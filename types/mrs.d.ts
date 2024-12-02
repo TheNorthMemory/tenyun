@@ -5,595 +5,595 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 入院情况 */
 declare interface AdmissionConditionBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 对外输出值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 入院诊断 */
 declare interface AdmissionDiagnosisBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 归一化值 */
-  Norm?: string | null;
+  Norm?: string;
   /** 对外输出值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 建议 */
 declare interface Advice {
   /** 文本 */
-  Text: string | null;
+  Text?: string;
 }
 
 /** 纵横比 */
 declare interface AspectRatio {
   /** 原文位置 */
-  Index: number[] | null;
+  Index?: number[];
   /** 数值 */
-  Number: string | null;
+  Number?: string;
   /** 关系 */
-  Relation: string | null;
+  Relation?: string;
   /** 原文 */
-  Src: string | null;
+  Src?: string;
   /** 值 */
-  Value: string | null;
+  Value?: string;
 }
 
 /** 标准信息类 */
 declare interface BaseInfo {
   /** 项目名称 */
-  Name?: string | null;
+  Name?: string;
   /** 索引 */
-  Index?: number[] | null;
+  Index?: number[];
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 标准值 */
-  Value?: string | null;
+  Value?: string;
   /** 原文对应坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
 }
 
 /** 基础类型 */
 declare interface BaseItem {
   /** 类型名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原始文本 */
-  Src?: string | null;
+  Src?: string;
   /** 归一化后值 */
-  Value?: string | null;
+  Value?: string;
   /** 别名 */
-  Alias?: string | null;
+  Alias?: string;
   /** 四点坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
 }
 
 /** 基础类型 */
 declare interface BaseItem2 {
   /** 类型 */
-  Name?: string | null;
+  Name?: string;
   /** 原始文本 */
-  Src?: string | null;
+  Src?: string;
   /** 归一化后值 */
-  Value?: string | null;
+  Value?: string;
   /** 四点坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
 }
 
 /** 基础类型 */
 declare interface BaseItem3 {
   /** 类型 */
-  Name?: string | null;
+  Name?: string;
   /** 原始文本 */
-  Src?: string | null;
+  Src?: string;
   /** 归一化后值 */
-  Value?: string | null;
+  Value?: string;
   /** 四点坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
   /** 第几次 */
-  Order?: number | null;
+  Order?: number;
 }
 
 /** 预防用生物制品说明书 */
 declare interface BiologicalProductInfo {
   /** 药品名称，包括通用名和商品名 */
-  Name?: BiologicalProductInfoName | null;
+  Name?: BiologicalProductInfoName;
   /** 成份和性状 */
-  IngredientAndAppearance?: BiologicalProductInfoIngredientAndAppearance | null;
+  IngredientAndAppearance?: BiologicalProductInfoIngredientAndAppearance;
   /** 接种对象 */
-  VaccinationTarget?: BiologicalProductInfoVaccinationTarget | null;
+  VaccinationTarget?: BiologicalProductInfoVaccinationTarget;
   /** 作用与用途 */
-  Indications?: BiologicalProductInfoIndications | null;
+  Indications?: BiologicalProductInfoIndications;
   /** 规格 */
-  Brochure?: BiologicalProductInfoBrochure | null;
+  Brochure?: BiologicalProductInfoBrochure;
   /** 免疫程序和剂量 */
-  Dosage?: BiologicalProductInfoDosage | null;
+  Dosage?: BiologicalProductInfoDosage;
   /** 不良反应 */
-  AdverseReaction?: BiologicalProductInfoAdverseReaction | null;
+  AdverseReaction?: BiologicalProductInfoAdverseReaction;
   /** 禁忌情况 */
-  Contraindications?: BiologicalProductInfoContraindications | null;
+  Contraindications?: BiologicalProductInfoContraindications;
   /** 注意事项 */
-  Precautions?: BiologicalProductInfoPrecautions | null;
+  Precautions?: BiologicalProductInfoPrecautions;
   /** 储存条件 */
-  Storage?: BiologicalProductInfoStorage | null;
+  Storage?: BiologicalProductInfoStorage;
   /** 包装信息 */
-  Packaging?: BiologicalProductInfoPackaging | null;
+  Packaging?: BiologicalProductInfoPackaging;
   /** 有效期 */
-  ValidityPeriod?: BiologicalProductInfoValidityPeriod | null;
+  ValidityPeriod?: BiologicalProductInfoValidityPeriod;
   /** 执行标准 */
-  ExecutiveStandards?: BiologicalProductInfoExecutiveStandards | null;
+  ExecutiveStandards?: BiologicalProductInfoExecutiveStandards;
   /** 批准文号 */
-  Approval?: BiologicalProductInfoApproval | null;
+  Approval?: BiologicalProductInfoApproval;
   /** 生产企业名称和地址 */
-  Manufacturer?: BiologicalProductInfoManufacturer | null;
+  Manufacturer?: BiologicalProductInfoManufacturer;
 }
 
 /** 不良反应 */
 declare interface BiologicalProductInfoAdverseReaction {
   /** 文本内容 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 批准文号 */
 declare interface BiologicalProductInfoApproval {
   /** 文本内容 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 规格 */
 declare interface BiologicalProductInfoBrochure {
   /** 文本内容 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 禁忌情况 */
 declare interface BiologicalProductInfoContraindications {
   /** 文本内容 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 免疫程序和剂量 */
 declare interface BiologicalProductInfoDosage {
   /** 文本内容 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 执行标准 */
 declare interface BiologicalProductInfoExecutiveStandards {
   /** 文本内容 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 作用与用途 */
 declare interface BiologicalProductInfoIndications {
   /** 文本内容 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 成份和性状 */
 declare interface BiologicalProductInfoIngredientAndAppearance {
   /** 文本 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 生产企业名称和地址 */
 declare interface BiologicalProductInfoManufacturer {
   /** 文本内容 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 药品名称，包括通用名和商品名 */
 declare interface BiologicalProductInfoName {
   /** 文本内容 */
-  Text?: string | null;
+  Text?: string;
   /** 通用名 */
-  GenericName?: string | null;
+  GenericName?: string;
   /** 品牌名 */
   BarndName?: string | null;
   /** 英文名 */
-  EnName?: string | null;
+  EnName?: string;
   /** 拼音 */
-  Pinyin?: string | null;
+  Pinyin?: string;
 }
 
 /** 包装信息 */
 declare interface BiologicalProductInfoPackaging {
   /** 文本内容 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 注意事项 */
 declare interface BiologicalProductInfoPrecautions {
   /** 文本内容 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 储存条件 */
 declare interface BiologicalProductInfoStorage {
   /** 文本内容 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 接种对象 */
 declare interface BiologicalProductInfoVaccinationTarget {
   /** 文本内容 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 有效期 */
 declare interface BiologicalProductInfoValidityPeriod {
   /** 文本内容 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 活检部位 */
 declare interface BiopsyPart {
   /** 值 */
-  Value?: string | null;
+  Value?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
 }
 
 /** 出生证明结构化信息 */
 declare interface BirthCert {
   /** 新生儿信息 */
-  NeonatalInfo?: NeonatalInfo | null;
+  NeonatalInfo?: NeonatalInfo;
   /** 母亲信息 */
-  MotherInfo?: ParentInfo | null;
+  MotherInfo?: ParentInfo;
   /** 父亲信息 */
-  FatherInfo?: ParentInfo | null;
+  FatherInfo?: ParentInfo;
   /** 签发信息 */
-  IssueInfo?: IssueInfo | null;
+  IssueInfo?: IssueInfo;
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 /** 出生地 */
 declare interface BirthPlaceBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 对外输出值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 结构化信息 */
 declare interface Block {
   /** 诊断信息 */
-  Check?: Check[] | null;
+  Check?: Check[];
   /** 病理报告 */
-  Pathology?: PathologyReport[] | null;
+  Pathology?: PathologyReport[];
   /** 医学资料 */
-  MedDoc?: MedDoc[] | null;
+  MedDoc?: MedDoc[];
   /** 诊断证明 */
-  DiagCert?: DiagCert[] | null;
+  DiagCert?: DiagCert[];
   /** 病案首页 */
-  FirstPage?: FirstPage[] | null;
+  FirstPage?: FirstPage[];
   /** 检验报告 */
-  Indicator?: Indicator[] | null;
+  Indicator?: Indicator[];
   /** 门诊病历信息 */
-  MedicalRecordInfo?: MedicalRecordInfo[] | null;
+  MedicalRecordInfo?: MedicalRecordInfo[];
   /** 出入院信息 */
-  Hospitalization?: Hospitalization[] | null;
+  Hospitalization?: Hospitalization[];
   /** 手术记录 */
-  Surgery?: Surgery[] | null;
+  Surgery?: Surgery[];
   /** 处方单 */
-  Prescription?: Prescription[] | null;
+  Prescription?: Prescription[];
   /** 免疫接种证明 */
-  VaccineCertificate?: VaccineCertificate[] | null;
+  VaccineCertificate?: VaccineCertificate[];
   /** 心电图 */
-  Electrocardiogram?: Electrocardiogram[] | null;
+  Electrocardiogram?: Electrocardiogram[];
   /** 病理报告v2 */
-  PathologyV2?: PathologyV2[] | null;
+  PathologyV2?: PathologyV2[];
   /** 内窥镜报告 */
-  Endoscopy?: Endoscopy[] | null;
+  Endoscopy?: Endoscopy[];
   /** C14检验报告 */
-  C14?: Indicator[] | null;
+  C14?: Indicator[];
   /** 体检结论 */
-  Exame?: Exame[] | null;
+  Exame?: Exame[];
   /** 出入院结构体 */
-  MedDocV2?: DischargeInfoBlock[] | null;
+  MedDocV2?: DischargeInfoBlock[];
   /** 检验报告v3 */
-  IndicatorV3?: IndicatorV3[] | null;
+  IndicatorV3?: IndicatorV3[];
   /** 孕产报告 */
-  Maternity?: Maternity[] | null;
+  Maternity?: Maternity[];
   /** 时间轴 */
-  Timeline?: TimelineInformation[] | null;
+  Timeline?: TimelineInformation[];
   /** 核酸报告结论 */
-  Covid?: CovidItemsInfo[] | null;
+  Covid?: CovidItemsInfo[];
   /** 眼科报告结构体 */
-  Eye?: EyeItemsInfo[] | null;
+  Eye?: EyeItemsInfo[];
   /** 出生证明结构化信息 */
-  BirthCert?: BirthCert[] | null;
+  BirthCert?: BirthCert[];
   /** 文本类型列表 */
-  TextTypeListBlocks?: TextTypeListBlock[] | null;
+  TextTypeListBlocks?: TextTypeListBlock[];
   /** 体检报告信息 */
-  PhysicalExamination?: PhysicalExaminationV1 | null;
+  PhysicalExamination?: PhysicalExaminationV1;
 }
 
 /** 块信息 */
 declare interface BlockInfo {
   /** 原文位置 */
-  Index?: number[] | null;
+  Index?: number[];
   /** 阳性 */
-  Positive?: string | null;
+  Positive?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 值 */
-  Value?: string | null;
+  Value?: string;
   /** 类型 */
-  Type?: string | null;
+  Type?: string;
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 大小 */
-  Size?: Size[] | null;
+  Size?: Size[];
 }
 
 /** 块信息 */
 declare interface BlockInfoV2 {
   /** 原文位置 */
-  Index?: number[] | null;
+  Index?: number[];
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 值 */
-  Value?: string | null;
+  Value?: string;
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 疾病编码 */
-  Code?: string | null;
+  Code?: string;
 }
 
 /** 块标题 */
 declare interface BlockTitle {
   /** name */
-  Name?: string | null;
+  Name?: string;
   /** src */
-  Src?: string | null;
+  Src?: string;
   /** value */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 血压 */
 declare interface BloodPressureBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 归一化值 */
-  Norm?: string | null;
+  Norm?: string;
   /** 单位 */
-  Unit?: string | null;
+  Unit?: string;
   /** 对外输出值 */
-  Value?: string | null;
+  Value?: string;
   /** 舒张压 */
-  NormDiastolic?: string | null;
+  NormDiastolic?: string;
   /** 收缩压 */
-  NormSystolic?: string | null;
+  NormSystolic?: string;
 }
 
 /** 体检报告血压检测信息 */
 declare interface BloodPressureItem {
   /** 类型 */
-  Name?: string | null;
+  Name?: string;
   /** 项目原文 */
-  Item?: PhysicalBaseItem | null;
+  Item?: PhysicalBaseItem;
   /** 数值 */
-  Result?: PhysicalBaseItem | null;
+  Result?: PhysicalBaseItem;
   /** 单位 */
-  Unit?: PhysicalBaseItem | null;
+  Unit?: PhysicalBaseItem;
   /** 第几次 */
-  Times?: PhysicalBaseItem | null;
+  Times?: PhysicalBaseItem;
   /** 左右手臂 */
-  Location?: PhysicalBaseItem | null;
+  Location?: PhysicalBaseItem;
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 /** 查体 */
 declare interface BodyExaminationBlock {
   /** 体温 */
-  BodyTemperature?: BodyTemperatureBlock | null;
+  BodyTemperature?: BodyTemperatureBlock;
   /** 脉搏 */
-  Pulse?: BodyTemperatureBlock | null;
+  Pulse?: BodyTemperatureBlock;
   /** 呼吸 */
-  Breathe?: BodyTemperatureBlock | null;
+  Breathe?: BodyTemperatureBlock;
   /** 血压 */
-  BloodPressure?: BloodPressureBlock | null;
+  BloodPressure?: BloodPressureBlock;
 }
 
 /** 体温名称 */
 declare interface BodyTemperatureBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 归一化值 */
-  Norm?: string | null;
+  Norm?: string;
   /** 单位 */
-  Unit?: string | null;
+  Unit?: string;
   /** 对外输出值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 检查报告单 */
 declare interface Check {
   /** 描述 */
-  Desc?: Desc | null;
+  Desc?: Desc;
   /** 结论 */
-  Summary?: Summary | null;
+  Summary?: Summary;
   /** 检查报告块标题 */
-  BlockTitle?: BlockTitle[] | null;
+  BlockTitle?: BlockTitle[];
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 /** 药品说明书消息定义 */
 declare interface ChemicalProductInfo {
   /** 药品名称，包括通用名和商品名 */
-  Name?: ChemicalProductInfoName | null;
+  Name?: ChemicalProductInfoName;
   /** 活性成份消息定义，如果是复方制剂，可以不列出每个活性成份的详细信息 */
-  ActiveIngredient?: ChemicalProductInfoActiveIngredient | null;
+  ActiveIngredient?: ChemicalProductInfoActiveIngredient;
   /** 性状 */
-  Appearance?: ChemicalProductInfoAppearance | null;
+  Appearance?: ChemicalProductInfoAppearance;
   /** 适应症描述 */
-  Indications?: ChemicalProductInfoIndications | null;
+  Indications?: ChemicalProductInfoIndications;
   /** 规格 */
-  Brochure?: ChemicalProductInfoBrochure | null;
+  Brochure?: ChemicalProductInfoBrochure;
   /** 用法用量 */
-  Dosage?: ChemicalProductInfoDosage | null;
+  Dosage?: ChemicalProductInfoDosage;
   /** 不良反应 */
-  AdverseReaction?: ChemicalProductInfoAdverseReaction | null;
+  AdverseReaction?: ChemicalProductInfoAdverseReaction;
   /** 禁忌情况 */
-  Contraindications?: ChemicalProductInfoContraindications | null;
+  Contraindications?: ChemicalProductInfoContraindications;
   /** 注意事项 */
-  Precautions?: ChemicalProductInfoPrecautions | null;
+  Precautions?: ChemicalProductInfoPrecautions;
   /** 孕妇及哺乳期妇女用药 */
-  PregnancyLactationUse?: ChemicalProductInfoPregnancyLactationUse | null;
+  PregnancyLactationUse?: ChemicalProductInfoPregnancyLactationUse;
   /** 儿童用药 */
-  PediatricUse?: ChemicalProductInfoPediatricUse | null;
+  PediatricUse?: ChemicalProductInfoPediatricUse;
   /** 老年用药 */
-  GeriatricUse?: ChemicalProductInfoGeriatricUse | null;
+  GeriatricUse?: ChemicalProductInfoGeriatricUse;
   /** 药品的药物相互作用 */
-  Interactions?: ChemicalProductInfoInteractions | null;
+  Interactions?: ChemicalProductInfoInteractions;
   /** 药物过量 */
-  Overdose?: ChemicalProductInfoOverdose | null;
+  Overdose?: ChemicalProductInfoOverdose;
   /** 临床试验 */
-  ClinicalTrial?: ChemicalProductInfoClinicalTrial | null;
+  ClinicalTrial?: ChemicalProductInfoClinicalTrial;
   /** 药理毒理 */
-  PharmacologyToxicology?: ChemicalProductInfoPharmacologyToxicology | null;
+  PharmacologyToxicology?: ChemicalProductInfoPharmacologyToxicology;
   /** 药代动力学 */
-  Pharmacokinetics?: ChemicalProductInfoPharmacokinetics | null;
+  Pharmacokinetics?: ChemicalProductInfoPharmacokinetics;
   /** 储存条件 */
-  Storage?: ChemicalProductInfoStorage | null;
+  Storage?: ChemicalProductInfoStorage;
   /** 包装信息 */
-  Packaging?: ChemicalProductInfoPackaging | null;
+  Packaging?: ChemicalProductInfoPackaging;
   /** 有效期 */
-  ValidityPeriod?: ChemicalProductInfoValidityPeriod | null;
+  ValidityPeriod?: ChemicalProductInfoValidityPeriod;
   /** 执行标准 */
-  ExecutiveStandards?: ChemicalProductInfoExecutiveStandards | null;
+  ExecutiveStandards?: ChemicalProductInfoExecutiveStandards;
   /** 批准文号 */
-  Approval?: ChemicalProductInfoApproval | null;
+  Approval?: ChemicalProductInfoApproval;
   /** 生产企业名称和地址 */
-  Manufacturer?: ChemicalProductInfoManufacturer | null;
+  Manufacturer?: ChemicalProductInfoManufacturer;
 }
 
 /** 活性成份消息定义，如果是复方制剂，可以不列出每个活性成份的详细信息 */
 declare interface ChemicalProductInfoActiveIngredient {
   /** 文本内容 */
-  Text?: string | null;
+  Text?: string;
   /** 活性成份的化学名称 */
-  ChemicalName?: string | null;
+  ChemicalName?: string;
   /** 活性成份的化学结构式 */
-  ChemicalFormula?: string | null;
+  ChemicalFormula?: string;
   /** 活性成份的分子式 */
-  MolecularFormula?: string | null;
+  MolecularFormula?: string;
   /** 活性成份的分子量 */
-  MolecularWeight?: string | null;
+  MolecularWeight?: string;
 }
 
 /** 不良反应 */
 declare interface ChemicalProductInfoAdverseReaction {
   /** 文本 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 性状 */
 declare interface ChemicalProductInfoAppearance {
   /** 文本 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 批准文号 */
 declare interface ChemicalProductInfoApproval {
   /** 文本 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 规格 */
 declare interface ChemicalProductInfoBrochure {
   /** 文本 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 临床试验 */
 declare interface ChemicalProductInfoClinicalTrial {
   /** 文本 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 禁忌情况 */
 declare interface ChemicalProductInfoContraindications {
   /** 文本 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 用法用量 */
 declare interface ChemicalProductInfoDosage {
   /** 文本 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 执行标准 */
 declare interface ChemicalProductInfoExecutiveStandards {
   /** 文本 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 老年用药 */
 declare interface ChemicalProductInfoGeriatricUse {
   /** 文本 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 适应症描述 */
 declare interface ChemicalProductInfoIndications {
   /** 文本 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 药品的药物相互作用 */
 declare interface ChemicalProductInfoInteractions {
   /** 文本 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 生产企业名称和地址 */
 declare interface ChemicalProductInfoManufacturer {
   /** 文本 */
-  Text?: string | null;
+  Text?: string;
   /** 企业名称 */
-  Name?: string | null;
+  Name?: string;
   /** 生产地址 */
-  Address?: string | null;
+  Address?: string;
   /** 邮政编码 */
-  PostalCode?: string | null;
+  PostalCode?: string;
   /** 电话，包含区号 */
-  Phone?: string | null;
+  Phone?: string;
   /** 传真，包含区号 */
-  Fax?: string | null;
+  Fax?: string;
   /** 网址，如无则不填写 */
-  Website?: string | null;
+  Website?: string;
 }
 
 /** 药品名称，包括通用名和商品名 */
 declare interface ChemicalProductInfoName {
   /** 文本内容 */
-  Text?: string | null;
+  Text?: string;
   /** 通用名 */
-  GenericName?: string | null;
+  GenericName?: string;
   /** 品牌名 */
   BarndName?: string | null;
   /** 英文名 */
-  EnName?: string | null;
+  EnName?: string;
   /** 拼音 */
-  Pinyin?: string | null;
+  Pinyin?: string;
   /** 品牌名 */
   BrandName?: string;
 }
@@ -601,833 +601,833 @@ declare interface ChemicalProductInfoName {
 /** 药物过量 */
 declare interface ChemicalProductInfoOverdose {
   /** 文本 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 包装信息 */
 declare interface ChemicalProductInfoPackaging {
   /** 文本 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 儿童用药 */
 declare interface ChemicalProductInfoPediatricUse {
   /** 文本 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 药代动力学 */
 declare interface ChemicalProductInfoPharmacokinetics {
   /** 文本 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 药理毒理 */
 declare interface ChemicalProductInfoPharmacologyToxicology {
   /** 文本 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 注意事项 */
 declare interface ChemicalProductInfoPrecautions {
   /** 文本 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 孕妇及哺乳期妇女用药 */
 declare interface ChemicalProductInfoPregnancyLactationUse {
   /** 文本 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 储存条件 */
 declare interface ChemicalProductInfoStorage {
   /** 文本 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 有效期 */
 declare interface ChemicalProductInfoValidityPeriod {
   /** 文本 */
-  Text?: string | null;
+  Text?: string;
 }
 
 /** 体检报告-胸围信息 */
 declare interface ChestCircumferenceItem {
   /** 类型 */
-  Name?: string | null;
+  Name?: string;
   /** 项目原文 */
-  Item?: PhysicalBaseItem | null;
+  Item?: PhysicalBaseItem;
   /** 数值 */
-  Result?: PhysicalBaseItem | null;
+  Result?: PhysicalBaseItem;
   /** 单位 */
-  Unit?: PhysicalBaseItem | null;
+  Unit?: PhysicalBaseItem;
   /** 呼吸状态 */
-  State?: PhysicalBaseItem | null;
+  State?: PhysicalBaseItem;
 }
 
 /** 主诉 */
 declare interface ChiefComplaintBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 单位输出值 */
-  Value?: string | null;
+  Value?: string;
   /** 主诉详情 */
-  Detail?: ChiefComplaintDetailBlock[] | null;
+  Detail?: ChiefComplaintDetailBlock[];
 }
 
 /** 主诉详情 */
 declare interface ChiefComplaintDetailBlock {
   /** 疾病名称 */
-  DiseaseName?: string | null;
+  DiseaseName?: string;
   /** 部位 */
-  Part?: string | null;
+  Part?: string;
   /** 时间 */
-  Time?: string | null;
+  Time?: string;
   /** 时间类型 */
-  TimeType?: string | null;
+  TimeType?: string;
 }
 
 /** 临床分期 */
 declare interface ClinicalStaging {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 坐标 */
 declare interface Coord {
   /** 坐标 */
-  Points?: Point[] | null;
+  Points?: Point[];
 }
 
 /** 坐标 */
 declare interface Coordinate {
   /** 左上角x坐标 */
-  X: number | null;
+  X?: number;
   /** 左上角y坐标 */
-  Y: number | null;
+  Y?: number;
   /** 宽度，单位像素 */
-  Width: number | null;
+  Width?: number;
   /** 高度，单位像素 */
-  Height: number | null;
+  Height?: number;
 }
 
 /** 核酸报告结论结构 */
 declare interface CovidItem {
   /** 采样时间 */
-  SampleTime?: BaseItem | null;
+  SampleTime?: BaseItem;
   /** 检测时间 */
-  TestTime?: BaseItem | null;
+  TestTime?: BaseItem;
   /** 检测机构 */
-  TestOrganization?: BaseItem | null;
+  TestOrganization?: BaseItem;
   /** 检测结果 */
-  TestResult?: BaseItem | null;
+  TestResult?: BaseItem;
   /** 健康码颜色 */
-  CodeColor?: BaseItem | null;
+  CodeColor?: BaseItem;
 }
 
 /** 核酸报告结论 */
 declare interface CovidItemsInfo {
   /** 核酸报告结论 */
-  CovidItems?: CovidItem[] | null;
+  CovidItems?: CovidItem[];
   /** 版本号 */
-  Version?: string | null;
+  Version?: string;
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 /** 死亡时间 */
 declare interface DeathDateBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 类型 */
-  Type?: string | null;
+  Type?: string;
   /** 归一化值 */
-  Norm?: string | null;
+  Norm?: string;
   /** 单位 */
-  Unit?: string | null;
+  Unit?: string;
   /** 时间戳 */
-  Timestamp?: string | null;
+  Timestamp?: string;
   /** 对外输出值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 描述 */
 declare interface Desc {
   /** 描述 */
-  Text?: string | null;
+  Text?: string;
   /** 器官 */
-  Organ?: Organ[] | null;
+  Organ?: Organ[];
   /** 结节 */
-  Tuber?: TuberInfo[] | null;
+  Tuber?: TuberInfo[];
   /** 坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
 }
 
 /** 描述段落 */
 declare interface DescInfo {
   /** 描述段落文本 */
-  Text?: BaseInfo | null;
+  Text?: BaseInfo;
   /** 描述段落详情 */
-  Infos?: DetailInformation[] | null;
+  Infos?: DetailInformation[];
 }
 
 /** 详情 */
 declare interface DetailInformation {
   /** 部位 */
-  Part?: Part | null;
+  Part?: Part;
   /** 组织大小 */
-  TissueSizes?: Size[] | null;
+  TissueSizes?: Size[];
   /** 结节大小 */
-  TuberSizes?: Size[] | null;
+  TuberSizes?: Size[];
   /** 肿瘤大小 */
-  CancerSizes?: Size[] | null;
+  CancerSizes?: Size[];
   /** 组织学等级 */
-  HistologyLevel?: BaseInfo | null;
+  HistologyLevel?: BaseInfo;
   /** 组织学类型 */
-  HistologyType?: HistologyTypeV2 | null;
+  HistologyType?: HistologyTypeV2;
   /** 侵犯 */
-  Invasive?: InvasiveV2[] | null;
+  Invasive?: InvasiveV2[];
   /** pTNM */
-  PTNM?: PTNM | null;
+  PTNM?: PTNM;
   /** 浸润深度 */
-  InfiltrationDepth?: BaseInfo | null;
+  InfiltrationDepth?: BaseInfo;
   /** 结节数量 */
-  TuberNum?: BaseInfo | null;
+  TuberNum?: BaseInfo;
   /** 钙化 */
-  Calcification?: BaseInfo | null;
+  Calcification?: BaseInfo;
   /** 坏死 */
-  Necrosis?: BaseInfo | null;
+  Necrosis?: BaseInfo;
   /** 异形 */
-  Abnormity?: BaseInfo | null;
+  Abnormity?: BaseInfo;
   /** 断链 */
-  Breaked?: BaseInfo | null;
+  Breaked?: BaseInfo;
 }
 
 /** 诊断证明 */
 declare interface DiagCert {
   /** 建议 */
-  Advice?: Advice | null;
+  Advice?: Advice;
   /** 诊断 */
-  Diagnosis?: DiagCertItem[] | null;
+  Diagnosis?: DiagCertItem[];
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 /** 诊断证明项 */
 declare interface DiagCertItem {
   /** 文本 */
-  Text: string | null;
+  Text?: string;
   /** 类型 */
-  Type: string | null;
+  Type?: string;
   /** 值 */
-  Value: string[] | null;
+  Value?: string[];
 }
 
 /** 出院情况 */
 declare interface DischargeConditionBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 对外输出值 */
-  Value?: string | null;
+  Value?: string;
   /** 归一化值 */
-  Norm?: string | null;
+  Norm?: string;
 }
 
 /** 出入院诊断 */
 declare interface DischargeDiagnosis {
   /** 表格位置 */
-  TableIndex: number | null;
+  TableIndex?: number;
   /** 出院诊断 */
-  OutDiagnosis: BlockInfo | null;
+  OutDiagnosis?: BlockInfo;
   /** 疾病编码 */
-  DiseaseCode: BlockInfo | null;
+  DiseaseCode?: BlockInfo;
   /** 入院情况 */
-  InStatus: BlockInfo | null;
+  InStatus?: BlockInfo;
   /** 出院情况 */
-  OutStatus: BlockInfo | null;
+  OutStatus?: BlockInfo;
 }
 
 /** 出院诊断 */
 declare interface DischargeDiagnosisBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 归一化值 */
-  Norm?: string | null;
+  Norm?: string;
   /** 对外输出值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 出入院结构体 */
 declare interface DischargeInfoBlock {
   /** 疾病史 */
-  DiseaseHistory?: DiseaseHistoryBlock | null;
+  DiseaseHistory?: DiseaseHistoryBlock;
   /** 个人史 */
-  PersonalHistory?: PersonalHistoryBlock | null;
+  PersonalHistory?: PersonalHistoryBlock;
   /** 药物史 */
-  DrugHistory?: DrugHistoryBlock | null;
+  DrugHistory?: DrugHistoryBlock;
   /** 治疗相关 */
-  TreatmentRecord?: TreatmentRecordBlock | null;
+  TreatmentRecord?: TreatmentRecordBlock;
   /** 文本段落 */
-  ParagraphBlock?: ParagraphBlock | null;
+  ParagraphBlock?: ParagraphBlock;
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 /** 疾病史 */
 declare interface DiseaseHistoryBlock {
   /** 主要病史 */
-  MainDiseaseHistory?: MainDiseaseHistoryBlock | null;
+  MainDiseaseHistory?: MainDiseaseHistoryBlock;
   /** 过敏史 */
-  AllergyHistory?: MainDiseaseHistoryBlock | null;
+  AllergyHistory?: MainDiseaseHistoryBlock;
   /** 注射史 */
-  InfectHistory?: MainDiseaseHistoryBlock | null;
+  InfectHistory?: MainDiseaseHistoryBlock;
   /** 手术史 */
-  SurgeryHistory?: SurgeryHistoryBlock | null;
+  SurgeryHistory?: SurgeryHistoryBlock;
   /** 输血史 */
-  TransfusionHistory?: TransfusionHistoryBlock | null;
+  TransfusionHistory?: TransfusionHistoryBlock;
 }
 
 /** 疾病史 */
 declare interface DiseaseMedicalHistory {
   /** 主病史 */
-  MainDiseaseHistory: string | null;
+  MainDiseaseHistory?: string;
   /** 过敏史 */
-  AllergyHistory: string | null;
+  AllergyHistory?: string;
   /** 传染疾病史 */
-  InfectHistory: string | null;
+  InfectHistory?: string;
   /** 手术史 */
-  OperationHistory: string | null;
+  OperationHistory?: string;
   /** 输血史 */
-  TransfusionHistory: string | null;
+  TransfusionHistory?: string;
 }
 
 /** 现病史 */
 declare interface DiseasePresentBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 值 */
-  Value?: string | null;
+  Value?: string;
   /** 归一化 */
-  Norm?: string | null;
+  Norm?: string;
 }
 
 /** 药物用法用量 */
 declare interface DosageBlock {
   /** 值 */
-  Value?: string | null;
+  Value?: string;
   /** 单次计量 */
-  SingleMeasurement?: string | null;
+  SingleMeasurement?: string;
   /** 频次 */
-  Frequency?: string | null;
+  Frequency?: string;
   /** 给药途径 */
-  DrugDeliveryRoute?: string | null;
+  DrugDeliveryRoute?: string;
 }
 
 /** 药物史 */
 declare interface DrugHistoryBlock {
   /** 药品名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 药物列表 */
-  DrugList?: DrugListBlock[] | null;
+  DrugList?: DrugListBlock[];
   /** 归一化值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 药物史 */
 declare interface DrugListBlock {
   /** 通用名称 */
-  CommonName?: string | null;
+  CommonName?: string;
   /** 商品名称 */
-  TradeName?: string | null;
+  TradeName?: string;
   /** 用法用量 */
-  Dosage?: DosageBlock | null;
+  Dosage?: DosageBlock;
   /** 值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 心电图详情 */
 declare interface EcgDescription {
   /** 心率 */
-  HeartRate: EcgItem | null;
+  HeartRate?: EcgItem;
   /** 心房率 */
-  AuricularRate: EcgItem | null;
+  AuricularRate?: EcgItem;
   /** 心室率 */
-  VentricularRate: EcgItem | null;
+  VentricularRate?: EcgItem;
   /** 节律 */
-  Rhythm: EcgItem | null;
+  Rhythm?: EcgItem;
   /** P波时间 */
-  PDuration: EcgItem | null;
+  PDuration?: EcgItem;
   /** QRS时间 */
-  QrsDuration: EcgItem | null;
+  QrsDuration?: EcgItem;
   /** QRS电轴 */
-  QrsAxis: EcgItem | null;
+  QrsAxis?: EcgItem;
   /** P-R间期 */
-  PRInterval: EcgItem | null;
+  PRInterval?: EcgItem;
   /** P-P间期 */
-  PPInterval: EcgItem | null;
+  PPInterval?: EcgItem;
   /** R-R间期 */
-  RRInterval: EcgItem | null;
+  RRInterval?: EcgItem;
   /** P-J间期 */
-  PJInterval: EcgItem | null;
+  PJInterval?: EcgItem;
   /** Q-T间期 */
-  QTInterval: EcgItem | null;
+  QTInterval?: EcgItem;
   /** qt/qtc间期 */
-  QTCInterval: EcgItem | null;
+  QTCInterval?: EcgItem;
   /** RV5/SV1振幅 */
-  Rv5SV1Amplitude: EcgItem | null;
+  Rv5SV1Amplitude?: EcgItem;
   /** RV5+SV1振幅 */
-  Rv5AddSV1Amplitude: EcgItem | null;
+  Rv5AddSV1Amplitude?: EcgItem;
   /** PRT电轴 */
-  PRTAxis: EcgItem | null;
+  PRTAxis?: EcgItem;
   /** RV5振幅 */
-  Rv5Amplitude: EcgItem | null;
+  Rv5Amplitude?: EcgItem;
   /** SV1振幅 */
-  SV1Amplitude: EcgItem | null;
+  SV1Amplitude?: EcgItem;
   /** RV6/SV2 */
-  RV6SV2: EcgItem | null;
+  RV6SV2?: EcgItem;
   /** P/QRS/T电轴 */
-  PQRSTAxis: EcgItem | null;
+  PQRSTAxis?: EcgItem;
 }
 
 /** 心电图诊断 */
 declare interface EcgDiagnosis {
   /** 名称 */
-  Name: string | null;
+  Name?: string;
   /** 值 */
-  Value: string[] | null;
+  Value?: string[];
 }
 
 /** 心电图指标项 */
 declare interface EcgItem {
   /** 名称 */
-  Name: string | null;
+  Name?: string;
   /** 值 */
-  Value: string | null;
+  Value?: string;
   /** 单位 */
-  Unit: string | null;
+  Unit?: string;
   /** 原文 */
-  Src: string | null;
+  Src?: string;
 }
 
 /** 弹性质地 */
 declare interface Elastic {
   /** 原文位置 */
-  Index: number[] | null;
+  Index?: number[];
   /** 分数 */
-  Score: string | null;
+  Score?: string;
   /** 原文 */
-  Src: string | null;
+  Src?: string;
   /** 值 */
-  Value: string | null;
+  Value?: string;
   /** 名称 */
-  Name: string | null;
+  Name?: string;
 }
 
 /** 心电图 */
 declare interface Electrocardiogram {
   /** 心电图详情 */
-  EcgDescription?: EcgDescription | null;
+  EcgDescription?: EcgDescription;
   /** 心电图诊断 */
-  EcgDiagnosis?: EcgDiagnosis | null;
+  EcgDiagnosis?: EcgDiagnosis;
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 /** 内窥镜报告 */
 declare interface Endoscopy {
   /** 活检部位 */
-  BiopsyPart?: BiopsyPart | null;
+  BiopsyPart?: BiopsyPart;
   /** 可见描述 */
-  Desc?: EndoscopyDesc | null;
+  Desc?: EndoscopyDesc;
   /** 结论 */
-  Summary?: Summary | null;
+  Summary?: Summary;
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 /** 内窥镜描述 */
 declare interface EndoscopyDesc {
   /** 描述内容 */
-  Text?: string | null;
+  Text?: string;
   /** 器官 */
-  Organ?: EndoscopyOrgan[] | null;
+  Organ?: EndoscopyOrgan[];
   /** 坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
 }
 
 /** 内窥部位 */
 declare interface EndoscopyOrgan {
   /** 部位 */
-  Part?: Part | null;
+  Part?: Part;
   /** 原文位置 */
-  Index?: number[] | null;
+  Index?: number[];
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 部位别名 */
-  PartAlias?: string | null;
+  PartAlias?: string;
   /** 症状描述 */
-  SymDescList?: BlockInfo[] | null;
+  SymDescList?: BlockInfo[];
   /** 坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
 }
 
 /** 体检结论 */
 declare interface Exame {
   /** 结论段落 */
-  OverView?: ResultInfo[] | null;
+  OverView?: ResultInfo[];
   /** 异常与建议段落 */
-  Abnormality?: ResultInfo[] | null;
+  Abnormality?: ResultInfo[];
 }
 
 /** 眼科子结构 */
 declare interface EyeChildItem {
   /** 球镜 */
-  Sph?: BaseItem3[] | null;
+  Sph?: BaseItem3[];
   /** 柱镜 */
-  Cyl?: BaseItem3[] | null;
+  Cyl?: BaseItem3[];
   /** 轴位 */
-  Ax?: BaseItem3[] | null;
+  Ax?: BaseItem3[];
   /** 等效球镜 */
-  Se?: BaseItem2 | null;
+  Se?: BaseItem2;
 }
 
 /** 眼科结构体 */
 declare interface EyeItem {
   /** 左眼 */
-  Left?: EyeChildItem | null;
+  Left?: EyeChildItem;
   /** 右眼 */
-  Right?: EyeChildItem | null;
+  Right?: EyeChildItem;
   /** 瞳距 */
-  Pd?: BaseItem2 | null;
+  Pd?: BaseItem2;
 }
 
 /** 眼科报告结构体 */
 declare interface EyeItemsInfo {
   /** 眼科报告 */
-  EyeItems?: EyeItem | null;
+  EyeItems?: EyeItem;
   /** 版本号 */
-  Version?: string | null;
+  Version?: string;
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 /** 家族史 */
 declare interface FamilyHistoryBlock {
   /** 家庭成员 */
-  RelativeHistory?: RelativeHistoryBlock | null;
+  RelativeHistory?: RelativeHistoryBlock;
   /** 家族肿瘤史 */
-  RelativeCancerHistory?: RelativeCancerHistoryBlock | null;
+  RelativeCancerHistory?: RelativeCancerHistoryBlock;
   /** 家族遗传史 */
-  GeneticHistory?: GeneticHistoryBlock | null;
+  GeneticHistory?: GeneticHistoryBlock;
 }
 
 /** 家族疾病史 */
 declare interface FamilyMedicalHistory {
   /** 家族成员史 */
-  RelativeHistory: string | null;
+  RelativeHistory?: string;
   /** 家族肿瘤史 */
-  RelativeCancerHistory: string | null;
+  RelativeCancerHistory?: string;
   /** 家族遗传史 */
-  GeneticHistory: string | null;
+  GeneticHistory?: string;
 }
 
 /** 婚育史 */
 declare interface FertilityHistoryBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 状态 */
-  State?: string | null;
+  State?: string;
   /** 归一化值 */
-  Norm?: string | null;
+  Norm?: string;
   /** 对外输出值 */
-  Value?: string | null;
+  Value?: string;
   /** 妊娠次数 */
-  PregCount?: string | null;
+  PregCount?: string;
   /** 生产次数 */
-  ProduCount?: string | null;
+  ProduCount?: string;
 }
 
 /** 胎儿数据结构 */
 declare interface Fetus {
   /** 双顶径 */
-  BPD?: FieldInfo | null;
+  BPD?: FieldInfo;
   /** 腹前后径 */
-  APTD?: FieldInfo | null;
+  APTD?: FieldInfo;
   /** 腹左右径 */
-  TTD?: FieldInfo | null;
+  TTD?: FieldInfo;
   /** 头臀径 */
-  CRL?: FieldInfo | null;
+  CRL?: FieldInfo;
   /** 头围 */
-  HC?: FieldInfo | null;
+  HC?: FieldInfo;
   /** 腹围 */
-  AC?: FieldInfo | null;
+  AC?: FieldInfo;
   /** 股骨长 */
-  FL?: FieldInfo | null;
+  FL?: FieldInfo;
   /** 肱骨长 */
-  HL?: FieldInfo | null;
+  HL?: FieldInfo;
   /** 胎儿重量 */
-  Weight?: FieldInfo | null;
+  Weight?: FieldInfo;
   /** 颈项透明层 */
-  NT?: FieldInfo | null;
+  NT?: FieldInfo;
   /** 脐动脉血流 */
-  UmbilicalCord?: FieldInfo | null;
+  UmbilicalCord?: FieldInfo;
   /** 羊水最大深度 */
-  WaterDeep?: FieldInfo | null;
+  WaterDeep?: FieldInfo;
   /** 羊水四象限测量 */
-  WaterQuad?: FieldInfo | null;
+  WaterQuad?: FieldInfo;
   /** 羊水指数 */
-  AFI?: FieldInfo | null;
+  AFI?: FieldInfo;
   /** 胎心 */
-  FHR?: FieldInfo | null;
+  FHR?: FieldInfo;
   /** 胎动 */
-  Movement?: FieldInfo | null;
+  Movement?: FieldInfo;
   /** 胎数 */
-  Num?: FieldInfo | null;
+  Num?: FieldInfo;
   /** 胎位 */
-  Position?: FieldInfo | null;
+  Position?: FieldInfo;
   /** 是否活胎 */
-  Alive?: FieldInfo | null;
+  Alive?: FieldInfo;
   /** 胎盘位置 */
-  PlacentaLocation?: FieldInfo | null;
+  PlacentaLocation?: FieldInfo;
   /** 胎盘厚度 */
-  PlacentaThickness?: FieldInfo | null;
+  PlacentaThickness?: FieldInfo;
   /** 胎盘成熟度 */
-  PlacentaGrade?: FieldInfo | null;
+  PlacentaGrade?: FieldInfo;
   /** 妊娠时间 */
-  GestationTime?: FieldInfo | null;
+  GestationTime?: FieldInfo;
   /** 妊娠周期 */
-  GestationPeriod?: FieldInfo | null;
+  GestationPeriod?: FieldInfo;
   /** 绕颈 */
-  AroundNeck?: FieldInfo | null;
+  AroundNeck?: FieldInfo;
   /** 病变 */
-  Sym?: FieldInfo[] | null;
+  Sym?: FieldInfo[];
   /** 原文内容 */
-  Src?: string | null;
+  Src?: string;
 }
 
 /** 通用块信息 */
 declare interface FieldInfo {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 值 */
-  Value?: string | null;
+  Value?: string;
   /** 数值 */
-  Nums?: NumValue[] | null;
+  Nums?: NumValue[];
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
 }
 
 /** 病案首页 */
 declare interface FirstPage {
   /** 出入院诊断 */
-  DischargeDiagnosis?: DischargeDiagnosis[] | null;
+  DischargeDiagnosis?: DischargeDiagnosis[];
   /** 病理诊断 */
-  PathologicalDiagnosis?: BlockInfo | null;
+  PathologicalDiagnosis?: BlockInfo;
   /** 临床诊断 */
-  ClinicalDiagnosis?: BlockInfo | null;
+  ClinicalDiagnosis?: BlockInfo;
   /** 受伤中毒的外部原因 */
-  DamagePoi?: BlockInfoV2 | null;
+  DamagePoi?: BlockInfoV2;
   /** 病案首页第二页 */
-  Fp2NdItems?: Fp2NdItem[] | null;
+  Fp2NdItems?: Fp2NdItem[];
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 /** 病案首页第二页 */
 declare interface Fp2NdItem {
   /** 手术编码 */
-  Code?: BaseItem | null;
+  Code?: BaseItem;
   /** 手术名称 */
-  Name?: BaseItem | null;
+  Name?: BaseItem;
   /** 手术开始时间 */
-  StartTime?: BaseItem | null;
+  StartTime?: BaseItem;
   /** 手术结束时间 */
-  EndTime?: BaseItem | null;
+  EndTime?: BaseItem;
   /** 手术等级 */
-  Level?: BaseItem | null;
+  Level?: BaseItem;
   /** 手术类型 */
-  Type?: BaseItem | null;
+  Type?: BaseItem;
   /** 醉愈合方式 */
-  IncisionHealingGrade?: BaseItem | null;
+  IncisionHealingGrade?: BaseItem;
   /** 麻醉方法 */
-  AnesthesiaMethod?: BaseItem | null;
+  AnesthesiaMethod?: BaseItem;
 }
 
 /** 体检报告-一般检测信息 */
 declare interface GeneralExaminationBaseItem {
   /** 生命体征 */
-  VitalSign?: GeneralExaminationVitalSign | null;
+  VitalSign?: GeneralExaminationVitalSign;
   /** 其他 */
-  Others?: GeneralExaminationOthers | null;
+  Others?: GeneralExaminationOthers;
   /** 小结 */
-  BriefSummary?: GeneralExaminationBriefSummary | null;
+  BriefSummary?: GeneralExaminationBriefSummary;
 }
 
 /** 体检报告-小结 */
 declare interface GeneralExaminationBriefSummary {
   /** 一般检查小结 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 体检报告-其他项 */
 declare interface GeneralExaminationOthers {
   /** 面容与表情 */
-  Countenance?: KeyValueItem | null;
+  Countenance?: KeyValueItem;
   /** 精神状态 */
-  MentalStatus?: KeyValueItem | null;
+  MentalStatus?: KeyValueItem;
   /** 发育及营养状况 */
-  DevelopmentCondition?: KeyValueItem | null;
+  DevelopmentCondition?: KeyValueItem;
   /** 记忆力 */
-  Memory?: KeyValueItem | null;
+  Memory?: KeyValueItem;
   /** 臀围 */
-  Hipline?: ValueUnitItem | null;
+  Hipline?: ValueUnitItem;
   /** 腰臀比 */
-  WaistHipRatio?: ValueUnitItem | null;
+  WaistHipRatio?: ValueUnitItem;
   /** 生活嗜好 */
-  Addiction?: KeyValueItem | null;
+  Addiction?: KeyValueItem;
   /** 生活能力评定 */
-  AbilityOfLifeADL?: KeyValueItem | null;
+  AbilityOfLifeADL?: KeyValueItem;
   /** 一般检查其他 */
-  Others?: KeyValueItem[] | null;
+  Others?: KeyValueItem[];
   /** 胸围 */
-  ChestCircumference?: ChestCircumferenceItem | null;
+  ChestCircumference?: ChestCircumferenceItem;
 }
 
 /** 生命体征 */
 declare interface GeneralExaminationVitalSign {
   /** 生命体征总体描述 */
-  Text?: ValueUnitItem | null;
+  Text?: ValueUnitItem;
   /** 体温 */
-  BodyTemperature?: ValueUnitItem | null;
+  BodyTemperature?: ValueUnitItem;
   /** 脉率 */
-  Pulse?: ValueUnitItem | null;
+  Pulse?: ValueUnitItem;
   /** 心率 */
-  HeartRate?: ValueUnitItem | null;
+  HeartRate?: ValueUnitItem;
   /** 呼吸频率 */
-  BreathingRate?: ValueUnitItem | null;
+  BreathingRate?: ValueUnitItem;
   /** 身高 */
-  BodyHeight?: ValueUnitItem | null;
+  BodyHeight?: ValueUnitItem;
   /** 体重 */
-  BodyWeight?: ValueUnitItem | null;
+  BodyWeight?: ValueUnitItem;
   /** 体质指数 */
-  BodyMassIndex?: ValueUnitItem | null;
+  BodyMassIndex?: ValueUnitItem;
   /** 腰围 */
-  Waistline?: ValueUnitItem | null;
+  Waistline?: ValueUnitItem;
   /** 血压 */
-  BloodPressure?: GeneralExaminationVitalSignBloodPressure | null;
+  BloodPressure?: GeneralExaminationVitalSignBloodPressure;
 }
 
 /** 血压 */
 declare interface GeneralExaminationVitalSignBloodPressure {
   /** 血压 */
-  Text?: BloodPressureItem | null;
+  Text?: BloodPressureItem;
   /** 收缩压/舒张压 */
-  SystolicDiastolicPressure?: BloodPressureItem[] | null;
+  SystolicDiastolicPressure?: BloodPressureItem[];
   /** 收缩压 */
-  SystolicPressure?: BloodPressureItem[] | null;
+  SystolicPressure?: BloodPressureItem[];
   /** 舒张压 */
-  DiastolicPressure?: BloodPressureItem[] | null;
+  DiastolicPressure?: BloodPressureItem[];
 }
 
 /** 家族遗传史 */
 declare interface GeneticHistoryBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 遗传列表 */
-  GeneticList?: string | null;
+  GeneticList?: string;
   /** 对外输出值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 体检报告-妇科-子宫附件 */
 declare interface GynaecologyAdnexal {
   /** 子宫附件总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 体检报告-妇科 */
 declare interface GynaecologyBaseItem {
   /** 外阴 */
-  Vulva?: GynaecologyVulva | null;
+  Vulva?: GynaecologyVulva;
   /** 阴道 */
-  Vagina?: GynaecologyVagina | null;
+  Vagina?: GynaecologyVagina;
   /** 子宫颈 */
-  Cervix?: GynaecologyCervix | null;
+  Cervix?: GynaecologyCervix;
   /** 子宫 */
-  Uterus?: GynaecologyUterus | null;
+  Uterus?: GynaecologyUterus;
   /** 子宫附件 */
-  Adnexal?: GynaecologyAdnexal | null;
+  Adnexal?: GynaecologyAdnexal;
   /** 盆腔 */
-  PelvicCavity?: GynaecologyPelvicCavity | null;
+  PelvicCavity?: GynaecologyPelvicCavity;
   /** 妇科其他 */
-  Others?: KeyValueItem[] | null;
+  Others?: KeyValueItem[];
   /** 月经史 */
-  MenstrualHistory?: GynaecologyMenstrualHistory | null;
+  MenstrualHistory?: GynaecologyMenstrualHistory;
   /** 小结 */
-  BriefSummary?: GynaecologyBriefSummary | null;
+  BriefSummary?: GynaecologyBriefSummary;
 }
 
 /** 体检报告-妇科-小结 */
 declare interface GynaecologyBriefSummary {
   /** 小结 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 体检报告-妇科-子宫颈 */
 declare interface GynaecologyCervix {
   /** 子宫颈总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 体检报告-妇科-月经史 */
 declare interface GynaecologyMenstrualHistory {
   /** 妇科月经史总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 体检报告-妇科-盆腔 */
 declare interface GynaecologyPelvicCavity {
   /** 盆腔总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 体检报告-妇科-子宫 */
 declare interface GynaecologyUterus {
   /** 子宫总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 体检报告-妇科-阴道 */
 declare interface GynaecologyVagina {
   /** 阴道总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 体检报告-妇科-外阴 */
 declare interface GynaecologyVulva {
   /** 外阴总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 图片处理参数 */
@@ -1453,135 +1453,135 @@ declare interface HandleParam {
 /** 听力信息 */
 declare interface HearingItem {
   /** 类型 */
-  Name?: string | null;
+  Name?: string;
   /** 项目原文 */
-  Item?: PhysicalBaseItem | null;
+  Item?: PhysicalBaseItem;
   /** 方位 */
-  Location?: PhysicalBaseItem | null;
+  Location?: PhysicalBaseItem;
   /** 描述 */
-  Result?: PhysicalBaseItem | null;
+  Result?: PhysicalBaseItem;
 }
 
 /** 组织学类 */
 declare interface HistologyClass {
   /** 项目名称 */
-  Name?: string | null;
+  Name?: string;
   /** 索引 */
-  Index?: number[] | null;
+  Index?: number[];
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 归一化值 */
-  Value?: string | null;
+  Value?: string;
   /** 原文对应坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
 }
 
 /** 组织学等级 */
 declare interface HistologyLevel {
   /** 等级 */
-  Grade: string | null;
+  Grade?: string;
   /** 原文位置 */
-  Index: number[] | null;
+  Index?: number[];
   /** 原文 */
-  Src: string | null;
+  Src?: string;
 }
 
 /** 组织学类型 */
 declare interface HistologyType {
   /** 浸润 */
-  Infiltration: string | null;
+  Infiltration?: string;
   /** 原文位置 */
-  Index: number[] | null;
+  Index?: number[];
   /** 原文 */
-  Src: string | null;
+  Src?: string;
   /** 类型 */
-  Type: string | null;
+  Type?: string;
 }
 
 /** 组织学类型 */
 declare interface HistologyTypeV2 {
   /** 浸润 */
-  Infiltration?: string | null;
+  Infiltration?: string;
   /** 索引 */
-  Index?: number[] | null;
+  Index?: number[];
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 归一化后的组织学类型 */
-  Type?: string | null;
+  Type?: string;
   /** 项目名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文对应坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
 }
 
 /** 出入院信息 */
 declare interface Hospitalization {
   /** 入院时间 */
-  AdmissionTime?: string | null;
+  AdmissionTime?: string;
   /** 出院时间 */
-  DischargeTime?: string | null;
+  DischargeTime?: string;
   /** 住院天数 */
-  AdmissionDays?: string | null;
+  AdmissionDays?: string;
   /** 入院诊断 */
   AdmissionDignosis?: string | null;
   /** 入院情况 */
-  AdmissionCondition?: string | null;
+  AdmissionCondition?: string;
   /** 诊疗经过 */
-  DiagnosisTreatment?: string | null;
+  DiagnosisTreatment?: string;
   /** 出院诊断 */
-  DischargeDiagnosis?: string | null;
+  DischargeDiagnosis?: string;
   /** 出院医嘱 */
-  DischargeInstruction?: string | null;
+  DischargeInstruction?: string;
   /** 入院诊断 */
-  AdmissionDiagnosis?: string | null;
+  AdmissionDiagnosis?: string;
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 /** IHC块 */
 declare interface IHCBlock {
   /** 索引 */
-  Index?: number[] | null;
+  Index?: number[];
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 具体值 */
-  Value?: ValueBlock | null;
+  Value?: ValueBlock;
   /** 坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
 }
 
 /** Ihc信息 */
 declare interface IHCInfo {
   /** 原文位置 */
-  Index: number[] | null;
+  Index?: number[];
   /** 原文 */
-  Src: string | null;
+  Src?: string;
   /** 名称 */
-  Name: string | null;
+  Name?: string;
   /** 值 */
-  Value: Value;
+  Value?: Value;
 }
 
 /** IHC */
 declare interface IHCV2 {
   /** 索引 */
-  Index?: number[] | null;
+  Index?: number[];
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** ihc归一化 */
-  Name?: string | null;
+  Name?: string;
   /** ihc详情 */
-  Value?: Value | null;
+  Value?: Value;
   /** 原文对应坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
 }
 
 /** 图片信息 */
 declare interface ImageInfo {
   /** 图片id */
-  Id: number;
+  Id?: number;
   /** 图片url(暂不支持传图片Url信息,请使用Base64字段传递图片的Base64编码) */
   Url?: string;
   /** 图片base64编码 */
@@ -1603,77 +1603,77 @@ declare interface ImageMaskFlags {
 /** 免疫组化 */
 declare interface ImmunohistochemistryBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 免疫组化详情 */
-  Value?: IHCBlock[] | null;
+  Value?: IHCBlock[];
 }
 
 /** 检验报告 */
 declare interface Indicator {
   /** 检验指标项 */
-  Indicators?: IndicatorItem[] | null;
+  Indicators?: IndicatorItem[];
   /** 检验报告块标题 */
-  BlockTitle?: BlockTitle[] | null;
+  BlockTitle?: BlockTitle[];
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 /** 检验指标项 */
 declare interface IndicatorItem {
   /** 英文缩写 */
-  Code: string | null;
+  Code?: string;
   /** 标准缩写 */
-  Scode: string | null;
+  Scode?: string;
   /** 项目名称 */
-  Name: string | null;
+  Name?: string;
   /** 标准名 */
-  Sname: string | null;
+  Sname?: string;
   /** 结果 */
-  Result: string | null;
+  Result?: string;
   /** 单位 */
-  Unit: string | null;
+  Unit?: string;
   /** 参考范围 */
-  Range: string | null;
+  Range?: string;
   /** 上下箭头 */
-  Arrow: string | null;
+  Arrow?: string;
   /** 是否正常 */
-  Normal: boolean | null;
+  Normal?: boolean;
   /** 项目原文 */
-  ItemString: string | null;
+  ItemString?: string;
   /** 指标项ID */
-  Id: number | null;
+  Id?: number;
   /** 指标项坐标位置 */
-  Coords: Coordinate | null;
+  Coords?: Coordinate;
   /** 推测结果是否异常 */
-  InferNormal?: string | null;
+  InferNormal?: string;
 }
 
 /** 检验指标项结构v2 */
 declare interface IndicatorItemV2 {
   /** 项目名称 */
-  Item?: BaseItem | null;
+  Item?: BaseItem;
   /** 英文编码 */
-  Code?: BaseItem | null;
+  Code?: BaseItem;
   /** 结果 */
-  Result?: BaseItem | null;
+  Result?: BaseItem;
   /** 单位 */
-  Unit?: BaseItem | null;
+  Unit?: BaseItem;
   /** 参考范围 */
-  Range?: BaseItem | null;
+  Range?: BaseItem;
   /** 上下箭头 */
-  Arrow?: BaseItem | null;
+  Arrow?: BaseItem;
   /** 检测方法 */
-  Method?: BaseItem | null;
+  Method?: BaseItem;
   /** 结果是否异常 */
-  Normal?: boolean | null;
+  Normal?: boolean;
   /** ID */
-  Id?: number | null;
+  Id?: number;
   /** 序号 */
-  Order?: number | null;
+  Order?: number;
   /** 推测结果是否异常 */
-  InferNormal?: string | null;
+  InferNormal?: string;
 }
 
 /** 检验报告v3 */
@@ -1681,347 +1681,347 @@ declare interface IndicatorV3 {
   /** 检验报告V3结论 */
   TableIndictors?: TableIndicators[] | null;
   /** 版本号 */
-  Version?: string | null;
+  Version?: string;
   /** 检验报告V3结论 */
-  TableIndicators?: TableIndicators[] | null;
+  TableIndicators?: TableIndicators[];
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 /** 体检报告-内科-腹部 */
 declare interface InternalMedicineAbdomen {
   /** 内科腹部小结 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
   /** 肝脏 */
-  Liver?: InternalMedicineAbdomenLiver | null;
+  Liver?: InternalMedicineAbdomenLiver;
   /** 胆囊 */
-  GallBladder?: InternalMedicineAbdomenGallBladder | null;
+  GallBladder?: InternalMedicineAbdomenGallBladder;
   /** 胰腺 */
-  Pancreas?: InternalMedicineAbdomenPancreas | null;
+  Pancreas?: InternalMedicineAbdomenPancreas;
   /** 脾脏 */
-  Spleen?: InternalMedicineAbdomenSpleen | null;
+  Spleen?: InternalMedicineAbdomenSpleen;
   /** 肾脏 */
-  Kidney?: InternalMedicineAbdomenKidney | null;
+  Kidney?: InternalMedicineAbdomenKidney;
   /** 腹部其他 */
-  Others?: KeyValueItem[] | null;
+  Others?: KeyValueItem[];
 }
 
 /** 体检报告-内科-腹部-胆囊 */
 declare interface InternalMedicineAbdomenGallBladder {
   /** 胆囊总体描述 */
-  Src?: KeyValueItem | null;
+  Src?: KeyValueItem;
   /** 胆囊大小 */
-  Size?: KeyValueItem | null;
+  Size?: KeyValueItem;
   /** 胆囊触诊 */
-  Palpation?: KeyValueItem | null;
+  Palpation?: KeyValueItem;
   /** 胆囊叩诊 */
-  Percussion?: KeyValueItem | null;
+  Percussion?: KeyValueItem;
   /** 胆囊压痛 */
-  Tenderness?: KeyValueItem | null;
+  Tenderness?: KeyValueItem;
   /** 胆囊质地 */
-  Consistency?: KeyValueItem | null;
+  Consistency?: KeyValueItem;
 }
 
 /** 体检报告-内科-腹部-肾脏 */
 declare interface InternalMedicineAbdomenKidney {
   /** 肾脏总体描述 */
-  Src?: KeyValueItem | null;
+  Src?: KeyValueItem;
   /** 肾脏大小 */
-  Size?: KeyValueItem | null;
+  Size?: KeyValueItem;
   /** 肾脏触诊 */
-  Palpation?: KeyValueItem | null;
+  Palpation?: KeyValueItem;
   /** 肾脏叩诊 */
-  Percussion?: KeyValueItem | null;
+  Percussion?: KeyValueItem;
   /** 肾脏压痛 */
-  Tenderness?: KeyValueItem | null;
+  Tenderness?: KeyValueItem;
   /** 肾脏质地 */
-  Consistency?: KeyValueItem | null;
+  Consistency?: KeyValueItem;
 }
 
 /** 体检报告-内科-腹部-肝脏 */
 declare interface InternalMedicineAbdomenLiver {
   /** 肝脏总体描述 */
-  Src?: KeyValueItem | null;
+  Src?: KeyValueItem;
   /** 肝脏大小 */
-  Size?: KeyValueItem | null;
+  Size?: KeyValueItem;
   /** 肝脏触诊 */
-  Palpation?: KeyValueItem | null;
+  Palpation?: KeyValueItem;
   /** 肝脏叩诊 */
-  Percussion?: KeyValueItem | null;
+  Percussion?: KeyValueItem;
   /** 肝脏压痛 */
-  Tenderness?: KeyValueItem | null;
+  Tenderness?: KeyValueItem;
   /** 肝脏质地 */
-  Consistency?: KeyValueItem | null;
+  Consistency?: KeyValueItem;
 }
 
 /** 体检报告-内科-腹部-胰腺 */
 declare interface InternalMedicineAbdomenPancreas {
   /** 胰腺总体描述 */
-  Src?: KeyValueItem | null;
+  Src?: KeyValueItem;
   /** 胰腺大小 */
-  Size?: KeyValueItem | null;
+  Size?: KeyValueItem;
   /** 胰腺触诊 */
-  Palpation?: KeyValueItem | null;
+  Palpation?: KeyValueItem;
   /** 胰腺叩诊 */
-  Percussion?: KeyValueItem | null;
+  Percussion?: KeyValueItem;
   /** 肝脏压痛 */
-  Tenderness?: KeyValueItem | null;
+  Tenderness?: KeyValueItem;
   /** 胰腺质地 */
-  Consistency?: KeyValueItem | null;
+  Consistency?: KeyValueItem;
 }
 
 /** 体检报告-内科-腹部-脾脏 */
 declare interface InternalMedicineAbdomenSpleen {
   /** 脾脏总体描述 */
-  Src?: KeyValueItem | null;
+  Src?: KeyValueItem;
   /** 脾脏大小 */
-  Size?: KeyValueItem | null;
+  Size?: KeyValueItem;
   /** 脾脏触诊 */
-  Palpation?: KeyValueItem | null;
+  Palpation?: KeyValueItem;
   /** 脾脏叩诊 */
-  Percussion?: KeyValueItem | null;
+  Percussion?: KeyValueItem;
   /** 脾脏压痛 */
-  Tenderness?: KeyValueItem | null;
+  Tenderness?: KeyValueItem;
   /** 脾脏质地 */
-  Consistency?: KeyValueItem | null;
+  Consistency?: KeyValueItem;
 }
 
 /** 体检报告-内科 */
 declare interface InternalMedicineBaseItem {
   /** 体检报告-内科-腹部 */
-  Abdomen?: InternalMedicineAbdomen | null;
+  Abdomen?: InternalMedicineAbdomen;
   /** 体检报告-内科-心脏 */
-  Heart?: InternalMedicineHeart | null;
+  Heart?: InternalMedicineHeart;
   /** 体检报告-内科-血管 */
-  Vessel?: InternalMedicineVessel | null;
+  Vessel?: InternalMedicineVessel;
   /** 体检报告-内科-呼吸系统 */
-  RespiratorySystem?: InternalMedicineRespiratorySystem | null;
+  RespiratorySystem?: InternalMedicineRespiratorySystem;
   /** 体检报告-内科-内科其他 */
-  Others?: KeyValueItem[] | null;
+  Others?: KeyValueItem[];
   /** 体检报告-内科-小结 */
-  BriefSummary?: InternalMedicineBriefSummary | null;
+  BriefSummary?: InternalMedicineBriefSummary;
 }
 
 /** 体检报告-内科-内科小结 */
 declare interface InternalMedicineBriefSummary {
   /** 内科小结 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 体检报告-内科-心脏 */
 declare interface InternalMedicineHeart {
   /** 心脏总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
   /** 心律 */
-  HeartRhythm?: KeyValueItem | null;
+  HeartRhythm?: KeyValueItem;
   /** 心率 */
-  HeartRate?: ValueUnitItem | null;
+  HeartRate?: ValueUnitItem;
   /** 心脏听诊 */
-  HeartAuscultation?: KeyValueItem | null;
+  HeartAuscultation?: KeyValueItem;
 }
 
 /** 体检报告-内科-呼吸系统 */
 declare interface InternalMedicineRespiratorySystem {
   /** 呼吸系统总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
   /** 胸廓 */
-  Thoracic?: KeyValueItem | null;
+  Thoracic?: KeyValueItem;
   /** 痰量 */
-  Sputum?: KeyValueItem | null;
+  Sputum?: KeyValueItem;
   /** 肺部叩诊 */
-  LungPercussion?: KeyValueItem | null;
+  LungPercussion?: KeyValueItem;
   /** 肺部听诊其他 */
-  LungAuscultation?: KeyValueItem[] | null;
+  LungAuscultation?: KeyValueItem[];
 }
 
 /** 体检报告-内科-血管 */
 declare interface InternalMedicineVessel {
   /** 血管总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
   /** 血管杂音 */
-  VascularMurmur?: KeyValueItem | null;
+  VascularMurmur?: KeyValueItem;
   /** 外周血管 */
-  PeripheralVessel?: KeyValueItem | null;
+  PeripheralVessel?: KeyValueItem;
 }
 
 /** 侵犯扩散 */
 declare interface Invas {
   /** 原文位置 */
-  Index: number[] | null;
+  Index?: number[];
   /** 部位 */
-  Part: Part | null;
+  Part?: Part;
   /** 阳性 */
-  Positive: string | null;
+  Positive?: string;
   /** 原文 */
-  Src: string | null;
+  Src?: string;
 }
 
 /** 侵犯 */
 declare interface InvasiveV2 {
   /** 索引 */
-  Index?: number[] | null;
+  Index?: number[];
   /** 部位 */
-  Part?: Part | null;
+  Part?: Part;
   /** 阴性或阳性 */
-  Positive?: string | null;
+  Positive?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 原文对应坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
 }
 
 /** 签发信息 */
 declare interface IssueInfo {
   /** 编号 */
-  CertNumber?: string | null;
+  CertNumber?: string;
   /** 签发机构 */
-  IssuedAuthority?: string | null;
+  IssuedAuthority?: string;
   /** 签发日期 */
-  IssuedDate?: string | null;
+  IssuedDate?: string;
 }
 
 /** 体检报告信息 */
 declare interface KeyValueItem {
   /** 类型 */
-  Name?: string | null;
+  Name?: string;
   /** 项目原文 */
-  Item?: PhysicalBaseItem | null;
+  Item?: PhysicalBaseItem;
   /** 结果 */
-  Result?: PhysicalBaseItem | null;
+  Result?: PhysicalBaseItem;
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 /** 末次月经 */
 declare interface LastMenstrualPeriodBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 归一化值 */
-  Norm?: string | null;
+  Norm?: string;
   /** 类型 */
-  Type?: string | null;
+  Type?: string;
   /** 时间戳 */
-  Timestamp?: string | null;
+  Timestamp?: string;
   /** 单位 */
-  Unit?: string | null;
+  Unit?: string;
   /** 对外输出值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 淋巴 */
 declare interface Lymph {
   /** 原文 */
-  Src: string | null;
+  Src?: string;
   /** 原文位置 */
-  Index: number[] | null;
+  Index?: number[];
   /** 部位 */
-  Part: Part | null;
+  Part?: Part;
   /** 总数 */
-  Total: number | null;
+  Total?: number;
   /** 转移数 */
-  TransferNum: number | null;
+  TransferNum?: number;
 }
 
 /** 单淋巴结转移信息 */
 declare interface LymphNode {
   /** 项目名称 */
-  Name?: string | null;
+  Name?: string;
   /** 索引 */
-  Index?: number[] | null;
+  Index?: number[];
   /** 部位 */
-  Part?: Part | null;
+  Part?: Part;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 总数量 */
-  Total?: number | null;
+  Total?: number;
   /** 转移数量 */
-  TransferNum?: number | null;
+  TransferNum?: number;
   /** 淋巴结大小 */
-  Sizes?: number[] | null;
+  Sizes?: number[];
   /** 原文对应坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
 }
 
 /** 淋巴结总计转移信息 */
 declare interface LymphTotal {
   /** 项目名称 */
-  Name?: string | null;
+  Name?: string;
   /** 转移数量 */
-  TransferNum?: number | null;
+  TransferNum?: number;
   /** 总数量 */
-  Total?: number | null;
+  Total?: number;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 索引 */
-  Index?: number[] | null;
+  Index?: number[];
   /** 原文对应坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
 }
 
 /** 既往史 */
 declare interface MainDiseaseHistoryBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 状态 */
-  State?: boolean | null;
+  State?: boolean;
   /** 对外输出值 */
-  Value?: string | null;
+  Value?: string;
   /** 否定列表 */
-  Neglist?: NeglistBlock | null;
+  Neglist?: NeglistBlock;
   /** 肯定列表 */
-  Poslist?: PoslistBlock | null;
+  Poslist?: PoslistBlock;
 }
 
 /** 孕产报告 */
 declare interface Maternity {
   /** 描述部分 */
-  Desc?: MaternityDesc | null;
+  Desc?: MaternityDesc;
   /** 结论部分 */
-  Summary?: MaternitySummary | null;
+  Summary?: MaternitySummary;
   /** 报告原文 */
-  OcrText?: string | null;
+  OcrText?: string;
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 /** 孕产描述部分 */
 declare interface MaternityDesc {
   /** 胎儿数据结构 */
-  Fetus?: Fetus[] | null;
+  Fetus?: Fetus[];
   /** 胎儿数量 */
-  FetusNum?: FieldInfo | null;
+  FetusNum?: FieldInfo;
   /** 原文 */
-  Text?: string | null;
+  Text?: string;
   /** 坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
 }
 
 /** 孕产结论部分 */
 declare interface MaternitySummary {
   /** 胎儿数据结构 */
-  Fetus?: Fetus[] | null;
+  Fetus?: Fetus[];
   /** 胎儿数量 */
-  FetusNum?: FieldInfo | null;
+  FetusNum?: FieldInfo;
   /** 病变 */
-  Sym?: FieldInfo[] | null;
+  Sym?: FieldInfo[];
   /** 原文 */
-  Text?: string | null;
+  Text?: string;
   /** 坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
 }
 
 /** 医学资料 */
 declare interface MedDoc {
   /** 建议 */
-  Advice?: Advice | null;
+  Advice?: Advice;
   /** 诊断结果 */
-  Diagnosis?: DiagCertItem[] | null;
+  Diagnosis?: DiagCertItem[];
   /** 疾病史 */
-  DiseaseMedicalHistory?: DiseaseMedicalHistory | null;
+  DiseaseMedicalHistory?: DiseaseMedicalHistory;
   /** 个人史 */
   PersonalMedicalHistory?: PersonalMedicalHistory;
   /** 婚孕史 */
@@ -2033,269 +2033,269 @@ declare interface MedDoc {
   /** 诊疗记录 */
   TreatmentRecord?: TreatmentRecord;
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 /** 门诊病历信息 */
 declare interface MedicalRecordInfo {
   /** 就诊日期 */
-  DiagnosisTime?: string | null;
+  DiagnosisTime?: string;
   /** 就诊科室 */
-  DiagnosisDepartmentName?: string | null;
+  DiagnosisDepartmentName?: string;
   /** 就诊医生 */
-  DiagnosisDoctorName?: string | null;
+  DiagnosisDoctorName?: string;
   /** 临床诊断 */
-  ClinicalDiagnosis?: string | null;
+  ClinicalDiagnosis?: string;
   /** 主述 */
-  MainNarration?: string | null;
+  MainNarration?: string;
   /** 体格检查 */
-  PhysicalExamination?: string | null;
+  PhysicalExamination?: string;
   /** 检查结论 */
-  InspectionFindings?: string | null;
+  InspectionFindings?: string;
   /** 治疗意见 */
-  TreatmentOpinion?: string | null;
+  TreatmentOpinion?: string;
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 /** 药品 */
 declare interface Medicine {
   /** 药品名 */
-  Name: string | null;
+  Name?: string;
   /** 商品名 */
-  TradeName: string | null;
+  TradeName?: string;
   /** 厂商 */
-  Firm: string | null;
+  Firm?: string;
   /** 医保类型 */
-  Category: string | null;
+  Category?: string;
   /** 规格 */
-  Specification: string | null;
+  Specification?: string;
   /** 最小包装数量 */
-  MinQuantity: string | null;
+  MinQuantity?: string;
   /** 最小制剂单位 */
-  DosageUnit: string | null;
+  DosageUnit?: string;
   /** 最小包装单位 */
-  PackingUnit: string | null;
+  PackingUnit?: string;
 }
 
 /** 月经量 */
 declare interface MenstrualFlowBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 对外输出值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 月经史 */
 declare interface MenstrualHistoryBlock {
   /** 末次月经 */
-  LastMenstrualPeriod?: LastMenstrualPeriodBlock | null;
+  LastMenstrualPeriod?: LastMenstrualPeriodBlock;
   /** 月经量 */
-  MenstrualFlow?: MenstrualFlowBlock | null;
+  MenstrualFlow?: MenstrualFlowBlock;
   /** 初潮时间 */
-  MenarcheAge?: LastMenstrualPeriodBlock | null;
+  MenarcheAge?: LastMenstrualPeriodBlock;
   /** 是否绝经 */
-  MenstruationOrNot?: MenstruationOrNotBlock | null;
+  MenstruationOrNot?: MenstruationOrNotBlock;
   /** 月经周期 */
-  MenstrualCycles?: LastMenstrualPeriodBlock | null;
+  MenstrualCycles?: LastMenstrualPeriodBlock;
   /** 月经经期 */
-  MenstrualPeriod?: MenstrualPeriodBlock | null;
+  MenstrualPeriod?: MenstrualPeriodBlock;
 }
 
 /** 月经史 */
 declare interface MenstrualHistoryDetailBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 状态 */
-  State?: string | null;
+  State?: string;
   /** 归一化值 */
-  Norm?: string | null;
+  Norm?: string;
   /** 时间类型 */
-  TimeType?: string | null;
+  TimeType?: string;
   /** 时间戳 */
-  Timestamp?: string | null;
+  Timestamp?: string;
   /** 单位 */
-  Unit?: string | null;
+  Unit?: string;
   /** 对外输出值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 月经史 */
 declare interface MenstrualMedicalHistory {
   /** 末次月经时间 */
-  LastMenstrualPeriod: string | null;
+  LastMenstrualPeriod?: string;
   /** 经量 */
-  MenstrualFlow: string | null;
+  MenstrualFlow?: string;
   /** 月经初潮年龄 */
-  MenarcheAge: string | null;
+  MenarcheAge?: string;
   /** 是否来月经 */
-  MenstruationOrNot: string | null;
+  MenstruationOrNot?: string;
   /** 月经周期 */
-  MenstrualCycles: string | null;
+  MenstrualCycles?: string;
   /** 月经持续天数 */
-  MenstrualPeriod: string | null;
+  MenstrualPeriod?: string;
 }
 
 /** 月经经期 */
 declare interface MenstrualPeriodBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 归一化值 */
-  Norm?: string | null;
+  Norm?: string;
   /** 类型 */
-  Type?: string | null;
+  Type?: string;
   /** 时间戳 */
-  Timestamp?: string | null;
+  Timestamp?: string;
   /** 单位 */
-  Unit?: string | null;
+  Unit?: string;
   /** 对外输出值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 是否绝经 */
 declare interface MenstruationOrNotBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 归一化值 */
-  Norm?: string | null;
+  Norm?: string;
   /** 时间类型 */
-  TimeType?: string | null;
+  TimeType?: string;
   /** 时间戳 */
-  Timestamp?: string | null;
+  Timestamp?: string;
   /** 对外输出值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 分子病理 */
 declare interface Molecular {
   /** 索引 */
-  Index?: number[] | null;
+  Index?: number[];
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 基因名称标注化 */
-  Name?: string | null;
+  Name?: string;
   /** 分子病理详细信息 */
-  Value?: MolecularValue | null;
+  Value?: MolecularValue;
   /** 原文对应坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
 }
 
 /** 分子病理详细信息 */
 declare interface MolecularValue {
   /** 外显子 */
-  Exon?: string | null;
+  Exon?: string;
   /** 点位 */
-  Position?: string | null;
+  Position?: string;
   /** 类型 */
-  Type?: string | null;
+  Type?: string;
   /** 阳性或阴性 */
-  Positive?: string | null;
+  Positive?: string;
   /** 基因名称原文 */
-  Src?: string | null;
+  Src?: string;
 }
 
 /** 多发 */
 declare interface Multiple {
   /** 原文位置 */
-  Index: number[] | null;
+  Index?: number[];
   /** 原文 */
-  Src: string | null;
+  Src?: string;
   /** 值 */
-  Value: string | null;
+  Value?: string;
   /** 数量 */
-  Count: number | null;
+  Count?: number;
   /** 名称 */
-  Name: string | null;
+  Name?: string;
 }
 
 /** 否定列表 */
 declare interface NeglistBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 新生儿信息 */
 declare interface NeonatalInfo {
   /** 新生儿名字 */
-  NeonatalName?: string | null;
+  NeonatalName?: string;
   /** 新生儿性别 */
-  NeonatalGender?: string | null;
+  NeonatalGender?: string;
   /** 出生身长 */
-  BirthLength?: string | null;
+  BirthLength?: string;
   /** 出生体重 */
-  BirthWeight?: string | null;
+  BirthWeight?: string;
   /** 出生孕周 */
-  GestationalAge?: string | null;
+  GestationalAge?: string;
   /** 出生时间 */
-  BirthTime?: string | null;
+  BirthTime?: string;
   /** 出生地点 */
-  BirthPlace?: string | null;
+  BirthPlace?: string;
   /** 医疗机构 */
-  MedicalInstitutions?: string | null;
+  MedicalInstitutions?: string;
 }
 
 /** 标准部位 */
 declare interface NormPart {
   /** 部位值 */
-  Part?: string | null;
+  Part?: string;
   /** 部位方向 */
-  PartDirection?: string | null;
+  PartDirection?: string;
   /** 组织值 */
-  Tissue?: string | null;
+  Tissue?: string;
   /** 组织方向 */
-  TissueDirection?: string | null;
+  TissueDirection?: string;
   /** 上级部位 */
-  Upper?: string | null;
+  Upper?: string;
   /** 部位详情 */
   PartDetail?: PartDesc | null;
   /** 部位详情 */
-  PartDetailList?: PartDesc[] | null;
+  PartDetailList?: PartDesc[];
 }
 
 /** 大小 */
 declare interface NormSize {
   /** 数量 */
-  Number?: string[] | null;
+  Number?: string[];
   /** 类型 */
-  Type?: string | null;
+  Type?: string;
   /** 单位 */
-  Unit?: string | null;
+  Unit?: string;
   /** 归一化值 */
-  Impl?: string | null;
+  Impl?: string;
 }
 
 /** 数值结构体 */
 declare interface NumValue {
   /** 数值 */
-  Num?: string | null;
+  Num?: string;
   /** 单位 */
-  Unit?: string | null;
+  Unit?: string;
 }
 
 /** 孕产史 */
 declare interface ObstericalMedicalHistory {
   /** 婚史 */
-  MarriageHistory: string | null;
+  MarriageHistory?: string;
   /** 孕史 */
-  FertilityHistory: string | null;
+  FertilityHistory?: string;
 }
 
 /** 婚姻-生育史 */
 declare interface ObstetricalHistoryBlock {
   /** 婚姻史 */
-  MarriageHistory?: MenstrualHistoryDetailBlock | null;
+  MarriageHistory?: MenstrualHistoryDetailBlock;
   /** 婚育史 */
-  FertilityHistory?: FertilityHistoryBlock | null;
+  FertilityHistory?: FertilityHistoryBlock;
 }
 
 /** 图片完整的OCR信息 */
@@ -2319,465 +2319,465 @@ declare interface OcrItem {
 /** 体检报告-眼科-裸眼视力 */
 declare interface OphthalmologyBareEyeSight {
   /** 左眼视力 */
-  LeftEyeVisual?: KeyValueItem | null;
+  LeftEyeVisual?: KeyValueItem;
   /** 裸眼视力 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
   /** 右眼视力 */
-  RightEyeVisual?: KeyValueItem | null;
+  RightEyeVisual?: KeyValueItem;
 }
 
 /** 体检报告-眼科 */
 declare interface OphthalmologyBaseItem {
   /** 裸眼视力 */
-  BareEyeSight?: OphthalmologyBareEyeSight | null;
+  BareEyeSight?: OphthalmologyBareEyeSight;
   /** 矫正视力 */
-  CorrectedVisualAcuity?: OphthalmologyCorrectedVisualAcuity | null;
+  CorrectedVisualAcuity?: OphthalmologyCorrectedVisualAcuity;
   /** 色觉 */
-  ColourVision?: OphthalmologyColourVision | null;
+  ColourVision?: OphthalmologyColourVision;
   /** 眼底 */
-  Fundoscopy?: OphthalmologyFundoscopy | null;
+  Fundoscopy?: OphthalmologyFundoscopy;
   /** 眼科其他 */
-  Others?: KeyValueItem[] | null;
+  Others?: KeyValueItem[];
   /** 眼科小结 */
-  BriefSummary?: OphthalmologyBriefSummary | null;
+  BriefSummary?: OphthalmologyBriefSummary;
 }
 
 /** 体检报告-眼科-小结 */
 declare interface OphthalmologyBriefSummary {
   /** 眼科小结 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 体检报告-眼科-色觉 */
 declare interface OphthalmologyColourVision {
   /** 色觉总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 体检报告-眼科-矫正视力 */
 declare interface OphthalmologyCorrectedVisualAcuity {
   /** 左眼矫正视力 */
-  LeftEyeVisual?: KeyValueItem | null;
+  LeftEyeVisual?: KeyValueItem;
   /** 矫正视力 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
   /** 右眼矫正视力 */
-  RightEyeVisual?: KeyValueItem | null;
+  RightEyeVisual?: KeyValueItem;
 }
 
 /** 体检报告-眼科-眼底 */
 declare interface OphthalmologyFundoscopy {
   /** 眼底检查总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 器官 */
 declare interface Organ {
   /** 部位 */
-  Part?: Part | null;
+  Part?: Part;
   /** 大小 */
-  Size?: Size[] | null;
+  Size?: Size[];
   /** 包膜 */
-  Envelope?: BlockInfo | null;
+  Envelope?: BlockInfo;
   /** 边缘 */
-  Edge?: BlockInfo | null;
+  Edge?: BlockInfo;
   /** 内部回声 */
-  InnerEcho?: BlockInfo | null;
+  InnerEcho?: BlockInfo;
   /** 腺体 */
-  Gland?: BlockInfo | null;
+  Gland?: BlockInfo;
   /** 形状 */
-  Shape?: BlockInfo | null;
+  Shape?: BlockInfo;
   /** 厚度 */
-  Thickness?: BlockInfo | null;
+  Thickness?: BlockInfo;
   /** 形态 */
-  ShapeAttr?: BlockInfo | null;
+  ShapeAttr?: BlockInfo;
   /** 血液cdfi */
-  CDFI?: BlockInfo | null;
+  CDFI?: BlockInfo;
   /** 描述信息 */
-  SymDesc?: BlockInfo | null;
+  SymDesc?: BlockInfo;
   /** 大小状态 */
-  SizeStatus?: BlockInfo | null;
+  SizeStatus?: BlockInfo;
   /** 轮廓 */
-  Outline?: BlockInfo | null;
+  Outline?: BlockInfo;
   /** 结构 */
-  Structure?: BlockInfo | null;
+  Structure?: BlockInfo;
   /** 密度 */
-  Density?: BlockInfo | null;
+  Density?: BlockInfo;
   /** 血管 */
-  Vas?: BlockInfo | null;
+  Vas?: BlockInfo;
   /** 囊壁 */
-  Cysticwall?: BlockInfo | null;
+  Cysticwall?: BlockInfo;
   /** 被膜 */
-  Capsule?: BlockInfo | null;
+  Capsule?: BlockInfo;
   /** 峡部厚度 */
   IsthmusThicknese?: Size | null;
   /** 内部回声分布 */
-  InnerEchoDistribution?: BlockInfo | null;
+  InnerEchoDistribution?: BlockInfo;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 原文位置 */
-  Index?: number[] | null;
+  Index?: number[];
   /** 透声度 */
-  Transparent?: BlockInfo | null;
+  Transparent?: BlockInfo;
   /** MRI ADC */
-  MriAdc?: BlockInfo | null;
+  MriAdc?: BlockInfo;
   /** MRI DWI */
-  MriDwi?: BlockInfo | null;
+  MriDwi?: BlockInfo;
   /** MRI T1信号 */
-  MriT1?: BlockInfo | null;
+  MriT1?: BlockInfo;
   /** MRI T2信号 */
-  MriT2?: BlockInfo | null;
+  MriT2?: BlockInfo;
   /** CT HU值 */
-  CtHu?: BlockInfo | null;
+  CtHu?: BlockInfo;
   /** SUmax值 */
-  Suvmax?: BlockInfo | null;
+  Suvmax?: BlockInfo;
   /** 代谢情况 */
-  Metabolism?: BlockInfo | null;
+  Metabolism?: BlockInfo;
   /** 放射性摄取 */
-  RadioactiveUptake?: BlockInfo | null;
+  RadioactiveUptake?: BlockInfo;
   /** 淋巴结情况 */
-  LymphEnlargement?: BlockInfo | null;
+  LymphEnlargement?: BlockInfo;
   /** 影像特征 */
-  ImageFeature?: BlockInfo | null;
+  ImageFeature?: BlockInfo;
   /** 导管 */
-  Duct?: BlockInfo | null;
+  Duct?: BlockInfo;
   /** 趋势 */
-  Trend?: BlockInfo | null;
+  Trend?: BlockInfo;
   /** 手术情况 */
-  Operation?: BlockInfo | null;
+  Operation?: BlockInfo;
   /** 器官在报告图片中的坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
   /** 峡部厚度 */
-  IsthmusThickness?: Size | null;
+  IsthmusThickness?: Size;
 }
 
 /** 其他信息 */
 declare interface OtherInfo {
   /** 麻醉方法 */
-  Anesthesia?: SurgeryAttr | null;
+  Anesthesia?: SurgeryAttr;
   /** 术中出血 */
-  BloodLoss?: SurgeryAttr | null;
+  BloodLoss?: SurgeryAttr;
   /** 输血 */
-  BloodTransfusion?: SurgeryAttr | null;
+  BloodTransfusion?: SurgeryAttr;
   /** 手术用时 */
-  Duration?: SurgeryAttr | null;
+  Duration?: SurgeryAttr;
   /** 手术开始时间 */
-  EndTime?: SurgeryAttr | null;
+  EndTime?: SurgeryAttr;
   /** 手术结束时间 */
-  StartTime?: SurgeryAttr | null;
+  StartTime?: SurgeryAttr;
 }
 
 /** 体检报告-耳鼻喉科 */
 declare interface OtolaryngologyBaseItem {
   /** 耳朵 */
-  Ear?: OtolaryngologyEar | null;
+  Ear?: OtolaryngologyEar;
   /** 鼻 */
-  Nose?: OtolaryngologyNose | null;
+  Nose?: OtolaryngologyNose;
   /** 喉 */
-  Larynx?: OtolaryngologyLarynx | null;
+  Larynx?: OtolaryngologyLarynx;
   /** 耳鼻喉其他 */
-  Others?: KeyValueItem[] | null;
+  Others?: KeyValueItem[];
   /** 小结 */
-  BriefSummary?: OtolaryngologyBriefSummary | null;
+  BriefSummary?: OtolaryngologyBriefSummary;
 }
 
 /** 体检报告-耳鼻喉科-小结 */
 declare interface OtolaryngologyBriefSummary {
   /** 耳鼻喉小结 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 体检报告-耳鼻喉科-耳朵 */
 declare interface OtolaryngologyEar {
   /** 耳总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
   /** 听力 */
-  Hearing?: HearingItem | null;
+  Hearing?: HearingItem;
 }
 
 /** 体检报告-耳鼻喉科-喉 */
 declare interface OtolaryngologyLarynx {
   /** 喉总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 体检报告-耳鼻喉科-鼻 */
 declare interface OtolaryngologyNose {
   /** 鼻总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** pTNM */
 declare interface PTNM {
   /** 项目名称 */
-  Name?: string | null;
+  Name?: string;
   /** 索引 */
-  Index?: number[] | null;
+  Index?: number[];
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 归一化值 */
-  Value?: string | null;
+  Value?: string;
   /** pT */
-  PT?: string | null;
+  PT?: string;
   /** pN */
-  PN?: string | null;
+  PN?: string;
   /** pM */
-  PM?: string | null;
+  PM?: string;
   /** 原文对应坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
 }
 
 /** PTNM分期 */
 declare interface PTNMBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** PTNM分期 */
-  PTNMM?: string | null;
+  PTNMM?: string;
   /** PTNM分期 */
-  PTNMN?: string | null;
+  PTNMN?: string;
   /** PTNM分期 */
-  PTNMT?: string | null;
+  PTNMT?: string;
 }
 
 /** 文本块 */
 declare interface ParagraphBlock {
   /** 切口愈合情况 */
-  IncisionHealingText?: string | null;
+  IncisionHealingText?: string;
   /** 辅助检查 */
-  AuxiliaryExaminationText?: string | null;
+  AuxiliaryExaminationText?: string;
   /** 特殊检查 */
-  SpecialExamText?: string | null;
+  SpecialExamText?: string;
   /** 门诊诊断 */
-  OutpatientDiagnosisText?: string | null;
+  OutpatientDiagnosisText?: string;
   /** 入院情况 */
-  AdmissionConditionText?: string | null;
+  AdmissionConditionText?: string;
   /** 诊疗经过 */
-  CheckAndTreatmentProcessText?: string | null;
+  CheckAndTreatmentProcessText?: string;
   /** 体征 */
-  SymptomsAndSignsText?: string | null;
+  SymptomsAndSignsText?: string;
   /** 出院医嘱 */
-  DischargeInstructionsText?: string | null;
+  DischargeInstructionsText?: string;
   /** 入院诊断 */
-  AdmissionDiagnosisText?: string | null;
+  AdmissionDiagnosisText?: string;
   /** 手术情况 */
-  SurgeryConditionText?: string | null;
+  SurgeryConditionText?: string;
   /** 病理诊断 */
-  PathologicalDiagnosisText?: string | null;
+  PathologicalDiagnosisText?: string;
   /** 出院情况 */
-  DischargeConditionText?: string | null;
+  DischargeConditionText?: string;
   /** 检查记录 */
-  CheckRecordText?: string | null;
+  CheckRecordText?: string;
   /** 主诉 */
-  ChiefComplaintText?: string | null;
+  ChiefComplaintText?: string;
   /** 出院诊断 */
-  DischargeDiagnosisText?: string | null;
+  DischargeDiagnosisText?: string;
   /** 既往史 */
-  MainDiseaseHistoryText?: string | null;
+  MainDiseaseHistoryText?: string;
   /** 现病史 */
-  DiseasePresentText?: string | null;
+  DiseasePresentText?: string;
   /** 个人史 */
-  PersonalHistoryText?: string | null;
+  PersonalHistoryText?: string;
   /** 月经史 */
   MenstruallHistoryText?: string | null;
   /** 婚育史 */
-  ObstericalHistoryText?: string | null;
+  ObstericalHistoryText?: string;
   /** 家族史 */
-  FamilyHistoryText?: string | null;
+  FamilyHistoryText?: string;
   /** 过敏史 */
-  AllergyHistoryText?: string | null;
+  AllergyHistoryText?: string;
   /** 病史信息 */
-  DiseaseHistoryText?: string | null;
+  DiseaseHistoryText?: string;
   /** 其它诊断 */
-  OtherDiagnosisText?: string | null;
+  OtherDiagnosisText?: string;
   /** 体格检查 */
-  BodyExaminationText?: string | null;
+  BodyExaminationText?: string;
   /** 专科检查 */
-  SpecialistExaminationText?: string | null;
+  SpecialistExaminationText?: string;
   /** 治疗结果 */
-  TreatmentResultText?: string | null;
+  TreatmentResultText?: string;
   /** 月经史 */
-  MenstrualHistoryText?: string | null;
+  MenstrualHistoryText?: string;
 }
 
 /** 母亲或父亲信息 */
 declare interface ParentInfo {
   /** 名字 */
-  Name?: string | null;
+  Name?: string;
   /** 年龄 */
-  Age?: string | null;
+  Age?: string;
   /** 证件号 */
-  IdCard?: string | null;
+  IdCard?: string;
   /** 民族 */
-  Ethnicity?: string | null;
+  Ethnicity?: string;
   /** 国籍 */
-  Nationality?: string | null;
+  Nationality?: string;
   /** 地址 */
-  Address?: string | null;
+  Address?: string;
 }
 
 /** 部位信息 */
 declare interface Part {
   /** 原文位置 */
-  Index?: number[] | null;
+  Index?: number[];
   /** 部位 */
-  NormPart?: NormPart | null;
+  NormPart?: NormPart;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 值 */
-  Value?: string | null;
+  Value?: string;
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 值 */
-  ValueBrief?: string | null;
+  ValueBrief?: string;
 }
 
 /** 部位描述 */
 declare interface PartDesc {
   /** 主要部位 */
-  MainDir?: string | null;
+  MainDir?: string;
   /** 部位 */
-  Part?: string | null;
+  Part?: string;
   /** 次要部位 */
-  SecondaryDir?: string | null;
+  SecondaryDir?: string;
   /** 类型 */
-  Type?: string | null;
+  Type?: string;
 }
 
 /** 病理诊断 */
 declare interface PathologicalDiagnosisBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 病理详细 */
-  Detail?: PathologicalDiagnosisDetailBlock[] | null;
+  Detail?: PathologicalDiagnosisDetailBlock[];
   /** 值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 病理详细 */
 declare interface PathologicalDiagnosisDetailBlock {
   /** 部位 */
-  Part?: string | null;
+  Part?: string;
   /** 类型 */
-  HistologicalType?: string | null;
+  HistologicalType?: string;
   /** 等级 */
-  HistologicalGrade?: string | null;
+  HistologicalGrade?: string;
 }
 
 /** 病理报告 */
 declare interface PathologyReport {
   /** 癌症部位 */
-  CancerPart: Part | null;
+  CancerPart?: Part;
   /** 癌症部位大小 */
-  CancerSize: Size[] | null;
+  CancerSize?: Size[];
   /** 描述文本 */
-  DescText: string | null;
+  DescText?: string;
   /** 组织学等级 */
-  HistologyLevel: HistologyLevel | null;
+  HistologyLevel?: HistologyLevel;
   /** 组织学类型 */
-  HistologyType: HistologyType | null;
+  HistologyType?: HistologyType;
   /** IHC信息 */
-  IHC: IHCInfo[] | null;
+  IHC?: IHCInfo[];
   /** 浸润深度 */
-  InfiltrationDepth: BlockInfo | null;
+  InfiltrationDepth?: BlockInfo;
   /** 肿瘤扩散 */
-  Invasive: Invas[] | null;
+  Invasive?: Invas[];
   /** 淋巴结 */
-  LymphNodes: Lymph[] | null;
+  LymphNodes?: Lymph[];
   /** PTNM信息 */
-  PTNM: BlockInfo | null;
+  PTNM?: BlockInfo;
   /** 病理报告类型 */
-  PathologicalReportType: BlockInfo | null;
+  PathologicalReportType?: BlockInfo;
   /** 报告原文 */
-  ReportText: string | null;
+  ReportText?: string;
   /** 标本类型 */
-  SampleType: BlockInfo | null;
+  SampleType?: BlockInfo;
   /** 结论文本 */
-  SummaryText: string | null;
+  SummaryText?: string;
 }
 
 /** 病理报告v2 */
 declare interface PathologyV2 {
   /** 报告类型 */
-  PathologicalReportType?: Report | null;
+  PathologicalReportType?: Report;
   /** 描述段落 */
-  Desc?: DescInfo | null;
+  Desc?: DescInfo;
   /** 诊断结论 */
-  Summary?: SummaryInfo | null;
+  Summary?: SummaryInfo;
   /** 报告全文 */
-  ReportText?: string | null;
+  ReportText?: string;
   /** 淋巴结总计转移信息 */
-  LymphTotal?: LymphTotal[] | null;
+  LymphTotal?: LymphTotal[];
   /** 单淋巴结转移信息 */
-  LymphNodes?: LymphNode[] | null;
+  LymphNodes?: LymphNode[];
   /** ihc信息 */
-  Ihc?: IHCV2[] | null;
+  Ihc?: IHCV2[];
   /** 临床诊断 */
-  Clinical?: BaseInfo | null;
+  Clinical?: BaseInfo;
   /** 是否癌前病变 */
-  Precancer?: HistologyClass | null;
+  Precancer?: HistologyClass;
   /** 是否恶性肿瘤 */
-  Malignant?: HistologyClass | null;
+  Malignant?: HistologyClass;
   /** 是否良性肿瘤 */
-  Benigntumor?: HistologyClass | null;
+  Benigntumor?: HistologyClass;
   /** 送检材料 */
-  SampleType?: BaseInfo | null;
+  SampleType?: BaseInfo;
   /** 淋巴结大小 */
-  LymphSize?: Size[] | null;
+  LymphSize?: Size[];
   /** 分子病理 */
-  Molecular?: Molecular[] | null;
+  Molecular?: Molecular[];
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 /** 患者信息 */
 declare interface PatientInfo {
   /** 患者姓名 */
-  Name?: string | null;
+  Name?: string;
   /** 患者性别 */
-  Sex?: string | null;
+  Sex?: string;
   /** 患者年龄 */
-  Age?: string | null;
+  Age?: string;
   /** 患者手机号码 */
-  Phone?: string | null;
+  Phone?: string;
   /** 患者地址 */
-  Address?: string | null;
+  Address?: string;
   /** 患者身份证 */
-  IdCard?: string | null;
+  IdCard?: string;
   /** 健康卡号 */
-  HealthCardNo?: string | null;
+  HealthCardNo?: string;
   /** 社保卡号 */
-  SocialSecurityCardNo?: string | null;
+  SocialSecurityCardNo?: string;
   /** 出生日期 */
-  Birthday?: string | null;
+  Birthday?: string;
   /** 民族 */
-  Ethnicity?: string | null;
+  Ethnicity?: string;
   /** 婚姻状况 */
-  Married?: string | null;
+  Married?: string;
   /** 职业 */
-  Profession?: string | null;
+  Profession?: string;
   /** 教育程度 */
-  EducationBackground?: string | null;
+  EducationBackground?: string;
   /** 国籍 */
-  Nationality?: string | null;
+  Nationality?: string;
   /** 籍贯 */
-  BirthPlace?: string | null;
+  BirthPlace?: string;
   /** 医保类型 */
-  MedicalInsuranceType?: string | null;
+  MedicalInsuranceType?: string;
   /** 标准化年龄 */
-  AgeNorm?: string | null;
+  AgeNorm?: string;
   /** 民族。该字段已不再使用，请从Ethnicity取值 */
   Nation?: string | null;
   /** 婚姻代码 */
-  MarriedCode?: string | null;
+  MarriedCode?: string;
   /** 职业代码 */
-  ProfessionCode?: string | null;
+  ProfessionCode?: string;
   /** 居民医保代码 */
-  MedicalInsuranceTypeCode?: string | null;
+  MedicalInsuranceTypeCode?: string;
   /** 床号 */
-  BedNo?: string | null;
+  BedNo?: string;
 }
 
 /** 体检报告PDF信息 */
@@ -2791,237 +2791,237 @@ declare interface PdfInfo {
 /** 个人史 */
 declare interface PersonalHistoryBlock {
   /** 出生地 */
-  BirthPlace?: BirthPlaceBlock | null;
+  BirthPlace?: BirthPlaceBlock;
   /** 居住地 */
-  LivePlace?: BirthPlaceBlock | null;
+  LivePlace?: BirthPlaceBlock;
   /** 职业 */
-  Job?: BirthPlaceBlock | null;
+  Job?: BirthPlaceBlock;
   /** 吸烟 */
-  SmokeHistory?: SmokeHistoryBlock | null;
+  SmokeHistory?: SmokeHistoryBlock;
   /** 喝酒 */
-  AlcoholicHistory?: SmokeHistoryBlock | null;
+  AlcoholicHistory?: SmokeHistoryBlock;
   /** 月经史 */
-  MenstrualHistory?: MenstrualHistoryBlock | null;
+  MenstrualHistory?: MenstrualHistoryBlock;
   /** 婚姻-生育史 */
-  ObstericalHistory?: ObstetricalHistoryBlock | null;
+  ObstericalHistory?: ObstetricalHistoryBlock;
   /** 家族史 */
-  FamilyHistory?: FamilyHistoryBlock | null;
+  FamilyHistory?: FamilyHistoryBlock;
 }
 
 /** 个人史 */
 declare interface PersonalMedicalHistory {
   /** 出生史 */
-  BirthPlace: string | null;
+  BirthPlace?: string;
   /** 居住史 */
-  LivePlace: string | null;
+  LivePlace?: string;
   /** 工作史 */
-  Job: string | null;
+  Job?: string;
   /** 吸烟史 */
-  SmokeHistory: string | null;
+  SmokeHistory?: string;
   /** 饮酒史 */
-  AlcoholicHistory: string | null;
+  AlcoholicHistory?: string;
 }
 
 /** 体检报告基础信息 */
 declare interface PhysicalBaseItem {
   /** 类型 */
-  Name?: string | null;
+  Name?: string;
   /** 原始文本 */
-  Src?: string | null;
+  Src?: string;
   /** 归一化后值 */
-  Value?: string | null;
+  Value?: string;
   /** 四点坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
 }
 
 /** 体检报告综合信息 */
 declare interface PhysicalExamination {
   /** 一般检查 */
-  GeneralExamination?: GeneralExaminationBaseItem | null;
+  GeneralExamination?: GeneralExaminationBaseItem;
   /** 内科 */
-  InternalMedicine?: InternalMedicineBaseItem | null;
+  InternalMedicine?: InternalMedicineBaseItem;
   /** 外科 */
-  Surgery?: SurgeryBaseItem | null;
+  Surgery?: SurgeryBaseItem;
   /** 口腔科 */
-  Stomatology?: StomatologyBaseItem | null;
+  Stomatology?: StomatologyBaseItem;
   /** 眼科 */
-  Ophthalmology?: OphthalmologyBaseItem | null;
+  Ophthalmology?: OphthalmologyBaseItem;
   /** 耳鼻喉科 */
-  Otolaryngology?: OtolaryngologyBaseItem | null;
+  Otolaryngology?: OtolaryngologyBaseItem;
   /** 妇科 */
-  Gynaecology?: GynaecologyBaseItem | null;
+  Gynaecology?: GynaecologyBaseItem;
   /** 未标准化 */
-  Unclassified?: KeyValueItem[] | null;
+  Unclassified?: KeyValueItem[];
 }
 
 /** 体检报告V1版本 */
 declare interface PhysicalExaminationV1 {
   /** 体检报告信息 */
-  PhysicalExaminationMulti?: PhysicalExamination | null;
+  PhysicalExaminationMulti?: PhysicalExamination;
   /** 版本 */
-  Version?: string | null;
+  Version?: string;
 }
 
 /** 点坐标 */
 declare interface Point {
   /** x坐标 */
-  X?: number | null;
+  X?: number;
   /** y坐标 */
-  Y?: number | null;
+  Y?: number;
 }
 
 /** 肯定列表 */
 declare interface PoslistBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 处方单 */
 declare interface Prescription {
   /** 药品列表 */
-  MedicineList?: Medicine[] | null;
+  MedicineList?: Medicine[];
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 /** 位置坐标 */
 declare interface Rectangle {
   /** x坐标 */
-  X?: number | null;
+  X?: number;
   /** y坐标 */
-  Y?: number | null;
+  Y?: number;
   /** 宽 */
-  W?: number | null;
+  W?: number;
   /** 高 */
-  H?: number | null;
+  H?: number;
 }
 
 /** 复发时间 */
 declare interface RelapseDateBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 疾病名称 */
-  DiseaseName?: string | null;
+  DiseaseName?: string;
   /** 类型 */
-  Type?: string | null;
+  Type?: string;
   /** 归一化值 */
-  Norm?: string | null;
+  Norm?: string;
   /** 单位 */
-  Unit?: string | null;
+  Unit?: string;
   /** 时间戳 */
-  Timestamp?: string | null;
+  Timestamp?: string;
   /** 对外输出值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 家族肿瘤史 */
 declare interface RelativeCancerHistoryBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 肿瘤史列表 */
-  RelativeCancerList?: string | null;
+  RelativeCancerList?: string;
   /** 对外输出值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 家庭成员 */
 declare interface RelativeHistoryBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 成员列表 */
-  Detail?: RelativeHistoryDetailBlock[] | null;
+  Detail?: RelativeHistoryDetailBlock[];
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 对外输出值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 家庭成员详情 */
 declare interface RelativeHistoryDetailBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 关系 */
-  Relation?: string | null;
+  Relation?: string;
   /** 死亡时间 */
-  TimeOfDeath?: string | null;
+  TimeOfDeath?: string;
   /** 时间类型 */
-  TimeType?: string | null;
+  TimeType?: string;
 }
 
 /** 报告类型 */
 declare interface Report {
   /** 项目名称 */
-  Name?: string | null;
+  Name?: string;
   /** 索引 */
-  Index?: number[] | null;
+  Index?: number[];
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 报告类型 */
-  Value?: string | null;
+  Value?: string;
   /** 原文对应坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
 }
 
 /** 报告基本信息 */
 declare interface ReportInfo {
   /** 医院名称 */
-  Hospital?: string | null;
+  Hospital?: string;
   /** 科室名称 */
-  DepartmentName?: string | null;
+  DepartmentName?: string;
   /** 申请时间 */
-  BillingTime?: string | null;
+  BillingTime?: string;
   /** 报告时间 */
-  ReportTime?: string | null;
+  ReportTime?: string;
   /** 检查时间 */
-  InspectTime?: string | null;
+  InspectTime?: string;
   /** 检查号 */
-  CheckNum?: string | null;
+  CheckNum?: string;
   /** 影像号 */
-  ImageNum?: string | null;
+  ImageNum?: string;
   /** 放射号 */
-  RadiationNum?: string | null;
+  RadiationNum?: string;
   /** 检验号 */
-  TestNum?: string | null;
+  TestNum?: string;
   /** 门诊号 */
-  OutpatientNum?: string | null;
+  OutpatientNum?: string;
   /** 病理号 */
-  PathologyNum?: string | null;
+  PathologyNum?: string;
   /** 住院号 */
-  InHospitalNum?: string | null;
+  InHospitalNum?: string;
   /** 样本号 */
-  SampleNum?: string | null;
+  SampleNum?: string;
   /** 标本种类 */
-  SampleType?: string | null;
+  SampleType?: string;
   /** 病历号 */
-  MedicalRecordNum?: string | null;
+  MedicalRecordNum?: string;
   /** 报告名称 */
-  ReportName?: string | null;
+  ReportName?: string;
   /** 超声号 */
-  UltraNum?: string | null;
+  UltraNum?: string;
   /** 临床诊断 */
-  Diagnose?: string | null;
+  Diagnose?: string;
   /** 检查项目 */
-  CheckItem?: string | null;
+  CheckItem?: string;
   /** 检查方法 */
-  CheckMethod?: string | null;
+  CheckMethod?: string;
   /** 诊断时间 */
-  DiagnoseTime?: string | null;
+  DiagnoseTime?: string;
   /** 体检号 */
-  HealthCheckupNum?: string | null;
+  HealthCheckupNum?: string;
   /** 其它时间 */
-  OtherTime?: string | null;
+  OtherTime?: string;
   /** 打印时间 */
-  PrintTime?: string | null;
+  PrintTime?: string;
   /** 未归类时间 */
-  Times?: Time[] | null;
+  Times?: Time[];
   /** 床号 */
-  BedNo?: string | null;
+  BedNo?: string;
 }
 
 /** 指定报告类型选用其结构化版本 */
@@ -3035,423 +3035,423 @@ declare interface ReportTypeVersion {
 /** 结论信息 */
 declare interface ResultInfo {
   /** 段落文本 */
-  Text?: BaseInfo | null;
+  Text?: BaseInfo;
   /** 结论详情 */
-  Items?: BaseInfo[] | null;
+  Items?: BaseInfo[];
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 /** 大小 */
 declare interface Size {
   /** 原文位置 */
-  Index?: number[] | null;
+  Index?: number[];
   /** 标准大小 */
-  NormSize?: NormSize | null;
+  NormSize?: NormSize;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 值 */
-  Value?: string | null;
+  Value?: string;
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
 }
 
 /** 吸烟史 */
 declare interface SmokeHistoryBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 时间单位 */
-  TimeUnit?: string | null;
+  TimeUnit?: string;
   /** 时间归一化 */
-  TimeNorm?: string | null;
+  TimeNorm?: string;
   /** 吸烟量 */
-  Amount?: string | null;
+  Amount?: string;
   /** 戒烟状态 */
-  QuitState?: boolean | null;
+  QuitState?: boolean;
   /** 是否吸烟 */
-  State?: boolean | null;
+  State?: boolean;
   /** 对外输出值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 体检报告-口腔科 */
 declare interface StomatologyBaseItem {
   /** 龋齿 */
-  ToothDecay?: StomatologyToothDecay | null;
+  ToothDecay?: StomatologyToothDecay;
   /** 牙龈 */
-  Gingiva?: StomatologyGingiva | null;
+  Gingiva?: StomatologyGingiva;
   /** 牙周 */
-  Periodontics?: StomatologyPeriodontics | null;
+  Periodontics?: StomatologyPeriodontics;
   /** 口腔其他 */
-  Others?: KeyValueItem[] | null;
+  Others?: KeyValueItem[];
   /** 小结 */
-  BriefSummary?: StomatologyBriefSummary | null;
+  BriefSummary?: StomatologyBriefSummary;
 }
 
 /** 体检报告-口腔科-小结 */
 declare interface StomatologyBriefSummary {
   /** 口腔小结 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 体检报告-口腔科-牙龈 */
 declare interface StomatologyGingiva {
   /** 牙龈总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 体检报告-口腔科-牙周 */
 declare interface StomatologyPeriodontics {
   /** 牙周总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 体检报告-口腔科-龋齿 */
 declare interface StomatologyToothDecay {
   /** 龋齿总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 结论 */
 declare interface Summary {
   /** 症状 */
-  Symptom?: SymptomInfo[] | null;
+  Symptom?: SymptomInfo[];
   /** 文本 */
-  Text?: string | null;
+  Text?: string;
   /** 坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
 }
 
 /** 诊断结论 */
 declare interface SummaryInfo {
   /** 诊断结论文本 */
-  Text?: BaseInfo | null;
+  Text?: BaseInfo;
   /** 诊断结论详情 */
-  Infos?: DetailInformation[] | null;
+  Infos?: DetailInformation[];
 }
 
 /** 手术记录 */
 declare interface Surgery {
   /** 手术史 */
-  SurgeryHistory?: SurgeryHistory | null;
+  SurgeryHistory?: SurgeryHistory;
   /** 其他信息 */
-  OtherInfo?: OtherInfo | null;
+  OtherInfo?: OtherInfo;
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 /** 体检报告-外科-肛门直肠 */
 declare interface SurgeryAnorectal {
   /** 肛门直肠总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
   /** 直肠指检 */
-  DigitalRectalExamination?: KeyValueItem | null;
+  DigitalRectalExamination?: KeyValueItem;
   /** 痔疮 */
-  Hemorrhoid?: KeyValueItem | null;
+  Hemorrhoid?: KeyValueItem;
 }
 
 /** 手术记录属性 */
 declare interface SurgeryAttr {
   /** 名称 */
-  Name: string | null;
+  Name?: string;
   /** 值 */
-  Value: string | null;
+  Value?: string;
 }
 
 /** 体检报告-外科 */
 declare interface SurgeryBaseItem {
   /** 体检报告-外科-头颈部 */
-  HeadNeck?: SurgeryHeadNeck | null;
+  HeadNeck?: SurgeryHeadNeck;
   /** 体检报告-外科-甲状腺 */
-  Thyroid?: SurgeryThyroid | null;
+  Thyroid?: SurgeryThyroid;
   /** 体检报告-外科-乳房 */
-  Breast?: SurgeryBreast | null;
+  Breast?: SurgeryBreast;
   /** 体检报告-外科-浅表淋巴结 */
-  LymphNode?: SurgeryLymphNode | null;
+  LymphNode?: SurgeryLymphNode;
   /** 体检报告-外科-脊柱 */
-  SpinalExtremities?: SurgerySpinalExtremities | null;
+  SpinalExtremities?: SurgerySpinalExtremities;
   /** 体检报告-外科-皮肤 */
-  Skin?: SurgerySkin | null;
+  Skin?: SurgerySkin;
   /** 体检报告-外科-肛门直肠 */
-  Anorectal?: SurgeryAnorectal | null;
+  Anorectal?: SurgeryAnorectal;
   /** 体检报告-外科-泌尿生殖系统 */
-  UrogenitalSystem?: SurgeryUrogenitalSystem | null;
+  UrogenitalSystem?: SurgeryUrogenitalSystem;
   /** 体检报告-外科-外科其他 */
-  Others?: KeyValueItem[] | null;
+  Others?: KeyValueItem[];
   /** 体检报告-外科-小结 */
-  BriefSummary?: SurgeryBriefSummary | null;
+  BriefSummary?: SurgeryBriefSummary;
 }
 
 /** 体检报告-外科-乳房 */
 declare interface SurgeryBreast {
   /** 乳房总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 体检报告-外科-小结 */
 declare interface SurgeryBriefSummary {
   /** 外科小结 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 手术经过 */
 declare interface SurgeryConditionBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 手术历史 */
-  SurgeryList?: SurgeryListBlock[] | null;
+  SurgeryList?: SurgeryListBlock[];
   /** 对外输出值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 体检报告-外科-头颈部 */
 declare interface SurgeryHeadNeck {
   /** 头颈部总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 手术史 */
 declare interface SurgeryHistory {
   /** 手术名称 */
-  SurgeryName: SurgeryAttr | null;
+  SurgeryName?: SurgeryAttr;
   /** 手术日期 */
-  SurgeryDate: SurgeryAttr | null;
+  SurgeryDate?: SurgeryAttr;
   /** 术前诊断 */
-  PreoperativePathology: SurgeryAttr | null;
+  PreoperativePathology?: SurgeryAttr;
   /** 术中诊断 */
-  IntraoperativePathology: SurgeryAttr | null;
+  IntraoperativePathology?: SurgeryAttr;
   /** 术后诊断 */
-  PostoperativePathology: SurgeryAttr | null;
+  PostoperativePathology?: SurgeryAttr;
   /** 出院诊断 */
-  DischargeDiagnosis: SurgeryAttr | null;
+  DischargeDiagnosis?: SurgeryAttr;
 }
 
 /** 手术史 */
 declare interface SurgeryHistoryBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 值 */
-  Value?: string | null;
+  Value?: string;
   /** 手术列表 */
-  Surgerylist?: SurgeryListBlock[] | null;
+  Surgerylist?: SurgeryListBlock[];
 }
 
 /** 手术列表 */
 declare interface SurgeryListBlock {
   /** 时间 */
-  Time?: string | null;
+  Time?: string;
   /** 类型 */
-  TimeType?: string | null;
+  TimeType?: string;
   /** 名称 */
-  Name?: string[] | null;
+  Name?: string[];
   /** 部位 */
-  Part?: string | null;
+  Part?: string;
 }
 
 /** 体检报告-外科-浅表淋巴结 */
 declare interface SurgeryLymphNode {
   /** 浅表淋巴结总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 体检报告-外科-皮肤 */
 declare interface SurgerySkin {
   /** 皮肤总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 体检报告-外科-脊柱 */
 declare interface SurgerySpinalExtremities {
   /** 脊柱四肢总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
   /** 脊柱 */
-  SpinalColumn?: KeyValueItem | null;
+  SpinalColumn?: KeyValueItem;
   /** 四肢和关节 */
-  LimbJoint?: KeyValueItem | null;
+  LimbJoint?: KeyValueItem;
   /** 平跛足 */
-  Foot?: KeyValueItem | null;
+  Foot?: KeyValueItem;
   /** 骨骼 */
-  Bone?: KeyValueItem | null;
+  Bone?: KeyValueItem;
   /** 步态 */
-  Gait?: KeyValueItem | null;
+  Gait?: KeyValueItem;
   /** 残疾或畸形 */
-  Deformity?: KeyValueItem | null;
+  Deformity?: KeyValueItem;
 }
 
 /** 体检报告-外科-甲状腺 */
 declare interface SurgeryThyroid {
   /** 甲状腺总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
 }
 
 /** 体检报告-外科-泌尿生殖系统 */
 declare interface SurgeryUrogenitalSystem {
   /** 泌尿生殖系统总体描述 */
-  Text?: KeyValueItem | null;
+  Text?: KeyValueItem;
   /** 前列腺 */
-  Prostate?: KeyValueItem | null;
+  Prostate?: KeyValueItem;
   /** 外生殖器（男性） */
-  ExternalReproductiveOrgans?: KeyValueItem | null;
+  ExternalReproductiveOrgans?: KeyValueItem;
 }
 
 /** 病症描述信息 */
 declare interface SymptomInfo {
   /** 等级 */
-  Grade?: BlockInfo | null;
+  Grade?: BlockInfo;
   /** 部位 */
-  Part?: Part | null;
+  Part?: Part;
   /** 原文位置 */
-  Index?: number[] | null;
+  Index?: number[];
   /** 病变 */
-  Symptom?: BlockInfo | null;
+  Symptom?: BlockInfo;
   /** 属性 */
-  Attrs?: BlockInfo[] | null;
+  Attrs?: BlockInfo[];
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
 }
 
 /** 检验报告结构 */
 declare interface TableIndicators {
   /** 项目列表 */
-  Indicators?: IndicatorItemV2[] | null;
+  Indicators?: IndicatorItemV2[];
   /** 采样标本 */
-  Sample?: BaseItem | null;
+  Sample?: BaseItem;
 }
 
 /** 报告模板 */
 declare interface Template {
   /** 患者信息 */
-  PatientInfo?: PatientInfo | null;
+  PatientInfo?: PatientInfo;
   /** 报告信息 */
-  ReportInfo?: ReportInfo | null;
+  ReportInfo?: ReportInfo;
   /** 检查报告 */
-  Check?: Check | null;
+  Check?: Check;
   /** 病理报告 */
-  Pathology?: PathologyReport | null;
+  Pathology?: PathologyReport;
   /** 出院报告，入院报告，门诊病历 */
-  MedDoc?: MedDoc | null;
+  MedDoc?: MedDoc;
   /** 诊断证明 */
-  DiagCert?: DiagCert | null;
+  DiagCert?: DiagCert;
   /** 病案首页 */
-  FirstPage?: FirstPage | null;
+  FirstPage?: FirstPage;
   /** 检验报告 */
-  Indicator?: Indicator | null;
+  Indicator?: Indicator;
   /** 报告类型 */
-  ReportType?: string | null;
+  ReportType?: string;
   /** 门诊病历信息 */
-  MedicalRecordInfo?: MedicalRecordInfo | null;
+  MedicalRecordInfo?: MedicalRecordInfo;
   /** 出入院信息 */
-  Hospitalization?: Hospitalization | null;
+  Hospitalization?: Hospitalization;
   /** 手术记录 */
-  Surgery?: Surgery | null;
+  Surgery?: Surgery;
   /** 心电图报告 */
-  Electrocardiogram?: Electrocardiogram | null;
+  Electrocardiogram?: Electrocardiogram;
   /** 内窥镜报告 */
-  Endoscopy?: Endoscopy | null;
+  Endoscopy?: Endoscopy;
   /** 处方单 */
-  Prescription?: Prescription | null;
+  Prescription?: Prescription;
   /** 疫苗接种凭证 */
-  VaccineCertificate?: VaccineCertificate | null;
+  VaccineCertificate?: VaccineCertificate;
   /** OCR文本 */
-  OcrText?: string | null;
+  OcrText?: string;
   /** OCR拼接后文本 */
-  OcrResult?: string | null;
+  OcrResult?: string;
   /** 报告类型 */
-  ReportTypeDesc?: string | null;
+  ReportTypeDesc?: string;
   /** 病理报告v2 */
-  PathologyV2?: PathologyV2 | null;
+  PathologyV2?: PathologyV2;
   /** 碳14尿素呼气试验 */
-  C14?: Indicator | null;
+  C14?: Indicator;
   /** 体检结论 */
-  Exame?: Exame | null;
+  Exame?: Exame;
   /** 出院报告v2，入院报告v2，门诊病历v2 */
-  MedDocV2?: DischargeInfoBlock | null;
+  MedDocV2?: DischargeInfoBlock;
   /** 检验报告v3 */
-  IndicatorV3?: IndicatorV3 | null;
+  IndicatorV3?: IndicatorV3;
   /** 核酸报告 */
-  Covid?: CovidItemsInfo | null;
+  Covid?: CovidItemsInfo;
   /** 孕产报告 */
-  Maternity?: Maternity | null;
+  Maternity?: Maternity;
   /** 眼科报告 */
-  Eye?: EyeItemsInfo | null;
+  Eye?: EyeItemsInfo;
   /** 出生证明 */
-  BirthCert?: BirthCert | null;
+  BirthCert?: BirthCert;
   /** 时间轴 */
-  Timeline?: TimelineInformation | null;
+  Timeline?: TimelineInformation;
 }
 
 /** 文本类型 */
 declare interface TextType {
   /** 类别Id */
-  Id: number | null;
+  Id?: number;
   /** 类别层级 */
-  Level: number | null;
+  Level?: number;
   /** 类别名 */
-  Name: string | null;
+  Name?: string;
 }
 
 /** 文本类型列表块 */
 declare interface TextTypeListBlock {
   /** 文本类型列表 */
-  TextTypeList?: TextType[] | null;
+  TextTypeList?: TextType[];
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 /** 时间 */
 declare interface Time {
   /** 具体时间类型 */
-  Name: string | null;
+  Name?: string;
   /** 时间值 */
-  Value: string | null;
+  Value?: string;
 }
 
 /** 时间轴事件 */
 declare interface TimelineEvent {
   /** 事件类型 */
-  Type?: string | null;
+  Type?: string;
   /** 原文本 */
-  Src?: string | null;
+  Src?: string;
   /** 事件子类型 */
-  SubType?: string | null;
+  SubType?: string;
   /** 事件发生时间 */
-  Time?: string | null;
+  Time?: string;
   /** 事件值 */
-  Value?: string | null;
+  Value?: string;
   /** 位置坐标 */
-  Rectangle?: Rectangle | null;
+  Rectangle?: Rectangle;
   /** 事件发生地点 */
-  Place?: string | null;
+  Place?: string;
   /** 结束时间 */
-  EndTime?: string | null;
+  EndTime?: string;
 }
 
 /** 时间轴 */
 declare interface TimelineInformation {
   /** 时间轴 */
-  Timeline?: TimelineEvent[] | null;
+  Timeline?: TimelineEvent[];
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 /** 输血史 */
 declare interface TransfusionHistoryBlock {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 状态 */
-  State?: boolean | null;
+  State?: boolean;
   /** 值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 病历 */
@@ -3459,327 +3459,327 @@ declare interface TreatmentRecord {
   /** 入院 */
   DmissionCondition?: string | null;
   /** 主诉 */
-  ChiefComplaint?: string | null;
+  ChiefComplaint?: string;
   /** 现病史 */
-  DiseasePresent?: string | null;
+  DiseasePresent?: string;
   /** 主要症状体征 */
-  SymptomsAndSigns?: string | null;
+  SymptomsAndSigns?: string;
   /** 辅助检查 */
-  AuxiliaryExamination?: string | null;
+  AuxiliaryExamination?: string;
   /** 体格检查 */
-  BodyExamination?: string | null;
+  BodyExamination?: string;
   /** 专科检查 */
-  SpecialistExamination?: string | null;
+  SpecialistExamination?: string;
   /** 精神检查 */
-  MentalExamination?: string | null;
+  MentalExamination?: string;
   /** 检查记录 */
-  CheckRecord?: string | null;
+  CheckRecord?: string;
   /** 化验结果 */
-  InspectResult?: string | null;
+  InspectResult?: string;
   /** 切口愈合情况 */
-  IncisionHealing?: string | null;
+  IncisionHealing?: string;
   /** 处理意见 */
-  TreatmentSuggestion?: string | null;
+  TreatmentSuggestion?: string;
   /** 门诊随访要求 */
-  FollowUpRequirements?: string | null;
+  FollowUpRequirements?: string;
   /** 诊疗经过 */
-  CheckAndTreatmentProcess?: string | null;
+  CheckAndTreatmentProcess?: string;
   /** 手术经过 */
-  SurgeryCondition?: string | null;
+  SurgeryCondition?: string;
   /** 入院情况 */
-  ConditionChanges?: string | null;
+  ConditionChanges?: string;
   /** 出院情况 */
-  DischargeCondition?: string | null;
+  DischargeCondition?: string;
   /** pTNM信息 */
-  PTNM?: string | null;
+  PTNM?: string;
   /** pTNMM信息 */
-  PTNMM?: string | null;
+  PTNMM?: string;
   /** pTNMN信息 */
-  PTNMN?: string | null;
+  PTNMN?: string;
   /** pTNMT信息 */
-  PTNMT?: string | null;
+  PTNMT?: string;
   /** ECOG信息 */
-  ECOG?: string | null;
+  ECOG?: string;
   /** NRS信息 */
-  NRS?: string | null;
+  NRS?: string;
   /** KPS信息 */
-  KPS?: string | null;
+  KPS?: string;
   /** 死亡日期 */
-  DeathDate?: string | null;
+  DeathDate?: string;
   /** 复发日期 */
-  RelapseDate?: string | null;
+  RelapseDate?: string;
   /** 观测天数 */
-  ObservationDays?: string | null;
+  ObservationDays?: string;
   /** 入院 */
-  AdmissionCondition?: string | null;
+  AdmissionCondition?: string;
 }
 
 /** 治疗记录 */
 declare interface TreatmentRecordBlock {
   /** 免疫组化 */
-  Immunohistochemistry?: ImmunohistochemistryBlock | null;
+  Immunohistochemistry?: ImmunohistochemistryBlock;
   /** 主诉 */
-  ChiefComplaint?: ChiefComplaintBlock | null;
+  ChiefComplaint?: ChiefComplaintBlock;
   /** 入院情况 */
-  AdmissionCondition?: AdmissionConditionBlock | null;
+  AdmissionCondition?: AdmissionConditionBlock;
   /** 查体 */
-  BodyExamination?: BodyExaminationBlock | null;
+  BodyExamination?: BodyExaminationBlock;
   /** 入院诊断 */
-  AdmissionDiagnosis?: AdmissionDiagnosisBlock | null;
+  AdmissionDiagnosis?: AdmissionDiagnosisBlock;
   /** 入院中医诊断 */
-  AdmissionTraditionalDiagnosis?: AdmissionDiagnosisBlock | null;
+  AdmissionTraditionalDiagnosis?: AdmissionDiagnosisBlock;
   /** 入院西医诊断 */
-  AdmissionModernDiagnosis?: AdmissionDiagnosisBlock | null;
+  AdmissionModernDiagnosis?: AdmissionDiagnosisBlock;
   /** 病理诊断 */
-  PathologicalDiagnosis?: PathologicalDiagnosisBlock | null;
+  PathologicalDiagnosis?: PathologicalDiagnosisBlock;
   /** 现病史 */
-  DiseasePresent?: DiseasePresentBlock | null;
+  DiseasePresent?: DiseasePresentBlock;
   /** 体征 */
-  SymptomsAndSigns?: DiseasePresentBlock | null;
+  SymptomsAndSigns?: DiseasePresentBlock;
   /** 辅助检查 */
-  AuxiliaryExamination?: DiseasePresentBlock | null;
+  AuxiliaryExamination?: DiseasePresentBlock;
   /** 特殊检查 */
-  SpecialistExamination?: DiseasePresentBlock | null;
+  SpecialistExamination?: DiseasePresentBlock;
   /** 精神检查 */
-  MentalExamination?: DiseasePresentBlock | null;
+  MentalExamination?: DiseasePresentBlock;
   /** 检查记录 */
-  CheckRecord?: DiseasePresentBlock | null;
+  CheckRecord?: DiseasePresentBlock;
   /** 检查结果 */
-  InspectResult?: DiseasePresentBlock | null;
+  InspectResult?: DiseasePresentBlock;
   /** 治疗经过 */
-  CheckAndTreatmentProcess?: DiseasePresentBlock | null;
+  CheckAndTreatmentProcess?: DiseasePresentBlock;
   /** 手术经过 */
-  SurgeryCondition?: SurgeryConditionBlock | null;
+  SurgeryCondition?: SurgeryConditionBlock;
   /** 切口愈合 */
-  IncisionHealing?: DiseasePresentBlock | null;
+  IncisionHealing?: DiseasePresentBlock;
   /** 出院诊断 */
-  DischargeDiagnosis?: DischargeDiagnosisBlock | null;
+  DischargeDiagnosis?: DischargeDiagnosisBlock;
   /** 出院中医诊断 */
-  DischargeTraditionalDiagnosis?: DiseasePresentBlock | null;
+  DischargeTraditionalDiagnosis?: DiseasePresentBlock;
   /** 出院西医诊断 */
-  DischargeModernDiagnosis?: DischargeDiagnosisBlock | null;
+  DischargeModernDiagnosis?: DischargeDiagnosisBlock;
   /** 出院情况 */
-  DischargeCondition?: DischargeConditionBlock | null;
+  DischargeCondition?: DischargeConditionBlock;
   /** 出院医嘱 */
-  DischargeInstructions?: DiseasePresentBlock | null;
+  DischargeInstructions?: DiseasePresentBlock;
   /** 治疗建议 */
-  TreatmentSuggestion?: DiseasePresentBlock | null;
+  TreatmentSuggestion?: DiseasePresentBlock;
   /** 随访 */
-  FollowUpRequirements?: DiseasePresentBlock | null;
+  FollowUpRequirements?: DiseasePresentBlock;
   /** 治疗情况变化 */
-  ConditionChanges?: DiseasePresentBlock | null;
+  ConditionChanges?: DiseasePresentBlock;
   /** 收缩压 */
-  PulmonaryArterySystolicPressure?: DiseasePresentBlock | null;
+  PulmonaryArterySystolicPressure?: DiseasePresentBlock;
   /** bclc分期 */
-  BCLC?: DiseasePresentBlock | null;
+  BCLC?: DiseasePresentBlock;
   /** PTNM分期 */
-  PTNM?: PTNMBlock | null;
+  PTNM?: PTNMBlock;
   /** ECOG评分 */
-  ECOG?: DiseasePresentBlock | null;
+  ECOG?: DiseasePresentBlock;
   /** NRS评分 */
-  NRS?: DiseasePresentBlock | null;
+  NRS?: DiseasePresentBlock;
   /** kps评分 */
-  KPS?: DiseasePresentBlock | null;
+  KPS?: DiseasePresentBlock;
   /** 癌症分期 */
-  Cancerstaging?: ClinicalStaging | null;
+  Cancerstaging?: ClinicalStaging;
   /** 死亡时间 */
-  DeathDate?: DeathDateBlock | null;
+  DeathDate?: DeathDateBlock;
   /** 复发日期 */
-  RelapseDate?: RelapseDateBlock | null;
+  RelapseDate?: RelapseDateBlock;
   /** 观察日期 */
-  ObservationDays?: DeathDateBlock | null;
+  ObservationDays?: DeathDateBlock;
   /** 切口愈合情况 */
-  IncisionHealingText?: string | null;
+  IncisionHealingText?: string;
   /** 辅助检查 */
-  AuxiliaryExaminationText?: string | null;
+  AuxiliaryExaminationText?: string;
   /** 特殊检查 */
-  SpecialExamText?: string | null;
+  SpecialExamText?: string;
   /** 门诊诊断 */
-  OutpatientDiagnosisText?: string | null;
+  OutpatientDiagnosisText?: string;
   /** 入院情况 */
-  AdmissionConditionText?: string | null;
+  AdmissionConditionText?: string;
   /** 诊疗经过 */
-  CheckAndTreatmentProcessText?: string | null;
+  CheckAndTreatmentProcessText?: string;
   /** 体征 */
-  SymptomsAndSignsText?: string | null;
+  SymptomsAndSignsText?: string;
   /** 出院医嘱 */
-  DischargeInstructionsText?: string | null;
+  DischargeInstructionsText?: string;
   /** 入院诊断 */
-  AdmissionDiagnosisText?: string | null;
+  AdmissionDiagnosisText?: string;
   /** 手术情况 */
-  SurgeryConditionText?: string | null;
+  SurgeryConditionText?: string;
   /** 病理诊断 */
-  PathologicalDiagnosisText?: string | null;
+  PathologicalDiagnosisText?: string;
   /** 出院情况 */
-  DischargeConditionText?: string | null;
+  DischargeConditionText?: string;
   /** 检查记录 */
-  CheckRecordText?: string | null;
+  CheckRecordText?: string;
   /** 主诉 */
-  ChiefComplaintText?: string | null;
+  ChiefComplaintText?: string;
   /** 出院诊断 */
-  DischargeDiagnosisText?: string | null;
+  DischargeDiagnosisText?: string;
 }
 
 /** 结节 */
 declare interface TuberInfo {
   /** 类型 */
-  Type?: BlockInfo | null;
+  Type?: BlockInfo;
   /** 部位 */
-  Part?: Part | null;
+  Part?: Part;
   /** 大小 */
-  Size?: Size[] | null;
+  Size?: Size[];
   /** 多发 */
-  Multiple?: Multiple | null;
+  Multiple?: Multiple;
   /** 纵横比 */
-  AspectRatio?: AspectRatio | null;
+  AspectRatio?: AspectRatio;
   /** 边缘 */
-  Edge?: BlockInfo | null;
+  Edge?: BlockInfo;
   /** 内部回声 */
-  InnerEcho?: BlockInfo | null;
+  InnerEcho?: BlockInfo;
   /** 外部回声 */
-  RearEcho?: BlockInfo | null;
+  RearEcho?: BlockInfo;
   /** 弹性质地 */
-  Elastic?: Elastic | null;
+  Elastic?: Elastic;
   /** 形状 */
-  Shape?: BlockInfo | null;
+  Shape?: BlockInfo;
   /** 形态 */
-  ShapeAttr?: BlockInfo | null;
+  ShapeAttr?: BlockInfo;
   /** 皮髓质信息 */
-  SkinMedulla?: BlockInfo | null;
+  SkinMedulla?: BlockInfo;
   /** 变化趋势 */
-  Trend?: BlockInfo | null;
+  Trend?: BlockInfo;
   /** 钙化 */
-  Calcification?: BlockInfo | null;
+  Calcification?: BlockInfo;
   /** 包膜 */
-  Envelope?: BlockInfo | null;
+  Envelope?: BlockInfo;
   /** 强化 */
-  Enhancement?: BlockInfo | null;
+  Enhancement?: BlockInfo;
   /** 淋巴结 */
-  LymphEnlargement?: BlockInfo | null;
+  LymphEnlargement?: BlockInfo;
   /** 淋巴门 */
-  LymphDoor?: BlockInfo | null;
+  LymphDoor?: BlockInfo;
   /** 活动度 */
-  Activity?: BlockInfo | null;
+  Activity?: BlockInfo;
   /** 手术情况 */
-  Operation?: BlockInfo | null;
+  Operation?: BlockInfo;
   /** 血液cdfi */
-  CDFI?: BlockInfo | null;
+  CDFI?: BlockInfo;
   /** 原文位置 */
-  Index?: number[] | null;
+  Index?: number[];
   /** 大小状态 */
-  SizeStatus?: BlockInfo | null;
+  SizeStatus?: BlockInfo;
   /** 内部回声分布 */
-  InnerEchoDistribution?: BlockInfo | null;
+  InnerEchoDistribution?: BlockInfo;
   /** 内部回声类型 */
-  InnerEchoType?: BlockInfo[] | null;
+  InnerEchoType?: BlockInfo[];
   /** 轮廓 */
-  Outline?: BlockInfo | null;
+  Outline?: BlockInfo;
   /** 结构 */
-  Structure?: BlockInfo | null;
+  Structure?: BlockInfo;
   /** 密度 */
-  Density?: BlockInfo | null;
+  Density?: BlockInfo;
   /** 血管 */
-  Vas?: BlockInfo | null;
+  Vas?: BlockInfo;
   /** 囊壁 */
-  Cysticwall?: BlockInfo | null;
+  Cysticwall?: BlockInfo;
   /** 被膜 */
-  Capsule?: BlockInfo | null;
+  Capsule?: BlockInfo;
   /** 峡部厚度 */
   IsthmusThicknese?: Size | null;
   /** 原文 */
-  Src?: string | null;
+  Src?: string;
   /** 透声度 */
-  Transparent?: BlockInfo | null;
+  Transparent?: BlockInfo;
   /** MRI ADC */
-  MriAdc?: BlockInfo | null;
+  MriAdc?: BlockInfo;
   /** MRI DWI */
-  MriDwi?: BlockInfo | null;
+  MriDwi?: BlockInfo;
   /** MRI T1信号 */
-  MriT1?: BlockInfo | null;
+  MriT1?: BlockInfo;
   /** MRI T2信号 */
-  MriT2?: BlockInfo | null;
+  MriT2?: BlockInfo;
   /** CT HU值 */
-  CtHu?: BlockInfo | null;
+  CtHu?: BlockInfo;
   /** SUmax值 */
-  Suvmax?: BlockInfo | null;
+  Suvmax?: BlockInfo;
   /** 代谢情况 */
-  Metabolism?: BlockInfo | null;
+  Metabolism?: BlockInfo;
   /** 放射性摄取 */
-  RadioactiveUptake?: BlockInfo | null;
+  RadioactiveUptake?: BlockInfo;
   /** 病变 */
-  SymDesc?: BlockInfo | null;
+  SymDesc?: BlockInfo;
   /** 影像特征 */
-  ImageFeature?: BlockInfo | null;
+  ImageFeature?: BlockInfo;
   /** 在报告图片中的坐标 */
-  Coords?: Coord[] | null;
+  Coords?: Coord[];
   /** 峡部厚度 */
-  IsthmusThickness?: Size | null;
+  IsthmusThickness?: Size;
 }
 
 /** 免疫接种记录 */
 declare interface Vaccination {
   /** 序号 */
-  Id?: string | null;
+  Id?: string;
   /** 疫苗名称 */
-  Vaccine?: string | null;
+  Vaccine?: string;
   /** 剂次 */
-  Dose?: string | null;
+  Dose?: string;
   /** 接种日期 */
-  Date?: string | null;
+  Date?: string;
   /** 疫苗批号 */
-  LotNumber?: string | null;
+  LotNumber?: string;
   /** 生产企业 */
-  Manufacturer?: string | null;
+  Manufacturer?: string;
   /** 接种单位 */
-  Clinic?: string | null;
+  Clinic?: string;
   /** 接种部位 */
-  Site?: string | null;
+  Site?: string;
   /** 接种者 */
-  Provider?: string | null;
+  Provider?: string;
   /** 疫苗批号 */
-  Lot?: string | null;
+  Lot?: string;
 }
 
 /** 免疫接种证明 */
 declare interface VaccineCertificate {
   /** 免疫接种列表 */
-  VaccineList?: Vaccination[] | null;
+  VaccineList?: Vaccination[];
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 /** 值 */
 declare interface Value {
   /** 等级 */
-  Grade: string | null;
+  Grade?: string;
   /** 百分比 */
-  Percent: number[] | null;
+  Percent?: number[];
   /** 阳性 */
-  Positive: string | null;
+  Positive?: string;
 }
 
 /** 值块 */
 declare interface ValueBlock {
   /** 等级 */
-  Grade?: string | null;
+  Grade?: string;
   /** 百分比 */
-  Percent?: number[] | null;
+  Percent?: number[];
   /** 阳性阴性 */
-  Positive?: string | null;
+  Positive?: string;
 }
 
 /** 体检报告信息-包含单位 */
 declare interface ValueUnitItem {
   /** 类型 */
-  Name?: string | null;
+  Name?: string;
   /** 项目原文 */
-  Item?: PhysicalBaseItem | null;
+  Item?: PhysicalBaseItem;
   /** 数值 */
-  Result?: PhysicalBaseItem | null;
+  Result?: PhysicalBaseItem;
   /** 单位 */
-  Unit?: PhysicalBaseItem | null;
+  Unit?: PhysicalBaseItem;
   /** 数据在原PDF文件中的第几页 */
-  Page?: number | null;
+  Page?: number;
 }
 
 declare interface DrugInstructionObjectRequest {
@@ -3789,9 +3789,9 @@ declare interface DrugInstructionObjectRequest {
 
 declare interface DrugInstructionObjectResponse {
   /** 药品说明书消息定义 */
-  ChemicalProductInfo?: ChemicalProductInfo | null;
+  ChemicalProductInfo?: ChemicalProductInfo;
   /** 预防用生物制品说明书 */
-  BiologicalProductInfo?: BiologicalProductInfo | null;
+  BiologicalProductInfo?: BiologicalProductInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3853,7 +3853,7 @@ declare interface ImageToClassRequest {
 
 declare interface ImageToClassResponse {
   /** 分类结果 */
-  TextTypeList?: TextType[] | null;
+  TextTypeList?: TextType[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

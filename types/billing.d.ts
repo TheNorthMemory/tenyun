@@ -910,6 +910,12 @@ declare interface BillDetail {
   RegionTypeName?: string | null;
   /** 备注属性（实例配置）：其他备注信息，如预留实例的预留实例类型和交易类型、CCN 产品的两端地域信息 */
   ReserveDetail?: string | null;
+  /** 优惠对象 */
+  DiscountObject?: string;
+  /** 优惠类型 */
+  DiscountType?: string;
+  /** 优惠内容 */
+  DiscountContent?: string;
 }
 
 /** 明细账单关联单据信息 */

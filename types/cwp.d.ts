@@ -8351,7 +8351,7 @@ declare interface DescribeBaselineListRequest {
   Limit: number;
   /** 分页参数 */
   Offset: number;
-  /** 过滤条件。StrategyId- Uint64 - 基线策略idStatus - Uint64 - 处理状态1已通过 0未通过Level - Uint64[] - 处理状态1已通过 0未通过BaselineName BaselineName - String - 基线名称Quuid- String - 主机quuidUuid- String - 主机uuid */
+  /** 过滤条件。StrategyId- Uint64 - 基线策略idStatus - Uint64 - 处理状态1已通过 0未通过Level - Uint64[] - 威胁等级BaselineName - String - 基线名称Quuid- String - 主机quuidUuid- String - 主机uuid */
   Filters?: Filters[];
 }
 

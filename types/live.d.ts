@@ -268,6 +268,56 @@ declare interface CasterLayoutParam {
   UsePortraitSegment?: boolean | null;
 }
 
+/** 导播台水印信息。 */
+declare interface CasterMarkPicInfo {
+  /** 水印图片Index。 */
+  MarkPicIndex: number;
+  /** 注：该字段已废弃。 */
+  MarkPicId?: number | null;
+  /** 水印图片在输出时的宽度。当该值为大于1的整数值时，单位为像素，允许范围[1,1920]。 当该值为小于1大于0的小数时，单位为百分比，表示水印在最终画面上所占的比例值。 */
+  MarkPicWidth?: number;
+  /** 水印图片在输出时的高度。当该值为大于1的整数值时，单位为像素，允许范围[1,1080]。 当该值为小于1大于0的小数时，单位为百分比，表示水印在输出上所占的比例值。 */
+  MarkPicHeight?: number;
+  /** 水印图片在输出时的X轴坐标。当该值为大于1的整数值时，单位为像素，允许范围[1,1920]。 当该值为小于1大于0的小数时，单位为百分比，表示水印在最终画面上x坐标所占的比例值。 */
+  MarkPicLocationX?: number;
+  /** 水印图片在输出时的Y坐标。当该值为大于1的整数值时，单位为像素，允许范围[1,1080]。 当该值为小于1大于0的小数时，单位为百分比，表示水印在最终画面Y坐标上所占的比例值。 */
+  MarkPicLocationY?: number;
+  /** 水印地址。最大长度256字符，且url需以jpg、jpeg、png、bmp、gif后缀结尾。 */
+  MarkPicUrl?: string | null;
+  /** 水印描述。最大允许长度为256。 */
+  Description?: string | null;
+  /** 是否启用了等比例缩放。注：该字段仅做状态保存，无实际效果。 */
+  IsEqualProportion?: boolean | null;
+}
+
+/** 导播台文字水印配置。 */
+declare interface CasterMarkWordInfo {
+  /** 文字水印Index。 */
+  MarkWordIndex: number;
+  /** 文字水印内容。 */
+  MarkWordText?: string | null;
+  /** 文字水印的字号。范围[16, 60] */
+  MarkWordFontSize?: number | null;
+  /** 文字水印的颜色，值为HEX颜色代码 */
+  MarkWordFontColor?: string | null;
+  /** 文字水印的字体类型。范围[1,2]。1. 宋体2. 黑体 */
+  MarkWordFontType?: number | null;
+  /** 文字水印的x坐标位置，单位百分比。范围[0.0, 1.0] */
+  MarkWordLocationX?: number | null;
+  /** 文字水印的Y坐标位置，单位百分比。范围[0.0, 1.0] */
+  MarkWordLocationY?: number | null;
+  /** 是否开启文字跑马灯功能。默认为false。 */
+  MarkWordRollEnable?: boolean | null;
+  /** 跑马灯文字显示一遍的时间，单位为秒。默认为5s。范围[5, 600]。 */
+  MarkWordRollOnceTime?: number | null;
+  /** 跑马灯文字的方向。默认值为0。范围[0,1]。0 从左到右1 从右到左 */
+  MarkWordRollDirection?: number | null;
+  /** 跑马灯文字显示的起始x坐标，单位百分比。范围[0.0, 1.0] */
+  MarkWordRollStartLocationX?: number | null;
+  /** 跑马灯文字显示的截止x坐标，单位百分比。范围[0.0, 1.0] */
+  MarkWordRollEndLocationX?: number | null;
+}
+
 /** 导播台推流信息。当导播台主监启动后，系统将自动将主监推流到腾讯云和其他第三方平台。 */
 declare interface CasterOutputInfo {
   /** 推流信息Index。当OutputType为1（表示推流到腾讯云直播）时，该值固定为0。范围[0,10]。 */
@@ -1642,6 +1692,30 @@ declare interface AddCasterLayoutInfoResponse {
   RequestId?: string;
 }
 
+declare interface AddCasterMarkPicInfoRequest {
+  /** 导播台ID */
+  CasterId: number;
+  /** 图片水印详细参数。 */
+  MarkPicInfo: CasterMarkPicInfo;
+}
+
+declare interface AddCasterMarkPicInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddCasterMarkWordInfoRequest {
+  /** 导播台ID。 */
+  CasterId: number;
+  /** 文本的详细配置。 */
+  MarkWordInfo: CasterMarkWordInfo;
+}
+
+declare interface AddCasterMarkWordInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AddCasterOutputInfoRequest {
   /** 导播台ID */
   CasterId: number;
@@ -2414,6 +2488,30 @@ declare interface DeleteCasterLayoutInfoResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCasterMarkPicInfoRequest {
+  /** 导播台ID。 */
+  CasterId: number;
+  /** 需要删除的水印Index。 */
+  MarkPicIndex: number;
+}
+
+declare interface DeleteCasterMarkPicInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCasterMarkWordInfoRequest {
+  /** 导播台ID。 */
+  CasterId: number;
+  /** 需要删除的文字水印Index。 */
+  MarkWordIndex: number;
+}
+
+declare interface DeleteCasterMarkWordInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCasterOutputInfoRequest {
   /** 导播台ID。 */
   CasterId: number;
@@ -2842,6 +2940,30 @@ declare interface DescribeCasterListRequest {
 declare interface DescribeCasterListResponse {
   /** 用户对应的导播台简要信息列表 */
   CasterList?: CasterBriefInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCasterMarkPicInfosRequest {
+  /** 导播台ID。 */
+  CasterId: number;
+}
+
+declare interface DescribeCasterMarkPicInfosResponse {
+  /** 导播台的水印信息列表。 */
+  MarkPicInfos?: CasterMarkPicInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCasterMarkWordInfosRequest {
+  /** 导播台ID。 */
+  CasterId: number;
+}
+
+declare interface DescribeCasterMarkWordInfosResponse {
+  /** 导播台的文本信息列表。 */
+  MarkWordInfos?: CasterMarkWordInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4402,6 +4524,30 @@ declare interface ModifyCasterLayoutInfoResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCasterMarkPicInfoRequest {
+  /** 导播台ID。 */
+  CasterId: number;
+  /** 新的水印信息。 */
+  MarkPicInfo: CasterMarkPicInfo;
+}
+
+declare interface ModifyCasterMarkPicInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCasterMarkWordInfoRequest {
+  /** 导播台ID。 */
+  CasterId: number;
+  /** 修改的文本配置。 */
+  MarkWordInfo: CasterMarkWordInfo;
+}
+
+declare interface ModifyCasterMarkWordInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCasterOutputInfoRequest {
   /** 导播台ID。 */
   CasterId: number;
@@ -5053,6 +5199,10 @@ declare interface Live {
   AddCasterInputInfo(data: AddCasterInputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<AddCasterInputInfoResponse>;
   /** 增加导播台布局参数 {@link AddCasterLayoutInfoRequest} {@link AddCasterLayoutInfoResponse} */
   AddCasterLayoutInfo(data: AddCasterLayoutInfoRequest, config?: AxiosRequestConfig): AxiosPromise<AddCasterLayoutInfoResponse>;
+  /** 新增图片水印信息 {@link AddCasterMarkPicInfoRequest} {@link AddCasterMarkPicInfoResponse} */
+  AddCasterMarkPicInfo(data: AddCasterMarkPicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<AddCasterMarkPicInfoResponse>;
+  /** 增加导播台文本配置 {@link AddCasterMarkWordInfoRequest} {@link AddCasterMarkWordInfoResponse} */
+  AddCasterMarkWordInfo(data: AddCasterMarkWordInfoRequest, config?: AxiosRequestConfig): AxiosPromise<AddCasterMarkWordInfoResponse>;
   /** 新增导播台推流信息 {@link AddCasterOutputInfoRequest} {@link AddCasterOutputInfoResponse} */
   AddCasterOutputInfo(data: AddCasterOutputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<AddCasterOutputInfoResponse>;
   /** 设置延时直播 {@link AddDelayLiveStreamRequest} {@link AddDelayLiveStreamResponse} */
@@ -5123,6 +5273,10 @@ declare interface Live {
   DeleteCasterInputInfo(data: DeleteCasterInputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCasterInputInfoResponse>;
   /** 删除导播台的布局信息 {@link DeleteCasterLayoutInfoRequest} {@link DeleteCasterLayoutInfoResponse} */
   DeleteCasterLayoutInfo(data: DeleteCasterLayoutInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCasterLayoutInfoResponse>;
+  /** 删除导播台水印信息 {@link DeleteCasterMarkPicInfoRequest} {@link DeleteCasterMarkPicInfoResponse} */
+  DeleteCasterMarkPicInfo(data: DeleteCasterMarkPicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCasterMarkPicInfoResponse>;
+  /** 删除导播台文本配置 {@link DeleteCasterMarkWordInfoRequest} {@link DeleteCasterMarkWordInfoResponse} */
+  DeleteCasterMarkWordInfo(data: DeleteCasterMarkWordInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCasterMarkWordInfoResponse>;
   /** 删除导播台推流信息 {@link DeleteCasterOutputInfoRequest} {@link DeleteCasterOutputInfoResponse} */
   DeleteCasterOutputInfo(data: DeleteCasterOutputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCasterOutputInfoResponse>;
   /** 删除回调规则 {@link DeleteLiveCallbackRuleRequest} {@link DeleteLiveCallbackRuleResponse} */
@@ -5187,6 +5341,10 @@ declare interface Live {
   DescribeCasterLayoutInfos(data: DescribeCasterLayoutInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterLayoutInfosResponse>;
   /** 查询导播台列表 {@link DescribeCasterListRequest} {@link DescribeCasterListResponse} */
   DescribeCasterList(data?: DescribeCasterListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterListResponse>;
+  /** 查询导播台的水印信息列表 {@link DescribeCasterMarkPicInfosRequest} {@link DescribeCasterMarkPicInfosResponse} */
+  DescribeCasterMarkPicInfos(data: DescribeCasterMarkPicInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterMarkPicInfosResponse>;
+  /** 查询导播台的文本列表 {@link DescribeCasterMarkWordInfosRequest} {@link DescribeCasterMarkWordInfosResponse} */
+  DescribeCasterMarkWordInfos(data: DescribeCasterMarkWordInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterMarkWordInfosResponse>;
   /** 查询导播台的推流信息列表 {@link DescribeCasterOutputInfosRequest} {@link DescribeCasterOutputInfosResponse} */
   DescribeCasterOutputInfos(data: DescribeCasterOutputInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterOutputInfosResponse>;
   /** 获取导播台视频流播放url {@link DescribeCasterPlayUrlRequest} {@link DescribeCasterPlayUrlResponse} */
@@ -5359,6 +5517,10 @@ declare interface Live {
   ModifyCasterInputInfo(data: ModifyCasterInputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCasterInputInfoResponse>;
   /** 修改布局参数 {@link ModifyCasterLayoutInfoRequest} {@link ModifyCasterLayoutInfoResponse} */
   ModifyCasterLayoutInfo(data: ModifyCasterLayoutInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCasterLayoutInfoResponse>;
+  /** 修改导播台水印信息 {@link ModifyCasterMarkPicInfoRequest} {@link ModifyCasterMarkPicInfoResponse} */
+  ModifyCasterMarkPicInfo(data: ModifyCasterMarkPicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCasterMarkPicInfoResponse>;
+  /** 修改导播台文本配置 {@link ModifyCasterMarkWordInfoRequest} {@link ModifyCasterMarkWordInfoResponse} */
+  ModifyCasterMarkWordInfo(data: ModifyCasterMarkWordInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCasterMarkWordInfoResponse>;
   /** 修改导播台推流信息 {@link ModifyCasterOutputInfoRequest} {@link ModifyCasterOutputInfoResponse} */
   ModifyCasterOutputInfo(data: ModifyCasterOutputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCasterOutputInfoResponse>;
   /** 修改回调模板 {@link ModifyLiveCallbackTemplateRequest} {@link ModifyLiveCallbackTemplateResponse} */

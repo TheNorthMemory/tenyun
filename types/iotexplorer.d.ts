@@ -790,7 +790,7 @@ declare interface TWeCallCategoryPkgInfo {
 declare interface TWeCallInfo {
   /** Sn信息，SN格式：产品ID_设备名 */
   Sn: string | null;
-  /** 小程序ID */
+  /** 小程序ID，参数已弃用，不用传参 */
   ModelId?: string | null;
   /** 激活数 */
   ActiveNum?: number | null;
@@ -897,7 +897,7 @@ declare interface WifiInfo {
 declare interface ActivateTWeCallLicenseRequest {
   /** TWecall类型：1-家庭安防场景； 2-穿戴类场景； 3-生活娱乐场景； 4-对讲及其它场景 */
   PkgType: number;
-  /** appId */
+  /** 参数已弃用，不用传参 */
   MiniProgramAppId?: string;
   /** 设备列表 */
   DeviceList?: TWeCallInfo[];
@@ -2799,7 +2799,7 @@ declare interface GetStudioProductListResponse {
 }
 
 declare interface GetTWeCallActiveStatusRequest {
-  /** appId */
+  /** 参数已弃用，不用传参 */
   MiniProgramAppId?: string;
   /** 设备列表 */
   DeviceList?: TWeCallInfo[];
@@ -2814,7 +2814,7 @@ declare interface GetTWeCallActiveStatusResponse {
 
 declare interface GetTWeCallPkgListRequest {
   /** appId */
-  MiniProgramAppId: string;
+  MiniProgramAppId?: string;
   /** 类型 */
   PkgType?: number[];
   /** 状态 */
@@ -3748,7 +3748,7 @@ declare interface Iotexplorer {
   /** 查询TWeCall激活状态 {@link GetTWeCallActiveStatusRequest} {@link GetTWeCallActiveStatusResponse} */
   GetTWeCallActiveStatus(data?: GetTWeCallActiveStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeCallActiveStatusResponse>;
   /** 查询TWeCall包列表 {@link GetTWeCallPkgListRequest} {@link GetTWeCallPkgListResponse} */
-  GetTWeCallPkgList(data: GetTWeCallPkgListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeCallPkgListResponse>;
+  GetTWeCallPkgList(data?: GetTWeCallPkgListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeCallPkgListResponse>;
   /** 获取规则列表 {@link GetTopicRuleListRequest} {@link GetTopicRuleListResponse} */
   GetTopicRuleList(data: GetTopicRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTopicRuleListResponse>;
   /** 查询微信授权票据 {@link GetWechatDeviceTicketRequest} {@link GetWechatDeviceTicketResponse} */

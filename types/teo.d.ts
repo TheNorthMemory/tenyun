@@ -3976,6 +3976,28 @@ declare interface DescribeTopL7CacheDataResponse {
   RequestId?: string;
 }
 
+declare interface DescribeZoneConfigImportResultRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 表示需要查询结果的导入配置任务 Id，导入任务 Id 仅支持查询最近 7 天的导入任务。 */
+  TaskId: string;
+}
+
+declare interface DescribeZoneConfigImportResultResponse {
+  /** 本次导入任务的导入状态。取值有： success：表示配置项导入成功； failure：表示配置项导入失败； doing：表示配置项正在导入中。 */
+  Status?: string;
+  /** 本次导入任务的状态的提示信息。当配置项导入失败时，可通过本字段查看失败原因。 */
+  Message?: string;
+  /** 本次导入任务的配置内容。 */
+  Content?: string;
+  /** 本次导入任务的开始时间。 */
+  ImportTime?: string;
+  /** 本次导入任务的结束时间。 */
+  FinishTime?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeZoneSettingRequest {
   /** 站点ID。 */
   ZoneId: string;
@@ -4068,6 +4090,20 @@ declare interface DownloadL7LogsResponse {
   RequestId?: string;
 }
 
+declare interface ExportZoneConfigRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 导出配置项的类型列表，不填表示导出所有类型的配置，当前支持的取值有：L7AccelerationConfig：表示导出七层加速配置，对应控制台「站点加速-全局加速配置」和「站点加速-规则引擎」。需注意：后续支持导出的类型会随着迭代增加，导出所有类型时需要注意导出文件大小，建议使用时指定需要导出的配置类型，以便控制请求响应包负载大小。 */
+  Types?: string[];
+}
+
+declare interface ExportZoneConfigResponse {
+  /** 导出的配置的具体内容。以 JSON 格式返回，按照 UTF-8 方式进行编码。配置内容可参考下方示例。 */
+  Content?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface HandleFunctionRuntimeEnvironmentRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -4096,6 +4132,20 @@ declare interface IdentifyZoneResponse {
   Ascription?: AscriptionInfo;
   /** 站点归属权校验：文件校验信息。 */
   FileAscription?: FileAscriptionInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ImportZoneConfigRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 待导入的配置内容。要求采用 JSON 格式，按照 UTF-8 方式进行编码。配置内容可通过站点配置导出接口（ExportZoneConfig）获取。您可以单独导入「站点加速-全局加速配置」或「站点加速-规则引擎」，传入对应的字段即可，详情可以参考下方示例。 */
+  Content: string;
+}
+
+declare interface ImportZoneConfigResponse {
+  /** 表示该次导入配置的任务 Id，通过查询站点配置导入结果接口（DescribeZoneConfigImportResult）获取本次导入任务执行的结果。注意：导入任务 Id 仅支持查询最近 7 天的导入任务。 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5093,6 +5143,8 @@ declare interface Teo {
   DescribeTopL7AnalysisData(data: DescribeTopL7AnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopL7AnalysisDataResponse>;
   /** 查询缓存分析Top数据（待废弃） {@link DescribeTopL7CacheDataRequest} {@link DescribeTopL7CacheDataResponse} */
   DescribeTopL7CacheData(data: DescribeTopL7CacheDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopL7CacheDataResponse>;
+  /** 查询站点配置导入结果 {@link DescribeZoneConfigImportResultRequest} {@link DescribeZoneConfigImportResultResponse} */
+  DescribeZoneConfigImportResult(data: DescribeZoneConfigImportResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneConfigImportResultResponse>;
   /** 查询站点配置 {@link DescribeZoneSettingRequest} {@link DescribeZoneSettingResponse} */
   DescribeZoneSetting(data: DescribeZoneSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneSettingResponse>;
   /** 查询站点列表 {@link DescribeZonesRequest} {@link DescribeZonesResponse} */
@@ -5103,10 +5155,14 @@ declare interface Teo {
   DownloadL4Logs(data: DownloadL4LogsRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadL4LogsResponse>;
   /** 下载七层离线日志 {@link DownloadL7LogsRequest} {@link DownloadL7LogsResponse} */
   DownloadL7Logs(data: DownloadL7LogsRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadL7LogsResponse>;
+  /** 导出站点配置 {@link ExportZoneConfigRequest} {@link ExportZoneConfigResponse} */
+  ExportZoneConfig(data: ExportZoneConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ExportZoneConfigResponse>;
   /** 操作边缘函数运行环境 {@link HandleFunctionRuntimeEnvironmentRequest} {@link HandleFunctionRuntimeEnvironmentResponse} */
   HandleFunctionRuntimeEnvironment(data: HandleFunctionRuntimeEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<HandleFunctionRuntimeEnvironmentResponse>;
   /** 认证站点 {@link IdentifyZoneRequest} {@link IdentifyZoneResponse} */
   IdentifyZone(data: IdentifyZoneRequest, config?: AxiosRequestConfig): AxiosPromise<IdentifyZoneResponse>;
+  /** 导入站点配置 {@link ImportZoneConfigRequest} {@link ImportZoneConfigResponse} */
+  ImportZoneConfig(data: ImportZoneConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ImportZoneConfigResponse>;
   /** 增购套餐配额 {@link IncreasePlanQuotaRequest} {@link IncreasePlanQuotaResponse} */
   IncreasePlanQuota(data: IncreasePlanQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<IncreasePlanQuotaResponse>;
   /** 修改加速域名信息 {@link ModifyAccelerationDomainRequest} {@link ModifyAccelerationDomainResponse} */
