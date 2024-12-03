@@ -42,6 +42,24 @@ declare interface TranslateResult {
   TargetText?: string | null;
 }
 
+declare interface CheckAnimateImageJobRequest {
+  /** 动作模板ID。 */
+  TemplateId: string;
+  /** 图片格式：支持PNG、JPG、JPEG、BMP、WEBP格式；图片分辨率：长边分辨率范围【192，4096】；图片大小：不超过10M；图片宽高比：【宽：高】数值在 1:2 到 1:1.2 范围内 */
+  ImageUrl?: string;
+  /** 图片base64数据。图片格式：支持PNG、JPG、JPEG、BMP、WEBP格式；图片分辨率：长边分辨率范围【192，4096】；图片大小：不超过10M；图片宽高比：【宽：高】数值在 1:2 到 1:1.2 范围内 */
+  ImageBase64?: string;
+  /** 是否检测输入图人体12个身体部位（头部、颈部、右肩、右肘、右腕、左肩、左肘、左腕、右髋、左髋,、左膝、右膝）。默认不检测。 */
+  EnableBodyJoins?: boolean;
+}
+
+declare interface CheckAnimateImageJobResponse {
+  /** 输入图是否通过校验。 */
+  CheckPass?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ConfirmVideoTranslateJobRequest {
   /** 视频转译任务 ID */
   JobId: string;
@@ -161,9 +179,9 @@ declare interface DescribeVideoTranslateJobResponse {
 }
 
 declare interface SubmitImageAnimateJobRequest {
-  /** 图片格式：支持PNG、JPG、JPEG格式；图片分辨率：长边分辨率不超过2056；图片大小：不超过10M；图片宽高比：【宽：高】数值在 1:2 到 1:1.2 范围内 */
+  /** 图片格式：支持PNG、JPG、JPEG、BMP、WEBP格式；图片分辨率：长边分辨率范围【192，4096】；图片大小：不超过10M；图片宽高比：【宽：高】数值在 1:2 到 1:1.2 范围内 */
   ImageUrl?: string;
-  /** 图片base64数据。图片格式：支持PNG、JPG、JPEG格式；图片分辨率：长边分辨率不超过2056；图片大小：不超过10M；图片宽高比：【宽：高】数值在 1:2 到 1:1.2 范围内 */
+  /** 图片base64数据。图片格式：支持PNG、JPG、JPEG、BMP、WEBP格式；图片分辨率：长边分辨率范围【192，4096】；图片大小：不超过10M；图片宽高比：【宽：高】数值在 1:2 到 1:1.2 范围内 */
   ImageBase64?: string;
   /** 动作模板ID。取值说明：ke3 科目三；tuziwu 兔子舞；huajiangwu 划桨舞。 */
   TemplateId?: string;
@@ -171,7 +189,7 @@ declare interface SubmitImageAnimateJobRequest {
   EnableAudio?: boolean;
   /** 是否检测输入图人体12个身体部位（头部、颈部、右肩、右肘、右腕、左肩、左肘、左腕、右髋、左髋,、左膝、右膝）。默认不检测。 */
   EnableBodyJoins?: boolean;
-  /** 最终视频是否保留原图的背景（该模式对于tuziwu、huajiangwu不生效） */
+  /** 最终视频是否保留原图的背景，默认不保留。 */
   EnableSegment?: boolean;
   /** 为生成视频添加标识的开关，默认为0。1：添加标识。0：不添加标识。其他数值：默认按1处理。建议您使用显著标识来提示，该视频是 AI 生成的视频。 */
   LogoAdd?: number;
@@ -180,7 +198,7 @@ declare interface SubmitImageAnimateJobRequest {
 }
 
 declare interface SubmitImageAnimateJobResponse {
-  /** 任务ID。 */
+  /** 图片跳舞任务ID。 */
   JobId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -257,6 +275,8 @@ declare interface SubmitVideoTranslateJobResponse {
 /** {@link Vclm 大模型视频创作引擎} */
 declare interface Vclm {
   (): Versions;
+  /** 校验图片跳舞输入图 {@link CheckAnimateImageJobRequest} {@link CheckAnimateImageJobResponse} */
+  CheckAnimateImageJob(data: CheckAnimateImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAnimateImageJobResponse>;
   /** 确认视频转译结果 {@link ConfirmVideoTranslateJobRequest} {@link ConfirmVideoTranslateJobResponse} */
   ConfirmVideoTranslateJob(data: ConfirmVideoTranslateJobRequest, config?: AxiosRequestConfig): AxiosPromise<ConfirmVideoTranslateJobResponse>;
   /** 查询图片跳舞任务 {@link DescribeImageAnimateJobRequest} {@link DescribeImageAnimateJobResponse} */

@@ -20,11 +20,11 @@ declare interface Acl {
 
 /** AclRule列表接口出参 */
 declare interface AclRule {
-  /** Acl规则名称 */
+  /** ACL规则名 */
   RuleName?: string | null;
-  /** 实例ID */
+  /** ckafka集群实例Id */
   InstanceId?: string | null;
-  /** 匹配类型，目前只支持前缀匹配，枚举值列表：PREFIXED */
+  /** ACL规则匹配类型，目前只支持前缀匹配，枚举值列表：PREFIXED */
   PatternType?: string | null;
   /** 表示前缀匹配的前缀的值 */
   Pattern?: string | null;
@@ -63,9 +63,9 @@ declare interface AclRuleInfo {
 /** AclRule列表接口返回结果 */
 declare interface AclRuleResp {
   /** 总数据条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** AclRule列表 */
-  AclRuleList: AclRule[] | null;
+  AclRuleList?: AclRule[] | null;
 }
 
 /** 数据处理-解析参数 */
@@ -83,9 +83,9 @@ declare interface AnalyseParam {
 /** 存储着分配给该消费者的 partition 信息 */
 declare interface Assignment {
   /** assingment版本信息 */
-  Version: number;
+  Version?: number;
   /** topic信息列表 */
-  Topics: GroupInfoTopics[] | null;
+  Topics?: GroupInfoTopics[] | null;
 }
 
 /** 批量解析 */
@@ -144,7 +144,7 @@ declare interface BatchModifyTopicResultDTO {
 declare interface BrokerTopicData {
   /** 主题名称 */
   TopicName?: string | null;
-  /** 主题ID */
+  /** 主题Id */
   TopicId?: string | null;
   /** 主题占用Broker 容量大小 */
   DataSize?: number | null;
@@ -152,9 +152,9 @@ declare interface BrokerTopicData {
 
 /** broker维度topic 流量排行指标 */
 declare interface BrokerTopicFlowData {
-  /** Topic 名称 */
+  /** 主题名 */
   TopicName?: string | null;
-  /** Topic Id */
+  /** 主题Id */
   TopicId?: string | null;
   /** Topic 流量(MB) */
   TopicTraffic?: string | null;
@@ -269,21 +269,21 @@ declare interface ClsParam {
 /** 集群信息实体 */
 declare interface ClusterInfo {
   /** 集群Id */
-  ClusterId: number;
+  ClusterId?: number;
   /** 集群名称 */
-  ClusterName: string;
+  ClusterName?: string;
   /** 集群最大磁盘 单位GB */
-  MaxDiskSize: number | null;
+  MaxDiskSize?: number | null;
   /** 集群最大带宽 单位MB/s */
-  MaxBandWidth: number | null;
+  MaxBandWidth?: number | null;
   /** 集群当前可用磁盘 单位GB */
-  AvailableDiskSize: number | null;
+  AvailableDiskSize?: number | null;
   /** 集群当前可用带宽 单位MB/s */
-  AvailableBandWidth: number | null;
+  AvailableBandWidth?: number | null;
   /** 集群所属可用区，表明集群归属的可用区 */
-  ZoneId: number | null;
+  ZoneId?: number | null;
   /** 集群节点所在的可用区，若该集群为跨可用区集群，则包含该集群节点所在的多个可用区。 */
-  ZoneIds: number[] | null;
+  ZoneIds?: number[] | null;
 }
 
 /** 高级配置对象 */
@@ -309,59 +309,59 @@ declare interface Config {
 /** 返回连接源的Id */
 declare interface ConnectResourceResourceIdResp {
   /** 连接源的Id */
-  ResourceId: string | null;
+  ResourceId?: string | null;
 }
 
 /** Connection信息 */
 declare interface Connection {
-  /** Topic名称 */
-  TopicName: string;
+  /** 主题名 */
+  TopicName?: string;
   /** 消费组ID */
-  GroupId: string;
-  /** Topic的Id */
-  TopicId: string;
+  GroupId?: string;
+  /** 主题Id */
+  TopicId?: string;
 }
 
 /** 用户组实体 */
 declare interface ConsumerGroup {
   /** 用户组名称 */
-  ConsumerGroupName: string;
+  ConsumerGroupName?: string;
   /** 订阅信息实体 */
-  SubscribedInfo: SubscribedInfo[];
+  SubscribedInfo?: SubscribedInfo[];
 }
 
 /** 消费者组消费速度排行 */
 declare interface ConsumerGroupSpeed {
   /** 消费者组名称 */
-  ConsumerGroupName: string;
+  ConsumerGroupName?: string;
   /** 消费速度 Count/Minute */
-  Speed: number;
+  Speed?: number;
 }
 
 /** 消费组主题对象 */
 declare interface ConsumerGroupTopic {
   /** 主题ID */
-  TopicId: string;
+  TopicId?: string;
   /** 主题名称 */
-  TopicName: string;
+  TopicName?: string;
 }
 
 /** 消息记录 */
 declare interface ConsumerRecord {
   /** 主题名 */
-  Topic: string;
+  Topic?: string;
   /** 分区id */
-  Partition: number;
+  Partition?: number;
   /** 位点 */
-  Offset: number;
+  Offset?: number;
   /** 消息key */
-  Key: string | null;
+  Key?: string | null;
   /** 消息value */
-  Value: string | null;
+  Value?: string | null;
   /** 消息时间戳 */
-  Timestamp: number | null;
+  Timestamp?: number | null;
   /** 消息headers */
-  Headers: string | null;
+  Headers?: string | null;
 }
 
 /** Cos Datahub 任务接入参数 */
@@ -441,7 +441,7 @@ declare interface CreateInstancePreResp {
 /** 创建主题返回 */
 declare interface CreateTopicResp {
   /** 主题Id */
-  TopicId: string;
+  TopicId?: string;
 }
 
 /** Ctsdb连接源参数 */
@@ -532,7 +532,7 @@ declare interface DatahubTaskIdRes {
 
 /** Datahub任务信息 */
 declare interface DatahubTaskInfo {
-  /** 任务ID */
+  /** 任务Id */
   TaskId?: string;
   /** 任务名称 */
   TaskName?: string;
@@ -719,35 +719,35 @@ declare interface DescribeConnectResourcesResp {
 /** 查询Datahub任务信息 */
 declare interface DescribeDatahubTaskRes {
   /** 任务ID */
-  TaskId: string;
+  TaskId?: string;
   /** 任务名称 */
-  TaskName: string;
+  TaskName?: string;
   /** 任务类型，SOURCE数据接入，SINK数据流出 */
-  TaskType: string;
+  TaskType?: string;
   /** 状态，-1创建失败，0创建中，1运行中，2删除中，3已删除，4删除失败，5暂停中，6已暂停，7暂停失败，8恢复中，9恢复失败 */
-  Status: number;
+  Status?: number;
   /** 数据源 */
-  SourceResource: DatahubResource | null;
+  SourceResource?: DatahubResource | null;
   /** 数据目标 */
-  TargetResource: DatahubResource | null;
+  TargetResource?: DatahubResource | null;
   /** Connection列表 */
-  Connections: Connection[] | null;
+  Connections?: Connection[] | null;
   /** 任务创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 消息处理规则 */
-  TransformParam: TransformParam | null;
+  TransformParam?: TransformParam | null;
   /** 数据接入ID */
-  DatahubId: string | null;
+  DatahubId?: string | null;
   /** 绑定的SchemaId */
-  SchemaId: string | null;
+  SchemaId?: string | null;
   /** 绑定的Schema名称 */
-  SchemaName: string | null;
+  SchemaName?: string | null;
   /** 数据处理规则 */
-  TransformsParam: TransformsParam | null;
+  TransformsParam?: TransformsParam | null;
   /** 异常信息 */
-  ErrorMessage: string | null;
+  ErrorMessage?: string | null;
   /** 任务标签列表 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
 }
 
 /** 查询Datahub任务列表 */
@@ -792,10 +792,10 @@ declare interface DescribeDatahubTopicsResp {
 
 /** DescribeGroup返回实体 */
 declare interface DescribeGroup {
-  /** groupId */
-  Group: string;
+  /** 消费分组名称 */
+  Group?: string;
   /** 该 group 使用的协议。 */
-  Protocol: string;
+  Protocol?: string;
 }
 
 /** Doris 连接源参数 */
@@ -978,7 +978,7 @@ declare interface EsModifyConnectParam {
 
 /** Es类型入参 */
 declare interface EsParam {
-  /** 实例资源 */
+  /** Es实例资源Id */
   Resource: string | null;
   /** Es的连接port */
   Port?: number | null;
@@ -1030,7 +1030,7 @@ declare interface EsRecordMapping {
 
 /** EventBus配置 */
 declare interface EventBusParam {
-  /** 资源类型。EB_COS/EB_ES/EB_CLS */
+  /** 资源类型。COS/ES/CLS */
   Type: string;
   /** 是否为自建集群 */
   SelfBuilt: boolean;
@@ -1102,60 +1102,60 @@ declare interface FilterMapParam {
 
 /** 组实体 */
 declare interface Group {
-  /** 组名称 */
-  GroupName: string;
+  /** 消费分组名称 */
+  GroupName?: string;
 }
 
 /** consumer信息 */
 declare interface GroupInfoMember {
   /** coordinator 为消费分组中的消费者生成的唯一 ID */
-  MemberId: string;
+  MemberId?: string;
   /** 客户消费者 SDK 自己设置的 client.id 信息 */
-  ClientId: string;
+  ClientId?: string;
   /** 一般存储客户的 IP 地址 */
-  ClientHost: string;
+  ClientHost?: string;
   /** 存储着分配给该消费者的 partition 信息 */
-  Assignment: Assignment;
+  Assignment?: Assignment;
 }
 
 /** GroupInfo内部topic对象 */
 declare interface GroupInfoTopics {
   /** 分配的 topic 名称 */
-  Topic: string;
+  Topic?: string;
   /** 分配的 partition 信息 */
-  Partitions: number[] | null;
+  Partitions?: number[] | null;
 }
 
 /** 组偏移量分区对象 */
 declare interface GroupOffsetPartition {
   /** topic 的 partitionId */
-  Partition: number;
+  Partition?: number;
   /** consumer 提交的 offset 位置 */
-  Offset: number;
+  Offset?: number;
   /** 支持消费者提交消息时，传入 metadata 作为它用，当前一般为空字符串 */
-  Metadata: string | null;
+  Metadata?: string | null;
   /** 错误码 */
-  ErrorCode: number;
+  ErrorCode?: number;
   /** 当前 partition 最新的 offset */
-  LogEndOffset: number;
+  LogEndOffset?: number;
   /** 未消费的消息个数 */
-  Lag: number;
+  Lag?: number;
 }
 
 /** 消费分组主题对象 */
 declare interface GroupOffsetTopic {
   /** 主题名称 */
-  Topic: string;
+  Topic?: string;
   /** 该主题分区数组，其中每个元素为一个 json object */
-  Partitions: GroupOffsetPartition[] | null;
+  Partitions?: GroupOffsetPartition[] | null;
 }
 
 /** InquireCkafkaPrice接口询价返回值 */
 declare interface InquireCkafkaPriceResp {
   /** 实例价格 */
-  InstancePrice: InquiryPrice | null;
+  InstancePrice?: InquiryPrice | null;
   /** 公网带宽价格 */
-  PublicNetworkBandwidthPrice: InquiryPrice | null;
+  PublicNetworkBandwidthPrice?: InquiryPrice | null;
 }
 
 /** 询价返回参数 */
@@ -1187,15 +1187,15 @@ declare interface InquiryBasePrice {
 /** 详细类别的价格 */
 declare interface InquiryDetailPrice {
   /** 额外内网带宽价格 */
-  BandwidthPrice: InquiryBasePrice | null;
+  BandwidthPrice?: InquiryBasePrice | null;
   /** 硬盘价格 */
-  DiskPrice: InquiryBasePrice | null;
+  DiskPrice?: InquiryBasePrice | null;
   /** 额外分区价格 */
-  PartitionPrice: InquiryBasePrice | null;
+  PartitionPrice?: InquiryBasePrice | null;
   /** 额外Topic价格 */
-  TopicPrice: InquiryBasePrice | null;
+  TopicPrice?: InquiryBasePrice | null;
   /** 实例套餐价格 */
-  InstanceTypePrice: InquiryBasePrice | null;
+  InstanceTypePrice?: InquiryBasePrice | null;
 }
 
 /** 购买硬盘参数 */
@@ -1209,29 +1209,29 @@ declare interface InquiryDiskParam {
 /** 询价返回参数 */
 declare interface InquiryPrice {
   /** 单位原价 */
-  UnitPrice: number | null;
+  UnitPrice?: number | null;
   /** 折扣单位价格 */
-  UnitPriceDiscount: number | null;
+  UnitPriceDiscount?: number | null;
   /** 合计原价 */
-  OriginalPrice: number | null;
+  OriginalPrice?: number | null;
   /** 折扣合计价格 */
-  DiscountPrice: number | null;
+  DiscountPrice?: number | null;
   /** 折扣(单位是%) */
-  Discount: number | null;
+  Discount?: number | null;
   /** 商品数量 */
-  GoodsNum: number | null;
+  GoodsNum?: number | null;
   /** 付费货币 */
-  Currency: string | null;
+  Currency?: string | null;
   /** 硬盘专用返回参数 */
-  DiskType: string | null;
+  DiskType?: string | null;
   /** 购买时长 */
-  TimeSpan: number | null;
+  TimeSpan?: number | null;
   /** 购买时长单位("m"按月, "h"按小时) */
-  TimeUnit: string | null;
+  TimeUnit?: string | null;
   /** 购买数量 */
-  Value: number | null;
+  Value?: number | null;
   /** 详细类别的价格 */
-  DetailPrices: InquiryDetailPrice | null;
+  DetailPrices?: InquiryDetailPrice | null;
 }
 
 /** 公网带宽参数 */
@@ -1244,14 +1244,14 @@ declare interface InquiryPublicNetworkParam {
 
 /** 实例对象 */
 declare interface Instance {
-  /** 实例id */
-  InstanceId: string;
-  /** 实例名称 */
-  InstanceName: string;
-  /** 实例的状态。0：创建中，1：运行中，2：删除中 ， 5 隔离中，-1 创建失败 */
-  Status: number;
+  /** ckafka集群实例Id */
+  InstanceId?: string;
+  /** ckafka集群实例Name */
+  InstanceName?: string;
+  /** 实例的状态。0: 创建中，1: 运行中，2: 删除中, 3: 已删除, 5: 隔离中, 7: 升级中, -1: 创建失败 */
+  Status?: number;
   /** 是否开源实例。开源：true，不开源：false */
-  IfCommunity: boolean | null;
+  IfCommunity?: boolean | null;
 }
 
 /** 实例购买付费参数 */
@@ -1265,18 +1265,18 @@ declare interface InstanceChargeParam {
 /** 实例配置实体 */
 declare interface InstanceConfigDO {
   /** 是否自动创建主题 */
-  AutoCreateTopicsEnable: boolean;
+  AutoCreateTopicsEnable?: boolean;
   /** 分区数 */
-  DefaultNumPartitions: number;
+  DefaultNumPartitions?: number;
   /** 默认的复制Factor */
-  DefaultReplicationFactor: number;
+  DefaultReplicationFactor?: number;
 }
 
 /** 实例详情 */
 declare interface InstanceDetail {
-  /** 实例id */
+  /** ckafka集群实例Id */
   InstanceId?: string;
-  /** 实例名称 */
+  /** ckafka集群实例名称 */
   InstanceName?: string;
   /** 访问实例的vip 信息 */
   Vip?: string;
@@ -1284,11 +1284,11 @@ declare interface InstanceDetail {
   Vport?: string;
   /** 虚拟IP列表 */
   VipList?: VipEntity[];
-  /** 实例的状态。0：创建中，1：运行中，2：删除中：5隔离中， -1 创建失败 */
+  /** 实例的状态。0: 创建中，1: 运行中，2: 删除中, 3: 已删除, 5: 隔离中, 7: 升级中, -1: 创建失败 */
   Status?: number;
   /** 实例带宽，单位Mbps */
   Bandwidth?: number;
-  /** 实例的存储大小，单位GB */
+  /** ckafka集群实例磁盘大小，单位G */
   DiskSize?: number;
   /** 可用区域ID */
   ZoneId?: number;
@@ -1318,9 +1318,9 @@ declare interface InstanceDetail {
   ZoneIds?: number[] | null;
   /** ckafka售卖类型 */
   Cvm?: number | null;
-  /** ckafka实例类型 */
+  /** ckafka集群实例类型 */
   InstanceType?: string | null;
-  /** 磁盘类型 */
+  /** ckafka集群实例磁盘类型 */
   DiskType?: string | null;
   /** 当前规格最大Topic数 */
   MaxTopicNumber?: number | null;
@@ -1330,11 +1330,11 @@ declare interface InstanceDetail {
   RebalanceTime?: string | null;
   /** 实例当前partition数量 */
   PartitionNumber?: number | null;
-  /** 公网带宽类型 */
+  /** ckafka集群实例公网带宽类型 */
   PublicNetworkChargeType?: string | null;
-  /** 公网带宽值 */
+  /** 公网带宽 最小3Mbps 最大999Mbps 仅专业版支持填写 */
   PublicNetwork?: number | null;
-  /** 实例类型 */
+  /** ckafka集群实例底层集群类型 */
   ClusterType?: string | null;
   /** 实例功能列表 */
   Features?: string[] | null;
@@ -1384,9 +1384,9 @@ declare interface KafkaConnectParam {
 declare interface KafkaParam {
   /** 是否为自建集群 */
   SelfBuilt: boolean;
-  /** 实例资源 */
+  /** ckafka集群实例Id */
   Resource: string;
-  /** Topic名称，多个以“,”分隔 */
+  /** 主题名，多个以“,”分隔 */
   Topic?: string;
   /** Offset类型，最开始位置earliest，最新位置latest，时间点位置timestamp */
   OffsetType?: string | null;
@@ -1394,9 +1394,9 @@ declare interface KafkaParam {
   StartTime?: number | null;
   /** 实例资源名称 */
   ResourceName?: string | null;
-  /** Zone ID */
+  /** 可用区 */
   ZoneId?: number | null;
-  /** Topic的Id */
+  /** 主题Id */
   TopicId?: string | null;
   /** Topic的分区数 */
   PartitionNum?: number | null;
@@ -1478,7 +1478,7 @@ declare interface MariaDBParam {
   Table: string | null;
   /** 该MariaDB在连接管理内的Id */
   Resource: string | null;
-  /** 复制存量信息(schema_only不复制, initial全量)，默认位initial */
+  /** 复制存量信息(schema_only不复制, initial全量)，默认值initial */
   SnapshotMode?: string | null;
   /** 格式：库1.表1:字段1,字段2;库2.表2:字段2，表之间;（分号）隔开，字段之间,（逗号）隔开。不指定的表默认取表的主键 */
   KeyColumns?: string | null;
@@ -1670,7 +1670,7 @@ declare interface MySQLParam {
   Table: string | null;
   /** 该MySQL在连接管理内的Id */
   Resource: string | null;
-  /** 复制存量信息(schema_only不复制, initial全量)，默认位initial */
+  /** 复制存量信息(schema_only不复制, initial全量)，默认值initial */
   SnapshotMode?: string | null;
   /** 存放MySQL的Ddl信息的Topic，为空则默认不存放 */
   DdlTopic?: string | null;
@@ -1733,15 +1733,15 @@ declare interface OperateResponseData {
 /** 分区实体 */
 declare interface Partition {
   /** 分区ID */
-  PartitionId: number;
+  PartitionId?: number;
 }
 
 /** 分区和位移 */
 declare interface PartitionOffset {
-  /** Partition,例如"0"或"1" */
-  Partition: string | null;
-  /** Offset,例如100 */
-  Offset: number | null;
+  /** 分区 */
+  Partition?: string | null;
+  /** 位点偏移量 */
+  Offset?: number | null;
 }
 
 /** partition信息 */
@@ -1901,21 +1901,21 @@ declare interface RegexReplaceParam {
 /** 地域实体对象 */
 declare interface Region {
   /** 地域ID */
-  RegionId: number;
+  RegionId?: number;
   /** 地域名称 */
-  RegionName: string;
+  RegionName?: string;
   /** 区域名称 */
-  AreaName: string;
+  AreaName?: string;
   /** 地域代码 */
-  RegionCode: string | null;
+  RegionCode?: string | null;
   /** 地域代码（V3版本） */
-  RegionCodeV3: string | null;
-  /** NONE:默认值不支持任何特殊机型\nCVM:支持CVM类型 */
-  Support: string | null;
+  RegionCodeV3?: string | null;
+  /** NONE:默认值不支持任何特殊类型 实例类型 */
+  Support?: string | null;
   /** 是否支持ipv6, 0：表示不支持，1：表示支持 */
-  Ipv6: number | null;
+  Ipv6?: number | null;
   /** 是否支持跨可用区, 0：表示不支持，1：表示支持 */
-  MultiZone: number | null;
+  MultiZone?: number | null;
 }
 
 /** RenewCkafkaInstance接口出参bigDealIds */
@@ -1938,7 +1938,7 @@ declare interface ReplaceParam {
 declare interface Route {
   /** 实例接入方式0：PLAINTEXT (明文方式，没有带用户信息老版本及社区版本都支持)1：SASL_PLAINTEXT（明文方式，不过在数据开始时，会通过SASL方式登录鉴权，仅社区版本支持）2：SSL（SSL加密通信，没有带用户信息，老版本及社区版本都支持）3：SASL_SSL（SSL加密通信，在数据开始时，会通过SASL方式登录鉴权，仅社区版本支持） */
   AccessType?: number;
-  /** 路由ID */
+  /** 路由Id */
   RouteId?: number;
   /** vip网络类型（1:外网TGW 2:基础网络 3:VPC网络 4:支撑网络(idc 环境) 5:SSL外网访问方式访问 6:黑石环境vpc 7:支撑网络(cvm 环境） */
   VipType?: number;
@@ -1950,11 +1950,11 @@ declare interface Route {
   DomainPort?: number | null;
   /** 时间戳 */
   DeleteTimestamp?: string | null;
-  /** 子网信息 */
+  /** 子网Id */
   Subnet?: string | null;
   /** 虚拟IP列表(1对1 broker节点) */
   BrokerVipList?: VipEntity[] | null;
-  /** vpc信息 */
+  /** 私有网络Id */
   VpcId?: string | null;
 }
 
@@ -2087,13 +2087,13 @@ declare interface SplitParam {
 /** 订阅信息实体 */
 declare interface SubscribedInfo {
   /** 订阅的主题名 */
-  TopicName: string;
+  TopicName?: string;
   /** 订阅的分区 */
-  Partition: number[] | null;
+  Partition?: number[] | null;
   /** 分区offset信息 */
-  PartitionOffset: PartitionOffset[] | null;
+  PartitionOffset?: PartitionOffset[] | null;
   /** 订阅的主题ID */
-  TopicId: string | null;
+  TopicId?: string | null;
 }
 
 /** 数据处理——Value处理参数——截取参数 */
@@ -2141,11 +2141,11 @@ declare interface TdwParam {
 /** 返回的topic对象 */
 declare interface Topic {
   /** 主题的ID */
-  TopicId: string;
+  TopicId?: string;
   /** 主题的名称 */
-  TopicName: string;
+  TopicName?: string;
   /** 备注 */
-  Note: string | null;
+  Note?: string | null;
 }
 
 /** 主题详情 */
@@ -2185,17 +2185,17 @@ declare interface TopicDetail {
 /** topic 流量排行 */
 declare interface TopicFlowRanking {
   /** 主题Id */
-  TopicId: string;
+  TopicId?: string;
   /** 主题名称 */
-  TopicName: string;
+  TopicName?: string;
   /** 分区数 */
-  PartitionNum: number;
+  PartitionNum?: number;
   /** 副本数 */
-  ReplicaNum: number;
-  /** Topic 流量 */
-  TopicTraffic: string;
+  ReplicaNum?: number;
+  /** Topic 流量,单位MB(设置date时以sum方式聚合) */
+  TopicTraffic?: string;
   /** Topic 消息堆积 */
-  MessageHeap: number;
+  MessageHeap?: number;
 }
 
 /** topic 生产消息数据，消费者数据 */
@@ -2237,25 +2237,25 @@ declare interface TopicInSyncReplicaInfo {
 /** Topic 副本及详情数据集合 */
 declare interface TopicInSyncReplicaResult {
   /** Topic详情及副本合集 */
-  TopicInSyncReplicaList: TopicInSyncReplicaInfo[];
+  TopicInSyncReplicaList?: TopicInSyncReplicaInfo[];
   /** 总计个数 */
-  TotalCount: number;
+  TotalCount?: number;
 }
 
 /** topic消息堆积、占用磁盘排行 */
 declare interface TopicMessageHeapRanking {
   /** 主题ID */
-  TopicId: string | null;
+  TopicId?: string | null;
   /** 主题名称 */
-  TopicName: string | null;
+  TopicName?: string | null;
   /** 分区数 */
-  PartitionNum: number | null;
+  PartitionNum?: number | null;
   /** 副本数 */
-  ReplicaNum: number | null;
+  ReplicaNum?: number | null;
   /** Topic 流量 */
-  TopicTraffic: string | null;
+  TopicTraffic?: string | null;
   /** topic消息堆积/占用磁盘 */
-  MessageHeap: number | null;
+  MessageHeap?: number | null;
 }
 
 /** Topic配置 */
@@ -2278,14 +2278,14 @@ declare interface TopicParam {
 
 /** 分区详情 */
 declare interface TopicPartitionDO {
-  /** Partition ID */
-  Partition: number;
+  /** Partition 分区ID */
+  Partition?: number;
   /** Leader 运行状态 */
-  LeaderStatus: number;
+  LeaderStatus?: number;
   /** ISR 个数 */
-  IsrNum: number;
+  IsrNum?: number;
   /** 副本个数 */
-  ReplicaNum: number;
+  ReplicaNum?: number;
 }
 
 /** 统一返回的TopicResponse */
@@ -2299,11 +2299,11 @@ declare interface TopicResult {
 /** Topic消息保留时间配置返回信息 */
 declare interface TopicRetentionTimeConfigRsp {
   /** 期望值，即用户配置的Topic消息保留时间(单位分钟) */
-  Expect: number | null;
+  Expect?: number | null;
   /** 当前值，即当前生效值(可能存在动态调整，单位分钟) */
-  Current: number | null;
+  Current?: number | null;
   /** 最近变更时间 */
-  ModTimeStamp: number | null;
+  ModTimeStamp?: number | null;
 }
 
 /** DescribeTopicSubscribeGroup接口出参 */
@@ -2377,13 +2377,13 @@ declare interface UrlDecodeParam {
 /** 用户实体 */
 declare interface User {
   /** 用户id */
-  UserId: number;
+  UserId?: number;
   /** 用户名称 */
-  Name: string;
+  Name?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 最后更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** 数据处理——Value处理参数 */
@@ -2415,28 +2415,28 @@ declare interface ValueParam {
 /** 虚拟IP实体 */
 declare interface VipEntity {
   /** 虚拟IP */
-  Vip: string;
+  Vip?: string;
   /** 虚拟端口 */
-  Vport: string;
+  Vport?: string;
 }
 
 /** zone信息实体 */
 declare interface ZoneInfo {
-  /** zone的id */
+  /** 可用区 */
   ZoneId?: string;
   /** 是否内部APP */
   IsInternalApp?: number;
-  /** app id */
+  /** 应用标识 */
   AppId?: number;
   /** 标识 */
   Flag?: boolean;
-  /** zone名称 */
+  /** 可用区名称 */
   ZoneName?: string;
-  /** zone状态 */
+  /** 可用区状态 */
   ZoneStatus?: number;
   /** 额外标识 */
   Exflag?: string;
-  /** json对象，key为机型，value true为售罄，false为未售罄 */
+  /** true为售罄，false为未售罄 */
   SoldOut?: string;
   /** 标准版售罄信息 */
   SalesInfo?: SaleInfo[] | null;
@@ -2446,16 +2446,16 @@ declare interface ZoneInfo {
 
 declare interface AclResponse {
   /** 符合条件的总数据条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** ACL列表 */
-  AclList: Acl[] | null;
+  AclList?: Acl[] | null;
 }
 
 declare interface AppIdResponse {
   /** 符合要求的所有AppId数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 符合要求的App Id列表 */
-  AppIdList: number[] | null;
+  AppIdList?: number[] | null;
 }
 
 declare interface AuthorizeTokenRequest {
@@ -2542,7 +2542,7 @@ declare interface CancelAuthorizationTokenResponse {
 
 declare interface CdcClusterResponse {
   /** 任务ID */
-  TaskId: number | null;
+  TaskId?: number | null;
 }
 
 declare interface CheckCdcClusterRequest {
@@ -2559,21 +2559,21 @@ declare interface CheckCdcClusterResponse {
 
 declare interface ConsumerGroupResponse {
   /** 符合条件的消费组数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 主题列表 */
-  TopicList: ConsumerGroupTopic[] | null;
+  TopicList?: ConsumerGroupTopic[] | null;
   /** 消费分组List */
-  GroupList: ConsumerGroup[] | null;
+  GroupList?: ConsumerGroup[] | null;
   /** 所有分区数量 */
-  TotalPartition: number | null;
+  TotalPartition?: number | null;
   /** 监控的分区列表 */
-  PartitionListForMonitor: Partition[] | null;
+  PartitionListForMonitor?: Partition[] | null;
   /** 主题总数 */
-  TotalTopic: number | null;
+  TotalTopic?: number | null;
   /** 监控的主题列表 */
-  TopicListForMonitor: ConsumerGroupTopic[] | null;
+  TopicListForMonitor?: ConsumerGroupTopic[] | null;
   /** 监控的组列表 */
-  GroupListForMonitor: Group[] | null;
+  GroupListForMonitor?: Group[] | null;
 }
 
 declare interface CreateAclRequest {
@@ -3663,9 +3663,9 @@ declare interface DescribeTopicDetailResponse {
 }
 
 declare interface DescribeTopicFlowRankingRequest {
-  /** 实例ID */
+  /** ckafka集群实例Id */
   InstanceId: string;
-  /** 排行类别(PRO-Topic生产流量/CON-Topic消费流量) */
+  /** 排行类别，PRO：Topic生产流量；CON：Topic消费流量 */
   RankingType: string;
   /** 排行起始日期 */
   BeginDate?: string;
@@ -3676,7 +3676,7 @@ declare interface DescribeTopicFlowRankingRequest {
 }
 
 declare interface DescribeTopicFlowRankingResponse {
-  /** 流量排行 */
+  /** 流量排行返回结果 */
   Result?: TopicFlowRankingResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3881,9 +3881,9 @@ declare interface GroupInfoResponse {
 
 declare interface GroupOffsetResponse {
   /** 符合调节的总结果数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 该主题分区数组，其中每个元素为一个 json object */
-  TopicList: GroupOffsetTopic[] | null;
+  TopicList?: GroupOffsetTopic[] | null;
 }
 
 declare interface GroupResponse {
@@ -3932,9 +3932,9 @@ declare interface InquireCkafkaPriceResponse {
 }
 
 declare interface InstanceAttributesResponse {
-  /** 实例ID */
+  /** ckafka集群实例Id */
   InstanceId?: string;
-  /** 实例名称 */
+  /** ckafka集群实例Name */
   InstanceName?: string;
   /** 接入点 VIP 列表信息 */
   VipList?: VipEntity[];
@@ -3942,7 +3942,7 @@ declare interface InstanceAttributesResponse {
   Vip?: string;
   /** 虚拟端口 */
   Vport?: string;
-  /** 实例的状态。0：创建中，1：运行中，2：删除中 */
+  /** 实例的状态。0: 创建中，1: 运行中，2: 删除中, 3: 已删除, 5: 隔离中, 7: 升级中, -1: 创建失败 */
   Status?: number;
   /** 实例带宽，单位：Mbps */
   Bandwidth?: number;
@@ -3976,9 +3976,9 @@ declare interface InstanceAttributesResponse {
   Tags?: Tag[] | null;
   /** 过期时间 */
   ExpireTime?: number | null;
-  /** 跨可用区 */
+  /** 可用区列表 */
   ZoneIds?: number[] | null;
-  /** kafka版本信息 */
+  /** ckafka集群实例版本 */
   Version?: string | null;
   /** 最大分组数 */
   MaxGroupNum?: number | null;
@@ -4004,25 +4004,31 @@ declare interface InstanceAttributesResponse {
   DynamicDiskConfig?: DynamicDiskConfig | null;
   /** 实例计费类型 */
   InstanceChargeType?: string | null;
+  /** 集群类型 */
+  ClusterType?: string | null;
+  /** 免费分区数量 */
+  FreePartitionNumber?: number;
+  /** 弹性带宽上浮值 */
+  ElasticFloatBandwidth?: number | null;
 }
 
 declare interface InstanceDeleteResponse {
   /** 删除实例返回的任务Id */
-  FlowId: number | null;
+  FlowId?: number | null;
 }
 
 declare interface InstanceDetailResponse {
   /** 符合条件的实例总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 符合条件的实例详情列表 */
-  InstanceList: InstanceDetail[];
+  InstanceList?: InstanceDetail[];
 }
 
 declare interface InstanceResponse {
   /** 符合条件的实例列表 */
-  InstanceList: Instance[] | null;
+  InstanceList?: Instance[] | null;
   /** 符合条件的结果总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
 }
 
 declare interface InstanceScalingDownRequest {
@@ -4328,7 +4334,7 @@ declare interface RenewCkafkaInstanceResponse {
 
 declare interface RouteResponse {
   /** 路由信息列表 */
-  Routers: Route[] | null;
+  Routers?: Route[] | null;
 }
 
 declare interface SendMessageRequest {
@@ -4347,9 +4353,9 @@ declare interface SendMessageResponse {
 
 declare interface TaskStatusResponse {
   /** 任务状态:0 成功1 失败2 进行中 */
-  Status: number;
+  Status?: number;
   /** 输出信息 */
-  Output: string | null;
+  Output?: string | null;
 }
 
 declare interface TopicAttributesResponse {
@@ -4388,9 +4394,9 @@ declare interface TopicDetailResponse {
 
 declare interface UserResponse {
   /** 符合条件的用户列表 */
-  Users: User[] | null;
+  Users?: User[] | null;
   /** 符合条件的总用户数 */
-  TotalCount: number;
+  TotalCount?: number;
 }
 
 declare interface ZoneResponse {
@@ -4414,11 +4420,11 @@ declare interface ZoneResponse {
   Profession?: string | null;
   /** 购买物理独占版配置 */
   Physical?: string | null;
-  /** 公网带宽 */
+  /** 公网带宽 最小3Mbps 最大999Mbps 仅专业版支持填写 */
   PublicNetwork?: string | null;
   /** 公网带宽配置 */
   PublicNetworkLimit?: string | null;
-  /** 请求ID */
+  /** 请求Id */
   RequestId?: string | null;
   /** 版本 */
   Version?: string | null;

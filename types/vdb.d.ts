@@ -92,6 +92,10 @@ declare interface Network {
   Vip?: string | null;
   /** 内网访问Port。 */
   Port?: number | null;
+  /** 旧 ip 保留时长，单位天 */
+  PreserveDuration?: number;
+  /** 旧 ip 到期时间 */
+  ExpireTime?: string;
 }
 
 /** 实例pod信息，仅包含 pod 名称 */

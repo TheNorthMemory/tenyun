@@ -104,7 +104,7 @@ declare interface BackupTableContent {
   BackupStatus?: number | null;
   /** 备份的错误信息 */
   BackupErrorMsg?: string | null;
-  /** 改库表是否绑定降冷策略 */
+  /** 该库表是否绑定降冷策略 */
   IsOpenCoolDown?: boolean | null;
 }
 

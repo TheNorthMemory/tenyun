@@ -522,6 +522,16 @@ declare interface CdbZoneSellConf {
   EngineType?: string[];
 }
 
+/** 迁移集群版校验结果 */
+declare interface CheckMigrateResult {
+  /** 校验名称 */
+  Name?: string;
+  /** 校验结果，通过为pass，失败为fail */
+  Status?: string;
+  /** 校验结果描述 */
+  Desc?: string;
+}
+
 /** 克隆任务记录。 */
 declare interface CloneItem {
   /** 克隆任务的源实例Id。 */
@@ -1040,6 +1050,28 @@ declare interface MasterInfo {
   ExClusterId: string;
   /** 独享集群名称 */
   ExClusterName: string;
+}
+
+/** 一键迁移集群版只读实例信息 */
+declare interface MigrateClusterRoInfo {
+  /** 只读实例名称 */
+  RoInstanceId?: string;
+  /** 只读实例CPU核数 */
+  Cpu?: number;
+  /** 只读实例内存大小，单位：MB */
+  Memory?: number;
+  /** 只读实例硬盘大小，单位：GB */
+  Volume?: number;
+  /** 磁盘类型。 CLOUD_SSD: SSD云硬盘; CLOUD_HSSD: 增强型SSD云硬盘 */
+  DiskType?: string;
+  /** 可用区 */
+  Zone?: string;
+  /** 迁移实例类型。支持值包括： "CLOUD_NATIVE_CLUSTER" - 标准型集群版实例， "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 加强型集群版实例。 */
+  DeviceType?: string;
+  /** 只读实例所在ro组，例：cdbrg-xxx */
+  RoGroupId?: string;
+  /** 实例当前告警策略id数组 */
+  SrcAlarmPolicyList?: number[];
 }
 
 /** 独享集群CDB实例的节点分布情况 */
@@ -1905,9 +1937,29 @@ declare interface BalanceRoGroupLoadResponse {
 }
 
 declare interface CheckMigrateClusterRequest {
+  /** 实例Id。 */
+  InstanceId: string;
+  /** 实例CPU核数 */
+  Cpu?: number;
+  /** 实例内存大小，单位：MB */
+  Memory?: number;
+  /** 实例硬盘大小，单位：GB */
+  Volume?: number;
+  /** 磁盘类型。 CLOUD_SSD: SSD云硬盘; CLOUD_HSSD: 增强型SSD云硬盘 */
+  DiskType?: string;
+  /** 集群版节点拓扑配置。 */
+  ClusterTopology?: ClusterTopology;
+  /** 迁移实例类型。支持值包括： "CLOUD_NATIVE_CLUSTER" - 标准型集群版实例， "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 加强型集群版实例。 */
+  DeviceType?: string;
+  /** 只读实例信息 */
+  RoInfo?: MigrateClusterRoInfo[];
 }
 
 declare interface CheckMigrateClusterResponse {
+  /** 校验是否通过，通过为pass，失败为fail */
+  CheckResult?: string;
+  /** 校验项 */
+  Items?: CheckMigrateResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5194,7 +5246,7 @@ declare interface Cdb {
   /** 均衡RO组内实例的负载 {@link BalanceRoGroupLoadRequest} {@link BalanceRoGroupLoadResponse} */
   BalanceRoGroupLoad(data: BalanceRoGroupLoadRequest, config?: AxiosRequestConfig): AxiosPromise<BalanceRoGroupLoadResponse>;
   /** 迁移集群版校验 {@link CheckMigrateClusterRequest} {@link CheckMigrateClusterResponse} */
-  CheckMigrateCluster(data?: CheckMigrateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CheckMigrateClusterResponse>;
+  CheckMigrateCluster(data: CheckMigrateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CheckMigrateClusterResponse>;
   /** 实例关闭审计服务 {@link CloseAuditServiceRequest} {@link CloseAuditServiceResponse} */
   CloseAuditService(data: CloseAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CloseAuditServiceResponse>;
   /** 关闭数据库代理 {@link CloseCDBProxyRequest} {@link CloseCDBProxyResponse} */

@@ -690,6 +690,22 @@ declare interface LiveDomainCertBindings {
   UpdateTime?: string | null;
 }
 
+/** 直播增强计费信息。 */
+declare interface LiveEnhanceInfo {
+  /** 域名。 */
+  Domain?: string;
+  /** 时间。 */
+  Time?: string;
+  /** 计费时长，单位分钟。 */
+  Duration?: number;
+  /** 帧率。 */
+  Fps?: string;
+  /** 分辨率。 */
+  Resolution?: string;
+  /** 增强服务类型。 */
+  Type?: string;
+}
+
 /** 直播包信息。 */
 declare interface LivePackageInfo {
   /** 包 ID。 */
@@ -3290,6 +3306,30 @@ declare interface DescribeLiveDomainsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLiveEnhanceInfoListRequest {
+  /** 起始时间点，使用ISO格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见[ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543)。接口支持最近三个月的查询，开始时间和结束时间查询跨度不能超过三十天。 */
+  StartTime: string;
+  /** 结束时间点，使用ISO格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见[ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543)。接口支持最近三个月的查询，开始时间和结束时间查询跨度不能超过三十天。 */
+  EndTime: string;
+  /** 查询粒度，支持5，60分钟。 */
+  Granularity?: number;
+  /** 查询域名，如果不填则默认查全部的数据。 */
+  DomainNames?: string[];
+  /** 增强服务类型，如果不填则默认查全部的数据。 */
+  Type?: string[];
+  /** 分辨率，如果不填则默认查全部的数据。 */
+  Resolution?: string[];
+  /** 帧率，如果不填则默认查全部的数据。 */
+  Fps?: string[];
+}
+
+declare interface DescribeLiveEnhanceInfoListResponse {
+  /** 直播增强统计信息列表。 */
+  DataInfoList?: LiveEnhanceInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLiveForbidStreamListRequest {
   /** 取得第几页，默认1。 */
   PageNum?: number;
@@ -3601,15 +3641,15 @@ declare interface DescribeLiveStreamOnlineListRequest {
 
 declare interface DescribeLiveStreamOnlineListResponse {
   /** 符合条件的总个数。 */
-  TotalNum: number;
+  TotalNum?: number;
   /** 总页数。 */
-  TotalPage: number;
+  TotalPage?: number;
   /** 分页的页码。 */
-  PageNum: number;
+  PageNum?: number;
   /** 每页显示的条数。 */
-  PageSize: number;
+  PageSize?: number;
   /** 正在推送流的信息列表。 */
-  OnlineInfo: StreamOnlineInfo[];
+  OnlineInfo?: StreamOnlineInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5197,11 +5237,11 @@ declare interface Live {
   (): Versions;
   /** 新增导播台输入源 {@link AddCasterInputInfoRequest} {@link AddCasterInputInfoResponse} */
   AddCasterInputInfo(data: AddCasterInputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<AddCasterInputInfoResponse>;
-  /** 增加导播台布局参数 {@link AddCasterLayoutInfoRequest} {@link AddCasterLayoutInfoResponse} */
+  /** 新增导播台布局 {@link AddCasterLayoutInfoRequest} {@link AddCasterLayoutInfoResponse} */
   AddCasterLayoutInfo(data: AddCasterLayoutInfoRequest, config?: AxiosRequestConfig): AxiosPromise<AddCasterLayoutInfoResponse>;
-  /** 新增图片水印信息 {@link AddCasterMarkPicInfoRequest} {@link AddCasterMarkPicInfoResponse} */
+  /** 新增导播台水印信息 {@link AddCasterMarkPicInfoRequest} {@link AddCasterMarkPicInfoResponse} */
   AddCasterMarkPicInfo(data: AddCasterMarkPicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<AddCasterMarkPicInfoResponse>;
-  /** 增加导播台文本配置 {@link AddCasterMarkWordInfoRequest} {@link AddCasterMarkWordInfoResponse} */
+  /** 新增导播台文本配置 {@link AddCasterMarkWordInfoRequest} {@link AddCasterMarkWordInfoResponse} */
   AddCasterMarkWordInfo(data: AddCasterMarkWordInfoRequest, config?: AxiosRequestConfig): AxiosPromise<AddCasterMarkWordInfoResponse>;
   /** 新增导播台推流信息 {@link AddCasterOutputInfoRequest} {@link AddCasterOutputInfoResponse} */
   AddCasterOutputInfo(data: AddCasterOutputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<AddCasterOutputInfoResponse>;
@@ -5217,15 +5257,15 @@ declare interface Live {
   CancelCommonMixStream(data: CancelCommonMixStreamRequest, config?: AxiosRequestConfig): AxiosPromise<CancelCommonMixStreamResponse>;
   /** 复制导播台 {@link CopyCasterRequest} {@link CopyCasterResponse} */
   CopyCaster(data: CopyCasterRequest, config?: AxiosRequestConfig): AxiosPromise<CopyCasterResponse>;
-  /** 创建新导播台 {@link CreateCasterRequest} {@link CreateCasterResponse} */
+  /** 创建导播台 {@link CreateCasterRequest} {@link CreateCasterResponse} */
   CreateCaster(data?: CreateCasterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCasterResponse>;
   /** 生成导播台推流URL {@link CreateCasterInputPushUrlRequest} {@link CreateCasterInputPushUrlResponse} */
   CreateCasterInputPushUrl(data: CreateCasterInputPushUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCasterInputPushUrlResponse>;
-  /** 创建主监任务 {@link CreateCasterPgmRequest} {@link CreateCasterPgmResponse} */
+  /** 创建导播台主监任务 {@link CreateCasterPgmRequest} {@link CreateCasterPgmResponse} */
   CreateCasterPgm(data: CreateCasterPgmRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCasterPgmResponse>;
-  /** 复制预监展示信息创建主监 {@link CreateCasterPgmFromPvwRequest} {@link CreateCasterPgmFromPvwResponse} */
+  /** 复制导播台预监展示信息创建主监任务 {@link CreateCasterPgmFromPvwRequest} {@link CreateCasterPgmFromPvwResponse} */
   CreateCasterPgmFromPvw(data: CreateCasterPgmFromPvwRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCasterPgmFromPvwResponse>;
-  /** 创建预监任务 {@link CreateCasterPvwRequest} {@link CreateCasterPvwResponse} */
+  /** 创建导播台预监任务 {@link CreateCasterPvwRequest} {@link CreateCasterPvwResponse} */
   CreateCasterPvw(data: CreateCasterPvwRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCasterPvwResponse>;
   /** 创建通用混流 {@link CreateCommonMixStreamRequest} {@link CreateCommonMixStreamResponse} */
   CreateCommonMixStream(data: CreateCommonMixStreamRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCommonMixStreamResponse>;
@@ -5269,9 +5309,9 @@ declare interface Live {
   CreateScreenshotTask(data: CreateScreenshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScreenshotTaskResponse>;
   /** 删除导播台 {@link DeleteCasterRequest} {@link DeleteCasterResponse} */
   DeleteCaster(data: DeleteCasterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCasterResponse>;
-  /** 删除导播台输入源信息 {@link DeleteCasterInputInfoRequest} {@link DeleteCasterInputInfoResponse} */
+  /** 删除导播台输入源 {@link DeleteCasterInputInfoRequest} {@link DeleteCasterInputInfoResponse} */
   DeleteCasterInputInfo(data: DeleteCasterInputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCasterInputInfoResponse>;
-  /** 删除导播台的布局信息 {@link DeleteCasterLayoutInfoRequest} {@link DeleteCasterLayoutInfoResponse} */
+  /** 删除导播台布局 {@link DeleteCasterLayoutInfoRequest} {@link DeleteCasterLayoutInfoResponse} */
   DeleteCasterLayoutInfo(data: DeleteCasterLayoutInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCasterLayoutInfoResponse>;
   /** 删除导播台水印信息 {@link DeleteCasterMarkPicInfoRequest} {@link DeleteCasterMarkPicInfoResponse} */
   DeleteCasterMarkPicInfo(data: DeleteCasterMarkPicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCasterMarkPicInfoResponse>;
@@ -5335,21 +5375,21 @@ declare interface Live {
   DescribeCaster(data: DescribeCasterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterResponse>;
   /** 查询导播台展示信息 {@link DescribeCasterDisplayInfoRequest} {@link DescribeCasterDisplayInfoResponse} */
   DescribeCasterDisplayInfo(data: DescribeCasterDisplayInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterDisplayInfoResponse>;
-  /** 查询导播台输入源信息列表 {@link DescribeCasterInputInfosRequest} {@link DescribeCasterInputInfosResponse} */
+  /** 查询导播台输入源列表 {@link DescribeCasterInputInfosRequest} {@link DescribeCasterInputInfosResponse} */
   DescribeCasterInputInfos(data: DescribeCasterInputInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterInputInfosResponse>;
-  /** 查询导播台的布局列表 {@link DescribeCasterLayoutInfosRequest} {@link DescribeCasterLayoutInfosResponse} */
+  /** 查询导播台布局列表 {@link DescribeCasterLayoutInfosRequest} {@link DescribeCasterLayoutInfosResponse} */
   DescribeCasterLayoutInfos(data: DescribeCasterLayoutInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterLayoutInfosResponse>;
   /** 查询导播台列表 {@link DescribeCasterListRequest} {@link DescribeCasterListResponse} */
   DescribeCasterList(data?: DescribeCasterListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterListResponse>;
-  /** 查询导播台的水印信息列表 {@link DescribeCasterMarkPicInfosRequest} {@link DescribeCasterMarkPicInfosResponse} */
+  /** 查询导播台水印信息列表 {@link DescribeCasterMarkPicInfosRequest} {@link DescribeCasterMarkPicInfosResponse} */
   DescribeCasterMarkPicInfos(data: DescribeCasterMarkPicInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterMarkPicInfosResponse>;
-  /** 查询导播台的文本列表 {@link DescribeCasterMarkWordInfosRequest} {@link DescribeCasterMarkWordInfosResponse} */
+  /** 查询导播台文本配置列表 {@link DescribeCasterMarkWordInfosRequest} {@link DescribeCasterMarkWordInfosResponse} */
   DescribeCasterMarkWordInfos(data: DescribeCasterMarkWordInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterMarkWordInfosResponse>;
   /** 查询导播台的推流信息列表 {@link DescribeCasterOutputInfosRequest} {@link DescribeCasterOutputInfosResponse} */
   DescribeCasterOutputInfos(data: DescribeCasterOutputInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterOutputInfosResponse>;
   /** 获取导播台视频流播放url {@link DescribeCasterPlayUrlRequest} {@link DescribeCasterPlayUrlResponse} */
   DescribeCasterPlayUrl(data: DescribeCasterPlayUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterPlayUrlResponse>;
-  /** 获取所有的转场列表 {@link DescribeCasterTransitionTypesRequest} {@link DescribeCasterTransitionTypesResponse} */
+  /** 获取导播台转场列表 {@link DescribeCasterTransitionTypesRequest} {@link DescribeCasterTransitionTypesResponse} */
   DescribeCasterTransitionTypes(data: DescribeCasterTransitionTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterTransitionTypesResponse>;
   /** 查询当前APPID导播台业务状态 {@link DescribeCasterUserStatusRequest} {@link DescribeCasterUserStatusResponse} */
   DescribeCasterUserStatus(data?: DescribeCasterUserStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterUserStatusResponse>;
@@ -5387,6 +5427,8 @@ declare interface Live {
   DescribeLiveDomainReferer(data: DescribeLiveDomainRefererRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDomainRefererResponse>;
   /** 查询域名列表 {@link DescribeLiveDomainsRequest} {@link DescribeLiveDomainsResponse} */
   DescribeLiveDomains(data?: DescribeLiveDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDomainsResponse>;
+  /** 查询直播增强用量明细 {@link DescribeLiveEnhanceInfoListRequest} {@link DescribeLiveEnhanceInfoListResponse} */
+  DescribeLiveEnhanceInfoList(data: DescribeLiveEnhanceInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveEnhanceInfoListResponse>;
   /** 获取禁推流列表 {@link DescribeLiveForbidStreamListRequest} {@link DescribeLiveForbidStreamListResponse} */
   DescribeLiveForbidStreamList(data?: DescribeLiveForbidStreamListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveForbidStreamListResponse>;
   /** 查询直播套餐包信息 {@link DescribeLivePackageInfoRequest} {@link DescribeLivePackageInfoResponse} */
@@ -5511,11 +5553,11 @@ declare interface Live {
   ForbidLiveDomain(data: ForbidLiveDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidLiveDomainResponse>;
   /** 禁推直播流 {@link ForbidLiveStreamRequest} {@link ForbidLiveStreamResponse} */
   ForbidLiveStream(data: ForbidLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidLiveStreamResponse>;
-  /** 修改导播台信息 {@link ModifyCasterRequest} {@link ModifyCasterResponse} */
+  /** 修改导播台 {@link ModifyCasterRequest} {@link ModifyCasterResponse} */
   ModifyCaster(data: ModifyCasterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCasterResponse>;
-  /** 修改导播台输入源信息 {@link ModifyCasterInputInfoRequest} {@link ModifyCasterInputInfoResponse} */
+  /** 修改导播台输入源 {@link ModifyCasterInputInfoRequest} {@link ModifyCasterInputInfoResponse} */
   ModifyCasterInputInfo(data: ModifyCasterInputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCasterInputInfoResponse>;
-  /** 修改布局参数 {@link ModifyCasterLayoutInfoRequest} {@link ModifyCasterLayoutInfoResponse} */
+  /** 修改导播台布局 {@link ModifyCasterLayoutInfoRequest} {@link ModifyCasterLayoutInfoResponse} */
   ModifyCasterLayoutInfo(data: ModifyCasterLayoutInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCasterLayoutInfoResponse>;
   /** 修改导播台水印信息 {@link ModifyCasterMarkPicInfoRequest} {@link ModifyCasterMarkPicInfoResponse} */
   ModifyCasterMarkPicInfo(data: ModifyCasterMarkPicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCasterMarkPicInfoResponse>;

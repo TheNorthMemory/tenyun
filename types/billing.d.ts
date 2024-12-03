@@ -1359,25 +1359,25 @@ declare interface ConditionBusiness {
 /** 付费模式过滤条件 */
 declare interface ConditionPayMode {
   /** 付费模式 */
-  PayMode: string;
+  PayMode?: string;
   /** 付费模式名称 */
-  PayModeName: string;
+  PayModeName?: string;
 }
 
 /** 项目过滤条件 */
 declare interface ConditionProject {
   /** 项目ID */
-  ProjectId: string;
+  ProjectId?: string;
   /** 项目名称 */
-  ProjectName: string;
+  ProjectName?: string;
 }
 
 /** 地域过滤条件 */
 declare interface ConditionRegion {
   /** 地域ID */
-  RegionId: string;
+  RegionId?: string;
   /** 地域名称 */
-  RegionName: string;
+  RegionName?: string;
 }
 
 /** 账单筛选条件对象 */
@@ -1587,7 +1587,7 @@ declare interface ConsumptionResourceSummaryDataItem {
 /** 消耗汇总详情 */
 declare interface ConsumptionSummaryTotal {
   /** 折后总价 */
-  RealTotalCost: string;
+  RealTotalCost?: string;
 }
 
 /** 消耗费用趋势 */
@@ -1783,9 +1783,9 @@ declare interface DescribeDosageDetail {
 /** 由时间和值组成的数据结构 */
 declare interface DetailPoint {
   /** 时间 */
-  Time: string;
+  Time?: string;
   /** 值 */
-  Value: string;
+  Value?: string;
 }
 
 /** 由域名和使用明细组成的数据结构 */

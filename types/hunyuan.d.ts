@@ -158,6 +158,16 @@ declare interface Multimedia {
   Ext?: SongExt | null;
 }
 
+/** 翻译对话参考示例 */
+declare interface Reference {
+  /** 翻译文本类型，枚举"sentence"表示句子, "term"表示术语 */
+  Type?: string;
+  /** 原文 */
+  Text?: string;
+  /** 译文 */
+  Translation?: string;
+}
+
 /** 相关组织及人物 */
 declare interface RelevantEntity {
   /** 相关组织及人物名称 */
@@ -334,6 +344,34 @@ declare interface ToolFunction {
   Description?: string;
 }
 
+/** 翻译接口返回的回复，支持多个 */
+declare interface TranslationChoice {
+  /** 结束标志位，可能为 stop、 sensitive。stop 表示输出正常结束。sensitive 只在开启流式输出审核时会出现，表示安全审核未通过。 */
+  FinishReason?: string;
+  /** 索引值，流式调用时使用该字段。 */
+  Index?: number;
+  /** 增量返回值，流式调用时使用该字段。 */
+  Delta?: TranslationDelta;
+  /** 返回值，非流式调用时使用该字段。 */
+  Message?: TranslationMessage;
+}
+
+/** 翻译接口返回的内容（流式返回） */
+declare interface TranslationDelta {
+  /** 角色名称。 */
+  Role?: string;
+  /** 内容详情。 */
+  Content?: string;
+}
+
+/** 翻译接口会话内容 */
+declare interface TranslationMessage {
+  /** 角色，可选值包括 system、user、assistant、 tool。 */
+  Role?: string;
+  /** 文本内容 */
+  Content?: string;
+}
+
 /** Token 数量 */
 declare interface Usage {
   /** 输入 Token 数量。 */
@@ -387,6 +425,8 @@ declare interface ChatCompletionsRequest {
   EnableDeepSearch?: boolean;
   /** 说明： 1. 确保模型的输出是可复现的。 2. 取值区间为非0正整数，最大值10000。 3. 非必要不建议使用，不合理的取值会影响效果。 */
   Seed?: number;
+  /** 强制搜索增强开关。说明：1. 未传值时默认关闭。2. 开启后，将强制走AI搜索，当AI搜索结果为空时，由大模型回复兜底话术。 */
+  ForceSearchEnhancement?: boolean;
 }
 
 declare interface ChatCompletionsResponse {
@@ -408,6 +448,40 @@ declare interface ChatCompletionsResponse {
   SearchInfo?: SearchInfo;
   /** 多媒体信息。说明：1. 可以用多媒体信息替换回复内容里的占位符，得到完整的消息。2. 可能会出现回复内容里存在占位符，但是因为审核等原因没有返回多媒体信息。 */
   Replaces?: Replace[];
+  /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
+  RequestId?: string;
+}
+
+declare interface ChatTranslationsRequest {
+  /** 模型名称，可选值包括 hunyuan-translation、hunyuan-translation-lite。各模型介绍请阅读 [产品概述](https://cloud.tencent.com/document/product/1729/104753) 中的说明。注意：不同的模型计费不同，请根据 [购买指南](https://cloud.tencent.com/document/product/1729/97731) 按需调用。 */
+  Model: string;
+  /** 流式调用开关。说明：1. 未传值时默认为非流式调用（false）。2. 流式调用时以 SSE 协议增量返回结果（返回值取 Choices[n].Delta 中的值，需要拼接增量数据才能获得完整结果）。3. 非流式调用时：调用方式与普通 HTTP 请求无异。接口响应耗时较长，**如需更低时延建议设置为 true**。只返回一次最终结果（返回值取 Choices[n].Message 中的值）。注意：通过 SDK 调用时，流式和非流式调用需用**不同的方式**获取返回值，具体参考 SDK 中的注释或示例（在各语言 SDK 代码仓库的 examples/hunyuan/v20230901/ 目录中）。 */
+  Stream?: boolean;
+  /** 待翻译的文本 */
+  Text?: string;
+  /** 源语言。支持语言列表: 1. 简体中文：zh，2. 粤语：yue，3. 英语：en，4. 法语：fr，5. 葡萄牙语：pt，6. 西班牙语：es，7. 日语：ja，8. 土耳其语：tr，9. 俄语：ru，10. 阿拉伯语：ar，11. 韩语：ko，12. 泰语：th，13. 意大利语：it，14. 德语：de，15. 越南语：vi，16. 马来语：ms，17. 印尼语：id */
+  Source?: string;
+  /** 目标语言。支持语言列表: 1. 简体中文：zh，2. 粤语：yue，3. 英语：en，4. 法语：fr，5. 葡萄牙语：pt，6. 西班牙语：es，7. 日语：ja，8. 土耳其语：tr，9. 俄语：ru，10. 阿拉伯语：ar，11. 韩语：ko，12. 泰语：th，13. 意大利语：it，14. 德语：de，15. 越南语：vi，16. 马来语：ms，17. 印尼语：id */
+  Target?: string;
+  /** 待翻译文本所属领域，例如游戏剧情等 */
+  Field?: string;
+  /** 参考示例，最多10个 */
+  References?: Reference[];
+}
+
+declare interface ChatTranslationsResponse {
+  /** 本次请求的 RequestId。 */
+  Id?: string;
+  /** 免责声明。 */
+  Note?: string;
+  /** Unix 时间戳，单位为秒。 */
+  Created?: number;
+  /** Token 统计信息。按照总 Token 数量计费。 */
+  Usage?: Usage;
+  /** 回复内容。 */
+  Choices?: TranslationChoice[];
+  /** 错误信息。如果流式返回中服务处理异常，返回该错误信息。 */
+  ErrorMsg?: ErrorMsg;
   /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
   RequestId?: string;
 }
@@ -719,6 +793,8 @@ declare interface SubmitHunyuanImageJobRequest {
   Num?: number;
   /** 随机种子，默认随机。不传：随机种子生成。正数：固定种子生成。 */
   Seed?: number;
+  /** 超分选项，默认不做超分，可选开启。 x2：2倍超分 x4：4倍超分 */
+  Clarity?: string;
   /** prompt 扩写开关。1为开启，0为关闭，不传默认开启。开启扩写后，将自动扩写原始输入的 prompt 并使用扩写后的 prompt 生成图片，返回生成图片结果时将一并返回扩写后的 prompt 文本。如果关闭扩写，将直接使用原始输入的 prompt 生成图片。建议开启，在多数场景下可提升生成图片效果、丰富生成图片细节。 */
   Revise?: number;
   /** 为生成结果图添加显式水印标识的开关，默认为1。 1：添加。 0：不添加。 其他数值：默认按1处理。 建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。 */
@@ -765,6 +841,8 @@ declare interface Hunyuan {
   ActivateService(data?: ActivateServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateServiceResponse>;
   /** hunyuan {@link ChatCompletionsRequest} {@link ChatCompletionsResponse} */
   ChatCompletions(data: ChatCompletionsRequest, config?: AxiosRequestConfig): AxiosPromise<ChatCompletionsResponse>;
+  /** hunyuan-translations {@link ChatTranslationsRequest} {@link ChatTranslationsResponse} */
+  ChatTranslations(data: ChatTranslationsRequest, config?: AxiosRequestConfig): AxiosPromise<ChatTranslationsResponse>;
   /** 创建会话 {@link CreateThreadRequest} {@link CreateThreadResponse} */
   CreateThread(data?: CreateThreadRequest, config?: AxiosRequestConfig): AxiosPromise<CreateThreadResponse>;
   /** 文件删除 {@link FilesDeletionsRequest} {@link FilesDeletionsResponse} */

@@ -119,7 +119,7 @@ declare interface TextToVoiceRequest {
   EmotionCategory?: string;
   /** 控制合成音频情感程度，取值范围为[50,200],默认为100；只有EmotionCategory不为空时生效； */
   EmotionIntensity?: number;
-  /** 一句话版声音复刻音色ID，使用一句话版声音复刻音色时需填写。 */
+  /** 一句话版声音复刻音色ID，使用一句话版声音复刻音色时需填写。【已废弃】 */
   FastVoiceType?: string;
 }
 

@@ -1014,6 +1014,10 @@ declare interface StepTip {
 declare interface SubsErr {
   /** 报错信息 */
   Message?: string;
+  /** 报错原因 */
+  Reason?: string;
+  /** 建议的修复方案 */
+  Solution?: string;
 }
 
 /** 订阅校验任务的各步骤信息。 */
