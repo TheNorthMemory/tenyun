@@ -88,6 +88,28 @@ declare interface AudioParams {
   BitRate: number;
 }
 
+/** 审核存储参数 */
+declare interface AuditStorageParams {
+  /** 腾讯云对象存储COS以及第三方云存储的账号信息 */
+  CloudAuditStorage?: CloudAuditStorage;
+}
+
+/** 腾讯云对象存储COS以及第三方云存储的账号信息 */
+declare interface CloudAuditStorage {
+  /** 腾讯云对象存储COS以及第三方云存储账号信息0：腾讯云对象存储 COS1：AWS【注意】目前第三方云存储仅支持AWS，更多第三方云存储陆续支持中示例值：0 */
+  Vendor: number;
+  /** 腾讯云对象存储的[地域信息]（https://cloud.tencent.com/document/product/436/6224 */
+  Region: string;
+  /** 云存储桶名称。 */
+  Bucket: string;
+  /** 云存储的access_key账号信息。若存储至腾讯云对象存储COS，请前往https://console.cloud.tencent.com/cam/capi 查看或创建，对应链接中密钥字段的SecretId值。示例值：test-accesskey */
+  AccessKey: string;
+  /** 云存储的secret_key账号信息。若存储至腾讯云对象存储COS，请前往https://console.cloud.tencent.com/cam/capi 查看或创建，对应链接中密钥字段的SecretKey值。示例值：test-secretkey */
+  SecretKey: string;
+  /** 云存储bucket 的指定位置，由字符串数组组成。合法的字符串范围az,AZ,0~9,'_'和'-'，举个例子，录制文件xxx.m3u8在 ["prefix1", "prefix2"]作用下，会变成prefix1/prefix2/TaskId/xxx.m3u8。示例值：["prefix1", "prefix2"] */
+  FileNamePrefix?: string[];
+}
+
 /** 腾讯云对象存储COS以及第三方云存储的账号信息 */
 declare interface CloudStorage {
   /** 腾讯云对象存储COS以及第三方云存储账号信息0：腾讯云对象存储 COS1：AWS【注意】目前第三方云存储仅支持AWS，更多第三方云存储陆续支持中 */
@@ -1073,6 +1095,8 @@ declare interface CreateBasicModerationRequest {
   UserId: string;
   /** TRTC房间号的类型。【*注意】必须和TRTC的房间所对应的RoomId类型相同:0: 字符串类型的RoomId1: 32位整型的RoomId（默认） */
   RoomIdType?: number;
+  /** 音频文件上传到云存储的参数 */
+  AuditStorageParams?: AuditStorageParams;
 }
 
 declare interface CreateBasicModerationResponse {

@@ -144,6 +144,30 @@ declare interface Filter {
   Values: string[];
 }
 
+/** 机型名称与GPU相关的参数，包括驱动版本，CUDA版本，cuDNN版本，是否开启MIG以及是否开启Fabric等相关配置信息 */
+declare interface GPUConfig {
+  /** 机型名称 */
+  InstanceType: string | null;
+  /** GPU相关的参数，包括驱动版本，CUDA版本，cuDNN版本，是否开启MIG以及是否开启Fabric等 */
+  GPUParams: GPUParams | null;
+}
+
+/** GPU相关的参数，包括驱动版本，CUDA版本，cuDNN版本，是否开启MIG以及是否开启Fabric */
+declare interface GPUParams {
+  /** GPU驱动版本 */
+  Driver?: string | null;
+  /** CUDA版本 */
+  CUDA?: string | null;
+  /** CUDNN版本 */
+  CUDNN?: string | null;
+  /** 是否启用MIG特性 */
+  MIGEnable?: boolean | null;
+  /** 是否启用Fabric特性 */
+  Fabric?: boolean | null;
+  /** 自定义驱动下载地址 */
+  CustomGPUDriver?: string | null;
+}
+
 /** 健康检测规则 */
 declare interface HealthCheckPolicy {
   /** 健康检测策略名称 */
@@ -630,6 +654,8 @@ declare interface UpdateNativeNodePoolParam {
   DataDisks?: DataDisk[];
   /** ssh公钥id数组 */
   KeyIds?: string[];
+  /** 节点池 GPU 配置 */
+  GPUConfigs?: GPUConfig[];
 }
 
 declare interface CreateHealthCheckPolicyRequest {

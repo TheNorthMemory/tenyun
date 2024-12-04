@@ -68,31 +68,31 @@ declare interface AppModel {
   UsageType?: string | null;
 }
 
-/** 属性标签详情信息 */
+/** 标签详情信息 */
 declare interface AttrLabel {
-  /** 属性标签来源 */
+  /** 标签来源 */
   Source?: number | null;
-  /** 属性ID */
-  AttrBizId?: string | null;
-  /** 属性标识 */
-  AttrKey?: string | null;
-  /** 属性名称 */
-  AttrName?: string | null;
   /** 标签ID */
+  AttrBizId?: string | null;
+  /** 标签标识 */
+  AttrKey?: string | null;
+  /** 标签名称 */
+  AttrName?: string | null;
+  /** 标签值 */
   Labels?: Label[] | null;
 }
 
 /** 标签详情 */
 declare interface AttrLabelDetail {
-  /** 属性ID */
+  /** 标签ID */
   AttrBizId?: string | null;
-  /** 属性标识 */
+  /** 标签标识 */
   AttrKey?: string | null;
-  /** 属性名称 */
-  AttrName?: string | null;
   /** 标签名称 */
+  AttrName?: string | null;
+  /** 标签值名称 */
   LabelNames?: string[] | null;
-  /** 属性标签是否在更新中 */
+  /** 标签是否在更新中 */
   IsUpdating?: boolean | null;
   /** 状态 */
   Status?: number | null;
@@ -100,13 +100,13 @@ declare interface AttrLabelDetail {
   StatusDesc?: string | null;
 }
 
-/** 属性标签引用信息 */
+/** 标签引用信息 */
 declare interface AttrLabelRefer {
-  /** 属性标签来源，1：属性标签 */
+  /** 标签来源，1：标签 */
   Source?: number;
-  /** 属性ID */
-  AttributeBizId?: string;
   /** 标签ID */
+  AttributeBizId?: string;
+  /** 标签值ID */
   LabelBizIds?: string[];
 }
 
@@ -116,13 +116,13 @@ declare interface AttributeFilters {
   Query?: string;
 }
 
-/** 属性标签 */
+/** 标签值 */
 declare interface AttributeLabel {
-  /** 标签ID */
+  /** 标准词ID */
   LabelBizId?: string | null;
-  /** 标签名称 */
+  /** 标准词名称 */
   LabelName?: string | null;
-  /** 相似标签名称 */
+  /** 同义词名称 */
   SimilarLabels?: string[] | null;
 }
 

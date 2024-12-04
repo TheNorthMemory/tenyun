@@ -1903,7 +1903,7 @@ declare interface DescribePolicyConfigResponse {
 }
 
 declare interface DescribePolicyRequest {
-  /** 策略Id。 */
+  /** 策略Id。可以调用[ListPolicies](https://cloud.tencent.com/document/product/850/105311)获取 */
   PolicyId: number;
   /** 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略 */
   PolicyType?: string;
@@ -2343,9 +2343,9 @@ declare interface ListNonCompliantResourceRequest {
 
 declare interface ListNonCompliantResourceResponse {
   /** 资源及标签合规信息。 */
-  Items?: ResourceTagMapping[] | null;
+  Items?: ResourceTagMapping[];
   /** 获取的下一页的Token值。 */
-  PaginationToken?: string | null;
+  PaginationToken?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2361,9 +2361,9 @@ declare interface ListOrgServiceAssignMemberRequest {
 
 declare interface ListOrgServiceAssignMemberResponse {
   /** 总数。 */
-  Total?: number | null;
+  Total?: number;
   /** 委派管理员列表。 */
-  Items?: OrganizationServiceAssignMember[] | null;
+  Items?: OrganizationServiceAssignMember[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2383,9 +2383,9 @@ declare interface ListOrganizationIdentityRequest {
 
 declare interface ListOrganizationIdentityResponse {
   /** 总数。 */
-  Total?: number | null;
+  Total?: number;
   /** 条目详情。 */
-  Items?: OrgIdentity[] | null;
+  Items?: OrgIdentity[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2401,9 +2401,9 @@ declare interface ListOrganizationServiceRequest {
 
 declare interface ListOrganizationServiceResponse {
   /** 总数。 */
-  Total?: number | null;
+  Total?: number;
   /** 集团服务列表。 */
-  Items?: OrganizationServiceAssign[] | null;
+  Items?: OrganizationServiceAssign[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2445,7 +2445,7 @@ declare interface ListPoliciesForTargetResponse {
   /** 总数。 */
   TotalNum?: number;
   /** 目标关联的策略列表。 */
-  List?: ListPoliciesForTarget[] | null;
+  List?: ListPoliciesForTarget[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2467,7 +2467,7 @@ declare interface ListPoliciesResponse {
   /** 策略总数 */
   TotalNum?: number;
   /** 策略列表数据 */
-  List?: ListPolicyNode[] | null;
+  List?: ListPolicyNode[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2607,7 +2607,7 @@ declare interface ListTargetsForPolicyResponse {
   /** 总数。 */
   TotalNum?: number;
   /** 指定SCP策略关联目标列表。 */
-  List?: ListTargetsForPolicyNode[] | null;
+  List?: ListTargetsForPolicyNode[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

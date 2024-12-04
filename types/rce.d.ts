@@ -30,7 +30,7 @@ declare interface DataAuthorizationInfo {
   AuthorizationTerm?: number;
   /** 客户获得用户授权所依赖的协议地址。示例值：https://www.*****.com/* */
   PrivacyPolicyLink?: string;
-  /** 是否是用户个人敏感数据。固定填：1。示例值：1 */
+  /** 是否是用户个人敏感数据（不推荐使用）。固定填：1。示例值：1 */
   IsPersonalData?: number;
 }
 

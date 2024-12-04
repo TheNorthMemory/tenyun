@@ -209,6 +209,8 @@ declare interface DescribeInstancesRequest {
   EngineNames?: string[];
   /** 按照版本筛选实例。 */
   EngineVersions?: string[];
+  /** 按照api版本筛选实例 */
+  ApiVersions?: string[];
   /** 按照创建时间筛选实例。 */
   CreateAt?: string;
   /** 按照可用区筛选实例。 */

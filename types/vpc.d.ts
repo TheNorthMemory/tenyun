@@ -2582,6 +2582,22 @@ declare interface TrafficPackage {
   DeductType?: string;
 }
 
+/** 流量调度规则 */
+declare interface TrafficQosPolicySet {
+  /** CCN实例ID。形如：ccn-f49l6u0z。 */
+  CcnId?: string | null;
+  /** qos id。 */
+  QosId?: number | null;
+  /** 描述。 */
+  QosPolicyDescription?: string | null;
+  /** 名称。 */
+  QosPolicyName?: string | null;
+  /** 带宽。 */
+  Bandwidth?: number | null;
+  /** 流量调度策略ID。 */
+  QosPolicyId?: string | null;
+}
+
 /** 私网网关转发规则匹配ACL */
 declare interface TranslationAclRule {
   /** ACL协议类型，可选值:"ALL","TCP","UDP" */
@@ -6614,6 +6630,22 @@ declare interface DescribeTrafficPackagesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTrafficQosPolicyRequest {
+  /** CCN实例ID。形如：ccn-f49l6u0z。 */
+  CcnId: string;
+  /** 本端地域。 */
+  LocalRegion: string;
+  /** 远端地域。 */
+  RemoteRegion: string;
+}
+
+declare interface DescribeTrafficQosPolicyResponse {
+  /** 流量调度规则。 */
+  TrafficQosPolicySet?: TrafficQosPolicySet[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUsedIpAddressRequest {
   /** VPC实例ID。 */
   VpcId: string;
@@ -9319,6 +9351,8 @@ declare interface Vpc {
   DescribeTenantCcns(data?: DescribeTenantCcnsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTenantCcnsResponse>;
   /** 查询共享流量包 {@link DescribeTrafficPackagesRequest} {@link DescribeTrafficPackagesResponse} */
   DescribeTrafficPackages(data?: DescribeTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficPackagesResponse>;
+  /** 查询流量调度规则 {@link DescribeTrafficQosPolicyRequest} {@link DescribeTrafficQosPolicyResponse} */
+  DescribeTrafficQosPolicy(data: DescribeTrafficQosPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficQosPolicyResponse>;
   /** 查看子网或者vpc内IP使用情况 {@link DescribeUsedIpAddressRequest} {@link DescribeUsedIpAddressResponse} */
   DescribeUsedIpAddress(data: DescribeUsedIpAddressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsedIpAddressResponse>;
   /** 查询终端节点列表 {@link DescribeVpcEndPointRequest} {@link DescribeVpcEndPointResponse} */

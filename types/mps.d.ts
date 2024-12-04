@@ -3250,8 +3250,10 @@ declare interface LiveStreamTagRecognitionResult {
 
 /** 任务处理的事件通知配置。 */
 declare interface LiveStreamTaskNotifyConfig {
-  /** 通知类型，默认CMQ，指定URL时HTTP回调推送到 NotifyUrl 指定的地址。 注：不填或为空时默认 CMQ，如需采用其他类型需填写对应类型值。 */
+  /** 通知类型："CMQ"：回调消息写入cmq队列； "URL"： 指定URL时HTTP回调推送到 NotifyUrl 指定的地址，回调协议http+json，包体内容同[解析直播事件通知接口](https://cloud.tencent.com/document/product/862/39229) 的输出参数 注：不填或为空时默认 CMQ，如需采用其他类型需填写对应类型值。 */
   NotifyType?: string;
+  /** HTTP回调地址，NotifyType为URL时必填。 */
+  NotifyUrl?: string;
   /** CMQ 的模型，有 Queue 和 Topic 两种，目前仅支持 Queue。 */
   CmqModel?: string;
   /** CMQ 的园区，如 sh，bj 等。 */
@@ -3260,8 +3262,6 @@ declare interface LiveStreamTaskNotifyConfig {
   QueueName?: string;
   /** 当模型为 Topic 时有效，表示接收事件通知的 CMQ 的主题名。 */
   TopicName?: string;
-  /** HTTP回调地址，NotifyType为URL时必填。 */
-  NotifyUrl?: string;
   /** 用于生成回调签名的 Key。 */
   NotifyKey?: string | null;
 }

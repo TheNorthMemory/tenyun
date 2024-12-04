@@ -33,9 +33,11 @@ declare interface AsrResult {
 /** 音频文件分析结果数据 */
 declare interface AudioData {
   /** 音频识别文本结果 */
-  AudioInfoSet: AudioInfo[] | null;
+  AudioInfoSet?: AudioInfo[] | null;
   /** 音频识别标签数据 */
-  TextTagSet: MultiLevelTag;
+  TextTagSet?: MultiLevelTag;
+  /** 音频下载地址 */
+  WebMediaURL?: string | null;
 }
 
 /** 音频识别结果信息 */
@@ -53,17 +55,21 @@ declare interface AudioInfo {
 /** 音频文件元信息 */
 declare interface AudioMetadata {
   /** 媒资音频文件大小，单位为Byte */
-  FileSize: number | null;
+  FileSize?: number | null;
   /** 媒资音频文件MD5 */
-  MD5: string | null;
+  MD5?: string | null;
   /** 媒资音频时长，单位为秒 */
-  Duration: number | null;
+  Duration?: number | null;
   /** 媒资音频采样率，单位为khz */
-  SampleRate: number | null;
+  SampleRate?: number | null;
   /** 媒资音频码率，单位为kbps */
-  BitRate: number | null;
+  BitRate?: number | null;
   /** 媒资音频文件格式 */
-  Format: string | null;
+  Format?: string | null;
+  /** Audio Bit Depth: 16/24 bit .etc */
+  BitDepth?: number | null;
+  /** 封装格式短后缀 */
+  ShortFormat?: string | null;
 }
 
 /** 已分类的人物信息 */
@@ -77,11 +83,11 @@ declare interface ClassifiedPersonInfo {
 /** 自定义分类信息 */
 declare interface CustomCategory {
   /** 自定义分类ID */
-  CategoryId: string;
+  CategoryId?: string;
   /** 一级自定义类型 */
-  L1Category: string;
+  L1Category?: string;
   /** 二级自定义类型 */
-  L2Category: string;
+  L2Category?: string;
 }
 
 /** 自定义人物批量查询过滤条件 */
@@ -99,19 +105,19 @@ declare interface CustomPersonFilter {
 /** 自定义人物信息 */
 declare interface CustomPersonInfo {
   /** 自定义人物Id */
-  PersonId: string;
+  PersonId?: string;
   /** 自定义人物姓名 */
-  Name: string;
+  Name?: string;
   /** 自定义人物简介信息 */
-  BasicInfo: string;
+  BasicInfo?: string;
   /** 一级自定义人物类型 */
-  L1Category: string;
+  L1Category?: string;
   /** 二级自定义人物类型 */
-  L2Category: string;
+  L2Category?: string;
   /** 自定义人物图片信息 */
-  ImageInfoSet: PersonImageInfo[];
+  ImageInfoSet?: PersonImageInfo[];
   /** 自定义人物创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
 }
 
 /** 任务结果数据 */
@@ -201,45 +207,45 @@ declare interface L3Tag {
 /** 媒资过滤条件 */
 declare interface MediaFilter {
   /** 媒资名称过滤条件 */
-  MediaNameSet?: string[] | null;
+  MediaNameSet?: string[];
   /** 媒资状态数组，媒资状态可选值参见MediaInfo */
-  StatusSet?: number[] | null;
+  StatusSet?: number[];
   /** 媒资ID数组 */
-  MediaIdSet?: string[] | null;
+  MediaIdSet?: string[];
   /** 媒资自定义标签数组 */
-  LabelSet?: string[] | null;
+  LabelSet?: string[];
   /** 媒资文件类型，定义参见[MediaPreknownInfo.MediaType](https://cloud.tencent.com/document/product/1509/65063) */
-  MediaType?: number | null;
+  MediaType?: number;
 }
 
 /** 媒资信息结构体媒资状态定义如下：| 状态名 | 状态值 | 状态描述 | |---|---|---|| MEDIA_STATUS_INVALID | 0 | 非法状态|| MEDIA_STATUS_WAITING| 1 | 等待中 || MEDIA_STATUS_DOWNLOADING | 2 | 下载中 || MEDIA_STATUS_DOWNLOADED | 3 | 下载完成 || MEDIA_STATUS_DOWNLOAD_FAILED | 4 | 下载失败(已废弃) || MEDIA_STATUS_TRANSCODING | 5 | 转码中 || MEDIA_STATUS_TRANSCODED | 6 | 转码完成 | | MEDIA_STATUS_TRANCODE_FAILED | 7 | 转码失败(已废弃) || MEDIA_STATUS_SUCCESS | 8 | 媒资文件状态就绪，可发起任务 || MEDIA_STATUS_EXPIRED | 9 | 媒资文件已过期 || MEDIA_STATUS_FAILED | 10 | 媒资导入失败 | */
 declare interface MediaInfo {
   /** 媒资ID */
-  MediaId: string;
+  MediaId?: string;
   /** 媒资名称 */
-  Name: string | null;
+  Name?: string | null;
   /** 媒资下载地址 */
-  DownLoadURL: string | null;
+  DownLoadURL?: string | null;
   /** 媒资状态，取值参看上方表格 */
-  Status: number | null;
+  Status?: number | null;
   /** 若状态为失败，表示失败原因 */
-  FailedReason: string | null;
+  FailedReason?: string | null;
   /** 媒资视频元信息，仅在MediaType=VIDEO时有效 */
-  Metadata: MediaMetadata | null;
+  Metadata?: MediaMetadata | null;
   /** 导入视频进度，取值范围为[0,100] */
-  Progress: number | null;
+  Progress?: number | null;
   /** 媒资自定义标签 */
-  Label: string | null;
+  Label?: string | null;
   /** 媒资导入完成后的回调地址 */
-  CallbackURL: string | null;
+  CallbackURL?: string | null;
   /** 媒资文件类型，具体参看[MediaPreknownInfo](https://cloud.tencent.com/document/product/1509/65063) */
-  MediaType: number | null;
+  MediaType?: number | null;
   /** 媒资音频元信息，仅在MediaType=Audio时有效 */
-  AudioMetadata: AudioMetadata | null;
+  AudioMetadata?: AudioMetadata | null;
   /** 媒资图片文件元信息，仅在MediaType=Image时有效 */
-  ImageMetadata: ImageMetadata | null;
+  ImageMetadata?: ImageMetadata | null;
   /** 媒资文本文件元信息，仅在MediaType=Text时有效 */
-  TextMetadata: TextMetadata | null;
+  TextMetadata?: TextMetadata | null;
 }
 
 /** 媒资文件视频元信息，包括分辨率，帧率，码率等 */
@@ -307,15 +313,17 @@ declare interface PersonImageInfo {
 /** 人物信息 */
 declare interface PersonInfo {
   /** 公众人物姓名 */
-  Name: string;
+  Name?: string;
   /** 公众人物职务 */
-  Job: string;
+  Job?: string;
   /** 首次出现模态，可选值为[1,3]，详细参见AppearIndex定义 */
-  FirstAppear: number;
+  FirstAppear?: number;
   /** 人物出现信息 */
-  AppearInfo: AppearInfo;
+  AppearInfo?: AppearInfo;
   /** 人脸在图片中的位置，仅在图片标签任务有效 */
-  AppearRect: Rectf | null;
+  AppearRect?: Rectf | null;
+  /** 人物的personId */
+  PersonId?: string | null;
 }
 
 /** 矩形内容框 */
@@ -415,39 +423,39 @@ declare interface TaskFilter {
 /** 任务信息TaskStatus定义如下:| TaskStatus名称 | TaskStatus取值 | TaskStatus描述 ||---|---|---|| TASK_STATUS_INVALID | 0 | 非法的任务状态 || TASK_STATUS_WAITING | 1 | 排队中 || TASK_STATUS_ANALYSING | 2 | 任务分析中 || TASK_STATUS_ANALYSED | 3 | 任务分析完成 || TASK_STATUS_SNAPSHOT_CREATING | 4 | 任务结果快照生成中 || TASK_STATUS_SNAPSHOT_CREATED | 5 | 任务结果快照生成完成 || TASK_STATUS_RESULT_UPLOADING | 6 | 任务结果快照上传中 || TASK_STATUS_RESULT_UPLOADED | 7 | 任务结果快照上传完成 || TASK_STATUS_SUCCESS | 8 | 任务执行完成 || TASK_STATUS_FAILED | 9 | 任务执行失败 | */
 declare interface TaskInfo {
   /** 任务ID */
-  TaskId: string;
+  TaskId?: string;
   /** 描述任务名称，指定后可根据名称筛选 */
-  TaskName: string | null;
+  TaskName?: string | null;
   /** 媒资文件ID */
-  MediaId: string;
+  MediaId?: string;
   /** 任务执行状态 */
-  TaskStatus: number;
+  TaskStatus?: number;
   /** 任务进度，范围为[0，100] */
-  TaskProgress: number | null;
+  TaskProgress?: number | null;
   /** 任务执行时间 */
-  TaskTimeCost: number | null;
+  TaskTimeCost?: number | null;
   /** 任务创建时间 */
-  TaskCreateTime: string;
+  TaskCreateTime?: string;
   /** 任务开始执行时间 */
-  TaskStartTime: string | null;
+  TaskStartTime?: string | null;
   /** 任务失败原因 */
-  FailedReason: string | null;
+  FailedReason?: string | null;
   /** 任务执行时指定的先验知识 */
-  MediaPreknownInfo: MediaPreknownInfo;
+  MediaPreknownInfo?: MediaPreknownInfo;
   /** 媒资文件名称 */
-  MediaName: string | null;
+  MediaName?: string | null;
   /** 媒资自定义标签 */
-  Label: string | null;
+  Label?: string | null;
   /** 任务分析完成后的后调地址 */
-  CallbackURL: string | null;
+  CallbackURL?: string | null;
   /** 任务对应的媒资文件元信息，仅在MediaType为Audio时有效 */
-  AudioMetadata: AudioMetadata | null;
+  AudioMetadata?: AudioMetadata | null;
   /** 任务对应的媒资文件元信息，仅在MediaType为Audio时有效 */
-  ImageMetadata: ImageMetadata | null;
+  ImageMetadata?: ImageMetadata | null;
   /** 任务对应的媒资文件元信息，仅在MediaType为Text时有效 */
-  TextMetadata: TextMetadata | null;
+  TextMetadata?: TextMetadata | null;
   /** 任务对应的媒资文件元信息，仅在MediaType为Video时有效 */
-  Metadata: MediaMetadata | null;
+  Metadata?: MediaMetadata | null;
 }
 
 /** 关键词在文本中的定位信息Position为关键词在文本中的偏移量，从0开始。例如，给定文本结果"欢迎收看新闻三十分”，以及关键词"新闻三十分"，那么StartPosition的值为4，EndPosition的值为9 */
@@ -463,11 +471,13 @@ declare interface TextAppearInfo {
 /** 文本文件标签识别结果 */
 declare interface TextData {
   /** 文本内容信息 */
-  Content: string | null;
+  Content?: string | null;
   /** 文本概要信息 */
-  Summary: string | null;
+  Summary?: string | null;
   /** 文本标签信息 */
-  TextTagSet: MultiLevelTag | null;
+  TextTagSet?: MultiLevelTag | null;
+  /** 文档下载地址 */
+  WebMediaURL?: string | null;
 }
 
 /** 可视文本识别结果信息(OCR) */
@@ -485,13 +495,15 @@ declare interface TextInfo {
 /** 文本文件元信息 */
 declare interface TextMetadata {
   /** 媒资文本文件大小，单位为字节 */
-  FileSize: number | null;
+  FileSize?: number | null;
   /** 媒资文本文件MD5 */
-  MD5: string | null;
+  MD5?: string | null;
   /** 媒资文本文件字符数 */
-  Length: number | null;
+  Length?: number | null;
   /** 媒资文本文件格式 */
-  Format: string | null;
+  Format?: string | null;
+  /** 封装格式短后缀 */
+  ShortFormat?: string | null;
 }
 
 /** 单个文本摘要分割结果和所有镜头的匹配度信息 */
@@ -503,19 +515,21 @@ declare interface TextSegMatchShotScore {
 /** 未知人物信息 */
 declare interface UnknownPerson {
   /** 视觉出现信息 */
-  VideoAppearSet: VideoAppearInfo[] | null;
+  VideoAppearSet?: VideoAppearInfo[] | null;
   /** 未知人物是否可以入库(只有当未知人物人脸小图质量分符合要求时才可入库) */
-  PutLibraryAllowed: boolean | null;
+  PutLibraryAllowed?: boolean | null;
+  /** 内容审核结果: 0-正常;1-涉政;其他待确定 */
+  AuditClass?: number | null;
 }
 
 /** 关键词在视觉结果中的定位信息 */
 declare interface VideoAppearInfo {
   /** 视觉信息起始时间戳，从0开始 */
-  StartTimeStamp: number;
+  StartTimeStamp?: number;
   /** 视觉信息终止时间戳，从0开始关键词在视觉信息中的区间为[StartTimeStamp, EndTimeStamp) */
-  EndTimeStamp: number;
+  EndTimeStamp?: number;
   /** 关键词在视觉信息中的封面图片 */
-  ImageURL: string;
+  ImageURL?: string;
 }
 
 /** 视频横转竖的控制参数 */
@@ -535,9 +549,9 @@ declare interface AddCustomPersonImageRequest {
 
 declare interface AddCustomPersonImageResponse {
   /** 自定义人物Id */
-  PersonId: string;
+  PersonId?: string;
   /** 自定义人脸图片信息 */
-  ImageInfo: PersonImageInfo;
+  ImageInfo?: PersonImageInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -551,7 +565,7 @@ declare interface CreateCustomCategoryRequest {
 
 declare interface CreateCustomCategoryResponse {
   /** 自定义分类信息ID */
-  CategoryId: string;
+  CategoryId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -581,9 +595,9 @@ declare interface CreateCustomPersonRequest {
 
 declare interface CreateCustomPersonResponse {
   /** 自定义人物Id */
-  PersonId: string;
+  PersonId?: string;
   /** 自定义人脸信息 */
-  ImageInfo: PersonImageInfo;
+  ImageInfo?: PersonImageInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -597,7 +611,7 @@ declare interface CreateDefaultCategoriesResponse {
 }
 
 declare interface CreateTaskRequest {
-  /** 媒资文件ID，最长32B */
+  /** 媒资文件ID */
   MediaId: string;
   /** 媒资素材先验知识，相关限制参考MediaPreknownInfo */
   MediaPreknownInfo: MediaPreknownInfo;
@@ -613,7 +627,7 @@ declare interface CreateTaskRequest {
 
 declare interface CreateTaskResponse {
   /** 智能标签视频分析任务ID */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -658,8 +672,8 @@ declare interface DeleteCustomCategoryRequest {
 }
 
 declare interface DeleteCustomCategoryResponse {
-  /** 123 */
-  CategoryId: string;
+  /** 自定义分类ID */
+  CategoryId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -673,9 +687,9 @@ declare interface DeleteCustomPersonImageRequest {
 
 declare interface DeleteCustomPersonImageResponse {
   /** 自定义人物Id */
-  PersonId: string;
+  PersonId?: string;
   /** 已删除的人物图片Id */
-  ImageId: string;
+  ImageId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -687,7 +701,7 @@ declare interface DeleteCustomPersonRequest {
 
 declare interface DeleteCustomPersonResponse {
   /** 已删除的自定义人物Id */
-  PersonId: string;
+  PersonId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -727,9 +741,9 @@ declare interface DescribeCustomGroupRequest {
 
 declare interface DescribeCustomGroupResponse {
   /** 自定义人物库所包含的人物个数 */
-  GroupSize: number;
+  GroupSize?: number;
   /** 自定义人物库图片后续所在的存储桶 */
-  Bucket: string;
+  Bucket?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -741,9 +755,9 @@ declare interface DescribeCustomPersonDetailRequest {
 
 declare interface DescribeCustomPersonDetailResponse {
   /** 自定义人物信息 */
-  PersonInfo: CustomPersonInfo;
+  PersonInfo?: CustomPersonInfo;
   /** 出现该自定义人物的所有分析人物Id */
-  TaskIdSet: string[] | null;
+  TaskIdSet?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -769,13 +783,13 @@ declare interface DescribeCustomPersonsResponse {
 }
 
 declare interface DescribeMediaRequest {
-  /** 导入媒资返回的媒资ID，最长32B */
+  /** 导入媒资返回的媒资ID */
   MediaId: string;
 }
 
 declare interface DescribeMediaResponse {
   /** 媒资信息 */
-  MediaInfo: MediaInfo | null;
+  MediaInfo?: MediaInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -807,27 +821,27 @@ declare interface DescribeTaskDetailRequest {
 
 declare interface DescribeTaskDetailResponse {
   /** 任务信息，不包含任务结果 */
-  TaskInfo: TaskInfo | null;
+  TaskInfo?: TaskInfo | null;
   /** 视频任务结果数据，只在视频任务结束时返回 */
-  TaskData: Data | null;
+  TaskData?: Data | null;
   /** 图片任务结果数据，只在图片任务结束时返回 */
-  ImageTaskData: ImageData | null;
+  ImageTaskData?: ImageData | null;
   /** 音频任务结果数据，只在音频任务结束时返回 */
-  AudioTaskData: AudioData | null;
+  AudioTaskData?: AudioData | null;
   /** 文本任务结果数据，只在文本任务结束时返回 */
-  TextTaskData: TextData | null;
+  TextTaskData?: TextData | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeTaskRequest {
-  /** CreateTask返回的任务ID，最长32B */
+  /** CreateTask返回的任务ID */
   TaskId: string;
 }
 
 declare interface DescribeTaskResponse {
   /** 任务信息，详情参见TaskInfo的定义 */
-  TaskInfo: TaskInfo | null;
+  TaskInfo?: TaskInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -895,11 +909,11 @@ declare interface DescribeVideoSummaryDetailResponse {
 }
 
 declare interface ImportMediaRequest {
-  /** 待分析视频的URL，目前只支持*不带签名的*COS地址，长度最长1KB */
+  /** 待分析视频的URL，目前只支持*不带签名的*COS地址，字段输入内容最大为1KB */
   URL: string;
-  /** 待分析视频的MD5，为空时不做校验，否则会做MD5校验，长度必须为32B */
+  /** 待分析视频的MD5，为空时不做校验，否则会做MD5校验，长度必须为32 */
   MD5?: string;
-  /** 待分析视频的名称，指定后可支持筛选，最多64B */
+  /** 待分析视频的名称，指定后可支持筛选，视频名称的大小长度不能超过64 */
   Name?: string;
   /** 当非本人外部视频地址导入时，该字段为转存的cos桶地址且不可为空; 示例：https://${Bucket}-${AppId}.cos.${Region}.myqcloud.com/${PathPrefix}/ (注意，cos路径需要以/分隔符结尾)。推荐采用本主帐号COS桶，如果使用其他帐号COS桶，请确保COS桶可写，否则可导致分析失败 */
   WriteBackCosPath?: string;
@@ -935,9 +949,9 @@ declare interface QueryCallbackRequest {
 
 declare interface QueryCallbackResponse {
   /** 任务分析完成后回调地址 */
-  TaskFinishNotifyURL: string;
+  TaskFinishNotifyURL?: string;
   /** 媒体导入完成后回调地址 */
-  MediaFinishNotifyURL: string;
+  MediaFinishNotifyURL?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -953,7 +967,7 @@ declare interface UpdateCustomCategoryRequest {
 
 declare interface UpdateCustomCategoryResponse {
   /** 成功更新的自定义人物类型Id */
-  CategoryId: string;
+  CategoryId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -971,7 +985,7 @@ declare interface UpdateCustomPersonRequest {
 
 declare interface UpdateCustomPersonResponse {
   /** 成功更新的自定义人物Id */
-  PersonId: string;
+  PersonId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
