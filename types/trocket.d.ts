@@ -58,7 +58,7 @@ declare interface Endpoint {
 
 /** 查询过滤器 */
 declare interface Filter {
-  /** 过滤条件名 */
+  /** 过滤条件参数名 */
   Name: string;
   /** 过滤条件的值 */
   Values: string[];
@@ -166,11 +166,11 @@ declare interface InstanceItemExtraInfo {
   NodeCount?: number | null;
   /** 专享集群最大存储 */
   MaxStorage?: number | null;
-  /** 专享集群最大保留时间 */
+  /** 专享集群最大保留时间，单位：小时 */
   MaxRetention?: number | null;
-  /** 专项集群最大保留时间 */
+  /** 专项集群最大保留时间，单位：小时 */
   MinRetention?: number | null;
-  /** 4.0共享集群 */
+  /** 4.0共享集群状态 */
   InstanceStatus?: number | null;
 }
 
@@ -763,9 +763,9 @@ declare interface DeleteMQTTInstanceResponse {
 }
 
 declare interface DeleteMQTTTopicRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
-  /** 主题 */
+  /** 主题名称 */
   Topic: string;
 }
 
@@ -1131,9 +1131,9 @@ declare interface DescribeMQTTInstanceResponse {
 }
 
 declare interface DescribeMQTTMessageListRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
-  /** 主题 */
+  /** 主题名称 */
   Topic: string;
   /** 开始时间 */
   StartTime: number;
@@ -1197,7 +1197,7 @@ declare interface DescribeMQTTProductSKUListResponse {
 }
 
 declare interface DescribeMQTTTopicListRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
   /** 查询条件列表 */
   Filters?: Filter[];
@@ -1217,9 +1217,9 @@ declare interface DescribeMQTTTopicListResponse {
 }
 
 declare interface DescribeMQTTTopicRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
-  /** 主题 */
+  /** 主题名称 */
   Topic: string;
 }
 
@@ -1429,7 +1429,7 @@ declare interface ModifyMQTTInsPublicEndpointResponse {
 }
 
 declare interface ModifyMQTTInstanceCertBindingRequest {
-  /** 实例ID */
+  /** 集群ID */
   InstanceId: string;
   /** 服务端证书id */
   SSLServerCertId: string;

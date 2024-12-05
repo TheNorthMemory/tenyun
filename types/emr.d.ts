@@ -296,6 +296,8 @@ declare interface ClusterInstancesInfo {
   ClusterTitle?: string | null;
   /** 集群产品配置信息 */
   ConfigDetail?: EmrProductConfigDetail | null;
+  /** 集群绑定的文件系统数 */
+  BindFileSystemNum?: number | null;
 }
 
 /** 集群配置。 */
@@ -710,12 +712,12 @@ declare interface Execution {
 declare interface ExternalService {
   /** 共用组件类型，EMR/CUSTOM */
   ShareType: string;
-  /** 自定义参数集合 */
-  CustomServiceDefineList: CustomServiceDefine[];
   /** 共用组件名 */
   Service: string;
   /** 共用组件集群 */
   InstanceId: string;
+  /** 自定义参数集合 */
+  CustomServiceDefineList: CustomServiceDefine[];
 }
 
 /** 资源调度-公平调度器的全局配置 */

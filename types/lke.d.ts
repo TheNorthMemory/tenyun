@@ -136,6 +136,52 @@ declare interface BaseConfig {
   Desc?: string;
 }
 
+/** 调用类型 */
+declare interface CallDetail {
+  /** 关联ID */
+  Id?: string | null;
+  /** 调用时间 */
+  CallTime?: string | null;
+  /** 总token消耗 */
+  TotalTokenUsage?: number | null;
+  /** 输入token消耗 */
+  InputTokenUsage?: number | null;
+  /** 输出token消耗 */
+  OutputTokenUsage?: number | null;
+  /** 搜索服务调用次数 */
+  SearchUsage?: number | null;
+  /** 模型名称 */
+  ModelName?: string | null;
+  /** 调用类型 */
+  CallType?: string | null;
+  /** 账号 */
+  UinAccount?: string | null;
+  /** 应用名称 */
+  AppName?: string | null;
+  /** 总消耗页数 */
+  PageUsage?: number | null;
+  /** 筛选子场景 */
+  SubScene?: string | null;
+}
+
+/** 分类信息 */
+declare interface CateInfo {
+  /** 分类ID */
+  CateBizId?: string | null;
+  /** 分类名称 */
+  Name?: string | null;
+  /** 分类下的Record（如文档、同义词等）数量 */
+  Total?: number | null;
+  /** 是否可新增 */
+  CanAdd?: boolean | null;
+  /** 是否可编辑 */
+  CanEdit?: boolean | null;
+  /** 是否可删除 */
+  CanDelete?: boolean | null;
+  /** 子分类 */
+  Children?: CateInfo[] | null;
+}
+
 /** 标签提取配置 */
 declare interface ClassifyConfig {
   /** 模型配置 */
@@ -344,6 +390,18 @@ declare interface KnowledgeCapacityPieGraphDetail {
   UsedCharSize?: string | null;
   /** 当前应用对于总用量的占比 */
   Proportion?: number | null;
+}
+
+/** 应用使用知识库容量详情 */
+declare interface KnowledgeDetail {
+  /** 应用名称 */
+  AppName?: string | null;
+  /** 已用字符数 */
+  UsedCharSize?: string | null;
+  /** 使用占比 */
+  Proportion?: number | null;
+  /** 超量字符数 */
+  ExceedCharSize?: string | null;
 }
 
 /** 知识问答配置 */
@@ -1308,6 +1366,28 @@ declare interface CreateCorpResponse {
   RequestId?: string;
 }
 
+declare interface CreateDocCateRequest {
+  /** 应用ID */
+  BotBizId: string;
+  /** 父级业务ID */
+  ParentBizId: string;
+  /** 分类名称 */
+  Name: string;
+}
+
+declare interface CreateDocCateResponse {
+  /** 是否可新增 */
+  CanAdd?: boolean;
+  /** 是否可编辑 */
+  CanEdit?: boolean;
+  /** 是否可删除 */
+  CanDelete?: boolean;
+  /** 分类业务ID */
+  CateBizId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateQACateRequest {
   /** 应用ID */
   BotBizId: string;
@@ -1440,6 +1520,18 @@ declare interface DeleteAttributeLabelRequest {
 }
 
 declare interface DeleteAttributeLabelResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDocCateRequest {
+  /** 应用ID */
+  BotBizId: string;
+  /** 分类业务ID */
+  CateBizId: string;
+}
+
+declare interface DeleteDocCateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1927,7 +2019,7 @@ declare interface DescribeStorageCredentialRequest {
   BotBizId?: string;
   /** 文件类型,正常的文件名类型后缀，例如 xlsx、pdf、 docx、png 等 */
   FileType?: string;
-  /** IsPublic用于上传文件或图片时选择场景，当上传为对话端图片时IsPublic为true，上传文件（包括文档库文件和对话端文件）时IsPublic为false */
+  /** IsPublic用于上传文件或图片时选择场景，当上传对话端图片时IsPublic为true，上传文件（包括文档库文件/图片等和对话端文件）时IsPublic为false */
   IsPublic?: boolean;
   /** 存储类型: offline:离线文件，realtime:实时文件；为空默认为offline */
   TypeKey?: string;
@@ -2342,6 +2434,20 @@ declare interface GetWsTokenResponse {
   RequestId?: string;
 }
 
+declare interface GroupDocRequest {
+  /** 应用ID */
+  BotBizId: string;
+  /** 操作对象的业务ID列表 */
+  BizIds: string[];
+  /** 分组 ID */
+  CateBizId: string;
+}
+
+declare interface GroupDocResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GroupQARequest {
   /** 应用ID */
   BotBizId: string;
@@ -2396,6 +2502,24 @@ declare interface ListAppCategoryResponse {
   RequestId?: string;
 }
 
+declare interface ListAppKnowledgeDetailRequest {
+  /** 页码 */
+  PageNumber: number;
+  /** 页面大小 */
+  PageSize: number;
+  /** 应用ID列表 */
+  AppBizIds?: string[];
+}
+
+declare interface ListAppKnowledgeDetailResponse {
+  /** 列表总数 */
+  Total?: number;
+  /** 应用使用知识库容量详情 */
+  List?: KnowledgeDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListAppRequest {
   /** 应用类型；knowledge_qa-知识问答管理；summary-知识摘要；classifys-知识标签提取 */
   AppType?: string;
@@ -2438,6 +2562,18 @@ declare interface ListAttributeLabelResponse {
   Total?: string;
   /** 列表 */
   List?: AttrLabelDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListDocCateRequest {
+  /** 应用ID */
+  BotBizId: string;
+}
+
+declare interface ListDocCateResponse {
+  /** 列表 */
+  List?: CateInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2734,6 +2870,36 @@ declare interface ListUnsatisfiedReplyResponse {
   RequestId?: string;
 }
 
+declare interface ListUsageCallDetailRequest {
+  /** 模型标识 */
+  ModelName: string;
+  /** 开始时间 */
+  StartTime: string;
+  /** 结束时间 */
+  EndTime: string;
+  /** 页码 */
+  PageNumber: number;
+  /** 分页数量 */
+  PageSize: number;
+  /** uin列表 */
+  UinAccount?: string[];
+  /** 应用ID列表 */
+  AppBizIds?: string[];
+  /** 调用类型列表 */
+  CallType?: string;
+  /** 筛选子场景 */
+  SubScenes?: string[];
+}
+
+declare interface ListUsageCallDetailResponse {
+  /** 列表总数 */
+  Total?: number;
+  /** 列表 */
+  List?: CallDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAppRequest {
   /** 应用 ID */
   AppBizId: string;
@@ -2794,6 +2960,20 @@ declare interface ModifyDocAttrRangeRequest {
 }
 
 declare interface ModifyDocAttrRangeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDocCateRequest {
+  /** 应用ID */
+  BotBizId: string;
+  /** 分类名称 */
+  Name: string;
+  /** 分类业务ID */
+  CateBizId: string;
+}
+
+declare interface ModifyDocCateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3197,6 +3377,8 @@ declare interface Lke {
   CreateAttributeLabel(data: CreateAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAttributeLabelResponse>;
   /** 创建企业 {@link CreateCorpRequest} {@link CreateCorpResponse} */
   CreateCorp(data: CreateCorpRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCorpResponse>;
+  /** 创建Doc分类 {@link CreateDocCateRequest} {@link CreateDocCateResponse} */
+  CreateDocCate(data: CreateDocCateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDocCateResponse>;
   /** 录入问答 {@link CreateQARequest} {@link CreateQAResponse} */
   CreateQA(data: CreateQARequest, config?: AxiosRequestConfig): AxiosPromise<CreateQAResponse>;
   /** 创建QA分类 {@link CreateQACateRequest} {@link CreateQACateResponse} */
@@ -3213,6 +3395,8 @@ declare interface Lke {
   DeleteAttributeLabel(data: DeleteAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttributeLabelResponse>;
   /** 删除文档 {@link DeleteDocRequest} {@link DeleteDocResponse} */
   DeleteDoc(data: DeleteDocRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDocResponse>;
+  /** Doc分类删除 {@link DeleteDocCateRequest} {@link DeleteDocCateResponse} */
+  DeleteDocCate(data: DeleteDocCateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDocCateResponse>;
   /** 删除问答 {@link DeleteQARequest} {@link DeleteQAResponse} */
   DeleteQA(data: DeleteQARequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQAResponse>;
   /** 分类删除 {@link DeleteQACateRequest} {@link DeleteQACateResponse} */
@@ -3287,6 +3471,8 @@ declare interface Lke {
   GetTaskStatus(data: GetTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskStatusResponse>;
   /** 获取ws token {@link GetWsTokenRequest} {@link GetWsTokenResponse} */
   GetWsToken(data: GetWsTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetWsTokenResponse>;
+  /** Doc分组 {@link GroupDocRequest} {@link GroupDocResponse} */
+  GroupDoc(data: GroupDocRequest, config?: AxiosRequestConfig): AxiosPromise<GroupDocResponse>;
   /** QA分组 {@link GroupQARequest} {@link GroupQAResponse} */
   GroupQA(data: GroupQARequest, config?: AxiosRequestConfig): AxiosPromise<GroupQAResponse>;
   /** 忽略不满意回复 {@link IgnoreUnsatisfiedReplyRequest} {@link IgnoreUnsatisfiedReplyResponse} */
@@ -3297,10 +3483,14 @@ declare interface Lke {
   ListApp(data?: ListAppRequest, config?: AxiosRequestConfig): AxiosPromise<ListAppResponse>;
   /** 应用类型列表 {@link ListAppCategoryRequest} {@link ListAppCategoryResponse} */
   ListAppCategory(data?: ListAppCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<ListAppCategoryResponse>;
+  /** 列表查询知识库容量详情 {@link ListAppKnowledgeDetailRequest} {@link ListAppKnowledgeDetailResponse} */
+  ListAppKnowledgeDetail(data: ListAppKnowledgeDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListAppKnowledgeDetailResponse>;
   /** 查询标签列表 {@link ListAttributeLabelRequest} {@link ListAttributeLabelResponse} */
   ListAttributeLabel(data: ListAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<ListAttributeLabelResponse>;
   /** 文档列表 {@link ListDocRequest} {@link ListDocResponse} */
   ListDoc(data: ListDocRequest, config?: AxiosRequestConfig): AxiosPromise<ListDocResponse>;
+  /** 获取文档分类 {@link ListDocCateRequest} {@link ListDocCateResponse} */
+  ListDocCate(data: ListDocCateRequest, config?: AxiosRequestConfig): AxiosPromise<ListDocCateResponse>;
   /** 获取模型列表 {@link ListModelRequest} {@link ListModelResponse} */
   ListModel(data: ListModelRequest, config?: AxiosRequestConfig): AxiosPromise<ListModelResponse>;
   /** 问答列表 {@link ListQARequest} {@link ListQAResponse} */
@@ -3323,6 +3513,8 @@ declare interface Lke {
   ListSelectDoc(data: ListSelectDocRequest, config?: AxiosRequestConfig): AxiosPromise<ListSelectDocResponse>;
   /** 查询不满意回复列表 {@link ListUnsatisfiedReplyRequest} {@link ListUnsatisfiedReplyResponse} */
   ListUnsatisfiedReply(data: ListUnsatisfiedReplyRequest, config?: AxiosRequestConfig): AxiosPromise<ListUnsatisfiedReplyResponse>;
+  /** 列表查询单次调用明细 {@link ListUsageCallDetailRequest} {@link ListUsageCallDetailResponse} */
+  ListUsageCallDetail(data: ListUsageCallDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListUsageCallDetailResponse>;
   /** 修改应用请求结构体 {@link ModifyAppRequest} {@link ModifyAppResponse} */
   ModifyApp(data: ModifyAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppResponse>;
   /** 编辑标签 {@link ModifyAttributeLabelRequest} {@link ModifyAttributeLabelResponse} */
@@ -3331,6 +3523,8 @@ declare interface Lke {
   ModifyDoc(data: ModifyDocRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDocResponse>;
   /** 批量修改文档适用范围 {@link ModifyDocAttrRangeRequest} {@link ModifyDocAttrRangeResponse} */
   ModifyDocAttrRange(data: ModifyDocAttrRangeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDocAttrRangeResponse>;
+  /** 修改Doc分类 {@link ModifyDocCateRequest} {@link ModifyDocCateResponse} */
+  ModifyDocCate(data: ModifyDocCateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDocCateResponse>;
   /** 更新问答 {@link ModifyQARequest} {@link ModifyQAResponse} */
   ModifyQA(data: ModifyQARequest, config?: AxiosRequestConfig): AxiosPromise<ModifyQAResponse>;
   /** 批量修改问答适用范围 {@link ModifyQAAttrRangeRequest} {@link ModifyQAAttrRangeResponse} */

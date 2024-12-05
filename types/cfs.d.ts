@@ -252,6 +252,8 @@ declare interface MigrationTaskInfo {
   FileFailedList?: string | null;
   /** 源桶路径 */
   BucketPath?: string | null;
+  /** 迁移方向。0: 对象存储迁移至文件系统，1: 文件系统迁移至对象存储。默认 0 */
+  Direction?: number;
 }
 
 /** 挂载点信息 */
@@ -607,6 +609,8 @@ declare interface CreateMigrationTaskRequest {
   FsName?: string;
   /** 源桶路径，默认为/ */
   BucketPath?: string;
+  /** 迁移方向。0: 对象存储迁移至文件系统，1: 文件系统迁移至对象存储。默认 0 */
+  Direction?: number;
 }
 
 declare interface CreateMigrationTaskResponse {

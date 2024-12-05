@@ -151,31 +151,33 @@ declare interface PrivateZone {
 /** 私有域信息 */
 declare interface PrivateZoneRecord {
   /** 记录id */
-  RecordId: string;
+  RecordId?: string;
   /** 私有域id: zone-xxxxxxxx */
-  ZoneId: string;
+  ZoneId?: string;
   /** 子域名 */
-  SubDomain: string;
+  SubDomain?: string;
   /** 记录类型，可选的记录类型为："A", "AAAA", "CNAME", "MX", "TXT", "PTR" */
-  RecordType: string;
+  RecordType?: string;
   /** 记录值 */
-  RecordValue: string;
+  RecordValue?: string;
   /** 记录缓存时间，数值越小生效越快，取值1-86400s, 默认 600 */
-  TTL: number;
+  TTL?: number;
   /** MX优先级：记录类型为MX时必填。取值范围：5,10,15,20,30,40,50 */
-  MX: number | null;
+  MX?: number | null;
   /** 记录状态：ENABLED */
-  Status: string;
+  Status?: string;
   /** 记录权重，值为1-100 */
-  Weight: number | null;
+  Weight?: number | null;
   /** 记录创建时间 */
-  CreatedOn: string;
+  CreatedOn?: string;
   /** 记录更新时间 */
-  UpdatedOn: string;
+  UpdatedOn?: string;
   /** 附加信息 */
-  Extra: string | null;
+  Extra?: string | null;
   /** 0暂停，1启用 */
-  Enabled: number | null;
+  Enabled?: number | null;
+  /** 备注 */
+  Remark?: string | null;
 }
 
 /** 标签 */
@@ -255,6 +257,8 @@ declare interface CreatePrivateZoneRecordRequest {
   MX?: number;
   /** 记录缓存时间，数值越小生效越快，取值1-86400s, 默认 600 */
   TTL?: number;
+  /** 备注 */
+  Remark?: string;
 }
 
 declare interface CreatePrivateZoneRecordResponse {
@@ -531,6 +535,8 @@ declare interface ModifyPrivateZoneRecordRequest {
   MX?: number;
   /** 记录缓存时间，数值越小生效越快，取值1-86400s, 默认 600 */
   TTL?: number;
+  /** 备注 */
+  Remark?: string;
 }
 
 declare interface ModifyPrivateZoneRecordResponse {

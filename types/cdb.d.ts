@@ -808,6 +808,20 @@ declare interface Inbound {
   Desc: string;
 }
 
+/** 实例事件信息 */
+declare interface InstEventInfo {
+  /** 事件名称。 */
+  EventName?: string;
+  /** 事件状态。 */
+  EventStatus?: string;
+  /** 事件发生时间。 */
+  OccurTime?: string;
+  /** 实例ID。 */
+  InstanceId?: string;
+  /** 节点ID */
+  NodeId?: string | null;
+}
+
 /** 审计日志搜索过滤器 */
 declare interface InstanceAuditLogFilters {
   /** 过滤项。目前支持以下搜索条件：包含、不包含、包含（分词维度）、不包含（分词维度）:sql - SQL详情；alarmLevel - 告警等级；ruleTemplateId - 规则模板Id等于、不等于、包含、不包含：host - 客户端地址；user - 用户名；dbName - 数据库名称；等于、不等于：sqlType - SQL类型；errCode - 错误码；threadId - 线程ID；范围搜索（时间类型统一为微秒）：execTime - 执行时间；lockWaitTime - 执行时间；ioWaitTime - IO等待时间；trxLivingTime - 事物持续时间；cpuTime - cpu时间；checkRows - 扫描行数；affectRows - 影响行数；sentRows - 返回行数。 */
@@ -3691,9 +3705,31 @@ declare interface DescribeErrorLogDataResponse {
 }
 
 declare interface DescribeInstanceAlarmEventsRequest {
+  /** 实例 ID。 */
+  InstanceId: string;
+  /** 事件查询范围开始时间，闭区间。 */
+  StartTime: string;
+  /** 事件查询范围截止时间，闭区间。 */
+  EndTime: string;
+  /** 事件名称。 Outofmemory - 内存OOM（有状态事件）; Switch - 主从切换（有状态事件）; Roremove - 只读实例剔除（有状态事件）; MemoryUsedHigh - 内存使用率过高（有状态事件）; CPUExpansion - CPU性能扩容（无状态事件）; CPUExpansionFailed - CPU性能扩容失败（无状态事件）; CPUContraction - CPU性能回缩（无状态事件）; Restart - 实例重启（有状态事件）; ServerFailureNodeMigration - ServerFailureNodeMigration（有状态事件）; PlannedSwitch - 计划内主备切换（无状态事件）; OverusedReadonlySet - 实例将被锁定（无状态事件）; OverusedReadWriteSet - 实例解除锁定（无状态事件）。 */
+  EventName?: string[];
+  /** 事件状态。"1" - 发生事件；"0" - 恢复事件；"-" - 无状态事件。 */
+  EventStatus?: string;
+  /** 排序方式。按事件发生事件进行排序，"DESC"-倒排；”ASC“-正序，默认倒排。 */
+  Order?: string;
+  /** 事件展示数量。 */
+  Limit?: string;
+  /** 偏移量。 */
+  Offset?: string;
+  /** 节点 ID。 */
+  NodeId?: string;
 }
 
 declare interface DescribeInstanceAlarmEventsResponse {
+  /** 事件数。 */
+  TotalCount?: number;
+  /** 事件信息。查询不到信息时，Items为null。 */
+  Items?: InstEventInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5400,7 +5436,7 @@ declare interface Cdb {
   /** 查询实例错误日志详情 {@link DescribeErrorLogDataRequest} {@link DescribeErrorLogDataResponse} */
   DescribeErrorLogData(data: DescribeErrorLogDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeErrorLogDataResponse>;
   /** 查询实例发生的事件信息 {@link DescribeInstanceAlarmEventsRequest} {@link DescribeInstanceAlarmEventsResponse} */
-  DescribeInstanceAlarmEvents(data?: DescribeInstanceAlarmEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceAlarmEventsResponse>;
+  DescribeInstanceAlarmEvents(data: DescribeInstanceAlarmEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceAlarmEventsResponse>;
   /** 查询实例参数修改历史 {@link DescribeInstanceParamRecordsRequest} {@link DescribeInstanceParamRecordsResponse} */
   DescribeInstanceParamRecords(data: DescribeInstanceParamRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamRecordsResponse>;
   /** 查询实例的可设置参数列表 {@link DescribeInstanceParamsRequest} {@link DescribeInstanceParamsResponse} */

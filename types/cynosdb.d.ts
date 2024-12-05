@@ -3266,6 +3266,20 @@ declare interface DescribeClusterPasswordComplexityResponse {
   RequestId?: string;
 }
 
+declare interface DescribeClusterTransparentEncryptInfoRequest {
+  /** 集群id */
+  ClusterId: string;
+}
+
+declare interface DescribeClusterTransparentEncryptInfoResponse {
+  /** 加密秘钥id */
+  KeyId?: string;
+  /** 加密秘钥地域 */
+  KeyRegion?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeClustersRequest {
   /** 引擎类型：目前支持“MYSQL”， “POSTGRESQL” */
   DbType?: string;
@@ -4684,6 +4698,24 @@ declare interface OpenClusterReadOnlyInstanceGroupAccessResponse {
   RequestId?: string;
 }
 
+declare interface OpenClusterTransparentEncryptRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 秘钥类型(cloud,custom) */
+  KeyType: string;
+  /** 秘钥Id */
+  KeyId?: string;
+  /** 秘钥地域 */
+  KeyRegion?: string;
+}
+
+declare interface OpenClusterTransparentEncryptResponse {
+  /** 异步任务id */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface OpenReadOnlyInstanceExclusiveAccessRequest {
   /** 请使用 [集群信息描述](https://cloud.tencent.com/document/api/1003/48086) 获取 clusterId。 */
   ClusterId: string;
@@ -5317,6 +5349,8 @@ declare interface Cynosdb {
   DescribeClusterParams(data: DescribeClusterParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterParamsResponse>;
   /** 查看集群密码复杂度详情 {@link DescribeClusterPasswordComplexityRequest} {@link DescribeClusterPasswordComplexityResponse} */
   DescribeClusterPasswordComplexity(data: DescribeClusterPasswordComplexityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterPasswordComplexityResponse>;
+  /** 查询集群透明加密信息 {@link DescribeClusterTransparentEncryptInfoRequest} {@link DescribeClusterTransparentEncryptInfoResponse} */
+  DescribeClusterTransparentEncryptInfo(data: DescribeClusterTransparentEncryptInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterTransparentEncryptInfoResponse>;
   /** 查询集群列表 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
   /** 查询实例安全组信息 {@link DescribeDBSecurityGroupsRequest} {@link DescribeDBSecurityGroupsResponse} */
@@ -5459,6 +5493,8 @@ declare interface Cynosdb {
   OpenClusterPasswordComplexity(data: OpenClusterPasswordComplexityRequest, config?: AxiosRequestConfig): AxiosPromise<OpenClusterPasswordComplexityResponse>;
   /** 开启只读实例组接入 {@link OpenClusterReadOnlyInstanceGroupAccessRequest} {@link OpenClusterReadOnlyInstanceGroupAccessResponse} */
   OpenClusterReadOnlyInstanceGroupAccess(data: OpenClusterReadOnlyInstanceGroupAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenClusterReadOnlyInstanceGroupAccessResponse>;
+  /** 开通集群透明加密 {@link OpenClusterTransparentEncryptRequest} {@link OpenClusterTransparentEncryptResponse} */
+  OpenClusterTransparentEncrypt(data: OpenClusterTransparentEncryptRequest, config?: AxiosRequestConfig): AxiosPromise<OpenClusterTransparentEncryptResponse>;
   /** 开通只读实例独有访问接入组 {@link OpenReadOnlyInstanceExclusiveAccessRequest} {@link OpenReadOnlyInstanceExclusiveAccessResponse} */
   OpenReadOnlyInstanceExclusiveAccess(data: OpenReadOnlyInstanceExclusiveAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenReadOnlyInstanceExclusiveAccessResponse>;
   /** 开通外网 {@link OpenWanRequest} {@link OpenWanResponse} */
