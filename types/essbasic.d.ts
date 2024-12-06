@@ -510,6 +510,8 @@ declare interface FlowApproverDetail {
   ApproveType?: string | null;
   /** 自定义签署人的角色名, 如: 收款人、开具人、见证人等 */
   ApproverRoleName?: string | null;
+  /** 签署参与人在本流程中的编号ID（每个流程不同），可用此ID来定位签署参与人在本流程的签署节点。 */
+  SignId?: string | null;
 }
 
 /** 创建签署流程签署人入参。**各种场景传参说明**: 场景编号 发起方类型 签署方类型 签署方传参说明 场景一 第三方子企业A员工 第三方子企业A员工 （选填）IdCardNumber和IdCardType：证件类型和证件号 （必传）Name：签署方的名字 （必传）Mobile：签署方的手机号 （必传）OpenId：企业员工标识 （必传）OrganizationName：子企业名称 （必传）OrganizationOpenId：子企业的标识 （固定）ApproverType：需设置为ORGANIZATION 场景二 第三方子企业A员工 第三方子企业B(不指定经办人走领取方式) （必传）OrganizationName：子企业名称 （必传）OrganizationOpenId：子企业的标识 （固定）ApproverType：需设置为ORGANIZATION （固定）ApproverOption.FillType：需设置为1 场景三 第三方子企业A员工 第三方子企业B员工 （选填）IdCardNumber和IdCardType：证件类型和证件号 （必传）Name：签署方的名字 （必传）Mobile：签署方的手机号 （必传）OpenId：企业员工标识 （必传）OrganizationName：子企业名称 （必传）OrganizationOpenId：子企业的标识 （固定）ApproverType：需设置为ORGANIZATION 场景四 第三方子企业A员工 个人/自然人 （选填）IdCardNumber和IdCardType：证件类型和证件号 （必传）Name：签署方的名字 （必传）Mobile：签署方的手机号 （固定）ApproverType：需设置为PERSON 场景五 第三方子企业A员工 SaaS平台企业员工 （选填）IdCardNumber和IdCardType：证件类型和证件号 （必传）OrganizationName：SaaS企业的名字 （必传）Name：签署方的名字 （必传）Mobile：签署方的手机号 （不传）OrganizationOpenId：子企业的标识 （不传）OpenId：企业员工标识 （固定）ApproverType：需设置为ORGANIZATION （固定）NotChannelOrganization：需设置为True **注1**: `使用模板发起合同时，RecipientId（模板发起合同时）必传`RecipientId参数获取：从DescribeFlowTemplates接口接口中，可以得到模板下的签署方Recipient列表，根据模板自定义的Rolename在此结构体中确定其RecipientId。**注2**: `如果发起的是动态签署方（即ApproverOption.FillType指定为1），可以不指定具体签署人信息`, 动态签署方可以参考此文档 */

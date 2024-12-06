@@ -46,6 +46,38 @@ declare interface AuthorizationPolicyPriority {
   Priority: number | null;
 }
 
+/** 设备证书信息 */
+declare interface DeviceCertificateItem {
+  /** 客户端id */
+  ClientId?: string | null;
+  /** 设备证书 */
+  DeviceCertificate?: string;
+  /** 设备证书Sn */
+  DeviceCertificateSn?: string;
+  /** 设备证书Cn */
+  DeviceCertificateCn?: string;
+  /** 签发ca的序列号 */
+  CaSn?: string;
+  /** 证书格式 */
+  Format?: string;
+  /** 证书状态 ACTIVE,//激活 INACTIVE,//未激活 REVOKED,//吊销 PENDING_ACTIVATION,//注册待激活 */
+  Status?: string;
+  /** 上次激活时间 */
+  LastActivationTime?: number | null;
+  /** 上次取消激活时间 */
+  LastInactivationTime?: number | null;
+  /** 创建时间 */
+  CreatedTime?: number;
+  /** 预销毁时间 */
+  UpdateTime?: number | null;
+  /** 证书来源：API, 手动注册 JITP 自动注册 */
+  CertificateSource?: string | null;
+  /** 证书失效日期 */
+  NotAfterTime?: number | null;
+  /** 证书生效开始日期 */
+  NotBeforeTime?: number | null;
+}
+
 /** 查询过滤器 */
 declare interface Filter {
   /** 过滤条件名 */
@@ -128,6 +160,18 @@ declare interface TagFilter {
   TagKey?: string;
   /** 标签键名称 */
   TagValues?: string[];
+}
+
+declare interface ActivateDeviceCertificateRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 设备证书序列号 */
+  DeviceCertificateSn: string;
+}
+
+declare interface ActivateDeviceCertificateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface CreateAuthorizationPolicyRequest {
@@ -288,8 +332,30 @@ declare interface DescribeAuthorizationPoliciesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDeviceCertificatesRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 过滤器支持ClientId、CaSn、DeviceCertificateSn、Status搜索 */
+  Filters?: Filter[];
+  /** 分页limit */
+  Limit?: number;
+  /** 分页偏移量 */
+  Offset?: number;
+  /** CREATE_TIME_DESC, 创建时间降序 CREATE_TIME_ASC,创建时间升序 UPDATE_TIME_DESC,更新时间降序 UPDATE_TIME_ASC,更新时间升序 */
+  OrderBy?: string;
+}
+
+declare interface DescribeDeviceCertificatesResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 设备证书 */
+  Data?: DeviceCertificateItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceListRequest {
-  /** 查询条件列表 */
+  /** 查询条件列表,支持以下子弹InstanceName：集群名模糊搜索InstanceId：集群id精确搜索InstanceStatus：集群状态搜索 */
   Filters?: Filter[];
   /** 查询起始位置 */
   Offset?: number;
@@ -367,7 +433,7 @@ declare interface DescribeInstanceResponse {
 declare interface DescribeTopicListRequest {
   /** 实例ID */
   InstanceId: string;
-  /** 查询条件列表 */
+  /** 查询条件列表:支持TopicName模糊查询 */
   Filters?: Filter[];
   /** 查询起始位置 */
   Offset?: number;
@@ -533,6 +599,8 @@ declare interface UpdateAuthorizationPolicyPriorityResponse {
 /** {@link Mqtt 消息队列 MQTT 版} */
 declare interface Mqtt {
   (): Versions;
+  /** 生效设备证书 {@link ActivateDeviceCertificateRequest} {@link ActivateDeviceCertificateResponse} */
+  ActivateDeviceCertificate(data: ActivateDeviceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateDeviceCertificateResponse>;
   /** 创建授权策略 {@link CreateAuthorizationPolicyRequest} {@link CreateAuthorizationPolicyResponse} */
   CreateAuthorizationPolicy(data: CreateAuthorizationPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuthorizationPolicyResponse>;
   /** 创建一个MQTTJWKS认证器 {@link CreateJWKSAuthenticatorRequest} {@link CreateJWKSAuthenticatorResponse} */
@@ -551,6 +619,8 @@ declare interface Mqtt {
   DescribeAuthenticator(data: DescribeAuthenticatorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuthenticatorResponse>;
   /** 查询授权策略 {@link DescribeAuthorizationPoliciesRequest} {@link DescribeAuthorizationPoliciesResponse} */
   DescribeAuthorizationPolicies(data?: DescribeAuthorizationPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuthorizationPoliciesResponse>;
+  /** 查询设备证书 {@link DescribeDeviceCertificatesRequest} {@link DescribeDeviceCertificatesResponse} */
+  DescribeDeviceCertificates(data: DescribeDeviceCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceCertificatesResponse>;
   /** 查询MQTT实例详情信息 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
   /** 获取MQTT实例列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */

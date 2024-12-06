@@ -1110,7 +1110,7 @@ declare interface RetentionPolicy {
 
 /** RocketMQ集群配置 */
 declare interface RocketMQClusterConfig {
-  /** 单命名空间TPS上线 */
+  /** 单命名空间TPS上限 */
   MaxTpsPerNamespace?: number;
   /** 最大命名空间数量 */
   MaxNamespaceNum?: number;
@@ -1304,7 +1304,7 @@ declare interface RocketMQGroupConfigOutput {
   Namespace?: string | null;
   /** 消费组名称 */
   GroupName?: string | null;
-  /** 导入状态 */
+  /** 是否已导入 */
   Imported?: boolean | null;
   /** remark */
   Remark?: string | null;
@@ -2151,7 +2151,7 @@ declare interface CreateRocketMQClusterRequest {
 
 declare interface CreateRocketMQClusterResponse {
   /** 集群ID */
-  ClusterId: string;
+  ClusterId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2766,26 +2766,6 @@ declare interface DescribeClustersResponse {
   TotalCount?: number;
   /** 集群信息列表 */
   ClusterSet?: Cluster[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeCmqDeadLetterSourceQueuesRequest {
-  /** 死信队列名称 */
-  DeadLetterQueueName: string;
-  /** 分页时本页获取主题列表的起始位置。如果填写了该值，必须也要填写 limit 。该值缺省时，后台取默认值 0。 */
-  Limit?: number;
-  /** 分页时本页获取主题的个数，如果不传递该参数，则该参数默认为20，最大值为50。 */
-  Offset?: number;
-  /** 根据SourceQueueName过滤 */
-  SourceQueueName?: string;
-}
-
-declare interface DescribeCmqDeadLetterSourceQueuesResponse {
-  /** 满足本次条件的队列个数 */
-  TotalCount: number;
-  /** 死信队列源队列 */
-  QueueSet: CmqDeadLetterSource[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3499,9 +3479,9 @@ declare interface DescribeRocketMQClustersRequest {
 
 declare interface DescribeRocketMQClustersResponse {
   /** 集群信息 */
-  ClusterList: RocketMQClusterDetail[] | null;
+  ClusterList?: RocketMQClusterDetail[] | null;
   /** 总条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5025,7 +5005,7 @@ declare interface Tdmq {
   DeleteSubscriptions(data: DeleteSubscriptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSubscriptionsResponse>;
   /** 删除主题 {@link DeleteTopicsRequest} {@link DeleteTopicsResponse} */
   DeleteTopics(data: DeleteTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicsResponse>;
-  /** 获取amqp集群列表 {@link DescribeAMQPClustersRequest} {@link DescribeAMQPClustersResponse} */
+  /** @deprecated 获取amqp集群列表 {@link DescribeAMQPClustersRequest} {@link DescribeAMQPClustersResponse} */
   DescribeAMQPClusters(data: DescribeAMQPClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAMQPClustersResponse>;
   /** 获取某租户的虚拟集群列表 {@link DescribeAllTenantsRequest} {@link DescribeAllTenantsResponse} */
   DescribeAllTenants(data: DescribeAllTenantsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllTenantsResponse>;
@@ -5037,8 +5017,6 @@ declare interface Tdmq {
   DescribeClusterDetail(data: DescribeClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDetailResponse>;
   /** 获取集群列表 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
-  /** @deprecated 枚举cmq死信队列源队列 {@link DescribeCmqDeadLetterSourceQueuesRequest} {@link DescribeCmqDeadLetterSourceQueuesResponse} */
-  DescribeCmqDeadLetterSourceQueues(data: DescribeCmqDeadLetterSourceQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqDeadLetterSourceQueuesResponse>;
   /** 查询cmq队列详情 {@link DescribeCmqQueueDetailRequest} {@link DescribeCmqQueueDetailResponse} */
   DescribeCmqQueueDetail(data: DescribeCmqQueueDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqQueueDetailResponse>;
   /** 查询cmq全量队列 {@link DescribeCmqQueuesRequest} {@link DescribeCmqQueuesResponse} */
@@ -5095,7 +5073,7 @@ declare interface Tdmq {
   DescribeRabbitMQVirtualHostList(data: DescribeRabbitMQVirtualHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQVirtualHostListResponse>;
   /** 获取单个RocketMQ集群信息 {@link DescribeRocketMQClusterRequest} {@link DescribeRocketMQClusterResponse} */
   DescribeRocketMQCluster(data: DescribeRocketMQClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQClusterResponse>;
-  /** 获取RocketMQ集群列表 {@link DescribeRocketMQClustersRequest} {@link DescribeRocketMQClustersResponse} */
+  /** 获取RocketMQ的集群列表 {@link DescribeRocketMQClustersRequest} {@link DescribeRocketMQClustersResponse} */
   DescribeRocketMQClusters(data: DescribeRocketMQClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQClustersResponse>;
   /** 获取消费详情列表 {@link DescribeRocketMQConsumeStatsRequest} {@link DescribeRocketMQConsumeStatsResponse} */
   DescribeRocketMQConsumeStats(data: DescribeRocketMQConsumeStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQConsumeStatsResponse>;
@@ -5157,7 +5135,7 @@ declare interface Tdmq {
   ImportRocketMQConsumerGroups(data: ImportRocketMQConsumerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportRocketMQConsumerGroupsResponse>;
   /** 平滑迁移：导入topic列表 {@link ImportRocketMQTopicsRequest} {@link ImportRocketMQTopicsResponse} */
   ImportRocketMQTopics(data: ImportRocketMQTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportRocketMQTopicsResponse>;
-  /** 更新Amqp集群信息 {@link ModifyAMQPClusterRequest} {@link ModifyAMQPClusterResponse} */
+  /** @deprecated 更新Amqp集群信息 {@link ModifyAMQPClusterRequest} {@link ModifyAMQPClusterResponse} */
   ModifyAMQPCluster(data: ModifyAMQPClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAMQPClusterResponse>;
   /** 更新集群信息 {@link ModifyClusterRequest} {@link ModifyClusterResponse} */
   ModifyCluster(data: ModifyClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterResponse>;

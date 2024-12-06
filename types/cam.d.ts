@@ -50,9 +50,9 @@ declare interface AttachPolicyInfo {
   PolicyName?: string | null;
   /** 创建时间 */
   AddTime?: string | null;
-  /** 创建来源，1 通过控制台创建, 2 通过策略语法创建。 */
+  /** 创建来源，1 通过控制台创建, 2 通过策略语法创建 */
   CreateMode?: number | null;
-  /** 取值为user和QCS */
+  /** 取值为User和QCS。User代表自定义策略，QCS代表系统策略 */
   PolicyType?: string | null;
   /** 策略备注 */
   Remark?: string | null;
@@ -60,9 +60,9 @@ declare interface AttachPolicyInfo {
   OperateOwnerUin?: string | null;
   /** 策略关联操作者ID，如果UinType为0表示子账号Uin，如果UinType为1表示角色ID */
   OperateUin?: string | null;
-  /** UinType为0表示OperateUin字段是子账号Uin，如果UinType为1表示OperateUin字段是角色ID */
+  /** 取值为0和1。OperateUinType为0表示OperateUin字段是子账号Uin。如果OperateUinType为1表示OperateUin字段是角色ID */
   OperateUinType?: number | null;
-  /** 是否已下线 */
+  /** 是否已下线，1代表已下线，0代表未下线 */
   Deactived?: number | null;
   /** 已下线的产品列表 */
   DeactivedDetail?: string[] | null;
@@ -1273,7 +1273,7 @@ declare interface GetSecurityLastUsedRequest {
 
 declare interface GetSecurityLastUsedResponse {
   /** 密钥ID最近访问列表 */
-  SecretIdLastUsedRows: SecretIdLastUsed[];
+  SecretIdLastUsedRows?: SecretIdLastUsed[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1367,7 +1367,7 @@ declare interface ListAccessKeysRequest {
 
 declare interface ListAccessKeysResponse {
   /** 访问密钥列表 */
-  AccessKeys: AccessKey[] | null;
+  AccessKeys?: AccessKey[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

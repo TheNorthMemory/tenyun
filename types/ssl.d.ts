@@ -1225,7 +1225,7 @@ declare interface CancelAuditCertificateRequest {
 
 declare interface CancelAuditCertificateResponse {
   /** 操作是否成功 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1265,7 +1265,7 @@ declare interface CheckCertificateDomainVerificationRequest {
 
 declare interface CheckCertificateDomainVerificationResponse {
   /** 域名验证结果 */
-  VerificationResults: DomainValidationResult[] | null;
+  VerificationResults?: DomainValidationResult[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1273,7 +1273,7 @@ declare interface CheckCertificateDomainVerificationResponse {
 declare interface CommitCertificateInformationRequest {
   /** 证书 ID。 */
   CertificateId: string;
-  /** 域名验证方式 */
+  /** 域名验证方式，如 DNS,DNS_AUTO,FILE */
   VerifyType?: string;
 }
 
@@ -1433,7 +1433,7 @@ declare interface DeployCertificateInstanceRequest {
   CertificateId: string;
   /** 需要部署实例列表 */
   InstanceIdList: string[];
-  /** 部署的云资源类型 */
+  /** 部署的云资源类型,如clb，cos */
   ResourceType?: string;
   /** 部署云资源状态：云直播：-1：域名未关联证书。1： 域名https已开启。0： 域名https已关闭。 */
   Status?: number;
@@ -1451,9 +1451,9 @@ declare interface DeployCertificateInstanceResponse {
 }
 
 declare interface DeployCertificateRecordRetryRequest {
-  /** 待重试部署记录ID */
+  /** 待重试部署记录ID，通过DeployCertificateInstance获得 */
   DeployRecordId?: number;
-  /** 待重试部署记录详情ID */
+  /** 待重试部署记录详情ID，通过DescribeHostDeployRecordDetail获得 */
   DeployRecordDetailId?: number;
 }
 
@@ -1463,7 +1463,7 @@ declare interface DeployCertificateRecordRetryResponse {
 }
 
 declare interface DeployCertificateRecordRollbackRequest {
-  /** 待重试部署记录ID */
+  /** 待重试部署记录ID,就是通过DeployCertificateInstance返回的DeployRecordId */
   DeployRecordId?: number;
 }
 
@@ -1521,7 +1521,7 @@ declare interface DescribeCertificateBindResourceTaskDetailResponse {
 }
 
 declare interface DescribeCertificateBindResourceTaskResultRequest {
-  /** 任务ID，根据任务ID查询绑定云资源结果， 最大支持100个 */
+  /** 任务ID，根据CreateCertificateBindResourceSyncTask得到的任务ID查询绑定云资源结果， 最大支持100个 */
   TaskIds: string[];
 }
 
@@ -1733,7 +1733,7 @@ declare interface DescribeCertificateResponse {
 declare interface DescribeCertificatesRequest {
   /** 分页偏移量，从0开始。 */
   Offset?: number;
-  /** 每页数量，默认10。最大1000 */
+  /** 每页数量，默认10。最大值1000，如超过1000按1000处理 */
   Limit?: number;
   /** 搜索关键词，可搜索证书 ID、备注名称、域名。例如： a8xHcaIs。 */
   SearchKey?: string;
@@ -1761,7 +1761,7 @@ declare interface DescribeCertificatesRequest {
   Hostable?: number;
   /** 筛选指定标签的证书 */
   Tags?: Tags[];
-  /** //是否筛选等待签发的证书，传1是筛选，0和null不筛选 */
+  /** 是否筛选等待签发的证书，传1是筛选，0和null不筛选 */
   IsPendingIssue?: number;
 }
 
@@ -1836,21 +1836,25 @@ declare interface DescribeDownloadCertificateUrlResponse {
 
 declare interface DescribeHostApiGatewayInstanceListRequest {
   /** 待部署的证书ID */
-  CertificateId: string;
-  /** 部署资源类型 */
-  ResourceType: string;
+  CertificateId?: string;
   /** 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时 */
   IsCache?: number;
   /** 过滤参数列表； FilterKey：domainMatch（查询域名是否匹配的实例列表） FilterValue：1，表示查询匹配； 0，表示查询不匹配； 默认查询匹配 */
   Filters?: Filter[];
+  /** 部署资源类型apigateway */
+  ResourceType?: string;
   /** 已部署的证书ID */
   OldCertificateId?: string;
+  /** 每页数量，默认10。 */
+  Limit?: number;
+  /** 分页偏移量，从0开始。 */
+  Offset?: string;
 }
 
 declare interface DescribeHostApiGatewayInstanceListResponse {
-  /** apiGateway实例列表 */
+  /** apiGateway实例列表,如取不到值返回空数组 */
   InstanceList?: ApiGatewayInstanceDetail[] | null;
-  /** 总数 */
+  /** 总数，如取不到值返回0 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1858,31 +1862,31 @@ declare interface DescribeHostApiGatewayInstanceListResponse {
 
 declare interface DescribeHostCdnInstanceListRequest {
   /** 待部署的证书ID */
-  CertificateId: string;
-  /** 部署资源类型 */
-  ResourceType: string;
+  CertificateId?: string;
   /** 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时 */
   IsCache?: number;
   /** 过滤参数列表； FilterKey：domainMatch（查询域名是否匹配的实例列表） FilterValue：1，表示查询匹配； 0，表示查询不匹配； 默认查询匹配 */
   Filters?: Filter[];
+  /** 部署资源类型cdn */
+  ResourceType?: string;
   /** 原证书ID */
   OldCertificateId?: string;
   /** 分页偏移量，从0开始。 */
   Offset?: number;
   /** 每页数量，默认10。 */
   Limit?: number;
-  /** 是否异步 */
+  /** 是否异步,0表示否，1表示是，默认为0 */
   AsyncCache?: number;
 }
 
 declare interface DescribeHostCdnInstanceListResponse {
-  /** CDN实例列表 */
+  /** CDN实例列表，如取不到值返回空数组 */
   InstanceList?: CdnInstanceDetail[] | null;
-  /** CDN域名总数 */
+  /** CDN域名总数，如取不到值返回0 */
   TotalCount?: number | null;
-  /** 异步刷新总数 */
+  /** 异步刷新总数，如取不到值返回0 */
   AsyncTotalNum?: number | null;
-  /** 异步刷新当前执行数 */
+  /** 异步刷新当前执行数，如取不到值返回0 */
   AsyncOffset?: number | null;
   /** 当前缓存读取时间 */
   AsyncCacheTime?: string | null;
@@ -1891,32 +1895,32 @@ declare interface DescribeHostCdnInstanceListResponse {
 }
 
 declare interface DescribeHostClbInstanceListRequest {
-  /** 待部署的证书ID */
-  CertificateId: string;
   /** 分页偏移量，从0开始。 */
   Offset?: number;
   /** 每页数量，默认10。 */
   Limit?: number;
+  /** 待部署的证书ID */
+  CertificateId?: string;
   /** 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时 */
   IsCache?: number;
   /** 过滤参数列表； FilterKey：domainMatch（查询域名是否匹配的实例列表） FilterValue：1，表示查询匹配； 0，表示查询不匹配； 默认查询匹配 */
   Filters?: Filter[];
-  /** 是否异步缓存 */
+  /** 是否异步缓存,0表示否,1表示是 */
   AsyncCache?: number;
   /** 原证书ID */
   OldCertificateId?: string;
 }
 
 declare interface DescribeHostClbInstanceListResponse {
-  /** 总数 */
+  /** 总数，取不到值返回0 */
   TotalCount?: number | null;
-  /** CLB实例监听器列表 */
+  /** CLB实例监听器列表，取不到值返回空数组 */
   InstanceList?: ClbInstanceDetail[] | null;
-  /** 异步刷新总数 */
+  /** 异步刷新总数，取不到值返回0 */
   AsyncTotalNum?: number | null;
-  /** 异步刷新当前执行数 */
+  /** 异步刷新当前执行数，取不到值返回0 */
   AsyncOffset?: number | null;
-  /** 当前缓存读取时间 */
+  /** 当前缓存读取时间，去不到值返回空 */
   AsyncCacheTime?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1937,7 +1941,7 @@ declare interface DescribeHostCosInstanceListRequest {
   Offset?: number;
   /** 每页数量，默认10。 */
   Limit?: number;
-  /** 是否异步 */
+  /** 是否异步，0表示否，1表示是 */
   AsyncCache?: number;
 }
 
@@ -1958,20 +1962,26 @@ declare interface DescribeHostCosInstanceListResponse {
 
 declare interface DescribeHostDdosInstanceListRequest {
   /** 待部署的证书ID */
-  CertificateId: string;
-  /** 部署资源类型 */
-  ResourceType: string;
+  CertificateId?: string;
   /** 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时 */
   IsCache?: number;
   /** 过滤参数列表； FilterKey：domainMatch（查询域名是否匹配的实例列表） FilterValue：1，表示查询匹配； 0，表示查询不匹配； 默认查询匹配 */
   Filters?: Filter[];
+  /** 部署资源类型ddos */
+  ResourceType?: string;
   /** 已部署的证书ID */
   OldCertificateId?: string;
+  /** 分页偏移量，从0开始。 */
+  Offset?: number;
+  /** 每页数量，默认10。 */
+  Limit?: number;
 }
 
 declare interface DescribeHostDdosInstanceListResponse {
-  /** DDOS实例列表 */
+  /** DDOS实例列表,取不到值返回空数组 */
   InstanceList?: DdosInstanceDetail[] | null;
+  /** 总数 */
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2007,7 +2017,7 @@ declare interface DescribeHostDeployRecordRequest {
   Offset?: number;
   /** 每页数量，默认10。 */
   Limit?: number;
-  /** 资源类型 */
+  /** 支持的资源类型如下,clb,cdn,ddos,waf,apigateway,teo,tke,cos,lighthouse,vod,tcb,tse */
   ResourceType?: string;
 }
 
@@ -2022,39 +2032,39 @@ declare interface DescribeHostDeployRecordResponse {
 
 declare interface DescribeHostLighthouseInstanceListRequest {
   /** 待部署的证书ID */
-  CertificateId: string;
-  /** 部署资源类型 lighthouse */
-  ResourceType: string;
+  CertificateId?: string;
   /** 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时 */
   IsCache?: number;
   /** 过滤参数列表 */
   Filters?: Filter[];
+  /** 部署资源类型 lighthouse */
+  ResourceType?: string;
 }
 
 declare interface DescribeHostLighthouseInstanceListResponse {
-  /** Lighthouse实例列表 */
-  InstanceList: LighthouseInstanceDetail[] | null;
-  /** 总数 */
-  TotalCount: number | null;
+  /** Lighthouse实例列表,如取不到返回空数组 */
+  InstanceList?: LighthouseInstanceDetail[] | null;
+  /** 总数，如取不到返回0 */
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeHostLiveInstanceListRequest {
   /** 待部署的证书ID */
-  CertificateId: string;
-  /** 部署资源类型 */
-  ResourceType: string;
+  CertificateId?: string;
   /** 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时 */
   IsCache?: number;
   /** 过滤参数列表； FilterKey：domainMatch（查询域名是否匹配的实例列表） FilterValue：1，表示查询匹配； 0，表示查询不匹配； 默认查询匹配 */
   Filters?: Filter[];
+  /** 部署资源类型 */
+  ResourceType?: string;
   /** 已部署的证书ID */
   OldCertificateId?: string;
 }
 
 declare interface DescribeHostLiveInstanceListResponse {
-  /** live实例列表 */
+  /** live实例列表,如取不到值返回空数组 */
   InstanceList?: LiveInstanceDetail[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2089,30 +2099,30 @@ declare interface DescribeHostTeoInstanceListResponse {
 }
 
 declare interface DescribeHostTkeInstanceListRequest {
-  /** 待部署的证书ID */
-  CertificateId: string;
   /** 分页偏移量，从0开始。 */
   Offset?: number;
   /** 每页数量，默认10。 */
   Limit?: number;
+  /** 待部署的证书ID */
+  CertificateId?: string;
   /** 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时 */
   IsCache?: number;
   /** 过滤参数列表； FilterKey：domainMatch（查询域名是否匹配的实例列表） FilterValue：1，表示查询匹配； 0，表示查询不匹配； 默认查询匹配 */
   Filters?: Filter[];
-  /** 是否异步缓存 */
+  /** 是否异步缓存，0表示否，1表示是，默认为0 */
   AsyncCache?: number;
   /** 原证书ID */
   OldCertificateId?: string;
 }
 
 declare interface DescribeHostTkeInstanceListResponse {
-  /** 总数 */
+  /** 总数，取不到值返回0 */
   TotalCount?: number | null;
-  /** CLB实例监听器列表 */
+  /** tke实例列表，取不到值返回空数组 */
   InstanceList?: TkeInstanceDetail[] | null;
-  /** 异步刷新总数 */
+  /** 异步刷新总数，取不到值返回0 */
   AsyncTotalNum?: number | null;
-  /** 异步刷新当前执行数 */
+  /** 异步刷新当前执行数，取不到值返回0 */
   AsyncOffset?: number | null;
   /** 当前缓存读取时间 */
   AsyncCacheTime?: string | null;
@@ -2121,7 +2131,7 @@ declare interface DescribeHostTkeInstanceListResponse {
 }
 
 declare interface DescribeHostUpdateRecordDetailRequest {
-  /** 一键更新记录ID */
+  /** 一键更新记录ID,从接口UpdateCertificateInstance获得 */
   DeployRecordId: string;
   /** 每页数量，默认10。 */
   Limit?: string;
@@ -2130,15 +2140,15 @@ declare interface DescribeHostUpdateRecordDetailRequest {
 }
 
 declare interface DescribeHostUpdateRecordDetailResponse {
-  /** 总数 */
+  /** 总数,如果取不到返回0 */
   TotalCount?: number | null;
-  /** 证书部署记录列表 */
+  /** 证书部署记录列表，如果取不到值返回空数组 */
   RecordDetailList?: UpdateRecordDetails[] | null;
-  /** 成功总数 */
+  /** 成功总数,如果取不到返回0 */
   SuccessTotalCount?: number | null;
-  /** 失败总数 */
+  /** 失败总数,如果取不到返回0 */
   FailedTotalCount?: number | null;
-  /** 部署中总数 */
+  /** 部署中总数,如果取不到返回0 */
   RunningTotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2166,21 +2176,21 @@ declare interface DescribeHostUpdateRecordResponse {
 
 declare interface DescribeHostVodInstanceListRequest {
   /** 待部署的证书ID */
-  CertificateId: string;
-  /** 部署资源类型 vod */
-  ResourceType: string;
+  CertificateId?: string;
   /** 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时 */
   IsCache?: number;
   /** 过滤参数列表 */
   Filters?: Filter[];
+  /** 部署资源类型 vod */
+  ResourceType?: string;
   /** 已部署的证书ID */
   OldCertificateId?: string;
 }
 
 declare interface DescribeHostVodInstanceListResponse {
-  /** Vod实例列表 */
+  /** Vod实例列表，如果取不到值返回空数组 */
   InstanceList?: VodInstanceDetail[] | null;
-  /** 总数 */
+  /** 总数,如果取不到值返回0 */
   TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2188,26 +2198,26 @@ declare interface DescribeHostVodInstanceListResponse {
 
 declare interface DescribeHostWafInstanceListRequest {
   /** 待部署的证书ID */
-  CertificateId: string;
-  /** 部署资源类型 */
-  ResourceType: string;
+  CertificateId?: string;
   /** 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时 */
   IsCache?: number;
   /** 过滤参数列表； FilterKey：domainMatch（查询域名是否匹配的实例列表） FilterValue：1，表示查询匹配； 0，表示查询不匹配； 默认查询匹配 */
   Filters?: Filter[];
+  /** 部署资源类型，如waf */
+  ResourceType?: string;
   /** 已部署的证书ID */
   OldCertificateId?: string;
 }
 
 declare interface DescribeHostWafInstanceListResponse {
-  /** WAF实例列表 */
+  /** WAF实例列表，如果没有取到值返回空数组 */
   InstanceList?: LiveInstanceDetail[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeManagerDetailRequest {
-  /** 管理人ID */
+  /** 管理人ID,可以从describeManagers接口获得 */
   ManagerId: number;
   /** 分页每页数量 */
   Limit?: number;
@@ -2259,7 +2269,7 @@ declare interface DescribeManagerDetailResponse {
 }
 
 declare interface DescribeManagersRequest {
-  /** 公司ID */
+  /** 公司ID,可以从DescribeCompanies接口获取 */
   CompanyId: number;
   /** 分页偏移量 */
   Offset?: number;
@@ -2303,11 +2313,11 @@ declare interface DescribePackagesRequest {
 
 declare interface DescribePackagesResponse {
   /** 权益包列表。 */
-  Packages: PackageInfo[];
+  Packages?: PackageInfo[];
   /** 总条数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 权益点总余额。 */
-  TotalBalance: number;
+  TotalBalance?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2535,9 +2545,9 @@ declare interface UpdateCertificateInstanceResponse {
 }
 
 declare interface UpdateCertificateRecordRetryRequest {
-  /** 待重试部署记录ID */
+  /** 待重试部署记录ID,通过UpdateCertificateInstance得到部署记录ID */
   DeployRecordId?: number;
-  /** 待重试部署记录详情ID */
+  /** 待重试部署记录详情ID,通过DescribeHostUpdateRecordDetail接口获得 */
   DeployRecordDetailId?: number;
 }
 
@@ -2547,7 +2557,7 @@ declare interface UpdateCertificateRecordRetryResponse {
 }
 
 declare interface UpdateCertificateRecordRollbackRequest {
-  /** 待重试部署记录ID */
+  /** 待重试部署记录ID,通过UpdateCertificateInstance获得 */
   DeployRecordId?: number;
 }
 
@@ -2686,35 +2696,35 @@ declare interface Ssl {
   /** 获取下载证书链接 {@link DescribeDownloadCertificateUrlRequest} {@link DescribeDownloadCertificateUrlResponse} */
   DescribeDownloadCertificateUrl(data: DescribeDownloadCertificateUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDownloadCertificateUrlResponse>;
   /** 查询证书apiGateway云资源部署实例列表 {@link DescribeHostApiGatewayInstanceListRequest} {@link DescribeHostApiGatewayInstanceListResponse} */
-  DescribeHostApiGatewayInstanceList(data: DescribeHostApiGatewayInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostApiGatewayInstanceListResponse>;
+  DescribeHostApiGatewayInstanceList(data?: DescribeHostApiGatewayInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostApiGatewayInstanceListResponse>;
   /** 查询证书cdn云资源部署实例列表 {@link DescribeHostCdnInstanceListRequest} {@link DescribeHostCdnInstanceListResponse} */
-  DescribeHostCdnInstanceList(data: DescribeHostCdnInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostCdnInstanceListResponse>;
+  DescribeHostCdnInstanceList(data?: DescribeHostCdnInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostCdnInstanceListResponse>;
   /** 查询证书CLB云资源部署实例列表信息 {@link DescribeHostClbInstanceListRequest} {@link DescribeHostClbInstanceListResponse} */
-  DescribeHostClbInstanceList(data: DescribeHostClbInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostClbInstanceListResponse>;
+  DescribeHostClbInstanceList(data?: DescribeHostClbInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostClbInstanceListResponse>;
   /** 查询证书cos云资源部署实例列表 {@link DescribeHostCosInstanceListRequest} {@link DescribeHostCosInstanceListResponse} */
   DescribeHostCosInstanceList(data?: DescribeHostCosInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostCosInstanceListResponse>;
   /** 查询证书ddos云资源部署实例列表 {@link DescribeHostDdosInstanceListRequest} {@link DescribeHostDdosInstanceListResponse} */
-  DescribeHostDdosInstanceList(data: DescribeHostDdosInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostDdosInstanceListResponse>;
+  DescribeHostDdosInstanceList(data?: DescribeHostDdosInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostDdosInstanceListResponse>;
   /** 查询证书云资源部署记录列表 {@link DescribeHostDeployRecordRequest} {@link DescribeHostDeployRecordResponse} */
   DescribeHostDeployRecord(data: DescribeHostDeployRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostDeployRecordResponse>;
   /** 查询证书云资源部署记录详情列表 {@link DescribeHostDeployRecordDetailRequest} {@link DescribeHostDeployRecordDetailResponse} */
   DescribeHostDeployRecordDetail(data: DescribeHostDeployRecordDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostDeployRecordDetailResponse>;
   /** 查询证书Lighthouse云资源部署实例列表 {@link DescribeHostLighthouseInstanceListRequest} {@link DescribeHostLighthouseInstanceListResponse} */
-  DescribeHostLighthouseInstanceList(data: DescribeHostLighthouseInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostLighthouseInstanceListResponse>;
+  DescribeHostLighthouseInstanceList(data?: DescribeHostLighthouseInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostLighthouseInstanceListResponse>;
   /** 查询证书live云资源部署实例列表 {@link DescribeHostLiveInstanceListRequest} {@link DescribeHostLiveInstanceListResponse} */
-  DescribeHostLiveInstanceList(data: DescribeHostLiveInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostLiveInstanceListResponse>;
+  DescribeHostLiveInstanceList(data?: DescribeHostLiveInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostLiveInstanceListResponse>;
   /** 查询证书EdgeOne云资源部署实例列表 {@link DescribeHostTeoInstanceListRequest} {@link DescribeHostTeoInstanceListResponse} */
   DescribeHostTeoInstanceList(data: DescribeHostTeoInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostTeoInstanceListResponse>;
   /** 查询证书tke云资源部署实例列表 {@link DescribeHostTkeInstanceListRequest} {@link DescribeHostTkeInstanceListResponse} */
-  DescribeHostTkeInstanceList(data: DescribeHostTkeInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostTkeInstanceListResponse>;
+  DescribeHostTkeInstanceList(data?: DescribeHostTkeInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostTkeInstanceListResponse>;
   /** 查询证书云资源更新记录列表 {@link DescribeHostUpdateRecordRequest} {@link DescribeHostUpdateRecordResponse} */
   DescribeHostUpdateRecord(data?: DescribeHostUpdateRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostUpdateRecordResponse>;
   /** 查询证书云资源更新记录详情列表 {@link DescribeHostUpdateRecordDetailRequest} {@link DescribeHostUpdateRecordDetailResponse} */
   DescribeHostUpdateRecordDetail(data: DescribeHostUpdateRecordDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostUpdateRecordDetailResponse>;
   /** 查询证书Vod云资源部署实例列表 {@link DescribeHostVodInstanceListRequest} {@link DescribeHostVodInstanceListResponse} */
-  DescribeHostVodInstanceList(data: DescribeHostVodInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostVodInstanceListResponse>;
+  DescribeHostVodInstanceList(data?: DescribeHostVodInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostVodInstanceListResponse>;
   /** 查询证书waf云资源部署实例列表 {@link DescribeHostWafInstanceListRequest} {@link DescribeHostWafInstanceListResponse} */
-  DescribeHostWafInstanceList(data: DescribeHostWafInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostWafInstanceListResponse>;
+  DescribeHostWafInstanceList(data?: DescribeHostWafInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostWafInstanceListResponse>;
   /** 查询管理人详情 {@link DescribeManagerDetailRequest} {@link DescribeManagerDetailResponse} */
   DescribeManagerDetail(data: DescribeManagerDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeManagerDetailResponse>;
   /** 查询管理人列表 {@link DescribeManagersRequest} {@link DescribeManagersResponse} */

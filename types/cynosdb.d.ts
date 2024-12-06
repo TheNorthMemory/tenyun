@@ -2294,6 +2294,22 @@ declare interface CloseClusterPasswordComplexityResponse {
   RequestId?: string;
 }
 
+declare interface CloseProxyEndPointRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 数据库代理组ID */
+  ProxyGroupId: string;
+}
+
+declare interface CloseProxyEndPointResponse {
+  /** 异步流程ID */
+  FlowId?: number;
+  /** 异步任务ID */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CloseProxyRequest {
   /** 集群ID */
   ClusterId: string;
@@ -3478,6 +3494,22 @@ declare interface DescribeInstancesResponse {
   TotalCount?: number;
   /** 实例列表 */
   InstanceSet?: CynosdbInstance[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstancesWithinSameClusterRequest {
+  /** vpcId */
+  UniqVpcId: string;
+  /** vip */
+  Vip: string;
+}
+
+declare interface DescribeInstancesWithinSameClusterResponse {
+  /** 实例个数 */
+  TotalCount?: number;
+  /** 实例ID列表 */
+  InstanceIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5261,6 +5293,8 @@ declare interface Cynosdb {
   CloseClusterPasswordComplexity(data: CloseClusterPasswordComplexityRequest, config?: AxiosRequestConfig): AxiosPromise<CloseClusterPasswordComplexityResponse>;
   /** 关闭数据库代理 {@link CloseProxyRequest} {@link CloseProxyResponse} */
   CloseProxy(data: CloseProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CloseProxyResponse>;
+  /** 关闭数据库代理连接地址 {@link CloseProxyEndPointRequest} {@link CloseProxyEndPointResponse} */
+  CloseProxyEndPoint(data: CloseProxyEndPointRequest, config?: AxiosRequestConfig): AxiosPromise<CloseProxyEndPointResponse>;
   /** 关闭外网 {@link CloseWanRequest} {@link CloseWanResponse} */
   CloseWan(data?: CloseWanRequest, config?: AxiosRequestConfig): AxiosPromise<CloseWanResponse>;
   /** 复制集群密码复杂度 {@link CopyClusterPasswordComplexityRequest} {@link CopyClusterPasswordComplexityResponse} */
@@ -5371,6 +5405,8 @@ declare interface Cynosdb {
   DescribeInstanceSpecs(data: DescribeInstanceSpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSpecsResponse>;
   /** 查询实例的列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
+  /** 查询同一集群下实例列表 {@link DescribeInstancesWithinSameClusterRequest} {@link DescribeInstancesWithinSameClusterResponse} */
+  DescribeInstancesWithinSameCluster(data: DescribeInstancesWithinSameClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesWithinSameClusterResponse>;
   /** 查询回收站实例列表 {@link DescribeIsolatedInstancesRequest} {@link DescribeIsolatedInstancesResponse} */
   DescribeIsolatedInstances(data?: DescribeIsolatedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIsolatedInstancesResponse>;
   /** 查询实例维护时间窗 {@link DescribeMaintainPeriodRequest} {@link DescribeMaintainPeriodResponse} */

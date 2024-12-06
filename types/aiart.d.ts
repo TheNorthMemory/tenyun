@@ -63,13 +63,15 @@ declare interface ChangeClothesResponse {
 }
 
 declare interface GenerateAvatarRequest {
-  /** 头像风格。请在 [百变头像风格列表](https://cloud.tencent.com/document/product/1668/107741) 中选择期望的风格，必须传入风格编号。 */
-  Style: string;
+  /** 头像风格，仅在人像模式下生效。请在 [百变头像风格列表](https://cloud.tencent.com/document/product/1668/107741) 中选择期望的风格，传入风格编号，不传默认使用 flower 风格。若使用萌宠贴纸模式，无需选择风格，该参数不生效。 */
+  Style?: string;
   /** 输入图 Base64 数据。Base64 和 Url 必须提供一个，如果都提供以 Url 为准。图片限制：单边分辨率小于5000，转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。 */
   InputImage?: string;
   /** 输入图 Url。Base64 和 Url 必须提供一个，如果都提供以 Url 为准。图片限制：单边分辨率小于5000，转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。 */
   InputUrl?: string;
-  /** 输入图像质量检测开关，默认开启。1：开启0：关闭建议开启检测，可提升生成效果，关闭检测可能因输入图像质量较差导致生成效果受损。开启后，将增强对输入图像的质量要求，如果输入图像单边分辨率<500、图像中人脸占比较小、存在多人、没有检测到人脸、人脸不完整、人脸遮挡等，将被拦截。关闭后，将降低对输入图像的质量要求，如果图像中没有检测到人脸或人脸占比过小等，将被拦截。 */
+  /** 图像类型，默认为人像。human：人像头像，仅支持人像图片输入，建议避免上传无人、多人、人像过小的图片。pet：萌宠贴纸，仅支持动物图片输入，建议避免上传无动物、多动物、动物过小的图片。 */
+  Type?: string;
+  /** 输入人像图的质量检测开关，默认开启，仅在人像模式下生效。1：开启0：关闭建议开启检测，可提升生成效果，关闭检测可能因输入图像质量较差导致生成效果受损。开启后，将增强对输入图像的质量要求，如果输入图像单边分辨率<500、图像中人脸占比较小、存在多人、没有检测到人脸、人脸不完整、人脸遮挡等，将被拦截。关闭后，将降低对输入图像的质量要求，如果图像中没有检测到人脸或人脸占比过小等，将被拦截。 */
   Filter?: number;
   /** 为生成结果图添加标识的开关，默认为1。1：添加标识。0：不添加标识。其他数值：默认按1处理。建议您使用显著标识来提示结果图是 AI 生成的图片。 */
   LogoAdd?: number;
@@ -338,7 +340,7 @@ declare interface Aiart {
   /** 模特换装 {@link ChangeClothesRequest} {@link ChangeClothesResponse} */
   ChangeClothes(data: ChangeClothesRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeClothesResponse>;
   /** 百变头像 {@link GenerateAvatarRequest} {@link GenerateAvatarResponse} */
-  GenerateAvatar(data: GenerateAvatarRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateAvatarResponse>;
+  GenerateAvatar(data?: GenerateAvatarRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateAvatarResponse>;
   /** 图像风格化（图生图） {@link ImageToImageRequest} {@link ImageToImageResponse} */
   ImageToImage(data?: ImageToImageRequest, config?: AxiosRequestConfig): AxiosPromise<ImageToImageResponse>;
   /** 查询生成写真图片任务 {@link QueryDrawPortraitJobRequest} {@link QueryDrawPortraitJobResponse} */

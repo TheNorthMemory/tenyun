@@ -17,51 +17,51 @@ declare interface Annotation {
 /** 规则详情 */
 declare interface ConfigRule {
   /** 规则标识 */
-  Identifier: string | null;
+  Identifier?: string | null;
   /** 规则名 */
-  RuleName: string | null;
+  RuleName?: string | null;
   /** 规则参数 */
-  InputParameter: InputParameter[] | null;
+  InputParameter?: InputParameter[] | null;
   /** 规则触发条件 */
-  SourceCondition: SourceConditionForManage[] | null;
+  SourceCondition?: SourceConditionForManage[] | null;
   /** 规则支持的资源类型，规则仅对指定资源类型的资源生效。 */
-  ResourceType: string[] | null;
+  ResourceType?: string[] | null;
   /** 规则所属标签 */
-  Labels: string[] | null;
+  Labels?: string[] | null;
   /** 规则风险等级1:低风险2:中风险3:高风险 */
-  RiskLevel: number | null;
+  RiskLevel?: number | null;
   /** 规则对应的函数 */
-  ServiceFunction: string | null;
+  ServiceFunction?: string | null;
   /** 创建时间格式：YYYY-MM-DD h:i:s */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 规则描述 */
-  Description: string | null;
+  Description?: string | null;
   /** ACTIVE：启用NO_ACTIVE：停止 */
-  Status: string | null;
+  Status?: string | null;
   /** 合规： 'COMPLIANT'不合规： 'NON_COMPLIANT'无法应用规则： 'NOT_APPLICABLE' */
-  ComplianceResult: string | null;
+  ComplianceResult?: string | null;
   /** ["",""] */
-  Annotation: Annotation | null;
+  Annotation?: Annotation | null;
   /** 规则评估时间格式：YYYY-MM-DD h:i:s */
-  ConfigRuleInvokedTime: string | null;
+  ConfigRuleInvokedTime?: string | null;
   /** 规则ID */
-  ConfigRuleId: string | null;
+  ConfigRuleId?: string | null;
   /** CUSTOMIZE：自定义规则、SYSTEM：托管规则 */
-  IdentifierType: string | null;
+  IdentifierType?: string | null;
   /** 合规包ID */
-  CompliancePackId: string | null;
+  CompliancePackId?: string | null;
   /** 触发类型ScheduledNotification：周期触发、ConfigurationItemChangeNotification：变更触发 */
-  TriggerType: TriggerType[] | null;
+  TriggerType?: TriggerType[] | null;
   /** 参数详情 */
-  ManageInputParameter: InputParameterForManage[] | null;
-  /** 规则名称 */
-  CompliancePackName: string | null;
+  ManageInputParameter?: InputParameterForManage[] | null;
+  /** 合规包名称 */
+  CompliancePackName?: string | null;
   /** 关联地域 */
-  RegionsScope: string[] | null;
+  RegionsScope?: string[] | null;
   /** 关联标签 */
-  TagsScope: Tag[] | null;
+  TagsScope?: Tag[] | null;
   /** 规则对指定资源ID无效，即不对该资源执行评估。 */
-  ExcludeResourceIdsScope: string[] | null;
+  ExcludeResourceIdsScope?: string[] | null;
   /** 账号组ID */
   AccountGroupId?: string | null;
   /** 账号组名称 */
@@ -235,17 +235,17 @@ declare interface ListAggregateConfigRulesResponse {
 }
 
 declare interface ListConfigRulesRequest {
-  /** 每页限制 */
+  /** 每页数量。取值范围：1~200 */
   Limit: number;
-  /** 偏移量 */
+  /** 偏移量。取值范围：最小值为0 */
   Offset: number;
-  /** 排序类型, 倒序：desc，顺序：asc */
+  /** 排序类型(规则名称)。倒序：desc，顺序：asc */
   OrderType?: string;
-  /** 风险等级1：高风险。2：中风险。3：低风险。 */
+  /** 风险等级。1：高风险，2：中风险，3：低风险。 */
   RiskLevel?: number[];
-  /** 规则状态 */
+  /** 规则状态。ACTIVE：启用UN_ACTIVE：停用 */
   State?: string;
-  /** 评估结果 */
+  /** 评估结果。COMPLIANT：合规NON_COMPLIANT：不合规 */
   ComplianceResult?: string[];
   /** 规则名 */
   RuleName?: string;
@@ -253,9 +253,9 @@ declare interface ListConfigRulesRequest {
 
 declare interface ListConfigRulesResponse {
   /** 总数 */
-  Total: number;
+  Total?: number;
   /** 详情 */
-  Items: ConfigRule[];
+  Items?: ConfigRule[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -275,15 +275,15 @@ declare interface ListDiscoveredResourcesRequest {
 
 declare interface ListDiscoveredResourcesResponse {
   /** 详情 */
-  Items: ResourceListInfo[];
+  Items?: ResourceListInfo[];
   /** 下一页 */
-  NextToken: string | null;
+  NextToken?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface PutEvaluationsRequest {
-  /** 回调令牌。从自定义规则所选的scf云函数Context中取参数ResultToken值 */
+  /** 回调令牌。从自定义规则所选的scf云函数入参中取参数ResultToken值云函数入参说明 */
   ResultToken: string;
   /** 自定义规则评估结果信息。 */
   Evaluations: Evaluation[];

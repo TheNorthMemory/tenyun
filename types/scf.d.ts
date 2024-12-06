@@ -444,6 +444,8 @@ declare interface NamespaceLimit {
 declare interface NamespaceResourceEnv {
   /** 基于TKE集群的资源池 */
   TKE?: NamespaceResourceEnvTKE | null;
+  /** 近离线计算类型的命名空间 */
+  OFFLINE?: boolean;
 }
 
 /** 基于TKE的资源池选项 */

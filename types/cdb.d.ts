@@ -5299,7 +5299,7 @@ declare interface Cdb {
   CreateAuditLogFile(data: CreateAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditLogFileResponse>;
   /** 创建审计策略 {@link CreateAuditPolicyRequest} {@link CreateAuditPolicyResponse} */
   CreateAuditPolicy(data: CreateAuditPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditPolicyResponse>;
-  /** 创建审计规则 {@link CreateAuditRuleRequest} {@link CreateAuditRuleResponse} */
+  /** @deprecated 创建审计规则 {@link CreateAuditRuleRequest} {@link CreateAuditRuleResponse} */
   CreateAuditRule(data: CreateAuditRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditRuleResponse>;
   /** 创建审计规则模板 {@link CreateAuditRuleTemplateRequest} {@link CreateAuditRuleTemplateResponse} */
   CreateAuditRuleTemplate(data: CreateAuditRuleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditRuleTemplateResponse>;
@@ -5333,7 +5333,7 @@ declare interface Cdb {
   DeleteAuditLogFile(data: DeleteAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditLogFileResponse>;
   /** 删除审计策略 {@link DeleteAuditPolicyRequest} {@link DeleteAuditPolicyResponse} */
   DeleteAuditPolicy(data: DeleteAuditPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditPolicyResponse>;
-  /** 删除审计规则 {@link DeleteAuditRuleRequest} {@link DeleteAuditRuleResponse} */
+  /** @deprecated 删除审计规则 {@link DeleteAuditRuleRequest} {@link DeleteAuditRuleResponse} */
   DeleteAuditRule(data: DeleteAuditRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditRuleResponse>;
   /** 删除审计规则模板 {@link DeleteAuditRuleTemplatesRequest} {@link DeleteAuditRuleTemplatesResponse} */
   DeleteAuditRuleTemplates(data: DeleteAuditRuleTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditRuleTemplatesResponse>;
@@ -5369,7 +5369,7 @@ declare interface Cdb {
   DescribeAuditRuleTemplateModifyHistory(data?: DescribeAuditRuleTemplateModifyHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditRuleTemplateModifyHistoryResponse>;
   /** 查询审计规则模板 {@link DescribeAuditRuleTemplatesRequest} {@link DescribeAuditRuleTemplatesResponse} */
   DescribeAuditRuleTemplates(data?: DescribeAuditRuleTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditRuleTemplatesResponse>;
-  /** 查询审计规则 {@link DescribeAuditRulesRequest} {@link DescribeAuditRulesResponse} */
+  /** @deprecated 查询审计规则 {@link DescribeAuditRulesRequest} {@link DescribeAuditRulesResponse} */
   DescribeAuditRules(data?: DescribeAuditRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditRulesResponse>;
   /** 查询云数据库备份配置信息 {@link DescribeBackupConfigRequest} {@link DescribeBackupConfigResponse} */
   DescribeBackupConfig(data: DescribeBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupConfigResponse>;
@@ -5503,7 +5503,7 @@ declare interface Cdb {
   ModifyAccountPrivileges(data: ModifyAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountPrivilegesResponse>;
   /** 更改审计服务配置 {@link ModifyAuditConfigRequest} {@link ModifyAuditConfigResponse} */
   ModifyAuditConfig(data: ModifyAuditConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditConfigResponse>;
-  /** 修改审计规则 {@link ModifyAuditRuleRequest} {@link ModifyAuditRuleResponse} */
+  /** @deprecated 修改审计规则 {@link ModifyAuditRuleRequest} {@link ModifyAuditRuleResponse} */
   ModifyAuditRule(data: ModifyAuditRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditRuleResponse>;
   /** 修改审计规则模板 {@link ModifyAuditRuleTemplatesRequest} {@link ModifyAuditRuleTemplatesResponse} */
   ModifyAuditRuleTemplates(data: ModifyAuditRuleTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditRuleTemplatesResponse>;

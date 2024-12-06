@@ -299,33 +299,33 @@ declare interface CCN {
 /** 云联网（CCN）关联实例（Instance）对象 */
 declare interface CcnAttachedInstance {
   /** 云联网实例ID。 */
-  CcnId: string;
+  CcnId?: string;
   /** 关联实例类型：`VPC`：私有网络`DIRECTCONNECT`：专线网关`BMVPC`：黑石私有网络 */
-  InstanceType: string;
+  InstanceType?: string;
   /** 关联实例ID。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 关联实例名称。 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 关联实例所属大区，例如：ap-guangzhou。 */
-  InstanceRegion: string;
+  InstanceRegion?: string;
   /** 关联实例所属UIN（根账号）。 */
-  InstanceUin: string;
+  InstanceUin?: string;
   /** 关联实例CIDR。 */
-  CidrBlock: string[];
+  CidrBlock?: string[];
   /** 关联实例状态：`PENDING`：申请中`ACTIVE`：已连接`EXPIRED`：已过期`REJECTED`：已拒绝`DELETED`：已删除`FAILED`：失败的（2小时后将异步强制解关联）`ATTACHING`：关联中`DETACHING`：解关联中`DETACHFAILED`：解关联失败（2小时后将异步强制解关联） */
-  State: string;
+  State?: string;
   /** 关联时间。 */
-  AttachedTime: string;
+  AttachedTime?: string;
   /** 云联网所属UIN（根账号）。 */
-  CcnUin: string;
+  CcnUin?: string;
   /** 关联实例所属的大地域，如: CHINA_MAINLAND */
-  InstanceArea: string;
+  InstanceArea?: string;
   /** 备注 */
-  Description: string;
+  Description?: string;
   /** 路由表ID */
-  RouteTableId: string | null;
+  RouteTableId?: string;
   /** 路由表名称 */
-  RouteTableName: string | null;
+  RouteTableName?: string;
 }
 
 /** 用于描述云联网地域间限速带宽实例的信息。 */
@@ -495,17 +495,17 @@ declare interface CcnRouteBroadcastPolicyRouteCondition {
 /** 云联网路由表信息 */
 declare interface CcnRouteTable {
   /** 云联网ID。 */
-  CcnId: string;
+  CcnId?: string;
   /** 云联网路由表ID。 */
-  CcnRouteTableId: string;
+  CcnRouteTableId?: string;
   /** 云联网路由表名称。 */
-  RouteTableName: string;
+  RouteTableName?: string;
   /** 云联网路由表描述。 */
-  RouteTableDescription: string;
+  RouteTableDescription?: string;
   /** True：是默认路由表 False：非默认路由表。 */
-  IsDefaultTable: boolean;
+  IsDefaultTable?: boolean;
   /** 创建时间。 */
-  CreateTime: string;
+  CreateTime?: string;
 }
 
 /** 云联网路由传播策略 */
@@ -571,7 +571,7 @@ declare interface CcnRouteTableSelectPolicy {
   /** 源端CIDR。 */
   SourceCidrBlock: string;
   /** 路由表ID。 */
-  RouteTableId: string | null;
+  RouteTableId: string;
   /** 路由表备注。 */
   Description?: string;
 }
@@ -675,13 +675,13 @@ declare interface CrossBorderCompliance {
 /** 跨境带宽监控数据 */
 declare interface CrossBorderFlowMonitorData {
   /** 入带宽，单位：`bps`。 */
-  InBandwidth: number[];
+  InBandwidth?: number[];
   /** 出带宽，单位：`bps`。 */
-  OutBandwidth: number[];
+  OutBandwidth?: number[];
   /** 入包，单位：`pps`。 */
-  InPkg: number[];
+  InPkg?: number[];
   /** 出包，单位：`pps`。 */
-  OutPkg: number[];
+  OutPkg?: number[];
 }
 
 /** 对端网关 */
@@ -1153,45 +1153,45 @@ declare interface HighPriorityRouteTable {
 /** IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议 */
 declare interface IKEOptionsSpecification {
   /** 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBS-192', 'AES-CBC-256', 'DES-CBC'，'SM4', 默认为3DES-CBC */
-  PropoEncryAlgorithm?: string | null;
+  PropoEncryAlgorithm?: string;
   /** 认证算法：可选值：'MD5', 'SHA1'，'SHA-256' 默认为MD5 */
-  PropoAuthenAlgorithm?: string | null;
+  PropoAuthenAlgorithm?: string;
   /** 协商模式：可选值：'AGGRESSIVE', 'MAIN'，默认为MAIN */
-  ExchangeMode?: string | null;
+  ExchangeMode?: string;
   /** 本端标识类型：可选值：'ADDRESS', 'FQDN'，默认为ADDRESS */
-  LocalIdentity?: string | null;
+  LocalIdentity?: string;
   /** 对端标识类型：可选值：'ADDRESS', 'FQDN'，默认为ADDRESS */
-  RemoteIdentity?: string | null;
+  RemoteIdentity?: string;
   /** 本端标识，当LocalIdentity选为ADDRESS时，LocalAddress必填。localAddress默认为vpn网关公网IP */
-  LocalAddress?: string | null;
+  LocalAddress?: string;
   /** 对端标识，当RemoteIdentity选为ADDRESS时，RemoteAddress必填 */
-  RemoteAddress?: string | null;
+  RemoteAddress?: string;
   /** 本端标识，当LocalIdentity选为FQDN时，LocalFqdnName必填 */
-  LocalFqdnName?: string | null;
+  LocalFqdnName?: string;
   /** 对端标识，当remoteIdentity选为FQDN时，RemoteFqdnName必填 */
-  RemoteFqdnName?: string | null;
+  RemoteFqdnName?: string;
   /** DH group，指定IKE交换密钥时使用的DH组，可选值：'GROUP1', 'GROUP2', 'GROUP5', 'GROUP14', 'GROUP24'， */
-  DhGroupName?: string | null;
+  DhGroupName?: string;
   /** IKE SA Lifetime，单位：秒，设置IKE SA的生存周期，取值范围：60-604800 */
-  IKESaLifetimeSeconds?: number | null;
+  IKESaLifetimeSeconds?: number;
   /** IKE版本 */
-  IKEVersion?: string | null;
+  IKEVersion?: string;
 }
 
 /** IPSec配置，腾讯云提供IPSec安全会话设置 */
 declare interface IPSECOptionsSpecification {
   /** 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBC-192', 'AES-CBC-256', 'DES-CBC', 'SM4', 'NULL'， 默认为AES-CBC-128 */
-  EncryptAlgorithm?: string | null;
+  EncryptAlgorithm?: string;
   /** 认证算法：可选值：'MD5', 'SHA1'，'SHA-256' 默认为 */
   IntegrityAlgorith?: string | null;
   /** IPsec SA lifetime(s)：单位秒，取值范围：180-604800 */
-  IPSECSaLifetimeSeconds?: number | null;
+  IPSECSaLifetimeSeconds?: number;
   /** PFS：可选值：'NULL', 'DH-GROUP1', 'DH-GROUP2', 'DH-GROUP5', 'DH-GROUP14', 'DH-GROUP24'，默认为NULL */
-  PfsDhGroup?: string | null;
+  PfsDhGroup?: string;
   /** IPsec SA lifetime(KB)：单位KB，取值范围：2560-604800 */
-  IPSECSaLifetimeTraffic?: number | null;
+  IPSECSaLifetimeTraffic?: number;
   /** 认证算法：可选值：'MD5', 'SHA1'，'SHA-256' 默认为 */
-  IntegrityAlgorithm?: string | null;
+  IntegrityAlgorithm?: string;
 }
 
 /** 云联网实例绑定路由表信息 */
@@ -2395,13 +2395,13 @@ declare interface SourceIpTranslationNatRule {
 /** DownloadVpnGatewaySslClientCert 使用 */
 declare interface SslClientConfig {
   /** 客户端配置 */
-  SslVpnClientConfiguration: string;
+  SslVpnClientConfiguration?: string;
   /** 更证书 */
-  SslVpnRootCert: string;
+  SslVpnRootCert?: string;
   /** 客户端密钥 */
-  SslVpnKey: string;
+  SslVpnKey?: string;
   /** 客户端证书 */
-  SslVpnCert: string;
+  SslVpnCert?: string;
   /** SSL-VPN-CLIENT 实例ID。 */
   SslVpnClientId?: string;
 }
@@ -3061,6 +3061,8 @@ declare interface AllocateIp6AddressesBandwidthRequest {
   InternetChargeType?: string;
   /** 带宽包id，上移账号，申请带宽包计费模式的ipv6地址需要传入. */
   BandwidthPackageId?: string;
+  /** 需要关联的标签列表。 */
+  Tags?: Tag[];
 }
 
 declare interface AllocateIp6AddressesBandwidthResponse {
@@ -4127,6 +4129,8 @@ declare interface CreateServiceTemplateGroupRequest {
   ServiceTemplateGroupName: string;
   /** 协议端口模板实例ID，例如：ppm-4dw6agho。 */
   ServiceTemplateIds: string[];
+  /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
+  Tags?: Tag[];
 }
 
 declare interface CreateServiceTemplateGroupResponse {
@@ -8931,7 +8935,7 @@ declare interface Vpc {
   AdjustPublicAddress(data?: AdjustPublicAddressRequest, config?: AxiosRequestConfig): AxiosPromise<AdjustPublicAddressResponse>;
   /** 创建弹性公网IP {@link AllocateAddressesRequest} {@link AllocateAddressesResponse} */
   AllocateAddresses(data?: AllocateAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<AllocateAddressesResponse>;
-  /** IPv6地址分配公网带宽 {@link AllocateIp6AddressesBandwidthRequest} {@link AllocateIp6AddressesBandwidthResponse} */
+  /** 开通IPv6公网带宽 {@link AllocateIp6AddressesBandwidthRequest} {@link AllocateIp6AddressesBandwidthResponse} */
   AllocateIp6AddressesBandwidth(data: AllocateIp6AddressesBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<AllocateIp6AddressesBandwidthResponse>;
   /** 分配IPv6地址 {@link AssignIpv6AddressesRequest} {@link AssignIpv6AddressesResponse} */
   AssignIpv6Addresses(data: AssignIpv6AddressesRequest, config?: AxiosRequestConfig): AxiosPromise<AssignIpv6AddressesResponse>;
@@ -9259,7 +9263,7 @@ declare interface Vpc {
   DescribeHighPriorityRouteTables(data?: DescribeHighPriorityRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHighPriorityRouteTablesResponse>;
   /** 查询高优路由表条目 {@link DescribeHighPriorityRoutesRequest} {@link DescribeHighPriorityRoutesResponse} */
   DescribeHighPriorityRoutes(data: DescribeHighPriorityRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHighPriorityRoutesResponse>;
-  /** 查询IPV6地址信息 {@link DescribeIp6AddressesRequest} {@link DescribeIp6AddressesResponse} */
+  /** 查询传统弹性公网IPv6列表 {@link DescribeIp6AddressesRequest} {@link DescribeIp6AddressesResponse} */
   DescribeIp6Addresses(data?: DescribeIp6AddressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIp6AddressesResponse>;
   /** 查询账户在指定地域IPV6转换实例和规则的配额 {@link DescribeIp6TranslatorQuotaRequest} {@link DescribeIp6TranslatorQuotaResponse} */
   DescribeIp6TranslatorQuota(data?: DescribeIp6TranslatorQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIp6TranslatorQuotaResponse>;
@@ -9517,7 +9521,7 @@ declare interface Vpc {
   ModifyHighPriorityRouteECMPAlgorithm(data: ModifyHighPriorityRouteECMPAlgorithmRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHighPriorityRouteECMPAlgorithmResponse>;
   /** 修改高优路由表属性 {@link ModifyHighPriorityRouteTableAttributeRequest} {@link ModifyHighPriorityRouteTableAttributeResponse} */
   ModifyHighPriorityRouteTableAttribute(data: ModifyHighPriorityRouteTableAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHighPriorityRouteTableAttributeResponse>;
-  /** 修改IPV6访问internet的带宽 {@link ModifyIp6AddressesBandwidthRequest} {@link ModifyIp6AddressesBandwidthResponse} */
+  /** 调整传统弹性公网IPv6带宽 {@link ModifyIp6AddressesBandwidthRequest} {@link ModifyIp6AddressesBandwidthResponse} */
   ModifyIp6AddressesBandwidth(data: ModifyIp6AddressesBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIp6AddressesBandwidthResponse>;
   /** 修改IPV6转换规则属性 {@link ModifyIp6RuleRequest} {@link ModifyIp6RuleResponse} */
   ModifyIp6Rule(data: ModifyIp6RuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIp6RuleResponse>;
@@ -9607,7 +9611,7 @@ declare interface Vpc {
   RejectVpcPeeringConnection(data: RejectVpcPeeringConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<RejectVpcPeeringConnectionResponse>;
   /** 释放弹性公网IP {@link ReleaseAddressesRequest} {@link ReleaseAddressesResponse} */
   ReleaseAddresses(data: ReleaseAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseAddressesResponse>;
-  /** 释放弹性公网IPv6地址带宽 {@link ReleaseIp6AddressesBandwidthRequest} {@link ReleaseIp6AddressesBandwidthResponse} */
+  /** 关闭IPv6公网带宽 {@link ReleaseIp6AddressesBandwidthRequest} {@link ReleaseIp6AddressesBandwidthResponse} */
   ReleaseIp6AddressesBandwidth(data?: ReleaseIp6AddressesBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseIp6AddressesBandwidthResponse>;
   /** 删除带宽包资源 {@link RemoveBandwidthPackageResourcesRequest} {@link RemoveBandwidthPackageResourcesResponse} */
   RemoveBandwidthPackageResources(data?: RemoveBandwidthPackageResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveBandwidthPackageResourcesResponse>;

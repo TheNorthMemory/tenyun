@@ -243,35 +243,35 @@ declare interface Region {
 /** 实例信息结构体 */
 declare interface Registry {
   /** 实例ID */
-  RegistryId: string;
+  RegistryId?: string;
   /** 实例名称 */
-  RegistryName: string;
+  RegistryName?: string;
   /** 实例规格 */
-  RegistryType: string;
-  /** 实例状态 */
-  Status: string;
+  RegistryType?: string;
+  /** 实例状态。有以下状态：Pending, 初始化中Deploying, 创建中Running, 运行中Unhealthy, 状态异常FailedCreated, 创建失败FailedUpdated, 更新失败Bucket-Error, 存储桶异常Isolate, 待回收Deleting, 删除中DeleteBucketFailed, 实例删除存储桶失败DeleteFailed, 实例删除失败 */
+  Status?: string;
   /** 实例的公共访问地址 */
-  PublicDomain: string;
+  PublicDomain?: string;
   /** 实例创建时间 */
-  CreatedAt: string;
+  CreatedAt?: string;
   /** 地域名称 */
-  RegionName: string;
+  RegionName?: string;
   /** 地域Id */
-  RegionId: number;
+  RegionId?: number;
   /** 是否支持匿名 */
-  EnableAnonymous: boolean;
+  EnableAnonymous?: boolean;
   /** Token有效时间 */
-  TokenValidTime: number;
+  TokenValidTime?: number;
   /** 实例内部访问地址 */
-  InternalEndpoint: string;
+  InternalEndpoint?: string;
   /** 实例云标签 */
-  TagSpecification: TagSpecification | null;
+  TagSpecification?: TagSpecification | null;
   /** 实例过期时间（预付费） */
-  ExpiredAt: string | null;
+  ExpiredAt?: string | null;
   /** 实例付费类型，0表示后付费，1表示预付费 */
-  PayMod: number | null;
+  PayMod?: number | null;
   /** 预付费续费标识，0表示手动续费，1表示自动续费，2不续费并且不通知 */
-  RenewFlag: number | null;
+  RenewFlag?: number | null;
   /** 是否开启实例删除保护，false表示不开启 */
   DeletionProtection?: boolean;
 }
