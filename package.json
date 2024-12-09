@@ -5,6 +5,41 @@
   "main": "index.js",
   "types": "types/index.d.ts",
   "type": "module",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "node": {
+        "import": {
+          "types": "./types/index.d.ts",
+          "default": "./index.mjs"
+        },
+        "require": {
+          "types": "./types/index.d.ts",
+          "default": "./index.js"
+        }
+      },
+      "import": {
+        "types": "./types/index.d.ts",
+        "default": "./index.mjs"
+      },
+      "require": {
+        "types": "./types/index.d.ts",
+        "default": "./index.js"
+      },
+      "types": "./types/index.d.ts",
+      "default": "./index.mjs"
+    },
+    "./node": {
+      "import": {
+        "types": "./types/index.d.ts",
+        "default": "./index.mjs"
+      },
+      "require": {
+        "types": "./types/index.d.ts",
+        "default": "./index.js"
+      }
+    }
+  },
   "author": "James ZHANG",
   "license": "MIT",
   "bugs": {
@@ -16,6 +51,7 @@
   },
   "files": [
     "index.js",
+    "index.mjs",
     "types/",
     "README.md",
     "LICENSE"
