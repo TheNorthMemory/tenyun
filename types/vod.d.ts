@@ -77,11 +77,11 @@ declare namespace V20180717 {
     OcrFullTextConfigure?: OcrFullTextConfigureInfo | null;
     /** 文本关键词识别控制参数。 */
     OcrWordsConfigure?: OcrWordsConfigureInfo | null;
-    /** 语音全文识别控制参数。 */
+    /** 语音全文识别控制参数。注意：本参数已不再维护，推荐使用 AsrTranslateConfigure 参数发起语音翻译识别（当 DstLanguage 不填或填空字符串时，则不进行翻译，计费项和语音全文识别一致）。 */
     AsrFullTextConfigure?: AsrFullTextConfigureInfo | null;
     /** 语音关键词识别控制参数。 */
     AsrWordsConfigure?: AsrWordsConfigureInfo | null;
-    /** 语音翻译控制参数。 */
+    /** 语音翻译识别控制参数。 */
     AsrTranslateConfigure?: AsrTranslateConfigureInfo | null;
     /** 物体识别控制参数。 */
     ObjectConfigure?: ObjectConfigureInfo | null;
@@ -573,13 +573,13 @@ declare namespace V20180717 {
     SubtitleSet?: AiRecognitionTaskAsrFullTextResultOutputSubtitleItem[];
   }
 
-  /** 语音翻译片段。 */
+  /** 语音翻译识别片段。 */
   interface AiRecognitionTaskAsrTranslateSegmentItem {
-    /** 语音翻译片段置信度。取值：0~100。 */
+    /** 语音翻译识别片段置信度。取值：0~100。 */
     Confidence?: number;
-    /** 语音翻译片段起始的偏移时间，单位：秒。 */
+    /** 语音翻译识别片段起始的偏移时间，单位：秒。 */
     StartTimeOffset?: number;
-    /** 语音翻译片段终止的偏移时间，单位：秒。 */
+    /** 语音翻译识别片段终止的偏移时间，单位：秒。 */
     EndTimeOffset?: number;
     /** 识别文本。 */
     Text?: string;
@@ -1517,7 +1517,7 @@ declare namespace V20180717 {
     Type?: string;
   }
 
-  /** 语音全文识别任务控制参数 */
+  /** 语音全文识别任务控制参数。注意：本参数已不再维护，推荐使用 AsrTranslateConfigure 参数发起语音翻译识别（当 DstLanguage 不填或填空字符串时，则不进行翻译，计费项和语音全文识别一致）。 */
   interface AsrFullTextConfigureInfo {
     /** 语音全文识别任务开关，可选值：ON：开启智能语音全文识别任务；OFF：关闭智能语音全文识别任务。 */
     Switch: string;
@@ -1545,13 +1545,13 @@ declare namespace V20180717 {
     SubtitleName?: string;
   }
 
-  /** 语音翻译任务控制参数 */
+  /** 语音翻译识别任务控制参数 */
   interface AsrTranslateConfigureInfo {
-    /** 语音翻译任务开关，可选值：ON：开启；OFF：关闭。注意：语音翻译任务本身会返回 ASR 全文识别结果，为避免重复收费，因此禁止同时开启语音翻译和 ASR 全文识别功能项。 */
+    /** 语音翻译识别任务开关，可选值：ON：开启；OFF：关闭。注意：语音翻译识别任务本身会返回 ASR 全文识别结果，为避免重复收费，因此禁止同时开启语音翻译识别和 ASR 全文识别功能项。 */
     Switch: string;
     /** 媒体源语言，当 Switch 为 ON 时，此参数必填。取值范围：zh：中文；en：英文；ja：日文；ko：韩文；vi：越南语；ms：马来语；th：泰语；pt：葡萄牙语；tr：土耳其语；ar：阿拉伯语；es：西班牙语；hi：印地语；fr：法语。 */
     SrcLanguage?: string;
-    /** 翻译目标语言，当 Switch 为 ON 时，此参数必填。当 SrcLanguage 为 zh（中文）时，取值范围：en：英文；ja：日文；ko：韩文；fr：法语；es：西班牙语；it：意大利语；de：德语；tr：土耳其语；ru：俄语；pt：葡萄牙语；vi：越南语；id：印尼语；th：泰语；ms：马来语。当 SrcLanguage 为 en（英文）时，取值范围：zh：中文；ja：日文；ko：韩文；fr：法语；es：西班牙语；it：意大利语；de：德语；tr：土耳其语；ru：俄语；pt：葡萄牙语；vi：越南语；id：印尼语；th：泰语；ms：马来语；ar：阿拉伯语；hi：印地语。当 SrcLanguage 为 ja（日文）时，取值范围：zh：中文；en：英文；ko：韩文。当 SrcLanguage 为 ko（韩文）时，取值范围：zh：中文；en：英文；ja：日文。当 SrcLanguage 为 vi（越南语）或 ms（马来语）或 th（泰语）时，取值范围：zh：中文；en：英文。当 SrcLanguage 为 pt（葡萄牙语）时，取值范围：zh：中文；en：英文；fr：法语；es：西班牙语；it：意大利语；de：德语；tr：土耳其语；ru：俄语。当 SrcLanguage 为 tr（土耳其语）时，取值范围：zh：中文；en：英文；fr：法语；es：西班牙语；it：意大利语；de：德语；ru：俄语；pt：葡萄牙语。当 SrcLanguage 为 es（西班牙语）时，取值范围：zh：中文；en：英文；fr：法语；it：意大利语；de：德语；tr：土耳其语；ru：俄语；pt：葡萄牙语。当 SrcLanguage 为 ar（阿拉伯语）或 hi（印地语）时，取值范围：en：英文。当 SrcLanguage 为 fr（法语）时，取值范围：zh：中文；en：英文；es：西班牙语；it：意大利语；de：德语；tr：土耳其语；ru：俄语；pt：葡萄牙语。 */
+    /** 翻译目标语言，当 Switch 为 ON 时，此参数有效。若此参数不填或者填写空字符串，则表示只进行语音全文识别，不进行翻译（计费项与 AsrFullTextConfigure 语音全文识别一致）；否则，此参数的取值范围分为如下几种情况：当 SrcLanguage 为 zh（中文）时，取值范围：en：英文；ja：日文；ko：韩文；fr：法语；es：西班牙语；it：意大利语；de：德语；tr：土耳其语；ru：俄语；pt：葡萄牙语；vi：越南语；id：印尼语；th：泰语；ms：马来语。当 SrcLanguage 为 en（英文）时，取值范围：zh：中文；ja：日文；ko：韩文；fr：法语；es：西班牙语；it：意大利语；de：德语；tr：土耳其语；ru：俄语；pt：葡萄牙语；vi：越南语；id：印尼语；th：泰语；ms：马来语；ar：阿拉伯语；hi：印地语。当 SrcLanguage 为 ja（日文）时，取值范围：zh：中文；en：英文；ko：韩文。当 SrcLanguage 为 ko（韩文）时，取值范围：zh：中文；en：英文；ja：日文。当 SrcLanguage 为 vi（越南语）或 ms（马来语）或 th（泰语）时，取值范围：zh：中文；en：英文。当 SrcLanguage 为 pt（葡萄牙语）时，取值范围：zh：中文；en：英文；fr：法语；es：西班牙语；it：意大利语；de：德语；tr：土耳其语；ru：俄语。当 SrcLanguage 为 tr（土耳其语）时，取值范围：zh：中文；en：英文；fr：法语；es：西班牙语；it：意大利语；de：德语；ru：俄语；pt：葡萄牙语。当 SrcLanguage 为 es（西班牙语）时，取值范围：zh：中文；en：英文；fr：法语；it：意大利语；de：德语；tr：土耳其语；ru：俄语；pt：葡萄牙语。当 SrcLanguage 为 ar（阿拉伯语）或 hi（印地语）时，取值范围：en：英文。当 SrcLanguage 为 fr（法语）时，取值范围：zh：中文；en：英文；es：西班牙语；it：意大利语；de：德语；tr：土耳其语；ru：俄语；pt：葡萄牙语。 */
     DstLanguage?: string;
     /** 生成的字幕文件格式列表，不填或者填空数组表示不生成字幕文件，可选值：vtt：生成 WebVTT 字幕文件；srt：生成 SRT 字幕文件。注意： 云点播媒资信息仅支持添加 vtt 字幕，因此当且仅当 SubtitleFormats 包含 vtt 时，云点播将生成的字幕添加到媒资。 */
     SubtitleFormats?: string[];
@@ -1559,13 +1559,13 @@ declare namespace V20180717 {
     SubtitleName?: string;
   }
 
-  /** 语音翻译控制参数 */
+  /** 语音翻译识别控制参数 */
   interface AsrTranslateConfigureInfoForUpdate {
-    /** 语音翻译任务开关，可选值：ON：开启；OFF：关闭。 */
+    /** 语音翻译识别任务开关，可选值：ON：开启；OFF：关闭。注意：语音翻译识别任务本身会返回 ASR 全文识别结果，为避免重复收费，因此禁止同时开启语音翻译识别和 ASR 全文识别功能项。 */
     Switch?: string;
     /** 媒体源语言，取值范围：zh：中文；en：英文；ja：日文；ko：韩文；vi：越南语；ms：马来语；th：泰语；pt：葡萄牙语；tr：土耳其语；ar：阿拉伯语；es：西班牙语；hi：印地语；fr：法语。 */
     SrcLanguage?: string;
-    /** 翻译目标语言。当 SrcLanguage 为 zh（中文）时，取值范围：en：英文；ja：日文；ko：韩文；fr：法语；es：西班牙语；it：意大利语；de：德语；tr：土耳其语；ru：俄语；pt：葡萄牙语；vi：越南语；id：印尼语；th：泰语；ms：马来语。当 SrcLanguage 为 en（英文）时，取值范围：zh：中文；ja：日文；ko：韩文；fr：法语；es：西班牙语；it：意大利语；de：德语；tr：土耳其语；ru：俄语；pt：葡萄牙语；vi：越南语；id：印尼语；th：泰语；ms：马来语；ar：阿拉伯语；hi：印地语。当 SrcLanguage 为 ja（日文）时，取值范围：zh：中文；en：英文；ko：韩文。当 SrcLanguage 为 ko（韩文）时，取值范围：zh：中文；en：英文；ja：日文。当 SrcLanguage 为 vi（越南语）或 ms（马来语）或 th（泰语）时，取值范围：zh：中文；en：英文。当 SrcLanguage 为 pt（葡萄牙语）时，取值范围：zh：中文；en：英文；fr：法语；es：西班牙语；it：意大利语；de：德语；tr：土耳其语；ru：俄语。当 SrcLanguage 为 tr（土耳其语）时，取值范围：zh：中文；en：英文；fr：法语；es：西班牙语；it：意大利语；de：德语；ru：俄语；pt：葡萄牙语。当 SrcLanguage 为 es（西班牙语）时，取值范围：zh：中文；en：英文；fr：法语；it：意大利语；de：德语；tr：土耳其语；ru：俄语；pt：葡萄牙语。当 SrcLanguage 为 ar（阿拉伯语）或 hi（印地语）时，取值范围：en：英文。当 SrcLanguage 为 fr（法语）时，取值范围：zh：中文；en：英文；es：西班牙语；it：意大利语；de：德语；tr：土耳其语；ru：俄语；pt：葡萄牙语。 */
+    /** 翻译目标语言。若此参数填写空字符串，则表示只进行语音全文识别，不进行翻译（计费项与 AsrFullTextConfigure 语音全文识别一致）；否则，此参数的取值范围分为如下几种情况：当 SrcLanguage 为 zh（中文）时，取值范围：en：英文；ja：日文；ko：韩文；fr：法语；es：西班牙语；it：意大利语；de：德语；tr：土耳其语；ru：俄语；pt：葡萄牙语；vi：越南语；id：印尼语；th：泰语；ms：马来语。当 SrcLanguage 为 en（英文）时，取值范围：zh：中文；ja：日文；ko：韩文；fr：法语；es：西班牙语；it：意大利语；de：德语；tr：土耳其语；ru：俄语；pt：葡萄牙语；vi：越南语；id：印尼语；th：泰语；ms：马来语；ar：阿拉伯语；hi：印地语。当 SrcLanguage 为 ja（日文）时，取值范围：zh：中文；en：英文；ko：韩文。当 SrcLanguage 为 ko（韩文）时，取值范围：zh：中文；en：英文；ja：日文。当 SrcLanguage 为 vi（越南语）或 ms（马来语）或 th（泰语）时，取值范围：zh：中文；en：英文。当 SrcLanguage 为 pt（葡萄牙语）时，取值范围：zh：中文；en：英文；fr：法语；es：西班牙语；it：意大利语；de：德语；tr：土耳其语；ru：俄语。当 SrcLanguage 为 tr（土耳其语）时，取值范围：zh：中文；en：英文；fr：法语；es：西班牙语；it：意大利语；de：德语；ru：俄语；pt：葡萄牙语。当 SrcLanguage 为 es（西班牙语）时，取值范围：zh：中文；en：英文；fr：法语；it：意大利语；de：德语；tr：土耳其语；ru：俄语；pt：葡萄牙语。当 SrcLanguage 为 ar（阿拉伯语）或 hi（印地语）时，取值范围：en：英文。当 SrcLanguage 为 fr（法语）时，取值范围：zh：中文；en：英文；es：西班牙语；it：意大利语；de：德语；tr：土耳其语；ru：俄语；pt：葡萄牙语。 */
     DstLanguage?: string;
     /** 字幕格式列表操作信息。 */
     SubtitleFormatsOperation?: SubtitleFormatsOperation;
@@ -6174,11 +6174,11 @@ declare namespace V20180717 {
     OcrFullTextConfigure?: OcrFullTextConfigureInfo;
     /** 文本关键词识别控制参数。 */
     OcrWordsConfigure?: OcrWordsConfigureInfo;
-    /** 语音全文识别控制参数。 */
+    /** 语音全文识别控制参数。注意：本参数已不再维护，推荐使用 AsrTranslateConfigure 参数发起语音翻译识别（当 DstLanguage 不填或填空字符串时，则不进行翻译，计费项和语音全文识别一致）。 */
     AsrFullTextConfigure?: AsrFullTextConfigureInfo;
     /** 语音关键词识别控制参数。 */
     AsrWordsConfigure?: AsrWordsConfigureInfo;
-    /** 语音翻译控制参数。 */
+    /** 语音翻译识别控制参数。 */
     AsrTranslateConfigure?: AsrTranslateConfigureInfo;
     /** 物体识别控制参数。 */
     ObjectConfigure?: ObjectConfigureInfo;
@@ -8636,11 +8636,11 @@ declare namespace V20180717 {
     OcrFullTextConfigure?: OcrFullTextConfigureInfoForUpdate;
     /** 文本关键词识别控制参数。 */
     OcrWordsConfigure?: OcrWordsConfigureInfoForUpdate;
-    /** 语音全文识别控制参数。 */
+    /** 语音全文识别控制参数。注意：本参数已不再维护，推荐使用 AsrTranslateConfigure 参数发起语音翻译识别（当 DstLanguage 不填或填空字符串时，则不进行翻译，计费项和语音全文识别一致）。 */
     AsrFullTextConfigure?: AsrFullTextConfigureInfoForUpdate;
     /** 语音关键词识别控制参数。 */
     AsrWordsConfigure?: AsrWordsConfigureInfoForUpdate;
-    /** 语音翻译控制参数。 */
+    /** 语音翻译识别控制参数。 */
     AsrTranslateConfigure?: AsrTranslateConfigureInfoForUpdate;
     /** 物体识别控制参数。 */
     ObjectConfigure?: ObjectConfigureInfoForUpdate;

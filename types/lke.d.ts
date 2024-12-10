@@ -3533,9 +3533,9 @@ declare interface Lke {
   ModifyQACate(data: ModifyQACateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyQACateResponse>;
   /** 修改拒答问题 {@link ModifyRejectedQuestionRequest} {@link ModifyRejectedQuestionResponse} */
   ModifyRejectedQuestion(data: ModifyRejectedQuestionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRejectedQuestionResponse>;
-  /** 文档解析旧版（请迁移新接口） {@link ParseDocRequest} {@link ParseDocResponse} */
+  /** @deprecated 文档解析旧版（请迁移新接口） {@link ParseDocRequest} {@link ParseDocResponse} */
   ParseDoc(data: ParseDocRequest, config?: AxiosRequestConfig): AxiosPromise<ParseDocResponse>;
-  /** 查询文档解析结果 {@link QueryParseDocResultRequest} {@link QueryParseDocResultResponse} */
+  /** @deprecated 查询文档解析结果 {@link QueryParseDocResultRequest} {@link QueryParseDocResultResponse} */
   QueryParseDocResult(data: QueryParseDocResultRequest, config?: AxiosRequestConfig): AxiosPromise<QueryParseDocResultResponse>;
   /** 多轮改写 {@link QueryRewriteRequest} {@link QueryRewriteResponse} */
   QueryRewrite(data: QueryRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<QueryRewriteResponse>;

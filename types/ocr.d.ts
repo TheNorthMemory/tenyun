@@ -118,6 +118,20 @@ declare interface AirTransport {
   QRCodeMark?: number;
   /** 条目 */
   FlightItems?: FlightItem[];
+  /** 提示信息 */
+  PromptInformation?: string;
+  /** 统一社会信用代码/纳税人识别号 */
+  BuyerTaxID?: string;
+  /** 购买方名称 */
+  Buyer?: string;
+  /** 发票号码 */
+  ReceiptNumber?: string;
+  /** 开票状态 */
+  InvoiceStatus?: string;
+  /** 增值税税率 */
+  TaxRate?: string;
+  /** 增值税税额 */
+  TaxAmount?: string;
 }
 
 /** 银行回单识别出的字段 */
@@ -558,6 +572,8 @@ declare interface ElectronicTrainTicketFull {
   BuyerTaxID?: string;
   /** 原发票号码 */
   OriginalNumber?: string;
+  /** 标识信息 */
+  IDInfo?: string;
 }
 
 /** 敏感数据加密 */
@@ -1769,11 +1785,11 @@ declare interface TableDetectInfo {
 /** 表格内容检测 */
 declare interface TableInfo {
   /** 单元格内容 */
-  Cells: TableCellInfo[] | null;
-  /** 图像中的文本块类型，0 为非表格文本，1 为有线表格，2 为无线表格 */
-  Type: number | null;
+  Cells?: TableCellInfo[] | null;
+  /** 图像中的文本块类型：0为非表格文本、1为有线表格、2为无线表格，有线表格：在表格内部，有横线/竖线纵跨整个表格的宽/高；无线表格：在表格内部，无横线/竖线纵跨整个表格的宽/高。 */
+  Type?: number | null;
   /** 表格主体四个顶点坐标（依次为左上角，右上角，右下角，左下角） */
-  TableCoordPoint: Coord[] | null;
+  TableCoordPoint?: Coord[] | null;
 }
 
 /** 表格标题 */

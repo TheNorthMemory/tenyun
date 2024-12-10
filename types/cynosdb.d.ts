@@ -2000,6 +2000,36 @@ declare interface SecurityGroup {
   SecurityGroupRemark?: string;
 }
 
+/** serverless规格 */
+declare interface ServerlessSpec {
+  /** cpu最小值 */
+  MinCpu?: number;
+  /** cpu最大值 */
+  MaxCpu?: number;
+  /** 最大存储空间 */
+  MaxStorageSize?: number;
+  /** 是否为默认规格 */
+  IsDefault?: number;
+  /** 是否有库存 */
+  HasStock?: boolean;
+  /** 库存数量 */
+  StockCount?: number;
+  /** 可用区库存信息 */
+  ZoneStockInfos?: ServerlessZoneStockInfo[] | null;
+}
+
+/** serverless类型的可用区库存信息 */
+declare interface ServerlessZoneStockInfo {
+  /** 可用区 */
+  Zone?: string | null;
+  /** 存储量 */
+  StockCount?: number | null;
+  /** 是否包含库存 */
+  HasStock?: boolean | null;
+  /** 从可用区库存信息 */
+  SlaveZoneStockInfos?: SlaveZoneStockInfo[] | null;
+}
+
 /** 可用区属性项 */
 declare interface SlaveZoneAttrItem {
   /** 可用区 */
@@ -3800,6 +3830,18 @@ declare interface DescribeRollbackTimeRangeResponse {
   RequestId?: string;
 }
 
+declare interface DescribeServerlessInstanceSpecsRequest {
+  /** 可用区 */
+  Zone?: string;
+}
+
+declare interface DescribeServerlessInstanceSpecsResponse {
+  /** Serverless实例可选规格 */
+  Specs?: ServerlessSpec[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeServerlessStrategyRequest {
   /** serverless集群id */
   ClusterId: string;
@@ -4607,10 +4649,6 @@ declare interface ModifyServerlessStrategyRequest {
   MinRoCount?: number;
   /** 只读节点最大个数 */
   MaxRoCount?: number;
-  /** 集群是否允许扩容，可选范围yesno */
-  AutoScaleUp?: string;
-  /** 集群是否允许缩容，可选范围yesno */
-  AutoScaleDown?: string;
 }
 
 declare interface ModifyServerlessStrategyResponse {
@@ -5433,6 +5471,8 @@ declare interface Cynosdb {
   DescribeResourcesByDealName(data?: DescribeResourcesByDealNameRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesByDealNameResponse>;
   /** 查询回档时间范围 {@link DescribeRollbackTimeRangeRequest} {@link DescribeRollbackTimeRangeResponse} */
   DescribeRollbackTimeRange(data: DescribeRollbackTimeRangeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTimeRangeResponse>;
+  /** 查询Serverless实例可选规格 {@link DescribeServerlessInstanceSpecsRequest} {@link DescribeServerlessInstanceSpecsResponse} */
+  DescribeServerlessInstanceSpecs(data?: DescribeServerlessInstanceSpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessInstanceSpecsResponse>;
   /** 查询serverless策略 {@link DescribeServerlessStrategyRequest} {@link DescribeServerlessStrategyResponse} */
   DescribeServerlessStrategy(data: DescribeServerlessStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessStrategyResponse>;
   /** 查询支持的数据库代理版本 {@link DescribeSupportProxyVersionRequest} {@link DescribeSupportProxyVersionResponse} */

@@ -1548,6 +1548,8 @@ declare interface DescribeBatchProductionResponse {
   SuccessCount?: number | null;
   /** 量产最后失败原因 */
   LastFailedReason?: string | null;
+  /** 量产状态 0：任务创建，未量产；1：处理中；2：量产结束上传结果中；3：任务完成 */
+  Status?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

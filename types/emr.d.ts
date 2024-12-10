@@ -130,6 +130,14 @@ declare interface BootstrapAction {
   Args?: string[];
 }
 
+/** 容器集群Pod服务CLB设置 */
+declare interface CLBSetting {
+  /** CLB类型，PUBLIC_IP表示支持公网CLB和INTERNAL_IP表示支持内网CLB字段 */
+  CLBType?: string | null;
+  /** Vpc和子网信息设置 */
+  VPCSettings?: VPCSettings | null;
+}
+
 /** COS 相关配置 */
 declare interface COSSettings {
   /** COS SecretId */
@@ -184,6 +192,28 @@ declare interface CdbInfo {
   ZoneId: number | null;
   /** RegionId */
   RegionId: number | null;
+}
+
+/** 容器集群Pod请求资源信息 */
+declare interface CloudResource {
+  /** 组件角色名 */
+  ComponentName: string;
+  /** pod请求数量 */
+  PodNumber: number;
+  /** Cpu请求数量最大值 */
+  LimitCpu: number;
+  /** 内存请求数量最大值 */
+  LimitMemory: number;
+  /** 服务名称，如HIVE */
+  Service?: string | null;
+  /** 数据卷目录设置 */
+  VolumeDir?: VolumeSetting | null;
+  /** 组件外部访问设置 */
+  ExternalAccess?: ExternalAccess | null;
+  /** 节点亲和性设置 */
+  Affinity?: NodeAffinity | null;
+  /** 所选数据盘信息 */
+  Disks?: Disk[] | null;
 }
 
 /** 当前集群共用组件与集群对应关系 */
@@ -488,6 +518,16 @@ declare interface DiffHeader {
   Id?: string;
 }
 
+/** 磁盘信息 */
+declare interface Disk {
+  /** 数据盘类型，创建EMR容器集群实例可选 SSD云盘: CLOUD_SSD高效云盘: CLOUD_PREMIUM */
+  DiskType?: string | null;
+  /** 单块大小GB */
+  DiskCapacity?: number | null;
+  /** 数据盘数量 */
+  DiskNumber?: number | null;
+}
+
 /** 磁盘组。 */
 declare interface DiskGroup {
   /** 磁盘规格。 */
@@ -708,6 +748,14 @@ declare interface Execution {
   Args: string[];
 }
 
+/** 容器集群外部访问设置 */
+declare interface ExternalAccess {
+  /** 外部访问类型，当前仅支持CLB字段 */
+  Type?: string | null;
+  /** CLB设置信息 */
+  CLBServer?: CLBSetting | null;
+}
+
 /** 共用组件信息 */
 declare interface ExternalService {
   /** 共用组件类型，EMR/CUSTOM */
@@ -800,6 +848,14 @@ declare interface HiveQuery {
   ExecutionEngine?: string | null;
   /** 查询ID */
   Id?: string | null;
+}
+
+/** 主机路径 */
+declare interface HostPathVolumeSource {
+  /** 主机路径 */
+  Path?: string | null;
+  /** 主机路径类型，当前默认DirectoryOrCreate */
+  Type?: string | null;
 }
 
 /** Pod HostPath挂载方式描述 */
@@ -1160,6 +1216,14 @@ declare interface NewResourceSpec {
   CommonCount?: number;
 }
 
+/** 节点亲和性设置 */
+declare interface NodeAffinity {
+  /** 节点亲和性-强制调度设置 */
+  RequiredDuringSchedulingIgnoredDuringExecution?: NodeSelector | null;
+  /** 节点亲和性-容忍调度 */
+  PreferredDuringSchedulingIgnoredDuringExecution?: PreferredSchedulingTerm[] | null;
+}
+
 /** 用于创建集群价格清单 节点价格详情 */
 declare interface NodeDetailPriceResult {
   /** 节点类型 master core task common router mysql */
@@ -1292,6 +1356,28 @@ declare interface NodeResourceSpec {
   DataDisk?: DiskSpecInfo[] | null;
   /** 本地数据盘 */
   LocalDataDisk?: DiskSpecInfo[] | null;
+}
+
+/** Pod强制调度节点选择条件 */
+declare interface NodeSelector {
+  /** Pod强制调度节点选择条件 */
+  NodeSelectorTerms?: NodeSelectorTerm[] | null;
+}
+
+/** Pod节点选择项 */
+declare interface NodeSelectorRequirement {
+  /** 节点选择项Key值 */
+  Key?: string | null;
+  /** 节点选择项Operator值，支持In, NotIn, Exists, DoesNotExist. Gt, and Lt. */
+  Operator?: string | null;
+  /** 节点选择项Values值 */
+  Values?: string[] | null;
+}
+
+/** Pod节点选择项集合 */
+declare interface NodeSelectorTerm {
+  /** 节点选择项表达式集合 */
+  MatchExpressions?: NodeSelectorRequirement[] | null;
 }
 
 /** 弹性扩缩容执行一次规则上下文 */
@@ -1562,6 +1648,14 @@ declare interface PrePaySetting {
   Period: Period | null;
   /** 自动续费标记，0：表示通知即将过期，但不自动续费 1：表示通知即将过期，而且自动续费 2：表示不通知即将过期，也不自动续费 */
   AutoRenewFlag: number | null;
+}
+
+/** Pod容忍调度节点选择项 */
+declare interface PreferredSchedulingTerm {
+  /** 权重，范围1-100 */
+  Weight?: number | null;
+  /** 节点选择表达式 */
+  Preference?: NodeSelectorTerm | null;
 }
 
 /** 价格详情 */
@@ -2298,6 +2392,14 @@ declare interface VirtualPrivateCloud {
   SubnetId: string;
 }
 
+/** 数据卷目录设置 */
+declare interface VolumeSetting {
+  /** 数据卷类型HOST_PATH表示支持本机路径NEW_PVC表示新建PVC组件角色支持的数据卷类型可参考 EMR on TKE 集群部署说明：[部署说明](https://cloud.tencent.com/document/product/589/94254) */
+  VolumeType?: string | null;
+  /** 主机路径信息 */
+  HostPath?: HostPathVolumeSource | null;
+}
+
 /** 定时扩容每周重复任务策略 */
 declare interface WeekRepeatStrategy {
   /** 重复任务执行的具体时刻，例如"01:02:00" */
@@ -2466,6 +2568,48 @@ declare interface AddUsersForUserManagerResponse {
   SuccessUserList?: string[] | null;
   /** 添加失败的用户列表 */
   FailedUserList?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCloudInstanceRequest {
+  /** 实例名称。长度限制为6-36个字符。只允许包含中文、字母、数字、-、_。 */
+  InstanceName: string;
+  /** 容器集群类型，取值范围EMR容器集群实例: EMR-TKE */
+  ClusterClass: string;
+  /** 部署的组件列表，不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）对应不同可选组件列表，不同产品版本可选组件列表查询：[组件版本](https://cloud.tencent.com/document/product/589/20279) ； */
+  Software: string[];
+  /** 容器平台类型，取值范围EMR容器集群实例: tke */
+  PlatFormType: string;
+  /** cos存储桶 */
+  CosBucket: string;
+  /** 容器集群id */
+  EksClusterId?: string;
+  /** 产品Id，不同产品ID表示不同的EMR产品版本。取值范围：60:表示EMR-TKE-V1.1.055:表示EMR-TKE-V1.0.152:表示EMR-TKE-V1.0.0 */
+  ProductId?: number;
+  /** 客户端token，唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，小于等于64个字符，例如 a9a90aa6----fae36063280示例值：a9a90aa6----fae36063280 */
+  ClientToken?: string;
+  /** 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。 */
+  VPCSettings?: VPCSettings;
+  /** 所有组件角色及其对应的Pod资源请求信息 */
+  CloudResources?: CloudResource[];
+  /** 安全组Id，为空默认创建新的安全组 */
+  SgId?: string;
+  /** 元数据库信息MetaDB信息，当MetaType选择EMR_NEW_META时，MetaDataJdbcUrl MetaDataUser MetaDataPass UnifyMetaInstanceId不用填当MetaType选择EMR_EXIT_META时，填写UnifyMetaInstanceId当MetaType选择USER_CUSTOM_META时，填写MetaDataJdbcUrl MetaDataUser MetaDataPass */
+  MetaDBInfo?: CustomMetaDBInfo;
+  /** 标签信息 */
+  Tags?: Tag[];
+  /** 登陆密码，LoginSettings中的Password字段 */
+  LoginSettings?: LoginSettings;
+  /** 共享服务信息 */
+  ExternalService?: ExternalService[];
+  /** 可用区id */
+  ZoneId?: number;
+}
+
+declare interface CreateCloudInstanceResponse {
+  /** 实例ID */
+  InstanceId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3646,6 +3790,26 @@ declare interface ModifyGlobalConfigResponse {
   RequestId?: string;
 }
 
+declare interface ModifyPodNumRequest {
+  /** 集群Id */
+  InstanceId: string;
+  /** 服务编号 */
+  ServiceGroup: number;
+  /** 角色编号 */
+  ServiceType: number;
+  /** 期望Pod数量 */
+  PodNum: number;
+}
+
+declare interface ModifyPodNumResponse {
+  /** 集群Id */
+  InstanceId?: string | null;
+  /** 流程Id */
+  FlowId?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyResourcePoolsRequest {
   /** emr集群id */
   InstanceId: string;
@@ -4053,6 +4217,8 @@ declare interface Emr {
   AddMetricScaleStrategy(data: AddMetricScaleStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<AddMetricScaleStrategyResponse>;
   /** 新增用户列表 {@link AddUsersForUserManagerRequest} {@link AddUsersForUserManagerResponse} */
   AddUsersForUserManager(data: AddUsersForUserManagerRequest, config?: AxiosRequestConfig): AxiosPromise<AddUsersForUserManagerResponse>;
+  /** 创建EMR容器集群实例 {@link CreateCloudInstanceRequest} {@link CreateCloudInstanceResponse} */
+  CreateCloudInstance(data: CreateCloudInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudInstanceResponse>;
   /** 创建EMR集群实例(新) {@link CreateClusterRequest} {@link CreateClusterResponse} */
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
   /** 创建EMR实例(旧) {@link CreateInstanceRequest} {@link CreateInstanceResponse} */
@@ -4143,6 +4309,8 @@ declare interface Emr {
   ModifyAutoScaleStrategy(data: ModifyAutoScaleStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoScaleStrategyResponse>;
   /** 修改YARN资源调度的全局配置 {@link ModifyGlobalConfigRequest} {@link ModifyGlobalConfigResponse} */
   ModifyGlobalConfig(data: ModifyGlobalConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGlobalConfigResponse>;
+  /** 调整Pod数量 {@link ModifyPodNumRequest} {@link ModifyPodNumResponse} */
+  ModifyPodNum(data: ModifyPodNumRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPodNumResponse>;
   /** 刷新YARN的动态资源池（旧） {@link ModifyResourcePoolsRequest} {@link ModifyResourcePoolsResponse} */
   ModifyResourcePools(data: ModifyResourcePoolsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcePoolsResponse>;
   /** 修改YARN资源调度的资源配置（旧） {@link ModifyResourceScheduleConfigRequest} {@link ModifyResourceScheduleConfigResponse} */

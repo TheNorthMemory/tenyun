@@ -2260,7 +2260,7 @@ declare interface DescribeBlockStaticListRequest {
 }
 
 declare interface DescribeBlockStaticListResponse {
-  /** 无 */
+  /** 查询结果 */
   Data?: StaticInfo[];
   /** 异步查询状态，1查询执行中，0查询已结束 */
   Status?: number;

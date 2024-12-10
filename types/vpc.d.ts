@@ -3052,6 +3052,36 @@ declare interface AllocateAddressesResponse {
   RequestId?: string;
 }
 
+declare interface AllocateIPv6AddressesRequest {
+  /** EIP名称，用于申请EIP时用户自定义该EIP的个性化名称，默认值：未命名。 */
+  AddressName?: string;
+  /** 弹性公网IPv6类型，可选值：- EIPv6：普通IPv6- HighQualityEIPv6：精品IPv6注意：需联系产品开通精品IPv6白名单，且仅部分地域支持精品IPv6默认值：EIPv6。 */
+  AddressType?: string;
+  /** 申请的弹性公网IPv6数量，默认值：1。 */
+  AddressCount?: number;
+  /** 弹性公网IPv6计费方式，可选值：- BANDWIDTH_PACKAGE：[共享带宽包](https://cloud.tencent.com/document/product/684/15255)付费- TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费默认值：TRAFFIC_POSTPAID_BY_HOUR。 */
+  InternetChargeType?: string;
+  /** 弹性公网IPv6线路类型，默认值：BGP。已开通静态单线IP白名单的用户，可选值：- CMCC：中国移动- CTCC：中国电信- CUCC：中国联通注意：仅部分地域支持静态单线IP。 */
+  InternetServiceProvider?: string;
+  /** 弹性公网IPv6带宽上限，单位：Mbps。可选值范围取决于EIP计费方式：- BANDWIDTH_PACKAGE：1 Mbps 至 2000 Mbps- TRAFFIC_POSTPAID_BY_HOUR：1 Mbps 至 100 Mbps默认值：1 Mbps。 */
+  InternetMaxBandwidthOut?: number;
+  /** 带宽包唯一ID参数。设定该参数且InternetChargeType为BANDWIDTH_PACKAGE，则表示创建的EIP加入该BGP带宽包并采用带宽包计费。 */
+  BandwidthPackageId?: string;
+  /** 需要关联的标签列表。 */
+  Tags?: Tag[];
+  /** 弹性公网IPv6网络出口，可选值：- CENTER_EGRESS_1：中心出口一- CENTER_EGRESS_2：中心出口二- CENTER_EGRESS_3：中心出口三注意：不同运营商或资源类型对应的网络出口需要联系产品开白默认值：CENTER_EGRESS_1。 */
+  Egress?: string;
+}
+
+declare interface AllocateIPv6AddressesResponse {
+  /** 申请到的弹性公网 IPv6 地址的唯一 ID 列表。 */
+  AddressSet?: string[];
+  /** 异步任务TaskId，可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AllocateIp6AddressesBandwidthRequest {
   /** 需要开通公网访问能力的IPV6地址 */
   Ip6Addresses: string[];
@@ -3184,6 +3214,20 @@ declare interface AssociateDirectConnectGatewayNatGatewayRequest {
 }
 
 declare interface AssociateDirectConnectGatewayNatGatewayResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AssociateIPv6AddressRequest {
+  /** 弹性公网IPv6唯一ID，EIPv6 唯一 ID 形如：eipv6-11112222。 */
+  IPv6AddressId: string;
+  /** 要绑定的弹性网卡 ID。 弹性网卡 ID 形如：eni-11112222。NetworkInterfaceId 与 InstanceId 不可同时指定。弹性网卡 ID 可通过登录控制台查询，也可通过DescribeNetworkInterfaces接口返回值中的networkInterfaceId获取。 */
+  NetworkInterfaceId?: string;
+  /** 要绑定的内网 IPv6。如果指定了 NetworkInterfaceId 则也必须指定 PrivateIPv6Address ，表示将 EIP 绑定到指定弹性网卡的指定内网 IP 上。同时要确保指定的 PrivateIPv6Address 是指定的 NetworkInterfaceId 上的一个内网 IPv6。指定弹性网卡的内网 IPv6 可通过登录控制台查询，也可通过DescribeNetworkInterfaces接口返回值中的Ipv6AddressSet.Address获取。 */
+  PrivateIPv6Address?: string;
+}
+
+declare interface AssociateIPv6AddressResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3405,6 +3449,8 @@ declare interface CreateAddressTemplateGroupRequest {
   AddressTemplateGroupName: string;
   /** IP地址模板实例ID，例如：ipm-mdunqeb6。 */
   AddressTemplateIds: string[];
+  /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
+  Tags?: Tag[];
 }
 
 declare interface CreateAddressTemplateGroupResponse {
@@ -3421,6 +3467,8 @@ declare interface CreateAddressTemplateRequest {
   Addresses?: string[];
   /** 地址信息，支持携带备注，支持 IP、CIDR、IP 范围。Addresses与AddressesExtra必填其一。 */
   AddressesExtra?: AddressInfo[];
+  /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
+  Tags?: Tag[];
 }
 
 declare interface CreateAddressTemplateResponse {
@@ -4147,6 +4195,8 @@ declare interface CreateServiceTemplateRequest {
   Services?: string[];
   /** 支持添加备注，单个端口、多个端口、连续端口及所有端口，协议支持：TCP、UDP、ICMP、GRE 协议。Services与ServicesExtra必填其一。 */
   ServicesExtra?: ServicesInfo[];
+  /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
+  Tags?: Tag[];
 }
 
 declare interface CreateServiceTemplateResponse {
@@ -5748,6 +5798,28 @@ declare interface DescribeHighPriorityRoutesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeIPv6AddressesRequest {
+  /** 标识 IPv6 的唯一 ID 列。- 传统弹性公网 IPv6 唯一 ID 形如：`eip-11112222`- 弹性公网 IPv6 唯一 ID 形如：`eipv6-11112222`注意：参数不支持同时指定`IPv6AddressIds`和`Filters`。 */
+  IPv6AddressIds?: string[];
+  /** 每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。参数不支持同时指定`IPv6AddressIds`和`Filters`。详细的过滤条件如下：- address-id - String - 是否必填：否 - （过滤条件）按照弹性公网IPv6的唯一ID过滤。- public-ipv6-address - String - 是否必填：否 - （过滤条件）按照公网 IPv6 的 IP 地址过滤。- network-interface-id - String - 是否必填：否 - （过滤条件）按照弹性网卡的唯一ID过滤。- instance-id - String - 是否必填：否 - （过滤条件）按照绑定实例的唯一ID过滤。- charge-type - String - 是否必填：否 - （过滤条件）按照计费类型过滤。- private-ipv6-address - String - 是否必填：否 - （过滤条件）按照绑定的内网 IPv6 地址过滤。- egress - String - 是否必填：否 - （过滤条件）按照出口过滤。- address-type - String - 是否必填：否 - （过滤条件）按照IPv6类型 进行过滤。可选值：'EIP6'，'EIPv6'，'WanIPv6'，'HighQualityEIPv6'。默认值是'EIPv6'。- address-isp - String - 是否必填：否 - （过滤条件）按照 运营商类型 进行过滤。可选值：'BGP'，'CMCC'，'CUCC', 'CTCC'。- address-status - String - 是否必填：否 - （过滤条件）按照 EIP 的状态过滤。状态包含：'CREATING'，'BINDING'，'BIND'，'UNBINDING'，'UNBIND'，'OFFLINING'，'BIND_ENI'，'PRIVATE'。- address-name - String - 是否必填：否 - （过滤条件）按照 EIP 名称过滤。不支持模糊过滤。- tag-key - String - 是否必填：否 - （过滤条件）按照标签键进行过滤。- tag-value - String - 是否必填：否 - （过滤条件）按照标签值进行过滤。- tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。tag-key使用具体的标签键进行替换。 */
+  Filters?: Filter[];
+  /** 是否查询传统型IPv6地址信息。 */
+  Traditional?: boolean;
+  /** 偏移量，默认为0。关于Offset的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/11646)中的相关小节。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/11646)中的相关小节。 */
+  Limit?: number;
+}
+
+declare interface DescribeIPv6AddressesResponse {
+  /** 符合条件的 IPv6 数量。 */
+  TotalCount?: number;
+  /** IPv6 详细信息列表。 */
+  AddressSet?: Address[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeIp6AddressesRequest {
   /** 标识 IPV6 的唯一 ID 列表。IPV6 唯一 ID 形如：`eip-11112222`。参数不支持同时指定`Ip6AddressIds`和`Filters`。 */
   Ip6AddressIds?: string[];
@@ -7158,6 +7230,18 @@ declare interface DisassociateDirectConnectGatewayNatGatewayResponse {
   RequestId?: string;
 }
 
+declare interface DisassociateIPv6AddressRequest {
+  /** 弹性公网IPv6唯一ID，EIPv6 唯一 ID 形如：eipv6-11112222。 */
+  IPv6AddressId: string;
+  /** 解绑时是否保持绑定弹性网卡。 */
+  KeepBindWithEni?: boolean;
+}
+
+declare interface DisassociateIPv6AddressResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DisassociateNatGatewayAddressRequest {
   /** NAT网关的ID，形如：`nat-df45454`。 */
   NatGatewayId: string;
@@ -7814,6 +7898,30 @@ declare interface ModifyHighPriorityRouteTableAttributeRequest {
 }
 
 declare interface ModifyHighPriorityRouteTableAttributeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyIPv6AddressesAttributesRequest {
+  /** 弹性公网IPv6唯一ID列表。 */
+  IPv6AddressIds: string[];
+  /** 弹性公网IPv6地址名称 */
+  IPv6AddressName?: string;
+}
+
+declare interface ModifyIPv6AddressesAttributesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyIPv6AddressesBandwidthRequest {
+  /** 弹性公网IPv6地址唯一ID */
+  IPv6AddressIds: string[];
+  /** 弹性公网IPv6地址网络带宽 */
+  InternetMaxBandwidthOut: number;
+}
+
+declare interface ModifyIPv6AddressesBandwidthResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8504,6 +8612,16 @@ declare interface ReleaseAddressesResponse {
   RequestId?: string;
 }
 
+declare interface ReleaseIPv6AddressesRequest {
+  /** IPv6地址唯一ID。 */
+  IPv6AddressIds: string[];
+}
+
+declare interface ReleaseIPv6AddressesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ReleaseIp6AddressesBandwidthRequest {
   /** IPV6地址。Ip6Addresses和Ip6AddressIds必须且只能传一个 */
   Ip6Addresses?: string[];
@@ -8935,6 +9053,8 @@ declare interface Vpc {
   AdjustPublicAddress(data?: AdjustPublicAddressRequest, config?: AxiosRequestConfig): AxiosPromise<AdjustPublicAddressResponse>;
   /** 创建弹性公网IP {@link AllocateAddressesRequest} {@link AllocateAddressesResponse} */
   AllocateAddresses(data?: AllocateAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<AllocateAddressesResponse>;
+  /** 创建弹性公网IPv6 {@link AllocateIPv6AddressesRequest} {@link AllocateIPv6AddressesResponse} */
+  AllocateIPv6Addresses(data?: AllocateIPv6AddressesRequest, config?: AxiosRequestConfig): AxiosPromise<AllocateIPv6AddressesResponse>;
   /** 开通IPv6公网带宽 {@link AllocateIp6AddressesBandwidthRequest} {@link AllocateIp6AddressesBandwidthResponse} */
   AllocateIp6AddressesBandwidth(data: AllocateIp6AddressesBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<AllocateIp6AddressesBandwidthResponse>;
   /** 分配IPv6地址 {@link AssignIpv6AddressesRequest} {@link AssignIpv6AddressesResponse} */
@@ -8951,6 +9071,8 @@ declare interface Vpc {
   AssociateDhcpIpWithAddressIp(data: AssociateDhcpIpWithAddressIpRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateDhcpIpWithAddressIpResponse>;
   /** 专线网关绑定NAT网关 {@link AssociateDirectConnectGatewayNatGatewayRequest} {@link AssociateDirectConnectGatewayNatGatewayResponse} */
   AssociateDirectConnectGatewayNatGateway(data: AssociateDirectConnectGatewayNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateDirectConnectGatewayNatGatewayResponse>;
+  /** 绑定弹性公网IPv6 {@link AssociateIPv6AddressRequest} {@link AssociateIPv6AddressResponse} */
+  AssociateIPv6Address(data: AssociateIPv6AddressRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateIPv6AddressResponse>;
   /** 关联云联网实例到指定的云联网路由表 {@link AssociateInstancesToCcnRouteTableRequest} {@link AssociateInstancesToCcnRouteTableResponse} */
   AssociateInstancesToCcnRouteTable(data: AssociateInstancesToCcnRouteTableRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateInstancesToCcnRouteTableResponse>;
   /** NAT网关绑定弹性IP {@link AssociateNatGatewayAddressRequest} {@link AssociateNatGatewayAddressResponse} */
@@ -9263,6 +9385,8 @@ declare interface Vpc {
   DescribeHighPriorityRouteTables(data?: DescribeHighPriorityRouteTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHighPriorityRouteTablesResponse>;
   /** 查询高优路由表条目 {@link DescribeHighPriorityRoutesRequest} {@link DescribeHighPriorityRoutesResponse} */
   DescribeHighPriorityRoutes(data: DescribeHighPriorityRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHighPriorityRoutesResponse>;
+  /** 查询弹性公网IPv6列表 {@link DescribeIPv6AddressesRequest} {@link DescribeIPv6AddressesResponse} */
+  DescribeIPv6Addresses(data?: DescribeIPv6AddressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPv6AddressesResponse>;
   /** 查询传统弹性公网IPv6列表 {@link DescribeIp6AddressesRequest} {@link DescribeIp6AddressesResponse} */
   DescribeIp6Addresses(data?: DescribeIp6AddressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIp6AddressesResponse>;
   /** 查询账户在指定地域IPV6转换实例和规则的配额 {@link DescribeIp6TranslatorQuotaRequest} {@link DescribeIp6TranslatorQuotaResponse} */
@@ -9423,6 +9547,8 @@ declare interface Vpc {
   DisassociateDhcpIpWithAddressIp(data: DisassociateDhcpIpWithAddressIpRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateDhcpIpWithAddressIpResponse>;
   /** 专线网关解绑NAT网关 {@link DisassociateDirectConnectGatewayNatGatewayRequest} {@link DisassociateDirectConnectGatewayNatGatewayResponse} */
   DisassociateDirectConnectGatewayNatGateway(data: DisassociateDirectConnectGatewayNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateDirectConnectGatewayNatGatewayResponse>;
+  /** 解绑弹性公网IPv6 {@link DisassociateIPv6AddressRequest} {@link DisassociateIPv6AddressResponse} */
+  DisassociateIPv6Address(data: DisassociateIPv6AddressRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateIPv6AddressResponse>;
   /** NAT网关解绑弹性IP {@link DisassociateNatGatewayAddressRequest} {@link DisassociateNatGatewayAddressResponse} */
   DisassociateNatGatewayAddress(data: DisassociateNatGatewayAddressRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateNatGatewayAddressResponse>;
   /** 网络ACL解关联子网 {@link DisassociateNetworkAclSubnetsRequest} {@link DisassociateNetworkAclSubnetsResponse} */
@@ -9521,6 +9647,10 @@ declare interface Vpc {
   ModifyHighPriorityRouteECMPAlgorithm(data: ModifyHighPriorityRouteECMPAlgorithmRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHighPriorityRouteECMPAlgorithmResponse>;
   /** 修改高优路由表属性 {@link ModifyHighPriorityRouteTableAttributeRequest} {@link ModifyHighPriorityRouteTableAttributeResponse} */
   ModifyHighPriorityRouteTableAttribute(data: ModifyHighPriorityRouteTableAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHighPriorityRouteTableAttributeResponse>;
+  /** 修改弹性公网IPv6属性 {@link ModifyIPv6AddressesAttributesRequest} {@link ModifyIPv6AddressesAttributesResponse} */
+  ModifyIPv6AddressesAttributes(data: ModifyIPv6AddressesAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIPv6AddressesAttributesResponse>;
+  /** 调整弹性公网IPv6带宽 {@link ModifyIPv6AddressesBandwidthRequest} {@link ModifyIPv6AddressesBandwidthResponse} */
+  ModifyIPv6AddressesBandwidth(data: ModifyIPv6AddressesBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIPv6AddressesBandwidthResponse>;
   /** 调整传统弹性公网IPv6带宽 {@link ModifyIp6AddressesBandwidthRequest} {@link ModifyIp6AddressesBandwidthResponse} */
   ModifyIp6AddressesBandwidth(data: ModifyIp6AddressesBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIp6AddressesBandwidthResponse>;
   /** 修改IPV6转换规则属性 {@link ModifyIp6RuleRequest} {@link ModifyIp6RuleResponse} */
@@ -9611,6 +9741,8 @@ declare interface Vpc {
   RejectVpcPeeringConnection(data: RejectVpcPeeringConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<RejectVpcPeeringConnectionResponse>;
   /** 释放弹性公网IP {@link ReleaseAddressesRequest} {@link ReleaseAddressesResponse} */
   ReleaseAddresses(data: ReleaseAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseAddressesResponse>;
+  /** 释放弹性公网IPv6 {@link ReleaseIPv6AddressesRequest} {@link ReleaseIPv6AddressesResponse} */
+  ReleaseIPv6Addresses(data: ReleaseIPv6AddressesRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseIPv6AddressesResponse>;
   /** 关闭IPv6公网带宽 {@link ReleaseIp6AddressesBandwidthRequest} {@link ReleaseIp6AddressesBandwidthResponse} */
   ReleaseIp6AddressesBandwidth(data?: ReleaseIp6AddressesBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseIp6AddressesBandwidthResponse>;
   /** 删除带宽包资源 {@link RemoveBandwidthPackageResourcesRequest} {@link RemoveBandwidthPackageResourcesResponse} */

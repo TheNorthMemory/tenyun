@@ -5069,7 +5069,7 @@ declare interface Tdmq {
   DescribeRabbitMQVipInstances(data?: DescribeRabbitMQVipInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQVipInstancesResponse>;
   /** 查询RabbitMQ vhost列表 {@link DescribeRabbitMQVirtualHostRequest} {@link DescribeRabbitMQVirtualHostResponse} */
   DescribeRabbitMQVirtualHost(data: DescribeRabbitMQVirtualHostRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQVirtualHostResponse>;
-  /** RabbitMQ专享版查询虚拟主机列表 {@link DescribeRabbitMQVirtualHostListRequest} {@link DescribeRabbitMQVirtualHostListResponse} */
+  /** @deprecated RabbitMQ专享版查询虚拟主机列表 {@link DescribeRabbitMQVirtualHostListRequest} {@link DescribeRabbitMQVirtualHostListResponse} */
   DescribeRabbitMQVirtualHostList(data: DescribeRabbitMQVirtualHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQVirtualHostListResponse>;
   /** 获取单个RocketMQ集群信息 {@link DescribeRocketMQClusterRequest} {@link DescribeRocketMQClusterResponse} */
   DescribeRocketMQCluster(data: DescribeRocketMQClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQClusterResponse>;

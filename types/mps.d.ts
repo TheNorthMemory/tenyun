@@ -2774,6 +2774,12 @@ declare interface ImageEncodeConfig {
 declare interface ImageEnhanceConfig {
   /** 超分配置。 */
   SuperResolution?: SuperResolutionConfig | null;
+  /** 色彩增强配置。 */
+  ColorEnhance?: ColorEnhanceConfig | null;
+  /** 细节增强配置。 */
+  SharpEnhance?: SharpEnhanceConfig | null;
+  /** 人脸增强配置。 */
+  FaceEnhance?: FaceEnhanceConfig | null;
 }
 
 /** 综合增强配置 */
@@ -7194,7 +7200,7 @@ declare interface ParseLiveStreamProcessNotificationRequest {
 }
 
 declare interface ParseLiveStreamProcessNotificationResponse {
-  /** 直播流处理结果类型，包含：AiReviewResult：内容审核结果；AiRecognitionResult：内容识别结果；LiveRecordResult：直播录制结果；ProcessEof：直播流处理结束。 */
+  /** 直播流处理结果类型，包含：AiReviewResult：内容审核结果；AiRecognitionResult：内容识别结果；LiveRecordResult：直播录制结果；AiQualityControlResult：媒体质检结果；ProcessEof：直播流处理结束。 */
   NotificationType?: string;
   /** 视频处理任务 ID。 */
   TaskId?: string;
@@ -7214,6 +7220,10 @@ declare interface ParseLiveStreamProcessNotificationResponse {
   SessionId?: string;
   /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长1000个字符。 */
   SessionContext?: string;
+  /** - 过期时间，事件通知签名过期 UNIX 时间戳。 - 来自媒体处理的消息通知默认过期时间是10分钟，如果一条消息通知中的 Timestamp 值所指定的时间已经过期，则可以判定这条通知无效，进而可以防止网络重放攻击。 - Timestamp 的格式为十进制 UNIX 时间戳，即从1970年01月01日（UTC/GMT 的午夜）开始所经过的秒数。 */
+  Timestamp?: number | null;
+  /** 事件通知安全签名 Sign = MD5（Timestamp + NotifyKey）。说明：媒体处理把Timestamp 和 TaskNotifyConfig 里面的NotifyKey 进行字符串拼接后通过 MD5 计算得出 Sign 值，并将其放在通知消息里，您的后台服务器在收到通知消息后可以根据同样的算法确认 Sign 是否正确，进而确认消息是否确实来自媒体处理后台。 */
+  Sign?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

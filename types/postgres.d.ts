@@ -367,49 +367,49 @@ declare interface DurationAnalysis {
 /** KMS密钥信息 */
 declare interface EncryptionKey {
   /** KMS实例加密的KeyId。 */
-  KeyId: string | null;
+  KeyId?: string | null;
   /** KMS实例加密Key的别名。 */
-  KeyAlias: string | null;
+  KeyAlias?: string | null;
   /** 实例加密密钥DEK的密文。 */
-  DEKCipherTextBlob: string | null;
+  DEKCipherTextBlob?: string | null;
   /** 密钥是否启用，1-启用， 0-未启用。 */
-  IsEnabled: number | null;
+  IsEnabled?: number | null;
   /** KMS密钥所在地域。 */
-  KeyRegion: string | null;
+  KeyRegion?: string | null;
   /** DEK密钥创建时间。 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
 }
 
 /** 错误日志详情 */
 declare interface ErrLogDetail {
   /** 用户名 */
-  UserName: string;
+  UserName?: string;
   /** 数据库名字 */
-  Database: string;
+  Database?: string;
   /** 错误发生时间 */
-  ErrTime: string;
+  ErrTime?: string;
   /** 错误消息 */
-  ErrMsg: string;
+  ErrMsg?: string;
 }
 
 /** 参数修改事件信息 */
 declare interface EventInfo {
   /** 参数名 */
-  ParamName: string | null;
+  ParamName?: string | null;
   /** 原参数值 */
-  OldValue: string | null;
+  OldValue?: string | null;
   /** 本次修改期望参数值 */
-  NewValue: string | null;
+  NewValue?: string | null;
   /** 后台参数修改开始时间 */
-  ModifyTime: string | null;
+  ModifyTime?: string | null;
   /** 后台参数生效开始时间 */
-  EffectiveTime: string | null;
+  EffectiveTime?: string | null;
   /** 修改状态 */
-  State: string | null;
+  State?: string | null;
   /** 操作者（一般为用户sub UIN） */
-  Operator: string | null;
+  Operator?: string | null;
   /** 时间日志。 */
-  EventLog: string | null;
+  EventLog?: string | null;
 }
 
 /** 修改参数条目，以参数为维度 */
@@ -487,35 +487,35 @@ declare interface NetworkAccess {
 /** 单条SlowQuery信息 */
 declare interface NormalQueryItem {
   /** 用户名 */
-  UserName: string;
+  UserName?: string;
   /** 调用次数 */
-  Calls: number;
+  Calls?: number;
   /** 粒度点 */
-  CallsGrids: number[];
+  CallsGrids?: number[];
   /** 花费总时间 */
-  CostTime: number;
+  CostTime?: number;
   /** 影响的行数 */
-  Rows: number;
+  Rows?: number;
   /** 花费最小时间 */
-  MinCostTime: number;
+  MinCostTime?: number;
   /** 花费最大时间 */
-  MaxCostTime: number;
+  MaxCostTime?: number;
   /** 最早一条慢SQL时间 */
-  FirstTime: string;
+  FirstTime?: string;
   /** 最晚一条慢SQL时间 */
-  LastTime: string;
+  LastTime?: string;
   /** 读共享内存块数 */
-  SharedReadBlks: number;
+  SharedReadBlks?: number;
   /** 写共享内存块数 */
-  SharedWriteBlks: number;
+  SharedWriteBlks?: number;
   /** 读io总耗时 */
-  ReadCostTime: number;
+  ReadCostTime?: number;
   /** 写io总耗时 */
-  WriteCostTime: number;
+  WriteCostTime?: number;
   /** 数据库名字 */
-  DatabaseName: string;
+  DatabaseName?: string;
   /** 脱敏后的慢SQL */
-  NormalQuery: string;
+  NormalQuery?: string;
 }
 
 /** 批量修改参数 */
@@ -609,31 +609,31 @@ declare interface ParamVersionRelation {
 /** 参数模板的基本信息 */
 declare interface ParameterTemplate {
   /** 参数模板ID */
-  TemplateId: string;
+  TemplateId?: string;
   /** 参数模板名称 */
-  TemplateName: string;
+  TemplateName?: string;
   /** 参数模板适用的数据库版本 */
-  DBMajorVersion: string;
+  DBMajorVersion?: string;
   /** 参数模板适用的数据库引擎 */
-  DBEngine: string;
+  DBEngine?: string;
   /** 参数模板描述 */
-  TemplateDescription: string;
+  TemplateDescription?: string;
 }
 
 /** 订单详情 */
 declare interface PgDeal {
   /** 订单名 */
-  DealName: string;
+  DealName?: string;
   /** 所属用户 */
-  OwnerUin: string;
+  OwnerUin?: string;
   /** 订单涉及多少个实例 */
-  Count: number;
+  Count?: number;
   /** 付费模式。1-预付费；0-后付费 */
-  PayMode: number;
+  PayMode?: number;
   /** 异步任务流程ID */
-  FlowId: number;
+  FlowId?: number;
   /** 实例ID数组 */
-  DBInstanceIdSet: string[];
+  DBInstanceIdSet?: string[];
 }
 
 /** 安全组规则信息 */
@@ -669,41 +669,41 @@ declare interface RawSlowQuery {
 /** 只读组信息 */
 declare interface ReadOnlyGroup {
   /** 只读组标识 */
-  ReadOnlyGroupId: string | null;
+  ReadOnlyGroupId?: string | null;
   /** 只读组名字 */
-  ReadOnlyGroupName: string | null;
+  ReadOnlyGroupName?: string | null;
   /** 项目id */
-  ProjectId: number | null;
+  ProjectId?: number | null;
   /** 主实例id */
-  MasterDBInstanceId: string | null;
+  MasterDBInstanceId?: string | null;
   /** 最小保留实例数 */
-  MinDelayEliminateReserve: number | null;
+  MinDelayEliminateReserve?: number | null;
   /** 延迟空间大小阈值 */
-  MaxReplayLatency: number;
+  MaxReplayLatency?: number;
   /** 延迟大小开关 */
-  ReplayLatencyEliminate: number;
+  ReplayLatencyEliminate?: number;
   /** 延迟时间大小阈值 */
-  MaxReplayLag: number;
+  MaxReplayLag?: number;
   /** 延迟时间开关 */
-  ReplayLagEliminate: number;
+  ReplayLagEliminate?: number;
   /** 虚拟网络id */
-  VpcId: string;
+  VpcId?: string;
   /** 子网id */
-  SubnetId: string | null;
+  SubnetId?: string | null;
   /** 地域id */
-  Region: string;
+  Region?: string;
   /** 地区id */
-  Zone: string;
+  Zone?: string;
   /** 状态 */
-  Status: string;
+  Status?: string;
   /** 实例详细信息 */
-  ReadOnlyDBInstanceList: DBInstance[];
+  ReadOnlyDBInstanceList?: DBInstance[];
   /** 自动负载均衡开关 */
-  Rebalance: number;
+  Rebalance?: number;
   /** 网络信息 */
-  DBInstanceNetInfo: DBInstanceNetInfo[];
+  DBInstanceNetInfo?: DBInstanceNetInfo[];
   /** 只读组网络信息列表（此字段已废弃） */
-  NetworkAccessList: NetworkAccess[] | null;
+  NetworkAccessList?: NetworkAccess[] | null;
 }
 
 /** 描述地域的编码和状态等信息 */
@@ -741,11 +741,11 @@ declare interface SecurityGroup {
 /** serverless账号描述 */
 declare interface ServerlessDBAccount {
   /** 用户名 */
-  DBUser: string | null;
+  DBUser?: string | null;
   /** 密码 */
-  DBPassword: string | null;
+  DBPassword?: string | null;
   /** 连接数限制 */
-  DBConnLimit: number | null;
+  DBConnLimit?: number | null;
 }
 
 /** serverless实例描述 */
@@ -789,15 +789,15 @@ declare interface ServerlessDBInstance {
 /** serverless实例网络信息描述 */
 declare interface ServerlessDBInstanceNetInfo {
   /** 地址 */
-  Address: string | null;
+  Address?: string | null;
   /** ip地址 */
-  Ip: string | null;
+  Ip?: string | null;
   /** 端口号 */
-  Port: number | null;
+  Port?: number | null;
   /** 状态 */
-  Status: string | null;
+  Status?: string | null;
   /** 网络类型 */
-  NetType: string | null;
+  NetType?: string | null;
 }
 
 /** 慢查询详情 */
@@ -881,17 +881,17 @@ declare interface Version {
 /** 数据库Xlog信息 */
 declare interface Xlog {
   /** 备份文件唯一标识 */
-  Id: number;
+  Id?: number;
   /** 文件生成的开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 文件生成的结束时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 内网下载地址 */
-  InternalAddr: string;
+  InternalAddr?: string;
   /** 外网下载地址 */
-  ExternalAddr: string;
+  ExternalAddr?: string;
   /** 备份文件大小 */
-  Size: number;
+  Size?: number;
 }
 
 /** 描述可用区的编码和状态信息 */
@@ -919,7 +919,7 @@ declare interface AddDBInstanceToReadOnlyGroupRequest {
 
 declare interface AddDBInstanceToReadOnlyGroupResponse {
   /** 流程ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1213,7 +1213,7 @@ declare interface CreateParameterTemplateRequest {
 
 declare interface CreateParameterTemplateResponse {
   /** 参数模板ID，用于唯一确认参数模板 */
-  TemplateId: string;
+  TemplateId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1443,7 +1443,7 @@ declare interface DeleteReadOnlyGroupRequest {
 
 declare interface DeleteReadOnlyGroupResponse {
   /** 流程ID */
-  FlowId: number | null;
+  FlowId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2503,7 +2503,7 @@ declare interface ModifyDBInstanceReadOnlyGroupRequest {
 
 declare interface ModifyDBInstanceReadOnlyGroupResponse {
   /** 流程ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2681,7 +2681,7 @@ declare interface RemoveDBInstanceFromReadOnlyGroupRequest {
 
 declare interface RemoveDBInstanceFromReadOnlyGroupResponse {
   /** 流程ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2725,7 +2725,7 @@ declare interface RestartDBInstanceRequest {
 
 declare interface RestartDBInstanceResponse {
   /** 异步流程ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2733,7 +2733,7 @@ declare interface RestartDBInstanceResponse {
 declare interface RestoreDBInstanceObjectsRequest {
   /** 实例ID。 */
   DBInstanceId: string;
-  /** 需要恢复的对象列表。假设需要恢复的对象名为test，则恢复后的名称为test_bak_${LinuxTime}。${LinuxTime}无法指定，由系统根据任务发起的linux时间设定。 */
+  /** 需要恢复的对象列表。假设需要恢复的对象名为user，则恢复后的名称为user_bak_${LinuxTime}。${LinuxTime}无法指定，由系统根据任务发起的linux时间设定。 */
   RestoreObjects: string[];
   /** 恢复所用备份集。BackupSetId与RestoreTargetTime有且只能传一个。 */
   BackupSetId?: string;

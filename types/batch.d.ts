@@ -226,12 +226,12 @@ declare interface Dependence {
 
 /** Docker容器信息 */
 declare interface Docker {
-  /** Docker Hub 用户名或 Tencent Registry 用户名 */
-  User: string;
-  /** Docker Hub 密码或 Tencent Registry 密码 */
-  Password: string;
   /** Docker Hub填写“[user/repo]:[tag]”，Tencent Registry填写“ccr.ccs.tencentyun.com/[namespace/repo]:[tag]” */
   Image: string;
+  /** Docker Hub 用户名或 Tencent Registry 用户名；公共镜像可不填写此参数。 */
+  User?: string;
+  /** Docker Hub 密码或 Tencent Registry 密码；公共镜像可不填写此参数。 */
+  Password?: string;
   /** Docker Hub 可以不填，但确保具有公网访问能力。或者是 Tencent Registry 服务地址“ccr.ccs.tencentyun.com” */
   Server?: string;
   /** 拉取Docker镜像重试次数。默认值：0。 */

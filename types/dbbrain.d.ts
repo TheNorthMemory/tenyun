@@ -2163,7 +2163,7 @@ declare interface KillMySqlThreadsRequest {
   SqlExecId?: string;
   /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，默认为"mysql"。 */
   Product?: string;
-  /** 默认是ture, 记录下kill的记录，为了加快kill，可设置为false。 */
+  /** 默认是true，会记录下kill的记录；该参数为true, 则在kill操作前校验目标会话是否存在，存在则继续kill，否则取消kill。为了加快kill速度，可设置为false。 */
   RecordHistory?: boolean;
 }
 

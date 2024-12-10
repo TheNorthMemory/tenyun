@@ -129,15 +129,15 @@ declare interface Data {
 /** 图片文件标签结果 */
 declare interface ImageData {
   /** 图片中出现的可视文本识别结果 */
-  OcrSet: ImageOcr[] | null;
+  OcrSet?: ImageOcr[] | null;
   /** 图片中出现的帧标签识别结果 */
-  FrameTagSet: MultiLevelTag | null;
+  FrameTagSet?: MultiLevelTag | null;
   /** 图片中出现的层级人物识别结果 */
-  MultiLevelPersonInfoSet: MultiLevelPersonInfo[] | null;
+  MultiLevelPersonInfoSet?: MultiLevelPersonInfo[] | null;
   /** 图片中出现的台标识别结果 */
-  TvLogo: ImageLogo | null;
+  TvLogo?: ImageLogo | null;
   /** 图片中出现的来源信息识别结果 */
-  SourceLogo: ImageLogo | null;
+  SourceLogo?: ImageLogo | null;
 }
 
 /** 图片中出现的Logo信息 */
@@ -251,21 +251,21 @@ declare interface MediaInfo {
 /** 媒资文件视频元信息，包括分辨率，帧率，码率等 */
 declare interface MediaMetadata {
   /** 媒资视频文件大小，单位为字节 */
-  FileSize: number;
+  FileSize?: number;
   /** 媒资视频文件MD5 */
-  MD5: string;
+  MD5?: string;
   /** 媒资视频时长，单位为秒 */
-  Duration: number | null;
+  Duration?: number | null;
   /** 媒资视频总帧数 */
-  NumFrames: number | null;
+  NumFrames?: number | null;
   /** 媒资视频宽度，单位为像素 */
-  Width: number | null;
+  Width?: number | null;
   /** 媒资视频高度，单位为像素 */
-  Height: number | null;
+  Height?: number | null;
   /** 媒资视频帧率，单位为Hz */
-  FPS: number | null;
+  FPS?: number | null;
   /** 媒资视频比特率，单位为kbps */
-  BitRate: number | null;
+  BitRate?: number | null;
 }
 
 /** 描述输入媒资的先验知识，例如文件类型(视频)，媒体类型(新闻/综艺等)MediaPreknownInfo.MediaType:| MediaType 名称| MediaType取值 | MediaType描述 ||---|---|---|| MEDIA_TYPE_INVALID | 0 | 非法的媒资文件类型 | | MEDIA_TYPE_IMAGE | 1 | 图片 || MEDIA_TYPE_VIDEO | 2 | 视频 || MEDIA_TYPE_AUDIO | 3 | 音频 || MEDIA_TYPE_VIDEO_STREAM | 4 | 视频流，暂不支持 || MEDIA_TYPE_TEXT | 5 | 文本 |MediaPreknownInfo.MediaLabel:| MediaLabel名称 | MediaLabel取值 | MediaLabel描述 ||---|---|---|| MEDIA_LABEL_INVALID | 0 | 非法的一级媒资素材类型 || MEDIA_LABEL_NEWS | 1 | 新闻 || MEDIA_LABEL_ENTERTAINMENT | 2 | 综艺|| MEDIA_LABEL_INTERNET_INFO | 3 | 互联网资讯 | | MEDIA_LABEL_MOVIE | 4 | 电影 || MEDIA_LABEL_SERIES | 5 | 电视连续剧 || MEDIA_LABEL_SPECIAL | 6 | 专题 || MEDIA_LABEL_SPORT | 7 | 体育 |MediaPreknownInfo.MediaSecondLabel请注意：**当且仅当MediaLabel=2(综艺)时MediaSecondLabel才有意义**| MediaSecondLabel名称 | MediaSecondLabel取值 | MediaSecondLabel 描述||---|---|---|| MEDIA_SECOND_LABEL_INVALID | 0 | 非法的MediaSecondLabel || MEDIA_SECOND_LABEL_EVENING | 1 | 综艺晚会 || MEDIA_SECOND_LABEL_OTHERS | 2 | 其他 |MediaMeta.MediaLang| MediaLang名称 | MediaLang取值 | MediaLang描述 ||---|---|---|| MEDIA_LANG_INVALID | 0 | 非法的MediaLang || MEDIA_LANG_MANDARIN | 1 | 普通话 || MEDIA_LANG_CANTONESE | 2 | 粤语 | */
@@ -301,13 +301,13 @@ declare interface MultiLevelTag {
 /** 自定义人物人脸图片信息 */
 declare interface PersonImageInfo {
   /** 人脸图片ID */
-  ImageId: string;
+  ImageId?: string;
   /** 自定义人脸图片的URL，存储在IVLDCustomPreson存储桶内 */
-  ImageURL: string;
+  ImageURL?: string;
   /** 自定义人脸图片处理错误码 */
-  ErrorCode: string;
+  ErrorCode?: string;
   /** 自定义人脸图片处理错误信息 */
-  ErrorMsg: string;
+  ErrorMsg?: string;
 }
 
 /** 人物信息 */
@@ -775,9 +775,9 @@ declare interface DescribeCustomPersonsRequest {
 
 declare interface DescribeCustomPersonsResponse {
   /** 满足过滤条件的自定义人物数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 自定义人物信息 */
-  PersonInfoSet: CustomPersonInfo[];
+  PersonInfoSet?: CustomPersonInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
