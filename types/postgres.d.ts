@@ -803,11 +803,11 @@ declare interface ServerlessDBInstanceNetInfo {
 /** 慢查询详情 */
 declare interface SlowlogDetail {
   /** 花费总时间 */
-  TotalTime: number;
+  TotalTime?: number;
   /** 调用总次数 */
-  TotalCalls: number;
+  TotalCalls?: number;
   /** 脱敏后的慢SQL列表 */
-  NormalQueries: NormalQueryItem[];
+  NormalQueries?: NormalQueryItem[];
 }
 
 /** 描述某个地域下某个可用区的可售卖规格详细信息。 */

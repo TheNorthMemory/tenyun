@@ -1972,6 +1972,28 @@ declare interface TextTable {
   AdvancedInfo: string;
 }
 
+/** 拖拉机行驶证副页正面的识别结果 */
+declare interface TextTractorVehicleBack {
+  /** 号牌号码 */
+  PlateNo?: string | null;
+  /** 准乘人数 */
+  AllowNum?: string | null;
+  /** 联合收割机质量 */
+  CombineHarvesterQuality?: string | null;
+  /** 拖拉机最小使用质量 */
+  TractorMinUsageWeight?: string | null;
+  /** 拖拉机最大允许载质量 */
+  TractorMaxAllowLoadCapacity?: string | null;
+  /** 外廓尺寸 */
+  ExternalSize?: string | null;
+  /** 检验记录 */
+  Record?: string | null;
+  /** 类型 */
+  VehicleType?: string | null;
+  /** 住址 */
+  Address?: string | null;
+}
+
 /** 增值税发票识别结果 */
 declare interface TextVatInvoice {
   /** 识别出的字段名称（关键字）。支持以下字段的识别：发票代码、 发票号码、 打印发票代码、 打印发票号码、 开票日期、 购买方识别号、 小写金额、 价税合计(大写)、 销售方识别号、 校验码、 购买方名称、 销售方名称、 税额、 复核、 联次名称、 备注、 联次、 密码区、 开票人、 收款人、 （货物或应税劳务、服务名称）、省、 市、 服务类型、 通行费标志、 是否代开、 是否收购、 合计金额、 是否有公司印章、 发票消费类型、 车船税、 机器编号、 成品油标志、 税率、 合计税额、 （购买方地址、电话）、 （销售方地址、电话）、 单价、 金额、 销售方开户行及账号、 购买方开户行及账号、 规格型号、 发票名称、 单位、 数量、 校验码备选、 校验码后六位备选、发票号码备选、车牌号、类型、通行日期起、通行日期止、发票类型。 */
@@ -3653,8 +3675,12 @@ declare interface LicensePlateOCRResponse {
 declare interface MLIDCardOCRRequest {
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。 */
   ImageBase64?: string;
+  /** 卡证背面图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  BackImageBase64?: string;
   /** 图片的 Url 地址。( 中国地区之外不支持这个字段 )支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
+  /** 卡证背面图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  BackImageUrl?: string;
   /** 是否返回图片，默认false */
   RetImage?: boolean;
 }
@@ -3678,6 +3704,8 @@ declare interface MLIDCardOCRResponse {
   Type?: string;
   /** 出生日期（目前该字段仅支持IKAD劳工证、MyKad 身份证） */
   Birthday?: string;
+  /** 马来身份证背面号码 */
+  MyKadNumber?: string;
   /** 告警码-9101 证件边框不完整告警-9102 证件复印件告警-9103 证件翻拍告警-9104 证件PS告警-9107 证件反光告警-9108 证件模糊告警-9109 告警能力未开通 */
   WarnCardInfos?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -4947,6 +4975,8 @@ declare interface VehicleLicenseOCRRequest {
   ImageUrl?: string;
   /** FRONT 为行驶证主页正面（有红色印章的一面），BACK 为行驶证副页正面（有号码号牌的一面），DOUBLE 为行驶证主页正面和副页正面。默认值为：FRONT。 */
   CardSide?: string;
+  /** FRONT为行驶证主页正面（有红色印章的一面），BACK 为拖拉机行驶证副页正面识别 */
+  TractorCardSide?: string;
 }
 
 declare interface VehicleLicenseOCRResponse {
@@ -4960,6 +4990,8 @@ declare interface VehicleLicenseOCRResponse {
   RecognizeWarnMsg?: string[];
   /** 行驶证类型 电子行驶证：Electronic 普通行驶证：Normal */
   VehicleLicenseType?: string;
+  /** 拖拉机行驶证副页正面的识别结果，CardSide 为 BACK。 */
+  TractorBackInfo?: TextTractorVehicleBack | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

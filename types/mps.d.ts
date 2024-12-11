@@ -206,6 +206,8 @@ declare interface AddOnSubtitle {
   Type?: string | null;
   /** 字幕文件。 */
   Subtitle?: MediaInputInfo | null;
+  /** 字幕名称 */
+  SubtitleName?: string | null;
 }
 
 /** 智能分析结果 */

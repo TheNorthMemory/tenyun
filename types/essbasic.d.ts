@@ -4819,7 +4819,7 @@ declare interface Essbasic {
   ChannelVerifyPdf(data: ChannelVerifyPdfRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelVerifyPdfResponse>;
   /** 批量操作企业初始化 {@link CreateBatchInitOrganizationUrlRequest} {@link CreateBatchInitOrganizationUrlResponse} */
   CreateBatchInitOrganizationUrl(data: CreateBatchInitOrganizationUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchInitOrganizationUrlResponse>;
-  /** 提交子企业批量认证链接创建任务 {@link CreateBatchOrganizationRegistrationTasksRequest} {@link CreateBatchOrganizationRegistrationTasksResponse} */
+  /** 创建企业批量认证链接任务 {@link CreateBatchOrganizationRegistrationTasksRequest} {@link CreateBatchOrganizationRegistrationTasksResponse} */
   CreateBatchOrganizationRegistrationTasks(data: CreateBatchOrganizationRegistrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchOrganizationRegistrationTasksResponse>;
   /** 提交申请出证报告任务 {@link CreateChannelFlowEvidenceReportRequest} {@link CreateChannelFlowEvidenceReportResponse} */
   CreateChannelFlowEvidenceReport(data: CreateChannelFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelFlowEvidenceReportResponse>;

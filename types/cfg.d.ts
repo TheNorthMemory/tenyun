@@ -827,6 +827,8 @@ declare interface DescribeTaskListRequest {
   ApplicationName?: string[];
   /** 任务状态筛选--支持多选 任务状态(1001 -- 未开始 1002 -- 进行中 1003 -- 暂停中 1004 -- 任务结束) */
   TaskStatusList?: number[];
+  /** 架构ID */
+  ArchId?: string;
 }
 
 declare interface DescribeTaskListResponse {

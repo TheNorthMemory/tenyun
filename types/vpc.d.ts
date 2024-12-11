@@ -4309,6 +4309,8 @@ declare interface CreateVpcEndPointServiceRequest {
   IsPassService?: boolean;
   /** 挂载的PAAS服务类型，CLB,CDB,CRS，不填默认挂载为CLB。 */
   ServiceType?: string;
+  /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
+  Tags?: Tag[];
 }
 
 declare interface CreateVpcEndPointServiceResponse {

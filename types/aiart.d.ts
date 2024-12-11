@@ -88,6 +88,30 @@ declare interface GenerateAvatarResponse {
   RequestId?: string;
 }
 
+declare interface ImageInpaintingRemovalRequest {
+  /** 输入图 Base64 数据。Base64 和 Url 必须提供一个，如果都提供以 Url 为准。图片限制：单边分辨率小于5000，转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。 */
+  InputImage?: string;
+  /** 输入图 Url。Base64 和 Url 必须提供一个，如果都提供以 Url 为准。图片限制：单边分辨率小于5000，转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。 */
+  InputUrl?: string;
+  /** 消除区域 Mask 图 Base64 数据。Mask 为单通道灰度图，待消除部分呈白色区域，原图保持部分呈黑色区域。Mask 的 Base64 和 Url 必须提供一个，如果都提供以 Url 为准。图片限制：Mask 分辨率需要和输入原图保持一致，转成 Base64 字符串后小于 6MB。 */
+  Mask?: string;
+  /** 消除区域 Mask 图 Url。Mask 为单通道灰度图，待消除部分呈白色区域，原图保持部分呈黑色区域。Mask 的 Base64 和 Url 必须提供一个，如果都提供以 Url 为准。图片限制：Mask 分辨率需要和输入原图保持一致，转成 Base64 字符串后小于 6MB。 */
+  MaskUrl?: string;
+  /** 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。 */
+  RspImgType?: string;
+  /** 为生成结果图添加标识的开关，默认为1。1：添加标识。0：不添加标识。其他数值：默认按1处理。建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。 */
+  LogoAdd?: number;
+  /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。 */
+  LogoParam?: LogoParam;
+}
+
+declare interface ImageInpaintingRemovalResponse {
+  /** 根据入参 RspImgType 填入不同，返回不同的内容。 如果传入 base64 则返回生成图 Base64 编码。 如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。 */
+  ResultImage?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ImageOutpaintingRequest {
   /** 扩展后的比例（宽:高），需要不等于原图比例。支持：1:1、4:3、3:4、16:9、9:16 */
   Ratio: string;
@@ -363,6 +387,8 @@ declare interface Aiart {
   ChangeClothes(data: ChangeClothesRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeClothesResponse>;
   /** 百变头像 {@link GenerateAvatarRequest} {@link GenerateAvatarResponse} */
   GenerateAvatar(data?: GenerateAvatarRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateAvatarResponse>;
+  /** 局部消除 {@link ImageInpaintingRemovalRequest} {@link ImageInpaintingRemovalResponse} */
+  ImageInpaintingRemoval(data?: ImageInpaintingRemovalRequest, config?: AxiosRequestConfig): AxiosPromise<ImageInpaintingRemovalResponse>;
   /** 扩图 {@link ImageOutpaintingRequest} {@link ImageOutpaintingResponse} */
   ImageOutpainting(data: ImageOutpaintingRequest, config?: AxiosRequestConfig): AxiosPromise<ImageOutpaintingResponse>;
   /** 图像风格化（图生图） {@link ImageToImageRequest} {@link ImageToImageResponse} */

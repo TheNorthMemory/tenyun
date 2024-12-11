@@ -356,6 +356,14 @@ declare interface EsDictionaryInfo {
   Synonym: DictInfo[];
   /** 更新词典类型 */
   UpdateType: string;
+  /** ansj启用词词典列表 */
+  AnsjMain?: DictInfo[] | null;
+  /** ansj停用词词典列表 */
+  AnsjStop?: DictInfo[] | null;
+  /** ansj歧义词库列表 */
+  AnsjAmbiguity?: DictInfo[] | null;
+  /** ansj同义词词典列表 */
+  AnsjSynonyms?: DictInfo[] | null;
 }
 
 /** ES公网访问控制信息 */
@@ -642,6 +650,12 @@ declare interface InstanceInfo {
   CosBucketStorageSize?: number | null;
   /** 读写分离模式：0-不开启，1-本地读写分离，2-远端读写分离 */
   ReadWriteMode?: number | null;
+  /** 是否有置放群组异步调度任务 */
+  EnableScheduleRecoverGroup?: boolean | null;
+  /** 异步调度任务的时间 */
+  EnableScheduleOperationDuration?: EnableScheduleOperationDuration | null;
+  /** 开启集群保护：OPEN-开启，CLOSE-关闭 */
+  EnableDestroyProtection?: string | null;
 }
 
 /** ES集群日志详细信息 */
@@ -1007,19 +1021,21 @@ declare interface NodeView {
 /** ES集群操作详细信息 */
 declare interface Operation {
   /** 操作唯一id */
-  Id: number;
+  Id?: number;
   /** 操作开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 操作类型 */
-  Type: string;
+  Type?: string;
   /** 操作详情 */
-  Detail: OperationDetail;
+  Detail?: OperationDetail;
   /** 操作结果 */
-  Result: string;
+  Result?: string;
   /** 流程任务信息 */
-  Tasks: TaskDetail[];
+  Tasks?: TaskDetail[];
   /** 操作进度 */
-  Progress: number;
+  Progress?: number;
+  /** 回滚标记， 0未回滚 ，1回滚中，2已回滚 */
+  RollbackTag?: number;
   /** 操作者Uin */
   SubAccountUin?: string | null;
 }
@@ -2565,6 +2581,8 @@ declare interface UpdateInstanceRequest {
   EnableScheduleRecoverGroup?: boolean;
   /** 置放群组异步任务可维护时间段 */
   EnableScheduleOperationDuration?: EnableScheduleOperationDuration;
+  /** 开启集群保护：OPEN-开启，CLOSE-关闭 */
+  EnableDestroyProtection?: string;
 }
 
 declare interface UpdateInstanceResponse {

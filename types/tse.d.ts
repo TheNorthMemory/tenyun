@@ -1620,6 +1620,24 @@ declare interface NativeGatewayServerGroups {
   GatewayGroupList: NativeGatewayServerGroup[];
 }
 
+/** 网关数据来源单个描述 */
+declare interface NativeGatewayServiceSourceItem {
+  /** 网关实例ID */
+  GatewayID: string;
+  /** 服务来源ID */
+  SourceID: string;
+  /** 服务来源名称 */
+  SourceName: string;
+  /** 服务来源类型 */
+  SourceType: string;
+  /** 服务来源额外信息 */
+  SourceInfo: SourceInfo;
+  /** 创建时间 */
+  CreateTime: string;
+  /** 修改时间 */
+  ModifyTime: string;
+}
+
 /** 网络访问策略 */
 declare interface NetworkAccessControl {
   /** 访问模式：Whitelist|Blacklist */
@@ -1828,6 +1846,34 @@ declare interface ServiceWafStatus {
   Type?: string | null;
   /** 服务是否开启 WAF 防护 */
   Status?: string | null;
+}
+
+/** 服务来源 */
+declare interface SourceInfo {
+  /** 微服务引擎接入IP地址信息 */
+  Addresses?: string[];
+  /** 微服务引擎VPC信息 */
+  VpcInfo?: SourceInstanceVpcInfo | null;
+  /** 微服务引擎鉴权信息 */
+  Auth?: SourceInstanceAuth | null;
+}
+
+/** 实例鉴权信息 */
+declare interface SourceInstanceAuth {
+  /** 用户名 */
+  Username?: string | null;
+  /** 账户密码 */
+  Password?: string | null;
+  /** 访问凭据 token */
+  AccessToken?: string | null;
+}
+
+/** 微服务引擎实例的VPC信息 */
+declare interface SourceInstanceVpcInfo {
+  /** 微服务引擎VPC信息 */
+  VpcID?: string | null;
+  /** 微服务引擎子网信息 */
+  SubnetID?: string | null;
 }
 
 /** 存储的额外选项 */
@@ -2338,6 +2384,26 @@ declare interface CreateNativeGatewayServerGroupResponse {
   RequestId?: string;
 }
 
+declare interface CreateNativeGatewayServiceSourceRequest {
+  /** 网关实例ID */
+  GatewayID: string;
+  /** 服务来源类型，参考值：- TSE-Nacos - TSE-Consul - TSE-PolarisMesh- Customer-Nacos- Customer-Consul- Customer-PolarisMesh- TSF- TKE- EKS- PrivateDNS- Customer-DNS */
+  SourceType: string;
+  /** 服务来源实例ID，当SourceType的值不为PrivateDNS或Customer-DNS时，必填 */
+  SourceID?: string;
+  /** 服务来源实例名称，当SourceType的值不为PrivateDNS时，必填 */
+  SourceName?: string;
+  /** 服务来源实例额外信息 */
+  SourceInfo?: SourceInfo;
+}
+
+declare interface CreateNativeGatewayServiceSourceResponse {
+  /** 创建是否成功 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateOrUpdateConfigFileAndReleaseRequest {
   /** 实例id */
   InstanceId: string;
@@ -2628,6 +2694,20 @@ declare interface DeleteNativeGatewayServerGroupRequest {
 declare interface DeleteNativeGatewayServerGroupResponse {
   /** 删除信息 */
   Result?: DeleteNativeGatewayServerGroupResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteNativeGatewayServiceSourceRequest {
+  /** 网关实例 ID */
+  GatewayID: string;
+  /** 服务来源实例 ID */
+  SourceID: string;
+}
+
+declare interface DeleteNativeGatewayServiceSourceResponse {
+  /** 结果 */
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3328,6 +3408,32 @@ declare interface DescribeNativeGatewayServerGroupsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeNativeGatewayServiceSourcesRequest {
+  /** 网关实例ID */
+  GatewayID: string;
+  /** 单页条数，最大100 */
+  Limit: number;
+  /** 分页偏移量 */
+  Offset: number;
+  /** 服务来源实例名称，模糊搜索 */
+  SourceName?: string;
+  /** 微服务引擎类型：TSE-Nacos｜TSE-Consul｜TSE-PolarisMesh｜Customer-Nacos｜Customer-Consul｜Customer-PolarisMesh */
+  SourceTypes?: string[];
+  /** 排序字段类型，当前仅支持SourceName */
+  OrderField?: string;
+  /** 排序类型，AES/DESC */
+  OrderType?: string;
+}
+
+declare interface DescribeNativeGatewayServiceSourcesResponse {
+  /** 总实例数 */
+  Total?: number;
+  /** 服务来源实例列表 */
+  List?: NativeGatewayServiceSourceItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeOneCloudNativeAPIGatewayServiceRequest {
   /** 网关ID */
   GatewayId: string;
@@ -3806,6 +3912,22 @@ declare interface ModifyNativeGatewayServerGroupResponse {
   RequestId?: string;
 }
 
+declare interface ModifyNativeGatewayServiceSourceRequest {
+  /** 网关实例ID */
+  GatewayID: string;
+  /** 服务来源实例ID */
+  SourceID: string;
+  /** 服务来源名称 */
+  SourceName: string;
+  /** 服务来源实例额外信息 */
+  SourceInfo?: SourceInfo;
+}
+
+declare interface ModifyNativeGatewayServiceSourceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyNetworkAccessStrategyRequest {
   /** 云原生API网关实例ID。 */
   GatewayId: string;
@@ -4070,6 +4192,8 @@ declare interface Tse {
   CreateGovernanceServices(data: CreateGovernanceServicesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGovernanceServicesResponse>;
   /** 创建云原生网关引擎分组 {@link CreateNativeGatewayServerGroupRequest} {@link CreateNativeGatewayServerGroupResponse} */
   CreateNativeGatewayServerGroup(data: CreateNativeGatewayServerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNativeGatewayServerGroupResponse>;
+  /** 创建网关服务来源 {@link CreateNativeGatewayServiceSourceRequest} {@link CreateNativeGatewayServiceSourceResponse} */
+  CreateNativeGatewayServiceSource(data: CreateNativeGatewayServiceSourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNativeGatewayServiceSourceResponse>;
   /** 创建或更新配置文件并发布配置 {@link CreateOrUpdateConfigFileAndReleaseRequest} {@link CreateOrUpdateConfigFileAndReleaseResponse} */
   CreateOrUpdateConfigFileAndRelease(data: CreateOrUpdateConfigFileAndReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrUpdateConfigFileAndReleaseResponse>;
   /** 新建 WAF 防护域名 {@link CreateWafDomainsRequest} {@link CreateWafDomainsResponse} */
@@ -4112,6 +4236,8 @@ declare interface Tse {
   DeleteGovernanceServices(data: DeleteGovernanceServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGovernanceServicesResponse>;
   /** 删除网关实例分组 {@link DeleteNativeGatewayServerGroupRequest} {@link DeleteNativeGatewayServerGroupResponse} */
   DeleteNativeGatewayServerGroup(data: DeleteNativeGatewayServerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNativeGatewayServerGroupResponse>;
+  /** 删除网关服务来源实例 {@link DeleteNativeGatewayServiceSourceRequest} {@link DeleteNativeGatewayServiceSourceResponse} */
+  DeleteNativeGatewayServiceSource(data: DeleteNativeGatewayServiceSourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNativeGatewayServiceSourceResponse>;
   /** 删除 WAF 防护域名 {@link DeleteWafDomainsRequest} {@link DeleteWafDomainsResponse} */
   DeleteWafDomains(data: DeleteWafDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWafDomainsResponse>;
   /** 获取全量配置文件模板列表 {@link DescribeAllConfigFileTemplatesRequest} {@link DescribeAllConfigFileTemplatesResponse} */
@@ -4182,6 +4308,8 @@ declare interface Tse {
   DescribeNacosServerInterfaces(data?: DescribeNacosServerInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNacosServerInterfacesResponse>;
   /** 查询云原生网关分组信息 {@link DescribeNativeGatewayServerGroupsRequest} {@link DescribeNativeGatewayServerGroupsResponse} */
   DescribeNativeGatewayServerGroups(data: DescribeNativeGatewayServerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNativeGatewayServerGroupsResponse>;
+  /** 查询网关服务来源实例列表 {@link DescribeNativeGatewayServiceSourcesRequest} {@link DescribeNativeGatewayServiceSourcesResponse} */
+  DescribeNativeGatewayServiceSources(data: DescribeNativeGatewayServiceSourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNativeGatewayServiceSourcesResponse>;
   /** 获取云原生网关服务详情 {@link DescribeOneCloudNativeAPIGatewayServiceRequest} {@link DescribeOneCloudNativeAPIGatewayServiceResponse} */
   DescribeOneCloudNativeAPIGatewayService(data: DescribeOneCloudNativeAPIGatewayServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOneCloudNativeAPIGatewayServiceResponse>;
   /** 查询公网地址信息 {@link DescribePublicAddressConfigRequest} {@link DescribePublicAddressConfigResponse} */
@@ -4234,6 +4362,8 @@ declare interface Tse {
   ModifyGovernanceServices(data: ModifyGovernanceServicesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGovernanceServicesResponse>;
   /** 修改云原生API网关实例分组基础信息 {@link ModifyNativeGatewayServerGroupRequest} {@link ModifyNativeGatewayServerGroupResponse} */
   ModifyNativeGatewayServerGroup(data: ModifyNativeGatewayServerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNativeGatewayServerGroupResponse>;
+  /** 修改网关服务来源 {@link ModifyNativeGatewayServiceSourceRequest} {@link ModifyNativeGatewayServiceSourceResponse} */
+  ModifyNativeGatewayServiceSource(data: ModifyNativeGatewayServiceSourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNativeGatewayServiceSourceResponse>;
   /** 修改云原生API网关实例Kong访问策略 {@link ModifyNetworkAccessStrategyRequest} {@link ModifyNetworkAccessStrategyResponse} */
   ModifyNetworkAccessStrategy(data: ModifyNetworkAccessStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNetworkAccessStrategyResponse>;
   /** 修改云原生API网关实例网络基本信息 {@link ModifyNetworkBasicInfoRequest} {@link ModifyNetworkBasicInfoResponse} */

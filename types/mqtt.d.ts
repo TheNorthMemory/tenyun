@@ -270,6 +270,18 @@ declare interface CreateTopicResponse {
   RequestId?: string;
 }
 
+declare interface DeactivateDeviceCertificateRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 设备证书序列号 */
+  DeviceCertificateSn: string;
+}
+
+declare interface DeactivateDeviceCertificateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAuthenticatorRequest {
   /** 实例ID */
   InstanceId: string;
@@ -290,6 +302,18 @@ declare interface DeleteAuthorizationPolicyRequest {
 }
 
 declare interface DeleteAuthorizationPolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDeviceCertificateRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 设备证书序列号 */
+  DeviceCertificateSn: string;
+}
+
+declare interface DeleteDeviceCertificateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -328,6 +352,46 @@ declare interface DescribeAuthorizationPoliciesRequest {
 declare interface DescribeAuthorizationPoliciesResponse {
   /** 规则 */
   Data?: AuthorizationPolicyItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDeviceCertificateRequest {
+  /** 设备证书sn */
+  DeviceCertificateSn: string;
+  /** 集群id */
+  InstanceId: string;
+}
+
+declare interface DescribeDeviceCertificateResponse {
+  /** 创建时间 */
+  CreatedTime?: number;
+  /** 上次更新时间 */
+  UpdateTime?: number;
+  /** 证书失效日期 */
+  NotAfterTime?: number;
+  /** 上次激活时间 */
+  LastActivationTime?: number;
+  /** 上次取消激活时间 */
+  LastInactivationTime?: number;
+  /** 证书状态 */
+  Status?: string;
+  /** 证书序列号 */
+  CaSn?: string;
+  /** 设备证书sn */
+  DeviceCertificateSn?: string;
+  /** 证书内容 */
+  DeviceCertificate?: string;
+  /** 设备证书cn */
+  DeviceCertificateCn?: string;
+  /** 证书格式 */
+  Format?: string;
+  /** 客户端id */
+  ClientId?: string | null;
+  /** API, 手动注册 JITP 自动注册 */
+  CertificateSource?: string;
+  /** 证书生效开始时间 */
+  NotBeforeTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -584,6 +648,18 @@ declare interface RegisterDeviceCertificateResponse {
   RequestId?: string;
 }
 
+declare interface RevokedDeviceCertificateRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 设备证书序列号 */
+  DeviceCertificateSn: string;
+}
+
+declare interface RevokedDeviceCertificateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateAuthorizationPolicyPriorityRequest {
   /** 实例ID */
   InstanceId: string;
@@ -609,16 +685,22 @@ declare interface Mqtt {
   CreateJWTAuthenticator(data: CreateJWTAuthenticatorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJWTAuthenticatorResponse>;
   /** 创建MQTT主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
+  /** 失效设备证书 {@link DeactivateDeviceCertificateRequest} {@link DeactivateDeviceCertificateResponse} */
+  DeactivateDeviceCertificate(data: DeactivateDeviceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DeactivateDeviceCertificateResponse>;
   /** 删除一个MQTT认证器 {@link DeleteAuthenticatorRequest} {@link DeleteAuthenticatorResponse} */
   DeleteAuthenticator(data: DeleteAuthenticatorRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuthenticatorResponse>;
   /** 删除授权策略 {@link DeleteAuthorizationPolicyRequest} {@link DeleteAuthorizationPolicyResponse} */
   DeleteAuthorizationPolicy(data: DeleteAuthorizationPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuthorizationPolicyResponse>;
+  /** 删除设备证书 {@link DeleteDeviceCertificateRequest} {@link DeleteDeviceCertificateResponse} */
+  DeleteDeviceCertificate(data: DeleteDeviceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceCertificateResponse>;
   /** 删除MQTT主题 {@link DeleteTopicRequest} {@link DeleteTopicResponse} */
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
   /** 查询MQTT认证器 {@link DescribeAuthenticatorRequest} {@link DescribeAuthenticatorResponse} */
   DescribeAuthenticator(data: DescribeAuthenticatorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuthenticatorResponse>;
   /** 查询授权策略 {@link DescribeAuthorizationPoliciesRequest} {@link DescribeAuthorizationPoliciesResponse} */
   DescribeAuthorizationPolicies(data?: DescribeAuthorizationPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuthorizationPoliciesResponse>;
+  /** 查询设备证书详情 {@link DescribeDeviceCertificateRequest} {@link DescribeDeviceCertificateResponse} */
+  DescribeDeviceCertificate(data: DescribeDeviceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceCertificateResponse>;
   /** 查询设备证书 {@link DescribeDeviceCertificatesRequest} {@link DescribeDeviceCertificatesResponse} */
   DescribeDeviceCertificates(data: DescribeDeviceCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceCertificatesResponse>;
   /** 查询MQTT实例详情信息 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
@@ -639,6 +721,8 @@ declare interface Mqtt {
   ModifyTopic(data: ModifyTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicResponse>;
   /** 注册设备证书 {@link RegisterDeviceCertificateRequest} {@link RegisterDeviceCertificateResponse} */
   RegisterDeviceCertificate(data: RegisterDeviceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterDeviceCertificateResponse>;
+  /** 吊销设备证书 {@link RevokedDeviceCertificateRequest} {@link RevokedDeviceCertificateResponse} */
+  RevokedDeviceCertificate(data: RevokedDeviceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<RevokedDeviceCertificateResponse>;
   /** 更新授权策略优先级 {@link UpdateAuthorizationPolicyPriorityRequest} {@link UpdateAuthorizationPolicyPriorityResponse} */
   UpdateAuthorizationPolicyPriority(data: UpdateAuthorizationPolicyPriorityRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAuthorizationPolicyPriorityResponse>;
 }

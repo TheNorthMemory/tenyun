@@ -403,44 +403,44 @@ declare interface Instance {
   /** 到期时间。按照`ISO8601`标准表示，并且使用`UTC`时间。格式为：`YYYY-MM-DDThh:mm:ssZ`。注意：后付费模式本项为null */
   ExpiredTime?: string;
   /** 操作系统名称。 */
-  OsName: string;
+  OsName?: string;
   /** 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。 */
-  SecurityGroupIds: string[];
+  SecurityGroupIds?: string[];
   /** 实例登录设置。目前只返回实例所关联的密钥。 */
-  LoginSettings: LoginSettings;
+  LoginSettings?: LoginSettings;
   /** 实例状态。取值范围：PENDING：表示创建中LAUNCH_FAILED：表示创建失败RUNNING：表示运行中STOPPED：表示关机STARTING：表示开机中STOPPING：表示关机中REBOOTING：表示重启中SHUTDOWN：表示停止待销毁TERMINATING：表示销毁中。 */
-  InstanceState: string;
+  InstanceState?: string;
   /** 实例关联的标签列表。 */
-  Tags: Tag[];
+  Tags?: Tag[];
   /** 实例的关机计费模式。取值范围：KEEP_CHARGING：关机继续收费STOP_CHARGING：关机停止收费NOT_APPLICABLE：实例处于非关机状态或者不适用关机停止计费的条件 */
-  StopChargingMode: string;
+  StopChargingMode?: string;
   /** 实例全局唯一ID */
-  Uuid: string;
+  Uuid?: string;
   /** 实例的最新操作。例：StopInstances、ResetInstance。 */
-  LatestOperation: string | null;
+  LatestOperation?: string | null;
   /** 实例的最新操作状态。取值范围：SUCCESS：表示操作成功OPERATING：表示操作执行中FAILED：表示操作失败 */
-  LatestOperationState: string | null;
+  LatestOperationState?: string | null;
   /** 实例最新操作的唯一请求 ID。 */
-  LatestOperationRequestId: string | null;
+  LatestOperationRequestId?: string | null;
   /** 分散置放群组ID。 */
-  DisasterRecoverGroupId: string | null;
+  DisasterRecoverGroupId?: string | null;
   /** 实例的IPv6地址。 */
-  IPv6Addresses: string[] | null;
+  IPv6Addresses?: string[] | null;
   /** CAM角色名。 */
-  CamRoleName: string | null;
+  CamRoleName?: string | null;
   /** 高性能计算集群`ID`。 */
-  HpcClusterId: string | null;
+  HpcClusterId?: string | null;
   /** 高性能计算集群`IP`列表。 */
-  RdmaIpAddresses: string[] | null;
+  RdmaIpAddresses?: string[] | null;
   /** 实例所在的专用集群`ID`。 */
-  DedicatedClusterId: string | null;
+  DedicatedClusterId?: string | null;
   /** 实例隔离类型。取值范围：ARREAR：表示欠费隔离EXPIRE：表示到期隔离MANMADE：表示主动退还隔离NOTISOLATED：表示未隔离 */
-  IsolatedSource: string | null;
+  IsolatedSource?: string | null;
   /** GPU信息。如果是gpu类型子机，该值会返回GPU信息，如果是其他类型子机则不返回。 */
   GPUInfo?: GPUInfo | null;
   /** 实例的操作系统许可类型，默认为TencentCloud */
   LicenseType?: string;
-  /** 实例销毁保护标志，表示是否允许通过api接口删除实例。取值范围：TRUE：表示开启实例保护，不允许通过api接口删除实例FALSE：表示关闭实例保护，允许通过api接口删除实例默认取值：FALSE。 */
+  /** 实例销毁保护标志，表示是否允许通过api接口删除实例。取值范围：true：表示开启实例保护，不允许通过api接口删除实例false：表示关闭实例保护，允许通过api接口删除实例默认取值：false。 */
   DisableApiTermination?: boolean;
   /** 默认登录用户。 */
   DefaultLoginUser?: string;

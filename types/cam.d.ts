@@ -159,27 +159,29 @@ declare interface GroupInfo {
 /** 用户组用户信息 */
 declare interface GroupMemberInfo {
   /** 子用户 Uid。 */
-  Uid: number;
+  Uid?: number;
   /** 子用户 Uin。 */
-  Uin: number;
+  Uin?: number;
   /** 子用户名称。 */
-  Name: string;
+  Name?: string;
   /** 手机号。 */
-  PhoneNum: string;
+  PhoneNum?: string;
   /** 手机区域代码。 */
-  CountryCode: string;
+  CountryCode?: string;
   /** 是否已验证手机。0-未验证 1-验证 */
-  PhoneFlag: number;
+  PhoneFlag?: number;
   /** 邮箱地址。 */
-  Email: string;
+  Email?: string;
   /** 是否已验证邮箱。0-未验证 1-验证 */
-  EmailFlag: number;
+  EmailFlag?: number;
   /** 用户类型。1-全局协作者 2-项目协作者 3-消息接收者 */
-  UserType: number;
+  UserType?: number;
   /** 创建时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 是否为主消息接收人。0-否 1-是 */
-  IsReceiverOwner: number;
+  IsReceiverOwner?: number;
+  /** 昵称 */
+  Remark?: string | null;
 }
 
 /** ListGrantServiceAccessAction节点 */
@@ -387,35 +389,35 @@ declare interface SecretIdLastUsed {
 /** 策略信息 */
 declare interface StrategyInfo {
   /** 策略ID。 */
-  PolicyId: number;
+  PolicyId?: number;
   /** 策略名称。 */
-  PolicyName: string;
+  PolicyName?: string;
   /** 策略创建时间。 */
-  AddTime: string | null;
+  AddTime?: string | null;
   /** 策略类型。1 表示自定义策略，2 表示预设策略。 */
-  Type: number;
+  Type?: number;
   /** 策略描述。 */
-  Description: string | null;
+  Description?: string | null;
   /** 创建来源，1 通过控制台创建, 2 通过策略语法创建。 */
-  CreateMode: number;
+  CreateMode?: number;
   /** 关联的用户数 */
-  Attachments: number;
+  Attachments?: number;
   /** 策略关联的产品 */
-  ServiceType: string | null;
+  ServiceType?: string | null;
   /** 当需要查询标记实体是否已经关联策略时不为null。0表示未关联策略，1表示已关联策略 */
-  IsAttached: number | null;
+  IsAttached?: number | null;
   /** 是否已下线 */
-  Deactived: number | null;
+  Deactived?: number | null;
   /** 已下线产品列表 */
-  DeactivedDetail: string[] | null;
+  DeactivedDetail?: string[] | null;
   /** 是否是服务相关角色策略 */
-  IsServiceLinkedPolicy: number | null;
+  IsServiceLinkedPolicy?: number | null;
   /** 关联策略实体数 */
-  AttachEntityCount: number | null;
+  AttachEntityCount?: number | null;
   /** 关联权限边界实体数 */
-  AttachEntityBoundaryCount: number | null;
+  AttachEntityBoundaryCount?: number | null;
   /** 最后编辑时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
 }
 
 /** 子用户信息 */
@@ -1854,6 +1856,20 @@ declare interface UpdateRoleDescriptionResponse {
   RequestId?: string;
 }
 
+declare interface UpdateRoleSessionDurationRequest {
+  /** 时长(秒) */
+  SessionDuration: number;
+  /** 角色名(与角色ID必填一个) */
+  RoleName?: string;
+  /** 角色ID(与角色名必填一个) */
+  RoleId?: number;
+}
+
+declare interface UpdateRoleSessionDurationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateSAMLProviderRequest {
   /** SAML身份提供商名称 */
   Name: string;
@@ -2107,6 +2123,8 @@ declare interface Cam {
   UpdateRoleConsoleLogin(data: UpdateRoleConsoleLoginRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRoleConsoleLoginResponse>;
   /** 修改角色描述信息 {@link UpdateRoleDescriptionRequest} {@link UpdateRoleDescriptionResponse} */
   UpdateRoleDescription(data: UpdateRoleDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRoleDescriptionResponse>;
+  /** 修改角色会话时长 {@link UpdateRoleSessionDurationRequest} {@link UpdateRoleSessionDurationResponse} */
+  UpdateRoleSessionDuration(data: UpdateRoleSessionDurationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRoleSessionDurationResponse>;
   /** 更新SAML身份提供商信息 {@link UpdateSAMLProviderRequest} {@link UpdateSAMLProviderResponse} */
   UpdateSAMLProvider(data: UpdateSAMLProviderRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateSAMLProviderResponse>;
   /** 更新子用户 {@link UpdateUserRequest} {@link UpdateUserResponse} */
