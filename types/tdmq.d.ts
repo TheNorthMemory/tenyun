@@ -460,6 +460,8 @@ declare interface InstanceNodeDistribution {
   NodeCount?: number;
   /** 有调度任务且没有切回的可用区，此标识为true */
   NodePermWipeFlag?: boolean;
+  /** 可用区状态 */
+  ZoneStatus?: string | null;
 }
 
 /** 面向运营端的虚拟集群信息 */

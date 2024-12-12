@@ -31,7 +31,7 @@ declare interface CFSTurbo {
 /** 对话结果 */
 declare interface Choice {
   /** 对话结果 */
-  Message?: Message | null;
+  Message?: Message;
   /** 结束理由: stop, length, content_filter, null */
   FinishReason?: string;
   /** 序号 */
@@ -102,6 +102,8 @@ declare interface CrossTenantENIInfo {
 declare interface DataConfig {
   /** 映射路径 */
   MappingPath?: string;
+  /** 存储用途可选值为 BUILTIN_CODE, BUILTIN_DATA, BUILTIN_MODEL, USER_DATA, USER_CODE, USER_MODEL, OUTPUT, OTHER */
+  DataSourceUsage?: string | null;
   /** DATASET、COS、CFS、CFSTurbo、GooseFSx、HDFS、WEDATA_HDFS */
   DataSourceType?: string | null;
   /** 来自数据集的数据 */
@@ -139,109 +141,135 @@ declare interface DataSetConfig {
 /** 数据集组 */
 declare interface DatasetGroup {
   /** 数据集ID */
-  DatasetId: string | null;
+  DatasetId?: string | null;
   /** 数据集名称 */
-  DatasetName: string | null;
+  DatasetName?: string | null;
   /** 创建者 */
-  Creator: string | null;
+  Creator?: string | null;
   /** 数据集版本 */
-  DatasetVersion: string | null;
+  DatasetVersion?: string | null;
   /** 数据集类型 */
-  DatasetType: string | null;
+  DatasetType?: string | null;
   /** 数据集标签 */
-  DatasetTags: Tag[] | null;
+  DatasetTags?: Tag[] | null;
   /** 数据集标注任务名称 */
-  DatasetAnnotationTaskName: string | null;
+  DatasetAnnotationTaskName?: string | null;
   /** 数据集标注任务ID */
-  DatasetAnnotationTaskId: string | null;
+  DatasetAnnotationTaskId?: string | null;
   /** 处理进度 */
-  Process: number | null;
+  Process?: number | null;
   /** 数据集状态 */
-  DatasetStatus: string | null;
+  DatasetStatus?: string | null;
   /** 错误详情 */
-  ErrorMsg: string | null;
+  ErrorMsg?: string | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 外部关联TASKType */
-  ExternalTaskType: string | null;
+  ExternalTaskType?: string | null;
   /** 数据集大小 */
-  DatasetSize: string | null;
+  DatasetSize?: string | null;
   /** 数据集数据量 */
-  FileNum: number | null;
+  FileNum?: number | null;
   /** 数据集源COS路径 */
-  StorageDataPath: CosPathInfo | null;
+  StorageDataPath?: CosPathInfo | null;
   /** 数据集标签存储路径 */
-  StorageLabelPath: CosPathInfo | null;
+  StorageLabelPath?: CosPathInfo | null;
   /** 数据集版本聚合详情 */
-  DatasetVersions: DatasetInfo[] | null;
+  DatasetVersions?: DatasetInfo[] | null;
   /** 数据集标注状态 */
-  AnnotationStatus: string | null;
+  AnnotationStatus?: string | null;
   /** 数据集类型 */
-  AnnotationType: string | null;
+  AnnotationType?: string | null;
   /** 数据集标注格式 */
-  AnnotationFormat: string | null;
+  AnnotationFormat?: string | null;
   /** 数据集范围 */
-  DatasetScope: string | null;
+  DatasetScope?: string | null;
   /** 数据集OCR子场景 */
-  OcrScene: string | null;
+  OcrScene?: string | null;
   /** 数据集字典修改状态 */
-  AnnotationKeyStatus: string | null;
+  AnnotationKeyStatus?: string | null;
   /** 文本数据集导入方式 */
   ContentType?: string | null;
+  /** 数据集建模类别。 */
+  DatasetScene?: string | null;
+  /** CFS配置 */
+  CFSConfig?: CFSConfig | null;
+  /** 数据集标签 */
+  SceneTags?: string[] | null;
+  /** 已标注数量 */
+  NumAnnotated?: number | null;
+  /** 标注规范 */
+  AnnotationSpecification?: string | null;
+  /** 标注Schema是否配置 */
+  AnnotationSchemaConfigured?: boolean | null;
 }
 
 /** 数据集详情 */
 declare interface DatasetInfo {
   /** 数据集id */
-  DatasetId: string | null;
+  DatasetId?: string | null;
   /** 数据集名称 */
-  DatasetName: string | null;
+  DatasetName?: string | null;
   /** 数据集创建者 */
-  Creator: string | null;
+  Creator?: string | null;
   /** 数据集版本 */
-  DatasetVersion: string | null;
+  DatasetVersion?: string | null;
   /** 数据集类型 */
-  DatasetType: string | null;
+  DatasetType?: string | null;
   /** 数据集标签 */
-  DatasetTags: Tag[] | null;
+  DatasetTags?: Tag[] | null;
   /** 数据集对应标注任务名称 */
-  DatasetAnnotationTaskName: string | null;
+  DatasetAnnotationTaskName?: string | null;
   /** 数据集对应标注任务ID */
-  DatasetAnnotationTaskId: string | null;
+  DatasetAnnotationTaskId?: string | null;
   /** 处理进度 */
-  Process: number | null;
+  Process?: number | null;
   /** 数据集状态 */
-  DatasetStatus: string | null;
+  DatasetStatus?: string | null;
   /** 错误详情 */
-  ErrorMsg: string | null;
+  ErrorMsg?: string | null;
   /** 数据集创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 数据集更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 外部任务类型 */
-  ExternalTaskType: string | null;
+  ExternalTaskType?: string | null;
   /** 数据集存储大小 */
-  DatasetSize: string | null;
+  DatasetSize?: string | null;
   /** 数据集数据数量 */
-  FileNum: number | null;
+  FileNum?: number | null;
   /** 数据集源cos 路径 */
-  StorageDataPath: CosPathInfo | null;
+  StorageDataPath?: CosPathInfo | null;
   /** 数据集输出cos路径 */
-  StorageLabelPath: CosPathInfo | null;
+  StorageLabelPath?: CosPathInfo | null;
   /** 数据集标注状态 */
-  AnnotationStatus: string | null;
+  AnnotationStatus?: string | null;
   /** 数据集类型 */
-  AnnotationType: string | null;
+  AnnotationType?: string | null;
   /** 数据集标注格式 */
-  AnnotationFormat: string | null;
+  AnnotationFormat?: string | null;
   /** 数据集范围 */
-  DatasetScope: string | null;
+  DatasetScope?: string | null;
   /** 数据集OCR子场景 */
-  OcrScene: string | null;
+  OcrScene?: string | null;
   /** 数据集字典修改状态 */
-  AnnotationKeyStatus: string | null;
+  AnnotationKeyStatus?: string | null;
+  /** 内容类型 */
+  ContentType?: string | null;
+  /** 数据集建模类别。 */
+  DatasetScene?: string | null;
+  /** CFS配置 */
+  CFSConfig?: CFSConfig | null;
+  /** 数据集标签 */
+  SceneTags?: string[] | null;
+  /** 已标注数量 */
+  NumAnnotated?: number | null;
+  /** 标注规范 */
+  AnnotationSpecification?: string | null;
+  /** 标注Schema是否配置 */
+  AnnotationSchemaConfigured?: boolean | null;
 }
 
 /** 默认内网调用信息 */
@@ -301,13 +329,13 @@ declare interface GpuDetail {
 /** 资源信息 */
 declare interface GroupResource {
   /** CPU核数; 单位为1/1000核，比如100表示0.1核 */
-  Cpu: number;
+  Cpu?: number;
   /** 内存；单位为MB */
-  Memory: number;
+  Memory?: number;
   /** 总卡数；GPUDetail 显卡数之和；单位为1/100卡，比如100代表1卡 */
-  Gpu: number | null;
+  Gpu?: number | null;
   /** Gpu详情 */
-  GpuDetailSet: GpuDetail[] | null;
+  GpuDetailSet?: GpuDetail[] | null;
 }
 
 /** HDFS的参数配置 */
@@ -376,18 +404,12 @@ declare interface ImageInfo {
   ImageName?: string | null;
   /** 是否支持数据构建 */
   SupportDataPipeline?: boolean | null;
-  /** 镜像仓库用户名密码信息(仅当ImageType为CUSTOM第三方镜像的时候需要) */
-  ImageSecret?: ImageSecret | null;
 }
 
-/** 自定义镜像仓库凭据 */
-declare interface ImageSecret {
-  /** 用于加密密码的KMS公钥ID */
-  KeyId?: string | null;
-  /** 用户名 */
-  Username?: string | null;
-  /** 密码,base64编码； 当keyId不为空时，密码是加密后的 */
-  Password?: string | null;
+/** 多模态对话图片信息 */
+declare interface ImageUrl {
+  /** 图片url */
+  Url?: string;
 }
 
 /** 推理代码的信息 */
@@ -509,9 +531,11 @@ declare interface LogConfig {
 /** 对话输入内容 */
 declare interface Message {
   /** 角色名。支持三个角色：system、user、assistant，其中system仅开头可出现一次，也可忽略。 */
-  Role: string | null;
+  Role: string;
   /** 对话输入内容。 */
-  Content: string | null;
+  Content?: string;
+  /** 多模态对话输入内容，Content与MultiModalContents两者只需要填写其中一个即可，当对话中包含多模态对话信息时，则填写本参数 */
+  MultiModalContents?: MultiModalContent[];
 }
 
 /** 指标数据 */
@@ -535,63 +559,69 @@ declare interface MetricData {
 /** 模型加速任务 */
 declare interface ModelAccelerateTask {
   /** 模型加速任务ID */
-  ModelAccTaskId: string | null;
+  ModelAccTaskId?: string | null;
   /** 模型加速任务名称 */
-  ModelAccTaskName: string | null;
+  ModelAccTaskName?: string | null;
   /** 模型ID */
-  ModelId: string | null;
+  ModelId?: string | null;
   /** 模型名称 */
-  ModelName: string | null;
+  ModelName?: string | null;
   /** 模型版本 */
-  ModelVersion: string | null;
+  ModelVersion?: string | null;
   /** 模型来源 */
-  ModelSource: string | null;
+  ModelSource?: string | null;
   /** 优化级别 */
-  OptimizationLevel: string | null;
+  OptimizationLevel?: string | null;
   /** 任务状态 */
-  TaskStatus: string | null;
+  TaskStatus?: string | null;
   /** input节点个数 */
-  ModelInputNum: number | null;
+  ModelInputNum?: number | null;
   /** input节点信息 */
-  ModelInputInfos: ModelInputInfo[] | null;
+  ModelInputInfos?: ModelInputInfo[] | null;
   /** GPU型号 */
-  GPUType: string | null;
+  GPUType?: string | null;
   /** 计费模式 */
-  ChargeType: string | null;
+  ChargeType?: string | null;
   /** 加速比 */
-  Speedup: string | null;
+  Speedup?: string | null;
   /** 模型输入cos路径 */
-  ModelInputPath: CosPathInfo | null;
+  ModelInputPath?: CosPathInfo | null;
   /** 模型输出cos路径 */
-  ModelOutputPath: CosPathInfo | null;
+  ModelOutputPath?: CosPathInfo | null;
   /** 错误信息 */
-  ErrorMsg: string | null;
+  ErrorMsg?: string | null;
   /** 算法框架 */
-  AlgorithmFramework: string | null;
+  AlgorithmFramework?: string | null;
   /** 排队个数 */
-  WaitNumber: number | null;
+  WaitNumber?: number | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 任务进度 */
-  TaskProgress: number | null;
+  TaskProgress?: number | null;
   /** 模型格式 */
-  ModelFormat: string | null;
+  ModelFormat?: string | null;
   /** 模型Tensor信息 */
-  TensorInfos: string[] | null;
+  TensorInfos?: string[] | null;
   /** 模型专业参数 */
-  HyperParameter: HyperParameter | null;
+  HyperParameter?: HyperParameter | null;
   /** 加速引擎版本 */
-  AccEngineVersion: string | null;
+  AccEngineVersion?: string | null;
   /** 标签 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 优化模型是否已保存到模型仓库 */
-  IsSaved: boolean | null;
+  IsSaved?: boolean | null;
   /** SAVED_MODEL保存时配置的签名 */
-  ModelSignature: string | null;
+  ModelSignature?: string | null;
   /** 是否是QAT模型 */
-  QATModel: boolean | null;
+  QATModel?: boolean | null;
   /** 加速引擎对应的框架版本 */
   FrameworkVersion?: string | null;
+  /** 模型版本ID */
+  ModelVersionId?: string | null;
+  /** 资源组id */
+  ResourceGroupId?: string | null;
+  /** 资源组名称 */
+  ResourceGroupName?: string | null;
 }
 
 /** 优化模型版本列表 */
@@ -650,6 +680,8 @@ declare interface ModelInfo {
   ModelFormat?: string | null;
   /** 是否为私有化大模型 */
   IsPrivateModel?: boolean | null;
+  /** 模型的类别 多模态MultiModal, 文本大模型 LLM */
+  ModelCategory?: string;
 }
 
 /** 模型输入信息 */
@@ -684,6 +716,16 @@ declare interface ModelSource {
   ReasoningEnvironmentId: string | null;
   /** 自定义推理环境 */
   ReasoningImageInfo: ImageInfo | null;
+}
+
+/** 多模态对话内容,支持图片与文字信息 */
+declare interface MultiModalContent {
+  /** 对话类型，text表示文本对话内容，image_url表示图片对话内容 */
+  Type: string;
+  /** 文本对话内容，当Type为text时需要填写该值 */
+  Text?: string;
+  /** 图片对话内容，当Type为image_url时需要填写该值 */
+  ImageUrl?: ImageUrl;
 }
 
 /** 类型NotebookDetail */
@@ -766,6 +808,14 @@ declare interface NotebookDetail {
   SSHConfig?: SSHConfig | null;
   /** GooseFS存储配置 */
   VolumeSourceGooseFS?: GooseFS | null;
+  /** 子用户ID */
+  SubUin?: string;
+  /** 调度节点ID */
+  ResourceGroupInstanceId?: string;
+  /** 子用户名称 */
+  SubUinName?: string;
+  /** 任务实例创建时间 */
+  JobCreateTime?: string;
 }
 
 /** Notebook列表元素 */
@@ -824,6 +874,8 @@ declare interface NotebookSetItem {
   SSHConfig?: SSHConfig | null;
   /** GooseFS存储配置 */
   VolumeSourceGooseFS?: GooseFS | null;
+  /** 子用户名称 */
+  SubUinName?: string;
 }
 
 /** 键值对 */
@@ -986,6 +1038,8 @@ declare interface SSHConfig {
   Port?: number | null;
   /** 登录命令 */
   LoginCommand?: string | null;
+  /** 登录地址是否改变 */
+  IsAddressChanged?: boolean | null;
 }
 
 /** 定时的事务和行为 */
@@ -1066,6 +1120,12 @@ declare interface Service {
   LatestVersion?: string | null;
   /** 资源组类别 托管 NORMAL，纳管 SW */
   ResourceGroupSWType?: string | null;
+  /** 服务的归档状态 Waiting 等待归档中，Archived 已归档 */
+  ArchiveStatus?: string | null;
+  /** 服务的部署类型 [STANDARD 标准部署，DIST 分布式多机部署] 默认STANDARD */
+  DeployType?: string | null;
+  /** 单副本下的实例数，仅在部署类型为DIST时生效，默认1 */
+  InstancePerReplicas?: string | null;
 }
 
 /** 服务的调用信息，服务组下唯一 */
@@ -1196,6 +1256,8 @@ declare interface ServiceInfo {
   OldHybridBillingPrepaidReplicas: number | null;
   /** 是否开启模型的热更新。默认不开启 */
   ModelHotUpdateEnable: boolean | null;
+  /** 服务的规格别名 */
+  InstanceAlias?: string;
   /** 实例数量调节方式,默认为手动支持：自动 - "AUTO", 手动 - "MANUAL" */
   ScaleMode?: string | null;
   /** 定时伸缩任务 */
@@ -1236,6 +1298,48 @@ declare interface ServiceLimit {
   EnableInstanceReqLimit?: boolean;
   /** 每个服务实例的最大并发 */
   InstanceReqLimit?: number;
+}
+
+/** 计费项内容 */
+declare interface Spec {
+  /** 计费项标签 */
+  SpecId?: string;
+  /** 计费项名称 */
+  SpecName?: string;
+  /** 计费项显示名称 */
+  SpecAlias?: string;
+  /** 是否售罄 */
+  Available?: boolean;
+  /** 当前资源售罄时，可用的区域有哪些 */
+  AvailableRegion?: string[];
+  /** 当前计费项支持的特性 */
+  SpecFeatures?: string[] | null;
+  /** 计费项类型 */
+  SpecType?: string | null;
+  /** GPU类型 */
+  GpuType?: string | null;
+  /** 计费项CategoryId */
+  CategoryId?: string | null;
+}
+
+/** 计费项询价结果 */
+declare interface SpecPrice {
+  /** 计费项名称 */
+  SpecName: string;
+  /** 原价，单位：分。最大值42亿，超过则返回0 */
+  TotalCost: number;
+  /** 优惠后的价格，单位：分 */
+  RealTotalCost: number;
+  /** 计费项数量 */
+  SpecCount?: number;
+}
+
+/** 计费项询价单元 */
+declare interface SpecUnit {
+  /** 计费项名称 */
+  SpecName: string;
+  /** 计费项数量,建议不超过100万 */
+  SpecCount: number;
 }
 
 /** 启动命令信息 */
@@ -1366,6 +1470,8 @@ declare interface TrainingTaskDetail {
   Uin?: string;
   /** 子账号uin */
   SubUin?: string;
+  /** 创建者名称 */
+  SubUinName?: string | null;
   /** 地域 */
   Region?: string;
   /** 训练框架名称，eg：SPARK、PYSARK、TENSORFLOW、PYTORCH */
@@ -1493,11 +1599,11 @@ declare interface TrainingTaskSetItem {
 /** 大模型生成Token统计 */
 declare interface Usage {
   /** 生成的token数目 */
-  CompletionTokens?: number | null;
+  CompletionTokens?: number;
   /** 输入的token数目 */
-  PromptTokens?: number | null;
+  PromptTokens?: number;
   /** 总共token数目 */
-  TotalTokens?: number | null;
+  TotalTokens?: number;
 }
 
 /** 外部挂载信息 */
@@ -1531,27 +1637,27 @@ declare interface WorkloadStatus {
 }
 
 declare interface ChatCompletionRequest {
-  /** 对话的目标模型ID。自行部署的开源大模型聊天：部署的模型服务组ID，形如ms-xxyyzz。 */
+  /** 对话的目标模型ID。自行部署的开源大模型聊天：部署的模型服务组ID，形如ms-q7pfr29p。 */
   Model: string;
   /** 输入对话历史。旧的对话在前，数组中最后一项应该为这次的问题。 */
   Messages: Message[];
-  /** 仅当模型为自行部署的开源大模型时生效。采样随机值，默认值为1.0，取值范围[0,2]。较高的值(如0.8)将使输出更加随机，而较低的值(如0.2)将使输出更加确定。建议仅修改此参数或TopP，但不建议两者都修改。 */
+  /** 仅当模型为自行部署的开源大模型时生效。采样随机值，默认值为0.7，取值范围[0,2]。较高的值(如0.8)将使输出更加随机，而较低的值(如0.2)将使输出更加确定。建议仅修改此参数或TopP，但不建议两者都修改。 */
   Temperature?: number;
   /** 仅当模型为自行部署的开源大模型时生效。核采样，默认值为1，取值范围[0,1]。指的是预先设置一个概率界限 p，然后将所有可能生成的token，根据概率大小从高到低排列，依次选取。当这些选取的token的累积概率大于或等于 p 值时停止，然后从已经选取的token中进行采样，生成下一个token。例如top_p为0.1时意味着模型只考虑累积概率为10%的token。建议仅修改此参数或Temperature，不建议两者都修改。 */
   TopP?: number;
-  /** 仅当模型为自行部署的开源大模型时生效。最大生成的token数目。默认为无限大。 */
+  /** 仅当模型为自行部署的开源大模型时生效。默认 512，模型可生成内容的最长 token 数量，最大不能超过模型支持的上下文长度。 */
   MaxTokens?: number;
 }
 
 declare interface ChatCompletionResponse {
-  /** 部署好的服务Id */
+  /** 对话的模型服务组ID */
   Model?: string;
   /** 本次问答的答案。 */
   Choices?: Choice[];
   /** 会话Id。 */
-  Id?: string | null;
+  Id?: string;
   /** token统计 */
-  Usage?: Usage | null;
+  Usage?: Usage;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1560,25 +1666,31 @@ declare interface CreateDatasetRequest {
   /** 数据集名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
   DatasetName: string;
   /** 数据集类型:TYPE_DATASET_TEXT，文本TYPE_DATASET_IMAGE，图片TYPE_DATASET_TABLE，表格TYPE_DATASET_OTHER，其他 */
-  DatasetType: string;
+  DatasetType?: string;
   /** 数据源cos路径 */
-  StorageDataPath: CosPathInfo;
+  StorageDataPath?: CosPathInfo;
   /** 数据集标签cos存储路径 */
-  StorageLabelPath: CosPathInfo;
+  StorageLabelPath?: CosPathInfo;
   /** 数据集标签 */
   DatasetTags?: Tag[];
   /** 数据集标注状态:STATUS_NON_ANNOTATED，未标注STATUS_ANNOTATED，已标注 */
   AnnotationStatus?: string;
-  /** 标注类型:ANNOTATION_TYPE_CLASSIFICATION，图片分类ANNOTATION_TYPE_DETECTION，目标检测ANNOTATION_TYPE_SEGMENTATION，图片分割ANNOTATION_TYPE_TRACKING，目标跟踪 */
+  /** 标注类型:ANNOTATION_TYPE_CLASSIFICATION，图片分类ANNOTATION_TYPE_DETECTION，目标检测ANNOTATION_TYPE_SEGMENTATION，图片分割ANNOTATION_TYPE_TRACKING，目标跟踪ANNOTATION_TYPE_OCR，OCRANNOTATION_TYPE_TEXT_CLASSIFICATION，文本分类 */
   AnnotationType?: string;
-  /** 标注格式:ANNOTATION_FORMAT_TI，TI平台格式ANNOTATION_FORMAT_PASCAL，Pascal VocANNOTATION_FORMAT_COCO，COCOANNOTATION_FORMAT_FILE，文件目录结构 */
+  /** 标注格式:ANNOTATION_FORMAT_TI，TI平台格式ANNOTATION_FORMAT_PASCAL，Pascal VocANNOTATION_FORMAT_COCO，COCOANNOTATION_FORMAT_FILE，文件目录结构ANNOTATION_FORMAT_TEXT_TI，文本类型TI平台格式ANNOTATION_FORMAT_TXT，文本类型TXT格式ANNOTATION_FORMAT_CSV，文本类型CSV格式ANNOTATION_FORMAT_JSON，文本类型JSON格式 */
   AnnotationFormat?: string;
   /** 表头信息 */
   SchemaInfos?: SchemaInfo[];
   /** 数据是否存在表头 */
   IsSchemaExisted?: boolean;
-  /** 导入文件粒度，按行或者按文件 */
+  /** 导入文件粒度TYPE_TEXT_LINE，按行TYPE_TEXT_FILE，按文件 */
   ContentType?: string;
+  /** 数据集建模一级类别。LLM,CV,STRUCTURE,OTHER */
+  DatasetScene?: string;
+  /** 数据集标签。 */
+  SceneTags?: string[];
+  /** 数据集CFS配置。仅支持LLM场景 */
+  CFSConfig?: CFSConfig;
 }
 
 declare interface CreateDatasetResponse {
@@ -1655,11 +1767,15 @@ declare interface CreateModelServiceRequest {
   CommandBase64?: string;
   /** 服务端口，仅在非内置镜像时生效，默认8501。不支持输入8501-8510,6006,9092 */
   ServicePort?: number;
+  /** 服务的部署类型 [STANDARD 标准部署，DIST 分布式多机部署] 默认STANDARD */
+  DeployType?: string;
+  /** 单副本下的实例数，仅在部署类型为DIST时生效，默认1 */
+  InstancePerReplicas?: number;
 }
 
 declare interface CreateModelServiceResponse {
   /** 生成的模型服务 */
-  Service?: Service | null;
+  Service?: Service;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1899,7 +2015,7 @@ declare interface DescribeBillingResourceGroupResponse {
 declare interface DescribeBillingResourceGroupsRequest {
   /** 资源组类型;枚举值:空: 通用, TRAIN: 训练, INFERENCE: 推理 */
   Type?: string;
-  /** Filter.Name: 枚举值: ResourceGroupId (资源组id列表) ResourceGroupName (资源组名称列表)Filter.Values: 长度为1且Filter.Fuzzy=true时，支持模糊查询; 不为1时，精确查询每次请求的Filters的上限为5，Filter.Values的上限为100 */
+  /** Filter.Name: 枚举值: ResourceGroupId (资源组id列表) ResourceGroupName (资源组名称列表) AvailableNodeCount（资源组中可用节点数量）Filter.Values: 长度为1且Filter.Fuzzy=true时，支持模糊查询; 不为1时，精确查询每次请求的Filters的上限为5，Filter.Values的上限为100 */
   Filters?: Filter[];
   /** 标签过滤 */
   TagFilters?: TagFilter[];
@@ -1936,6 +2052,34 @@ declare interface DescribeBillingResourceInstanceRunningJobsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBillingSpecsPriceRequest {
+  /** 询价参数，支持批量询价 */
+  SpecsParam: SpecUnit[];
+}
+
+declare interface DescribeBillingSpecsPriceResponse {
+  /** 计费项价格，支持批量返回 */
+  SpecsPrice?: SpecPrice[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBillingSpecsRequest {
+  /** 付费模式：POSTPAID_BY_HOUR按量计费、PREPAID包年包月 */
+  ChargeType: string;
+  /** 枚举值：空、TRAIN、NOTEBOOK、INFERENCE或EMS */
+  TaskType?: string;
+  /** 资源类型：["", "CALC", "CPU", "GPU", "GPU-SW"] */
+  ResourceType?: string;
+}
+
+declare interface DescribeBillingSpecsResponse {
+  /** 计费项列表 */
+  Specs?: Spec[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBuildInImagesRequest {
   /** 镜像过滤器 */
   ImageFilters?: ImageFIlter[];
@@ -1963,15 +2107,21 @@ declare interface DescribeDatasetsRequest {
   Offset?: number;
   /** 返回数据个数，默认20，最大支持200 */
   Limit?: number;
+  /** 是否检查CFS。若开启，则在CFS挂载好之前，不会返回数据集列表。 */
+  CFSChecking?: boolean;
+  /** 是否返回CFS详情。 */
+  CFSDetail?: boolean;
 }
 
 declare interface DescribeDatasetsResponse {
   /** 数据集总量（名称维度） */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 数据集按照数据集名称聚合的分组 */
-  DatasetGroups: DatasetGroup[] | null;
+  DatasetGroups?: DatasetGroup[] | null;
   /** 数据集ID总量 */
-  DatasetIdNums: number | null;
+  DatasetIdNums?: number | null;
+  /** 若开启了CFSChecking，则检查CFS是否准备完毕。若CFS未准备完毕，则返回true，并且TotalCount为0，DatasetGroups为空。 */
+  CFSNotReady?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2129,7 +2279,7 @@ declare interface DescribeNotebookRequest {
 
 declare interface DescribeNotebookResponse {
   /** 详情 */
-  NotebookDetail: NotebookDetail;
+  NotebookDetail?: NotebookDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2151,9 +2301,9 @@ declare interface DescribeNotebooksRequest {
 
 declare interface DescribeNotebooksResponse {
   /** 详情 */
-  NotebookSet?: NotebookSetItem[] | null;
+  NotebookSet?: NotebookSetItem[];
   /** 总条数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2287,6 +2437,8 @@ declare interface ModifyModelServiceRequest {
   CommandBase64?: string;
   /** 服务端口，仅在非内置镜像时生效，默认8501。不支持输入8501-8510,6006,9092 */
   ServicePort?: number;
+  /** 单副本下的实例数，仅在部署类型为DIST时生效，默认1 */
+  InstancePerReplicas?: number;
 }
 
 declare interface ModifyModelServiceResponse {
@@ -2302,28 +2454,6 @@ declare interface PushTrainingMetricsRequest {
 }
 
 declare interface PushTrainingMetricsResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface SendChatMessageRequest {
-  /** 会话id，标识一组对话的唯一id，id变更则重置会话 */
-  SessionId: string;
-  /** 问题描述 */
-  Question: string;
-  /** 会话模型版本。金融大模型：填写sn-finllm-13b-chat-v1。默认为sn-finllm-13b-chat-v1，即金融大模型。 */
-  ModelVersion?: string;
-  /** 使用模式。通用问答：填写General。搜索增强问答：填写WithSearchPlugin。默认为General，即通用问答。当前可体验模型仅支持General。 */
-  Mode?: string;
-  /** 搜索来源。仅当Mode为WithSearchPlugin时生效。预置文稿库：填写Preset。自定义：填写Custom。 */
-  SearchSource?: string;
-}
-
-declare interface SendChatMessageResponse {
-  /** 答案 */
-  Answer?: string;
-  /** 会话id,返回请求的会话id */
-  SessionId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3109,6 +3239,10 @@ declare interface Tione {
   DescribeBillingResourceGroups(data?: DescribeBillingResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceGroupsResponse>;
   /** 查询资源组节点运行中的任务 {@link DescribeBillingResourceInstanceRunningJobsRequest} {@link DescribeBillingResourceInstanceRunningJobsResponse} */
   DescribeBillingResourceInstanceRunningJobs(data: DescribeBillingResourceInstanceRunningJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceInstanceRunningJobsResponse>;
+  /** 查询计费项列表 {@link DescribeBillingSpecsRequest} {@link DescribeBillingSpecsResponse} */
+  DescribeBillingSpecs(data: DescribeBillingSpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingSpecsResponse>;
+  /** 查询计费项价格 {@link DescribeBillingSpecsPriceRequest} {@link DescribeBillingSpecsPriceResponse} */
+  DescribeBillingSpecsPrice(data: DescribeBillingSpecsPriceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingSpecsPriceResponse>;
   /** 获取内置镜像列表 {@link DescribeBuildInImagesRequest} {@link DescribeBuildInImagesResponse} */
   DescribeBuildInImages(data?: DescribeBuildInImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBuildInImagesResponse>;
   /** 查询数据集列表 {@link DescribeDatasetsRequest} {@link DescribeDatasetsResponse} */
@@ -3147,8 +3281,6 @@ declare interface Tione {
   ModifyModelService(data: ModifyModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelServiceResponse>;
   /** 上报训练自定义指标 {@link PushTrainingMetricsRequest} {@link PushTrainingMetricsResponse} */
   PushTrainingMetrics(data?: PushTrainingMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<PushTrainingMetricsResponse>;
-  /** 大模型聊天体验 {@link SendChatMessageRequest} {@link SendChatMessageResponse} */
-  SendChatMessage(data: SendChatMessageRequest, config?: AxiosRequestConfig): AxiosPromise<SendChatMessageResponse>;
   /** 启动Notebook {@link StartNotebookRequest} {@link StartNotebookResponse} */
   StartNotebook(data: StartNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<StartNotebookResponse>;
   /** 停止模型加速任务 {@link StopModelAccelerateTaskRequest} {@link StopModelAccelerateTaskResponse} */

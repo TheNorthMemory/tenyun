@@ -3367,19 +3367,19 @@ declare interface DescribeLivePackageInfoRequest {
 
 declare interface DescribeLivePackageInfoResponse {
   /** 套餐包信息。 */
-  LivePackageInfoList: LivePackageInfo[] | null;
+  LivePackageInfoList?: LivePackageInfo[] | null;
   /** 套餐包当前计费方式:-1: 无计费方式或获取失败0: 无计费方式201: 月结带宽202: 月结流量203: 日结带宽204: 日结流量205: 日结时长206: 月结时长304: 日结流量。 */
-  PackageBillMode: number | null;
+  PackageBillMode?: number | null;
   /** 总页数。 */
-  TotalPage: number | null;
+  TotalPage?: number | null;
   /** 数据总条数。 */
-  TotalNum: number | null;
+  TotalNum?: number | null;
   /** 当前页数。 */
-  PageNum: number | null;
+  PageNum?: number | null;
   /** 当前每页数量。 */
-  PageSize: number | null;
+  PageSize?: number | null;
   /** 当请求参数 PackageType = 0 时生效，逗号分隔，从第一个到最后一个分别表示：标准直播，中国大陆（境内全地区）计费方式。标准直播，国际/港澳台（境外多地区）计费方式。快直播，中国大陆（境内全地区）计费方式。快直播，国际/港澳台（境外多地区）计费方式。 */
-  FluxPackageBillMode: string | null;
+  FluxPackageBillMode?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -59,23 +59,23 @@ declare interface DeployParam {
 /** 环境基础信息 */
 declare interface EnvBaseInfo {
   /** 环境Id */
-  EnvId: string;
+  EnvId?: string;
   /** 套餐类型：Trial ｜ Standard ｜ Professional ｜ Enterprise */
-  PackageType: string;
+  PackageType?: string;
   /** VPC Id */
-  VpcId: string;
+  VpcId?: string;
   /** 环境创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 环境别名 */
-  Alias: string;
+  Alias?: string;
   /** 环境状态 */
-  Status: string;
+  Status?: string;
   /** 环境地域 */
-  Region: string;
+  Region?: string;
   /** 环境类型 tcbr ｜ run */
-  EnvType: string;
+  EnvType?: string;
   /** 子网id */
-  SubnetIds: string;
+  SubnetIds?: string;
 }
 
 /** 环境信息 */
@@ -165,11 +165,11 @@ declare interface ObjectKV {
 /** 在线版本信息 */
 declare interface OnlineVersionInfo {
   /** 版本名 */
-  VersionName: string | null;
+  VersionName?: string | null;
   /** 镜像url */
-  ImageUrl: string | null;
+  ImageUrl?: string | null;
   /** 流量 */
-  FlowRatio: string | null;
+  FlowRatio?: string | null;
 }
 
 /** 代码仓库信息 */
@@ -249,37 +249,37 @@ declare interface ServerBaseInfo {
 /** 服务管理任务信息 */
 declare interface ServerManageTaskInfo {
   /** 任务Id */
-  Id: number;
+  Id?: number;
   /** 环境Id */
-  EnvId: string;
+  EnvId?: string;
   /** 服务名 */
-  ServerName: string;
+  ServerName?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 变更类型 */
-  ChangeType: string;
+  ChangeType?: string;
   /** 发布类型 */
-  ReleaseType: string;
+  ReleaseType?: string;
   /** 部署类型 */
-  DeployType: string;
+  DeployType?: string;
   /** 上一个版本名 */
-  PreVersionName: string;
+  PreVersionName?: string;
   /** 版本名 */
-  VersionName: string;
+  VersionName?: string;
   /** 流水线Id */
-  PipelineId: number;
+  PipelineId?: number;
   /** 流水线任务Id */
-  PipelineTaskId: number;
+  PipelineTaskId?: number;
   /** 发布单Id */
-  ReleaseId: number;
+  ReleaseId?: number;
   /** 状态 */
-  Status: string;
+  Status?: string;
   /** 步骤信息 */
-  Steps: TaskStepInfo[];
+  Steps?: TaskStepInfo[];
   /** 失败原因 */
-  FailReason: string;
+  FailReason?: string;
   /** 操作标识 */
-  OperatorRemark: string;
+  OperatorRemark?: string;
 }
 
 /** 静态CDN资源信息 */
@@ -319,17 +319,17 @@ declare interface Tag {
 /** 任务步骤信息 */
 declare interface TaskStepInfo {
   /** 步骤名 */
-  Name: string;
+  Name?: string;
   /** 未启动："todo"运行中："running"失败："failed"成功结束："finished" */
-  Status: string;
+  Status?: string;
   /** 开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 结束时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 消耗时间：秒 */
-  CostTime: number;
+  CostTime?: number;
   /** 失败原因 */
-  FailReason: string;
+  FailReason?: string;
 }
 
 /** 版本流量信息 */
@@ -391,7 +391,7 @@ declare interface CreateCloudRunServerRequest {
 
 declare interface CreateCloudRunServerResponse {
   /** 一键部署任务Id，微信云托管，暂时用不到 */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -421,11 +421,11 @@ declare interface DescribeCloudRunServerDetailRequest {
 
 declare interface DescribeCloudRunServerDetailResponse {
   /** 服务基本信息 */
-  BaseInfo: ServerBaseInfo | null;
+  BaseInfo?: ServerBaseInfo | null;
   /** 服务配置信息 */
-  ServerConfig: ServerBaseConfig | null;
+  ServerConfig?: ServerBaseConfig | null;
   /** 在线版本信息 */
-  OnlineVersionInfos: OnlineVersionInfo[] | null;
+  OnlineVersionInfos?: OnlineVersionInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -441,9 +441,9 @@ declare interface DescribeCloudRunServersRequest {
 
 declare interface DescribeCloudRunServersResponse {
   /** 服务列表 */
-  ServerList: ServerBaseInfo[];
+  ServerList?: ServerBaseInfo[];
   /** 服务总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -473,9 +473,9 @@ declare interface DescribeServerManageTaskRequest {
 
 declare interface DescribeServerManageTaskResponse {
   /** 是否存在 */
-  IsExist: boolean;
+  IsExist?: boolean;
   /** 任务信息 */
-  Task: ServerManageTaskInfo;
+  Task?: ServerManageTaskInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -533,9 +533,9 @@ declare interface UpdateCloudRunServerRequest {
 
 declare interface UpdateCloudRunServerResponse {
   /** 环境Id */
-  EnvId: string;
+  EnvId?: string;
   /** 一键部署任务Id，暂时用不到 */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
