@@ -2462,6 +2462,54 @@ declare interface CreateAlarmPolicyResponse {
   RequestId?: string;
 }
 
+declare interface CreateAlarmShieldRequest {
+  /** 模块名，这里填“monitor” */
+  Module: string;
+  /** 屏蔽策略名称 */
+  Name: string;
+  /** 监控类型 */
+  MonitorType: string;
+  /** 命名空间即策略类型 */
+  NameSpace: string;
+  /** 屏蔽时间类型 FOREVER_SHIELD:永久屏蔽 PERIOD_SHIELD:绝对时间范围屏蔽 LOOP_SHIELD:相对时间范围屏蔽 */
+  ShieldTimeType: string;
+  /** 屏蔽对象 */
+  ShieldObject?: string[];
+  /** 屏蔽指标 为空则为全部指标 */
+  ShieldMetric?: string[];
+  /** 开始时间 相对时间范围:36000 绝对时间范围:1648742400 缺省:0 */
+  StartTime?: number;
+  /** 结束时间 相对时间范围:72000 绝对时间范围:1649088000 缺省:0 */
+  EndTime?: number;
+  /** 循环开始日期 2022/04/01 缺省:0 */
+  LoopStartDate?: number;
+  /** 循环结束日期 2022/04/05 缺省:0 */
+  LoopEndDate?: number;
+  /** 需要屏蔽的策略ID */
+  ShieldPolicyId?: string;
+  /** 需要屏蔽的告警等级，取值范围Warn,Remind,Serious */
+  ShieldAlarmLevel?: string[];
+  /** 屏蔽类型，为OBJNAME是老版本实例名屏蔽，为POLICY是新版本维度匹配 */
+  VersionTag?: string;
+  /** 屏蔽规则的描述 */
+  Description?: string;
+  /** 时区，东八区+8，西八区减8，以此类推 */
+  TimeZone?: number;
+  /** 屏蔽事件 为空则为全部指标 */
+  ShieldEvent?: string[];
+  /** 是否对指标屏蔽 1=是 0=否 */
+  ShieldMetricFlag?: number;
+  /** 是否对事件屏蔽 1=是 0=否 */
+  ShieldEventFlag?: number;
+}
+
+declare interface CreateAlarmShieldResponse {
+  /** 屏蔽规则的Id */
+  ShieldId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAlertRuleRequest {
   /** Prometheus 实例 ID，例如：prom-abcd1234 */
   InstanceId: string;
@@ -5227,6 +5275,8 @@ declare interface Monitor {
   CreateAlarmNotice(data: CreateAlarmNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlarmNoticeResponse>;
   /** 创建腾讯云可观测平台告警策略 {@link CreateAlarmPolicyRequest} {@link CreateAlarmPolicyResponse} */
   CreateAlarmPolicy(data: CreateAlarmPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlarmPolicyResponse>;
+  /** 创建告警屏蔽规则 {@link CreateAlarmShieldRequest} {@link CreateAlarmShieldResponse} */
+  CreateAlarmShield(data: CreateAlarmShieldRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlarmShieldResponse>;
   /** 创建告警规则 {@link CreateAlertRuleRequest} {@link CreateAlertRuleResponse} */
   CreateAlertRule(data: CreateAlertRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlertRuleResponse>;
   /** 创建 exporter 集成 {@link CreateExporterIntegrationRequest} {@link CreateExporterIntegrationResponse} */

@@ -4209,11 +4209,13 @@ declare interface CreateServiceTemplateResponse {
 declare interface CreateSnapshotPoliciesRequest {
   /** 快照策略详情。 */
   SnapshotPolicies: SnapshotPolicy[];
+  /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
+  Tags?: Tag[];
 }
 
 declare interface CreateSnapshotPoliciesResponse {
   /** 快照策略。 */
-  SnapshotPolicies: SnapshotPolicy[];
+  SnapshotPolicies?: SnapshotPolicy[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

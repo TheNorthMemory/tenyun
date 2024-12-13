@@ -653,13 +653,13 @@ declare interface InstancePriceDetail {
 /** 实例可退还信息。 */
 declare interface InstanceReturnable {
   /** 实例 ID。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例是否可退还。 */
-  IsReturnable: boolean;
+  IsReturnable?: boolean;
   /** 实例退还失败错误码。 */
-  ReturnFailCode: number;
+  ReturnFailCode?: number;
   /** 实例退还失败错误信息。 */
-  ReturnFailMessage: string;
+  ReturnFailMessage?: string;
 }
 
 /** 实例流量包详情 */
@@ -1173,7 +1173,7 @@ declare interface CreateKeyPairRequest {
 
 declare interface CreateKeyPairResponse {
   /** 密钥对信息。 */
-  KeyPair: KeyPair;
+  KeyPair?: KeyPair;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

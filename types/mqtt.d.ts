@@ -285,7 +285,7 @@ declare interface DeactivateDeviceCertificateResponse {
 declare interface DeleteAuthenticatorRequest {
   /** 实例ID */
   InstanceId: string;
-  /** 认证器类型 */
+  /** 认证器类型:JWT：JWT认证器JWKS：JWKS认证器BYOC：一端一证认证器 */
   Type: string;
 }
 
@@ -333,7 +333,7 @@ declare interface DeleteTopicResponse {
 declare interface DescribeAuthenticatorRequest {
   /** 实例ID */
   InstanceId: string;
-  /** 认证器类型 */
+  /** 认证器类型: JWT：JWT认证器 JWKS：JWKS认证器 HTTP:HTTP认证器 */
   Type?: string;
 }
 
@@ -376,13 +376,13 @@ declare interface DescribeDeviceCertificateResponse {
   LastInactivationTime?: number;
   /** 证书状态 */
   Status?: string;
-  /** 证书序列号 */
+  /** Ca证书序列号 */
   CaSn?: string;
-  /** 设备证书sn */
+  /** 设备证书序列号 */
   DeviceCertificateSn?: string;
-  /** 证书内容 */
+  /** 设备证书内容 */
   DeviceCertificate?: string;
-  /** 设备证书cn */
+  /** 设备证书common name */
   DeviceCertificateCn?: string;
   /** 证书格式 */
   Format?: string;
@@ -444,7 +444,7 @@ declare interface DescribeInstanceRequest {
 }
 
 declare interface DescribeInstanceResponse {
-  /** 实例类型，EXPERIMENT 体验版BASIC 基础版PRO 专业版PLATINUM 铂金版 */
+  /** 实例类型BASIC 基础版PRO 专业版 */
   InstanceType?: string;
   /** 实例ID */
   InstanceId?: string;
@@ -470,7 +470,7 @@ declare interface DescribeInstanceResponse {
   AuthorizationPolicyLimit?: number;
   /** 客户端数量上限 */
   ClientNumLimit?: number;
-  /** 客户端证书注册方式：JITP，API */
+  /** 客户端证书注册方式：JITP：自动注册API：通过API手动注册 */
   DeviceCertificateProvisionType?: string;
   /** 自动注册设备证书时是否自动激活 */
   AutomaticActivation?: boolean;
