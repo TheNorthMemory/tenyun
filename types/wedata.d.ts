@@ -866,6 +866,22 @@ declare interface DataServiceResponseParam {
   Description: string | null;
 }
 
+/** 数据源云梯连接状态 */
+declare interface DataSourceConnectStatus {
+  /** id */
+  Id?: number;
+  /** 项目id */
+  ProjectId?: string;
+  /** 数据源id */
+  DatasourceId?: string;
+  /** 连接结果 */
+  ConnectResult?: number;
+  /** 错误信息 */
+  ConnectError?: string;
+  /** 时间戳 */
+  Timestamp?: number;
+}
+
 /** 数据源对象 */
 declare interface DataSourceInfo {
   /** 若数据源列表为绑定数据库，则为db名称 */
@@ -936,6 +952,8 @@ declare interface DataSourceInfo {
   DevelopmentId?: number | null;
   /** 同params 内容为开发数据源的数据 */
   DevelopmentParams?: string | null;
+  /** 数据源连接状态 */
+  ConnectStatus?: DataSourceConnectStatus | null;
 }
 
 /** 查询数据源分页列表 */

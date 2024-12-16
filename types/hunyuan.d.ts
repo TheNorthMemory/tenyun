@@ -427,6 +427,8 @@ declare interface ChatCompletionsRequest {
   Seed?: number;
   /** 强制搜索增强开关。说明：1. 未传值时默认关闭。2. 开启后，将强制走AI搜索，当AI搜索结果为空时，由大模型回复兜底话术。 */
   ForceSearchEnhancement?: boolean;
+  /** 自定义结束生成字符串 */
+  Stop?: string[];
 }
 
 declare interface ChatCompletionsResponse {
@@ -839,9 +841,9 @@ declare interface Hunyuan {
   (): Versions;
   /** 开通服务 {@link ActivateServiceRequest} {@link ActivateServiceResponse} */
   ActivateService(data?: ActivateServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateServiceResponse>;
-  /** hunyuan {@link ChatCompletionsRequest} {@link ChatCompletionsResponse} */
+  /** 对话 {@link ChatCompletionsRequest} {@link ChatCompletionsResponse} */
   ChatCompletions(data: ChatCompletionsRequest, config?: AxiosRequestConfig): AxiosPromise<ChatCompletionsResponse>;
-  /** hunyuan-translations {@link ChatTranslationsRequest} {@link ChatTranslationsResponse} */
+  /** 翻译 {@link ChatTranslationsRequest} {@link ChatTranslationsResponse} */
   ChatTranslations(data: ChatTranslationsRequest, config?: AxiosRequestConfig): AxiosPromise<ChatTranslationsResponse>;
   /** 创建会话 {@link CreateThreadRequest} {@link CreateThreadResponse} */
   CreateThread(data?: CreateThreadRequest, config?: AxiosRequestConfig): AxiosPromise<CreateThreadResponse>;
@@ -851,7 +853,7 @@ declare interface Hunyuan {
   FilesList(data?: FilesListRequest, config?: AxiosRequestConfig): AxiosPromise<FilesListResponse>;
   /** 文件上传 {@link FilesUploadsRequest} {@link FilesUploadsResponse} */
   FilesUploads(data: FilesUploadsRequest, config?: AxiosRequestConfig): AxiosPromise<FilesUploadsResponse>;
-  /** hunyuan-embedding {@link GetEmbeddingRequest} {@link GetEmbeddingResponse} */
+  /** 向量化 {@link GetEmbeddingRequest} {@link GetEmbeddingResponse} */
   GetEmbedding(data?: GetEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<GetEmbeddingResponse>;
   /** 查询会话 {@link GetThreadRequest} {@link GetThreadResponse} */
   GetThread(data: GetThreadRequest, config?: AxiosRequestConfig): AxiosPromise<GetThreadResponse>;

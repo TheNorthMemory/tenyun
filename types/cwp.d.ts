@@ -1798,8 +1798,10 @@ declare interface BashEventNew {
   ModifyTime?: string;
   /** 规则类别 0=系统规则，1=用户规则 */
   RuleCategory?: number;
-  /** 自动生成的正则表达式 */
+  /** 转义后的正则表达式 */
   RegexBashCmd?: string;
+  /** 转义后的正则表达式 */
+  RegexExe?: string;
   /** 0:普通 1:专业版 2:旗舰版 */
   MachineType?: number;
   /** 机器额外信息 */
@@ -4322,6 +4324,42 @@ declare interface RansomDefenseStrategyMachineInfo {
   DiskInfo?: string;
 }
 
+/** rasp白名单规则 */
+declare interface RaspRule {
+  /** 规则ID */
+  Id?: number;
+  /** 自定义请求url范围正则表达式，为空则保存不成功 */
+  URLRegexp?: string;
+  /** 漏洞id */
+  VulVulsID?: number;
+  /** 漏洞名称 */
+  VulVulsName?: string;
+  /** cve_id */
+  CveID?: string;
+  /** 漏洞防御类型，从漏洞表富化， 1:支持组件漏洞防御，组件漏洞没有正则加白。2:支持正则防御 */
+  SupportDefense?: number;
+  /** 加白范围，0:全部请求加白，1:自定义请求范围加白 */
+  WhiteType?: number;
+  /** 状态 0: 有效 */
+  Status?: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 修改时间 */
+  ModifyTime?: string;
+}
+
+/** rasp白名单漏洞列表 */
+declare interface RaspRuleVul {
+  /** 漏洞id */
+  VulVulsID?: number;
+  /** 漏洞名称 */
+  VulVulsName?: string;
+  /** cve_id */
+  CveID?: string;
+  /** 漏洞防御类型，从漏洞表富化， 1:支持组件漏洞防御，组件漏洞没有正则加白。2:支持正则防御 */
+  SupportDefense?: number;
+}
+
 /** 客户端异常信息结构 */
 declare interface RecordInfo {
   /** 主机ip */
@@ -6658,6 +6696,16 @@ declare interface DeleteProtectDirRequest {
 }
 
 declare interface DeleteProtectDirResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRaspRulesRequest {
+  /** 待删除的规则ID数组 (最大100条) */
+  IDs: number[];
+}
+
+declare interface DeleteRaspRulesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10698,6 +10746,56 @@ declare interface DescribeRansomDefenseTrendResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRaspMaxCpuRequest {
+}
+
+declare interface DescribeRaspMaxCpuResponse {
+  /** rasp当前最大cpu限制，0<cpu<=100，默认100表示不限制 */
+  RaspMaxCpu?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRaspRuleVulsRequest {
+  /** 过滤条件。Name=WhiteType的必选，0：表示自定义范围的漏洞列表，1：表示全部请求范围的列表 */
+  Filters: Filter[];
+  /** 返回数量，默认为10，最大值为1000。 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+}
+
+declare interface DescribeRaspRuleVulsResponse {
+  /** 列表内容 */
+  List?: RaspRuleVul[];
+  /** 总条数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRaspRulesRequest {
+  /** 返回数量，默认为10，最大值为100。 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 过滤条件。Keywords - String - 是否必填：否 - 关键字(进程名称) */
+  Filters?: Filter[];
+  /** 排序字段，目前有：CreateTime、ModifyTime，默认按照ModifyTime排序 */
+  By?: string;
+  /** 排序升序还是倒序，DESC有ASC、 */
+  Order?: string;
+}
+
+declare interface DescribeRaspRulesResponse {
+  /** 列表内容 */
+  List?: RaspRule[];
+  /** 总条数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRecommendedProtectCpuRequest {
 }
 
@@ -14102,6 +14200,32 @@ declare interface ModifyRansomDefenseStrategyStatusResponse {
   RequestId?: string;
 }
 
+declare interface ModifyRaspMaxCpuRequest {
+  /** rasp当前最大cpu限制，0<cpu<=100，默认100表示不限制 */
+  RaspMaxCpu?: number;
+}
+
+declare interface ModifyRaspMaxCpuResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyRaspRulesRequest {
+  /** 规则ID(新增时请留空，编辑时候必传) */
+  Id?: number;
+  /** 漏洞id数组 */
+  VulVulsIDs?: number[];
+  /** 自定义请求范围加白正则表达式，选择全部请求范围时候为空，否则不能为空，base64编码 */
+  URLRegexp?: string;
+  /** 加白方式，0：自定义请求范围加白。1：全部请求加白 */
+  WhiteType?: number;
+}
+
+declare interface ModifyRaspRulesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyReverseShellRulesAggregationRequest {
   /** 规则ID(新增时请留空) */
   Id?: number;
@@ -14959,6 +15083,8 @@ declare interface Cwp {
   DeletePrivilegeRules(data: DeletePrivilegeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivilegeRulesResponse>;
   /** 删除防护网站 {@link DeleteProtectDirRequest} {@link DeleteProtectDirResponse} */
   DeleteProtectDir(data: DeleteProtectDirRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProtectDirResponse>;
+  /** 删除rasp白名单规则 {@link DeleteRaspRulesRequest} {@link DeleteRaspRulesResponse} */
+  DeleteRaspRules(data: DeleteRaspRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRaspRulesResponse>;
   /** 删除反弹Shell事件 {@link DeleteReverseShellEventsRequest} {@link DeleteReverseShellEventsResponse} */
   DeleteReverseShellEvents(data?: DeleteReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReverseShellEventsResponse>;
   /** 删除反弹Shell规则 {@link DeleteReverseShellRulesRequest} {@link DeleteReverseShellRulesResponse} */
@@ -15391,6 +15517,12 @@ declare interface Cwp {
   DescribeRansomDefenseStrategyMachines(data: DescribeRansomDefenseStrategyMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRansomDefenseStrategyMachinesResponse>;
   /** 获取全网勒索态势 {@link DescribeRansomDefenseTrendRequest} {@link DescribeRansomDefenseTrendResponse} */
   DescribeRansomDefenseTrend(data?: DescribeRansomDefenseTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRansomDefenseTrendResponse>;
+  /** 查询rasp最大cpu限制 {@link DescribeRaspMaxCpuRequest} {@link DescribeRaspMaxCpuResponse} */
+  DescribeRaspMaxCpu(data?: DescribeRaspMaxCpuRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRaspMaxCpuResponse>;
+  /** 获取rasp白名单里的漏洞列表 {@link DescribeRaspRuleVulsRequest} {@link DescribeRaspRuleVulsResponse} */
+  DescribeRaspRuleVuls(data: DescribeRaspRuleVulsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRaspRuleVulsResponse>;
+  /** 获取rasp白名单列表 {@link DescribeRaspRulesRequest} {@link DescribeRaspRulesResponse} */
+  DescribeRaspRules(data?: DescribeRaspRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRaspRulesResponse>;
   /** 查询推荐购买防护核数 {@link DescribeRecommendedProtectCpuRequest} {@link DescribeRecommendedProtectCpuResponse} */
   DescribeRecommendedProtectCpu(data?: DescribeRecommendedProtectCpuRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecommendedProtectCpuResponse>;
   /** 查询反弹shell详情 {@link DescribeReverseShellEventInfoRequest} {@link DescribeReverseShellEventInfoResponse} */
@@ -15783,6 +15915,10 @@ declare interface Cwp {
   ModifyRansomDefenseEventsStatus(data: ModifyRansomDefenseEventsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRansomDefenseEventsStatusResponse>;
   /** 批量修改防勒索策略状态 {@link ModifyRansomDefenseStrategyStatusRequest} {@link ModifyRansomDefenseStrategyStatusResponse} */
   ModifyRansomDefenseStrategyStatus(data: ModifyRansomDefenseStrategyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRansomDefenseStrategyStatusResponse>;
+  /** 编辑rasp最大cpu限制 {@link ModifyRaspMaxCpuRequest} {@link ModifyRaspMaxCpuResponse} */
+  ModifyRaspMaxCpu(data?: ModifyRaspMaxCpuRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRaspMaxCpuResponse>;
+  /** 编辑或者创建rasp白名单规则 {@link ModifyRaspRulesRequest} {@link ModifyRaspRulesResponse} */
+  ModifyRaspRules(data?: ModifyRaspRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRaspRulesResponse>;
   /** 编辑反弹Shell规则（支持多服务器选择）-聚合版本-支持正则 {@link ModifyReverseShellRulesAggregationRequest} {@link ModifyReverseShellRulesAggregationResponse} */
   ModifyReverseShellRulesAggregation(data?: ModifyReverseShellRulesAggregationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReverseShellRulesAggregationResponse>;
   /** 更改恶意请求策略 {@link ModifyRiskDnsPolicyRequest} {@link ModifyRiskDnsPolicyResponse} */

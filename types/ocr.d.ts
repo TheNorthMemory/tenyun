@@ -4779,7 +4779,7 @@ declare interface TextDetectRequest {
 
 declare interface TextDetectResponse {
   /** 图片中是否包含文字。 */
-  HasText: boolean;
+  HasText?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

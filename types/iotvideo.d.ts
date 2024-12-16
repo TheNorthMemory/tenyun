@@ -774,6 +774,20 @@ declare interface CreateDataForwardResponse {
   RequestId?: string;
 }
 
+declare interface CreateDeviceChannelRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 通道ID */
+  ChannelId: number;
+}
+
+declare interface CreateDeviceChannelResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateForwardRuleRequest {
   /** 产品ID */
   ProductID: string;
@@ -822,6 +836,34 @@ declare interface CreateForwardRuleResponse {
   InstanceName?: string;
   /** 错误消息 */
   ErrMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateFreeCloudStorageRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 云存套餐ID：lye1w3d：低功耗事件3天周套餐。ye1w3d：事件3天周套餐 */
+  PackageId: string;
+  /** 如果当前设备已开启云存套餐，Override=1会使用新套餐覆盖原有套餐。不传此参数则默认为0。 */
+  Override?: number;
+  /** 套餐列表顺序：PackageQueue=front会立即使用新购买的套餐，新购套餐结束后，列表中下一个未过期的套餐继续生效；PackageQueue=end会等设备当前所有已购买套餐过期后才会生效新购套餐。与Override参数不能同时使用。 */
+  PackageQueue?: string;
+  /** 订单id */
+  OrderId?: string;
+  /** 通道ID */
+  ChannelId?: number;
+  /** 云存视频存储区域，国内默认为ap-guangzhou。海外默认为东南亚ap-singapore，可选美东na-ashburn、欧洲eu-frankfurt。 */
+  StorageRegion?: string;
+}
+
+declare interface CreateFreeCloudStorageResponse {
+  /** 订单金额，单位为分 */
+  Price?: number | null;
+  /** 支付金额，单位为分 */
+  Amount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5871,8 +5913,12 @@ declare interface Iotvideo {
   CreateCloudStorage(data: CreateCloudStorageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudStorageResponse>;
   /** 创建数据转发 {@link CreateDataForwardRequest} {@link CreateDataForwardResponse} */
   CreateDataForward(data: CreateDataForwardRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataForwardResponse>;
+  /** 创建设备通道 {@link CreateDeviceChannelRequest} {@link CreateDeviceChannelResponse} */
+  CreateDeviceChannel(data: CreateDeviceChannelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceChannelResponse>;
   /** 创建转发规则 {@link CreateForwardRuleRequest} {@link CreateForwardRuleResponse} */
   CreateForwardRule(data: CreateForwardRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateForwardRuleResponse>;
+  /** 开通云存卡服务 {@link CreateFreeCloudStorageRequest} {@link CreateFreeCloudStorageResponse} */
+  CreateFreeCloudStorage(data: CreateFreeCloudStorageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFreeCloudStorageResponse>;
   /** 创建产品 {@link CreateProductRequest} {@link CreateProductResponse} */
   CreateProduct(data: CreateProductRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProductResponse>;
   /** 获取任务文件上传链接 {@link CreateTaskFileUrlRequest} {@link CreateTaskFileUrlResponse} */

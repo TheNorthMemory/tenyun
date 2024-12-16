@@ -81,47 +81,47 @@ declare interface EnvBaseInfo {
 /** 环境信息 */
 declare interface EnvInfo {
   /** 账户下该环境唯一标识 */
-  EnvId: string;
+  EnvId?: string;
   /** 环境来源。包含以下取值：miniapp：微信小程序qcloud ：腾讯云 */
-  Source: string;
+  Source?: string;
   /** 环境别名，要以a-z开头，不能包含 a-zA-z0-9- 以外的字符 */
-  Alias: string;
+  Alias?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 最后修改时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 环境状态。包含以下取值：NORMAL：正常可用UNAVAILABLE：服务不可用，可能是尚未初始化或者初始化过程中 */
-  Status: string;
+  Status?: string;
   /** 是否到期自动降为免费版 */
-  IsAutoDegrade: boolean | null;
+  IsAutoDegrade?: boolean;
   /** 环境渠道 */
-  EnvChannel: string | null;
+  EnvChannel?: string;
   /** 支付方式。包含以下取值： prepayment：预付费 postpaid：后付费 */
-  PayMode: string | null;
+  PayMode?: string;
   /** 是否为默认环境 */
-  IsDefault: boolean | null;
+  IsDefault?: boolean;
   /** 环境所属地域 */
-  Region: string | null;
+  Region?: string;
   /** 环境类型：baas, run, hosting, weda,tcbr */
-  EnvType: string | null;
+  EnvType?: string;
   /** 数据库列表 */
-  Databases: DatabasesInfo[];
+  Databases?: DatabasesInfo[];
   /** 存储列表 */
-  Storages: StorageInfo[];
+  Storages?: StorageInfo[];
   /** 函数列表 */
-  Functions: FunctionInfo[];
+  Functions?: FunctionInfo[];
   /** 云日志服务列表 */
-  LogServices: LogServiceInfo[] | null;
+  LogServices?: LogServiceInfo[];
   /** 静态资源信息 */
-  StaticStorages: StaticStorageInfo[] | null;
+  StaticStorages?: StaticStorageInfo[];
   /** 环境标签列表 */
-  Tags: Tag[] | null;
+  Tags?: Tag[];
   /** 自定义日志服务 */
-  CustomLogServices: ClsInfo[] | null;
+  CustomLogServices?: ClsInfo[];
   /** tcb产品套餐ID，参考DescribePackages接口的返回值。 */
-  PackageId: string | null;
+  PackageId?: string;
   /** 套餐中文名称，参考DescribePackages接口的返回值。 */
-  PackageName: string | null;
+  PackageName?: string;
 }
 
 /** 函数的信息 */
@@ -135,9 +135,9 @@ declare interface FunctionInfo {
 /** 扩缩容入参 */
 declare interface HpaPolicy {
   /** 扩缩容类型 */
-  PolicyType: string | null;
+  PolicyType: string;
   /** 扩缩容阈值 */
-  PolicyThreshold: number | null;
+  PolicyThreshold: number;
 }
 
 /** 云日志服务相关信息 */
@@ -165,11 +165,11 @@ declare interface ObjectKV {
 /** 在线版本信息 */
 declare interface OnlineVersionInfo {
   /** 版本名 */
-  VersionName?: string | null;
+  VersionName?: string;
   /** 镜像url */
-  ImageUrl?: string | null;
+  ImageUrl?: string;
   /** 流量 */
-  FlowRatio?: string | null;
+  FlowRatio?: string;
 }
 
 /** 代码仓库信息 */
@@ -225,7 +225,7 @@ declare interface ServerBaseConfig {
   /** 解析类型：json ｜ line */
   LogParseType?: string;
   /** 服务标签, function: 函数托管 */
-  Tag?: string | null;
+  Tag?: string;
 }
 
 /** 服务基本信息 */
@@ -421,11 +421,11 @@ declare interface DescribeCloudRunServerDetailRequest {
 
 declare interface DescribeCloudRunServerDetailResponse {
   /** 服务基本信息 */
-  BaseInfo?: ServerBaseInfo | null;
+  BaseInfo?: ServerBaseInfo;
   /** 服务配置信息 */
-  ServerConfig?: ServerBaseConfig | null;
+  ServerConfig?: ServerBaseConfig;
   /** 在线版本信息 */
-  OnlineVersionInfos?: OnlineVersionInfo[] | null;
+  OnlineVersionInfos?: OnlineVersionInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

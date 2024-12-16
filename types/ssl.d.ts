@@ -2345,7 +2345,7 @@ declare interface ModifyCertificateAliasRequest {
 
 declare interface ModifyCertificateAliasResponse {
   /** 修改成功的证书 ID。 */
-  CertificateId: string;
+  CertificateId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2497,6 +2497,8 @@ declare interface SubmitCertificateInformationRequest {
   ContactNumber?: string;
   /** 联系人职位。 */
   ContactPosition?: string;
+  /** 是否DV证书。默认false */
+  IsDV?: boolean;
 }
 
 declare interface SubmitCertificateInformationResponse {
@@ -2621,9 +2623,9 @@ declare interface UploadRevokeLetterRequest {
 
 declare interface UploadRevokeLetterResponse {
   /** 证书 ID。 */
-  CertificateId: string;
+  CertificateId?: string;
   /** 是否成功。 */
-  IsSuccess: boolean;
+  IsSuccess?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

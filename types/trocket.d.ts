@@ -583,6 +583,8 @@ declare interface CreateInstanceRequest {
   TimeSpan?: number;
   /** 最大可创建主题数 */
   MaxTopicNum?: number;
+  /** 部署可用区列表 */
+  ZoneIds?: number[];
 }
 
 declare interface CreateInstanceResponse {
@@ -988,6 +990,8 @@ declare interface DescribeInstanceResponse {
   TopicNumLowerLimit?: number | null;
   /** 最大可设置的topic个数 */
   TopicNumUpperLimit?: number | null;
+  /** 可用区列表 */
+  ZoneIds?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -931,6 +931,8 @@ declare interface ImageRecognitionV2Request {
   Optional?: string;
   /** 敏感数据加密信息。- 对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。 */
   Encryption?: Encryption;
+  /** 自定义描述字段。- 用于描述调用业务信息，出参中将返回此描述字段。 - 每个自定义描述字段支持[1,10]个字符。 */
+  Extra?: string;
 }
 
 declare interface ImageRecognitionV2Response {
@@ -940,6 +942,8 @@ declare interface ImageRecognitionV2Response {
   Result?: string;
   /** 业务结果描述。 */
   Description?: string;
+  /** 调用接口中自定义的描述字段。 */
+  Extra?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
