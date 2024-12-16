@@ -2836,6 +2836,8 @@ declare interface Pair {
   Key: string;
   /** 值 */
   Value: string;
+  /** 唯一标识 */
+  Id?: string | null;
 }
 
 /** 键值对 */

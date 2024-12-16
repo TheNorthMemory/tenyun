@@ -1384,7 +1384,7 @@ declare interface TemplateInfo {
   OrganizationId?: string;
   /** 模板创建人用户ID */
   CreatorId?: string;
-  /** 模板的H5预览链接,有效期5分钟。可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。 */
+  /** 模板的 H5 预览链接，有效期为 5 分钟。您可以通过浏览器直接打开此链接预览模板，或将其嵌入到 iframe 中进行预览。注意：只有在请求接口时将 WithPreviewUrl 参数设置为 true，才会生成预览链接。 */
   PreviewUrl?: string | null;
   /** 用户自定义合同类型。返回配置模板的时候选择的合同类型。[点击查看配置的位置](https://qcloudimg.tencent-cloud.cn/raw/4a766f0540253bf2a05d50c58bd14990.png)自定义合同类型配置的地方如链接图所示。[点击查看自定义合同类型管理的位置](https://qcloudimg.tencent-cloud.cn/raw/36582cea03ae6a2559894844942b5d5c.png) */
   UserFlowType?: UserFlowType | null;

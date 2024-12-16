@@ -3577,7 +3577,7 @@ declare interface Iotexplorer {
   (): Versions;
   /** 激活TWeCall {@link ActivateTWeCallLicenseRequest} {@link ActivateTWeCallLicenseResponse} */
   ActivateTWeCallLicense(data: ActivateTWeCallLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateTWeCallLicenseResponse>;
-  /** 分配TWeCall {@link AssignTWeCallLicenseRequest} {@link AssignTWeCallLicenseResponse} */
+  /** @deprecated 分配TWeCall {@link AssignTWeCallLicenseRequest} {@link AssignTWeCallLicenseResponse} */
   AssignTWeCallLicense(data: AssignTWeCallLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<AssignTWeCallLicenseResponse>;
   /** 绑定云存用户 {@link BindCloudStorageUserRequest} {@link BindCloudStorageUserResponse} */
   BindCloudStorageUser(data: BindCloudStorageUserRequest, config?: AxiosRequestConfig): AxiosPromise<BindCloudStorageUserResponse>;
@@ -3783,7 +3783,7 @@ declare interface Iotexplorer {
   GetStudioProductList(data?: GetStudioProductListRequest, config?: AxiosRequestConfig): AxiosPromise<GetStudioProductListResponse>;
   /** 查询TWeCall激活状态 {@link GetTWeCallActiveStatusRequest} {@link GetTWeCallActiveStatusResponse} */
   GetTWeCallActiveStatus(data?: GetTWeCallActiveStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeCallActiveStatusResponse>;
-  /** 查询TWeCall包列表 {@link GetTWeCallPkgListRequest} {@link GetTWeCallPkgListResponse} */
+  /** @deprecated 查询TWeCall包列表 {@link GetTWeCallPkgListRequest} {@link GetTWeCallPkgListResponse} */
   GetTWeCallPkgList(data?: GetTWeCallPkgListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeCallPkgListResponse>;
   /** 获取规则列表 {@link GetTopicRuleListRequest} {@link GetTopicRuleListResponse} */
   GetTopicRuleList(data: GetTopicRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTopicRuleListResponse>;

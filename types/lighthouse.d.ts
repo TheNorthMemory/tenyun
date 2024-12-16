@@ -71,11 +71,11 @@ declare interface Blueprint {
 /** 描述镜像实例信息。 */
 declare interface BlueprintInstance {
   /** 镜像信息。 */
-  Blueprint: Blueprint;
+  Blueprint?: Blueprint;
   /** 软件列表。 */
-  SoftwareSet: Software[];
+  SoftwareSet?: Software[];
   /** 实例 ID。 */
-  InstanceId: string;
+  InstanceId?: string;
 }
 
 /** BlueprintPrice	自定义镜像的价格参数。 */
@@ -490,7 +490,7 @@ declare interface FirewallTemplateApplyRecord {
   ApplyTime?: string;
   /** 模板规则列表。 */
   TemplateRuleSet?: FirewallTemplateRule[];
-  /** 应用模板的执行状态。 */
+  /** 应用模板的执行状态。- SUCCESS：成功- FAILED：失败 */
   ApplyState?: string;
   /** 应用成功的实例数量。 */
   SuccessCount?: number;
@@ -506,7 +506,7 @@ declare interface FirewallTemplateApplyRecord {
 declare interface FirewallTemplateApplyRecordDetail {
   /** 实例标识信息。 */
   Instance?: InstanceIdentifier;
-  /** 防火墙模板应用状态。 */
+  /** 防火墙模板应用状态。- SUCCESS：成功- FAILED：失败 */
   ApplyState?: string;
   /** 防火墙模板应用错误信息。 */
   ErrorMessage?: string;
@@ -531,11 +531,11 @@ declare interface FirewallTemplateRuleInfo {
 /** 描述通用资源配额信息。 */
 declare interface GeneralResourceQuota {
   /** 资源名称。 */
-  ResourceName: string;
+  ResourceName?: string;
   /** 资源当前可用数量。 */
-  ResourceQuotaAvailable: number;
+  ResourceQuotaAvailable?: number;
   /** 资源总数量。 */
-  ResourceQuotaTotal: number;
+  ResourceQuotaTotal?: number;
 }
 
 /** 描述了实例信息。 */
@@ -783,31 +783,31 @@ declare interface RenewDiskChargePrepaid {
 /** 描述了镜像重置信息 */
 declare interface ResetInstanceBlueprint {
   /** 镜像详细信息 */
-  BlueprintInfo: Blueprint;
+  BlueprintInfo?: Blueprint;
   /** 实例镜像是否可重置为目标镜像 */
-  IsResettable: boolean;
+  IsResettable?: boolean;
   /** 不可重置信息.当镜像可重置时为"" */
-  NonResettableMessage: string;
+  NonResettableMessage?: string;
 }
 
 /** 使用场景信息 */
 declare interface Scene {
   /** 使用场景Id */
-  SceneId: string;
+  SceneId?: string;
   /** 使用场景展示名称 */
-  DisplayName: string;
+  DisplayName?: string;
   /** 使用场景描述 */
-  Description: string;
+  Description?: string;
 }
 
 /** 使用场景详细信息 */
 declare interface SceneInfo {
   /** 使用场景Id。 */
-  SceneId: string;
+  SceneId?: string;
   /** 使用场景展示名称。 */
-  DisplayName: string;
+  DisplayName?: string;
   /** 使用场景描述信息。 */
-  Description: string;
+  Description?: string;
 }
 
 /** 描述了快照相关信息。 */
@@ -847,15 +847,15 @@ declare interface SnapshotDeniedActions {
 /** 描述镜像软件信息。 */
 declare interface Software {
   /** 软件名称。 */
-  Name: string;
+  Name?: string;
   /** 软件版本。 */
-  Version: string;
+  Version?: string;
   /** 软件图片 URL。 */
-  ImageUrl: string;
+  ImageUrl?: string;
   /** 软件安装目录。 */
-  InstallDir: string;
+  InstallDir?: string;
   /** 软件详情列表。 */
-  DetailSet: SoftwareDetail[];
+  DetailSet?: SoftwareDetail[];
 }
 
 /** 描述镜像软件详细信息。 */

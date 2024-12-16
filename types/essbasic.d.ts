@@ -1212,13 +1212,13 @@ declare interface TemplateInfo {
   TemplateName?: string;
   /** 模板描述信息 */
   Description?: string;
-  /** 模板的填充控件列表 */
+  /** 模板的填充控件列表[点击查看在模板中配置的填充控件的样子](https://qcloudimg.tencent-cloud.cn/raw/cb2f58529fca8d909258f9d45a56f7f4.png) */
   Components?: Component[];
-  /** 此模块需要签署的各个参与方的角色列表。RecipientId标识每个参与方角色对应的唯一标识符，用于确定此角色的信息。 */
+  /** 此模块需要签署的各个参与方的角色列表。RecipientId标识每个参与方角色对应的唯一标识符，用于确定此角色的信息。[点击查看在模板中配置的签署参与方角色列表的样子](https://qcloudimg.tencent-cloud.cn/raw/e082bbcc0d923f8cb723d98382410aa2.png) */
   Recipients?: Recipient[];
-  /** 此模板中的签署控件列表 */
+  /** 此模板中的签署控件列表[点击查看在模板中配置的签署控件的样子](https://qcloudimg.tencent-cloud.cn/raw/29bc6ed753a5a0fce4a3ab02e2c0d955.png) */
   SignComponents?: Component[];
-  /** 模板类型：1-静默签；3-普通模板 */
+  /** 模板类型可以分为以下两种：1：带有本企业自动签署的模板，即签署过程无需签署人手动操作，系统自动完成签署。3：普通模板，即签署人需要手动进行签署操作。 */
   TemplateType?: number;
   /** 是否是发起人 ,已弃用 */
   IsPromoter?: boolean;
@@ -1226,7 +1226,7 @@ declare interface TemplateInfo {
   Creator?: string;
   /** 模板创建的时间戳，格式为Unix标准时间戳（秒） */
   CreatedOn?: number;
-  /** 模板的H5预览链接,有效期5分钟。可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。 */
+  /** 模板的 H5 预览链接，有效期为 5 分钟。您可以通过浏览器直接打开此链接预览模板，或将其嵌入到 iframe 中进行预览。注意：只有在请求接口时将 WithPreviewUrl 参数设置为 true，才会生成预览链接。 */
   PreviewUrl?: string | null;
   /** 第三方应用集成-模板PDF文件链接，有效期5分钟。请求参数WithPdfUrl=true时返回（此功能开放需要联系客户经理）。 */
   PdfUrl?: string | null;
@@ -2388,13 +2388,13 @@ declare interface CreateBatchInitOrganizationUrlRequest {
 }
 
 declare interface CreateBatchInitOrganizationUrlResponse {
-  /** 小程序路径 */
+  /** 小程序路径，有效时间为7天 */
   MiniAppPath?: string;
-  /** 操作长链 */
+  /** 操作长链，有效时间为7天 */
   OperateLongUrl?: string;
-  /** 操作短链 */
+  /** 操作短链，有效时间为7天 */
   OperateShortUrl?: string;
-  /** 操作二维码 */
+  /** 操作二维码，有效时间为7天 */
   QRCodeUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

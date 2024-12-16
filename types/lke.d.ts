@@ -2087,9 +2087,9 @@ declare interface DescribeTokenUsageRequest {
   SubBizType?: string;
   /** 模型标识 */
   ModelName?: string;
-  /** 开始时间戳, 单位为秒 */
+  /** 开始时间戳, 单位为秒(默认值0) */
   StartTime?: string;
-  /** 结束时间戳, 单位为秒 */
+  /** 结束时间戳, 单位为秒(默认值0， 必须大于开始时间戳) */
   EndTime?: string;
   /** 应用id列表 */
   AppBizIds?: string[];
