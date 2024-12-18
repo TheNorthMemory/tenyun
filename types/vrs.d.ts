@@ -100,9 +100,9 @@ declare interface VoiceTypeListData {
 
 /** 音频检测提示信息：1.检测字是否存在多读、 少读、 错读等2.检测准确度和流畅度 */
 declare interface Words {
-  /** 准确度 (<75则认为不合格) */
+  /** 准确度 (小于75则认为不合格) */
   PronAccuracy?: number | null;
-  /** 流畅度 (<0.95则认为不合格) */
+  /** 流畅度 (小于0.95则认为不合格) */
   PronFluency?: number | null;
   /** tag: 0: match 匹配1: insert 多读2: delete 少读3: replace 错读4: oov 待评估字不在发音评估的词库5: unknown 未知错误 */
   Tag?: number | null;
@@ -216,6 +216,22 @@ declare interface GetTrainingTextResponse {
   RequestId?: string;
 }
 
+declare interface GetVRSVoiceTypeInfoRequest {
+  /** 音色id。 */
+  VoiceType: number;
+  /** 0 - 除快速声音复刻外其他复刻类型（默认）； 5 - 快速声音复刻。 默认为0。 */
+  TaskType?: number;
+  /** 快速复刻音色id。 */
+  FastVoiceType?: string;
+}
+
+declare interface GetVRSVoiceTypeInfoResponse {
+  /** 音色信息 */
+  Data?: VoiceTypeInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetVRSVoiceTypesRequest {
   /** 复刻类型。0 - 除快速声音复刻外其他复刻类型（默认）；5 - 一句话声音复刻。 */
   TaskType?: number;
@@ -243,6 +259,8 @@ declare interface Vrs {
   DownloadVRSModel(data: DownloadVRSModelRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadVRSModelResponse>;
   /** 获取声音复刻训练文本 {@link GetTrainingTextRequest} {@link GetTrainingTextResponse} */
   GetTrainingText(data?: GetTrainingTextRequest, config?: AxiosRequestConfig): AxiosPromise<GetTrainingTextResponse>;
+  /** 查询复刻音色信息 {@link GetVRSVoiceTypeInfoRequest} {@link GetVRSVoiceTypeInfoResponse} */
+  GetVRSVoiceTypeInfo(data: GetVRSVoiceTypeInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetVRSVoiceTypeInfoResponse>;
   /** 查询复刻音色 {@link GetVRSVoiceTypesRequest} {@link GetVRSVoiceTypesResponse} */
   GetVRSVoiceTypes(data?: GetVRSVoiceTypesRequest, config?: AxiosRequestConfig): AxiosPromise<GetVRSVoiceTypesResponse>;
 }

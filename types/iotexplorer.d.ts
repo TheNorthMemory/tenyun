@@ -1110,6 +1110,36 @@ declare interface CreateCloudStorageAIServiceResponse {
   RequestId?: string;
 }
 
+declare interface CreateCloudStorageAIServiceTaskRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 云存 AI 服务类型。可选值：- `RealtimeObjectDetect`：目标检测- `Highlight`：视频浓缩- `VideoToText`：视频语义理解 */
+  ServiceType: string;
+  /** 待分析云存的起始时间 */
+  StartTime: number;
+  /** 待分析云存的结束时间 */
+  EndTime: number;
+  /** 通道 ID */
+  ChannelId?: number;
+  /** 视频分析配置参数 */
+  Config?: string;
+  /** 视频分析识别区域 */
+  ROI?: string;
+  /** 分析外部传入的视频 URL 列表，支持 HLS 点播（m3u8）及常见视频格式（mp4 等） */
+  VideoURLs?: string[];
+  /** 自定义任务 ID */
+  CustomId?: string;
+}
+
+declare interface CreateCloudStorageAIServiceTaskResponse {
+  /** 任务 ID */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDeviceChannelRequest {
   /** 产品ID */
   ProductId: string;
@@ -3641,6 +3671,8 @@ declare interface Iotexplorer {
   CreateBatchProduction(data: CreateBatchProductionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchProductionResponse>;
   /** 开通设备云存AI分析服务 {@link CreateCloudStorageAIServiceRequest} {@link CreateCloudStorageAIServiceResponse} */
   CreateCloudStorageAIService(data: CreateCloudStorageAIServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudStorageAIServiceResponse>;
+  /** 创建设备云存AI分析任务 {@link CreateCloudStorageAIServiceTaskRequest} {@link CreateCloudStorageAIServiceTaskResponse} */
+  CreateCloudStorageAIServiceTask(data: CreateCloudStorageAIServiceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudStorageAIServiceTaskResponse>;
   /** 创建设备 {@link CreateDeviceRequest} {@link CreateDeviceResponse} */
   CreateDevice(data: CreateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceResponse>;
   /** 创建设备通道 {@link CreateDeviceChannelRequest} {@link CreateDeviceChannelResponse} */
@@ -3875,13 +3907,13 @@ declare interface Iotexplorer {
   ModifyTopicPolicy(data: ModifyTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicPolicyResponse>;
   /** 修改规则 {@link ModifyTopicRuleRequest} {@link ModifyTopicRuleResponse} */
   ModifyTopicRule(data: ModifyTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicRuleResponse>;
-  /** 发布广播消息 {@link PublishBroadcastMessageRequest} {@link PublishBroadcastMessageResponse} */
+  /** @deprecated 发布广播消息 {@link PublishBroadcastMessageRequest} {@link PublishBroadcastMessageResponse} */
   PublishBroadcastMessage(data: PublishBroadcastMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishBroadcastMessageResponse>;
   /** 确认固件升级任务 {@link PublishFirmwareUpdateMessageRequest} {@link PublishFirmwareUpdateMessageResponse} */
   PublishFirmwareUpdateMessage(data: PublishFirmwareUpdateMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishFirmwareUpdateMessageResponse>;
   /** 设备透传指令控制 {@link PublishMessageRequest} {@link PublishMessageResponse} */
   PublishMessage(data: PublishMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishMessageResponse>;
-  /** 发布RRPC消息 {@link PublishRRPCMessageRequest} {@link PublishRRPCMessageResponse} */
+  /** @deprecated 发布RRPC消息 {@link PublishRRPCMessageRequest} {@link PublishRRPCMessageResponse} */
   PublishRRPCMessage(data: PublishRRPCMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishRRPCMessageResponse>;
   /** 发布产品 {@link ReleaseStudioProductRequest} {@link ReleaseStudioProductResponse} */
   ReleaseStudioProduct(data: ReleaseStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseStudioProductResponse>;

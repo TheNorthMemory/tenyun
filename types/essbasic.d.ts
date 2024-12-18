@@ -1604,6 +1604,8 @@ declare interface ChannelCreateFlowByFilesResponse {
   FlowId?: string | null;
   /** 签署方信息，如角色ID、角色名称等 */
   Approvers?: ApproverItem[] | null;
+  /** 预览链接，有效期5分钟注：如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL */
+  PreviewUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
