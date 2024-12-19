@@ -90,24 +90,26 @@ declare interface ClientConnection {
 
 /** 云数据库实例当前操作 */
 declare interface CurrentOp {
-  /** 操作序号 */
-  OpId: number | null;
-  /** 操作所在的命名空间，形式如db.collection */
-  Ns: string | null;
-  /** 操作执行语句 */
-  Query: string | null;
-  /** 操作类型，可能的取值：aggregate、count、delete、distinct、find、findAndModify、getMore、insert、mapReduce、update和command */
-  Op: string | null;
-  /** 操作所在的分片名称 */
-  ReplicaSetName: string;
-  /** 筛选条件，节点状态，可能的取值为：Primary、Secondary */
-  State: string | null;
-  /** 操作详细信息 */
-  Operation: string | null;
-  /** 操作所在的节点名称 */
-  NodeName: string;
-  /** 操作已执行时间（ms） */
-  MicrosecsRunning: number | null;
+  /** 操作序号。 */
+  OpId?: number | null;
+  /** 操作所在的命名空间，形式如db.collection。 */
+  Ns?: string | null;
+  /** 操作执行语句。 */
+  Query?: string | null;
+  /** 操作类型，可能的取值：aggregate、count、delete、distinct、find、findAndModify、getMore、insert、mapReduce、update和command。 */
+  Op?: string | null;
+  /** 操作所在的分片名称。 */
+  ReplicaSetName?: string;
+  /** 操作所在的节点名称。 */
+  NodeName?: string;
+  /** 操作详细信息。 */
+  Operation?: string | null;
+  /** 筛选条件，节点状态，可能的取值为：Primary、Secondary。 */
+  State?: string | null;
+  /** 操作已执行时间（ms）。 */
+  MicrosecsRunning?: number | null;
+  /** 当前操作所在节点信息。 */
+  ExecNode?: string | null;
 }
 
 /** 实例信息 */
@@ -619,7 +621,7 @@ declare interface UserInfo {
 }
 
 declare interface AssignProjectRequest {
-  /** 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同 */
+  /** 实例ID列表，格式如：cmgo-p8vn****。与云数据库控制台页面中显示的实例ID相同 */
   InstanceIds: string[];
   /** 项目ID，用户已创建项目的唯一ID,非自定义 */
   ProjectId: number;
@@ -627,7 +629,7 @@ declare interface AssignProjectRequest {
 
 declare interface AssignProjectResponse {
   /** 返回的异步任务ID列表 */
-  FlowIds: number[];
+  FlowIds?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -881,7 +883,7 @@ declare interface DescribeAsyncRequestInfoRequest {
 
 declare interface DescribeAsyncRequestInfoResponse {
   /** 状态。返回参数有：initial-初始化、running-运行中、paused-任务执行失败，已暂停、undoed-任务执行失败，已回滚、failed-任务执行失败, 已终止、success-成功 */
-  Status: string;
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -951,17 +953,17 @@ declare interface DescribeClientConnectionsResponse {
 }
 
 declare interface DescribeCurrentOpRequest {
-  /** 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同 */
+  /** 指定要查询的实例 ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 筛选条件，操作所属的命名空间namespace，格式为db.collection */
+  /** 操作所属的命名空间 namespace，格式为 db.collection。 */
   Ns?: string;
-  /** 筛选条件，操作已经执行的时间（单位：毫秒），结果将返回超过设置时间的操作，默认值为0，取值范围为[0, 3600000] */
+  /** 设置查询筛选条件为操作任务已经执行的时间。- 默认值为0，取值范围为[0, 3600000]，单位：毫秒。- 结果将返回超过设置时间的操作。 */
   MillisecondRunning?: number;
-  /** 筛选条件，操作类型，可能的取值：none，update，insert，query，command，getmore，remove和killcursors */
+  /** 设置查询筛选条件为操作任务类型。取值包括：none、update、insert，query、command、getmore、remove 和 killcursors。 */
   Op?: string;
-  /** 筛选条件，分片名称 */
+  /** 筛选条件，分片名称。 */
   ReplicaSetName?: string;
-  /** 筛选条件，节点状态，可能的取值为：primarysecondary */
+  /** 设置查询筛选条件为节点角色。- primary：主节点。- secondary：从节点。 */
   State?: string;
   /** 单次请求返回的数量，默认值为100，取值范围为[0,100] */
   Limit?: number;
@@ -974,10 +976,10 @@ declare interface DescribeCurrentOpRequest {
 }
 
 declare interface DescribeCurrentOpResponse {
-  /** 符合查询条件的操作总数 */
-  TotalCount: number;
-  /** 当前操作列表 */
-  CurrentOps: CurrentOp[];
+  /** 符合查询条件的操作总数。 */
+  TotalCount?: number;
+  /** 当前操作列表。 */
+  CurrentOps?: CurrentOp[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1365,7 +1367,7 @@ declare interface InquirePriceModifyDBInstanceSpecResponse {
 }
 
 declare interface InquirePriceRenewDBInstancesRequest {
-  /** 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同，接口单次最多只支持5个实例进行操作。 */
+  /** 实例ID，格式如：cmgo-p8vn****。与云数据库控制台页面中显示的实例ID相同，接口单次最多只支持5个实例进行操作。 */
   InstanceIds: string[];
   /** 预付费模式（即包年包月）相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。 */
   InstanceChargePrepaid: InstanceChargePrepaid;
@@ -1373,7 +1375,7 @@ declare interface InquirePriceRenewDBInstancesRequest {
 
 declare interface InquirePriceRenewDBInstancesResponse {
   /** 价格 */
-  Price: DBInstancePrice;
+  Price?: DBInstancePrice;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1868,9 +1870,9 @@ declare namespace V20180408 {
     Memory: number;
     /** 实例硬盘大小，单位：GB */
     Volume: number;
-    /** 版本号，当前支持 MONGO_3_WT、MONGO_3_ROCKS、MONGO_36_WT */
+    /** 指版本信息。具体支持的版本信息 ，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。 - MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本。 - MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。 - MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。 - MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。 - MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。 - MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。 */
     MongoVersion: string;
-    /** 机器类型，GIO：高IO版；TGIO：高IO万兆 */
+    /** 机器类型，HIO10G：高IO万兆。 */
     MachineCode: string;
     /** 实例数量，默认值为1, 最小值1，最大值为10 */
     GoodsNum: number;
@@ -1888,6 +1890,8 @@ declare namespace V20180408 {
     UniqVpcId?: string;
     /** 私有网络下的子网ID，如果设置了 VpcId，则 SubnetId必填 */
     UniqSubnetId?: string;
+    /** 实例类型，REPLSET-副本集，SHARD-分片集群，默认为REPLSET */
+    InstanceType?: string;
   }
 
   interface CreateDBInstanceResponse {
@@ -1906,15 +1910,15 @@ declare namespace V20180408 {
 
   interface DescribeClientConnectionsResponse {
     /** 客户端连接信息，包括客户端IP和对应IP的连接数量 */
-    Clients: ClientConnection[] | null;
+    Clients?: ClientConnection[] | null;
     /** 连接数总结 */
-    TotalCount: number | null;
+    TotalCount?: number | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
 
   interface DescribeDBInstancesRequest {
-    /** 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同。 */
+    /** 实例ID列表，格式如：cmgo-p8vn****。与云数据库控制台页面中显示的实例ID相同。 */
     InstanceIds?: string[];
     /** 实例类型，取值范围：0： 所有实例1： 正式实例2： 临时实例3： 只读实例-1： 正式实例+只读+灾备实例 */
     InstanceType?: number;
@@ -1940,9 +1944,9 @@ declare namespace V20180408 {
 
   interface DescribeDBInstancesResponse {
     /** 符合查询条件的实例总数 */
-    TotalCount: number;
+    TotalCount?: number;
     /** 实例详细信息 */
-    InstanceDetails: MongoDBInstanceDetail[];
+    InstanceDetails?: MongoDBInstanceDetail[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -2008,17 +2012,17 @@ declare namespace V20180408 {
   }
 
   interface SetPasswordRequest {
-    /** 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同 */
+    /** 实例ID，格式如：cmgo-p8vn****。与云数据库控制台页面中显示的实例ID相同 */
     InstanceId: string;
     /** 实例账户名。初始化实例密码，本参数传mongouser。 */
     UserName: string;
-    /** 实例新密码，至少包含字母、数字和字符（!@#%^*()）中的两种，长度为8-16个字符 */
+    /** 指定账户的新密码， 密码格式为8-32个字符长度，至少包含字母、数字和字符（!@#%^*()_）中的两种 */
     Password: string;
   }
 
   interface SetPasswordResponse {
     /** 返回的异步任务ID */
-    FlowId: number;
+    FlowId?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -2054,7 +2058,7 @@ declare namespace V20180408 {
   }
 
   interface UpgradeDBInstanceRequest {
-    /** 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同 */
+    /** 实例ID，格式如：cmgo-iga0****。与云数据库控制台页面中显示的实例ID相同 */
     InstanceId: string;
     /** 升级后的内存大小，单位：GB */
     Memory: number;

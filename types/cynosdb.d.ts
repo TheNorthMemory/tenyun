@@ -3164,6 +3164,32 @@ declare interface DescribeChangedParamsAfterUpgradeResponse {
   RequestId?: string;
 }
 
+declare interface DescribeClusterDatabaseTablesRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 数据库名 */
+  Db: string;
+  /** 偏移 */
+  Offset?: number;
+  /** 个数 */
+  Limit?: number;
+  /** 数据表类型。"view"表示只返回 view，"base_table" 表示只返回基本表，"all" 表示返回 view 和表。默认为 all。 */
+  TableType?: string;
+}
+
+declare interface DescribeClusterDatabaseTablesResponse {
+  /** 总条数 */
+  TotalCount?: number;
+  /** 分页偏移 */
+  Offset?: number;
+  /** 分页限制数量 */
+  Limit?: number;
+  /** 数据库表列表 */
+  Tables?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeClusterDatabasesRequest {
   /** 集群id */
   ClusterId: string;
@@ -5405,6 +5431,8 @@ declare interface Cynosdb {
   DescribeBinlogs(data: DescribeBinlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogsResponse>;
   /** 升降配运行参数对比 {@link DescribeChangedParamsAfterUpgradeRequest} {@link DescribeChangedParamsAfterUpgradeResponse} */
   DescribeChangedParamsAfterUpgrade(data: DescribeChangedParamsAfterUpgradeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChangedParamsAfterUpgradeResponse>;
+  /** 获取table列表 {@link DescribeClusterDatabaseTablesRequest} {@link DescribeClusterDatabaseTablesResponse} */
+  DescribeClusterDatabaseTables(data: DescribeClusterDatabaseTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDatabaseTablesResponse>;
   /** 获取集群数据库列表 {@link DescribeClusterDatabasesRequest} {@link DescribeClusterDatabasesResponse} */
   DescribeClusterDatabases(data: DescribeClusterDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDatabasesResponse>;
   /** 集群信息描述 {@link DescribeClusterDetailRequest} {@link DescribeClusterDetailResponse} */

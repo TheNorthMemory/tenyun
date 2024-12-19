@@ -98,7 +98,7 @@ declare interface TargetGroupBackend {
   InstanceId?: string;
   /** 后端服务的监听端口 */
   Port?: number;
-  /** 后端服务的转发权重，取值范围：[0, 100]，默认为 10。 */
+  /** 后端服务的转发权重，取值为0或16 */
   Weight?: number;
   /** 后端服务的外网 IP */
   PublicIpAddresses?: string[] | null;
@@ -118,7 +118,7 @@ declare interface TargetGroupBackend {
 declare interface TargetGroupHealthCheck {
   /** 是否开启健康检查。 */
   HealthSwitch: boolean;
-  /** 健康检查使用的协议。支持ping和tcp，默认为ping。- PING: icmp- TCP: tcp */
+  /** 健康检查使用的协议。支持PING和TCP两种方式，默认为PING。- icmp: 使用PING的方式进行健康检查- tcp: 使用TCP连接的方式进行健康检查 */
   Protocol?: string;
   /** 健康检查端口，探测协议为tcp时，该参数必填。 */
   Port?: number;
@@ -148,9 +148,9 @@ declare interface TargetGroupInfo {
   UpdatedTime?: string;
   /** 关联到的规则数组。在DescribeTargetGroupList接口调用时无法获取到该参数。 */
   AssociatedRule?: AssociationItem[] | null;
-  /** 后端协议类型。 */
+  /** 网关负载均衡目标组协议。- tencent_geneve ：GENEVE 标准协议- aws_geneve：GENEVE 兼容协议 */
   Protocol?: string | null;
-  /** 调度算法。ip_hash_3：弹性哈希 */
+  /** 均衡算法。- ip_hash_3_elastic：弹性哈希 */
   ScheduleAlgorithm?: string | null;
   /** 健康检查详情。 */
   HealthCheck?: TargetGroupHealthCheck | null;
@@ -191,7 +191,7 @@ declare interface AssociateTargetGroupsResponse {
 }
 
 declare interface CreateGatewayLoadBalancerRequest {
-  /** 网关负载均衡后端目标设备所属的私有网络 ID，如vpc-12345678，可以通过 DescribeVpcEx 接口获取。 不填此参数则默认为DefaultVPC。创建内网负载均衡实例时，此参数必填。 */
+  /** 网关负载均衡后端目标设备所属的私有网络 ID，如vpc-azd4dt1c，可以通过 [DescribeVpcs](https://cloud.tencent.com/document/product/215/15778) 接口获取。 */
   VpcId: string;
   /** 网关负载均衡后端目标设备所属的私有网络的子网ID。 */
   SubnetId: string;
@@ -219,11 +219,11 @@ declare interface CreateTargetGroupRequest {
   TargetGroupName?: string;
   /** 目标组的vpcid属性，不填则使用默认vpc */
   VpcId?: string;
-  /** 目标组的默认端口， 后续添加服务器时可使用该默认端口。Port和TargetGroupInstances.N中的port二者必填其一。 */
+  /** 目标组的默认端口， 后续添加服务器时可使用该默认端口。Port和TargetGroupInstances.N中的port二者必填其一。仅支持6081。 */
   Port?: number;
   /** 目标组绑定的后端服务器 */
   TargetGroupInstances?: TargetGroupInstance[];
-  /** 网关负载均衡目标组协议。- TENCENT_GENEVE ：GENEVE 标准协议- AWS_GENEVE：GENEVE 兼容协议（需要提交工单申请开白） */
+  /** 网关负载均衡目标组协议。- TENCENT_GENEVE ：GENEVE 标准协议- AWS_GENEVE：GENEVE 兼容协议 */
   Protocol?: string;
   /** 健康检查设置。 */
   HealthCheck?: TargetGroupHealthCheck;
@@ -309,7 +309,7 @@ declare interface DescribeTargetGroupInstanceStatusResponse {
 }
 
 declare interface DescribeTargetGroupInstancesRequest {
-  /** 过滤条件，当前仅支持TargetGroupId，BindIP，InstanceId过滤。 */
+  /** 过滤条件，当前仅支持TargetGroupId，BindIP，InstanceId过滤。- TargetGroupId - String - 是否必填：否 - （过滤条件）目标组ID，如“lbtg-5xunivs0”。- BindIP - String - 是否必填：否 - （过滤条件）目标组绑定实例的IP地址，如“10.1.1.1”- InstanceId - String - 是否必填：否 - （过滤条件）目标组绑定实例的名称，如“ins_name” */
   Filters: Filter[];
   /** 显示数量限制，默认20。 */
   Limit?: number;
@@ -331,7 +331,7 @@ declare interface DescribeTargetGroupInstancesResponse {
 declare interface DescribeTargetGroupListRequest {
   /** 目标组ID数组。 */
   TargetGroupIds?: string[];
-  /** 过滤条件数组，支持TargetGroupVpcId和TargetGroupName。 */
+  /** 过滤条件数组。- TargetGroupVpcId - String - 是否必填：否 - （过滤条件）按照目标组所属的私有网络过滤，如“vpc-bhqk****”。- TargetGroupName - String - 是否必填：否 - （过滤条件）按照目标组的名称过滤，如“tg_name” */
   Filters?: Filter[];
   /** 显示的偏移起始量。 */
   Offset?: number;
@@ -355,7 +355,7 @@ declare interface DescribeTargetGroupsRequest {
   Limit?: number;
   /** 显示的偏移起始量。 */
   Offset?: number;
-  /** 过滤条件数组，支持TargetGroupVpcId和TargetGroupName。 */
+  /** 过滤条件数组。- TargetGroupVpcId - String - 是否必填：否 - （过滤条件）按照目标组所属的私有网络过滤，如“vpc-bhqk****”。- TargetGroupName - String - 是否必填：否 - （过滤条件）按照目标组的名称过滤，如“tg_name” */
   Filters?: Filter[];
 }
 

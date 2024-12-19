@@ -412,6 +412,8 @@ declare interface BatchOperateResultOpsDto {
   ErrorId?: string | null;
   /** 错误说明 */
   ErrorDesc?: string | null;
+  /** 异步操作id */
+  AsyncActionId?: string | null;
 }
 
 /** 批量操作的结果返回 */
@@ -422,6 +424,8 @@ declare interface BatchOperationOpsDto {
   FailedCount?: number | null;
   /** 批量操作的总数 */
   TotalCount?: number | null;
+  /** 异步操作记录的唯一id */
+  AsyncActionId?: string | null;
 }
 
 /** 批量操作结果，带失败原因 */
@@ -2388,6 +2392,12 @@ declare interface IntegrationTaskInfo {
   ArrangeSpaceTaskId?: string | null;
   /** 离线任务状态区分1.未提交2.已提交3.已导出 */
   OfflineTaskStatus?: number | null;
+  /** 导入到编排空间配置 */
+  TaskImportInfo?: TaskImportInfo | null;
+  /** 业务延迟 */
+  BusinessLatency?: number | null;
+  /** 当前同步位点 */
+  CurrentSyncPosition?: number | null;
 }
 
 /** 表生命周期相关信息 */
@@ -2522,6 +2532,10 @@ declare interface MakePlanOpsDto {
   SuccessPercent?: number | null;
   /** 补录检查父任务类型。取值范围： NONE: 全部不检查 ALL: 检查全部上游父任务 MAKE_SCOPE: 只在（当前补录计划）选中任务中检查 */
   CheckParentType?: string | null;
+  /** 是否和原任务保持相同工作流自依赖属性 */
+  SameSelfWorkflowDependType?: boolean | null;
+  /** 工作流自依赖类型 */
+  SelfWorkflowDependency?: string | null;
 }
 
 /** 补录计划集合 */
@@ -2660,6 +2674,8 @@ declare interface OperationOpsDto {
   ErrorId?: string | null;
   /** 操作失败描述 */
   ErrorDesc?: string | null;
+  /** 异步操作记录id */
+  AsyncActionId?: string;
 }
 
 /** 任务信息 */
@@ -3736,6 +3752,10 @@ declare interface RuntimeInstanceCntTop {
   CurRunTime?: string | null;
   /** 等待调度耗时 */
   WaitScheduleTime?: number | null;
+  /** 项目ID */
+  ProjectId?: string | null;
+  /** 项目名称 */
+  ProjectName?: string | null;
 }
 
 /** 集成离线任务实例信息 */
@@ -3778,6 +3798,8 @@ declare interface ScreenInstanceInfo {
   SucceedNum?: number | null;
   /** 失败 */
   FailedNum?: number | null;
+  /** 跳过运行总数 */
+  SkipRunningNum?: number;
 }
 
 /** 运维大屏任务展示 */
@@ -3794,6 +3816,8 @@ declare interface ScreenTaskInfo {
   StoppedNum?: number | null;
   /** 暂停 */
   FrozenNum?: number | null;
+  /** 无效任务数 */
+  InvalidNum?: number | null;
   /** 年任务 */
   YearNum?: number | null;
   /** 月任务 */
@@ -4624,6 +4648,24 @@ declare interface TaskExtInfo {
   Key?: string;
   /** 值 */
   Value?: string;
+}
+
+/** 集成任务导入到编排空间配置 */
+declare interface TaskImportInfo {
+  /** 是否导入编排空间 */
+  IsImport?: boolean | null;
+  /** 是否新建工作流 */
+  IsNewWorkFlow?: boolean | null;
+  /** 工作流所属目录id */
+  WorkFlowFolderId?: string | null;
+  /** 工作流所属目录名称 */
+  WorkFlowFolderName?: string | null;
+  /** 工作流id */
+  WorkFlowId?: string | null;
+  /** 工作流名称 */
+  WorkFlowName?: string | null;
+  /** 重名任务处理策略, 0:跳过,不导入; 1: 重命名 */
+  TaskNameExistMode?: number | null;
 }
 
 /** 任务属性 */
@@ -5615,6 +5657,8 @@ declare interface BatchStopOpsTasksRequest {
   ProjectId: string;
   /** 是否终止已生成的实例 */
   KillInstance?: boolean;
+  /** 是否异步模式 */
+  AsyncMode?: boolean;
 }
 
 declare interface BatchStopOpsTasksResponse {
@@ -5631,6 +5675,8 @@ declare interface BatchStopWorkflowsByIdsRequest {
   ProjectId: string;
   /** 是否终止已生成的实例 */
   KillInstance?: boolean;
+  /** 是否异步模式 */
+  AsyncMode?: boolean;
 }
 
 declare interface BatchStopWorkflowsByIdsResponse {
@@ -5864,6 +5910,8 @@ declare interface CreateCustomFunctionRequest {
   DbName?: string;
   /** 项目ID */
   ProjectId?: string;
+  /** 函数资源文件类型 */
+  FunctionResourceFileType?: string;
 }
 
 declare interface CreateCustomFunctionResponse {
@@ -5980,11 +6028,15 @@ declare interface CreateHiveTableByDDLRequest {
   Incharge?: string;
   /** schema名称 */
   SchemaName?: string;
+  /** 是否异步建表 */
+  Async?: boolean;
 }
 
 declare interface CreateHiveTableByDDLResponse {
-  /** 表名称 */
+  /** 返回表名称，无论是否异步都有值 */
   Data?: string;
+  /** 异步任务轮询 id，只有异步才有值 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6064,11 +6116,15 @@ declare interface CreateOfflineTaskRequest {
   TaskAction: string;
   /** 区分画布和表单 */
   TaskMode: string;
+  /** 导入编排空间配置 */
+  TaskImportInfo?: TaskImportInfo;
 }
 
 declare interface CreateOfflineTaskResponse {
   /** 任务ID */
   TaskId?: string | null;
+  /** 导入到编排空间的任务id */
+  ArrangeSpaceTaskId?: string | null;
   /** 结果 */
   Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -7180,6 +7236,10 @@ declare interface DescribeDsFolderTreeRequest {
   DisplayType?: string;
   /** 是否包含任务目录 true 是 false 否 */
   IncludeTaskFolder?: boolean;
+  /** 是否使用最新模式展示目录树 */
+  NewFolderTreeMode?: boolean;
+  /** 节点分类ID */
+  TaskNodeId?: string;
 }
 
 declare interface DescribeDsFolderTreeResponse {
@@ -7200,6 +7260,8 @@ declare interface DescribeDsParentFolderTreeRequest {
   TaskId?: string;
   /** 任务展示形式, 示例取值- classification:分类展示- catalog:目录展示 */
   DisplayType?: string;
+  /** 是否新模式展示目录树 */
+  NewFolderTreeMode?: boolean;
 }
 
 declare interface DescribeDsParentFolderTreeResponse {
@@ -7820,6 +7882,8 @@ declare interface DescribeOperateOpsTasksRequest {
   InitStrategy?: string;
   /** 额外请求的资源类型 */
   RequestResourceTypes?: string[];
+  /** 项目ID列表 */
+  ProjectIds?: string[];
 }
 
 declare interface DescribeOperateOpsTasksResponse {
@@ -7870,6 +7934,8 @@ declare interface DescribeOpsMakePlanTasksRequest {
   ProjectId: string;
   /** 补录计划ID */
   PlanId: string;
+  /** 实例状态过滤条件 */
+  StateList?: number[];
   /** 分页页码，默认值1 */
   PageNumber?: number;
   /** 分页大小，默认值10 */
@@ -7904,6 +7970,10 @@ declare interface DescribeOpsMakePlansRequest {
   MinCreateTime?: string;
   /** 补录计划最大创建时间 */
   MaxCreateTime?: string;
+  /** 实例状态过滤条件 */
+  StateList?: number[];
+  /** 模糊查询关键字 */
+  Keyword?: string;
 }
 
 declare interface DescribeOpsMakePlansResponse {
@@ -7940,6 +8010,8 @@ declare interface DescribeOpsWorkflowsRequest {
   SortItem?: string;
   /** 排序方式，DESC或ASC */
   SortType?: string;
+  /** 项目ID列表，用于多项目工作流筛选 */
+  ProjectIds?: string[];
 }
 
 declare interface DescribeOpsWorkflowsResponse {
@@ -8502,6 +8574,8 @@ declare interface DescribeSchedulerInstanceStatusRequest {
   InCharge?: string;
   /** 工作流ID */
   WorkflowId?: string;
+  /** 任务ID列表 */
+  ProjectIds?: string[];
 }
 
 declare interface DescribeSchedulerInstanceStatusResponse {
@@ -8532,6 +8606,8 @@ declare interface DescribeSchedulerRunTimeInstanceCntByStatusRequest {
   SortItem?: string;
   /** 升序降序 */
   SortType?: string;
+  /** 项目ID列表，如果传了 ProjectIds，则 ProjectId 不会生效，用于多项目筛选 */
+  ProjectIds?: string[];
 }
 
 declare interface DescribeSchedulerRunTimeInstanceCntByStatusResponse {
@@ -8552,6 +8628,10 @@ declare interface DescribeSchedulerTaskCntByStatusRequest {
   InCharge?: string;
   /** 工作流ID */
   WorkflowId?: string;
+  /** 项目ID列表，如果传了 ProjectIds ，ProjectId 不会生效 */
+  ProjectIds?: string[];
+  /** 资源组ID筛选 */
+  ResourceGroupIds?: string[];
 }
 
 declare interface DescribeSchedulerTaskCntByStatusResponse {
@@ -8604,6 +8684,10 @@ declare interface DescribeStatisticInstanceStatusTrendOpsRequest {
   AverageWindowSize?: number;
   /** 工作流ID */
   WorkflowId?: string;
+  /** 项目ID列表，用于多项目实例趋势筛选，当指定了 ProjectIds 的时候，ProjectId 将只用来鉴权，不做筛选 */
+  ProjectIds?: string[];
+  /** 指定时间点，当统计时常为整天的时候使用，必须小于 24 */
+  TimePoint?: number;
 }
 
 declare interface DescribeStatisticInstanceStatusTrendOpsResponse {
@@ -8934,6 +9018,12 @@ declare interface DescribeTaskByCycleRequest {
   InCharge?: string;
   /** 工作流ID */
   WorkflowId?: string;
+  /** 项目ID列表筛选 */
+  ProjectIds?: string[];
+  /** 资源组ID列表筛选 */
+  ResourceGroupIds?: string[];
+  /** 任务类型ID筛选 */
+  TaskTypeIdList?: string[];
 }
 
 declare interface DescribeTaskByCycleResponse {
@@ -8966,6 +9056,8 @@ declare interface DescribeTaskByStatusReportRequest {
   InCharge?: string;
   /** 工作流ID */
   WorkflowId?: string;
+  /** 项目ID列表，用于多项目实例趋势筛选，当指定了 ProjectIds 的时候，ProjectId 将只用来鉴权，不做筛选 */
+  ProjectIds?: string[];
 }
 
 declare interface DescribeTaskByStatusReportResponse {
@@ -9292,6 +9384,8 @@ declare interface FreezeTasksByWorkflowIdsRequest {
   ProjectId: string;
   /** 是否终止已生成的实例 */
   KillInstance?: boolean;
+  /** 是否异步模式 */
+  AsyncMode?: boolean;
 }
 
 declare interface FreezeTasksByWorkflowIdsResponse {
@@ -9543,6 +9637,10 @@ declare interface KillOpsMakePlanInstancesRequest {
   ProjectId: string;
   /** 补录计划ID */
   PlanId: string;
+  /** 是否异步模式 */
+  AsyncMode?: boolean;
+  /** 补录计划名 */
+  PlanName?: string;
 }
 
 declare interface KillOpsMakePlanInstancesResponse {
@@ -9589,6 +9687,8 @@ declare interface KillScheduleInstancesRequest {
   RequestBaseInfo?: ProjectBaseInfoOpsRequest;
   /** 是否计算总数 */
   IsCount?: boolean;
+  /** 是否异步模式 */
+  AsyncMode?: boolean;
 }
 
 declare interface KillScheduleInstancesResponse {
@@ -10370,6 +10470,8 @@ declare interface RunForceSucScheduleInstancesRequest {
   RequestBaseInfo?: ProjectBaseInfoOpsRequest;
   /** 是否计算总数 */
   IsCount?: boolean;
+  /** 是否异步模式 */
+  AsyncMode?: boolean;
 }
 
 declare interface RunForceSucScheduleInstancesResponse {
@@ -10416,6 +10518,8 @@ declare interface RunRerunScheduleInstancesRequest {
   RequestBaseInfo?: ProjectBaseInfoOpsRequest;
   /** 是否计算总数 */
   IsCount?: boolean;
+  /** 是否异步模式 */
+  AsyncMode?: boolean;
 }
 
 declare interface RunRerunScheduleInstancesResponse {
@@ -11336,7 +11440,7 @@ declare interface Wedata {
   ResumeIntegrationTask(data: ResumeIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeIntegrationTaskResponse>;
   /** 抢占锁定集成任务 {@link RobAndLockIntegrationTaskRequest} {@link RobAndLockIntegrationTaskResponse} */
   RobAndLockIntegrationTask(data: RobAndLockIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RobAndLockIntegrationTaskResponse>;
-  /** 实例运维-实例批量置成功 {@link RunForceSucScheduleInstancesRequest} {@link RunForceSucScheduleInstancesResponse} */
+  /** 实例运维-实例批量置成功1 {@link RunForceSucScheduleInstancesRequest} {@link RunForceSucScheduleInstancesResponse} */
   RunForceSucScheduleInstances(data?: RunForceSucScheduleInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RunForceSucScheduleInstancesResponse>;
   /** 任务运维-实例批量重跑 {@link RunRerunScheduleInstancesRequest} {@link RunRerunScheduleInstancesResponse} */
   RunRerunScheduleInstances(data?: RunRerunScheduleInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RunRerunScheduleInstancesResponse>;

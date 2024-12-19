@@ -126,6 +126,8 @@ declare interface ObjectType {
   ObjectPlatformName?: string | null;
   /** 1：平台支持的对象 2：应用支持的部分对象 */
   ObjectSupportType?: number | null;
+  /** 1.接入层 2.逻辑层 3. 数据层 */
+  ArchLayer?: number;
 }
 
 /** 对象类型配置 */
@@ -612,6 +614,8 @@ declare interface TemplateGroupAction {
   ActionType?: string | null;
   /** 动作风险等级，1:低风险 2:中风险 3:高风险 */
   ActionRisk?: string | null;
+  /** 故障表现 */
+  FailurePerformance?: string;
 }
 
 /** 经验库列表信息 */

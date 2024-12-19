@@ -1203,7 +1203,7 @@ declare interface DescribeTemplateListResponse {
 }
 
 declare interface DescribeTemplateRequest {
-  /** 模板ID */
+  /** 模板ID(模板列表接口可获取) */
   TemplateId: string;
 }
 
@@ -1299,7 +1299,7 @@ declare interface ModifyDomainOwnerBatchRequest {
 
 declare interface ModifyDomainOwnerBatchResponse {
   /** 日志id */
-  LogId: number;
+  LogId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1447,7 +1447,7 @@ declare interface TransferInDomainBatchRequest {
 
 declare interface TransferInDomainBatchResponse {
   /** 日志ID */
-  LogId: number;
+  LogId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

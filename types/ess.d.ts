@@ -3362,6 +3362,20 @@ declare interface DescribeOrganizationSealsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeOrganizationVerifyStatusRequest {
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。 支持填入集团子公司经办人 userId 代发合同。 注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator?: UserInfo;
+  /** 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+}
+
+declare interface DescribeOrganizationVerifyStatusResponse {
+  /** 当前企业认证状态 0 :未认证 1 : 认证中 2 : 已认证 */
+  VerifyStatus?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePersonCertificateRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -3887,6 +3901,8 @@ declare interface Ess {
   DescribeOrganizationGroupOrganizations(data: DescribeOrganizationGroupOrganizationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationGroupOrganizationsResponse>;
   /** 查询企业电子印章 {@link DescribeOrganizationSealsRequest} {@link DescribeOrganizationSealsResponse} */
   DescribeOrganizationSeals(data: DescribeOrganizationSealsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationSealsResponse>;
+  /** 查询本企业认证状态 {@link DescribeOrganizationVerifyStatusRequest} {@link DescribeOrganizationVerifyStatusResponse} */
+  DescribeOrganizationVerifyStatus(data?: DescribeOrganizationVerifyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationVerifyStatusResponse>;
   /** 查询个人证书接口 {@link DescribePersonCertificateRequest} {@link DescribePersonCertificateResponse} */
   DescribePersonCertificate(data: DescribePersonCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonCertificateResponse>;
   /** 查询H5签署认证人脸视频 {@link DescribeSignFaceVideoRequest} {@link DescribeSignFaceVideoResponse} */

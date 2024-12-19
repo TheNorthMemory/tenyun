@@ -5,15 +5,15 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** AttributeKey值详情 */
 declare interface AttributeKeyDetail {
   /** 输入框类型 */
-  LabelType: string;
+  LabelType: string | null;
   /** 初始化展示 */
-  Starter: string;
+  Starter: string | null;
   /** 展示排序 */
-  Order: number;
+  Order: number | null;
   /** AttributeKey值 */
-  Value: string;
+  Value: string | null;
   /** 中文标签 */
-  Label: string;
+  Label: string | null;
 }
 
 /** 跟踪集概览 */
@@ -91,9 +91,9 @@ declare interface Filter {
 /** CMK属性 */
 declare interface KeyMetadata {
   /** 作为密钥更容易辨识，更容易被人看懂的别名 */
-  Alias?: string;
+  Alias?: string | null;
   /** CMK的全局唯一标识 */
-  KeyId?: string;
+  KeyId?: string | null;
 }
 
 /** 检索条件 */
@@ -327,7 +327,7 @@ declare interface GetAttributeKeyRequest {
 
 declare interface GetAttributeKeyResponse {
   /** AttributeKey的有效取值范围 */
-  AttributeKeyDetails: AttributeKeyDetail[];
+  AttributeKeyDetails?: AttributeKeyDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -387,9 +387,9 @@ declare interface ListKeyAliasByRegionRequest {
 
 declare interface ListKeyAliasByRegionResponse {
   /** CMK的总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 密钥别名 */
-  KeyMetadatas: KeyMetadata[];
+  KeyMetadatas?: KeyMetadata[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -473,7 +473,7 @@ declare interface StartLoggingRequest {
 
 declare interface StartLoggingResponse {
   /** 是否开启成功 */
-  IsSuccess: number;
+  IsSuccess?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

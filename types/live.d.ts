@@ -216,7 +216,7 @@ declare interface CasterInfo {
 
 /** 导播台输入信息参数 */
 declare interface CasterInputInfo {
-  /** 输入源Index。范围[1, 20] */
+  /** 输入源Index。范围[1, 24] */
   InputIndex: number;
   /** 输入源类型。范围[0,1,2,3,4]。0：推流地址。1：点播文件地址。2：直播拉流地址。3：图片地址。4：webrtc协议推流地址。 */
   InputType?: number;
@@ -1855,7 +1855,7 @@ declare interface CopyCasterResponse {
 declare interface CreateCasterInputPushUrlRequest {
   /** 导播台ID */
   CasterId: number;
-  /** 请求生成推流地址的输入Index。允许范围[1,20]。 */
+  /** 请求生成推流地址的输入Index。允许范围[1,24]。 */
   InputIndex: number;
   /** 生成推流地址协议。范围[rtmp,webrtc]。注：获取webrtc推流地址时，需配合腾讯云快直播推流sdk才可成功推流。 */
   Protocol?: string;

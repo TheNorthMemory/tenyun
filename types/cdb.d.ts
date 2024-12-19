@@ -4786,6 +4786,18 @@ declare interface ModifyParamTemplateResponse {
   RequestId?: string;
 }
 
+declare interface ModifyProtectModeRequest {
+  /** 无 */
+  ProtectMode: number;
+  /** 实例ID。 */
+  InstanceId: string;
+}
+
+declare interface ModifyProtectModeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyRemoteBackupConfigRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
@@ -5547,6 +5559,8 @@ declare interface Cdb {
   ModifyNameOrDescByDpId(data: ModifyNameOrDescByDpIdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNameOrDescByDpIdResponse>;
   /** 修改参数模板 {@link ModifyParamTemplateRequest} {@link ModifyParamTemplateResponse} */
   ModifyParamTemplate(data: ModifyParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyParamTemplateResponse>;
+  /** 修改实例的同步方式 {@link ModifyProtectModeRequest} {@link ModifyProtectModeResponse} */
+  ModifyProtectMode(data: ModifyProtectModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProtectModeResponse>;
   /** 修改云数据库异地备份配置信息 {@link ModifyRemoteBackupConfigRequest} {@link ModifyRemoteBackupConfigResponse} */
   ModifyRemoteBackupConfig(data: ModifyRemoteBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRemoteBackupConfigResponse>;
   /** 更新实例Ro组的信息 {@link ModifyRoGroupInfoRequest} {@link ModifyRoGroupInfoResponse} */

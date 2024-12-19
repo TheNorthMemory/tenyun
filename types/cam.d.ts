@@ -71,21 +71,21 @@ declare interface AttachPolicyInfo {
 /** 角色关联的策略信息 */
 declare interface AttachedPolicyOfRole {
   /** 策略ID */
-  PolicyId: number;
+  PolicyId?: number;
   /** 策略名称 */
-  PolicyName: string;
+  PolicyName?: string;
   /** 绑定时间 */
-  AddTime: string;
+  AddTime?: string;
   /** 策略类型，User表示自定义策略，QCS表示预设策略 */
-  PolicyType: string | null;
+  PolicyType?: string | null;
   /** 策略创建方式，1表示按产品功能或项目权限创建，其他表示按策略语法创建 */
-  CreateMode: number;
+  CreateMode?: number;
   /** 是否已下线(0:否 1:是) */
-  Deactived: number | null;
+  Deactived?: number | null;
   /** 已下线的产品列表 */
-  DeactivedDetail: string[] | null;
+  DeactivedDetail?: string[] | null;
   /** 策略描述 */
-  Description: string | null;
+  Description?: string | null;
 }
 
 /** 用户关联的策略详情 */
@@ -195,11 +195,11 @@ declare interface ListGrantServiceAccessActionNode {
 /** 用于ListPoliciesGrantingServiceAccess接口的List节点 */
 declare interface ListGrantServiceAccessNode {
   /** 服务 */
-  Service: ListGrantServiceAccessService;
+  Service?: ListGrantServiceAccessService;
   /** 接口信息 */
-  Action: ListGrantServiceAccessActionNode[];
+  Action?: ListGrantServiceAccessActionNode[];
   /** 授权的策略 */
-  Policy: ListGrantServiceAccessPolicy[];
+  Policy?: ListGrantServiceAccessPolicy[];
 }
 
 /** 用于ListPoliciesGrantingServiceAccess接口的Policy节点 */
@@ -285,23 +285,23 @@ declare interface OffsiteFlag {
 /** 策略版本详情 */
 declare interface PolicyVersionDetail {
   /** 策略版本号 */
-  VersionId: number | null;
+  VersionId?: number | null;
   /** 策略版本创建时间 */
-  CreateDate: string | null;
+  CreateDate?: string | null;
   /** 是否是正在生效的版本。0表示不是，1表示是 */
-  IsDefaultVersion: number | null;
+  IsDefaultVersion?: number | null;
   /** 策略语法文本 */
-  Document: string | null;
+  Document?: string | null;
 }
 
 /** 策略版本列表元素结构 */
 declare interface PolicyVersionItem {
   /** 策略版本号 */
-  VersionId: number | null;
+  VersionId?: number | null;
   /** 策略版本创建时间 */
-  CreateDate: string | null;
+  CreateDate?: string | null;
   /** 是否是正在生效的版本。0表示不是，1表示是 */
-  IsDefaultVersion: number | null;
+  IsDefaultVersion?: number | null;
 }
 
 /** 消息接收人信息 */
@@ -1209,7 +1209,7 @@ declare interface GetPolicyVersionRequest {
 
 declare interface GetPolicyVersionResponse {
   /** 策略版本详情 */
-  PolicyVersion: PolicyVersionDetail | null;
+  PolicyVersion?: PolicyVersionDetail | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1411,9 +1411,9 @@ declare interface ListAttachedRolePoliciesRequest {
 
 declare interface ListAttachedRolePoliciesResponse {
   /** 角色关联的策略列表 */
-  List: AttachedPolicyOfRole[];
+  List?: AttachedPolicyOfRole[];
   /** 角色关联的策略总数 */
-  TotalNum: number;
+  TotalNum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1453,9 +1453,9 @@ declare interface ListAttachedUserPoliciesRequest {
 
 declare interface ListAttachedUserPoliciesResponse {
   /** 策略总数 */
-  TotalNum: number;
+  TotalNum?: number;
   /** 策略列表 */
-  List: AttachPolicyInfo[];
+  List?: AttachPolicyInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1547,7 +1547,7 @@ declare interface ListPoliciesGrantingServiceAccessRequest {
 
 declare interface ListPoliciesGrantingServiceAccessResponse {
   /** 列表 */
-  List: ListGrantServiceAccessNode[];
+  List?: ListGrantServiceAccessNode[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
