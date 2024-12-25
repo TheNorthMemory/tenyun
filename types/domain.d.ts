@@ -17,11 +17,11 @@ declare interface AuctionInfo {
 /** 批量任务状态 */
 declare interface BatchStatus {
   /** 批量任务id */
-  LogId: number;
+  LogId?: number;
   /** 批量任务状态 doing：进行中 success：成功 failed：失败 partial_success：部分成功 */
-  Status: string;
+  Status?: string;
   /** 批量任务类型 */
-  BatchAction: string;
+  BatchAction?: string;
 }
 
 /** 我预定的域名结构体。 */
@@ -207,23 +207,23 @@ declare interface DomainBatchLogSet {
 /** 域名列表 */
 declare interface DomainList {
   /** 是否是溢价域名：ture 是 false 不是 */
-  IsPremium: boolean;
+  IsPremium?: boolean;
   /** 域名资源ID。 */
-  DomainId: string;
+  DomainId?: string;
   /** 域名名称。 */
-  DomainName: string;
+  DomainName?: string;
   /** 是否已设置自动续费 。0：未设置 1：已设置2：设置后，关闭 */
-  AutoRenew: number;
+  AutoRenew?: number;
   /** 注册时间。 */
-  CreationDate: string;
+  CreationDate?: string;
   /** 到期时间。 */
-  ExpirationDate: string;
+  ExpirationDate?: string;
   /** 域名后缀 */
-  Tld: string;
+  Tld?: string;
   /** 编码后的后缀（中文会进行编码） */
-  CodeTld: string;
+  CodeTld?: string;
   /** 域名购买状态。ok：正常AboutToExpire: 即将到期RegisterPending：注册中RegisterDoing：注册中RegisterFailed：注册失败RenewPending：续费期RenewDoing：续费中RedemptionPending：赎回期RedemptionDoing：赎回中TransferPending：转入中TransferTransing：转入中TransferFailed：转入失败 */
-  BuyStatus: string;
+  BuyStatus?: string;
 }
 
 /** 获取域名基础模板信息 */
@@ -331,15 +331,15 @@ declare interface PreReleaseInfo {
 /** 域名价格信息 */
 declare interface PriceInfo {
   /** 域名后缀，例如.com */
-  Tld: string;
+  Tld?: string;
   /** 购买年限，范围[1-10] */
-  Year: number;
+  Year?: number;
   /** 域名原价 */
-  Price: number;
+  Price?: number;
   /** 域名现价 */
-  RealPrice: number;
+  RealPrice?: number;
   /** 商品的购买类型，新购，续费，赎回，转入，续费并转入 */
-  Operation: string;
+  Operation?: string;
 }
 
 /** 预释放价格区间配置 */
@@ -1281,7 +1281,7 @@ declare interface ModifyDomainDNSBatchRequest {
 
 declare interface ModifyDomainDNSBatchResponse {
   /** 日志ID。 */
-  LogId: number;
+  LogId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1579,7 +1579,7 @@ declare interface Domain {
   DescribeUnPreDomainDetail(data: DescribeUnPreDomainDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnPreDomainDetailResponse>;
   /** 修改自定义DNS Host {@link ModifyCustomDnsHostRequest} {@link ModifyCustomDnsHostResponse} */
   ModifyCustomDnsHost(data: ModifyCustomDnsHostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomDnsHostResponse>;
-  /** 批量域名 DNS 修改 {@link ModifyDomainDNSBatchRequest} {@link ModifyDomainDNSBatchResponse} */
+  /** 批量域名 DNS 修改 {@link ModifyDomainDNSBatchRequest} {@link ModifyDomainDNSBatchResponse} */
   ModifyDomainDNSBatch(data: ModifyDomainDNSBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainDNSBatchResponse>;
   /** 批量账号间转移 {@link ModifyDomainOwnerBatchRequest} {@link ModifyDomainOwnerBatchResponse} */
   ModifyDomainOwnerBatch(data: ModifyDomainOwnerBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainOwnerBatchResponse>;

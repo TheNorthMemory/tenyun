@@ -123,17 +123,17 @@ declare interface FileSystemByPolicy {
 /** 文件系统客户端信息 */
 declare interface FileSystemClient {
   /** 文件系统IP地址 */
-  CfsVip: string;
+  CfsVip?: string;
   /** 客户端IP地址 */
-  ClientIp: string;
+  ClientIp?: string;
   /** 文件系统所属VPCID */
-  VpcId: string;
+  VpcId?: string;
   /** 可用区名称，例如ap-beijing-1，请参考 概览文档中的地域与可用区列表 */
-  Zone: string;
+  Zone?: string;
   /** 可用区中文名称 */
-  ZoneName: string;
+  ZoneName?: string;
   /** 该文件系统被挂载到客户端上的路径信息 */
-  MountDirectory: string;
+  MountDirectory?: string;
 }
 
 /** 文件系统基本信息 */
@@ -185,11 +185,11 @@ declare interface FileSystemInfo {
   /** 文件系统生命周期管理状态NotAvailable：不可用Available:可用 */
   TieringState?: string;
   /** 分层存储详情 */
-  TieringDetail?: TieringDetailInfo | null;
+  TieringDetail?: TieringDetailInfo;
   /** 文件系统自动扩容策略 */
-  AutoScaleUpRule?: AutoScaleUpRule | null;
+  AutoScaleUpRule?: AutoScaleUpRule;
   /** 文件系统版本 */
-  Version?: string | null;
+  Version?: string;
 }
 
 /** 条件过滤 */
@@ -211,15 +211,15 @@ declare interface MigrationTaskInfo {
   /** 迁移模式，默认为0。0: 全量迁移 */
   MigrationMode?: number;
   /** 数据源桶名称 */
-  BucketName?: string | null;
+  BucketName?: string;
   /** 数据源桶地域 */
-  BucketRegion?: string | null;
+  BucketRegion?: string;
   /** 数据源桶地址 */
-  BucketAddress?: string | null;
+  BucketAddress?: string;
   /** 清单地址 */
-  ListAddress?: string | null;
+  ListAddress?: string;
   /** 文件系统实例名称 */
-  FsName?: string | null;
+  FsName?: string;
   /** 文件系统实例Id */
   FileSystemId?: string;
   /** 文件系统路径 */
@@ -229,29 +229,29 @@ declare interface MigrationTaskInfo {
   /** 创建时间 */
   CreateTime?: number;
   /** 完成/终止时间 */
-  EndTime?: number | null;
+  EndTime?: number;
   /** 迁移状态。0: 已完成；1: 进行中；2: 已终止 */
   Status?: number;
   /** 文件数量 */
-  FileTotalCount?: number | null;
+  FileTotalCount?: number;
   /** 已迁移文件数量 */
-  FileMigratedCount?: number | null;
+  FileMigratedCount?: number;
   /** 迁移失败文件数量 */
-  FileFailedCount?: number | null;
+  FileFailedCount?: number;
   /** 文件容量，单位Byte */
-  FileTotalSize?: number | null;
+  FileTotalSize?: number;
   /** 已迁移文件容量，单位Byte */
-  FileMigratedSize?: number | null;
+  FileMigratedSize?: number;
   /** 迁移失败文件容量，单位Byte */
-  FileFailedSize?: number | null;
+  FileFailedSize?: number;
   /** 全部清单 */
-  FileTotalList?: string | null;
+  FileTotalList?: string;
   /** 已完成文件清单 */
-  FileCompletedList?: string | null;
+  FileCompletedList?: string;
   /** 失败文件清单 */
-  FileFailedList?: string | null;
+  FileFailedList?: string;
   /** 源桶路径 */
-  BucketPath?: string | null;
+  BucketPath?: string;
   /** 迁移方向。0: 对象存储迁移至文件系统，1: 文件系统迁移至对象存储。默认 0 */
   Direction?: number;
 }
@@ -389,7 +389,7 @@ declare interface TagInfo {
 /** 分层存储详细信息 */
 declare interface TieringDetailInfo {
   /** 低频存储容量 */
-  TieringSizeInBytes?: number | null;
+  TieringSizeInBytes?: number;
   /** 冷存储容量 */
   SecondaryTieringSizeInBytes?: number;
 }
@@ -407,13 +407,13 @@ declare interface UserQuota {
   /** 文件系统ID */
   FileSystemId: string;
   /** 容量使用，单位GiB */
-  CapacityUsed?: number | null;
+  CapacityUsed?: number;
   /** 文件使用个数，单位个 */
-  FileUsed?: number | null;
+  FileUsed?: number;
   /** 目录配额的目录绝对路径 */
   DirectoryPath?: string | null;
   /** 配置规则状态，inavailable---配置中，available --已生效，deleting--删除中，deleted 已删除，failed--配置失败 */
-  Status?: string | null;
+  Status?: string;
 }
 
 declare interface BindAutoSnapshotPolicyRequest {
@@ -823,7 +823,7 @@ declare interface DescribeCfsPGroupsRequest {
 
 declare interface DescribeCfsPGroupsResponse {
   /** 权限组信息列表 */
-  PGroupList: PGroupInfo[];
+  PGroupList?: PGroupInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -931,9 +931,9 @@ declare interface DescribeSnapshotOperationLogsRequest {
 
 declare interface DescribeSnapshotOperationLogsResponse {
   /** 快照ID */
-  SnapshotId: string;
+  SnapshotId?: string;
   /** 操作日志 */
-  SnapshotOperates: SnapshotOperateLog[];
+  SnapshotOperates?: SnapshotOperateLog[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1091,11 +1091,11 @@ declare interface UpdateCfsFileSystemNameRequest {
 
 declare interface UpdateCfsFileSystemNameResponse {
   /** 用户自定义文件系统名称 */
-  CreationToken: string;
+  CreationToken?: string;
   /** 文件系统ID */
-  FileSystemId: string;
+  FileSystemId?: string;
   /** 用户自定义文件系统名称 */
-  FsName: string;
+  FsName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

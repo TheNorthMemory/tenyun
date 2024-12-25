@@ -526,6 +526,16 @@ declare interface DataEngineInfo {
   EngineNetworkName?: string | null;
   /** 是否使用预留池 */
   IsPoolMode?: string | null;
+  /** 是否支持AI，false: 不支持；true：支持 */
+  IsSupportAI?: boolean | null;
+  /** 网关id */
+  GatewayId?: string | null;
+  /** 网关状态 */
+  GatewayState?: number | null;
+  /** 是否能执行AI任务 */
+  IsAIGateway?: boolean | null;
+  /** 1:AI引擎，0:非AI引擎 */
+  IsAIEngine?: number | null;
 }
 
 /** 引擎规格详情 */
@@ -1024,6 +1034,18 @@ declare interface NotebookSessionInfo {
   SparkUiUrl?: string | null;
   /** 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于ExecutorNumbers */
   ExecutorMaxNumbers?: number | null;
+  /** session类型，group：资源组下session independent：独立资源session， 不依赖资源组 */
+  SessionType?: string | null;
+  /** 引擎id */
+  DataEngineId?: string | null;
+  /** 资源组id */
+  ResourceGroupId?: string | null;
+  /** 资源组名称 */
+  ResourceGroupName?: string | null;
+  /** session，pod大小 */
+  PodSize?: number | null;
+  /** pod数量 */
+  PodNumbers?: number | null;
 }
 
 /** 按批提交Statement运行SQL任务。 */
@@ -1084,6 +1106,14 @@ declare interface NotebookSessions {
   Creator?: string;
   /** spark ui地址 */
   SparkUiUrl?: string | null;
+  /** session类型，group：资源组session independent：独立资源session，不依赖资源组 */
+  SessionType?: string | null;
+  /** 引擎id */
+  DataEngineId?: string | null;
+  /** 资源组id */
+  ResourceGroupId?: string | null;
+  /** 资源组名字 */
+  ResourceGroupName?: string | null;
 }
 
 /** 开通了第三方访问的用户信息 */

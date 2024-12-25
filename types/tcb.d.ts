@@ -641,35 +641,39 @@ declare interface EndUserInfo {
 /** 环境计费信息 */
 declare interface EnvBillingInfoItem {
   /** 环境ID */
-  EnvId: string;
+  EnvId?: string;
   /** tcb产品套餐ID，参考DescribePackages接口的返回值。 */
-  PackageId: string;
+  PackageId?: string;
   /** 自动续费标记 */
-  IsAutoRenew: boolean;
+  IsAutoRenew?: boolean;
   /** 状态。包含以下取值： 空字符串：初始化中 NORMAL：正常 ISOLATE：隔离 */
-  Status: string;
+  Status?: string;
   /** 支付方式。包含以下取值： PREPAYMENT：预付费 POSTPAID：后付费 */
-  PayMode: string;
+  PayMode?: string;
   /** 隔离时间，最近一次隔离的时间 */
-  IsolatedTime: string;
+  IsolatedTime?: string;
   /** 过期时间，套餐即将到期的时间 */
-  ExpireTime: string;
+  ExpireTime?: string;
   /** 创建时间，第一次接入计费方案的时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 更新时间，计费信息最近一次更新的时间。 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** true表示从未升级过付费版。 */
-  IsAlwaysFree: boolean;
+  IsAlwaysFree?: boolean;
   /** 付费渠道。 miniapp：小程序 qcloud：腾讯云 */
-  PaymentChannel: string | null;
+  PaymentChannel?: string | null;
   /** 最新的订单信息 */
-  OrderInfo: OrderInfo | null;
+  OrderInfo?: OrderInfo | null;
   /** 免费配额信息。 */
-  FreeQuota: string | null;
+  FreeQuota?: string | null;
   /** 是否开启 `超过套餐额度部分转按量付费` */
-  EnableOverrun: boolean | null;
+  EnableOverrun?: boolean | null;
   /** 环境套餐类型 */
-  ExtPackageType: string | null;
+  ExtPackageType?: string | null;
+  /** 是否付费期环境，可取值：yes/no。 */
+  EnvCharged?: string;
+  /** 是否已激活，可取值：yes/no。 */
+  EnvActivated?: string;
 }
 
 /** 环境信息 */

@@ -1344,6 +1344,10 @@ declare interface KongRoutePreview {
   DestinationPorts?: number[] | null;
   /** 路由的Headers */
   Headers?: KVMapping[] | null;
+  /** 是否缓存请求body，默认true */
+  RequestBuffering?: boolean;
+  /** 是否缓存响应body，默认true */
+  ResponseBuffering?: boolean;
 }
 
 /** 云原生网关服务详细信息 */
@@ -1561,17 +1565,17 @@ declare interface Metadata {
 /** Nacos副本信息 */
 declare interface NacosReplica {
   /** 名称 */
-  Name: string;
+  Name?: string;
   /** 角色 */
-  Role: string;
+  Role?: string;
   /** 状态 */
-  Status: string;
+  Status?: string;
   /** 子网ID */
-  SubnetId: string | null;
+  SubnetId?: string | null;
   /** 可用区ID */
-  Zone: string | null;
+  Zone?: string | null;
   /** 可用区ID */
-  ZoneId: string | null;
+  ZoneId?: string | null;
   /** VPC ID */
   VpcId?: string | null;
 }
@@ -1957,19 +1961,19 @@ declare interface ZookeeperRegionMyIdInfo {
 /** Zookeeper副本信息 */
 declare interface ZookeeperReplica {
   /** 名称 */
-  Name: string;
+  Name?: string;
   /** 角色 */
-  Role: string;
+  Role?: string;
   /** 状态 */
-  Status: string;
+  Status?: string;
   /** 子网ID */
-  SubnetId: string | null;
+  SubnetId?: string | null;
   /** 可用区ID */
-  Zone: string | null;
+  Zone?: string | null;
   /** 可用区ID */
-  ZoneId: string | null;
+  ZoneId?: string | null;
   /** 别名 */
-  AliasName: string | null;
+  AliasName?: string | null;
   /** VPC ID */
   VpcId?: string | null;
 }
@@ -2169,6 +2173,10 @@ declare interface CreateCloudNativeAPIGatewayRouteRequest {
   DestinationPorts?: number[];
   /** 路由的Headers */
   Headers?: KVMapping[];
+  /** 是否缓存请求body，默认true */
+  RequestBuffering?: boolean;
+  /** 是否缓存响应body，默认true */
+  ResponseBuffering?: boolean;
 }
 
 declare interface CreateCloudNativeAPIGatewayRouteResponse {
@@ -3741,6 +3749,10 @@ declare interface ModifyCloudNativeAPIGatewayRouteRequest {
   DestinationPorts?: number[];
   /** 路由的Headers */
   Headers?: KVMapping[];
+  /** 是否缓存请求body，默认true */
+  RequestBuffering?: boolean;
+  /** 是否缓存响应body，默认true */
+  ResponseBuffering?: boolean;
 }
 
 declare interface ModifyCloudNativeAPIGatewayRouteResponse {

@@ -77,33 +77,33 @@ declare interface BatchTarget {
 /** 绑定关系，包含监听器名字、协议、url、vport。 */
 declare interface BindDetailItem {
   /** 配置绑定的CLB ID */
-  LoadBalancerId: string;
+  LoadBalancerId?: string;
   /** 配置绑定的监听器ID */
-  ListenerId: string | null;
+  ListenerId?: string | null;
   /** 配置绑定的域名 */
-  Domain: string | null;
+  Domain?: string | null;
   /** 配置绑定的规则 */
-  LocationId: string | null;
+  LocationId?: string | null;
   /** 监听器名字 */
-  ListenerName: string | null;
+  ListenerName?: string | null;
   /** 监听器协议 */
-  Protocol: string | null;
+  Protocol?: string | null;
   /** 监听器端口 */
-  Vport: number | null;
+  Vport?: number | null;
   /** location的url */
-  Url: string | null;
+  Url?: string | null;
   /** 配置ID */
-  UconfigId: string | null;
+  UconfigId?: string | null;
 }
 
 /** 加入了12306黑名单的IP */
 declare interface BlockedIP {
   /** 黑名单IP */
-  IP: string;
+  IP?: string;
   /** 加入黑名单的时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 过期时间 */
-  ExpireTime: string;
+  ExpireTime?: string;
 }
 
 /** 证书ID，以及与该证书ID关联的负载均衡实例列表 */
@@ -161,15 +161,15 @@ declare interface CertificateOutput {
 /** 传统型负载均衡后端服务的健康状态 */
 declare interface ClassicalHealth {
   /** 后端服务的内网 IP */
-  IP: string;
+  IP?: string;
   /** 后端服务的端口 */
-  Port: number;
+  Port?: number;
   /** 负载均衡的监听端口 */
-  ListenerPort: number;
+  ListenerPort?: number;
   /** 转发协议 */
-  Protocol: string;
+  Protocol?: string;
   /** 健康检查结果，1 表示健康，0 表示不健康 */
-  HealthStatus: number;
+  HealthStatus?: number;
 }
 
 /** 传统型负载均衡监听器信息 */
@@ -215,27 +215,27 @@ declare interface ClassicalListener {
 /** 负载均衡信息 */
 declare interface ClassicalLoadBalancerInfo {
   /** 后端实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 负载均衡实例ID列表 */
-  LoadBalancerIds: string[] | null;
+  LoadBalancerIds?: string[] | null;
 }
 
 /** 传统型负载均衡的后端服务相关信息 */
 declare interface ClassicalTarget {
   /** 后端服务的类型，可取值：CVM、ENI（即将支持） */
-  Type: string;
+  Type?: string;
   /** 后端服务的唯一 ID，可通过 DescribeInstances 接口返回字段中的 unInstanceId 字段获取 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 后端服务的转发权重，取值范围：[0, 100]，默认为 10。 */
-  Weight: number;
+  Weight?: number;
   /** 后端服务的外网 IP */
-  PublicIpAddresses: string[] | null;
+  PublicIpAddresses?: string[] | null;
   /** 后端服务的内网 IP */
-  PrivateIpAddresses: string[] | null;
+  PrivateIpAddresses?: string[] | null;
   /** 后端服务的实例名称 */
-  InstanceName: string | null;
+  InstanceName?: string | null;
   /** 后端服务的状态1：故障，2：运行中，3：创建中，4：已关机，5：已退还，6：退还中， 7：重启中，8：开机中，9：关机中，10：密码重置中，11：格式化中，12：镜像制作中，13：带宽设置中，14：重装系统中，19：升级中，21：热迁移中 */
-  RunFlag: number | null;
+  RunFlag?: number | null;
 }
 
 /** 传统型负载均衡的后端信息 */
@@ -331,9 +331,9 @@ declare interface ClusterResource {
 /** 集群所在的可用区。 */
 declare interface ClustersZone {
   /** 集群所在的主可用区。 */
-  MasterZone: string[] | null;
+  MasterZone?: string[] | null;
   /** 集群所在的备可用区。 */
-  SlaveZone: string[] | null;
+  SlaveZone?: string[] | null;
 }
 
 /** 配置内容 */
@@ -513,13 +513,13 @@ declare interface LBChargePrepaid {
 /** 反查Lb绑定关系。 */
 declare interface LBItem {
   /** lb的字符串id */
-  LoadBalancerId: string;
+  LoadBalancerId?: string;
   /** lb的vip */
-  Vip: string;
+  Vip?: string;
   /** 监听器规则 */
-  Listeners: ListenerItem[];
+  Listeners?: ListenerItem[];
   /** LB所在地域 */
-  Region: string;
+  Region?: string;
 }
 
 /** 查询类型 */
@@ -533,15 +533,15 @@ declare interface LbRsItem {
 /** 反查结果数据类型。 */
 declare interface LbRsTargets {
   /** 内网ip类型。“cvm”或“eni” */
-  Type: string;
+  Type?: string;
   /** 后端实例的内网ip。 */
-  PrivateIp: string;
+  PrivateIp?: string;
   /** 绑定后端实例的端口。 */
-  Port: number;
+  Port?: number;
   /** rs的vpcId */
-  VpcId: number | null;
+  VpcId?: number | null;
   /** rs的权重 */
-  Weight: number | null;
+  Weight?: number | null;
 }
 
 /** 监听器的信息 */
@@ -615,31 +615,31 @@ declare interface ListenerBackend {
 /** 监听器的健康检查信息 */
 declare interface ListenerHealth {
   /** 监听器ID */
-  ListenerId: string;
+  ListenerId?: string;
   /** 监听器名称 */
-  ListenerName: string | null;
+  ListenerName?: string | null;
   /** 监听器的协议 */
-  Protocol: string;
+  Protocol?: string;
   /** 监听器的端口 */
-  Port: number;
+  Port?: number;
   /** 监听器的转发规则列表 */
-  Rules: RuleHealth[] | null;
+  Rules?: RuleHealth[] | null;
 }
 
 /** 反查监听器类型 */
 declare interface ListenerItem {
   /** 监听器ID */
-  ListenerId: string;
+  ListenerId?: string;
   /** 监听器协议 */
-  Protocol: string;
+  Protocol?: string;
   /** 监听器端口 */
-  Port: number;
+  Port?: number;
   /** 绑定规则 */
-  Rules: RulesItems[] | null;
+  Rules?: RulesItems[] | null;
   /** 四层绑定对象 */
-  Targets: LbRsTargets[] | null;
+  Targets?: LbRsTargets[] | null;
   /** 端口段监听器的结束端口 */
-  EndPort: number | null;
+  EndPort?: number | null;
 }
 
 /** 负载均衡实例的信息 */
@@ -849,11 +849,11 @@ declare interface LoadBalancerDetail {
 /** 负载均衡实例的健康检查状态 */
 declare interface LoadBalancerHealth {
   /** 负载均衡实例ID */
-  LoadBalancerId: string;
+  LoadBalancerId?: string;
   /** 负载均衡实例名称 */
-  LoadBalancerName: string | null;
+  LoadBalancerName?: string | null;
   /** 监听器列表 */
-  Listeners: ListenerHealth[] | null;
+  Listeners?: ListenerHealth[] | null;
 }
 
 /** 负载均衡流量数据。 */
@@ -945,15 +945,15 @@ declare interface RewriteLocationMap {
 /** 重定向目标的信息 */
 declare interface RewriteTarget {
   /** 重定向目标的监听器ID注意：此字段可能返回 null，表示无重定向。 */
-  TargetListenerId: string | null;
+  TargetListenerId?: string | null;
   /** 重定向目标的转发规则ID注意：此字段可能返回 null，表示无重定向。 */
-  TargetLocationId: string | null;
+  TargetLocationId?: string | null;
   /** 重定向状态码 */
-  RewriteCode: number | null;
+  RewriteCode?: number | null;
   /** 重定向是否携带匹配的url */
-  TakeUrl: boolean | null;
+  TakeUrl?: boolean | null;
   /** 重定向类型，Manual: 手动重定向，Auto: 自动重定向 */
-  RewriteType: string | null;
+  RewriteType?: string | null;
 }
 
 /** 修改节点标签的数据类型 */
@@ -987,13 +987,13 @@ declare interface RsWeightRule {
 /** 一条转发规则的健康检查状态 */
 declare interface RuleHealth {
   /** 转发规则ID */
-  LocationId: string;
+  LocationId?: string;
   /** 转发规则的域名 */
-  Domain: string | null;
+  Domain?: string | null;
   /** 转发规则的Url */
-  Url: string | null;
+  Url?: string | null;
   /** 本规则上绑定的后端服务的健康检查状态 */
-  Targets: TargetHealth[] | null;
+  Targets?: TargetHealth[] | null;
 }
 
 /** HTTP/HTTPS转发规则（输入） */
@@ -1099,13 +1099,13 @@ declare interface RuleTargets {
 /** 七层规则对象 */
 declare interface RulesItems {
   /** 规则id */
-  LocationId: string;
+  LocationId?: string;
   /** 域名 */
-  Domain: string;
+  Domain?: string;
   /** uri */
-  Url: string;
+  Url?: string;
   /** 绑定的后端对象 */
-  Targets: LbRsTargets[];
+  Targets?: LbRsTargets[];
 }
 
 /** 升级为性能容量型参数 */
@@ -1335,7 +1335,9 @@ declare interface BatchDeregisterTargetsRequest {
 
 declare interface BatchDeregisterTargetsResponse {
   /** 解绑失败的监听器ID。 */
-  FailListenerIdSet: string[];
+  FailListenerIdSet?: string[];
+  /** 解绑失败错误原因信息。 */
+  Message?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

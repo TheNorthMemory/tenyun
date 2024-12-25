@@ -41,57 +41,57 @@ declare interface AgentProfile {
 /** API 对象类型描述 */
 declare interface ApiDefinitionDescr {
   /** 对象名称 */
-  Name: string;
+  Name?: string;
   /** 对象属性列表 */
-  Properties: PropertyField[];
+  Properties?: PropertyField[];
 }
 
 /** API 明细 */
 declare interface ApiDetailInfo {
   /** API ID */
-  ApiId: string | null;
+  ApiId?: string | null;
   /** 命名空间ID */
-  NamespaceId: string | null;
+  NamespaceId?: string | null;
   /** 命名空间名称 */
-  NamespaceName: string | null;
+  NamespaceName?: string | null;
   /** 服务ID */
-  MicroserviceId: string | null;
+  MicroserviceId?: string | null;
   /** 服务名称 */
-  MicroserviceName: string | null;
+  MicroserviceName?: string | null;
   /** API 请求路径 */
-  Path: string | null;
+  Path?: string | null;
   /** Api 映射路径 */
-  PathMapping: string | null;
+  PathMapping?: string | null;
   /** 请求方法 */
-  Method: string | null;
+  Method?: string | null;
   /** 所属分组ID */
-  GroupId: string | null;
+  GroupId?: string | null;
   /** 是否禁用 */
-  UsableStatus: string | null;
+  UsableStatus?: string | null;
   /** 发布状态 */
-  ReleaseStatus: string | null;
+  ReleaseStatus?: string | null;
   /** 开启限流 */
-  RateLimitStatus: string | null;
+  RateLimitStatus?: string | null;
   /** 是否开启mock */
-  MockStatus: string | null;
+  MockStatus?: string | null;
   /** 创建时间 */
-  CreatedTime: string | null;
+  CreatedTime?: string | null;
   /** 更新时间 */
-  UpdatedTime: string | null;
+  UpdatedTime?: string | null;
   /** 发布时间 */
-  ReleasedTime: string | null;
+  ReleasedTime?: string | null;
   /** 所属分组名称 */
-  GroupName: string | null;
+  GroupName?: string | null;
   /** API 超时，单位毫秒 */
-  Timeout: number | null;
+  Timeout?: number | null;
   /** Api所在服务host */
-  Host: string | null;
+  Host?: string | null;
   /** API类型。 ms ： 微服务API； external :外部服务Api */
-  ApiType: string | null;
+  ApiType?: string | null;
   /** Api描述信息 */
-  Description: string | null;
+  Description?: string | null;
   /** API路径匹配类型。normal：普通API；wildcard：通配API。 */
-  ApiMatchType: string | null;
+  ApiMatchType?: string | null;
   /** RPC 额外信息 */
   RpcExt?: string | null;
   /** 部署组id */
@@ -105,41 +105,43 @@ declare interface ApiDetailInfo {
 /** API分组信息 */
 declare interface ApiGroupInfo {
   /** Api Group Id */
-  GroupId: string | null;
+  GroupId?: string | null;
   /** Api Group 名称 */
-  GroupName: string | null;
+  GroupName?: string | null;
   /** 分组上下文 */
-  GroupContext: string | null;
+  GroupContext?: string | null;
   /** 鉴权类型。 secret： 密钥鉴权； none:无鉴权 */
-  AuthType: string | null;
+  AuthType?: string | null;
   /** 发布状态, drafted: 未发布。 released: 发布 */
-  Status: string | null;
+  Status?: string | null;
   /** 分组创建时间 如:2019-06-20 15:51:28 */
-  CreatedTime: string | null;
+  CreatedTime?: string | null;
   /** 分组更新时间 如:2019-06-20 15:51:28 */
-  UpdatedTime: string | null;
+  UpdatedTime?: string | null;
   /** api分组已绑定的网关部署组 */
-  BindedGatewayDeployGroups: GatewayDeployGroup[] | null;
+  BindedGatewayDeployGroups?: GatewayDeployGroup[] | null;
   /** api 个数 */
-  ApiCount: number | null;
+  ApiCount?: number | null;
   /** 访问group的ACL类型 */
-  AclMode: string | null;
+  AclMode?: string | null;
   /** 描述 */
-  Description: string | null;
+  Description?: string | null;
   /** 分组类型。 ms： 微服务分组； external:外部Api分组 */
-  GroupType: string | null;
+  GroupType?: string | null;
   /** 网关实例的类型 */
-  GatewayInstanceType: string | null;
+  GatewayInstanceType?: string | null;
   /** 网关实例ID */
-  GatewayInstanceId: string | null;
+  GatewayInstanceId?: string | null;
   /** 命名空间参数key值 */
-  NamespaceNameKey: string | null;
+  NamespaceNameKey?: string | null;
   /** 微服务名参数key值 */
-  ServiceNameKey: string | null;
+  ServiceNameKey?: string | null;
   /** 命名空间参数位置，path，header或query，默认是path */
-  NamespaceNameKeyPosition: string | null;
+  NamespaceNameKeyPosition?: string | null;
   /** 微服务名参数位置，path，header或query，默认是path */
-  ServiceNameKeyPosition: string | null;
+  ServiceNameKeyPosition?: string | null;
+  /** 网关实例ID列表 */
+  GatewayInstanceIdList?: string[] | null;
 }
 
 /** 微服务网关API信息 */
@@ -193,47 +195,47 @@ declare interface ApiRateLimitRule {
 /** ApiRequestDescr */
 declare interface ApiRequestDescr {
   /** 参数名称 */
-  Name: string;
+  Name?: string;
   /** 参数类型 */
-  Type: string;
+  Type?: string;
   /** 参数位置 */
-  In: string;
+  In?: string;
   /** 参数描述 */
-  Description: string;
+  Description?: string;
   /** 参数是否必须 */
-  Required: boolean;
+  Required?: boolean;
   /** 参数的默认值 */
-  DefaultValue: string | null;
+  DefaultValue?: string | null;
 }
 
 /** API 响应的参数结构描述 */
 declare interface ApiResponseDescr {
   /** 参数描述 */
-  Name: string;
+  Name?: string;
   /** 参数类型 */
-  Type: string;
+  Type?: string;
   /** 参数描述 */
-  Description: string;
+  Description?: string;
 }
 
 /** API 日统计数据点 */
 declare interface ApiUseStatisticsEntity {
   /** 名称 */
-  Name: string;
+  Name?: string;
   /** 次数 */
-  Count: string;
+  Count?: string;
   /** 比率 */
-  Ratio: string;
+  Ratio?: string;
 }
 
 /** API版本数组 */
 declare interface ApiVersionArray {
   /** App ID */
-  ApplicationId: string | null;
+  ApplicationId?: string | null;
   /** App 名称 */
-  ApplicationName: string | null;
+  ApplicationName?: string | null;
   /** App 包版本 */
-  PkgVersion: string | null;
+  PkgVersion?: string | null;
 }
 
 /** 应用列表其它字段 */
@@ -579,29 +581,29 @@ declare interface CommonRef {
 /** 配置项 */
 declare interface Config {
   /** 配置项ID */
-  ConfigId: string | null;
+  ConfigId?: string | null;
   /** 配置项名称 */
-  ConfigName: string | null;
+  ConfigName?: string | null;
   /** 配置项版本 */
-  ConfigVersion: string | null;
+  ConfigVersion?: string | null;
   /** 配置项版本描述 */
-  ConfigVersionDesc: string | null;
+  ConfigVersionDesc?: string | null;
   /** 配置项值 */
-  ConfigValue: string | null;
+  ConfigValue?: string | null;
   /** 配置项类型 */
-  ConfigType: string | null;
+  ConfigType?: string | null;
   /** 创建时间 */
-  CreationTime: string | null;
+  CreationTime?: string | null;
   /** 应用ID */
-  ApplicationId: string | null;
+  ApplicationId?: string | null;
   /** 应用名称 */
-  ApplicationName: string | null;
+  ApplicationName?: string | null;
   /** 删除标识，true：可以删除；false：不可删除 */
-  DeleteFlag: boolean | null;
+  DeleteFlag?: boolean | null;
   /** 最后更新时间 */
-  LastUpdateTime: string | null;
+  LastUpdateTime?: string | null;
   /** 配置项版本数量 */
-  ConfigVersionCount: number | null;
+  ConfigVersionCount?: number | null;
 }
 
 /** ConfigMap可选项 */
@@ -1263,19 +1265,19 @@ declare interface GatewayConfig {
 /** api分组已绑定的网关部署组 */
 declare interface GatewayDeployGroup {
   /** 网关部署组ID */
-  DeployGroupId: string | null;
+  DeployGroupId?: string | null;
   /** 网关部署组名称 */
-  DeployGroupName: string | null;
+  DeployGroupName?: string | null;
   /** 应用ID */
-  ApplicationId: string | null;
+  ApplicationId?: string | null;
   /** 应用名称 */
-  ApplicationName: string | null;
+  ApplicationName?: string | null;
   /** 应用分类：V：虚拟机应用，C：容器应用 */
-  ApplicationType: string | null;
+  ApplicationType?: string | null;
   /** 部署组应用状态,取值: Running、Waiting、Paused、Updating、RollingBack、Abnormal、Unknown */
-  GroupStatus: string | null;
+  GroupStatus?: string | null;
   /** 集群类型，C ：容器，V：虚拟机 */
-  ClusterType: string | null;
+  ClusterType?: string | null;
 }
 
 /** 网关API简单信息 */
@@ -1303,19 +1305,19 @@ declare interface GatewayGroupIds {
 /** 微服务网关插件实例对象 */
 declare interface GatewayPlugin {
   /** 网关插件id */
-  Id: string | null;
+  Id?: string | null;
   /** 插件名称 */
-  Name: string | null;
+  Name?: string | null;
   /** 插件类型 */
-  Type: string | null;
+  Type?: string | null;
   /** 插件描述 */
-  Description: string | null;
+  Description?: string | null;
   /** 创建时间 */
-  CreatedTime: string | null;
+  CreatedTime?: string | null;
   /** 更新时间 */
-  UpdatedTime: string | null;
+  UpdatedTime?: string | null;
   /** 发布状态 */
-  Status: string | null;
+  Status?: string | null;
 }
 
 /** 微服务网关插件绑定对象 */
@@ -1327,9 +1329,9 @@ declare interface GatewayPluginBoundParam {
   /** 插件绑定到的对象主键值，例如分组的ID/API的ID */
   ScopeValue: string;
   /** 创建关联的服务id，关联envoy网关时使用 */
-  MicroserviceId?: string | null;
+  MicroserviceId?: string;
   /** 网关id */
-  GatewayInstanceId?: string | null;
+  GatewayInstanceId?: string;
 }
 
 /** 网关部署组、分组、API列表数据 */
@@ -1947,9 +1949,9 @@ declare interface LaneInfo {
 /** 泳道分页查询 */
 declare interface LaneInfos {
   /** 总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 泳道信息列表 */
-  Content: LaneInfo[] | null;
+  Content?: LaneInfo[] | null;
 }
 
 /** 泳道规则 */
@@ -2117,13 +2119,13 @@ declare interface MonitorOverview {
 /** 微服务API数组 */
 declare interface MsApiArray {
   /** API 请求路径 */
-  Path: string;
+  Path?: string;
   /** 请求方法 */
-  Method: string;
+  Method?: string;
   /** 方法描述 */
-  Description: string | null;
+  Description?: string | null;
   /** API状态 0:离线 1:在线 */
-  Status: number | null;
+  Status?: number | null;
 }
 
 /** 微服务实例信息 */
@@ -2697,9 +2699,9 @@ declare interface ServiceStatisticsResult {
 /** 服务统计结果集 */
 declare interface ServiceStatisticsResults {
   /** 返回结果 */
-  Content: ServiceStatisticsResult[] | null;
+  Content?: ServiceStatisticsResult[] | null;
   /** 条数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
 }
 
 /** 分片参数 */
@@ -2967,9 +2969,9 @@ declare interface TsfConfigCenter {
 /** ApiDetailInfo 翻页对象 */
 declare interface TsfPageApiDetailInfo {
   /** 总记录数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** API 信息列表 */
-  Content: ApiDetailInfo[];
+  Content?: ApiDetailInfo[];
 }
 
 /** ApiGroupInfo翻页结构体 */
@@ -3161,9 +3163,9 @@ declare interface TsfPageStdoutLogV2 {
 /** 单元化命名空间翻页对象 */
 declare interface TsfPageUnitNamespace {
   /** 记录总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 记录实体列表 */
-  Content: UnitNamespace[];
+  Content?: UnitNamespace[];
 }
 
 /** 单元化规则翻页对象 */
@@ -3177,9 +3179,9 @@ declare interface TsfPageUnitRule {
 /** 单元化规则翻页对象 */
 declare interface TsfPageUnitRuleV2 {
   /** 记录总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 记录实体列表 */
-  Content: UnitRule[] | null;
+  Content?: UnitRule[] | null;
 }
 
 /** 列表中部署组分页信息 */
@@ -3530,19 +3532,19 @@ declare interface AddInstancesResponse {
 
 declare interface ApiDetailResponse {
   /** API 请求参数 */
-  Request: ApiRequestDescr[];
+  Request?: ApiRequestDescr[];
   /** API 响应参数 */
-  Response: ApiResponseDescr[] | null;
+  Response?: ApiResponseDescr[] | null;
   /** API 复杂结构定义 */
-  Definitions: ApiDefinitionDescr[];
+  Definitions?: ApiDefinitionDescr[];
   /** API 的 content type */
-  RequestContentType: string | null;
+  RequestContentType?: string | null;
   /** API 能否调试 */
-  CanRun: boolean | null;
+  CanRun?: boolean | null;
   /** API 状态 0:离线 1:在线，默认0 */
-  Status: number | null;
+  Status?: number | null;
   /** API 描述 */
-  Description: string | null;
+  Description?: string | null;
 }
 
 declare interface AssociateBusinessLogConfigRequest {
@@ -3672,7 +3674,7 @@ declare interface CreateApiGroupRequest {
 
 declare interface CreateApiGroupResponse {
   /** API分组ID */
-  Result: string | null;
+  Result?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4117,8 +4119,8 @@ declare interface CreateMicroserviceWithDetailRespRequest {
 }
 
 declare interface CreateMicroserviceWithDetailRespResponse {
-  /** id */
-  Result: string;
+  /** 微服务ID */
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4856,7 +4858,7 @@ declare interface DescribeApiGroupsRequest {
 
 declare interface DescribeApiGroupsResponse {
   /** 翻页结构体 */
-  Result: TsfPageApiGroupInfo | null;
+  Result?: TsfPageApiGroupInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5418,7 +5420,7 @@ declare interface DescribeFlowLastBatchStateResponse {
 declare interface DescribeGatewayAllGroupApisRequest {
   /** 网关部署组ID */
   GatewayDeployGroupId: string;
-  /** 搜索关键字，支持分组名称或API Path */
+  /** 搜索关键字，支持命名空间名称或服务名称 */
   SearchWord?: string;
 }
 
@@ -7763,7 +7765,7 @@ declare interface Tsf {
   DeleteCluster(data: DeleteClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterResponse>;
   /** 删除配置项 {@link DeleteConfigRequest} {@link DeleteConfigResponse} */
   DeleteConfig(data: DeleteConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigResponse>;
-  /** 删除模板 {@link DeleteConfigTemplateRequest} {@link DeleteConfigTemplateResponse} */
+  /** 删除配置模板 {@link DeleteConfigTemplateRequest} {@link DeleteConfigTemplateResponse} */
   DeleteConfigTemplate(data: DeleteConfigTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigTemplateResponse>;
   /** 删除容器部署组 {@link DeleteContainerGroupRequest} {@link DeleteContainerGroupResponse} */
   DeleteContainerGroup(data: DeleteContainerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteContainerGroupResponse>;
@@ -7791,7 +7793,7 @@ declare interface Tsf {
   DeletePublicConfig(data: DeletePublicConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePublicConfigResponse>;
   /** 删除仓库 {@link DeleteRepositoryRequest} {@link DeleteRepositoryResponse} */
   DeleteRepository(data: DeleteRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRepositoryResponse>;
-  /** 删除部署组 {@link DeleteServerlessGroupRequest} {@link DeleteServerlessGroupResponse} */
+  /** @deprecated 删除部署组 {@link DeleteServerlessGroupRequest} {@link DeleteServerlessGroupResponse} */
   DeleteServerlessGroup(data: DeleteServerlessGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServerlessGroupResponse>;
   /** 删除任务 {@link DeleteTaskRequest} {@link DeleteTaskResponse} */
   DeleteTask(data: DeleteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskResponse>;

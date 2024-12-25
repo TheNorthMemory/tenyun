@@ -237,6 +237,8 @@ declare interface ReplaceBackgroundRequest {
   ProductUrl: string;
   /** 对新背景的文本描述。最多支持256个 utf-8 字符，支持中、英文。 */
   Prompt: string;
+  /** 反向提示词。最多支持256个 utf-8 字符，支持中、英文。 */
+  NegativePrompt?: string;
   /** 商品图中的商品主体名称。建议说明商品主体，否则影响生成效果。 */
   Product?: string;
   /** 商品 Mask 图 Url，要求背景透明，保留商品主体。如果不传，将自动使用内置的商品分割算法得到 Mask。支持自定义上传 Mask，如果该参数不为空，则以实际上传的数据为准。图片限制：Mask 图必须和商品原图分辨率一致，转成 Base64 字符串后小于 6MB，格式仅支持 png。 */

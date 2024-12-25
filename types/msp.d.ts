@@ -193,7 +193,7 @@ declare interface RegisterMigrationTaskResponse {
 /** {@link Msp 迁移服务平台} */
 declare interface Msp {
   (): Versions;
-  /** 取消注册迁移任务 {@link DeregisterMigrationTaskRequest} {@link DeregisterMigrationTaskResponse} */
+  /** @deprecated 取消注册迁移任务 {@link DeregisterMigrationTaskRequest} {@link DeregisterMigrationTaskResponse} */
   DeregisterMigrationTask(data: DeregisterMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterMigrationTaskResponse>;
   /** 获取指定迁移任务详情 {@link DescribeMigrationTaskRequest} {@link DescribeMigrationTaskResponse} */
   DescribeMigrationTask(data: DescribeMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrationTaskResponse>;

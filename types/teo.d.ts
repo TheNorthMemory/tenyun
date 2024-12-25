@@ -558,6 +558,28 @@ declare interface ConfigGroupVersionInfo {
   CreateTime?: string;
 }
 
+/** 内容标识符。该功能仅白名单开放。 */
+declare interface ContentIdentifier {
+  /** 内容标识符 ID。 */
+  ContentId?: string;
+  /** 内容标识符描述。 */
+  Description?: string;
+  /** 被规则引擎引用的次数。 */
+  ReferenceCount?: number;
+  /** 绑定的套餐 ID。 */
+  PlanId?: string;
+  /** 绑定的标签。 */
+  Tags?: Tag[];
+  /** 内容标识符状态，取值有： active：已生效； deleted：已删除。 */
+  Status?: string;
+  /** 创建时间，时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。 */
+  CreatedOn?: string;
+  /** 最新一次更新时间，时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。 */
+  ModifiedOn?: string;
+  /** 删除时间，状态非 deleted 时候为空；时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。 */
+  DeletedOn?: string | null;
+}
+
 /** 实时日志投递到自定义 HTTP(S) 接口的配置信息。 */
 declare interface CustomEndpoint {
   /** 实时日志投递的自定义 HTTP 接口地址，暂仅支持 HTTP/HTTPS 协议。 */
@@ -768,6 +790,34 @@ declare interface DiffIPWhitelist {
   RemovedIPWhitelist: IPWhitelist;
   /** 最新IP白名单列表相比于当前IP白名单列表，不变部分。 */
   NoChangeIPWhitelist: IPWhitelist;
+}
+
+/** DNS 记录 */
+declare interface DnsRecord {
+  /** 站点 ID。注意：ZoneId 仅做出参使用，在 ModifyDnsRecords 不可作为入参使用，如有传此参数，会忽略。 */
+  ZoneId?: string;
+  /** DNS 记录 ID。 */
+  RecordId?: string;
+  /** DNS 记录名。 */
+  Name?: string;
+  /** DNS 记录类型，取值有：A：将域名指向一个外网 IPv4 地址，如 8.8.8.8；AAAA：将域名指向一个外网 IPv6 地址；MX：用于邮箱服务器。存在多条 MX 记录时，优先级越低越优先；CNAME：将域名指向另一个域名，再由该域名解析出最终 IP 地址；TXT：对域名进行标识和说明，常用于域名验证和 SPF 记录（反垃圾邮件）；NS：如果需要将子域名交给其他 DNS 服务商解析，则需要添加 NS 记录。根域名无法添加 NS 记录；CAA：指定可为本站点颁发证书的 CA；SRV：标识某台服务器使用了某个服务，常见于微软系统的目录管理。 */
+  Type?: string;
+  /** DNS 记录解析线路，不指定默认为 Default，表示默认解析线路，代表全部地域生效。解析线路配置仅适用于当 Type（DNS 记录类型）为 A、AAAA、CNAME 时。取值请参考：[解析线路及对应代码枚举](https://cloud.tencent.com/document/product/1552/112542)。 */
+  Location?: string;
+  /** DNS 记录内容。根据 Type 值填入与之相对应的内容。 */
+  Content?: string;
+  /** 缓存时间，取值范围 60~86400，数值越小，修改记录各地生效时间越快，单位：秒。 */
+  TTL?: number;
+  /** DNS 记录权重，取值范围 -1~100，为 -1 时表示不分配权重，为 0 时表示不解析。权重配置仅适用于当 Type（DNS 记录类型）为 A、AAAA、CNAME 时。 */
+  Weight?: number;
+  /** MX 记录优先级，取值范围 0~50，数值越小越优先。 */
+  Priority?: number;
+  /** DNS 记录解析状态，取值有：enable：已生效；disable：已停用。注意：Status 仅做出参使用，在 ModifyDnsRecords 不可作为入参使用，如有传此参数，会忽略。 */
+  Status?: string;
+  /** 创建时间。注意：CreatedOn 仅做出参使用，在 ModifyDnsRecords 不可作为入参使用，如有传此参数，会忽略。 */
+  CreatedOn?: string;
+  /** 修改时间。注意：ModifiedOn 仅做出参使用，在 ModifyDnsRecords 不可作为入参使用，如有传此参数，会忽略。 */
+  ModifiedOn?: string;
 }
 
 /** CNAME 接入，使用 DNS 解析验证时所需的信息。 */
@@ -2594,6 +2644,22 @@ declare interface CreateConfigGroupVersionResponse {
   RequestId?: string;
 }
 
+declare interface CreateContentIdentifierRequest {
+  /** 内容标识符的描述，长度限制不超过 20 个字符。 */
+  Description: string;
+  /** 待绑定的目标套餐 ID，仅限企业版可用。当您账号下已存在套餐时，需要先前往 [套餐管理](https://console.cloud.tencent.com/edgeone/package) 获取套餐 ID，直接将内容标识符绑定至该套餐；若您当前没有可绑定的套餐时，请先购买企业版套餐。 */
+  PlanId: string;
+  /** 标签。该参数用于对内容标识符进行分权限管控。您需要先前往 [标签控制台](https://console.cloud.tencent.com/tag/taglist) 创建标签才可以在此处传入对应的标签键和标签值。 */
+  Tags?: Tag[];
+}
+
+declare interface CreateContentIdentifierResponse {
+  /** 生成的内容标识符 ID。创建完成之后您可以前往规则引擎在一定匹配条件下「设置内容标识符」。 */
+  ContentId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCustomizeErrorPageRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -2610,6 +2676,32 @@ declare interface CreateCustomizeErrorPageRequest {
 declare interface CreateCustomizeErrorPageResponse {
   /** 页面 ID。 */
   PageId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDnsRecordRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** DNS 记录名，如果是中文、韩文、日文域名，需要转换为 punycode 后输入。 */
+  Name: string;
+  /** DNS 记录类型，取值有：A：将域名指向一个外网 IPv4 地址，如 8.8.8.8；AAAA：将域名指向一个外网 IPv6 地址；MX：用于邮箱服务器。存在多条 MX 记录时，优先级越低越优先；CNAME：将域名指向另一个域名，再由该域名解析出最终 IP 地址；TXT：对域名进行标识和说明，常用于域名验证和 SPF 记录（反垃圾邮件）；NS：如果需要将子域名交给其他 DNS 服务商解析，则需要添加 NS 记录。根域名无法添加 NS 记录；CAA：指定可为本站点颁发证书的 CA；SRV：标识某台服务器使用了某个服务，常见于微软系统的目录管理。不同的记录类型呢例如 SRV、CAA 记录对主机记录名称、记录值格式有不同的要求，各记录类型的详细说明介绍和格式示例请参考：[解析记录类型介绍](https://cloud.tencent.com/document/product/1552/90453)。 */
+  Type: string;
+  /** DNS 记录内容，根据 Type 值填入与之相对应的内容，如果是中文、韩文、日文域名，需要转换为 punycode 后输入。 */
+  Content: string;
+  /** DNS 记录解析线路，不指定默认为 Default，表示默认解析线路，代表全部地域生效。- 解析线路配置仅适用于当 Type（DNS 记录类型）为 A、AAAA、CNAME 时。- 解析线路配置仅适用于标准版、企业版套餐使用，取值请参考：[解析线路及对应代码枚举](https://cloud.tencent.com/document/product/1552/112542)。 */
+  Location?: string;
+  /** 缓存时间，用户可指定值范围 60~86400，数值越小，修改记录各地生效时间越快，默认为 300，单位：秒。 */
+  TTL?: number;
+  /** DNS 记录权重，用户可指定值范围 -1~100，设置为 0 时表示不解析，不指定默认为 -1，表示不设置权重。权重配置仅适用于当 Type（DNS 记录类型）为 A、AAAA、CNAME 时。注意：同一个子域名下，相同解析线路的不同 DNS 记录，应保持同时设置权重或者同时都不设置权重。 */
+  Weight?: number;
+  /** MX 记录优先级，该参数仅在当 Type（DNS 记录类型）为 MX 时生效，值越小优先级越高，用户可指定值范围0~50，不指定默认为0。 */
+  Priority?: number;
+}
+
+declare interface CreateDnsRecordResponse {
+  /** DNS 记录 ID。 */
+  RecordId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2980,6 +3072,16 @@ declare interface DeleteApplicationProxyRuleResponse {
   RequestId?: string;
 }
 
+declare interface DeleteContentIdentifierRequest {
+  /** 内容标识符 ID。 */
+  ContentId: string;
+}
+
+declare interface DeleteContentIdentifierResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCustomErrorPageRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -2988,6 +3090,18 @@ declare interface DeleteCustomErrorPageRequest {
 }
 
 declare interface DeleteCustomErrorPageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDnsRecordsRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 待删除的 DNS 记录 ID 列表，上限：1000。 */
+  RecordIds: string[];
+}
+
+declare interface DeleteDnsRecordsResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3278,6 +3392,24 @@ declare interface DescribeConfigGroupVersionsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeContentIdentifiersRequest {
+  /** 分页查询偏移量。默认值：0。 */
+  Offset?: number;
+  /** 分页查询限制数目。默认值：20，最大值：100。 */
+  Limit?: number;
+  /** 过滤条件，Filters 的上限为 20，Filters.Values 的上限为 20。该参数不填写时，默认返回当前 AppId 下有权限的内容标识符。详细的过滤条件如下：description：按照内容标识符描述批量进行过滤；例如：test；content-id：按照内容标识符 ID 批量进行过滤；例如：eocontent-2noz78a8ev6k；tag-key：按照标签键进行过滤； tag-value： 按照标签值进行过滤；status：按照内容标识符状态进行过滤，取值有：active：生效中；deleted：已删除。仅支持按照 description 模糊查询，其余字段需要精准查询。 */
+  Filters?: AdvancedFilter[];
+}
+
+declare interface DescribeContentIdentifiersResponse {
+  /** 符合过滤条件的内容标识符总数。 */
+  TotalCount?: number;
+  /** 内容标识符详细内容列表。 */
+  ContentIdentifiers?: ContentIdentifier[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeContentQuotaRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -3436,6 +3568,32 @@ declare interface DescribeDeployHistoryResponse {
   TotalCount?: number;
   /** 发布记录详情。 */
   Records?: DeployRecord[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDnsRecordsRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 分页查询偏移量，默认为 0。 */
+  Offset?: number;
+  /** 分页查询限制数目，默认值：20，上限：1000。 */
+  Limit?: number;
+  /** 过滤条件，Filters.Values 的上限为20。详细的过滤条件如下：id： 按照 DNS 记录 ID 进行过滤，支持模糊查询；name：按照 DNS 记录名称进行过滤，支持模糊查询；content：按照 DNS 记录内容进行过滤，支持模糊查询；type：按照 DNS 记录类型进行过滤，不支持模糊查询。可选项： A：将域名指向一个外网 IPv4 地址，如 8.8.8.8； AAAA：将域名指向一个外网 IPv6 地址； CNAME：将域名指向另一个域名，再由该域名解析出最终 IP 地址； TXT：对域名进行标识和说明，常用于域名验证和 SPF 记录（反垃圾邮件）； NS：如果需要将子域名交给其他 DNS 服务商解析，则需要添加 NS 记录。根域名无法添加 NS 记录； CAA：指定可为本站点颁发证书的 CA； SRV：标识某台服务器使用了某个服务，常见于微软系统的目录管理； MX：指定收件人邮件服务器。ttl：按照解析生效时间进行过滤，不支持模糊查询。 */
+  Filters?: AdvancedFilter[];
+  /** 排序依据，取值有：content：DNS 记录内容；created-on：DNS 记录创建时间；name：DNS 记录名称；ttl：缓存时间；type：DNS 记录类型。默认根据 type, name 属性组合排序。 */
+  SortBy?: string;
+  /** 列表排序方式，取值有：asc：升序排列；desc：降序排列。默认值为 asc。 */
+  SortOrder?: string;
+  /** 匹配方式，取值有：all：返回匹配所有查询条件的记录；any：返回匹配任意一个查询条件的记录。默认值为 all。 */
+  Match?: string;
+}
+
+declare interface DescribeDnsRecordsResponse {
+  /** DNS 记录总数。 */
+  TotalCount?: number;
+  /** DNS 记录列表。 */
+  DnsRecords?: DnsRecord[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4320,6 +4478,18 @@ declare interface ModifyApplicationProxyStatusResponse {
   RequestId?: string;
 }
 
+declare interface ModifyContentIdentifierRequest {
+  /** 内容标识符 ID。 */
+  ContentId: string;
+  /** 内容标识符描述，长度限制不超过 20 个字符。 */
+  Description: string;
+}
+
+declare interface ModifyContentIdentifierResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCustomErrorPageRequest {
   /** 自定义错误页面 ID。 */
   PageId: string;
@@ -4336,6 +4506,32 @@ declare interface ModifyCustomErrorPageRequest {
 }
 
 declare interface ModifyCustomErrorPageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDnsRecordsRequest {
+  /** 站点 ID 。 */
+  ZoneId: string;
+  /** DNS 记录修改数据列表，一次最多修改100条。 */
+  DnsRecords?: DnsRecord[];
+}
+
+declare interface ModifyDnsRecordsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDnsRecordsStatusRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 待启用的 DNS 记录 ID 列表，上限：200。注意：同个 DNS 记录 ID 不能同时存在于 RecordsToEnable 和 RecordsToDisable。 */
+  RecordsToEnable?: string[];
+  /** 待停用的 DNS 记录 ID 列表，上限：200。注意：同个 DNS 记录 ID 不能同时存在于 RecordsToEnable 和 RecordsToDisable。 */
+  RecordsToDisable?: string[];
+}
+
+declare interface ModifyDnsRecordsStatusResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4995,8 +5191,12 @@ declare interface Teo {
   CreateCLSIndex(data: CreateCLSIndexRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCLSIndexResponse>;
   /** 创建配置组版本 {@link CreateConfigGroupVersionRequest} {@link CreateConfigGroupVersionResponse} */
   CreateConfigGroupVersion(data: CreateConfigGroupVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigGroupVersionResponse>;
+  /** 创建内容标识符 {@link CreateContentIdentifierRequest} {@link CreateContentIdentifierResponse} */
+  CreateContentIdentifier(data: CreateContentIdentifierRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContentIdentifierResponse>;
   /** 创建自定义响应页面 {@link CreateCustomizeErrorPageRequest} {@link CreateCustomizeErrorPageResponse} */
   CreateCustomizeErrorPage(data: CreateCustomizeErrorPageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomizeErrorPageResponse>;
+  /** 创建 DNS 记录 {@link CreateDnsRecordRequest} {@link CreateDnsRecordResponse} */
+  CreateDnsRecord(data: CreateDnsRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDnsRecordResponse>;
   /** 创建边缘函数 {@link CreateFunctionRequest} {@link CreateFunctionResponse} */
   CreateFunction(data: CreateFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFunctionResponse>;
   /** 创建边缘函数触发规则 {@link CreateFunctionRuleRequest} {@link CreateFunctionRuleResponse} */
@@ -5035,8 +5235,12 @@ declare interface Teo {
   DeleteApplicationProxy(data: DeleteApplicationProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationProxyResponse>;
   /** 删除应用代理规则（旧） {@link DeleteApplicationProxyRuleRequest} {@link DeleteApplicationProxyRuleResponse} */
   DeleteApplicationProxyRule(data: DeleteApplicationProxyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationProxyRuleResponse>;
+  /** 删除内容标识符 {@link DeleteContentIdentifierRequest} {@link DeleteContentIdentifierResponse} */
+  DeleteContentIdentifier(data: DeleteContentIdentifierRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteContentIdentifierResponse>;
   /** 删除自定义响应页面 {@link DeleteCustomErrorPageRequest} {@link DeleteCustomErrorPageResponse} */
   DeleteCustomErrorPage(data: DeleteCustomErrorPageRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomErrorPageResponse>;
+  /** 批量删除 DNS 记录 {@link DeleteDnsRecordsRequest} {@link DeleteDnsRecordsResponse} */
+  DeleteDnsRecords(data: DeleteDnsRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDnsRecordsResponse>;
   /** 删除边缘函数 {@link DeleteFunctionRequest} {@link DeleteFunctionResponse} */
   DeleteFunction(data: DeleteFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFunctionResponse>;
   /** 删除边缘函数触发规则 {@link DeleteFunctionRulesRequest} {@link DeleteFunctionRulesResponse} */
@@ -5075,6 +5279,8 @@ declare interface Teo {
   DescribeConfigGroupVersionDetail(data: DescribeConfigGroupVersionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigGroupVersionDetailResponse>;
   /** 查询配置组版本列表 {@link DescribeConfigGroupVersionsRequest} {@link DescribeConfigGroupVersionsResponse} */
   DescribeConfigGroupVersions(data: DescribeConfigGroupVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigGroupVersionsResponse>;
+  /** 批量查询内容标识符 {@link DescribeContentIdentifiersRequest} {@link DescribeContentIdentifiersResponse} */
+  DescribeContentIdentifiers(data?: DescribeContentIdentifiersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentIdentifiersResponse>;
   /** 查询内容管理接口配额 {@link DescribeContentQuotaRequest} {@link DescribeContentQuotaResponse} */
   DescribeContentQuota(data: DescribeContentQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentQuotaResponse>;
   /** 查询自定义响应页面列表 {@link DescribeCustomErrorPagesRequest} {@link DescribeCustomErrorPagesResponse} */
@@ -5089,6 +5295,8 @@ declare interface Teo {
   DescribeDefaultCertificates(data?: DescribeDefaultCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultCertificatesResponse>;
   /** 查询版本发布历史 {@link DescribeDeployHistoryRequest} {@link DescribeDeployHistoryResponse} */
   DescribeDeployHistory(data: DescribeDeployHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeployHistoryResponse>;
+  /** 查询 DNS 记录列表 {@link DescribeDnsRecordsRequest} {@link DescribeDnsRecordsResponse} */
+  DescribeDnsRecords(data: DescribeDnsRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDnsRecordsResponse>;
   /** 查询环境信息 {@link DescribeEnvironmentsRequest} {@link DescribeEnvironmentsResponse} */
   DescribeEnvironments(data: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
   /** 查询边缘函数触发规则 {@link DescribeFunctionRulesRequest} {@link DescribeFunctionRulesResponse} */
@@ -5181,8 +5389,14 @@ declare interface Teo {
   ModifyApplicationProxyRuleStatus(data: ModifyApplicationProxyRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyRuleStatusResponse>;
   /** 修改应用代理的状态（旧） {@link ModifyApplicationProxyStatusRequest} {@link ModifyApplicationProxyStatusResponse} */
   ModifyApplicationProxyStatus(data: ModifyApplicationProxyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationProxyStatusResponse>;
+  /** 修改内容标识符 {@link ModifyContentIdentifierRequest} {@link ModifyContentIdentifierResponse} */
+  ModifyContentIdentifier(data: ModifyContentIdentifierRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContentIdentifierResponse>;
   /** 修改自定义响应页面 {@link ModifyCustomErrorPageRequest} {@link ModifyCustomErrorPageResponse} */
   ModifyCustomErrorPage(data: ModifyCustomErrorPageRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomErrorPageResponse>;
+  /** 批量修改 DNS 记录 {@link ModifyDnsRecordsRequest} {@link ModifyDnsRecordsResponse} */
+  ModifyDnsRecords(data: ModifyDnsRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDnsRecordsResponse>;
+  /** 批量修改 DNS 记录状态 {@link ModifyDnsRecordsStatusRequest} {@link ModifyDnsRecordsStatusResponse} */
+  ModifyDnsRecordsStatus(data: ModifyDnsRecordsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDnsRecordsStatusResponse>;
   /** 修改边缘函数 {@link ModifyFunctionRequest} {@link ModifyFunctionResponse} */
   ModifyFunction(data: ModifyFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFunctionResponse>;
   /** 修改边缘函数触发规则 {@link ModifyFunctionRuleRequest} {@link ModifyFunctionRuleResponse} */

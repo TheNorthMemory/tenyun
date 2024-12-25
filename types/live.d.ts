@@ -2093,6 +2093,10 @@ declare interface CreateLivePullStreamTaskRequest {
   Comment?: string;
   /** 完整目标 URL 地址。用法注意：如果使用该参数来传完整目标地址，则 DomainName, AppName, StreamName 需要传入空字符串，任务将会使用该 ToUrl 参数指定的目标地址。使用该方式传入目标地址支持的协议有：rtmp、rtmps、rtsp、rtp、srt。注意：签名时间需要超过任务结束时间，避免因签名过期造成任务失败。 */
   ToUrl?: string;
+  /** 指定播放文件索引。注意： 1. 从1开始，不大于SourceUrls中文件个数。2. 该偏移仅在首次轮播时有效。3. 提前创建的任务指定的偏移最长有效期为24小时，24小时后未开始的任务偏移失效。 */
+  FileIndex?: number;
+  /** 指定播放文件偏移。注意：1. 单位：秒，配合FileIndex使用。 */
+  OffsetTime?: number;
   /** 备源的类型：PullLivePushLive -直播，PullVodPushLive -点播。注意：1. 仅当主源类型为直播源时，备源才会生效。2. 主直播源拉流中断时，自动使用备源进行拉流。3. 如果备源为点播文件时，则每次轮播完点播文件就检查主源是否恢复，如果主源恢复则自动切回到主源，否则继续拉备源。 */
   BackupSourceType?: string;
   /** 备源 URL。只允许填一个备源 URL */

@@ -414,7 +414,7 @@ declare interface ResourceSpec {
 
 /** 策略详情 */
 declare interface ScheduleStrategy {
-  /** 备份桶列表 */
+  /** 备份桶名称 */
   CosBucketName?: string | null;
   /** 备份保留天数 */
   RetainDays?: number;
@@ -511,7 +511,7 @@ declare interface CreateInstanceNewRequest {
   UserVPCId: string;
   /** 子网 */
   UserSubnetId: string;
-  /** 版本 */
+  /** 系统版本 */
   ProductVersion: string;
   /** 计费方式 */
   ChargeProperties: Charge;
@@ -525,7 +525,7 @@ declare interface CreateInstanceNewRequest {
   ClsLogSetId?: string;
   /** COS桶名称 */
   CosBucketName?: string;
-  /** 是否是裸盘挂载 */
+  /** 是否是裸盘挂载，默认值 0 为 未挂载，1 为挂载。 */
   MountDiskType?: number;
   /** 是否是ZK高可用 */
   HAZk?: boolean;

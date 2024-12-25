@@ -5,35 +5,35 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 计算环境的创建或销毁活动 */
 declare interface Activity {
   /** 活动ID */
-  ActivityId: string;
+  ActivityId?: string;
   /** 计算节点ID */
-  ComputeNodeId: string;
+  ComputeNodeId?: string;
   /** 计算节点活动类型，创建或者销毁 */
-  ComputeNodeActivityType: string;
+  ComputeNodeActivityType?: string;
   /** 计算环境ID */
-  EnvId: string;
+  EnvId?: string;
   /** 起因 */
-  Cause: string;
+  Cause?: string;
   /** 活动状态 */
-  ActivityState: string;
+  ActivityState?: string;
   /** 状态原因 */
-  StateReason: string;
+  StateReason?: string;
   /** 活动开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 活动结束时间 */
   EndTime?: string | null;
   /** 云服务器实例ID */
-  InstanceId: string | null;
+  InstanceId?: string | null;
 }
 
 /** agent运行模式 */
 declare interface AgentRunningMode {
   /** 场景类型，支持WINDOWS */
-  Scene: string;
+  Scene: string | null;
   /** 运行Agent的User */
-  User: string;
+  User: string | null;
   /** 运行Agent的Session */
-  Session: string;
+  Session: string | null;
 }
 
 /** 计算环境 */
@@ -65,11 +65,11 @@ declare interface Application {
 /** 授权认证信息 */
 declare interface Authentication {
   /** 授权场景，例如COS */
-  Scene: string;
+  Scene: string | null;
   /** SecretId */
-  SecretId: string;
+  SecretId: string | null;
   /** SecretKey */
-  SecretKey: string;
+  SecretKey: string | null;
 }
 
 /** 任务执行信息描述。 */
@@ -81,27 +81,27 @@ declare interface CommandLine {
 /** 计算环境创建信息。 */
 declare interface ComputeEnvCreateInfo {
   /** 计算环境 ID */
-  EnvId: string;
+  EnvId?: string;
   /** 计算环境名称 */
-  EnvName: string | null;
+  EnvName?: string | null;
   /** 计算环境描述 */
-  EnvDescription: string | null;
+  EnvDescription?: string | null;
   /** 计算环境类型，仅支持“MANAGED”类型 */
-  EnvType: string;
+  EnvType?: string;
   /** 计算环境参数 */
-  EnvData: EnvData;
+  EnvData?: EnvData;
   /** 数据盘挂载选项 */
-  MountDataDisks: MountDataDisk[] | null;
+  MountDataDisks?: MountDataDisk[] | null;
   /** 输入映射 */
-  InputMappings: InputMapping[] | null;
+  InputMappings?: InputMapping[] | null;
   /** 授权信息 */
-  Authentications: Authentication[] | null;
+  Authentications?: Authentication[] | null;
   /** 通知信息 */
-  Notifications: Notification[] | null;
+  Notifications?: Notification[] | null;
   /** 计算节点期望个数 */
-  DesiredComputeNodeCount: number;
+  DesiredComputeNodeCount?: number;
   /** 计算环境标签列表 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
 }
 
 /** 计算环境属性数据 */
@@ -113,73 +113,73 @@ declare interface ComputeEnvData {
 /** 计算环境信息 */
 declare interface ComputeEnvView {
   /** 计算环境ID */
-  EnvId: string;
+  EnvId?: string;
   /** 计算环境名称 */
-  EnvName: string;
+  EnvName?: string;
   /** 位置信息 */
-  Placement: Placement;
+  Placement?: Placement;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 计算节点统计指标 */
-  ComputeNodeMetrics: ComputeNodeMetrics;
+  ComputeNodeMetrics?: ComputeNodeMetrics;
   /** 计算环境类型 */
-  EnvType: string;
+  EnvType?: string;
   /** 计算节点期望个数 */
-  DesiredComputeNodeCount: number;
+  DesiredComputeNodeCount?: number;
   /** 计算环境资源类型，当前为CVM和CPM（黑石） */
-  ResourceType: string;
+  ResourceType?: string;
   /** 下一步动作 */
-  NextAction: string;
+  NextAction?: string;
   /** 用户添加到计算环境中的计算节点个数 */
-  AttachedComputeNodeCount: number;
+  AttachedComputeNodeCount?: number;
   /** 计算环境绑定的标签列表。 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
 }
 
 /** 计算节点 */
 declare interface ComputeNode {
   /** 计算节点ID */
-  ComputeNodeId: string;
+  ComputeNodeId?: string;
   /** 计算节点实例ID，对于CVM场景，即为CVM的InstanceId */
   ComputeNodeInstanceId?: string;
   /** 计算节点状态 */
-  ComputeNodeState: string;
+  ComputeNodeState?: string;
   /** CPU核数 */
-  Cpu: number;
+  Cpu?: number;
   /** 内存容量，单位GiB */
-  Mem: number;
+  Mem?: number;
   /** 资源创建完成时间 */
   ResourceCreatedTime?: string;
   /** 计算节点运行 TaskInstance 可用容量。0表示计算节点忙碌。 */
-  TaskInstanceNumAvailable: number;
+  TaskInstanceNumAvailable?: number;
   /** Batch Agent 版本 */
   AgentVersion?: string;
   /** 实例内网IP */
-  PrivateIpAddresses: string[];
+  PrivateIpAddresses?: string[];
   /** 实例公网IP */
-  PublicIpAddresses: string[];
+  PublicIpAddresses?: string[];
   /** 计算环境资源类型，当前为CVM和CPM（黑石） */
-  ResourceType: string;
+  ResourceType?: string;
   /** 计算环境资源来源。BATCH_CREATED：由批量计算创建的实例资源。USER_ATTACHED：用户添加到计算环境中的实例资源。 */
-  ResourceOrigin: string;
+  ResourceOrigin?: string;
 }
 
 /** 计算节点统计指标 */
 declare interface ComputeNodeMetrics {
   /** 已经完成提交的计算节点数量 */
-  SubmittedCount: number;
+  SubmittedCount?: number;
   /** 创建中的计算节点数量 */
-  CreatingCount: number;
+  CreatingCount?: number;
   /** 创建失败的计算节点数量 */
-  CreationFailedCount: number;
+  CreationFailedCount?: number;
   /** 完成创建的计算节点数量 */
-  CreatedCount: number;
+  CreatedCount?: number;
   /** 运行中的计算节点数量 */
-  RunningCount: number;
+  RunningCount?: number;
   /** 销毁中的计算节点数量 */
-  DeletingCount: number;
+  DeletingCount?: number;
   /** 异常的计算节点数量 */
-  AbnormalCount: number;
+  AbnormalCount?: number;
 }
 
 /** 黑石私有网络 */
@@ -219,9 +219,9 @@ declare interface DataDisk {
 /** 依赖关系 */
 declare interface Dependence {
   /** 依赖关系的起点任务名称 */
-  StartTask: string;
+  StartTask: string | null;
   /** 依赖关系的终点任务名称 */
-  EndTask: string;
+  EndTask: string | null;
 }
 
 /** Docker容器信息 */
@@ -337,9 +337,9 @@ declare interface EnvDataCpm {
 /** 环境变量 */
 declare interface EnvVar {
   /** 环境变量名称 */
-  Name: string;
+  Name: string | null;
   /** 环境变量取值 */
-  Value: string;
+  Value: string | null;
 }
 
 /** 事件配置 */
@@ -353,9 +353,9 @@ declare interface EventConfig {
 /** 自定义键值对 */
 declare interface EventVar {
   /** 自定义键 */
-  Name: string;
+  Name: string | null;
   /** 自定义值 */
-  Value: string;
+  Value: string | null;
 }
 
 /** 扩展数据 */
@@ -379,11 +379,11 @@ declare interface Filter {
 /** 输入映射 */
 declare interface InputMapping {
   /** 源端路径 */
-  SourcePath: string;
+  SourcePath: string | null;
   /** 目的端路径 */
-  DestinationPath: string;
+  DestinationPath: string | null;
   /** 挂载配置项参数 */
-  MountOptionParameter?: string;
+  MountOptionParameter?: string | null;
 }
 
 /** 描述实例的信息 */
@@ -399,23 +399,23 @@ declare interface Instance {
 /** 实例分类列表 */
 declare interface InstanceCategoryItem {
   /** 实例类型名 */
-  InstanceCategory: string;
+  InstanceCategory?: string;
   /** 实例族列表 */
-  InstanceFamilySet: string[];
+  InstanceFamilySet?: string[];
 }
 
 /** 批量计算可用的InstanceTypeConfig信息 */
 declare interface InstanceTypeConfig {
   /** 内存容量，单位：`GB`。 */
-  Mem: number;
+  Mem?: number;
   /** CPU核数，单位：核。 */
-  Cpu: number;
+  Cpu?: number;
   /** 实例机型。 */
-  InstanceType: string;
+  InstanceType?: string;
   /** 可用区。 */
-  Zone: string;
+  Zone?: string;
   /** 实例机型系列。 */
-  InstanceFamily: string;
+  InstanceFamily?: string;
 }
 
 /** 实例机型配置。 */
@@ -559,23 +559,23 @@ declare interface Job {
 /** 作业信息 */
 declare interface JobView {
   /** 作业ID */
-  JobId: string;
+  JobId?: string;
   /** 作业名称 */
-  JobName: string;
+  JobName?: string;
   /** 作业状态 */
-  JobState: string;
+  JobState?: string;
   /** 作业优先级 */
-  Priority: number;
+  Priority?: number;
   /** 位置信息 */
   Placement?: Placement | null;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 结束时间 */
   EndTime?: string | null;
   /** 任务统计指标 */
-  TaskMetrics: TaskMetrics;
+  TaskMetrics?: TaskMetrics;
   /** 作业绑定的标签列表。 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
 }
 
 /** 本地磁盘规格 */
@@ -594,7 +594,7 @@ declare interface LocalDiskType {
 
 /** 描述了实例登录相关配置与信息。 */
 declare interface LoginSettings {
-  /** 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：Linux实例密码必须8到16位，至少包括两项[a-z，A-Z]、[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? \/ ]中的特殊符号。Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? \/]中的特殊符号。若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。 */
+  /** 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：Linux实例密码必须8到16位，至少包括两项[a-z，A-Z]、[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? \/ ]中的特殊符号。 Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? \/]中的特殊符号。若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。 */
   Password?: string;
   /** 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口DescribeKeyPairs获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。当前仅支持购买的时候指定一个密钥。 */
   KeyIds?: string[];
@@ -605,9 +605,9 @@ declare interface LoginSettings {
 /** 数据盘挂载选项 */
 declare interface MountDataDisk {
   /** 挂载点，Linux系统合法路径，或Windows系统盘符,比如"H:\\" */
-  LocalPath: string;
+  LocalPath: string | null;
   /** 文件系统类型，Linux系统下支持"EXT3"和"EXT4"两种，默认"EXT3"；Windows系统下仅支持"NTFS" */
-  FileSystemType?: string;
+  FileSystemType?: string | null;
 }
 
 /** 计算环境 */
@@ -673,27 +673,27 @@ declare interface NamedCpmComputeEnv {
 /** 通知信息 */
 declare interface Notification {
   /** CMQ主题名字，要求主题名有效且关联订阅 */
-  TopicName: string;
+  TopicName: string | null;
   /** 事件配置 */
-  EventConfigs: EventConfig[];
+  EventConfigs: EventConfig[] | null;
 }
 
 /** 操作系统类型 */
 declare interface OsInfo {
   /** 操作系统ID。 */
-  OsTypeId: number;
+  OsTypeId?: number;
   /** 操作系统名称。 */
-  OsName: string;
+  OsName?: string;
   /** 操作系统名称描述。 */
-  OsDescription: string;
+  OsDescription?: string;
   /** 操作系统英文名称。 */
-  OsEnglishDescription: string;
+  OsEnglishDescription?: string;
   /** 操作系统的分类，如CentOs Debian。 */
-  OsClass: string;
+  OsClass?: string;
   /** 标识镜像分类。public:公共镜像; private: 专属镜像。 */
-  ImageTag: string;
+  ImageTag?: string;
   /** 操作系统，ext4文件下所支持的最大的磁盘大小。单位为T。 */
-  MaxPartitionSize: number;
+  MaxPartitionSize?: number;
 }
 
 /** 输出映射 */
@@ -736,26 +736,26 @@ declare interface Placement {
 
 /** 重定向信息 */
 declare interface RedirectInfo {
-  /** 标准输出重定向路径 */
-  StdoutRedirectPath?: string;
+  /** 标准输出重定向路径; */
+  StdoutRedirectPath?: string | null;
   /** 标准错误重定向路径 */
-  StderrRedirectPath?: string;
+  StderrRedirectPath?: string | null;
   /** 标准输出重定向文件名，支持三个占位符${BATCH_JOB_ID}、${BATCH_TASK_NAME}、${BATCH_TASK_INSTANCE_INDEX} */
-  StdoutRedirectFileName?: string;
+  StdoutRedirectFileName?: string | null;
   /** 标准错误重定向文件名，支持三个占位符${BATCH_JOB_ID}、${BATCH_TASK_NAME}、${BATCH_TASK_INSTANCE_INDEX} */
-  StderrRedirectFileName?: string;
+  StderrRedirectFileName?: string | null;
 }
 
 /** 本地重定向信息 */
 declare interface RedirectLocalInfo {
   /** 标准输出重定向本地路径 */
-  StdoutLocalPath?: string;
+  StdoutLocalPath?: string | null;
   /** 标准错误重定向本地路径 */
-  StderrLocalPath?: string;
+  StderrLocalPath?: string | null;
   /** 标准输出重定向本地文件名，支持三个占位符${BATCH_JOB_ID}、${BATCH_TASK_NAME}、${BATCH_TASK_INSTANCE_INDEX} */
-  StdoutLocalFileName?: string;
+  StdoutLocalFileName?: string | null;
   /** 标准错误重定向本地文件名，支持三个占位符${BATCH_JOB_ID}、${BATCH_TASK_NAME}、${BATCH_TASK_INSTANCE_INDEX} */
-  StderrLocalFileName?: string;
+  StderrLocalFileName?: string | null;
 }
 
 /** 描述了 “云自动化助手” 服务相关的信息 */
@@ -859,55 +859,55 @@ declare interface Task {
 /** 任务实例日志详情。 */
 declare interface TaskInstanceLog {
   /** 任务实例 */
-  TaskInstanceIndex: number;
+  TaskInstanceIndex?: number;
   /** 标准输出日志（Base64编码，解码后最大日志长度2048字节） */
-  StdoutLog: string | null;
+  StdoutLog?: string | null;
   /** 标准错误日志（Base64编码，解码后最大日志长度2048字节） */
-  StderrLog: string | null;
+  StderrLog?: string | null;
   /** 标准输出重定向路径 */
-  StdoutRedirectPath: string | null;
+  StdoutRedirectPath?: string | null;
   /** 标准错误重定向路径 */
-  StderrRedirectPath: string | null;
+  StderrRedirectPath?: string | null;
   /** 标准输出重定向文件名 */
-  StdoutRedirectFileName: string | null;
+  StdoutRedirectFileName?: string | null;
   /** 标准错误重定向文件名 */
-  StderrRedirectFileName: string | null;
+  StderrRedirectFileName?: string | null;
 }
 
 /** 任务实例统计指标 */
 declare interface TaskInstanceMetrics {
   /** Submitted个数 */
-  SubmittedCount: number;
+  SubmittedCount?: number | null;
   /** Pending个数 */
-  PendingCount: number;
+  PendingCount?: number | null;
   /** Runnable个数 */
-  RunnableCount: number;
+  RunnableCount?: number | null;
   /** Starting个数 */
-  StartingCount: number;
+  StartingCount?: number | null;
   /** Running个数 */
-  RunningCount: number;
+  RunningCount?: number | null;
   /** Succeed个数 */
-  SucceedCount: number;
+  SucceedCount?: number | null;
   /** FailedInterrupted个数 */
-  FailedInterruptedCount: number;
+  FailedInterruptedCount?: number | null;
   /** Failed个数 */
-  FailedCount: number;
+  FailedCount?: number | null;
 }
 
 /** 任务实例视图信息 */
 declare interface TaskInstanceView {
   /** 任务实例索引 */
-  TaskInstanceIndex: number;
+  TaskInstanceIndex?: number;
   /** 任务实例状态 */
-  TaskInstanceState: string;
+  TaskInstanceState?: string;
   /** 应用程序执行结束的exit code */
   ExitCode?: number | null;
   /** 任务实例状态原因，任务实例失败时，会记录失败原因 */
-  StateReason: string;
+  StateReason?: string;
   /** 任务实例运行时所在计算节点（例如CVM）的InstanceId。任务实例未运行或者完结时，本字段为空。任务实例重试时，本字段会随之变化 */
   ComputeNodeInstanceId?: string | null;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 启动时间 */
   LaunchTime?: string | null;
   /** 开始运行时间 */
@@ -915,55 +915,55 @@ declare interface TaskInstanceView {
   /** 结束时间 */
   EndTime?: string | null;
   /** 重定向信息 */
-  RedirectInfo: RedirectInfo;
+  RedirectInfo?: RedirectInfo;
   /** 任务实例状态原因详情，任务实例失败时，会记录失败原因 */
-  StateDetailedReason: string;
+  StateDetailedReason?: string;
 }
 
 /** 任务统计指标 */
 declare interface TaskMetrics {
   /** Submitted个数 */
-  SubmittedCount: number;
+  SubmittedCount?: number | null;
   /** Pending个数 */
-  PendingCount: number;
+  PendingCount?: number | null;
   /** Runnable个数 */
-  RunnableCount: number;
+  RunnableCount?: number | null;
   /** Starting个数 */
-  StartingCount: number;
+  StartingCount?: number | null;
   /** Running个数 */
-  RunningCount: number;
+  RunningCount?: number | null;
   /** Succeed个数 */
-  SucceedCount: number;
+  SucceedCount?: number | null;
   /** FailedInterrupted个数 */
-  FailedInterruptedCount: number;
+  FailedInterruptedCount?: number | null;
   /** Failed个数 */
-  FailedCount: number;
+  FailedCount?: number | null;
 }
 
 /** 任务模板信息 */
 declare interface TaskTemplateView {
   /** 任务模板ID */
-  TaskTemplateId: string;
+  TaskTemplateId?: string;
   /** 任务模板名称 */
-  TaskTemplateName: string;
+  TaskTemplateName?: string;
   /** 任务模板描述 */
-  TaskTemplateDescription: string;
+  TaskTemplateDescription?: string;
   /** 任务模板信息 */
-  TaskTemplateInfo: Task;
+  TaskTemplateInfo?: Task;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 任务模板绑定的标签列表。 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
 }
 
 /** 任务视图信息 */
 declare interface TaskView {
   /** 任务名称 */
-  TaskName: string;
+  TaskName?: string;
   /** 任务状态 */
-  TaskState: string;
+  TaskState?: string;
   /** 开始时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 结束时间 */
   EndTime?: string | null;
 }
@@ -1005,7 +1005,7 @@ declare interface CreateComputeEnvRequest {
 
 declare interface CreateComputeEnvResponse {
   /** 计算环境ID */
-  EnvId: string;
+  EnvId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1039,7 +1039,7 @@ declare interface CreateTaskTemplateRequest {
 
 declare interface CreateTaskTemplateResponse {
   /** 任务模板ID */
-  TaskTemplateId: string;
+  TaskTemplateId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1151,9 +1151,9 @@ declare interface DescribeComputeEnvCreateInfosRequest {
 
 declare interface DescribeComputeEnvCreateInfosResponse {
   /** 计算环境数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 计算环境创建信息列表 */
-  ComputeEnvCreateInfoSet: ComputeEnvCreateInfo[];
+  ComputeEnvCreateInfoSet?: ComputeEnvCreateInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1165,29 +1165,29 @@ declare interface DescribeComputeEnvRequest {
 
 declare interface DescribeComputeEnvResponse {
   /** 计算环境ID */
-  EnvId: string;
+  EnvId?: string;
   /** 计算环境名称 */
-  EnvName: string;
+  EnvName?: string;
   /** 位置信息 */
-  Placement: Placement;
+  Placement?: Placement;
   /** 计算环境创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 计算节点列表信息 */
-  ComputeNodeSet: ComputeNode[];
+  ComputeNodeSet?: ComputeNode[];
   /** 计算节点统计指标 */
-  ComputeNodeMetrics: ComputeNodeMetrics;
+  ComputeNodeMetrics?: ComputeNodeMetrics;
   /** 计算节点期望个数 */
-  DesiredComputeNodeCount: number;
+  DesiredComputeNodeCount?: number;
   /** 计算环境类型 */
-  EnvType: string;
+  EnvType?: string;
   /** 计算环境资源类型，当前为CVM和CPM（黑石） */
-  ResourceType: string;
+  ResourceType?: string;
   /** 下一步动作 */
-  NextAction: string;
+  NextAction?: string;
   /** 用户添加到计算环境中的计算节点个数 */
-  AttachedComputeNodeCount: number;
+  AttachedComputeNodeCount?: number;
   /** 计算环境绑定的标签列表。 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1253,33 +1253,33 @@ declare interface DescribeJobRequest {
 
 declare interface DescribeJobResponse {
   /** 作业ID */
-  JobId: string;
+  JobId?: string;
   /** 作业名称 */
-  JobName: string;
+  JobName?: string;
   /** 可用区信息 */
-  Zone: string;
+  Zone?: string;
   /** 作业优先级 */
-  Priority: number;
+  Priority?: number;
   /** 作业状态 */
-  JobState: string;
+  JobState?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 结束时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 任务视图信息 */
-  TaskSet: TaskView[];
+  TaskSet?: TaskView[];
   /** 任务间依赖信息 */
-  DependenceSet: Dependence[];
+  DependenceSet?: Dependence[];
   /** 任务统计指标 */
-  TaskMetrics: TaskMetrics;
+  TaskMetrics?: TaskMetrics;
   /** 任务实例统计指标 */
-  TaskInstanceMetrics: TaskInstanceMetrics;
+  TaskInstanceMetrics?: TaskInstanceMetrics;
   /** 作业失败原因 */
-  StateReason: string;
+  StateReason?: string;
   /** 作业绑定的标签列表。 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 下一步动作 */
-  NextAction: string | null;
+  NextAction?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1365,21 +1365,21 @@ declare interface DescribeTaskRequest {
 
 declare interface DescribeTaskResponse {
   /** 作业ID */
-  JobId: string;
+  JobId?: string;
   /** 任务名称 */
-  TaskName: string;
+  TaskName?: string;
   /** 任务状态 */
-  TaskState: string;
+  TaskState?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 结束时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 任务实例总数 */
-  TaskInstanceTotalCount: number;
+  TaskInstanceTotalCount?: number;
   /** 任务实例信息 */
-  TaskInstanceSet: TaskInstanceView[];
+  TaskInstanceSet?: TaskInstanceView[];
   /** 任务实例统计指标 */
-  TaskInstanceMetrics: TaskInstanceMetrics;
+  TaskInstanceMetrics?: TaskInstanceMetrics;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1478,7 +1478,7 @@ declare interface SubmitJobRequest {
 
 declare interface SubmitJobResponse {
   /** 当通过本接口来提交作业时会返回该参数，表示一个作业ID。返回作业ID列表并不代表作业解析/运行成功，可根据 DescribeJob 接口查询其状态。 */
-  JobId: string;
+  JobId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

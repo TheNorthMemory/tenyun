@@ -629,27 +629,27 @@ declare interface ErrorInfoItem {
 /** kafka消费者组详情 */
 declare interface GroupInfo {
   /** 消费者组账号 */
-  Account: string;
+  Account?: string;
   /** 消费者组名称 */
-  ConsumerGroupName: string;
+  ConsumerGroupName?: string;
   /** 消费者组备注 */
-  Description: string | null;
+  Description?: string | null;
   /** 消费组偏移量。该字段是为了兼容以前单Partition的情况，取值为最后一个分区的偏移量。各分区的偏移量详见StateOfPartition字段 */
-  ConsumerGroupOffset: number;
+  ConsumerGroupOffset?: number;
   /** 消费组未消费的数据量。该字段是为了兼容以前单Partition的情况，取值为最后一个分区未消费的数据量。各分区未消费数据量详见StateOfPartition字段 */
-  ConsumerGroupLag: number;
+  ConsumerGroupLag?: number;
   /** 消费延迟(单位为秒) */
-  Latency: number;
+  Latency?: number;
   /** 各分区的消费状态 */
-  StateOfPartition: MonitorInfo[];
+  StateOfPartition?: MonitorInfo[];
   /** 消费者组创建时间，格式为YYYY-MM-DD hh:mm:ss */
-  CreatedAt: string;
+  CreatedAt?: string;
   /** 消费者组修改时间，格式为YYYY-MM-DD hh:mm:ss */
-  UpdatedAt: string;
+  UpdatedAt?: string;
   /** 消费者组状态，包括Dead、Empty、Stable等，只有Dead和Empty两种状态可以执行reset操作 */
-  ConsumerGroupState: string;
+  ConsumerGroupState?: string;
   /** 每个消费者正在消费的分区 */
-  PartitionAssignment: PartitionAssignment[] | null;
+  PartitionAssignment?: PartitionAssignment[] | null;
 }
 
 /** 迁移任务列表 */
@@ -785,13 +785,13 @@ declare interface ModifiedSubscribeObject {
 /** kafka消费者组的分区详情 */
 declare interface MonitorInfo {
   /** 当前分区的编号，从0开始 */
-  PartitionNo: number;
+  PartitionNo?: number;
   /** 当前分区的偏移量 */
-  ConsumerGroupOffset: number;
+  ConsumerGroupOffset?: number;
   /** 当前分区未消费的数据量 */
-  ConsumerGroupLag: number;
+  ConsumerGroupLag?: number;
   /** 当前分区的消费延迟(单位为秒) */
-  Latency: number;
+  Latency?: number;
 }
 
 /** 同步的数据库对对象描述 */
@@ -842,6 +842,8 @@ declare interface Options {
   RateLimitOption?: RateLimitOption | null;
   /** 自动重试的时间窗口设置 */
   AutoRetryTimeRangeMinutes?: number | null;
+  /** 同步到kafka链路指定位点。目前只支持时间格式：yyyy-mm-dd hh:mm:ss。如果没有指定位点，为空。 */
+  StartPosition?: string | null;
   /** 同步到kafka链路是否过滤掉begin和commit消息。目前仅mysql2kafka链路支持 */
   FilterBeginCommit?: boolean | null;
   /** 同步到kafka链路是否过滤掉checkpoint消息。目前仅mysql2kafka链路支持 */
@@ -2614,27 +2616,27 @@ declare namespace V20180330 {
   /** 迁移任务错误信息及提示 */
   interface ErrorInfo {
     /** 具体的报错日志, 包含错误码和错误信息 */
-    ErrorLog: string;
+    ErrorLog?: string;
     /** 报错对应的帮助文档Ur */
-    HelpDoc: string;
+    HelpDoc?: string;
   }
 
   /** 描述详细迁移过程 */
   interface MigrateDetailInfo {
     /** 总步骤数 */
-    StepAll: number;
+    StepAll?: number;
     /** 当前步骤 */
-    StepNow: number;
+    StepNow?: number;
     /** 总进度,如："10" */
-    Progress: string;
+    Progress?: string;
     /** 当前步骤进度,如:"1" */
-    CurrentStepProgress: string;
+    CurrentStepProgress?: string;
     /** 主从差距，MB；在增量同步阶段有效，目前支持产品为：redis和mysql */
-    MasterSlaveDistance: number;
+    MasterSlaveDistance?: number;
     /** 主从差距，秒；在增量同步阶段有效，目前支持产品为：mysql */
-    SecondsBehindMaster: number;
+    SecondsBehindMaster?: number;
     /** 步骤信息 */
-    StepInfo: MigrateStepDetailInfo[];
+    StepInfo?: MigrateStepDetailInfo[];
   }
 
   /** 迁移任务详情 */
@@ -2700,15 +2702,15 @@ declare namespace V20180330 {
   /** 迁移中的步骤信息 */
   interface MigrateStepDetailInfo {
     /** 步骤序列 */
-    StepNo: number;
+    StepNo?: number;
     /** 步骤展现名称 */
-    StepName: string;
+    StepName?: string;
     /** 步骤英文标识 */
-    StepId: string;
+    StepId?: string;
     /** 步骤状态:0-默认值,1-成功,2-失败,3-执行中,4-未执行 */
-    Status: number;
+    Status?: number;
     /** 当前步骤开始的时间，格式为"yyyy-mm-dd hh:mm:ss"，该字段不存在或者为空是无意义 */
-    StartTime: string | null;
+    StartTime?: string | null;
   }
 
   /** 源实例信息 */
@@ -2759,35 +2761,35 @@ declare namespace V20180330 {
     SubscribeId?: string;
     /** 数据订阅实例的名称 */
     SubscribeName?: string;
-    /** 数据订阅实例绑定的通道ID */
+    /** 数据订阅实例绑定的通道ID。kafka版订阅就是kafka topic */
     ChannelId?: string;
-    /** 数据订阅绑定实例对应的产品名称 */
+    /** 订阅实例的类型，目前支持 cynosdbmysql,mariadb,mongodb,mysql,percona,tdpg,tdsqlpercona(tdsqlmysql) */
     Product?: string;
     /** 数据订阅实例绑定的数据库实例ID */
     InstanceId?: string;
-    /** 数据订阅实例绑定的数据库实例状态 */
+    /** 云数据库状态：running 运行中，isolated 已隔离，offline 已下线。如果不是云上，此值为空 */
     InstanceStatus?: string;
-    /** 数据订阅实例的配置状态，unconfigure - 未配置， configuring - 配置中，configured - 已配置 */
+    /** 数据订阅状态，可能的值为：未启动 notStarted, 校验中 checking, 校验不通过 checkNotPass, 校验通过 checkPass, 启动中 starting, 运行中 running, 异常出错 error */
     SubsStatus?: string;
-    /** 上次修改时间 */
+    /** 上次修改时间，时间格式如：Y-m-d h:m:s */
     ModifyTime?: string;
     /** 创建时间 */
     CreateTime?: string;
-    /** 隔离时间 */
+    /** 隔离时间，时间格式如：Y-m-d h:m:s */
     IsolateTime?: string;
-    /** 到期时间 */
+    /** 包年包月任务的到期时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00 */
     ExpireTime?: string;
     /** 下线时间 */
     OfflineTime?: string;
     /** 最近一次修改的消费时间起点，如果从未修改则为零值 */
     ConsumeStartTime?: string;
-    /** 自动续费标识。0-不自动续费，1-自动续费 */
+    /** 自动续费标识。只有当 PayType=0，该值才有意义。枚举值：0-不自动续费，1-自动续费 */
     AutoRenewFlag?: number | null;
     /** 数据订阅实例所属地域 */
     Region?: string;
     /** 计费方式，0 - 包年包月，1 - 按量计费 */
     PayType?: number;
-    /** 数据订阅实例的Vip */
+    /** 旧版订阅通道的vip */
     Vip?: string;
     /** 数据订阅实例的Vport */
     Vport?: number;
@@ -2795,7 +2797,7 @@ declare namespace V20180330 {
     UniqVpcId?: string;
     /** 数据订阅实例Vip所在子网的唯一ID */
     UniqSubnetId?: string;
-    /** 数据订阅实例的状态，creating - 创建中，normal - 正常运行，isolating - 隔离中，isolated - 已隔离，offlining - 下线中，offline - 已下线 */
+    /** 数据订阅生命周期状态，可能的值为：正常 normal, 隔离中 isolating, 已隔离 isolated, 下线中 offlining, 按量转包年包月中 post2PrePayIng */
     Status?: string;
     /** SDK最后一条确认消息的时间戳，如果SDK一直消费，也可以作为SDK当前消费时间点 */
     SdkConsumedTime?: string;

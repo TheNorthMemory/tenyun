@@ -476,6 +476,8 @@ declare interface ElectronicFlightTicketFull {
   BuyerTaxID?: string;
   /** 机票详细信息元组 */
   FlightItems?: FlightItemInfo[];
+  /** 机票开具状态 */
+  InvoiceStatus?: string;
 }
 
 /** 全电发票（铁路电子客票） */

@@ -41,9 +41,9 @@ declare interface ColumnPrivilege {
 /** 约束类型值的范围 */
 declare interface ConstraintRange {
   /** 约束类型为section时的最小值 */
-  Min: string;
+  Min?: string | null;
   /** 约束类型为section时的最大值 */
-  Max: string;
+  Max?: string | null;
 }
 
 /** 云数据库账号信息 */
@@ -71,11 +71,11 @@ declare interface DBAccount {
 /** 云数据库实例备份时间配置信息 */
 declare interface DBBackupTimeConfig {
   /** 实例 ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 每天备份执行的区间的开始时间，格式 mm:ss，形如 22:00 */
-  StartBackupTime: string;
+  StartBackupTime?: string;
   /** 每天备份执行的区间的结束时间，格式 mm:ss，形如 23:00 */
-  EndBackupTime: string;
+  EndBackupTime?: string;
 }
 
 /** 描述云数据库实例的详细信息。 */
@@ -217,13 +217,13 @@ declare interface DCNReplicaStatus {
 /** 数据库信息 */
 declare interface Database {
   /** 数据库名称 */
-  DbName: string;
+  DbName?: string;
 }
 
 /** 数据库函数信息 */
 declare interface DatabaseFunction {
   /** 函数名称 */
-  Func: string;
+  Func?: string;
 }
 
 /** 数据库权限 */
@@ -237,19 +237,19 @@ declare interface DatabasePrivilege {
 /** 数据库存储过程信息 */
 declare interface DatabaseProcedure {
   /** 存储过程名称 */
-  Proc: string;
+  Proc?: string;
 }
 
 /** 数据库表信息 */
 declare interface DatabaseTable {
   /** 表名 */
-  Table: string;
+  Table?: string;
 }
 
 /** 数据库视图信息 */
 declare interface DatabaseView {
   /** 视图名称 */
-  View: string;
+  View?: string;
 }
 
 /** DCN详情条目 */
@@ -373,21 +373,21 @@ declare interface InstanceBackupFileItem {
 /** 按机型归类的实例可售卖规格信息 */
 declare interface InstanceSpec {
   /** 设备型号 */
-  Machine: string;
+  Machine: string | null;
   /** 该机型对应的可售卖规格列表 */
-  SpecInfos: SpecConfigInfo[];
+  SpecInfos: SpecConfigInfo[] | null;
 }
 
 /** 拉取的日志信息 */
 declare interface LogFileInfo {
   /** Log最后修改时间 */
-  Mtime: number;
+  Mtime?: number;
   /** 文件长度 */
-  Length: number;
+  Length?: number;
   /** 下载Log时用到的统一资源标识符 */
-  Uri: string;
+  Uri?: string;
   /** 文件名 */
-  FileName: string;
+  FileName?: string;
 }
 
 /** 数据库超期备份配置 */
@@ -409,21 +409,21 @@ declare interface NewBackupConfig {
 /** 描述实例的各个DB节点信息 */
 declare interface NodeInfo {
   /** DB节点ID */
-  NodeId: string;
+  NodeId?: string;
   /** DB节点角色，取值为master或者slave */
-  Role: string;
+  Role?: string;
 }
 
 /** 参数约束 */
 declare interface ParamConstraint {
   /** 约束类型,如枚举enum，区间section */
-  Type: string;
+  Type?: string;
   /** 约束类型为enum时的可选值列表 */
   Enum?: string;
   /** 约束类型为section时的范围 */
   Range?: ConstraintRange | null;
   /** 约束类型为string时的可选值列表 */
-  String: string;
+  String?: string;
 }
 
 /** DB参数描述 */
@@ -447,9 +447,9 @@ declare interface ParamDesc {
 /** 修改参数结果 */
 declare interface ParamModifyResult {
   /** 修改参数名字 */
-  Param: string;
+  Param?: string;
   /** 参数修改结果。0表示修改成功；-1表示修改失败；-2表示该参数值非法 */
-  Code: number;
+  Code?: number;
 }
 
 /** 存储过程权限信息 */
@@ -465,15 +465,15 @@ declare interface ProcedurePrivilege {
 /** 售卖可用区信息 */
 declare interface RegionInfo {
   /** 地域英文ID */
-  Region: string;
+  Region?: string;
   /** 地域数字ID */
-  RegionId: number;
+  RegionId?: number;
   /** 地域中文名 */
-  RegionName: string;
+  RegionName?: string;
   /** 可用区列表 */
-  ZoneList: ZonesInfo[];
+  ZoneList?: ZonesInfo[];
   /** 可选择的主可用区和从可用区 */
-  AvailableChoice: ZoneChooseInfo[];
+  AvailableChoice?: ZoneChooseInfo[];
 }
 
 /** 保留的网络资源信息 */
@@ -501,19 +501,19 @@ declare interface ResourceTag {
 /** 安全组详情 */
 declare interface SecurityGroup {
   /** 项目ID */
-  ProjectId: number;
+  ProjectId?: number;
   /** 创建时间，时间格式：yyyy-mm-dd hh:mm:ss */
-  CreateTime: string;
+  CreateTime?: string;
   /** 安全组ID */
-  SecurityGroupId: string;
+  SecurityGroupId?: string;
   /** 安全组名称 */
-  SecurityGroupName: string;
+  SecurityGroupName?: string;
   /** 安全组备注 */
-  SecurityGroupRemark: string;
+  SecurityGroupRemark?: string;
   /** 入站规则 */
-  Inbound: SecurityGroupBound[];
+  Inbound?: SecurityGroupBound[];
   /** 出站规则 */
-  Outbound: SecurityGroupBound[];
+  Outbound?: SecurityGroupBound[];
 }
 
 /** 安全出入口规则 */
@@ -573,31 +573,31 @@ declare interface SlowLogData {
 /** 实例可售卖规格详细信息，创建实例和扩容实例时 Pid+MemSize 唯一确定一种售卖规格，磁盘大小可用区间为[MinDataDisk,MaxDataDisk] */
 declare interface SpecConfigInfo {
   /** 设备型号 */
-  Machine: string;
+  Machine?: string;
   /** 内存大小，单位 GB */
-  Memory: number;
+  Memory?: number;
   /** 数据盘规格最小值，单位 GB */
-  MinStorage: number;
+  MinStorage?: number;
   /** 数据盘规格最大值，单位 GB */
-  MaxStorage: number;
+  MaxStorage?: number;
   /** 推荐的使用场景 */
-  SuitInfo: string;
+  SuitInfo?: string;
   /** 最大 Qps 值 */
-  Qps: number;
+  Qps?: number;
   /** 产品类型 Id */
-  Pid: number;
+  Pid?: number;
   /** 节点个数，2 表示一主一从，3 表示一主二从 */
-  NodeCount: number;
+  NodeCount?: number;
   /** Cpu核数 */
-  Cpu: number;
+  Cpu?: number;
 }
 
 /** 数据库列信息 */
 declare interface TableColumn {
   /** 列名称 */
-  Col: string;
+  Col?: string;
   /** 列类型 */
-  Type: string;
+  Type?: string;
 }
 
 /** 数据库表权限 */
@@ -621,35 +621,35 @@ declare interface Tag {
 /** 临时实例 */
 declare interface TmpInstance {
   /** 应用ID */
-  AppId: number | null;
+  AppId?: number | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 实例备注 */
-  InstanceRemark: string | null;
+  InstanceRemark?: string | null;
   /** 0:非临时实例 ,1:无效临时实例, 2:回档成功的有效临时实例 */
-  TempType: number | null;
+  TempType?: number | null;
   /** 实例状态,0:待初始化,1:流程处理中,2:有效状态,-1:已隔离，-2：已下线 */
-  Status: number | null;
+  Status?: number | null;
   /** 实例 ID，形如：tdsql-ow728lmc。 */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 实例虚IP */
-  Vip: string | null;
+  Vip?: string | null;
   /** 实例虚端口 */
-  Vport: number | null;
+  Vport?: number | null;
   /** 有效期结束时间 */
-  PeriodEndTime: string | null;
+  PeriodEndTime?: string | null;
   /** 源实例 ID，形如：tdsql-ow728lmc。 */
-  SrcInstanceId: string | null;
+  SrcInstanceId?: string | null;
   /** 实例状态描述 */
-  StatusDesc: string | null;
+  StatusDesc?: string | null;
   /** 实例所在地域 */
-  Region: string | null;
+  Region?: string | null;
   /** 实例所在可用区 */
-  Zone: string | null;
+  Zone?: string | null;
   /** 实例虚IPv6 */
-  Vipv6: string | null;
+  Vipv6?: string | null;
   /** 实例IPv6标志 */
-  Ipv6Flag: number | null;
+  Ipv6Flag?: number | null;
 }
 
 /** 视图权限信息 */
@@ -665,9 +665,9 @@ declare interface ViewPrivileges {
 /** 分片节点可用区选择 */
 declare interface ZoneChooseInfo {
   /** 主可用区 */
-  MasterZone: ZonesInfo;
+  MasterZone?: ZonesInfo;
   /** 可选的从可用区 */
-  SlaveZones: ZonesInfo[];
+  SlaveZones?: ZonesInfo[];
 }
 
 /** 可用区信息 */
@@ -753,7 +753,7 @@ declare interface CloseDBExtranetAccessRequest {
 
 declare interface CloseDBExtranetAccessResponse {
   /** 异步任务ID，可通过 DescribeFlow 查询任务状态。 */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -891,7 +891,7 @@ declare interface CreateDedicatedClusterDBInstanceRequest {
   VpcId?: string;
   /** 子网Id */
   SubnetId?: string;
-  /** db类型，不传默认0 */
+  /** db类型，不传默认8.0 */
   DbVersionId?: string;
   /** （废弃）是否手动指定一组服务器分配, 运维使用 */
   Manual?: number;
@@ -1033,13 +1033,13 @@ declare interface DescribeAccountPrivilegesRequest {
 
 declare interface DescribeAccountPrivilegesResponse {
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 权限列表。 */
-  Privileges: string[];
+  Privileges?: string[];
   /** 数据库账号用户名 */
-  UserName: string;
+  UserName?: string;
   /** 数据库账号Host */
-  Host: string;
+  Host?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1103,9 +1103,9 @@ declare interface DescribeBackupFilesRequest {
 
 declare interface DescribeBackupFilesResponse {
   /** 备份文件列表 */
-  Files: InstanceBackupFileItem[];
+  Files?: InstanceBackupFileItem[];
   /** 总条目数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1145,11 +1145,11 @@ declare interface DescribeDBEncryptAttributesRequest {
 
 declare interface DescribeDBEncryptAttributesResponse {
   /** 是否启用加密，1-已开启；0-未开启。 */
-  EncryptStatus: number;
+  EncryptStatus?: number;
   /** DEK密钥 */
-  CipherText: string;
+  CipherText?: string;
   /** DEK密钥过期日期。 */
-  ExpireDate: string;
+  ExpireDate?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1331,9 +1331,9 @@ declare interface DescribeDBInstancesRequest {
   Tags?: Tag[];
   /** 实例类型过滤，1-独享实例，2-主实例，3-灾备实例，多个按逗号分隔 */
   FilterInstanceType?: string;
-  /** 按照实例状态进行筛选 */
+  /** 按照实例状态进行筛选。状态值 -2：已删除； -1：已隔离；0：创建中；1：流程处理中；2：运行中 */
   Status?: number[];
-  /** 排除实例状态 */
+  /** 排除实例状态。状态值 -2：已删除； -1：已隔离；0：创建中；1：流程处理中；2：运行中 */
   ExcludeStatus?: number[];
 }
 
@@ -1393,11 +1393,11 @@ declare interface DescribeDBSecurityGroupsRequest {
 
 declare interface DescribeDBSecurityGroupsResponse {
   /** 安全组详情。 */
-  Groups: SecurityGroup[];
+  Groups?: SecurityGroup[];
   /** 实例VIP。 */
-  VIP: string | null;
+  VIP?: string | null;
   /** 实例端口。 */
-  VPort: string | null;
+  VPort?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1461,7 +1461,7 @@ declare interface DescribeDBTmpInstancesRequest {
 
 declare interface DescribeDBTmpInstancesResponse {
   /** 临时实例 */
-  TmpInstances: TmpInstance[];
+  TmpInstances?: TmpInstance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1475,17 +1475,17 @@ declare interface DescribeDatabaseObjectsRequest {
 
 declare interface DescribeDatabaseObjectsResponse {
   /** 透传入参。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 数据库名称。 */
-  DbName: string;
+  DbName?: string;
   /** 表列表。 */
-  Tables: DatabaseTable[];
+  Tables?: DatabaseTable[];
   /** 视图列表。 */
-  Views: DatabaseView[];
+  Views?: DatabaseView[];
   /** 存储过程列表。 */
-  Procs: DatabaseProcedure[];
+  Procs?: DatabaseProcedure[];
   /** 函数列表。 */
-  Funcs: DatabaseFunction[];
+  Funcs?: DatabaseFunction[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1501,27 +1501,27 @@ declare interface DescribeDatabaseTableRequest {
 
 declare interface DescribeDatabaseTableResponse {
   /** 实例名称。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 数据库名称。 */
-  DbName: string;
+  DbName?: string;
   /** 表名称。 */
-  Table: string;
+  Table?: string;
   /** 列信息。 */
-  Cols: TableColumn[];
+  Cols?: TableColumn[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeDatabasesRequest {
-  /** 实例 ID，形如：dcdbt-ow7t8lmc。 */
+  /** 实例 ID，形如：tdsql-e9tklsgz。 */
   InstanceId: string;
 }
 
 declare interface DescribeDatabasesResponse {
   /** 该实例上的数据库列表。 */
-  Databases: Database[];
+  Databases?: Database[];
   /** 透传入参。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1647,9 +1647,9 @@ declare interface DescribeProjectSecurityGroupsRequest {
 
 declare interface DescribeProjectSecurityGroupsResponse {
   /** 安全组详情。 */
-  Groups: SecurityGroup[];
+  Groups?: SecurityGroup[];
   /** 安全组总数。 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1845,7 +1845,7 @@ declare interface KillSessionRequest {
 
 declare interface KillSessionResponse {
   /** 任务ID */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2049,7 +2049,7 @@ declare interface ModifyInstanceVipRequest {
 
 declare interface ModifyInstanceVipResponse {
   /** 异步任务流程ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2131,7 +2131,7 @@ declare interface RenewDBInstanceRequest {
 
 declare interface RenewDBInstanceResponse {
   /** 长订单号。可以据此调用 DescribeOrders 查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。 */
-  DealName: string;
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2211,7 +2211,7 @@ declare interface UpgradeDBInstanceRequest {
 
 declare interface UpgradeDBInstanceResponse {
   /** 长订单号。可以据此调用 DescribeOrders 查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。 */
-  DealName: string;
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

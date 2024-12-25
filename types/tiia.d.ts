@@ -5,29 +5,29 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 属性 */
 declare interface Attribute {
   /** 属性 */
-  Type: string;
+  Type?: string;
   /** 属性详情 */
-  Details: string;
+  Details?: string;
 }
 
 /** 属性检测到的人体 */
 declare interface AttributesForBody {
   /** 人体框。当不开启人体检测时，内部参数默认为0。 */
-  Rect: ImageRect | null;
+  Rect?: ImageRect | null;
   /** 人体检测置信度。取值0-1之间，当不开启人体检测开关时默认为0。 */
-  DetectConfidence: number | null;
+  DetectConfidence?: number;
   /** 属性信息。 */
-  Attributes: BodyAttributes[] | null;
+  Attributes?: BodyAttributes[] | null;
 }
 
 /** 属性列表。 */
 declare interface BodyAttributes {
   /** 属性值。 */
-  Label: string | null;
+  Label?: string;
   /** 置信度，取值0-1之间。 */
-  Confidence: number | null;
+  Confidence?: number;
   /** 属性名称。 */
-  Name: string | null;
+  Name?: string;
 }
 
 /** 图像主体区域。 */
@@ -43,67 +43,67 @@ declare interface Box {
 /** 车牌信息 */
 declare interface CarPlateContent {
   /** 车牌信息。 */
-  Plate: string | null;
+  Plate?: string;
   /** 车牌颜色。 */
-  Color: string | null;
+  Color?: string;
   /** 车牌类型，包含：0普通蓝牌，1双层黄牌，2单层黄牌，3新能源车牌，4使馆车牌，5领馆车牌，6澳门车牌，7香港车牌，8警用车牌，9教练车牌，10武警车牌，11军用车牌 -2遮挡污损模糊车牌/异常 其他无牌注意：此字段可能返回 null，表示取不到有效值。此字段结果遮挡污损模糊车牌/异常：包含PlateStatus参数的“遮挡污损模糊车牌”，针对车牌异常，建议参考此字段，更全面 */
-  Type: string | null;
+  Type?: string;
   /** 车牌在图片中的坐标信息。 */
-  PlateLocation: Coord[] | null;
+  PlateLocation?: Coord[] | null;
   /** 判断车牌是否遮挡：“遮挡污损模糊车牌”和"正常车牌"。 */
-  PlateStatus: string | null;
+  PlateStatus?: string;
   /** 车牌遮挡的置信度，0-100。 */
-  PlateStatusConfidence: number | null;
+  PlateStatusConfidence?: number;
   /** 车牌角度。 */
-  PlateAngle: number | null;
+  PlateAngle?: number;
 }
 
 /** 车辆属性识别的结果 */
 declare interface CarTagItem {
   /** 车系 */
-  Serial: string;
+  Serial?: string;
   /** 车辆品牌 */
-  Brand: string;
+  Brand?: string;
   /** 车辆类型 */
-  Type: string;
+  Type?: string;
   /** 车辆颜色 */
-  Color: string;
+  Color?: string;
   /** 车系置信度，0-100 */
-  Confidence: number;
+  Confidence?: number;
   /** 年份，没识别出年份的时候返回0 */
-  Year: number;
+  Year?: number;
   /** 车辆在图片中的坐标信息 */
-  CarLocation: Coord[];
+  CarLocation?: Coord[];
   /** 车牌信息，仅车辆识别（增强版）支持 */
-  PlateContent: CarPlateContent | null;
+  PlateContent?: CarPlateContent | null;
   /** 车牌信息置信度，0-100，仅车辆识别（增强版）支持 */
-  PlateConfidence: number | null;
+  PlateConfidence?: number;
   /** 车辆类型置信度，0-100，仅车辆识别（增强版）支持 */
-  TypeConfidence: number | null;
+  TypeConfidence?: number;
   /** 车辆颜色置信度，0-100，仅车辆识别（增强版）支持 */
-  ColorConfidence: number | null;
+  ColorConfidence?: number;
   /** 车辆朝向，仅车辆识别（增强版）支持 */
-  Orientation: string | null;
+  Orientation?: string;
   /** 车辆朝向置信度，0-100，仅车辆识别（增强版）支持 */
-  OrientationConfidence: number | null;
+  OrientationConfidence?: number;
 }
 
 /** 整张图颜色信息。 */
 declare interface ColorInfo {
   /** RGB颜色值（16进制），例如：291A18。 */
-  Color: string;
+  Color?: string;
   /** 当前颜色标签所占比例。 */
-  Percentage: number;
+  Percentage?: number;
   /** 颜色标签。蜜柚色，米驼色等。 */
-  Label: string;
+  Label?: string;
 }
 
 /** 汽车坐标信息 */
 declare interface Coord {
   /** 横坐标x */
-  X: number;
+  X?: number;
   /** 纵坐标y */
-  Y: number;
+  Y?: number;
 }
 
 /** 图像标签检测结果。 */
@@ -121,37 +121,37 @@ declare interface DetectLabelItem {
 /** 图库信息。 */
 declare interface GroupInfo {
   /** 图库Id。 */
-  GroupId: string;
+  GroupId?: string;
   /** 图库名称。 */
-  GroupName: string;
+  GroupName?: string;
   /** 图库简介。 */
-  Brief: string;
+  Brief?: string;
   /** 图库容量。 */
-  MaxCapacity: number;
+  MaxCapacity?: number;
   /** 该库的访问限频 。 */
-  MaxQps: number;
+  MaxQps?: number;
   /** 图库类型，对应不同服务类型，默认为1。建议手动调整为4～6，1～3为历史版本，不推荐。参数值：4：在自建图库中搜索相同原图，可支持裁剪、翻转、调色、加水印后的图片搜索，适用于图片版权保护、原图查询等场景。5：在自建图库中搜索相同或相似的商品图片，适用于商品分类、检索、推荐等电商场景。6：在自建图片库中搜索与输入图片高度相似的图片，适用于相似图案、logo、纹理等图像元素的搜索。 */
-  GroupType: number;
+  GroupType?: number;
   /** 图库图片数量。 */
-  PicCount: number;
+  PicCount?: number;
   /** 图库创建时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 图库更新时间。 */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** 图片信息 */
 declare interface ImageInfo {
   /** 图片名称。 */
-  EntityId: string;
+  EntityId?: string;
   /** 用户自定义的内容。 */
-  CustomContent: string;
+  CustomContent?: string;
   /** 图片自定义标签，JSON格式。 */
-  Tags: string;
+  Tags?: string;
   /** 图片名称。 */
-  PicName: string;
+  PicName?: string;
   /** 相似度。 */
-  Score: number;
+  Score?: number;
 }
 
 /** 图像主体区域坐标 */
@@ -169,9 +169,9 @@ declare interface ImageRect {
 /** 图片标签。 */
 declare interface ImageTag {
   /** 标签内容。 */
-  Name: string;
+  Name?: string;
   /** 置信度范围在0-100之间。值越高，表示目标为相应结果的可能性越高。 */
-  Confidence: number;
+  Confidence?: number;
 }
 
 /** 图像的主体信息。 */
@@ -201,19 +201,19 @@ declare interface Pet {
 /** 检测到的单个商品结构体 */
 declare interface Product {
   /** 图片中商品的三级分类识别结果，选取所有三级分类中的置信度最大者 */
-  Name: string;
+  Name?: string;
   /** 三级商品分类对应的一级分类和二级分类，两级之间用“-”（中划线）隔开，例如商品名称是“硬盘”，那么Parents输出为“电脑、办公-电脑配件” */
-  Parents: string;
+  Parents?: string;
   /** 算法对于Name的置信度，0-100之间，值越高，表示对于Name越确定 */
-  Confidence: number;
+  Confidence?: number;
   /** 商品坐标X轴的最小值 */
-  XMin: number;
+  XMin?: number;
   /** 商品坐标Y轴的最小值 */
-  YMin: number;
+  YMin?: number;
   /** 商品坐标X轴的最大值 */
-  XMax: number;
+  XMax?: number;
   /** 商品坐标Y轴的最大值 */
-  YMax: number;
+  YMax?: number;
 }
 
 /** 具体坐标，可用来判断边界 */
@@ -237,19 +237,19 @@ declare interface AssessQualityRequest {
 
 declare interface AssessQualityResponse {
   /** 取值为TRUE或FALSE，TRUE为长图，FALSE为正常图，长图定义为长宽比大于等于3或小于等于1/3的图片。 */
-  LongImage: boolean;
+  LongImage?: boolean;
   /** 取值为TRUE或FALSE，TRUE为黑白图，FALSE为否。黑白图即灰度图，指红绿蓝三个通道都是以灰度色阶显示的图片，并非视觉上的“黑白图片”。 */
-  BlackAndWhite: boolean;
+  BlackAndWhite?: boolean;
   /** 取值为TRUE或FALSE，TRUE为小图，FALSE为否, 小图定义为最长边小于179像素的图片。当一张图片被判断为小图时，不建议做推荐和展示，其他字段统一输出为0或FALSE。 */
-  SmallImage: boolean;
+  SmallImage?: boolean;
   /** 取值为TRUE或FALSE，TRUE为大图，FALSE为否，定义为最短边大于1000像素的图片 */
-  BigImage: boolean;
+  BigImage?: boolean;
   /** 取值为TRUE或FALSE，TRUE为纯色图或纯文字图，即没有内容或只有简单内容的图片，FALSE为正常图片。 */
-  PureImage: boolean;
+  PureImage?: boolean;
   /** 综合评分。图像清晰度的得分，对图片的噪声、曝光、模糊、压缩等因素进行综合评估，取值为[0, 100]，值越大，越清晰。一般大于50为较清晰图片，标准可以自行把握。 */
-  ClarityScore: number;
+  ClarityScore?: number;
   /** 综合评分。图像美观度得分， 从构图、色彩等多个艺术性维度评价图片，取值为[0, 100]，值越大，越美观。一般大于50为较美观图片，标准可以自行把握。 */
-  AestheticScore: number;
+  AestheticScore?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -299,7 +299,7 @@ declare interface CreateImageRequest {
 
 declare interface CreateImageResponse {
   /** 输入图的主体信息。若启用主体识别且在请求中指定了类目ID或主体区域，以指定的主体为准。若启用主体识别且没有指定，以最大面积主体为准。**注意：仅服务类型为商品图像搜索时才生效。** */
-  Object: ObjectInfo | null;
+  Object?: ObjectInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -317,19 +317,19 @@ declare interface CropImageRequest {
 
 declare interface CropImageResponse {
   /** 裁剪区域左上角X坐标值 */
-  X: number;
+  X?: number;
   /** 裁剪区域左上角Y坐标值 */
-  Y: number;
+  Y?: number;
   /** 裁剪区域的宽度，单位为像素 */
-  Width: number;
+  Width?: number;
   /** 裁剪区域的高度，单位为像素 */
-  Height: number;
+  Height?: number;
   /** 原图宽度，单位为像素 */
-  OriginalWidth: number;
+  OriginalWidth?: number;
   /** 原图高度，单位为像素 */
-  OriginalHeight: number;
+  OriginalHeight?: number;
   /** 0：抠图正常；1：原图过长，指原图的高度是宽度的1.8倍以上；2：原图过宽，指原图的宽度是高度的1.8倍以上；3：抠图区域过长，指抠图的高度是主体备选框高度的1.6倍以上；4：抠图区域过宽，指当没有检测到人脸时，抠图区域宽度是检测出的原图主体区域宽度的1.6倍以上；5：纯色图，指裁剪区域视觉较为单一、缺乏主体部分 ；6：宽高比异常，指Width : Height取值超出[1, 2.5]的范围；以上是辅助决策的参考建议，可以根据业务需求选择采纳或忽视。 */
-  CropResult: number;
+  CropResult?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -359,7 +359,7 @@ declare interface DescribeGroupsRequest {
 
 declare interface DescribeGroupsResponse {
   /** 图库信息 */
-  Groups?: GroupInfo[] | null;
+  Groups?: GroupInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -375,11 +375,11 @@ declare interface DescribeImagesRequest {
 
 declare interface DescribeImagesResponse {
   /** 图库名称。 */
-  GroupId: string;
+  GroupId?: string;
   /** 物品ID。 */
-  EntityId: string;
+  EntityId?: string;
   /** 图片信息。 */
-  ImageInfos: ImageInfo[];
+  ImageInfos?: ImageInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -397,7 +397,7 @@ declare interface DetectChefDressRequest {
 
 declare interface DetectChefDressResponse {
   /** 识别到的人体属性信息。单个人体属性信息包括人体检测置信度，属性信息，人体检测框。 */
-  Bodies: AttributesForBody[] | null;
+  Bodies?: AttributesForBody[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -411,9 +411,9 @@ declare interface DetectDisgustRequest {
 
 declare interface DetectDisgustResponse {
   /** 对于图片中包含恶心内容的置信度，取值[0,1]，一般超过0.5则表明可能是恶心图片。 */
-  Confidence: number;
+  Confidence?: number;
   /** 与图像内容最相似的恶心内容的类别，包含腐烂、密集、畸形、血腥、蛇、虫子、牙齿等。 */
-  Type: string;
+  Type?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -427,9 +427,9 @@ declare interface DetectEnvelopeRequest {
 
 declare interface DetectEnvelopeResponse {
   /** 一级标签结果数组。识别是否文件封。 */
-  FirstTags: ImageTag[] | null;
+  FirstTags?: ImageTag[];
   /** 二级标签结果数组。识别文件封正反面。 */
-  SecondTags: ImageTag[] | null;
+  SecondTags?: ImageTag[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -445,17 +445,17 @@ declare interface DetectLabelBetaRequest {
 
 declare interface DetectLabelBetaResponse {
   /** Web网络版标签结果数组。如未选择WEB场景，则为空。 */
-  Labels: DetectLabelItem[] | null;
+  Labels?: DetectLabelItem[] | null;
   /** Camera摄像头版标签结果数组。如未选择CAMERA场景，则为空。 */
-  CameraLabels: DetectLabelItem[] | null;
+  CameraLabels?: DetectLabelItem[] | null;
   /** Album相册版标签结果数组。如未选择ALBUM场景，则为空。 */
-  AlbumLabels: DetectLabelItem[] | null;
+  AlbumLabels?: DetectLabelItem[] | null;
   /** News新闻版标签结果数组。如未选择NEWS场景，则为空。新闻版目前为测试阶段，暂不提供每个标签的一级、二级分类信息的输出。 */
-  NewsLabels: DetectLabelItem[] | null;
+  NewsLabels?: DetectLabelItem[] | null;
   /** 非实拍标签 */
-  NoneCamLabels: DetectLabelItem[] | null;
+  NoneCamLabels?: DetectLabelItem[] | null;
   /** 识别结果 */
-  LocationLabels: Product[] | null;
+  LocationLabels?: Product[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -469,7 +469,7 @@ declare interface DetectLabelProRequest {
 
 declare interface DetectLabelProResponse {
   /** 返回标签数组。 */
-  Labels: DetectLabelItem[] | null;
+  Labels?: DetectLabelItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -485,13 +485,13 @@ declare interface DetectLabelRequest {
 
 declare interface DetectLabelResponse {
   /** Web网络版标签结果数组。如未选择WEB场景，则为空。 */
-  Labels: DetectLabelItem[] | null;
+  Labels?: DetectLabelItem[] | null;
   /** Camera摄像头版标签结果数组。如未选择CAMERA场景，则为空。 */
-  CameraLabels: DetectLabelItem[] | null;
+  CameraLabels?: DetectLabelItem[] | null;
   /** Album相册版标签结果数组。如未选择ALBUM场景，则为空。 */
-  AlbumLabels: DetectLabelItem[] | null;
+  AlbumLabels?: DetectLabelItem[] | null;
   /** News新闻版标签结果数组。如未选择NEWS场景，则为空。新闻版目前为测试阶段，暂不提供每个标签的一级、二级分类信息的输出。 */
-  NewsLabels: DetectLabelItem[] | null;
+  NewsLabels?: DetectLabelItem[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -521,7 +521,7 @@ declare interface DetectPetRequest {
 
 declare interface DetectPetResponse {
   /** 识别出图片中的宠物信息列表。 */
-  Pets: Pet[];
+  Pets?: Pet[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -535,7 +535,7 @@ declare interface DetectProductRequest {
 
 declare interface DetectProductResponse {
   /** 商品识别结果数组 */
-  Products: Product[];
+  Products?: Product[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -553,7 +553,7 @@ declare interface DetectSecurityRequest {
 
 declare interface DetectSecurityResponse {
   /** 识别到的人体属性信息。单个人体属性信息包括人体检测置信度，属性信息，人体检测框。 */
-  Bodies?: AttributesForBody[] | null;
+  Bodies?: AttributesForBody[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -567,7 +567,7 @@ declare interface EnhanceImageRequest {
 
 declare interface EnhanceImageResponse {
   /** 增强后图片的base64编码。 */
-  EnhancedImage: string;
+  EnhancedImage?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -597,9 +597,9 @@ declare interface RecognizeCarRequest {
 
 declare interface RecognizeCarResponse {
   /** 汽车的四个矩形顶点坐标，如果图片中存在多辆车，则输出最大车辆的坐标。 */
-  CarCoords: Coord[];
+  CarCoords?: Coord[];
   /** 车辆属性识别的结果数组，如果识别到多辆车，则会输出每辆车的top1结果。 */
-  CarTags: CarTagItem[];
+  CarTags?: CarTagItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -617,7 +617,7 @@ declare interface SearchImageRequest {
   Offset?: number;
   /** 匹配阈值。只有图片相似度分数超过匹配阈值的结果才会返回。当MatchThreshold为0（默认值）时，各服务类型将按照以下默认的匹配阈值进行结果过滤：• 通用图像搜索1.0版：50。• 商品图像搜索2.0升级版：45。• 商品图像搜索1.0版：28。• 图案花纹搜索1.0版：56。建议：可以手动调整MatchThreshold值来控制输出结果的范围。如果发现无检索结果，可能是因为图片相似度较低导致检索结果被匹配阈值过滤，建议调整为较低的阈值后再次尝试检索。 */
   MatchThreshold?: number;
-  /** 标签过滤条件。针对创建图片时提交的Tags信息进行条件过滤。支持>、>=、 <、 <=、=，!=，多个条件之间支持AND和OR进行连接。 */
+  /** 标签过滤条件。针对创建图片时提交的Tags信息进行条件过滤。支持>、>=、 <、 <=、=，!=，多个条件之间支持AND和OR进行连接。最大支持64字符。 */
   Filter?: string;
   /** 图像主体区域。若设置主体区域，提取指定的区域进行检索。 */
   ImageRect?: ImageRect;
@@ -629,11 +629,11 @@ declare interface SearchImageRequest {
 
 declare interface SearchImageResponse {
   /** 返回结果数量。 */
-  Count: number;
+  Count?: number;
   /** 图片信息。 */
-  ImageInfos: ImageInfo[] | null;
+  ImageInfos?: ImageInfo[] | null;
   /** 输入图的主体信息。若启用主体识别且在请求中指定了类目ID或主体区域，以指定的主体为准。若启用主体识别且没有指定，以最大面积主体为准。**注意：仅服务类型为商品图像搜索时才生效。** */
-  Object: ObjectInfo | null;
+  Object?: ObjectInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

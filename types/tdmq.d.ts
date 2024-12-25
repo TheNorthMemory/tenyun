@@ -224,7 +224,7 @@ declare interface CmqQueue {
 
 /** cmq订阅返回参数 */
 declare interface CmqSubscription {
-  /** 订阅名字，在单个地域同一帐号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
+  /** 订阅名字，在单个地域同一账号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
   SubscriptionName?: string | null;
   /** 订阅 ID。订阅 ID 在拉取监控数据时会用到。 */
   SubscriptionId?: string | null;
@@ -4402,6 +4402,22 @@ declare interface ModifyPublicNetworkAccessPointResponse {
   RequestId?: string;
 }
 
+declare interface ModifyPublicNetworkSecurityPolicyRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 策略列表 */
+  PolicyList: SecurityPolicy[];
+}
+
+declare interface ModifyPublicNetworkSecurityPolicyResponse {
+  /** SUCCESS或者FAILURE */
+  ModifyResult?: string;
+  /** 集群id */
+  InstanceId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyRabbitMQUserRequest {
   /** 集群实例Id */
   InstanceId: string;
@@ -5153,6 +5169,8 @@ declare interface Tdmq {
   ModifyEnvironmentRole(data: ModifyEnvironmentRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvironmentRoleResponse>;
   /** RabbitMQ专享版修改公网管控台，vpc15672开关 {@link ModifyPublicNetworkAccessPointRequest} {@link ModifyPublicNetworkAccessPointResponse} */
   ModifyPublicNetworkAccessPoint(data: ModifyPublicNetworkAccessPointRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPublicNetworkAccessPointResponse>;
+  /** 修改公网安全策略 {@link ModifyPublicNetworkSecurityPolicyRequest} {@link ModifyPublicNetworkSecurityPolicyResponse} */
+  ModifyPublicNetworkSecurityPolicy(data: ModifyPublicNetworkSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPublicNetworkSecurityPolicyResponse>;
   /** 修改RabbitMQ的用户 {@link ModifyRabbitMQUserRequest} {@link ModifyRabbitMQUserResponse} */
   ModifyRabbitMQUser(data: ModifyRabbitMQUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRabbitMQUserResponse>;
   /** 修改RabbitMQ专享版实例 {@link ModifyRabbitMQVipInstanceRequest} {@link ModifyRabbitMQVipInstanceResponse} */

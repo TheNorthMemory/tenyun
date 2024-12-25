@@ -727,13 +727,13 @@ declare interface LoginSettings {
 /** 描述了实例可变更的套餐。 */
 declare interface ModifyBundle {
   /** 更改实例套餐后需要补的差价。 */
-  ModifyPrice: Price;
+  ModifyPrice?: Price;
   /** 变更套餐状态。取值：SOLD_OUT：套餐售罄AVAILABLE：支持套餐变更UNAVAILABLE：暂不支持套餐变更 */
-  ModifyBundleState: string;
+  ModifyBundleState?: string;
   /** 套餐信息。 */
-  Bundle: Bundle;
+  Bundle?: Bundle;
   /** 不支持套餐变更原因信息。变更套餐状态为"AVAILABLE"时, 该信息为空 */
-  NotSupportModifyMessage: string | null;
+  NotSupportModifyMessage?: string | null;
 }
 
 /** 折扣详情信息。 */
@@ -753,7 +753,7 @@ declare interface PolicyDetail {
 /** 价格信息 */
 declare interface Price {
   /** 实例价格。 */
-  InstancePrice: InstancePrice;
+  InstancePrice?: InstancePrice;
 }
 
 /** 描述地域信息。 */
@@ -860,12 +860,12 @@ declare interface Software {
 
 /** 描述镜像软件详细信息。 */
 declare interface SoftwareDetail {
-  /** 详情唯一键。 */
-  Key: string;
-  /** 详情标题。 */
-  Title: string;
-  /** 详情值。 */
-  Value: string;
+  /** 软件的属性标识 */
+  Key?: string;
+  /** 软件的属性标识描述 */
+  Title?: string;
+  /** 软件的属性值 */
+  Value?: string;
 }
 
 /** 描述了操作系统所在块设备即系统盘的信息。 */

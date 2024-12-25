@@ -77,33 +77,33 @@ declare interface BigKeyTypeInfo {
 /** redis独享集群详细信息 */
 declare interface CDCResource {
   /** 用户的Appid */
-  AppId: number;
+  AppId?: number;
   /** 地域id */
-  RegionId: number;
+  RegionId?: number;
   /** 可用区id */
-  ZoneId: number;
+  ZoneId?: number;
   /** redis独享集群id */
-  RedisClusterId: string;
+  RedisClusterId?: string;
   /** 计费模式，1-包年包月，0-按量计费 */
-  PayMode: number;
+  PayMode?: number;
   /** 项目id */
-  ProjectId: number;
+  ProjectId?: number;
   /** 自动续费标识，0 - 默认状态（手动续费）；1 - 自动续费；2 - 明确不自动续费 */
-  AutoRenewFlag: number;
+  AutoRenewFlag?: number;
   /** 独享集群名称 */
-  ClusterName: string;
+  ClusterName?: string;
   /** 实例创建时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 实例到期时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 集群状态：1-流程中，2-运行中，3-已隔离 */
-  Status: number;
+  Status?: number;
   /** 基础管控资源包 */
-  BaseBundles: ResourceBundle[];
+  BaseBundles?: ResourceBundle[];
   /** 资源包列表 */
-  ResourceBundles: ResourceBundle[];
+  ResourceBundles?: ResourceBundle[];
   /** 所属本地专有集群id */
-  DedicatedClusterId: string;
+  DedicatedClusterId?: string;
 }
 
 /** 命令耗时 */
@@ -862,6 +862,14 @@ declare interface ResourceTag {
   TagKey: string;
   /** 标签 Key 对应的 Value。 */
   TagValue: string;
+}
+
+/** 秒级备份不存在的时间戳范围 */
+declare interface SecondLevelBackupMissingTimestamps {
+  /** 开始时间戳 */
+  StartTimeStamp?: number | null;
+  /** 结束时间戳 */
+  EndTimeStamp?: number | null;
 }
 
 /** 安全组规则 */
@@ -2224,6 +2232,26 @@ declare interface DescribeSSLStatusResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSecondLevelBackupInfoRequest {
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录Redis控制台在实例列表复制实例 ID。 */
+  InstanceId?: string;
+  /** 秒级备份时间戳，7天内 */
+  BackupTimestamp?: number;
+}
+
+declare interface DescribeSecondLevelBackupInfoResponse {
+  /** 备份记录ID */
+  BackupId?: string;
+  /** 备份时间戳 */
+  BackupTimestamp?: number;
+  /** 备份不存在的时间戳范围 */
+  MissingTimestamps?: SecondLevelBackupMissingTimestamps[] | null;
+  /** 实例开启秒级备份的时间戳 */
+  StartTimestamp?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSlowLogRequest {
   /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
@@ -2617,6 +2645,20 @@ declare interface ModifyInstanceAvailabilityZonesRequest {
 
 declare interface ModifyInstanceAvailabilityZonesResponse {
   /** 任务ID。 */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyInstanceBackupModeRequest {
+  /** 实例的ID，长度在12-36之间。 */
+  InstanceId: string;
+  /** 备份模式：- SecondLevelBackup 秒级备份- NormalLevelBackup 普通备份 */
+  BackupMode?: string;
+}
+
+declare interface ModifyInstanceBackupModeResponse {
+  /** 任务ID */
   TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3175,6 +3217,8 @@ declare interface Redis {
   DescribeReplicationGroupInstance(data: DescribeReplicationGroupInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReplicationGroupInstanceResponse>;
   /** 查询SSL状态 {@link DescribeSSLStatusRequest} {@link DescribeSSLStatusResponse} */
   DescribeSSLStatus(data: DescribeSSLStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSSLStatusResponse>;
+  /** 查询实例秒级备份信息 {@link DescribeSecondLevelBackupInfoRequest} {@link DescribeSecondLevelBackupInfoResponse} */
+  DescribeSecondLevelBackupInfo(data?: DescribeSecondLevelBackupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecondLevelBackupInfoResponse>;
   /** 查询实例慢查询记录 {@link DescribeSlowLogRequest} {@link DescribeSlowLogResponse} */
   DescribeSlowLog(data: DescribeSlowLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogResponse>;
   /** Redis查询任务结果 {@link DescribeTaskInfoRequest} {@link DescribeTaskInfoResponse} */
@@ -3219,6 +3263,8 @@ declare interface Redis {
   ModifyInstanceAccount(data: ModifyInstanceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceAccountResponse>;
   /** 修改实例可用区 {@link ModifyInstanceAvailabilityZonesRequest} {@link ModifyInstanceAvailabilityZonesResponse} */
   ModifyInstanceAvailabilityZones(data: ModifyInstanceAvailabilityZonesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceAvailabilityZonesResponse>;
+  /** 修改实例备份模式 {@link ModifyInstanceBackupModeRequest} {@link ModifyInstanceBackupModeResponse} */
+  ModifyInstanceBackupMode(data: ModifyInstanceBackupModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceBackupModeResponse>;
   /** 修改实例事件 {@link ModifyInstanceEventRequest} {@link ModifyInstanceEventResponse} */
   ModifyInstanceEvent(data: ModifyInstanceEventRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceEventResponse>;
   /** 修改实例日志投递配置 {@link ModifyInstanceLogDeliveryRequest} {@link ModifyInstanceLogDeliveryResponse} */

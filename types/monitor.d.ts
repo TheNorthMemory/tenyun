@@ -320,6 +320,14 @@ declare interface AlarmPolicyTriggerTask {
   TaskConfig: string | null;
 }
 
+/** url鉴权 */
+declare interface BasicAuth {
+  /** 用户名 */
+  UserName?: string | null;
+  /** 密码 */
+  Password?: string | null;
+}
+
 /** 策略绑定实例维度信息 */
 declare interface BindingPolicyObjectDimension {
   /** 地域名 */
@@ -2156,6 +2164,30 @@ declare interface RecordingRuleSet {
   UpdatedAt?: string;
   /** 规则名称 */
   RuleName?: string | null;
+}
+
+/** 多写配置 */
+declare interface RemoteWrite {
+  /** 多写url */
+  URL: string;
+  /** RelabelConfig */
+  URLRelabelConfig?: string | null;
+  /** 鉴权 */
+  BasicAuth?: BasicAuth | null;
+  /** 最大block */
+  MaxBlockSize?: string | null;
+  /** Label */
+  Label?: string | null;
+  /** HTTP 额外添加的头 */
+  Headers?: RemoteWriteHeader[] | null;
+}
+
+/** Remote Write 协议额外添加的 HTTP 头 */
+declare interface RemoteWriteHeader {
+  /** HTTP 头的键 */
+  Key: string | null;
+  /** HTTP 头的值 */
+  Value?: string | null;
 }
 
 /** Prometheus 服务发现信息 */
@@ -4390,6 +4422,20 @@ declare interface DescribeRecordingRulesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRemoteURLsRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** url数组 */
+  RemoteURLs?: string[];
+}
+
+declare interface DescribeRemoteURLsResponse {
+  /** 多写配置 */
+  RemoteWrites?: RemoteWrite[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSSOAccountRequest {
   /** Grafana 实例 ID，例如：grafana-abcdefgh */
   InstanceId: string;
@@ -4828,6 +4874,18 @@ declare interface ModifyPrometheusTempRequest {
 }
 
 declare interface ModifyPrometheusTempResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyRemoteURLsRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 多写配置 */
+  RemoteWrites?: RemoteWrite[];
+}
+
+declare interface ModifyRemoteURLsResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5467,6 +5525,8 @@ declare interface Monitor {
   DescribePrometheusZones(data?: DescribePrometheusZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusZonesResponse>;
   /** 查询预聚合规则 {@link DescribeRecordingRulesRequest} {@link DescribeRecordingRulesResponse} */
   DescribeRecordingRules(data: DescribeRecordingRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordingRulesResponse>;
+  /** 获取多写配置详情 {@link DescribeRemoteURLsRequest} {@link DescribeRemoteURLsResponse} */
+  DescribeRemoteURLs(data: DescribeRemoteURLsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRemoteURLsResponse>;
   /** 列出授权账号 {@link DescribeSSOAccountRequest} {@link DescribeSSOAccountResponse} */
   DescribeSSOAccount(data: DescribeSSOAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSSOAccountResponse>;
   /** 列出服务发现列表 {@link DescribeServiceDiscoveryRequest} {@link DescribeServiceDiscoveryResponse} */
@@ -5519,6 +5579,8 @@ declare interface Monitor {
   ModifyPrometheusRecordRuleYaml(data: ModifyPrometheusRecordRuleYamlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusRecordRuleYamlResponse>;
   /** 修改模板实例 {@link ModifyPrometheusTempRequest} {@link ModifyPrometheusTempResponse} */
   ModifyPrometheusTemp(data: ModifyPrometheusTempRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrometheusTempResponse>;
+  /** 修改多写配置 {@link ModifyRemoteURLsRequest} {@link ModifyRemoteURLsResponse} */
+  ModifyRemoteURLs(data: ModifyRemoteURLsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRemoteURLsResponse>;
   /** 恢复 Grafana 实例 {@link ResumeGrafanaInstanceRequest} {@link ResumeGrafanaInstanceResponse} */
   ResumeGrafanaInstance(data: ResumeGrafanaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeGrafanaInstanceResponse>;
   /** 初始化TMP实例 {@link RunPrometheusInstanceRequest} {@link RunPrometheusInstanceResponse} */

@@ -5,21 +5,21 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 安全组入站规则 */
 declare interface Inbound {
   /** 策略，ACCEPT或者DROP。 */
-  Action: string;
+  Action?: string;
   /** 地址组id代表的地址集合。 */
-  AddressModule: string;
+  AddressModule?: string;
   /** 来源Ip或Ip段，例如192.168.0.0/16。 */
-  CidrIp: string;
+  CidrIp?: string;
   /** 描述。 */
-  Desc: string;
+  Desc?: string;
   /** 网络协议，支持udp、tcp等。 */
-  IpProtocol: string;
+  IpProtocol?: string;
   /** 端口。 */
-  PortRange: string;
+  PortRange?: string;
   /** 服务组id代表的协议和端口集合。 */
-  ServiceModule: string;
+  ServiceModule?: string;
   /** 安全组id代表的地址集合。 */
-  Id: string;
+  Id?: string;
 }
 
 /** 实例信息，用于实例列表 */
@@ -107,21 +107,21 @@ declare interface NodeInfo {
 /** 安全组出站规则 */
 declare interface Outbound {
   /** 策略，ACCEPT或者DROP。 */
-  Action: string;
+  Action?: string;
   /** 地址组id代表的地址集合。 */
-  AddressModule: string;
+  AddressModule?: string;
   /** 来源Ip或Ip段，例如192.168.0.0/16。 */
-  CidrIp: string;
+  CidrIp?: string;
   /** 描述。 */
-  Desc: string;
+  Desc?: string;
   /** 网络协议，支持udp、tcp等。 */
-  IpProtocol: string;
+  IpProtocol?: string;
   /** 端口。 */
-  PortRange: string;
+  PortRange?: string;
   /** 服务组id代表的协议和端口集合。 */
-  ServiceModule: string;
+  ServiceModule?: string;
   /** 安全组id代表的地址集合。 */
-  Id: string;
+  Id?: string;
 }
 
 /** 安全组规则 */

@@ -44,6 +44,8 @@ declare interface FusionUltraParam {
   BlurRadio?: number;
   /** 牙齿增强开关，默认取值为1牙齿增强，修复牙齿。当生成牙齿不好（如牙齿裂开）可以打开此开关0：牙齿增强关闭1：牙齿增强打开该参数仅对SwapModelType（模型类型）取值1-5生效 */
   TeethEnhanceRadio?: number;
+  /** 妆容迁移开关，默认取值为0。将素材模板的妆容迁移到融合结果上。即：如果希望妆容效果与模板图保持一致，可以打开此开关。0：妆容迁移关闭1：妆容迁移打开该参数仅对SwapModelType（模型类型）取值1-5生效 */
+  MakeupTransferRadio?: number;
 }
 
 /** 图片编码参数 */

@@ -5,17 +5,17 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 权限组 */
 declare interface AccessGroup {
   /** 权限组ID */
-  AccessGroupId: string;
+  AccessGroupId?: string;
   /** 权限组名称 */
-  AccessGroupName: string;
+  AccessGroupName?: string;
   /** 权限组描述 */
-  Description: string;
+  Description?: string;
   /** 创建时间 */
-  CreateTime: string;
-  /** VPC网络类型（1：CVM；2：黑石1.0） */
-  VpcType: number;
+  CreateTime?: string;
+  /** VPC网络类型（1：CVM） */
+  VpcType?: number;
   /** VPC网络ID */
-  VpcId: string;
+  VpcId?: string;
 }
 
 /** 权限规则 */
@@ -161,7 +161,7 @@ declare interface AssociateAccessGroupsResponse {
 declare interface CreateAccessGroupRequest {
   /** 权限组名称 */
   AccessGroupName: string;
-  /** VPC网络类型（1：CVM；2：黑石1.0） */
+  /** VPC网络类型（1：CVM） */
   VpcType: number;
   /** VPC网络ID */
   VpcId: string;

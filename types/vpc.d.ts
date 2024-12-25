@@ -263,37 +263,37 @@ declare interface CCN {
   /** 实例服务质量，’PT’：白金，'AU'：金，'AG'：银。 */
   QosLevel?: string;
   /** 付费类型，PREPAID为预付费，POSTPAID为后付费。 */
-  InstanceChargeType?: string | null;
+  InstanceChargeType?: string;
   /** 限速类型，`INTER_REGION_LIMIT` 为地域间限速；`OUTER_REGION_LIMIT` 为地域出口限速。 */
-  BandwidthLimitType?: string | null;
+  BandwidthLimitType?: string;
   /** 标签键值对。 */
   TagSet?: Tag[];
   /** 是否支持云联网路由优先级的功能。`False`：不支持，`True`：支持。 */
   RoutePriorityFlag?: boolean;
   /** 实例关联的路由表个数。 */
-  RouteTableCount?: number | null;
+  RouteTableCount?: number;
   /** 是否开启云联网多路由表特性。`False`：未开启，`True`：开启。 */
-  RouteTableFlag?: boolean | null;
+  RouteTableFlag?: boolean;
   /** `true`：实例已被封禁，流量不通，`false`:解封禁。 */
-  IsSecurityLock?: boolean | null;
+  IsSecurityLock?: boolean;
   /** 是否开启云联网路由传播策略。`False` 未开启，`True` 开启。 */
-  RouteBroadcastPolicyFlag?: boolean | null;
+  RouteBroadcastPolicyFlag?: boolean;
   /** 是否开启等价路由功能。`False` 未开启，`True` 开启。 */
-  RouteECMPFlag?: boolean | null;
+  RouteECMPFlag?: boolean;
   /** 是否开启路由重叠功能。`False` 未开启，`True` 开启。 */
-  RouteOverlapFlag?: boolean | null;
+  RouteOverlapFlag?: boolean;
   /** 是否开启QOS。 */
-  TrafficMarkingPolicyFlag?: boolean | null;
+  TrafficMarkingPolicyFlag?: boolean;
   /** 是否开启路由表选择策略。 */
-  RouteSelectPolicyFlag?: boolean | null;
+  RouteSelectPolicyFlag?: boolean;
   /** 是否开启二层云联网通道。 */
-  DirectConnectAccelerateChannelFlag?: boolean | null;
+  DirectConnectAccelerateChannelFlag?: boolean;
   /** 是否支持ipv6路由表 */
-  Ipv6Flag?: boolean | null;
+  Ipv6Flag?: boolean;
   /** 是否支持路由表聚合策略 */
-  MrtbAggregatePolicyFlag?: boolean | null;
+  MrtbAggregatePolicyFlag?: boolean;
   /** 是否支持策略值 */
-  MrtbPolicyValueFlag?: boolean | null;
+  MrtbPolicyValueFlag?: boolean;
 }
 
 /** 云联网（CCN）关联实例（Instance）对象 */

@@ -160,6 +160,14 @@ declare interface CcInfo {
   CcPermission?: number;
 }
 
+/** 动态签署2.0合同参与人信息 */
+declare interface ChannelArchiveDynamicApproverData {
+  /** 签署方唯一编号，一个全局唯一的标识符，不同的流程不会出现冲突。 可以使用签署方的唯一编号来生成签署链接（也可以通过RecipientId来生成签署链接）。 */
+  SignId?: string;
+  /** 签署方角色编号，签署方角色编号是用于区分同一个流程中不同签署方的唯一标识。不同的流程会出现同样的签署方角色编号。 填写控件和签署控件都与特定的角色编号关联。 */
+  RecipientId?: string;
+}
+
 /** 用户计费使用情况详情 */
 declare interface ChannelBillUsageDetail {
   /** 合同流程ID，为32位字符串。 */
@@ -254,9 +262,9 @@ declare interface CommonFlowApprover {
   ApproverName?: string;
   /** 签署人手机号，saas企业签署人，个人签署人必传 */
   ApproverMobile?: string;
-  /** 签署方经办人的证件类型，支持以下类型ID_CARD : 居民身份证 (默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)OTHER_CARD_TYPE : 其他证件注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。` */
+  /** 签署方经办人的证件类型，支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)OTHER_CARD_TYPE : 其他证件注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。` */
   ApproverIdCardType?: string;
-  /** 签署方经办人的证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给香港居民，“M”字头签发给澳门居民；第2位至第11位为数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
+  /** 签署方经办人的证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   ApproverIdCardNumber?: string;
   /** 签署人Id，使用模板发起是，对应模板配置中的签署人RecipientId注意：模板发起时该字段必填 */
   RecipientId?: string;
@@ -396,6 +404,36 @@ declare interface DownloadFlowInfo {
   FlowIdList: string[];
 }
 
+/** 动态合同签署人结果 */
+declare interface DynamicFlowApproverResult {
+  /** 签署流程签署人在模板中对应的签署人Id；在非单方签署、以及非B2C签署的场景下必传，用于指定当前签署方在签署流程中的位置； */
+  RecipientId?: string;
+  /** 签署ID - 发起流程时系统自动补充 - 创建签署链接时，可以通过查询详情接口获得签署人的SignId，然后可传入此值为该签署人创建签署链接，无需再传姓名、手机号、证件号等其他信息 */
+  SignId?: string;
+  /** 签署人状态信息 */
+  ApproverStatus?: number;
+}
+
+/** 动态合同信息 */
+declare interface DynamicFlowInfo {
+  /** 合同流程ID，为32位字符串。 - 建议开发者妥善保存此流程ID，以便于顺利进行后续操作。 - 可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 - 不建议继续使用，请使用补充签署人结构体中的FlowId指定合同 */
+  FlowId: string;
+  /** 合同流程的参与方列表, 最多可支持50个参与方，可在列表中指定企业B端签署方和个人C端签署方的联系和认证方式等信息，不同类型的签署方传参方式可以参考文档 [签署方入参指引](https://qian.tencent.com/developers/partner/flow_approver)。 如果合同流程是有序签署，Approvers列表中参与人的顺序就是默认的签署顺序, 请确保列表中参与人的顺序符合实际签署顺序。 */
+  FlowApprovers: FlowApproverInfo[];
+  /** 个人自动签名的使用场景包括以下, 个人自动签署(即ApproverType设置成个人自动签署时)业务此值必传： **E_PRESCRIPTION_AUTO_SIGN**：电子处方单（医疗自动签） **OTHER** : 通用场景 注: `个人自动签名场景是白名单功能，使用前请与对接的客户经理联系沟通。` */
+  AutoSignScene?: string;
+  /** 签署人校验方式 VerifyCheck: 人脸识别（默认） MobileCheck：手机号验证，用户手机号和参与方手机号（ApproverMobile）相同即可查看合同内容（当手写签名方式为OCR_ESIGN时，该校验方式无效，因为这种签名方式依赖实名认证） 参数说明：可选人脸识别或手机号验证两种方式，若选择后者，未实名个人签署方在签署合同时，无需经过实名认证和意愿确认两次人脸识别，该能力仅适用于个人签署方。 */
+  ApproverVerifyType?: string;
+}
+
+/** 动态合同补充签署人结果 */
+declare interface DynamicFlowResult {
+  /** 合同流程ID，为32位字符串。 建议开发者妥善保存此流程ID，以便于顺利进行后续操作。 [点击查看FlowId在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/05af26573d5106763b4cfbb9f7c64b41.png) */
+  FlowId?: string;
+  /** 动态合同签署人补充结果信息列表 */
+  DynamicFlowApproverList?: DynamicFlowApproverResult[];
+}
+
 /** 创建嵌入式页面url个性化参数 */
 declare interface EmbedUrlOption {
   /** 合同详情预览，允许展示控件信息true：允许在合同详情页展示控件false：（默认）不允许在合同详情页展示控件 */
@@ -444,9 +482,9 @@ declare interface FillApproverInfo {
   OrganizationOpenId?: string;
   /** 签署企业非渠道子客，默认为false，即表示同一渠道下的企业；如果为true，则目前表示接收方企业为SaaS企业, 为渠道子客时，OrganizationOpenId 必传 */
   NotChannelOrganization?: boolean;
-  /** 签署方经办人的证件类型，支持以下类型ID_CARD 中国大陆居民身份证HONGKONG_AND_MACAO 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)OTHER_CARD_TYPE 其他证件注: `1.其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。``2.补充个人签署方时，若该用户已在电子签完成实名则可通过指定姓名和证件类型、证件号码完成补充。` */
+  /** 签署方经办人的证件类型，支持以下类型ID_CARD 中国大陆居民身份证HONGKONG_AND_MACAO 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 中国港澳台居民居住证(格式同中国大陆居民身份证)OTHER_CARD_TYPE 其他证件注: `1.其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。``2.补充个人签署方时，若该用户已在电子签完成实名则可通过指定姓名和证件类型、证件号码完成补充。` */
   ApproverIdCardType?: string;
-  /** 签署方经办人的证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给香港居民，“M”字头签发给澳门居民；第2位至第11位为数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。注：`补充个人签署方时，若该用户已在电子签完成实名则可通过指定姓名和证件类型、证件号码完成补充。` */
+  /** 签署方经办人的证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。注：`补充个人签署方时，若该用户已在电子签完成实名则可通过指定姓名和证件类型、证件号码完成补充。` */
   ApproverIdCardNumber?: string;
   /** 合同流程ID- 补充合同组子合同动态签署人时必传。- 补充正常合同，请阅读：补充签署人接口接口使用说明 */
   FlowId?: string;
@@ -518,9 +556,9 @@ declare interface FlowApproverDetail {
 declare interface FlowApproverInfo {
   /** 签署方经办人的姓名。经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。 */
   Name?: string;
-  /** 签署方经办人的证件类型，支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)OTHER_CARD_TYPE : 其他证件注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。` */
+  /** 签署方经办人的证件类型，支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)OTHER_CARD_TYPE : 其他证件注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。` */
   IdCardType?: string;
-  /** 签署方经办人的证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给香港居民，“M”字头签发给澳门居民；第2位至第11位为数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
+  /** 签署方经办人的证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   IdCardNumber?: string;
   /** 签署方经办人手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)， 不支持海外手机号。请确认手机号所有方为此合同签署方。 */
   Mobile?: string;
@@ -554,7 +592,7 @@ declare interface FlowApproverInfo {
   ApproverNeedSignReview?: boolean;
   /** 指定个人签署方查看合同的校验方式,可以传值如下: **1** : （默认）人脸识别,人脸识别后才能合同内容 **2** : 手机号验证, 用户手机号和参与方手机号(ApproverMobile)相同即可查看合同内容（当手写签名方式为OCR_ESIGN时，该校验方式无效，因为这种签名方式依赖实名认证）注: 如果合同流程设置ApproverVerifyType查看合同的校验方式, 则忽略此签署人的查看合同的校验方式此字段可传多个校验方式 */
   ApproverVerifyTypes?: number[];
-  /** 签署人签署合同时的认证方式 **1** :人脸认证 **2** :签署密码 **3** :运营商三要素（如果是港澳台客户，建议不要选择这个）**5**：设备指纹识别，需要对比手机机主预留的指纹信息，校验一致才能成功进行合同签署。（iOS系统暂不支持该校验方式）**6**：设备面容识别，需要对比手机机主预留的人脸信息，校验一致才能成功进行合同签署。（Android系统暂不支持该校验方式）默认为1(人脸认证 ),2(签署密码),3(运营商三要素),5(设备指纹识别),6(设备面容识别)注: 1. 用模板创建合同场景, 签署人的认证方式需要在配置模板的时候指定, 在创建合同重新指定无效2. 运营商三要素认证方式对手机号运营商及前缀有限制,可以参考[运营商支持列表类](https://qian.tencent.com/developers/partner/mobile_support)得到具体的支持说明3. 校验方式不允许只包含设备指纹识别和设备面容识别，至少需要再增加一种其他校验方式。4. 设备指纹识别和设备面容识别只支持小程序使用，其他端暂不支持。 */
+  /** 签署人签署合同时的认证方式 **1** :人脸认证 **2** :签署密码 **3** :运营商三要素（如果是港澳台客户，建议不要选择这个）**5**：设备指纹识别，需要对比手机机主预留的指纹信息，校验一致才能成功进行合同签署。（iOS系统暂不支持该校验方式）**6**：设备面容识别，需要对比手机机主预留的人脸信息，校验一致才能成功进行合同签署。（Android系统暂不支持该校验方式）默认为：1(人脸认证 ),2(签署密码),3(运营商三要素),5(设备指纹识别),6(设备面容识别)注: 1. 用模板创建合同场景, 签署人的认证方式需要在配置模板的时候指定, 在创建合同重新指定无效2. 运营商三要素认证方式对手机号运营商及前缀有限制,可以参考[运营商支持列表类](https://qian.tencent.com/developers/partner/mobile_support)得到具体的支持说明3. 校验方式不允许只包含设备指纹识别和设备面容识别，至少需要再增加一种其他校验方式。4. 设备指纹识别和设备面容识别只支持小程序使用，其他端暂不支持。 */
   ApproverSignTypes?: number[];
   /** 签署ID- 发起流程时系统自动补充- 创建签署链接时，可以通过查询详情接口获得签署人的SignId，然后可传入此值为该签署人创建签署链接，无需再传姓名、手机号、证件号等其他信息 */
   SignId?: string;
@@ -824,9 +862,9 @@ declare interface NeedReviewApproverInfo {
   ApproverName: string;
   /** 签署方经办人手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。 请确认手机号所有方为此合同签署方。 */
   ApproverMobile?: string;
-  /** 签署方经办人的证件类型，支持以下类型ID_CARD 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)OTHER_CARD_TYPE 其他证件注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。` */
+  /** 签署方经办人的证件类型，支持以下类型ID_CARD 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 中国港澳台居民居住证(格式同中国大陆居民身份证)OTHER_CARD_TYPE 其他证件注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。` */
   ApproverIdCardType?: string;
-  /** 签署方经办人的证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给香港居民，“M”字头签发给澳门居民；第2位至第11位为数字。。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
+  /** 签署方经办人的证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。。中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   ApproverIdCardNumber?: string;
   /** 组织机构名称。请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。如果签署方是企业签署方(approverType = 0 或者 approverType = 3)， 则企业名称必填。 */
   OrganizationName?: string;
@@ -864,6 +902,36 @@ declare interface OrganizationAuthUrl {
   AuthUrl?: string;
   /** 企业批量注册的错误信息，例如：企业三要素不通过 */
   ErrorMessage?: string;
+}
+
+/** 企业认证信息参数， 需要保证这些参数跟营业执照中的信息一致。 */
+declare interface OrganizationCommonInfo {
+  /** 组织机构名称。请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。 */
+  OrganizationName: string | null;
+  /** 组织机构企业统一社会信用代码。请确认该企业统一社会信用代码与企业营业执照中注册的统一社会信用代码一致。 */
+  UniformSocialCreditCode: string | null;
+  /** 组织机构法人的姓名。请确认该企业统一社会信用代码与企业营业执照中注册的法人姓名一致。 */
+  LegalName: string | null;
+  /** 组织机构法人的证件类型 */
+  LegalIdCardType?: string | null;
+  /** 组织机构法人的证件号码 */
+  LegalIdCardNumber?: string | null;
+  /** 组织机构超管姓名。 */
+  AdminName?: string | null;
+  /** 组织机构超管手机号。 */
+  AdminMobile?: string | null;
+  /** 组织机构超管证件类型 */
+  AdminIdCardType?: string | null;
+  /** 组织机构超管证件号码 */
+  AdminIdCardNumber?: string | null;
+  /** 原超管姓名 */
+  OldAdminName?: string | null;
+  /** 原超管手机号 */
+  OldAdminMobile?: string | null;
+  /** 原超管证件类型 */
+  OldAdminIdCardType?: string | null;
+  /** 原超管证件号码 */
+  OldAdminIdCardNumber?: string | null;
 }
 
 /** 机构信息 */
@@ -956,7 +1024,7 @@ declare interface ProxyOrganizationOperator {
   Id: string;
   /** 员工的姓名，最大长度50个字符员工的姓名将用于身份认证和电子签名，请确保填写的姓名为真实姓名，而非昵称等代名。 */
   Name?: string;
-  /** 签署方经办人的证件类型，支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
+  /** 签署方经办人的证件类型，支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证) */
   IdCardType?: string;
   /** 经办人证件号 */
   IdCardNumber?: string;
@@ -1019,14 +1087,14 @@ declare interface RegistrationOrganizationInfo {
   /** 组织机构法人的姓名。请确认该企业统一社会信用代码与企业营业执照中注册的法人姓名一致。 */
   LegalName: string;
   /** 组织机构企业注册地址。请确认该企业注册地址与企业营业执照中注册的地址一致。 */
-  Address: string;
+  Address?: string;
   /** 组织机构超管姓名。在注册流程中，必须是超管本人进行操作。如果法人作为超管管理组织机构,超管姓名就是法人姓名 */
   AdminName?: string;
   /** 组织机构超管手机号。在注册流程中，这个手机号必须跟操作人在电子签注册的个人手机号一致。 */
   AdminMobile?: string;
   /** 可选的此企业允许的授权方式, 可以设置的方式有:1：上传授权书2：法人授权超管5：授权书+对公打款注:`1. 当前仅支持一种认证方式``2. 如果当前的企业类型是政府/事业单位, 则只支持上传授权书+对公打款``3. 如果当前操作人是法人,则是法人认证` */
   AuthorizationTypes?: number[];
-  /** 经办人的证件类型，支持以下类型ID_CARD : 居民身份证 (默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
+  /** 经办人的证件类型，支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证) */
   AdminIdCardType?: string;
   /** 经办人的证件号 */
   AdminIdCardNumber?: string;
@@ -1048,9 +1116,9 @@ declare interface ReleasedApprover {
   ReleasedApproverRecipientId?: string;
   /** 签署人姓名，最大长度50个字。 */
   Name?: string;
-  /** 签署方经办人的证件类型，支持以下类型ID_CARD : 居民身份证(默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
+  /** 签署方经办人的证件类型，支持以下类型ID_CARD : 中国大陆居民身份证(默认值)HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证) */
   IdCardType?: string;
-  /** 证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成(如存在X，请大写)。港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给香港居民，“M”字头签发给澳门居民；第2位至第11位为数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
+  /** 证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成(如存在X，请大写)。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   IdCardNumber?: string;
   /** 签署人手机号。 */
   Mobile?: string;
@@ -1068,17 +1136,17 @@ declare interface ReleasedApprover {
   ApproverSignSealId?: string;
 }
 
-/** 解除协议文档中内容信息，包括但不限于：解除理由、解除后仍然有效的条款-保留条款、原合同事项处理-费用结算、原合同事项处理-其他事项、其他约定等。 */
+/** 解除协议文档中内容信息，包括但不限于：解除理由、解除后仍然有效的条款-保留条款、原合同事项处理-费用结算、原合同事项处理-其他事项、其他约定等。下面各种字段在解除协议中的位置参考：![image](https://qcloudimg.tencent-cloud.cn/raw/5087164cfe5a15fa3ced3180842d5da9.png) */
 declare interface RelieveInfo {
-  /** 解除理由，最大支持200个字 */
+  /** 解除理由，长度不能超过200，只能由中文、字母、数字、中文标点和英文标点组成(不支持表情)。 */
   Reason: string;
-  /** 解除后仍然有效的条款，保留条款，最大支持200个字 */
+  /** 解除后仍然有效的条款，保留条款，长度不能超过200，只能由中文、字母、数字、中文标点和英文标点组成(不支持表情)。 */
   RemainInForceItem?: string;
-  /** 原合同事项处理-费用结算，最大支持200个字 */
+  /** 原合同事项处理-费用结算，长度不能超过200，只能由中文、字母、数字、中文标点和英文标点组成(不支持表情)。 */
   OriginalExpenseSettlement?: string;
-  /** 原合同事项处理-其他事项，最大支持200个字 */
+  /** 原合同事项处理-其他事项，长度不能超过200，只能由中文、字母、数字、中文标点和英文标点组成(不支持表情)。 */
   OriginalOtherSettlement?: string;
-  /** 其他约定，最大支持200个字 */
+  /** 其他约定（如约定的与解除协议存在冲突的，以【其他约定】为准），最大支持200个字，只能由中文、字母、数字、中文标点和英文标点组成(不支持表情)。 */
   OtherDeals?: string;
 }
 
@@ -1110,6 +1178,8 @@ declare interface SignQrCode {
   QrCodeUrl?: string;
   /** 二维码的有截止时间，格式为Unix标准时间戳（秒），可以通过入参的QrEffectiveDay来设置有效期，默认为7天有效期。 一旦超过二维码的有效期限，该二维码将自动失效。 */
   ExpiredTime?: number;
+  /** 微信小程序二维码 */
+  WeixinQrCodeUrl?: string;
 }
 
 /** 流程签署二维码的签署信息，适用于客户系统整合二维码功能。 通过链接，用户可直接访问电子签名小程序并签署合同。 */
@@ -1246,7 +1316,7 @@ declare interface TemplateInfo {
 declare interface UploadFile {
   /** Base64编码后的文件内容 */
   FileBody: string;
-  /** 文件名，最大长度不超过200字符 */
+  /** 文件的名字。文件名的最大长度应不超过200个字符，并且文件名的后缀必须反映其文件类型。例如，PDF文件应以“.pdf”结尾，如“XXX.pdf”，而Word文件应以“.doc”或“.docx”结尾，如“XXX.doc”或“XXX.docx”。 */
   FileName?: string;
 }
 
@@ -1284,9 +1354,9 @@ declare interface UserInfo {
 declare interface UserThreeFactor {
   /** 签署方经办人的姓名。经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。 */
   Name: string;
-  /** 证件类型，支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
+  /** 证件类型，支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证) */
   IdCardType: string;
-  /** 证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给香港居民，“M”字头签发给澳门居民；第2位至第11位为数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
+  /** 证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   IdCardNumber: string;
 }
 
@@ -1302,6 +1372,22 @@ declare interface WebThemeConfig {
   HideAuthenticateNavigationBar?: boolean;
   /** 隐藏企业认证顶部logo，取值如下： **true**：隐藏企业认证顶部logo **false**：显示企业认证顶部logo（默认） */
   HideAuthenticateTopLogo?: boolean;
+}
+
+declare interface ArchiveDynamicFlowRequest {
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId第三方平台子客企业和员工必须已经过实名认证 */
+  Agent: Agent;
+  /** 合同流程ID */
+  FlowId: string;
+}
+
+declare interface ArchiveDynamicFlowResponse {
+  /** 合同流程ID */
+  FlowId?: string;
+  /** 动态签署人的参与人信息 */
+  Approvers?: ChannelArchiveDynamicApproverData[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface ChannelBatchCancelFlowsRequest {
@@ -1437,9 +1523,9 @@ declare interface ChannelCreateBatchSignUrlRequest {
   Mobile?: string;
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator?: UserInfo;
-  /** 证件类型，支持以下类型**ID_CARD** : 中国大陆居民身份证 (默认值)**HONGKONG_AND_MACAO** : 港澳居民来往内地通行证**HONGKONG_MACAO_AND_TAIWAN** : 港澳台居民居住证(格式同居民身份证)注：`请确保和合同中填入的一致` */
+  /** 证件类型，支持以下类型**ID_CARD** : 中国大陆居民身份证 (默认值)**HONGKONG_AND_MACAO** : 中国港澳居民来往内地通行证**HONGKONG_MACAO_AND_TAIWAN** : 中国港澳台居民居住证(格式同中国大陆居民身份证)注：`请确保和合同中填入的一致` */
   IdCardType?: string;
-  /** 证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给香港居民，“M”字头签发给澳门居民；第2位至第11位为数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。注：`请确保和合同中填入的一致` */
+  /** 证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。注：`请确保和合同中填入的一致` */
   IdCardNumber?: string;
   /** 通知用户方式：**NONE** : 不通知（默认）**SMS** : 短信通知（发送短信通知到Mobile参数所传的手机号） */
   NotifyType?: string;
@@ -1502,6 +1588,20 @@ declare interface ChannelCreateConvertTaskApiRequest {
 declare interface ChannelCreateConvertTaskApiResponse {
   /** 接口返回的文件转换任务Id，可以调用接口查询转换任务状态获取转换任务的状态和转换后的文件资源Id。 */
   TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ChannelCreateDynamicFlowApproverRequest {
+  /** 动态合同信息 */
+  FillDynamicFlowList: DynamicFlowInfo[];
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 此接口下面信息必填。 渠道应用标识: Agent.AppId 第三方平台子客企业标识: Agent.ProxyOrganizationOpenId 第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId 第三方平台子客企业和员工必须已经经过实名认证 */
+  Agent?: Agent;
+}
+
+declare interface ChannelCreateDynamicFlowApproverResponse {
+  /** 动态合同补充结果列表 */
+  DynamicFlowResultList?: DynamicFlowResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1597,6 +1697,8 @@ declare interface ChannelCreateFlowByFilesRequest {
   NeedPreview?: boolean;
   /** 预览模式下产生的预览链接类型 **0** :(默认) 文件流 ,点开后下载预览的合同PDF文件 **1** :H5链接 ,点开后在浏览器中展示合同的样子注: `此参数在NeedPreview 为true时有效` */
   PreviewType?: number;
+  /** 是否开启动态合同（动态签署人2.0） **false** :(默认) 不开启动态合同（动态签署人2.0） **true** :开启动态合同（动态签署人2.0）,发起后可继续追加合同签署人 */
+  OpenDynamicFlow?: boolean;
 }
 
 declare interface ChannelCreateFlowByFilesResponse {
@@ -1829,7 +1931,7 @@ declare interface ChannelCreatePreparedPersonalEsignRequest {
   Agent: Agent;
   /** 个人用户姓名 */
   UserName: string;
-  /** 证件号码, 应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给香港居民，“M”字头签发给澳门居民；第2位至第11位为数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
+  /** 证件号码, 应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   IdCardNumber: string;
   /** 电子印章名字，1-50个中文字符注:`同一企业下电子印章名字不能相同` */
   SealName: string;
@@ -1837,7 +1939,7 @@ declare interface ChannelCreatePreparedPersonalEsignRequest {
   SealImage: string;
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator?: UserInfo;
-  /** 证件类型，支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)OTHER_CARD_TYPE : 其他注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。` */
+  /** 证件类型，支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)OTHER_CARD_TYPE : 其他注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。` */
   IdCardType?: string;
   /** 是否开启印章图片压缩处理，默认不开启，如需开启请设置为 true。当印章超过 2M 时建议开启，开启后图片的 hash 将发生变化。 */
   SealImageCompress?: boolean;
@@ -2521,7 +2623,7 @@ declare interface CreateConsoleLoginUrlRequest {
   AuthorizationTypes?: number[];
   /** 暂未开放 */
   Operator?: UserInfo;
-  /** 子客经办人身份证注意：`如果已同步，这里非空会更新同步的经办人身份证号，暂时只支持居民身份证类型`。 */
+  /** 子客经办人身份证注意：`如果已同步，这里非空会更新同步的经办人身份证号，暂时只支持中国大陆居民身份证类型`。 */
   ProxyOperatorIdCardNumber?: string;
   /** 认证完成跳转链接。注意：`此功能仅在Endpoint参数设置成 H5 或 PC时才有效`。 */
   AutoJumpUrl?: string;
@@ -2640,6 +2742,22 @@ declare interface CreateLegalSealQrCodeResponse {
   RequestId?: string;
 }
 
+declare interface CreateOrganizationAuthFileRequest {
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
+  Agent: Agent;
+  /** 企业授权书信息参数， 需要自行保证这些参数跟营业执照中的信息一致。 */
+  OrganizationCommonInfo?: OrganizationCommonInfo;
+  /** 授权书类型：- 0: 企业认证超管授权书- 1: 超管变更授权书- 2: 企业注销授权书 */
+  Type?: number;
+}
+
+declare interface CreateOrganizationAuthFileResponse {
+  /** 授权书链接，有效期5分钟。 */
+  FileUrl?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreatePartnerAutoSignAuthUrlRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
@@ -2671,9 +2789,9 @@ declare interface CreatePersonAuthCertificateImageRequest {
   Agent: Agent;
   /** 个人用户名称 */
   UserName: string;
-  /** 证件类型，支持以下类型 ID_CARD : 居民身份证 (默认值) HONGKONG_AND_MACAO : 港澳居民来往内地通行证 HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
+  /** 证件类型，支持以下类型 ID_CARD : 中国大陆居民身份证 (默认值) HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证 HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证) */
   IdCardType: string;
-  /** 证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给香港居民，“M”字头签发给澳门居民；第2位至第11位为数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
+  /** 证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   IdCardNumber: string;
   /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景 **OTHER** : 通用场景注: `不传默认为处方单场景，即E_PRESCRIPTION_AUTO_SIGN` */
   SceneKey?: string;
@@ -2743,9 +2861,9 @@ declare interface CreateSignUrlsRequest {
   Name?: string;
   /** 合同流程里边签署方经办人手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。注: `GenerateType为"PERSON"或"FOLLOWER"时必填` */
   Mobile?: string;
-  /** 证件类型，支持以下类型ID_CARD : 居民身份证HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
+  /** 证件类型，支持以下类型ID_CARD : 中国大陆居民身份证HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证) */
   IdCardType?: string;
-  /** 证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成(如存在X，请大写)。港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给香港居民，“M”字头签发给澳门居民；第2位至第11位为数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
+  /** 证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成(如存在X，请大写)。港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   IdCardNumber?: string;
   /** 第三方平台子客企业的企业的标识, 即OrganizationOpenId。 注: `1.GenerateType为"CHANNEL"时必填` `2.获取B端动态签署人领取链接时,可指定此字段来预先设定签署人的平台子客企业,预设后只能以该平台子客企业身份去领取合同并完成签署` */
   OrganizationOpenId?: string;
@@ -3163,9 +3281,9 @@ declare interface SyncProxyOrganizationRequest {
   ProxyLegalName?: string;
   /** 暂未开放 */
   Operator?: UserInfo;
-  /** 第三方平台子客企业法定代表人的证件类型，支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)注: `现在仅支持ID_CARD居民身份证类型` */
+  /** 第三方平台子客企业法定代表人的证件类型，支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)注: `现在仅支持ID_CARD中国大陆居民身份证类型` */
   ProxyLegalIdCardType?: string;
-  /** 第三方平台子客企业法定代表人的证件号码, 应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。 */
+  /** 第三方平台子客企业法定代表人的证件号码, 应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。 */
   ProxyLegalIdCardNumber?: string;
   /** 第三方平台子客企业详细住所，最大长度500个字符注：`需要符合省市区详情的格式例如： XX省XX市XX区街道具体地址` */
   ProxyAddress?: string;
@@ -3181,7 +3299,7 @@ declare interface UploadFilesRequest {
   Agent: Agent;
   /** 文件对应业务类型,可以选择的类型如下 **TEMPLATE** : 此上传的文件用户生成合同模板，文件类型支持.pdf/.doc/.docx/.html格式，如果非pdf文件需要通过创建文件转换任务转换后才能使用 **DOCUMENT** : 此文件用来发起合同流程，文件类型支持.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html，如果非pdf文件需要通过创建文件转换任务转换后才能使用 */
   BusinessType: string;
-  /** 上传文件内容数组，最多支持上传20个文件。 */
+  /** 上传文件内容数组，一次最多可上传20个文件。若上传多个文件，所有文件必须为相同类型，例如全部为PDF或全部为Word文件。不支持混合文件类型的上传。 */
   FileInfos?: UploadFile[];
   /** 操作者的信息 */
   Operator?: UserInfo;
@@ -3190,7 +3308,7 @@ declare interface UploadFilesRequest {
 declare interface UploadFilesResponse {
   /** 上传成功文件数量注: `如果一个文件上传失败, 则全部文件皆上传失败` */
   TotalCount?: number;
-  /** 文件资源ID数组，每个文件资源ID为32位字符串。建议开发者保存此资源ID，后续创建合同或创建合同流程需此资源ID。注:`有效期一个小时, 有效期内此文件id可以反复使用, 超过有效期无法使用` */
+  /** 文件资源ID数组，每个文件资源ID为32位字符串。建议开发者保存此资源ID，后续创建合同或创建合同流程需此资源ID。注:`有效期一个小时（超过一小时后系统不定期清理，会有部分时间差）, 有效期内此文件id可以反复使用, 超过有效期无法使用` */
   FileIds?: string[];
   /** 对应上传文件的下载链接，过期时间5分钟 */
   FileUrls?: string[];
@@ -4731,6 +4849,8 @@ declare namespace V20201222 {
 /** {@link Essbasic 腾讯电子签（基础版）} */
 declare interface Essbasic {
   (): Versions;
+  /** 结束动态签署流程 {@link ArchiveDynamicFlowRequest} {@link ArchiveDynamicFlowResponse} */
+  ArchiveDynamicFlow(data: ArchiveDynamicFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ArchiveDynamicFlowResponse>;
   /** 批量撤销合同流程 {@link ChannelBatchCancelFlowsRequest} {@link ChannelBatchCancelFlowsResponse} */
   ChannelBatchCancelFlows(data: ChannelBatchCancelFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelBatchCancelFlowsResponse>;
   /** 撤销合同流程 {@link ChannelCancelFlowRequest} {@link ChannelCancelFlowResponse} */
@@ -4749,6 +4869,8 @@ declare interface Essbasic {
   ChannelCreateBoundFlows(data: ChannelCreateBoundFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateBoundFlowsResponse>;
   /** 创建文件转换任务 {@link ChannelCreateConvertTaskApiRequest} {@link ChannelCreateConvertTaskApiResponse} */
   ChannelCreateConvertTaskApi(data: ChannelCreateConvertTaskApiRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateConvertTaskApiResponse>;
+  /** 渠道版补充动态合同签署人接口 {@link ChannelCreateDynamicFlowApproverRequest} {@link ChannelCreateDynamicFlowApproverResponse} */
+  ChannelCreateDynamicFlowApprover(data: ChannelCreateDynamicFlowApproverRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateDynamicFlowApproverResponse>;
   /** 获取常规模块嵌入页面链接 {@link ChannelCreateEmbedWebUrlRequest} {@link ChannelCreateEmbedWebUrlResponse} */
   ChannelCreateEmbedWebUrl(data: ChannelCreateEmbedWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateEmbedWebUrlResponse>;
   /** 补充签署流程签署人信息 {@link ChannelCreateFlowApproversRequest} {@link ChannelCreateFlowApproversResponse} */
@@ -4847,6 +4969,8 @@ declare interface Essbasic {
   CreateFlowsByTemplates(data: CreateFlowsByTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowsByTemplatesResponse>;
   /** 获取到电子签小程序创建法人章二维码 {@link CreateLegalSealQrCodeRequest} {@link CreateLegalSealQrCodeResponse} */
   CreateLegalSealQrCode(data?: CreateLegalSealQrCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLegalSealQrCodeResponse>;
+  /** 生成企业授权书 {@link CreateOrganizationAuthFileRequest} {@link CreateOrganizationAuthFileResponse} */
+  CreateOrganizationAuthFile(data: CreateOrganizationAuthFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrganizationAuthFileResponse>;
   /** 创建企业自动签授权链接 {@link CreatePartnerAutoSignAuthUrlRequest} {@link CreatePartnerAutoSignAuthUrlResponse} */
   CreatePartnerAutoSignAuthUrl(data: CreatePartnerAutoSignAuthUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePartnerAutoSignAuthUrlResponse>;
   /** 获取个人用户认证证书图片 {@link CreatePersonAuthCertificateImageRequest} {@link CreatePersonAuthCertificateImageResponse} */

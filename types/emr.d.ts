@@ -3639,10 +3639,10 @@ declare interface InquiryPriceCreateInstanceResponse {
 declare interface InquiryPriceRenewInstanceRequest {
   /** 实例续费的时长。需要结合TimeUnit一起使用。1表示续费一个月 */
   TimeSpan: number;
-  /** 待续费节点的资源ID列表。资源ID形如：emr-vm-xxxxxxxx。有效的资源ID可通过登录[控制台](https://console.cloud.tencent.com/emr)查询。 */
-  ResourceIds: string[];
   /** 实例计费模式。此处只支持取值为1，表示包年包月。 */
   PayMode: number;
+  /** 待续费节点的资源ID列表。资源ID形如：emr-vm-xxxxxxxx。有效的资源ID可通过登录[控制台](https://console.cloud.tencent.com/emr)查询。 */
+  ResourceIds?: string[];
   /** 实例续费的时间单位。取值范围：m：表示月份。 */
   TimeUnit?: string;
   /** 货币种类。取值范围：CNY：表示人民币。 */
@@ -3651,6 +3651,10 @@ declare interface InquiryPriceRenewInstanceRequest {
   Placement?: Placement;
   /** 是否按量转包年包月。0：否，1：是。 */
   ModifyPayMode?: number;
+  /** 是否需要每个节点续费价格 */
+  NeedDetail?: boolean;
+  /** 集群id，如果需要集群所有包年包月节点续费信息，可以填写该参数 */
+  InstanceId?: string;
 }
 
 declare interface InquiryPriceRenewInstanceResponse {
@@ -3662,6 +3666,8 @@ declare interface InquiryPriceRenewInstanceResponse {
   TimeUnit?: string | null;
   /** 实例续费的时长。 */
   TimeSpan?: number | null;
+  /** 价格详情 */
+  PriceDetail?: PriceDetail[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4042,6 +4048,10 @@ declare interface ScaleOutClusterResponse {
   FlowId?: number | null;
   /** 查询流程状态，流程额外信息 */
   TraceId?: string | null;
+  /** 订单号。 */
+  DealNames?: string[] | null;
+  /** 大订单号。 */
+  BillId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

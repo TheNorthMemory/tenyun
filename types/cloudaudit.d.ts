@@ -19,13 +19,13 @@ declare interface AttributeKeyDetail {
 /** 跟踪集概览 */
 declare interface AuditSummary {
   /** 跟踪集状态，1：开启，0：关闭 */
-  AuditStatus?: number;
+  AuditStatus?: number | null;
   /** COS存储桶名称 */
-  CosBucketName?: string;
+  CosBucketName?: string | null;
   /** 跟踪集名称 */
-  AuditName?: string;
+  AuditName?: string | null;
   /** 日志前缀 */
-  LogFilePrefix?: string;
+  LogFilePrefix?: string | null;
 }
 
 /** cmq地域信息 */
@@ -347,7 +347,7 @@ declare interface ListAuditsRequest {
 
 declare interface ListAuditsResponse {
   /** 查询跟踪集概要集合 */
-  AuditSummarys: AuditSummary[] | null;
+  AuditSummarys?: AuditSummary[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

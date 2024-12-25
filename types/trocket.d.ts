@@ -314,6 +314,14 @@ declare interface MQTTUserItem {
   ModifiedTime?: number;
 }
 
+/** 消息轨迹 */
+declare interface MessageTraceItem {
+  /** 步骤 */
+  Stage?: string | null;
+  /** 轨迹详情 */
+  Data?: string | null;
+}
+
 /** MQTT客户端监控 */
 declare interface PacketStatistics {
   /** 类型 */
@@ -1260,6 +1268,28 @@ declare interface DescribeMQTTUserListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMessageTraceRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 主题名称 */
+  Topic: string;
+  /** 消息ID */
+  MsgId: string;
+  /** 是否是死信消息 */
+  QueryDeadLetterMessage?: boolean;
+  /** 是否是延时消息 */
+  QueryDelayMessage?: boolean;
+}
+
+declare interface DescribeMessageTraceResponse {
+  /** 展示Topic名 */
+  ShowTopicName?: string;
+  /** 轨迹详情 */
+  Data?: MessageTraceItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeProductSKUsRequest {
 }
 
@@ -1599,6 +1629,8 @@ declare interface Trocket {
   DescribeMQTTTopicList(data: DescribeMQTTTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTTopicListResponse>;
   /** 查询MQTT用户列表 {@link DescribeMQTTUserListRequest} {@link DescribeMQTTUserListResponse} */
   DescribeMQTTUserList(data: DescribeMQTTUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTUserListResponse>;
+  /** 查询消息轨迹 {@link DescribeMessageTraceRequest} {@link DescribeMessageTraceResponse} */
+  DescribeMessageTrace(data: DescribeMessageTraceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageTraceResponse>;
   /** 查询产品售卖规格 {@link DescribeProductSKUsRequest} {@link DescribeProductSKUsResponse} */
   DescribeProductSKUs(data?: DescribeProductSKUsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductSKUsResponse>;
   /** 查询角色列表 {@link DescribeRoleListRequest} {@link DescribeRoleListResponse} */

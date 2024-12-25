@@ -59,9 +59,9 @@ declare interface DescribeProductsRequest {
 
 declare interface DescribeProductsResponse {
   /** 产品详细信息列表。 */
-  Products: RegionProduct[];
+  Products?: RegionProduct[];
   /** 产品总数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

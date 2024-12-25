@@ -532,6 +532,8 @@ declare interface NodeInfos {
   Id?: string | null;
   /** 可用区 */
   Zone?: string | null;
+  /** 创建时间 */
+  CreateTime?: string;
 }
 
 /** 节点角色描述信息 */

@@ -75,99 +75,99 @@ declare interface InstanceEnumParam {
 /** 实例详细信息 */
 declare interface InstanceInfo {
   /** 实例名称。 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 实例 ID。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 用户的Appid。 */
-  Appid: number;
+  Appid?: number;
   /** 项目 ID。 */
-  ProjectId: number;
+  ProjectId?: number;
   /** 地域ID。1：广州。4：上海。8：北京。 */
-  RegionId: number;
+  RegionId?: number;
   /** 可用区 ID。 */
-  ZoneId: number;
+  ZoneId?: number;
   /** VPC 网络 ID， 如：75101。该参数当前暂保留，可忽略。 */
-  VpcId: number;
+  VpcId?: number;
   /** 实例当前状态。0：待初始化。1：实例在流程中。2：实例运行中。-2：实例已隔离。-3：实例待删除。 */
-  Status: number;
+  Status?: number;
   /** VPC 网络下子网 ID， 如：46315。该参数当前暂保留，可忽略。 */
-  SubnetId: number;
+  SubnetId?: number;
   /** 实例 VIP。 */
-  WanIp: string;
+  WanIp?: string;
   /** 实例端口号。 */
-  Port: number;
+  Port?: number;
   /** 实例创建时间。 */
-  Createtime: string;
+  Createtime?: string;
   /** 实例持久内存总容量大小，单位：MB。 */
-  Size: number;
+  Size?: number;
   /** 实例类型。13：标准版。14：集群版。 */
-  Type: number;
+  Type?: number;
   /** 实例是否设置自动续费标识。1：设置自动续费。0：未设置自动续费。 */
-  AutoRenewFlag: number;
+  AutoRenewFlag?: number;
   /** 实例到期时间。 */
-  DeadlineTime: string;
+  DeadlineTime?: string;
   /** 存储引擎。 */
-  Engine: string;
+  Engine?: string;
   /** 产品类型。standalone ：标准版。cluster ：集群版。 */
-  ProductType: string;
+  ProductType?: string;
   /** VPC 网络 ID， 如：vpc-fk33jsf4****。 */
-  UniqVpcId: string;
+  UniqVpcId?: string;
   /** VPC 网络下子网 ID，如：subnet-fd3j6l3****。 */
-  UniqSubnetId: string;
+  UniqSubnetId?: string;
   /** 计费模式。0：按量计费。1：包年包月。 */
-  BillingMode: number;
+  BillingMode?: number;
   /** 实例运行状态描述：如”实例运行中“。 */
-  InstanceTitle: string;
+  InstanceTitle?: string;
   /** 计划下线时间。 */
-  OfflineTime: string;
+  OfflineTime?: string;
   /** 流程中的实例，返回子状态。 */
-  SubStatus: number;
+  SubStatus?: number;
   /** 反亲和性标签 */
-  Tags: string[];
+  Tags?: string[];
   /** 分片大小。 */
-  RedisShardSize: number;
+  RedisShardSize?: number;
   /** 分片数量。 */
-  RedisShardNum: number;
+  RedisShardNum?: number;
   /** 副本数量。 */
-  RedisReplicasNum: number;
+  RedisReplicasNum?: number;
   /** 计费 ID。 */
-  PriceId: number;
+  PriceId?: number;
   /** 隔离时间。 */
-  CloseTime: string;
+  CloseTime?: string;
   /** 从节点读取权重。 */
-  SlaveReadWeight: number;
+  SlaveReadWeight?: number;
   /** 实例关联的标签信息。 */
-  InstanceTags: InstanceTagInfo[] | null;
+  InstanceTags?: InstanceTagInfo[] | null;
   /** 项目名称。 */
-  ProjectName: string | null;
+  ProjectName?: string | null;
   /** 是否为免密实例；true：免密实例。false：非免密实例。 */
-  NoAuth: boolean | null;
+  NoAuth?: boolean | null;
   /** 客户端连接数。 */
-  ClientLimit: number | null;
+  ClientLimit?: number | null;
   /** DTS状态（内部参数，用户可忽略）。 */
-  DtsStatus: number | null;
+  DtsStatus?: number | null;
   /** 分片带宽上限，单位 MB。 */
-  NetLimit: number | null;
+  NetLimit?: number | null;
   /** 免密实例标识（内部参数，用户可忽略）。 */
-  PasswordFree: number | null;
+  PasswordFree?: number | null;
   /** 实例只读标识（内部参数，用户可忽略）。 */
-  ReadOnly: number | null;
+  ReadOnly?: number | null;
   /** 内部参数，用户可忽略。 */
-  Vip6: string | null;
+  Vip6?: string | null;
   /** 内部参数，用户可忽略。 */
-  RemainBandwidthDuration: string | null;
+  RemainBandwidthDuration?: string | null;
   /** 实例的磁盘容量大小。 */
-  DiskSize: number | null;
+  DiskSize?: number | null;
   /** 监控版本。1m：分钟粒度监控。5s：5秒粒度监控。 */
-  MonitorVersion: string | null;
+  MonitorVersion?: string | null;
   /** 客户端最大连接数可设置的最小值。 */
-  ClientLimitMin: number | null;
+  ClientLimitMin?: number | null;
   /** 客户端最大连接数可设置的最大值。 */
-  ClientLimitMax: number | null;
+  ClientLimitMax?: number | null;
   /** 实例的节点详细信息。 */
-  NodeSet: NodeInfo[] | null;
+  NodeSet?: NodeInfo[] | null;
   /** 实例所在的地域信息，比如ap-guangzhou。 */
-  Region: string | null;
+  Region?: string | null;
   /** 实例内存容量，单位：GB。KeeWiDB 内存容量 */
   MachineMemory?: number | null;
   /** 单分片磁盘大小，单位：MB */
@@ -176,6 +176,8 @@ declare interface InstanceInfo {
   DiskShardNum?: number;
   /** 1 */
   DiskReplicasNum?: number;
+  /** 数据压缩开关。ON：开启。OFF：关闭。 */
+  Compression?: string | null;
 }
 
 /** 实例整型参数描述 */
@@ -813,15 +815,15 @@ declare interface DescribeInstanceParamsRequest {
 
 declare interface DescribeInstanceParamsResponse {
   /** 实例参数总数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例枚举类型参数数组。 */
-  InstanceEnumParam: InstanceEnumParam[];
+  InstanceEnumParam?: InstanceEnumParam[];
   /** 实例整型参数数组。 */
-  InstanceIntegerParam: InstanceIntegerParam[];
+  InstanceIntegerParam?: InstanceIntegerParam[];
   /** 实例字符型参数数组。 */
-  InstanceTextParam: InstanceTextParam[];
+  InstanceTextParam?: InstanceTextParam[];
   /** 实例多选项型参数数组。 */
-  InstanceMultiParam: InstanceMultiParam[];
+  InstanceMultiParam?: InstanceMultiParam[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -867,7 +869,7 @@ declare interface DescribeInstancesRequest {
   UniqSubnetIds?: string[];
   /** 实例状态。0：待初始化。1：流程中。2：运行中。-2：已隔离。-3：待删除。 */
   Status?: number[];
-  /** 包年包月计费的续费模式。0：默认状态，指手动续费。1：自动续费。2：到期不再续费。 */
+  /** 续费模式。- 0：手动续费。- 1：自动续费。- 2：到期不再续费。 */
   AutoRenew?: number[];
   /** 计费模式。postpaid：按量计费。prepaid：包年包月。 */
   BillingMode?: string;
@@ -887,9 +889,9 @@ declare interface DescribeInstancesRequest {
 
 declare interface DescribeInstancesResponse {
   /** 实例数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例详细信息列表 */
-  InstanceSet: InstanceInfo[];
+  InstanceSet?: InstanceInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -933,9 +935,9 @@ declare interface DescribeProjectSecurityGroupsRequest {
 
 declare interface DescribeProjectSecurityGroupsResponse {
   /** 安全组规则。 */
-  Groups: SecurityGroup[];
+  Groups?: SecurityGroup[];
   /** 符合条件的安全组总数量。 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1007,9 +1009,9 @@ declare interface DescribeTaskListRequest {
 
 declare interface DescribeTaskListResponse {
   /** 任务总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 任务详细信息列表。 */
-  Tasks: TaskInfoDetail[];
+  Tasks?: TaskInfoDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

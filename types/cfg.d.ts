@@ -380,7 +380,7 @@ declare interface TaskGroupActionConfig {
 
 /** 动作组的配置项 */
 declare interface TaskGroupConfig {
-  /** 动作组所关联的实例对象 */
+  /** 动作组所关联的实例对象CVM ins-xxxMySQL cdb-xxxCLB lb-xxxRedis crs-xxxNAT网关 nat-xxx专线-独享专用通道 dcx-xxx标准集群普通节点 {"ClusterId":"cls-xxx","InstanceId":"ins-xxx","LanIP":"1.1.1.1"}标准集群Pod {"ClusterId":"cls-xxx","PodName":"podname","NodeName":"1.1.1.1","NameSpace":"ns","Workload":"workload"}TDSQL-MySQL(InnoDB) tdsqlshard-xxxTDSQL-C cynosdbmysql-xxxVPC子网 subnet-xxxxCKafka ckafka-xxxMariaDB tdsql-xxxxPostgreSQL postgres-xxx云原生网关 gateway-xxx标准集群超级节点 {"ClusterId":"cls-xxx","InstanceId":"eklet-xxx","LanIP":"1.1.1.1,"NodePoolId":"np-xxx"}Serverless集群超级节点 {"ClusterId":"cls-xxxx","InstanceId":"eklet-xxxx","LanIP":"1.1.1.1"}Elasticsearch集群 es-xxxxRabbitMQ amqp-xxxx */
   TaskGroupInstances: string[];
   /** 动作组标题，不填默认取经验中的动作组名称 */
   TaskGroupTitle?: string;
@@ -689,7 +689,7 @@ declare interface CreateTaskFromActionResponse {
 }
 
 declare interface CreateTaskFromMultiActionRequest {
-  /** 参与演练的实例ID */
+  /** 参与演练的实例IDCVM ins-xxxMySQL cdb-xxxCLB lb-xxxRedis crs-xxxNAT网关 nat-xxxRedis crs-xxx专线-独享专用通道 dcx-xxx标准集群普通节点 {"ClusterId":"cls-xxx","InstanceId":"ins-xxx","LanIP":"1.1.1.1"}标准集群Pod {"ClusterId":"cls-xxx","PodName":"podname","NodeName":"1.1.1.1","NameSpace":"ns","Workload":"workload"}TDSQL-MySQL(InnoDB) tdsqlshard-xxxTDSQL-C cynosdbmysql-xxxVPC子网 subnet-xxxxCKafka ckafka-xxxMariaDB tdsql-xxxxPostgreSQL postgres-xxx云原生网关 gateway-xxx标准集群超级节点 {"ClusterId":"cls-xxx","InstanceId":"eklet-xxx","LanIP":"1.1.1.1,"NodePoolId":"np-xxx"}Serverless集群超级节点 {"ClusterId":"cls-xxxx","InstanceId":"eklet-xxxx","LanIP":"1.1.1.1"}Elasticsearch集群 es-xxxxRabbitMQ amqp-xxxx */
   TaskInstances: string[];
   /** 演练名称，不填则默认取动作名称 */
   TaskTitle?: string;

@@ -45,11 +45,11 @@ declare interface AccessRegionDomainConf {
 /** 带宽梯度价格 */
 declare interface BandwidthPriceGradient {
   /** 带宽范围。 */
-  BandwidthRange: number[];
+  BandwidthRange?: number[];
   /** 在对应带宽范围内的单宽单价，单位：元/Mbps/天。 */
-  BandwidthUnitPrice: number;
+  BandwidthUnitPrice?: number;
   /** 带宽折扣价，单位：元/Mbps/天。 */
-  DiscountBandwidthUnitPrice: number;
+  DiscountBandwidthUnitPrice?: number;
 }
 
 /** 已绑定的源站信息 */
@@ -73,15 +73,15 @@ declare interface BindRealServer {
 /** 添加源站的源站信息返回值 */
 declare interface BindRealServerInfo {
   /** 源站的IP或域名 */
-  RealServerIP: string;
+  RealServerIP?: string;
   /** 源站ID */
-  RealServerId: string;
+  RealServerId?: string;
   /** 源站名称 */
-  RealServerName: string;
+  RealServerName?: string;
   /** 项目ID */
-  ProjectId: number;
+  ProjectId?: number;
   /** 标签列表 */
-  TagSet: TagPair[] | null;
+  TagSet?: TagPair[] | null;
 }
 
 /** 接口扩展参数 */
@@ -95,55 +95,55 @@ declare interface Capacity {
 /** 服务器证书 */
 declare interface Certificate {
   /** 证书ID */
-  CertificateId: string;
+  CertificateId?: string;
   /** 证书名称（旧参数，请使用CertificateAlias）。 */
-  CertificateName: string;
+  CertificateName?: string;
   /** 证书类型。 */
-  CertificateType: number;
+  CertificateType?: number;
   /** 证书名称。 */
-  CertificateAlias: string | null;
+  CertificateAlias?: string | null;
   /** 证书创建时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 证书生效起始时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。 */
-  BeginTime: number | null;
+  BeginTime?: number | null;
   /** 证书过期时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。 */
-  EndTime: number | null;
+  EndTime?: number | null;
   /** 证书签发者通用名称。 */
-  IssuerCN: string | null;
+  IssuerCN?: string | null;
   /** 证书主题通用名称。 */
-  SubjectCN: string | null;
+  SubjectCN?: string | null;
 }
 
 /** 证书别名信息 */
 declare interface CertificateAliasInfo {
   /** 证书ID */
-  CertificateId: string;
+  CertificateId?: string;
   /** 证书别名 */
-  CertificateAlias: string;
+  CertificateAlias?: string;
 }
 
 /** 证书详情，包括证书ID， 证书名字，证书类型，证书内容以及密钥内容。 */
 declare interface CertificateDetail {
   /** 证书ID。 */
-  CertificateId: string;
+  CertificateId?: string;
   /** 证书类型。 */
-  CertificateType: number;
+  CertificateType?: number;
   /** 证书名字。 */
-  CertificateAlias: string | null;
+  CertificateAlias?: string | null;
   /** 证书内容。 */
-  CertificateContent: string;
+  CertificateContent?: string;
   /** 密钥内容。仅当证书类型为SSL证书时，返回该字段。 */
-  CertificateKey: string | null;
+  CertificateKey?: string | null;
   /** 创建时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。 */
-  CreateTime: number | null;
+  CreateTime?: number | null;
   /** 证书生效起始时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。 */
-  BeginTime: number | null;
+  BeginTime?: number | null;
   /** 证书过期时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。 */
-  EndTime: number | null;
+  EndTime?: number | null;
   /** 证书签发者通用名称。 */
-  IssuerCN: string | null;
+  IssuerCN?: string | null;
   /** 证书主题通用名称。 */
-  SubjectCN: string | null;
+  SubjectCN?: string | null;
 }
 
 /** 国家地区映射关系（名称和编码） */
@@ -215,39 +215,39 @@ declare interface Domain {
 /** 域名解析就近访问配置详情 */
 declare interface DomainAccessRegionDict {
   /** 就近接入区域 */
-  NationCountryInnerList: NationCountryInnerInfo[];
+  NationCountryInnerList?: NationCountryInnerInfo[];
   /** 加速区域通道列表 */
-  ProxyList: ProxyIdDict[];
+  ProxyList?: ProxyIdDict[];
   /** 加速区域ID */
-  RegionId: string;
+  RegionId?: string;
   /** 加速区域内部编码 */
-  GeographicalZoneInnerCode: string;
+  GeographicalZoneInnerCode?: string;
   /** 加速区域所属大洲内部编码 */
-  ContinentInnerCode: string;
+  ContinentInnerCode?: string;
   /** 加速区域别名 */
-  RegionName: string;
+  RegionName?: string;
 }
 
 /** 域名的定制错误响应配置 */
 declare interface DomainErrorPageInfo {
   /** 错误定制响应的配置ID */
-  ErrorPageId: string;
+  ErrorPageId?: string;
   /** 监听器ID */
-  ListenerId: string;
+  ListenerId?: string;
   /** 域名 */
-  Domain: string;
+  Domain?: string;
   /** 原始错误码 */
-  ErrorNos: number[];
+  ErrorNos?: number[];
   /** 新的错误码 */
-  NewErrorNo: number | null;
+  NewErrorNo?: number | null;
   /** 需要清理的响应头 */
-  ClearHeaders: string[] | null;
+  ClearHeaders?: string[] | null;
   /** 需要设置的响应头 */
-  SetHeaders: HttpHeaderParam[] | null;
+  SetHeaders?: HttpHeaderParam[] | null;
   /** 设置的响应体(不包括 HTTP头) */
-  Body: string | null;
+  Body?: string | null;
   /** 规则状态,0为成功 */
-  Status: number | null;
+  Status?: number | null;
 }
 
 /** 按照域名分类的7层监听器转发规则信息 */
@@ -325,11 +325,11 @@ declare interface GlobalDns {
 /** 可以显示统计数据的通道组和对应通道信息 */
 declare interface GroupStatisticsInfo {
   /** 通道组ID */
-  GroupId: string;
+  GroupId?: string;
   /** 通道组名称 */
-  GroupName: string;
+  GroupName?: string;
   /** 通道组下通道列表 */
-  ProxySet: ProxySimpleInfo[];
+  ProxySet?: ProxySimpleInfo[];
 }
 
 /** HTTP类型监听器信息 */
@@ -413,13 +413,13 @@ declare interface IPDetail {
 /** 内部接口使用，返回可以查询统计数据的监听器信息 */
 declare interface ListenerInfo {
   /** 监听器ID */
-  ListenerId: string;
+  ListenerId?: string;
   /** 监听器名称 */
-  ListenerName: string;
+  ListenerName?: string;
   /** 监听器监听端口 */
-  Port: number;
+  Port?: number;
   /** 监听器协议类型 */
-  Protocol: string;
+  Protocol?: string;
 }
 
 /** 单指标的统计数据 */
@@ -441,9 +441,9 @@ declare interface NationCountryInnerInfo {
 /** 新添加源站信息 */
 declare interface NewRealServer {
   /** 源站ID */
-  RealServerId: string;
+  RealServerId?: string;
   /** 源站ip或域名 */
-  RealServerIP: string;
+  RealServerIP?: string;
 }
 
 /** 加速通道接入点详细信息(包含id、地域、ip等） */
@@ -623,11 +623,11 @@ declare interface ProxyInfo {
 /** 内部接口使用，返回可以查询统计数据的通道和对应的监听器信息 */
 declare interface ProxySimpleInfo {
   /** 通道ID */
-  ProxyId: string;
+  ProxyId?: string;
   /** 通道名称 */
-  ProxyName: string;
+  ProxyName?: string;
   /** 监听器列表 */
-  ListenerList: ListenerInfo[];
+  ListenerList?: ListenerInfo[];
 }
 
 /** 通道状态信息 */
@@ -809,47 +809,47 @@ declare interface SupportFeature {
 /** TCP类型监听器信息 */
 declare interface TCPListener {
   /** 监听器ID */
-  ListenerId: string;
+  ListenerId?: string;
   /** 监听器名称 */
-  ListenerName: string;
+  ListenerName?: string;
   /** 监听器端口 */
-  Port: number;
+  Port?: number;
   /** 监听器转发源站端口，仅对版本为1.0的通道有效 */
-  RealServerPort: number | null;
+  RealServerPort?: number | null;
   /** 监听器绑定源站类型 */
-  RealServerType: string;
+  RealServerType?: string;
   /** 监听器协议， TCP */
-  Protocol: string;
+  Protocol?: string;
   /** 监听器状态，其中：0表示运行中；1表示创建中；2表示销毁中；3表示源站调整中；4表示配置变更中。 */
-  ListenerStatus: number;
+  ListenerStatus?: number;
   /** 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数；lrtt表示最小时延。 */
-  Scheduler: string;
+  Scheduler?: string;
   /** 源站健康检查响应超时时间，单位：秒 */
-  ConnectTimeout: number;
+  ConnectTimeout?: number;
   /** 源站健康检查时间间隔，单位：秒 */
-  DelayLoop: number;
+  DelayLoop?: number;
   /** 监听器是否开启健康检查，其中：0表示关闭；1表示开启 */
-  HealthCheck: number;
+  HealthCheck?: number;
   /** 监听器绑定的源站状态， 其中：0表示异常；1表示正常。 */
-  BindStatus: number;
+  BindStatus?: number;
   /** 监听器绑定的源站信息 */
-  RealServerSet: BindRealServer[] | null;
+  RealServerSet?: BindRealServer[] | null;
   /** 监听器创建时间，Unix时间戳 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 监听器获取客户端 IP 的方式，0表示TOA, 1表示Proxy Protocol */
-  ClientIPMethod: number | null;
+  ClientIPMethod?: number | null;
   /** 健康阈值，表示连续检查成功多少次后认定源站健康。范围为1到10 */
-  HealthyThreshold: number | null;
+  HealthyThreshold?: number | null;
   /** 不健康阈值，表示连续检查失败多少次数后认为源站不健康。范围为1到10 */
-  UnhealthyThreshold: number | null;
+  UnhealthyThreshold?: number | null;
   /** 源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启 */
-  FailoverSwitch: number | null;
+  FailoverSwitch?: number | null;
   /** 是否开启会话保持选项：0关闭， 非0开启，非0值为会话保持时间 */
-  SessionPersist: number | null;
+  SessionPersist?: number | null;
   /** 监听器的通道ID，如果监听器属于通道组，则为null */
-  ProxyId: string | null;
+  ProxyId?: string | null;
   /** 监听器的通道组ID，如果监听器属于通道，则为null */
-  GroupId: string | null;
+  GroupId?: string | null;
 }
 
 /** 标签键值对 */
@@ -871,55 +871,55 @@ declare interface TagResourceInfo {
 /** UDP类型监听器信息 */
 declare interface UDPListener {
   /** 监听器ID */
-  ListenerId: string;
+  ListenerId?: string;
   /** 监听器名称 */
-  ListenerName: string;
+  ListenerName?: string;
   /** 监听器端口 */
-  Port: number;
+  Port?: number;
   /** 监听器转发源站端口，仅V1版本通道或通道组监听器有效 */
-  RealServerPort: number | null;
+  RealServerPort?: number | null;
   /** 监听器绑定源站类型 */
-  RealServerType: string;
+  RealServerType?: string;
   /** 监听器协议， UDP */
-  Protocol: string;
+  Protocol?: string;
   /** 监听器状态，其中：0表示运行中；1表示创建中；2表示销毁中；3表示源站调整中；4表示配置变更中。 */
-  ListenerStatus: number;
+  ListenerStatus?: number;
   /** 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数；lrtt表示最小时延。 */
-  Scheduler: string;
+  Scheduler?: string;
   /** 监听器绑定源站状态， 0表示正常，1表示IP异常，2表示域名解析异常 */
-  BindStatus: number;
+  BindStatus?: number;
   /** 监听器绑定的源站信息 */
-  RealServerSet: BindRealServer[];
+  RealServerSet?: BindRealServer[];
   /** 监听器创建时间，Unix时间戳 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 是否开启会话保持选项：0关闭， 非0开启，非0值为会话保持时间 */
-  SessionPersist: number | null;
+  SessionPersist?: number | null;
   /** 源站健康检查时间间隔，单位：秒。时间间隔取值在[5，300]之间。 */
-  DelayLoop: number | null;
+  DelayLoop?: number | null;
   /** 源站健康检查响应超时时间，单位：秒。超时时间取值在[2，60]之间。超时时间应小于健康检查时间间隔DelayLoop。 */
-  ConnectTimeout: number | null;
+  ConnectTimeout?: number | null;
   /** 健康阈值，表示连续检查成功多少次后认定源站健康。范围为1到10 */
-  HealthyThreshold: number | null;
+  HealthyThreshold?: number | null;
   /** 不健康阈值，表示连续检查失败多少次数后认为源站不健康。范围为1到10 */
-  UnhealthyThreshold: number | null;
+  UnhealthyThreshold?: number | null;
   /** 源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启 */
-  FailoverSwitch: number | null;
+  FailoverSwitch?: number | null;
   /** 源站是否开启健康检查：1开启，0关闭。 */
-  HealthCheck: number | null;
+  HealthCheck?: number | null;
   /** UDP源站健康类型。PORT表示检查端口，PING表示PING。 */
-  CheckType: string | null;
+  CheckType?: string | null;
   /** UDP源站健康检查探测端口。 */
-  CheckPort: number | null;
+  CheckPort?: number | null;
   /** UDP源站健康检查端口探测报文类型：TEXT表示文本。仅在健康检查类型为PORT时使用。 */
-  ContextType: string | null;
+  ContextType?: string | null;
   /** UDP源站健康检查端口探测发送报文。仅在健康检查类型为PORT时使用。 */
-  SendContext: string | null;
+  SendContext?: string | null;
   /** UDP源站健康检查端口探测接收报文。仅在健康检查类型为PORT时使用。 */
-  RecvContext: string | null;
+  RecvContext?: string | null;
   /** 监听器的通道ID，如果监听器属于通道组，则为null */
-  ProxyId: string | null;
+  ProxyId?: string | null;
   /** 监听器的通道组ID，如果监听器属于通道，则为null */
-  GroupId: string | null;
+  GroupId?: string | null;
 }
 
 declare interface AddRealServersRequest {

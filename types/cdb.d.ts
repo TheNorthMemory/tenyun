@@ -5,9 +5,9 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 数据库账号信息 */
 declare interface Account {
   /** 新账户的名称 */
-  User: string | null;
+  User: string;
   /** 新账户的域名 */
-  Host: string | null;
+  Host: string;
 }
 
 /** 账号详细信息 */
@@ -127,7 +127,9 @@ declare interface AuditLog {
   /** 事物持续时间，微秒。 */
   TrxLivingTime?: number | null;
   /** 日志命中规则模板的基本信息 */
-  TemplateInfo?: LogRuleTemplateInfo[] | null;
+  TemplateInfo?: LogRuleTemplateInfo[];
+  /** 事务ID */
+  TrxId?: number;
 }
 
 /** 审计日志分析结果 */
@@ -191,11 +193,11 @@ declare interface AuditLogFilter {
   /** 事务持续时间，格式为M-N，例如：10-200 */
   TransactionLivingTimeSection?: string;
   /** 线程ID */
-  ThreadId?: string[] | null;
+  ThreadId?: string[];
   /** 返回行数。表示筛选返回行数大于该值的审计日志。 */
-  SentRows?: number | null;
+  SentRows?: number;
   /** mysql错误码 */
-  ErrCode?: number[] | null;
+  ErrCode?: number[];
 }
 
 /** 审计策略 */
@@ -591,13 +593,13 @@ declare interface ClusterTopology {
 /** 列权限信息 */
 declare interface ColumnPrivilege {
   /** 数据库名 */
-  Database: string;
+  Database: string | null;
   /** 数据库表名 */
-  Table: string;
+  Table: string | null;
   /** 数据库列名 */
-  Column: string;
+  Column: string | null;
   /** 权限信息 */
-  Privileges: string[];
+  Privileges: string[] | null;
 }
 
 /** 通用时间窗 */
@@ -627,15 +629,15 @@ declare interface CommonTimeWindow {
 /** proxy配置 */
 declare interface CustomConfig {
   /** 设备 */
-  Device: string | null;
+  Device?: string | null;
   /** 类型 */
-  Type: string | null;
+  Type?: string | null;
   /** 设备类型 */
-  DeviceType: string | null;
+  DeviceType?: string | null;
   /** 内存 */
-  Memory: number | null;
+  Memory?: number | null;
   /** 核数 */
-  Cpu: number | null;
+  Cpu?: number | null;
 }
 
 /** 云数据库切换记录 */
@@ -649,9 +651,9 @@ declare interface DBSwitchInfo {
 /** 数据库权限 */
 declare interface DatabasePrivilege {
   /** 权限信息 */
-  Privileges: string[];
+  Privileges: string[] | null;
   /** 数据库名 */
-  Database: string;
+  Database: string | null;
 }
 
 /** 数据库名以及字符集 */
@@ -665,21 +667,21 @@ declare interface DatabasesWithCharacterLists {
 /** 置放群组信息 */
 declare interface DeployGroupInfo {
   /** 置放群组 ID。 */
-  DeployGroupId: string;
+  DeployGroupId?: string;
   /** 置放群组名称。 */
-  DeployGroupName: string;
+  DeployGroupName?: string;
   /** 创建时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 置放群组实例配额，表示一个置放群组中可容纳的最大实例数目。 */
-  Quota: number;
+  Quota?: number;
   /** 置放群组亲和性策略，目前仅支持策略1，即在物理机纬度打散实例的分布。 */
-  Affinity: string | null;
+  Affinity?: string | null;
   /** 置放群组亲和性策略1中，同台物理机上同个置放群组实例的限制个数。 */
-  LimitNum: number | null;
+  LimitNum?: number | null;
   /** 置放群组详细信息。 */
-  Description: string;
+  Description?: string;
   /** 置放群组物理机型属性。 */
-  DevClass: string | null;
+  DevClass?: string | null;
 }
 
 /** CPU负载 */
@@ -755,9 +757,9 @@ declare interface DrInfo {
 /** 结构化的错误日志详情 */
 declare interface ErrlogItem {
   /** 错误发生时间。 */
-  Timestamp: number | null;
+  Timestamp?: number | null;
   /** 错误详情 */
-  Content: string | null;
+  Content?: string | null;
 }
 
 /** 导入任务记录 */
@@ -1709,11 +1711,11 @@ declare interface SqlFileInfo {
 /** 数据库表权限 */
 declare interface TablePrivilege {
   /** 数据库名 */
-  Database: string;
+  Database: string | null;
   /** 数据库表名 */
-  Table: string;
+  Table: string | null;
   /** 权限信息 */
-  Privileges: string[];
+  Privileges: string[] | null;
 }
 
 /** 标签结构 */
@@ -1759,9 +1761,9 @@ declare interface TagsInfoOfInstance {
 /** 任务列表中的部分任务支持特定的附加信息 */
 declare interface TaskAttachInfo {
   /** 升级任务：”FastUpgradeStatus“：表示升级类型。1-原地升级；0-普通升级。 */
-  AttachKey?: string | null;
+  AttachKey?: string;
   /** 升级任务：”FastUpgradeStatus“：表示升级类型。1-原地升级；0-普通升级。 */
-  AttachValue?: string | null;
+  AttachValue?: string;
 }
 
 /** 实例任务详情 */
@@ -1787,7 +1789,7 @@ declare interface TaskDetail {
   /** 异步任务的请求 ID。 */
   AsyncRequestId?: string;
   /** 任务的附加信息。 */
-  TaskAttachInfo?: TaskAttachInfo[] | null;
+  TaskAttachInfo?: TaskAttachInfo[];
 }
 
 /** 5.7升级8.0指定参数的结构 */
@@ -2533,7 +2535,7 @@ declare interface CreateDeployGroupRequest {
 
 declare interface CreateDeployGroupResponse {
   /** 置放群组ID。 */
-  DeployGroupId: string;
+  DeployGroupId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2853,7 +2855,7 @@ declare interface DescribeAuditLogsRequest {
   EndTime: string;
   /** 分页参数，单次返回的数据条数。默认值为100，最大值为100。 */
   Limit?: number;
-  /** 分页偏移量。 */
+  /** 日志偏移量，最多支持偏移查询65535条日志。可填写范围：0 - 65535。 */
   Offset?: number;
   /** 排序方式。支持值包括："ASC" - 升序，"DESC" - 降序。 */
   Order?: string;
@@ -3651,9 +3653,9 @@ declare interface DescribeDeployGroupListRequest {
 
 declare interface DescribeDeployGroupListResponse {
   /** 符合条件的记录总数。 */
-  Total: number;
+  Total?: number;
   /** 返回列表。 */
-  Items: DeployGroupInfo[] | null;
+  Items?: DeployGroupInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3905,11 +3907,11 @@ declare interface DescribeProxyCustomConfRequest {
 
 declare interface DescribeProxyCustomConfResponse {
   /** 代理配置数 */
-  Count: number | null;
+  Count?: number | null;
   /** 代理配置 */
-  CustomConf: CustomConfig | null;
+  CustomConf?: CustomConfig | null;
   /** 权重限制 */
-  WeightRule: Rule | null;
+  WeightRule?: Rule | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4313,7 +4315,7 @@ declare interface ModifyAccountHostRequest {
 
 declare interface ModifyAccountHostResponse {
   /** 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。 */
-  AsyncRequestId: string;
+  AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4329,7 +4331,7 @@ declare interface ModifyAccountMaxUserConnectionsRequest {
 
 declare interface ModifyAccountMaxUserConnectionsResponse {
   /** 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。 */
-  AsyncRequestId: string;
+  AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

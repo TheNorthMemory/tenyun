@@ -903,6 +903,8 @@ declare interface DescribeProjectListRequest {
   AllPage?: boolean;
   /** 角色信息 */
   ModuleCollection?: string;
+  /** moduleId集合 */
+  ModuleIdList?: string[];
 }
 
 declare interface DescribeProjectListResponse {

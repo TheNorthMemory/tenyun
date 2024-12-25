@@ -39,11 +39,11 @@ declare interface BackupConfig {
 /** 描述分片DB节点信息 */
 declare interface BriefNodeInfo {
   /** DB节点ID */
-  NodeId: string;
+  NodeId?: string;
   /** DB节点角色，取值为master或者slave */
-  Role: string;
+  Role?: string;
   /** 节点所属分片的分片ID */
-  ShardId: string;
+  ShardId?: string;
 }
 
 /** 列权限信息 */
@@ -69,9 +69,9 @@ declare interface ConfigValue {
 /** 约束类型值的范围 */
 declare interface ConstraintRange {
   /** 约束类型为section时的最小值 */
-  Min: string;
+  Min?: string;
   /** 约束类型为section时的最大值 */
-  Max: string;
+  Max?: string;
 }
 
 /** 云数据库账号信息 */
@@ -211,67 +211,67 @@ declare interface DCDBInstanceInfo {
 /** 描述分布式数据库分片信息。 */
 declare interface DCDBShardInfo {
   /** 所属实例Id */
-  InstanceId: string;
+  InstanceId?: string;
   /** 分片SQL透传Id，用于将sql透传到指定分片执行 */
-  ShardSerialId: string;
+  ShardSerialId?: string;
   /** 全局唯一的分片Id */
-  ShardInstanceId: string;
+  ShardInstanceId?: string;
   /** 状态：0 创建中，1 流程处理中， 2 运行中，3 分片未初始化 */
-  Status: number;
+  Status?: number;
   /** 状态中文描述 */
-  StatusDesc: string;
+  StatusDesc?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 字符串格式的私有网络Id */
-  VpcId: string;
+  VpcId?: string;
   /** 字符串格式的私有网络子网Id */
-  SubnetId: string;
+  SubnetId?: string;
   /** 项目ID */
-  ProjectId: number;
+  ProjectId?: number;
   /** 地域 */
-  Region: string;
+  Region?: string;
   /** 可用区 */
-  Zone: string;
+  Zone?: string;
   /** 内存大小，单位 GB */
-  Memory: number;
+  Memory?: number;
   /** 存储大小，单位 GB */
-  Storage: number;
+  Storage?: number;
   /** 到期时间 */
-  PeriodEndTime: string;
+  PeriodEndTime?: string;
   /** 节点数，2 为一主一从， 3 为一主二从 */
-  NodeCount: number;
+  NodeCount?: number;
   /** 存储使用率，单位为 % */
-  StorageUsage: number;
+  StorageUsage?: number;
   /** 内存使用率，单位为 % */
-  MemoryUsage: number;
+  MemoryUsage?: number;
   /** 数字分片Id（过时字段，请勿依赖该值） */
-  ShardId: number;
+  ShardId?: number;
   /** 产品ProductID */
-  Pid: number;
+  Pid?: number;
   /** Proxy版本 */
-  ProxyVersion: string;
+  ProxyVersion?: string;
   /** 付费模型 */
-  Paymode: string | null;
+  Paymode?: string | null;
   /** 分片的主可用区 */
-  ShardMasterZone: string | null;
+  ShardMasterZone?: string | null;
   /** 分片的从可用区列表 */
-  ShardSlaveZones: string[] | null;
+  ShardSlaveZones?: string[] | null;
   /** CPU核数 */
-  Cpu: number;
+  Cpu?: number;
   /** 分片ShardKey的范围（总共64个哈希值），例如： 0-31，32-63 */
-  Range: string;
+  Range?: string;
 }
 
 /** 数据库信息 */
 declare interface Database {
   /** 数据库名称 */
-  DbName: string;
+  DbName?: string;
 }
 
 /** 数据库函数信息 */
 declare interface DatabaseFunction {
   /** 函数名称 */
-  Func: string;
+  Func?: string;
 }
 
 /** 数据库权限 */
@@ -285,19 +285,19 @@ declare interface DatabasePrivilege {
 /** 数据库存储过程信息 */
 declare interface DatabaseProcedure {
   /** 存储过程名称 */
-  Proc: string;
+  Proc?: string;
 }
 
 /** 数据库表信息 */
 declare interface DatabaseTable {
   /** 表名 */
-  Table: string;
+  Table?: string;
 }
 
 /** 数据库视图信息 */
 declare interface DatabaseView {
   /** 视图名称 */
-  View: string;
+  View?: string;
 }
 
 /** DCN详情条目 */
@@ -419,13 +419,13 @@ declare interface InstanceBackupFileItem {
 /** 拉取的日志信息 */
 declare interface LogFileInfo {
   /** Log最后修改时间 */
-  Mtime: number;
+  Mtime?: number;
   /** 文件长度 */
-  Length: number;
+  Length?: number;
   /** 下载Log时用到的统一资源标识符 */
-  Uri: string;
+  Uri?: string;
   /** 文件名 */
-  FileName: string;
+  FileName?: string;
 }
 
 /** 数据库超期备份配置 */
@@ -447,21 +447,21 @@ declare interface NewBackupConfig {
 /** 描述DB节点信息 */
 declare interface NodeInfo {
   /** DB节点ID */
-  NodeId: string;
+  NodeId?: string;
   /** DB节点角色，取值为master或者slave */
-  Role: string;
+  Role?: string;
 }
 
 /** 参数约束 */
 declare interface ParamConstraint {
   /** 约束类型,如枚举enum，区间section */
-  Type: string;
+  Type?: string;
   /** 约束类型为enum时的可选值列表 */
-  Enum: string;
+  Enum?: string;
   /** 约束类型为section时的范围 */
-  Range: ConstraintRange | null;
+  Range?: ConstraintRange | null;
   /** 约束类型为string时的可选值列表 */
-  String: string;
+  String?: string;
 }
 
 /** DB参数描述 */
@@ -485,49 +485,49 @@ declare interface ParamDesc {
 /** 修改参数结果 */
 declare interface ParamModifyResult {
   /** 修改参数名字 */
-  Param: string;
+  Param?: string;
   /** 参数修改结果。0表示修改成功；-1表示修改失败；-2表示该参数值非法 */
-  Code: number;
+  Code?: number;
 }
 
 /** 项目信息描述 */
 declare interface Project {
   /** 项目ID */
-  ProjectId: number;
+  ProjectId?: number;
   /** 资源拥有者（主账号）uin */
-  OwnerUin: number;
+  OwnerUin?: number;
   /** 应用Id */
-  AppId: number;
+  AppId?: number;
   /** 项目名称 */
-  Name: string;
+  Name?: string;
   /** 创建者uin */
-  CreatorUin: number;
+  CreatorUin?: number;
   /** 来源平台 */
-  SrcPlat: string;
+  SrcPlat?: string;
   /** 来源AppId */
-  SrcAppId: number;
+  SrcAppId?: number;
   /** 项目状态,0正常，-1关闭。默认项目为3 */
-  Status: number;
+  Status?: number;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 是否默认项目，1 是，0 不是 */
-  IsDefault: number;
+  IsDefault?: number;
   /** 描述信息 */
-  Info: string;
+  Info?: string;
 }
 
 /** 售卖可用区信息 */
 declare interface RegionInfo {
   /** 地域英文ID */
-  Region: string;
+  Region?: string;
   /** 地域数字ID */
-  RegionId: number;
+  RegionId?: number;
   /** 地域中文名 */
-  RegionName: string;
+  RegionName?: string;
   /** 可用区列表 */
-  ZoneList: ZonesInfo[];
+  ZoneList?: ZonesInfo[];
   /** 可选择的主可用区和从可用区 */
-  AvailableChoice: ShardZoneChooseInfo[];
+  AvailableChoice?: ShardZoneChooseInfo[];
 }
 
 /** 保留的网络资源信息 */
@@ -555,19 +555,19 @@ declare interface ResourceTag {
 /** 安全组详情 */
 declare interface SecurityGroup {
   /** 项目ID */
-  ProjectId: number;
+  ProjectId?: number;
   /** 创建时间，时间格式：yyyy-mm-dd hh:mm:ss */
-  CreateTime: string;
+  CreateTime?: string;
   /** 安全组ID */
-  SecurityGroupId: string;
+  SecurityGroupId?: string;
   /** 安全组名称 */
-  SecurityGroupName: string;
+  SecurityGroupName?: string;
   /** 安全组备注 */
-  SecurityGroupRemark: string;
+  SecurityGroupRemark?: string;
   /** 入站规则 */
-  Inbound: SecurityGroupBound[];
+  Inbound?: SecurityGroupBound[];
   /** 出站规则 */
-  Outbound: SecurityGroupBound[];
+  Outbound?: SecurityGroupBound[];
 }
 
 /** 安全出入口规则 */
@@ -585,67 +585,67 @@ declare interface SecurityGroupBound {
 /** DCDB分片信息 */
 declare interface ShardBriefInfo {
   /** 分片SerialId */
-  ShardSerialId: string;
+  ShardSerialId?: string;
   /** 分片ID，形如shard-7vg1o339 */
-  ShardInstanceId: string;
+  ShardInstanceId?: string;
   /** 分片运行状态 */
-  Status: number;
+  Status?: number;
   /** 分片运行状态描述 */
-  StatusDesc: string;
+  StatusDesc?: string;
   /** 分片创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 分片内存大小，单位GB */
-  Memory: number;
+  Memory?: number;
   /** 分片磁盘大小，单位GB */
-  Storage: number;
+  Storage?: number;
   /** 分片日志磁盘空间大小，单位GB */
-  LogDisk: number;
+  LogDisk?: number;
   /** 分片节点个数 */
-  NodeCount: number;
+  NodeCount?: number;
   /** 分片磁盘空间使用率 */
-  StorageUsage: number;
+  StorageUsage?: number;
   /** 分片Proxy版本信息 */
-  ProxyVersion: string;
+  ProxyVersion?: string;
   /** 分片主DB可用区 */
-  ShardMasterZone: string;
+  ShardMasterZone?: string;
   /** 分片从DB可用区 */
-  ShardSlaveZones: string[];
+  ShardSlaveZones?: string[];
   /** 分片Cpu核数 */
-  Cpu: number;
+  Cpu?: number;
   /** DB节点信息 */
-  NodesInfo: NodeInfo[] | null;
+  NodesInfo?: NodeInfo[] | null;
 }
 
 /** 分片信息 */
 declare interface ShardInfo {
   /** 分片ID */
-  ShardInstanceId: string;
+  ShardInstanceId?: string;
   /** 分片Set ID */
-  ShardSerialId: string;
+  ShardSerialId?: string;
   /** 状态：0 创建中，1 流程处理中， 2 运行中，3 分片未初始化，-2 分片已删除 */
-  Status: number;
+  Status?: number;
   /** 创建时间 */
-  Createtime: string;
+  Createtime?: string;
   /** 内存大小，单位 GB */
-  Memory: number;
+  Memory?: number;
   /** 存储大小，单位 GB */
-  Storage: number;
+  Storage?: number;
   /** 分片数字ID */
-  ShardId: number;
+  ShardId?: number;
   /** 节点数，2 为一主一从， 3 为一主二从 */
-  NodeCount: number;
+  NodeCount?: number;
   /** 产品类型 Id（过时字段，请勿依赖该值） */
-  Pid: number;
+  Pid?: number;
   /** Cpu核数 */
-  Cpu: number;
+  Cpu?: number;
 }
 
 /** 分片节点可用区选择 */
 declare interface ShardZoneChooseInfo {
   /** 主可用区 */
-  MasterZone: ZonesInfo;
+  MasterZone?: ZonesInfo;
   /** 可选的从可用区 */
-  SlaveZones: ZonesInfo[];
+  SlaveZones?: ZonesInfo[];
 }
 
 /** 慢查询条目信息 */
@@ -693,29 +693,29 @@ declare interface SlowLogData {
 /** 按机型分类的规格配置 */
 declare interface SpecConfig {
   /** 规格机型 */
-  Machine: string;
+  Machine?: string;
   /** 规格列表 */
-  SpecConfigInfos: SpecConfigInfo[];
+  SpecConfigInfos?: SpecConfigInfo[];
 }
 
 /** 实例可售卖规格详细信息，创建实例和扩容实例时 NodeCount、Memory 确定售卖规格，硬盘大小可用区间为[MinStorage,MaxStorage] */
 declare interface SpecConfigInfo {
   /** 节点个数，2 表示一主一从，3 表示一主二从 */
-  NodeCount: number;
+  NodeCount?: number;
   /** 内存大小，单位 GB */
-  Memory: number;
+  Memory?: number;
   /** 数据盘规格最小值，单位 GB */
-  MinStorage: number;
+  MinStorage?: number;
   /** 数据盘规格最大值，单位 GB */
-  MaxStorage: number;
+  MaxStorage?: number;
   /** 推荐的使用场景 */
-  SuitInfo: string;
+  SuitInfo?: string;
   /** 产品类型 Id */
-  Pid: number;
+  Pid?: number;
   /** 最大 Qps 值 */
-  Qps: number;
+  Qps?: number;
   /** CPU核数 */
-  Cpu: number;
+  Cpu?: number;
 }
 
 /** 升级实例 -- 切分分片类型 */
@@ -733,9 +733,9 @@ declare interface SplitShardConfig {
 /** 数据库列信息 */
 declare interface TableColumn {
   /** 列名称 */
-  Col: string;
+  Col?: string;
   /** 列类型 */
-  Type: string;
+  Type?: string;
 }
 
 /** 数据库表权限 */
@@ -759,61 +759,61 @@ declare interface Tag {
 /** 临时实例 */
 declare interface TmpInstance {
   /** 应用ID */
-  AppId: number | null;
+  AppId?: number | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 实例备注 */
-  InstanceRemark: string | null;
+  InstanceRemark?: string | null;
   /** 0:非临时实例 ,1:无效临时实例, 2:回档成功的有效临时实例 */
-  TempType: number | null;
+  TempType?: number | null;
   /** 实例状态,0:待初始化,1:流程处理中,2:有效状态,-1:已隔离，-2：已下线 */
-  Status: number | null;
+  Status?: number | null;
   /** 实例 ID，形如：tdsql-ow728lmc。 */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 实例虚IP */
-  Vip: string | null;
+  Vip?: string | null;
   /** 实例虚端口 */
-  Vport: number | null;
+  Vport?: number | null;
   /** 有效期结束时间 */
-  PeriodEndTime: string | null;
+  PeriodEndTime?: string | null;
   /** 源实例 ID，形如：tdsql-ow728lmc。 */
-  SrcInstanceId: string | null;
+  SrcInstanceId?: string | null;
   /** 实例状态描述 */
-  StatusDesc: string | null;
+  StatusDesc?: string | null;
   /** 实例所在地域 */
-  Region: string | null;
+  Region?: string | null;
   /** 实例所在可用区 */
-  Zone: string | null;
+  Zone?: string | null;
   /** 实例虚IPv6 */
-  Vipv6: string | null;
+  Vipv6?: string | null;
   /** 实例IPv6标志 */
-  Ipv6Flag: number | null;
+  Ipv6Flag?: number | null;
 }
 
 /** 用户任务信息 */
 declare interface UserTaskInfo {
   /** 任务ID */
-  Id: number;
+  Id?: number;
   /** 用户账户ID */
-  AppId: number;
+  AppId?: number;
   /** 任务状态，0-任务初始化中；1-任务运行中；2-任务成功；3-任务失败 */
-  Status: number;
+  Status?: number;
   /** 任务类型，0-实例回档；1-实例创建；2-实例扩容；3-实例迁移；4-实例删除；5-实例重启 */
-  UserTaskType: number;
+  UserTaskType?: number;
   /** 任务创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 任务结束时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 任务错误信息 */
-  ErrMsg: string;
+  ErrMsg?: string;
   /** 客户端参数 */
-  InputData: string;
+  InputData?: string;
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例名称 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 地域ID */
-  RegionId: number;
+  RegionId?: number;
 }
 
 /** 视图权限信息 */
@@ -909,7 +909,7 @@ declare interface CloseDBExtranetAccessRequest {
 
 declare interface CloseDBExtranetAccessResponse {
   /** 异步任务ID，可通过 DescribeFlow 查询任务状态。 */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1239,13 +1239,13 @@ declare interface DescribeAccountPrivilegesRequest {
 
 declare interface DescribeAccountPrivilegesResponse {
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 权限列表。 */
-  Privileges: string[];
+  Privileges?: string[];
   /** 数据库账号用户名 */
-  UserName: string;
+  UserName?: string;
   /** 数据库账号Host */
-  Host: string;
+  Host?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1311,9 +1311,9 @@ declare interface DescribeBackupFilesRequest {
 
 declare interface DescribeBackupFilesResponse {
   /** 备份文件列表 */
-  Files: InstanceBackupFileItem[];
+  Files?: InstanceBackupFileItem[];
   /** 总条目数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1325,11 +1325,11 @@ declare interface DescribeDBEncryptAttributesRequest {
 
 declare interface DescribeDBEncryptAttributesResponse {
   /** 是否启用加密，1-已开启；0-未开启。 */
-  EncryptStatus: number;
+  EncryptStatus?: number;
   /** DEK密钥 */
-  CipherText: string;
+  CipherText?: string;
   /** DEK密钥过期日期。 */
-  ExpireDate: string;
+  ExpireDate?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1385,11 +1385,11 @@ declare interface DescribeDBSecurityGroupsRequest {
 
 declare interface DescribeDBSecurityGroupsResponse {
   /** 安全组详情。 */
-  Groups: SecurityGroup[];
+  Groups?: SecurityGroup[];
   /** 实例VIP */
-  VIP: string | null;
+  VIP?: string | null;
   /** 实例端口 */
-  VPort: string | null;
+  VPort?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1645,9 +1645,9 @@ declare interface DescribeDCDBInstancesRequest {
   Tags?: Tag[];
   /** 实例类型过滤，1-独享实例，2-主实例，3-灾备实例，多个按逗号分隔 */
   FilterInstanceType?: string;
-  /** 按实例状态筛选 */
+  /** 按实例状态筛选。状态值 -2：已删除； -1：已隔离；0：创建中；1：流程处理中；2：运行中 */
   Status?: number[];
-  /** 排除实例状态 */
+  /** 排除实例状态。状态值 -2：已删除； -1：已隔离；0：创建中；1：流程处理中；2：运行中 */
   ExcludeStatus?: number[];
 }
 
@@ -1735,11 +1735,11 @@ declare interface DescribeDCDBShardsRequest {
 
 declare interface DescribeDCDBShardsResponse {
   /** 符合条件的分片数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 分片信息列表 */
-  Shards: DCDBShardInfo[];
+  Shards?: DCDBShardInfo[];
   /** 灾备标志，0-无，1-主实例，2-灾备实例 */
-  DcnFlag: number | null;
+  DcnFlag?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1779,17 +1779,17 @@ declare interface DescribeDatabaseObjectsRequest {
 
 declare interface DescribeDatabaseObjectsResponse {
   /** 透传入参。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 数据库名称。 */
-  DbName: string;
+  DbName?: string;
   /** 表列表。 */
-  Tables: DatabaseTable[];
+  Tables?: DatabaseTable[];
   /** 视图列表。 */
-  Views: DatabaseView[];
+  Views?: DatabaseView[];
   /** 存储过程列表。 */
-  Procs: DatabaseProcedure[];
+  Procs?: DatabaseProcedure[];
   /** 函数列表。 */
-  Funcs: DatabaseFunction[];
+  Funcs?: DatabaseFunction[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1805,13 +1805,13 @@ declare interface DescribeDatabaseTableRequest {
 
 declare interface DescribeDatabaseTableResponse {
   /** 实例名称。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 数据库名称。 */
-  DbName: string;
+  DbName?: string;
   /** 表名称。 */
-  Table: string;
+  Table?: string;
   /** 列信息。 */
-  Cols: TableColumn[];
+  Cols?: TableColumn[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1865,7 +1865,7 @@ declare interface DescribeFlowRequest {
 
 declare interface DescribeFlowResponse {
   /** 流程状态，0：成功，1：失败，2：运行中 */
-  Status: number;
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1907,9 +1907,9 @@ declare interface DescribeProjectSecurityGroupsRequest {
 
 declare interface DescribeProjectSecurityGroupsResponse {
   /** 安全组详情。 */
-  Groups: SecurityGroup[];
+  Groups?: SecurityGroup[];
   /** 安全组个数。 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1955,9 +1955,9 @@ declare interface DescribeUserTasksRequest {
 
 declare interface DescribeUserTasksResponse {
   /** 任务总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 任务列表 */
-  FlowSet: UserTaskInfo[];
+  FlowSet?: UserTaskInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2105,7 +2105,7 @@ declare interface KillSessionRequest {
 
 declare interface KillSessionResponse {
   /** 任务ID */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2305,7 +2305,7 @@ declare interface ModifyInstanceVipRequest {
 
 declare interface ModifyInstanceVipResponse {
   /** 异步任务流程ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2361,7 +2361,7 @@ declare interface RenewDCDBInstanceRequest {
 
 declare interface RenewDCDBInstanceResponse {
   /** 长订单号。可以据此调用 DescribeOrders 查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。 */
-  DealName: string;
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

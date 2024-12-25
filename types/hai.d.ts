@@ -38,7 +38,7 @@ declare interface Instance {
   InstanceId?: string | null;
   /** 实例名称 */
   InstanceName?: string | null;
-  /** 实例状态：PENDING：表示创建中LAUNCH_FAILED：表示创建失败RUNNING：表示运行中ARREARS：表示欠费隔离TERMINATING：表示销毁中。TERMINATED：表示已销毁 */
+  /** 实例状态：PENDING：表示创建中LAUNCH_FAILED：表示创建失败RUNNING：表示运行中ARREARS：表示待回收STOPPED_NO_CHARGE：表示关机不收费TERMINATING：表示销毁中TERMINATED：表示已销毁 */
   InstanceState?: string | null;
   /** 应用名称 */
   ApplicationName?: string | null;

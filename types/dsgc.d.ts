@@ -5,19 +5,19 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** AKSK泄漏信息 */
 declare interface AKSKLeak {
   /** AK编码 */
-  AK?: string | null;
+  AK?: string;
   /** SK编码 */
-  SK?: string | null;
+  SK?: string;
   /** URL编码 */
-  URL?: string | null;
+  URL?: string;
 }
 
 /** 账户风险 */
 declare interface AccountRisk {
   /** id（可不参考） */
-  Id?: string | null;
+  Id?: string;
   /** 风险账户 */
-  RiskAccount?: string | null;
+  RiskAccount?: string;
 }
 
 /** DSPA评估控制项 */
@@ -27,7 +27,7 @@ declare interface AssessmentControlItem {
   /** 评估项名称 */
   ItemName?: string;
   /** 评估项描述 */
-  Description?: string | null;
+  Description?: string;
   /** 评估项来源，内置/用户自定，取值（system，user） */
   Source?: string;
   /** 评估项类型，问卷/自动化，取值（questionnaire，auto） */
@@ -39,7 +39,7 @@ declare interface AssessmentControlItem {
   /** 评估项启用状态，启用/未启用，取值draft / launched */
   Status?: string;
   /** 评估项关联的模板数量 */
-  TemplateCount?: number | null;
+  TemplateCount?: number;
 }
 
 /** DSPA评估风险项 */
@@ -47,7 +47,7 @@ declare interface AssessmentRisk {
   /** 风险项Id */
   RiskId?: string;
   /** 风险项描述 */
-  RiskDescription?: string | null;
+  RiskDescription?: string;
   /** 评估模板Id */
   TemplateId?: string;
   /** 评估模板名称 */
@@ -71,41 +71,41 @@ declare interface AssessmentRisk {
   /** 风险涉及资产 */
   RelatedAsset?: string;
   /** 风险涉及资产id */
-  DataSourceId?: string | null;
+  DataSourceId?: string;
   /** 风险涉及资产名称 */
-  DataSourceName?: string | null;
+  DataSourceName?: string;
   /** 资产名称 */
-  AssetName?: string | null;
+  AssetName?: string;
   /** 建议使用安全产品 */
-  SecurityProduct?: SecurityProduct[] | null;
+  SecurityProduct?: SecurityProduct[];
   /** 风险类型 */
-  RiskType?: string | null;
+  RiskType?: string;
   /** 风险面 */
-  RiskSide?: string | null;
+  RiskSide?: string;
   /** 数据源类型 */
-  DataSourceType?: string | null;
+  DataSourceType?: string;
 }
 
 /** 风险项列表详细数据 */
 declare interface AssessmentRiskItem {
   /** 脆弱项id */
-  Id?: number | null;
+  Id?: number;
   /** 名称 */
-  RiskName?: string | null;
+  RiskName?: string;
   /** 脆弱性级别 */
-  Level?: string | null;
+  Level?: string;
   /** 说明 */
-  Description?: string | null;
+  Description?: string;
   /** 风险类型 */
-  RiskType?: string | null;
+  RiskType?: string;
   /** 关联模板个数 */
-  ReferTemplateCount?: number | null;
+  ReferTemplateCount?: number;
   /** 支持的数据源 */
-  SupportDataSource?: string[] | null;
+  SupportDataSource?: string[];
   /** 风险面 */
-  RiskSide?: string | null;
+  RiskSide?: string;
   /** 关联模板列表 */
-  ReferTemplateList?: TemplateInfo[] | null;
+  ReferTemplateList?: TemplateInfo[];
 }
 
 /** DSPA评估任务 */
@@ -113,7 +113,7 @@ declare interface AssessmentTask {
   /** 评估任务Id */
   TaskId: string;
   /** 评估任务的自增ID */
-  TaskUid: number | null;
+  TaskUid: number;
   /** 评估任务名称 */
   TaskName: string;
   /** 业务名称 */
@@ -135,7 +135,7 @@ declare interface AssessmentTask {
   /** 风险项数量（仅状态为finished的风险项不计入总数，其余状态均算入该数量） */
   RiskCount: number;
   /** 评估任务完成时间 */
-  FinishedTime: string | null;
+  FinishedTime: string;
   /** 评估任务发起时间 */
   CreatedTime: string;
   /** 评估状态。(waiting待评估，processing评估中, , finished已评估, failed评估失败) */
@@ -143,25 +143,25 @@ declare interface AssessmentTask {
   /** 待处理各等级风险项信息 */
   RiskCountInfoList: RiskCountInfo[];
   /** 数据源信息 */
-  DiscoveryCondition: DiscoveryCondition | null;
+  DiscoveryCondition: DiscoveryCondition;
   /** 评估任务失败信息 */
   ErrorInfo: string;
   /** 模板主键id */
-  TemplateUid: number | null;
+  TemplateUid: number;
   /** 进度百分比 */
-  ProgressPercent: number | null;
+  ProgressPercent: number;
 }
 
 /** DSPA评估模板 */
 declare interface AssessmentTemplate {
   /** id */
-  Id?: number | null;
+  Id?: number;
   /** 评估模板Id */
   TemplateId?: string;
   /** 评估模板名称 */
   TemplateName?: string;
   /** 描述信息 */
-  Description?: string | null;
+  Description?: string;
   /** 模板来源，内置/用户自定，取值（system，user） */
   Source?: string;
   /** 模板类型，自动化/半自动化/问卷，取值（auto，semi-auto，law）等 */
@@ -175,47 +175,47 @@ declare interface AssessmentTemplate {
   /** 模板启用状态，草稿/已启用，取值draft / launched */
   Status?: string;
   /** 支持的数据源类型 */
-  SupportDataSource?: string[] | null;
+  SupportDataSource?: string[];
   /** 是否包含攻击面风险 */
-  IsASMTemplate?: boolean | null;
+  IsASMTemplate?: boolean;
   /** 合规组id */
-  IdentifyComplianceId?: number | null;
+  IdentifyComplianceId?: number;
 }
 
 /** 数据资产报告-cos的资产详情 */
 declare interface AssetCosDetail {
   /** 桶的名 */
-  Bucket?: string | null;
+  Bucket?: string;
   /** 数据源类型 */
-  DataType?: string | null;
+  DataType?: string;
   /** 文件的个数 */
-  FileNums?: number | null;
+  FileNums?: number;
   /** 敏感的文件个数 */
-  SensitiveFileNums?: number | null;
+  SensitiveFileNums?: number;
   /** 敏感分布 */
-  DistributionData?: Note[] | null;
+  DistributionData?: Note[];
   /** cos文件的敏感数据个数 */
-  MatchedNum?: number | null;
+  MatchedNum?: number;
 }
 
 /** RDB敏感资产详情列表 */
 declare interface AssetDBDetail {
   /** 数据源id */
-  DataSourceId?: string | null;
+  DataSourceId?: string;
   /** 数据库名称 */
-  DdName?: string | null;
+  DdName?: string;
   /** 数据库类型 */
-  DataType?: string | null;
+  DataType?: string;
   /** 表的数量 */
-  TableNums?: number | null;
+  TableNums?: number;
   /** 敏感表数量 */
-  SensitiveTableNums?: number | null;
+  SensitiveTableNums?: number;
   /** 字段的数量 */
-  FieldNums?: number | null;
+  FieldNums?: number;
   /** 敏感字段的数量 */
-  SensitiveFieldNums?: number | null;
+  SensitiveFieldNums?: number;
   /** 敏感数据分布 */
-  DistributionData?: Note[] | null;
+  DistributionData?: Note[];
 }
 
 /** 数据资产报告页面-用户查询入参 */
@@ -259,23 +259,23 @@ declare interface CategoryRule {
   /** 分类规则绑定关系id */
   Id?: number;
   /** 别名ID */
-  AliasRuleId?: number | null;
+  AliasRuleId?: number;
   /** 别名规则名称 */
-  AliasRuleName?: string | null;
+  AliasRuleName?: string;
   /** 各类分类分级规则数量 */
-  RuleEffectItems?: RuleEffectItem[] | null;
+  RuleEffectItems?: RuleEffectItem[];
   /** 规则状态 */
-  RuleStatus?: number | null;
+  RuleStatus?: number;
 }
 
 /** 分类规则统计信息 */
 declare interface CategoryRuleStatistic {
   /** 分类id */
-  CategoryId: number;
+  CategoryId?: number;
   /** 规则数量 */
-  RuleCount: number;
+  RuleCount?: number;
   /** 分类名称 */
-  CategoryName: string;
+  CategoryName?: string;
 }
 
 /** 云数据库资源项 */
@@ -293,19 +293,19 @@ declare interface ComplianceGroupDetail {
   /** 模板名称 */
   Name?: string;
   /** 描述 */
-  Description?: string | null;
+  Description?: string;
   /** 模板类型 */
-  ComplianceGroupType?: number | null;
+  ComplianceGroupType?: number;
   /** 模板分级方案id */
   LevelGroupId?: number;
   /** 模板分级方案名称 */
   LevelGroupName?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 更新时间 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
   /** 是否开启别名 */
-  IsAlias?: boolean | null;
+  IsAlias?: boolean;
 }
 
 /** 合规组中规则信息：包括规则ID，数据分类ID, 数据分级标识ID */
@@ -321,13 +321,13 @@ declare interface ComplianceGroupRuleIdInfo {
 /** 数据资产报告-cos的敏感资产报告详情 */
 declare interface CosAsset {
   /** 桶的个数 */
-  BucketNums?: number | null;
+  BucketNums?: number;
   /** 敏感桶的个数 */
-  SensitiveBucketNums?: number | null;
+  SensitiveBucketNums?: number;
   /** 文件个数 */
-  FileNums?: number | null;
+  FileNums?: number;
   /** 敏感文件的个数 */
-  SensitiveFileNums?: number | null;
+  SensitiveFileNums?: number;
 }
 
 /** cos桶资源项 */
@@ -355,7 +355,7 @@ declare interface CosTaskResult {
   /** 结果描述。 */
   ResultDescription?: string;
   /** 错误信息描述。 */
-  ErrDescription?: ErrDescription | null;
+  ErrDescription?: ErrDescription;
   /** 资源ID。 */
   ResourceId?: string;
 }
@@ -371,9 +371,9 @@ declare interface CreateComplianceRules {
 /** 绑定的实例信息 */
 declare interface DBInstanceInfo {
   /** 数据源id */
-  ResourceId?: string | null;
+  ResourceId?: string;
   /** 数据源绑定的db信息 */
-  DbInfos?: DbInfo[] | null;
+  DbInfos?: DbInfo[];
 }
 
 /** 数据库信息 */
@@ -407,23 +407,23 @@ declare interface DSPACosMetaDataInfo {
 /** DSPA数据源的数据库信息 */
 declare interface DSPADataSourceDbInfo {
   /** 数据库名称 */
-  DbName: string | null;
+  DbName?: string;
 }
 
 /** 元数据类型 */
 declare interface DSPAMetaType {
   /** 元数据类型 */
-  MetaType?: string | null;
+  MetaType?: string;
   /** 支持的此元数据类型的地域列表 */
-  Regions?: string[] | null;
+  Regions?: string[];
   /** 此元数据类型支持的授权类型：account -- 账户名密码授权，账户的最高只读权限需要由用户自行赋予；automatic -- 一键授权，由DSPA自动生成账户名密码并自动在实例中给账户名赋予最高只读权限；如果此列表为空，表明此类资源不支持以上的授权机制，无法通过后台进行授权。 */
-  SupportedAuthTypes?: string[] | null;
+  SupportedAuthTypes?: string[];
 }
 
 /** DSPA分类分级任务扫描的表信息 */
 declare interface DSPATableInfo {
   /** 表名 */
-  TableName: string | null;
+  TableName?: string;
 }
 
 /** 敏感数据分类 */
@@ -461,33 +461,33 @@ declare interface DataRules {
   /** 操作符；只能取and, or的其中一种 */
   Operator: string;
   /** 规则 */
-  Contents: DataRule[] | null;
+  Contents: DataRule[];
 }
 
 /** dsgc-资产梳理报表-数据源信息 */
 declare interface DataSourceInfo {
   /** 数据源ID */
-  DataSourceId: string | null;
+  DataSourceId: string;
   /** 针对rbd-就是绑定的db_name */
-  BindList?: string[] | null;
+  BindList?: string[];
 }
 
 /** 敏感数据识别规则扩展参数 */
 declare interface DatagovRuleExtendParameter {
   /** 扩展参数名称，目前支持如下两个扩展属性名称：IsFullWordMatch，表示是否全文匹配，该Name对应的Value可取值为"true"或"false":，默认值为"false"，IsIgnoreCase，表示是否忽略大小写，该Name对应的Value可取值为"true"或"false"，默认值为"true" */
-  Name?: string | null;
+  Name?: string;
   /** 扩展参数值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 查询绑定的db信息 */
 declare interface DbInfo {
   /** 数据库名称 */
-  DbName?: string | null;
+  DbName?: string;
   /** 绑定的状态 */
-  ValidStatus?: string | null;
+  ValidStatus?: string;
   /** 绑定的类型 */
-  BindType?: string | null;
+  BindType?: string;
 }
 
 /** 数据库实例的DB绑定关系状态信息。 */
@@ -513,7 +513,7 @@ declare interface DbTaskResult {
   /** 结果描述。 */
   ResultDescription?: string;
   /** 错误信息描述。 */
-  ErrDescription?: ErrDescription | null;
+  ErrDescription?: ErrDescription;
   /** 资源ID。 */
   ResourceId?: string;
   /** database名称。 */
@@ -523,13 +523,13 @@ declare interface DbTaskResult {
 /** DSPA敏感数据扫描数据源条件 */
 declare interface DiscoveryCondition {
   /** RDB实例列表 */
-  RDBInstances?: RDBInstance[] | null;
+  RDBInstances?: RDBInstance[];
   /** COS实例列表 */
-  COSInstances?: COSInstance[] | null;
+  COSInstances?: COSInstance[];
   /** Mongo实例列表 */
-  NOSQLInstances?: NOSQLInstance[] | null;
+  NOSQLInstances?: NOSQLInstance[];
   /** ES实例列表 */
-  ESInstances?: ESInstance[] | null;
+  ESInstances?: ESInstance[];
 }
 
 /** 描述键值对过滤器，用于条件过滤查询 */
@@ -543,23 +543,23 @@ declare interface DspaAssessmentFilter {
 /** COS对象存储敏感数据资产统计 */
 declare interface DspaCOSDataAssetCount {
   /** 数组资产类型，0代表关系型数据库资产，1代表对象存储COS资产 */
-  DataAssetType: number | null;
+  DataAssetType?: number;
   /** 已扫描的存储桶的个数 */
-  TotalBucketCnt: number | null;
+  TotalBucketCnt?: number;
   /** 对象总数 */
-  TotalObjectCnt: number | null;
+  TotalObjectCnt?: number;
   /** 敏感数据类型个数 */
-  SensitiveCategoryCnt: number | null;
+  SensitiveCategoryCnt?: number;
   /** 敏感数据条数 */
-  SensitiveDataCnt: number | null;
+  SensitiveDataCnt?: number;
   /** 敏感等级分布 */
-  SensitiveLevel: SensitiveLevel[] | null;
+  SensitiveLevel?: SensitiveLevel[];
   /** 敏感存储桶个数 */
-  SensitiveBucketCnt: number | null;
+  SensitiveBucketCnt?: number;
   /** 敏感对象个数 */
-  SensitiveObjectCnt: number | null;
+  SensitiveObjectCnt?: number;
   /** 数据分类分布 */
-  CategoryDistributed: DspaDataCategoryDistributed[] | null;
+  CategoryDistributed?: DspaDataCategoryDistributed[];
 }
 
 /** COS对象存储数据资产详情 */
@@ -589,21 +589,21 @@ declare interface DspaCOSDataAssetDetail {
   /** 规则id */
   RuleId?: number;
   /** 资源所在地域 */
-  ResourceRegion?: string | null;
+  ResourceRegion?: string;
   /** 分类ID */
-  CategoryId?: number | null;
+  CategoryId?: number;
   /** 分级ID */
-  LevelId?: number | null;
+  LevelId?: number;
   /** 文件扫描结果ID */
-  FileResultId?: number | null;
+  FileResultId?: number;
   /** 数据源名称 */
-  DataSourceName?: string | null;
+  DataSourceName?: string;
   /** 分类路径 */
-  CategoryFullPath?: string | null;
+  CategoryFullPath?: string;
   /** 0-系统识别1-人工识别 */
-  IdentifyType?: number | null;
+  IdentifyType?: number;
   /** 0-系统识别1-人工识别 */
-  CheckStatus?: number | null;
+  CheckStatus?: number;
 }
 
 /** COS敏感数据扫描任务相关信息 */
@@ -623,25 +623,25 @@ declare interface DspaCOSDiscoveryTask {
   /** 通用规则集开关，0 关闭，1 启用 */
   GeneralRuleSetEnable?: number;
   /** 任务最新的一次执行结果信息，该字段用于查询任务列表接口 */
-  Result?: ScanTaskResult | null;
+  Result?: ScanTaskResult;
   /** 定时开始时间 */
-  TimingStartTime?: string | null;
+  TimingStartTime?: string;
   /** 关联分类模板是否更新 */
-  ComplianceUpdate?: boolean | null;
+  ComplianceUpdate?: boolean;
 }
 
 /** 扫描任务元数据信息 */
 declare interface DspaCOSDiscoveryTaskDataSourceInfo {
   /** 数据源ID */
-  DataSourceId: string;
+  DataSourceId?: string;
   /** 代理地址 */
-  ProxyAddress: string[] | null;
+  ProxyAddress?: string[];
   /** 数据源名称 */
-  DataSourceName: string | null;
+  DataSourceName?: string;
   /** 扫描任务条件 */
-  Condition: DspaDiscoveryTaskCOSCondition | null;
+  Condition?: DspaDiscoveryTaskCOSCondition;
   /** 资源所在地域 */
-  ResourceRegion: string | null;
+  ResourceRegion?: string;
 }
 
 /** COS敏感数据扫描任务相关信息 */
@@ -661,43 +661,43 @@ declare interface DspaCOSDiscoveryTaskDetail {
   /** 通用规则集开关，0 关闭，1 启用 */
   GeneralRuleSetEnable?: number;
   /** 当创建任务时，用户打开了通用规则集开关，则该字段就会保存默认合规组信息 */
-  DefaultComplianceInfo?: ScanTaskComplianceInfo[] | null;
+  DefaultComplianceInfo?: ScanTaskComplianceInfo[];
   /** 该任务中用户选择的合规组信息列表 */
-  CustomComplianceInfo?: ScanTaskComplianceInfo[] | null;
+  CustomComplianceInfo?: ScanTaskComplianceInfo[];
   /** 定时开始时间 */
-  TimingStartTime?: string | null;
+  TimingStartTime?: string;
 }
 
 /** COS扫描任务结果，按照数据库级别展示 */
 declare interface DspaCOSDiscoveryTaskResult {
   /** 扫描bucket结果ID */
-  BucketResultId: number;
+  BucketResultId?: number;
   /** 任务ID */
-  TaskId: number;
+  TaskId?: number;
   /** 任务名称 */
-  TaskName: string;
+  TaskName?: string;
   /** 扫描任务最新一次扫描结果ID */
-  ResultId: number;
+  ResultId?: number;
   /** 数据源ID */
-  DataSourceId: string;
+  DataSourceId?: string;
   /** 桶名称 */
-  BucketName: string;
+  BucketName?: string;
   /** 总文件数 */
-  TotalFiles: number;
+  TotalFiles?: number;
   /** 被识别出的敏感数据数 */
-  SensitiveDataNums: number;
+  SensitiveDataNums?: number;
   /** Bucket扫描的结束时间，格式如：2006-01-02 15:04:05 */
-  EndTime: string;
+  EndTime?: string;
   /** 数据源名称 */
-  DataSourceName: string | null;
+  DataSourceName?: string;
   /** Bucket扫描状态，0待扫描 1扫描中 2扫描终止 3扫描成功 4扫描失败 */
-  Status: number;
+  Status?: number;
   /** Bucket扫描结果错误信息 */
-  ErrorInfo: string | null;
+  ErrorInfo?: string;
   /** 资源所在地域 */
-  ResourceRegion: string | null;
+  ResourceRegion?: string;
   /** 是否超额 */
-  OverSize?: string | null;
+  OverSize?: string;
 }
 
 /** 云上资源元数据 */
@@ -721,13 +721,13 @@ declare interface DspaCloudResourceMeta {
 /** DSPA数据分类分布 */
 declare interface DspaDataCategoryDistributed {
   /** 数据分类ID */
-  CategoryId: number | null;
+  CategoryId?: number;
   /** 数据分类名称 */
-  CategoryName: string | null;
+  CategoryName?: string;
   /** 数据分类统计个数 */
-  Count: number | null;
+  Count?: number;
   /** 分类路径 */
-  CategoryFullPath: string | null;
+  CategoryFullPath?: string;
 }
 
 /** 过滤内容 */
@@ -741,23 +741,23 @@ declare interface DspaDataSourceMngFilter {
 /** COS敏感数据识别规则 */
 declare interface DspaDiscoveryCOSDataRule {
   /** 只能取and 、or两个值其中之一，and：字段和内容同时满足，or：字段和内容满足其一.默认值为or */
-  Operator?: string | null;
+  Operator?: string;
   /** 规则内容 */
-  Contents?: DspaDiscoveryDataContent[] | null;
+  Contents?: DspaDiscoveryDataContent[];
 }
 
 /** 分类分级任务COS识别规则 */
 declare interface DspaDiscoveryCOSRules {
   /** 规则状态；0 不启用, 1 启用 */
-  Status?: number | null;
+  Status?: number;
   /** regex规则内容 */
-  RegexRule?: DspaDiscoveryCOSDataRule | null;
+  RegexRule?: DspaDiscoveryCOSDataRule;
   /** 关键词规则内容组，最大支持5个关键词。 */
-  KeywordRule?: DspaDiscoveryCOSDataRule | null;
+  KeywordRule?: DspaDiscoveryCOSDataRule;
   /** 忽略词规则内容组，最大支持5个忽略词。 */
-  IgnoreStringRule?: DspaDiscoveryCOSDataRule | null;
+  IgnoreStringRule?: DspaDiscoveryCOSDataRule;
   /** 最大匹配距离，默认值为100。上限为500. */
-  MaxMatch?: number | null;
+  MaxMatch?: number;
 }
 
 /** COS扫描任务结果详情 */
@@ -765,187 +765,193 @@ declare interface DspaDiscoveryCOSTaskResultDetail {
   /** 任务ID */
   TaskId?: number;
   /** 扫描File结果详情ID */
-  FileResultId?: number | null;
+  FileResultId?: number;
   /** 所属桶名 */
-  BucketName?: string | null;
+  BucketName?: string;
   /** 所属文件名 */
-  FileName?: string | null;
+  FileName?: string;
   /** 敏感数据分类ID */
-  CategoryId?: number | null;
+  CategoryId?: number;
   /** 敏感数据分类名称 */
-  CategoryName?: string | null;
+  CategoryName?: string;
   /** 敏感数据分级ID */
-  LevelId?: number | null;
+  LevelId?: number;
   /** 敏感数据分级名称 */
-  LevelName?: string | null;
+  LevelName?: string;
   /** KMS加密，true or false */
-  KMSEncrypted?: boolean | null;
+  KMSEncrypted?: boolean;
   /** 规则名称 */
-  RuleName?: string | null;
+  RuleName?: string;
   /** 规则ID */
-  RuleId?: number | null;
+  RuleId?: number;
   /** 敏感数据分级分数 */
-  LevelRiskScore?: number | null;
+  LevelRiskScore?: number;
   /** 文件大小，单位为KB */
-  FileSize?: number | null;
+  FileSize?: number;
   /** 文件类型，如csv，txt */
-  FileType?: string | null;
+  FileType?: string;
   /** 敏感数据出现次数 */
-  SensitiveDataCount?: number | null;
+  SensitiveDataCount?: number;
   /** 分类树路径 */
-  CategoryFullPath?: string[] | null;
+  CategoryFullPath?: string[];
+  /** 分类树路径 */
+  CategoryArr?: string[];
   /** 合规组ID */
-  ComplianceId?: number | null;
+  ComplianceId?: number;
   /** 结果id */
-  ResultId?: number | null;
+  ResultId?: number;
 }
 
 /** 合规组 */
 declare interface DspaDiscoveryComplianceGroup {
   /** 合规组ID */
-  ComplianceGroupId: number | null;
+  ComplianceGroupId?: number;
   /** 合规组名称 */
-  Name: string | null;
+  Name?: string;
   /** 合规组描述信息 */
-  Description: string | null;
+  Description?: string;
   /** 合规组类型；0 默认合规组，1 系统合规组（除默认合规组外）, 2 自定义合规组 */
-  ComplianceGroupType: number | null;
+  ComplianceGroupType?: number;
   /** 合规组对应的规则项 */
-  ComplianceGroupRules: DspaDiscoveryComplianceGroupRuleInfo[] | null;
+  ComplianceGroupRules?: DspaDiscoveryComplianceGroupRuleInfo[];
   /** 合规组对应的分级组ID */
-  LevelGroupId: number | null;
+  LevelGroupId?: number;
 }
 
 /** 合规组信息 */
 declare interface DspaDiscoveryComplianceGroupInfo {
   /** 合规组ID */
-  ComplianceGroupId?: number | null;
+  ComplianceGroupId?: number;
   /** 合规组名称 */
-  Name?: string | null;
+  Name?: string;
   /** 合规组描述信息 */
-  Description?: string | null;
+  Description?: string;
   /** 合规组类型；0 默认合规组，1 系统合规组（除默认合规组外）, 2 自定义合规组 */
-  ComplianceGroupType?: number | null;
+  ComplianceGroupType?: number;
   /** 合规组对应的规则项 */
-  ComplianceGroupRules?: DspaDiscoveryComplianceGroupRule[] | null;
+  ComplianceGroupRules?: DspaDiscoveryComplianceGroupRule[];
   /** 合规组对应的分级组ID */
-  LevelGroupId?: number | null;
+  LevelGroupId?: number;
   /** 是否禁止使用（true，禁止使用，false，可以使用） */
-  Disabled?: boolean | null;
+  Disabled?: boolean;
   /** 是否别名 */
-  IsAlias?: boolean | null;
+  IsAlias?: boolean;
+  /** 1代表模版开启，0代表模版关闭 */
+  Status?: number;
+  /** 模版最后修改时间 */
+  ModifyTime?: string;
 }
 
 /** 合规组中规则信息，用于合规组列表中规则信息展示 */
 declare interface DspaDiscoveryComplianceGroupRule {
   /** 敏感数据识别规则ID */
-  RuleId: number | null;
+  RuleId?: number;
   /** 敏感数据识别规则名称 */
-  RuleName: string | null;
+  RuleName?: string;
   /** 敏感数据分类ID */
-  CategoryId: number | null;
+  CategoryId?: number;
   /** 敏感数据分级ID, 目前只支持高、中、低三级 */
-  LevelId: number | null;
+  LevelId?: number;
   /** 合规组对应的分类信息 */
-  CategoryName: string | null;
+  CategoryName?: string;
   /** 分级名称 */
-  LevelRiskName: string | null;
+  LevelRiskName?: string;
 }
 
 /** 合规组中规则信息，用于合规组列表中规则信息展示 */
 declare interface DspaDiscoveryComplianceGroupRuleInfo {
   /** 敏感数据识别规则ID */
-  RuleId: number | null;
+  RuleId?: number;
   /** 敏感数据识别规则名称 */
-  RuleName: string | null;
+  RuleName?: string;
   /** 敏感数据分类ID */
-  CategoryId: number | null;
+  CategoryId?: number;
   /** 敏感数据分级ID, 目前只支持高、中、低三级 */
-  LevelId: number | null;
+  LevelId?: number;
 }
 
 /** 扫描规则内容 */
 declare interface DspaDiscoveryDataContent {
   /** 规则内容，可以是正则规则，关键词，忽略词扥 */
-  RuleContent?: string | null;
+  RuleContent?: string;
   /** 是否区分大小写false: 不区分大小写true:区分大小写 */
-  IsIgnoreCase?: boolean | null;
+  IsIgnoreCase?: boolean;
 }
 
 /** 敏感数据识别规则 */
 declare interface DspaDiscoveryDataRule {
   /** 规则类型；取值：keyword 关键字, regex 正则 */
-  RuleType: string | null;
+  RuleType: string;
   /** 内容 */
-  RuleContent: string | null;
+  RuleContent: string;
   /** 该字段是针对规则类型RuleType为keyword类型时的一个扩展属性 */
-  ExtendParameters?: DatagovRuleExtendParameter[] | null;
+  ExtendParameters?: DatagovRuleExtendParameter[];
 }
 
 /** 敏感数据识别规则集 */
 declare interface DspaDiscoveryDataRules {
   /** 操作符；只能取and, or的其中一种 */
-  Operator: string | null;
+  Operator: string;
   /** 规则 */
-  Contents: DspaDiscoveryDataRule[] | null;
+  Contents: DspaDiscoveryDataRule[];
 }
 
 /** 敏感数据分级信息 */
 declare interface DspaDiscoveryLevelDetail {
   /** 分级组名称，唯一性约束，最多60个字符，仅允许输入中文、英文字母、数字、'_'、'-'，并且开头和结尾需为中文、英文字母或者数字，Name不可重复 */
-  LevelGroupName: string | null;
+  LevelGroupName?: string;
   /** 分级组来源，0为内置，1为自定义 */
-  Source: number | null;
+  Source?: number;
   /** 分级组描述，最多1024字符 */
-  LevelGroupDesc: string | null;
+  LevelGroupDesc?: string;
   /** 具体分级标识详情 */
-  LevelDetail: LevelItem[] | null;
+  LevelDetail?: LevelItem[];
   /** 引用合规组次数 */
-  RefComplianceCnt: number | null;
+  RefComplianceCnt?: number;
   /** 引用合规组 */
-  RefCompliance: DspaDiscoveryComplianceGroup[] | null;
+  RefCompliance?: DspaDiscoveryComplianceGroup[];
   /** 分级组ID */
-  LevelGroupId: number | null;
+  LevelGroupId?: number;
 }
 
 /** 分类分级任务RDB数据规则 */
 declare interface DspaDiscoveryRDBRules {
   /** 规则状态；0 不启用, 1 启用 */
-  Status: number | null;
+  Status: number;
   /** 只能取and 、or两个值其中之一，and：字段和内容同时满足，or：字段和内容满足其一 */
-  MatchOperator: string | null;
+  MatchOperator: string;
   /** 字段名包含规则，最大支持选择9项 */
-  MetaRule: DspaDiscoveryDataRules | null;
+  MetaRule: DspaDiscoveryDataRules;
   /** 内容包含规则，最大支持选择9项 */
-  ContentRule: DspaDiscoveryDataRules | null;
+  ContentRule: DspaDiscoveryDataRules;
 }
 
 /** 敏感数据扫描任务识别规则详情 */
 declare interface DspaDiscoveryRuleDetail {
   /** 规则ID */
-  RuleId?: number | null;
+  RuleId?: number;
   /** 规则名称 */
-  Name?: string | null;
+  Name?: string;
   /** 规则描述 */
-  Description?: string | null;
+  Description?: string;
   /** 规则来源，取值：0 内置, 1 自定义 */
-  Source?: number | null;
+  Source?: number;
   /** RDB规则详情 */
-  RDBRules?: DspaDiscoveryRDBRules | null;
+  RDBRules?: DspaDiscoveryRDBRules;
   /** COS规则详情 */
-  COSRules?: DspaDiscoveryCOSRules | null;
+  COSRules?: DspaDiscoveryCOSRules;
   /** 0关闭，1开启 */
-  Status?: number | null;
+  Status?: number;
 }
 
 /** 描述对象存储类敏感识别扫描人元数据条件。 */
 declare interface DspaDiscoveryTaskCOSCondition {
   /** 数据桶名称 */
-  Bucket: string | null;
+  Bucket?: string;
   /** 文件类型 */
-  FileTypes: string[] | null;
+  FileTypes?: string[];
   /** 文件大小上限，单位为KB，如1000, 目前单个文件最大只支持1GB（1048576KB） */
-  FileSizeLimit: number | null;
+  FileSizeLimit?: number;
 }
 
 /** 扫描任务数据源信息 */
@@ -955,13 +961,13 @@ declare interface DspaDiscoveryTaskDataSource {
   /** 用于传入的数据源的条件，可以选择多个数据库，数据库之间通过逗号分隔，如果为空，默认是全部数据库 */
   Condition?: string;
   /** 代理地址 */
-  ProxyAddress?: string[] | null;
+  ProxyAddress?: string[];
   /** 数据源名称 */
-  DataSourceName?: string | null;
+  DataSourceName?: string;
   /** 资源所在地域 */
-  ResourceRegion?: string | null;
+  ResourceRegion?: string;
   /** 数据源类型 */
-  DataSourceType?: string | null;
+  DataSourceType?: string;
 }
 
 /** 扫描任务结果，按照数据库级别展示 */
@@ -985,17 +991,17 @@ declare interface DspaDiscoveryTaskDbResult {
   /** DB扫描的结束时间，格式如：2006-01-02 15:04:05 */
   EndTime?: string;
   /** 数据源名称 */
-  DataSourceName?: string | null;
+  DataSourceName?: string;
   /** DB扫描状态，0待扫描 1扫描中 2扫描终止 3扫描成功 4扫描失败 */
   Status?: number;
   /** DB扫描结果错误信息 */
-  ErrorInfo?: string | null;
+  ErrorInfo?: string;
   /** 资源所在地域 */
-  ResourceRegion?: string | null;
+  ResourceRegion?: string;
   /** 敏感字段数 */
-  SensitiveField?: number | null;
+  SensitiveField?: number;
   /** 总的字段数 */
-  TotalField?: number | null;
+  TotalField?: number;
 }
 
 /** 敏感数据扫描任务相关信息 */
@@ -1003,7 +1009,7 @@ declare interface DspaDiscoveryTaskDetail {
   /** 任务名称 */
   Name?: string;
   /** 任务描述 */
-  Description?: string | null;
+  Description?: string;
   /** 执行周期，0单次 1每天 2每周 3每月 */
   Period?: number;
   /** 执行计划，0立即 1定时 */
@@ -1011,15 +1017,15 @@ declare interface DspaDiscoveryTaskDetail {
   /** 任务开关；1 打开，0 关闭 */
   Enable?: number;
   /** 元数据对象信息 */
-  DataSourceInfo?: DspaDiscoveryTaskDataSource | null;
+  DataSourceInfo?: DspaDiscoveryTaskDataSource;
   /** 通用规则集开关，0 关闭，1 启用 */
-  GeneralRuleSetEnable?: number | null;
+  GeneralRuleSetEnable?: number;
   /** 当创建任务时，用户打开了通用规则集开关，则该字段就会保存默认合规组信息 */
-  DefaultComplianceInfo?: ScanTaskComplianceInfo[] | null;
+  DefaultComplianceInfo?: ScanTaskComplianceInfo[];
   /** 该任务中用户选择的合规组信息列表 */
-  CustomComplianceInfo?: ScanTaskComplianceInfo[] | null;
+  CustomComplianceInfo?: ScanTaskComplianceInfo[];
   /** 定时开始时间 */
-  TimingStartTime?: string | null;
+  TimingStartTime?: string;
 }
 
 /** 扫描任务结果详情 */
@@ -1047,15 +1053,17 @@ declare interface DspaDiscoveryTaskResultDetail {
   /** 敏感数据分级分数 */
   LevelRiskScore?: number;
   /** 保护措施 */
-  SafeGuard?: DspaSafeGuard | null;
+  SafeGuard?: DspaSafeGuard;
   /** 分类路径 */
-  CategoryFullPath?: string | null;
+  CategoryFullPath?: string;
+  /** 模式名 */
+  SchemaName?: string;
 }
 
 /** 数据样本 */
 declare interface DspaFieldResultDataSample {
   /** 数据样本 */
-  DataSample: string | null;
+  DataSample?: string;
 }
 
 /** Dspa实例信息 */
@@ -1091,35 +1099,35 @@ declare interface DspaInstance {
   /** 0: 默认状态(用户未设置)1: 开启自动续费2: 明确不自动续费 */
   RenewFlag?: number;
   /** 实例渠道 */
-  Channel?: string | null;
+  Channel?: string;
   /** 已授权的实例数量 */
-  InsAuthCount?: number | null;
+  InsAuthCount?: number;
   /** 已购买的实例数量 */
-  InsTotalQuota?: number | null;
+  InsTotalQuota?: number;
 }
 
 /** RDB关系型数据库敏感数据资产统计 */
 declare interface DspaRDBDataAssetCount {
   /** 数组资产类型，0代表关系型数据库资产，1代表对象存储COS资产 */
-  DataAssetType: number | null;
+  DataAssetType?: number;
   /** 已扫描的数据库的个数 */
-  TotalDbCnt: number | null;
+  TotalDbCnt?: number;
   /** 数据库表的个数 */
-  TotalTableCnt: number | null;
+  TotalTableCnt?: number;
   /** 敏感数据类型个数 */
-  SensitiveCategoryCnt: number | null;
+  SensitiveCategoryCnt?: number;
   /** 敏感字段的个数 */
-  SensitiveFieldCnt: number | null;
+  SensitiveFieldCnt?: number;
   /** 敏感等级分布 */
-  SensitiveLevel: SensitiveLevel[] | null;
+  SensitiveLevel?: SensitiveLevel[];
   /** 敏感数据库的个数 */
-  SensitiveDbCnt: number | null;
+  SensitiveDbCnt?: number;
   /** 敏感数据库表的个数 */
-  SensitiveTableCnt: number | null;
+  SensitiveTableCnt?: number;
   /** 扫描字段的个数 */
-  TotalFieldCnt: number | null;
+  TotalFieldCnt?: number;
   /** 数据分类分布 */
-  CategoryDistributed: DspaDataCategoryDistributed[] | null;
+  CategoryDistributed?: DspaDataCategoryDistributed[];
 }
 
 /** 关系型数据库资产详情 */
@@ -1141,31 +1149,33 @@ declare interface DspaRDBDataAssetDetail {
   /** 敏感等级 */
   LevelRiskName?: string;
   /** 分级风险分数，1-10，最小值为1，最大值为10 */
-  LevelRiskScore?: number | null;
+  LevelRiskScore?: number;
   /** 可信分 */
-  TrustedScore?: string | null;
+  TrustedScore?: string;
   /** 资源所在地域 */
-  ResourceRegion?: string | null;
+  ResourceRegion?: string;
   /** 字段扫描结果ID */
-  FieldResultId?: string | null;
+  FieldResultId?: string;
   /** 规则ID */
-  RuleId?: number | null;
+  RuleId?: number;
   /** 分级ID */
-  LevelId?: number | null;
+  LevelId?: number;
   /** 分类ID */
-  CategoryId?: number | null;
+  CategoryId?: number;
   /** 数据源名称 */
-  DataSourceName?: string | null;
+  DataSourceName?: string;
   /** 保护措施 */
-  SafeGuard?: DspaSafeGuard | null;
+  SafeGuard?: DspaSafeGuard;
   /** 分类路径 */
-  CategoryFullPath?: string | null;
+  CategoryFullPath?: string;
   /** 0.系统识别，1人工打标 */
-  IdentifyType?: number | null;
+  IdentifyType?: number;
   /** 0未核查 1已核查 */
-  CheckStatus?: number | null;
+  CheckStatus?: number;
   /** 0非敏感，1敏感 */
-  IsSensitiveData?: number | null;
+  IsSensitiveData?: number;
+  /** 模式名 */
+  SchemaName?: string;
 }
 
 /** 资源账户信息 */
@@ -1181,9 +1191,9 @@ declare interface DspaResourceAccount {
 /** 分类分级扫描结果字段的保护措施 */
 declare interface DspaSafeGuard {
   /** 加密状态，可取值如下：UNSET 未设置DISABLE 规则设置未启用ENABLE 规则设置并启用 */
-  Encrypt: string | null;
+  Encrypt?: string;
   /** 脱敏状态，可取值如下：UNSET 未设置DISABLE 规则设置未启用ENABLE 规则设置并启用 */
-  Desensitization: string | null;
+  Desensitization?: string;
 }
 
 /** 任务执行结果描述。 */
@@ -1239,97 +1249,97 @@ declare interface DspaUserResourceMeta {
   /** 授权账号名 */
   ResourceAuthAccount?: string;
   /** 实例类型 */
-  InstanceType?: string | null;
+  InstanceType?: string;
   /** 实例值 */
-  InstanceValue?: string | null;
+  InstanceValue?: string;
   /** //治理授权状态（0：关闭 1：开启） */
   GovernAuthStatus?: number;
   /** 授权范围：all - 授权整个数据源 manual:手动指定数据源 */
-  AuthRange?: string | null;
+  AuthRange?: string;
 }
 
 /** es的资产统计结果 */
 declare interface ESAsset {
   /** 索引总数量 */
-  IndexNums?: number | null;
+  IndexNums?: number;
   /** 敏感索引的数量 */
-  SensitiveIndexNums?: number | null;
+  SensitiveIndexNums?: number;
   /** 字段数量 */
-  FieldNums?: number | null;
+  FieldNums?: number;
   /** 敏感的字段数量 */
-  SensitiveFieldNums?: number | null;
+  SensitiveFieldNums?: number;
 }
 
 /** es敏感资产详情列表 */
 declare interface ESAssetDBDetail {
   /** 数据源id */
-  DataSourceId?: string | null;
+  DataSourceId?: string;
   /** 索引名称 */
-  IndexName?: string | null;
+  IndexName?: string;
   /** 数据库类型 */
-  DataType?: string | null;
+  DataType?: string;
   /** 字段的数量 */
-  FieldNums?: number | null;
+  FieldNums?: number;
   /** 敏感字段的数量 */
-  SensitiveFieldNums?: number | null;
+  SensitiveFieldNums?: number;
   /** 敏感数据分布 */
-  DistributionData?: Note[] | null;
+  DistributionData?: Note[];
 }
 
 /** ES的概览页统计数据 */
 declare interface ESDataAssetCountDto {
   /** es */
-  DataAssetType?: number | null;
+  DataAssetType?: number;
   /** 敏感索引个数 */
-  SensitiveIndexCnt?: number | null;
+  SensitiveIndexCnt?: number;
   /** 总的索引个数 */
-  TotalIndexCnt?: number | null;
+  TotalIndexCnt?: number;
   /** 敏感字段个数 */
-  SensitiveFieldCnt?: number | null;
+  SensitiveFieldCnt?: number;
   /** 总的字段个数 */
-  TotalFieldCnt?: number | null;
+  TotalFieldCnt?: number;
   /** 敏感分类的个数 */
-  SensitiveCategoryCnt?: number | null;
+  SensitiveCategoryCnt?: number;
   /** 敏感分级的分布 */
-  SensitiveLevel?: SensitiveLevel[] | null;
+  SensitiveLevel?: SensitiveLevel[];
   /** 敏感分类的分布 */
-  CategoryDistributed?: DspaDataCategoryDistributed[] | null;
+  CategoryDistributed?: DspaDataCategoryDistributed[];
 }
 
 /** ES的概览页资产详情 */
 declare interface ESDataAssetDetail {
   /** id */
-  FieldResultId?: number | null;
+  FieldResultId?: number;
   /** 数据源id */
-  DataSourceId?: string | null;
+  DataSourceId?: string;
   /** 数据源名称 */
-  DataSourceName?: string | null;
+  DataSourceName?: string;
   /** 类型 */
-  DataSourceType?: string | null;
+  DataSourceType?: string;
   /** 地域信息 */
-  ResourceRegion?: string | null;
+  ResourceRegion?: string;
   /** 索引名称 */
-  IndexName?: string | null;
+  IndexName?: string;
   /** 字段名称 */
-  FieldName?: string | null;
+  FieldName?: string;
   /** 分类id */
-  CategoryId?: number | null;
+  CategoryId?: number;
   /** 分类名称 */
-  CategoryName?: string | null;
+  CategoryName?: string;
   /** 分类路径数组 */
-  CategoryArr?: string[] | null;
+  CategoryArr?: string[];
   /** 等级id */
-  LevelId?: number | null;
+  LevelId?: number;
   /** 分级名称 */
-  LevelRiskName?: string | null;
+  LevelRiskName?: string;
   /** 分级分数 */
-  LevelRiskScore?: number | null;
+  LevelRiskScore?: number;
   /** 可信分 */
-  TrustedScore?: number | null;
+  TrustedScore?: number;
   /** 规则id */
-  RuleId?: number | null;
+  RuleId?: number;
   /** 规则名称 */
-  RuleName?: string | null;
+  RuleName?: string;
   /** 0系统识别，1人工打标 */
   IdentifyType?: number;
   /** 0未核查，1已核查 */
@@ -1353,27 +1363,27 @@ declare interface ESInstance {
 /** ES扫描任务结果详情 */
 declare interface ESTaskResultDetail {
   /** id */
-  Id?: number | null;
+  Id?: number;
   /** 任务id */
-  TaskId?: number | null;
+  TaskId?: number;
   /** 字段名称 */
-  FieldName?: string | null;
+  FieldName?: string;
   /** 规则id */
-  RuleId?: number | null;
+  RuleId?: number;
   /** 规则名称 */
-  RuleName?: string | null;
+  RuleName?: string;
   /** 分类id */
-  CategoryId?: number | null;
+  CategoryId?: number;
   /** 分类名称 */
-  CategoryName?: string | null;
+  CategoryName?: string;
   /** 多级分类的路径 */
-  CategoryArr?: string[] | null;
+  CategoryArr?: string[];
   /** 分级id */
-  LevelId?: number | null;
+  LevelId?: number;
   /** 分级名称 */
-  LevelName?: string | null;
+  LevelName?: string;
   /** 分级分数 */
-  LevelRiskScore?: number | null;
+  LevelRiskScore?: number;
 }
 
 /** 错误信息描述 */
@@ -1395,23 +1405,23 @@ declare interface Filter {
 /** 高风险资产详情信息 */
 declare interface HighRiskAssetsDetail {
   /** 实例id */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 数据源类型 */
-  DataSourceType?: string | null;
+  DataSourceType?: string;
   /** 数据源名称 */
-  DataSourceName?: string | null;
+  DataSourceName?: string;
   /** 资产对象名称 */
-  AssetsName?: string | null;
+  AssetsName?: string;
   /** 高风险个数 */
-  HighRiskCount?: number | null;
+  HighRiskCount?: number;
   /** 风险类型 */
-  RiskType?: string | null;
+  RiskType?: string;
   /** 总的风险个数 */
-  TotalRiskCount?: number | null;
+  TotalRiskCount?: number;
   /** 风险面 */
-  RiskSide?: string | null;
+  RiskSide?: string;
   /** 地域 */
-  ResourceRegion?: string | null;
+  ResourceRegion?: string;
 }
 
 /** 某个分级单个信息 */
@@ -1437,97 +1447,97 @@ declare interface LevelItem {
 /** mongo的资产统计结果 */
 declare interface MongoAsset {
   /** DB总数量 */
-  DbNums?: number | null;
+  DbNums?: number;
   /** 敏感DB数量 */
-  SensitiveDbNums?: number | null;
+  SensitiveDbNums?: number;
   /** 集合数量 */
-  ColNums?: number | null;
+  ColNums?: number;
   /** 敏感集合的数量 */
-  SensitiveColNums?: number | null;
+  SensitiveColNums?: number;
   /** 字段数量 */
-  FieldNums?: number | null;
+  FieldNums?: number;
   /** 敏感的字段数量 */
-  SensitiveFieldNums?: number | null;
+  SensitiveFieldNums?: number;
 }
 
 /** mongo敏感资产详情列表 */
 declare interface MongoAssetDBDetail {
   /** 数据源id */
-  DataSourceId?: string | null;
+  DataSourceId?: string;
   /** 数据库名称 */
-  DdName?: string | null;
+  DdName?: string;
   /** 数据库类型 */
-  DataType?: string | null;
+  DataType?: string;
   /** 集合的数量 */
-  ColNums?: number | null;
+  ColNums?: number;
   /** 敏感集合数量 */
-  SensitiveColNums?: number | null;
+  SensitiveColNums?: number;
   /** 字段的数量 */
-  FieldNums?: number | null;
+  FieldNums?: number;
   /** 敏感字段的数量 */
-  SensitiveFieldNums?: number | null;
+  SensitiveFieldNums?: number;
   /** 敏感数据分布 */
-  DistributionData?: Note[] | null;
+  DistributionData?: Note[];
 }
 
 /** NOSQL类型的数据源实例 */
 declare interface NOSQLInstance {
   /** 数据源id */
-  DataSourceId: string | null;
+  DataSourceId: string;
   /** cdb, dcdb, mariadb, postgres, cynosdbpg, cynosdbmysql, cos, mysql_like_proto, postgre_like_proto,mongodb */
-  DataSourceType: string | null;
+  DataSourceType: string;
   /** 资源所在地域 */
-  ResourceRegion: string | null;
+  ResourceRegion: string;
   /** 根据实例创建的敏感数据识别扫描任务Id */
-  DiscoveryTaskId?: number | null;
+  DiscoveryTaskId?: number;
   /** 敏感数据识别任务实例id */
-  DiscoveryTaskInstanceID?: number | null;
+  DiscoveryTaskInstanceID?: number;
 }
 
 /** 数据资产报告-各种key-value的展示数据结构 */
 declare interface Note {
   /** 通用key，例如分类名称 */
-  Key?: string | null;
+  Key?: string;
   /** 通用value，例如分类个数 */
-  Value?: number | null;
+  Value?: number;
 }
 
 /** 权限风险详情 */
 declare interface PrivilegeRisk {
   /** 账户名 */
-  AccountName?: string[] | null;
+  AccountName?: string[];
   /** 表名称 */
-  TableName?: string | null;
+  TableName?: string;
   /** 说明 */
-  Description?: string | null;
+  Description?: string;
 }
 
 /** 处理历史 */
 declare interface ProcessHistory {
   /** 处理时间 */
-  Time?: string | null;
+  Time?: string;
   /** 状态 */
-  Status?: number | null;
+  Status?: number;
   /** 处理人 */
-  Handler?: string | null;
+  Handler?: string;
   /** 备注 */
-  Note?: string | null;
+  Note?: string;
 }
 
 /** rdb的资产统计结果 */
 declare interface RDBAsset {
   /** DB总数量 */
-  DbNums?: number | null;
+  DbNums?: number;
   /** 敏感DB数量 */
-  SensitiveDbNums?: number | null;
+  SensitiveDbNums?: number;
   /** 表数量 */
-  TableNums?: number | null;
+  TableNums?: number;
   /** 敏感表的数量 */
-  SensitiveTableNums?: number | null;
+  SensitiveTableNums?: number;
   /** 字段数量 */
-  FieldNums?: number | null;
+  FieldNums?: number;
   /** 敏感的字段数量 */
-  SensitiveFieldNums?: number | null;
+  SensitiveFieldNums?: number;
 }
 
 /** RDB实例信息 */
@@ -1539,7 +1549,7 @@ declare interface RDBInstance {
   /** 资源所在地域 */
   ResourceRegion: string;
   /** 若未来扩展到DBName粒度，可采用 */
-  DBs?: DBStatements[] | null;
+  DBs?: DBStatements[];
 }
 
 /** 报表信息 */
@@ -1549,31 +1559,31 @@ declare interface ReportInfo {
   /** 报告名称 */
   ReportName?: string;
   /** 报告类型（AssetSorting:资产梳理） */
-  ReportType?: string | null;
+  ReportType?: string;
   /** 报告周期（0单次 1每天 2每周 3每月） */
-  ReportPeriod?: number | null;
+  ReportPeriod?: number;
   /** 执行计划 （0:单次报告 1:定时报告） */
-  ReportPlan?: number | null;
+  ReportPlan?: number;
   /** 报告导出状态（Success 成功, Failed 失败, InProgress 进行中） */
-  ReportStatus?: string | null;
+  ReportStatus?: string;
   /** 任务下次启动时间 */
-  TimingStartTime?: string | null;
+  TimingStartTime?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 完成时间 */
-  FinishedTime?: string | null;
+  FinishedTime?: string;
   /** 子账号uin */
-  SubUin?: string | null;
+  SubUin?: string;
   /** 失败信息 */
-  FailedMessage?: string | null;
+  FailedMessage?: string;
   /** 是否启用（0：否 1：是） */
-  Enable?: number | null;
+  Enable?: number;
   /** 识别模板名称 */
-  ComplianceName?: string | null;
+  ComplianceName?: string;
   /** 进度百分比 */
-  ProgressPercent?: number | null;
+  ProgressPercent?: number;
   /** 报告模版名称 */
-  ReportTemplateName?: string | null;
+  ReportTemplateName?: string;
 }
 
 /** 待处理风险项数量信息 */
@@ -1583,19 +1593,19 @@ declare interface RiskCountInfo {
   /** 该等级风险项数量 */
   Count: number;
   /** 风险等级名称 */
-  RiskLevelName: string | null;
+  RiskLevelName: string;
 }
 
 /** 风险趋势项 */
 declare interface RiskDealedTrendItem {
   /** 日期 */
-  Date: string;
+  Date?: string;
   /** 未解决数量 */
-  Unhandled: number;
+  Unhandled?: number;
   /** 已解决数量 */
-  Handled: number;
+  Handled?: number;
   /** 新发现 */
-  NewDiscoveryHandled?: number | null;
+  NewDiscoveryHandled?: number;
 }
 
 /** 风险TOP5统计项 */
@@ -1611,71 +1621,71 @@ declare interface RiskItemInfo {
   /** 最新风险项id */
   Id?: number;
   /** 数据源id */
-  DataSourceId?: string | null;
+  DataSourceId?: string;
   /** 数据源名称 */
-  DataSourceName?: string | null;
+  DataSourceName?: string;
   /** 数据源类型 */
-  DataSourceType?: string | null;
+  DataSourceType?: string;
   /** 资源地域 */
-  ResourceRegion?: string | null;
+  ResourceRegion?: string;
   /** 资产名称 */
-  AssetName?: string | null;
+  AssetName?: string;
   /** 风险类型 */
-  RiskType?: string | null;
+  RiskType?: string;
   /** 风险项 */
-  RiskName?: string | null;
+  RiskName?: string;
   /** 风险级别 */
-  RiskLevel?: string | null;
+  RiskLevel?: string;
   /** 风险描述 */
-  RiskDescription?: string | null;
+  RiskDescription?: string;
   /** 建议措施 */
-  SuggestAction?: string | null;
+  SuggestAction?: string;
   /** 安全产品（可能有多个） */
-  SecurityProduct?: SecurityProduct[] | null;
+  SecurityProduct?: SecurityProduct[];
   /** 状态(waiting:待处理，processing:处理中，finished:已处理，ignored:已忽略) */
-  Status?: number | null;
+  Status?: number;
   /** 扫描时间 */
-  ScanTime?: string | null;
+  ScanTime?: string;
   /** 最后处置时间 */
-  LastProcessTime?: string | null;
+  LastProcessTime?: string;
   /** 分类分级合规组Id */
-  IdentifyComplianceId?: number | null;
+  IdentifyComplianceId?: number;
   /** 类型 */
-  ItemSubType?: string | null;
+  ItemSubType?: string;
   /** 风险面 */
-  RiskSide?: string | null;
+  RiskSide?: string;
   /** API安全风险链接 */
-  APIRiskLinkURL?: string | null;
+  APIRiskLinkURL?: string;
   /** 备注 */
-  Remark?: string | null;
+  Remark?: string;
 }
 
 /** 风险级别详情的矩阵 */
 declare interface RiskLevelMatrix {
   /** 存储id */
-  Id?: number | null;
+  Id?: number;
   /** 分类分级levelID */
-  SensitiveLevelId?: number | null;
+  SensitiveLevelId?: number;
   /** 分类分级名称 */
-  SensitiveLevelName?: string | null;
+  SensitiveLevelName?: string;
   /** 漏洞级别 */
-  VulnerabilityLevel?: string | null;
+  VulnerabilityLevel?: string;
   /** 风险级别 */
-  RiskLevel?: string | null;
+  RiskLevel?: string;
 }
 
 /** 风险等级列表 */
 declare interface RiskLevelRisk {
   /** 风险id */
-  Id?: number | null;
+  Id?: number;
   /** 风险等级列表 */
-  RiskLevelName?: string | null;
+  RiskLevelName?: string;
   /** 风险级别描述 */
-  RiskLevelDescription?: string | null;
+  RiskLevelDescription?: string;
   /** 引用的分类分级模板 */
-  IdentifyComplianceName?: string | null;
+  IdentifyComplianceName?: string;
   /** 类型，区分自定义还是系统内置 */
-  Type?: string | null;
+  Type?: string;
 }
 
 /** 风险级别趋势项 */
@@ -1695,53 +1705,53 @@ declare interface RiskLevelTrendItem {
 /** 用于生成默认的风险级别矩阵 */
 declare interface RiskMatrixLevel {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 就是id */
-  Id?: number | null;
+  Id?: number;
   /** 分数 */
-  Score?: number | null;
+  Score?: number;
 }
 
 /** 风险面的分布 */
 declare interface RiskSideDistributed {
   /** 风险面 */
-  AssessmentRiskSide?: Note | null;
+  AssessmentRiskSide?: Note;
   /** 风险类型 */
-  AssessmentRisk?: Note[] | null;
+  AssessmentRisk?: Note[];
 }
 
 /** 数据资产报告-rdb的敏感数据规则分布 */
 declare interface RuleDistribution {
   /** 规则id */
-  RuleId?: number | null;
+  RuleId?: number;
   /** 规则名称 */
-  RuleName?: string | null;
+  RuleName?: string;
   /** 分级id */
-  LevelId?: number | null;
+  LevelId?: number;
   /** 分级名称 */
-  LevelName?: string | null;
+  LevelName?: string;
   /** 规则数量 */
-  RuleCnt?: number | null;
+  RuleCnt?: number;
 }
 
 /** 分类分级规则数量 */
 declare interface RuleEffectItem {
   /** 规则描述 */
-  Name?: string | null;
+  Name?: string;
   /** 规则值 */
-  Value?: number | null;
+  Value?: number;
 }
 
 /** 敏感识别任务COS识别规则 */
 declare interface ScanTaskCOSRules {
   /** regex规则内容 */
-  RegexRule: COSDataRule | null;
+  RegexRule: COSDataRule;
   /** 规则状态；0 不启用, 1 启用 */
   Status?: number;
   /** 关键词规则内容组，最大支持5个关键词。 */
-  KeywordRule?: COSDataRule | null;
+  KeywordRule?: COSDataRule;
   /** 忽略词规则内容组，最大支持5个忽略词。 */
-  IgnoreStringRule?: COSDataRule | null;
+  IgnoreStringRule?: COSDataRule;
   /** 最大匹配距离，默认值为100。上限为500. */
   MaxMatch?: number;
 }
@@ -1769,21 +1779,25 @@ declare interface ScanTaskRDBRules {
 /** 扫描任务结果信息 */
 declare interface ScanTaskResult {
   /** 任务最新一次运行结果ID */
-  Id: number;
+  Id?: number;
   /** 任务扫描结束的时间，格式如：2021-12-12 12:12:12 */
-  EndTime: string;
+  EndTime?: string;
   /** 任务状态，-1待触发 0待扫描 1扫描中 2扫描终止 3扫描成功 4扫描失败 */
-  Status: number;
+  Status?: number;
   /** 扫描任务结果展示，如果扫描失败，则显示失败原因 */
-  Result: string;
+  Result?: string;
+  /** 结果描述 */
+  ResultDescription?: string;
+  /** 结果建议 */
+  Suggestion?: string;
 }
 
 /** 建议使用的安全产品 */
 declare interface SecurityProduct {
   /** 产品名称 */
-  ProductName?: string | null;
+  ProductName?: string;
   /** 产品链接 */
-  ReferUrl?: string | null;
+  ReferUrl?: string;
 }
 
 /** 敏感等级分布 */
@@ -1801,45 +1815,45 @@ declare interface SensitiveLevel {
 /** 生成的建议的风险等级矩阵 */
 declare interface SuggestRiskLevelMatrix {
   /** 矩阵 */
-  RiskLevelMatrix?: SuggestRiskLevelMatrixItem[] | null;
+  RiskLevelMatrix?: SuggestRiskLevelMatrixItem[];
 }
 
 /** 建议生成的二位矩阵的第二层 */
 declare interface SuggestRiskLevelMatrixItem {
   /** 分类分级等级 */
-  SensitiveLevel?: RiskMatrixLevel | null;
+  SensitiveLevel?: RiskMatrixLevel;
   /** 脆弱项等级 */
-  VulnerabilityLevel?: RiskMatrixLevel | null;
+  VulnerabilityLevel?: RiskMatrixLevel;
   /** 风险名 */
-  RiskName?: string | null;
+  RiskName?: string;
   /** 分数 */
-  RiskScore?: number | null;
+  RiskScore?: number;
 }
 
-/** 评估模版的详情数据 */
+/** 评估模板的详情数据 */
 declare interface TemplateInfo {
   /** 模板id */
-  TemplateId: number | null;
+  TemplateId: number;
   /** 模板名称 */
-  TemplateName: string | null;
+  TemplateName: string;
 }
 
 /** 数据资产报告-涉敏top的资产 */
 declare interface TopAsset {
   /** 分级名称 */
-  LevelName?: string | null;
+  LevelName?: string;
   /** top数据信息 */
-  TopStat?: TopAssetStat[] | null;
+  TopStat?: TopAssetStat[];
 }
 
 /** 设敏top资产的信息 */
 declare interface TopAssetStat {
   /** 数据源id */
-  DataSourceId?: string | null;
+  DataSourceId?: string;
   /** db_name */
-  SubData?: string | null;
+  SubData?: string;
   /** 敏感个数 */
-  SensitiveCnt?: number | null;
+  SensitiveCnt?: number;
 }
 
 declare interface AuthorizeDSPAMetaResourcesRequest {
@@ -1863,7 +1877,7 @@ declare interface AuthorizeDSPAMetaResourcesResponse {
   /** DSPA实例ID。 */
   DspaId?: string;
   /** 授权结果。 */
-  Results?: DspaTaskResult[] | null;
+  Results?: DspaTaskResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1927,9 +1941,9 @@ declare interface CreateAssetSortingReportRetryTaskRequest {
 
 declare interface CreateAssetSortingReportRetryTaskResponse {
   /** 任务id */
-  ReportTaskId?: number | null;
+  ReportTaskId?: number;
   /** 提示信息 */
-  Remark?: string | null;
+  Remark?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1945,9 +1959,9 @@ declare interface CreateAssetSortingReportTaskRequest {
 
 declare interface CreateAssetSortingReportTaskResponse {
   /** 报表任务id */
-  ReportTaskId?: number | null;
+  ReportTaskId?: number;
   /** 提示信息 */
-  Remark?: string | null;
+  Remark?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2035,8 +2049,6 @@ declare interface CreateDSPACOSDiscoveryTaskRequest {
   Enable: number;
   /** 桶名 */
   Bucket: string;
-  /** 通用规则集开关，0 关闭，1 启用 */
-  GeneralRuleSetEnable: number;
   /** 执行计划， 0立即 1定时，选择“立即”时，扫描周期只能选择单次。 */
   Plan: number;
   /** 扫描周期，0单次 1每天 2每周 3每月 */
@@ -2049,6 +2061,8 @@ declare interface CreateDSPACOSDiscoveryTaskRequest {
   ResourceRegion: string;
   /** 任务描述，最大长度为1024个字符 */
   Description?: string;
+  /** 通用规则集开关，0 关闭，1 启用 */
+  GeneralRuleSetEnable?: number;
   /** 合规组ID列表，最多支持添加5个 */
   ComplianceGroupIds?: number[];
   /** 任务定时启动时间，格式如：2006-01-02 15:04:05当执行计划（Plan字段）为”立即“时，定时启动时间不会生效，此场景下给该字段传值不会被保存。 */
@@ -2057,9 +2071,9 @@ declare interface CreateDSPACOSDiscoveryTaskRequest {
 
 declare interface CreateDSPACOSDiscoveryTaskResponse {
   /** 任务ID */
-  TaskId: number;
+  TaskId?: number;
   /** 扫描结果ID */
-  ResultId: number | null;
+  ResultId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2089,7 +2103,7 @@ declare interface CreateDSPACategoryRequest {
 
 declare interface CreateDSPACategoryResponse {
   /** 敏感数据分类ID */
-  CategoryId: number;
+  CategoryId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2105,11 +2119,15 @@ declare interface CreateDSPAComplianceGroupRequest {
   ComplianceGroupRules?: ComplianceGroupRuleIdInfo[];
   /** 分级组ID，默认值为1，新增参数，可选 */
   LevelGroupId?: number;
+  /** 1代表模版开启，0代表模版关闭 */
+  Status?: number;
+  /** 该complianceId的开启状态将被关闭 */
+  CloseComplianceId?: number;
 }
 
 declare interface CreateDSPAComplianceGroupResponse {
   /** 合规组ID */
-  ComplianceGroupId: number;
+  ComplianceGroupId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2207,8 +2225,6 @@ declare interface CreateDSPADiscoveryTaskRequest {
   DataSourceId: string;
   /** 任务开关，0 关闭，1 启用 */
   Enable: number;
-  /** 通用规则集开关，0 关闭，1 启用 */
-  GeneralRuleSetEnable: number;
   /** 执行计划， 0立即 1定时，选择“立即”时，扫描周期只能选择单次 */
   Plan: number;
   /** 扫描周期，0单次 1每天 2每周 3每月 */
@@ -2217,6 +2233,8 @@ declare interface CreateDSPADiscoveryTaskRequest {
   ResourceRegion: string;
   /** 数据源类型，可取值如下：cdb 表示云数据库 MySQL,dcdb 表示TDSQL MySQL版,mariadb 表示云数据库 MariaDB,postgres 表示云数据库 PostgreSQL,cynosdbpg 表示TDSQL-C PostgreSQL版,cynosdbmysql 表示TDSQL-C MySQL版,selfbuilt-db 表示自建数据库 */
   DataSourceType: string;
+  /** 通用规则集开关，0 关闭，1 启用 */
+  GeneralRuleSetEnable?: number;
   /** 任务描述，最大长度为1024个字符 */
   Description?: string;
   /** 用于传入的数据源的条件，目前只支持数据库，所以目前表示数据库的名称，选择多个数据库，之间通过逗号分隔，若不选，则默认选择全部数据库 */
@@ -2237,7 +2255,7 @@ declare interface CreateDSPADiscoveryTaskResponse {
   /** 任务ID */
   TaskId?: number;
   /** 扫描结果ID */
-  ResultId?: number | null;
+  ResultId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2255,7 +2273,7 @@ declare interface CreateDSPALevelGroupRequest {
 
 declare interface CreateDSPALevelGroupResponse {
   /** 分级组ID */
-  LevelGroupId: number;
+  LevelGroupId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2351,9 +2369,9 @@ declare interface CreateIdentifyRuleAnotherNameRequest {
 
 declare interface CreateIdentifyRuleAnotherNameResponse {
   /** 创建的别名规则id */
-  AliasRuleId?: number | null;
+  AliasRuleId?: number;
   /** 别名规则名称 */
-  AliasRuleName?: string | null;
+  AliasRuleName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2401,7 +2419,7 @@ declare interface DeleteCosMetaResourceRequest {
 
 declare interface DeleteCosMetaResourceResponse {
   /** 结果集合。 */
-  Results?: DspaTaskResult[] | null;
+  Results?: DspaTaskResult[];
   /** DSPA实例ID。 */
   DspaId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -2513,37 +2531,37 @@ declare interface DescribeAssetOverviewRequest {
 
 declare interface DescribeAssetOverviewResponse {
   /** 数据库实例id */
-  DBInstanceNums?: number | null;
+  DBInstanceNums?: number;
   /** 数据库个数 */
-  DBNums?: number | null;
+  DBNums?: number;
   /** 表的个数 */
-  TableNums?: number | null;
+  TableNums?: number;
   /** 字段个数 */
-  FieldNums?: number | null;
+  FieldNums?: number;
   /** 数据库实例的分布情况 */
-  DBInstanceDistribution?: Note[] | null;
+  DBInstanceDistribution?: Note[];
   /** db分布情况 */
-  DBDistribution?: Note[] | null;
+  DBDistribution?: Note[];
   /** cos桶的数量 */
-  BucketNums?: number | null;
+  BucketNums?: number;
   /** 文件个数 */
-  FileNums?: number | null;
+  FileNums?: number;
   /** 用于对用户进行提示信息 */
-  Remark?: string | null;
+  Remark?: string;
   /** es实例数量 */
-  EsInstanceNums?: number | null;
+  EsInstanceNums?: number;
   /** es索引数量 */
-  EsIndexNums?: number | null;
+  EsIndexNums?: number;
   /** es字段数量 */
-  EsFieldNums?: number | null;
+  EsFieldNums?: number;
   /** mongo实例数量 */
-  MongoInstanceNums?: number | null;
+  MongoInstanceNums?: number;
   /** mongo数据库数量 */
-  MongoDbNums?: number | null;
+  MongoDbNums?: number;
   /** mongo集合数量 */
-  MongoColNums?: number | null;
+  MongoColNums?: number;
   /** mongo字段数量 */
-  MongoFieldNums?: number | null;
+  MongoFieldNums?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2559,9 +2577,9 @@ declare interface DescribeBindDBListRequest {
 
 declare interface DescribeBindDBListResponse {
   /** 绑定的DB列表（已废弃） */
-  BindDBList?: string[] | null;
+  BindDBList?: string[];
   /** 绑定信息 */
-  BindList?: DBInstanceInfo[] | null;
+  BindList?: DBInstanceInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2577,11 +2595,11 @@ declare interface DescribeCOSAssetSensitiveDistributionRequest {
 
 declare interface DescribeCOSAssetSensitiveDistributionResponse {
   /** cos的涉敏资产 */
-  CosAsset?: CosAsset | null;
+  CosAsset?: CosAsset;
   /** 涉敏top */
-  TopAsset?: TopAsset[] | null;
+  TopAsset?: TopAsset[];
   /** cos资产详情列表 */
-  CosDetail?: AssetCosDetail[] | null;
+  CosDetail?: AssetCosDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2613,7 +2631,7 @@ declare interface DescribeDSPAAssessmentHighRiskTop10OverviewRequest {
 
 declare interface DescribeDSPAAssessmentHighRiskTop10OverviewResponse {
   /** 含高风险资产TOP10的列表数据 */
-  AssetsList?: HighRiskAssetsDetail[] | null;
+  AssetsList?: HighRiskAssetsDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2629,43 +2647,43 @@ declare interface DescribeDSPAAssessmentLatestRiskDetailInfoRequest {
 
 declare interface DescribeDSPAAssessmentLatestRiskDetailInfoResponse {
   /** 数据源id */
-  DataSourceId?: string | null;
+  DataSourceId?: string;
   /** 数据源name */
-  DataSourceName?: string | null;
+  DataSourceName?: string;
   /** 资产对象名称 */
-  AssetName?: string | null;
+  AssetName?: string;
   /** 风险评估模板id */
-  AssessmentTemplateId?: number | null;
+  AssessmentTemplateId?: number;
   /** 分类分级的模板id */
-  IdentifyTemplateId?: number | null;
+  IdentifyTemplateId?: number;
   /** 风险类型 */
-  RiskType?: string | null;
+  RiskType?: string;
   /** 风险项 */
-  RiskName?: string | null;
+  RiskName?: string;
   /** 风险的描述 */
-  RiskDescription?: string | null;
+  RiskDescription?: string;
   /** 风险的级别 */
-  RiskLevel?: string | null;
+  RiskLevel?: string;
   /** 处置的建议 */
-  SuggestAction?: string | null;
+  SuggestAction?: string;
   /** 处置状态 */
-  Status?: number | null;
+  Status?: number;
   /** 备注 */
-  Remark?: string | null;
+  Remark?: string;
   /** 安全产品 */
-  SecurityProduct?: SecurityProduct[] | null;
+  SecurityProduct?: SecurityProduct[];
   /** 风险归属 */
-  RiskDimension?: string | null;
+  RiskDimension?: string;
   /** 关联数据库（如果风险归属是instance） */
-  RelationAsset?: string[] | null;
+  RelationAsset?: string[];
   /** 风险账号详情 */
-  AccountRiskDetail?: AccountRisk[] | null;
+  AccountRiskDetail?: AccountRisk[];
   /** 权限风险详情 */
-  PrivilegeRiskDetail?: PrivilegeRisk[] | null;
+  PrivilegeRiskDetail?: PrivilegeRisk[];
   /** 策略风险的cos风险文件列表 */
-  PolicyRiskCosFileList?: string[] | null;
+  PolicyRiskCosFileList?: string[];
   /** AKSK泄漏列表 */
-  AKSKLeak?: AKSKLeak[] | null;
+  AKSKLeak?: AKSKLeak[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2701,7 +2719,7 @@ declare interface DescribeDSPAAssessmentLatestRiskListRequest {
 
 declare interface DescribeDSPAAssessmentLatestRiskListResponse {
   /** 最新风险详情列表 */
-  LatestRiskList?: RiskItemInfo[] | null;
+  LatestRiskList?: RiskItemInfo[];
   /** 总条数 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -2784,8 +2802,8 @@ declare interface DescribeDSPAAssessmentRiskDatasourceTop5Request {
 }
 
 declare interface DescribeDSPAAssessmentRiskDatasourceTop5Response {
-  /** 无 */
-  Items: RiskItem[] | null;
+  /** 风险值 */
+  Items?: RiskItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2821,7 +2839,7 @@ declare interface DescribeDSPAAssessmentRiskDealedTrendRequest {
 
 declare interface DescribeDSPAAssessmentRiskDealedTrendResponse {
   /** 趋势统计结果 */
-  Items?: RiskDealedTrendItem[] | null;
+  Items?: RiskDealedTrendItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2837,11 +2855,11 @@ declare interface DescribeDSPAAssessmentRiskDistributionOverviewRequest {
 
 declare interface DescribeDSPAAssessmentRiskDistributionOverviewResponse {
   /** 风险类型分布 */
-  RiskTypeDistribution?: Note[] | null;
+  RiskTypeDistribution?: Note[];
   /** 风险详情分布 */
-  RiskDetailDistribution?: Note[] | null;
+  RiskDetailDistribution?: Note[];
   /** 风险资产详情 */
-  RiskAssetsDistribution?: Note[] | null;
+  RiskAssetsDistribution?: Note[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2852,8 +2870,8 @@ declare interface DescribeDSPAAssessmentRiskItemTop5Request {
 }
 
 declare interface DescribeDSPAAssessmentRiskItemTop5Response {
-  /** 无 */
-  Items: RiskItem[] | null;
+  /** 风险结果 */
+  Items?: RiskItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2869,13 +2887,13 @@ declare interface DescribeDSPAAssessmentRiskLevelDetailResponse {
   /** 风险级别名称 */
   RiskLevelName?: string;
   /** 风险级别描述 */
-  RiskLevelDescription?: string | null;
+  RiskLevelDescription?: string;
   /** 分类分级id */
-  IdentifyComplianceId?: number | null;
+  IdentifyComplianceId?: number;
   /** 分类分级模板名称 */
   IdentifyComplianceName?: string;
   /** 风险数据 */
-  RiskLevelMatrix?: RiskLevelMatrix[] | null;
+  RiskLevelMatrix?: RiskLevelMatrix[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2893,7 +2911,7 @@ declare interface DescribeDSPAAssessmentRiskLevelListResponse {
   /** 总条数 */
   TotalCount?: number;
   /** 风险等级列表 */
-  RiskLevelList?: RiskLevelRisk[] | null;
+  RiskLevelList?: RiskLevelRisk[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2911,7 +2929,7 @@ declare interface DescribeDSPAAssessmentRiskLevelTrendRequest {
 
 declare interface DescribeDSPAAssessmentRiskLevelTrendResponse {
   /** 结果集 */
-  Items?: RiskLevelTrendItem[] | null;
+  Items?: RiskLevelTrendItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2937,13 +2955,13 @@ declare interface DescribeDSPAAssessmentRiskOverviewResponse {
 declare interface DescribeDSPAAssessmentRiskProcessHistoryRequest {
   /** dspa实例id */
   DspaId: string;
-  /** xxx */
+  /** 风险id */
   RiskId: number;
 }
 
 declare interface DescribeDSPAAssessmentRiskProcessHistoryResponse {
   /** 处理的历史 */
-  ProcessHistory?: ProcessHistory[] | null;
+  ProcessHistory?: ProcessHistory[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2957,7 +2975,7 @@ declare interface DescribeDSPAAssessmentRiskSideDistributedRequest {
 
 declare interface DescribeDSPAAssessmentRiskSideDistributedResponse {
   /** 风险面的分布 */
-  RiskSideDistributed?: RiskSideDistributed[] | null;
+  RiskSideDistributed?: RiskSideDistributed[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2971,7 +2989,7 @@ declare interface DescribeDSPAAssessmentRiskSideListRequest {
 
 declare interface DescribeDSPAAssessmentRiskSideListResponse {
   /** 风险面列表 */
-  RiskSideItmeList?: Note[] | null;
+  RiskSideItmeList?: Note[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2993,17 +3011,17 @@ declare interface DescribeDSPAAssessmentRiskTemplateDetailResponse {
   /** 模板名称 */
   TemplateName?: string;
   /** 模板的描述 */
-  TemplateDescription?: string | null;
+  TemplateDescription?: string;
   /** 风险等级 */
   RiskLevelId?: number;
   /** 风险等级名称 */
   RiskLevelName?: string;
   /** 脆弱项配置列表 */
-  RiskItemList?: AssessmentRiskItem[] | null;
+  RiskItemList?: AssessmentRiskItem[];
   /** 脆弱项配置条数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 被任务引用次数 */
-  TaskCitations?: number | null;
+  TaskCitations?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3025,7 +3043,7 @@ declare interface DescribeDSPAAssessmentRiskTemplateVulnerableListRequest {
 
 declare interface DescribeDSPAAssessmentRiskTemplateVulnerableListResponse {
   /** 脆弱项列表 */
-  RiskItemList?: AssessmentRiskItem[] | null;
+  RiskItemList?: AssessmentRiskItem[];
   /** 总条数 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3047,9 +3065,9 @@ declare interface DescribeDSPAAssessmentRisksRequest {
 
 declare interface DescribeDSPAAssessmentRisksResponse {
   /** 符合条件的评估风险项数目 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 评估风险项列表 */
-  Items: AssessmentRisk[];
+  Items?: AssessmentRisk[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3061,15 +3079,15 @@ declare interface DescribeDSPAAssessmentTasksRequest {
   Offset?: number;
   /** 结果集个数限制。默认为20，最大值为100 */
   Limit?: number;
-  /** 过滤项。支持模糊搜索：TaskId，TaskName支持过滤：BusinessName：业务名称BusinessDept：业务部门名称TemplateName：评估模版名称Status：评估状态 (waiting待评估，processing评估中, , finished已评估, failed评估失败) */
+  /** 过滤项。支持模糊搜索：TaskId，TaskName支持过滤：BusinessName：业务名称BusinessDept：业务部门名称TemplateName：评估模板名称Status：评估状态 (waiting待评估，processing评估中, , finished已评估, failed评估失败) */
   Filters?: DspaAssessmentFilter[];
 }
 
 declare interface DescribeDSPAAssessmentTasksResponse {
   /** 符合条件的评估任务数目 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 评估任务列表 */
-  Items: AssessmentTask[];
+  Items?: AssessmentTask[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3125,7 +3143,7 @@ declare interface DescribeDSPACOSDataAssetBucketsRequest {
 
 declare interface DescribeDSPACOSDataAssetBucketsResponse {
   /** COS对象存储敏感数据资产已扫描的桶集合。 */
-  Buckets: string[] | null;
+  Buckets?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3139,7 +3157,7 @@ declare interface DescribeDSPACOSDataAssetByComplianceIdRequest {
 
 declare interface DescribeDSPACOSDataAssetByComplianceIdResponse {
   /** 符合条件的COS存储对象的敏感数据资产统计记录 */
-  Stats?: DspaCOSDataAssetCount | null;
+  Stats?: DspaCOSDataAssetCount;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3153,9 +3171,9 @@ declare interface DescribeDSPACOSDataAssetDetailRequest {
 
 declare interface DescribeDSPACOSDataAssetDetailResponse {
   /** COS对象存储敏感数据资产详情列表 */
-  Details: DspaCOSDataAssetDetail[] | null;
+  Details?: DspaCOSDataAssetDetail[];
   /** 符合条件的COS对象存储敏感数据资产数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3169,7 +3187,7 @@ declare interface DescribeDSPACOSDiscoveryTaskDetailRequest {
 
 declare interface DescribeDSPACOSDiscoveryTaskDetailResponse {
   /** 任务详情 */
-  Task: DspaCOSDiscoveryTaskDetail | null;
+  Task?: DspaCOSDiscoveryTaskDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3185,7 +3203,7 @@ declare interface DescribeDSPACOSDiscoveryTaskFilesRequest {
 
 declare interface DescribeDSPACOSDiscoveryTaskFilesResponse {
   /** 文件列表 */
-  Files: string[] | null;
+  Files?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3203,9 +3221,9 @@ declare interface DescribeDSPACOSDiscoveryTaskResultRequest {
 
 declare interface DescribeDSPACOSDiscoveryTaskResultResponse {
   /** 扫描任务结果项 */
-  Items?: DspaCOSDiscoveryTaskResult[] | null;
+  Items?: DspaCOSDiscoveryTaskResult[];
   /** 符合条件的数据结果数目 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3227,9 +3245,9 @@ declare interface DescribeDSPACOSDiscoveryTasksRequest {
 
 declare interface DescribeDSPACOSDiscoveryTasksResponse {
   /** 任务列表 */
-  Items: DspaCOSDiscoveryTask[] | null;
+  Items?: DspaCOSDiscoveryTask[];
   /** 符合条件的任务列表数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3261,9 +3279,9 @@ declare interface DescribeDSPACOSTaskResultDetailRequest {
 
 declare interface DescribeDSPACOSTaskResultDetailResponse {
   /** 扫描结果详情列表 */
-  Items: DspaDiscoveryCOSTaskResultDetail[] | null;
+  Items?: DspaDiscoveryCOSTaskResultDetail[];
   /** 符合条件的详情数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3283,9 +3301,9 @@ declare interface DescribeDSPACategoriesRequest {
 
 declare interface DescribeDSPACategoriesResponse {
   /** 敏感数据分类列表 */
-  Items: DataCategory[] | null;
+  Items?: DataCategory[];
   /** 符合条件的敏感数据分类数 */
-  TotalCount: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3299,7 +3317,7 @@ declare interface DescribeDSPACategoryRuleStatisticRequest {
 
 declare interface DescribeDSPACategoryRuleStatisticResponse {
   /** 分类规则统计信息 */
-  StatisticSet: CategoryRuleStatistic[] | null;
+  StatisticSet?: CategoryRuleStatistic[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3315,7 +3333,7 @@ declare interface DescribeDSPACategoryRulesRequest {
 
 declare interface DescribeDSPACategoryRulesResponse {
   /** 分类规则信息 */
-  CategoryRules?: CategoryRule[] | null;
+  CategoryRules?: CategoryRule[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3329,7 +3347,7 @@ declare interface DescribeDSPACategoryTreeRequest {
 
 declare interface DescribeDSPACategoryTreeResponse {
   /** 分类树json */
-  ResultJson?: string | null;
+  ResultJson?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3345,7 +3363,7 @@ declare interface DescribeDSPACategoryTreeWithRulesRequest {
 
 declare interface DescribeDSPACategoryTreeWithRulesResponse {
   /** 分类树json */
-  ResultJson?: string | null;
+  ResultJson?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3359,7 +3377,7 @@ declare interface DescribeDSPAComplianceGroupDetailRequest {
 
 declare interface DescribeDSPAComplianceGroupDetailResponse {
   /** 模板详情 */
-  Detail: ComplianceGroupDetail | null;
+  Detail?: ComplianceGroupDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3377,13 +3395,15 @@ declare interface DescribeDSPAComplianceGroupsRequest {
   Limit?: number;
   /** 合规组类型可选值：0 默认合规组, 1 系统合规组, 2 自定义合规组 */
   ComplianceGroupTypeList?: number[];
+  /** 是否仅显示已开启模版 */
+  IsFilterCloseComplianceGroup?: boolean;
 }
 
 declare interface DescribeDSPAComplianceGroupsResponse {
   /** 合规组列表 */
-  Items: DspaDiscoveryComplianceGroupInfo[] | null;
+  Items?: DspaDiscoveryComplianceGroupInfo[];
   /** 符合条件的合规组列表数 */
-  TotalCount: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3397,9 +3417,9 @@ declare interface DescribeDSPAComplianceUpdateNotificationRequest {
 
 declare interface DescribeDSPAComplianceUpdateNotificationResponse {
   /** 模板是否更新 */
-  IsUpdated: boolean | null;
+  IsUpdated?: boolean;
   /** 任务名称集合 */
-  TaskNameSet: string[] | null;
+  TaskNameSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3415,7 +3435,9 @@ declare interface DescribeDSPADataSourceDbInfoRequest {
 
 declare interface DescribeDSPADataSourceDbInfoResponse {
   /** 数据库信息列表 */
-  Items?: DSPADataSourceDbInfo[] | null;
+  Items?: DSPADataSourceDbInfo[];
+  /** 数据源id */
+  DataSourceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3439,7 +3461,7 @@ declare interface DescribeDSPADiscoveryRulesResponse {
   /** 规则ID */
   TotalCount?: number;
   /** 规则集合 */
-  Items?: DspaDiscoveryRuleDetail[] | null;
+  Items?: DspaDiscoveryRuleDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3465,7 +3487,7 @@ declare interface DescribeDSPADiscoveryTaskDetailRequest {
 
 declare interface DescribeDSPADiscoveryTaskDetailResponse {
   /** 任务详情 */
-  Task: DspaDiscoveryTaskDetail | null;
+  Task?: DspaDiscoveryTaskDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3497,9 +3519,9 @@ declare interface DescribeDSPADiscoveryTaskResultDetailRequest {
 
 declare interface DescribeDSPADiscoveryTaskResultDetailResponse {
   /** 扫描结果详情列表 */
-  Items?: DspaDiscoveryTaskResultDetail[] | null;
+  Items?: DspaDiscoveryTaskResultDetail[];
   /** 符合条件的扫描结果详情记录数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3527,9 +3549,9 @@ declare interface DescribeDSPADiscoveryTaskResultRequest {
 
 declare interface DescribeDSPADiscoveryTaskResultResponse {
   /** 扫描任务结果项 */
-  Items: DspaDiscoveryTaskDbResult[] | null;
+  Items?: DspaDiscoveryTaskDbResult[];
   /** 符合条件的扫描任务结果记录数 */
-  TotalCount: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3547,7 +3569,7 @@ declare interface DescribeDSPADiscoveryTaskTablesRequest {
 
 declare interface DescribeDSPADiscoveryTaskTablesResponse {
   /** 分类分级扫描表集合 */
-  Items?: DSPATableInfo[] | null;
+  Items?: DSPATableInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3565,7 +3587,7 @@ declare interface DescribeDSPAESDataAssetByComplianceIdRequest {
 
 declare interface DescribeDSPAESDataAssetByComplianceIdResponse {
   /** 概览统计结果 */
-  Stats?: ESDataAssetCountDto | null;
+  Stats?: ESDataAssetCountDto;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3587,9 +3609,9 @@ declare interface DescribeDSPAESDataAssetDetailRequest {
 
 declare interface DescribeDSPAESDataAssetDetailResponse {
   /** 总的个数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 概览详情列表 */
-  Details?: ESDataAssetDetail[] | null;
+  Details?: ESDataAssetDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3607,7 +3629,7 @@ declare interface DescribeDSPAESDataSampleRequest {
 
 declare interface DescribeDSPAESDataSampleResponse {
   /** 数据样本列表，最多10条数据 */
-  Items?: string[] | null;
+  Items?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3627,15 +3649,15 @@ declare interface DescribeDSPAESDiscoveryTaskResultDetailRequest {
   CategoryIdList?: number[];
   /** 敏感数据分级ID */
   LevelId?: number;
-  /** 索引名称 */
+  /** 数据库名称 */
   DbName?: string;
 }
 
 declare interface DescribeDSPAESDiscoveryTaskResultDetailResponse {
   /** ES扫描结果详情列表 */
-  Items?: ESTaskResultDetail[] | null;
+  Items?: ESTaskResultDetail[];
   /** 符合条件的扫描结果详情记录数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3665,9 +3687,9 @@ declare interface DescribeDSPALevelGroupsRequest {
 
 declare interface DescribeDSPALevelGroupsResponse {
   /** 符合条件的敏感数据分级标识记录 */
-  Items?: DspaDiscoveryLevelDetail[] | null;
+  Items?: DspaDiscoveryLevelDetail[];
   /** 符合条件的敏感数据分级标识记录数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3707,7 +3729,7 @@ declare interface DescribeDSPARDBDataAssetDetailRequest {
 
 declare interface DescribeDSPARDBDataAssetDetailResponse {
   /** RDB关系数据库敏感数据资产详情列表 */
-  Details?: DspaRDBDataAssetDetail[] | null;
+  Details?: DspaRDBDataAssetDetail[];
   /** 符合条件的RDB关系数据库敏感数据资产数量 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3721,7 +3743,7 @@ declare interface DescribeDSPASupportedMetasRequest {
 
 declare interface DescribeDSPASupportedMetasResponse {
   /** 支持的元数据类型 */
-  Metas?: DSPAMetaType[] | null;
+  Metas?: DSPAMetaType[];
   /** 最大支持每批次同步数量 */
   MaxDBInstanceLimit?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3741,7 +3763,7 @@ declare interface DescribeDSPATaskResultDataSampleRequest {
 
 declare interface DescribeDSPATaskResultDataSampleResponse {
   /** 数据样本列表，最多10条数据 */
-  Items?: DspaFieldResultDataSample[] | null;
+  Items?: DspaFieldResultDataSample[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3757,11 +3779,11 @@ declare interface DescribeESAssetSensitiveDistributionRequest {
 
 declare interface DescribeESAssetSensitiveDistributionResponse {
   /** ES的资产统计数据 */
-  ESAsset?: ESAsset | null;
+  ESAsset?: ESAsset;
   /** 涉敏top数据 */
-  TopAsset?: TopAsset[] | null;
+  TopAsset?: TopAsset[];
   /** ES的详情列表 */
-  ESDetail?: ESAssetDBDetail[] | null;
+  ESDetail?: ESAssetDBDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3801,11 +3823,11 @@ declare interface DescribeMongoAssetSensitiveDistributionRequest {
 
 declare interface DescribeMongoAssetSensitiveDistributionResponse {
   /** mongo的资产统计数据 */
-  MongoAsset?: MongoAsset | null;
+  MongoAsset?: MongoAsset;
   /** 涉敏top数据 */
-  TopAsset?: TopAsset[] | null;
+  TopAsset?: TopAsset[];
   /** mongo的详情列表 */
-  MongoDetail?: MongoAssetDBDetail[] | null;
+  MongoDetail?: MongoAssetDBDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3821,11 +3843,11 @@ declare interface DescribeRDBAssetSensitiveDistributionRequest {
 
 declare interface DescribeRDBAssetSensitiveDistributionResponse {
   /** rdb的资产统计数据 */
-  RDBAsset?: RDBAsset | null;
+  RDBAsset?: RDBAsset;
   /** 涉敏top数据 */
-  TopAsset?: TopAsset[] | null;
+  TopAsset?: TopAsset[];
   /** rdb的详情列表 */
-  RDBDetail?: AssetDBDetail[] | null;
+  RDBDetail?: AssetDBDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3841,7 +3863,7 @@ declare interface DescribeReportTaskDownloadUrlRequest {
 
 declare interface DescribeReportTaskDownloadUrlResponse {
   /** 下载链接集合 */
-  DownloadUrlSet?: string[] | null;
+  DownloadUrlSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3859,9 +3881,9 @@ declare interface DescribeReportTasksRequest {
 
 declare interface DescribeReportTasksResponse {
   /** 总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 报表信息 */
-  ItemSet?: ReportInfo[] | null;
+  ItemSet?: ReportInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3893,13 +3915,13 @@ declare interface DescribeSensitiveCOSDataDistributionRequest {
 
 declare interface DescribeSensitiveCOSDataDistributionResponse {
   /** 分级分布 */
-  LevelDistribution?: Note[] | null;
+  LevelDistribution?: Note[];
   /** 分类分布 */
-  CategoryDistribution?: Note[] | null;
+  CategoryDistribution?: Note[];
   /** 规则分布详情 */
-  RuleDistribution?: RuleDistribution[] | null;
+  RuleDistribution?: RuleDistribution[];
   /** 计算占比 */
-  SensitiveDataNum?: number | null;
+  SensitiveDataNum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3915,13 +3937,13 @@ declare interface DescribeSensitiveRDBDataDistributionRequest {
 
 declare interface DescribeSensitiveRDBDataDistributionResponse {
   /** 分级分布 */
-  LevelDistribution?: Note[] | null;
+  LevelDistribution?: Note[];
   /** 分类分布 */
-  CategoryDistribution?: Note[] | null;
+  CategoryDistribution?: Note[];
   /** 敏感规则分布详情列表 */
-  RuleDistribution?: RuleDistribution[] | null;
+  RuleDistribution?: RuleDistribution[];
   /** 计算占比字段 */
-  SensitiveDataNum?: number | null;
+  SensitiveDataNum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3941,7 +3963,7 @@ declare interface DisableDSPAMetaResourceAuthResponse {
   /** DSPA实例ID。 */
   DspaId?: string;
   /** 授权结果。 */
-  Results?: DspaTaskResult[] | null;
+  Results?: DspaTaskResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4007,7 +4029,7 @@ declare interface GetResourceConnectionStatusResponse {
   /** 连接状态，success -- 连接成功，failed -- 连接失败 */
   ConnectionStatus?: string;
   /** 连接状态的描述信息。 */
-  ConnectionDesc?: string | null;
+  ConnectionDesc?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4063,9 +4085,9 @@ declare interface ListDSPAClustersRequest {
   Limit?: number;
   /** 分页偏移量，默认为0。 */
   Offset?: number;
-  /** 过滤项。支持的过滤项包括：DspaId、Status、Version、DspaName。DspaId和DspaName支持模糊搜索。Status支持的可选值：enabled、disabled。Version支持的可选值：trial、official。 */
+  /** 过滤项。支持的过滤项包括：DspaId、Status、Version、DspaName、Channel。DspaId和DspaName支持模糊搜索。Status支持的可选值：enabled、disabled。Version支持的可选值：trial、official。Channel支持的可选值：sp_cds_dsgc_pre（代表dsgc实例）、sp_cds_dsgc_wedata_dc（代表wedata实例） */
   Filters?: DspaDataSourceMngFilter[];
-  /** 展示模式。 */
+  /** 展示模式。目前只有两个值的处理逻辑：空值：需要查询每个实例的配额信息，因为是串行查询，所以速度很慢，limit最大为100"simple"：不需要查询每个实例的配额信息，速度快，limit最大为1000 */
   ListMode?: string;
 }
 
@@ -4097,9 +4119,9 @@ declare interface ListDSPACosMetaResourcesResponse {
   /** 符合条件的COS元数据数量。 */
   TotalCount?: number;
   /** COS元数据信息 */
-  Items?: DSPACosMetaDataInfo[] | null;
+  Items?: DSPACosMetaDataInfo[];
   /** DSPA实例ID */
-  DspaId?: string | null;
+  DspaId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4203,12 +4225,12 @@ declare interface ModifyDSPAAssessmentRiskTemplateRequest {
   DspaId: string;
   /** 模板名称 */
   TemplateName: string;
-  /** 模板的描述 */
-  TemplateDescription: string;
   /** 模板id */
   TemplateId: number;
   /** 修改的风险等级id */
   RiskLevelId: number;
+  /** 模板的描述 */
+  TemplateDescription?: string;
   /** 脆弱项列表 */
   RiskIdList?: number[];
 }
@@ -4565,7 +4587,7 @@ declare interface StartDSPADiscoveryTaskRequest {
 
 declare interface StartDSPADiscoveryTaskResponse {
   /** 任务扫描结果ID */
-  ResultId: number | null;
+  ResultId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4579,7 +4601,7 @@ declare interface StopDSPADiscoveryTaskRequest {
 
 declare interface StopDSPADiscoveryTaskResponse {
   /** 任务扫描结果ID */
-  ResultId: number | null;
+  ResultId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4615,9 +4637,9 @@ declare interface VerifyDSPACOSRuleRequest {
 
 declare interface VerifyDSPACOSRuleResponse {
   /** 验证结果Success 验证成功Failed 验证失败 */
-  VerifyResult: string;
+  VerifyResult?: string;
   /** 验证结果详情 */
-  DetailInfo: string;
+  DetailInfo?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4639,9 +4661,9 @@ declare interface VerifyDSPADiscoveryRuleRequest {
 
 declare interface VerifyDSPADiscoveryRuleResponse {
   /** 验证结果Success 验证成功Failed 验证失败 */
-  VerifyResult: string;
+  VerifyResult?: string;
   /** 验证结果详情 */
-  DetailInfo: string;
+  DetailInfo?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4851,7 +4873,7 @@ declare interface Dsgc {
   DescribeLeafClassification(data?: DescribeLeafClassificationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLeafClassificationResponse>;
   /** 查询mongo的敏感资产分布 {@link DescribeMongoAssetSensitiveDistributionRequest} {@link DescribeMongoAssetSensitiveDistributionResponse} */
   DescribeMongoAssetSensitiveDistribution(data: DescribeMongoAssetSensitiveDistributionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMongoAssetSensitiveDistributionResponse>;
-  /** 查询rdb的敏感资产分布 {@link DescribeRDBAssetSensitiveDistributionRequest} {@link DescribeRDBAssetSensitiveDistributionResponse} */
+  /** 查询关系型数据库的敏感资产分布 {@link DescribeRDBAssetSensitiveDistributionRequest} {@link DescribeRDBAssetSensitiveDistributionResponse} */
   DescribeRDBAssetSensitiveDistribution(data: DescribeRDBAssetSensitiveDistributionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRDBAssetSensitiveDistributionResponse>;
   /** 获取报表下载链接 {@link DescribeReportTaskDownloadUrlRequest} {@link DescribeReportTaskDownloadUrlResponse} */
   DescribeReportTaskDownloadUrl(data: DescribeReportTaskDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReportTaskDownloadUrlResponse>;

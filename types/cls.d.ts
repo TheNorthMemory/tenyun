@@ -3235,7 +3235,7 @@ declare interface ModifyConfigExtraRequest {
   ContainerStdout?: ContainerStdoutInfo;
   /** 采集的日志类型，默认为minimalist_log。支持以下类型：- json_log代表：JSON-文件日志（详见[使用 JSON 提取模式采集日志](https://cloud.tencent.com/document/product/614/17419)）；- delimiter_log代表：分隔符-文件日志（详见[使用分隔符提取模式采集日志](https://cloud.tencent.com/document/product/614/17420)）；- minimalist_log代表：单行全文-文件日志（详见[使用单行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17421)）；- fullregex_log代表：单行完全正则-文件日志（详见[使用单行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52365)）；- multiline_log代表：多行全文-文件日志（详见[使用多行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17422)）；- multiline_fullregex_log代表：多行完全正则-文件日志（详见[使用多行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52366)）；- user_define_log代表：组合解析（适用于多格式嵌套的日志，详见[使用组合解析提取模式采集日志](https://cloud.tencent.com/document/product/614/61310)）。 */
   LogType?: string;
-  /** 日志格式化方式，用于容器采集场景。- stdout-docker-json：用于docker容器采集场景- stdout-containerd：用于containerd容器采集场景 */
+  /** 日志格式化方式，用于容器采集场景。目前已经废弃- stdout-docker-json：用于docker容器采集场景- stdout-containerd：用于containerd容器采集场景 */
   LogFormat?: string;
   /** 提取规则，如果设置了ExtractRule，则必须设置LogType */
   ExtractRule?: ExtractRuleInfo;

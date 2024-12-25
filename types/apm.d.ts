@@ -187,11 +187,11 @@ declare interface ApmTag {
 /** 查询过滤参数 */
 declare interface Filter {
   /** 过滤方式（=, !=, in） */
-  Type: string;
+  Type: string | null;
   /** 过滤维度名 */
-  Key: string;
+  Key: string | null;
   /** 过滤值，in过滤方式用逗号分割多个值 */
-  Value: string;
+  Value: string | null;
 }
 
 /** 查询过滤参数 */

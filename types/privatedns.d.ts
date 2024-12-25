@@ -7,23 +7,23 @@ declare interface AccountVpcInfo {
   /** VpcId： vpc-xadsafsdasd */
   UniqVpcId: string;
   /** Vpc所属地区: ap-guangzhou, ap-shanghai */
-  Region: string | null;
+  Region: string;
   /** Vpc所属账号: 123456789 */
-  Uin: string | null;
+  Uin: string;
   /** vpc资源名称：testname */
-  VpcName?: string | null;
+  VpcName?: string;
 }
 
 /** 查询关联账号VPC列表出参 */
 declare interface AccountVpcInfoOut {
   /** VpcId： vpc-xadsafsdasd */
-  VpcId: string;
+  VpcId?: string;
   /** Vpc所属地区: ap-guangzhou, ap-shanghai */
-  Region: string;
+  Region?: string;
   /** Vpc所属账号: 123456789 */
-  Uin: string;
+  Uin?: string;
   /** vpc资源名称：testname */
-  VpcName: string;
+  VpcName?: string;
 }
 
 /** 关联的VPC出参 */
@@ -39,31 +39,31 @@ declare interface AccountVpcInfoOutput {
 /** 操作日志 */
 declare interface AuditLog {
   /** 日志类型 */
-  Resource: string;
+  Resource?: string;
   /** 日志表名 */
-  Metric: string;
+  Metric?: string;
   /** 日志总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 日志列表 */
-  DataSet: AuditLogInfo[];
+  DataSet?: AuditLogInfo[];
 }
 
 /** 日志详情 */
 declare interface AuditLogInfo {
   /** 时间 */
-  Date: string;
+  Date?: string;
   /** 操作人uin */
-  OperatorUin: string;
+  OperatorUin?: string;
   /** 日志内容 */
-  Content: string;
+  Content?: string;
 }
 
 /** 时间统计值 */
 declare interface DatePoint {
   /** 时间 */
-  Date: string;
+  Date?: string;
   /** 值 */
-  Value: number;
+  Value?: number;
 }
 
 /** 筛选参数 */
@@ -77,23 +77,23 @@ declare interface Filter {
 /** 流量包用量 */
 declare interface FlowUsage {
   /** 流量包类型：ZONE 私有域；TRAFFIC 解析流量包 */
-  FlowType: string;
+  FlowType?: string;
   /** 流量包总额度 */
-  TotalQuantity: number;
+  TotalQuantity?: number;
   /** 流量包可用额度 */
-  AvailableQuantity: number;
+  AvailableQuantity?: number;
 }
 
 /** 统计数据表 */
 declare interface MetricData {
   /** 资源描述 */
-  Resource: string;
+  Resource?: string;
   /** 表名 */
-  Metric: string;
+  Metric?: string;
   /** 表数据 */
-  DataSet: DatePoint[];
+  DataSet?: DatePoint[];
   /** 查询范围内的请求总量 */
-  MetricCount: number | null;
+  MetricCount?: number | null;
 }
 
 /** 私有域解析账号 */
@@ -227,7 +227,7 @@ declare interface AddSpecifyPrivateZoneVpcResponse {
   /** 本次新增的关联账号vpc */
   AccountVpcSet?: AccountVpcInfo[];
   /** 唯一id */
-  UniqId?: string | null;
+  UniqId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -351,7 +351,7 @@ declare interface DeleteSpecifyPrivateZoneVpcResponse {
   /** 本次删除的关联账户的VPC */
   AccountVpcSet?: AccountVpcInfo[];
   /** 唯一id */
-  UniqId?: string | null;
+  UniqId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -369,9 +369,9 @@ declare interface DescribeAccountVpcListRequest {
 
 declare interface DescribeAccountVpcListResponse {
   /** VPC数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** VPC 列表 */
-  VpcSet: AccountVpcInfoOut[];
+  VpcSet?: AccountVpcInfoOut[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -629,7 +629,7 @@ declare interface Privatedns {
   (): Versions;
   /** 追加与私有域关联的VPC {@link AddSpecifyPrivateZoneVpcRequest} {@link AddSpecifyPrivateZoneVpcResponse} */
   AddSpecifyPrivateZoneVpc(data: AddSpecifyPrivateZoneVpcRequest, config?: AxiosRequestConfig): AxiosPromise<AddSpecifyPrivateZoneVpcResponse>;
-  /** 创建私有域解析账号 {@link CreatePrivateDNSAccountRequest} {@link CreatePrivateDNSAccountResponse} */
+  /** 添加绑定账号 {@link CreatePrivateDNSAccountRequest} {@link CreatePrivateDNSAccountResponse} */
   CreatePrivateDNSAccount(data: CreatePrivateDNSAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateDNSAccountResponse>;
   /** 创建私有域 {@link CreatePrivateZoneRequest} {@link CreatePrivateZoneResponse} */
   CreatePrivateZone(data: CreatePrivateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateZoneResponse>;

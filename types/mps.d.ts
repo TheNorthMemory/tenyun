@@ -206,7 +206,7 @@ declare interface AddOnSubtitle {
   Type?: string | null;
   /** 字幕文件。 */
   Subtitle?: MediaInputInfo | null;
-  /** 字幕名称 */
+  /** 字幕名称	。注意：仅支持中文、英文、数字、空格、下划线(_)、短横线(-)、句点(.)和中英文括号，长度不能超过64个字符。 */
   SubtitleName?: string | null;
 }
 
@@ -2730,6 +2730,16 @@ declare interface FrameTagConfigureInfoForUpdate {
   Switch?: string;
 }
 
+/** HLS配置参数 */
+declare interface HLSConfigureInfo {
+  /** 单个 TS 文件时长，单位：秒，取值范围 5-30 秒。不填默认为 30 秒。 */
+  ItemDuration?: number | null;
+  /** 录制周期，单位：秒，取值范围 10 分钟到 12 小时。不填默认为 10分钟（3600 秒）。 */
+  Interval?: number | null;
+  /** 续录等待时间，单位：秒。取值范围为60秒-1800秒。不填默认为0（不启用续录）。 */
+  ContinueTimeout?: number | null;
+}
+
 /** 创建的输入HLS拉流源站配置信息。 */
 declare interface HLSPullSourceAddress {
   /** HLS源站的Url地址。 */
@@ -2938,6 +2948,24 @@ declare interface LiveRecordTaskInput {
   OutputStorage?: TaskOutputStorage | null;
   /** 直播录制后文件的输出路径。 */
   OutputObjectPath?: string | null;
+}
+
+/** 直播录制模板详情 */
+declare interface LiveRecordTemplate {
+  /** 录制模板唯一标识。 */
+  Definition?: number;
+  /** HLS 配置参数 */
+  HLSConfigure?: HLSConfigureInfo;
+  /** 录制模板名称。 */
+  Name?: string;
+  /** 模板描述信息。 */
+  Comment?: string;
+  /** 模板类型，取值：Preset：系统预置模板；Custom：用户自定义模板。 */
+  Type?: string;
+  /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  CreateTime?: string;
+  /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  UpdateTime?: string;
 }
 
 /** 直播编排直播录制任务结果类型 */
@@ -5122,13 +5150,13 @@ declare interface VideoTemplateInfo {
   Gop?: number;
   /** Gop数值单位，可选值：frame：表示帧second：表示秒默认值：frame */
   GopUnit?: string | null;
-  /** 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式： stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊填充。smarttailor：智能剪裁：智能选取视频画面，来保证画面比例裁剪。默认值：black 。注意：自适应码流只支持 stretch、black。 */
+  /** 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式： stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊填充。smarttailor：智能剪裁：智能选取视频画面，来保证画面比例裁剪。默认值：black 。 */
   FillType?: string;
-  /** 视频恒定码率控制因子，取值范围为[0, 51]。如果指定该参数，将使用 CRF 的码率控制方式做转码（视频码率将不再生效）。如果没有特殊需求，不建议指定该参数。注意：若Mode选择ABR，无需配置Vcrf值若Mode选择CBR，无需配置Vcrf值 */
+  /** 视频的恒定码率控制因子，取值范围为[0, 51]，不填表示“自动”。如果没有特殊需求，建议不指定该参数。当Mode参数设置为VBR时，如果同时配置了Vcrf值，MPS将在VBR模式下处理视频，同时考虑Vcrf和Bitrate参数的设置，以平衡视频质量、码率、转码效率和文件大小。当Mode参数设置为CRF，Bitrate设置将失效，编码将根据Vcrf值进行。当Mode参数选择ABR或CBR时，无需配置Vcrf值。 */
   Vcrf?: number | null;
-  /** 分片平均时长，范围：（0-10]，单位：秒默认值：10注意：只能在封装格式hls的情况下使用 */
+  /** 分片平均时长，范围：（0-10]，单位：秒不填表示自动，将根据视频的GOP等特征自动选择合适的分片时长。注意：只能在封装格式hls的情况下使用 */
   HlsTime?: number | null;
-  /** hls 分片类型，可选值 ：0：HLS+TS 切片2：HLS+TS byte range7：HLS+MP4 切片5：HLS+MP4 byte range默认值：0 */
+  /** hls 分片类型，可选值 ：0：HLS+TS 切片2：HLS+TS byte range7：HLS+MP4 切片5：HLS+MP4 byte range默认值：0注意：该字段用于普通/极速高清转码设置，对自适应码流不生效，如需给自适应码流配置分片类型，可以使用外层字段 */
   SegmentType?: number | null;
   /** 帧率分母部分注意：值必须大于0 */
   FpsDenominator?: number | null;
@@ -5152,13 +5180,13 @@ declare interface VideoTemplateInfo {
   RawPts?: number | null;
   /** 按比例压缩码率，开启后，将根据比例来调整输出视频的码率。填写压缩率后，系统会根据视频源码率自动计算目标输出码率。压缩率范围0-100不填此值表示不开启，默认不开启 */
   Compress?: number | null;
-  /** 切片特殊配置 */
+  /** 启动时分片时长 */
   SegmentSpecificInfo?: SegmentSpecificInfo | null;
-  /** 模版是否开启场景化 0：不开启 1：开启 默认值：0 */
+  /** 模板是否开启场景化 0：不开启 1：开启 默认值：0	注意：只有此字段值为1时，SceneType和CompressType字段的值才会生效 */
   ScenarioBased?: number | null;
-  /** 视频场景化，可选值： normal：通用转码场景：通用转码压缩场景。pgc：PGC高清影视：压缩时会注重影视剧的观看体验，根据影视剧特性进行ROI编码，同时保留高质量的视频内容和音频。 materials_video：高清素材：素材资源类场景，对画质要求极高，较多透明画面内容，在压缩的同时接近视觉无损。 ugc：UGC内容：适用于广泛的UGC/短视频场景，针对短视频的特性优化编码码率， 画质提升，提升业务QOS/QOE指标。 e-commerce_video：秀场/电商类：压缩时会强调细节清晰度和ROI区域提升，尤其注重保持人脸区域的画质。 educational_video：教育类：压缩时会强调文字和图像的清晰度和可读性，以便学生更好地理解内容，确保讲解内容清晰传达。 默认值：normal */
+  /** 视频场景化，可选值： normal：通用转码场景：通用转码压缩场景。pgc：PGC高清影视：压缩时会注重影视剧的观看体验，根据影视剧特性进行ROI编码，同时保留高质量的视频内容和音频。 materials_video：高清素材：素材资源类场景，对画质要求极高，较多透明画面内容，在压缩的同时接近视觉无损。 ugc：UGC内容：适用于广泛的UGC/短视频场景，针对短视频的特性优化编码码率， 画质提升，提升业务QOS/QOE指标。 e-commerce_video：秀场/电商类：压缩时会强调细节清晰度和ROI区域提升，尤其注重保持人脸区域的画质。 educational_video：教育类：压缩时会强调文字和图像的清晰度和可读性，以便学生更好地理解内容，确保讲解内容清晰传达。 默认值：normal注意：要使用此值ScenarioBased的值必须为1，否则此值不生效 */
   SceneType?: string | null;
-  /** 转码策略，可选值： ultra_compress：极致压缩：相比标准压缩，该策略能在保证一定画质的基础上最大限度压缩码率，极大节约带宽和存储成本。 standard_compress：综合最优：平衡压缩率与画质，在保证主观画质没有明显降低的情况下尽可能压缩文件。该策略仅收取音视频极速高清转码费用。 high_compress：码率优先：优先保证降低文件体积大小，可能有一定画质损失。该策略仅收取音视频极速高清转码费用。 low_compress：画质优先：优先保证画质，压缩出来的文件体积可能相对较大。该策略仅收取音视频极速高清转码费用。 默认值：standard_compress 注：若需要在电视上观看视频，不建议使用ultra_compress策略。ultra_compress策略计费标准为极速高清转码 + 音视频增强-去毛刺。 */
+  /** 转码策略，可选值： ultra_compress：极致压缩：相比标准压缩，该策略能在保证一定画质的基础上最大限度压缩码率，极大节约带宽和存储成本。 standard_compress：综合最优：平衡压缩率与画质，在保证主观画质没有明显降低的情况下尽可能压缩文件。该策略仅收取音视频极速高清转码费用。 high_compress：码率优先：优先保证降低文件体积大小，可能有一定画质损失。该策略仅收取音视频极速高清转码费用。 low_compress：画质优先：优先保证画质，压缩出来的文件体积可能相对较大。该策略仅收取音视频极速高清转码费用。 默认值：standard_compress 注：若需要在电视上观看视频，不建议使用ultra_compress策略。ultra_compress策略计费标准为极速高清转码 + 音视频增强-去毛刺。注意：要使用此值ScenarioBased的值必须为1，否则此值不生效 */
   CompressType?: string | null;
 }
 
@@ -5180,15 +5208,15 @@ declare interface VideoTemplateInfoForUpdate {
   Gop?: number | null;
   /** Gop数值单位，可选值： frame：表示帧 second：表示秒默认值：frame */
   GopUnit?: string | null;
-  /** 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式： stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊填充。smarttailor：智能剪裁：智能选取视频画面，来保证画面比例裁剪。默认值：black 。注意：自适应码流只支持 stretch、black。 */
+  /** 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式： stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊填充。smarttailor：智能剪裁：智能选取视频画面，来保证画面比例裁剪。默认值：black 。 */
   FillType?: string | null;
-  /** 视频恒定码率控制因子。取值范围为[0, 51]和100。如果没有特殊需求，不建议指定该参数。注意：需要修改为自动时，填100若Mode选择ABR，无需配置Vcrf值若Mode选择CBR，无需配置Vcrf值 */
+  /** 视频的恒定码率控制因子，取值范围为[0, 51]，不填表示“自动”。如果没有特殊需求，建议不指定该参数。当Mode参数设置为VBR时，如果同时配置了Vcrf值，MPS将在VBR模式下处理视频，同时考虑Vcrf和Bitrate参数的设置，以平衡视频质量、码率、转码效率和文件大小。当Mode参数设置为CRF，Bitrate设置将失效，编码将根据Vcrf值进行。当Mode参数选择ABR或CBR时，无需配置Vcrf值。注意：需要修改为自动时，填100 */
   Vcrf?: number | null;
   /** 内容自适应编码。可选值：0：不开启1：开启默认值: 0. 当开启该参数时，将会自适应生成多个不同分辨率，不同码率的码流， 其中VideoTemplate的宽和高为多个码流中的最大分辨率，VideoTemplate中的码率为多个码流中的最高码率， VideoTemplate中的vcrf为多个码流中的最高质量。 当不设置分辨率、码率和vcrf时， ContentAdaptStream 参数生成的最高分辨率为视频源的分辨率，视频质量为接近vmaf95分。 若要开启该参数或了解计费细节, 请联系您的腾讯云商务。 */
   ContentAdaptStream?: number | null;
   /** 分片平均时长，取值范围：（0-10]，单位：秒默认值：10注意：只在封装格式HLS时使用 */
   HlsTime?: number | null;
-  /** hls 分片类型，可选值：0：HLS+TS 切片2：HLS+TS byte range7：HLS+MP4 切片5：HLS+MP4 byte range默认值：0 */
+  /** hls 分片类型，可选值：0：HLS+TS 切片2：HLS+TS byte range7：HLS+MP4 切片5：HLS+MP4 byte range默认值：0注意：该字段用于普通/极速高清转码设置，对自适应码流不生效，如需给自适应码流配置分片类型，可以使用外层字段 */
   SegmentType?: number | null;
   /** 帧率分母部分注意：值必须大于0 */
   FpsDenominator?: number | null;
@@ -5212,13 +5240,13 @@ declare interface VideoTemplateInfoForUpdate {
   RawPts?: number | null;
   /** 按比例压缩码率，开启后，将根据比例来调整输出视频的码率。填写压缩率后，系统会根据视频源码率自动计算目标输出码率。压缩率范围0-100，可选值：[0-100]和-1 注意：-1表示修改为自动 */
   Compress?: number | null;
-  /** 切片特殊配置 */
+  /** 启动时分片时长 */
   SegmentSpecificInfo?: SegmentSpecificInfo | null;
-  /** 模版是否开启场景化 0：不开启 1：开启 默认值：0 */
+  /** 模板是否开启场景化 0：不开启 1：开启 默认值：0	注意：只有此字段值为1时，SceneType和CompressType字段的值才会生效 */
   ScenarioBased?: number | null;
-  /** 视频场景化，可选值： normal：通用转码场景：通用转码压缩场景 pgc：PGC高清影视：压缩时会注重影视剧的观看体验，根据影视剧特性进行ROI编码，同时保留高质量的视频内容和音频。 materials_video：高清素材：素材资源类场景，对画质要求极高，较多透明画面内容，在压缩的同时接近视觉无损。 ugc：UGC内容：适用于广泛的UGC/短视频场景，针对短视频的特性优化编码码率， 画质提升，提升业务QOS/QOE指标。 e-commerce_video：秀场/电商类：压缩时会强调细节清晰度和ROI区域提升，尤其注重保持人脸区域的画质。 educational_video：教育类：压缩时会强调文字和图像的清晰度和可读性，以便学生更好地理解内容，确保讲解内容清晰传达。默认值：normal */
+  /** 视频场景化，可选值： normal：通用转码场景：通用转码压缩场景 pgc：PGC高清影视：压缩时会注重影视剧的观看体验，根据影视剧特性进行ROI编码，同时保留高质量的视频内容和音频。 materials_video：高清素材：素材资源类场景，对画质要求极高，较多透明画面内容，在压缩的同时接近视觉无损。 ugc：UGC内容：适用于广泛的UGC/短视频场景，针对短视频的特性优化编码码率， 画质提升，提升业务QOS/QOE指标。 e-commerce_video：秀场/电商类：压缩时会强调细节清晰度和ROI区域提升，尤其注重保持人脸区域的画质。 educational_video：教育类：压缩时会强调文字和图像的清晰度和可读性，以便学生更好地理解内容，确保讲解内容清晰传达。默认值：normal注意：要使用此值ScenarioBased的值必须为1，否则此值不生效 */
   SceneType?: string | null;
-  /** 转码策略，可选值： ultra_compress：极致压缩：相比标准压缩，该策略能在保证一定画质的基础上最大限度压缩码率，极大节约带宽和存储成本。 standard_compress：综合最优：平衡压缩率与画质，在保证主观画质没有明显降低的情况下尽可能压缩文件。该策略仅收取音视频极速高清转码费用。 high_compress：码率优先：优先保证降低文件体积大小，可能有一定画质损失。该策略仅收取音视频极速高清转码费用。 low_compress：画质优先：优先保证画质，压缩出来的文件体积可能相对较大。该策略仅收取音视频极速高清转码费用。 默认值：standard_compress 注：若需要在电视上观看视频，不建议使用ultra_compress策略。ultra_compress策略计费标准为极速高清转码 + 音视频增强-去毛刺。 */
+  /** 转码策略，可选值： ultra_compress：极致压缩：相比标准压缩，该策略能在保证一定画质的基础上最大限度压缩码率，极大节约带宽和存储成本。 standard_compress：综合最优：平衡压缩率与画质，在保证主观画质没有明显降低的情况下尽可能压缩文件。该策略仅收取音视频极速高清转码费用。 high_compress：码率优先：优先保证降低文件体积大小，可能有一定画质损失。该策略仅收取音视频极速高清转码费用。 low_compress：画质优先：优先保证画质，压缩出来的文件体积可能相对较大。该策略仅收取音视频极速高清转码费用。 默认值：standard_compress 注：若需要在电视上观看视频，不建议使用ultra_compress策略。ultra_compress策略计费标准为极速高清转码 + 音视频增强-去毛刺。注意：要使用此值ScenarioBased的值必须为1，否则此值不生效 */
   CompressType?: string | null;
 }
 
@@ -5449,7 +5477,7 @@ declare interface CreateAdaptiveDynamicStreamingTemplateRequest {
   DisableHigherVideoResolution?: number;
   /** 模板描述信息，长度限制：256 个字符。 */
   Comment?: string;
-  /** 是否为纯音频，0表示视频模版，1表示纯音频模版当值为1：1. StreamInfos.N.RemoveVideo=12. StreamInfos.N.RemoveAudio=03. StreamInfos.N.Video.Codec=copy当值为0：1. StreamInfos.N.Video.Codec不能为copy2. StreamInfos.N.Video.Fps不能为null */
+  /** 是否为纯音频，0表示视频模板，1表示纯音频模板当值为1：1. StreamInfos.N.RemoveVideo=12. StreamInfos.N.RemoveAudio=03. StreamInfos.N.Video.Codec=copy当值为0：1. StreamInfos.N.Video.Codec不能为copy2. StreamInfos.N.Video.Fps不能为null注意：此值只是区分模板类型，任务使用RemoveAudio和RemoveVideo的值 */
   PureAudio?: number;
   /** hls 分片类型，可选值： ts-segment：HLS+TS 切片 ts-byterange：HLS+TS byte range mp4-segment：HLS+MP4 切片 mp4-byterange：HLS+MP4 byte range ts-packed-audio：TS+Packed Audio mp4-packed-audio：MP4+Packed Audio 默认值：ts-segment 注：自适应码流的hls分片格式已此字段为准 */
   SegmentType?: string;
@@ -5539,6 +5567,22 @@ declare interface CreateImageSpriteTemplateRequest {
 
 declare interface CreateImageSpriteTemplateResponse {
   /** 雪碧图模板唯一标识。 */
+  Definition?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateLiveRecordTemplateRequest {
+  /** HLS 配置参数 */
+  HLSConfigure: HLSConfigureInfo;
+  /** 录制模板名称，长度限制：64 个字符。 */
+  Name?: string;
+  /** 模板描述信息，长度限制：256 个字符。 */
+  Comment?: string;
+}
+
+declare interface CreateLiveRecordTemplateResponse {
+  /** 录制模板唯一标识。 */
   Definition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -5908,6 +5952,16 @@ declare interface DeleteImageSpriteTemplateResponse {
   RequestId?: string;
 }
 
+declare interface DeleteLiveRecordTemplateRequest {
+  /** 录制模板唯一标识。 */
+  Definition: number;
+}
+
+declare interface DeleteLiveRecordTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeletePersonSampleRequest {
   /** 素材 ID。 */
   PersonId: string;
@@ -6160,6 +6214,28 @@ declare interface DescribeImageSpriteTemplatesResponse {
   TotalCount?: number;
   /** 雪碧图模板详情列表。 */
   ImageSpriteTemplateSet?: ImageSpriteTemplate[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLiveRecordTemplatesRequest {
+  /** 录制模板唯一标识过滤条件，数组长度限制：100。 */
+  Definitions?: number[];
+  /** 分页偏移量，默认值：0。 */
+  Offset?: number;
+  /** 返回记录条数，默认值：10，最大值：100。 */
+  Limit?: number;
+  /** 模板类型过滤条件，不填则返回所有，可选值：* Preset：系统预置模板；* Custom：用户自定义模板。 */
+  Type?: string;
+  /** 录制模板标识过滤条件，长度限制：64 个字符。 */
+  Name?: string;
+}
+
+declare interface DescribeLiveRecordTemplatesResponse {
+  /** 符合过滤条件的记录总数。 */
+  TotalCount?: number;
+  /** 录制模板详情列表。 */
+  LiveRecordTemplateSet?: LiveRecordTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6859,11 +6935,11 @@ declare interface ModifyAdaptiveDynamicStreamingTemplateRequest {
   DisableHigherVideoBitrate?: number;
   /** 是否禁止视频分辨率转高分辨率，取值范围：0：否，1：是。 */
   DisableHigherVideoResolution?: number;
-  /** 转自适应码流输入流参数信息，最多输入10路流。注意：各个流的帧率必须保持一致；如果不一致，采用第一个流的帧率作为输出帧率。 */
+  /** 转自适应码流输入流参数信息，最多输入10路流。注意：1、各个流的帧率必须保持一致；如果不一致，采用第一个流的帧率作为输出帧率。2、修改子流信息时需要全量修改添加所有字段值，否则没填字段会使用默认值。 */
   StreamInfos?: AdaptiveStreamTemplate[];
   /** 模板描述信息，长度限制：256 个字符。 */
   Comment?: string;
-  /** 是否为纯音频，0表示视频模版，1表示纯音频模版当值为1：1. StreamInfos.N.RemoveVideo=12. StreamInfos.N.RemoveAudio=03. StreamInfos.N.Video.Codec=copy当值为0：1. StreamInfos.N.Video.Codec不能为copy2. StreamInfos.N.Video.Fps不能为null */
+  /** 是否为纯音频，0表示视频模板，1表示纯音频模板当值为1：1. StreamInfos.N.RemoveVideo=12. StreamInfos.N.RemoveAudio=03. StreamInfos.N.Video.Codec=copy当值为0：1. StreamInfos.N.Video.Codec不能为copy2. StreamInfos.N.Video.Fps不能为null注意：此值只是区分模板类型，任务使用RemoveAudio和RemoveVideo的值 */
   PureAudio?: number;
   /** hls 分片类型，可选值： ts-segment：HLS+TS 切片 ts-byterange：HLS+TS byte range mp4-segment：HLS+MP4 切片 mp4-byterange：HLS+MP4 byte range ts-packed-audio：TS+Packed Audio mp4-packed-audio：MP4+Packed Audio 默认值：ts-segment 注：自适应码流的hls分片格式已此字段为准 */
   SegmentType?: string;
@@ -6952,6 +7028,22 @@ declare interface ModifyImageSpriteTemplateRequest {
 }
 
 declare interface ModifyImageSpriteTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyLiveRecordTemplateRequest {
+  /** 录制模板唯一标识。 */
+  Definition: number;
+  /** HLS 配置参数 */
+  HLSConfigure?: HLSConfigureInfo;
+  /** 录制模板名称，长度限制：64 个字符。 */
+  Name?: string;
+  /** 模板描述信息，长度限制：256 个字符。 */
+  Comment?: string;
+}
+
+declare interface ModifyLiveRecordTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7447,6 +7539,8 @@ declare interface Mps {
   CreateContentReviewTemplate(data?: CreateContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContentReviewTemplateResponse>;
   /** 创建雪碧图模板 {@link CreateImageSpriteTemplateRequest} {@link CreateImageSpriteTemplateResponse} */
   CreateImageSpriteTemplate(data: CreateImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageSpriteTemplateResponse>;
+  /** 创建直播录制模板 {@link CreateLiveRecordTemplateRequest} {@link CreateLiveRecordTemplateResponse} */
+  CreateLiveRecordTemplate(data: CreateLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveRecordTemplateResponse>;
   /** 创建素材样本 {@link CreatePersonSampleRequest} {@link CreatePersonSampleResponse} */
   CreatePersonSample(data: CreatePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonSampleResponse>;
   /** 创建媒体质检模板 {@link CreateQualityControlTemplateRequest} {@link CreateQualityControlTemplateResponse} */
@@ -7489,6 +7583,8 @@ declare interface Mps {
   DeleteContentReviewTemplate(data: DeleteContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteContentReviewTemplateResponse>;
   /** 删除雪碧图模板 {@link DeleteImageSpriteTemplateRequest} {@link DeleteImageSpriteTemplateResponse} */
   DeleteImageSpriteTemplate(data: DeleteImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageSpriteTemplateResponse>;
+  /** 删除直播录制模板 {@link DeleteLiveRecordTemplateRequest} {@link DeleteLiveRecordTemplateResponse} */
+  DeleteLiveRecordTemplate(data: DeleteLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveRecordTemplateResponse>;
   /** 删除素材样本 {@link DeletePersonSampleRequest} {@link DeletePersonSampleResponse} */
   DeletePersonSample(data: DeletePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePersonSampleResponse>;
   /** 删除媒体质检模板 {@link DeleteQualityControlTemplateRequest} {@link DeleteQualityControlTemplateResponse} */
@@ -7525,6 +7621,8 @@ declare interface Mps {
   DescribeContentReviewTemplates(data?: DescribeContentReviewTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentReviewTemplatesResponse>;
   /** 获取雪碧图模板列表 {@link DescribeImageSpriteTemplatesRequest} {@link DescribeImageSpriteTemplatesResponse} */
   DescribeImageSpriteTemplates(data?: DescribeImageSpriteTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageSpriteTemplatesResponse>;
+  /** 获取直播录制模板 {@link DescribeLiveRecordTemplatesRequest} {@link DescribeLiveRecordTemplatesResponse} */
+  DescribeLiveRecordTemplates(data?: DescribeLiveRecordTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveRecordTemplatesResponse>;
   /** 获取媒体元信息 {@link DescribeMediaMetaDataRequest} {@link DescribeMediaMetaDataResponse} */
   DescribeMediaMetaData(data: DescribeMediaMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMediaMetaDataResponse>;
   /** 获取素材样本列表 {@link DescribePersonSamplesRequest} {@link DescribePersonSamplesResponse} */
@@ -7603,6 +7701,8 @@ declare interface Mps {
   ModifyContentReviewTemplate(data: ModifyContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContentReviewTemplateResponse>;
   /** 修改雪碧图模板 {@link ModifyImageSpriteTemplateRequest} {@link ModifyImageSpriteTemplateResponse} */
   ModifyImageSpriteTemplate(data: ModifyImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageSpriteTemplateResponse>;
+  /** 修改直播录制模板 {@link ModifyLiveRecordTemplateRequest} {@link ModifyLiveRecordTemplateResponse} */
+  ModifyLiveRecordTemplate(data: ModifyLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveRecordTemplateResponse>;
   /** 修改素材样本 {@link ModifyPersonSampleRequest} {@link ModifyPersonSampleResponse} */
   ModifyPersonSample(data: ModifyPersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonSampleResponse>;
   /** 修改媒体质检模板 {@link ModifyQualityControlTemplateRequest} {@link ModifyQualityControlTemplateResponse} */

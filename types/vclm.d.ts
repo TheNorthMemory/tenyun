@@ -191,7 +191,7 @@ declare interface SubmitImageAnimateJobRequest {
   EnableAudio?: boolean;
   /** 是否检测输入图人体12个身体部位（头部、颈部、右肩、右肘、右腕、左肩、左肘、左腕、右髋、左髋,、左膝、右膝）。默认不检测。 */
   EnableBodyJoins?: boolean;
-  /** 最终视频是否保留原图的背景，默认不保留。 */
+  /** 是否对结果视频背景进行分割，默认值为false。true：分割结果视频，结果视频（ResultVideoUrl）将为去除背景的绿幕视频，并返回掩码视频（MaskVideoUrl）；false：不分割结果视频，结果视频（ResultVideoUrl）为带背景的视频，掩码视频（MaskVideoUrl）为空字符串。 */
   EnableSegment?: boolean;
   /** 为生成视频添加标识的开关，默认为0。1：添加标识。0：不添加标识。其他数值：默认按1处理。建议您使用显著标识来提示，该视频是 AI 生成的视频。 */
   LogoAdd?: number;
