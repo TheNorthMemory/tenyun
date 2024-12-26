@@ -4756,6 +4756,22 @@ declare interface ResetRocketMQConsumerOffSetResponse {
   RequestId?: string;
 }
 
+declare interface RetryRocketMQDlqMessageRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 命名空间名称 */
+  NamespaceId: string;
+  /** group名称 */
+  GroupName: string;
+  /** 死信消息ID */
+  MessageIds: string[];
+}
+
+declare interface RetryRocketMQDlqMessageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RewindCmqQueueRequest {
   /** 队列名字，在单个地域同一账号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
   QueueName: string;
@@ -5205,6 +5221,8 @@ declare interface Tdmq {
   ResetMsgSubOffsetByTimestamp(data: ResetMsgSubOffsetByTimestampRequest, config?: AxiosRequestConfig): AxiosPromise<ResetMsgSubOffsetByTimestampResponse>;
   /** 重置RocketMQ消费位点 {@link ResetRocketMQConsumerOffSetRequest} {@link ResetRocketMQConsumerOffSetResponse} */
   ResetRocketMQConsumerOffSet(data: ResetRocketMQConsumerOffSetRequest, config?: AxiosRequestConfig): AxiosPromise<ResetRocketMQConsumerOffSetResponse>;
+  /** 重发RocketMQ死信消息 {@link RetryRocketMQDlqMessageRequest} {@link RetryRocketMQDlqMessageResponse} */
+  RetryRocketMQDlqMessage(data: RetryRocketMQDlqMessageRequest, config?: AxiosRequestConfig): AxiosPromise<RetryRocketMQDlqMessageResponse>;
   /** 回溯cmq队列 {@link RewindCmqQueueRequest} {@link RewindCmqQueueResponse} */
   RewindCmqQueue(data: RewindCmqQueueRequest, config?: AxiosRequestConfig): AxiosPromise<RewindCmqQueueResponse>;
   /** 批量发送消息 {@link SendBatchMessagesRequest} {@link SendBatchMessagesResponse} */

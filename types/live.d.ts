@@ -1877,7 +1877,7 @@ declare interface CreateCasterPgmFromPvwResponse {
   /** 主监任务的rtmp协议预览地址。 注：该地址仅供预览，不可分发。 */
   PgmPlayUrl?: string;
   /** 注：该字段已废弃，请结合腾讯云直播播放地址生成策略生成cdn播放地址 */
-  CdnPlayUrl?: string | null;
+  CdnPlayUrl?: string;
   /** 主监任务在腾讯云直播侧的流ID。 */
   CdnStreamId?: string;
   /** 主监任务的webrtc协议播放地址。 注：1.该预览地址仅作为预览，不可分发。2.webrtc播放地址需配合腾讯云快直播播放sdk使用。 */
@@ -1895,13 +1895,13 @@ declare interface CreateCasterPgmRequest {
 
 declare interface CreateCasterPgmResponse {
   /** 主监任务的rtmp协议预览地址。注：该地址仅供预览，不可分发。 */
-  PgmPlayUrl?: string | null;
+  PgmPlayUrl?: string;
   /** 注：该字段已废弃，请结合腾讯云直播播放地址生成策略生成cdn播放地址。 */
-  CdnPlayUrl?: string | null;
+  CdnPlayUrl?: string;
   /** 主监任务在腾讯云直播侧的流ID。 */
-  CdnStreamId?: string | null;
+  CdnStreamId?: string;
   /** 主监任务的webrtc协议播放地址。注：1. 该预览地址仅作为预览，不可分发。2. webrtc播放地址需配合腾讯云快直播播放sdk使用。 */
-  PgmWebRTCPlayUrl?: string | null;
+  PgmWebRTCPlayUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2427,7 +2427,7 @@ declare interface CreatePullStreamConfigRequest {
 
 declare interface CreatePullStreamConfigResponse {
   /** 配置成功后的 ID。 */
-  ConfigId: string;
+  ConfigId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2841,7 +2841,7 @@ declare interface DescribeBackupStreamListRequest {
 
 declare interface DescribeBackupStreamListResponse {
   /** 主备流分组信息列表。 */
-  StreamInfoList?: BackupStreamGroupInfo[] | null;
+  StreamInfoList?: BackupStreamGroupInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3397,7 +3397,7 @@ declare interface DescribeLivePadProcessorListRequest {
 
 declare interface DescribeLivePadProcessorListResponse {
   /** 当前正在拉取垫片的流名称列表。 */
-  StreamNameList?: string[] | null;
+  StreamNameList?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3453,7 +3453,7 @@ declare interface DescribeLivePullStreamTaskStatusRequest {
 
 declare interface DescribeLivePullStreamTaskStatusResponse {
   /** 任务状态信息。 */
-  TaskStatusInfo: TaskStatusInfo;
+  TaskStatusInfo?: TaskStatusInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3875,7 +3875,7 @@ declare interface DescribeLiveTranscodeTotalInfoRequest {
 
 declare interface DescribeLiveTranscodeTotalInfoResponse {
   /** 统计数据列表。 */
-  DataInfoList?: TranscodeTotalInfo[] | null;
+  DataInfoList?: TranscodeTotalInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5135,7 +5135,7 @@ declare interface StopLivePadProcessorRequest {
 
 declare interface StopLivePadProcessorResponse {
   /** 处理结果信息。 */
-  ResultMessage?: string | null;
+  ResultMessage?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

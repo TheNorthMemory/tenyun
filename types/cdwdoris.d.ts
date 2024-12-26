@@ -1899,6 +1899,8 @@ declare interface RecoverBackUpJobRequest {
   RecoverScope?: string;
   /** 恢复库：如果是按库备份，则需要该字段，库之间用","分割 */
   RecoverDatabase?: string;
+  /** 1:恢复后，不保留降冷策略，数据变为热数据；2:恢复后，沿用备份表的降冷策略；0:默认值，该版本没有这个配置（2.1版本2.1.8之前；2.0版本2.0.16之前） */
+  ReserveStoragePolicy?: number;
 }
 
 declare interface RecoverBackUpJobResponse {

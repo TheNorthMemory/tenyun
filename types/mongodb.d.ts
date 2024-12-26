@@ -52,7 +52,7 @@ declare interface BackupDownloadTaskStatus {
 
 /** 备份信息 */
 declare interface BackupInfo {
-  /** 实例ID */
+  /** 实例ID。 */
   InstanceId?: string;
   /** 备份方式，0-自动备份，1-手动备份 */
   BackupType?: number;
@@ -115,9 +115,9 @@ declare interface CurrentOp {
 /** 实例信息 */
 declare interface DBInstanceInfo {
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 地域信息 */
-  Region: string;
+  Region?: string;
 }
 
 /** 数据库实例价格 */
@@ -287,65 +287,65 @@ declare interface InstanceEnumParam {
 /** 实例可修改参数 Integer 类型集合。 */
 declare interface InstanceIntegerParam {
   /** 参数当前值。 */
-  CurrentValue: string;
+  CurrentValue?: string;
   /** 参数默认值。 */
-  DefaultValue: string;
+  DefaultValue?: string;
   /** 参数最大值。 */
-  Max: string;
+  Max?: string;
   /** 最小值。 */
-  Min: string;
+  Min?: string;
   /** 参数修改之后是否需要重启生效。- 1:需要重启后生效。- 0：无需重启，设置成功即可生效。 */
-  NeedRestart: string;
+  NeedRestart?: string;
   /** 参数名称。 */
-  ParamName: string;
+  ParamName?: string;
   /** 参数说明。 */
-  Tips: string[];
+  Tips?: string[];
   /** 参数类型。 */
-  ValueType: string;
+  ValueType?: string;
   /** 是否为运行中参数值。- 1：运行中参数值。- 0：非运行中参数值。 */
-  Status: number;
+  Status?: number;
   /** 冗余字段，可忽略。 */
-  Unit: string;
+  Unit?: string;
 }
 
 /** 实例可修改参数Multi类型集合。 */
 declare interface InstanceMultiParam {
   /** 参数当前值。 */
-  CurrentValue: string;
+  CurrentValue?: string;
   /** 参数默认值。 */
-  DefaultValue: string;
+  DefaultValue?: string;
   /** 参考值范围。 */
-  EnumValue: string[];
+  EnumValue?: string[];
   /** 参数修改后是否需要重启才会生效。- 1：需要重启后生效。- 0：无需重启，设置成功即可生效。 */
-  NeedRestart: string;
+  NeedRestart?: string;
   /** 参数名称。 */
-  ParamName: string;
+  ParamName?: string;
   /** 是否为运行中参数值。- 1：运行中参数值。- 0：非运行中参数值。 */
-  Status: number;
+  Status?: number;
   /** 参数说明。 */
-  Tips: string[];
+  Tips?: string[];
   /** 当前值的类型描述，默认为multi。 */
-  ValueType: string;
+  ValueType?: string;
 }
 
 /** 实例可修改参数为 Text 类型的参数集合。 */
 declare interface InstanceTextParam {
   /** 参数当前值。 */
-  CurrentValue: string;
+  CurrentValue?: string;
   /** 参数默认值。 */
-  DefaultValue: string;
+  DefaultValue?: string;
   /** 修改参数值之后是否需要重启。 */
-  NeedRestart: string;
+  NeedRestart?: string;
   /** 参数名称。 */
-  ParamName: string;
+  ParamName?: string;
   /** Text 类型参数对应的值。 */
-  TextValue: string;
+  TextValue?: string;
   /** 参数说明。 */
-  Tips: string[];
+  Tips?: string[];
   /** 参数值类型说明。 */
-  ValueType: string;
+  ValueType?: string;
   /** 是否为运行中的参数值。- 1：运行中参数值。- 0：非运行中参数值。 */
-  Status: string;
+  Status?: string;
 }
 
 /** KMS密钥信息 */
@@ -362,6 +362,8 @@ declare interface KMSInfoDetail {
   KeyUsage?: string | null;
   /** 密钥来源。 */
   KeyOrigin?: string | null;
+  /** kms所在地域。 */
+  KmsRegion?: string;
 }
 
 /** 修改mongoDB实例，请求参数 */
@@ -491,21 +493,21 @@ declare interface SecurityGroup {
 /** 安全组规则 */
 declare interface SecurityGroupBound {
   /** 执行规则。ACCEPT或DROP */
-  Action: string;
+  Action?: string;
   /** ip段。 */
-  CidrIp: string;
+  CidrIp?: string;
   /** 端口范围 */
-  PortRange: string;
+  PortRange?: string;
   /** 传输层协议。tcp，udp或ALL */
-  IpProtocol: string;
+  IpProtocol?: string;
   /** 安全组id代表的地址集合 */
-  Id: string;
+  Id?: string;
   /** 地址组id代表的地址集合 */
-  AddressModule: string;
+  AddressModule?: string;
   /** 服务组id代表的协议和端口集合 */
-  ServiceModule: string;
+  ServiceModule?: string;
   /** 描述 */
-  Desc: string;
+  Desc?: string;
 }
 
 /** 实例分片详情 */
@@ -1287,7 +1289,7 @@ declare interface FlashBackDBInstanceRequest {
 
 declare interface FlashBackDBInstanceResponse {
   /** 回档数据异步任务 ID。 */
-  FlowId?: number | null;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1630,117 +1632,117 @@ declare namespace V20180408 {
   /** 客户端连接信息，包括客户端IP和连接数 */
   interface ClientConnection {
     /** 连接的客户端IP */
-    IP: string;
+    IP?: string;
     /** 对应客户端IP的连接数 */
-    Count: number;
+    Count?: number;
   }
 
   /** 实例信息 */
   interface MongoDBInstance {
     /** 实例ID */
-    InstanceId: string;
+    InstanceId?: string;
     /** 地域信息 */
-    Region: string;
+    Region?: string;
   }
 
   /** 实例详情 */
   interface MongoDBInstanceDetail {
     /** 实例ID */
-    InstanceId: string;
+    InstanceId?: string;
     /** 实例名称 */
-    InstanceName: string;
+    InstanceName?: string;
     /** 付费类型，可能的返回值：1-包年包月；0-按量计费 */
-    PayMode: number;
+    PayMode?: number;
     /** 项目ID */
-    ProjectId: number;
+    ProjectId?: number;
     /** 集群类型，可能的返回值：0-副本集实例，1-分片实例， */
-    ClusterType: number;
+    ClusterType?: number;
     /** 地域信息 */
-    Region: string;
+    Region?: string;
     /** 可用区信息 */
-    Zone: string;
+    Zone?: string;
     /** 网络类型，可能的返回值：0-基础网络，1-私有网络 */
-    NetType: number;
+    NetType?: number;
     /** 私有网络的ID */
-    VpcId: string;
+    VpcId?: string;
     /** 私有网络的子网ID */
-    SubnetId: string;
+    SubnetId?: string;
     /** 实例状态，可能的返回值：0-待初始化，1-流程处理中，2-运行中，-2-实例已过期 */
-    Status: number;
+    Status?: number;
     /** 实例IP */
-    Vip: string;
+    Vip?: string;
     /** 端口号 */
-    Vport: number;
+    Vport?: number;
     /** 实例创建时间 */
-    CreateTime: string;
+    CreateTime?: string;
     /** 实例到期时间 */
-    DeadLine: string;
+    DeadLine?: string;
     /** 实例版本信息 */
-    MongoVersion: string;
+    MongoVersion?: string;
     /** 实例内存规格，单位为MB */
-    Memory: number;
+    Memory?: number;
     /** 实例磁盘规格，单位为MB */
-    Volume: number;
+    Volume?: number;
     /** 实例CPU核心数 */
-    CpuNum: number;
+    CpuNum?: number;
     /** 实例机器类型 */
-    MachineType: string;
+    MachineType?: string;
     /** 实例从节点数 */
-    SecondaryNum: number;
+    SecondaryNum?: number;
     /** 实例分片数 */
-    ReplicationSetNum: number;
+    ReplicationSetNum?: number;
     /** 实例自动续费标志，可能的返回值：0-手动续费，1-自动续费，2-确认不续费 */
-    AutoRenewFlag: number;
+    AutoRenewFlag?: number;
     /** 已用容量，单位MB */
-    UsedVolume: number;
+    UsedVolume?: number;
     /** 维护窗口起始时间 */
-    MaintenanceStart: string;
+    MaintenanceStart?: string;
     /** 维护窗口结束时间 */
-    MaintenanceEnd: string;
+    MaintenanceEnd?: string;
     /** 分片信息 */
-    ReplicaSets: MongodbShardInfo[];
+    ReplicaSets?: MongodbShardInfo[];
     /** 只读实例信息 */
-    ReadonlyInstances: MongoDBInstance[] | null;
+    ReadonlyInstances?: MongoDBInstance[] | null;
     /** 灾备实例信息 */
-    StandbyInstances: MongoDBInstance[] | null;
+    StandbyInstances?: MongoDBInstance[] | null;
     /** 临时实例信息 */
-    CloneInstances: MongoDBInstance[] | null;
+    CloneInstances?: MongoDBInstance[] | null;
     /** 关联实例信息，对于正式实例，该字段表示它的临时实例信息；对于临时实例，则表示它的正式实例信息;如果为只读/灾备实例,则表示他的主实例信息 */
-    RelatedInstance: MongoDBInstance | null;
+    RelatedInstance?: MongoDBInstance | null;
     /** 实例标签信息集合 */
-    Tags: TagInfo[] | null;
+    Tags?: TagInfo[] | null;
     /** 实例标记 */
-    InstanceVer: number;
+    InstanceVer?: number;
     /** 实例标记 */
-    ClusterVer: number;
+    ClusterVer?: number;
     /** 协议信息，可能的返回值：1-mongodb，2-dynamodb */
-    Protocol: number;
+    Protocol?: number;
     /** 实例类型，可能的返回值，1-正式实例，2-临时实例，3-只读实例，4-灾备实例 */
-    InstanceType: number;
+    InstanceType?: number;
     /** 实例状态描述 */
-    InstanceStatusDesc: string;
+    InstanceStatusDesc?: string;
     /** 实例对应的物理实例ID，回档并替换过的实例有不同的InstanceId和RealInstanceId，从barad获取监控数据等场景下需要用物理id获取 */
-    RealInstanceId: string;
+    RealInstanceId?: string;
   }
 
   /** 实例分片详情 */
   interface MongodbShardInfo {
     /** 分片已使用容量 */
-    UsedVolume: number;
+    UsedVolume?: number;
     /** 分片ID */
-    ReplicaSetId: string;
+    ReplicaSetId?: string;
     /** 分片名 */
-    ReplicaSetName: string;
+    ReplicaSetName?: string;
     /** 分片内存规格，单位为MB */
-    Memory: number;
+    Memory?: number;
     /** 分片磁盘规格，单位为MB */
-    Volume: number;
+    Volume?: number;
     /** 分片Oplog大小，单位为MB */
-    OplogSize: number;
+    OplogSize?: number;
     /** 分片从节点数 */
-    SecondaryNum: number;
+    SecondaryNum?: number;
     /** 分片物理ID */
-    RealReplicaSetId: string;
+    RealReplicaSetId?: string;
   }
 
   /** mongodb售卖规格 */
@@ -1802,9 +1804,9 @@ declare namespace V20180408 {
   /** 实例标签信息 */
   interface TagInfo {
     /** 标签Key值 */
-    TagKey: string;
+    TagKey?: string;
     /** 标签值 */
-    TagValue: string;
+    TagValue?: string;
   }
 
   interface AssignProjectRequest {

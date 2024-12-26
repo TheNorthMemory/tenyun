@@ -425,9 +425,9 @@ declare interface ListenerInfo {
 /** 单指标的统计数据 */
 declare interface MetricStatisticsInfo {
   /** 指标名称 */
-  MetricName: string;
+  MetricName?: string;
   /** 指标统计数据 */
-  MetricData: StatisticsDataInfo[];
+  MetricData?: StatisticsDataInfo[];
 }
 
 /** 就近接入的国家地区详情 */
@@ -669,13 +669,13 @@ declare interface RealServerBindSetReq {
 /** 源站绑定信息查询，BindStatus， 0: 未被绑定 1：被规则或者监听器绑定 */
 declare interface RealServerStatus {
   /** 源站ID。 */
-  RealServerId: string;
+  RealServerId?: string;
   /** 0表示未被绑定 1表示被规则或者监听器绑定。 */
-  BindStatus: number;
+  BindStatus?: number;
   /** 绑定此源站的通道ID，没有绑定时为空字符串。 */
-  ProxyId: string;
+  ProxyId?: string;
   /** 绑定此源站的通道组ID，没有绑定时为空字符串。 */
-  GroupId: string | null;
+  GroupId?: string | null;
 }
 
 /** 区域信息详情 */
@@ -863,9 +863,9 @@ declare interface TagPair {
 /** 标签对应资源信息 */
 declare interface TagResourceInfo {
   /** 资源类型，其中：Proxy表示通道，ProxyGroup表示通道组，RealServer表示源站 */
-  ResourceType: string;
+  ResourceType?: string;
   /** 资源ID */
-  ResourceId: string;
+  ResourceId?: string;
 }
 
 /** UDP类型监听器信息 */

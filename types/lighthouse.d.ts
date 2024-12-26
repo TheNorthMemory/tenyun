@@ -2631,7 +2631,7 @@ declare interface Lighthouse {
   DescribeFirewallTemplates(data?: DescribeFirewallTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirewallTemplatesResponse>;
   /** 查询通用资源配额信息 {@link DescribeGeneralResourceQuotasRequest} {@link DescribeGeneralResourceQuotasResponse} */
   DescribeGeneralResourceQuotas(data: DescribeGeneralResourceQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralResourceQuotasResponse>;
-  /** 查询实例默认登录密钥属性 {@link DescribeInstanceLoginKeyPairAttributeRequest} {@link DescribeInstanceLoginKeyPairAttributeResponse} */
+  /** @deprecated 查询实例默认登录密钥属性 {@link DescribeInstanceLoginKeyPairAttributeRequest} {@link DescribeInstanceLoginKeyPairAttributeResponse} */
   DescribeInstanceLoginKeyPairAttribute(data: DescribeInstanceLoginKeyPairAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLoginKeyPairAttributeResponse>;
   /** 查询实例管理终端地址 {@link DescribeInstanceVncUrlRequest} {@link DescribeInstanceVncUrlResponse} */
   DescribeInstanceVncUrl(data: DescribeInstanceVncUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceVncUrlResponse>;
@@ -2705,7 +2705,7 @@ declare interface Lighthouse {
   ModifyInstancesAttribute(data: ModifyInstancesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesAttributeResponse>;
   /** 变更实例套餐 {@link ModifyInstancesBundleRequest} {@link ModifyInstancesBundleResponse} */
   ModifyInstancesBundle(data: ModifyInstancesBundleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesBundleResponse>;
-  /** 修改实例默认登录密钥对属性 {@link ModifyInstancesLoginKeyPairAttributeRequest} {@link ModifyInstancesLoginKeyPairAttributeResponse} */
+  /** @deprecated 修改实例默认登录密钥对属性 {@link ModifyInstancesLoginKeyPairAttributeRequest} {@link ModifyInstancesLoginKeyPairAttributeResponse} */
   ModifyInstancesLoginKeyPairAttribute(data: ModifyInstancesLoginKeyPairAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesLoginKeyPairAttributeResponse>;
   /** 修改实例续费标识 {@link ModifyInstancesRenewFlagRequest} {@link ModifyInstancesRenewFlagResponse} */
   ModifyInstancesRenewFlag(data: ModifyInstancesRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesRenewFlagResponse>;

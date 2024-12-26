@@ -314,12 +314,42 @@ declare interface MQTTUserItem {
   ModifiedTime?: number;
 }
 
+/** 消息记录 */
+declare interface MessageItem {
+  /** 消息ID */
+  MsgId?: string | null;
+  /** 消息tag */
+  Tags?: string | null;
+  /** 消息key */
+  Keys?: string | null;
+  /** 客户端地址 */
+  ProducerAddr?: string | null;
+  /** 消息发送时间 */
+  ProduceTime?: string | null;
+  /** 死信重发次数 */
+  DeadLetterResendTimes?: number | null;
+  /** 死信重发成功次数 */
+  DeadLetterResendSuccessTimes?: number | null;
+}
+
 /** 消息轨迹 */
 declare interface MessageTraceItem {
   /** 步骤 */
   Stage?: string | null;
   /** 轨迹详情 */
   Data?: string | null;
+}
+
+/** MessageTrack */
+declare interface MessageTrackItem {
+  /** 消费组名称 */
+  ConsumerGroup?: string;
+  /** 消费状态, CONSUMED: 已消费 CONSUMED_BUT_FILTERED: 已过滤 NOT_CONSUME: 未消费 ENTER_RETRY: 进入重试队列 ENTER_DLQ: 进入死信队列 UNKNOWN: 查询不到消费状态 */
+  ConsumeStatus?: string;
+  /** track类型 */
+  TrackType?: string;
+  /** 异常信息 */
+  ExceptionDesc?: string | null;
 }
 
 /** MQTT客户端监控 */
@@ -1268,6 +1298,84 @@ declare interface DescribeMQTTUserListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMessageListRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 主题名称 */
+  Topic: string;
+  /** 开始时间 */
+  StartTime: number;
+  /** 结束时间 */
+  EndTime: number;
+  /** 一次查询标识 */
+  TaskRequestId: string;
+  /** 查询起始位置 */
+  Offset?: number;
+  /** 查询结果限制数量 */
+  Limit?: number;
+  /** 消费组名称 */
+  ConsumerGroup?: string;
+  /** 消息 ID */
+  MsgId?: string;
+  /** 消息 Key */
+  MsgKey?: string;
+  /** 查询最近N条消息 最大不超过1024，默认-1为其他查询条件 */
+  RecentMessageNum?: number;
+  /** 是否查询死信消息 */
+  QueryDeadLetterMessage?: boolean;
+  /** 消息 Tag */
+  Tag?: string;
+}
+
+declare interface DescribeMessageListResponse {
+  /** 查询总数 */
+  TotalCount?: number | null;
+  /** 消息记录列表 */
+  Data?: MessageItem[] | null;
+  /** 一次查询ID */
+  TaskRequestId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMessageRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 主题名称 */
+  Topic: string;
+  /** 消息ID */
+  MsgId: string;
+  /** 查询起始位置 */
+  Offset?: number;
+  /** 查询结果限制数量 */
+  Limit?: number;
+  /** 是否是死信消息 */
+  QueryDeadLetterMessage?: boolean;
+  /** 是否是延时消息 */
+  QueryDelayMessage?: boolean;
+}
+
+declare interface DescribeMessageResponse {
+  /** 消息体 */
+  Body?: string;
+  /** 详情参数 */
+  Properties?: string;
+  /** 生产时间 */
+  ProduceTime?: string;
+  /** 消息ID */
+  MessageId?: string | null;
+  /** 生产者地址 */
+  ProducerAddr?: string;
+  /** 消息消费情况列表 */
+  MessageTracks?: MessageTrackItem[] | null;
+  /** Topic */
+  ShowTopicName?: string;
+  /** 消息消费情况列表总条数 */
+  MessageTracksCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeMessageTraceRequest {
   /** 集群ID */
   InstanceId: string;
@@ -1558,6 +1666,22 @@ declare interface ModifyTopicResponse {
   RequestId?: string;
 }
 
+declare interface ResendDeadLetterMessageRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 死信消息ID列表 */
+  MessageIds: string[];
+  /** 消费组名称 */
+  ConsumerGroup?: string;
+}
+
+declare interface ResendDeadLetterMessageResponse {
+  /** 重发消息结果 */
+  ResendResult?: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Trocket 消息队列 RocketMQ 版} */
 declare interface Trocket {
   (): Versions;
@@ -1629,6 +1753,10 @@ declare interface Trocket {
   DescribeMQTTTopicList(data: DescribeMQTTTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTTopicListResponse>;
   /** 查询MQTT用户列表 {@link DescribeMQTTUserListRequest} {@link DescribeMQTTUserListResponse} */
   DescribeMQTTUserList(data: DescribeMQTTUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTUserListResponse>;
+  /** 查询消息详情 {@link DescribeMessageRequest} {@link DescribeMessageResponse} */
+  DescribeMessage(data: DescribeMessageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageResponse>;
+  /** 查询消息列表 {@link DescribeMessageListRequest} {@link DescribeMessageListResponse} */
+  DescribeMessageList(data: DescribeMessageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageListResponse>;
   /** 查询消息轨迹 {@link DescribeMessageTraceRequest} {@link DescribeMessageTraceResponse} */
   DescribeMessageTrace(data: DescribeMessageTraceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageTraceResponse>;
   /** 查询产品售卖规格 {@link DescribeProductSKUsRequest} {@link DescribeProductSKUsResponse} */
@@ -1661,6 +1789,8 @@ declare interface Trocket {
   ModifyRole(data: ModifyRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoleResponse>;
   /** 修改主题属性 {@link ModifyTopicRequest} {@link ModifyTopicResponse} */
   ModifyTopic(data: ModifyTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicResponse>;
+  /** 重新发送死信消息 {@link ResendDeadLetterMessageRequest} {@link ResendDeadLetterMessageResponse} */
+  ResendDeadLetterMessage(data: ResendDeadLetterMessageRequest, config?: AxiosRequestConfig): AxiosPromise<ResendDeadLetterMessageResponse>;
 }
 
 export declare type Versions = ["2023-03-08"];

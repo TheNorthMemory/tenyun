@@ -5379,11 +5379,11 @@ declare namespace V20180717 {
 
   /** 视频处理任务统计数据。 */
   interface TaskStatData {
-    /** 任务类型。 Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生 QualityInspect: 音画质检测Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）VoiceTranslation: 语音翻译 */
+    /** 任务类型。 Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生 QualityInspect: 音画质检测Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）VoiceTranslation: 语音翻译JITTranscoding: 即时转码 */
     TaskType?: string;
     /** 任务数统计数据概览，用量单位为秒。 */
     Summary?: TaskStatDataItem[];
-    /** 不同规格任务统计数据详情。转码规格：Remuxing: 转封装Audio: 音频转码Standard.H264.SD: H.264编码方式标清转码Standard.H264.HD: H.264编码方式高清转码Standard.H264.FHD: H.264编码方式全高清转码Standard.H264.2K: H.264编码方式2K转码Standard.H264.4K: H.264编码方式4K转码Standard.H265.SD: H.265编码方式标清转码Standard.H265.HD: H.265编码方式高清转码Standard.H265.FHD: H.265编码方式全高清转码Standard.H265.2K: H.265编码方式2K转码Standard.H265.4K: H.265编码方式4K转码TESHD-10.H264.SD: H.264编码方式标清极速高清转码TESHD-10.H264.HD: H.264编码方式高清极速高清转码TESHD-10.H264.FHD: H.264编码方式全高清极速高清转码TESHD-10.H264.2K: H.264编码方式2K极速高清转码TESHD-10.H264.4K: H.264编码方式4K极速高清转码TESHD-10.H265.SD: H.265编码方式标清极速高清转码TESHD-10.H265.HD: H.265编码方式高清极速高清转码TESHD-10.H265.FHD: H.265编码方式全高清极速高清转码TESHD-10.H265.2K: H.265编码方式2K极速高清转码TESHD-10.H265.4K: H.265编码方式4K极速高清转码Edit.Audio: 音频编辑Edit.H264.SD: H.264编码方式标清视频编辑Edit.H264.HD: H.264编码方式高清视频编辑Edit.H264.FHD: H.264编码方式全高清视频编辑Edit.H264.2K: H.264编码方式2K视频编辑Edit.H264.4K: H.264编码方式4K视频编辑Edit.H265.SD: H.265编码方式标清视频编辑Edit.H265.HD: H.265编码方式高清视频编辑Edit.H265.FHD: H.265编码方式全高清视频编辑Edit.H265.2K: H.265编码方式2K视频编辑Edit.H265.4K: H.265编码方式4K视频编辑Edit.TESHD-10.H264.SD: H.264编码方式标清极速高清视频编辑Edit.TESHD-10.H264.HD: H.264编码方式高清极速高清视频编辑Edit.TESHD-10.H264.FHD: H.264编码方式全高清极速高清视频编辑Edit.TESHD-10.H264.2K: H.264编码方式2K极速高清视频编辑Edit.TESHD-10.H264.4K: H.264编码方式4K极速高清视频编辑Edit.TESHD-10.H265.SD: H.265编码方式标清极速高清视频编辑Edit.TESHD-10.H265.HD: H.265编码方式高清极速高清视频编辑Edit.TESHD-10.H265.FHD: H.265编码方式全高清极速高清视频编辑Edit.TESHD-10.H265.2K: H.265编码方式2K极速高清视频编辑Edit.TESHD-10.H265.4K: H.265编码方式4K极速高清视频编辑去水印、音画质重生规格：480P: 短边 ≤ 480px720P: 短边 ≤ 720px1080P: 短边 ≤ 1080px2K: 短边 ≤ 1440px4K: 短边 ≤ 2160px8K: 短边 ≤ 4320pxAudio: 音频 */
+    /** 不同规格任务统计数据详情。转码规格：Remuxing: 转封装Audio: 音频转码Standard.H264.SD: H.264编码方式标清转码Standard.H264.HD: H.264编码方式高清转码Standard.H264.FHD: H.264编码方式全高清转码Standard.H264.2K: H.264编码方式2K转码Standard.H264.4K: H.264编码方式4K转码Standard.H265.SD: H.265编码方式标清转码Standard.H265.HD: H.265编码方式高清转码Standard.H265.FHD: H.265编码方式全高清转码Standard.H265.2K: H.265编码方式2K转码Standard.H265.4K: H.265编码方式4K转码TESHD-10.H264.SD: H.264编码方式标清极速高清转码TESHD-10.H264.HD: H.264编码方式高清极速高清转码TESHD-10.H264.FHD: H.264编码方式全高清极速高清转码TESHD-10.H264.2K: H.264编码方式2K极速高清转码TESHD-10.H264.4K: H.264编码方式4K极速高清转码TESHD-10.H265.SD: H.265编码方式标清极速高清转码TESHD-10.H265.HD: H.265编码方式高清极速高清转码TESHD-10.H265.FHD: H.265编码方式全高清极速高清转码TESHD-10.H265.2K: H.265编码方式2K极速高清转码TESHD-10.H265.4K: H.265编码方式4K极速高清转码Edit.Audio: 音频编辑Edit.H264.SD: H.264编码方式标清视频编辑Edit.H264.HD: H.264编码方式高清视频编辑Edit.H264.FHD: H.264编码方式全高清视频编辑Edit.H264.2K: H.264编码方式2K视频编辑Edit.H264.4K: H.264编码方式4K视频编辑Edit.H265.SD: H.265编码方式标清视频编辑Edit.H265.HD: H.265编码方式高清视频编辑Edit.H265.FHD: H.265编码方式全高清视频编辑Edit.H265.2K: H.265编码方式2K视频编辑Edit.H265.4K: H.265编码方式4K视频编辑Edit.TESHD-10.H264.SD: H.264编码方式标清极速高清视频编辑Edit.TESHD-10.H264.HD: H.264编码方式高清极速高清视频编辑Edit.TESHD-10.H264.FHD: H.264编码方式全高清极速高清视频编辑Edit.TESHD-10.H264.2K: H.264编码方式2K极速高清视频编辑Edit.TESHD-10.H264.4K: H.264编码方式4K极速高清视频编辑Edit.TESHD-10.H265.SD: H.265编码方式标清极速高清视频编辑Edit.TESHD-10.H265.HD: H.265编码方式高清极速高清视频编辑Edit.TESHD-10.H265.FHD: H.265编码方式全高清极速高清视频编辑Edit.TESHD-10.H265.2K: H.265编码方式2K极速高清视频编辑Edit.TESHD-10.H265.4K: H.265编码方式4K极速高清视频编辑去水印、音画质重生规格：480P: 短边 ≤ 480px720P: 短边 ≤ 720px1080P: 短边 ≤ 1080px2K: 短边 ≤ 1440px4K: 短边 ≤ 2160px8K: 短边 ≤ 4320pxAudio: 音频即时转码规格：JITTranscoding.H264.SD: H.264编码方式标清即时转码JITTranscoding.H264.HD: H.264编码方式高清即时转码JITTranscoding.H264.FHD: H.264编码方式全高清即时转码JITTranscoding.H264.2K: H.264编码方式2K即时转码JITTranscoding.Audio: 音频即时转码JITTranscoding.Copy: 转封装即时转码 */
     Details?: SpecificationDataItem[];
   }
 
@@ -6350,6 +6350,8 @@ declare namespace V20180717 {
   interface CreateDomainVerifyRecordRequest {
     /** 需要接入点播的加速域名。 */
     Domain: string;
+    /** 点播[应用](/document/product/266/14574) ID。从2024年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: number;
   }
 
   interface CreateDomainVerifyRecordResponse {
@@ -7784,7 +7786,7 @@ declare namespace V20180717 {
     EndTime: string;
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
-    /** 查询视频处理任务类型，目前支持的任务类型包括： Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去除水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生 QualityInspect: 音画质检测 VideoHighlight: 视频智能集锦 VideoTag: 视频智能标签 VideoClassification: 视频智能分类 VideoCover: 视频智能封面 VideoSegment: 视频智能拆条 VideoProduce: 视频制作 MediaCast: 媒体转推Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）VoiceTranslation: 语音翻译 */
+    /** 查询视频处理任务类型，目前支持的任务类型包括： Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去除水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生 QualityInspect: 音画质检测 VideoHighlight: 视频智能集锦 VideoTag: 视频智能标签 VideoClassification: 视频智能分类 VideoCover: 视频智能封面 VideoSegment: 视频智能拆条 VideoProduce: 视频制作 MediaCast: 媒体转推Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）VoiceTranslation: 语音翻译JITTranscoding: 即时转码 */
     Type?: string;
   }
 
@@ -9894,6 +9896,8 @@ declare namespace V20180717 {
   interface VerifyDomainRecordRequest {
     /** 需要接入点播的加速域名。 */
     Domain: string;
+    /** 点播[应用](/document/product/266/14574) ID。从2024年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: number;
     /** 验证方式：dns：DNS 解析验证；fIle：文件验证。默认值：dns。 */
     VerifyType?: string;
   }

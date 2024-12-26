@@ -2062,7 +2062,7 @@ declare interface DescribeProductInfoRequest {
 }
 
 declare interface DescribeProductInfoResponse {
-  /** 地域售卖信息。 */
+  /** 地域售卖信息。即使指定具体地域，也返回所有地域的售卖信息。 */
   RegionSet?: RegionConf[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

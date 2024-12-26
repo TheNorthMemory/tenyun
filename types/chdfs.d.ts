@@ -35,31 +35,31 @@ declare interface AccessRule {
 /** 文件系统 */
 declare interface FileSystem {
   /** 资源所属用户AppId */
-  AppId: number;
+  AppId?: number;
   /** 文件系统名称 */
-  FileSystemName: string;
+  FileSystemName?: string;
   /** 文件系统描述 */
-  Description: string;
+  Description?: string;
   /** 地域 */
-  Region: string;
+  Region?: string;
   /** 文件系统ID */
-  FileSystemId: string;
+  FileSystemId?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 文件系统块大小（byte） */
-  BlockSize: number;
+  BlockSize?: number;
   /** 文件系统容量（byte） */
-  CapacityQuota: number;
+  CapacityQuota?: number;
   /** 文件系统状态（1：创建中；2：创建成功；3：创建失败） */
-  Status: number;
+  Status?: number;
   /** 超级用户名列表 */
-  SuperUsers: string[];
+  SuperUsers?: string[];
   /** POSIX权限控制 */
-  PosixAcl: boolean;
+  PosixAcl?: boolean;
   /** 是否打开Ranger地址校验 */
-  EnableRanger: boolean | null;
+  EnableRanger?: boolean | null;
   /** Ranger地址列表 */
-  RangerServiceAddresses: string[] | null;
+  RangerServiceAddresses?: string[] | null;
 }
 
 /** 生命周期规则 */
@@ -117,17 +117,17 @@ declare interface RestoreTask {
 /** 生命周期规则当前路径具体存储量信息 */
 declare interface Summary {
   /** 已使用容量（byte） */
-  CapacityUsed: number | null;
+  CapacityUsed?: number;
   /** 已使用COS标准存储容量（byte） */
-  StandardCapacityUsed: number | null;
+  StandardCapacityUsed?: number;
   /** 已使用COS低频存储容量（byte） */
-  DegradeCapacityUsed?: number | null;
+  DegradeCapacityUsed?: number;
   /** 已使用COS归档存储容量（byte） */
-  ArchiveCapacityUsed?: number | null;
+  ArchiveCapacityUsed?: number;
   /** 已使用COS深度归档存储容量（byte） */
-  DeepArchiveCapacityUsed?: number | null;
+  DeepArchiveCapacityUsed?: number;
   /** 已使用COS智能分层存储容量（byte） */
-  IntelligentCapacityUsed?: number | null;
+  IntelligentCapacityUsed?: number;
 }
 
 /** 资源标签。 */
@@ -193,12 +193,12 @@ declare interface CreateAccessRulesResponse {
 declare interface CreateFileSystemRequest {
   /** 文件系统名称 */
   FileSystemName: string;
-  /** 文件系统容量（byte），下限为1GB，上限为1PB，且必须是1GB的整数倍 */
-  CapacityQuota: number;
   /** 是否校验POSIX ACL */
   PosixAcl: boolean;
   /** 文件系统描述，默认为空字符串 */
   Description?: string;
+  /** 文件系统容量（byte），下限为1GB，上限为1PB，且必须是1GB的整数倍 */
+  CapacityQuota?: number;
   /** 超级用户名列表，默认为空数组 */
   SuperUsers?: string[];
   /** 根目录Inode用户名，默认为hadoop */
@@ -243,7 +243,7 @@ declare interface CreateMountPointRequest {
 
 declare interface CreateMountPointResponse {
   /** 挂载点 */
-  MountPoint: MountPoint;
+  MountPoint?: MountPoint;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -317,7 +317,7 @@ declare interface DescribeAccessGroupRequest {
 
 declare interface DescribeAccessGroupResponse {
   /** 权限组 */
-  AccessGroup: AccessGroup;
+  AccessGroup?: AccessGroup;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -331,7 +331,7 @@ declare interface DescribeAccessGroupsRequest {
 
 declare interface DescribeAccessGroupsResponse {
   /** 权限组列表 */
-  AccessGroups: AccessGroup[];
+  AccessGroups?: AccessGroup[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -355,19 +355,19 @@ declare interface DescribeFileSystemRequest {
 
 declare interface DescribeFileSystemResponse {
   /** 文件系统 */
-  FileSystem: FileSystem;
+  FileSystem?: FileSystem;
   /** 文件系统已使用容量（byte） */
-  CapacityUsed: number | null;
+  CapacityUsed?: number | null;
   /** 已使用COS归档存储容量（byte） */
-  ArchiveCapacityUsed: number | null;
+  ArchiveCapacityUsed?: number | null;
   /** 已使用COS标准存储容量（byte） */
-  StandardCapacityUsed: number | null;
+  StandardCapacityUsed?: number | null;
   /** 已使用COS低频存储容量（byte） */
-  DegradeCapacityUsed: number | null;
+  DegradeCapacityUsed?: number | null;
   /** 已使用COS深度归档存储容量（byte） */
-  DeepArchiveCapacityUsed: number | null;
+  DeepArchiveCapacityUsed?: number | null;
   /** 已使用COS智能分层存储容量（byte） */
-  IntelligentCapacityUsed: number | null;
+  IntelligentCapacityUsed?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -401,7 +401,7 @@ declare interface DescribeMountPointRequest {
 
 declare interface DescribeMountPointResponse {
   /** 挂载点 */
-  MountPoint: MountPoint;
+  MountPoint?: MountPoint;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -417,7 +417,7 @@ declare interface DescribeMountPointsRequest {
 
 declare interface DescribeMountPointsResponse {
   /** 挂载点列表 */
-  MountPoints: MountPoint[];
+  MountPoints?: MountPoint[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

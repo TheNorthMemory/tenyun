@@ -403,7 +403,7 @@ declare interface CheckTransformationRequest {
 
 declare interface CheckTransformationResponse {
   /** 经过Transformations处理之后的数据 */
-  Output: string;
+  Output?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -677,7 +677,7 @@ declare interface GetTransformationRequest {
 
 declare interface GetTransformationResponse {
   /** 转换规则列表 */
-  Transformations: Transformation[];
+  Transformations?: Transformation[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

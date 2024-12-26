@@ -16,7 +16,7 @@ declare interface Choice {
 
 /** 可以传入多种类型的内容，如图片或文本。当前只支持传入单张图片，传入多张图片时，以第一个图片为准。 */
 declare interface Content {
-  /** 内容类型注意：当前只支持传入单张图片，传入多张图片时，以第一个图片为准。 */
+  /** 内容类型注意：当前只支持传入单张图片，传入多张图片时，以第一个图片为准。参数值可选范围：[text", "image_url"] */
   Type: string | null;
   /** 当 Type 为 text 时使用，表示具体的文本内容 */
   Text?: string | null;
@@ -429,6 +429,8 @@ declare interface ChatCompletionsRequest {
   ForceSearchEnhancement?: boolean;
   /** 自定义结束生成字符串 */
   Stop?: string[];
+  /** 推荐问答开关。说明：1. 未传值时默认关闭。2. 开启后，返回值里将增加 RecommendedQuestions 字段返回推荐问答， 最多只返回3条。 */
+  EnableRecommendedQuestions?: boolean;
 }
 
 declare interface ChatCompletionsResponse {
@@ -450,6 +452,8 @@ declare interface ChatCompletionsResponse {
   SearchInfo?: SearchInfo;
   /** 多媒体信息。说明：1. 可以用多媒体信息替换回复内容里的占位符，得到完整的消息。2. 可能会出现回复内容里存在占位符，但是因为审核等原因没有返回多媒体信息。 */
   Replaces?: Replace[];
+  /** 推荐问答。 */
+  RecommendedQuestions?: string[];
   /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
   RequestId?: string;
 }

@@ -1066,7 +1066,7 @@ declare interface InstanceAbility {
 
 /** 审计日志搜索条件 */
 declare interface InstanceAuditLogFilter {
-  /** 过滤项。目前支持以下搜索条件：包含、不包含、包含（分词维度）、不包含（分词维度）: sql - SQL详情；alarmLevel - 告警等级；ruleTemplateId - 规则模板Id等于、不等于、包含、不包含： host - 客户端地址； user - 用户名； dbName - 数据库名称；等于、不等于： sqlType - SQL类型； errCode - 错误码； threadId - 线程ID；范围搜索（时间类型统一为微秒）： execTime - 执行时间； lockWaitTime - 执行时间； ioWaitTime - IO等待时间； trxLivingTime - 事物持续时间； cpuTime - cpu时间； checkRows - 扫描行数； affectRows - 影响行数； sentRows - 返回行数。 */
+  /** 过滤项。目前支持以下搜索条件：包含、不包含、包含（分词维度）、不包含（分词维度）: sql - SQL详情；alarmLevel - 告警等级；ruleTemplateId - 规则模板Id等于、不等于、包含、不包含： host - 客户端地址； user - 用户名； dbName - 数据库名称；等于、不等于： sqlType - SQL类型； errCode - 错误码； threadId - 线程ID；范围搜索（时间类型统一为微秒）： execTime - 执行时间； lockWaitTime - 执行时间； ioWaitTime - IO等待时间； trxLivingTime - 事务持续时间； cpuTime - cpu时间； checkRows - 扫描行数； affectRows - 影响行数； sentRows - 返回行数。 */
   Type: string;
   /** 过滤条件。支持以下条件：WINC-包含（分词维度），WEXC-不包含（分词维度）,INC - 包含,EXC - 不包含,EQS - 等于,NEQ - 不等于,RA - 范围。 */
   Compare: string;
@@ -1203,25 +1203,25 @@ declare interface InstanceParamItem {
 /** 实例可售卖规格详细信息，创建实例时Cpu/Memory确定实例规格，存储可选大小为[MinStorageSize,MaxStorageSize] */
 declare interface InstanceSpec {
   /** 实例CPU，单位：核 */
-  Cpu: number;
+  Cpu?: number;
   /** 实例内存，单位：GB */
-  Memory: number;
+  Memory?: number;
   /** 实例最大可用存储，单位：GB */
-  MaxStorageSize: number;
+  MaxStorageSize?: number;
   /** 实例最小可用存储，单位：GB */
-  MinStorageSize: number;
+  MinStorageSize?: number;
   /** 是否有库存 */
-  HasStock: boolean;
+  HasStock?: boolean;
   /** 机器类型 */
-  MachineType: string;
+  MachineType?: string;
   /** 最大IOPS */
-  MaxIops: number;
+  MaxIops?: number;
   /** 最大IO带宽 */
-  MaxIoBandWidth: number;
+  MaxIoBandWidth?: number;
   /** 地域库存信息 */
-  ZoneStockInfos: ZoneStockInfo[] | null;
+  ZoneStockInfos?: ZoneStockInfo[] | null;
   /** 库存数量 */
-  StockCount: number | null;
+  StockCount?: number | null;
 }
 
 /** 审计日志命中规则模板的基本信息 */
@@ -1581,17 +1581,17 @@ declare interface ParamItemInfo {
 /** 参数模板信息 */
 declare interface ParamTemplateListInfo {
   /** 参数模板ID */
-  Id: number;
+  Id?: number;
   /** 参数模板名称 */
-  TemplateName: string;
+  TemplateName?: string;
   /** 参数模板描述 */
-  TemplateDescription: string;
+  TemplateDescription?: string;
   /** 引擎版本 */
-  EngineVersion: string;
+  EngineVersion?: string;
   /** 数据库类型，可选值：NORMAL，SERVERLESS */
-  DbMode: string;
+  DbMode?: string;
   /** 参数模板详情 */
-  ParamInfoSet: TemplateParamInfo[] | null;
+  ParamInfoSet?: TemplateParamInfo[] | null;
 }
 
 /** 安全组规则 */
@@ -3977,7 +3977,7 @@ declare interface ExportInstanceErrorLogsRequest {
   FileType?: string;
   /** 可选值Timestamp */
   OrderBy?: string;
-  /** ASC或DESC */
+  /** 排序类型，ASC 或 DESC。 */
   OrderByType?: string;
 }
 
@@ -4919,15 +4919,15 @@ declare interface RenewClustersRequest {
 
 declare interface RenewClustersResponse {
   /** 预付费总订单号 */
-  BigDealIds: string[] | null;
+  BigDealIds?: string[] | null;
   /** 退款订单号 */
-  DealNames: string[] | null;
+  DealNames?: string[] | null;
   /** 冻结流水，一次开通一个冻结流水 */
-  TranId: string | null;
+  TranId?: string | null;
   /** 每个订单号对应的发货资源id列表 */
-  ResourceIds: string[] | null;
+  ResourceIds?: string[] | null;
   /** 集群id列表 */
-  ClusterIds: string[] | null;
+  ClusterIds?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

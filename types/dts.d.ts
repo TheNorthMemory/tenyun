@@ -842,7 +842,7 @@ declare interface Options {
   RateLimitOption?: RateLimitOption | null;
   /** 自动重试的时间窗口设置 */
   AutoRetryTimeRangeMinutes?: number | null;
-  /** 同步到kafka链路指定位点。目前只支持时间格式：yyyy-mm-dd hh:mm:ss。如果没有指定位点，为空。 */
+  /** 同步到kafka链路指定位点。目前只支持时间格式：2023-12-20T19:24:23+08:00。如果没有指定位点，为空。 */
   StartPosition?: string | null;
   /** 同步到kafka链路是否过滤掉begin和commit消息。目前仅mysql2kafka链路支持 */
   FilterBeginCommit?: boolean | null;
@@ -2183,10 +2183,10 @@ declare interface ModifyConsumerGroupPasswordRequest {
   AccountName: string;
   /** 消费组名称。实际的消费组全称形如：consumer-grp-#{SubscribeId}-#{ConsumerGroupName} */
   ConsumerGroupName: string;
-  /** 旧密码 */
-  OldPassword: string;
   /** 新密码。字符长度不小于3，不大于32 */
   NewPassword: string;
+  /** 旧密码，非必选 */
+  OldPassword?: string;
 }
 
 declare interface ModifyConsumerGroupPasswordResponse {

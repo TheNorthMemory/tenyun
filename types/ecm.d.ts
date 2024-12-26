@@ -67,13 +67,13 @@ declare interface Area {
 /** VPC辅助CIDR信息。 */
 declare interface AssistantCidr {
   /** VPC实例ID。形如：vpc-6v2ht8q5 */
-  VpcId: string;
+  VpcId?: string;
   /** 辅助CIDR。形如：172.16.0.0/16 */
-  CidrBlock: string;
+  CidrBlock?: string;
   /** 辅助CIDR类型（0：普通辅助CIDR，1：容器辅助CIDR），默认都是0。 */
-  AssistantType: number;
+  AssistantType?: number;
   /** 辅助CIDR拆分的子网。 */
-  SubnetSet: Subnet[] | null;
+  SubnetSet?: Subnet[] | null;
 }
 
 /** 负责均衡后端信息 */
@@ -539,9 +539,9 @@ declare interface InstancePricesPartDetail {
 /** 用于描述实例的统计信息 */
 declare interface InstanceStatistic {
   /** 实例的类型 */
-  InstanceType: string;
+  InstanceType?: string;
   /** 实例的个数 */
-  InstanceCount: number;
+  InstanceCount?: number;
 }
 
 /** 机型配置 */
@@ -829,41 +829,41 @@ declare interface MonthNetwork {
 /** 弹性网卡 */
 declare interface NetworkInterface {
   /** 弹性网卡实例ID，例如：eni-f1xjkw1b。 */
-  NetworkInterfaceId: string;
+  NetworkInterfaceId?: string;
   /** 弹性网卡名称。 */
-  NetworkInterfaceName: string;
+  NetworkInterfaceName?: string;
   /** 弹性网卡描述。 */
-  NetworkInterfaceDescription: string;
+  NetworkInterfaceDescription?: string;
   /** 子网实例ID。 */
-  SubnetId: string;
+  SubnetId?: string;
   /** VPC实例ID。 */
-  VpcId: string;
+  VpcId?: string;
   /** 绑定的安全组。 */
-  GroupSet: string[] | null;
+  GroupSet?: string[] | null;
   /** 是否是主网卡。 */
-  Primary: boolean;
+  Primary?: boolean;
   /** MAC地址。 */
-  MacAddress: string;
+  MacAddress?: string;
   /** 弹性网卡状态：PENDING：创建中AVAILABLE：可用的ATTACHING：绑定中DETACHING：解绑中DELETING：删除中 */
-  State: string;
+  State?: string;
   /** 内网IP信息。 */
-  PrivateIpAddressSet: PrivateIpAddressSpecification[] | null;
+  PrivateIpAddressSet?: PrivateIpAddressSpecification[] | null;
   /** 绑定的云服务器对象。 */
-  Attachment: NetworkInterfaceAttachment | null;
+  Attachment?: NetworkInterfaceAttachment | null;
   /** 可用区。 */
-  Zone: string;
+  Zone?: string;
   /** 创建时间。 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** IPv6地址列表。 */
-  Ipv6AddressSet: Ipv6Address[] | null;
+  Ipv6AddressSet?: Ipv6Address[] | null;
   /** 标签键值对。 */
-  TagSet: Tag[] | null;
+  TagSet?: Tag[] | null;
   /** 网卡类型。0 - 弹性网卡；1 - evm弹性网卡。 */
-  EniType: number;
+  EniType?: number;
   /** EcmRegion ecm区域 */
-  EcmRegion: string;
+  EcmRegion?: string;
   /** 网卡绑定的子机类型：cvm，eks。 */
-  Business: string | null;
+  Business?: string | null;
 }
 
 /** 弹性网卡绑定关系 */
@@ -1161,9 +1161,9 @@ declare interface RouteConflict {
   /** 路由表实例ID */
   RouteTableId?: string;
   /** 要检查的与之冲突的目的端 */
-  DestinationCidrBlock: string;
+  DestinationCidrBlock?: string;
   /** 冲突的路由策略列表 */
-  ConflictSet: Route[] | null;
+  ConflictSet?: Route[] | null;
 }
 
 /** 路由表 */
@@ -1237,39 +1237,39 @@ declare interface SecurityGroup {
 /** 安全组关联的资源统计 */
 declare interface SecurityGroupAssociationStatistics {
   /** 安全组实例ID。 */
-  SecurityGroupId: string;
+  SecurityGroupId?: string;
   /** ECM实例数。 */
-  ECM: number;
+  ECM?: number;
   /** ECM模块数。 */
-  Module: number;
+  Module?: number;
   /** 弹性网卡实例数。 */
-  ENI: number;
+  ENI?: number;
   /** 被安全组引用数。 */
-  SG: number;
+  SG?: number;
   /** 负载均衡实例数。 */
-  CLB: number;
+  CLB?: number;
   /** 全量实例的绑定统计。 */
-  InstanceStatistics: InstanceStatistic[];
+  InstanceStatistics?: InstanceStatistic[];
   /** 所有资源的总计数（不包含被安全组引用数）。 */
-  TotalCount: number;
+  TotalCount?: number;
 }
 
 /** 用户安全组配额限制 */
 declare interface SecurityGroupLimitSet {
   /** 可创建安全组总数 */
-  SecurityGroupLimit: number;
+  SecurityGroupLimit?: number;
   /** 安全组下的最大规则数 */
-  SecurityGroupPolicyLimit: number;
+  SecurityGroupPolicyLimit?: number;
   /** 安全组下嵌套安全组规则数 */
-  ReferedSecurityGroupLimit: number;
+  ReferedSecurityGroupLimit?: number;
   /** 单安全组关联实例数 */
-  SecurityGroupInstanceLimit: number;
+  SecurityGroupInstanceLimit?: number;
   /** 实例关联安全组数 */
-  InstanceSecurityGroupLimit: number;
+  InstanceSecurityGroupLimit?: number;
   /** 单安全组关联的模块数 */
-  SecurityGroupModuleLimit: number;
+  SecurityGroupModuleLimit?: number;
   /** 模块关联的安全组数 */
-  ModuleSecurityGroupLimit: number;
+  ModuleSecurityGroupLimit?: number;
 }
 
 /** 安全组规则对象 */
@@ -1761,7 +1761,7 @@ declare interface AssignPrivateIpAddressesRequest {
 
 declare interface AssignPrivateIpAddressesResponse {
   /** 内网IP详细信息。 */
-  PrivateIpAddressSet?: PrivateIpAddressSpecification[] | null;
+  PrivateIpAddressSet?: PrivateIpAddressSpecification[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1917,7 +1917,7 @@ declare interface CreateHaVipRequest {
 
 declare interface CreateHaVipResponse {
   /** HAVIP对象。 */
-  HaVip: HaVip;
+  HaVip?: HaVip;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2071,7 +2071,7 @@ declare interface CreateNetworkInterfaceRequest {
 
 declare interface CreateNetworkInterfaceResponse {
   /** 弹性网卡实例。 */
-  NetworkInterface: NetworkInterface;
+  NetworkInterface?: NetworkInterface;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2101,9 +2101,9 @@ declare interface CreateRoutesRequest {
 
 declare interface CreateRoutesResponse {
   /** 新增的实例个数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 路由表对象。 */
-  RouteTableSet: RouteTable[] | null;
+  RouteTableSet?: RouteTable[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2495,9 +2495,9 @@ declare interface DescribeHaVipsRequest {
 
 declare interface DescribeHaVipsResponse {
   /** 符合条件的对象数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** HAVIP对象数组。 */
-  HaVipSet: HaVip[] | null;
+  HaVipSet?: HaVip[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2835,7 +2835,7 @@ declare interface DescribeRouteConflictsRequest {
 
 declare interface DescribeRouteConflictsResponse {
   /** 路由策略冲突列表 */
-  RouteConflictSet: RouteConflict[] | null;
+  RouteConflictSet?: RouteConflict[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

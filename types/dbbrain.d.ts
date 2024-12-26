@@ -141,83 +141,83 @@ declare interface AuditLogFile {
 /** 过滤条件。可按设置的过滤条件过滤日志。 */
 declare interface AuditLogFilter {
   /** 客户端地址。 */
-  Host?: string[] | null;
+  Host?: string[];
   /** 数据库名称。 */
-  DBName?: string[] | null;
+  DBName?: string[];
   /** 用户名。 */
-  User?: string[] | null;
+  User?: string[];
   /** 返回行数。表示筛选返回行数大于该值的审计日志。 */
-  SentRows?: number | null;
+  SentRows?: number;
   /** 影响行数。表示筛选影响行数大于该值的审计日志。 */
-  AffectRows?: number | null;
+  AffectRows?: number;
   /** 执行时间。单位为：µs。表示筛选执行时间大于该值的审计日志。 */
-  ExecTime?: number | null;
+  ExecTime?: number;
 }
 
 /** 联系人contact描述。 */
 declare interface ContactItem {
   /** 联系人id。 */
-  Id: number;
+  Id?: number;
   /** 联系人姓名。 */
-  Name: string;
+  Name?: string;
   /** 联系人绑定的邮箱。 */
-  Mail: string;
+  Mail?: string;
 }
 
 /** 实例诊断历史事件 */
 declare interface DiagHistoryEventItem {
   /** 诊断类型。 */
-  DiagType: string;
+  DiagType?: string;
   /** 结束时间。 */
-  EndTime: string;
+  EndTime?: string;
   /** 开始时间。 */
-  StartTime: string;
+  StartTime?: string;
   /** 事件唯一ID 。 */
-  EventId: number;
+  EventId?: number;
   /** 严重程度。严重程度分为5级，按影响程度从高至低分别为：1：致命，2：严重，3：告警，4：提示，5：健康。 */
-  Severity: number;
+  Severity?: number;
   /** 诊断概要。 */
-  Outline: string;
+  Outline?: string;
   /** 诊断项说明。 */
-  DiagItem: string;
+  DiagItem?: string;
   /** 实例 ID 。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 保留字段。 */
-  Metric: string | null;
+  Metric?: string | null;
   /** 地域。 */
-  Region: string;
+  Region?: string;
 }
 
 /** 异常事件信息。 */
 declare interface EventInfo {
   /** 事件 ID 。 */
-  EventId: number;
+  EventId?: number;
   /** 诊断类型。 */
-  DiagType: string;
+  DiagType?: string;
   /** 开始时间。 */
-  StartTime: string;
+  StartTime?: string;
   /** 结束时间。 */
-  EndTime: string;
+  EndTime?: string;
   /** 概要。 */
-  Outline: string;
+  Outline?: string;
   /** 严重程度。严重程度分为5级，按影响程度从高至低分别为：1：致命，2：严重，3：告警，4：提示，5：健康。 */
-  Severity: number;
+  Severity?: number;
   /** 扣分。 */
-  ScoreLost: number;
+  ScoreLost?: number;
   /** 保留字段。 */
-  Metric: string;
+  Metric?: string;
   /** 告警数目。 */
-  Count: number;
+  Count?: number;
 }
 
 /** 描述组信息。 */
 declare interface GroupItem {
   /** 组id。 */
-  Id: number;
+  Id?: number;
   /** 组名称。 */
-  Name: string;
+  Name?: string;
   /** 组成员数量。 */
-  MemberCount: number;
+  MemberCount?: number;
 }
 
 /** 健康报告任务详情。 */
@@ -299,17 +299,17 @@ declare interface IndexesToDrop {
 /** 实例基础信息。 */
 declare interface InstanceBasicInfo {
   /** 实例ID。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例名称。 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 实例内网IP。 */
-  Vip: string;
+  Vip?: string;
   /** 实例内网Port。 */
-  Vport: number;
+  Vport?: number;
   /** 实例产品。 */
-  Product: string;
+  Product?: string;
   /** 实例引擎版本。 */
-  EngineVersion: string;
+  EngineVersion?: string;
 }
 
 /** 实例配置。 */
@@ -461,47 +461,47 @@ declare interface MonitorFloatMetric {
 /** 单位时间间隔内的监控指标数据（浮点型） */
 declare interface MonitorFloatMetricSeriesData {
   /** 监控指标。 */
-  Series: MonitorFloatMetric[];
+  Series?: MonitorFloatMetric[];
   /** 监控指标对应的时间戳。 */
-  Timestamp: number[];
+  Timestamp?: number[];
 }
 
 /** 监控数据 */
 declare interface MonitorMetric {
   /** 指标名称。 */
-  Metric: string;
+  Metric?: string;
   /** 指标单位。 */
-  Unit: string;
+  Unit?: string;
   /** 指标值。 */
-  Values: number[] | null;
+  Values?: number[] | null;
 }
 
 /** 单位时间间隔内的监控指标数据 */
 declare interface MonitorMetricSeriesData {
   /** 监控指标。 */
-  Series: MonitorMetric[];
+  Series?: MonitorMetric[];
   /** 监控指标对应的时间戳。 */
-  Timestamp: number[];
+  Timestamp?: number[];
 }
 
 /** 关系型数据库线程 */
 declare interface MySqlProcess {
   /** 线程ID。 */
-  ID: string;
+  ID?: string;
   /** 线程的操作账号名。 */
-  User: string;
+  User?: string;
   /** 线程的操作主机地址。 */
-  Host: string;
+  Host?: string;
   /** 线程的操作数据库。 */
-  DB: string;
+  DB?: string;
   /** 线程的操作状态。 */
-  State: string;
+  State?: string;
   /** 线程的执行类型。 */
-  Command: string;
+  Command?: string;
   /** 线程的操作时长，单位秒。 */
-  Time: string;
+  Time?: string;
   /** 线程的操作语句。 */
-  Info: string;
+  Info?: string;
 }
 
 /** 实时会话详情。 */
@@ -587,19 +587,19 @@ declare interface RedisBigKeyTask {
 /** redis key空间信息。 */
 declare interface RedisKeySpaceData {
   /** key名。 */
-  Key: string;
+  Key?: string;
   /** key类型。 */
-  Type: string;
+  Type?: string;
   /** key编码方式。 */
-  Encoding: string;
+  Encoding?: string;
   /** key过期时间戳（毫秒），0代表未设置过期时间。 */
-  ExpireTime: number;
+  ExpireTime?: number;
   /** key内存大小，单位Byte。 */
-  Length: number;
+  Length?: number;
   /** 元素个数。 */
-  ItemCount: number;
+  ItemCount?: number;
   /** 最大元素长度。 */
-  MaxElementSize: number;
+  MaxElementSize?: number;
   /** 平均元素长度。 */
   AveElementSize?: number;
   /** 所属分片序号。 */
@@ -625,27 +625,27 @@ declare interface RedisPreKeySpaceData {
 /** 实例SQL限流任务。 */
 declare interface SQLFilter {
   /** 任务ID。 */
-  Id: number;
+  Id?: number;
   /** 任务状态，取值包括RUNNING - 运行中, FINISHED - 已完成, TERMINATED - 已终止。 */
-  Status: string;
+  Status?: string;
   /** SQL类型，取值包括SELECT, UPDATE, DELETE, INSERT, REPLACE。 */
-  SqlType: string;
+  SqlType?: string;
   /** 筛选SQL的关键词，多个关键词用英文逗号拼接。 */
-  OriginKeys: string;
+  OriginKeys?: string;
   /** 筛选SQL的规则。 */
-  OriginRule: string;
+  OriginRule?: string;
   /** 已拒绝SQL数目。 */
-  RejectedSqlCount: number;
+  RejectedSqlCount?: number;
   /** 当前并发数。 */
-  CurrentConcurrency: number;
+  CurrentConcurrency?: number;
   /** 最大并发数。 */
-  MaxConcurrency: number;
+  MaxConcurrency?: number;
   /** 任务创建时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 当前时间。 */
-  CurrentTime: string;
+  CurrentTime?: string;
   /** 限流过期时间。 */
-  ExpireTime: string;
+  ExpireTime?: string;
 }
 
 /** SchemaItem数组 */
@@ -657,29 +657,29 @@ declare interface SchemaItem {
 /** 库空间统计数据。 */
 declare interface SchemaSpaceData {
   /** 库名。 */
-  TableSchema: string;
+  TableSchema?: string;
   /** 数据空间（MB）。 */
-  DataLength: number;
+  DataLength?: number;
   /** 索引空间（MB）。 */
-  IndexLength: number;
+  IndexLength?: number;
   /** 碎片空间（MB）。 */
-  DataFree: number;
+  DataFree?: number;
   /** 总使用空间（MB）。 */
-  TotalLength: number;
+  TotalLength?: number;
   /** 碎片率（%）。 */
-  FragRatio: number;
+  FragRatio?: number;
   /** 行数。 */
-  TableRows: number;
+  TableRows?: number;
   /** 库中所有表对应的独立物理文件大小加和（MB）。 */
-  PhysicalFileSize: number | null;
+  PhysicalFileSize?: number | null;
 }
 
 /** 库空间时序数据 */
 declare interface SchemaSpaceTimeSeries {
   /** 库名 */
-  TableSchema: string;
+  TableSchema?: string;
   /** 单位时间间隔内的空间指标数据。 */
-  SeriesData: MonitorMetricSeriesData;
+  SeriesData?: MonitorMetricSeriesData;
 }
 
 /** 扣分详情。 */
@@ -869,77 +869,77 @@ declare interface StatisticInfo {
 /** 表结构。 */
 declare interface Table {
   /** 库名。 */
-  TableSchema: string;
+  TableSchema?: string;
   /** 表名。 */
-  TableName: string;
+  TableName?: string;
   /** 库表的存储引擎。 */
-  Engine: string;
+  Engine?: string;
   /** 行数。 */
-  TableRows: number;
+  TableRows?: number;
   /** 总使用空间（MB）。 */
-  TotalLength: number;
+  TotalLength?: number;
 }
 
 /** 库表空间统计数据。 */
 declare interface TableSpaceData {
   /** 表名。 */
-  TableName: string;
+  TableName?: string;
   /** 库名。 */
-  TableSchema: string;
+  TableSchema?: string;
   /** 库表的存储引擎。 */
-  Engine: string;
+  Engine?: string;
   /** 数据空间（MB）。 */
-  DataLength: number;
+  DataLength?: number;
   /** 索引空间（MB）。 */
-  IndexLength: number;
+  IndexLength?: number;
   /** 碎片空间（MB）。 */
-  DataFree: number;
+  DataFree?: number;
   /** 总使用空间（MB）。 */
-  TotalLength: number;
+  TotalLength?: number;
   /** 碎片率（%）。 */
-  FragRatio: number;
+  FragRatio?: number;
   /** 行数。 */
-  TableRows: number;
+  TableRows?: number;
   /** 表对应的独立物理文件大小（MB）。 */
-  PhysicalFileSize: number;
+  PhysicalFileSize?: number;
 }
 
 /** 库表空间时序数据 */
 declare interface TableSpaceTimeSeries {
   /** 表名。 */
-  TableName: string;
+  TableName?: string;
   /** 库名。 */
-  TableSchema: string;
+  TableSchema?: string;
   /** 库表的存储引擎。 */
-  Engine: string;
+  Engine?: string;
   /** 单位时间间隔内的空间指标数据。 */
-  SeriesData: MonitorFloatMetricSeriesData;
+  SeriesData?: MonitorFloatMetricSeriesData;
 }
 
 /** 展示 redis kill 会话任务状态。 */
 declare interface TaskInfo {
   /** 异步任务 ID。 */
-  AsyncRequestId: number;
+  AsyncRequestId?: number;
   /** 当前实例所有 proxy 列表。 */
-  InstProxyList: string[];
+  InstProxyList?: string[];
   /** 当前实例所有 proxy 数量。 */
-  InstProxyCount: number;
+  InstProxyCount?: number;
   /** 任务创建时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 任务启动时间。 */
-  StartTime: string;
+  StartTime?: string;
   /** 任务的状态，支持的取值包括："created" - 新建；"chosen" - 待执行； "running" - 执行中；"failed" - 失败；"finished" - 已完成。 */
-  TaskStatus: string;
+  TaskStatus?: string;
   /** 完成 kill 任务的 proxyId。 */
-  FinishedProxyList: string[];
+  FinishedProxyList?: string[];
   /** kill 任务实行失败的 proxyId。 */
-  FailedProxyList: string[];
+  FailedProxyList?: string[];
   /** 任务结束时间。 */
-  EndTime: string;
+  EndTime?: string;
   /** 任务执行进度。 */
-  Progress: number;
+  Progress?: number;
   /** 实例 ID。 */
-  InstanceId: string;
+  InstanceId?: string;
 }
 
 /** 通知模板 */
@@ -961,15 +961,15 @@ declare interface TimeSlice {
 /** 用户配置的相关信息，包括邮件配置。 */
 declare interface UserProfile {
   /** 配置的id。 */
-  ProfileId: string | null;
+  ProfileId?: string | null;
   /** 配置类型，支持值包括："dbScan_mail_configuration" - 数据库巡检邮件配置，"scheduler_mail_configuration" - 定期生成邮件配置。 */
-  ProfileType: string | null;
+  ProfileType?: string | null;
   /** 配置级别，支持值包括："User" - 用户级别，"Instance" - 实例级别，其中数据库巡检邮件配置为用户级别，定期生成邮件配置为实例级别。 */
-  ProfileLevel: string | null;
+  ProfileLevel?: string | null;
   /** 配置名称。 */
-  ProfileName: string | null;
+  ProfileName?: string | null;
   /** 配置详情。 */
-  ProfileInfo: ProfileInfo;
+  ProfileInfo?: ProfileInfo;
 }
 
 declare interface AddUserContactRequest {
@@ -1381,9 +1381,9 @@ declare interface DescribeAuditInstanceListResponse {
 }
 
 declare interface DescribeAuditLogFilesRequest {
-  /** 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB。 */
+  /** 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB， "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL， "postgres" - 云数据库 PostgreSQL */
   Product: string;
-  /** 与Product保持一致。如："dcdb" ,"mariadb" */
+  /** 该字段规则如下： 当product为"dcdb"则输入"dcdb"， 当product为"mariadb"则输入"mariadb"， 当product为"mysql"则输入"mysql"， 当product为"cynosdb"则输入"mysql"， 当product为"postgres"则输入"postgres"。 */
   NodeRequestType: string;
   /** 实例 ID 。 */
   InstanceId: string;
@@ -1741,9 +1741,9 @@ declare interface DescribeProxySessionKillTasksRequest {
 
 declare interface DescribeProxySessionKillTasksResponse {
   /** kill 任务的详情。 */
-  Tasks: TaskInfo[];
+  Tasks?: TaskInfo[];
   /** 任务总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2025,15 +2025,15 @@ declare interface DescribeSqlTemplateRequest {
 
 declare interface DescribeSqlTemplateResponse {
   /** 数据库名。 */
-  Schema: string;
+  Schema?: string;
   /** SQL语句。 */
-  SqlText: string;
+  SqlText?: string;
   /** SQL类型。 */
-  SqlType: string;
+  SqlType?: string;
   /** SQL模版内容。 */
-  SqlTemplate: string;
+  SqlTemplate?: string;
   /** SQL模版ID。 */
-  SqlId: number;
+  SqlId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2097,7 +2097,7 @@ declare interface DescribeTopSpaceTableTimeSeriesRequest {
 
 declare interface DescribeTopSpaceTableTimeSeriesResponse {
   /** 返回的Top表空间统计信息的时序数据列表。 */
-  TopSpaceTableTimeSeries: TableSpaceTimeSeries[];
+  TopSpaceTableTimeSeries?: TableSpaceTimeSeries[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2115,9 +2115,9 @@ declare interface DescribeTopSpaceTablesRequest {
 
 declare interface DescribeTopSpaceTablesResponse {
   /** 返回的Top表空间统计信息列表。 */
-  TopSpaceTables: TableSpaceData[];
+  TopSpaceTables?: TableSpaceData[];
   /** 采集表空间数据的时间戳（秒）。 */
-  Timestamp: number;
+  Timestamp?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2135,19 +2135,19 @@ declare interface DescribeUserSqlAdviceRequest {
 
 declare interface DescribeUserSqlAdviceResponse {
   /** SQL优化建议，可解析为JSON数组，无需优化时输出为空。 */
-  Advices: string;
+  Advices?: string;
   /** SQL优化建议备注，可解析为String数组，无需优化时输出为空。 */
-  Comments: string;
+  Comments?: string;
   /** SQL语句。 */
-  SqlText: string;
+  SqlText?: string;
   /** 库名。 */
-  Schema: string;
+  Schema?: string;
   /** 相关表的DDL信息，可解析为JSON数组。 */
-  Tables: string;
+  Tables?: string;
   /** SQL执行计划，可解析为JSON，无需优化时输出为空。 */
-  SqlPlan: string;
+  SqlPlan?: string;
   /** SQL优化后的成本节约详情，可解析为JSON，无需优化时输出为空。 */
-  Cost: string;
+  Cost?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2334,67 +2334,67 @@ declare namespace V20191016 {
   /** 联系人contact描述。 */
   interface ContactItem {
     /** 联系人id。 */
-    Id: number;
+    Id?: number;
     /** 联系人姓名。 */
-    Name: string;
+    Name?: string;
     /** 联系人绑定的邮箱。 */
-    Mail: string;
+    Mail?: string;
   }
 
   /** 实例诊断历史事件 */
   interface DiagHistoryEventItem {
     /** 诊断类型。 */
-    DiagType: string;
+    DiagType?: string;
     /** 结束时间。 */
-    EndTime: string;
+    EndTime?: string;
     /** 开始时间。 */
-    StartTime: string;
+    StartTime?: string;
     /** 事件 ID 。 */
-    EventId: number;
+    EventId?: number;
     /** 严重程度。严重程度分为5级，按影响程度从高至低分别为：1：致命，2：严重，3：告警，4：提示，5：健康。 */
-    Severity: number;
+    Severity?: number;
     /** 概要。 */
-    Outline: string;
+    Outline?: string;
     /** 诊断项。 */
-    DiagItem: string;
+    DiagItem?: string;
     /** 实例 ID 。 */
-    InstanceId: string | null;
+    InstanceId?: string | null;
     /** 保留字段 */
-    Metric: string | null;
+    Metric?: string | null;
     /** 地域 */
-    Region: string | null;
+    Region?: string | null;
   }
 
   /** 异常事件信息。 */
   interface EventInfo {
     /** 事件 ID 。 */
-    EventId: number;
+    EventId?: number;
     /** 诊断类型。 */
-    DiagType: string;
+    DiagType?: string;
     /** 开始时间。 */
-    StartTime: string;
+    StartTime?: string;
     /** 结束时间。 */
-    EndTime: string;
+    EndTime?: string;
     /** 概要。 */
-    Outline: string;
+    Outline?: string;
     /** 严重程度。严重程度分为5级，按影响程度从高至低分别为：1：致命，2：严重，3：告警，4：提示，5：健康。 */
-    Severity: number;
+    Severity?: number;
     /** 扣分。 */
-    ScoreLost: number;
+    ScoreLost?: number;
     /** 保留字段。 */
-    Metric: string;
+    Metric?: string;
     /** 告警数目。 */
-    Count: number;
+    Count?: number;
   }
 
   /** 描述组信息。 */
   interface GroupItem {
     /** 组id。 */
-    Id: number;
+    Id?: number;
     /** 组名称。 */
-    Name: string;
+    Name?: string;
     /** 组成员数量。 */
-    MemberCount: number;
+    MemberCount?: number;
   }
 
   /** 健康报告任务详情。 */
@@ -2444,17 +2444,17 @@ declare namespace V20191016 {
   /** 实例基础信息。 */
   interface InstanceBasicInfo {
     /** 实例ID。 */
-    InstanceId: string;
+    InstanceId?: string;
     /** 实例名称。 */
-    InstanceName: string;
+    InstanceName?: string;
     /** 实例内网IP。 */
-    Vip: string;
+    Vip?: string;
     /** 实例内网Port。 */
-    Vport: number;
+    Vport?: number;
     /** 实例产品。 */
-    Product: string;
+    Product?: string;
     /** 实例引擎版本。 */
-    EngineVersion: string;
+    EngineVersion?: string;
   }
 
   /** 实例配置。 */
@@ -2470,61 +2470,61 @@ declare namespace V20191016 {
   /** 查询实例列表，返回实例的相关信息的对象。 */
   interface InstanceInfo {
     /** 实例ID。 */
-    InstanceId: string;
+    InstanceId?: string;
     /** 实例名称。 */
-    InstanceName: string;
+    InstanceName?: string;
     /** 实例所属地域。 */
-    Region: string;
+    Region?: string;
     /** 健康得分。 */
-    HealthScore: number;
+    HealthScore?: number;
     /** 所属产品。 */
-    Product: string;
+    Product?: string;
     /** 异常事件数量。 */
-    EventCount: number;
+    EventCount?: number;
     /** 实例类型：1:MASTER；2:DR，3：RO，4:SDR。 */
-    InstanceType: number;
+    InstanceType?: number;
     /** 核心数。 */
-    Cpu: number;
+    Cpu?: number;
     /** 内存，单位MB。 */
-    Memory: number;
+    Memory?: number;
     /** 硬盘存储，单位GB。 */
-    Volume: number;
+    Volume?: number;
     /** 数据库版本。 */
-    EngineVersion: string;
+    EngineVersion?: string;
     /** 内网地址。 */
-    Vip: string;
+    Vip?: string;
     /** 内网端口。 */
-    Vport: number;
+    Vport?: number;
     /** 接入来源。 */
-    Source: string;
+    Source?: string;
     /** 分组ID。 */
-    GroupId: string;
+    GroupId?: string;
     /** 分组组名。 */
-    GroupName: string;
+    GroupName?: string;
     /** 实例状态：0：发货中；1：运行正常；4：销毁中；5：隔离中。 */
-    Status: number;
+    Status?: number;
     /** 子网统一ID。 */
-    UniqSubnetId: string;
+    UniqSubnetId?: string;
     /** cdb类型。 */
-    DeployMode: string;
+    DeployMode?: string;
     /** cdb实例初始化标志：0：未初始化；1：已初始化。 */
-    InitFlag: number;
+    InitFlag?: number;
     /** 任务状态。 */
-    TaskStatus: number;
+    TaskStatus?: number;
     /** 私有网络统一ID。 */
-    UniqVpcId: string;
+    UniqVpcId?: string;
     /** 实例巡检/概览的状态。 */
-    InstanceConf: InstanceConfs;
+    InstanceConf?: InstanceConfs;
     /** 资源到期时间。 */
-    DeadlineTime: string;
+    DeadlineTime?: string;
     /** 是否是DBbrain支持的实例。 */
-    IsSupported: boolean;
+    IsSupported?: boolean;
     /** 实例安全审计日志开启状态：ON： 安全审计开启；OFF： 未开启安全审计。 */
-    SecAuditStatus: string;
+    SecAuditStatus?: string;
     /** 实例审计日志开启状态，ALL_AUDIT： 开启全审计；RULE_AUDIT： 开启规则审计；UNBOUND： 未开启审计。 */
-    AuditPolicyStatus: string;
+    AuditPolicyStatus?: string;
     /** 实例审计日志运行状态：normal： 运行中； paused： 欠费暂停。 */
-    AuditRunningStatus: string;
+    AuditRunningStatus?: string;
     /** 内网vip。 */
     InternalVip?: string | null;
     /** 内网port。 */
@@ -2564,37 +2564,37 @@ declare namespace V20191016 {
   /** 监控数据（浮点型） */
   interface MonitorFloatMetric {
     /** 指标名称。 */
-    Metric: string;
+    Metric?: string;
     /** 指标单位。 */
-    Unit: string;
+    Unit?: string;
     /** 指标值。 */
-    Values: number[] | null;
+    Values?: number[] | null;
   }
 
   /** 单位时间间隔内的监控指标数据（浮点型） */
   interface MonitorFloatMetricSeriesData {
     /** 监控指标。 */
-    Series: MonitorFloatMetric[];
+    Series?: MonitorFloatMetric[];
     /** 监控指标对应的时间戳。 */
-    Timestamp: number[];
+    Timestamp?: number[];
   }
 
   /** 监控数据 */
   interface MonitorMetric {
     /** 指标名称。 */
-    Metric: string;
+    Metric?: string;
     /** 指标单位。 */
-    Unit: string;
+    Unit?: string;
     /** 指标值。 */
-    Values: number[] | null;
+    Values?: number[] | null;
   }
 
   /** 单位时间间隔内的监控指标数据 */
   interface MonitorMetricSeriesData {
     /** 监控指标。 */
-    Series: MonitorMetric[];
+    Series?: MonitorMetric[];
     /** 监控指标对应的时间戳。 */
-    Timestamp: number[];
+    Timestamp?: number[];
   }
 
   /** 用户配置的信息 */
@@ -2614,29 +2614,29 @@ declare namespace V20191016 {
   /** 库空间统计数据。 */
   interface SchemaSpaceData {
     /** 库名。 */
-    TableSchema: string;
+    TableSchema?: string;
     /** 数据空间（MB）。 */
-    DataLength: number;
+    DataLength?: number;
     /** 索引空间（MB）。 */
-    IndexLength: number;
+    IndexLength?: number;
     /** 碎片空间（MB）。 */
-    DataFree: number;
+    DataFree?: number;
     /** 总使用空间（MB）。 */
-    TotalLength: number;
+    TotalLength?: number;
     /** 碎片率（%）。 */
-    FragRatio: number;
+    FragRatio?: number;
     /** 行数。 */
-    TableRows: number;
+    TableRows?: number;
     /** 库中所有表对应的独立物理文件大小加和（MB）。 */
-    PhysicalFileSize: number | null;
+    PhysicalFileSize?: number | null;
   }
 
   /** 库空间时序数据 */
   interface SchemaSpaceTimeSeries {
     /** 库名 */
-    TableSchema: string;
+    TableSchema?: string;
     /** 单位时间间隔内的空间指标数据。 */
-    SeriesData: MonitorMetricSeriesData;
+    SeriesData?: MonitorMetricSeriesData;
   }
 
   /** 扣分详情。 */
@@ -2766,59 +2766,59 @@ declare namespace V20191016 {
   /** 库表空间统计数据。 */
   interface TableSpaceData {
     /** 表名。 */
-    TableName: string;
+    TableName?: string;
     /** 库名。 */
-    TableSchema: string;
+    TableSchema?: string;
     /** 库表的存储引擎。 */
-    Engine: string;
+    Engine?: string;
     /** 数据空间（MB）。 */
-    DataLength: number;
+    DataLength?: number;
     /** 索引空间（MB）。 */
-    IndexLength: number;
+    IndexLength?: number;
     /** 碎片空间（MB）。 */
-    DataFree: number;
+    DataFree?: number;
     /** 总使用空间（MB）。 */
-    TotalLength: number;
+    TotalLength?: number;
     /** 碎片率（%）。 */
-    FragRatio: number;
+    FragRatio?: number;
     /** 行数。 */
-    TableRows: number;
+    TableRows?: number;
     /** 表对应的独立物理文件大小（MB）。 */
-    PhysicalFileSize: number;
+    PhysicalFileSize?: number;
   }
 
   /** 库表空间时序数据 */
   interface TableSpaceTimeSeries {
     /** 表名。 */
-    TableName: string;
+    TableName?: string;
     /** 库名。 */
-    TableSchema: string;
+    TableSchema?: string;
     /** 库表的存储引擎。 */
-    Engine: string;
+    Engine?: string;
     /** 单位时间间隔内的空间指标数据。 */
-    SeriesData: MonitorFloatMetricSeriesData;
+    SeriesData?: MonitorFloatMetricSeriesData;
   }
 
   /** 单位时间间隔内的慢日志统计 */
   interface TimeSlice {
     /** 总数 */
-    Count: number;
+    Count?: number;
     /** 统计开始时间 */
-    Timestamp: number;
+    Timestamp?: number;
   }
 
   /** 用户配置的相关信息，包括邮件配置。 */
   interface UserProfile {
     /** 配置的id。 */
-    ProfileId: string | null;
+    ProfileId?: string | null;
     /** 配置类型。 */
-    ProfileType: string | null;
+    ProfileType?: string | null;
     /** 配置级别，"User"或"Instance"。 */
-    ProfileLevel: string | null;
+    ProfileLevel?: string | null;
     /** 配置名称。 */
-    ProfileName: string | null;
+    ProfileName?: string | null;
     /** 配置详情。 */
-    ProfileInfo: ProfileInfo;
+    ProfileInfo?: ProfileInfo;
   }
 
   interface AddUserContactRequest {

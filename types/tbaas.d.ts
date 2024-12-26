@@ -5,15 +5,15 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 区块对象 */
 declare interface Block {
   /** 区块编号 */
-  BlockNum: number;
+  BlockNum?: number;
   /** 区块数据Hash数值 */
-  DataHash: string;
+  DataHash?: string;
   /** 区块ID，与区块编号一致 */
-  BlockId: number;
+  BlockId?: number;
   /** 前一个区块Hash */
-  PreHash: string;
+  PreHash?: string;
   /** 区块内的交易数量 */
-  TxCount: number;
+  TxCount?: number;
 }
 
 /** 长安链合约执行结果 */
@@ -55,9 +55,9 @@ declare interface ChainMakerTransactionResult {
 /** 背书组织及其节点列表 */
 declare interface EndorserGroup {
   /** 背书组织名称 */
-  EndorserGroupName: string;
+  EndorserGroupName?: string;
   /** 背书节点列表 */
-  EndorserPeerList: string[];
+  EndorserPeerList?: string[];
 }
 
 /** PeerSet */
@@ -95,21 +95,21 @@ declare interface Transaction {
 /** 交易列表项信息 */
 declare interface TransactionItem {
   /** 交易ID */
-  TransactionId: string;
+  TransactionId?: string;
   /** 交易hash */
-  TransactionHash: string;
+  TransactionHash?: string;
   /** 创建交易的组织名 */
-  CreateOrgName: string;
+  CreateOrgName?: string;
   /** 交易所在区块号 */
-  BlockId: number;
+  BlockId?: number;
   /** 交易类型（普通交易和配置交易） */
-  TransactionType: string;
+  TransactionType?: string;
   /** 交易创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 交易所在区块高度 */
-  BlockHeight: number;
+  BlockHeight?: number;
   /** 交易状态 */
-  TransactionStatus: string;
+  TransactionStatus?: string;
 }
 
 declare interface ApplyChainMakerBatchUserCertRequest {

@@ -5,27 +5,29 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 接入点信息。 */
 declare interface AccessPoint {
   /** 接入点的名称。 */
-  AccessPointName: string;
+  AccessPointName?: string;
   /** 接入点唯一ID。 */
-  AccessPointId: string;
+  AccessPointId?: string;
   /** 接入点的状态。可用，不可用。 */
-  State: string;
+  State?: string;
   /** 接入点的位置。 */
-  Location: string;
+  Location?: string;
   /** 接入点支持的运营商列表。 */
-  LineOperator: string[];
+  LineOperator?: string[];
   /** 接入点管理的大区ID。 */
-  RegionId: string;
-  /** 接入点可用的端口类型列表。1000BASE-T代表千兆电口，1000BASE-LX代表千兆单模光口10km，1000BASE-ZX代表千兆单模光口80km,10GBASE-LR代表万兆单模光口10km,10GBASE-ZR代表万兆单模光口80km,10GBASE-LH代表万兆单模光口40km,100GBASE-LR4代表100G单模光口10km */
-  AvailablePortType: string[] | null;
-  /** 接入点经纬度 */
-  Coordinate: Coordinate | null;
-  /** 接入点所在城市 */
-  City: string | null;
-  /** 接入点地域名称 */
-  Area: string | null;
+  RegionId?: string;
+  /** 接入点可用的端口类型列表。1000BASE-T代表千兆电口，1000BASE-LX代表千兆单模光口10km，1000BASE-ZX代表千兆单模光口80km,10GBASE-LR代表万兆单模光口10km,10GBASE-ZR代表万兆单模光口80km,10GBASE-LH代表万兆单模光口40km,100GBASE-LR4代表100G单模光口10km。 */
+  AvailablePortType?: string[];
+  /** 接入点经纬度。 */
+  Coordinate?: Coordinate;
+  /** 接入点所在城市。 */
+  City?: string;
+  /** 接入点地域名称。 */
+  Area?: string;
   /** 接入点类型。VXLAN/QCPL/QCAR */
-  AccessPointType: string | null;
+  AccessPointType?: string;
+  /** 端口规格信息。 */
+  AvailablePortInfo?: PortSpecification[];
 }
 
 /** BFD配置信息 */
@@ -39,9 +41,9 @@ declare interface BFDInfo {
 /** bgp状态信息 */
 declare interface BGPStatus {
   /** 腾讯侧主互联IP BGP状态 */
-  TencentAddressBgpState: string;
+  TencentAddressBgpState?: string;
   /** 腾讯侧备互联IP BGP状态 */
-  TencentBackupAddressBgpState: string;
+  TencentBackupAddressBgpState?: string;
 }
 
 /** bgp参数，包括Asn，AuthKey */
@@ -97,9 +99,9 @@ declare interface CloudAttachInfo {
 /** 坐标，经维度描述 */
 declare interface Coordinate {
   /** 纬度 */
-  Lat: number;
+  Lat?: number;
   /** 经度 */
-  Lng: number;
+  Lng?: number;
 }
 
 /** 创建敏捷上云入参 */
@@ -410,6 +412,16 @@ declare interface NQAInfo {
   DestinationIp?: string;
 }
 
+/** 端口规格 */
+declare interface PortSpecification {
+  /** 端口名称 */
+  InternationalName?: string;
+  /** 端口规格（M） */
+  Specification?: number;
+  /** 端口类型：T-电口，X-光口 */
+  PortType?: string;
+}
+
 /** 用户侧网段地址 */
 declare interface RouteFilterPrefix {
   /** 用户侧网段地址 */
@@ -587,6 +599,8 @@ declare interface DescribeAccessPointsRequest {
   Offset?: number;
   /** 返回数量，默认为20，最大值为100。 */
   Limit?: number;
+  /** 过滤参数，支持：access-point-id、isp */
+  Filters?: Filter[];
 }
 
 declare interface DescribeAccessPointsResponse {

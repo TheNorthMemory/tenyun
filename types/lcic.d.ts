@@ -426,7 +426,7 @@ declare interface RoomItem {
   RealStartTime?: number | null;
   /** 实际结束时间 */
   RealEndTime?: number | null;
-  /** 分辨率。1 标清2 高清3 全高清 */
+  /** 头像区域，摄像头视频画面的分辨率。可以有如下取值：1 标清2 高清3 全高清 */
   Resolution?: number | null;
   /** 最大允许连麦人数。已废弃，使用字段 MaxMicNumber */
   MaxRTCMember?: number | null;

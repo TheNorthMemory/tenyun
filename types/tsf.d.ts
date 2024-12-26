@@ -5566,7 +5566,7 @@ declare interface DescribeGroupRequest {
 
 declare interface DescribeGroupResponse {
   /** 虚拟机部署组详情 */
-  Result: VmGroup | null;
+  Result?: VmGroup | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6454,7 +6454,7 @@ declare interface DescribeTaskRecordsRequest {
 
 declare interface DescribeTaskRecordsResponse {
   /** 任务记录列表 */
-  Result: TaskRecordPage | null;
+  Result?: TaskRecordPage | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7340,7 +7340,7 @@ declare interface SearchBusinessLogResponse {
 }
 
 declare interface SearchStdoutLogRequest {
-  /** 机器实例ID */
+  /** 机器实例ID， 和 实例 ID 二者必选其一，不能同时为空 */
   InstanceId?: string;
   /** 单页请求配置数量，取值范围[1, 500]，默认值为100 */
   Limit?: number;
@@ -7348,7 +7348,7 @@ declare interface SearchStdoutLogRequest {
   SearchWords?: string[];
   /** 查询起始时间 */
   StartTime?: string;
-  /** 部署组ID */
+  /** 部署组ID，和 InstanceId 二者必选其一，不能同时为空 */
   GroupId?: string;
   /** 查询结束时间 */
   EndTime?: string;
@@ -7368,7 +7368,7 @@ declare interface SearchStdoutLogRequest {
 
 declare interface SearchStdoutLogResponse {
   /** 标准输出日志列表 */
-  Result: TsfPageStdoutLogV2 | null;
+  Result?: TsfPageStdoutLogV2 | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8049,7 +8049,7 @@ declare interface Tsf {
   ModifyUploadInfo(data: ModifyUploadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUploadInfoResponse>;
   /** 绑定解绑tcr仓库 {@link OperateApplicationTcrBindingRequest} {@link OperateApplicationTcrBindingResponse} */
   OperateApplicationTcrBinding(data?: OperateApplicationTcrBindingRequest, config?: AxiosRequestConfig): AxiosPromise<OperateApplicationTcrBindingResponse>;
-  /** 重关联业务日志配置 {@link ReassociateBusinessLogConfigRequest} {@link ReassociateBusinessLogConfigResponse} */
+  /** @deprecated 重关联业务日志配置 {@link ReassociateBusinessLogConfigRequest} {@link ReassociateBusinessLogConfigResponse} */
   ReassociateBusinessLogConfig(data: ReassociateBusinessLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ReassociateBusinessLogConfigResponse>;
   /** 重新执行任务 {@link RedoTaskRequest} {@link RedoTaskResponse} */
   RedoTask(data: RedoTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RedoTaskResponse>;
