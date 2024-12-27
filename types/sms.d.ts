@@ -17,23 +17,23 @@ declare interface AddTemplateStatus {
 /** 回执数据统计响应包体 */
 declare interface CallbackStatusStatistics {
   /** 短信回执量统计。 */
-  CallbackCount: number;
+  CallbackCount?: number;
   /** 短信提交成功量统计。 */
-  RequestSuccessCount: number;
+  RequestSuccessCount?: number;
   /** 短信回执失败量统计。 */
-  CallbackFailCount: number;
+  CallbackFailCount?: number;
   /** 短信回执成功量统计。 */
-  CallbackSuccessCount: number;
+  CallbackSuccessCount?: number;
   /** 运营商内部错误统计。 */
-  InternalErrorCount: number;
+  InternalErrorCount?: number;
   /** 号码无效或空号统计。 */
-  InvalidNumberCount: number;
+  InvalidNumberCount?: number;
   /** 停机、关机等错误统计。 */
-  ShutdownErrorCount: number;
+  ShutdownErrorCount?: number;
   /** 号码拉入黑名单统计。 */
-  BlackListCount: number;
+  BlackListCount?: number;
   /** 运营商频率限制统计。 */
-  FrequencyLimitCount: number;
+  FrequencyLimitCount?: number;
 }
 
 /** 删除签名响应 */
@@ -47,9 +47,9 @@ declare interface DeleteSignStatus {
 /** 删除模板响应 */
 declare interface DeleteTemplateStatus {
   /** 删除状态信息。 */
-  DeleteStatus: string;
+  DeleteStatus?: string;
   /** 删除时间，UNIX 时间戳（单位：秒）。 */
-  DeleteTime: number;
+  DeleteTime?: number;
 }
 
 /** 获取短信签名信息响应 */
@@ -183,29 +183,29 @@ declare interface SendStatus {
 /** 发送数据统计响应包体 */
 declare interface SendStatusStatistics {
   /** 短信计费条数统计，例如提交成功量为100条，其中有20条是长短信（长度为80字）被拆分成2条，则计费条数为： ```80 * 1 + 20 * 2 = 120``` 条。 */
-  FeeCount: number;
+  FeeCount?: number;
   /** 短信提交量统计。 */
-  RequestCount: number;
+  RequestCount?: number;
   /** 短信提交成功量统计。 */
-  RequestSuccessCount: number;
+  RequestSuccessCount?: number;
 }
 
 /** 套餐包信息统计响应包体 */
 declare interface SmsPackagesStatistics {
   /** 套餐包创建时间，UNIX 时间戳（单位：秒）。 */
-  PackageCreateTime: number;
+  PackageCreateTime?: number;
   /** 套餐包生效时间，UNIX 时间戳（单位：秒）。 */
-  PackageEffectiveTime: number;
+  PackageEffectiveTime?: number;
   /** 套餐包过期时间，UNIX 时间戳（单位：秒）。 */
-  PackageExpiredTime: number;
+  PackageExpiredTime?: number;
   /** 套餐包条数。 */
-  PackageAmount: number;
+  PackageAmount?: number;
   /** 套餐包类别，0表示赠送套餐包，1表示购买套餐包。 */
-  PackageType: number;
+  PackageType?: number;
   /** 套餐包 ID。 */
-  PackageId: number;
+  PackageId?: number;
   /** 当前使用套餐包条数。 */
-  CurrentUsage: number;
+  CurrentUsage?: number;
 }
 
 declare interface AddSmsSignRequest {
@@ -552,37 +552,37 @@ declare namespace V20190711 {
   /** 添加签名响应 */
   interface AddSignStatus {
     /** 签名Id。 */
-    SignId: number;
+    SignId?: number;
     /** 签名申请Id。 */
-    SignApplyId: number;
+    SignApplyId?: number;
   }
 
   /** 添加模板参数响应 */
   interface AddTemplateStatus {
     /** 模板参数 */
-    TemplateId: string;
+    TemplateId?: string;
   }
 
   /** 回执数据统计响应包体 */
   interface CallbackStatusStatistics {
     /** 短信回执量统计。 */
-    CallbackCount: number;
+    CallbackCount?: number;
     /** 短信提交成功量统计。 */
-    RequestSuccessCount: number;
+    RequestSuccessCount?: number;
     /** 短信回执失败量统计。 */
-    CallbackFailCount: number;
+    CallbackFailCount?: number;
     /** 短信回执成功量统计。 */
-    CallbackSuccessCount: number;
+    CallbackSuccessCount?: number;
     /** 运营商内部错误统计。 */
-    InternalErrorCount: number;
+    InternalErrorCount?: number;
     /** 号码无效或空号统计。 */
-    InvalidNumberCount: number;
+    InvalidNumberCount?: number;
     /** 停机、关机等错误统计。 */
-    ShutdownErrorCount: number;
+    ShutdownErrorCount?: number;
     /** 号码拉入黑名单统计。 */
-    BlackListCount: number;
+    BlackListCount?: number;
     /** 运营商频率限制统计。 */
-    FrequencyLimitCount: number;
+    FrequencyLimitCount?: number;
   }
 
   /** 删除签名响应 */
@@ -596,9 +596,9 @@ declare namespace V20190711 {
   /** 删除模板响应 */
   interface DeleteTemplateStatus {
     /** 删除状态信息。 */
-    DeleteStatus: string;
+    DeleteStatus?: string;
     /** 删除时间，UNIX 时间戳（单位：秒）。 */
-    DeleteTime: number;
+    DeleteTime?: number;
   }
 
   /** 获取短信签名信息响应 */
@@ -636,15 +636,15 @@ declare namespace V20190711 {
   /** 修改签名响应 */
   interface ModifySignStatus {
     /** 签名Id */
-    SignId: number;
+    SignId?: number;
     /** 签名修改申请Id */
-    SignApplyId: string;
+    SignApplyId?: string;
   }
 
   /** 修改模板参数响应 */
   interface ModifyTemplateStatus {
     /** 模板参数 */
-    TemplateId: number;
+    TemplateId?: number;
   }
 
   /** 短信回复状态 */
@@ -706,35 +706,35 @@ declare namespace V20190711 {
   /** 发送数据统计响应包体 */
   interface SendStatusStatistics {
     /** 短信计费条数统计，例如提交成功量为100条，其中有20条是长短信（长度为80字）被拆分成2条，则计费条数为： ```80 * 1 + 20 * 2 = 120``` 条。 */
-    FeeCount: number;
+    FeeCount?: number;
     /** 短信提交量统计。 */
-    RequestCount: number;
+    RequestCount?: number;
     /** 短信提交成功量统计。 */
-    RequestSuccessCount: number;
+    RequestSuccessCount?: number;
   }
 
   /** 套餐包信息统计响应包体 */
   interface SmsPackagesStatistics {
     /** 套餐包创建时间，标准时间，例如：2019-10-08 17:18:37。 */
-    PackageCreateTime: string;
+    PackageCreateTime?: string;
     /** 套餐包创建时间，UNIX 时间戳（单位：秒）。 */
-    PackageCreateUnixTime: number;
+    PackageCreateUnixTime?: number;
     /** 套餐包生效时间，标准时间，例如：2019-10-08 17:18:37。 */
-    PackageEffectiveTime: string;
+    PackageEffectiveTime?: string;
     /** 套餐包生效时间，UNIX 时间戳（单位：秒）。 */
-    PackageEffectiveUnixTime: number;
+    PackageEffectiveUnixTime?: number;
     /** 套餐包过期时间，标准时间，例如：2019-10-08 17:18:37。 */
-    PackageExpiredTime: string;
+    PackageExpiredTime?: string;
     /** 套餐包过期时间，UNIX 时间戳（单位：秒）。 */
-    PackageExpiredUnixTime: number;
+    PackageExpiredUnixTime?: number;
     /** 套餐包条数。 */
-    AmountOfPackage: number;
+    AmountOfPackage?: number;
     /** 0表示赠送套餐包，1表示购买套餐包。 */
-    TypeOfPackage: number;
+    TypeOfPackage?: number;
     /** 套餐包 ID。 */
-    PackageId: number;
+    PackageId?: number;
     /** 当前使用量。 */
-    CurrentUsage: number;
+    CurrentUsage?: number;
   }
 
   interface AddSmsSignRequest {

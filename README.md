@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 261+ 款产品，12058+ 服务数</summary>
+<details><summary>共计 261+ 款产品，12063+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -171,7 +171,7 @@ cms | 内容安全 | 2019-03-21(6) |
 config | [配置审计](https://cloud.tencent.com/document/product/1579) | 2022-08-02(5) |
 controlcenter | [控制中心](https://cloud.tencent.com/document/product/1708) | 2023-01-10(1) |
 cpdp | [企业收付平台](https://cloud.tencent.com/document/product/1122) | 2019-08-20(219) |
-csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(43) |
+csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(48) |
 csxg | [5G入云服务](https://cloud.tencent.com/document/product/1687) | 2023-03-03(5) |
 cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-12(101) |
 cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(520) |

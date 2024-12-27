@@ -248,6 +248,64 @@ declare interface AlertInfo {
   LogSearch?: string;
 }
 
+/** 集群列表集群防护状态，左边枚举,右边为显示集群防护状态 0:未接入1:未防护 2:部分防护 3:防护中 4:接入异常 5:接入中 6:卸载中 7:卸载异常 */
+declare interface AssetCluster {
+  /** 租户id */
+  AppId?: number;
+  /** 租户uin */
+  Uin?: string;
+  /** 租户昵称 */
+  Nick?: string;
+  /** 地域 */
+  Region?: string;
+  /** 集群id */
+  AssetId?: string;
+  /** 集群名称 */
+  AssetName?: string;
+  /** 集群类型 */
+  AssetType?: string;
+  /** 集群创建时间 */
+  InstanceCreateTime?: string;
+  /** 状态 */
+  Status?: string;
+  /** 集群防护状态，左边枚举,右边为显示集群防护状态 0:未接入1:未防护 2:部分防护 3:防护中 4:接入异常 5:接入中 6:卸载中 7:卸载异常 */
+  ProtectStatus?: number;
+  /** 接入信息，不为空表示有接入异常信息 */
+  ProtectInfo?: string;
+  /** 私有网络id */
+  VpcId?: string;
+  /** 私有网络名称 */
+  VpcName?: string;
+  /** kubernetes版本 */
+  KubernetesVersion?: string;
+  /** 运行时组件 */
+  Component?: string;
+  /** 运行时组件版本 */
+  ComponentVersion?: string;
+  /** 组件状态 */
+  ComponentStatus?: string;
+  /** 体检时间 */
+  CheckTime?: string;
+  /** 关联主机数 */
+  MachineCount?: number;
+  /** 关联pod数 */
+  PodCount?: number;
+  /** 关联service数 */
+  ServiceCount?: number;
+  /** 漏洞风险 */
+  VulRisk?: number;
+  /** 配置风险 */
+  CFGRisk?: number;
+  /** 体检数 */
+  CheckCount?: number;
+  /** 是否核心：1:核心，2:非核心 */
+  IsCore?: number;
+  /** 是否新资产 1新 */
+  IsNewAsset?: number;
+  /** 云资产类型：0：腾讯云，1：aws，2：azure */
+  CloudType?: number;
+}
+
 /** 集群pod列表 */
 declare interface AssetClusterPod {
   /** 租户id */
@@ -834,6 +892,16 @@ declare interface ClbListenerListInfo {
   LoadBalancerDomain?: string;
 }
 
+/** 多云账户统计信息 */
+declare interface CloudCountDesc {
+  /** 0表示腾讯云1表示AWS */
+  CloudType?: number;
+  /** 账户数量 */
+  CloudCount?: number;
+  /** 该云账号类型描述 */
+  CloudDesc?: string;
+}
+
 /** db资产输出字段 */
 declare interface DBAssetVO {
   /** 资产id */
@@ -1268,6 +1336,64 @@ declare interface NewAlertKey {
   Status?: number;
 }
 
+/** 集团账号详情 */
+declare interface OrganizationInfo {
+  /** 成员账号名称 */
+  NickName?: string;
+  /** 部门节点名称，账号所属部门 */
+  NodeName?: string;
+  /** Member/Admin/DelegatedAdmin/EntityAdmin; 成员/管理员/委派管理员/主体管理员 */
+  Role?: string;
+  /** 成员账号id */
+  MemberId?: string;
+  /** 账号加入方式,create/invite */
+  JoinType?: string;
+  /** 集团名称 */
+  GroupName?: string;
+  /** 管理员账号名称 */
+  AdminName?: string;
+  /** 管理员Uin */
+  AdminUin?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 部门数 */
+  NodeCount?: number;
+  /** 成员数 */
+  MemberCount?: number;
+  /** 子账号数 */
+  SubAccountCount?: number;
+  /** 异常子账号数量 */
+  AbnormalSubUserCount?: number;
+  /** 集团关系策略权限 */
+  GroupPermission?: string[];
+  /** 成员关系策略权限 */
+  MemberPermission?: string[];
+  /** 集团付费模式；0/自付费，1/代付费 */
+  GroupPayMode?: number;
+  /** 个人付费模式；0/自付费，1/代付费 */
+  MemberPayMode?: number;
+  /** 空则未开启，否则不同字符串对应不同版本，common为通用，不区分版本 */
+  CFWProtect?: string;
+  /** 空则未开启，否则不同字符串对应不同版本，common为通用，不区分版本 */
+  WAFProtect?: string;
+  /** 空则未开启，否则不同字符串对应不同版本，common为通用，不区分版本 */
+  CWPProtect?: string;
+  /** 所有部门的集合数组 */
+  Departments?: string[];
+  /** 成员创建时间 */
+  MemberCreateTime?: string;
+  /** Advanced/Enterprise/Ultimate */
+  CSIPProtect?: string;
+  /** 1表示配额消耗方 */
+  QuotaConsumer?: number;
+  /** 管理员/委派管理员 已开启数量 */
+  EnableAdminCount?: number;
+  /** 账户多云信息统计，数组形式，具体参考CloudCountDesc描述 */
+  CloudCountDesc?: CloudCountDesc[];
+  /** 管理员/委派管理员 总数量 */
+  AdminCount?: number;
+}
+
 /** 集团账号成员详情 */
 declare interface OrganizationUserInfo {
   /** 成员账号Uin */
@@ -1662,6 +1788,54 @@ declare interface ServiceSupport {
   IsSupport?: boolean;
 }
 
+/** 用户行为分析 统计条件 */
+declare interface StatisticalFilter {
+  /** 0:不基于统计检测1:发生次数高于固定值2:发生次数高于周期平均值的百分之3:发生次数高于用户平均值的百分之 */
+  OperatorType: number | null;
+  /** 统计值 */
+  Value: number | null;
+}
+
+/** 子账号详情 */
+declare interface SubUserInfo {
+  /** 主键ID，无业务意义仅作为唯一键 */
+  ID?: number;
+  /** 子账号Appid */
+  AppID?: string;
+  /** 子账号UIn */
+  Uin?: string;
+  /** 子账号名称 */
+  NickName?: string;
+  /** 主账号Appid */
+  OwnerAppID?: string;
+  /** 主账号Uin */
+  OwnerUin?: string;
+  /** 主账号名称 */
+  OwnerNickName?: string;
+  /** 所属主账号memberid */
+  OwnerMemberID?: string;
+  /** 账户类型，0为腾讯云账户，1为AWS账户 */
+  CloudType?: number;
+  /** 可访问服务数量 */
+  ServiceCount?: number;
+  /** 可访问接口数量 */
+  InterfaceCount?: number;
+  /** 可访问资源数量 */
+  AssetCount?: number;
+  /** 访问/行为日志数量 */
+  LogCount?: number;
+  /** 权限配置风险 */
+  ConfigRiskCount?: number;
+  /** 危险行为告警 */
+  ActionRiskCount?: number;
+  /** 是否接入云审计日志 */
+  IsAccessCloudAudit?: boolean;
+  /** 是否配置风险的安全体检 */
+  IsAccessCheck?: boolean;
+  /** 是否配置用户行为管理策略 */
+  IsAccessUeba?: boolean;
+}
+
 /** 子网资产 */
 declare interface SubnetAsset {
   /** appid */
@@ -1830,6 +2004,74 @@ declare interface TaskLogURL {
   TaskLogName?: string;
   /** APP ID */
   AppId?: string;
+}
+
+/** 用户行为分析 自定义策略结构体 */
+declare interface UebaCustomRule {
+  /** 策略名称 */
+  RuleName: string;
+  /** 1: 云账号2: 自定义用户 */
+  UserType: number;
+  /** 发生时间1：10分钟2：1小时3：一天4：一周5：一个月 */
+  TimeInterval: number;
+  /** 发生事件 */
+  EventContent: UebaEventContent;
+  /** 告警名称 */
+  AlertName: string;
+  /** 告警类型0: 提示1: 低危2: 中危3: 高危4: 严重 */
+  AlterLevel: number;
+  /** 操作者 */
+  Operator: string[];
+  /** 操作对象 */
+  OperateObject: string[];
+  /** 操作方式 */
+  OperateMethod: string[];
+  /** 日志类型 */
+  LogType?: string;
+  /** 日志中文名 */
+  LogTypeStr?: string;
+}
+
+/** 用户行为分析 发生事件结构体 */
+declare interface UebaEventContent {
+  /** 发生事件类型1:语句检索2:过滤检索 */
+  EventType: number;
+  /** 语句检索内容 */
+  Content?: string;
+  /** 检索条件 */
+  Filters?: WhereFilter[];
+  /** 统计条件 */
+  StatisticalFilter?: StatisticalFilter;
+}
+
+/** 用户行为分析策略 */
+declare interface UebaRule {
+  /** 策略id */
+  RuleID?: string | null;
+  /** 规则名称 */
+  RuleName?: string | null;
+  /** 策略类型0:系统策略1:自定义策略 */
+  RuleType?: number | null;
+  /** 策略等级0:提示1:低危2:中危3:高危4:严重 */
+  RuleLevel?: number | null;
+  /** 策略内容 */
+  RuleContent?: string | null;
+  /** 策略开关 */
+  RuleStatus?: boolean | null;
+  /** 命中次数 */
+  HitCount?: number | null;
+  /** 所属账号Appid */
+  AppID?: string | null;
+  /** 多账号，成员ID */
+  MemberID?: string | null;
+  /** Uin */
+  Uin?: string | null;
+  /** 昵称 */
+  Nickname?: string | null;
+  /** 自定义规则具体内容 */
+  CustomRuleDetail?: UebaCustomRule | null;
+  /** 云类型腾讯云：0aws：1 */
+  CloudType?: number | null;
 }
 
 /** 漏洞风险高级配置列表 */
@@ -2413,6 +2655,36 @@ declare interface DescribeCVMAssetsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeClusterAssetsRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤 */
+  Filter?: Filter;
+}
+
+declare interface DescribeClusterAssetsResponse {
+  /** 列表 */
+  Data?: AssetCluster[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 集群类型枚举 */
+  ClusterTypeList?: FilterDataObject[];
+  /** 集群状态枚举 */
+  ClusterStatusList?: FilterDataObject[];
+  /** 组件状态枚举 */
+  ComponentStatusList?: FilterDataObject[];
+  /** 私有网络枚举 */
+  VpcList?: FilterDataObject[];
+  /** 地域枚举 */
+  RegionList?: FilterDataObject[];
+  /** 租户枚举 */
+  AppIdList?: FilterDataObject[];
+  /** 集群防护状态枚举 */
+  ProtectStatusList?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeClusterPodAssetsRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -2563,6 +2835,20 @@ declare interface DescribeNICAssetsResponse {
   VpcList?: FilterDataObject[];
   /** appid列表 */
   AppIdList?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeOrganizationInfoRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeOrganizationInfoResponse {
+  /** 总条数 */
+  TotalCount?: number;
+  /** 集团用户列表 */
+  Data?: OrganizationInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2885,6 +3171,26 @@ declare interface DescribeSearchBugInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSubUserInfoRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤内容 */
+  Filter?: Filter;
+}
+
+declare interface DescribeSubUserInfoResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 子用户列表 */
+  Data?: SubUserInfo[];
+  /** 厂商枚举列表 */
+  CloudTypeLst?: FilterDataObject[];
+  /** 所属主账号appid枚举 */
+  OwnerAppIDLst?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSubnetAssetsRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -2957,6 +3263,24 @@ declare interface DescribeTopAttackInfoRequest {
 declare interface DescribeTopAttackInfoResponse {
   /** Top攻击类型/攻击者次数 */
   TopAttackInfo?: TagCount[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUebaRuleRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤条件 */
+  Filter?: Filter;
+}
+
+declare interface DescribeUebaRuleResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 策略列表 */
+  Data?: UebaRule[];
+  /** 自定义策略对应的告警类别枚举 */
+  AlterType?: FilterDataObject[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3127,6 +3451,24 @@ declare interface ModifyRiskCenterScanTaskResponse {
   RequestId?: string;
 }
 
+declare interface ModifyUebaRuleSwitchRequest {
+  /** 策略ID */
+  RuleID: string;
+  /** 开关状态 */
+  Status: boolean;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface ModifyUebaRuleSwitchResponse {
+  /** 0成功，1失败 */
+  Code?: number;
+  /** 返回信息 */
+  Msg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopRiskCenterTaskRequest {
   /** 任务id 列表 */
   TaskIdList: TaskIdListKey[];
@@ -3184,6 +3526,8 @@ declare interface Csip {
   DescribeCVMAssetInfo(data: DescribeCVMAssetInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCVMAssetInfoResponse>;
   /** cvm列表 {@link DescribeCVMAssetsRequest} {@link DescribeCVMAssetsResponse} */
   DescribeCVMAssets(data?: DescribeCVMAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCVMAssetsResponse>;
+  /** 集群列表 {@link DescribeClusterAssetsRequest} {@link DescribeClusterAssetsResponse} */
+  DescribeClusterAssets(data?: DescribeClusterAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterAssetsResponse>;
   /** 集群pod列表 {@link DescribeClusterPodAssetsRequest} {@link DescribeClusterPodAssetsResponse} */
   DescribeClusterPodAssets(data?: DescribeClusterPodAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterPodAssetsResponse>;
   /** db资产详情 {@link DescribeDbAssetInfoRequest} {@link DescribeDbAssetInfoResponse} */
@@ -3198,6 +3542,8 @@ declare interface Csip {
   DescribeListenerList(data?: DescribeListenerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListenerListResponse>;
   /** 网卡列表 {@link DescribeNICAssetsRequest} {@link DescribeNICAssetsResponse} */
   DescribeNICAssets(data?: DescribeNICAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNICAssetsResponse>;
+  /** 查询集团账号详情 {@link DescribeOrganizationInfoRequest} {@link DescribeOrganizationInfoResponse} */
+  DescribeOrganizationInfo(data?: DescribeOrganizationInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationInfoResponse>;
   /** 查询集团账号用户列表 {@link DescribeOrganizationUserInfoRequest} {@link DescribeOrganizationUserInfoResponse} */
   DescribeOrganizationUserInfo(data?: DescribeOrganizationUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationUserInfoResponse>;
   /** 公网列表 {@link DescribePublicIpAssetsRequest} {@link DescribePublicIpAssetsResponse} */
@@ -3224,6 +3570,8 @@ declare interface Csip {
   DescribeScanTaskList(data?: DescribeScanTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanTaskListResponse>;
   /** 查询漏洞信息 {@link DescribeSearchBugInfoRequest} {@link DescribeSearchBugInfoResponse} */
   DescribeSearchBugInfo(data: DescribeSearchBugInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchBugInfoResponse>;
+  /** 查询集团的子账号列表 {@link DescribeSubUserInfoRequest} {@link DescribeSubUserInfoResponse} */
+  DescribeSubUserInfo(data?: DescribeSubUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubUserInfoResponse>;
   /** 子网列表 {@link DescribeSubnetAssetsRequest} {@link DescribeSubnetAssetsResponse} */
   DescribeSubnetAssets(data?: DescribeSubnetAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetAssetsResponse>;
   /** 获取任务扫描报告列表 {@link DescribeTaskLogListRequest} {@link DescribeTaskLogListResponse} */
@@ -3232,6 +3580,8 @@ declare interface Csip {
   DescribeTaskLogURL(data: DescribeTaskLogURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLogURLResponse>;
   /** 查询TOP攻击信息 {@link DescribeTopAttackInfoRequest} {@link DescribeTopAttackInfoResponse} */
   DescribeTopAttackInfo(data?: DescribeTopAttackInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopAttackInfoResponse>;
+  /** 查询用户行为分析策略列表 {@link DescribeUebaRuleRequest} {@link DescribeUebaRuleResponse} */
+  DescribeUebaRule(data?: DescribeUebaRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUebaRuleResponse>;
   /** 查询漏洞风险高级配置 {@link DescribeVULRiskAdvanceCFGListRequest} {@link DescribeVULRiskAdvanceCFGListResponse} */
   DescribeVULRiskAdvanceCFGList(data?: DescribeVULRiskAdvanceCFGListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVULRiskAdvanceCFGListResponse>;
   /** 漏洞管理-漏洞详情 {@link DescribeVULRiskDetailRequest} {@link DescribeVULRiskDetailResponse} */
@@ -3246,6 +3596,8 @@ declare interface Csip {
   ModifyRiskCenterRiskStatus(data: ModifyRiskCenterRiskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRiskCenterRiskStatusResponse>;
   /** 修改风险中心扫描任务 {@link ModifyRiskCenterScanTaskRequest} {@link ModifyRiskCenterScanTaskResponse} */
   ModifyRiskCenterScanTask(data: ModifyRiskCenterScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRiskCenterScanTaskResponse>;
+  /** 更新自定义策略的开关 {@link ModifyUebaRuleSwitchRequest} {@link ModifyUebaRuleSwitchResponse} */
+  ModifyUebaRuleSwitch(data: ModifyUebaRuleSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUebaRuleSwitchResponse>;
   /** 停止扫风险中心扫描任务 {@link StopRiskCenterTaskRequest} {@link StopRiskCenterTaskResponse} */
   StopRiskCenterTask(data: StopRiskCenterTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopRiskCenterTaskResponse>;
   /** 批量告警状态处理 {@link UpdateAlertStatusListRequest} {@link UpdateAlertStatusListResponse} */
