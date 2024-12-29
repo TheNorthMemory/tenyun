@@ -31,13 +31,13 @@ declare interface Autoscaler {
 /** 配置 */
 declare interface ConfigData {
   /** 配置名称 */
-  Name: string;
+  Name?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 关联的服务列表 */
-  RelatedApplications: TemService[];
+  RelatedApplications?: TemService[];
   /** 配置条目 */
-  Data: Pair[];
+  Data?: Pair[];
 }
 
 /** Cos token */
@@ -141,25 +141,25 @@ declare interface DeployStrategyConf {
 /** 配置信息的分页列表 */
 declare interface DescribeConfigDataListPage {
   /** 记录 */
-  Records: ConfigData[];
+  Records?: ConfigData[];
   /** 分页游标，用以查询下一页 */
-  ContinueToken: string | null;
+  ContinueToken?: string | null;
   /** 剩余数目 */
-  RemainingCount: number | null;
+  RemainingCount?: number | null;
 }
 
 /** 版本pod列表 */
 declare interface DescribeRunPodPage {
   /** 分页下标 */
-  Offset: number;
+  Offset?: number;
   /** 单页条数 */
-  Limit: number;
+  Limit?: number;
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 请求id */
-  RequestId: string;
+  RequestId?: string;
   /** 条目 */
-  PodList: RunVersionPod[];
+  PodList?: RunVersionPod[];
 }
 
 /** eks service info */
@@ -389,9 +389,9 @@ declare interface LogConfigExtractRule {
 /** LogConfig 列表结果 */
 declare interface LogConfigListPage {
   /** 记录 */
-  Records: LogConfig[] | null;
+  Records?: LogConfig[] | null;
   /** 翻页游标 */
-  ContinueToken: string | null;
+  ContinueToken?: string | null;
 }
 
 /** 日志输出配置 */
@@ -423,29 +423,29 @@ declare interface MountedSettingConf {
 /** Namespace 基础信息 */
 declare interface NamespaceInfo {
   /** ID 信息 */
-  EnvironmentId: string;
+  EnvironmentId?: string;
   /** 名字（已弃用） */
-  NamespaceName: string;
+  NamespaceName?: string;
   /** 地域 */
-  Region: string;
+  Region?: string;
   /** vpc id */
-  VpcId: string;
+  VpcId?: string;
   /** subnet id 数组 */
-  SubnetIds: string[];
+  SubnetIds?: string[];
   /** 描述 */
-  Description: string;
+  Description?: string;
   /** 创建时间 */
-  CreatedDate: string;
+  CreatedDate?: string;
   /** 环境名称 */
-  EnvironmentName: string | null;
+  EnvironmentName?: string | null;
   /** APM 资源 ID */
-  ApmInstanceId: string | null;
+  ApmInstanceId?: string | null;
   /** 环境是否上锁，1为上锁，0则未上锁 */
-  Locked: number | null;
+  Locked?: number | null;
   /** 标签 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 环境类型：test、pre、prod */
-  EnvType: string | null;
+  EnvType?: string | null;
 }
 
 /** 命名空间分页 */
@@ -481,15 +481,15 @@ declare interface NamespaceStatusInfo {
 /** node信息 */
 declare interface NodeInfo {
   /** node名字 */
-  Name: string;
+  Name?: string;
   /** node可用区 */
-  Zone: string | null;
+  Zone?: string | null;
   /** node子网ID */
-  SubnetId: string | null;
+  SubnetId?: string | null;
   /** 可用IP数 */
-  AvailableIpCount: string | null;
+  AvailableIpCount?: string | null;
   /** cidr块 */
-  Cidr: string | null;
+  Cidr?: string | null;
 }
 
 /** 键值对 */
@@ -529,37 +529,37 @@ declare interface QueryFilter {
 /** 应用实例 */
 declare interface RunVersionPod {
   /** shell地址 */
-  Webshell: string;
+  Webshell?: string;
   /** pod的id */
-  PodId: string;
+  PodId?: string;
   /** 状态 */
-  Status: string;
+  Status?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 实例的ip */
-  PodIp: string;
+  PodIp?: string;
   /** 可用区 */
-  Zone: string | null;
+  Zone?: string | null;
   /** 部署版本 */
-  DeployVersion: string | null;
+  DeployVersion?: string | null;
   /** 重启次数 */
-  RestartCount: number | null;
+  RestartCount?: number | null;
   /** pod是否就绪 */
-  Ready: boolean | null;
+  Ready?: boolean | null;
   /** 容器状态 */
-  ContainerState: string | null;
+  ContainerState?: string | null;
   /** 实例所在节点信息 */
-  NodeInfo: NodeInfo | null;
+  NodeInfo?: NodeInfo | null;
   /** 启动时间 */
-  StartTime: string | null;
+  StartTime?: string | null;
   /** 是否健康 */
-  Unhealthy: boolean | null;
+  Unhealthy?: boolean | null;
   /** 不健康时的提示信息 */
-  UnhealthyWarningMsg: string | null;
+  UnhealthyWarningMsg?: string | null;
   /** 版本ID */
-  VersionId: string | null;
+  VersionId?: string | null;
   /** 应用名称 */
-  ApplicationName: string | null;
+  ApplicationName?: string | null;
 }
 
 /** 服务分页 */
@@ -747,55 +747,55 @@ declare interface TemEnvironmentStoppingStatus {
 /** 命名空间对象 */
 declare interface TemNamespaceInfo {
   /** 环境id */
-  EnvironmentId: string;
+  EnvironmentId?: string;
   /** 渠道 */
-  Channel: string;
+  Channel?: string;
   /** 环境名称 */
-  EnvironmentName: string;
+  EnvironmentName?: string;
   /** 区域名称 */
-  Region: string;
+  Region?: string;
   /** 环境描述 */
-  Description: string | null;
+  Description?: string | null;
   /** 状态,1:已销毁;0:正常 */
-  Status: number;
+  Status?: number;
   /** vpc网络 */
-  Vpc: string;
+  Vpc?: string;
   /** 创建时间 */
-  CreateDate: string;
+  CreateDate?: string;
   /** 修改时间 */
-  ModifyDate: string;
+  ModifyDate?: string;
   /** 修改人 */
-  Modifier: string;
+  Modifier?: string;
   /** 创建人 */
-  Creator: string;
+  Creator?: string;
   /** 应用数 */
-  ApplicationNum: number;
+  ApplicationNum?: number;
   /** 运行实例数 */
-  RunInstancesNum: number;
+  RunInstancesNum?: number;
   /** 子网络 */
-  SubnetId: string;
+  SubnetId?: string;
   /** 环境集群 status */
-  ClusterStatus: string;
+  ClusterStatus?: string;
   /** 是否开启tsw */
-  EnableTswTraceService: boolean;
+  EnableTswTraceService?: boolean;
   /** 环境锁，1为上锁，0则为上锁 */
-  Locked: number;
+  Locked?: number;
   /** 用户AppId */
-  AppId: string | null;
+  AppId?: string | null;
   /** 用户Uin */
-  Uin: string | null;
+  Uin?: string | null;
   /** 用户SubAccountUin */
-  SubAccountUin: string | null;
+  SubAccountUin?: string | null;
   /** 集群ID */
-  ClusterId: string | null;
+  ClusterId?: string | null;
   /** 标签 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 资源是否有权限 */
-  HasAuthority: boolean | null;
+  HasAuthority?: boolean | null;
   /** 环境类型: test、pre、prod */
-  EnvType: string | null;
+  EnvType?: string | null;
   /** 地域码 */
-  RegionId: string | null;
+  RegionId?: string | null;
 }
 
 /** 服务 */
@@ -1031,23 +1031,23 @@ declare interface UseDefaultRepoParameters {
 /** 工作负载详情 */
 declare interface WorkloadInfo {
   /** 资源 ID */
-  ClusterId: string | null;
+  ClusterId?: string | null;
   /** 应用名 */
-  ApplicationName: string | null;
+  ApplicationName?: string | null;
   /** 版本名称 */
-  VersionName: string | null;
+  VersionName?: string | null;
   /** Ready实例数 */
-  ReadyReplicas: number | null;
+  ReadyReplicas?: number | null;
   /** 实例数 */
-  Replicas: number | null;
+  Replicas?: number | null;
   /** Updated实例数 */
-  UpdatedReplicas: number | null;
+  UpdatedReplicas?: number | null;
   /** UpdatedReady实例数 */
-  UpdatedReadyReplicas: number | null;
+  UpdatedReadyReplicas?: number | null;
   /** 更新版本 */
-  UpdateRevision: string | null;
+  UpdateRevision?: string | null;
   /** 当前版本 */
-  CurrentRevision: string | null;
+  CurrentRevision?: string | null;
 }
 
 declare interface CreateApplicationAutoscalerRequest {
@@ -1100,7 +1100,7 @@ declare interface CreateApplicationRequest {
 }
 
 declare interface CreateApplicationResponse {
-  /** 服务code */
+  /** 应用ID */
   Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2895,7 +2895,7 @@ declare interface Tem {
   ModifyConfigData(data: ModifyConfigDataRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigDataResponse>;
   /** 编辑环境 {@link ModifyEnvironmentRequest} {@link ModifyEnvironmentResponse} */
   ModifyEnvironment(data: ModifyEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvironmentResponse>;
-  /** 创建或者更新 Ingress 规则 {@link ModifyIngressRequest} {@link ModifyIngressResponse} */
+  /** @deprecated 创建或者更新 Ingress 规则 {@link ModifyIngressRequest} {@link ModifyIngressResponse} */
   ModifyIngress(data: ModifyIngressRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIngressResponse>;
   /** 编辑日志收集配置 {@link ModifyLogConfigRequest} {@link ModifyLogConfigResponse} */
   ModifyLogConfig(data: ModifyLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLogConfigResponse>;

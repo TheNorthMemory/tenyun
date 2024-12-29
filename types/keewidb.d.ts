@@ -5,17 +5,17 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 实例的备份信息 */
 declare interface BackupInfo {
   /** 备份开始时间。 */
-  StartTime: string;
+  StartTime?: string;
   /** 备份 ID。 */
-  BackupId: string;
-  /** 备份类型。1：手动备份，指根据业务运维排障需求，立即执行备份任务的操作。 0：自动备份，指根据自动备份策略定时自动发起的备份任务。 */
-  BackupType: string;
+  BackupId?: string;
+  /** 备份类型。1：手动备份，指根据业务运维排障需求，立即执行备份任务的操作。 0：自动备份，指根据自动备份策略定时自动发起的备份任务。2：生成RDB，指根据业务需求，发起的生成文件为rdb类型的备份任务。 */
+  BackupType?: string;
   /** 备份的备注信息. */
-  Remark: string;
+  Remark?: string;
   /** 备份状态。 1：备份任务被其它流程锁定。2：备份正常，没有被任何流程锁定。 -1：备份已过期。3：备份正在被导出。 4：备份导出成功。 */
-  Status: number;
+  Status?: number;
   /** 备份是否被锁定。0：未被锁定。1：已被锁定。 */
-  Locked: number;
+  Locked?: number;
 }
 
 /** 实例增量备份信息 */
@@ -35,21 +35,21 @@ declare interface BinlogInfo {
 /** 安全组入站规则 */
 declare interface Inbound {
   /** 策略，ACCEPT或者DROP。 */
-  Action: string;
+  Action?: string;
   /** 地址组id代表的地址集合。 */
-  AddressModule: string;
+  AddressModule?: string;
   /** 来源Ip或Ip段，例如192.168.0.0/16。 */
-  CidrIp: string;
+  CidrIp?: string;
   /** 描述。 */
-  Desc: string;
+  Desc?: string;
   /** 网络协议，支持udp、tcp等。 */
-  IpProtocol: string;
+  IpProtocol?: string;
   /** 端口。 */
-  PortRange: string;
+  PortRange?: string;
   /** 服务组id代表的协议和端口集合。 */
-  ServiceModule: string;
+  ServiceModule?: string;
   /** 安全组id代表的地址集合。 */
-  Id: string;
+  Id?: string;
 }
 
 /** 实例枚举类型参数描述 */
@@ -183,45 +183,45 @@ declare interface InstanceInfo {
 /** 实例整型参数描述 */
 declare interface InstanceIntegerParam {
   /** 参数名 */
-  ParamName: string;
+  ParamName?: string;
   /** 参数类型：integer */
-  ValueType: string;
+  ValueType?: string;
   /** 修改后是否需要重启：true，false */
-  NeedRestart: string;
+  NeedRestart?: string;
   /** 参数默认值 */
-  DefaultValue: string;
+  DefaultValue?: string;
   /** 当前运行参数值 */
-  CurrentValue: string;
+  CurrentValue?: string;
   /** 参数说明 */
-  Tips: string;
+  Tips?: string;
   /** 参数最小值 */
-  Min: string;
+  Min?: string;
   /** 参数最大值 */
-  Max: string;
+  Max?: string;
   /** 参数状态, 1: 修改中， 2：修改完成 */
-  Status: number;
+  Status?: number;
   /** 参数单位 */
-  Unit: string | null;
+  Unit?: string | null;
 }
 
 /** 实例多选项类型参数描述 */
 declare interface InstanceMultiParam {
   /** 参数名 */
-  ParamName: string;
+  ParamName?: string;
   /** 参数类型：multi */
-  ValueType: string;
+  ValueType?: string;
   /** 修改后是否需要重启：true，false */
-  NeedRestart: string;
+  NeedRestart?: string;
   /** 参数默认值 */
-  DefaultValue: string;
+  DefaultValue?: string;
   /** 当前运行参数值 */
-  CurrentValue: string;
+  CurrentValue?: string;
   /** 参数说明 */
-  Tips: string;
+  Tips?: string;
   /** 参数说明 */
-  EnumValue: string[];
+  EnumValue?: string[];
   /** 参数状态, 1: 修改中， 2：修改完成 */
-  Status: number;
+  Status?: number;
 }
 
 /** 实例节点信息 */
@@ -243,29 +243,29 @@ declare interface InstanceParam {
 /** 实例参数修改历史 */
 declare interface InstanceParamHistory {
   /** 参数名称 */
-  ParamName: string;
+  ParamName?: string;
   /** 修改前值 */
-  PreValue: string;
+  PreValue?: string;
   /** 修改后值 */
-  NewValue: string;
+  NewValue?: string;
   /** 状态：1-参数配置修改中；2-参数配置修改成功；3-参数配置修改失败 */
-  Status: number;
+  Status?: number;
   /** 修改时间 */
-  ModifyTime: string;
+  ModifyTime?: string;
 }
 
 /** 代理慢查询详情 */
 declare interface InstanceProxySlowlogDetail {
   /** 慢查询耗时 */
-  Duration: number;
+  Duration?: number;
   /** 客户端地址 */
-  Client: string;
+  Client?: string;
   /** 命令 */
-  Command: string;
+  Command?: string;
   /** 详细命令行信息 */
-  CommandLine: string;
+  CommandLine?: string;
   /** 执行时间 */
-  ExecuteTime: string;
+  ExecuteTime?: string;
 }
 
 /** 实例标签信息 */
@@ -279,21 +279,21 @@ declare interface InstanceTagInfo {
 /** 实例字符型参数描述 */
 declare interface InstanceTextParam {
   /** 参数名 */
-  ParamName: string;
+  ParamName?: string;
   /** 参数类型：text */
-  ValueType: string;
+  ValueType?: string;
   /** 修改后是否需要重启：true，false */
-  NeedRestart: string;
+  NeedRestart?: string;
   /** 参数默认值 */
-  DefaultValue: string;
+  DefaultValue?: string;
   /** 当前运行参数值 */
-  CurrentValue: string;
+  CurrentValue?: string;
   /** 参数说明 */
-  Tips: string;
+  Tips?: string;
   /** 参数可取值 */
-  TextValue: string[];
+  TextValue?: string[];
   /** 参数状态, 1: 修改中， 2：修改完成 */
-  Status: number;
+  Status?: number;
 }
 
 /** KeeWiDB节点的运行信息 */
@@ -321,21 +321,21 @@ declare interface NodeInfo {
 /** 安全组出站规则 */
 declare interface Outbound {
   /** 策略，ACCEPT或者DROP。 */
-  Action: string;
+  Action?: string;
   /** 地址组id代表的地址集合。 */
-  AddressModule: string;
+  AddressModule?: string;
   /** 来源Ip或Ip段，例如192.168.0.0/16。 */
-  CidrIp: string;
+  CidrIp?: string;
   /** 描述。 */
-  Desc: string;
+  Desc?: string;
   /** 网络协议，支持udp、tcp等。 */
-  IpProtocol: string;
+  IpProtocol?: string;
   /** 端口。 */
-  PortRange: string;
+  PortRange?: string;
   /** 服务组id代表的协议和端口集合。 */
-  ServiceModule: string;
+  ServiceModule?: string;
   /** 安全组id代表的地址集合。 */
-  Id: string;
+  Id?: string;
 }
 
 /** 产品规格信息 */
@@ -363,7 +363,7 @@ declare interface ProductConf {
 /** Proxy节点信息 */
 declare interface ProxyNodeInfo {
   /** 节点ID */
-  NodeId: string | null;
+  NodeId?: string | null;
 }
 
 /** Redis节点信息 */
@@ -395,15 +395,15 @@ declare interface RegionConf {
 /** 实例副本组信息 */
 declare interface ReplicaGroup {
   /** 节点 ID。 */
-  GroupId: number;
+  GroupId?: number;
   /** 节点组的名称，主节点为空。 */
-  GroupName: string;
+  GroupName?: string;
   /** 节点的可用区ID，比如ap-guangzhou-1。 */
-  ZoneId: string;
+  ZoneId?: string;
   /** 节点组角色。master：为主节点。replica：为副本节点。 */
-  Role: string;
+  Role?: string;
   /** 节点组节点列表。 */
-  KeeWiDBNodes: KeeWiDBNode[];
+  KeeWiDBNodes?: KeeWiDBNode[];
 }
 
 /** 实例绑定标签 */
@@ -417,41 +417,41 @@ declare interface ResourceTag {
 /** 安全组规则 */
 declare interface SecurityGroup {
   /** 创建时间，时间格式：yyyy-mm-dd hh:mm:ss。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 项目ID。 */
-  ProjectId: number;
+  ProjectId?: number;
   /** 安全组ID。 */
-  SecurityGroupId: string;
+  SecurityGroupId?: string;
   /** 安全组名称。 */
-  SecurityGroupName: string;
+  SecurityGroupName?: string;
   /** 安全组备注。 */
-  SecurityGroupRemark: string;
+  SecurityGroupRemark?: string;
   /** 出站规则。 */
-  Outbound: Outbound[];
+  Outbound?: Outbound[];
   /** 入站规则。 */
-  Inbound: Inbound[];
+  Inbound?: Inbound[];
 }
 
 /** 任务信息详情 */
 declare interface TaskInfoDetail {
   /** 任务Id */
-  TaskId: number | null;
+  TaskId?: number | null;
   /** 开始时间 */
-  StartTime: string | null;
+  StartTime?: string | null;
   /** 任务类型 */
-  TaskType: string | null;
+  TaskType?: string | null;
   /** 实例名称 */
-  InstanceName: string | null;
+  InstanceName?: string | null;
   /** 实例Id */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 项目Id */
-  ProjectId: number | null;
+  ProjectId?: number | null;
   /** 任务进度 */
-  Progress: number | null;
+  Progress?: number | null;
   /** 结束时间 */
-  EndTime: string | null;
+  EndTime?: string | null;
   /** 任务状态 */
-  Result: number | null;
+  Result?: number | null;
   /** 操作者用户uin */
   OperatorUin?: string | null;
 }
@@ -459,15 +459,15 @@ declare interface TaskInfoDetail {
 /** 实例慢查询详情 */
 declare interface TendisSlowLogDetail {
   /** 执行时间 */
-  ExecuteTime: string;
+  ExecuteTime?: string;
   /** 慢查询耗时（毫秒） */
-  Duration: number;
+  Duration?: number;
   /** 命令 */
-  Command: string;
+  Command?: string;
   /** 详细命令行信息 */
-  CommandLine: string;
+  CommandLine?: string;
   /** 节点ID */
-  Node: string;
+  Node?: string;
 }
 
 /** 订单交易信息 */
@@ -581,7 +581,7 @@ declare interface CreateBackupManuallyRequest {
 
 declare interface CreateBackupManuallyResponse {
   /** 任务 ID。 */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -772,6 +772,10 @@ declare interface LiveStreamMonitorInfo {
   AiFormatDiagnose?: number | null;
   /** 是否开启内容质检。 */
   AiQualityControl?: number | null;
+  /** 导播台监播对应的导播台场次id */
+  CasterId?: string;
+  /** 拉流转推监播对应的拉流转推任务id */
+  PullPushTaskId?: string;
 }
 
 /** 直播监播功能输入流信息 */
@@ -786,6 +790,10 @@ declare interface LiveStreamMonitorInputInfo {
   InputUrl?: string | null;
   /** 描述。256字节以内。 */
   Description?: string | null;
+  /** 导播台输入源索引（10000 pvw， 10001 pgm， 其余代表输入下标） */
+  CasterInputIndex?: number;
+  /** 该输入源是否正在监播 */
+  NeedMonitor?: boolean;
 }
 
 /** 直播流监播通知策略 */
@@ -824,10 +832,12 @@ declare interface LogInfo {
 
 /** 媒体处理结果，包含智能语音识别、智能文字识别结果 */
 declare interface MPSResult {
-  /** 智能语音识别结果 */
+  /** 智能语音识别结果。 */
   AiAsrResults?: string[] | null;
-  /** 智能文字识别结果 */
+  /** 智能文字识别结果。 */
   AiOcrResults?: string[] | null;
+  /** 内容质检结果。 */
+  StreamQuaCtrlResults?: string[] | null;
 }
 
 /** 混流抠图参数 */
@@ -1817,11 +1827,11 @@ declare interface AuthenticateDomainOwnerRequest {
 
 declare interface AuthenticateDomainOwnerResponse {
   /** 验证内容。VerifyType 传 dnsCheck 时，为要配的 TXT 记录值。VerifyType 传 fileCheck 时，为文件内容。 */
-  Content: string;
+  Content?: string;
   /** 域名验证状态。>=0 为已验证归属。<0 未验证归属权。 */
-  Status: number;
+  Status?: number;
   /** DomainName 对应的主域名。同一主域名下的所有域名只需成功验证一次，后续均无需再验证。 */
-  MainDomain: string;
+  MainDomain?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2053,7 +2063,7 @@ declare interface CreateLivePadTemplateRequest {
 
 declare interface CreateLivePadTemplateResponse {
   /** 模板Id。 */
-  TemplateId: number;
+  TemplateId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2275,11 +2285,15 @@ declare interface CreateLiveStreamMonitorRequest {
   AiFormatDiagnose?: number;
   /** 是否开启内容质检。 */
   AiQualityControl?: number;
+  /** 导播台监播对应的导播台场次id。 */
+  CasterId?: string;
+  /** 拉流转推监播任务对应的拉流转推场次id */
+  PullPushTaskId?: string;
 }
 
 declare interface CreateLiveStreamMonitorResponse {
   /** 监播任务ID。 */
-  MonitorId?: string | null;
+  MonitorId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2919,13 +2933,13 @@ declare interface DescribeCasterDisplayInfoRequest {
 
 declare interface DescribeCasterDisplayInfoResponse {
   /** 导播台状态0：停止状态，无预监，无主监 1：无预监，有主监 2：有预监，无主监 3：有预监，有主监 */
-  Status?: number | null;
+  Status?: number;
   /** 预监使用的展示参数。 */
-  PvwDisplayInfo?: CasterDisplayInfo | null;
+  PvwDisplayInfo?: CasterDisplayInfo;
   /** 主监使用的展示参数。 */
-  PgmDisplayInfo?: CasterDisplayInfo | null;
+  PgmDisplayInfo?: CasterDisplayInfo;
   /** 启动直播的时间，值为unix时间戳。 */
-  StartLiveTime?: number | null;
+  StartLiveTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2959,7 +2973,7 @@ declare interface DescribeCasterListRequest {
 
 declare interface DescribeCasterListResponse {
   /** 用户对应的导播台简要信息列表 */
-  CasterList?: CasterBriefInfo[] | null;
+  CasterList?: CasterBriefInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2971,7 +2985,7 @@ declare interface DescribeCasterMarkPicInfosRequest {
 
 declare interface DescribeCasterMarkPicInfosResponse {
   /** 导播台的水印信息列表。 */
-  MarkPicInfos?: CasterMarkPicInfo[] | null;
+  MarkPicInfos?: CasterMarkPicInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2983,7 +2997,7 @@ declare interface DescribeCasterMarkWordInfosRequest {
 
 declare interface DescribeCasterMarkWordInfosResponse {
   /** 导播台的文本信息列表。 */
-  MarkWordInfos?: CasterMarkWordInfo[] | null;
+  MarkWordInfos?: CasterMarkWordInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2995,7 +3009,7 @@ declare interface DescribeCasterOutputInfosRequest {
 
 declare interface DescribeCasterOutputInfosResponse {
   /** 导播台的推流信息列表。 */
-  OutputInfos?: CasterOutputInfo[] | null;
+  OutputInfos?: CasterOutputInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3011,9 +3025,9 @@ declare interface DescribeCasterPlayUrlRequest {
 
 declare interface DescribeCasterPlayUrlResponse {
   /** 播放url。当导播台不存在预监或主监时，若请求预监或主监的播放地址，该字段为空。 */
-  PlayUrl?: string | null;
+  PlayUrl?: string;
   /** webrtc协议播放地址。当导播台不存在预监或主监时，若请求预监或主监的webrtc播放地址，该字段为空。注：webrtc协议播放地址需配合腾讯云快直播播放sdk方可使用。 */
-  WebRTCPlayUrl?: string | null;
+  WebRTCPlayUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3037,7 +3051,7 @@ declare interface DescribeCasterTransitionTypesRequest {
 
 declare interface DescribeCasterTransitionTypesResponse {
   /** 转场信息列表 */
-  TransitionTypes?: TransitionTypeInfo[] | null;
+  TransitionTypes?: TransitionTypeInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3153,7 +3167,7 @@ declare interface DescribeLiveCallbackTemplateRequest {
 
 declare interface DescribeLiveCallbackTemplateResponse {
   /** 回调模板信息。 */
-  Template: CallBackTemplateInfo;
+  Template?: CallBackTemplateInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3163,7 +3177,7 @@ declare interface DescribeLiveCallbackTemplatesRequest {
 
 declare interface DescribeLiveCallbackTemplatesResponse {
   /** 模板信息列表。 */
-  Templates: CallBackTemplateInfo[];
+  Templates?: CallBackTemplateInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3215,9 +3229,9 @@ declare interface DescribeLiveDomainCertBindingsRequest {
 
 declare interface DescribeLiveDomainCertBindingsResponse {
   /** 有绑定证书的域名信息数组。 */
-  LiveDomainCertBindings: LiveDomainCertBindings[];
+  LiveDomainCertBindings?: LiveDomainCertBindings[];
   /** 总的记录行数，便于分页。 */
-  TotalNum: number;
+  TotalNum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3275,7 +3289,7 @@ declare interface DescribeLiveDomainRequest {
 
 declare interface DescribeLiveDomainResponse {
   /** 域名信息。 */
-  DomainInfo?: DomainInfo | null;
+  DomainInfo?: DomainInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3303,9 +3317,9 @@ declare interface DescribeLiveDomainsResponse {
   /** 域名详细信息列表。 */
   DomainList?: DomainInfo[];
   /** 可继续添加域名数量。 */
-  CreateLimitCount?: number | null;
+  CreateLimitCount?: number;
   /** 启用的播放域名加速区域统计，数组元素分别为：中国大陆（境内），全球地区，国际/港澳台（境外）域名数量。 */
-  PlayTypeCount?: number[] | null;
+  PlayTypeCount?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3371,9 +3385,9 @@ declare interface DescribeLivePackageInfoRequest {
 
 declare interface DescribeLivePackageInfoResponse {
   /** 套餐包信息。 */
-  LivePackageInfoList?: LivePackageInfo[] | null;
+  LivePackageInfoList?: LivePackageInfo[];
   /** 套餐包当前计费方式:-1: 无计费方式或获取失败0: 无计费方式201: 月结带宽202: 月结流量203: 日结带宽204: 日结流量205: 日结时长206: 月结时长304: 日结流量。 */
-  PackageBillMode?: number | null;
+  PackageBillMode?: number;
   /** 总页数。 */
   TotalPage?: number | null;
   /** 数据总条数。 */
@@ -3383,7 +3397,7 @@ declare interface DescribeLivePackageInfoResponse {
   /** 当前每页数量。 */
   PageSize?: number | null;
   /** 当请求参数 PackageType = 0 时生效，逗号分隔，从第一个到最后一个分别表示：标准直播，中国大陆（境内全地区）计费方式。标准直播，国际/港澳台（境外多地区）计费方式。快直播，中国大陆（境内全地区）计费方式。快直播，国际/港澳台（境外多地区）计费方式。 */
-  FluxPackageBillMode?: string | null;
+  FluxPackageBillMode?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3407,7 +3421,7 @@ declare interface DescribeLivePadRulesRequest {
 
 declare interface DescribeLivePadRulesResponse {
   /** 规则信息列表。 */
-  Rules: RuleInfo[];
+  Rules?: RuleInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3419,7 +3433,7 @@ declare interface DescribeLivePadTemplateRequest {
 
 declare interface DescribeLivePadTemplateResponse {
   /** 直播垫片模板信息。 */
-  Template: PadTemplate;
+  Template?: PadTemplate;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3429,7 +3443,7 @@ declare interface DescribeLivePadTemplatesRequest {
 
 declare interface DescribeLivePadTemplatesResponse {
   /** 直播垫片模板信息。 */
-  Templates: PadTemplate[];
+  Templates?: PadTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3515,7 +3529,7 @@ declare interface DescribeLiveRecordTemplateRequest {
 
 declare interface DescribeLiveRecordTemplateResponse {
   /** 录制模板信息。 */
-  Template: RecordTemplateInfo;
+  Template?: RecordTemplateInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3527,7 +3541,7 @@ declare interface DescribeLiveRecordTemplatesRequest {
 
 declare interface DescribeLiveRecordTemplatesResponse {
   /** 录制模板信息列表。 */
-  Templates: RecordTemplateInfo[];
+  Templates?: RecordTemplateInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3559,7 +3573,7 @@ declare interface DescribeLiveSnapshotTemplatesRequest {
 
 declare interface DescribeLiveSnapshotTemplatesResponse {
   /** 截图模板列表。 */
-  Templates: SnapshotTemplateInfo[];
+  Templates?: SnapshotTemplateInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3611,9 +3625,9 @@ declare interface DescribeLiveStreamMonitorListRequest {
 
 declare interface DescribeLiveStreamMonitorListResponse {
   /** 账号下的直播流监播任务个数。 */
-  TotalNum?: number | null;
+  TotalNum?: number;
   /** 直播流监播任务列表 */
-  LiveStreamMonitors?: LiveStreamMonitorInfo[] | null;
+  LiveStreamMonitors?: LiveStreamMonitorInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3625,7 +3639,7 @@ declare interface DescribeLiveStreamMonitorRequest {
 
 declare interface DescribeLiveStreamMonitorResponse {
   /** 直播监播任务相关信息。 */
-  LiveStreamMonitor?: LiveStreamMonitorInfo | null;
+  LiveStreamMonitor?: LiveStreamMonitorInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3753,7 +3767,7 @@ declare interface DescribeLiveTimeShiftRulesRequest {
 
 declare interface DescribeLiveTimeShiftRulesResponse {
   /** 规则信息列表。 */
-  Rules: RuleInfo[];
+  Rules?: RuleInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3763,7 +3777,7 @@ declare interface DescribeLiveTimeShiftTemplatesRequest {
 
 declare interface DescribeLiveTimeShiftTemplatesResponse {
   /** 直播时移模板信息。 */
-  Templates: TimeShiftTemplate[];
+  Templates?: TimeShiftTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3833,7 +3847,7 @@ declare interface DescribeLiveTranscodeRulesRequest {
 
 declare interface DescribeLiveTranscodeRulesResponse {
   /** 转码规则列表。 */
-  Rules: RuleInfo[];
+  Rules?: RuleInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3845,7 +3859,7 @@ declare interface DescribeLiveTranscodeTemplateRequest {
 
 declare interface DescribeLiveTranscodeTemplateResponse {
   /** 模板信息。 */
-  Template: TemplateInfo;
+  Template?: TemplateInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3965,9 +3979,9 @@ declare interface DescribeMonitorReportRequest {
 
 declare interface DescribeMonitorReportResponse {
   /** 媒体处理结果信息。 */
-  MPSResult?: MPSResult | null;
+  MPSResult?: MPSResult;
   /** 媒体诊断结果信息。 */
-  DiagnoseResult?: DiagnoseResult | null;
+  DiagnoseResult?: DiagnoseResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4239,9 +4253,9 @@ declare interface DescribeScreenshotTaskRequest {
 
 declare interface DescribeScreenshotTaskResponse {
   /** 翻页标识，当请求未返回所有数据，该字段表示下一条记录的 Token。当该字段为空，说明已无更多数据。 */
-  ScrollToken: string;
+  ScrollToken?: string;
   /** 截图任务列表。当该字段为空，说明已返回所有数据。 */
-  TaskList: ScreenshotTask[];
+  TaskList?: ScreenshotTask[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4337,7 +4351,7 @@ declare interface DescribeTimeShiftRecordDetailRequest {
 
 declare interface DescribeTimeShiftRecordDetailResponse {
   /** 时移录制会话数组。 */
-  RecordList?: TimeShiftRecord[] | null;
+  RecordList?: TimeShiftRecord[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4363,7 +4377,7 @@ declare interface DescribeTimeShiftStreamListResponse {
   /** 时间段内所有的数据量。 */
   TotalSize?: number;
   /** 流列表。 */
-  StreamList?: TimeShiftStreamInfo[] | null;
+  StreamList?: TimeShiftStreamInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4689,9 +4703,9 @@ declare interface ModifyLiveDomainCertBindingsRequest {
 
 declare interface ModifyLiveDomainCertBindingsResponse {
   /** DomainNames 入参中，与证书不匹配的域名列表，将会跳过处理。 */
-  MismatchedDomainNames: string[];
+  MismatchedDomainNames?: string[];
   /** 操作失败的域名及错误码，错误信息，包括MismatchedDomainNames中的域名。 */
-  Errors: BatchDomainOperateErrors[] | null;
+  Errors?: BatchDomainOperateErrors[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

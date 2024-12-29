@@ -1133,7 +1133,7 @@ declare interface Mna {
   AddL3Conn(data: AddL3ConnRequest, config?: AxiosRequestConfig): AxiosPromise<AddL3ConnResponse>;
   /** 设置或更新密钥 {@link CreateEncryptedKeyRequest} {@link CreateEncryptedKeyResponse} */
   CreateEncryptedKey(data?: CreateEncryptedKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEncryptedKeyResponse>;
-  /** 发起Qos加速过程 {@link CreateQosRequest} {@link CreateQosResponse} */
+  /** @deprecated 发起Qos加速过程 {@link CreateQosRequest} {@link CreateQosResponse} */
   CreateQos(data: CreateQosRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQosResponse>;
   /** 删除设备 {@link DeleteDeviceRequest} {@link DeleteDeviceResponse} */
   DeleteDevice(data: DeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceResponse>;
@@ -1141,9 +1141,9 @@ declare interface Mna {
   DeleteGroup(data: DeleteGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupResponse>;
   /** 删除互通规则 {@link DeleteL3ConnRequest} {@link DeleteL3ConnResponse} */
   DeleteL3Conn(data: DeleteL3ConnRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteL3ConnResponse>;
-  /** 停止Qos加速过程 {@link DeleteQosRequest} {@link DeleteQosResponse} */
+  /** @deprecated 停止Qos加速过程 {@link DeleteQosRequest} {@link DeleteQosResponse} */
   DeleteQos(data: DeleteQosRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQosResponse>;
-  /** 获取Qos加速状态 {@link DescribeQosRequest} {@link DescribeQosResponse} */
+  /** @deprecated 获取Qos加速状态 {@link DescribeQosRequest} {@link DescribeQosResponse} */
   DescribeQos(data: DescribeQosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQosResponse>;
   /** 获取设备详细信息 {@link GetDeviceRequest} {@link GetDeviceResponse} */
   GetDevice(data: GetDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceResponse>;

@@ -118,6 +118,14 @@ declare interface Cluster {
   MemRatio?: number | null;
   /** 是否开启跨租户弹性网卡 */
   CrossTenantEniMode?: number;
+  /** 总的CPU */
+  TotalCpu?: number;
+  /** 总的内存 */
+  TotalMem?: number;
+  /** 运行的CPU */
+  RunningCpu?: number;
+  /** 运行的内存 */
+  RunningMem?: number;
 }
 
 /** 工作空间集群组信息 */
@@ -164,6 +172,14 @@ declare interface ClusterGroupSetItem {
   SubEks?: SubEks | null;
   /** 默认 "" 包销模式 "exclusiveSale" */
   BillingResourceMode?: string | null;
+  /** TotalCpu */
+  TotalCpu?: number;
+  /** TotalMem */
+  TotalMem?: number;
+  /** RunningCpu */
+  RunningCpu?: number;
+  /** RunningMem */
+  RunningMem?: number;
 }
 
 /** session集群信息 */
@@ -388,6 +404,16 @@ declare interface JobConfig {
   WorkspaceName?: string | null;
   /** flink 版本 */
   FlinkVersion?: string | null;
+  /** jm使用cpu数目 */
+  JobManagerCpu?: number | null;
+  /** jm使用内存数目 */
+  JobManagerMem?: number | null;
+  /** tm使用cpu数 */
+  TaskManagerCpu?: number | null;
+  /** tm使用mem数 */
+  TaskManagerMem?: number | null;
+  /** 运行中配置 */
+  JobConfigItem?: JobConfig | null;
 }
 
 /** 描述作业发生的一个事件 */
@@ -665,13 +691,27 @@ declare interface ResourceItem {
   /** 关联作业数 */
   RefJobCount?: number | null;
   /** 作业运行状态 */
-  IsJobRun?: number | null;
+  IsJobRun?: number;
   /** 文件名 */
   FileName?: string | null;
   /** 工作空间ID */
   WorkSpaceId?: number | null;
   /** 分状态统计关联作业数 */
   RefJobStatusCountSet?: RefJobStatusCountItem[] | null;
+  /** 连接器名称 */
+  Connector?: string;
+  /** 连接器版本 */
+  ConnectorVersion?: string;
+  /** 连接方式 */
+  ConnectionMethod?: string;
+  /** connector关联的资源id */
+  RelatedResourceId?: string;
+  /** 图标 */
+  Icon?: string;
+  /** 连接器中文名 */
+  ConnectorName?: string;
+  /** 连接器官网链接 */
+  ConnectorUrl?: string;
 }
 
 /** 资源位置描述 */
@@ -705,15 +745,17 @@ declare interface ResourceRef {
 /** JobConfig引用资源信息 */
 declare interface ResourceRefDetail {
   /** 资源id */
-  ResourceId: string;
+  ResourceId?: string;
   /** 资源版本，-1表示使用最新版本 */
-  Version: number;
+  Version?: number;
   /** 资源名称 */
-  Name: string;
+  Name?: string;
   /** 1: 主资源 */
-  Type: number;
+  Type?: number;
   /** 1: 系统内置资源 */
-  SystemProvide: number;
+  SystemProvide?: number;
+  /** Connector */
+  Connector?: string;
 }
 
 /** 资源被Job 引用信息 */
@@ -882,6 +924,10 @@ declare interface SqlGatewayItem {
   UpdateTime?: string | null;
   /** 配置参数 */
   Properties?: Property[] | null;
+  /** Cpu */
+  Cpu?: number;
+  /** Mem */
+  Mem?: number;
 }
 
 /** Sql Gateway 返回Result结构类型 */
@@ -914,6 +960,14 @@ declare interface SubEks {
   StatusDesc?: string | null;
   /** 运行cu */
   RunningCu?: number | null;
+  /** 总的CPU */
+  TotalCpu?: number;
+  /** 总的内存 */
+  TotalMem?: number;
+  /** 运行的CPU */
+  RunningCpu?: number;
+  /** 运行的内存 */
+  RunningMem?: number;
 }
 
 /** 子目录信息 */
@@ -927,17 +981,19 @@ declare interface SubFolderInfo {
 /** 系统资源返回值 */
 declare interface SystemResourceItem {
   /** 资源ID */
-  ResourceId: string;
+  ResourceId?: string;
   /** 资源名称 */
-  Name: string;
+  Name?: string;
   /** 资源类型。1 表示 JAR 包，目前只支持该值。 */
-  ResourceType: number;
+  ResourceType?: number;
   /** 资源备注 */
-  Remark: string;
+  Remark?: string;
   /** 资源所属地域 */
-  Region: string;
+  Region?: string;
   /** 资源的最新版本 */
-  LatestResourceConfigVersion: number;
+  LatestResourceConfigVersion?: number;
+  /** 1 是系统提供资源 2 用户提供CONNECTOR */
+  SystemProvide?: number;
 }
 
 /** 标签 */
@@ -968,6 +1024,12 @@ declare interface TreeJobSets {
   RunningCu?: number | null;
   /** 作业状态 启动或者停止或者暂停 */
   Status?: number | null;
+  /** 0:代表没开启调优任务，1:开启智能调优，2:代表定时调优 */
+  ScalingType?: number | null;
+  /** RunningCpu */
+  RunningCpu?: number;
+  /** RunningMem */
+  RunningMem?: number;
 }
 
 /** 树状结构资源对象 */
@@ -1161,6 +1223,14 @@ declare interface CreateJobConfigRequest {
   EsServerlessSpace?: string;
   /** flink版本 */
   FlinkVersion?: string;
+  /** JobManager cpu */
+  JobManagerCpu?: number;
+  /** JobManager 内存 */
+  JobManagerMem?: number;
+  /** TaskManager cpu */
+  TaskManagerCpu?: number;
+  /** TaskManager 内存 */
+  TaskManagerMem?: number;
 }
 
 declare interface CreateJobConfigResponse {
@@ -1353,7 +1423,7 @@ declare interface DeleteWorkSpaceRequest {
 
 declare interface DeleteWorkSpaceResponse {
   /** 是否删除 */
-  Delete: boolean;
+  Delete?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1623,6 +1693,8 @@ declare interface DescribeResourcesRequest {
   Filters?: Filter[];
   /** 工作空间 SerialId */
   WorkSpaceId?: string;
+  /** 资源类型，0=用户，1系统connector，2=用户自定义connector */
+  SystemResource?: number;
 }
 
 declare interface DescribeResourcesResponse {
@@ -1647,6 +1719,8 @@ declare interface DescribeSystemResourcesRequest {
   ClusterId?: string;
   /** 查询对应Flink版本的内置connector */
   FlinkVersion?: string;
+  /** 空间 */
+  WorkSpaceId?: string;
 }
 
 declare interface DescribeSystemResourcesResponse {

@@ -774,6 +774,8 @@ declare interface TWeCallActiveInfo {
   Sn?: string | null;
   /** 过期时间 */
   ExpireTime?: number | null;
+  /** 类型 */
+  PkgType?: number;
 }
 
 /** TWeCall分类统计数据 */

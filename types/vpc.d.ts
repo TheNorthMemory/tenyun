@@ -687,13 +687,13 @@ declare interface CrossBorderFlowMonitorData {
 /** 对端网关 */
 declare interface CustomerGateway {
   /** 用户网关唯一ID */
-  CustomerGatewayId: string;
+  CustomerGatewayId?: string;
   /** 网关名称 */
-  CustomerGatewayName: string;
+  CustomerGatewayName?: string;
   /** 公网地址 */
-  IpAddress: string;
+  IpAddress?: string;
   /** 创建时间 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** BGP ASN。 */
   BgpAsn?: number;
 }
@@ -1230,6 +1230,24 @@ declare interface InstanceStatistic {
   InstanceType?: string;
   /** 实例的个数 */
   InstanceCount?: number;
+}
+
+/** 公网询价出参 */
+declare interface InternetPrice {
+  /** 公网IP询价详细参数。 */
+  AddressPrice?: InternetPriceDetail;
+}
+
+/** 公网IP询价出参 */
+declare interface InternetPriceDetail {
+  /** 付费单价，单位：元，仅后付费价格查询返回。 */
+  UnitPrice?: number;
+  /** 折扣后的价格，单位：元。 */
+  DiscountPrice?: number | null;
+  /** 计价单元，可取值范围： HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）。 */
+  ChargeUnit?: string | null;
+  /** 原价，单位：元，仅预付费价格查询返回。 */
+  OriginalPrice?: number;
 }
 
 /** IPV6转换规则 */
@@ -7496,6 +7514,24 @@ declare interface InquirePriceCreateDirectConnectGatewayResponse {
   RequestId?: string;
 }
 
+declare interface InquiryPriceAllocateAddressesRequest {
+  /** EIP计费方式。账号为标准账户类型的用户，可选值：BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费BANDWIDTH_PREPAID_BY_MONTH：包月按带宽预付费TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费默认值：TRAFFIC_POSTPAID_BY_HOUR。 */
+  InternetChargeType?: string;
+  /** EIP出带宽上限，单位：Mbps。账号为标准账户类型的用户，可选值范围取决于EIP计费方式：BANDWIDTH_POSTPAID_BY_HOUR：1 Mbps 至 100 MbpsBANDWIDTH_PREPAID_BY_MONTH：1 Mbps 至 200 MbpsTRAFFIC_POSTPAID_BY_HOUR：1 Mbps 至 100 Mbps默认值：1 Mbps。账号为传统账户类型的用户，EIP出带宽上限取决于与其绑定的实例的公网出带宽上限，无需传递此参数。 */
+  InternetMaxBandwidthOut?: number;
+  /** 包月按带宽预付费EIP的计费参数。EIP为包月按带宽预付费时，该参数必传，其余场景不需传递 */
+  AddressChargePrepaid?: AddressChargePrepaid;
+  /** EIP类型。默认值：EIP。精品IP，可选值：HighQualityEIP：精品IP注意：仅部分地域支持精品IP。 高防IP，可选值： AntiDDoSEIP：高防IP */
+  AddressType?: string;
+}
+
+declare interface InquiryPriceAllocateAddressesResponse {
+  /** 弹性公网IP价格 */
+  Price?: InternetPrice;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface InquiryPriceCreateVpnGatewayRequest {
   /** 公网带宽设置。可选带宽规格：5, 10, 20, 50, 100, 200, 500, 1000, 3000；单位：Mbps。 */
   InternetMaxBandwidthOut: number;
@@ -7512,6 +7548,34 @@ declare interface InquiryPriceCreateVpnGatewayRequest {
 declare interface InquiryPriceCreateVpnGatewayResponse {
   /** 商品价格。 */
   Price?: Price;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface InquiryPriceModifyAddressesBandwidthRequest {
+  /** EIP唯一ID */
+  AddressIds: string[];
+  /** 新带宽值 */
+  InternetMaxBandwidthOut: number;
+}
+
+declare interface InquiryPriceModifyAddressesBandwidthResponse {
+  /** 弹性公网IP调整带宽询价结果 */
+  Price?: InternetPrice;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface InquiryPriceRenewAddressesRequest {
+  /** 续费资源实例ID。 */
+  AddressIds: string[];
+  /** 包月按带宽预付费EIP的计费参数。EIP为包月按带宽预付费时，该参数必传，其余场景不需传递。 */
+  AddressChargePrepaid: AddressChargePrepaid;
+}
+
+declare interface InquiryPriceRenewAddressesResponse {
+  /** 弹性公网IP续费价格。 */
+  Price?: InternetPrice;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9595,8 +9659,14 @@ declare interface Vpc {
   HaVipDisassociateAddressIp(data: HaVipDisassociateAddressIpRequest, config?: AxiosRequestConfig): AxiosPromise<HaVipDisassociateAddressIpResponse>;
   /** 创建专线网关询价 {@link InquirePriceCreateDirectConnectGatewayRequest} {@link InquirePriceCreateDirectConnectGatewayResponse} */
   InquirePriceCreateDirectConnectGateway(data?: InquirePriceCreateDirectConnectGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceCreateDirectConnectGatewayResponse>;
+  /** 弹性公网IP新购询价 {@link InquiryPriceAllocateAddressesRequest} {@link InquiryPriceAllocateAddressesResponse} */
+  InquiryPriceAllocateAddresses(data?: InquiryPriceAllocateAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceAllocateAddressesResponse>;
   /** 创建VPN网关询价 {@link InquiryPriceCreateVpnGatewayRequest} {@link InquiryPriceCreateVpnGatewayResponse} */
   InquiryPriceCreateVpnGateway(data: InquiryPriceCreateVpnGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceCreateVpnGatewayResponse>;
+  /** 弹性公网IP调整带宽询价 {@link InquiryPriceModifyAddressesBandwidthRequest} {@link InquiryPriceModifyAddressesBandwidthResponse} */
+  InquiryPriceModifyAddressesBandwidth(data: InquiryPriceModifyAddressesBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceModifyAddressesBandwidthResponse>;
+  /** 弹性公网IP续费询价 {@link InquiryPriceRenewAddressesRequest} {@link InquiryPriceRenewAddressesResponse} */
+  InquiryPriceRenewAddresses(data: InquiryPriceRenewAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceRenewAddressesResponse>;
   /** 续费VPN网关询价 {@link InquiryPriceRenewVpnGatewayRequest} {@link InquiryPriceRenewVpnGatewayResponse} */
   InquiryPriceRenewVpnGateway(data: InquiryPriceRenewVpnGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceRenewVpnGatewayResponse>;
   /** 调整VPN网关带宽上限询价 {@link InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest} {@link InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse} */

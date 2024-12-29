@@ -354,6 +354,8 @@ declare interface ReplicationRule {
   Override: boolean;
   /** 同步过滤条件 */
   Filters: ReplicationFilter[];
+  /** 是否同步删除事件 */
+  Deletion?: boolean;
 }
 
 /** 仓库的信息 */

@@ -581,15 +581,15 @@ declare interface JobView {
 /** 本地磁盘规格 */
 declare interface LocalDiskType {
   /** 本地磁盘类型。 */
-  Type: string;
+  Type?: string;
   /** 本地磁盘属性。 */
-  PartitionType: string;
+  PartitionType?: string;
   /** 本地磁盘最小值。 */
-  MinSize: number;
+  MinSize?: number;
   /** 本地磁盘最大值。 */
-  MaxSize: number;
+  MaxSize?: number;
   /** 购买时本地盘是否为必选。取值范围：REQUIRED：表示必选OPTIONAL：表示可选。 */
-  Required: string;
+  Required?: string;
 }
 
 /** 描述了实例登录相关配置与信息。 */

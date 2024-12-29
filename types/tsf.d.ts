@@ -1465,21 +1465,21 @@ declare interface GroupPodResult {
 /** 部署组配置发布相关信息 */
 declare interface GroupRelease {
   /** 程序包ID */
-  PackageId: string | null;
+  PackageId?: string | null;
   /** 程序包名 */
-  PackageName: string | null;
+  PackageName?: string | null;
   /** 程序包版本 */
-  PackageVersion: string | null;
+  PackageVersion?: string | null;
   /** 镜像名 */
-  RepoName: string | null;
+  RepoName?: string | null;
   /** 镜像版本 */
-  TagName: string | null;
+  TagName?: string | null;
   /** 已发布的全局配置列表 */
-  PublicConfigReleaseList: ConfigRelease[] | null;
+  PublicConfigReleaseList?: ConfigRelease[] | null;
   /** 已发布的应用配置列表 */
-  ConfigReleaseList: ConfigRelease[] | null;
+  ConfigReleaseList?: ConfigRelease[] | null;
   /** 已发布的文件配置列表 */
-  FileConfigReleaseList: FileConfigRelease[] | null;
+  FileConfigReleaseList?: FileConfigRelease[] | null;
 }
 
 /** 单元化API使用详情统计对象列表 */
@@ -1957,25 +1957,25 @@ declare interface LaneInfos {
 /** 泳道规则 */
 declare interface LaneRule {
   /** 泳道规则ID */
-  RuleId: string | null;
+  RuleId?: string | null;
   /** 泳道规则名称 */
-  RuleName: string | null;
+  RuleName?: string | null;
   /** 优先级 */
-  Priority: number | null;
+  Priority?: number | null;
   /** 备注 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 泳道规则标签列表 */
-  RuleTagList: LaneRuleTag[] | null;
+  RuleTagList?: LaneRuleTag[] | null;
   /** 泳道规则标签关系 */
-  RuleTagRelationship: string | null;
+  RuleTagRelationship?: string | null;
   /** 泳道ID */
-  LaneId: string | null;
+  LaneId?: string | null;
   /** 开启状态 */
-  Enable: boolean | null;
+  Enable?: boolean | null;
   /** 创建时间 */
-  CreateTime: number | null;
+  CreateTime?: number | null;
   /** 更新时间 */
-  UpdateTime: number | null;
+  UpdateTime?: number | null;
 }
 
 /** 泳道规则标签 */
@@ -1999,9 +1999,9 @@ declare interface LaneRuleTag {
 /** 泳道规则分页查询 */
 declare interface LaneRules {
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 泳道规则列表 */
-  Content: LaneRule[];
+  Content?: LaneRule[];
 }
 
 /** Jvm监控内存数据封装 */
@@ -2103,17 +2103,17 @@ declare interface Microservice {
 /** 监控概览对象 */
 declare interface MonitorOverview {
   /** 近24小时调用数量 */
-  InvocationCountOfDay: string | null;
+  InvocationCountOfDay?: string | null;
   /** 总调用数量 */
-  InvocationCount: string | null;
+  InvocationCount?: string | null;
   /** 近24小时调用错误数量 */
-  ErrorCountOfDay: string | null;
+  ErrorCountOfDay?: string | null;
   /** 总调用错误数量 */
-  ErrorCount: string | null;
+  ErrorCount?: string | null;
   /** 近24小时调用成功率 */
-  SuccessRatioOfDay: string | null;
+  SuccessRatioOfDay?: string | null;
   /** 总调用成功率 */
-  SuccessRatio: string | null;
+  SuccessRatio?: string | null;
 }
 
 /** 微服务API数组 */
@@ -2279,17 +2279,17 @@ declare interface PagedProgram {
 /** 路径重写 */
 declare interface PathRewrite {
   /** 路径重写规则ID */
-  PathRewriteId: string;
+  PathRewriteId?: string;
   /** 网关部署组ID */
-  GatewayGroupId: string;
+  GatewayGroupId?: string;
   /** 正则表达式 */
-  Regex: string;
+  Regex?: string;
   /** 替换的内容 */
-  Replacement: string;
+  Replacement?: string;
   /** 是否屏蔽映射后路径，Y: 是 N: 否 */
-  Blocked: string;
+  Blocked?: string;
   /** 规则顺序，越小优先级越高 */
-  Order: number;
+  Order?: number;
 }
 
 /** 路径重写创建对象 */
@@ -2309,9 +2309,9 @@ declare interface PathRewriteCreateObject {
 /** 路径重写翻页对象 */
 declare interface PathRewritePage {
   /** 总记录数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 路径重写规则列表 */
-  Content: PathRewrite[];
+  Content?: PathRewrite[];
 }
 
 /** 描述程序包关联信息 */
@@ -2407,11 +2407,11 @@ declare interface ProgramItem {
 /** 属性字段 */
 declare interface PropertyField {
   /** 属性名称 */
-  Name: string;
+  Name?: string;
   /** 属性类型 */
-  Type: string;
+  Type?: string;
   /** 属性描述 */
-  Description: string | null;
+  Description?: string | null;
 }
 
 /** 端口对象 */
@@ -2431,13 +2431,13 @@ declare interface ProtocolPort {
 /** 分位数据模型 */
 declare interface QuantileEntity {
   /** 最大值 */
-  MaxValue: string | null;
+  MaxValue?: string | null;
   /** 最小值 */
-  MinValue: string | null;
+  MinValue?: string | null;
   /** 五分位值 */
-  FifthPositionValue: string | null;
+  FifthPositionValue?: string | null;
   /** 九分位值 */
-  NinthPositionValue: string | null;
+  NinthPositionValue?: string | null;
 }
 
 /** 仓库信息 */
@@ -2977,9 +2977,9 @@ declare interface TsfPageApiDetailInfo {
 /** ApiGroupInfo翻页结构体 */
 declare interface TsfPageApiGroupInfo {
   /** 总记录数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** API分组信息 */
-  Content: ApiGroupInfo[];
+  Content?: ApiGroupInfo[];
 }
 
 /** 应用分页信息 */
@@ -3031,25 +3031,25 @@ declare interface TsfPageClusterV2 {
 /** TsfPage */
 declare interface TsfPageConfig {
   /** TsfPageConfig */
-  TotalCount: number;
+  TotalCount?: number;
   /** 配置项列表 */
-  Content: Config[];
+  Content?: Config[];
 }
 
 /** TSF配置项发布信息分页对象 */
 declare interface TsfPageConfigRelease {
   /** 总条数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 配置项发布信息数组 */
-  Content: ConfigRelease[] | null;
+  Content?: ConfigRelease[] | null;
 }
 
 /** TSF配置项发布日志分页对象 */
 declare interface TsfPageConfigReleaseLog {
   /** 总条数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 配置项发布日志数组 */
-  Content: ConfigReleaseLog[] | null;
+  Content?: ConfigReleaseLog[] | null;
 }
 
 /** 分页的 ContainerEvent */
@@ -3071,33 +3071,33 @@ declare interface TsfPageDimension {
 /** 文件配置项列表 */
 declare interface TsfPageFileConfig {
   /** 总数目 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 文件配置数组 */
-  Content: FileConfig[] | null;
+  Content?: FileConfig[] | null;
 }
 
 /** 文件配置项发布信息列表 */
 declare interface TsfPageFileConfigRelease {
   /** 数量 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 列表 */
-  Content: FileConfigRelease[] | null;
+  Content?: FileConfigRelease[] | null;
 }
 
 /** GatewayDeployGroup 翻页对象 */
 declare interface TsfPageGatewayDeployGroup {
   /** 记录总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 记录实体列表 */
-  Content: GatewayDeployGroup[];
+  Content?: GatewayDeployGroup[];
 }
 
 /** GatewayPlugin 翻页对象 */
 declare interface TsfPageGatewayPlugin {
   /** 记录总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 记录实体列表 */
-  Content: GatewayPlugin[] | null;
+  Content?: GatewayPlugin[] | null;
 }
 
 /** TSF机器实例分页对象 */
@@ -3111,17 +3111,17 @@ declare interface TsfPageInstance {
 /** 微服务列表信息 */
 declare interface TsfPageMicroservice {
   /** 微服务总数目 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 微服务列表信息 */
-  Content: Microservice[] | null;
+  Content?: Microservice[] | null;
 }
 
 /** 微服务实例的分页内容 */
 declare interface TsfPageMsInstance {
   /** 微服务实例总数目 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 微服务实例列表内容 */
-  Content: MsInstance[] | null;
+  Content?: MsInstance[] | null;
 }
 
 /** Tsf命名空间分页对象 */
@@ -3171,9 +3171,9 @@ declare interface TsfPageUnitNamespace {
 /** 单元化规则翻页对象 */
 declare interface TsfPageUnitRule {
   /** 记录总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 记录实体列表 */
-  Content: UnitRule[];
+  Content?: UnitRule[];
 }
 
 /** 单元化规则翻页对象 */
@@ -3578,7 +3578,7 @@ declare interface AssociateConfigWithGroupRequest {
 
 declare interface AssociateConfigWithGroupResponse {
   /** 绑定是否成功 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7491,9 +7491,9 @@ declare interface TerminateTaskFlowBatchResponse {
 
 declare interface TsfApiListResponse {
   /** 数量 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** API 列表 */
-  Content: MsApiArray[] | null;
+  Content?: MsApiArray[] | null;
 }
 
 declare interface UnbindApiGroupRequest {
@@ -7579,7 +7579,7 @@ declare interface UpdateApiTimeoutsRequest {
 
 declare interface UpdateApiTimeoutsResponse {
   /** 是否成功 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1265,7 +1265,7 @@ declare interface CreateAndDeployCloudBaseProjectRequest {
 
 declare interface CreateAndDeployCloudBaseProjectResponse {
   /** 环境Id */
-  EnvId: string | null;
+  EnvId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

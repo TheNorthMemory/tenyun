@@ -148,6 +148,8 @@ declare interface ObjectTypeConfigFields {
   Transfer?: string | null;
   /** tke的pod字段信息解析 */
   JsonParse?: string | null;
+  /** 字段类型 0:str 1:list */
+  Type?: number;
 }
 
 /** 标准pod对象类型下拉数据的解析 */

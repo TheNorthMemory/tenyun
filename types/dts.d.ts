@@ -741,15 +741,15 @@ declare interface MigrateDBItem {
 /** 迁移执行过程信息 */
 declare interface MigrateDetailInfo {
   /** 总步骤数 */
-  StepAll: number | null;
+  StepAll?: number | null;
   /** 当前步骤 */
-  StepNow: number | null;
+  StepNow?: number | null;
   /** 主从差距，MB；只在任务正常，迁移或者同步的最后一步（追Binlog的阶段才有校），如果是非法值，返回-1 */
-  MasterSlaveDistance: number | null;
+  MasterSlaveDistance?: number | null;
   /** 主从差距，秒；只在任务正常，迁移或者同步的最后一步（追Binlog的阶段才有校），如果是非法值，返回-1 */
-  SecondsBehindMaster: number | null;
+  SecondsBehindMaster?: number | null;
   /** 步骤信息 */
-  StepInfo: StepDetailInfo[] | null;
+  StepInfo?: StepDetailInfo[] | null;
 }
 
 /** 迁移选项，描述任务如何执行迁移等一系列配置信息 */
@@ -1218,6 +1218,8 @@ declare interface SyncJobInfo {
   AutoRenew?: number | null;
   /** 下线时间，格式为 yyyy-mm-dd hh:mm:ss */
   OfflineTime?: string | null;
+  /** 动态修改对象，修改任务的状态等 */
+  OptObjStatus?: string | null;
   /** 自动重试时间段设置 */
   AutoRetryTimeRangeMinutes?: number | null;
   /** 全量导出可重入标识：enum::"yes"/"no"。yes表示当前任务可重入、no表示当前任务处于全量导出且不可重入阶段；如果在该值为no时重启任务导出流程不支持断点续传 */
@@ -2642,41 +2644,41 @@ declare namespace V20180330 {
   /** 迁移任务详情 */
   interface MigrateJobInfo {
     /** 数据迁移任务ID */
-    JobId: string;
+    JobId?: string;
     /** 数据迁移任务名称 */
-    JobName: string;
+    JobName?: string;
     /** 迁移任务配置选项 */
-    MigrateOption: MigrateOption;
+    MigrateOption?: MigrateOption;
     /** 源实例数据库类型:mysql，redis，mongodb，postgresql，mariadb，percona */
-    SrcDatabaseType: string;
+    SrcDatabaseType?: string;
     /** 源实例接入类型，值包括：extranet(外网),cvm(cvm自建实例),dcg(专线接入的实例),vpncloud(云vpn接入的实例),cdb(腾讯云数据库实例),ccn(云联网实例) */
-    SrcAccessType: string;
+    SrcAccessType?: string;
     /** 源实例信息，具体内容跟迁移任务类型相关 */
-    SrcInfo: SrcInfo;
+    SrcInfo?: SrcInfo;
     /** 目标实例数据库类型:mysql，redis，mongodb，postgresql，mariadb，percona */
-    DstDatabaseType: string;
+    DstDatabaseType?: string;
     /** 目标实例接入类型，目前支持：cdb(腾讯云数据库实例) */
-    DstAccessType: string;
+    DstAccessType?: string;
     /** 目标实例信息 */
-    DstInfo: DstInfo;
+    DstInfo?: DstInfo;
     /** 需要迁移的源数据库表信息，如果需要迁移的是整个实例，该字段为[] */
-    DatabaseInfo: string;
+    DatabaseInfo?: string;
     /** 任务创建(提交)时间 */
-    CreateTime: string;
+    CreateTime?: string;
     /** 任务开始执行时间 */
-    StartTime: string;
+    StartTime?: string;
     /** 任务执行结束时间 */
-    EndTime: string;
-    /** 任务状态,取值为：1-创建中(Creating),3-校验中(Checking)4-校验通过(CheckPass),5-校验不通过（CheckNotPass）,7-任务运行(Running),8-准备完成（ReadyComplete）,9-任务成功（Success）,10-任务失败（Failed）,11-撤销中（Stopping）,12-完成中（Completing） */
-    Status: number;
+    EndTime?: string;
+    /** 任务状态,取值为：1-创建中(Creating),3-校验中(Checking)4-校验通过(CheckPass),5-校验不通过（CheckNotPass）,7-任务运行(Running),8-准备完成（ReadyComplete）,9-任务成功（Success）,10-任务失败（Failed）,11-撤销中（Stopping）,12-完成中（Completing）,23-未知状态（Unknown） */
+    Status?: number;
     /** 任务详情 */
-    Detail: MigrateDetailInfo;
+    Detail?: MigrateDetailInfo;
     /** 任务错误信息提示，当任务发生错误时，不为null或者空值 */
-    ErrorInfo: ErrorInfo[];
+    ErrorInfo?: ErrorInfo[];
     /** 标签 */
-    Tags: TagItem[] | null;
+    Tags?: TagItem[] | null;
     /** 源实例为集群时且接入为非cdb时源实例信息 */
-    SrcInfoMulti: SrcInfo[] | null;
+    SrcInfoMulti?: SrcInfo[] | null;
   }
 
   /** 迁移任务配置选项 */
@@ -2906,7 +2908,7 @@ declare namespace V20180330 {
 
   interface CreateMigrateJobResponse {
     /** 数据迁移任务ID */
-    JobId: string;
+    JobId?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -2998,9 +3000,9 @@ declare namespace V20180330 {
 
   interface DescribeMigrateJobsResponse {
     /** 任务数目 */
-    TotalCount: number;
+    TotalCount?: number;
     /** 任务详情数组 */
-    JobList: MigrateJobInfo[];
+    JobList?: MigrateJobInfo[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

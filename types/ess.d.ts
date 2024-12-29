@@ -104,6 +104,8 @@ declare interface ApproverOption {
   FillType?: number;
   /** 签署人阅读合同限制参数 取值： LimitReadTimeAndBottom，阅读合同必须限制阅读时长并且必须阅读到底 LimitReadTime，阅读合同仅限制阅读时长 LimitBottom，阅读合同仅限制必须阅读到底 NoReadTimeAndBottom，阅读合同不限制阅读时长且不限制阅读到底（白名单功能，请联系客户经理开白使用） */
   FlowReadLimit?: string;
+  /** 禁止在签署过程中添加签署日期控件 前置条件：文件发起合同时，指定SignBeanTag=1（可以在签署过程中添加签署控件）： 默认值：false，在开启：签署过程中添加签署控件时，添加签署控件会默认自带签署日期控件 可选值：true，在开启：签署过程中添加签署控件时，添加签署控件不会自带签署日期控件 */
+  ForbidAddSignDate?: boolean;
 }
 
 /** 指定签署人限制项 */
@@ -2552,7 +2554,7 @@ declare interface CreatePrepareFlowRequest {
   /** 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 20480长度。在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的回调通知模块。 */
   UserData?: string;
   /** 合同流程的抄送人列表，最多可支持50个抄送人，抄送人可查看合同内容及签署进度，但无需参与合同签署。 */
-  CcInfos?: CcInfo;
+  CcInfos?: CcInfo[];
   /** 合同Id：用于通过一个已发起的合同快速生成一个发起流程web链接注: `该参数必须是一个待发起审核的合同id，并且还未审核通过` */
   FlowId?: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
@@ -3231,13 +3233,13 @@ declare interface DescribeFlowTemplatesRequest {
   Agent?: Agent;
   /** 查询内容控制**0**：模板列表及详情（默认）**1**：仅模板列表 */
   ContentType?: number;
-  /** 搜索条件，本字段用于指定模板Id进行查询。- Key：template-id Values：需要查询的模板Id列表- Key：template-name Values：需要查询的模板名称列表 */
+  /** 搜索过滤的条件，本字段允许您通过指定模板 ID 或模板名称来进行查询。模板 ID：Key设置为 template-id ，Values为您想要查询的 模板 ID 列表。 主企业模板 ID：Key设置为 share-template-id ，Values为您想要查询的 主企业模板 ID 列表。用来查询主企业分享模板到子企业场景下，子企业的模板信息，在此情境下，参数 Agent.ProxyOrganizationId（子企业的组织ID）为必填项。 模板名称：Key设置为 template-name ，Values为您想要查询的模板名称列表。 */
   Filters?: Filter[];
   /** 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。注：`1.offset从0开始，即第一页为0。``2.默认从第一页返回。` */
   Offset?: number;
   /** 指定每页返回的数据条数，和Offset参数配合使用。注：`1.默认值为20，单页做大值为200。` */
   Limit?: number;
-  /** 指定查询的应用号，指定后查询该应用号下的模板列表。注：`1.ApplicationId为空时，查询所有应用下的模板列表。` */
+  /** 通过指定[第三方应用的应用号（ApplicationId）](https://qcloudimg.tencent-cloud.cn/raw/60efa1e9049732e5246b20a268882b1a.png)，您可以查询【应用模板库管理】中某个第三方应用下的模板。注意事项：当 ApplicationId 为空时（默认），系统将查询平台企业的所有模板（自建应用使用的模板）。当 ApplicationId 不为空时，系统将从【应用模板库管理】中查询该特定应用下的模板（分享给第三方应用子企业的模板）。 */
   ApplicationId?: string;
   /** 默认为false，查询SaaS模板库列表；为true，查询第三方应用集成平台企业模板库管理列表 */
   IsChannel?: boolean;
@@ -3245,7 +3247,7 @@ declare interface DescribeFlowTemplatesRequest {
   Organization?: OrganizationInfo;
   /** 暂未开放 */
   GenerateSource?: number;
-  /** 是否获取模板预览链接 */
+  /** 是否获取模板预览链接。false：不获取（默认）true：需要获取设置为true之后， 返回参数PreviewUrl，为模板的H5预览链接, 有效期5分钟。可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。 */
   WithPreviewUrl?: boolean;
 }
 

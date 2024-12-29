@@ -85,17 +85,17 @@ declare interface LifeCycleRule {
 /** 挂载点 */
 declare interface MountPoint {
   /** 挂载点ID */
-  MountPointId: string;
+  MountPointId?: string;
   /** 挂载点名称 */
   MountPointName?: string;
   /** 文件系统ID */
-  FileSystemId: string;
+  FileSystemId?: string;
   /** 挂载点状态（1：打开；2：关闭） */
-  Status: number;
+  Status?: number;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 绑定的权限组ID列表 */
-  AccessGroupIds: string[];
+  AccessGroupIds?: string[];
 }
 
 /** 回热任务 */
@@ -377,7 +377,7 @@ declare interface DescribeFileSystemsRequest {
 
 declare interface DescribeFileSystemsResponse {
   /** 文件系统列表 */
-  FileSystems: FileSystem[];
+  FileSystems?: FileSystem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

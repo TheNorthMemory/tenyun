@@ -1068,6 +1068,8 @@ declare interface GovernanceNamespace {
   RemoveUserIds?: string[] | null;
   /** 移除可以操作此命名空间的用户组ID列表 */
   RemoveGroupIds?: string[] | null;
+  /** 该命名空间下的服务对哪些命名空间可见 */
+  ServiceExportTo?: string[] | null;
 }
 
 /** 治理中心命名空间输入参数 */
@@ -1084,6 +1086,8 @@ declare interface GovernanceNamespaceInput {
   RemoveUserIds?: string[];
   /** 移除可以操作此命名空间的用户组ID列表 */
   RemoveGroupIds?: string[];
+  /** 该命名空间下的服务对哪些命名空间下可见，1、为空或者不填写，表示仅当前命名空间可见2、列表内容仅一个元素，且为字符 *，表示所有命名空间可见（包括新增）3、列表内容为部份命名空间名称，则只对这些命名空间下可见 */
+  ServiceExportTo?: string[];
 }
 
 /** 治理中心服务信息。 */
@@ -3253,6 +3257,8 @@ declare interface DescribeGovernanceNamespacesRequest {
   InstanceId: string;
   /** 根据命名空间名称过滤。 */
   Name?: string;
+  /** 是否开启同步到全局注册中心 */
+  SyncToGlobalRegistry?: string;
   /** 偏移量，默认为0。 */
   Offset?: number;
   /** 返回数量，默认为20，最大值为100。 */
@@ -3337,6 +3343,8 @@ declare interface DescribeGovernanceServicesRequest {
   Host?: string;
   /** 是否只查询存在健康实例的服务 */
   OnlyExistHealthyInstance?: boolean;
+  /** 是否开启同步到全局注册中心 */
+  SyncToGlobalRegistry?: string;
 }
 
 declare interface DescribeGovernanceServicesResponse {

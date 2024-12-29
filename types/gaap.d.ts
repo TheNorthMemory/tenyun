@@ -55,19 +55,19 @@ declare interface BandwidthPriceGradient {
 /** 已绑定的源站信息 */
 declare interface BindRealServer {
   /** 源站ID */
-  RealServerId: string;
+  RealServerId?: string;
   /** 源站IP或者域名 */
-  RealServerIP: string;
+  RealServerIP?: string;
   /** 该源站所占权重 */
-  RealServerWeight: number;
+  RealServerWeight?: number;
   /** 源站健康检查状态，其中：0表示正常；1表示异常。未开启健康检查状态时，该状态始终为正常。 */
-  RealServerStatus: number | null;
+  RealServerStatus?: number | null;
   /** 源站的端口号 */
-  RealServerPort: number | null;
+  RealServerPort?: number | null;
   /** 当源站为域名时，域名被解析成一个或者多个IP，该字段表示其中异常的IP列表。状态异常，但该字段为空时，表示域名解析异常。 */
-  DownIPList: string[];
+  DownIPList?: string[];
   /** 源站主备角色：master表示主，slave表示备，该参数必须在监听器打开了源站主备模式。 */
-  RealServerFailoverRole: string;
+  RealServerFailoverRole?: string;
 }
 
 /** 添加源站的源站信息返回值 */
@@ -187,29 +187,29 @@ declare interface DeviceInfo {
 /** 统一域名信息 */
 declare interface Domain {
   /** 域名ID */
-  DomainId: string;
+  DomainId?: string;
   /** 完整域名记录 */
-  FullDomain: string;
+  FullDomain?: string;
   /** 别名 */
-  Alias: string;
+  Alias?: string;
   /** 类型 */
-  Type: string;
+  Type?: string;
   /** 状态，1表示关闭，0表示开启，2表示关闭中，3表示开启中 */
-  Status: number;
+  Status?: number;
   /** 所属项目 */
-  ProjectId: number;
+  ProjectId?: number;
   /** 默认入口 */
-  DefaultValue: string | null;
+  DefaultValue?: string | null;
   /** 通道数量 */
-  ProxyCount: number;
+  ProxyCount?: number;
   /** 创建时间，使用UNIX时间戳 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 更新时间，使用UNIX时间戳 */
-  UpdateTime: number | null;
+  UpdateTime?: number | null;
   /** 标签列表 */
-  TagSet: TagPair[] | null;
+  TagSet?: TagPair[] | null;
   /** 封禁解封状态：BANNED表示已封禁，RECOVER表示已解封或未封禁，BANNING表示封禁中，RECOVERING表示解封中，BAN_FAILED表示封禁失败，RECOVER_FAILED表示解封失败。 */
-  BanStatus: string | null;
+  BanStatus?: string | null;
 }
 
 /** 域名解析就近访问配置详情 */
@@ -433,9 +433,9 @@ declare interface MetricStatisticsInfo {
 /** 就近接入的国家地区详情 */
 declare interface NationCountryInnerInfo {
   /** 国家名 */
-  NationCountryName: string;
+  NationCountryName?: string;
   /** 国家内部编码 */
-  NationCountryInnerCode: string;
+  NationCountryInnerCode?: string;
 }
 
 /** 新添加源站信息 */
@@ -449,17 +449,17 @@ declare interface NewRealServer {
 /** 加速通道接入点详细信息(包含id、地域、ip等） */
 declare interface ProxyAccessInfo {
   /** 地域ID */
-  RegionId: string | null;
+  RegionId?: string | null;
   /** 地域名称 */
-  RegionName: string | null;
+  RegionName?: string | null;
   /** 通道ID */
-  ProxyId: string | null;
+  ProxyId?: string | null;
   /** 通道接入ip */
-  Vip: string | null;
+  Vip?: string | null;
   /** 三网通道VIP列表 */
-  VipList: IPDetail[] | null;
+  VipList?: IPDetail[] | null;
   /** 接入点IDC类型。ec或dc */
-  SourceRegionIdcType: string | null;
+  SourceRegionIdcType?: string | null;
 }
 
 /** 通道组详情信息 */
@@ -769,19 +769,19 @@ declare interface SecurityPolicyRuleIn {
 /** 安全策略规则（出参） */
 declare interface SecurityPolicyRuleOut {
   /** 策略：允许（ACCEPT）或拒绝（DROP） */
-  Action: string;
+  Action?: string;
   /** 请求来源Ip或Ip段 */
-  SourceCidr: string;
+  SourceCidr?: string;
   /** 规则别名 */
-  AliasName: string;
+  AliasName?: string;
   /** 目标端口范围 */
-  DestPortRange: string | null;
+  DestPortRange?: string | null;
   /** 规则ID */
-  RuleId: string;
+  RuleId?: string;
   /** 要匹配的协议类型（TCP/UDP） */
-  Protocol: string | null;
+  Protocol?: string | null;
   /** 安全策略ID */
-  PolicyId: string | null;
+  PolicyId?: string | null;
 }
 
 /** 网络加速的原地址信息 */
@@ -1011,9 +1011,9 @@ declare interface CloseProxiesRequest {
 
 declare interface CloseProxiesResponse {
   /** 非运行状态下的通道实例ID列表，不可开启。 */
-  InvalidStatusInstanceSet: string[];
+  InvalidStatusInstanceSet?: string[];
   /** 开启操作失败的通道实例ID列表。 */
-  OperationFailedInstanceSet: string[];
+  OperationFailedInstanceSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1025,9 +1025,9 @@ declare interface CloseProxyGroupRequest {
 
 declare interface CloseProxyGroupResponse {
   /** 非运行状态下的通道实例ID列表，不可开启。 */
-  InvalidStatusInstanceSet: string[];
+  InvalidStatusInstanceSet?: string[];
   /** 开启操作失败的通道实例ID列表。 */
-  OperationFailedInstanceSet: string[];
+  OperationFailedInstanceSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1189,7 +1189,7 @@ declare interface CreateHTTPListenerRequest {
 
 declare interface CreateHTTPListenerResponse {
   /** 创建的监听器ID */
-  ListenerId: string;
+  ListenerId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1219,7 +1219,7 @@ declare interface CreateHTTPSListenerRequest {
 
 declare interface CreateHTTPSListenerResponse {
   /** 创建的监听器ID */
-  ListenerId: string;
+  ListenerId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1331,7 +1331,7 @@ declare interface CreateRuleRequest {
 
 declare interface CreateRuleResponse {
   /** 创建转发规则成功返回规则ID */
-  RuleId: string;
+  RuleId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1347,7 +1347,7 @@ declare interface CreateSecurityPolicyRequest {
 
 declare interface CreateSecurityPolicyResponse {
   /** 安全策略ID */
-  PolicyId: string;
+  PolicyId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1957,7 +1957,7 @@ declare interface DescribeProxiesStatusRequest {
 
 declare interface DescribeProxiesStatusResponse {
   /** 通道状态列表。 */
-  InstanceStatusSet: ProxyStatus[];
+  InstanceStatusSet?: ProxyStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2083,9 +2083,9 @@ declare interface DescribeRealServerStatisticsRequest {
 
 declare interface DescribeRealServerStatisticsResponse {
   /** 指定监听器的源站状态统计数据 */
-  StatisticsData: StatisticsDataInfo[];
+  StatisticsData?: StatisticsDataInfo[];
   /** 多个源站状态统计数据 */
-  RsStatisticsData: MetricStatisticsInfo[];
+  RsStatisticsData?: MetricStatisticsInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2121,9 +2121,9 @@ declare interface DescribeRealServersStatusRequest {
 
 declare interface DescribeRealServersStatusResponse {
   /** 返回源站查询结果的个数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 源站被绑定状态列表 */
-  RealServerStatusSet: RealServerStatus[];
+  RealServerStatusSet?: RealServerStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2159,9 +2159,9 @@ declare interface DescribeResourcesByTagRequest {
 
 declare interface DescribeResourcesByTagResponse {
   /** 资源总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 标签对应的资源列表 */
-  ResourceSet: TagResourceInfo[];
+  ResourceSet?: TagResourceInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2751,9 +2751,9 @@ declare interface OpenProxiesRequest {
 
 declare interface OpenProxiesResponse {
   /** 非关闭状态下的通道实例ID列表，不可开启。 */
-  InvalidStatusInstanceSet: string[];
+  InvalidStatusInstanceSet?: string[];
   /** 开启操作失败的通道实例ID列表。 */
-  OperationFailedInstanceSet: string[];
+  OperationFailedInstanceSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2765,9 +2765,9 @@ declare interface OpenProxyGroupRequest {
 
 declare interface OpenProxyGroupResponse {
   /** 非关闭状态下的通道实例ID列表，不可开启。 */
-  InvalidStatusInstanceSet: string[];
+  InvalidStatusInstanceSet?: string[];
   /** 开启操作失败的通道实例ID列表。 */
-  OperationFailedInstanceSet: string[];
+  OperationFailedInstanceSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

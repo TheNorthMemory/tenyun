@@ -389,11 +389,11 @@ declare interface DescribeDeviceSessionListRequest {
 
 declare interface DescribeDeviceSessionListResponse {
   /** 总个数 */
-  Total: number;
+  Total?: number;
   /** 会话列表 */
-  DeviceSessionList: SessionInfo[];
+  DeviceSessionList?: SessionInfo[];
   /** 本页数量 */
-  Num: number;
+  Num?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -415,15 +415,15 @@ declare interface DescribePolicyRequest {
 
 declare interface DescribePolicyResponse {
   /** 权限模式 */
-  PolicyMode: string;
+  PolicyMode?: string;
   /** 返回的权限模式是否为当前生效的权限模式 */
-  PolicyEnabled: boolean;
+  PolicyEnabled?: boolean;
   /** 权限信息列表 */
-  PolicyInfo: PolicyInfo[];
+  PolicyInfo?: PolicyInfo[];
   /** 本次返回的权限信息数量 */
-  Num: number;
+  Num?: number;
   /** 权限信息总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -481,11 +481,11 @@ declare interface DescribeRecentSessionListRequest {
 
 declare interface DescribeRecentSessionListResponse {
   /** 总个数 */
-  Total: number;
+  Total?: number;
   /** 会话列表 */
-  RecentSessionList: RecentSessionInfo[];
+  RecentSessionList?: RecentSessionInfo[];
   /** 本页数量 */
-  Num: number;
+  Num?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -130,6 +130,40 @@ declare interface BootstrapAction {
   Args?: string[];
 }
 
+/** CBS实例信息 */
+declare interface CBSInstance {
+  /** 云硬盘ID */
+  DiskId: string | null;
+  /** 云硬盘类型 */
+  DiskUsage: string | null;
+  /** 云硬盘名称 */
+  DiskName: string | null;
+  /** 云硬盘大小 */
+  DiskSize: number | null;
+  /** 云盘介质类型 */
+  DiskType: string | null;
+  /** 是否跟随实例删除 */
+  DeleteWithInstance: boolean | null;
+  /** 云硬盘收费类型 */
+  DiskChargeType: string | null;
+  /** 云硬盘运行状态 */
+  DiskState: string | null;
+  /** 是否自动续费 */
+  RenewFlag: string | null;
+  /** 到期时间 */
+  DeadlineTime: string | null;
+  /** 云盘是否挂载到云主机上 */
+  Attached: boolean | null;
+  /** 当前时间距离盘到期的天数 */
+  DifferDaysOfDeadline: number | null;
+  /** 该云盘当前被挂载到的CVM实例InstanceId */
+  InstanceIdList: string[] | null;
+  /** 云硬盘挂载的云主机ID */
+  InstanceId: string | null;
+  /** 云盘是否为共享型云盘。 */
+  Shareable: boolean | null;
+}
+
 /** 容器集群Pod服务CLB设置 */
 declare interface CLBSetting {
   /** CLB类型，PUBLIC_IP表示支持公网CLB和INTERNAL_IP表示支持内网CLB字段 */
@@ -466,6 +500,14 @@ declare interface DependService {
   ServiceName: string;
   /** 共用组件集群 */
   InstanceId: string;
+}
+
+/** DescribeResourceConfig接口出参 */
+declare interface DescribeResourceConfig {
+  /** 规格管理类型 */
+  ResourceType: string;
+  /** 规格管理数据 */
+  ResourceData: NodeResource[];
 }
 
 /** 动态生成的变更详情 */
@@ -1176,11 +1218,11 @@ declare interface MultiDisk {
 declare interface MultiDiskMC {
   /** 该类型云盘个数 */
   Count: number | null;
-  /** 磁盘类型 */
+  /** 磁盘类型1 :本地盘2 :云硬盘3 : 本地SSD4 : 云SSD5 : 高效云盘6 : 增强型SSD云硬盘11 : 吞吐型云硬盘12 : 极速型SSD云硬盘13 : 通用型SSD云硬盘14 : 大数据型云硬盘15 : 高IO型云硬盘16 : 远端SSD盘 */
   Type?: number | null;
   /** 磁盘大小 */
   Size?: string | null;
-  /** 云盘大小 */
+  /** 云盘大小,单位b */
   Volume?: number | null;
 }
 
@@ -1344,6 +1386,24 @@ declare interface NodeHardwareInfo {
   SharedClusterIdDesc?: string | null;
 }
 
+/** 规格管理，规格类型描述 */
+declare interface NodeResource {
+  /** 配置Id */
+  ResourceConfigId?: number;
+  /** Resource */
+  Resource?: Resource | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** 是否默认配置,DEFAULT,BACKUP */
+  IsDefault?: string | null;
+  /** 该类型剩余 */
+  MaxResourceNum?: number | null;
+  /** 支持的包销时长 */
+  PrepaidUnderwritePeriods?: number[] | null;
+}
+
 /** 资源详情 */
 declare interface NodeResourceSpec {
   /** 规格类型，如S2.MEDIUM8 */
@@ -1378,6 +1438,18 @@ declare interface NodeSelectorRequirement {
 declare interface NodeSelectorTerm {
   /** 节点选择项表达式集合 */
   MatchExpressions?: NodeSelectorRequirement[] | null;
+}
+
+/** 节点磁盘类型 */
+declare interface NodeSpecDiskV2 {
+  /** 数量 */
+  Count?: number | null;
+  /** 名字 */
+  Name?: string | null;
+  /** 磁盘类型 */
+  DiskType?: string | null;
+  /** 指定磁盘大小 */
+  DefaultDiskSize?: number | null;
 }
 
 /** 弹性扩缩容执行一次规则上下文 */
@@ -1449,17 +1521,17 @@ declare interface OverviewRow {
 /** 用于创建集群价格清单-节点组成部分价格 */
 declare interface PartDetailPriceItem {
   /** 类型包括：节点->node、系统盘->rootDisk、云数据盘->dataDisk、metaDB */
-  InstanceType: string | null;
+  InstanceType?: string | null;
   /** 单价（原价） */
-  Price: number | null;
+  Price?: number | null;
   /** 单价（折扣价） */
-  RealCost: number | null;
+  RealCost?: number | null;
   /** 总价（折扣价） */
-  RealTotalCost: number | null;
+  RealTotalCost?: number | null;
   /** 折扣 */
-  Policy: number | null;
+  Policy?: number | null;
   /** 数量 */
-  GoodsNum: number | null;
+  GoodsNum?: number | null;
 }
 
 /** Serverless HBase包年包月时间 */
@@ -1711,13 +1783,13 @@ declare interface PriceResult {
 /** 获取CVM配额 */
 declare interface QuotaEntity {
   /** 已使用配额 */
-  UsedQuota: number | null;
+  UsedQuota?: number | null;
   /** 剩余配额 */
-  RemainingQuota: number | null;
+  RemainingQuota?: number | null;
   /** 总配额 */
-  TotalQuota: number | null;
+  TotalQuota?: number | null;
   /** 可用区 */
-  Zone: string | null;
+  Zone?: string | null;
 }
 
 /** 集群续费实例信息 */
@@ -1768,7 +1840,7 @@ declare interface RepeatStrategy {
 declare interface Resource {
   /** 节点规格描述，如CVM.SA2。 */
   Spec: string | null;
-  /** 存储类型取值范围：4：表示云SSD。5：表示高效云盘。6：表示增强型SSD云硬盘。11：表示吞吐型云硬盘。12：表示极速型SSD云硬盘。 */
+  /** 存储类型取值范围：4：表示云SSD。5：表示高效云盘。6：表示增强型SSD云硬盘。11：表示吞吐型云硬盘。12：表示极速型SSD云硬盘。：创建时该类型无效，会根据数据盘类型和节点类型自动判断 */
   StorageType: number | null;
   /** 磁盘类型取值范围：CLOUD_SSD：表示云SSD。CLOUD_PREMIUM：表示高效云盘。CLOUD_BASIC：表示云硬盘。 */
   DiskType: string | null;
@@ -1895,11 +1967,11 @@ declare interface SceneSoftwareConfig {
 /** 调度任务详情 */
 declare interface SchedulerTaskDetail {
   /** 步骤 */
-  Step: string | null;
+  Step?: string | null;
   /** 进度 */
-  Progress: string | null;
+  Progress?: string | null;
   /** 失败信息 */
-  FailReason: string | null;
+  FailReason?: string | null;
   /** 用来获取详情的id */
   JobId?: number | null;
 }
@@ -1907,17 +1979,17 @@ declare interface SchedulerTaskDetail {
 /** yarn资源调度历史 */
 declare interface SchedulerTaskInfo {
   /** 调度器类型 */
-  SchedulerName: string;
+  SchedulerName?: string;
   /** 操作类型 */
-  OperatorName: string;
+  OperatorName?: string;
   /** 开始时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 结束时间 */
-  EndTime: string | null;
+  EndTime?: string | null;
   /** 状态 */
-  State: number | null;
+  State?: number | null;
   /** 详情 */
-  Details: SchedulerTaskDetail[] | null;
+  Details?: SchedulerTaskDetail[] | null;
 }
 
 /** 添加引导操作 */
@@ -2066,7 +2138,7 @@ declare interface SparkQuery {
 
 /** 任务步骤详情 */
 declare interface StageInfoDetail {
-  /** 步骤id */
+  /** 步骤 */
   Stage?: string;
   /** 步骤名 */
   Name?: string | null;
@@ -2556,6 +2628,34 @@ declare interface AddMetricScaleStrategyResponse {
   RequestId?: string;
 }
 
+declare interface AddNodeResourceConfigRequest {
+  /** 集群实例Id */
+  InstanceId: string;
+  /** 节点类型 CORE TASK ROUTER */
+  ResourceType: string;
+  /** 资源详情 */
+  ResourceConfig: Resource;
+  /** 付费模式 */
+  PayMode: number;
+  /** 是否默认配置,DEFAULT,BACKUP,不填默认不是默认配置 */
+  IsDefault?: string;
+  /** 地域ID */
+  ZoneId?: number;
+  /** 添加多个规格时，第1个规格详情在ResourceConfig参数，第2-n个在MultipleResourceConfig参数 */
+  MultipleResourceConfig?: Resource[];
+  /** 类型为ComputeResource和EMR以及默认，默认为EMR */
+  ResourceBaseType?: string;
+  /** 计算资源id */
+  ComputeResourceId?: string;
+  /** 硬件类型 */
+  HardwareResourceType?: string;
+}
+
+declare interface AddNodeResourceConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AddUsersForUserManagerRequest {
   /** 集群字符串ID */
   InstanceId: string;
@@ -2568,6 +2668,30 @@ declare interface AddUsersForUserManagerResponse {
   SuccessUserList?: string[] | null;
   /** 添加失败的用户列表 */
   FailedUserList?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AttachDisksRequest {
+  /** EMR集群实例ID */
+  InstanceId: string;
+  /** 需要挂载的云盘ID */
+  DiskIds?: string[];
+  /** 挂载模式，取值范围：AUTO_RENEW：自动续费ALIGN_DEADLINE：自动对其到期时间 */
+  AlignType?: string;
+  /** 需要挂载的cvm节点id列表 */
+  CvmInstanceIds?: string[];
+  /** 是否是新购云盘进行挂载 */
+  CreateDisk?: boolean;
+  /** 新购云盘规格 */
+  DiskSpec?: NodeSpecDiskV2;
+  /** 可选参数，不传该参数则仅执行挂载操作。传入True时，会在挂载成功后将云硬盘设置为随云主机销毁模式，仅对按量计费云硬盘有效。 */
+  DeleteWithInstance?: boolean;
+}
+
+declare interface AttachDisksResponse {
+  /** 流程id */
+  FlowId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2780,6 +2904,24 @@ declare interface DeleteAutoScaleStrategyRequest {
 }
 
 declare interface DeleteAutoScaleStrategyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteNodeResourceConfigRequest {
+  /** 集群实例Id */
+  InstanceId: string;
+  /** 节点配置Id */
+  ResourceConfigId: number;
+  /** 节点类型 CORE TASK ROUTER */
+  ResourceType?: string;
+  /** 类型为ComputeResource和EMR以及默认，默认为EMR */
+  ResourceBaseType?: string;
+  /** 计算资源id */
+  ComputeResourceId?: string;
+}
+
+declare interface DeleteNodeResourceConfigResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3254,6 +3396,46 @@ declare interface DescribeKyuubiQueryInfoResponse {
   TotalCount?: number;
   /** Kyuubi查询信息列表 */
   KyuubiQueryInfoList?: KyuubiQueryInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNodeDataDisksRequest {
+  /** EMR集群实例ID */
+  InstanceId: string;
+  /** 节点CVM实例Id列表 */
+  CvmInstanceIds: string[];
+}
+
+declare interface DescribeNodeDataDisksResponse {
+  /** 总数量 */
+  TotalCount: number;
+  /** 云盘列表 */
+  CBSList: CBSInstance[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNodeResourceConfigFastRequest {
+  /** 集群实例Id */
+  InstanceId: string;
+  /** 节点类型 CORE TASK ROUTER ALL */
+  ResourceType: string;
+  /** 计费类型 */
+  PayMode: number;
+  /** 可用区ID */
+  ZoneId?: number;
+  /** 类型为ComputeResource和EMR以及默认，默认为EMR */
+  ResourceBaseType?: string;
+  /** 计算资源id */
+  ComputeResourceId?: string;
+  /** 硬件类型 */
+  HardwareResourceType?: string;
+}
+
+declare interface DescribeNodeResourceConfigFastResponse {
+  /** DescribeResourceConfig接口返回值 */
+  Data?: DescribeResourceConfig[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3796,6 +3978,22 @@ declare interface ModifyGlobalConfigResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInstanceBasicRequest {
+  /** 集群实例ID */
+  InstanceId: string;
+  /** 集群名称 */
+  ClusterName: string;
+  /** 用来标注修改计算资源 */
+  ResourceBaseType?: string;
+  /** 需要修改的计算资源id，与ResourceBaseType 配合使用 */
+  ComputeResourceId?: string;
+}
+
+declare interface ModifyInstanceBasicResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyPodNumRequest {
   /** 集群Id */
   InstanceId: string;
@@ -3828,6 +4026,30 @@ declare interface ModifyResourcePoolsResponse {
   IsDraft?: boolean;
   /** 扩展字段，暂时没用 */
   ErrorMsg?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyResourceRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 计费类型 */
+  PayMode: number;
+  /** 变配CPU */
+  NewCpu: number;
+  /** 变配内存 */
+  NewMem: number;
+  /** Token */
+  ClientToken?: string;
+  /** 变配机器规格 */
+  InstanceType?: string;
+  /** 节点ID列表 */
+  ResourceIdList?: string[];
+}
+
+declare interface ModifyResourceResponse {
+  /** 流程traceId */
+  TraceId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3954,6 +4176,24 @@ declare interface ResetYarnConfigRequest {
 }
 
 declare interface ResetYarnConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ResizeDataDisksRequest {
+  /** EMR集群实例ID */
+  InstanceId: string;
+  /** 需要扩容的云盘ID */
+  DiskIds: string[];
+  /** 需要扩充的容量值，容量值需要大于原容量，并且为10的整数倍 */
+  DiskSize: number;
+  /** 需要扩容的节点ID列表 */
+  CvmInstanceIds: string[];
+}
+
+declare interface ResizeDataDisksResponse {
+  /** 流程Id */
+  FlowId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4132,6 +4372,26 @@ declare interface ScaleOutInstanceResponse {
   RequestId?: string;
 }
 
+declare interface SetNodeResourceConfigDefaultRequest {
+  /** 集群实例Id */
+  InstanceId: string;
+  /** 配置Id */
+  ResourceConfigId: number;
+  /** 规格节点类型 CORE TASK ROUTER */
+  ResourceType?: string;
+  /** 类型为ComputeResource和EMR以及默认，默认为EMR */
+  ResourceBaseType?: string;
+  /** 计算资源id */
+  ComputeResourceId?: string;
+  /** 硬件类型 */
+  HardwareResourceType?: string;
+}
+
+declare interface SetNodeResourceConfigDefaultResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StartStopServiceOrMonitorRequest {
   /** 集群ID */
   InstanceId: string;
@@ -4225,8 +4485,12 @@ declare interface Emr {
   (): Versions;
   /** 添加扩缩容负载规则 {@link AddMetricScaleStrategyRequest} {@link AddMetricScaleStrategyResponse} */
   AddMetricScaleStrategy(data: AddMetricScaleStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<AddMetricScaleStrategyResponse>;
+  /** 增加节点规格配置 {@link AddNodeResourceConfigRequest} {@link AddNodeResourceConfigResponse} */
+  AddNodeResourceConfig(data: AddNodeResourceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<AddNodeResourceConfigResponse>;
   /** 新增用户列表 {@link AddUsersForUserManagerRequest} {@link AddUsersForUserManagerResponse} */
   AddUsersForUserManager(data: AddUsersForUserManagerRequest, config?: AxiosRequestConfig): AxiosPromise<AddUsersForUserManagerResponse>;
+  /** 云盘挂载 {@link AttachDisksRequest} {@link AttachDisksResponse} */
+  AttachDisks(data: AttachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<AttachDisksResponse>;
   /** 创建EMR容器集群实例 {@link CreateCloudInstanceRequest} {@link CreateCloudInstanceResponse} */
   CreateCloudInstance(data: CreateCloudInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudInstanceResponse>;
   /** 创建EMR集群实例(新) {@link CreateClusterRequest} {@link CreateClusterResponse} */
@@ -4237,6 +4501,8 @@ declare interface Emr {
   CreateSLInstance(data: CreateSLInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSLInstanceResponse>;
   /** 删除自动扩缩容规则 {@link DeleteAutoScaleStrategyRequest} {@link DeleteAutoScaleStrategyResponse} */
   DeleteAutoScaleStrategy(data: DeleteAutoScaleStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAutoScaleStrategyResponse>;
+  /** 删除节点规格配置 {@link DeleteNodeResourceConfigRequest} {@link DeleteNodeResourceConfigResponse} */
+  DeleteNodeResourceConfig(data: DeleteNodeResourceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNodeResourceConfigResponse>;
   /** 删除用户列表 {@link DeleteUserManagerUserListRequest} {@link DeleteUserManagerUserListResponse} */
   DeleteUserManagerUserList(data: DeleteUserManagerUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserManagerUserListResponse>;
   /** yarn资源调度-部署生效 {@link DeployYarnConfRequest} {@link DeployYarnConfResponse} */
@@ -4279,6 +4545,10 @@ declare interface Emr {
   DescribeJobFlow(data: DescribeJobFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobFlowResponse>;
   /** 查询Kyuubi查询信息 {@link DescribeKyuubiQueryInfoRequest} {@link DescribeKyuubiQueryInfoResponse} */
   DescribeKyuubiQueryInfo(data: DescribeKyuubiQueryInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKyuubiQueryInfoResponse>;
+  /** 查询节点数据盘信息 {@link DescribeNodeDataDisksRequest} {@link DescribeNodeDataDisksResponse} */
+  DescribeNodeDataDisks(data: DescribeNodeDataDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodeDataDisksResponse>;
+  /** 快速获取节点规格配置 {@link DescribeNodeResourceConfigFastRequest} {@link DescribeNodeResourceConfigFastResponse} */
+  DescribeNodeResourceConfigFast(data: DescribeNodeResourceConfigFastRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodeResourceConfigFastResponse>;
   /** 查询YARN资源调度数据信息（旧） {@link DescribeResourceScheduleRequest} {@link DescribeResourceScheduleResponse} */
   DescribeResourceSchedule(data: DescribeResourceScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceScheduleResponse>;
   /** YARN资源调度-变更详情 {@link DescribeResourceScheduleDiffDetailRequest} {@link DescribeResourceScheduleDiffDetailResponse} */
@@ -4319,8 +4589,12 @@ declare interface Emr {
   ModifyAutoScaleStrategy(data: ModifyAutoScaleStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoScaleStrategyResponse>;
   /** 修改YARN资源调度的全局配置 {@link ModifyGlobalConfigRequest} {@link ModifyGlobalConfigResponse} */
   ModifyGlobalConfig(data: ModifyGlobalConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGlobalConfigResponse>;
+  /** 修改集群名称 {@link ModifyInstanceBasicRequest} {@link ModifyInstanceBasicResponse} */
+  ModifyInstanceBasic(data: ModifyInstanceBasicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceBasicResponse>;
   /** 调整Pod数量 {@link ModifyPodNumRequest} {@link ModifyPodNumResponse} */
   ModifyPodNum(data: ModifyPodNumRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPodNumResponse>;
+  /** 变配实例 {@link ModifyResourceRequest} {@link ModifyResourceResponse} */
+  ModifyResource(data: ModifyResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceResponse>;
   /** 刷新YARN的动态资源池（旧） {@link ModifyResourcePoolsRequest} {@link ModifyResourcePoolsResponse} */
   ModifyResourcePools(data: ModifyResourcePoolsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcePoolsResponse>;
   /** 修改YARN资源调度的资源配置（旧） {@link ModifyResourceScheduleConfigRequest} {@link ModifyResourceScheduleConfigResponse} */
@@ -4339,12 +4613,16 @@ declare interface Emr {
   ModifyYarnQueueV2(data: ModifyYarnQueueV2Request, config?: AxiosRequestConfig): AxiosPromise<ModifyYarnQueueV2Response>;
   /** yarn资源调度-重置 {@link ResetYarnConfigRequest} {@link ResetYarnConfigResponse} */
   ResetYarnConfig(data: ResetYarnConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ResetYarnConfigResponse>;
+  /** 云盘扩容 {@link ResizeDataDisksRequest} {@link ResizeDataDisksResponse} */
+  ResizeDataDisks(data: ResizeDataDisksRequest, config?: AxiosRequestConfig): AxiosPromise<ResizeDataDisksResponse>;
   /** 创建流程作业 {@link RunJobFlowRequest} {@link RunJobFlowResponse} */
   RunJobFlow(data: RunJobFlowRequest, config?: AxiosRequestConfig): AxiosPromise<RunJobFlowResponse>;
   /** 扩容集群节点(新) {@link ScaleOutClusterRequest} {@link ScaleOutClusterResponse} */
   ScaleOutCluster(data: ScaleOutClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleOutClusterResponse>;
   /** 实例扩容(旧) {@link ScaleOutInstanceRequest} {@link ScaleOutInstanceResponse} */
   ScaleOutInstance(data: ScaleOutInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleOutInstanceResponse>;
+  /** 设置节点规格配置默认属性 {@link SetNodeResourceConfigDefaultRequest} {@link SetNodeResourceConfigDefaultResponse} */
+  SetNodeResourceConfigDefault(data: SetNodeResourceConfigDefaultRequest, config?: AxiosRequestConfig): AxiosPromise<SetNodeResourceConfigDefaultResponse>;
   /** 执行服务操作 {@link StartStopServiceOrMonitorRequest} {@link StartStopServiceOrMonitorResponse} */
   StartStopServiceOrMonitor(data: StartStopServiceOrMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<StartStopServiceOrMonitorResponse>;
   /** EMR同步POD状态 {@link SyncPodStateRequest} {@link SyncPodStateResponse} */

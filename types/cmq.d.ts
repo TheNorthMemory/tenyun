@@ -90,30 +90,30 @@ declare interface QueueSet {
 
 /** 订阅返回参数 */
 declare interface Subscription {
-  /** 订阅名字，在单个地域同一帐号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
-  SubscriptionName: string | null;
-  /** 订阅 ID。订阅 ID 在拉取监控数据时会用到。 */
-  SubscriptionId: string | null;
-  /** 订阅拥有者的 APPID。 */
-  TopicOwner: number | null;
   /** 该订阅待投递的消息数。 */
-  MsgCount: number | null;
-  /** 最后一次修改订阅属性的时间。返回 Unix 时间戳，精确到秒。 */
-  LastModifyTime: number | null;
-  /** 订阅的创建时间。返回 Unix 时间戳，精确到秒。 */
-  CreateTime: number | null;
+  MsgCount?: number | null;
   /** 表示订阅接收消息的过滤策略。 */
-  BindingKey: string[] | null;
+  BindingKey?: string[] | null;
   /** 接收通知的 endpoint，根据协议 protocol 区分：对于 HTTP，endpoint 必须以http://开头，host 可以是域名或 IP；对于 queue，则填 queueName。 */
-  Endpoint: string | null;
-  /** 描述用户创建订阅时选择的过滤策略：filterType = 1表示用户使用 filterTag 标签过滤filterType = 2表示用户使用 bindingKey 过滤。 */
-  FilterTags: string[] | null;
-  /** 订阅的协议，目前支持两种协议：HTTP、queue。使用 HTTP 协议，用户需自己搭建接受消息的 Web Server。使用 queue，消息会自动推送到 CMQ queue，用户可以并发地拉取消息。 */
-  Protocol: string | null;
+  Endpoint?: string | null;
+  /** 订阅拥有者的 APPID。 */
+  TopicOwner?: number | null;
   /** 向 endpoint 推送消息出现错误时，CMQ 推送服务器的重试策略。取值有：（1）BACKOFF_RETRY，退避重试。每隔一定时间重试一次，重试够一定次数后，就把该消息丢弃，继续推送下一条消息；（2）EXPONENTIAL_DECAY_RETRY，指数衰退重试。每次重试的间隔是指数递增的，例如开始 1s，后面是 2s，4s，8s...由于 Topic 消息的周期是一天，所以最多重试一天就把消息丢弃。默认值是 EXPONENTIAL_DECAY_RETRY。 */
-  NotifyStrategy: string | null;
+  NotifyStrategy?: string | null;
   /** 推送内容的格式。取值：（1）JSON；（2）SIMPLIFIED，即 raw 格式。如果 protocol 是 queue，则取值必须为 SIMPLIFIED。如果 protocol 是 HTTP，两个值均可以，默认值是 JSON。 */
-  NotifyContentFormat: string | null;
+  NotifyContentFormat?: string | null;
+  /** 最后一次修改订阅属性的时间。返回 Unix 时间戳，精确到秒。 */
+  LastModifyTime?: number | null;
+  /** 描述用户创建订阅时选择的过滤策略：filterType = 1表示用户使用 filterTag 标签过滤filterType = 2表示用户使用 bindingKey 过滤。 */
+  FilterTags?: string[] | null;
+  /** 订阅名字，在单个地域同一账号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
+  SubscriptionName?: string | null;
+  /** 订阅的协议，目前支持两种协议：HTTP、queue。使用 HTTP 协议，用户需自己搭建接受消息的 Web Server。使用 queue，消息会自动推送到 CMQ queue，用户可以并发地拉取消息。 */
+  Protocol?: string | null;
+  /** 订阅 ID。订阅 ID 在拉取监控数据时会用到。 */
+  SubscriptionId?: string | null;
+  /** 订阅的创建时间。返回 Unix 时间戳，精确到秒。 */
+  CreateTime?: number | null;
 }
 
 /** 标签 */
@@ -483,23 +483,23 @@ declare interface UnbindDeadLetterResponse {
 /** {@link Cmq 消息队列 CMQ} */
 declare interface Cmq {
   (): Versions;
-  /** 清空消息队列中的消息 {@link ClearQueueRequest} {@link ClearQueueResponse} */
+  /** @deprecated 清空消息队列中的消息 {@link ClearQueueRequest} {@link ClearQueueResponse} */
   ClearQueue(data: ClearQueueRequest, config?: AxiosRequestConfig): AxiosPromise<ClearQueueResponse>;
-  /** 清空订阅者消息标签 {@link ClearSubscriptionFilterTagsRequest} {@link ClearSubscriptionFilterTagsResponse} */
+  /** @deprecated 清空订阅者消息标签 {@link ClearSubscriptionFilterTagsRequest} {@link ClearSubscriptionFilterTagsResponse} */
   ClearSubscriptionFilterTags(data: ClearSubscriptionFilterTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ClearSubscriptionFilterTagsResponse>;
   /** 创建队列接口 {@link CreateQueueRequest} {@link CreateQueueResponse} */
   CreateQueue(data: CreateQueueRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQueueResponse>;
-  /** 创建订阅接口 {@link CreateSubscribeRequest} {@link CreateSubscribeResponse} */
+  /** @deprecated 创建订阅接口 {@link CreateSubscribeRequest} {@link CreateSubscribeResponse} */
   CreateSubscribe(data: CreateSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubscribeResponse>;
   /** 创建主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
   /** 删除队列 {@link DeleteQueueRequest} {@link DeleteQueueResponse} */
   DeleteQueue(data: DeleteQueueRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQueueResponse>;
-  /** 删除订阅 {@link DeleteSubscribeRequest} {@link DeleteSubscribeResponse} */
+  /** @deprecated 删除订阅 {@link DeleteSubscribeRequest} {@link DeleteSubscribeResponse} */
   DeleteSubscribe(data: DeleteSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSubscribeResponse>;
-  /** 删除主题 {@link DeleteTopicRequest} {@link DeleteTopicResponse} */
+  /** @deprecated 删除主题 {@link DeleteTopicRequest} {@link DeleteTopicResponse} */
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
-  /** 枚举死信队列源队列 {@link DescribeDeadLetterSourceQueuesRequest} {@link DescribeDeadLetterSourceQueuesResponse} */
+  /** @deprecated 枚举死信队列源队列 {@link DescribeDeadLetterSourceQueuesRequest} {@link DescribeDeadLetterSourceQueuesResponse} */
   DescribeDeadLetterSourceQueues(data: DescribeDeadLetterSourceQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeadLetterSourceQueuesResponse>;
   /** 枚举队列 {@link DescribeQueueDetailRequest} {@link DescribeQueueDetailResponse} */
   DescribeQueueDetail(data?: DescribeQueueDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQueueDetailResponse>;
@@ -509,13 +509,13 @@ declare interface Cmq {
   DescribeTopicDetail(data?: DescribeTopicDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicDetailResponse>;
   /** 修改队列属性 {@link ModifyQueueAttributeRequest} {@link ModifyQueueAttributeResponse} */
   ModifyQueueAttribute(data: ModifyQueueAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyQueueAttributeResponse>;
-  /** 修改订阅属性 {@link ModifySubscriptionAttributeRequest} {@link ModifySubscriptionAttributeResponse} */
+  /** @deprecated 修改订阅属性 {@link ModifySubscriptionAttributeRequest} {@link ModifySubscriptionAttributeResponse} */
   ModifySubscriptionAttribute(data: ModifySubscriptionAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubscriptionAttributeResponse>;
-  /** 修改主题属性 {@link ModifyTopicAttributeRequest} {@link ModifyTopicAttributeResponse} */
+  /** @deprecated 修改主题属性 {@link ModifyTopicAttributeRequest} {@link ModifyTopicAttributeResponse} */
   ModifyTopicAttribute(data: ModifyTopicAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicAttributeResponse>;
-  /** 回溯队列 {@link RewindQueueRequest} {@link RewindQueueResponse} */
+  /** @deprecated 回溯队列 {@link RewindQueueRequest} {@link RewindQueueResponse} */
   RewindQueue(data: RewindQueueRequest, config?: AxiosRequestConfig): AxiosPromise<RewindQueueResponse>;
-  /** 解绑死信队列 {@link UnbindDeadLetterRequest} {@link UnbindDeadLetterResponse} */
+  /** @deprecated 解绑死信队列 {@link UnbindDeadLetterRequest} {@link UnbindDeadLetterResponse} */
   UnbindDeadLetter(data: UnbindDeadLetterRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindDeadLetterResponse>;
 }
 

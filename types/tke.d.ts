@@ -915,6 +915,8 @@ declare namespace V20180525 {
     Phase?: string | null;
     /** addon失败的原因 */
     Reason?: string | null;
+    /** addon的创建时间 */
+    CreateTime?: string;
   }
 
   /** 注释 */
@@ -3358,13 +3360,13 @@ declare namespace V20180525 {
   /** 集群日志开关集合 */
   interface Switch {
     /** 集群ID */
-    ClusterId: string;
+    ClusterId?: string;
     /** 审计开关的详细信息 */
-    Audit: SwitchInfo | null;
+    Audit?: SwitchInfo | null;
     /** 事件开关的详细信息 */
-    Event: SwitchInfo | null;
+    Event?: SwitchInfo | null;
     /** 普通日志的详细信息 */
-    Log: SwitchInfo | null;
+    Log?: SwitchInfo | null;
     /** master 日志详细信息 */
     MasterLog?: SwitchInfo | null;
   }
@@ -4761,9 +4763,9 @@ declare namespace V20180525 {
   }
 
   interface DescribeAddonValuesResponse {
-    /** 参数列表，如果addon已安装，会使用已设置的参数做渲染，是一个json格式的字符串 */
+    /** 参数列表，如果addon已安装，会使用已设置的参数和chart里的默认参数做渲染，是一个json格式的字符串，未安装addon时返回为空值。 */
     Values?: string;
-    /** addon支持的参数列表，使用默认值，是一个json格式的字符串 */
+    /** addon支持的参数列表，值为chart的默认值，是一个json格式的字符串。 */
     DefaultValues?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
@@ -6686,7 +6688,7 @@ declare namespace V20180525 {
   }
 
   interface InstallAddonRequest {
-    /** 集群ID */
+    /** 集群ID（仅支持标准tke集群） */
     ClusterId: string;
     /** addon名称 */
     AddonName: string;

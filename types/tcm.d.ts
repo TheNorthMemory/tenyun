@@ -557,7 +557,7 @@ declare interface CreateMeshRequest {
 
 declare interface CreateMeshResponse {
   /** 创建的Mesh的Id */
-  MeshId: string;
+  MeshId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

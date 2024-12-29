@@ -5,15 +5,15 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** apiGateway实例详情 */
 declare interface ApiGatewayInstanceDetail {
   /** 实例ID */
-  ServiceId: string;
+  ServiceId?: string;
   /** 实例名称 */
-  ServiceName: string;
+  ServiceName?: string;
   /** 域名 */
-  Domain: string;
+  Domain?: string;
   /** 证书ID */
-  CertId: string | null;
+  CertId?: string | null;
   /** 使用协议 */
-  Protocol: string;
+  Protocol?: string;
 }
 
 /** apigateway实例详情 - 异步关联云资源数据结构 */
@@ -259,11 +259,11 @@ declare interface Certificates {
 /** clb实例详情 */
 declare interface ClbInstanceDetail {
   /** CLB实例ID */
-  LoadBalancerId: string;
+  LoadBalancerId?: string;
   /** CLB实例名称 */
-  LoadBalancerName: string;
+  LoadBalancerName?: string;
   /** CLB监听器列表 */
-  Listeners: ClbListener[] | null;
+  Listeners?: ClbListener[] | null;
 }
 
 /** clb实例详情 - 异步关联云资源数据结构 */
@@ -281,17 +281,17 @@ declare interface ClbInstanceList {
 /** CLB实例监听器 */
 declare interface ClbListener {
   /** 监听器ID */
-  ListenerId: string;
+  ListenerId?: string;
   /** 监听器名称 */
-  ListenerName: string;
+  ListenerName?: string;
   /** 是否开启SNI，1为开启，0为关闭 */
-  SniSwitch: number;
+  SniSwitch?: number;
   /** 监听器协议类型， HTTPS|TCP_SSL */
-  Protocol: string;
+  Protocol?: string;
   /** 监听器绑定的证书数据 */
-  Certificate: Certificate | null;
+  Certificate?: Certificate | null;
   /** 监听器规则列表 */
-  Rules: ClbListenerRule[] | null;
+  Rules?: ClbListenerRule[] | null;
   /** 不匹配域名列表 */
   NoMatchDomains?: string[] | null;
 }
@@ -339,29 +339,29 @@ declare interface CompanyInfo {
 /** COS实例详情 */
 declare interface CosInstanceDetail {
   /** 域名 */
-  Domain: string;
+  Domain?: string;
   /** 已绑定的证书ID */
-  CertId: string | null;
+  CertId?: string | null;
   /** ENABLED: 域名上线状态DISABLED:域名下线状态 */
-  Status: string;
+  Status?: string;
   /** 存储桶名称 */
-  Bucket: string | null;
+  Bucket?: string | null;
   /** 存储桶地域 */
-  Region: string | null;
+  Region?: string | null;
 }
 
 /** ddos复杂类型 */
 declare interface DdosInstanceDetail {
   /** 域名 */
-  Domain: string;
+  Domain?: string;
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 协议类型 */
-  Protocol: string;
+  Protocol?: string;
   /** 证书ID */
-  CertId: string | null;
+  CertId?: string | null;
   /** 转发端口 */
-  VirtualPort: string;
+  VirtualPort?: string;
 }
 
 /** ddos实例详情 - 异步关联云资源数据结构 */
@@ -441,19 +441,19 @@ declare interface DeployRecordDetail {
 /** 部署记录信息 */
 declare interface DeployRecordInfo {
   /** 部署记录ID */
-  Id: number;
+  Id?: number;
   /** 部署证书ID */
-  CertId: string;
+  CertId?: string;
   /** 部署资源类型 */
-  ResourceType: string;
+  ResourceType?: string;
   /** 部署地域 */
-  Region: string;
+  Region?: string;
   /** 部署状态 */
-  Status: number;
+  Status?: number;
   /** 部署时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 最近一次更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** 资源详情 */
@@ -473,21 +473,21 @@ declare interface DeployedResources {
 /** 域名验证结果 */
 declare interface DomainValidationResult {
   /** 域名。 */
-  Domain: string;
+  Domain?: string;
   /** 验证类型。 */
-  VerifyType: string | null;
+  VerifyType?: string | null;
   /** 本地检查结果。 */
-  LocalCheck: number;
+  LocalCheck?: number;
   /** CA检查结果。 */
-  CaCheck: number;
+  CaCheck?: number;
   /** 检查失败原因。 */
-  LocalCheckFailReason: string | null;
+  LocalCheckFailReason?: string | null;
   /** 检查到的值。 */
-  CheckValue: string[] | null;
+  CheckValue?: string[] | null;
   /** 是否频繁请求。 */
-  Frequently: boolean;
+  Frequently?: boolean;
   /** 是否已经签发。 */
-  Issued: boolean;
+  Issued?: boolean;
 }
 
 /** 获取证书列表（DescribeCertificate）返回参数键为 DvAuthDetail 的内容。 */
@@ -567,23 +567,23 @@ declare interface HostingConfig {
 /** Lighthouse实例 */
 declare interface LighthouseInstanceDetail {
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例名称 */
-  InstanceName: string;
+  InstanceName?: string;
   /** IP地址 */
-  IP: string[];
+  IP?: string[];
   /** 可选择域名 */
-  Domain: string[];
+  Domain?: string[];
 }
 
 /** live实例详情 */
 declare interface LiveInstanceDetail {
   /** 域名 */
-  Domain: string;
+  Domain?: string;
   /** 已绑定的证书ID */
-  CertId: string | null;
+  CertId?: string | null;
   /** -1：域名未关联证书。1： 域名https已开启。0： 域名https已关闭。 */
-  Status: number;
+  Status?: number;
 }
 
 /** live实例详情 - 异步关联云资源数据结构 */
@@ -663,61 +663,61 @@ declare interface OperationLog {
 /** 权益包基本信息 */
 declare interface PackageInfo {
   /** 权益包ID。 */
-  PackageId: string;
+  PackageId?: string;
   /** 权益包内权益点总量。 */
-  Total: number;
+  Total?: number;
   /** 权益包内权益点余量。 */
-  Balance: number;
+  Balance?: number;
   /** 权益包名称。 */
-  Type: string;
+  Type?: string;
   /** 权益点是转入时，来源信息。 */
-  SourceUin: number | null;
+  SourceUin?: number | null;
   /** 权益点状态。 */
-  Status: string;
+  Status?: string;
   /** 过期时间。 */
-  ExpireTime: string;
+  ExpireTime?: string;
   /** 更新时间。 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 生成时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 来源类型。 */
-  SourceType: string;
+  SourceType?: string;
   /** 转移信息。 */
-  TransferOutInfos: PackageTransferOutInfo[] | null;
+  TransferOutInfos?: PackageTransferOutInfo[] | null;
 }
 
 /** 权益包转出详情 */
 declare interface PackageTransferOutInfo {
   /** 权益包ID。 */
-  PackageId: string;
+  PackageId?: string;
   /** 转移码。 */
-  TransferCode: string;
+  TransferCode?: string;
   /** 本次转移点数。 */
-  TransferCount: number;
+  TransferCount?: number;
   /** 转入的PackageID。 */
-  ReceivePackageId: string | null;
+  ReceivePackageId?: string | null;
   /** 本次转移过期时间。 */
-  ExpireTime: string;
+  ExpireTime?: string;
   /** 本次转移生成时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 本次转移更新时间。 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 转移状态。 */
-  TransferStatus: string;
+  TransferStatus?: string;
   /** 接收者uin。 */
-  ReceiverUin: number | null;
+  ReceiverUin?: number | null;
   /** 接收时间。 */
-  ReceiveTime: string | null;
+  ReceiveTime?: string | null;
 }
 
 /** 预审核信息列表 */
 declare interface PreAuditInfo {
   /** 证书总年限 */
-  TotalPeriod: number | null;
+  TotalPeriod?: number | null;
   /** 证书当前年限 */
-  NowPeriod: number | null;
+  NowPeriod?: number | null;
   /** 证书预审核管理人ID */
-  ManagerId: string | null;
+  ManagerId?: string | null;
 }
 
 /** 获取证书列表（DescribeCertificates）返回参数键为 Certificates 下，key为 ProjectInfo 的内容。 */
@@ -739,9 +739,9 @@ declare interface ProjectInfo {
 /** 云资源地域列表 */
 declare interface ResourceTypeRegions {
   /** 云资源类型 */
-  ResourceType?: string | null;
+  ResourceType?: string;
   /** 地域列表 */
-  Regions?: string[] | null;
+  Regions?: string[];
 }
 
 /** 返回参数键为 RevokeDomainValidateAuths 的内容。 */
@@ -961,9 +961,9 @@ declare interface Tags {
 /** teo实例详情 */
 declare interface TeoInstanceDetail {
   /** 域名 */
-  Host: string;
+  Host?: string;
   /** 证书ID */
-  CertId: string;
+  CertId?: string;
   /** 区域ID */
   ZoneId?: string | null;
   /** 域名状态 */
@@ -983,11 +983,11 @@ declare interface TeoInstanceList {
 /** tke ingress实例详情 */
 declare interface TkeIngressDetail {
   /** ingress名称 */
-  IngressName: string;
+  IngressName?: string;
   /** tls域名列表 */
-  TlsDomains: string[];
+  TlsDomains?: string[];
   /** ingress域名列表 */
-  Domains: string[];
+  Domains?: string[];
 }
 
 /** tke实例详情 */
@@ -1019,21 +1019,21 @@ declare interface TkeInstanceList {
 /** tke namespace详情 */
 declare interface TkeNameSpaceDetail {
   /** namespace名称 */
-  Name: string;
+  Name?: string;
   /** secret列表 */
-  SecretList: TkeSecretDetail[];
+  SecretList?: TkeSecretDetail[];
 }
 
 /** tke secret详情 */
 declare interface TkeSecretDetail {
   /** secret名称 */
-  Name: string;
+  Name?: string;
   /** 证书ID */
-  CertId: string;
+  CertId?: string;
   /** ingress列表 */
-  IngressList: TkeIngressDetail[];
+  IngressList?: TkeIngressDetail[];
   /** 和新证书不匹配的域名列表 */
-  NoMatchDomains: string[] | null;
+  NoMatchDomains?: string[] | null;
 }
 
 /** 更新记录详情 */
@@ -1089,9 +1089,9 @@ declare interface UpdateRecordDetail {
 /** 更新记录详情列表 */
 declare interface UpdateRecordDetails {
   /** 部署资源类型 */
-  ResourceType: string;
+  ResourceType?: string;
   /** 部署资源详情列表 */
-  List: UpdateRecordDetail[];
+  List?: UpdateRecordDetail[];
   /** 该部署资源总数 */
   TotalCount?: number;
 }
@@ -1099,21 +1099,21 @@ declare interface UpdateRecordDetails {
 /** 部署记录信息 */
 declare interface UpdateRecordInfo {
   /** 记录ID */
-  Id: number;
+  Id?: number;
   /** 新证书ID */
-  CertId: string;
+  CertId?: string;
   /** 原证书ID */
-  OldCertId: string;
+  OldCertId?: string;
   /** 部署资源类型列表 */
-  ResourceTypes: string[];
+  ResourceTypes?: string[];
   /** 部署地域列表 */
-  Regions: string[] | null;
+  Regions?: string[] | null;
   /** 部署状态 */
-  Status: number;
+  Status?: number;
   /** 部署时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 最后一次更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** 更新异步任务进度 */
@@ -1475,7 +1475,7 @@ declare interface DeployCertificateRecordRollbackResponse {
 }
 
 declare interface DescribeCertificateBindResourceTaskDetailRequest {
-  /** 任务ID，根据任务ID查询绑定云资源结果 */
+  /** 任务ID，根据CreateCertificateBindResourceSyncTask得到的任务ID查询绑定云资源结果 */
   TaskId: string;
   /** 每页展示数量， 默认10，最大值100; 分页总数为云资源地域下实例总数， 即第一页会拉群每个云资源的地域下面Limit数量实例 */
   Limit?: string;
@@ -2085,12 +2085,12 @@ declare interface DescribeHostTeoInstanceListRequest {
   Offset?: number;
   /** 每页数量，默认10。 */
   Limit?: number;
-  /** 是否异步 */
+  /** 是否异步，1表示是，0表示否，默认为0 */
   AsyncCache?: number;
 }
 
 declare interface DescribeHostTeoInstanceListResponse {
-  /** teo实例列表 */
+  /** teo实例列表，如取不到值返回空数组 */
   InstanceList?: TeoInstanceDetail[] | null;
   /** 总数 */
   TotalCount?: number;

@@ -4622,6 +4622,14 @@ declare interface SegmentRecognitionItem {
   BeginTime?: string | null;
   /** 直播切片对应直播结束时间点，采用 ISO 日期格式。 */
   EndTime?: string | null;
+  /** 直播拆条用，音频url。 */
+  AudioUrl?: string;
+  /** 直播拆条用，音频对应起始时间戳； */
+  AudioBeginTime?: number;
+  /** 直播拆条用，音频对应结束时间戳。 */
+  AudioEndTime?: number;
+  /** 直播拆条用，人物位置参考信息用于横转竖。 */
+  PersonPositionUrl?: string;
 }
 
 /** 切片特殊配置信息。 */

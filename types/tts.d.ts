@@ -45,7 +45,7 @@ declare interface CreateTtsTaskRequest {
   Text: string;
   /** 音量大小，范围[-10，10]，对应音量大小。默认为0，代表正常音量，值越大音量越高。 */
   Volume?: number;
-  /** 语速，范围：[-2，2]，分别对应不同语速：-2代表0.6倍-1代表0.8倍0代表1.0倍（默认）1代表1.2倍2代表1.5倍如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。参数值与实际语速转换，可参考[代码示例](https://sdk-1300466766.cos.ap-shanghai.myqcloud.com/sample/speed_sample.tar.gz) */
+  /** 语速，范围：[-2，6]，分别对应不同语速：-2代表0.6倍-1代表0.8倍0代表1.0倍（默认）1代表1.2倍2代表1.5倍6代表2.5倍如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。参数值与实际语速转换，可参考[代码示例](https://sdk-1300466766.cos.ap-shanghai.myqcloud.com/sample/speed_sample.tar.gz) */
   Speed?: number;
   /** 项目id，用户自定义，默认为0。 */
   ProjectId?: number;

@@ -307,31 +307,31 @@ declare interface SpanTag {
 }
 
 declare interface CreateApmInstanceRequest {
-  /** 实例名 */
+  /** 业务系统名 */
   Name: string;
-  /** 实例描述信息 */
+  /** 业务系统描述信息 */
   Description?: string;
   /** Trace数据保存时长，单位为天默认存储为3天 */
   TraceDuration?: number;
   /** 标签列表 */
   Tags?: ApmTag[];
-  /** 实例上报额度值，默认赋值为0表示不限制上报额度 */
+  /** 业务系统上报额度值，默认赋值为0表示不限制上报额度 */
   SpanDailyCounters?: number;
-  /** 实例的计费模式 */
+  /** 业务系统的计费模式 */
   PayMode?: number;
   /** （0=付费版；1=tsf受限免费版；2=免费版） */
   Free?: number;
 }
 
 declare interface CreateApmInstanceResponse {
-  /** 实例ID */
+  /** 业务系统ID */
   InstanceId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeApmAgentRequest {
-  /** 实例ID */
+  /** 业务系统ID */
   InstanceId: string;
   /** 接入方式 */
   AgentType?: string;
@@ -423,7 +423,7 @@ declare interface DescribeGeneralSpanListRequest {
   OrderBy?: OrderBy;
   /** span查询开始时间戳（单位:秒） */
   StartTime?: number;
-  /** 实例名 */
+  /** 业务系统ID */
   InstanceId?: string;
   /** 通用过滤参数 */
   Filters?: Filter[];
@@ -435,9 +435,9 @@ declare interface DescribeGeneralSpanListRequest {
 
 declare interface DescribeGeneralSpanListResponse {
   /** 总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** Span分页列表 */
-  Spans: Span[];
+  Spans?: Span[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -451,7 +451,7 @@ declare interface DescribeMetricRecordsRequest {
   GroupBy: string[];
   /** 排序 */
   OrderBy?: OrderBy;
-  /** 实例ID */
+  /** 业务系统ID */
   InstanceId?: string;
   /** 每页大小 */
   Limit?: number;
@@ -491,7 +491,7 @@ declare interface DescribeServiceOverviewRequest {
   GroupBy: string[];
   /** 排序 */
   OrderBy?: OrderBy;
-  /** 实例ID */
+  /** 业务系统ID */
   InstanceId?: string;
   /** 每页大小 */
   Limit?: number;
@@ -505,7 +505,7 @@ declare interface DescribeServiceOverviewRequest {
 
 declare interface DescribeServiceOverviewResponse {
   /** 指标结果集 */
-  Records: ApmMetricRecord[] | null;
+  Records?: ApmMetricRecord[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -513,7 +513,7 @@ declare interface DescribeServiceOverviewResponse {
 declare interface DescribeTagValuesRequest {
   /** 维度名 */
   TagKey: string;
-  /** 实例ID */
+  /** 业务系统ID */
   InstanceId?: string;
   /** 结束时间 */
   EndTime?: number;
@@ -535,19 +535,19 @@ declare interface DescribeTagValuesResponse {
 }
 
 declare interface ModifyApmInstanceRequest {
-  /** 实例ID */
+  /** 业务系统ID */
   InstanceId: string;
-  /** 实例名 */
+  /** 业务系统名 */
   Name: string;
   /** 标签列表 */
   Tags?: ApmTag[];
-  /** 实例详情 */
+  /** 业务系统详情 */
   Description?: string;
   /** Trace数据保存时长 */
   TraceDuration?: number;
   /** 是否开启计费 */
   OpenBilling?: boolean;
-  /** 实例上报额度 */
+  /** 业务系统上报额度 */
   SpanDailyCounters?: number;
   /** 错误率阈值 */
   ErrRateThreshold?: number;
@@ -607,7 +607,7 @@ declare interface ModifyGeneralApmApplicationConfigResponse {
 }
 
 declare interface TerminateApmInstanceRequest {
-  /** 实例ID */
+  /** 业务系统ID */
   InstanceId: string;
 }
 
@@ -619,9 +619,9 @@ declare interface TerminateApmInstanceResponse {
 /** {@link Apm 应用性能监控} */
 declare interface Apm {
   (): Versions;
-  /** 创建APM实例 {@link CreateApmInstanceRequest} {@link CreateApmInstanceResponse} */
+  /** 创建APM业务系统 {@link CreateApmInstanceRequest} {@link CreateApmInstanceResponse} */
   CreateApmInstance(data: CreateApmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApmInstanceResponse>;
-  /** 获取APM Agent信息 {@link DescribeApmAgentRequest} {@link DescribeApmAgentResponse} */
+  /** 获取 APM Agent信息 {@link DescribeApmAgentRequest} {@link DescribeApmAgentResponse} */
   DescribeApmAgent(data: DescribeApmAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmAgentResponse>;
   /** 拉取APM实例列表 {@link DescribeApmInstancesRequest} {@link DescribeApmInstancesResponse} */
   DescribeApmInstances(data?: DescribeApmInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmInstancesResponse>;
@@ -633,15 +633,15 @@ declare interface Apm {
   DescribeGeneralSpanList(data: DescribeGeneralSpanListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralSpanListResponse>;
   /** 通用指标列表接口 {@link DescribeMetricRecordsRequest} {@link DescribeMetricRecordsResponse} */
   DescribeMetricRecords(data: DescribeMetricRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMetricRecordsResponse>;
-  /** 获取服务概览数据 {@link DescribeServiceOverviewRequest} {@link DescribeServiceOverviewResponse} */
+  /** 获取应用概览数据 {@link DescribeServiceOverviewRequest} {@link DescribeServiceOverviewResponse} */
   DescribeServiceOverview(data: DescribeServiceOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceOverviewResponse>;
   /** 查询 Tag 数据 {@link DescribeTagValuesRequest} {@link DescribeTagValuesResponse} */
   DescribeTagValues(data: DescribeTagValuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagValuesResponse>;
-  /** 修改APM实例 {@link ModifyApmInstanceRequest} {@link ModifyApmInstanceResponse} */
+  /** 修改APM业务系统 {@link ModifyApmInstanceRequest} {@link ModifyApmInstanceResponse} */
   ModifyApmInstance(data: ModifyApmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApmInstanceResponse>;
   /** 修改应用配置信息 {@link ModifyGeneralApmApplicationConfigRequest} {@link ModifyGeneralApmApplicationConfigResponse} */
   ModifyGeneralApmApplicationConfig(data: ModifyGeneralApmApplicationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGeneralApmApplicationConfigResponse>;
-  /** 销毁实例 {@link TerminateApmInstanceRequest} {@link TerminateApmInstanceResponse} */
+  /** 销毁业务系统 {@link TerminateApmInstanceRequest} {@link TerminateApmInstanceResponse} */
   TerminateApmInstance(data: TerminateApmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateApmInstanceResponse>;
 }
 

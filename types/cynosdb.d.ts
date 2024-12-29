@@ -7,35 +7,35 @@ declare interface Ability {
   /** 是否支持从可用区 */
   IsSupportSlaveZone: string;
   /** 不支持从可用区的原因 */
-  NonsupportSlaveZoneReason: string | null;
+  NonsupportSlaveZoneReason: string;
   /** 是否支持RO实例 */
   IsSupportRo: string;
   /** 不支持RO实例的原因 */
-  NonsupportRoReason: string | null;
+  NonsupportRoReason: string;
   /** 是否支持手动发起快照备份 */
-  IsSupportManualSnapshot: string | null;
+  IsSupportManualSnapshot: string;
   /** 是否支持透明数据加密 */
-  IsSupportTransparentDataEncryption?: string | null;
+  IsSupportTransparentDataEncryption?: string;
   /** 不支持透明数据加密原因 */
-  NoSupportTransparentDataEncryptionReason?: string | null;
+  NoSupportTransparentDataEncryptionReason?: string;
   /** 是否支持手动发起逻辑备份 */
-  IsSupportManualLogic?: string | null;
+  IsSupportManualLogic?: string;
 }
 
 /** 数据库账号信息 */
 declare interface Account {
   /** 数据库账号名 */
-  AccountName: string;
+  AccountName?: string;
   /** 数据库账号描述 */
-  Description: string;
+  Description?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 主机 */
-  Host: string;
+  Host?: string;
   /** 用户最大连接数 */
-  MaxUserConnections: number;
+  MaxUserConnections?: number;
 }
 
 /** 账号参数 */
@@ -110,7 +110,7 @@ declare interface AuditLog {
   IoWaitTime?: number | null;
   /** 锁等待时间，微秒。 */
   LockWaitTime?: number | null;
-  /** 事物持续等待时间，微秒。 */
+  /** 事务持续等待时间，微秒。 */
   TrxLivingTime?: number | null;
   /** 开始时间，与timestamp构成一个精确到纳秒的时间。 */
   NsTime?: number | null;
@@ -123,17 +123,17 @@ declare interface AuditLog {
 /** 审计日志文件 */
 declare interface AuditLogFile {
   /** 审计日志文件名称 */
-  FileName: string;
+  FileName?: string;
   /** 审计日志文件创建时间。格式为 : "2019-03-20 17:09:13"。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 文件状态值。可能返回的值为："creating" - 生成中;"failed" - 创建失败;"success" - 已生成; */
-  Status: string;
+  Status?: string;
   /** 文件大小，单位为 KB。 */
-  FileSize: number | null;
+  FileSize?: number;
   /** 审计日志下载地址。 */
-  DownloadUrl: string | null;
+  DownloadUrl?: string;
   /** 错误信息。 */
-  ErrMsg: string | null;
+  ErrMsg?: string;
 }
 
 /** 审计日志过滤条件。查询审计日志时，用户过滤返回的审计日志。 */
@@ -227,11 +227,11 @@ declare interface BackupFileInfo {
 /** 计费资源信息 */
 declare interface BillingResourceInfo {
   /** 集群ID */
-  ClusterId: string;
+  ClusterId?: string;
   /** 实例ID列表 */
-  InstanceIds: string[];
+  InstanceIds?: string[];
   /** 订单ID */
-  DealName: string;
+  DealName?: string;
 }
 
 /** 资源包绑定的实例信息 */
@@ -423,21 +423,21 @@ declare interface ClusterInstanceDetail {
 /** 参数修改记录 */
 declare interface ClusterParamModifyLog {
   /** 参数名称 */
-  ParamName: string;
+  ParamName?: string;
   /** 当前值 */
-  CurrentValue: string;
+  CurrentValue?: string;
   /** 修改后的值 */
-  UpdateValue: string;
+  UpdateValue?: string;
   /** 修改状态 */
-  Status: string;
+  Status?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 集群ID */
-  ClusterId: string;
+  ClusterId?: string;
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
 }
 
 /** 集群从可用区信息 */
@@ -673,11 +673,11 @@ declare interface CynosdbClusterDetail {
 /** 实例错误日志返回类型 */
 declare interface CynosdbErrorLogItem {
   /** 日志时间戳 */
-  Timestamp?: number | null;
+  Timestamp?: number;
   /** 日志等级 */
-  Level?: string | null;
+  Level?: string;
   /** 日志内容 */
-  Content?: string | null;
+  Content?: string;
 }
 
 /** 实例信息 */
@@ -867,7 +867,7 @@ declare interface CynosdbInstanceDetail {
   /** serverless实例cpu上限 */
   MaxCpu?: number;
   /** Db类型:NORMALSERVERLESS */
-  DbMode?: string | null;
+  DbMode?: string;
 }
 
 /** 实例组信息 */
@@ -884,7 +884,7 @@ declare interface CynosdbInstanceGroup {
   InstanceGroupId?: string;
   /** 状态 */
   Status?: string;
-  /** 实例组类型。ha-ha组；ro-只读组 */
+  /** 实例组（网络）类型。ha-ha组；ro-只读组；proxy-代理；singleRo-只读实例独占 */
   Type?: string;
   /** 更新时间 */
   UpdatedTime?: string;
@@ -1627,23 +1627,23 @@ declare interface ProxyConnectionPoolInfo {
 /** proxy组 */
 declare interface ProxyGroup {
   /** 数据库代理组ID */
-  ProxyGroupId: string;
+  ProxyGroupId?: string;
   /** 数据库代理组节点个数 */
-  ProxyNodeCount: number;
+  ProxyNodeCount?: number;
   /** 数据库代理组状态 */
-  Status: string;
+  Status?: string;
   /** 地域 */
-  Region: string;
+  Region?: string;
   /** 可用区 */
-  Zone: string;
+  Zone?: string;
   /** 当前代理版本 */
-  CurrentProxyVersion: string;
+  CurrentProxyVersion?: string;
   /** 集群ID */
-  ClusterId: string | null;
+  ClusterId?: string | null;
   /** 用户AppId */
-  AppId: number | null;
+  AppId?: number | null;
   /** 读写节点开通数据库代理 */
-  OpenRw: string | null;
+  OpenRw?: string | null;
 }
 
 /** 数据库代理组详细信息 */
@@ -1723,9 +1723,9 @@ declare interface ProxyNodeInfo {
 /** 数据库代理规格 */
 declare interface ProxySpec {
   /** 数据库代理cpu核数 */
-  Cpu: number;
+  Cpu?: number;
   /** 数据库代理内存 */
-  Mem: number;
+  Mem?: number;
 }
 
 /** TDSQL-C MySQL支持的proxy版本信息 */
@@ -1897,9 +1897,9 @@ declare interface RollbackTableInfo {
 /** 可回档的时间范围 */
 declare interface RollbackTimeRange {
   /** 开始时间 */
-  TimeRangeStart: string;
+  TimeRangeStart?: string;
   /** 结束时间 */
-  TimeRangeEnd: string;
+  TimeRangeEnd?: string;
 }
 
 /** 审计规则的规则过滤条件 */
@@ -2939,7 +2939,7 @@ declare interface DescribeAuditLogFilesResponse {
 }
 
 declare interface DescribeAuditLogsRequest {
-  /** 实例ID */
+  /** 实例 ID。 */
   InstanceId: string;
   /** 开始时间，格式为："2017-07-12 10:29:20"。 */
   StartTime: string;
@@ -2953,7 +2953,7 @@ declare interface DescribeAuditLogsRequest {
   Filter?: AuditLogFilter;
   /** 分页参数，单次返回的数据条数。默认值为100，最大值为100。 */
   Limit?: number;
-  /** 分页偏移量。 */
+  /** 分页偏移量。说明：Limit 和 Offset 的取值之和需小于等于65536。 */
   Offset?: number;
   /** 过滤条件。多个值之前是且的关系。 */
   LogFilter?: InstanceAuditLogFilter[];

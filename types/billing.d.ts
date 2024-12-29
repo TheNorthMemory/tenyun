@@ -2242,6 +2242,10 @@ declare interface VoucherInfos {
   ApplicableProducts?: ApplicableProducts;
   /** 不适用商品信息 */
   ExcludedProducts?: ExcludedProducts[];
+  /** 使用说明/批次备注 */
+  PolicyRemark?: string;
+  /** 发券时间 */
+  CreateTime?: string;
 }
 
 declare interface CreateAllocationTagRequest {

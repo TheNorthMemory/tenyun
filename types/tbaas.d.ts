@@ -293,9 +293,9 @@ declare interface GetBlockTransactionListForUserRequest {
 
 declare interface GetBlockTransactionListForUserResponse {
   /** 交易总数量 */
-  TotalCount?: number;
+  TotalCount: number;
   /** 交易列表 */
-  TransactionList?: TransactionItem[];
+  TransactionList: TransactionItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -795,9 +795,9 @@ declare interface Tbaas {
   DescribeFabricTransaction(data: DescribeFabricTransactionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFabricTransactionResponse>;
   /** 下载用户证书 {@link DownloadUserCertRequest} {@link DownloadUserCertResponse} */
   DownloadUserCert(data: DownloadUserCertRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadUserCertResponse>;
-  /** 查询区块列表 {@link GetBlockListRequest} {@link GetBlockListResponse} */
+  /** 查询fabric的区块列表 {@link GetBlockListRequest} {@link GetBlockListResponse} */
   GetBlockList(data: GetBlockListRequest, config?: AxiosRequestConfig): AxiosPromise<GetBlockListResponse>;
-  /** 获取区块内的交易列表 {@link GetBlockTransactionListForUserRequest} {@link GetBlockTransactionListForUserResponse} */
+  /** 获取区块内交易列表 {@link GetBlockTransactionListForUserRequest} {@link GetBlockTransactionListForUserResponse} */
   GetBlockTransactionListForUser(data: GetBlockTransactionListForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetBlockTransactionListForUserResponse>;
   /** 获取区块链网络概要 {@link GetClusterSummaryRequest} {@link GetClusterSummaryResponse} */
   GetClusterSummary(data: GetClusterSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<GetClusterSummaryResponse>;
@@ -807,7 +807,7 @@ declare interface Tbaas {
   GetLatesdTransactionList(data: GetLatesdTransactionListRequest, config?: AxiosRequestConfig): AxiosPromise<GetLatesdTransactionListResponse>;
   /** 获取fabric最新交易列表 {@link GetLatestTransactionListRequest} {@link GetLatestTransactionListResponse} */
   GetLatestTransactionList(data: GetLatestTransactionListRequest, config?: AxiosRequestConfig): AxiosPromise<GetLatestTransactionListResponse>;
-  /** 获取交易详情 {@link GetTransactionDetailForUserRequest} {@link GetTransactionDetailForUserResponse} */
+  /** 获取交易的详情 {@link GetTransactionDetailForUserRequest} {@link GetTransactionDetailForUserResponse} */
   GetTransactionDetailForUser(data: GetTransactionDetailForUserRequest, config?: AxiosRequestConfig): AxiosPromise<GetTransactionDetailForUserResponse>;
   /** 新增交易 {@link InvokeRequest} {@link InvokeResponse} */
   Invoke(data: InvokeRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeResponse>;

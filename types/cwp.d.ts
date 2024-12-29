@@ -9322,16 +9322,6 @@ declare interface DescribeImportMachineInfoResponse {
   RequestId?: string;
 }
 
-declare interface DescribeIndexListRequest {
-}
-
-declare interface DescribeIndexListResponse {
-  /** ES 索引信息 */
-  Data: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeJavaMemShellInfoRequest {
   /** 事件Id */
   Id: number;
@@ -15373,8 +15363,6 @@ declare interface Cwp {
   DescribeIgnoreRuleEffectHostList(data: DescribeIgnoreRuleEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIgnoreRuleEffectHostListResponse>;
   /** 查询批量导入机器信息 {@link DescribeImportMachineInfoRequest} {@link DescribeImportMachineInfoResponse} */
   DescribeImportMachineInfo(data: DescribeImportMachineInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImportMachineInfoResponse>;
-  /** @deprecated 获取索引列表 {@link DescribeIndexListRequest} {@link DescribeIndexListResponse} */
-  DescribeIndexList(data?: DescribeIndexListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexListResponse>;
   /** 查询java内存马事件详细信息 {@link DescribeJavaMemShellInfoRequest} {@link DescribeJavaMemShellInfoResponse} */
   DescribeJavaMemShellInfo(data: DescribeJavaMemShellInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJavaMemShellInfoResponse>;
   /** 查询java内存马事件列表 {@link DescribeJavaMemShellListRequest} {@link DescribeJavaMemShellListResponse} */

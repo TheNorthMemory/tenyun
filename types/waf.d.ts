@@ -224,6 +224,34 @@ declare interface ApiSecKey {
   Method: string;
 }
 
+/** 地域信息 */
+declare interface Area {
+  /** 国家，除了标准的国家外还支持国内、国外这两个特殊的标识 */
+  Country: string;
+  /** 省份 */
+  Region?: string;
+  /** 城市 */
+  City?: string;
+}
+
+/** 地域封禁规则详情 */
+declare interface AreaBanRule {
+  /** 状态 0：未开启地域封禁、1：开启地域封禁 */
+  Status?: number;
+  /** 数据来源 custom：自定义(默认)、batch：批量防护 */
+  Source?: string;
+  /** 配置的地域列表 */
+  Areas?: Area[];
+  /** 规则执行的方式，TimedJob为定时执行，CronJob为周期执行 */
+  JobType?: string;
+  /** 定时任务配置 */
+  JobDateTime?: JobDateTime;
+  /** 如果是周期任务类型，那么表示周期的类型，支持 Week：按周、Month：按月 */
+  CronType?: string;
+  /** 地域信息的语言，支持cn、en，默认为中文cn */
+  Lang?: string;
+}
+
 /** 攻击日志详情 */
 declare interface AttackLogInfo {
   /** 攻击日志的详情内容 */
@@ -2364,6 +2392,24 @@ declare interface CreateAccessExportResponse {
   RequestId?: string;
 }
 
+declare interface CreateAreaBanRuleRequest {
+  /** 需要修改的域名 */
+  Domain: string;
+  /** 需要新增的封禁地域 */
+  Areas: Area[];
+  /** 规则执行的方式，TimedJob为定时执行，CronJob为周期执行 */
+  JobType: string;
+  /** 定时任务配置 */
+  JobDateTime: JobDateTime;
+  /** 地域信息的语言，支持cn、en，默认为中文cn */
+  Lang: string;
+}
+
+declare interface CreateAreaBanRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDealsRequest {
   /** 计费下单入参 */
   Goods: CreateDealsGoods[];
@@ -2729,7 +2775,7 @@ declare interface DescribeAntiFakeRulesRequest {
   Filters?: FiltersItemNew[];
   /** asc或者desc */
   Order?: string;
-  /** 目前支持根据ts排序 */
+  /** 目前支持根据create_time、modify_time、id排序 */
   By?: string;
 }
 
@@ -2844,6 +2890,18 @@ declare interface DescribeAreaBanAreasRequest {
 declare interface DescribeAreaBanAreasResponse {
   /** 回包内容 */
   Data?: DescribeAreaBanAreasRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAreaBanRuleRequest {
+  /** 需要查询的域名 */
+  Domain: string;
+}
+
+declare interface DescribeAreaBanRuleResponse {
+  /** 规则内容 */
+  Data?: AreaBanRule;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4202,6 +4260,24 @@ declare interface ModifyAreaBanAreasResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAreaBanRuleRequest {
+  /** 需要修改的域名 */
+  Domain: string;
+  /** 需要新增的封禁地域 */
+  Areas: Area[];
+  /** 规则执行的方式，TimedJob为定时执行，CronJob为周期执行 */
+  JobType: string;
+  /** 定时任务配置 */
+  JobDateTime: JobDateTime;
+  /** 地域信息的语言，支持cn、en，默认为中文cn */
+  Lang?: string;
+}
+
+declare interface ModifyAreaBanRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAreaBanStatusRequest {
   /** 需要修改的域名 */
   Domain: string;
@@ -4651,7 +4727,7 @@ declare interface ModifyObjectResponse {
 declare interface ModifyProtectionStatusRequest {
   /** 域名 */
   Domain: string;
-  /** 状态 */
+  /** 1：开启WAF开关，0：关闭WAF开关 */
   Status: number;
   /** WAF的版本，clb-waf代表负载均衡WAF、sparta-waf代表SaaS WAF，默认是sparta-waf。 */
   Edition?: string;
@@ -5143,6 +5219,8 @@ declare interface Waf {
   BatchOperateUserSignatureRules(data: BatchOperateUserSignatureRulesRequest, config?: AxiosRequestConfig): AxiosPromise<BatchOperateUserSignatureRulesResponse>;
   /** 创建访问日志导出 {@link CreateAccessExportRequest} {@link CreateAccessExportResponse} */
   CreateAccessExport(data: CreateAccessExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessExportResponse>;
+  /** 添加地域封禁规则 {@link CreateAreaBanRuleRequest} {@link CreateAreaBanRuleResponse} */
+  CreateAreaBanRule(data: CreateAreaBanRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAreaBanRuleResponse>;
   /** 计费实例创建订单 {@link CreateDealsRequest} {@link CreateDealsResponse} */
   CreateDeals(data: CreateDealsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDealsResponse>;
   /** 添加负载均衡型WAF防护域名 {@link CreateHostRequest} {@link CreateHostResponse} */
@@ -5195,6 +5273,8 @@ declare interface Waf {
   DescribeApiListVersionTwo(data: DescribeApiListVersionTwoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiListVersionTwoResponse>;
   /** 获取地域封禁配置 {@link DescribeAreaBanAreasRequest} {@link DescribeAreaBanAreasResponse} */
   DescribeAreaBanAreas(data: DescribeAreaBanAreasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAreaBanAreasResponse>;
+  /** 获取地域封禁规则 {@link DescribeAreaBanRuleRequest} {@link DescribeAreaBanRuleResponse} */
+  DescribeAreaBanRule(data: DescribeAreaBanRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAreaBanRuleResponse>;
   /** 获取WAF地域封禁支持的地域列表 {@link DescribeAreaBanSupportAreasRequest} {@link DescribeAreaBanSupportAreasResponse} */
   DescribeAreaBanSupportAreas(data?: DescribeAreaBanSupportAreasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAreaBanSupportAreasResponse>;
   /** 攻击总览 {@link DescribeAttackOverviewRequest} {@link DescribeAttackOverviewResponse} */
@@ -5331,6 +5411,8 @@ declare interface Waf {
   ModifyApiSecEventChange(data?: ModifyApiSecEventChangeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiSecEventChangeResponse>;
   /** 修改地域封禁中地域信息 {@link ModifyAreaBanAreasRequest} {@link ModifyAreaBanAreasResponse} */
   ModifyAreaBanAreas(data: ModifyAreaBanAreasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAreaBanAreasResponse>;
+  /** 编辑地域封禁规则 {@link ModifyAreaBanRuleRequest} {@link ModifyAreaBanRuleResponse} */
+  ModifyAreaBanRule(data: ModifyAreaBanRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAreaBanRuleResponse>;
   /** 修改地域封禁状态 {@link ModifyAreaBanStatusRequest} {@link ModifyAreaBanStatusResponse} */
   ModifyAreaBanStatus(data: ModifyAreaBanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAreaBanStatusResponse>;
   /** 修改规则引擎白名单 {@link ModifyAttackWhiteRuleRequest} {@link ModifyAttackWhiteRuleResponse} */
@@ -5377,7 +5459,7 @@ declare interface Waf {
   ModifyModuleStatus(data: ModifyModuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModuleStatusResponse>;
   /** 修改防护对象 {@link ModifyObjectRequest} {@link ModifyObjectResponse} */
   ModifyObject(data: ModifyObjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyObjectResponse>;
-  /** 获取基础安全防护（WAF开关）状态 {@link ModifyProtectionStatusRequest} {@link ModifyProtectionStatusResponse} */
+  /** 开启、关闭WAF开关 {@link ModifyProtectionStatusRequest} {@link ModifyProtectionStatusResponse} */
   ModifyProtectionStatus(data: ModifyProtectionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProtectionStatusResponse>;
   /** 编辑SaaS型WAF域名 {@link ModifySpartaProtectionRequest} {@link ModifySpartaProtectionResponse} */
   ModifySpartaProtection(data: ModifySpartaProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySpartaProtectionResponse>;

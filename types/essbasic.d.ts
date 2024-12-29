@@ -46,6 +46,8 @@ declare interface ApproverOption {
   FillType?: number;
   /** 签署人阅读合同限制参数 取值： LimitReadTimeAndBottom，阅读合同必须限制阅读时长并且必须阅读到底 LimitReadTime，阅读合同仅限制阅读时长 LimitBottom，阅读合同仅限制必须阅读到底 NoReadTimeAndBottom，阅读合同不限制阅读时长且不限制阅读到底（白名单功能，请联系客户经理开白使用） */
   FlowReadLimit?: string;
+  /** 禁止在签署过程中添加签署日期控件 前置条件：文件发起合同时，指定SignBeanTag=1（可以在签署过程中添加签署控件）： 默认值：false，在开启：签署过程中添加签署控件时，添加签署控件会默认自带签署日期控件 可选值：true，在开启：签署过程中添加签署控件时，添加签署控件不会自带签署日期控件 */
+  ForbidAddSignDate?: boolean;
 }
 
 /** 指定签署人限制项 */
@@ -1543,7 +1545,7 @@ declare interface ChannelCreateBatchSignUrlRequest {
   OrganizationOpenId?: string;
   /** 签署完成后是否自动回跳false：否, 签署完成不会自动跳转回来(默认)true：是, 签署完成会自动跳转回来注: 1. 该参数只针对APP类型（电子签小程序跳转贵方小程序）场景 的签署链接有效2. 手机应用APP 或 微信小程序需要监控界面的返回走后序逻辑, 微信小程序的文档可以参考[这个](https://developers.weixin.qq.com/miniprogram/dev/reference/api/App.html#onShow-Object-object)3. 电子签小程序跳转贵方APP，不支持自动跳转，必需用户手动点击完成按钮（微信的限制） */
   AutoJumpBack?: boolean;
-  /** 签署完成后，如需“返回应用”功能，在获取签署链接接口的 UrlUseEnv 参数需设置为 **WeChatOfficialAccounts**，小程序签署成功的结果页面中才会出现“返回应用”按钮。在用户点击“返回应用”按钮之后，会返回到公众号 H5。 此时，公众号 H5 可以处理页面的 [visibilitychange](https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilitychange_event) 事件 与 [visibilityState](https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilityState) 属性 来判断已经返回到当前页面。再通过电子签后台接口查询合同的签署状态，继续自己的业务流程。参考 [微信网页开发-开放标签跳转小程序](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_Open_Tag.html#%E5%BC%80%E6%94%BE%E6%A0%87%E7%AD%BE) 或 [自有 H5 跳转电子签小程序](https://test.qian.tencent.cn/developers/company/openwxminiprogram/#4%E8%87%AA%E6%9C%89-h5-%E8%B7%B3%E8%BD%AC%E7%94%B5%E5%AD%90%E7%AD%BE%E5%B0%8F%E7%A8%8B%E5%BA%8F)。 */
+  /** 仅公众号 H5 跳转电子签小程序时，如需签署完成的“返回应用”功能，在获取签署链接接口的 UrlUseEnv 参数需设置为 **WeChatOfficialAccounts**，小程序签署成功的结果页面中才会出现“返回应用”按钮。在用户点击“返回应用”按钮之后，会返回到公众号 H5。 参考 [公众号 H5 跳转电子签小程序](https://qian.tencent.com/developers/company/openwxminiprogram/#23-%E5%85%AC%E4%BC%97%E5%8F%B7-h5-%E4%B8%AD%E8%B7%B3%E8%BD%AC)。 */
   UrlUseEnv?: string;
 }
 
@@ -2883,7 +2885,7 @@ declare interface CreateSignUrlsRequest {
   RecipientIds?: string[];
   /** 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。 */
   FlowGroupUrlInfo?: FlowGroupUrlInfo;
-  /** 签署完成后，如需“返回应用”功能，在获取签署链接接口的 UrlUseEnv 参数需设置为 **WeChatOfficialAccounts**，小程序签署成功的结果页面中才会出现“返回应用”按钮。在用户点击“返回应用”按钮之后，会返回到公众号 H5。 此时，公众号 H5 可以处理页面的 [visibilitychange](https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilitychange_event) 事件 与 [visibilityState](https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilityState) 属性 来判断已经返回到当前页面。再通过电子签后台接口查询合同的签署状态，继续自己的业务流程。参考 [微信网页开发-开放标签跳转小程序](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_Open_Tag.html#%E5%BC%80%E6%94%BE%E6%A0%87%E7%AD%BE) 或 [自有 H5 跳转电子签小程序](https://test.qian.tencent.cn/developers/company/openwxminiprogram/#4%E8%87%AA%E6%9C%89-h5-%E8%B7%B3%E8%BD%AC%E7%94%B5%E5%AD%90%E7%AD%BE%E5%B0%8F%E7%A8%8B%E5%BA%8F)。 */
+  /** 仅公众号 H5 跳转电子签小程序时，如需签署完成的“返回应用”功能，在获取签署链接接口的 UrlUseEnv 参数需设置为 **WeChatOfficialAccounts**，小程序签署成功的结果页面中才会出现“返回应用”按钮。在用户点击“返回应用”按钮之后，会返回到公众号 H5。 参考 [公众号 H5 跳转电子签小程序](https://qian.tencent.com/developers/company/openwxminiprogram/#23-%E5%85%AC%E4%BC%97%E5%8F%B7-h5-%E4%B8%AD%E8%B7%B3%E8%BD%AC)。 */
   UrlUseEnv?: string;
 }
 

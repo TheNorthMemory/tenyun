@@ -1647,9 +1647,9 @@ declare interface AllocateAddressesRequest {
 
 declare interface AllocateAddressesResponse {
   /** 申请到的 EIP 的唯一 ID 列表。 */
-  AddressSet: string[] | null;
+  AddressSet?: string[] | null;
   /** 异步任务TaskId。可以使用DescribeTaskResult接口查询任务状态。 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3637,7 +3637,7 @@ declare interface ReleaseIpv6AddressesBandwidthRequest {
 
 declare interface ReleaseIpv6AddressesBandwidthResponse {
   /** 异步任务TaskId。 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

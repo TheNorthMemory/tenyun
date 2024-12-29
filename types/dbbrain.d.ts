@@ -777,55 +777,55 @@ declare interface SlowLogInfoItem {
 /** 慢日志TopSql */
 declare interface SlowLogTopSqlItem {
   /** sql总锁等待时间，单位秒 */
-  LockTime: number;
+  LockTime?: number;
   /** 最大锁等待时间，单位秒 */
-  LockTimeMax: number;
+  LockTimeMax?: number;
   /** 最小锁等待时间，单位秒 */
-  LockTimeMin: number;
+  LockTimeMin?: number;
   /** 总扫描行数 */
-  RowsExamined: number;
+  RowsExamined?: number;
   /** 最大扫描行数 */
-  RowsExaminedMax: number;
+  RowsExaminedMax?: number;
   /** 最小扫描行数 */
-  RowsExaminedMin: number;
+  RowsExaminedMin?: number;
   /** 总耗时，单位秒 */
-  QueryTime: number;
+  QueryTime?: number;
   /** 最大执行时间，单位秒 */
-  QueryTimeMax: number;
+  QueryTimeMax?: number;
   /** 最小执行时间，单位秒 */
-  QueryTimeMin: number;
+  QueryTimeMin?: number;
   /** 总返回行数 */
-  RowsSent: number;
+  RowsSent?: number;
   /** 最大返回行数 */
-  RowsSentMax: number;
+  RowsSentMax?: number;
   /** 最小返回行数 */
-  RowsSentMin: number;
+  RowsSentMin?: number;
   /** 执行次数 */
-  ExecTimes: number;
+  ExecTimes?: number;
   /** sql模板 */
-  SqlTemplate: string;
+  SqlTemplate?: string;
   /** 带参数SQL（随机） */
-  SqlText: string;
+  SqlText?: string;
   /** 数据库名 */
-  Schema: string;
+  Schema?: string;
   /** 总耗时占比，单位% */
-  QueryTimeRatio: number;
+  QueryTimeRatio?: number;
   /** sql总锁等待时间占比，单位% */
-  LockTimeRatio: number;
+  LockTimeRatio?: number;
   /** 总扫描行数占比，单位% */
-  RowsExaminedRatio: number;
+  RowsExaminedRatio?: number;
   /** 总返回行数占比，单位% */
-  RowsSentRatio: number;
+  RowsSentRatio?: number;
   /** 平均执行时间，单位秒 */
-  QueryTimeAvg: number;
+  QueryTimeAvg?: number;
   /** 平均返回行数 */
-  RowsSentAvg: number;
+  RowsSentAvg?: number;
   /** 平均锁等待时间，单位秒 */
-  LockTimeAvg: number;
+  LockTimeAvg?: number;
   /** 平均扫描行数 */
-  RowsExaminedAvg: number;
+  RowsExaminedAvg?: number;
   /** SQL模板的MD5值 */
-  Md5: string;
+  Md5?: string;
 }
 
 /** 慢日志来源用户详情。 */
@@ -1059,7 +1059,7 @@ declare interface CreateDBDiagReportTaskRequest {
 
 declare interface CreateDBDiagReportTaskResponse {
   /** 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。 */
-  AsyncRequestId: number | null;
+  AsyncRequestId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1141,7 +1141,7 @@ declare interface CreateProxySessionKillTaskRequest {
 
 declare interface CreateProxySessionKillTaskResponse {
   /** 创建 kill 会话任务返回的异步任务 id */
-  AsyncRequestId: number;
+  AsyncRequestId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1413,27 +1413,27 @@ declare interface DescribeDBDiagEventRequest {
 
 declare interface DescribeDBDiagEventResponse {
   /** 诊断项。 */
-  DiagItem: string;
+  DiagItem?: string;
   /** 诊断类型。 */
-  DiagType: string;
+  DiagType?: string;
   /** 事件 ID 。 */
-  EventId: number;
+  EventId?: number;
   /** 诊断事件详情，若无附加解释信息则输出为空。 */
-  Explanation: string;
+  Explanation?: string;
   /** 诊断概要。 */
-  Outline: string;
+  Outline?: string;
   /** 诊断出的问题。 */
-  Problem: string;
+  Problem?: string;
   /** 严重程度。严重程度分为5级，按影响程度从高至低分别为：1：致命，2：严重，3：告警，4：提示，5：健康。 */
-  Severity: number;
+  Severity?: number;
   /** 开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 诊断建议，若无建议则输出为空。 */
-  Suggestions: string;
+  Suggestions?: string;
   /** 保留字段。 */
-  Metric: string | null;
+  Metric?: string | null;
   /** 结束时间。 */
-  EndTime: string;
+  EndTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

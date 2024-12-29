@@ -81,13 +81,13 @@ declare interface AuditInstanceFilters {
 /** 审计实例详情 */
 declare interface AuditInstanceInfo {
   /** 项目ID */
-  ProjectId?: number | null;
+  ProjectId?: number;
   /** 标签信息 */
-  TagList?: TagInfoUnit[] | null;
+  TagList?: TagInfoUnit[];
   /** 数据库内核类型 */
-  DbType?: string | null;
+  DbType?: string;
   /** 数据库内核版本 */
-  DbVersion?: string | null;
+  DbVersion?: string;
 }
 
 /** 审计日志详细信息 */
@@ -117,17 +117,17 @@ declare interface AuditLog {
   /** 线程ID。 */
   ThreadId?: number;
   /** 扫描行数。 */
-  CheckRows?: number | null;
+  CheckRows?: number;
   /** cpu执行时间，微秒。 */
-  CpuTime?: number | null;
+  CpuTime?: number;
   /** IO等待时间，微秒。 */
-  IoWaitTime?: number | null;
+  IoWaitTime?: number;
   /** 锁等待时间，微秒。 */
-  LockWaitTime?: number | null;
+  LockWaitTime?: number;
   /** 开始时间，与timestamp构成一个精确到纳秒的时间。 */
-  NsTime?: number | null;
+  NsTime?: number;
   /** 事物持续时间，微秒。 */
-  TrxLivingTime?: number | null;
+  TrxLivingTime?: number;
   /** 日志命中规则模板的基本信息 */
   TemplateInfo?: LogRuleTemplateInfo[];
   /** 事务ID */
@@ -137,9 +137,9 @@ declare interface AuditLog {
 /** 审计日志分析结果 */
 declare interface AuditLogAggregationResult {
   /** 聚合维度 */
-  AggregationField?: string | null;
+  AggregationField?: string;
   /** 聚合桶的结果集 */
-  Buckets?: Bucket[] | null;
+  Buckets?: Bucket[];
 }
 
 /** 审计日志文件 */
@@ -151,11 +151,11 @@ declare interface AuditLogFile {
   /** 文件状态值。可能返回的值为："creating" - 生成中;"failed" - 创建失败;"success" - 已生成; */
   Status?: string;
   /** 文件大小，单位为 KB。 */
-  FileSize?: number | null;
+  FileSize?: number;
   /** 审计日志下载地址。 */
-  DownloadUrl?: string | null;
+  DownloadUrl?: string;
   /** 错误信息。 */
-  ErrMsg?: string | null;
+  ErrMsg?: string;
 }
 
 /** 审计日志过滤条件。查询审计日志时，用户过滤返回的审计日志。 */
@@ -219,9 +219,9 @@ declare interface AuditPolicy {
   /** 审计规则 ID。 */
   RuleId?: string;
   /** 审计规则名称。 */
-  RuleName?: string | null;
+  RuleName?: string;
   /** 数据库实例名称 */
-  InstanceName?: string | null;
+  InstanceName?: string;
 }
 
 /** 审计规则 */
@@ -245,7 +245,7 @@ declare interface AuditRule {
 /** 审计规则的过滤条件 */
 declare interface AuditRuleFilters {
   /** 单条审计规则。 */
-  RuleFilters?: RuleFilters[] | null;
+  RuleFilters?: RuleFilters[];
 }
 
 /** 审计规则模板的详情 */
@@ -257,7 +257,7 @@ declare interface AuditRuleTemplateInfo {
   /** 规则模板的过滤条件。 */
   RuleFilters?: RuleFilters[];
   /** 规则模板描述。 */
-  Description?: string | null;
+  Description?: string;
   /** 规则模板创建时间。 */
   CreateAt?: string;
   /** 告警等级。1-低风险，2-中风险，3-高风险。 */
@@ -337,7 +337,7 @@ declare interface BackupInfo {
   /** 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId?: string;
   /** 备份文件是否加密， on-加密， off-未加密 */
-  EncryptionFlag?: string | null;
+  EncryptionFlag?: string;
   /** 备份GTID点位 */
   ExecutedGTIDSet?: string;
 }
@@ -415,9 +415,9 @@ declare interface BinlogInfo {
 /** 聚合桶的信息 */
 declare interface Bucket {
   /** 无 */
-  Key: string | null;
+  Key?: string;
   /** key值出现的次数。 */
-  Count: number;
+  Count?: number;
 }
 
 /** 地域售卖配置 */
@@ -437,27 +437,27 @@ declare interface CdbRegionSellConf {
 /** 售卖配置详情 */
 declare interface CdbSellConfig {
   /** 内存大小，单位为MB */
-  Memory: number;
+  Memory?: number;
   /** CPU核心数 */
-  Cpu: number;
+  Cpu?: number;
   /** 磁盘最小规格，单位为GB */
-  VolumeMin: number;
+  VolumeMin?: number;
   /** 磁盘最大规格，单位为GB */
-  VolumeMax: number;
+  VolumeMax?: number;
   /** 磁盘步长，单位为GB */
-  VolumeStep: number;
+  VolumeStep?: number;
   /** 每秒IO数量 */
-  Iops: number;
+  Iops?: number;
   /** 应用场景描述 */
-  Info: string;
+  Info?: string;
   /** 状态值，0 表示该规格对外售卖 */
-  Status: number;
+  Status?: number;
   /** 实例类型，可能的取值范围有：UNIVERSAL (通用型), EXCLUSIVE (独享型), BASIC (基础型), BASIC_V2 (基础型v2) */
-  DeviceType: string | null;
+  DeviceType?: string;
   /** 引擎类型描述，可能的取值范围有：Innodb，RocksDB */
-  EngineType: string;
+  EngineType?: string;
   /** 售卖规格Id */
-  Id: number;
+  Id?: number;
 }
 
 /** 售卖实例类型 */
@@ -581,7 +581,7 @@ declare interface ClusterNodeInfo {
   /** 节点的权重 */
   Weight?: number;
   /** 节点状态。 */
-  Status?: string | null;
+  Status?: string;
 }
 
 /** 集群版的节点拓扑配置。 */
@@ -595,13 +595,13 @@ declare interface ClusterTopology {
 /** 列权限信息 */
 declare interface ColumnPrivilege {
   /** 数据库名 */
-  Database: string | null;
+  Database: string;
   /** 数据库表名 */
-  Table: string | null;
+  Table: string;
   /** 数据库列名 */
-  Column: string | null;
+  Column: string;
   /** 权限信息 */
-  Privileges: string[] | null;
+  Privileges: string[];
 }
 
 /** 通用时间窗 */
@@ -631,31 +631,31 @@ declare interface CommonTimeWindow {
 /** proxy配置 */
 declare interface CustomConfig {
   /** 设备 */
-  Device?: string | null;
+  Device?: string;
   /** 类型 */
-  Type?: string | null;
+  Type?: string;
   /** 设备类型 */
-  DeviceType?: string | null;
+  DeviceType?: string;
   /** 内存 */
-  Memory?: number | null;
+  Memory?: number;
   /** 核数 */
-  Cpu?: number | null;
+  Cpu?: number;
 }
 
 /** 云数据库切换记录 */
 declare interface DBSwitchInfo {
   /** 切换时间，格式为：2017-09-03 01:34:31 */
-  SwitchTime?: string | null;
+  SwitchTime?: string;
   /** 切换类型，可能的返回值为：TRANSFER - 数据迁移；MASTER2SLAVE - 主备切换；RECOVERY - 主从恢复 */
-  SwitchType?: string | null;
+  SwitchType?: string;
 }
 
 /** 数据库权限 */
 declare interface DatabasePrivilege {
   /** 权限信息 */
-  Privileges: string[] | null;
+  Privileges: string[];
   /** 数据库名 */
-  Database: string | null;
+  Database: string;
 }
 
 /** 数据库名以及字符集 */
@@ -677,13 +677,13 @@ declare interface DeployGroupInfo {
   /** 置放群组实例配额，表示一个置放群组中可容纳的最大实例数目。 */
   Quota?: number;
   /** 置放群组亲和性策略，目前仅支持策略1，即在物理机纬度打散实例的分布。 */
-  Affinity?: string | null;
+  Affinity?: string;
   /** 置放群组亲和性策略1中，同台物理机上同个置放群组实例的限制个数。 */
-  LimitNum?: number | null;
+  LimitNum?: number;
   /** 置放群组详细信息。 */
   Description?: string;
   /** 置放群组物理机型属性。 */
-  DevClass?: string | null;
+  DevClass?: string;
 }
 
 /** CPU负载 */
@@ -741,57 +741,57 @@ declare interface DeviceNetInfo {
 /** 灾备实例信息 */
 declare interface DrInfo {
   /** 灾备实例状态 */
-  Status: number;
+  Status?: number;
   /** 可用区信息 */
-  Zone: string;
+  Zone?: string;
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 地域信息 */
-  Region: string;
+  Region?: string;
   /** 实例同步状态。可能的返回值为：0 - 灾备未同步；1 - 灾备同步中；2 - 灾备同步成功；3 - 灾备同步失败；4 - 灾备同步修复中。 */
-  SyncStatus: number;
+  SyncStatus?: number;
   /** 实例名称 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 实例类型 */
-  InstanceType: number;
+  InstanceType?: number;
 }
 
 /** 结构化的错误日志详情 */
 declare interface ErrlogItem {
   /** 错误发生时间。 */
-  Timestamp?: number | null;
+  Timestamp?: number;
   /** 错误详情 */
-  Content?: string | null;
+  Content?: string;
 }
 
 /** 导入任务记录 */
 declare interface ImportRecord {
   /** 状态值 */
-  Status?: number | null;
+  Status?: number;
   /** 状态值 */
-  Code?: number | null;
+  Code?: number;
   /** 执行时间 */
-  CostTime?: number | null;
+  CostTime?: number;
   /** 实例ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 后端任务ID */
-  WorkId?: string | null;
+  WorkId?: string;
   /** 导入文件名 */
-  FileName?: string | null;
+  FileName?: string;
   /** 执行进度 */
-  Process?: number | null;
+  Process?: number;
   /** 任务创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 文件大小 */
-  FileSize?: string | null;
+  FileSize?: string;
   /** 任务执行信息 */
-  Message?: string | null;
+  Message?: string;
   /** 任务ID */
-  JobId?: number | null;
+  JobId?: number;
   /** 导入库表名 */
-  DbName?: string | null;
+  DbName?: string;
   /** 异步任务的请求ID */
-  AsyncRequestId?: string | null;
+  AsyncRequestId?: string;
 }
 
 /** 安全组入站规则 */
@@ -823,7 +823,7 @@ declare interface InstEventInfo {
   /** 实例ID。 */
   InstanceId?: string;
   /** 节点ID */
-  NodeId?: string | null;
+  NodeId?: string;
 }
 
 /** 审计日志搜索过滤器 */
@@ -843,29 +843,29 @@ declare interface InstanceDbAuditStatus {
   /** 审计状态。ON-表示审计已开启，OFF-表示审计关闭 */
   AuditStatus?: string;
   /** 任务状态。0-无任务；1-审计开启中，2-审计关闭中。 */
-  AuditTask?: number | null;
+  AuditTask?: number;
   /** 日志保留时长。 */
-  LogExpireDay?: number | null;
+  LogExpireDay?: number;
   /** 高频存储时长。 */
-  HighLogExpireDay?: number | null;
+  HighLogExpireDay?: number;
   /** 低频存储时长。 */
-  LowLogExpireDay?: number | null;
+  LowLogExpireDay?: number;
   /** 日志存储量。 */
-  BillingAmount?: number | null;
+  BillingAmount?: number;
   /** 高频存储量。 */
-  HighRealStorage?: number | null;
+  HighRealStorage?: number;
   /** 低频存储量。 */
-  LowRealStorage?: number | null;
+  LowRealStorage?: number;
   /** 是否为全审计。true-表示全审计。 */
-  AuditAll?: boolean | null;
+  AuditAll?: boolean;
   /** 审计开通时间。 */
-  CreateAt?: string | null;
+  CreateAt?: string;
   /** 实例相关信息 */
-  InstanceInfo?: AuditInstanceInfo | null;
+  InstanceInfo?: AuditInstanceInfo;
   /** 总存储量。 */
-  RealStorage?: number | null;
+  RealStorage?: number;
   /** 是否包含审计策略 */
-  OldRule?: boolean | null;
+  OldRule?: boolean;
   /** 实例所应用的规则模板。 */
   RuleTemplateIds?: string[];
 }
@@ -879,7 +879,7 @@ declare interface InstanceInfo {
   /** 初始化标志，可能的返回值为：0-未初始化；1-已初始化 */
   InitFlag?: number;
   /** 只读vip信息。单独开通只读实例访问的只读实例才有该字段 */
-  RoVipInfo?: RoVipInfo | null;
+  RoVipInfo?: RoVipInfo;
   /** 内存容量，单位为 MB */
   Memory?: number;
   /** 实例状态，可能的返回值：0-创建中；1-运行中；4-正在进行隔离操作；5-已隔离 */
@@ -887,7 +887,7 @@ declare interface InstanceInfo {
   /** 私有网络 ID，例如：51102 */
   VpcId?: number;
   /** 备机信息 */
-  SlaveInfo?: SlaveInfo | null;
+  SlaveInfo?: SlaveInfo;
   /** 实例 ID */
   InstanceId?: string;
   /** 硬盘容量，单位为 GB */
@@ -897,7 +897,7 @@ declare interface InstanceInfo {
   /** 数据复制方式。0 - 异步复制；1 - 半同步复制；2 - 强同步复制 */
   ProtectMode?: number;
   /** 只读组详细信息 */
-  RoGroups?: RoGroup[] | null;
+  RoGroups?: RoGroup[];
   /** 子网 ID，例如：2333 */
   SubnetId?: number;
   /** 实例类型，可能的返回值：1-主实例；2-灾备实例；3-只读实例 */
@@ -913,7 +913,7 @@ declare interface InstanceInfo {
   /** 实例任务状态。0 - 没有任务 ,1 - 升级中,2 - 数据导入中,3 - 开放Slave中,4 - 外网访问开通中,5 - 批量操作执行中,6 - 回档中,7 - 外网访问关闭中,8 - 密码修改中,9 - 实例名修改中,10 - 重启中,12 - 自建迁移中,13 - 删除库表中,14 - 灾备实例创建同步中,15 - 升级待切换,16 - 升级切换中,17 - 升级切换完成 */
   TaskStatus?: number;
   /** 主实例详细信息 */
-  MasterInfo?: MasterInfo | null;
+  MasterInfo?: MasterInfo;
   /** 实例类型 */
   DeviceType?: string;
   /** 内核版本 */
@@ -921,7 +921,7 @@ declare interface InstanceInfo {
   /** 实例名称 */
   InstanceName?: string;
   /** 灾备实例详细信息 */
-  DrInfo?: DrInfo[] | null;
+  DrInfo?: DrInfo[];
   /** 外网域名 */
   WanDomain?: string;
   /** 外网端口号 */
@@ -949,45 +949,45 @@ declare interface InstanceInfo {
   /** 可用区中文名称 */
   ZoneName?: string;
   /** 物理机型 */
-  DeviceClass?: string | null;
+  DeviceClass?: string;
   /** 置放群组 ID */
-  DeployGroupId?: string | null;
+  DeployGroupId?: string;
   /** 可用区 ID */
-  ZoneId?: number | null;
+  ZoneId?: number;
   /** 节点数 */
   InstanceNodes?: number;
   /** 标签列表 */
-  TagList?: TagInfoItem[] | null;
+  TagList?: TagInfoItem[];
   /** 引擎类型 */
-  EngineType?: string | null;
+  EngineType?: string;
   /** 最大延迟阈值 */
-  MaxDelayTime?: number | null;
+  MaxDelayTime?: number;
   /** 实例磁盘类型，仅云盘版实例才返回该值。可能的值为 CLOUD_SSD：SSD云硬盘， CLOUD_HSSD：增强型SSD云硬盘 */
   DiskType?: string;
   /** 当前扩容的CPU核心数。 */
-  ExpandCpu?: number | null;
+  ExpandCpu?: number;
   /** 实例集群版节点信息 */
-  ClusterInfo?: ClusterInfo[] | null;
+  ClusterInfo?: ClusterInfo[];
 }
 
 /** 实例预期重启时间 */
 declare interface InstanceRebootTime {
   /** 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 预期重启时间 */
-  TimeInSeconds?: number | null;
+  TimeInSeconds?: number;
 }
 
 /** 实例可回档时间范围 */
 declare interface InstanceRollbackRangeTime {
   /** 查询数据库错误码 */
-  Code?: number | null;
+  Code?: number;
   /** 查询数据库错误信息 */
-  Message?: string | null;
+  Message?: string;
   /** 实例ID列表，单个实例Id的格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 可回档时间范围 */
-  Times?: RollbackTimeRange[] | null;
+  Times?: RollbackTimeRange[];
 }
 
 /** 本地binlog保留配置 */
@@ -1009,13 +1009,13 @@ declare interface LocalBinlogConfigDefault {
 /** 审计日志命中规则模板的基本信息 */
 declare interface LogRuleTemplateInfo {
   /** 模板ID。 */
-  RuleTemplateId?: string | null;
+  RuleTemplateId?: string;
   /** 规则模板名 */
-  RuleTemplateName?: string | null;
+  RuleTemplateName?: string;
   /** 告警等级。1-低风险，2-中风险，3-高风险。 */
-  AlarmLevel?: string | null;
+  AlarmLevel?: string;
   /** 规则模板变更状态：0-未变更；1-已变更；2-已删除 */
-  RuleTemplateStatus?: number | null;
+  RuleTemplateStatus?: number;
 }
 
 /** DB实例慢日志、错误日志投递CLS配置 */
@@ -1159,7 +1159,7 @@ declare interface ParamTemplateInfo {
   /** 参数模板类型 */
   TemplateType?: string;
   /** 参数模板引擎 */
-  EngineType?: string | null;
+  EngineType?: string;
 }
 
 /** 数据库实例参数 */
@@ -1195,7 +1195,7 @@ declare interface ParameterDetail {
   /** 参数是公式类型时，该字段有效，表示公式类型最小值 */
   MinFunc?: string;
   /** 参数是否不支持修改 */
-  IsNotSupportEdit?: boolean | null;
+  IsNotSupportEdit?: boolean;
 }
 
 /** 数据库代理地址信息 */
@@ -1211,27 +1211,27 @@ declare interface ProxyAddress {
   /** 端口 */
   VPort?: number;
   /** 权重分配模式；系统自动分配："system"， 自定义："custom" */
-  WeightMode?: string | null;
+  WeightMode?: string;
   /** 是否开启延迟剔除，取值："true" | "false" */
-  IsKickOut?: boolean | null;
+  IsKickOut?: boolean;
   /** 最小保留数量，最小取值：0 */
-  MinCount?: number | null;
+  MinCount?: number;
   /** 延迟剔除阈值，最小取值：0 */
-  MaxDelay?: number | null;
+  MaxDelay?: number;
   /** 是否自动添加RO，取值："true" | "false" */
-  AutoAddRo?: boolean | null;
+  AutoAddRo?: boolean;
   /** 是否是只读，取值："true" | "false" */
-  ReadOnly?: boolean | null;
+  ReadOnly?: boolean;
   /** 是否开启事务分离 */
-  TransSplit?: boolean | null;
+  TransSplit?: boolean;
   /** 是否开启故障转移 */
-  FailOver?: boolean | null;
+  FailOver?: boolean;
   /** 是否开启连接池 */
-  ConnectionPool?: boolean | null;
+  ConnectionPool?: boolean;
   /** 描述 */
-  Desc?: string | null;
+  Desc?: string;
   /** 实例读权重分配 */
-  ProxyAllocation?: ProxyAllocation[] | null;
+  ProxyAllocation?: ProxyAllocation[];
   /** 接入模式 */
   AccessMode?: string;
   /** 是否开启自动负载均衡 */
@@ -1253,41 +1253,41 @@ declare interface ProxyGroupInfo {
   /** 代理组ID */
   ProxyGroupId?: string;
   /** 代理版本 */
-  ProxyVersion?: string | null;
+  ProxyVersion?: string;
   /** 代理支持升级版本 */
-  SupportUpgradeProxyVersion?: string | null;
+  SupportUpgradeProxyVersion?: string;
   /** 代理状态 */
-  Status?: string | null;
+  Status?: string;
   /** 代理任务状态 */
-  TaskStatus?: string | null;
+  TaskStatus?: string;
   /** 代理组节点信息 */
-  ProxyNode?: ProxyNode[] | null;
+  ProxyNode?: ProxyNode[];
   /** 代理组地址信息 */
-  ProxyAddress?: ProxyAddress[] | null;
+  ProxyAddress?: ProxyAddress[];
   /** 连接池阈值 */
-  ConnectionPoolLimit?: number | null;
+  ConnectionPoolLimit?: number;
   /** 支持创建地址 */
-  SupportCreateProxyAddress?: boolean | null;
+  SupportCreateProxyAddress?: boolean;
   /** 支持升级代理版本所需的cdb版本 */
-  SupportUpgradeProxyMysqlVersion?: string | null;
+  SupportUpgradeProxyMysqlVersion?: string;
 }
 
 /** 代理实例 */
 declare interface ProxyInst {
   /** 实例ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 实例名称 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 实例类型：1 master 主实例; 2 ro 只读实例; 3 dr 灾备实例; 4 sdr 小灾备实例 */
-  InstanceType?: number | null;
+  InstanceType?: number;
   /** 实例状态，可能的返回值：0-创建中；1-运行中；4-隔离中；5-已隔离 */
-  Status?: number | null;
+  Status?: number;
   /** 只读权重,如果权重为系统自动分配，改值不生效，只代表是否启用该实例 */
-  Weight?: number | null;
+  Weight?: number;
   /** 实例所属地域 */
-  Region?: string | null;
+  Region?: string;
   /** 实例所属可用区 */
-  Zone?: string | null;
+  Zone?: string;
   /** 实例节点ID */
   InstNodeId?: string;
   /** 节点角色 */
@@ -1297,19 +1297,19 @@ declare interface ProxyInst {
 /** 代理节点 */
 declare interface ProxyNode {
   /** 代理节点ID */
-  ProxyId: string | null;
+  ProxyId?: string;
   /** CPU核数 */
-  Cpu: number | null;
+  Cpu?: number;
   /** 内存大小 */
-  Mem: number | null;
+  Mem?: number;
   /** 节点状态 */
-  Status: string | null;
+  Status?: string;
   /** 代理节点可用区 */
-  Zone: string | null;
+  Zone?: string;
   /** 代理节点地域 */
-  Region: string | null;
+  Region?: string;
   /** 连接数 */
-  Connection: number | null;
+  Connection?: number;
 }
 
 /** 节点规格配置 */
@@ -1395,15 +1395,15 @@ declare interface RoGroup {
   /** 只读组的内网端口号。 */
   Vport?: number;
   /** 私有网络 ID。 */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** 子网 ID。 */
-  UniqSubnetId?: string | null;
+  UniqSubnetId?: string;
   /** 只读组所在的地域。 */
-  RoGroupRegion?: string | null;
+  RoGroupRegion?: string;
   /** 只读组所在的可用区。 */
-  RoGroupZone?: string | null;
+  RoGroupZone?: string;
   /** 延迟复制时间。 */
-  DelayReplicationTime?: number | null;
+  DelayReplicationTime?: number;
 }
 
 /** RO 组的配置信息 */
@@ -1475,15 +1475,15 @@ declare interface RoInstanceInfo {
 /** 只读vip信息 */
 declare interface RoVipInfo {
   /** 只读vip状态 */
-  RoVipStatus?: number | null;
+  RoVipStatus?: number;
   /** 只读vip的子网 */
-  RoSubnetId?: number | null;
+  RoSubnetId?: number;
   /** 只读vip的私有网络 */
-  RoVpcId?: number | null;
+  RoVpcId?: number;
   /** 只读vip的端口号 */
-  RoVport?: number | null;
+  RoVport?: number;
   /** 只读vip */
-  RoVip?: string | null;
+  RoVip?: string;
 }
 
 /** RO 实例的权重值 */
@@ -1497,39 +1497,39 @@ declare interface RoWeightValue {
 /** 用于回档的数据库名 */
 declare interface RollbackDBName {
   /** 回档前的原数据库名 */
-  DatabaseName: string | null;
+  DatabaseName: string;
   /** 回档后的新数据库名 */
-  NewDatabaseName: string | null;
+  NewDatabaseName: string;
 }
 
 /** 用于回档的实例详情 */
 declare interface RollbackInstancesInfo {
   /** 云数据库实例ID */
-  InstanceId: string | null;
+  InstanceId: string;
   /** 回档策略。可选值为：table、db、full；默认值为full。table - 极速回档模式，仅导入所选中表级别的备份和binlog，如有跨表操作，且关联表未被同时选中，将会导致回档失败，该模式下参数Databases必须为空；db - 快速模式，仅导入所选中库级别的备份和binlog，如有跨库操作，且关联库未被同时选中，将会导致回档失败；full - 普通回档模式，将导入整个实例的备份和binlog，速度较慢。 */
   Strategy: string;
   /** 数据库回档时间，时间格式为：yyyy-mm-dd hh:mm:ss */
   RollbackTime: string;
   /** 待回档的数据库信息，表示整库回档 */
-  Databases?: RollbackDBName[] | null;
+  Databases?: RollbackDBName[];
   /** 待回档的数据库表信息，表示按表回档 */
-  Tables?: RollbackTables[] | null;
+  Tables?: RollbackTables[];
 }
 
 /** 用于回档的数据库表名 */
 declare interface RollbackTableName {
   /** 回档前的原数据库表名 */
-  TableName: string | null;
+  TableName: string;
   /** 回档后的新数据库表名 */
-  NewTableName: string | null;
+  NewTableName: string;
 }
 
 /** 用于回档的数据库表详情 */
 declare interface RollbackTables {
   /** 数据库名 */
-  Database: string | null;
+  Database: string;
   /** 数据库表详情 */
-  Table: RollbackTableName[] | null;
+  Table: RollbackTableName[];
 }
 
 /** 回档任务详情 */
@@ -1545,23 +1545,23 @@ declare interface RollbackTask {
   /** 任务结束时间。 */
   EndTime?: string;
   /** 回档任务详情。 */
-  Detail?: RollbackInstancesInfo[] | null;
+  Detail?: RollbackInstancesInfo[];
 }
 
 /** 可回档时间范围 */
 declare interface RollbackTimeRange {
   /** 实例可回档开始时间，时间格式：2016-10-29 01:06:04 */
-  Begin?: string | null;
+  Begin?: string;
   /** 实例可回档结束时间，时间格式：2016-11-02 11:44:47 */
-  End?: string | null;
+  End?: string;
 }
 
 /** 权重分配规则 */
 declare interface Rule {
   /** 划分上限 */
-  LessThan: number | null;
+  LessThan?: number;
   /** 权重 */
-  Weight: number | null;
+  Weight?: number;
 }
 
 /** 审计规则的规则过滤条件 */
@@ -1609,27 +1609,27 @@ declare interface RuleTemplateRecordInfo {
 /** 安全组详情 */
 declare interface SecurityGroup {
   /** 项目ID */
-  ProjectId?: number | null;
+  ProjectId?: number;
   /** 创建时间，时间格式：yyyy-mm-dd hh:mm:ss */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 入站规则 */
-  Inbound?: Inbound[] | null;
+  Inbound?: Inbound[];
   /** 出站规则 */
-  Outbound?: Outbound[] | null;
+  Outbound?: Outbound[];
   /** 安全组ID */
-  SecurityGroupId?: string | null;
+  SecurityGroupId?: string;
   /** 安全组名称 */
-  SecurityGroupName?: string | null;
+  SecurityGroupName?: string;
   /** 安全组备注 */
-  SecurityGroupRemark?: string | null;
+  SecurityGroupRemark?: string;
 }
 
 /** 从库的配置信息 */
 declare interface SlaveConfig {
   /** 从库复制方式，可能的返回值：aysnc-异步，semisync-半同步 */
-  ReplicationMode?: string | null;
+  ReplicationMode?: string;
   /** 从库可用区的正式名称，如ap-shanghai-1 */
-  Zone?: string | null;
+  Zone?: string;
 }
 
 /** 备机信息 */
@@ -1637,7 +1637,7 @@ declare interface SlaveInfo {
   /** 第一备机信息 */
   First?: SlaveInstanceInfo;
   /** 第二备机信息 */
-  Second?: SlaveInstanceInfo | null;
+  Second?: SlaveInstanceInfo;
 }
 
 /** 备机信息 */
@@ -1671,27 +1671,27 @@ declare interface SlowLogInfo {
 /** 结构化的慢日志详情 */
 declare interface SlowLogItem {
   /** Sql的执行时间。 */
-  Timestamp?: number | null;
+  Timestamp?: number;
   /** Sql的执行时长（秒）。 */
-  QueryTime?: number | null;
+  QueryTime?: number;
   /** Sql语句。 */
-  SqlText?: string | null;
+  SqlText?: string;
   /** 客户端地址。 */
-  UserHost?: string | null;
+  UserHost?: string;
   /** 用户名。 */
-  UserName?: string | null;
+  UserName?: string;
   /** 数据库名。 */
-  Database?: string | null;
+  Database?: string;
   /** 锁时长（秒）。 */
-  LockTime?: number | null;
+  LockTime?: number;
   /** 扫描行数。 */
-  RowsExamined?: number | null;
+  RowsExamined?: number;
   /** 结果集行数。 */
-  RowsSent?: number | null;
+  RowsSent?: number;
   /** Sql模板。 */
-  SqlTemplate?: string | null;
+  SqlTemplate?: string;
   /** Sql语句的md5。 */
-  Md5?: string | null;
+  Md5?: string;
 }
 
 /** sql文件信息 */
@@ -1713,11 +1713,11 @@ declare interface SqlFileInfo {
 /** 数据库表权限 */
 declare interface TablePrivilege {
   /** 数据库名 */
-  Database: string | null;
+  Database: string;
   /** 数据库表名 */
-  Table: string | null;
+  Table: string;
   /** 权限信息 */
-  Privileges: string[] | null;
+  Privileges: string[];
 }
 
 /** 标签结构 */
@@ -1739,9 +1739,9 @@ declare interface TagInfo {
 /** 标签信息 */
 declare interface TagInfoItem {
   /** 标签键 */
-  TagKey: string | null;
+  TagKey: string;
   /** 标签值 */
-  TagValue: string | null;
+  TagValue: string;
 }
 
 /** tag信息单元 */
@@ -1787,7 +1787,7 @@ declare interface TaskDetail {
   /** 实例任务结束时间。 */
   EndTime?: string;
   /** 任务关联的实例 ID。 */
-  InstanceIds?: string[] | null;
+  InstanceIds?: string[];
   /** 异步任务的请求 ID。 */
   AsyncRequestId?: string;
   /** 任务的附加信息。 */
@@ -1805,21 +1805,21 @@ declare interface UpgradeEngineVersionParams {
 /** 文件上传描述 */
 declare interface UploadInfo {
   /** 文件所有分片数 */
-  AllSliceNum?: number | null;
+  AllSliceNum?: number;
   /** 已完成分片数 */
-  CompleteNum?: number | null;
+  CompleteNum?: number;
 }
 
 /** 多可用区信息 */
 declare interface ZoneConf {
   /** 可用区部署方式，可能的值为：0-单可用区；1-多可用区 */
-  DeployMode: number[] | null;
+  DeployMode: number[];
   /** 主实例所在的可用区 */
-  MasterZone: string[] | null;
+  MasterZone: string[];
   /** 实例为多可用区部署时，备库1所在的可用区 */
-  SlaveZone: string[] | null;
+  SlaveZone: string[];
   /** 实例为多可用区部署时，备库2所在的可用区 */
-  BackupZone: string[] | null;
+  BackupZone: string[];
 }
 
 declare interface AddTimeWindowRequest {
@@ -1881,7 +1881,7 @@ declare interface AdjustCdbProxyAddressRequest {
 
 declare interface AdjustCdbProxyAddressResponse {
   /** 异步任务ID */
-  AsyncRequestId?: string | null;
+  AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1901,7 +1901,7 @@ declare interface AdjustCdbProxyRequest {
 
 declare interface AdjustCdbProxyResponse {
   /** 异步任务ID */
-  AsyncRequestId?: string | null;
+  AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1923,9 +1923,9 @@ declare interface AnalyzeAuditLogsRequest {
 
 declare interface AnalyzeAuditLogsResponse {
   /** 返回的聚合桶信息集 */
-  Items?: AuditLogAggregationResult[] | null;
+  Items?: AuditLogAggregationResult[];
   /** 扫描的日志条数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2141,7 +2141,7 @@ declare interface CreateAuditRuleTemplateRequest {
 
 declare interface CreateAuditRuleTemplateResponse {
   /** 生成的规则模板ID。 */
-  RuleTemplateId?: string | null;
+  RuleTemplateId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2211,7 +2211,7 @@ declare interface CreateCdbProxyAddressRequest {
 
 declare interface CreateCdbProxyAddressResponse {
   /** 异步任务ID */
-  AsyncRequestId?: string | null;
+  AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2237,7 +2237,7 @@ declare interface CreateCdbProxyRequest {
 
 declare interface CreateCdbProxyResponse {
   /** 异步任务ID */
-  AsyncRequestId?: string | null;
+  AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2783,9 +2783,9 @@ declare interface DescribeAsyncRequestInfoRequest {
 
 declare interface DescribeAsyncRequestInfoResponse {
   /** 任务执行结果。可能的取值：INITIAL - 初始化，RUNNING - 运行中，SUCCESS - 执行成功，FAILED - 执行失败，KILLED - 已终止，REMOVED - 已删除，PAUSED - 终止中。 */
-  Status: string | null;
+  Status?: string;
   /** 任务执行信息描述。 */
-  Info: string | null;
+  Info?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2797,13 +2797,13 @@ declare interface DescribeAuditConfigRequest {
 
 declare interface DescribeAuditConfigResponse {
   /** 审计日志保存时长。目前支持的值包括：[0，7，30，180，365，1095，1825]。 */
-  LogExpireDay: number | null;
+  LogExpireDay?: number;
   /** 审计日志存储类型。目前支持的值包括："storage" - 存储型。 */
-  LogType: string;
+  LogType?: string;
   /** 是否正在关闭审计。目前支持的值包括："false"-否，"true"-是 */
-  IsClosing: string;
+  IsClosing?: string;
   /** 审计服务开通时间。 */
-  CreateTime: string | null;
+  CreateTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2845,7 +2845,7 @@ declare interface DescribeAuditLogFilesResponse {
   /** 符合条件的审计日志文件个数。 */
   TotalCount?: number;
   /** 审计日志文件详情。 */
-  Items?: AuditLogFile[] | null;
+  Items?: AuditLogFile[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2899,7 +2899,7 @@ declare interface DescribeAuditPoliciesResponse {
   /** 符合条件的审计策略个数。 */
   TotalCount?: number;
   /** 审计策略详情。 */
-  Items?: AuditPolicy[] | null;
+  Items?: AuditPolicy[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2947,7 +2947,7 @@ declare interface DescribeAuditRuleTemplatesResponse {
   /** 符合查询条件的实例总数。 */
   TotalCount?: number;
   /** 规则模板详细信息列表。 */
-  Items?: AuditRuleTemplateInfo[] | null;
+  Items?: AuditRuleTemplateInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3081,11 +3081,11 @@ declare interface DescribeBackupOverviewResponse {
   /** 用户在当前地域获得的赠送备份容量。 */
   FreeVolume?: number;
   /** 用户在当前地域的异地备份总容量。 */
-  RemoteBackupVolume?: number | null;
+  RemoteBackupVolume?: number;
   /** 归档备份容量，包含数据备份以及日志备份。 */
-  BackupArchiveVolume?: number | null;
+  BackupArchiveVolume?: number;
   /** 标准存储备份容量，包含数据备份以及日志备份。 */
-  BackupStandbyVolume?: number | null;
+  BackupStandbyVolume?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3189,9 +3189,9 @@ declare interface DescribeCdbProxyInfoRequest {
 
 declare interface DescribeCdbProxyInfoResponse {
   /** 代理组数量 */
-  Count?: number | null;
+  Count?: number;
   /** 代理组信息 */
-  ProxyInfos?: ProxyGroupInfo[] | null;
+  ProxyInfos?: ProxyGroupInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3253,11 +3253,11 @@ declare interface DescribeCpuExpandStrategyRequest {
 
 declare interface DescribeCpuExpandStrategyResponse {
   /** 策略类型。可选值 auto、manual。 */
-  Type?: string | null;
+  Type?: string;
   /** 手动扩容的 CPU 。Type为 manual 时有效。 */
-  ExpandCpu?: string | null;
+  ExpandCpu?: string;
   /** 自动扩容策略。Type 为 auto 时有效 */
-  AutoStrategy?: string | null;
+  AutoStrategy?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3305,9 +3305,9 @@ declare interface DescribeDBImportRecordsRequest {
 
 declare interface DescribeDBImportRecordsResponse {
   /** 符合查询条件的导入任务操作日志总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 返回的导入操作记录列表。 */
-  Items: ImportRecord[];
+  Items?: ImportRecord[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3371,11 +3371,11 @@ declare interface DescribeDBInstanceInfoResponse {
   /** 是否开通加密，YES 已开通，NO 未开通。 */
   Encryption?: string;
   /** 加密使用的密钥 ID 。 */
-  KeyId?: string | null;
+  KeyId?: string;
   /** 密钥所在地域。 */
-  KeyRegion?: string | null;
+  KeyRegion?: string;
   /** 当前 CDB 后端服务使用的 KMS 服务的默认地域。 */
-  DefaultKmsRegion?: string | null;
+  DefaultKmsRegion?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3429,7 +3429,7 @@ declare interface DescribeDBInstancesRequest {
   PayTypes?: number[];
   /** 实例名称。 */
   InstanceNames?: string[];
-  /** 实例任务状态，可能取值：0 - 没有任务1 - 升级中2 - 数据导入中3 - 开放Slave中4 - 外网访问开通中5 - 批量操作执行中6 - 回档中7 - 外网访问关闭中8 - 密码修改中9 - 实例名修改中10 - 重启中12 - 自建迁移中13 - 删除库表中14 - 灾备实例创建同步中15 - 升级待切换16 - 升级切换中17 - 升级切换完成19 - 参数设置待执行 */
+  /** 实例任务状态，可能取值：0 - 没有任务1 - 升级中2 - 数据导入中3 - 开放Slave中4 - 外网访问开通中5 - 批量操作执行中6 - 回档中7 - 外网访问关闭中8 - 密码修改中9 - 实例名修改中10 - 重启中12 - 自建迁移中13 - 删除库表中14 - 灾备实例创建同步中15 - 升级待切换16 - 升级切换中17 - 升级切换完成19 - 参数设置待执行34 - 原地升级待执行 */
   TaskStatus?: number[];
   /** 实例数据库引擎版本，可能取值：5.1、5.5、5.6 和 5.7。 */
   EngineVersions?: string[];
@@ -3473,7 +3473,7 @@ declare interface DescribeDBInstancesRequest {
   UniqueVpcIds?: string[];
   /** 私有网络字符型subnetId */
   UniqSubnetIds?: string[];
-  /** 标签键值 */
+  /** 标签键值请注意，创建中的实例无法查询到标签。 */
   Tags?: Tag[];
   /** 数据库代理 IP 。 */
   ProxyVips?: string[];
@@ -3659,7 +3659,7 @@ declare interface DescribeDeployGroupListResponse {
   /** 符合条件的记录总数。 */
   Total?: number;
   /** 返回列表。 */
-  Items?: DeployGroupInfo[] | null;
+  Items?: DeployGroupInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3705,7 +3705,7 @@ declare interface DescribeErrorLogDataResponse {
   /** 符合条件的记录总数。 */
   TotalCount?: number;
   /** 返回的记录。 */
-  Items?: ErrlogItem[] | null;
+  Items?: ErrlogItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3735,7 +3735,7 @@ declare interface DescribeInstanceAlarmEventsResponse {
   /** 事件数。 */
   TotalCount?: number;
   /** 事件信息。查询不到信息时，Items为null。 */
-  Items?: InstEventInfo[] | null;
+  Items?: InstEventInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3861,7 +3861,7 @@ declare interface DescribeParamTemplateInfoResponse {
   /** 参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模板，"HIGH_PERFORMANCE" - 高性能模板。 */
   TemplateType?: string;
   /** 参数模板引擎。支持值包括："InnoDB"，"RocksDB"。 */
-  EngineType?: string | null;
+  EngineType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3879,9 +3879,9 @@ declare interface DescribeParamTemplatesRequest {
 
 declare interface DescribeParamTemplatesResponse {
   /** 该用户的参数模板数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 参数模板详情。 */
-  Items: ParamTemplateInfo[];
+  Items?: ParamTemplateInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3911,11 +3911,11 @@ declare interface DescribeProxyCustomConfRequest {
 
 declare interface DescribeProxyCustomConfResponse {
   /** 代理配置数 */
-  Count?: number | null;
+  Count?: number;
   /** 代理配置 */
-  CustomConf?: CustomConfig | null;
+  CustomConf?: CustomConfig;
   /** 权重限制 */
-  WeightRule?: Rule | null;
+  WeightRule?: Rule;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3927,25 +3927,25 @@ declare interface DescribeProxySupportParamRequest {
 
 declare interface DescribeProxySupportParamResponse {
   /** 支持最大代理版本 */
-  ProxyVersion?: string | null;
+  ProxyVersion?: string;
   /** 是否支持连接池 */
-  SupportPool?: boolean | null;
+  SupportPool?: boolean;
   /** 连接池最小值 */
-  PoolMin?: number | null;
+  PoolMin?: number;
   /** 连接池最大值 */
-  PoolMax?: number | null;
+  PoolMax?: number;
   /** 是否支持事务拆分 */
-  SupportTransSplit?: boolean | null;
+  SupportTransSplit?: boolean;
   /** 支持连接池的最小代理版本 */
-  SupportPoolMinVersion?: string | null;
+  SupportPoolMinVersion?: string;
   /** 支持事务拆分的最小代理版本 */
-  SupportTransSplitMinVersion?: string | null;
+  SupportTransSplitMinVersion?: string;
   /** 是否支持设置只读 */
-  SupportReadOnly?: boolean | null;
+  SupportReadOnly?: boolean;
   /** 是否自动均衡负载 */
-  SupportAutoLoadBalance?: boolean | null;
+  SupportAutoLoadBalance?: boolean;
   /** 是否支持接入模式 */
-  SupportAccessMode?: boolean | null;
+  SupportAccessMode?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4029,9 +4029,9 @@ declare interface DescribeRollbackTaskDetailRequest {
 
 declare interface DescribeRollbackTaskDetailResponse {
   /** 符合条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 回档任务详情。 */
-  Items: RollbackTask[] | null;
+  Items?: RollbackTask[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4083,7 +4083,7 @@ declare interface DescribeSlowLogDataResponse {
   /** 符合条件的记录总数。 */
   TotalCount?: number;
   /** 查询到的记录。 */
-  Items?: SlowLogItem[] | null;
+  Items?: SlowLogItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4285,7 +4285,7 @@ declare interface IsolateDBInstanceRequest {
 
 declare interface IsolateDBInstanceResponse {
   /** 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。(该返回字段目前已废弃，可以通过 DescribeDBInstances 接口查询实例的隔离状态) */
-  AsyncRequestId: string | null;
+  AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4693,7 +4693,7 @@ declare interface ModifyDBInstanceVipVportRequest {
 
 declare interface ModifyDBInstanceVipVportResponse {
   /** 异步任务ID。(该返回字段目前已废弃) */
-  AsyncRequestId?: string | null;
+  AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4837,7 +4837,7 @@ declare interface ModifyRoGroupInfoRequest {
 
 declare interface ModifyRoGroupInfoResponse {
   /** 异步任务 ID。 */
-  AsyncRequestId?: string | null;
+  AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5057,7 +5057,7 @@ declare interface StartReplicationRequest {
 
 declare interface StartReplicationResponse {
   /** 异步任务 ID。 */
-  AsyncRequestId?: string | null;
+  AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5091,7 +5091,7 @@ declare interface StopReplicationRequest {
 
 declare interface StopReplicationResponse {
   /** 异步任务 ID。 */
-  AsyncRequestId?: string | null;
+  AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5191,7 +5191,7 @@ declare interface UpgradeCDBProxyVersionRequest {
 
 declare interface UpgradeCDBProxyVersionResponse {
   /** 异步处理ID */
-  AsyncRequestId: string | null;
+  AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

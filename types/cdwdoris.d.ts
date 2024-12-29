@@ -428,6 +428,10 @@ declare interface InstanceInfo {
   EnableDlc?: number | null;
   /** 账户类型 0:普通用户 1:CAM用户 */
   AccountType?: number | null;
+  /** 监控模式 0: 老监控 1：新监控 */
+  MonitorMode?: number | null;
+  /** cn节点信息 */
+  CNSummary?: NodesSummary;
 }
 
 /** 实例节点描述信息 */
@@ -456,6 +460,8 @@ declare interface InstanceNode {
   UUID?: string | null;
   /** 可用区 */
   Zone?: string | null;
+  /** 创建时间 */
+  CreateTime?: string;
 }
 
 /** 集群操作描述 */
@@ -1148,6 +1154,8 @@ declare interface DescribeClusterConfigsResponse {
   BuildVersion?: string;
   /** 错误信息 */
   ErrorMsg?: string | null;
+  /** 是否包含CN节点 */
+  HasCN?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
