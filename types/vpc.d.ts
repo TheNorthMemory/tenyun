@@ -5,17 +5,17 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 策略信息 */
 declare interface AccessPolicy {
   /** 目的CIDR */
-  TargetCidr: string;
+  TargetCidr?: string;
   /** 策略ID */
-  VpnGatewayIdSslAccessPolicyId: string;
+  VpnGatewayIdSslAccessPolicyId?: string;
   /** 是否对所有用户都生效。1 生效 0不生效 */
-  ForAllClient: number;
+  ForAllClient?: number;
   /** 用户组ID */
-  UserGroupIds: string[];
+  UserGroupIds?: string[];
   /** 更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** Remark */
-  Remark?: string | null;
+  Remark?: string;
 }
 
 /** 账户属性对象 */
@@ -235,15 +235,15 @@ declare interface BgpConfig {
 /** VPN通道BGP配置 */
 declare interface BgpConfigAndAsn {
   /** BGP通道CIDR */
-  TunnelCidr?: string | null;
+  TunnelCidr?: string;
   /** 本端BGP IP */
-  LocalBgpIp?: string | null;
+  LocalBgpIp?: string;
   /** 对端BGP IP */
-  RemoteBgpIp?: string | null;
+  RemoteBgpIp?: string;
   /** 本端BGP ASN号 */
-  LocalBgpAsn?: string | null;
+  LocalBgpAsn?: string;
   /** 对端BGP ASN号 */
-  RemoteBgpAsn?: string | null;
+  RemoteBgpAsn?: string;
 }
 
 /** 云联网（CCN）对象 */
@@ -359,21 +359,25 @@ declare interface CcnBandwidth {
 /** 用于描述云联网地域间限速带宽实例的信息。 */
 declare interface CcnBandwidthInfo {
   /** 带宽所属的云联网ID。 */
-  CcnId: string | null;
+  CcnId?: string;
   /** 实例的创建时间。 */
-  CreatedTime: string | null;
+  CreatedTime?: string;
   /** 实例的过期时间 */
-  ExpiredTime: string | null;
+  ExpiredTime?: string;
   /** 带宽实例的唯一ID。 */
-  RegionFlowControlId: string | null;
+  RegionFlowControlId?: string;
   /** 带宽是否自动续费的标记。 */
-  RenewFlag: string | null;
+  RenewFlag?: string;
   /** 描述带宽的地域和限速上限信息。在地域间限速的情况下才会返回参数，出口限速模式不返回。 */
-  CcnRegionBandwidthLimit: CcnRegionBandwidthLimit | null;
+  CcnRegionBandwidthLimit?: CcnRegionBandwidthLimit;
   /** 云市场实例ID。 */
-  MarketId: string | null;
+  MarketId?: string;
   /** 资源绑定的标签列表 */
-  TagSet?: Tag[] | null;
+  TagSet?: Tag[];
+  /** `true表示`Qos默认带宽；`false`表示非Qos默认带宽； */
+  DefaultQosBandwidthFlag?: boolean;
+  /** 服务等级信息。 */
+  QosLevel?: string;
 }
 
 /** 云联网路由表信息 */
@@ -407,13 +411,15 @@ declare interface CcnInstance {
   /** 备注 */
   Description?: string;
   /** 实例关联的路由表ID。 */
-  RouteTableId?: string | null;
+  RouteTableId?: string;
   /** 实例付费方式 */
-  OrderType?: string | null;
+  OrderType?: string;
 }
 
 /** 云联网实例对象，该对象特用于运营端使用，不建议给租户的接口中提供该复杂类型。 */
 declare interface CcnInstanceInfo {
+  /** 云联网唯一ID。 */
+  CcnId?: string;
 }
 
 /** ccn实例信息（不带地域属性） */
@@ -433,7 +439,7 @@ declare interface CcnRegionBandwidthLimit {
   /** 是否黑石地域，默认`false`。 */
   IsBm?: boolean;
   /** 目的地域，例如：ap-shanghai */
-  DstRegion?: string | null;
+  DstRegion?: string;
   /** 目的地域是否为黑石地域，默认`false`。 */
   DstIsBm?: boolean;
 }
@@ -441,11 +447,11 @@ declare interface CcnRegionBandwidthLimit {
 /** 云联网（CCN）地域出带宽上限。 */
 declare interface CcnRegionBandwidthLimitInfo {
   /** 源地域，例如：ap-shanghai */
-  SourceRegion: string | null;
+  SourceRegion?: string;
   /** 目的地域， 例如：ap-shanghai */
-  DestinationRegion: string | null;
+  DestinationRegion?: string;
   /** 出带宽上限，单位：Mbps。 */
-  BandwidthLimit: number | null;
+  BandwidthLimit?: number;
 }
 
 /** CCN路由策略对象 */
@@ -477,9 +483,9 @@ declare interface CcnRoute {
   /** 下一跳扩展名称（关联实例的扩展名称） */
   InstanceExtraName?: string;
   /** 实例类型 */
-  AliasType?: string | null;
+  AliasType?: string;
   /** 实例id */
-  AliasInstanceId?: string | null;
+  AliasInstanceId?: string;
 }
 
 /** 云联网路由传播策略之路由条件 */
@@ -519,13 +525,13 @@ declare interface CcnRouteTableBroadcastPolicy {
   /** 策略描述 */
   Description?: string;
   /** as-path操作 */
-  OperateAsPath?: string | null;
+  OperateAsPath?: string;
   /** as-path操作模式 */
-  AsPathOperateMode?: string | null;
+  AsPathOperateMode?: string;
   /** community操作 */
-  OperateCommunitySet?: string[] | null;
+  OperateCommunitySet?: string[];
   /** community操作模式 */
-  CommunityOperateMode?: string | null;
+  CommunityOperateMode?: string;
 }
 
 /** 云联网路由传播策略列表 */
@@ -555,11 +561,11 @@ declare interface CcnRouteTableInputPolicy {
 /** 云联网路由接收策略列表 */
 declare interface CcnRouteTableInputPolicys {
   /** 策略列表。 */
-  Policys?: CcnRouteTableInputPolicy[] | null;
+  Policys?: CcnRouteTableInputPolicy[];
   /** 版本号。 */
-  PolicyVersion?: number | null;
+  PolicyVersion?: number;
   /** 创建时间。 */
-  CreateTime?: string | null;
+  CreateTime?: string;
 }
 
 /** 路由表选择策略信息 */
@@ -667,9 +673,9 @@ declare interface CrossBorderCompliance {
   /** 审批单创建时间。 */
   CreatedTime?: string;
   /** 法定代表人身份证号。 */
-  LegalPersonId?: string | null;
+  LegalPersonId?: string;
   /** 法定代表人身份证。 */
-  LegalPersonIdCard?: string | null;
+  LegalPersonIdCard?: string;
 }
 
 /** 跨境带宽监控数据 */
@@ -701,11 +707,11 @@ declare interface CustomerGateway {
 /** 对端网关厂商信息对象。 */
 declare interface CustomerGatewayVendor {
   /** 平台。 */
-  Platform: string;
+  Platform: string | null;
   /** 软件版本。 */
-  SoftwareVersion: string;
+  SoftwareVersion: string | null;
   /** 供应商名称。 */
-  VendorName: string;
+  VendorName: string | null;
 }
 
 /** 云主机实例信息。 */
@@ -2131,23 +2137,23 @@ declare interface RouteECMPAlgorithm {
 /** 路由表选择策略信息 */
 declare interface RouteSelectionPolicy {
   /** 云联网ID。 */
-  CcnId: string;
+  CcnId?: string;
   /** 路由表ID。 */
-  RouteTableId: string;
+  RouteTableId?: string;
   /** 路由表名称。 */
-  RouteTableName: string;
+  RouteTableName?: string;
   /** 实例类型。如VPC */
-  InstanceType: string;
+  InstanceType?: string;
   /** 实例名称。 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 源端cidr。 */
-  SourceCidrBlock: string;
+  SourceCidrBlock?: string;
   /** 路由表描述。 */
-  Description: string | null;
+  Description?: string;
   /** 实例ID。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 关联实例所属UIN（根账号）。 */
-  InstanceUin: string;
+  InstanceUin?: string;
 }
 
 /** 路由表对象 */
@@ -2835,19 +2841,19 @@ declare interface VpnConnection {
   /** 通道健康检查状态，AVAILABLE：正常，UNAVAILABLE：不正常。 未配置健康检查不返回该对象 */
   HealthCheckStatus?: string;
   /** DPD探测开关。默认为0，表示关闭DPD探测。可选值：0（关闭），1（开启） */
-  DpdEnable?: number | null;
+  DpdEnable?: number;
   /** DPD超时时间。即探测确认对端不存在需要的时间。 */
-  DpdTimeout?: string | null;
+  DpdTimeout?: string;
   /** DPD超时后的动作。默认为clear。dpdEnable为1（开启）时有效。可取值为clear（断开）和restart（重试） */
-  DpdAction?: string | null;
+  DpdAction?: string;
   /** 标签键值对数组 */
   TagSet?: Tag[];
   /** 协商类型 */
-  NegotiationType?: string | null;
+  NegotiationType?: string;
   /** Bgp配置信息 */
-  BgpConfig?: BgpConfigAndAsn | null;
+  BgpConfig?: BgpConfigAndAsn;
   /** Nqa配置信息 */
-  HealthCheckConfig?: HealthCheckConfig | null;
+  HealthCheckConfig?: HealthCheckConfig;
 }
 
 /** VPN网关对象。 */
@@ -2899,11 +2905,11 @@ declare interface VpnGateway {
 /** VPN网关配额对象 */
 declare interface VpnGatewayQuota {
   /** 带宽配额 */
-  Bandwidth: number;
+  Bandwidth?: number;
   /** 配额中文名称 */
-  Cname: string;
+  Cname?: string;
   /** 配额英文名称 */
-  Name: string;
+  Name?: string;
 }
 
 /** VPN网关目的路由 */
@@ -5379,9 +5385,9 @@ declare interface DescribeCcnRouteTablesRequest {
 
 declare interface DescribeCcnRouteTablesResponse {
   /** 路由表信息列表。 */
-  CcnRouteTableSet: CcnRouteTable[];
+  CcnRouteTableSet?: CcnRouteTable[];
   /** 查询到的路由表数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5561,7 +5567,7 @@ declare interface DescribeCrossBorderFlowMonitorRequest {
 
 declare interface DescribeCrossBorderFlowMonitorResponse {
   /** 云联网跨境带宽监控数据 */
-  CrossBorderFlowMonitorData?: CrossBorderFlowMonitorData[] | null;
+  CrossBorderFlowMonitorData?: CrossBorderFlowMonitorData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6711,7 +6717,7 @@ declare interface DescribeTenantCcnsRequest {
 
 declare interface DescribeTenantCcnsResponse {
   /** 云联网（CCN）对象。 */
-  CcnSet?: CcnInstanceInfo[] | null;
+  CcnSet?: CcnInstanceInfo[];
   /** 符合条件的对象总数。 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -7031,7 +7037,7 @@ declare interface DescribeVpnGatewayRoutesResponse {
   /** VPN网关目的路由。 */
   Routes?: VpnGatewayRoute[];
   /** 路由条数。 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7473,9 +7479,9 @@ declare interface GetCcnRegionBandwidthLimitsRequest {
 
 declare interface GetCcnRegionBandwidthLimitsResponse {
   /** 云联网（CCN）各地域出带宽详情。 */
-  CcnBandwidthSet?: CcnBandwidthInfo[] | null;
+  CcnBandwidthSet?: CcnBandwidthInfo[];
   /** 符合条件的对象数。 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8575,7 +8581,7 @@ declare interface ModifyVpnGatewayRoutesRequest {
 
 declare interface ModifyVpnGatewayRoutesResponse {
   /** VPN路由信息 */
-  Routes?: VpnGatewayRoute[] | null;
+  Routes?: VpnGatewayRoute[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

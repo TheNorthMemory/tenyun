@@ -922,6 +922,26 @@ declare interface RabbitMQExchangeListInfo {
   MessagesDelayed?: number | null;
 }
 
+/** RabbitMQ权限详情 */
+declare interface RabbitMQPermission {
+  /** 集群实例Id */
+  InstanceId?: string;
+  /** 用户名，权限关联的用户 */
+  User?: string;
+  /** vhost名 */
+  VirtualHost?: string;
+  /** 权限类型，declare相关操作，该用户可操作该vhost下的资源名称正则表达式 */
+  ConfigRegexp?: string | null;
+  /** 权限类型，消息写入相关操作，该用户可操作该vhost下的资源名称正则表达式 */
+  WriteRegexp?: string | null;
+  /** 权限类型，消息读取相关操作，该用户可操作该vhost下的资源名称正则表达式 */
+  ReadRegexp?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 修改时间 */
+  ModifyTime?: string | null;
+}
+
 /** RabbitMQ节点信息 */
 declare interface RabbitMQPrivateNode {
   /** 节点名字 */
@@ -2478,6 +2498,20 @@ declare interface DeleteRabbitMQBindingResponse {
   RequestId?: string;
 }
 
+declare interface DeleteRabbitMQPermissionRequest {
+  /** 集群实例Id */
+  InstanceId: string;
+  /** 用户名，登录时使用 */
+  User: string;
+  /** vhost名 */
+  VirtualHost: string;
+}
+
+declare interface DeleteRabbitMQPermissionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteRabbitMQUserRequest {
   /** 集群实例Id */
   InstanceId: string;
@@ -3232,6 +3266,28 @@ declare interface DescribeRabbitMQNodeListResponse {
   TotalCount?: number;
   /** 集群列表 */
   NodeList?: RabbitMQPrivateNode[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRabbitMQPermissionRequest {
+  /** 集群实例id */
+  InstanceId: string;
+  /** 用户名，用于查询过滤，不传则查询全部 */
+  User?: string;
+  /** vhost名，用于查询过滤，不传则查询全部 */
+  VirtualHost?: string;
+  /** 分页Offset */
+  Offset?: number;
+  /** 分页Limit */
+  Limit?: number;
+}
+
+declare interface DescribeRabbitMQPermissionResponse {
+  /** 返回权限数量 */
+  TotalCount?: number;
+  /** 权限详情列表 */
+  RabbitMQPermissionList?: RabbitMQPermission[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4420,6 +4476,26 @@ declare interface ModifyPublicNetworkSecurityPolicyResponse {
   RequestId?: string;
 }
 
+declare interface ModifyRabbitMQPermissionRequest {
+  /** 集群实例Id */
+  InstanceId: string;
+  /** 用户名，权限关联的用户 */
+  User: string;
+  /** vhost名称 */
+  VirtualHost: string;
+  /** 权限类型，declare相关操作，该用户可操作该vhost下的资源名称正则表达式 */
+  ConfigRegexp: string;
+  /** 权限类型，消息写入相关操作，该用户可操作该vhost下的资源名称正则表达式 */
+  WriteRegexp: string;
+  /** 权限类型，消息读取相关操作，该用户可操作该vhost下的资源名称正则表达式 */
+  ReadRegexp: string;
+}
+
+declare interface ModifyRabbitMQPermissionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyRabbitMQUserRequest {
   /** 集群实例Id */
   InstanceId: string;
@@ -5017,6 +5093,8 @@ declare interface Tdmq {
   DeleteProCluster(data: DeleteProClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProClusterResponse>;
   /** 解绑RabbitMQ路由关系 {@link DeleteRabbitMQBindingRequest} {@link DeleteRabbitMQBindingResponse} */
   DeleteRabbitMQBinding(data: DeleteRabbitMQBindingRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRabbitMQBindingResponse>;
+  /** 删除RabbitMQ的权限 {@link DeleteRabbitMQPermissionRequest} {@link DeleteRabbitMQPermissionResponse} */
+  DeleteRabbitMQPermission(data: DeleteRabbitMQPermissionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRabbitMQPermissionResponse>;
   /** 删除RabbitMQ的用户 {@link DeleteRabbitMQUserRequest} {@link DeleteRabbitMQUserResponse} */
   DeleteRabbitMQUser(data: DeleteRabbitMQUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRabbitMQUserResponse>;
   /** 删除RabbitMQ专享版实例 {@link DeleteRabbitMQVipInstanceRequest} {@link DeleteRabbitMQVipInstanceResponse} */
@@ -5095,6 +5173,8 @@ declare interface Tdmq {
   DescribeRabbitMQExchanges(data: DescribeRabbitMQExchangesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQExchangesResponse>;
   /** RabbitMQ专享版查询节点列表 {@link DescribeRabbitMQNodeListRequest} {@link DescribeRabbitMQNodeListResponse} */
   DescribeRabbitMQNodeList(data: DescribeRabbitMQNodeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQNodeListResponse>;
+  /** 查询RabbitMQ权限列表 {@link DescribeRabbitMQPermissionRequest} {@link DescribeRabbitMQPermissionResponse} */
+  DescribeRabbitMQPermission(data: DescribeRabbitMQPermissionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQPermissionResponse>;
   /** 查询RabbitMQ队列详情 {@link DescribeRabbitMQQueueDetailRequest} {@link DescribeRabbitMQQueueDetailResponse} */
   DescribeRabbitMQQueueDetail(data: DescribeRabbitMQQueueDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQQueueDetailResponse>;
   /** 查询RabbitMQ队列列表 {@link DescribeRabbitMQQueuesRequest} {@link DescribeRabbitMQQueuesResponse} */
@@ -5191,6 +5271,8 @@ declare interface Tdmq {
   ModifyPublicNetworkAccessPoint(data: ModifyPublicNetworkAccessPointRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPublicNetworkAccessPointResponse>;
   /** 修改公网安全策略 {@link ModifyPublicNetworkSecurityPolicyRequest} {@link ModifyPublicNetworkSecurityPolicyResponse} */
   ModifyPublicNetworkSecurityPolicy(data: ModifyPublicNetworkSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPublicNetworkSecurityPolicyResponse>;
+  /** 修改RabbitMQ的权限 {@link ModifyRabbitMQPermissionRequest} {@link ModifyRabbitMQPermissionResponse} */
+  ModifyRabbitMQPermission(data: ModifyRabbitMQPermissionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRabbitMQPermissionResponse>;
   /** 修改RabbitMQ的用户 {@link ModifyRabbitMQUserRequest} {@link ModifyRabbitMQUserResponse} */
   ModifyRabbitMQUser(data: ModifyRabbitMQUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRabbitMQUserResponse>;
   /** 修改RabbitMQ专享版实例 {@link ModifyRabbitMQVipInstanceRequest} {@link ModifyRabbitMQVipInstanceResponse} */

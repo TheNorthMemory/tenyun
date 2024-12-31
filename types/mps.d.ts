@@ -3876,6 +3876,8 @@ declare interface ModifyOutputInfo {
   Zones?: string[];
   /** 转推RIST的配置。 */
   RISTSettings?: CreateOutputRistSettings;
+  /** 输出类型：Internet/TencentCSS/StreamLive */
+  OutputType?: string;
 }
 
 /** 媒体处理任务中的马赛克参数类型 */

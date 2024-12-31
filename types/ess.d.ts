@@ -1200,7 +1200,7 @@ declare interface RegistrationOrganizationInfo {
   AdminIdCardType?: string;
   /** 营业执照正面照(PNG或JPG) base64格式, 大小不超过5M */
   BusinessLicense?: string;
-  /** 授权书(PNG或JPG或PDF) base64格式, 大小不超过8M 。p.s. 如果上传授权书 ，需遵循以下条件1. 超管的信息（超管姓名，超管身份证，超管手机号）必须为必填参数。2. 超管的个人身份必须在电子签已经实名。2. 认证方式AuthorizationTypes必须只能是上传授权书方式 */
+  /** 授权书(PNG或JPG或PDF) base64格式, 大小不超过8M 。p.s. 如果上传授权书 ，需遵循以下条件1. 超管的信息（超管姓名，超管手机号）必须为必填参数。2. 超管的个人身份必须在电子签已经实名。2. 认证方式AuthorizationTypes必须只能是上传授权书方式 */
   PowerOfAttorneys?: string[];
 }
 
@@ -2375,15 +2375,15 @@ declare interface CreateOrganizationAuthUrlRequest {
   AdminIdCardType?: string;
   /** 对方打开链接认证时，对方填写的营业执照的社会信用代码是否与接口上传上来的要保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。 */
   UniformSocialCreditCodeSame?: boolean;
-  /** 对方打开链接认证时，法人姓名是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。 */
+  /** 对方打开链接认证时，法人姓名是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。p.s. 仅在法人姓名不为空时有效 */
   LegalNameSame?: boolean;
-  /** 对方打开链接认证时，认证人姓名是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。 */
+  /** 对方打开链接认证时，认证人姓名是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。p.s. 仅在认证人姓名不为空时有效 */
   AdminNameSame?: boolean;
-  /** 对方打开链接认证时，认证人居民身份证件号是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。 */
+  /** 对方打开链接认证时，认证人居民身份证件号是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。p.s. 仅在认证人身份证号不为空时有效 */
   AdminIdCardNumberSame?: boolean;
-  /** 对方打开链接认证时，认证人手机号是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。 */
+  /** 对方打开链接认证时，认证人手机号是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。p.s. 仅在认证人手机号不为空时有效 */
   AdminMobileSame?: boolean;
-  /** 对方打开链接认证时，企业名称是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。 */
+  /** 对方打开链接认证时，企业名称是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。p.s. 仅在企业名称不为空时有效 */
   OrganizationNameSame?: boolean;
   /** 营业执照正面照（支持PNG或JPG格式）需以base64格式提供，且文件大小不得超过5MB。 */
   BusinessLicense?: string;
@@ -2391,6 +2391,8 @@ declare interface CreateOrganizationAuthUrlRequest {
   Endpoint?: string;
   /** 指定企业初始化引导，现在可以配置如下的选项：1: 启用此选项后，在企业认证的最终步骤将添加创建印章的引导。如下图的位置![image](https://qcloudimg.tencent-cloud.cn/raw/88e0b45095a5c589de8995462ad755dc.jpg) */
   Initialization?: number[];
+  /** 授权书(PNG或JPG或PDF) base64格式, 大小不超过8M 。 授权书可以通过接口[生成企业授权书](https://qian.tencent.com/developers/companyApis/organizations/CreateOrganizationAuthFile) 来获得。p.s. 如果上传授权书 ，需遵循以下条件 1. 超管的信息（超管姓名，超管手机号）必须为必填参数。2. 认证方式AuthorizationTypes必须只能是上传授权书方式 */
+  PowerOfAttorneys?: string[];
 }
 
 declare interface CreateOrganizationAuthUrlResponse {

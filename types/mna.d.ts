@@ -401,7 +401,7 @@ declare interface AddDeviceRequest {
   Encrypted?: boolean;
   /** 接入环境。0：公有云网关；1：自有网关；2：公有云网关和自有网关。不填默认公有云网关。具体含义：公有云网关：即该设备只能接入公有云网关（就近接入）自有网关：即该设备只能接入已经注册上线的自有网关（就近接入或固定ip接入）公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入） */
   AccessScope?: number;
-  /** license付费方式： 0，月度授权 1，永久授权 若不传则默认为月度授权 */
+  /** license付费方式： 0，月度授权 1，永久授权 若不传则默认为月度授权，永久授权设备需要调用OrderPerLicense接口支付授权费，否则设备无法使用 */
   LicensePayMode?: number;
   /** 设备分组名称，非必选，预留参数，需要分组时传入GroupId */
   GroupName?: string;
@@ -473,7 +473,7 @@ declare interface CreateEncryptedKeyRequest {
 
 declare interface CreateEncryptedKeyResponse {
   /** 预置密钥 */
-  EncryptedKey: string;
+  EncryptedKey?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -881,7 +881,7 @@ declare interface GetPublicKeyRequest {
 
 declare interface GetPublicKeyResponse {
   /** 非对称公钥 */
-  PublicKey: string;
+  PublicKey?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

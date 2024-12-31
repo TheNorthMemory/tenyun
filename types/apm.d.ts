@@ -2,41 +2,41 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
-/** APM浮点数类型键值对 */
+/** APM 浮点数类型键值对 */
 declare interface APMKV {
-  /** Key值定义 */
-  Key: string | null;
-  /** Value值定义 */
-  Value: number | null;
+  /** Key 值定义 */
+  Key?: string;
+  /** Value 值定义 */
+  Value?: number;
 }
 
-/** Apm通用KV结构 */
+/** APM 通用 KV 结构 */
 declare interface APMKVItem {
-  /** Key值定义 */
-  Key: string | null;
-  /** Value值定义 */
-  Value: string | null;
+  /** Key 值定义 */
+  Key: string;
+  /** Value 值定义 */
+  Value: string;
 }
 
-/** apm Agent信息 */
+/** APM Agent 信息 */
 declare interface ApmAgentInfo {
-  /** Agent下载地址 */
-  AgentDownloadURL: string | null;
-  /** Collector上报地址 */
-  CollectorURL: string | null;
-  /** Token信息 */
-  Token: string | null;
+  /** Agent 下载地址 */
+  AgentDownloadURL?: string;
+  /** Collector 上报地址 */
+  CollectorURL?: string;
+  /** Token 信息 */
+  Token?: string;
   /** 外网上报地址 */
-  PublicCollectorURL: string | null;
-  /** 自研VPC上报地址 */
-  InnerCollectorURL: string | null;
-  /** 内网上报地址(Private Link上报地址) */
-  PrivateLinkCollectorURL: string | null;
+  PublicCollectorURL?: string;
+  /** 自研 VPC 上报地址 */
+  InnerCollectorURL?: string;
+  /** 内网上报地址( Private Link 上报地址) */
+  PrivateLinkCollectorURL?: string;
 }
 
 /** 应用相关的配置列表项 */
 declare interface ApmApplicationConfigView {
-  /** 业务系统ID */
+  /** 业务系统 ID */
   InstanceKey?: string;
   /** 应用名 */
   ServiceName?: string;
@@ -44,22 +44,22 @@ declare interface ApmApplicationConfigView {
   OperationNameFilter?: string;
   /** 错误类型过滤 */
   ExceptionFilter?: string;
-  /** HTTP状态码过滤 */
+  /** HTTP 状态码过滤 */
   ErrorCodeFilter?: string;
   /** 应用诊断开关（已废弃） */
-  EventEnable?: boolean | null;
-  /** URL收敛开关 0 关 1 开 */
+  EventEnable?: boolean;
+  /** URL 收敛开关 0 关 1 开 */
   UrlConvergenceSwitch?: number;
-  /** URL收敛阈值 */
+  /** URL 收敛阈值 */
   UrlConvergenceThreshold?: number;
-  /** URL收敛规则正则 */
+  /** URL 收敛规则正则 */
   UrlConvergence?: string;
-  /** URL排除规则正则 */
+  /** URL 排除规则正则 */
   UrlExclude?: string;
   /** 是否开启日志 0 关 1 开 */
   IsRelatedLog?: number;
   /** 日志源 */
-  LogSource?: string | null;
+  LogSource?: string;
   /** 日志集 */
   LogSet?: string;
   /** 日志主题 */
@@ -71,7 +71,7 @@ declare interface ApmApplicationConfigView {
   /** 探针总开关 */
   AgentEnable?: boolean;
   /** 组件列表开关（已废弃） */
-  InstrumentList?: Instrument[] | null;
+  InstrumentList?: Instrument[];
   /** 链路压缩开关（已废弃） */
   TraceSquash?: boolean;
 }
@@ -79,93 +79,93 @@ declare interface ApmApplicationConfigView {
 /** 指标维度信息 */
 declare interface ApmField {
   /** 昨日同比指标值，已弃用，不建议使用 */
-  CompareVal: string | null;
+  CompareVal?: string;
   /** Compare值结果数组，推荐使用 */
-  CompareVals: APMKVItem[] | null;
+  CompareVals?: APMKVItem[] | null;
   /** 指标值 */
-  Value: number | null;
+  Value?: number;
   /** 指标所对应的单位 */
-  Unit: string | null;
+  Unit?: string;
   /** 请求数 */
-  Key: string;
+  Key?: string;
   /** 同环比上周期具体数值 */
-  LastPeriodValue: APMKV[] | null;
+  LastPeriodValue?: APMKV[] | null;
 }
 
-/** apm实例信息 */
+/** APM 业务系统信息 */
 declare interface ApmInstanceDetail {
-  /** 存储使用量(MB) */
-  AmountOfUsedStorage?: number | null;
-  /** 实例名 */
-  Name?: string | null;
-  /** 实例所属tag列表 */
-  Tags?: ApmTag[] | null;
-  /** 实例ID */
+  /** 存储使用量( MB ) */
+  AmountOfUsedStorage?: number;
+  /** 业务系统名 */
+  Name?: string;
+  /** 业务系统所属 Tag 列表 */
+  Tags?: ApmTag[];
+  /** 业务系统 ID */
   InstanceId?: string;
-  /** 创建人Uin */
-  CreateUin?: string | null;
-  /** 该实例已上报的服务端应用数量 */
-  ServiceCount?: number | null;
-  /** 日均上报Span数 */
-  CountOfReportSpanPerDay?: number | null;
-  /** AppId信息 */
+  /** 创建人 Uin */
+  CreateUin?: string;
+  /** 该业务系统已上报的服务端应用数量 */
+  ServiceCount?: number;
+  /** 日均上报 Span 数 */
+  CountOfReportSpanPerDay?: number;
+  /** AppID 信息 */
   AppId?: number;
-  /** Trace数据保存时长 */
-  TraceDuration?: number | null;
-  /** 实例描述信息 */
-  Description?: string | null;
-  /** 实例状态 */
-  Status?: number | null;
-  /** 实例所属地域 */
-  Region?: string | null;
-  /** 实例上报额度 */
-  SpanDailyCounters?: number | null;
-  /** 实例是否开通计费 */
-  BillingInstance?: number | null;
+  /** Trace 数据保存时长 */
+  TraceDuration?: number;
+  /** 业务系统描述信息 */
+  Description?: string;
+  /** 业务系统状态 */
+  Status?: number;
+  /** 业务系统所属地域 */
+  Region?: string;
+  /** 业务系统上报额度 */
+  SpanDailyCounters?: number;
+  /** 业务系统是否开通计费 */
+  BillingInstance?: number;
   /** 错误率阈值 */
-  ErrRateThreshold?: number | null;
+  ErrRateThreshold?: number;
   /** 采样率阈值 */
-  SampleRate?: number | null;
+  SampleRate?: number;
   /** 是否开启错误采样 0 关 1 开 */
-  ErrorSample?: number | null;
+  ErrorSample?: number;
   /** 慢调用保存阈值 */
-  SlowRequestSavedThreshold?: number | null;
-  /** cls日志所在地域 */
-  LogRegion?: string | null;
+  SlowRequestSavedThreshold?: number;
+  /** CLS 日志所在地域 */
+  LogRegion?: string;
   /** 日志来源 */
-  LogSource?: string | null;
+  LogSource?: string;
   /** 日志功能开关 0 关 | 1 开 */
-  IsRelatedLog?: number | null;
+  IsRelatedLog?: number;
   /** 日志主题ID */
-  LogTopicID?: string | null;
+  LogTopicID?: string;
   /** 该实例已上报的客户端应用数量 */
-  ClientCount?: number | null;
+  ClientCount?: number;
   /** 该实例已上报的总应用数量 */
-  TotalCount?: number | null;
-  /** CLS日志集 | ES集群ID */
-  LogSet?: string | null;
-  /** Metric数据保存时长 */
-  MetricDuration?: number | null;
+  TotalCount?: number;
+  /** CLS 日志集 | ES 集群ID */
+  LogSet?: string;
+  /** Metric 数据保存时长 */
+  MetricDuration?: number;
   /** 用户自定义展示标签列表 */
-  CustomShowTags?: string[] | null;
-  /** 实例计费模式1为预付费0为按量付费 */
-  PayMode?: number | null;
-  /** 实例计费模式是否生效 */
-  PayModeEffective?: boolean | null;
+  CustomShowTags?: string[];
+  /** 业务系统计费模式1为预付费0为按量付费 */
+  PayMode?: number;
+  /** 业务系统计费模式是否生效 */
+  PayModeEffective?: boolean;
   /** 响应时间满意阈值 */
-  ResponseDurationWarningThreshold?: number | null;
+  ResponseDurationWarningThreshold?: number;
   /** 是否免费（0=否，1=限额免费，2=完全免费），默认0 */
-  Free?: number | null;
-  /** 是否tsf默认业务系统（0=否，1-是） */
-  DefaultTSF?: number | null;
-  /** 是否关联dashboard： 0 关 1 开 */
-  IsRelatedDashboard?: number | null;
-  /** dashboard ID */
-  DashboardTopicID?: string | null;
+  Free?: number;
+  /** 是否 tsf 默认业务系统（0=否，1-是） */
+  DefaultTSF?: number;
+  /** 是否关联 Dashboard： 0 关 1 开 */
+  IsRelatedDashboard?: number;
+  /** Dashboard ID */
+  DashboardTopicID?: string;
   /** 是否开启组件漏洞检测 */
-  IsInstrumentationVulnerabilityScan?: number | null;
-  /** 是否开启SQL注入分析 */
-  IsSqlInjectionAnalysis?: number | null;
+  IsInstrumentationVulnerabilityScan?: number;
+  /** 是否开启 SQL 注入分析 */
+  IsSqlInjectionAnalysis?: number;
 }
 
 /** 指标列表单元 */
@@ -187,11 +187,11 @@ declare interface ApmTag {
 /** 查询过滤参数 */
 declare interface Filter {
   /** 过滤方式（=, !=, in） */
-  Type: string | null;
+  Type: string;
   /** 过滤维度名 */
-  Key: string | null;
+  Key: string;
   /** 过滤值，in过滤方式用逗号分割多个值 */
-  Value: string | null;
+  Value: string;
 }
 
 /** 查询过滤参数 */
@@ -205,23 +205,23 @@ declare interface GeneralFilter {
 /** 组件 */
 declare interface Instrument {
   /** 组件名称 */
-  Name?: string | null;
+  Name?: string;
   /** 组件开关 */
-  Enable?: boolean | null;
+  Enable?: boolean;
 }
 
 /** 指标曲线数据 */
 declare interface Line {
   /** 指标名 */
-  MetricName: string;
+  MetricName?: string;
   /** 指标中文名 */
-  MetricNameCN: string;
+  MetricNameCN?: string;
   /** 时间序列 */
-  TimeSerial: number[];
+  TimeSerial?: number[];
   /** 数据序列 */
-  DataSerial: number[] | null;
+  DataSerial?: number[];
   /** 维度列表 */
-  Tags: ApmTag[] | null;
+  Tags?: ApmTag[];
 }
 
 /** sql排序字段 */
@@ -242,32 +242,32 @@ declare interface QueryMetricItem {
   Compares?: string[];
 }
 
-/** Span对象 */
+/** Span 对象 */
 declare interface Span {
-  /** Trace Id */
-  TraceID?: string | null;
+  /** Trace ID */
+  TraceID?: string;
   /** 日志 */
-  Logs?: SpanLog[] | null;
+  Logs?: SpanLog[];
   /** 标签 */
-  Tags?: SpanTag[] | null;
+  Tags?: SpanTag[];
   /** 上报应用服务信息 */
-  Process?: SpanProcess | null;
+  Process?: SpanProcess;
   /** 产生时间戳(毫秒) */
-  Timestamp?: number | null;
-  /** Span名称 */
-  OperationName?: string | null;
+  Timestamp?: number;
+  /** Span 名称 */
+  OperationName?: string;
   /** 关联关系 */
-  References?: SpanReference[] | null;
+  References?: SpanReference[];
   /** 产生时间戳(微秒) */
-  StartTime?: number | null;
+  StartTime?: number;
   /** 持续耗时(微妙) */
-  Duration?: number | null;
-  /** Span Id */
-  SpanID?: string | null;
+  Duration?: number;
+  /** Span ID */
+  SpanID?: string;
   /** 产生时间戳(毫秒) */
-  StartTimeMillis?: number | null;
-  /** Parent Span Id */
-  ParentSpanID?: string | null;
+  StartTimeMillis?: number;
+  /** Parent Span ID */
+  ParentSpanID?: string;
 }
 
 /** Span日志部分 */
@@ -311,7 +311,7 @@ declare interface CreateApmInstanceRequest {
   Name: string;
   /** 业务系统描述信息 */
   Description?: string;
-  /** Trace数据保存时长，单位为天默认存储为3天 */
+  /** Trace 数据保存时长，单位为天默认存储为3天 */
   TraceDuration?: number;
   /** 标签列表 */
   Tags?: ApmTag[];
@@ -319,19 +319,19 @@ declare interface CreateApmInstanceRequest {
   SpanDailyCounters?: number;
   /** 业务系统的计费模式 */
   PayMode?: number;
-  /** （0=付费版；1=tsf受限免费版；2=免费版） */
+  /** （0=付费版；1=tsf 受限免费版；2=免费版） */
   Free?: number;
 }
 
 declare interface CreateApmInstanceResponse {
-  /** 业务系统ID */
-  InstanceId?: string | null;
+  /** 业务系统 ID */
+  InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeApmAgentRequest {
-  /** 业务系统ID */
+  /** 业务系统 ID */
   InstanceId: string;
   /** 接入方式 */
   AgentType?: string;
@@ -344,28 +344,28 @@ declare interface DescribeApmAgentRequest {
 }
 
 declare interface DescribeApmAgentResponse {
-  /** Agent信息 */
-  ApmAgent?: ApmAgentInfo | null;
+  /** Agent 信息 */
+  ApmAgent?: ApmAgentInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeApmInstancesRequest {
-  /** Tag列表 */
+  /** Tag 列表 */
   Tags?: ApmTag[];
-  /** 搜索实例名 */
+  /** 搜索业务系统名 */
   InstanceName?: string;
-  /** 过滤实例ID */
+  /** 过滤业务系统 ID */
   InstanceIds?: string[];
-  /** 是否查询官方demo实例 */
+  /** 是否查询官方 Demo 业务系统 */
   DemoInstanceFlag?: number;
-  /** 是否查询全地域实例 */
+  /** 是否查询全地域业务系统 */
   AllRegionsFlag?: number;
 }
 
 declare interface DescribeApmInstancesResponse {
-  /** apm实例列表 */
-  Instances?: ApmInstanceDetail[] | null;
+  /** APM 业务系统列表 */
+  Instances?: ApmInstanceDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -409,7 +409,7 @@ declare interface DescribeGeneralMetricDataRequest {
 
 declare interface DescribeGeneralMetricDataResponse {
   /** 指标结果集 */
-  Records?: Line[] | null;
+  Records?: Line[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -421,22 +421,22 @@ declare interface DescribeGeneralSpanListRequest {
   Limit: number;
   /** 排序 */
   OrderBy?: OrderBy;
-  /** span查询开始时间戳（单位:秒） */
+  /** Span查询开始时间戳（单位:秒） */
   StartTime?: number;
-  /** 业务系统ID */
+  /** 业务系统 ID */
   InstanceId?: string;
   /** 通用过滤参数 */
   Filters?: Filter[];
   /** 业务自身服务名 */
   BusinessName?: string;
-  /** span查询结束时间戳（单位:秒） */
+  /** Span查询结束时间戳（单位:秒） */
   EndTime?: number;
 }
 
 declare interface DescribeGeneralSpanListResponse {
   /** 总数量 */
   TotalCount?: number;
-  /** Span分页列表 */
+  /** Span 分页列表 */
   Spans?: Span[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -475,9 +475,9 @@ declare interface DescribeMetricRecordsRequest {
 
 declare interface DescribeMetricRecordsResponse {
   /** 指标结果集 */
-  Records?: ApmMetricRecord[] | null;
+  Records?: ApmMetricRecord[];
   /** 查询指标结果集条数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -505,7 +505,7 @@ declare interface DescribeServiceOverviewRequest {
 
 declare interface DescribeServiceOverviewResponse {
   /** 指标结果集 */
-  Records?: ApmMetricRecord[] | null;
+  Records?: ApmMetricRecord[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -619,11 +619,11 @@ declare interface TerminateApmInstanceResponse {
 /** {@link Apm 应用性能监控} */
 declare interface Apm {
   (): Versions;
-  /** 创建APM业务系统 {@link CreateApmInstanceRequest} {@link CreateApmInstanceResponse} */
+  /** 创建 APM 业务系统 {@link CreateApmInstanceRequest} {@link CreateApmInstanceResponse} */
   CreateApmInstance(data: CreateApmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApmInstanceResponse>;
-  /** 获取 APM Agent信息 {@link DescribeApmAgentRequest} {@link DescribeApmAgentResponse} */
+  /** 获取 APM Agent 信息 {@link DescribeApmAgentRequest} {@link DescribeApmAgentResponse} */
   DescribeApmAgent(data: DescribeApmAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmAgentResponse>;
-  /** 拉取APM实例列表 {@link DescribeApmInstancesRequest} {@link DescribeApmInstancesResponse} */
+  /** 拉取 APM 业务系统列表 {@link DescribeApmInstancesRequest} {@link DescribeApmInstancesResponse} */
   DescribeApmInstances(data?: DescribeApmInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmInstancesResponse>;
   /** 查询应用配置信息 {@link DescribeGeneralApmApplicationConfigRequest} {@link DescribeGeneralApmApplicationConfigResponse} */
   DescribeGeneralApmApplicationConfig(data: DescribeGeneralApmApplicationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralApmApplicationConfigResponse>;

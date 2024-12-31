@@ -229,7 +229,7 @@ declare interface AnalysisDimensional {
   /** 分析内容 */
   Content: string | null;
   /** 多维分析配置。当Analysis的Type字段为query（自定义）时，支持{"Key": "SyntaxRule", // 语法规则"Value": "1" //0：Lucene语法 ，1： CQL语法}当Analysis的Type字段为field（top5）时, 支持 { "Key": "QueryIndex", "Value": "-1" // -1：自定义， 1：执行语句1， 2：执行语句2},{ "Key": "CustomQuery", //检索语句。 QueryIndex为-1时有效且必填 "Value": "* | select count(*) as count"},{ "Key": "SyntaxRule", // 查不到这个字段也是老语法（Lucene） "Value": "0"//0:Lucene, 1:CQL} 当Analysis的Type字段为original（原始日志）时, 支持{ "Key": "Fields", "Value": "__SOURCE__,__HOSTNAME__,__TIMESTAMP__,__PKG_LOGID__,__TAG__.pod_ip"}, { "Key": "QueryIndex", "Value": "-1" // -1：自定义， 1：执行语句1， 2：执行语句2},{ "Key": "CustomQuery", // //检索语句。 QueryIndex为-1时有效且必填 "Value": "* | select count(*) as count"},{ "Key": "Format", //显示形式。1：每条日志一行，2：每条日志每个字段一行 "Value": "2"},{ "Key": "Limit", //最大日志条数 "Value": "5"},{ "Key": "SyntaxRule", // 查不到这个字段也是老语法 "Value": "0"//0:Lucene, 1:CQL} */
-  ConfigInfo?: AlarmAnalysisConfig[] | null;
+  ConfigInfo?: AlarmAnalysisConfig[];
 }
 
 /** 免鉴权信息 */
@@ -1598,6 +1598,30 @@ declare interface WebCallback {
   Index?: number;
 }
 
+/** 告警渠道回调配置信息 */
+declare interface WebCallbackInfo {
+  /** 告警渠道回调配置id。 */
+  WebCallbackId?: string | null;
+  /** 告警渠道回调配置名称。 */
+  Name?: string | null;
+  /** 渠道类型WeCom:企业微信;DingTalk:钉钉;Lark:飞书;Http:自定义回调; */
+  Type?: string | null;
+  /** 回调地址。 */
+  Webhook?: string | null;
+  /** 请求方式。 */
+  Method?: string | null;
+  /** 秘钥信息。 */
+  Key?: string | null;
+  /** 主账号。 */
+  Uin?: number | null;
+  /** 子账号。 */
+  SubUin?: number | null;
+  /** 创建时间。秒级时间戳 */
+  CreateTime?: number | null;
+  /** 更新时间。秒级时间戳 */
+  UpdateTime?: number | null;
+}
+
 declare interface AddMachineGroupInfoRequest {
   /** 机器组ID */
   GroupId: string;
@@ -1829,7 +1853,7 @@ declare interface CreateConfigExtraRequest {
   ContainerFile?: ContainerFileInfo;
   /** 容器标准输出类型配置。 */
   ContainerStdout?: ContainerStdoutInfo;
-  /** 日志格式化方式，用于容器采集场景。- stdout-docker-json：用于docker容器采集场景- stdout-containerd：用于containerd容器采集场景 */
+  /** 日志格式化方式，用于容器采集场景。 - 已废弃- stdout-docker-json：用于docker容器采集场景- stdout-containerd：用于containerd容器采集场景 */
   LogFormat?: string;
   /** 提取规则，如果设置了ExtractRule，则必须设置LogType */
   ExtractRule?: ExtractRuleInfo;
@@ -2254,6 +2278,26 @@ declare interface CreateTopicResponse {
   RequestId?: string;
 }
 
+declare interface CreateWebCallbackRequest {
+  /** 通知内容名称。 */
+  Name: string;
+  /** 渠道类型。WeCom:企业微信;DingTalk:钉钉;Lark:飞书;Http:自定义回调。 */
+  Type: string;
+  /** Webhook地址。 */
+  Webhook: string;
+  /** 请求方式。 支持POST、PUT。当Type为Http时，必填。 */
+  Method?: string;
+  /** 秘钥。 */
+  Key?: string;
+}
+
+declare interface CreateWebCallbackResponse {
+  /** 回调配置ID。 */
+  WebCallbackId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAlarmNoticeRequest {
   /** 通知渠道组ID */
   AlarmNoticeId: string;
@@ -2476,6 +2520,16 @@ declare interface DeleteTopicRequest {
 }
 
 declare interface DeleteTopicResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteWebCallbackRequest {
+  /** 告警渠道回调配置ID。 */
+  WebCallbackId: string;
+}
+
+declare interface DeleteWebCallbackResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3035,7 +3089,7 @@ declare interface DescribeTopicsRequest {
   Limit?: number;
   /** 控制Filters相关字段是否为精确匹配。0: 默认值，topicName 和 logsetName 模糊匹配1: topicName 精确匹配2: logsetName精确匹配3: topicName 和logsetName 都精确匹配 */
   PreciseSearch?: number;
-  /** 主题类型0:日志主题，默认值1:指标主题 */
+  /** 主题类型- 0:日志主题，默认值- 1:指标主题 */
   BizType?: number;
 }
 
@@ -3043,6 +3097,24 @@ declare interface DescribeTopicsResponse {
   /** 日志主题列表 */
   Topics?: TopicInfo[];
   /** 总数目 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWebCallbacksRequest {
+  /** name按照【告警渠道回调配置名称】进行过滤。类型：String必选：否 webCallbackId按照【告警渠道回调配置ID】进行过滤。类型：String必选：否 type按照【告警渠道回调配置渠道类型】进行过滤。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为100。 */
+  Filters?: Filter[];
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
+}
+
+declare interface DescribeWebCallbacksResponse {
+  /** 告警渠道回调配置列表。 */
+  WebCallbacks?: WebCallbackInfo[] | null;
+  /** 符合条件的通知内容配置总数。 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3612,6 +3684,26 @@ declare interface ModifyTopicResponse {
   RequestId?: string;
 }
 
+declare interface ModifyWebCallbackRequest {
+  /** 告警渠道回调配置ID。 */
+  WebCallbackId: string;
+  /** 告警渠道回调配置名称。 */
+  Name?: string;
+  /** 渠道类型WeCom:企业微信;DingTalk:钉钉;Lark:飞书;Http:自定义回调; */
+  Type?: string;
+  /** 回调地址。 */
+  Webhook?: string;
+  /** 请求方式。支持POST、PUT。注意：当Type为Http时，必填。 */
+  Method?: string;
+  /** 秘钥信息。 */
+  Key?: string;
+}
+
+declare interface ModifyWebCallbackResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface OpenKafkaConsumerRequest {
   /** 日志主题ID */
   FromTopicId: string;
@@ -3899,6 +3991,8 @@ declare interface Cls {
   CreateShipper(data: CreateShipperRequest, config?: AxiosRequestConfig): AxiosPromise<CreateShipperResponse>;
   /** 创建日志主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
+  /** 创建告警渠道回调配置 {@link CreateWebCallbackRequest} {@link CreateWebCallbackResponse} */
+  CreateWebCallback(data: CreateWebCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWebCallbackResponse>;
   /** 删除告警策略 {@link DeleteAlarmRequest} {@link DeleteAlarmResponse} */
   DeleteAlarm(data: DeleteAlarmRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAlarmResponse>;
   /** 删除通知渠道组 {@link DeleteAlarmNoticeRequest} {@link DeleteAlarmNoticeResponse} */
@@ -3941,6 +4035,8 @@ declare interface Cls {
   DeleteShipper(data: DeleteShipperRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShipperResponse>;
   /** 删除日志主题 {@link DeleteTopicRequest} {@link DeleteTopicResponse} */
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
+  /** 删除告警渠道回调配置 {@link DeleteWebCallbackRequest} {@link DeleteWebCallbackResponse} */
+  DeleteWebCallback(data: DeleteWebCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWebCallbackResponse>;
   /** 获取通知渠道组列表 {@link DescribeAlarmNoticesRequest} {@link DescribeAlarmNoticesResponse} */
   DescribeAlarmNotices(data?: DescribeAlarmNoticesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmNoticesResponse>;
   /** 获取告警屏蔽配置规则 {@link DescribeAlarmShieldsRequest} {@link DescribeAlarmShieldsResponse} */
@@ -4001,6 +4097,8 @@ declare interface Cls {
   DescribeShippers(data?: DescribeShippersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShippersResponse>;
   /** 获取日志主题列表 {@link DescribeTopicsRequest} {@link DescribeTopicsResponse} */
   DescribeTopics(data?: DescribeTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicsResponse>;
+  /** 获取告警渠道回调配置列表 {@link DescribeWebCallbacksRequest} {@link DescribeWebCallbacksResponse} */
+  DescribeWebCallbacks(data?: DescribeWebCallbacksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebCallbacksResponse>;
   /** 获取告警策略执行详情 {@link GetAlarmLogRequest} {@link GetAlarmLogResponse} */
   GetAlarmLog(data: GetAlarmLogRequest, config?: AxiosRequestConfig): AxiosPromise<GetAlarmLogResponse>;
   /** 合并分区 {@link MergePartitionRequest} {@link MergePartitionResponse} */
@@ -4045,6 +4143,8 @@ declare interface Cls {
   ModifyShipper(data: ModifyShipperRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyShipperResponse>;
   /** 修改日志主题 {@link ModifyTopicRequest} {@link ModifyTopicResponse} */
   ModifyTopic(data: ModifyTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicResponse>;
+  /** 修改告警渠道回调配置 {@link ModifyWebCallbackRequest} {@link ModifyWebCallbackResponse} */
+  ModifyWebCallback(data: ModifyWebCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWebCallbackResponse>;
   /** 打开Kafka协议消费 {@link OpenKafkaConsumerRequest} {@link OpenKafkaConsumerResponse} */
   OpenKafkaConsumer(data: OpenKafkaConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<OpenKafkaConsumerResponse>;
   /** Kafka数据订阅日志预览 {@link PreviewKafkaRechargeRequest} {@link PreviewKafkaRechargeResponse} */

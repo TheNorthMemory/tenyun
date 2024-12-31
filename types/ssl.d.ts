@@ -459,15 +459,15 @@ declare interface DeployRecordInfo {
 /** 资源详情 */
 declare interface DeployedResources {
   /** 证书ID */
-  CertificateId: string;
+  CertificateId?: string;
   /** 数量 */
-  Count: number;
+  Count?: number;
   /** 资源标识:clb,cdn,live,waf,antiddos */
-  Type: string;
+  Type?: string;
   /** 不建议使用。字段返回和Resources相同。本字段后续只返回null */
-  ResourceIds: string[] | null;
+  ResourceIds?: string[] | null;
   /** 关联资源ID或关联域名。 */
-  Resources: string[] | null;
+  Resources?: string[] | null;
 }
 
 /** 域名验证结果 */
@@ -497,13 +497,13 @@ declare interface DvAuthDetail {
   /** DV 认证值。 */
   DvAuthValue?: string | null;
   /** DV 认证值域名。 */
-  DvAuthDomain: string | null;
+  DvAuthDomain?: string | null;
   /** DV 认证值路径。 */
-  DvAuthPath: string | null;
+  DvAuthPath?: string | null;
   /** DV 认证子域名。 */
-  DvAuthKeySubDomain: string | null;
+  DvAuthKeySubDomain?: string | null;
   /** DV 认证信息。 */
-  DvAuths: DvAuths[] | null;
+  DvAuths?: DvAuths[] | null;
 }
 
 /** 返回参数键为 DvAuths 的内容。 */
@@ -723,17 +723,17 @@ declare interface PreAuditInfo {
 /** 获取证书列表（DescribeCertificates）返回参数键为 Certificates 下，key为 ProjectInfo 的内容。 */
 declare interface ProjectInfo {
   /** 项目名称。 */
-  ProjectName: string | null;
+  ProjectName?: string | null;
   /** 项目创建用户 UIN。 */
-  ProjectCreatorUin: number | null;
+  ProjectCreatorUin?: number | null;
   /** 项目创建时间。 */
-  ProjectCreateTime: string | null;
+  ProjectCreateTime?: string | null;
   /** 项目信息简述。 */
-  ProjectResume: string | null;
+  ProjectResume?: string | null;
   /** 用户 UIN。 */
-  OwnerUin: number | null;
+  OwnerUin?: number | null;
   /** 项目 ID。 */
-  ProjectId: string | null;
+  ProjectId?: string | null;
 }
 
 /** 云资源地域列表 */
@@ -747,13 +747,13 @@ declare interface ResourceTypeRegions {
 /** 返回参数键为 RevokeDomainValidateAuths 的内容。 */
 declare interface RevokeDomainValidateAuths {
   /** DV 认证值路径。 */
-  DomainValidateAuthPath: string | null;
+  DomainValidateAuthPath?: string | null;
   /** DV 认证 KEY。 */
-  DomainValidateAuthKey: string | null;
+  DomainValidateAuthKey?: string | null;
   /** DV 认证值。 */
-  DomainValidateAuthValue: string | null;
+  DomainValidateAuthValue?: string | null;
   /** DV 认证域名。 */
-  DomainValidateAuthDomain: string | null;
+  DomainValidateAuthDomain?: string | null;
 }
 
 /** 根证书 */

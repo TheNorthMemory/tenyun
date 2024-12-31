@@ -15,7 +15,7 @@ declare interface AddRecordBatch {
   /** 解析记录的线路 ID，RecordLine和RecordLineId都有时，系统优先取 RecordLineId。 */
   RecordLineId?: string;
   /** 记录权重值(暂未支持)。 */
-  Weight?: number | null;
+  Weight?: number;
   /** 记录的 MX 记录值，非 MX 记录类型，默认为 0，MX记录则必选。 */
   MX?: number;
   /** 记录的 TTL 值，默认600。 */
@@ -193,7 +193,7 @@ declare interface DeleteRecordBatchDetail {
   /** 操作 */
   Operation?: string;
   /** 解析记录列表，json 序列化之后的字符串形式 */
-  RecordList: string;
+  RecordList?: string;
 }
 
 /** 查看任务详情返回结构 */
@@ -477,13 +477,13 @@ declare interface LineGroupDetail {
 /** 线路分组信息 */
 declare interface LineGroupInfo {
   /** 线路分组ID */
-  LineId: string;
+  LineId?: string;
   /** 线路分组名称 */
-  Name: string;
+  Name?: string;
   /** 分组类型 */
-  Type: string;
+  Type?: string;
   /** 线路分组包含的线路列表 */
-  LineList: string[];
+  LineList?: string[];
 }
 
 /** 自定义线路分组元素 */
@@ -866,30 +866,30 @@ declare interface WhoisContact {
 
 /** Whois联系信息地址 */
 declare interface WhoisContactAddress {
+  /** 城市 */
+  City?: string | null;
+  /** 国家 */
+  Country?: string | null;
+  /** 电子邮箱 */
+  Email?: string | null;
+  /** 传真 */
+  Fax?: string | null;
+  /** 传真分机号 */
+  FaxExt?: string | null;
   /** 无 */
-  City: string | null;
-  /** 无 */
-  Country: string | null;
-  /** 无 */
-  Email: string | null;
-  /** 无 */
-  Fax: string | null;
-  /** 无 */
-  FaxExt: string | null;
-  /** 无 */
-  Handle: string | null;
-  /** 无 */
-  Name: string | null;
-  /** 无 */
-  Organization: string | null;
-  /** 无 */
-  Phone: string | null;
-  /** 无 */
-  PostalCode: string | null;
-  /** 无 */
-  State: string | null;
-  /** 无 */
-  Street: string | null;
+  Handle?: string | null;
+  /** 名称 */
+  Name?: string | null;
+  /** 组织机构 */
+  Organization?: string | null;
+  /** 电话 */
+  Phone?: string | null;
+  /** 邮编 */
+  PostalCode?: string | null;
+  /** 省份/州 */
+  State?: string | null;
+  /** 街道地址 */
+  Street?: string | null;
 }
 
 /** Whois信息 */
@@ -2163,14 +2163,14 @@ declare interface ModifyDynamicDNSRequest {
   RecordId: number;
   /** 记录线路，通过 API 记录线路获得，中文，比如：默认。 */
   RecordLine: string;
-  /** 记录值，如 IP : 200.200.200.200， CNAME : cname.dnspod.com.， MX : mail.dnspod.com.。 */
-  Value: string;
   /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId */
   DomainId?: number;
   /** 主机记录，如 www，如果不传，默认为 @。 */
   SubDomain?: string;
   /** 线路的 ID，通过 API 记录线路获得，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。 */
   RecordLineId?: string;
+  /** IP 地址，支持 IPv4、IPv6，例如 119.29.29.29 或者 2402:4e00:: */
+  Value?: string;
   /** TTL值，如果不传，默认为域名的TTL值。 */
   Ttl?: number;
 }

@@ -906,6 +906,16 @@ declare interface OrganizationAuthUrl {
   ErrorMessage?: string;
 }
 
+/** 企业认证可选项，其中包括 社会信用代码是否一致，企业名称是否一致，法人是否一致等信息。代表生成链接的时候指定的这些信息不能被用户修改。p.s. 注意这些选项一旦传递，相关的信息也不会被上传的营业执照里面包含的信息所覆盖。 */
+declare interface OrganizationAuthorizationOptions {
+  /** 对方打开链接认证时，对方填写的营业执照的社会信用代码是否与接口上传上来的要保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。 */
+  UniformSocialCreditCodeSame?: boolean;
+  /** 对方打开链接认证时，企业名称是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。p.s. 仅在企业名称不为空时有效 */
+  OrganizationNameSame?: boolean;
+  /** 对方打开链接认证时，法人姓名是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。p.s. 仅在法人姓名不为空时有效 */
+  LegalNameSame?: boolean;
+}
+
 /** 企业认证信息参数， 需要保证这些参数跟营业执照中的信息一致。 */
 declare interface OrganizationCommonInfo {
   /** 组织机构名称。请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。 */
@@ -2635,6 +2645,16 @@ declare interface CreateConsoleLoginUrlRequest {
   TopNavigationStatus?: string;
   /** 是否自动激活子客企业，有下面两种选项：**false（默认设置）**：不自动激活子客户。您需要通过控制台或调用[激活或者续期子企业](https://qian.tencent.com/developers/partnerApis/accounts/CreateChannelSubOrganizationActive)接口手动完成激活过程。**true**：若持有的许可证充足，子客户企业注册完成后将自动激活，无需手动操作或访问控制台。注：如果应用扩展服务中的自动激活子客企业为打开态， 则忽略本接口的AutoActive这个参数（若持有的许可证充足，子客户企业注册完成后将自动激活），具体位置参考下图：![image](https://qcloudimg.tencent-cloud.cn/raw/c3639b05503d3735bac483d17aa6b0a3.png) */
   AutoActive?: boolean;
+  /** 营业执照正面照（支持PNG或JPG格式）需以base64格式提供，且文件大小不得超过5MB。 */
+  BusinessLicense?: string;
+  /** 组织机构企业注册地址。 请确认该企业注册地址与企业营业执照中注册的地址一致。 */
+  ProxyAddress?: string;
+  /** 组织机构法人的姓名。 请确认该企业统一社会信用代码与企业营业执照中注册的法人姓名一致。 */
+  ProxyLegalName?: string;
+  /** 授权书(PNG或JPG或PDF) base64格式, 大小不超过8M 。 p.s. 如果上传授权书 ，需遵循以下条件 1. 超管的信息（超管姓名，超管手机号）必须为必填参数。 2. 认证方式AuthorizationTypes必须只能是上传授权书方式 */
+  PowerOfAttorneys?: string[];
+  /** 企业认证时个性化能力信息 */
+  OrganizationAuthorizationOptions?: OrganizationAuthorizationOptions;
 }
 
 declare interface CreateConsoleLoginUrlResponse {

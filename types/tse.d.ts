@@ -1070,6 +1070,8 @@ declare interface GovernanceNamespace {
   RemoveGroupIds?: string[] | null;
   /** 该命名空间下的服务对哪些命名空间可见 */
   ServiceExportTo?: string[] | null;
+  /** 是否开启同步到全局注册中心 */
+  SyncToGlobalRegistry?: boolean | null;
 }
 
 /** 治理中心命名空间输入参数 */
@@ -1128,6 +1130,8 @@ declare interface GovernanceService {
   ExportTo?: string[] | null;
   /** 该服务信息摘要签名 */
   Revision?: string | null;
+  /** 是否开启同步到全局注册中心 */
+  SyncToGlobalRegistry?: boolean;
 }
 
 /** 服务契约定义 */

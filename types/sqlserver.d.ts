@@ -576,6 +576,14 @@ declare interface DrReadableInfo {
   ReadMode?: string;
 }
 
+/** 备机可用区信息 */
+declare interface DrZoneInfo {
+  /** 备机资源ID */
+  DrInstanceId?: string;
+  /** 备机可用区 */
+  Zone?: string;
+}
+
 /** 设置实例扩展事件阈值 */
 declare interface EventConfig {
   /** 事件类型，slow-设置慢SQL阈值，blocked-设置阻塞、死锁阈值 */
@@ -3039,7 +3047,7 @@ declare interface DescribeOrdersResponse {
 declare interface DescribeProductConfigRequest {
   /** 可用区英文ID，形如ap-guangzhou-1 */
   Zone: string;
-  /** 购买实例的类型 HA-本地盘高可用(包括双机高可用，alwaysOn集群)，RO-本地盘只读副本，SI-云盘版单节点,BI-商业智能服务，cvmHA-云盘版高可用，cvmRO-云盘版只读副本 */
+  /** 购买实例的类型 HA-本地盘高可用(包括双机高可用，alwaysOn集群)，RO-本地盘只读副本，SI-云盘版单节点,BI-商业智能服务，cvmHA-云盘版高可用，cvmRO-云盘版只读副本，MultiHA-多节点，cvmMultiHA-云盘多节点 */
   InstanceType?: string;
 }
 
@@ -3397,17 +3405,19 @@ declare interface DescribeUpgradeInstanceCheckRequest {
   HAType?: string;
   /** 实例变配后的跨可用区类型，可选值： SameZones-修改为同可用区 MultiZones-修改为跨可用区，不填则不修改 */
   MultiZones?: string;
+  /** 多节点架构实例的备节点可用区，默认为空。如果需要在变配的同时修改指定备节点的可用区时必传，当MultiZones = MultiZones时主节点和备节点可用区不能全部相同。备机可用区集合最小为2个，最大不超过5个。 */
+  DrZones?: DrZoneInfo[];
 }
 
 declare interface DescribeUpgradeInstanceCheckResponse {
   /** 本变配是否对实例有影响，0-没有影响 1-有影响 */
-  IsAffect: number;
+  IsAffect?: number;
   /** 本变配是否可以执行 0-不通过，不能变配 1-通过，可以变配 */
-  Passed: number;
+  Passed?: number;
   /** 本变配是升配还是降配，down-降配 up-升配 */
-  ModifyMode: string;
+  ModifyMode?: string;
   /** 检查项列表 */
-  CheckItems: CheckItem[];
+  CheckItems?: CheckItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

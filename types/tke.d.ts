@@ -119,7 +119,7 @@ declare interface Disk {
 /** 第三方节点 */
 declare interface ExternalNodeInfo {
   /** 第三方节点名称 */
-  Name: string;
+  Name?: string;
   /** CPU核数，单位：核 */
   CPU?: number | null;
   /** 节点内存容量，单位：`GB` */
@@ -179,11 +179,11 @@ declare interface HealthCheckPolicy {
 /** 健康检测策略和节点池的绑定关系 */
 declare interface HealthCheckPolicyBinding {
   /** 健康检测策略名称 */
-  Name: string;
+  Name?: string;
   /** 规则创建时间 */
-  CreatedAt: string;
+  CreatedAt?: string;
   /** 关联节点池数组 */
-  NodePools: string[];
+  NodePools?: string[];
 }
 
 /** 健康检测规则 */
@@ -349,13 +349,13 @@ declare interface ManagementConfig {
 /** 手动加入的节点 */
 declare interface ManuallyAdded {
   /** 加入中的节点数量 */
-  Joining: number;
+  Joining?: number;
   /** 初始化中的节点数量 */
-  Initializing: number;
+  Initializing?: number;
   /** 正常的节点数量 */
-  Normal: number;
+  Normal?: number;
   /** 节点总数 */
-  Total: number;
+  Total?: number;
 }
 
 /** 节点信息 */
@@ -459,9 +459,9 @@ declare interface NativeNodePoolInfo {
 /** 节点统计列表 */
 declare interface NodeCountSummary {
   /** 手动管理的节点 */
-  ManuallyAdded: ManuallyAdded | null;
+  ManuallyAdded?: ManuallyAdded | null;
   /** 自动管理的节点 */
-  AutoscalingAdded: AutoscalingAdded | null;
+  AutoscalingAdded?: AutoscalingAdded | null;
 }
 
 /** 节点池信息 */
@@ -511,21 +511,21 @@ declare interface RegularNodeInfo {
 /** 普通节点池信息 */
 declare interface RegularNodePoolInfo {
   /** LaunchConfigurationId 配置 */
-  LaunchConfigurationId: string;
+  LaunchConfigurationId?: string;
   /** AutoscalingGroupId 分组id */
-  AutoscalingGroupId: string;
+  AutoscalingGroupId?: string;
   /** NodeCountSummary 节点列表 */
-  NodeCountSummary: NodeCountSummary;
+  NodeCountSummary?: NodeCountSummary;
   /** 状态信息 */
-  AutoscalingGroupStatus: string | null;
+  AutoscalingGroupStatus?: string | null;
   /** 最大节点数量 */
-  MaxNodesNum: number | null;
+  MaxNodesNum?: number | null;
   /** 最小节点数量 */
-  MinNodesNum: number | null;
+  MinNodesNum?: number | null;
   /** 期望的节点数量 */
-  DesiredNodesNum: number | null;
+  DesiredNodesNum?: number | null;
   /** 节点池osName */
-  NodePoolOs: string | null;
+  NodePoolOs?: string | null;
   /** 节点配置 */
   InstanceAdvancedSettings?: InstanceAdvancedSettings | null;
 }
@@ -551,33 +551,33 @@ declare interface SortBy {
 /** 超级节点信息 */
 declare interface SuperNodeInfo {
   /** 实例名称 */
-  Name: string | null;
+  Name?: string | null;
   /** 自动续费标识 */
-  AutoRenewFlag: number | null;
+  AutoRenewFlag?: number | null;
   /** 资源类型 */
-  ResourceType: string | null;
+  ResourceType?: string | null;
   /** 节点的 CPU 规格，单位：核。 */
-  CPU: number | null;
+  CPU?: number | null;
   /** 节点上 Pod 的 CPU总和，单位：核。 */
-  UsedCPU: number | null;
+  UsedCPU?: number | null;
   /** 节点的内存规格，单位：Gi。 */
-  Memory: number | null;
+  Memory?: number | null;
   /** 节点上 Pod 的内存总和，单位：Gi。 */
-  UsedMemory: number | null;
+  UsedMemory?: number | null;
   /** 可用区 */
-  Zone: string | null;
+  Zone?: string | null;
   /** VPC 唯一 ID */
-  VpcId: string | null;
+  VpcId?: string | null;
   /** 子网唯一 ID */
-  SubnetId: string | null;
+  SubnetId?: string | null;
   /** 生效时间 */
-  ActiveAt: string | null;
+  ActiveAt?: string | null;
   /** 过期时间 */
-  ExpireAt: string | null;
+  ExpireAt?: string | null;
   /** 可调度的单 Pod 最大 CPU 规格 */
-  MaxCPUScheduledPod: number | null;
+  MaxCPUScheduledPod?: number | null;
   /** 实例属性 */
-  InstanceAttribute: string | null;
+  InstanceAttribute?: string | null;
 }
 
 /** 虚拟节点池信息 */
@@ -667,7 +667,7 @@ declare interface CreateHealthCheckPolicyRequest {
 
 declare interface CreateHealthCheckPolicyResponse {
   /** 健康检测策略名称 */
-  HealthCheckPolicyName: string;
+  HealthCheckPolicyName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -763,9 +763,9 @@ declare interface DescribeHealthCheckPoliciesRequest {
 
 declare interface DescribeHealthCheckPoliciesResponse {
   /** 健康检测策略数组 */
-  HealthCheckPolicies: HealthCheckPolicy[] | null;
+  HealthCheckPolicies?: HealthCheckPolicy[] | null;
   /** 数组总数目 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -783,9 +783,9 @@ declare interface DescribeHealthCheckPolicyBindingsRequest {
 
 declare interface DescribeHealthCheckPolicyBindingsResponse {
   /** 健康检测规则数组 */
-  HealthCheckPolicyBindings: HealthCheckPolicyBinding[] | null;
+  HealthCheckPolicyBindings?: HealthCheckPolicyBinding[] | null;
   /** 健康检测规则数量 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -22,6 +22,8 @@ declare interface AssociationItem {
   LoadBalancerName?: string;
   /** 监听器名称 */
   ListenerName?: string;
+  /** 关联目标组的权重， 该参数只有v2新版目标组生效。 */
+  Weight?: number | null;
 }
 
 /** 监听器绑定的后端服务的详细信息 */
@@ -54,6 +56,8 @@ declare interface BasicTargetGroupInfo {
   TargetGroupId?: string;
   /** 目标组名称 */
   TargetGroupName?: string;
+  /** 权重 */
+  Weight?: number;
 }
 
 /** 批量绑定类型 */
@@ -599,17 +603,17 @@ declare interface Listener {
 /** 监听器上绑定的后端服务的信息 */
 declare interface ListenerBackend {
   /** 监听器 ID */
-  ListenerId: string;
+  ListenerId?: string;
   /** 监听器的协议 */
-  Protocol: string;
+  Protocol?: string;
   /** 监听器的端口 */
-  Port: number;
+  Port?: number;
   /** 监听器下的规则信息（仅适用于HTTP/HTTPS监听器） */
-  Rules: RuleTargets[] | null;
+  Rules?: RuleTargets[] | null;
   /** 监听器上绑定的后端服务列表（仅适用于TCP/UDP/TCP_SSL监听器） */
-  Targets: Backend[] | null;
+  Targets?: Backend[] | null;
   /** 若支持端口段，则为端口段结束端口；若不支持端口段，则为0 */
-  EndPort: number | null;
+  EndPort?: number | null;
 }
 
 /** 监听器的健康检查信息 */

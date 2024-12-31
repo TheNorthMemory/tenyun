@@ -33,27 +33,27 @@ declare interface CFSOptionOverview {
 /** 符合条件的集群活动信息。 */
 declare interface ClusterActivity {
   /** 集群ID。 */
-  ClusterId: string;
+  ClusterId?: string;
   /** 集群活动ID。 */
-  ActivityId: string;
+  ActivityId?: string;
   /** 集群活动类型。取值范围：CreateAndAddNodes：创建实例并添加进集群RemoveNodesFromCluster：从集群移除实例TerminateNodes：销毁实例MountStorageOption：增加挂载选项并进行挂载UmountStorageOption：删除集群挂载存储选项并解挂载 */
-  ActivityType: string;
+  ActivityType?: string;
   /** 集群活动状态。取值范围：PENDING：等待运行RUNNING：运行中SUCCESSFUL：活动成功PARTIALLY_SUCCESSFUL：活动部分成功FAILED：活动失败 */
-  ActivityStatus: string;
+  ActivityStatus?: string;
   /** 集群活动状态码。 */
-  ActivityStatusCode: string | null;
+  ActivityStatusCode?: string | null;
   /** 集群活动结果详情。 */
-  ResultDetail: string | null;
+  ResultDetail?: string | null;
   /** 集群活动起因。 */
-  Cause: string;
+  Cause?: string;
   /** 集群活动描述。 */
-  Description: string;
+  Description?: string;
   /** 集群活动相关节点活动集合。 */
-  RelatedNodeActivitySet: NodeActivity[];
+  RelatedNodeActivitySet?: NodeActivity[];
   /** 集群活动开始时间。 */
-  StartTime: string | null;
+  StartTime?: string | null;
   /** 集群活动结束时间。 */
-  EndTime: string | null;
+  EndTime?: string | null;
 }
 
 /** 集群概览信息。 */
@@ -149,7 +149,7 @@ declare interface ExpansionNodeConfig {
   /** 私有网络相关信息配置。 */
   VirtualPrivateCloud?: VirtualPrivateCloud;
   /** 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。 */
-  ProjectId?: number | null;
+  ProjectId?: number;
 }
 
 /** 扩容节点配置信息概览。 */
@@ -177,9 +177,9 @@ declare interface ExpansionNodeConfigOverview {
 /** >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等> * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。> * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。 */
 declare interface Filter {
   /** 需要过滤的字段。 */
-  Name: string | null;
+  Name: string;
   /** 字段的过滤值。 */
-  Values: string[] | null;
+  Values: string[];
 }
 
 /** 描述GooseFS挂载信息 */
@@ -195,11 +195,11 @@ declare interface GooseFSOption {
 /** GooseFS存储选项概览信息。 */
 declare interface GooseFSOptionOverview {
   /** 文件系统本地挂载路径。 */
-  LocalPath: string;
+  LocalPath?: string;
   /** 文件系统远程挂载路径。 */
-  RemotePath: string;
+  RemotePath?: string;
   /** 文件系统master的ip和端口。 */
-  Masters: string[];
+  Masters?: string[];
 }
 
 /** 描述GooseFSx挂载信息 */
@@ -299,13 +299,13 @@ declare interface ManagerNodeOverview {
 /** 节点活动信息。 */
 declare interface NodeActivity {
   /** 节点活动所在的实例ID。 */
-  NodeInstanceId: string | null;
+  NodeInstanceId?: string | null;
   /** 节点活动状态。取值范围：RUNNING：运行中SUCCESSFUL：活动成功FAILED：活动失败 */
-  NodeActivityStatus: string;
+  NodeActivityStatus?: string;
   /** 节点活动状态码。 */
-  NodeActivityStatusCode: string | null;
+  NodeActivityStatusCode?: string | null;
   /** 节点活动状态原因。 */
-  NodeActivityStatusReason: string | null;
+  NodeActivityStatusReason?: string | null;
 }
 
 /** 节点概览信息。 */
@@ -737,7 +737,7 @@ declare interface CreateWorkspacesRequest {
   Placement?: SpacePlacement;
   /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。 */
   SpaceChargePrepaid?: SpaceChargePrepaid;
-  /** 工作空间计费类型 */
+  /** 工作空间计费类型，包括：PREPAID，UNDERWRITE。工作空间计费类型，包括：PREPAID，UNDERWRITE。 */
   SpaceChargeType?: string;
   /** 工作空间规格 */
   SpaceType?: string;
@@ -1062,57 +1062,57 @@ declare namespace V20220401 {
   /** 符合条件的集群活动信息。 */
   interface ClusterActivity {
     /** 集群ID。 */
-    ClusterId: string;
+    ClusterId?: string;
     /** 集群活动ID。 */
-    ActivityId: string;
+    ActivityId?: string;
     /** 集群活动类型。取值范围：CreateAndAddNodes：创建实例并添加进集群RemoveNodesFromCluster：从集群移除实例TerminateNodes：销毁实例MountStorageOption：增加挂载选项并进行挂载UmountStorageOption：删除集群挂载存储选项并解挂载 */
-    ActivityType: string;
+    ActivityType?: string;
     /** 集群活动状态。取值范围：PENDING：等待运行RUNNING：运行中SUCCESSFUL：活动成功PARTIALLY_SUCCESSFUL：活动部分成功FAILED：活动失败 */
-    ActivityStatus: string;
+    ActivityStatus?: string;
     /** 集群活动状态码。 */
-    ActivityStatusCode: string | null;
+    ActivityStatusCode?: string | null;
     /** 集群活动结果详情。 */
-    ResultDetail: string | null;
+    ResultDetail?: string | null;
     /** 集群活动起因。 */
-    Cause: string;
+    Cause?: string;
     /** 集群活动描述。 */
-    Description: string;
+    Description?: string;
     /** 集群活动相关节点活动集合。 */
-    RelatedNodeActivitySet: NodeActivity[];
+    RelatedNodeActivitySet?: NodeActivity[];
     /** 集群活动开始时间。 */
-    StartTime: string | null;
+    StartTime?: string | null;
     /** 集群活动结束时间。 */
-    EndTime: string | null;
+    EndTime?: string | null;
   }
 
   /** 集群概览信息。 */
   interface ClusterOverview {
     /** 集群ID。 */
-    ClusterId: string;
+    ClusterId?: string;
     /** 集群状态。取值范围：PENDING：创建中INITING：初始化中INIT_FAILED：初始化失败RUNNING：运行中TERMINATING：销毁中 */
-    ClusterStatus: string;
+    ClusterStatus?: string;
     /** 集群名称。 */
-    ClusterName: string;
+    ClusterName?: string;
     /** 集群位置信息。 */
-    Placement: Placement;
+    Placement?: Placement;
     /** 集群创建时间。 */
-    CreateTime: string;
+    CreateTime?: string;
     /** 集群调度器。 */
-    SchedulerType: string;
+    SchedulerType?: string;
     /** 计算节点数量。 */
-    ComputeNodeCount: number;
+    ComputeNodeCount?: number;
     /** 计算节点概览。 */
-    ComputeNodeSet: ComputeNodeOverview[];
+    ComputeNodeSet?: ComputeNodeOverview[];
     /** 管控节点数量。 */
-    ManagerNodeCount: number;
+    ManagerNodeCount?: number;
     /** 管控节点概览。 */
-    ManagerNodeSet: ManagerNodeOverview[];
+    ManagerNodeSet?: ManagerNodeOverview[];
     /** 登录节点概览。 */
-    LoginNodeSet: LoginNodeOverview[];
+    LoginNodeSet?: LoginNodeOverview[];
     /** 登录节点数量。 */
-    LoginNodeCount: number;
+    LoginNodeCount?: number;
     /** 集群所属私有网络ID。 */
-    VpcId: string;
+    VpcId?: string;
   }
 
   /** 计算节点信息。 */
@@ -1155,7 +1155,7 @@ declare namespace V20220401 {
     InstanceChargeType?: string;
     /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。 */
     InstanceChargePrepaid?: InstanceChargePrepaid;
-    /** 节点机型。不同实例机型指定了不同的资源规格。具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。 */
+    /** 节点机型。不同实例机型指定了不同的资源规格。 具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。 */
     InstanceType?: string;
     /** 私有网络相关信息配置。 */
     VirtualPrivateCloud?: VirtualPrivateCloud;
@@ -1186,9 +1186,9 @@ declare namespace V20220401 {
   /** >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等> * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。> * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。 */
   interface Filter {
     /** 需要过滤的字段。 */
-    Name: string | null;
+    Name: string;
     /** 字段的过滤值。 */
-    Values: string[] | null;
+    Values: string[];
   }
 
   /** 描述GooseFS挂载信息 */
@@ -1204,11 +1204,11 @@ declare namespace V20220401 {
   /** GooseFS存储选项概览信息。 */
   interface GooseFSOptionOverview {
     /** 文件系统本地挂载路径。 */
-    LocalPath: string;
+    LocalPath?: string;
     /** 文件系统远程挂载路径。 */
-    RemotePath: string;
+    RemotePath?: string;
     /** 文件系统master的ip和端口。 */
-    Masters: string[];
+    Masters?: string[];
   }
 
   /** 描述了实例的计费模式 */
@@ -1284,13 +1284,13 @@ declare namespace V20220401 {
   /** 节点活动信息。 */
   interface NodeActivity {
     /** 节点活动所在的实例ID。 */
-    NodeInstanceId: string | null;
+    NodeInstanceId?: string | null;
     /** 节点活动状态。取值范围：RUNNING：运行中SUCCESSFUL：活动成功FAILED：活动失败 */
-    NodeActivityStatus: string;
+    NodeActivityStatus?: string;
     /** 节点活动状态码。 */
-    NodeActivityStatusCode: string | null;
+    NodeActivityStatusCode?: string | null;
     /** 节点活动状态原因。 */
-    NodeActivityStatusReason: string | null;
+    NodeActivityStatusReason?: string | null;
   }
 
   /** 节点概览信息。 */
@@ -1976,7 +1976,7 @@ declare namespace V20211109 {
 
   interface CreateClusterResponse {
     /** 集群ID。 */
-    ClusterId: string | null;
+    ClusterId?: string | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -2002,9 +2002,9 @@ declare namespace V20211109 {
 
   interface DescribeClustersResponse {
     /** 集群概览信息列表。 */
-    ClusterSet: ClusterOverview[];
+    ClusterSet?: ClusterOverview[];
     /** 集群数量。 */
-    TotalCount: number;
+    TotalCount?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

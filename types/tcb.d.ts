@@ -935,9 +935,9 @@ declare interface LoginStatistic {
 /** Key-Value类型，模拟的 object 类型 */
 declare interface ObjectKV {
   /** object 的 key */
-  Key: string;
+  Key?: string;
   /** object key 对应的 value */
-  Value: string;
+  Value?: string;
 }
 
 /** 一键部署步骤信息 */
@@ -1895,29 +1895,29 @@ declare interface DescribeCloudBaseRunOneClickTaskExternalRequest {
 
 declare interface DescribeCloudBaseRunOneClickTaskExternalResponse {
   /** 外部任务Id */
-  ExternalId: string;
+  ExternalId?: string;
   /** 弃用 */
-  EnvId: string;
+  EnvId?: string;
   /** 用户uin */
-  UserUin: string;
+  UserUin?: string;
   /** 服务名 */
-  ServerName: string;
+  ServerName?: string;
   /** 版本名 */
-  VersionName: string;
+  VersionName?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 当前阶段微信云托管环境创建阶段：envStage存储资源创建阶段：storageStage服务创建阶段：serverStage */
-  Stage: string;
+  Stage?: string;
   /** 状态runningstoppedfailedfinished */
-  Status: string;
+  Status?: string;
   /** 失败原因 */
-  FailReason: string;
+  FailReason?: string;
   /** 用户envId */
-  UserEnvId: string;
+  UserEnvId?: string;
   /** 创建时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 步骤信息 */
-  Steps: OneClickTaskStepInfo[];
+  Steps?: OneClickTaskStepInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2013,11 +2013,11 @@ declare interface DescribeCloudBaseRunServerDomainNameRequest {
 
 declare interface DescribeCloudBaseRunServerDomainNameResponse {
   /** 公网服务域名 */
-  PublicDomain: string;
+  PublicDomain?: string;
   /** 内部服务域名 */
-  InternalDomain: string;
+  InternalDomain?: string;
   /** 弃用 */
-  DomainName: string;
+  DomainName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2253,7 +2253,7 @@ declare interface DescribeCloudBaseRunVersionSnapshotRequest {
 
 declare interface DescribeCloudBaseRunVersionSnapshotResponse {
   /** 版本历史 */
-  Snapshots: CloudRunServiceSimpleVersionSnapshot[] | null;
+  Snapshots?: CloudRunServiceSimpleVersionSnapshot[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2935,7 +2935,7 @@ declare interface ModifyCloudBaseRunServerFlowConfRequest {
 
 declare interface ModifyCloudBaseRunServerFlowConfResponse {
   /** 返回结果，succ代表成功 */
-  Result: string | null;
+  Result?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2969,7 +2969,7 @@ declare interface ModifyCloudBaseRunServerVersionRequest {
 
 declare interface ModifyCloudBaseRunServerVersionResponse {
   /** 返回结果（succ为成功） */
-  Result: string | null;
+  Result?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3217,9 +3217,9 @@ declare interface UnfreezeCloudBaseRunServersRequest {
 
 declare interface UnfreezeCloudBaseRunServersResponse {
   /** 批量执行结果成功：succ失败：fail部分：partial（部分成功、部分失败） */
-  Result: string | null;
+  Result?: string | null;
   /** 解冻失败列表 */
-  FailServerList: string[] | null;
+  FailServerList?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -629,9 +629,9 @@ declare interface CreateDeviceGroupRequest {
 
 declare interface CreateDeviceGroupResponse {
   /** 响应结果，“OK”为成功，其他为失败 */
-  Status: string | null;
+  Status?: string | null;
   /** 分组ID */
-  GroupId: string | null;
+  GroupId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -649,11 +649,11 @@ declare interface CreateDeviceRequest {
 
 declare interface CreateDeviceResponse {
   /** 设备编码 */
-  DeviceCode: string | null;
+  DeviceCode?: string | null;
   /** 设备唯一标识 */
-  DeviceId: string | null;
+  DeviceId?: string | null;
   /** 设备虚拟组信息，仅在创建NVR时返回该值 */
-  VirtualGroupId: string | null;
+  VirtualGroupId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -733,7 +733,7 @@ declare interface CreateRecordPlanRequest {
 
 declare interface CreateRecordPlanResponse {
   /** 录制计划ID */
-  PlanId: string;
+  PlanId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -751,7 +751,7 @@ declare interface CreateRecordingPlanRequest {
 
 declare interface CreateRecordingPlanResponse {
   /** 录制计划ID */
-  PlanId: string;
+  PlanId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -913,7 +913,7 @@ declare interface DeleteTimeTemplateRequest {
 
 declare interface DeleteTimeTemplateResponse {
   /** 操作结果，OK：成功，其他：失败 */
-  Status: string | null;
+  Status?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -969,9 +969,9 @@ declare interface DescribeAllDeviceListRequest {
 
 declare interface DescribeAllDeviceListResponse {
   /** 设备总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 设备详细信息列表 */
-  Devices: AllDeviceInfo[] | null;
+  Devices?: AllDeviceInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1155,7 +1155,7 @@ declare interface DescribeDeviceGroupRequest {
 
 declare interface DescribeDeviceGroupResponse {
   /** 设备所在分组信息 */
-  DevGroups: DevGroupInfo[] | null;
+  DevGroups?: DevGroupInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1205,7 +1205,7 @@ declare interface DescribeDevicePassWordRequest {
 
 declare interface DescribeDevicePassWordResponse {
   /** 设备密码 */
-  PassWord: string;
+  PassWord?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1233,7 +1233,7 @@ declare interface DescribeDeviceStreamsRequest {
 
 declare interface DescribeDeviceStreamsResponse {
   /** 设备实时流地址列表 */
-  Data: DescribeDeviceStreamsData;
+  Data?: DescribeDeviceStreamsData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1333,9 +1333,9 @@ declare interface DescribeLiveChannelListRequest {
 
 declare interface DescribeLiveChannelListResponse {
   /** 频道总数 */
-  Total: number | null;
+  Total?: number | null;
   /** 频道信息数组 */
-  LiveChannels: LiveChannelInfo[] | null;
+  LiveChannels?: LiveChannelInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1441,9 +1441,9 @@ declare interface DescribeLiveVideoListRequest {
 
 declare interface DescribeLiveVideoListResponse {
   /** 总的条数 */
-  Total: number | null;
+  Total?: number | null;
   /** 录制任务详情数组 */
-  RecordList: LiveRecordItem[] | null;
+  RecordList?: LiveRecordItem[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1537,7 +1537,7 @@ declare interface DescribeRecordDatesByChannelRequest {
 
 declare interface DescribeRecordDatesByChannelResponse {
   /** 含有录像文件的日期列表 */
-  Dates: string[] | null;
+  Dates?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1553,7 +1553,7 @@ declare interface DescribeRecordDatesByLiveRequest {
 
 declare interface DescribeRecordDatesByLiveResponse {
   /** 录制日期数组 */
-  Dates: string[] | null;
+  Dates?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1587,7 +1587,7 @@ declare interface DescribeRecordingPlanByIdRequest {
 
 declare interface DescribeRecordingPlanByIdResponse {
   /** 录制计划详情 */
-  Plan: RecordPlanDetail | null;
+  Plan?: RecordPlanDetail | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1597,9 +1597,9 @@ declare interface DescribeRecordingPlansRequest {
 
 declare interface DescribeRecordingPlansResponse {
   /** 录制计划详情·列表 */
-  Plans: RecordPlanDetail[] | null;
+  Plans?: RecordPlanDetail[] | null;
   /** 录制计划总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1793,11 +1793,11 @@ declare interface DescribeVideoListRequest {
 
 declare interface DescribeVideoListResponse {
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 已废弃 */
-  VideoList: RecordTaskItem;
+  VideoList?: RecordTaskItem;
   /** 录像详情列表 */
-  RecordList: RecordTaskItem[];
+  RecordList?: RecordTaskItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1833,9 +1833,9 @@ declare interface DescribeWarningsRequest {
 
 declare interface DescribeWarningsResponse {
   /** 总数 */
-  Total: number | null;
+  Total?: number | null;
   /** 告警列表 */
-  Data: WarningsData[] | null;
+  Data?: WarningsData[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1873,7 +1873,7 @@ declare interface GetRecordDatesByDevRequest {
 
 declare interface GetRecordDatesByDevResponse {
   /** 含有录像文件的日期列表 */
-  Dates: string[] | null;
+  Dates?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1885,7 +1885,7 @@ declare interface GetRecordPlanByDevRequest {
 
 declare interface GetRecordPlanByDevResponse {
   /** 录制计划详情 */
-  Plan: RecordPlanItem | null;
+  Plan?: RecordPlanItem | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1897,7 +1897,7 @@ declare interface GetRecordPlanByIdRequest {
 
 declare interface GetRecordPlanByIdResponse {
   /** 录制计划详情 */
-  Plan: RecordPlanItem | null;
+  Plan?: RecordPlanItem | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1921,7 +1921,7 @@ declare interface GetTimeTemplateByIdRequest {
 
 declare interface GetTimeTemplateByIdResponse {
   /** 时间模板详情 */
-  Template: TimeTemplateItem | null;
+  Template?: TimeTemplateItem | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1931,9 +1931,9 @@ declare interface GetTimeTemplatesRequest {
 
 declare interface GetTimeTemplatesResponse {
   /** 时间模板列表 */
-  Templates: TimeTemplateItem[] | null;
+  Templates?: TimeTemplateItem[] | null;
   /** 时间模板总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1957,9 +1957,9 @@ declare interface GetVideoListByConRequest {
 
 declare interface GetVideoListByConResponse {
   /** 录像详情列表 */
-  VideoList: RecordTaskItem[] | null;
+  VideoList?: RecordTaskItem[] | null;
   /** 录像总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2029,7 +2029,7 @@ declare interface ModifyDeviceDataRequest {
 
 declare interface ModifyDeviceDataResponse {
   /** 操作结果,“OK”表示成功，其他表示失败。 */
-  Status: string | null;
+  Status?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2111,7 +2111,7 @@ declare interface ModifyRecordingPlanRequest {
 
 declare interface ModifyRecordingPlanResponse {
   /** 操作结果 */
-  Status: string;
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2195,7 +2195,7 @@ declare interface UpdateDevicePassWordRequest {
 
 declare interface UpdateDevicePassWordResponse {
   /** 操作结果，“OK”表示成功，其他表示失败。 */
-  Status: string | null;
+  Status?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2217,7 +2217,7 @@ declare interface UpdateRecordPlanRequest {
 
 declare interface UpdateRecordPlanResponse {
   /** 操作结果 */
-  Status: string;
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2235,7 +2235,7 @@ declare interface UpdateTimeTemplateRequest {
 
 declare interface UpdateTimeTemplateResponse {
   /** 操作结果，“OK”表示成功，其他表示失败。 */
-  Status: string;
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

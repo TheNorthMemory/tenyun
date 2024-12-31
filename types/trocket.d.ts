@@ -26,6 +26,20 @@ declare interface ConsumeGroupItem {
   FullNamespaceV4?: string | null;
 }
 
+/** 消费者客户端 */
+declare interface ConsumerClient {
+  /** 客户端ID */
+  ClientId?: string;
+  /** 客户端地址 */
+  ClientAddr?: string;
+  /** 客户端SDK语言 */
+  Language?: string;
+  /** 客户端SDK版本 */
+  Version?: string;
+  /** 客户端消费堆积 */
+  ConsumerLag?: number | null;
+}
+
 /** map结构返回 */
 declare interface CustomMapEntry {
   /** key */
@@ -534,6 +548,22 @@ declare interface TagFilter {
   TagValues: string[];
 }
 
+/** 主题消费进度 */
+declare interface TopicConsumeStats {
+  /** 主题名称 */
+  Topic?: string;
+  /** 主题类型 */
+  TopicType?: string;
+  /** 单节点主题队列数量 */
+  QueueNum?: number;
+  /** 消费堆积 */
+  ConsumerLag?: number;
+  /** 订阅规则 */
+  SubString?: string;
+  /** 最后消费进度更新时间 */
+  LastUpdateTime?: number | null;
+}
+
 /** 列表上的主题信息 */
 declare interface TopicItem {
   /** 实例ID */
@@ -846,6 +876,30 @@ declare interface DeleteTopicRequest {
 }
 
 declare interface DeleteTopicResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConsumerClientRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 客户端ID */
+  ClientId: string;
+  /** 查询条件列表 */
+  Filters?: Filter[];
+  /** 查询起始位置 */
+  Offset?: number;
+  /** 查询结果限制数量 */
+  Limit?: number;
+  /** 消费组名称 */
+  ConsumerGroup?: string;
+}
+
+declare interface DescribeConsumerClientResponse {
+  /** 客户端详情 */
+  Client?: ConsumerClient | null;
+  /** 主题消费信息 */
+  TopicList?: TopicConsumeStats[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1717,6 +1771,8 @@ declare interface Trocket {
   DeleteRole(data: DeleteRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoleResponse>;
   /** 删除主题 {@link DeleteTopicRequest} {@link DeleteTopicResponse} */
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
+  /** 查询消费者客户端详情 {@link DescribeConsumerClientRequest} {@link DescribeConsumerClientResponse} */
+  DescribeConsumerClient(data: DescribeConsumerClientRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerClientResponse>;
   /** 查询消费组详情 {@link DescribeConsumerGroupRequest} {@link DescribeConsumerGroupResponse} */
   DescribeConsumerGroup(data: DescribeConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerGroupResponse>;
   /** 查询消费组列表 {@link DescribeConsumerGroupListRequest} {@link DescribeConsumerGroupListResponse} */

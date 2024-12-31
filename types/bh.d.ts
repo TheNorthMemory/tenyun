@@ -1067,6 +1067,8 @@ declare interface DescribeAclsRequest {
   Status?: number;
   /** 部门ID，用于过滤属于某个部门的访问权限 */
   DepartmentId?: string;
+  /** 是否根据AuthorizedDeviceIdSet,对资产账号进行精确匹配，默认false, 设置true时，确保AuthorizedDeviceIdSet只有一个元素 */
+  ExactAccount?: boolean;
   /** 过滤数组 */
   Filters?: Filter[];
 }

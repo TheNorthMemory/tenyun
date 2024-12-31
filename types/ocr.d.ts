@@ -790,6 +790,24 @@ declare interface GroupInfo {
   Groups?: LineInfo[];
 }
 
+/** 身份证配置信息 */
+declare interface IDCardConfig {
+  /** 默认为false */
+  CopyWarn?: boolean;
+  /** 默认为false */
+  BorderCheckWarn?: boolean;
+  /** 默认为false */
+  ReshootWarn?: boolean;
+  /** 默认为false */
+  DetectPsWarn?: boolean;
+  /** 默认为false */
+  TempIdWarn?: boolean;
+  /** 默认为false */
+  InvalidDateWarn?: boolean;
+  /** 默认为false */
+  ReflectWarn?: boolean;
+}
+
 /** 身份证信息返回 */
 declare interface IDCardInfo {
   /** 姓名（人像面） */
@@ -814,6 +832,44 @@ declare interface IDCardInfo {
   CardImage?: ContentInfo;
   /** Portrait，身份证头像照片的base64编码，请求 EnablePortrait 时返回； */
   PortraitImage?: ContentInfo;
+}
+
+/** 身份证ocr信息结果 */
+declare interface IDCardInfoResult {
+  /** 警告代码 */
+  WarnCodes?: number[] | null;
+  /** 地址 */
+  Address?: string | null;
+  /** 签发机关 */
+  Authority?: string | null;
+  /** 出生日期 */
+  Birth?: string | null;
+  /** 身份证号 */
+  IdNum?: string | null;
+  /** 名字 */
+  Name?: string | null;
+  /** 地区 */
+  Nation?: string | null;
+  /** 性别 */
+  Sex?: string | null;
+  /** 到期时间 */
+  ValidDate?: string | null;
+  /** 请求的id */
+  RequestId?: string | null;
+  /** 错误码 */
+  ErrorCode?: string | null;
+  /** 错误信息 */
+  ErrorMessage?: string | null;
+  /** 原图地址 */
+  ImageUrl?: string;
+}
+
+/** IDCardResult */
+declare interface IDCardResult {
+  /** 正面结果 */
+  Front?: IDCardInfoResult | null;
+  /** 反面结果 */
+  Back?: IDCardInfoResult | null;
 }
 
 /** 头像位置坐标 */
@@ -1252,6 +1308,12 @@ declare interface NonTaxItem {
   Standard?: string;
   /** 金额 */
   Total?: string;
+}
+
+/** ocr结果信息 */
+declare interface OCRResult {
+  /** 身份证结果 */
+  IDCardResult?: IDCardResult | null;
 }
 
 /** 网约车行程单识别结果 */
@@ -3450,6 +3512,34 @@ declare interface GeneralHandwritingOCRResponse {
   RequestId?: string;
 }
 
+declare interface GetOCRResultRequest {
+  /** token值 */
+  OCRToken: string;
+}
+
+declare interface GetOCRResultResponse {
+  /** ocr业务类型 */
+  Type?: string;
+  /** ocr结果 */
+  OCRResult?: OCRResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetOCRTokenRequest {
+  /** 业务类型，如身份证识别为IDCardOCR */
+  Type: string;
+  /** 身份证配置信息 */
+  IDCardConfig?: IDCardConfig;
+}
+
+declare interface GetOCRTokenResponse {
+  /** token值 */
+  OCRToken?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetTaskStateRequest {
   /** 智慧表单任务唯一身份ID */
   TaskId: string;
@@ -4901,7 +4991,7 @@ declare interface VatInvoiceVerifyNewRequest {
   InvoiceNo: string;
   /** 开票日期（不支持当天发票查询，支持五年以内开具的发票），格式：“YYYY-MM-DD”，如：2019-12-20。 */
   InvoiceDate: string;
-  /** 发票代码（10或12 位），全电发票为空。查验未成功超过5次后当日无法再查。 */
+  /** 发票代码（10或12 位），全电发票为空。查验超过5次后当日无法再查。 */
   InvoiceCode?: string;
   /** 票种类型 01:增值税专用发票， 02:货运运输业增值税专用发 票， 03:机动车销售统一发票， 04:增值税普通发票， 08:增值税电子专用发票(含全电)， 10:增值税电子普通发票(含全电)， 11:增值税普通发票(卷式)， 14:增值税电子(通行费)发 票， 15:二手车销售统一发票，16:财务发票， 32:深圳区块链发票(云南区块链因业务调整现已下线)。 */
   InvoiceKind?: string;
@@ -4915,7 +5005,7 @@ declare interface VatInvoiceVerifyNewRequest {
   SellerTaxCode?: string;
   /** 是否开启通用机打电子发票，默认为关闭。 */
   EnableCommonElectronic?: boolean;
-  /** 是否允许查验当日发票，默认值为false。请注意，发票从开具到录入税局需要一定的时间来更新和验证发票信息，打开后仅支持查验已成功录入到税局中的发票。 */
+  /** 是否允许查验当日发票，默认值为false。请注意，发票从开具到录入税局需要一定的时间来更新和验证发票信息，打开后仅支持查验已成功录入到税局中的当日发票。 */
   EnableTodayInvoice?: boolean;
 }
 
@@ -5165,6 +5255,10 @@ declare interface Ocr {
   GeneralFastOCR(data?: GeneralFastOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralFastOCRResponse>;
   /** 通用手写体识别 {@link GeneralHandwritingOCRRequest} {@link GeneralHandwritingOCRResponse} */
   GeneralHandwritingOCR(data?: GeneralHandwritingOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralHandwritingOCRResponse>;
+  /** 得到ocr的信息 {@link GetOCRResultRequest} {@link GetOCRResultResponse} */
+  GetOCRResult(data: GetOCRResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetOCRResultResponse>;
+  /** 得到ocr的token {@link GetOCRTokenRequest} {@link GetOCRTokenResponse} */
+  GetOCRToken(data: GetOCRTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetOCRTokenResponse>;
   /** @deprecated 查询智慧表单任务状态 {@link GetTaskStateRequest} {@link GetTaskStateResponse} */
   GetTaskState(data: GetTaskStateRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskStateResponse>;
   /** 中国香港身份证识别 {@link HKIDCardOCRRequest} {@link HKIDCardOCRResponse} */

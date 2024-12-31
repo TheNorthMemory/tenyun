@@ -1541,7 +1541,7 @@ declare interface DescribeSampleMatrixBatchQueryRequest {
 
 declare interface DescribeSampleMatrixBatchQueryResponse {
   /** 批量指标矩阵 */
-  MetricSampleMatrixSet: CustomSampleMatrix[] | null;
+  MetricSampleMatrixSet?: CustomSampleMatrix[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

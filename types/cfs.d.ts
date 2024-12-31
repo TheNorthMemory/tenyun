@@ -287,23 +287,23 @@ declare interface MountInfo {
 /** 文件系统绑定权限组信息 */
 declare interface PGroup {
   /** 权限组ID */
-  PGroupId: string;
+  PGroupId?: string;
   /** 权限组名称 */
-  Name: string;
+  Name?: string;
 }
 
 /** 权限组数组 */
 declare interface PGroupInfo {
   /** 权限组ID */
-  PGroupId: string;
+  PGroupId?: string;
   /** 权限组名称 */
-  Name: string;
+  Name?: string;
   /** 描述信息 */
-  DescInfo: string;
+  DescInfo?: string;
   /** 创建时间 */
-  CDate: string;
+  CDate?: string;
   /** 关联文件系统个数 */
-  BindCfsNum: number;
+  BindCfsNum?: number;
 }
 
 /** 权限组规则列表 */

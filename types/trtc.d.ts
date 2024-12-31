@@ -42,6 +42,8 @@ declare interface AgentConfig {
   InterruptSpeechDuration?: number;
   /** 控制新一轮对话的触发方式，默认为0。- 0表示当服务端语音识别检测出的完整一句话后，自动触发一轮新的对话。- 1表示客户端在收到字幕消息后，自行决定是否手动发送聊天信令触发一轮新的对话。 */
   TurnDetectionMode?: number;
+  /** 是否过滤掉用户只说了一个字的句子，true表示过滤，false表示不过滤，默认值为true */
+  FilterOneWord?: boolean;
 }
 
 /** 转推服务加入TRTC房间的机器人参数。 */
@@ -902,7 +904,7 @@ declare interface TranscriptionParams {
   TranscriptionMode?: number;
   /** TranscriptionMode为1时必填，机器人只会拉该userid的流，忽略房间里其他用户。 */
   TargetUserId?: string;
-  /** 机器人订阅的用户列表 */
+  /** 机器人订阅的用户列表仅 TranscriptionMode 为 1或者 TranscriptionMode 为无限上麦模式支持传入多个用户列表 */
   TargetUserIdList?: string[];
 }
 

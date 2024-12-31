@@ -3447,6 +3447,12 @@ declare interface DescribeDatahubTopicsRequest {
   Offset?: number;
   /** 本次返回结果的最大个数，默认为50，最大值为50 */
   Limit?: number;
+  /** 是否从连接查询topic列表 */
+  QueryFromConnectResource?: boolean;
+  /** 连接的ID */
+  ConnectResourceId?: string;
+  /** topic资源表达式 */
+  TopicRegularExpression?: string;
 }
 
 declare interface DescribeDatahubTopicsResponse {
