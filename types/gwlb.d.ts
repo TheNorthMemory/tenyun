@@ -25,7 +25,7 @@ declare interface GatewayLoadBalancer {
   /** 网关负载均衡实例的名称。 */
   LoadBalancerName?: string;
   /** 网关负载均衡所属私有网络。 */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 网关负载均衡所属子网。 */
   SubnetId?: string;
   /** 网关负载均衡提供服务的虚拟IP。 */
@@ -33,19 +33,19 @@ declare interface GatewayLoadBalancer {
   /** 网关负载均衡实例状态。0：创建中，1：正常运行，3：删除中。 */
   Status?: number;
   /** 关联的目标组唯一ID。 */
-  TargetGroupId?: string | null;
+  TargetGroupId?: string;
   /** 是否开启删除保护功能。 */
-  DeleteProtect?: boolean | null;
+  DeleteProtect?: boolean;
   /** 负载均衡实例的标签信息。 */
-  Tags?: TagInfo[] | null;
+  Tags?: TagInfo[];
   /** 创建时间。 */
   CreateTime?: string;
   /** 网关负载均衡实例的计费类型，POSTPAID_BY_HOUR：按量计费 */
-  ChargeType?: string | null;
+  ChargeType?: string;
   /** 0：表示未被隔离，1：表示被隔离。 */
-  Isolation?: number | null;
+  Isolation?: number;
   /** 负载均衡实例被隔离的时间 */
-  IsolatedTime?: string | null;
+  IsolatedTime?: string;
 }
 
 /** 描述了单项的价格信息 */

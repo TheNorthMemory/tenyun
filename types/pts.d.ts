@@ -1223,7 +1223,7 @@ declare interface DescribeCheckSummaryRequest {
 
 declare interface DescribeCheckSummaryResponse {
   /** 检查点汇总信息 */
-  CheckSummarySet: CheckSummary[] | null;
+  CheckSummarySet?: CheckSummary[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1249,9 +1249,9 @@ declare interface DescribeCronJobsRequest {
 
 declare interface DescribeCronJobsResponse {
   /** 定时任务总数 */
-  Total: number;
+  Total?: number;
   /** 定时任务信息 */
-  CronJobSet: CronJob[] | null;
+  CronJobSet?: CronJob[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1559,7 +1559,7 @@ declare interface DescribeSampleMatrixQueryRequest {
   Aggregation: string;
   /** 用标签过滤规则来过滤指标，规则中包含标签名 LabelName、标签值 LabelValue、操作符 Operator（0代表相等，1代表不等） */
   Filters?: Filter[];
-  /** 分组 */
+  /** 分组；取值范围参见 DescribeMetricLabelWithValues 接口返回的指标及其支持的标签名 */
   GroupBy?: string[];
 }
 
@@ -1653,9 +1653,9 @@ declare interface DescribeScenariosRequest {
 
 declare interface DescribeScenariosResponse {
   /** 场景列表 */
-  ScenarioSet: Scenario[] | null;
+  ScenarioSet?: Scenario[] | null;
   /** 场景总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

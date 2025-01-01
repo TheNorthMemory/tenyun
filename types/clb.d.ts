@@ -1929,9 +1929,9 @@ declare interface DescribeCrossTargetsRequest {
 
 declare interface DescribeCrossTargetsResponse {
   /** 后端服务列表总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 后端服务列表。 */
-  CrossTargetSet: CrossTargets[];
+  CrossTargetSet?: CrossTargets[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

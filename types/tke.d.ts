@@ -223,31 +223,31 @@ declare interface HealthCheckTemplateRule {
 /** 集群的实例信息 */
 declare interface Instance {
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 节点角色, MASTER, WORKER, ETCD, MASTER_ETCD,ALL, 默认为WORKER */
-  InstanceRole: string;
+  InstanceRole?: string;
   /** 实例异常(或者处于初始化中)的原因 */
-  FailedReason: string | null;
+  FailedReason?: string | null;
   /** 实例的状态- initializing创建中- running 运行中- failed 异常 */
-  InstanceState: string;
+  InstanceState?: string;
   /** 是否不可调度 */
-  Unschedulable: boolean | null;
+  Unschedulable?: boolean | null;
   /** 添加时间 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 节点内网IP */
-  LanIP: string | null;
+  LanIP?: string | null;
   /** 资源池ID */
-  NodePoolId: string | null;
+  NodePoolId?: string | null;
   /** 原生节点参数 */
-  Native: NativeNodeInfo | null;
+  Native?: NativeNodeInfo | null;
   /** 普通节点参数 */
-  Regular: RegularNodeInfo | null;
+  Regular?: RegularNodeInfo | null;
   /** 超级节点参数 */
-  Super: SuperNodeInfo | null;
+  Super?: SuperNodeInfo | null;
   /** 第三方节点参数 */
-  External: ExternalNodeInfo | null;
+  External?: ExternalNodeInfo | null;
   /** 节点类型 */
-  NodeType: string | null;
+  NodeType?: string | null;
 }
 
 /** 描述了k8s集群相关配置与信息。 */
@@ -503,9 +503,9 @@ declare interface NodePool {
 /** 普通节点信息 */
 declare interface RegularNodeInfo {
   /** 节点配置 */
-  InstanceAdvancedSettings: InstanceAdvancedSettings | null;
+  InstanceAdvancedSettings?: InstanceAdvancedSettings | null;
   /** 自动伸缩组ID */
-  AutoscalingGroupId: string | null;
+  AutoscalingGroupId?: string | null;
 }
 
 /** 普通节点池信息 */
@@ -4076,7 +4076,7 @@ declare namespace V20180525 {
 
   interface CreateEKSContainerInstancesResponse {
     /** EKS Container Instance Id集合，格式为eksci-xxx，是容器实例的唯一标识。 */
-    EksCiIds: string[];
+    EksCiIds?: string[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

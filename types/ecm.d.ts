@@ -869,13 +869,13 @@ declare interface NetworkInterface {
 /** 弹性网卡绑定关系 */
 declare interface NetworkInterfaceAttachment {
   /** 云主机实例ID。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 网卡在云主机实例内的序号。 */
-  DeviceIndex: number;
+  DeviceIndex?: number;
   /** 云主机所有者账户信息。 */
-  InstanceAccountId: string;
+  InstanceAccountId?: string;
   /** 绑定时间。 */
-  AttachTime: string;
+  AttachTime?: string;
 }
 
 /** 网络硬盘上下限数据 */

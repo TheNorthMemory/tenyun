@@ -113,29 +113,29 @@ declare interface DeviceInfo {
 /** 设备网络状态信息 */
 declare interface DeviceNetInfo {
   /** 网络类型：0:数据1:Wi-Fi2:有线 */
-  Type: number | null;
+  Type?: number | null;
   /** 启用/禁用 */
-  DataEnable: boolean | null;
+  DataEnable?: boolean | null;
   /** 上行限速 */
-  UploadLimit: string | null;
+  UploadLimit?: string | null;
   /** 下行限速 */
-  DownloadLimit: string | null;
+  DownloadLimit?: string | null;
   /** 接收实时速率 */
-  DataRx: number | null;
+  DataRx?: number | null;
   /** 发送实时速率 */
-  DataTx: number | null;
+  DataTx?: number | null;
   /** 运营商类型：1: 中国移动；2: 中国电信; 3: 中国联通 */
-  Vendor: number | null;
+  Vendor?: number | null;
   /** 连接状态：0:无连接1:连接中2:已连接 */
-  State: number | null;
+  State?: number | null;
   /** 公网IP */
-  PublicIp: string | null;
+  PublicIp?: string | null;
   /** 信号强度/单位：dbm */
-  SignalStrength: number | null;
+  SignalStrength?: number | null;
   /** 数据网络类型：-1 ：无效值 2：2G 3：3G 4：4G 5：5G */
-  Rat: number | null;
+  Rat?: number | null;
   /** 网卡名 */
-  NetInfoName: string | null;
+  NetInfoName?: string | null;
   /** 下行实时速率（浮点数类型代替上一版本DataRx的整型） */
   DownRate?: number | null;
   /** 上行实时速率（浮点数类型代替上一版本TxRate的整型） */
@@ -355,27 +355,27 @@ declare interface UpdateNetInfo {
 /** 厂商硬件详细信息 */
 declare interface VendorHardware {
   /** 硬件id */
-  HardwareId?: string | null;
+  HardwareId?: string;
   /** 硬件序列号 */
-  SN?: string | null;
+  SN?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 激活状态， 空：全部； 1:待激活； 2:已激活 */
-  Status?: number | null;
+  Status?: number;
   /** 激活时间 */
   ActiveTime?: string | null;
   /** 厂商备注 */
-  Description?: string | null;
+  Description?: string;
   /** 设备id */
-  DeviceId?: string | null;
+  DeviceId?: string;
   /** license计费模式： 1，租户月付费 2，厂商月付费 3，license永久授权注：设备为租户付费且未激活（未选择月付还是永久付费）时，此参数返回1，仅代表租户付费。后续将废弃此参数，新接入请使用LicensePayMode和Payer */
-  LicenseChargingMode?: number | null;
+  LicenseChargingMode?: number;
   /** 最后在线时间 */
   LastOnlineTime?: string | null;
   /** license授权有效期0：月度授权1：永久授权-1：未知 */
-  LicensePayMode?: number | null;
+  LicensePayMode?: number;
   /** 付费方0：客户付费1：厂商付费 */
-  Payer?: number | null;
+  Payer?: number;
 }
 
 declare interface ActivateHardwareRequest {

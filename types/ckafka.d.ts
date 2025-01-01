@@ -1422,6 +1422,8 @@ declare interface KafkaParam {
   ConnectorSyncType?: string | null;
   /** 数据同步专用参数, 当通过时,希望下游的消息写入分区与上游的一致,则填true,但下游分区小于上游时,会报错; 不需要一致则为false, 默认为false */
   KeepPartition?: boolean | null;
+  /** 正则匹配Topic列表 */
+  TopicRegularExpression?: string | null;
 }
 
 /** 小写字符解析 */

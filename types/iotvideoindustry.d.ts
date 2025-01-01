@@ -51,23 +51,23 @@ declare interface AllDeviceInfo {
 /** 国标通道详细信息 */
 declare interface ChannelDetail {
   /** 通道名称 */
-  ChannelName: string;
+  ChannelName?: string;
   /** 通道唯一标识 */
-  ChannelId: string;
+  ChannelId?: string;
   /** 通道类型 0：未知；1：视频通道；2：音频通道；3：告警通道 */
-  ChannelType: number | null;
+  ChannelType?: number | null;
   /** 20位国标通道编码 */
-  ChannelCode: string | null;
+  ChannelCode?: string | null;
   /** 通道扩展信息 */
-  ExtraInformation: string | null;
+  ExtraInformation?: string | null;
   /** 通道在线状态 */
-  Status: number | null;
+  Status?: number | null;
   /** 通道是否存在录像标识 0：无录像；1：有录像 */
-  IsRecord: number | null;
+  IsRecord?: number | null;
   /** 通道所属设备唯一标识 */
-  DeviceId: string | null;
+  DeviceId?: string | null;
   /** 通道所属虚拟组织的ID */
-  BusinessGroupId: string | null;
+  BusinessGroupId?: string | null;
 }
 
 /** GB28181通道 */
@@ -81,13 +81,13 @@ declare interface ChannelItem {
 /** DescribeDeviceStreams的出参复杂类型 */
 declare interface DescribeDeviceStreamsData {
   /** rtsp地址 */
-  RtspAddr: string;
+  RtspAddr?: string;
   /** rtmp地址 */
-  RtmpAddr: string;
+  RtmpAddr?: string;
   /** hls地址 */
-  HlsAddr: string;
+  HlsAddr?: string;
   /** flv地址 */
-  FlvAddr: string;
+  FlvAddr?: string;
 }
 
 /** DescribeRecordStreamData 复杂类型 */
@@ -137,23 +137,23 @@ declare interface DeviceMonitorValue {
 /** 设备事件列表 */
 declare interface Events {
   /** 开始时间，秒级时间戳 */
-  EventTime: number | null;
+  EventTime?: number | null;
   /** 事件类型 1:注册 2:心跳 4:录制异常 5:播放异常 6:流中断 */
-  EventType: number | null;
+  EventType?: number | null;
   /** 事件描述 */
-  EventDesc: string | null;
+  EventDesc?: string | null;
   /** 设备类型 */
-  DeviceType: number;
+  DeviceType?: number;
   /** 设备地址 */
-  DeviceAddress: string;
+  DeviceAddress?: string;
   /** 设备Id */
-  DeviceId: string;
+  DeviceId?: string;
   /** 通道Id */
-  ChannelId: string;
+  ChannelId?: string;
   /** 事件日志 */
-  EventLog: string;
+  EventLog?: string;
   /** 设备备注名称 */
-  DeviceName: string | null;
+  DeviceName?: string | null;
 }
 
 /** 分组下设备信息 */
@@ -429,35 +429,35 @@ declare interface SceneItem {
 /** SIIP服务器相关配置项 */
 declare interface ServerConfiguration {
   /** SIP服务器地址 */
-  Host: string;
+  Host?: string;
   /** SIP服务器端口 */
-  Port: number;
+  Port?: number;
   /** SIP服务器编码 */
-  Serial: string;
+  Serial?: string;
   /** SIP服务器域 */
-  Realm: string;
+  Realm?: string;
 }
 
 /** 某天的统计数额 */
 declare interface StatisticItem {
   /** 日期。格式【YYYY-MM-DD】 */
-  Date: string | null;
+  Date?: string | null;
   /** 统计数额 */
-  Sum: number | null;
+  Sum?: number | null;
 }
 
 /** 拉流地址，只有在推流情况下才有 */
 declare interface StreamAddress {
   /** 流ID */
-  StreamId: string | null;
+  StreamId?: string | null;
   /** rtsp流地址 */
-  RtspAddr: string | null;
+  RtspAddr?: string | null;
   /** rtmp流地址 */
-  RtmpAddr: string | null;
+  RtmpAddr?: string | null;
   /** hls流地址 */
-  HlsAddr: string | null;
+  HlsAddr?: string | null;
   /** flv流地址 */
-  FlvAddr: string | null;
+  FlvAddr?: string | null;
 }
 
 /** 时间模板详情 */
@@ -487,29 +487,29 @@ declare interface TimeTemplateSpec {
 /** 告警列表出参 */
 declare interface WarningsData {
   /** 唯一ID */
-  Id: number | null;
+  Id?: number | null;
   /** 设备ID */
-  DeviceId: string | null;
+  DeviceId?: string | null;
   /** 设备名称 */
-  DeviceName: string | null;
+  DeviceName?: string | null;
   /** 告警通道 */
-  WarnChannel: string | null;
+  WarnChannel?: string | null;
   /** 告警级别 1: "一级警情", 2: "二级警情", 3: "三级警情", 4: "四级警情", */
-  WarnLevel: number | null;
+  WarnLevel?: number | null;
   /** 告警级别名称 */
-  WarnLevelName: string | null;
+  WarnLevelName?: string | null;
   /** 告警方式 2 设备报警 5 视频报警 6 设备故障报警 */
-  WarnMode: number | null;
+  WarnMode?: number | null;
   /** 告警方式名称 */
-  WarnModeName: string | null;
+  WarnModeName?: string | null;
   /** 告警类型 2: { Name: "设备报警", WarnType: map[int]string{ 1: "视频丢失报警", 2: "设备防拆报警", 3: "存储设备磁盘满报警", 4: "设备高温报警", 5: "设备低温报警", }, }, 5: { Name: "视频报警", WarnType: map[int]string{ 1: "人工视频报警", 2: "运动目标检测报警", 3: "遗留物检测报警", 4: "物体移除检测报警", 5: "绊线检测报警", 6: "入侵检测报警", 7: "逆行检测报警", 8: "徘徊检测报警", 9: "流量统计报警", 10: "密度检测报警", 11: "视频异常检测报警", 12: "快速移动报警", }, }, 6: { Name: "设备故障报警", WarnType: map[int]string{ 1: "存储设备磁盘故障报警", 2: "存储设备风扇故障报警", }, } */
-  WarnType: number | null;
+  WarnType?: number | null;
   /** 是否删除 */
-  Del: number | null;
+  Del?: number | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
 }
 
 declare interface BindGroupDevicesRequest {
