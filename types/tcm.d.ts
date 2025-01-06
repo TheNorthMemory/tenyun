@@ -635,7 +635,7 @@ declare interface DescribeMeshRequest {
 
 declare interface DescribeMeshResponse {
   /** Mesh详细信息 */
-  Mesh: Mesh;
+  Mesh?: Mesh;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1665,9 +1665,9 @@ declare interface DescribeImagesRequest {
 
 declare interface DescribeImagesResponse {
   /** 一个关于镜像详细信息的结构体，主要包括镜像的主要状态与属性。 */
-  ImageSet: Image[];
+  ImageSet?: Image[];
   /** 符合要求的镜像数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

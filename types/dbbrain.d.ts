@@ -958,6 +958,20 @@ declare interface TimeSlice {
   Timestamp: number;
 }
 
+/** 热key分析返回信息 */
+declare interface TopHotKeys {
+  /** 访问频次。 */
+  Count?: number;
+  /** 热Key所属数据库。 */
+  Db?: string;
+  /** Redis节点。 */
+  InstanceNodeId?: string;
+  /** 热Key。 */
+  Key?: string;
+  /** 数据类型。 */
+  Type?: string;
+}
+
 /** 用户配置的相关信息，包括邮件配置。 */
 declare interface UserProfile {
   /** 配置的id。 */
@@ -1812,6 +1826,28 @@ declare interface DescribeRedisTopBigKeysResponse {
   TopKeys?: RedisKeySpaceData[];
   /** 采集时间戳（秒）。 */
   Timestamp?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRedisTopHotKeysRequest {
+  /** 实例 ID 。 */
+  InstanceId: string;
+  /** 开始时间，如“2024-09-22T00:00:00+00:00”。0天 < 当前服务器时间 - 开始时间 <= 10天。 */
+  StartTime: string;
+  /** 结束时间，如“2024-09-22T01:00:00+00:00”，0天 < 结束时间 - 开始时间 <= 10天。 */
+  EndTime: string;
+  /** 服务产品类型，仅仅支持值 "redis" - 云数据库 Redis。 */
+  Product: string;
+  /** Redis 节点数组。 */
+  InstanceNodeIds?: string[];
+  /** top 数目，默认为20，最大值为100。 */
+  Limit?: number;
+}
+
+declare interface DescribeRedisTopHotKeysResponse {
+  /** 热Key分析结果 */
+  TopHotKeys?: TopHotKeys[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3481,6 +3517,8 @@ declare interface Dbbrain {
   DescribeRedisProcessList(data: DescribeRedisProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisProcessListResponse>;
   /** 查询redis实例大key列表 {@link DescribeRedisTopBigKeysRequest} {@link DescribeRedisTopBigKeysResponse} */
   DescribeRedisTopBigKeys(data: DescribeRedisTopBigKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisTopBigKeysResponse>;
+  /** 获取redis top热key {@link DescribeRedisTopHotKeysRequest} {@link DescribeRedisTopHotKeysResponse} */
+  DescribeRedisTopHotKeys(data: DescribeRedisTopHotKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisTopHotKeysResponse>;
   /** 查询redis实例top key前缀列表 {@link DescribeRedisTopKeyPrefixListRequest} {@link DescribeRedisTopKeyPrefixListResponse} */
   DescribeRedisTopKeyPrefixList(data: DescribeRedisTopKeyPrefixListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisTopKeyPrefixListResponse>;
   /** 查询安全审计日志导出文件下载链接 {@link DescribeSecurityAuditLogDownloadUrlsRequest} {@link DescribeSecurityAuditLogDownloadUrlsResponse} */

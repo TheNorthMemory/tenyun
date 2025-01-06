@@ -331,29 +331,29 @@ declare interface CcnAttachedInstance {
 /** 用于描述云联网地域间限速带宽实例的信息。 */
 declare interface CcnBandwidth {
   /** 带宽所属的云联网ID。 */
-  CcnId: string;
+  CcnId?: string;
   /** 实例的创建时间。 */
-  CreatedTime: string | null;
+  CreatedTime?: string;
   /** 实例的过期时间 */
-  ExpiredTime: string | null;
+  ExpiredTime?: string;
   /** 带宽实例的唯一ID。 */
-  RegionFlowControlId: string | null;
+  RegionFlowControlId?: string;
   /** 带宽是否自动续费的标记。 */
-  RenewFlag: string | null;
+  RenewFlag?: string;
   /** 描述带宽的地域和限速上限信息。在地域间限速的情况下才会返回参数，出口限速模式不返回。 */
-  CcnRegionBandwidthLimit: CcnRegionBandwidthLimitInfo | null;
+  CcnRegionBandwidthLimit?: CcnRegionBandwidthLimitInfo;
   /** 云市场实例ID。 */
-  MarketId: string | null;
+  MarketId?: string;
   /** 实例所属用户主账号ID。 */
-  UserAccountID: string | null;
+  UserAccountID?: string;
   /** 是否跨境，`true`表示跨境，反之不跨境。 */
-  IsCrossBorder: boolean | null;
+  IsCrossBorder?: boolean;
   /** `true`表示封禁，地域间流量不通，`false`解禁，地域间流量正常 */
-  IsSecurityLock: boolean | null;
+  IsSecurityLock?: boolean;
   /** `POSTPAID`表示后付费，`PREPAID`表示预付费。 */
-  InstanceChargeType: string | null;
+  InstanceChargeType?: string;
   /** 实例更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
 }
 
 /** 用于描述云联网地域间限速带宽实例的信息。 */
@@ -537,11 +537,11 @@ declare interface CcnRouteTableBroadcastPolicy {
 /** 云联网路由传播策略列表 */
 declare interface CcnRouteTableBroadcastPolicys {
   /** 策略列表 */
-  Policys: CcnRouteTableBroadcastPolicy[];
+  Policys?: CcnRouteTableBroadcastPolicy[];
   /** 版本号 */
-  PolicyVersion: number;
+  PolicyVersion?: number;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
 }
 
 /** 云联网路由接收策略 */
@@ -707,11 +707,11 @@ declare interface CustomerGateway {
 /** 对端网关厂商信息对象。 */
 declare interface CustomerGatewayVendor {
   /** 平台。 */
-  Platform: string | null;
+  Platform: string;
   /** 软件版本。 */
-  SoftwareVersion: string | null;
+  SoftwareVersion: string;
   /** 供应商名称。 */
-  VendorName: string | null;
+  VendorName: string;
 }
 
 /** 云主机实例信息。 */
@@ -827,49 +827,51 @@ declare interface DhcpIp {
 /** 专线网关对象。 */
 declare interface DirectConnectGateway {
   /** 专线网关`ID`。 */
-  DirectConnectGatewayId: string;
+  DirectConnectGatewayId?: string;
   /** 专线网关名称。 */
-  DirectConnectGatewayName: string;
+  DirectConnectGatewayName?: string;
   /** 专线网关关联`VPC`实例`ID`。 */
-  VpcId: string;
+  VpcId?: string;
   /** 关联网络类型：`VPC` - 私有网络`CCN` - 云联网 */
-  NetworkType: string;
+  NetworkType?: string;
   /** 关联网络实例`ID`：`NetworkType`为`VPC`时，这里为私有网络实例`ID``NetworkType`为`CCN`时，这里为云联网实例`ID` */
-  NetworkInstanceId: string;
+  NetworkInstanceId?: string;
   /** 网关类型：NORMAL - 标准型，注：云联网只支持标准型NAT - NAT型NAT类型支持网络地址转换配置，类型确定后不能修改；一个私有网络可以创建一个NAT类型的专线网关和一个非NAT类型的专线网关 */
-  GatewayType: string;
+  GatewayType?: string;
   /** 创建时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 专线网关IP。 */
-  DirectConnectGatewayIp: string;
+  DirectConnectGatewayIp?: string;
   /** 专线网关关联`CCN`实例`ID`。 */
-  CcnId: string;
+  CcnId?: string;
   /** 云联网路由学习类型：`BGP` - 自动学习。`STATIC` - 静态，即用户配置。 */
-  CcnRouteType: string;
+  CcnRouteType?: string;
   /** 是否启用BGP。 */
-  EnableBGP: boolean;
+  EnableBGP?: boolean;
   /** 开启和关闭BGP的community属性。 */
-  EnableBGPCommunity: boolean;
+  EnableBGPCommunity?: boolean;
   /** 绑定的NAT网关ID。 */
-  NatGatewayId: string | null;
+  NatGatewayId?: string;
   /** 专线网关是否支持VXLAN架构 */
-  VXLANSupport: boolean[] | null;
+  VXLANSupport?: boolean[];
   /** 云联网路由发布模式：`standard`（标准模式）、`exquisite`（精细模式）。 */
-  ModeType: string | null;
+  ModeType?: string;
   /** 是否为localZone专线网关。 */
-  LocalZone: boolean | null;
+  LocalZone?: boolean;
   /** 专线网关所在可用区 */
-  Zone: string | null;
+  Zone?: string;
   /** 网关流控明细启用状态：0：关闭1：开启 */
-  EnableFlowDetails: number | null;
+  EnableFlowDetails?: number;
   /** 开启、关闭网关流控明细时间 */
-  FlowDetailsUpdateTime: string | null;
+  FlowDetailsUpdateTime?: string;
   /** 是否支持开启网关流控明细0：不支持1：支持 */
-  NewAfc: number | null;
+  NewAfc?: number;
   /** 专线网关接入网络类型：`VXLAN` - VXLAN类型。`MPLS` - MPLS类型。`Hybrid` - Hybrid类型。 */
-  AccessNetworkType: string | null;
+  AccessNetworkType?: string;
   /** 跨可用区容灾专线网关的可用区列表 */
-  HaZoneList: string[] | null;
+  HaZoneList?: string[];
+  /** 专线网关自定义ASN */
+  GatewayAsn?: number;
 }
 
 /** 专线网关云联网路由（IDC网段）对象 */
@@ -1099,13 +1101,13 @@ declare interface HaVipAssociation {
 /** VPN通道健康检查配置 */
 declare interface HealthCheckConfig {
   /** 探测模式，默认值NQA，不可修改。 */
-  ProbeType?: string | null;
+  ProbeType?: string;
   /** 探测间隔，腾讯云两次健康检查间隔时间，范围【1000-5000】，单位ms。 */
-  ProbeInterval?: number | null;
+  ProbeInterval?: number;
   /** 探测次数，连续N次健康检查失败后执行路由切换，范围【3-8】，单位次。 */
-  ProbeThreshold?: number | null;
+  ProbeThreshold?: number;
   /** 探测超时时间，范围【10-5000】，单位ms。 */
-  ProbeTimeout?: number | null;
+  ProbeTimeout?: number;
 }
 
 /** 高优路由表条目修改属性。 */
@@ -2287,9 +2289,9 @@ declare interface SecurityGroupPolicySet {
 /** SecurityPolicyDatabase策略 */
 declare interface SecurityPolicyDatabase {
   /** 本端网段 */
-  LocalCidrBlock: string | null;
+  LocalCidrBlock: string;
   /** 对端网段 */
-  RemoteCidrBlock: string[] | null;
+  RemoteCidrBlock: string[];
 }
 
 /** 协议端口模板 */
@@ -2453,7 +2455,7 @@ declare interface SslVpnClient {
 /** SSL-VPN-SERVER 出参 */
 declare interface SslVpnSever {
   /** VPC实例ID. */
-  VpcId?: string | null;
+  VpcId?: string;
   /** SSL-VPN-SERVER 实例ID。 */
   SslVpnServerId?: string;
   /** VPN 实例ID。 */
@@ -2491,7 +2493,7 @@ declare interface SslVpnSever {
   /** 策略信息 */
   AccessPolicy?: AccessPolicy[];
   /** CAM服务提供商Name */
-  SpName?: string | null;
+  SpName?: string;
 }
 
 /** 子网对象 */
@@ -2609,17 +2611,17 @@ declare interface TrafficPackage {
 /** 流量调度规则 */
 declare interface TrafficQosPolicySet {
   /** CCN实例ID。形如：ccn-f49l6u0z。 */
-  CcnId?: string | null;
+  CcnId?: string;
   /** qos id。 */
-  QosId?: number | null;
+  QosId?: number;
   /** 描述。 */
-  QosPolicyDescription?: string | null;
+  QosPolicyDescription?: string;
   /** 名称。 */
-  QosPolicyName?: string | null;
+  QosPolicyName?: string;
   /** 带宽。 */
-  Bandwidth?: number | null;
+  Bandwidth?: number;
   /** 流量调度策略ID。 */
-  QosPolicyId?: string | null;
+  QosPolicyId?: string;
 }
 
 /** 私网网关转发规则匹配ACL */
@@ -3111,20 +3113,20 @@ declare interface AllocateIPv6AddressesResponse {
 }
 
 declare interface AllocateIp6AddressesBandwidthRequest {
-  /** 需要开通公网访问能力的IPV6地址 */
+  /** 需要开通公网访问能力的IPv6地址 */
   Ip6Addresses: string[];
   /** 带宽，单位Mbps。默认是1Mbps */
   InternetMaxBandwidthOut?: number;
-  /** 网络计费模式。IPV6当前支持"TRAFFIC_POSTPAID_BY_HOUR"，"BANDWIDTH_PACKAGE"。默认网络计费模式是"TRAFFIC_POSTPAID_BY_HOUR"。 */
+  /** 网络计费模式。IPv6当前支持"TRAFFIC_POSTPAID_BY_HOUR"，"BANDWIDTH_PACKAGE"。默认网络计费模式是"TRAFFIC_POSTPAID_BY_HOUR"。 */
   InternetChargeType?: string;
-  /** 带宽包id，上移账号，申请带宽包计费模式的ipv6地址需要传入. */
+  /** 带宽包id，上移账号，申请带宽包计费模式的IPv6地址需要传入. */
   BandwidthPackageId?: string;
   /** 需要关联的标签列表。 */
   Tags?: Tag[];
 }
 
 declare interface AllocateIp6AddressesBandwidthResponse {
-  /** 弹性公网 IPV6 的唯一 ID 列表。 */
+  /** 传统弹性公网 IPv6 的唯一 ID 列表。 */
   AddressSet?: string[];
   /** 异步任务TaskId。可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。 */
   TaskId?: string;
@@ -3209,7 +3211,7 @@ declare interface AssociateAddressRequest {
   PrivateIpAddress?: string;
   /** 指定绑定时是否设置直通。弹性公网 IP 直通请参见 [EIP 直通](https://cloud.tencent.com/document/product/1199/41709)。取值：True、False，默认值为 False。当绑定 CVM 实例、EKS 弹性集群时，可设定此参数为 True。此参数目前处于内测中，如需使用，请提交 [工单申请](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=163&source=0&data_title=%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%20CLB&level3_id=1071&queue=96&scene_code=34639&step=2)。 */
   EipDirectConnection?: boolean;
-  /** 要绑定的实例所在的地域 */
+  /** 要绑定的实例所在地域。默认无需填写，仅限GAAP特殊场景需指定实例所在地域。 */
   InstanceRegion?: string;
 }
 
@@ -3721,15 +3723,19 @@ declare interface CreateDirectConnectGatewayRequest {
   GatewayType?: string;
   /** 云联网路由发布模式，可选值：`standard`（标准模式）、`exquisite`（精细模式）。只有云联网类型专线网关才支持`ModeType`。 */
   ModeType?: string;
+  /** 专线网关自定义ASN，范围：45090，64512-65534 和4200000000-4294967294 */
+  GatewayAsn?: number;
   /** 专线网关可用区 */
   Zone?: string;
   /** 专线网关高可用区容灾组ID */
   HaZoneGroupId?: string;
+  /** 标签 */
+  Tags?: Tag[];
 }
 
 declare interface CreateDirectConnectGatewayResponse {
   /** 专线网关对象。 */
-  DirectConnectGateway: DirectConnectGateway;
+  DirectConnectGateway?: DirectConnectGateway;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5349,9 +5355,9 @@ declare interface DescribeCcnRouteTableBroadcastPolicysRequest {
 
 declare interface DescribeCcnRouteTableBroadcastPolicysResponse {
   /** 路由表传播策略。 */
-  PolicySet: CcnRouteTableBroadcastPolicys[];
+  PolicySet?: CcnRouteTableBroadcastPolicys[];
   /** 符合条件的对象数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5855,9 +5861,9 @@ declare interface DescribeIPv6AddressesResponse {
 }
 
 declare interface DescribeIp6AddressesRequest {
-  /** 标识 IPV6 的唯一 ID 列表。IPV6 唯一 ID 形如：`eip-11112222`。参数不支持同时指定`Ip6AddressIds`和`Filters`。 */
+  /** 标识 IPv6 的唯一 ID 列表。IPv6 唯一 ID 形如：`eip-11112222`。参数不支持同时指定`Ip6AddressIds`和`Filters`。 */
   Ip6AddressIds?: string[];
-  /** 每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。参数不支持同时指定`AddressIds`和`Filters`。详细的过滤条件如下： address-ip - String - 是否必填：否 - （过滤条件）按照 IPV6 的 IP 地址过滤。 network-interface-id - String - 是否必填：否 - （过滤条件）按照弹性网卡的唯一ID过滤。 */
+  /** 每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。参数不支持同时指定`AddressIds`和`Filters`。详细的过滤条件如下： address-ip - String - 是否必填：否 - （过滤条件）按照 IPv6 的 IP 地址过滤。 network-interface-id - String - 是否必填：否 - （过滤条件）按照弹性网卡的唯一ID过滤。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/11646)中的相关小节。 */
   Offset?: number;
@@ -5866,9 +5872,9 @@ declare interface DescribeIp6AddressesRequest {
 }
 
 declare interface DescribeIp6AddressesResponse {
-  /** 符合条件的 IPV6 数量。 */
+  /** 符合条件的 IPv6 数量。 */
   TotalCount?: number;
-  /** IPV6 详细信息列表。 */
+  /** IPv6 详细信息列表。 */
   AddressSet?: Address[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -8009,9 +8015,9 @@ declare interface ModifyIPv6AddressesBandwidthResponse {
 declare interface ModifyIp6AddressesBandwidthRequest {
   /** 修改的目标带宽，单位Mbps */
   InternetMaxBandwidthOut: number;
-  /** IPV6地址。Ip6Addresses和Ip6AddressId必须且只能传一个 */
+  /** IPv6地址。Ip6Addresses和Ip6AddressId必须且只能传一个 */
   Ip6Addresses?: string[];
-  /** IPV6地址对应的唯一ID，形如eip-xxxxxxxx。Ip6Addresses和Ip6AddressId必须且只能传一个 */
+  /** IPv6地址对应的唯一ID，形如eip-xxxxxxxx。Ip6Addresses和Ip6AddressId必须且只能传一个 */
   Ip6AddressIds?: string[];
 }
 
@@ -8703,9 +8709,9 @@ declare interface ReleaseIPv6AddressesResponse {
 }
 
 declare interface ReleaseIp6AddressesBandwidthRequest {
-  /** IPV6地址。Ip6Addresses和Ip6AddressIds必须且只能传一个 */
+  /** IPv6地址。Ip6Addresses和Ip6AddressIds必须且只能传一个 */
   Ip6Addresses?: string[];
-  /** IPV6地址对应的唯一ID，形如eip-xxxxxxxx。Ip6Addresses和Ip6AddressIds必须且只能传一个。 */
+  /** IPv6地址对应的唯一ID，形如eip-xxxxxxxx。Ip6Addresses和Ip6AddressIds必须且只能传一个。 */
   Ip6AddressIds?: string[];
 }
 

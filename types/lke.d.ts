@@ -1832,6 +1832,8 @@ declare interface DescribeKnowledgeUsageResponse {
   AvailableCharSize?: string;
   /** 超过可用字符数上限的字符数 */
   ExceedCharSize?: string;
+  /** 知识库使用字符总数 */
+  UsedCharSize?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2110,6 +2112,10 @@ declare interface DescribeTokenUsageResponse {
   SearchUsage?: number;
   /** 文档解析消耗页数 */
   PageUsage?: number;
+  /** 拆分token消耗量 */
+  SplitTokenUsage?: number;
+  /** Rag检索次数 */
+  RagSearchUsage?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

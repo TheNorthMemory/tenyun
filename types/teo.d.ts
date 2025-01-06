@@ -2881,7 +2881,7 @@ declare interface CreatePrefetchTaskResponse {
 }
 
 declare interface CreatePurgeTaskRequest {
-  /** 站点 ID。 */
+  /** 站点 ID。若您希望快速提交不同站点下的 Targets Url，可以将其填写为 *，但前提是调用该 API 的账号必须具备主账号下全部站点资源的权限。 */
   ZoneId: string;
   /** 节点缓存清除类型，取值有：purge_url：URL刷新；purge_prefix：目录刷新；purge_host：Hostname 刷新；purge_all：站点下全部缓存刷新；purge_cache_tag：cache-tag 刷新。缓存清除类型详情请查看[清除缓存](https://cloud.tencent.com/document/product/1552/70759)。 */
   Type: string;
@@ -4031,7 +4031,7 @@ declare interface DescribeTimingL7AnalysisDataRequest {
   StartTime: string;
   /** 结束时间。 */
   EndTime: string;
-  /** 指标列表，取值有:l7Flow_outFlux: L7 EdgeOne 响应流量；l7Flow_inFlux: L7 客户端请求流量；l7Flow_flux: L7 访问总流量（EdgeOne 响应+客户端请求）；l7Flow_outBandwidth: L7 EdgeOne 响应带宽；l7Flow_inBandwidth：L7 客户端请求带宽；l7Flow_bandwidth：L7 访问总带宽（EdgeOne 响应+客户端请求）；l7Flow_request: L7 访问请求数。 */
+  /** 指标列表，取值有:l7Flow_outFlux: L7 EdgeOne 响应流量，单位：Byte；l7Flow_inFlux: L7 客户端请求流量，单位：Byte；l7Flow_flux: L7 访问总流量（EdgeOne 响应+客户端请求），单位：Byte；l7Flow_outBandwidth: L7 EdgeOne 响应带宽，单位：bps；l7Flow_inBandwidth：L7 客户端请求带宽，单位：bps；l7Flow_bandwidth：L7 访问总带宽（EdgeOne 响应+客户端请求），单位：bps；l7Flow_request: L7 访问请求数，单位：次； l7Flow_avgResponseTime: L7 访问平均响应耗时，单位：ms； l7Flow_avgFirstByteResponseTime: L7 访问平均首字节响应耗时，单位：ms。 */
   MetricNames: string[];
   /** 站点 ID 集合，此参数必填。 */
   ZoneIds?: string[];

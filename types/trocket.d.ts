@@ -1482,6 +1482,28 @@ declare interface DescribeRoleListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTopicListByGroupRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 查询起始位置 */
+  Offset?: number;
+  /** 查询结果限制数量 */
+  Limit?: number;
+  /** 消费组名称 */
+  ConsumerGroup?: string;
+  /** 查询条件列表 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeTopicListByGroupResponse {
+  /** 查询总数 */
+  TotalCount?: number | null;
+  /** 主题列表 */
+  Data?: SubscriptionData[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTopicListRequest {
   /** 集群ID */
   InstanceId: string;
@@ -1823,6 +1845,8 @@ declare interface Trocket {
   DescribeTopic(data: DescribeTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicResponse>;
   /** 查询主题列表 {@link DescribeTopicListRequest} {@link DescribeTopicListResponse} */
   DescribeTopicList(data: DescribeTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicListResponse>;
+  /** 查询消费组订阅的主题列表 {@link DescribeTopicListByGroupRequest} {@link DescribeTopicListByGroupResponse} */
+  DescribeTopicListByGroup(data: DescribeTopicListByGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicListByGroupResponse>;
   /** 导入 Group 元数据 {@link ImportSourceClusterConsumerGroupsRequest} {@link ImportSourceClusterConsumerGroupsResponse} */
   ImportSourceClusterConsumerGroups(data: ImportSourceClusterConsumerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportSourceClusterConsumerGroupsResponse>;
   /** 导入 Topic 元数据 {@link ImportSourceClusterTopicsRequest} {@link ImportSourceClusterTopicsResponse} */

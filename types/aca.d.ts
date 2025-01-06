@@ -16,7 +16,7 @@ declare interface Abnormals {
 declare interface CommonHeader {
   /** 机构ID */
   HospitalId: string;
-  /** 合作方ID */
+  /** token */
   Token: string;
 }
 
@@ -41,15 +41,15 @@ declare interface CurrentDiagnosis {
 /** 科室信息 */
 declare interface Department {
   /** 科室ID */
-  Id: string | null;
+  Id: string;
   /** 科室名称 */
-  Name: string | null;
+  Name: string;
   /** 科室类型 0:门诊 1:住院 2:门诊+住院 */
-  Scope: number | null;
+  Scope: number;
   /** 门诊区开关 true:此科室对应的门诊区开启智能审方功能, false:此科室对应的门诊区关闭智能审方功能; 仅对scope为0/2的科室生效 */
-  OutpatientOn: boolean | null;
+  OutpatientOn: boolean;
   /** 住院区开关 true:此科室对应的住院区开启智能审方功能, false:此科室对应的住院区关闭智能审方功能; 仅对scope为1/2的科室生效 */
-  InHospitalOn: boolean | null;
+  InHospitalOn: boolean;
 }
 
 /** 诊断、辅助内容 */

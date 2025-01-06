@@ -5,37 +5,37 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 内网接入信息 */
 declare interface AccessVpc {
   /** Vpc的Id */
-  VpcId: string;
+  VpcId?: string;
   /** 子网Id */
-  SubnetId: string;
+  SubnetId?: string;
   /** 内网接入状态 */
-  Status: string;
+  Status?: string;
   /** 内网接入Ip */
-  AccessIp: string;
+  AccessIp?: string;
 }
 
 /** 自动删除策略信息 */
 declare interface AutoDelStrategyInfo {
   /** 用户名 */
-  Username: string;
+  Username?: string;
   /** 仓库名 */
-  RepoName: string;
+  RepoName?: string;
   /** 类型 */
-  Type: string;
+  Type?: string;
   /** 策略值 */
-  Value: number;
+  Value?: number;
   /** Valid */
-  Valid: number;
+  Valid?: number;
   /** 创建时间 */
-  CreationTime: string;
+  CreationTime?: string;
 }
 
 /** 获取自动删除策略 */
 declare interface AutoDelStrategyInfoResp {
   /** 总数目 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 自动删除策略列表 */
-  StrategyInfo: AutoDelStrategyInfo[] | null;
+  StrategyInfo?: AutoDelStrategyInfo[] | null;
 }
 
 /** 命名空间漏洞白名单列表 */
@@ -59,55 +59,55 @@ declare interface CustomizedDomainInfo {
 /** 查询应用更新触发器触发日志返回值 */
 declare interface DescribeApplicationTriggerLogPersonalResp {
   /** 返回总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 触发日志列表 */
-  LogInfo: TriggerLogResp[] | null;
+  LogInfo?: TriggerLogResp[] | null;
 }
 
 /** 拉取触发器列表返回值 */
 declare interface DescribeApplicationTriggerPersonalResp {
   /** 返回条目总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 触发器列表 */
-  TriggerInfo: TriggerResp[];
+  TriggerInfo?: TriggerResp[];
 }
 
 /** 复制镜像tag返回值 */
 declare interface DupImageTagResp {
   /** 镜像Digest值 */
-  Digest: string;
+  Digest?: string;
 }
 
 /** 用于获取收藏仓库的响应 */
 declare interface FavorResp {
   /** 收藏仓库的总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 仓库信息数组 */
-  RepoInfo: Favors[] | null;
+  RepoInfo?: Favors[] | null;
 }
 
 /** 仓库收藏 */
 declare interface Favors {
   /** 仓库名字 */
-  RepoName: string;
+  RepoName?: string;
   /** 仓库类型 */
-  RepoType: string;
+  RepoType?: string;
   /** Pull总共的次数 */
-  PullCount: number | null;
+  PullCount?: number | null;
   /** 仓库收藏次数 */
-  FavorCount: number | null;
+  FavorCount?: number | null;
   /** 仓库是否公开 */
-  Public: number | null;
+  Public?: number | null;
   /** 是否为官方所有 */
-  IsQcloudOfficial: boolean | null;
+  IsQcloudOfficial?: boolean | null;
   /** 仓库Tag的数量 */
-  TagCount: number | null;
+  TagCount?: number | null;
   /** Logo */
-  Logo: string | null;
+  Logo?: string | null;
   /** 地域 */
-  Region: string;
+  Region?: string;
   /** 地域的Id */
-  RegionId: number;
+  RegionId?: number;
 }
 
 /** 过滤器 */
@@ -121,15 +121,15 @@ declare interface Filter {
 /** GC 执行信息 */
 declare interface GCJobInfo {
   /** 作业 ID */
-  ID: number;
+  ID?: number;
   /** 作业状态 */
-  JobStatus: string;
+  JobStatus?: string;
   /** 创建时间 */
-  CreationTime: string;
+  CreationTime?: string;
   /** 更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 调度信息 */
-  Schedule: Schedule;
+  Schedule?: Schedule;
 }
 
 /** Header KV */
@@ -189,9 +189,9 @@ declare interface NamespaceInfo {
 /** 获取命名空间信息返回 */
 declare interface NamespaceInfoResp {
   /** 命名空间数量 */
-  NamespaceCount: number;
+  NamespaceCount?: number;
   /** 命名空间信息 */
-  NamespaceInfo: NamespaceInfo[];
+  NamespaceInfo?: NamespaceInfo[];
 }
 
 /** NamespaceIsExists返回类型 */
@@ -287,11 +287,11 @@ declare interface RegistryChargePrepaid {
 /** 实例创建过程 */
 declare interface RegistryCondition {
   /** 实例创建过程类型 */
-  Type: string;
+  Type?: string;
   /** 实例创建过程状态 */
-  Status: string;
+  Status?: string;
   /** 转换到该过程的简明原因 */
-  Reason: string | null;
+  Reason?: string | null;
 }
 
 /** 实例状态 */
@@ -361,43 +361,43 @@ declare interface ReplicationRule {
 /** 仓库的信息 */
 declare interface RepoInfo {
   /** 仓库名称 */
-  RepoName: string;
+  RepoName?: string;
   /** 仓库类型 */
-  RepoType: string;
+  RepoType?: string;
   /** Tag数量 */
-  TagCount: number;
+  TagCount?: number;
   /** 是否为公开 */
-  Public: number;
+  Public?: number;
   /** 是否为用户收藏 */
-  IsUserFavor: boolean;
+  IsUserFavor?: boolean;
   /** 是否为腾讯云官方仓库 */
-  IsQcloudOfficial: boolean;
+  IsQcloudOfficial?: boolean;
   /** 被收藏的个数 */
-  FavorCount: number;
+  FavorCount?: number;
   /** 拉取的数量 */
-  PullCount: number;
+  PullCount?: number;
   /** 描述 */
-  Description: string;
+  Description?: string;
   /** 仓库创建时间 */
-  CreationTime: string;
+  CreationTime?: string;
   /** 仓库更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** 仓库信息的返回信息 */
 declare interface RepoInfoResp {
   /** 仓库总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 仓库信息列表 */
-  RepoInfo: RepoInfo[];
+  RepoInfo?: RepoInfo[];
   /** Server信息 */
-  Server: string;
+  Server?: string;
 }
 
 /** 仓库是否存在的返回值 */
 declare interface RepoIsExistResp {
   /** 仓库是否存在 */
-  IsExist: boolean;
+  IsExist?: boolean;
 }
 
 /** 查询共享版仓库信息返回 */
@@ -655,17 +655,17 @@ declare interface TcrInstanceToken {
 /** Tcr 命名空间的描述 */
 declare interface TcrNamespaceInfo {
   /** 命名空间名称 */
-  Name: string;
+  Name?: string;
   /** 创建时间 */
-  CreationTime: string;
+  CreationTime?: string;
   /** 访问级别 */
-  Public: boolean;
+  Public?: boolean;
   /** 命名空间的Id */
-  NamespaceId: number;
+  NamespaceId?: number;
   /** 实例云标签 */
-  TagSpecification: TagSpecification | null;
+  TagSpecification?: TagSpecification | null;
   /** 命名空间元数据 */
-  Metadata: KeyValueString[] | null;
+  Metadata?: KeyValueString[] | null;
   /** 漏洞白名单列表 */
   CVEWhitelistItems?: CVEWhitelistItem[];
   /** 扫描级别，true为自动，false为手动 */
@@ -697,9 +697,9 @@ declare interface TcrRepositoryInfo {
 /** 触发器触发条件 */
 declare interface TriggerInvokeCondition {
   /** 触发方式 */
-  InvokeMethod: string;
+  InvokeMethod?: string;
   /** 触发表达式 */
-  InvokeExpr: string | null;
+  InvokeExpr?: string | null;
 }
 
 /** 触发器触发参数 */
@@ -721,49 +721,49 @@ declare interface TriggerInvokePara {
 /** 触发器触发结果 */
 declare interface TriggerInvokeResult {
   /** 请求TKE返回值 */
-  ReturnCode: number | null;
+  ReturnCode?: number | null;
   /** 请求TKE返回信息 */
-  ReturnMsg: string | null;
+  ReturnMsg?: string | null;
 }
 
 /** 触发器日志 */
 declare interface TriggerLogResp {
   /** 仓库名称 */
-  RepoName: string | null;
+  RepoName?: string | null;
   /** Tag名称 */
-  TagName: string | null;
+  TagName?: string | null;
   /** 触发器名称 */
-  TriggerName: string | null;
+  TriggerName?: string | null;
   /** 触发方式 */
-  InvokeSource: string | null;
+  InvokeSource?: string | null;
   /** 触发动作 */
-  InvokeAction: string | null;
+  InvokeAction?: string | null;
   /** 触发时间 */
-  InvokeTime: string | null;
+  InvokeTime?: string | null;
   /** 触发条件 */
-  InvokeCondition: TriggerInvokeCondition | null;
+  InvokeCondition?: TriggerInvokeCondition | null;
   /** 触发参数 */
-  InvokePara: TriggerInvokePara | null;
+  InvokePara?: TriggerInvokePara | null;
   /** 触发结果 */
-  InvokeResult: TriggerInvokeResult | null;
+  InvokeResult?: TriggerInvokeResult | null;
 }
 
 /** 触发器返回值 */
 declare interface TriggerResp {
   /** 触发器名称 */
-  TriggerName: string | null;
+  TriggerName?: string | null;
   /** 触发来源 */
-  InvokeSource: string | null;
+  InvokeSource?: string | null;
   /** 触发动作 */
-  InvokeAction: string | null;
+  InvokeAction?: string | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 触发条件 */
-  InvokeCondition: TriggerInvokeCondition | null;
+  InvokeCondition?: TriggerInvokeCondition | null;
   /** 触发器参数 */
-  InvokePara: TriggerInvokePara | null;
+  InvokePara?: TriggerInvokePara | null;
 }
 
 /** vpc和domain信息 */
@@ -816,6 +816,8 @@ declare interface WebhookTrigger {
   Description?: string;
   /** 触发器所属命名空间 Id */
   NamespaceId?: number;
+  /** 触发器所属命名空间名称 */
+  NamespaceName?: string | null;
 }
 
 /** 触发器日志 */
@@ -2111,7 +2113,7 @@ declare interface DescribeServiceAccountsRequest {
   All?: boolean;
   /** 是否填充权限信息 */
   EmbedPermission?: boolean;
-  /** 过滤条件 */
+  /** 过滤条件，key 目前只支持ServiceAccountName */
   Filters?: Filter[];
   /** 偏移量,默认0 */
   Offset?: number;

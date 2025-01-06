@@ -1324,6 +1324,8 @@ declare interface DescribeInstanceNodesResponse {
   TotalCount?: number;
   /** 实例节点总数 */
   InstanceNodesList?: InstanceNode[] | null;
+  /** 节点类型 */
+  NodeRoles?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1558,12 +1560,14 @@ declare interface DescribeSpecRequest {
 }
 
 declare interface DescribeSpecResponse {
-  /** zookeeper节点规格描述 */
+  /** fe节点规格描述 */
   MasterSpec?: ResourceSpec[];
-  /** 数据节点规格描述 */
+  /** be节点规格描述 */
   CoreSpec?: ResourceSpec[];
   /** 云盘列表 */
   AttachCBSSpec?: DiskSpec[] | null;
+  /** cn节点列表 */
+  CNSpec?: ResourceSpec[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

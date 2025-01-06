@@ -1832,7 +1832,7 @@ declare interface SpartaProtectionPort {
   UpstreamProtocol: string;
 }
 
-/** 自定义规则的匹配条件结构体 */
+/** 规则的匹配条件结构体 */
 declare interface Strategy {
   /** 匹配字段 匹配字段不同，相应的匹配参数、逻辑符号、匹配内容有所不同具体如下所示：匹配字段匹配参数逻辑符号匹配内容IP（来源IP）不支持参数ipmatch（匹配）ipnmatch（不匹配）多个IP以英文逗号隔开,最多20个IPV6（来源IPv6）不支持参数ipmatch（匹配）ipnmatch（不匹配）支持单个IPV6地址Referer（Referer）不支持参数empty（内容为空）null（不存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请输入内容,512个字符以内URL（请求路径）不支持参数eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请以/开头,512个字符以内UserAgent（UserAgent）不支持参数同匹配字段Referer逻辑符号请输入内容,512个字符以内HTTP_METHOD（HTTP请求方法）不支持参数eq（等于）neq（不等于）请输入方法名称,建议大写QUERY_STRING（请求字符串）不支持参数同匹配字段请求路径逻辑符号请输入内容,512个字符以内GET（GET参数值）支持参数录入contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）请输入内容,512个字符以内GET_PARAMS_NAMES（GET参数名）不支持参数exsit（存在参数）nexsit（不存在参数）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）请输入内容,512个字符以内POST（POST参数值）支持参数录入同匹配字段GET参数值逻辑符号请输入内容,512个字符以内GET_POST_NAMES（POST参数名）不支持参数同匹配字段GET参数名逻辑符号请输入内容,512个字符以内POST_BODY（完整BODY）不支持参数同匹配字段请求路径逻辑符号请输入BODY内容,512个字符以内COOKIE（Cookie）不支持参数empty（内容为空）null（不存在）rematch（正则匹配）暂不支持GET_COOKIES_NAMES（Cookie参数名）不支持参数同匹配字段GET参数名逻辑符号请输入内容,512个字符以内ARGS_COOKIE（Cookie参数值）支持参数录入同匹配字段GET参数值逻辑符号请输入内容,512个字符以内GET_HEADERS_NAMES（Header参数名）不支持参数exsit（存在参数）nexsit（不存在参数）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请输入内容,建议小写,512个字符以内ARGS_HEADER（Header参数值）支持参数录入contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请输入内容,512个字符以内 */
   Field: string;

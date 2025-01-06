@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 261+ 款产品，12083+ 服务数</summary>
+<details><summary>共计 261+ 款产品，12086+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -180,7 +180,7 @@ cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) |
 dasb | [运维安全中心（堡垒机）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(63) |
 dataintegration | [数据接入平台](https://cloud.tencent.com/document/product/1591) | 2022-06-13(1) |
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112) |
-dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(63) | 2019-10-16(27) |
+dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(64) | 2019-10-16(27) |
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(6) |
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(22) |
 dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(77) |
@@ -278,7 +278,7 @@ region | [地域管理系统](https://cloud.tencent.com/document/product/1596) |
 rkp | [风险探针](https://cloud.tencent.com/document/product/1169) | 2019-12-09(3) |
 rp | [注册保护](https://cloud.tencent.com/document/product/1191) | 2020-02-24(1) |
 rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(54) |
-scf | [云函数](https://cloud.tencent.com/document/product/583) | 2018-04-16(51+7) |
+scf | [云函数](https://cloud.tencent.com/document/product/583) | 2018-04-16(52+7) |
 ses | [邮件推送](https://cloud.tencent.com/document/product/1288) | 2020-10-02(31) |
 smh | [智能媒资托管](https://cloud.tencent.com/document/product/1339) | 2021-07-12(15) |
 smop | [腾讯安心用户运营平台](https://cloud.tencent.com/document/product/1310) | 2020-12-03(1) |
@@ -331,7 +331,7 @@ tms | [文本内容安全](https://cloud.tencent.com/document/product/1124) | 20
 tmt | [机器翻译](https://cloud.tencent.com/document/product/551) | 2018-03-21(7) |
 tourism | [文旅客情大数据](https://cloud.tencent.com/document/product/1684) | 2023-02-15(1) |
 trdp | [流量风险决策平台](https://cloud.tencent.com/document/product/1604) | 2022-07-26(1) |
-trocket | [消息队列 RocketMQ 版](https://cloud.tencent.com/document/product/1493) | 2023-03-08(54) |
+trocket | [消息队列 RocketMQ 版](https://cloud.tencent.com/document/product/1493) | 2023-03-08(55) |
 trp | [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) | 2021-05-15(54) |
 trro | [远程实时操控](https://cloud.tencent.com/document/product/1584) | 2022-03-25(23) |
 trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(57) |

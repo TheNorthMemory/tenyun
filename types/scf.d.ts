@@ -17,13 +17,13 @@ declare interface Alias {
   /** 别名的名称 */
   Name: string;
   /** 别名的路由信息 */
-  RoutingConfig: RoutingConfig | null;
+  RoutingConfig: RoutingConfig;
   /** 描述信息 */
-  Description?: string | null;
+  Description?: string;
   /** 创建时间 */
-  AddTime?: string | null;
+  AddTime?: string;
   /** 更新时间 */
-  ModTime?: string | null;
+  ModTime?: string;
 }
 
 /** 异步事件 */
@@ -63,7 +63,7 @@ declare interface AsyncTriggerConfig {
 /** 证书配置 */
 declare interface CertConf {
   /** ssl证书ID */
-  CertificateId?: string | null;
+  CertificateId?: string;
 }
 
 /** 文件系统(cfs)配置描述 */
@@ -145,11 +145,11 @@ declare interface DomainInfo {
   /** 协议，取值范围：HTTP, HTTPS, HTTP&HTTPS */
   Protocol?: string;
   /** 路由配置信息 */
-  EndpointsConfig?: EndpointsConf[] | null;
+  EndpointsConfig?: EndpointsConf[];
   /** 证书配置信息，HTTPS协议必传路由配置 */
-  CertConfig?: CertConf | null;
+  CertConfig?: CertConf;
   /** web 应用防火墙配置 */
-  WafConfig?: WafConf | null;
+  WafConfig?: WafConf;
 }
 
 /** 公网访问固定ip配置 */
@@ -161,29 +161,29 @@ declare interface EipConfigIn {
 /** 公网访问固定ip配置 */
 declare interface EipConfigOut {
   /** 是否是固定IP，["ENABLE","DISABLE"] */
-  EipStatus: string;
+  EipStatus?: string;
   /** IP列表 */
-  EipAddress: string[] | null;
+  EipAddress?: string[];
 }
 
 /** EipOutConfig */
 declare interface EipOutConfig {
   /** 是否是固定IP，["TRUE","FALSE"] */
-  EipFixed: string;
+  EipFixed?: string;
   /** IP列表 */
-  Eips: string[];
+  Eips?: string[];
 }
 
 /** 后端路由配置信息 */
 declare interface EndpointsConf {
   /** 函数命名空间 */
-  Namespace: string | null;
+  Namespace: string;
   /** 函数名 */
-  FunctionName: string | null;
+  FunctionName: string;
   /** 函数别名或版本 */
-  Qualifier: string | null;
+  Qualifier: string;
   /** 路径,取值规范：/，/*，/xxx，/xxx/a，/xxx/*" */
-  PathMatch: string | null;
+  PathMatch: string;
   /** 路径重写策略 */
   PathRewrite?: PathRewriteRule[] | null;
 }
@@ -205,37 +205,37 @@ declare interface Filter {
 /** 函数列表 */
 declare interface Function {
   /** 修改时间 */
-  ModTime: string;
+  ModTime?: string;
   /** 创建时间 */
-  AddTime: string;
+  AddTime?: string;
   /** 运行时 */
-  Runtime: string | null;
+  Runtime?: string | null;
   /** 函数名称 */
-  FunctionName: string;
+  FunctionName?: string;
   /** 函数ID */
-  FunctionId: string;
+  FunctionId?: string;
   /** 命名空间 */
-  Namespace: string;
+  Namespace?: string;
   /** 函数状态，状态值及流转[参考此处](https://cloud.tencent.com/document/product/583/47175) */
-  Status: string;
+  Status?: string;
   /** 函数状态详情 */
-  StatusDesc: string;
+  StatusDesc?: string;
   /** 函数描述 */
-  Description: string;
+  Description?: string;
   /** 函数标签 */
-  Tags: Tag[];
+  Tags?: Tag[];
   /** 函数类型，取值为 HTTP 或者 Event */
-  Type: string;
+  Type?: string;
   /** 函数状态失败原因 */
-  StatusReasons: StatusReason[];
+  StatusReasons?: StatusReason[];
   /** 函数所有版本预置并发内存总和 */
-  TotalProvisionedConcurrencyMem: number | null;
+  TotalProvisionedConcurrencyMem?: number | null;
   /** 函数并发保留内存 */
-  ReservedConcurrencyMem: number | null;
+  ReservedConcurrencyMem?: number | null;
   /** 函数异步属性，取值 TRUE 或者 FALSE */
-  AsyncRunEnable: string;
+  AsyncRunEnable?: string;
   /** 异步函数是否开启调用追踪，取值 TRUE 或者 FALSE */
-  TraceEnable: string;
+  TraceEnable?: string;
 }
 
 /** 日志信息 */
@@ -349,11 +349,11 @@ declare interface K8SToleration {
 /** 层版本信息 */
 declare interface LayerVersionInfo {
   /** 版本适用的运行时 */
-  CompatibleRuntimes?: string[] | null;
+  CompatibleRuntimes?: string[];
   /** 创建时间 */
   AddTime?: string;
   /** 版本描述 */
-  Description?: string | null;
+  Description?: string;
   /** 许可证信息 */
   LicenseInfo?: string | null;
   /** 版本号 */
@@ -363,7 +363,7 @@ declare interface LayerVersionInfo {
   /** 层的具体版本当前状态，状态值[参考此处](https://cloud.tencent.com/document/product/583/47175) */
   Status?: string;
   /** Stamp */
-  Stamp?: string | null;
+  Stamp?: string;
   /** 返回层绑定的标签信息 */
   Tags?: Tag[] | null;
 }
@@ -379,9 +379,9 @@ declare interface LayerVersionSimple {
 /** 限制信息 */
 declare interface LimitsInfo {
   /** 命名空间个数限制 */
-  NamespacesCount: number;
+  NamespacesCount?: number;
   /** 命名空间限制信息 */
-  Namespace: NamespaceLimit[];
+  Namespace?: NamespaceLimit[];
 }
 
 /** 日志过滤条件，用于区分正确与错误日志 */
@@ -405,39 +405,39 @@ declare interface LogSearchContext {
 /** 命名空间 */
 declare interface Namespace {
   /** 命名空间创建时间 */
-  ModTime: string;
+  ModTime?: string;
   /** 命名空间修改时间 */
-  AddTime: string;
+  AddTime?: string;
   /** 命名空间描述 */
-  Description: string;
+  Description?: string;
   /** 命名空间名称 */
-  Name: string;
+  Name?: string;
   /** 默认default，TCB表示是小程序云开发创建的 */
-  Type: string;
+  Type?: string;
 }
 
 /** 命名空间限制 */
 declare interface NamespaceLimit {
   /** 函数总数 */
-  FunctionsCount: number;
+  FunctionsCount?: number;
   /** Trigger信息 */
-  Trigger: TriggerCount;
+  Trigger?: TriggerCount;
   /** Namespace名称 */
-  Namespace: string;
+  Namespace?: string;
   /** 并发量 */
-  ConcurrentExecutions: number;
+  ConcurrentExecutions?: number;
   /** Timeout限制 */
-  TimeoutLimit: number;
+  TimeoutLimit?: number;
   /** 测试事件限制 */
-  TestModelLimit: number | null;
+  TestModelLimit?: number | null;
   /** 初始化超时限制 */
-  InitTimeoutLimit: number;
+  InitTimeoutLimit?: number;
   /** 异步重试次数限制 */
-  RetryNumLimit: number;
+  RetryNumLimit?: number;
   /** 异步重试消息保留时间下限 */
-  MinMsgTTL: number;
+  MinMsgTTL?: number;
   /** 异步重试消息保留时间上限 */
-  MaxMsgTTL: number;
+  MaxMsgTTL?: number;
 }
 
 /** 命名空间资源池配置 */
@@ -471,27 +471,27 @@ declare interface NamespaceResourceEnvTKE {
 /** 名称空间已使用信息 */
 declare interface NamespaceUsage {
   /** 函数数组 */
-  Functions: string[];
+  Functions?: string[];
   /** 命名空间名称 */
-  Namespace: string;
+  Namespace?: string;
   /** 命名空间函数个数 */
-  FunctionsCount: number;
+  FunctionsCount?: number;
   /** 命名空间配额总量 */
-  TotalConcurrencyMem: number | null;
+  TotalConcurrencyMem?: number;
   /** 命名空间并发使用量 */
-  TotalAllocatedConcurrencyMem: number | null;
+  TotalAllocatedConcurrencyMem?: number;
   /** 命名空间预置使用量 */
-  TotalAllocatedProvisionedMem: number | null;
+  TotalAllocatedProvisionedMem?: number;
 }
 
 /** 路径路由重写规则 */
 declare interface PathRewriteRule {
   /** 需要重路由的路径，取值规范：/，/*，/xxx，/xxx/a，/xxx/* */
-  Path: string | null;
+  Path: string;
   /** 匹配规，取值范围： WildcardRules 通配符匹配， ExactRules 精确匹配 */
-  Type: string | null;
+  Type: string;
   /** 替换值：比如/, /$ */
-  Rewrite: string | null;
+  Rewrite: string;
 }
 
 /** HTTP函数支持其他访问协议的参数 */
@@ -511,29 +511,29 @@ declare interface PublicNetConfigIn {
 /** 公网访问配置 */
 declare interface PublicNetConfigOut {
   /** 是否开启公网访问能力取值['DISABLE','ENABLE'] */
-  PublicNetStatus: string;
+  PublicNetStatus?: string;
   /** Eip配置 */
-  EipConfig: EipConfigOut;
+  EipConfig?: EipConfigOut;
 }
 
 /** 函数运行状态 */
 declare interface RequestStatus {
   /** 函数的名称 */
-  FunctionName: string;
+  FunctionName?: string;
   /** 函数执行完成后的返回值 */
-  RetMsg: string;
+  RetMsg?: string;
   /** 查询的请求 id */
-  RequestId: string;
+  RequestId?: string;
   /** 请求开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 请求执行结果， 0 表示执行成功，1表示运行中，-1 表示执行异常。 */
-  RetCode: number;
+  RetCode?: number;
   /** 请求运行耗时，单位：ms */
-  Duration: number;
+  Duration?: number;
   /** 请求消耗内存，单位为 MB */
-  MemUsage: number;
+  MemUsage?: number;
   /** 重试次数 */
-  RetryNum: number;
+  RetryNum?: number;
 }
 
 /** 运行函数的返回 */
@@ -581,9 +581,9 @@ declare interface SearchKey {
 /** 状态原因描述 */
 declare interface StatusReason {
   /** 错误码 */
-  ErrorCode: string;
+  ErrorCode?: string;
   /** 错误描述 */
-  ErrorMessage: string;
+  ErrorMessage?: string;
 }
 
 /** 函数标签 */
@@ -605,21 +605,21 @@ declare interface TimeInterval {
 /** 触发器类型 */
 declare interface Trigger {
   /** 触发器最后修改时间 */
-  ModTime: string;
+  ModTime?: string;
   /** 触发器类型 */
-  Type: string;
+  Type?: string;
   /** 触发器详细配置 */
-  TriggerDesc: string;
+  TriggerDesc?: string;
   /** 触发器名称 */
-  TriggerName: string;
+  TriggerName?: string;
   /** 触发器创建时间 */
-  AddTime: string;
+  AddTime?: string;
   /** 使能开关 */
-  Enable: number;
+  Enable?: number;
   /** 客户自定义参数 */
-  CustomArgument: string;
+  CustomArgument?: string;
   /** 触发器状态 */
-  AvailableStatus: string;
+  AvailableStatus?: string;
   /** 触发器最小资源ID */
   ResourceId?: string;
   /** 触发器和云函数绑定状态 */
@@ -627,7 +627,7 @@ declare interface Trigger {
   /** 触发器类型，双向表示两侧控制台均可操作，单向表示SCF控制台单向创建 */
   TriggerAttribute?: string;
   /** 触发器绑定的别名或版本 */
-  Qualifier: string;
+  Qualifier?: string;
   /** 触发器描述 */
   Description?: string;
 }
@@ -635,11 +635,11 @@ declare interface Trigger {
 /** 预置定时任务动作 */
 declare interface TriggerAction {
   /** 定时预置名称 */
-  TriggerName: string | null;
+  TriggerName: string;
   /** 定时预置并发数量 */
-  TriggerProvisionedConcurrencyNum: number | null;
+  TriggerProvisionedConcurrencyNum: number;
   /** 设置定时触发器的时间配置，cron表达式。Cron 表达式有七个必需字段，按空格分隔。 */
-  TriggerCronConfig: string | null;
+  TriggerCronConfig: string;
   /** 预置类型 Default */
   ProvisionedType?: string | null;
 }
@@ -647,51 +647,51 @@ declare interface TriggerAction {
 /** TriggerCount描述不同类型触发器的数量 */
 declare interface TriggerCount {
   /** Cos触发器数量 */
-  Cos: number;
+  Cos?: number;
   /** Timer触发器数量 */
-  Timer: number;
+  Timer?: number;
   /** Cmq触发器数量 */
-  Cmq: number;
+  Cmq?: number;
   /** 触发器总数 */
-  Total: number;
+  Total?: number;
   /** Ckafka触发器数量 */
-  Ckafka: number;
+  Ckafka?: number;
   /** Apigw触发器数量 */
-  Apigw: number;
+  Apigw?: number;
   /** Cls触发器数量 */
-  Cls: number;
+  Cls?: number;
   /** Clb触发器数量 */
-  Clb: number;
+  Clb?: number;
   /** Mps触发器数量 */
-  Mps: number;
+  Mps?: number;
   /** Cm触发器数量 */
-  Cm: number;
+  Cm?: number;
   /** Vod触发器数量 */
-  Vod: number;
+  Vod?: number;
   /** Eb触发器数量 */
-  Eb: number | null;
+  Eb?: number;
 }
 
 /** 触发器信息 */
 declare interface TriggerInfo {
   /** 使能开关 */
-  Enable: number;
+  Enable?: number;
   /** 函数版本或别名 */
-  Qualifier: string;
+  Qualifier?: string;
   /** 触发器名称 */
-  TriggerName: string;
+  TriggerName?: string;
   /** 触发器类型 */
-  Type: string;
+  Type?: string;
   /** 触发器详细配置 */
-  TriggerDesc: string;
+  TriggerDesc?: string;
   /** 触发器是否可用 */
-  AvailableStatus: string;
+  AvailableStatus?: string;
   /** 客户自定义参数 */
-  CustomArgument: string | null;
+  CustomArgument?: string | null;
   /** 触发器创建时间 */
-  AddTime: string;
+  AddTime?: string;
   /** 触发器最后修改时间 */
-  ModTime: string;
+  ModTime?: string;
   /** 触发器最小资源ID */
   ResourceId?: string;
   /** 触发器和云函数绑定状态 */
@@ -705,15 +705,15 @@ declare interface TriggerInfo {
 /** 已使用的信息 */
 declare interface UsageInfo {
   /** 命名空间个数 */
-  NamespacesCount: number;
+  NamespacesCount?: number;
   /** 命名空间详情 */
-  Namespace: NamespaceUsage[];
+  Namespace?: NamespaceUsage[];
   /** 当前地域用户并发内存配额上限 */
-  TotalConcurrencyMem: number;
+  TotalConcurrencyMem?: number;
   /** 当前地域用户已配置并发内存额度 */
-  TotalAllocatedConcurrencyMem: number;
+  TotalAllocatedConcurrencyMem?: number;
   /** 用户实际配置的账号并发配额 */
-  UserConcurrencyMemLimit: number;
+  UserConcurrencyMemLimit?: number;
 }
 
 /** 变量参数 */
@@ -739,17 +739,17 @@ declare interface VersionMatch {
 /** 函数版本的预置并发信息，包括设置预置并发数、已完成预置的并发数和预置任务状态。 */
 declare interface VersionProvisionedConcurrencyInfo {
   /** 设置的预置并发数。 */
-  AllocatedProvisionedConcurrencyNum: number;
+  AllocatedProvisionedConcurrencyNum?: number;
   /** 当前已完成预置的并发数。 */
-  AvailableProvisionedConcurrencyNum: number;
+  AvailableProvisionedConcurrencyNum?: number;
   /** 预置任务状态，Done表示已完成，InProgress表示进行中，Failed表示部分或全部失败。 */
-  Status: string;
+  Status?: string;
   /** 对预置任务状态Status的说明。 */
-  StatusReason: string;
+  StatusReason?: string;
   /** 函数版本号 */
-  Qualifier: string;
+  Qualifier?: string;
   /** 预置并发定时任务。 */
-  TriggerActions: TriggerAction[] | null;
+  TriggerActions?: TriggerAction[] | null;
 }
 
 /** 带有权重的函数版本 */
@@ -777,9 +777,9 @@ declare interface WSParams {
 /** web应用防火墙配置信息 */
 declare interface WafConf {
   /** web应用防火墙是否打开， 取值范围:OPEN, CLOSE */
-  WafOpen?: string | null;
+  WafOpen?: string;
   /** web应用防火墙实例ID */
-  WafInstanceId?: string | null;
+  WafInstanceId?: string;
 }
 
 declare interface CopyFunctionRequest {
@@ -833,7 +833,7 @@ declare interface CreateCustomDomainRequest {
   Protocol: string;
   /** 路由配置 */
   EndpointsConfig: EndpointsConf[];
-  /** 证书配置信息，HTTPS协议必穿 */
+  /** 证书配置信息，有使用HTTPS协议时候必须传 */
   CertConfig?: CertConf;
   /** web 应用防火墙配置 */
   WafConfig?: WafConf;
@@ -994,6 +994,22 @@ declare interface DeleteFunctionResponse {
   RequestId?: string;
 }
 
+declare interface DeleteFunctionVersionRequest {
+  /** 要删除的函数名称 */
+  FunctionName: string;
+  /** 填写需要删除的版本号 */
+  Qualifier: string;
+  /** 函数所属命名空间 */
+  Namespace?: string;
+  /** 强制删除标记，传true会直接删除容器，并强制关闭还在执行中的函数 */
+  ForceDelete?: string;
+}
+
+declare interface DeleteFunctionVersionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteLayerVersionRequest {
   /** 层名称 */
   LayerName: string;
@@ -1067,9 +1083,9 @@ declare interface GetAccountRequest {
 
 declare interface GetAccountResponse {
   /** 命名空间已使用的信息 */
-  AccountUsage: UsageInfo;
+  AccountUsage?: UsageInfo;
   /** 命名空间限制的信息 */
-  AccountLimit: LimitsInfo;
+  AccountLimit?: LimitsInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1085,17 +1101,17 @@ declare interface GetAliasRequest {
 
 declare interface GetAliasResponse {
   /** 别名指向的主版本 */
-  FunctionVersion: string;
+  FunctionVersion?: string;
   /** 别名的名称 */
-  Name: string;
+  Name?: string;
   /** 别名的路由信息 */
-  RoutingConfig: RoutingConfig;
+  RoutingConfig?: RoutingConfig;
   /** 别名的描述 */
-  Description: string | null;
+  Description?: string;
   /** 创建时间 */
-  AddTime: string | null;
+  AddTime?: string;
   /** 更新时间 */
-  ModTime: string | null;
+  ModTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1143,9 +1159,9 @@ declare interface GetFunctionAddressRequest {
 
 declare interface GetFunctionAddressResponse {
   /** 函数的Cos地址 */
-  Url: string;
+  Url?: string;
   /** 函数的SHA256编码 */
-  CodeSha256: string;
+  CodeSha256?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1287,19 +1303,19 @@ declare interface GetFunctionResponse {
   /** 是否启用Ons */
   OnsEnable?: string | null;
   /** 文件系统配置参数，用于云函数挂载文件系统 */
-  CfsConfig?: CfsConfig | null;
+  CfsConfig?: CfsConfig;
   /** 函数的计费状态，状态值[参考此处](https://cloud.tencent.com/document/product/583/47175) */
-  AvailableStatus?: string | null;
+  AvailableStatus?: string;
   /** 函数版本 */
-  Qualifier?: string | null;
+  Qualifier?: string;
   /** 函数初始化超时时间 */
   InitTimeout?: number;
   /** 函数状态失败原因 */
-  StatusReasons?: StatusReason[] | null;
+  StatusReasons?: StatusReason[];
   /** 是否开启异步属性 */
-  AsyncRunEnable?: string | null;
+  AsyncRunEnable?: string;
   /** 是否开启事件追踪 */
-  TraceEnable?: string | null;
+  TraceEnable?: string;
   /** 镜像配置 */
   ImageConfig?: ImageConfig | null;
   /** HTTP函数支持的访问协议。当前支持WebSockets协议。 */
@@ -1307,7 +1323,7 @@ declare interface GetFunctionResponse {
   /** HTTP函数配置ProtocolType访问协议，当前协议配置的参数 */
   ProtocolParams?: ProtocolParams | null;
   /** 是否开启DNS缓存 */
-  DnsCache?: string | null;
+  DnsCache?: string;
   /** 内网访问配置 */
   IntranetConfig?: IntranetConfigOut | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1355,9 +1371,9 @@ declare interface GetProvisionedConcurrencyConfigRequest {
 
 declare interface GetProvisionedConcurrencyConfigResponse {
   /** 该函数剩余可配置的预置并发数。 */
-  UnallocatedConcurrencyNum: number;
+  UnallocatedConcurrencyNum?: number;
   /** 函数已预置的并发配置详情。 */
-  Allocated: VersionProvisionedConcurrencyInfo[];
+  Allocated?: VersionProvisionedConcurrencyInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1393,7 +1409,7 @@ declare interface GetReservedConcurrencyConfigRequest {
 
 declare interface GetReservedConcurrencyConfigResponse {
   /** 该函数的最大独占配额。 */
-  ReservedMem: number | null;
+  ReservedMem?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1461,7 +1477,7 @@ declare interface ListAliasesResponse {
   /** 别名列表 */
   Aliases?: Alias[];
   /** 别名总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1539,15 +1555,15 @@ declare interface ListFunctionsRequest {
   Namespace?: string;
   /** 函数描述，支持模糊搜索 */
   Description?: string;
-  /** 过滤条件。- tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。每次请求的Filters的上限为10，Filter.Values的上限为5。 */
+  /** `过滤特定属性或者有特定标签的函数。`- 传值方式key-value 进行传值 例如："Filters": [{ "Name": "Status", "Values": ["CreateFailed","Creating"]}, {"Name": "Type","Values": ["HTTP"]}]上述条件的函数是，函数状态为创建失败或者创建中，且函数类型为 HTTP 函数`如果通过标签进行过滤：`- tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。示例值："Filters": [{"Name":"tag-dmtest","Values":["dmtest"]}]`入参限制：`1.每次请求的Filters的上限为10，Filter.Values的上限为5。2.[VpcId', 'SubnetId', 'ClsTopicId', 'ClsLogsetId', 'Role', 'CfsId', 'CfsMountInsId', 'Eip'] 过滤的Name 为这些属性时， values 只能传一个值3.['Status', 'Runtime', 'Type', 'PublicNetStatus', 'AsyncRunEnable', 'TraceEnable', 'Stamp'] 过滤的Name 为这些属性时 ，values 可以传多个值 */
   Filters?: Filter[];
 }
 
 declare interface ListFunctionsResponse {
   /** 函数列表 */
-  Functions: Function[];
+  Functions?: Function[];
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1651,11 +1667,11 @@ declare interface ListVersionByFunctionRequest {
 
 declare interface ListVersionByFunctionResponse {
   /** 函数版本。 */
-  FunctionVersion: string[];
+  FunctionVersion?: string[];
   /** 函数版本列表。 */
-  Versions: FunctionVersion[] | null;
+  Versions?: FunctionVersion[];
   /** 函数版本总数。 */
-  TotalCount: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2001,6 +2017,8 @@ declare interface Scf {
   DeleteCustomDomain(data?: DeleteCustomDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomDomainResponse>;
   /** 删除函数 {@link DeleteFunctionRequest} {@link DeleteFunctionResponse} */
   DeleteFunction(data: DeleteFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFunctionResponse>;
+  /** 删除函数指定版本 {@link DeleteFunctionVersionRequest} {@link DeleteFunctionVersionResponse} */
+  DeleteFunctionVersion(data: DeleteFunctionVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFunctionVersionResponse>;
   /** 删除层版本 {@link DeleteLayerVersionRequest} {@link DeleteLayerVersionResponse} */
   DeleteLayerVersion(data: DeleteLayerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLayerVersionResponse>;
   /** 删除命名空间 {@link DeleteNamespaceRequest} {@link DeleteNamespaceResponse} */

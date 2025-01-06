@@ -1434,6 +1434,14 @@ declare interface NoticeBindPolicys {
   PolicyIds?: string[];
 }
 
+/** 通知内容模板绑定信息 */
+declare interface NoticeContentTmplBindInfo {
+  /** 通知内容模板ID */
+  ContentTmplID?: string;
+  /** 通知模板ID */
+  NoticeID?: string;
+}
+
 /** 维度支持的操作符信息 */
 declare interface Operator {
   /** 运算符标识 */
@@ -2483,6 +2491,10 @@ declare interface CreateAlarmPolicyRequest {
   MigrateFlag?: number;
   /** 事件配置的告警 */
   EbSubject?: string;
+  /** 附加告警内容 */
+  AdditionalAlarmContent?: string;
+  /** 通知模板绑定信息 */
+  NoticeContentTmplBindInfos?: NoticeContentTmplBindInfo[];
 }
 
 declare interface CreateAlarmPolicyResponse {
@@ -4691,6 +4703,8 @@ declare interface ModifyAlarmPolicyNoticeRequest {
   PolicyIds?: string[];
   /** 告警分级通知规则配置 */
   HierarchicalNotices?: AlarmHierarchicalNotice[];
+  /** 通知内容模板绑定信息 */
+  NoticeContentTmplBindInfos?: NoticeContentTmplBindInfo[];
 }
 
 declare interface ModifyAlarmPolicyNoticeResponse {

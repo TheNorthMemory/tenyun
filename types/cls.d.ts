@@ -179,9 +179,9 @@ declare interface AlarmTargetInfo {
 /** 告警通知渠道组详情 */
 declare interface AlertHistoryNotice {
   /** 通知渠道组名称 */
-  Name: string;
+  Name?: string;
   /** 通知渠道组ID */
-  AlarmNoticeId: string;
+  AlarmNoticeId?: string;
 }
 
 /** 告警历史详情 */
@@ -567,27 +567,27 @@ declare interface CsvInfo {
 /** 仪表盘信息 */
 declare interface DashboardInfo {
   /** 仪表盘id */
-  DashboardId: string;
+  DashboardId?: string;
   /** 仪表盘名字 */
-  DashboardName: string;
+  DashboardName?: string;
   /** 仪表盘数据 */
-  Data: string | null;
+  Data?: string | null;
   /** 创建仪表盘的时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** AssumerUin非空则表示创建该日志主题的服务方Uin */
-  AssumerUin: number | null;
+  AssumerUin?: number | null;
   /** RoleName非空则表示创建该日志主题的服务方使用的角色 */
-  RoleName: string | null;
+  RoleName?: string | null;
   /** AssumerName非空则表示创建该日志主题的服务方名称 */
-  AssumerName: string | null;
+  AssumerName?: string | null;
   /** 日志主题绑定的标签信息 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 仪表盘所在地域： 为了兼容老的地域。 */
-  DashboardRegion: string | null;
+  DashboardRegion?: string | null;
   /** 修改仪表盘的时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 仪表盘对应的topic相关信息 */
-  DashboardTopicInfos: DashboardTopicInfo[] | null;
+  DashboardTopicInfos?: DashboardTopicInfo[] | null;
 }
 
 /** 仪表盘订阅通知方式 */
@@ -720,7 +720,7 @@ declare interface EventLog {
   TimeType: number;
   /** 时间，用户选择自定义时间类型时，需要指定时间 */
   Timestamp?: number;
-  /** 事件ID过滤列表 */
+  /** 事件ID过滤列表	选填，为空表示不做过滤支持正向过滤单个值（例：20）或范围（例：0-20），也支持反向过滤单个值(例：-20)多个过滤项之间可由逗号隔开，例：1-200,-100表示采集1-200范围内除了100以外的事件日志 */
   EventIDs?: string[];
 }
 
@@ -800,7 +800,7 @@ declare interface ExtractRuleInfo {
   ParseProtocol?: string | null;
   /** 元数据类型。0: 不使用元数据信息；1:使用机器组元数据；2:使用用户自定义元数据；3:使用采集配置路径。注意：- COS导入不支持此字段。 */
   MetadataType?: number;
-  /** 采集配置路径正则表达式。注意：- MetadataType为3时必填。- COS导入不支持此字段。 */
+  /** 采集配置路径正则表达式。```请用"()"标识路径中目标字段对应的正则表达式，解析时将"()"视为捕获组，并以__TAG__.{i}:{目标字段}的形式与日志一起上报，其中i为捕获组的序号。若不希望以序号为键名，可以通过命名捕获组"(?<{键名}>{正则})"自定义键名，并以__TAG__.{键名}:{目标字段}的形式与日志一起上报。最多支持5个捕获组```注意：- MetadataType为3时必填。- COS导入不支持此字段。 */
   PathRegex?: string | null;
   /** 用户自定义元数据信息。注意：- MetadataType为2时必填。- COS导入不支持此字段。 */
   MetaTags?: MetaTagInfo[];
@@ -857,9 +857,9 @@ declare interface GroupTriggerConditionInfo {
 /** 日志内容高亮描述信息 */
 declare interface HighLightItem {
   /** 高亮的日志Key */
-  Key: string;
+  Key?: string;
   /** 高亮的语法 */
-  Values: string[];
+  Values?: string[];
 }
 
 /** 直方图详细信息 */
@@ -1019,9 +1019,9 @@ declare interface LogInfo {
 /** 日志中的KV对 */
 declare interface LogItem {
   /** 日志Key */
-  Key: string;
+  Key?: string;
   /** 日志Value */
-  Value: string;
+  Value?: string;
 }
 
 /** LogItem的数组 */
@@ -1168,7 +1168,7 @@ declare interface MonitorTime {
 declare interface MultiCondition {
   /** 触发条件。 */
   Condition?: string | null;
-  /** 告警级别。0:警告(Warn); 1:提醒(Info); 2:紧急 (Critical)。 不填则默认为0。 */
+  /** 告警级别。0:警告(Warn); 1:提醒(Info); 2:紧急 (Critical)。- 不填则默认为0。 */
   AlarmLevel?: number | null;
 }
 
@@ -1277,17 +1277,17 @@ declare interface ParquetKeyInfo {
 /** 日志主题分区信息 */
 declare interface PartitionInfo {
   /** 分区ID */
-  PartitionId: number;
+  PartitionId?: number;
   /** 分区的状态（readwrite或者是readonly） */
-  Status: string;
+  Status?: string;
   /** 分区哈希键起始key */
-  InclusiveBeginKey: string;
+  InclusiveBeginKey?: string;
   /** 分区哈希键结束key */
-  ExclusiveEndKey: string;
+  ExclusiveEndKey?: string;
   /** 分区创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 只读分区数据停止写入时间 */
-  LastWriteTime: string | null;
+  LastWriteTime?: string | null;
 }
 
 /** 预览数据详情 */
@@ -3103,7 +3103,7 @@ declare interface DescribeTopicsResponse {
 }
 
 declare interface DescribeWebCallbacksRequest {
-  /** name按照【告警渠道回调配置名称】进行过滤。类型：String必选：否 webCallbackId按照【告警渠道回调配置ID】进行过滤。类型：String必选：否 type按照【告警渠道回调配置渠道类型】进行过滤。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为100。 */
+  /** - name按照【告警渠道回调配置名称】进行过滤。类型：String必选：否- webCallbackId按照【告警渠道回调配置ID】进行过滤。类型：String必选：否- type按照【告警渠道回调配置渠道类型】进行过滤。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为100。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0。 */
   Offset?: number;

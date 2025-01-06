@@ -930,11 +930,11 @@ declare namespace V20180525 {
   /** app所支持的chart */
   interface AppChart {
     /** chart名称 */
-    Name: string;
+    Name?: string;
     /** chart的标签 */
-    Label: string | null;
+    Label?: string | null;
     /** chart的版本 */
-    LatestVersion: string;
+    LatestVersion?: string;
   }
 
   /** 集群关联的伸缩组最大实例数最小值实例数 */
@@ -1110,15 +1110,15 @@ declare namespace V20180525 {
   /** 集群关联的伸缩组信息 */
   interface ClusterAsGroup {
     /** 伸缩组ID */
-    AutoScalingGroupId: string;
+    AutoScalingGroupId?: string;
     /** 伸缩组状态(开启 enabled 开启中 enabling 关闭 disabled 关闭中 disabling 更新中 updating 删除中 deleting 开启缩容中 scaleDownEnabling 关闭缩容中 scaleDownDisabling) */
-    Status: string;
+    Status?: string;
     /** 节点是否设置成不可调度 */
-    IsUnschedulable: boolean | null;
+    IsUnschedulable?: boolean | null;
     /** 伸缩组的label列表 */
-    Labels: Label[] | null;
+    Labels?: Label[] | null;
     /** 创建时间 */
-    CreatedTime: string;
+    CreatedTime?: string;
   }
 
   /** 集群伸缩组属性 */
@@ -1171,7 +1171,7 @@ declare namespace V20180525 {
     ClusterName?: string;
     /** 集群描述 */
     ClusterDescription?: string;
-    /** 私有网络ID，形如vpc-xxx。创建托管空集群时必传。 */
+    /** 私有网络ID，形如vpc-e55paxnt。创建托管空集群时必传。 */
     VpcId?: string;
     /** 集群内新增资源所属项目ID。 */
     ProjectId?: number;
@@ -1212,17 +1212,17 @@ declare namespace V20180525 {
   /** 集群创建过程 */
   interface ClusterCondition {
     /** 集群创建过程类型 */
-    Type: string;
+    Type?: string;
     /** 集群创建过程状态 */
-    Status: string;
+    Status?: string;
     /** 最后一次探测到该状态的时间 */
-    LastProbeTime: string | null;
+    LastProbeTime?: string | null;
     /** 最后一次转换到该过程的时间 */
-    LastTransitionTime: string | null;
+    LastTransitionTime?: string | null;
     /** 转换到该过程的简明原因 */
-    Reason: string | null;
+    Reason?: string | null;
     /** 转换到该过程的更多信息 */
-    Message: string | null;
+    Message?: string | null;
   }
 
   /** 接入k8s 的认证信息 */
@@ -1256,47 +1256,47 @@ declare namespace V20180525 {
   /** 托管集群等级属性 */
   interface ClusterLevelAttribute {
     /** 集群等级 */
-    Name: string;
+    Name?: string;
     /** 等级名称 */
-    Alias: string;
+    Alias?: string;
     /** 节点数量 */
-    NodeCount: number;
+    NodeCount?: number;
     /** Pod数量 */
-    PodCount: number;
+    PodCount?: number;
     /** Configmap数量 */
-    ConfigMapCount: number;
+    ConfigMapCount?: number;
     /** ReplicaSets数量 */
     RSCount?: number;
     /** CRD数量 */
-    CRDCount: number;
+    CRDCount?: number;
     /** 是否启用 */
-    Enable: boolean;
+    Enable?: boolean;
     /** 其他资源数量 */
-    OtherCount: number | null;
+    OtherCount?: number | null;
   }
 
   /** 集群等级变配记录 */
   interface ClusterLevelChangeRecord {
     /** 记录ID */
-    ID: string;
+    ID?: string;
     /** 集群ID */
-    ClusterID: string;
+    ClusterID?: string;
     /** 变配状态：trading 发货中,upgrading 变配中,success 变配成功,failed 变配失败。 */
-    Status: string;
+    Status?: string;
     /** 状态描述 */
-    Message: string;
+    Message?: string;
     /** 变配前规模 */
-    OldLevel: string;
+    OldLevel?: string;
     /** 变配后规模 */
-    NewLevel: string;
+    NewLevel?: string;
     /** 变配触发类型：manual 手动,auto 自动 */
-    TriggerType: string;
+    TriggerType?: string;
     /** 创建时间 */
     CreatedAt?: string;
     /** 开始时间 */
-    StartedAt: string;
+    StartedAt?: string;
     /** 结束时间 */
-    EndedAt: string;
+    EndedAt?: string;
   }
 
   /** 集群网络相关的参数 */
@@ -1354,43 +1354,43 @@ declare namespace V20180525 {
   /** 集群状态信息 */
   interface ClusterStatus {
     /** 集群Id */
-    ClusterId: string;
+    ClusterId?: string;
     /** 集群状态 */
-    ClusterState: string;
+    ClusterState?: string;
     /** 集群下机器实例的状态 */
-    ClusterInstanceState: string;
+    ClusterInstanceState?: string;
     /** 集群是否开启监控 */
-    ClusterBMonitor: boolean;
+    ClusterBMonitor?: boolean;
     /** 集群创建中的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败 */
-    ClusterInitNodeNum: number;
+    ClusterInitNodeNum?: number;
     /** 集群运行中的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败 */
-    ClusterRunningNodeNum: number;
+    ClusterRunningNodeNum?: number;
     /** 集群异常的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败 */
-    ClusterFailedNodeNum: number;
+    ClusterFailedNodeNum?: number;
     /** 集群已关机的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败 */
-    ClusterClosedNodeNum: number | null;
+    ClusterClosedNodeNum?: number | null;
     /** 集群关机中的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败 */
-    ClusterClosingNodeNum: number | null;
+    ClusterClosingNodeNum?: number | null;
     /** 集群是否开启删除保护 */
-    ClusterDeletionProtection: boolean | null;
+    ClusterDeletionProtection?: boolean | null;
     /** 集群是否可审计 */
-    ClusterAuditEnabled: boolean | null;
+    ClusterAuditEnabled?: boolean | null;
   }
 
   /** 集群版本信息 */
   interface ClusterVersion {
     /** 集群ID */
-    ClusterId: string;
+    ClusterId?: string;
     /** 集群主版本号列表，例如1.18.4 */
-    Versions: string[];
+    Versions?: string[];
   }
 
   /** 账户UIN与客户端证书CommonName的映射 */
   interface CommonName {
     /** 子账户UIN */
-    SubaccountUin: string;
+    SubaccountUin?: string;
     /** 子账户客户端证书中的CommonName字段 */
-    CN: string;
+    CN?: string;
   }
 
   /** EKS Instance Container容器 */
@@ -1704,11 +1704,11 @@ declare namespace V20180525 {
   /** EksCi地域信息 */
   interface EksCiRegionInfo {
     /** 地域别名，形如gz */
-    Alias: string;
+    Alias?: string;
     /** 地域名，形如ap-guangzhou */
-    RegionName: string;
+    RegionName?: string;
     /** 地域ID */
-    RegionId: number;
+    RegionId?: number;
   }
 
   /** EKS Instance Volume, 可选包括CbsVolume和NfsVolume */
@@ -1731,7 +1731,7 @@ declare namespace V20180525 {
     SubnetIds: string[];
     /** k8s 版本号 */
     K8SVersion: string;
-    /** 集群状态(running运行中，initializing 初始化中，failed异常) */
+    /** 集群状态(running 运行中，initializing 初始化中，Failed 异常，Idling 空闲中，Activating 激活中，Terminating 删除中) */
     Status?: string;
     /** 集群描述信息 */
     ClusterDesc?: string;
@@ -1770,19 +1770,19 @@ declare namespace V20180525 {
   /** 服务事件 */
   interface Event {
     /** pod名称 */
-    PodName: string;
+    PodName?: string;
     /** 事件原因内容 */
-    Reason: string;
+    Reason?: string;
     /** 事件类型 */
-    Type: string;
+    Type?: string;
     /** 事件出现次数 */
-    Count: number;
+    Count?: number;
     /** 事件第一次出现时间 */
-    FirstTimestamp: string;
+    FirstTimestamp?: string;
     /** 事件最后一次出现时间 */
-    LastTimestamp: string;
+    LastTimestamp?: string;
     /** 事件内容 */
-    Message: string;
+    Message?: string;
   }
 
   /** 探针在容器内执行检测命令参数类型 */
@@ -1794,35 +1794,35 @@ declare namespace V20180525 {
   /** 已经存在的实例信息 */
   interface ExistedInstance {
     /** 实例是否支持加入集群(TRUE 可以加入 FALSE 不能加入)。 */
-    Usable: boolean | null;
+    Usable?: boolean | null;
     /** 实例不支持加入的原因。 */
-    UnusableReason: string | null;
+    UnusableReason?: string | null;
     /** 实例已经所在的集群ID。 */
-    AlreadyInCluster: string | null;
-    /** 实例ID形如：ins-xxxxxxxx。 */
-    InstanceId: string;
+    AlreadyInCluster?: string | null;
+    /** 实例ID形如：ins-e55paxnt。 */
+    InstanceId?: string;
     /** 实例名称。 */
-    InstanceName: string | null;
+    InstanceName?: string | null;
     /** 实例主网卡的内网IP列表。 */
-    PrivateIpAddresses: string[] | null;
+    PrivateIpAddresses?: string[] | null;
     /** 实例主网卡的公网IP列表。 */
-    PublicIpAddresses: string[] | null;
+    PublicIpAddresses?: string[] | null;
     /** 创建时间。按照ISO8601标准表示，并且使用UTC时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
-    CreatedTime: string | null;
+    CreatedTime?: string | null;
     /** 实例的CPU核数，单位：核。 */
-    CPU: number | null;
+    CPU?: number | null;
     /** 实例内存容量，单位：GB。 */
-    Memory: number | null;
+    Memory?: number | null;
     /** 操作系统名称。 */
-    OsName: string | null;
+    OsName?: string | null;
     /** 实例机型。 */
-    InstanceType: string | null;
+    InstanceType?: string | null;
     /** 伸缩组ID */
-    AutoscalingGroupId: string | null;
+    AutoscalingGroupId?: string | null;
     /** 实例计费模式。取值范围： PREPAID：表示预付费，即包年包月 POSTPAID_BY_HOUR：表示后付费，即按量计费 CDHPAID：CDH付费，即只对CDH计费，不对CDH上的实例计费。 */
-    InstanceChargeType: string | null;
+    InstanceChargeType?: string | null;
     /** 实例的IPv6地址。 */
-    IPv6Addresses: string[] | null;
+    IPv6Addresses?: string[] | null;
   }
 
   /** 不同角色的已存在节点配置参数 */
@@ -1938,29 +1938,29 @@ declare namespace V20180525 {
   /** 镜像缓存的事件 */
   interface ImageCacheEvent {
     /** 镜像缓存Id */
-    ImageCacheId: string;
+    ImageCacheId?: string;
     /** 事件类型, Normal或者Warning */
-    Type: string;
+    Type?: string;
     /** 事件原因简述 */
-    Reason: string;
+    Reason?: string;
     /** 事件原因详述 */
-    Message: string;
+    Message?: string;
     /** 事件第一次出现时间 */
-    FirstTimestamp: string;
+    FirstTimestamp?: string;
     /** 事件最后一次出现时间 */
-    LastTimestamp: string;
+    LastTimestamp?: string;
   }
 
   /** 镜像信息 */
   interface ImageInstance {
     /** 镜像别名 */
-    Alias: string | null;
+    Alias?: string | null;
     /** 操作系统名称 */
-    OsName: string | null;
+    OsName?: string | null;
     /** 镜像ID */
-    ImageId: string | null;
+    ImageId?: string | null;
     /** 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值) */
-    OsCustomizeType: string | null;
+    OsCustomizeType?: string | null;
   }
 
   /** 从镜像仓库拉取镜像的凭据 */
@@ -1978,25 +1978,25 @@ declare namespace V20180525 {
   /** 集群的实例信息 */
   interface Instance {
     /** 实例ID */
-    InstanceId: string;
+    InstanceId?: string;
     /** 节点角色, MASTER, WORKER, ETCD, MASTER_ETCD,ALL, 默认为WORKER */
-    InstanceRole: string;
+    InstanceRole?: string;
     /** 实例异常(或者处于初始化中)的原因 */
-    FailedReason: string;
+    FailedReason?: string;
     /** 实例的状态（running 运行中，initializing 初始化中，failed 异常） */
-    InstanceState: string;
+    InstanceState?: string;
     /** 实例是否封锁状态 */
-    DrainStatus: string | null;
+    DrainStatus?: string | null;
     /** 节点配置 */
-    InstanceAdvancedSettings: InstanceAdvancedSettings | null;
+    InstanceAdvancedSettings?: InstanceAdvancedSettings | null;
     /** 添加时间 */
-    CreatedTime: string;
+    CreatedTime?: string;
     /** 节点内网IP */
-    LanIP: string | null;
+    LanIP?: string | null;
     /** 资源池ID */
-    NodePoolId: string | null;
+    NodePoolId?: string | null;
     /** 自动伸缩组ID */
-    AutoscalingGroupId: string | null;
+    AutoscalingGroupId?: string | null;
   }
 
   /** 描述了k8s集群相关配置与信息。 */
@@ -2052,35 +2052,35 @@ declare namespace V20180525 {
   /** 节点升级过程中集群当前状态 */
   interface InstanceUpgradeClusterStatus {
     /** pod总数 */
-    PodTotal: number;
+    PodTotal?: number;
     /** NotReady pod总数 */
-    NotReadyPod: number;
+    NotReadyPod?: number;
   }
 
   /** 某个节点升级前检查结果 */
   interface InstanceUpgradePreCheckResult {
     /** 检查是否通过 */
-    CheckPass: boolean;
+    CheckPass?: boolean;
     /** 检查项数组 */
-    Items: InstanceUpgradePreCheckResultItem[];
+    Items?: InstanceUpgradePreCheckResultItem[];
     /** 本节点独立pod列表 */
-    SinglePods: string[];
+    SinglePods?: string[];
   }
 
   /** 节点升级检查项结果 */
   interface InstanceUpgradePreCheckResultItem {
     /** 工作负载的命名空间 */
-    Namespace: string;
+    Namespace?: string;
     /** 工作负载类型 */
-    WorkLoadKind: string;
+    WorkLoadKind?: string;
     /** 工作负载名称 */
-    WorkLoadName: string;
+    WorkLoadName?: string;
     /** 驱逐节点前工作负载running的pod数目 */
-    Before: number;
+    Before?: number;
     /** 驱逐节点后工作负载running的pod数目 */
-    After: number;
+    After?: number;
     /** 工作负载在本节点上的pod列表 */
-    Pods: string[];
+    Pods?: string[];
   }
 
   /** 某个节点的升级进度 */
@@ -2246,13 +2246,13 @@ declare namespace V20180525 {
   /** 手动加入的节点 */
   interface ManuallyAdded {
     /** 加入中的节点数量 */
-    Joining: number;
+    Joining?: number;
     /** 初始化中的节点数量 */
-    Initializing: number;
+    Initializing?: number;
     /** 正常的节点数量 */
-    Normal: number;
+    Normal?: number;
     /** 节点总数 */
-    Total: number;
+    Total?: number;
   }
 
   /** EKS Instance Nfs Volume */
@@ -2270,9 +2270,9 @@ declare namespace V20180525 {
   /** 节点统计列表 */
   interface NodeCountSummary {
     /** 手动管理的节点 */
-    ManuallyAdded: ManuallyAdded | null;
+    ManuallyAdded?: ManuallyAdded | null;
     /** 自动管理的节点 */
-    AutoscalingAdded: AutoscalingAdded | null;
+    AutoscalingAdded?: AutoscalingAdded | null;
   }
 
   /** 节点池描述 */
@@ -2496,13 +2496,13 @@ declare namespace V20180525 {
   /** 机型信息和其可支持的最大VPC-CNI模式Pod数量信息 */
   interface PodLimitsInstance {
     /** 机型所在可用区 */
-    Zone: string | null;
+    Zone?: string | null;
     /** 机型所属机型族 */
-    InstanceFamily: string | null;
+    InstanceFamily?: string | null;
     /** 实例机型名称 */
-    InstanceType: string | null;
+    InstanceType?: string | null;
     /** 机型可支持的最大VPC-CNI模式Pod数量信息 */
-    PodLimits: PodLimitsByType | null;
+    PodLimits?: PodLimitsByType | null;
   }
 
   /** Pod所在的节点信息 */
@@ -2548,21 +2548,21 @@ declare namespace V20180525 {
   /** 托管prometheus agent概览 */
   interface PrometheusAgentOverview {
     /** 集群类型 */
-    ClusterType: string;
+    ClusterType?: string;
     /** 集群id */
-    ClusterId: string;
+    ClusterId?: string;
     /** agent状态normal = 正常abnormal = 异常 */
-    Status: string;
+    Status?: string;
     /** 集群名称 */
-    ClusterName: string;
+    ClusterName?: string;
     /** 额外labels本集群的所有指标都会带上这几个label */
-    ExternalLabels: Label[] | null;
+    ExternalLabels?: Label[] | null;
     /** 集群所在地域 */
-    Region: string | null;
+    Region?: string | null;
     /** 集群所在VPC ID */
-    VpcId: string | null;
+    VpcId?: string | null;
     /** 记录关联等操作的失败信息 */
-    FailedReason: string | null;
+    FailedReason?: string | null;
   }
 
   /** prometheus告警历史 */
@@ -2651,7 +2651,7 @@ declare namespace V20180525 {
 
   /** 与云监控融合托管prometheus实例，关联集群基础信息 */
   interface PrometheusClusterAgentBasic {
-    /** 集群ID */
+    /** 地域 */
     Region: string;
     /** 集群类型 */
     ClusterType: string;
@@ -2692,83 +2692,83 @@ declare namespace V20180525 {
   /** 托管prometheus中grafana的信息 */
   interface PrometheusGrafanaInfo {
     /** 是否启用 */
-    Enabled: boolean;
+    Enabled?: boolean;
     /** 域名，只有开启外网访问才有效果 */
-    Domain: string;
+    Domain?: string;
     /** 内网地址，或者外网地址 */
-    Address: string;
+    Address?: string;
     /** 是否开启了外网访问close = 未开启外网访问opening = 正在开启外网访问open = 已开启外网访问 */
-    Internet: string;
+    Internet?: string;
     /** grafana管理员用户名 */
-    AdminUser: string;
+    AdminUser?: string;
   }
 
   /** 托管prometheus实例概览 */
   interface PrometheusInstanceOverview {
     /** 实例id */
-    InstanceId: string;
+    InstanceId?: string;
     /** 实例名称 */
-    Name: string;
+    Name?: string;
     /** 实例vpcId */
-    VpcId: string;
+    VpcId?: string;
     /** 实例子网Id */
-    SubnetId: string;
+    SubnetId?: string;
     /** 实例当前的状态prepare_env = 初始化环境install_suit = 安装组件running = 运行中 */
-    Status: string;
+    Status?: string;
     /** COS桶存储 */
-    COSBucket: string;
+    COSBucket?: string;
     /** grafana默认地址，如果开启外网访问得为域名，否则为内网地址 */
-    GrafanaURL: string | null;
+    GrafanaURL?: string | null;
     /** 关联集群总数 */
-    BoundTotal: number | null;
+    BoundTotal?: number | null;
     /** 运行正常的集群数 */
-    BoundNormal: number | null;
+    BoundNormal?: number | null;
   }
 
   /** 托管prometheusV2实例概览 */
   interface PrometheusInstancesOverview {
     /** 实例ID */
-    InstanceId: string;
+    InstanceId?: string;
     /** 实例名 */
-    InstanceName: string;
+    InstanceName?: string;
     /** VPC ID */
-    VpcId: string;
+    VpcId?: string;
     /** 子网ID */
-    SubnetId: string;
+    SubnetId?: string;
     /** 运行状态（1:正在创建；2:运行中；3:异常；4:重启中；5:销毁中； 6:已停机； 7: 已删除） */
-    InstanceStatus: number;
+    InstanceStatus?: number;
     /** 计费状态（1:正常；2:过期; 3:销毁; 4:分配中; 5:分配失败） */
-    ChargeStatus: number | null;
+    ChargeStatus?: number | null;
     /** 是否开启 Grafana（0:不开启，1:开启） */
-    EnableGrafana: number;
+    EnableGrafana?: number;
     /** Grafana 面板 URL */
-    GrafanaURL: string | null;
+    GrafanaURL?: string | null;
     /** 实例付费类型（1:试用版；2:预付费） */
-    InstanceChargeType: number;
+    InstanceChargeType?: number;
     /** 规格名称 */
-    SpecName: string | null;
+    SpecName?: string | null;
     /** 存储周期 */
-    DataRetentionTime: number | null;
+    DataRetentionTime?: number | null;
     /** 购买的实例过期时间 */
-    ExpireTime: string | null;
+    ExpireTime?: string | null;
     /** 自动续费标记(0:不自动续费；1:开启自动续费；2:禁止自动续费；-1:无效) */
-    AutoRenewFlag: number | null;
+    AutoRenewFlag?: number | null;
     /** 绑定集群总数 */
-    BoundTotal: number;
+    BoundTotal?: number;
     /** 绑定集群正常状态总数 */
-    BoundNormal: number;
+    BoundNormal?: number;
   }
 
   /** prometheus一个job的targets */
   interface PrometheusJobTargets {
     /** 该Job的targets列表 */
-    Targets: PrometheusTarget[];
+    Targets?: PrometheusTarget[];
     /** job的名称 */
-    JobName: string;
+    JobName?: string;
     /** targets总数 */
-    Total: number;
+    Total?: number;
     /** 健康的target总数 */
-    Up: number;
+    Up?: number;
   }
 
   /** amp告警渠道配置 */
@@ -2836,31 +2836,31 @@ declare namespace V20180525 {
   /** prometheus聚合规则实例详情，包含所属集群ID */
   interface PrometheusRecordRuleYamlItem {
     /** 实例名称 */
-    Name: string;
+    Name?: string;
     /** 最近更新时间 */
-    UpdateTime: string;
+    UpdateTime?: string;
     /** Yaml内容 */
-    TemplateId: string;
+    TemplateId?: string;
     /** 如果该聚合规则来至模板，则TemplateId为模板id */
-    Content: string | null;
+    Content?: string | null;
     /** 该聚合规则如果来源于用户集群crd资源定义，则ClusterId为所属集群ID */
-    ClusterId: string | null;
+    ClusterId?: string | null;
   }
 
   /** prometheus一个抓取目标的信息 */
   interface PrometheusTarget {
     /** 抓取目标的URL */
-    Url: string;
+    Url?: string;
     /** target当前状态,当前支持up = 健康down = 不健康unknown = 未知 */
-    State: string;
+    State?: string;
     /** target的元label */
-    Labels: Label[];
+    Labels?: Label[];
     /** 上一次抓取的时间 */
-    LastScrape: string;
+    LastScrape?: string;
     /** 上一次抓取的耗时，单位是s */
-    ScrapeDuration: number;
+    ScrapeDuration?: number;
     /** 上一次抓取如果错误，该字段存储错误信息 */
-    Error: string;
+    Error?: string;
   }
 
   /** 模板实例 */
@@ -2984,119 +2984,125 @@ declare namespace V20180525 {
   /** 预留券抵扣详情 */
   interface RIUtilizationDetail {
     /** 预留券ID */
-    ReservedInstanceId: string;
+    ReservedInstanceId?: string;
     /** Pod唯一ID */
-    EksId: string;
+    EksId?: string;
     /** 集群ID */
-    ClusterId: string;
+    ClusterId?: string;
     /** Pod的名称 */
-    Name: string;
+    Name?: string;
     /** Pod的命名空间 */
-    Namespace: string;
+    Namespace?: string;
     /** 工作负载类型 */
-    Kind: string;
+    Kind?: string;
     /** 工作负载名称 */
-    KindName: string;
+    KindName?: string;
     /** Pod的uid */
-    Uid: string;
+    Uid?: string;
     /** 用量开始时间 */
-    StartTime: string;
+    StartTime?: string;
     /** 用量结束时间 */
-    EndTime: string;
+    EndTime?: string;
     /** 抵扣资源所属产品 */
-    Product: string;
+    Product?: string;
   }
 
   /** 地域属性信息 */
   interface RegionInstance {
     /** 地域名称 */
-    RegionName: string | null;
+    RegionName?: string | null;
     /** 地域ID */
-    RegionId: number | null;
+    RegionId?: number | null;
     /** 地域状态 */
-    Status: string | null;
+    Status?: string | null;
     /** 地域特性开关(按照JSON的形式返回所有属性) */
-    FeatureGates: string | null;
+    FeatureGates?: string | null;
     /** 地域简称 */
-    Alias: string | null;
+    Alias?: string | null;
     /** 地域白名单 */
-    Remark: string | null;
+    Remark?: string | null;
   }
 
   /** 应用市场部署的应用结构 */
   interface Release {
     /** 应用名称 */
-    Name: string;
+    Name?: string;
     /** 应用命名空间 */
-    Namespace: string;
+    Namespace?: string;
     /** 应用当前版本 */
-    Revision: string | null;
+    Revision?: string | null;
     /** 应用状态 */
-    Status: string | null;
+    Status?: string | null;
     /** 制品名称 */
-    ChartName: string | null;
+    ChartName?: string | null;
     /** 制品版本 */
-    ChartVersion: string | null;
+    ChartVersion?: string | null;
     /** 制品应用版本 */
-    AppVersion: string | null;
+    AppVersion?: string | null;
     /** 更新时间 */
-    UpdatedTime: string | null;
+    UpdatedTime?: string | null;
     /** 应用描述 */
-    Description: string | null;
+    Description?: string | null;
   }
 
   /** 应用市场的安装应用详情 */
   interface ReleaseDetails {
     /** 应用名称 */
-    Name: string;
+    Name?: string;
     /** 应用所在命名空间 */
-    Namespace: string;
+    Namespace?: string;
     /** 应用当前版本 */
-    Version: number | null;
+    Version?: number | null;
     /** 应用状态 */
-    Status: string | null;
+    Status?: string | null;
     /** 应用描述 */
-    Description: string | null;
+    Description?: string | null;
     /** 应用提示 */
-    Notes: string | null;
+    Notes?: string | null;
     /** 用户自定义参数 */
-    Config: string | null;
+    Config?: string | null;
     /** 应用资源详情 */
-    Manifest: string | null;
+    Manifest?: string | null;
     /** 应用制品版本 */
-    ChartVersion: string | null;
+    ChartVersion?: string | null;
     /** 应用制品名称 */
-    ChartName: string | null;
+    ChartName?: string | null;
     /** 应用制品描述 */
-    ChartDescription: string | null;
+    ChartDescription?: string | null;
     /** 应用制品app版本 */
-    AppVersion: string | null;
+    AppVersion?: string | null;
     /** 应用首次部署时间 */
-    FirstDeployedTime: string | null;
+    FirstDeployedTime?: string | null;
     /** 应用最近部署时间 */
-    LastDeployedTime: string | null;
+    LastDeployedTime?: string | null;
     /** 应用参数 */
-    ComputedValues: string | null;
+    ComputedValues?: string | null;
+    /** chart 的来源， tke-market, others */
+    ChartFrom?: string | null;
+    /** 第三方chart 的安装地址 */
+    ChartURL?: string | null;
+    /** 通过chart 创建的资源 */
+    Resources?: string | null;
   }
 
   /** 应用市场中部署的应用版本历史 */
   interface ReleaseHistory {
     /** 应用名称 */
-    Name: string;
+    Name?: string;
     /** 应用命名空间 */
-    Namespace: string;
+    Namespace?: string;
     /** 应用版本 */
-    Revision: number | null;
+    Revision?: number | null;
     /** 应用状态 */
-    Status: string | null;
+    Status?: string | null;
     /** 应用制品名称 */
-    Chart: string | null;
+    Chart?: string | null;
     /** 应用制品版本 */
-    AppVersion: string | null;
+    AppVersion?: string | null;
     /** 应用更新时间 */
-    UpdatedTime: string | null;
+    UpdatedTime?: string | null;
     /** 应用描述 */
-    Description: string | null;
+    Description?: string | null;
   }
 
   /** 应用市场自定义参数 */
@@ -3110,31 +3116,31 @@ declare namespace V20180525 {
   /** 预留实例 */
   interface ReservedInstance {
     /** 预留实例ID */
-    ReservedInstanceId: string;
+    ReservedInstanceId?: string;
     /** 预留实例名称 */
-    ReservedInstanceName: string;
+    ReservedInstanceName?: string;
     /** 预留券状态 */
-    Status: string;
+    Status?: string;
     /** 有效期，单位：月 */
-    TimeSpan: number;
+    TimeSpan?: number;
     /** 抵扣资源类型 */
-    ResourceType: string;
+    ResourceType?: string;
     /** 资源核数 */
-    Cpu: number;
+    Cpu?: number;
     /** 资源内存，单位：Gi */
-    Memory: number;
+    Memory?: number;
     /** 预留券的范围，默认值region。 */
-    Scope: string;
+    Scope?: string;
     /** 创建时间 */
-    CreatedAt: string;
+    CreatedAt?: string;
     /** 生效时间 */
-    ActiveAt: string;
+    ActiveAt?: string;
     /** 过期时间 */
-    ExpireAt: string;
+    ExpireAt?: string;
     /** GPU卡数 */
-    GpuCount: string;
+    GpuCount?: string;
     /** 自动续费标记 */
-    AutoRenewFlag: number;
+    AutoRenewFlag?: number;
     /** 集群 ID */
     ClusterId?: string;
     /** 节点名称 */
@@ -3204,51 +3210,51 @@ declare namespace V20180525 {
   /** 集群资源使用量 */
   interface ResourceUsage {
     /** 资源类型 */
-    Name: string;
+    Name?: string;
     /** 资源使用量 */
-    Usage: number;
+    Usage?: number;
     /** 资源使用详情 */
-    Details: ResourceUsageDetail[];
+    Details?: ResourceUsageDetail[];
   }
 
   /** 资源使用明细 */
   interface ResourceUsageDetail {
     /** 资源名称 */
-    Name: string;
+    Name?: string;
     /** 资源使用量 */
-    Usage: number;
+    Usage?: number;
   }
 
   /** 集群路由对象 */
   interface RouteInfo {
     /** 路由表名称。 */
-    RouteTableName: string;
+    RouteTableName?: string;
     /** 目的端CIDR。 */
-    DestinationCidrBlock: string;
+    DestinationCidrBlock?: string;
     /** 下一跳地址。 */
-    GatewayIp: string;
+    GatewayIp?: string;
   }
 
   /** 路由表冲突对象 */
   interface RouteTableConflict {
     /** 路由表类型。 */
-    RouteTableType: string;
+    RouteTableType?: string;
     /** 路由表CIDR。 */
-    RouteTableCidrBlock: string | null;
+    RouteTableCidrBlock?: string | null;
     /** 路由表名称。 */
-    RouteTableName: string | null;
+    RouteTableName?: string | null;
     /** 路由表ID。 */
-    RouteTableId: string | null;
+    RouteTableId?: string | null;
   }
 
   /** 集群路由表对象 */
   interface RouteTableInfo {
     /** 路由表名称。 */
-    RouteTableName: string;
+    RouteTableName?: string;
     /** 路由表CIDR。 */
-    RouteTableCidrBlock: string;
+    RouteTableCidrBlock?: string;
     /** VPC实例ID。 */
-    VpcId: string;
+    VpcId?: string;
   }
 
   /** 描述了 “云自动化助手” 服务相关的信息 */
@@ -3416,15 +3422,15 @@ declare namespace V20180525 {
   /** 任务步骤信息 */
   interface TaskStepInfo {
     /** 步骤名称 */
-    Step: string;
+    Step?: string;
     /** 生命周期pending : 步骤未开始running: 步骤执行中success: 步骤成功完成failed: 步骤失败 */
-    LifeState: string;
+    LifeState?: string;
     /** 步骤开始时间 */
-    StartAt: string | null;
+    StartAt?: string | null;
     /** 步骤结束时间 */
-    EndAt: string | null;
+    EndAt?: string | null;
     /** 若步骤生命周期为failed,则此字段显示错误信息 */
-    FailedMsg: string | null;
+    FailedMsg?: string | null;
   }
 
   /** 探针使用TcpSocket检测容器 */
@@ -3446,19 +3452,19 @@ declare namespace V20180525 {
   /** 不可用原因 */
   interface UnavailableReason {
     /** 实例ID */
-    InstanceId: string | null;
+    InstanceId?: string | null;
     /** 原因 */
-    Reason: string | null;
+    Reason?: string | null;
   }
 
   /** 可升级节点信息 */
   interface UpgradeAbleInstancesItem {
     /** 节点Id */
-    InstanceId: string;
+    InstanceId?: string;
     /** 节点的当前版本 */
-    Version: string;
+    Version?: string;
     /** 当前版本的最新小版本 */
-    LatestVersion: string | null;
+    LatestVersion?: string | null;
     /** RuntimeVersion */
     RuntimeVersion?: string;
     /** RuntimeLatestVersion */
@@ -3480,39 +3486,39 @@ declare namespace V20180525 {
   /** 版本信息 */
   interface VersionInstance {
     /** 版本名称 */
-    Name: string | null;
+    Name?: string | null;
     /** 版本信息 */
-    Version: string | null;
+    Version?: string | null;
     /** Remark */
-    Remark: string | null;
+    Remark?: string | null;
   }
 
   /** 虚拟节点 */
   interface VirtualNode {
     /** 虚拟节点名称 */
-    Name: string;
+    Name?: string;
     /** 虚拟节点所属子网 */
-    SubnetId: string;
+    SubnetId?: string;
     /** 虚拟节点状态 */
-    Phase: string;
+    Phase?: string;
     /** 创建时间 */
-    CreatedTime: string | null;
+    CreatedTime?: string | null;
   }
 
   /** 虚拟节点池 */
   interface VirtualNodePool {
     /** 节点池ID */
-    NodePoolId: string;
+    NodePoolId?: string;
     /** 子网列表 */
-    SubnetIds: string[] | null;
+    SubnetIds?: string[] | null;
     /** 节点池名称 */
-    Name: string;
+    Name?: string;
     /** 节点池生命周期 */
-    LifeState: string;
+    LifeState?: string;
     /** 虚拟节点label */
-    Labels: Label[] | null;
+    Labels?: Label[] | null;
     /** 虚拟节点taint */
-    Taints: Taint[] | null;
+    Taints?: Taint[] | null;
   }
 
   /** 超级节点 */
@@ -4858,9 +4864,9 @@ declare namespace V20180525 {
 
   interface DescribeClusterAsGroupsResponse {
     /** 集群关联的伸缩组总数 */
-    TotalCount: number;
+    TotalCount?: number;
     /** 集群关联的伸缩组列表 */
-    ClusterAsGroupSet: ClusterAsGroup[];
+    ClusterAsGroupSet?: ClusterAsGroup[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5088,7 +5094,7 @@ declare namespace V20180525 {
   interface DescribeClusterNodePoolsRequest {
     /** ClusterId（集群id） */
     ClusterId: string;
-    /** · "Name":"NodePoolsName","Values": ["test"] 按照【节点池名】进行过滤。 类型：String 必选：否· "Name":"NodePoolsId","Values": ["np-d2mb2zb"] 按照【节点池id】进行过滤。 类型：String 必选：否· "Name":"Tags","Values": ["abc:1"] 按照【标签键值对】进行过滤。 类型：String 必选：否 */
+    /** · "Name":"NodePoolsName","Values": ["test"] 按照【节点池名】进行过滤。 类型：String 必选：否· "Name":"NodePoolsId","Values": ["np-d2mb2zb"] 按照【节点池id】进行过滤。 类型：String 必选：否· "Name":"Tags","Values": ["product:tke"] 按照【标签键值对】进行过滤。 类型：String 必选：否 */
     Filters?: Filter[];
   }
 
@@ -5302,7 +5308,7 @@ declare namespace V20180525 {
     Offset?: number;
     /** 最大输出条数，默认20，最大为100 */
     Limit?: number;
-    /** · "Name":"ClusterName","Values": ["test"] 按照【集群名】进行过滤。 类型：String 必选：否 · "Name":"ClusterType","Values": ["MANAGED_CLUSTER"] 按照【集群类型】进行过滤。 类型：String 必选：否 · "Name":"ClusterStatus","Values": ["Running"] 按照【集群状态】进行过滤。 类型：String 必选：否 · "Name":"vpc-id","Values": ["vpc-123qajzs"] 按照【VPC】进行过滤。 类型：String 必选：否 · "Name":"tag-key","Values": ["testKey"] 按照【标签键】进行过滤。 类型：String 必选：否 · "Name":"tag-value","Values": ["testValue"] 按照【标签值】进行过滤。 类型：String 必选：否 · "Name":"Tags","Values": ["abc:1"] 按照【标签键值对】进行过滤。 类型：String 必选：否 */
+    /** · "Name":"ClusterName","Values": ["test"] 按照【集群名】进行过滤。 类型：String 必选：否 · "Name":"ClusterType","Values": ["MANAGED_CLUSTER"] 按照【集群类型】进行过滤。 类型：String 必选：否 · "Name":"ClusterStatus","Values": ["Running"] 按照【集群状态】进行过滤。 类型：String 必选：否 · "Name":"vpc-id","Values": ["vpc-2wds9k9p"] 按照【VPC】进行过滤。 类型：String 必选：否 · "Name":"tag-key","Values": ["testKey"] 按照【标签键】进行过滤。 类型：String 必选：否 · "Name":"tag-value","Values": ["testValue"] 按照【标签值】进行过滤。 类型：String 必选：否 · "Name":"Tags","Values": ["product:tke"] 按照【标签键值对】进行过滤。 类型：String 必选：否 */
     Filters?: Filter[];
     /** 集群类型，例如：MANAGED_CLUSTER */
     ClusterType?: string;
@@ -5416,9 +5422,9 @@ declare namespace V20180525 {
 
   interface DescribeEKSContainerInstancesResponse {
     /** 容器组总数 */
-    TotalCount: number;
+    TotalCount?: number;
     /** 容器组列表 */
-    EksCis: EksCi[];
+    EksCis?: EksCi[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6852,7 +6858,7 @@ declare namespace V20180525 {
   interface ModifyClusterImageRequest {
     /** 集群ID */
     ClusterId: string;
-    /** 指定有效的镜像ID，格式形如img-xxxx。可通过登录控制台查询，也可调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715)，取返回信息中的ImageId字段。 */
+    /** 指定有效的镜像ID，格式形如img-e55paxnt。可通过登录控制台查询，也可调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715)，取返回信息中的ImageId字段。 */
     ImageId: string;
   }
 
@@ -7410,7 +7416,7 @@ declare namespace V20180525 {
 
   interface UpdateEKSContainerInstanceResponse {
     /** 容器实例 ID */
-    EksCiId: string | null;
+    EksCiId?: string | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
