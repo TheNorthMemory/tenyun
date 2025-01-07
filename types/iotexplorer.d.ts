@@ -897,7 +897,7 @@ declare interface WifiInfo {
 }
 
 declare interface ActivateTWeCallLicenseRequest {
-  /** TWecall类型：1-家庭安防场景； 2-穿戴类场景； 3-生活娱乐场景； 4-对讲及其它场景 */
+  /** TWecall类型：0-体验套餐；1-家庭安防场景； 2-穿戴类场景； 3-生活娱乐场景； 4-对讲及其它场景 */
   PkgType: number;
   /** 参数已弃用，不用传参 */
   MiniProgramAppId?: string;
@@ -3322,6 +3322,16 @@ declare interface ModifyTopicRuleResponse {
   RequestId?: string;
 }
 
+declare interface PauseTWeCallDeviceRequest {
+  /** 设备列表 */
+  DeviceList?: TWeCallInfo[];
+}
+
+declare interface PauseTWeCallDeviceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface PublishBroadcastMessageRequest {
   /** 产品ID */
   ProductId: string;
@@ -3466,6 +3476,26 @@ declare interface ResetCloudStorageResponse {
   RequestId?: string;
 }
 
+declare interface ResetTWeCallDeviceRequest {
+  /** 设备列表 */
+  DeviceList?: TWeCallInfo[];
+}
+
+declare interface ResetTWeCallDeviceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ResumeWeCallDeviceRequest {
+  /** 设备列表 */
+  DeviceList?: TWeCallInfo[];
+}
+
+declare interface ResumeWeCallDeviceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SearchPositionSpaceRequest {
   /** 项目Id */
   ProjectId: string;
@@ -3538,6 +3568,18 @@ declare interface TransferCloudStorageRequest {
 }
 
 declare interface TransferCloudStorageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface TransferTWeCallDeviceRequest {
+  /** sn信息，product_deviceName */
+  TransferInDevice?: string;
+  /** sn信息，product_deviceName */
+  TransferOutDevice?: string;
+}
+
+declare interface TransferTWeCallDeviceResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3909,6 +3951,8 @@ declare interface Iotexplorer {
   ModifyTopicPolicy(data: ModifyTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicPolicyResponse>;
   /** 修改规则 {@link ModifyTopicRuleRequest} {@link ModifyTopicRuleResponse} */
   ModifyTopicRule(data: ModifyTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicRuleResponse>;
+  /** 暂停TWeCall激活设备 {@link PauseTWeCallDeviceRequest} {@link PauseTWeCallDeviceResponse} */
+  PauseTWeCallDevice(data?: PauseTWeCallDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<PauseTWeCallDeviceResponse>;
   /** @deprecated 发布广播消息 {@link PublishBroadcastMessageRequest} {@link PublishBroadcastMessageResponse} */
   PublishBroadcastMessage(data: PublishBroadcastMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishBroadcastMessageResponse>;
   /** 确认固件升级任务 {@link PublishFirmwareUpdateMessageRequest} {@link PublishFirmwareUpdateMessageResponse} */
@@ -3927,6 +3971,10 @@ declare interface Iotexplorer {
   ResetCloudStorageAIService(data: ResetCloudStorageAIServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ResetCloudStorageAIServiceResponse>;
   /** 重置云存事件 {@link ResetCloudStorageEventRequest} {@link ResetCloudStorageEventResponse} */
   ResetCloudStorageEvent(data: ResetCloudStorageEventRequest, config?: AxiosRequestConfig): AxiosPromise<ResetCloudStorageEventResponse>;
+  /** 重置TWeCall激活设备 {@link ResetTWeCallDeviceRequest} {@link ResetTWeCallDeviceResponse} */
+  ResetTWeCallDevice(data?: ResetTWeCallDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ResetTWeCallDeviceResponse>;
+  /** 恢复TWeCall激活设备 {@link ResumeWeCallDeviceRequest} {@link ResumeWeCallDeviceResponse} */
+  ResumeWeCallDevice(data?: ResumeWeCallDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeWeCallDeviceResponse>;
   /** 搜索位置空间 {@link SearchPositionSpaceRequest} {@link SearchPositionSpaceResponse} */
   SearchPositionSpace(data: SearchPositionSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<SearchPositionSpaceResponse>;
   /** 搜索产品 {@link SearchStudioProductRequest} {@link SearchStudioProductResponse} */
@@ -3935,6 +3983,8 @@ declare interface Iotexplorer {
   SearchTopicRule(data: SearchTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<SearchTopicRuleResponse>;
   /** 转移云存服务 {@link TransferCloudStorageRequest} {@link TransferCloudStorageResponse} */
   TransferCloudStorage(data: TransferCloudStorageRequest, config?: AxiosRequestConfig): AxiosPromise<TransferCloudStorageResponse>;
+  /** 转移TWeCall激活 {@link TransferTWeCallDeviceRequest} {@link TransferTWeCallDeviceResponse} */
+  TransferTWeCallDevice(data?: TransferTWeCallDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<TransferTWeCallDeviceResponse>;
   /** 批量解绑子设备 {@link UnbindDevicesRequest} {@link UnbindDevicesResponse} */
   UnbindDevices(data: UnbindDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindDevicesResponse>;
   /** 批量解绑子产品 {@link UnbindProductsRequest} {@link UnbindProductsResponse} */

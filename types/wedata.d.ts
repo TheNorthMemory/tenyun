@@ -172,6 +172,12 @@ declare interface AlarmEventInfo {
   Threshold?: number | null;
   /** 告警原因 */
   AlarmReason?: string | null;
+  /** 近范围值 */
+  IndicatorTimeRangeValue?: number | null;
+  /** 近范围单位 */
+  IndicatorTimeRangeUnit?: string | null;
+  /** 同步类型 */
+  SyncType?: number | null;
 }
 
 /** 告警指标 */
@@ -6304,7 +6310,7 @@ declare interface CreateTaskFolderRequest {
   WorkflowId: string;
   /** 父文件夹ID */
   ParentFolderId?: string;
-  /** 目录分类 */
+  /** 目录分类，该值必传，枚举值如下：ETL：数据集成EMR：EMRTBDS：TBDSDLC：DLCTDSQL：TDSQLTCHOUSE：TCHOUSEGENERAL：通用TI_ONE：TI-ONE机器学习ACROSS_WORKFLOWS：跨工作流 */
   TaskNodeType?: string;
 }
 

@@ -246,6 +246,8 @@ declare interface AlarmPolicy {
   IsSupportAlarmTag?: number | null;
   /** 多标签交/并集关系 */
   TagOperation?: string | null;
+  /** 通知模板绑定内容模板信息 */
+  NoticeTmplBindInfos?: NoticeContentTmplBindInfo[];
 }
 
 /** 告警策略指标触发条件 */
@@ -3407,6 +3409,8 @@ declare interface DescribeAlarmPoliciesRequest {
   PromInsId?: string;
   /** 根据排班表搜索 */
   ReceiverOnCallFormIDs?: string[];
+  /** 通知内容模板ID筛选 */
+  NoticeContentTmplIDs?: string[];
 }
 
 declare interface DescribeAlarmPoliciesResponse {

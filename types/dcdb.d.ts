@@ -1823,9 +1823,9 @@ declare interface DescribeDatabasesRequest {
 
 declare interface DescribeDatabasesResponse {
   /** 该实例上的数据库列表。 */
-  Databases: Database[];
+  Databases?: Database[];
   /** 透传入参。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
