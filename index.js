@@ -181,6 +181,7 @@ export const SERVICE_VERSIONS = {
   lighthouse: ['2020-03-24'],
   live: ['2018-08-01'],
   lke: ['2023-11-30'],
+  lkeap: ['2024-05-22'],
   lowcode: ['2021-01-08'],
   lp: ['2020-02-24'],
   mall: ['2023-05-18'],

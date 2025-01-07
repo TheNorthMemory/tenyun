@@ -147,6 +147,7 @@ import Lcic, { Versions as LcicVersions } from "./lcic";
 import Lighthouse, { Versions as LighthouseVersions } from "./lighthouse";
 import Live, { Versions as LiveVersions } from "./live";
 import Lke, { Versions as LkeVersions } from "./lke";
+import Lkeap, { Versions as LkeapVersions } from "./lkeap";
 import Lowcode, { Versions as LowcodeVersions } from "./lowcode";
 import Lp, { Versions as LpVersions } from "./lp";
 import Mall, { Versions as MallVersions } from "./mall";
@@ -412,6 +413,7 @@ export declare type SERVICE_VERSIONS = {
   lighthouse: LighthouseVersions,
   live: LiveVersions,
   lke: LkeVersions,
+  lkeap: LkeapVersions,
   lowcode: LowcodeVersions,
   lp: LpVersions,
   mall: MallVersions,
@@ -835,6 +837,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   live: Live,
   /** {@link Lke 大模型知识引擎} */
   lke: Lke,
+  /** {@link Lkeap 知识引擎原子能力} */
+  lkeap: Lkeap,
   /** {@link Lowcode 云开发低码} */
   lowcode: Lowcode,
   /** {@link Lp 登录保护} */
