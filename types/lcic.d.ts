@@ -59,7 +59,7 @@ declare interface AppCustomContent {
 /** 背景图片配置 */
 declare interface BackgroundPictureConfig {
   /** 背景图片的url */
-  Url: string | null;
+  Url?: string | null;
 }
 
 /** 批量注册用户信息 */
@@ -199,9 +199,9 @@ declare interface FaceMsgContent {
 /** 批量创建群组基础信息 */
 declare interface GroupBaseInfo {
   /** 待创建群组名 */
-  GroupName: string | null;
+  GroupName: string;
   /** 群组主讲人ID */
-  TeacherId?: string | null;
+  TeacherId?: string;
 }
 
 /** 获取群组列表返回的群组信息 */
@@ -686,7 +686,7 @@ declare interface BindDocumentToRoomRequest {
   RoomId: number;
   /** 文档ID。 */
   DocumentId: string;
-  /** 绑定类型。后台可透传到客户端，默认为0。客户端可以根据这个字段实现业务逻辑。 */
+  /** 绑定类型。后台可透传到客户端，默认为0。除以下例值外支持自定义该字段，并在前端实现相应业务逻辑，示例参考：示例值：0，仅绑定课件到房间示例值：1，绑定课件到房间后，默认展示课件 */
   BindType?: number;
 }
 
@@ -1720,7 +1720,7 @@ declare interface RegisterUserRequest {
   SdkAppId: number;
   /** 用户名称。 */
   Name?: string;
-  /** 用户在客户系统的Id，需要在同一应用下唯一。 */
+  /** 用户在客户系统的Id，需要在同一应用下唯一。入参为空时默认赋值为UserId。 */
   OriginId?: string;
   /** 用户头像。 */
   Avatar?: string;
@@ -1728,9 +1728,9 @@ declare interface RegisterUserRequest {
 
 declare interface RegisterUserResponse {
   /** 用户Id。 */
-  UserId: string;
+  UserId?: string;
   /** 登录/注册成功后返回登录态token。有效期7天。 */
-  Token: string;
+  Token?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

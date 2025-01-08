@@ -136,9 +136,9 @@ declare interface AddressTemplateGroup {
 declare interface AddressTemplateItem {
   /** IP地址模板ID */
   AddressTemplateId?: string;
-  /** IP模板名称 */
+  /** IP模板名称。 */
   AddressTemplateName?: string;
-  /** 废弃字段 */
+  /** 废弃字段。 */
   From?: string;
   /** 废弃字段 */
   To?: string;
@@ -1090,12 +1090,12 @@ declare interface HaVip {
 
 /** HaVip绑定的子机/网卡（用于限制HaVip飘移的范围，并不是真正的飘移动作）。 */
 declare interface HaVipAssociation {
-  /** HaVip实例唯一ID。 */
-  HaVipId: string | null;
   /** HaVip绑定的子机或网卡唯一ID。 */
   InstanceId: string | null;
+  /** HaVip实例唯一ID。 */
+  HaVipId?: string | null;
   /** HaVip绑定的类型。取值:CVM, ENI。 */
-  InstanceType: string | null;
+  InstanceType?: string | null;
 }
 
 /** VPN通道健康检查配置 */
@@ -1722,6 +1722,8 @@ declare interface NetworkInterface {
   MacAddress?: string;
   /** 弹性网卡状态：`PENDING`：创建中`AVAILABLE`：可用的`ATTACHING`：绑定中`DETACHING`：解绑中`DELETING`：删除中 */
   State?: string;
+  /** 弹性网卡状态：`PENDING`：创建中`AVAILABLE`：可用的`ATTACHING`：绑定中`DETACHING`：解绑中`DELETING`：删除中`INUSE`：已绑定 */
+  NetworkInterfaceState?: string;
   /** 内网IP信息。 */
   PrivateIpAddressSet?: PrivateIpAddressSpecification[];
   /** 绑定的云服务器对象。 */
@@ -2339,7 +2341,7 @@ declare interface ServicesInfo {
   /** 协议端口。 */
   Service: string;
   /** 备注。 */
-  Description?: string | null;
+  Description?: string;
 }
 
 /** 快照文件信息 */

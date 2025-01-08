@@ -88,6 +88,14 @@ declare interface LabelItem {
   Values?: string[];
 }
 
+/** 会话内容 */
+declare interface Message {
+  /** 角色 */
+  Role?: string;
+  /** 内容 */
+  Content?: string;
+}
+
 /** 问答对信息 */
 declare interface QaItem {
   /** 问答id */
@@ -404,6 +412,22 @@ declare interface ModifyQAResponse {
   RequestId?: string;
 }
 
+declare interface QueryRewriteRequest {
+  /** 需要改写的多轮历史会话，每轮历史对话需要包含user（问）和assistant（答）成对输入，由于模型字符限制，最多提供4轮对话。针对最后一轮对话进行改写 */
+  Messages: Message[];
+  /** 模型名称 */
+  Model?: string;
+}
+
+declare interface QueryRewriteResponse {
+  /** 改写结果 */
+  Content?: string;
+  /** 消耗量，返回输入token数，输出token数以及总token数 */
+  Usage?: Usage;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ReconstructDocumentSSERequest {
   /** 文件类型。**支持的文件类型**：PDF、DOC、DOCX、PPT、PPTX、MD、TXT、XLS、XLSX、CSV、PNG、JPG、JPEG、BMP、GIF、WEBP、HEIC、EPS、ICNS、IM、PCX、PPM、TIFF、XBM、HEIF、JP2**支持的文件大小**：- PDF、DOC、DOCX、PPT、PPTX 支持100M- MD、TXT 支持10M- 其他支持20M */
   FileType: string;
@@ -549,6 +573,8 @@ declare interface Lkeap {
   ModifyAttributeLabel(data?: ModifyAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAttributeLabelResponse>;
   /** 修改问答对 {@link ModifyQARequest} {@link ModifyQAResponse} */
   ModifyQA(data?: ModifyQARequest, config?: AxiosRequestConfig): AxiosPromise<ModifyQAResponse>;
+  /** 多轮改写 {@link QueryRewriteRequest} {@link QueryRewriteResponse} */
+  QueryRewrite(data: QueryRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<QueryRewriteResponse>;
   /** 实时文档解析 {@link ReconstructDocumentSSERequest} {@link ReconstructDocumentSSEResponse} */
   ReconstructDocumentSSE(data: ReconstructDocumentSSERequest, config?: AxiosRequestConfig): AxiosPromise<ReconstructDocumentSSEResponse>;
   /** 检索知识库内容 {@link RetrieveKnowledgeRequest} {@link RetrieveKnowledgeResponse} */

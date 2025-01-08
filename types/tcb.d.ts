@@ -5,49 +5,49 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 活动信息 */
 declare interface ActivityInfoItem {
   /** 活动id */
-  ActivityId: number;
+  ActivityId?: number;
   /** 记录插入时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 记录最后一次变更时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 活动开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 活动结束时间 */
-  ExpireTime: string;
+  ExpireTime?: string;
   /** 自定义备注信息 */
-  Tag: string;
+  Tag?: string;
 }
 
 /** 活动详情 */
 declare interface ActivityRecordItem {
   /** 用户uin */
-  Uin: string | null;
+  Uin?: string | null;
   /** 活动id */
-  ActivityId: number | null;
+  ActivityId?: number | null;
   /** 自定义状态码 */
-  Status: number | null;
+  Status?: number | null;
   /** 自定义子状态码 */
-  SubStatus: string | null;
+  SubStatus?: string | null;
   /** 整型子状态码 */
-  SubStatusInt: number | null;
+  SubStatusInt?: number | null;
   /** 是否软删除 */
-  IsDeleted: boolean | null;
+  IsDeleted?: boolean | null;
 }
 
 /** 合法域名 */
 declare interface AuthDomain {
   /** 域名ID */
-  Id: string;
+  Id?: string;
   /** 域名 */
-  Domain: string;
+  Domain?: string;
   /** 域名类型。包含以下取值：SYSTEMUSER */
-  Type: string;
+  Type?: string;
   /** 状态。包含以下取值：ENABLEDISABLE */
-  Status: string;
+  Status?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** 云开发新套餐详情 */
@@ -744,7 +744,7 @@ declare interface ExtensionFileInfo {
   CodeUri: string;
   /** 上传文件的临时地址，含签名 */
   UploadUrl: string;
-  /** 自定义密钥。如果为空，则表示不需要加密 */
+  /** 自定义密钥。如果为空，则表示不需要加密。参考cos预签名url上传https://cloud.tencent.com/document/product/436/36121上传的时候要按照 SSE-C 的方式设置header：https://cloud.tencent.com/document/product/436/7728 */
   CustomKey: string;
   /** 文件大小限制，单位M，客户端上传前需要主动检查文件大小，超过限制的文件会被删除。 */
   MaxSize: number;
@@ -753,17 +753,17 @@ declare interface ExtensionFileInfo {
 /** 后付费资源免费量信息 */
 declare interface FreequotaInfo {
   /** 资源类型COSCDNFLEXDBSCF */
-  ResourceType: string;
+  ResourceType?: string;
   /** 资源指标名称 */
-  ResourceMetric: string;
+  ResourceMetric?: string;
   /** 资源指标免费量 */
-  FreeQuota: number;
+  FreeQuota?: number;
   /** 指标单位 */
-  MetricUnit: string;
+  MetricUnit?: string;
   /** 免费量抵扣周期sum-month:以月为单位抵扣sum-day:以天为单位抵扣totalize:总容量抵扣 */
-  DeductType: string | null;
+  DeductType?: string | null;
   /** 免费量类型basic:通用量抵扣 */
-  FreeQuotaType: string | null;
+  FreeQuotaType?: string | null;
 }
 
 /** 安全网关版本路由信息限额配置 */
@@ -777,9 +777,9 @@ declare interface FrequencyLimitConfig {
 /** 函数的信息 */
 declare interface FunctionInfo {
   /** 命名空间 */
-  Namespace: string;
+  Namespace?: string;
   /** 所属地域。当前支持ap-shanghai */
-  Region: string;
+  Region?: string;
 }
 
 /** 网关信息 */
@@ -881,43 +881,43 @@ declare interface KVPair {
 /** CLS日志单条信息 */
 declare interface LogObject {
   /** 日志属于的 topic ID */
-  TopicId: string;
+  TopicId?: string;
   /** 日志主题的名字 */
-  TopicName: string;
+  TopicName?: string;
   /** 日志时间 */
-  Timestamp: string;
+  Timestamp?: string;
   /** 日志内容 */
-  Content: string;
+  Content?: string;
   /** 采集路径 */
-  FileName: string;
+  FileName?: string;
   /** 日志来源设备 */
-  Source: string;
+  Source?: string;
 }
 
 /** CLS日志结果 */
 declare interface LogResObject {
   /** 获取更多检索结果的游标 */
-  Context: string;
+  Context?: string;
   /** 搜索结果是否已经全部返回 */
-  ListOver: boolean;
+  ListOver?: boolean;
   /** 日志内容信息 */
-  Results: LogObject[];
+  Results?: LogObject[];
 }
 
 /** 云日志服务相关信息 */
 declare interface LogServiceInfo {
   /** log名 */
-  LogsetName: string;
+  LogsetName?: string;
   /** log-id */
-  LogsetId: string;
+  LogsetId?: string;
   /** topic名 */
-  TopicName: string;
+  TopicName?: string;
   /** topic-id */
-  TopicId: string;
+  TopicId?: string;
   /** cls日志所属地域 */
-  Region: string;
+  Region?: string;
   /** topic保存时长 默认7天 */
-  Period: number | null;
+  Period?: number | null;
 }
 
 /** 终端用户登录新增统计 */
@@ -959,43 +959,43 @@ declare interface OneClickTaskStepInfo {
 /** 订单信息 */
 declare interface OrderInfo {
   /** 订单号 */
-  TranId: string;
+  TranId?: string;
   /** 订单要切换的套餐ID */
-  PackageId: string;
+  PackageId?: string;
   /** 订单类型1 购买2 续费3 变配 */
-  TranType: string;
+  TranType?: string;
   /** 订单状态。1未支付2 支付中3 发货中4 发货成功5 发货失败6 已退款7 已取消100 已删除 */
-  TranStatus: string;
+  TranStatus?: string;
   /** 订单更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 订单创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 付费模式.prepayment 预付费postpaid 后付费 */
-  PayMode: string;
+  PayMode?: string;
   /** 订单绑定的扩展ID */
-  ExtensionId: string | null;
+  ExtensionId?: string | null;
   /** 资源初始化结果(仅当ExtensionId不为空时有效): successful(初始化成功), failed(初始化失败), doing(初始化进行中), init(准备初始化) */
-  ResourceReady: string | null;
+  ResourceReady?: string | null;
   /** 安装标记。建议使用方统一转大小写之后再判断。QuickStart：快速启动来源Activity：活动来源 */
-  Flag: string | null;
+  Flag?: string | null;
   /** 下单时的参数 */
-  ReqBody: string;
+  ReqBody?: string;
 }
 
 /** 后付费免费额度 */
 declare interface PackageFreeQuotaInfo {
   /** 资源类型COSCDNFLEXDBSCF */
-  ResourceType: string | null;
+  ResourceType?: string | null;
   /** 资源指标名称 */
-  ResourceMetric: string | null;
+  ResourceMetric?: string | null;
   /** 资源指标免费量 */
-  FreeQuota: number | null;
+  FreeQuota?: number | null;
   /** 指标单位 */
-  MetricUnit: string | null;
+  MetricUnit?: string | null;
   /** 免费量抵扣周期sum-month:以月为单位抵扣sum-day:以天为单位抵扣totalize:总容量抵扣 */
-  DeductType: string | null;
+  DeductType?: string | null;
   /** 免费量类型basic:通用量抵扣 */
-  FreeQuotaType: string | null;
+  FreeQuotaType?: string | null;
 }
 
 /** 终端用户平台统计信息 */
@@ -1027,29 +1027,29 @@ declare interface PostPaidEnvDeductInfo {
 /** 按量付费免费配额信息 */
 declare interface PostpayEnvQuota {
   /** 资源类型 */
-  ResourceType: string;
+  ResourceType?: string;
   /** 指标名 */
-  MetricName: string;
+  MetricName?: string;
   /** 配额值 */
-  Value: number;
+  Value?: number;
   /** 配额生效时间为空表示没有时间限制 */
-  StartTime: string;
+  StartTime?: string;
   /** 配额失效时间为空表示没有时间限制 */
-  EndTime: string;
+  EndTime?: string;
 }
 
 /** 短信免费量 */
 declare interface SmsFreeQuota {
   /** 免费量总条数 */
-  FreeQuota: number | null;
+  FreeQuota?: number | null;
   /** 共计已使用总条数 */
-  TotalUsedQuota: number | null;
+  TotalUsedQuota?: number | null;
   /** 免费周期起点，0000-00-00 00:00:00 形式 */
-  CycleStart: string | null;
+  CycleStart?: string | null;
   /** 免费周期终点，0000-00-00 00:00:00 形式 */
-  CycleEnd: string | null;
+  CycleEnd?: string | null;
   /** 今天已使用总条数 */
-  TodayUsedQuota: number | null;
+  TodayUsedQuota?: number | null;
 }
 
 /** 1分钱计费详情 */
@@ -1119,13 +1119,13 @@ declare interface StaticStorageInfo {
 /** StorageInfo 资源信息 */
 declare interface StorageInfo {
   /** 资源所属地域。当前支持ap-shanghai */
-  Region: string;
+  Region?: string;
   /** 桶名，存储资源的唯一标识 */
-  Bucket: string;
+  Bucket?: string;
   /** cdn 域名 */
-  CdnDomain: string;
+  CdnDomain?: string;
   /** 资源所属用户的腾讯云appId */
-  AppId: string;
+  AppId?: string;
 }
 
 /** 标签键值对 */
@@ -1443,7 +1443,7 @@ declare interface CreatePostpayPackageResponse {
   /** 后付费订单号 */
   TranId?: string;
   /** 环境ID */
-  EnvId?: string | null;
+  EnvId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1479,7 +1479,7 @@ declare interface CreateStaticStoreRequest {
 
 declare interface CreateStaticStoreResponse {
   /** 创建静态资源结果(succ/fail) */
-  Result?: string | null;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1647,7 +1647,7 @@ declare interface DescribeActivityRecordRequest {
 
 declare interface DescribeActivityRecordResponse {
   /** 活动记录详情 */
-  ActivityRecords: ActivityRecordItem[];
+  ActivityRecords?: ActivityRecordItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2311,11 +2311,11 @@ declare interface DescribeDownloadFileRequest {
 
 declare interface DescribeDownloadFileResponse {
   /** 文件路径，该字段已废弃 */
-  FilePath: string | null;
+  FilePath?: string;
   /** 加密key，用于计算下载加密文件的header。参考SSE-C https://cloud.tencent.com/document/product/436/7728 */
-  CustomKey: string | null;
+  CustomKey?: string;
   /** 下载链接 */
-  DownloadUrl: string | null;
+  DownloadUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2401,7 +2401,7 @@ declare interface DescribeEnvFreeQuotaRequest {
 
 declare interface DescribeEnvFreeQuotaResponse {
   /** 免费抵扣配额详情 */
-  QuotaItems?: PostpayEnvQuota[] | null;
+  QuotaItems?: PostpayEnvQuota[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2455,7 +2455,7 @@ declare interface DescribeEnvPostpaidDeductRequest {
 
 declare interface DescribeEnvPostpaidDeductResponse {
   /** 指标抵扣详情列表 */
-  PostPaidEnvDeductInfoList?: PostPaidEnvDeductInfo[] | null;
+  PostPaidEnvDeductInfoList?: PostPaidEnvDeductInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2485,7 +2485,7 @@ declare interface DescribeExtensionUploadInfoRequest {
 
 declare interface DescribeExtensionUploadInfoResponse {
   /** 待上传文件的信息数组 */
-  FilesData: ExtensionFileInfo[];
+  FilesData?: ExtensionFileInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2607,7 +2607,7 @@ declare interface DescribePostpayFreeQuotasRequest {
 
 declare interface DescribePostpayFreeQuotasResponse {
   /** 免费量资源信息列表 */
-  FreequotaInfoList?: FreequotaInfo[] | null;
+  FreequotaInfoList?: FreequotaInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2621,7 +2621,7 @@ declare interface DescribePostpayPackageFreeQuotasRequest {
 
 declare interface DescribePostpayPackageFreeQuotasResponse {
   /** 免费量资源信息列表 */
-  PackageFreeQuotaInfos?: PackageFreeQuotaInfo[] | null;
+  PackageFreeQuotaInfos?: PackageFreeQuotaInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2629,7 +2629,7 @@ declare interface DescribePostpayPackageFreeQuotasResponse {
 declare interface DescribeQuotaDataRequest {
   /** 环境ID */
   EnvId: string;
-  /** 指标名: StorageSizepkg: 当月存储空间容量, 单位MB StorageReadpkg: 当月存储读请求次数 StorageWritepkg: 当月存储写请求次数 StorageCdnOriginFluxpkg: 当月CDN回源流量, 单位字节 StorageCdnOriginFluxpkgDay: 当日CDN回源流量, 单位字节 StorageReadpkgDay: 当日存储读请求次数 StorageWritepkgDay: 当日写请求次数 CDNFluxpkg: 当月CDN流量, 单位为字节 CDNFluxpkgDay: 当日CDN流量, 单位为字节 FunctionInvocationpkg: 当月云函数调用次数 FunctionGBspkg: 当月云函数资源使用量, 单位Mb*Ms FunctionFluxpkg: 当月云函数流量, 单位千字节(KB) FunctionInvocationpkgDay: 当日云函数调用次数 FunctionGBspkgDay: 当日云函数资源使用量, 单位Mb*Ms FunctionFluxpkgDay: 当日云函数流量, 单位千字节(KB) DbSizepkg: 当月数据库容量大小, 单位MB DbReadpkg: 当日数据库读请求数 DbWritepkg: 当日数据库写请求数 StaticFsFluxPkgDay: 当日静态托管流量 StaticFsFluxPkg: 当月静态托管流量 StaticFsSizePkg: 当月静态托管容量 TkeCpuUsedPkg: 当月容器托管CPU使用量，单位核*秒 TkeCpuUsedPkgDay: 当天容器托管CPU使用量，单位核*秒 TkeMemUsedPkg: 当月容器托管内存使用量，单位MB*秒 TkeMemUsedPkgDay: 当天容器托管内存使用量，单位MB*秒 CodingBuildTimePkgDay: 当天容器托管构建时间使用量，单位毫秒 TkeHttpServiceNatPkgDay: 当天容器托管流量使用量，单位B */
+  /** 指标名: StorageSizepkg: 当月存储空间容量, 单位MB StorageReadpkg: 当月存储读请求次数 StorageWritepkg: 当月存储写请求次数 StorageCdnOriginFluxpkg: 当月CDN回源流量, 单位字节 StorageCdnOriginFluxpkgDay: 当日CDN回源流量, 单位字节 StorageReadpkgDay: 当日存储读请求次数 StorageWritepkgDay: 当日写请求次数 CDNFluxpkg: 当月CDN流量, 单位为字节 CDNFluxpkgDay: 当日CDN流量, 单位为字节 FunctionInvocationpkg: 当月云函数调用次数 FunctionGBspkg: 当月云函数资源使用量, 单位Mb*Ms FunctionFluxpkg: 当月云函数流量, 单位千字节(KB) FunctionInvocationpkgDay: 当日云函数调用次数 FunctionGBspkgDay: 当日云函数资源使用量, 单位Mb*Ms FunctionFluxpkgDay: 当日云函数流量, 单位千字节(KB) DbSizepkg: 当月数据库容量大小, 单位MB DbReadpkg: 当日数据库读请求数 DbWritepkg: 当日数据库写请求数 StaticFsFluxPkgDay: 当日静态托管流量 StaticFsFluxPkg: 当月静态托管流量 StaticFsSizePkg: 当月静态托管容量 TkeCpuUsedPkg: 当月容器托管CPU使用量，单位核*秒 TkeCpuUsedPkgDay: 当天容器托管CPU使用量，单位核*秒 TkeMemUsedPkg: 当月容器托管内存使用量，单位MB*秒 TkeMemUsedPkgDay: 当天容器托管内存使用量，单位MB*秒 CodingBuildTimePkgDay: 当天容器托管构建时间使用量，单位毫秒 TkeHttpServiceNatPkgDay: 当天容器托管流量使用量，单位B CynosdbCcupkg: 当月微信云托管MySQL CCU使用量，单位个 （需要除以1000） CynosdbStoragepkg: 当月微信云托管MySQL 存储使用量，单位MB （需要除以1000） CynosdbCcupkgDay: 当天微信云托管MySQL 存储使用量，单位个 （需要除以1000） CynosdbStoragepkgDay: 当天微信云托管MySQL 存储使用量，单位MB （需要除以1000） */
   MetricName: string;
   /** 资源ID, 目前仅对云函数、容器托管相关的指标有意义。云函数(FunctionInvocationpkg, FunctionGBspkg, FunctionFluxpkg)、容器托管（服务名称）。如果想查询某个云函数的指标则在ResourceId中传入函数名; 如果只想查询整个namespace的指标, 则留空或不传。 */
   ResourceID?: string;
@@ -2641,7 +2641,7 @@ declare interface DescribeQuotaDataResponse {
   /** 指标的值 */
   Value?: number;
   /** 指标的附加值信息 */
-  SubValue?: string | null;
+  SubValue?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2653,7 +2653,7 @@ declare interface DescribeSmsQuotasRequest {
 
 declare interface DescribeSmsQuotasResponse {
   /** 短信免费量信息列表 */
-  SmsFreeQuotaList?: SmsFreeQuota[] | null;
+  SmsFreeQuotaList?: SmsFreeQuota[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2669,7 +2669,7 @@ declare interface DescribeSpecialCostItemsRequest {
 
 declare interface DescribeSpecialCostItemsResponse {
   /** 1分钱抵扣详情 */
-  SpecialCostItems: SpecialCostItem[] | null;
+  SpecialCostItems?: SpecialCostItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2721,15 +2721,15 @@ declare interface DescribeUserActivityInfoRequest {
 
 declare interface DescribeUserActivityInfoResponse {
   /** 自定义标记，1元钱裂变需求中即代指`团id` */
-  Tag: string;
+  Tag?: string;
   /** 自定义备注，1元钱裂变需求中返回`团列表`，uin列表通过","拼接 */
-  Notes: string;
+  Notes?: string;
   /** 活动剩余时间，单位为s.1元钱裂变需求中即为 time(活动过期时间)-Now()), 过期后为0，即返回必为自然数 */
-  ActivityTimeLeft: number;
+  ActivityTimeLeft?: number;
   /** 拼团剩余时间，单位为s.1元钱裂变需求中即为time(成团时间)+24H-Now()，过期后为0，即返回必为自然数 */
-  GroupTimeLeft: number;
+  GroupTimeLeft?: number;
   /** 昵称列表,通过","拼接， 1元钱裂变活动中与Notes中uin一一对应 */
-  NickNameList: string | null;
+  NickNameList?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

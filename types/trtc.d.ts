@@ -1165,14 +1165,14 @@ declare interface CreatePictureResponse {
 }
 
 declare interface DeleteBasicModerationRequest {
-  /** TRTC的SDKAppId，和TRTC的房间所对应的SDKAppId相同。 */
+  /** TRTC的SDKAppId，和TRTC的房间所使用的SDKAppId相同。 */
   SdkAppId: number;
   /** 审核任务的唯一Id，在启动审核任务成功后会返回。 */
   TaskId: string;
 }
 
 declare interface DeleteBasicModerationResponse {
-  /** 审核任务的唯一Id，在启动审核任务成功后会返回。 */
+  /** 审核任务的唯一Id。 */
   TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1719,9 +1719,9 @@ declare interface DescribeWebRecordResponse {
   /** 1: 正在录制中 */
   Status?: number;
   /** 在使用RecordId查询时返回 */
-  TaskId?: string | null;
+  TaskId?: string;
   /** 在使用TaskId查询时返回 */
-  RecordId?: string | null;
+  RecordId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1007,13 +1007,13 @@ declare interface CreateInstanceTokenRequest {
 
 declare interface CreateInstanceTokenResponse {
   /** 用户名 */
-  Username: string | null;
+  Username?: string | null;
   /** 访问凭证 */
-  Token: string;
+  Token?: string;
   /** 访问凭证过期时间戳，是一个时间戳数字，无单位 */
-  ExpTime: number;
+  ExpTime?: number;
   /** 长期凭证的TokenId，短期凭证没有TokenId */
-  TokenId: string | null;
+  TokenId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

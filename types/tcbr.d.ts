@@ -12,6 +12,8 @@ declare interface BuildPacksInfo {
   RepoLanguage: string;
   /** 上传文件名 */
   UploadFilename: string;
+  /** 语言版本 */
+  LanguageVersion?: string;
 }
 
 /** cls日志信息 */
@@ -231,19 +233,21 @@ declare interface ServerBaseConfig {
 /** 服务基本信息 */
 declare interface ServerBaseInfo {
   /** 服务名 */
-  ServerName: string;
+  ServerName?: string;
   /** 默认服务域名 */
-  DefaultDomainName: string;
+  DefaultDomainName?: string;
   /** 自定义域名 */
-  CustomDomainName: string;
+  CustomDomainName?: string;
   /** 服务状态：running/deploying/deploy_failed */
-  Status: string;
+  Status?: string;
   /** 更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 公网访问类型 */
-  AccessTypes: string[];
+  AccessTypes?: string[];
   /** 展示自定义域名 */
-  CustomDomainNames: string[];
+  CustomDomainNames?: string[];
+  /** 服务类型: function 云函数2.0；container 容器服务 */
+  ServerType?: string;
 }
 
 /** 服务管理任务信息 */
@@ -361,11 +365,11 @@ declare interface CreateCloudRunEnvRequest {
   SubNetIds?: string[];
   /** 请求key 用于防重 */
   ReqKey?: string;
-  /** 来源：wechat | cloud */
+  /** 来源：wechat | cloud | weda */
   Source?: string;
-  /** 渠道：wechat | cloud */
+  /** 渠道：wechat | cloud | weda */
   Channel?: string;
-  /** 环境ID */
+  /** 环境ID 云开发平台必填 */
   EnvId?: string;
 }
 
@@ -455,7 +459,9 @@ declare interface DescribeEnvBaseInfoRequest {
 
 declare interface DescribeEnvBaseInfoResponse {
   /** 环境基础信息 */
-  EnvBaseInfo: EnvBaseInfo;
+  EnvBaseInfo?: EnvBaseInfo;
+  /** 是否存在 */
+  IsExist?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

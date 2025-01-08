@@ -1667,9 +1667,9 @@ declare interface AllocateIpv6AddressesBandwidthRequest {
 
 declare interface AllocateIpv6AddressesBandwidthResponse {
   /** 弹性公网 IPV6 的唯一 ID 列表。 */
-  AddressSet: string[] | null;
+  AddressSet?: string[] | null;
   /** 异步任务TaskId。 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

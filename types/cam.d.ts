@@ -1031,27 +1031,27 @@ declare interface DescribeUserOIDCConfigRequest {
 
 declare interface DescribeUserOIDCConfigResponse {
   /** 身份提供商类型。 12：用户OIDC身份提供商 */
-  ProviderType: number;
+  ProviderType?: number;
   /** 身份提供商URL */
-  IdentityUrl: string;
+  IdentityUrl?: string;
   /** 签名公钥 */
-  IdentityKey: string;
+  IdentityKey?: string;
   /** 客户端id */
-  ClientId: string;
+  ClientId?: string;
   /** 状态：0:未设置，11:已开启，2:已禁用 */
-  Status: number;
+  Status?: number;
   /** 授权请求Endpoint */
-  AuthorizationEndpoint: string;
+  AuthorizationEndpoint?: string;
   /** 授权请求Scope */
-  Scope: string[];
+  Scope?: string[];
   /** 授权请求Response type */
-  ResponseType: string;
+  ResponseType?: string;
   /** 授权请求Response mode */
-  ResponseMode: string;
+  ResponseMode?: string;
   /** 映射字段名称 */
-  MappingFiled: string;
+  MappingFiled?: string;
   /** 描述 */
-  Description: string;
+  Description?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1062,7 +1062,7 @@ declare interface DescribeUserSAMLConfigRequest {
 declare interface DescribeUserSAMLConfigResponse {
   /** SAML元数据文档 */
   SAMLMetadata?: string;
-  /** 状态：0:未设置，1:已开启，2:已禁用 */
+  /** 状态：0:未设置，11:已开启，2:已禁用 */
   Status?: number;
   /** 辅助域名 */
   AuxiliaryDomain?: string;

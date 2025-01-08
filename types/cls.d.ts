@@ -404,7 +404,7 @@ declare interface ConsoleSharingConfig {
   Resources: string[];
   /** 分享链接域名，可选范围- 公网匿名分享：填写clsshare.com- datasight内网匿名分享(若开启)：datasight内网域名 */
   Domain?: string | null;
-  /** 验证码 */
+  /** 分享链接加密访问验证码。支持0-9和a-z(不区分大小写)在内的6个字符，可为空，代表免验证码访问 */
   VerifyCode?: string | null;
   /** 默认查询范围的开始时间点，支持绝对时间(13位Unix时间戳)或相对时间表达式 */
   StartTime?: string;

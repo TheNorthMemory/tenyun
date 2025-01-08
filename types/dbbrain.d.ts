@@ -1859,15 +1859,17 @@ declare interface DescribeRedisTopKeyPrefixListRequest {
   Date: string;
   /** 服务产品类型，支持值包括 "redis" - 云数据库 Redis。 */
   Product: string;
-  /** 查询数目，默认为20，最大值为100。 */
+  /** 查询数目，默认为20，最大值为500。 */
   Limit?: number;
+  /** 分片ID数组。 */
+  ShardIds?: number[];
 }
 
 declare interface DescribeRedisTopKeyPrefixListResponse {
   /** top key前缀列表。 */
-  Items: RedisPreKeySpaceData[];
+  Items?: RedisPreKeySpaceData[];
   /** 采集时间戳（秒）。 */
-  Timestamp: number;
+  Timestamp?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

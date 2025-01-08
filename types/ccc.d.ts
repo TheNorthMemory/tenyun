@@ -2,6 +2,16 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** AI转人工配置项 */
+declare interface AITransferItem {
+  /** 转人工的function calling 名称 */
+  TransferFunctionName: string;
+  /** TransferFunctionEnable为true时生效；transfer_to_human function calling的desc，默认为 "Transfer to human when the user has to transfer to human (like says transfer to human) or you are instructed to do so." */
+  TransferFunctionDesc: string;
+  /** 转人工的技能组ID */
+  TransferSkillGroupId: number;
+}
+
 /** 生效运营商白名单号码 */
 declare interface ActiveCarrierPrivilegeNumber {
   /** 实例Id */
@@ -849,6 +859,10 @@ declare interface CreateAICallRequest {
   EndFunctionEnable?: boolean;
   /** EndFunctionEnable为true时生效；call_end function calling的desc，默认为 "End the call when user has to leave (like says bye) or you are instructed to do so." */
   EndFunctionDesc?: string;
+  /** 模型是否支持(或者开启)transfer_to_human function calling */
+  TransferFunctionEnable?: boolean;
+  /** TransferFunctionEnable为true的时候生效: 转人工配置 */
+  TransferItems?: AITransferItem[];
   /** 用户多久没说话提示时长,最小10秒,默认10秒 */
   NotifyDuration?: number;
   /** 用户NotifyDuration没说话，AI提示的语句，默认是"抱歉，我没听清。您可以重复下吗？" */
@@ -857,6 +871,8 @@ declare interface CreateAICallRequest {
   NotifyMaxCount?: number;
   /** 和VoiceType字段需要选填一个，这里是使用自己自定义的TTS，VoiceType是系统内置的一些音色Tencent TTS配置请参考腾讯云TTS文档链接{ &quot;TTSType&quot;: &quot;tencent&quot;, // String TTS类型, 目前支持&quot;tencent&quot; 和 “minixmax”， 其他的厂商支持中 &quot;AppId&quot;: &quot;您的应用ID&quot;, // String 必填 &quot;SecretId&quot;: &quot;您的密钥ID&quot;, // String 必填 &quot;SecretKey&quot;: &quot;您的密钥Key&quot;, // String 必填 &quot;VoiceType&quot;: 101001, // Integer 必填，音色 ID，包括标准音色与精品音色，精品音色拟真度更高，价格不同于标准音色，请参见语音合成计费概述。完整的音色 ID 列表请参见语音合成音色列表。 &quot;Speed&quot;: 1.25, // Integer 非必填，语速，范围：[-2，6]，分别对应不同语速： -2: 代表0.6倍 -1: 代表0.8倍 0: 代表1.0倍（默认） 1: 代表1.2倍 2: 代表1.5倍 6: 代表2.5倍 如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。 参数值与实际语速转换，可参考 语速转换 &quot;Volume&quot;: 5, // Integer 非必填，音量大小，范围：[0，10]，分别对应11个等级的音量，默认值为0，代表正常音量。 &quot;PrimaryLanguage&quot;: 1, // Integer 可选 主要语言 1-中文（默认） 2-英文 3-日文 &quot;FastVoiceType&quot;: &quot;xxxx&quot; // 可选参数， 快速声音复刻的参数 } Minimax TTS配置请参考Minimax TTS文档链接。注意Minimax TTS存在频率限制，超频可能会导致回答卡顿，Minimax TTS频率限制相关文档链接。{ &quot;TTSType&quot;: &quot;minimax&quot;, // String TTS类型, &quot;Model&quot;: &quot;speech-01-turbo&quot;, &quot;APIUrl&quot;: &quot;https://api.minimax.chat/v1/t2a_v2&quot;, &quot;APIKey&quot;: &quot;eyxxxx&quot;, &quot;GroupId&quot;: &quot;181000000000000&quot;, &quot;VoiceType&quot;:&quot;female-tianmei-jingpin&quot;, &quot;Speed&quot;: 1.2}火山 TTS配置音色类型参考火山TTS文档链接语音合成音色列表–语音技术-火山引擎大模型语音合成音色列表–语音技术-火山引擎{ &quot;TTSType&quot;: &quot;volcengine&quot;, // 必填：String TTS类型 &quot;AppId&quot; : &quot;xxxxxxxx&quot;, // 必填：String 火山引擎分配的Appid &quot;Token&quot; : &quot;TY9d4sQXHxxxxxxx&quot;, // 必填： String类型 火山引擎的访问token &quot;Speed&quot; : 1.0, // 可选参数 语速，默认为1.0 &quot;Volume&quot;: 1.0, // 可选参数， 音量大小， 默认为1.0 &quot;Cluster&quot; : &quot;volcano_tts&quot;, // 可选参数，业务集群, 默认是 volcano_tts &quot;VoiceType&quot; : &quot;zh_male_aojiaobazong_moon_bigtts&quot; // 音色类型， 默认为大模型语音合成的音色。 如果使用普通语音合成，则需要填写对应的音色类型。 音色类型填写错误会导致没有声音。}Azure TTS配置请参考AzureTTS文档链接{ &quot;TTSType&quot;: &quot;azure&quot;, // 必填：String TTS类型 &quot;SubscriptionKey&quot;: &quot;xxxxxxxx&quot;, // 必填：String 订阅的Key &quot;Region&quot;: &quot;chinanorth3&quot;, // 必填：String 订阅的地区 &quot;VoiceName&quot;: &quot;zh-CN-XiaoxiaoNeural&quot;, // 必填：String 音色名必填 &quot;Language&quot;: &quot;zh-CN&quot;, // 必填：String 合成的语言 &quot;Rate&quot;: 1 // 选填：float 语速 0.5～2 默认为 1}自定义TTS具体协议规范请参考腾讯文档{ &quot;TTSType&quot;: &quot;custom&quot;, // String 必填 &quot;APIKey&quot;: &quot;ApiKey&quot;, // String 必填 用来鉴权 &quot;APIUrl&quot;: &quot;http://0.0.0.0:8080/stream-audio&quot; // String，必填，TTS API URL &quot;AudioFormat&quot;: &quot;wav&quot;, // String, 非必填，期望输出的音频格式，如mp3， ogg_opus，pcm，wav，默认为 wav，目前只支持pcm和wav， &quot;SampleRate&quot;: 16000, // Integer，非必填，音频采样率，默认为16000(16k)，推荐值为16000 &quot;AudioChannel&quot;: 1, // Integer，非必填，音频通道数，取值：1 或 2 默认为1 } */
   CustomTTSConfig?: string;
+  /** 提示词变量 */
+  PromptVariables?: Variable[];
 }
 
 declare interface CreateAICallResponse {

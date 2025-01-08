@@ -1762,6 +1762,14 @@ declare interface TopicStats {
   LastUpdateTimestamp?: number | null;
 }
 
+/** 主题实例 */
+declare interface Topic_Simplification {
+  /** 主题名称。 */
+  TopicName?: string | null;
+  /** 0: 非持久非分区1: 非持久分区2: 持久非分区3: 持久分区 */
+  PulsarTopicType?: number | null;
+}
+
 /** 消息轨迹结果 */
 declare interface TraceResult {
   /** 阶段 */
@@ -4262,6 +4270,26 @@ declare interface ExportRocketMQMessageDetailResponse {
   RequestId?: string;
 }
 
+declare interface GetTopicListRequest {
+  /** 环境（命名空间）名称。 */
+  EnvironmentId: string;
+  /** Pulsar 集群的ID */
+  ClusterId: string;
+  /** 起始下标，不填默认为0。 */
+  Offset?: number;
+  /** 返回数量，不填则默认为10，最大值为20。 */
+  Limit?: number;
+}
+
+declare interface GetTopicListResponse {
+  /** 主题数量。 */
+  TotalCount?: number;
+  /** 主题列表 */
+  TopicList?: Topic_Simplification[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ImportRocketMQConsumerGroupsRequest {
   /** 导入topic */
   Groups: RocketMQGroupConfig[];
@@ -5249,6 +5277,8 @@ declare interface Tdmq {
   DescribeTopics(data: DescribeTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicsResponse>;
   /** 导出RocketMQ消息详情 {@link ExportRocketMQMessageDetailRequest} {@link ExportRocketMQMessageDetailResponse} */
   ExportRocketMQMessageDetail(data: ExportRocketMQMessageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ExportRocketMQMessageDetailResponse>;
+  /** 查询命名空间下的主题列表 {@link GetTopicListRequest} {@link GetTopicListResponse} */
+  GetTopicList(data: GetTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTopicListResponse>;
   /** 平滑迁移：导入消费者组列表 {@link ImportRocketMQConsumerGroupsRequest} {@link ImportRocketMQConsumerGroupsResponse} */
   ImportRocketMQConsumerGroups(data: ImportRocketMQConsumerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportRocketMQConsumerGroupsResponse>;
   /** 平滑迁移：导入topic列表 {@link ImportRocketMQTopicsRequest} {@link ImportRocketMQTopicsResponse} */

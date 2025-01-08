@@ -3554,7 +3554,7 @@ declare interface GetTaskStateResponse {
 
 declare interface HKIDCardOCRRequest {
   /** 是否返回人像照片。 */
-  ReturnHeadImage: boolean;
+  ReturnHeadImage?: boolean;
   /** 是否鉴伪。 */
   DetectFake?: boolean;
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。 */
@@ -5264,7 +5264,7 @@ declare interface Ocr {
   /** @deprecated 查询智慧表单任务状态 {@link GetTaskStateRequest} {@link GetTaskStateResponse} */
   GetTaskState(data: GetTaskStateRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskStateResponse>;
   /** 中国香港身份证识别 {@link HKIDCardOCRRequest} {@link HKIDCardOCRResponse} */
-  HKIDCardOCR(data: HKIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<HKIDCardOCRResponse>;
+  HKIDCardOCR(data?: HKIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<HKIDCardOCRResponse>;
   /** 港澳台居住证识别 {@link HmtResidentPermitOCRRequest} {@link HmtResidentPermitOCRResponse} */
   HmtResidentPermitOCR(data?: HmtResidentPermitOCRRequest, config?: AxiosRequestConfig): AxiosPromise<HmtResidentPermitOCRResponse>;
   /** 身份证识别 {@link IDCardOCRRequest} {@link IDCardOCRResponse} */

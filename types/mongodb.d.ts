@@ -21,25 +21,29 @@ declare interface Auth {
 /** 备份下载任务 */
 declare interface BackupDownloadTask {
   /** 任务创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 备份文件名 */
-  BackupName: string;
+  BackupName?: string;
   /** 分片名称 */
-  ReplicaSetId: string;
+  ReplicaSetId?: string;
   /** 备份数据大小，单位为字节 */
-  BackupSize: number;
+  BackupSize?: number;
   /** 任务状态。0-等待执行，1-正在下载，2-下载完成，3-下载失败，4-等待重试 */
-  Status: number;
+  Status?: number;
   /** 任务进度百分比 */
-  Percent: number;
+  Percent?: number;
   /** 耗时，单位为秒 */
-  TimeSpend: number;
+  TimeSpend?: number;
   /** 备份数据下载链接 */
-  Url: string;
+  Url?: string;
   /** 备份文件备份类型，0-逻辑备份，1-物理备份 */
-  BackupMethod: number;
+  BackupMethod?: number;
   /** 发起备份时指定的备注信息 */
-  BackupDesc: string | null;
+  BackupDesc?: string;
+  /** 地区信息。 */
+  Region?: string | null;
+  /** Bucket信息。 */
+  Bucket?: string | null;
 }
 
 /** 创建备份下载任务结果 */
@@ -59,13 +63,13 @@ declare interface BackupInfo {
   /** 备份名称 */
   BackupName?: string;
   /** 备份备注 */
-  BackupDesc?: string | null;
+  BackupDesc?: string;
   /** 备份文件大小，单位KB */
-  BackupSize?: number | null;
+  BackupSize?: number;
   /** 备份开始时间 */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 备份结束时间 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 备份状态，1-备份中，2-备份成功 */
   Status?: number;
   /** 备份方法，0-逻辑备份，1-物理备份 */
@@ -75,7 +79,7 @@ declare interface BackupInfo {
   /** 备份删除时间 */
   DeleteTime?: string;
   /** 异地备份地域 */
-  BackupRegion?: string | null;
+  BackupRegion?: string;
 }
 
 /** 客户端连接信息，包括客户端IP和连接数 */
@@ -123,7 +127,7 @@ declare interface DBInstanceInfo {
 /** 数据库实例价格 */
 declare interface DBInstancePrice {
   /** 单价 */
-  UnitPrice: number | null;
+  UnitPrice: number;
   /** 原价 */
   OriginalPrice: number;
   /** 折扣价 */
@@ -245,23 +249,23 @@ declare interface InstanceDetail {
   /** 实例对应的物理实例id，回档并替换过的实例有不同的InstanceId和RealInstanceId，从barad获取监控数据等场景下需要用物理id获取 */
   RealInstanceId?: string;
   /** 实例当前可用区信息。 */
-  ZoneList?: string[] | null;
+  ZoneList?: string[];
   /** mongos节点个数。 */
-  MongosNodeNum?: number | null;
+  MongosNodeNum?: number;
   /** mongos节点内存。 */
-  MongosMemory?: number | null;
+  MongosMemory?: number;
   /** mongos节点CPU核数。 */
-  MongosCpuNum?: number | null;
+  MongosCpuNum?: number;
   /** Config Server节点个数。 */
-  ConfigServerNodeNum?: number | null;
+  ConfigServerNodeNum?: number;
   /** Config Server节点内存。 */
-  ConfigServerMemory?: number | null;
+  ConfigServerMemory?: number;
   /** Config Server节点磁盘大小。 */
-  ConfigServerVolume?: number | null;
+  ConfigServerVolume?: number;
   /** Config Server节点CPU核数。 */
-  ConfigServerCpuNum?: number | null;
+  ConfigServerCpuNum?: number;
   /** readonly节点个数。 */
-  ReadonlyNodeNum?: number | null;
+  ReadonlyNodeNum?: number;
 }
 
 /** 实例可修改参数枚举类型集合。 */
@@ -351,17 +355,17 @@ declare interface InstanceTextParam {
 /** KMS密钥信息 */
 declare interface KMSInfoDetail {
   /** 主密钥 ID。 */
-  KeyId?: string | null;
+  KeyId?: string;
   /** 主密钥名称。 */
-  KeyName?: string | null;
+  KeyName?: string;
   /** 实例与密钥绑定时间。 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 密钥状态。 */
-  Status?: string | null;
+  Status?: string;
   /** 密钥用途。 */
-  KeyUsage?: string | null;
+  KeyUsage?: string;
   /** 密钥来源。 */
-  KeyOrigin?: string | null;
+  KeyOrigin?: string;
   /** kms所在地域。 */
   KmsRegion?: string;
 }
@@ -385,35 +389,37 @@ declare interface ModifyNetworkAddress {
 /** 节点属性 */
 declare interface NodeProperty {
   /** 节点所在的可用区。 */
-  Zone: string | null;
+  Zone?: string;
   /** 节点名称。 */
-  NodeName: string | null;
+  NodeName?: string;
   /** 节点访问地址。 */
-  Address: string | null;
+  Address?: string;
+  /** 节点公网访问地址(IP或域名)。 */
+  WanServiceAddress?: string;
   /** 角色。 */
-  Role: string | null;
+  Role?: string;
   /** 是否为Hidden节点 */
-  Hidden: boolean | null;
+  Hidden?: boolean;
   /** 节点状态，包括：ORMAL/STARTUP/RECOVERING/STARTUP2/UNKNOWN/DOWN/ROLLBACK/REMOVED等。 */
-  Status: string | null;
+  Status?: string;
   /** 主从延迟，单位秒。 */
-  SlaveDelay: number | null;
+  SlaveDelay?: number;
   /** 节点优先级。 */
-  Priority: number | null;
+  Priority?: number;
   /** 节点投票权。 */
-  Votes: number | null;
+  Votes?: number;
   /** 节点标签。 */
-  Tags: NodeTag[] | null;
+  Tags?: NodeTag[];
   /** 副本集Id。 */
-  ReplicateSetId: string | null;
+  ReplicateSetId?: string;
 }
 
 /** 节点Tag */
 declare interface NodeTag {
   /** 节点Tag key */
-  TagKey?: string | null;
+  TagKey?: string;
   /** 节点Tag Value */
-  TagValue?: string | null;
+  TagValue?: string;
 }
 
 /** 需要终止的操作 */
@@ -469,7 +475,7 @@ declare interface ReplicaSetInfo {
 /** 副本集信息 */
 declare interface ReplicateSetInfo {
   /** 节点属性 */
-  Nodes: NodeProperty[] | null;
+  Nodes?: NodeProperty[];
 }
 
 /** 安全组信息 */
@@ -513,33 +519,33 @@ declare interface SecurityGroupBound {
 /** 实例分片详情 */
 declare interface ShardInfo {
   /** 分片已使用容量 */
-  UsedVolume: number;
+  UsedVolume?: number;
   /** 分片ID */
-  ReplicaSetId: string;
+  ReplicaSetId?: string;
   /** 分片名 */
-  ReplicaSetName: string;
+  ReplicaSetName?: string;
   /** 分片内存规格，单位为MB */
-  Memory: number;
+  Memory?: number;
   /** 分片磁盘规格，单位为MB */
-  Volume: number;
+  Volume?: number;
   /** 分片Oplog大小，单位为MB */
-  OplogSize: number;
+  OplogSize?: number;
   /** 分片从节点数 */
-  SecondaryNum: number;
+  SecondaryNum?: number;
   /** 分片物理id */
-  RealReplicaSetId: string;
+  RealReplicaSetId?: string;
 }
 
 /** 用于描述MongoDB数据库慢日志统计信息 */
 declare interface SlowLogPattern {
   /** 慢日志模式 */
-  Pattern: string;
+  Pattern?: string;
   /** 最大执行时间 */
-  MaxTime: number;
+  MaxTime?: number;
   /** 平均执行时间 */
-  AverageTime: number;
+  AverageTime?: number;
   /** 该模式慢日志条数 */
-  Total: number;
+  Total?: number;
 }
 
 /** mongodb售卖规格 */
@@ -1045,9 +1051,9 @@ declare interface DescribeDBInstanceNodePropertyRequest {
 
 declare interface DescribeDBInstanceNodePropertyResponse {
   /** Mongos节点属性。 */
-  Mongos: NodeProperty[] | null;
+  Mongos?: NodeProperty[];
   /** 副本集节点信息。 */
-  ReplicateSets: ReplicateSetInfo[];
+  ReplicateSets?: ReplicateSetInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1061,21 +1067,21 @@ declare interface DescribeDBInstanceParamTplDetailRequest {
 
 declare interface DescribeDBInstanceParamTplDetailResponse {
   /** 枚举类参数详情列表。 */
-  InstanceEnumParams?: InstanceEnumParam[] | null;
+  InstanceEnumParams?: InstanceEnumParam[];
   /** 整形参数详情列表。 */
-  InstanceIntegerParams?: InstanceIntegerParam[] | null;
+  InstanceIntegerParams?: InstanceIntegerParam[];
   /** 文本参数详情列表。 */
-  InstanceTextParams?: InstanceTextParam[] | null;
+  InstanceTextParams?: InstanceTextParam[];
   /** 多值参数详情列表。 */
-  InstanceMultiParams?: InstanceMultiParam[] | null;
+  InstanceMultiParams?: InstanceMultiParam[];
   /** 参数总个数。 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 模板适配实例版本。 */
-  MongoVersion?: string | null;
+  MongoVersion?: string;
   /** 模板适配集群类型，副本集或分片。。 */
-  ClusterType?: string | null;
+  ClusterType?: string;
   /** 参数模板名称。 */
-  TplName?: string | null;
+  TplName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1093,9 +1099,9 @@ declare interface DescribeDBInstanceParamTplRequest {
 
 declare interface DescribeDBInstanceParamTplResponse {
   /** 参数模板列表信息。 */
-  ParamTpls?: ParamTpl[] | null;
+  ParamTpls?: ParamTpl[];
   /** 参数模板总数。 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1219,7 +1225,7 @@ declare interface DescribeSlowLogsResponse {
   /** 慢日志总数 */
   Count?: number;
   /** 慢日志详情 */
-  SlowLogs?: string[] | null;
+  SlowLogs?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1702,15 +1708,15 @@ declare namespace V20180408 {
     /** 分片信息 */
     ReplicaSets?: MongodbShardInfo[];
     /** 只读实例信息 */
-    ReadonlyInstances?: MongoDBInstance[] | null;
+    ReadonlyInstances?: MongoDBInstance[];
     /** 灾备实例信息 */
-    StandbyInstances?: MongoDBInstance[] | null;
+    StandbyInstances?: MongoDBInstance[];
     /** 临时实例信息 */
-    CloneInstances?: MongoDBInstance[] | null;
+    CloneInstances?: MongoDBInstance[];
     /** 关联实例信息，对于正式实例，该字段表示它的临时实例信息；对于临时实例，则表示它的正式实例信息;如果为只读/灾备实例,则表示他的主实例信息 */
-    RelatedInstance?: MongoDBInstance | null;
+    RelatedInstance?: MongoDBInstance;
     /** 实例标签信息集合 */
-    Tags?: TagInfo[] | null;
+    Tags?: TagInfo[];
     /** 实例标记 */
     InstanceVer?: number;
     /** 实例标记 */
@@ -1748,57 +1754,57 @@ declare namespace V20180408 {
   /** mongodb售卖规格 */
   interface SpecItem {
     /** 规格信息标识 */
-    SpecCode: string;
+    SpecCode: string | null;
     /** 规格有效标志，取值：0-停止售卖，1-开放售卖 */
-    Status: number;
+    Status: number | null;
     /** 机器类型，取值：0-HIO，4-HIO10G */
-    MachineType: string;
+    MachineType: string | null;
     /** cpu核心数 */
-    Cpu: number;
+    Cpu: number | null;
     /** 内存规格，单位为MB */
-    Memory: number;
+    Memory: number | null;
     /** 默认磁盘规格，单位MB */
-    DefaultStorage: number;
+    DefaultStorage: number | null;
     /** 最大磁盘规格，单位MB */
-    MaxStorage: number;
+    MaxStorage: number | null;
     /** 最小磁盘规格，单位MB */
-    MinStorage: number;
+    MinStorage: number | null;
     /** 可承载qps信息 */
-    Qps: number;
+    Qps: number | null;
     /** 连接数限制 */
-    Conns: number;
+    Conns: number | null;
     /** 实例mongodb版本信息 */
-    MongoVersionCode: string;
+    MongoVersionCode: string | null;
     /** 实例mongodb版本号 */
-    MongoVersionValue: number;
+    MongoVersionValue: number | null;
     /** 实例mongodb版本号（短） */
-    Version: string;
+    Version: string | null;
     /** 存储引擎 */
-    EngineName: string;
+    EngineName: string | null;
     /** 集群类型，取值：1-分片集群，0-副本集集群 */
-    ClusterType: number;
+    ClusterType: number | null;
     /** 最小副本集从节点数 */
-    MinNodeNum: number;
+    MinNodeNum: number | null;
     /** 最大副本集从节点数 */
-    MaxNodeNum: number;
+    MaxNodeNum: number | null;
     /** 最小分片数 */
-    MinReplicateSetNum: number;
+    MinReplicateSetNum: number | null;
     /** 最大分片数 */
-    MaxReplicateSetNum: number;
+    MaxReplicateSetNum: number | null;
     /** 最小分片从节点数 */
-    MinReplicateSetNodeNum: number;
+    MinReplicateSetNodeNum: number | null;
     /** 最大分片从节点数 */
-    MaxReplicateSetNodeNum: number;
+    MaxReplicateSetNodeNum: number | null;
   }
 
   /** 实例规格信息 */
   interface SpecificationInfo {
     /** 地域信息 */
-    Region: string;
+    Region?: string;
     /** 可用区信息 */
-    Zone: string;
+    Zone?: string;
     /** 售卖规格信息 */
-    SpecItems: SpecItem[];
+    SpecItems?: SpecItem[];
   }
 
   /** 实例标签信息 */
@@ -1834,13 +1840,13 @@ declare namespace V20180408 {
     SecondaryNum: number;
     /** MongoDB引擎版本，值包括MONGO_3_WT 、MONGO_3_ROCKS和MONGO_36_WT */
     EngineVersion: string;
-    /** 实例类型，GIO：高IO版；TGIO：高IO万兆 */
+    /** 实例类型，HIO10G：高IO万兆。 */
     Machine: string;
     /** 实例数量，默认值为1, 最小值1，最大值为10 */
     GoodsNum: number;
     /** 可用区信息，格式如：ap-guangzhou-2 */
     Zone: string;
-    /** 实例角色，支持值包括：MASTER-表示主实例，DR-表示灾备实例，RO-表示只读实例 */
+    /** 实例角色，默认传MASTER即可 */
     InstanceRole: string;
     /** 实例类型，REPLSET-副本集，SHARD-分片集群 */
     InstanceType: string;
@@ -1854,6 +1860,10 @@ declare namespace V20180408 {
     ProjectId?: number;
     /** 安全组参数 */
     SecurityGroup?: string[];
+    /** 私有网络ID，如果不传则默认选择基础网络 */
+    UniqVpcId?: string;
+    /** 私有网络下的子网ID，如果设置了 VpcId，则 SubnetId必填 */
+    UniqSubnetId?: string;
   }
 
   interface CreateDBInstanceHourResponse {
@@ -1912,9 +1922,9 @@ declare namespace V20180408 {
 
   interface DescribeClientConnectionsResponse {
     /** 客户端连接信息，包括客户端IP和对应IP的连接数量 */
-    Clients?: ClientConnection[] | null;
+    Clients?: ClientConnection[];
     /** 连接数总结 */
-    TotalCount?: number | null;
+    TotalCount?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
