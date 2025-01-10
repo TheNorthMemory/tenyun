@@ -46,12 +46,14 @@ declare interface BGPStatus {
   TencentBackupAddressBgpState?: string;
 }
 
-/** bgp参数，包括Asn，AuthKey */
+/** bgp参数，包括CloudAsn，Asn，AuthKey */
 declare interface BgpPeer {
+  /** 腾讯侧BGP ASN */
+  CloudAsn?: string;
   /** 用户侧BGP ASN */
-  Asn?: number | null;
+  Asn?: number;
   /** 用户侧BGP密钥 */
-  AuthKey?: string | null;
+  AuthKey?: string;
 }
 
 /** 敏捷上云服务信息 */
@@ -143,53 +145,53 @@ declare interface DirectConnect {
   /** 用户侧物理专线接入端口类型,取值：100Base-T：百兆电口,1000Base-T（默认值）：千兆电口,1000Base-LX：千兆单模光口（10千米）,10GBase-T：万兆电口10GBase-LR：万兆单模光口（10千米），默认值，千兆单模光口（10千米） */
   PortType?: string;
   /** 运营商或者服务商为物理专线提供的电路编码。 */
-  CircuitCode?: string | null;
+  CircuitCode?: string;
   /** 冗余物理专线的ID。 */
   RedundantDirectConnectId?: string;
   /** 物理专线调试VLAN。默认开启VLAN，自动分配VLAN。 */
-  Vlan?: number | null;
+  Vlan?: number;
   /** 物理专线调试腾讯侧互联IP。 */
-  TencentAddress?: string | null;
+  TencentAddress?: string;
   /** 物理专线调试用户侧互联IP。 */
-  CustomerAddress?: string | null;
+  CustomerAddress?: string;
   /** 物理专线申请者姓名。默认从账户体系获取。 */
-  CustomerName?: string | null;
+  CustomerName?: string;
   /** 物理专线申请者联系邮箱。默认从账户体系获取。 */
-  CustomerContactMail?: string | null;
+  CustomerContactMail?: string;
   /** 物理专线申请者联系号码。默认从账户体系获取。 */
-  CustomerContactNumber?: string | null;
+  CustomerContactNumber?: string;
   /** 物理专线的过期时间。 */
-  ExpiredTime?: string | null;
+  ExpiredTime?: string;
   /** 物理专线计费类型。 NON_RECURRING_CHARGE：一次性接入费用；PREPAID_BY_YEAR：按年预付费。 */
-  ChargeType?: string | null;
+  ChargeType?: string;
   /** 报障联系人。 */
-  FaultReportContactPerson?: string | null;
+  FaultReportContactPerson?: string;
   /** 报障联系电话。 */
-  FaultReportContactNumber?: string | null;
+  FaultReportContactNumber?: string;
   /** 标签键值对 */
-  TagSet?: Tag[] | null;
+  TagSet?: Tag[];
   /** 物理专线的接入点类型。 */
   AccessPointType?: string;
   /** IDC所在城市 */
-  IdcCity?: string | null;
+  IdcCity?: string;
   /** 计费状态 */
-  ChargeState?: string | null;
+  ChargeState?: string;
   /** 物理专线开通时间 */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 物理专线是否已签署用户协议 */
-  SignLaw?: boolean | null;
+  SignLaw?: boolean;
   /** 物理专线是否为LocalZone */
-  LocalZone?: boolean | null;
+  LocalZone?: boolean;
   /** 该物理专线下vlan 0的专用通道数量 */
-  VlanZeroDirectConnectTunnelCount?: number | null;
+  VlanZeroDirectConnectTunnelCount?: number;
   /** 该物理专线下非vlan 0的专用通道数量 */
-  OtherVlanDirectConnectTunnelCount?: number | null;
+  OtherVlanDirectConnectTunnelCount?: number;
   /** 物理专线最小带宽 */
-  MinBandwidth?: number | null;
+  MinBandwidth?: number;
   /** 建设模式 */
-  Construct?: number | null;
+  Construct?: number;
   /** 物理专线的接入点名称 */
-  AccessPointName?: string | null;
+  AccessPointName?: string;
 }
 
 /** 专用通道信息列表 */
@@ -214,7 +216,7 @@ declare interface DirectConnectTunnel {
   DirectConnectGatewayId?: string;
   /** BGP ：BGP路由 STATIC：静态 默认为 BGP 路由 */
   RouteType?: string;
-  /** 用户侧BGP，Asn，AuthKey */
+  /** 用户侧BGP，包括： CloudAsn，Asn，AuthKey */
   BgpPeer?: BgpPeer;
   /** 用户侧网段地址 */
   RouteFilterPrefixes?: RouteFilterPrefix[];
@@ -233,29 +235,29 @@ declare interface DirectConnectTunnel {
   /** 专用通道标签值 */
   TagSet?: Tag[];
   /** 关联的网络自定义探测ID */
-  NetDetectId?: string | null;
+  NetDetectId?: string;
   /** BGP community开关 */
-  EnableBGPCommunity?: boolean | null;
+  EnableBGPCommunity?: boolean;
   /** 是否为Nat通道 */
-  NatType?: number | null;
+  NatType?: number;
   /** VPC地域简码，如gz、cd */
-  VpcRegion?: string | null;
+  VpcRegion?: string;
   /** 是否开启BFD */
-  BfdEnable?: number | null;
+  BfdEnable?: number;
   /** 专用通道接入点类型 */
-  AccessPointType?: string | null;
+  AccessPointType?: string;
   /** 专线网关名称 */
-  DirectConnectGatewayName?: string | null;
+  DirectConnectGatewayName?: string;
   /** VPC名称 */
-  VpcName?: string | null;
+  VpcName?: string;
   /** TencentBackupAddress，腾讯侧备用互联 IP */
-  TencentBackupAddress?: string | null;
+  TencentBackupAddress?: string;
   /** 专用通道关联的物理专线是否签署了用户协议 */
-  SignLaw?: boolean | null;
+  SignLaw?: boolean;
   /** 高速上云服务ID */
-  CloudAttachId?: string | null;
+  CloudAttachId?: string;
   /** 是否共享通道 */
-  ShareOrNot?: number | null;
+  ShareOrNot?: number;
 }
 
 /** 专用通道扩展信息 */
@@ -327,19 +329,19 @@ declare interface DirectConnectTunnelExtra {
   /** BGP状态 */
   BgpStatus?: BGPStatus;
   /** 是否开启IPv6 */
-  IPv6Enable?: number | null;
+  IPv6Enable?: number;
   /** 腾讯侧互联IPv6地址 */
-  TencentIPv6Address?: string | null;
+  TencentIPv6Address?: string;
   /** 腾讯侧备用互联IPv6地址 */
-  TencentBackupIPv6Address?: string | null;
+  TencentBackupIPv6Address?: string;
   /** BGPv6状态 */
-  BgpIPv6Status?: BGPStatus | null;
+  BgpIPv6Status?: BGPStatus;
   /** 用户侧互联IPv6地址 */
-  CustomerIPv6Address?: string | null;
+  CustomerIPv6Address?: string;
   /** 专用通道是否支持巨帧。1 支持，0 不支持 */
-  JumboEnable?: number | null;
+  JumboEnable?: number;
   /** 专用通道是否支持高精度BFD。1支持，0不支持 */
-  HighPrecisionBFDEnable?: number | null;
+  HighPrecisionBFDEnable?: number;
 }
 
 /** 专用通道路由 */
@@ -356,6 +358,10 @@ declare interface DirectConnectTunnelRoute {
   ASPath: string[];
   /** 路由下一跳IP */
   NextHop: string;
+  /** 路由更新时间 */
+  UpdateTime: string | null;
+  /** 是否配置在通道上 */
+  ApplyOnTunnelEnable: boolean;
 }
 
 /** 用于条件过滤查询 */
@@ -369,37 +375,37 @@ declare interface Filter {
 /** 互联网地址详细信息 */
 declare interface InternetAddressDetail {
   /** 互联网地址ID */
-  InstanceId: string | null;
+  InstanceId?: string;
   /** 互联网网络地址 */
-  Subnet: string | null;
+  Subnet?: string;
   /** 网络地址掩码长度 */
-  MaskLen: number | null;
+  MaskLen?: number;
   /** 0:BGP1:电信2:移动3:联通 */
-  AddrType: number | null;
+  AddrType?: number;
   /** 0:使用中1:已停用2:已退还 */
-  Status: number;
+  Status?: number;
   /** 申请时间 */
-  ApplyTime: string | null;
+  ApplyTime?: string;
   /** 停用时间 */
-  StopTime: string | null;
+  StopTime?: string;
   /** 退还时间 */
-  ReleaseTime: string | null;
+  ReleaseTime?: string;
   /** 地域信息 */
-  Region: string | null;
+  Region?: string;
   /** 用户ID */
-  AppId: number | null;
+  AppId?: number;
   /** 0:IPv4 1:IPv6 */
-  AddrProto: number | null;
+  AddrProto?: number;
   /** 释放状态的IP地址保留的天数 */
-  ReserveTime: number | null;
+  ReserveTime?: number;
 }
 
 /** 互联网公网地址统计 */
 declare interface InternetAddressStatistics {
   /** 地域 */
-  Region: string | null;
+  Region?: string;
   /** 互联网公网地址数量 */
-  SubnetNum: number | null;
+  SubnetNum?: number;
 }
 
 /** nqa配置信息 */
@@ -425,15 +431,15 @@ declare interface PortSpecification {
 /** 用户侧网段地址 */
 declare interface RouteFilterPrefix {
   /** 用户侧网段地址 */
-  Cidr?: string | null;
+  Cidr?: string;
 }
 
 /** 标签键值对 */
 declare interface Tag {
   /** 标签键 */
-  Key: string | null;
+  Key: string;
   /** 标签值 */
-  Value: string | null;
+  Value: string;
 }
 
 declare interface AcceptDirectConnectTunnelRequest {

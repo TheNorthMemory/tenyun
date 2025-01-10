@@ -21,17 +21,17 @@ declare interface ActivityInfoItem {
 /** 活动详情 */
 declare interface ActivityRecordItem {
   /** 用户uin */
-  Uin?: string | null;
+  Uin?: string;
   /** 活动id */
-  ActivityId?: number | null;
+  ActivityId?: number;
   /** 自定义状态码 */
-  Status?: number | null;
+  Status?: number;
   /** 自定义子状态码 */
-  SubStatus?: string | null;
+  SubStatus?: string;
   /** 整型子状态码 */
-  SubStatusInt?: number | null;
+  SubStatusInt?: number;
   /** 是否软删除 */
-  IsDeleted?: boolean | null;
+  IsDeleted?: boolean;
 }
 
 /** 合法域名 */
@@ -53,23 +53,23 @@ declare interface AuthDomain {
 /** 云开发新套餐详情 */
 declare interface BaasPackageInfo {
   /** DAU产品套餐ID */
-  PackageName?: string | null;
+  PackageName?: string;
   /** DAU套餐中文名称 */
-  PackageTitle?: string | null;
+  PackageTitle?: string;
   /** 套餐分组 */
-  GroupName?: string | null;
+  GroupName?: string;
   /** 套餐分组中文名 */
-  GroupTitle?: string | null;
+  GroupTitle?: string;
   /** json格式化计费标签，例如：{"pid":2, "cids":{"create": 2, "renew": 2, "modify": 2}, "productCode":"p_tcb_mp", "subProductCode":"sp_tcb_mp_cloudbase_dau"} */
-  BillTags?: string | null;
+  BillTags?: string;
   /** json格式化用户资源限制，例如：{"Qps":1000,"InvokeNum":{"TimeUnit":"m", "Unit":"万次", "MaxSize": 100},"Capacity":{"TimeUnit":"m", "Unit":"GB", "MaxSize": 100}, "Cdn":{"Flux":{"TimeUnit":"m", "Unit":"GB", "MaxSize": 100}, "BackFlux":{"TimeUnit":"m", "Unit":"GB", "MaxSize": 100}},"Scf":{"Concurrency":1000,"OutFlux":{"TimeUnit":"m", "Unit":"GB", "MaxSize": 100},"MemoryUse":{"TimeUnit":"m", "Unit":"WGBS", "MaxSize": 100000}}} */
-  ResourceLimit?: string | null;
+  ResourceLimit?: string;
   /** json格式化高级限制，例如：{"CMSEnable":false,"ProvisionedConcurrencyMem":512000, "PictureProcessing":false, "SecurityAudit":false, "RealTimePush":false, "TemplateMessageBatchPush":false, "Payment":false} */
-  AdvanceLimit?: string | null;
+  AdvanceLimit?: string;
   /** 套餐描述 */
-  PackageDescription?: string | null;
+  PackageDescription?: string;
   /** 是否对外展示 */
-  IsExternal?: boolean | null;
+  IsExternal?: boolean;
 }
 
 /** 网关服务信息 */
@@ -95,19 +95,19 @@ declare interface BanConfig {
 /** 代码包信息 */
 declare interface CbrPackageInfo {
   /** 代码包名称 */
-  PackageName?: string | null;
+  PackageName?: string;
   /** 代码包版本 */
-  PackageVersion?: string | null;
+  PackageVersion?: string;
 }
 
 /** 仓库信息 */
 declare interface CbrRepoInfo {
   /** 仓库名称 */
-  Repo?: string | null;
+  Repo?: string;
   /** 仓库平台 */
-  RepoType?: string | null;
+  RepoType?: string;
   /** 仓库语言 */
-  RepoLanguage?: string | null;
+  RepoLanguage?: string;
   /** 分支名称 */
   Branch?: string | null;
 }
@@ -115,9 +115,9 @@ declare interface CbrRepoInfo {
 /** cloudrun安全特性能力 */
 declare interface CloudBaseCapabilities {
   /** 启用安全能力项列表 */
-  Add?: string[] | null;
+  Add?: string[];
   /** 禁用安全能力向列表 */
-  Drop?: string[] | null;
+  Drop?: string[];
 }
 
 /** 代码仓库里 Repo的信息描述 */
@@ -131,27 +131,27 @@ declare interface CloudBaseCodeRepoDetail {
 /** 代码仓库 repo的名字 */
 declare interface CloudBaseCodeRepoName {
   /** repo的名字 */
-  Name?: string | null;
+  Name?: string;
   /** repo的完整全名 */
-  FullName?: string | null;
+  FullName?: string;
 }
 
 /** es信息 */
 declare interface CloudBaseEsInfo {
   /** es的id */
-  Id?: number | null;
+  Id?: number;
   /** secret名字 */
-  SecretName?: string | null;
+  SecretName?: string;
   /** ip地址 */
-  Ip?: string | null;
+  Ip?: string;
   /** 端口 */
-  Port?: number | null;
+  Port?: number;
   /** 索引 */
-  Index?: string | null;
+  Index?: string;
   /** 用户名 */
-  Account?: string | null;
+  Account?: string;
   /** 密码 */
-  Password?: string | null;
+  Password?: string;
 }
 
 /** 云开发项目版本 */
@@ -159,71 +159,71 @@ declare interface CloudBaseProjectVersion {
   /** 项目名 */
   Name?: string;
   /** SAM json */
-  Sam?: string | null;
+  Sam?: string;
   /** 来源类型 */
-  Source?: CodeSource | null;
+  Source?: CodeSource;
   /** 创建时间, unix时间戳 */
-  CreateTime?: number | null;
+  CreateTime?: number;
   /** 更新时间 ,unix时间戳 */
-  UpdateTime?: number | null;
+  UpdateTime?: number;
   /** 项目状态, 枚举值: "creatingEnv"-创建环境中	"createEnvFail"-创建环境失败	"building"-构建中	"buildFail"-构建失败	"deploying"-部署中 "deployFail"-部署失败 "success"-部署成功 */
-  Status?: string | null;
+  Status?: string;
   /** 环境变量 */
-  Parameters?: KVPair[] | null;
+  Parameters?: KVPair[];
   /** 项目类型, 枚举值:"framework-oneclick" 控制台一键部署"framework-local-oneclick" cli本地一键部署"qci-extension-cicd" 内网coding ci cd */
-  Type?: string | null;
+  Type?: string;
   /** ci的id */
-  CIId?: string | null;
+  CIId?: string;
   /** cd的id */
-  CDId?: string | null;
+  CDId?: string;
   /** 环境id */
-  EnvId?: string | null;
+  EnvId?: string;
   /** 版本号 */
-  VersionNum?: number | null;
+  VersionNum?: number;
   /** 错误原因 */
-  FailReason?: string | null;
+  FailReason?: string;
   /** rc.json内容 */
-  RcJson?: string | null;
+  RcJson?: string;
   /** 插件配置内容 */
-  AddonConfig?: string | null;
+  AddonConfig?: string;
   /** 标签 */
-  Tags?: string[] | null;
+  Tags?: string[];
   /** 网络配置 */
-  NetworkConfig?: string | null;
+  NetworkConfig?: string;
   /** 扩展id */
-  ExtensionId?: string | null;
+  ExtensionId?: string;
   /** 错误类型 */
-  FailType?: string | null;
+  FailType?: string;
   /** 私有仓库地址 */
-  RepoUrl?: string | null;
+  RepoUrl?: string;
   /** 是否私有仓库代码变更触发自动部署 */
-  AutoDeployOnCodeChange?: boolean | null;
+  AutoDeployOnCodeChange?: boolean;
   /** ci部署进度（%） */
-  BuildPercent?: number | null;
+  BuildPercent?: number;
   /** Uin */
-  Uin?: string | null;
+  Uin?: string;
   /** BuildFinishTime */
-  BuildFinishTime?: string | null;
+  BuildFinishTime?: string;
   /** DeployFinishTime */
-  DeployFinishTime?: string | null;
+  DeployFinishTime?: string;
   /** BuildId */
-  BuildId?: string | null;
+  BuildId?: string;
   /** SourceUrl */
-  SourceUrl?: string | null;
+  SourceUrl?: string;
   /** FailReasonShort */
-  FailReasonShort?: string | null;
+  FailReasonShort?: string;
   /** FirstInitRepo */
-  FirstInitRepo?: string | null;
+  FirstInitRepo?: string;
 }
 
 /** emptydir 数据卷详细信息 */
 declare interface CloudBaseRunEmptyDirVolumeSource {
   /** 启用emptydir数据卷 */
-  EnableEmptyDirVolume?: boolean;
+  EnableEmptyDirVolume?: boolean | null;
   /** "","Memory","HugePages" */
-  Medium?: string;
+  Medium?: string | null;
   /** emptydir数据卷大小 */
-  SizeLimit?: string;
+  SizeLimit?: string | null;
 }
 
 /** 独立网关云托管服务配置信息 */
@@ -285,25 +285,25 @@ declare interface CloudBaseRunImageSecretInfo {
 /** KV参数的优先级 */
 declare interface CloudBaseRunKVPriority {
   /** 参数的Key */
-  Key: string | null;
+  Key?: string;
   /** 参数的Value */
-  Value: string | null;
+  Value?: string;
   /** 优先级 */
-  Priority: number | null;
+  Priority?: number;
 }
 
 /** nfs挂载资源 */
 declare interface CloudBaseRunNfsVolumeSource {
   /** NFS挂载Server */
-  Server?: string | null;
+  Server?: string;
   /** Server路径 */
-  Path?: string | null;
+  Path?: string;
   /** 是否只读 */
-  ReadOnly?: boolean | null;
+  ReadOnly?: boolean;
   /** secret名称 */
-  SecretName?: string | null;
+  SecretName?: string;
   /** 临时目录 */
-  EnableEmptyDirVolume?: boolean | null;
+  EnableEmptyDirVolume?: boolean;
 }
 
 /** 版本的列表 */
@@ -311,43 +311,45 @@ declare interface CloudBaseRunServerVersionItem {
   /** 版本名称 */
   VersionName?: string;
   /** 状态 */
-  Status?: string | null;
+  Status?: string;
   /** 流量占比 */
   FlowRatio?: number;
   /** 创建时间 */
-  CreatedTime?: string | null;
+  CreatedTime?: string;
   /** 更新时间 */
-  UpdatedTime?: string | null;
+  UpdatedTime?: string;
   /** 构建ID */
-  BuildId?: number | null;
+  BuildId?: number;
   /** 构建方式 */
-  UploadType?: string | null;
+  UploadType?: string;
   /** 备注 */
-  Remark?: string | null;
+  Remark?: string;
   /** url中的参数路径 */
-  UrlParam?: ObjectKV | null;
+  UrlParam?: ObjectKV;
   /** 优先级（数值越小，优先级越高） */
-  Priority?: number | null;
+  Priority?: number;
   /** 是否是默认兜底版本 */
-  IsDefaultPriority?: boolean | null;
+  IsDefaultPriority?: boolean;
   /** KV Params */
   FlowParams?: CloudBaseRunKVPriority[] | null;
   /** 最小副本数 */
-  MinReplicas?: number | null;
+  MinReplicas?: number;
   /** 最大副本数 */
-  MaxReplicas?: number | null;
+  MaxReplicas?: number;
   /** 操作记录id */
-  RunId?: string | null;
+  RunId?: string;
   /** 进度 */
-  Percent?: number | null;
+  Percent?: number;
   /** 当前副本数 */
-  CurrentReplicas?: number | null;
+  CurrentReplicas?: number;
   /** Monolithic，Microservice */
-  Architecture?: string | null;
+  Architecture?: string;
 }
 
 /** 主机路径挂载参数 */
 declare interface CloudBaseRunServiceVolumeHostPath {
+  /** 主机路径 */
+  Path?: string | null;
 }
 
 /** 对标 EKS VolumeMount */
@@ -400,6 +402,20 @@ declare interface CloudBaseRunVersionFlowItem {
   IsDefaultPriority?: boolean | null;
 }
 
+/** pod信息 */
+declare interface CloudBaseRunVersionPod {
+  /** webshell链接 */
+  Webshell?: string;
+  /** pod name */
+  PodId?: string;
+  /** pod ip */
+  PodIp?: string | null;
+  /** 状态 */
+  Status?: string;
+  /** 创建时间 */
+  CreateTime?: string | null;
+}
+
 /** cfs挂载点 */
 declare interface CloudBaseRunVolumeMount {
   /** 资源名 */
@@ -427,19 +443,19 @@ declare interface CloudBaseRunVpcInfo {
 /** 子网信息 */
 declare interface CloudBaseRunVpcSubnet {
   /** 子网id */
-  Id: string | null;
+  Id?: string | null;
   /** 子网的ipv4 */
-  Cidr: string | null;
+  Cidr?: string | null;
   /** 可用区 */
-  Zone: string | null;
+  Zone?: string | null;
   /** 类型 */
-  Type: string | null;
+  Type?: string | null;
   /** subnet类型 */
-  Target: string | null;
+  Target?: string | null;
   /** 地域 */
-  Region: string | null;
+  Region?: string | null;
   /** 名字 */
-  Name: string | null;
+  Name?: string | null;
 }
 
 /** cloudrun安全特性 */
@@ -541,31 +557,31 @@ declare interface ClsInfo {
 /** 云开发项目来源 */
 declare interface CodeSource {
   /** 类型, 可能的枚举: "coding","package","package_url","github","gitlab","gitee","rawcode" */
-  Type?: string | null;
+  Type?: string;
   /** 下载链接 */
-  Url?: string | null;
+  Url?: string;
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 工作目录 */
-  WorkDir?: string | null;
+  WorkDir?: string;
   /** code包名, type为coding的时候需要填写 */
-  CodingPackageName?: string | null;
+  CodingPackageName?: string;
   /** coding版本名, type为coding的时候需要填写 */
-  CodingPackageVersion?: string | null;
+  CodingPackageVersion?: string;
   /** 源码 */
-  RawCode?: string | null;
+  RawCode?: string;
   /** 代码分支 */
-  Branch?: string | null;
+  Branch?: string;
   /** coding项目ID，type为coding时需要填写 */
-  ProjectId?: number | null;
+  ProjectId?: number;
   /** coding项目 */
-  ProjectName?: string | null;
+  ProjectName?: string;
 }
 
 /** 安全网关自定义头部 */
 declare interface CustomHeader {
   /** 请求添加头部配置 */
-  RequestToAddList?: CustomRequestToAdd[] | null;
+  RequestToAddList?: CustomRequestToAdd[];
 }
 
 /** 安全网关自定义日志配置 */
@@ -587,23 +603,23 @@ declare interface CustomLogConfig {
 /** 安全网关请求自定义头部 */
 declare interface CustomRequestToAdd {
   /** Header名称 */
-  Key?: string | null;
+  Key?: string;
   /** Header值 */
-  Value?: string | null;
+  Value?: string;
   /** Header类型 */
-  AppendAction?: string | null;
+  AppendAction?: string;
 }
 
 /** 数据库资源信息 */
 declare interface DatabasesInfo {
   /** 数据库唯一标识 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 状态。包含以下取值：INITIALIZING：资源初始化中RUNNING：运行中，可正常使用的状态UNUSABLE：禁用，不可用OVERDUE：资源过期 */
-  Status: string;
+  Status?: string;
   /** 所属地域。当前支持ap-shanghai */
-  Region: string;
+  Region?: string;
   /** 更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string;
 }
 
 /** 终端用户信息 */
@@ -661,15 +677,15 @@ declare interface EnvBillingInfoItem {
   /** true表示从未升级过付费版。 */
   IsAlwaysFree?: boolean;
   /** 付费渠道。 miniapp：小程序 qcloud：腾讯云 */
-  PaymentChannel?: string | null;
+  PaymentChannel?: string;
   /** 最新的订单信息 */
-  OrderInfo?: OrderInfo | null;
+  OrderInfo?: OrderInfo;
   /** 免费配额信息。 */
-  FreeQuota?: string | null;
+  FreeQuota?: string;
   /** 是否开启 `超过套餐额度部分转按量付费` */
-  EnableOverrun?: boolean | null;
+  EnableOverrun?: boolean;
   /** 环境套餐类型 */
-  ExtPackageType?: string | null;
+  ExtPackageType?: string;
   /** 是否付费期环境，可取值：yes/no。 */
   EnvCharged?: string;
   /** 是否已激活，可取值：yes/no。 */
@@ -697,37 +713,37 @@ declare interface EnvInfo {
   /** 函数列表 */
   Functions?: FunctionInfo[];
   /** tcb产品套餐ID，参考DescribePackages接口的返回值。 */
-  PackageId?: string | null;
+  PackageId?: string;
   /** 套餐中文名称，参考DescribePackages接口的返回值。 */
-  PackageName?: string | null;
+  PackageName?: string;
   /** 云日志服务列表 */
-  LogServices?: LogServiceInfo[] | null;
+  LogServices?: LogServiceInfo[];
   /** 静态资源信息 */
-  StaticStorages?: StaticStorageInfo[] | null;
+  StaticStorages?: StaticStorageInfo[];
   /** 是否到期自动降为免费版 */
-  IsAutoDegrade?: boolean | null;
+  IsAutoDegrade?: boolean;
   /** 环境渠道 */
-  EnvChannel?: string | null;
+  EnvChannel?: string;
   /** 支付方式。包含以下取值： prepayment：预付费 postpaid：后付费 */
-  PayMode?: string | null;
+  PayMode?: string;
   /** 是否为默认环境 */
-  IsDefault?: boolean | null;
+  IsDefault?: boolean;
   /** 环境所属地域 */
-  Region?: string | null;
+  Region?: string;
   /** 环境标签列表 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
   /** 自定义日志服务 */
-  CustomLogServices?: ClsInfo[] | null;
+  CustomLogServices?: ClsInfo[];
   /** 环境类型：baas, run, hoting, weda */
-  EnvType?: string | null;
+  EnvType?: string;
   /** 是否是dau新套餐 */
-  IsDauPackage?: boolean | null;
+  IsDauPackage?: boolean;
   /** 套餐类型:空\baas\tcbr */
-  PackageType?: string | null;
+  PackageType?: string;
   /** 架构类型 */
-  ArchitectureType?: string | null;
+  ArchitectureType?: string;
   /** 回收标志，默认为空 */
-  Recycle?: string | null;
+  Recycle?: string;
 }
 
 /** 扩展文件 */
@@ -761,17 +777,17 @@ declare interface FreequotaInfo {
   /** 指标单位 */
   MetricUnit?: string;
   /** 免费量抵扣周期sum-month:以月为单位抵扣sum-day:以天为单位抵扣totalize:总容量抵扣 */
-  DeductType?: string | null;
+  DeductType?: string;
   /** 免费量类型basic:通用量抵扣 */
-  FreeQuotaType?: string | null;
+  FreeQuotaType?: string;
 }
 
 /** 安全网关版本路由信息限额配置 */
 declare interface FrequencyLimitConfig {
   /** 限额对象 "ConnectionsLimit" 或 "QPSLimit" */
-  LimitObject?: string | null;
+  LimitObject?: string;
   /** 限额配置 */
-  LimitConfig?: string | null;
+  LimitConfig?: string;
 }
 
 /** 函数的信息 */
@@ -787,55 +803,55 @@ declare interface GatewayItem {
   /** 用户uin */
   Uin?: string;
   /** 用户appid */
-  AppId?: number | null;
+  AppId?: number;
   /** WxAppId */
-  WxAppId?: string | null;
+  WxAppId?: string;
   /** 环境id */
-  EnvId?: string | null;
+  EnvId?: string;
   /** Gateway唯一id */
-  GatewayId?: string | null;
+  GatewayId?: string;
   /** Gateway名称 */
-  GatewayName?: string | null;
+  GatewayName?: string;
   /** Gateway类型 */
-  GatewayType?: string | null;
+  GatewayType?: string;
   /** Gateway描述 */
-  GatewayDesc?: string | null;
+  GatewayDesc?: string;
   /** 套餐版本 */
-  PackageVersion?: string | null;
+  PackageVersion?: string;
   /** 套餐唯一id */
-  PackageId?: number | null;
+  PackageId?: number;
   /** vpc唯一id */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 子网id */
-  SubnetIds?: string[] | null;
+  SubnetIds?: string[];
   /** 网关状态 */
-  Status?: string | null;
+  Status?: string;
   /** l5地址 */
-  L5Addr?: string | null;
+  L5Addr?: string;
   /** 地域 */
-  Region?: string | null;
+  Region?: string;
   /** 是否可以续费 */
-  CanRenew?: boolean | null;
+  CanRenew?: boolean;
   /** 自动续费标志 */
-  AutoRenewFlag?: number | null;
+  AutoRenewFlag?: number;
   /** 隔离时间 */
-  IsolateTime?: string | null;
+  IsolateTime?: string;
   /** 到期时间 */
-  ExpireTime?: string | null;
+  ExpireTime?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 变更时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 是否可以降配 */
-  CanDowngrade?: boolean | null;
+  CanDowngrade?: boolean;
   /** 允许未登录访问 */
-  AllowUncertified?: number | null;
+  AllowUncertified?: number;
   /** 网关版本限额 */
-  VersionNumLimit?: number | null;
+  VersionNumLimit?: number;
   /** Donut接入ID */
-  LongAccessId?: string | null;
+  LongAccessId?: string;
   /** Donut接入域名 */
-  AccessDomain?: string | null;
+  AccessDomain?: string;
 }
 
 /** 网关版本详情 */
@@ -917,7 +933,7 @@ declare interface LogServiceInfo {
   /** cls日志所属地域 */
   Region?: string;
   /** topic保存时长 默认7天 */
-  Period?: number | null;
+  Period?: number;
 }
 
 /** 终端用户登录新增统计 */
@@ -943,17 +959,17 @@ declare interface ObjectKV {
 /** 一键部署步骤信息 */
 declare interface OneClickTaskStepInfo {
   /** 未启动："todo"运行中："running"失败："failed"成功结束："finished" */
-  Status: string;
+  Status?: string;
   /** 开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 结束时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 耗时：秒 */
-  CostTime: number;
+  CostTime?: number;
   /** 失败原因 */
-  FailReason: string;
+  FailReason?: string;
   /** 步骤名 */
-  Name: string;
+  Name?: string;
 }
 
 /** 订单信息 */
@@ -973,11 +989,11 @@ declare interface OrderInfo {
   /** 付费模式.prepayment 预付费postpaid 后付费 */
   PayMode?: string;
   /** 订单绑定的扩展ID */
-  ExtensionId?: string | null;
+  ExtensionId?: string;
   /** 资源初始化结果(仅当ExtensionId不为空时有效): successful(初始化成功), failed(初始化失败), doing(初始化进行中), init(准备初始化) */
-  ResourceReady?: string | null;
+  ResourceReady?: string;
   /** 安装标记。建议使用方统一转大小写之后再判断。QuickStart：快速启动来源Activity：活动来源 */
-  Flag?: string | null;
+  Flag?: string;
   /** 下单时的参数 */
   ReqBody?: string;
 }
@@ -985,43 +1001,43 @@ declare interface OrderInfo {
 /** 后付费免费额度 */
 declare interface PackageFreeQuotaInfo {
   /** 资源类型COSCDNFLEXDBSCF */
-  ResourceType?: string | null;
+  ResourceType?: string;
   /** 资源指标名称 */
-  ResourceMetric?: string | null;
+  ResourceMetric?: string;
   /** 资源指标免费量 */
-  FreeQuota?: number | null;
+  FreeQuota?: number;
   /** 指标单位 */
-  MetricUnit?: string | null;
+  MetricUnit?: string;
   /** 免费量抵扣周期sum-month:以月为单位抵扣sum-day:以天为单位抵扣totalize:总容量抵扣 */
-  DeductType?: string | null;
+  DeductType?: string;
   /** 免费量类型basic:通用量抵扣 */
-  FreeQuotaType?: string | null;
+  FreeQuotaType?: string;
 }
 
 /** 终端用户平台统计信息 */
 declare interface PlatformStatistic {
   /** 终端用户从属平台 */
-  Platform?: string | null;
+  Platform?: string;
   /** 平台终端用户数 */
-  Count?: number | null;
+  Count?: number;
   /** 更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
 }
 
 /** 后付费计费详情 */
 declare interface PostPaidEnvDeductInfo {
   /** 资源方 */
-  ResourceType: string | null;
+  ResourceType?: string;
   /** 指标名 */
-  MetricName: string | null;
+  MetricName?: string;
   /** 按量计费详情 */
-  ResQuota: number | null;
+  ResQuota?: number;
   /** 资源包抵扣详情 */
-  PkgQuota: number | null;
+  PkgQuota?: number;
   /** 免费额度抵扣详情 */
-  FreeQuota: number | null;
+  FreeQuota?: number;
   /** 环境id */
-  EnvId: string | null;
+  EnvId?: string;
 }
 
 /** 按量付费免费配额信息 */
@@ -1041,27 +1057,27 @@ declare interface PostpayEnvQuota {
 /** 短信免费量 */
 declare interface SmsFreeQuota {
   /** 免费量总条数 */
-  FreeQuota?: number | null;
+  FreeQuota?: number;
   /** 共计已使用总条数 */
-  TotalUsedQuota?: number | null;
+  TotalUsedQuota?: number;
   /** 免费周期起点，0000-00-00 00:00:00 形式 */
-  CycleStart?: string | null;
+  CycleStart?: string;
   /** 免费周期终点，0000-00-00 00:00:00 形式 */
-  CycleEnd?: string | null;
+  CycleEnd?: string;
   /** 今天已使用总条数 */
-  TodayUsedQuota?: number | null;
+  TodayUsedQuota?: number;
 }
 
 /** 1分钱计费详情 */
 declare interface SpecialCostItem {
   /** 上报日期 */
-  ReportDate?: string | null;
+  ReportDate?: string;
   /** 腾讯云uin */
-  Uin?: string | null;
+  Uin?: string;
   /** 资源id:环境id */
-  EnvId?: string | null;
+  EnvId?: string;
   /** 上报任务状态 */
-  Status?: string | null;
+  Status?: string;
 }
 
 /** 独立网关信息 */
@@ -1105,15 +1121,15 @@ declare interface StandaloneGatewayPackageInfo {
 /** 静态CDN资源信息 */
 declare interface StaticStorageInfo {
   /** 静态CDN域名 */
-  StaticDomain?: string | null;
+  StaticDomain?: string;
   /** 静态CDN默认文件夹，当前为根目录 */
-  DefaultDirName?: string | null;
+  DefaultDirName?: string;
   /** 资源状态(process/online/offline/init) */
-  Status?: string | null;
+  Status?: string;
   /** cos所属区域 */
-  Region?: string | null;
+  Region?: string;
   /** bucket信息 */
-  Bucket?: string | null;
+  Bucket?: string;
 }
 
 /** StorageInfo 资源信息 */
@@ -1175,27 +1191,27 @@ declare interface WxGatewayRountItem {
   /** 安全网关创建时间 */
   GatewayRouteCreateTime?: string;
   /** 安全网关路由限制 */
-  FrequencyLimitConfig?: FrequencyLimitConfig[] | null;
+  FrequencyLimitConfig?: FrequencyLimitConfig[];
   /** ip代表绑定后端ip。cbr代表云托管服务 */
-  GatewayRouteServerType?: string | null;
+  GatewayRouteServerType?: string;
   /** 服务名 */
-  GatewayRouteServerName?: string | null;
+  GatewayRouteServerName?: string;
   /** ip */
-  GatewayRewriteHost?: string | null;
+  GatewayRewriteHost?: string;
   /** 网关版本 */
-  GatewayVersion?: string | null;
+  GatewayVersion?: string;
   /** 请求路径 */
-  GatewayRoutePath?: string | null;
+  GatewayRoutePath?: string;
   /** 请求模式 */
-  GatewayRouteMethod?: string | null;
+  GatewayRouteMethod?: string;
   /** 4层端口 */
-  GatewayRoutePort?: number | null;
+  GatewayRoutePort?: number;
   /** 路由环境ID */
-  GatewayRouteEnvId?: string | null;
+  GatewayRouteEnvId?: string;
   /** 路径匹配类型，支持prefix(前缀匹配)，regex(正则匹配)， 默认prefix */
-  GatewayRoutePathMatchType?: string | null;
+  GatewayRoutePathMatchType?: string;
   /** 安全网关自定义头部 */
-  CustomHeader?: CustomHeader | null;
+  CustomHeader?: CustomHeader;
 }
 
 declare interface BindEnvGatewayRequest {
@@ -1265,7 +1281,7 @@ declare interface CreateAndDeployCloudBaseProjectRequest {
 
 declare interface CreateAndDeployCloudBaseProjectResponse {
   /** 环境Id */
-  EnvId?: string | null;
+  EnvId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1595,7 +1611,7 @@ declare interface DeleteGatewayVersionRequest {
   IsDeleteImage?: boolean;
   /** 是否强制删除 */
   IsForce?: boolean;
-  /** 操作记录 */
+  /** 操作者记录 */
   OperatorRemark?: string;
 }
 
@@ -1829,9 +1845,9 @@ declare interface DescribeCloudBaseProjectLatestVersionListRequest {
 
 declare interface DescribeCloudBaseProjectLatestVersionListResponse {
   /** 项目列表 */
-  ProjectList?: CloudBaseProjectVersion[] | null;
+  ProjectList?: CloudBaseProjectVersion[];
   /** 总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1853,9 +1869,9 @@ declare interface DescribeCloudBaseProjectVersionListRequest {
 
 declare interface DescribeCloudBaseProjectVersionListResponse {
   /** 版本列表 */
-  ProjectVersions?: CloudBaseProjectVersion[] | null;
+  ProjectVersions?: CloudBaseProjectVersion[];
   /** 总个数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1931,9 +1947,9 @@ declare interface DescribeCloudBaseRunOperationTypesRequest {
 
 declare interface DescribeCloudBaseRunOperationTypesResponse {
   /** 操作类型 */
-  Action: string[] | null;
+  Action?: string[] | null;
   /** 服务名列表 */
-  ServerName: string[] | null;
+  ServerName?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1956,6 +1972,14 @@ declare interface DescribeCloudBaseRunPodListRequest {
 }
 
 declare interface DescribeCloudBaseRunPodListResponse {
+  /** 偏移量 */
+  Offset?: number;
+  /** 分页大小 */
+  Limit?: number;
+  /** 总数 */
+  TotalCount?: number;
+  /** 容器列表 */
+  PodList?: CloudBaseRunVersionPod[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2775,9 +2799,9 @@ declare interface DescribeWxGatewayRoutesRequest {
 
 declare interface DescribeWxGatewayRoutesResponse {
   /** 返回的服务个数 */
-  TotalCount: number | null;
+  TotalCount?: number;
   /** 返回的服务列表 */
-  WxGatewayRouteSet: WxGatewayRountItem[] | null;
+  WxGatewayRouteSet?: WxGatewayRountItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2797,9 +2821,9 @@ declare interface DescribeWxGatewaysRequest {
 
 declare interface DescribeWxGatewaysResponse {
   /** 返回的服务列表 */
-  Gateways?: GatewayItem[] | null;
+  Gateways?: GatewayItem[];
   /** 网关总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3289,7 +3313,7 @@ declare interface Tcb {
   DescribeCloudBaseRunOneClickTaskExternal(data: DescribeCloudBaseRunOneClickTaskExternalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunOneClickTaskExternalResponse>;
   /** 查询操作类型接口 {@link DescribeCloudBaseRunOperationTypesRequest} {@link DescribeCloudBaseRunOperationTypesResponse} */
   DescribeCloudBaseRunOperationTypes(data: DescribeCloudBaseRunOperationTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunOperationTypesResponse>;
-  /** 查询云应用服务版本容器列表 {@link DescribeCloudBaseRunPodListRequest} {@link DescribeCloudBaseRunPodListResponse} */
+  /** 查询云托管服务版本容器列表 {@link DescribeCloudBaseRunPodListRequest} {@link DescribeCloudBaseRunPodListResponse} */
   DescribeCloudBaseRunPodList(data: DescribeCloudBaseRunPodListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunPodListResponse>;
   /** 查看容器托管的资源状态 {@link DescribeCloudBaseRunResourceRequest} {@link DescribeCloudBaseRunResourceResponse} */
   DescribeCloudBaseRunResource(data: DescribeCloudBaseRunResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunResourceResponse>;

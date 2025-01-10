@@ -935,7 +935,7 @@ declare interface AddRealServersRequest {
 
 declare interface AddRealServersResponse {
   /** 源站信息列表 */
-  RealServerSet: NewRealServer[];
+  RealServerSet?: NewRealServer[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1095,7 +1095,7 @@ declare interface CreateDomainErrorPageInfoRequest {
 
 declare interface CreateDomainErrorPageInfoResponse {
   /** 错误定制响应的配置ID */
-  ErrorPageId: string;
+  ErrorPageId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2869,7 +2869,7 @@ declare interface Gaap {
   CreateDomain(data: CreateDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainResponse>;
   /** 定制域名指定错误码的错误响应 {@link CreateDomainErrorPageInfoRequest} {@link CreateDomainErrorPageInfoResponse} */
   CreateDomainErrorPageInfo(data: CreateDomainErrorPageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainErrorPageInfoResponse>;
-  /** 创建接入段加速会话 {@link CreateFirstLinkSessionRequest} {@link CreateFirstLinkSessionResponse} */
+  /** @deprecated 创建接入段加速会话 {@link CreateFirstLinkSessionRequest} {@link CreateFirstLinkSessionResponse} */
   CreateFirstLinkSession(data: CreateFirstLinkSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFirstLinkSessionResponse>;
   /** 创建域名 {@link CreateGlobalDomainRequest} {@link CreateGlobalDomainResponse} */
   CreateGlobalDomain(data: CreateGlobalDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGlobalDomainResponse>;
@@ -2901,7 +2901,7 @@ declare interface Gaap {
   DeleteDomain(data: DeleteDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainResponse>;
   /** 删除域名的定制错误 {@link DeleteDomainErrorPageInfoRequest} {@link DeleteDomainErrorPageInfoResponse} */
   DeleteDomainErrorPageInfo(data: DeleteDomainErrorPageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainErrorPageInfoResponse>;
-  /** 删除接入段加速会话 {@link DeleteFirstLinkSessionRequest} {@link DeleteFirstLinkSessionResponse} */
+  /** @deprecated 删除接入段加速会话 {@link DeleteFirstLinkSessionRequest} {@link DeleteFirstLinkSessionResponse} */
   DeleteFirstLinkSession(data: DeleteFirstLinkSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFirstLinkSessionResponse>;
   /** 删除域名 {@link DeleteGlobalDomainRequest} {@link DeleteGlobalDomainResponse} */
   DeleteGlobalDomain(data: DeleteGlobalDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGlobalDomainResponse>;
@@ -2941,7 +2941,7 @@ declare interface Gaap {
   DescribeDomainErrorPageInfo(data: DescribeDomainErrorPageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainErrorPageInfoResponse>;
   /** 根据定制错误ID查询错误响应 {@link DescribeDomainErrorPageInfoByIdsRequest} {@link DescribeDomainErrorPageInfoByIdsResponse} */
   DescribeDomainErrorPageInfoByIds(data: DescribeDomainErrorPageInfoByIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainErrorPageInfoByIdsResponse>;
-  /** 查询接入段加速会话信息 {@link DescribeFirstLinkSessionRequest} {@link DescribeFirstLinkSessionResponse} */
+  /** @deprecated 查询接入段加速会话信息 {@link DescribeFirstLinkSessionRequest} {@link DescribeFirstLinkSessionResponse} */
   DescribeFirstLinkSession(data: DescribeFirstLinkSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirstLinkSessionResponse>;
   /** 查询域名解析列表 {@link DescribeGlobalDomainDnsRequest} {@link DescribeGlobalDomainDnsResponse} */
   DescribeGlobalDomainDns(data: DescribeGlobalDomainDnsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGlobalDomainDnsResponse>;

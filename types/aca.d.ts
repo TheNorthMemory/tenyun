@@ -644,7 +644,7 @@ declare interface SmartDrugInfoResp {
   DrugRoute?: string;
   /** 药品本位码 */
   DrugBasicCode?: string;
-  /** OCT标签 */
+  /** OTC标签 */
   OctTag?: string;
 }
 

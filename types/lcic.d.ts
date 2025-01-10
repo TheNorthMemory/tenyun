@@ -1484,7 +1484,7 @@ declare interface GetRoomEventRequest {
   SdkAppId: number;
   /** 起始页，1开始。keyword为空时有效。 */
   Page: number;
-  /** 每页个数。keyword为空时有效。一次性最多200条。 */
+  /** 每页个数。keyword为空时有效。一次性最多100条。 */
   Limit: number;
   /** 搜索事件类型。有以下事件类型:RoomStart:房间开始RoomEnd:房间结束MemberJoin:成员加入MemberQuit:成员退出RecordFinish:录制结束CameraOn: 摄像头打开CameraOff: 摄像头关闭MicOn: 麦克风打开MicOff: 麦克风关闭ScreenOn: 屏幕共享打开ScreenOff: 屏幕共享关闭VisibleOn: 页面可见VisibleOff: 页面不可见 */
   Keyword?: string;

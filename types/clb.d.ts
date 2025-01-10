@@ -1613,6 +1613,10 @@ declare interface CreateTargetGroupRequest {
   Port?: number;
   /** 目标组绑定的后端服务器 */
   TargetGroupInstances?: TargetGroupInstance[];
+  /** 标签。 */
+  Tags?: TagInfo[];
+  /** 后端服务默认权重。 取值范围[0, 100] 设置该值后，添加后端服务到目标组时， 若后端服务不单独设置权重， 则使用这里的默认权重。 */
+  Weight?: number;
 }
 
 declare interface CreateTargetGroupResponse {
@@ -2271,7 +2275,7 @@ declare interface DescribeTargetHealthRequest {
 
 declare interface DescribeTargetHealthResponse {
   /** 负载均衡实例列表。 */
-  LoadBalancers: LoadBalancerHealth[] | null;
+  LoadBalancers?: LoadBalancerHealth[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2649,6 +2653,8 @@ declare interface ModifyTargetGroupAttributeRequest {
   TargetGroupName?: string;
   /** 目标组的新默认端口。 */
   Port?: number;
+  /** 后端服务默认权重。 取值范围[0, 100] 设置该值后，添加后端服务到目标组时， 若后端服务不单独设置权重， 则使用这里的默认权重。 */
+  Weight?: number;
 }
 
 declare interface ModifyTargetGroupAttributeResponse {

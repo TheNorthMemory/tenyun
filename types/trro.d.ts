@@ -20,6 +20,8 @@ declare interface Device {
   LicenseIds?: string[] | null;
   /** 每月license的限定时长 */
   MonthlyRemainTime?: number | null;
+  /** 月封顶时长（分钟) */
+  LimitedTime?: number;
 }
 
 /** 设备信息 */

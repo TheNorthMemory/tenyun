@@ -41,9 +41,9 @@ declare interface BackupDownloadTask {
   /** 发起备份时指定的备注信息 */
   BackupDesc?: string;
   /** 地区信息。 */
-  Region?: string | null;
+  Region?: string;
   /** Bucket信息。 */
-  Bucket?: string | null;
+  Bucket?: string;
 }
 
 /** 创建备份下载任务结果 */
@@ -95,25 +95,25 @@ declare interface ClientConnection {
 /** 云数据库实例当前操作 */
 declare interface CurrentOp {
   /** 操作序号。 */
-  OpId?: number | null;
+  OpId?: number;
   /** 操作所在的命名空间，形式如db.collection。 */
-  Ns?: string | null;
+  Ns?: string;
   /** 操作执行语句。 */
-  Query?: string | null;
+  Query?: string;
   /** 操作类型，可能的取值：aggregate、count、delete、distinct、find、findAndModify、getMore、insert、mapReduce、update和command。 */
-  Op?: string | null;
+  Op?: string;
   /** 操作所在的分片名称。 */
   ReplicaSetName?: string;
   /** 操作所在的节点名称。 */
   NodeName?: string;
   /** 操作详细信息。 */
-  Operation?: string | null;
+  Operation?: string;
   /** 筛选条件，节点状态，可能的取值为：Primary、Secondary。 */
-  State?: string | null;
+  State?: string;
   /** 操作已执行时间（ms）。 */
-  MicrosecsRunning?: number | null;
+  MicrosecsRunning?: number;
   /** 当前操作所在节点信息。 */
-  ExecNode?: string | null;
+  ExecNode?: string;
 }
 
 /** 实例信息 */
@@ -394,7 +394,7 @@ declare interface NodeProperty {
   NodeName?: string;
   /** 节点访问地址。 */
   Address?: string;
-  /** 节点公网访问地址(IP或域名)。 */
+  /** 节点公网访问外网地址(IP或域名，示例为IP方式)。 */
   WanServiceAddress?: string;
   /** 角色。 */
   Role?: string;
@@ -1754,47 +1754,47 @@ declare namespace V20180408 {
   /** mongodb售卖规格 */
   interface SpecItem {
     /** 规格信息标识 */
-    SpecCode: string | null;
+    SpecCode: string;
     /** 规格有效标志，取值：0-停止售卖，1-开放售卖 */
-    Status: number | null;
+    Status: number;
     /** 机器类型，取值：0-HIO，4-HIO10G */
-    MachineType: string | null;
+    MachineType: string;
     /** cpu核心数 */
-    Cpu: number | null;
+    Cpu: number;
     /** 内存规格，单位为MB */
-    Memory: number | null;
+    Memory: number;
     /** 默认磁盘规格，单位MB */
-    DefaultStorage: number | null;
+    DefaultStorage: number;
     /** 最大磁盘规格，单位MB */
-    MaxStorage: number | null;
+    MaxStorage: number;
     /** 最小磁盘规格，单位MB */
-    MinStorage: number | null;
+    MinStorage: number;
     /** 可承载qps信息 */
-    Qps: number | null;
+    Qps: number;
     /** 连接数限制 */
-    Conns: number | null;
+    Conns: number;
     /** 实例mongodb版本信息 */
-    MongoVersionCode: string | null;
+    MongoVersionCode: string;
     /** 实例mongodb版本号 */
-    MongoVersionValue: number | null;
+    MongoVersionValue: number;
     /** 实例mongodb版本号（短） */
-    Version: string | null;
+    Version: string;
     /** 存储引擎 */
-    EngineName: string | null;
+    EngineName: string;
     /** 集群类型，取值：1-分片集群，0-副本集集群 */
-    ClusterType: number | null;
+    ClusterType: number;
     /** 最小副本集从节点数 */
-    MinNodeNum: number | null;
+    MinNodeNum: number;
     /** 最大副本集从节点数 */
-    MaxNodeNum: number | null;
+    MaxNodeNum: number;
     /** 最小分片数 */
-    MinReplicateSetNum: number | null;
+    MinReplicateSetNum: number;
     /** 最大分片数 */
-    MaxReplicateSetNum: number | null;
+    MaxReplicateSetNum: number;
     /** 最小分片从节点数 */
-    MinReplicateSetNodeNum: number | null;
+    MinReplicateSetNodeNum: number;
     /** 最大分片从节点数 */
-    MaxReplicateSetNodeNum: number | null;
+    MaxReplicateSetNodeNum: number;
   }
 
   /** 实例规格信息 */
@@ -2052,7 +2052,7 @@ declare namespace V20180408 {
   }
 
   interface UpgradeDBInstanceHourRequest {
-    /** 实例ID，格式如：cmgo-p8vnipr5 */
+    /** 实例ID，格式如：cmgo-iga0**** */
     InstanceId: string;
     /** 升级后的内存大小，单位：GB */
     Memory: number;

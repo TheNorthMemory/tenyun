@@ -92,7 +92,7 @@ declare interface TargetGroupAssociation {
 declare interface TargetGroupBackend {
   /** 目标组ID */
   TargetGroupId?: string;
-  /** 后端服务的类型，可取：CVM、ENI（即将支持） */
+  /** 后端服务的类型，可取：CVM、ENI */
   Type?: string;
   /** 后端服务的唯一 ID */
   InstanceId?: string;

@@ -598,6 +598,8 @@ declare interface FlowApproverDetail {
   SignId?: string | null;
   /** 自定义签署人角色 */
   ApproverRoleName?: string | null;
+  /** 模板配置中的参与方ID,与控件绑定 */
+  RecipientId?: string;
 }
 
 /** 签署链接信息。 */
@@ -1211,7 +1213,7 @@ declare interface ReleasedApprover {
   /** 签署人手机号。 */
   Mobile: string;
   /** 要更换的原合同参与人RecipientId编号。(可通过接口DescribeFlowInfo查询签署人的RecipientId编号) */
-  RelievedApproverReceiptId: string;
+  RelievedApproverReceiptId?: string;
   /** 指定签署人类型，目前仅支持 **ORGANIZATION**：企业（默认值） **ENTERPRISESERVER**：企业静默签 */
   ApproverType?: string;
   /** 签署控件类型，支持自定义企业签署方的签署控件类型 **SIGN_SEAL**：默认为印章控件类型（默认值） **SIGN_SIGNATURE**：手写签名控件类型 */
@@ -1220,6 +1222,8 @@ declare interface ReleasedApprover {
   ApproverSignRole?: string;
   /** 印章Id，签署控件类型为印章时，用于指定本企业签署方在解除协议中使用那个印章进行签署 */
   ApproverSignSealId?: string;
+  /** 要更换的原合同参与人RecipientId编号。(可通过接口DescribeFlowInfo查询签署人的RecipientId编号) */
+  RelievedApproverRecipientId?: string;
 }
 
 /** 解除协议文档中内容信息，包括但不限于：解除理由、解除后仍然有效的条款-保留条款、原合同事项处理-费用结算、原合同事项处理-其他事项、其他约定等。下面各种字段在解除协议中的位置参考：![image](https://qcloudimg.tencent-cloud.cn/raw/5087164cfe5a15fa3ced3180842d5da9.png) */
@@ -1785,9 +1789,9 @@ declare interface CreateDocumentResponse {
   /** 合同流程的底层电子文档ID，为32位字符串。注:后续需用同样的FlowId再次调用[发起签署流程](https://qian.tencent.com/developers/companyApis/startFlows/StartFlow)，合同才能进入签署环节 */
   DocumentId?: string;
   /** 合同预览链接URL。注: `1.如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL``2.当使用的模板中存在动态表格控件时，预览结果中没有动态表格的填写内容` */
-  PreviewFileUrl?: string | null;
+  PreviewFileUrl?: string;
   /** 签署方信息，如角色ID、角色名称等 */
-  Approvers?: ApproverItem[] | null;
+  Approvers?: ApproverItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1889,7 +1893,7 @@ declare interface CreateFlowApproversRequest {
 
 declare interface CreateFlowApproversResponse {
   /** 批量补充签署人时，补充失败的报错说明注:`目前仅补充动态签署人时会返回补充失败的原因` */
-  FillError?: FillError[] | null;
+  FillError?: FillError[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1969,9 +1973,9 @@ declare interface CreateFlowByFilesResponse {
   /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。注: 如果是预览模式(即NeedPreview设置为true)时, 此处不会有值返回。[点击查看FlowId在控制台中的位置](https://qcloudimg.tencent-cloud.cn/raw/0a83015166cfe1cb043d14f9ec4bd75e.png) */
   FlowId?: string;
   /** 合同预览链接URL。注：如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL */
-  PreviewUrl?: string | null;
+  PreviewUrl?: string;
   /** 签署方信息，如角色ID、角色名称等 */
-  Approvers?: ApproverItem[] | null;
+  Approvers?: ApproverItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1989,7 +1993,7 @@ declare interface CreateFlowEvidenceReportRequest {
 
 declare interface CreateFlowEvidenceReportResponse {
   /** 出证报告 ID，可用于获取出证报告任务执行结果查询出证任务结果和出证PDF的下载URL */
-  ReportId?: string | null;
+  ReportId?: string;
   /** 出证任务执行的状态, 状态含义如下：**EvidenceStatusExecuting**： 出证任务在执行中**EvidenceStatusSuccess**： 出证任务执行成功**EvidenceStatusFailed** ： 出征任务执行失败 */
   Status?: string;
   /** 此字段已经废除,不再使用.出证的PDF下载地址请调用DescribeChannelFlowEvidenceReport接口获取 */
@@ -2037,9 +2041,9 @@ declare interface CreateFlowGroupByTemplatesRequest {
 
 declare interface CreateFlowGroupByTemplatesResponse {
   /** 合同(流程)组的合同组Id */
-  FlowGroupId?: string | null;
+  FlowGroupId?: string;
   /** 合同(流程)组中子合同列表. */
-  FlowIds?: string[] | null;
+  FlowIds?: string[];
   /** 合同组签署人信息。 */
   Approvers?: FlowGroupApprovers[];
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -2513,13 +2517,13 @@ declare interface CreatePersonAuthCertificateImageResponse {
   /** 个人用户认证证书图片下载URL，`有效期为5分钟`，超过有效期后将无法再下载。 */
   AuthCertUrl?: string;
   /** 个人用户认证证书的编号, 为20位数字组成的字符串, 由腾讯电子签下发此编号 。该编号会合成到个人用户证书证明图片。注: `个人用户认证证书的编号和证明图片绑定, 获取新的证明图片编号会变动` */
-  ImageCertId?: string | null;
+  ImageCertId?: string;
   /** 在数字证书申请过程中，系统会自动生成一个独一无二的序列号。请注意，当证书到期并自动续期时，该序列号将会发生变化。值得注意的是，此序列号不会被合成至个人用户证书的证明图片中。 */
-  SerialNumber?: string | null;
+  SerialNumber?: string;
   /** CA证书颁发时间，格式为Unix标准时间戳（秒） 该时间格式化后会合成到个人用户证书证明图片 */
-  ValidFrom?: number | null;
+  ValidFrom?: number;
   /** CA证书有效截止时间，格式为Unix标准时间戳（秒）该时间格式化后会合成到个人用户证书证明图片 */
-  ValidTo?: number | null;
+  ValidTo?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3057,7 +3061,7 @@ declare interface DescribeBillUsageResponse {
   /** 企业套餐余额及使用情况 */
   Summary?: OrgBillSummary[];
   /** 集团子企业套餐使用情况 */
-  SubOrgSummary?: SubOrgBillSummary[] | null;
+  SubOrgSummary?: SubOrgBillSummary[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3181,7 +3185,7 @@ declare interface DescribeFlowComponentsRequest {
 
 declare interface DescribeFlowComponentsResponse {
   /** 合同流程关联的填写控件信息，包括填写控件的归属方以及是否填写等内容。 */
-  RecipientComponentInfos?: RecipientComponentInfo[] | null;
+  RecipientComponentInfos?: RecipientComponentInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3199,7 +3203,7 @@ declare interface DescribeFlowEvidenceReportRequest {
 
 declare interface DescribeFlowEvidenceReportResponse {
   /** 出证报告PDF的下载 URL，`有效期为5分钟`，超过有效期后将无法再下载。 */
-  ReportUrl?: string | null;
+  ReportUrl?: string;
   /** 出证任务执行的状态, 状态含义如下：**EvidenceStatusExecuting**： 出证任务在执行中**EvidenceStatusSuccess**： 出证任务执行成功**EvidenceStatusFailed** ： 出征任务执行失败 */
   Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3291,15 +3295,15 @@ declare interface DescribeIntegrationEmployeesRequest {
   Agent?: Agent;
   /** 查询的关键字段，支持Key-Values查询。可选键值如下： Key:**"Status"**，根据实名状态查询员工，Values可选： **["IsVerified"]**：查询已实名的员工**["NotVerified"]**：查询未实名的员工 Key:**"DepartmentId"**，根据部门ID查询部门下的员工，Values为指定的部门ID：**["DepartmentId"]** Key:**"UserId"**，根据用户ID查询员工，Values为指定的用户ID：**["UserId"]** Key:**"UserWeWorkOpenId"**，根据用户企微账号ID查询员工，Values为指定用户的企微账号ID：**["UserWeWorkOpenId"]** Key:**"StaffOpenId"**，根据第三方系统用户OpenId查询员工，Values为第三方系统用户OpenId列表：**["OpenId1","OpenId2",...]** Key:**"RoleId"**，根据电子签角色ID查询员工，Values为指定的角色ID，满足其中任意一个角色即可：**["RoleId1","RoleId2",...]** */
   Filters?: Filter[];
-  /** 指定分页返回第几页的数据，如果不传默认返回第一页。页码从 0 开始，即首页为 0，最大20000。 */
+  /** 偏移量，默认为0，最大20000。。关于Offset的更进一步介绍请参考 API 简介中的相关小节。 */
   Offset?: number;
 }
 
 declare interface DescribeIntegrationEmployeesResponse {
   /** 员工信息列表。 */
-  Employees?: Staff[] | null;
-  /** 指定分页返回第几页的数据。页码从 0 开始，即首页为 0，最大20000。 */
-  Offset?: number | null;
+  Employees?: Staff[];
+  /** 偏移量 */
+  Offset?: number;
   /** 指定分页每页返回的数据条数，单页最大支持 20。 */
   Limit?: number;
   /** 符合条件的员工数量。 */
@@ -3465,9 +3469,9 @@ declare interface DescribeSignFaceVideoRequest {
 
 declare interface DescribeSignFaceVideoResponse {
   /** 核身视频结果。 */
-  VideoData?: DetectInfoVideoData | null;
+  VideoData?: DetectInfoVideoData;
   /** 意愿核身问答模式结果。若未使用该意愿核身功能，该字段返回值可以不处理。 */
-  IntentionQuestionResult?: IntentionQuestionResult | null;
+  IntentionQuestionResult?: IntentionQuestionResult;
   /** 意愿核身点头确认模式的结果信息，若未使用该意愿核身功能，该字段返回值可以不处理。 */
   IntentionActionResult?: IntentionActionResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3551,7 +3555,7 @@ declare interface DisableUserAutoSignResponse {
 }
 
 declare interface GetTaskResultApiRequest {
-  /** 转换任务Id，通过接口创建文件转换任务接口或创建多文件转换任务接口得到的转换任务id */
+  /** 转换任务Id，通过接口创建文件转换任务接口得到的转换任务id */
   TaskId: string;
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator?: UserInfo;

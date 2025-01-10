@@ -5,23 +5,23 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 造成异常体验可能的异常事件类型 */
 declare interface AbnormalEvent {
   /** 异常事件ID，具体值查看附录：异常体验ID映射表：https://cloud.tencent.com/document/product/647/44916 */
-  AbnormalEventId: number;
+  AbnormalEventId?: number;
   /** 远端用户ID,""：表示异常事件不是由远端用户产生 */
-  PeerId: string | null;
+  PeerId?: string | null;
 }
 
 /** 用户的异常体验及可能的原因 */
 declare interface AbnormalExperience {
   /** 用户ID */
-  UserId: string;
+  UserId?: string;
   /** 异常体验ID */
-  ExperienceId: number;
+  ExperienceId?: number;
   /** 字符串房间号 */
-  RoomId: string;
+  RoomId?: string;
   /** 异常事件数组 */
-  AbnormalEventList: AbnormalEvent[];
+  AbnormalEventList?: AbnormalEvent[];
   /** 异常事件的上报时间 */
-  EventTime: number;
+  EventTime?: number;
 }
 
 /** 机器人参数 */
@@ -173,23 +173,23 @@ declare interface EncodeParams {
 /** sdk或webrtc的事件列表。 */
 declare interface EventList {
   /** 数据内容 */
-  Content: EventMessage[];
+  Content?: EventMessage[];
   /** 发送端的userId */
-  PeerId: string;
+  PeerId?: string;
 }
 
 /** 事件信息，包括，事件时间戳，事件ID, */
 declare interface EventMessage {
   /** 视频流类型：0：与视频无关的事件；2：视频为大画面；3：视频为小画面；7：视频为旁路画面； */
-  Type: number;
+  Type?: number;
   /** 事件上报的时间戳，unix时间（1589891188801ms) */
-  Time: number;
+  Time?: number;
   /** 事件Id：分为sdk的事件和webrtc的事件，详情见：附录/事件 ID 映射表：https://cloud.tencent.com/document/product/647/44916 */
-  EventId: number;
+  EventId?: number;
   /** 事件的第一个参数，如视频分辨率宽 */
-  ParamOne: number;
+  ParamOne?: number;
   /** 事件的第二个参数，如视频分辨率高 */
-  ParamTwo: number;
+  ParamTwo?: number;
 }
 
 /** MCU混流布局参数 */
@@ -559,11 +559,11 @@ declare interface MixUserInfo {
 /** 旁路转码时长的查询结果 */
 declare interface OneSdkAppIdTranscodeTimeUsagesInfo {
   /** 旁路转码时长查询结果数组 */
-  SdkAppIdTranscodeTimeUsages: SdkAppIdTrtcMcuTranscodeTimeUsage[];
+  SdkAppIdTranscodeTimeUsages?: SdkAppIdTrtcMcuTranscodeTimeUsage[];
   /** 查询记录数量 */
-  TotalNum: number;
+  TotalNum?: number;
   /** 所查询的应用ID，可能值为:1-应用的应用ID，2-total，显示为total则表示查询的是所有应用的用量合计值。 */
-  SdkAppId: string;
+  SdkAppId?: string;
 }
 
 /** MCU混流的输出参数 */
@@ -581,17 +581,17 @@ declare interface OutputParams {
 /** 图片列表信息 */
 declare interface PictureInfo {
   /** 图片长度 */
-  Height: number;
+  Height?: number;
   /** 图片宽度 */
-  Width: number;
+  Width?: number;
   /** 显示位置x轴方向 */
-  XPosition: number;
+  XPosition?: number;
   /** 显示位置y轴方向 */
-  YPosition: number;
+  YPosition?: number;
   /** 应用id */
-  SdkAppId: number;
+  SdkAppId?: number;
   /** 图片id */
-  PictureId: number;
+  PictureId?: number;
 }
 
 /** 自定义模板中有效，指定用户视频在混合画面中的位置。 */
@@ -629,13 +629,13 @@ declare interface PublishCdnParams {
 /** Es返回的质量数据 */
 declare interface QualityData {
   /** 数据内容 */
-  Content: TimeValue[];
+  Content?: TimeValue[];
   /** 用户ID */
-  UserId: string;
+  UserId?: string;
   /** 对端Id,为空时表示上行数据 */
-  PeerId: string | null;
+  PeerId?: string | null;
   /** 数据类型 */
-  DataType: string;
+  DataType?: string;
 }
 
 /** 语音识别使用的配置 */
@@ -675,31 +675,31 @@ declare interface RecordParams {
 /** 录制的使用信息。 */
 declare interface RecordUsage {
   /** 本组数据对应的时间点，格式如:2020-09-07或2020-09-07 00:05:05。 */
-  TimeKey: string;
+  TimeKey?: string;
   /** 视频时长-标清SD，单位：秒。 */
-  Class1VideoTime: number;
+  Class1VideoTime?: number;
   /** 视频时长-高清HD，单位：秒。 */
-  Class2VideoTime: number;
+  Class2VideoTime?: number;
   /** 视频时长-超清HD，单位：秒。 */
-  Class3VideoTime: number;
+  Class3VideoTime?: number;
   /** 语音时长，单位：秒。 */
-  AudioTime: number;
+  AudioTime?: number;
 }
 
 /** 房间信息列表 */
 declare interface RoomState {
   /** 通话ID（唯一标识一次通话） */
-  CommId: string;
+  CommId?: string;
   /** 房间号 */
-  RoomString: string;
+  RoomString?: string;
   /** 房间创建时间 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 房间销毁时间 */
-  DestroyTime: number;
+  DestroyTime?: number;
   /** 房间是否已经结束 */
-  IsFinished: boolean;
+  IsFinished?: boolean;
   /** 房间创建者Id */
-  UserId: string;
+  UserId?: string;
 }
 
 /** SeriesInfo类型的二维数组 */
@@ -723,21 +723,21 @@ declare interface STTConfig {
 /** 历史规模信息 */
 declare interface ScaleInfomation {
   /** 每天开始的时间 */
-  Time: number;
+  Time?: number;
   /** 房间人数，用户重复进入同一个房间为1次 */
-  UserNumber: number | null;
+  UserNumber?: number | null;
   /** 房间人次，用户每次进入房间为一次 */
-  UserCount: number | null;
+  UserCount?: number | null;
   /** sdkappid下一天内的房间数 */
-  RoomNumbers: number | null;
+  RoomNumbers?: number | null;
 }
 
 /** SdkAppId级别录制时长数据。 */
 declare interface SdkAppIdRecordUsage {
   /** SdkAppId的值。 */
-  SdkAppId: string;
+  SdkAppId?: string;
   /** 统计的时间点数据。 */
-  Usages: RecordUsage[];
+  Usages?: RecordUsage[];
 }
 
 /** 查询旁路转码计费时长。查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。 */
@@ -883,9 +883,9 @@ declare interface TencentVod {
 /** 返回的质量数据，时间:值 */
 declare interface TimeValue {
   /** 时间，unix时间戳（1590065877s) */
-  Time: number;
+  Time?: number;
   /** 当前时间返回参数取值，如（bigvCapFps在1590065877取值为0，则Value：0 ） */
-  Value: number;
+  Value?: number;
 }
 
 /** AI转录参数 */
@@ -921,21 +921,21 @@ declare interface TrtcUsage {
 /** 用户信息，包括用户进房时间，退房时间等 */
 declare interface UserInformation {
   /** 房间号 */
-  RoomStr: string;
+  RoomStr?: string;
   /** 用户Id */
-  UserId: string;
+  UserId?: string;
   /** 用户进房时间 */
-  JoinTs: number;
+  JoinTs?: number;
   /** 用户退房时间，用户没有退房则返回当前时间 */
-  LeaveTs: number;
+  LeaveTs?: number;
   /** 终端类型 */
-  DeviceType: string;
+  DeviceType?: string;
   /** Sdk版本号 */
-  SdkVersion: string;
+  SdkVersion?: string;
   /** 客户端IP地址 */
-  ClientIp: string;
+  ClientIp?: string;
   /** 判断用户是否已经离开房间 */
-  Finished: boolean;
+  Finished?: boolean;
 }
 
 /** 用户媒体流参数。 */
@@ -1271,9 +1271,9 @@ declare interface DescribeCallDetailInfoResponse {
   /** 返回的用户总条数 */
   Total?: number;
   /** 用户信息列表 */
-  UserList?: UserInformation[] | null;
+  UserList?: UserInformation[];
   /** 质量数据 */
-  Data?: QualityData[] | null;
+  Data?: QualityData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1425,7 +1425,7 @@ declare interface DescribeScaleInfoResponse {
   /** 返回的数据条数 */
   Total?: number;
   /** 返回的数据 */
-  ScaleList?: ScaleInfomation[] | null;
+  ScaleList?: ScaleInfomation[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1701,7 +1701,7 @@ declare interface DescribeUserInfoResponse {
   /** 返回的用户总条数 */
   Total?: number;
   /** 用户信息列表 */
-  UserList?: UserInformation[] | null;
+  UserList?: UserInformation[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

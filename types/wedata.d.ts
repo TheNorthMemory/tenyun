@@ -204,6 +204,10 @@ declare interface AlarmIndicatorInfo {
   MaxTimes?: number;
   /** 指标阈值 */
   Threshold?: number | null;
+  /** 时间范围单位 */
+  IndicatorTimeRangeUnit?: string | null;
+  /** 时间范围值 */
+  IndicatorTimeRangeValue?: number | null;
 }
 
 /** 任务告警信息 */
@@ -4620,6 +4624,8 @@ declare interface TaskAlarmInfo {
   LarkWebHooks?: string | null;
   /** 钉钉群Hook地址，多个hook地址使用,隔开 */
   DingDingWebHooks?: string | null;
+  /** 业务类型, 0-非默认, 1-默认 */
+  BusinessType?: number | null;
 }
 
 /** 周期单位统计 */
@@ -6036,6 +6042,10 @@ declare interface CreateHiveTableByDDLRequest {
   SchemaName?: string;
   /** 是否异步建表 */
   Async?: boolean;
+  /** 数据优化使用的资源 */
+  DataOptimizationResource?: string;
+  /** 是否开启数据优化 */
+  SmartOptimizerWritten?: string;
 }
 
 declare interface CreateHiveTableByDDLResponse {
@@ -6060,6 +6070,10 @@ declare interface CreateHiveTableRequest {
   ProjectId: string;
   /** 责任人 */
   Incharge?: string;
+  /** 数据优化引擎 */
+  DataOptimizationResource?: string;
+  /** 是否开启数据优化 */
+  SmartOptimizerWritten?: string;
 }
 
 declare interface CreateHiveTableResponse {
@@ -9450,6 +9464,8 @@ declare interface GenHiveTableDDLSqlRequest {
   TableBaseInfo?: TableBaseInfo;
   /** 目标端schema名称 */
   SinkSchemaName?: string;
+  /** 获取源信息的环境 */
+  Env?: string;
 }
 
 declare interface GenHiveTableDDLSqlResponse {

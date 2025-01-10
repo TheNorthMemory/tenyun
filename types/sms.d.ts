@@ -66,6 +66,12 @@ declare interface DescribeSignListStatus {
   SignName?: string;
   /** 提交审核时间，UNIX 时间戳（单位：秒）。 */
   CreateTime?: number;
+  /** 国内短信的资质 ID。资质 ID 信息可前往国内短信的 [实名资质管理](https://console.cloud.tencent.com/smsv2/enterprise) 页查看。注：国际短信不涉及，默认为0。 */
+  QualificationId?: number;
+  /** 国内短信的资质名称。注：国际短信不涉及，默认为空。 */
+  QualificationName?: string;
+  /** 国内短信的资质状态。其中0表示待审核，1表示已通过，2表示已拒绝，3表示待补充后提交，4表示变更后待审核，5表示变更后被驳回。可参考 [实名资质审核状态说明](https://cloud.tencent.com/document/product/382/13444) 。注：国际短信不涉及，默认为0。 */
+  QualificationStatusCode?: number;
 }
 
 /** 获取短信模板信息响应 */
@@ -225,6 +231,8 @@ declare interface AddSmsSignRequest {
   CommissionImage?: string;
   /** 签名的申请备注。 */
   Remark?: string;
+  /** 已审核通过的国内短信的资质 ID。资质 ID 信息可前往国内短信的 [实名资质管理](https://console.cloud.tencent.com/smsv2/enterprise) 页查看。国内短信需填写资质ID，国际短信无需填写。</dx-alert> */
+  QualificationId?: number;
 }
 
 declare interface AddSmsSignResponse {
@@ -361,6 +369,8 @@ declare interface ModifySmsSignRequest {
   CommissionImage?: string;
   /** 签名的申请备注。 */
   Remark?: string;
+  /** 已审核通过的国内短信的资质 ID。资质 ID 信息可前往国内短信的 [实名资质管理](https://console.cloud.tencent.com/smsv2/enterprise) 页查看。国内短信需填写资质ID，国际短信无需填写。</dx-alert> */
+  QualificationId?: number;
 }
 
 declare interface ModifySmsSignResponse {
@@ -615,6 +625,12 @@ declare namespace V20190711 {
     SignName?: string;
     /** 提交审核时间，UNIX 时间戳（单位：秒）。 */
     CreateTime?: number;
+    /** 国内短信的资质 ID。资质 ID 信息可前往国内短信的 [实名资质管理](https://console.cloud.tencent.com/smsv2/enterprise) 页查看。注：国际短信不涉及，默认为0。 */
+    QualificationId?: number;
+    /** 国内短信的资质名称。注：国际短信不涉及，默认为空。 */
+    QualificationName?: string;
+    /** 国内短信的资质状态。其中0表示待审核，1表示已通过，2表示已拒绝，3表示待补充后提交，4表示变更后待审核，5表示变更后被驳回。可参考 [实名资质审核状态说明](https://cloud.tencent.com/document/product/382/13444) 。注：国际短信不涉及，默认为0。 */
+    QualificationStatusCode?: number;
   }
 
   /** 获取短信模板信息响应 */
@@ -754,6 +770,8 @@ declare namespace V20190711 {
     CommissionImage?: string;
     /** 签名的申请备注。 */
     Remark?: string;
+    /** 已审核通过的国内短信的资质 ID。资质 ID 信息可前往国内短信的 [实名资质管理](https://console.cloud.tencent.com/smsv2/enterprise) 页查看。国内短信需填写资质ID，国际短信无需填写。</dx-alert> */
+    QualificationId?: number;
   }
 
   interface AddSmsSignResponse {
@@ -874,6 +892,8 @@ declare namespace V20190711 {
     CommissionImage?: string;
     /** 签名的申请备注。 */
     Remark?: string;
+    /** 已审核通过的国内短信的资质 ID。资质 ID 信息可前往国内短信的 [实名资质管理](https://console.cloud.tencent.com/smsv2/enterprise) 页查看。国内短信需填写资质ID，国际短信无需填写。</dx-alert> */
+    QualificationId?: number;
   }
 
   interface ModifySmsSignResponse {

@@ -1791,11 +1791,11 @@ declare interface DescribeImmutableTagRulesRequest {
 
 declare interface DescribeImmutableTagRulesResponse {
   /** 规则列表 */
-  Rules: ImmutableTagRule[] | null;
+  Rules?: ImmutableTagRule[] | null;
   /** 未创建规则的命名空间 */
-  EmptyNs: string[] | null;
+  EmptyNs?: string[] | null;
   /** 规则总量 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

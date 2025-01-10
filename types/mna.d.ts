@@ -5,27 +5,27 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 激活设备 */
 declare interface ActivateHardware {
   /** 厂商名称 */
-  Vendor: string | null;
+  Vendor: string;
   /** 设备SN序列号 */
   SN: string;
   /** 设备名称 */
-  DeviceName: string | null;
+  DeviceName: string;
   /** 备注 */
-  Description?: string | null;
+  Description?: string;
   /** 设备密钥 */
   DataKey?: string;
   /** 接入环境。0：公有云网关；1：自有网关；2：公有云网关和自有网关。不填默认公有云网关。 具体含义： 公有云网关：即该设备只能接入公有云网关（就近接入） 自有网关：即该设备只能接入已经注册上线的自有网关（就近接入或固定ip接入） 公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入） */
   AccessScope?: number;
   /** 当付费方为租户时，可选择租户license付费方式：0，月度授权1，永久授权若不传则默认为月度授权。当付费方为厂商时，此参数无效 */
-  LicensePayMode?: number | null;
+  LicensePayMode?: number;
   /** 设备分组ID */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 设备分组名称，预留参数，需要分组时传入GroupId */
-  GroupName?: string | null;
+  GroupName?: string;
   /** 设备无流量包处理方式，0: 按量付费，1: 截断加速 */
-  FlowTrunc?: number | null;
+  FlowTrunc?: number;
   /** 激活后的设备ID */
-  DeviceId?: string | null;
+  DeviceId?: string;
 }
 
 /** 接口能力扩展，用于填充电信的加速Token，并为未来参数提供兼容空间 */
@@ -67,9 +67,9 @@ declare interface DeviceBaseInfo {
   /** 接入环境。0：公有云网关；1：自有网关；2：公有云网关和自有网关。默认公有云网关。 具体含义： 公有云网关：即该设备只能接入公有云网关（就近接入） 自有网关：即该设备只能接入已经注册上线的自有网关（就近接入或固定ip接入） 公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入） */
   AccessScope?: number;
   /** license授权有效期 0：月度授权 1：永久授权 */
-  LicensePayMode?: number | null;
+  LicensePayMode?: number;
   /** 付费方 0：厂商付费 1：客户付费 */
-  Payer?: number | null;
+  Payer?: number;
   /** 设备分组ID */
   GroupId?: string | null;
   /** 设备分组名称 */

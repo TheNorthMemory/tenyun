@@ -130,6 +130,28 @@ declare interface LoginSetting {
   Url?: string | null;
 }
 
+/** musk prompt详情 */
+declare interface MuskPromptInfo {
+  /** workflow id */
+  WorkflowId?: string;
+  /** workgroup id */
+  WorkgroupId?: string;
+  /** prompt id */
+  PromptId?: string;
+  /** 生成的内容 */
+  OutputResource?: string[];
+  /** prompt status 0: 执行中1: 执行成功2: 执行失败 */
+  Status?: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 任务执行耗时，单位毫秒 */
+  Cost?: number;
+  /** 任务执行失败错误信息 */
+  ErrorMessage?: string;
+}
+
 /** HAI 实例的网络配置和消耗情况 */
 declare interface NetworkStatus {
   /** HAI 的实例 ID */
@@ -182,6 +204,22 @@ declare interface SystemDisk {
   DiskSize?: number | null;
   /** 系统盘分区盘符 */
   DiskName?: string | null;
+}
+
+declare interface CreateMuskPromptRequest {
+  /** workgroup id */
+  WorkgroupId: string;
+  /** workflow id */
+  WorkflowId: string;
+  /** prompt 参数 */
+  PromptParams: string;
+}
+
+declare interface CreateMuskPromptResponse {
+  /** prompt id */
+  PromptId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface DescribeApplicationsRequest {
@@ -238,6 +276,28 @@ declare interface DescribeInstancesResponse {
   TotalCount?: number | null;
   /** 分页实例详情 */
   InstanceSet?: Instance[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMuskPromptsRequest {
+  /** workgroup id */
+  WorkgroupId: string;
+  /** workflow id */
+  WorkflowId: string;
+  /** offset */
+  Offset: number;
+  /** limit */
+  Limit: number;
+  /** 过滤参数 支持过滤的键值： PromptId，Status */
+  Filters?: Filter[];
+}
+
+declare interface DescribeMuskPromptsResponse {
+  /** total count */
+  TotalCount?: number;
+  /** prompt列表详情 */
+  MuskPromptInfos?: MuskPromptInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -375,12 +435,16 @@ declare interface TerminateInstancesResponse {
 /** {@link Hai 高性能应用服务} */
 declare interface Hai {
   (): Versions;
+  /** 创建Prompt请求任务 {@link CreateMuskPromptRequest} {@link CreateMuskPromptResponse} */
+  CreateMuskPrompt(data: CreateMuskPromptRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMuskPromptResponse>;
   /** 查询应用 {@link DescribeApplicationsRequest} {@link DescribeApplicationsResponse} */
   DescribeApplications(data?: DescribeApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsResponse>;
   /** 查询实例的网络配置及消耗情况 {@link DescribeInstanceNetworkStatusRequest} {@link DescribeInstanceNetworkStatusResponse} */
   DescribeInstanceNetworkStatus(data: DescribeInstanceNetworkStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceNetworkStatusResponse>;
   /** 查询实例 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
+  /** 获取Prompt任务列表 {@link DescribeMuskPromptsRequest} {@link DescribeMuskPromptsResponse} */
+  DescribeMuskPrompts(data: DescribeMuskPromptsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMuskPromptsResponse>;
   /** 查询地域列表 {@link DescribeRegionsRequest} {@link DescribeRegionsResponse} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
   /** 查询场景 {@link DescribeScenesRequest} {@link DescribeScenesResponse} */

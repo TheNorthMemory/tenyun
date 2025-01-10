@@ -593,9 +593,9 @@ declare interface CidrForCcn {
 /** 私有网络和基础网络互通设备 */
 declare interface ClassicLinkInstance {
   /** VPC实例ID */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 云服务器实例唯一ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
 }
 
 /** 冲突资源条目信息。 */
@@ -821,7 +821,7 @@ declare interface DhcpIp {
   /** 创建时间。 */
   CreatedTime?: string;
   /** 标签键值对。 */
-  TagSet?: Tag[] | null;
+  TagSet?: Tag[];
 }
 
 /** 专线网关对象。 */
@@ -1392,7 +1392,7 @@ declare interface Ipv6Address {
 declare interface Ipv6SubnetCidrBlock {
   /** 子网实例`ID`。形如：`subnet-pxir56ns`。 */
   SubnetId: string;
-  /** `IPv6`子网段。形如：`3402:4e00:20:1001::/64` */
+  /** `IPv6`子网段。形如：`3402:4e00:20:1001::/64`。作为AssignIpv6SubnetCidrBlock接口入参时，该参数必填。 */
   Ipv6CidrBlock?: string;
 }
 
@@ -1589,9 +1589,9 @@ declare interface NetDetect {
   /** 网络探测描述。 */
   NetDetectDescription?: string | null;
   /** 创建时间。 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 标签键值对。 */
-  TagSet?: Tag[] | null;
+  TagSet?: Tag[];
 }
 
 /** 网络探测目的IP的验证结果。 */
@@ -1797,9 +1797,11 @@ declare interface PeerConnection {
   /** 资源标签数据。 */
   TagSet?: Tag[];
   /** 服务分级：PT、AU、AG。 */
-  QosLevel?: string | null;
+  QosLevel?: string;
   /** 互通类型，VPC_PEER：VPC间互通；VPC_BM_PEER：VPC与黑石网络互通。 */
-  Type?: string | null;
+  Type?: string;
+  /** 对端VPC唯一ID。 */
+  DestinationVpcId?: string;
 }
 
 /** 安全组策略统计 */
@@ -4397,7 +4399,7 @@ declare interface CreateVpcPeeringConnectionRequest {
 
 declare interface CreateVpcPeeringConnectionResponse {
   /** 对等连接ID */
-  PeeringConnectionId?: string | null;
+  PeeringConnectionId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

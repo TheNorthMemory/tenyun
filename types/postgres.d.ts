@@ -1978,6 +1978,24 @@ declare interface DescribeLogBackupsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMaintainTimeWindowRequest {
+  /** 实例ID */
+  DBInstanceId: string;
+}
+
+declare interface DescribeMaintainTimeWindowResponse {
+  /** 实例ID */
+  DBInstanceId?: string;
+  /** 维护开始时间。时区为东八区（UTC+8） */
+  MaintainStartTime?: string;
+  /** 维护持续时间。单位：小时 */
+  MaintainDuration?: number;
+  /** 维护周期 */
+  MaintainWeekDays?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeOrdersRequest {
   /** 订单名集合 */
   DealNames: string[];
@@ -2582,6 +2600,22 @@ declare interface ModifyDatabaseOwnerResponse {
   RequestId?: string;
 }
 
+declare interface ModifyMaintainTimeWindowRequest {
+  /** 实例ID */
+  DBInstanceId: string;
+  /** 维护开始时间。时区为东八区（UTC+8） */
+  MaintainStartTime?: string;
+  /** 维护持续时间。单位：小时 */
+  MaintainDuration?: number;
+  /** 维护周期 */
+  MaintainWeekDays?: string[];
+}
+
+declare interface ModifyMaintainTimeWindowResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyParameterTemplateRequest {
   /** 参数模板ID，用于唯一确认参数模板，不可修改 */
   TemplateId: string;
@@ -2969,6 +3003,8 @@ declare interface Postgres {
   DescribeEncryptionKeys(data: DescribeEncryptionKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEncryptionKeysResponse>;
   /** 查询日志备份列表 {@link DescribeLogBackupsRequest} {@link DescribeLogBackupsResponse} */
   DescribeLogBackups(data?: DescribeLogBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogBackupsResponse>;
+  /** 查询维护时间窗口 {@link DescribeMaintainTimeWindowRequest} {@link DescribeMaintainTimeWindowResponse} */
+  DescribeMaintainTimeWindow(data: DescribeMaintainTimeWindowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaintainTimeWindowResponse>;
   /** 查询订单信息 {@link DescribeOrdersRequest} {@link DescribeOrdersResponse} */
   DescribeOrders(data: DescribeOrdersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrdersResponse>;
   /** 查询参数模板详情 {@link DescribeParameterTemplateAttributesRequest} {@link DescribeParameterTemplateAttributesResponse} */
@@ -3037,6 +3073,8 @@ declare interface Postgres {
   ModifyDBInstancesProject(data: ModifyDBInstancesProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstancesProjectResponse>;
   /** 修改数据库所有者 {@link ModifyDatabaseOwnerRequest} {@link ModifyDatabaseOwnerResponse} */
   ModifyDatabaseOwner(data: ModifyDatabaseOwnerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatabaseOwnerResponse>;
+  /** 修改维护时间窗口 {@link ModifyMaintainTimeWindowRequest} {@link ModifyMaintainTimeWindowResponse} */
+  ModifyMaintainTimeWindow(data: ModifyMaintainTimeWindowRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMaintainTimeWindowResponse>;
   /** 修改参数模板 {@link ModifyParameterTemplateRequest} {@link ModifyParameterTemplateResponse} */
   ModifyParameterTemplate(data: ModifyParameterTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyParameterTemplateResponse>;
   /** 修改只读组配置 {@link ModifyReadOnlyGroupConfigRequest} {@link ModifyReadOnlyGroupConfigResponse} */

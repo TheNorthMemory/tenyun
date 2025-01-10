@@ -816,6 +816,8 @@ declare interface NotebookDetail {
   SubUinName?: string;
   /** 任务实例创建时间 */
   JobCreateTime?: string;
+  /** Appid */
+  AppId?: string | null;
 }
 
 /** Notebook列表元素 */
@@ -876,6 +878,8 @@ declare interface NotebookSetItem {
   VolumeSourceGooseFS?: GooseFS | null;
   /** 子用户名称 */
   SubUinName?: string;
+  /** AppId */
+  AppId?: string | null;
 }
 
 /** 键值对 */

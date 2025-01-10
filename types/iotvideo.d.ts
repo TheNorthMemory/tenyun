@@ -116,6 +116,18 @@ declare interface CloudStorageEvent {
   Data?: string | null;
 }
 
+/** 云存套餐包信息 */
+declare interface CloudStoragePackageInfo {
+  /** 套餐包id */
+  PackageId?: string;
+  /** 套餐包名字 */
+  PackageName?: string;
+  /** 套餐包数量 */
+  Num?: number;
+  /** 已使用数量 */
+  UsedNum?: number;
+}
+
 /** 云存时间轴接口返回数据 */
 declare interface CloudStorageTimeData {
   /** 云存时间轴信息列表 */
@@ -1860,6 +1872,16 @@ declare interface DescribeForwardRuleResponse {
   InstanceName?: string;
   /** 错误消息 */
   ErrMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFreeCloudStorageNumRequest {
+}
+
+declare interface DescribeFreeCloudStorageNumResponse {
+  /** 套餐包信息 */
+  PackageInfos?: CloudStoragePackageInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6015,6 +6037,8 @@ declare interface Iotvideo {
   DescribeFirmwareTasks(data: DescribeFirmwareTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareTasksResponse>;
   /** 获取产品转发规则 {@link DescribeForwardRuleRequest} {@link DescribeForwardRuleResponse} */
   DescribeForwardRule(data: DescribeForwardRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeForwardRuleResponse>;
+  /** 查询云存卡套餐信息 {@link DescribeFreeCloudStorageNumRequest} {@link DescribeFreeCloudStorageNumResponse} */
+  DescribeFreeCloudStorageNum(data?: DescribeFreeCloudStorageNumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFreeCloudStorageNumResponse>;
   /** 查询设备消息数量统计 {@link DescribeMessageDataStatsRequest} {@link DescribeMessageDataStatsResponse} */
   DescribeMessageDataStats(data: DescribeMessageDataStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageDataStatsResponse>;
   /** 查询产品数据模板 {@link DescribeModelDefinitionRequest} {@link DescribeModelDefinitionResponse} */

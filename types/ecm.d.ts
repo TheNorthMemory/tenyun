@@ -263,27 +263,27 @@ declare interface Filter {
 /** HAVIP对象。 */
 declare interface HaVip {
   /** HAVIP的ID，是HAVIP的唯一标识。 */
-  HaVipId: string;
+  HaVipId?: string;
   /** HAVIP名称。 */
-  HaVipName: string;
+  HaVipName?: string;
   /** 虚拟IP地址。 */
-  Vip: string;
+  Vip?: string;
   /** HAVIP所在私有网络ID。 */
-  VpcId: string;
+  VpcId?: string;
   /** HAVIP所在子网ID。 */
-  SubnetId: string;
+  SubnetId?: string;
   /** HAVIP关联弹性网卡ID。 */
-  NetworkInterfaceId: string;
+  NetworkInterfaceId?: string;
   /** 被绑定的实例ID。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 绑定EIP。 */
-  AddressIp: string;
+  AddressIp?: string;
   /** 状态：AVAILABLE：运行中。UNBIND：未绑定。 */
-  State: string;
+  State?: string;
   /** 创建时间。 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 使用havip的业务标识。 */
-  Business: string;
+  Business?: string;
 }
 
 /** 负载均衡健康检查 */
@@ -1089,7 +1089,7 @@ declare interface PrivateIpAddressSpecification {
   /** 内网IP地址。 */
   PrivateIpAddress: string;
   /** 是否是主IP。 */
-  Primary?: boolean | null;
+  Primary?: boolean;
   /** 公网IP地址。 */
   PublicIpAddress?: string;
   /** EIP实例ID，例如：eip-11112222。 */
@@ -1097,7 +1097,7 @@ declare interface PrivateIpAddressSpecification {
   /** 内网IP描述信息。 */
   Description?: string;
   /** 公网IP是否被封堵。 */
-  IsWanIpBlocked?: boolean | null;
+  IsWanIpBlocked?: boolean;
   /** IP状态：PENDING：生产中MIGRATING：迁移中DELETING：删除中AVAILABLE：可用的 */
   State?: string;
 }
@@ -1293,7 +1293,7 @@ declare interface SecurityGroupPolicy {
   /** 安全组规则描述。 */
   PolicyDescription?: string;
   /** 修改时间，例如 2020-07-22 19：27：23 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
   /** 网段或IPv6(互斥)。 */
   Ipv6CidrBlock?: string | null;
 }
@@ -1447,9 +1447,9 @@ declare interface SystemDisk {
 /** 标签信息。 */
 declare interface Tag {
   /** 标签健。 */
-  Key: string | null;
+  Key: string;
   /** 标签值。 */
-  Value: string | null;
+  Value: string;
 }
 
 /** 标签信息。 */
@@ -2723,7 +2723,7 @@ declare interface DescribeNetworkInterfacesResponse {
   /** 符合条件的实例数量。 */
   TotalCount?: number;
   /** 实例详细信息列表。 */
-  NetworkInterfaceSet?: NetworkInterface[] | null;
+  NetworkInterfaceSet?: NetworkInterface[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2855,9 +2855,9 @@ declare interface DescribeRouteTablesRequest {
 
 declare interface DescribeRouteTablesResponse {
   /** 符合条件的实例数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 路由表列表 */
-  RouteTableSet: RouteTable[] | null;
+  RouteTableSet?: RouteTable[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2959,7 +2959,7 @@ declare interface DescribeSubnetsResponse {
   /** 符合条件的实例数量。 */
   TotalCount?: number;
   /** 子网对象。 */
-  SubnetSet?: Subnet[] | null;
+  SubnetSet?: Subnet[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3041,7 +3041,7 @@ declare interface DescribeVpcsResponse {
   /** 符合条件的对象数。 */
   TotalCount?: number;
   /** 私有网络对象。 */
-  VpcSet?: VpcInfo[] | null;
+  VpcSet?: VpcInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

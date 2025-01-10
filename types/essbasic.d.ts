@@ -222,7 +222,7 @@ declare interface ChannelOrganizationInfo {
   AuthorizationType?: string;
   /** 子企业激活状态。值如下： **0**： 未激活 **1**： 已激活 */
   ActiveStatus?: number;
-  /** 账号过期时间，时间戳 */
+  /** 账号到期时间，时间戳 */
   LicenseExpireTime?: number;
 }
 
@@ -552,6 +552,8 @@ declare interface FlowApproverDetail {
   ApproverRoleName?: string | null;
   /** 签署参与人在本流程中的编号ID（每个流程不同），可用此ID来定位签署参与人在本流程的签署节点。 */
   SignId?: string | null;
+  /** 模板配置时候的签署人角色ID(用PDF文件发起也可以指定,如果不指定则自动生成此角色ID), 所有的填写控件和签署控件都归属不同的角色 */
+  RecipientId?: string;
 }
 
 /** 创建签署流程签署人入参。**各种场景传参说明**: 场景编号 发起方类型 签署方类型 签署方传参说明 场景一 第三方子企业A员工 第三方子企业A员工 （选填）IdCardNumber和IdCardType：证件类型和证件号 （必传）Name：签署方的名字 （必传）Mobile：签署方的手机号 （必传）OpenId：企业员工标识 （必传）OrganizationName：子企业名称 （必传）OrganizationOpenId：子企业的标识 （固定）ApproverType：需设置为ORGANIZATION 场景二 第三方子企业A员工 第三方子企业B(不指定经办人走领取方式) （必传）OrganizationName：子企业名称 （必传）OrganizationOpenId：子企业的标识 （固定）ApproverType：需设置为ORGANIZATION （固定）ApproverOption.FillType：需设置为1 场景三 第三方子企业A员工 第三方子企业B员工 （选填）IdCardNumber和IdCardType：证件类型和证件号 （必传）Name：签署方的名字 （必传）Mobile：签署方的手机号 （必传）OpenId：企业员工标识 （必传）OrganizationName：子企业名称 （必传）OrganizationOpenId：子企业的标识 （固定）ApproverType：需设置为ORGANIZATION 场景四 第三方子企业A员工 个人/自然人 （选填）IdCardNumber和IdCardType：证件类型和证件号 （必传）Name：签署方的名字 （必传）Mobile：签署方的手机号 （固定）ApproverType：需设置为PERSON 场景五 第三方子企业A员工 SaaS平台企业员工 （选填）IdCardNumber和IdCardType：证件类型和证件号 （必传）OrganizationName：SaaS企业的名字 （必传）Name：签署方的名字 （必传）Mobile：签署方的手机号 （不传）OrganizationOpenId：子企业的标识 （不传）OpenId：企业员工标识 （固定）ApproverType：需设置为ORGANIZATION （固定）NotChannelOrganization：需设置为True **注1**: `使用模板发起合同时，RecipientId（模板发起合同时）必传`RecipientId参数获取：从DescribeFlowTemplates接口接口中，可以得到模板下的签署方Recipient列表，根据模板自定义的Rolename在此结构体中确定其RecipientId。**注2**: `如果发起的是动态签署方（即ApproverOption.FillType指定为1），可以不指定具体签署人信息`, 动态签署方可以参考此文档 */
@@ -1661,7 +1663,7 @@ declare interface ChannelCreateFlowApproversRequest {
 
 declare interface ChannelCreateFlowApproversResponse {
   /** 批量补充签署人时，补充失败的报错说明 注:`目前仅补充动态签署人时会返回补充失败的原因` */
-  FillError?: FillError[] | null;
+  FillError?: FillError[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1713,13 +1715,15 @@ declare interface ChannelCreateFlowByFilesRequest {
   PreviewType?: number;
   /** 是否开启动态合同（动态签署人2.0） **false** :(默认) 不开启动态合同（动态签署人2.0） **true** :开启动态合同（动态签署人2.0）,发起后可继续追加合同签署人 */
   OpenDynamicFlow?: boolean;
+  /** 是否开启动态合同（动态签署人2.0） **false** :(默认) 不开启动态合同（动态签署人2.0） **true** :开启动态合同（动态签署人2.0）,发起后可继续追加合同签署人 */
+  OpenDynamicSignFlow?: boolean;
 }
 
 declare interface ChannelCreateFlowByFilesResponse {
   /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。[点击查看FlowId在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/05af26573d5106763b4cfbb9f7c64b41.png) */
-  FlowId?: string | null;
+  FlowId?: string;
   /** 签署方信息，如角色ID、角色名称等 */
-  Approvers?: ApproverItem[] | null;
+  Approvers?: ApproverItem[];
   /** 预览链接，有效期5分钟注：如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL */
   PreviewUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1743,9 +1747,9 @@ declare interface ChannelCreateFlowGroupByFilesRequest {
 
 declare interface ChannelCreateFlowGroupByFilesResponse {
   /** 合同组ID，为32位字符串。建议开发者妥善保存此合同组ID，以便于顺利进行后续操作。 */
-  FlowGroupId?: string | null;
+  FlowGroupId?: string;
   /** 合同组中每个合同流程ID，每个ID均为32位字符串。注:`此数组的顺序和入参中的FlowGroupInfos顺序一致` */
-  FlowIds?: string[] | null;
+  FlowIds?: string[];
   /** 合同组签署方信息。 */
   Approvers?: FlowGroupApprovers[];
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -2051,7 +2055,7 @@ declare interface ChannelCreateUserAutoSignEnableUrlRequest {
   AutoSignConfig?: AutoSignConfig;
   /** 生成的链接类型： 不传(即为空值) 则会生成小程序端开通链接(默认) **H5SIGN** : 生成H5端开通链接 */
   UrlType?: string;
-  /** 是否通知开通方，通知类型:默认不设置为不通知开通方**SMS** : 短信通知 ,如果需要短信通知则NotifyAddress填写对方的手机号 */
+  /** 是否通知开通方，通知类型:默认为不通知开通方**SMS** : 短信通知 ,如果需要短信通知则NotifyAddress填写对方的手机号 */
   NotifyType?: string;
   /** 如果通知类型NotifyType选择为SMS，则此处为手机号, 其他通知类型不需要设置此项 */
   NotifyAddress?: string;

@@ -1090,6 +1090,8 @@ declare interface GovernanceNamespaceInput {
   RemoveGroupIds?: string[];
   /** 该命名空间下的服务对哪些命名空间下可见，1、为空或者不填写，表示仅当前命名空间可见2、列表内容仅一个元素，且为字符 *，表示所有命名空间可见（包括新增）3、列表内容为部份命名空间名称，则只对这些命名空间下可见 */
   ServiceExportTo?: string[];
+  /** 是否开启同步到全局注册中心 */
+  SyncToGlobalRegistry?: boolean;
 }
 
 /** 治理中心服务信息。 */
@@ -1194,6 +1196,8 @@ declare interface GovernanceServiceInput {
   RemoveGroupIds?: string[];
   /** 该服务对哪些命名空间可见 */
   ExportTo?: string[];
+  /** 是否开启同步到全局注册中心 */
+  SyncToGlobalRegistry?: boolean;
 }
 
 /** 实例监听端口信息 */

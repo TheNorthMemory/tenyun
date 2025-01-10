@@ -2,6 +2,34 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 资源列列表信息 */
+declare interface AggregateResourceInfo {
+  /** 资源类型 */
+  ResourceType?: string;
+  /** 资源名称 */
+  ResourceName?: string;
+  /** 资源ID */
+  ResourceId?: string;
+  /** 地域 */
+  ResourceRegion?: string | null;
+  /** 资源状态 */
+  ResourceStatus?: string | null;
+  /** 是否删除 1:已删除 0:未删除 */
+  ResourceDelete?: number | null;
+  /** 资源创建时间 */
+  ResourceCreateTime?: string | null;
+  /** 标签信息 */
+  Tags?: Tag[] | null;
+  /** 可用区 */
+  ResourceZone?: string | null;
+  /** 合规状态 */
+  ComplianceResult?: string | null;
+  /** 资源所属用户ID */
+  ResourceOwnerId?: number;
+  /** 用户昵称 */
+  ResourceOwnerName?: string | null;
+}
+
 /** 合规详情 */
 declare interface Annotation {
   /** 资源当前实际配置。长度为0~256位字符，即资源不合规配置 */
@@ -172,6 +200,42 @@ declare interface TriggerType {
   MaximumExecutionFrequency?: string | null;
 }
 
+declare interface DescribeAggregateDiscoveredResourceRequest {
+  /** 资源ID */
+  ResourceId: string;
+  /** 资源类型 */
+  ResourceType: string;
+  /** 资源地域 */
+  ResourceRegion: string;
+  /** 账号组ID */
+  AccountGroupId: string;
+  /** 资源所属用户ID */
+  ResourceOwnerId: number;
+}
+
+declare interface DescribeAggregateDiscoveredResourceResponse {
+  /** 资源Id */
+  ResourceId?: string | null;
+  /** 资源类型 */
+  ResourceType?: string | null;
+  /** 资源名 */
+  ResourceName?: string | null;
+  /** 资源地域 */
+  ResourceRegion?: string | null;
+  /** 资源可用区 */
+  ResourceZone?: string | null;
+  /** 资源配置 */
+  Configuration?: string | null;
+  /** 资源创建时间 */
+  ResourceCreateTime?: string | null;
+  /** 资源标签 */
+  Tags?: Tag[] | null;
+  /** 资源更新时间 */
+  UpdateTime?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDiscoveredResourceRequest {
   /** 资源ID */
   ResourceId: string;
@@ -230,6 +294,30 @@ declare interface ListAggregateConfigRulesResponse {
   Total?: number;
   /** 详情 */
   Items?: ConfigRule[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListAggregateDiscoveredResourcesRequest {
+  /** 每页显示数量 */
+  MaxResults: number;
+  /** 账号组ID */
+  AccountGroupId: string;
+  /** resourceName：资源名 resourceId ：资源ID */
+  Filters?: Filter[];
+  /** 标签 */
+  Tags?: Tag[];
+  /** 下一页token */
+  NextToken?: string;
+  /** 排序方式 asc、desc */
+  OrderType?: string;
+}
+
+declare interface ListAggregateDiscoveredResourcesResponse {
+  /** 详情 */
+  Items?: AggregateResourceInfo[];
+  /** 下一页 */
+  NextToken?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -297,10 +385,14 @@ declare interface PutEvaluationsResponse {
 /** {@link Config 配置审计} */
 declare interface Config {
   (): Versions;
+  /** 账号组资源详情 {@link DescribeAggregateDiscoveredResourceRequest} {@link DescribeAggregateDiscoveredResourceResponse} */
+  DescribeAggregateDiscoveredResource(data: DescribeAggregateDiscoveredResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAggregateDiscoveredResourceResponse>;
   /** 资源详情 {@link DescribeDiscoveredResourceRequest} {@link DescribeDiscoveredResourceResponse} */
   DescribeDiscoveredResource(data: DescribeDiscoveredResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiscoveredResourceResponse>;
   /** 账号组获取规则列表 {@link ListAggregateConfigRulesRequest} {@link ListAggregateConfigRulesResponse} */
   ListAggregateConfigRules(data: ListAggregateConfigRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAggregateConfigRulesResponse>;
+  /** 账号组获取资源列表 {@link ListAggregateDiscoveredResourcesRequest} {@link ListAggregateDiscoveredResourcesResponse} */
+  ListAggregateDiscoveredResources(data: ListAggregateDiscoveredResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAggregateDiscoveredResourcesResponse>;
   /** 获取规则列表 {@link ListConfigRulesRequest} {@link ListConfigRulesResponse} */
   ListConfigRules(data: ListConfigRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ListConfigRulesResponse>;
   /** 获取资源列表 {@link ListDiscoveredResourcesRequest} {@link ListDiscoveredResourcesResponse} */

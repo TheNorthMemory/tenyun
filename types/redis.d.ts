@@ -51,27 +51,27 @@ declare interface BackupLimitVpcItem {
 /** 大Key详情 */
 declare interface BigKeyInfo {
   /** 所属的database */
-  DB: number;
+  DB?: number;
   /** 大Key */
-  Key: string;
+  Key?: string;
   /** 类型 */
-  Type: string;
+  Type?: string;
   /** 大小 */
-  Size: number;
+  Size?: number;
   /** 数据时间戳 */
-  Updatetime: number;
+  Updatetime?: number;
 }
 
 /** 大Key类型分布详情 */
 declare interface BigKeyTypeInfo {
   /** 类型 */
-  Type: string;
+  Type?: string;
   /** 数量 */
-  Count: number;
+  Count?: number;
   /** 大小 */
-  Size: number;
+  Size?: number;
   /** 时间戳 */
-  Updatetime: number;
+  Updatetime?: number;
 }
 
 /** redis独享集群详细信息 */
@@ -177,21 +177,21 @@ declare interface HotKeyInfo {
 /** 安全组入站规则 */
 declare interface Inbound {
   /** 策略，ACCEPT或者DROP。 */
-  Action: string;
+  Action?: string;
   /** 地址组id代表的地址集合。 */
-  AddressModule: string;
+  AddressModule?: string;
   /** 来源Ip或Ip段，例如192.168.0.0/16。 */
-  CidrIp: string;
+  CidrIp?: string;
   /** 描述。 */
-  Desc: string;
+  Desc?: string;
   /** 网络协议，支持udp、tcp等。 */
-  IpProtocol: string;
+  IpProtocol?: string;
   /** 端口。 */
-  PortRange: string;
+  PortRange?: string;
   /** 服务组id代表的协议和端口集合。 */
-  ServiceModule: string;
+  ServiceModule?: string;
   /** 安全组id代表的地址集合。 */
-  Id: string;
+  Id?: string;
 }
 
 /** 实例节点类型 */
@@ -414,7 +414,7 @@ declare interface InstanceSet {
   InstanceTitle?: string;
   /** 已隔离实例默认下线时间。按量计费实例隔离后默认两小时后下线，包年包月默认7天后下线。格式如：2020-02-15 10:20:00。 */
   OfflineTime?: string;
-  /** 流程中的实例，返回子状态。 */
+  /** 流程中的实例返回的子状态。- 0：磁盘读写状态。- 1：磁盘超限只读状态。 */
   SubStatus?: number;
   /** 反亲和性标签。 */
   Tags?: string[];
@@ -491,17 +491,17 @@ declare interface InstanceSet {
 /** 慢查询详情 */
 declare interface InstanceSlowlogDetail {
   /** 慢查询耗时 */
-  Duration: number;
+  Duration?: number;
   /** 客户端地址 */
-  Client: string;
+  Client?: string;
   /** 命令 */
-  Command: string;
+  Command?: string;
   /** 详细命令行信息 */
-  CommandLine: string;
+  CommandLine?: string;
   /** 执行时间 */
-  ExecuteTime: string;
+  ExecuteTime?: string;
   /** 节点ID */
-  Node: string;
+  Node?: string;
 }
 
 /** 实例标签信息 */
@@ -593,21 +593,21 @@ declare interface LogDeliveryInfo {
 /** 安全组出站规则 */
 declare interface Outbound {
   /** 策略，ACCEPT或者DROP。 */
-  Action: string;
+  Action?: string;
   /** 地址组id代表的地址集合。 */
-  AddressModule: string;
+  AddressModule?: string;
   /** 来源Ip或Ip段，例如192.168.0.0/16。 */
-  CidrIp: string;
+  CidrIp?: string;
   /** 描述。 */
-  Desc: string;
+  Desc?: string;
   /** 网络协议，支持udp、tcp等。 */
-  IpProtocol: string;
+  IpProtocol?: string;
   /** 端口。 */
-  PortRange: string;
+  PortRange?: string;
   /** 服务组id代表的协议和端口集合。 */
-  ServiceModule: string;
+  ServiceModule?: string;
   /** 安全组id代表的地址集合。 */
-  Id: string;
+  Id?: string;
 }
 
 /** 参数模板信息 */
@@ -625,23 +625,23 @@ declare interface ParamTemplateInfo {
 /** Redis参数模板参数详情 */
 declare interface ParameterDetail {
   /** 参数名称。 */
-  Name: string;
+  Name?: string;
   /** 参数类型。 */
-  ParamType: string;
+  ParamType?: string;
   /** 参数默认值。 */
-  Default: string;
+  Default?: string;
   /** 参数描述。 */
-  Description: string;
+  Description?: string;
   /** 参数当前值。 */
-  CurrentValue: string;
+  CurrentValue?: string;
   /** 修改参数后，是否需要重启数据库以使参数生效。- 0：不需要重启。- 1：需要重启。 */
-  NeedReboot: number;
+  NeedReboot?: number;
   /** 参数允许的最大值。 */
-  Max: string | null;
+  Max?: string | null;
   /** 参数允许的最小值。 */
-  Min: string | null;
+  Min?: string | null;
   /** 参数可选枚举值。如果为非枚举参数，则为空。 */
-  EnumValue: string[] | null;
+  EnumValue?: string[] | null;
 }
 
 /** 产品信息 */
@@ -687,35 +687,35 @@ declare interface ProxyNodes {
 /** 实例的备份数组 */
 declare interface RedisBackupSet {
   /** 备份开始时间。 */
-  StartTime: string;
+  StartTime?: string;
   /** 备份任务ID。 */
-  BackupId: string;
+  BackupId?: string;
   /** 备份类型。- 1：凌晨系统发起的自动备份。- 0：用户发起的手动备份。 */
-  BackupType: string;
+  BackupType?: string;
   /** 备份状态。 - 1：备份被其它流程锁定。- 2：备份正常，没有被任何流程锁定。- -1：备份已过期。- 3：备份正在被导出。- 4：备份导出成功。 */
-  Status: number;
+  Status?: number;
   /** 备份的备注信息。 */
-  Remark: string;
+  Remark?: string;
   /** 备份是否被锁定。- 0：未被锁定。- 1：已被锁定。 */
-  Locked: number;
+  Locked?: number;
   /** 内部字段，用户可忽略。 */
-  BackupSize: number | null;
+  BackupSize?: number | null;
   /** 内部字段，用户可忽略。 */
-  FullBackup: number | null;
+  FullBackup?: number | null;
   /** 内部字段，用户可忽略。 */
-  InstanceType: number | null;
+  InstanceType?: number | null;
   /** 实例 ID。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例名称。 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 本地备份所在地域。 */
-  Region: string;
+  Region?: string;
   /** 备份结束时间。 */
-  EndTime: string;
+  EndTime?: string;
   /** 备份文件类型。 */
-  FileType: string;
+  FileType?: string;
   /** 备份文件过期时间。 */
-  ExpireTime: string;
+  ExpireTime?: string;
 }
 
 /** 单个实例信息 */
@@ -821,15 +821,15 @@ declare interface RedisNodes {
 /** 地域信息 */
 declare interface RegionConf {
   /** 地域ID */
-  RegionId: string;
+  RegionId?: string;
   /** 地域名称 */
-  RegionName: string;
+  RegionName?: string;
   /** 地域简称 */
-  RegionShortName: string;
+  RegionShortName?: string;
   /** 地域所在大区名称 */
-  Area: string;
+  Area?: string;
   /** 可用区信息 */
-  ZoneSet: ZoneCapacityConf[];
+  ZoneSet?: ZoneCapacityConf[];
 }
 
 /** 实例节点组信息 */
@@ -875,19 +875,19 @@ declare interface SecondLevelBackupMissingTimestamps {
 /** 安全组规则 */
 declare interface SecurityGroup {
   /** 创建时间，时间格式：yyyy-mm-dd hh:mm:ss。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 项目ID。 */
-  ProjectId: number;
+  ProjectId?: number;
   /** 安全组ID。 */
-  SecurityGroupId: string;
+  SecurityGroupId?: string;
   /** 安全组名称。 */
-  SecurityGroupName: string;
+  SecurityGroupName?: string;
   /** 安全组备注。 */
-  SecurityGroupRemark: string;
+  SecurityGroupRemark?: string;
   /** 出站规则。 */
-  Outbound: Outbound[];
+  Outbound?: Outbound[];
   /** 入站规则。 */
-  Inbound: Inbound[];
+  Inbound?: Inbound[];
 }
 
 /** 安全组详情 */
@@ -973,43 +973,43 @@ declare interface TendisNodes {
 /** Tendis慢查询详情 */
 declare interface TendisSlowLogDetail {
   /** 执行时间 */
-  ExecuteTime: string;
+  ExecuteTime?: string;
   /** 慢查询耗时（毫秒） */
-  Duration: number;
+  Duration?: number;
   /** 命令 */
-  Command: string;
+  Command?: string;
   /** 详细命令行信息 */
-  CommandLine: string;
+  CommandLine?: string;
   /** 节点ID */
-  Node: string;
+  Node?: string;
 }
 
 /** 订单交易信息 */
 declare interface TradeDealDetail {
   /** 订单号ID，调用云API时使用此ID */
-  DealId: string;
+  DealId?: string;
   /** 长订单ID，反馈订单问题给官方客服使用此ID */
-  DealName: string;
+  DealName?: string;
   /** 可用区id */
-  ZoneId: number;
+  ZoneId?: number;
   /** 订单关联的实例数 */
-  GoodsNum: number;
+  GoodsNum?: number;
   /** 创建用户uin */
-  Creater: string;
+  Creater?: string;
   /** 订单创建时间 */
-  CreatTime: string;
+  CreatTime?: string;
   /** 订单超时时间 */
-  OverdueTime: string;
+  OverdueTime?: string;
   /** 订单完成时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 订单状态 1：未支付 2:已支付，未发货 3:发货中 4:发货成功 5:发货失败 6:已退款 7:已关闭订单 8:订单过期 9:订单已失效 10:产品已失效 11:代付拒绝 12:支付中 */
-  Status: number;
+  Status?: number;
   /** 订单状态描述 */
-  Description: string;
+  Description?: string;
   /** 订单实际总价，单位：分 */
-  Price: number;
+  Price?: number;
   /** 实例ID */
-  InstanceIds: string[];
+  InstanceIds?: string[];
 }
 
 /** 可用区内产品信息 */
@@ -1259,7 +1259,7 @@ declare interface CreateInstancesRequest {
   BillingMode: number;
   /** 实例所属的可用区ID，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106) 。 */
   ZoneId?: number;
-  /** 访问实例的密码。- 当输入参数**NoAuth**为**true**时，指设置实例为免密码访问，Password可不用配置，否则Password为必填参数。- 当实例类型**TypeId**为Redis 2.8 内存版标准架构、Redis 4.0、5.0、6.0内存版标准架构或集群架构时，其密码复杂度要求为：8-64个字符，至少包含小写字母、大写字母、数字和字符()`~!@#$%^&*-+=_|{}[]:;<>,.?/ 中的2种，不能以"/"开头。- 当实例类型**TypeId**为CKV 3.2 内存版标准架构或集群架构时，其密码复杂度为：8-30个字符，必须包含字母和数字，且不包含其他字符。 */
+  /** 访问实例的密码。- 当输入参数**NoAuth**为**true**时，指设置实例为免密码访问，Password可不用配置，否则Password为必填参数。- 当实例类型**TypeId**为Redis 2.8 内存版标准架构、Redis 4.0、5.0、6.2、7.0内存版标准架构或集群架构时，其密码复杂度要求为：8-64个字符，至少包含小写字母、大写字母、数字和字符()`~!@#$%^&*-+=_|{}[]:;<>,.?/ 中的2种，不能以"/"开头。- 当实例类型**TypeId**为CKV 3.2 内存版标准架构或集群架构时，其密码复杂度为：8-30个字符，必须包含字母和数字，且不包含其他字符。 */
   Password?: string;
   /** 私有网络ID。如果不配置该参数则默认选择基础网络。请登录 [私有网络](https://console.cloud.tencent.com/vpc)控制台查询具体的ID。 */
   VpcId?: string;
@@ -1783,7 +1783,7 @@ declare interface DescribeInstanceMonitorTookDistResponse {
 }
 
 declare interface DescribeInstanceMonitorTopNCmdRequest {
-  /** 实例 ID。 */
+  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
   /** 时间范围。- 1：实时。- 2：近30分钟。- 3：近6小时。- 4：近24小时。 */
   SpanType: number;
@@ -2527,7 +2527,7 @@ declare interface ModfiyInstancePasswordRequest {
   InstanceId: string;
   /** 实例旧密码。 */
   OldPassword: string;
-  /** 实例新密码。密码复杂度要求如下：- 长度8 - 30位, 推荐使用12位以上的密码。- 不能以"/"开头。- 至少包含小写字母a - z、大写字母A - Z、数字0 - 9、特殊字符 ()~!@#$%^&*-+=_|{}[]:;<>,.?/中的两项。 */
+  /** 实例新密码。密码复杂度要求如下：- 长度8 - 64位, 推荐使用12位以上的密码。- 不能以"/"开头。- 至少包含小写字母a - z、大写字母A - Z、数字0 - 9、特殊字符 ()~!@#$%^&*-+=_|{}[]:;<>,.?/中的两项。 */
   Password: string;
 }
 

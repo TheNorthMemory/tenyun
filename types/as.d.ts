@@ -602,6 +602,8 @@ declare interface RollingUpdateSettings {
   BatchPause?: string;
   /** 最大额外数量。设置该参数后，在滚动更新开始前根据启动配置创建一批按量计费的额外实例，滚动更新完成后销毁额外实例。该参数用于保证滚动更新过程中可用实例的数量，最大额外数量不能超过滚动更新单个批次的刷新实例数。回滚流程暂不支持该参数。 */
   MaxSurge?: number;
+  /** 失败处理策略。默认值为 AUTO_PAUSE，取值范围如下：AUTO_PAUSE：刷新失败后暂停AUTO_ROLLBACK：刷新失败后回滚。回滚时每批次回滚一台实例，CheckInstanceTargetHealth 参数值与原刷新活动一致。MaxSurge参数引入的扩缩容流程失败无需回滚，会用取消动作代替回滚AUTO_CANCEL：刷新失败后取消 */
+  FailProcess?: string;
 }
 
 /** 描述了 “自动化助手” 服务相关的信息 */

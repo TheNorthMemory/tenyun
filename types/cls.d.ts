@@ -66,6 +66,8 @@ declare interface AlarmInfo {
   MonitorObjectType?: number | null;
   /** 告警级别。0:警告(Warn);1:提醒(Info);2:紧急 (Critical)。 */
   AlarmLevel?: number | null;
+  /** 告警附加分类字段。 */
+  Classifications?: AlarmClassification[] | null;
   /** 多触发条件。与Condition互斥。 */
   MultiConditions?: MultiCondition[] | null;
 }

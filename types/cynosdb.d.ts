@@ -344,6 +344,8 @@ declare interface BizTaskInfo {
   TaskMaintainInfo?: TaskMaintainInfo | null;
   /** 实例日志投递信息 */
   InstanceCLSDeliveryInfos?: InstanceCLSDeliveryInfo[] | null;
+  /** 任务进度信息 */
+  TaskProgressInfo?: TaskProgressInfo;
 }
 
 /** 实例参数修改任务详情 */
@@ -2122,6 +2124,16 @@ declare interface TaskMaintainInfo {
   MaintainWeekDays?: string[] | null;
 }
 
+/** 任务进度查询 */
+declare interface TaskProgressInfo {
+  /** 当前步骤 */
+  CurrentStep?: string;
+  /** 当前进度 */
+  CurrentStepProgress?: number;
+  /** 预估时间 */
+  CurrentStepRemainingTime?: string;
+}
+
 /** 参数模板详情 */
 declare interface TemplateParamInfo {
   /** 当前值 */
@@ -3499,6 +3511,8 @@ declare interface DescribeInstanceSlowQueriesRequest {
   OrderBy?: string;
   /** 排序类型，可选值：asc,desc */
   OrderByType?: string;
+  /** sql语句 */
+  SqlText?: string;
 }
 
 declare interface DescribeInstanceSlowQueriesResponse {
@@ -5067,6 +5081,8 @@ declare interface RollbackToNewClusterRequest {
   RollbackTables?: RollbackTable[];
   /** 原ro实例信息 */
   OriginalROInstanceList?: string[];
+  /** 项目id */
+  ProjectId?: number;
 }
 
 declare interface RollbackToNewClusterResponse {

@@ -13,13 +13,13 @@ declare interface AllNodeResourceSpec {
   /** 描述Common节点资源 */
   CommonResourceSpec?: NodeResourceSpec | null;
   /** Master节点数量 */
-  MasterCount?: number | null;
+  MasterCount?: number;
   /** Corer节点数量 */
-  CoreCount?: number | null;
+  CoreCount?: number;
   /** Task节点数量 */
-  TaskCount?: number | null;
+  TaskCount?: number;
   /** Common节点数量 */
-  CommonCount?: number | null;
+  CommonCount?: number;
 }
 
 /** yarn application 统计信息 */
@@ -197,35 +197,35 @@ declare interface CapacityGlobalConfig {
 /** 出参 */
 declare interface CdbInfo {
   /** 数据库实例 */
-  InstanceName: string | null;
+  InstanceName?: string;
   /** 数据库IP */
-  Ip: string | null;
+  Ip?: string;
   /** 数据库端口 */
-  Port: number | null;
+  Port?: number;
   /** 数据库内存规格 */
-  MemSize: number | null;
+  MemSize?: number;
   /** 数据库磁盘规格 */
-  Volume: number | null;
+  Volume?: number;
   /** 服务标识 */
-  Service: string | null;
+  Service?: string;
   /** 过期时间 */
-  ExpireTime: string | null;
+  ExpireTime?: string;
   /** 申请时间 */
-  ApplyTime: string | null;
+  ApplyTime?: string;
   /** 付费类型 */
-  PayType: number | null;
+  PayType?: number;
   /** 过期标识 */
-  ExpireFlag: boolean | null;
+  ExpireFlag?: boolean;
   /** 数据库状态 */
-  Status: number | null;
+  Status?: number;
   /** 续费标识 */
-  IsAutoRenew: number | null;
+  IsAutoRenew?: number;
   /** 数据库字符串 */
-  SerialNo: string | null;
+  SerialNo?: string;
   /** ZoneId */
-  ZoneId: number | null;
+  ZoneId?: number;
   /** RegionId */
-  RegionId: number | null;
+  RegionId?: number;
 }
 
 /** 容器集群Pod请求资源信息 */
@@ -239,7 +239,7 @@ declare interface CloudResource {
   /** 内存请求数量最大值 */
   LimitMemory: number;
   /** 服务名称，如HIVE */
-  Service?: string | null;
+  Service?: string;
   /** 数据卷目录设置 */
   VolumeDir?: VolumeSetting | null;
   /** 组件外部访问设置 */
@@ -273,95 +273,105 @@ declare interface ClusterIDToFlowID {
 /** 集群实例信息 */
 declare interface ClusterInstancesInfo {
   /** ID号 */
-  Id?: number | null;
+  Id?: number;
   /** 集群ID */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 标题 */
   Ftitle?: string | null;
   /** 集群名 */
-  ClusterName?: string | null;
+  ClusterName?: string;
   /** 地域ID */
-  RegionId?: number | null;
+  RegionId?: number;
   /** 地区ID */
-  ZoneId?: number | null;
+  ZoneId?: number;
   /** 用户APPID */
-  AppId?: number | null;
+  AppId?: number;
   /** 用户UIN */
-  Uin?: string | null;
+  Uin?: string;
   /** 项目Id */
-  ProjectId?: number | null;
+  ProjectId?: number;
   /** 集群VPCID */
-  VpcId?: number | null;
+  VpcId?: number;
   /** 子网ID */
-  SubnetId?: number | null;
+  SubnetId?: number;
   /** 实例的状态码。取值范围：2：表示集群运行中。3：表示集群创建中。4：表示集群扩容中。5：表示集群增加router节点中。6：表示集群安装组件中。7：表示集群执行命令中。8：表示重启服务中。9：表示进入维护中。10：表示服务暂停中。11：表示退出维护中。12：表示退出暂停中。13：表示配置下发中。14：表示销毁集群中。15：表示销毁core节点中。16：销毁task节点中。17：表示销毁router节点中。18：表示更改webproxy密码中。19：表示集群隔离中。20：表示集群冲正中。21：表示集群回收中。22：表示变配等待中。23：表示集群已隔离。24：表示缩容节点中。33：表示集群等待退费中。34：表示集群已退费。301：表示创建失败。302：表示扩容失败。 */
-  Status?: number | null;
+  Status?: number;
   /** 添加时间 */
-  AddTime?: string | null;
+  AddTime?: string;
   /** 已经运行时间 */
-  RunTime?: string | null;
+  RunTime?: string;
   /** 集群产品配置信息 */
   Config?: EmrProductConfigOutter | null;
   /** 主节点外网IP */
-  MasterIp?: string | null;
+  MasterIp?: string;
   /** EMR版本 */
-  EmrVersion?: string | null;
+  EmrVersion?: string;
   /** 收费类型 */
-  ChargeType?: number | null;
+  ChargeType?: number;
   /** 交易版本 */
-  TradeVersion?: number | null;
+  TradeVersion?: number;
   /** 资源订单ID */
-  ResourceOrderId?: number | null;
+  ResourceOrderId?: number;
   /** 是否计费集群 */
-  IsTradeCluster?: number | null;
+  IsTradeCluster?: number;
   /** 集群错误状态告警信息 */
-  AlarmInfo?: string | null;
+  AlarmInfo?: string;
   /** 是否采用新架构 */
-  IsWoodpeckerCluster?: number | null;
+  IsWoodpeckerCluster?: number;
   /** 元数据库信息 */
-  MetaDb?: string | null;
+  MetaDb?: string;
   /** 标签信息 */
   Tags?: Tag[] | null;
   /** Hive元数据信息 */
-  HiveMetaDb?: string | null;
+  HiveMetaDb?: string;
   /** 集群类型:EMR,CLICKHOUSE,DRUID */
-  ServiceClass?: string | null;
+  ServiceClass?: string;
   /** 集群所有节点的别名序列化 */
-  AliasInfo?: string | null;
+  AliasInfo?: string;
   /** 集群版本Id */
-  ProductId?: number | null;
+  ProductId?: number;
   /** 地区ID */
-  Zone?: string | null;
+  Zone?: string;
   /** 场景名称 */
-  SceneName?: string | null;
+  SceneName?: string;
   /** 场景化集群类型 */
-  SceneServiceClass?: string | null;
+  SceneServiceClass?: string;
   /** 场景化EMR版本 */
-  SceneEmrVersion?: string | null;
+  SceneEmrVersion?: string;
   /** 场景化集群类型 */
-  DisplayName?: string | null;
+  DisplayName?: string;
   /** vpc name */
-  VpcName?: string | null;
+  VpcName?: string;
   /** subnet name */
-  SubnetName?: string | null;
+  SubnetName?: string;
   /** 集群依赖关系 */
   ClusterExternalServiceInfo?: ClusterExternalServiceInfo[] | null;
   /** 集群vpcid 字符串类型 */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** 子网id 字符串类型 */
-  UniqSubnetId?: string | null;
+  UniqSubnetId?: string;
   /** 节点信息 */
   TopologyInfoList?: TopologyInfo[] | null;
   /** 是否是跨AZ集群 */
-  IsMultiZoneCluster?: boolean | null;
+  IsMultiZoneCluster?: boolean;
   /** 是否开通异常节点自动补偿 */
-  IsCvmReplace?: boolean | null;
+  IsCvmReplace?: boolean;
   /** 标题 */
-  ClusterTitle?: string | null;
+  ClusterTitle?: string;
   /** 集群产品配置信息 */
   ConfigDetail?: EmrProductConfigDetail | null;
   /** 集群绑定的文件系统数 */
-  BindFileSystemNum?: number | null;
+  BindFileSystemNum?: number;
+  /** rss集群的绑定列表 */
+  ClusterRelationInfoList?: ClusterRelationMeta[] | null;
+}
+
+/** 集群间绑定使用信息 */
+declare interface ClusterRelationMeta {
+  /** 集群类型 */
+  ClusterType?: string | null;
+  /** 集群id列表 */
+  ClusterIdList?: string[] | null;
 }
 
 /** 集群配置。 */
@@ -505,9 +515,9 @@ declare interface DependService {
 /** DescribeResourceConfig接口出参 */
 declare interface DescribeResourceConfig {
   /** 规格管理类型 */
-  ResourceType: string;
+  ResourceType?: string;
   /** 规格管理数据 */
-  ResourceData: NodeResource[];
+  ResourceData?: NodeResource[];
 }
 
 /** 动态生成的变更详情 */
@@ -687,15 +697,15 @@ declare interface EmrListInstance {
 /** Emr询价描述 */
 declare interface EmrPrice {
   /** 刊例价格 */
-  OriginalCost: string | null;
+  OriginalCost?: string;
   /** 折扣价格 */
-  DiscountCost: string | null;
+  DiscountCost?: string;
   /** 单位 */
-  Unit: string | null;
+  Unit?: string;
   /** 询价配置 */
-  PriceSpec: PriceResource | null;
+  PriceSpec?: PriceResource | null;
   /** 是否支持竞价实例 */
-  SupportSpotPaid: boolean | null;
+  SupportSpotPaid?: boolean;
 }
 
 /** EMR产品配置 */
@@ -1097,23 +1107,23 @@ declare interface KyuubiQueryInfo {
 /** 自动扩缩容基于负载指标的规则 */
 declare interface LoadAutoScaleStrategy {
   /** 规则ID。 */
-  StrategyId?: number | null;
+  StrategyId?: number;
   /** 规则名称。 */
-  StrategyName?: string | null;
+  StrategyName?: string;
   /** 规则生效冷却时间。 */
-  CalmDownTime?: number | null;
+  CalmDownTime?: number;
   /** 扩缩容动作，1表示扩容，2表示缩容。 */
-  ScaleAction?: number | null;
+  ScaleAction?: number;
   /** 每次规则生效时的扩缩容数量。 */
-  ScaleNum?: number | null;
+  ScaleNum?: number;
   /** 指标处理方法，1表示MAX，2表示MIN，3表示AVG。 */
-  ProcessMethod?: number | null;
+  ProcessMethod?: number;
   /** 规则优先级，添加时无效，默认为自增。 */
-  Priority?: number | null;
+  Priority?: number;
   /** 规则状态，1表示启动，3表示禁用。 */
-  StrategyStatus?: number | null;
+  StrategyStatus?: number;
   /** 规则扩容指定 yarn node label */
-  YarnNodeLabel?: string | null;
+  YarnNodeLabel?: string;
   /** 规则生效的有效时间 */
   PeriodValid?: string;
   /** 优雅缩容开关 */
@@ -1123,9 +1133,9 @@ declare interface LoadAutoScaleStrategy {
   /** 绑定标签列表 */
   Tags?: Tag[] | null;
   /** 预设配置组 */
-  ConfigGroupAssigned?: string | null;
+  ConfigGroupAssigned?: string;
   /** 扩容资源计算方法，"DEFAULT","INSTANCE", "CPU", "MEMORYGB"。"DEFAULT"表示默认方式，与"INSTANCE"意义相同。"INSTANCE"表示按照节点计算，默认方式。"CPU"表示按照机器的核数计算。"MEMORYGB"表示按照机器内存数计算。 */
-  MeasureMethod?: string | null;
+  MeasureMethod?: string;
   /** 多指标触发条件 */
   LoadMetricsConditions?: LoadMetricsConditions | null;
 }
@@ -1133,13 +1143,13 @@ declare interface LoadAutoScaleStrategy {
 /** 负载指标条件 */
 declare interface LoadMetricsCondition {
   /** 规则统计周期，提供1min,3min,5min。 */
-  StatisticPeriod?: number | null;
+  StatisticPeriod?: number;
   /** 触发次数，当连续触发超过TriggerThreshold次后才开始扩缩容。 */
-  TriggerThreshold?: number | null;
+  TriggerThreshold?: number;
   /** 扩缩容负载指标。 */
-  LoadMetrics?: string | null;
+  LoadMetrics?: string;
   /** 规则元数据记录ID。 */
-  MetricId?: number | null;
+  MetricId?: number;
   /** 触发条件 */
   Conditions?: TriggerCondition[] | null;
 }
@@ -1207,11 +1217,11 @@ declare interface MonthRepeatStrategy {
 /** 多云盘参数 */
 declare interface MultiDisk {
   /** 云盘类型CLOUD_SSD：表示云SSD。CLOUD_PREMIUM：表示高效云盘。CLOUD_HSSD：表示增强型SSD云硬盘。 */
-  DiskType?: string | null;
+  DiskType?: string;
   /** 云盘大小 */
-  Volume?: number | null;
+  Volume?: number;
   /** 该类型云盘个数 */
-  Count?: number | null;
+  Count?: number;
 }
 
 /** 多云盘参数 */
@@ -1229,7 +1239,7 @@ declare interface MultiDiskMC {
 /** 各个可用区的参数信息 */
 declare interface MultiZoneSetting {
   /** "master"、"standby"、"third-party" */
-  ZoneTag?: string | null;
+  ZoneTag?: string;
   /** 无 */
   VPCSettings?: VPCSettings;
   /** 无 */
@@ -1393,13 +1403,13 @@ declare interface NodeResource {
   /** Resource */
   Resource?: Resource | null;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 是否默认配置,DEFAULT,BACKUP */
-  IsDefault?: string | null;
+  IsDefault?: string;
   /** 该类型剩余 */
-  MaxResourceNum?: number | null;
+  MaxResourceNum?: number;
   /** 支持的包销时长 */
   PrepaidUnderwritePeriods?: number[] | null;
 }
@@ -1550,6 +1560,8 @@ declare interface PersistentVolumeContext {
   DiskType?: string;
   /** 磁盘数量 */
   DiskNum?: number;
+  /** 云盘额外性能 */
+  ExtraPerformance?: number;
 }
 
 /** 描述集群实例位置信息 */
@@ -1643,11 +1655,11 @@ declare interface PodSpec {
   /** 浮动规格 */
   DynamicPodSpec?: DynamicPodSpec | null;
   /** 代表vpc网络唯一id */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 代表vpc子网唯一id */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** pod name */
-  PodName?: string | null;
+  PodName?: string;
 }
 
 /** Pod相关信息 */
@@ -1745,31 +1757,31 @@ declare interface PriceDetail {
 /** 询价资源 */
 declare interface PriceResource {
   /** 需要的规格 */
-  Spec: string | null;
+  Spec?: string;
   /** 硬盘类型 */
-  StorageType: number | null;
+  StorageType?: number;
   /** 硬盘类型 */
-  DiskType: string | null;
+  DiskType?: string;
   /** 系统盘大小 */
-  RootSize: number | null;
+  RootSize?: number;
   /** 内存大小 */
-  MemSize: number | null;
+  MemSize?: number;
   /** 核心数量 */
-  Cpu: number | null;
+  Cpu?: number;
   /** 硬盘大小 */
-  DiskSize: number | null;
+  DiskSize?: number;
   /** 云盘列表 */
-  MultiDisks: MultiDisk[] | null;
+  MultiDisks?: MultiDisk[] | null;
   /** 磁盘数量 */
-  DiskCnt: number | null;
+  DiskCnt?: number;
   /** 规格 */
-  InstanceType: string | null;
+  InstanceType?: string;
   /** 标签 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 磁盘数量 */
-  DiskNum: number | null;
+  DiskNum?: number;
   /** 本地盘的数量 */
-  LocalDiskNum: number | null;
+  LocalDiskNum?: number;
 }
 
 /** 询价结果 */
@@ -1834,34 +1846,36 @@ declare interface RepeatStrategy {
   NotRepeat?: NotRepeatStrategy | null;
   /** 规则过期时间，超过该时间后，规则将自动置为暂停状态，形式为"2020-07-23 00:00:00"。必须填写 */
   Expire?: string | null;
+  /** 周期性规则开始时间 */
+  StartTime?: string;
 }
 
 /** 资源详情 */
 declare interface Resource {
   /** 节点规格描述，如CVM.SA2。 */
-  Spec: string | null;
+  Spec: string;
   /** 存储类型取值范围：4：表示云SSD。5：表示高效云盘。6：表示增强型SSD云硬盘。11：表示吞吐型云硬盘。12：表示极速型SSD云硬盘。：创建时该类型无效，会根据数据盘类型和节点类型自动判断 */
-  StorageType: number | null;
+  StorageType: number;
   /** 磁盘类型取值范围：CLOUD_SSD：表示云SSD。CLOUD_PREMIUM：表示高效云盘。CLOUD_BASIC：表示云硬盘。 */
-  DiskType: string | null;
+  DiskType: string;
   /** 内存容量,单位为M */
-  MemSize: number | null;
+  MemSize: number;
   /** CPU核数 */
-  Cpu: number | null;
+  Cpu: number;
   /** 数据盘容量 */
-  DiskSize: number | null;
+  DiskSize: number;
   /** 系统盘容量 */
-  RootSize?: number | null;
+  RootSize?: number;
   /** 云盘列表，当数据盘为一块云盘时，直接使用DiskType和DiskSize参数，超出部分使用MultiDisks */
   MultiDisks?: MultiDisk[] | null;
   /** 需要绑定的标签列表 */
   Tags?: Tag[] | null;
   /** 规格类型，如S2.MEDIUM8 */
-  InstanceType?: string | null;
+  InstanceType?: string;
   /** 本地盘数量，该字段已废弃 */
-  LocalDiskNum?: number | null;
+  LocalDiskNum?: number;
   /** 本地盘数量，如2 */
-  DiskNum?: number | null;
+  DiskNum?: number;
 }
 
 /** 资源详情 */
@@ -1889,15 +1903,15 @@ declare interface ResourceDetail {
 /** 组件重启策略 */
 declare interface RestartPolicy {
   /** 重启策略名。 */
-  Name: string;
+  Name?: string;
   /** 策略展示名称。 */
-  DisplayName: string;
+  DisplayName?: string;
   /** 策略描述。 */
-  Describe: string;
+  Describe?: string;
   /** 批量重启节点数可选范围。 */
-  BatchSizeRange: number[];
+  BatchSizeRange?: number[];
   /** 是否是默认策略。 */
-  IsDefault: string;
+  IsDefault?: string;
 }
 
 /** Serverless HBase 实例信息 */
@@ -2291,45 +2305,45 @@ declare interface Tag {
 /** 时间扩缩容规则 */
 declare interface TimeAutoScaleStrategy {
   /** 策略名字，集群内唯一。 */
-  StrategyName: string | null;
+  StrategyName: string;
   /** 策略触发后的冷却时间，该段时间内，将不能触发弹性扩缩容。 */
-  IntervalTime: number | null;
+  IntervalTime: number;
   /** 扩缩容动作，1表示扩容，2表示缩容。 */
-  ScaleAction: number | null;
+  ScaleAction: number;
   /** 扩缩容数量。 */
-  ScaleNum: number | null;
+  ScaleNum: number;
   /** 规则状态，1表示有效，2表示无效，3表示暂停。必须填写 */
-  StrategyStatus: number | null;
+  StrategyStatus: number;
   /** 规则优先级，越小越高。 */
-  Priority: number | null;
+  Priority: number;
   /** 当多条规则同时触发，其中某些未真正执行时，在该时间范围内，将会重试。 */
-  RetryValidTime: number | null;
+  RetryValidTime: number;
   /** 时间扩缩容重复策略 */
   RepeatStrategy: RepeatStrategy | null;
   /** 策略唯一ID。 */
-  StrategyId?: number | null;
+  StrategyId?: number;
   /** 优雅缩容开关 */
-  GraceDownFlag?: boolean | null;
+  GraceDownFlag?: boolean;
   /** 优雅缩容等待时间 */
-  GraceDownTime?: number | null;
+  GraceDownTime?: number;
   /** 绑定标签列表 */
   Tags?: Tag[] | null;
   /** 预设配置组 */
-  ConfigGroupAssigned?: string | null;
+  ConfigGroupAssigned?: string;
   /** 扩容资源计算方法，"DEFAULT","INSTANCE", "CPU", "MEMORYGB"。"DEFAULT"表示默认方式，与"INSTANCE"意义相同。"INSTANCE"表示按照节点计算，默认方式。"CPU"表示按照机器的核数计算。"MEMORYGB"表示按照机器内存数计算。 */
-  MeasureMethod?: string | null;
+  MeasureMethod?: string;
   /** 销毁策略, "DEFAULT",默认销毁策略，由缩容规则触发缩容，"TIMING"表示定时销毁 */
-  TerminatePolicy?: string | null;
+  TerminatePolicy?: string;
   /** 最长使用时间， 秒数，最短1小时，最长24小时 */
-  MaxUse?: number | null;
+  MaxUse?: number;
   /** 节点部署服务列表。部署服务仅填写HDFS、YARN。[组件名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760) */
   SoftDeployInfo?: number[] | null;
   /** 启动进程列表。 */
   ServiceNodeInfo?: number[] | null;
   /** 补偿扩容，0表示不开启，1表示开启 */
-  CompensateFlag?: number | null;
+  CompensateFlag?: number;
   /** 伸缩组id */
-  GroupId?: number | null;
+  GroupId?: number;
 }
 
 /** 集群节点拓扑信息 */
@@ -2349,7 +2363,7 @@ declare interface TriggerCondition {
   /** 条件比较方法，1表示大于，2表示小于，3表示大于等于，4表示小于等于。 */
   CompareMethod: number;
   /** 条件阈值。 */
-  Threshold?: number | null;
+  Threshold?: number;
 }
 
 /** trino 查询信息 */
@@ -2617,7 +2631,7 @@ declare interface ZoneSetting {
 declare interface AddMetricScaleStrategyRequest {
   /** 实例ID。 */
   InstanceId: string;
-  /** 1表示按负载规则扩容，2表示按时间规则扩容。必须填写，并且和下面的规则策略匹配 */
+  /** 1表示按负载规则扩缩容，2表示按时间规则扩缩容。必须填写，并且和下面的规则策略匹配 */
   StrategyType: number;
   /** 按负载扩容的规则。 */
   LoadAutoScaleStrategy?: LoadAutoScaleStrategy;
@@ -2693,7 +2707,7 @@ declare interface AttachDisksRequest {
 
 declare interface AttachDisksResponse {
   /** 流程id */
-  FlowId?: number | null;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2969,7 +2983,7 @@ declare interface DescribeAutoScaleGroupGlobalConfResponse {
   /** 集群所有伸缩组全局信息 */
   GroupGlobalConfs?: GroupGlobalConfs[] | null;
   /** 总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2977,7 +2991,7 @@ declare interface DescribeAutoScaleGroupGlobalConfResponse {
 declare interface DescribeAutoScaleRecordsRequest {
   /** 实例ID。 */
   InstanceId: string;
-  /** 记录过滤参数，目前仅能为“StartTime”,“EndTime”和“StrategyName”。StartTime和EndTime支持2006-01-02 15:04:05 或者2006/01/02 15:04:05的时间格式 */
+  /** 记录过滤参数，目前仅能为“StartTime”,“EndTime”和“StrategyName”、ActionStatus、ScaleAction。StartTime和EndTime支持2006-01-02 15:04:05 或者2006/01/02 15:04:05的时间格式ActionStatus：0:INITED,1:SUCCESS, 2:FAILED,3:LIMITED_SUCCESSED,4:IN_PROCESS,5:IN_RETRYScaleAction：1:扩容 2:缩容 */
   Filters?: KeyValue[];
   /** 分页参数。 */
   Offset?: number;
@@ -2985,6 +2999,8 @@ declare interface DescribeAutoScaleRecordsRequest {
   Limit?: number;
   /** 表示是自动(0)还是托管伸缩(1) */
   RecordSource?: number;
+  /** 是否升序，1:升序，0:降序 */
+  Asc?: number;
 }
 
 declare interface DescribeAutoScaleRecordsResponse {
@@ -3027,11 +3043,11 @@ declare interface DescribeClusterFlowStatusDetailResponse {
   /** 任务参数 */
   FlowDesc?: FlowParamsDesc[] | null;
   /** 任务名称 */
-  FlowName?: string | null;
+  FlowName?: string;
   /** 总任务流程进度：例如：0.8 */
-  FlowTotalProgress?: number | null;
+  FlowTotalProgress?: number;
   /** 定义流程总状态：0:初始化，1:运行中，2:完成，3:完成（存在跳过步骤），-1:失败，-3:阻塞， */
-  FlowTotalStatus?: number | null;
+  FlowTotalStatus?: number;
   /** 流程额外信息NeedExtraDetail为true时返回 */
   FlowExtraDetail?: FlowExtraDetail[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3211,7 +3227,7 @@ declare interface DescribeHDFSStorageInfoRequest {
 
 declare interface DescribeHDFSStorageInfoResponse {
   /** 采样时间 */
-  SampleTime?: number | null;
+  SampleTime?: number;
   /** hdfs存储详情 */
   StorageSummaryDistribution?: StorageSummaryDistribution[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3565,7 +3581,7 @@ declare interface DescribeServiceNodeInfosRequest {
   NodeTypeName?: string;
   /** 过滤条件：dn是否处于维护状态0代表所有状态1代表处于维护状态 */
   DataNodeMaintenanceId?: number;
-  /** 支持搜索的字段 */
+  /** 支持搜索的字段，目前支持 SearchType	：ipv4 */
   SearchFields?: SearchItem[];
 }
 
@@ -3757,13 +3773,13 @@ declare interface InquirePriceRenewEmrRequest {
 
 declare interface InquirePriceRenewEmrResponse {
   /** 原价，单位为元。 */
-  OriginalCost?: number | null;
+  OriginalCost?: number;
   /** 折扣价，单位为元。 */
-  DiscountCost?: number | null;
+  DiscountCost?: number;
   /** 实例续费的时间单位。取值范围：m：表示月份。 */
-  TimeUnit?: string | null;
+  TimeUnit?: string;
   /** 实例续费的时长。 */
-  TimeSpan?: number | null;
+  TimeSpan?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3807,13 +3823,13 @@ declare interface InquiryPriceCreateInstanceRequest {
 
 declare interface InquiryPriceCreateInstanceResponse {
   /** 原价，单位为元。 */
-  OriginalCost?: number | null;
+  OriginalCost?: number;
   /** 折扣价，单位为元。 */
-  DiscountCost?: number | null;
+  DiscountCost?: number;
   /** 购买实例的时间单位。取值范围：s：表示秒。m：表示月份。 */
-  TimeUnit?: string | null;
+  TimeUnit?: string;
   /** 购买实例的时长。 */
-  TimeSpan?: number | null;
+  TimeSpan?: number;
   /** 价格清单 */
   PriceList?: ZoneDetailPriceResult[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3843,13 +3859,13 @@ declare interface InquiryPriceRenewInstanceRequest {
 
 declare interface InquiryPriceRenewInstanceResponse {
   /** 原价，单位为元。 */
-  OriginalCost?: number | null;
+  OriginalCost?: number;
   /** 折扣价，单位为元。 */
-  DiscountCost?: number | null;
+  DiscountCost?: number;
   /** 实例续费的时间单位。取值范围：m：表示月份。 */
-  TimeUnit?: string | null;
+  TimeUnit?: string;
   /** 实例续费的时长。 */
-  TimeSpan?: number | null;
+  TimeSpan?: number;
   /** 价格详情 */
   PriceDetail?: PriceDetail[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3887,11 +3903,11 @@ declare interface InquiryPriceScaleOutInstanceRequest {
 
 declare interface InquiryPriceScaleOutInstanceResponse {
   /** 原价，单位为元。 */
-  OriginalCost?: string | null;
+  OriginalCost?: string;
   /** 折扣价，单位为元。 */
-  DiscountCost?: string | null;
+  DiscountCost?: string;
   /** 扩容的时间单位。取值范围：s：表示秒。m：表示月份。 */
-  Unit?: string | null;
+  Unit?: string;
   /** 询价的节点规格。 */
   PriceSpec?: PriceResource | null;
   /** 对应入参MultipleResources中多个规格的询价结果，其它出参返回的是第一个规格的询价结果 */
@@ -3919,13 +3935,13 @@ declare interface InquiryPriceUpdateInstanceRequest {
 
 declare interface InquiryPriceUpdateInstanceResponse {
   /** 原价，单位为元。 */
-  OriginalCost?: number | null;
+  OriginalCost?: number;
   /** 折扣价，单位为元。 */
-  DiscountCost?: number | null;
+  DiscountCost?: number;
   /** 变配的时间单位。取值范围：s：表示秒。m：表示月份。 */
-  TimeUnit?: string | null;
+  TimeUnit?: string;
   /** 变配的时长。 */
-  TimeSpan?: number | null;
+  TimeSpan?: number;
   /** 价格详情 */
   PriceDetail?: PriceDetail[] | null;
   /** 新配置价格 */
@@ -4009,9 +4025,9 @@ declare interface ModifyPodNumRequest {
 
 declare interface ModifyPodNumResponse {
   /** 集群Id */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 流程Id */
-  FlowId?: number | null;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4027,7 +4043,7 @@ declare interface ModifyResourcePoolsResponse {
   /** false表示不是草稿，提交刷新请求成功 */
   IsDraft?: boolean;
   /** 扩展字段，暂时没用 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4051,7 +4067,7 @@ declare interface ModifyResourceRequest {
 
 declare interface ModifyResourceResponse {
   /** 流程traceId */
-  TraceId?: string | null;
+  TraceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4069,9 +4085,9 @@ declare interface ModifyResourceScheduleConfigResponse {
   /** true为草稿，表示还没有刷新资源池 */
   IsDraft?: boolean;
   /** 校验错误信息，如果不为空，则说明校验失败，配置没有成功 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 返回数据 */
-  Data?: string | null;
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4195,7 +4211,7 @@ declare interface ResizeDataDisksRequest {
 
 declare interface ResizeDataDisksResponse {
   /** 流程Id */
-  FlowId?: number | null;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4285,15 +4301,15 @@ declare interface ScaleOutClusterResponse {
   /** 实例ID。 */
   InstanceId?: string;
   /** 客户端Token。 */
-  ClientToken?: string | null;
+  ClientToken?: string;
   /** 扩容流程ID。 */
-  FlowId?: number | null;
+  FlowId?: number;
   /** 查询流程状态，流程额外信息 */
-  TraceId?: string | null;
+  TraceId?: string;
   /** 订单号。 */
   DealNames?: string[] | null;
   /** 大订单号。 */
-  BillId?: string | null;
+  BillId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4363,13 +4379,13 @@ declare interface ScaleOutInstanceResponse {
   /** 订单号。 */
   DealNames?: string[] | null;
   /** 客户端Token。 */
-  ClientToken?: string | null;
+  ClientToken?: string;
   /** 扩容流程ID。 */
-  FlowId?: number | null;
+  FlowId?: number;
   /** 大订单号。 */
-  BillId?: string | null;
+  BillId?: string;
   /** 扩容TraceId */
-  TraceId?: string | null;
+  TraceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

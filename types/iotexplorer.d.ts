@@ -2,6 +2,20 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 设备激活详情信息 */
+declare interface ActivateDeviceInfo {
+  /** 实例ID */
+  InstanceId: string;
+  /** 实例类型 */
+  InstanceType: number;
+  /** 设备激活信息 */
+  DeviceActivationDetails: DeviceActivationDetail;
+  /** 已注册设备类型信息 */
+  RegisteredDeviceType: RegisteredDeviceTypeInfo;
+  /** 已注册设备通信类型信息 */
+  RegisteredDeviceNetType: RegisteredDeviceNetTypeInfo;
+}
+
 /** 云api直接绑定设备出参 */
 declare interface AppDeviceInfo {
   /** 产品ID/设备名 */
@@ -140,6 +154,18 @@ declare interface CloudStorageEvent {
   Data?: string | null;
 }
 
+/** 云存套餐包信息 */
+declare interface CloudStoragePackageInfo {
+  /** 套餐包id */
+  PackageId?: string;
+  /** 套餐包名字 */
+  PackageName?: string;
+  /** 套餐包数量 */
+  Num?: number;
+  /** 已使用数量 */
+  UsedNum?: number;
+}
+
 /** 云存时间轴接口返回数据 */
 declare interface CloudStorageTimeData {
   /** 云存时间轴信息列表 */
@@ -160,6 +186,22 @@ declare interface CloudStorageTimeInfo {
 declare interface CloudStorageUserInfo {
   /** 用户ID */
   UserId?: string;
+}
+
+/** 设备激活详情信息 */
+declare interface DeviceActivationDetail {
+  /** 可注册设备数 */
+  TotalDeviceNum: number;
+  /** 已注册设备数 */
+  UsedDeviceNum: number;
+  /** 设备授权数 */
+  TotalNormalLicense: number;
+  /** 已使用设备授权数 */
+  UsedNormalLicense: number;
+  /** 蓝牙授权数 */
+  TotalBluetoothLicense: number;
+  /** 已使用蓝牙授权数 */
+  UsedBluetoothLicense: number;
 }
 
 /** 设备激活结果数据 */
@@ -458,6 +500,18 @@ declare interface InstanceDetail {
   MaxDeviceOnlineCount?: number | null;
 }
 
+/** 增值服务数量统计 */
+declare interface LicenseServiceNumInfo {
+  /** 服务类型 */
+  LicenseType?: string;
+  /** 授权总数 */
+  TotalNum?: number;
+  /** 已使用授权数 */
+  UsedNum?: number;
+  /** TWeCall激活码 */
+  TWeCallLicense?: TWeCallLicenseInfo[] | null;
+}
+
 /** LoRa自定义频点信息 */
 declare interface LoRaFrequencyEntry {
   /** 频点唯一ID */
@@ -744,6 +798,24 @@ declare interface ProjectEntryEx {
   EnableOpenState: number | null;
 }
 
+/** 已注册通信类型信息 */
+declare interface RegisteredDeviceNetTypeInfo {
+  /** 普通设备数 */
+  NormalDeviceNum: number;
+  /** 蓝牙设备数 */
+  BluetoothDeviceNum: number;
+}
+
+/** 已注册设备类型信息 */
+declare interface RegisteredDeviceTypeInfo {
+  /** 已注册设备数 */
+  NormalDeviceNum: number;
+  /** 已注册网关数 */
+  GatewayDeviceNum: number;
+  /** 已注册子设备数 */
+  SubDeviceNum: number;
+}
+
 /** 搜索关键词 */
 declare interface SearchKeyword {
   /** 搜索条件的Key */
@@ -796,6 +868,16 @@ declare interface TWeCallInfo {
   ModelId?: string | null;
   /** 激活数 */
   ActiveNum?: number | null;
+}
+
+/** TWeCall信息 */
+declare interface TWeCallLicenseInfo {
+  /** voip类型 */
+  TWeCallType?: string | null;
+  /** 总数 */
+  TotalNum?: number | null;
+  /** 已使用 */
+  UsedNum?: number | null;
 }
 
 /** TWeCall设备信息 */
@@ -868,6 +950,18 @@ declare interface TopicRulePayload {
   Description?: string;
   /** 是否禁用规则 */
   RuleDisabled?: boolean;
+}
+
+/** 视频设备激活码统计 */
+declare interface VideoLicenseEntity {
+  /** 激活码类型，取值范围如下：0_5_mbps、1_mbps、1_5_mbps、2_mbps */
+  Type?: string;
+  /** 有效激活码总数 */
+  TotalCount?: number;
+  /** 待使用的激活码数量 */
+  UsedCount?: number;
+  /** 即将过期的激活码数量 */
+  ExpiresSoonCount?: number;
 }
 
 /** 微信硬件设备信息 */
@@ -1598,6 +1692,32 @@ declare interface DeleteTopicRuleResponse {
   RequestId?: string;
 }
 
+declare interface DescribeActivateDeviceRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeActivateDeviceResponse {
+  /** 设备激活详情信息 */
+  Data: ActivateDeviceInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeActivateLicenseServiceRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 激活码类型 */
+  LicenseType?: string;
+}
+
+declare interface DescribeActivateLicenseServiceResponse {
+  /** 增值服务激活码信息 */
+  Data?: LicenseServiceNumInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBatchProductionRequest {
   /** 产品ID */
   ProductId: string;
@@ -2284,6 +2404,16 @@ declare interface DescribeFirmwareUpdateStatusResponse {
   RequestId?: string;
 }
 
+declare interface DescribeFreeCloudStorageNumRequest {
+}
+
+declare interface DescribeFreeCloudStorageNumResponse {
+  /** 套餐包信息 */
+  PackageInfos?: CloudStoragePackageInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeGatewayBindDevicesRequest {
   /** 网关设备的产品ID */
   GatewayProductId: string;
@@ -2526,6 +2656,18 @@ declare interface DescribeTopicRuleResponse {
   Rule?: TopicRule | null;
   /** 规则绑定的标签 */
   CamTag?: CamTag[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVideoLicenseRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeVideoLicenseResponse {
+  /** 视频激活码分类概览 */
+  License?: VideoLicenseEntity[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3771,6 +3913,10 @@ declare interface Iotexplorer {
   DeleteTopicPolicy(data: DeleteTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicPolicyResponse>;
   /** 删除规则 {@link DeleteTopicRuleRequest} {@link DeleteTopicRuleResponse} */
   DeleteTopicRule(data: DeleteTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicRuleResponse>;
+  /** 获取设备激活详情 {@link DescribeActivateDeviceRequest} {@link DescribeActivateDeviceResponse} */
+  DescribeActivateDevice(data: DescribeActivateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeActivateDeviceResponse>;
+  /** 获取增值服务激活码详情 {@link DescribeActivateLicenseServiceRequest} {@link DescribeActivateLicenseServiceResponse} */
+  DescribeActivateLicenseService(data: DescribeActivateLicenseServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeActivateLicenseServiceResponse>;
   /** 获取量产详情 {@link DescribeBatchProductionRequest} {@link DescribeBatchProductionResponse} */
   DescribeBatchProduction(data: DescribeBatchProductionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchProductionResponse>;
   /** 获取网关产品已经绑定的子产品 {@link DescribeBindedProductsRequest} {@link DescribeBindedProductsResponse} */
@@ -3835,6 +3981,8 @@ declare interface Iotexplorer {
   DescribeFirmwareTask(data: DescribeFirmwareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareTaskResponse>;
   /** 查询设备固件升级状态 {@link DescribeFirmwareUpdateStatusRequest} {@link DescribeFirmwareUpdateStatusResponse} */
   DescribeFirmwareUpdateStatus(data: DescribeFirmwareUpdateStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareUpdateStatusResponse>;
+  /** 查询云存卡套餐信息 {@link DescribeFreeCloudStorageNumRequest} {@link DescribeFreeCloudStorageNumResponse} */
+  DescribeFreeCloudStorageNum(data?: DescribeFreeCloudStorageNumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFreeCloudStorageNumResponse>;
   /** 获取网关绑定的子设备列表 {@link DescribeGatewayBindDevicesRequest} {@link DescribeGatewayBindDevicesResponse} */
   DescribeGatewayBindDevices(data: DescribeGatewayBindDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayBindDevicesResponse>;
   /** 查询绑定到家庭的网关设备的子设备列表 {@link DescribeGatewaySubDeviceListRequest} {@link DescribeGatewaySubDeviceListResponse} */
@@ -3865,6 +4013,8 @@ declare interface Iotexplorer {
   DescribeTopicPolicy(data: DescribeTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicPolicyResponse>;
   /** 获取规则信息 {@link DescribeTopicRuleRequest} {@link DescribeTopicRuleResponse} */
   DescribeTopicRule(data: DescribeTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicRuleResponse>;
+  /** 查询视频激活码统计概览 {@link DescribeVideoLicenseRequest} {@link DescribeVideoLicenseResponse} */
+  DescribeVideoLicense(data: DescribeVideoLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoLicenseResponse>;
   /** 直接绑定设备和家庭 {@link DirectBindDeviceInFamilyRequest} {@link DirectBindDeviceInFamilyResponse} */
   DirectBindDeviceInFamily(data: DirectBindDeviceInFamilyRequest, config?: AxiosRequestConfig): AxiosPromise<DirectBindDeviceInFamilyResponse>;
   /** 禁用规则 {@link DisableTopicRuleRequest} {@link DisableTopicRuleResponse} */

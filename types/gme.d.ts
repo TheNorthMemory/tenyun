@@ -45,31 +45,31 @@ declare interface AppStatisticsItem {
 /** 应用统计数据 */
 declare interface ApplicationDataStatistics {
   /** 应用ID */
-  BizId: number;
+  BizId?: number;
   /** Dau统计项数目 */
-  DauDataNum: number;
+  DauDataNum?: number;
   /** 大陆地区Dau统计数据，单位人 */
-  DauDataMainland: StatisticsItem[];
+  DauDataMainland?: StatisticsItem[];
   /** 海外地区Dau统计数据，单位人 */
-  DauDataOversea: StatisticsItem[];
+  DauDataOversea?: StatisticsItem[];
   /** 大陆和海外地区Dau统计数据汇总，单位人 */
-  DauDataSum: StatisticsItem[];
+  DauDataSum?: StatisticsItem[];
   /** 实时语音时长统计项数目 */
-  DurationDataNum: number;
+  DurationDataNum?: number;
   /** 大陆地区实时语音时长统计数据，单位分钟 */
-  DurationDataMainland: StatisticsItem[];
+  DurationDataMainland?: StatisticsItem[];
   /** 海外地区实时语音时长统计数据，单位分钟 */
-  DurationDataOversea: StatisticsItem[];
+  DurationDataOversea?: StatisticsItem[];
   /** 大陆和海外地区实时语音时长统计数据汇总，单位分钟 */
-  DurationDataSum: StatisticsItem[];
+  DurationDataSum?: StatisticsItem[];
   /** Pcu统计项数目 */
-  PcuDataNum: number;
+  PcuDataNum?: number;
   /** 大陆地区Pcu统计数据，单位人 */
-  PcuDataMainland: StatisticsItem[];
+  PcuDataMainland?: StatisticsItem[];
   /** 海外地区Pcu统计数据，单位人 */
-  PcuDataOversea: StatisticsItem[];
+  PcuDataOversea?: StatisticsItem[];
   /** 大陆和海外地区Pcu统计数据汇总，单位人 */
-  PcuDataSum: StatisticsItem[];
+  PcuDataSum?: StatisticsItem[];
 }
 
 /** 获取应用列表返回 */
@@ -143,9 +143,9 @@ declare interface CustomizationConfigs {
 /** 剔除房间操作结果 */
 declare interface DeleteResult {
   /** 错误码，0-剔除成功 其他-剔除失败 */
-  Code: number;
+  Code?: number;
   /** 错误描述 */
-  ErrorMsg: string;
+  ErrorMsg?: string;
 }
 
 /** 获取应用用量统计数据输出参数 */
@@ -203,9 +203,9 @@ declare interface InOutTimeInfo {
 /** ModifyAppStatus接口输出参数 */
 declare interface ModifyAppStatusResp {
   /** GME应用ID */
-  BizId: number;
+  BizId?: number;
   /** 应用状态，取值：open/close */
-  Status: string;
+  Status?: string;
 }
 
 /** 海外转文本用量数据 */
@@ -217,17 +217,17 @@ declare interface OverseaTextStatisticsItem {
 /** 实时语音用量统计数据 */
 declare interface RealTimeSpeechStatisticsItem {
   /** 大陆地区DAU */
-  MainLandDau: number;
+  MainLandDau?: number;
   /** 大陆地区PCU */
-  MainLandPcu: number;
+  MainLandPcu?: number;
   /** 大陆地区总使用时长，单位为min */
-  MainLandDuration: number;
+  MainLandDuration?: number;
   /** 海外地区DAU */
-  OverseaDau: number;
+  OverseaDau?: number;
   /** 海外地区PCU */
-  OverseaPcu: number;
+  OverseaPcu?: number;
   /** 海外地区总使用时长，单位为min */
-  OverseaDuration: number;
+  OverseaDuration?: number;
 }
 
 /** 实时语音配置数据 */
@@ -309,9 +309,9 @@ declare interface ScanPiece {
 /** 语音检测返回结果 */
 declare interface ScanVoiceResult {
   /** 数据ID */
-  DataId: string;
+  DataId?: string;
   /** 任务ID */
-  TaskId: string;
+  TaskId?: string;
 }
 
 /** SceneInfo场景信息'RealTime','实时语音分析','VoiceMessage','语音消息','GMECloudApi':'GME云API接口' */
@@ -337,15 +337,15 @@ declare interface ServiceStatus {
 /** 用量数据单元 */
 declare interface StatisticsItem {
   /** 日期，格式为年-月-日，如2018-07-13 */
-  StatDate: string;
+  StatDate?: string;
   /** 统计值 */
-  Data: number;
+  Data?: number;
 }
 
 /** 服务开关状态 */
 declare interface StatusInfo {
   /** 服务开关状态， 0-正常，1-关闭 */
-  Status: number;
+  Status?: number;
 }
 
 /** 流式转文本用量数据 */
@@ -417,7 +417,7 @@ declare interface VoiceMessageConf {
 /** 语音消息用量统计信息 */
 declare interface VoiceMessageStatisticsItem {
   /** 离线语音DAU */
-  Dau: number;
+  Dau?: number;
 }
 
 declare interface CreateAgeDetectTaskRequest {
