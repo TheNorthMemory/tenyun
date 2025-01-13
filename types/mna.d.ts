@@ -385,7 +385,7 @@ declare interface ActivateHardwareRequest {
 
 declare interface ActivateHardwareResponse {
   /** 完成激活的设备信息 */
-  HardwareInfo?: ActivateHardware[] | null;
+  HardwareInfo?: ActivateHardware[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

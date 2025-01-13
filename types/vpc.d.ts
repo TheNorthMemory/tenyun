@@ -7523,9 +7523,9 @@ declare interface InquirePriceCreateDirectConnectGatewayRequest {
 
 declare interface InquirePriceCreateDirectConnectGatewayResponse {
   /** 专线网关标准接入费用 */
-  TotalCost?: number | null;
+  TotalCost?: number;
   /** 专线网关真实接入费用 */
-  RealTotalCost?: number | null;
+  RealTotalCost?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

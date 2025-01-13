@@ -1173,7 +1173,7 @@ declare interface WxGatewayCustomConfig {
   /** 日志信息 */
   LogConfig?: CustomLogConfig;
   /** 是否开启http1.0 */
-  IsAcceptHttpOne?: boolean | null;
+  IsAcceptHttpOne?: boolean;
 }
 
 /** 安全网关路由 */

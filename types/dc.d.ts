@@ -347,21 +347,21 @@ declare interface DirectConnectTunnelExtra {
 /** 专用通道路由 */
 declare interface DirectConnectTunnelRoute {
   /** 专用通道路由ID */
-  RouteId: string;
+  RouteId?: string;
   /** 网段CIDR */
-  DestinationCidrBlock: string;
+  DestinationCidrBlock?: string;
   /** 路由类型：BGP/STATIC路由 */
-  RouteType: string;
+  RouteType?: string;
   /** ENABLE：路由启用，DISABLE：路由禁用 */
-  Status: string;
+  Status?: string;
   /** ASPath信息 */
-  ASPath: string[];
+  ASPath?: string[];
   /** 路由下一跳IP */
-  NextHop: string;
+  NextHop?: string;
   /** 路由更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string;
   /** 是否配置在通道上 */
-  ApplyOnTunnelEnable: boolean;
+  ApplyOnTunnelEnable?: boolean;
 }
 
 /** 用于条件过滤查询 */
@@ -463,7 +463,7 @@ declare interface ApplyInternetAddressRequest {
 
 declare interface ApplyInternetAddressResponse {
   /** 互联网公网地址ID */
-  InstanceId: string | null;
+  InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -667,7 +667,7 @@ declare interface DescribeDirectConnectsResponse {
   /** 符合物理专线列表数量。 */
   TotalCount?: number;
   /** 用户名下物理专线是否都签署了用户协议。 */
-  AllSignLaw?: boolean | null;
+  AllSignLaw?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -677,15 +677,15 @@ declare interface DescribeInternetAddressQuotaRequest {
 
 declare interface DescribeInternetAddressQuotaResponse {
   /** IPv6互联网公网允许的最小前缀长度 */
-  Ipv6PrefixLen?: number | null;
+  Ipv6PrefixLen?: number;
   /** BGP类型IPv4互联网地址配额 */
-  Ipv4BgpQuota?: number | null;
+  Ipv4BgpQuota?: number;
   /** 非BGP类型IPv4互联网地址配额 */
-  Ipv4OtherQuota?: number | null;
+  Ipv4OtherQuota?: number;
   /** BGP类型IPv4互联网地址已使用数量 */
-  Ipv4BgpNum?: number | null;
+  Ipv4BgpNum?: number;
   /** 非BGP类型互联网地址已使用数量 */
-  Ipv4OtherNum?: number | null;
+  Ipv4OtherNum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -715,26 +715,26 @@ declare interface DescribeInternetAddressStatisticsResponse {
   /** 互联网公网地址统计信息数量 */
   TotalCount?: number;
   /** 互联网公网地址统计信息列表 */
-  InternetAddressStatistics?: InternetAddressStatistics[] | null;
+  InternetAddressStatistics?: InternetAddressStatistics[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribePublicDirectConnectTunnelRoutesRequest {
-  /** 专用通道ID */
+  /** 专用通道ID。 */
   DirectConnectTunnelId: string;
-  /** 过滤条件：route-type：路由类型，取值：BGP/STATICroute-subnet：路由cidr，取值如：192.68.1.0/24 */
+  /** 过滤条件：route-type：路由类型，取值：BGP/STATIC；route-subnet：路由cidr，取值如：192.68.1.0/24。 */
   Filters?: Filter[];
-  /** 偏移量，默认为0 */
+  /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 返回数量，默认为20，最大值为100 */
+  /** 返回数量，默认为20，最大值为100。 */
   Limit?: number;
 }
 
 declare interface DescribePublicDirectConnectTunnelRoutesResponse {
-  /** 互联网通道路由列表 */
+  /** 互联网通道路由列表。 */
   Routes?: DirectConnectTunnelRoute[];
-  /** 记录总数 */
+  /** 路由总数量。 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

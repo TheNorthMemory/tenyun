@@ -5,21 +5,21 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 查询用户设备的授权绑定情况 */
 declare interface Device {
   /** 设备ID */
-  DeviceId?: string | null;
+  DeviceId?: string;
   /** 设备名称 */
-  DeviceName?: string | null;
+  DeviceName?: string;
   /** 已经绑定license数量 */
-  LicenseCount?: number | null;
+  LicenseCount?: number;
   /** 剩余天数：天 */
-  RemainDay?: number | null;
+  RemainDay?: number;
   /** 过期时间：s */
-  ExpireTime?: string | null;
+  ExpireTime?: string;
   /** 服务时长：s */
-  Duration?: string | null;
+  Duration?: string;
   /** 已经绑定licenseId列表 */
-  LicenseIds?: string[] | null;
+  LicenseIds?: string[];
   /** 每月license的限定时长 */
-  MonthlyRemainTime?: number | null;
+  MonthlyRemainTime?: number;
   /** 月封顶时长（分钟) */
   LimitedTime?: number;
 }
@@ -145,49 +145,49 @@ declare interface SessionDeviceDetail {
   /** 设备ID */
   DeviceId?: string;
   /** sdk版本 */
-  Ver?: string | null;
+  Ver?: string;
   /** 模式(p2p/server) */
-  SdkMode?: string | null;
+  SdkMode?: string;
   /** 解码耗时，单位：ms */
-  DecodeCost?: number[] | null;
+  DecodeCost?: number[];
   /** 【已废弃，使用RenderCost】 */
   RenderConst?: number[] | null;
   /** 卡顿k100 */
-  K100?: number[] | null;
+  K100?: number[];
   /** 卡顿k150 */
-  K150?: number[] | null;
+  K150?: number[];
   /** nack请求数 */
-  NACK?: number[] | null;
+  NACK?: number[];
   /** 服务端调控码率,单位：kbps */
-  BitRateEstimate?: number[] | null;
+  BitRateEstimate?: number[];
   /** 宽度 */
-  Width?: number | null;
+  Width?: number;
   /** 高度 */
-  Height?: number | null;
+  Height?: number;
   /** 编码耗时，单位：ms */
-  EncodeCost?: number[] | null;
+  EncodeCost?: number[];
   /** 采集耗时，单位：ms */
-  CaptureCost?: number[] | null;
+  CaptureCost?: number[];
   /** 渲染耗时，单位：ms */
-  RenderCost?: number[] | null;
+  RenderCost?: number[];
   /** 配置宽度 */
-  ConfigWidth?: number | null;
+  ConfigWidth?: number;
   /** 配置高度 */
-  ConfigHeight?: number | null;
+  ConfigHeight?: number;
   /** 平均帧间隔 */
-  FrameDelta?: number[] | null;
+  FrameDelta?: number[];
   /** 最大帧间隔 */
-  MaxFrameDelta?: number[] | null;
+  MaxFrameDelta?: number[];
   /** 总码率评估,单位：kbps */
-  TotalBitrateEstimate?: number[] | null;
+  TotalBitrateEstimate?: number[];
   /** 帧间隔大于100ms的卡顿时长 */
-  Lag100Duration?: number[] | null;
+  Lag100Duration?: number[];
   /** 帧间隔大于150ms的卡顿时长 */
-  Lag150Duration?: number[] | null;
+  Lag150Duration?: number[];
   /** 是否开启多网：0 单网，1 多网 */
-  MultiMode?: number | null;
+  MultiMode?: number;
   /** 多网卡信息 */
-  MultiNet?: MultiNet[] | null;
+  MultiNet?: MultiNet[];
 }
 
 /** 会话信息 */

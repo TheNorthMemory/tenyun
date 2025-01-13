@@ -414,6 +414,8 @@ declare interface IndexMetaField {
   IndexOptionsField?: IndexOptionsField | null;
   /** 索引配置字段 */
   IndexSettingsField?: IndexSettingsField | null;
+  /** 索引别名字段 */
+  IndexAliasesField?: string[] | null;
   /** 索引所属集群APP ID */
   AppId?: number | null;
   /** 索引文档数 */
