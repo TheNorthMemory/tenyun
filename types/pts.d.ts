@@ -15,31 +15,31 @@ declare interface AggregationLegend {
 /** 告警通知渠道 */
 declare interface AlertChannel {
   /** 通知模板ID */
-  NoticeId?: string | null;
+  NoticeId?: string;
   /** AMP consumer ID */
-  AMPConsumerId?: string | null;
+  AMPConsumerId?: string;
 }
 
 /** 告警通知接收组 */
 declare interface AlertChannelRecord {
   /** Notice ID */
-  NoticeId?: string | null;
+  NoticeId?: string;
   /** Consumer ID */
-  AMPConsumerId?: string | null;
+  AMPConsumerId?: string;
   /** 项目 ID */
-  ProjectId?: string | null;
+  ProjectId?: string;
   /** 状态 */
-  Status?: number | null;
+  Status?: number;
   /** 创建时间 */
-  CreatedAt?: string | null;
+  CreatedAt?: string;
   /** 更新时间 */
-  UpdatedAt?: string | null;
+  UpdatedAt?: string;
   /** App ID */
-  AppId?: number | null;
+  AppId?: number;
   /** 主账号 */
-  Uin?: string | null;
+  Uin?: string;
   /** 子账号 */
-  SubAccountUin?: string | null;
+  SubAccountUin?: string;
 }
 
 /** 告警历史记录项 */
@@ -47,67 +47,67 @@ declare interface AlertRecord {
   /** 告警历史记录项 ID */
   AlertRecordId?: string | null;
   /** 项目 ID */
-  ProjectId?: string | null;
+  ProjectId?: string;
   /** 场景 ID */
-  ScenarioId?: string | null;
+  ScenarioId?: string;
   /** 状态 */
-  Status?: AlertRecordStatus | null;
+  Status?: AlertRecordStatus;
   /** 创建时间 */
-  CreatedAt?: string | null;
+  CreatedAt?: string;
   /** 修改时间 */
-  UpdatedAt?: string | null;
+  UpdatedAt?: string;
   /** 任务 ID */
-  JobId?: string | null;
+  JobId?: string;
   /** App ID */
-  AppId?: number | null;
+  AppId?: number;
   /** 主账号 */
-  Uin?: string | null;
+  Uin?: string;
   /** 子账号 */
-  SubAccountUin?: string | null;
+  SubAccountUin?: string;
   /** 场景名称 */
-  ScenarioName?: string | null;
+  ScenarioName?: string;
   /** 告警对象 */
-  Target?: string | null;
+  Target?: string;
   /** 告警规则 ID */
-  JobSLAId?: string | null;
+  JobSLAId?: string;
   /** 告警规则描述 */
-  JobSLADescription?: string | null;
+  JobSLADescription?: string;
 }
 
 /** 告警历史项的状态 */
 declare interface AlertRecordStatus {
   /** 停止压测任务成功与否 */
-  AbortJob?: number | null;
+  AbortJob?: number;
   /** 发送告警通知成功与否 */
-  SendNotice?: number | null;
+  SendNotice?: number;
 }
 
 /** 采样日志附带属性 */
 declare interface Attributes {
   /** 采用请求返回码 */
-  Status: string | null;
+  Status?: string;
   /** 采样请求结果码 */
-  Result: string | null;
+  Result?: string;
   /** 采样请求API */
-  Service: string | null;
+  Service?: string;
   /** 采样请求调用方法 */
-  Method: string | null;
+  Method?: string;
   /** 采样请求延时时间 */
-  Duration: string | null;
+  Duration?: string;
 }
 
 /** 检查点汇总结果 */
 declare interface CheckSummary {
   /** 检查点名字 */
-  Name: string;
+  Name?: string;
   /** 检查点所在步骤名字 */
-  Step: string;
+  Step?: string;
   /** 检查点成功次数 */
-  SuccessCount: number;
+  SuccessCount?: number;
   /** 检查失败次数 */
-  FailCount: number;
+  FailCount?: number;
   /** 错误比例 */
-  ErrorRate: number;
+  ErrorRate?: number;
 }
 
 /** 并发模式的施压配置 */
@@ -115,93 +115,93 @@ declare interface Concurrency {
   /** 多阶段配置数组 */
   Stages?: Stage[] | null;
   /** 运行次数 */
-  IterationCount?: number | null;
+  IterationCount?: number;
   /** 最大RPS */
-  MaxRequestsPerSecond?: number | null;
+  MaxRequestsPerSecond?: number;
   /** 优雅终止任务的等待时间 */
-  GracefulStopSeconds?: number | null;
+  GracefulStopSeconds?: number;
   /** 资源数 */
-  Resources?: number | null;
+  Resources?: number;
 }
 
 /** COS临时凭证 */
 declare interface Credentials {
   /** 临时secret ID */
-  TmpSecretId: string;
+  TmpSecretId?: string;
   /** 临时secret key */
-  TmpSecretKey: string;
+  TmpSecretKey?: string;
   /** 临时token */
-  Token: string;
+  Token?: string;
 }
 
 /** 定时任务 */
 declare interface CronJob {
   /** 定时任务ID */
-  CronJobId: string | null;
+  CronJobId?: string | null;
   /** 定时任务名字 */
-  Name: string | null;
+  Name?: string;
   /** 项目ID */
-  ProjectId: string | null;
+  ProjectId?: string;
   /** 场景ID */
-  ScenarioId: string | null;
+  ScenarioId?: string;
   /** 场景名称 */
-  ScenarioName: string | null;
+  ScenarioName?: string;
   /** cron 表达式 */
-  CronExpression: string | null;
+  CronExpression?: string;
   /** 结束时间 */
-  EndTime: string | null;
+  EndTime?: string | null;
   /** 中止原因 */
-  AbortReason: number | null;
+  AbortReason?: number;
   /** 定时任务状态 */
-  Status: number | null;
+  Status?: number;
   /** Notice ID */
-  NoticeId: string | null;
+  NoticeId?: string;
   /** 创建时间 */
-  CreatedAt: string | null;
+  CreatedAt?: string | null;
   /** 更新时间 */
-  UpdatedAt: string | null;
+  UpdatedAt?: string | null;
   /** 执行频率类型 */
-  FrequencyType: number | null;
+  FrequencyType?: number;
   /** 备注 */
-  Note: string | null;
+  Note?: string;
   /** tom */
-  JobOwner: string | null;
+  JobOwner?: string;
   /** App ID */
-  AppId: number | null;
+  AppId?: number;
   /** 主账号 */
-  Uin: string | null;
+  Uin?: string;
   /** 子账号 */
-  SubAccountUin: string | null;
+  SubAccountUin?: string;
 }
 
 /** sample附带原始查询语句中的metric, aggregation */
 declare interface CustomSample {
   /** 指标名 */
-  Metric: string;
+  Metric?: string;
   /** 聚合条件 */
-  Aggregation: string;
+  Aggregation?: string;
   /** 过滤条件 */
-  Labels: Label[] | null;
+  Labels?: Label[] | null;
   /** 查询值 */
-  Value: number;
+  Value?: number;
   /** Time is the number of milliseconds since the epoch// (1970-01-01 00:00 UTC) excluding leap seconds. */
-  Timestamp: number;
+  Timestamp?: number;
   /** 指标对应的单位，当前单位有：s,bytes,bytes/s,reqs,reqs/s,checks,checks/s,iters,iters/s,VUs, % */
-  Unit: string;
+  Unit?: string;
   /** 指标序列名字 */
-  Name: string | null;
+  Name?: string;
 }
 
 /** 指标矩阵，可包含多条指标序列 */
 declare interface CustomSampleMatrix {
   /** 指标名字 */
-  Metric: string;
+  Metric?: string;
   /** 聚合函数 */
-  Aggregation: string;
+  Aggregation?: string;
   /** 指标单位 */
-  Unit: string | null;
+  Unit?: string;
   /** 指标序列数组 */
-  Streams: SampleStream[] | null;
+  Streams?: SampleStream[] | null;
 }
 
 /** 施压机 DNS 配置 */
@@ -221,75 +221,75 @@ declare interface DomainNameConfig {
 /** 错误信息汇总 */
 declare interface ErrorSummary {
   /** 状态码 */
-  Status?: string | null;
+  Status?: string;
   /** 结果码 */
-  Result?: string | null;
+  Result?: string;
   /** 错误出现次数 */
-  Count?: number | null;
+  Count?: number;
   /** 错误率 */
-  Rate?: number | null;
+  Rate?: number;
   /** 错误信息 */
-  Message?: string | null;
+  Message?: string;
   /** 请求协议类型 */
-  Proto?: string | null;
+  Proto?: string;
 }
 
 /** 文件列表 */
 declare interface File {
   /** 文件 ID */
-  FileId: string;
+  FileId?: string;
   /** 文件种类，参数文件-1，协议文件-2，请求文件-3 */
-  Kind: number;
+  Kind?: number;
   /** 文件名 */
-  Name: string;
+  Name?: string;
   /** 文件字节数 */
-  Size: number;
+  Size?: number;
   /** 文件类型 */
-  Type: string;
+  Type?: string;
   /** 更新时间 */
-  UpdatedAt: string;
+  UpdatedAt?: string;
   /** 文件行数 */
-  LineCount: number | null;
+  LineCount?: number;
   /** 头部数据行 */
-  HeadLines: string[] | null;
+  HeadLines?: string[] | null;
   /** 尾部数据行 */
-  TailLines: string[] | null;
+  TailLines?: string[] | null;
   /** 首行是否为参数名 */
-  HeaderInFile: boolean | null;
+  HeaderInFile?: boolean;
   /** 参数名数组 */
-  HeaderColumns: string[] | null;
+  HeaderColumns?: string[] | null;
   /** 文件夹中的文件 */
-  FileInfos: FileInfo[] | null;
+  FileInfos?: FileInfo[] | null;
   /** 关联场景 */
-  ScenarioSet: Scenario[] | null;
+  ScenarioSet?: Scenario[] | null;
   /** 文件状态 */
-  Status: number | null;
+  Status?: number;
   /** 创建时间 */
-  CreatedAt: string | null;
+  CreatedAt?: string | null;
   /** 项目 ID */
-  ProjectId: string | null;
+  ProjectId?: string;
   /** 此字段不再使用 */
-  AppID: number | null;
+  AppID?: number;
   /** 用户主账号 */
-  Uin: string | null;
+  Uin?: string;
   /** 用户子账号 */
-  SubAccountUin: string | null;
+  SubAccountUin?: string;
   /** 用户账号的 App ID */
-  AppId: number | null;
+  AppId?: number;
 }
 
 /** 文件基本信息 */
 declare interface FileInfo {
   /** 文件名 */
-  Name?: string | null;
+  Name?: string;
   /** 文件大小 */
-  Size?: number | null;
+  Size?: number;
   /** 文件类型 */
-  Type?: string | null;
+  Type?: string;
   /** 更新时间 */
   UpdatedAt?: string | null;
   /** 文件 ID */
-  FileId?: string | null;
+  FileId?: string;
 }
 
 /** 指标查询过滤 */
@@ -317,7 +317,7 @@ declare interface HostAlias {
   /** 需绑定的域名列表 */
   HostNames?: string[] | null;
   /** 需绑定的 IP 地址 */
-  IP?: string | null;
+  IP?: string;
 }
 
 /** 查询结构封装 */
@@ -339,9 +339,9 @@ declare interface Job {
   /** 任务的JobID */
   JobId?: string | null;
   /** 任务的场景ID */
-  ScenarioId?: string | null;
+  ScenarioId?: string;
   /** 任务的施压配置 */
-  Load?: Load | null;
+  Load?: Load;
   /** 此字段不再使用 */
   Configs?: string[] | null;
   /** 任务的数据集文件 */
@@ -349,43 +349,43 @@ declare interface Job {
   /** 此字段不再使用 */
   Extensions?: string[] | null;
   /** 任务的运行状态, JobUnknown: 0,JobCreated:1,JobPending:2, JobPreparing:3,JobSelectClustering:4,JobCreateTasking:5,JobSyncTasking:6JobRunning:11,JobFinished:12,JobPrepareException:13,JobFinishException:14,JobAborting:15,JobAborted:16,JobAbortException:17,JobDeleted:18,JobSelectClusterException:19,JobCreateTaskException:20,JobSyncTaskException:21 */
-  Status?: number | null;
+  Status?: number;
   /** 任务的开始时间 */
   StartTime?: string | null;
   /** 任务的结束时间 */
   EndTime?: string | null;
   /** 任务的最大VU数 */
-  MaxVirtualUserCount?: number | null;
+  MaxVirtualUserCount?: number;
   /** 任务的备注信息 */
-  Note?: string | null;
+  Note?: string;
   /** 错误率百分比 */
-  ErrorRate?: number | null;
+  ErrorRate?: number;
   /** 任务发起人 */
-  JobOwner?: string | null;
+  JobOwner?: string;
   /** 此字段不再使用 */
   LoadSources?: LoadSource | null;
   /** 任务时长 */
-  Duration?: number | null;
+  Duration?: number;
   /** 最大每秒请求数 */
-  MaxRequestsPerSecond?: number | null;
+  MaxRequestsPerSecond?: number;
   /** 总请求数 */
-  RequestTotal?: number | null;
+  RequestTotal?: number;
   /** 平均每秒请求数 */
-  RequestsPerSecond?: number | null;
+  RequestsPerSecond?: number;
   /** 平均响应时间 */
-  ResponseTimeAverage?: number | null;
+  ResponseTimeAverage?: number;
   /** 响应时间第99百分位 */
-  ResponseTimeP99?: number | null;
+  ResponseTimeP99?: number;
   /** 响应时间第95百分位 */
-  ResponseTimeP95?: number | null;
+  ResponseTimeP95?: number;
   /** 响应时间第90百分位 */
-  ResponseTimeP90?: number | null;
+  ResponseTimeP90?: number;
   /** 此字段不再使用 */
   Scripts?: string[] | null;
   /** 最大响应时间 */
-  ResponseTimeMax?: number | null;
+  ResponseTimeMax?: number;
   /** 最小响应时间 */
-  ResponseTimeMin?: number | null;
+  ResponseTimeMin?: number;
   /** 发压host信息 */
   LoadSourceInfos?: LoadSource[] | null;
   /** 测试脚本信息 */
@@ -397,35 +397,35 @@ declare interface Job {
   /** 拓展包文件信息 */
   Plugins?: FileInfo[] | null;
   /** 定时任务ID */
-  CronId?: string | null;
+  CronId?: string;
   /** 场景类型 */
-  Type?: string | null;
+  Type?: string;
   /** 域名绑定配置 */
-  DomainNameConfig?: DomainNameConfig | null;
+  DomainNameConfig?: DomainNameConfig;
   /** false */
-  Debug?: boolean | null;
+  Debug?: boolean;
   /** 中断原因 */
-  AbortReason?: number | null;
+  AbortReason?: number;
   /** 任务的创建时间 */
   CreatedAt?: string | null;
   /** 项目ID */
-  ProjectId?: string | null;
+  ProjectId?: string;
   /** 通知事件回调 */
   NotificationHooks?: NotificationHook[] | null;
   /** 每秒接收字节数 */
-  NetworkReceiveRate?: number | null;
+  NetworkReceiveRate?: number;
   /** 每秒发送字节数 */
-  NetworkSendRate?: number | null;
+  NetworkSendRate?: number;
   /** 任务状态描述 */
-  Message?: string | null;
+  Message?: string;
   /** test-project */
-  ProjectName?: string | null;
+  ProjectName?: string;
   /** test-scenario */
-  ScenarioName?: string | null;
+  ScenarioName?: string;
   /** 付费类型 */
-  PayMode?: number | null;
+  PayMode?: number;
   /** job VUM用量 */
-  Usage?: number | null;
+  Usage?: number;
 }
 
 /** 包含labelName 和labelValue */
@@ -447,7 +447,7 @@ declare interface LabelWithValues {
 /** 施压配置 */
 declare interface Load {
   /** 施压配置 */
-  LoadSpec?: LoadSpec | null;
+  LoadSpec?: LoadSpec;
   /** 压力来源 */
   VpcLoadDistribution?: VpcLoadDistribution | null;
   /** 多地域压力分布 */
@@ -457,11 +457,11 @@ declare interface Load {
 /** 发压host来源 */
 declare interface LoadSource {
   /** 发压host的IP */
-  IP?: string | null;
+  IP?: string;
   /** 发压host所在的pod */
-  PodName?: string | null;
+  PodName?: string;
   /** 所属地域 */
-  Region?: string | null;
+  Region?: string;
 }
 
 /** 施压配置 */
@@ -477,19 +477,19 @@ declare interface LoadSpec {
 /** 指标结构 */
 declare interface MetricInfo {
   /** 后台指标 */
-  Metric: string;
+  Metric?: string;
   /** 前台展示指标名称 */
-  Alias: string;
+  Alias?: string;
   /** 指标描述 */
-  Description: string | null;
+  Description?: string;
   /** 指标类型 */
-  MetricType: string;
+  MetricType?: string;
   /** 默认指标单位 */
-  Unit: string;
+  Unit?: string;
   /** 指标支持的聚合函数 */
-  Aggregations: AggregationLegend[];
+  Aggregations?: AggregationLegend[];
   /** 是否内部指标，内部指标不可在前台提供用户自由选择 */
-  InnerMetric: boolean;
+  InnerMetric?: boolean;
 }
 
 /** PTS提供的指标名，指标对应的labels及values */
@@ -503,11 +503,11 @@ declare interface MetricLabelWithValues {
 /** 通用日志 */
 declare interface NormalLog {
   /** 毫秒时间戳 */
-  Timestamp: string | null;
+  Timestamp?: string;
   /** 日志级别 */
-  SeverityText: string | null;
+  SeverityText?: string;
   /** 日志输出内容 */
-  Body: string | null;
+  Body?: string;
 }
 
 /** 测试启动前后的消息通知 */
@@ -523,7 +523,7 @@ declare interface NotificationHook {
   /** 通知事件 */
   Events?: string[] | null;
   /** 回调 URL */
-  URL?: string | null;
+  URL?: string;
 }
 
 /** 项目 */
@@ -533,7 +533,7 @@ declare interface Project {
   /** 项目名 */
   Name?: string;
   /** 项目描述 */
-  Description?: string | null;
+  Description?: string;
   /** 标签数组 */
   Tags?: TagSpec[] | null;
   /** 项目状态 */
@@ -543,25 +543,25 @@ declare interface Project {
   /** 修改时间 */
   UpdatedAt?: string;
   /** App ID */
-  AppId: number;
+  AppId?: number;
   /** 用户ID */
-  Uin: string;
+  Uin?: string;
   /** 子用户ID */
-  SubAccountUin: string;
+  SubAccountUin?: string;
 }
 
 /** 协议文件详情 */
 declare interface ProtocolInfo {
   /** 协议详情 */
-  Name?: string | null;
+  Name?: string;
   /** 文件大小 */
-  Size?: number | null;
+  Size?: number;
   /** 文件类型 */
-  Type?: string | null;
+  Type?: string;
   /** 更新时间 */
   UpdatedAt?: string | null;
   /** 文件 ID */
-  FileId?: string | null;
+  FileId?: string;
 }
 
 /** 采用日志响应时间RT范围 */
@@ -625,27 +625,27 @@ declare interface RequestSummary {
 /** RPS模式的施压配置 */
 declare interface RequestsPerSecond {
   /** 最大RPS */
-  MaxRequestsPerSecond?: number | null;
+  MaxRequestsPerSecond?: number;
   /** 施压时间 */
-  DurationSeconds?: number | null;
+  DurationSeconds?: number;
   /** deprecated */
-  TargetVirtualUsers?: number | null;
+  TargetVirtualUsers?: number;
   /** 资源数 */
-  Resources?: number | null;
+  Resources?: number;
   /** 起始RPS */
-  StartRequestsPerSecond?: number | null;
+  StartRequestsPerSecond?: number;
   /** 目标RPS，入参无效 */
-  TargetRequestsPerSecond?: number | null;
+  TargetRequestsPerSecond?: number;
   /** 优雅关停的等待时间 */
-  GracefulStopSeconds?: number | null;
+  GracefulStopSeconds?: number;
 }
 
 /** SLA 标签 */
 declare interface SLALabel {
   /** 标签名 */
-  LabelName?: string | null;
+  LabelName?: string;
   /** 标签值 */
-  LabelValue?: string | null;
+  LabelValue?: string;
 }
 
 /** SLA 策略 */
@@ -659,29 +659,29 @@ declare interface SLAPolicy {
 /** SLA 规则 */
 declare interface SLARule {
   /** 压测指标 */
-  Metric?: string | null;
+  Metric?: string;
   /** 压测指标聚合方法 */
-  Aggregation?: string | null;
+  Aggregation?: string;
   /** 压测指标条件判断符号 */
-  Condition?: string | null;
+  Condition?: string;
   /** 阈值 */
-  Value?: number | null;
+  Value?: number;
   /** 标签 */
   LabelFilter?: SLALabel[] | null;
   /** 是否停止压测任务 */
-  AbortFlag?: boolean | null;
+  AbortFlag?: boolean;
   /** 持续时长 */
-  For?: string | null;
+  For?: string;
 }
 
 /** 采样日志 */
 declare interface SampleLog {
   /** 日志毫秒时间戳 */
-  Timestamp: string | null;
+  Timestamp?: string;
   /** 采样日志属性 */
-  Attributes: Attributes | null;
+  Attributes?: Attributes;
   /** har格式的采样请求 */
-  Body: string | null;
+  Body?: string;
 }
 
 /** sample采样值 */
@@ -695,11 +695,11 @@ declare interface SamplePair {
 /** 连续指标采样内容 */
 declare interface SampleStream {
   /** labels描述 */
-  Labels: Label[] | null;
+  Labels?: Label[] | null;
   /** 指标采样数组 */
-  Values: SamplePair[];
+  Values?: SamplePair[];
   /** 指标序列名字 */
-  Name: string | null;
+  Name?: string;
 }
 
 /** 场景列表 */
@@ -709,15 +709,15 @@ declare interface Scenario {
   /** 场景名 */
   Name?: string;
   /** 场景描述 */
-  Description?: string | null;
+  Description?: string;
   /** 场景类型，如pts-http, pts-js, pts-trpc, pts-jmeter */
-  Type?: string | null;
+  Type?: string;
   /** 场景状态 */
-  Status?: number | null;
+  Status?: number;
   /** 施压配置 */
-  Load?: Load | null;
+  Load?: Load;
   /** deprecated */
-  EncodedScripts?: string | null;
+  EncodedScripts?: string;
   /** deprecated */
   Configs?: string[] | null;
   /** deprecated */
@@ -725,21 +725,21 @@ declare interface Scenario {
   /** 测试数据集 */
   Datasets?: TestData[] | null;
   /** SLA规则的ID */
-  SLAId?: string | null;
+  SLAId?: string;
   /** Cron Job规则的ID */
-  CronId?: string | null;
+  CronId?: string;
   /** 场景创建时间 */
   CreatedAt?: string;
   /** 场景修改时间 */
   UpdatedAt?: string;
   /** 项目ID */
-  ProjectId?: string | null;
+  ProjectId?: string;
   /** App ID */
-  AppId?: number | null;
+  AppId?: number;
   /** 用户ID */
-  Uin?: string | null;
+  Uin?: string;
   /** 子用户ID */
-  SubAccountUin?: string | null;
+  SubAccountUin?: string;
   /** 测试脚本信息 */
   TestScripts?: ScriptInfo[] | null;
   /** 协议文件信息 */
@@ -747,17 +747,17 @@ declare interface Scenario {
   /** 请求文件信息 */
   RequestFiles?: FileInfo[] | null;
   /** SLA 策略 */
-  SLAPolicy?: SLAPolicy | null;
+  SLAPolicy?: SLAPolicy;
   /** 扩展包信息 */
   Plugins?: FileInfo[] | null;
   /** 域名解析配置 */
-  DomainNameConfig?: DomainNameConfig | null;
+  DomainNameConfig?: DomainNameConfig;
   /** 通知事件回调 */
   NotificationHooks?: NotificationHook[] | null;
   /** 创建人员 */
-  Owner?: string | null;
+  Owner?: string;
   /** 场景所在的项目的名字 */
-  ProjectName?: string | null;
+  ProjectName?: string;
 }
 
 /** 查询与特定scenario关联的job的参数 */
@@ -775,29 +775,29 @@ declare interface ScenarioRelatedJobsParams {
 /** 带已执行任务的scenario */
 declare interface ScenarioWithJobs {
   /** scecario结果 */
-  Scenario: Scenario | null;
+  Scenario?: Scenario;
   /** job结果 */
-  Jobs: Job[] | null;
+  Jobs?: Job[] | null;
 }
 
 /** 脚本信息 */
 declare interface ScriptInfo {
   /** 文件名 */
-  Name?: string | null;
+  Name?: string;
   /** 文件大小 */
-  Size?: number | null;
+  Size?: number;
   /** 文件类型 */
-  Type?: string | null;
+  Type?: string;
   /** 更新时间 */
   UpdatedAt?: string | null;
   /** base64编码后的文件内容 */
-  EncodedContent?: string | null;
+  EncodedContent?: string;
   /** base64编码后的har结构体 */
-  EncodedHttpArchive?: string | null;
+  EncodedHttpArchive?: string;
   /** 脚本权重，范围 1-100 */
-  LoadWeight?: number | null;
+  LoadWeight?: number;
   /** 文件 ID */
-  FileId?: string | null;
+  FileId?: string;
 }
 
 /** 脚本内置压力模型 */
@@ -813,43 +813,43 @@ declare interface ScriptOrigin {
 /** 分阶段施压时，对单个阶段的配置 */
 declare interface Stage {
   /** 施压时间 */
-  DurationSeconds?: number | null;
+  DurationSeconds?: number;
   /** 虚拟用户数 */
-  TargetVirtualUsers?: number | null;
+  TargetVirtualUsers?: number;
 }
 
 /** 标签 */
 declare interface TagSpec {
   /** 标签键 */
-  TagKey?: string | null;
+  TagKey?: string;
   /** 标签值 */
-  TagValue?: string | null;
+  TagValue?: string;
 }
 
 /** 测试数据集 */
 declare interface TestData {
   /** 测试数据集所在的文件名 */
-  Name: string | null;
+  Name: string;
   /** 测试数据集是否分片 */
-  Split: boolean | null;
+  Split: boolean;
   /** 首行是否为参数名 */
-  HeaderInFile: boolean | null;
+  HeaderInFile: boolean;
   /** 参数名数组 */
   HeaderColumns?: string[] | null;
   /** 文件行数 */
-  LineCount?: number | null;
+  LineCount?: number;
   /** 更新时间 */
   UpdatedAt?: string | null;
   /** 文件字节数 */
-  Size?: number | null;
+  Size?: number;
   /** 头部数据行 */
   HeadLines?: string[] | null;
   /** 尾部数据行 */
   TailLines?: string[] | null;
   /** 文件类型 */
-  Type?: string | null;
+  Type?: string;
   /** 文件 ID */
-  FileId?: string | null;
+  FileId?: string;
 }
 
 /** 压力来源配置 */
@@ -859,7 +859,7 @@ declare interface VpcLoadDistribution {
   /** 地域 */
   Region?: string;
   /** VPC ID */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 子网ID列表 */
   SubnetIds?: string[] | null;
 }
@@ -1169,7 +1169,7 @@ declare interface DescribeAlertChannelsResponse {
   /** 告警通知接收组列表 */
   AlertChannelSet?: AlertChannelRecord[] | null;
   /** 告警通知接收组数目 */
-  Total?: number | null;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1197,7 +1197,7 @@ declare interface DescribeAlertRecordsResponse {
   /** 告警历史 */
   AlertRecordSet?: AlertRecord[] | null;
   /** 告警历史记录的总数 */
-  Total?: number | null;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1301,7 +1301,7 @@ declare interface DescribeFilesResponse {
   /** 文件列表 */
   FileSet?: File[] | null;
   /** 文件总数 */
-  Total?: number | null;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1335,7 +1335,7 @@ declare interface DescribeJobsResponse {
   /** 任务列表 */
   JobSet?: Job[] | null;
   /** 任务数量 */
-  Total?: number | null;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1371,7 +1371,7 @@ declare interface DescribeMetricLabelWithValuesRequest {
 
 declare interface DescribeMetricLabelWithValuesResponse {
   /** 指标所有的label和values数组 */
-  MetricLabelWithValuesSet: MetricLabelWithValues[] | null;
+  MetricLabelWithValuesSet?: MetricLabelWithValues[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1403,7 +1403,7 @@ declare interface DescribeNormalLogsRequest {
 
 declare interface DescribeNormalLogsResponse {
   /** 日志上下文，加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容。过期时间1小时 */
-  Context?: string | null;
+  Context?: string;
   /** 日志数组 */
   NormalLogs?: NormalLog[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1521,7 +1521,7 @@ declare interface DescribeSampleLogsResponse {
   /** 日志总数 */
   Total?: number;
   /** 日志上下文，加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容。过期时间1小时 */
-  Context?: string | null;
+  Context?: string;
   /** 采样日志数组 */
   SampleLogs?: SampleLog[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1669,11 +1669,11 @@ declare interface GenerateTmpKeyRequest {
 
 declare interface GenerateTmpKeyResponse {
   /** 临时访问凭证获取时刻的时间戳（单位秒） */
-  StartTime: number;
+  StartTime?: number;
   /** 临时访问凭证超时 时刻的时间戳（单位秒） */
-  ExpiredTime: number;
+  ExpiredTime?: number;
   /** 临时访问凭证 */
-  Credentials: Credentials;
+  Credentials?: Credentials;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

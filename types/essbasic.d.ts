@@ -89,7 +89,7 @@ declare interface AuthInfoDetail {
 /** 授权用户 */
 declare interface AuthorizedUser {
   /** 第三方应用平台的用户openid */
-  OpenId: string;
+  OpenId?: string;
 }
 
 /** 自动签开启、签署相关配置 */
@@ -241,7 +241,7 @@ declare interface ChannelRole {
 /** 签署人配置信息 */
 declare interface CommonApproverOption {
   /** 是否允许修改签署人信息 */
-  CanEditApprover?: boolean | null;
+  CanEditApprover?: boolean;
 }
 
 /** 通用签署人信息 */
@@ -387,9 +387,9 @@ declare interface DeleteOrganizationAuthorizationInfo {
 /** 第三方应用集成员工部门信息 */
 declare interface Department {
   /** 部门id */
-  DepartmentId: string | null;
+  DepartmentId?: string | null;
   /** 部门名称 */
-  DepartmentName: string | null;
+  DepartmentName?: string | null;
 }
 
 /** 视频认证结果 */
@@ -694,7 +694,7 @@ declare interface FlowFileInfo {
   FlowType?: string;
   /** 已废弃，请使用【应用号配置】中的回调地址统一接收消息 */
   CallbackUrl?: string;
-  /** 第三方应用的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN */
+  /** 第三方应用的业务信息，最大长度1000个字符。 */
   CustomerData?: string;
   /** 合同签署顺序类型(无序签,顺序签)，默认为false，即有序签署 */
   Unordered?: boolean;
@@ -1267,9 +1267,9 @@ declare interface Staff {
 /** 第三方应用集成员工角色信息 */
 declare interface StaffRole {
   /** 角色id */
-  RoleId: string | null;
+  RoleId?: string | null;
   /** 角色名称 */
-  RoleName: string | null;
+  RoleName?: string | null;
 }
 
 /** 同步员工失败原因 */
@@ -1283,9 +1283,9 @@ declare interface SyncFailReason {
 /** 复杂文档合成任务的任务信息 */
 declare interface TaskInfo {
   /** 合成任务Id，可以通过 ChannelGetTaskResultApi 接口获取任务信息 */
-  TaskId: string | null;
+  TaskId?: string | null;
   /** 任务状态：READY - 任务已完成；NOTREADY - 任务未完成； */
-  TaskStatus: string | null;
+  TaskStatus?: string | null;
 }
 
 /** 此结构体 (TemplateInfo) 用于描述模板的信息。> **模板组成** >> 一个模板通常会包含以下结构信息>- 模板基本信息>- 签署参与方 Recipients，在模板发起合同时用于指定参与方>- 填写控件 Components>- 签署控件 SignComponents */
@@ -1625,7 +1625,7 @@ declare interface ChannelCreateDynamicFlowApproverResponse {
 declare interface ChannelCreateEmbedWebUrlRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 要生成WEB嵌入界面的类型, 可以选择的值如下: CREATE_SEAL: 生成创建印章的嵌入页面CREATE_TEMPLATE：生成创建模板的嵌入页面MODIFY_TEMPLATE：生成修改模板的嵌入页面PREVIEW_TEMPLATE：生成预览模板的嵌入页面PREVIEW_FLOW：生成预览合同文档的嵌入页面（支持移动端）PREVIEW_FLOW_DETAIL：生成预览合同详情的嵌入页面（仅支持PC端）PREVIEW_SEAL_LIST：生成预览印章列表的嵌入页面PREVIEW_SEAL_DETAIL：生成预览印章详情的嵌入页面EXTEND_SERVICE：生成扩展服务的嵌入页面 */
+  /** 要生成WEB嵌入界面的类型, 可以选择的值如下: CREATE_SEAL: 生成创建印章的嵌入页面CREATE_TEMPLATE：生成创建模板的嵌入页面MODIFY_TEMPLATE：生成修改模板的嵌入页面PREVIEW_TEMPLATE：生成预览模板的嵌入页面PREVIEW_FLOW：生成预览合同文档的嵌入页面（H5链接，支持移动端的浏览器中打开）PREVIEW_FLOW_DETAIL：生成预览合同详情的嵌入页面（仅支持PC的浏览器中打开）PREVIEW_SEAL_LIST：生成预览印章列表的嵌入页面PREVIEW_SEAL_DETAIL：生成预览印章详情的嵌入页面EXTEND_SERVICE：生成扩展服务的嵌入页面 */
   EmbedType: string;
   /** WEB嵌入的业务资源ID当EmbedType取值为MODIFY_TEMPLATE，PREVIEW_TEMPLATE必填，取值为模板id为CREATE_TEMPLATE，非必填，取值为资源id。*资源Id获取可使用接口[上传文件](https://qian.tencent.com/developers/partnerApis/files/UploadFiles)*为PREVIEW_FLOW，PREVIEW_FLOW_DETAIL必填，取值为合同id为PREVIEW_SEAL_DETAIL必填，取值为印章id注意： 1. CREATE_TEMPLATE中的BusinessId仅支持PDF文件类型， 如果您的文件不是PDF， 请使用接口[创建文件转换任务](https://qian.tencent.com/developers/partnerApis/files/ChannelCreateConvertTaskApi) 和[查询转换任务状态](https://qian.tencent.com/developers/partnerApis/files/ChannelGetTaskResultApi) 来进行转换成PDF资源。 */
   BusinessId?: string;
@@ -2253,9 +2253,9 @@ declare interface ChannelDescribeEmployeesRequest {
 
 declare interface ChannelDescribeEmployeesResponse {
   /** 员工信息列表。 */
-  Employees?: Staff[] | null;
+  Employees?: Staff[];
   /** 指定分页返回第几页的数据。页码从 0 开始，即首页为 0，最大20000。 */
-  Offset?: number | null;
+  Offset?: number;
   /** 指定分页每页返回的数据条数，单页最大支持 20。 */
   Limit?: number;
   /** 符合条件的员工数量。 */
@@ -2325,7 +2325,7 @@ declare interface ChannelDescribeRolesResponse {
   /** 查询角色的总数量 */
   TotalCount?: number;
   /** 查询的角色信息列表 */
-  ChannelRoles?: ChannelRole[] | null;
+  ChannelRoles?: ChannelRole[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2341,9 +2341,9 @@ declare interface ChannelDescribeSignFaceVideoRequest {
 
 declare interface ChannelDescribeSignFaceVideoResponse {
   /** 核身视频结果。 */
-  VideoData?: DetectInfoVideoData | null;
+  VideoData?: DetectInfoVideoData;
   /** 意愿核身问答模式结果。若未使用该意愿核身功能，该字段返回值可以不处理。 */
-  IntentionQuestionResult?: IntentionQuestionResult | null;
+  IntentionQuestionResult?: IntentionQuestionResult;
   /** 意愿核身点头确认模式的结果信息，若未使用该意愿核身功能，该字段返回值可以不处理。 */
   IntentionActionResult?: IntentionActionResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -2413,7 +2413,7 @@ declare interface ChannelGetTaskResultApiResponse {
   /** 资源Id（即FileId），用于[用PDF文件创建签署流程](https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowByFiles) */
   ResourceId?: string;
   /** 预览文件Url，有效期30分钟 当前字段返回为空，发起的时候，将ResourceId 放入发起即可 */
-  PreviewUrl?: string | null;
+  PreviewUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2553,11 +2553,11 @@ declare interface CreateChannelFlowEvidenceReportRequest {
 
 declare interface CreateChannelFlowEvidenceReportResponse {
   /** 出证报告 ID，可用于获取出证报告任务执行结果查询出证任务结果和出证PDF的下载URL */
-  ReportId?: string | null;
-  /** 出证任务执行的状态, 状态含义如下：**EvidenceStatusExecuting**： 出证任务在执行中**EvidenceStatusSuccess**： 出证任务执行成功**EvidenceStatusFailed** ： 出征任务执行失败 */
+  ReportId?: string;
+  /** 出证任务执行的状态, 状态含义如下：**EvidenceStatusExecuting**： 出证任务在执行中**EvidenceStatusSuccess**： 出证任务执行成功**EvidenceStatusFailed** ： 出证任务执行失败 */
   Status?: string;
   /** 废除，字段无效 */
-  ReportUrl?: string | null;
+  ReportUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2775,13 +2775,13 @@ declare interface CreateOrganizationAuthFileRequest {
   Agent: Agent;
   /** 企业授权书信息参数， 需要自行保证这些参数跟营业执照中的信息一致。 */
   OrganizationCommonInfo?: OrganizationCommonInfo;
-  /** 授权书类型：- 0: 企业认证超管授权书- 1: 超管变更授权书- 2: 企业注销授权书 */
+  /** 授权书类型：0: 企业认证超管授权书1: 超管变更授权书2: 企业注销授权书 */
   Type?: number;
 }
 
 declare interface CreateOrganizationAuthFileResponse {
   /** 授权书链接，有效期5分钟。 */
-  FileUrl?: string | null;
+  FileUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2803,7 +2803,7 @@ declare interface CreatePartnerAutoSignAuthUrlRequest {
 
 declare interface CreatePartnerAutoSignAuthUrlResponse {
   /** 授权链接，以短链形式返回，短链的有效期参考回参中的 ExpiredTime。 */
-  Url?: string | null;
+  Url?: string;
   /** 从客户小程序或者客户APP跳转至腾讯电子签小程序进行批量签署的跳转路径 */
   MiniAppPath?: string;
   /** 链接过期时间以 Unix 时间戳格式表示，从生成链接时间起，往后7天有效期。过期后短链将失效，无法打开。 */
@@ -2829,13 +2829,13 @@ declare interface CreatePersonAuthCertificateImageResponse {
   /** 个人用户认证证书图片下载URL，`有效期为5分钟`，超过有效期后将无法再下载。 */
   AuthCertUrl?: string;
   /** 个人用户认证证书的编号, 为20位数字组成的字符串, 由腾讯电子签下发此编号 。该编号会合成到个人用户证书证明图片。注: `个人用户认证证书的编号和证明图片绑定, 获取新的证明图片编号会变动` */
-  ImageCertId?: string | null;
+  ImageCertId?: string;
   /** 在数字证书申请过程中，系统会自动生成一个独一无二的序列号。请注意，当证书到期并自动续期时，该序列号将会发生变化。值得注意的是，此序列号不会被合成至个人用户证书的证明图片中。 */
-  SerialNumber?: string | null;
+  SerialNumber?: string;
   /** CA证书颁发时间，格式为Unix标准时间戳（秒） 该时间格式化后会合成到个人用户证书证明图片 */
-  ValidFrom?: number | null;
+  ValidFrom?: number;
   /** CA证书有效截止时间，格式为Unix标准时间戳（秒）该时间格式化后会合成到个人用户证书证明图片 */
-  ValidTo?: number | null;
+  ValidTo?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2867,7 +2867,7 @@ declare interface CreateSealByImageResponse {
   /** 电子印章ID，为32位字符串。建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。 */
   SealId?: string;
   /** 电子印章预览链接地址，地址默认失效时间为24小时。注:`图片上传生成的电子印章无预览链接地址` */
-  ImageUrl?: string | null;
+  ImageUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2987,8 +2987,8 @@ declare interface DescribeChannelFlowEvidenceReportRequest {
 
 declare interface DescribeChannelFlowEvidenceReportResponse {
   /** 出证报告PDF的下载 URL，有效期为5分钟，超过有效期后将无法再下载。 */
-  ReportUrl?: string | null;
-  /** 出证任务执行的状态, 状态含义如下：**EvidenceStatusExecuting**： 出证任务在执行中**EvidenceStatusSuccess**： 出证任务执行成功**EvidenceStatusFailed** ： 出征任务执行失败 */
+  ReportUrl?: string;
+  /** 出证任务执行的状态, 状态含义如下：**EvidenceStatusExecuting**： 出证任务在执行中**EvidenceStatusSuccess**： 出证任务执行成功**EvidenceStatusFailed** ： 出证任务执行失败 */
   Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3049,7 +3049,7 @@ declare interface DescribeExtendedServiceAuthDetailRequest {
 
 declare interface DescribeExtendedServiceAuthDetailResponse {
   /** 服务授权的信息列表，根据查询类型返回特定扩展服务的开通和授权状况。 */
-  AuthInfoDetail?: AuthInfoDetail | null;
+  AuthInfoDetail?: AuthInfoDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3061,7 +3061,7 @@ declare interface DescribeExtendedServiceAuthInfoRequest {
 
 declare interface DescribeExtendedServiceAuthInfoResponse {
   /** 服务开通和授权的信息列表，根据查询类型返回所有支持的扩展服务开通和授权状况，或者返回特定扩展服务的开通和授权状况。 */
-  AuthInfo?: ExtentServiceAuthInfo[] | null;
+  AuthInfo?: ExtentServiceAuthInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3083,11 +3083,11 @@ declare interface DescribeFlowDetailInfoResponse {
   /** 合同归属的第三方平台子客企业OpenId */
   ProxyOrganizationOpenId?: string;
   /** 合同流程的详细信息。如果查询的是合同组信息，则返回的是组内所有子合同流程的详细信息。 */
-  FlowInfo?: FlowDetailInfo[] | null;
+  FlowInfo?: FlowDetailInfo[];
   /** 合同组ID，只有在查询合同组信息时才会返回。 */
-  FlowGroupId?: string | null;
+  FlowGroupId?: string;
   /** 合同组名称，只有在查询合同组信息时才会返回。 */
-  FlowGroupName?: string | null;
+  FlowGroupName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3171,7 +3171,7 @@ declare interface DescribeUsageResponse {
   /** 用量明细条数 */
   Total?: number;
   /** 用量明细 */
-  Details?: UsageDetail[] | null;
+  Details?: UsageDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3245,17 +3245,17 @@ declare interface OperateChannelTemplateRequest {
 
 declare interface OperateChannelTemplateResponse {
   /** 第三方应用平台的应用ID */
-  AppId?: string | null;
+  AppId?: string;
   /** 合同模板ID */
-  TemplateId?: string | null;
+  TemplateId?: string;
   /** 描述模板可见性更改的结果。all-success: 全部成功part-success: 部分成功,失败的会在FailMessageList中展示fail:全部失败, 失败的会在FailMessageList中展示 */
-  OperateResult?: string | null;
+  OperateResult?: string;
   /** 模板可见范围:**all**: 所有本第三方应用合作企业可见**part**: 指定的本第三方应用合作企业 */
-  AuthTag?: string | null;
+  AuthTag?: string;
   /** 第三方平台子客企业标识列表 */
-  ProxyOrganizationOpenIds?: string[] | null;
+  ProxyOrganizationOpenIds?: string[];
   /** 操作失败信息数组 */
-  FailMessageList?: AuthFailMessage[] | null;
+  FailMessageList?: AuthFailMessage[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3291,9 +3291,9 @@ declare interface SyncProxyOrganizationOperatorsRequest {
 
 declare interface SyncProxyOrganizationOperatorsResponse {
   /** 同步的状态, 全部同步失败接口是接口会直接报错 **1** :全部成功 **2** :部分成功 */
-  Status?: number | null;
+  Status?: number;
   /** 同步失败员工ID及其失败原因 */
-  FailedList?: SyncFailReason[] | null;
+  FailedList?: SyncFailReason[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

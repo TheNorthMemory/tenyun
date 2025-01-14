@@ -695,7 +695,7 @@ declare interface DescribeInternetAddressRequest {
   Offset?: number;
   /** 返回数量，默认为20，最大值100 */
   Limit?: number;
-  /** 过滤条件：AddrType, 地址类型。0：BGP 1; 1: 电信， 2：移动， 3：联通AddrProto地址类型。0：IPv4 1:IPv6Status 地址状态。 0：使用中， 1：已停用， 2：已退还Subnet 互联网公网地址，数组互联网公网地址ID，数组 */
+  /** 过滤条件： AddrType，地址类型。0：BGP 1；1: 电信；2：移动；3：联通 AddrProto，地址类型。0：IPv4；1:IPv6 Status，地址状态。 0：使用中；1：已停用； 2：已退还 Subnet，互联网公网地址。数组 InstanceIds，互联网公网地址ID。数组 */
   Filters?: Filter[];
 }
 
@@ -703,7 +703,7 @@ declare interface DescribeInternetAddressResponse {
   /** 互联网公网地址数量 */
   TotalCount?: number;
   /** 互联网公网地址列表 */
-  Subnets?: InternetAddressDetail[] | null;
+  Subnets?: InternetAddressDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

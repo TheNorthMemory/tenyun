@@ -159,7 +159,7 @@ declare interface AuthRecord {
 /** 授权用户 */
 declare interface AuthorizedUser {
   /** 电子签系统中的用户id */
-  UserId: string;
+  UserId?: string;
 }
 
 /** 自动签开启、签署相关配置 */
@@ -192,7 +192,7 @@ declare interface BillUsageDetail {
   CreateOrganizationName?: string;
   /** 合同流程的名称。 */
   FlowName?: string;
-  /** 当前合同状态,如下是状态码对应的状态。**0**: 还没有发起**1**: 等待签署**2**: 部分签署 **3**: 拒签**4**: 已签署 **5**: 已过期 **6**: 已撤销 **7**: 还没有预发起**8**: 等待填写**9**: 部分填写 **10**: 拒填**11**: 已解除 */
+  /** 当前合同状态,如下是状态码对应的状态。**0**: 还没有发起**1**: 等待签署**2**: 部分签署 **3**: 拒签**4**: 已签署 **5**: 已过期 **6**: 已撤销 **7**: 还没有预发起**8**: 等待填写**9**: 部分填写 **10**: 拒签**11**: 已解除 */
   Status?: number;
   /** 查询的套餐类型对应关系如下:**CloudEnterprise**: 企业版合同**SingleSignature**: 单方签章**CloudProve**: 签署报告**CloudOnlineSign**: 腾讯会议在线签约**ChannelWeCard**: 微工卡**SignFlow**: 合同套餐**SignFace**: 签署意愿（人脸识别）**SignPassword**: 签署意愿（密码）**SignSMS**: 签署意愿（短信）**PersonalEssAuth**: 签署人实名（腾讯电子签认证）**PersonalThirdAuth**: 签署人实名（信任第三方认证）**OrgEssAuth**: 签署企业实名**FlowNotify**: 短信通知**AuthService**: 企业工商信息查询 */
   QuotaType?: string;
@@ -469,11 +469,11 @@ declare interface FailedCreateStaffData {
 /** 删除员工失败数据 */
 declare interface FailedDeleteStaffData {
   /** 员工在电子签的userId */
-  UserId: string | null;
+  UserId?: string | null;
   /** 员工在第三方平台的openId */
-  OpenId: string | null;
+  OpenId?: string | null;
   /** 失败原因 */
-  Reason: string;
+  Reason?: string;
 }
 
 /** 更新员工信息失败返回的数据信息 */
@@ -764,7 +764,7 @@ declare interface FlowGroupInfo {
   FileIds?: string[];
   /** 合同模板ID，为32位字符串。建议开发者保存此模板ID，后续用此模板发起合同流程需要此参数。可登录腾讯电子签控制台，在 "模板"->"模板中心"->"列表展示设置"选中模板 ID 中查看某个模板的TemplateId(在页面中展示为模板ID)。 */
   TemplateId?: string;
-  /** 签署流程的类型(如销售合同/入职合同等)，最大长度200个字符示例值：劳务合同 */
+  /** 签署流程的类型(如销售合同/入职合同等)，最大长度200个字符 */
   FlowType?: string;
   /** 签署流程描述,最大长度1000个字符 */
   FlowDescription?: string;
@@ -780,7 +780,7 @@ declare interface FlowGroupInfo {
   Components?: Component[];
   /** 发起方企业的签署人进行签署操作是否需要企业内部审批。使用此功能需要发起方企业有参与签署。若设置为true，审核结果需通过接口 [CreateFlowSignReview](https://qian.tencent.com/developers/companyApis/operateFlows/CreateFlowSignReview) 通知电子签，审核通过后，发起方企业签署人方可进行签署操作，否则会阻塞其签署操作。注：企业可以通过此功能与企业内部的审批流程进行关联，支持手动、静默签署合同。示例值：true */
   NeedSignReview?: boolean;
-  /** 个人自动签场景。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN示例值：E_PRESCRIPTION_AUTO_SIGN */
+  /** 个人自动签场景。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN */
   AutoSignScene?: string;
   /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
   FlowDisplayType?: number;
@@ -1365,11 +1365,11 @@ declare interface SuccessCreateStaffData {
 /** 删除员工的成功数据 */
 declare interface SuccessDeleteStaffData {
   /** 员工名 */
-  DisplayName: string;
+  DisplayName?: string;
   /** 员工手机号 */
-  Mobile: string;
+  Mobile?: string;
   /** 员工在电子签平台的id */
-  UserId: string;
+  UserId?: string;
 }
 
 /** 更新员工信息成功返回的数据信息， 仅支持未实名的用户进行更新会通过短信、企微消息或者H5Url 链接如果是通过H5邀请加入的方式，会返回H5 链接 */
@@ -1994,10 +1994,10 @@ declare interface CreateFlowEvidenceReportRequest {
 declare interface CreateFlowEvidenceReportResponse {
   /** 出证报告 ID，可用于获取出证报告任务执行结果查询出证任务结果和出证PDF的下载URL */
   ReportId?: string;
-  /** 出证任务执行的状态, 状态含义如下：**EvidenceStatusExecuting**： 出证任务在执行中**EvidenceStatusSuccess**： 出证任务执行成功**EvidenceStatusFailed** ： 出征任务执行失败 */
+  /** 出证任务执行的状态, 状态含义如下：**EvidenceStatusExecuting**： 出证任务在执行中**EvidenceStatusSuccess**： 出证任务执行成功**EvidenceStatusFailed** ： 出证任务执行失败 */
   Status?: string;
   /** 此字段已经废除,不再使用.出证的PDF下载地址请调用DescribeChannelFlowEvidenceReport接口获取 */
-  ReportUrl?: string | null;
+  ReportUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3204,7 +3204,7 @@ declare interface DescribeFlowEvidenceReportRequest {
 declare interface DescribeFlowEvidenceReportResponse {
   /** 出证报告PDF的下载 URL，`有效期为5分钟`，超过有效期后将无法再下载。 */
   ReportUrl?: string;
-  /** 出证任务执行的状态, 状态含义如下：**EvidenceStatusExecuting**： 出证任务在执行中**EvidenceStatusSuccess**： 出证任务执行成功**EvidenceStatusFailed** ： 出征任务执行失败 */
+  /** 出证任务执行的状态, 状态含义如下：**EvidenceStatusExecuting**： 出证任务在执行中**EvidenceStatusSuccess**： 出证任务执行成功**EvidenceStatusFailed** ： 出证任务执行失败 */
   Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

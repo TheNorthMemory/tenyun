@@ -261,7 +261,7 @@ mrs | [医疗报告结构化](https://cloud.tencent.com/document/product/1314) |
 ms | [移动应用安全](https://cloud.tencent.com/document/product/283) | 2018-04-08(23) |
 msp | [迁移服务平台](https://cloud.tencent.com/document/product/659) | 2018-03-19(7) |
 mvj | 营销价值判断 | 2019-09-26(1) |
-nlp | [NLP 服务](https://cloud.tencent.com/document/product/271) | 2019-04-08(12) |
+nlp | [NLP 技术](https://cloud.tencent.com/document/product/271) | 2019-04-08(12) |
 npp | 号码保护 | 2019-08-23(8) |
 oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(39) |
 ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(85) |

@@ -1166,7 +1166,7 @@ declare interface HeaderKey {
 
 /** 启发式缓存配置 */
 declare interface HeuristicCache {
-  /** 启发式缓存配置开关，取值有：on：开启off：关闭 */
+  /** 启发式缓存配置开关，取值有：on：开启off：关闭（默认） */
   Switch: string | null;
   /** 自定义启发式缓存时间配置 */
   CacheConfig?: CacheConfig | null;

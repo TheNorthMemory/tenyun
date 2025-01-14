@@ -224,6 +224,10 @@ declare interface SearchResult {
   Title?: string | null;
   /** 搜索引文链接 */
   Url?: string | null;
+  /** 搜索引文站点名 */
+  Text?: string;
+  /** 搜索引文图标 */
+  Icon?: string;
 }
 
 /** 歌曲详情。具体含义参考 [QQ音乐SDK](https://developer.y.qq.com/) */

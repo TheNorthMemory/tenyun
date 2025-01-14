@@ -300,7 +300,7 @@ declare interface TextWritingResponse {
   RequestId?: string;
 }
 
-/** {@link Nlp NLP 服务} */
+/** {@link Nlp NLP 技术} */
 declare interface Nlp {
   (): Versions;
   /** 情感分析V2 {@link AnalyzeSentimentRequest} {@link AnalyzeSentimentResponse} */

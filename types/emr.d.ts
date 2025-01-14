@@ -1209,7 +1209,7 @@ declare interface ModifyResourceTags {
 /** 定时伸缩每月重复任务策略 */
 declare interface MonthRepeatStrategy {
   /** 重复任务执行的具体时刻，例如"01:02:00" */
-  ExecuteAtTimeOfDay: string | null;
+  ExecuteAtTimeOfDay: string;
   /** 每月中的天数时间段描述，长度只能为2，例如[2,10]表示每月2-10号。 */
   DaysOfMonthRange: number[] | null;
 }
@@ -2749,7 +2749,7 @@ declare interface CreateCloudInstanceRequest {
 
 declare interface CreateCloudInstanceResponse {
   /** 实例ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2801,7 +2801,7 @@ declare interface CreateClusterRequest {
 
 declare interface CreateClusterResponse {
   /** 实例ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

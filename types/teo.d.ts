@@ -984,12 +984,12 @@ declare interface FirstPartConfig {
 declare interface FollowOrigin {
   /** 遵循源站配置开关，取值有：on：开启；off：关闭。 */
   Switch: string;
-  /** 源站未返回 Cache-Control 头时，缓存/不缓存开关。当 Switch 为 on 时，此字段必填，否则此字段不生效。取值有：on：缓存；off：不缓存。 */
-  DefaultCache?: string | null;
+  /** 源站未返回 Cache-Control 头时，缓存/不缓存开关。当 Switch 为 on 时，此字段必填，当 Switch 为 off 时，无需填写此字段，若填写则不生效。取值有：on：缓存；off：不缓存。 */
+  DefaultCache?: string;
   /** 源站未返回 Cache-Control 头时，使用/不使用默认缓存策略开关。当 DefaultCache 为 on 时，此字段必填，否则此字段不生效；当 DefaultCacheTime 不为 0 时，此字段必须为 off。取值有：on：使用默认缓存策略；off：不使用默认缓存策略。 */
-  DefaultCacheStrategy?: string | null;
-  /** 源站未返回 Cache-Control 头时，表示默认的缓存时间，单位为秒，取值：0～315360000。当 DefaultCache 为 on 时，此字段必填，否则此字段不生效；当 DefaultCacheStrategy 为 on 时， 此字段必须为 0。 */
-  DefaultCacheTime?: number | null;
+  DefaultCacheStrategy?: string;
+  /** 源站未返回 Cache-Control 头时，表示默认的缓存时间，单位为秒，取值：0-315360000。当 DefaultCache 为 on 时，此字段必填，否则此字段不生效；当 DefaultCacheStrategy 为 on 时， 此字段必须为 0。 */
+  DefaultCacheTime?: number;
 }
 
 /** 访问协议强制 HTTPS 跳转配置。 */
