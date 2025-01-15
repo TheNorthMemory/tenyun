@@ -93,19 +93,19 @@ declare interface BackupStatus {
 /** 备份表信息 */
 declare interface BackupTableContent {
   /** 数据库 */
-  Database: string | null;
+  Database: string;
   /** 表 */
-  Table: string | null;
+  Table: string;
   /** 表总字节数 */
-  TotalBytes: number | null;
+  TotalBytes: number;
   /** 表单个副本的大小 */
-  SingleReplicaBytes?: string | null;
+  SingleReplicaBytes?: string;
   /** 备份状态 */
-  BackupStatus?: number | null;
+  BackupStatus?: number;
   /** 备份的错误信息 */
-  BackupErrorMsg?: string | null;
+  BackupErrorMsg?: string;
   /** 该库表是否绑定降冷策略 */
-  IsOpenCoolDown?: boolean | null;
+  IsOpenCoolDown?: boolean;
 }
 
 /** 资源组绑定的用户信息，需要username和host信息进行授权 */
@@ -119,29 +119,29 @@ declare interface BindUser {
 /** 集群计费相关信息 */
 declare interface ChargeProperties {
   /** 计费类型，“PREPAID” 预付费，“POSTPAID_BY_HOUR” 后付费 */
-  ChargeType?: string | null;
+  ChargeType?: string;
   /** 是否自动续费，1表示自动续费开启 */
-  RenewFlag?: number | null;
+  RenewFlag?: number;
   /** 计费时间长度 */
-  TimeSpan?: number | null;
+  TimeSpan?: number;
   /** 计费时间单位，“m”表示月等 */
-  TimeUnit?: string | null;
+  TimeUnit?: string;
 }
 
 /** 集群的配置文件的修改历史 */
 declare interface ClusterConfigsHistory {
   /** 配置文件名称 */
-  FileName: string;
+  FileName?: string;
   /** 修改后的配置文件内容，base64编码 */
-  NewConfValue: string;
+  NewConfValue?: string;
   /** 修改前的配置文件内容，base64编码 */
-  OldConfValue: string;
+  OldConfValue?: string;
   /** 修改原因 */
-  Remark: string | null;
+  Remark?: string;
   /** 修改时间 */
-  ModifyTime: string;
+  ModifyTime?: string;
   /** 修改子账号id */
-  UserUin: string;
+  UserUin?: string;
 }
 
 /** 用于返回XML格式的配置文件和内容以及其他配置文件有关的信息 */
@@ -157,25 +157,25 @@ declare interface ClusterConfigsInfoFromEMR {
   /** 用于表示当前配置文件是不是有过修改后没有重启，提醒用户需要重启 */
   NeedRestart?: number;
   /** 配置文件路径 */
-  FilePath?: string | null;
+  FilePath?: string;
   /** 配置文件kv值 */
   FileKeyValues?: string | null;
   /** 配置文件kv值 */
-  FileKeyValuesNew?: ConfigKeyValue[] | null;
+  FileKeyValuesNew?: ConfigKeyValue[];
 }
 
 /** 返回配置的文件内容（key-value） */
 declare interface ConfigKeyValue {
   /** key */
-  KeyName?: string | null;
+  KeyName?: string;
   /** 值 */
-  Value?: string | null;
+  Value?: string;
   /** 备注 */
-  Message?: string | null;
+  Message?: string;
   /** 1-只读，2-可修改但不可删除，3-可删除 */
-  Display?: number | null;
+  Display?: number;
   /** 0不支持 1支持热更新 */
-  SupportHotUpdate?: number | null;
+  SupportHotUpdate?: number;
 }
 
 /** 配置文件修改信息 */
@@ -193,45 +193,45 @@ declare interface ConfigSubmitContext {
 /** 冷热分层backend节点信息 */
 declare interface CoolDownBackend {
   /** 字段：Host */
-  Host?: string | null;
+  Host?: string;
   /** 字段：DataUsedCapacity */
-  DataUsedCapacity?: string | null;
+  DataUsedCapacity?: string;
   /** 字段：TotalCapacity */
-  TotalCapacity?: string | null;
+  TotalCapacity?: string;
   /** 字段：RemoteUsedCapacity */
-  RemoteUsedCapacity?: string | null;
+  RemoteUsedCapacity?: string;
 }
 
 /** 冷热分层策略 */
 declare interface CoolDownPolicyInfo {
   /** 策略名称 */
-  PolicyName?: string | null;
+  PolicyName?: string;
   /** cooldown_ttl */
-  CooldownDatetime?: string | null;
+  CooldownDatetime?: string;
   /** cooldown_datetime */
-  CooldownTtl?: string | null;
+  CooldownTtl?: string;
 }
 
 /** 冷热分层Table数据信息 */
 declare interface CoolDownTableDataInfo {
   /** 列：DatabaseName */
-  DatabaseName?: string | null;
+  DatabaseName?: string;
   /** 列：TableName */
-  TableName?: string | null;
+  TableName?: string;
   /** 列：Size */
-  Size?: string | null;
+  Size?: string;
   /** 列：RemoteSize */
-  RemoteSize?: string | null;
+  RemoteSize?: string;
 }
 
 /** 客户提供cos认证信息。 */
 declare interface CosSourceInfo {
   /** cos认证中的Id */
-  SecretId?: string | null;
+  SecretId?: string;
   /** cos认证中的key */
-  SecretKey?: string | null;
+  SecretKey?: string;
   /** cos认证中的路径 */
-  CosPath?: string | null;
+  CosPath?: string;
 }
 
 /** 集群规格 */
@@ -247,33 +247,35 @@ declare interface CreateInstanceSpec {
 /** 数据库审计 */
 declare interface DataBaseAuditRecord {
   /** 查询用户 */
-  OsUser?: string | null;
+  OsUser?: string;
   /** 查询ID */
-  InitialQueryId?: string | null;
+  InitialQueryId?: string;
   /** SQL语句 */
-  Sql?: string | null;
+  Sql?: string;
   /** 开始时间 */
-  QueryStartTime?: string | null;
+  QueryStartTime?: string;
   /** 执行耗时 */
-  DurationMs?: number | null;
+  DurationMs?: number;
   /** 读取行数 */
-  ReadRows?: number | null;
+  ReadRows?: number;
   /** 读取字节数 */
-  ResultRows?: number | null;
+  ResultRows?: number;
   /** 结果字节数 */
-  ResultBytes?: number | null;
+  ResultBytes?: number;
   /** 内存 */
-  MemoryUsage?: number | null;
+  MemoryUsage?: number;
   /** 初始查询IP */
-  InitialAddress?: string | null;
+  InitialAddress?: string;
   /** 数据库 */
-  DbName?: string | null;
+  DbName?: string;
   /** sql类型 */
-  SqlType?: string | null;
+  SqlType?: string;
   /** catalog名称 */
-  Catalog?: string | null;
+  Catalog?: string;
   /** 状态 */
-  State?: string | null;
+  State?: string;
+  /** 是否是查询 */
+  IsQuery?: boolean;
 }
 
 /** 磁盘规格描述 */
@@ -727,19 +729,21 @@ declare interface SlowQueryRecord {
   /** 初始查询IP */
   InitialAddress?: string;
   /** 数据库名 */
-  DbName?: string | null;
+  DbName?: string;
   /** 是否是查询，0：否，1：查询语句 */
-  IsQuery?: number | null;
+  IsQuery?: number;
   /** ResultBytes的MB格式 */
-  ResultBytesMB?: number | null;
+  ResultBytesMB?: number;
   /** MemoryUsage的MB表示 */
-  MemoryUsageMB?: number | null;
+  MemoryUsageMB?: number;
   /** DurationMs的秒表示 */
-  DurationSec?: number | null;
+  DurationSec?: number;
   /** 状态 */
-  State?: string | null;
+  State?: string;
   /** Catalog Name */
-  CatalogName?: string | null;
+  CatalogName?: string;
+  /** cpu执行时间 */
+  CpuTimeMs?: number;
 }
 
 /** 标签描述 */
@@ -851,7 +855,7 @@ declare interface CheckCoolDownWorkingVariableConfigCorrectRequest {
 
 declare interface CheckCoolDownWorkingVariableConfigCorrectResponse {
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -893,7 +897,7 @@ declare interface CreateBackUpScheduleRequest {
 
 declare interface CreateBackUpScheduleResponse {
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -911,7 +915,7 @@ declare interface CreateCoolDownPolicyRequest {
 
 declare interface CreateCoolDownPolicyResponse {
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1271,6 +1275,8 @@ declare interface DescribeDatabaseAuditRecordsRequest {
   SqlTypes?: string[];
   /** catalog名称（多选） */
   Catalogs?: string[];
+  /** 是否是查询 */
+  IsQuery?: boolean[];
 }
 
 declare interface DescribeDatabaseAuditRecordsResponse {
@@ -1279,9 +1285,9 @@ declare interface DescribeDatabaseAuditRecordsResponse {
   /** 记录列表 */
   SlowQueryRecords?: DataBaseAuditRecord;
   /** 记录列表 */
-  Records?: DataBaseAuditRecord[] | null;
+  Records?: DataBaseAuditRecord[];
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -340,6 +340,8 @@ declare interface BackupInfo {
   EncryptionFlag?: string;
   /** 备份GTID点位 */
   ExecutedGTIDSet?: string;
+  /** 备份文件MD5值 */
+  MD5?: string;
 }
 
 /** 创建备份时，指定需要备份的库表信息 */

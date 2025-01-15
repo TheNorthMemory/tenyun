@@ -1626,6 +1626,8 @@ declare interface NativeGatewayServerGroup {
   SubnetIds?: string | null;
   /** 分组默认权重 */
   DefaultWeight?: number | null;
+  /** 弹性节点 */
+  ElasticNumber?: number | null;
 }
 
 /** 网关分组列表 */

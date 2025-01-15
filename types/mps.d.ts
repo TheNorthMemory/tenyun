@@ -2058,13 +2058,13 @@ declare interface CreateOutputSRTSettings {
   Destinations: CreateOutputSRTSettingsDestinations[];
   /** 转推SRT的流Id，可选大小写字母、数字和特殊字符（.#!:&,=_-），长度为0~512。 */
   StreamId?: string;
-  /** 转推SRT的总延迟，默认0，单位ms，范围为[0, 3000]。 */
+  /** 转推SRT的总延迟，默认0，单位ms，范围为[0, 3000]。此参数同时设置了发送方和接收方的延迟（recvlatency和peerlatency）为相同的值。建议配置为至少3倍RTT，以确保在网络拥塞时能够有效处理数据包的重传和确认 */
   Latency?: number;
-  /** 转推SRT的接收延迟，默认120，单位ms，范围为[0, 3000]。 */
+  /** 转推SRT的接收延迟，默认120，单位ms，范围为[0, 3000]。 此参数表示接收方用于缓存数据包的时间长度 */
   RecvLatency?: number;
-  /** 转推SRT的对端延迟，默认0，单位ms，范围为[0, 3000]。 */
+  /** 转推SRT的对端延迟，默认0，单位ms，范围为[0, 3000]。 此参数由发送方设置，用于告知接收方其期望的延迟缓冲时间 */
   PeerLatency?: number;
-  /** 转推SRT的对端空闲超时时间，默认5000，单位ms，范围为[1000, 10000]。 */
+  /** 转推SRT的对端空闲超时时间，默认5000，单位ms，范围为[1000, 10000]。 如果连接在设定的超时时间内没有活动，将会被关闭 */
   PeerIdleTimeout?: number;
   /** 转推SRT的加密密钥，默认为空，表示不加密。只可填ascii码值，长度为[10, 79]。 */
   Passphrase?: string;
@@ -2520,6 +2520,30 @@ declare interface FlowAudio {
   Rate: number;
   /** 音频Pid。 */
   Pid: number;
+}
+
+/** 查询Flow的配置信息。 */
+declare interface FlowInOutResp {
+  /** 流Id。 */
+  FlowId?: string;
+  /** 流名称。 */
+  FlowName?: string;
+  /** 该Flow关联的媒体传输事件EventId。 */
+  EventId?: string;
+  /** 媒体传输输入流所属的区域，取值和InputRegion相同。 */
+  FlowRegion?: string;
+  /** 当返回是输出类型时非空，output所在Region。 */
+  OutputRegion?: string;
+  /** EventName。 */
+  EventName?: string;
+  /** InOutType为Input有效。 */
+  InputName?: string;
+  /** InOutType为Output有效。 */
+  OutputName?: string;
+  /** Input或者Output的Id。 */
+  InOutId?: string;
+  /** 输入/输出类型，可选值：Input：输入Outpu：输出。 */
+  InOutType?: string;
 }
 
 /** 传输流日志信息。 */
@@ -4602,6 +4626,22 @@ declare interface SearchValueInput {
   TextInput?: string | null;
 }
 
+/** 安全组信息。 */
+declare interface SecurityGroupInfo {
+  /** 安全组 ID。 */
+  Id?: string;
+  /** 安全组名称。 */
+  Name?: string;
+  /** 白名单列表。 */
+  Whitelist?: string[];
+  /** 绑定的输入流列表。 */
+  OccupiedInputs?: string[] | null;
+  /** 安全组地址。 */
+  Region?: string;
+  /** 绑定的输出流列表。 */
+  OccupiedOutputs?: string[] | null;
+}
+
 /** 智能拆条片段。 */
 declare interface SegmentRecognitionItem {
   /** 置信度。 */
@@ -5004,6 +5044,18 @@ declare interface TranslateConfigureInfoForUpdate {
   SubtitleFormat?: string;
 }
 
+/** 安全组解绑输入/输出请求信息。 */
+declare interface UnattachSecurityGroupInOutInfo {
+  /** 该安全组关联的FlowId。 */
+  FlowId: string;
+  /** 要解绑的输入/输出ID。 */
+  InOutId: string;
+  /** 输入/输出类型，可选值：Input：输入Output：输出。 */
+  InOutType: string;
+  /** Flow所在的Region，和input共用。 */
+  FlowRegion: string;
+}
+
 /** 媒体处理 URL 对象信息。 */
 declare interface UrlInputInfo {
   /** 视频的 URL。 */
@@ -5152,9 +5204,9 @@ declare interface VideoTemplateInfo {
   Bitrate: number;
   /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。注意：自适应模式时，Width不能小于Height。 */
   ResolutionAdaptive?: string;
-  /** 视频流宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
+  /** 视频流宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。注意：Codec为MV-HEVC时可以支持到7680 */
   Width?: number;
-  /** 视频流高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
+  /** 视频流高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。注意：Codec为MV-HEVC时可以支持到7680 */
   Height?: number;
   /** 关键帧 I 帧之间的间隔，允许按帧或秒自定义GOP长度，取值范围：0 和 [1, 100000]，当填 0 或不填时，系统将自动设置 gop 长度。 */
   Gop?: number;
@@ -5210,9 +5262,9 @@ declare interface VideoTemplateInfoForUpdate {
   Bitrate?: number | null;
   /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。注意：自适应模式时，Width不能小于Height。 */
   ResolutionAdaptive?: string | null;
-  /** 视频流宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。 */
+  /** 视频流宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。注意：Codec为MV-HEVC时可以支持到7680 */
   Width?: number | null;
-  /** 视频流高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。 */
+  /** 视频流高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。注意：Codec为MV-HEVC时可以支持到7680 */
   Height?: number | null;
   /** 关键帧 I 帧之间的间隔，允许按帧或秒自定义GOP长度，取值范围：0 和 [1, 100000]。当填 0 时，系统将自动设置 gop 长度。 */
   Gop?: number | null;
@@ -5772,6 +5824,20 @@ declare interface CreateStreamLinkOutputInfoResponse {
   RequestId?: string;
 }
 
+declare interface CreateStreamLinkSecurityGroupRequest {
+  /** 安全组名称，限制大小写、数字和下划线，Region下唯一。 */
+  Name: string;
+  /** 白名单列表，数量限制[1, 10]。 */
+  Whitelist: string[];
+}
+
+declare interface CreateStreamLinkSecurityGroupResponse {
+  /** 安全组 ID。 */
+  Id?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateTranscodeTemplateRequest {
   /** 封装格式，可选值：mp4、flv、hls、ts、webm、mkv、mxf、mov、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。 */
   Container: string;
@@ -6054,6 +6120,16 @@ declare interface DeleteStreamLinkOutputResponse {
   RequestId?: string;
 }
 
+declare interface DeleteStreamLinkSecurityGroupRequest {
+  /** 安全组 ID。 */
+  Id: string;
+}
+
+declare interface DeleteStreamLinkSecurityGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteTranscodeTemplateRequest {
   /** 转码模板唯一标识。 */
   Definition: number;
@@ -6147,7 +6223,7 @@ declare interface DescribeAdaptiveDynamicStreamingTemplatesRequest {
   Limit?: number;
   /** 模板类型过滤条件，可选值：Preset：系统预置模板；Custom：用户自定义模板。 */
   Type?: string;
-  /** 是否为纯音频，0表示视频，1表示纯音频 */
+  /** 是否为纯音频，0表示视频，1表示纯音频默认值：0 */
   PureAudio?: number;
   /** 自适应转码模板标识过滤条件，长度限制：64 个字符 */
   Name?: string;
@@ -6202,6 +6278,18 @@ declare interface DescribeContentReviewTemplatesResponse {
   TotalCount?: number;
   /** 内容审核模板详情列表。 */
   ContentReviewTemplateSet?: ContentReviewTemplateItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeGroupAttachFlowsByIdRequest {
+  /** 媒体传输安全组ID。 */
+  Id?: string;
+}
+
+declare interface DescribeGroupAttachFlowsByIdResponse {
+  /** 安全组反查的Flow信息列表。 */
+  Infos?: FlowInOutResp[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6604,6 +6692,16 @@ declare interface DescribeStreamLinkRegionsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeStreamLinkSecurityGroupsRequest {
+}
+
+declare interface DescribeStreamLinkSecurityGroupsResponse {
+  /** 安全组信息列表。 */
+  Infos?: SecurityGroupInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTaskDetailRequest {
   /** 视频处理任务的任务 ID。 */
   TaskId: string;
@@ -6808,6 +6906,18 @@ declare interface DisableWorkflowRequest {
 }
 
 declare interface DisableWorkflowResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DisassociateSecurityGroupRequest {
+  /** 媒体传输安全组ID。 */
+  Id?: string;
+  /** 要解绑的输入输出信息列表。 */
+  UnattachInOutInfos?: UnattachSecurityGroupInOutInfo[];
+}
+
+declare interface DisassociateSecurityGroupResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7228,6 +7338,20 @@ declare interface ModifyStreamLinkOutputInfoResponse {
   RequestId?: string;
 }
 
+declare interface ModifyStreamLinkSecurityGroupRequest {
+  /** 安全组Id。 */
+  Id: string;
+  /** 安全组名称，限制大小写、数字和下划线，长度[1, 32]，Region下唯一。 */
+  Name?: string;
+  /** 白名单列表，最多10个。 */
+  Whitelist?: string[];
+}
+
+declare interface ModifyStreamLinkSecurityGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyTranscodeTemplateRequest {
   /** 转码模板唯一标识。 */
   Definition: number;
@@ -7569,6 +7693,8 @@ declare interface Mps {
   CreateStreamLinkInput(data: CreateStreamLinkInputRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStreamLinkInputResponse>;
   /** 创建媒体传输的输出信息 {@link CreateStreamLinkOutputInfoRequest} {@link CreateStreamLinkOutputInfoResponse} */
   CreateStreamLinkOutputInfo(data: CreateStreamLinkOutputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStreamLinkOutputInfoResponse>;
+  /** 创建安全组 {@link CreateStreamLinkSecurityGroupRequest} {@link CreateStreamLinkSecurityGroupResponse} */
+  CreateStreamLinkSecurityGroup(data: CreateStreamLinkSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStreamLinkSecurityGroupResponse>;
   /** 创建转码模板 {@link CreateTranscodeTemplateRequest} {@link CreateTranscodeTemplateResponse} */
   CreateTranscodeTemplate(data: CreateTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTranscodeTemplateResponse>;
   /** 创建视频检索的入库任务 {@link CreateVideoDatabaseEntryTaskRequest} {@link CreateVideoDatabaseEntryTaskResponse} */
@@ -7611,6 +7737,8 @@ declare interface Mps {
   DeleteStreamLinkFlow(data: DeleteStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStreamLinkFlowResponse>;
   /** 删除媒体传输输出 {@link DeleteStreamLinkOutputRequest} {@link DeleteStreamLinkOutputResponse} */
   DeleteStreamLinkOutput(data: DeleteStreamLinkOutputRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStreamLinkOutputResponse>;
+  /** 删除安全组 {@link DeleteStreamLinkSecurityGroupRequest} {@link DeleteStreamLinkSecurityGroupResponse} */
+  DeleteStreamLinkSecurityGroup(data: DeleteStreamLinkSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStreamLinkSecurityGroupResponse>;
   /** 删除转码模板 {@link DeleteTranscodeTemplateRequest} {@link DeleteTranscodeTemplateResponse} */
   DeleteTranscodeTemplate(data: DeleteTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTranscodeTemplateResponse>;
   /** 删除水印模板 {@link DeleteWatermarkTemplateRequest} {@link DeleteWatermarkTemplateResponse} */
@@ -7629,6 +7757,8 @@ declare interface Mps {
   DescribeAnimatedGraphicsTemplates(data?: DescribeAnimatedGraphicsTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAnimatedGraphicsTemplatesResponse>;
   /** 获取智能审核模板列表 {@link DescribeContentReviewTemplatesRequest} {@link DescribeContentReviewTemplatesResponse} */
   DescribeContentReviewTemplates(data?: DescribeContentReviewTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentReviewTemplatesResponse>;
+  /** 反查媒体传输安全组绑定的Flow信息 {@link DescribeGroupAttachFlowsByIdRequest} {@link DescribeGroupAttachFlowsByIdResponse} */
+  DescribeGroupAttachFlowsById(data?: DescribeGroupAttachFlowsByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupAttachFlowsByIdResponse>;
   /** 获取雪碧图模板列表 {@link DescribeImageSpriteTemplatesRequest} {@link DescribeImageSpriteTemplatesResponse} */
   DescribeImageSpriteTemplates(data?: DescribeImageSpriteTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageSpriteTemplatesResponse>;
   /** 获取直播录制模板 {@link DescribeLiveRecordTemplatesRequest} {@link DescribeLiveRecordTemplatesResponse} */
@@ -7669,6 +7799,8 @@ declare interface Mps {
   DescribeStreamLinkFlows(data?: DescribeStreamLinkFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkFlowsResponse>;
   /** 查询媒体传输地区 {@link DescribeStreamLinkRegionsRequest} {@link DescribeStreamLinkRegionsResponse} */
   DescribeStreamLinkRegions(data?: DescribeStreamLinkRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkRegionsResponse>;
+  /** 批量查询安全组信息 {@link DescribeStreamLinkSecurityGroupsRequest} {@link DescribeStreamLinkSecurityGroupsResponse} */
+  DescribeStreamLinkSecurityGroups(data?: DescribeStreamLinkSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkSecurityGroupsResponse>;
   /** 查询任务详情 {@link DescribeTaskDetailRequest} {@link DescribeTaskDetailResponse} */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
   /** 获取任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
@@ -7689,6 +7821,8 @@ declare interface Mps {
   DisableSchedule(data: DisableScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DisableScheduleResponse>;
   /** 禁用工作流 {@link DisableWorkflowRequest} {@link DisableWorkflowResponse} */
   DisableWorkflow(data: DisableWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<DisableWorkflowResponse>;
+  /** 批量解绑安全组 {@link DisassociateSecurityGroupRequest} {@link DisassociateSecurityGroupResponse} */
+  DisassociateSecurityGroup(data?: DisassociateSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateSecurityGroupResponse>;
   /** 编辑视频 {@link EditMediaRequest} {@link EditMediaResponse} */
   EditMedia(data: EditMediaRequest, config?: AxiosRequestConfig): AxiosPromise<EditMediaResponse>;
   /** 启用编排 {@link EnableScheduleRequest} {@link EnableScheduleResponse} */
@@ -7731,6 +7865,8 @@ declare interface Mps {
   ModifyStreamLinkInput(data: ModifyStreamLinkInputRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStreamLinkInputResponse>;
   /** 修改媒体传输的输出信息 {@link ModifyStreamLinkOutputInfoRequest} {@link ModifyStreamLinkOutputInfoResponse} */
   ModifyStreamLinkOutputInfo(data: ModifyStreamLinkOutputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStreamLinkOutputInfoResponse>;
+  /** 更新安全组 {@link ModifyStreamLinkSecurityGroupRequest} {@link ModifyStreamLinkSecurityGroupResponse} */
+  ModifyStreamLinkSecurityGroup(data: ModifyStreamLinkSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStreamLinkSecurityGroupResponse>;
   /** 修改转码模板 {@link ModifyTranscodeTemplateRequest} {@link ModifyTranscodeTemplateResponse} */
   ModifyTranscodeTemplate(data: ModifyTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTranscodeTemplateResponse>;
   /** 修改水印模板 {@link ModifyWatermarkTemplateRequest} {@link ModifyWatermarkTemplateResponse} */

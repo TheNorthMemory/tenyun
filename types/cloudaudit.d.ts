@@ -485,7 +485,7 @@ declare interface StopLoggingRequest {
 
 declare interface StopLoggingResponse {
   /** 是否关闭成功 */
-  IsSuccess: number;
+  IsSuccess?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

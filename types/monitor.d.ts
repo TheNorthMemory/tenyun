@@ -1063,9 +1063,9 @@ declare interface Filter {
   /** 过滤值，in过滤方式用逗号分割多个值 */
   Value?: string;
   /** 过滤条件名称 */
-  Name?: string | null;
+  Name?: string;
   /** 过滤条件取值范围 */
-  Values?: string[] | null;
+  Values?: string[];
 }
 
 /** Grafana可视化服务 授权账户信息 */
@@ -1946,9 +1946,9 @@ declare interface PrometheusRecordRuleYamlItem {
   Name?: string;
   /** 最近更新时间 */
   UpdateTime?: string;
-  /** Yaml内容 */
-  TemplateId?: string;
   /** 如果该聚合规则来至模板，则TemplateId为模板id */
+  TemplateId?: string;
+  /** Yaml内容 */
   Content?: string | null;
   /** 该聚合规则如果来源于用户集群crd资源定义，则ClusterId为所属集群ID */
   ClusterId?: string | null;
@@ -2036,6 +2036,10 @@ declare interface PrometheusTag {
 
 /** prometheus一个抓取目标的信息 */
 declare interface PrometheusTarget {
+  /** 抓取目标的URL */
+  Url?: string;
+  /** target当前状态,当前支持up = 健康down = 不健康unknown = 未知 */
+  State?: string;
 }
 
 /** 模板实例 */
@@ -2709,7 +2713,7 @@ declare interface CreatePrometheusAgentRequest {
 
 declare interface CreatePrometheusAgentResponse {
   /** 创建成功的 Agent Id */
-  AgentId: string;
+  AgentId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

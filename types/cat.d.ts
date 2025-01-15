@@ -215,11 +215,11 @@ declare interface DeleteProbeTaskRequest {
 
 declare interface DeleteProbeTaskResponse {
   /** 任务总量 */
-  Total: number;
+  Total?: number;
   /** 任务成功量 */
-  SuccessCount: number | null;
+  SuccessCount?: number | null;
   /** 任务执行结果 */
-  Results: TaskResult[] | null;
+  Results?: TaskResult[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -277,9 +277,9 @@ declare interface DescribeInstantTasksRequest {
 
 declare interface DescribeInstantTasksResponse {
   /** 任务 */
-  Tasks: SingleInstantTask[] | null;
+  Tasks?: SingleInstantTask[] | null;
   /** 总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -393,11 +393,11 @@ declare interface ResumeProbeTaskRequest {
 
 declare interface ResumeProbeTaskResponse {
   /** 任务总量 */
-  Total: number;
+  Total?: number;
   /** 任务成功量 */
-  SuccessCount: number | null;
+  SuccessCount?: number | null;
   /** 任务执行详情 */
-  Results: TaskResult[] | null;
+  Results?: TaskResult[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -409,11 +409,11 @@ declare interface SuspendProbeTaskRequest {
 
 declare interface SuspendProbeTaskResponse {
   /** 任务总量 */
-  Total: number;
+  Total?: number;
   /** 任务成功量 */
-  SuccessCount: number | null;
+  SuccessCount?: number | null;
   /** 任务执行结果 */
-  Results: TaskResult[] | null;
+  Results?: TaskResult[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -459,7 +459,7 @@ declare interface Cat {
   (): Versions;
   /** 批量创建拨测任务 {@link CreateProbeTasksRequest} {@link CreateProbeTasksResponse} */
   CreateProbeTasks(data: CreateProbeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProbeTasksResponse>;
-  /** 删除拨测任务 {@link DeleteProbeTaskRequest} {@link DeleteProbeTaskResponse} */
+  /** 删除任务 {@link DeleteProbeTaskRequest} {@link DeleteProbeTaskResponse} */
   DeleteProbeTask(data: DeleteProbeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProbeTaskResponse>;
   /** 列出单次拨测详情数据 {@link DescribeDetailedSingleProbeDataRequest} {@link DescribeDetailedSingleProbeDataResponse} */
   DescribeDetailedSingleProbeData(data: DescribeDetailedSingleProbeDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDetailedSingleProbeDataResponse>;
@@ -475,7 +475,7 @@ declare interface Cat {
   DescribeProbeTasks(data?: DescribeProbeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProbeTasksResponse>;
   /** 恢复拨测任务 {@link ResumeProbeTaskRequest} {@link ResumeProbeTaskResponse} */
   ResumeProbeTask(data: ResumeProbeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeProbeTaskResponse>;
-  /** 暂停拨测任务 {@link SuspendProbeTaskRequest} {@link SuspendProbeTaskResponse} */
+  /** 暂停任务 {@link SuspendProbeTaskRequest} {@link SuspendProbeTaskResponse} */
   SuspendProbeTask(data: SuspendProbeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SuspendProbeTaskResponse>;
   /** 更新探测任务属性 {@link UpdateProbeTaskAttributesRequest} {@link UpdateProbeTaskAttributesResponse} */
   UpdateProbeTaskAttributes(data: UpdateProbeTaskAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProbeTaskAttributesResponse>;

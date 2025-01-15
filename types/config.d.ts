@@ -303,7 +303,7 @@ declare interface ListAggregateDiscoveredResourcesRequest {
   MaxResults: number;
   /** 账号组ID */
   AccountGroupId: string;
-  /** resourceName：资源名 resourceId ：资源ID */
+  /** resourceName：资源名 resourceId ：资源ID resourceType：资源类型 */
   Filters?: Filter[];
   /** 标签 */
   Tags?: Tag[];

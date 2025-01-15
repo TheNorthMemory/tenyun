@@ -824,6 +824,26 @@ declare interface BindStaffSkillGroupListResponse {
   RequestId?: string;
 }
 
+declare interface CreateAIAgentCallRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** AI智能体ID */
+  AIAgentId: number;
+  /** 被叫号码 */
+  Callee: string;
+  /** 主叫号码列表 */
+  Callers?: string[];
+  /** 提示词变量 */
+  PromptVariables?: Variable[];
+}
+
+declare interface CreateAIAgentCallResponse {
+  /** 新创建的会话 ID */
+  SessionId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAICallRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -873,6 +893,8 @@ declare interface CreateAICallRequest {
   CustomTTSConfig?: string;
   /** 提示词变量 */
   PromptVariables?: Variable[];
+  /** 语音识别vad的时间，范围为240-2000，默认为1000，单位为ms。更小的值会让语音识别分句更快。 */
+  VadSilenceTime?: number;
 }
 
 declare interface CreateAICallResponse {
@@ -2063,6 +2085,8 @@ declare interface Ccc {
   BindNumberCallOutSkillGroup(data: BindNumberCallOutSkillGroupRequest, config?: AxiosRequestConfig): AxiosPromise<BindNumberCallOutSkillGroupResponse>;
   /** 绑定座席所属技能组 {@link BindStaffSkillGroupListRequest} {@link BindStaffSkillGroupListResponse} */
   BindStaffSkillGroupList(data: BindStaffSkillGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<BindStaffSkillGroupListResponse>;
+  /** 创建AI智能体会话 {@link CreateAIAgentCallRequest} {@link CreateAIAgentCallResponse} */
+  CreateAIAgentCall(data: CreateAIAgentCallRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIAgentCallResponse>;
   /** 创建AI会话 {@link CreateAICallRequest} {@link CreateAICallResponse} */
   CreateAICall(data: CreateAICallRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAICallResponse>;
   /** 创建管理端访问链接 {@link CreateAdminURLRequest} {@link CreateAdminURLResponse} */

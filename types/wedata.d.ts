@@ -1842,6 +1842,8 @@ declare interface InstanceDownloadLogInfo {
 declare interface InstanceLifeCycleOpsDto {
   /** 任务id */
   TaskId?: string | null;
+  /** 任务名 */
+  TaskName?: string | null;
   /** 数据时间 */
   CurRunDate?: string | null;
   /** 实例生命次数 */
@@ -1868,6 +1870,10 @@ declare interface InstanceLifeCycleOpsDto {
   ExecutionJobId?: string | null;
   /** 实例运行类型: 0: 普通运行, 1: 空跑运行 */
   InstanceRunType?: number | null;
+  /** 实例当前总生命周期数 */
+  TotalLifeRound?: number;
+  /** 任务类型 */
+  TaskType?: TaskTypeOpsDto | null;
 }
 
 /** 实例生命周期detail */
@@ -1964,6 +1970,8 @@ declare interface InstanceLogInfoOpsDto {
   IsEnd?: boolean | null;
   /** 文件大小 */
   FileSize?: string | null;
+  /** 日志匹配节点信息 */
+  MatchedBrokerIp?: string;
 }
 
 /** 实例日志信息 */
@@ -2546,6 +2554,8 @@ declare interface MakePlanOpsDto {
   SameSelfWorkflowDependType?: boolean | null;
   /** 工作流自依赖类型 */
   SelfWorkflowDependency?: string | null;
+  /** 补录时间顺序NORMAL： 正常ORDER ： 按照实例时间顺序执行REVERSE： 实例数据时间逆序 */
+  MakeDataTimeOrder?: string;
 }
 
 /** 补录计划集合 */
@@ -5246,6 +5256,8 @@ declare interface WorkflowCanvasOpsDto {
   Owner?: string | null;
   /** 责任人UserId */
   OwnerId?: string | null;
+  /** 工作流类型，周期cycle，手动manual */
+  WorkflowType?: string | null;
 }
 
 /** 工作流 */
@@ -5278,6 +5290,8 @@ declare interface WorkflowExtOpsDto {
   CreateTime?: string | null;
   /** 最近更新时间 */
   ModifyTime?: string | null;
+  /** 工作流类型，周期cycle，手动manual */
+  WorkflowType?: string | null;
 }
 
 /** 用户生产工作流列表分页 */
@@ -6046,6 +6060,8 @@ declare interface CreateHiveTableByDDLRequest {
   DataOptimizationResource?: string;
   /** 是否开启数据优化 */
   SmartOptimizerWritten?: string;
+  /** 数据优化表名 */
+  TableName?: string;
 }
 
 declare interface CreateHiveTableByDDLResponse {
@@ -6074,6 +6090,8 @@ declare interface CreateHiveTableRequest {
   DataOptimizationResource?: string;
   /** 是否开启数据优化 */
   SmartOptimizerWritten?: string;
+  /** 数据优化针对的表 */
+  TableName?: string;
 }
 
 declare interface CreateHiveTableResponse {
@@ -6390,6 +6408,8 @@ declare interface CreateWorkflowDsRequest {
   FolderId: string;
   /** 工作流描述 */
   WorkflowDesc?: string;
+  /** 工作流类型,取值示例- cycle 周期工作流- manual 手动工作流 */
+  WorkflowType?: string;
 }
 
 declare interface CreateWorkflowDsResponse {
@@ -7260,6 +7280,8 @@ declare interface DescribeDsFolderTreeRequest {
   NewFolderTreeMode?: boolean;
   /** 节点分类ID */
   TaskNodeId?: string;
+  /** 工作流类型, 使用场景: 任务复制,选择工作流. 取值范围- cycle 周期工作流- manual 手动工作流 */
+  WorkflowType?: string;
 }
 
 declare interface DescribeDsFolderTreeResponse {
@@ -7568,6 +7590,16 @@ declare interface DescribeInstanceLogDetailRequest {
   ExtInfo?: string;
   /** 请求来源，WEB 前端；CLIENT 客户端 */
   RequestFromSource?: string;
+  /** 生命周期为基础数据进行日志匹配 */
+  InstanceLifeDetailDtoList?: InstanceLifeDetailDto[];
+  /** 当前生命周期 */
+  CurrentLifeRound?: number;
+  /** 生命周期总数 */
+  MaxLifeRound?: number;
+  /** 当前生命周期重试次数 */
+  Tries?: number;
+  /** 动态加载日志 */
+  Dynamic?: boolean;
 }
 
 declare interface DescribeInstanceLogDetailResponse {
@@ -7596,6 +7628,14 @@ declare interface DescribeInstanceLogFileRequest {
   LogLevelType?: string;
   /** 文件类型,Log/Code */
   ExecutionFileType?: string;
+  /** 生命周期为基础数据进行日志匹配。Dynamic=true动态获取日志链路中使用 */
+  InstanceLifeDetailDtoList?: InstanceLifeDetailDto[];
+  /** 当前生命周期数 */
+  CurrentLifeRound?: number;
+  /** 当前生命周期重试次数 */
+  Tries?: number;
+  /** 动态获取日志信息标识 */
+  Dynamic?: boolean;
 }
 
 declare interface DescribeInstanceLogFileResponse {
@@ -8032,6 +8072,10 @@ declare interface DescribeOpsWorkflowsRequest {
   SortType?: string;
   /** 项目ID列表，用于多项目工作流筛选 */
   ProjectIds?: string[];
+  /** 工作流类型列表 多个用英文逗号连接 cycle,manual. 默认只查询 cycle */
+  WorkflowTypeList?: string[];
+  /** 工作流过滤keyword，支持工作流 id/name 模糊匹配， 多个用|分割 */
+  KeyWord?: string;
 }
 
 declare interface DescribeOpsWorkflowsResponse {
@@ -10542,6 +10586,20 @@ declare interface RunRerunScheduleInstancesRequest {
   IsCount?: boolean;
   /** 是否异步模式 */
   AsyncMode?: boolean;
+  /** 是否检查上游任务： ALL（全部）、 MAKE_SCOPE（选中）、NONE （全部不检查） */
+  CheckParentType?: string;
+  /** 任务原有自依赖配置 true（是）、false（否） */
+  SameSelfDependType?: boolean;
+  /** 实例运行并发度 */
+  ParallelNum?: number;
+  /** 任务原有自依赖配置 true（是）、false（否） */
+  SameSelfWorkflowDependType?: boolean;
+  /** 代表重新指定 的 是 或者 否 yes、 no */
+  SelfWorkflowDependency?: string;
+  /** 运行实例数据时间排序 0---正常 1--正序 2 – 逆序 */
+  DataTimeOrder?: number;
+  /** 重跑参数 */
+  ReDoParams?: string;
 }
 
 declare interface RunRerunScheduleInstancesResponse {
@@ -11124,9 +11182,9 @@ declare interface Wedata {
   DeleteFilePath(data: DeleteFilePathRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFilePathResponse>;
   /** 删除集成节点 {@link DeleteIntegrationNodeRequest} {@link DeleteIntegrationNodeResponse} */
   DeleteIntegrationNode(data: DeleteIntegrationNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationNodeResponse>;
-  /** 删除集成任务 {@link DeleteIntegrationTaskRequest} {@link DeleteIntegrationTaskResponse} */
+  /** 删除实时集成任务 {@link DeleteIntegrationTaskRequest} {@link DeleteIntegrationTaskResponse} */
   DeleteIntegrationTask(data: DeleteIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationTaskResponse>;
-  /** 删除任务 {@link DeleteOfflineTaskRequest} {@link DeleteOfflineTaskResponse} */
+  /** 删除离线任务 {@link DeleteOfflineTaskRequest} {@link DeleteOfflineTaskResponse} */
   DeleteOfflineTask(data: DeleteOfflineTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOfflineTaskResponse>;
   /** 删除项目参数 {@link DeleteProjectParamDsRequest} {@link DeleteProjectParamDsResponse} */
   DeleteProjectParamDs(data: DeleteProjectParamDsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectParamDsResponse>;
@@ -11410,7 +11468,7 @@ declare interface Wedata {
   KillOpsMakePlanInstances(data: KillOpsMakePlanInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<KillOpsMakePlanInstancesResponse>;
   /** 实例运维-批量终止l实例 {@link KillScheduleInstancesRequest} {@link KillScheduleInstancesResponse} */
   KillScheduleInstances(data?: KillScheduleInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<KillScheduleInstancesResponse>;
-  /** 锁定集成任务 {@link LockIntegrationTaskRequest} {@link LockIntegrationTaskResponse} */
+  /** 锁定实时集成任务 {@link LockIntegrationTaskRequest} {@link LockIntegrationTaskResponse} */
   LockIntegrationTask(data: LockIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<LockIntegrationTaskResponse>;
   /** 修改审批单状态 {@link ModifyApproveStatusRequest} {@link ModifyApproveStatusResponse} */
   ModifyApproveStatus(data?: ModifyApproveStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApproveStatusResponse>;
@@ -11458,7 +11516,7 @@ declare interface Wedata {
   RemoveWorkflowDs(data: RemoveWorkflowDsRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveWorkflowDsResponse>;
   /** 更新工作流下任务调度信息 {@link RenewWorkflowSchedulerInfoDsRequest} {@link RenewWorkflowSchedulerInfoDsResponse} */
   RenewWorkflowSchedulerInfoDs(data: RenewWorkflowSchedulerInfoDsRequest, config?: AxiosRequestConfig): AxiosPromise<RenewWorkflowSchedulerInfoDsResponse>;
-  /** 继续集成任务 {@link ResumeIntegrationTaskRequest} {@link ResumeIntegrationTaskResponse} */
+  /** 继续实时集成任务 {@link ResumeIntegrationTaskRequest} {@link ResumeIntegrationTaskResponse} */
   ResumeIntegrationTask(data: ResumeIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeIntegrationTaskResponse>;
   /** 抢占锁定集成任务 {@link RobAndLockIntegrationTaskRequest} {@link RobAndLockIntegrationTaskResponse} */
   RobAndLockIntegrationTask(data: RobAndLockIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RobAndLockIntegrationTaskResponse>;
@@ -11472,9 +11530,9 @@ declare interface Wedata {
   SaveCustomFunction(data: SaveCustomFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<SaveCustomFunctionResponse>;
   /** 设置任务告警，新建（更新）告警信息 {@link SetTaskAlarmNewRequest} {@link SetTaskAlarmNewResponse} */
   SetTaskAlarmNew(data: SetTaskAlarmNewRequest, config?: AxiosRequestConfig): AxiosPromise<SetTaskAlarmNewResponse>;
-  /** 启动集成任务 {@link StartIntegrationTaskRequest} {@link StartIntegrationTaskResponse} */
+  /** 启动实时集成任务 {@link StartIntegrationTaskRequest} {@link StartIntegrationTaskResponse} */
   StartIntegrationTask(data: StartIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StartIntegrationTaskResponse>;
-  /** 停止集成任务 {@link StopIntegrationTaskRequest} {@link StopIntegrationTaskResponse} */
+  /** 停止实时集成任务 {@link StopIntegrationTaskRequest} {@link StopIntegrationTaskResponse} */
   StopIntegrationTask(data: StopIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopIntegrationTaskResponse>;
   /** 提交自定义函数 {@link SubmitCustomFunctionRequest} {@link SubmitCustomFunctionResponse} */
   SubmitCustomFunction(data: SubmitCustomFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitCustomFunctionResponse>;
@@ -11486,7 +11544,7 @@ declare interface Wedata {
   SubmitTaskTestRun(data: SubmitTaskTestRunRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTaskTestRunResponse>;
   /** 提交工作流 {@link SubmitWorkflowRequest} {@link SubmitWorkflowResponse} */
   SubmitWorkflow(data: SubmitWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitWorkflowResponse>;
-  /** 暂停集成任务 {@link SuspendIntegrationTaskRequest} {@link SuspendIntegrationTaskResponse} */
+  /** 暂停实时集成任务 {@link SuspendIntegrationTaskRequest} {@link SuspendIntegrationTaskResponse} */
   SuspendIntegrationTask(data: SuspendIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SuspendIntegrationTaskResponse>;
   /** 查询实时任务日志接口 {@link TaskLogRequest} {@link TaskLogResponse} */
   TaskLog(data: TaskLogRequest, config?: AxiosRequestConfig): AxiosPromise<TaskLogResponse>;
@@ -11494,7 +11552,7 @@ declare interface Wedata {
   TriggerDsEvent(data: TriggerDsEventRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerDsEventResponse>;
   /** 触发事件生成事件实例 {@link TriggerEventRequest} {@link TriggerEventResponse} */
   TriggerEvent(data: TriggerEventRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerEventResponse>;
-  /** 解锁集成任务 {@link UnlockIntegrationTaskRequest} {@link UnlockIntegrationTaskResponse} */
+  /** 解锁实时集成任务 {@link UnlockIntegrationTaskRequest} {@link UnlockIntegrationTaskResponse} */
   UnlockIntegrationTask(data: UnlockIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockIntegrationTaskResponse>;
   /** （仅公有云）数语向Wedata注册，更新相关信息 {@link UpdateDataModelRegistryInfoRequest} {@link UpdateDataModelRegistryInfoResponse} */
   UpdateDataModelRegistryInfo(data: UpdateDataModelRegistryInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDataModelRegistryInfoResponse>;
