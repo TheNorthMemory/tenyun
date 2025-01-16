@@ -113,9 +113,9 @@ declare interface BlockedIP {
 /** 证书ID，以及与该证书ID关联的负载均衡实例列表 */
 declare interface CertIdRelatedWithLoadBalancers {
   /** 证书ID */
-  CertId: string;
+  CertId?: string;
   /** 与证书关联的负载均衡实例列表 */
-  LoadBalancers: LoadBalancer[] | null;
+  LoadBalancers?: LoadBalancer[] | null;
 }
 
 /** 证书信息 */
@@ -302,6 +302,8 @@ declare interface Cluster {
   Egress?: string | null;
   /** IP版本 */
   IPVersion?: string | null;
+  /** 标签信息 */
+  Tag?: TagInfo[] | null;
 }
 
 /** 独占集群信息 */
@@ -760,6 +762,8 @@ declare interface LoadBalancer {
   Egress?: string | null;
   /** 实例类型是否为独占型。1：独占型实例。0：非独占型实例。 */
   Exclusive?: number | null;
+  /** 已绑定的后端服务数量。 */
+  TargetCount?: number;
 }
 
 /** 负载均衡详细信息 */
@@ -1216,6 +1220,16 @@ declare interface TargetGroupInfo {
   UpdatedTime?: string;
   /** 关联到的规则数组。在DescribeTargetGroupList接口调用时无法获取到该参数。 */
   AssociatedRule?: AssociationItem[] | null;
+  /** 目标组类型，当前支持v1(旧版目标组), v2(新版目标组), gwlb(全局负载均衡目标组)。 */
+  TargetGroupType?: string | null;
+  /** 目标组已关联的规则数。 */
+  AssociatedRuleCount?: number | null;
+  /** 目标组内的实例数量。 */
+  RegisteredInstancesCount?: number | null;
+  /** 标签。 */
+  Tag?: TagInfo[];
+  /** 默认权重。只有v2类型目标组返回该字段。当返回为NULL时， 表示未设置默认权重。 */
+  Weight?: number | null;
 }
 
 /** 目标组实例 */
@@ -1989,7 +2003,7 @@ declare interface DescribeExclusiveClustersRequest {
   Limit?: number;
   /** 返回集群列表起始偏移量，默认为0。 */
   Offset?: number;
-  /** 查询集群列表条件，详细的过滤条件如下： cluster-type - String - 是否必填：否 - （过滤条件）按照 集群 的类型过滤，包括"TGW","STGW","VPCGW"。 cluster-id - String - 是否必填：否 - （过滤条件）按照 集群 的唯一ID过滤，如 ："tgw-12345678","stgw-12345678","vpcgw-12345678"。 cluster-name - String - 是否必填：否 - （过滤条件）按照 集群 的名称过滤。 cluster-tag - String - 是否必填：否 - （过滤条件）按照 集群 的标签过滤。（只有TGW/STGW集群有集群标签） vip - String - 是否必填：否 - （过滤条件）按照 集群 内的vip过滤。 loadblancer-id - String - 是否必填：否 - （过滤条件）按照 集群 内的负载均衡唯一ID过滤。 network - String - 是否必填：否 - （过滤条件）按照 集群 的网络类型过滤，如："Public","Private"。 zone - String - 是否必填：否 - （过滤条件）按照 集群 所在可用区过滤，如："ap-guangzhou-1"（广州一区）。 isp -- String - 是否必填：否 - （过滤条件）按照TGW集群的 Isp 类型过滤，如："BGP","CMCC","CUCC","CTCC","INTERNAL"。 */
+  /** 查询集群列表条件，详细的过滤条件如下： cluster-type - String - 是否必填：否 - （过滤条件）按照 集群 的类型过滤，包括"TGW","STGW","VPCGW"。 cluster-id - String - 是否必填：否 - （过滤条件）按照 集群 的唯一ID过滤，如 ："tgw-12345678","stgw-12345678","vpcgw-12345678"。 cluster-name - String - 是否必填：否 - （过滤条件）按照 集群 的名称过滤。 cluster-tag - String - 是否必填：否 - （过滤条件）按照 集群 的标签过滤。（只有TGW/STGW集群有集群标签） vip - String - 是否必填：否 - （过滤条件）按照 集群 内的vip过滤。 loadbalancer-id - String - 是否必填：否 - （过滤条件）按照 集群 内的负载均衡唯一ID过滤。 network - String - 是否必填：否 - （过滤条件）按照 集群 的网络类型过滤，如："Public","Private"。 zone - String - 是否必填：否 - （过滤条件）按照 集群 所在可用区过滤，如："ap-guangzhou-1"（广州一区）。 isp -- String - 是否必填：否 - （过滤条件）按照TGW集群的 Isp 类型过滤，如："BGP","CMCC","CUCC","CTCC","INTERNAL"。 */
   Filters?: Filter[];
 }
 
@@ -2151,8 +2165,10 @@ declare interface DescribeLoadBalancersRequest {
   SecurityGroup?: string;
   /** 主可用区ID，如 ："100001" （对应的是广州一区）。可通过[DescribeZones](https://cloud.tencent.com/document/product/213/15707)获取可用区列表。 */
   MasterZone?: string;
-  /** 每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。`Filter.Name`和`Filter.Values`皆为必填项。详细的过滤条件如下： charge-type - String - 是否必填：否 - （过滤条件）按照 CLB 的实例计费模式过滤，包括"PREPAID","POSTPAID_BY_HOUR"。 internet-charge-type - String - 是否必填：否 - （过滤条件）按照 CLB 的网络计费模式过滤，包括"BANDWIDTH_PREPAID","TRAFFIC_POSTPAID_BY_HOUR","BANDWIDTH_POSTPAID_BY_HOUR","BANDWIDTH_PACKAGE"。 master-zone-id - String - 是否必填：否 - （过滤条件）按照 CLB 的主可用区ID过滤，如 ："100001" （对应的是广州一区）。 tag-key - String - 是否必填：否 - （过滤条件）按照 CLB 标签的键过滤。 tag:tag-key - String - 是否必填：否 - （过滤条件）按照CLB标签键值对进行过滤，tag-key使用具体的标签键进行替换。 function-name - String - 是否必填：否 - （过滤条件）按照 CLB 后端绑定的SCF云函数的函数名称过滤。 vip-isp - String - 是否必填：否 - （过滤条件）按照 CLB VIP的运营商类型过滤，如："BGP","INTERNAL","CMCC","CTCC","CUCC"等。 sla-type - String - 是否必填：否 - （过滤条件）按照 CLB 的性能容量型规格过滤，包括"clb.c2.medium","clb.c3.small","clb.c3.medium","clb.c4.small","clb.c4.medium","clb.c4.large","clb.c4.xlarge"。 */
+  /** 每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。`Filter.Name`和`Filter.Values`皆为必填项。详细的过滤条件如下： charge-type - String - 是否必填：否 - （过滤条件）按照 CLB 的实例计费模式过滤，包括"PREPAID","POSTPAID_BY_HOUR"。 internet-charge-type - String - 是否必填：否 - （过滤条件）按照 CLB 的网络计费模式过滤，包括"BANDWIDTH_PREPAID","TRAFFIC_POSTPAID_BY_HOUR","BANDWIDTH_POSTPAID_BY_HOUR","BANDWIDTH_PACKAGE"。 master-zone-id - String - 是否必填：否 - （过滤条件）按照 CLB 的主可用区ID过滤，如 ："100001" （对应的是广州一区）。 tag-key - String - 是否必填：否 - （过滤条件）按照 CLB 标签的键过滤。 tag:tag-key - String - 是否必填：否 - （过滤条件）按照CLB标签键值对进行过滤，tag-key使用具体的标签键进行替换。 function-name - String - 是否必填：否 - （过滤条件）按照 CLB 后端绑定的SCF云函数的函数名称过滤。 vip-isp - String - 是否必填：否 - （过滤条件）按照 CLB VIP的运营商类型过滤，如："BGP","INTERNAL","CMCC","CTCC","CUCC"等。 sla-type - String - 是否必填：否 - （过滤条件）按照 CLB 的性能容量型规格过滤，包括"clb.c1.small","clb.c2.medium","clb.c3.small","clb.c3.medium","clb.c4.small","clb.c4.medium","clb.c4.large","clb.c4.xlarge","others"。 exclusive - uint64 - 是否必填：否 - （过滤条件）按照独占实例进行过滤。 */
   Filters?: Filter[];
+  /** 选择返回的扩充字段，不指定时，扩充字段默认不返回。详细支持的扩充字段如下： TargetCount：绑定的后端服务数量 */
+  AdditionalFields?: string[];
 }
 
 declare interface DescribeLoadBalancersResponse {

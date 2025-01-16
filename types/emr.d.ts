@@ -1287,113 +1287,117 @@ declare interface NodeDetailPriceResult {
 /** 节点硬件信息 */
 declare interface NodeHardwareInfo {
   /** 用户APPID */
-  AppId?: number | null;
+  AppId?: number;
   /** 序列号 */
-  SerialNo?: string | null;
+  SerialNo?: string;
   /** 机器实例ID */
-  OrderNo?: string | null;
+  OrderNo?: string;
   /** master节点绑定外网IP */
-  WanIp?: string | null;
+  WanIp?: string;
   /** 节点类型。0:common节点；1:master节点；2:core节点；3:task节点 */
-  Flag?: number | null;
+  Flag?: number;
   /** 节点规格 */
-  Spec?: string | null;
+  Spec?: string;
   /** 节点核数 */
-  CpuNum?: number | null;
-  /** 节点内存 */
-  MemSize?: number | null;
-  /** 节点内存描述 */
-  MemDesc?: string | null;
+  CpuNum?: number;
+  /** 节点内存,单位b */
+  MemSize?: number;
+  /** 节点内存描述，单位GB */
+  MemDesc?: string;
   /** 节点所在region */
-  RegionId?: number | null;
+  RegionId?: number;
   /** 节点所在Zone */
-  ZoneId?: number | null;
+  ZoneId?: number;
   /** 申请时间 */
-  ApplyTime?: string | null;
+  ApplyTime?: string;
   /** 释放时间 */
-  FreeTime?: string | null;
+  FreeTime?: string;
   /** 硬盘大小 */
-  DiskSize?: string | null;
+  DiskSize?: string;
   /** 节点描述 */
-  NameTag?: string | null;
+  NameTag?: string;
   /** 节点部署服务 */
-  Services?: string | null;
-  /** 磁盘类型 */
-  StorageType?: number | null;
-  /** 系统盘大小 */
-  RootSize?: number | null;
-  /** 付费类型 */
-  ChargeType?: number | null;
+  Services?: string;
+  /** 磁盘类型，1 :本地盘 2 :云硬盘 3 : 本地SSD 4 : 云SSD 5 : 高效云盘 6 : 增强型SSD云硬盘 11 : 吞吐型云硬盘 12 : 极速型SSD云硬盘 13 : 通用型SSD云硬盘 14 : 大数据型云硬盘 15 : 高IO型云硬盘 16 : 远端SSD盘 */
+  StorageType?: number;
+  /** 系统盘大小，单位GB */
+  RootSize?: number;
+  /** 付费类型，0：按量计费；1：包年包月 */
+  ChargeType?: number;
   /** 数据库IP */
-  CdbIp?: string | null;
+  CdbIp?: string;
   /** 数据库端口 */
-  CdbPort?: number | null;
-  /** 硬盘容量 */
-  HwDiskSize?: number | null;
+  CdbPort?: number;
+  /** 硬盘容量,单位b */
+  HwDiskSize?: number;
   /** 硬盘容量描述 */
-  HwDiskSizeDesc?: string | null;
-  /** 内存容量 */
-  HwMemSize?: number | null;
+  HwDiskSizeDesc?: string;
+  /** 内存容量，单位b */
+  HwMemSize?: number;
   /** 内存容量描述 */
-  HwMemSizeDesc?: string | null;
+  HwMemSizeDesc?: string;
   /** 过期时间 */
-  ExpireTime?: string | null;
+  ExpireTime?: string;
   /** 节点资源ID */
-  EmrResourceId?: string | null;
+  EmrResourceId?: string;
   /** 续费标志 */
-  IsAutoRenew?: number | null;
+  IsAutoRenew?: number;
   /** 设备标识 */
-  DeviceClass?: string | null;
+  DeviceClass?: string;
   /** 支持变配 */
-  Mutable?: number | null;
+  Mutable?: number;
   /** 多云盘 */
   MCMultiDisk?: MultiDiskMC[] | null;
   /** 数据库信息 */
   CdbNodeInfo?: CdbInfo | null;
   /** 内网IP */
-  Ip?: string | null;
+  Ip?: string;
   /** 此节点是否可销毁，1可销毁，0不可销毁 */
-  Destroyable?: number | null;
+  Destroyable?: number;
   /** 节点绑定的标签 */
   Tags?: Tag[] | null;
   /** 是否是自动扩缩容节点，0为普通节点，1为自动扩缩容节点。 */
-  AutoFlag?: number | null;
+  AutoFlag?: number;
   /** 资源类型, host/pod */
-  HardwareResourceType?: string | null;
+  HardwareResourceType?: string;
   /** 是否浮动规格，1是，0否 */
-  IsDynamicSpec?: number | null;
+  IsDynamicSpec?: number;
   /** 浮动规格值json字符串 */
-  DynamicPodSpec?: string | null;
+  DynamicPodSpec?: string;
   /** 是否支持变更计费类型 1是，0否 */
-  SupportModifyPayMode?: number | null;
-  /** 系统盘类型 */
-  RootStorageType?: number | null;
+  SupportModifyPayMode?: number;
+  /** 系统盘类型，1 :本地盘 2 :云硬盘 3 : 本地SSD 4 : 云SSD 5 : 高效云盘 6 : 增强型SSD云硬盘 11 : 吞吐型云硬盘 12 : 极速型SSD云硬盘 13 : 通用型SSD云硬盘 14 : 大数据型云硬盘 15 : 高IO型云硬盘 16 : 远端SSD盘 */
+  RootStorageType?: number;
   /** 可用区信息 */
-  Zone?: string | null;
+  Zone?: string;
   /** 子网 */
   SubnetInfo?: SubnetInfo | null;
   /** 客户端 */
-  Clients?: string | null;
+  Clients?: string;
   /** 系统当前时间 */
-  CurrentTime?: string | null;
+  CurrentTime?: string;
   /** 是否用于联邦 ,1是，0否 */
-  IsFederation?: number | null;
+  IsFederation?: number;
   /** 设备名称 */
-  DeviceName?: string | null;
+  DeviceName?: string;
   /** 服务 */
-  ServiceClient?: string | null;
+  ServiceClient?: string;
   /** 该实例是否开启实例保护，true为开启 false为关闭 */
-  DisableApiTermination?: boolean | null;
+  DisableApiTermination?: boolean;
   /** 0表示老计费，1表示新计费 */
-  TradeVersion?: number | null;
+  TradeVersion?: number;
   /** 各组件状态，Zookeeper:STARTED,ResourceManager:STARTED，STARTED已启动，STOPED已停止 */
-  ServicesStatus?: string | null;
+  ServicesStatus?: string;
   /** 备注 */
-  Remark?: string | null;
+  Remark?: string;
   /** 共享集群id */
-  SharedClusterId?: string | null;
+  SharedClusterId?: string;
   /** 共享集群id描述 */
-  SharedClusterIdDesc?: string | null;
+  SharedClusterIdDesc?: string;
+  /** 是否是定时销毁资源 */
+  TimingResource?: boolean;
+  /** 资源类型（HardwareResourceType）为pod时，对应的TKE集群id */
+  TkeClusterId?: string;
 }
 
 /** 规格管理，规格类型描述 */

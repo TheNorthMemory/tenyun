@@ -23,7 +23,7 @@ declare interface EventDetail {
 /** 产品可用性事件详情列表 */
 declare interface ProductEventList {
   /** 事件详情列表 */
-  EventList?: EventDetail[] | null;
+  EventList?: EventDetail[];
 }
 
 declare interface DescribeEventsRequest {

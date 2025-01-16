@@ -1300,6 +1300,12 @@ declare interface SessionResourceTemplate {
   ExecutorMaxNumbers?: number | null;
 }
 
+/** 混合表中，change表的数据保存时间，单位为天 */
+declare interface SmartOptimizerChangeTablePolicy {
+  /** change表的数据保存时间，单位为天 */
+  DataRetentionTime?: number | null;
+}
+
 /** SmartOptimizerIndexPolicy */
 declare interface SmartOptimizerIndexPolicy {
   /** 开启索引 */
@@ -1332,6 +1338,8 @@ declare interface SmartOptimizerPolicy {
   Lifecycle?: SmartOptimizerLifecyclePolicy | null;
   /** SmartOptimizerIndexPolicy */
   Index?: SmartOptimizerIndexPolicy | null;
+  /** SmartOptimizerChangeTablePolicy */
+  ChangeTable?: SmartOptimizerChangeTablePolicy | null;
 }
 
 /** SmartOptimizerWrittenPolicy */
@@ -1620,6 +1628,8 @@ declare interface TableBaseInfo {
   DbGovernPolicyIsDisable?: string | null;
   /** 智能数据治理配置项 */
   SmartPolicy?: SmartPolicy | null;
+  /** T-ICEBERG表的主键 */
+  PrimaryKeys?: string[] | null;
 }
 
 /** 返回数据表的相关信息。 */
@@ -1662,6 +1672,8 @@ declare interface TableResponseInfo {
   MapMaterializedViewName?: string | null;
   /** 访问热点 */
   HeatValue?: number | null;
+  /** InputFormat的缩写 */
+  InputFormatShort?: string;
 }
 
 /** 标签对信息 */

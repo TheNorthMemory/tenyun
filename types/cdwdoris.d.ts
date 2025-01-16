@@ -295,23 +295,23 @@ declare interface DiskSpec {
 /** 外部doris集群的连接信息 */
 declare interface DorisSourceInfo {
   /** doris集群的fe的ip */
-  Host?: string | null;
+  Host?: string;
   /** doris集群的fe的端口号 */
-  Port?: number | null;
+  Port?: number;
   /** doris集群的账号 */
-  User?: string | null;
+  User?: string;
   /** base64编码的doris集群对应用户的密码 */
-  Password?: string | null;
+  Password?: string;
 }
 
 /** 前端规则描述 */
 declare interface FrontEndRule {
   /** id序列 */
-  ID: number | null;
+  ID?: number;
   /** 规则名称 */
-  Name: string | null;
+  Name?: string;
   /** 详细规则 */
-  Rule: string | null;
+  Rule?: string;
 }
 
 /** KV配置 */
@@ -325,113 +325,113 @@ declare interface InstanceConfigItem {
 /** Instance表detail字段 */
 declare interface InstanceDetail {
   /** 告警策略是否可用 */
-  EnableAlarmStrategy?: boolean | null;
+  EnableAlarmStrategy?: boolean;
 }
 
 /** 实例描述信息 */
 declare interface InstanceInfo {
   /** 集群实例ID, "cdw-xxxx" 字符串类型 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 集群实例名称 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 状态,Init 创建中; Serving 运行中； Deleted已销毁；Deleting 销毁中；Modify 集群变更中； */
-  Status?: string | null;
+  Status?: string;
   /** 版本 */
-  Version?: string | null;
+  Version?: string;
   /** 地域, ap-guangzhou */
-  Region?: string | null;
+  Region?: string;
   /** 可用区， ap-guangzhou-3 */
-  Zone?: string | null;
+  Zone?: string;
   /** 私有网络名称 */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 子网名称 */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 付费类型，"hour", "prepay" */
-  PayMode?: string | null;
+  PayMode?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 过期时间 */
-  ExpireTime?: string | null;
+  ExpireTime?: string;
   /** 数据节点描述信息 */
-  MasterSummary?: NodesSummary | null;
+  MasterSummary?: NodesSummary;
   /** zookeeper节点描述信息 */
-  CoreSummary?: NodesSummary | null;
+  CoreSummary?: NodesSummary;
   /** 高可用，“true" "false" */
-  HA?: string | null;
+  HA?: string;
   /** 高可用类型：0：非高可用1：读高可用2：读写高可用。 */
-  HaType?: number | null;
+  HaType?: number;
   /** 访问地址，例如 "10.0.0.1:9000" */
-  AccessInfo?: string | null;
+  AccessInfo?: string;
   /** 记录ID，数值型 */
-  Id?: number | null;
+  Id?: number;
   /** regionId, 表示地域 */
-  RegionId?: number | null;
+  RegionId?: number;
   /** 可用区说明，例如 "广州二区" */
-  ZoneDesc?: string | null;
+  ZoneDesc?: string;
   /** 错误流程说明信息 */
-  FlowMsg?: string | null;
+  FlowMsg?: string;
   /** 状态描述，例如“运行中”等 */
-  StatusDesc?: string | null;
+  StatusDesc?: string;
   /** 自动续费标记 */
-  RenewFlag?: boolean | null;
+  RenewFlag?: boolean;
   /** 标签列表 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
   /** 监控信息 */
-  Monitor?: string | null;
+  Monitor?: string;
   /** 是否开通日志 */
-  HasClsTopic?: boolean | null;
+  HasClsTopic?: boolean;
   /** 日志主题ID */
-  ClsTopicId?: string | null;
+  ClsTopicId?: string;
   /** 日志集ID */
-  ClsLogSetId?: string | null;
+  ClsLogSetId?: string;
   /** 是否支持xml配置管理 */
-  EnableXMLConfig?: number | null;
+  EnableXMLConfig?: number;
   /** 区域 */
-  RegionDesc?: string | null;
+  RegionDesc?: string;
   /** 弹性网卡地址 */
-  Eip?: string | null;
+  Eip?: string;
   /** 冷热分层系数 */
-  CosMoveFactor?: number | null;
+  CosMoveFactor?: number;
   /** external/local/yunti */
-  Kind?: string | null;
+  Kind?: string;
   /** cos桶 */
-  CosBucketName?: string | null;
+  CosBucketName?: string;
   /** cbs */
-  CanAttachCbs?: boolean | null;
+  CanAttachCbs?: boolean;
   /** 小版本 */
-  BuildVersion?: string | null;
+  BuildVersion?: string;
   /** 组件信息注：这里返回类型实际为map[string]struct类型，并非显示的string类型，可以参考“示例值”进行数据的解析。 */
-  Components?: string | null;
+  Components?: string;
   /** 判断审计日志表是否有catalog字段 */
   IfExistCatalog?: number | null;
   /** 页面特性，用于前端屏蔽一些页面入口 */
-  Characteristic?: string[] | null;
+  Characteristic?: string[];
   /** 超时时间 单位s */
-  RestartTimeout?: string | null;
+  RestartTimeout?: string;
   /** 内核优雅重启超时时间，如果为-1说明未设置 */
-  GraceShutdownWaitSeconds?: string | null;
+  GraceShutdownWaitSeconds?: string;
   /** 表名大小写是否敏感，0：敏感；1：不敏感，以小写进行比较；2：不敏感，表名改为以小写存储 */
-  CaseSensitive?: number | null;
+  CaseSensitive?: number;
   /** 用户是否可以绑定安全组 */
-  IsWhiteSGs?: boolean | null;
+  IsWhiteSGs?: boolean;
   /** 已绑定的安全组信息 */
-  BindSGs?: string[] | null;
+  BindSGs?: string[];
   /** 是否为多可用区 */
-  EnableMultiZones?: boolean | null;
+  EnableMultiZones?: boolean;
   /** 用户可用区和子网信息 */
-  UserNetworkInfos?: string | null;
+  UserNetworkInfos?: string;
   /** 是否启用冷热分层。0：未开启 1：已开启 */
-  EnableCoolDown?: number | null;
+  EnableCoolDown?: number;
   /** 冷热分层使用COS桶 */
-  CoolDownBucket?: string | null;
+  CoolDownBucket?: string;
   /** 实例扩展信息 */
-  Details?: InstanceDetail | null;
+  Details?: InstanceDetail;
   /** 是否启用DLC 0:关闭 1:开启 */
-  EnableDlc?: number | null;
+  EnableDlc?: number;
   /** 账户类型 0:普通用户 1:CAM用户 */
-  AccountType?: number | null;
+  AccountType?: number;
   /** 监控模式 0: 老监控 1：新监控 */
-  MonitorMode?: number | null;
+  MonitorMode?: number;
   /** cn节点信息 */
   CNSummary?: NodesSummary;
 }
@@ -453,15 +453,15 @@ declare interface InstanceNode {
   /** 所属clickhouse cluster名称 */
   Role?: string;
   /** 状态 */
-  Status?: string | null;
+  Status?: string;
   /** rip */
-  Rip?: string | null;
+  Rip?: string;
   /** FE节点角色 */
-  FeRole?: string | null;
+  FeRole?: string;
   /** UUID */
-  UUID?: string | null;
+  UUID?: string;
   /** 可用区 */
-  Zone?: string | null;
+  Zone?: string;
   /** 创建时间 */
   CreateTime?: string;
 }
@@ -495,31 +495,31 @@ declare interface InstanceOperation {
 /** 网络信息 */
 declare interface NetworkInfo {
   /** 可用区 */
-  Zone?: string | null;
+  Zone?: string;
   /** 子网id */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 当前子网可用ip数 */
-  SubnetIpNum?: number | null;
+  SubnetIpNum?: number;
 }
 
 /** NodeInfo */
 declare interface NodeInfo {
   /** 用户IP */
-  Ip?: string | null;
+  Ip?: string;
   /** 节点状态 */
-  Status?: number | null;
+  Status?: number;
   /** 节点角色名 */
-  NodeName?: string | null;
+  NodeName?: string;
   /** 组件名 */
-  ComponentName?: string | null;
+  ComponentName?: string;
   /** 节点角色 */
-  NodeRole?: string | null;
+  NodeRole?: string;
   /** 节点上次重启的时间 */
-  LastRestartTime?: string | null;
+  LastRestartTime?: string;
   /** 节点所在可用区 */
-  Zone?: string | null;
+  Zone?: string;
   /** Id */
-  Id?: string | null;
+  Id?: string;
 }
 
 /** 节点信息列表 */
@@ -537,9 +537,9 @@ declare interface NodeInfos {
   /** 上一次重启时间 */
   LastRestartTime?: string;
   /** id */
-  Id?: string | null;
+  Id?: string;
   /** 可用区 */
-  Zone?: string | null;
+  Zone?: string;
   /** 创建时间 */
   CreateTime?: string;
 }
@@ -561,19 +561,19 @@ declare interface NodesSummary {
   /** 磁盘描述 */
   DiskDesc?: string;
   /** 挂载云盘信息 */
-  AttachCBSSpec?: AttachCBSSpec | null;
+  AttachCBSSpec?: AttachCBSSpec;
   /** 子产品名称 */
-  SubProductType?: string | null;
+  SubProductType?: string;
   /** 规格核数 */
-  SpecCore?: number | null;
+  SpecCore?: number;
   /** 规格内存 */
-  SpecMemory?: number | null;
+  SpecMemory?: number;
   /** 磁盘大小 */
-  DiskCount?: number | null;
+  DiskCount?: number;
   /** 是否加密 */
-  Encrypt?: number | null;
+  Encrypt?: number;
   /** 最大磁盘 */
-  MaxDiskSize?: number | null;
+  MaxDiskSize?: number;
 }
 
 /** 可用区的地域大类描述 */
@@ -843,7 +843,7 @@ declare interface CancelBackupJobRequest {
 
 declare interface CancelBackupJobResponse {
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1571,7 +1571,7 @@ declare interface DescribeSpecResponse {
   /** be节点规格描述 */
   CoreSpec?: ResourceSpec[];
   /** 云盘列表 */
-  AttachCBSSpec?: DiskSpec[] | null;
+  AttachCBSSpec?: DiskSpec[];
   /** cn节点列表 */
   CNSpec?: ResourceSpec[];
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1599,9 +1599,9 @@ declare interface DescribeSqlApisRequest {
 
 declare interface DescribeSqlApisResponse {
   /** 返回的查询数据，大部分情况是list，也可能是bool */
-  ReturnData?: string | null;
+  ReturnData?: string;
   /** 错误消息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1621,9 +1621,9 @@ declare interface DescribeTableListRequest {
 
 declare interface DescribeTableListResponse {
   /** 表名列表 */
-  TableNames?: string[] | null;
+  TableNames?: string[];
   /** 错误信息 */
-  Message?: string | null;
+  Message?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1705,7 +1705,7 @@ declare interface ModifyCoolDownPolicyRequest {
 
 declare interface ModifyCoolDownPolicyResponse {
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1733,7 +1733,7 @@ declare interface ModifyInstanceKeyValConfigsRequest {
 
 declare interface ModifyInstanceKeyValConfigsResponse {
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** ID */
   FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1783,7 +1783,7 @@ declare interface ModifySecurityGroupsRequest {
 
 declare interface ModifySecurityGroupsResponse {
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1819,7 +1819,7 @@ declare interface ModifyUserPrivilegesV3Request {
 
 declare interface ModifyUserPrivilegesV3Response {
   /** 错误信息，为空就是没有错误 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 集群id */
   InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1887,7 +1887,7 @@ declare interface OpenCoolDownRequest {
 
 declare interface OpenCoolDownResponse {
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

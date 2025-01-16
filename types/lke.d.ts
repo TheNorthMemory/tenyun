@@ -850,6 +850,8 @@ declare interface QAQuery {
   Source?: number;
   /** 查询答案 */
   QueryAnswer?: string;
+  /** 查询类型 filename 名称、 attribute 标签 */
+  QueryType?: string;
 }
 
 /** 搜索引擎参考来源索引 */

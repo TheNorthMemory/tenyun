@@ -600,12 +600,16 @@ declare interface GetThreadMessageListResponse {
   Data?: ThreadMessage[];
   /** 第一条消息 ID */
   FirstID?: string | null;
-  /** 最后一条消息 ID */
+  /** 已废弃 */
   LastID?: number | null;
   /** 是否还有更多消息 */
   HasMore?: boolean;
   /** 对象类型 */
   Object?: string;
+  /** 第一条消息 ID */
+  FirstMsgID?: string;
+  /** 最后一条消息 ID */
+  LastMsgID?: string;
   /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
   RequestId?: string;
 }

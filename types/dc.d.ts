@@ -77,7 +77,7 @@ declare interface CloudAttachInfo {
   /** 敏捷上云申请的时间 */
   ApplyTime?: string;
   /** 敏捷上云建设完成的时间 */
-  ReadyTime?: string | null;
+  ReadyTime?: string;
   /** 敏捷上云过期时间 */
   ExpireTime?: string;
   /** 备注信息 */
@@ -96,6 +96,8 @@ declare interface CloudAttachInfo {
   CloudAttachServiceGatewaysSupport?: boolean;
   /** 敏捷上云服务是否处于升降配中 */
   BUpdateBandwidth?: boolean;
+  /** 接入地域 */
+  ArRegion?: string;
 }
 
 /** 坐标，经维度描述 */
@@ -120,6 +122,8 @@ declare interface CreateCasInput {
   Telephone: string;
   /** 备注信息 */
   Remarks: string;
+  /** 接入地域 */
+  ArRegion?: string;
 }
 
 /** 物理专线信息列表 */
