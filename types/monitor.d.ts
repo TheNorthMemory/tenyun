@@ -1071,17 +1071,17 @@ declare interface Filter {
 /** Grafana可视化服务 授权账户信息 */
 declare interface GrafanaAccountInfo {
   /** 用户账号ID */
-  UserId: string;
+  UserId?: string;
   /** 用户权限 */
-  Role: GrafanaAccountRole[];
+  Role?: GrafanaAccountRole[];
   /** 备注 */
-  Notes: string;
+  Notes?: string;
   /** 创建时间 */
-  CreateAt: string;
+  CreateAt?: string;
   /** 实例 ID */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 用户主账号 UIN */
-  Uin: string;
+  Uin?: string;
 }
 
 /** Grafana可视化服务 账号权限 */
@@ -1153,37 +1153,37 @@ declare interface GrafanaInstanceInfo {
 /** Grafana 集成实例配置 */
 declare interface GrafanaIntegrationConfig {
   /** 集成 ID */
-  IntegrationId: string;
+  IntegrationId?: string;
   /** 集成类型 */
-  Kind: string;
+  Kind?: string;
   /** 集成内容 */
-  Content: string;
+  Content?: string;
   /** 集成描述 */
-  Description: string;
-  /** Grafana 跳转地址 */
-  GrafanaURL: string | null;
+  Description?: string;
+  /** Grafana 跳转地址(目前未使用，默认为空) */
+  GrafanaURL?: string | null;
 }
 
 /** Grafana 告警渠道 */
 declare interface GrafanaNotificationChannel {
   /** 渠道 ID */
-  ChannelId: string;
+  ChannelId?: string;
   /** 渠道名 */
-  ChannelName: string;
+  ChannelName?: string;
   /** 告警通道模板 ID 数组 */
-  Receivers: string[];
+  Receivers?: string[];
   /** 创建时间 */
-  CreatedAt: string;
+  CreatedAt?: string;
   /** 更新时间 */
-  UpdatedAt: string;
+  UpdatedAt?: string;
   /** 默认生效组织，已废弃，请使用 OrganizationIds */
-  OrgId: string;
+  OrgId?: string;
   /** 额外生效组织，已废弃，请使用 OrganizationIds */
-  ExtraOrgIds: string[] | null;
+  ExtraOrgIds?: string[] | null;
   /** 生效组织，已废弃，请使用 OrganizationIds */
-  OrgIds: string[] | null;
+  OrgIds?: string[] | null;
   /** 告警渠道的所有生效组织 */
-  OrganizationIds: string[] | null;
+  OrganizationIds?: string[] | null;
 }
 
 /** Grafana 插件 */
@@ -1783,15 +1783,15 @@ declare interface PrometheusInstanceGrantInfo {
 /** Prometheus用量信息 */
 declare interface PrometheusInstanceTenantUsage {
   /** 实例ID */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 计费周期 */
-  CalcDate: string | null;
+  CalcDate?: string | null;
   /** 总用量 */
-  Total: number | null;
+  Total?: number | null;
   /** 基础指标用量 */
-  Basic: number | null;
+  Basic?: number | null;
   /** 付费指标用量 */
-  Fee: number | null;
+  Fee?: number | null;
 }
 
 /** Prometheus 服务响应体 */

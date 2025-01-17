@@ -496,6 +496,20 @@ declare interface LoginSettings {
   KeepImageLogin?: boolean;
 }
 
+/** 自定义 Metadata */
+declare interface Metadata {
+  /** 自定义 Metadata 键值对列表 */
+  Items?: MetadataItem[];
+}
+
+/** 自定义 Metadata 的一组键值对信息 */
+declare interface MetadataItem {
+  /** 自定义 MetaData 键 */
+  Key: string;
+  /** 自定义 MetaData 值 */
+  Value: string;
+}
+
 /** 弹性伸缩告警指标 */
 declare interface MetricAlarm {
   /** 比较运算符，可选值：GREATER_THAN：大于GREATER_THAN_OR_EQUAL_TO：大于或等于LESS_THAN：小于 LESS_THAN_OR_EQUAL_TO：小于或等于 EQUAL_TO：等于 NOT_EQUAL_TO：不等于 */
@@ -799,6 +813,8 @@ declare interface ClearLaunchConfigurationAttributesRequest {
   ClearDisasterRecoverGroupIds?: boolean;
   /** 是否清空实例标签列表，非必填，默认为 false。填 true 代表清空实例标签列表，清空后基于此新创建的云主机将不会绑定列表中的标签。 */
   ClearInstanceTags?: boolean;
+  /** 是否清空 MetaData，非必填，默认为 false。填 true 代表清空 MetaData，清空后基于此新创建的云主机将不会关联自定义的 Metadata。 */
+  ClearMetadata?: boolean;
 }
 
 declare interface ClearLaunchConfigurationAttributesResponse {
@@ -959,6 +975,8 @@ declare interface CreateLaunchConfigurationRequest {
   ImageFamily?: string;
   /** 本地专用集群ID。 */
   DedicatedClusterId?: string;
+  /** 自定义metadata。 */
+  Metadata?: Metadata;
 }
 
 declare interface CreateLaunchConfigurationResponse {
@@ -1570,6 +1588,8 @@ declare interface ModifyLaunchConfigurationAttributesRequest {
   ImageFamily?: string;
   /** 本地专用集群ID。 */
   DedicatedClusterId?: string;
+  /** 自定义metadata。 */
+  Metadata?: Metadata;
 }
 
 declare interface ModifyLaunchConfigurationAttributesResponse {

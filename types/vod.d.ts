@@ -2285,7 +2285,7 @@ declare namespace V20180717 {
   interface EditMediaVideoStream {
     /** 视频流的编码格式，可选值：libx264：H.264 编码；libx265：H.265 编码；av1：AOMedia Video 1 编码；H.266：H.266 编码。 */
     Codec?: string;
-    /** 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。当取值为 0 或不填时，表示自动选择最佳视频码率。 */
+    /** 视频流的码率，取值范围：0 和 [128, 100000]，单位：kbps。当取值为 0 或不填时，表示自动选择最佳视频码率。 */
     Bitrate?: number;
     /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
     ResolutionAdaptive?: string;
@@ -5775,7 +5775,7 @@ declare namespace V20180717 {
     Codec: string;
     /** 视频帧率，取值范围：[0, 100]，单位：Hz。当取值为 0，表示帧率和原始视频保持一致。 */
     Fps: number;
-    /** 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
+    /** 视频流的码率，取值范围：0 和 [128, 100000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
     Bitrate: number;
     /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
     ResolutionAdaptive?: string;
@@ -5801,7 +5801,7 @@ declare namespace V20180717 {
     Codec?: string;
     /** 视频帧率，取值范围：[0, 100]，单位：Hz。当取值为 0，表示帧率和原始视频保持一致。 */
     Fps?: number;
-    /** 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
+    /** 视频流的码率，取值范围：0 和 [128, 100000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
     Bitrate?: number;
     /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。 */
     ResolutionAdaptive?: string;

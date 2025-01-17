@@ -1413,7 +1413,7 @@ declare interface CreateLaunchTemplateVersionResponse {
 }
 
 declare interface DeleteDisasterRecoverGroupsRequest {
-  /** 分散置放群组ID列表，可通过[DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/api/213/17810)接口获取。每次请求允许操作的分散置放群组数量上限是100。 */
+  /** 分散置放群组ID列表，可通过[DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/api/213/17810)接口获取。每次请求允许操作的分散置放群组数量上限是10。 */
   DisasterRecoverGroupIds: string[];
 }
 
@@ -1553,7 +1553,7 @@ declare interface DescribeDisasterRecoverGroupQuotaResponse {
 }
 
 declare interface DescribeDisasterRecoverGroupsRequest {
-  /** 分散置放群组ID列表。每次请求允许操作的分散置放群组数量上限是100。 */
+  /** 分散置放群组ID列表。每次请求允许操作的分散置放群组数量上限是10。 */
   DisasterRecoverGroupIds?: string[];
   /** 分散置放群组名称，支持模糊匹配。 */
   Name?: string;
@@ -2453,6 +2453,20 @@ declare interface ModifyInstancesChargeTypeResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInstancesDisasterRecoverGroupRequest {
+  /** 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为1 */
+  InstanceIds: string[];
+  /** 分散置放群组ID，可使用[DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/api/213/17810)接口获取 */
+  DisasterRecoverGroupId?: string;
+  /** 是否强制更换实例宿主机。取值范围：true：表示允许实例更换宿主机，允许重启实例。本地盘子机不支持指定此参数。false：不允许实例更换宿主机，只在当前宿主机上加入置放群组。这可能导致更换置放群组失败。默认取值：false */
+  Force?: boolean;
+}
+
+declare interface ModifyInstancesDisasterRecoverGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyInstancesProjectRequest {
   /** 一个或多个待操作的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) API返回值中的`InstanceId`获取。每次请求允许操作的实例数量上限是100。 */
   InstanceIds: string[];
@@ -2984,6 +2998,8 @@ declare interface Cvm {
   ModifyInstancesAttribute(data: ModifyInstancesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesAttributeResponse>;
   /** 修改实例计费模式 {@link ModifyInstancesChargeTypeRequest} {@link ModifyInstancesChargeTypeResponse} */
   ModifyInstancesChargeType(data: ModifyInstancesChargeTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesChargeTypeResponse>;
+  /** 调整实例分散置放群组 {@link ModifyInstancesDisasterRecoverGroupRequest} {@link ModifyInstancesDisasterRecoverGroupResponse} */
+  ModifyInstancesDisasterRecoverGroup(data: ModifyInstancesDisasterRecoverGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesDisasterRecoverGroupResponse>;
   /** 修改实例所属项目 {@link ModifyInstancesProjectRequest} {@link ModifyInstancesProjectResponse} */
   ModifyInstancesProject(data: ModifyInstancesProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesProjectResponse>;
   /** 修改实例续费标识 {@link ModifyInstancesRenewFlagRequest} {@link ModifyInstancesRenewFlagResponse} */

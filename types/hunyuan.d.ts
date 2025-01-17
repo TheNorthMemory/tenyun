@@ -431,7 +431,7 @@ declare interface ChatCompletionsRequest {
   Seed?: number;
   /** 强制搜索增强开关。说明：1. 未传值时默认关闭。2. 开启后，将强制走AI搜索，当AI搜索结果为空时，由大模型回复兜底话术。 */
   ForceSearchEnhancement?: boolean;
-  /** 自定义结束生成字符串 */
+  /** 自定义结束生成字符串调用 OpenAI 的接口时，如果您指定了 `stop` 参数, 模型会停止在匹配到 `stop` 的内容之前。在调用混元接口时，会停止在匹配到 `stop` 的内容之后。**说明：**未来我们可能会修改此行为以便和 OpenAI 保持一致。但是目前有使用该参数的情况下，开发者需要注意该参数是否会对应用造成影响，以及未来该行为调整时带来的影响。 */
   Stop?: string[];
   /** 推荐问答开关。说明：1. 未传值时默认关闭。2. 开启后，在返回值的最后一个包中会增加 RecommendedQuestions 字段表示推荐问答， 最多返回3条。 */
   EnableRecommendedQuestions?: boolean;

@@ -595,13 +595,13 @@ declare interface RegionInfo {
   /** 地域唯一标记 */
   RegionId?: number;
   /** 地域下所有可用区列表 */
-  Zones?: ZoneInfo[] | null;
+  Zones?: ZoneInfo[];
   /** 该地域下集群数目 */
   Count?: number;
   /** 0代表是国际站 1代表不是 */
-  IsInternationalSite?: number | null;
+  IsInternationalSite?: number;
   /** 桶 */
-  Bucket?: string | null;
+  Bucket?: string;
 }
 
 /** 资源规格描述信息 */
@@ -615,17 +615,17 @@ declare interface ResourceSpec {
   /** 分类标记，STANDARD/BIGDATA/HIGHIO分别表示标准型/大数据型/高IO */
   Type?: string;
   /** 系统盘描述信息 */
-  SystemDisk?: DiskSpec | null;
+  SystemDisk?: DiskSpec;
   /** 数据盘描述信息 */
-  DataDisk?: DiskSpec | null;
+  DataDisk?: DiskSpec;
   /** 最大节点数目限制 */
-  MaxNodeSize?: number | null;
+  MaxNodeSize?: number;
   /** 是否可用，false代表售罄 */
-  Available?: boolean | null;
+  Available?: boolean;
   /** 规格描述信息 */
-  ComputeSpecDesc?: string | null;
+  ComputeSpecDesc?: string;
   /** cvm库存 */
-  InstanceQuota?: number | null;
+  InstanceQuota?: number;
 }
 
 /** 恢复任务信息 */
@@ -673,27 +673,27 @@ declare interface RestoreStatus {
   /** 是否保持源表中的动态分区 */
   ReserveDynamicPartitionEnable?: boolean;
   /** 备份实例id */
-  BackupJobId?: number | null;
+  BackupJobId?: number;
   /** 实例对应snapshot的id */
-  TaskId?: number | null;
+  TaskId?: number;
 }
 
 /** 调度信息 */
 declare interface ScheduleInfo {
   /** 生效周期 */
-  EffectivePeriod?: string | null;
+  EffectivePeriod?: string;
   /** 调度类型，不传该参数时为立即执行：Day-天Week-周Month-月Once-单次 */
-  ScheduleType?: string | null;
+  ScheduleType?: string;
   /** 执行调度的日期。调度类型为周和月时以英文逗号分隔；调度类型为单次时，该值是个日期 */
-  ScheduleData?: string | null;
+  ScheduleData?: string;
   /** 执行时间：时 */
-  ScheduleHour?: number | null;
+  ScheduleHour?: number;
   /** 执行时间：分 */
-  ScheduleMin?: number | null;
+  ScheduleMin?: number;
   /** 备份粒度：All-全量Database-按库Table-按表 */
-  BackupScope?: string | null;
+  BackupScope?: string;
   /** 备份库：如果是按库备份，则需要该字段，库之间用英文逗号分割 */
-  BackupDatabase?: string | null;
+  BackupDatabase?: string;
 }
 
 /** 列表页搜索的标记列表 */
@@ -785,23 +785,23 @@ declare interface UserInfo {
 /** 用户绑定资源组信息 */
 declare interface UserWorkloadGroup {
   /** test */
-  UserName?: string | null;
+  UserName?: string;
   /** normal */
-  WorkloadGroupName?: string | null;
+  WorkloadGroupName?: string;
 }
 
 /** 资源组相关配置 */
 declare interface WorkloadGroupConfig {
   /** 资源组名称 */
-  WorkloadGroupName?: string | null;
+  WorkloadGroupName?: string;
   /** CPU权重 */
-  CpuShare?: number | null;
+  CpuShare?: number;
   /** 内存限制，所有资源组的内存限制值之和应该小于等于100 */
-  MemoryLimit?: number | null;
+  MemoryLimit?: number;
   /** 是否允许超配分配 */
-  EnableMemoryOverCommit?: boolean | null;
+  EnableMemoryOverCommit?: boolean;
   /** cpu硬限制 */
-  CpuHardLimit?: string | null;
+  CpuHardLimit?: string;
 }
 
 /** 可用区描述信息 */
@@ -813,9 +813,9 @@ declare interface ZoneInfo {
   /** 可用区唯一标记 */
   ZoneId?: number;
   /** Encryptid */
-  Encrypt?: number | null;
+  Encrypt?: number;
   /** 是否为主力园区 */
-  Main?: boolean | null;
+  Main?: boolean;
 }
 
 declare interface ActionAlterUserRequest {
@@ -1922,6 +1922,12 @@ declare interface RecoverBackUpJobRequest {
 }
 
 declare interface RecoverBackUpJobResponse {
+  /** 恢复任务总数量 */
+  TotalCount?: number;
+  /** 重复的表名 */
+  DuplicateTables?: string[];
+  /** 错误信息 */
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2061,7 +2067,7 @@ declare interface UpdateCoolDownRequest {
 
 declare interface UpdateCoolDownResponse {
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

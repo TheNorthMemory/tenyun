@@ -71,15 +71,15 @@ declare interface DeviceBaseInfo {
   /** 付费方 0：厂商付费 1：客户付费 */
   Payer?: number;
   /** 设备分组ID */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 设备分组名称 */
-  GroupName?: string | null;
+  GroupName?: string;
   /** 设备无流量包处理方式，0: 按量付费，1: 截断加速 */
-  FlowTrunc?: number | null;
+  FlowTrunc?: number;
   /** 设备sn */
-  Sn?: string | null;
+  Sn?: string;
   /** 厂商 */
-  Vendor?: string | null;
+  Vendor?: string;
 }
 
 /** 设备详细信息 */
@@ -87,13 +87,13 @@ declare interface DeviceDetails {
   /** 设备基本信息 */
   DeviceBaseInfo?: DeviceBaseInfo;
   /** 设备网络信息 */
-  DeviceNetInfo?: DeviceNetInfo[] | null;
+  DeviceNetInfo?: DeviceNetInfo[];
   /** 聚合服务器地址 */
-  GatewaySite?: string | null;
+  GatewaySite?: string;
   /** 业务下行速率 */
-  BusinessDownRate?: number | null;
+  BusinessDownRate?: number;
   /** 业务上行速率 */
-  BusinessUpRate?: number | null;
+  BusinessUpRate?: number;
 }
 
 /** 设备信息结构体 */
@@ -113,7 +113,7 @@ declare interface DeviceInfo {
 /** 设备网络状态信息 */
 declare interface DeviceNetInfo {
   /** 网络类型：0:数据1:Wi-Fi2:有线 */
-  Type?: number | null;
+  Type?: number;
   /** 启用/禁用 */
   DataEnable?: boolean | null;
   /** 上行限速 */
@@ -417,7 +417,7 @@ declare interface AddDeviceResponse {
   /** 设备ID */
   DeviceId?: string;
   /** 签名字符串 */
-  Signature?: string | null;
+  Signature?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -625,11 +625,11 @@ declare interface GetFlowAlarmInfoRequest {
 
 declare interface GetFlowAlarmInfoResponse {
   /** 流量包的告警阈值 */
-  AlarmValue?: number | null;
+  AlarmValue?: number;
   /** 告警通知回调url */
-  NotifyUrl?: string | null;
+  NotifyUrl?: string;
   /** 告警通知回调key */
-  CallbackKey?: string | null;
+  CallbackKey?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -869,7 +869,7 @@ declare interface GetNetMonitorRequest {
 
 declare interface GetNetMonitorResponse {
   /** 监控数据 */
-  MonitorData?: MonitorData[] | null;
+  MonitorData?: MonitorData[];
   /** 接入区域。取值范围：['MC','AP','EU','AM']MC=中国大陆AP=亚太EU=欧洲AM=美洲 */
   AccessRegion?: string;
   /** 唯一请求 ID，每次请求都会返回。 */

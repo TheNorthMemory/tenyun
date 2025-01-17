@@ -1718,7 +1718,7 @@ declare interface ModifyUserProfileResponse {
 declare interface RegisterUserRequest {
   /** 低代码互动课堂的SdkAppId。 */
   SdkAppId: number;
-  /** 用户名称。 */
+  /** 对应用户昵称。对应修改用户信息下“nickname“字段，在修改用户信息时，可以对该字段进行调整，从而更改用户的昵称。 */
   Name?: string;
   /** 用户在客户系统的Id，需要在同一应用下唯一。入参为空时默认赋值为UserId。 */
   OriginId?: string;
@@ -2004,7 +2004,7 @@ declare interface Lcic {
   DescribeSupervisors(data: DescribeSupervisorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupervisorsResponse>;
   /** 获取用户信息 {@link DescribeUserRequest} {@link DescribeUserResponse} */
   DescribeUser(data?: DescribeUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResponse>;
-  /** 结束房间 {@link EndRoomRequest} {@link EndRoomResponse} */
+  /** 结束直播 {@link EndRoomRequest} {@link EndRoomResponse} */
   EndRoom(data: EndRoomRequest, config?: AxiosRequestConfig): AxiosPromise<EndRoomResponse>;
   /** 禁言和取消禁言 {@link ForbidSendMsgRequest} {@link ForbidSendMsgResponse} */
   ForbidSendMsg(data: ForbidSendMsgRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidSendMsgResponse>;
@@ -2044,7 +2044,7 @@ declare interface Lcic {
   SetWatermark(data: SetWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<SetWatermarkResponse>;
   /** 开启录制 {@link StartRecordRequest} {@link StartRecordResponse} */
   StartRecord(data: StartRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StartRecordResponse>;
-  /** 开始房间 {@link StartRoomRequest} {@link StartRoomResponse} */
+  /** 开始直播 {@link StartRoomRequest} {@link StartRoomResponse} */
   StartRoom(data: StartRoomRequest, config?: AxiosRequestConfig): AxiosPromise<StartRoomResponse>;
   /** 停止录制 {@link StopRecordRequest} {@link StopRecordResponse} */
   StopRecord(data: StopRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StopRecordResponse>;

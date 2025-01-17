@@ -1763,6 +1763,8 @@ declare interface DescribeCertificatesRequest {
   Tags?: Tags[];
   /** 是否筛选等待签发的证书，传1是筛选，0和null不筛选 */
   IsPendingIssue?: number;
+  /** 筛选指定证书ID的证书，只支持有权限的证书ID */
+  CertIds?: string[];
 }
 
 declare interface DescribeCertificatesResponse {

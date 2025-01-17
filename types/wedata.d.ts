@@ -2820,6 +2820,14 @@ declare interface OrderFieldOptional {
   Direction?: string;
 }
 
+/** 排序 */
+declare interface OrderFields {
+  /** 字段 */
+  Name?: string;
+  /** 排序 */
+  Direction?: string;
+}
+
 /** 包含层级信息的函数 */
 declare interface OrganizationalFunction {
   /** 名称 */
@@ -4970,6 +4978,64 @@ declare interface TaskSubmitPreCheckDetailInfo {
   InCharge?: string | null;
 }
 
+/** 任务表粒度指标信息 */
+declare interface TaskTableMetricInfo {
+  /** 数据库名称 */
+  DatabaseName?: string | null;
+  /** 表名称 */
+  TableName?: string | null;
+  /** 总记录数 */
+  TotalRecordNum?: number | null;
+  /** 总字节数 */
+  TotalRecordByteNum?: number | null;
+  /** 总脏记录数 */
+  TotalDirtyRecordNum?: number | null;
+  /** Schema名称 */
+  SchemaName?: string | null;
+  /** topic名称 */
+  Topic?: string | null;
+  /** Collection名称 */
+  Collection?: string | null;
+  /** 数据源名称 */
+  DataSourceName?: string;
+  /** 节点id */
+  NodeId?: string;
+  /** 逻辑库名 */
+  LogicDatabase?: string | null;
+  /** 逻辑表名 */
+  LogicTable?: string | null;
+  /** 逻辑schema名 */
+  LogicSchema?: string | null;
+  /** 物理表信息 */
+  TaskTableMetricInfos?: TaskTableMetricInfo[] | null;
+  /** 同步状态，0-未知，1-正常， 2-异常 */
+  SyncStatus?: number | null;
+  /** Target数据库名称 */
+  TargetDatabaseName?: string | null;
+  /** Target表名称 */
+  TargetTableName?: string | null;
+  /** Write总记录数 */
+  WriteTotalRecordNum?: number | null;
+  /** Write总字节数 */
+  WriteTotalRecordByteNum?: string | null;
+  /** TargetSchema名称 */
+  TargetSchemaName?: string | null;
+  /** Targettopic名称 */
+  TargetTopic?: string | null;
+  /** TargetCollection名称 */
+  TargetCollection?: string | null;
+  /** 数据源名称 */
+  TargetDataSourceName?: string | null;
+  /** 节点id */
+  TargetNodeId?: string | null;
+  /** 读取条数的速度 */
+  TotalRecordSpeed?: number | null;
+  /** 写入条数的速度 */
+  WriteTotalRecordSpeed?: number | null;
+  /** 异常原因 */
+  ExceptionReason?: string | null;
+}
+
 /** 任务标签，可用于检索任务的条件 */
 declare interface TaskTag {
   /** 标签名称 */
@@ -6042,7 +6108,7 @@ declare interface CreateHiveTableByDDLRequest {
   DatasourceId: string;
   /** 数据库 */
   Database: string;
-  /** 建hive表ddl */
+  /** 建hive表ddl的base64编码 */
   DDLSql: string;
   /** 表权限 ，默认为0:项目共享;1:仅个人与管理员 */
   Privilege: number;
@@ -6164,7 +6230,7 @@ declare interface CreateOfflineTaskResponse {
   /** 导入到编排空间的任务id */
   ArrangeSpaceTaskId?: string | null;
   /** 结果 */
-  Data?: string;
+  Data?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9195,6 +9261,36 @@ declare interface DescribeTaskScriptResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTaskTableMetricOverviewRequest {
+  /** 任务TaskId */
+  TaskId: string;
+  /** 来源类型，支持枚举： SOURCE、SINK */
+  NodeType: string;
+  /** 页码 */
+  PageNumber: number;
+  /** 页大小 */
+  PageSize: number;
+  /** 项目ID */
+  ProjectId: string;
+  /** 任务类型：201. stream, 202. offline，当前只支持实时201 */
+  TaskType?: number;
+  /** 根据SchemaName来模糊搜索 */
+  Filters?: Filter[];
+  /** 排序 */
+  OrderFields?: OrderFields[];
+}
+
+declare interface DescribeTaskTableMetricOverviewResponse {
+  /** 表粒度指标集合 */
+  TaskTableMetricInfos?: TaskTableMetricInfo[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 返回列表类型 */
+  MetricType?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTemplateDimCountRequest {
   /** 模板类型 */
   Type?: number;
@@ -11420,6 +11516,8 @@ declare interface Wedata {
   DescribeTaskRunHistory(data: DescribeTaskRunHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskRunHistoryResponse>;
   /** 查询任务脚本 {@link DescribeTaskScriptRequest} {@link DescribeTaskScriptResponse} */
   DescribeTaskScript(data: DescribeTaskScriptRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskScriptResponse>;
+  /** 查询实时任务表粒度指标概览 {@link DescribeTaskTableMetricOverviewRequest} {@link DescribeTaskTableMetricOverviewResponse} */
+  DescribeTaskTableMetricOverview(data: DescribeTaskTableMetricOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskTableMetricOverviewResponse>;
   /** 查询规则模板维度分布情况 {@link DescribeTemplateDimCountRequest} {@link DescribeTemplateDimCountResponse} */
   DescribeTemplateDimCount(data?: DescribeTemplateDimCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateDimCountResponse>;
   /** 实例运维-获取第三方运行日志 {@link DescribeThirdTaskRunLogRequest} {@link DescribeThirdTaskRunLogResponse} */
