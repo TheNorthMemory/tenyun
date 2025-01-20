@@ -118,7 +118,7 @@ declare interface CloudStorageAIServiceTask {
   DeviceName?: string;
   /** 通道 ID */
   ChannelId?: number;
-  /** 云存 AI 服务类型。可能取值：- `RealtimeObjectDetect`：目标检测- `Highlight`：视频浓缩 */
+  /** 云存 AI 服务类型。可能取值：- `RealtimeObjectDetect`：目标检测- `Highlight`：视频浓缩- `VideoToText`：视频语义理解 */
   ServiceType?: string;
   /** 对应云存视频的起始时间 */
   StartTime?: number;
@@ -152,6 +152,24 @@ declare interface CloudStorageEvent {
   UploadStatus?: string | null;
   /** 事件自定义数据 */
   Data?: string | null;
+}
+
+/** 云存事件及其关联的云存 AI 任务 */
+declare interface CloudStorageEventWithAITasks {
+  /** 事件起始时间（Unix 时间戳，秒级 */
+  StartTime?: number;
+  /** 事件结束时间（Unix 时间戳，秒级 */
+  EndTime?: number;
+  /** 事件缩略图 */
+  Thumbnail?: string;
+  /** 事件ID */
+  EventId?: string;
+  /** 事件录像上传状态，Finished: 全部上传成功 Partial: 部分上传成功 Failed: 上传失败 */
+  UploadStatus?: string;
+  /** 事件自定义数据 */
+  Data?: string;
+  /** 事件关联的云存 AI 任务列表 */
+  AITasks?: CloudStorageAIServiceTask[];
 }
 
 /** 云存套餐包信息 */
@@ -1829,7 +1847,7 @@ declare interface DescribeCloudStorageAIServiceTasksRequest {
   ProductId: string;
   /** 设备名称 */
   DeviceName: string;
-  /** 云存 AI 服务类型。可选值：- `RealtimeObjectDetect`：目标检测- `Highlight`：视频浓缩 */
+  /** 云存 AI 服务类型。可选值：- `RealtimeObjectDetect`：目标检测- `Highlight`：视频浓缩- `VideoToText`：视频语义理解 */
   ServiceType: string;
   /** 分页拉取数量 */
   Limit: number;
@@ -1894,6 +1912,44 @@ declare interface DescribeCloudStorageEventsRequest {
 declare interface DescribeCloudStorageEventsResponse {
   /** 云存事件列表 */
   Events?: CloudStorageEvent[];
+  /** 请求上下文, 用作查询游标 */
+  Context?: string;
+  /** 拉取结果是否已经结束 */
+  Listover?: boolean;
+  /** 内部结果数量，并不等同于事件总数。 */
+  Total?: number;
+  /** 视频播放URL */
+  VideoURL?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudStorageEventsWithAITasksRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 事件关联的视频 AI 分析服务类型（支持多选）。可选值：- `RealtimeObjectDetect`：目标检测- `Highlight`：视频浓缩- `VideoToText`：视频语义理解 */
+  ServiceTypes: string[];
+  /** 起始时间（Unix 时间戳，秒级）, 为0 表示 当前时间 - 24h */
+  StartTime?: number;
+  /** 结束时间（Unix 时间戳，秒级）, 为0 表示当前时间 */
+  EndTime?: number;
+  /** 请求上下文, 用作查询游标 */
+  Context?: string;
+  /** 查询数据项目的最大数量, 默认为10。假设传Size=10，返回的实际事件数量为N，则 5 <= N <= 10。 */
+  Size?: number;
+  /** 事件标识符，可以用来指定查询特定的事件，如果不指定，则查询所有事件。 */
+  EventId?: string;
+  /** 用户ID */
+  UserId?: string;
+  /** 通道ID 非NVR设备则不填 NVR设备则必填 默认为无 */
+  ChannelId?: number;
+}
+
+declare interface DescribeCloudStorageEventsWithAITasksResponse {
+  /** 云存事件列表 */
+  Events?: CloudStorageEventWithAITasks[];
   /** 请求上下文, 用作查询游标 */
   Context?: string;
   /** 拉取结果是否已经结束 */
@@ -3935,6 +3991,8 @@ declare interface Iotexplorer {
   DescribeCloudStorageDate(data: DescribeCloudStorageDateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageDateResponse>;
   /** 拉取云存事件列表 {@link DescribeCloudStorageEventsRequest} {@link DescribeCloudStorageEventsResponse} */
   DescribeCloudStorageEvents(data: DescribeCloudStorageEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageEventsResponse>;
+  /** 拉取云存事件及 AI 分析任务列表 {@link DescribeCloudStorageEventsWithAITasksRequest} {@link DescribeCloudStorageEventsWithAITasksResponse} */
+  DescribeCloudStorageEventsWithAITasks(data: DescribeCloudStorageEventsWithAITasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageEventsWithAITasksResponse>;
   /** 拉取多个云存事件缩略图 {@link DescribeCloudStorageMultiThumbnailRequest} {@link DescribeCloudStorageMultiThumbnailResponse} */
   DescribeCloudStorageMultiThumbnail(data: DescribeCloudStorageMultiThumbnailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageMultiThumbnailResponse>;
   /** 查询云存订单详情 {@link DescribeCloudStorageOrderRequest} {@link DescribeCloudStorageOrderResponse} */

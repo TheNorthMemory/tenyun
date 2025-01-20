@@ -1157,6 +1157,10 @@ declare interface CreateInstancesRequest {
   Tags?: Tag[];
   /** 创建实例后自动执行的命令。 */
   InitCommand?: Command;
+  /** 主域名。 */
+  DomainName?: string;
+  /** 子域名。 */
+  Subdomain?: string;
 }
 
 declare interface CreateInstancesResponse {

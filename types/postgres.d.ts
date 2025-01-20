@@ -872,7 +872,7 @@ declare interface Version {
   DBKernelVersion?: string;
   /** 数据库内核支持的特性列表。例如，TDE：支持数据加密。 */
   SupportedFeatureNames?: string[];
-  /** 数据库版本状态，包括：AVAILABLE：可用；DEPRECATED：已弃用。 */
+  /** 数据库版本状态，包括：AVAILABLE：可用；UPGRADE_ONLY：不可创建，此版本仅可升级至高版本；DEPRECATED：已弃用。 */
   Status?: string;
   /** 该数据库版本（DBKernelVersion）可以升级到的版本号列表。其中包含可升级的小版本号和可升级的大版本号（完整内核版本格式示例：v15.1_v1.6）。 */
   AvailableUpgradeTarget?: string[];
@@ -2403,10 +2403,14 @@ declare interface ModifyBackupPlanRequest {
   MaxBackupStartTime?: string;
   /** 实例备份保留时长，取值范围为7-1830，单位是天 */
   BaseBackupRetentionPeriod?: number;
-  /** 实例备份周期，按照星期维度，格式为小写星期英文单词 */
+  /** 实例备份周期，若是星期维度，格式为小写星期英文单词；若是按月维度，格式为数字字符，如["1","2"]。 */
   BackupPeriod?: string[];
   /** 实例日志备份保留时长，取值范围为7-1830，单位是天 */
   LogBackupRetentionPeriod?: number;
+  /** 备份计划ID，用于指明要修改哪个备份计划，不传则是修改默认备份计划。 */
+  PlanId?: string;
+  /** 要修改的备份计划名称。 */
+  PlanName?: string;
 }
 
 declare interface ModifyBackupPlanResponse {
@@ -2723,9 +2727,9 @@ declare interface RemoveDBInstanceFromReadOnlyGroupResponse {
 declare interface RenewInstanceRequest {
   /** 实例ID，形如postgres-6fego161 */
   DBInstanceId: string;
-  /** 续费多少个月 */
+  /** 购买时长，单位：月。预付费：支持1,2,3,4,5,6,7,8,9,10,11,12,24,36后付费：只支持1 */
   Period: number;
-  /** 是否自动使用代金券,1是,0否，默认不使用 */
+  /** 是否自动使用代金券：0：否1：是默认值：0 */
   AutoVoucher?: number;
   /** 代金券ID列表，目前仅支持指定一张代金券 */
   VoucherIds?: string[];
@@ -2733,7 +2737,7 @@ declare interface RenewInstanceRequest {
 
 declare interface RenewInstanceResponse {
   /** 订单名 */
-  DealName: string;
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

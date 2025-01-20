@@ -47,11 +47,11 @@ declare interface BackUpJobDisplay {
 /** 备份实例中关于cos的信息 */
 declare interface BackupCosInfo {
   /** 备份文件所在的cos桶 */
-  CosBucket?: string | null;
+  CosBucket?: string;
   /** 备份文件所在的完整cos路径 */
-  CosPath?: string | null;
+  CosPath?: string;
   /** 备份文件名称 */
-  SnapShotPath?: string | null;
+  SnapShotPath?: string;
 }
 
 /** 备份任务的进度详情 */
@@ -85,9 +85,9 @@ declare interface BackupStatus {
   /** 超时信息 */
   Timeout?: number;
   /** 备份实例id */
-  BackupJobId?: number | null;
+  BackupJobId?: number;
   /** 实例对应snapshoit的id */
-  TaskId?: number | null;
+  TaskId?: number;
 }
 
 /** 备份表信息 */
@@ -111,9 +111,9 @@ declare interface BackupTableContent {
 /** 资源组绑定的用户信息，需要username和host信息进行授权 */
 declare interface BindUser {
   /** 用户名 */
-  UserName?: string | null;
+  UserName?: string;
   /** 主机信息 */
-  Host?: string | null;
+  Host?: string;
 }
 
 /** 集群计费相关信息 */
@@ -1237,6 +1237,8 @@ declare interface DescribeDatabaseAuditDownloadRequest {
   SqlTypes?: string[];
   /** catalog名称 （多选） */
   Catalogs?: string[];
+  /** 是否是查询 */
+  IsQuery?: boolean[];
 }
 
 declare interface DescribeDatabaseAuditDownloadResponse {
@@ -1501,6 +1503,10 @@ declare interface DescribeSlowQueryRecordsDownloadRequest {
   DbName?: string[];
   /** catalog名称 */
   CatalogName?: string[];
+  /** 排序字段 */
+  SortField?: string;
+  /** 排序方式 */
+  SortOrder?: string;
 }
 
 declare interface DescribeSlowQueryRecordsDownloadResponse {
@@ -1539,6 +1545,10 @@ declare interface DescribeSlowQueryRecordsRequest {
   ResultBytes?: string;
   /** MemoryUsage排序字段 */
   MemoryUsage?: string;
+  /** 排序字段 */
+  SortField?: string;
+  /** 排序方式 */
+  SortOrder?: string;
 }
 
 declare interface DescribeSlowQueryRecordsResponse {
@@ -1547,9 +1557,9 @@ declare interface DescribeSlowQueryRecordsResponse {
   /** 记录列表 */
   SlowQueryRecords?: SlowQueryRecord[];
   /** 所有数据库名 */
-  DBNameList?: string[] | null;
+  DBNameList?: string[];
   /** 所有catalog名 */
-  CatalogNameList?: string[] | null;
+  CatalogNameList?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

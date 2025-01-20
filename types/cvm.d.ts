@@ -336,6 +336,10 @@ declare interface HpcClusterInfo {
   HpcClusterType?: string | null;
   /** 高性能计算集群对应的业务场景标识，当前只支持CDC。 */
   HpcClusterBusinessId?: string | null;
+  /** 高性能计算集群网络模式 */
+  HpcClusterNetMode?: number;
+  /** 高性能计算集群关联的标签列表 */
+  Tags?: Tag[];
 }
 
 /** 一个关于镜像详细信息的结构体，主要包括镜像的主要状态与属性。 */
@@ -1227,6 +1231,8 @@ declare interface CreateHpcClusterRequest {
   HpcClusterType?: string;
   /** 高性能计算集群对应的业务场景标识，当前只支持CDC。 */
   HpcClusterBusinessId?: string;
+  /** 标签描述列表。通过指定该参数可以同时绑定标签到相应的HPC高性能集群。 */
+  TagSpecification?: TagSpecification[];
 }
 
 declare interface CreateHpcClusterResponse {
@@ -1605,6 +1611,10 @@ declare interface DescribeHpcClustersRequest {
   HpcClusterType?: string;
   /** 高性能计算集群对应的业务场景标识，当前只支持CDC。 */
   HpcClusterBusinessId?: string;
+  /** 高性能计算集群实例类型 */
+  InstanceType?: string;
+  /** tag-key 按照【标签键】进行过滤。类型：String必选：否 tag-value 按照【标签值】进行过滤。类型：String必选：否 tag:tag-key 按照【标签键值对】进行过滤。tag-key使用具体的标签键进行替换。类型：String必选：否 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。 */
+  Filters?: Filter[];
 }
 
 declare interface DescribeHpcClustersResponse {

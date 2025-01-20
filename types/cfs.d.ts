@@ -430,6 +430,18 @@ declare interface BindAutoSnapshotPolicyResponse {
   RequestId?: string;
 }
 
+declare interface CreateAccessCertRequest {
+  /** 证书描述 */
+  CertDesc: string;
+}
+
+declare interface CreateAccessCertResponse {
+  /** 凭证唯一标识 */
+  CertId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAutoSnapshotPolicyRequest {
   /** 快照重复时间点,0-23 */
   Hour: string;
@@ -1213,6 +1225,8 @@ declare interface Cfs {
   (): Versions;
   /** 文件系统绑定快照策略 {@link BindAutoSnapshotPolicyRequest} {@link BindAutoSnapshotPolicyResponse} */
   BindAutoSnapshotPolicy(data: BindAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<BindAutoSnapshotPolicyResponse>;
+  /** 创建访问凭证 {@link CreateAccessCertRequest} {@link CreateAccessCertResponse} */
+  CreateAccessCert(data: CreateAccessCertRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessCertResponse>;
   /** 创建定期快照策略 {@link CreateAutoSnapshotPolicyRequest} {@link CreateAutoSnapshotPolicyResponse} */
   CreateAutoSnapshotPolicy(data: CreateAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAutoSnapshotPolicyResponse>;
   /** 创建文件系统 {@link CreateCfsFileSystemRequest} {@link CreateCfsFileSystemResponse} */
