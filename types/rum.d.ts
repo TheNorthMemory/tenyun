@@ -173,7 +173,7 @@ declare interface ScoreInfo {
   /** Duration */
   PageDuration?: string;
   /** 时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 页面性能评分 */
   PagePerformanceScore?: string;
   /** js错误评分 */

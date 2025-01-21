@@ -1704,7 +1704,7 @@ declare interface ModifyRoomResponse {
 declare interface ModifyUserProfileRequest {
   /** 待修改用户ID */
   UserId: string;
-  /** 待修改的用户名 */
+  /** 待修改的用户名。对应注册用户下“Name“字段，本次修改是对此内容进行修改。 */
   Nickname?: string;
   /** 待修改头像url */
   Avatar?: string;
@@ -2028,7 +2028,7 @@ declare interface Lcic {
   ModifyGroup(data: ModifyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGroupResponse>;
   /** 修改房间 {@link ModifyRoomRequest} {@link ModifyRoomResponse} */
   ModifyRoom(data: ModifyRoomRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoomResponse>;
-  /** 修改用户配置 {@link ModifyUserProfileRequest} {@link ModifyUserProfileResponse} */
+  /** 修改用户信息 {@link ModifyUserProfileRequest} {@link ModifyUserProfileResponse} */
   ModifyUserProfile(data: ModifyUserProfileRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserProfileResponse>;
   /** 注册用户 {@link RegisterUserRequest} {@link RegisterUserResponse} */
   RegisterUser(data: RegisterUserRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterUserResponse>;

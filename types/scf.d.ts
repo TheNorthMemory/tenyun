@@ -216,7 +216,7 @@ declare interface Function {
   FunctionId?: string;
   /** 命名空间 */
   Namespace?: string;
-  /** 函数状态，状态值及流转[参考此处](https://cloud.tencent.com/document/product/583/47175) */
+  /** 函数状态，状态值及流转[参考此处](https://cloud.tencent.com/document/product/583/17244) */
   Status?: string;
   /** 函数状态详情 */
   StatusDesc?: string;
@@ -360,7 +360,7 @@ declare interface LayerVersionInfo {
   LayerVersion?: number;
   /** 层名称 */
   LayerName?: string;
-  /** 层的具体版本当前状态，状态值[参考此处](https://cloud.tencent.com/document/product/583/47175) */
+  /** 层的具体版本当前状态，状态值[参考此处](https://cloud.tencent.com/document/product/583/115197) */
   Status?: string;
   /** Stamp */
   Stamp?: string;

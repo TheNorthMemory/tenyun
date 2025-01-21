@@ -507,7 +507,7 @@ declare interface DescribeSessionStatisticsByIntervalRequest {
 
 declare interface DescribeSessionStatisticsByIntervalResponse {
   /** 各时间段的会话统计数据 */
-  SessionStatistics: SessionIntervalStatistic[];
+  SessionStatistics?: SessionIntervalStatistic[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -525,15 +525,15 @@ declare interface DescribeSessionStatisticsRequest {
 
 declare interface DescribeSessionStatisticsResponse {
   /** 会话数量 */
-  SessionNum: number;
+  SessionNum?: number;
   /** 通话时长，单位：分钟 */
-  TotalDuration: number;
+  TotalDuration?: number;
   /** 活跃现场设备数 */
-  ActiveFieldDeviceNum: number;
+  ActiveFieldDeviceNum?: number;
   /** 活跃远端设备数 */
-  ActiveRemoteDeviceNum: number;
+  ActiveRemoteDeviceNum?: number;
   /** 优良会话占比，单位：% */
-  NotBadSessionRatio: number;
+  NotBadSessionRatio?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

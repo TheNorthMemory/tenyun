@@ -736,6 +736,14 @@ declare interface DescribeGatewayInstancePortResult {
   GatewayInstancePortList?: GatewayInstanceSchemeAndPorts[] | null;
 }
 
+/** 根据公网IP查询云原生网关实例信息出参 */
+declare interface DescribeInstanceInfoByIpResult {
+  /** 实例id */
+  GatewayId?: string | null;
+  /** 分组id */
+  GroupId?: string | null;
+}
+
 /** 实例地域信息描述 */
 declare interface DescribeInstanceRegionInfo {
   /** 引擎部署地域信息 */
@@ -2858,6 +2866,18 @@ declare interface DescribeCloudNativeAPIGatewayConfigResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCloudNativeAPIGatewayInfoByIpRequest {
+  /** 云原生网关的公网ip */
+  PublicNetworkIP: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayInfoByIpResponse {
+  /** 出参 */
+  Result?: DescribeInstanceInfoByIpResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCloudNativeAPIGatewayNodesRequest {
   /** 云原生API网关实例ID。 */
   GatewayId: string;
@@ -4286,6 +4306,8 @@ declare interface Tse {
   DescribeCloudNativeAPIGatewayCertificates(data: DescribeCloudNativeAPIGatewayCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayCertificatesResponse>;
   /** 获取云原生API网关实例网络配置信息 {@link DescribeCloudNativeAPIGatewayConfigRequest} {@link DescribeCloudNativeAPIGatewayConfigResponse} */
   DescribeCloudNativeAPIGatewayConfig(data: DescribeCloudNativeAPIGatewayConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayConfigResponse>;
+  /** 根据公网IP查询云原生网关实例信息 {@link DescribeCloudNativeAPIGatewayInfoByIpRequest} {@link DescribeCloudNativeAPIGatewayInfoByIpResponse} */
+  DescribeCloudNativeAPIGatewayInfoByIp(data: DescribeCloudNativeAPIGatewayInfoByIpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayInfoByIpResponse>;
   /** 获取云原生网关节点列表 {@link DescribeCloudNativeAPIGatewayNodesRequest} {@link DescribeCloudNativeAPIGatewayNodesResponse} */
   DescribeCloudNativeAPIGatewayNodes(data: DescribeCloudNativeAPIGatewayNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayNodesResponse>;
   /** 获取云原生API网关实例端口信息 {@link DescribeCloudNativeAPIGatewayPortsRequest} {@link DescribeCloudNativeAPIGatewayPortsResponse} */

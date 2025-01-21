@@ -44,6 +44,8 @@ declare interface AgentConfig {
   TurnDetectionMode?: number;
   /** 是否过滤掉用户只说了一个字的句子，true表示过滤，false表示不过滤，默认值为true */
   FilterOneWord?: boolean;
+  /** 欢迎消息优先级，0默认，1高优，高优不能被打断。 */
+  WelcomeMessagePriority?: number;
 }
 
 /** 转推服务加入TRTC房间的机器人参数。 */
