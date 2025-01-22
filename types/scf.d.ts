@@ -1272,7 +1272,7 @@ declare interface GetFunctionResponse {
   Role?: string;
   /** 是否自动安装依赖 */
   InstallDependency?: string;
-  /** 函数状态，状态值及流转[参考说明](https://cloud.tencent.com/document/product/583/47175) */
+  /** 函数状态，状态值及流转[参考说明](https://cloud.tencent.com/document/product/583/115197) */
   Status?: string;
   /** 状态描述 */
   StatusDesc?: string;
@@ -1354,7 +1354,7 @@ declare interface GetLayerVersionResponse {
   LayerVersion?: number;
   /** 层名称 */
   LayerName?: string;
-  /** 层的具体版本当前状态，状态值[参考此处](https://cloud.tencent.com/document/product/583/47175) */
+  /** 层的具体版本当前状态，状态值[参考此处](https://cloud.tencent.com/document/product/583/115197) */
   Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

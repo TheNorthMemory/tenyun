@@ -1146,66 +1146,6 @@ declare interface AssetWebServiceBaseInfo {
   MachineExtraInfo?: MachineExtraInfo;
 }
 
-/** 攻击溯源 */
-declare interface AttackSource {
-  /** 攻击溯源节点描述 */
-  Nodes?: AttackSourceNode[];
-  /** 攻击溯源节点路径 */
-  Edges?: AttackSourceEdge[];
-  /** 请求节点相关事件详情的参数 */
-  EventInfoParam?: string;
-}
-
-/** 攻击溯源路线描述 */
-declare interface AttackSourceEdge {
-  /** 出发节点 */
-  From?: string;
-  /** 目标节点 */
-  To?: string;
-}
-
-/** 攻击溯源事件 */
-declare interface AttackSourceEvent {
-  /** 事件类型：0：文件查杀，1：异常登录， 2：密码破解，3：恶意请求，4：高危命令 */
-  EventType?: number;
-  /** 【文件查杀】病毒名 VirusName、文件名 FileName、文件路径 FilePath、文件大小 FileSize、文件MD5 MD5、首次发现时间 CreateTime、最近检测时间LatestScanTime、危害描述 HarmDescribe、修复建议SuggestScheme【异常登录】来源IP SrcIp、来源地 Location、登录用户名 UserName、登录时间 LoginTime【密码破解】来源IP SrcIp、来源地 City,Country 、协议 Protocol、登录用户名UserName 、端口 Port、尝试次数 Count、首次攻击时间 CreateTime、最近攻击时间 ModifyTime【恶意请求】恶意请求域名 Url、进程ProcessName 、MD5 ProcessMd5、PID Pid、请求次数 AccessCount、最近请求时间 MergeTime、危害描述 HarmDescribe、修复建议SuggestScheme【高危命令】命中规则名 RuleName、规则类别 RuleCategory、命令内容 BashCmd、数据来源 DetectBy、登录用户 User、PID Pid、发生时间 CreateTime 、危害描述 HarmDescribe、修复建议SuggestScheme */
-  Content?: string;
-  /** 入侵时间 */
-  CreatedTime?: string;
-  /** 等级 事件统一等级 0：提示，1：低危, 2：中危, 3：高危, 4：严重 */
-  Level?: number;
-  /** 等级中文展示字符串 */
-  LevelZh?: string;
-  /** 事件id */
-  Id?: number;
-  /** 主机uuid */
-  Uuid?: string;
-}
-
-/** 攻击溯源节点 */
-declare interface AttackSourceNode {
-  /** 事件ID，为空的时候表示没有对应事件 */
-  EventId?: number;
-  /** BRUTEFORCE:密码破解、MALWARE:木马、BASH:高危命令、RISK_DNS:恶意请求、LOGIN:异地登录、HOST:主机节点, TIME_ORDER：通用节点 */
-  EventType?: string;
-  /** 节点ip 当节点为HOST时 */
-  Ip?: string;
-  /** 等级 0：提示，1：低危, 2：中危, 3：高危, 4：严重 */
-  Level?: number;
-  /** 节点ID */
-  NodeId?: string;
-  /** 开始时间 */
-  StartTime?: string;
-  /** 结束时间 */
-  EndTime?: string;
-  /** 通用节点的描述 */
-  NodeDesc?: string;
-  /** 时间线编号，同一个编号的节点属于同一个时间线 */
-  TimeLineNum?: number;
-  /** 节点详情 */
-  NodeDetail?: string;
-}
-
 /** 阻断白名单规则 */
 declare interface BanWhiteList {
   /** 白名单ID。 */
@@ -7876,46 +7816,6 @@ declare interface DescribeAttackLogsResponse {
   AttackLogs?: DefendAttackLog[] | null;
   /** 总条数 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeAttackSourceEventsRequest {
-  /** 主机uuid */
-  Uuid: string;
-  /** 开始日期 */
-  BeginDate: string;
-  /** 结束日期 */
-  EndDate: string;
-  /** 接口DescribeAttackSource 返回的EventInfoParam */
-  EventInfoParam: string;
-  /** 限制分页条数默认10 */
-  Limit?: number;
-  /** 起始步长默认0 */
-  Offset?: number;
-}
-
-declare interface DescribeAttackSourceEventsResponse {
-  /** 总条数 */
-  TotalCount: number;
-  /** 攻击溯源事件列表 */
-  List: AttackSourceEvent[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeAttackSourceRequest {
-  /** 主机uuid */
-  Uuid: string;
-  /** 开始日期 */
-  BeginDate: string;
-  /** 结束日期 */
-  EndDate: string;
-}
-
-declare interface DescribeAttackSourceResponse {
-  /** 攻击溯源数据 */
-  AttackSource: AttackSource;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -15207,10 +15107,6 @@ declare interface Cwp {
   DescribeAttackEvents(data?: DescribeAttackEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackEventsResponse>;
   /** @deprecated 网络攻击日志列表(待下线,请使用DescribeAttackEvents代替) {@link DescribeAttackLogsRequest} {@link DescribeAttackLogsResponse} */
   DescribeAttackLogs(data?: DescribeAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackLogsResponse>;
-  /** @deprecated 查询攻击溯源 {@link DescribeAttackSourceRequest} {@link DescribeAttackSourceResponse} */
-  DescribeAttackSource(data: DescribeAttackSourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackSourceResponse>;
-  /** @deprecated 查询攻击溯源事件 {@link DescribeAttackSourceEventsRequest} {@link DescribeAttackSourceEventsResponse} */
-  DescribeAttackSourceEvents(data: DescribeAttackSourceEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackSourceEventsResponse>;
   /** 网络攻击数据统计 {@link DescribeAttackStatisticsRequest} {@link DescribeAttackStatisticsResponse} */
   DescribeAttackStatistics(data?: DescribeAttackStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackStatisticsResponse>;
   /** 网络攻击top数据列表 {@link DescribeAttackTopRequest} {@link DescribeAttackTopResponse} */

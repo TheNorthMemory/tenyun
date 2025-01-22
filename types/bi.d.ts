@@ -130,6 +130,8 @@ declare interface DatasourceInfo {
   ClusterId?: string | null;
   /** 数据源名称 */
   DbTypeName?: string | null;
+  /** 开启vpc */
+  UseVPC?: boolean | null;
 }
 
 /** 数据源详情列表 */
@@ -611,6 +613,10 @@ declare interface CreateDatasourceRequest {
   VpcId?: string;
   /** 操作权限限制 */
   OperationAuthLimit?: string[];
+  /** 开启vpc */
+  UseVPC?: boolean;
+  /** 地域 */
+  RegionId?: string;
 }
 
 declare interface CreateDatasourceResponse {
@@ -1127,6 +1133,10 @@ declare interface ModifyDatasourceRequest {
   Vport?: string;
   /** 腾讯云私有网络标识 */
   VpcId?: string;
+  /** 开启vpc */
+  UseVPC?: boolean;
+  /** 地域 */
+  RegionId?: string;
 }
 
 declare interface ModifyDatasourceResponse {
@@ -1223,6 +1233,12 @@ declare interface ModifyUserRoleRequest {
   AppUserId?: string;
   /** 是否开启手机验证码登录（0 关闭，1 开启） */
   LoginSecurityStatus?: number;
+  /** 是否开启密码过期提醒（0 关闭，1 开启 */
+  ResetPassWordTip?: number;
+  /** 强制修改密码（0 关闭，1 开启） */
+  ForceResetPassWord?: number;
+  /** 密码过期提醒时间，30、60、90（默认）、180天 */
+  PasswordExpired?: number;
 }
 
 declare interface ModifyUserRoleResponse {

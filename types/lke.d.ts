@@ -2,6 +2,86 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 思考事件过程信息 */
+declare interface AgentProcedure {
+  /** 索引 */
+  Index?: number | null;
+  /** 执行过程英语名 */
+  Name?: string | null;
+  /** 中文名, 用于展示 */
+  Title?: string | null;
+  /** 状态常量: 使用中: processing, 成功: success, 失败: failed */
+  Status?: string | null;
+  /** 图标 */
+  Icon?: string | null;
+  /** Agent调试信息 */
+  Debugging?: AgentProcedureDebugging | null;
+  /** 是否切换Agent，取值为"main"或者"workflow",不切换为空 */
+  Switch?: string | null;
+  /** 工作流名称 */
+  WorkflowName?: string | null;
+  /** 当前请求执行时间, 单位 ms */
+  Elapsed?: number | null;
+}
+
+/** Agent思考过程调试信息 */
+declare interface AgentProcedureDebugging {
+  /** 模型思考内容 */
+  Content?: string | null;
+  /** 展示的具体文本内容 */
+  DisplayContent?: string | null;
+  /** 展示类型 */
+  DisplayType?: number | null;
+  /** 搜索引擎展示的索引 */
+  QuoteInfos?: QuoteInfo[] | null;
+  /** 具体的参考来源 */
+  References?: AgentReference[] | null;
+}
+
+/** Agent中的参考来源 */
+declare interface AgentReference {
+  /** 来源文档ID */
+  DocId?: string | null;
+  /** id */
+  Id?: string | null;
+  /** 名称 */
+  Name?: string | null;
+  /** 类型 */
+  Type?: number | null;
+  /** 链接 */
+  Url?: string | null;
+  /** 文档业务ID */
+  DocBizId?: string | null;
+  /** 文档名称 */
+  DocName?: string | null;
+  /** 问答业务ID */
+  QaBizId?: string | null;
+  /** 搜索引擎索引 */
+  Index?: number | null;
+  /** 标题 */
+  Title?: string | null;
+}
+
+/** Agent的思考过程 */
+declare interface AgentThought {
+  /** 会话 ID */
+  SessionId?: string | null;
+  /** 请求 ID */
+  RequestId?: string | null;
+  /** 对应哪条会话, 会话 ID, 用于回答的消息存储使用, 可提前生成, 保存消息时使用 */
+  RecordId?: string | null;
+  /** 当前请求执行时间, 单位 ms */
+  Elapsed?: number | null;
+  /** 当前是否为工作流 */
+  IsWorkflow?: boolean | null;
+  /** 如果当前是工作流，工作流名称 */
+  WorkflowName?: string | null;
+  /** 具体思考过程详情 */
+  Procedures?: AgentProcedure[] | null;
+  /** TraceId */
+  TraceId?: string | null;
+}
+
 /** 自定义变量和标签关系数据 */
 declare interface ApiVarAttrInfo {
   /** 自定义变量id */
@@ -44,8 +124,12 @@ declare interface AppInfo {
   Operator?: string | null;
   /** 模型名称 */
   ModelName?: string | null;
-  /** 模型别名 */
+  /** 生成模型别名 */
   ModelAliasName?: string | null;
+  /** 应用模式 standard:标准模式, agent: agent模式，single_workflow：单工作流模式 */
+  Pattern?: string | null;
+  /** 思考模型别名 */
+  ThoughtModelAliasName?: string | null;
 }
 
 /** 应用模型配置 */
@@ -66,6 +150,10 @@ declare interface AppModel {
   HistoryLimit?: number | null;
   /** 使用类型 */
   UsageType?: string | null;
+  /** 模型温度 */
+  Temperature?: string | null;
+  /** 模型TopP */
+  TopP?: string | null;
 }
 
 /** 标签详情信息 */
@@ -410,7 +498,7 @@ declare interface KnowledgeQaConfig {
   Greeting?: string | null;
   /** 角色描述，300字符以内 */
   RoleDescription?: string | null;
-  /** 模型配置 */
+  /** 生成模型配置 */
   Model?: AppModel | null;
   /** 知识搜索配置 */
   Search?: KnowledgeQaSearch[] | null;
@@ -420,6 +508,16 @@ declare interface KnowledgeQaConfig {
   Workflow?: KnowledgeWorkflow | null;
   /** 检索范围 */
   SearchRange?: SearchRange | null;
+  /** 应用模式，standard:标准模式, agent: agent模式，single_workflow：单工作流模式 */
+  Pattern?: string | null;
+  /** 检索策略 */
+  SearchStrategy?: SearchStrategy | null;
+  /** 单工作流ID，Pattern为single_workflow时传入 */
+  SingleWorkflow?: KnowledgeQaSingleWorkflow | null;
+  /** 应用关联插件 */
+  Plugins?: KnowledgeQaPlugin[] | null;
+  /** 思考模型配置 */
+  ThoughtModel?: AppModel | null;
 }
 
 /** 应用管理输出配置 */
@@ -438,6 +536,26 @@ declare interface KnowledgeQaOutput {
   QuestionClarifyKeywords?: string[] | null;
   /** 是否打开推荐问题开关 */
   UseRecommended?: boolean | null;
+}
+
+/** 应用关联插件信息 */
+declare interface KnowledgeQaPlugin {
+  /** 插件ID */
+  PluginId?: string | null;
+  /** 插件名称 */
+  PluginName?: string;
+  /** 插件图标 */
+  PluginIcon?: string;
+  /** 工具ID */
+  ToolId?: string;
+  /** 工具名称 */
+  ToolName?: string;
+  /** 工具描述 */
+  ToolDesc?: string;
+  /** 工具输入参数 */
+  Inputs?: PluginToolReqParam[];
+  /** 插件是否和知识库绑定 */
+  IsBindingKnowledge?: boolean;
 }
 
 /** 检索配置 */
@@ -462,6 +580,20 @@ declare interface KnowledgeQaSearch {
   ResourceStatus?: number | null;
 }
 
+/** 问答知识库单工作流模式下指定单工作流配置 */
+declare interface KnowledgeQaSingleWorkflow {
+  /** 工作流ID */
+  WorkflowId?: string;
+  /** 工作流名称 */
+  WorkflowName?: string;
+  /** 工作流描述 */
+  WorkflowDesc?: string;
+  /** 工作流状态，发布状态(UNPUBLISHED: 待发布 PUBLISHING: 发布中 PUBLISHED: 已发布 FAIL:发布失败) */
+  Status?: string;
+  /** 工作流是否启用 */
+  IsEnable?: boolean;
+}
+
 /** 检索知识 */
 declare interface KnowledgeSummary {
   /** 1是问答 2是文档片段 */
@@ -474,6 +606,8 @@ declare interface KnowledgeSummary {
 declare interface KnowledgeWorkflow {
   /** 是否启用工作流 */
   IsEnabled?: boolean | null;
+  /** 是否启用PDL */
+  UsePdl?: boolean | null;
 }
 
 /** 标签ID */
@@ -500,6 +634,8 @@ declare interface ListDocItem {
   DocBizId?: string | null;
   /** 文件名称 */
   FileName?: string | null;
+  /** 重命名的新文档名称，在重命名提交之后，文档发布之前都是这个名称 */
+  NewName?: string;
   /** 文件类型 */
   FileType?: string | null;
   /** cos路径 */
@@ -598,6 +734,8 @@ declare interface ListQaItem {
   AttrLabels?: AttrLabel[];
   /** 相似问个数 */
   SimilarQuestionNum?: number;
+  /** 返回问答关联的相似问,联动搜索,仅展示一条 */
+  SimilarQuestionTips?: string;
 }
 
 /** 发布列表详情 */
@@ -722,6 +860,8 @@ declare interface MsgRecord {
   FileInfos?: FileInfo[] | null;
   /** 参考来源引用位置信息 */
   QuoteInfos?: QuoteInfo[] | null;
+  /** Agent的思考过程信息 */
+  AgentThought?: AgentThought | null;
 }
 
 /** 聊天详情Refer */
@@ -748,6 +888,22 @@ declare interface Option {
   CharSize?: string | null;
   /** 文件类型 */
   FileType?: string | null;
+}
+
+/** 插件参数请求结构 */
+declare interface PluginToolReqParam {
+  /** 参数名称 */
+  Name?: string;
+  /** 参数描述 */
+  Desc?: string;
+  /** 参数类型，0:string, 1:int, 2:float，3:bool 4:object 5:array_string, 6:array_int, 7:array_float, 8:array_bool, 9:array_object */
+  Type?: number;
+  /** 参数是否必填 */
+  IsRequired?: boolean;
+  /** 参数默认值 */
+  DefaultValue?: string;
+  /** 子参数,ParamType 是OBJECT 或 ARRAY<>类型有用 */
+  SubParams?: PluginToolReqParam[];
 }
 
 /** 文本的坐标，以四个顶点坐标表示注意：此字段可能返回 null，表示取不到有效值 */
@@ -976,7 +1132,7 @@ declare interface ReleaseQA {
   Action?: number;
   /** 状态描述 */
   ActionDesc?: string;
-  /** 来源 */
+  /** 来源1:文档生成，2：批量导入，3：手动添加 */
   Source?: number;
   /** 来源描述 */
   SourceDesc?: string;
@@ -1028,6 +1184,14 @@ declare interface SearchRange {
   Condition?: string | null;
   /** 自定义变量和标签关系数据 */
   ApiVarAttrInfos?: ApiVarAttrInfo[] | null;
+}
+
+/** 知识库检索策略 */
+declare interface SearchStrategy {
+  /** 检索策略类型 0:混合检索，1：语义检索 */
+  StrategyType?: number | null;
+  /** Excel检索增强开关 */
+  TableEnhancement?: boolean | null;
 }
 
 /** 相似问信息 */
@@ -2290,7 +2454,7 @@ declare interface GetDocPreviewRequest {
 }
 
 declare interface GetDocPreviewResponse {
-  /** 文件名 */
+  /** 文件名, 发布端固定使用这个名称 */
   FileName?: string;
   /** 文件类型 */
   FileType?: string;
@@ -2300,6 +2464,8 @@ declare interface GetDocPreviewResponse {
   Url?: string;
   /** cos桶 */
   Bucket?: string;
+  /** 存在文档重命名情况下的新名称, 评测端优先使用这个名称 */
+  NewName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2427,17 +2593,21 @@ declare interface GetWsTokenRequest {
   BotAppKey?: string;
   /** 访客ID（外部输入，建议唯一，标识当前接入会话的用户） */
   VisitorBizId?: string;
-  /** 知识标签（用于知识库中知识的检索过滤） */
+  /** 知识标签，用于知识库中知识的检索过滤。该字段即将下线，请使用对话端接口中的 custom_variables 字段替代该字段。 */
   VisitorLabels?: GetWsTokenReq_Label[];
 }
 
 declare interface GetWsTokenResponse {
-  /** token值（有效期60s） */
+  /** token值（有效期60s，仅一次有效，多次校验会报错） */
   Token?: string;
   /** 余额; 余额大于 0 时表示有效 */
   Balance?: number | null;
   /** 对话窗输入字符限制 */
   InputLenLimit?: number;
+  /** 应用模式，standard:标准模式, agent: agent模式，single_workflow：单工作流模式 */
+  Pattern?: string;
+  /** SingleWorkflow */
+  SingleWorkflow?: KnowledgeQaSingleWorkflow;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2615,6 +2785,10 @@ declare interface ListDocResponse {
 declare interface ListModelRequest {
   /** 应用类型；knowledge_qa-知识问答管理；summary-知识摘要；classifys-知识标签提取 */
   AppType: string;
+  /** 应用模式 standard:标准模式, agent: agent模式，single_workflow：单工作流模式 */
+  Pattern?: string;
+  /** 模型类别 generate：生成模型，thought：思考模型 */
+  ModelCategory?: string;
   /** 登录用户主账号(集成商模式必填) */
   LoginUin?: string;
   /** 登录用户子账号(集成商模式必填) */

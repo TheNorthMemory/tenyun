@@ -357,7 +357,7 @@ declare interface DMSTableInfo {
 /** DataEngine基本信息 */
 declare interface DataEngineBasicInfo {
   /** DataEngine名称 */
-  DataEngineName: string;
+  DataEngineName?: string;
   /** 数据引擎状态 -2已删除 -1失败 0初始化中 1挂起 2运行中 3准备删除 4删除中 */
   State?: number;
   /** 创建时间 */
@@ -811,11 +811,11 @@ declare interface HiveInfo {
 /** 集群事件日志 */
 declare interface HouseEventsInfo {
   /** 事件时间 */
-  Time: string[] | null;
+  Time?: string[] | null;
   /** 事件类型 */
-  EventsAction: string[] | null;
+  EventsAction?: string[] | null;
   /** 集群信息 */
-  ClusterInfo: string[] | null;
+  ClusterInfo?: string[] | null;
 }
 
 /** ip端口对信息 */
@@ -829,13 +829,13 @@ declare interface IpPortPair {
 /** 日志详情 */
 declare interface JobLogResult {
   /** 日志时间戳，毫秒 */
-  Time: number | null;
+  Time?: number | null;
   /** 日志topic id */
-  TopicId: string | null;
+  TopicId?: string | null;
   /** 日志topic name */
-  TopicName: string | null;
+  TopicName?: string | null;
   /** 日志内容，json字符串 */
-  LogJson: string | null;
+  LogJson?: string | null;
   /** 日志ID */
   PkgLogId?: string | null;
 }
@@ -1233,17 +1233,17 @@ declare interface Property {
 /** python-spark镜像信息。 */
 declare interface PythonSparkImage {
   /** spark镜像唯一id */
-  SparkImageId: string;
+  SparkImageId?: string;
   /** 集群小版本镜像id */
-  ChildImageVersionId: string;
+  ChildImageVersionId?: string;
   /** spark镜像名称 */
-  SparkImageVersion: string;
+  SparkImageVersion?: string;
   /** spark镜像描述信息 */
-  Description: string | null;
+  Description?: string | null;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** ResourceInfo */
@@ -1275,17 +1275,17 @@ declare interface SQLTask {
 /** script实例。 */
 declare interface Script {
   /** 脚本Id，长度36字节。 */
-  ScriptId: string | null;
+  ScriptId?: string | null;
   /** 脚本名称，长度0-25。 */
-  ScriptName: string | null;
+  ScriptName?: string | null;
   /** 脚本描述，长度0-50。 */
-  ScriptDesc: string | null;
+  ScriptDesc?: string | null;
   /** 默认关联数据库。 */
-  DatabaseName: string | null;
+  DatabaseName?: string | null;
   /** SQL描述，长度0-10000。 */
-  SQLStatement: string | null;
+  SQLStatement?: string | null;
   /** 更新时间戳， 单位：ms。 */
-  UpdateTime: number | null;
+  UpdateTime?: number | null;
 }
 
 /** Spark批作业集群Session资源配置模板； */
@@ -1592,11 +1592,11 @@ declare interface TPartition {
   Type?: string;
   /** 字段描述 */
   Comment?: string;
-  /** 分区类型 */
+  /** 分区类型（已废弃） */
   PartitionType?: string;
-  /** 分区格式 */
+  /** 分区格式（已废弃） */
   PartitionFormat?: string;
-  /** 分区分隔数 */
+  /** 分区分隔数（已废弃） */
   PartitionDot?: number;
   /** 分区转换策略 */
   Transform?: string;
@@ -1975,15 +1975,15 @@ declare interface ViewBaseInfo {
 /** 查询视图信息对象 */
 declare interface ViewResponseInfo {
   /** 视图基本信息。 */
-  ViewBaseInfo: ViewBaseInfo;
+  ViewBaseInfo?: ViewBaseInfo;
   /** 视图列信息。 */
-  Columns: Column[] | null;
+  Columns?: Column[] | null;
   /** 视图属性信息。 */
-  Properties: Property[] | null;
+  Properties?: Property[] | null;
   /** 视图创建时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 视图更新时间。 */
-  ModifiedTime: string;
+  ModifiedTime?: string;
 }
 
 /** VPC子网信息 */
@@ -2039,35 +2039,35 @@ declare interface WorkGroupIdSetOfUserId {
 /** 工作组信息 */
 declare interface WorkGroupInfo {
   /** 查询到的工作组唯一Id */
-  WorkGroupId: number;
+  WorkGroupId?: number;
   /** 工作组名称 */
-  WorkGroupName: string;
+  WorkGroupName?: string;
   /** 工作组描述 */
-  WorkGroupDescription: string | null;
+  WorkGroupDescription?: string | null;
   /** 工作组关联的用户数量 */
-  UserNum: number;
+  UserNum?: number;
   /** 工作组关联的用户集合 */
-  UserSet: UserMessage[] | null;
+  UserSet?: UserMessage[] | null;
   /** 工作组绑定的权限集合 */
-  PolicySet: Policy[] | null;
+  PolicySet?: Policy[] | null;
   /** 工作组的创建人 */
-  Creator: string;
+  Creator?: string;
   /** 工作组的创建时间，形如2021-07-28 16:19:32 */
-  CreateTime: string;
+  CreateTime?: string;
 }
 
 /** 工作组部分信息 */
 declare interface WorkGroupMessage {
   /** 工作组唯一Id */
-  WorkGroupId: number;
+  WorkGroupId?: number;
   /** 工作组名称 */
-  WorkGroupName: string;
+  WorkGroupName?: string;
   /** 工作组描述 */
-  WorkGroupDescription: string | null;
+  WorkGroupDescription?: string | null;
   /** 创建者 */
-  Creator: string;
+  Creator?: string;
   /** 工作组创建的时间，形如2021-07-28 16:19:32 */
-  CreateTime: string;
+  CreateTime?: string;
 }
 
 /** 工作组集合 */
@@ -2347,9 +2347,9 @@ declare interface CheckLockMetaDataRequest {
 
 declare interface CheckLockMetaDataResponse {
   /** 锁ID */
-  LockId: number;
+  LockId?: number;
   /** 锁状态：ACQUIRED、WAITING、ABORT、NOT_ACQUIRED */
-  LockState: string;
+  LockState?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2569,7 +2569,7 @@ declare interface CreateInternalTableRequest {
 
 declare interface CreateInternalTableResponse {
   /** 创建托管存储内表sql语句描述 */
-  Execution: string;
+  Execution?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4191,7 +4191,7 @@ declare interface DescribeWorkGroupInfoRequest {
 
 declare interface DescribeWorkGroupInfoResponse {
   /** 工作组详细信息 */
-  WorkGroupInfo: WorkGroupDetailInfo | null;
+  WorkGroupInfo?: WorkGroupDetailInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4407,9 +4407,9 @@ declare interface LockMetaDataRequest {
 
 declare interface LockMetaDataResponse {
   /** 锁id */
-  LockId: number;
+  LockId?: number;
   /** 锁状态：ACQUIRED、WAITING、ABORT、NOT_ACQUIRED */
-  LockState: string;
+  LockState?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

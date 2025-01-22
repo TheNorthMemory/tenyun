@@ -10,6 +10,26 @@ declare interface Filter {
   Name?: string;
 }
 
+/** 旁路kafka配置 */
+declare interface Kafka {
+  /** 1：开启0：关闭 */
+  EnableKafka?: number;
+  /** host地址 */
+  KafkaHost?: string;
+  /** topic */
+  KafkaTopic?: string;
+  /** 版本 */
+  KafkaVersion?: string;
+  /** username */
+  SaslUserName?: string;
+  /** password */
+  SaslPassword?: string;
+  /** ssl */
+  SaslMechanism?: string;
+  /** 默认算子id为0新增算子一旦算子新增成功会返回正确的算子id值 */
+  SinkId?: number;
+}
+
 /** 项目接口限制类型 */
 declare interface ProjectLimit {
   /** 接口 */
@@ -27,15 +47,15 @@ declare interface ProjectLimit {
 /** 发布文件列表(SOURCEMAP) */
 declare interface ReleaseFile {
   /** 文件版本 */
-  Version: string;
+  Version?: string;
   /** 文件唯一 key */
-  FileKey: string;
+  FileKey?: string;
   /** 文件名 */
-  FileName: string;
+  FileName?: string;
   /** 文件哈希值 */
-  FileHash: string;
+  FileHash?: string;
   /** 文件 id */
-  ID: number | null;
+  ID?: number;
 }
 
 /** Rum片区信息 */
@@ -59,79 +79,81 @@ declare interface RumAreaInfo {
 /** Rum实例信息 */
 declare interface RumInstanceInfo {
   /** 实例状态(1=创建中，2=运行中，3=异常，4=重启中，5=停止中，6=已停止，7=已删除) */
-  InstanceStatus: number;
+  InstanceStatus?: number;
   /** 片区Id */
-  AreaId: number;
+  AreaId?: number;
   /** 标签列表 */
-  Tags: Tag[];
+  Tags?: Tag[];
   /** 实例Id */
-  InstanceId: string;
+  InstanceId?: string;
   /** 集群Id */
-  ClusterId: number;
+  ClusterId?: number;
   /** 实例描述 */
-  InstanceDesc: string;
+  InstanceDesc?: string;
   /** 计费状态(1=使用中，2=已过期，3=已销毁，4=分配中，5=分配失败) */
-  ChargeStatus: number;
+  ChargeStatus?: number;
   /** 计费类型(1=免费版，2=预付费，3=后付费) */
-  ChargeType: number;
+  ChargeType?: number;
   /** 更新时间 */
-  UpdatedAt: string;
+  UpdatedAt?: string;
   /** 数据保留时间(天) */
-  DataRetentionDays: number;
+  DataRetentionDays?: number;
   /** 实例名称 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 创建时间 */
-  CreatedAt: string;
+  CreatedAt?: string;
   /** 实例类型 1:原web相关类型 2:app端类型 */
-  InstanceType?: number | null;
+  InstanceType?: number;
 }
 
 /** Rum 项目信息 */
 declare interface RumProject {
   /** 项目名 */
-  Name: string;
+  Name?: string;
   /** 创建者 id */
-  Creator: string;
+  Creator?: string;
   /** 实例 id */
-  InstanceID: string;
+  InstanceID?: string;
   /** 项目类型 */
-  Type: string;
+  Type?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 项目仓库地址 */
-  Repo: string | null;
+  Repo?: string;
   /** 项目网址地址 */
-  URL: string | null;
+  URL?: string;
   /** 项目采样频率 */
-  Rate: string;
+  Rate?: string;
   /** 项目唯一key（长度 12 位） */
-  Key: string;
+  Key?: string;
   /** 是否开启url聚类 */
-  EnableURLGroup: number;
+  EnableURLGroup?: number;
   /** 实例名 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 项目 ID */
-  ID: number;
+  ID?: number;
   /** 实例 key */
-  InstanceKey: string;
+  InstanceKey?: string;
   /** 项目描述 */
-  Desc: string | null;
+  Desc?: string;
   /** 是否星标 1:是 0:否 */
-  IsStar: number | null;
+  IsStar?: number;
   /** 项目状态(1 创建中，2 运行中，3 异常，4 重启中，5 停止中，6 已停止， 7 销毁中，8 已销毁) */
-  ProjectStatus: number | null;
+  ProjectStatus?: number;
   /** 日志接入点，用户忽略。 */
-  AccessPoint?: string | null;
+  AccessPoint?: string;
+  /** kafka旁路配置信息 */
+  Kafka?: Kafka;
 }
 
 /** rum 日志对象 */
 declare interface RumPvInfo {
   /** 项目ID */
-  ProjectId: number;
+  ProjectId?: number;
   /** pv访问量 */
-  Pv: string | null;
+  Pv?: string;
   /** 时间 */
-  CreateTime: string;
+  CreateTime?: string;
 }
 
 /** RumUv 访问量 */
@@ -199,21 +221,21 @@ declare interface Tag {
 /** 白名单 */
 declare interface Whitelist {
   /** 备注 */
-  Remark: string;
+  Remark?: string;
   /** 实例ID */
-  InstanceID: string;
+  InstanceID?: string;
   /** 截止时间 */
-  Ttl: string;
+  Ttl?: string;
   /** 白名单自增ID */
-  ID: string;
+  ID?: string;
   /** 业务唯一标识 */
-  WhitelistUin: string;
+  WhitelistUin?: string;
   /** 创建者ID */
-  CreateUser: string;
+  CreateUser?: string;
   /** aid标识 */
-  Aid: string;
+  Aid?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
 }
 
 declare interface CreateProjectRequest {
@@ -302,8 +324,8 @@ declare interface CreateTawInstanceRequest {
 declare interface CreateTawInstanceResponse {
   /** 实例Id */
   InstanceId?: string;
-  /** 预付费订单 id */
-  DealName?: string | null;
+  /** 预付费订单 ，预付费不为null，后付费为null */
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -363,15 +385,15 @@ declare interface DeleteReleaseFileResponse {
 }
 
 declare interface DeleteStarProjectRequest {
-  /** 实例ID：taw-123 */
+  /** 实例ID：****-1792 */
   InstanceID: string;
   /** 项目ID */
   ID: number;
 }
 
 declare interface DeleteStarProjectResponse {
-  /** 返回消息 */
-  Msg?: string | null;
+  /** 返回消息,请求成功才会返回，出现异常默认为null */
+  Msg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1403,7 +1425,7 @@ declare interface DescribePvListRequest {
 
 declare interface DescribePvListResponse {
   /** pv列表 */
-  ProjectPvSet?: RumPvInfo[] | null;
+  ProjectPvSet?: RumPvInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1687,7 +1709,7 @@ declare interface ModifyProjectLimitRequest {
 
 declare interface ModifyProjectLimitResponse {
   /** 返回信息 */
-  Msg?: string | null;
+  Msg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

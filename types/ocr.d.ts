@@ -754,6 +754,16 @@ declare interface FlightItemInfo {
   Allow?: string;
 }
 
+/** 通用卡证鉴伪告警信息 */
+declare interface GeneralCardWarnInfo {
+  /** 是否存在该告警 */
+  IsWarn?: boolean;
+  /** 风险程度 */
+  RiskConfidence?: number;
+  /** 告警位置四点坐标 */
+  Polygon?: Polygon[];
+}
+
 /** 通用机打发票条目 */
 declare interface GeneralMachineItem {
   /** 项目名称 */
@@ -4242,6 +4252,38 @@ declare interface RecognizeForeignPermanentResidentIdCardResponse {
   RequestId?: string;
 }
 
+declare interface RecognizeGeneralCardWarnRequest {
+  /** 图片链接 */
+  ImageUrl?: string;
+  /** 图片base64 */
+  ImageBase64?: string;
+  /** 卡证类型参数，包含以下范围： default：通用卡证 idcard：身份证 passport：护照 bizlicense：营业执照 regcertificate：登记证书 residpermit：居住证 transpermit：通行证 signboard：门头照 bankcard：银行卡 drivinglicense：驾驶证、行驶证 */
+  CardType?: string;
+  /** 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。 */
+  IsPdf?: boolean;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
+  PdfPageNumber?: number;
+}
+
+declare interface RecognizeGeneralCardWarnResponse {
+  /** 卡证类型参数，包含以下范围： default：通用卡证idcard：身份证 passport：护照 bizlicense：营业执照 regcertificate：登记证书 residpermit：居住证 transpermit：通行证 signboard：门头照 bankcard：银行卡 drivinglicense：驾驶证、行驶证 */
+  CardType?: string;
+  /** 模糊信息 */
+  Blur?: GeneralCardWarnInfo;
+  /** 边框不完整信息 */
+  BorderIncomplete?: GeneralCardWarnInfo;
+  /** 复印件信息 */
+  Copy?: GeneralCardWarnInfo;
+  /** ps篡改信息 */
+  Ps?: GeneralCardWarnInfo;
+  /** 反光信息 */
+  Reflection?: GeneralCardWarnInfo;
+  /** 翻拍件信息 */
+  Reprint?: GeneralCardWarnInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RecognizeGeneralInvoiceRequest {
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 8M。图片下载时间不超过 3 秒。支持的图片像素：单边介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -5313,6 +5355,8 @@ declare interface Ocr {
   RecognizeEncryptedIDCardOCR(data: RecognizeEncryptedIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeEncryptedIDCardOCRResponse>;
   /** 外国人永久居留身份证识别 {@link RecognizeForeignPermanentResidentIdCardRequest} {@link RecognizeForeignPermanentResidentIdCardResponse} */
   RecognizeForeignPermanentResidentIdCard(data?: RecognizeForeignPermanentResidentIdCardRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeForeignPermanentResidentIdCardResponse>;
+  /** 通用卡证鉴伪 {@link RecognizeGeneralCardWarnRequest} {@link RecognizeGeneralCardWarnResponse} */
+  RecognizeGeneralCardWarn(data?: RecognizeGeneralCardWarnRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeGeneralCardWarnResponse>;
   /** 通用票据识别（高级版） {@link RecognizeGeneralInvoiceRequest} {@link RecognizeGeneralInvoiceResponse} */
   RecognizeGeneralInvoice(data?: RecognizeGeneralInvoiceRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeGeneralInvoiceResponse>;
   /** 通用文本图像告警 {@link RecognizeGeneralTextImageWarnRequest} {@link RecognizeGeneralTextImageWarnResponse} */

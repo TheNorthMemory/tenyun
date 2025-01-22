@@ -470,6 +470,10 @@ declare interface TaskListItem {
   VerifyId?: number | null;
   /** 状态类型: 0 -- 无状态，1 -- 成功，2-- 失败，3--终止 */
   TaskStatusType?: number | null;
+  /** 架构ID */
+  ArchId?: string;
+  /** 架构名称 */
+  ArchName?: string;
 }
 
 /** 监控指标 */
@@ -835,6 +839,8 @@ declare interface DescribeTaskListRequest {
   TaskStatusList?: number[];
   /** 架构ID */
   ArchId?: string;
+  /** 架构名称 */
+  ArchName?: string;
 }
 
 declare interface DescribeTaskListResponse {

@@ -23,7 +23,7 @@ declare interface BackUpJobDisplay {
   /** 备份数据量 */
   BackUpSize?: number;
   /** 备份单副本数据量 */
-  BackUpSingleSize?: number | null;
+  BackUpSingleSize?: number;
   /** 实例创建时间 */
   BackUpTime?: string;
   /** 实例过期时间 */
@@ -31,17 +31,19 @@ declare interface BackUpJobDisplay {
   /** 实例状态 */
   JobStatus?: string;
   /** 0为默认。1时是对远端的doris进行备份，不周期，一次性 */
-  BackupType?: number | null;
+  BackupType?: number;
   /** 0为默认。1时是立即备份。2时是迁移 */
-  BackupTimeType?: number | null;
+  BackupTimeType?: number;
   /** 远端doris的连接信息 */
-  DorisSourceInfo?: DorisSourceInfo | null;
+  DorisSourceInfo?: DorisSourceInfo;
   /** 实例状态对应的数值 */
-  JobStatusNum?: number | null;
+  JobStatusNum?: number;
   /** 备份实例中关于cos的信息 */
-  BackupCosInfo?: BackupCosInfo | null;
+  BackupCosInfo?: BackupCosInfo;
   /** 是否使用的自定义桶 */
-  IsUserDefineBucket?: boolean | null;
+  IsUserDefineBucket?: boolean;
+  /** 错误原因 */
+  ErrorReason?: string;
 }
 
 /** 备份实例中关于cos的信息 */
@@ -951,6 +953,8 @@ declare interface CreateInstanceNewRequest {
   EnableMultiZones?: boolean;
   /** 开启多可用区后，用户的所有可用区和子网信息 */
   UserMultiZoneInfos?: NetworkInfo;
+  /** 开启多可用区后，用户的所有可用区和子网信息 */
+  UserMultiZoneInfoArr?: NetworkInfo[];
 }
 
 declare interface CreateInstanceNewResponse {
@@ -1015,9 +1019,9 @@ declare interface DescribeAreaRegionResponse {
   /** 地域列表 */
   Items?: RegionAreaInfo[];
   /** 前端规则描述 */
-  FrontEndRules?: FrontEndRule[] | null;
+  FrontEndRules?: FrontEndRule[];
   /** 返回可用的白名单名称 */
-  AvailableWhiteListNames?: string[] | null;
+  AvailableWhiteListNames?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1031,7 +1035,13 @@ declare interface DescribeBackUpJobDetailRequest {
 
 declare interface DescribeBackUpJobDetailResponse {
   /** 备份表详情 */
-  TableContents: BackupTableContent[] | null;
+  TableContents?: BackupTableContent[];
+  /** 错误信息 */
+  ErrorMsg?: string;
+  /** 是否是未知版本 */
+  IsUnknownVersion?: boolean;
+  /** 返回对象用字符串表示 */
+  Msg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1055,11 +1065,11 @@ declare interface DescribeBackUpJobRequest {
 
 declare interface DescribeBackUpJobResponse {
   /** 任务列表 */
-  BackUpJobs?: BackUpJobDisplay[] | null;
+  BackUpJobs?: BackUpJobDisplay[];
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1089,11 +1099,11 @@ declare interface DescribeBackUpTablesResponse {
   /** 可备份表列表 */
   AvailableTables?: BackupTableContent[];
   /** msg */
-  Msg?: string | null;
+  Msg?: string;
   /** 未知version */
-  IsUnknownVersion?: boolean | null;
+  IsUnknownVersion?: boolean;
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1107,9 +1117,9 @@ declare interface DescribeBackUpTaskDetailRequest {
 
 declare interface DescribeBackUpTaskDetailResponse {
   /** 备份任务进度详情 */
-  BackupStatus: BackupStatus[] | null;
+  BackupStatus?: BackupStatus[];
   /** 错误信息 */
-  ErrorMsg: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1157,7 +1167,7 @@ declare interface DescribeClusterConfigsResponse {
   /** 返回当前内核版本 如果不存在则返回空字符串 */
   BuildVersion?: string;
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 是否包含CN节点 */
   HasCN?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1171,9 +1181,9 @@ declare interface DescribeCoolDownBackendsRequest {
 
 declare interface DescribeCoolDownBackendsResponse {
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 节点信息列表 */
-  List?: CoolDownBackend[] | null;
+  List?: CoolDownBackend[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1185,9 +1195,9 @@ declare interface DescribeCoolDownPoliciesRequest {
 
 declare interface DescribeCoolDownPoliciesResponse {
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 冷热分层策略列表 */
-  List?: CoolDownPolicyInfo[] | null;
+  List?: CoolDownPolicyInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1201,9 +1211,9 @@ declare interface DescribeCoolDownTableDataRequest {
 
 declare interface DescribeCoolDownTableDataResponse {
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 冷热分层Table数据列表 */
-  List?: CoolDownTableDataInfo[] | null;
+  List?: CoolDownTableDataInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1301,15 +1311,15 @@ declare interface DescribeInstanceNodesInfoRequest {
 
 declare interface DescribeInstanceNodesInfoResponse {
   /** Be节点 */
-  BeNodes?: string[] | null;
+  BeNodes?: string[];
   /** Fe节点 */
-  FeNodes?: string[] | null;
+  FeNodes?: string[];
   /** Fe master节点 */
   FeMaster?: string;
   /** Be节点信息 */
-  BeNodeInfos?: NodeInfo[] | null;
+  BeNodeInfos?: NodeInfo[];
   /** Fe节点信息 */
-  FeNodeInfos?: NodeInfo[] | null;
+  FeNodeInfos?: NodeInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1331,7 +1341,7 @@ declare interface DescribeInstanceNodesResponse {
   /** 总数 */
   TotalCount?: number;
   /** 实例节点总数 */
-  InstanceNodesList?: InstanceNode[] | null;
+  InstanceNodesList?: InstanceNode[];
   /** 节点类型 */
   NodeRoles?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1373,7 +1383,7 @@ declare interface DescribeInstanceOperationsResponse {
   /** 操作记录总数 */
   TotalCount?: number;
   /** 操作记录具体数据 */
-  Operations?: InstanceOperation[] | null;
+  Operations?: InstanceOperation[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1399,15 +1409,15 @@ declare interface DescribeInstanceStateResponse {
   /** 集群状态，例如：Serving */
   InstanceState?: string;
   /** 集群操作创建时间 */
-  FlowCreateTime?: string | null;
+  FlowCreateTime?: string;
   /** 集群操作名称 */
-  FlowName?: string | null;
+  FlowName?: string;
   /** 集群操作进度 */
-  FlowProgress?: number | null;
+  FlowProgress?: number;
   /** 集群状态描述，例如：运行中 */
-  InstanceStateDesc?: string | null;
+  InstanceStateDesc?: string;
   /** 集群流程错误信息，例如：“创建失败，资源不足” */
-  FlowMsg?: string | null;
+  FlowMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1419,9 +1429,9 @@ declare interface DescribeInstanceUsedSubnetsRequest {
 
 declare interface DescribeInstanceUsedSubnetsResponse {
   /** 集群使用的vpc信息 */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 集群使用的subnet信息 */
-  UsedSubnets?: string[] | null;
+  UsedSubnets?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1435,7 +1445,7 @@ declare interface DescribeInstancesHealthStateRequest {
 
 declare interface DescribeInstancesHealthStateResponse {
   /** base64编码后的数据，包含了集群的健康信息 */
-  Data?: string | null;
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1471,9 +1481,9 @@ declare interface DescribeRestoreTaskDetailRequest {
 
 declare interface DescribeRestoreTaskDetailResponse {
   /** 恢复任务进度详情 */
-  RestoreStatus: RestoreStatus[] | null;
+  RestoreStatus?: RestoreStatus[];
   /** 错误信息 */
-  ErrorMsg: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

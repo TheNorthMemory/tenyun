@@ -2511,7 +2511,7 @@ declare interface DeleteRabbitMQPermissionRequest {
   InstanceId: string;
   /** 用户名，登录时使用 */
   User: string;
-  /** vhost名 */
+  /** vhost名称 */
   VirtualHost: string;
 }
 
