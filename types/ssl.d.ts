@@ -1270,6 +1270,18 @@ declare interface CheckCertificateDomainVerificationResponse {
   RequestId?: string;
 }
 
+declare interface CheckCertificateExistRequest {
+  /** 证书公钥内容， 包含证书链 */
+  CertificatePublicKey: string;
+}
+
+declare interface CheckCertificateExistResponse {
+  /** 重复的证书ID */
+  RepeatCertId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CommitCertificateInformationRequest {
   /** 证书 ID。 */
   CertificateId: string;
@@ -2657,6 +2669,8 @@ declare interface Ssl {
   CheckCertificateChain(data: CheckCertificateChainRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCertificateChainResponse>;
   /** 检查证书域名验证 {@link CheckCertificateDomainVerificationRequest} {@link CheckCertificateDomainVerificationResponse} */
   CheckCertificateDomainVerification(data: CheckCertificateDomainVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCertificateDomainVerificationResponse>;
+  /** 检测证书内容是否存在 {@link CheckCertificateExistRequest} {@link CheckCertificateExistResponse} */
+  CheckCertificateExist(data: CheckCertificateExistRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCertificateExistResponse>;
   /** 提交证书订单 {@link CommitCertificateInformationRequest} {@link CommitCertificateInformationResponse} */
   CommitCertificateInformation(data: CommitCertificateInformationRequest, config?: AxiosRequestConfig): AxiosPromise<CommitCertificateInformationResponse>;
   /** 主动触发证书验证 {@link CompleteCertificateRequest} {@link CompleteCertificateResponse} */

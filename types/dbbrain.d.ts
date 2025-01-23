@@ -1843,6 +1843,8 @@ declare interface DescribeRedisTopHotKeysRequest {
   InstanceNodeIds?: string[];
   /** top 数目，默认为20，最大值为100。 */
   Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
 }
 
 declare interface DescribeRedisTopHotKeysResponse {

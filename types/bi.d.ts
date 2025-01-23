@@ -261,39 +261,39 @@ declare interface PermissionGroup {
 /** 项目信息描述 */
 declare interface Project {
   /** 项目ID */
-  Id: number;
+  Id?: number;
   /** 项目Logo */
-  Logo: string | null;
+  Logo?: string | null;
   /** 项目名称 */
-  Name: string | null;
+  Name?: string | null;
   /** logo底色 */
-  ColorCode: string | null;
+  ColorCode?: string | null;
   /** 创建人 */
-  CreatedUser: string | null;
+  CreatedUser?: string | null;
   /** 创建时间 */
-  CreatedAt: string | null;
+  CreatedAt?: string | null;
   /** 成员个数 */
-  MemberCount: number | null;
+  MemberCount?: number | null;
   /** 页面个数 */
-  PageCount: number | null;
+  PageCount?: number | null;
   /** 最后修改报表、简报名称 */
-  LastModifyName: string | null;
+  LastModifyName?: string | null;
   /** "" */
-  Source: string | null;
+  Source?: string | null;
   /** "" */
-  Apply: boolean | null;
+  Apply?: boolean | null;
   /** "" */
-  UpdatedUser: string | null;
+  UpdatedUser?: string | null;
   /** "" */
-  UpdatedAt: string | null;
+  UpdatedAt?: string | null;
   /** "" */
-  CorpId: string | null;
+  CorpId?: string | null;
   /** "" */
-  Mark: string | null;
+  Mark?: string | null;
   /** "" */
-  Seed: string | null;
+  Seed?: string | null;
   /** 项目内权限列表 */
-  AuthList: string[] | null;
+  AuthList?: string[] | null;
   /** 默认看板 */
   PanelScope?: string | null;
   /** 是否被托管 */
@@ -970,7 +970,7 @@ declare interface DescribeUserRoleListRequest {
 declare interface DescribeUserRoleListResponse {
   /** 自定义错误信息对象 */
   ErrorInfo?: ErrorInfo | null;
-  /** 扩展 */
+  /** 扩展描述信息(提供更多异常信息,用于辅助判断) */
   Extra?: string | null;
   /** 数据 */
   Data?: UserRoleListData | null;
