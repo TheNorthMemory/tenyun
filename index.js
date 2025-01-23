@@ -243,6 +243,7 @@ export const SERVICE_VERSIONS = {
   tcaplusdb: ['2019-08-23'],
   tcb: ['2018-06-08'],
   tcbr: ['2022-02-17'],
+  tccatalog: ['2024-10-24'],
   tcex: ['2020-07-27'],
   tchd: ['2023-03-06'],
   tci: ['2019-03-18'],

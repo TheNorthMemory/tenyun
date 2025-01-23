@@ -209,6 +209,7 @@ import Tbp, { Versions as TbpVersions } from "./tbp";
 import Tcaplusdb, { Versions as TcaplusdbVersions } from "./tcaplusdb";
 import Tcb, { Versions as TcbVersions } from "./tcb";
 import Tcbr, { Versions as TcbrVersions } from "./tcbr";
+import Tccatalog, { Versions as TccatalogVersions } from "./tccatalog";
 import Tcex, { Versions as TcexVersions } from "./tcex";
 import Tchd, { Versions as TchdVersions } from "./tchd";
 import Tci, { Versions as TciVersions } from "./tci";
@@ -475,6 +476,7 @@ export declare type SERVICE_VERSIONS = {
   tcaplusdb: TcaplusdbVersions,
   tcb: TcbVersions,
   tcbr: TcbrVersions,
+  tccatalog: TccatalogVersions,
   tcex: TcexVersions,
   tchd: TchdVersions,
   tci: TciVersions,
@@ -960,6 +962,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   tcb: Tcb,
   /** {@link Tcbr 云托管 CloudBase Run} */
   tcbr: Tcbr,
+  /** {@link Tccatalog 统一Catalog服务} */
+  tccatalog: Tccatalog,
   /** {@link Tcex 腾讯云释义} */
   tcex: Tcex,
   /** {@link Tchd 腾讯云健康看板} */
