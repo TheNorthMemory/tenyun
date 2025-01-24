@@ -2,6 +2,44 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** AI 通话提取配置项 */
+declare interface AICallExtractConfigElement {
+  /** 配置项类型，包括Text 文本Selector 选项Boolean 布尔值Number 数字 */
+  InfoType: string;
+  /** 配置项名称，不可重复 */
+  InfoName: string;
+  /** 配置项具体内容 */
+  InfoContent?: string;
+  /** 配置项提取内容示例 */
+  Examples?: string[];
+  /** InfoType 为 Selector，需要配置此字段 */
+  Choices?: string[];
+}
+
+/** AI 通话提取结果。 */
+declare interface AICallExtractResultElement {
+  /** 提取信息的类型Text 文本Selector 选项Boolean 布尔值Number 数字 */
+  InfoType?: string;
+  /** 提取信息的名称 */
+  InfoName?: string;
+  /** 提取信息的具体描述 */
+  InfoContent?: string;
+  /** 提取信息的具体结果 */
+  Result?: AICallExtractResultInfo;
+}
+
+/** AI 通话结果具体信息 */
+declare interface AICallExtractResultInfo {
+  /** 提取的类型是文本 */
+  Text?: string;
+  /** 提取的内型是选项 */
+  Chosen?: string[];
+  /** 提取类型是布尔值 */
+  Boolean?: boolean;
+  /** 提取类型是数字 */
+  Number?: number;
+}
+
 /** AI转人工配置项 */
 declare interface AITransferItem {
   /** 转人工的function calling 名称 */
@@ -867,11 +905,13 @@ declare interface CreateAICallRequest {
   WelcomeMessage?: string;
   /** 0：使用welcomeMessage(为空时，被叫先说话；不为空时，机器人先说话)1: 使用ai根据prompt自动生成welcomeMessage并先说话 */
   WelcomeType?: number;
+  /** 0: 默认可打断， 1：高优先不可打断 */
+  WelcomeMessagePriority?: number;
   /** 最大等待时长(毫秒)，默认60秒，超过这个时间用户没说话，自动挂断 */
   MaxDuration?: number;
   /** 语音识别支持的语言, 默认是"zh" 中文,填写数组,最长4个语言，第一个语言为主要识别语言，后面为可选语言，注意:主要语言为中国方言时，可选语言无效目前全量支持的语言如下，等号左面是语言英文名，右面是Language字段需要填写的值，该值遵循ISO639：1. Chinese = "zh" # 中文2. Chinese_TW = "zh-TW" # 中国台湾3. Chinese_DIALECT = "zh-dialect" # 中国方言4. English = "en" # 英语5. Vietnamese = "vi" # 越南语6. Japanese = "ja" # 日语7. Korean = "ko" # 汉语8. Indonesia = "id" # 印度尼西亚语9. Thai = "th" # 泰语10. Portuguese = "pt" # 葡萄牙语11. Turkish = "tr" # 土耳其语12. Arabic = "ar" # 阿拉伯语13. Spanish = "es" # 西班牙语14. Hindi = "hi" # 印地语15. French = "fr" # 法语16. Malay = "ms" # 马来语17. Filipino = "fil" # 菲律宾语18. German = "de" # 德语19. Italian = "it" # 意大利语20. Russian = "ru" # 俄语 */
   Languages?: string[];
-  /** 打断AI说话模式，默认为0，0表示服务端自动打断，1表示服务端不打断，由端上发送打断信令进行打断 */
+  /** 打断AI说话模式，默认为0，0表示自动打断，1表示不打断。 */
   InterruptMode?: number;
   /** InterruptMode为0时使用，单位为毫秒，默认为500ms。表示服务端检测到持续InterruptSpeechDuration毫秒的人声则进行打断。 */
   InterruptSpeechDuration?: number;
@@ -895,6 +935,8 @@ declare interface CreateAICallRequest {
   PromptVariables?: Variable[];
   /** 语音识别vad的时间，范围为240-2000，默认为1000，单位为ms。更小的值会让语音识别分句更快。 */
   VadSilenceTime?: number;
+  /** 通话内容提取配置 */
+  ExtractConfig?: AICallExtractConfigElement[];
 }
 
 declare interface CreateAICallResponse {
@@ -1214,6 +1256,24 @@ declare interface DeleteStaffRequest {
 declare interface DeleteStaffResponse {
   /** 无法删除的状态为在线的客服列表 */
   OnlineStaffList?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAICallExtractResultRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 会话 ID */
+  SessionId: string;
+  /** 查找起始时间 */
+  StartTime: number;
+  /** 查找结束时间 */
+  EndTime: number;
+}
+
+declare interface DescribeAICallExtractResultResponse {
+  /** 结果列表 */
+  ResultList?: AICallExtractResultElement[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2121,6 +2181,8 @@ declare interface Ccc {
   DeletePredictiveDialingCampaign(data: DeletePredictiveDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePredictiveDialingCampaignResponse>;
   /** 删除坐席信息 {@link DeleteStaffRequest} {@link DeleteStaffResponse} */
   DeleteStaff(data: DeleteStaffRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStaffResponse>;
+  /** 查询 AI 通话内容提取结果 {@link DescribeAICallExtractResultRequest} {@link DescribeAICallExtractResultResponse} */
+  DescribeAICallExtractResult(data: DescribeAICallExtractResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAICallExtractResultResponse>;
   /** 查询生效运营商白名单规则 {@link DescribeActiveCarrierPrivilegeNumberRequest} {@link DescribeActiveCarrierPrivilegeNumberResponse} */
   DescribeActiveCarrierPrivilegeNumber(data: DescribeActiveCarrierPrivilegeNumberRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeActiveCarrierPrivilegeNumberResponse>;
   /** 查询自动外呼任务详情 {@link DescribeAutoCalloutTaskRequest} {@link DescribeAutoCalloutTaskResponse} */

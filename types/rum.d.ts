@@ -407,7 +407,7 @@ declare interface DeleteWhitelistRequest {
 
 declare interface DeleteWhitelistResponse {
   /** 消息success */
-  Msg: string;
+  Msg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -827,7 +827,7 @@ declare interface DescribeDataLogUrlInfoRequest {
 
 declare interface DescribeDataLogUrlInfoResponse {
   /** 返回字符串 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1079,7 +1079,7 @@ declare interface DescribeDataRequest {
 
 declare interface DescribeDataResponse {
   /** 返回字符串 */
-  Result: string;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -47,15 +47,15 @@ declare interface CycleEmailParam {
 /** 用于描述DNS记录的域名、记录类型、期望得到的值、目前配置的值 */
 declare interface DNSAttributes {
   /** 记录类型 CNAME | A | TXT | MX */
-  Type: string;
+  Type?: string;
   /** 域名 */
-  SendDomain: string;
+  SendDomain?: string;
   /** 需要配置的值 */
-  ExpectedValue: string;
+  ExpectedValue?: string;
   /** 腾讯云目前检测到的值 */
-  CurrentValue: string;
+  CurrentValue?: string;
   /** 检测是否通过，创建时默认为false */
-  Status: boolean;
+  Status?: boolean;
 }
 
 /** 发信域名验证列表结构体 */
@@ -75,11 +75,13 @@ declare interface EmailIdentity {
 /** 用于描述发件人相关信息 */
 declare interface EmailSender {
   /** 发信地址 */
-  EmailAddress: string;
+  EmailAddress?: string;
   /** 发信人别名 */
-  EmailSenderName: string | null;
+  EmailSenderName?: string;
   /** 创建时间 */
-  CreatedTimestamp: number | null;
+  CreatedTimestamp?: number;
+  /** smtp密码类型,0=没有设置密码,1=已经设置了密码 */
+  SmtpPwdType?: number;
 }
 
 /** 收件人列表数据类型 */
@@ -127,65 +129,65 @@ declare interface ReceiverInputData {
 /** 描述邮件发送状态 */
 declare interface SendEmailStatus {
   /** SendEmail返回的MessageId */
-  MessageId: string;
+  MessageId?: string;
   /** 收件人邮箱 */
-  ToEmailAddress: string;
+  ToEmailAddress?: string;
   /** 发件人邮箱 */
-  FromEmailAddress: string;
+  FromEmailAddress?: string;
   /** 腾讯云处理状态0: 处理成功1001: 内部系统异常1002: 内部系统异常1003: 内部系统异常1003: 内部系统异常1004: 发信超时1005: 内部系统异常1006: 触发频率控制，短时间内对同一地址发送过多邮件1007: 邮件地址在黑名单中1008: 域名被收件人拒收1009: 内部系统异常1010: 超出了每日发送限制1011: 无发送自定义内容权限，必须使用模板1013: 域名被收件人取消订阅2001: 找不到相关记录3007: 模板ID无效或者不可用3008: 被收信域名临时封禁3009: 无权限使用该模板3010: TemplateData字段格式不正确 3014: 发件域名没有经过认证，无法发送3020: 收件方邮箱类型在黑名单3024: 邮箱地址格式预检查失败3030: 退信率过高，临时限制发送3033: 余额不足，账号欠费等 */
-  SendStatus: number;
+  SendStatus?: number;
   /** 收件方处理状态0: 请求成功被腾讯云接受，进入发送队列1: 邮件递送成功，DeliverTime表示递送成功的时间2: 邮件因某种原因被丢弃，DeliverMessage表示丢弃原因3: 收件方ESP拒信，一般原因为邮箱地址不存在，或其它原因8: 邮件被ESP因某些原因延迟递送，DeliverMessage表示延迟原因 */
-  DeliverStatus: number;
+  DeliverStatus?: number;
   /** 收件方处理状态描述 */
-  DeliverMessage: string;
+  DeliverMessage?: string;
   /** 请求到达腾讯云时间戳 */
-  RequestTime: number;
+  RequestTime?: number;
   /** 腾讯云执行递送时间戳 */
-  DeliverTime: number;
+  DeliverTime?: number;
   /** 用户是否打开该邮件 */
-  UserOpened: boolean;
+  UserOpened?: boolean;
   /** 用户是否点击该邮件中的链接 */
-  UserClicked: boolean;
+  UserClicked?: boolean;
   /** 用户是否取消该发送者的订阅 */
-  UserUnsubscribed: boolean;
+  UserUnsubscribed?: boolean;
   /** 用户是否举报该发送者 */
-  UserComplainted: boolean;
+  UserComplainted?: boolean;
 }
 
 /** 发送任务数据 */
 declare interface SendTaskData {
   /** 任务id */
-  TaskId: number;
+  TaskId?: number;
   /** 发信地址 */
-  FromEmailAddress: string;
+  FromEmailAddress?: string;
   /** 收件人列表Id */
-  ReceiverId: number;
+  ReceiverId?: number;
   /** 任务状态 1 待开始 5 发送中 6 今日暂停发送 7 发信异常 10 发送完成 */
-  TaskStatus: number;
+  TaskStatus?: number;
   /** 任务类型 1 即时 2 定时 3 周期 */
-  TaskType: number;
+  TaskType?: number;
   /** 任务请求发信数量 */
-  RequestCount: number;
+  RequestCount?: number;
   /** 已经发送数量 */
-  SendCount: number;
+  SendCount?: number;
   /** 缓存数量 */
-  CacheCount: number;
+  CacheCount?: number;
   /** 任务创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 任务更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 邮件主题 */
-  Subject: string;
+  Subject?: string;
   /** 模板和模板数据 */
-  Template: Template | null;
+  Template?: Template | null;
   /** 周期任务参数 */
-  CycleParam: CycleEmailParam | null;
+  CycleParam?: CycleEmailParam | null;
   /** 定时任务参数 */
-  TimedParam: TimedEmailParam | null;
+  TimedParam?: TimedEmailParam | null;
   /** 任务异常信息 */
-  ErrMsg: string | null;
+  ErrMsg?: string | null;
   /** 收件人列表名称 */
-  ReceiversName: string;
+  ReceiversName?: string;
 }
 
 /** 邮件发送的内容，可以是纯文本(TEXT)，也可以是纯代码(HTML)，或者纯文本+HTML的组合(建议方式) */
@@ -345,7 +347,7 @@ declare interface CreateEmailTemplateRequest {
 
 declare interface CreateEmailTemplateResponse {
   /** 模板id */
-  TemplateID: number;
+  TemplateID?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -358,6 +360,16 @@ declare interface CreateReceiverDetailRequest {
 }
 
 declare interface CreateReceiverDetailResponse {
+  /** 收件人总数 */
+  TotalCount?: number;
+  /** 实际上传数量 */
+  ValidCount?: number;
+  /** 数据过长数量 */
+  TooLongCount?: number;
+  /** 邮件地址为空数量 */
+  EmptyEmailCount?: number;
+  /** 重复数量 */
+  RepeatCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -393,7 +405,7 @@ declare interface CreateReceiverRequest {
 
 declare interface CreateReceiverResponse {
   /** 收件人列表id，后续根据收件人列表id上传收件人地址 */
-  ReceiverId: number;
+  ReceiverId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -579,7 +591,7 @@ declare interface ListEmailAddressRequest {
 
 declare interface ListEmailAddressResponse {
   /** 发信地址列表详情 */
-  EmailSenders?: EmailSender[] | null;
+  EmailSenders?: EmailSender[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -657,9 +669,9 @@ declare interface ListReceiversRequest {
 
 declare interface ListReceiversResponse {
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 数据记录 */
-  Data: ReceiverData[];
+  Data?: ReceiverData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -679,9 +691,9 @@ declare interface ListSendTasksRequest {
 
 declare interface ListSendTasksResponse {
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 数据记录 */
-  Data: SendTaskData[];
+  Data?: SendTaskData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -697,7 +709,7 @@ declare interface SendEmailRequest {
   ReplyToAddresses?: string;
   /** 抄送人邮箱地址，最多支持抄送20人。 */
   Cc?: string[];
-  /** 密送人邮箱地址，最多支持抄送20人。 */
+  /** 密送人邮箱地址，最多支持抄送20人,Bcc和Destination不能重复。 */
   Bcc?: string[];
   /** 使用模板发送时，填写模板相关参数。 如您未申请过特殊配置，则该字段为必填 </dx-alert> */
   Template?: Template;

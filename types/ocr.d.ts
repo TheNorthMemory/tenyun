@@ -578,6 +578,20 @@ declare interface ElectronicTrainTicketFull {
   IDInfo?: string;
 }
 
+/** 试题识别结果-元素内容 */
+declare interface Element {
+  /** 元素内容，当type为figure时该字段内容为图片的位置 */
+  Text?: string;
+  /** 元素坐标 */
+  Coord?: Polygon;
+  /** 元素group类型，包括multiple-choice(选择题)、fill-in-the-blank(填空题)、problem-solving(解答题)、arithmetic(算术题) */
+  GroupType?: string;
+  /** 结果列表 */
+  ResultList?: ResultList[] | null;
+  /** 元素索引 */
+  Index?: number;
+}
+
 /** 敏感数据加密 */
 declare interface Encryption {
   /** 有加密需求的用户，接入传入kms的CiphertextBlob（Base64编码），关于数据加密可查阅[敏感数据加密指引](https://cloud.tencent.com/document/product/866/106048)文档。 */
@@ -752,16 +766,6 @@ declare interface FlightItemInfo {
   FareBasis?: string;
   /** 免费行李额 */
   Allow?: string;
-}
-
-/** 通用卡证鉴伪告警信息 */
-declare interface GeneralCardWarnInfo {
-  /** 是否存在该告警 */
-  IsWarn?: boolean;
-  /** 风险程度 */
-  RiskConfidence?: number;
-  /** 告警位置四点坐标 */
-  Polygon?: Polygon[];
 }
 
 /** 通用机打发票条目 */
@@ -1498,6 +1502,24 @@ declare interface QuestionBlockObj {
   QuestionBboxCoord: Rect;
 }
 
+/** 试题识别结果 */
+declare interface QuestionInfo {
+  /** 旋转角度 */
+  Angle?: number;
+  /** 预处理后图片高度 */
+  Height?: number;
+  /** 预处理后图片宽度 */
+  Width?: number;
+  /** 文档元素 */
+  ResultList?: ResultList[] | null;
+  /** 输入图片高度 */
+  OrgHeight?: number;
+  /** 输入图片宽度 */
+  OrgWidth?: number;
+  /** 预处理后的图片base64编码 */
+  ImageBase64?: string;
+}
+
 /** 试题识别结构化信息 */
 declare interface QuestionObj {
   /** 题号 */
@@ -1644,6 +1666,22 @@ declare interface ResidencePermitInfo {
   PassNum?: ContentInfo;
   /** 签发次数，港澳台居住证国徽面 返回该字段 */
   IssueNum?: ContentInfo;
+}
+
+/** 结果列表 */
+declare interface ResultList {
+  /** 题干 */
+  Question?: Element[] | null;
+  /** 选项 */
+  Option?: Element[] | null;
+  /** 插图 */
+  Figure?: Element[] | null;
+  /** 表格 */
+  Table?: Element[] | null;
+  /** 答案 */
+  Answer?: Element[] | null;
+  /** 整题的坐标 */
+  Coord?: Polygon[] | null;
 }
 
 /** 印章信息 */
@@ -2008,6 +2046,14 @@ declare interface TextEduPaper {
 declare interface TextFormula {
   /** 识别出的文本行内容 */
   DetectedText: string;
+}
+
+/** 公式识别结果 */
+declare interface TextFormulaInfo {
+  /** 识别出的文本行内容 */
+  DetectedText?: string;
+  /** 识别出的文本行内容坐标 */
+  Coord?: Polygon;
 }
 
 /** 文字识别结果 */
@@ -4100,6 +4146,46 @@ declare interface QrcodeOCRResponse {
   RequestId?: string;
 }
 
+declare interface QuestionOCRRequest {
+  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  ImageUrl?: string;
+  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  ImageBase64?: string;
+  /** 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。 */
+  IsPdf?: boolean;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
+  PdfPageNumber?: number;
+  /** 是否开启切边增强和弯曲矫正,默认为false不开启 */
+  EnableImageCrop?: boolean;
+}
+
+declare interface QuestionOCRResponse {
+  /** 检测到的文本信息 */
+  QuestionInfo?: QuestionInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface QuestionSplitOCRRequest {
+  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  ImageUrl?: string;
+  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  ImageBase64?: string;
+  /** 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。 */
+  IsPdf?: boolean;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
+  PdfPageNumber?: number;
+  /** 是否开启切边增强和弯曲矫正,默认为false不开启 */
+  EnableImageCrop?: boolean;
+}
+
+declare interface QuestionSplitOCRResponse {
+  /** 检测到的文本信息 */
+  QuestionInfo?: QuestionInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface QuotaInvoiceOCRRequest {
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -4252,34 +4338,22 @@ declare interface RecognizeForeignPermanentResidentIdCardResponse {
   RequestId?: string;
 }
 
-declare interface RecognizeGeneralCardWarnRequest {
-  /** 图片链接 */
+declare interface RecognizeFormulaOCRRequest {
+  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
-  /** 图片base64 */
+  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
-  /** 卡证类型参数，包含以下范围： default：通用卡证 idcard：身份证 passport：护照 bizlicense：营业执照 regcertificate：登记证书 residpermit：居住证 transpermit：通行证 signboard：门头照 bankcard：银行卡 drivinglicense：驾驶证、行驶证 */
-  CardType?: string;
   /** 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。 */
   IsPdf?: boolean;
   /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
   PdfPageNumber?: number;
 }
 
-declare interface RecognizeGeneralCardWarnResponse {
-  /** 卡证类型参数，包含以下范围： default：通用卡证idcard：身份证 passport：护照 bizlicense：营业执照 regcertificate：登记证书 residpermit：居住证 transpermit：通行证 signboard：门头照 bankcard：银行卡 drivinglicense：驾驶证、行驶证 */
-  CardType?: string;
-  /** 模糊信息 */
-  Blur?: GeneralCardWarnInfo;
-  /** 边框不完整信息 */
-  BorderIncomplete?: GeneralCardWarnInfo;
-  /** 复印件信息 */
-  Copy?: GeneralCardWarnInfo;
-  /** ps篡改信息 */
-  Ps?: GeneralCardWarnInfo;
-  /** 反光信息 */
-  Reflection?: GeneralCardWarnInfo;
-  /** 翻拍件信息 */
-  Reprint?: GeneralCardWarnInfo;
+declare interface RecognizeFormulaOCRResponse {
+  /** 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负 */
+  Angle?: number;
+  /** 检测到的文本信息 */
+  FormulaInfoList?: TextFormulaInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5347,6 +5421,10 @@ declare interface Ocr {
   PropOwnerCertOCR(data?: PropOwnerCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<PropOwnerCertOCRResponse>;
   /** 二维码和条形码识别 {@link QrcodeOCRRequest} {@link QrcodeOCRResponse} */
   QrcodeOCR(data?: QrcodeOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QrcodeOCRResponse>;
+  /** 试题识别 {@link QuestionOCRRequest} {@link QuestionOCRResponse} */
+  QuestionOCR(data?: QuestionOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QuestionOCRResponse>;
+  /** 试卷切题 {@link QuestionSplitOCRRequest} {@link QuestionSplitOCRResponse} */
+  QuestionSplitOCR(data?: QuestionSplitOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QuestionSplitOCRResponse>;
   /** 定额发票识别 {@link QuotaInvoiceOCRRequest} {@link QuotaInvoiceOCRResponse} */
   QuotaInvoiceOCR(data?: QuotaInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QuotaInvoiceOCRResponse>;
   /** 集装箱识别 {@link RecognizeContainerOCRRequest} {@link RecognizeContainerOCRResponse} */
@@ -5355,8 +5433,8 @@ declare interface Ocr {
   RecognizeEncryptedIDCardOCR(data: RecognizeEncryptedIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeEncryptedIDCardOCRResponse>;
   /** 外国人永久居留身份证识别 {@link RecognizeForeignPermanentResidentIdCardRequest} {@link RecognizeForeignPermanentResidentIdCardResponse} */
   RecognizeForeignPermanentResidentIdCard(data?: RecognizeForeignPermanentResidentIdCardRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeForeignPermanentResidentIdCardResponse>;
-  /** 通用卡证鉴伪 {@link RecognizeGeneralCardWarnRequest} {@link RecognizeGeneralCardWarnResponse} */
-  RecognizeGeneralCardWarn(data?: RecognizeGeneralCardWarnRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeGeneralCardWarnResponse>;
+  /** 公式识别 {@link RecognizeFormulaOCRRequest} {@link RecognizeFormulaOCRResponse} */
+  RecognizeFormulaOCR(data?: RecognizeFormulaOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeFormulaOCRResponse>;
   /** 通用票据识别（高级版） {@link RecognizeGeneralInvoiceRequest} {@link RecognizeGeneralInvoiceResponse} */
   RecognizeGeneralInvoice(data?: RecognizeGeneralInvoiceRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeGeneralInvoiceResponse>;
   /** 通用文本图像告警 {@link RecognizeGeneralTextImageWarnRequest} {@link RecognizeGeneralTextImageWarnResponse} */

@@ -655,7 +655,7 @@ declare interface GetDetectInfoResponse {
 }
 
 declare interface GetEidResultRequest {
-  /** E证通流程的唯一标识，调用GetEidToken接口时生成。 */
+  /** E证通流程的唯一标识，调用[GetEidToken](https://cloud.tencent.com/document/product/1007/54089)接口时生成。 */
   EidToken: string;
   /** 指定拉取的结果信息。- 取值范围： 0：全部。 1：文本类。 2：身份证信息。 3：最佳截图信息。 5：意愿核身朗读模式相关结果。 6：意愿核身问答模式相关结果。- 例如 13表示拉取文本类、最佳截图信息。- 默认值：0 */
   InfoType?: string;
