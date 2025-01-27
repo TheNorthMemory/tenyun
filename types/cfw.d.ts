@@ -3056,18 +3056,6 @@ declare interface ModifyAllRuleStatusResponse {
   RequestId?: string;
 }
 
-declare interface ModifyAllVPCSwitchStatusRequest {
-  /** 状态，0：关闭，1：开启 */
-  Status: number;
-  /** 选中的防火墙开关Id */
-  FireWallVpcIds?: string[];
-}
-
-declare interface ModifyAllVPCSwitchStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ModifyAssetScanRequest {
   /** 扫描范围：1端口, 2端口+漏扫 */
   ScanRange: number;
@@ -3793,8 +3781,6 @@ declare interface Cfw {
   ModifyAllPublicIPSwitchStatus(data: ModifyAllPublicIPSwitchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAllPublicIPSwitchStatusResponse>;
   /** 启用停用全部规则 {@link ModifyAllRuleStatusRequest} {@link ModifyAllRuleStatusResponse} */
   ModifyAllRuleStatus(data: ModifyAllRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAllRuleStatusResponse>;
-  /** @deprecated VPC防火墙一键开关 {@link ModifyAllVPCSwitchStatusRequest} {@link ModifyAllVPCSwitchStatusResponse} */
-  ModifyAllVPCSwitchStatus(data: ModifyAllVPCSwitchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAllVPCSwitchStatusResponse>;
   /** 资产扫描 {@link ModifyAssetScanRequest} {@link ModifyAssetScanResponse} */
   ModifyAssetScan(data: ModifyAssetScanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetScanResponse>;
   /** 资产同步 {@link ModifyAssetSyncRequest} {@link ModifyAssetSyncResponse} */

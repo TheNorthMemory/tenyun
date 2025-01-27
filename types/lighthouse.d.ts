@@ -1325,7 +1325,7 @@ declare interface DescribeBundleDiscountResponse {
 }
 
 declare interface DescribeBundlesRequest {
-  /** 套餐 ID 列表。可通过[DescribeBundles](https://cloud.tencent.com/document/product/1207/47575)接口返回值中的BundleId获取。 */
+  /** 套餐 ID 列表。每次请求批量套餐的上限为 100。可通过[DescribeBundles](https://cloud.tencent.com/document/product/1207/47575)接口返回值中的BundleId获取。 */
   BundleIds?: string[];
   /** 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。 */
   Offset?: number;

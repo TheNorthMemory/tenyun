@@ -95,7 +95,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 263+ 款产品，12142+ 服务数</summary>
+<details><summary>共计 263+ 款产品，12141+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -152,7 +152,7 @@ cdwpg | [云数据仓库 PostgreSQL](https://cloud.tencent.com/document/product/
 cdz | [专属可用区](https://cloud.tencent.com/document/product/1629) | 2022-11-23(2) |
 cfg | [混沌演练平台](https://cloud.tencent.com/document/product/1500) | 2021-08-20(17) |
 cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(44) |
-cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(114) |
+cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(113) |
 chdfs | [云 HDFS](https://cloud.tencent.com/document/product/1105) | 2020-11-12(29) | 2019-07-18(26) |
 ciam | [账号风控平台](https://cloud.tencent.com/document/product/1441) | 2022-03-31(23) |
 cii | [智能保险助手](https://cloud.tencent.com/document/product/1368) | 2021-04-08(13) | 2020-12-10(3) |

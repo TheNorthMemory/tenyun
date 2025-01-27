@@ -5933,7 +5933,7 @@ declare interface Teo {
   CreatePurgeTask(data: CreatePurgeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePurgeTaskResponse>;
   /** 创建实时日志投递任务 {@link CreateRealtimeLogDeliveryTaskRequest} {@link CreateRealtimeLogDeliveryTaskResponse} */
   CreateRealtimeLogDeliveryTask(data: CreateRealtimeLogDeliveryTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRealtimeLogDeliveryTaskResponse>;
-  /** 创建规则引擎规则 {@link CreateRuleRequest} {@link CreateRuleResponse} */
+  /** 创建规则引擎规则（旧） {@link CreateRuleRequest} {@link CreateRuleResponse} */
   CreateRule(data: CreateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleResponse>;
   /** 创建安全 IP 组 {@link CreateSecurityIPGroupRequest} {@link CreateSecurityIPGroupResponse} */
   CreateSecurityIPGroup(data: CreateSecurityIPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityIPGroupResponse>;
@@ -6145,7 +6145,7 @@ declare interface Teo {
   ModifyPlan(data: ModifyPlanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPlanResponse>;
   /** 修改实时日志投递任务 {@link ModifyRealtimeLogDeliveryTaskRequest} {@link ModifyRealtimeLogDeliveryTaskResponse} */
   ModifyRealtimeLogDeliveryTask(data: ModifyRealtimeLogDeliveryTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRealtimeLogDeliveryTaskResponse>;
-  /** 修改规则引擎规则 {@link ModifyRuleRequest} {@link ModifyRuleResponse} */
+  /** 修改规则引擎规则（旧） {@link ModifyRuleRequest} {@link ModifyRuleResponse} */
   ModifyRule(data: ModifyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleResponse>;
   /** 修改安全 IP 组 {@link ModifySecurityIPGroupRequest} {@link ModifySecurityIPGroupResponse} */
   ModifySecurityIPGroup(data: ModifySecurityIPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityIPGroupResponse>;
