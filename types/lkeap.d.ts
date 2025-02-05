@@ -184,6 +184,20 @@ declare interface Usage {
   TotalTokens?: number;
 }
 
+declare interface ChatCompletionsRequest {
+  /** 模型名称 */
+  Model: string;
+  /** 会话列表 */
+  Messages: Message[];
+  /** 是否流式输出 */
+  Stream?: boolean;
+}
+
+declare interface ChatCompletionsResponse {
+  /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
+  RequestId?: string;
+}
+
 declare interface CreateAttributeLabelRequest {
   /** 属性标签信息 */
   Labels?: AttributeLabelItem[];
@@ -535,6 +549,8 @@ declare interface UploadDocResponse {
 /** {@link Lkeap 知识引擎原子能力} */
 declare interface Lkeap {
   (): Versions;
+  /** 对话 {@link ChatCompletionsRequest} {@link ChatCompletionsResponse} */
+  ChatCompletions(data: ChatCompletionsRequest, config?: AxiosRequestConfig): AxiosPromise<ChatCompletionsResponse>;
   /** 创建属性标签 {@link CreateAttributeLabelRequest} {@link CreateAttributeLabelResponse} */
   CreateAttributeLabel(data?: CreateAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAttributeLabelResponse>;
   /** 创建知识库 {@link CreateKnowledgeBaseRequest} {@link CreateKnowledgeBaseResponse} */
