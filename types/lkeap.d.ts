@@ -30,6 +30,28 @@ declare interface AttributeLabelReferItem {
   LabelIds?: string[] | null;
 }
 
+/** 消耗量 */
+declare interface ChatUsage {
+  /** 输入token数 */
+  PromptTokens?: number;
+  /** 输出token数 */
+  CompletionTokens?: number;
+  /** 总token数 */
+  TotalTokens?: number;
+}
+
+/** 返回的回复, 支持多个 */
+declare interface Choice {
+  /** 结束标志位，可能为 stop、 sensitive或者tool_calls。stop 表示输出正常结束。sensitive 只在开启流式输出审核时会出现，表示安全审核未通过。tool_calls 标识函数调用。 */
+  FinishReason?: string;
+  /** 增量返回值，流式调用时使用该字段。 */
+  Delta?: Delta;
+  /** 返回值，非流式调用时使用该字段。 */
+  Message?: Message;
+  /** 索引值，流式调用时使用该字段。 */
+  Index?: number;
+}
+
 /** 创建智能文档解析任务的配置信息 */
 declare interface CreateReconstructDocumentFlowConfig {
   /** Markdown文件中表格返回的形式0，表格以MD形式返回1，表格以HTML形式返回默认为1 */
@@ -48,6 +70,14 @@ declare interface CreateSplitDocumentFlowConfig {
   EnableMllm?: boolean;
   /** 最大分片长度 */
   MaxChunkSize?: number;
+}
+
+/** 返回的内容 */
+declare interface Delta {
+  /** 角色名称。 */
+  Role?: string;
+  /** 内容详情。 */
+  Content?: string;
 }
 
 /** 离线文档列表回包 */
@@ -94,6 +124,8 @@ declare interface Message {
   Role?: string;
   /** 内容 */
   Content?: string;
+  /** 思维链内容。ReasoningConent参数仅支持出参，且只有deepseek-r1模型会返回。 */
+  ReasoningContent?: string;
 }
 
 /** 问答对信息 */
@@ -191,9 +223,23 @@ declare interface ChatCompletionsRequest {
   Messages: Message[];
   /** 是否流式输出 */
   Stream?: boolean;
+  /** 控制生成的随机性，较高的值会产生更多样化的输出。 */
+  Temperature?: number;
+  /** 最大生成的token数量 */
+  MaxTokens?: number;
 }
 
 declare interface ChatCompletionsResponse {
+  /** Unix 时间戳，单位为秒。 */
+  Created?: number;
+  /** Token 统计信息。按照总 Token 数量计费。 */
+  Usage?: ChatUsage;
+  /** 本次请求的 RequestId。 */
+  Id?: string;
+  /** 回复内容。 */
+  Choices?: Choice[];
+  /** 模型名称。 */
+  Model?: string;
   /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
   RequestId?: string;
 }

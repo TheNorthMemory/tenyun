@@ -31,7 +31,7 @@ declare interface BlackEmailAddress {
   /** 被拉黑的邮箱地址 */
   EmailAddress?: string;
   /** 被拉黑的理由 */
-  IspDesc?: string | null;
+  IspDesc?: string;
 }
 
 /** 创建重复周期发送邮件任务的参数 */
@@ -93,13 +93,13 @@ declare interface ReceiverData {
   /** 收件人地址总数 */
   Count?: number;
   /** 收件人列表描述 */
-  Desc?: string | null;
+  Desc?: string;
   /** 列表状态(1 待上传 2 上传中 3 上传完成) */
-  ReceiversStatus?: number | null;
+  ReceiversStatus?: number;
   /** 创建时间,如:2021-09-28 16:40:35 */
   CreateTime?: string;
   /** 无效收件人数量 */
-  InvalidCount?: number | null;
+  InvalidCount?: number;
 }
 
 /** 收件人列表详情 */
@@ -111,11 +111,11 @@ declare interface ReceiverDetail {
   /** 模板参数 */
   TemplateData?: string;
   /** 无效原因 */
-  Reason?: string | null;
+  Reason?: string;
   /** 1:有效，2:无效 */
-  Status?: number | null;
+  Status?: number;
   /** 收件人地址id */
-  EmailId?: number | null;
+  EmailId?: number;
 }
 
 /** 收件人明细输入参数，包含收件人邮箱，以及模板参数 */
@@ -217,15 +217,15 @@ declare interface TemplateContent {
 /** 模板列表结构 */
 declare interface TemplatesMetadata {
   /** 创建时间 */
-  CreatedTimestamp: number;
+  CreatedTimestamp?: number;
   /** 模板名称 */
-  TemplateName: string;
+  TemplateName?: string;
   /** 模板状态。1-审核中|0-已通过|2-拒绝|其它-不可用 */
-  TemplateStatus: number;
+  TemplateStatus?: number;
   /** 模板ID */
-  TemplateID: number;
+  TemplateID?: number;
   /** 审核原因 */
-  ReviewReason: string;
+  ReviewReason?: string;
 }
 
 /** 创建定时发送邮件任务时，设置的定时参数，比如开始时间之类 */
@@ -237,21 +237,21 @@ declare interface TimedEmailParam {
 /** 统计数据的结构体 */
 declare interface Volume {
   /** 日期 */
-  SendDate: string | null;
+  SendDate?: string | null;
   /** 邮件请求数量 */
-  RequestCount: number;
+  RequestCount?: number;
   /** 腾讯云通过数量 */
-  AcceptedCount: number;
+  AcceptedCount?: number;
   /** 送达数量 */
-  DeliveredCount: number;
+  DeliveredCount?: number;
   /** 打开邮件的用户数量，根据收件人去重 */
-  OpenedCount: number;
+  OpenedCount?: number;
   /** 点击了邮件中的链接数量用户数量 */
-  ClickedCount: number;
+  ClickedCount?: number;
   /** 退信数量 */
-  BounceCount: number;
+  BounceCount?: number;
   /** 取消订阅的用户数量 */
-  UnsubscribeCount: number | null;
+  UnsubscribeCount?: number | null;
 }
 
 declare interface BatchSendEmailRequest {
@@ -383,15 +383,15 @@ declare interface CreateReceiverDetailWithDataRequest {
 
 declare interface CreateReceiverDetailWithDataResponse {
   /** 收件人总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 实际上传数量 */
-  ValidCount?: number | null;
+  ValidCount?: number;
   /** 数据过长数量 */
-  TooLongCount?: number | null;
+  TooLongCount?: number;
   /** 邮件地址为空数量 */
-  EmptyEmailCount?: number | null;
+  EmptyEmailCount?: number;
   /** 重复数量 */
-  RepeatCount?: number | null;
+  RepeatCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
