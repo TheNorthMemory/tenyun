@@ -5437,7 +5437,7 @@ declare interface Cdb {
   DescribeCloneList(data: DescribeCloneListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloneListResponse>;
   /** 查询集群版实例信息 {@link DescribeClusterInfoRequest} {@link DescribeClusterInfoResponse} */
   DescribeClusterInfo(data: DescribeClusterInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInfoResponse>;
-  /** 查询实例的 CPU 弹性扩容策略 {@link DescribeCpuExpandStrategyRequest} {@link DescribeCpuExpandStrategyResponse} */
+  /** @deprecated 查询实例的 CPU 弹性扩容策略 {@link DescribeCpuExpandStrategyRequest} {@link DescribeCpuExpandStrategyResponse} */
   DescribeCpuExpandStrategy(data: DescribeCpuExpandStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCpuExpandStrategyResponse>;
   /** 查询实例版本属性 {@link DescribeDBFeaturesRequest} {@link DescribeDBFeaturesResponse} */
   DescribeDBFeatures(data: DescribeDBFeaturesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBFeaturesResponse>;

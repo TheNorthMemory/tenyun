@@ -1604,6 +1604,24 @@ declare interface ModifyConsumerGroupResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInstanceEndpointRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 接入点类型，PUBLIC 公网 */
+  Type: string;
+  /** 公网带宽，Mbps为单位 */
+  Bandwidth?: number;
+  /** 公网安全组信息 */
+  IpRules?: IpRule[];
+  /** 公网是否按流量计费 */
+  BillingFlow?: boolean;
+}
+
+declare interface ModifyInstanceEndpointResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyInstanceRequest {
   /** 集群ID */
   InstanceId: string;
@@ -1855,6 +1873,8 @@ declare interface Trocket {
   ModifyConsumerGroup(data: ModifyConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsumerGroupResponse>;
   /** 修改集群属性 {@link ModifyInstanceRequest} {@link ModifyInstanceResponse} */
   ModifyInstance(data: ModifyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceResponse>;
+  /** 修改集群接入点 {@link ModifyInstanceEndpointRequest} {@link ModifyInstanceEndpointResponse} */
+  ModifyInstanceEndpoint(data: ModifyInstanceEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceEndpointResponse>;
   /** 更新MQTT实例公网接入点 {@link ModifyMQTTInsPublicEndpointRequest} {@link ModifyMQTTInsPublicEndpointResponse} */
   ModifyMQTTInsPublicEndpoint(data: ModifyMQTTInsPublicEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMQTTInsPublicEndpointResponse>;
   /** 修改MQTT实例属性 {@link ModifyMQTTInstanceRequest} {@link ModifyMQTTInstanceResponse} */

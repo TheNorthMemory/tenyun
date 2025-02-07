@@ -786,6 +786,12 @@ declare interface ModelInfo {
   Temperature?: ModelParameter | null;
   /** 最多能生成的token数量 */
   MaxTokens?: ModelParameter | null;
+  /** 模型来源 Hunyuan：腾讯混元大模型,Industry：腾讯云行业大模型,Experience：新模型体验 */
+  Source?: string;
+  /** 模型图标 */
+  Icon?: string;
+  /** 是否免费 */
+  IsFree?: boolean;
 }
 
 /** 模型参数范围 */
