@@ -27,12 +27,22 @@ const secretKey = 'Gu5t9xGARNpq86cd98joQYCN3*******';
 
 const tc = new TenYun(secretId, secretKey);
 
-const sampleRequest = {Limit: 1, Filters: [ { Values: [ '未命名' ], Name: 'instance-name' } ]};
+const sampleRequest = {
+  Limit: 1,
+  Filters: [
+    {
+      Values: [ '未命名' ],
+      Name: 'instance-name',
+    },
+  ],
+};
 
+// Promise based
 tc.cvm.DescribeInstances(sampleRequest)
 .then(({ data }) => console.info(data))
 .catch((error) => console.error(error.code));
 
+// Async/Await based
 (async () => {
   try {
     const { data } = await tc.cvm.DescribeInstances(sampleRequest);
@@ -42,8 +52,17 @@ tc.cvm.DescribeInstances(sampleRequest)
   }
 })();
 
-// provide the second object, AKA AxiosRequestConfig, to request the specific `X-TC-Version` API
-tc.sms.DescribeSmsSignList({ SignIdSet: [123], International: 0 }, { headers: { 'X-TC-Version': '2019-07-11' } })
+// Request the specific `X-TC-Version` API
+tc.sms.DescribeSmsSignList(
+  {
+    SignIdSet: [ 123 ],
+    International: 0,
+  }, {
+    headers: {
+      'X-TC-Version': '2019-07-11',
+    },
+  },
+)
 .then(({ data }) => console.info(data))
 .catch((error) => console.error(error.code));
 
