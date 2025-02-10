@@ -287,9 +287,9 @@ declare interface ReplaceBackgroundResponse {
 declare interface SketchToImageRequest {
   /** 用于线稿生图的文本描述。最多支持200个 utf-8 字符。建议格式：线稿中的主体对象+画面场景+配色/材质/元素/风格等 */
   Prompt: string;
-  /** 线稿图 Base64 数据。Base64 和 Url 必须提供一个，如果都提供以Url 为准。图片限制：黑白线稿图片，单边分辨率小于5000且大于512（分辨率过小会导致效果受损），转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。 */
+  /** 线稿图 Base64 数据。Base64 和 Url 必须提供一个，如果都提供以Url 为准。图片限制：黑白线稿图片，单边分辨率小于5000且大于128（分辨率过小会导致效果受损），转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。 */
   InputImage?: string;
-  /** 线稿图 Url。Base64 和 Url 必须提供一个，如果都提供以Url 为准。图片限制：黑白线稿图片，单边分辨率小于5000且大于512（分辨率过小会导致效果受损），转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。 */
+  /** 线稿图 Url。Base64 和 Url 必须提供一个，如果都提供以Url 为准。图片限制：黑白线稿图片，单边分辨率小于5000且大于128（分辨率过小会导致效果受损），转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。 */
   InputUrl?: string;
   /** 为生成结果图添加标识的开关，默认为1。1：添加标识。0：不添加标识。其他数值：默认按1处理。建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。 */
   LogoAdd?: number;

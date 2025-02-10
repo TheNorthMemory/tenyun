@@ -115,25 +115,25 @@ declare interface DeviceNetInfo {
   /** 网络类型：0:数据1:Wi-Fi2:有线 */
   Type?: number;
   /** 启用/禁用 */
-  DataEnable?: boolean | null;
+  DataEnable?: boolean;
   /** 上行限速 */
-  UploadLimit?: string | null;
+  UploadLimit?: string;
   /** 下行限速 */
-  DownloadLimit?: string | null;
+  DownloadLimit?: string;
   /** 接收实时速率 */
-  DataRx?: number | null;
+  DataRx?: number;
   /** 发送实时速率 */
-  DataTx?: number | null;
+  DataTx?: number;
   /** 运营商类型：1: 中国移动；2: 中国电信; 3: 中国联通 */
-  Vendor?: number | null;
+  Vendor?: number;
   /** 连接状态：0:无连接1:连接中2:已连接 */
-  State?: number | null;
+  State?: number;
   /** 公网IP */
-  PublicIp?: string | null;
+  PublicIp?: string;
   /** 信号强度/单位：dbm */
-  SignalStrength?: number | null;
+  SignalStrength?: number;
   /** 数据网络类型：-1 ：无效值 2：2G 3：3G 4：4G 5：5G */
-  Rat?: number | null;
+  Rat?: number;
   /** 网卡名 */
   NetInfoName?: string | null;
   /** 下行实时速率（浮点数类型代替上一版本DataRx的整型） */

@@ -597,13 +597,13 @@ declare interface SpecItem {
 /** 实例规格信息 */
 declare interface SpecificationInfo {
   /** 地域信息 */
-  Region: string;
+  Region?: string;
   /** 可用区信息 */
-  Zone: string;
+  Zone?: string;
   /** 售卖规格信息 */
-  SpecItems: SpecItem[];
+  SpecItems?: SpecItem[];
   /** 是否支持跨可用区部署 1-支持，0-不支持 */
-  SupportMultiAZ: number;
+  SupportMultiAZ?: number;
 }
 
 /** 实例标签信息 */
@@ -629,7 +629,7 @@ declare interface UserInfo {
 }
 
 declare interface AssignProjectRequest {
-  /** 实例ID列表，格式如：cmgo-p8vn****。与云数据库控制台页面中显示的实例ID相同 */
+  /** 实例 ID 列表，请登录[MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceIds: string[];
   /** 项目ID，用户已创建项目的唯一ID,非自定义 */
   ProjectId: number;
@@ -719,7 +719,7 @@ declare interface CreateDBInstanceHourRequest {
   VpcId?: string;
   /** 私有网络VPC的子网。请登录 [私有网络控制台](https://console.cloud.tencent.com/vpc) 查询子网列表确认正确的 ID。 示例值：subnet-7jbabche */
   SubnetId?: string;
-  /** 实例密码。自定义密码长度为8-32个字符，至少包含字母、数字和字符（!@#%^*()_）中的两种。 */
+  /** 实例密码。设置要求如下：- 字符个数为[8,32]。- 可输入[A,Z]、[a,z]、[0,9]范围内的字符。- 可输入的特殊字符包括：感叹号“!”，at“@”，警号“#”、百分号“%”、插入号“^”、星号“\*”、括号“()”、下划线“_”。- 不能设置单一的字母或者数字。 */
   Password?: string;
   /** 项目ID。- 若不设置该参数，则为默认项目。- 在 [MongoDB 控制台项目管理](https://console.cloud.tencent.com/project)页面，可获取项目ID。 */
   ProjectId?: number;
@@ -811,7 +811,7 @@ declare interface CreateDBInstanceRequest {
   VpcId?: string;
   /** 私有网络VPC的子网。请登录 [私有网络控制台](https://console.cloud.tencent.com/vpc) 查询子网列表确认正确的 ID。 示例值：subnet-7jbabche */
   SubnetId?: string;
-  /** 实例密码。设置要求如下：- 字符个数为[8,32]。- 可输入[A,Z]、[a,z]、[0,9]范围内的字符。- 可输入的特殊字符包括：感叹号“!”，at“@”，警号“#“、百分号”%”、插入号“^”、星号“*”、括号“()”、下划线“_”。- 不能设置单一的字母或者数字。 */
+  /** 实例密码。设置要求如下：- 字符个数为[8,32]。- 可输入[A,Z]、[a,z]、[0,9]范围内的字符。- 可输入的特殊字符包括：感叹号“!”，at“@”，警号“#”、百分号“%”、插入号“^”、星号“\*”、括号“()”、下划线“\_”。- 不能设置单一的字母或者数字。 */
   Password?: string;
   /** 实例标签信息。 */
   Tags?: TagInfo[];
@@ -1375,7 +1375,7 @@ declare interface InquirePriceModifyDBInstanceSpecResponse {
 }
 
 declare interface InquirePriceRenewDBInstancesRequest {
-  /** 实例ID，格式如：cmgo-p8vn****。请登录[MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID，且单次最多同时查询5个实例。 */
+  /** 实例ID。请登录[MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID，且单次最多同时查询5个实例。 */
   InstanceIds: string[];
   /** 预付费模式（即包年包月）相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。 */
   InstanceChargePrepaid: InstanceChargePrepaid;
@@ -1521,9 +1521,9 @@ declare interface OfflineIsolatedDBInstanceResponse {
 }
 
 declare interface RenameInstanceRequest {
-  /** 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同 */
+  /** 实例ID，格式如：cmgo-p8vnipr5。请登录[MongoDB 控制台](https://console.cloud.tencent.com/mongodb#/)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 自定义实例名称，名称只支持长度为60个字符的中文、英文、数字、下划线_、分隔符 - */
+  /** 自定义实例名称，要求为1～128 长度的任意字符。 */
   NewName: string;
 }
 
@@ -1533,7 +1533,7 @@ declare interface RenameInstanceResponse {
 }
 
 declare interface RenewDBInstancesRequest {
-  /** 一个或多个待操作的实例ID。可通过DescribeInstances接口返回值中的InstanceId获取。每次请求批量实例的上限为100。 */
+  /** 指定续费的一个或多个待操作的实例ID。- 可通过[DescribeDBInstances](https://cloud.tencent.com/document/product/240/38568)接口返回值中的**InstanceIds**获取。- 每次续费请求的实例数量上限为100。 */
   InstanceIds: string[];
   /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。包年包月实例该参数为必传参数。 */
   InstanceChargePrepaid: InstanceChargePrepaid;

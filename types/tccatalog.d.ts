@@ -12,6 +12,10 @@ declare interface NetWork {
   SubnetId?: string;
   /** 子网网段 */
   SubnetCidrBlock?: string;
+  /** 服务clbip */
+  ClbIp?: string;
+  /** 服务clbPort */
+  ClbPort?: string;
 }
 
 /** Tcc数据目录信息 */

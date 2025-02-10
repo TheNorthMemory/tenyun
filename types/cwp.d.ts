@@ -2148,20 +2148,6 @@ declare interface CommandLine {
   Cmdline?: string;
 }
 
-/** 组件统计数据。 */
-declare interface ComponentStatistics {
-  /** 组件ID。 */
-  Id?: number;
-  /** 主机数量。 */
-  MachineNum?: number;
-  /** 组件名称。 */
-  ComponentName?: string;
-  /** 组件类型。WEB：Web组件SYSTEM：系统组件 */
-  ComponentType?: string;
-  /** 组件描述。 */
-  Description?: string;
-}
-
 /** 创建修复任务的quuids */
 declare interface CreateVulFixTaskQuuids {
   /** 漏洞id */
@@ -2178,40 +2164,6 @@ declare interface DefaultStrategyInfo {
   StrategyName?: string;
   /** 策略id */
   StrategyId?: number;
-}
-
-/** 网络攻击日志 */
-declare interface DefendAttackLog {
-  /** 日志ID */
-  Id?: number;
-  /** 客户端ID */
-  Uuid?: string;
-  /** 来源IP */
-  SrcIp?: string;
-  /** 来源端口 */
-  SrcPort?: number;
-  /** 攻击方式 */
-  HttpMethod?: string;
-  /** 攻击描述 */
-  HttpCgi?: string;
-  /** 攻击参数 */
-  HttpParam?: string;
-  /** 威胁类型 */
-  VulType?: string;
-  /** 攻击时间 */
-  CreatedAt?: string;
-  /** 目标服务器IP */
-  MachineIp?: string;
-  /** 目标服务器名称 */
-  MachineName?: string;
-  /** 目标IP */
-  DstIp?: string;
-  /** 目标端口 */
-  DstPort?: number;
-  /** 攻击内容 */
-  HttpContent?: string;
-  /** 主机额外信息 */
-  MachineExtraInfo?: MachineExtraInfo;
 }
 
 /** 日志投递类型细节 */
@@ -7798,28 +7750,6 @@ declare interface DescribeAttackEventsResponse {
   RequestId?: string;
 }
 
-declare interface DescribeAttackLogsRequest {
-  /** 返回数量，最大值为100。 */
-  Limit?: number;
-  /** 偏移量，默认为0。 */
-  Offset?: number;
-  /** 过滤条件。HttpMethod - String - 是否必填：否 - 攻击方法(POST|GET)DateRange - String - 是否必填：否 - 时间范围(存储最近3个月的数据)，如最近一个月["2019-11-17", "2019-12-17"]VulType - String 威胁类型 - 是否必填: 否SrcIp - String 攻击源IP - 是否必填: 否DstIp - String 攻击目标IP - 是否必填: 否SrcPort - String 攻击源端口 - 是否必填: 否DstPort - String 攻击目标端口 - 是否必填: 否 */
-  Filters?: Filter[];
-  /** 主机安全客户端ID */
-  Uuid?: string;
-  /** 云主机机器ID */
-  Quuid?: string;
-}
-
-declare interface DescribeAttackLogsResponse {
-  /** 日志列表 */
-  AttackLogs?: DefendAttackLog[] | null;
-  /** 总条数 */
-  TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeAttackStatisticsRequest {
 }
 
@@ -8722,24 +8652,6 @@ declare interface DescribeClientExceptionResponse {
   TotalCount?: number;
   /** 事件详情 */
   Records?: RecordInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeComponentStatisticsRequest {
-  /** 返回数量，默认为10，最大值为100。 */
-  Limit?: number;
-  /** 偏移量，默认为0。 */
-  Offset?: number;
-  /** 过滤条件。ComponentName - String - 是否必填：否 - 组件名称 */
-  Filters?: Filter[];
-}
-
-declare interface DescribeComponentStatisticsResponse {
-  /** 组件统计列表记录总数。 */
-  TotalCount: number;
-  /** 组件统计列表数据数组。 */
-  ComponentStatistics: ComponentStatistics[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -15105,8 +15017,6 @@ declare interface Cwp {
   DescribeAttackEventInfo(data: DescribeAttackEventInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackEventInfoResponse>;
   /** 网络攻击检测事件列表 {@link DescribeAttackEventsRequest} {@link DescribeAttackEventsResponse} */
   DescribeAttackEvents(data?: DescribeAttackEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackEventsResponse>;
-  /** @deprecated 网络攻击日志列表(待下线,请使用DescribeAttackEvents代替) {@link DescribeAttackLogsRequest} {@link DescribeAttackLogsResponse} */
-  DescribeAttackLogs(data?: DescribeAttackLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackLogsResponse>;
   /** 网络攻击数据统计 {@link DescribeAttackStatisticsRequest} {@link DescribeAttackStatisticsResponse} */
   DescribeAttackStatistics(data?: DescribeAttackStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackStatisticsResponse>;
   /** 网络攻击top数据列表 {@link DescribeAttackTopRequest} {@link DescribeAttackTopResponse} */
@@ -15207,8 +15117,6 @@ declare interface Cwp {
   DescribeCanNotSeparateMachine(data?: DescribeCanNotSeparateMachineRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCanNotSeparateMachineResponse>;
   /** 获取客户端异常事件 {@link DescribeClientExceptionRequest} {@link DescribeClientExceptionResponse} */
   DescribeClientException(data: DescribeClientExceptionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientExceptionResponse>;
-  /** @deprecated 获取组件统计列表 {@link DescribeComponentStatisticsRequest} {@link DescribeComponentStatisticsResponse} */
-  DescribeComponentStatistics(data?: DescribeComponentStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComponentStatisticsResponse>;
   /** 获取漏洞防御事件详情 {@link DescribeDefenceEventDetailRequest} {@link DescribeDefenceEventDetailResponse} */
   DescribeDefenceEventDetail(data: DescribeDefenceEventDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefenceEventDetailResponse>;
   /** 获取专线agent安装命令 {@link DescribeDirectConnectInstallCommandRequest} {@link DescribeDirectConnectInstallCommandResponse} */

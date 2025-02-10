@@ -446,6 +446,8 @@ declare interface FirewallRule {
   Port?: string;
   /** IPv4网段或 IPv4地址(互斥)。示例值：0.0.0.0/0。和Ipv6CidrBlock互斥，两者都不指定时，如果Protocol不是ICMPv6，则取默认值0.0.0.0/0。 */
   CidrBlock?: string;
+  /** IPv6网段或IPv6地址(互斥)。示例值：::/0。和CidrBlock互斥，两者都不指定时，如果Protocol是ICMPv6，则取默认值::/0。 */
+  Ipv6CidrBlock?: string;
   /** 取值：ACCEPT，DROP。默认为 ACCEPT。 */
   Action?: string;
   /** 防火墙规则描述。 */
@@ -462,6 +464,8 @@ declare interface FirewallRuleInfo {
   Port?: string;
   /** IPv4网段或 IPv4地址(互斥)。示例值：0.0.0.0/0。和Ipv6CidrBlock互斥，两者都不指定时，如果Protocol不是ICMPv6，则取默认值0.0.0.0/0。 */
   CidrBlock?: string;
+  /** IPv6网段或IPv6地址(互斥)。示例值：::/0。和CidrBlock互斥，两者都不指定时，如果Protocol是ICMPv6，则取默认值::/0。 */
+  Ipv6CidrBlock?: string;
   /** 取值：ACCEPT，DROP。默认为 ACCEPT。 */
   Action?: string;
   /** 防火墙规则描述。 */
@@ -596,6 +600,10 @@ declare interface Instance {
   Tags?: Tag[];
   /** 实例封禁状态。取值范围：NORMAL实例正常。NETWORK_RESTRICT：网络封禁。 */
   InstanceRestrictState?: string;
+  /** 描述实例是否支持IPv6。 */
+  SupportIpv6Detail?: SupportIpv6Detail;
+  /** 公网IPv6地址列表。 */
+  PublicIpv6Addresses?: string[];
   /** 创建实例后自动执行TAT命令的调用ID。 */
   InitInvocationId?: string;
   /** 实例违规详情。 */
@@ -866,6 +874,16 @@ declare interface SoftwareDetail {
   Title?: string;
   /** 软件的属性值 */
   Value?: string;
+}
+
+/** 实例支持IPv6详情描述。 */
+declare interface SupportIpv6Detail {
+  /** 是否支持开启IPv6。 */
+  IsSupport?: boolean;
+  /** 详情。当IsSupport为True，Detail枚举值为:EFFECTIVE_IMMEDIATELY: 立即生效EFFECTIVE_AFTER_REBOOT: 分配过程需要开关机，用户需备份数据 当IsSupport为False，Detail枚举值为:HAD_BEEN_ASSIGNED: 已分配IPv6地址REGION_NOT_SUPPORT: 地域不支持BLUEPRINT_NOT_SUPPORT: 镜像不支持BUNDLE_INSTANCE_NOT_SUPPORT: 套餐实例不支持BUNDLE_BANDWIDTH_NOT_SUPPORT: 套餐带宽不支持 */
+  Detail?: string;
+  /** 提示信息。 */
+  Message?: string;
 }
 
 /** 描述了操作系统所在块设备即系统盘的信息。 */

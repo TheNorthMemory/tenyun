@@ -4209,7 +4209,7 @@ declare interface ModifyInstanceAttributesRequest {
   Config?: ModifyInstanceAttributesConfig;
   /** 动态消息保留策略配置 */
   DynamicRetentionConfig?: DynamicRetentionTime;
-  /** 升配Rebalance时间 参数已废弃,忽略不填!!! */
+  /** 用于修改升级版本或升配定时任务的执行时间，Unix时间戳，精确到秒 */
   RebalanceTime?: number;
   /** 公网带宽 最小3Mbps 最大999Mbps 仅专业版支持填写 */
   PublicNetwork?: number;
@@ -4217,6 +4217,8 @@ declare interface ModifyInstanceAttributesRequest {
   DynamicDiskConfig?: DynamicDiskConfig;
   /** 实例级别单条消息大小（单位byte) 最大 12582912(不包含) 最小1024(不包含) */
   MaxMessageByte?: number;
+  /** 集群topic默认 unclean.leader.election.enable配置: 1 开启 0 关闭 */
+  UncleanLeaderElectionEnable?: number;
 }
 
 declare interface ModifyInstanceAttributesResponse {

@@ -2017,13 +2017,13 @@ declare interface PrometheusRuleSet {
 /** Prometheus 抓取任务 */
 declare interface PrometheusScrapeJob {
   /** 任务名 */
-  Name: string | null;
+  Name?: string | null;
   /** Agent ID */
-  AgentId: string;
+  AgentId?: string;
   /** 任务 ID */
-  JobId: string;
+  JobId?: string;
   /** 配置 */
-  Config: string | null;
+  Config?: string | null;
 }
 
 /** Prometheus 托管服务标签 */

@@ -813,13 +813,13 @@ declare interface SmallVideoLayoutParams {
 /** 云端录制查询接口，录制文件的信息 */
 declare interface StorageFile {
   /** 录制文件对应的UserId，如果是混流的话的这里返回的是空串。 */
-  UserId: string | null;
+  UserId?: string | null;
   /** 录制索引文件名。 */
-  FileName: string;
+  FileName?: string;
   /** 录制文件流信息。video：视频录制文件audio：音频录制文件audio_video：音视频录制文件 */
-  TrackType: string | null;
+  TrackType?: string | null;
   /** 录制文件开始Unix时间戳。 */
-  BeginTimeStamp: number;
+  BeginTimeStamp?: number;
 }
 
 /** 录制存储参数 */
@@ -1331,9 +1331,9 @@ declare interface DescribePictureRequest {
 
 declare interface DescribePictureResponse {
   /** 返回的图片记录数 */
-  Total: number;
+  Total?: number;
   /** 图片信息列表 */
-  PictureInfo: PictureInfo[];
+  PictureInfo?: PictureInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

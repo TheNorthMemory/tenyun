@@ -1464,44 +1464,6 @@ declare interface VpcZoneData {
   Region: string;
 }
 
-declare interface AddAcRuleRequest {
-  /** -1表示优先级最低，1表示优先级最高 */
-  OrderIndex: string;
-  /** 访问控制策略中设置的流量通过云防火墙的方式。取值：accept：放行drop：拒绝log：观察 */
-  RuleAction: string;
-  /** 访问控制策略的流量方向。取值：in：外对内流量访问控制out：内对外流量访问控制 */
-  Direction: string;
-  /** 访问控制策略的描述信息 */
-  Description: string;
-  /** 访问控制策略中的源地址类型。取值：net：源IP或网段（IP或者CIDR）location：源区域template：云防火墙地址模板instance：实例idvendor：云厂商 */
-  SourceType: string;
-  /** 访问控制策略中的源地址。取值：当SourceType为net时，SourceContent为源IP地址或者CIDR地址。例如：1.1.1.0/24当SourceType为template时，SourceContent为源地址模板id。当SourceType为location时，SourceContent为源区域。例如["BJ11", "ZB"]当SourceType为instance时，SourceContent为该实例id对应的公网ip。例如ins-xxxxx当SourceType为vendor时，SourceContent为所选择厂商的公网ip列表。例如：aws,huawei,tencent,aliyun,azure,all代表以上五个 */
-  SourceContent: string;
-  /** 访问控制策略中的目的地址类型。取值：net：目的IP或者网段（IP或者CIDR）location：源区域template：云防火墙地址模板instance：实例idvendor：云厂商domain: 域名或者ip */
-  DestType: string;
-  /** 访问控制策略中的目的地址。取值：当DestType为net时，DestContent为源IP地址或者CIDR地址。例如：1.1.1.0/24当DestType为template时，DestContent为源地址模板id。当DestType为location时，DestContent为源区域。例如["BJ11", "ZB"]当DestType为instance时，DestContent为该实例id对应的公网ip。例如ins-xxxxx当DestType为domain时，DestContent为该实例id对应的域名规则。例如*.qq.com当DestType为vendor时，DestContent为所选择厂商的公网ip列表。例如：aws,huawei,tencent,aliyun,azure,all代表以上五个 */
-  DestContent: string;
-  /** 访问控制策略的端口。取值：-1/-1：全部端口80,443：80或者443 */
-  Port: string;
-  /** 访问控制策略中流量访问的协议类型。取值：TCP，目前互联网边界规则只能支持TCP，不传参数默认就是TCP */
-  Protocol?: string;
-  /** 七层协议，取值：HTTP/HTTPSTLS/SSL */
-  ApplicationName?: string;
-  /** 是否启用规则，默认为启用，取值：true为启用，false为不启用 */
-  Enable?: string;
-}
-
-declare interface AddAcRuleResponse {
-  /** 创建成功后返回新策略的uuid */
-  RuleUuid?: number;
-  /** 0代表成功，-1代表失败 */
-  ReturnCode?: number;
-  /** success代表成功，failed代表失败 */
-  ReturnMsg?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface AddAclRuleRequest {
   /** 需要添加的访问控制规则列表 */
   Rules: CreateRuleItem[];
@@ -3631,8 +3593,6 @@ declare interface SyncFwOperateResponse {
 /** {@link Cfw 云防火墙} */
 declare interface Cfw {
   (): Versions;
-  /** @deprecated 添加互联网边界规则（不再使用，已迁移到新接口AddAclRule） {@link AddAcRuleRequest} {@link AddAcRuleResponse} */
-  AddAcRule(data: AddAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddAcRuleResponse>;
   /** 添加互联网边界访问控制规则 {@link AddAclRuleRequest} {@link AddAclRuleResponse} */
   AddAclRule(data: AddAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddAclRuleResponse>;
   /** 创建新企业安全组规则 {@link AddEnterpriseSecurityGroupRulesRequest} {@link AddEnterpriseSecurityGroupRulesResponse} */
