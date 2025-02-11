@@ -57,9 +57,9 @@ declare interface FileSystem {
   /** POSIX权限控制 */
   PosixAcl?: boolean;
   /** 是否打开Ranger地址校验 */
-  EnableRanger?: boolean | null;
+  EnableRanger?: boolean;
   /** Ranger地址列表 */
-  RangerServiceAddresses?: string[] | null;
+  RangerServiceAddresses?: string[];
 }
 
 /** 生命周期规则 */
@@ -185,7 +185,7 @@ declare interface CreateAccessRulesRequest {
 
 declare interface CreateAccessRulesResponse {
   /** 权限规则列表 */
-  AccessRules: AccessRule[] | null;
+  AccessRules?: AccessRule[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1369,7 +1369,7 @@ declare interface DescribeCcnAttachedInstancesRequest {
 
 declare interface DescribeCcnAttachedInstancesResponse {
   /** 云联网关联的实例列表。 */
-  CcnAttachedInstanceSet: CcnAttachedInstance[] | null;
+  CcnAttachedInstanceSet?: CcnAttachedInstance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2061,9 +2061,9 @@ declare interface InquirePriceRenewInstancesResponse {
   /** 询价信息。默认为列表中第一个实例的价格信息。 */
   Price?: Price;
   /** 数据盘价格信息列表。 */
-  DataDiskPriceSet?: DataDiskPrice[] | null;
+  DataDiskPriceSet?: DataDiskPrice[];
   /** 待续费实例价格列表。 */
-  InstancePriceDetailSet?: InstancePriceDetail[] | null;
+  InstancePriceDetailSet?: InstancePriceDetail[];
   /** 总计价格。 */
   TotalPrice?: TotalPrice;
   /** 唯一请求 ID，每次请求都会返回。 */

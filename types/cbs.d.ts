@@ -180,7 +180,7 @@ declare interface Disk {
   DeadlineTime?: string;
   /** 云盘是否挂载到云主机上。取值范围：false:表示未挂载true:表示已挂载。 */
   Attached?: boolean;
-  /** 云硬盘大小，单位GB。 */
+  /** 云硬盘大小，单位GiB。 */
   DiskSize?: number;
   /** 云盘类型变更的迁移进度，取值0到100。 */
   MigratePercent?: number | null;
@@ -218,6 +218,8 @@ declare interface Disk {
   ErrorPrompt?: string | null;
   /** 云盘是否开启性能突发 */
   BurstPerformance?: boolean | null;
+  /** 云硬盘加密类型，值为ENCRYPT_V1和ENCRYPT_V2，分别表示第一代和第二代加密技术，两种加密技术互不兼容 */
+  EncryptType?: string | null;
 }
 
 /** 云硬盘备份点。 */
@@ -571,7 +573,7 @@ declare interface CreateDisksRequest {
   DiskCount?: number;
   /** 可选参数。使用此参数可给云硬盘购买额外的性能。当前仅支持极速型云盘（CLOUD_TSSD）和增强型SSD云硬盘（CLOUD_HSSD） */
   ThroughputPerformance?: number;
-  /** 云硬盘大小，单位为GB。如果传入`SnapshotId`则可不传`DiskSize`，此时新建云盘的大小为快照大小如果传入`SnapshotId`同时传入`DiskSize`，则云盘大小必须大于或等于快照大小云盘大小取值范围参见云硬盘[产品分类](/document/product/362/2353)的说明。 */
+  /** 云硬盘大小，单位为GiB。如果传入`SnapshotId`则可不传`DiskSize`，此时新建云盘的大小为快照大小如果传入`SnapshotId`同时传入`DiskSize`，则云盘大小必须大于或等于快照大小云盘大小取值范围参见云硬盘[产品分类](/document/product/362/2353)的说明。 */
   DiskSize?: number;
   /** 可选参数，默认为False。传入True时，云盘将创建为共享型云盘。 */
   Shareable?: boolean;

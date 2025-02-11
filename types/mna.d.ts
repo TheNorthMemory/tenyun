@@ -135,11 +135,11 @@ declare interface DeviceNetInfo {
   /** 数据网络类型：-1 ：无效值 2：2G 3：3G 4：4G 5：5G */
   Rat?: number;
   /** 网卡名 */
-  NetInfoName?: string | null;
+  NetInfoName?: string;
   /** 下行实时速率（浮点数类型代替上一版本DataRx的整型） */
-  DownRate?: number | null;
+  DownRate?: number;
   /** 上行实时速率（浮点数类型代替上一版本TxRate的整型） */
-  UpRate?: number | null;
+  UpRate?: number;
 }
 
 /** 设备付费模式信息 */
@@ -167,15 +167,15 @@ declare interface ExpectedThreshold {
 /** 设备流量信息 */
 declare interface FlowDetails {
   /** 流量数据点 */
-  NetDetails?: NetDetails[] | null;
+  NetDetails?: NetDetails[];
   /** 设备ID */
-  DeviceId?: string | null;
+  DeviceId?: string;
   /** 流量最大值（单位：bytes） */
-  MaxValue?: number | null;
+  MaxValue?: number;
   /** 流量平均值（单位：bytes） */
-  AvgValue?: number | null;
+  AvgValue?: number;
   /** 流量总值（单位：bytes） */
-  TotalValue?: number | null;
+  TotalValue?: number;
 }
 
 /** 流量包信息 */

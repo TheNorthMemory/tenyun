@@ -76,6 +76,50 @@ declare interface Acl {
   WhiteCmds?: string[];
   /** 是否允许记录键盘 */
   AllowKeyboardLogger?: boolean;
+  /** 关联的应用资产列表 */
+  AppAssetSet?: AppAsset[];
+}
+
+/** 应用资产信息 */
+declare interface AppAsset {
+  /** 应用资产id */
+  Id?: number;
+  /** 实例id */
+  InstanceId?: string;
+  /** 资产名称 */
+  Name?: string;
+  /** 应用服务器id */
+  DeviceId?: number;
+  /** 应用服务器账号id */
+  DeviceAccountId?: number;
+  /** 应用资产类型。1-web应用 */
+  Kind?: number;
+  /** 客户端工具路径 */
+  ClientAppPath?: string;
+  /** 客户端工具类型 */
+  ClientAppKind?: string;
+  /** 应用资产url */
+  Url?: string;
+  /** 托管状态。0-未托管，1-已托管 */
+  BindStatus?: number;
+  /** 应用服务器实例id */
+  DeviceInstanceId?: string;
+  /** 应用服务器名称 */
+  DeviceName?: string;
+  /** 应用服务器账号名称 */
+  DeviceAccountName?: string;
+  /** 堡垒机实例id */
+  ResourceId?: string;
+  /** 堡垒机实例信息 */
+  Resource?: Resource;
+  /** 网络域id */
+  DomainId?: string;
+  /** 网络域名称 */
+  DomainName?: string;
+  /** 资产组信息 */
+  GroupSet?: Group[];
+  /** 资产所属部门 */
+  Department?: Department;
 }
 
 /** 资产同步状态 */
@@ -562,6 +606,50 @@ declare interface SearchFileTypeFilter {
   Method?: number[];
 }
 
+/** 搜索字符或图形会话时返回的SessionResul结构体 */
+declare interface SessionResult {
+  /** 用户名 */
+  UserName?: string;
+  /** 姓名 */
+  RealName?: string;
+  /** 主机账号 */
+  Account?: string;
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 会话大小 */
+  Size?: number;
+  /** 设备ID */
+  InstanceId?: string;
+  /** 设备名 */
+  DeviceName?: string;
+  /** 内部Ip */
+  PrivateIp?: string;
+  /** 外部Ip */
+  PublicIp?: string;
+  /** 来源Ip */
+  FromIp?: string;
+  /** 会话持续时长 */
+  Duration?: number;
+  /** 该会话内命令数量 ，搜索图形会话时该字段无意义 */
+  Count?: number;
+  /** 该会话内高危命令数，搜索图形时该字段无意义 */
+  DangerCount?: number;
+  /** 会话状态，如1会话活跃 2会话结束 3强制离线 4其他错误 */
+  Status?: number;
+  /** 会话Id */
+  Id?: string;
+  /** 设备所属的地域 */
+  ApCode?: string;
+  /** 会话协议 */
+  Protocol?: string;
+  /** 应用资产类型：1-web */
+  AppAssetKind?: number;
+  /** 应用资产url */
+  AppAssetUrl?: string;
+}
+
 /** 资产标签 */
 declare interface TagFilter {
   /** 标签键 */
@@ -701,6 +789,8 @@ declare interface CreateAclRequest {
   UserGroupIdSet?: number[];
   /** 关联的资产ID集合 */
   DeviceIdSet?: number[];
+  /** 关联的应用资产ID集合 */
+  AppAssetIdSet?: number[];
   /** 关联的资产组ID */
   DeviceGroupIdSet?: number[];
   /** 关联的账号 */
@@ -1063,6 +1153,8 @@ declare interface DescribeAclsRequest {
   AuthorizedUserIdSet?: number[];
   /** 有访问权限的资产ID集合 */
   AuthorizedDeviceIdSet?: number[];
+  /** 有访问权限的应用资产ID集合 */
+  AuthorizedAppAssetIdSet?: number[];
   /** 访问权限状态，1 - 已生效，2 - 未生效，3 - 已过期 */
   Status?: number;
   /** 部门ID，用于过滤属于某个部门的访问权限 */
@@ -1193,6 +1285,8 @@ declare interface DescribeDeviceGroupMembersRequest {
   Limit?: number;
   /** 资产类型，1 - Linux，2 - Windows，3 - MySQL，4 - SQLServer */
   Kind?: number;
+  /** 资产类型集合，1 - Linux，2 - Windows，3 - MySQL，4 - SQLServer */
+  KindSet?: number[];
   /** 所属部门ID */
   DepartmentId?: string;
   /** 过滤条件，可按照标签键、标签进行过滤。如果同时指定标签键和标签过滤条件，它们之间为“AND”的关系 */
@@ -1433,6 +1527,8 @@ declare interface DescribeUsersRequest {
   Email?: string;
   /** 查询具有指定资产ID访问权限的用户 */
   AuthorizedDeviceIdSet?: number[];
+  /** 查询具有指定应用资产ID访问权限的用户 */
+  AuthorizedAppAssetIdSet?: number[];
   /** 认证方式，0 - 本地, 1 - LDAP, 2 - OAuth, 不传为全部 */
   AuthTypeSet?: number[];
   /** 部门ID，用于过滤属于某个部门的用户 */
@@ -1493,6 +1589,8 @@ declare interface ModifyAclRequest {
   UserGroupIdSet?: number[];
   /** 关联的资产ID */
   DeviceIdSet?: number[];
+  /** 关联的应用资产ID集合 */
+  AppAssetIdSet?: number[];
   /** 关联的资产组ID */
   DeviceGroupIdSet?: number[];
   /** 关联的账号 */
@@ -1955,11 +2053,17 @@ declare interface SearchSessionRequest {
   Status?: number;
   /** 若入参为Id，则其他入参字段不作为搜索依据，仅按照Id来搜索会话 */
   Id?: string;
+  /** 应用资产类型, 1-web */
+  AppAssetKindSet?: number[];
+  /** 应用资产Url */
+  AppAssetUrl?: string;
 }
 
 declare interface SearchSessionResponse {
   /** 记录数 */
   TotalCount?: number;
+  /** 会话信息列表 */
+  SessionSet?: SessionResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

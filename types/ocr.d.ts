@@ -2159,27 +2159,33 @@ declare interface TextVehicleBack {
 /** 行驶证主页正面的识别结果 */
 declare interface TextVehicleFront {
   /** 号牌号码 */
-  PlateNo: string | null;
+  PlateNo?: string | null;
   /** 车辆类型 */
-  VehicleType: string | null;
+  VehicleType?: string | null;
   /** 所有人 */
-  Owner: string | null;
+  Owner?: string | null;
   /** 住址 */
-  Address: string | null;
+  Address?: string | null;
   /** 使用性质 */
-  UseCharacter: string | null;
+  UseCharacter?: string | null;
   /** 品牌型号 */
-  Model: string | null;
+  Model?: string | null;
   /** 车辆识别代号 */
-  Vin: string | null;
+  Vin?: string | null;
   /** 发动机号码 */
-  EngineNo: string | null;
+  EngineNo?: string | null;
   /** 注册日期 */
-  RegisterDate: string | null;
+  RegisterDate?: string | null;
   /** 发证日期 */
-  IssueDate: string | null;
+  IssueDate?: string | null;
   /** 印章 */
-  Seal: string | null;
+  Seal?: string | null;
+  /** 状态 */
+  StateElectronic?: string;
+  /** 检验有效期 */
+  InspectionValidityTimeElectronic?: string;
+  /** 生成时间 */
+  GenerationTimeElectronic?: string;
 }
 
 /** 运单识别结果 */

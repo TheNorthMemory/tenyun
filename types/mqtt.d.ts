@@ -86,6 +86,16 @@ declare interface Filter {
   Values: string[];
 }
 
+/** IP规则 */
+declare interface IpRule {
+  /** IP地址 */
+  Ip: string;
+  /** 是否允许放行 */
+  Allow: boolean;
+  /** 备注信息 */
+  Remark: string | null;
+}
+
 /** MQTT认证器信息 */
 declare interface MQTTAuthenticatorItem {
   /** 认证器类型: JWT：JWT认证器 JWKS：JWKS认证器 BYOC：一端一证认证器 */
@@ -98,6 +108,24 @@ declare interface MQTTAuthenticatorItem {
   CreateTime?: number | null;
   /** 说明 */
   Remark?: string | null;
+}
+
+/** MQTTEndpoint */
+declare interface MQTTEndpointItem {
+  /** 类型 */
+  Type?: string | null;
+  /** 接入点 */
+  Url?: string | null;
+  /** vpc信息 */
+  VpcId?: string | null;
+  /** 子网信息 */
+  SubnetId?: string | null;
+  /** 主机 */
+  Host?: string | null;
+  /** 端口 */
+  Port?: number | null;
+  /** 接入点ip */
+  Ip?: string | null;
 }
 
 /** MQTT 实例信息 */
@@ -154,12 +182,52 @@ declare interface MQTTTopicItem {
   Remark?: string | null;
 }
 
+/** MQTT集群用户信息 */
+declare interface MQTTUserItem {
+  /** 用户名 */
+  Username?: string;
+  /** 密码 */
+  Password?: string;
+  /** 备注信息 */
+  Remark?: string;
+  /** 创建时间，秒为单位 */
+  CreatedTime?: number;
+  /** 修改时间，秒为单位 */
+  ModifiedTime?: number;
+}
+
+/** 公网访问安全规则 */
+declare interface PublicAccessRule {
+  /** ip网段信息 */
+  IpRule: string | null;
+  /** 允许或者拒绝 */
+  Allow: boolean | null;
+  /** 备注信息 */
+  Remark?: string | null;
+}
+
+/** 标签数据 */
+declare interface Tag {
+  /** 标签名称 */
+  TagKey: string | null;
+  /** 标签值 */
+  TagValue: string | null;
+}
+
 /** 标签过滤器 */
 declare interface TagFilter {
   /** 标签键名称 */
   TagKey?: string;
   /** 标签键名称 */
   TagValues?: string[];
+}
+
+/** VPC信息 */
+declare interface VpcInfo {
+  /** VPC ID */
+  VpcId: string;
+  /** 子网ID */
+  SubnetId: string;
 }
 
 declare interface ActivateDeviceCertificateRequest {
@@ -204,6 +272,54 @@ declare interface CreateAuthorizationPolicyRequest {
 }
 
 declare interface CreateAuthorizationPolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateInsPublicEndpointRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 带宽,单位Mbps */
+  Bandwidth: number;
+  /** 公网访问规则 */
+  Rules?: PublicAccessRule[];
+}
+
+declare interface CreateInsPublicEndpointResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateInstanceRequest {
+  /** 实例类型，BASIC 基础版PRO 专业版 */
+  InstanceType: string;
+  /** 实例名称 */
+  Name: string;
+  /** 商品规格，可用规格可通过接口DescribeProductSKUList查询 */
+  SkuCode: string;
+  /** 备注信息 */
+  Remark?: string;
+  /** 标签列表 */
+  TagList?: Tag[];
+  /** 实例绑定的VPC信息 */
+  VpcList?: VpcInfo[];
+  /** 是否开启公网 */
+  EnablePublic?: boolean;
+  /** 公网带宽（单位：兆） */
+  Bandwidth?: number;
+  /** 公网访问白名单 */
+  IpRules?: IpRule[];
+  /** 是否自动续费（0: 不自动续费；1: 自动续费） */
+  RenewFlag?: number;
+  /** 购买时长（单位：月） */
+  TimeSpan?: number;
+  /** 付费模式（0: 后付费；1: 预付费） */
+  PayMode?: number;
+}
+
+declare interface CreateInstanceResponse {
+  /** 实例ID */
+  InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -270,6 +386,22 @@ declare interface CreateTopicResponse {
   RequestId?: string;
 }
 
+declare interface CreateUserRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 用户名 */
+  Username: string;
+  /** 密码，该字段为空时候则后端会默认生成 */
+  Password?: string;
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface CreateUserResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeactivateDeviceCertificateRequest {
   /** 集群id */
   InstanceId: string;
@@ -318,6 +450,26 @@ declare interface DeleteDeviceCertificateResponse {
   RequestId?: string;
 }
 
+declare interface DeleteInsPublicEndpointRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DeleteInsPublicEndpointResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteInstanceRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DeleteInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteTopicRequest {
   /** 实例ID */
   InstanceId: string;
@@ -326,6 +478,18 @@ declare interface DeleteTopicRequest {
 }
 
 declare interface DeleteTopicResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteUserRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 用户名 */
+  Username: string;
+}
+
+declare interface DeleteUserResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -414,6 +578,26 @@ declare interface DescribeDeviceCertificatesResponse {
   TotalCount?: number;
   /** 设备证书 */
   Data?: DeviceCertificateItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInsPublicEndpointsRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeInsPublicEndpointsResponse {
+  /** 接入点 */
+  Endpoints?: MQTTEndpointItem[];
+  /** 实例id */
+  InstanceId?: string;
+  /** 带宽 */
+  Bandwidth?: number;
+  /** 公网访问规则 */
+  Rules?: PublicAccessRule[];
+  /** 公网状态： NORMAL-正常 CLOSING-关闭中 MODIFYING-修改中 CREATING-开启中 CLOSE-关闭 */
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -534,6 +718,26 @@ declare interface DescribeTopicResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUserListRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 查询条件列表支持字段Username：Username模糊查询 */
+  Filters?: Filter[];
+  /** 查询起始位置 */
+  Offset?: number;
+  /** 查询结果限制数量 */
+  Limit?: number;
+}
+
+declare interface DescribeUserListResponse {
+  /** 查询总数 */
+  TotalCount?: number | null;
+  /** 角色信息列表 */
+  Data?: MQTTUserItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAuthorizationPolicyRequest {
   /** 策略 */
   Id: number;
@@ -566,6 +770,40 @@ declare interface ModifyAuthorizationPolicyRequest {
 }
 
 declare interface ModifyAuthorizationPolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyInsPublicEndpointRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 带宽，单位：Mbps */
+  Bandwidth: number;
+  /** 公网访问规则 */
+  Rules: PublicAccessRule[];
+}
+
+declare interface ModifyInsPublicEndpointResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyInstanceRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 要修改实例名称 */
+  Name?: string;
+  /** 要修改的备注信息 */
+  Remark?: string;
+  /** 要变更的配置规格 */
+  SkuCode?: string;
+  /** 客户端证书注册方式：JITP：自动注册API：手动通过API注册 */
+  DeviceCertificateProvisionType?: string;
+  /** 自动注册证书是否自动激活 */
+  AutomaticActivation?: boolean;
+}
+
+declare interface ModifyInstanceResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -628,6 +866,20 @@ declare interface ModifyTopicResponse {
   RequestId?: string;
 }
 
+declare interface ModifyUserRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 用户名 */
+  Username: string;
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface ModifyUserResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RegisterDeviceCertificateRequest {
   /** 集群id */
   InstanceId: string;
@@ -679,12 +931,18 @@ declare interface Mqtt {
   ActivateDeviceCertificate(data: ActivateDeviceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateDeviceCertificateResponse>;
   /** 创建授权策略 {@link CreateAuthorizationPolicyRequest} {@link CreateAuthorizationPolicyResponse} */
   CreateAuthorizationPolicy(data: CreateAuthorizationPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuthorizationPolicyResponse>;
+  /** 为MQTT实例创建公网接入点 {@link CreateInsPublicEndpointRequest} {@link CreateInsPublicEndpointResponse} */
+  CreateInsPublicEndpoint(data: CreateInsPublicEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInsPublicEndpointResponse>;
+  /** 购买MQTT实例 {@link CreateInstanceRequest} {@link CreateInstanceResponse} */
+  CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
   /** 创建一个MQTTJWKS认证器 {@link CreateJWKSAuthenticatorRequest} {@link CreateJWKSAuthenticatorResponse} */
   CreateJWKSAuthenticator(data: CreateJWKSAuthenticatorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJWKSAuthenticatorResponse>;
   /** 创建一个MQTTJWT认证器 {@link CreateJWTAuthenticatorRequest} {@link CreateJWTAuthenticatorResponse} */
   CreateJWTAuthenticator(data: CreateJWTAuthenticatorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJWTAuthenticatorResponse>;
   /** 创建MQTT主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
+  /** 添加MQTT角色 {@link CreateUserRequest} {@link CreateUserResponse} */
+  CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
   /** 失效设备证书 {@link DeactivateDeviceCertificateRequest} {@link DeactivateDeviceCertificateResponse} */
   DeactivateDeviceCertificate(data: DeactivateDeviceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DeactivateDeviceCertificateResponse>;
   /** 删除一个MQTT认证器 {@link DeleteAuthenticatorRequest} {@link DeleteAuthenticatorResponse} */
@@ -693,8 +951,14 @@ declare interface Mqtt {
   DeleteAuthorizationPolicy(data: DeleteAuthorizationPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuthorizationPolicyResponse>;
   /** 删除设备证书 {@link DeleteDeviceCertificateRequest} {@link DeleteDeviceCertificateResponse} */
   DeleteDeviceCertificate(data: DeleteDeviceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceCertificateResponse>;
+  /** 删除MQTT实例的公网接入点 {@link DeleteInsPublicEndpointRequest} {@link DeleteInsPublicEndpointResponse} */
+  DeleteInsPublicEndpoint(data: DeleteInsPublicEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInsPublicEndpointResponse>;
+  /** 删除MQTT实例 {@link DeleteInstanceRequest} {@link DeleteInstanceResponse} */
+  DeleteInstance(data: DeleteInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceResponse>;
   /** 删除MQTT主题 {@link DeleteTopicRequest} {@link DeleteTopicResponse} */
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
+  /** 删除MQTT角色 {@link DeleteUserRequest} {@link DeleteUserResponse} */
+  DeleteUser(data: DeleteUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserResponse>;
   /** 查询MQTT认证器 {@link DescribeAuthenticatorRequest} {@link DescribeAuthenticatorResponse} */
   DescribeAuthenticator(data: DescribeAuthenticatorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuthenticatorResponse>;
   /** 查询授权策略 {@link DescribeAuthorizationPoliciesRequest} {@link DescribeAuthorizationPoliciesResponse} */
@@ -703,6 +967,8 @@ declare interface Mqtt {
   DescribeDeviceCertificate(data: DescribeDeviceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceCertificateResponse>;
   /** 查询设备证书 {@link DescribeDeviceCertificatesRequest} {@link DescribeDeviceCertificatesResponse} */
   DescribeDeviceCertificates(data: DescribeDeviceCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceCertificatesResponse>;
+  /** 查询MQTT实例公网接入点 {@link DescribeInsPublicEndpointsRequest} {@link DescribeInsPublicEndpointsResponse} */
+  DescribeInsPublicEndpoints(data: DescribeInsPublicEndpointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInsPublicEndpointsResponse>;
   /** 查询MQTT实例详情信息 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
   /** 获取MQTT实例列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */
@@ -711,14 +977,22 @@ declare interface Mqtt {
   DescribeTopic(data: DescribeTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicResponse>;
   /** 查询MQTT主题列表 {@link DescribeTopicListRequest} {@link DescribeTopicListResponse} */
   DescribeTopicList(data: DescribeTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicListResponse>;
+  /** 查询MQTT用户列表 {@link DescribeUserListRequest} {@link DescribeUserListResponse} */
+  DescribeUserList(data: DescribeUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserListResponse>;
   /** 修改授权策略 {@link ModifyAuthorizationPolicyRequest} {@link ModifyAuthorizationPolicyResponse} */
   ModifyAuthorizationPolicy(data: ModifyAuthorizationPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuthorizationPolicyResponse>;
+  /** 更新MQTT实例公网接入点 {@link ModifyInsPublicEndpointRequest} {@link ModifyInsPublicEndpointResponse} */
+  ModifyInsPublicEndpoint(data: ModifyInsPublicEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInsPublicEndpointResponse>;
+  /** 修改MQTT实例属性 {@link ModifyInstanceRequest} {@link ModifyInstanceResponse} */
+  ModifyInstance(data: ModifyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceResponse>;
   /** 修改MQTTJWKS认证器 {@link ModifyJWKSAuthenticatorRequest} {@link ModifyJWKSAuthenticatorResponse} */
   ModifyJWKSAuthenticator(data: ModifyJWKSAuthenticatorRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyJWKSAuthenticatorResponse>;
   /** 修改MQTTJWT认证器 {@link ModifyJWTAuthenticatorRequest} {@link ModifyJWTAuthenticatorResponse} */
   ModifyJWTAuthenticator(data: ModifyJWTAuthenticatorRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyJWTAuthenticatorResponse>;
   /** 修改MQTT主题属性 {@link ModifyTopicRequest} {@link ModifyTopicResponse} */
   ModifyTopic(data: ModifyTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicResponse>;
+  /** 修改MQTT角色 {@link ModifyUserRequest} {@link ModifyUserResponse} */
+  ModifyUser(data: ModifyUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserResponse>;
   /** 注册设备证书 {@link RegisterDeviceCertificateRequest} {@link RegisterDeviceCertificateResponse} */
   RegisterDeviceCertificate(data: RegisterDeviceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterDeviceCertificateResponse>;
   /** 吊销设备证书 {@link RevokedDeviceCertificateRequest} {@link RevokedDeviceCertificateResponse} */

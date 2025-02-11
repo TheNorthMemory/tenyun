@@ -1242,6 +1242,110 @@ declare interface CancelCertificateOrderResponse {
   RequestId?: string;
 }
 
+declare interface CertificateInfoSubmitRequest {
+  /** 证书 ID。 */
+  CertId: string;
+  /** CSR 生成方式：online = 在线生成, upload = 手动上传。 */
+  GenCsrType: string;
+  /** 绑定证书的主域名。 */
+  CertCommonName: string;
+  /** 组织信息类型：1，个人； 2， 公司； */
+  CompanyType: number;
+  /** 公司证件类型（） */
+  OrgIdType: string;
+  /** 公司证件号码 */
+  OrgIdNumber: string;
+  /** 管理人证件类型 */
+  AdminIdType: string;
+  /** 管理人证件号码 */
+  AdminIdNumber: string;
+  /** 联系人证件类型 */
+  TechIdType: string;
+  /** 联系人证件号码 */
+  TechIdNumber: string;
+  /** 公司ID */
+  CompanyId: string;
+  /** 上传的 CSR 内容。如果GenCsrType为upload则该字段必传 */
+  Csr?: string;
+  /** 域名数组（多域名证书可以上传）。 */
+  DnsNames?: string[];
+  /** 私钥密码（非必填）。 */
+  KeyPass?: string;
+  /** 公司名称。 */
+  OrgOrganization?: string;
+  /** 部门名称。 */
+  OrgDivision?: string;
+  /** 公司详细地址。 */
+  OrgAddress?: string;
+  /** 国家名称，如中国：CN 。 */
+  OrgCountry?: string;
+  /** 公司所在城市。 */
+  OrgCity?: string;
+  /** 公司所在省份。 */
+  OrgRegion?: string;
+  /** 公司座机区号。 */
+  OrgPhoneArea?: string;
+  /** 公司座机号码。 */
+  OrgPhoneNumber?: string;
+  /** 证书验证方式。验证类型：DNS_AUTO = 自动DNS验证（仅支持在腾讯云解析且解析状态正常的域名使用该验证类型），DNS = 手动DNS验证，FILE = 文件验证。 */
+  VerifyType?: string;
+  /** 管理人名。 */
+  AdminFirstName?: string;
+  /** 管理人姓。 */
+  AdminLastName?: string;
+  /** 管理人手机号码。 */
+  AdminPhone?: string;
+  /** 管理人邮箱地址。 */
+  AdminEmail?: string;
+  /** 管理人职位。 */
+  AdminTitle?: string;
+  /** 联系人名。 */
+  TechFirstName?: string;
+  /** 联系人姓。 */
+  TechLastName?: string;
+  /** 联系人邮箱地址。 */
+  ContactEmail?: string;
+  /** 是否开启自动续费： 0， 不开启； 1， 开启； 默认为0 */
+  AutoRenewFlag?: number;
+  /** 证书加密参数 */
+  CsrKeyParameter?: string;
+  /** 证书加密方式 */
+  CsrEncryptAlgo?: string;
+  /** 管理人ID */
+  ManagerId?: string;
+  /** 联系人电话 */
+  TechPhone?: string;
+  /** 联系人邮箱 */
+  TechEmail?: string;
+  /** 联系人职位 */
+  TechTitle?: string;
+}
+
+declare interface CertificateInfoSubmitResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CertificateOrderSubmitRequest {
+  /** 证书 ID。 */
+  CertId: string;
+  /** 是否删除自动DNS验证值：0，不删除； 1，删除； 默认不删除 */
+  DeleteDnsAutoRecord?: number;
+  /** 域名验证方式：DNS_AUTO 自动DNS验证， DNS DNS验证， FILE 文件验证 */
+  VerifyType?: string;
+}
+
+declare interface CertificateOrderSubmitResponse {
+  /** CA机构侧订单号。 */
+  OrderId?: string;
+  /** 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 已添加DNS记录，5 = 企业证书，待提交，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函，13 = 免费证书待提交资料。 */
+  Status?: number;
+  /** 是否预审核 */
+  IsAudited?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CheckCertificateChainRequest {
   /** 待检查的证书链 */
   CertificateChain: string;
@@ -2665,6 +2769,10 @@ declare interface Ssl {
   CancelAuditCertificate(data: CancelAuditCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<CancelAuditCertificateResponse>;
   /** 取消证书订单 {@link CancelCertificateOrderRequest} {@link CancelCertificateOrderResponse} */
   CancelCertificateOrder(data: CancelCertificateOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CancelCertificateOrderResponse>;
+  /** 付费提交证书资料 {@link CertificateInfoSubmitRequest} {@link CertificateInfoSubmitResponse} */
+  CertificateInfoSubmit(data: CertificateInfoSubmitRequest, config?: AxiosRequestConfig): AxiosPromise<CertificateInfoSubmitResponse>;
+  /** 提交付费证书订单 {@link CertificateOrderSubmitRequest} {@link CertificateOrderSubmitResponse} */
+  CertificateOrderSubmit(data: CertificateOrderSubmitRequest, config?: AxiosRequestConfig): AxiosPromise<CertificateOrderSubmitResponse>;
   /** 检查证书链完整性 {@link CheckCertificateChainRequest} {@link CheckCertificateChainResponse} */
   CheckCertificateChain(data: CheckCertificateChainRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCertificateChainResponse>;
   /** 检查证书域名验证 {@link CheckCertificateDomainVerificationRequest} {@link CheckCertificateDomainVerificationResponse} */

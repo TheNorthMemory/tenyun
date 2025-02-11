@@ -7,7 +7,7 @@ declare interface AbnormalEvent {
   /** 异常事件ID，具体值查看附录：异常体验ID映射表：https://cloud.tencent.com/document/product/647/44916 */
   AbnormalEventId?: number;
   /** 远端用户ID,""：表示异常事件不是由远端用户产生 */
-  PeerId?: string | null;
+  PeerId?: string;
 }
 
 /** 用户的异常体验及可能的原因 */
@@ -635,7 +635,7 @@ declare interface QualityData {
   /** 用户ID */
   UserId?: string;
   /** 对端Id,为空时表示上行数据 */
-  PeerId?: string | null;
+  PeerId?: string;
   /** 数据类型 */
   DataType?: string;
 }
@@ -1191,7 +1191,7 @@ declare interface DeleteCloudRecordingRequest {
 
 declare interface DeleteCloudRecordingResponse {
   /** 云录制服务分配的任务 ID。任务 ID 是对一次录制生命周期过程的唯一标识，结束录制时会失去意义。 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1767,7 +1767,7 @@ declare interface ModifyCloudRecordingRequest {
 
 declare interface ModifyCloudRecordingResponse {
   /** 云录制服务分配的任务 ID。任务 ID 是对一次录制生命周期过程的唯一标识，结束录制时会失去意义。 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

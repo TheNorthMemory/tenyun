@@ -2006,6 +2006,8 @@ declare interface CreateOutputInfo {
   OutputType?: string;
   /** 输出的RIST的配置。 */
   RISTSettings?: CreateOutputRistSettings;
+  /** 对于含有多个音/视频轨的流，可以指定需要使用的轨道 */
+  PidSelector?: PidSelector;
 }
 
 /** 创建媒体传输流的输出的RTP配置。 */
@@ -2101,21 +2103,25 @@ declare interface DescribeEvent {
 /** 查询Flow的配置信息。 */
 declare interface DescribeFlow {
   /** 流Id。 */
-  FlowId: string;
+  FlowId?: string;
   /** 流名称。 */
-  FlowName: string;
+  FlowName?: string;
   /** 流状态，目前有IDLE/RUNNING。 */
-  State: string;
+  State?: string;
   /** 最大带宽值。 */
-  MaxBandwidth: number;
+  MaxBandwidth?: number;
   /** 输入组。 */
-  InputGroup: DescribeInput[];
+  InputGroup?: DescribeInput[];
   /** 输出组。 */
-  OutputGroup: DescribeOutput[] | null;
+  OutputGroup?: DescribeOutput[] | null;
   /** 该Flow关联的媒体传输事件EventId。 */
-  EventId: string;
+  EventId?: string;
   /** 媒体传输输入流所属的区域，取值和InputRegion相同。 */
-  Region: string;
+  Region?: string;
+  /** 该Flow允许创建的输入协议 */
+  AllowedInputProtocols?: string[];
+  /** 该Flow允许创建的输出协议 */
+  AllowedOutputProtocols?: string[];
 }
 
 /** Event管理的Flow列表 */
@@ -2276,6 +2282,8 @@ declare interface DescribeOutput {
   Zones?: string[];
   /** 输出的RIST配置信息。 */
   RISTSettings?: DescribeOutputRISTSettings | null;
+  /** 对于含有多个音/视频轨的流，可以指定需要使用的轨道 */
+  PidSelector?: PidSelector;
 }
 
 /** 查询输出的HLS拉流URL信息。 */
@@ -3902,6 +3910,8 @@ declare interface ModifyOutputInfo {
   RISTSettings?: CreateOutputRistSettings;
   /** 输出类型：Internet/TencentCSS/StreamLive */
   OutputType?: string;
+  /** 对于含有多个音/视频轨的流，可以指定需要使用的轨道 */
+  PidSelector?: PidSelector;
 }
 
 /** 媒体处理任务中的马赛克参数类型 */
@@ -4006,6 +4016,14 @@ declare interface OverrideTranscodeParameter {
   StdExtInfo?: string | null;
   /** 要插入的字幕文件。 */
   AddOnSubtitles?: AddOnSubtitle[] | null;
+}
+
+/** 对于含有多个音/视频轨的流，可以指定需要使用的轨道 */
+declare interface PidSelector {
+  /** 对于含有多音轨的流, 可以通过输入PID来指定需要使用的音轨，PID可以输入1到8191之间的正整数。 */
+  AudioPID?: number[] | null;
+  /** 对于含有多个视频轨的流，可以通过输入PID来指定需要使用的视频轨，PID可以输入1到8191之间的正整数。 */
+  VideoPID?: number[] | null;
 }
 
 /** 语音涉敏任务控制参数 */
