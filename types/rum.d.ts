@@ -275,7 +275,7 @@ declare interface CreateReleaseFileRequest {
 
 declare interface CreateReleaseFileResponse {
   /** 调用结果 */
-  Msg: string;
+  Msg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

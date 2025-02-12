@@ -665,7 +665,7 @@ declare interface BatchRegisterRequest {
 
 declare interface BatchRegisterResponse {
   /** 注册成功的用户列表 */
-  Users?: BatchUserInfo[] | null;
+  Users?: BatchUserInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1260,7 +1260,7 @@ declare interface DescribeRoomForbiddenUserRequest {
 
 declare interface DescribeRoomForbiddenUserResponse {
   /** 禁言用户信息数组，内容包括被禁言的成员 ID，及其被禁言到的时间（使用 UTC 时间，即世界协调时间） */
-  MutedAccountList?: MutedAccountList[] | null;
+  MutedAccountList?: MutedAccountList[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1384,7 +1384,7 @@ declare interface DescribeScoreListResponse {
   /** 总数 */
   Total?: number;
   /** 课堂评分列表 */
-  Scores?: ClassScoreItem[] | null;
+  Scores?: ClassScoreItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1402,7 +1402,7 @@ declare interface DescribeSdkAppIdUsersResponse {
   /** 用户总数 */
   Total?: number;
   /** 当前获取用户信息数组列表 */
-  Users?: UserInfo[] | null;
+  Users?: UserInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

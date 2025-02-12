@@ -3381,17 +3381,17 @@ declare interface DescribeOrganizationGroupOrganizationsRequest {
 
 declare interface DescribeOrganizationGroupOrganizationsResponse {
   /** 符合查询条件的资源实例总数量。 */
-  Total?: number | null;
+  Total?: number;
   /** 已授权待激活的子企业总数量 */
-  JoinedTotal?: number | null;
+  JoinedTotal?: number;
   /** 已加入的企业数量(废弃,请使用ActivatedTotal) */
-  ActivedTotal?: number | null;
+  ActivedTotal?: number;
   /** 如果入参Export为 true 时使用，表示导出Excel的url */
-  ExportUrl?: string | null;
+  ExportUrl?: string;
   /** 成员企业信息列表 */
-  List?: GroupOrganization[] | null;
+  List?: GroupOrganization[];
   /** 已加入的子企业总数量 */
-  ActivatedTotal?: number | null;
+  ActivatedTotal?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

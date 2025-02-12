@@ -5,9 +5,9 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 语音验证码发送状态 */
 declare interface SendStatus {
   /** 标识本次发送 ID，标识一次下发记录。 */
-  CallId: string;
+  CallId?: string;
   /** 用户的 session 内容，腾讯 server 回包中会原样返回。 */
-  SessionContext: string | null;
+  SessionContext?: string | null;
 }
 
 declare interface SendCodeVoiceRequest {
@@ -25,7 +25,7 @@ declare interface SendCodeVoiceRequest {
 
 declare interface SendCodeVoiceResponse {
   /** 语音验证码发送状态。 */
-  SendStatus: SendStatus;
+  SendStatus?: SendStatus;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -47,7 +47,7 @@ declare interface SendTtsVoiceRequest {
 
 declare interface SendTtsVoiceResponse {
   /** 语音通知发送状态。 */
-  SendStatus: SendStatus;
+  SendStatus?: SendStatus;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

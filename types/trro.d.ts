@@ -666,7 +666,7 @@ declare interface ModifyProjectResponse {
   RequestId?: string;
 }
 
-/** {@link Trro 远程实时操控} */
+/** {@link Trro 实时互动-工业能源版} */
 declare interface Trro {
   (): Versions;
   /** 批量删除设备 {@link BatchDeleteDevicesRequest} {@link BatchDeleteDevicesResponse} */

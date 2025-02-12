@@ -72,7 +72,7 @@ declare interface CdnInstanceDetail {
   Domain?: string;
   /** 已部署证书ID */
   CertId?: string;
-  /** 域名状态 */
+  /** 域名状态 rejected：域名审核未通过，域名备案过期/被注销导致，processing：部署中，online：已启动，offline：已关闭 */
   Status?: string;
   /** 域名计费状态 */
   HttpsBillingSwitch?: string;
@@ -470,23 +470,23 @@ declare interface DeployedResources {
   Resources?: string[] | null;
 }
 
-/** 域名验证结果 */
+/** 证书域名验证结果 */
 declare interface DomainValidationResult {
-  /** 域名。 */
+  /** 证书绑定的域名。 */
   Domain?: string;
-  /** 验证类型。 */
+  /** 域名验证类型。 取值为：DNS、FILE、DNS_AUTO、DNS_PROXY、FILE_PROXY */
   VerifyType?: string | null;
-  /** 本地检查结果。 */
+  /** 腾讯云检测结果，取值：1（验证通过）； -1（被限频或者 txt record not found）；-2（txt record not match）；-3（ns record not found）；-4（file not found）；-5（file not match）；-6（cname record not found）；-7（cname record not match）；-8（ns record not found）-9（file not found）；-10（file not match） */
   LocalCheck?: number;
-  /** CA检查结果。 */
+  /** CA检查结果。取值： -1（未检测通过）；2（检测通过） */
   CaCheck?: number;
-  /** 检查失败原因。 */
+  /** 检查失败原因。状态LocalCheck的具体描述 */
   LocalCheckFailReason?: string | null;
   /** 检查到的值。 */
   CheckValue?: string[] | null;
-  /** 是否频繁请求。 */
+  /** 是否被限频拦截， 取值：false（未被限频）；true（被限频） */
   Frequently?: boolean;
-  /** 是否已经签发。 */
+  /** 证书是否已经签发。取值： false（未签发）；true（已签发） */
   Issued?: boolean;
 }
 
@@ -966,7 +966,7 @@ declare interface TeoInstanceDetail {
   CertId?: string;
   /** 区域ID */
   ZoneId?: string | null;
-  /** 域名状态 */
+  /** 域名状态deployed：已部署；processing：部署中；applying：申请中；failed：申请失败；issued：绑定失败。 */
   Status?: string;
 }
 
@@ -2153,7 +2153,7 @@ declare interface DescribeHostLighthouseInstanceListRequest {
   CertificateId?: string;
   /** 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时 */
   IsCache?: number;
-  /** 过滤参数列表 */
+  /** 过滤参数列表； FilterKey：domainMatch（查询域名是否匹配的实例列表） FilterValue：1，表示查询匹配； 0，表示查询不匹配； 默认查询匹配 */
   Filters?: Filter[];
   /** 部署资源类型 lighthouse */
   ResourceType?: string;
@@ -2297,7 +2297,7 @@ declare interface DescribeHostVodInstanceListRequest {
   CertificateId?: string;
   /** 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时 */
   IsCache?: number;
-  /** 过滤参数列表 */
+  /** 过滤参数列表； FilterKey：domainMatch（查询域名是否匹配的实例列表） FilterValue：1，表示查询匹配； 0，表示查询不匹配； 默认查询匹配 */
   Filters?: Filter[];
   /** 部署资源类型 vod */
   ResourceType?: string;

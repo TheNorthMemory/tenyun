@@ -2086,6 +2086,8 @@ declare interface ImportImageRequest {
 }
 
 declare interface ImportImageResponse {
+  /** 镜像 ID */
+  ImageId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

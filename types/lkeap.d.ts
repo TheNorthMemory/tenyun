@@ -84,7 +84,7 @@ declare interface Delta {
 declare interface DocItem {
   /** 文档id */
   DocId?: string | null;
-  /** 状态，- Uploading 上传中 - Parsing 解析中 - ParseFailed 解析失败- Indexing 创建索引中 - IndexFailed 创建索引失败- Success 发布成功- Failed 失败 */
+  /** 状态，- Uploading 上传中 - Auditing 审核中- Parsing 解析中 - ParseFailed 解析失败- Indexing 创建索引中 - IndexFailed 创建索引失败- Success 发布成功- Failed 失败 */
   Status?: string | null;
   /** 文件名 */
   FileName?: string | null;
@@ -245,6 +245,12 @@ declare interface ChatCompletionsResponse {
 }
 
 declare interface CreateAttributeLabelRequest {
+  /** 知识库ID */
+  KnowledgeBaseId: string;
+  /** 属性标识，最大40个英文字符，如style */
+  AttributeKey: string;
+  /** 属性名称，最大80个英文字符，如风格 */
+  AttributeName: string;
   /** 属性标签信息 */
   Labels?: AttributeLabelItem[];
 }
@@ -265,11 +271,19 @@ declare interface CreateKnowledgeBaseResponse {
 }
 
 declare interface CreateQARequest {
+  /** 知识库ID */
+  KnowledgeBaseId: string;
+  /** 问题，最大1000个英文字符 */
+  Question: string;
+  /** 答案，最大4000个英文字符 */
+  Answer: string;
   /** 属性标签 */
   AttributeLabels?: AttributeLabelReferItem[];
 }
 
 declare interface CreateQAResponse {
+  /** 问答对ID */
+  QaId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -321,6 +335,10 @@ declare interface CreateSplitDocumentFlowResponse {
 }
 
 declare interface DeleteAttributeLabelsRequest {
+  /** 知识库ID */
+  KnowledgeBaseId: string;
+  /** 属性ID */
+  AttributeIds: string[];
 }
 
 declare interface DeleteAttributeLabelsResponse {
@@ -329,6 +347,10 @@ declare interface DeleteAttributeLabelsResponse {
 }
 
 declare interface DeleteDocsRequest {
+  /** 知识库ID */
+  KnowledgeBaseId: string;
+  /** 文档ID列表。支持批量删除，数量不超过100 */
+  DocIds: string[];
 }
 
 declare interface DeleteDocsResponse {
@@ -347,6 +369,10 @@ declare interface DeleteKnowledgeBaseResponse {
 }
 
 declare interface DeleteQAsRequest {
+  /** 知识库ID */
+  KnowledgeBaseId: string;
+  /** 问答对ID列表。支持批量删除，数量不超过100 */
+  QaIds: string[];
 }
 
 declare interface DeleteQAsResponse {
@@ -355,9 +381,21 @@ declare interface DeleteQAsResponse {
 }
 
 declare interface DescribeDocRequest {
+  /** 知识库ID */
+  KnowledgeBaseId: string;
+  /** 文档ID */
+  DocId: string;
 }
 
 declare interface DescribeDocResponse {
+  /** 文档ID */
+  DocId?: string;
+  /** 状态，- Uploading 上传中 - Auditing 审核中- Parsing 解析中 - ParseFailed 解析失败- Indexing 创建索引中 - IndexFailed 创建索引失败- Success 发布成功- Failed 失败 */
+  Status?: string;
+  /** 文件名 */
+  FileName?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
   /** 属性标签 */
   AttributeLabels?: AttributeLabelReferItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -415,6 +453,14 @@ declare interface GetSplitDocumentResultResponse {
 }
 
 declare interface ImportQAsRequest {
+  /** 知识库ID */
+  KnowledgeBaseId: string;
+  /** 文件名 */
+  FileName: string;
+  /** 文件的 Url 地址。文件存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。导入模板：https://cdn.xiaowei.qq.com/lke/assets//static/批量导入问答模板v6.xlsx */
+  FileUrl: string;
+  /** 文件类型，仅支持XLSX格式，请使用模板 */
+  FileType?: string;
 }
 
 declare interface ImportQAsResponse {
@@ -423,9 +469,17 @@ declare interface ImportQAsResponse {
 }
 
 declare interface ListAttributeLabelsRequest {
+  /** 知识库ID */
+  KnowledgeBaseId: string;
+  /** 页码，默认1 */
+  PageNumber?: number;
+  /** 每页数目，最大50，默认20 */
+  PageSize?: number;
 }
 
 declare interface ListAttributeLabelsResponse {
+  /** 属性总数 */
+  TotalCount?: number;
   /** 属性标签列表 */
   List?: AttributeItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -433,9 +487,17 @@ declare interface ListAttributeLabelsResponse {
 }
 
 declare interface ListDocsRequest {
+  /** 知识库ID */
+  KnowledgeBaseId: string;
+  /** 页码，默认1 */
+  PageNumber?: number;
+  /** 每页数目，最大50，默认20 */
+  PageSize?: number;
 }
 
 declare interface ListDocsResponse {
+  /** 文档总数 */
+  TotalCount?: number;
   /** 文档信息 */
   List?: DocItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -443,9 +505,17 @@ declare interface ListDocsResponse {
 }
 
 declare interface ListQAsRequest {
+  /** 知识库ID */
+  KnowledgeBaseId: string;
+  /** 页码，默认1 */
+  PageNumber?: number;
+  /** 每页数目，最大50，默认20 */
+  PageSize?: number;
 }
 
 declare interface ListQAsResponse {
+  /** 问答对总数量 */
+  TotalCount?: number;
   /** 问答对信息 */
   List?: QaItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -453,6 +523,14 @@ declare interface ListQAsResponse {
 }
 
 declare interface ModifyAttributeLabelRequest {
+  /** 知识库ID */
+  KnowledgeBaseId: string;
+  /** 属性ID */
+  AttributeId: string;
+  /** 属性标识，最大40个英文字符，如style */
+  AttributeKey: string;
+  /** 属性名称，最大80个英文字符，如风格 */
+  AttributeName: string;
   /** 属性标签 */
   Labels?: AttributeLabelItem[];
 }
@@ -463,6 +541,14 @@ declare interface ModifyAttributeLabelResponse {
 }
 
 declare interface ModifyQARequest {
+  /** 知识库ID */
+  KnowledgeBaseId: string;
+  /** 问答对ID */
+  QaId: string;
+  /** 问题，最大1000个英文字符 */
+  Question: string;
+  /** 答案，最大4000个英文字符 */
+  Answer: string;
   /** 属性标签 */
   AttributeLabels?: AttributeLabelReferItem[];
 }
@@ -598,25 +684,25 @@ declare interface Lkeap {
   /** 对话 {@link ChatCompletionsRequest} {@link ChatCompletionsResponse} */
   ChatCompletions(data: ChatCompletionsRequest, config?: AxiosRequestConfig): AxiosPromise<ChatCompletionsResponse>;
   /** 创建属性标签 {@link CreateAttributeLabelRequest} {@link CreateAttributeLabelResponse} */
-  CreateAttributeLabel(data?: CreateAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAttributeLabelResponse>;
+  CreateAttributeLabel(data: CreateAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAttributeLabelResponse>;
   /** 创建知识库 {@link CreateKnowledgeBaseRequest} {@link CreateKnowledgeBaseResponse} */
   CreateKnowledgeBase(data?: CreateKnowledgeBaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKnowledgeBaseResponse>;
   /** 创建问答对 {@link CreateQARequest} {@link CreateQAResponse} */
-  CreateQA(data?: CreateQARequest, config?: AxiosRequestConfig): AxiosPromise<CreateQAResponse>;
+  CreateQA(data: CreateQARequest, config?: AxiosRequestConfig): AxiosPromise<CreateQAResponse>;
   /** 创建文档解析任务 {@link CreateReconstructDocumentFlowRequest} {@link CreateReconstructDocumentFlowResponse} */
   CreateReconstructDocumentFlow(data: CreateReconstructDocumentFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReconstructDocumentFlowResponse>;
   /** 创建文档拆分任务 {@link CreateSplitDocumentFlowRequest} {@link CreateSplitDocumentFlowResponse} */
   CreateSplitDocumentFlow(data: CreateSplitDocumentFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSplitDocumentFlowResponse>;
   /** 批量删除属性标签 {@link DeleteAttributeLabelsRequest} {@link DeleteAttributeLabelsResponse} */
-  DeleteAttributeLabels(data?: DeleteAttributeLabelsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttributeLabelsResponse>;
+  DeleteAttributeLabels(data: DeleteAttributeLabelsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttributeLabelsResponse>;
   /** 删除文档 {@link DeleteDocsRequest} {@link DeleteDocsResponse} */
-  DeleteDocs(data?: DeleteDocsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDocsResponse>;
+  DeleteDocs(data: DeleteDocsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDocsResponse>;
   /** 删除知识库 {@link DeleteKnowledgeBaseRequest} {@link DeleteKnowledgeBaseResponse} */
   DeleteKnowledgeBase(data: DeleteKnowledgeBaseRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteKnowledgeBaseResponse>;
   /** 删除问答对 {@link DeleteQAsRequest} {@link DeleteQAsResponse} */
-  DeleteQAs(data?: DeleteQAsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQAsResponse>;
+  DeleteQAs(data: DeleteQAsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQAsResponse>;
   /** 查询文档详情 {@link DescribeDocRequest} {@link DescribeDocResponse} */
-  DescribeDoc(data?: DescribeDocRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDocResponse>;
+  DescribeDoc(data: DescribeDocRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDocResponse>;
   /** 获取特征向量 {@link GetEmbeddingRequest} {@link GetEmbeddingResponse} */
   GetEmbedding(data: GetEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<GetEmbeddingResponse>;
   /** 查询文档解析任务结果 {@link GetReconstructDocumentResultRequest} {@link GetReconstructDocumentResultResponse} */
@@ -624,17 +710,17 @@ declare interface Lkeap {
   /** 查询文档拆分任务结果 {@link GetSplitDocumentResultRequest} {@link GetSplitDocumentResultResponse} */
   GetSplitDocumentResult(data: GetSplitDocumentResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetSplitDocumentResultResponse>;
   /** 批量导入问答对 {@link ImportQAsRequest} {@link ImportQAsResponse} */
-  ImportQAs(data?: ImportQAsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportQAsResponse>;
+  ImportQAs(data: ImportQAsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportQAsResponse>;
   /** 获取属性标签列表 {@link ListAttributeLabelsRequest} {@link ListAttributeLabelsResponse} */
-  ListAttributeLabels(data?: ListAttributeLabelsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAttributeLabelsResponse>;
+  ListAttributeLabels(data: ListAttributeLabelsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAttributeLabelsResponse>;
   /** 获取文档列表 {@link ListDocsRequest} {@link ListDocsResponse} */
-  ListDocs(data?: ListDocsRequest, config?: AxiosRequestConfig): AxiosPromise<ListDocsResponse>;
+  ListDocs(data: ListDocsRequest, config?: AxiosRequestConfig): AxiosPromise<ListDocsResponse>;
   /** 获取问答对列表 {@link ListQAsRequest} {@link ListQAsResponse} */
-  ListQAs(data?: ListQAsRequest, config?: AxiosRequestConfig): AxiosPromise<ListQAsResponse>;
+  ListQAs(data: ListQAsRequest, config?: AxiosRequestConfig): AxiosPromise<ListQAsResponse>;
   /** 修改属性标签 {@link ModifyAttributeLabelRequest} {@link ModifyAttributeLabelResponse} */
-  ModifyAttributeLabel(data?: ModifyAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAttributeLabelResponse>;
+  ModifyAttributeLabel(data: ModifyAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAttributeLabelResponse>;
   /** 修改问答对 {@link ModifyQARequest} {@link ModifyQAResponse} */
-  ModifyQA(data?: ModifyQARequest, config?: AxiosRequestConfig): AxiosPromise<ModifyQAResponse>;
+  ModifyQA(data: ModifyQARequest, config?: AxiosRequestConfig): AxiosPromise<ModifyQAResponse>;
   /** 多轮改写 {@link QueryRewriteRequest} {@link QueryRewriteResponse} */
   QueryRewrite(data: QueryRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<QueryRewriteResponse>;
   /** 实时文档解析 {@link ReconstructDocumentSSERequest} {@link ReconstructDocumentSSEResponse} */

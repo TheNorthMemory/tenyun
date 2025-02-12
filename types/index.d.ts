@@ -1022,7 +1022,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   trocket: Trocket,
   /** {@link Trp T-Sec-安心平台(RP)} */
   trp: Trp,
-  /** {@link Trro 远程实时操控} */
+  /** {@link Trro 实时互动-工业能源版} */
   trro: Trro,
   /** {@link Trtc 实时音视频} */
   trtc: Trtc,

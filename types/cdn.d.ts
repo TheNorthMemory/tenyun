@@ -336,7 +336,7 @@ declare interface AwsPrivateAccess {
   Switch: string;
   /** 访问ID。 */
   AccessKey?: string | null;
-  /** 密钥。 */
+  /** 密钥，字段为脱敏返回。 */
   SecretKey?: string | null;
   /** 地域 */
   Region?: string | null;
@@ -1284,7 +1284,7 @@ declare interface HwPrivateAccess {
   Switch: string;
   /** 访问 ID */
   AccessKey?: string | null;
-  /** 密钥 */
+  /** 密钥，字段为脱敏返回。 */
   SecretKey?: string | null;
   /** bucketname */
   Bucket?: string | null;
@@ -1596,7 +1596,7 @@ declare interface OssPrivateAccess {
   Switch: string;
   /** 访问ID。 */
   AccessKey?: string | null;
-  /** 密钥。 */
+  /** 密钥，字段为脱敏返回。 */
   SecretKey?: string | null;
   /** 地域 */
   Region?: string | null;
@@ -1610,7 +1610,7 @@ declare interface OthersPrivateAccess {
   Switch: string;
   /** 访问ID。 */
   AccessKey?: string | null;
-  /** 密钥。 */
+  /** 密钥，字段位脱敏返回。 */
   SecretKey?: string | null;
   /** 地域。 */
   Region?: string | null;
@@ -1774,7 +1774,7 @@ declare interface QnPrivateAccess {
   Switch: string;
   /** 访问 ID */
   AccessKey?: string | null;
-  /** 密钥 */
+  /** 密钥，字段为脱敏返回。 */
   SecretKey?: string;
 }
 

@@ -1342,6 +1342,10 @@ declare interface InstanceInfo {
   BillingItem?: string;
   /** 实例延期释放标识 */
   FreeDelayFlag?: number;
+  /** 最近3天最大qps */
+  Last3MaxQPS?: number;
+  /** 最近3天最大带宽 */
+  Last3MaxBandwidth?: number;
 }
 
 /** 数据封装 */

@@ -7581,6 +7581,32 @@ declare interface DescribeInstanceByCycleResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceDetailInfoRequest {
+  /** 任务ID */
+  TaskId: string;
+  /** 实例数据时间 */
+  CurRunDate: string;
+  /** 项目id */
+  ProjectId?: string;
+  /** 实例的第几次执行 */
+  LifeRound?: number;
+  /** 生命周期查询起始index */
+  LifeRoundStartIndex?: number;
+  /** 生命周期查询批次数量 */
+  LifeRoundSize?: number;
+  /** 生命周期总数，可省略 */
+  TotalLifeRound?: string;
+  /** 动态加载日志标识 */
+  Dynamic?: boolean;
+}
+
+declare interface DescribeInstanceDetailInfoResponse {
+  /** 生命周期结果 */
+  Data?: InstanceLifeCycleOpsDto[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceLastLogRequest {
   /** 任务id */
   TaskId: string;
@@ -11368,6 +11394,8 @@ declare interface Wedata {
   DescribeFunctionTypes(data?: DescribeFunctionTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFunctionTypesResponse>;
   /** 周期实例统计 {@link DescribeInstanceByCycleRequest} {@link DescribeInstanceByCycleResponse} */
   DescribeInstanceByCycle(data?: DescribeInstanceByCycleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceByCycleResponse>;
+  /** DescribeInstanceDetailInfo {@link DescribeInstanceDetailInfoRequest} {@link DescribeInstanceDetailInfoResponse} */
+  DescribeInstanceDetailInfo(data: DescribeInstanceDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDetailInfoResponse>;
   /** 获取日志详情页面 {@link DescribeInstanceLastLogRequest} {@link DescribeInstanceLastLogResponse} */
   DescribeInstanceLastLog(data: DescribeInstanceLastLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLastLogResponse>;
   /** 获取离线运维实例列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */

@@ -3484,7 +3484,7 @@ declare interface CloneSecurityGroupRequest {
   /** 源Region,跨地域克隆安全组时，需要传入源安全组所属地域信息，例如：克隆广州的安全组到上海，则这里需要传入广州安全的地域信息：ap-guangzhou。 */
   RemoteRegion?: string;
   /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。若指定Tags入参且指定IsCloneTags为true，会合并源安全组的标签和新增的标签。 */
-  Tags?: Tag;
+  Tags?: Tag[];
 }
 
 declare interface CloneSecurityGroupResponse {
