@@ -7,7 +7,7 @@ declare interface SendStatus {
   /** 标识本次发送 ID，标识一次下发记录。 */
   CallId?: string;
   /** 用户的 session 内容，腾讯 server 回包中会原样返回。 */
-  SessionContext?: string | null;
+  SessionContext?: string;
 }
 
 declare interface SendCodeVoiceRequest {

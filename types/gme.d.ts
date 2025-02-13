@@ -25,21 +25,21 @@ declare interface AgeDetectTaskResult {
 /** 应用用量统计数据 */
 declare interface AppStatisticsItem {
   /** 实时语音统计数据 */
-  RealtimeSpeechStatisticsItem?: RealTimeSpeechStatisticsItem | null;
+  RealtimeSpeechStatisticsItem?: RealTimeSpeechStatisticsItem;
   /** 语音消息统计数据 */
-  VoiceMessageStatisticsItem?: VoiceMessageStatisticsItem | null;
+  VoiceMessageStatisticsItem?: VoiceMessageStatisticsItem;
   /** 语音过滤统计数据 */
-  VoiceFilterStatisticsItem?: VoiceFilterStatisticsItem | null;
+  VoiceFilterStatisticsItem?: VoiceFilterStatisticsItem;
   /** 统计时间 */
   Date?: string;
   /** 录音转文本用量统计数据 */
-  AudioTextStatisticsItem?: AudioTextStatisticsItem | null;
+  AudioTextStatisticsItem?: AudioTextStatisticsItem;
   /** 流式转文本用量数据 */
-  StreamTextStatisticsItem?: StreamTextStatisticsItem | null;
+  StreamTextStatisticsItem?: StreamTextStatisticsItem;
   /** 海外转文本用量数据 */
-  OverseaTextStatisticsItem?: OverseaTextStatisticsItem | null;
+  OverseaTextStatisticsItem?: OverseaTextStatisticsItem;
   /** 实时语音转文本用量数据 */
-  RealtimeTextStatisticsItem?: RealtimeTextStatisticsItem | null;
+  RealtimeTextStatisticsItem?: RealtimeTextStatisticsItem;
 }
 
 /** 应用统计数据 */
@@ -99,7 +99,7 @@ declare interface AsrConf {
 /** 录音转文本用量统计数据 */
 declare interface AudioTextStatisticsItem {
   /** 统计值，单位：秒 */
-  Data: number | null;
+  Data?: number;
 }
 
 /** CreateApp的输出参数 */
@@ -211,7 +211,7 @@ declare interface ModifyAppStatusResp {
 /** 海外转文本用量数据 */
 declare interface OverseaTextStatisticsItem {
   /** 统计值，单位：秒 */
-  Data: number | null;
+  Data?: number;
 }
 
 /** 实时语音用量统计数据 */
@@ -241,7 +241,7 @@ declare interface RealtimeSpeechConf {
 /** 实时语音转文本用量数据 */
 declare interface RealtimeTextStatisticsItem {
   /** 统计值，单位：秒 */
-  Data: number | null;
+  Data?: number;
 }
 
 /** 房间内录制信息。 */
@@ -316,6 +316,12 @@ declare interface ScanVoiceResult {
 
 /** SceneInfo场景信息'RealTime','实时语音分析','VoiceMessage','语音消息','GMECloudApi':'GME云API接口' */
 declare interface SceneInfo {
+  /** 'RealTime','实时语音分析','VoiceMessage','语音消息','GMECloudApi':'GME云API接口' */
+  SceneId: string;
+  /** 开关状态，true开启/false关闭 */
+  Status: boolean;
+  /** 用户回调地址 */
+  CallbackUrl?: string;
 }
 
 /** 服务开关状态 */
@@ -351,7 +357,7 @@ declare interface StatusInfo {
 /** 流式转文本用量数据 */
 declare interface StreamTextStatisticsItem {
   /** 统计值，单位：秒 */
-  Data: number | null;
+  Data?: number;
 }
 
 /** 指定订阅流白名单或者黑名单。 */
@@ -365,9 +371,9 @@ declare interface SubscribeRecordUserIds {
 /** 标签列表 */
 declare interface Tag {
   /** 标签键 */
-  TagKey?: string | null;
+  TagKey?: string;
   /** 标签值 */
-  TagValue?: string | null;
+  TagValue?: string;
 }
 
 /** 语音检测任务列表 */

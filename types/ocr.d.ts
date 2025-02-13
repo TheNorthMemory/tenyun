@@ -266,10 +266,14 @@ declare interface ContentInfo {
   Content?: string;
   /** 结果置信度 */
   Confidence?: number;
-  /** 字段是否不完整0 字段正常1 字段不完整 */
+  /** 字段是否不完整（value内容）0 字段正常1 字段不完整 */
   IsInComplete?: number;
-  /** 字段反光0 字段正常1 字段有反光 */
+  /** 字段反光（value内容）0 字段正常1 字段有反光 */
   IsReflect?: number;
+  /** 字段是否不完整（key内容）0 字段正常1 字段不完整 */
+  IsKeyInComplete?: number;
+  /** 字段反光（key内容）0 字段正常1 字段有反光 */
+  IsKeyReflect?: number;
 }
 
 /** 坐标 */

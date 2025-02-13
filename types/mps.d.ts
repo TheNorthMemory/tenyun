@@ -570,6 +570,10 @@ declare interface AiContentReviewTaskInput {
 declare interface AiParagraphInfo {
   /** 分段摘要 */
   Summary?: string | null;
+  /** 分段标题 */
+  Title?: string;
+  /** 分段关键词 */
+  Keywords?: string[];
   /** 分段起始时间点，秒 */
   StartTimeOffset?: number | null;
   /** 分段结束时间点，秒 */
@@ -3384,6 +3388,10 @@ declare interface MediaAiAnalysisDescriptionItem {
   Description?: string;
   /** 智能描述的可信度，取值范围是 0 到 100。 */
   Confidence?: number;
+  /** 智能描述标题 */
+  Title?: string;
+  /** 智能描述关键词 */
+  Keywords?: string[];
   /** 分段结果。 */
   Paragraphs?: AiParagraphInfo[] | null;
 }

@@ -655,7 +655,7 @@ declare interface InstancePriceDetail {
   /** 询价信息。 */
   InstancePrice?: InstancePrice | null;
   /** 折扣梯度详情，每个梯度包含的信息有：时长，折扣数，总价，折扣价，折扣详情（用户折扣、官网折扣、最终折扣）。 */
-  DiscountDetail?: DiscountDetail[] | null;
+  DiscountDetail?: DiscountDetail[];
 }
 
 /** 实例可退还信息。 */
@@ -681,13 +681,13 @@ declare interface InstanceTrafficPackage {
 /** 实例违规详情。 */
 declare interface InstanceViolationDetail {
   /** 来源：RESTRICT：封禁、FREEZW：冻结 */
-  Source?: string | null;
+  Source?: string;
   /** 是否允许自助解封：1是，2否 */
-  State?: string | null;
+  State?: string;
   /** 违规类型 */
-  Reason?: string | null;
+  Reason?: string;
   /** 违规内容（URL、关联域名） */
-  Content?: string | null;
+  Content?: string;
 }
 
 /** 描述了启动配置创建实例的公网可访问性，声明了实例的公网使用计费模式，最大带宽等。 */

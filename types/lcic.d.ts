@@ -1360,9 +1360,9 @@ declare interface DescribeRoomStatisticsResponse {
   /** 成员记录列表。 */
   MemberRecords?: MemberRecord[];
   /** 秒级unix时间戳，实际房间开始时间。 */
-  RealStartTime?: number | null;
+  RealStartTime?: number;
   /** 秒级unix时间戳，实际房间结束时间。 */
-  RealEndTime?: number | null;
+  RealEndTime?: number;
   /** 房间消息总数。 */
   MessageCount?: number;
   /** 房间连麦总数。 */
@@ -1446,7 +1446,7 @@ declare interface DescribeUserResponse {
   /** 用户头像Url。 */
   Avatar?: string;
   /** 用户在客户系统的Id */
-  OriginId?: string | null;
+  OriginId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1494,7 +1494,7 @@ declare interface GetRoomEventResponse {
   /** 该房间的事件总数，keyword搜索不影响该值。 */
   Total?: number;
   /** 详细事件内容。包含相应的类型、发生的时间戳。 */
-  Events?: EventInfo[] | null;
+  Events?: EventInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1548,13 +1548,13 @@ declare interface GetWatermarkRequest {
 
 declare interface GetWatermarkResponse {
   /** 老师视频区域的水印参数配置 */
-  TeacherLogo?: WatermarkConfig | null;
+  TeacherLogo?: WatermarkConfig;
   /** 白板区域的水印参数配置 */
-  BoardLogo?: WatermarkConfig | null;
+  BoardLogo?: WatermarkConfig;
   /** 背景图片配置 */
-  BackgroundPicture?: BackgroundPictureConfig | null;
+  BackgroundPicture?: BackgroundPictureConfig;
   /** 文字水印配置 */
-  Text?: TextMarkConfig | null;
+  Text?: TextMarkConfig;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1934,7 +1934,7 @@ declare interface Lcic {
   BatchDescribeDocument(data: BatchDescribeDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDescribeDocumentResponse>;
   /** 用户批量注册 {@link BatchRegisterRequest} {@link BatchRegisterResponse} */
   BatchRegister(data: BatchRegisterRequest, config?: AxiosRequestConfig): AxiosPromise<BatchRegisterResponse>;
-  /** 绑定文档到房间 {@link BindDocumentToRoomRequest} {@link BindDocumentToRoomResponse} */
+  /** 绑定课件到房间 {@link BindDocumentToRoomRequest} {@link BindDocumentToRoomResponse} */
   BindDocumentToRoom(data: BindDocumentToRoomRequest, config?: AxiosRequestConfig): AxiosPromise<BindDocumentToRoomResponse>;
   /** 创建文档 {@link CreateDocumentRequest} {@link CreateDocumentResponse} */
   CreateDocument(data: CreateDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDocumentResponse>;

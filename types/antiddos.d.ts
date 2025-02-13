@@ -1181,9 +1181,9 @@ declare interface StaticPackRelation {
 /** 操作返回码，只用于返回成功的情况 */
 declare interface SuccessCode {
   /** 描述 */
-  Message: string;
+  Message?: string;
   /** 成功/错误码 */
-  Code: string;
+  Code?: string;
 }
 
 /** 标签类型 */
@@ -1299,7 +1299,7 @@ declare interface CreateBoundIPRequest {
   UnBoundDevList?: BoundIpInfo[];
   /** 已弃用，不填 */
   CopyPolicy?: string;
-  /** 如果该资源实例为域名化资产则，该参数必填 */
+  /** 如果该资源实例为域名化资产以及跨地域绑定则，该参数必填 */
   FilterRegion?: string;
 }
 

@@ -1480,6 +1480,24 @@ declare interface UserThreeFactor {
   IdCardNumber: string;
 }
 
+/** 数字加签文件验签结果 */
+declare interface VerifyDigitFileResult {
+  /** 证书起始时间的Unix时间戳，单位毫秒 */
+  CertNotBefore?: number;
+  /** 证书过期时间的时间戳，单位毫秒 */
+  CertNotAfter?: number;
+  /** 证书序列号，在数字证书申请过程中，系统会自动生成一个独一无二的序号。 */
+  CertSn?: string;
+  /** 证书签名算法, 如SHA1withRSA等算法 */
+  SignAlgorithm?: string;
+  /** 签署时间的Unix时间戳，单位毫秒 */
+  SignTime?: number;
+  /** 签名类型。0表示带签章的数字签名，1表示仅数字签名 */
+  SignType?: number;
+  /** 申请证书的主体的名字如果是在腾讯电子签平台签署, 则对应的主体的名字个数如下**企业**: ESS@企业名称@编码**个人**: ESS@个人姓名@证件号@808854如果在其他平台签署的, 主体的名字参考其他平台的说明 */
+  SignerName?: string;
+}
+
 /** 页面主题配置 */
 declare interface WebThemeConfig {
   /** 是否显示页面底部电子签logo，取值如下： **true**：页面底部显示电子签logo **false**：页面底部不显示电子签logo（默认） */
@@ -1870,6 +1888,28 @@ declare interface CreateExtendedServiceAuthInfosRequest {
 }
 
 declare interface CreateExtendedServiceAuthInfosResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateFileCounterSignRequest {
+  /** 需要加签的文件Id。注: `暂时只支持pdf类型的文件` */
+  FileId: string;
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator?: UserInfo;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+  /** 是否使用同步模式。false:异步模式，返回taskId。需要使用taskId轮询结果查询接口。true: 同步模式，此接口将直接返回taskId和ResultFileId(加签后文件id)。注：1. 当加签文件较大的时候，建议使用异步接口进行操作。否则文件加签时间过长会导致接口超时。 */
+  SyncMode?: boolean;
+}
+
+declare interface CreateFileCounterSignResponse {
+  /** 加签任务的状态。PROCESSING: 任务正在执行中。FINISHED: 已执行成功 */
+  Status?: string;
+  /** 加签完成后新的文件Id */
+  ResultFileId?: string;
+  /** 异步模式下用于轮询状态的任务Id */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3124,12 +3164,32 @@ declare interface DescribeExtendedServiceAuthInfosResponse {
   RequestId?: string;
 }
 
+declare interface DescribeFileCounterSignResultRequest {
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator?: UserInfo;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+  /** 加签任务Id */
+  TaskId?: string;
+}
+
+declare interface DescribeFileCounterSignResultResponse {
+  /** 加签任务的状态。PROCESSING: 任务正在执行中。FINISHED: 已执行成功FAILED: 执行失败 */
+  Status?: string;
+  /** 加签完成后新的文件Id */
+  ResultFileId?: string;
+  /** 失败的错误信息，加签任务失败的情况下会返回。 */
+  ErrorDetail?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeFileUrlsRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 文件对应的业务类型，目前支持：**FLOW ** : 如需下载合同文件请选择此项**TEMPLATE ** : 如需下载模板文件请选择此项**DOCUMENT **: 如需下载文档文件请选择此项**SEAL **: 如需下载印章图片请选择此项 */
+  /** 文件对应的业务类型，目前支持：**FLOW ** : 如需下载合同文件请选择此项**TEMPLATE ** : 如需下载模板文件请选择此项**DOCUMENT **: 如需下载文档文件请选择此项**SEAL **: 如需下载印章图片请选择此项**DIGITFILE**: 如需下载加签文件请选择此项 */
   BusinessType: string;
-  /** 业务编号的数组，取值如下：流程编号模板编号文档编号印章编号如需下载合同文件请传入FlowId，最大支持20个资源 */
+  /** 业务编号的数组，取值如下：流程编号模板编号文档编号印章编号加签文件编号如需下载合同文件请传入FlowId，最大支持20个资源 */
   BusinessIds: string[];
   /** 下载后的文件命名，只有FileType为zip的时候生效 */
   FileName?: string;
@@ -3786,6 +3846,28 @@ declare interface UploadFilesResponse {
   RequestId?: string;
 }
 
+declare interface VerifyDigitFileRequest {
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
+  Operator?: UserInfo;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+  /** 加签接口返回的文件Id */
+  FileId?: string;
+}
+
+declare interface VerifyDigitFileResponse {
+  /** 加签文件MD5哈希值 */
+  PdfResourceMd5?: string;
+  /** 验签结果代码，代码的含义如下：**1**：文件验证成功。**2**：文件验证失败。 */
+  VerifyResult?: number;
+  /** 验签序列号, 为11为数组组成的字符串 */
+  VerifySerialNo?: string;
+  /** 验签结果详情，每个签名域对应的验签结果。 */
+  VerifyDigitFileResults?: VerifyDigitFileResult[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface VerifyPdfRequest {
   /** 合同流程ID，为32位字符串。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
   FlowId: string;
@@ -3845,6 +3927,8 @@ declare interface Ess {
   CreateEmployeeQualificationSealQrCode(data: CreateEmployeeQualificationSealQrCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmployeeQualificationSealQrCodeResponse>;
   /** 创建企业扩展服务授权 {@link CreateExtendedServiceAuthInfosRequest} {@link CreateExtendedServiceAuthInfosResponse} */
   CreateExtendedServiceAuthInfos(data: CreateExtendedServiceAuthInfosRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExtendedServiceAuthInfosResponse>;
+  /** 文件加签接口 {@link CreateFileCounterSignRequest} {@link CreateFileCounterSignResponse} */
+  CreateFileCounterSign(data: CreateFileCounterSignRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileCounterSignResponse>;
   /** 模板发起合同-创建签署流程 {@link CreateFlowRequest} {@link CreateFlowResponse} */
   CreateFlow(data: CreateFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowResponse>;
   /** 补充签署流程签署人信息 {@link CreateFlowApproversRequest} {@link CreateFlowApproversResponse} */
@@ -3941,6 +4025,8 @@ declare interface Ess {
   DescribeExtendedServiceAuthDetail(data: DescribeExtendedServiceAuthDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtendedServiceAuthDetailResponse>;
   /** 查询企业扩展服务授权信息 {@link DescribeExtendedServiceAuthInfosRequest} {@link DescribeExtendedServiceAuthInfosResponse} */
   DescribeExtendedServiceAuthInfos(data: DescribeExtendedServiceAuthInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtendedServiceAuthInfosResponse>;
+  /** 文件加签任务结果轮询接口 {@link DescribeFileCounterSignResultRequest} {@link DescribeFileCounterSignResultResponse} */
+  DescribeFileCounterSignResult(data?: DescribeFileCounterSignResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileCounterSignResultResponse>;
   /** 查询文件下载URL {@link DescribeFileUrlsRequest} {@link DescribeFileUrlsResponse} */
   DescribeFileUrls(data: DescribeFileUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileUrlsResponse>;
   /** 查询流程基础信息 {@link DescribeFlowBriefsRequest} {@link DescribeFlowBriefsResponse} */
@@ -4001,6 +4087,8 @@ declare interface Ess {
   UpdateIntegrationEmployees(data: UpdateIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateIntegrationEmployeesResponse>;
   /** 上传文件 {@link UploadFilesRequest} {@link UploadFilesResponse} */
   UploadFiles(data: UploadFilesRequest, config?: AxiosRequestConfig): AxiosPromise<UploadFilesResponse>;
+  /** 加签文件验签接口 {@link VerifyDigitFileRequest} {@link VerifyDigitFileResponse} */
+  VerifyDigitFile(data?: VerifyDigitFileRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyDigitFileResponse>;
   /** 流程文件验签 {@link VerifyPdfRequest} {@link VerifyPdfResponse} */
   VerifyPdf(data: VerifyPdfRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyPdfResponse>;
 }

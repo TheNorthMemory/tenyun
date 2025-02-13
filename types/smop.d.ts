@@ -5,31 +5,31 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 后端提交任务事件返回Data复杂类型 */
 declare interface TaskEventData {
   /** 状态码，0为成功，-1为失败 */
-  Code?: number | null;
+  Code?: number;
   /** 提示信息 */
-  Message?: string | null;
+  Message?: string;
   /** 任务ID */
-  TaskId?: number | null;
+  TaskId?: number;
   /** 当前完成或正在完成的安心用户运营平台的任务订单ID */
-  TaskOrderId?: string | null;
+  TaskOrderId?: string;
   /** 当前任务订单状态码。1代表未完成；2代表已完成但未提交任务；3表示已完成，且已提交获得积分任务；4表示过期任务，提交后不获得积分。 */
-  TaskCode?: number | null;
+  TaskCode?: number;
   /** 获得积分数 */
-  TaskCoinNumber?: number | null;
+  TaskCoinNumber?: number;
   /** 任务类型后台代码 */
-  TaskType?: number | null;
+  TaskType?: number;
   /** 用户的当前积分 */
-  TotalCoin?: number | null;
+  TotalCoin?: number;
   /** 用户透传的附加数据 */
-  Attach?: string | null;
+  Attach?: string;
   /** 计次任务当前完成次数 */
-  DoneTimes?: number | null;
+  DoneTimes?: number;
   /** 计次任务当前所需完成次数 */
-  TotalTimes?: number | null;
+  TotalTimes?: number;
   /** 任务名称 */
-  TaskName?: string | null;
+  TaskName?: string;
   /** 用户当前成长值 */
-  GrowScore?: number | null;
+  GrowScore?: number;
 }
 
 declare interface SubmitTaskEventRequest {
@@ -51,13 +51,13 @@ declare interface SubmitTaskEventRequest {
 
 declare interface SubmitTaskEventResponse {
   /** 任务的唯一订单号 */
-  OrderId?: string | null;
+  OrderId?: string;
   /** 信息码。0表示成功，-1标识失败 */
-  Code?: number | null;
+  Code?: number;
   /** 提示信息 */
-  Message?: string | null;
+  Message?: string;
   /** 任务处理结果列表 */
-  Data?: TaskEventData[] | null;
+  Data?: TaskEventData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

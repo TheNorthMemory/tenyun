@@ -1918,7 +1918,7 @@ declare interface RestartPolicy {
   IsDefault?: string;
 }
 
-/** Serverless HBase 实例信息 */
+/** Serverless HBase实例信息 */
 declare interface SLInstanceInfo {
   /** 集群实例字符串ID */
   ClusterId?: string;
@@ -1926,6 +1926,8 @@ declare interface SLInstanceInfo {
   Id?: number;
   /** 状态描述 */
   StatusDesc?: string;
+  /** 健康状态 */
+  HealthStatus?: string;
   /** 实例名称 */
   ClusterName?: string;
   /** 地域ID */

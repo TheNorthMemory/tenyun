@@ -1485,7 +1485,7 @@ declare interface DescribeBackupUrlResponse {
   /** 文件名称，该字段正在逐步废弃中。 */
   Filenames?: string[] | null;
   /** 备份文件信息列表。 */
-  BackupInfos?: BackupDownloadInfo[] | null;
+  BackupInfos?: BackupDownloadInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1585,9 +1585,9 @@ declare interface DescribeInstanceAccountRequest {
 
 declare interface DescribeInstanceAccountResponse {
   /** 账号详细信息。 */
-  Accounts?: Account[] | null;
+  Accounts?: Account[];
   /** 账号个数。 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1625,21 +1625,21 @@ declare interface DescribeInstanceDTSInfoRequest {
 
 declare interface DescribeInstanceDTSInfoResponse {
   /** DTS任务ID */
-  JobId?: string | null;
+  JobId?: string;
   /** DTS任务名称 */
-  JobName?: string | null;
+  JobName?: string;
   /** 任务状态,取值为：1-创建中(Creating),3-校验中(Checking)4-校验通过(CheckPass),5-校验不通过（CheckNotPass）,7-任务运行(Running),8-准备完成（ReadyComplete）,9-任务成功（Success）,10-任务失败（Failed）,11-撤销中（Stopping）,12-完成中（Completing） */
-  Status?: number | null;
+  Status?: number;
   /** 状态描述 */
-  StatusDesc?: string | null;
+  StatusDesc?: string;
   /** 同步时延，单位：字节 */
-  Offset?: number | null;
+  Offset?: number;
   /** 断开时间 */
-  CutDownTime?: string | null;
+  CutDownTime?: string;
   /** 源实例信息 */
-  SrcInfo?: DescribeInstanceDTSInstanceInfo | null;
+  SrcInfo?: DescribeInstanceDTSInstanceInfo;
   /** 目标实例信息 */
-  DstInfo?: DescribeInstanceDTSInstanceInfo | null;
+  DstInfo?: DescribeInstanceDTSInstanceInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1823,15 +1823,15 @@ declare interface DescribeInstanceNodeInfoResponse {
   /** Proxy节点数量。 */
   ProxyCount?: number;
   /** Proxy节点信息。 */
-  Proxy?: ProxyNodes[] | null;
+  Proxy?: ProxyNodes[];
   /** Redis节点数量。 */
   RedisCount?: number;
   /** Redis节点信息。 */
-  Redis?: RedisNodes[] | null;
+  Redis?: RedisNodes[];
   /** 该参数不再使用，请忽略。 */
   TendisCount?: number;
   /** 该参数不再使用，请忽略。 */
-  Tendis?: TendisNodes[] | null;
+  Tendis?: TendisNodes[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2391,7 +2391,7 @@ declare interface DisableReplicaReadonlyRequest {
 
 declare interface DisableReplicaReadonlyResponse {
   /** 任务ID */
-  TaskId?: number | null;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2419,9 +2419,9 @@ declare interface EnableReplicaReadonlyRequest {
 
 declare interface EnableReplicaReadonlyResponse {
   /** 错误：ERROR，正确OK（已废弃） */
-  Status?: string | null;
+  Status?: string;
   /** 任务ID */
-  TaskId?: number | null;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2453,7 +2453,7 @@ declare interface InquiryPriceCreateInstanceRequest {
 
 declare interface InquiryPriceCreateInstanceResponse {
   /** 价格，单位：分 */
-  Price?: number | null;
+  Price?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2467,7 +2467,7 @@ declare interface InquiryPriceRenewInstanceRequest {
 
 declare interface InquiryPriceRenewInstanceResponse {
   /** 价格，单位：分。 */
-  Price?: number | null;
+  Price?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2485,7 +2485,7 @@ declare interface InquiryPriceUpgradeInstanceRequest {
 
 declare interface InquiryPriceUpgradeInstanceResponse {
   /** 价格，单位：分 */
-  Price?: number | null;
+  Price?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

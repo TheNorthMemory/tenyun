@@ -2604,6 +2604,72 @@ declare interface TrafficFlow {
   FormatUnit?: string | null;
 }
 
+/** 流量镜像实例 */
+declare interface TrafficMirror {
+  /** VPC实例ID。 */
+  VpcId: string;
+  /** 流量镜像实例。 */
+  TrafficMirrorId: string;
+  /** 流量镜像名字。 */
+  TrafficMirrorName: string;
+  /** 流量镜像描述。 */
+  TrafficMirrorDescribe: string;
+  /** 流量镜像状态。 */
+  State: string;
+  /** 流量镜像采集方向。 */
+  Direction: string;
+  /** 流量镜像采集对象。 */
+  CollectorSrcs: string[];
+  /** 流量镜像过滤的nat网关实例ID。 */
+  NatId: string;
+  /** 流量镜像过滤的五元组规则。 */
+  CollectorNormalFilters: TrafficMirrorFilter[];
+  /** 流量镜接收目标。 */
+  CollectorTarget: TrafficMirrorTarget;
+  /** 流量镜像创建时间。 */
+  CreateTime: string;
+  /** 流量镜像的类型。 */
+  Type: string | null;
+  /** 流量镜像所属的子网ID。 */
+  SubnetId: string | null;
+  /** 流量镜接收目标资源信息，当接收目标为ENI和CLB时返回。 */
+  TargetInfo: TrafficMirrorTargetResourceInfo[] | null;
+}
+
+/** 流量镜像五元组过滤规则对象 */
+declare interface TrafficMirrorFilter {
+  /** 过滤规则的源网段 */
+  SrcNet: string;
+  /** 过滤规则的目的网段 */
+  DstNet: string;
+  /** 过滤规则的协议 */
+  Protocol: string;
+  /** 过滤规则的源端口，默认值1-65535 */
+  SrcPort?: string;
+  /** 过滤规则的目的端口，默认值1-65535 */
+  DstPort?: string;
+}
+
+/** 流量镜像采集目标类型 */
+declare interface TrafficMirrorTarget {
+  /** 流量镜像的接收IP */
+  TargetIps?: string[];
+  /** 流量镜像接收IP组，均衡规则，支持ENI/FIVE_TUPLE_FLOW（vpc），FIVE_TUPLE_FLOW（公网IP） */
+  AlgHash?: string;
+  /** 流量镜像的接收endpoint（公网IP） */
+  TargetEndPoints?: string[] | null;
+  /** 流量镜像的接收类型，分别为：IP/ENI/CLB */
+  TargetType?: string | null;
+}
+
+/** 流量镜像接收流量信息，当接收目标为ENI和CLB时返回 */
+declare interface TrafficMirrorTargetResourceInfo {
+  /** 接收目标的资源Id */
+  TargetId: string;
+  /** 接收目标的资源名称 */
+  TargetName: string;
+}
+
 /** 流量包信息描述类型 */
 declare interface TrafficPackage {
   /** 流量包唯一ID */
@@ -3462,6 +3528,24 @@ declare interface CheckNetDetectStateResponse {
   RequestId?: string;
 }
 
+declare interface CheckTrafficMirrorRequest {
+  /** 流量镜像所属的vpc */
+  VpcId: string;
+  /** 流量镜像的实例id */
+  TrafficMirrorId?: string;
+  /** 流量镜像的采集端IP列表 */
+  CollectorSources?: string[];
+  /** 流量镜像的接收端的子网 */
+  SubnetId?: string;
+  /** 流量镜像采集端的 */
+  CollectorTarget?: TrafficMirrorTarget[];
+}
+
+declare interface CheckTrafficMirrorResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ClearRouteTableSelectionPoliciesRequest {
   /** 云联网ID。 */
   CcnId: string;
@@ -3551,6 +3635,8 @@ declare interface CreateAndAttachNetworkInterfaceRequest {
   Tags?: Tag[];
   /** 绑定类型：0 标准型 1 扩展型。 */
   AttachType?: number;
+  /** 是否创建RDMA弹性网卡，true:创建rdma弹性网卡，false:普通弹性网卡。不填默认为false。 */
+  IsRdma?: boolean;
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
 }
@@ -4035,6 +4121,8 @@ declare interface CreateNetworkInterfaceRequest {
   Tags?: Tag[];
   /** 网卡trunking模式设置，Enable-开启，Disable--关闭，默认关闭。 */
   TrunkingFlag?: string;
+  /** 是否创建RDMA弹性网卡，true:创建rdma弹性网卡，false:普通弹性网卡。不填默认为false */
+  IsRdma?: boolean;
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
 }
@@ -4310,6 +4398,40 @@ declare interface CreateSubnetsRequest {
 declare interface CreateSubnetsResponse {
   /** 新创建的子网列表。 */
   SubnetSet?: Subnet[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateTrafficMirrorRequest {
+  /** VPC实例ID。 */
+  VpcId: string;
+  /** 流量镜像名字。 */
+  TrafficMirrorName: string;
+  /** 流量镜像描述。 */
+  TrafficMirrorDescribe?: string;
+  /** 流量镜像状态, 支持RUNNING/STOPED（vpc），RUNNING（公网IP），当采集vpc流量镜像时，此参数为必填。 */
+  State?: string;
+  /** 流量镜像采集方向，支持EGRESS/INGRESS/ALL（vpc），ALL（公网IP）。 */
+  Direction?: string;
+  /** 流量镜像的采集对象，支持eni_xxxx。 */
+  CollectorSrcs?: string[];
+  /** 流量镜像过滤的natgw实例。 */
+  NatId?: string;
+  /** 需要过滤的五元组规则。 */
+  CollectorNormalFilters?: TrafficMirrorFilter[];
+  /** 流量镜像的目的地址。 */
+  CollectorTarget?: TrafficMirrorTarget;
+  /** 流量镜像采集流量的发送端所属子网ID。 */
+  SubnetId?: string;
+  /** 创建的流量镜像的类型，支持VPC/PUBLICIP，默认为VPC类型。 */
+  Type?: string;
+  /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
+  Tags?: Tag[];
+}
+
+declare interface CreateTrafficMirrorResponse {
+  /** 流量镜像实例 */
+  TrafficMirror?: TrafficMirror;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5040,6 +5162,16 @@ declare interface DeleteTemplateMemberRequest {
 }
 
 declare interface DeleteTemplateMemberResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteTrafficMirrorRequest {
+  /** 流量镜像实例ID */
+  TrafficMirrorId: string;
+}
+
+declare interface DeleteTrafficMirrorResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6800,6 +6932,24 @@ declare interface DescribeTenantCcnsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTrafficMirrorsRequest {
+  /** 流量镜像实例ID集合 */
+  TrafficMirrorIds?: string[];
+  /** 流量镜像查询过滤调节 */
+  Filters?: Filter;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+}
+
+declare interface DescribeTrafficMirrorsResponse {
+  /** 流量镜像实例信息 */
+  TrafficMirrorSet?: TrafficMirror[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTrafficPackagesRequest {
   /** 共享流量包ID，支持批量 */
   TrafficPackageIds?: string[];
@@ -8498,6 +8648,20 @@ declare interface ModifyTemplateMemberResponse {
   RequestId?: string;
 }
 
+declare interface ModifyTrafficMirrorAttributeRequest {
+  /** 流量镜像实例ID */
+  TrafficMirrorId: string;
+  /** 流量镜像实例名称 */
+  TrafficMirrorName?: string;
+  /** 流量镜像实例描述信息 */
+  TrafficMirrorDescription?: string;
+}
+
+declare interface ModifyTrafficMirrorAttributeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyVpcAttributeRequest {
   /** VPC实例ID。形如：vpc-f49l6u0z。 */
   VpcId: string;
@@ -9022,6 +9186,46 @@ declare interface ResetRoutesResponse {
   RequestId?: string;
 }
 
+declare interface ResetTrafficMirrorFilterRequest {
+  /** 流量镜像实例ID */
+  TrafficMirrorId: string;
+  /** 流量镜像需要过滤的natgw实例ID */
+  NatId?: string;
+  /** 流量镜像需要过滤的五元组规则 */
+  CollectorNormalFilters?: TrafficMirrorFilter[];
+}
+
+declare interface ResetTrafficMirrorFilterResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ResetTrafficMirrorSrcsRequest {
+  /** 流量镜像实例ID */
+  TrafficMirrorId: string;
+  /** 流量镜像采集对象 */
+  CollectorSrcs: string[];
+}
+
+declare interface ResetTrafficMirrorSrcsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ResetTrafficMirrorTargetRequest {
+  /** 流量镜像实例ID */
+  TrafficMirrorId: string;
+  /** 流量镜像的接收目的信息 */
+  CollectorTarget: TrafficMirrorTarget;
+  /** 公网IP类型的流量镜像采集流量的发送端所属子网 */
+  SubnetId?: string;
+}
+
+declare interface ResetTrafficMirrorTargetResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ResetVpnConnectionRequest {
   /** VPN网关实例ID。 */
   VpnGatewayId: string;
@@ -9094,6 +9298,26 @@ declare interface SetVpnGatewaysRenewFlagRequest {
 }
 
 declare interface SetVpnGatewaysRenewFlagResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StartTrafficMirrorRequest {
+  /** 流量镜像实例ID */
+  TrafficMirrorId: string;
+}
+
+declare interface StartTrafficMirrorResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopTrafficMirrorRequest {
+  /** 流量镜像实例ID */
+  TrafficMirrorId: string;
+}
+
+declare interface StopTrafficMirrorResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9180,6 +9404,36 @@ declare interface UnlockCcnsResponse {
   RequestId?: string;
 }
 
+declare interface UpdateTrafficMirrorAllFilterRequest {
+  /** 流量镜像实例ID */
+  TrafficMirrorId: string;
+  /** 流量镜像采集方向 */
+  Direction: string;
+  /** 流量镜像采集对象 */
+  CollectorSrcs?: string[];
+  /** 流量镜像需要过滤的natgw实例 */
+  NatId?: string;
+  /** 流量镜像需要过滤的五元组规则 */
+  CollectorNormalFilters?: TrafficMirrorFilter[];
+}
+
+declare interface UpdateTrafficMirrorAllFilterResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateTrafficMirrorDirectionRequest {
+  /** 流量镜像实例ID */
+  TrafficMirrorId: string;
+  /** 流量镜像采集方向 */
+  Direction: string;
+}
+
+declare interface UpdateTrafficMirrorDirectionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface WithdrawNotifyRoutesRequest {
   /** 路由表唯一ID。 */
   RouteTableId: string;
@@ -9253,6 +9507,8 @@ declare interface Vpc {
   CheckDefaultSubnet(data?: CheckDefaultSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDefaultSubnetResponse>;
   /** 验证网络探测 {@link CheckNetDetectStateRequest} {@link CheckNetDetectStateResponse} */
   CheckNetDetectState(data: CheckNetDetectStateRequest, config?: AxiosRequestConfig): AxiosPromise<CheckNetDetectStateResponse>;
+  /** 检查流量镜像的采集端接收端 {@link CheckTrafficMirrorRequest} {@link CheckTrafficMirrorResponse} */
+  CheckTrafficMirror(data: CheckTrafficMirrorRequest, config?: AxiosRequestConfig): AxiosPromise<CheckTrafficMirrorResponse>;
   /** 清空云联网路由表选择策略 {@link ClearRouteTableSelectionPoliciesRequest} {@link ClearRouteTableSelectionPoliciesResponse} */
   ClearRouteTableSelectionPolicies(data: ClearRouteTableSelectionPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ClearRouteTableSelectionPoliciesResponse>;
   /** 克隆安全组 {@link CloneSecurityGroupRequest} {@link CloneSecurityGroupResponse} */
@@ -9345,6 +9601,8 @@ declare interface Vpc {
   CreateSubnet(data: CreateSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubnetResponse>;
   /** 批量创建子网 {@link CreateSubnetsRequest} {@link CreateSubnetsResponse} */
   CreateSubnets(data: CreateSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubnetsResponse>;
+  /** 创建流量镜像 {@link CreateTrafficMirrorRequest} {@link CreateTrafficMirrorResponse} */
+  CreateTrafficMirror(data: CreateTrafficMirrorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrafficMirrorResponse>;
   /** 创建共享流量包 {@link CreateTrafficPackagesRequest} {@link CreateTrafficPackagesResponse} */
   CreateTrafficPackages(data: CreateTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrafficPackagesResponse>;
   /** 创建VPC {@link CreateVpcRequest} {@link CreateVpcResponse} */
@@ -9447,6 +9705,8 @@ declare interface Vpc {
   DeleteSubnet(data: DeleteSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSubnetResponse>;
   /** 删除模板对象成员 {@link DeleteTemplateMemberRequest} {@link DeleteTemplateMemberResponse} */
   DeleteTemplateMember(data: DeleteTemplateMemberRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTemplateMemberResponse>;
+  /** 删除流量镜像 {@link DeleteTrafficMirrorRequest} {@link DeleteTrafficMirrorResponse} */
+  DeleteTrafficMirror(data: DeleteTrafficMirrorRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrafficMirrorResponse>;
   /** 删除共享流量包 {@link DeleteTrafficPackagesRequest} {@link DeleteTrafficPackagesResponse} */
   DeleteTrafficPackages(data: DeleteTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrafficPackagesResponse>;
   /** 删除VPC {@link DeleteVpcRequest} {@link DeleteVpcResponse} */
@@ -9639,6 +9899,8 @@ declare interface Vpc {
   DescribeTemplateLimits(data?: DescribeTemplateLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateLimitsResponse>;
   /** 查询租户云联网实例 {@link DescribeTenantCcnsRequest} {@link DescribeTenantCcnsResponse} */
   DescribeTenantCcns(data?: DescribeTenantCcnsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTenantCcnsResponse>;
+  /** 用户查询流量镜像 {@link DescribeTrafficMirrorsRequest} {@link DescribeTrafficMirrorsResponse} */
+  DescribeTrafficMirrors(data?: DescribeTrafficMirrorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficMirrorsResponse>;
   /** 查询共享流量包 {@link DescribeTrafficPackagesRequest} {@link DescribeTrafficPackagesResponse} */
   DescribeTrafficPackages(data?: DescribeTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficPackagesResponse>;
   /** 查询流量调度规则 {@link DescribeTrafficQosPolicyRequest} {@link DescribeTrafficQosPolicyResponse} */
@@ -9873,6 +10135,8 @@ declare interface Vpc {
   ModifySubnetAttribute(data: ModifySubnetAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubnetAttributeResponse>;
   /** 修改模板对象成员 {@link ModifyTemplateMemberRequest} {@link ModifyTemplateMemberResponse} */
   ModifyTemplateMember(data: ModifyTemplateMemberRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTemplateMemberResponse>;
+  /** 修改流量镜像属性 {@link ModifyTrafficMirrorAttributeRequest} {@link ModifyTrafficMirrorAttributeResponse} */
+  ModifyTrafficMirrorAttribute(data: ModifyTrafficMirrorAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTrafficMirrorAttributeResponse>;
   /** 修改VPC属性 {@link ModifyVpcAttributeRequest} {@link ModifyVpcAttributeResponse} */
   ModifyVpcAttribute(data: ModifyVpcAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpcAttributeResponse>;
   /** 修改终端节点属性 {@link ModifyVpcEndPointAttributeRequest} {@link ModifyVpcEndPointAttributeResponse} */
@@ -9943,6 +10207,12 @@ declare interface Vpc {
   ResetNatGatewayConnection(data: ResetNatGatewayConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<ResetNatGatewayConnectionResponse>;
   /** 重置路由表名称和路由策略 {@link ResetRoutesRequest} {@link ResetRoutesResponse} */
   ResetRoutes(data: ResetRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<ResetRoutesResponse>;
+  /** 更新流量镜像过滤规则 {@link ResetTrafficMirrorFilterRequest} {@link ResetTrafficMirrorFilterResponse} */
+  ResetTrafficMirrorFilter(data: ResetTrafficMirrorFilterRequest, config?: AxiosRequestConfig): AxiosPromise<ResetTrafficMirrorFilterResponse>;
+  /** 重置流量镜像采集对象 {@link ResetTrafficMirrorSrcsRequest} {@link ResetTrafficMirrorSrcsResponse} */
+  ResetTrafficMirrorSrcs(data: ResetTrafficMirrorSrcsRequest, config?: AxiosRequestConfig): AxiosPromise<ResetTrafficMirrorSrcsResponse>;
+  /** 更新流量镜像接收目的信息 {@link ResetTrafficMirrorTargetRequest} {@link ResetTrafficMirrorTargetResponse} */
+  ResetTrafficMirrorTarget(data: ResetTrafficMirrorTargetRequest, config?: AxiosRequestConfig): AxiosPromise<ResetTrafficMirrorTargetResponse>;
   /** 重置VPN通道 {@link ResetVpnConnectionRequest} {@link ResetVpnConnectionResponse} */
   ResetVpnConnection(data: ResetVpnConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<ResetVpnConnectionResponse>;
   /** 调整VPN网关带宽上限 {@link ResetVpnGatewayInternetMaxBandwidthRequest} {@link ResetVpnGatewayInternetMaxBandwidthResponse} */
@@ -9955,6 +10225,10 @@ declare interface Vpc {
   SetCcnRegionBandwidthLimits(data: SetCcnRegionBandwidthLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<SetCcnRegionBandwidthLimitsResponse>;
   /** 设置VPNGW续费标记 {@link SetVpnGatewaysRenewFlagRequest} {@link SetVpnGatewaysRenewFlagResponse} */
   SetVpnGatewaysRenewFlag(data: SetVpnGatewaysRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<SetVpnGatewaysRenewFlagResponse>;
+  /** 开启流量镜像 {@link StartTrafficMirrorRequest} {@link StartTrafficMirrorResponse} */
+  StartTrafficMirror(data: StartTrafficMirrorRequest, config?: AxiosRequestConfig): AxiosPromise<StartTrafficMirrorResponse>;
+  /** 关闭流量镜像 {@link StopTrafficMirrorRequest} {@link StopTrafficMirrorResponse} */
+  StopTrafficMirror(data: StopTrafficMirrorRequest, config?: AxiosRequestConfig): AxiosPromise<StopTrafficMirrorResponse>;
   /** 普通IP转弹性IP {@link TransformAddressRequest} {@link TransformAddressResponse} */
   TransformAddress(data: TransformAddressRequest, config?: AxiosRequestConfig): AxiosPromise<TransformAddressResponse>;
   /** 释放IPv6地址 {@link UnassignIpv6AddressesRequest} {@link UnassignIpv6AddressesResponse} */
@@ -9969,6 +10243,10 @@ declare interface Vpc {
   UnlockCcnBandwidths(data: UnlockCcnBandwidthsRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockCcnBandwidthsResponse>;
   /** 安全解锁云联网实例 {@link UnlockCcnsRequest} {@link UnlockCcnsResponse} */
   UnlockCcns(data?: UnlockCcnsRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockCcnsResponse>;
+  /** 更新流量镜像过滤规则或者采集对象 {@link UpdateTrafficMirrorAllFilterRequest} {@link UpdateTrafficMirrorAllFilterResponse} */
+  UpdateTrafficMirrorAllFilter(data: UpdateTrafficMirrorAllFilterRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTrafficMirrorAllFilterResponse>;
+  /** 更新流量镜像采集方向 {@link UpdateTrafficMirrorDirectionRequest} {@link UpdateTrafficMirrorDirectionResponse} */
+  UpdateTrafficMirrorDirection(data: UpdateTrafficMirrorDirectionRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTrafficMirrorDirectionResponse>;
   /** 从云联网撤销路由 {@link WithdrawNotifyRoutesRequest} {@link WithdrawNotifyRoutesResponse} */
   WithdrawNotifyRoutes(data: WithdrawNotifyRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<WithdrawNotifyRoutesResponse>;
 }

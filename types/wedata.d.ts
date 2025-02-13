@@ -786,6 +786,14 @@ declare interface Content {
   Url?: string | null;
 }
 
+/** 是否支持creat 或ddl */
+declare interface CreateAndDDLSupport {
+  /** 是否支持select */
+  SupportSelect?: boolean | null;
+  /** 是否支持ddl */
+  SupportDdl?: boolean | null;
+}
+
 /** 补录计划日期范围 */
 declare interface CreateMakeDatetimeInfo {
   /** 开始日期 */
@@ -1062,6 +1070,10 @@ declare interface DatabaseMeta {
   ClusterId?: string | null;
   /** 引擎名称 */
   ClusterName?: string | null;
+  /** 库下表的最新更新时间 */
+  ModifiedTimeByTables?: number | null;
+  /** 库下表的最新访问时间 */
+  LastAccessTimeByTables?: number | null;
 }
 
 /** 数据源对象 */
@@ -4452,6 +4464,12 @@ declare interface TableMeta {
   Urn?: string | null;
   /** 是否有修改业务权限 */
   HasBizPermission?: boolean | null;
+  /** 引擎侧创建人 */
+  OwnerByEngine?: string | null;
+  /** 用户无映射账户，请先完成账户映射后再来申请。 */
+  ErrorTips?: string | null;
+  /** 是否支持select or ddl */
+  IfSupportCreateAndDDL?: CreateAndDDLSupport | null;
 }
 
 /** 表附加信息 */
