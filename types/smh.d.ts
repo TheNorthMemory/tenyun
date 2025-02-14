@@ -5,25 +5,29 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 官方云盘实例信息 */
 declare interface Instance {
   /** 实例 ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 专属域名。如果实例无专属域名，则该属性为 null。 */
-  Domain: string | null;
+  Domain?: string | null;
   /** 生效时间 */
-  EffectiveTime: string;
+  EffectiveTime?: string;
   /** 过期时间。如果为按量计费或永久有效实例，该属性为 null。 */
-  ExpireTime: string | null;
+  ExpireTime?: string | null;
   /** 用户数量。如果为按量计费或不限制用户数量实例，该属性为 null。 */
-  UserLimit: number | null;
+  UserLimit?: number | null;
   /** 存储容量，单位为 Bytes，由于数字类型精度限制，该字段为 String 类型。如果为按量计费或不限制存储容量实例，该属性为 null。 */
-  StorageLimit: string | null;
+  StorageLimit?: string | null;
   /** 存储容量，单位为 GB。如果为按量计费或不限制存储容量实例，该属性为 null。 */
-  StorageLimitGB: number | null;
+  StorageLimitGB?: number | null;
   /** 是否过期隔离 */
-  Isolated: boolean;
+  Isolated?: boolean;
   /** 续费标识。0：手动续费；1：自动续费；2：到期不续。 */
-  AutoRenew: number;
+  AutoRenew?: number;
   /** 超级管理员账号，如果未选择查询实例绑定的超级管理员账号或当前实例未绑定超级管理员账号，则该属性为 null。 */
-  SuperAdminAccount: string | null;
+  SuperAdminAccount?: string | null;
+  /** 自选桶模式下，展示存储桶使用 */
+  Bucket?: string;
+  /** 自选桶模式下，展示日志桶使用 */
+  LogBucket?: string | null;
 }
 
 /** PaaS 服务媒体库信息 */
@@ -95,25 +99,25 @@ declare interface LibraryExtension {
 /** 流量资源包信息 */
 declare interface TrafficPackage {
   /** 流量资源包所抵扣的实例 ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 专属域名。如果实例无专属域名，则该属性为 null。 */
-  Domain: string | null;
+  Domain?: string | null;
   /** 流量资源包来源类型，0 为付费购买，1 为赠送。 */
-  Type: number;
+  Type?: number;
   /** 总流量，单位为 Bytes，由于数字类型精度限制，该字段为 String 类型。 */
-  Size: string;
+  Size?: string;
   /** 总流量，单位为 GB */
-  SizeGB: number;
+  SizeGB?: number;
   /** 剩余流量，单位为 Bytes，由于数字类型精度限制，该字段为 String 类型。 */
-  Remain: string;
+  Remain?: string;
   /** 已使用流量，单位为 Bytes，由于数字类型精度限制，该字段为 String 类型。 */
-  Used: string;
+  Used?: string;
   /** 已使用百分比，由于数字类型精度限制，该字段为 String 类型。 */
-  UsedPercentage: string;
+  UsedPercentage?: string;
   /** 生效时间，即流量资源包的订购时间 */
-  EffectiveTime: string;
+  EffectiveTime?: string;
   /** 过期时间，即所抵扣的实例的过期时间。如果流量资源包所抵扣的实例为按量计费或永久有效实例，该属性为 null。 */
-  ExpireTime: string | null;
+  ExpireTime?: string | null;
 }
 
 /** 用于唯一查找用户的过滤器。 */
@@ -217,13 +221,13 @@ declare interface CreateUserResponse {
   /** 第三方账号 ID，用于关联第三方账号体系，如未指定则为 null。 */
   AccountUserId?: string | null;
   /** 备注。 */
-  Comment?: string | null;
+  Comment?: string;
   /** 昵称。 */
-  Nickname?: string | null;
+  Nickname?: string;
   /** 用户头像地址。 */
-  Avatar?: string | null;
+  Avatar?: string;
   /** 自定义信息。 */
-  Customize?: string | null;
+  Customize?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -303,9 +307,9 @@ declare interface DescribeOfficialInstancesRequest {
 
 declare interface DescribeOfficialInstancesResponse {
   /** 实例列表 */
-  List: Instance[];
+  List?: Instance[];
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

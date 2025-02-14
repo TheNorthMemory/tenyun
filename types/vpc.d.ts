@@ -2607,33 +2607,33 @@ declare interface TrafficFlow {
 /** 流量镜像实例 */
 declare interface TrafficMirror {
   /** VPC实例ID。 */
-  VpcId: string;
+  VpcId?: string;
   /** 流量镜像实例。 */
-  TrafficMirrorId: string;
+  TrafficMirrorId?: string;
   /** 流量镜像名字。 */
-  TrafficMirrorName: string;
+  TrafficMirrorName?: string;
   /** 流量镜像描述。 */
-  TrafficMirrorDescribe: string;
+  TrafficMirrorDescribe?: string;
   /** 流量镜像状态。 */
-  State: string;
+  State?: string;
   /** 流量镜像采集方向。 */
-  Direction: string;
+  Direction?: string;
   /** 流量镜像采集对象。 */
-  CollectorSrcs: string[];
+  CollectorSrcs?: string[];
   /** 流量镜像过滤的nat网关实例ID。 */
-  NatId: string;
+  NatId?: string;
   /** 流量镜像过滤的五元组规则。 */
-  CollectorNormalFilters: TrafficMirrorFilter[];
+  CollectorNormalFilters?: TrafficMirrorFilter[];
   /** 流量镜接收目标。 */
-  CollectorTarget: TrafficMirrorTarget;
+  CollectorTarget?: TrafficMirrorTarget;
   /** 流量镜像创建时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 流量镜像的类型。 */
-  Type: string | null;
+  Type?: string | null;
   /** 流量镜像所属的子网ID。 */
-  SubnetId: string | null;
+  SubnetId?: string | null;
   /** 流量镜接收目标资源信息，当接收目标为ENI和CLB时返回。 */
-  TargetInfo: TrafficMirrorTargetResourceInfo[] | null;
+  TargetInfo?: TrafficMirrorTargetResourceInfo[] | null;
 }
 
 /** 流量镜像五元组过滤规则对象 */
@@ -4413,7 +4413,7 @@ declare interface CreateTrafficMirrorRequest {
   State?: string;
   /** 流量镜像采集方向，支持EGRESS/INGRESS/ALL（vpc），ALL（公网IP）。 */
   Direction?: string;
-  /** 流量镜像的采集对象，支持eni_xxxx。 */
+  /** 流量镜像的采集对象。 */
   CollectorSrcs?: string[];
   /** 流量镜像过滤的natgw实例。 */
   NatId?: string;
@@ -4693,9 +4693,9 @@ declare interface CreateVpnGatewaySslServerRequest {
   SslVpnProtocol?: string;
   /** SSL VPN服务端监听协议端口，默认1194。 */
   SslVpnPort?: number;
-  /** 认证算法。可选 'SHA1', 'MD5', 'NONE'，默认NONE。 */
+  /** 认证算法。可选 'SHA1'，默认SHA1。 */
   IntegrityAlgorithm?: string;
-  /** 加密算法。可选 'AES-128-CBC','AES-192-CBC', 'AES-256-CBC', 'NONE'，默认NONE。 */
+  /** 加密算法。可选 'AES-128-CBC','AES-192-CBC', 'AES-256-CBC', 默认AES-128-CBC。 */
   EncryptAlgorithm?: string;
   /** 是否支持压缩。当前不支持压缩，默认False。 */
   Compress?: boolean;
@@ -6935,7 +6935,7 @@ declare interface DescribeTenantCcnsResponse {
 declare interface DescribeTrafficMirrorsRequest {
   /** 流量镜像实例ID集合 */
   TrafficMirrorIds?: string[];
-  /** 流量镜像查询过滤调节 */
+  /** 流量镜像查询过滤调节。vpc-id ：VPC实例ID，例如：vpc-f49l6u0z。traffic-mirror-id：流量镜像实例ID。traffic-mirror-name：流量镜像名称。tag-key ：按照标签键进行过滤。 */
   Filters?: Filter;
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -8851,9 +8851,9 @@ declare interface ModifyVpnGatewaySslServerRequest {
   SslVpnProtocol?: string;
   /** SSL VPN服务端监听协议端口。 */
   SslVpnPort?: number;
-  /** 加密算法。可选 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'NONE'。默认NONE */
+  /** 加密算法。可选 'AES-128-CBC','AES-192-CBC', 'AES-256-CBC', 默认AES-128-CBC。 */
   EncryptAlgorithm?: string;
-  /** 认证算法。可选 'SHA1', 'MD5', 'NONE'。默认NONE */
+  /** 认证算法。可选 'SHA1'，默认SHA1。 */
   IntegrityAlgorithm?: string;
   /** 是否支持压缩。当前不支持压缩。默认False。 */
   Compress?: boolean;

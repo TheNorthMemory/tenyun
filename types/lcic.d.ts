@@ -1251,6 +1251,20 @@ declare interface DescribeRecordStreamResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRecordTaskRequest {
+  /** 学校ID */
+  SdkAppId: number;
+  /** 房间ID */
+  RoomId: number;
+}
+
+declare interface DescribeRecordTaskResponse {
+  /** 任务ID */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRoomForbiddenUserRequest {
   /** 低代码互动课堂的SdkAppId。 */
   SdkAppId: number;
@@ -1990,6 +2004,8 @@ declare interface Lcic {
   DescribeRecord(data: DescribeRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordResponse>;
   /** 获取流信息 {@link DescribeRecordStreamRequest} {@link DescribeRecordStreamResponse} */
   DescribeRecordStream(data: DescribeRecordStreamRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordStreamResponse>;
+  /** 查询录制任务ID {@link DescribeRecordTaskRequest} {@link DescribeRecordTaskResponse} */
+  DescribeRecordTask(data: DescribeRecordTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordTaskResponse>;
   /** 获取房间配置信息 {@link DescribeRoomRequest} {@link DescribeRoomResponse} */
   DescribeRoom(data: DescribeRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomResponse>;
   /** 获取房间中被禁言成员列表 {@link DescribeRoomForbiddenUserRequest} {@link DescribeRoomForbiddenUserResponse} */

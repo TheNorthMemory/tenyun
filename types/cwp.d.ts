@@ -6767,7 +6767,7 @@ declare interface DescribeAgentInstallCommandRequest {
   VpcId?: string;
   /** 标签ID列表，IsCloud=false时才会生效 */
   TagIds?: number[];
-  /** 命令有效期，非腾讯云时必填 */
+  /** 命令有效期，非腾讯云时必填（已废弃，命令永久生效） */
   ExpireDate?: string;
   /** 代理方式接入的vip */
   Vip?: string;
@@ -14066,6 +14066,8 @@ declare interface ModifyRiskDnsPolicyRequest {
 }
 
 declare interface ModifyRiskDnsPolicyResponse {
+  /** 0：没有重复，1：和现有策略重复 */
+  Repeat?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

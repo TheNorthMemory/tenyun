@@ -824,6 +824,8 @@ declare interface IDCardConfig {
   InvalidDateWarn?: boolean;
   /** 是否开启反光检测，默认为false */
   ReflectWarn?: boolean;
+  /** 是否开启头像剪切 */
+  CropPortrait?: boolean;
 }
 
 /** 身份证信息返回 */
@@ -856,21 +858,21 @@ declare interface IDCardInfo {
 declare interface IDCardInfoResult {
   /** 警告代码 */
   WarnCodes?: number[] | null;
-  /** 地址 */
+  /** 地址（人像面） */
   Address?: string | null;
-  /** 签发机关 */
+  /** 发证机关（国徽面） */
   Authority?: string | null;
-  /** 出生日期 */
+  /** 出生日期（人像面） */
   Birth?: string | null;
-  /** 身份证号 */
+  /** 身份证号（人像面） */
   IdNum?: string | null;
-  /** 名字 */
+  /** 名字（人像面） */
   Name?: string | null;
-  /** 地区 */
+  /** 民族（人像面） */
   Nation?: string | null;
-  /** 性别 */
+  /** 性别（人像面） */
   Sex?: string | null;
-  /** 到期时间 */
+  /** 证件有效期（国徽面） */
   ValidDate?: string | null;
   /** 请求的id */
   RequestId?: string | null;
@@ -880,6 +882,8 @@ declare interface IDCardInfoResult {
   ErrorMessage?: string | null;
   /** 原图地址 */
   ImageUrl?: string;
+  /** 身份证头像照片的地址（人像面） */
+  PortraitUrl?: string;
 }
 
 /** IDCardResult */
@@ -5389,9 +5393,9 @@ declare interface Ocr {
   GeneralFastOCR(data?: GeneralFastOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralFastOCRResponse>;
   /** 通用手写体识别 {@link GeneralHandwritingOCRRequest} {@link GeneralHandwritingOCRResponse} */
   GeneralHandwritingOCR(data?: GeneralHandwritingOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralHandwritingOCRResponse>;
-  /** 得到ocr的信息 {@link GetOCRResultRequest} {@link GetOCRResultResponse} */
+  /** 获取OCR识别结果 {@link GetOCRResultRequest} {@link GetOCRResultResponse} */
   GetOCRResult(data: GetOCRResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetOCRResultResponse>;
-  /** 得到ocr的token {@link GetOCRTokenRequest} {@link GetOCRTokenResponse} */
+  /** 获取OCR Token {@link GetOCRTokenRequest} {@link GetOCRTokenResponse} */
   GetOCRToken(data: GetOCRTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetOCRTokenResponse>;
   /** @deprecated 查询智慧表单任务状态 {@link GetTaskStateRequest} {@link GetTaskStateResponse} */
   GetTaskState(data: GetTaskStateRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskStateResponse>;

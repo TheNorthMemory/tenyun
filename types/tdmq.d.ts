@@ -374,6 +374,20 @@ declare interface ConsumersSchedule {
   MsgRateExpired?: string | null;
 }
 
+/** Topic&Group维度的权限配置 */
+declare interface DetailedRolePerm {
+  /** 权限对应的资源 */
+  Resource: string;
+  /** 是否开启生产权限 */
+  PermWrite: boolean;
+  /** 是否开启消费权限 */
+  PermRead: boolean;
+  /** 授权资源类型（Topic:主题; Group:消费组） */
+  ResourceType: string;
+  /** 资源备注 */
+  Remark?: string;
+}
+
 /** 命名空间信息 */
 declare interface Environment {
   /** 命名空间名称 */
@@ -2195,6 +2209,8 @@ declare interface CreateRocketMQEnvironmentRoleRequest {
   Permissions: string[];
   /** 必填字段，集群的ID */
   ClusterId: string;
+  /** Topic&Group维度权限配置 */
+  DetailedPerms?: DetailedRolePerm[];
 }
 
 declare interface CreateRocketMQEnvironmentRoleResponse {
@@ -2251,6 +2267,8 @@ declare interface CreateRocketMQRoleRequest {
   ClusterId: string;
   /** 备注说明，长度必须大等于0且小等于128。 */
   Remark?: string;
+  /** 角色授权类型（集群：Cluster; 主题或消费组：TopicAndGroup） */
+  PermType?: string;
 }
 
 declare interface CreateRocketMQRoleResponse {
@@ -4603,6 +4621,8 @@ declare interface ModifyRocketMQEnvironmentRoleRequest {
   Permissions: string[];
   /** 必填字段，集群的ID */
   ClusterId: string;
+  /** Topic&Group维度权限配置 */
+  DetailedPerms?: DetailedRolePerm[];
 }
 
 declare interface ModifyRocketMQEnvironmentRoleResponse {
@@ -4693,6 +4713,8 @@ declare interface ModifyRocketMQRoleRequest {
   ClusterId: string;
   /** 备注说明，长度必须大等于0且小等于128。 */
   Remark?: string;
+  /** 权限类型，默认按集群授权（Cluster：集群级别；TopicAndGroup：主题&消费组级别） */
+  PermType?: string;
 }
 
 declare interface ModifyRocketMQRoleResponse {

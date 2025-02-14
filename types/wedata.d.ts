@@ -1984,6 +1984,8 @@ declare interface InstanceLogInfoOpsDto {
   FileSize?: string | null;
   /** 日志匹配节点信息 */
   MatchedBrokerIp?: string;
+  /** 执行平台通用协议 */
+  ExecutionExtendedProps?: PairDto[];
 }
 
 /** 实例日志信息 */
@@ -2917,9 +2919,11 @@ declare interface Pair {
 /** 键值对 */
 declare interface PairDto {
   /** 键名 */
-  Key: string | null;
+  Key?: string | null;
   /** 值 */
-  Value: string | null;
+  Value?: string | null;
+  /** 描述 */
+  Description?: string;
 }
 
 /** 参数参数 */
@@ -6746,11 +6750,11 @@ declare interface DeleteResourceFileResponse {
 declare interface DeleteResourceFilesRequest {
   /** 项目id */
   ProjectId: string;
-  /** 使用状态 */
+  /** 使用状态， 为ture 判断资源的使用状态，如果使用中则不能删除 */
   UseStatus: boolean;
   /** 资源id列表 */
   ResourceIds?: string[];
-  /** 资源路径列表 */
+  /** 需要删除的资源路径列表 即资源管理中的目录结构 */
   FilePaths?: string[];
 }
 
@@ -11384,7 +11388,7 @@ declare interface Wedata {
   DescribeDependTaskLists(data: DescribeDependTaskListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDependTaskListsResponse>;
   /** 查询维度评分 {@link DescribeDimensionScoreRequest} {@link DescribeDimensionScoreResponse} */
   DescribeDimensionScore(data: DescribeDimensionScoreRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDimensionScoreResponse>;
-  /** 分页查询试运行实例列表 {@link DescribeDrInstancePageRequest} {@link DescribeDrInstancePageResponse} */
+  /** @deprecated 分页查询试运行实例列表 {@link DescribeDrInstancePageRequest} {@link DescribeDrInstancePageResponse} */
   DescribeDrInstancePage(data: DescribeDrInstancePageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDrInstancePageResponse>;
   /** 编排空间-查询目录树 {@link DescribeDsFolderTreeRequest} {@link DescribeDsFolderTreeResponse} */
   DescribeDsFolderTree(data: DescribeDsFolderTreeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDsFolderTreeResponse>;
@@ -11550,7 +11554,7 @@ declare interface Wedata {
   DescribeTaskAlarmRegulations(data: DescribeTaskAlarmRegulationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskAlarmRegulationsResponse>;
   /** 周期任务统计 {@link DescribeTaskByCycleRequest} {@link DescribeTaskByCycleResponse} */
   DescribeTaskByCycle(data: DescribeTaskByCycleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskByCycleResponse>;
-  /** 任务状态周期增长趋势 {@link DescribeTaskByCycleReportRequest} {@link DescribeTaskByCycleReportResponse} */
+  /** @deprecated 任务状态周期增长趋势 {@link DescribeTaskByCycleReportRequest} {@link DescribeTaskByCycleReportResponse} */
   DescribeTaskByCycleReport(data: DescribeTaskByCycleReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskByCycleReportResponse>;
   /** 任务状态趋势 {@link DescribeTaskByStatusReportRequest} {@link DescribeTaskByStatusReportResponse} */
   DescribeTaskByStatusReport(data: DescribeTaskByStatusReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskByStatusReportResponse>;

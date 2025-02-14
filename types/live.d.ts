@@ -116,6 +116,10 @@ declare interface CallBackTemplateInfo {
   PushExceptionNotifyUrl?: string | null;
   /** 音频审核回调 URL。 */
   AudioAuditNotifyUrl?: string | null;
+  /** 录制异常回调 URL。 */
+  RecordExceptionNotifyUrl?: string;
+  /** 录制异常回调级别，可选择：error: 错误。alarm: 告警。 */
+  RecordExceptionLevels?: string[];
 }
 
 /** 回调事件信息 */
@@ -2021,6 +2025,10 @@ declare interface CreateLiveCallbackTemplateRequest {
   PushExceptionNotifyUrl?: string;
   /** 音频审核回调 URL。 */
   AudioAuditNotifyUrl?: string;
+  /** 录制异常回调 URL。 */
+  RecordExceptionNotifyUrl?: string;
+  /** 录制异常回调级别，可选择：error、warning、info。 */
+  RecordExceptionLevels?: string[];
 }
 
 declare interface CreateLiveCallbackTemplateResponse {
@@ -4681,6 +4689,10 @@ declare interface ModifyLiveCallbackTemplateRequest {
   PushExceptionNotifyUrl?: string;
   /** 音频审核回调 URL。 */
   AudioAuditNotifyUrl?: string;
+  /** 录制异常回调 URL。 */
+  RecordExceptionNotifyUrl?: string;
+  /** 录制异常回调级别，可选择：error、warning、info。 */
+  RecordExceptionLevels?: string[];
 }
 
 declare interface ModifyLiveCallbackTemplateResponse {

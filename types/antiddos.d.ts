@@ -477,9 +477,9 @@ declare interface CcGeoIpPolicyNew {
 /** 使用证书的规则集合 */
 declare interface CertIdInsL7Rules {
   /** 使用证书的规则列表 */
-  L7Rules: InsL7Rules[];
+  L7Rules?: InsL7Rules[];
   /** 证书ID */
-  CertId: string;
+  CertId?: string;
 }
 
 /** 连接抑制相关配置 */
@@ -697,17 +697,17 @@ declare interface InstanceRelation {
 /** IP封堵记录 */
 declare interface IpBlockData {
   /** 状态（Blocked：被封堵；UnBlocking：解封中；UnBlockFailed：解封失败） */
-  Status: string;
+  Status?: string;
   /** 资源IP */
-  Ip: string;
+  Ip?: string;
   /** 封堵时间 */
-  BlockTime: string;
+  BlockTime?: string;
   /** 解封时间（预计解封时间） */
-  UnBlockTime: string;
+  UnBlockTime?: string;
   /** 解封类型（user：自助解封；auto：自动解封； update：升级解封；bind：绑定高防包解封） */
-  ActionType: string;
+  ActionType?: string;
   /** 高防标记，0：非高防，1：高防 */
-  ProtectFlag: number;
+  ProtectFlag?: number;
 }
 
 /** ip段数据结构 */
@@ -721,9 +721,9 @@ declare interface IpSegment {
 /** 字段值，K-V形式 */
 declare interface KeyValue {
   /** 字段名称 */
-  Key: string;
+  Key?: string;
   /** 字段取值 */
-  Value: string;
+  Value?: string;
 }
 
 /** L4规则回源列表 */
@@ -929,27 +929,27 @@ declare interface NewL7RuleEntry {
 /** 防护概览DDoS攻击事件 */
 declare interface OverviewDDoSEvent {
   /** 事件Id */
-  Id: string;
+  Id?: string;
   /** ip */
-  Vip: string;
+  Vip?: string;
   /** 开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 结束时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 攻击类型 */
-  AttackType: string;
+  AttackType?: string;
   /** 攻击状态，0：攻击中；1：攻击结束 */
-  AttackStatus: number;
+  AttackStatus?: number;
   /** 攻击流量，单位Mbps */
-  Mbps: number;
+  Mbps?: number;
   /** 攻击包量，单位pps */
-  Pps: number;
+  Pps?: number;
   /** 业务类型，bgp-multip：高防包；bgpip：高防ip；basic：基础防护 */
-  Business: string;
+  Business?: string;
   /** 高防实例Id */
-  InstanceId: string;
+  InstanceId?: string;
   /** 高防实例名称 */
-  InstanceName: string;
+  InstanceName?: string;
 }
 
 /** 套餐包信息 */
@@ -976,35 +976,35 @@ declare interface PacketFilterConfig {
   PktlenMin: number;
   /** 最大报文长度，取值1-1500，必须大于等于最小报文长度 */
   PktlenMax: number;
-  /** 动作，取值[drop(丢弃)transmit(放行)drop_black(丢弃并拉黑)drop_rst(拦截)drop_black_rst(拦截并拉黑)forward(继续防护)] */
+  /** 动作，取值[drop(丢弃)transmit(放行)drop_black(丢弃并拉黑)drop_rst(拦截)（已废弃，不支持drop_rst）drop_black_rst(拦截并拉黑)（已废弃，不支持drop_black_rst）forward(继续防护)] */
   Action: string;
   /** 检测位置，取值[begin_l3(IP头)begin_l4(TCP/UDP头)begin_l5(T载荷)no_match(不匹配)] */
   MatchBegin?: string;
-  /** 检测类型，取值[sunday(关键字)pcre(正则表达式)] */
+  /** 检测类型，取值[sunday(关键字)pcre(正则表达式) （已废弃，仅支持sunday）] */
   MatchType?: string;
-  /** 检测值，关键字符串或正则表达式,取值[当检测类型为sunday时，请填写字符串或者16进制字节码，例如\x313233对应的是字符串"123"的16进制字节码;当检测类型为pcre时, 请填写正则表达式字符串;] */
+  /** 检测值，关键字符串或正则表达式,取值[ 当检测类型为sunday时，请填写字符串或者16进制字节码，例如\x313233对应的是字符串"123"的16进制字节码; 最多支持63位; ] */
   Str?: string;
   /** 从检测位置开始的检测深度，取值[0,1500] */
   Depth?: number;
   /** 从检测位置开始的偏移量，取值范围[0,Depth] */
   Offset?: number;
-  /** 是否包含检测值，取值[0(包含)1(不包含)] */
+  /** 是否包含检测值，取值[0(包含)1(不包含) （已废弃，仅支持0）] */
   IsNot?: number;
-  /** 当有第二个检测条件时，与第一检测条件的且或关系，取值[and(且的关系)none(当没有第二个检测条件时填写此值)] */
+  /** 当有第二个检测条件时，与第一检测条件的且或关系，取值[and(且的关系) （已废弃，仅支持none）none(当没有第二个检测条件时填写此值)] */
   MatchLogic?: string;
-  /** 第二个检测位置，取值[begin_l5(载荷)no_match(不匹配)] */
+  /** （已废弃） */
   MatchBegin2?: string;
-  /** 第二个检测类型，取值[sunday(关键字)pcre(正则表达式)] */
+  /** （已废弃） */
   MatchType2?: string;
-  /** 第二个检测值，关键字符串或正则表达式,取值[当检测类型为sunday时，请填写字符串或者16进制字节码，例如\x313233对应的是字符串"123"的16进制字节码;当检测类型为pcre时, 请填写正则表达式字符串;] */
+  /** （已废弃） */
   Str2?: string;
-  /** 从第二个检测位置开始的第二个检测深度，取值[0,1500] */
+  /** （已废弃） */
   Depth2?: number;
-  /** 从第二个检测位置开始的偏移量，取值范围[0,Depth2] */
+  /** （已废弃） */
   Offset2?: number;
-  /** 第二个检测是否包含检测值，取值[0(包含)1(不包含)] */
+  /** （已废弃） */
   IsNot2?: number;
-  /** 特征过滤配置添加成功后自动生成的规则ID，当添加新特征过滤配置时，此字段不用填写； */
+  /** 特征过滤配置添加成功后自动生成的规则ID，当添加新特征过滤配置时，此字段不用填写；当修改/删除新特征过滤配置时，此字段必填； */
   Id?: string;
   /** 大于报文长度，取值1+ */
   PktLenGT?: number;
@@ -1215,7 +1215,7 @@ declare interface WaterPrintConfig {
   /** 水印检查模式, 取值[checkall（普通模式）shortfpcheckall（精简模式）] */
   Verify?: string;
   /** 是否开启代理，1开启则忽略IP+端口校验；0关闭则需要IP+端口校验 */
-  CloudSdkProxy?: number | null;
+  CloudSdkProxy?: number;
 }
 
 /** 生成的水印密钥 */
@@ -1315,7 +1315,7 @@ declare interface CreateCCPrecisionPolicyRequest {
   InstanceId: string;
   /** IP值 */
   Ip: string;
-  /** 协议， 可取值HTTP，HTTPS */
+  /** 协议， 可取值http，https，http/https */
   Protocol: string;
   /** 域名 */
   Domain: string;
@@ -1335,13 +1335,13 @@ declare interface CreateCCReqLimitPolicyRequest {
   InstanceId: string;
   /** IP值 */
   Ip: string;
-  /** 协议，可取值HTTP，HTTPS */
+  /** 协议，可取值http, https, http/https */
   Protocol: string;
   /** 域名 */
   Domain: string;
   /** 策略项 */
   Policy: CCReqLimitPolicyRecord;
-  /** 是否为兜底频控 */
+  /** 是否为兜底频控 0表示不是 1表示是 */
   IsGlobal?: number;
 }
 
@@ -1813,7 +1813,7 @@ declare interface DescribeBgpBizTrendRequest {
   StartTime: string;
   /** 统计结束时间。 例：“2020-09-22 00:00:00”，注意该时间必须为5分钟的倍数 */
   EndTime: string;
-  /** 统计纬度，可取值intraffic, outtraffic, inpkg, outpkg */
+  /** 统计维度，可取值intraffic, outtraffic, inpkg, outpkg； intraffic：入流量 outtraffic：出流量 inpkg：入包速率 outpkg：出包速率 */
   MetricName: string;
   /** 资源实例ID */
   InstanceId: string;
@@ -2169,9 +2169,9 @@ declare interface DescribeDDoSConnectLimitListRequest {
 
 declare interface DescribeDDoSConnectLimitListResponse {
   /** 连接抑制配置总数 */
-  Total: number;
+  Total?: number;
   /** 连接抑制配置详情信息 */
-  ConfigList: ConnectLimitRelation[];
+  ConfigList?: ConnectLimitRelation[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2235,7 +2235,7 @@ declare interface DescribeIpBlockListRequest {
 
 declare interface DescribeIpBlockListResponse {
   /** IP封堵列表 */
-  List: IpBlockData[];
+  List?: IpBlockData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2249,7 +2249,7 @@ declare interface DescribeL7RulesBySSLCertIdRequest {
 
 declare interface DescribeL7RulesBySSLCertIdResponse {
   /** 证书规则集合 */
-  CertSet: CertIdInsL7Rules[];
+  CertSet?: CertIdInsL7Rules[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2367,9 +2367,9 @@ declare interface DescribeListBlackWhiteIpListRequest {
 
 declare interface DescribeListBlackWhiteIpListResponse {
   /** 总数 */
-  Total: number;
+  Total?: number;
   /** 黑白IP列表 */
-  IpList: BlackWhiteIpRelation[];
+  IpList?: BlackWhiteIpRelation[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2483,9 +2483,9 @@ declare interface DescribeListPacketFilterConfigRequest {
 
 declare interface DescribeListPacketFilterConfigResponse {
   /** 总数 */
-  Total: number;
+  Total?: number;
   /** 特征过滤配置 */
-  ConfigList: PacketFilterRelation[];
+  ConfigList?: PacketFilterRelation[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2587,9 +2587,9 @@ declare interface DescribeListWaterPrintConfigRequest {
 
 declare interface DescribeListWaterPrintConfigResponse {
   /** 总数 */
-  Total: number;
+  Total?: number;
   /** 水印配置列表 */
-  ConfigList: WaterPrintRelation[];
+  ConfigList?: WaterPrintRelation[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2657,17 +2657,17 @@ declare interface DescribeOverviewAttackTrendRequest {
 
 declare interface DescribeOverviewAttackTrendResponse {
   /** 攻击类型 */
-  Type: string;
+  Type?: string;
   /** 防护概览攻击趋势起始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 防护概览攻击趋势结束时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 周期 */
-  Period: number;
+  Period?: number;
   /** 每个周期点的攻击次数 */
-  Data: number[];
+  Data?: number[];
   /** 包含的周期点数 */
-  Count: number;
+  Count?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2831,7 +2831,7 @@ declare interface ModifyCCPrecisionPolicyRequest {
   InstanceId: string;
   /** 策略Id */
   PolicyId: string;
-  /** 策略方式。可取值：alg、drop。alg指返回验证码方式验证，drop表示该访问丢弃。 */
+  /** 策略方式。可取值：alg、drop、trans。alg指返回验证码方式验证，drop表示该访问丢弃，trans表示该访问放行。 */
   PolicyAction: string;
   /** 策略记录 */
   PolicyList: CCPrecisionPlyRecord[];
@@ -2863,7 +2863,7 @@ declare interface ModifyCCThresholdPolicyRequest {
   Ip: string;
   /** 域名 */
   Domain: string;
-  /** 协议，可取值HTTP，HTTPS */
+  /** 协议，可取值http，https，http/https */
   Protocol: string;
   /** 清洗阈值，-1表示开启“默认”模式 */
   Threshold: number;

@@ -451,6 +451,10 @@ declare interface ApplyDiskBackupRequest {
   DiskBackupId: string;
   /** 云硬盘备份点原云硬盘ID，可通过DescribeDisks接口查询。 */
   DiskId: string;
+  /** 回滚云硬盘备份点前是否自动关机，默认为FALSE，表示不自动关机 */
+  AutoStopInstance?: boolean;
+  /** 回滚云硬盘备份点完成后是否自动开机，默认为FALSE，表示不自动开机 */
+  AutoStartInstance?: boolean;
 }
 
 declare interface ApplyDiskBackupResponse {

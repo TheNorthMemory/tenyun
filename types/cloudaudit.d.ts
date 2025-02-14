@@ -529,9 +529,9 @@ declare interface UpdateAuditResponse {
 /** {@link Cloudaudit 操作审计} */
 declare interface Cloudaudit {
   (): Versions;
-  /** 创建操作审计跟踪集 {@link CreateAuditTrackRequest} {@link CreateAuditTrackResponse} */
+  /** 创建指定事件跟踪集 {@link CreateAuditTrackRequest} {@link CreateAuditTrackResponse} */
   CreateAuditTrack(data: CreateAuditTrackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditTrackResponse>;
-  /** 创建操作审计跟踪集（多事件） {@link CreateEventsAuditTrackRequest} {@link CreateEventsAuditTrackResponse} */
+  /** 创建全部事件跟踪集 {@link CreateEventsAuditTrackRequest} {@link CreateEventsAuditTrackResponse} */
   CreateEventsAuditTrack(data: CreateEventsAuditTrackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEventsAuditTrackResponse>;
   /** 删除操作审计跟踪集 {@link DeleteAuditTrackRequest} {@link DeleteAuditTrackResponse} */
   DeleteAuditTrack(data: DeleteAuditTrackRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditTrackResponse>;
