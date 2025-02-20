@@ -1,44 +1,44 @@
 {
   "name": "tenyun",
-  "version": "0.11.4",
+  "version": "0.11.5",
   "description": "Promise based and chained Tencent Cloud OpenAPI client for NodeJS",
-  "main": "index.js",
+  "main": "index.cjs",
   "types": "types/index.d.ts",
   "type": "module",
   "exports": {
-    "./package.json": "./package.json",
     ".": {
       "node": {
         "import": {
           "types": "./types/index.d.ts",
-          "default": "./index.mjs"
+          "default": "./index.js"
         },
         "require": {
           "types": "./types/index.d.ts",
-          "default": "./index.js"
+          "default": "./index.cjs"
         }
       },
       "import": {
         "types": "./types/index.d.ts",
-        "default": "./index.mjs"
+        "default": "./index.js"
       },
       "require": {
         "types": "./types/index.d.ts",
-        "default": "./index.js"
+        "default": "./index.cjs"
       },
       "types": "./types/index.d.ts",
-      "default": "./index.mjs"
+      "default": "./index.js"
     },
     "./node": {
       "import": {
         "types": "./types/index.d.ts",
-        "default": "./index.mjs"
+        "default": "./index.js"
       },
       "require": {
         "types": "./types/index.d.ts",
-        "default": "./index.js"
+        "default": "./index.cjs"
       }
-    }
+    },
+    "./package.json": "./package.json"
   },
   "author": "James ZHANG",
   "license": "MIT",
@@ -51,7 +51,7 @@
   },
   "files": [
     "index.js",
-    "index.mjs",
+    "index.cjs",
     "types/",
     "README.md",
     "LICENSE"
