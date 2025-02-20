@@ -729,11 +729,11 @@ declare interface ScaleInfomation {
   /** 每天开始的时间 */
   Time?: number;
   /** 房间人数，用户重复进入同一个房间为1次 */
-  UserNumber?: number | null;
+  UserNumber?: number;
   /** 房间人次，用户每次进入房间为一次 */
-  UserCount?: number | null;
+  UserCount?: number;
   /** sdkappid下一天内的房间数 */
-  RoomNumbers?: number | null;
+  RoomNumbers?: number;
 }
 
 /** SdkAppId级别录制时长数据。 */
@@ -1603,7 +1603,7 @@ declare interface DescribeTrtcMcuTranscodeTimeRequest {
 
 declare interface DescribeTrtcMcuTranscodeTimeResponse {
   /** 应用的用量信息数组。 */
-  Usages: OneSdkAppIdTranscodeTimeUsagesInfo[];
+  Usages?: OneSdkAppIdTranscodeTimeUsagesInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2217,7 +2217,7 @@ declare interface Trtc {
   DescribeTRTCRealTimeScaleData(data: DescribeTRTCRealTimeScaleDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCRealTimeScaleDataResponse>;
   /** 查询TRTC实时监控规模指标 {@link DescribeTRTCRealTimeScaleMetricDataRequest} {@link DescribeTRTCRealTimeScaleMetricDataResponse} */
   DescribeTRTCRealTimeScaleMetricData(data: DescribeTRTCRealTimeScaleMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCRealTimeScaleMetricDataResponse>;
-  /** 查询旁路转码计费时长(旧) {@link DescribeTrtcMcuTranscodeTimeRequest} {@link DescribeTrtcMcuTranscodeTimeResponse} */
+  /** 查询旁路转码计费时长（旧） {@link DescribeTrtcMcuTranscodeTimeRequest} {@link DescribeTrtcMcuTranscodeTimeResponse} */
   DescribeTrtcMcuTranscodeTime(data: DescribeTrtcMcuTranscodeTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrtcMcuTranscodeTimeResponse>;
   /** 查询TRTC音视频房间维度用量 {@link DescribeTrtcRoomUsageRequest} {@link DescribeTrtcRoomUsageResponse} */
   DescribeTrtcRoomUsage(data: DescribeTrtcRoomUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrtcRoomUsageResponse>;

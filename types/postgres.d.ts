@@ -74,6 +74,20 @@ declare interface BackupPlan {
   MinBackupStartTime?: string;
   /** 开始备份的最晚时间 */
   MaxBackupStartTime?: string;
+  /** 备份计划ID */
+  PlanId?: string;
+  /** 备份计划自定义名称。 */
+  PlanName?: string;
+  /** 日志备份保留时长。 */
+  LogBackupRetentionPeriod?: number;
+  /** 创建时间。 */
+  CreatedTime?: string;
+  /** 最近一次的修改时间。 */
+  UpdatedTime?: string;
+  /** 备份计划类型。系统默认创建的为default，自定义的为custom。 */
+  PlanType?: string;
+  /** 备份周期类型。当前支持week、month。 */
+  BackupPeriodType?: string;
 }
 
 /** 实例备份统计项 */
@@ -860,6 +874,44 @@ declare interface Tag {
   TagValue: string;
 }
 
+/** 任务的详情信息 */
+declare interface TaskDetail {
+  /** 当前执行的子任务步骤名称。 */
+  CurrentStep?: string | null;
+  /** 当前任务所拥有的子步骤描述。 */
+  AllSteps?: string | null;
+  /** 任务的输入参数。 */
+  Input?: string | null;
+  /** 任务的输出参数。 */
+  Output?: string | null;
+  /** 指定实例配置完成变更后的切换时间，默认值：00: 此任务不需要切换1：立即切换2：指定时间切换3：维护时间窗口内切换。 */
+  SwitchTag?: number | null;
+  /** 指定的切换时间。 */
+  SwitchTime?: string | null;
+  /** 任务的提示信息。 */
+  Message?: string | null;
+}
+
+/** 任务列表信息 */
+declare interface TaskSet {
+  /** 任务ID。 */
+  TaskId?: number;
+  /** 任务的类型。 */
+  TaskType?: string;
+  /** 任务实例的实例ID。 */
+  DBInstanceId?: string;
+  /** 任务的开始时间。 */
+  StartTime?: string;
+  /** 任务的结束时间。 */
+  EndTime?: string | null;
+  /** 任务的运行状态，包括Running,Success,WaitSwitch,Fail,Pause。 */
+  Status?: string;
+  /** 任务的执行进度，取值范围0-100。 */
+  Progress?: number;
+  /** 任务的详情信息 */
+  TaskDetail?: TaskDetail | null;
+}
+
 /** 数据库版本号信息 */
 declare interface Version {
   /** 数据库引擎，支持：1、postgresql（云数据库PostgreSQL）；2、mssql_compatible（MSSQL兼容-云数据库PostgreSQL）； */
@@ -1016,6 +1068,30 @@ declare interface CreateAccountRequest {
 }
 
 declare interface CreateAccountResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateBackupPlanRequest {
+  /** 实例ID。 */
+  DBInstanceId: string;
+  /** 备份计划名称。 */
+  PlanName: string;
+  /** 创建的备份计划类型，当前仅支持month创建。 */
+  BackupPeriodType: string;
+  /** 备份的日期，示例是每个月的2号开启备份。 */
+  BackupPeriod: string[];
+  /** 备份开始时间，不传跟随默认备份计划。 */
+  MinBackupStartTime?: string;
+  /** 备份结束时间，不传跟随默认计划。 */
+  MaxBackupStartTime?: string;
+  /** 数据备份保留时长，week默认是7,month为30。 */
+  BaseBackupRetentionPeriod?: number;
+}
+
+declare interface CreateBackupPlanResponse {
+  /** 备份策略的ID. */
+  PlanId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1362,6 +1438,18 @@ declare interface DeleteAccountRequest {
 }
 
 declare interface DeleteAccountResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteBackupPlanRequest {
+  /** 实例ID。 */
+  DBInstanceId: string;
+  /** 备份计划的ID。 */
+  PlanId: string;
+}
+
+declare interface DeleteBackupPlanResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1764,6 +1852,22 @@ declare interface DescribeDBInstanceParametersResponse {
   TotalCount?: number;
   /** 参数列表返回详情 */
   Detail?: ParamInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDBInstanceSSLConfigRequest {
+  /** 实例ID，形如postgres-6bwgamo3 */
+  DBInstanceId: string;
+}
+
+declare interface DescribeDBInstanceSSLConfigResponse {
+  /** true 代表开通 ，false 代表未开通 */
+  SSLEnabled?: boolean;
+  /** 云端根证书下载链接 */
+  CAUrl?: string;
+  /** 服务器证书中配置的内网或外网连接地址 */
+  ConnectAddress?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2196,6 +2300,34 @@ declare interface DescribeSlowQueryListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTasksRequest {
+  /** 按照任务ID进行查询。其余云API中返回的FlowId和TaskId等价。 */
+  TaskId?: number;
+  /** 按照数据库实例ID进行查询。 */
+  DBInstanceId?: string;
+  /** 任务的最早开始时间，形如2024-08-23 00:00:00,默认只展示180天内的数据。 */
+  MinStartTime?: string;
+  /** 任务的最晚开始时间，形如2024-08-23 00:00:00，默认为当前时间。 */
+  MaxStartTime?: string;
+  /** 每页显示数量，取值范围为1-100，默认为返回20条。 */
+  Limit?: number;
+  /** 数据偏移量，从0开始。 */
+  Offset?: number;
+  /** 排序字段，支持StartTime,EndTime，默认为StartTime。 */
+  OrderBy?: string;
+  /** 排序方式，包括升序：asc，降序：desc，默认为desc。 */
+  OrderByType?: string;
+}
+
+declare interface DescribeTasksResponse {
+  /** 查询到的任务数量 */
+  TotalCount?: number;
+  /** 任务信息列表 */
+  TaskSet?: TaskSet[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeZonesRequest {
 }
 
@@ -2530,6 +2662,22 @@ declare interface ModifyDBInstanceReadOnlyGroupResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDBInstanceSSLConfigRequest {
+  /** 实例 ID */
+  DBInstanceId: string;
+  /** 开启或关闭SSL */
+  SSLEnabled: boolean;
+  /** SSL证书保护的唯一连接地址，若为主实例，可设置为内外网IP地址；若为只读实例，可设置为实例IP或只读组IP。在开启SSL或修改SSL保护的连接地址时，该参数为必传项；在关闭SSL时，该参数将被忽略。 */
+  ConnectAddress?: string;
+}
+
+declare interface ModifyDBInstanceSSLConfigResponse {
+  /** 任务ID */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDBInstanceSecurityGroupsRequest {
   /** 实例或只读组要绑定的安全组列表。安全组信息可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来查询。 */
   SecurityGroupIdSet: string[];
@@ -2634,6 +2782,20 @@ declare interface ModifyParameterTemplateRequest {
 }
 
 declare interface ModifyParameterTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyReadOnlyDBInstanceWeightRequest {
+  /** 实例ID */
+  DBInstanceId: string;
+  /** 只读组ID */
+  ReadOnlyGroupId: string;
+  /** 只读实例在只读组中的流量权重(1-50) */
+  Weight: number;
+}
+
+declare interface ModifyReadOnlyDBInstanceWeightResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2917,6 +3079,8 @@ declare interface Postgres {
   CloseServerlessDBExtranetAccess(data?: CloseServerlessDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseServerlessDBExtranetAccessResponse>;
   /** 创建数据库账号 {@link CreateAccountRequest} {@link CreateAccountResponse} */
   CreateAccount(data: CreateAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountResponse>;
+  /** 创建备份计划 {@link CreateBackupPlanRequest} {@link CreateBackupPlanResponse} */
+  CreateBackupPlan(data: CreateBackupPlanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupPlanResponse>;
   /** 创建实例数据备份 {@link CreateBaseBackupRequest} {@link CreateBaseBackupResponse} */
   CreateBaseBackup(data: CreateBaseBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBaseBackupResponse>;
   /** 创建实例网络 {@link CreateDBInstanceNetworkAccessRequest} {@link CreateDBInstanceNetworkAccessResponse} */
@@ -2939,6 +3103,8 @@ declare interface Postgres {
   CreateServerlessDBInstance(data: CreateServerlessDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServerlessDBInstanceResponse>;
   /** 删除数据库账号 {@link DeleteAccountRequest} {@link DeleteAccountResponse} */
   DeleteAccount(data: DeleteAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountResponse>;
+  /** 删除备份计划 {@link DeleteBackupPlanRequest} {@link DeleteBackupPlanResponse} */
+  DeleteBackupPlan(data: DeleteBackupPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBackupPlanResponse>;
   /** 删除实例数据备份 {@link DeleteBaseBackupRequest} {@link DeleteBaseBackupResponse} */
   DeleteBaseBackup(data: DeleteBaseBackupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBaseBackupResponse>;
   /** 删除实例网络 {@link DeleteDBInstanceNetworkAccessRequest} {@link DeleteDBInstanceNetworkAccessResponse} */
@@ -2985,6 +3151,8 @@ declare interface Postgres {
   DescribeDBInstanceHAConfig(data: DescribeDBInstanceHAConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceHAConfigResponse>;
   /** 查询实例参数 {@link DescribeDBInstanceParametersRequest} {@link DescribeDBInstanceParametersResponse} */
   DescribeDBInstanceParameters(data: DescribeDBInstanceParametersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceParametersResponse>;
+  /** 查询实例SSL配置 {@link DescribeDBInstanceSSLConfigRequest} {@link DescribeDBInstanceSSLConfigResponse} */
+  DescribeDBInstanceSSLConfig(data: DescribeDBInstanceSSLConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceSSLConfigResponse>;
   /** 查询实例安全组 {@link DescribeDBInstanceSecurityGroupsRequest} {@link DescribeDBInstanceSecurityGroupsResponse} */
   DescribeDBInstanceSecurityGroups(data?: DescribeDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceSecurityGroupsResponse>;
   /** 查询实例列表 {@link DescribeDBInstancesRequest} {@link DescribeDBInstancesResponse} */
@@ -3029,6 +3197,8 @@ declare interface Postgres {
   DescribeSlowQueryAnalysis(data: DescribeSlowQueryAnalysisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowQueryAnalysisResponse>;
   /** 获取慢查询列表 {@link DescribeSlowQueryListRequest} {@link DescribeSlowQueryListResponse} */
   DescribeSlowQueryList(data: DescribeSlowQueryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowQueryListResponse>;
+  /** 查询任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
+  DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
   /** 查询售卖可用区 {@link DescribeZonesRequest} {@link DescribeZonesResponse} */
   DescribeZones(data?: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
   /** 销毁实例 {@link DestroyDBInstanceRequest} {@link DestroyDBInstanceResponse} */
@@ -3069,6 +3239,8 @@ declare interface Postgres {
   ModifyDBInstanceParameters(data: ModifyDBInstanceParametersRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceParametersResponse>;
   /** 修改实例所属的只读组 {@link ModifyDBInstanceReadOnlyGroupRequest} {@link ModifyDBInstanceReadOnlyGroupResponse} */
   ModifyDBInstanceReadOnlyGroup(data: ModifyDBInstanceReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceReadOnlyGroupResponse>;
+  /** 修改实例SSL配置 {@link ModifyDBInstanceSSLConfigRequest} {@link ModifyDBInstanceSSLConfigResponse} */
+  ModifyDBInstanceSSLConfig(data: ModifyDBInstanceSSLConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSSLConfigResponse>;
   /** 修改实例的安全组 {@link ModifyDBInstanceSecurityGroupsRequest} {@link ModifyDBInstanceSecurityGroupsResponse} */
   ModifyDBInstanceSecurityGroups(data: ModifyDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSecurityGroupsResponse>;
   /** 修改实例规格 {@link ModifyDBInstanceSpecRequest} {@link ModifyDBInstanceSpecResponse} */
@@ -3081,6 +3253,8 @@ declare interface Postgres {
   ModifyMaintainTimeWindow(data: ModifyMaintainTimeWindowRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMaintainTimeWindowResponse>;
   /** 修改参数模板 {@link ModifyParameterTemplateRequest} {@link ModifyParameterTemplateResponse} */
   ModifyParameterTemplate(data: ModifyParameterTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyParameterTemplateResponse>;
+  /** 修改只读实例权重 {@link ModifyReadOnlyDBInstanceWeightRequest} {@link ModifyReadOnlyDBInstanceWeightResponse} */
+  ModifyReadOnlyDBInstanceWeight(data: ModifyReadOnlyDBInstanceWeightRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReadOnlyDBInstanceWeightResponse>;
   /** 修改只读组配置 {@link ModifyReadOnlyGroupConfigRequest} {@link ModifyReadOnlyGroupConfigResponse} */
   ModifyReadOnlyGroupConfig(data: ModifyReadOnlyGroupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReadOnlyGroupConfigResponse>;
   /** 修改变更配置切换时间 {@link ModifySwitchTimePeriodRequest} {@link ModifySwitchTimePeriodResponse} */

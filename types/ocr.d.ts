@@ -110,7 +110,7 @@ declare interface AirTransport {
   DomesticInternationalTag?: string;
   /** 客票生效日期 */
   DateStart?: string;
-  /** 有效截至日期 */
+  /** 有效截止日期 */
   DateEnd?: string;
   /** 签注 */
   Endorsement?: string;
@@ -770,6 +770,20 @@ declare interface FlightItemInfo {
   FareBasis?: string;
   /** 免费行李额 */
   Allow?: string;
+  /** 客票生效日期 */
+  DateStart?: string;
+  /** 有效截止日期 */
+  DateEnd?: string;
+}
+
+/** 通用卡证鉴伪告警信息 */
+declare interface GeneralCardWarnInfo {
+  /** 是否存在该告警 */
+  IsWarn?: boolean;
+  /** 风险程度 */
+  RiskConfidence?: number;
+  /** 告警位置四点坐标 */
+  Polygon?: Polygon[];
 }
 
 /** 通用机打发票条目 */
@@ -2540,6 +2554,14 @@ declare interface VatElectronicItemInfo {
   EstateNumber?: string;
   /** 面积单位，仅不动产经营租赁服务发票返回 */
   AreaUnit?: string;
+  /** 出行人，仅旅客运输服务发票返回 */
+  Traveler?: string;
+  /** 有效身份证件号，仅旅客运输服务发票返回 */
+  TravelerID?: string;
+  /** 出行日期，仅旅客运输服务发票返回 */
+  TravelDate?: string;
+  /** 等级，仅旅客运输服务发票返回 */
+  TravelLevel?: string;
 }
 
 /** 增值税发票、购车发票、全电发票的基础要素字段信息。 */
@@ -4191,6 +4213,8 @@ declare interface QuestionSplitOCRRequest {
   PdfPageNumber?: number;
   /** 是否开启切边增强和弯曲矫正,默认为false不开启 */
   EnableImageCrop?: boolean;
+  /** 是否只返回检测框，默认false */
+  EnableOnlyDetectBorder?: boolean;
 }
 
 declare interface QuestionSplitOCRResponse {
@@ -4368,6 +4392,38 @@ declare interface RecognizeFormulaOCRResponse {
   Angle?: number;
   /** 检测到的文本信息 */
   FormulaInfoList?: TextFormulaInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RecognizeGeneralCardWarnRequest {
+  /** 图片链接 */
+  ImageUrl?: string;
+  /** 图片base64 */
+  ImageBase64?: string;
+  /** 卡证类型参数，包含以下范围： General：通用卡证IDCard：身份证 Passport：护照 BankCard：银行卡VehicleLicense：行驶证DriverLicense：驾驶证BizLicense：营业执照 HmtResidentPermit：港澳台居住证ForeignPermanentResident：外国人永居证MainlandPermit：港澳台来往内地通行证 */
+  CardType?: string;
+  /** 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。 */
+  IsPdf?: boolean;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
+  PdfPageNumber?: number;
+}
+
+declare interface RecognizeGeneralCardWarnResponse {
+  /** 卡证类型参数，包含以下范围： General：通用卡证IDCard：身份证 Passport：护照 BankCard：银行卡VehicleLicense：行驶证DriverLicense：驾驶证BizLicense：营业执照 HmtResidentPermit：港澳台居住证ForeignPermanentResident：外国人永居证MainlandPermit：港澳台来往内地通行证 */
+  CardType?: string;
+  /** 模糊信息 */
+  Blur?: GeneralCardWarnInfo;
+  /** 边框不完整信息 */
+  BorderIncomplete?: GeneralCardWarnInfo;
+  /** 复印件信息 */
+  Copy?: GeneralCardWarnInfo;
+  /** ps篡改信息 */
+  Ps?: GeneralCardWarnInfo;
+  /** 反光信息 */
+  Reflection?: GeneralCardWarnInfo;
+  /** 翻拍件信息 */
+  Reprint?: GeneralCardWarnInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5449,6 +5505,8 @@ declare interface Ocr {
   RecognizeForeignPermanentResidentIdCard(data?: RecognizeForeignPermanentResidentIdCardRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeForeignPermanentResidentIdCardResponse>;
   /** 公式识别 {@link RecognizeFormulaOCRRequest} {@link RecognizeFormulaOCRResponse} */
   RecognizeFormulaOCR(data?: RecognizeFormulaOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeFormulaOCRResponse>;
+  /** 通用卡证鉴伪 {@link RecognizeGeneralCardWarnRequest} {@link RecognizeGeneralCardWarnResponse} */
+  RecognizeGeneralCardWarn(data?: RecognizeGeneralCardWarnRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeGeneralCardWarnResponse>;
   /** 通用票据识别（高级版） {@link RecognizeGeneralInvoiceRequest} {@link RecognizeGeneralInvoiceResponse} */
   RecognizeGeneralInvoice(data?: RecognizeGeneralInvoiceRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeGeneralInvoiceResponse>;
   /** 通用文本图像告警 {@link RecognizeGeneralTextImageWarnRequest} {@link RecognizeGeneralTextImageWarnResponse} */

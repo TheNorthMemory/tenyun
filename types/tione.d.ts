@@ -910,6 +910,8 @@ declare interface Pod {
   ContainerInfos?: Container[] | null;
   /** 容器调用信息 */
   CrossTenantENIInfo?: CrossTenantENIInfo | null;
+  /** 实例的状态信息 */
+  Status?: string;
 }
 
 /** 任务建模Pod信息 */

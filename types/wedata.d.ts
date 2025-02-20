@@ -904,6 +904,26 @@ declare interface DataSourceConnectStatus {
   Timestamp?: number;
 }
 
+/** 数据源环境信息 */
+declare interface DataSourceEnvInfo {
+  /** 环境 */
+  Env?: string | null;
+  /** 数据源类型 */
+  DataSourceType?: string | null;
+  /** 集群id */
+  ClusterId?: string | null;
+  /** 配置信息 */
+  Params?: string | null;
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 数据源id */
+  DataSourceId?: string | null;
+  /** env环境的数据源id */
+  EnvDataSourceId?: string | null;
+  /** 配置信息 */
+  BizParams?: string | null;
+}
+
 /** 数据源对象 */
 declare interface DataSourceInfo {
   /** 若数据源列表为绑定数据库，则为db名称 */
@@ -976,6 +996,16 @@ declare interface DataSourceInfo {
   DevelopmentParams?: string | null;
   /** 数据源连接状态 */
   ConnectStatus?: DataSourceConnectStatus | null;
+  /** 数据源展示类型 */
+  DisplayType?: string | null;
+  /** 数据源环境 */
+  Env?: string | null;
+  /** 数据源唯一标识 */
+  DatasourceUrn?: string | null;
+  /** 是否标准模式 */
+  Model?: string | null;
+  /** 数据源环境信息 */
+  DataSourceEnvInfos?: DataSourceEnvInfo[] | null;
 }
 
 /** 查询数据源分页列表 */
@@ -3012,6 +3042,8 @@ declare interface Project {
   Status?: number;
   /** 项目类型，SIMPLE：简单模式 STANDARD：标准模式 */
   Model?: string | null;
+  /** 二级菜单 */
+  SecondModuleList?: string[] | null;
 }
 
 /** 项目的用户对象 */
@@ -5494,6 +5526,14 @@ declare interface WorkflowTaskCountOpsDto {
   TypeCount?: PairDto[] | null;
   /** 任务周期类型维度统计 */
   CycleCount?: PairDto[] | null;
+}
+
+declare interface AddProjectUserRoleRequest {
+}
+
+declare interface AddProjectUserRoleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface BatchCreateIntegrationTaskAlarmsRequest {
@@ -11228,6 +11268,8 @@ declare interface UploadResourceResponse {
 /** {@link Wedata 数据开发治理平台 WeData} */
 declare interface Wedata {
   (): Versions;
+  /** 添加项目用户角色 {@link AddProjectUserRoleRequest} {@link AddProjectUserRoleResponse} */
+  AddProjectUserRole(data?: AddProjectUserRoleRequest, config?: AxiosRequestConfig): AxiosPromise<AddProjectUserRoleResponse>;
   /** 批量创建任务告警规则 {@link BatchCreateIntegrationTaskAlarmsRequest} {@link BatchCreateIntegrationTaskAlarmsResponse} */
   BatchCreateIntegrationTaskAlarms(data: BatchCreateIntegrationTaskAlarmsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchCreateIntegrationTaskAlarmsResponse>;
   /** 异步批量创建任务版本 {@link BatchCreateTaskVersionAsyncRequest} {@link BatchCreateTaskVersionAsyncResponse} */

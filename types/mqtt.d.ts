@@ -46,6 +46,36 @@ declare interface AuthorizationPolicyPriority {
   Priority: number | null;
 }
 
+/** CA证书信息 */
+declare interface CaCertificateItem {
+  /** common name */
+  CaCn?: string;
+  /** 证书内容 */
+  CaCertificate?: string;
+  /** 证书序列号 */
+  CaSn?: string;
+  /** 证书格式 */
+  Format?: string;
+  /** 验证证书内容 */
+  VerificationCertificate?: string;
+  /** ca状态 */
+  Status?: string | null;
+  /** 上次激活时间 */
+  LastActivationTime?: number | null;
+  /** 创建时间 */
+  CreatedTime?: number | null;
+  /** 预销毁时间 */
+  UpdateTime?: number | null;
+  /** 上次去激活时间 */
+  LastInactivationTime?: number | null;
+  /** Ca证书颁发者CN */
+  CaIssuerCn?: string | null;
+  /** 生效时间 */
+  NotBeforeTime?: number | null;
+  /** 失效时间 */
+  NotAfterTime?: number | null;
+}
+
 /** 设备证书信息 */
 declare interface DeviceCertificateItem {
   /** 客户端id */
@@ -196,6 +226,40 @@ declare interface MQTTUserItem {
   ModifiedTime?: number;
 }
 
+/** 价格标签信息 */
+declare interface PriceTag {
+  /** 计价名称 */
+  Name?: string;
+  /** 计价类别 */
+  Category?: string;
+  /** 计费项标签 */
+  Code?: string;
+  /** 步长 */
+  Step?: number | null;
+}
+
+/** MQTT ProductSkuItem */
+declare interface ProductSkuItem {
+  /** 规格类型BASIC：基础版PRO ：专业版 */
+  InstanceType?: string | null;
+  /** 规格代码 */
+  SkuCode?: string | null;
+  /** 是否售卖 */
+  OnSale?: boolean | null;
+  /** topic num限制 */
+  TopicNumLimit?: number | null;
+  /** tps */
+  TpsLimit?: number | null;
+  /** 客户端连接数 */
+  ClientNumLimit?: number | null;
+  /** 单客户端最大订阅数 */
+  MaxSubscriptionPerClient?: number | null;
+  /** 授权规则条数 */
+  AuthorizationPolicyLimit?: number | null;
+  /** 计费项信息 */
+  PriceTags?: PriceTag[] | null;
+}
+
 /** 公网访问安全规则 */
 declare interface PublicAccessRule {
   /** ip网段信息 */
@@ -230,6 +294,18 @@ declare interface VpcInfo {
   SubnetId: string;
 }
 
+declare interface ActivateCaCertificateRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 证书序列号 */
+  CaSn: string;
+}
+
+declare interface ActivateCaCertificateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ActivateDeviceCertificateRequest {
   /** 集群id */
   InstanceId: string;
@@ -238,6 +314,20 @@ declare interface ActivateDeviceCertificateRequest {
 }
 
 declare interface ActivateDeviceCertificateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ApplyRegistrationCodeRequest {
+  /** 集群id */
+  InstanceId: string;
+}
+
+declare interface ApplyRegistrationCodeResponse {
+  /** 集群ID */
+  InstanceId?: string;
+  /** 注册码 */
+  RegistrationCode?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -402,6 +492,18 @@ declare interface CreateUserResponse {
   RequestId?: string;
 }
 
+declare interface DeactivateCaCertificateRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 证书序列号 */
+  CaSn: string;
+}
+
+declare interface DeactivateCaCertificateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeactivateDeviceCertificateRequest {
   /** 集群id */
   InstanceId: string;
@@ -434,6 +536,18 @@ declare interface DeleteAuthorizationPolicyRequest {
 }
 
 declare interface DeleteAuthorizationPolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCaCertificateRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 证书序列号 */
+  CaSn: string;
+}
+
+declare interface DeleteCaCertificateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -516,6 +630,54 @@ declare interface DescribeAuthorizationPoliciesRequest {
 declare interface DescribeAuthorizationPoliciesResponse {
   /** 规则 */
   Data?: AuthorizationPolicyItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCaCertificateRequest {
+  /** ca证书sn */
+  CaSn: string;
+  /** 集群id */
+  InstanceId: string;
+}
+
+declare interface DescribeCaCertificateResponse {
+  /** 创建时间 */
+  CreatedTime?: number;
+  /** 上次更新时间 */
+  UpdateTime?: number;
+  /** 失效日期 */
+  NotAfterTime?: number;
+  /** 上次激活时间 */
+  LastActivationTime?: number;
+  /** 上次吊销时间 */
+  LastInactivationTime?: number;
+  /** 证书状态 */
+  Status?: string;
+  /** 证书序列号 */
+  CaSn?: string;
+  /** common name */
+  CaCn?: string;
+  /** 证书内容 */
+  CaCertificate?: string;
+  /** 证书格式 */
+  Format?: string;
+  /** Ca证书颁发者CN */
+  CaIssuerCn?: string | null;
+  /** 生效开始时间 */
+  NotBeforeTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCaCertificatesRequest {
+  /** 集群ID */
+  InstanceId: string;
+}
+
+declare interface DescribeCaCertificatesResponse {
+  /** ca证书列表 */
+  Data?: CaCertificateItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -678,6 +840,18 @@ declare interface DescribeInstanceResponse {
   RequestId?: string;
 }
 
+declare interface DescribeProductSKUListRequest {
+}
+
+declare interface DescribeProductSKUListResponse {
+  /** 查询总数 */
+  TotalCount?: number | null;
+  /** mqtt商品配置信息 */
+  MQTTProductSkuList?: ProductSkuItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTopicListRequest {
   /** 实例ID */
   InstanceId: string;
@@ -788,6 +962,26 @@ declare interface ModifyInsPublicEndpointResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInstanceCertBindingRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 服务端证书id */
+  SSLServerCertId: string;
+  /** CA证书id */
+  SSLCaCertId: string;
+  /** 加密通信方式TLS：单向证书认证mTLS：双向证书认证BYOC：一设备一证书认证 */
+  X509Mode: string;
+  /** 设备证书注册类型：JITP，自动注册；MANUAL 手动注册 */
+  DeviceCertificateProvisionType?: string;
+  /** 是否自动激活，默认为false */
+  AutomaticActivation?: boolean;
+}
+
+declare interface ModifyInstanceCertBindingResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyInstanceRequest {
   /** 实例ID */
   InstanceId: string;
@@ -880,6 +1074,24 @@ declare interface ModifyUserResponse {
   RequestId?: string;
 }
 
+declare interface RegisterCaCertificateRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** CA证书 */
+  CaCertificate: string;
+  /** 验证证书 */
+  VerificationCertificate: string;
+  /** 证书格式，不传默认PEM格式 */
+  Format?: string;
+  /** 证书状态，不传默认ACTIVE状态 ACTIVE,//激活 INACTIVE,//未激活 REVOKED,//吊销 PENDING_ACTIVATION,//注册待激活 */
+  Status?: string;
+}
+
+declare interface RegisterCaCertificateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RegisterDeviceCertificateRequest {
   /** 集群id */
   InstanceId: string;
@@ -927,8 +1139,12 @@ declare interface UpdateAuthorizationPolicyPriorityResponse {
 /** {@link Mqtt 消息队列 MQTT 版} */
 declare interface Mqtt {
   (): Versions;
+  /** 激活Ca证书 {@link ActivateCaCertificateRequest} {@link ActivateCaCertificateResponse} */
+  ActivateCaCertificate(data: ActivateCaCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateCaCertificateResponse>;
   /** 生效设备证书 {@link ActivateDeviceCertificateRequest} {@link ActivateDeviceCertificateResponse} */
   ActivateDeviceCertificate(data: ActivateDeviceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateDeviceCertificateResponse>;
+  /** 申请注册ca用的注册码 {@link ApplyRegistrationCodeRequest} {@link ApplyRegistrationCodeResponse} */
+  ApplyRegistrationCode(data: ApplyRegistrationCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyRegistrationCodeResponse>;
   /** 创建授权策略 {@link CreateAuthorizationPolicyRequest} {@link CreateAuthorizationPolicyResponse} */
   CreateAuthorizationPolicy(data: CreateAuthorizationPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuthorizationPolicyResponse>;
   /** 为MQTT实例创建公网接入点 {@link CreateInsPublicEndpointRequest} {@link CreateInsPublicEndpointResponse} */
@@ -943,12 +1159,16 @@ declare interface Mqtt {
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
   /** 添加MQTT角色 {@link CreateUserRequest} {@link CreateUserResponse} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
+  /** 失效Ca证书 {@link DeactivateCaCertificateRequest} {@link DeactivateCaCertificateResponse} */
+  DeactivateCaCertificate(data: DeactivateCaCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DeactivateCaCertificateResponse>;
   /** 失效设备证书 {@link DeactivateDeviceCertificateRequest} {@link DeactivateDeviceCertificateResponse} */
   DeactivateDeviceCertificate(data: DeactivateDeviceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DeactivateDeviceCertificateResponse>;
   /** 删除一个MQTT认证器 {@link DeleteAuthenticatorRequest} {@link DeleteAuthenticatorResponse} */
   DeleteAuthenticator(data: DeleteAuthenticatorRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuthenticatorResponse>;
   /** 删除授权策略 {@link DeleteAuthorizationPolicyRequest} {@link DeleteAuthorizationPolicyResponse} */
   DeleteAuthorizationPolicy(data: DeleteAuthorizationPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuthorizationPolicyResponse>;
+  /** 删除Ca证书 {@link DeleteCaCertificateRequest} {@link DeleteCaCertificateResponse} */
+  DeleteCaCertificate(data: DeleteCaCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCaCertificateResponse>;
   /** 删除设备证书 {@link DeleteDeviceCertificateRequest} {@link DeleteDeviceCertificateResponse} */
   DeleteDeviceCertificate(data: DeleteDeviceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceCertificateResponse>;
   /** 删除MQTT实例的公网接入点 {@link DeleteInsPublicEndpointRequest} {@link DeleteInsPublicEndpointResponse} */
@@ -963,6 +1183,10 @@ declare interface Mqtt {
   DescribeAuthenticator(data: DescribeAuthenticatorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuthenticatorResponse>;
   /** 查询授权策略 {@link DescribeAuthorizationPoliciesRequest} {@link DescribeAuthorizationPoliciesResponse} */
   DescribeAuthorizationPolicies(data?: DescribeAuthorizationPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuthorizationPoliciesResponse>;
+  /** 查询Ca证书详情 {@link DescribeCaCertificateRequest} {@link DescribeCaCertificateResponse} */
+  DescribeCaCertificate(data: DescribeCaCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaCertificateResponse>;
+  /** 查询集群CA证书列表 {@link DescribeCaCertificatesRequest} {@link DescribeCaCertificatesResponse} */
+  DescribeCaCertificates(data: DescribeCaCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaCertificatesResponse>;
   /** 查询设备证书详情 {@link DescribeDeviceCertificateRequest} {@link DescribeDeviceCertificateResponse} */
   DescribeDeviceCertificate(data: DescribeDeviceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceCertificateResponse>;
   /** 查询设备证书 {@link DescribeDeviceCertificatesRequest} {@link DescribeDeviceCertificatesResponse} */
@@ -973,6 +1197,8 @@ declare interface Mqtt {
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
   /** 获取MQTT实例列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */
   DescribeInstanceList(data?: DescribeInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceListResponse>;
+  /** 获取MQTT产品售卖规格 {@link DescribeProductSKUListRequest} {@link DescribeProductSKUListResponse} */
+  DescribeProductSKUList(data?: DescribeProductSKUListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductSKUListResponse>;
   /** 查询MQTT主题详情 {@link DescribeTopicRequest} {@link DescribeTopicResponse} */
   DescribeTopic(data: DescribeTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicResponse>;
   /** 查询MQTT主题列表 {@link DescribeTopicListRequest} {@link DescribeTopicListResponse} */
@@ -985,6 +1211,8 @@ declare interface Mqtt {
   ModifyInsPublicEndpoint(data: ModifyInsPublicEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInsPublicEndpointResponse>;
   /** 修改MQTT实例属性 {@link ModifyInstanceRequest} {@link ModifyInstanceResponse} */
   ModifyInstance(data: ModifyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceResponse>;
+  /** 更新MQTT集群证书证书 {@link ModifyInstanceCertBindingRequest} {@link ModifyInstanceCertBindingResponse} */
+  ModifyInstanceCertBinding(data: ModifyInstanceCertBindingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceCertBindingResponse>;
   /** 修改MQTTJWKS认证器 {@link ModifyJWKSAuthenticatorRequest} {@link ModifyJWKSAuthenticatorResponse} */
   ModifyJWKSAuthenticator(data: ModifyJWKSAuthenticatorRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyJWKSAuthenticatorResponse>;
   /** 修改MQTTJWT认证器 {@link ModifyJWTAuthenticatorRequest} {@link ModifyJWTAuthenticatorResponse} */
@@ -993,6 +1221,8 @@ declare interface Mqtt {
   ModifyTopic(data: ModifyTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicResponse>;
   /** 修改MQTT角色 {@link ModifyUserRequest} {@link ModifyUserResponse} */
   ModifyUser(data: ModifyUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserResponse>;
+  /** 注册CA证书 {@link RegisterCaCertificateRequest} {@link RegisterCaCertificateResponse} */
+  RegisterCaCertificate(data: RegisterCaCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterCaCertificateResponse>;
   /** 注册设备证书 {@link RegisterDeviceCertificateRequest} {@link RegisterDeviceCertificateResponse} */
   RegisterDeviceCertificate(data: RegisterDeviceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterDeviceCertificateResponse>;
   /** 吊销设备证书 {@link RevokedDeviceCertificateRequest} {@link RevokedDeviceCertificateResponse} */

@@ -202,9 +202,9 @@ declare interface GetEidTokenConfig {
   IntentionMode?: string;
   /** 意愿核身朗读模式使用的文案。- 若未使用意愿核身朗读功能，该字段无需传入。- 默认为空，最长可接受120的字符串长度。 */
   IntentionVerifyText?: string;
-  /** 意愿核身问答模式的配置列表。- 当前仅支持一个问答。 */
+  /** 意愿核身问答模式的配置列表。- 问答模式支持1-10轮（不超过10轮）的意愿确认。 */
   IntentionQuestions?: IntentionQuestion[];
-  /** 意愿核身（点头确认模式）使用的文案。- 若未使用意愿核身（点头确认模式），则该字段无需传入。- 默认为空，最长可接受150的字符串长度。 */
+  /** 意愿核身（点头确认模式）使用的文案。- 若未使用意愿核身（点头确认模式），则该字段无需传入。- 默认为空，最长可接受150的字符串长度。- 点头确认模式支持1-10轮（不超过10轮）的意愿确认。 */
   IntentionActions?: IntentionActionConfig[];
   /** 意愿核身过程中识别用户的回答意图。- 开启后除了IntentionQuestions的Answers列表中的标准回答会通过，近似意图的回答也会通过。- 默认开启。 */
   IntentionRecognition?: boolean;
@@ -543,9 +543,9 @@ declare interface DetectAuthRequest {
   Encryption?: Encryption;
   /** 意愿核身（朗读模式）使用的文案。- 若未使用意愿核身（朗读模式），则该字段无需传入。- 最长可接受120的字符串长度。 */
   IntentionVerifyText?: string;
-  /** 意愿核身（语音播报+语音回答模式）使用的文案。- 包括：系统语音播报的文本、需要核验的标准文本。- 当前仅支持1轮问答。 */
+  /** 意愿核身（语音播报+语音回答模式）使用的文案。- 包括：系统语音播报的文本、需要核验的标准文本。- 问答模式支持1-10轮（不超过10轮）的意愿确认。 */
   IntentionQuestions?: IntentionQuestion[];
-  /** 意愿核身（点头确认模式）使用的文案。- 若未使用意愿核身（点头确认模式），则该字段无需传入。- 当前仅支持一个提示文本。 */
+  /** 意愿核身（点头确认模式）使用的文案。- 若未使用意愿核身（点头确认模式），则该字段无需传入。- 点头确认模式支持1-10轮（不超过10轮）的意愿确认。 */
   IntentionActions?: IntentionActionConfig[];
   /** 意愿核身流程配置。 */
   Config?: RuleIdConfig;

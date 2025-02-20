@@ -42,7 +42,7 @@ declare interface ChatUsage {
 
 /** 返回的回复, 支持多个 */
 declare interface Choice {
-  /** 结束标志位，可能为 stop、 sensitive或者tool_calls。stop 表示输出正常结束。sensitive 只在开启流式输出审核时会出现，表示安全审核未通过。tool_calls 标识函数调用。 */
+  /** 结束标志位，可能为 stop、 content_filter。stop 表示输出正常结束。content_filter 只在开启流式输出审核时会出现，表示安全审核未通过。 */
   FinishReason?: string;
   /** 增量返回值，流式调用时使用该字段。 */
   Delta?: Delta;
@@ -293,7 +293,7 @@ declare interface CreateReconstructDocumentFlowRequest {
   FileType: string;
   /** 文件的 URL 地址。文件存储于腾讯云的 URL 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 URL 速度和稳定性可能受一定影响。参考：[腾讯云COS文档](https://cloud.tencent.com/document/product/436/7749) */
   FileUrl?: string;
-  /** 文件的 Base64 值。支持的文件大小：所下载文件经Base64编码后不超过 8M。文件下载时间不超过 3 秒。支持的图片像素：单边介于20-10000px之间。文件的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。 */
+  /** 文件的 Base64 值。支持的文件类型： PNG、JPG、JPEG、PDF、GIF、BMP、TIFF支持的文件大小：所下载文件经Base64编码后不超过 8M。文件下载时间不超过 3 秒。支持的图片像素：单边介于20-10000px之间。文件的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。 */
   FileBase64?: string;
   /** 文档的起始页码。当传入文件是PDF、PDF、PPT、PPTX、DOC类型时，用来指定识别的起始页码，识别的页码包含当前值。 */
   FileStartPageNumber?: number;
@@ -647,6 +647,16 @@ declare interface RunRerankResponse {
 }
 
 declare interface UploadDocRealtimeRequest {
+  /** 知识库ID */
+  KnowledgeBaseId: string;
+  /** 文件名，可选。**需带文件类型后缀**，当文件名无法从传入的`FileUrl`获取时需要通过该字段来明确。 */
+  FileName: string;
+  /** 文件类型。**支持的文件类型：**- `PDF`、`DOC`、`DOCX`、`XLS`、`XLSX`、`PPT`、`PPTX`、`MD`、`TXT`、`PNG`、`JPG`、`JPEG`、`CSV`、`HTML`、`EPUB`**支持的文件大小：** - `PDF`、`DOCX`、`DOC`、`PPT`、`PPTX` 最大 200M - `TXT`、`MD` 最大10M - 其他 最大20M */
+  FileType: string;
+  /** 文件的 URL 地址。文件存储于腾讯云的 URL 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 URL 速度和稳定性可能受一定影响。参考：[腾讯云COS文档](https://cloud.tencent.com/document/product/436/7749) */
+  FileUrl: string;
+  /** 过期时间的秒数，最长24小时，默认24小时 */
+  ExpireTime?: number;
 }
 
 declare interface UploadDocRealtimeResponse {
@@ -657,7 +667,7 @@ declare interface UploadDocRealtimeResponse {
 declare interface UploadDocRequest {
   /** 知识库ID */
   KnowledgeBaseId: string;
-  /** 文件名，可选。**需带文件类型后缀**，当文件名无法从传入的`FileUrl`获取时需要通过该字段来明确。 */
+  /** 文件名。**需带文件类型后缀** */
   FileName: string;
   /** 文件类型。**支持的文件类型：**- `PDF`、`DOC`、`DOCX`、`XLS`、`XLSX`、`PPT`、`PPTX`、`MD`、`TXT`、`PNG`、`JPG`、`JPEG`、`CSV`**支持的文件大小：** - `PDF`、`DOCX`、`DOC`、`PPT`、`PPTX` 最大 200M - `TXT`、`MD` 最大10M - 其他 最大20M */
   FileType: string;
@@ -681,7 +691,7 @@ declare interface UploadDocResponse {
 /** {@link Lkeap 知识引擎原子能力} */
 declare interface Lkeap {
   (): Versions;
-  /** 对话 {@link ChatCompletionsRequest} {@link ChatCompletionsResponse} */
+  /** DeepSeek API 接口 {@link ChatCompletionsRequest} {@link ChatCompletionsResponse} */
   ChatCompletions(data: ChatCompletionsRequest, config?: AxiosRequestConfig): AxiosPromise<ChatCompletionsResponse>;
   /** 创建属性标签 {@link CreateAttributeLabelRequest} {@link CreateAttributeLabelResponse} */
   CreateAttributeLabel(data: CreateAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAttributeLabelResponse>;
@@ -732,7 +742,7 @@ declare interface Lkeap {
   /** 上传文档 {@link UploadDocRequest} {@link UploadDocResponse} */
   UploadDoc(data: UploadDocRequest, config?: AxiosRequestConfig): AxiosPromise<UploadDocResponse>;
   /** 实时文档上传 {@link UploadDocRealtimeRequest} {@link UploadDocRealtimeResponse} */
-  UploadDocRealtime(data?: UploadDocRealtimeRequest, config?: AxiosRequestConfig): AxiosPromise<UploadDocRealtimeResponse>;
+  UploadDocRealtime(data: UploadDocRealtimeRequest, config?: AxiosRequestConfig): AxiosPromise<UploadDocRealtimeResponse>;
 }
 
 export declare type Versions = ["2024-05-22"];

@@ -105,21 +105,21 @@ declare interface AudioTextStatisticsItem {
 /** CreateApp的输出参数 */
 declare interface CreateAppResp {
   /** 应用ID，由后台自动生成。 */
-  BizId: number;
+  BizId?: number;
   /** 应用名称，透传输入参数的AppName */
-  AppName: string;
+  AppName?: string;
   /** 项目ID，透传输入的ProjectId */
-  ProjectId: number;
+  ProjectId?: number;
   /** 应用密钥，GME SDK初始化时使用 */
-  SecretKey: string;
+  SecretKey?: string;
   /** 服务创建时间戳 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 实时语音服务配置数据 */
-  RealtimeSpeechConf: RealtimeSpeechConf;
+  RealtimeSpeechConf?: RealtimeSpeechConf;
   /** 语音消息服务配置数据 */
-  VoiceMessageConf: VoiceMessageConf;
+  VoiceMessageConf?: VoiceMessageConf;
   /** 语音分析服务配置数据 */
-  VoiceFilterConf: VoiceFilterConf;
+  VoiceFilterConf?: VoiceFilterConf;
   /** 语音转文本服务配置数据 */
   AsrConf?: AsrConf;
 }
@@ -157,31 +157,31 @@ declare interface DescribeAppStatisticsResp {
 /** 语音检测结果返回 */
 declare interface DescribeScanResult {
   /** 业务返回码 */
-  Code: number;
+  Code?: number;
   /** 数据唯一 ID */
-  DataId: string;
+  DataId?: string;
   /** 检测完成的时间戳 */
-  ScanFinishTime: number;
+  ScanFinishTime?: number;
   /** 是否违规 */
-  HitFlag: boolean;
+  HitFlag?: boolean;
   /** 是否为流 */
-  Live: boolean;
+  Live?: boolean;
   /** 业务返回描述 */
-  Msg: string | null;
+  Msg?: string;
   /** 检测结果，Code 为 0 时返回 */
-  ScanPiece: ScanPiece[] | null;
+  ScanPiece?: ScanPiece[];
   /** 提交检测的时间戳 */
-  ScanStartTime: number;
+  ScanStartTime?: number;
   /** 语音检测场景，对应请求时的 Scene */
-  Scenes: string[];
+  Scenes?: string[];
   /** 语音检测任务 ID，由后台分配 */
-  TaskId: string;
+  TaskId?: string;
   /** 文件或接流地址 */
-  Url: string;
+  Url?: string;
   /** 检测任务执行结果状态，分别为：Start: 任务开始Success: 成功结束Error: 异常 */
-  Status: string;
+  Status?: string;
   /** 提交检测的应用 ID */
-  BizId: number;
+  BizId?: number;
 }
 
 /** 查找过滤 */
@@ -195,9 +195,9 @@ declare interface Filter {
 /** 房间内的事件 */
 declare interface InOutTimeInfo {
   /** 进入房间时间 */
-  StartTime: number;
+  StartTime?: number;
   /** 退出房间时间 */
-  EndTime: number;
+  EndTime?: number;
 }
 
 /** ModifyAppStatus接口输出参数 */
@@ -259,13 +259,13 @@ declare interface RecordInfo {
 /** 房间内用户信息 */
 declare interface RoomUser {
   /** 房间id */
-  RoomId: number;
+  RoomId?: number;
   /** 房间里用户uin列表 */
-  Uins: number[] | null;
+  Uins?: number[];
   /** 字符串房间id */
-  StrRoomId: string | null;
+  StrRoomId?: string;
   /** 房间里用户字符串uin列表 */
-  StrUins?: string[] | null;
+  StrUins?: string[];
 }
 
 /** 语音检测详情 */
@@ -285,25 +285,25 @@ declare interface ScanDetail {
 /** 语音检测结果，Code 为 0 时返回 */
 declare interface ScanPiece {
   /** 流检测时返回，音频转存地址，保留30min */
-  DumpUrl: string | null;
+  DumpUrl?: string;
   /** 是否违规 */
-  HitFlag: boolean;
+  HitFlag?: boolean;
   /** 违规主要类型 */
-  MainType: string | null;
+  MainType?: string;
   /** 语音检测详情 */
-  ScanDetail: ScanDetail[];
+  ScanDetail?: ScanDetail[];
   /** gme实时语音房间ID，透传任务传入时的RoomId */
-  RoomId: string | null;
+  RoomId?: string;
   /** gme实时语音用户ID，透传任务传入时的OpenId */
-  OpenId: string | null;
+  OpenId?: string;
   /** 备注 */
-  Info: string | null;
+  Info?: string;
   /** 流检测时分片在流中的偏移时间，单位毫秒 */
-  Offset: number | null;
+  Offset?: number;
   /** 流检测时分片时长 */
-  Duration: number | null;
+  Duration?: number;
   /** 分片开始检测时间 */
-  PieceStartTime: number | null;
+  PieceStartTime?: number;
 }
 
 /** 语音检测返回结果 */
@@ -327,17 +327,17 @@ declare interface SceneInfo {
 /** 服务开关状态 */
 declare interface ServiceStatus {
   /** 实时语音服务开关状态 */
-  RealTimeSpeech: StatusInfo | null;
+  RealTimeSpeech?: StatusInfo;
   /** 语音消息服务开关状态 */
-  VoiceMessage: StatusInfo | null;
+  VoiceMessage?: StatusInfo;
   /** 语音内容安全服务开关状态 */
-  Porn: StatusInfo | null;
+  Porn?: StatusInfo;
   /** 语音录制服务开关状态 */
-  Live: StatusInfo | null;
+  Live?: StatusInfo;
   /** 语音转文本服务开关状态 */
-  RealTimeAsr: StatusInfo | null;
+  RealTimeAsr?: StatusInfo;
   /** 文本翻译服务开关状态 */
-  TextTranslate?: StatusInfo | null;
+  TextTranslate?: StatusInfo;
 }
 
 /** 用量数据单元 */
@@ -403,7 +403,7 @@ declare interface VoiceFilterConf {
   /** 语音过滤服务开关，取值：open/close */
   Status?: string;
   /** 场景配置信息，如开关状态，回调地址。 */
-  SceneInfos?: SceneInfo[] | null;
+  SceneInfos?: SceneInfo[];
 }
 
 /** 语音过滤用量统计数据 */

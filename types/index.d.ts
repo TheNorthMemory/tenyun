@@ -236,6 +236,7 @@ import Tkgdq, { Versions as TkgdqVersions } from "./tkgdq";
 import Tms, { Versions as TmsVersions } from "./tms";
 import Tmt, { Versions as TmtVersions } from "./tmt";
 import Tourism, { Versions as TourismVersions } from "./tourism";
+import Trabbit, { Versions as TrabbitVersions } from "./trabbit";
 import Trdp, { Versions as TrdpVersions } from "./trdp";
 import Trocket, { Versions as TrocketVersions } from "./trocket";
 import Trp, { Versions as TrpVersions } from "./trp";
@@ -503,6 +504,7 @@ export declare type SERVICE_VERSIONS = {
   tms: TmsVersions,
   tmt: TmtVersions,
   tourism: TourismVersions,
+  trabbit: TrabbitVersions,
   trdp: TrdpVersions,
   trocket: TrocketVersions,
   trp: TrpVersions,
@@ -1016,6 +1018,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   tmt: Tmt,
   /** {@link Tourism 文旅客情大数据} */
   tourism: Tourism,
+  /** {@link Trabbit 消息队列 RabbitMQ Serverless 版} */
+  trabbit: Trabbit,
   /** {@link Trdp 流量风险决策平台} */
   trdp: Trdp,
   /** {@link Trocket 消息队列 RocketMQ 版} */

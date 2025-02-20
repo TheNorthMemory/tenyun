@@ -2145,9 +2145,9 @@ declare interface Ccc {
   BindNumberCallOutSkillGroup(data: BindNumberCallOutSkillGroupRequest, config?: AxiosRequestConfig): AxiosPromise<BindNumberCallOutSkillGroupResponse>;
   /** 绑定座席所属技能组 {@link BindStaffSkillGroupListRequest} {@link BindStaffSkillGroupListResponse} */
   BindStaffSkillGroupList(data: BindStaffSkillGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<BindStaffSkillGroupListResponse>;
-  /** 创建AI智能体会话 {@link CreateAIAgentCallRequest} {@link CreateAIAgentCallResponse} */
+  /** 创建智能体通话 {@link CreateAIAgentCallRequest} {@link CreateAIAgentCallResponse} */
   CreateAIAgentCall(data: CreateAIAgentCallRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIAgentCallResponse>;
-  /** 创建AI会话 {@link CreateAICallRequest} {@link CreateAICallResponse} */
+  /** 创建AI通话 {@link CreateAICallRequest} {@link CreateAICallResponse} */
   CreateAICall(data: CreateAICallRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAICallResponse>;
   /** 创建管理端访问链接 {@link CreateAdminURLRequest} {@link CreateAdminURLResponse} */
   CreateAdminURL(data: CreateAdminURLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAdminURLResponse>;

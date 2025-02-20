@@ -29,17 +29,17 @@ declare interface AppConfig {
   /** 应用ID */
   ApplicationId?: string;
   /** 应用名称 */
-  AppName?: string | null;
+  AppName?: string;
   /** 应用状态 1正常 2停用 */
-  State?: number | null;
+  State?: number;
   /** 1试用 2轻量版 3标准版 4旗舰版 */
-  AppVersion?: number | null;
+  AppVersion?: number;
   /** 创建时间 */
-  CreatedAt?: string | null;
+  CreatedAt?: string;
   /** 回调 */
-  Callback?: string | null;
+  Callback?: string;
   /** 回调Key */
-  CallbackKey?: string | null;
+  CallbackKey?: string;
 }
 
 /** 应用自定义内容 */
@@ -59,7 +59,7 @@ declare interface AppCustomContent {
 /** 背景图片配置 */
 declare interface BackgroundPictureConfig {
   /** 背景图片的url */
-  Url?: string | null;
+  Url?: string;
 }
 
 /** 批量注册用户信息 */
@@ -67,33 +67,33 @@ declare interface BatchUserInfo {
   /** 低代码互动课堂的SdkAppId。 */
   SdkAppId?: number;
   /** 用户ID。 */
-  UserId?: string | null;
+  UserId?: string;
   /** 用户在客户系统的Id。 若用户注册时该字段为空，则默认为 UserId 值一致。 */
-  OriginId?: string | null;
+  OriginId?: string;
 }
 
 /** 课堂评分字段 */
 declare interface ClassScoreItem {
   /** 课堂iD */
-  RoomId?: number | null;
+  RoomId?: number;
   /** 用户ID */
-  UserId?: string | null;
+  UserId?: string;
   /** 评分时间 */
-  CreateTime?: number | null;
+  CreateTime?: number;
   /** 课堂评分 */
-  Score?: number | null;
+  Score?: number;
   /** 课堂评价 */
-  ScoreMsg?: string | null;
+  ScoreMsg?: string;
 }
 
 /** 自定义消息 */
 declare interface CustomMsgContent {
   /** 自定义消息数据。 */
-  Data?: string | null;
+  Data?: string;
   /** 自定义消息描述信息。 */
-  Desc?: string | null;
+  Desc?: string;
   /** 扩展字段。 */
-  Ext?: string | null;
+  Ext?: string;
 }
 
 /** 自定义录制信息 */
@@ -119,63 +119,63 @@ declare interface CustomRecordInfo {
 /** 文档信息 */
 declare interface DocumentInfo {
   /** 文档Id */
-  DocumentId?: string | null;
+  DocumentId?: string;
   /** 文档原址url */
-  DocumentUrl?: string | null;
+  DocumentUrl?: string;
   /** 文档名称 */
-  DocumentName?: string | null;
+  DocumentName?: string;
   /** 文档所有者UserId */
-  Owner?: string | null;
+  Owner?: string;
   /** 应用Id */
-  SdkAppId?: number | null;
+  SdkAppId?: number;
   /** 文档权限，0：私有课件 1：公共课件 */
-  Permission?: number | null;
+  Permission?: number;
   /** 转码结果，无需转码为空，转码成功为结果url，转码失败为错误码 */
-  TranscodeResult?: string | null;
+  TranscodeResult?: string;
   /** 转码类型 */
-  TranscodeType?: number | null;
+  TranscodeType?: number;
   /** 转码进度， 0 - 100 表示（0% - 100%） */
-  TranscodeProgress?: number | null;
+  TranscodeProgress?: number;
   /** 转码状态，0为无需转码，1为正在转码，2为转码失败，3为转码成功 */
-  TranscodeState?: number | null;
+  TranscodeState?: number;
   /** 转码失败后的错误信息 */
-  TranscodeInfo?: string | null;
+  TranscodeInfo?: string;
   /** 文档类型 */
-  DocumentType?: string | null;
+  DocumentType?: string;
   /** 文档大小，单位：字节 */
-  DocumentSize?: number | null;
+  DocumentSize?: number;
   /** 更新的UNIX时间戳 */
-  UpdateTime?: number | null;
+  UpdateTime?: number;
   /** 课件页数 */
-  Pages?: number | null;
+  Pages?: number;
   /** 宽，仅在静态转码的课件有效 */
-  Width?: number | null;
+  Width?: number;
   /** 高，仅在静态转码的课件有效 */
-  Height?: number | null;
+  Height?: number;
   /** 封面，仅转码的课件会生成封面 */
-  Cover?: string | null;
+  Cover?: string;
   /** 课件预览地址 */
-  Preview?: string | null;
+  Preview?: string;
   /** 文档的分辨率 */
-  Resolution?: string | null;
+  Resolution?: string;
   /** 转码后文档的最小分辨率，和创建文档时传入的参数一致。 */
-  MinScaleResolution?: string | null;
+  MinScaleResolution?: string;
 }
 
 /** 房间事件对应的信息。 */
 declare interface EventDataInfo {
   /** 事件发生的房间号。 */
-  RoomId?: number | null;
+  RoomId?: number;
   /** 事件发生的用户。 */
-  UserId?: string | null;
+  UserId?: string;
   /** 用户设备类型。0: Unknown; 1: Windows; 2: macOS; 3: Android; 4: iOS; 5: Web; 6: Mobile webpage; 7: Weixin Mini Program. */
-  Device?: number | null;
+  Device?: number;
   /** 录制时长。单位：秒 */
-  Duration?: number | null;
+  Duration?: number;
   /** 录制文件大小 */
-  RecordSize?: number | null;
+  RecordSize?: number;
   /** 录制url */
-  RecordUrl?: string | null;
+  RecordUrl?: string;
 }
 
 /** 房间事件信息。 */
@@ -185,7 +185,7 @@ declare interface EventInfo {
   /** 事件类型,有以下值:RoomStart:房间开始 RoomEnd:房间结束 MemberJoin:成员加入 MemberQuit:成员退出 RecordFinish:录制结束CameraOn: 摄像头打开CameraOff: 摄像头关闭MicOn: 麦克风打开MicOff: 麦克风关闭ScreenOn: 屏幕共享打开ScreenOff: 屏幕共享关闭VisibleOn: 页面可见VisibleOff: 页面不可见 */
   EventType?: string;
   /** 事件详细内容，包含房间号,成员类型事件包含用户Id。 */
-  EventData?: EventDataInfo | null;
+  EventData?: EventDataInfo;
 }
 
 /** 表情消息 */
@@ -207,13 +207,13 @@ declare interface GroupBaseInfo {
 /** 获取群组列表返回的群组信息 */
 declare interface GroupInfo {
   /** 群组ID */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 群组名称 */
-  GroupName?: string | null;
+  GroupName?: string;
   /** 群组主讲人ID */
-  TeacherId?: string | null;
+  TeacherId?: string;
   /** 群组类型 0-基础群组 1-组合群组，若为1时会返回子群组ID列表 */
-  GroupType?: number | null;
+  GroupType?: number;
   /** 子群组ID列表，如有。 */
   SubGroupIds?: string | null;
 }
@@ -283,33 +283,33 @@ declare interface MemberRecord {
   /** 子上课班号 */
   SubGroupId?: string[] | null;
   /** 用户的上台状态 */
-  Stage?: number | null;
+  Stage?: number;
   /** 用户状态。0为未到，1为在线，2为离线，3为被踢，4为永久被踢，5为暂时掉线 */
-  CurrentState?: number | null;
+  CurrentState?: number;
 }
 
 /** 单条消息体内容 */
 declare interface MessageItem {
   /** 消息类型。0表示文本消息，1表示图片消息 */
-  MessageType?: number | null;
+  MessageType?: number;
   /** 文本消息内容。message type为0时有效。 */
-  TextMessage?: string | null;
+  TextMessage?: string;
   /** 图片消息URL。 message type为1时有效。 */
-  ImageMessage?: string | null;
+  ImageMessage?: string;
   /** 自定义消息内容。message type为2时有效。 */
-  CustomMessage?: CustomMsgContent | null;
+  CustomMessage?: CustomMsgContent;
 }
 
 /** 历史消息列表 */
 declare interface MessageList {
   /** 消息时间戳 */
-  Timestamp?: number | null;
+  Timestamp?: number;
   /** 消息发送者 */
-  FromAccount?: string | null;
+  FromAccount?: string;
   /** 消息序列号，当前课堂内唯一且单调递增 */
-  Seq?: number | null;
+  Seq?: number;
   /** 历史消息列表 */
-  MessageBody?: MessageItem[] | null;
+  MessageBody?: MessageItem[];
 }
 
 /** 自定义消息结构 */
@@ -329,9 +329,9 @@ declare interface MsgBody {
 /** 禁言用户信息数组，内容包括被禁言的成员 ID，及其被禁言到的时间（使用 UTC 时间，即世界协调时间） */
 declare interface MutedAccountList {
   /** 用户 ID */
-  MemberAccount?: string | null;
+  MemberAccount?: string;
   /** 禁言到的时间（使用 UTC 时间，即世界协调时间） */
-  MutedUntil?: number | null;
+  MutedUntil?: number;
 }
 
 /** 房间问答问题详情 */
@@ -345,7 +345,7 @@ declare interface QuestionInfo {
   /** 正确答案（按照位表示是否选择，如0x1表示选择A，0x11表示选择AB） */
   CorrectAnswer?: number;
   /** 每个选项答题人数统计 */
-  AnswerStats?: AnswerStat[] | null;
+  AnswerStats?: AnswerStat[];
 }
 
 /** 批量创建房间的房间信息 */
@@ -467,43 +467,43 @@ declare interface SceneItem {
   /** 场景名称 */
   Scene?: string;
   /** logo地址 */
-  LogoUrl?: string | null;
+  LogoUrl?: string;
   /** 主页地址 */
-  HomeUrl?: string | null;
+  HomeUrl?: string;
   /** 自定义的js */
-  JSUrl?: string | null;
+  JSUrl?: string;
   /** 自定义的css */
-  CSSUrl?: string | null;
+  CSSUrl?: string;
 }
 
 /** 录制流信息 */
 declare interface SingleStreamInfo {
   /** 用户ID */
-  UserId?: string | null;
+  UserId?: string;
   /** 开始时间 */
-  StartTime?: number | null;
+  StartTime?: number;
   /** 结束时间 */
-  StopTime?: number | null;
+  StopTime?: number;
   /** 总时长 */
-  Duration?: number | null;
+  Duration?: number;
   /** 文件格式 */
-  FileFormat?: string | null;
+  FileFormat?: string;
   /** 流url */
-  RecordUrl?: string | null;
+  RecordUrl?: string;
   /** 流大小 */
-  RecordSize?: number | null;
+  RecordSize?: number;
   /** 流ID */
-  VideoId?: string | null;
+  VideoId?: string;
   /** 流类型 */
-  Role?: string | null;
+  Role?: string;
 }
 
 /** 文字水印配置 */
 declare interface TextMarkConfig {
   /** 文字水印内容 */
-  Text?: string | null;
+  Text?: string;
   /** 文字水印颜色 */
-  Color?: string | null;
+  Color?: string;
 }
 
 /** 文本消息 */
@@ -521,29 +521,29 @@ declare interface TransferItem {
 /** 用户信息结构体 */
 declare interface UserInfo {
   /** 应用Id。 */
-  SdkAppId?: number | null;
+  SdkAppId?: number;
   /** 用户Id。 */
-  UserId?: string | null;
+  UserId?: string;
   /** 用户昵称。 */
-  Name?: string | null;
+  Name?: string;
   /** 用户头像Url。 */
-  Avatar?: string | null;
+  Avatar?: string;
   /** 用户在客户系统的Id */
-  OriginId?: string | null;
+  OriginId?: string;
 }
 
 /** 水印配置 */
 declare interface WatermarkConfig {
   /** 水印图片的url */
-  Url?: string | null;
+  Url?: string;
   /** 水印宽。为比例值 */
-  Width?: number | null;
+  Width?: number;
   /** 水印高。为比例值 */
-  Height?: number | null;
+  Height?: number;
   /** 水印X偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间。 */
-  LocationX?: number | null;
+  LocationX?: number;
   /** 水印Y偏移, 取值:0-100, 表示区域Y方向的百分比。比如50，则表示位于Y轴中间。 */
-  LocationY?: number | null;
+  LocationY?: number;
 }
 
 declare interface AddGroupMemberRequest {

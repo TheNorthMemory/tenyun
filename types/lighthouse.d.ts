@@ -55,13 +55,13 @@ declare interface Blueprint {
   /** 镜像所需内存大小, 单位: GB */
   RequiredMemorySize?: number;
   /** CVM镜像共享到轻量应用服务器轻量应用服务器后的CVM镜像ID。 */
-  ImageId?: string | null;
+  ImageId?: string;
   /** 官方网站Url。 */
   CommunityUrl?: string;
   /** 指导文章Url。 */
   GuideUrl?: string;
   /** 镜像关联使用场景Id列表。 */
-  SceneIdSet?: string[] | null;
+  SceneIdSet?: string[];
   /** Docker版本号。 */
   DockerVersion?: string | null;
   /** 镜像是否已共享。 */
@@ -119,7 +119,7 @@ declare interface Bundle {
   /** 套餐类型。取值范围：STARTER_BUNDLE：入门型GENERAL_BUNDLE：通用型ENTERPRISE_BUNDLE：企业型STORAGE_BUNDLE：存储型EXCLUSIVE_BUNDLE：专属型HK_EXCLUSIVE_BUNDLE：香港专属型 CAREFREE_BUNDLE：无忧型BEFAST_BUNDLE：蜂驰型 */
   BundleType?: string;
   /** 套餐类型描述信息。 */
-  BundleTypeDescription?: string | null;
+  BundleTypeDescription?: string;
   /** 套餐展示标签.取值范围:"ACTIVITY": 活动套餐,"NORMAL": 普通套餐"CAREFREE": 无忧套餐 */
   BundleDisplayLabel?: string;
 }
@@ -153,25 +153,25 @@ declare interface Command {
 /** 容器环境变量 */
 declare interface ContainerEnv {
   /** 环境变量Key */
-  Key: string;
+  Key: string | null;
   /** 环境变量值 */
-  Value: string;
+  Value: string | null;
 }
 
 /** 数据盘价格 */
 declare interface DataDiskPrice {
   /** 云硬盘ID。 */
-  DiskId: string;
+  DiskId?: string;
   /** 云硬盘单价。 */
-  OriginalDiskPrice: number;
+  OriginalDiskPrice?: number;
   /** 云硬盘总价。 */
-  OriginalPrice: number;
+  OriginalPrice?: number;
   /** 折扣。 */
-  Discount: number;
+  Discount?: number;
   /** 折后总价。 */
-  DiscountPrice: number;
+  DiscountPrice?: number;
   /** 数据盘挂载的实例ID。 */
-  InstanceId: string | null;
+  InstanceId?: string;
 }
 
 /** 限制操作。 */
@@ -275,11 +275,11 @@ declare interface DiskBackup {
   /** 创建或回滚云硬盘备份点进度百分比，成功后此字段取值为 100。 */
   Percent?: number;
   /** 上一次操作 */
-  LatestOperation?: string | null;
+  LatestOperation?: string;
   /** 上一次操作状态 */
-  LatestOperationState?: string | null;
+  LatestOperationState?: string;
   /** 上一次请求ID */
-  LatestOperationRequestId?: string | null;
+  LatestOperationRequestId?: string;
   /** 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
   CreatedTime?: string;
 }
@@ -367,7 +367,7 @@ declare interface DockerActivity {
   /** 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 */
   CreatedTime?: string;
   /** 结束时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 */
-  EndTime?: string | null;
+  EndTime?: string;
 }
 
 /** Docker容器信息 */
@@ -417,9 +417,9 @@ declare interface DockerContainerPublishPort {
   /** 容器端口 */
   ContainerPort: number;
   /** 对外绑定IP，默认0.0.0.0 */
-  Ip?: string | null;
+  Ip?: string;
   /** 协议，默认tcp，支持tcp/udp/sctp */
-  Protocol?: string | null;
+  Protocol?: string;
 }
 
 /** Docker容器挂载卷 */
@@ -607,7 +607,7 @@ declare interface Instance {
   /** 创建实例后自动执行TAT命令的调用ID。 */
   InitInvocationId?: string;
   /** 实例违规详情。 */
-  InstanceViolationDetail?: InstanceViolationDetail | null;
+  InstanceViolationDetail?: InstanceViolationDetail;
 }
 
 /** 描述了实例的计费模式 */
@@ -621,7 +621,7 @@ declare interface InstanceChargePrepaid {
 /** 实例操作限制列表。 */
 declare interface InstanceDeniedActions {
   /** 实例 ID。 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 操作限制列表。 */
   DeniedActions?: DeniedAction[];
 }
@@ -645,15 +645,15 @@ declare interface InstancePrice {
   /** 折后价。 */
   DiscountPrice?: number;
   /** 价格货币单位。取值范围CNY:人民币。USD:美元。 */
-  Currency?: string | null;
+  Currency?: string;
 }
 
 /** 实例价格详细信息 */
 declare interface InstancePriceDetail {
   /** 实例ID。 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 询价信息。 */
-  InstancePrice?: InstancePrice | null;
+  InstancePrice?: InstancePrice;
   /** 折扣梯度详情，每个梯度包含的信息有：时长，折扣数，总价，折扣价，折扣详情（用户折扣、官网折扣、最终折扣）。 */
   DiscountDetail?: DiscountDetail[];
 }
@@ -709,7 +709,7 @@ declare interface KeyPair {
   /** 密钥对的纯文本公钥。 */
   PublicKey?: string;
   /** 密钥对关联的实例 ID 列表。 */
-  AssociatedInstanceIds?: string[] | null;
+  AssociatedInstanceIds?: string[];
   /** 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ */
   CreatedTime?: string | null;
   /** 密钥对私钥。 */
@@ -741,7 +741,7 @@ declare interface ModifyBundle {
   /** 套餐信息。 */
   Bundle?: Bundle;
   /** 不支持套餐变更原因信息。变更套餐状态为"AVAILABLE"时, 该信息为空 */
-  NotSupportModifyMessage?: string | null;
+  NotSupportModifyMessage?: string;
 }
 
 /** 折扣详情信息。 */
@@ -835,13 +835,13 @@ declare interface Snapshot {
   /** 创建或回滚快照进度百分比，成功后此字段取值为 100。 */
   Percent?: number;
   /** 快照的最新操作，只有创建、回滚快照时记录。取值如 CreateInstanceSnapshot，RollbackInstanceSnapshot。 */
-  LatestOperation?: string | null;
+  LatestOperation?: string;
   /** 快照的最新操作状态，只有创建、回滚快照时记录。取值范围：SUCCESS：表示操作成功OPERATING：表示操作执行中FAILED：表示操作失败 */
-  LatestOperationState?: string | null;
+  LatestOperationState?: string;
   /** 快照最新操作的唯一请求 ID，只有创建、回滚快照时记录。 */
-  LatestOperationRequestId?: string | null;
+  LatestOperationRequestId?: string;
   /** 快照的创建时间。 */
-  CreatedTime?: string | null;
+  CreatedTime?: string;
 }
 
 /** 快照操作限制列表。 */
@@ -907,9 +907,9 @@ declare interface Tag {
 /** 总计价格信息 */
 declare interface TotalPrice {
   /** 原始总计价格。 */
-  OriginalPrice?: number | null;
+  OriginalPrice?: number;
   /** 折扣总计价格。 */
-  DiscountPrice?: number | null;
+  DiscountPrice?: number;
 }
 
 /** 流量包详情 */
@@ -925,11 +925,11 @@ declare interface TrafficPackage {
   /** 流量包生效周期内超出流量包额度的流量，单位字节。 */
   TrafficOverflow?: number;
   /** 流量包生效周期开始时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 流量包生效周期结束时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 流量包到期时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
-  Deadline?: string | null;
+  Deadline?: string;
   /** 流量包状态：NETWORK_NORMAL：正常OVERDUE_NETWORK_DISABLED：欠费断网 */
   Status?: string;
 }
@@ -1515,9 +1515,9 @@ declare interface DescribeDockerActivitiesResponse {
 }
 
 declare interface DescribeDockerContainerConfigurationRequest {
-  /** 实例ID。 */
+  /** 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。 */
   InstanceId: string;
-  /** 容器ID。 */
+  /** 容器ID。可通过[DescribeDockerContainers](https://cloud.tencent.com/document/product/1207/95473)接口返回值中的ContainerId获取。 */
   ContainerId: string;
 }
 

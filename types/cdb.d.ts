@@ -272,16 +272,20 @@ declare interface AuditRuleTemplateInfo {
   UpdateAt?: string;
 }
 
-/** CPU弹性扩容的自动扩容策略 */
+/** CPU 弹性扩容的自动扩容策略。 */
 declare interface AutoStrategy {
-  /** 自动扩容阈值，可选值70、80、90，代表CPU利用率达到70%、80%、90%时后台进行自动扩容 */
+  /** 自动扩容阈值，可选值40、50、60、70、80、90，代表 CPU 利用率达到40%、50%、60%、70%、80%、90%时后台进行自动扩容。 */
   ExpandThreshold: number;
-  /** 自动扩容观测周期，单位是分钟，可选值1、3、5、10、15、30。后台会按照配置的周期进行扩容判断。 */
-  ExpandPeriod: number;
   /** 自动缩容阈值，可选值10、20、30，代表CPU利用率达到10%、20%、30%时后台进行自动缩容 */
   ShrinkThreshold: number;
+  /** 自动扩容观测周期，单位是分钟，可选值1、3、5、10、15、30。后台会按照配置的周期进行扩容判断。 */
+  ExpandPeriod?: number | null;
   /** 自动缩容观测周期，单位是分钟，可选值5、10、15、30。后台会按照配置的周期进行缩容判断。 */
-  ShrinkPeriod: number;
+  ShrinkPeriod?: number | null;
+  /** 弹性扩容观测周期（秒级） */
+  ExpandSecondPeriod?: number;
+  /** 缩容观测周期（秒级） */
+  ShrinkSecondPeriod?: number;
 }
 
 /** ECDB第二个从库的配置信息，只有ECDB实例才有这个字段 */

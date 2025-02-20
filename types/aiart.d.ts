@@ -2,6 +2,14 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 融合信息 */
+declare interface FaceInfo {
+  /** 用户图 URL 列表 */
+  ImageUrls?: string[];
+  /** 模版图人脸坐标。 */
+  TemplateFaceRect?: Rect;
+}
+
 /** 训练图像质量过滤开关配置。支持开启或关闭对训练图像分辨率下限、脸部区域大小、脸部遮挡、脸部角度的过滤，默认开启以上过滤。如果训练图像内包含多人脸或无人脸、和 Base 人像不为同一人也将被过滤，不可关闭该过滤条件。建议：关闭以上过滤可能导致写真生成效果受损，建议使用单人、正脸、脸部清晰、无遮挡、无夸张表情、脸部区域占比较大的图像进行训练。 */
 declare interface Filter {
   /** 过滤不满足分辨率下限的训练图像，默认开启过滤开启后将过滤横边<512或竖边<720的图片，横、竖边上限均为2000，不支持调整1：开启过滤0：关闭过滤 */
@@ -32,6 +40,18 @@ declare interface LogoRect {
   Width?: number | null;
   /** 方框高度 */
   Height?: number | null;
+}
+
+/** 人脸框坐标 */
+declare interface Rect {
+  /** 人脸框左上角横坐标。 */
+  X?: number;
+  /** 人脸框左上角纵坐标。 */
+  Y?: number;
+  /** 人脸框宽度。 */
+  Width?: number;
+  /** 人脸框高度。 */
+  Height?: number;
 }
 
 /** 返回结果配置 */
@@ -190,6 +210,28 @@ declare interface QueryDrawPortraitJobResponse {
   RequestId?: string;
 }
 
+declare interface QueryGlamPicJobRequest {
+  /** 任务ID。 */
+  JobId: string;
+}
+
+declare interface QueryGlamPicJobResponse {
+  /** 当前任务状态码：1：等待中、2：运行中、4：处理失败、5：处理完成。 */
+  JobStatusCode?: string;
+  /** 当前任务状态：排队中、处理中、处理失败或者处理完成。 */
+  JobStatusMsg?: string;
+  /** 任务处理失败错误码。 */
+  JobErrorCode?: string;
+  /** 任务处理失败错误信息。 */
+  JobErrorMsg?: string;
+  /** 生成图 URL 列表，有效期1小时，请及时保存。 */
+  ResultImage?: string[];
+  /** 结果 detail 数组，Success 代表成功。 */
+  ResultDetails?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface QueryMemeJobRequest {
   /** 查询表情动图生成任务 ID。 */
   JobId: string;
@@ -328,6 +370,32 @@ declare interface SubmitDrawPortraitJobResponse {
   RequestId?: string;
 }
 
+declare interface SubmitGlamPicJobRequest {
+  /** 美照模板图 URL。图片限制：模板图中最多出现5张人脸，单边分辨率大于300，转成 Base64 字符串后小于 10MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。 */
+  TemplateUrl: string;
+  /** 用户图 URL 列表，以及模板图中需要替换成用户的人脸框信息。一张美照中可包含1 ~ 5个用户形象。每个用户需上传1 ~ 6张照片，如果图中存在多个人脸将取最大人脸。模板图中的人脸数量需要大于等于用户个数。如果不传每个用户在模板图中的人脸框位置，默认按照模板图人脸框从大到小的顺序进行替换。如需自定义顺序，需要依次上传每个用户在模板图中的人脸框位置。图片限制：每张图片转成 Base64 字符串后小于 10MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。建议使用单人、正脸、脸部区域占比较大、脸部清晰无遮挡、无大角度偏转、无夸张表情的用户图。 */
+  FaceInfos?: FaceInfo[];
+  /** 美照生成数量。支持1 ~ 4张，默认生成4张。 */
+  Num?: number;
+  /** 美照生成风格。仅对单人美照生效，单人可支持选择不同风格。需按照美照生成数量，在数组中逐一填入每张美照的风格名称。如果不传，默认取不重复的随机风格顺序。多人美照只支持 balanced 一种风格，该参数不生效。可选风格：real：面部相似度更高。balanced：平衡面部真实感和美观度。extured：脸部皮肤更具真实感。beautiful：脸部美观度更高。 */
+  Style?: string[];
+  /** 相似度系数，越高越像用户图。取值范围[0, 1]，默认为0.6。 */
+  Similarity?: number;
+  /** 超分选项，默认不做超分，可选开启。x2：2倍超分x4：4倍超分 */
+  Clarity?: string;
+  /** 为生成结果图添加标识的开关，默认为1。1：添加标识。0：不添加标识。其他数值：默认按1处理。建议您使用显著标识来提示结果图是 AI 生成的图片。 */
+  LogoAdd?: number;
+  /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。 */
+  LogoParam?: LogoParam;
+}
+
+declare interface SubmitGlamPicJobResponse {
+  /** 任务ID。 */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SubmitMemeJobRequest {
   /** 表情模板。请在 [表情动图模板列表](https://cloud.tencent.com/document/product/1668/115327) 中选择期望的模板，传入 Pose 名称。 */
   Pose: string;
@@ -445,6 +513,8 @@ declare interface Aiart {
   ImageToImage(data?: ImageToImageRequest, config?: AxiosRequestConfig): AxiosPromise<ImageToImageResponse>;
   /** 查询生成写真图片任务 {@link QueryDrawPortraitJobRequest} {@link QueryDrawPortraitJobResponse} */
   QueryDrawPortraitJob(data: QueryDrawPortraitJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryDrawPortraitJobResponse>;
+  /** 查询美照生成任务 {@link QueryGlamPicJobRequest} {@link QueryGlamPicJobResponse} */
+  QueryGlamPicJob(data: QueryGlamPicJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryGlamPicJobResponse>;
   /** 查询表情动图生成任务 {@link QueryMemeJobRequest} {@link QueryMemeJobResponse} */
   QueryMemeJob(data: QueryMemeJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMemeJobResponse>;
   /** 查询文生图（高级版）任务（即将下线） {@link QueryTextToImageProJobRequest} {@link QueryTextToImageProJobResponse} */
@@ -457,6 +527,8 @@ declare interface Aiart {
   SketchToImage(data: SketchToImageRequest, config?: AxiosRequestConfig): AxiosPromise<SketchToImageResponse>;
   /** 提交生成写真图片任务 {@link SubmitDrawPortraitJobRequest} {@link SubmitDrawPortraitJobResponse} */
   SubmitDrawPortraitJob(data: SubmitDrawPortraitJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitDrawPortraitJobResponse>;
+  /** 提交美照生成任务 {@link SubmitGlamPicJobRequest} {@link SubmitGlamPicJobResponse} */
+  SubmitGlamPicJob(data: SubmitGlamPicJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitGlamPicJobResponse>;
   /** 提交表情动图生成任务 {@link SubmitMemeJobRequest} {@link SubmitMemeJobResponse} */
   SubmitMemeJob(data: SubmitMemeJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitMemeJobResponse>;
   /** 提交文生图（高级版）任务（即将下线） {@link SubmitTextToImageProJobRequest} {@link SubmitTextToImageProJobResponse} */

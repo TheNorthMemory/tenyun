@@ -2,16 +2,6 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
-/** 文本片段及其时间戳 */
-declare interface AsrTimestamps {
-  /** 文本片段 */
-  Text: string | null;
-  /** 开始时间 */
-  StartMs: number | null;
-  /** 结束时间 */
-  EndMs: number | null;
-}
-
 /** logo参数 */
 declare interface LogoParam {
   /** 水印 Url */
@@ -34,14 +24,6 @@ declare interface LogoRect {
   Height?: number;
 }
 
-/** 音频翻译结果 */
-declare interface TranslateResult {
-  /** 翻译源文字 */
-  SourceText?: string | null;
-  /** 翻译后文字。 */
-  TargetText?: string | null;
-}
-
 declare interface CheckAnimateImageJobRequest {
   /** 动作模板ID。 */
   TemplateId: string;
@@ -56,30 +38,6 @@ declare interface CheckAnimateImageJobRequest {
 declare interface CheckAnimateImageJobResponse {
   /** 输入图是否通过校验。 */
   CheckPass?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ConfirmVideoTranslateJobRequest {
-  /** 视频转译任务 ID */
-  JobId: string;
-  /** 待确认文本。如果文本中含有数字，支持将数字配置为SSML语言 */
-  TranslateResults: TranslateResult[];
-}
-
-declare interface ConfirmVideoTranslateJobResponse {
-  /** 视频转译任务 ID。 */
-  JobId?: string;
-  /** 音频转译任务 ID。 */
-  TaskId?: string;
-  /** 音频转译结果确认 session。 */
-  SessionId?: string;
-  /** 任务状态。0：任务初始化。1：音频翻译中。 2：音频翻译失败。 3：音频翻译成功。 4：音频结果待确认。 5：音频结果已确认完毕。6：视频翻译中。 7：视频翻译失败。 8：视频翻译成功。 */
-  Status?: number;
-  /** 视频转译任务信息。 */
-  Message?: string;
-  /** 任务状态。0：任务初始化。1：音频翻译中。 2：音频翻译失败。 3：音频翻译成功。 4：音频结果待确认。 5：音频结果已确认完毕。6：视频翻译中。 7：视频翻译失败。 8：视频翻译成功。 */
-  JobStatus?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -140,42 +98,6 @@ declare interface DescribeVideoStylizationJobResponse {
   StatusMsg?: string;
   /** 处理结果视频Url。URL有效期为24小时。 */
   ResultVideoUrl?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeVideoTranslateJobRequest {
-  /** 视频转译任务 ID */
-  JobId: string;
-}
-
-declare interface DescribeVideoTranslateJobResponse {
-  /** 任务状态。0: 任务初始化。 1：音频转译中。 2：音频转译失败。 3：音频转译成功。 4：音频结果待确认。 5：音频结果已确认完毕。6：视频转译中。 7：视频转译失败。 8：视频转译成功。 */
-  JobStatus?: number;
-  /** 本次任务出错的错误码，用来定位问题原因。 */
-  JobErrorCode?: string;
-  /** 任务错误信息，错误码出现的原因。 */
-  JobErrorMsg?: string;
-  /** 视频转译生成结果视频url，有效期1天。当JobStatus为8时，该字段返回视频Url。 */
-  ResultVideoUrl?: string;
-  /** 音频转译后分句翻译内容，包含分句起始时间、源识别文本以及翻译后文本。当JobStatus为3、4时，该字段返回分句翻译数据。 */
-  TranslateResults?: TranslateResult[];
-  /** 是否需要确认翻译结果。0：不需要，1：需要。 */
-  JobConfirm?: number;
-  /** 音频任务 ID。 */
-  JobAudioTaskId?: string;
-  /** 视频审核任务ID。 */
-  JobVideoModerationId?: string;
-  /** 音频审核任务 ID。 */
-  JobAudioModerationId?: string;
-  /** 口型驱动任务 ID。 */
-  JobVideoId?: string;
-  /** 视频素材原始 URL。 */
-  OriginalVideoUrl?: string;
-  /** 文本片段及其时间戳。 */
-  AsrTimestamps?: AsrTimestamps[];
-  /** 提交视频转译任务时的 requestId。 */
-  JobSubmitReqId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -246,57 +168,23 @@ declare interface SubmitVideoStylizationJobResponse {
   RequestId?: string;
 }
 
-declare interface SubmitVideoTranslateJobRequest {
-  /** 视频地址URL。格式要求：支持 mp4、mov、avi 。时长要求：【5-600】秒。fps 要求：【15-60】fps分辨率要求：单边像素要求在 【360~4096】 之间。大小要求：不超过500MB请保证文件的下载速度，否则会下载失败。 */
-  VideoUrl: string;
-  /** 输入视频中音频语种目前支持语种范围：zh(中文), en(英文) */
-  SrcLang: string;
-  /** 当音频 URL 不为空时，不经过语音AI处理，直接以视频为素材用音频内容做视频口型驱动。格式要求：支持 mp3、m4a、aac、wav 格式。时长要求：【5~600】秒，音频时长要匹配视频时长。大小要求：不超过 100MB。请保证文件的下载速度，否则会下载失败。 */
-  AudioUrl?: string;
-  /** 输出视频中翻译语种。默认是en(英语)。目前支持语种范围：zh(简体中文)、en(英语)、ar(阿拉伯语)、de(德语)、es(西班牙语)、fr(法语)、id(印尼语)、it(意大利语)、ja(日语)、ko(韩语)、ms(马来语)、pt(葡萄牙语)、ru(俄语)、th(泰语)、tr(土耳其语)、vi(越南语) */
-  DstLang?: string;
-  /** 翻译语种匹配音色种别，其他说明如下：1）默认不填代表克隆输入视频中音频音色；2）翻译语种非中英（即zh、en），该项必填；具体音色种别详见说明“支持音色种别列表”，每个音色都支持 15 个目标语种。 */
-  VoiceType?: string;
-  /** 是否需要纠正视频中音频识别与翻译内容，取值范围：0-不需要，1-需要，默认0。 */
-  Confirm?: number;
-  /** 是否需要去除VideoUrl或AudioUrl中背景音，取值范围：0-不需要，1-需要，默认0 。 */
-  RemoveVocal?: number;
-  /** 是否开启口型驱动，0-不开启，1-开启。默认0。 */
-  LipSync?: number;
-  /** 当 AudioUrl 字段有输入音频时，如果输入音频时长大于输入视频时长，会拼接视频（ 0-正向拼接、1-反向拼接 ）对齐音频时长。默认 0。 */
-  VideoLoop?: number;
-}
-
-declare interface SubmitVideoTranslateJobResponse {
-  /** 视频转译任务的ID */
-  JobId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 /** {@link Vclm 大模型视频创作引擎} */
 declare interface Vclm {
   (): Versions;
   /** 校验图片跳舞输入图 {@link CheckAnimateImageJobRequest} {@link CheckAnimateImageJobResponse} */
   CheckAnimateImageJob(data: CheckAnimateImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAnimateImageJobResponse>;
-  /** 确认视频转译结果 {@link ConfirmVideoTranslateJobRequest} {@link ConfirmVideoTranslateJobResponse} */
-  ConfirmVideoTranslateJob(data: ConfirmVideoTranslateJobRequest, config?: AxiosRequestConfig): AxiosPromise<ConfirmVideoTranslateJobResponse>;
   /** 查询图片跳舞任务 {@link DescribeImageAnimateJobRequest} {@link DescribeImageAnimateJobResponse} */
   DescribeImageAnimateJob(data?: DescribeImageAnimateJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageAnimateJobResponse>;
   /** 查询图片唱演任务 {@link DescribePortraitSingJobRequest} {@link DescribePortraitSingJobResponse} */
   DescribePortraitSingJob(data: DescribePortraitSingJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePortraitSingJobResponse>;
   /** 查询视频风格化任务 {@link DescribeVideoStylizationJobRequest} {@link DescribeVideoStylizationJobResponse} */
   DescribeVideoStylizationJob(data: DescribeVideoStylizationJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoStylizationJobResponse>;
-  /** 查询视频转译任务 {@link DescribeVideoTranslateJobRequest} {@link DescribeVideoTranslateJobResponse} */
-  DescribeVideoTranslateJob(data: DescribeVideoTranslateJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoTranslateJobResponse>;
   /** 提交图片跳舞任务 {@link SubmitImageAnimateJobRequest} {@link SubmitImageAnimateJobResponse} */
   SubmitImageAnimateJob(data?: SubmitImageAnimateJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitImageAnimateJobResponse>;
   /** 提交图片唱演任务 {@link SubmitPortraitSingJobRequest} {@link SubmitPortraitSingJobResponse} */
   SubmitPortraitSingJob(data: SubmitPortraitSingJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitPortraitSingJobResponse>;
   /** 提交视频风格化任务 {@link SubmitVideoStylizationJobRequest} {@link SubmitVideoStylizationJobResponse} */
   SubmitVideoStylizationJob(data: SubmitVideoStylizationJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitVideoStylizationJobResponse>;
-  /** 提交视频转译任务 {@link SubmitVideoTranslateJobRequest} {@link SubmitVideoTranslateJobResponse} */
-  SubmitVideoTranslateJob(data: SubmitVideoTranslateJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitVideoTranslateJobResponse>;
 }
 
 export declare type Versions = ["2024-05-23"];

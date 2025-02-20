@@ -28,6 +28,14 @@ declare interface ActivateHardware {
   DeviceId?: string;
 }
 
+/** 激活设备数统计 */
+declare interface ActiveDeviceList {
+  /** 数量 */
+  Count?: number;
+  /** 时间 */
+  Time?: string;
+}
+
 /** 接口能力扩展，用于填充电信的加速Token，并为未来参数提供兼容空间 */
 declare interface Capacity {
   /** 电信鉴权的Token。要加速的电信手机终端访问 http://qos.189.cn/qos-api/getToken?appid=TencentCloud 页面，获取返回结果中result的值 */
@@ -570,6 +578,58 @@ declare interface DescribeQosResponse {
   Duration: number | null;
   /** 加速套餐类型，仅匹配时返回 */
   QosMenu: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DownloadActiveDeviceCountRequest {
+  /** 查询粒度。0:day, 1:week, 2:month, 不传默认为day */
+  Period?: number;
+  /** 开始时间。单位秒 */
+  StartTime?: number;
+  /** 结束时间。单位秒 */
+  EndTime?: number;
+  /** 设备组, 不传查询全部 */
+  DevGroup?: string;
+  /** license类型, 不传查询全部, 1: 租户月付，2：厂商月付，3：永久授权 */
+  LicenseType?: number;
+}
+
+declare interface DownloadActiveDeviceCountResponse {
+  /** URL地址 */
+  FilePath?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetActiveDeviceCountRequest {
+  /** 查询粒度。0:day, 1:week, 2:month, 不传默认为day */
+  Period?: number;
+  /** 开始时间。单位秒 */
+  StartTime?: number;
+  /** 结束时间。单位秒 */
+  EndTime?: number;
+  /** 设备组, 不传查询全部 */
+  DevGroup?: string;
+  /** license类型, 不传查询全部, 1: 租户月付，2：厂商月付，3：永久授权 */
+  LicenseType?: number;
+}
+
+declare interface GetActiveDeviceCountResponse {
+  /** 激活设备统计 */
+  ActiveDeviceList?: ActiveDeviceList[];
+  /** 查询粒度，0:day, 1:week, 2:month, 不传默认为day */
+  Period?: number;
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 设备组 */
+  DevGroup?: string;
+  /** license类型, 不传查询全部, 1: 租户月付，2：厂商月付，3：永久授权 */
+  LicenseType?: string;
+  /** 租户ID */
+  AppId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1145,6 +1205,10 @@ declare interface Mna {
   DeleteQos(data: DeleteQosRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQosResponse>;
   /** @deprecated 获取Qos加速状态 {@link DescribeQosRequest} {@link DescribeQosResponse} */
   DescribeQos(data: DescribeQosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQosResponse>;
+  /** 下载活跃设备数量统计 {@link DownloadActiveDeviceCountRequest} {@link DownloadActiveDeviceCountResponse} */
+  DownloadActiveDeviceCount(data?: DownloadActiveDeviceCountRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadActiveDeviceCountResponse>;
+  /** 活跃设备数量统计 {@link GetActiveDeviceCountRequest} {@link GetActiveDeviceCountResponse} */
+  GetActiveDeviceCount(data?: GetActiveDeviceCountRequest, config?: AxiosRequestConfig): AxiosPromise<GetActiveDeviceCountResponse>;
   /** 获取设备详细信息 {@link GetDeviceRequest} {@link GetDeviceResponse} */
   GetDevice(data: GetDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceResponse>;
   /** 获取设备付费模式 {@link GetDevicePayModeRequest} {@link GetDevicePayModeResponse} */

@@ -1335,15 +1335,15 @@ declare interface TagInfo {
 /** 实例操作记录中的流程任务信息 */
 declare interface TaskDetail {
   /** 任务名 */
-  Name: string;
+  Name?: string;
   /** 任务进度 */
-  Progress: number;
+  Progress?: number;
   /** 任务完成时间 */
-  FinishTime: string;
+  FinishTime?: string;
   /** 子任务 */
-  SubTasks: SubTaskDetail[];
+  SubTasks?: SubTaskDetail[];
   /** 任务花费时间 */
-  ElapsedTime: number | null;
+  ElapsedTime?: number | null;
   /** 任务进度详情 */
   ProcessInfo?: ProcessDetail | null;
 }

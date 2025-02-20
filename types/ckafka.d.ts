@@ -4032,6 +4032,8 @@ declare interface InstanceAttributesResponse {
   ElasticFloatBandwidth?: number | null;
   /** ssl自定义证书id */
   CustomCertId?: string;
+  /** 集群topic默认 unclean.leader.election.enable配置: 1 开启 0 关闭 */
+  UncleanLeaderElectionEnable?: number;
 }
 
 declare interface InstanceDeleteResponse {

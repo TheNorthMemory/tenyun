@@ -3355,7 +3355,7 @@ declare interface DescribeIntegrationEmployeesRequest {
   Agent?: Agent;
   /** 查询的关键字段，支持Key-Values查询。可选键值如下： Key:**"Status"**，根据实名状态查询员工，Values可选： **["IsVerified"]**：查询已实名的员工**["NotVerified"]**：查询未实名的员工 Key:**"DepartmentId"**，根据部门ID查询部门下的员工，Values为指定的部门ID：**["DepartmentId"]** Key:**"UserId"**，根据用户ID查询员工，Values为指定的用户ID：**["UserId"]** Key:**"UserWeWorkOpenId"**，根据用户企微账号ID查询员工，Values为指定用户的企微账号ID：**["UserWeWorkOpenId"]** Key:**"StaffOpenId"**，根据第三方系统用户OpenId查询员工，Values为第三方系统用户OpenId列表：**["OpenId1","OpenId2",...]** Key:**"RoleId"**，根据电子签角色ID查询员工，Values为指定的角色ID，满足其中任意一个角色即可：**["RoleId1","RoleId2",...]** */
   Filters?: Filter[];
-  /** 偏移量，默认为0，最大20000。。关于Offset的更进一步介绍请参考 API 简介中的相关小节。 */
+  /** 偏移量，默认为0，最大20000。关于Offset的更进一步介绍请参考 API 简介中的相关小节。 */
   Offset?: number;
 }
 

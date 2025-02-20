@@ -11252,46 +11252,6 @@ declare interface DescribeSecurityEventsCntResponse {
   RequestId?: string;
 }
 
-declare interface DescribeSecurityProtectionStatRequest {
-}
-
-declare interface DescribeSecurityProtectionStatResponse {
-  /** 0 ：0付费资产情况， 1：存在未安装agent情况 ，2：部分资产已是专业版/旗舰版， 3：全部资产已是专业版/旗舰版 */
-  AssetManageStat?: number;
-  /** 0:从未检测过，或0资产付费情况, 1:存在漏洞风险, 2:无风险 */
-  VulManageStat?: number;
-  /** 0:从未检测过，或0资产付费情况, 1:存在基线风险,2:无风险 */
-  SecureBasicLineStat?: number;
-  /** 0:从未检测过，或0资产付费情况, 1:已检测，存在恶意文件, 2:已检测，未开启隔离防护, 3:已检测且已开启防护且无风险 */
-  MalwareScanStat?: number;
-  /** 密码破解是否开启防护 0:未开启防护或0付费资产情况 1:已开启防护 2:存在带处理事件 */
-  DefenseBruteAttackStat?: number;
-  /** 核心文件监控 0:未开启防护（0付费资产情况）,1: 已开通 */
-  FileTamperStat?: number;
-  /** 网页防篡改 0:未开通, 1:已开通 */
-  WebPageStat?: number;
-  /** 异常登录 0:存在未处理风险,1:无风险，未配置白名单,2:无风险，已配置 */
-  LoginLogStat?: number;
-  /** 检测--密码破解有无存在风险 0:存在未处理风险, 1：无风险，正常检测 */
-  DiscoverBruteAttackStat?: number;
-  /** 恶意请求 0 : 0台开通专业版/旗舰版, 1: 恶意请求 存在未处理风险, 2:已有付费资产，无风险 */
-  MaliciousRequestStat?: number;
-  /** 本地提权 0:0台开通专业版/旗舰版, 1:存在未处理风险 2:已有付费资产，无风险 */
-  PrivilegeStat?: number;
-  /** 反弹shell 0:0台开通专业版/旗舰版, 1:存在未处理风险 2:已有付费资产，无风险 */
-  ReverseShellStat?: number;
-  /** 专家服务 0:未开通服务, 1:已开通 */
-  ExpertServiceStat?: number;
-  /** 日志分析 0:未开通服务, 1:已开通 */
-  LogAnalysisStat?: number;
-  /** 安全告警 0:未开通设置（全部关闭） 1:已开通（只要开启1个就算） */
-  WarningSetStat?: number;
-  /** 高危命令，0：0台开通专业版/旗舰版， 1：存在未处理风险， 2：已有付费资产，无风险 */
-  EventBashStat?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeSecurityTrendsRequest {
   /** 开始时间，如：2021-07-10 */
   BeginDate: string;
@@ -15391,8 +15351,6 @@ declare interface Cwp {
   DescribeSecurityEventStat(data?: DescribeSecurityEventStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityEventStatResponse>;
   /** 获取安全事件数统计数据 {@link DescribeSecurityEventsCntRequest} {@link DescribeSecurityEventsCntResponse} */
   DescribeSecurityEventsCnt(data?: DescribeSecurityEventsCntRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityEventsCntResponse>;
-  /** @deprecated 获取安全防护状态 {@link DescribeSecurityProtectionStatRequest} {@link DescribeSecurityProtectionStatResponse} */
-  DescribeSecurityProtectionStat(data?: DescribeSecurityProtectionStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityProtectionStatResponse>;
   /** 获取主机安全事件统计数据 {@link DescribeSecurityTrendsRequest} {@link DescribeSecurityTrendsResponse} */
   DescribeSecurityTrends(data: DescribeSecurityTrendsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityTrendsResponse>;
   /** 查询服务器关联目录详情 {@link DescribeServerRelatedDirInfoRequest} {@link DescribeServerRelatedDirInfoResponse} */

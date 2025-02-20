@@ -1791,9 +1791,9 @@ declare interface ServiceSupport {
 /** 用户行为分析 统计条件 */
 declare interface StatisticalFilter {
   /** 0:不基于统计检测1:发生次数高于固定值2:发生次数高于周期平均值的百分之3:发生次数高于用户平均值的百分之 */
-  OperatorType: number | null;
+  OperatorType: number;
   /** 统计值 */
-  Value: number | null;
+  Value: number;
 }
 
 /** 子账号详情 */
@@ -2047,31 +2047,31 @@ declare interface UebaEventContent {
 /** 用户行为分析策略 */
 declare interface UebaRule {
   /** 策略id */
-  RuleID?: string | null;
+  RuleID?: string;
   /** 规则名称 */
-  RuleName?: string | null;
+  RuleName?: string;
   /** 策略类型0:系统策略1:自定义策略 */
-  RuleType?: number | null;
+  RuleType?: number;
   /** 策略等级0:提示1:低危2:中危3:高危4:严重 */
-  RuleLevel?: number | null;
+  RuleLevel?: number;
   /** 策略内容 */
-  RuleContent?: string | null;
+  RuleContent?: string;
   /** 策略开关 */
-  RuleStatus?: boolean | null;
+  RuleStatus?: boolean;
   /** 命中次数 */
-  HitCount?: number | null;
+  HitCount?: number;
   /** 所属账号Appid */
-  AppID?: string | null;
+  AppID?: string;
   /** 多账号，成员ID */
-  MemberID?: string | null;
+  MemberID?: string;
   /** Uin */
-  Uin?: string | null;
+  Uin?: string;
   /** 昵称 */
-  Nickname?: string | null;
+  Nickname?: string;
   /** 自定义规则具体内容 */
-  CustomRuleDetail?: UebaCustomRule | null;
+  CustomRuleDetail?: UebaCustomRule;
   /** 云类型腾讯云：0aws：1 */
-  CloudType?: number | null;
+  CloudType?: number;
 }
 
 /** 漏洞风险高级配置列表 */

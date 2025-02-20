@@ -22,6 +22,10 @@ declare interface AgentProcedure {
   WorkflowName?: string | null;
   /** 当前请求执行时间, 单位 ms */
   Elapsed?: number | null;
+  /** 工作流节点名称 */
+  NodeName?: string | null;
+  /** 用于展示思考放在哪个回复气泡中 */
+  ReplyIndex?: number | null;
 }
 
 /** Agent思考过程调试信息 */
@@ -2839,6 +2843,8 @@ declare interface ListQARequest {
   Source?: number;
   /** 查询答案 */
   QueryAnswer?: string;
+  /** 分类ID */
+  CateBizId?: string;
   /** QA业务ID列表 */
   QaBizIds?: string[];
   /** 查询类型 filename 名称、 attribute 标签 */

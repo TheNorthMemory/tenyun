@@ -2070,52 +2070,6 @@ declare interface SavingPlanCoverageRate {
   Rate?: number;
 }
 
-/** 节省计划总览明细数据 */
-declare interface SavingPlanOverviewDetail {
-  /** 节省计划类型 */
-  SpType?: string;
-  /** 支付类型 */
-  PayType?: number;
-  /** 支付金额（单位：元） */
-  PayAmount?: string;
-  /** 开始时间 yyyy-mm-dd HH:mm:ss格式 */
-  StartTime?: string;
-  /** 结束时间 yyyy-mm-dd HH:mm:ss格式 */
-  EndTime?: string;
-  /** 购买时间 yyyy-mm-dd HH:mm:ss格式 */
-  BuyTime?: string;
-  /** 状态 */
-  Status?: number;
-  /** 累计节省金额（单位：元） */
-  SavingAmount?: string;
-  /** 地域 */
-  Region?: string[];
-}
-
-/** 节省计划使用率数据 */
-declare interface SavingPlanUsageDetail {
-  /** 节省计划类型 */
-  SpType?: string;
-  /** 节省计划状态 */
-  Status?: number;
-  /** 累计抵扣的金额（单位：元） */
-  DeductAmount?: string;
-  /** 累计承诺消费金额（单位：元） */
-  PromiseAmount?: string;
-  /** 累计净节省金额（单位：元） */
-  NetSavings?: string;
-  /** 使用率 */
-  UtilizationRate?: number;
-  /** 累计流失金额（单位：元） */
-  LossAmount?: string;
-  /** 累计按量计费预期金额（单位：元） */
-  DosageAmount?: string;
-  /** 累计成本金额（单位：元） */
-  CostAmount?: string;
-  /** 地域 */
-  Region?: string[] | null;
-}
-
 /** 账单多维度汇总消费详情 */
 declare interface SummaryDetail {
   /** 账单维度编码 */
@@ -2254,34 +2208,6 @@ declare interface CreateAllocationTagRequest {
 }
 
 declare interface CreateAllocationTagResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateSavingPlanOrderRequest {
-  /** 地域编码 */
-  RegionId: number;
-  /** 区域编码 */
-  ZoneId: number;
-  /** 预付费类型 */
-  PrePayType: string;
-  /** 时长 */
-  TimeSpan: number;
-  /** 时长单位 */
-  TimeUnit: string;
-  /** 商品唯一标识 */
-  CommodityCode: string;
-  /** 承诺时长内的小额金额（单位：元） */
-  PromiseUseAmount: number;
-  /** 节省计划的指定生效时间，若不传则为当前下单时间。传参数格式:"2023-10-01 00:00:00"，仅支持指定日期的0点时刻 */
-  SpecifyEffectTime?: string;
-  /** 可重入ID */
-  ClientToken?: string;
-}
-
-declare interface CreateSavingPlanOrderResponse {
-  /** 订单号 */
-  BigDealId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3436,26 +3362,6 @@ declare interface DescribeSavingPlanCoverageResponse {
   RequestId?: string;
 }
 
-declare interface DescribeSavingPlanOverviewRequest {
-  /** 开始时间，格式yyyy-MM-dd 注：查询范围请勿超过6个月 */
-  StartDate: string;
-  /** 结束时间，格式yyyy-MM-dd */
-  EndDate: string;
-  /** 分页偏移量 */
-  Offset: number;
-  /** 每页数量，最大值为200 */
-  Limit: number;
-}
-
-declare interface DescribeSavingPlanOverviewResponse {
-  /** 节省计划总览明细数据 */
-  Overviews?: SavingPlanOverviewDetail[];
-  /** 查询命中的节省计划总览明细数据总条数 */
-  Total?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeSavingPlanResourceInfoRequest {
   /** 数量，最大值为100 */
   Limit: number;
@@ -3469,28 +3375,6 @@ declare interface DescribeSavingPlanResourceInfoRequest {
 
 declare interface DescribeSavingPlanResourceInfoResponse {
   /** 记录数 */
-  Total?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeSavingPlanUsageRequest {
-  /** 开始时间，格式yyyy-MM-dd 注：查询范围请勿超过6个月 */
-  StartDate: string;
-  /** 结束时间，格式yyyy-MM-dd */
-  EndDate: string;
-  /** 分页偏移量 */
-  Offset: number;
-  /** 每页数量，最大值为200 */
-  Limit: number;
-  /** 查询结果数据的时间间隔 */
-  TimeInterval: string;
-}
-
-declare interface DescribeSavingPlanUsageResponse {
-  /** 节省计划使用率数据 */
-  Usages?: SavingPlanUsageDetail[];
-  /** 查询命中的节省计划总览明细数据总条数 */
   Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3627,8 +3511,6 @@ declare interface Billing {
   (): Versions;
   /** 批量设置分账标签 {@link CreateAllocationTagRequest} {@link CreateAllocationTagResponse} */
   CreateAllocationTag(data: CreateAllocationTagRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAllocationTagResponse>;
-  /** @deprecated 创建节省计划订单 {@link CreateSavingPlanOrderRequest} {@link CreateSavingPlanOrderResponse} */
-  CreateSavingPlanOrder(data: CreateSavingPlanOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSavingPlanOrderResponse>;
   /** 批量取消设置分账标签 {@link DeleteAllocationTagRequest} {@link DeleteAllocationTagResponse} */
   DeleteAllocationTag(data: DeleteAllocationTagRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAllocationTagResponse>;
   /** 获取账户余额 {@link DescribeAccountBalanceRequest} {@link DescribeAccountBalanceResponse} */
@@ -3703,12 +3585,8 @@ declare interface Billing {
   DescribeGatherResource(data: DescribeGatherResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatherResourceResponse>;
   /** 查询节省计划覆盖率数据 {@link DescribeSavingPlanCoverageRequest} {@link DescribeSavingPlanCoverageResponse} */
   DescribeSavingPlanCoverage(data: DescribeSavingPlanCoverageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSavingPlanCoverageResponse>;
-  /** @deprecated 查询节省计划总览明细 {@link DescribeSavingPlanOverviewRequest} {@link DescribeSavingPlanOverviewResponse} */
-  DescribeSavingPlanOverview(data: DescribeSavingPlanOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSavingPlanOverviewResponse>;
   /** 查询节省计划可共享列表详情 {@link DescribeSavingPlanResourceInfoRequest} {@link DescribeSavingPlanResourceInfoResponse} */
   DescribeSavingPlanResourceInfo(data: DescribeSavingPlanResourceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSavingPlanResourceInfoResponse>;
-  /** @deprecated 查询节省计划使用率明细 {@link DescribeSavingPlanUsageRequest} {@link DescribeSavingPlanUsageResponse} */
-  DescribeSavingPlanUsage(data: DescribeSavingPlanUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSavingPlanUsageResponse>;
   /** 获取分账标签 {@link DescribeTagListRequest} {@link DescribeTagListResponse} */
   DescribeTagList(data: DescribeTagListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagListResponse>;
   /** 获取代金券相关信息 {@link DescribeVoucherInfoRequest} {@link DescribeVoucherInfoResponse} */

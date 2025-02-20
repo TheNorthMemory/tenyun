@@ -274,6 +274,8 @@ declare interface DMSPartition {
   Params?: KVPair[];
   /** 存储对象 */
   Sds?: DMSSds;
+  /** 数据源连接名 */
+  DatasourceConnectionName?: string;
 }
 
 /** 元数据存储描述属性 */
@@ -2119,6 +2121,8 @@ declare interface AlterDMSDatabaseRequest {
   Location?: string;
   /** 基础对象 */
   Asset?: Asset;
+  /** 数据源连接名 */
+  DatasourceConnectionName?: string;
 }
 
 declare interface AlterDMSDatabaseResponse {
@@ -2135,6 +2139,8 @@ declare interface AlterDMSPartitionRequest {
   CurrentValues: string;
   /** 分区 */
   Partition?: DMSPartition;
+  /** 数据源连接名 */
+  DatasourceConnectionName?: string;
 }
 
 declare interface AlterDMSPartitionResponse {
@@ -2179,6 +2185,8 @@ declare interface AlterDMSTableRequest {
   Partitions?: DMSPartition[];
   /** 当前表名 */
   Name?: string;
+  /** 数据源连接名 */
+  DatasourceConnectionName?: string;
 }
 
 declare interface AlterDMSTableResponse {
@@ -2383,6 +2391,8 @@ declare interface CreateDMSDatabaseRequest {
   Location?: string;
   /** 数据库名称 */
   Name?: string;
+  /** 数据源连接名 */
+  DatasourceConnectionName?: string;
 }
 
 declare interface CreateDMSDatabaseResponse {
@@ -2423,6 +2433,8 @@ declare interface CreateDMSTableRequest {
   Partitions?: DMSPartition[];
   /** 表名称 */
   Name?: string;
+  /** 数据源连接名 */
+  DatasourceConnectionName?: string;
 }
 
 declare interface CreateDMSTableResponse {
@@ -3075,8 +3087,10 @@ declare interface DescribeDMSDatabaseRequest {
   Name?: string;
   /** schema名称 */
   SchemaName?: string;
-  /** 匹配规则 */
+  /** 匹配规则，只支持填* */
   Pattern?: string;
+  /** 数据源连接名 */
+  DatasourceConnectionName?: string;
 }
 
 declare interface DescribeDMSDatabaseResponse {
@@ -3117,6 +3131,8 @@ declare interface DescribeDMSPartitionsRequest {
   Limit?: number;
   /** 表达式 */
   Expression?: string;
+  /** 数据源连接名 */
+  DatasourceConnectionName?: string;
 }
 
 declare interface DescribeDMSPartitionsResponse {
@@ -3135,14 +3151,16 @@ declare interface DescribeDMSTableRequest {
   SchemaName?: string;
   /** 表名称 */
   Name?: string;
-  /** 数据目录 */
+  /** catalog类型 */
   Catalog?: string;
   /** 查询关键词 */
   Keyword?: string;
-  /** 查询模式 */
+  /** 查询模式，只支持填* */
   Pattern?: string;
   /** 表类型 */
   Type?: string;
+  /** 数据源连接名 */
+  DatasourceConnectionName?: string;
 }
 
 declare interface DescribeDMSTableResponse {
@@ -3193,11 +3211,11 @@ declare interface DescribeDMSTablesRequest {
   SchemaName?: string;
   /** 表名称 */
   Name?: string;
-  /** 数据目录 */
+  /** catalog类型 */
   Catalog?: string;
   /** 查询关键词 */
   Keyword?: string;
-  /** 查询模式 */
+  /** 查询模式，只支持填* */
   Pattern?: string;
   /** 表类型 */
   Type?: string;
@@ -3213,6 +3231,8 @@ declare interface DescribeDMSTablesRequest {
   Sort?: string;
   /** 排序字段：true：升序（默认），false：降序 */
   Asc?: boolean;
+  /** 数据源连接名 */
+  DatasourceConnectionName?: string;
 }
 
 declare interface DescribeDMSTablesResponse {
@@ -4251,6 +4271,8 @@ declare interface DropDMSDatabaseRequest {
   DeleteData?: boolean;
   /** 是否级联删除 */
   Cascade?: boolean;
+  /** 数据源连接名 */
+  DatasourceConnectionName?: string;
 }
 
 declare interface DropDMSDatabaseResponse {
@@ -4271,6 +4293,8 @@ declare interface DropDMSPartitionsRequest {
   Values?: string[];
   /** 是否删除分区数据 */
   DeleteData?: boolean;
+  /** 数据源连接名 */
+  DatasourceConnectionName?: string;
 }
 
 declare interface DropDMSPartitionsResponse {
@@ -4289,6 +4313,8 @@ declare interface DropDMSTableRequest {
   DeleteData?: boolean;
   /** 环境属性 */
   EnvProps?: KVPair;
+  /** 数据目录信息 */
+  DatasourceConnectionName?: string;
 }
 
 declare interface DropDMSTableResponse {

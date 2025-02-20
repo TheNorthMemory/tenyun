@@ -2254,7 +2254,7 @@ declare interface ChannelDescribeEmployeesRequest {
 declare interface ChannelDescribeEmployeesResponse {
   /** 员工信息列表。 */
   Employees?: Staff[];
-  /** 指定分页返回第几页的数据。页码从 0 开始，即首页为 0，最大20000。 */
+  /** 偏移量，默认为0，最大20000。关于Offset的更进一步介绍请参考 API 简介中的相关小节。 */
   Offset?: number;
   /** 指定分页每页返回的数据条数，单页最大支持 20。 */
   Limit?: number;

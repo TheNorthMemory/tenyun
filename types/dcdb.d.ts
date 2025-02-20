@@ -262,6 +262,28 @@ declare interface DCDBShardInfo {
   Range?: string;
 }
 
+/** DDL任务执行详情 */
+declare interface DDLDetail {
+  /** 分片Id */
+  ShardSerialId?: string;
+  /** 数据库 */
+  DbName?: string;
+  /** 表 */
+  Table?: string;
+  /** 执行的DDL任务内容 */
+  Alter?: string;
+  /** 开始执行时间 */
+  BeginTime?: string;
+  /** 当前任务状态。0 成功； 1失败； 2进行中 */
+  Status?: number;
+  /** 任务详细描述信息 */
+  Desc?: string;
+  /** 任务当前所处阶段 */
+  Stage?: string;
+  /** 切换状态：1: 未到切换阶段；2：正在等待进行表切换；3: 正在进行切换；4: 切换成功；5: 切换失败 */
+  SwitchStatus?: number;
+}
+
 /** 数据库信息 */
 declare interface Database {
   /** 数据库名称 */
@@ -874,6 +896,18 @@ declare interface CancelDcnJobRequest {
 declare interface CancelDcnJobResponse {
   /** 流程ID */
   FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CancelOnlineDDLJobRequest {
+  /** 实例Id */
+  InstanceId: string;
+  /** 要暂停的 Online DDL 任务对应的流程Id。创建任务时，CreateOnlineDDLJob 会返回此流程Id */
+  FlowId: number;
+}
+
+declare interface CancelOnlineDDLJobResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1884,6 +1918,26 @@ declare interface DescribeLogFileRetentionPeriodResponse {
   RequestId?: string;
 }
 
+declare interface DescribeOnlineDDLJobRequest {
+  /** 实例Id */
+  InstanceId: string;
+  /** Online DDL 对应的流程Id。创建任务时，CreateOnlineDDLJob 会返回此流程Id */
+  FlowId: number;
+}
+
+declare interface DescribeOnlineDDLJobResponse {
+  /** 任务状态。0：成功；1：失败；大于1：进行中 */
+  Status?: number;
+  /** 任务进度百分比 */
+  Process?: number;
+  /** 错误信息或提示信息 */
+  ErrorMessage?: string;
+  /** 各分片DDL执行详情 */
+  DDLDetails?: DDLDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeOrdersRequest {
   /** 待查询的长订单号列表，创建实例、续费实例、扩容实例接口返回。 */
   DealNames: string[];
@@ -2505,6 +2559,8 @@ declare interface Dcdb {
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
   /** 取消DCN同步 {@link CancelDcnJobRequest} {@link CancelDcnJobResponse} */
   CancelDcnJob(data: CancelDcnJobRequest, config?: AxiosRequestConfig): AxiosPromise<CancelDcnJobResponse>;
+  /** 取消在线DDL任务 {@link CancelOnlineDDLJobRequest} {@link CancelOnlineDDLJobResponse} */
+  CancelOnlineDDLJob(data: CancelOnlineDDLJobRequest, config?: AxiosRequestConfig): AxiosPromise<CancelOnlineDDLJobResponse>;
   /** 克隆实例账户 {@link CloneAccountRequest} {@link CloneAccountResponse} */
   CloneAccount(data: CloneAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CloneAccountResponse>;
   /** 关闭外网访问 {@link CloseDBExtranetAccessRequest} {@link CloseDBExtranetAccessResponse} */
@@ -2579,6 +2635,8 @@ declare interface Dcdb {
   DescribeFlow(data: DescribeFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowResponse>;
   /** 查看备份日志备份天数 {@link DescribeLogFileRetentionPeriodRequest} {@link DescribeLogFileRetentionPeriodResponse} */
   DescribeLogFileRetentionPeriod(data: DescribeLogFileRetentionPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogFileRetentionPeriodResponse>;
+  /** 查询在线DDL任务 {@link DescribeOnlineDDLJobRequest} {@link DescribeOnlineDDLJobResponse} */
+  DescribeOnlineDDLJob(data: DescribeOnlineDDLJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOnlineDDLJobResponse>;
   /** 查询订单信息 {@link DescribeOrdersRequest} {@link DescribeOrdersResponse} */
   DescribeOrders(data: DescribeOrdersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrdersResponse>;
   /** 查询项目安全组信息 {@link DescribeProjectSecurityGroupsRequest} {@link DescribeProjectSecurityGroupsResponse} */
