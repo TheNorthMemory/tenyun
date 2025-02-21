@@ -25,65 +25,65 @@ declare interface AttrItem {
 /** 上链数据 */
 declare interface Chain {
   /** 码url */
-  Code: string | null;
+  Code: string;
   /** 上链数据 */
-  Data: ChainValue[] | null;
+  Data: ChainValue[];
 }
 
 /** 上链数据 */
 declare interface ChainData {
   /** 区块hash */
-  BlockHash?: string | null;
+  BlockHash?: string;
   /** 区块高度 */
-  BlockHeight?: string | null;
+  BlockHeight?: string;
   /** 区块时间 */
-  BlockTime?: string | null;
+  BlockTime?: string;
 }
 
 /** 上链数据 key-value */
 declare interface ChainValue {
   /** 标题名字 */
-  Label: string | null;
+  Label: string;
   /** 类型，文字："text"，图片："image" */
-  Type: string | null;
+  Type: string;
   /** 值，文字类型："abc"，图片类型：""/images/img.png" */
-  Value: string | null;
+  Value: string;
 }
 
 /** 批次 */
 declare interface CodeBatch {
   /** 批次号 */
-  BatchId?: string | null;
+  BatchId?: string;
   /** 企业ID */
-  CorpId?: number | null;
+  CorpId?: number;
   /** 批次编码(未使用) */
-  BatchCode?: string | null;
+  BatchCode?: string;
   /** 码数量 */
-  CodeCnt?: number | null;
+  CodeCnt?: number;
   /** 所属商户ID */
-  MerchantId?: string | null;
+  MerchantId?: string;
   /** 产品ID */
-  ProductId?: string | null;
+  ProductId?: string;
   /** 批次类型 */
-  BatchType?: number | null;
+  BatchType?: number;
   /** 备注 */
-  Remark?: string | null;
+  Remark?: string;
   /** 微信模板 */
-  MpTpl?: string | null;
+  MpTpl?: string;
   /** 批次状态 0: 未激活 1: 已激活 -1: 已冻结 */
-  Status?: number | null;
+  Status?: number;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 修改时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 所属商户名称 */
-  MerchantName?: string | null;
+  MerchantName?: string;
   /** 产品名称 */
-  ProductName?: string | null;
+  ProductName?: string;
   /** 未使用 */
   Ext?: Ext | null;
   /** 模板名称 */
-  TplName?: string | null;
+  TplName?: string;
   /** 调度任务 */
   Job?: Job | null;
   /** 生产日期 */
@@ -103,77 +103,77 @@ declare interface CodeItem {
 /** 码包类型 */
 declare interface CodePack {
   /** 码id */
-  PackId?: string | null;
+  PackId?: string;
   /** 企业id */
-  CorpId?: number | null;
+  CorpId?: number;
   /** 商户id */
-  MerchantId?: string | null;
+  MerchantId?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 制码状态 init: 初始化, pending: 执行中, done: 完成, error: 失败 */
-  Status?: string | null;
+  Status?: string;
   /** 执行日志 */
-  Log?: string | null;
+  Log?: string;
   /** 创建人 */
-  CreateUser?: string | null;
+  CreateUser?: string;
   /** 码数 */
-  Amount?: number | null;
+  Amount?: number;
   /** 防伪码长度 */
-  CodeLength?: number | null;
+  CodeLength?: number;
   /** 码类型 */
-  CodeType?: string | null;
+  CodeType?: string;
   /** 是否暗码 */
-  Cipher?: number | null;
+  Cipher?: number;
   /** [弃用] 文字码地址，通过另一个接口查 */
-  TextUrl?: string | null;
+  TextUrl?: string;
   /** [弃用] 二维码地址，通过另一个接口查 */
-  PackUrl?: string | null;
+  PackUrl?: string;
   /** 商户名 */
-  MerchantName?: string | null;
+  MerchantName?: string;
   /** 码规则类型 0: 默认, 1: 自定义 */
-  RuleType?: number | null;
+  RuleType?: number;
   /** 自定义码规则ID */
-  CustomId?: string | null;
+  CustomId?: string;
   /** 码包类型 0: 普通码包 1: 层级码包 */
-  PackType?: number | null;
+  PackType?: number;
   /** 生码层级 */
-  PackLevel?: number | null;
+  PackLevel?: number;
   /** 层级码配置 */
-  PackSpec?: PackSpec[] | null;
+  PackSpec?: PackSpec[];
   /** 商品名称 */
-  ProductName?: string | null;
+  ProductName?: string;
   /** 商品规格 */
-  ProductSpecification?: string | null;
+  ProductSpecification?: string;
   /** 商品ID */
-  ProductId?: string | null;
+  ProductId?: string;
   /** 码关系是否预关联0:否, 1:是 */
   RelateType?: number;
   /** 场景码 */
-  SceneCode?: number | null;
+  SceneCode?: number;
   /** 码规则 */
-  CodeRule?: string | null;
+  CodeRule?: string;
   /** 已使用码数 */
-  UsedAmount?: number | null;
+  UsedAmount?: number;
   /** 开始流水号 */
-  SerialStart?: number | null;
+  SerialStart?: number;
   /** 结束流水号 */
-  SerialEnd?: number | null;
+  SerialEnd?: number;
 }
 
 /** 码段配置 */
 declare interface CodePart {
   /** 码段名称 */
-  Name: string | null;
+  Name: string;
   /** 码段类型 */
-  Type: string | null;
+  Type: string;
   /** 码段内容 */
-  Value: string | null;
+  Value: string;
   /** 码段长度 */
   Length: number;
   /** 扩展字段 */
-  Ext: string | null;
+  Ext: string;
 }
 
 /** 渠道商的子企业额度使用情况 */
@@ -191,23 +191,23 @@ declare interface CorpQuota {
 /** 码规则 */
 declare interface CustomRule {
   /** 码规则ID */
-  CustomId: string;
+  CustomId?: string;
   /** 码规则名 */
-  Name: string | null;
+  Name?: string;
   /** 企业ID */
-  CorpId: number | null;
+  CorpId?: number;
   /** 商户ID */
-  MerchantId: string | null;
+  MerchantId?: string;
   /** 码ID长度 */
-  CodeLength: number;
+  CodeLength?: number;
   /** 规则状态 */
-  Status: number;
+  Status?: number;
   /** 码段配置 */
-  CodeParts: CodePart[];
+  CodeParts?: CodePart[];
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** 预留字段 */
@@ -243,33 +243,33 @@ declare interface Job {
 /** 商户信息 */
 declare interface Merchant {
   /** 商户标识码 */
-  MerchantId: string;
+  MerchantId?: string;
   /** 企业id */
-  CorpId: number;
+  CorpId?: number;
   /** 商户名称 */
-  Name: string;
+  Name?: string;
   /** 备注 */
-  Remark: string | null;
+  Remark?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 商户码规则 */
-  CodeRule: string;
+  CodeRule?: string;
   /** 码来源类型 0: 安心平台 1: 第三方码 */
-  CodeType: number;
+  CodeType?: number;
   /** 第三方码域名前缀 */
-  CodeUrl: string | null;
+  CodeUrl?: string;
 }
 
 /** 业务出参 */
 declare interface OutputAuthorizedTransfer {
   /** 推送状态，0表示成功。 */
-  Code?: number | null;
+  Code?: number;
   /** 错误码。 */
-  Message?: string | null;
+  Message?: string;
   /** 错误信息描述。 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 层级码配置 */
@@ -281,55 +281,55 @@ declare interface PackSpec {
   /** 数量 */
   Amount: number;
   /** 码规则ID */
-  CustomId?: string | null;
+  CustomId?: string;
   /** 码段配置 */
-  CodeParts?: CodePart[] | null;
+  CodeParts?: CodePart[];
   /** 包装单位 */
-  Unit?: string | null;
+  Unit?: string;
   /** 场景值 */
-  SceneCode?: number | null;
+  SceneCode?: number;
 }
 
 /** 环节数据 */
 declare interface PhaseData {
   /** 启用头 */
-  HeadEnabled?: boolean | null;
+  HeadEnabled?: boolean;
   /** 标题 */
-  HeadTitle?: string | null;
+  HeadTitle?: string;
   /** 标识符 */
-  Key?: string | null;
+  Key?: string;
   /** 小程序AppId */
-  AppId?: string | null;
+  AppId?: string;
   /** 小程序AppPath */
-  AppPath?: string | null;
+  AppPath?: string;
   /** 小程序名称AppName */
-  AppName?: string | null;
+  AppName?: string;
 }
 
 /** 安心计划二维码 */
 declare interface PlanQRCode {
   /** 二维码 */
-  Url: string | null;
+  Url: string;
   /** 状态，0:未激活 1:已激活 2:已冻结 */
-  Status: number | null;
+  Status: number;
 }
 
 /** 安心计划二维码扫码记录 */
 declare interface PlanQRCodeRecord {
   /** 二维码 */
-  Url: string | null;
+  Url: string;
   /** OpenID */
-  OpenId: string | null;
+  OpenId: string;
   /** 扫码时间 */
-  ScanTime: string | null;
+  ScanTime: string;
   /** IP 地址 */
-  Ip: string | null;
+  Ip: string;
   /** 国家 */
-  Country: string | null;
+  Country: string;
   /** 省份 */
-  Province: string | null;
+  Province: string;
   /** 城市 */
-  City: string | null;
+  City: string;
 }
 
 /** 商品信息 */
@@ -345,57 +345,57 @@ declare interface Product {
   /** 商品编号 */
   ProductCode?: string;
   /** 商品规格 */
-  Specification?: string | null;
+  Specification?: string;
   /** 备注 */
-  Remark?: string | null;
+  Remark?: string;
   /** 商品图片 */
-  Logo?: string[] | null;
+  Logo?: string[];
   /** 创建时间 */
   CreateTime?: string;
   /** 修改时间 */
   UpdateTime?: string;
   /** 预留字段 */
-  Ext?: Ext | null;
+  Ext?: Ext;
   /** 商户名称 */
   MerchantName?: string;
   /** 认证状态 */
-  CertState?: number | null;
+  CertState?: number;
 }
 
 /** 企业配额信息 */
 declare interface Quota {
   /** 服务开始时间 */
-  StartTime: string | null;
+  StartTime: string;
   /** 服务结束时间 */
-  EndTime: string | null;
+  EndTime: string;
   /** 配额ID */
-  QuotaId?: number | null;
+  QuotaId?: number;
   /** 企业ID */
-  CorpId?: number | null;
+  CorpId?: number;
   /** 开通服务 */
-  Services?: string[] | null;
+  Services?: string[];
   /** 商户配额 */
-  FactoryQuota?: number | null;
+  FactoryQuota?: number;
   /** 商品配额 */
-  ItemQuota?: number | null;
+  ItemQuota?: number;
   /** 溯源码配额 */
-  TrackQuota?: number | null;
+  TrackQuota?: number;
   /** 销售码配额 */
-  SaleQuota?: number | null;
+  SaleQuota?: number;
   /** 上链配额 */
-  ChainQuota?: number | null;
+  ChainQuota?: number;
   /** 风控配额 */
-  RiskQuota?: number | null;
+  RiskQuota?: number;
   /** AI文字数量 */
-  AigcTextQuota?: number | null;
+  AigcTextQuota?: number;
   /** AI图片数量 */
-  AigcImageQuota?: number | null;
+  AigcImageQuota?: number;
   /** 溯源类型 */
-  TrackType?: number | null;
+  TrackType?: number;
   /** 开通版本 lite:轻量版, basic:基础版, standard:标准版 */
-  Version?: string | null;
+  Version?: string;
   /** 是否开启企业认证 */
-  ProductCertify?: number | null;
+  ProductCertify?: number;
 }
 
 /** 原始扫码日志 */
@@ -403,7 +403,7 @@ declare interface RawScanLog {
   /** 日志ID */
   LogId?: number;
   /** 微信小程序openid */
-  Openid?: string | null;
+  Openid?: string;
   /** 扫码时间 */
   CreateTime?: string;
   /** 溯源码 */
@@ -411,17 +411,17 @@ declare interface RawScanLog {
   /** 企业ID */
   CorpId?: number;
   /** 商户ID */
-  MerchantId?: string | null;
+  MerchantId?: string;
   /** 商品ID */
-  ProductId?: string | null;
+  ProductId?: string;
   /** 批次ID */
-  BatchId?: string | null;
+  BatchId?: string;
   /** 省份 */
-  Province?: string | null;
+  Province?: string;
   /** 地市 */
-  City?: string | null;
+  City?: string;
   /** 区/县 */
-  District?: string | null;
+  District?: string;
 }
 
 /** 扫码明细 */
@@ -429,43 +429,43 @@ declare interface ScanLog {
   /** 行ID */
   LogId?: number;
   /** 微信openid */
-  Openid?: string | null;
+  Openid?: string;
   /** 微信昵称 */
-  Nickname?: string | null;
+  Nickname?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 码 */
-  Code?: string | null;
+  Code?: string;
   /** 企业ID */
-  CorpId?: number | null;
+  CorpId?: number;
   /** 商户ID */
-  MerchantId?: string | null;
+  MerchantId?: string;
   /** 商品ID */
-  ProductId?: string | null;
+  ProductId?: string;
   /** ip地址 */
-  Ip?: string | null;
+  Ip?: string;
   /** 国家 */
-  Country?: string | null;
+  Country?: string;
   /** 省份 */
-  Province?: string | null;
+  Province?: string;
   /** 城市 */
-  City?: string | null;
+  City?: string;
   /** 县/区 */
-  District?: string | null;
+  District?: string;
   /** 微信 unionid */
-  Unionid?: string | null;
+  Unionid?: string;
   /** 首次扫码 0:否, 1:是 */
-  First?: number | null;
+  First?: number;
   /** 批次ID */
-  BatchId?: string | null;
+  BatchId?: string;
   /** 扫码类型 0:无效扫码 1: 小程序扫码 2: 商家扫码 */
   Type?: number;
   /** 商户名称 */
-  MerchantName?: string | null;
+  MerchantName?: string;
   /** 产品名称 */
-  ProductName?: string | null;
+  ProductName?: string;
   /** 产品Logo */
-  ProductLogo?: string | null;
+  ProductLogo?: string;
   /** 风险状态0: 未知, 1:通过, 2:失败/风险, 3:存疑 */
   Status?: number;
   /** 是否开启验证0:否, 1:是 */
@@ -527,11 +527,11 @@ declare interface TraceCode {
   /** 码层级 0: 最小级, 1: 一级, 2: 二级 */
   Level?: number;
   /** 码层级详情 */
-  PackSpec?: PackSpec[] | null;
+  PackSpec?: PackSpec[];
   /** 场景码 */
-  SceneCode?: number | null;
+  SceneCode?: number;
   /** 流水码 */
-  SerialCode?: number | null;
+  SerialCode?: number;
 }
 
 /** 溯源数据 */
@@ -543,7 +543,7 @@ declare interface TraceData {
   /** 码类型 0: 批次, 1: 码, 2: 生产任务 */
   Type: number;
   /** 码值，跟码类型一一对应 */
-  Code: string | null;
+  Code: string;
   /** 排序，在Phase相同情况下，值越小排名靠前 */
   Rank: number;
   /** 溯源阶段 0:商品 1:通用 2:生产溯源 3:销售溯源 */
@@ -551,17 +551,17 @@ declare interface TraceData {
   /** 溯源环节名称 */
   PhaseName: string;
   /** 溯源时间 */
-  TraceTime: string | null;
+  TraceTime: string;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime: string;
   /** 上链状态 0: 未上链 1: 上链中 2: 已上链 -1: 异常 */
-  ChainStatus: number | null;
+  ChainStatus: number;
   /** 上链时间 */
-  ChainTime: string | null;
+  ChainTime: string;
   /** 上链数据 */
-  ChainData: ChainData | null;
+  ChainData: ChainData;
   /** 溯源阶段配置 */
-  PhaseData: PhaseData | null;
+  PhaseData: PhaseData;
   /** 溯源阶段状态 0: 无效, 1: 有效 */
   Status: number;
   /** 无 */
@@ -595,21 +595,21 @@ declare interface TraceItem {
 /** 付费信息使用量 */
 declare interface UsageQuota {
   /** 企业ID */
-  CorpId?: number | null;
+  CorpId?: number;
   /** 商户配额 */
-  FactoryCnt?: number | null;
+  FactoryCnt?: number;
   /** 商品数量 */
-  ItemCnt?: number | null;
+  ItemCnt?: number;
   /** 溯源码量 */
-  TrackCnt?: number | null;
+  TrackCnt?: number;
   /** 营销码额度 */
-  SaleCnt?: number | null;
+  SaleCnt?: number;
   /** 区块链上链次数 */
-  ChainCnt?: number | null;
+  ChainCnt?: number;
   /** 风险检测次数 */
   RiskCnt?: number | null;
   /** 时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
 }
 
 declare interface AuthorizedTransferRequest {
@@ -727,7 +727,7 @@ declare interface CreateCorporationOrderRequest {
 
 declare interface CreateCorporationOrderResponse {
   /** 企业ID */
-  CorpId?: number | null;
+  CorpId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -783,7 +783,7 @@ declare interface CreateCustomRuleRequest {
 
 declare interface CreateCustomRuleResponse {
   /** 码规则ID */
-  CustomId?: string | null;
+  CustomId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -803,7 +803,7 @@ declare interface CreateMerchantRequest {
 
 declare interface CreateMerchantResponse {
   /** 商户标识码 */
-  MerchantId?: string | null;
+  MerchantId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -829,7 +829,7 @@ declare interface CreateProductRequest {
 
 declare interface CreateProductResponse {
   /** 商品ID */
-  ProductId?: string | null;
+  ProductId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -859,7 +859,7 @@ declare interface CreateTraceCodesAsyncRequest {
 
 declare interface CreateTraceCodesAsyncResponse {
   /** 批次ID */
-  BatchId?: string | null;
+  BatchId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -943,7 +943,7 @@ declare interface DeleteMerchantRequest {
 
 declare interface DeleteMerchantResponse {
   /** 商户标识码 */
-  MerchantId?: string | null;
+  MerchantId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -957,7 +957,7 @@ declare interface DeleteProductRequest {
 
 declare interface DeleteProductResponse {
   /** 商品ID */
-  ProductId: string | null;
+  ProductId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -971,7 +971,7 @@ declare interface DeleteTraceDataRequest {
 
 declare interface DeleteTraceDataResponse {
   /** 溯源id */
-  TraceId?: string | null;
+  TraceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1055,9 +1055,9 @@ declare interface DescribeCodeBatchsRequest {
 
 declare interface DescribeCodeBatchsResponse {
   /** 批次列表 */
-  CodeBatchs?: CodeBatch[] | null;
+  CodeBatchs?: CodeBatch[];
   /** 总条数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1071,7 +1071,7 @@ declare interface DescribeCodePackStatusRequest {
 
 declare interface DescribeCodePackStatusResponse {
   /** 码包状态 init: 初始化, pending: 执行中, done: 完成, error: 失败 */
-  Status: string | null;
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1085,11 +1085,11 @@ declare interface DescribeCodePackUrlRequest {
 
 declare interface DescribeCodePackUrlResponse {
   /** 文字码包地址 */
-  Url: string | null;
+  Url?: string;
   /** 图片码包地址，可能为空 */
-  ImgUrl: string | null;
+  ImgUrl?: string;
   /** 文字码包Key，用于上传导入 */
-  FileKey: string | null;
+  FileKey?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1133,7 +1133,7 @@ declare interface DescribeCodesByPackRequest {
 
 declare interface DescribeCodesByPackResponse {
   /** 码列表 */
-  Codes: CodeItem[] | null;
+  Codes?: CodeItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1151,9 +1151,9 @@ declare interface DescribeCorpQuotasRequest {
 
 declare interface DescribeCorpQuotasResponse {
   /** 子企业额度使用情况 */
-  CorpQuotas?: CorpQuota[] | null;
+  CorpQuotas?: CorpQuota[];
   /** 记录总数量 */
-  Total?: number | null;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1167,7 +1167,7 @@ declare interface DescribeCustomRuleByIdRequest {
 
 declare interface DescribeCustomRuleByIdResponse {
   /** 码规则信息 */
-  CustomRule?: CustomRule | null;
+  CustomRule?: CustomRule;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1189,9 +1189,9 @@ declare interface DescribeCustomRulesRequest {
 
 declare interface DescribeCustomRulesResponse {
   /** 码规则列表 */
-  CustomRules?: CustomRule[] | null;
+  CustomRules?: CustomRule[];
   /** 总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1205,7 +1205,7 @@ declare interface DescribeJobFileUrlRequest {
 
 declare interface DescribeJobFileUrlResponse {
   /** 码包地址 */
-  Url: string | null;
+  Url?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1219,7 +1219,7 @@ declare interface DescribeMerchantByIdRequest {
 
 declare interface DescribeMerchantByIdResponse {
   /** 商户信息 */
-  Merchant?: Merchant | null;
+  Merchant?: Merchant;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1239,9 +1239,9 @@ declare interface DescribeMerchantsRequest {
 
 declare interface DescribeMerchantsResponse {
   /** 商户列表 */
-  Merchants?: Merchant[] | null;
+  Merchants?: Merchant[];
   /** 总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1301,7 +1301,7 @@ declare interface DescribeProductByIdRequest {
 
 declare interface DescribeProductByIdResponse {
   /** 商品信息 */
-  Product?: Product | null;
+  Product?: Product;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1323,9 +1323,9 @@ declare interface DescribeProductsRequest {
 
 declare interface DescribeProductsResponse {
   /** 商品列表 */
-  Products?: Product[] | null;
+  Products?: Product[];
   /** 总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1407,7 +1407,7 @@ declare interface DescribeTmpTokenRequest {
 
 declare interface DescribeTmpTokenResponse {
   /** 临时token */
-  Token?: string | null;
+  Token?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1443,9 +1443,9 @@ declare interface DescribeTraceCodesRequest {
 
 declare interface DescribeTraceCodesResponse {
   /** 标识列表 */
-  TraceCodes?: TraceCode[] | null;
+  TraceCodes?: TraceCode[];
   /** 条数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1547,7 +1547,7 @@ declare interface ModifyCustomRuleRequest {
 
 declare interface ModifyCustomRuleResponse {
   /** 码规则ID */
-  CustomId?: string | null;
+  CustomId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1563,7 +1563,7 @@ declare interface ModifyCustomRuleStatusRequest {
 
 declare interface ModifyCustomRuleStatusResponse {
   /** 码规则ID */
-  CustomId?: string | null;
+  CustomId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1585,7 +1585,7 @@ declare interface ModifyMerchantRequest {
 
 declare interface ModifyMerchantResponse {
   /** 商户标识码 */
-  MerchantId?: string | null;
+  MerchantId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1609,7 +1609,7 @@ declare interface ModifyProductRequest {
 
 declare interface ModifyProductResponse {
   /** 商品ID */
-  ProductId?: string | null;
+  ProductId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1661,7 +1661,7 @@ declare interface ModifyTraceDataRanksRequest {
 
 declare interface ModifyTraceDataRanksResponse {
   /** 批次ID */
-  BatchId?: string | null;
+  BatchId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

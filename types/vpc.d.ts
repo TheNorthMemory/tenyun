@@ -220,6 +220,16 @@ declare interface BandwidthPackageBillBandwidth {
   BandwidthUsage: number;
 }
 
+/** 带宽上下限。 */
+declare interface BandwidthRange {
+  /** 资源ID。 */
+  ResourceId?: string;
+  /** 带宽下限，单位：Mbps。 */
+  BandwidthLowerLimit?: number;
+  /** 带宽上限，单位：Mbps。 */
+  BandwidthUpperLimit?: number;
+}
+
 /** 批量修改快照策略信息 */
 declare interface BatchModifySnapshotPolicy {
   /** 快照策略Id。 */
@@ -5308,6 +5318,18 @@ declare interface DescribeAccountAttributesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAddressBandwidthRangeRequest {
+  /** EIP资源ID列表，单次查询上限20。 */
+  AddressIds?: string[];
+}
+
+declare interface DescribeAddressBandwidthRangeResponse {
+  /** EIP带宽上下限详细信息。 */
+  BandwidthRangeSet?: BandwidthRange[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAddressQuotaRequest {
 }
 
@@ -5410,6 +5432,18 @@ declare interface DescribeAssistantCidrResponse {
   AssistantCidrSet?: AssistantCidr[];
   /** 符合条件的实例数量。 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBandwidthPackageBandwidthRangeRequest {
+  /** 带宽包资源ID列表，单次查询上限20。 */
+  BandwidthPackageIds?: string[];
+}
+
+declare interface DescribeBandwidthPackageBandwidthRangeResponse {
+  /** 带宽包带宽上下限详细信息。 */
+  BandwidthRangeSet?: BandwidthRange[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9731,6 +9765,8 @@ declare interface Vpc {
   DeleteVpnGatewaySslServer(data: DeleteVpnGatewaySslServerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpnGatewaySslServerResponse>;
   /** 查询账户属性 {@link DescribeAccountAttributesRequest} {@link DescribeAccountAttributesResponse} */
   DescribeAccountAttributes(data?: DescribeAccountAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountAttributesResponse>;
+  /** 查询指定EIP带宽上下限 {@link DescribeAddressBandwidthRangeRequest} {@link DescribeAddressBandwidthRangeResponse} */
+  DescribeAddressBandwidthRange(data?: DescribeAddressBandwidthRangeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressBandwidthRangeResponse>;
   /** 查询弹性公网IP配额 {@link DescribeAddressQuotaRequest} {@link DescribeAddressQuotaResponse} */
   DescribeAddressQuota(data?: DescribeAddressQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressQuotaResponse>;
   /** 查询IP地址模板集合 {@link DescribeAddressTemplateGroupsRequest} {@link DescribeAddressTemplateGroupsResponse} */
@@ -9741,6 +9777,8 @@ declare interface Vpc {
   DescribeAddresses(data?: DescribeAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressesResponse>;
   /** 查询辅助CIDR列表 {@link DescribeAssistantCidrRequest} {@link DescribeAssistantCidrResponse} */
   DescribeAssistantCidr(data?: DescribeAssistantCidrRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssistantCidrResponse>;
+  /** 查询指定带宽包带宽上下限 {@link DescribeBandwidthPackageBandwidthRangeRequest} {@link DescribeBandwidthPackageBandwidthRangeResponse} */
+  DescribeBandwidthPackageBandwidthRange(data?: DescribeBandwidthPackageBandwidthRangeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBandwidthPackageBandwidthRangeResponse>;
   /** 查询后付费共享带宽包当前的用量 {@link DescribeBandwidthPackageBillUsageRequest} {@link DescribeBandwidthPackageBillUsageResponse} */
   DescribeBandwidthPackageBillUsage(data: DescribeBandwidthPackageBillUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBandwidthPackageBillUsageResponse>;
   /** 查询带宽包配额 {@link DescribeBandwidthPackageQuotaRequest} {@link DescribeBandwidthPackageQuotaResponse} */

@@ -14,6 +14,14 @@ declare interface AdvancedRetentionPolicy {
   Years: number | null;
 }
 
+/** 本参数用于快照组回滚接口的入参，表示回滚的云盘、快照列表。 */
+declare interface ApplyDisk {
+  /** 快照组关联的快照ID。 */
+  SnapshotId: string;
+  /** 快照组关联快照对应的原云硬盘ID。 */
+  DiskId: string;
+}
+
 /** 描述一个实例已挂载和可挂载数据盘的数量。 */
 declare interface AttachDetail {
   /** 实例ID。 */
@@ -438,6 +446,36 @@ declare interface SnapshotCopyResult {
   DestinationRegion?: string;
 }
 
+/** 描述快照组详情 */
+declare interface SnapshotGroup {
+  /** 快照组ID。 */
+  SnapshotGroupId: string;
+  /** 快照组类型。NORMAL: 普通快照组，非一致性快照。 */
+  SnapshotGroupType: string;
+  /** 快照组是否包含系统盘快照。 */
+  ContainRootSnapshot: boolean;
+  /** 快照组包含的快照ID列表。 */
+  SnapshotIdSet: string[];
+  /** 快照组状态。NORMAL: 正常CREATING:创建中ROLLBACKING:回滚中 */
+  SnapshotGroupState: string;
+  /** 快照组创建进度。 */
+  Percent: number;
+  /** 快照组创建时间。 */
+  CreateTime: string;
+  /** 快照组最新修改时间 */
+  ModifyTime: string;
+  /** 快照组关联的镜像列表。 */
+  Images: Image[];
+  /** 快照组名称。 */
+  SnapshotGroupName: string;
+  /** 快照组关联的镜像数量。 */
+  ImageCount: number;
+  /** 快照组是否永久保留 */
+  IsPermanent: boolean;
+  /** 快照组到期时间。 */
+  DeadlineTime: string | null;
+}
+
 /** 标签。 */
 declare interface Tag {
   /** 标签健。 */
@@ -458,6 +496,22 @@ declare interface ApplyDiskBackupRequest {
 }
 
 declare interface ApplyDiskBackupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ApplySnapshotGroupRequest {
+  /** 回滚的快照组ID。 */
+  SnapshotGroupId: string;
+  /** 回滚的快照组关联的快照ID，及快照对应的原云硬盘ID列表。 */
+  ApplyDisks: ApplyDisk[];
+  /** 回滚前是否执行自动关机。 */
+  AutoStopInstance?: boolean;
+  /** 回滚完成后是否自动开机。 */
+  AutoStartInstance?: boolean;
+}
+
+declare interface ApplySnapshotGroupResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -608,6 +662,22 @@ declare interface CreateDisksResponse {
   RequestId?: string;
 }
 
+declare interface CreateSnapshotGroupRequest {
+  /** 需要创建快照组的云硬盘ID列表，必须选择挂载在同一实例上的盘列表。 */
+  DiskIds: string[];
+  /** 快照组名称，快照组关联的快照也会继承快照组的名称。例如：快照组名称为testSnapshotGroup，快照组关联两个快照，则两个快照的名称分别为testSnapshotGroup_0，testSnapshotGroup_1。 */
+  SnapshotGroupName?: string;
+  /** 快照组需要绑定的标签列表。 */
+  Tags?: Tag[];
+}
+
+declare interface CreateSnapshotGroupResponse {
+  /** 创建成功的快照组ID。 */
+  SnapshotGroupId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSnapshotRequest {
   /** 需要创建快照的云硬盘ID，可通过[DescribeDisks](/document/product/362/16315)接口查询。 */
   DiskId: string;
@@ -644,6 +714,20 @@ declare interface DeleteDiskBackupsRequest {
 }
 
 declare interface DeleteDiskBackupsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSnapshotGroupRequest {
+  /** 快照组ID。 */
+  SnapshotGroupId?: string;
+  /** 快照组ID 列表。此参数与快照组 ID 至少传 1 个，同时传会与快照组 ID 合并。 */
+  SnapshotGroupIds?: string[];
+  /** 是否同时删除快照组关联的镜像；取值为false，表示不删除快照组绑定的镜像，此时，如果快照组有绑定的镜像，删除会失败；取值为true，表示同时删除快照组绑定的镜像；默认值为false。 */
+  DeleteBindImages?: boolean;
+}
+
+declare interface DeleteSnapshotGroupResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -806,6 +890,24 @@ declare interface DescribeInstancesDiskNumRequest {
 declare interface DescribeInstancesDiskNumResponse {
   /** 各个云服务器已挂载和可挂载弹性云盘的数量。 */
   AttachDetail?: AttachDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSnapshotGroupsRequest {
+  /** 过滤条件。snapshot-group-id - Array of String - 是否必填：否 -（过滤条件）按快照组ID过滤 snapshot-group-state - Array of String - 是否必填：否 -（过滤条件）按快照组状态过滤。(NORMAL: 正常 | CREATING:创建中 | ROLLBACKING:回滚中) snapshot-group-name - Array of String - 是否必填：否 -（过滤条件）按快照组名称过滤 snapshot-id - Array of String - 是否必填：否 -（过滤条件）按快照组内的快照ID过滤 */
+  Filters?: Filter[];
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+}
+
+declare interface DescribeSnapshotGroupsResponse {
+  /** 符合条件的总数量。 */
+  TotalCount?: number;
+  /** 快照组列表详情。 */
+  SnapshotGroupSet?: SnapshotGroup[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1127,8 +1229,8 @@ declare interface RenewDiskResponse {
 declare interface ResizeDiskRequest {
   /** 云硬盘扩容后的大小，单位为GB，必须大于当前云硬盘大小。云盘大小取值范围参见云硬盘[产品分类](/document/product/362/2353)的说明。 */
   DiskSize: number;
-  /** 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。 */
-  DiskId: string;
+  /** 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。该字段仅供单块云硬盘扩容时传入。 */
+  DiskId?: string;
 }
 
 declare interface ResizeDiskResponse {
@@ -1167,6 +1269,8 @@ declare interface Cbs {
   ApplyDiskBackup(data: ApplyDiskBackupRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyDiskBackupResponse>;
   /** 回滚快照 {@link ApplySnapshotRequest} {@link ApplySnapshotResponse} */
   ApplySnapshot(data: ApplySnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<ApplySnapshotResponse>;
+  /** 回滚快照组 {@link ApplySnapshotGroupRequest} {@link ApplySnapshotGroupResponse} */
+  ApplySnapshotGroup(data: ApplySnapshotGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ApplySnapshotGroupResponse>;
   /** 挂载云硬盘 {@link AttachDisksRequest} {@link AttachDisksResponse} */
   AttachDisks(data: AttachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<AttachDisksResponse>;
   /** 绑定定期快照策略 {@link BindAutoSnapshotPolicyRequest} {@link BindAutoSnapshotPolicyResponse} */
@@ -1181,10 +1285,14 @@ declare interface Cbs {
   CreateDisks(data: CreateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDisksResponse>;
   /** 创建快照 {@link CreateSnapshotRequest} {@link CreateSnapshotResponse} */
   CreateSnapshot(data: CreateSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotResponse>;
+  /** 创建快照组 {@link CreateSnapshotGroupRequest} {@link CreateSnapshotGroupResponse} */
+  CreateSnapshotGroup(data: CreateSnapshotGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotGroupResponse>;
   /** 删除定期快照策略 {@link DeleteAutoSnapshotPoliciesRequest} {@link DeleteAutoSnapshotPoliciesResponse} */
   DeleteAutoSnapshotPolicies(data: DeleteAutoSnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAutoSnapshotPoliciesResponse>;
   /** 删除云硬盘备份点 {@link DeleteDiskBackupsRequest} {@link DeleteDiskBackupsResponse} */
   DeleteDiskBackups(data: DeleteDiskBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDiskBackupsResponse>;
+  /** 删除快照组 {@link DeleteSnapshotGroupRequest} {@link DeleteSnapshotGroupResponse} */
+  DeleteSnapshotGroup(data?: DeleteSnapshotGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotGroupResponse>;
   /** 删除快照 {@link DeleteSnapshotsRequest} {@link DeleteSnapshotsResponse} */
   DeleteSnapshots(data: DeleteSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotsResponse>;
   /** 查询定期快照策略 {@link DescribeAutoSnapshotPoliciesRequest} {@link DescribeAutoSnapshotPoliciesResponse} */
@@ -1201,6 +1309,8 @@ declare interface Cbs {
   DescribeDisks(data?: DescribeDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksResponse>;
   /** 查询实例关联的云硬盘数量 {@link DescribeInstancesDiskNumRequest} {@link DescribeInstancesDiskNumResponse} */
   DescribeInstancesDiskNum(data: DescribeInstancesDiskNumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesDiskNumResponse>;
+  /** 查询快照组列表 {@link DescribeSnapshotGroupsRequest} {@link DescribeSnapshotGroupsResponse} */
+  DescribeSnapshotGroups(data?: DescribeSnapshotGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotGroupsResponse>;
   /** 查询快照使用概览 {@link DescribeSnapshotOverviewRequest} {@link DescribeSnapshotOverviewResponse} */
   DescribeSnapshotOverview(data?: DescribeSnapshotOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotOverviewResponse>;
   /** 查看快照分享信息 {@link DescribeSnapshotSharePermissionRequest} {@link DescribeSnapshotSharePermissionResponse} */

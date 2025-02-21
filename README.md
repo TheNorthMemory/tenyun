@@ -114,11 +114,10 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 264+ 款产品，12214+ 服务数</summary>
+<details><summary>共计 263+ 款产品，12219+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
-aa | [活动防刷](https://cloud.tencent.com/document/product/1189) | 2020-02-24(1) |
 aai |  | 2018-05-22(4) |
 aca | [AI 临床助手](https://cloud.tencent.com/document/product/1388) | 2021-03-23(8) |
 acp | [应用合规平台](https://cloud.tencent.com/document/product/1553) | 2022-01-05(8) |
@@ -159,7 +158,7 @@ cam | [访问管理](https://cloud.tencent.com/document/product/598) | 2019-01-1
 captcha | [验证码](https://cloud.tencent.com/document/product/1110) | 2019-07-22(18) |
 car | [应用云渲染](https://cloud.tencent.com/document/product/1547) | 2022-01-10(6) |
 cat | [云拨测](https://cloud.tencent.com/document/product/280) | 2018-04-09(12) |
-cbs | [云硬盘](https://cloud.tencent.com/document/product/362) | 2017-03-12(42) |
+cbs | [云硬盘](https://cloud.tencent.com/document/product/362) | 2017-03-12(46) |
 ccc | [云联络中心](https://cloud.tencent.com/document/product/679) | 2020-02-10(64) |
 cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(172) |
 cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 2020-12-14(21) |
@@ -370,7 +369,7 @@ vdb | [向量数据库](https://cloud.tencent.com/document/product/1709) | 2023-
 vm | [视频内容安全](https://cloud.tencent.com/document/product/1265) | 2021-09-22(4) | 2020-12-29(4)<br/>2020-07-09(5) |
 vms | [语音消息](https://cloud.tencent.com/document/product/1128) | 2020-09-02(2) |
 vod | [云点播](https://cloud.tencent.com/document/product/266) | 2024-07-18(1) | 2018-07-17(181) |
-vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(400) |
+vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(402) |
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(8) |
 vtc | [视频转译](https://cloud.tencent.com/document/product/1769) | 2024-02-23(3) |
 waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(149) |

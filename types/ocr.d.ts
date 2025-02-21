@@ -284,6 +284,14 @@ declare interface Coord {
   Y?: number;
 }
 
+/** 海关缴款书 */
+declare interface CustomsPaymentReceipt {
+  /** 发票名称 */
+  Title?: string;
+  /** 识别出的字段名称(关键字)，支持以下字段： 税号 、纳税人识别号 、纳税人名称 、金额合计大写 、金额合计小写 、填发日期 、税务机关 、填票人。 示例值：纳税人识别号 */
+  Content?: OtherInvoiceItem[];
+}
+
 /** 机票详细信息元组 */
 declare interface DetailInformationOfAirTicketTupleList {
   /** 出发站（自） */
@@ -962,7 +970,7 @@ declare interface InvoiceGeneralInfo {
 declare interface InvoiceItem {
   /** 识别结果。OK：表示识别成功；FailedOperation.UnsupportedInvoice：表示不支持识别；FailedOperation.UnKnowError：表示识别失败；其它错误码见各个票据接口的定义。 */
   Code?: string;
-  /** 识别出的图片所属的票据类型。-1：未知类型0：出租车发票1：定额发票2：火车票3：增值税发票5：机票行程单8：通用机打发票9：汽车票10：轮船票11：增值税发票（卷票）12：购车发票13：过路过桥费发票15：非税发票16：全电发票17：医疗发票 */
+  /** 识别出的图片所属的票据类型。-1：未知类型0：出租车发票1：定额发票2：火车票3：增值税发票5：机票行程单8：通用机打发票9：汽车票10：轮船票11：增值税发票（卷票）12：购车发票13：过路过桥费发票15：非税发票16：全电发票17：医疗发票18：完税凭证19：海关缴款书 */
   Type?: number;
   /** 该发票在原图片中的四点坐标。 */
   Polygon?: Polygon;
@@ -1826,6 +1834,10 @@ declare interface SingleInvoiceItem {
   ElectronicTrainTicketFull?: ElectronicTrainTicketFull | null;
   /** 电子发票（机票行程单） */
   ElectronicFlightTicketFull?: ElectronicFlightTicketFull | null;
+  /** 完税凭证 */
+  TaxPayment?: TaxPayment | null;
+  /** 海关缴款 */
+  CustomsPaymentReceipt?: CustomsPaymentReceipt | null;
 }
 
 /** 智慧表单上传文件信息 */
@@ -1930,6 +1942,14 @@ declare interface TableInfo {
 declare interface TableTitle {
   /** 表格名称 */
   Text: string | null;
+}
+
+/** 完税凭证 */
+declare interface TaxPayment {
+  /** 发票名称 */
+  Title?: string;
+  /** 识别出的字段名称(关键字)，支持以下字段：税号 、纳税人识别号 、纳税人名称 、金额合计大写 、金额合计小写 、填发日期 、税务机关 、填票人。示例值：纳税人识别号 */
+  Content?: OtherInvoiceItem[];
 }
 
 /** 出租车发票 */

@@ -1772,6 +1772,10 @@ declare interface OriginDetail {
   VodeoDistributionRange?: string;
   /** MO 存储桶 ID，分发范围(DistributionRange)为存储桶(Bucket)时必填 */
   VodeoBucketId?: string;
+  /** 云点播回源范围，当 OriginType = VOD 时该参数会返回值。取值有:all：当前源站对应的云点播应用内所有文件，默认值为 all； bucket：当前源站对应的云点播应用下指定某一个存储桶内的文件。通过参数 VodBucketId 来指定存储桶。 */
+  VodOriginScope?: string;
+  /** 云点播存储桶 ID，该参数当 OriginType = VOD 且 VodOriginScope = bucket 时必填。数据来源：云点播专业版应用下存储桶的存储 ID 。 */
+  VodBucketId?: string;
 }
 
 /** 源站组信息 */
@@ -1862,6 +1866,10 @@ declare interface OriginInfo {
   VodeoDistributionRange?: string;
   /** VODEO 存储桶 ID，该参数当 OriginType = VODEO 且 VodeoDistributionRange = Bucket 时必填。 */
   VodeoBucketId?: string;
+  /** 云点播回源范围，该参数当 OriginType = VOD 时生效。取值有：all：当前源站对应的云点播应用内所有文件，默认值为 all；bucket：当前源站对应的云点播应用下指定某一个存储桶内的文件。通过参数 VodBucketId 来指定存储桶。 */
+  VodOriginScope?: string;
+  /** VOD 存储桶 ID，该参数当 OriginType = VOD 且 VodOriginScope = bucket 时必填。数据来源：云点播专业版应用下存储桶的存储 ID 。 */
+  VodBucketId?: string;
 }
 
 /** 对象存储源站私有鉴权参数。 */

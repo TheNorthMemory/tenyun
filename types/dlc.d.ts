@@ -367,15 +367,15 @@ declare interface DataEngineBasicInfo {
   /** 更新时间 */
   UpdateTime?: number;
   /** 返回信息 */
-  Message?: string | null;
+  Message?: string;
   /** 引擎id */
   DataEngineId?: string;
   /** 引擎类型，有效值：PrestoSQL/SparkSQL/SparkBatch */
-  DataEngineType?: string | null;
+  DataEngineType?: string;
   /** 用户ID */
-  AppId?: number | null;
+  AppId?: number;
   /** 账号ID */
-  UserUin?: string | null;
+  UserUin?: string;
 }
 
 /** 引擎配置信息 */
@@ -391,9 +391,9 @@ declare interface DataEngineConfigInstanceInfo {
 /** 引擎配置 */
 declare interface DataEngineConfigPair {
   /** 配置项 */
-  ConfigItem: string | null;
+  ConfigItem: string;
   /** 配置值 */
-  ConfigValue: string | null;
+  ConfigValue: string;
 }
 
 /** 集群大版本镜像信息。 */
@@ -543,21 +543,21 @@ declare interface DataEngineInfo {
 /** 引擎规格详情 */
 declare interface DataEngineScaleInfo {
   /** 引擎ID */
-  DataEngineId?: string | null;
+  DataEngineId?: string;
   /** 引擎名称 */
-  DataEngineName?: string | null;
+  DataEngineName?: string;
   /** 引擎规格详情 */
-  ScaleDetail?: DataEngineScaleInfoDetail[] | null;
+  ScaleDetail?: DataEngineScaleInfoDetail[];
 }
 
 /** 引擎规格详情 */
 declare interface DataEngineScaleInfoDetail {
   /** 统计开始时间，格式为：yyyy-MM-dd HH:mm:ss */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 统计结束时间，格式为：yyyy-MM-dd HH:mm:ss */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 当前统计时间段，引擎规格 */
-  CU?: number | null;
+  CU?: number;
 }
 
 /** 数据表数据格式。 */

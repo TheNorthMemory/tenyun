@@ -661,11 +661,11 @@ declare interface DescribeRecordInfoRequest {
 
 declare interface DescribeRecordInfoResponse {
   /** 录制信息。 */
-  RecordInfo: RecordInfo[] | null;
+  RecordInfo?: RecordInfo[];
   /** 录制类型：1代表单流 2代表混流 3代表单流和混流。 */
-  RecordMode: number;
+  RecordMode?: number;
   /** 房间ID。 */
-  RoomId: string;
+  RoomId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -681,9 +681,9 @@ declare interface DescribeRoomInfoRequest {
 
 declare interface DescribeRoomInfoResponse {
   /** 操作结果, 0成功, 非0失败 */
-  Result?: number | null;
+  Result?: number;
   /** 房间用户信息 */
-  RoomUsers?: RoomUser[] | null;
+  RoomUsers?: RoomUser[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -699,7 +699,7 @@ declare interface DescribeScanResultListRequest {
 
 declare interface DescribeScanResultListResponse {
   /** 要查询的语音检测任务的结果 */
-  Data?: DescribeScanResult[] | null;
+  Data?: DescribeScanResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -713,11 +713,11 @@ declare interface DescribeTaskInfoRequest {
 
 declare interface DescribeTaskInfoResponse {
   /** 进行中的任务taskid（StartRecord接口返回）。 */
-  TaskId: number | null;
+  TaskId?: number;
   /** 录制类型：1代表单流 2代表混流 3代表单流和混流。 */
-  RecordMode: number | null;
+  RecordMode?: number;
   /** 指定订阅流白名单或者黑名单。 */
-  SubscribeRecordUserIds: SubscribeRecordUserIds | null;
+  SubscribeRecordUserIds?: SubscribeRecordUserIds;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -751,7 +751,7 @@ declare interface GetCustomizationListRequest {
 
 declare interface GetCustomizationListResponse {
   /** 语音消息转文本热句模型配置 */
-  CustomizationConfigs?: CustomizationConfigs[] | null;
+  CustomizationConfigs?: CustomizationConfigs[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -903,7 +903,7 @@ declare interface UpdateScanRoomsRequest {
 
 declare interface UpdateScanRoomsResponse {
   /** 返回结果码 */
-  ErrorCode?: number | null;
+  ErrorCode?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

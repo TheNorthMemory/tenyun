@@ -31,13 +31,13 @@ declare interface AclConfigRelation {
 /** Anycast转外套餐详情 */
 declare interface AnycastOutPackRelation {
   /** 业务带宽(单位M) */
-  NormalBandwidth: number | null;
+  NormalBandwidth?: number | null;
   /** 转发规则数 */
-  ForwardRulesLimit: number | null;
+  ForwardRulesLimit?: number | null;
   /** 自动续费标记 */
-  AutoRenewFlag: number | null;
+  AutoRenewFlag?: number | null;
   /** 到期时间 */
-  CurDeadline: string | null;
+  CurDeadline?: string | null;
 }
 
 /** 高防IP资产实例信息 */
@@ -241,25 +241,25 @@ declare interface BGPInstance {
 /** 高防包资产实例的规格信息 */
 declare interface BGPInstanceSpecification {
   /** 保底防护峰值，单位Gbps */
-  ProtectBandwidth: number;
+  ProtectBandwidth?: number;
   /** 防护次数，单位次 */
-  ProtectCountLimit: number;
+  ProtectCountLimit?: number;
   /** 防护IP数，单位个 */
-  ProtectIPNumberLimit: number;
+  ProtectIPNumberLimit?: number;
   /** 自动续费状态，取值[0：没有开启自动续费1：开启了自动续费] */
-  AutoRenewFlag: number;
+  AutoRenewFlag?: number;
   /** 联合产品标记，0代表普通高防包，1代表联合高防包 */
-  UnionPackFlag: number | null;
+  UnionPackFlag?: number | null;
   /** 业务带宽 */
-  ServiceBandWidth: number | null;
+  ServiceBandWidth?: number | null;
   /** 战斗服版本标记，0表示普通高防包，1表示战斗服高防包 */
-  BattleEditionFlag: number | null;
+  BattleEditionFlag?: number | null;
   /** 渠道版标记，0表示普通高防包，1表示渠道版高防包 */
-  ChannelEditionFlag: number | null;
+  ChannelEditionFlag?: number | null;
   /** 高防包企业版标记，0表示普通高防包；1表示企业版高防包 */
-  EnterpriseFlag: number | null;
+  EnterpriseFlag?: number | null;
   /** 高防包企业版弹性阈值，0表示未开启；大于0为弹性防护阈值 */
-  ElasticLimit: number | null;
+  ElasticLimit?: number | null;
   /** 降配后的防护能力，单位Gbps */
   DownGradeProtect?: number | null;
 }
@@ -908,8 +908,10 @@ declare interface NewL7RuleEntry {
   CCStatus?: number;
   /** HTTPS协议的CC防护状态，取值[0(关闭), 1(开启)] */
   CCEnable?: number;
-  /** HTTPS协议的CC防护阈值 */
+  /** HTTPS协议的CC防护阈值（已废弃） */
   CCThreshold?: number;
+  /** HTTPS协议的CC防护阈值 -1：默认防御阈值0: 关闭大于0：自定义防护阈值 */
+  CCThresholdNew?: number;
   /** HTTPS协议的CC防护等级 */
   CCLevel?: string;
   /** 修改时间 */
@@ -1167,15 +1169,15 @@ declare interface SpeedValue {
 /** 三网高防套餐详情 */
 declare interface StaticPackRelation {
   /** 保底带宽 */
-  ProtectBandwidth: number | null;
+  ProtectBandwidth?: number | null;
   /** 业务带宽 */
-  NormalBandwidth: number | null;
+  NormalBandwidth?: number | null;
   /** 转发规则 */
-  ForwardRulesLimit: number | null;
+  ForwardRulesLimit?: number | null;
   /** 自动续费标记 */
-  AutoRenewFlag: number | null;
+  AutoRenewFlag?: number | null;
   /** 到期时间 */
-  CurDeadline: string | null;
+  CurDeadline?: string | null;
 }
 
 /** 操作返回码，只用于返回成功的情况 */
@@ -1961,13 +1963,13 @@ declare interface DescribeCCLevelPolicyRequest {
   Ip: string;
   /** 域名 */
   Domain: string;
-  /** 协议，可取值HTTP，HTTPS */
+  /** 协议，可取值http、https、http/https */
   Protocol: string;
 }
 
 declare interface DescribeCCLevelPolicyResponse {
   /** CC防护等级，可取值loose表示宽松，strict表示严格，normal表示适中， emergency表示攻击紧急， sup_loose表示超级宽松，default表示默认策略（无频控配置下发），customized表示自定义策略 */
-  Level: string;
+  Level?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2291,9 +2293,9 @@ declare interface DescribeListBGPIPInstancesRequest {
 
 declare interface DescribeListBGPIPInstancesResponse {
   /** 总数 */
-  Total: number;
+  Total?: number;
   /** 高防IP资产实例列表 */
-  InstanceList: BGPIPInstance[];
+  InstanceList?: BGPIPInstance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2337,7 +2339,7 @@ declare interface DescribeListBGPInstancesRequest {
   FilterAssetIpList?: string[];
   /** 是否包含基础防护增强版 0: 不包含 1: 包含 */
   FilterBasicPlusFlag?: number;
-  /** 是否商业模式优化-普惠版 0: 包含商业模式优化-普惠版 1: 只查询商业模式优化-普惠版 */
+  /** 是否标准版2.0 0: 包含标准版2.0 0 1: 只查询标准版2.0 0 2: 不查标准版2.0 */
   FilterPlanCntFlag?: number;
   /** 是否跨区域产品 0: 不包含跨区域产品 1: 中国大陆跨区域产品 2: 非中国大陆跨区域产品 3: 包含全部 */
   FilterTransRegionFlag?: number;
@@ -2815,7 +2817,7 @@ declare interface ModifyCCLevelPolicyRequest {
   Ip: string;
   /** 域名 */
   Domain: string;
-  /** 协议，可取值HTTP，HTTPS */
+  /** 协议，可取值http、https、http/https */
   Protocol: string;
   /** CC防护等级，可取值loose表示宽松，strict表示严格，normal表示适中， emergency表示攻击紧急， sup_loose表示超级宽松，default表示默认策略（无频控配置下发），customized表示自定义策略 */
   Level: string;

@@ -1155,10 +1155,12 @@ declare interface DescribeClusterConfigsRequest {
   ConfigType?: number;
   /** 模糊搜索关键字文件 */
   FileName?: string;
-  /** 0集群维度 1节点维度 */
+  /** 0集群维度 1节点维度 2启动脚本 3计算组维度 */
   ClusterConfigType?: number;
   /** eth0的ip地址 */
   IPAddress?: string;
+  /** 计算组id */
+  ComputeGroupId?: string;
 }
 
 declare interface DescribeClusterConfigsResponse {

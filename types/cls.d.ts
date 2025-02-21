@@ -1062,6 +1062,8 @@ declare interface LogRechargeRuleInfo {
   Metadata?: string[] | null;
   /** 日志Key列表，RechargeType为full_regex_log时必填 */
   Keys?: string[] | null;
+  /** json解析模式，开启首层数据解析 */
+  ParseArray?: boolean;
 }
 
 /** 日志集相关信息 */

@@ -37,7 +37,6 @@ const X_TC_LANGUAGE = 'X-TC-Language';
 export const LANGUAGES = ['zh-CN', 'en-US'];
 
 export const SERVICE_VERSIONS = {
-  aa: ['2020-02-24'],
   aai: ['2018-05-22'],
   aca: ['2021-03-23'],
   acp: ['2022-01-05'],

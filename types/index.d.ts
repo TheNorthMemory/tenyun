@@ -3,7 +3,6 @@
 import { BinaryLike } from "crypto";
 import { AxiosInstance, AxiosRequestConfig, AxiosPromise, AxiosRequestHeaders, AxiosResponseHeaders } from "axios";
 
-import Aa, { Versions as AaVersions } from "./aa";
 import Aai, { Versions as AaiVersions } from "./aai";
 import Aca, { Versions as AcaVersions } from "./aca";
 import Acp, { Versions as AcpVersions } from "./acp";
@@ -271,7 +270,6 @@ import Yunsou, { Versions as YunsouVersions } from "./yunsou";
 export declare type LANGUAGES = ["zh-CN", "en-US"];
 
 export declare type SERVICE_VERSIONS = {
-  aa: AaVersions,
   aai: AaiVersions,
   aca: AcaVersions,
   acp: AcpVersions,
@@ -557,8 +555,6 @@ declare interface CloudInstance {
 }
 
 declare type TenYun = CloudInstance & CloudServices & {
-  /** {@link Aa 活动防刷} */
-  aa: Aa,
   aai: Aai,
   /** {@link Aca AI 临床助手} */
   aca: Aca,

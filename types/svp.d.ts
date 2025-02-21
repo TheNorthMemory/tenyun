@@ -63,9 +63,9 @@ declare interface SavingPlanOverviewDetail {
   /** 地域 */
   Region?: string[];
   /** 支付类型 */
-  PayType?: number | null;
+  PayType?: number;
   /** 购买时间 yyyy-mm-dd HH:mm:ss格式 */
-  BuyTime?: string | null;
+  BuyTime?: string;
 }
 
 /** 节省计划使用率数据 */
@@ -89,7 +89,7 @@ declare interface SavingPlanUsageDetail {
   /** 累计成本金额（单位：元） */
   CostAmount?: string;
   /** 地域 */
-  Region?: string[] | null;
+  Region?: string[];
 }
 
 declare interface CreateSavingPlanOrderRequest {
