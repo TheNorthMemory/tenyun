@@ -10,6 +10,7 @@ const ACTION = Symbol('ACTION');
 const SERVICE = Symbol('SERVICE');
 const SECRET_ID = Symbol('SECRET_ID');
 const SECRET_KEY = Symbol('SECRET_KEY');
+const BUSINESS_ERR_INTERCEPTOR = Symbol('BUSINESS_ERR_INTERCEPTOR');
 const AUTHORIZATION = 'Authorization';
 const CONTENT_TYPE = 'Content-Type';
 const BASE_DOMAIN = '.tencentcloudapi.com';
@@ -29,6 +30,7 @@ const X_TC_LANGUAGE = 'X-TC-Language';
  * @typedef {import('axios').AxiosInstance} AxiosInstance
  * @typedef {import('axios').AxiosRequestConfig} AxiosRequestConfig
  * @typedef {import('axios').AxiosRequestHeaders} AxiosRequestHeaders
+ * @typedef {import('axios').AxiosResponse} AxiosResponse
  * @typedef {import('axios').AxiosResponseHeaders} AxiosResponseHeaders
  * @typedef {() => string[]} ServiceEndpoint
  * @typedef {(data?: object|Buffer, config?: AxiosRequestConfig) => AxiosPromise} ServiceActionRequest
@@ -312,6 +314,8 @@ const timestamp = () => Date.now() / 1e3 | 0;
 
 const toUTCYMD = (...val) => (new Date(...val)).toJSON().substring(0, 10);
 
+class BusinessError extends Error {}
+
 class TenYun {
   /**
    * @param {string} SecretId - The SecretId
@@ -322,15 +326,41 @@ class TenYun {
   constructor(SecretId, SecretKey, Token, Region) {
     this[SECRET_ID] = SecretId;
     this[SECRET_KEY] = createSecretKey(Buffer.concat([Buffer.from('TC3'), Buffer.from(SecretKey)]));
-    Object.defineProperty(this, CLIENT, {
-      value: axios.create({
-        transformRequest: [].concat(axios.defaults.transformRequest, this.signer),
-        transformResponse: [].concat(axios.defaults.transformResponse, this.verifier),
-        headers: { [X_TC_LANGUAGE]: LANGUAGES.slice().shift(), ...(Token ? { [X_TC_TOKEN]: Token } : 0), ...(Region ? { [X_TC_REGION]: Region } : 0) },
-      }),
+    const value = axios.create({
+      transformRequest: [].concat(axios.defaults.transformRequest, this.signer),
+      transformResponse: [].concat(axios.defaults.transformResponse, this.verifier),
+      headers: { [X_TC_LANGUAGE]: LANGUAGES.slice().shift(), ...(Token ? { [X_TC_TOKEN]: Token } : 0), ...(Region ? { [X_TC_REGION]: Region } : 0) },
     });
+    value.interceptors.response.use(this[BUSINESS_ERR_INTERCEPTOR]);
+    Object.defineProperty(this, CLIENT, { value });
 
     return new Proxy(this, { get: this[SERVICE] });
+  }
+
+  get [BUSINESS_ERR_INTERCEPTOR]() {
+    /**
+     * @param {AxiosResponse} thing
+     */
+    return (thing) => {
+      if (thing?.data instanceof BusinessError) {
+        throw new axios.AxiosError(
+          thing.data.message,
+          thing.data.code,
+          thing.config,
+          thing.request,
+          {
+            status: thing.status,
+            statusText: thing.statusText,
+            headers: thing.headers,
+            data: thing.data.data,
+            config: thing.config,
+            request: thing.request
+          }
+        );
+      }
+
+      return thing;
+    }
   }
 
   get [SERVICE]() {
@@ -436,10 +466,11 @@ class TenYun {
       if (typeof data === 'object' && data !== null) {
         Reflect.deleteProperty(headers, 'content-length');
         if (data?.Response?.Error) {
-          const err = new Error(data.Response.Error?.Message);
+          const err = new BusinessError(data.Response.Error?.Message);
           err.code = data.Response.Error?.Code;
           err.data = data.Response;
-          throw err;
+
+          return err;
         }
 
         return data?.Response;
