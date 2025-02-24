@@ -416,6 +416,34 @@ declare interface DescribeGeneralMetricDataResponse {
   RequestId?: string;
 }
 
+declare interface DescribeGeneralOTSpanListRequest {
+  /** 业务系统 ID */
+  InstanceId: string;
+  /** Span 查询开始时间戳（单位：秒） */
+  StartTime: number;
+  /** Span 查询结束时间戳（单位：秒） */
+  EndTime: number;
+  /** 通用过滤参数 */
+  Filters?: Filter[];
+  /** 排序现支持的 Key 有：- startTime(开始时间)- endTime(结束时间)- duration(响应时间)现支持的 Value 有：- desc(降序排序)- asc(升序排序) */
+  OrderBy?: OrderBy;
+  /** 业务自身服务名，控制台用户请填写taw */
+  BusinessName?: string;
+  /** 单页项目个数，默认为10000，合法取值范围为0～10000 */
+  Limit?: number;
+  /** 分页 */
+  Offset?: number;
+}
+
+declare interface DescribeGeneralOTSpanListResponse {
+  /** 总数量 */
+  TotalCount?: number;
+  /** 装有查询结果 Spans 的 Trace 结构体。OpenTelemetry 标准 Trace 结构体哈希后的字符串，先将 Trace 利用 ptrace.JSONMarshaler 转换成 Json 字符串，再用 gzip 压缩，最后转换成 base64 标准的字符串。 */
+  Spans?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeGeneralSpanListRequest {
   /** 业务系统 ID */
   InstanceId?: string;
@@ -631,6 +659,8 @@ declare interface Apm {
   DescribeGeneralApmApplicationConfig(data: DescribeGeneralApmApplicationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralApmApplicationConfigResponse>;
   /** 获取指标数据通用接口 {@link DescribeGeneralMetricDataRequest} {@link DescribeGeneralMetricDataResponse} */
   DescribeGeneralMetricData(data: DescribeGeneralMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralMetricDataResponse>;
+  /** 通用查询 OpenTelemetry 调用链列表 {@link DescribeGeneralOTSpanListRequest} {@link DescribeGeneralOTSpanListResponse} */
+  DescribeGeneralOTSpanList(data: DescribeGeneralOTSpanListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralOTSpanListResponse>;
   /** 通用查询调用链列表 {@link DescribeGeneralSpanListRequest} {@link DescribeGeneralSpanListResponse} */
   DescribeGeneralSpanList(data?: DescribeGeneralSpanListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralSpanListResponse>;
   /** 通用指标列表接口 {@link DescribeMetricRecordsRequest} {@link DescribeMetricRecordsResponse} */

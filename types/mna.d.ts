@@ -159,7 +159,7 @@ declare interface DevicePayModeInfo {
   /** 付费模式描述 */
   PayModeDesc?: string;
   /** 流量包ID，仅当付费模式为流量包类型时才有。 */
-  ResourceId?: string | null;
+  ResourceId?: string;
 }
 
 /** 用户期望门限 */
@@ -197,7 +197,7 @@ declare interface FlowPackageInfo {
   /** 流量包状态，0：未生效，1：有效期内，2：已过期 */
   Status?: number;
   /** 购买时间，Unix时间戳格式，单位：秒 */
-  CreateTime?: number | null;
+  CreateTime?: number;
   /** 生效时间，Unix时间戳格式，单位：秒 */
   ActiveTime?: number;
   /** 过期时间，Unix时间戳格式，单位：秒 */
@@ -229,7 +229,7 @@ declare interface GroupInfo {
   /** 分组更新的时间，单位：ms */
   UpdateTime?: string;
   /** 分组描述 */
-  Description?: string | null;
+  Description?: string;
   /** 分组中的设备数量 */
   DeviceNum?: number;
 }
@@ -237,45 +237,45 @@ declare interface GroupInfo {
 /** 新建Hardware入参 */
 declare interface Hardware {
   /** 硬件序列号 */
-  SN: string | null;
+  SN: string;
   /** license计费模式：1，租户付费2，厂商月付费3，厂商永久授权 */
-  LicenseChargingMode: number | null;
+  LicenseChargingMode: number;
   /** 设备描述 */
-  Description?: string | null;
+  Description?: string;
   /** 硬件ID，入参无需传递 */
-  HardwareId?: string | null;
+  HardwareId?: string;
 }
 
 /** 硬件信息 */
 declare interface HardwareInfo {
   /** 设备ID */
-  DeviceId?: string | null;
+  DeviceId?: string;
   /** 设备名称 */
-  DeviceName?: string | null;
+  DeviceName?: string;
   /** 激活时间 */
-  ActiveTime?: string | null;
+  ActiveTime?: string;
   /** 最后在线时间 */
-  LastOnlineTime?: string | null;
+  LastOnlineTime?: string;
   /** 备注 */
-  Description?: string | null;
+  Description?: string;
   /** 厂商备注 */
-  VendorDescription?: string | null;
+  VendorDescription?: string;
   /** license计费模式： 1，租户月付费 2，厂商月付费 3，license永久授权注：后续将废弃此参数，新接入请使用LicensePayMode和Payer */
-  LicenseChargingMode?: number | null;
+  LicenseChargingMode?: number;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 硬件序列号 */
-  SN?: string | null;
+  SN?: string;
   /** license授权有效期 0：月度授权 1：永久授权 */
-  LicensePayMode?: number | null;
+  LicensePayMode?: number;
   /** 付费方 0：客户付费 1：厂商付费 */
-  Payer?: number | null;
+  Payer?: number;
   /** 设备分组ID */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 设备分组名称 */
-  GroupName?: string | null;
+  GroupName?: string;
   /** 设备无流量包处理方式，0: 按量付费，1: 截断加速 */
-  FlowTrunc?: number | null;
+  FlowTrunc?: number;
 }
 
 /** 三层互通规则信息 */
@@ -293,17 +293,17 @@ declare interface L3ConnInfo {
   /** 互通规则启用状态 */
   Enable?: boolean;
   /** 互通规则描述 */
-  Description?: string | null;
+  Description?: string;
 }
 
 /** 流量监控指标 */
 declare interface MonitorData {
   /** 时间点：s */
-  Time: string;
+  Time?: string;
   /** 业务指标（bps/ms/%） */
-  BusinessMetrics: number | null;
+  BusinessMetrics?: number;
   /** 网卡状态信息 */
-  SlotNetInfo: SlotNetInfo[] | null;
+  SlotNetInfo?: SlotNetInfo[];
 }
 
 /** 网络详细信息 */
@@ -329,11 +329,11 @@ declare interface NetworkData {
 /** 网卡流量指标数据 */
 declare interface SlotNetInfo {
   /** 网卡名 */
-  NetInfoName: string | null;
+  NetInfoName?: string;
   /** 公网IP */
-  PublicIP: string | null;
+  PublicIP?: string;
   /** 指标数据（bps/ms/%） */
-  Current: number | null;
+  Current?: number;
 }
 
 /** 移动网络加速源地址结构体 */
@@ -371,7 +371,7 @@ declare interface VendorHardware {
   /** 激活状态， 空：全部； 1:待激活； 2:已激活 */
   Status?: number;
   /** 激活时间 */
-  ActiveTime?: string | null;
+  ActiveTime?: string;
   /** 厂商备注 */
   Description?: string;
   /** 设备id */
@@ -379,7 +379,7 @@ declare interface VendorHardware {
   /** license计费模式： 1，租户月付费 2，厂商月付费 3，license永久授权注：设备为租户付费且未激活（未选择月付还是永久付费）时，此参数返回1，仅代表租户付费。后续将废弃此参数，新接入请使用LicensePayMode和Payer */
   LicenseChargingMode?: number;
   /** 最后在线时间 */
-  LastOnlineTime?: string | null;
+  LastOnlineTime?: string;
   /** license授权有效期0：月度授权1：永久授权-1：未知 */
   LicensePayMode?: number;
   /** 付费方0：客户付费1：厂商付费 */

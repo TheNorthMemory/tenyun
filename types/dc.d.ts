@@ -28,6 +28,8 @@ declare interface AccessPoint {
   AccessPointType?: string;
   /** 端口规格信息。 */
   AvailablePortInfo?: PortSpecification[];
+  /** 接入点地址。 */
+  Address?: string;
 }
 
 /** BFD配置信息 */

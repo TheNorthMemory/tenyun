@@ -1136,8 +1136,20 @@ declare interface LoadAutoScaleStrategy {
   ConfigGroupAssigned?: string;
   /** 扩容资源计算方法，"DEFAULT","INSTANCE", "CPU", "MEMORYGB"。"DEFAULT"表示默认方式，与"INSTANCE"意义相同。"INSTANCE"表示按照节点计算，默认方式。"CPU"表示按照机器的核数计算。"MEMORYGB"表示按照机器内存数计算。 */
   MeasureMethod?: string;
+  /** 节点部署服务列表，例如["HDFS-3.1.2","YARN-3.1.2"]。 */
+  SoftDeployDesc?: string[] | null;
+  /** 启动进程列表，例如["NodeManager"]。 */
+  ServiceNodeDesc?: string;
+  /** 启动进程列表。 */
+  ServiceNodeInfo?: number[] | null;
+  /** 节点部署服务列表。部署服务仅填写HDFS、YARN。[组件名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760) */
+  SoftDeployInfo?: number[] | null;
   /** 多指标触发条件 */
   LoadMetricsConditions?: LoadMetricsConditions | null;
+  /** 伸缩组Id */
+  GroupId?: number;
+  /** soft例如yarn */
+  Soft?: string;
 }
 
 /** 负载指标条件 */
