@@ -1,6 +1,6 @@
 /* eslint no-bitwise: ["error", { "allow": ["|"] }], no-nested-ternary: 0, class-methods-use-this: 0, no-constructor-return: 0 */
-import { createHmac, createHash, createSecretKey } from 'crypto';
-import axios from 'axios';
+const { createHmac, createHash, createSecretKey } = require('crypto');
+const axios = require('axios');
 
 const HEX = 'hex';
 const SHA256 = 'sha256';
@@ -36,9 +36,9 @@ const X_TC_LANGUAGE = 'X-TC-Language';
  * @typedef {(data?: object|Buffer, config?: AxiosRequestConfig) => AxiosPromise} ServiceActionRequest
  */
 
-export const LANGUAGES = ['zh-CN', 'en-US'];
+const LANGUAGES = ['zh-CN', 'en-US'];
 
-export const SERVICE_VERSIONS = {
+const SERVICE_VERSIONS = {
   aai: ['2018-05-22'],
   aca: ['2021-03-23'],
   acp: ['2022-01-05'],
@@ -484,6 +484,12 @@ class TenYun {
    * @returns {AxiosInstance} - The Axios instance
    */
   get client() { return this[CLIENT]; }
+
+  static get default() { return this; }
+
+  static get LANGUAGES() { return LANGUAGES; }
+
+  static get SERVICE_VERSIONS() { return SERVICE_VERSIONS; }
 }
 
-export default TenYun;
+module.exports = TenYun;

@@ -2,40 +2,39 @@
   "name": "tenyun",
   "version": "0.12.0",
   "description": "Promise based and chained Tencent Cloud OpenAPI client for NodeJS",
-  "main": "index.cjs",
+  "main": "index.js",
   "types": "types/index.d.ts",
-  "type": "module",
   "exports": {
     ".": {
       "node": {
         "import": {
           "types": "./types/index.d.ts",
-          "default": "./index.js"
+          "default": "./index.mjs"
         },
         "require": {
           "types": "./types/index.d.ts",
-          "default": "./index.cjs"
+          "default": "./index.js"
         }
       },
       "import": {
         "types": "./types/index.d.ts",
-        "default": "./index.js"
+        "default": "./index.mjs"
       },
       "require": {
         "types": "./types/index.d.ts",
-        "default": "./index.cjs"
+        "default": "./index.js"
       },
       "types": "./types/index.d.ts",
-      "default": "./index.js"
+      "default": "./index.mjs"
     },
     "./node": {
       "import": {
         "types": "./types/index.d.ts",
-        "default": "./index.js"
+        "default": "./index.mjs"
       },
       "require": {
         "types": "./types/index.d.ts",
-        "default": "./index.cjs"
+        "default": "./index.js"
       }
     },
     "./package.json": "./package.json"
@@ -51,7 +50,7 @@
   },
   "files": [
     "index.js",
-    "index.cjs",
+    "index.mjs",
     "types/",
     "README.md",
     "LICENSE"
