@@ -385,19 +385,19 @@ declare interface IVRKeyPressedElement {
 /** 单条消息 */
 declare interface Message {
   /** 消息类型 */
-  Type: string;
+  Type?: string;
   /** 消息内容 */
-  Content: string;
+  Content?: string;
 }
 
 /** 聊天消息 */
 declare interface MessageBody {
   /** 消息时间戳 */
-  Timestamp: number;
+  Timestamp?: number;
   /** 发消息的用户ID */
-  From: string;
+  From?: string;
   /** 消息列表 */
-  Messages: Message[];
+  Messages?: Message[];
 }
 
 /** 号码信息 */

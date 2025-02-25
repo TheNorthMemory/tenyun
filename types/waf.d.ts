@@ -298,7 +298,7 @@ declare interface BatchIpAccessControlItem {
   Ip?: string;
   /** 备注 */
   Note?: string;
-  /** 添加路径 */
+  /** batch为批量域名，batch-group为防护对象组 */
   Source?: string;
   /** 修改时间 */
   TsVersion?: number;
@@ -320,6 +320,8 @@ declare interface BatchIpAccessControlItem {
   JobDateTime?: JobDateTime;
   /** 生效状态 */
   ValidStatus?: number;
+  /** 防护对象组ID列表，如果绑定的是防护对象组 */
+  GroupIds?: number[];
 }
 
 /** Bot资源信息 */
@@ -756,6 +758,8 @@ declare interface DescribeCustomRulesRspRuleListItem {
   PageId?: string;
   /** 域名 */
   Domain?: string;
+  /** 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系 */
+  LogicalOp?: string;
 }
 
 /** domain列表 */
@@ -970,6 +974,10 @@ declare interface DomainsPartInfo {
   Labels?: string[];
   /** 拨测状态。 0: 禁用拨测, 1: 启用拨测 */
   ProbeStatus?: number;
+  /** 回源策略。0：负载均衡回源1：分流回源 */
+  UpstreamPolicy?: number;
+  /** 分流回源策略 */
+  UpstreamRules?: UpstreamRule[];
 }
 
 /** 下载攻击日志记录数据项 */
@@ -1427,11 +1435,11 @@ declare interface IpHitItemsData {
 /** 规则执行的时间结构体 */
 declare interface JobDateTime {
   /** 定时执行的时间参数 */
-  Timed?: TimedJob[];
+  Timed?: TimedJob[] | null;
   /** 周期执行的时间参数 */
-  Cron?: CronJob[];
+  Cron?: CronJob[] | null;
   /** 时区 */
-  TimeTZone?: string;
+  TimeTZone?: string | null;
 }
 
 /** Key-Value的形式，Value为Int */
@@ -1838,9 +1846,9 @@ declare interface SpartaProtectionPort {
 
 /** 规则的匹配条件结构体 */
 declare interface Strategy {
-  /** 匹配字段 匹配字段不同，相应的匹配参数、逻辑符号、匹配内容有所不同具体如下所示：匹配字段匹配参数逻辑符号匹配内容IP（来源IP）不支持参数ipmatch（匹配）ipnmatch（不匹配）多个IP以英文逗号隔开,最多20个IPV6（来源IPv6）不支持参数ipmatch（匹配）ipnmatch（不匹配）支持单个IPV6地址Referer（Referer）不支持参数empty（内容为空）null（不存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请输入内容,512个字符以内URL（请求路径）不支持参数eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请以/开头,512个字符以内UserAgent（UserAgent）不支持参数同匹配字段Referer逻辑符号请输入内容,512个字符以内HTTP_METHOD（HTTP请求方法）不支持参数eq（等于）neq（不等于）请输入方法名称,建议大写QUERY_STRING（请求字符串）不支持参数同匹配字段请求路径逻辑符号请输入内容,512个字符以内GET（GET参数值）支持参数录入contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）请输入内容,512个字符以内GET_PARAMS_NAMES（GET参数名）不支持参数exsit（存在参数）nexsit（不存在参数）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）请输入内容,512个字符以内POST（POST参数值）支持参数录入同匹配字段GET参数值逻辑符号请输入内容,512个字符以内GET_POST_NAMES（POST参数名）不支持参数同匹配字段GET参数名逻辑符号请输入内容,512个字符以内POST_BODY（完整BODY）不支持参数同匹配字段请求路径逻辑符号请输入BODY内容,512个字符以内COOKIE（Cookie）不支持参数empty（内容为空）null（不存在）rematch（正则匹配）暂不支持GET_COOKIES_NAMES（Cookie参数名）不支持参数同匹配字段GET参数名逻辑符号请输入内容,512个字符以内ARGS_COOKIE（Cookie参数值）支持参数录入同匹配字段GET参数值逻辑符号请输入内容,512个字符以内GET_HEADERS_NAMES（Header参数名）不支持参数exsit（存在参数）nexsit（不存在参数）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请输入内容,建议小写,512个字符以内ARGS_HEADER（Header参数值）支持参数录入contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请输入内容,512个字符以内 */
+  /** 匹配字段 匹配字段不同，相应的匹配参数、逻辑符号、匹配内容有所不同具体如下所示：匹配字段匹配参数逻辑符号匹配内容IP（来源IP）不支持参数ipmatch（匹配）ipnmatch（不匹配）多个IP以英文逗号隔开,最多20个IPV6（来源IPv6）不支持参数ipmatch（匹配）ipnmatch（不匹配）支持单个IPV6地址Referer（Referer）不支持参数empty（内容为空）null（不存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请输入内容,512个字符以内URL（请求路径）不支持参数eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请以/开头,512个字符以内UserAgent（UserAgent）不支持参数同匹配字段Referer逻辑符号请输入内容,512个字符以内HTTP_METHOD（HTTP请求方法）不支持参数eq（等于）neq（不等于）请输入方法名称,建议大写QUERY_STRING（请求字符串）不支持参数同匹配字段请求路径逻辑符号请输入内容,512个字符以内GET（GET参数值）支持参数录入contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）请输入内容,512个字符以内GET_PARAMS_NAMES（GET参数名）不支持参数exsit（存在参数）nexsit（不存在参数）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）请输入内容,512个字符以内POST（POST参数值）支持参数录入同匹配字段GET参数值逻辑符号请输入内容,512个字符以内GET_POST_NAMES（POST参数名）不支持参数同匹配字段GET参数名逻辑符号请输入内容,512个字符以内POST_BODY（完整BODY）不支持参数同匹配字段请求路径逻辑符号请输入BODY内容,512个字符以内COOKIE（Cookie）不支持参数empty（内容为空）null（不存在）rematch（正则匹配）暂不支持GET_COOKIES_NAMES（Cookie参数名）不支持参数同匹配字段GET参数名逻辑符号请输入内容,512个字符以内ARGS_COOKIE（Cookie参数值）支持参数录入同匹配字段GET参数值逻辑符号请输入内容,512个字符以内GET_HEADERS_NAMES（Header参数名）不支持参数exsit（存在参数）nexsit（不存在参数）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请输入内容,建议小写,512个字符以内ARGS_HEADER（Header参数值）支持参数录入contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请输入内容,512个字符以内CONTENT_LENGTH（Content-length）支持参数录入numgt（数值大于）numlt（数值小于）numeq（数值等于）请输入0-9999999999999之间的整数IP_GEO（来源IP归属地）支持参数录入geo_in（属于）geo_not_in（不属于）请输入内容,10240字符以内，格式为序列化的JSON，格式为：[{"Country":"中国","Region":"广东","City":"深圳"}] */
   Field: string;
-  /** 逻辑符号 逻辑符号一共分为以下几种类型： empty （ 内容为空） null （不存在） eq （ 等于） neq （ 不等于） contains （ 包含） ncontains （ 不包含） strprefix （ 前缀匹配） strsuffix （ 后缀匹配） len_eq （ 长度等于） len_gt （ 长度大于） len_lt （ 长度小于） ipmatch （ 属于） ipnmatch （ 不属于） 各匹配字段对应的逻辑符号不同，详见上述匹配字段表格 */
+  /** 逻辑符号 逻辑符号一共分为以下几种类型： empty （ 内容为空） null （不存在） eq （ 等于） neq （ 不等于） contains （ 包含） ncontains （ 不包含） strprefix （ 前缀匹配） strsuffix （ 后缀匹配） len_eq （ 长度等于） len_gt （ 长度大于） len_lt （ 长度小于） ipmatch （ 属于） ipnmatch （ 不属于） numgt （ 数值大于） numlt （ 数值小于） numeq （ 数值等于） geo_in （ IP地理属于） geo_not_in （ IP地理不属于） 各匹配字段对应的逻辑符号不同，详见上述匹配字段表格 */
   CompareFunc: string;
   /** 匹配内容 目前 当匹配字段为COOKIE（Cookie）时，不需要输入 匹配内容其他都需要 */
   Content: string;
@@ -1900,6 +1908,20 @@ declare interface TimedJob {
   StartDateTime?: number;
   /** 结束时间戳，单位为秒 */
   EndDateTime?: number;
+}
+
+/** SAASWAF规则回源时的规则数据结构 */
+declare interface UpstreamRule {
+  /** 匹配的关键字。目前支持host、uri两种 */
+  KeyName: string;
+  /** 逻辑符号。equal：等于not equal：不等于belong：属于not belong：不属于 */
+  Symbol: string;
+  /** 匹配的内容。equal和not equal时，数组只能有一个元素 */
+  ContentList: string[];
+  /** 规则匹配后生效的回源地址。 */
+  AddressList: string[];
+  /** 回源负载均衡类型，仅多个回源地址时生效。0：轮询1：IP_HASH */
+  BalanceType: number;
 }
 
 /** saas和clb信息 */
@@ -2193,6 +2215,8 @@ declare interface AddCustomRuleRequest {
   Status?: number;
   /** 拦截页面id */
   PageId?: string;
+  /** 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系 */
+  LogicalOp?: string;
 }
 
 declare interface AddCustomRuleResponse {
@@ -2209,14 +2233,14 @@ declare interface AddCustomWhiteRuleRequest {
   Name: string;
   /** 优先级 */
   SortId: string;
-  /** 过期时间 */
-  ExpireTime: string;
   /** 策略详情 */
   Strategies: Strategy[];
   /** 需要添加策略的域名 */
   Domain: string;
-  /** 放行的详情 */
+  /** 放行的模块，多个模块之间用逗号连接。支持的模块：acl（自定义规则）、owasp（规则引擎）、webshell（恶意文件检测）、geoip（地域封禁）、bwip（IP黑白名单）、cc、botrpc（BOT防护）、antileakage（信息防泄露）、api（API安全）、ai（AI引擎）、ip_auto_deny（IP封禁）、applet（小程序流量风控） */
   Bypass: string;
+  /** 如果没有设置JobDateTime字段则用此字段，0表示永久生效，其它表示定时生效的截止时间（单位为秒） */
+  ExpireTime?: string;
   /** 规则执行的方式，TimedJob为定时执行，CronJob为周期执行 */
   JobType?: string;
   /** 定时任务配置 */
@@ -2343,6 +2367,10 @@ declare interface AddSpartaProtectionRequest {
   GmEncPrivateKey?: string;
   /** GmCertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id */
   GmSSLId?: string;
+  /** 回源策略，支持负载均衡回源和分流回源两种方式。0：默认值，负载均衡回源；1：分流回源 */
+  UpstreamPolicy?: number;
+  /** 分流回源时生效，分流回源的规则。 */
+  UpstreamRules?: UpstreamRule[];
 }
 
 declare interface AddSpartaProtectionResponse {
@@ -3043,7 +3071,7 @@ declare interface DescribeAutoDenyIPResponse {
 }
 
 declare interface DescribeBatchIpAccessControlRequest {
-  /** 筛选条件，支持 ActionType，可选的值为40（白名单）42（黑名单），ValidStatus，可选的值为1（生效）0（过期） */
+  /** 筛选条件，支持 ActionType（可选的值为40：白名单，42：黑名单），ValidStatus（可选的值0：全部，1：生效，2：过期），Ip，Domains（域名列表），GroupId（防护对象组ID），GroupName（防护对象组名），RuleId（规则ID），TimerType（生效方式，1：永久生效，2：定时生效，3：按周周期生效，4：按月周期生效） */
   Filters: FiltersItemNew[];
   /** 偏移 */
   OffSet?: number;
@@ -3499,7 +3527,7 @@ declare interface DescribeIpAccessControlRequest {
   Sort?: string;
   /** IP */
   Ip?: string;
-  /** 生效状态 */
+  /** 生效状态，1表示生效中，2表示过期，0表示全部 */
   ValidStatus?: number;
   /** 最小有效时间的时间戳 */
   ValidTimeStampMin?: string;
@@ -3507,7 +3535,7 @@ declare interface DescribeIpAccessControlRequest {
   ValidTimeStampMax?: string;
   /** 规则ID */
   RuleId?: number;
-  /** 定时任务类型筛选0 1 2 3 4 */
+  /** 0表示全部，1表示永久生效，2表示定时生效，3表示周粒度生效，4表示月粒度生效 */
   TimerType?: number;
 }
 
@@ -3537,13 +3565,13 @@ declare interface DescribeIpHitItemsRequest {
   CtsMax?: number;
   /** 偏移参数 */
   Skip?: number;
-  /** 限制数目 */
+  /** 限制数目，category不等于threat_intelligence时，该值需要必传 */
   Limit?: number;
   /** 策略名称 */
   Name?: string;
   /** 排序参数 */
   Sort?: string;
-  /** IP */
+  /** IP,category传threat_intelligence的时候，该值必传 */
   Ip?: string;
   /** 有效时间最小时间戳 */
   ValidTimeStampMin?: number;
@@ -4383,6 +4411,8 @@ declare interface ModifyCustomRuleRequest {
   Status?: number;
   /** 拦截页面id */
   PageId?: string;
+  /** 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系 */
+  LogicalOp?: string;
 }
 
 declare interface ModifyCustomRuleResponse {
@@ -4423,7 +4453,7 @@ declare interface ModifyCustomWhiteRuleRequest {
   Bypass: string;
   /** 优先级，1~100的整数，数字越小，代表这条规则的执行优先级越高。 */
   SortId: number;
-  /** 规则生效截止时间，0：永久生效，其它值为对应时间的时间戳。 */
+  /** 如果没有设置JobDateTime字段则用此字段，0表示永久生效，其它表示定时生效的截止时间（单位为秒） */
   ExpireTime: number;
   /** 匹配条件数组 */
   Strategies: Strategy[];
@@ -4849,6 +4879,10 @@ declare interface ModifySpartaProtectionRequest {
   GmEncPrivateKey?: string;
   /** GmCertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id */
   GmSSLId?: string;
+  /** 回源策略，支持负载均衡回源和分流回源两种方式。0：默认值，负载均衡回源；1：分流回源 */
+  UpstreamPolicy?: number;
+  /** 分流回源时生效，分流回源的规则。 */
+  UpstreamRules?: UpstreamRule[];
 }
 
 declare interface ModifySpartaProtectionResponse {
@@ -5109,7 +5143,7 @@ declare interface UpsertCCRuleRequest {
   Interval: string;
   /** 检测Url */
   Url: string;
-  /** 匹配方法，0表示等于，1表示前缀匹配，2表示包含 */
+  /** 匹配方法，0表示等于，1表示前缀匹配，2表示包含，3表示不等于，6表示后缀匹配，7表示不包含 */
   MatchFunc: number;
   /** 动作，20表示观察，21表示人机识别，22表示拦截，23表示精准拦截，26表示精准人机识别，27表示JS校验 */
   ActionType: string;
@@ -5117,7 +5151,7 @@ declare interface UpsertCCRuleRequest {
   Priority: number;
   /** 动作有效时间 */
   ValidTime: number;
-  /** 附加参数 */
+  /** [{\"key\":\"Method\",\"args\":[\"=R0VU\"],\"match\":\"0\",\"encodeflag\":true}] Key可选值为 Method、Post、Referer、Cookie、User-Agent、CustomHeader match可选值为，当Key为Method的时候可选值为0（等于）、3（不等于）。 Key为Post的时候可选值为0（等于）、3（不等于），Key为Cookie的时候可选值为0（等于）、2（包含），3（不等于）、7（不包含）、 当Key为Referer的时候可选值为0（等于）、3（不等于）、1（前缀匹配）、6（后缀匹配）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）， 当Key为Cookie的时候可选值为0（等于）、3（不等于）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）， 当Key为User-Agent的时候可选值为0（等于）、3（不等于）、1（前缀匹配）、6（后缀匹配）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）， 当Key为CustomHeader的时候可选值为0（等于）、3（不等于）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）。 args用来表示匹配内容，需要设置encodeflag为true，当Key为Post、Cookie、CustomHeader时，用等号=来分别串接Key和Value，并分别用Base64编码，类似YWJj=YWJj。当Key为Referer、User-Agent时，用等号=来串接Value，类似=YWJj。 */
   OptionsArr?: string;
   /** waf版本，sparta-waf或者clb-waf */
   Edition?: string;

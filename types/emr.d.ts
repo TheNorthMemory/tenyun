@@ -482,6 +482,16 @@ declare interface CustomServiceDefine {
   Value?: string;
 }
 
+/** DAG信息 */
+declare interface DAGInfo {
+  /** 查询ID */
+  ID?: string;
+  /** DAG类型，目前只支持starrocks */
+  Type?: string;
+  /** 返回的DAG的JSON字符串 */
+  Content?: string;
+}
+
 /** 弹性扩缩容按天重复任务描述 */
 declare interface DayRepeatStrategy {
   /** 重复任务执行的具体时刻，例如"01:02:00" */
@@ -3124,6 +3134,24 @@ declare interface DescribeCvmQuotaResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDAGInfoRequest {
+  /** 集群ID */
+  InstanceID: string;
+  /** DAG类型，目前只支持STARROCKS */
+  Type: string;
+  /** 查询ID列表,最大长度为1 */
+  IDList: string[];
+}
+
+declare interface DescribeDAGInfoResponse {
+  /** 总数，分页查询时使用 */
+  TotalCount?: number;
+  /** Starrocks 查询信息列表 */
+  DAGInfoList?: DAGInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeEmrApplicationStaticsRequest {
   /** 集群id */
   InstanceId: string;
@@ -4555,6 +4583,8 @@ declare interface Emr {
   DescribeClusterNodes(data: DescribeClusterNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterNodesResponse>;
   /** 查询账户的CVM配额 {@link DescribeCvmQuotaRequest} {@link DescribeCvmQuotaResponse} */
   DescribeCvmQuota(data: DescribeCvmQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCvmQuotaResponse>;
+  /** 查询DAG信息 {@link DescribeDAGInfoRequest} {@link DescribeDAGInfoResponse} */
+  DescribeDAGInfo(data: DescribeDAGInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDAGInfoResponse>;
   /** 查询YARN的任务统计信息 {@link DescribeEmrApplicationStaticsRequest} {@link DescribeEmrApplicationStaticsResponse} */
   DescribeEmrApplicationStatics(data: DescribeEmrApplicationStaticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmrApplicationStaticsResponse>;
   /** 查询监控概览页指标数据 {@link DescribeEmrOverviewMetricsRequest} {@link DescribeEmrOverviewMetricsResponse} */

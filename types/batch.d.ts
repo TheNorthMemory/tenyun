@@ -803,9 +803,9 @@ declare interface SystemDisk {
   /** 系统盘大小，单位：GB。默认值为 50 */
   DiskSize?: number;
   /** 所属的独享集群ID。 */
-  CdcId?: string | null;
+  CdcId?: string;
   /** 磁盘名称，长度不超过128 个字符。该参数正在邀测中，暂未开放使用。 */
-  DiskName?: string | null;
+  DiskName?: string;
 }
 
 /** 标签。 */

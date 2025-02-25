@@ -16,21 +16,21 @@ declare interface AccountInfo {
 
 /** 数据授权信息 */
 declare interface DataAuthorizationInfo {
-  /** 数据委托方、需求方：客户主体名称。示例值：某某有限公司。 */
+  /** 数据委托方、需求方：客户主体名称。 */
   DataProviderName: string;
-  /** 数据受托方、提供方：腾讯云主体名称。固定填：腾讯云计算（北京）有限责任公司示例值：腾讯云计算（北京）有限责任公司 */
+  /** 数据受托方、提供方：腾讯云主体名称。固定填：腾讯云计算（北京）有限责任公司 */
   DataRecipientName: string;
-  /** 客户请求RCE所提供的用户数据类型，支持多选。实际以接口请求传参为准。1-手机号；2-微信开放账号；3-QQ开放账号；4-IP地址；999-其它；示例值：[1, 4] */
+  /** 客户请求RCE所提供的用户数据类型，支持多选。实际以接口请求传参为准。1-手机号；2-微信开放账号；3-QQ开放账号；4-IP地址；999-其它； */
   UserDataType: number[];
-  /** 客户是否已按[合规指南](https://rule.tencent.com/rule/202409130001)要求获取用户授权，同意客户委托腾讯云处理入参信息1-已授权；其它值为未授权。示例值：1 */
+  /** 客户是否已按[合规指南](https://rule.tencent.com/rule/202409130001)要求获取用户授权，同意客户委托腾讯云处理入参信息1-已授权；其它值为未授权。 */
   IsAuthorize: number;
-  /** 客户是否已按[合规指南](https://rule.tencent.com/rule/202409130001)要求获取用户授权，同意腾讯云结合客户提供的信息，对已合法收集的用户数据进行必要处理得出服务结果，并返回给客户。1-已授权；其它值为未授权。示例值：1 */
+  /** 客户是否已按[合规指南](https://rule.tencent.com/rule/202409130001)要求获取用户授权，同意腾讯云结合客户提供的信息，对已合法收集的用户数据进行必要处理得出服务结果，并返回给客户。1-已授权；其它值为未授权。 */
   IsOrderHandling?: number;
-  /** 客户获得的用户授权期限时间戳（单位秒）。不填默认无固定期限。示例值：1719805604 */
+  /** 客户获得的用户授权期限时间戳（单位秒）。不填默认无固定期限。 */
   AuthorizationTerm?: number;
-  /** 客户获得用户授权所依赖的协议地址。示例值：https://www.*****.com/* */
+  /** 客户获得用户授权所依赖的协议地址。 */
   PrivacyPolicyLink?: string;
-  /** 是否是用户个人敏感数据（不推荐使用）。固定填：1。示例值：1 */
+  /** 是否是用户个人敏感数据（不推荐使用）。固定填：1。 */
   IsPersonalData?: number;
 }
 
@@ -40,9 +40,9 @@ declare interface DataContentInfo {
   DataContent?: string;
   /** 名单数据描述 */
   DataRemark?: string;
-  /** 名单数据开始时间，时间格式示例"2024-05-05 12:10:15" */
+  /** 名单数据开始时间 */
   StartTime?: string;
-  /** 名单数据结束时间，时间格式示例"2024-05-05 12:10:15" */
+  /** 名单数据结束时间 */
   EndTime?: string;
 }
 
@@ -206,9 +206,9 @@ declare interface InputModifyNameListDataFront {
   NameListDataId: number;
   /** 名单数据内容 */
   DataContent?: string;
-  /** 名单数据开始时间，时间格式示例"2024-05-05 12:10:15" */
+  /** 名单数据开始时间 */
   StartTime?: string;
-  /** 名单数据结束时间，时间格式示例"2024-05-05 12:10:15" */
+  /** 名单数据结束时间 */
   EndTime?: string;
   /** 记录状态 [1 启用 2 停用] */
   Status?: number;
@@ -230,7 +230,7 @@ declare interface OnlineScamInfo {
   ContentRiskLevel?: number;
   /** 内容产生形式：0：对话。1：广播。 */
   ContentType?: number;
-  /** 类型 */
+  /** 账号类型1：手机号2：uin账号 */
   FraudType?: number;
   /** 账号 */
   FraudAccount?: string;
@@ -249,7 +249,7 @@ declare interface OtherAccountInfo {
 /** 黑白名单数据列表信息 */
 declare interface OuntputDescribeDataListInfo {
   /** 数量 */
-  Count?: number | null;
+  Count?: number;
   /** 列表 */
   List?: OutputDescribeDataListFront[] | null;
 }
@@ -267,9 +267,9 @@ declare interface OutputCreateNameListFront {
 /** 删除黑白名单出参 */
 declare interface OutputDeleteNameListData {
   /** 错误码，0 表示成功，非0表示失败错误码。 0：成功 1002：参数错误 4300：未开通服务 6000：系统内部错误 */
-  Code?: number | null;
+  Code?: number;
   /** 错误信息 */
-  Message?: string | null;
+  Message?: string;
   /** 空数组 */
   Value?: string[] | null;
 }
@@ -294,20 +294,20 @@ declare interface OutputDescribeDataListFront {
   DataContent?: string;
   /** 数据来源，固定传2（手工录入） */
   DataSource?: number;
-  /** 名单数据开始时间，时间格式示例"2024-05-05 12:10:15" */
-  StartTime?: string | null;
-  /** 名单数据结束时间，时间格式示例"2024-05-05 12:10:15" */
-  EndTime?: string | null;
+  /** 名单数据开始时间 */
+  StartTime?: string;
+  /** 名单数据结束时间 */
+  EndTime?: string;
   /** 名单数据状态 [1 启用 2 停用] */
   Status?: number;
   /** 名单数据描述 */
-  Remark?: string | null;
-  /** 名单数据创建时间，时间格式示例"2024-05-05 12:10:15" */
+  Remark?: string;
+  /** 名单数据创建时间 */
   CreateTime?: string;
-  /** 名单数据更新时间，时间格式示例"2024-05-05 12:10:15" */
+  /** 名单数据更新时间 */
   UpdateTime?: string;
   /** 加密名单数据内容 */
-  EncryptDataContent?: string | null;
+  EncryptDataContent?: string;
 }
 
 /** 查询黑白名单数据出参 */
@@ -336,9 +336,9 @@ declare interface OutputDescribeNameListDetail {
   Status?: number | null;
   /** 描述 */
   Remark?: string | null;
-  /** 创建时间，时间格式示例"2024-05-05 12:10:15" */
+  /** 创建时间 */
   CreateTime?: string | null;
-  /** 更新时间，时间格式示例"2024-05-05 12:10:15" */
+  /** 更新时间 */
   UpdateTime?: string | null;
   /** 加密类型 [0 无需加密，1 MD5加密，2 SHA256加密] */
   EncryptionType?: number | null;
@@ -368,9 +368,9 @@ declare interface OutputDescribeNameListFrontFix {
   Status?: number;
   /** 描述 */
   Remark?: string | null;
-  /** 创建时间，时间格式示例"2024-05-05 12:10:15" */
+  /** 创建时间 */
   CreateTime?: string;
-  /** 更新时间，时间格式示例"2024-05-05 12:10:15" */
+  /** 更新时间 */
   UpdateTime?: string;
   /** 有效数据/数据总数 */
   EffectCount?: string;

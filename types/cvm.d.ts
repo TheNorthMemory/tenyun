@@ -495,9 +495,9 @@ declare interface Instance {
 /** 描述了实例的计费模式 */
 declare interface InstanceChargePrepaid {
   /** 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60。 */
-  Period: number | null;
+  Period: number;
   /** 自动续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。 */
-  RenewFlag?: string | null;
+  RenewFlag?: string;
 }
 
 /** 描述实例的机型族配置信息形如：{'InstanceFamilyName': '标准型S1', 'InstanceFamily': 'S1'}、{'InstanceFamilyName': '网络优化型N1', 'InstanceFamily': 'N1'}、{'InstanceFamilyName': '高IO型I1', 'InstanceFamily': 'I1'}等。 */
@@ -1033,9 +1033,9 @@ declare interface SystemDisk {
   /** 系统盘大小，单位：GB。默认值为 50 */
   DiskSize?: number;
   /** 所属的独享集群ID。 */
-  CdcId?: string | null;
+  CdcId?: string;
   /** 磁盘名称，长度不超过128 个字符。该参数正在邀测中，暂未开放使用。 */
-  DiskName?: string | null;
+  DiskName?: string;
 }
 
 /** 标签键值对，可以通过调用 [DescribeTags](https://cloud.tencent.com/document/api/651/35316) 返回值中的 Tags 字段来获取。 */
