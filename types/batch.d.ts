@@ -361,11 +361,11 @@ declare interface EventVar {
 /** 扩展数据 */
 declare interface Externals {
   /** 释放地址 */
-  ReleaseAddress?: boolean | null;
+  ReleaseAddress?: boolean;
   /** 不支持的网络类型，取值范围：BASIC：基础网络VPC1.0：私有网络VPC1.0 */
-  UnsupportNetworks?: string[] | null;
+  UnsupportNetworks?: string[];
   /** HDD本地存储属性 */
-  StorageBlockAttr?: StorageBlock | null;
+  StorageBlockAttr?: StorageBlock;
 }
 
 /** >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等> * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。> * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。>> 以[DescribeInstances](https://cloud.tencent.com/document/api/213/15728)接口的`Filter`为例。若我们需要查询可用区（`zone`）为广州一区 ***并且*** 实例计费模式（`instance-charge-type`）为包年包月 ***或者*** 按量计费的实例时，可如下实现：```Filters.0.Name=zone&Filters.0.Values.0=ap-guangzhou-1&Filters.1.Name=instance-charge-type&Filters.1.Values.0=PREPAID&Filters.1.Values.1=POSTPAID_BY_HOUR``` */
@@ -439,7 +439,7 @@ declare interface InstanceTypeQuotaItem {
   /** 网卡类型，例如：25代表25G网卡 */
   NetworkCard?: number;
   /** 扩展属性。 */
-  Externals?: Externals | null;
+  Externals?: Externals;
   /** 实例的CPU核数，单位：核。 */
   Cpu?: number;
   /** 实例内存容量，单位：`GB`。 */
@@ -455,7 +455,7 @@ declare interface InstanceTypeQuotaItem {
   /** 实例的售卖价格。 */
   Price?: ItemPrice;
   /** 售罄原因。 */
-  SoldOutReason?: string | null;
+  SoldOutReason?: string;
   /** 内网带宽，单位Gbps。 */
   InstanceBandwidth?: number;
   /** 网络收发包能力，单位万PPS。 */
@@ -475,7 +475,7 @@ declare interface InstanceTypeQuotaItem {
   /** 实例的CPU主频信息 */
   Frequency?: string;
   /** 描述库存情况。取值范围： EnoughStock：表示对应库存非常充足 NormalStock：表示对应库存供应有保障 UnderStock：表示对应库存即将售罄 WithoutStock：表示对应库存已经售罄 */
-  StatusCategory?: string | null;
+  StatusCategory?: string;
 }
 
 /** 描述了实例的公网可访问性，声明了实例的公网使用计费模式，最大带宽等 */
@@ -493,43 +493,43 @@ declare interface InternetAccessible {
 /** 描述了单项的价格信息 */
 declare interface ItemPrice {
   /** 后续合计费用的原价，后付费模式使用，单位：元。如返回了其他时间区间项，如UnitPriceSecondStep，则本项代表时间区间在(0, 96)小时；若未返回其他时间区间项，则本项代表全时段，即(0, ∞)小时 */
-  UnitPrice?: number | null;
+  UnitPrice?: number;
   /** 后续计价单元，后付费模式使用，可取值范围： HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：实例按小时后付费（POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）：GB：表示计价单元是按每GB来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）。 */
-  ChargeUnit?: string | null;
+  ChargeUnit?: string;
   /** 预支合计费用的原价，预付费模式使用，单位：元。 */
-  OriginalPrice?: number | null;
+  OriginalPrice?: number;
   /** 预支合计费用的折扣价，预付费模式使用，单位：元。 */
-  DiscountPrice?: number | null;
+  DiscountPrice?: number;
   /** 折扣，如20.0代表2折。 */
-  Discount?: number | null;
+  Discount?: number;
   /** 后续合计费用的折扣价，后付费模式使用，单位：元如返回了其他时间区间项，如UnitPriceDiscountSecondStep，则本项代表时间区间在(0, 96)小时；若未返回其他时间区间项，则本项代表全时段，即(0, ∞)小时 */
-  UnitPriceDiscount?: number | null;
+  UnitPriceDiscount?: number;
   /** 使用时间区间在(96, 360)小时的后续合计费用的原价，后付费模式使用，单位：元。 */
-  UnitPriceSecondStep?: number | null;
+  UnitPriceSecondStep?: number;
   /** 使用时间区间在(96, 360)小时的后续合计费用的折扣价，后付费模式使用，单位：元 */
-  UnitPriceDiscountSecondStep?: number | null;
+  UnitPriceDiscountSecondStep?: number;
   /** 使用时间区间在(360, ∞)小时的后续合计费用的原价，后付费模式使用，单位：元。 */
-  UnitPriceThirdStep?: number | null;
+  UnitPriceThirdStep?: number;
   /** 使用时间区间在(360, ∞)小时的后续合计费用的折扣价，后付费模式使用，单位：元 */
-  UnitPriceDiscountThirdStep?: number | null;
+  UnitPriceDiscountThirdStep?: number;
   /** 预支三年合计费用的原价，预付费模式使用，单位：元。 */
-  OriginalPriceThreeYear?: number | null;
+  OriginalPriceThreeYear?: number;
   /** 预支三年合计费用的折扣价，预付费模式使用，单位：元。 */
-  DiscountPriceThreeYear?: number | null;
+  DiscountPriceThreeYear?: number;
   /** 预支三年应用的折扣，如20.0代表2折。 */
-  DiscountThreeYear?: number | null;
+  DiscountThreeYear?: number;
   /** 预支五年合计费用的原价，预付费模式使用，单位：元。 */
-  OriginalPriceFiveYear?: number | null;
+  OriginalPriceFiveYear?: number;
   /** 预支五年合计费用的折扣价，预付费模式使用，单位：元。 */
-  DiscountPriceFiveYear?: number | null;
+  DiscountPriceFiveYear?: number;
   /** 预支五年应用的折扣，如20.0代表2折。 */
-  DiscountFiveYear?: number | null;
+  DiscountFiveYear?: number;
   /** 预支一年合计费用的原价，预付费模式使用，单位：元。 */
-  OriginalPriceOneYear?: number | null;
+  OriginalPriceOneYear?: number;
   /** 预支一年合计费用的折扣价，预付费模式使用，单位：元。 */
-  DiscountPriceOneYear?: number | null;
+  DiscountPriceOneYear?: number;
   /** 预支一年应用的折扣，如20.0代表2折。 */
-  DiscountOneYear?: number | null;
+  DiscountOneYear?: number;
 }
 
 /** 作业 */
@@ -787,11 +787,11 @@ declare interface SpotMarketOptions {
 /** HDD的本地存储信息 */
 declare interface StorageBlock {
   /** HDD本地存储类型，值为：LOCAL_PRO. */
-  Type?: string | null;
+  Type?: string;
   /** HDD本地存储的最小容量 */
-  MinSize?: number | null;
+  MinSize?: number;
   /** HDD本地存储的最大容量 */
-  MaxSize?: number | null;
+  MaxSize?: number;
 }
 
 /** 描述了操作系统所在块设备即系统盘的信息 */

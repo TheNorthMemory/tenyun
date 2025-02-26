@@ -313,43 +313,43 @@ declare interface OutputDescribeDataListFront {
 /** 查询黑白名单数据出参 */
 declare interface OutputDescribeDataListFrontData {
   /** 错误码，0 表示成功，非0表示失败错误码。 0：成功 1002：参数错误 4300：未开通服务 6000：系统内部错误 */
-  Code?: number | null;
+  Code?: number;
   /** 错误信息 */
-  Message?: string | null;
+  Message?: string;
   /** 黑白名单数据信息 */
-  Value?: OuntputDescribeDataListInfo | null;
+  Value?: OuntputDescribeDataListInfo;
 }
 
 /** 黑白名单详情出参 */
 declare interface OutputDescribeNameListDetail {
   /** 名单ID */
-  NameListId?: number | null;
+  NameListId?: number;
   /** 名单名称 */
-  ListName?: string | null;
+  ListName?: string;
   /** 名单类型 [1 黑名单 2 白名单] */
-  ListType?: number | null;
+  ListType?: number;
   /** 数据类型[1 手机号 2 qqOpenId 3 2echatOpenId 4 ip 6 idfa 7 imei] */
-  DataType?: number | null;
+  DataType?: number;
   /** 场景Code */
-  SceneCode?: string | null;
+  SceneCode?: string;
   /** 名单列表状态 [1 启用 2 停用] */
-  Status?: number | null;
+  Status?: number;
   /** 描述 */
-  Remark?: string | null;
+  Remark?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 加密类型 [0 无需加密，1 MD5加密，2 SHA256加密] */
-  EncryptionType?: number | null;
+  EncryptionType?: number;
 }
 
 /** 查询列表详情出参 */
 declare interface OutputDescribeNameListDetailFront {
   /** 错误码，0 表示成功，非0表示失败错误码。 0：成功 1002：参数错误 4300：未开通服务 6000：系统内部错误 */
-  Code?: number | null;
+  Code?: number;
   /** 错误信息 */
-  Message?: string | null;
+  Message?: string;
   /** 列表详情信息 */
   Value?: OutputDescribeNameListDetail | null;
 }
@@ -359,15 +359,15 @@ declare interface OutputDescribeNameListFrontFix {
   /** 名单ID */
   NameListId?: number;
   /** 名单名称 */
-  ListName?: string | null;
+  ListName?: string;
   /** 名单类型 [1 黑名单 2 白名单] */
-  ListType?: number | null;
+  ListType?: number;
   /** 数据类型[1 手机号 2 qqOpenId 3 2echatOpenId 4 ip 6 idfa 7 imei] */
   DataType?: number;
   /** 记录状态 [1 启用 2 停用] */
   Status?: number;
   /** 描述 */
-  Remark?: string | null;
+  Remark?: string;
   /** 创建时间 */
   CreateTime?: string;
   /** 更新时间 */
@@ -375,25 +375,25 @@ declare interface OutputDescribeNameListFrontFix {
   /** 有效数据/数据总数 */
   EffectCount?: string;
   /** 加密类型[0 无需加密 1 MD5加密 2 SHA256加密] */
-  EncryptionType?: number | null;
+  EncryptionType?: number;
   /** 场景Code，all_scene代表全部场景 */
-  SceneCode?: string | null;
+  SceneCode?: string;
 }
 
 /** 查询黑白名单出参 */
 declare interface OutputDescribeNameListFrontFixListData {
   /** 错误码，0 表示成功，非0表示失败错误码。 0：成功 1002：参数错误 4300：未开通服务 6000：系统内部错误 */
-  Code?: number | null;
+  Code?: number;
   /** 错误信息 */
-  Message?: string | null;
+  Message?: string;
   /** 黑白名单列表信息 */
-  Value?: OutputDescribeNameListInfo | null;
+  Value?: OutputDescribeNameListInfo;
 }
 
 /** 黑白名单信息 */
 declare interface OutputDescribeNameListInfo {
   /** 总数 */
-  Count?: number | null;
+  Count?: number;
   /** 列表 */
   List?: OutputDescribeNameListFrontFix[] | null;
 }
@@ -401,19 +401,19 @@ declare interface OutputDescribeNameListInfo {
 /** 预付费 后付费 总数显示接口出参 */
 declare interface OutputDescribeUserUsageCnt {
   /** 当前付费模式，0 后付费 1 预付费 */
-  PayMode?: number | null;
+  PayMode?: number;
   /** 后付费本月使用量 */
-  AfterPayModeThisMonthUsedCnt?: number | null;
+  AfterPayModeThisMonthUsedCnt?: number;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 超出时间 */
-  ExpireTime?: string | null;
+  ExpireTime?: string;
   /** 后付费上月使用量 */
-  AfterPayModeLastMonthUsedCnt?: number | null;
+  AfterPayModeLastMonthUsedCnt?: number;
   /** 预付费总量 */
-  BeforePayModeTotalUsedCnt?: number | null;
+  BeforePayModeTotalUsedCnt?: number;
   /** 预付费剩余用量 */
-  BeforePayModeRemainUsedCnt?: number | null;
+  BeforePayModeRemainUsedCnt?: number;
 }
 
 /** RCE控制台预付费和后付费次数展示出参数据 */

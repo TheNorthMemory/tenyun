@@ -8229,7 +8229,7 @@ declare interface DescribeBaselineListRequest {
   Limit: number;
   /** 分页参数 */
   Offset: number;
-  /** 过滤条件。StrategyId- Uint64 - 基线策略idStatus - Uint64 - 处理状态1已通过 0未通过Level - Uint64[] - 威胁等级BaselineName - String - 基线名称Quuid- String - 主机quuidUuid- String - 主机uuid */
+  /** 过滤条件 StrategyId- Uint64 - 基线策略id Status - Uint64 - 处理状态 1-已通过 0-未通过 Level - Uint64 - 威胁等级 1-低危 2-中危 3-高危 4-严重 BaselineName - String - 基线名称 Quuid- String - 主机quuid Uuid- String - 主机uuid */
   Filters?: Filters[];
 }
 
@@ -11829,7 +11829,7 @@ declare interface DescribeVulListRequest {
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 过滤条件。Status - String - 是否必填：否 - 处理状态 0 -- 待处理 1 -- 已加白 2 -- 已删除 3 - 已忽略ModifyTime - String - 是否必填：否 - 最近发生时间Uuid- String - 是否必填：否 - 主机uuid查询VulName- string -VulCategory- string - 是否必填：否 - 漏洞类别 1: web-cms漏洞 2:应用漏洞 4: Linux软件漏洞 5: Windows系统漏洞IsSupportDefense - int- 是否必填：否 - 是否支持防御 0:不支持 1:支持Labels- string- 是否必填：否 - 标签搜索IsSupportAutoFix- string- 是否必填：否 - 是否支持自动修复 0:不支持 1:支持CvssScore- string- 是否必填：否 - CvssScore大于多少AttackLevel- string- 是否必填：否 - 攻击热度大于多少 */
+  /** 过滤条件。Status - String - 是否必填：否 - 处理状态 0-待处理 1-已加白 2-已删除 3-已修复 5-检测中 6-修复中 8-修复失败ModifyTime - String - 是否必填：否 - 最近发生时间Uuid- String - 是否必填：否 - 主机uuid查询VulName- string -VulCategory- string - 是否必填：否 - 漏洞类别 1: web-cms漏洞 2:应用漏洞 4: Linux软件漏洞 5: Windows系统漏洞IsSupportDefense - int- 是否必填：否 - 是否支持防御 0:不支持 1:支持Labels- string- 是否必填：否 - 标签搜索IsSupportAutoFix- string- 是否必填：否 - 是否支持自动修复 0:不支持 1:支持CvssScore- string- 是否必填：否 - CvssScore大于多少AttackLevel- string- 是否必填：否 - 攻击热度大于多少 */
   Filters?: Filters[];
   /** 可选排序字段 Level，LastTime，HostCount */
   By?: string;

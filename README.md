@@ -114,7 +114,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 263+ 款产品，12221+ 服务数</summary>
+<details><summary>共计 263+ 款产品，12226+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -177,7 +177,7 @@ cii | [智能保险助手](https://cloud.tencent.com/document/product/1368) | 20
 cim |  | 2019-03-18(1) |
 cis |  | 2018-04-08(7) |
 ckafka | [消息队列 CKafka 版](https://cloud.tencent.com/document/product/597) | 2019-08-19(85) |
-clb | [负载均衡](https://cloud.tencent.com/document/product/214) | 2018-03-17(86) |
+clb | [负载均衡](https://cloud.tencent.com/document/product/214) | 2018-03-17(91) |
 cloudapp | [云应用](https://cloud.tencent.com/document/product/1689) | 2022-05-30(1) |
 cloudaudit | [操作审计](https://cloud.tencent.com/document/product/629) | 2019-03-19(19) |
 cloudhsm | [云加密机](https://cloud.tencent.com/document/product/639) | 2019-11-12(14) |

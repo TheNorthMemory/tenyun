@@ -291,7 +291,7 @@ declare interface RegistryCondition {
   /** 实例创建过程状态 */
   Status?: string;
   /** 转换到该过程的简明原因 */
-  Reason?: string | null;
+  Reason?: string;
 }
 
 /** 实例状态 */
@@ -315,17 +315,17 @@ declare interface ReplicationFilter {
 /** 同步日志 */
 declare interface ReplicationLog {
   /** 资源类型 */
-  ResourceType: string | null;
+  ResourceType?: string;
   /** 源资源 */
-  Source: string | null;
+  Source?: string;
   /** 目的资源 */
-  Destination: string | null;
+  Destination?: string;
   /** 同步状态 */
-  Status: string | null;
+  Status?: string;
   /** 开始时间 */
-  StartTime: string | null;
+  StartTime?: string;
   /** 结束时间 */
-  EndTime: string | null;
+  EndTime?: string;
 }
 
 /** 企业版复制实例 */

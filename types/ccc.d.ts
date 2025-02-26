@@ -1015,7 +1015,7 @@ declare interface CreateCCCSkillGroupResponse {
 declare interface CreateCallOutSessionRequest {
   /** 应用 ID */
   SdkAppId: number;
-  /** 客服用户 ID，一般为客服邮箱 */
+  /** 客服用户 ID，一般为客服邮箱，确保已经绑定了手机号 https://cloud.tencent.com/document/product/679/76067 */
   UserId: string;
   /** 被叫号码，须带 0086 前缀 */
   Callee: string;
@@ -1023,7 +1023,7 @@ declare interface CreateCallOutSessionRequest {
   Caller?: string;
   /** 指定主叫号码列表，如果前面的号码失败了会自动换成下一个号码，须带 0086 前缀 */
   Callers?: string[];
-  /** 是否强制使用手机外呼，当前只支持 true，若为 true 请确保已配置白名单 */
+  /** 是否强制使用手机外呼，当前只支持 true，若为 true 请确保已配置白名单 https://cloud.tencent.com/document/product/679/76744 */
   IsForceUseMobile?: boolean;
   /** 自定义数据，长度限制 1024 字节 */
   Uui?: string;

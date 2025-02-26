@@ -100,6 +100,18 @@ declare interface BindDetailItem {
   UconfigId?: string | null;
 }
 
+/** 配置绑定关系 */
+declare interface BindItem {
+  /** 配置绑定的CLB ID */
+  LoadBalancerId: string;
+  /** 配置绑定的监听器ID */
+  ListenerId: string | null;
+  /** 配置绑定的域名 */
+  Domain: string | null;
+  /** 配置绑定的规则 */
+  LocationId?: string | null;
+}
+
 /** 加入了12306黑名单的IP */
 declare interface BlockedIP {
   /** 黑名单IP */
@@ -1316,6 +1328,34 @@ declare interface ZoneResource {
   Egress?: string | null;
 }
 
+declare interface AddCustomizedConfigRequest {
+  /** 配置名字 */
+  ConfigName: string;
+  /** 配置类型，取值范围["CLB", "SERVER", "LOCATION"]，分别表示CLB配置，server配置，location配置。 */
+  ConfigType: string;
+  /** 配置内容 */
+  ConfigContent: string;
+}
+
+declare interface AddCustomizedConfigResponse {
+  /** 配置ID */
+  ConfigId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AssociateCustomizedConfigRequest {
+  /** 配置ID */
+  UconfigId: string;
+  /** 关联的server或location */
+  BindList: BindItem[];
+}
+
+declare interface AssociateCustomizedConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AssociateTargetGroupsRequest {
   /** 绑定的关系数组。一次请求最多支持20个。 */
   Associations: TargetGroupAssociation[];
@@ -1656,6 +1696,16 @@ declare interface CreateTopicRequest {
 declare interface CreateTopicResponse {
   /** 日志主题的 ID。 */
   TopicId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCustomizedConfigRequest {
+  /** 删除的配置ID列表 */
+  UconfigIdList: string[];
+}
+
+declare interface DeleteCustomizedConfigResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2334,6 +2384,18 @@ declare interface DescribeTaskStatusResponse {
   RequestId?: string;
 }
 
+declare interface DisassociateCustomizedConfigRequest {
+  /** 配置ID */
+  UconfigId: string;
+  /** 解绑的列表 */
+  BindList: BindItem[];
+}
+
+declare interface DisassociateCustomizedConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DisassociateTargetGroupsRequest {
   /** 待解绑的规则关系数组。 */
   Associations: TargetGroupAssociation[];
@@ -2458,6 +2520,20 @@ declare interface ModifyBlockIPListRequest {
 declare interface ModifyBlockIPListResponse {
   /** 异步任务的ID */
   JodId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCustomizedConfigRequest {
+  /** 配置名字 */
+  ConfigName: string;
+  /** 配置ID */
+  UconfigId: string;
+  /** 配置内容 */
+  ConfigContent: string;
+}
+
+declare interface ModifyCustomizedConfigResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2901,6 +2977,10 @@ declare interface SetSecurityGroupForLoadbalancersResponse {
 /** {@link Clb 负载均衡} */
 declare interface Clb {
   (): Versions;
+  /** 新增个性化配置 {@link AddCustomizedConfigRequest} {@link AddCustomizedConfigResponse} */
+  AddCustomizedConfig(data: AddCustomizedConfigRequest, config?: AxiosRequestConfig): AxiosPromise<AddCustomizedConfigResponse>;
+  /** 关联个性化配置 {@link AssociateCustomizedConfigRequest} {@link AssociateCustomizedConfigResponse} */
+  AssociateCustomizedConfig(data: AssociateCustomizedConfigRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateCustomizedConfigResponse>;
   /** 规则关联目标组 {@link AssociateTargetGroupsRequest} {@link AssociateTargetGroupsResponse} */
   AssociateTargetGroups(data: AssociateTargetGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateTargetGroupsResponse>;
   /** 自动生成负载均衡转发规则的重定向关系 {@link AutoRewriteRequest} {@link AutoRewriteResponse} */
@@ -2929,6 +3009,8 @@ declare interface Clb {
   CreateTargetGroup(data?: CreateTargetGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTargetGroupResponse>;
   /** 创建主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
+  /** 删除个性化配置 {@link DeleteCustomizedConfigRequest} {@link DeleteCustomizedConfigResponse} */
+  DeleteCustomizedConfig(data: DeleteCustomizedConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomizedConfigResponse>;
   /** 删除负载均衡监听器 {@link DeleteListenerRequest} {@link DeleteListenerResponse} */
   DeleteListener(data: DeleteListenerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteListenerResponse>;
   /** 删除负载均衡实例 {@link DeleteLoadBalancerRequest} {@link DeleteLoadBalancerResponse} */
@@ -3009,6 +3091,8 @@ declare interface Clb {
   DescribeTargets(data: DescribeTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetsResponse>;
   /** 查询异步任务状态 {@link DescribeTaskStatusRequest} {@link DescribeTaskStatusResponse} */
   DescribeTaskStatus(data?: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
+  /** 去关联个性化配置 {@link DisassociateCustomizedConfigRequest} {@link DisassociateCustomizedConfigResponse} */
+  DisassociateCustomizedConfig(data: DisassociateCustomizedConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateCustomizedConfigResponse>;
   /** 解除规则的目标组关联关系 {@link DisassociateTargetGroupsRequest} {@link DisassociateTargetGroupsResponse} */
   DisassociateTargetGroups(data: DisassociateTargetGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateTargetGroupsResponse>;
   /** 创建负载均衡实例询价 {@link InquiryPriceCreateLoadBalancerRequest} {@link InquiryPriceCreateLoadBalancerResponse} */
@@ -3025,6 +3109,8 @@ declare interface Clb {
   MigrateClassicalLoadBalancers(data: MigrateClassicalLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<MigrateClassicalLoadBalancersResponse>;
   /** 修改负载均衡的IP封禁黑名单列表 {@link ModifyBlockIPListRequest} {@link ModifyBlockIPListResponse} */
   ModifyBlockIPList(data: ModifyBlockIPListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockIPListResponse>;
+  /** 修改个性化配置 {@link ModifyCustomizedConfigRequest} {@link ModifyCustomizedConfigResponse} */
+  ModifyCustomizedConfig(data: ModifyCustomizedConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomizedConfigResponse>;
   /** 修改七层转发规则的域名 {@link ModifyDomainRequest} {@link ModifyDomainResponse} */
   ModifyDomain(data: ModifyDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainResponse>;
   /** 修改负载均衡七层监听器转发规则的域名级别属性 {@link ModifyDomainAttributesRequest} {@link ModifyDomainAttributesResponse} */
