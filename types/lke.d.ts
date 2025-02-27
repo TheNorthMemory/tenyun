@@ -158,6 +158,8 @@ declare interface AppModel {
   Temperature?: string | null;
   /** 模型TopP */
   TopP?: string | null;
+  /** 模型资源状态 1：资源可用；2：资源已用尽 */
+  ResourceStatus?: number | null;
 }
 
 /** 标签详情信息 */
@@ -692,6 +694,10 @@ declare interface ListDocItem {
   ExpireEnd?: string | null;
   /** 是否允许重试，0：否，1：是 */
   IsAllowRetry?: boolean | null;
+  /** 0:文档比对处理 1:文档生成问答 */
+  Processing?: number[] | null;
+  /** 文档创建落库时间 */
+  CreateTime?: string | null;
 }
 
 /** 问答详情数据 */
@@ -1567,7 +1573,7 @@ declare interface CreateDocCateResponse {
 declare interface CreateQACateRequest {
   /** 应用ID */
   BotBizId: string;
-  /** 父级业务ID */
+  /** 父级业务ID，创建顶级分类时传字符串"0" */
   ParentBizId: string;
   /** 分类名称 */
   Name: string;
@@ -1918,10 +1924,18 @@ declare interface DescribeCorpRequest {
 declare interface DescribeCorpResponse {
   /** 企业ID */
   CorpBizId?: string;
-  /** 机器人配额 */
+  /** 应用配额 */
   RobotQuota?: number;
   /** 企业全称 */
   FullName?: string;
+  /** 是否试用 */
+  IsTrial?: boolean;
+  /** 是否试用过期 */
+  IsTrialExpired?: boolean;
+  /** 可用应用数量 */
+  AvailableAppQuota?: number;
+  /** 是否支持自定义模型配置 */
+  IsSupportCustomModel?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

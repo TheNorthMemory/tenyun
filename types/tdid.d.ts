@@ -54,6 +54,16 @@ declare interface CredentialState {
   MetaDigest?: string;
 }
 
+/** 设置凭证状态信息 */
+declare interface CredentialStatusInfo {
+  /** 凭证唯一id */
+  Id?: string;
+  /** 凭证状态（0：吊销；1：有效） */
+  Issuer?: string;
+  /** 凭证颁发者Did */
+  Status?: number;
+}
+
 /** did自定义属性 */
 declare interface DidAttribute {
   /** 键名 */
@@ -65,15 +75,15 @@ declare interface DidAttribute {
 /** 资源计数统计数据 */
 declare interface ResourceCounterData {
   /** DID总数 */
-  DidCnt?: number | null;
+  DidCnt?: number;
   /** VC总数 */
-  VCCnt?: number | null;
+  VCCnt?: number;
   /** CPT总数 */
-  CPTCnt?: number | null;
+  CPTCnt?: number;
   /** VC验证总数 */
-  VerifyCnt?: number | null;
+  VerifyCnt?: number;
   /** 权威机构数量 */
-  AuthCnt?: number | null;
+  AuthCnt?: number;
 }
 
 declare interface CreateDisclosedCredentialRequest {
@@ -85,6 +95,8 @@ declare interface CreateDisclosedCredentialRequest {
   PolicyJson?: string;
   /** DID应用ID */
   DAPId?: number;
+  /** 用户应用ID */
+  UAPId?: number;
 }
 
 declare interface CreateDisclosedCredentialResponse {
@@ -97,6 +109,8 @@ declare interface CreateDisclosedCredentialResponse {
 declare interface CreatePresentationRequest {
   /** DID应用id */
   DAPId?: number;
+  /** 用户应用id */
+  UAPId?: number;
   /** 凭证列表 */
   Credentials?: string[];
   /** VP持有人的DID标识 */
@@ -179,9 +193,9 @@ declare interface GetAppSummaryRequest {
 
 declare interface GetAppSummaryResponse {
   /** 用户参与应用的统计指标 */
-  AppCounter?: ResourceCounterData | null;
+  AppCounter?: ResourceCounterData;
   /** 用户创建资源的统计指标 */
-  UserCounter?: ResourceCounterData | null;
+  UserCounter?: ResourceCounterData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -195,7 +209,7 @@ declare interface GetCredentialStateRequest {
 
 declare interface GetCredentialStateResponse {
   /** 凭证状态信息 */
-  CredentialState?: CredentialState | null;
+  CredentialState?: CredentialState;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -227,7 +241,7 @@ declare interface GetTDidByObjectIdRequest {
 
 declare interface GetTDidByObjectIdResponse {
   /** DID标识 */
-  Did?: string | null;
+  Did?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -335,13 +349,17 @@ declare interface SetTDidAttributeResponse {
 declare interface UpdateCredentialStateRequest {
   /** DID应用Id */
   DAPId?: number;
-  /** 更新VC状态的临时凭证内容，通过创建凭证接口(CreateCredential)生成并签名，凭证类型为：OperateCredential, 为安全起见凭证过期时间不适合太长，建议设置为1分钟内 */
+  /** 更新VC状态的临时凭证内容，通过创建凭证接口(CreateCredential)生成并签名，凭证类型为：OperateCredential, 为安全起见凭证过期时间不适合太长，如设置为1分钟内 */
   OperateCredential?: string;
+  /** 待更新凭证状态的原始凭证内容 */
+  OriginCredential?: string;
+  /** 凭证状态信息 */
+  CredentialStatus?: CredentialStatusInfo;
 }
 
 declare interface UpdateCredentialStateResponse {
   /** 更新是否成功 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

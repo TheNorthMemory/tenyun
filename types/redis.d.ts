@@ -5,27 +5,27 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 子账号信息 */
 declare interface Account {
   /** 实例 ID。 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 账号名称。 */
-  AccountName?: string | null;
+  AccountName?: string;
   /** 账号描述信息。 */
-  Remark?: string | null;
+  Remark?: string;
   /** 读写权限策略。- r：只读。- w：只写。- rw：读写。 */
-  Privilege?: string | null;
+  Privilege?: string;
   /** 只读路由策略。- master：主节点。- replication：从节点。 */
-  ReadonlyPolicy?: string[] | null;
+  ReadonlyPolicy?: string[];
   /** 子账号状态.- 1：账号变更中。- 2：账号有效。- 4：账号已删除。 */
-  Status?: number | null;
+  Status?: number;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
 }
 
 /** 可使用的地域信息 */
 declare interface AvailableRegion {
   /** 地域 */
-  Region?: string | null;
+  Region?: string;
   /** 可用区信息 */
-  AvailableZones?: string[] | null;
+  AvailableZones?: string[];
 }
 
 /** 备份文件下载信息 */
@@ -127,21 +127,21 @@ declare interface DelayDistribution {
 /** 详细DTS实例信息 */
 declare interface DescribeInstanceDTSInstanceInfo {
   /** 地域 ID。 */
-  RegionId?: number | null;
+  RegionId?: number;
   /** 实例 ID。 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 仓库ID。 */
-  SetId?: number | null;
+  SetId?: number;
   /** 可用区ID。 */
-  ZoneId?: number | null;
+  ZoneId?: number;
   /** 实例类型。 */
-  Type?: number | null;
+  Type?: number;
   /** 实例名称。 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 实例访问地址。 */
-  Vip?: string | null;
+  Vip?: string;
   /** 状态。 */
-  Status?: number | null;
+  Status?: number;
 }
 
 /** 复制组信息 */
@@ -153,15 +153,15 @@ declare interface Groups {
   /** 复制组 ID。格式如：crs-rpl-deind****。 */
   GroupId?: string;
   /** 复制组名称。 */
-  GroupName?: string | null;
+  GroupName?: string;
   /** 复制组状态。- 37：绑定复制组中。- 38：复制组重连中。- 51：解绑复制组中。- 52：复制组实例切主中。- 53：角色变更中。 */
   Status?: number;
   /** 复制组数量。 */
   InstanceCount?: number;
   /** 复制组中的实例信息。 */
-  Instances?: Instances[] | null;
+  Instances?: Instances[];
   /** 备注信息。 */
-  Remark?: string | null;
+  Remark?: string;
 }
 
 /** 热Key详细信息 */
@@ -289,7 +289,7 @@ declare interface InstanceIntegerParam {
   /** 参数状态, 1: 修改中， 2：修改完成 */
   Status?: number;
   /** 参数单位 */
-  Unit?: string | null;
+  Unit?: string;
 }
 
 /** 实例多选项类型参数描述 */
@@ -433,59 +433,59 @@ declare interface InstanceSet {
   /** 从节点读取权重。 */
   SlaveReadWeight?: number;
   /** 实例关联的标签信息。 */
-  InstanceTags?: InstanceTagInfo[] | null;
+  InstanceTags?: InstanceTagInfo[];
   /** 项目名称。 */
-  ProjectName?: string | null;
+  ProjectName?: string;
   /** 是否为免密实例。true：免密实例。false：非免密实例。 */
-  NoAuth?: boolean | null;
+  NoAuth?: boolean;
   /** 客户端连接数。 */
-  ClientLimit?: number | null;
+  ClientLimit?: number;
   /** DTS状态（内部参数，用户可忽略）。 */
-  DtsStatus?: number | null;
+  DtsStatus?: number;
   /** 分片带宽上限，单位MB。 */
-  NetLimit?: number | null;
+  NetLimit?: number;
   /** 免密实例标识（内部参数，用户可忽略）。 */
-  PasswordFree?: number | null;
+  PasswordFree?: number;
   /** 该参数存在命名不规范问题，建议用参数IPv6取代。内部参数，用户可忽略。 */
-  Vip6?: string | null;
+  Vip6?: string;
   /** 内部参数，用户可忽略。 */
-  IPv6?: string | null;
+  IPv6?: string;
   /** 实例只读标识（内部参数，用户可忽略）。 */
-  ReadOnly?: number | null;
+  ReadOnly?: number;
   /** 内部参数，用户可忽略。 */
-  RemainBandwidthDuration?: string | null;
+  RemainBandwidthDuration?: string;
   /** Redis实例请忽略该参数。 */
-  DiskSize?: number | null;
+  DiskSize?: number;
   /** 监控版本。1m：1分钟粒度监控。目前该监控粒度已下线，具体信息，请参见[云数据库 Redis 1分钟粒度下线公告](https://cloud.tencent.com/document/product/239/80653)。5s：5秒粒度监控。 */
-  MonitorVersion?: string | null;
+  MonitorVersion?: string;
   /** 客户端最大连接数可设置的最小值。 */
-  ClientLimitMin?: number | null;
+  ClientLimitMin?: number;
   /** 客户端最大连接数可设置的最大值。 */
-  ClientLimitMax?: number | null;
+  ClientLimitMax?: number;
   /** 实例的节点详细信息。 */
-  NodeSet?: RedisNodeInfo[] | null;
+  NodeSet?: RedisNodeInfo[];
   /** 实例所在的地域信息，比如ap-guangzhou。 */
-  Region?: string | null;
+  Region?: string;
   /** 外网地址。 */
-  WanAddress?: string | null;
+  WanAddress?: string;
   /** 北极星服务地址，内部使用。 */
-  PolarisServer?: string | null;
+  PolarisServer?: string;
   /** CDC Redis集群ID。 */
-  RedisClusterId?: string | null;
+  RedisClusterId?: string;
   /** CDC 集群ID。 */
-  DedicatedClusterId?: string | null;
+  DedicatedClusterId?: string;
   /** 产品版本。local：本地盘。cloud：云盘版。cdc：CDC 集群版本。 */
-  ProductVersion?: string | null;
+  ProductVersion?: string;
   /** 实例当前Proxy版本。 */
-  CurrentProxyVersion?: string | null;
+  CurrentProxyVersion?: string;
   /** 实例当前Cache小版本。如果实例加入全球复制组，显示全球复制的内核版本。 */
-  CurrentRedisVersion?: string | null;
+  CurrentRedisVersion?: string;
   /** 实例可升级Proxy版本。 */
-  UpgradeProxyVersion?: string | null;
+  UpgradeProxyVersion?: string;
   /** 实例可升级Cache小版本。 */
-  UpgradeRedisVersion?: string | null;
+  UpgradeRedisVersion?: string;
   /** 备份模式：- SecondLevelBackup 秒级备份- NormalLevelBackup 普通备份 */
-  BackupMode?: string | null;
+  BackupMode?: string;
 }
 
 /** 慢查询详情 */
@@ -551,7 +551,7 @@ declare interface Instances {
   /** 分片内存大小。 */
   RedisShardSize?: number;
   /** 实例的磁盘大小。 */
-  DiskSize?: number | null;
+  DiskSize?: number;
   /** 引擎：社区版Redis、腾讯云CKV。 */
   Engine?: string;
   /** 实例读写权限。rw：可读写。r：只读。 */
@@ -559,9 +559,9 @@ declare interface Instances {
   /** 实例 VIP 地址。 */
   Vip?: string;
   /** 该参数存在命名不规范问题，建议用参数IPv6取代。内部参数，用户可忽略。 */
-  Vip6?: string | null;
+  Vip6?: string;
   /** 内部参数，用户可忽略。 */
-  IPv6?: string | null;
+  IPv6?: string;
   /** VPC 网络ID，如：75101。 */
   VpcID?: number;
   /** 实例端口。 */
@@ -581,13 +581,13 @@ declare interface Instances {
 /** 日志投递信息 */
 declare interface LogDeliveryInfo {
   /** 日志投递开启状态，开启：true，关闭：false */
-  Enabled?: boolean | null;
+  Enabled?: boolean;
   /** 日志集ID。 */
-  LogsetId?: string | null;
+  LogsetId?: string;
   /** 日志主题ID。 */
-  TopicId?: string | null;
+  TopicId?: string;
   /** 日志集所在地域 */
-  LogRegion?: string | null;
+  LogRegion?: string;
 }
 
 /** 安全组出站规则 */

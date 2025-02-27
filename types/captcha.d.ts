@@ -241,7 +241,7 @@ declare interface DescribeCaptchaAppIdInfoResponse {
   /** 成功返回0 其它失败 */
   CaptchaCode?: number;
   /** 返回操作信息 */
-  CaptchaMsg?: string | null;
+  CaptchaMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -261,9 +261,9 @@ declare interface DescribeCaptchaDataResponse {
   /** 返回码 0 成功 其它失败 */
   CaptchaCode?: number;
   /** 数据数组 */
-  Data?: CaptchaQueryData[] | null;
+  Data?: CaptchaQueryData[];
   /** 返回信息描述 */
-  CaptchaMsg?: string | null;
+  CaptchaMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -287,7 +287,7 @@ declare interface DescribeCaptchaDataSumResponse {
   /** 拦截攻击量 */
   AttackSum?: number;
   /** 返回信息 */
-  CaptchaMsg?: string | null;
+  CaptchaMsg?: string;
   /** 成功返回0 其它失败 */
   CaptchaCode?: number;
   /** 票据校验总量 */
@@ -315,9 +315,9 @@ declare interface DescribeCaptchaMiniDataResponse {
   /** 返回码 0 成功 其它失败 */
   CaptchaCode?: number;
   /** 数据数组 */
-  Data?: CaptchaQueryData[] | null;
+  Data?: CaptchaQueryData[];
   /** 返回信息描述 */
-  CaptchaMsg?: string | null;
+  CaptchaMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -333,23 +333,23 @@ declare interface DescribeCaptchaMiniDataSumRequest {
 
 declare interface DescribeCaptchaMiniDataSumResponse {
   /** 请求总量 */
-  GetSum?: number | null;
+  GetSum?: number;
   /** 请求验证成功量 */
-  VfySuccSum?: number | null;
+  VfySuccSum?: number;
   /** 请求验证量 */
-  VfySum?: number | null;
+  VfySum?: number;
   /** 拦截攻击量 */
-  AttackSum?: number | null;
+  AttackSum?: number;
   /** 返回信息 */
-  CaptchaMsg?: string | null;
+  CaptchaMsg?: string;
   /** 成功返回0 其它失败 */
-  CaptchaCode?: number | null;
+  CaptchaCode?: number;
   /** 票据校验总量 */
-  CheckTicketSum?: number | null;
+  CheckTicketSum?: number;
   /** 票据验证通过量 */
-  TicketThroughputSum?: number | null;
+  TicketThroughputSum?: number;
   /** 票据验证拦截量 */
-  TicketInterceptSum?: number | null;
+  TicketInterceptSum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -369,9 +369,9 @@ declare interface DescribeCaptchaMiniOperDataResponse {
   /** 成功返回 0 其它失败 */
   CaptchaCode?: number;
   /** 返回信息 */
-  CaptchaMsg?: string | null;
+  CaptchaMsg?: string;
   /** 用户操作数据 */
-  Data?: CaptchaOperDataRes | null;
+  Data?: CaptchaOperDataRes;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -457,9 +457,9 @@ declare interface DescribeCaptchaOperDataResponse {
   /** 成功返回 0 其它失败 */
   CaptchaCode?: number;
   /** 返回信息 */
-  CaptchaMsg?: string | null;
+  CaptchaMsg?: string;
   /** 用户操作数据 */
-  Data?: CaptchaOperDataRes | null;
+  Data?: CaptchaOperDataRes;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -565,9 +565,9 @@ declare interface DescribeCaptchaTicketDataResponse {
   /** 成功返回 0 其它失败 */
   CaptchaCode?: number;
   /** 返回信息 */
-  CaptchaMsg?: string | null;
+  CaptchaMsg?: string;
   /** 验证码票据信息 */
-  Data?: CaptchaTicketDataRes | null;
+  Data?: CaptchaTicketDataRes;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -577,11 +577,11 @@ declare interface DescribeCaptchaUserAllAppIdRequest {
 
 declare interface DescribeCaptchaUserAllAppIdResponse {
   /** 用户注册的所有Appid和应用名称 */
-  Data?: CaptchaUserAllAppId[] | null;
+  Data?: CaptchaUserAllAppId[];
   /** 成功返回 0 其它失败 */
   CaptchaCode?: number;
   /** 返回操作信息 */
-  CaptchaMsg?: string | null;
+  CaptchaMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -703,7 +703,7 @@ declare interface UpdateCaptchaAppIdInfoResponse {
   /** 返回码 0 成功，其它失败 */
   CaptchaCode?: number;
   /** 返回操作信息 */
-  CaptchaMsg?: string | null;
+  CaptchaMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -293,25 +293,35 @@ declare interface InstanceInfo {
 /** 实例节点描述信息 */
 declare interface InstanceNode {
   /** IP地址 */
-  Ip: string;
+  Ip?: string;
   /** 机型，如 S1 */
-  Spec: string;
+  Spec?: string;
   /** cpu核数 */
-  Core: number;
+  Core?: number;
   /** 内存大小 */
-  Memory: number;
+  Memory?: number;
   /** 磁盘类型 */
-  DiskType: string;
+  DiskType?: string;
   /** 磁盘大小 */
-  DiskSize: number;
+  DiskSize?: number;
   /** 所属clickhouse cluster名称 */
-  Cluster: string;
+  Cluster?: string;
   /** 节点所属的分组信息 */
-  NodeGroups: GroupInfo[];
+  NodeGroups?: GroupInfo[];
   /** VPC IP */
-  Rip: string | null;
+  Rip?: string | null;
   /** ture的时候表示该节点上部署了chproxy进程 */
-  IsCHProxy: boolean | null;
+  IsCHProxy?: boolean | null;
+  /** 节点状态 */
+  Status?: string | null;
+  /** 节点uuid */
+  UUID?: string | null;
+  /** 区 */
+  Zone?: string | null;
+  /** 区描述 */
+  ZoneDesc?: string | null;
+  /** 真实资源id */
+  RealResourceId?: string;
 }
 
 /** 集群状态抽象后的结构体 */

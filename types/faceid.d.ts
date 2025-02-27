@@ -825,21 +825,21 @@ declare interface GetLiveCodeResponse {
 }
 
 declare interface GetWeChatBillDetailsRequest {
-  /** 拉取的日期（YYYY-MM-DD）。最大可追溯到365天前。当天6点后才能拉取前一天的数据。 */
+  /** 拉取的日期（YYYY-MM-DD）。- 最大可追溯到365天前。- 当天6点后才能拉取前一天的数据。 */
   Date: string;
-  /** 游标。用于分页，取第一页时传0，取后续页面时，传入本接口响应中返回的NextCursor字段的值。 */
+  /** 游标。- 用于分页。- 取第一页时传0，取后续页面时，传入本接口响应中返回的NextCursor字段的值。 */
   Cursor: number;
-  /** 需要拉取账单详情业务对应的RuleId。不传会返回所有RuleId数据。默认为空字符串。 */
+  /** 需要拉取账单详情业务对应的RuleId。- 不传会返回所有RuleId数据。- 默认为空字符串。 */
   RuleId?: string;
 }
 
 declare interface GetWeChatBillDetailsResponse {
-  /** 是否还有下一页。该字段为true时，需要将NextCursor的值作为入参Cursor继续调用本接口。 */
-  HasNextPage: boolean;
-  /** 下一页的游标。用于分页。 */
-  NextCursor: number;
-  /** 数据 */
-  WeChatBillDetails: WeChatBillDetail[];
+  /** 是否还有下一页。- 该字段为true时，需要将NextCursor的值作为入参Cursor继续调用本接口。 */
+  HasNextPage?: boolean;
+  /** 下一页的游标，用于分页。 */
+  NextCursor?: number;
+  /** 数据。 */
+  WeChatBillDetails?: WeChatBillDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

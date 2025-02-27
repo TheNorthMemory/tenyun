@@ -2291,6 +2291,18 @@ declare namespace V20180724 {
     Yaml: string | null;
   }
 
+  /** 单个有序数据点 */
+  interface SingleOrderedDataPoint {
+    /** 实例对象维度组合 */
+    Dimensions?: Dimension[] | null;
+    /** 监控数据值 */
+    Value?: number | null;
+    /** 监控数据时间戳 */
+    Timestamp?: number | null;
+    /** 排序序号 */
+    Order?: number | null;
+  }
+
   /** 标签 */
   interface Tag {
     /** 标签key */
@@ -4681,6 +4693,38 @@ declare namespace V20180724 {
     RequestId?: string;
   }
 
+  interface GetTopNMonitorDataRequest {
+    /** topN */
+    N: number;
+    /** 起始时间 */
+    StartTime: string;
+    /** 截止时间 */
+    EndTime: string;
+    /** 实例对象的维度组合，格式为key-value键值对形式的集合。不同类型的实例字段完全不同，如CVM为[{"Name":"InstanceId","Value":"ins-j0hk02zo"}]，Ckafka为[{"Name":"instanceId","Value":"ckafka-l49k54dd"}]，COS为[{"Name":"appid","Value":"1258344699"},{"Name":"bucket","Value":"rig-1258344699"}]。各个云产品的维度请参阅各个产品监控指标文档，对应的维度列即为维度组合的key，value为key对应的值。单请求最多支持批量拉取50个实例的监控数据。 */
+    Instances: Instance[];
+    /** 指标名称，如Bwpresourcebandwidthin，仅支持单指标拉取。各个云产品的详细指标说明请参阅各个产品监控指标文档，对应的指标英文名即为MetricName */
+    MetricName: string;
+    /** 命名空间，如QCE/CVM。各个云产品的详细命名空间说明请参阅各个产品监控指标文档 */
+    Namespace: string;
+    /** 监控统计周期，如60。默认为取值为60，单位为s。每个指标支持的统计周期不一定相同，各个云产品支持的统计周期请参阅各个产品监控指标文档，对应的统计周期列即为支持的统计周期。 */
+    Period?: number;
+  }
+
+  interface GetTopNMonitorDataResponse {
+    /** 指标名 */
+    MetricName?: string;
+    /** 统计周期 */
+    Period?: number;
+    /** topN */
+    N?: number;
+    /** 排序的监控数据 */
+    OrderedDataPoints?: SingleOrderedDataPoint[];
+    /** 返回信息 */
+    Msg?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface InstallPluginsRequest {
     /** 插件信息(可通过 DescribePluginOverviews 接口获取) */
     Plugins: GrafanaPlugin[];
@@ -5639,6 +5683,8 @@ declare interface Monitor {
   GetMonitorData(data: V20180724.GetMonitorDataRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.GetMonitorDataResponse>;
   /** 获取 Prometheus Agent 管理相关的命令行 {@link V20180724.GetPrometheusAgentManagementCommandRequest} {@link V20180724.GetPrometheusAgentManagementCommandResponse} */
   GetPrometheusAgentManagementCommand(data: V20180724.GetPrometheusAgentManagementCommandRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.GetPrometheusAgentManagementCommandResponse>;
+  /** 获取TopN监控数据 {@link V20180724.GetTopNMonitorDataRequest} {@link V20180724.GetTopNMonitorDataResponse} */
+  GetTopNMonitorData(data: V20180724.GetTopNMonitorDataRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.GetTopNMonitorDataResponse>;
   /** 安装 Grafana Plugin {@link V20180724.InstallPluginsRequest} {@link V20180724.InstallPluginsResponse} */
   InstallPlugins(data: V20180724.InstallPluginsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.InstallPluginsResponse>;
   /** 修改通知模板 {@link V20180724.ModifyAlarmNoticeRequest} {@link V20180724.ModifyAlarmNoticeResponse} */

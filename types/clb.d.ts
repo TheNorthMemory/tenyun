@@ -1667,6 +1667,8 @@ declare interface CreateTargetGroupRequest {
   Port?: number;
   /** 目标组绑定的后端服务器 */
   TargetGroupInstances?: TargetGroupInstance[];
+  /** 目标组类型，当前支持v1(旧版目标组), v2(新版目标组), 默认为v1(旧版目标组)。 */
+  Type?: string;
   /** 标签。 */
   Tags?: TagInfo[];
   /** 后端服务默认权重。 取值范围[0, 100] 设置该值后，添加后端服务到目标组时， 若后端服务不单独设置权重， 则使用这里的默认权重。 */

@@ -3497,7 +3497,7 @@ declare interface AddClusterInstancesRequest {
 
 declare interface AddClusterInstancesResponse {
   /** 添加云主机的返回列表 */
-  Result?: AddInstanceResult | null;
+  Result?: AddInstanceResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3525,7 +3525,7 @@ declare interface AddInstancesRequest {
 
 declare interface AddInstancesResponse {
   /** 添加云主机是否成功 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3556,7 +3556,7 @@ declare interface AssociateBusinessLogConfigRequest {
 
 declare interface AssociateBusinessLogConfigResponse {
   /** 操作结果 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3578,7 +3578,7 @@ declare interface AssociateConfigWithGroupRequest {
 
 declare interface AssociateConfigWithGroupResponse {
   /** 绑定是否成功 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3748,7 +3748,7 @@ declare interface CreateApplicationRequest {
 
 declare interface CreateApplicationResponse {
   /** 应用ID */
-  Result?: string | null;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3792,7 +3792,7 @@ declare interface CreateClusterRequest {
 
 declare interface CreateClusterResponse {
   /** 集群ID */
-  Result?: string | null;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4048,7 +4048,7 @@ declare interface CreateGroupRequest {
 
 declare interface CreateGroupResponse {
   /** groupId， null表示创建失败 */
-  Result?: string | null;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4148,7 +4148,7 @@ declare interface CreateNamespaceRequest {
 
 declare interface CreateNamespaceResponse {
   /** 成功时为命名空间ID，失败为null */
-  Result?: string | null;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4258,7 +4258,7 @@ declare interface CreateRepositoryRequest {
 
 declare interface CreateRepositoryResponse {
   /** 创建仓库是否成功 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4278,7 +4278,7 @@ declare interface CreateTaskFlowRequest {
 
 declare interface CreateTaskFlowResponse {
   /** 工作流 ID */
-  Result?: string | null;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4320,7 +4320,7 @@ declare interface CreateTaskRequest {
 
 declare interface CreateTaskResponse {
   /** 任务ID */
-  Result?: string | null;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4496,7 +4496,7 @@ declare interface DeleteGroupRequest {
 
 declare interface DeleteGroupResponse {
   /** 删除部署组操作是否成功。true：操作成功。false：操作失败。 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4612,7 +4612,7 @@ declare interface DeleteRepositoryRequest {
 
 declare interface DeleteRepositoryResponse {
   /** 删除仓库是否成功 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4798,7 +4798,7 @@ declare interface DeployGroupRequest {
 
 declare interface DeployGroupResponse {
   /** 任务ID */
-  Result?: TaskId | null;
+  Result?: TaskId;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4958,7 +4958,7 @@ declare interface DescribeApplicationsRequest {
 
 declare interface DescribeApplicationsResponse {
   /** 应用分页列表信息 */
-  Result?: TsfPageApplication | null;
+  Result?: TsfPageApplication;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5024,7 +5024,7 @@ declare interface DescribeClusterInstancesRequest {
 
 declare interface DescribeClusterInstancesResponse {
   /** 集群机器实例分页信息 */
-  Result?: TsfPageInstance | null;
+  Result?: TsfPageInstance;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5048,7 +5048,7 @@ declare interface DescribeClustersRequest {
 
 declare interface DescribeClustersResponse {
   /** Cluster分页信息 */
-  Result?: TsfPageClusterV2 | null;
+  Result?: TsfPageClusterV2;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5200,7 +5200,7 @@ declare interface DescribeContainerEventsRequest {
 
 declare interface DescribeContainerEventsResponse {
   /** events 分页列表 */
-  Result?: TsfPageContainerEvent | null;
+  Result?: TsfPageContainerEvent;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5320,7 +5320,7 @@ declare interface DescribeDeliveryConfigsRequest {
 
 declare interface DescribeDeliveryConfigsResponse {
   /** 投递项关联部署组信息 */
-  Result?: DeliveryConfigBindGroups | null;
+  Result?: DeliveryConfigBindGroups;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5472,7 +5472,7 @@ declare interface DescribeGroupAttributeRequest {
 
 declare interface DescribeGroupAttributeResponse {
   /** 虚拟机部署组信息 */
-  Result?: VmGroupOther | null;
+  Result?: VmGroupOther;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5542,7 +5542,7 @@ declare interface DescribeGroupInstancesRequest {
 
 declare interface DescribeGroupInstancesResponse {
   /** 部署组机器信息 */
-  Result?: TsfPageInstance | null;
+  Result?: TsfPageInstance;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5618,7 +5618,7 @@ declare interface DescribeGroupsRequest {
 
 declare interface DescribeGroupsResponse {
   /** 虚拟机部署组分页信息 */
-  Result?: TsfPageVmGroup | null;
+  Result?: TsfPageVmGroup;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5740,7 +5740,7 @@ declare interface DescribeInstancesRequest {
 
 declare interface DescribeInstancesResponse {
   /** 机器列表信息 */
-  Result?: InstanceEnrichedInfoPage | null;
+  Result?: InstanceEnrichedInfoPage;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5764,7 +5764,7 @@ declare interface DescribeInvocationMetricDataCurveRequest {
 
 declare interface DescribeInvocationMetricDataCurveResponse {
   /** 指标监控数据曲线集合 */
-  Result?: MetricDataCurve[] | null;
+  Result?: MetricDataCurve[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5808,7 +5808,7 @@ declare interface DescribeInvocationMetricDataPointRequest {
 
 declare interface DescribeInvocationMetricDataPointResponse {
   /** 单值指标列表 */
-  Result?: MetricDataSingleValue[] | null;
+  Result?: MetricDataSingleValue[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6238,7 +6238,7 @@ declare interface DescribeRepositoryRequest {
 
 declare interface DescribeRepositoryResponse {
   /** 查询的仓库信息 */
-  Result?: RepositoryInfo | null;
+  Result?: RepositoryInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6278,7 +6278,7 @@ declare interface DescribeSimpleApplicationsRequest {
 
 declare interface DescribeSimpleApplicationsResponse {
   /** 简单应用分页对象 */
-  Result?: TsfPageSimpleApplication | null;
+  Result?: TsfPageSimpleApplication;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6300,7 +6300,7 @@ declare interface DescribeSimpleClustersRequest {
 
 declare interface DescribeSimpleClustersResponse {
   /** TSF集群分页对象 */
-  Result?: TsfPageCluster | null;
+  Result?: TsfPageCluster;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6328,7 +6328,7 @@ declare interface DescribeSimpleGroupsRequest {
 
 declare interface DescribeSimpleGroupsResponse {
   /** 简单部署组列表 */
-  Result?: TsfPageSimpleGroup | null;
+  Result?: TsfPageSimpleGroup;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6360,7 +6360,7 @@ declare interface DescribeSimpleNamespacesRequest {
 
 declare interface DescribeSimpleNamespacesResponse {
   /** 命名空间分页列表 */
-  Result?: TsfPageNamespace | null;
+  Result?: TsfPageNamespace;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6402,7 +6402,7 @@ declare interface DescribeStatisticsRequest {
 
 declare interface DescribeStatisticsResponse {
   /** 查询服务统计结果 */
-  Result?: ServiceStatisticsResults | null;
+  Result?: ServiceStatisticsResults;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6454,7 +6454,7 @@ declare interface DescribeTaskRecordsRequest {
 
 declare interface DescribeTaskRecordsResponse {
   /** 任务记录列表 */
-  Result?: TaskRecordPage | null;
+  Result?: TaskRecordPage;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6666,7 +6666,7 @@ declare interface DisassociateBusinessLogConfigRequest {
 
 declare interface DisassociateBusinessLogConfigResponse {
   /** 操作结果 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6680,7 +6680,7 @@ declare interface DisassociateKafkaConfigRequest {
 
 declare interface DisassociateKafkaConfigResponse {
   /** 解除绑定是否成功 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6790,7 +6790,7 @@ declare interface ExpandGroupRequest {
 
 declare interface ExpandGroupResponse {
   /** 任务ID */
-  Result?: TaskId | null;
+  Result?: TaskId;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6816,7 +6816,7 @@ declare interface ModifyApplicationRequest {
 
 declare interface ModifyApplicationResponse {
   /** true：操作成功false：操作失败 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6894,7 +6894,7 @@ declare interface ModifyGroupRequest {
 
 declare interface ModifyGroupResponse {
   /** 更新部署组详情是否成功。true：操作成功。false：操作失败。 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6966,7 +6966,7 @@ declare interface ModifyNamespaceRequest {
 
 declare interface ModifyNamespaceResponse {
   /** Result */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7050,7 +7050,7 @@ declare interface ModifyTaskRequest {
 
 declare interface ModifyTaskResponse {
   /** 更新是否成功 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7248,7 +7248,7 @@ declare interface RemoveInstancesRequest {
 
 declare interface RemoveInstancesResponse {
   /** 集群移除机器是否成功 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7380,7 +7380,7 @@ declare interface ShrinkGroupRequest {
 
 declare interface ShrinkGroupResponse {
   /** 任务ID */
-  Result?: TaskId | null;
+  Result?: TaskId;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7418,7 +7418,7 @@ declare interface StartGroupRequest {
 
 declare interface StartGroupResponse {
   /** 任务ID */
-  Result?: TaskId | null;
+  Result?: TaskId;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7442,7 +7442,7 @@ declare interface StopGroupRequest {
 
 declare interface StopGroupResponse {
   /** 任务ID */
-  Result?: TaskId | null;
+  Result?: TaskId;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7651,7 +7651,7 @@ declare interface UpdateRepositoryRequest {
 
 declare interface UpdateRepositoryResponse {
   /** 更新仓库是否成功 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
