@@ -1235,17 +1235,17 @@ declare interface RuleDetailRes {
 /** 保存or修改设备分组回包 */
 declare interface SaveDeviceGroupRes {
   /** 保存or修改设备分组回包信息 */
-  Id?: number | null;
+  Id?: number;
 }
 
 /** 场景信息 */
 declare interface SceneInfo {
   /** 场景id */
-  SceneId?: string | null;
+  SceneId?: string;
   /** 场景名称 */
-  SceneName?: string | null;
+  SceneName?: string;
   /** 场景版本 */
-  Version?: string | null;
+  Version?: string;
 }
 
 /** 场景列表响应体 */
@@ -1263,21 +1263,21 @@ declare interface SpaceDataListStatsRes {
 /** 项目空间楼栋数量与建筑面积出参 */
 declare interface SpaceDataStats {
   /** 工作空间ID */
-  WorkspaceId?: string | null;
+  WorkspaceId?: string;
   /** 工作空间名称 */
-  WorkspaceName?: string | null;
+  WorkspaceName?: string;
   /** 楼栋数量 */
-  BuildingCount?: number | null;
+  BuildingCount?: number;
   /** 建筑面积 */
-  BuildingArea?: number | null;
+  BuildingArea?: number;
 }
 
 /** 查询租户楼栋数量和楼栋建筑面积相应体 */
 declare interface SpaceDataTotalStatsRes {
   /** 总楼栋数量 */
-  BuildingCount?: number | null;
+  BuildingCount?: number;
   /** 总建筑面积 */
-  BuildingArea?: number | null;
+  BuildingArea?: number;
 }
 
 /** 查询指定空间id列表响应 */

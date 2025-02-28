@@ -657,7 +657,7 @@ declare interface GetDetectInfoResponse {
 declare interface GetEidResultRequest {
   /** E证通流程的唯一标识，调用[GetEidToken](https://cloud.tencent.com/document/product/1007/54089)接口时生成。 */
   EidToken: string;
-  /** 指定拉取的结果信息。- 取值范围： 0：全部。 1：文本类。 2：身份证信息。 3：最佳截图信息。 5：意愿核身朗读模式相关结果。 6：意愿核身问答模式相关结果。- 例如 13表示拉取文本类、最佳截图信息。- 默认值：0 */
+  /** 指定需要拉取的结果信息。- 取值范围： 0：全部。 1：文本类。 2：身份证信息。 3：最佳截图信息。 5：意愿核身朗读模式相关结果。 6：意愿核身问答/点头模式相关结果。- 例如 13表示拉取文本类、最佳截图信息。- 默认值：0 */
   InfoType?: string;
   /** 从活体视频中截取一定张数的最佳帧。- 默认为0，最大为3，超出3的最多只给3张。- InfoType需要包含3。 */
   BestFramesCount?: number;
@@ -674,7 +674,7 @@ declare interface GetEidResultResponse {
   IdCardData?: DetectInfoIdCardData | null;
   /** 最佳帧信息。 */
   BestFrame?: DetectInfoBestFrame | null;
-  /** Eid信息。- 包括商户下用户唯一标识以及加密后的姓名、身份证号信息。- 解密方式详见[E证通获取实名信息指引](https://cloud.tencent.com/document/product/1007/63370) */
+  /** Eid信息。- EidInfo字段只有在人脸核身控制台完成“申请返回实名信息”之后返回，操作指引详见 [E证通获取实名信息指引](https://cloud.tencent.com/document/product/1007/63370)。- Eid信息包括商户下用户唯一标识以及加密后的姓名、身份证号信息。- 解密方式详见 [E证通获取实名信息指引](https://cloud.tencent.com/document/product/1007/63370)- 只有整个核验流程完成之后才能返回该字段信息。 */
   EidInfo?: EidInfo | null;
   /** 意愿核身朗读模式相关信息。- 若未使用意愿核身朗读功能，该字段返回值可以不处理。 */
   IntentionVerifyData?: IntentionVerifyData | null;
@@ -687,7 +687,7 @@ declare interface GetEidResultResponse {
 }
 
 declare interface GetEidTokenRequest {
-  /** EID商户ID。通过人脸核身控制台[自助接入](https://console.cloud.tencent.com/faceid/access)申请。- 字段长度最长50位。 */
+  /** EID商户ID。- 商户ID通过人脸核身控制台[自助接入](https://console.cloud.tencent.com/faceid/access)申请。- 商户ID与您通过腾讯云人脸核身控制台完成自助接入时所使用的腾讯云账号绑定。- 必须使用申请该商户ID时登录的腾讯云账号所对应的腾讯云API密钥调用该接口。 */
   MerchantId: string;
   /** 身份标识。- 未使用OCR服务时，必须传入。- 规则：a-z，A-Z，0-9组合。- 最长长度32位。 */
   IdCard?: string;

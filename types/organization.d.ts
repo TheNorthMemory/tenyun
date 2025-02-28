@@ -284,6 +284,8 @@ declare interface OrgMember {
   PermissionStatus?: string;
   /** 成员标签列表 */
   Tags?: Tag[];
+  /** 腾讯云昵称 */
+  NickName?: string;
 }
 
 /** 成员和子账号的授权关系 */
@@ -2947,6 +2949,8 @@ declare interface UpdateOrganizationMemberRequest {
   IsAllowQuit?: string;
   /** 代付者Uin。成员财务权限有代付费时需要，取值为成员对应主体的主体管理员Uin */
   PayUin?: string;
+  /** 是否同步组织成员名称到成员账号昵称。取值： 1-同步 0-不同步 */
+  IsModifyNickName?: number;
 }
 
 declare interface UpdateOrganizationMemberResponse {

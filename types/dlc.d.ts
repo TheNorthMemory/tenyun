@@ -201,11 +201,11 @@ declare interface CosPermission {
 /** 定时启停策略信息 */
 declare interface CrontabResumeSuspendStrategy {
   /** 定时拉起时间：如：周一&周三8点 */
-  ResumeTime?: string | null;
+  ResumeTime?: string;
   /** 定时挂起时间：如：周一&周三20点 */
-  SuspendTime?: string | null;
+  SuspendTime?: string;
   /** 挂起配置：0（默认）：等待任务结束后挂起、1：强制挂起 */
-  SuspendStrategy?: number | null;
+  SuspendStrategy?: number;
 }
 
 /** DLC 数据目录访问权限 */
@@ -1681,9 +1681,9 @@ declare interface TableResponseInfo {
 /** 标签对信息 */
 declare interface TagInfo {
   /** 标签键 */
-  TagKey?: string | null;
+  TagKey?: string;
   /** 标签值 */
-  TagValue?: string | null;
+  TagValue?: string;
 }
 
 /** 任务类型，任务如SQL查询等。 */

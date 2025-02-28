@@ -114,7 +114,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 263+ 款产品，12236+ 服务数</summary>
+<details><summary>共计 260+ 款产品，12231+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -263,7 +263,6 @@ live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-
 lke | [大模型知识引擎](https://cloud.tencent.com/document/product/1759) | 2023-11-30(98) |
 lkeap | [知识引擎原子能力](https://cloud.tencent.com/document/product/1772) | 2024-05-22(26) |
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(10) |
-lp | [登录保护](https://cloud.tencent.com/document/product/1190) | 2020-02-24(1) |
 mall | [商场客留大数据](https://cloud.tencent.com/document/product/1707) | 2023-05-18(1) |
 mariadb | [云数据库 MariaDB](https://cloud.tencent.com/document/product/237) | 2017-03-12(77) |
 market | [云市场](https://cloud.tencent.com/document/product/306) | 2019-10-10(2) |
@@ -294,8 +293,6 @@ pts | [云压测](https://cloud.tencent.com/document/product/1484) | 2021-07-28(
 rce | [全栈式风控引擎](https://cloud.tencent.com/document/product/1343) | 2020-11-03(11) |
 redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 2018-04-12(109) |
 region | [地域管理系统](https://cloud.tencent.com/document/product/1596) | 2022-06-27(3) |
-rkp | [风险探针](https://cloud.tencent.com/document/product/1169) | 2019-12-09(3) |
-rp | [注册保护](https://cloud.tencent.com/document/product/1191) | 2020-02-24(1) |
 rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(54) |
 scf | [云函数](https://cloud.tencent.com/document/product/583) | 2018-04-16(52+7) |
 ses | [邮件推送](https://cloud.tencent.com/document/product/1288) | 2020-10-02(31) |

@@ -745,7 +745,7 @@ declare interface DescribeClusterInstancesResponse {
   /** 集群中实例列表 */
   InstanceSet?: Instance[];
   /** 错误信息集合 */
-  Errors?: string[] | null;
+  Errors?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -765,7 +765,7 @@ declare interface DescribeHealthCheckPoliciesResponse {
   /** 健康检测策略数组 */
   HealthCheckPolicies?: HealthCheckPolicy[] | null;
   /** 数组总数目 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -785,7 +785,7 @@ declare interface DescribeHealthCheckPolicyBindingsResponse {
   /** 健康检测规则数组 */
   HealthCheckPolicyBindings?: HealthCheckPolicyBinding[] | null;
   /** 健康检测规则数量 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -813,7 +813,7 @@ declare interface DescribeNodePoolsRequest {
 
 declare interface DescribeNodePoolsResponse {
   /** 节点池列表 */
-  NodePools?: NodePool[] | null;
+  NodePools?: NodePool[];
   /** 资源总数 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3650,7 +3650,7 @@ declare namespace V20180525 {
 
   interface CancelClusterReleaseResponse {
     /** 应用信息 */
-    Release: PendingRelease | null;
+    Release?: PendingRelease;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3694,9 +3694,9 @@ declare namespace V20180525 {
     /** 集群master对应的大版本目前最新小版本 */
     LatestVersion?: string;
     /** 可升级节点列表 */
-    UpgradeAbleInstances?: UpgradeAbleInstancesItem[] | null;
+    UpgradeAbleInstances?: UpgradeAbleInstancesItem[];
     /** 总数 */
-    Total?: number | null;
+    Total?: number;
     /** 不可升级原因 */
     UnavailableVersionReason?: UnavailableReason[] | null;
     /** 唯一请求 ID，每次请求都会返回。 */
@@ -3858,7 +3858,7 @@ declare namespace V20180525 {
 
   interface CreateClusterReleaseResponse {
     /** 应用详情 */
-    Release?: PendingRelease | null;
+    Release?: PendingRelease;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4604,7 +4604,7 @@ declare namespace V20180525 {
 
   interface DeleteLogConfigsResponse {
     /** 删除采集规则遇到错误时返回错误原因 */
-    Message?: string | null;
+    Message?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4788,7 +4788,7 @@ declare namespace V20180525 {
     /** 可升级的集群版本号 */
     Versions?: string[] | null;
     /** 集群信息 */
-    Clusters?: ClusterVersion[] | null;
+    Clusters?: ClusterVersion[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4828,9 +4828,9 @@ declare namespace V20180525 {
 
   interface DescribeBatchModifyTagsStatusResponse {
     /** 失败资源列表 */
-    FailedResources?: FailedResource[] | null;
+    FailedResources?: FailedResource[];
     /** 任务状态：- running 运行中- failed 失败- done 成功 */
-    Status?: string | null;
+    Status?: string;
     /** 是否同步集群内子资源标签 */
     SyncSubresource?: boolean;
     /** 集群标签 */
@@ -4846,7 +4846,7 @@ declare namespace V20180525 {
 
   interface DescribeClusterAsGroupOptionResponse {
     /** 集群弹性伸缩属性 */
-    ClusterAsGroupOption?: ClusterAsGroupOption | null;
+    ClusterAsGroupOption?: ClusterAsGroupOption;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4878,11 +4878,11 @@ declare namespace V20180525 {
 
   interface DescribeClusterAuthenticationOptionsResponse {
     /** ServiceAccount认证配置 */
-    ServiceAccounts?: ServiceAccountAuthenticationOptions | null;
+    ServiceAccounts?: ServiceAccountAuthenticationOptions;
     /** 最近一次修改操作结果，返回值可能为：Updating，Success，Failed，TimeOut */
-    LatestOperationState?: string | null;
+    LatestOperationState?: string;
     /** OIDC认证配置 */
-    OIDCConfig?: OIDCConfigAuthenticationOptions | null;
+    OIDCConfig?: OIDCConfigAuthenticationOptions;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4924,9 +4924,9 @@ declare namespace V20180525 {
 
   interface DescribeClusterEndpointStatusResponse {
     /** 查询集群访问端口状态（Created 开启成功，Creating 开启中，NotFound 未开启） */
-    Status?: string | null;
+    Status?: string;
     /** 开启访问入口失败信息 */
-    ErrorMsg?: string | null;
+    ErrorMsg?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4940,7 +4940,7 @@ declare namespace V20180525 {
     /** 端口操作状态 (Creating 创建中 CreateFailed 创建失败 Created 创建完成 Deleting 删除中 DeletedFailed 删除失败 Deleted 已删除 NotFound 未发现操作 ) */
     Status?: string;
     /** 操作失败的原因 */
-    ErrorMsg?: string | null;
+    ErrorMsg?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4958,17 +4958,17 @@ declare namespace V20180525 {
     /** 集群APIServer的内网访问地址 */
     ClusterIntranetEndpoint?: string;
     /** 集群APIServer的域名 */
-    ClusterDomain?: string | null;
+    ClusterDomain?: string;
     /** 集群APIServer的外网访问ACL列表 */
     ClusterExternalACL?: string[] | null;
     /** 外网域名 */
-    ClusterExternalDomain?: string | null;
+    ClusterExternalDomain?: string;
     /** 内网域名 */
-    ClusterIntranetDomain?: string | null;
+    ClusterIntranetDomain?: string;
     /** 外网安全组 */
-    SecurityGroup?: string | null;
+    SecurityGroup?: string;
     /** 内网访问所属子网 */
-    ClusterIntranetSubnetId?: string | null;
+    ClusterIntranetSubnetId?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4980,7 +4980,7 @@ declare namespace V20180525 {
 
   interface DescribeClusterExtraArgsResponse {
     /** 集群自定义参数 */
-    ClusterExtraArgs?: ClusterExtraArgs | null;
+    ClusterExtraArgs?: ClusterExtraArgs;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5100,7 +5100,7 @@ declare namespace V20180525 {
 
   interface DescribeClusterNodePoolsResponse {
     /** NodePools（节点池列表） */
-    NodePoolSet?: NodePool[] | null;
+    NodePoolSet?: NodePool[];
     /** 资源总数 */
     TotalCount?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
@@ -5120,13 +5120,13 @@ declare namespace V20180525 {
 
   interface DescribeClusterPendingReleasesResponse {
     /** 正在安装中应用列表 */
-    ReleaseSet?: PendingRelease[] | null;
+    ReleaseSet?: PendingRelease[];
     /** 每页返回数量限制 */
-    Limit?: number | null;
+    Limit?: number;
     /** 页偏移量 */
-    Offset?: number | null;
+    Offset?: number;
     /** 总数量 */
-    Total?: number | null;
+    Total?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5144,7 +5144,7 @@ declare namespace V20180525 {
 
   interface DescribeClusterReleaseDetailsResponse {
     /** 应用详情 */
-    Release?: ReleaseDetails | null;
+    Release?: ReleaseDetails;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5162,9 +5162,9 @@ declare namespace V20180525 {
 
   interface DescribeClusterReleaseHistoryResponse {
     /** 已安装应用版本历史 */
-    ReleaseHistorySet: ReleaseHistory[] | null;
+    ReleaseHistorySet?: ReleaseHistory[];
     /** 总数量 */
-    Total: number | null;
+    Total?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5188,13 +5188,13 @@ declare namespace V20180525 {
 
   interface DescribeClusterReleasesResponse {
     /** 数量限制 */
-    Limit?: number | null;
+    Limit?: number;
     /** 偏移量 */
-    Offset?: number | null;
+    Offset?: number;
     /** 已安装应用列表 */
-    ReleaseSet?: Release[] | null;
+    ReleaseSet?: Release[];
     /** 已安装应用总数量 */
-    Total?: number | null;
+    Total?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5248,7 +5248,7 @@ declare namespace V20180525 {
     /** 集群访问策略组 */
     SecurityPolicy?: string[] | null;
     /** 集群Kubeconfig文件 */
-    Kubeconfig?: string | null;
+    Kubeconfig?: string;
     /** 集群JnsGw的访问地址 */
     JnsGwEndpoint?: string | null;
     /** 唯一请求 ID，每次请求都会返回。 */
@@ -5276,9 +5276,9 @@ declare namespace V20180525 {
 
   interface DescribeClusterVirtualNodePoolsResponse {
     /** 节点池总数 */
-    TotalCount?: number | null;
+    TotalCount?: number;
     /** 虚拟节点池列表 */
-    NodePoolSet?: VirtualNodePool[] | null;
+    NodePoolSet?: VirtualNodePool[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5294,9 +5294,9 @@ declare namespace V20180525 {
 
   interface DescribeClusterVirtualNodeResponse {
     /** 节点列表 */
-    Nodes?: VirtualNode[] | null;
+    Nodes?: VirtualNode[];
     /** 节点总数 */
-    TotalCount?: number | null;
+    TotalCount?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5560,7 +5560,7 @@ declare namespace V20180525 {
     /** 任务进度的描述：Running/Succeed/Failed */
     Status?: string;
     /** 当任务进度为Failed时，对任务状态的进一步描述，例如IPAMD组件安装失败 */
-    ErrorMessage?: string | null;
+    ErrorMessage?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5600,7 +5600,7 @@ declare namespace V20180525 {
 
   interface DescribeExistedInstancesResponse {
     /** 已经存在的实例信息数组。 */
-    ExistedInstanceSet?: ExistedInstance[] | null;
+    ExistedInstanceSet?: ExistedInstance[];
     /** 符合条件的实例数量。 */
     TotalCount?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
@@ -5654,19 +5654,19 @@ declare namespace V20180525 {
     /** 是否安装了eniipamd组件 */
     EnableIPAMD?: boolean;
     /** 是否开启自定义podcidr，默认为false，已安装eniipamd组件才意义 */
-    EnableCustomizedPodCidr?: boolean | null;
+    EnableCustomizedPodCidr?: boolean;
     /** 是否不开启vpccni模式，默认为false，已安装eniipamd组件才意义 */
-    DisableVpcCniMode?: boolean | null;
+    DisableVpcCniMode?: boolean;
     /** 组件状态，已安装eniipamd组件才会有值 */
-    Phase?: string | null;
+    Phase?: string;
     /** 错误信息，已安装eniipamd组件且状态为非running才会有错误信息 */
-    Reason?: string | null;
+    Reason?: string;
     /** 子网信息，已安装eniipamd组件才会有值 */
     SubnetIds?: string[] | null;
     /** 固定ip回收时间，已安装eniipamd组件才会有值 */
-    ClaimExpiredDuration?: string | null;
+    ClaimExpiredDuration?: string;
     /** 是否开启了中继网卡模式 */
-    EnableTrunkingENI?: boolean | null;
+    EnableTrunkingENI?: boolean;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5698,9 +5698,9 @@ declare namespace V20180525 {
 
   interface DescribeImagesResponse {
     /** 镜像数量 */
-    TotalCount?: number | null;
+    TotalCount?: number;
     /** 镜像信息列表 */
-    ImageInstanceSet?: ImageInstance[] | null;
+    ImageInstanceSet?: ImageInstance[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5720,11 +5720,11 @@ declare namespace V20180525 {
 
   interface DescribeLogConfigsResponse {
     /** 分页查找时返回采集规则总数 */
-    Total?: number | null;
+    Total?: number;
     /** 指定采集规则名称查找，部分失败时返回失败采集规则名称及最后一个失败原因 */
-    Message?: string | null;
+    Message?: string;
     /** 采集规则查询结果 */
-    LogConfigs?: string | null;
+    LogConfigs?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6208,9 +6208,9 @@ declare namespace V20180525 {
 
   interface DescribeRegionsResponse {
     /** 地域的数量 */
-    TotalCount?: number | null;
+    TotalCount?: number;
     /** 地域列表 */
-    RegionInstanceSet?: RegionInstance[] | null;
+    RegionInstanceSet?: RegionInstance[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6288,7 +6288,7 @@ declare namespace V20180525 {
     /** 路由表是否冲突。 */
     HasConflict?: boolean;
     /** 路由表冲突列表。 */
-    RouteTableConflictSet?: RouteTableConflict[] | null;
+    RouteTableConflictSet?: RouteTableConflict[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6300,7 +6300,7 @@ declare namespace V20180525 {
 
   interface DescribeSupportedRuntimeResponse {
     /** 可选运行时列表 */
-    OptionalRuntimes?: OptionalRuntimes[] | null;
+    OptionalRuntimes?: OptionalRuntimes[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6410,9 +6410,9 @@ declare namespace V20180525 {
 
   interface DescribeVersionsResponse {
     /** 版本数量 */
-    TotalCount?: number | null;
+    TotalCount?: number;
     /** 版本列表 */
-    VersionInstanceSet?: VersionInstance[] | null;
+    VersionInstanceSet?: VersionInstance[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6428,9 +6428,9 @@ declare namespace V20180525 {
 
   interface DescribeVpcCniPodLimitsResponse {
     /** 机型数据数量 */
-    TotalCount?: number | null;
+    TotalCount?: number;
     /** 机型信息及其可支持的最大VPC-CNI模式Pod数量信息 */
-    PodLimitsInstanceSet?: PodLimitsInstance[] | null;
+    PodLimitsInstanceSet?: PodLimitsInstance[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6812,19 +6812,19 @@ declare namespace V20180525 {
 
   interface ModifyClusterAttributeResponse {
     /** 集群所属项目 */
-    ProjectId?: number | null;
+    ProjectId?: number;
     /** 集群名称 */
-    ClusterName?: string | null;
+    ClusterName?: string;
     /** 集群描述 */
-    ClusterDesc?: string | null;
+    ClusterDesc?: string;
     /** 集群等级 */
-    ClusterLevel?: string | null;
+    ClusterLevel?: string;
     /** 自动变配集群等级 */
-    AutoUpgradeClusterLevel?: AutoUpgradeClusterLevel | null;
+    AutoUpgradeClusterLevel?: AutoUpgradeClusterLevel;
     /** 是否开启QGPU共享 */
-    QGPUShareEnable?: boolean | null;
+    QGPUShareEnable?: boolean;
     /** 集群属性 */
-    ClusterProperty?: ClusterProperty | null;
+    ClusterProperty?: ClusterProperty;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -7188,7 +7188,7 @@ declare namespace V20180525 {
 
   interface RollbackClusterReleaseResponse {
     /** 应用详情 */
-    Release: PendingRelease | null;
+    Release?: PendingRelease;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -7248,7 +7248,7 @@ declare namespace V20180525 {
 
   interface SetNodePoolNodeProtectionResponse {
     /** 成功设置的节点id */
-    SucceedInstanceIds?: string[] | null;
+    SucceedInstanceIds?: string[];
     /** 没有成功设置的节点id */
     FailedInstanceIds?: string[] | null;
     /** 唯一请求 ID，每次请求都会返回。 */
@@ -7292,7 +7292,7 @@ declare namespace V20180525 {
 
   interface UninstallClusterReleaseResponse {
     /** 应用详情 */
-    Release: PendingRelease | null;
+    Release?: PendingRelease;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -7346,7 +7346,7 @@ declare namespace V20180525 {
 
   interface UpdateClusterKubeconfigResponse {
     /** 已更新的子账户Uin列表 */
-    UpdatedSubAccounts?: string[] | null;
+    UpdatedSubAccounts?: string[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -7550,7 +7550,7 @@ declare namespace V20180525 {
 
   interface UpgradeClusterReleaseResponse {
     /** 应用详情 */
-    Release?: PendingRelease | null;
+    Release?: PendingRelease;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

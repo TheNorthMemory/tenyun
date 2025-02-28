@@ -4627,7 +4627,7 @@ declare interface Emr {
   DescribeServiceNodeInfos(data: DescribeServiceNodeInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceNodeInfosResponse>;
   /** 查询Spark查询列表 {@link DescribeSparkQueriesRequest} {@link DescribeSparkQueriesResponse} */
   DescribeSparkQueries(data: DescribeSparkQueriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkQueriesResponse>;
-  /** 查询StarRocsk查询信息 {@link DescribeStarRocksQueryInfoRequest} {@link DescribeStarRocksQueryInfoResponse} */
+  /** 查询StarRocks查询信息 {@link DescribeStarRocksQueryInfoRequest} {@link DescribeStarRocksQueryInfoResponse} */
   DescribeStarRocksQueryInfo(data: DescribeStarRocksQueryInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStarRocksQueryInfoResponse>;
   /** 查询Trino(PrestoSQL)查询信息 {@link DescribeTrinoQueryInfoRequest} {@link DescribeTrinoQueryInfoResponse} */
   DescribeTrinoQueryInfo(data: DescribeTrinoQueryInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrinoQueryInfoResponse>;

@@ -132,6 +132,8 @@ declare interface ChargeProperties {
 
 /** 集群的配置文件的修改历史 */
 declare interface ClusterConfigsHistory {
+  /** 计算组id */
+  ComputeGroupId?: string;
   /** 配置文件名称 */
   FileName?: string;
   /** 修改后的配置文件内容，base64编码 */
@@ -1137,6 +1139,8 @@ declare interface DescribeClusterConfigsHistoryRequest {
   EndTime: string;
   /** 需要查询的配置文件名称数组，如果为空则查询全部历史记录。目前支持的配置文件名称有：apache_hdfs_broker.conf、be.conf、fe.conf、core-site.xml、hdfs-site.xml、odbcinst.ini */
   ConfigFileNames?: string[];
+  /** 需要查询的计算组列表 */
+  ComputeGroupIds?: string[];
 }
 
 declare interface DescribeClusterConfigsHistoryResponse {

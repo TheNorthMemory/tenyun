@@ -148,7 +148,6 @@ import Live, { Versions as LiveVersions } from "./live";
 import Lke, { Versions as LkeVersions } from "./lke";
 import Lkeap, { Versions as LkeapVersions } from "./lkeap";
 import Lowcode, { Versions as LowcodeVersions } from "./lowcode";
-import Lp, { Versions as LpVersions } from "./lp";
 import Mall, { Versions as MallVersions } from "./mall";
 import Mariadb, { Versions as MariadbVersions } from "./mariadb";
 import Market, { Versions as MarketVersions } from "./market";
@@ -179,8 +178,6 @@ import Pts, { Versions as PtsVersions } from "./pts";
 import Rce, { Versions as RceVersions } from "./rce";
 import Redis, { Versions as RedisVersions } from "./redis";
 import Region, { Versions as RegionVersions } from "./region";
-import Rkp, { Versions as RkpVersions } from "./rkp";
-import Rp, { Versions as RpVersions } from "./rp";
 import Rum, { Versions as RumVersions } from "./rum";
 import Scf, { Versions as ScfVersions } from "./scf";
 import Ses, { Versions as SesVersions } from "./ses";
@@ -415,7 +412,6 @@ export declare type SERVICE_VERSIONS = {
   lke: LkeVersions,
   lkeap: LkeapVersions,
   lowcode: LowcodeVersions,
-  lp: LpVersions,
   mall: MallVersions,
   mariadb: MariadbVersions,
   market: MarketVersions,
@@ -446,8 +442,6 @@ export declare type SERVICE_VERSIONS = {
   rce: RceVersions,
   redis: RedisVersions,
   region: RegionVersions,
-  rkp: RkpVersions,
-  rp: RpVersions,
   rum: RumVersions,
   scf: ScfVersions,
   ses: SesVersions,
@@ -841,8 +835,6 @@ declare type TenYun = CloudInstance & CloudServices & {
   lkeap: Lkeap,
   /** {@link Lowcode 云开发低码} */
   lowcode: Lowcode,
-  /** {@link Lp 登录保护} */
-  lp: Lp,
   /** {@link Mall 商场客留大数据} */
   mall: Mall,
   /** {@link Mariadb 云数据库 MariaDB} */
@@ -903,10 +895,6 @@ declare type TenYun = CloudInstance & CloudServices & {
   redis: Redis,
   /** {@link Region 地域管理系统} */
   region: Region,
-  /** {@link Rkp 风险探针} */
-  rkp: Rkp,
-  /** {@link Rp 注册保护} */
-  rp: Rp,
   /** {@link Rum 前端性能监控} */
   rum: Rum,
   /** {@link Scf 云函数} */
