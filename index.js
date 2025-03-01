@@ -1,4 +1,4 @@
-/* eslint no-bitwise: ["error", { "allow": ["|"] }], no-nested-ternary: 0, class-methods-use-this: 0, no-constructor-return: 0 */
+/* eslint max-classes-per-file: ["error", 2], no-bitwise: ["error", { "allow": ["|"] }], no-nested-ternary: 0, class-methods-use-this: 0, no-constructor-return: 0 */
 const { createHmac, createHash, createSecretKey } = require('crypto');
 const axios = require('axios');
 
@@ -32,6 +32,7 @@ const X_TC_LANGUAGE = 'X-TC-Language';
  * @typedef {import('axios').AxiosRequestHeaders} AxiosRequestHeaders
  * @typedef {import('axios').AxiosResponse} AxiosResponse
  * @typedef {import('axios').AxiosResponseHeaders} AxiosResponseHeaders
+ * @typedef {import('axios').AxiosError} AxiosError
  * @typedef {() => string[]} ServiceEndpoint
  * @typedef {(data?: object|Buffer, config?: AxiosRequestConfig) => AxiosPromise} ServiceActionRequest
  */
@@ -293,7 +294,7 @@ const SERVICE_VERSIONS = {
   vtc: ['2024-02-23'],
   wav: ['2021-01-29'],
   wedata: ['2021-08-20'],
-  weilingwith : ['2023-04-27'],
+  weilingwith: ['2023-04-27'],
   wss: ['2018-04-26'],
   yinsuda: ['2022-05-27'],
   youmall: ['2018-02-28'],
@@ -336,7 +337,9 @@ class TenYun {
 
   get [BUSINESS_ERR_INTERCEPTOR]() {
     /**
-     * @param {AxiosResponse} thing
+     * @param {AxiosResponse} thing - The response
+     * @returns {AxiosResponse} - The input response
+     * @throws {AxiosError} - An AxiosError instance
      */
     return (thing) => {
       if (thing?.data instanceof BusinessError) {
@@ -351,13 +354,13 @@ class TenYun {
             headers: thing.headers,
             data: thing.data.data,
             config: thing.config,
-            request: thing.request
-          }
+            request: thing.request,
+          },
         );
       }
 
       return thing;
-    }
+    };
   }
 
   get [SERVICE]() {
