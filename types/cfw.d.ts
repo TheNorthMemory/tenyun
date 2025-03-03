@@ -3619,7 +3619,7 @@ declare interface Cfw {
   CreateChooseVpcs(data: CreateChooseVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChooseVpcsResponse>;
   /** 创建暴露数据库白名单规则 {@link CreateDatabaseWhiteListRulesRequest} {@link CreateDatabaseWhiteListRulesResponse} */
   CreateDatabaseWhiteListRules(data: CreateDatabaseWhiteListRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatabaseWhiteListRulesResponse>;
-  /** 创建入侵防御规则白名单接口 {@link CreateIdsWhiteRuleRequest} {@link CreateIdsWhiteRuleResponse} */
+  /** @deprecated 创建入侵防御规则白名单接口 {@link CreateIdsWhiteRuleRequest} {@link CreateIdsWhiteRuleResponse} */
   CreateIdsWhiteRule(data: CreateIdsWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIdsWhiteRuleResponse>;
   /** 创建NAT防火墙实例（Region参数必填） {@link CreateNatFwInstanceRequest} {@link CreateNatFwInstanceResponse} */
   CreateNatFwInstance(data: CreateNatFwInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNatFwInstanceResponse>;
@@ -3639,7 +3639,7 @@ declare interface Cfw {
   DeleteBlockIgnoreRuleList(data: DeleteBlockIgnoreRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBlockIgnoreRuleListResponse>;
   /** 批量删除入侵防御封禁列表、放通列表规则（新） {@link DeleteBlockIgnoreRuleNewRequest} {@link DeleteBlockIgnoreRuleNewResponse} */
   DeleteBlockIgnoreRuleNew(data: DeleteBlockIgnoreRuleNewRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBlockIgnoreRuleNewResponse>;
-  /** 删除入侵防御规则白名单接口 {@link DeleteIdsWhiteRuleRequest} {@link DeleteIdsWhiteRuleResponse} */
+  /** @deprecated 删除入侵防御规则白名单接口 {@link DeleteIdsWhiteRuleRequest} {@link DeleteIdsWhiteRuleResponse} */
   DeleteIdsWhiteRule(data: DeleteIdsWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIdsWhiteRuleResponse>;
   /** 销毁防火墙实例 {@link DeleteNatFwInstanceRequest} {@link DeleteNatFwInstanceResponse} */
   DeleteNatFwInstance(data: DeleteNatFwInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNatFwInstanceResponse>;
@@ -3687,7 +3687,7 @@ declare interface Cfw {
   DescribeGuideScanInfo(data?: DescribeGuideScanInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGuideScanInfoResponse>;
   /** IP防护状态查询 {@link DescribeIPStatusListRequest} {@link DescribeIPStatusListResponse} */
   DescribeIPStatusList(data: DescribeIPStatusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPStatusListResponse>;
-  /** 查询入侵防御规则白名单接口 {@link DescribeIdsWhiteRuleRequest} {@link DescribeIdsWhiteRuleResponse} */
+  /** @deprecated 查询入侵防御规则白名单接口 {@link DescribeIdsWhiteRuleRequest} {@link DescribeIdsWhiteRuleResponse} */
   DescribeIdsWhiteRule(data: DescribeIdsWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIdsWhiteRuleResponse>;
   /** 日志审计日志查询 {@link DescribeLogsRequest} {@link DescribeLogsResponse} */
   DescribeLogs(data: DescribeLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogsResponse>;

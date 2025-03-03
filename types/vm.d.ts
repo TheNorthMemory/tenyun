@@ -5,31 +5,41 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 音频输出参数 */
 declare interface AudioResult {
   /** 该字段用于返回审核内容是否命中审核模型；取值：0（**未命中**）、1（**命中**）。 */
-  HitFlag?: number | null;
+  HitFlag?: number;
   /** 该字段用于返回检测结果所对应的恶意标签。返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。 */
-  Label?: string | null;
+  Label?: string;
   /** 该字段用于返回后续操作建议。当您获取到判定结果后，返回值表示具体的后续建议操作。返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过 */
-  Suggestion?: string | null;
+  Suggestion?: string;
   /** 该字段用于返回当前标签下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容。 */
-  Score?: number | null;
+  Score?: number;
   /** 该字段用于返回音频文件经ASR识别后的文本信息。最长可识别**5小时**的音频文件，若超出时长限制，接口将会报错。 */
-  Text?: string | null;
+  Text?: string;
   /** 该字段用于返回审核结果的访问链接（URL）。备注：链接默认有效期为12小时。如果您需要更长时效的链接，请使用[COS预签名](https://cloud.tencent.com/document/product/1265/104001)功能更新签名时效。 */
-  Url?: string | null;
+  Url?: string;
   /** 该字段用于返回音频文件的时长，单位为毫秒。 */
-  Duration?: string | null;
+  Duration?: string;
   /** 该字段用于返回输入参数中的额外附加信息（Extra），如未配置则默认返回值为空。备注：不同客户或Biztype下返回信息不同，如需配置该字段请提交工单咨询或联系售后专员处理。 */
-  Extra?: string | null;
+  Extra?: string;
   /** 该字段用于返回音频文件经ASR识别后产生的文本的详细审核结果。具体结果内容请参见AudioResultDetailLanguageResult数据结构的细节描述。 */
-  TextResults?: AudioResultDetailTextResult[] | null;
+  TextResults?: AudioResultDetailTextResult[];
   /** 该字段用于返回音频文件呻吟检测的详细审核结果。具体结果内容请参见AudioResultDetailMoanResult数据结构的细节描述。 */
-  MoanResults?: AudioResultDetailMoanResult[] | null;
+  MoanResults?: AudioResultDetailMoanResult[];
   /** 该字段用于返回音频小语种检测的详细审核结果。具体结果内容请参见AudioResultDetailLanguageResult数据结构的细节描述。 */
-  LanguageResults?: AudioResultDetailLanguageResult[] | null;
+  LanguageResults?: AudioResultDetailLanguageResult[];
   /** 该字段用于返回当前标签（Lable）下的二级标签。 */
-  SubLabel?: string | null;
+  SubLabel?: string;
   /** 识别类标签结果信息列表 */
-  RecognitionResults?: RecognitionResult[] | null;
+  RecognitionResults?: RecognitionResult[];
+  /** 该字段用于返回音频文件说话人检测的详细审核结果 */
+  SpeakerResults?: SpeakerResult[];
+  /** 该字段用于返回音频文件出行检测的详细审核结果 */
+  TravelResults?: TravelResult[];
+  /** 该字段用于返回音频文件的三级标签 */
+  SubTag?: string;
+  /** 该字段用于返回音频文件的三级标签码 */
+  SubTagCode?: string;
+  /** 该字段用于返回音频文件歌曲识别的详细审核结果 */
+  LabelResults?: LabelResult[];
 }
 
 /** 音频小语种检测结果 */
@@ -67,29 +77,33 @@ declare interface AudioResultDetailMoanResult {
 /** 音频ASR文本审核结果 */
 declare interface AudioResultDetailTextResult {
   /** 该字段用于返回检测结果所对应的恶意标签。返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。 */
-  Label: string | null;
+  Label?: string;
   /** 该字段用于返回ASR识别出的文本内容命中的关键词信息，用于标注内容违规的具体原因（如：加我微信）。该参数可能会有多个返回值，代表命中的多个关键词；若返回值为空，Score不为空，则代表识别结果所对应的恶意标签（Label）来自于语义模型判断的返回值。 */
-  Keywords: string[] | null;
+  Keywords?: string[];
   /** 该字段**仅当Label为Custom：自定义关键词时该参数有效**,用于返回自定义库的ID，以方便自定义库管理和配置。 */
-  LibId: string | null;
+  LibId?: string;
   /** 该字段**仅当Label为Custom：自定义关键词时该参数有效**,用于返回自定义库的名称,以方便自定义库管理和配置。 */
-  LibName: string | null;
+  LibName?: string;
   /** 该字段用于返回当前标签下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高**），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容。 */
-  Score: number | null;
+  Score?: number;
   /** 该字段用于返回自定义关键词对应的词库类型，取值为**1**（黑白库）和**2**（自定义关键词库），若未配置自定义关键词库,则默认值为1（黑白库匹配）。 */
-  LibType: number | null;
+  LibType?: number;
   /** 该字段用于返回后续操作建议。当您获取到判定结果后，返回值表示具体的后续建议操作。返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过 */
-  Suggestion: string | null;
+  Suggestion?: string;
   /** 该字段用于返回当前标签（Lable）下的二级标签。 */
-  SubLabel: string | null;
+  SubLabel?: string;
+  /** 该字段用于返回命中的关键词信息 */
+  HitInfos?: OcrHitInfo[];
 }
 
 /** 声音段信息 */
 declare interface AudioSegments {
   /** 截帧时间。点播文件：该值为相对于视频偏移时间，单位为秒，例如：0，5，10直播流：该值为时间戳，例如：1594650717 */
-  OffsetTime: string | null;
+  OffsetTime?: string;
   /** 结果集 */
-  Result: AudioResult | null;
+  Result?: AudioResult;
+  /** 创建时间 */
+  CreatedAt?: string;
 }
 
 /** 文件桶信息参考腾讯云存储相关说明 https://cloud.tencent.com/document/product/436/44352 */
@@ -105,19 +119,23 @@ declare interface BucketInfo {
 /** Result结果详情 */
 declare interface ImageResult {
   /** 违规标志0 未命中1 命中 */
-  HitFlag?: number | null;
+  HitFlag?: number;
   /** 命中的标签Porn 色情Sexy 性感Polity 政治Illegal 违法Abuse 谩骂Terror 暴恐Ad 广告 */
-  Label?: string | null;
+  Label?: string;
   /** 审核建议，可选值：Pass 通过，Review 建议人审，Block 确认违规 */
-  Suggestion?: string | null;
+  Suggestion?: string;
   /** 得分 */
-  Score?: number | null;
+  Score?: number;
   /** 画面截帧图片结果集 */
-  Results?: ImageResultResult[] | null;
+  Results?: ImageResultResult[];
   /** 该字段用于返回审核结果的访问链接（URL）。备注：链接默认有效期为12小时。如果您需要更长时效的链接，请使用[COS预签名](https://cloud.tencent.com/document/product/1265/104001)功能更新签名时效。 */
-  Url?: string | null;
+  Url?: string;
   /** 附加字段 */
-  Extra?: string | null;
+  Extra?: string;
+  /** 二级标签 */
+  SubLabel?: string;
+  /** 场景结果 */
+  RecognitionResults?: RecognitionResult[];
 }
 
 /** 图片输出结果的子结果 */
@@ -145,25 +163,29 @@ declare interface ImageResultResult {
 /** 具体场景下的图片识别结果 */
 declare interface ImageResultsResultDetail {
   /** 任务名称 */
-  Name: string | null;
+  Name?: string | null;
   /** OCR识别文本 */
-  Text: string | null;
+  Text?: string | null;
   /** 位置信息 */
-  Location: ImageResultsResultDetailLocation | null;
+  Location?: ImageResultsResultDetailLocation | null;
   /** 标签 */
-  Label: string | null;
+  Label?: string | null;
   /** 库ID */
-  LibId: string | null;
+  LibId?: string | null;
   /** 库名称 */
-  LibName: string | null;
+  LibName?: string | null;
   /** 命中的关键词 */
-  Keywords: string[] | null;
+  Keywords?: string[] | null;
   /** 建议 */
-  Suggestion: string | null;
+  Suggestion?: string | null;
   /** 得分 */
-  Score: number | null;
+  Score?: number | null;
   /** 子标签码 */
-  SubLabelCode: string | null;
+  SubLabelCode?: string | null;
+  /** 子标签 */
+  SubLabel?: string;
+  /** Ocr文本命中信息 */
+  OcrHitInfos?: OcrHitInfo[];
 }
 
 /** 图片详情位置信息 */
@@ -183,9 +205,13 @@ declare interface ImageResultsResultDetailLocation {
 /** 图片段信息 */
 declare interface ImageSegments {
   /** 截帧时间。点播文件：该值为相对于视频偏移时间，单位为秒，例如：0，5，10直播流：该值为时间戳，例如：1594650717 */
-  OffsetTime: string;
+  OffsetTime?: string;
   /** 画面截帧结果详情 */
-  Result: ImageResult;
+  Result?: ImageResult;
+  /** 时间 */
+  CreatedAt?: string;
+  /** 截帧毫秒时间 */
+  OffsetusTime?: string;
 }
 
 /** 输入信息详情 */
@@ -196,6 +222,24 @@ declare interface InputInfo {
   Url: string | null;
   /** 桶信息。当输入当时COS时，该字段不为空 */
   BucketInfo: string | null;
+}
+
+/** 歌曲识别结果 */
+declare interface LabelResult {
+  /** 场景 */
+  Scene?: string;
+  /** 建议 */
+  Suggestion?: number;
+  /** 标签 */
+  Label?: string;
+  /** 名字 */
+  Name?: string;
+  /** 分数 */
+  Score?: number;
+  /** 开始时间 */
+  StartTime?: number;
+  /** 结束时间 */
+  EndTime?: number;
 }
 
 /** 媒体类型 */
@@ -210,6 +254,18 @@ declare interface MediaInfo {
   Height: number;
   /** 封面 */
   Thumbnail: string;
+}
+
+/** Ocr命中信息 */
+declare interface OcrHitInfo {
+  /** 关键词 */
+  Type?: string;
+  /** 关键词内容 */
+  Keyword?: string;
+  /** 自定义库名 */
+  LibName?: string;
+  /** 位置信息 */
+  Positions?: TextPosition[];
 }
 
 /** 审核切片asr文本信息 */
@@ -240,6 +296,18 @@ declare interface SegmentCosUrlList {
   AudioBlockUrl?: string | null;
   /** 全量音频识别文本的cos url */
   AsrUrl?: string | null;
+}
+
+/** 说话人结果 */
+declare interface SpeakerResult {
+  /** 标签 */
+  Label?: string;
+  /** 分数 */
+  Score?: number;
+  /** 开始时间 */
+  StartTime?: number;
+  /** 结束时间 */
+  EndTime?: number;
 }
 
 /** 数据存储信息 */
@@ -336,6 +404,32 @@ declare interface TaskResult {
   Code: string | null;
   /** 如果错误，该字段表示错误详情 */
   Message: string | null;
+}
+
+/** 文本关键词命中的位置信息 */
+declare interface TextPosition {
+  /** 命中关键词在文本中的起始位置 */
+  Start?: number;
+  /** 命中关键词在文本中的结束位置 */
+  End?: number;
+}
+
+/** 出行结果 */
+declare interface TravelResult {
+  /** 一级标签 */
+  Label?: string;
+  /** 二级标签 */
+  SubLabel?: string;
+  /** 风险等级 */
+  RiskLevel?: string;
+  /** 出行音频角色 */
+  AudioRole?: string;
+  /** 出行语音文本 */
+  AudioText?: string;
+  /** 开始时间 */
+  StartTime?: number;
+  /** 结束时间 */
+  EndTime?: number;
 }
 
 /** 用户信息 */
@@ -485,34 +579,62 @@ declare interface DescribeTasksResponse {
 declare namespace V20201229 {
   type VersionHeader = { headers: { 'X-TC-Version': '2020-12-29' } }
 
+  /** 敏感歌曲 */
+  interface AudioLabelResult {
+    /** 场景 */
+    Scene?: string;
+    /** 建议 */
+    Suggestion?: number;
+    /** 标签 */
+    Label?: string;
+    /** 歌曲名等 */
+    Name?: string;
+    /** 分数 */
+    Score?: number;
+    /** 开始时间 */
+    StartTime?: number;
+    /** 结束时间 */
+    EndTime?: number;
+  }
+
   /** 音频审核输出参数 */
   interface AudioResult {
     /** 该字段用于返回审核内容是否命中审核模型；取值：0（**未命中**）、1（**命中**）。 */
-    HitFlag?: number | null;
+    HitFlag?: number;
     /** 该字段用于返回检测结果所对应的恶意标签。返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。 */
-    Label?: string | null;
+    Label?: string;
     /** 该字段用于返回后续操作建议。当您获取到判定结果后，返回值表示具体的后续建议操作。返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过 */
-    Suggestion?: string | null;
+    Suggestion?: string;
     /** 该字段用于返回当前标签下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容。 */
-    Score?: number | null;
+    Score?: number;
     /** 该字段用于返回音频文件经ASR识别后的文本信息。最长可识别**5小时**的音频文件，若超出时长限制，接口将会报错。 */
-    Text?: string | null;
+    Text?: string;
     /** 该字段用于返回审核结果的访问链接（URL）。备注：链接默认有效期为12小时。如果您需要更长时效的链接，请使用[COS预签名](https://cloud.tencent.com/document/product/1265/104001)功能更新签名时效。 */
-    Url?: string | null;
+    Url?: string;
     /** 该字段用于返回音频文件的时长，单位为毫秒。 */
-    Duration?: string | null;
+    Duration?: string;
     /** 该字段用于返回输入参数中的额外附加信息（Extra），如未配置则默认返回值为空。备注：不同客户或Biztype下返回信息不同，如需配置该字段请提交工单咨询或联系售后专员处理。 */
-    Extra?: string | null;
+    Extra?: string;
     /** 该字段用于返回音频文件经ASR识别后产生的文本的详细审核结果。具体结果内容请参见AudioResultDetailLanguageResult数据结构的细节描述。 */
-    TextResults?: AudioResultDetailTextResult[] | null;
+    TextResults?: AudioResultDetailTextResult[];
     /** 该字段用于返回音频文件呻吟检测的详细审核结果。具体结果内容请参见AudioResultDetailMoanResult数据结构的细节描述。 */
-    MoanResults?: AudioResultDetailMoanResult[] | null;
+    MoanResults?: AudioResultDetailMoanResult[];
     /** 该字段用于返回音频小语种检测的详细审核结果。具体结果内容请参见AudioResultDetailLanguageResult数据结构的细节描述。 */
-    LanguageResults?: AudioResultDetailLanguageResult[] | null;
+    LanguageResults?: AudioResultDetailLanguageResult[];
     /** 该字段用于返回当前标签（Lable）下的二级标签。 */
-    SubLabel?: string | null;
+    SubLabel?: string;
     /** 识别类标签结果信息列表 */
-    RecognitionResults?: RecognitionResult[] | null;
+    RecognitionResults?: RecognitionResult[];
+    /** 该字段用于返回音频文件说话人检测的详细审核结果。 */
+    SpeakerResults?: SpeakerResult[];
+    /** 该字段用于返回音频文件歌曲检测的详细审核结果。 */
+    LabelResults?: AudioLabelResult[];
+    /** 该字段用于返回音频文件出行检测的详细审核结果。 */
+    TravelResults?: TravelResult[];
+    /** 三级标签 */
+    SubTag?: string;
+    /** 三级标签码 */
+    SubTagCode?: string;
   }
 
   /** 音频语言种类检测结果 */
@@ -550,29 +672,33 @@ declare namespace V20201229 {
   /** 音频ASR文本审核结果 */
   interface AudioResultDetailTextResult {
     /** 该字段用于返回检测结果所对应的恶意标签。返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。 */
-    Label: string | null;
+    Label?: string;
     /** 该字段用于返回ASR识别出的文本内容命中的关键词信息，用于标注内容违规的具体原因（如：加我微信）。该参数可能会有多个返回值，代表命中的多个关键词；若返回值为空，Score不为空，则代表识别结果所对应的恶意标签（Label）来自于语义模型判断的返回值。 */
-    Keywords: string[] | null;
+    Keywords?: string[];
     /** 该字段**仅当Label为Custom：自定义关键词时该参数有效**,用于返回自定义库的ID，以方便自定义库管理和配置。 */
-    LibId: string | null;
+    LibId?: string;
     /** 该字段**仅当Label为Custom：自定义关键词时该参数有效**,用于返回自定义库的名称,以方便自定义库管理和配置。 */
-    LibName: string | null;
+    LibName?: string;
     /** 该字段用于返回当前标签下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高**），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容。 */
-    Score: number | null;
+    Score?: number;
     /** 该字段用于返回后续操作建议。当您获取到判定结果后，返回值表示具体的后续建议操作。返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过 */
-    Suggestion: string | null;
+    Suggestion?: string;
     /** 该字段用于返回自定义关键词对应的词库类型，取值为**1**（黑白库）和**2**（自定义关键词库），若未配置自定义关键词库,则默认值为1（黑白库匹配）。 */
-    LibType: number | null;
+    LibType?: number;
     /** 该字段用于返回当前标签（Lable）下的二级标签。 */
-    SubLabel: string | null;
+    SubLabel?: string;
+    /** 该字段用于返回命中的关键词信息 */
+    HitInfos?: HitInfo[];
   }
 
   /** 用于返回音频片段的审核结果 */
   interface AudioSegments {
     /** 该字段用于返回音频片段的开始时间，单位为秒。对于点播文件，该参数代表对应音频相对于完整音轨的偏移时间，如0（代表不偏移），5（音轨开始后5秒），10（音轨开始后10秒）；对于直播文件，该参数则返回对应音频片段开始时的Unix时间戳，如：1594650717。 */
-    OffsetTime: string | null;
+    OffsetTime?: string;
     /** 该字段用于返回音频片段的具体审核结果，详细内容敬请参考AudioResult数据结构的描述。 */
-    Result: AudioResult | null;
+    Result?: AudioResult;
+    /** 创建时间 */
+    CreatedAt?: string;
   }
 
   /** 文件桶信息参考腾讯云存储相关说明 https://cloud.tencent.com/document/product/436/44352 */
@@ -583,6 +709,18 @@ declare namespace V20201229 {
     Region: string;
     /** 该字段用于标识腾讯云对象存储的对象Key,对象z作为基本单元被存放在存储桶中；用户可以通过腾讯云控制台、API、SDK 等多种方式管理对象。有关对象的详细描述敬请参阅相应 [产品文档](https://cloud.tencent.com/document/product/436/13324)。 */
     Object: string;
+  }
+
+  /** 文本关键词命中信息 */
+  interface HitInfo {
+    /** 关键词 */
+    Type?: string;
+    /** 命中关键词 */
+    Keyword?: string;
+    /** 命中的自定义词库名 */
+    LibName?: string;
+    /** 关键词位置信息 */
+    Positions?: TextPosition[];
   }
 
   /** Result结果详情 */
@@ -632,27 +770,29 @@ declare namespace V20201229 {
   /** 具体场景下的图片识别结果 */
   interface ImageResultsResultDetail {
     /** 该字段用于返回调用视频审核接口时传入的TaskInput参数中的任务名称，方便任务的识别与管理。 */
-    Name?: string | null;
+    Name?: string;
     /** 该字段用于返回图片OCR文本识别的检测结果，识别**上限在5000字节内**。 */
-    Text?: string | null;
+    Text?: string;
     /** 该字段用于返回图像审核子结果的详细位置信息，如坐标、大小、旋转角度等。详细返回内容敬请参考ImageResultsResultDetailLocation数据结构的描述。 */
-    Location?: ImageResultsResultDetailLocation | null;
+    Location?: ImageResultsResultDetailLocation;
     /** 该字段用于返回检测结果所对应的恶意标签。返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。 */
-    Label?: string | null;
+    Label?: string;
     /** 该字段**仅当Label为Custom：自定义关键词时该参数有效**,用于返回自定义库的ID，以方便自定义库管理和配置。 */
-    LibId?: string | null;
+    LibId?: string;
     /** 该字段**仅当Label为Custom：自定义关键词时该参数有效**,用于返回自定义库的名称,以方便自定义库管理和配置。 */
-    LibName?: string | null;
+    LibName?: string;
     /** 该字段用于返回检测文本命中的关键词信息，用于标注文本违规的具体原因（如：*加我微信*）。该参数可能会有多个返回值，代表命中的多个关键词；如返回值为空且Score不为空，则代表识别结果所对应的恶意标签（Label）是来自于语义模型判断的返回值。 */
-    Keywords?: string[] | null;
+    Keywords?: string[];
     /** 该字段用于返回后续操作建议。当您获取到判定结果后，返回值表示具体的后续建议操作。返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过 */
-    Suggestion?: string | null;
+    Suggestion?: string;
     /** 该字段用于返回当前标签下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容。 */
-    Score?: number | null;
+    Score?: number;
     /** 该字段用于返回恶意标签下对应的子标签的检测结果，如：*Porn-SexBehavior*等子标签。 */
-    SubLabelCode?: string | null;
+    SubLabelCode?: string;
     /** 该字段用于返回恶意标签下对应的子标签的检测结果，如：*Porn-SexBehavior*等子标签。 */
-    SubLabel?: string | null;
+    SubLabel?: string;
+    /** 该字段用于返回OCR命中的关键词信息。 */
+    OcrHitInfos?: HitInfo[];
   }
 
   /** 图片详情位置信息 */
@@ -725,6 +865,18 @@ declare namespace V20201229 {
     AudioBlockUrl?: string | null;
     /** 全量音频识别文本的cos url */
     AsrUrl?: string | null;
+  }
+
+  /** 说话人结果 */
+  interface SpeakerResult {
+    /** 标签 */
+    Label?: string;
+    /** 分数 */
+    Score?: number;
+    /** 开始时间 */
+    StartTime?: number;
+    /** 结束时间 */
+    EndTime?: number;
   }
 
   /** 数据存储信息 */
@@ -821,6 +973,32 @@ declare namespace V20201229 {
     Code: string | null;
     /** **仅在Code的返回值为错误码时生效**，用于返回错误的详情内容。 */
     Message: string | null;
+  }
+
+  /** 文本关键词命中位置信息 */
+  interface TextPosition {
+    /** 关键词在文本中的起始位置 */
+    Start?: number;
+    /** 关键词在文本中的结束位置 */
+    End?: number;
+  }
+
+  /** 出行结果 */
+  interface TravelResult {
+    /** 一级标签 */
+    Label?: string;
+    /** 二级标签 */
+    SubLabel?: string;
+    /** 风险等级 */
+    RiskLevel?: string;
+    /** 音频角色 */
+    AudioRole?: string;
+    /** 音频语音文本 */
+    AudioText?: string;
+    /** 开始时间 */
+    StartTime?: number;
+    /** 结束时间 */
+    EndTime?: number;
   }
 
   interface CancelTaskRequest {

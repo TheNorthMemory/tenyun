@@ -17,7 +17,7 @@ declare interface ManagePortraitRiskOutput {
   /** 返回码（0，成功，其他失败） */
   Code?: number;
   /** 返回码对应的信息 */
-  Message?: string | null;
+  Message?: string;
   /** 结果 */
   Value?: ManagePortraitRiskValueOutput | null;
 }

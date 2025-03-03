@@ -763,43 +763,43 @@ declare interface EmrProductConfigDetail {
 /** EMR产品配置 */
 declare interface EmrProductConfigOutter {
   /** 软件信息 */
-  SoftInfo: string[] | null;
+  SoftInfo?: string[] | null;
   /** Master节点个数 */
-  MasterNodeSize: number | null;
+  MasterNodeSize?: number | null;
   /** Core节点个数 */
-  CoreNodeSize: number | null;
+  CoreNodeSize?: number | null;
   /** Task节点个数 */
-  TaskNodeSize: number | null;
+  TaskNodeSize?: number | null;
   /** Common节点个数 */
-  ComNodeSize: number | null;
+  ComNodeSize?: number | null;
   /** Master节点资源 */
-  MasterResource: OutterResource | null;
+  MasterResource?: OutterResource | null;
   /** Core节点资源 */
-  CoreResource: OutterResource | null;
+  CoreResource?: OutterResource | null;
   /** Task节点资源 */
-  TaskResource: OutterResource | null;
+  TaskResource?: OutterResource | null;
   /** Common节点资源 */
-  ComResource: OutterResource | null;
+  ComResource?: OutterResource | null;
   /** 是否使用COS */
-  OnCos: boolean | null;
+  OnCos?: boolean | null;
   /** 收费类型 */
-  ChargeType: number | null;
+  ChargeType?: number | null;
   /** Router节点个数 */
-  RouterNodeSize: number | null;
+  RouterNodeSize?: number | null;
   /** 是否支持HA */
-  SupportHA: boolean | null;
+  SupportHA?: boolean | null;
   /** 是否支持安全模式 */
-  SecurityOn: boolean | null;
-  /** 安全组名称 */
-  SecurityGroup: string | null;
+  SecurityOn?: boolean | null;
+  /** 集群初始安全组id */
+  SecurityGroup?: string | null;
   /** 是否开启Cbs加密 */
-  CbsEncrypt: number | null;
+  CbsEncrypt?: number | null;
   /** 自定义应用角色。 */
-  ApplicationRole: string | null;
-  /** 安全组 */
-  SecurityGroups: string[] | null;
+  ApplicationRole?: string | null;
+  /** 安全组id */
+  SecurityGroups?: string[] | null;
   /** SSH密钥Id */
-  PublicKeyId: string | null;
+  PublicKeyId?: string | null;
 }
 
 /** 执行动作。 */

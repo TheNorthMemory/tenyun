@@ -1309,7 +1309,7 @@ declare interface DescribeBlueprintInstancesResponse {
 }
 
 declare interface DescribeBlueprintsRequest {
-  /** 镜像 ID 列表。 */
+  /** 镜像 ID 列表。可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值字段BlueprintSet获取。列表长度最大值为100。 */
   BlueprintIds?: string[];
   /** 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。 */
   Offset?: number;
@@ -1387,7 +1387,7 @@ declare interface DescribeDiskBackupsDeniedActionsResponse {
 }
 
 declare interface DescribeDiskBackupsRequest {
-  /** 查询的云硬盘备份点ID列表。最大支持 100 个。参数不支持同时指定 DiskBackupIds 和 Filters。 */
+  /** 查询的云硬盘备份点ID列表。可通过[DescribeDiskBackups](https://cloud.tencent.com/document/product/1207/84379)接口返回值字段DiskBackupSet获取。列表长度最大值为100。参数不支持同时指定 DiskBackupIds 和 Filters。 */
   DiskBackupIds?: string[];
   /** 过滤器列表。disk-backup-id按照【云硬盘备份点 ID】进行过滤。类型：String必选：否disk-id按照【云硬盘 ID】进行过滤。类型：String必选：否disk-backup-state按照【云硬盘备份点状态】进行过滤。类型：String必选：否取值：参考数据结构 DescribeSnapshots 下的DiskBackupState取值。disk-usage按照【云硬盘类型】进行过滤。类型：String必选：否取值：SYSTEM_DISK或DATA_DISK每次请求的 Filters 的上限为 10，Filter.Values 的上限为5。参数不支持同时指定DiskBackupIds 和 Filters。 */
   Filters?: Filter[];
@@ -1449,7 +1449,7 @@ declare interface DescribeDisksDeniedActionsResponse {
 }
 
 declare interface DescribeDisksRequest {
-  /** 云硬盘ID列表。每次批量请求云硬盘的上限为 100。 */
+  /** 云硬盘ID列表。可通过[DescribeDisks](https://cloud.tencent.com/document/product/1207/66093)接口返回值字段KeyPairSet获取。列表长度最大值为100。 */
   DiskIds?: string[];
   /** 过滤器列表。disk-id按照【云硬盘 ID】进行过滤。类型：String必选：否instance-id按照【实例ID】进行过滤。类型：String必选：否disk-name按照【云硬盘名称】进行过滤。类型：String必选：否zone按照【可用区】进行过滤。类型：String必选：否disk-usage按照【云硬盘类型】进行过滤。类型：String必选：否取值：SYSTEM_DISK或DATA_DISKdisk-state按照【云硬盘状态】进行过滤。类型：String必选：否取值：参考数据结构[Disk](https://cloud.tencent.com/document/api/1207/47576)中DiskState取值。每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 DiskIds 和 Filters。 */
   Filters?: Filter[];
@@ -1637,9 +1637,9 @@ declare interface DescribeFirewallTemplateRuleQuotaResponse {
 }
 
 declare interface DescribeFirewallTemplateRulesRequest {
-  /** 防火墙模板ID。 */
+  /** 防火墙模板ID列表。可通过[DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874)接口返回值字段TemplateSet获取。列表长度最大值为100。 */
   TemplateId: string;
-  /** 防火墙模板规则ID列表。 */
+  /** 防火墙模板规则ID列表。可通过[DescribeFirewallTemplateRules](https://cloud.tencent.com/document/product/1207/96875)接口返回值字段TemplateRuleSet获取。列表长度最大值为100。 */
   TemplateRuleIds?: string[];
   /** 偏移量，默认为 0。 */
   Offset?: number;
@@ -1799,7 +1799,7 @@ declare interface DescribeInstancesTrafficPackagesResponse {
 }
 
 declare interface DescribeKeyPairsRequest {
-  /** 密钥对 ID 列表，每次请求批量密钥对的上限为 100。 */
+  /** 密钥对 ID 列表。可通过[DescribeKeyPairs](https://cloud.tencent.com/document/product/1207/55540)接口返回值字段KeyPairSet获取。列表长度最大值为100。 */
   KeyIds?: string[];
   /** 偏移量，默认为 0。 */
   Offset?: number;

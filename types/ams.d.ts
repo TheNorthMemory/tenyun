@@ -122,6 +122,18 @@ declare interface BucketInfo {
   Object: string | null;
 }
 
+/** 关键词命中位置信息 */
+declare interface HitInfo {
+  /** 标识模型命中还是关键词命中 */
+  Type?: string;
+  /** 命中关键词 */
+  Keyword?: string;
+  /** 自定义词库名称 */
+  LibName?: string;
+  /** 位置信息 */
+  Positions?: Position[];
+}
+
 /** 输入信息详情 */
 declare interface InputInfo {
   /** 该字段表示文件访问类型，取值为**URL**（资源链接）和**COS** (腾讯云对象存储)。 */
@@ -178,6 +190,14 @@ declare interface MoanResult {
   EndTime?: number;
   /** 该字段用于返回当前标签（Lable）下的二级标签。注意：此字段可能返回null，表示取不到有效值。 */
   SubLabel?: string | null;
+}
+
+/** 标识命中的违规关键词位置信息 */
+declare interface Position {
+  /** 关键词起始位置 */
+  Start?: number;
+  /** 关键词结束位置 */
+  End?: number;
 }
 
 /** 识别类标签结果信息 */
@@ -314,6 +334,8 @@ declare interface TextResult {
   LibType?: number;
   /** 该字段用于返回当前标签（Lable）下的二级标签。注意：此字段可能返回null，表示取不到有效值。 */
   SubLabel?: string | null;
+  /** 该字段用于返回违规文本命中信息 */
+  HitInfos?: HitInfo[];
 }
 
 /** 出行结果 */

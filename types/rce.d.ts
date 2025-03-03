@@ -64,7 +64,7 @@ declare interface InputCreateNameListFront {
 
 /** 全栈式风控引擎入参 */
 declare interface InputCryptoManageMarketingRisk {
-  /** 是否授权：1已授权，否则未授权。 调用全栈式风控引擎接口服务时，客户需先明确授权 */
+  /** 是否授权：1已授权，否则未授权。 调用全栈式风控引擎接口服务时，客户需先明确授权。 */
   IsAuthorized?: string;
   /** 加密类型：1AES加密 */
   CryptoType?: string;
@@ -382,11 +382,11 @@ declare interface OutputDescribeNameListFrontFix {
 
 /** 查询黑白名单出参 */
 declare interface OutputDescribeNameListFrontFixListData {
-  /** 错误码，0 表示成功，非0表示失败错误码。 0：成功 1002：参数错误 4300：未开通服务 6000：系统内部错误 */
+  /** 错误码，0 表示成功，非0表示失败错误码。 0：成功 1002：参数错误 4300：未开通服务 6000：系统内部错误。 */
   Code?: number;
-  /** 错误信息 */
+  /** 错误信息。 */
   Message?: string;
-  /** 黑白名单列表信息 */
+  /** 黑白名单列表信息。 */
   Value?: OutputDescribeNameListInfo;
 }
 

@@ -5,9 +5,9 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 企业超管信息 */
 declare interface Admin {
   /** 超管名 */
-  Name?: string | null;
+  Name?: string;
   /** 超管手机号，打码显示示例值：138****1569 */
-  Mobile?: string | null;
+  Mobile?: string;
 }
 
 /** 代理相关应用信息，如集团主企业代子企业操作 */
@@ -85,11 +85,11 @@ declare interface ApproverInfo {
 /** 签署方信息，发起合同后可获取到对应的签署方信息，如角色ID，角色名称 */
 declare interface ApproverItem {
   /** 签署方唯一编号 */
-  SignId?: string | null;
+  SignId?: string;
   /** 签署方角色编号 */
-  RecipientId?: string | null;
+  RecipientId?: string;
   /** 签署方角色名称 */
-  ApproverRoleName?: string | null;
+  ApproverRoleName?: string;
 }
 
 /** 签署人个性化能力信息 */
@@ -123,25 +123,25 @@ declare interface ApproverRestriction {
 /** 动态签署2.0合同参与人信息 */
 declare interface ArchiveDynamicApproverData {
   /** 签署方唯一编号，一个全局唯一的标识符，不同的流程不会出现冲突。可以使用签署方的唯一编号来生成签署链接（也可以通过RecipientId来生成签署链接）。 */
-  SignId?: string | null;
+  SignId?: string;
   /** 签署方角色编号，签署方角色编号是用于区分同一个流程中不同签署方的唯一标识。不同的流程会出现同样的签署方角色编号。填写控件和签署控件都与特定的角色编号关联。 */
-  RecipientId?: string | null;
+  RecipientId?: string;
 }
 
 /** 企业扩展服务授权列表详情 */
 declare interface AuthInfoDetail {
   /** 扩展服务类型，和入参一致 */
-  Type?: string | null;
+  Type?: string;
   /** 扩展服务名称 */
-  Name?: string | null;
+  Name?: string;
   /** 授权员工列表 */
-  HasAuthUserList?: HasAuthUser[] | null;
+  HasAuthUserList?: HasAuthUser[];
   /** 授权企业列表（企业自动签时，该字段有值） */
-  HasAuthOrganizationList?: HasAuthOrganization[] | null;
+  HasAuthOrganizationList?: HasAuthOrganization[];
   /** 授权员工列表总数 */
-  AuthUserTotal?: number | null;
+  AuthUserTotal?: number;
   /** 授权企业列表总数 */
-  AuthOrganizationTotal?: number | null;
+  AuthOrganizationTotal?: number;
 }
 
 /** 企业认证信息 */
@@ -287,9 +287,9 @@ declare interface Component {
   /** 控件填充vaule，ComponentType和传入值类型对应关系： TEXT : 文本内容 MULTI_LINE_TEXT : 文本内容，可以用 \n 来控制换行位置 CHECK_BOX : true/false FILL_IMAGE、ATTACHMENT : 附件的FileId，需要通过UploadFiles接口上传获取 SELECTOR : 选项值 DYNAMIC_TABLE - 传入json格式的表格内容，详见说明：[数据表格](https://qian.tencent.com/developers/company/dynamic_table) DATE : 格式化为：xxxx年xx月xx日（例如2024年05年28日） SIGN_SEAL : 印章ID，于控制台查询获取， [点击查看在控制台上位置](https://qcloudimg.tencent-cloud.cn/raw/f7b0f2ea4a534aada4b893dbf9671eae.png) SIGN_PAGING_SEAL : 可以指定印章ID，于控制台查询获取， [点击查看在控制台上位置](https://qcloudimg.tencent-cloud.cn/raw/f7b0f2ea4a534aada4b893dbf9671eae.png)控件值约束说明： 特殊控件 填写约束 企业全称控件 企业名称中文字符中文括号 统一社会信用代码控件 企业注册的统一社会信用代码 法人名称控件 最大50个字符，2到25个汉字或者1到50个字母 签署意见控件 签署意见最大长度为50字符 签署人手机号控件 国内手机号 13,14,15,16,17,18,19号段长度11位 签署人身份证控件 合法的身份证号码检查 控件名称 控件名称最大长度为20字符，不支持表情 单行文本控件 只允许输入中文，英文，数字，中英文标点符号，不支持表情 多行文本控件 只允许输入中文，英文，数字，中英文标点符号，不支持表情 勾选框控件 选择填字符串true，不选填字符串false 选择器控件 同单行文本控件约束，填写选择值中的字符串 数字控件 请输入有效的数字(可带小数点) 日期控件 格式：yyyy年mm月dd日 附件控件 JPG或PNG图片，上传数量限制，1到6个，最大6个附件，填写上传的资源ID 图片控件 JPG或PNG图片，填写上传的图片资源ID 邮箱控件 有效的邮箱地址, w3c标准 地址控件 只允许输入中文，英文，数字，中英文标点符号，不支持表情 省市区控件 只允许输入中文，英文，数字，中英文标点符号，不支持表情 性别控件 选择值中的字符串 学历控件 选择值中的字符串 水印控件 水印控件设置为CUSTOM_WATERMARK类型时的水印内容 注： `部分特殊控件需要在控制台配置模板形式创建` */
   ComponentValue?: string;
   /** **如果控件是关键字定位方式**，可以对关键字定位出来的区域进行横坐标方向的调整，单位为pt（点）。例如，如果关键字定位出来的区域偏左或偏右，可以通过调整横坐标方向的参数来使控件位置更加准确。注意： `向左调整设置为负数， 向右调整设置成正数` */
-  OffsetX?: number | null;
+  OffsetX?: number;
   /** **如果控件是关键字定位方式**，可以对关键字定位出来的区域进行纵坐标方向的调整，单位为pt（点）。例如，如果关键字定位出来的区域偏上或偏下，可以通过调整纵坐标方向的参数来使控件位置更加准确。注意： `向上调整设置为负数， 向下调整设置成正数` */
-  OffsetY?: number | null;
+  OffsetY?: number;
   /** **如果控件是关键字定位方式**，指定关键字排序规则时，可以选择Positive或Reverse两种排序方式。 Positive :表示正序，即根据关键字在PDF文件内的顺序进行排列 Reverse :表示倒序，即根据关键字在PDF文件内的反序进行排列在指定KeywordIndexes时，如果使用Positive排序方式，0代表在PDF内查找内容时，查找到的第一个关键字；如果使用Reverse排序方式，0代表在PDF内查找内容时，查找到的最后一个关键字。 */
   KeywordOrder?: string;
   /** **如果控件是关键字定位方式**，在KeywordPage中指定关键字页码时，将只会在该页码中查找关键字，非该页码的关键字将不会查询出来。如果不设置查找所有页面中的关键字。 */
@@ -299,9 +299,9 @@ declare interface Component {
   /** **如果控件是关键字定位方式**，关键字索引是指在PDF文件中存在多个相同的关键字时，通过索引指定使用哪一个关键字作为最后的结果。可以通过指定多个索引来同时使用多个关键字。例如，[0,2]表示使用PDF文件内第1个和第3个关键字位置作为最后的结果。注意：关键字索引是从0开始计数的 */
   KeywordIndexes?: number[];
   /** **web嵌入发起合同场景下**， 是否锁定填写和签署控件值不允许嵌入页面进行编辑false（默认）：不锁定控件值，允许在页面编辑控件值true：锁定控件值，在页面编辑控件值 */
-  LockComponentValue?: boolean | null;
+  LockComponentValue?: boolean;
   /** **web嵌入发起合同场景下**，是否禁止移动和删除填写和签署控件 false（默认） :不禁止移动和删除控件 true : 可以移动和删除控件 */
-  ForbidMoveAndDelete?: boolean | null;
+  ForbidMoveAndDelete?: boolean;
   /** 【暂未使用】日期签署控件的字号，默认为 12 */
   ComponentDateFontSize?: number;
   /** 【暂未使用】第三方应用集成平台模板控件 ID 标识 */
@@ -363,9 +363,9 @@ declare interface CreateResultPageConfig {
 /** 创建员工的结果 */
 declare interface CreateStaffResult {
   /** 创建员工的成功列表 */
-  SuccessEmployeeData: SuccessCreateStaffData[] | null;
+  SuccessEmployeeData?: SuccessCreateStaffData[];
   /** 创建员工的失败列表 */
-  FailedEmployeeData: FailedCreateStaffData[] | null;
+  FailedEmployeeData?: FailedCreateStaffData[];
 }
 
 /** 清理的企业认证流信息 */
@@ -381,9 +381,9 @@ declare interface DeleteOrganizationAuthorizationInfo {
 /** 删除员工结果 */
 declare interface DeleteStaffsResult {
   /** 删除员工的成功数据 */
-  SuccessEmployeeData: SuccessDeleteStaffData[] | null;
+  SuccessEmployeeData?: SuccessDeleteStaffData[];
   /** 删除员工的失败数据 */
-  FailedEmployeeData: FailedDeleteStaffData[] | null;
+  FailedEmployeeData?: FailedDeleteStaffData[];
 }
 
 /** 集成版员工部门信息。 */
@@ -397,17 +397,17 @@ declare interface Department {
 /** 视频认证结果 */
 declare interface DetectInfoVideoData {
   /** 活体视频的base64编码，mp4格式注:`需进行base64解码获取活体视频文件` */
-  LiveNessVideo?: string | null;
+  LiveNessVideo?: string;
 }
 
 /** 动态添加签署人的结果信息 */
 declare interface DynamicFlowApproverResult {
   /** 签署方角色编号，签署方角色编号是用于区分同一个流程中不同签署方的唯一标识。不同的流程会出现同样的签署方角色编号。填写控件和签署控件都与特定的角色编号关联。在进行新增签署方操作时，建议记录下该签署方的角色编号。后续可以拉取流程信息，用来判断该签署方的当前状态。 */
-  RecipientId?: string | null;
+  RecipientId?: string;
   /** 签署方唯一编号，一个全局唯一的标识符，不同的流程不会出现冲突。可以使用签署方的唯一编号来生成签署链接（也可以通过RecipientId来生成签署链接）。 */
-  SignId?: string | null;
+  SignId?: string;
   /** 签署方当前状态，会出现下面的状态2：待签署3：已签署4：已拒绝5：已过期6：已撤销8：待填写9：因为各种原因（签署人改名等）而终止10：填写完成15：已解除19：转他人处理 */
-  ApproverStatus?: number | null;
+  ApproverStatus?: number;
 }
 
 /** 个性化参数 */
@@ -429,29 +429,29 @@ declare interface ExtendAuthInfo {
   /** 扩展服务的开通状态：ENABLE : 已开通DISABLE : 未开通 */
   Status?: string;
   /** 操作扩展服务的操作人UserId，员工在腾讯电子签平台的唯一身份标识，为32位字符串。 */
-  OperatorUserId?: string | null;
+  OperatorUserId?: string;
   /** 扩展服务的操作时间，格式为Unix标准时间戳（秒）。 */
-  OperateOn?: number | null;
+  OperateOn?: number;
   /** 该扩展服务若可以授权，此参数对应授权人员的列表 */
-  HasAuthUserList?: HasAuthUser[] | null;
+  HasAuthUserList?: HasAuthUser[];
 }
 
 /** 印章扩展信息 */
 declare interface ExtendScene {
   /** 印章来源类型 */
-  GenerateType?: string | null;
+  GenerateType?: string;
   /** 印章来源类型描述 */
-  GenerateTypeDesc?: string | null;
+  GenerateTypeDesc?: string;
   /** 印章来源logo */
-  GenerateTypeLogo?: string | null;
+  GenerateTypeLogo?: string;
 }
 
 /** 绑定角色失败信息 */
 declare interface FailedCreateRoleData {
   /** 用户userId */
-  UserId?: string | null;
+  UserId?: string;
   /** 角色id列表 */
-  RoleIds?: string[] | null;
+  RoleIds?: string[];
 }
 
 /** 创建员工的失败数据 */
@@ -507,7 +507,7 @@ declare interface FileUrl {
   /** 下载文件的URL，有效期为输入的UrlTtl，默认5分钟 */
   Url: string;
   /** 下载文件的附加信息。如果是pdf文件，会返回pdf文件每页的有效高宽 */
-  Option: string | null;
+  Option: string;
 }
 
 /** 补充签署人信息- RecipientId 必须指定- 通过企业微信自定义账号ID补充签署人时，ApproverSource 和 CustomUserId 必填，ApproverSource取值：WEWORKAPP- 通过二要素（姓名/手机号）补充签署人时，ApproverName 和 ApproverMobile 必填，ApproverSource设置为空- 补充个人签署方时，若该用户已在电子签完成实名则可通过指定姓名和证件类型、证件号码完成补充 */
@@ -535,27 +535,27 @@ declare interface FillApproverInfo {
 /** 批量补充签署人时，补充失败的报错说明 */
 declare interface FillError {
   /** 为签署方经办人在签署合同中的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。与入参中补充的签署人角色ID对应，批量补充部分失败返回对应的错误信息。 */
-  RecipientId?: string | null;
+  RecipientId?: string;
   /** 补充失败错误说明 */
-  ErrMessage?: string | null;
+  ErrMessage?: string;
   /** 合同流程ID，为32位字符串。 */
-  FlowId?: string | null;
+  FlowId?: string;
 }
 
 /** 文档内的填充控件返回结构体，返回控件的基本信息和填写内容值 */
 declare interface FilledComponent {
   /** 控件Id */
-  ComponentId?: string | null;
+  ComponentId?: string;
   /** 控件名称 */
-  ComponentName?: string | null;
+  ComponentName?: string;
   /** 控件填写状态；0-未填写；1-已填写 */
-  ComponentFillStatus?: string | null;
+  ComponentFillStatus?: string;
   /** 控件填写内容 */
-  ComponentValue?: string | null;
+  ComponentValue?: string;
   /** 控件所属参与方Id */
-  ComponentRecipientId?: string | null;
+  ComponentRecipientId?: string;
   /** 图片填充控件下载链接，如果是图片填充控件时，这里返回图片的下载链接。 */
-  ImageUrl?: string | null;
+  ImageUrl?: string;
 }
 
 /** 查询过滤条件 */
@@ -569,7 +569,7 @@ declare interface Filter {
 /** 签署人详情信息 */
 declare interface FlowApproverDetail {
   /** 签署时的相关信息 */
-  ApproveMessage?: string | null;
+  ApproveMessage?: string;
   /** 签署方姓名 */
   ApproveName?: string;
   /** 签署方的签署状态0：还没有发起1：流程中 没有开始处理2：待签署3：已签署4：已拒绝5：已过期6：已撤销7：还没有预发起8：待填写9：因为各种原因而终止10：填写完成15：已解除19：转他人处理 */
@@ -577,7 +577,7 @@ declare interface FlowApproverDetail {
   /** 模板配置中的参与方ID,与控件绑定 */
   ReceiptId?: string;
   /** 客户自定义的用户ID */
-  CustomUserId?: string | null;
+  CustomUserId?: string;
   /** 签署人手机号 */
   Mobile?: string;
   /** 签署顺序，如果是有序签署，签署顺序从小到大 */
@@ -585,19 +585,19 @@ declare interface FlowApproverDetail {
   /** 签署人签署时间，时间戳，单位秒 */
   ApproveTime?: number;
   /** 签署方类型，ORGANIZATION-企业员工，PERSON-个人，ENTERPRISESERVER-企业静默签 */
-  ApproveType?: string | null;
+  ApproveType?: string;
   /** 签署方侧用户来源，如WEWORKAPP-企业微信等 */
-  ApproverSource?: string | null;
+  ApproverSource?: string;
   /** 客户自定义签署方标识 */
-  CustomApproverTag?: string | null;
+  CustomApproverTag?: string;
   /** 签署方企业Id */
-  OrganizationId?: string | null;
+  OrganizationId?: string;
   /** 签署方企业名称 */
-  OrganizationName?: string | null;
+  OrganizationName?: string;
   /** 签署参与人在本流程中的编号ID（每个流程不同），可用此ID来定位签署参与人在本流程的签署节点，也可用于后续创建签署链接等操作。 */
-  SignId?: string | null;
+  SignId?: string;
   /** 自定义签署人角色 */
-  ApproverRoleName?: string | null;
+  ApproverRoleName?: string;
   /** 模板配置中的参与方ID,与控件绑定 */
   RecipientId?: string;
 }
@@ -637,19 +637,19 @@ declare interface FlowBrief {
   /** 合同流程的名称。 */
   FlowName?: string;
   /** 合同流程描述信息。 */
-  FlowDescription?: string | null;
+  FlowDescription?: string;
   /** 合同流程的类别分类（如销售合同/入职合同等）。 */
   FlowType?: string;
   /** 合同流程当前的签署状态, 会存在下列的状态值 **0** : 未开启流程(合同中不存在填写环节) **1** : 待签署 **2** : 部分签署 **3** : 已拒签 **4** : 已签署 **5** : 已过期 **6** : 已撤销 **7** : 未开启流程(合同中存在填写环节) **8** : 等待填写 **9** : 部分填写 **10** : 已拒填 **21** : 已解除 */
-  FlowStatus?: number | null;
+  FlowStatus?: number;
   /** 合同流程创建时间，格式为Unix标准时间戳（秒）。 */
-  CreatedOn?: number | null;
+  CreatedOn?: number;
   /** 当合同流程状态为已拒签（即 FlowStatus=3）或已撤销（即 FlowStatus=6）时，此字段 FlowMessage 为拒签或撤销原因。 */
-  FlowMessage?: string | null;
+  FlowMessage?: string;
   /** 合同流程发起方的员工编号, 即员工在腾讯电子签平台的唯一身份标识。 */
-  Creator?: string | null;
+  Creator?: string;
   /** 合同流程的签署截止时间，格式为Unix标准时间戳（秒）。 */
-  Deadline?: number | null;
+  Deadline?: number;
 }
 
 /** 创建流程的签署方信息 */
@@ -721,13 +721,13 @@ declare interface FlowDetailInfo {
   /** 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。 */
   FlowName?: string;
   /** 合同流程的类别分类（如销售合同/入职合同等）。 */
-  FlowType?: string | null;
+  FlowType?: string;
   /** 合同流程当前的签署状态, 会存在下列的状态值 **0** : 未开启流程(合同中不存在填写环节) **1** : 待签署 **2** : 部分签署 **3** : 已拒签 **4** : 已签署 **5** : 已过期 **6** : 已撤销 **7** : 未开启流程(合同中存在填写环节) **8** : 等待填写 **9** : 部分填写 **10** : 已拒填 **21** : 已解除 */
   FlowStatus?: number;
   /** 当合同流程状态为已拒签（即 FlowStatus=3）或已撤销（即 FlowStatus=6）时，此字段 FlowMessage 为拒签或撤销原因。 */
-  FlowMessage?: string | null;
+  FlowMessage?: string;
   /** 合同流程描述信息。 */
-  FlowDescription?: string | null;
+  FlowDescription?: string;
   /** 合同流程的创建时间戳，格式为Unix标准时间戳（秒）。 */
   CreatedOn?: number;
   /** 合同流程的签署方数组 */
@@ -735,7 +735,7 @@ declare interface FlowDetailInfo {
   /** 合同流程的关注方信息数组 */
   CcInfos?: FlowApproverDetail[];
   /** 合同流程发起方的员工编号, 即员工在腾讯电子签平台的唯一身份标识。 */
-  Creator?: string | null;
+  Creator?: string;
 }
 
 /** 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。 */
@@ -749,9 +749,9 @@ declare interface FlowGroupApproverInfo {
 /** 合同组签署方信息 */
 declare interface FlowGroupApprovers {
   /** 合同流程ID */
-  FlowId?: string | null;
+  FlowId?: string;
   /** 签署方信息，包含合同ID和角色ID用于定位RecipientId。 */
-  Approvers?: ApproverItem[] | null;
+  Approvers?: ApproverItem[];
 }
 
 /** 此结构体(FlowGroupInfo)描述的是合同组(流程组)的单个合同(流程)信息 */
@@ -815,87 +815,87 @@ declare interface FormField {
 /** 成员企业信息 */
 declare interface GroupOrganization {
   /** 成员企业名 */
-  Name?: string | null;
+  Name?: string;
   /** 成员企业别名 */
-  Alias?: string | null;
+  Alias?: string;
   /** 成员企业id，为 32 位字符串，可在电子签PC 控制台，企业设置->企业电子签账号 获取 */
-  OrganizationId?: string | null;
+  OrganizationId?: string;
   /** 记录更新时间， unix时间戳，单位秒 */
-  UpdateTime?: number | null;
+  UpdateTime?: number;
   /** 成员企业加入集团的当前状态 **1**：待授权 **2**：已授权待激活 **3**：拒绝授权 **4**：已解除 **5**：已加入 */
-  Status?: number | null;
+  Status?: number;
   /** 是否为集团主企业 */
-  IsMainOrganization?: boolean | null;
+  IsMainOrganization?: boolean;
   /** 企业社会信用代码 */
-  IdCardNumber?: string | null;
+  IdCardNumber?: string;
   /** 企业超管信息 */
-  AdminInfo?: Admin | null;
+  AdminInfo?: Admin;
   /** 企业许可证Id，此字段暂时不需要关注 */
-  License?: string | null;
+  License?: string;
   /** 企业许可证过期时间，unix时间戳，单位秒 */
-  LicenseExpireTime?: number | null;
+  LicenseExpireTime?: number;
   /** 成员企业加入集团时间，unix时间戳，单位秒 */
-  JoinTime?: number | null;
+  JoinTime?: number;
   /** 是否使用自建审批流引擎（即不是企微审批流引擎） **true**：是 **false**：否 */
-  FlowEngineEnable?: boolean | null;
+  FlowEngineEnable?: boolean;
 }
 
 /** 授权企业列表（目前仅用于“企业自动签 -> 合作企业授权”） */
 declare interface HasAuthOrganization {
   /** 授权企业id */
-  OrganizationId?: string | null;
+  OrganizationId?: string;
   /** 授权企业名称 */
-  OrganizationName?: string | null;
+  OrganizationName?: string;
   /** 被授权企业id */
-  AuthorizedOrganizationId?: string | null;
+  AuthorizedOrganizationId?: string;
   /** 被授权企业名称 */
-  AuthorizedOrganizationName?: string | null;
+  AuthorizedOrganizationName?: string;
   /** 授权模板id（仅当授权方式为模板授权时有值） */
-  TemplateId?: string | null;
+  TemplateId?: string;
   /** 授权模板名称（仅当授权方式为模板授权时有值） */
-  TemplateName?: string | null;
+  TemplateName?: string;
   /** 授权时间，格式为时间戳，单位s */
-  AuthorizeTime?: number | null;
+  AuthorizeTime?: number;
 }
 
 /** 被授权的用户信息 */
 declare interface HasAuthUser {
   /** 员工在腾讯电子签平台的唯一身份标识，为32位字符串。 */
-  UserId?: string | null;
+  UserId?: string;
   /** 当前员工的归属情况，可能值是：MainOrg：在集团企业的场景下，返回此值代表是归属主企业CurrentOrg：在普通企业场景下返回此值；或者在集团企业的场景下，返回此值代表归属子企业 */
-  BelongTo?: string | null;
+  BelongTo?: string;
   /** 集团主企业id，当前企业为集团子企业时，该字段有值 */
-  MainOrganizationId?: string | null;
+  MainOrganizationId?: string;
 }
 
 /** 企业角色数据信息 */
 declare interface IntegrateRole {
   /** 角色id */
-  RoleId?: string | null;
+  RoleId?: string;
   /** 角色名 */
-  RoleName?: string | null;
+  RoleName?: string;
   /** 角色状态，1-启用，2-禁用 */
-  RoleStatus?: number | null;
+  RoleStatus?: number;
   /** 是否是集团角色，true-是，false-否 */
-  IsGroupRole?: boolean | null;
+  IsGroupRole?: boolean;
   /** 管辖的子企业列表 */
-  SubOrgIdList?: string[] | null;
+  SubOrgIdList?: string[];
   /** 权限树 */
-  PermissionGroups?: PermissionGroup[] | null;
+  PermissionGroups?: PermissionGroup[];
 }
 
 /** 部门信息 */
 declare interface IntegrationDepartment {
   /** 部门ID。 */
-  DeptId?: string | null;
+  DeptId?: string;
   /** 部门名。 */
-  DeptName?: string | null;
+  DeptName?: string;
   /** 父部门ID */
-  ParentDeptId?: string | null;
+  ParentDeptId?: string;
   /** 客户系统部门ID */
-  DeptOpenId?: string | null;
+  DeptOpenId?: string;
   /** 序列号。 */
-  OrderNo?: number | null;
+  OrderNo?: number;
 }
 
 /** 视频核身意图配置，可指定问答模式或者点头模式的语音文本。注: `视频认证为白名单功能，使用前请联系对接的客户经理沟通。` */
@@ -923,7 +923,7 @@ declare interface IntentionActionResult {
 /** 意愿核身点头确认模式结果详细数据 */
 declare interface IntentionActionResultDetail {
   /** 视频base64编码（其中包含全程提示文本和点头音频，mp4格式） */
-  Video?: string | null;
+  Video?: string;
 }
 
 /** 意愿核身语音问答模式（即语音播报+语音回答）使用的文案，包括：系统语音播报的文本、需要核验的标准文本。当前仅支持1轮问答。 */
@@ -937,11 +937,11 @@ declare interface IntentionQuestion {
 /** 意愿核身问答模式结果。若未使用该意愿核身功能，该字段返回值可以不处理。 */
 declare interface IntentionQuestionResult {
   /** 视频base64（其中包含全程问题和回答音频，mp4格式）注：`需进行base64解码获取视频文件` */
-  Video?: string | null;
+  Video?: string;
   /** 和答案匹配结果列表 */
-  ResultCode?: string[] | null;
+  ResultCode?: string[];
   /** 回答问题语音识别结果列表 */
-  AsrResult?: string[] | null;
+  AsrResult?: string[];
 }
 
 /** 需要进行签署审核的签署人信息 */
@@ -975,7 +975,7 @@ declare interface OccupiedSeal {
   /** 印章状态，有以下六种：CHECKING（审核中）SUCCESS（已启用）FAIL（审核拒绝）CHECKING-SADM（待超管审核）DISABLE（已停用）STOPPED（已终止） */
   SealStatus?: string;
   /** 审核失败原因 */
-  FailReason?: string | null;
+  FailReason?: string;
   /** 印章图片url，5分钟内有效 */
   Url?: string;
   /** 印章类型,OFFICIAL-企业公章, CONTRACT-合同专用章,ORGANIZATIONSEAL-企业印章(本地上传印章类型),LEGAL_PERSON_SEAL-法人印章 */
@@ -983,9 +983,9 @@ declare interface OccupiedSeal {
   /** 用印申请是否为永久授权，true-是，false-否 */
   IsAllTime?: boolean;
   /** 授权人列表 */
-  AuthorizedUsers?: AuthorizedUser[] | null;
+  AuthorizedUsers?: AuthorizedUser[];
   /** 印章扩展数据信息 */
-  ExtendScene?: ExtendScene | null;
+  ExtendScene?: ExtendScene;
 }
 
 /** 企业套餐余额情况 */
@@ -1013,27 +1013,27 @@ declare interface OrganizationAuthUrl {
 /** 企业授权书信息参数， 需要保证这些参数跟营业执照中的信息一致。 */
 declare interface OrganizationCommonInfo {
   /** 组织机构名称。请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。 */
-  OrganizationName: string | null;
+  OrganizationName: string;
   /** 组织机构企业统一社会信用代码。请确认该企业统一社会信用代码与企业营业执照中注册的统一社会信用代码一致。 */
-  UniformSocialCreditCode: string | null;
+  UniformSocialCreditCode: string;
   /** 组织机构法人的姓名。请确认该企业统一社会信用代码与企业营业执照中注册的法人姓名一致。 */
-  LegalName: string | null;
+  LegalName: string;
   /** 组织机构法人的证件类型 */
-  LegalIdCardType?: string | null;
+  LegalIdCardType?: string;
   /** 组织机构法人的证件号码 */
-  LegalIdCardNumber?: string | null;
+  LegalIdCardNumber?: string;
   /** 组织机构超管姓名。 */
-  AdminName?: string | null;
+  AdminName?: string;
   /** 组织机构超管手机号。 */
-  AdminMobile?: string | null;
+  AdminMobile?: string;
   /** 组织机构超管证件类型 */
-  AdminIdCardType?: string | null;
+  AdminIdCardType?: string;
   /** 组织机构超管证件号码 */
-  AdminIdCardNumber?: string | null;
+  AdminIdCardNumber?: string;
   /** 原超管姓名 */
-  OldAdminName?: string | null;
+  OldAdminName?: string;
   /** 原超管手机号 */
-  OldAdminMobile?: string | null;
+  OldAdminMobile?: string;
   /** 原超管证件类型 */
   OldAdminIdCardType?: string;
   /** 原超管证件号码 */
@@ -1087,39 +1087,39 @@ declare interface PdfVerifyResult {
 /** 权限树节点权限 */
 declare interface Permission {
   /** 权限名称 */
-  Name?: string | null;
+  Name?: string;
   /** 权限key */
-  Key?: string | null;
+  Key?: string;
   /** 权限类型 1前端，2后端 */
-  Type?: number | null;
+  Type?: number;
   /** 是否隐藏 */
-  Hide?: number | null;
+  Hide?: number;
   /** 数据权限标签 1:表示根节点，2:表示叶子结点 */
-  DataLabel?: number | null;
+  DataLabel?: number;
   /** 数据权限独有，1:关联其他模块鉴权，2:表示关联自己模块鉴权 */
-  DataType?: number | null;
+  DataType?: number;
   /** 数据权限独有，表示数据范围，1：全公司，2:部门及下级部门，3:自己 */
-  DataRange?: number | null;
+  DataRange?: number;
   /** 关联权限, 表示这个功能权限要受哪个数据权限管控 */
-  DataTo?: string | null;
+  DataTo?: string;
   /** 父级权限key */
-  ParentKey?: string | null;
+  ParentKey?: string;
   /** 是否选中 */
-  IsChecked?: boolean | null;
+  IsChecked?: boolean;
   /** 子权限集合 */
-  Children?: Permission[] | null;
+  Children?: Permission[];
 }
 
 /** 权限树中的权限组 */
 declare interface PermissionGroup {
   /** 权限组名称 */
-  GroupName?: string | null;
+  GroupName?: string;
   /** 权限组key */
-  GroupKey?: string | null;
+  GroupKey?: string;
   /** 是否隐藏分组，0否1是 */
-  Hide?: number | null;
+  Hide?: number;
   /** 权限集合 */
-  Permissions?: Permission[] | null;
+  Permissions?: Permission[];
 }
 
 /** 流程中参与方的信息结构 */
@@ -1161,23 +1161,23 @@ declare interface Recipient {
 /** 参与方填写控件信息 */
 declare interface RecipientComponentInfo {
   /** 签署方经办人在合同流程中的参与方ID，与控件绑定，是控件的归属方 */
-  RecipientId?: string | null;
+  RecipientId?: string;
   /** 参与方填写状态**空值** : 此参与方没有填写控件**0**: 未填写, 表示此参与方还没有填写合同的填写控件**1**: 已填写, 表示此参与方已经填写所有的填写控件 */
-  RecipientFillStatus?: string | null;
+  RecipientFillStatus?: string;
   /** 是否为发起方true-发起方false-参与方 */
-  IsPromoter?: boolean | null;
+  IsPromoter?: boolean;
   /** 改参与方填写控件信息列表 */
-  Components?: FilledComponent[] | null;
+  Components?: FilledComponent[];
 }
 
 /** 发起流程快速注册相关信息 */
 declare interface RegisterInfo {
   /** 法人姓名 */
-  LegalName: string | null;
+  LegalName: string;
   /** 社会统一信用代码 */
   Uscc?: string | null;
   /** 社会统一信用代码 */
-  UnifiedSocialCreditCode?: string | null;
+  UnifiedSocialCreditCode?: string;
 }
 
 /** 企业认证信息参数， 需要保证这些参数跟营业执照中的信息一致。 */
@@ -1261,11 +1261,11 @@ declare interface ReviewerInfo {
 /** 模板中指定的印章信息 */
 declare interface SealInfo {
   /** 印章ID */
-  SealId: string | null;
+  SealId: string;
   /** 印章类型。LEGAL_PERSON_SEAL: 法定代表人章；ORGANIZATIONSEAL：企业印章；OFFICIAL：企业公章；CONTRACT：合同专用章 */
-  SealType: string | null;
+  SealType: string;
   /** 印章名称 */
-  SealName: string | null;
+  SealName: string;
 }
 
 /** 签署二维码的基本信息，用于创建二维码，用户可扫描该二维码进行签署操作。 */
@@ -1299,35 +1299,35 @@ declare interface Staff {
   /** 用户手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。 */
   Mobile?: string;
   /** 用户邮箱。 */
-  Email?: string | null;
+  Email?: string;
   /** 用户在第三方平台ID。注：`如需在此接口提醒员工实名，该参数不传。` */
-  OpenId?: string | null;
+  OpenId?: string;
   /** 员工角色信息。注：`创建和更新场景无需填写。` */
-  Roles?: StaffRole[] | null;
+  Roles?: StaffRole[];
   /** 员工部门信息。 */
-  Department?: Department | null;
+  Department?: Department;
   /** 员工是否实名。注：`创建和更新场景无需填写。` */
   Verified?: boolean;
   /** 员工创建时间戳，单位秒。注：`创建和更新场景无需填写。` */
   CreatedOn?: number;
   /** 员工实名时间戳，单位秒。注：`创建和更新场景无需填写。` */
-  VerifiedOn?: number | null;
+  VerifiedOn?: number;
   /** 员工是否离职：**0**：未离职**1**：离职注：`创建和更新场景无需填写。` */
-  QuiteJob?: number | null;
+  QuiteJob?: number;
   /** 员工离职交接人用户ID。注：`创建和更新场景无需填写。` */
   ReceiveUserId?: string;
   /** 员工离职交接人用户OpenId。注：`创建和更新场景无需填写。` */
   ReceiveOpenId?: string;
   /** 企业微信用户账号ID。注：`仅企微类型的企业创建员工接口支持该字段。` */
-  WeworkOpenId?: string | null;
+  WeworkOpenId?: string;
 }
 
 /** 集成版企业角色信息。 */
 declare interface StaffRole {
   /** 角色ID。 */
-  RoleId?: string | null;
+  RoleId?: string;
   /** 角色名称。 */
-  RoleName?: string | null;
+  RoleName?: string;
 }
 
 /** 子企业套餐使用情况 */
@@ -1355,7 +1355,7 @@ declare interface SuccessCreateStaffData {
   /** 员工在电子签平台的id */
   UserId?: string;
   /** 提示，当创建已存在未实名用户时，该字段有值 */
-  Note?: string | null;
+  Note?: string;
   /** 传入的企微账号id */
   WeworkOpenId?: string;
   /** 员工邀请返回链接 根据入参的 InvitationNotifyType 和 Endpoint 返回链接 链接类型有效期示例HTTP_SHORT_URL（短链）一天https://test.essurl.cn/fvG7UBEd0FHTTP（长链）一天https://res.ess.tencent.cn/cdn/h5-activity-dev/jump-mp.html?where=mini&from=MSG&to=USER_VERIFY&verifyToken=yDCVbUUckpwocmfpUySko7IS83LTV0u0&expireTime=1710840183H530 天https://quick.test.qian.tencent.cn/guide?Code=yDCVbUUckpwtvxqoUbTw4VBBjLbfAtW7&CodeType=QUICK&shortKey=yDCVbUY7lhqV7mZlCL2dAPP一天/pages/guide/index?to=USER_VERIFY&verifyToken=yDCVbUUckpwocm96UySko7ISvEIZH7Yz&expireTime=1710840455 */
@@ -1423,17 +1423,17 @@ declare interface TemplateInfo {
   /** 模板创建人用户ID */
   CreatorId?: string;
   /** 模板的 H5 预览链接，有效期为 5 分钟。您可以通过浏览器直接打开此链接预览模板，或将其嵌入到 iframe 中进行预览。注意：只有在请求接口时将 WithPreviewUrl 参数设置为 true，才会生成预览链接。 */
-  PreviewUrl?: string | null;
+  PreviewUrl?: string;
   /** 用户自定义合同类型。返回配置模板的时候选择的合同类型。[点击查看配置的位置](https://qcloudimg.tencent-cloud.cn/raw/4a766f0540253bf2a05d50c58bd14990.png)自定义合同类型配置的地方如链接图所示。[点击查看自定义合同类型管理的位置](https://qcloudimg.tencent-cloud.cn/raw/36582cea03ae6a2559894844942b5d5c.png) */
-  UserFlowType?: UserFlowType | null;
+  UserFlowType?: UserFlowType;
   /** 模板版本的编号，旨在标识其独特的版本信息，通常呈现为一串字符串，由日期和递增的数字组成 */
-  TemplateVersion?: string | null;
+  TemplateVersion?: string;
   /** 模板是否已发布可以分为以下两种状态：true：已发布状态，表示该模板已经发布并可以正常使用。false：未发布状态，表示该模板还未发布，无法使用。 */
-  Published?: boolean | null;
+  Published?: boolean;
   /** 集体账号场景下： 集团账号分享给子企业的模板的来源模板ID。 */
-  ShareTemplateId?: string | null;
+  ShareTemplateId?: string;
   /** 此模板配置的预填印章列表（包括自动签署指定的印章） */
-  TemplateSeals?: SealInfo[] | null;
+  TemplateSeals?: SealInfo[];
   /** 模板内部指定的印章列表 */
   Seals?: SealInfo[] | null;
 }
@@ -1449,11 +1449,11 @@ declare interface UploadFile {
 /** 用户自定义合同类型， 自定义合同类型的管理可以[点击查看在控制台位置的截图](https://qcloudimg.tencent-cloud.cn/raw/85a9b2ebce07b0cd6d75d5327d538235.png) */
 declare interface UserFlowType {
   /** 合同类型ID */
-  UserFlowTypeId?: string | null;
+  UserFlowTypeId?: string;
   /** 合同类型名称 */
-  Name?: string | null;
+  Name?: string;
   /** 合同类型说明 */
-  Description?: string | null;
+  Description?: string;
 }
 
 /** 用户信息 */
@@ -1856,6 +1856,26 @@ declare interface CreateEmbedWebUrlRequest {
 declare interface CreateEmbedWebUrlResponse {
   /** 嵌入的web链接，有效期：5分钟EmbedType=PREVIEW_CC_FLOW，该url为h5链接 */
   WebUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateEmployeeChangeUrlRequest {
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator?: UserInfo;
+  /** 待修改的员工UserId */
+  UserId?: string;
+  /** 待修改的员工手机号 */
+  NewMobile?: string;
+}
+
+declare interface CreateEmployeeChangeUrlResponse {
+  /** 修改员工信息的小程序链接跳转到腾讯电子签小程序的实现可以参考微信的官方文档:开放能力/打开 App */
+  MiniAppPath?: string;
+  /** 链接过期时间以 Unix 时间戳格式表示，从生成链接时间起，往后7天有效期。过期后短链将失效，无法打开。 */
+  ExpireTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3923,6 +3943,8 @@ declare interface Ess {
   CreateDynamicFlowApprover(data: CreateDynamicFlowApproverRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDynamicFlowApproverResponse>;
   /** 获取其他可嵌入web页面 {@link CreateEmbedWebUrlRequest} {@link CreateEmbedWebUrlResponse} */
   CreateEmbedWebUrl(data: CreateEmbedWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmbedWebUrlResponse>;
+  /** 创建员工信息变更链接 {@link CreateEmployeeChangeUrlRequest} {@link CreateEmployeeChangeUrlResponse} */
+  CreateEmployeeChangeUrl(data?: CreateEmployeeChangeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmployeeChangeUrlResponse>;
   /** 创建个人印章授权给企业使用的授权二维码 {@link CreateEmployeeQualificationSealQrCodeRequest} {@link CreateEmployeeQualificationSealQrCodeResponse} */
   CreateEmployeeQualificationSealQrCode(data: CreateEmployeeQualificationSealQrCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmployeeQualificationSealQrCodeResponse>;
   /** 创建企业扩展服务授权 {@link CreateExtendedServiceAuthInfosRequest} {@link CreateExtendedServiceAuthInfosResponse} */

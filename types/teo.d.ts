@@ -4003,7 +4003,7 @@ declare interface DescribeBillingDataRequest {
   EndTime: string;
   /** 站点 ID 集合，此参数必填。 */
   ZoneIds: string[];
-  /** 指标列表，取值有：acc_flux: 内容加速流量，单位为 Byte；smt_flux: 智能加速流量，单位为 Byte；l4_flux: 四层加速流量，单位为 Byte；sec_flux: 独立防护流量，单位为 Byte；zxctg_flux: 中国大陆网络优化流量，单位为 Byte；acc_bandwidth: 内容加速带宽，单位为 bps；smt_bandwidth: 智能加速带宽，单位为 bps；l4_bandwidth: 四层加速带宽，单位为 bps；sec_bandwidth: 独立防护带宽，单位为 bps；zxctg_bandwidth: 中国大陆网络优化带宽，单位为 bps；sec_request_clean: HTTP/HTTPS 请求，单位为次；smt_request_clean: 智能加速请求，单位为次；quic_request: QUIC 请求，单位为次；bot_request_clean: Bot 请求，单位为次；cls_count: 实时日志推送条数，单位为条；ddos_bandwidth: 弹性 DDoS 防护带宽，单位为 bps。 */
+  /** 指标列表，取值有：acc_flux: 内容加速流量，单位为 Byte；smt_flux: 智能加速流量，单位为 Byte；l4_flux: 四层加速流量，单位为 Byte；sec_flux: 独立防护流量，单位为 Byte；zxctg_flux: 中国大陆网络优化流量，单位为 Byte；acc_bandwidth: 内容加速带宽，单位为 bps；smt_bandwidth: 智能加速带宽，单位为 bps；l4_bandwidth: 四层加速带宽，单位为 bps；sec_bandwidth: 独立防护带宽，单位为 bps；zxctg_bandwidth: 中国大陆网络优化带宽，单位为 bps；sec_request_clean: HTTP/HTTPS 请求，单位为次；smt_request_clean: 智能加速请求，单位为次；quic_request: QUIC 请求，单位为次；bot_request_clean: Bot 请求，单位为次；cls_count: 实时日志推送条数，单位为条；ddos_bandwidth: 弹性 DDoS 防护带宽，单位为 bps；total_transcode：所有规格音频，视频即时转码，转封装时长，单位为秒；remux：转封装时长，单位为秒；transcode_audio：音频转码时长，单位为秒；transcode_H264_SD：H.264 编码方式的标清视频（短边 <= 480 px）时长，单位为秒；transcode_H264_HD：H.264 编码方式的高清视频（短边 <= 720 px）时长，单位为秒；transcode_H264_FHD：H.264 编码方式的全高清视频（短边 <= 1080 px）时长，单位为秒；transcode_H264_2K：H.264 编码方式的 2K 视频（短边 <= 1440 px）时长，单位为秒。 */
   MetricName: string;
   /** 查询时间粒度，取值有：5min：5 分钟粒度；hour：1 小时粒度；day：1 天粒度。 */
   Interval: string;
@@ -4869,7 +4869,7 @@ declare interface DescribeZonesRequest {
   Offset?: number;
   /** 分页查询限制数目。默认值：20，最大值：100。 */
   Limit?: number;
-  /** 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回当前 appid 下有权限的所有站点信息。详细的过滤条件如下：zone-name：按照站点名称进行过滤；zone-id：按照站点 ID进行过滤。站点 ID 形如：zone-2noz78a8ev6k；status：按照站点状态进行过滤；tag-key：按照标签键进行过滤；tag-value： 按照标签值进行过滤。模糊查询时仅支持过滤字段名为 zone-name。 */
+  /** 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回当前 appid 下有权限的所有站点信息。详细的过滤条件如下：zone-name：按照站点名称进行过滤；zone-id：按照站点 ID进行过滤。站点 ID 形如：zone-2noz78a8ev6k；status：按照站点状态进行过滤；tag-key：按照标签键进行过滤；tag-value： 按照标签值进行过滤。alias-zone-name： 按照同名站点标识进行过滤。模糊查询时支持过滤字段名为 zone-name 或 alias-zone-name。 */
   Filters?: AdvancedFilter[];
   /** 可根据该字段对返回结果进行排序，取值有： type：接入类型； area：加速区域； create-time：创建时间； zone-name：站点名称； use-time：最近使用时间； active-status：生效状态。不填写时对返回结果默认按照 create-time 排序。 */
   Order?: string;

@@ -78,6 +78,14 @@ declare interface CLBMultiRegion {
   CLBSlaveZone?: string | null;
 }
 
+/** 灰度规则 Priority - Rule */
+declare interface CanaryPriorityRule {
+  /** 优先级 */
+  Priority?: number;
+  /** 灰度规则配置 */
+  CanaryRule?: CloudNativeAPIGatewayCanaryRule;
+}
+
 /** 证书信息 */
 declare interface CertificateInfo {
   /** 唯一id */
@@ -1368,6 +1376,8 @@ declare interface KongRoutePreview {
   RequestBuffering?: boolean;
   /** 是否缓存响应body，默认true */
   ResponseBuffering?: boolean;
+  /** 正则优先级 */
+  RegexPriority?: number;
 }
 
 /** 云原生网关服务详细信息 */
@@ -2068,7 +2078,9 @@ declare interface CreateCloudNativeAPIGatewayCanaryRuleRequest {
   /** 服务 ID */
   ServiceId: string;
   /** 灰度规则配置 */
-  CanaryRule: CloudNativeAPIGatewayCanaryRule;
+  CanaryRule?: CloudNativeAPIGatewayCanaryRule;
+  /** 灰度规则配置列表，如果配置了此参数，将以此参数为准，忽略CanaryRule参数 */
+  CanaryRuleList?: CloudNativeAPIGatewayCanaryRule[];
 }
 
 declare interface CreateCloudNativeAPIGatewayCanaryRuleResponse {
@@ -2199,6 +2211,8 @@ declare interface CreateCloudNativeAPIGatewayRouteRequest {
   RequestBuffering?: boolean;
   /** 是否缓存响应body，默认true */
   ResponseBuffering?: boolean;
+  /** 正则优先级 */
+  RegexPriority?: number;
 }
 
 declare interface CreateCloudNativeAPIGatewayRouteResponse {
@@ -2486,7 +2500,9 @@ declare interface DeleteCloudNativeAPIGatewayCanaryRuleRequest {
   /** 服务 ID */
   ServiceId: string;
   /** 优先级 */
-  Priority: number;
+  Priority?: number;
+  /** 优先级列表，如果配置了此参数，将以此参数为准，忽略Priority参数 */
+  PriorityList?: number[];
 }
 
 declare interface DeleteCloudNativeAPIGatewayCanaryRuleResponse {
@@ -3692,9 +3708,11 @@ declare interface ModifyCloudNativeAPIGatewayCanaryRuleRequest {
   /** 服务 ID */
   ServiceId: string;
   /** 优先级，同一个服务的灰度规则优先级是唯一的 */
-  Priority: number;
+  Priority?: number;
   /** 灰度规则配置 */
-  CanaryRule: CloudNativeAPIGatewayCanaryRule;
+  CanaryRule?: CloudNativeAPIGatewayCanaryRule;
+  /** 灰度规则配置列表，如果配置了此参数，将以此参数为准，忽略Priority和CanaryRule参数 */
+  CanaryRuleList?: CanaryPriorityRule[];
 }
 
 declare interface ModifyCloudNativeAPIGatewayCanaryRuleResponse {
@@ -3791,6 +3809,8 @@ declare interface ModifyCloudNativeAPIGatewayRouteRequest {
   RequestBuffering?: boolean;
   /** 是否缓存响应body，默认true */
   ResponseBuffering?: boolean;
+  /** 增加优先级 */
+  RegexPriority?: number;
 }
 
 declare interface ModifyCloudNativeAPIGatewayRouteResponse {

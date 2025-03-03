@@ -3036,6 +3036,8 @@ declare interface DescribeBackupConfigResponse {
   BackupType?: string | null;
   /** 跨地域逻辑备份配置修改时间 */
   LogicCrossRegionsConfigUpdateTime?: string | null;
+  /** 自动逻辑备份配置 */
+  LogicBackupConfig?: LogicBackupConfigInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3389,9 +3391,9 @@ declare interface DescribeClustersResponse {
 }
 
 declare interface DescribeDBSecurityGroupsRequest {
-  /** 实例ID */
+  /** 实例ID（InstanceId与InstanceGroupId必须任选一个传入） */
   InstanceId?: string;
-  /** 实例组ID */
+  /** 实例组ID（InstanceId与InstanceGroupId必须任选一个传入） */
   InstanceGroupId?: string;
 }
 

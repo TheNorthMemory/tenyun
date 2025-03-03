@@ -27,11 +27,11 @@ declare interface AccountQuotaOverview {
 /** 定时任务 */
 declare interface ActionTimer {
   /** 定时器动作，目前仅支持销毁一个值：TerminateInstances。 */
-  TimerAction?: string | null;
+  TimerAction?: string;
   /** 执行时间，按照ISO8601标准表示，并且使用UTC时间。格式为 YYYY-MM-DDThh:mm:ssZ。例如 2018-05-29T11:26:40Z，执行时间必须大于当前时间5分钟。 */
-  ActionTime?: string | null;
+  ActionTime?: string;
   /** 扩展数据 */
-  Externals?: Externals | null;
+  Externals?: Externals;
   /** 定时器ID。 */
   ActionTimerId?: string;
   /** 定时器状态，取值范围：UNDO：未触发DOING：触发中DONE：已经触发 */
@@ -165,19 +165,19 @@ declare interface DataDisk {
   /** 数据盘ID。该参数目前仅用于`DescribeInstances`等查询类接口的返回参数，不可用于`RunInstances`等写接口的入参。 */
   DiskId?: string;
   /** 数据盘是否随子机销毁。取值范围：true：子机销毁时，销毁数据盘，只支持按小时后付费云盘 false：子机销毁时，保留数据盘 默认取值：true 该参数目前仅用于 `RunInstances` 接口。 */
-  DeleteWithInstance?: boolean | null;
+  DeleteWithInstance?: boolean;
   /** 数据盘快照ID。选择的数据盘快照大小需小于数据盘大小。 */
-  SnapshotId?: string | null;
+  SnapshotId?: string;
   /** 数据盘是加密。取值范围：true：加密 false：不加密 默认取值：false 该参数目前仅用于 `RunInstances` 接口。 */
-  Encrypt?: boolean | null;
+  Encrypt?: boolean;
   /** 自定义CMK对应的ID，取值为UUID或者类似kms-abcd1234。用于加密云盘。该参数目前仅用于 `RunInstances` 接口。 */
-  KmsKeyId?: string | null;
+  KmsKeyId?: string;
   /** 云硬盘性能，单位：MB/s */
-  ThroughputPerformance?: number | null;
+  ThroughputPerformance?: number;
   /** 所属的独享集群ID。 */
-  CdcId?: string | null;
+  CdcId?: string;
   /** 突发性能 注：内测中。 */
-  BurstPerformance?: boolean | null;
+  BurstPerformance?: boolean;
   /** 磁盘名称，长度不超过128 个字符。该参数正在邀测中，暂未开放使用。 */
   DiskName?: string;
 }
@@ -817,7 +817,7 @@ declare interface LoginSettings {
   /** 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口[DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699)获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。 */
   KeyIds?: string[] | null;
   /** 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为true。取值范围：true：表示保持镜像的登录设置false：表示不保持镜像的登录设置默认取值：false。 */
-  KeepImageLogin?: string | null;
+  KeepImageLogin?: string;
 }
 
 /** 描述了单台实例操作次数限制 */
@@ -959,7 +959,7 @@ declare interface RunAutomationServiceEnabled {
 /** 描述了 “云监控” 服务相关的信息 */
 declare interface RunMonitorServiceEnabled {
   /** 是否开启[云监控](/document/product/248)服务。取值范围：true：表示开启云监控服务false：表示不开启云监控服务默认取值：true。 */
-  Enabled?: boolean | null;
+  Enabled?: boolean;
 }
 
 /** 描述了 “云安全” 服务相关的信息 */
@@ -989,9 +989,9 @@ declare interface Snapshot {
 /** 竞价相关选项 */
 declare interface SpotMarketOptions {
   /** 竞价出价 */
-  MaxPrice: string | null;
+  MaxPrice: string;
   /** 竞价请求类型，当前仅支持类型：one-time */
-  SpotInstanceType?: string | null;
+  SpotInstanceType?: string;
 }
 
 /** 竞价实例配额 */
@@ -1049,9 +1049,9 @@ declare interface Tag {
 /** 创建资源实例时同时绑定的标签对说明 */
 declare interface TagSpecification {
   /** 标签绑定的资源类型，云服务器为“instance”，专用宿主机为“host”，镜像为“image”，密钥为“keypair” */
-  ResourceType: string | null;
+  ResourceType: string;
   /** 标签对列表 */
-  Tags: Tag[] | null;
+  Tags: Tag[];
 }
 
 /** 操作系统转换的目标操作系统信息 */
@@ -1343,6 +1343,8 @@ declare interface CreateLaunchTemplateRequest {
   InstanceChargePrepaid?: InstanceChargePrepaid;
   /** 实例销毁保护标志，表示是否允许通过api接口删除实例。取值范围：TRUE：表示开启实例保护，不允许通过api接口删除实例FALSE：表示关闭实例保护，允许通过api接口删除实例默认取值：FALSE。 */
   DisableApiTermination?: boolean;
+  /** 标签描述列表。通过指定该参数可以绑定标签到实例启动模板。 */
+  LaunchTemplateTagSpecification?: TagSpecification[];
 }
 
 declare interface CreateLaunchTemplateResponse {
@@ -2310,9 +2312,9 @@ declare interface InquiryPriceTerminateInstancesResponse {
 
 declare interface InstanceMarketOptionsRequest {
   /** 竞价相关选项 */
-  SpotOptions: SpotMarketOptions | null;
+  SpotOptions: SpotMarketOptions;
   /** 市场选项类型，当前只支持取值：spot */
-  MarketType?: string | null;
+  MarketType?: string;
 }
 
 declare interface ModifyChcAttributeRequest {

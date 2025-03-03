@@ -199,19 +199,19 @@ declare interface DataDisk {
   /** 数据盘ID。该参数目前仅用于`DescribeInstances`等查询类接口的返回参数，不可用于`RunInstances`等写接口的入参。 */
   DiskId?: string;
   /** 数据盘是否随子机销毁。取值范围：true：子机销毁时，销毁数据盘，只支持按小时后付费云盘 false：子机销毁时，保留数据盘 默认取值：true 该参数目前仅用于 `RunInstances` 接口。 */
-  DeleteWithInstance?: boolean | null;
+  DeleteWithInstance?: boolean;
   /** 数据盘快照ID。选择的数据盘快照大小需小于数据盘大小。 */
-  SnapshotId?: string | null;
+  SnapshotId?: string;
   /** 数据盘是加密。取值范围：true：加密 false：不加密 默认取值：false 该参数目前仅用于 `RunInstances` 接口。 */
-  Encrypt?: boolean | null;
+  Encrypt?: boolean;
   /** 自定义CMK对应的ID，取值为UUID或者类似kms-abcd1234。用于加密云盘。该参数目前仅用于 `RunInstances` 接口。 */
-  KmsKeyId?: string | null;
+  KmsKeyId?: string;
   /** 云硬盘性能，单位：MB/s */
-  ThroughputPerformance?: number | null;
+  ThroughputPerformance?: number;
   /** 所属的独享集群ID。 */
-  CdcId?: string | null;
+  CdcId?: string;
   /** 突发性能 注：内测中。 */
-  BurstPerformance?: boolean | null;
+  BurstPerformance?: boolean;
   /** 磁盘名称，长度不超过128 个字符。该参数正在邀测中，暂未开放使用。 */
   DiskName?: string;
 }
@@ -767,7 +767,7 @@ declare interface RunAutomationServiceEnabled {
 /** 描述了 “云监控” 服务相关的信息 */
 declare interface RunMonitorServiceEnabled {
   /** 是否开启[云监控](/document/product/248)服务。取值范围：true：表示开启云监控服务false：表示不开启云监控服务默认取值：true。 */
-  Enabled?: boolean | null;
+  Enabled?: boolean;
 }
 
 /** 描述了 “云安全” 服务相关的信息 */
@@ -779,9 +779,9 @@ declare interface RunSecurityServiceEnabled {
 /** 竞价相关选项 */
 declare interface SpotMarketOptions {
   /** 竞价出价 */
-  MaxPrice: string | null;
+  MaxPrice: string;
   /** 竞价请求类型，当前仅支持类型：one-time */
-  SpotInstanceType?: string | null;
+  SpotInstanceType?: string;
 }
 
 /** HDD的本地存储信息 */
@@ -1418,9 +1418,9 @@ declare interface DetachInstancesResponse {
 
 declare interface InstanceMarketOptionsRequest {
   /** 竞价相关选项 */
-  SpotOptions: SpotMarketOptions | null;
+  SpotOptions: SpotMarketOptions;
   /** 市场选项类型，当前只支持取值：spot */
-  MarketType?: string | null;
+  MarketType?: string;
 }
 
 declare interface ModifyComputeEnvRequest {

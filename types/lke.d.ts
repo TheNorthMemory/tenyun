@@ -2611,9 +2611,9 @@ declare interface GetTaskStatusResponse {
 }
 
 declare interface GetWsTokenRequest {
-  /** 接入类型 */
+  /** 接入类型，当前请填写5 */
   Type: number;
-  /** 应用AppKey（应用发布后在应用页面[发布管理]-[调用信息]-[API管理]处获取） */
+  /** 当Type=5时，必填；应用AppKey（应用发布后在应用页面[发布管理]-[调用信息]-[API管理]处获取） */
   BotAppKey?: string;
   /** 访客ID（外部输入，建议唯一，标识当前接入会话的用户） */
   VisitorBizId?: string;
@@ -3394,6 +3394,24 @@ declare interface ReconstructDocumentResponse {
   RequestId?: string;
 }
 
+declare interface RenameDocRequest {
+  /** 登录用户主账号(集成商模式必填) */
+  LoginUin?: string;
+  /** 登录用户子账号(集成商模式必填) */
+  LoginSubAccountUin?: string;
+  /** 应用ID */
+  BotBizId?: string;
+  /** 文档ID */
+  DocBizId?: string;
+  /** 新文档名，需要带上后缀 */
+  NewName?: string;
+}
+
+declare interface RenameDocResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ResetSessionRequest {
   /** 会话ID */
   SessionId: string;
@@ -3751,6 +3769,8 @@ declare interface Lke {
   RateMsgRecord(data: RateMsgRecordRequest, config?: AxiosRequestConfig): AxiosPromise<RateMsgRecordResponse>;
   /** 文档解析 {@link ReconstructDocumentRequest} {@link ReconstructDocumentResponse} */
   ReconstructDocument(data?: ReconstructDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<ReconstructDocumentResponse>;
+  /** 文档重命名 {@link RenameDocRequest} {@link RenameDocResponse} */
+  RenameDoc(data?: RenameDocRequest, config?: AxiosRequestConfig): AxiosPromise<RenameDocResponse>;
   /** 重置会话 {@link ResetSessionRequest} {@link ResetSessionResponse} */
   ResetSession(data: ResetSessionRequest, config?: AxiosRequestConfig): AxiosPromise<ResetSessionResponse>;
   /** 文档审核重试 {@link RetryDocAuditRequest} {@link RetryDocAuditResponse} */
