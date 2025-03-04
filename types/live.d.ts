@@ -513,11 +513,11 @@ declare interface DelayInfo {
 /** 媒体诊断结果，包含断流信息、低帧率信息等 */
 declare interface DiagnoseResult {
   /** 断流信息 */
-  StreamBrokenResults?: string[] | null;
+  StreamBrokenResults?: string[];
   /** 低帧率信息 */
-  LowFrameRateResults?: string[] | null;
+  LowFrameRateResults?: string[];
   /** 流格式诊断信息 */
-  StreamFormatResults?: string[] | null;
+  StreamFormatResults?: string[];
 }
 
 /** 域名证书信息 */
@@ -737,45 +737,45 @@ declare interface LivePackageInfo {
 /** 直播监播任务信息。 */
 declare interface LiveStreamMonitorInfo {
   /** 监播任务ID。 */
-  MonitorId: string | null;
+  MonitorId: string;
   /** 监播任务名称。128字节以内。 */
-  MonitorName?: string | null;
+  MonitorName?: string;
   /** 监播任务输出信息。 */
-  OutputInfo?: LiveStreamMonitorOutputInfo | null;
+  OutputInfo?: LiveStreamMonitorOutputInfo;
   /** 待监播的输入流信息。 */
-  InputList?: LiveStreamMonitorInputInfo[] | null;
+  InputList?: LiveStreamMonitorInputInfo[];
   /** 监播任务状态。0： 代表空闲1： 代表监播中。 */
-  Status?: number | null;
+  Status?: number;
   /** 上一次的启动时间，unix时间戳。 */
-  StartTime?: number | null;
+  StartTime?: number;
   /** 上一次的停止时间，unix时间戳。 */
-  StopTime?: number | null;
+  StopTime?: number;
   /** 监播任务创建时间，unix时间戳 */
-  CreateTime?: number | null;
+  CreateTime?: number;
   /** 监播任务更新时间，unix时间戳 */
-  UpdateTime?: number | null;
+  UpdateTime?: number;
   /** 监播事件通知策略。 */
-  NotifyPolicy?: LiveStreamMonitorNotifyPolicy | null;
+  NotifyPolicy?: LiveStreamMonitorNotifyPolicy;
   /** 输出音频的输入Index列表。 */
-  AudibleInputIndexList?: number[] | null;
+  AudibleInputIndexList?: number[];
   /** 开启智能语音识别的输入Index列表 */
-  AiAsrInputIndexList?: number[] | null;
+  AiAsrInputIndexList?: number[];
   /** 是否开启断流检测 */
-  CheckStreamBroken?: number | null;
+  CheckStreamBroken?: number;
   /** 是否开启低帧率检测 */
-  CheckStreamLowFrameRate?: number | null;
+  CheckStreamLowFrameRate?: number;
   /** 智能语音识别语种：0 关闭 1 中文 2 英文 3日文 4 韩文 */
-  AsrLanguage?: number | null;
+  AsrLanguage?: number;
   /** 智能文字识别语种：0 关闭 1 中、英文 */
-  OcrLanguage?: number | null;
+  OcrLanguage?: number;
   /** 开启智能文字识别的输入Index列表 */
-  AiOcrInputIndexList?: number[] | null;
+  AiOcrInputIndexList?: number[];
   /** 是否存储监播事件到监播报告，以及是否允许查询监播报告 */
-  AllowMonitorReport?: number | null;
+  AllowMonitorReport?: number;
   /** 是否开启格式诊断 */
-  AiFormatDiagnose?: number | null;
+  AiFormatDiagnose?: number;
   /** 是否开启内容质检。 */
-  AiQualityControl?: number | null;
+  AiQualityControl?: number;
   /** 导播台监播对应的导播台场次id */
   CasterId?: string;
   /** 拉流转推监播对应的拉流转推任务id */
@@ -785,15 +785,15 @@ declare interface LiveStreamMonitorInfo {
 /** 直播监播功能输入流信息 */
 declare interface LiveStreamMonitorInputInfo {
   /** 待监播的输入流名称。256字节以内，只允许包含字母、数字、‘-’，‘_’，'.'字符。 */
-  InputStreamName: string | null;
+  InputStreamName: string;
   /** 待监播的输入流推流域名。128字节以内，只允许填处于启用状态的推流域名。 */
-  InputDomain?: string | null;
+  InputDomain?: string;
   /** 待监播的输入流推流路径。32字节以内，只允许包含字母、数字、‘-’，‘_’，'.'字符。 */
-  InputApp?: string | null;
+  InputApp?: string;
   /** 待监播的输入流推流url。一般场景下，无需该参数。 */
-  InputUrl?: string | null;
+  InputUrl?: string;
   /** 描述。256字节以内。 */
-  Description?: string | null;
+  Description?: string;
   /** 导播台输入源索引（10000 pvw， 10001 pgm， 其余代表输入下标） */
   CasterInputIndex?: number;
   /** 该输入源是否正在监播 */
@@ -805,23 +805,23 @@ declare interface LiveStreamMonitorInputInfo {
 /** 直播流监播通知策略 */
 declare interface LiveStreamMonitorNotifyPolicy {
   /** 通知策略类型：范围[0,1]0:代表不使用任何通知策略1:代表使用全局回调策略，所有事件通知到CallbackUrl。 */
-  NotifyPolicyType?: number | null;
+  NotifyPolicyType?: number;
   /** 回调URL：长度[0,512]只支持http和https类型的url。 */
-  CallbackUrl?: string | null;
+  CallbackUrl?: string;
 }
 
 /** 直播流监播输出流信息 */
 declare interface LiveStreamMonitorOutputInfo {
   /** 监播任务输出流宽度像素。范围[1,1920]。建议至少大于100像素。 */
-  OutputStreamWidth: number | null;
+  OutputStreamWidth: number;
   /** 监播任务输出流长度像素。范围[1,1080]，建议至少大于100像素。 */
-  OutputStreamHeight: number | null;
+  OutputStreamHeight: number;
   /** 监播任务输出流名称。不填时，系统会自动生成。256字节以内，只允许包含字母、数字、‘-’，‘_’，'.'字符。 */
-  OutputStreamName?: string | null;
+  OutputStreamName?: string;
   /** 监播任务播放域名。128字节以内，只允许填处于启用状态的播放域名。 */
-  OutputDomain?: string | null;
+  OutputDomain?: string;
   /** 监播任务播放路径。32字节以内，只允许包含字母、数字、‘-’，‘_’，'.'字符。 */
-  OutputApp?: string | null;
+  OutputApp?: string;
 }
 
 /** 日志url信息。 */
@@ -839,11 +839,11 @@ declare interface LogInfo {
 /** 媒体处理结果，包含智能语音识别、智能文字识别结果 */
 declare interface MPSResult {
   /** 智能语音识别结果。 */
-  AiAsrResults?: string[] | null;
+  AiAsrResults?: string[];
   /** 智能文字识别结果。 */
-  AiOcrResults?: string[] | null;
+  AiOcrResults?: string[];
   /** 内容质检结果。 */
-  StreamQuaCtrlResults?: string[] | null;
+  StreamQuaCtrlResults?: string[];
 }
 
 /** 混流抠图参数 */

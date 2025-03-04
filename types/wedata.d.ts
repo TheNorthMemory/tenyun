@@ -10562,9 +10562,9 @@ declare interface RegisterEventRequest {
   TimeUnit: string;
   /** 事件所属人 */
   Owner: string;
-  /** 事件类型，默认值：TIME_SERIES */
+  /** 必填，事件类型，默认值：TIME_SERIES */
   EventType?: string;
-  /** 对应day： yyyyMMdd，对应HOUR：yyyyMMddHH，对应MIN：yyyyMMddHHmm，对应SECOND：yyyyMMddHHmmss */
+  /** 必填，对应day： yyyyMMdd，对应HOUR：yyyyMMddHH，对应MIN：yyyyMMddHHmm，对应SECOND：yyyyMMddHHmmss，默认值：yyyyMMdd */
   DimensionFormat?: string;
   /** 存活时间 */
   TimeToLive?: number;
@@ -10638,6 +10638,8 @@ declare interface RenewWorkflowSchedulerInfoDsRequest {
   CalendarName?: string;
   /** 日历id */
   CalendarId?: string;
+  /** 时区 */
+  ScheduleTimeZone?: string;
 }
 
 declare interface RenewWorkflowSchedulerInfoDsResponse {

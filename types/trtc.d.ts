@@ -2153,6 +2153,8 @@ declare interface UpdateStreamIngestRequest {
   StreamUrl?: string;
   /** 音量，取值范围[0, 100]，默认100，表示原音量。 */
   Volume?: number;
+  /** 是否暂停，默认false表示不暂停。暂停期间任务仍在进行中仍会计费，如果要销毁任务请调用停止接口。 */
+  IsPause?: boolean;
 }
 
 declare interface UpdateStreamIngestResponse {

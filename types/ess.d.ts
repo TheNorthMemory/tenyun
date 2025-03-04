@@ -469,9 +469,9 @@ declare interface FailedCreateStaffData {
 /** 删除员工失败数据 */
 declare interface FailedDeleteStaffData {
   /** 员工在电子签的userId */
-  UserId?: string | null;
+  UserId?: string;
   /** 员工在第三方平台的openId */
-  OpenId?: string | null;
+  OpenId?: string;
   /** 失败原因 */
   Reason?: string;
 }
@@ -738,6 +738,22 @@ declare interface FlowDetailInfo {
   Creator?: string;
 }
 
+/** 合同转交相关信息 */
+declare interface FlowForwardInfo {
+  /** 合同流程ID，为32位字符串。此接口的合同流程ID需要由[创建签署流程](https://qian.tencent.com/developers/companyApis/startFlows/CreateFlow)接口创建得到。 */
+  FlowId: string;
+  /** 签署方经办人在合同中的参与方ID，为32位字符串。 */
+  RecipientId: string;
+}
+
+/** 转交合同结果 */
+declare interface FlowForwardResult {
+  /** 合同流程ID为32位字符串。您可以登录腾讯电子签控制台，在 "合同" -> "合同中心" 中查看某个合同的FlowId（在页面中展示为合同ID）。[点击查看FlowId在控制台中的位置](https://qcloudimg.tencent-cloud.cn/raw/0a83015166cfe1cb043d14f9ec4bd75e.png)。 */
+  FlowId?: string;
+  /** 如果失败，返回的错误细节。 */
+  ErrorDetail?: string;
+}
+
 /** 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。 */
 declare interface FlowGroupApproverInfo {
   /** 合同流程ID。 */
@@ -917,7 +933,7 @@ declare interface IntentionAction {
 /** 意愿核身点头确认模式结果 */
 declare interface IntentionActionResult {
   /** 意愿核身结果详细数据，与每段点头确认过程一一对应 */
-  Details?: IntentionActionResultDetail[] | null;
+  Details?: IntentionActionResultDetail[];
 }
 
 /** 意愿核身点头确认模式结果详细数据 */
@@ -2058,6 +2074,26 @@ declare interface CreateFlowEvidenceReportResponse {
   Status?: string;
   /** 此字段已经废除,不再使用.出证的PDF下载地址请调用DescribeChannelFlowEvidenceReport接口获取 */
   ReportUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateFlowForwardsRequest {
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 合同对应参与方需要修改的目标经办人。其UserId可在企业控制台中组织管理里面找到。或者使用获取员工信息接口得到。注意：`需要保证目标经办人已经加入企业且已实名` */
+  TargetUserId: string;
+  /** 企业签署方的合同及对应签署方 */
+  FlowForwardInfos: FlowForwardInfo[];
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+}
+
+declare interface CreateFlowForwardsResponse {
+  /** 失败的合同id以及错误详情 */
+  FailedFlows?: FlowForwardResult[];
+  /** 成功的合同id */
+  SuccessFlows?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3961,6 +3997,8 @@ declare interface Ess {
   CreateFlowByFiles(data: CreateFlowByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowByFilesResponse>;
   /** 提交申请出证报告任务 {@link CreateFlowEvidenceReportRequest} {@link CreateFlowEvidenceReportResponse} */
   CreateFlowEvidenceReport(data: CreateFlowEvidenceReportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowEvidenceReportResponse>;
+  /** 变更本企业待签合同的经办人 {@link CreateFlowForwardsRequest} {@link CreateFlowForwardsResponse} */
+  CreateFlowForwards(data: CreateFlowForwardsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowForwardsResponse>;
   /** 通过多文件创建合同组签署流程 {@link CreateFlowGroupByFilesRequest} {@link CreateFlowGroupByFilesResponse} */
   CreateFlowGroupByFiles(data: CreateFlowGroupByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowGroupByFilesResponse>;
   /** 通过多模板创建合同组签署流程 {@link CreateFlowGroupByTemplatesRequest} {@link CreateFlowGroupByTemplatesResponse} */

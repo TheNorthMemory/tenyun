@@ -3253,7 +3253,7 @@ declare interface Tione {
   DescribeBuildInImages(data?: DescribeBuildInImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBuildInImagesResponse>;
   /** 查询数据集列表 {@link DescribeDatasetsRequest} {@link DescribeDatasetsResponse} */
   DescribeDatasets(data?: DescribeDatasetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasetsResponse>;
-  /** 查询推理镜像模板 {@link DescribeInferTemplatesRequest} {@link DescribeInferTemplatesResponse} */
+  /** @deprecated 查询推理镜像模板 {@link DescribeInferTemplatesRequest} {@link DescribeInferTemplatesResponse} */
   DescribeInferTemplates(data?: DescribeInferTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInferTemplatesResponse>;
   /** 查询模型优化任务详情 {@link DescribeModelAccelerateTaskRequest} {@link DescribeModelAccelerateTaskResponse} */
   DescribeModelAccelerateTask(data: DescribeModelAccelerateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelAccelerateTaskResponse>;

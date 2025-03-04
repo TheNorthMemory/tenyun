@@ -3125,11 +3125,11 @@ declare interface DescribeCvmQuotaRequest {
 
 declare interface DescribeCvmQuotaResponse {
   /** 后付费配额列表 */
-  PostPaidQuotaSet: QuotaEntity[] | null;
+  PostPaidQuotaSet?: QuotaEntity[] | null;
   /** 竞价实例配额列表 */
-  SpotPaidQuotaSet: QuotaEntity[] | null;
+  SpotPaidQuotaSet?: QuotaEntity[] | null;
   /** eks配额 */
-  EksQuotaSet: PodSaleSpec[] | null;
+  EksQuotaSet?: PodSaleSpec[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

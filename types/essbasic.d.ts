@@ -708,6 +708,22 @@ declare interface FlowFileInfo {
   FlowDisplayType?: number;
 }
 
+/** 合同转交相关信息 */
+declare interface FlowForwardInfo {
+  /** 合同流程ID，为32位字符串。此接口的合同流程ID需要由[创建签署流程](https://qian.tencent.com/developers/companyApis/startFlows/CreateFlow)接口创建得到。 */
+  FlowId: string;
+  /** 签署方经办人在合同中的参与方ID，为32位字符串。 */
+  RecipientId: string;
+}
+
+/** 转交合同结果 */
+declare interface FlowForwardResult {
+  /** 合同流程ID为32位字符串。您可以登录腾讯电子签控制台，在 "合同" -> "合同中心" 中查看某个合同的FlowId（在页面中展示为合同ID）。[点击查看FlowId在控制台中的位置](https://qcloudimg.tencent-cloud.cn/raw/0a83015166cfe1cb043d14f9ec4bd75e.png)。 */
+  FlowId?: string;
+  /** 如果失败，返回的错误细节。 */
+  ErrorDetail?: string;
+}
+
 /** 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。 */
 declare interface FlowGroupApproverInfo {
   /** 合同流程ID。 */
@@ -2748,6 +2764,24 @@ declare interface CreateFlowBlockchainEvidenceUrlResponse {
   Url?: string;
   /** 二维码和短链的过期时间戳，过期时间默认为生成链接后7天。 */
   ExpiredOn?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateFlowForwardsRequest {
+  /** 合同对应参与方需要修改的目标经办人对应的OpenId。注意：`需要保证目标经办人已经加入企业且已实名` */
+  TargetOpenId: string;
+  /** 企业签署方的合同及对应签署方 */
+  FlowForwardInfos: FlowForwardInfo[];
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
+  Agent: Agent;
+}
+
+declare interface CreateFlowForwardsResponse {
+  /** 失败的合同id以及错误详情 */
+  FailedFlows?: FlowForwardResult[];
+  /** 成功的合同id */
+  SuccessFlows?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5043,6 +5077,8 @@ declare interface Essbasic {
   CreateEmployeeQualificationSealQrCode(data: CreateEmployeeQualificationSealQrCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmployeeQualificationSealQrCodeResponse>;
   /** 获取签署存证证书查看二维码 {@link CreateFlowBlockchainEvidenceUrlRequest} {@link CreateFlowBlockchainEvidenceUrlResponse} */
   CreateFlowBlockchainEvidenceUrl(data: CreateFlowBlockchainEvidenceUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowBlockchainEvidenceUrlResponse>;
+  /** 变更本企业待签合同的经办人 {@link CreateFlowForwardsRequest} {@link CreateFlowForwardsResponse} */
+  CreateFlowForwards(data: CreateFlowForwardsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowForwardsResponse>;
   /** 提交合同组签署流程审批结果 {@link CreateFlowGroupSignReviewRequest} {@link CreateFlowGroupSignReviewResponse} */
   CreateFlowGroupSignReview(data: CreateFlowGroupSignReviewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowGroupSignReviewResponse>;
   /** 用模板创建签署流程 {@link CreateFlowsByTemplatesRequest} {@link CreateFlowsByTemplatesResponse} */

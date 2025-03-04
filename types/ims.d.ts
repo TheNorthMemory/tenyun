@@ -132,6 +132,18 @@ declare interface ObjectResult {
   Details?: ObjectDetail[] | null;
 }
 
+/** ocr关键词命中位置信息 */
+declare interface OcrHitInfo {
+  /** 标识模型命中还是关键词命中 */
+  Type?: string;
+  /** 命中关键词 */
+  Keyword?: string;
+  /** 自定义词库名称 */
+  LibName?: string;
+  /** 位置信息 */
+  Positions?: Positions[];
+}
+
 /** 用于返回OCR结果检测详情 */
 declare interface OcrResult {
   /** 该字段表示识别场景，取值默认为OCR（图片OCR识别）。 */
@@ -170,6 +182,16 @@ declare interface OcrTextDetail {
   Rate?: number;
   /** 该字段用于返回检测结果所对应的恶意二级标签。 */
   SubLabel?: string;
+  /** 关键词命中位置信息 */
+  HitInfos?: OcrHitInfo[];
+}
+
+/** 标识命中的违规关键词位置信息 */
+declare interface Positions {
+  /** 关键词起始位置 */
+  Start?: number;
+  /** 关键词结束位置 */
+  End?: number;
 }
 
 /** 识别类型标签结果信息 */
