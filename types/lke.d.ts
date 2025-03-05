@@ -2207,7 +2207,7 @@ declare interface DescribeSegmentsResponse {
 }
 
 declare interface DescribeStorageCredentialRequest {
-  /** 应用ID */
+  /** 应用ID，参数非必填不代表不需要填写，下面不同的参数组合会获取到不同的权限，具体请参考 https://cloud.tencent.com/document/product/1759/116238 */
   BotBizId?: string;
   /** 文件类型,正常的文件名类型后缀，例如 xlsx、pdf、 docx、png 等 */
   FileType?: string;

@@ -4172,6 +4172,18 @@ declare interface ModifyResourcesTagsResponse {
   RequestId?: string;
 }
 
+declare interface ModifySLInstanceBasicRequest {
+  /** 集群实例ID */
+  InstanceId: string;
+  /** 实例名称 */
+  ClusterName: string;
+}
+
+declare interface ModifySLInstanceBasicResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifySLInstanceRequest {
   /** 实例唯一标识符（字符串表示）。 */
   InstanceId: string;
@@ -4671,6 +4683,8 @@ declare interface Emr {
   ModifyResourcesTags(data: ModifyResourcesTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcesTagsResponse>;
   /** Serverless HBase变配实例 {@link ModifySLInstanceRequest} {@link ModifySLInstanceResponse} */
   ModifySLInstance(data: ModifySLInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySLInstanceResponse>;
+  /** Serverless HBase修改实例名称 {@link ModifySLInstanceBasicRequest} {@link ModifySLInstanceBasicResponse} */
+  ModifySLInstanceBasic(data: ModifySLInstanceBasicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySLInstanceBasicResponse>;
   /** 修改用户密码（用户管理） {@link ModifyUserManagerPwdRequest} {@link ModifyUserManagerPwdResponse} */
   ModifyUserManagerPwd(data: ModifyUserManagerPwdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserManagerPwdResponse>;
   /** 部署生效（旧） {@link ModifyYarnDeployRequest} {@link ModifyYarnDeployResponse} */

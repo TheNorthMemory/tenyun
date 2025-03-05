@@ -3653,7 +3653,7 @@ declare interface CreateZoneRequest {
   Area?: string;
   /** 待绑定的目标套餐 ID。当您账号下已存在套餐时，可以填写此参数，直接将站点绑定至该套餐。若您当前没有可绑定的套餐时，请前往控制台购买套餐完成站点创建。 */
   PlanId?: string;
-  /** 同名站点标识。限制输入数字、英文、- 和 _ 组合，长度 20 个字符以内。详情参考 [同名站点标识](https://cloud.tencent.com/document/product/1552/70202)，无此使用场景时，该字段保留为空即可。 */
+  /** 同名站点标识。限制输入数字、英文、"." 、"-" 和 "_"，长度 200 个字符以内。详情参考 [同名站点标识](https://cloud.tencent.com/document/product/1552/70202)，无此使用场景时，该字段保留为空即可。 */
   AliasZoneName?: string;
   /** 标签。该参数用于对站点进行分权限管控、分账。需要先前往 [标签控制台](https://console.cloud.tencent.com/tag/taglist) 创建对应的标签才可以在此处传入对应的标签键和标签值。 */
   Tags?: Tag[];
@@ -5527,7 +5527,7 @@ declare interface ModifyZoneRequest {
   Type?: string;
   /** 自定义站点信息，以替代系统默认分配的名称服务器。不填写保持原有配置。当站点是无域名接入方式时不允许传此参数。 */
   VanityNameServers?: VanityNameServers;
-  /** 站点别名。数字、英文、-和_组合，限制20个字符。 */
+  /** 同名站点标识。限制输入数字、英文、"." 、"-" 和 "_"，长度 200 个字符以内。 */
   AliasZoneName?: string;
   /** 站点接入地域，取值有： global：全球； mainland：中国大陆； overseas：境外区域。当站点是无域名接入方式时，不允许传此参数。 */
   Area?: string;
