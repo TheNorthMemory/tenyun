@@ -179,7 +179,7 @@ declare interface CreateProbeTasksRequest {
   TaskType: number;
   /** 拨测节点，如10001，具体拨测地域运营商对应的拨测点编号可联系云拨测确认。 */
   Nodes: string[];
-  /** 拨测间隔 */
+  /** 拨测间隔，单位为分钟 */
   Interval: number;
   /** 拨测参数，详细可参考云拨测官方文档,链接:https://cloud.tencent.com/document/product/248/87308 */
   Parameters: string;

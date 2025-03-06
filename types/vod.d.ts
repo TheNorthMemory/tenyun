@@ -145,9 +145,9 @@ declare namespace V20180717 {
     Definition: number;
     /** 水印列表，支持多张图片或文字水印，最大可支持 10 张。 */
     WatermarkSet?: WatermarkInput[];
-    /** 溯源水印，该功能已不再支持使用。 */
+    /** 溯源水印。 */
     TraceWatermark?: TraceWatermarkInput;
-    /** 版权水印，该功能已不再支持使用。 */
+    /** 版权水印。 */
     CopyRightWatermark?: CopyRightWatermarkInput;
     /** 字幕列表，元素为字幕 ID，支持多个字幕，最大可支持16个。 */
     SubtitleSet?: string[];
@@ -5559,9 +5559,9 @@ declare namespace V20180717 {
     Definition: number;
     /** 水印列表，支持多张图片或文字水印，最大可支持 10 张。 */
     WatermarkSet?: WatermarkInput[];
-    /** 溯源水印，该功能已不再支持使用。 */
+    /** 溯源水印。 */
     TraceWatermark?: TraceWatermarkInput;
-    /** 版权水印，该功能已不再支持使用。 */
+    /** 版权水印。 */
     CopyRightWatermark?: CopyRightWatermarkInput;
     /** 马赛克列表，最大可支持 10 张。 */
     MosaicSet?: MosaicInput[];

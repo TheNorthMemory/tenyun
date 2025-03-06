@@ -470,7 +470,7 @@ declare interface AiAnalysisTaskHorizontalToVerticalResult {
 declare interface AiAnalysisTaskInput {
   /** 视频内容分析模板 ID。 */
   Definition: number;
-  /** 扩展参数，其值为序列化的 json字符串。注意：此参数为定制需求参数，需要线下对接。 */
+  /** 扩展参数，其值为序列化的 json字符串。注意：此参数为定制需求参数，参考如下：智能檫除：https://cloud.tencent.com/document/product/862/101530智能拆条：https://cloud.tencent.com/document/product/862/112098高光集锦：https://cloud.tencent.com/document/product/862/107280智能横转竖：https://cloud.tencent.com/document/product/862/112112 */
   ExtendedParameter?: string | null;
 }
 
@@ -2416,7 +2416,7 @@ declare interface DiagnoseResult {
 
 /** Drm 加密信息。 */
 declare interface DrmInfo {
-  /** 加密类型： simpleaes: aes-128 加密 */
+  /** 加密类型： simpleaes: aes-128 加密 widevine fairplay：Dash不支持fairplay加密 playready */
   Type: string | null;
   /** SimpleAes 加密信息。 */
   SimpleAesDrm?: SimpleAesDrm | null;
@@ -7587,6 +7587,8 @@ declare interface ProcessMediaRequest {
   SessionContext?: string;
   /** 任务类型，默认Online Online：实时任务 Offline：闲时任务，不保证实效性，默认3天内处理完 */
   TaskType?: string;
+  /** 资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。 */
+  ResourceId?: string;
 }
 
 declare interface ProcessMediaResponse {

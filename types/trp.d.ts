@@ -237,7 +237,7 @@ declare interface Job {
   /** 执行状态 init:初始化, pending: 执行中, done: 执行成功, error: 执行失败 */
   Status?: string;
   /** 任务错误信息 */
-  ErrorMessage?: string | null;
+  ErrorMessage?: string;
 }
 
 /** 商户信息 */
@@ -1117,9 +1117,9 @@ declare interface DescribeCodePacksRequest {
 
 declare interface DescribeCodePacksResponse {
   /** 码列表 */
-  CodePacks?: CodePack[] | null;
+  CodePacks?: CodePack[];
   /** 总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
