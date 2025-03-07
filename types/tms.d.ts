@@ -143,6 +143,8 @@ declare interface TextModerationRequest {
   User?: User;
   /** 该字段表示待检测对象对应的设备相关信息，传入后可便于甄别相应违规风险设备 */
   Device?: Device;
+  /** Content的原始语种，比如en,zh */
+  SourceLanguage?: string;
 }
 
 declare interface TextModerationResponse {

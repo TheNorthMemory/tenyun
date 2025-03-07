@@ -2380,23 +2380,23 @@ declare namespace V20180525 {
   /** opa策略信息 */
   interface OpenPolicyInfo {
     /** 策略分类：cluster集群策略、node节点策略、namespace命名空间策略、configuration配置相关策略、compute计算资源策略、storage存储资源策略、network网络资源策略 */
-    PolicyCategory?: string | null;
+    PolicyCategory?: string;
     /** 策略中文名称 */
-    PolicyName?: string | null;
+    PolicyName?: string;
     /** 策略描述 */
-    PolicyDesc?: string | null;
+    PolicyDesc?: string;
     /** 策略运行模式：dryrun空跑不生效，deny拦截生效 */
-    EnforcementAction?: string | null;
+    EnforcementAction?: string;
     /** 关联的事件数量(最近7d) */
-    EventNums?: number | null;
+    EventNums?: number;
     /** 策略英文名称 */
-    Name?: string | null;
+    Name?: string;
     /** 策略模板类型 */
-    Kind?: string | null;
+    Kind?: string;
     /** 策略开关状态：open打开，close关闭 */
-    EnabledStatus?: string | null;
+    EnabledStatus?: string;
     /** 策略的实例的yaml示例base64编码 */
-    ConstraintYamlExample?: string | null;
+    ConstraintYamlExample?: string;
     /** 策略关联的实例列表 */
     OpenConstraintInfoList?: OpenConstraintInfo[] | null;
   }
@@ -5752,7 +5752,7 @@ declare namespace V20180525 {
 
   interface DescribeOpenPolicyListResponse {
     /** 策略信息列表 */
-    OpenPolicyInfoList?: OpenPolicyInfo[] | null;
+    OpenPolicyInfoList?: OpenPolicyInfo[];
     /** 集群内是否安装了gatekeeper addon */
     GatekeeperStatus?: number;
     /** 唯一请求 ID，每次请求都会返回。 */

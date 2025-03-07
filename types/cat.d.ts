@@ -100,7 +100,7 @@ declare interface ProbeTask {
   Nodes?: string[];
   /** 拨测任务所选的拨测点IP类型，0-不限，1-IPv4，2-IPv6 */
   NodeIpType?: number | null;
-  /** 拨测间隔 */
+  /** 拨测间隔，单位为分钟 */
   Interval?: number;
   /** 拨测参数 */
   Parameters?: string;

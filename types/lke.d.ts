@@ -1282,6 +1282,18 @@ declare interface SummaryOutput {
   RequireCommand?: string | null;
 }
 
+/** 变量详情 */
+declare interface TaskFLowVar {
+  /** 变量ID */
+  VarId?: string | null;
+  /** 变量名称 */
+  VarName?: string | null;
+  /** 变量描述（默认为"-"） */
+  VarDesc?: string;
+  /** 变量类型 (STRING,INT,FLOAT,BOOL,OBJECT,ARRAY_STRING,ARRAY_INT,ARRAY_FLOAT,ARRAY_BOOL,ARRAY_OBJECT,FILE,DOCUMENT,IMAGE,AUDIO) */
+  VarType?: string;
+}
+
 /** 任务流程信息 */
 declare interface TaskFlowInfo {
   /** 任务流程ID */
@@ -1674,6 +1686,24 @@ declare interface CreateReleaseRequest {
 declare interface CreateReleaseResponse {
   /** 发布ID */
   ReleaseBizId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateVarRequest {
+  /** 应用ID */
+  AppBizId: string;
+  /** 变量名称，不允许重复，最大支持50个字符 */
+  VarName: string;
+  /** 变量描述，最大支持120个字符 */
+  VarDesc?: string;
+  /** 变量类型定义，支持类型如下：(STRING,INT,FLOAT,BOOL,OBJECT,ARRAY_STRING,ARRAY_INT,ARRAY_FLOAT,ARRAY_BOOL,ARRAY_OBJECT,FILE,DOCUMENT,IMAGE,AUDIO);传输过程是json字符串，标签中仅支持"STRING"类型使用 */
+  VarType?: string;
+}
+
+declare interface CreateVarResponse {
+  /** 变量ID */
+  VarId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2606,6 +2636,30 @@ declare interface GetTaskStatusResponse {
   Message?: string | null;
   /** 任务参数 */
   Params?: TaskParams | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetVarListRequest {
+  /** 应用ID */
+  AppBizId: string;
+  /** 变量ID数组 */
+  VarIds?: string[];
+  /** 按变量名称关键词搜索 */
+  Keyword?: string;
+  /** 起始偏移量（默认0） */
+  Offset?: number;
+  /** 限定数量（默认15） */
+  Limit?: number;
+  /** 按变量类型过滤，默认查询所有类型(STRING,INT,FLOAT,BOOL,OBJECT,ARRAY_STRING,ARRAY_INT,ARRAY_FLOAT,ARRAY_BOOL,ARRAY_OBJECT,FILE,DOCUMENT,IMAGE,AUDIO) */
+  VarType?: string;
+}
+
+declare interface GetVarListResponse {
+  /** 变量总数 */
+  Total?: number;
+  /** 变量信息列表 */
+  List?: TaskFLowVar[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3615,6 +3669,8 @@ declare interface Lke {
   CreateRejectedQuestion(data: CreateRejectedQuestionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRejectedQuestionResponse>;
   /** 创建发布 {@link CreateReleaseRequest} {@link CreateReleaseResponse} */
   CreateRelease(data: CreateReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReleaseResponse>;
+  /** 创建变量 {@link CreateVarRequest} {@link CreateVarResponse} */
+  CreateVar(data: CreateVarRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVarResponse>;
   /** 删除应用 {@link DeleteAppRequest} {@link DeleteAppResponse} */
   DeleteApp(data: DeleteAppRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAppResponse>;
   /** 删除标签 {@link DeleteAttributeLabelRequest} {@link DeleteAttributeLabelResponse} */
@@ -3695,6 +3751,8 @@ declare interface Lke {
   GetReconstructDocumentResult(data: GetReconstructDocumentResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetReconstructDocumentResultResponse>;
   /** 查询任务状态 {@link GetTaskStatusRequest} {@link GetTaskStatusResponse} */
   GetTaskStatus(data: GetTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskStatusResponse>;
+  /** 获取变量列表 {@link GetVarListRequest} {@link GetVarListResponse} */
+  GetVarList(data: GetVarListRequest, config?: AxiosRequestConfig): AxiosPromise<GetVarListResponse>;
   /** 获取ws token {@link GetWsTokenRequest} {@link GetWsTokenResponse} */
   GetWsToken(data: GetWsTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetWsTokenResponse>;
   /** Doc分组 {@link GroupDocRequest} {@link GroupDocResponse} */

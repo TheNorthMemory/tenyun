@@ -7,7 +7,7 @@ declare interface ChargeAttribute {
   /** 到期时间 */
   CurDeadline?: string | null;
   /** 付费方式 */
-  PayMode?: string | null;
+  PayMode?: string;
   /** 自动付费标识：0:默认未设置 1:自动续费 2 不自动续费 */
   AutoRenewFlag?: number | null;
   /** 资源ID */
@@ -75,7 +75,7 @@ declare interface FSAttribute {
   /** 创建时间 */
   CreateTime?: string;
   /** GooseFSx文件系统属性 */
-  GooseFSxAttribute?: GooseFSxAttribute | null;
+  GooseFSxAttribute?: GooseFSxAttribute;
   /** 文件系统状态 ACTIVE(运行中), CREATING(创建中), DESTROYING(销毁中), FAIL(创建失败),EXPANDING(扩容中),PROBING(容灾中) */
   Status?: string;
   /** 文件系统名 */
@@ -89,11 +89,11 @@ declare interface FSAttribute {
   /** 子网所在的可用区 */
   Zone?: string;
   /** Tag数组 */
-  Tag?: Tag[] | null;
+  Tag?: Tag[];
   /** 更新属性时间 */
   ModifyTime?: string;
   /** 文件系统付费信息 */
-  ChargeAttribute?: ChargeAttribute | null;
+  ChargeAttribute?: ChargeAttribute;
 }
 
 /** GooseFSx文件系统的属性 */
@@ -139,7 +139,7 @@ declare interface MappedBucket {
   /** 映射到的文件系统路径, 默认为/ */
   FileSystemPath: string;
   /** 数据流动的自动策略, 包含加载与沉降。策略可以是多种的组合按需加载(OnDemandImport)自动加载元数据(AutoImportMeta)自动加载数据(AutoImportData)周期加载(PeriodImport)周期沉降(PeriodExport)立即沉降(ImmediateExport) */
-  DataRepositoryTaskAutoStrategy?: string[] | null;
+  DataRepositoryTaskAutoStrategy?: string[];
   /** 绑定bucket的数据流动策略ID */
   RuleId?: string | null;
   /** 规则备注与描述 */

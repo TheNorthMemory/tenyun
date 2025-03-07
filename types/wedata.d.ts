@@ -2600,6 +2600,10 @@ declare interface MakePlanOpsDto {
   SelfWorkflowDependency?: string | null;
   /** 补录时间顺序NORMAL： 正常ORDER ： 按照实例时间顺序执行REVERSE： 实例数据时间逆序 */
   MakeDataTimeOrder?: string;
+  /** 补录时间范围的时区 */
+  ScheduleTimeZone?: string;
+  /** 执行应用参数 */
+  AppParam?: string;
 }
 
 /** 补录计划集合 */
@@ -5008,6 +5012,8 @@ declare interface TaskOpsDto {
   ExtResourceFlag?: ExtResourceFlagDto | null;
   /** 父任务simple信息(新) */
   NewParentTaskInfos?: AiopsSimpleTaskDto[] | null;
+  /** 任务自依赖类型：yes： 任务需满足自依赖no：任务无需满足自依赖 */
+  SelfWorkFlowDependType?: string | null;
 }
 
 /** 任务执行脚本 */
@@ -5472,6 +5478,8 @@ declare interface WorkflowScheduleDtoDs {
   CalendarName?: string | null;
   /** 日历调度id */
   CalendarId?: string | null;
+  /** 时区配置 */
+  ScheduleTimeZone?: string | null;
 }
 
 /** 工作流调度详情 */
@@ -6190,6 +6198,8 @@ declare interface CreateHiveTableByDDLRequest {
   SmartOptimizerWritten?: string;
   /** 数据优化表名 */
   TableName?: string;
+  /** 数据优化资源组 */
+  ResourceGroupName?: string;
 }
 
 declare interface CreateHiveTableByDDLResponse {
@@ -6220,6 +6230,8 @@ declare interface CreateHiveTableRequest {
   SmartOptimizerWritten?: string;
   /** 数据优化针对的表 */
   TableName?: string;
+  /** 数据优化资源组 */
+  ResourceGroupName?: string;
 }
 
 declare interface CreateHiveTableResponse {
@@ -8098,6 +8110,10 @@ declare interface DescribeOperateOpsTasksRequest {
   RequestResourceTypes?: string[];
   /** 项目ID列表 */
   ProjectIds?: string[];
+  /** 黑名单任务ID列表，传了该值在筛选的时候会将列表中的任务ID剔除 */
+  BlackTaskIdList?: string[];
+  /** 时区 */
+  ScheduleTimeZone?: string;
 }
 
 declare interface DescribeOperateOpsTasksResponse {
@@ -9866,6 +9882,8 @@ declare interface InstanceApiOpsRequest {
   ExecutorGroupIdList?: string[];
   /** true 只过滤重跑过的实例，false 忽略此过滤条件，结果集过滤条件中不包括是否重跑 */
   OnlyRerun?: boolean;
+  /** 时区 */
+  ScheduleTimeZone?: string;
 }
 
 declare interface JudgeResourceFileRequest {
@@ -10640,6 +10658,8 @@ declare interface RenewWorkflowSchedulerInfoDsRequest {
   CalendarId?: string;
   /** 时区 */
   ScheduleTimeZone?: string;
+  /** 是否自动清理不支持的任务链接 */
+  ClearLink?: boolean;
 }
 
 declare interface RenewWorkflowSchedulerInfoDsResponse {
@@ -11142,6 +11162,8 @@ declare interface TriggerDsEventRequest {
   EventCaseList?: EventCaseDTO[];
   /** 事件实例信息(连续时间) */
   EventBatchCaseList?: EventBatchCaseDTO[];
+  /** 触发时区 */
+  ScheduleTimeZone?: string;
 }
 
 declare interface TriggerDsEventResponse {

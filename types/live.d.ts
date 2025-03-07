@@ -5,29 +5,29 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 主备流详细信息。 */
 declare interface BackupStreamDetailData {
   /** 推流域名。 */
-  DomainName?: string | null;
+  DomainName?: string;
   /** 推流路径。 */
-  AppName?: string | null;
+  AppName?: string;
   /** UTC 格式，例如：2018-06-29T19:00:00Z。注意：和北京时间相差8小时。 */
-  PublishTime?: string | null;
+  PublishTime?: string;
   /** 推流唯一标识。 */
-  UpstreamSequence?: string | null;
+  UpstreamSequence?: string;
   /** 推流来源。示例：直推流；拉流转推(1234)；注意：拉流转推来源括号中为拉流转推的任务 ID。 */
-  SourceFrom?: string | null;
+  SourceFrom?: string;
   /** 主备标识。当前流为主流：1，当前流为备流: 0。 */
-  MasterFlag?: number | null;
+  MasterFlag?: number;
 }
 
 /** 主备流分组信息。 */
 declare interface BackupStreamGroupInfo {
   /** 流名称。 */
-  StreamName?: string | null;
+  StreamName?: string;
   /** 主备流信息。 */
-  BackupList?: BackupStreamDetailData[] | null;
+  BackupList?: BackupStreamDetailData[];
   /** 是否对该流开启了择优调度。0 - 未开启。1 - 已开启。 */
-  OptimalEnable?: number | null;
+  OptimalEnable?: number;
   /** 域名分组的分组名称。 */
-  HostGroupName?: string | null;
+  HostGroupName?: string;
 }
 
 /** 带宽信息 */
@@ -41,11 +41,11 @@ declare interface BandwidthInfo {
 /** 批量操作域名相关接口，若其中个别域名操作失败将会跳过，相应的域名错误信息将统一汇总在此类型中 */
 declare interface BatchDomainOperateErrors {
   /** 操作失败的域名。 */
-  DomainName: string;
+  DomainName?: string;
   /** API3.0错误码。 */
-  Code: string;
+  Code?: string;
   /** API3.0错误信息。 */
-  Message: string;
+  Message?: string;
 }
 
 /** 海外分区直播带宽出参，分区信息 */
@@ -541,9 +541,9 @@ declare interface DomainCertInfo {
   /** 证书状态。 */
   Status?: number;
   /** 证书本身标识的域名列表。比如: ["*.x.com"] */
-  CertDomains?: string[] | null;
+  CertDomains?: string[];
   /** 腾讯云ssl的证书Id */
-  CloudCertId?: string | null;
+  CloudCertId?: string;
 }
 
 /** 每个域名的统计信息。 */
@@ -585,7 +585,7 @@ declare interface DomainInfo {
   /** 失效参数，可忽略。注：此字段为北京时间（UTC+8时区）。 */
   RentExpireTime?: string;
   /** 0: 标准直播。1: 小程序直播。 */
-  IsMiniProgramLive?: number | null;
+  IsMiniProgramLive?: number;
 }
 
 /** 多个域名信息列表 */
@@ -1081,15 +1081,15 @@ declare interface PullStreamTaskInfo {
 /** 推流鉴权key信息。 */
 declare interface PushAuthKeyInfo {
   /** 域名。 */
-  DomainName: string;
+  DomainName?: string;
   /** 是否启用，0：关闭，1：启用。 */
-  Enable: number;
+  Enable?: number;
   /** 主鉴权 Key。 */
-  MasterAuthKey: string;
+  MasterAuthKey?: string;
   /** 备鉴权 Key。 */
-  BackupAuthKey: string;
+  BackupAuthKey?: string;
   /** 有效时间，单位：秒。 */
-  AuthDelta: number;
+  AuthDelta?: number;
 }
 
 /** 推流数据信息 */
@@ -1233,21 +1233,21 @@ declare interface RecordParam {
 /** 录制任务 */
 declare interface RecordTask {
   /** 录制任务ID。 */
-  TaskId: string;
+  TaskId?: string;
   /** 推流域名。 */
-  DomainName: string;
+  DomainName?: string;
   /** 推流路径。 */
-  AppName: string;
+  AppName?: string;
   /** 流名称。 */
-  StreamName: string;
+  StreamName?: string;
   /** 任务开始时间，Unix时间戳。 */
-  StartTime: number;
+  StartTime?: number;
   /** 任务结束时间，Unix时间戳。 */
-  EndTime: number;
+  EndTime?: number;
   /** 录制模板ID。 */
-  TemplateId: number;
+  TemplateId?: number;
   /** 调用 StopRecordTask 停止任务时间，Unix时间戳。值为0表示未曾调用接口停止任务。 */
-  Stopped: number;
+  Stopped?: number;
 }
 
 /** 录制模板信息 */
@@ -1283,15 +1283,15 @@ declare interface RecordTemplateInfo {
 /** 直播域名Referer黑白名单配置 */
 declare interface RefererAuthConfig {
   /** 域名。 */
-  DomainName: string;
+  DomainName?: string;
   /** 是否启用，0：关闭，1：启用。 */
-  Enable: number;
+  Enable?: number;
   /** 名单类型，0：黑名单，1：白名单。 */
-  Type: number;
+  Type?: number;
   /** 是否允许空Referer，0：不允许，1：允许。 */
-  AllowEmpty: number;
+  AllowEmpty?: number;
   /** 名单列表，以分号(;)分隔。 */
-  Rules: string;
+  Rules?: string;
 }
 
 /** 规则信息。 */
@@ -1333,29 +1333,29 @@ declare interface ScreenshotTask {
 /** 截图模板信息。 */
 declare interface SnapshotTemplateInfo {
   /** 模板 ID。 */
-  TemplateId: number;
+  TemplateId?: number;
   /** 模板名称。 */
-  TemplateName: string;
+  TemplateName?: string;
   /** 截图时间间隔，5-300秒。 */
-  SnapshotInterval: number;
+  SnapshotInterval?: number;
   /** 截图宽度，范围：0-3000。 0：原始宽度并适配原始比例。 */
-  Width: number;
+  Width?: number;
   /** 截图高度，范围：0-2000。0：原始高度并适配原始比例。 */
-  Height: number;
+  Height?: number;
   /** 是否开启鉴黄，0：不开启，1：开启。 */
-  PornFlag: number;
+  PornFlag?: number;
   /** Cos 应用 ID。 */
-  CosAppId: number;
+  CosAppId?: number;
   /** Cos Bucket名称。 */
-  CosBucket: string;
+  CosBucket?: string;
   /** Cos 地域。 */
-  CosRegion: string;
+  CosRegion?: string;
   /** 模板描述。 */
-  Description: string;
+  Description?: string;
   /** Cos Bucket文件夹前缀。 */
-  CosPrefix: string | null;
+  CosPrefix?: string | null;
   /** Cos 文件名称。 */
-  CosFileName: string | null;
+  CosFileName?: string | null;
 }
 
 /** 推断流事件信息。 */
@@ -1689,11 +1689,11 @@ declare interface XP2PDetailInfo {
   /** 时间，一分钟粒度，utc格式：yyyy-mm-ddTHH:MM:SSZ，参考https://cloud.tencent.com/document/product/266/11732 */
   Time?: string;
   /** 类型，分live和vod两种。 */
-  Type?: string | null;
+  Type?: string;
   /** 流ID。 */
-  StreamName?: string | null;
+  StreamName?: string;
   /** AppId。 */
-  AppId?: string | null;
+  AppId?: string;
 }
 
 declare interface AddCasterInputInfoRequest {
@@ -3589,9 +3589,9 @@ declare interface DescribeLiveSnapshotTemplatesResponse {
 }
 
 declare interface DescribeLiveStreamEventListRequest {
-  /** 起始时间。 UTC 格式，例如：2018-12-29T19:00:00Z。支持查询60天内的历史记录。 */
+  /** 起始时间。 UTC 格式，例如：2018-12-29T19:00:00Z。支持查询2个月内的历史记录。 */
   StartTime: string;
-  /** 结束时间。UTC 格式，例如：2018-12-29T20:00:00Z。不超过当前时间，且和起始时间相差不得超过30天。 */
+  /** 结束时间。UTC 格式，例如：2018-12-29T20:00:00Z。不超过当前时间，且和起始时间相差不得超过1个月。 */
   EndTime: string;
   /** 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。 */
   AppName?: string;
@@ -3613,15 +3613,15 @@ declare interface DescribeLiveStreamEventListRequest {
 
 declare interface DescribeLiveStreamEventListResponse {
   /** 推断流事件列表。 */
-  EventList: StreamEventInfo[];
+  EventList?: StreamEventInfo[];
   /** 分页的页码。 */
-  PageNum: number;
+  PageNum?: number;
   /** 每页大小。 */
-  PageSize: number;
+  PageSize?: number;
   /** 符合条件的总个数。 */
-  TotalNum: number;
+  TotalNum?: number;
   /** 总页数。 */
-  TotalPage: number;
+  TotalPage?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3685,9 +3685,9 @@ declare interface DescribeLiveStreamOnlineListResponse {
 declare interface DescribeLiveStreamPublishedListRequest {
   /** 您的推流域名。 */
   DomainName: string;
-  /** 结束时间。UTC 格式，例如：2016-06-30T19:00:00Z。不超过当前时间。注意：EndTime和StartTime相差不可超过30天。 */
+  /** 结束时间。UTC 格式，例如：2016-06-30T19:00:00Z。不超过当前时间。注意：EndTime和StartTime相差不可超过1个月。 */
   EndTime: string;
-  /** 起始时间。 UTC 格式，例如：2016-06-29T19:00:00Z。最长支持查询60天内数据。 */
+  /** 起始时间。 UTC 格式，例如：2016-06-29T19:00:00Z。最长支持查询2个月内数据。 */
   StartTime: string;
   /** 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。不支持模糊匹配。 */
   AppName?: string;

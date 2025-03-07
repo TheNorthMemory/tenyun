@@ -388,6 +388,16 @@ declare interface DetailedRolePerm {
   Remark?: string;
 }
 
+/** 实例维度组合数组 */
+declare interface DimensionInstance {
+  /** 实例的维度组合 */
+  Dimensions: DimensionOpt[] | null;
+}
+
+/** 指标维度对象 */
+declare interface DimensionOpt {
+}
+
 /** 命名空间信息 */
 declare interface Environment {
   /** 命名空间名称 */
@@ -4004,6 +4014,24 @@ declare interface DescribeRocketMQSubscriptionsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRocketMQTopUsagesRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 指标名称，支持以下：consumeLag，消费组堆积数量deadLetterCount，死信数量topicRateIn, Topic生产速率topicRateOut，Topic消费速率topicStorageSize，Topic存储空间topicApiCalls，Topic API调用次数 */
+  MetricName: string;
+  /** 排序数量，最大20 */
+  Limit: number;
+}
+
+declare interface DescribeRocketMQTopUsagesResponse {
+  /** 指标值列表 */
+  Values?: number[];
+  /** 指标值对应的维度组合，本接口存在以下几个维度：tenant，namespace，group，topic */
+  Dimensions?: DimensionInstance[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRocketMQTopicMsgsRequest {
   /** 集群 ID */
   ClusterId: string;
@@ -5277,6 +5305,8 @@ declare interface Tdmq {
   DescribeRocketMQSourceClusterTopicList(data: DescribeRocketMQSourceClusterTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQSourceClusterTopicListResponse>;
   /** 获取RocketMQ消费组订阅关系 {@link DescribeRocketMQSubscriptionsRequest} {@link DescribeRocketMQSubscriptionsResponse} */
   DescribeRocketMQSubscriptions(data: DescribeRocketMQSubscriptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQSubscriptionsResponse>;
+  /** 获取 RocketMQ 集群相关指标排序列表 {@link DescribeRocketMQTopUsagesRequest} {@link DescribeRocketMQTopUsagesResponse} */
+  DescribeRocketMQTopUsages(data: DescribeRocketMQTopUsagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQTopUsagesResponse>;
   /** rocketmq 消息查询 {@link DescribeRocketMQTopicMsgsRequest} {@link DescribeRocketMQTopicMsgsResponse} */
   DescribeRocketMQTopicMsgs(data: DescribeRocketMQTopicMsgsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQTopicMsgsResponse>;
   /** 获取Topic生产详情列表 {@link DescribeRocketMQTopicStatsRequest} {@link DescribeRocketMQTopicStatsResponse} */

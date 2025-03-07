@@ -1202,6 +1202,8 @@ declare interface ServerlessIndexSettingsField {
   NumberOfShards?: string | null;
   /** 索引刷新频率 */
   RefreshInterval?: string | null;
+  /** 自定义参数 */
+  CustomSetting?: string;
 }
 
 /** Serverless索引空间信息 */

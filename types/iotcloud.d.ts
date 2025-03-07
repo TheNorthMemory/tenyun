@@ -11,13 +11,13 @@ declare interface Attribute {
 /** 子设备信息 */
 declare interface BindDeviceInfo {
   /** 产品ID */
-  ProductId: string;
+  ProductId?: string;
   /** 设备名 */
-  DeviceName: string;
+  DeviceName?: string;
   /** 设备Tag */
-  Tags: DeviceTag[];
+  Tags?: DeviceTag[];
   /** 子设备绑定时间 */
-  BindTime: number | null;
+  BindTime?: number | null;
 }
 
 /** 子产品信息 */
@@ -179,23 +179,23 @@ declare interface DeviceTag {
 /** 设备固件更新状态 */
 declare interface DeviceUpdateStatus {
   /** 设备名 */
-  DeviceName: string;
+  DeviceName?: string;
   /** 最后处理时间 */
-  LastProcessTime: number;
+  LastProcessTime?: number;
   /** 状态 */
-  Status: number;
+  Status?: number;
   /** 错误消息 */
-  ErrMsg: string;
+  ErrMsg?: string;
   /** 返回码 */
-  Retcode: number;
+  Retcode?: number;
   /** 目标更新版本 */
-  DstVersion: string;
+  DstVersion?: string;
   /** 下载中状态时的下载进度 */
-  Percent: number | null;
+  Percent?: number | null;
   /** 原版本号 */
-  OriVersion: string | null;
+  OriVersion?: string | null;
   /** 任务ID */
-  TaskId: number | null;
+  TaskId?: number | null;
 }
 
 /** 设备固件详细信息 */
@@ -237,25 +237,25 @@ declare interface FirmwareTaskInfo {
 /** 内容日志项 */
 declare interface PayloadLogItem {
   /** 账号id */
-  Uin: string;
+  Uin?: string;
   /** 产品id */
-  ProductId: string;
+  ProductId?: string;
   /** 设备名称 */
-  DeviceName: string;
+  DeviceName?: string;
   /** 来源类型 */
-  SrcType: string;
+  SrcType?: string;
   /** 来源名称 */
-  SrcName: string;
+  SrcName?: string;
   /** 消息topic */
-  Topic: string;
+  Topic?: string;
   /** 内容格式类型 */
-  PayloadFormatType: string;
+  PayloadFormatType?: string;
   /** 内容信息 */
-  Payload: string;
+  Payload?: string;
   /** 请求ID */
-  RequestId: string;
+  RequestId?: string;
   /** 日期时间 */
-  DateTime: string;
+  DateTime?: string;
 }
 
 /** 产品详细信息 */
@@ -325,57 +325,57 @@ declare interface ProductProperties {
 /** 产品资源详细信息 */
 declare interface ProductResourceInfo {
   /** 产品ID */
-  ProductID: string;
+  ProductID?: string;
   /** 产品名 */
-  ProductName: string;
+  ProductName?: string;
   /** 资源名称 */
-  Name: string;
+  Name?: string;
   /** 资源文件md5 */
-  Md5: string;
+  Md5?: string;
   /** 资源文件大小 */
-  Size: number;
+  Size?: number;
   /** 资源文件描述 */
-  Description: string | null;
+  Description?: string | null;
   /** 资源创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
 }
 
 /** 产品级任务详细信息 */
 declare interface ProductTaskInfo {
   /** 任务ID */
-  Id: number;
+  Id?: number;
   /** 任务类型 0-批量创建设备类型 */
-  Type: number;
+  Type?: number;
   /** 任务状态 0-创建中 1-待执行 2-执行中 3-执行失败 4-子任务部分失败 5-执行成功 */
-  State: number;
+  State?: number;
   /** 任务参数类型 cosfile-文件输入 random-随机生成 */
-  ParametersType: string;
+  ParametersType?: string;
   /** 任务参数 */
-  Parameters: string;
+  Parameters?: string;
   /** 任务执行结果类型 cosfile-文件输出 errmsg-错误信息 */
-  ResultType: string | null;
+  ResultType?: string | null;
   /** 任务执行结果 */
-  Result: string | null;
+  Result?: string | null;
   /** 子任务总个数 */
-  BatchCount: number | null;
+  BatchCount?: number | null;
   /** 子任务已执行个数 */
-  BatchOffset: number | null;
+  BatchOffset?: number | null;
   /** 任务创建时间 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 任务更新时间 */
-  UpdateTime: number;
+  UpdateTime?: number;
   /** 任务完成时间 */
-  CompleteTime: number | null;
+  CompleteTime?: number | null;
 }
 
 /** 重置设备状态结果 */
 declare interface ResetDeviceResult {
   /** 设备名 */
-  DeviceName: string;
+  DeviceName?: string;
   /** 是否成功 */
-  Success: boolean;
+  Success?: boolean;
   /** 失败原因 */
-  Reason: string | null;
+  Reason?: string | null;
 }
 
 /** SDK日志项 */
@@ -403,23 +403,23 @@ declare interface SearchKeyword {
 /** 状态统计信息 */
 declare interface StatusStatistic {
   /** 任务状态 */
-  Status: number | null;
+  Status?: number | null;
   /** 统计总数 */
-  Total: number | null;
+  Total?: number | null;
 }
 
 /** 规则详细信息 */
 declare interface TopicRuleInfo {
   /** 规则名称 */
-  RuleName: string;
+  RuleName?: string;
   /** 规则描述 */
-  Description: string;
+  Description?: string;
   /** 创建时间 */
-  CreatedAt: number;
+  CreatedAt?: number;
   /** 不生效 */
-  RuleDisabled: boolean;
+  RuleDisabled?: boolean;
   /** 规则模式 */
-  TopicPattern: string;
+  TopicPattern?: string;
 }
 
 /** 创建规则请求包体 */
@@ -561,7 +561,7 @@ declare interface CreateMultiDevicesTaskRequest {
 
 declare interface CreateMultiDevicesTaskResponse {
   /** 任务ID */
-  Id: number;
+  Id?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -591,11 +591,11 @@ declare interface CreateProductRequest {
 
 declare interface CreateProductResponse {
   /** 产品名称 */
-  ProductName: string;
+  ProductName?: string;
   /** 产品 ID，腾讯云生成全局唯一 ID */
-  ProductId: string;
+  ProductId?: string;
   /** 产品属性 */
-  ProductProperties: ProductProperties;
+  ProductProperties?: ProductProperties;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -607,9 +607,9 @@ declare interface CreateTaskFileUrlRequest {
 
 declare interface CreateTaskFileUrlResponse {
   /** 任务文件上传链接 */
-  Url: string;
+  Url?: string;
   /** 任务文件名 */
-  FileName: string;
+  FileName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -652,12 +652,12 @@ declare interface DeleteDeviceRequest {
 }
 
 declare interface DeleteDeviceResourceRequest {
-  /** 产品ID */
-  ProductID: string;
   /** 资源名称 */
   Name: string;
   /** 设备名称 */
   DeviceName: string;
+  /** 产品ID */
+  ProductID?: string;
 }
 
 declare interface DeleteDeviceResourceResponse {
@@ -733,7 +733,7 @@ declare interface DescribeDeviceClientKeyRequest {
 
 declare interface DescribeDeviceClientKeyResponse {
   /** 设备的私钥 */
-  ClientKey: string;
+  ClientKey?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -925,9 +925,9 @@ declare interface DescribeFirmwareTaskDevicesRequest {
 
 declare interface DescribeFirmwareTaskDevicesResponse {
   /** 固件升级任务的设备总数 */
-  Total: number | null;
+  Total?: number | null;
   /** 固件升级任务的设备列表 */
-  Devices: DeviceUpdateStatus[] | null;
+  Devices?: DeviceUpdateStatus[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -943,7 +943,7 @@ declare interface DescribeFirmwareTaskDistributionRequest {
 
 declare interface DescribeFirmwareTaskDistributionResponse {
   /** 固件升级任务状态分布信息 */
-  StatusInfos: StatusStatistic[];
+  StatusInfos?: StatusStatistic[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -959,21 +959,21 @@ declare interface DescribeFirmwareTaskRequest {
 
 declare interface DescribeFirmwareTaskResponse {
   /** 固件任务ID */
-  TaskId: number | null;
+  TaskId?: number | null;
   /** 固件任务状态 */
-  Status: number | null;
+  Status?: number | null;
   /** 固件任务创建时间，单位:秒 */
-  CreateTime: number | null;
+  CreateTime?: number | null;
   /** 固件任务升级类型 */
-  Type: number | null;
+  Type?: number | null;
   /** 产品名称 */
-  ProductName: string | null;
+  ProductName?: string | null;
   /** 固件任务升级模式。originalVersion（按版本号升级）、filename（提交文件升级）、devicenames（按设备名称升级） */
-  UpgradeMode: string | null;
+  UpgradeMode?: string | null;
   /** 产品ID */
-  ProductId: string | null;
+  ProductId?: string | null;
   /** 升级前版本号 */
-  OriginalVersion: string | null;
+  OriginalVersion?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -987,11 +987,11 @@ declare interface DescribeFirmwareTaskStatisticsRequest {
 
 declare interface DescribeFirmwareTaskStatisticsResponse {
   /** 升级成功的设备总数 */
-  SuccessTotal: number | null;
+  SuccessTotal?: number | null;
   /** 升级失败的设备总数 */
-  FailureTotal: number | null;
+  FailureTotal?: number | null;
   /** 正在升级的设备总数 */
-  UpgradingTotal: number | null;
+  UpgradingTotal?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1011,9 +1011,9 @@ declare interface DescribeFirmwareTasksRequest {
 
 declare interface DescribeFirmwareTasksResponse {
   /** 固件升级任务列表 */
-  TaskInfos: FirmwareTaskInfo[] | null;
+  TaskInfos?: FirmwareTaskInfo[] | null;
   /** 固件升级任务总数 */
-  Total: number | null;
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1033,11 +1033,11 @@ declare interface DescribeGatewayBindDevicesRequest {
 
 declare interface DescribeGatewayBindDevicesResponse {
   /** 子设备总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 子设备信息 */
-  Devices: BindDeviceInfo[];
+  Devices?: BindDeviceInfo[];
   /** 子设备所属的产品名 */
-  ProductName: string;
+  ProductName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1087,7 +1087,7 @@ declare interface DescribeProductCARequest {
 
 declare interface DescribeProductCAResponse {
   /** CA证书列表 */
-  CAs: CertInfo[];
+  CAs?: CertInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1124,9 +1124,9 @@ declare interface DescribeProductResourcesRequest {
 
 declare interface DescribeProductResourcesResponse {
   /** 资源总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 资源详情 */
-  Result: ProductResourceInfo[] | null;
+  Result?: ProductResourceInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1153,7 +1153,7 @@ declare interface DescribeProductTaskRequest {
 
 declare interface DescribeProductTaskResponse {
   /** 产品任务详细信息 */
-  TaskInfo: ProductTaskInfo;
+  TaskInfo?: ProductTaskInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1169,9 +1169,9 @@ declare interface DescribeProductTasksRequest {
 
 declare interface DescribeProductTasksResponse {
   /** 符合条件的任务总个数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 任务详细信息列表 */
-  TaskInfos: ProductTaskInfo[];
+  TaskInfos?: ProductTaskInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1293,7 +1293,7 @@ declare interface GetAllVersionRequest {
 
 declare interface GetAllVersionResponse {
   /** 版本号列表 */
-  Version: string[];
+  Version?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1309,7 +1309,7 @@ declare interface GetCOSURLRequest {
 
 declare interface GetCOSURLResponse {
   /** 固件URL */
-  Url: string;
+  Url?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1361,11 +1361,11 @@ declare interface ListLogPayloadRequest {
 
 declare interface ListLogPayloadResponse {
   /** 日志上下文 */
-  Context: string;
+  Context?: string;
   /** 是否还有日志，如有仍有日志，下次查询的请求带上当前请求返回的Context */
-  Listover: boolean;
+  Listover?: boolean;
   /** 日志列表 */
-  Results: PayloadLogItem[];
+  Results?: PayloadLogItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1429,9 +1429,9 @@ declare interface ListTopicRulesRequest {
 
 declare interface ListTopicRulesResponse {
   /** 规则总数量 */
-  TotalCnt: number;
+  TotalCnt?: number;
   /** 规则列表 */
-  Rules: TopicRuleInfo[];
+  Rules?: TopicRuleInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1449,7 +1449,7 @@ declare interface PublishBroadcastMessageRequest {
 
 declare interface PublishBroadcastMessageResponse {
   /** 广播消息任务ID */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1513,9 +1513,9 @@ declare interface ResetDeviceStateRequest {
 
 declare interface ResetDeviceStateResponse {
   /** 批量重置设备成功数 */
-  SuccessCount: number;
+  SuccessCount?: number;
   /** 批量重置设备结果 */
-  ResetDeviceResults: ResetDeviceResult[];
+  ResetDeviceResults?: ResetDeviceResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1621,7 +1621,7 @@ declare interface UpdateDeviceShadowRequest {
 
 declare interface UpdateDeviceShadowResponse {
   /** 设备影子数据，JSON字符串格式 */
-  Data: string;
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1679,11 +1679,11 @@ declare interface UpdateProductDynamicRegisterRequest {
 
 declare interface UpdateProductDynamicRegisterResponse {
   /** 动态注册类型，0-关闭 1-预创建设备 2-自动创建设备 */
-  RegisterType: number;
+  RegisterType?: number;
   /** 动态注册产品密钥 */
-  ProductSecret: string;
+  ProductSecret?: string;
   /** 动态注册设备上限 */
-  RegisterLimit: number;
+  RegisterLimit?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3557,7 +3557,7 @@ declare interface Iotcloud {
   EnableTopicRule(data: EnableTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<EnableTopicRuleResponse>;
   /** 获取所有版本列表 {@link GetAllVersionRequest} {@link GetAllVersionResponse} */
   GetAllVersion(data: GetAllVersionRequest, config?: AxiosRequestConfig): AxiosPromise<GetAllVersionResponse>;
-  /** 获取固件下载地址 {@link GetCOSURLRequest} {@link GetCOSURLResponse} */
+  /** 获取固件上传地址 {@link GetCOSURLRequest} {@link GetCOSURLResponse} */
   GetCOSURL(data: GetCOSURLRequest, config?: AxiosRequestConfig): AxiosPromise<GetCOSURLResponse>;
   /** 获取用户资源信息 {@link GetUserResourceInfoRequest} {@link GetUserResourceInfoResponse} */
   GetUserResourceInfo(data?: GetUserResourceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetUserResourceInfoResponse>;
@@ -3585,7 +3585,7 @@ declare interface Iotcloud {
   RetryDeviceFirmwareTask(data: RetryDeviceFirmwareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RetryDeviceFirmwareTaskResponse>;
   /** 批量设置产品禁用状态 {@link SetProductsForbiddenStatusRequest} {@link SetProductsForbiddenStatusResponse} */
   SetProductsForbiddenStatus(data: SetProductsForbiddenStatusRequest, config?: AxiosRequestConfig): AxiosPromise<SetProductsForbiddenStatusResponse>;
-  /** 批量解绑子设备 {@link UnbindDevicesRequest} {@link UnbindDevicesResponse} */
+  /** 批量解绑子设备（旧） {@link UnbindDevicesRequest} {@link UnbindDevicesResponse} */
   UnbindDevices(data: UnbindDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindDevicesResponse>;
   /** 切换设备可用状态 {@link UpdateDeviceAvailableStateRequest} {@link UpdateDeviceAvailableStateResponse} */
   UpdateDeviceAvailableState(data: UpdateDeviceAvailableStateRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDeviceAvailableStateResponse>;

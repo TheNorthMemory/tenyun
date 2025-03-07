@@ -1435,11 +1435,11 @@ declare interface IpHitItemsData {
 /** 规则执行的时间结构体 */
 declare interface JobDateTime {
   /** 定时执行的时间参数 */
-  Timed?: TimedJob[] | null;
+  Timed?: TimedJob[];
   /** 周期执行的时间参数 */
-  Cron?: CronJob[] | null;
+  Cron?: CronJob[];
   /** 时区 */
-  TimeTZone?: string | null;
+  TimeTZone?: string;
 }
 
 /** Key-Value的形式，Value为Int */

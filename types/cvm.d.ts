@@ -51,13 +51,13 @@ declare interface ChargePrepaid {
 /** chc部署网络minos引导配置。 */
 declare interface ChcDeployExtraConfig {
   /** minos类型。是使用腾讯云的minios，还是客户自己的minios。 */
-  MiniOsType: string | null;
+  MiniOsType: string;
   /** 服务器的架构和启动方式。取值为x86_legacy, arm_uefi。 */
-  BootType: string | null;
+  BootType: string;
   /** PXE使用的引导文件。默认为pxelinux.0。 */
-  BootFile?: string | null;
+  BootFile?: string;
   /** tftp服务器的ip地址。 */
-  NextServerAddress?: string | null;
+  NextServerAddress?: string;
 }
 
 /** CHC物理服务器信息 */
@@ -71,61 +71,61 @@ declare interface ChcHost {
   /** CHC的状态INIT: 设备已录入。还未配置带外和部署网络READY: 已配置带外和部署网络PREPARED: 可分配云主机ONLINE: 已分配云主机OPERATING: 设备操作中，如正在配置带外网络等。CLEAR_NETWORK_FAILED: 清理带外和部署网络失败 */
   InstanceState?: string;
   /** 设备类型。 */
-  DeviceType?: string | null;
+  DeviceType?: string;
   /** 所属可用区 */
   Placement?: Placement;
   /** 带外网络。 */
-  BmcVirtualPrivateCloud?: VirtualPrivateCloud | null;
+  BmcVirtualPrivateCloud?: VirtualPrivateCloud;
   /** 带外网络Ip。 */
-  BmcIp?: string | null;
+  BmcIp?: string;
   /** 带外网络安全组Id。 */
-  BmcSecurityGroupIds?: string[] | null;
+  BmcSecurityGroupIds?: string[];
   /** 部署网络。 */
-  DeployVirtualPrivateCloud?: VirtualPrivateCloud | null;
+  DeployVirtualPrivateCloud?: VirtualPrivateCloud;
   /** 部署网络Ip。 */
-  DeployIp?: string | null;
+  DeployIp?: string;
   /** 部署网络安全组Id。 */
-  DeploySecurityGroupIds?: string[] | null;
+  DeploySecurityGroupIds?: string[];
   /** 关联的云主机Id。 */
-  CvmInstanceId?: string | null;
+  CvmInstanceId?: string;
   /** 服务器导入的时间。 */
   CreatedTime?: string;
   /** 机型的硬件描述，分别为CPU核数，内存容量和磁盘容量 */
-  HardwareDescription?: string | null;
+  HardwareDescription?: string;
   /** CHC物理服务器的CPU核数 */
-  CPU?: number | null;
+  CPU?: number;
   /** CHC物理服务器的内存大小，单位为GB */
-  Memory?: number | null;
+  Memory?: number;
   /** CHC物理服务器的磁盘信息 */
-  Disk?: string | null;
+  Disk?: string;
   /** 带外网络下分配的MAC地址 */
-  BmcMAC?: string | null;
+  BmcMAC?: string;
   /** 部署网络下分配的MAC地址 */
-  DeployMAC?: string | null;
+  DeployMAC?: string;
   /** 设备托管类型。HOSTING: 托管TENANT: 租赁 */
-  TenantType?: string | null;
+  TenantType?: string;
   /** chc dhcp选项，用于minios调试。 */
-  DeployExtraConfig?: ChcDeployExtraConfig | null;
+  DeployExtraConfig?: ChcDeployExtraConfig;
   /** GPU型号。 */
-  Gpu?: string | null;
+  Gpu?: string;
   /** 网卡型号。主要指RDMA网卡。 */
-  NetworkCard?: string | null;
+  NetworkCard?: string;
   /** 是否是预定义机型。 */
-  IsPredefinedType?: boolean | null;
+  IsPredefinedType?: boolean;
   /** CHC云主机机型。 */
-  ChcInstanceType?: string | null;
+  ChcInstanceType?: string;
   /** CHC云主机机型簇。 */
-  ChcInstanceFamily?: string | null;
+  ChcInstanceFamily?: string;
   /** CHC云主机机型簇名称。 */
-  ChcInstanceFamilyName?: string | null;
+  ChcInstanceFamilyName?: string;
   /** 转售客户的AppId。 */
-  ResaleAppId?: string | null;
+  ResaleAppId?: string;
   /** 转售客户的账号ID。 */
-  ResaleAccountId?: string | null;
+  ResaleAccountId?: string;
   /** 售卖状态。NOT_FOR_SALE:不可售卖AVAILABLE: 可售卖SOLD: 已售卖 */
-  SaleStatus?: string | null;
+  SaleStatus?: string;
   /** CHC物理服务器关联的标签列表。 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
   /** 最近操作 */
   LatestOperation?: string;
   /** 最近操作错误码 */
@@ -247,11 +247,11 @@ declare interface Filter {
 /** 实例GPU信息 */
 declare interface GPUInfo {
   /** 实例GPU个数。值小于1代表VGPU类型，大于1代表GPU直通类型。 */
-  GPUCount: number | null;
+  GPUCount?: number;
   /** 实例GPU地址。 */
-  GPUId: string[] | null;
+  GPUId?: string[];
   /** 实例GPU类型。 */
-  GPUType: string | null;
+  GPUType?: string;
 }
 
 /** 专用宿主机实例详细信息 */
@@ -281,9 +281,9 @@ declare interface HostItem {
   /** 专用宿主机实例资源信息 */
   HostResource?: HostResource;
   /** 专用宿主机所属的围笼ID。该字段仅对金融专区围笼内的专用宿主机有效。 */
-  CageId?: string | null;
+  CageId?: string;
   /** 专用宿主机关联的标签列表。 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
 }
 
 /** cdh相关价格信息 */
@@ -313,7 +313,7 @@ declare interface HostResource {
   /** 专用宿主机实例可用GPU卡数 */
   GpuAvailable?: number;
   /** CDH owner */
-  ExclusiveOwner?: string | null;
+  ExclusiveOwner?: string;
 }
 
 /** 高性能计算集群 */
@@ -321,9 +321,9 @@ declare interface HpcClusterInfo {
   /** 高性能计算集群ID */
   HpcClusterId?: string;
   /** 高性能计算集群名 */
-  Name?: string | null;
+  Name?: string;
   /** 高性能计算集群备注 */
-  Remark?: string | null;
+  Remark?: string;
   /** 集群下设备容量 */
   CvmQuotaTotal?: number;
   /** 集群所在可用区 */
@@ -331,13 +331,13 @@ declare interface HpcClusterInfo {
   /** 集群当前已有设备量 */
   CurrentNum?: number;
   /** 集群创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 集群内实例ID列表 */
-  InstanceIds?: string[] | null;
+  InstanceIds?: string[];
   /** 高性能计算集群类型。 */
-  HpcClusterType?: string | null;
+  HpcClusterType?: string;
   /** 高性能计算集群对应的业务场景标识，当前只支持CDC。 */
-  HpcClusterBusinessId?: string | null;
+  HpcClusterBusinessId?: string;
   /** 高性能计算集群网络模式 */
   HpcClusterNetMode?: number;
   /** 高性能计算集群关联的标签列表 */
@@ -373,15 +373,15 @@ declare interface Image {
   /** 同步百分比 */
   SyncPercent?: number | null;
   /** 镜像是否支持cloud-init */
-  IsSupportCloudinit?: boolean | null;
+  IsSupportCloudinit?: boolean;
   /** 镜像关联的快照信息 */
-  SnapshotSet?: Snapshot[] | null;
+  SnapshotSet?: Snapshot[];
   /** 镜像关联的标签列表。 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
   /** 镜像许可类型 */
   LicenseType?: string;
   /** 镜像族 */
-  ImageFamily?: string | null;
+  ImageFamily?: string;
   /** 镜像是否废弃 */
   ImageDeprecated?: boolean;
 }
@@ -389,9 +389,9 @@ declare interface Image {
 /** 支持的操作系统类型，根据Windows和Linux分类。 */
 declare interface ImageOsList {
   /** 支持的Windows操作系统。 */
-  Windows?: string[] | null;
+  Windows?: string[];
   /** 支持的Linux操作系统 */
-  Linux?: string[] | null;
+  Linux?: string[];
 }
 
 /** 镜像配额 */
@@ -467,21 +467,21 @@ declare interface Instance {
   /** 实例最新操作的唯一请求 ID。 */
   LatestOperationRequestId?: string | null;
   /** 分散置放群组ID。 */
-  DisasterRecoverGroupId?: string | null;
+  DisasterRecoverGroupId?: string;
   /** 实例的IPv6地址。 */
   IPv6Addresses?: string[] | null;
   /** CAM角色名。 */
   CamRoleName?: string | null;
   /** 高性能计算集群`ID`。 */
-  HpcClusterId?: string | null;
+  HpcClusterId?: string;
   /** 高性能计算集群`IP`列表。 */
   RdmaIpAddresses?: string[] | null;
   /** 实例所在的专用集群`ID`。 */
-  DedicatedClusterId?: string | null;
+  DedicatedClusterId?: string;
   /** 实例隔离类型。取值范围：ARREAR：表示欠费隔离EXPIRE：表示到期隔离MANMADE：表示主动退还隔离NOTISOLATED：表示未隔离 */
-  IsolatedSource?: string | null;
+  IsolatedSource?: string;
   /** GPU信息。如果是gpu类型子机，该值会返回GPU信息，如果是其他类型子机则不返回。 */
-  GPUInfo?: GPUInfo | null;
+  GPUInfo?: GPUInfo;
   /** 实例的操作系统许可类型，默认为TencentCloud */
   LicenseType?: string;
   /** 实例销毁保护标志，表示是否允许通过api接口删除实例。取值范围：true：表示开启实例保护，不允许通过api接口删除实例false：表示关闭实例保护，允许通过api接口删除实例默认取值：false。 */
@@ -513,11 +513,11 @@ declare interface InstanceFamilyConfig {
 /** 描述退款详情。 */
 declare interface InstanceRefund {
   /** 实例Id。 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 退款数额。 */
-  Refunds?: number | null;
+  Refunds?: number;
   /** 退款详情。 */
-  PriceDetail?: string | null;
+  PriceDetail?: string;
 }
 
 /** 描述实例的状态。状态类型详见[实例状态表](/document/api/213/15753) */
@@ -551,11 +551,11 @@ declare interface InstanceTypeConfig {
 /** 描述实例机型配置信息及状态信息 */
 declare interface InstanceTypeConfigStatus {
   /** 状态描述 */
-  Status: string;
+  Status?: string;
   /** 状态描述信息 */
-  Message: string | null;
+  Message?: string;
   /** 配置信息 */
-  InstanceTypeConfig: InstanceTypeConfig;
+  InstanceTypeConfig?: InstanceTypeConfig;
 }
 
 /** 描述实例机型配额信息。 */
@@ -633,9 +633,9 @@ declare interface InternetBandwidthConfig {
 /** 描述了网络计费 */
 declare interface InternetChargeTypeConfig {
   /** 网络计费模式。 */
-  InternetChargeType?: string | null;
+  InternetChargeType?: string;
   /** 网络计费模式描述信息。 */
-  Description?: string | null;
+  Description?: string;
 }
 
 /** 描述了单项的价格信息 */
@@ -699,7 +699,7 @@ declare interface KeyPair {
   /** 创建时间。按照`ISO8601`标准表示，并且使用`UTC`时间。格式为：`YYYY-MM-DDThh:mm:ssZ`。 */
   CreatedTime?: string;
   /** 密钥关联的标签列表。 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
 }
 
 /** 实例启动模板，通过该参数可使用实例模板中的预设参数创建实例。 */
@@ -713,89 +713,89 @@ declare interface LaunchTemplate {
 /** 实例启动模板简要信息。 */
 declare interface LaunchTemplateInfo {
   /** 实例启动模版本号。 */
-  LatestVersionNumber?: number | null;
+  LatestVersionNumber?: number;
   /** 实例启动模板ID。 */
-  LaunchTemplateId?: string | null;
+  LaunchTemplateId?: string;
   /** 实例启动模板名。 */
-  LaunchTemplateName?: string | null;
+  LaunchTemplateName?: string;
   /** 实例启动模板默认版本号。 */
-  DefaultVersionNumber?: number | null;
+  DefaultVersionNumber?: number;
   /** 实例启动模板包含的版本总数量。 */
-  LaunchTemplateVersionCount?: number | null;
+  LaunchTemplateVersionCount?: number;
   /** 创建该模板的用户UIN。 */
-  CreatedBy?: string | null;
+  CreatedBy?: string;
   /** 创建该模板的时间。 */
-  CreationTime?: string | null;
+  CreationTime?: string;
 }
 
 /** 实例启动模板版本信息 */
 declare interface LaunchTemplateVersionData {
   /** 实例所在的位置。 */
-  Placement?: Placement | null;
+  Placement?: Placement;
   /** 实例机型。 */
-  InstanceType?: string | null;
+  InstanceType?: string;
   /** 实例名称。 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 实例计费模式。取值范围：`PREPAID`：表示预付费，即包年包月`POSTPAID_BY_HOUR`：表示后付费，即按量计费`CDHPAID`：`专用宿主机`付费，即只对`专用宿主机`计费，不对`专用宿主机`上的实例计费。`SPOTPAID`：表示竞价实例付费。 */
-  InstanceChargeType?: string | null;
+  InstanceChargeType?: string;
   /** 实例系统盘信息。 */
-  SystemDisk?: SystemDisk | null;
+  SystemDisk?: SystemDisk;
   /** 实例数据盘信息。只包含随实例购买的数据盘。 */
-  DataDisks?: DataDisk[] | null;
+  DataDisks?: DataDisk[];
   /** 实例带宽信息。 */
-  InternetAccessible?: InternetAccessible | null;
+  InternetAccessible?: InternetAccessible;
   /** 实例所属虚拟私有网络信息。 */
-  VirtualPrivateCloud?: VirtualPrivateCloud | null;
+  VirtualPrivateCloud?: VirtualPrivateCloud;
   /** 生产实例所使用的镜像`ID`。 */
-  ImageId?: string | null;
+  ImageId?: string;
   /** 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。 */
-  SecurityGroupIds?: string[] | null;
+  SecurityGroupIds?: string[];
   /** 实例登录设置。目前只返回实例所关联的密钥。 */
-  LoginSettings?: LoginSettings | null;
+  LoginSettings?: LoginSettings;
   /** CAM角色名。 */
-  CamRoleName?: string | null;
+  CamRoleName?: string;
   /** 高性能计算集群`ID`。 */
-  HpcClusterId?: string | null;
+  HpcClusterId?: string;
   /** 购买实例数量。 */
-  InstanceCount?: number | null;
+  InstanceCount?: number;
   /** 增强服务。 */
-  EnhancedService?: EnhancedService | null;
+  EnhancedService?: EnhancedService;
   /** 提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16KB。 */
-  UserData?: string | null;
+  UserData?: string;
   /** 置放群组ID，仅支持指定一个。 */
-  DisasterRecoverGroupIds?: string[] | null;
+  DisasterRecoverGroupIds?: string[];
   /** 定时任务。通过该参数可以为实例指定定时任务，目前仅支持定时销毁。 */
-  ActionTimer?: ActionTimer | null;
+  ActionTimer?: ActionTimer;
   /** 实例的市场相关选项，如竞价实例相关参数，若指定实例的付费模式为竞价付费则该参数必传。 */
-  InstanceMarketOptions?: InstanceMarketOptionsRequest | null;
+  InstanceMarketOptions?: InstanceMarketOptionsRequest;
   /** 云服务器的主机名。 */
-  HostName?: string | null;
+  HostName?: string;
   /** 用于保证请求幂等性的字符串。 */
-  ClientToken?: string | null;
+  ClientToken?: string;
   /** 预付费模式，即包年包月相关参数设置。 */
-  InstanceChargePrepaid?: InstanceChargePrepaid | null;
+  InstanceChargePrepaid?: InstanceChargePrepaid;
   /** 标签描述列表。通过指定该参数可以同时绑定标签到相应的云服务器、云硬盘实例。 */
-  TagSpecification?: TagSpecification[] | null;
-  /** 实例销毁保护标志，表示是否允许通过api接口删除实例。取值范围：TRUE：表示开启实例保护，不允许通过api接口删除实例FALSE：表示关闭实例保护，允许通过api接口删除实例默认取值：FALSE。 */
-  DisableApiTermination?: boolean | null;
+  TagSpecification?: TagSpecification[];
+  /** 实例销毁保护标志，表示是否允许通过api接口删除实例。取值范围：true：表示开启实例保护，不允许通过api接口删除实例false：表示关闭实例保护，允许通过api接口删除实例默认取值：false。 */
+  DisableApiTermination?: boolean;
 }
 
 /** 实例启动模板版本集合 */
 declare interface LaunchTemplateVersionInfo {
   /** 实例启动模板版本号。 */
-  LaunchTemplateVersion: number | null;
+  LaunchTemplateVersion?: number | null;
   /** 实例启动模板版本数据详情。 */
-  LaunchTemplateVersionData: LaunchTemplateVersionData;
+  LaunchTemplateVersionData?: LaunchTemplateVersionData;
   /** 实例启动模板版本创建时间。 */
-  CreationTime: string;
+  CreationTime?: string;
   /** 实例启动模板ID。 */
-  LaunchTemplateId: string;
+  LaunchTemplateId?: string;
   /** 是否为默认启动模板版本。 */
-  IsDefaultVersion: boolean;
+  IsDefaultVersion?: boolean;
   /** 实例启动模板版本描述信息。 */
-  LaunchTemplateVersionDescription: string | null;
+  LaunchTemplateVersionDescription?: string | null;
   /** 创建者。 */
-  CreatedBy: string;
+  CreatedBy?: string;
 }
 
 /** 本地磁盘规格 */
@@ -859,27 +859,27 @@ declare interface Placement {
 /** 后付费实例配额 */
 declare interface PostPaidQuota {
   /** 累计已使用配额 */
-  UsedQuota: number;
+  UsedQuota?: number;
   /** 剩余配额 */
-  RemainingQuota: number;
+  RemainingQuota?: number;
   /** 总配额 */
-  TotalQuota: number;
+  TotalQuota?: number;
   /** 可用区 */
-  Zone: string;
+  Zone?: string;
 }
 
 /** 预付费实例配额 */
 declare interface PrePaidQuota {
   /** 当月已使用配额 */
-  UsedQuota: number;
+  UsedQuota?: number;
   /** 单次购买最大数量 */
-  OnceQuota: number;
+  OnceQuota?: number;
   /** 剩余配额 */
-  RemainingQuota: number;
+  RemainingQuota?: number;
   /** 总配额 */
-  TotalQuota: number;
+  TotalQuota?: number;
   /** 可用区 */
-  Zone: string;
+  Zone?: string;
 }
 
 /** 价格 */
@@ -893,11 +893,11 @@ declare interface Price {
 /** 地域信息 */
 declare interface RegionInfo {
   /** 地域名称，例如，ap-guangzhou */
-  Region?: string | null;
+  Region?: string;
   /** 地域描述，例如，华南地区(广州) */
-  RegionName?: string | null;
+  RegionName?: string;
   /** 地域是否可用状态 */
-  RegionState?: string | null;
+  RegionState?: string;
 }
 
 /** 描述维修任务的相关信息 */
@@ -999,13 +999,13 @@ declare interface SpotMarketOptions {
 /** 竞价实例配额 */
 declare interface SpotPaidQuota {
   /** 已使用配额，单位：vCPU核心数 */
-  UsedQuota: number;
+  UsedQuota?: number;
   /** 剩余配额，单位：vCPU核心数 */
-  RemainingQuota: number;
+  RemainingQuota?: number;
   /** 总配额，单位：vCPU核心数 */
-  TotalQuota: number;
+  TotalQuota?: number;
   /** 可用区 */
-  Zone: string;
+  Zone?: string;
 }
 
 /** HDD的本地存储信息 */
@@ -1189,9 +1189,9 @@ declare interface ConvertOperatingSystemsRequest {
 
 declare interface ConvertOperatingSystemsResponse {
   /** 转换的目标操系统信息，仅在入参 DryRun 为 true 时返回。 */
-  SupportTargetOSList?: TargetOS[] | null;
+  SupportTargetOSList?: TargetOS[];
   /** 操作系统转换的任务 ID */
-  TaskId?: string | null;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1243,7 +1243,7 @@ declare interface CreateHpcClusterRequest {
 
 declare interface CreateHpcClusterResponse {
   /** 高性能计算集群信息。 */
-  HpcClusterSet?: HpcClusterInfo[] | null;
+  HpcClusterSet?: HpcClusterInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1273,7 +1273,7 @@ declare interface CreateImageRequest {
 
 declare interface CreateImageResponse {
   /** 镜像ID */
-  ImageId?: string | null;
+  ImageId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1562,6 +1562,8 @@ declare interface DescribeDisasterRecoverGroupQuotaResponse {
   CvmInSwGroupQuota?: number;
   /** 机架类型容灾组内实例的配额数。 */
   CvmInRackGroupQuota?: number;
+  /** 交换机类型容灾组内实例的配额数。 */
+  CvmInSwitchGroupQuota?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1899,7 +1901,7 @@ declare interface DescribeLaunchTemplateVersionsResponse {
 declare interface DescribeLaunchTemplatesRequest {
   /** 启动模板ID，一个或者多个启动模板ID。若未指定，则显示用户所有模板。 */
   LaunchTemplateIds?: string[];
-  /** 按照【LaunchTemplateName】进行过滤。类型：String必选：否每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`LaunchTemplateIds`和`Filters`。 */
+  /** LaunchTemplateName按照【实例启动模板名称】进行过滤。类型：String必选：否tag-key按照【标签键】进行过滤。类型：String必选：否tag-value 按照【标签值】进行过滤。类型：String必选：否tag:tag-key 按照【标签键值对】进行过滤。tag-key使用具体的标签键进行替换。类型：String必选：否每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`LaunchTemplateIds`和`Filters`。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
   Offset?: number;
@@ -1909,9 +1911,9 @@ declare interface DescribeLaunchTemplatesRequest {
 
 declare interface DescribeLaunchTemplatesResponse {
   /** 符合条件的实例模板数量。 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 实例详细信息列表。 */
-  LaunchTemplateSet?: LaunchTemplateInfo[] | null;
+  LaunchTemplateSet?: LaunchTemplateInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2043,7 +2045,7 @@ declare interface ExitRescueModeResponse {
 declare interface ExportImagesRequest {
   /** COS存储桶名称 */
   BucketName: string;
-  /** 镜像ID列表 */
+  /** 镜像ID列表。调用 ExportImages 接口时，参数 ImageIds 和 SnapshotIds 为二选一必填参数，目前参数 SnapshotIds 暂未对外开放。 */
   ImageIds?: string[];
   /** 镜像文件导出格式。取值范围：RAW，QCOW2，VHD，VMDK。默认为RAW */
   ExportFormat?: string;

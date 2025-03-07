@@ -1074,6 +1074,28 @@ declare interface ModifyUserResponse {
   RequestId?: string;
 }
 
+declare interface PublishMessageRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 消息 payload，需要按 encoding 指定的编码方式进行编码 */
+  Payload: string;
+  /** 消息目的主题，该参数与 TargetClientId 二选一 */
+  TargetTopic?: string;
+  /** 消息目的客户端 ID，该参数与 TargetTopic 二选一 */
+  TargetClientId?: string;
+  /** 消息 payload 编码，可选 plain 或 base64，默认为 plain（即不编码） */
+  Encoding?: string;
+  /** 消息的服务质量等级，默认为 1 */
+  Qos?: number;
+  /** 是否为保留消息，默认为 false，且仅支持发布到主题的消息设置为 true */
+  Retain?: boolean;
+}
+
+declare interface PublishMessageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RegisterCaCertificateRequest {
   /** 集群id */
   InstanceId: string;
@@ -1221,6 +1243,8 @@ declare interface Mqtt {
   ModifyTopic(data: ModifyTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicResponse>;
   /** 修改MQTT角色 {@link ModifyUserRequest} {@link ModifyUserResponse} */
   ModifyUser(data: ModifyUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserResponse>;
+  /** 发布 MQTT 消息 {@link PublishMessageRequest} {@link PublishMessageResponse} */
+  PublishMessage(data: PublishMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishMessageResponse>;
   /** 注册CA证书 {@link RegisterCaCertificateRequest} {@link RegisterCaCertificateResponse} */
   RegisterCaCertificate(data: RegisterCaCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterCaCertificateResponse>;
   /** 注册设备证书 {@link RegisterDeviceCertificateRequest} {@link RegisterDeviceCertificateResponse} */

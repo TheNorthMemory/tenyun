@@ -669,7 +669,7 @@ declare interface ModifyResourceTagsResponse {
 }
 
 declare interface ModifyResourcesTagValueRequest {
-  /** 业务类型，示例 cvm 。资源所属业务名称（资源六段式中的第三段） */
+  /** 业务类型，示例 cvm。资源所属业务名称（资源六段式中的第三段） */
   ServiceType: string;
   /** 资源ID数组，资源个数最多为50 */
   ResourceIds: string[];

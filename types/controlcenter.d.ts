@@ -5,9 +5,9 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 账号工厂基线配置项 */
 declare interface BaselineConfigItem {
   /** 账号工厂基线项唯一标识,只能包含英文字母、数字和@、,._[]-:()（）【】+=，。，长度2-128个字符。 */
-  Identifier?: string | null;
+  Identifier?: string;
   /** 账号工厂基线项配置，不同基线项配置参数不同。 */
-  Configuration?: string | null;
+  Configuration?: string;
 }
 
 declare interface BatchApplyAccountBaselinesRequest {

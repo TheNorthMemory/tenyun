@@ -3531,6 +3531,8 @@ declare interface DescribeNotebookSessionStatementSqlResultRequest {
   MaxResults?: number;
   /** 上一次请求响应返回的分页信息。第一次可以不带，从头开始返回数据，每次返回MaxResults字段设置的数据量。 */
   NextToken?: string;
+  /** 批次Id */
+  BatchId?: string;
 }
 
 declare interface DescribeNotebookSessionStatementSqlResultResponse {
@@ -3550,6 +3552,8 @@ declare interface DescribeNotebookSessionStatementSqlResultResponse {
   AffectRows?: number | null;
   /** 数据扫描量 */
   DataAmount?: number | null;
+  /** spark ui地址 */
+  UiUrl?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

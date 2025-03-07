@@ -1010,6 +1010,8 @@ declare interface InsightResult {
   ScheduleTaskName?: string;
   /** Yarn任务的部分核心配置 */
   JobConf?: string;
+  /** 洞察结构化信息 */
+  Context?: string | null;
 }
 
 /** 实例预付费参数，只有在付费类型为PREPAID时生效。 */

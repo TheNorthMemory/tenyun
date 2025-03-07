@@ -5,17 +5,17 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 用户组删除时关联的应用信息 */
 declare interface AppAssociatedUserGroupIds {
   /** 用户组id */
-  UserGroupId?: string | null;
+  UserGroupId?: string;
   /** 应用id */
-  ApplicationId?: string | null;
+  ApplicationId?: string;
   /** 应用名称 */
-  ApplicationName?: string | null;
+  ApplicationName?: string;
 }
 
 /** 失败详情 */
 declare interface ErrorDetails {
   /** 用户信息 */
-  UserId?: string | null;
+  UserId?: string;
   /** 失败原因 */
   Error?: string;
 }
@@ -31,9 +31,9 @@ declare interface ExportPropertyMap {
 /** 失败的用户 */
 declare interface FailedUsers {
   /** 失败用户标识 */
-  FailedUserIdentification?: string | null;
+  FailedUserIdentification?: string;
   /** 导入的用户失败原因 */
-  FailedReason?: string | null;
+  FailedReason?: string;
 }
 
 /** 查询条件 */
@@ -129,7 +129,7 @@ declare interface Job {
   /** 任务结果下载地址 */
   Location?: string | null;
   /** 失败详情 */
-  ErrorDetails?: ErrorDetails[] | null;
+  ErrorDetails?: ErrorDetails[];
   /** 失败的用户 */
   FailedUsers?: FailedUsers[] | null;
 }
@@ -139,35 +139,35 @@ declare interface LogMessage {
   /** 日志标识 */
   LogId?: string;
   /** 租户ID */
-  TenantId?: string | null;
+  TenantId?: string;
   /** 用户池ID */
-  UserStoreId?: string | null;
+  UserStoreId?: string;
   /** 事件编码 */
-  EventCode?: string | null;
+  EventCode?: string;
   /** 事件发生时间戳，单位：毫秒 */
-  EventDate?: number | null;
+  EventDate?: number;
   /** 描述 */
   Description?: string | null;
   /** 事件参与者 **TENANT** 租户 **USER** 用户 */
-  Participant?: string | null;
+  Participant?: string;
   /** 应用clientId */
-  ApplicationClientId?: string | null;
+  ApplicationClientId?: string;
   /** 应用名称 */
-  ApplicationName?: string | null;
+  ApplicationName?: string;
   /** 认证源ID */
-  AuthSourceId?: string | null;
+  AuthSourceId?: string;
   /** 认证源名称 */
-  AuthSourceName?: string | null;
+  AuthSourceName?: string;
   /** 认证源类型 */
-  AuthSourceType?: string | null;
+  AuthSourceType?: string;
   /** 认证源类别 */
-  AuthSourceCategory?: string | null;
+  AuthSourceCategory?: string;
   /** IP地址 */
-  Ip?: string | null;
+  Ip?: string;
   /** 用户代理 */
-  UserAgent?: string | null;
+  UserAgent?: string;
   /** 用户ID */
-  UserId?: string | null;
+  UserId?: string;
   /** 详情 */
   Detail?: string | null;
   /** 日志结果 */
@@ -181,7 +181,7 @@ declare interface MemberMap {
   /** 值 */
   Value: string;
   /** 类型 */
-  Type?: string | null;
+  Type?: string;
 }
 
 /** 分页对象 */
@@ -263,7 +263,7 @@ declare interface User {
   /** 上次修改时间 */
   LastModifiedDate?: number | null;
   /** 自定义属性 */
-  CustomAttributes?: MemberMap[] | null;
+  CustomAttributes?: MemberMap[];
   /** 身份证号 */
   ResidentIdentityCard?: string | null;
   /** QQ的OpenId */
@@ -289,21 +289,21 @@ declare interface User {
   /** 实名核验方式 */
   IdentityVerificationMethod?: string | null;
   /** 是否已经实名核验 */
-  IdentityVerified?: boolean | null;
+  IdentityVerified?: boolean;
   /** 工作 */
   Job?: string | null;
   /** 国家 */
   Nationality?: string | null;
   /** 是否主账号（进行过账号融合后，主账号为true，从账号为false） */
-  Primary?: boolean | null;
+  Primary?: boolean;
   /** 时区 */
   Zone?: string | null;
   /** 是否已经首次登录 */
-  AlreadyFirstLogin?: boolean | null;
+  AlreadyFirstLogin?: boolean;
   /** 租户id */
-  TenantId?: string | null;
+  TenantId?: string;
   /** 用户目录id */
-  UserStoreId?: string | null;
+  UserStoreId?: string;
   /** 版本 */
   Version?: number | null;
   /** 锁定类型（分为管理员锁定，和登录策略锁定） */
@@ -343,9 +343,9 @@ declare interface UserGroup {
 /** 删除用户组信息时返回的详情 */
 declare interface UserGroupDeleteResp {
   /** 错误详情 */
-  ErrorMessage?: string | null;
+  ErrorMessage?: string;
   /** 用户组关联的应用信息 */
-  AppAssociatedUserGroupIds?: AppAssociatedUserGroupIds[] | null;
+  AppAssociatedUserGroupIds?: AppAssociatedUserGroupIds[];
 }
 
 /** 用户池 */
@@ -365,11 +365,11 @@ declare interface UserStore {
   /** 应用数量 */
   AppNum?: number;
   /** 上次切换的用户池 */
-  LastStatus?: boolean | null;
+  LastStatus?: boolean;
   /** 默认用户池 */
-  DefaultStatus?: boolean | null;
+  DefaultStatus?: boolean;
   /** 创建时间 */
-  CreateDate?: number | null;
+  CreateDate?: number;
   /** 上次切换时间 */
   LastStatusTime?: number | null;
   /** 用户目录域名 */
@@ -459,7 +459,7 @@ declare interface CreateUserRequest {
 
 declare interface CreateUserResponse {
   /** 创建的用户信息 */
-  User?: User | null;
+  User?: User;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -489,7 +489,7 @@ declare interface DeleteUserGroupsRequest {
 
 declare interface DeleteUserGroupsResponse {
   /** 删除的用户组关联的应用信息 */
-  UserGroupDeletedInfo?: UserGroupDeleteResp | null;
+  UserGroupDeletedInfo?: UserGroupDeleteResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -547,11 +547,11 @@ declare interface DescribeUserRequest {
 
 declare interface DescribeUserResponse {
   /** 总条数 */
-  Total?: number | null;
+  Total?: number;
   /** 分页对象 */
   Pageable?: Pageable | null;
   /** 用户列表 */
-  Content?: User[] | null;
+  Content?: User[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -581,7 +581,7 @@ declare interface ListJobsRequest {
 
 declare interface ListJobsResponse {
   /** 任务列表 */
-  JobSet?: Job[] | null;
+  JobSet?: Job[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -603,7 +603,7 @@ declare interface ListLogMessageByConditionResponse {
   /** 分页对象 */
   Pageable?: Pageable;
   /** 日志列表 */
-  Content?: LogMessage[] | null;
+  Content?: LogMessage[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -621,7 +621,7 @@ declare interface ListUserByPropertyRequest {
 
 declare interface ListUserByPropertyResponse {
   /** 用户列表 */
-  Users?: User[] | null;
+  Users?: User[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -637,11 +637,11 @@ declare interface ListUserGroupsRequest {
 
 declare interface ListUserGroupsResponse {
   /** 用户组列表 */
-  Content?: UserGroup[] | null;
+  Content?: UserGroup[];
   /** 总条数 */
-  Total?: number | null;
+  Total?: number;
   /** 分页 */
-  Pageable?: Pageable | null;
+  Pageable?: Pageable;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -659,11 +659,11 @@ declare interface ListUserRequest {
 
 declare interface ListUserResponse {
   /** 总条数 */
-  Total?: number | null;
+  Total?: number;
   /** 分页对象 */
   Pageable?: Pageable | null;
   /** 用户列表 */
-  Content?: User[] | null;
+  Content?: User[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -757,7 +757,7 @@ declare interface UpdateUserRequest {
 
 declare interface UpdateUserResponse {
   /** 更新之后的用户信息 */
-  User?: User | null;
+  User?: User;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

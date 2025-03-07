@@ -44,8 +44,10 @@ declare interface GatewayLoadBalancer {
   ChargeType?: string;
   /** 0：表示未被隔离，1：表示被隔离。 */
   Isolation?: number;
-  /** 负载均衡实例被隔离的时间 */
+  /** 网关负载均衡实例被隔离的时间 */
   IsolatedTime?: string;
+  /** 是否开启配置修改保护功能。 */
+  OperateProtect?: boolean;
 }
 
 /** 描述了单项的价格信息 */
@@ -279,7 +281,7 @@ declare interface DescribeGatewayLoadBalancersRequest {
   Limit?: number;
   /** 返回网关负载均衡实例列表的起始偏移量，默认0。 */
   Offset?: number;
-  /** 查询负载均衡详细信息列表的过滤条件，每次请求的Filters的上限为10，Filter.Values的上限为100。Filter.Name和Filter.Values皆为必填项。详细的过滤条件如下：- VpcId - String - 是否必填：否 - （过滤条件）按照网关负载均衡实例所属的私有网络过滤，如“vpc-bhqk****”。- Vips - String - 是否必填：否 - （过滤条件）按照网关负载均衡实例所属的私有网络过滤，如“10.1.1.1” */
+  /** 查询负载均衡详细信息列表的过滤条件，每次请求的Filters的上限为10，Filter.Values的上限为100。Filter.Name和Filter.Values皆为必填项。详细的过滤条件如下：- VpcId - String - 是否必填：否 - （过滤条件）按照网关负载均衡实例所属的私有网络过滤，如“vpc-bhqk****”。- Vips - String - 是否必填：否 - （过滤条件）按照网关负载均衡实例所属的私有网络过滤，如“10.1.1.1”- tag:tag-key - String - 是否必填：否 - （过滤条件）按照GWLB标签键值对进行过滤，tag-key使用具体的标签键进行替换。 */
   Filters?: Filter[];
   /** 搜索字段，模糊匹配名称、VIP。 */
   SearchKey?: string;
@@ -411,6 +413,8 @@ declare interface ModifyGatewayLoadBalancerAttributeRequest {
   LoadBalancerId: string;
   /** 网关负载均衡实例名称。可支持输入1-60个字符。 */
   LoadBalancerName?: string;
+  /** 是否开启删除保护。 */
+  DeleteProtect?: boolean;
 }
 
 declare interface ModifyGatewayLoadBalancerAttributeResponse {

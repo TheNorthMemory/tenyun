@@ -21,15 +21,15 @@ declare interface BackupInfo {
 /** 实例增量备份信息 */
 declare interface BinlogInfo {
   /** 备份开始时间。 */
-  StartTime: string;
+  StartTime?: string;
   /** 备份结束时间。 */
-  EndTime: string;
+  EndTime?: string;
   /** 备份 ID。 */
-  BackupId: string;
+  BackupId?: string;
   /** 备份文件名。 */
-  Filename: string;
+  Filename?: string;
   /** 备份文件大小，单位：Byte。 */
-  FileSize: number | null;
+  FileSize?: number;
 }
 
 /** 安全组入站规则 */
@@ -137,39 +137,39 @@ declare interface InstanceInfo {
   /** 从节点读取权重。 */
   SlaveReadWeight?: number;
   /** 实例关联的标签信息。 */
-  InstanceTags?: InstanceTagInfo[] | null;
+  InstanceTags?: InstanceTagInfo[];
   /** 项目名称。 */
-  ProjectName?: string | null;
+  ProjectName?: string;
   /** 是否为免密实例；true：免密实例。false：非免密实例。 */
-  NoAuth?: boolean | null;
+  NoAuth?: boolean;
   /** 客户端连接数。 */
-  ClientLimit?: number | null;
+  ClientLimit?: number;
   /** DTS状态（内部参数，用户可忽略）。 */
-  DtsStatus?: number | null;
+  DtsStatus?: number;
   /** 分片带宽上限，单位 MB。 */
-  NetLimit?: number | null;
+  NetLimit?: number;
   /** 免密实例标识（内部参数，用户可忽略）。 */
-  PasswordFree?: number | null;
+  PasswordFree?: number;
   /** 实例只读标识（内部参数，用户可忽略）。 */
-  ReadOnly?: number | null;
+  ReadOnly?: number;
   /** 内部参数，用户可忽略。 */
-  Vip6?: string | null;
+  Vip6?: string;
   /** 内部参数，用户可忽略。 */
-  RemainBandwidthDuration?: string | null;
+  RemainBandwidthDuration?: string;
   /** 实例的磁盘容量大小。 */
-  DiskSize?: number | null;
+  DiskSize?: number;
   /** 监控版本。1m：分钟粒度监控。5s：5秒粒度监控。 */
-  MonitorVersion?: string | null;
+  MonitorVersion?: string;
   /** 客户端最大连接数可设置的最小值。 */
-  ClientLimitMin?: number | null;
+  ClientLimitMin?: number;
   /** 客户端最大连接数可设置的最大值。 */
-  ClientLimitMax?: number | null;
+  ClientLimitMax?: number;
   /** 实例的节点详细信息。 */
   NodeSet?: NodeInfo[] | null;
   /** 实例所在的地域信息，比如ap-guangzhou。 */
-  Region?: string | null;
+  Region?: string;
   /** 实例内存容量，单位：GB。KeeWiDB 内存容量 */
-  MachineMemory?: number | null;
+  MachineMemory?: number;
   /** 单分片磁盘大小，单位：MB */
   DiskShardSize?: number;
   /** 3 */
@@ -177,7 +177,7 @@ declare interface InstanceInfo {
   /** 1 */
   DiskReplicasNum?: number;
   /** 数据压缩开关。ON：开启。OFF：关闭。 */
-  Compression?: string | null;
+  Compression?: string;
 }
 
 /** 实例整型参数描述 */
@@ -201,7 +201,7 @@ declare interface InstanceIntegerParam {
   /** 参数状态, 1: 修改中， 2：修改完成 */
   Status?: number;
   /** 参数单位 */
-  Unit?: string | null;
+  Unit?: string;
 }
 
 /** 实例多选项类型参数描述 */
@@ -363,7 +363,7 @@ declare interface ProductConf {
 /** Proxy节点信息 */
 declare interface ProxyNodeInfo {
   /** 节点ID */
-  NodeId?: string | null;
+  NodeId?: string;
 }
 
 /** Redis节点信息 */
@@ -435,25 +435,25 @@ declare interface SecurityGroup {
 /** 任务信息详情 */
 declare interface TaskInfoDetail {
   /** 任务Id */
-  TaskId?: number | null;
+  TaskId?: number;
   /** 开始时间 */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 任务类型 */
-  TaskType?: string | null;
+  TaskType?: string;
   /** 实例名称 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 实例Id */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 项目Id */
-  ProjectId?: number | null;
+  ProjectId?: number;
   /** 任务进度 */
-  Progress?: number | null;
+  Progress?: number;
   /** 结束时间 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 任务状态 */
-  Result?: number | null;
+  Result?: number;
   /** 操作者用户uin */
-  OperatorUin?: string | null;
+  OperatorUin?: string;
 }
 
 /** 实例慢查询详情 */
@@ -675,9 +675,9 @@ declare interface DescribeConnectionConfigResponse {
   /** 实例当前单分片连接数限制。 */
   ClientLimit?: number;
   /** 单分片连接数限制最小值。 */
-  ClientLimitMin?: number | null;
+  ClientLimitMin?: number;
   /** 单分片连接数限制最大值。 */
-  ClientLimitMax?: number | null;
+  ClientLimitMax?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -717,11 +717,11 @@ declare interface DescribeInstanceBackupsRequest {
 
 declare interface DescribeInstanceBackupsResponse {
   /** 备份文件总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 废弃字段。 */
-  BackupSet: BinlogInfo[] | null;
+  BackupSet?: BinlogInfo[];
   /** 实例备份信息列表。 */
-  BackupRecord: BackupInfo[];
+  BackupRecord?: BackupInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -771,21 +771,21 @@ declare interface DescribeInstanceNodeInfoRequest {
 
 declare interface DescribeInstanceNodeInfoResponse {
   /** Proxy 节点数量。 */
-  ProxyCount: number;
+  ProxyCount?: number;
   /** Proxy 节点信息。 */
-  Proxy: ProxyNodeInfo[] | null;
+  Proxy?: ProxyNodeInfo[];
   /** Redis 节点数量。该参数仅为产品兼容性而保留，并不具有实际意义，可忽略。 */
-  RedisCount: number;
+  RedisCount?: number;
   /** Redis 节点信息。该参数仅为产品兼容性而保留，并不具有实际意义，可忽略。 */
-  Redis: RedisNodeInfo[] | null;
+  Redis?: RedisNodeInfo[];
   /** Tendis 节点数量。该参数仅为产品兼容性而保留，并不具有实际意义，可忽略。 */
-  TendisCount: number;
+  TendisCount?: number;
   /** Tendis 节点信息。该参数仅为产品兼容性而保留，并不具有实际意义，可忽略。 */
-  Tendis: InstanceNodeInfo[] | null;
+  Tendis?: InstanceNodeInfo[];
   /** KeewiDB 节点数量。 */
-  KeeWiDBCount: number | null;
+  KeeWiDBCount?: number;
   /** KeewiDB 节点信息。 */
-  KeeWiDB: InstanceNodeInfo[] | null;
+  KeeWiDB?: InstanceNodeInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

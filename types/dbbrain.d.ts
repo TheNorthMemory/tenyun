@@ -1347,9 +1347,9 @@ declare interface DescribeAllUserContactRequest {
 
 declare interface DescribeAllUserContactResponse {
   /** 联系人的总数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 联系人的信息。 */
-  Contacts: ContactItem[] | null;
+  Contacts?: ContactItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1363,9 +1363,9 @@ declare interface DescribeAllUserGroupRequest {
 
 declare interface DescribeAllUserGroupResponse {
   /** 组总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 组信息。 */
-  Groups: GroupItem[] | null;
+  Groups?: GroupItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1445,7 +1445,7 @@ declare interface DescribeDBDiagEventResponse {
   /** 诊断建议，若无建议则输出为空。 */
   Suggestions?: string;
   /** 保留字段。 */
-  Metric?: string | null;
+  Metric?: string;
   /** 结束时间。 */
   EndTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1605,7 +1605,7 @@ declare interface DescribeIndexRecommendAggregationSlowLogsRequest {
 
 declare interface DescribeIndexRecommendAggregationSlowLogsResponse {
   /** 查询实例慢查询聚合结果。 */
-  Aggregation?: Aggregation | null;
+  Aggregation?: Aggregation;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1687,7 +1687,7 @@ declare interface DescribeMySqlProcessListResponse {
   /** 实时线程列表。 */
   ProcessList?: MySqlProcess[];
   /** sql会话统计信息。 */
-  Statistics?: StatisticInfo[] | null;
+  Statistics?: StatisticInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2211,7 +2211,7 @@ declare interface KillMySqlThreadsResponse {
   /** kill完成的sql会话ID列表。 */
   Threads?: number[];
   /** 执行ID， Prepare阶段的任务输出，用于Commit阶段中指定执行kill操作的会话ID。 */
-  SqlExecId?: string | null;
+  SqlExecId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3002,7 +3002,7 @@ declare namespace V20191016 {
     /** 联系人的总数量。 */
     TotalCount?: number;
     /** 联系人的信息。 */
-    Contacts?: ContactItem[] | null;
+    Contacts?: ContactItem[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3018,7 +3018,7 @@ declare namespace V20191016 {
     /** 组总数。 */
     TotalCount?: number;
     /** 组信息。 */
-    Groups?: GroupItem[] | null;
+    Groups?: GroupItem[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3052,7 +3052,7 @@ declare namespace V20191016 {
     /** 建议。 */
     Suggestions?: string;
     /** 保留字段。 */
-    Metric?: string | null;
+    Metric?: string;
     /** 结束时间。 */
     EndTime?: string;
     /** 唯一请求 ID，每次请求都会返回。 */

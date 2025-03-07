@@ -330,7 +330,7 @@ declare interface CCPrecisionPlyRecord {
   FieldName: string;
   /** 配置取值 */
   Value: string;
-  /** 配置项值比对方式，可取值equal ，not_equal， include */
+  /** 配置项值比对方式，可取值equal：相等，not_equal：不相等， include：包含 */
   ValueOperator: string;
 }
 

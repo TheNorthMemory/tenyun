@@ -1733,6 +1733,22 @@ declare interface ModifyProjectRequest {
   Type?: string;
   /** 应用描述(可选，最长为 1000字符) */
   Desc?: string;
+  /** 启动kafka配置 */
+  EnableKafka?: number;
+  /** kafka_host */
+  KafkaHost?: string;
+  /** topic */
+  KafkaTopic?: string;
+  /** kafka_version */
+  KafkaVersion?: string;
+  /** kafka_username */
+  SaslUserName?: string;
+  /** kafka_pwd */
+  SaslPassword?: string;
+  /** SaslMechanism */
+  SaslMechanism?: string;
+  /** sink_id，日知汇算子id */
+  SinkId?: number;
 }
 
 declare interface ModifyProjectResponse {
@@ -1747,6 +1763,8 @@ declare interface ModifyProjectResponse {
 declare interface ResumeInstanceRequest {
   /** 需要恢复的实例id */
   InstanceId: string;
+  /** 修改是否包括白名单 */
+  IsModifyAll?: boolean;
 }
 
 declare interface ResumeInstanceResponse {
@@ -1767,6 +1785,8 @@ declare interface ResumeProjectResponse {
 declare interface StopInstanceRequest {
   /** 需要停止的实例id */
   InstanceId: string;
+  /** 修改是否包括白名单 */
+  IsModifyAll?: boolean;
 }
 
 declare interface StopInstanceResponse {

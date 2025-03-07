@@ -637,11 +637,11 @@ declare interface ParameterDetail {
   /** 修改参数后，是否需要重启数据库以使参数生效。- 0：不需要重启。- 1：需要重启。 */
   NeedReboot?: number;
   /** 参数允许的最大值。 */
-  Max?: string | null;
+  Max?: string;
   /** 参数允许的最小值。 */
-  Min?: string | null;
+  Min?: string;
   /** 参数可选枚举值。如果为非枚举参数，则为空。 */
-  EnumValue?: string[] | null;
+  EnumValue?: string[];
 }
 
 /** 产品信息 */
@@ -673,15 +673,15 @@ declare interface ProductConf {
   /** 该参数名因存在拼写不规范的问题，建议使用**EnableReplicaReadOnly**参数取代。其含义为是否支持副本只读。- true：支持副本只读。- false：不支持。 */
   EnableRepicaReadOnly?: boolean;
   /** 是否支持副本只读。- true：支持副本只读。- false：不支持。 */
-  EnableReplicaReadOnly?: boolean | null;
+  EnableReplicaReadOnly?: boolean;
 }
 
 /** Proxy节点信息。 */
 declare interface ProxyNodes {
   /** 节点 ID。 */
-  NodeId?: string | null;
+  NodeId?: string;
   /** 可用区 ID。 */
-  ZoneId?: number | null;
+  ZoneId?: number;
 }
 
 /** 实例的备份数组 */
@@ -699,11 +699,11 @@ declare interface RedisBackupSet {
   /** 备份是否被锁定。- 0：未被锁定。- 1：已被锁定。 */
   Locked?: number;
   /** 内部字段，用户可忽略。 */
-  BackupSize?: number | null;
+  BackupSize?: number;
   /** 内部字段，用户可忽略。 */
-  FullBackup?: number | null;
+  FullBackup?: number;
   /** 内部字段，用户可忽略。 */
-  InstanceType?: number | null;
+  InstanceType?: number;
   /** 实例 ID。 */
   InstanceId?: string;
   /** 实例名称。 */
@@ -753,31 +753,31 @@ declare interface RedisCommonInstanceList {
 /** 实例事件信息 */
 declare interface RedisInstanceEvent {
   /** 事件 ID。 */
-  ID?: number | null;
+  ID?: number;
   /** 实例 ID。 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 实例名称。 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 事件类型，当前仅支持配置实例迁移、资源腾挪、机房裁撤相关的运维操作。该参数仅支持配置为 **InstanceMigration**。 */
-  Type?: string | null;
+  Type?: string;
   /** 事件等级根据其影响严重程度和紧急程度进行分级，由重至轻依次为关键、重要、中等、一般。- Critical：关键- High：重要- Middle：中等- Low：一般 */
-  Grade?: string | null;
+  Grade?: string;
   /** 事件计划执行日期。 */
-  ExecutionDate?: string | null;
+  ExecutionDate?: string;
   /** 事件计划执行开始时间。 */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 事件计划执行结束时间。 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 运维事件最迟执行的日期，即该事件必须在该日期之前完成，否则可能会对业务产生影响。 */
-  LatestExecutionDate?: string | null;
+  LatestExecutionDate?: string;
   /** 事件当前状态。- Waiting：未到达执行日期或不在维护时间窗内的事件。- Running：在维护时间窗内，正在执行维护的事件。- Finished：已全部完成维护的事件。- Canceled：已取消执行的事件。 */
-  Status?: string | null;
+  Status?: string;
   /** 事件执行任务完成时间。 */
-  TaskEndTime?: string | null;
+  TaskEndTime?: string;
   /** 事件影响信息。 */
-  EffectInfo?: string | null;
+  EffectInfo?: string;
   /** 事件最初计划执行日期。 */
-  InitialExecutionDate?: string | null;
+  InitialExecutionDate?: string;
 }
 
 /** Redis节点的运行信息 */
@@ -867,9 +867,9 @@ declare interface ResourceTag {
 /** 秒级备份不存在的时间戳范围 */
 declare interface SecondLevelBackupMissingTimestamps {
   /** 开始时间戳 */
-  StartTimeStamp?: number | null;
+  StartTimeStamp?: number;
   /** 结束时间戳 */
-  EndTimeStamp?: number | null;
+  EndTimeStamp?: number;
 }
 
 /** 安全组规则 */
@@ -941,23 +941,23 @@ declare interface SourceInfo {
 /** 任务信息详情 */
 declare interface TaskInfoDetail {
   /** 任务 ID。 */
-  TaskId?: number | null;
+  TaskId?: number;
   /** 任务开始时间。 */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 任务类型。- FLOW_CREATE: "001"，新建实例- FLOW_RESIZE ： "002"，配置变更- FLOW_CLOSE："003"，关闭实例- FLOW_CLEAN： "004"，清空实例- FLOW_STARTUP："005"，实例启用。- FLOW_DELETE："006"，删除实例。- FLOW_SETPWD："007"，重置密码。- FLOW_EXPORTBACKUP："009"，导出备份文件。- FLOW_RESTOREBACKUP："010"，恢复备份。- FLOW_BACKUPINSTANCE："012"，备份实例。- FLOW_MIGRATEINSTANCE："013"，迁移实例。- FLOW_DELBACKUP："014"，删除备份。- FLOW_EXCHANGEINSTANCE： "016"，切换实例流程。- FLOW_AUTOBACKUP："017"，自动备份实例。- FLOW_MIGRATECHECK： "022"，迁移参数校验。- FLOW_MIGRATETASK："023"，数据迁移中。- FLOW_CLEANDB："025"，清空某个数据库。- FLOW_CLONEBACKUP："026"，克隆备份。- FLOW_CHANGEVIP： "027"，改变vip地址。- FLOW_EXPORSHR ："028"，扩缩容。- FLOW_ADDNODES："029"，加（减）节点。- FLOW_CHANGENET："031"，改变网络类型。- FLOW_MODIFYINSTACEREADONLY："033"，只读策略变更。- FLOW_MODIFYINSTANCEPARAMS："034"，修改实例参数。- FLOW_MODIFYINSTANCEPASSWORDFREE："035"，设置免密。- FLOW_SWITCHINSTANCEVIP："036"，实例VIP切换。- FLOW_MODIFYINSTANCEACCOUNT："037"，实例帐号变更。- FLOW_MODIFYINSTANCEBANDWIDTH："038"，实例带宽变更。- FLOW_ENABLEINSTANCE_REPLICATE："039"，开启副本只读。- FLOW_DISABLEINSTANCE_REPLICATE："040"，关闭副本只读。- FLOW_UpgradeArch："041"，实例架构升级，主从升集群。- FLOW_DowngradeArch： "042"，实例架构降级，集群降主从。- FLOW_UpgradeVersion： "043"，版本升级。- FLOW_MODIFYCONNECTIONCONFIG："044"，带宽连接数调整。- FLOW_CLEARNETWORK："045"，更换网络，- FLOW_REMOVE_BACKUP_FILE："046"，删除备份。- FLOW_UPGRADE_SUPPORT_MULTI_AZ："047"，升级实例支持多可用区。- FLOW_SHUTDOWN_MASTER："048"，模拟故障。- FLOW_CHANGE_REPLICA_TO_MASTER："049"，手动提主。- FLOW_CODE_ADD_REPLICATION_INSTANCE："050"，新增复制组。- FLOW_OPEN_WAN："052"，开通外网。- FLOW_CLOSE_WAN："053"，关闭外网FLOW_UPDATE_WAN："054"，更新外网。- FLOW_CODE_DELETE_REPLICATION_INSTANCE："055"，解绑复制组。- FLOW_CODE_CHANGE_MASTER_INSTANCE："056"，复制组实例切主。- FLOW_CODE_CHANGE_INSTANCE_ROLE： "057"，更改复制组实例角色。- FLOW_MIGRATE_NODE："058"，迁移节点。- FLOW_SWITCH_NODE："059"，切换节点。- FLOW_UPGRADE_SMALL_VERSION："060"，升级 Redi s版本。- FLOW_UPGRADE_PROXY_VERSION："061"，升级 Proxy 版本。- FLOW_MODIFY_INSTANCE_NETWORK： "062"，实例修改网络。- FLOW_MIGRATE_PROXY_NODE："063"，迁移proxy节点。- FLOW_MIGRATION_INSTANCE_ZONE："066"，实例可用区迁移中。- FLOW_UPGRADE_INSTANCE_CACHE_AND_PROXY： "067"，实例版本升级中。- FLOW_MODIFY_PROXY_NUM："069"，加（减）Proxy 节点。- FLOW_MODIFYBACKUPMOD："070"，变更实例备份模式。 */
-  TaskType?: string | null;
+  TaskType?: string;
   /** 实例名称。 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 实例 ID。 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 项目 ID。 */
-  ProjectId?: number | null;
+  ProjectId?: number;
   /** 任务进度。 */
-  Progress?: number | null;
+  Progress?: number;
   /** 任务执行结束时间。 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 任务执行状态。0：任务初始化。1：执行中。2：完成。4：失败。 */
-  Result?: number | null;
+  Result?: number;
 }
 
 /** tendis节点信息 */

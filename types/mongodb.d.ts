@@ -1099,7 +1099,7 @@ declare interface DescribeDBInstanceParamTplRequest {
   TplIds?: string[];
   /** 模板名称，查询条件。 */
   TplNames?: string[];
-  /** 根据版本号插叙参数模板，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。参数与版本对应关系是：MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本，MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本，MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。 */
+  /** 根据版本号查询参数模板，具体支持的售卖版本，请参见[DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567)查询云数据库的售卖规格的返回结果。参数与版本对应关系如下所示：- MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本。- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。 */
   MongoVersion?: string[];
   /** 根据模板类型查询参数模板，支持DEFAULT（默认模板）和CUSTOMIZE（自定义模板）两种。 */
   TplType?: string;
@@ -1489,7 +1489,7 @@ declare interface ModifyDBInstanceSpecRequest {
   Volume?: number;
   /** (已废弃) 请使用ResizeOplog独立接口完成。实例配置变更后 Oplog 的大小。- 单位：GB。- 默认 Oplog 占用容量为磁盘空间的10%。系统允许设置的 Oplog 容量范围为磁盘空间的[10%,90%]。 */
   OplogSize?: number;
-  /** 实例变更后mongod的节点数（不包含readonly节点数）。- 变更mongod CPU与内存规格时，该参数可以不配置或者输入当前 mongod(不包含readonly) 节点数量。- 变更 mongos CPU与内存规格时，该参数可以不配置或者输入当前 mongod(不包含readonly) 节点数量。- 节点变更时(全部类型)，该参数可不配置或输入变更后的 mongod(不包含readonl) 节点数量。- 副本集节点数：请确认节点数量取值范围，通过云数据库的售卖规格 [DescribeSpecInfo ](https://cloud.tencent.com/document/product/240/38565)接口返回的参数 MinNodeNum 与 MaxNodeNum 获取。- 分片集群每个分片节点数：请确认节点数量取值范围，通过云数据库的售卖规格 [DescribeSpecInfo ](https://cloud.tencent.com/document/product/240/38565)接口返回的参数 MinReplicateSetNodeNum 与 MaxReplicateSetNodeNum 获取。 */
+  /** 实例变更后mongod的节点数（不包含readonly节点数）。- 变更mongod CPU与内存规格时，该参数可以不配置或者输入当前 mongod(不包含readonly) 节点数量。- 变更 mongos CPU与内存规格时，该参数可以不配置或者输入当前 mongod(不包含readonly) 节点数量。- 节点变更时(全部类型)，该参数可不配置或输入变更后的 mongod(不包含readonly) 节点数量。- 副本集节点数：请确认节点数量取值范围，通过云数据库的售卖规格 [DescribeSpecInfo ](https://cloud.tencent.com/document/product/240/38565)接口返回的参数 MinNodeNum 与 MaxNodeNum 获取。- 分片集群每个分片节点数：请确认节点数量取值范围，通过云数据库的售卖规格 [DescribeSpecInfo ](https://cloud.tencent.com/document/product/240/38565)接口返回的参数 MinReplicateSetNodeNum 与 MaxReplicateSetNodeNum 获取。 */
   NodeNum?: number;
   /** 实例变更后的分片数。- 取值范围请通过云数据库的售卖规格[DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 接口返回的参数**MinReplicateSetNum**与**MaxReplicateSetNum**获取。- 该参数只能增加不能减少。 */
   ReplicateSetNum?: number;

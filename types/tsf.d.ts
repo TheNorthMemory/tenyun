@@ -5,11 +5,11 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 添加实例到集群的结果 */
 declare interface AddInstanceResult {
   /** 添加集群失败的节点列表 */
-  FailedInstanceIds?: string[] | null;
+  FailedInstanceIds?: string[];
   /** 添加集群成功的节点列表 */
-  SuccInstanceIds?: string[] | null;
+  SuccInstanceIds?: string[];
   /** 添加集群超时的节点列表 */
-  TimeoutInstanceIds?: string[] | null;
+  TimeoutInstanceIds?: string[];
   /** 失败的节点的失败原因 */
   FailedReasons?: string[] | null;
 }
@@ -23,11 +23,11 @@ declare interface AdvanceSettings {
 /** 亲和规则 */
 declare interface Affinity {
   /** 亲和性范围 */
-  Scope?: string | null;
+  Scope?: string;
   /** 亲和规则的权重 */
-  Weight?: string | null;
+  Weight?: string;
   /** - */
-  Paths?: CommonOption[] | null;
+  Paths?: CommonOption[];
 }
 
 /** 部署javaagent的类型、版本信息 */
@@ -241,15 +241,15 @@ declare interface ApiVersionArray {
 /** 应用列表其它字段 */
 declare interface ApplicationAttribute {
   /** 总实例个数 */
-  InstanceCount?: number | null;
+  InstanceCount?: number;
   /** 运行实例个数 */
-  RunInstanceCount?: number | null;
+  RunInstanceCount?: number;
   /** 应用下部署组个数 */
-  GroupCount?: number | null;
+  GroupCount?: number;
   /** 运行中部署组个数 */
-  RunningGroupCount?: string | null;
+  RunningGroupCount?: string;
   /** 异常部署组个数 */
-  AbnormalCount?: string | null;
+  AbnormalCount?: string;
 }
 
 /** 分页的应用描述信息字段 */
@@ -305,11 +305,11 @@ declare interface ApplicationForPage {
 /** 打散调度规则 */
 declare interface AvailableZoneScatterScheduleRule {
   /** - */
-  ScatterDimension?: string | null;
+  ScatterDimension?: string;
   /** - */
-  MaxUnbalanceQuantity?: number | null;
+  MaxUnbalanceQuantity?: number;
   /** - */
-  IsForceSchedule?: boolean | null;
+  IsForceSchedule?: boolean;
 }
 
 /** 业务日志配置关联部署组信息 */
@@ -367,27 +367,27 @@ declare interface BusinessLogConfig {
 /** 业务日志配置关联部署组信息 */
 declare interface BusinessLogConfigAssociatedGroup {
   /** 部署组ID */
-  GroupId: string | null;
+  GroupId: string;
   /** 部署组名称 */
-  GroupName: string | null;
+  GroupName: string;
   /** 部署组所属应用ID */
-  ApplicationId: string | null;
+  ApplicationId: string;
   /** 部署组所属应用名称 */
-  ApplicationName: string | null;
+  ApplicationName: string;
   /** 部署组所属应用类型 */
-  ApplicationType: string | null;
+  ApplicationType: string;
   /** 部署组所属命名空间ID */
-  NamespaceId: string | null;
+  NamespaceId: string;
   /** 部署组所属命名空间名称 */
-  NamespaceName: string | null;
+  NamespaceName: string;
   /** 部署组所属集群ID */
-  ClusterId: string | null;
+  ClusterId: string;
   /** 部署组所属集群名称 */
-  ClusterName: string | null;
+  ClusterName: string;
   /** 部署组所属集群类型 */
-  ClusterType: string | null;
+  ClusterType: string;
   /** 部署组关联日志配置时间 */
-  AssociatedTime: string | null;
+  AssociatedTime: string;
 }
 
 /** 业务日志配置解析规则 */
@@ -401,7 +401,7 @@ declare interface BusinessLogConfigSchema {
   /** 解析规则对应的多行匹配规则 */
   SchemaMultilinePattern?: string | null;
   /** 解析规则创建时间 */
-  SchemaCreateTime?: string | null;
+  SchemaCreateTime?: string;
   /** 用户填写的解析规则 */
   SchemaPatternLayout?: string | null;
 }
@@ -409,83 +409,83 @@ declare interface BusinessLogConfigSchema {
 /** 业务日志 */
 declare interface BusinessLogV2 {
   /** 实例ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 日志内容 */
-  Content?: string | null;
+  Content?: string;
   /** 日志时间戳 */
-  Timestamp?: number | null;
+  Timestamp?: number;
   /** 实例IP */
-  InstanceIp?: string | null;
+  InstanceIp?: string;
   /** 日志ID */
-  LogId?: string | null;
+  LogId?: string;
   /** 部署组ID */
-  GroupId?: string | null;
+  GroupId?: string;
 }
 
 /** 集群 */
 declare interface Cluster {
   /** 集群ID */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 集群名称 */
-  ClusterName?: string | null;
+  ClusterName?: string;
   /** 集群描述 */
-  ClusterDesc?: string | null;
+  ClusterDesc?: string;
   /** 集群类型 */
-  ClusterType?: string | null;
+  ClusterType?: string;
   /** 集群所属私有网络ID */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 集群状态 */
-  ClusterStatus?: string | null;
+  ClusterStatus?: string;
   /** 集群CIDR */
-  ClusterCIDR?: string | null;
+  ClusterCIDR?: string;
   /** 集群总CPU，单位: 核 */
-  ClusterTotalCpu?: number | null;
+  ClusterTotalCpu?: number;
   /** 集群总内存，单位: G */
-  ClusterTotalMem?: number | null;
+  ClusterTotalMem?: number;
   /** 集群已使用CPU，单位: 核 */
-  ClusterUsedCpu?: number | null;
+  ClusterUsedCpu?: number;
   /** 集群已使用内存，单位: G */
-  ClusterUsedMem?: number | null;
+  ClusterUsedMem?: number;
   /** 集群机器实例数量 */
-  InstanceCount?: number | null;
+  InstanceCount?: number;
   /** 集群可用的机器实例数量 */
-  RunInstanceCount?: number | null;
+  RunInstanceCount?: number;
   /** 集群正常状态的机器实例数量 */
-  NormalInstanceCount?: number | null;
+  NormalInstanceCount?: number;
   /** 删除标记：true：可以删除；false：不可删除 */
-  DeleteFlag?: boolean | null;
+  DeleteFlag?: boolean;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 集群所属TSF地域ID */
-  TsfRegionId?: string | null;
+  TsfRegionId?: string;
   /** 集群所属TSF地域名称 */
-  TsfRegionName?: string | null;
+  TsfRegionName?: string;
   /** 集群所属TSF可用区ID */
-  TsfZoneId?: string | null;
+  TsfZoneId?: string;
   /** 集群所属TSF可用区名称 */
-  TsfZoneName?: string | null;
+  TsfZoneName?: string;
   /** 集群不可删除的原因 */
-  DeleteFlagReason?: string | null;
+  DeleteFlagReason?: string;
   /** 集群最大CPU限制，单位：核 */
-  ClusterLimitCpu?: number | null;
+  ClusterLimitCpu?: number;
   /** 集群最大内存限制，单位：G */
-  ClusterLimitMem?: number | null;
+  ClusterLimitMem?: number;
   /** 集群可用的服务实例数量 */
-  RunServiceInstanceCount?: number | null;
+  RunServiceInstanceCount?: number;
   /** 集群所属子网ID */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 返回给前端的控制信息 */
-  OperationInfo?: OperationInfo | null;
+  OperationInfo?: OperationInfo;
   /** 集群版本 */
-  ClusterVersion?: string | null;
+  ClusterVersion?: string;
 }
 
 /** 集群详情 */
 declare interface ClusterV2 {
   /** 集群ID */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 集群名称 */
   ClusterName?: string | null;
   /** 集群描述 */
@@ -557,25 +557,25 @@ declare interface ClusterV2 {
   /** native secret */
   KuberneteNativeSecret?: string | null;
   /** 是否开启cls日志功能 */
-  EnableLogCollection?: boolean | null;
+  EnableLogCollection?: boolean;
 }
 
 /** 通用选项 */
 declare interface CommonOption {
   /** - */
-  LabelName?: string | null;
+  LabelName?: string;
   /** - */
-  Operator?: string | null;
+  Operator?: string;
   /** - */
-  LabelValue?: string | null;
+  LabelValue?: string;
 }
 
 /** ValueFrom 通用结构 */
 declare interface CommonRef {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** Key值 */
-  Key?: string | null;
+  Key?: string;
 }
 
 /** 配置项 */
@@ -711,45 +711,45 @@ declare interface ConfigTemplate {
 /** 部署组列表（应用下钻界面的） */
 declare interface ContainGroup {
   /** 部署组ID */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 分组名称 */
-  GroupName?: string | null;
+  GroupName?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 镜像server */
-  Server?: string | null;
+  Server?: string;
   /** 镜像名，如/tsf/nginx */
-  RepoName?: string | null;
+  RepoName?: string;
   /** 镜像版本名称 */
-  TagName?: string | null;
+  TagName?: string;
   /** 集群ID */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 集群名称 */
-  ClusterName?: string | null;
+  ClusterName?: string;
   /** 命名空间ID */
-  NamespaceId?: string | null;
+  NamespaceId?: string;
   /** 命名空间名称 */
-  NamespaceName?: string | null;
+  NamespaceName?: string;
   /** 初始分配的 CPU 核数，对应 K8S request */
-  CpuRequest?: string | null;
+  CpuRequest?: string;
   /** 最大分配的 CPU 核数，对应 K8S limit */
-  CpuLimit?: string | null;
+  CpuLimit?: string;
   /** 初始分配的内存 MiB 数，对应 K8S request */
-  MemRequest?: string | null;
+  MemRequest?: string;
   /** 最大分配的内存 MiB 数，对应 K8S limit */
-  MemLimit?: string | null;
+  MemLimit?: string;
   /** 部署组备注 */
-  Alias?: string | null;
+  Alias?: string;
   /** KubeInjectEnable值 */
-  KubeInjectEnable?: boolean | null;
+  KubeInjectEnable?: boolean;
   /** 更新时间 */
-  UpdatedTime?: string | null;
+  UpdatedTime?: string;
 }
 
 /** 部署组列表（应用下钻） */
 declare interface ContainGroupResult {
   /** 部署组列表 */
-  Content?: ContainGroup[] | null;
+  Content?: ContainGroup[];
   /** 总记录数 */
   TotalCount?: number;
 }
@@ -979,41 +979,41 @@ declare interface ContainerGroupOther {
 /** cos临时账号信息 */
 declare interface CosCredentials {
   /** 会话Token */
-  SessionToken?: string | null;
+  SessionToken?: string;
   /** 临时应用ID */
-  TmpAppId?: string | null;
+  TmpAppId?: string;
   /** 临时调用者身份ID */
-  TmpSecretId?: string | null;
+  TmpSecretId?: string;
   /** 临时密钥 */
-  TmpSecretKey?: string | null;
+  TmpSecretKey?: string;
   /** 过期时间 */
-  ExpiredTime?: number | null;
+  ExpiredTime?: number;
   /** 所在域 */
-  Domain?: string | null;
+  Domain?: string;
 }
 
 /** Cos下载所需信息 */
 declare interface CosDownloadInfo {
   /** 桶名称 */
-  Bucket?: string | null;
+  Bucket?: string;
   /** 地域 */
-  Region?: string | null;
+  Region?: string;
   /** 路径 */
-  Path?: string | null;
+  Path?: string;
   /** 鉴权信息 */
-  Credentials?: CosCredentials | null;
+  Credentials?: CosCredentials;
 }
 
 /** cos上传所需信息 */
 declare interface CosUploadInfo {
   /** 程序包ID */
-  PkgId?: string | null;
+  PkgId?: string;
   /** 桶 */
-  Bucket?: string | null;
+  Bucket?: string;
   /** 目标地域 */
-  Region?: string | null;
+  Region?: string;
   /** 存储路径 */
-  Path?: string | null;
+  Path?: string;
   /** 鉴权信息 */
   Credentials?: CosCredentials;
 }
@@ -1039,15 +1039,15 @@ declare interface CustomPodSchedule {
 /** 自定义容忍调度规则列表 */
 declare interface CustomTolerateSchedule {
   /** - */
-  Key?: string | null;
+  Key?: string;
   /** - */
-  Operator?: string | null;
+  Operator?: string;
   /** - */
-  Value?: string | null;
+  Value?: string;
   /** - */
-  Effect?: string | null;
+  Effect?: string;
   /** - */
-  TolerationSeconds?: number | null;
+  TolerationSeconds?: number;
 }
 
 /** 需要删除的镜像版本 */
@@ -1065,11 +1065,11 @@ declare interface DeliveryConfigBindGroup {
   /** 配置名 */
   ConfigName: string;
   /** 采集路径 */
-  CollectPath: string[] | null;
+  CollectPath: string[];
   /** 关联部署组信息 */
-  Groups: GroupInfo[] | null;
+  Groups: GroupInfo[];
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime: string;
   /** KafkaVIp */
   KafkaVIp?: string | null;
   /** KafkaAddress */
@@ -1077,7 +1077,7 @@ declare interface DeliveryConfigBindGroup {
   /** KafkaVPort */
   KafkaVPort?: string | null;
   /** Topic */
-  Topic?: string | null;
+  Topic?: string;
   /** LineRule */
   LineRule?: string | null;
   /** CustomRule */
@@ -1085,7 +1085,7 @@ declare interface DeliveryConfigBindGroup {
   /** EnableGlobalLineRule */
   EnableGlobalLineRule?: boolean | null;
   /** EnableAuth */
-  EnableAuth?: boolean | null;
+  EnableAuth?: boolean;
   /** Username */
   Username?: string | null;
   /** Password */
@@ -1097,33 +1097,33 @@ declare interface DeliveryConfigBindGroup {
 /** 描述配置项绑定的部署组 */
 declare interface DeliveryConfigBindGroups {
   /** 公共条数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 内容 */
-  Content?: DeliveryConfigBindGroup[] | null;
+  Content?: DeliveryConfigBindGroup[];
 }
 
 /** kafka投递的topic和path的信息 */
 declare interface DeliveryKafkaInfo {
   /** 投递kafka的topic */
-  Topic?: string | null;
+  Topic?: string;
   /** 采集日志的path */
-  Path?: string[] | null;
+  Path?: string[];
   /** default，默认换行符分行time，按时间分行custom, 选了custom那么CustomRule就要填入具体的自定义值 */
-  LineRule?: string | null;
+  LineRule?: string;
   /** 自定义的分行值 */
-  CustomRule?: string | null;
+  CustomRule?: string;
 }
 
 /** 空目录选项 */
 declare interface EmptyDirOption {
   /** - */
-  EnableMemory?: boolean | null;
+  EnableMemory?: boolean;
   /** - */
-  StorageCapacity?: number | null;
+  StorageCapacity?: number;
   /** - */
-  StorageUnit?: string | null;
+  StorageUnit?: string;
   /** - */
-  SizeLimit?: string | null;
+  SizeLimit?: string;
 }
 
 /** 环境变量 */
@@ -1139,17 +1139,17 @@ declare interface Env {
 /** 独占实例 */
 declare interface ExclusiveInstance {
   /** 配置中心类型[Registration、Configuration] */
-  CenterType?: string | null;
+  CenterType?: string;
   /** 实例id */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 实例类型[Polaris] */
-  InstanceType?: string | null;
+  InstanceType?: string;
   /** 实例名称 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 实例地域id */
-  RegionId?: string | null;
+  RegionId?: string;
   /** 实例命名空间ID */
-  InstanceNamespaceId?: string | null;
+  InstanceNamespaceId?: string;
 }
 
 /** 容器 env 的 FieldRef */
@@ -1411,55 +1411,55 @@ declare interface GroupInfo {
   /** 集群类型 */
   ClusterType: string;
   /** 集群id */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 集群名称 */
-  ClusterName?: string | null;
+  ClusterName?: string;
   /** 命名空间名称 */
-  NamespaceName?: string | null;
+  NamespaceName?: string;
   /** 绑定时间 */
-  AssociateTime?: string | null;
+  AssociateTime?: string;
 }
 
 /** 部署组实例列表 */
 declare interface GroupPod {
   /** 实例名称(对应到kubernetes的pod名称) */
-  PodName?: string | null;
+  PodName?: string;
   /** 实例ID(对应到kubernetes的pod id) */
-  PodId?: string | null;
+  PodId?: string;
   /** 实例状态，请参考后面的实例以及容器的状态定义。启动中（pod 未 ready）：Starting；运行中：Running；异常：Abnormal；停止：Stopped； */
-  Status?: string | null;
+  Status?: string;
   /** 实例处于当前状态的原因，例如容器下载镜像失败 */
-  Reason?: string | null;
+  Reason?: string;
   /** 主机IP */
-  NodeIp?: string | null;
+  NodeIp?: string;
   /** 实例IP */
-  Ip?: string | null;
+  Ip?: string;
   /** 实例中容器的重启次数 */
-  RestartCount?: number | null;
+  RestartCount?: number;
   /** 实例中已就绪容器的个数 */
-  ReadyCount?: number | null;
+  ReadyCount?: number;
   /** 运行时长 */
-  Runtime?: string | null;
+  Runtime?: string;
   /** 实例启动时间 */
-  CreatedAt?: string | null;
+  CreatedAt?: string;
   /** 服务实例状态 */
-  ServiceInstanceStatus?: string | null;
+  ServiceInstanceStatus?: string;
   /** 机器实例可使用状态 */
-  InstanceAvailableStatus?: string | null;
+  InstanceAvailableStatus?: string;
   /** 机器实例状态 */
-  InstanceStatus?: string | null;
+  InstanceStatus?: string;
   /** 节点实例id */
-  NodeInstanceId?: string | null;
+  NodeInstanceId?: string;
   /** 预期副本数 */
-  SpecTotalCount?: string | null;
+  SpecTotalCount?: string;
 }
 
 /** 部署组实例列表 */
 declare interface GroupPodResult {
   /** 总记录数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 列表信息 */
-  Content?: GroupPod[] | null;
+  Content?: GroupPod[];
 }
 
 /** 部署组配置发布相关信息 */
@@ -1515,19 +1515,19 @@ declare interface GroupUnitApiUseStatistics {
 /** API分组日使用统计对象数据点 */
 declare interface GroupUseStatisticsEntity {
   /** API 路径 */
-  ApiPath?: string | null;
+  ApiPath?: string;
   /** 服务名 */
-  ServiceName?: string | null;
+  ServiceName?: string;
   /** 统计值 */
-  Value?: string | null;
+  Value?: string;
   /** API ID */
-  ApiId?: string | null;
+  ApiId?: string;
 }
 
 /** 健康检查配置 */
 declare interface HealthCheckConfig {
   /** 健康检查路径 */
-  Path?: string | null;
+  Path?: string;
 }
 
 /** 健康检查配置信息，若不指定该参数，则默认不设置健康检查。 */
@@ -1567,53 +1567,53 @@ declare interface HealthCheckSettings {
 /** 镜像仓库 */
 declare interface ImageRepository {
   /** 仓库名,含命名空间,如tsf/nginx */
-  Reponame?: string | null;
+  Reponame?: string;
   /** 仓库类型 */
-  Repotype?: string | null;
+  Repotype?: string;
   /** 镜像版本数 */
-  TagCount?: number | null;
+  TagCount?: number;
   /** 是否公共,1:公有,0:私有 */
-  IsPublic?: number | null;
+  IsPublic?: number;
   /** 是否被用户收藏。true：是，false：否 */
-  IsUserFavor?: boolean | null;
+  IsUserFavor?: boolean;
   /** 是否是腾讯云官方仓库。 是否是腾讯云官方仓库。true：是，false：否 */
-  IsQcloudOfficial?: boolean | null;
+  IsQcloudOfficial?: boolean;
   /** 被所有用户收藏次数 */
-  FavorCount?: number | null;
+  FavorCount?: number;
   /** 拉取次数 */
-  PullCount?: number | null;
+  PullCount?: number;
   /** 描述内容 */
-  Description?: string | null;
+  Description?: string;
   /** 创建时间 */
-  CreationTime?: string | null;
+  CreationTime?: string;
   /** 更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** TcrRepoInfo值 */
-  TcrRepoInfo?: TcrRepoInfo | null;
+  TcrRepoInfo?: TcrRepoInfo;
   /** TcrBindingId值 */
-  TcrBindingId?: number | null;
+  TcrBindingId?: number;
   /** applicationid值 */
-  ApplicationId?: string | null;
+  ApplicationId?: string;
   /** ApplicationName值（废弃） */
-  ApplicationName?: ScalableRule | null;
+  ApplicationName?: ScalableRule;
   /** ApplicationName值 */
-  ApplicationNameReal?: string | null;
+  ApplicationNameReal?: string;
   /** 是否公共,1:公有,0:私有 */
-  Public?: number | null;
+  Public?: number;
   /** 创建方式：manual | automatic */
-  CreateMode?: string | null;
+  CreateMode?: string;
   /** 仓库名，等同reponame字段 */
-  RepoName?: string | null;
+  RepoName?: string;
 }
 
 /** 镜像仓库列表 */
 declare interface ImageRepositoryResult {
   /** 总记录数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 镜像服务器地址 */
   Server?: string | null;
   /** 列表信息 */
-  Content?: ImageRepository[] | null;
+  Content?: ImageRepository[];
 }
 
 /** 列表信息 */
@@ -1639,13 +1639,13 @@ declare interface ImageTag {
   /** Docker客户端版本 */
   DockerVersion?: string;
   /** 操作系统 */
-  Os?: string | null;
+  Os?: string;
   /** push时间 */
   PushTime?: string;
   /** 单位为字节 */
   SizeByte?: number;
   /** TcrRepoInfo值 */
-  TcrRepoInfo?: TcrRepoInfo | null;
+  TcrRepoInfo?: TcrRepoInfo;
 }
 
 /** 镜像版本列表 */
@@ -1663,11 +1663,11 @@ declare interface ImageTagsResult {
 /** 监控指标坐标 */
 declare interface IndicatorCoord {
   /** 指标横坐标值 */
-  CoordX?: string | null;
+  CoordX?: string;
   /** 指标纵坐标值 */
-  CoordY?: string | null;
+  CoordY?: string;
   /** 指标标签，用于标识附加信息 */
-  CoordTag?: string | null;
+  CoordTag?: string;
 }
 
 /** 机器实例 */
@@ -1763,47 +1763,47 @@ declare interface InstanceAdvancedSettings {
 /** 包含虚拟机所在TSF中的位置信息 */
 declare interface InstanceEnrichedInfo {
   /** 机器ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 机器名称 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 机器内网IP */
-  LanIp?: string | null;
+  LanIp?: string;
   /** 机器外网IP */
-  WanIp?: string | null;
+  WanIp?: string;
   /** 机器所在VPC */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 机器运行状态 Pending Running Stopped Rebooting Starting Stopping Abnormal Unknown */
-  InstanceStatus?: string | null;
+  InstanceStatus?: string;
   /** 机器可用状态（表示机器上的Agent在线） */
-  InstanceAvailableStatus?: string | null;
+  InstanceAvailableStatus?: string;
   /** 应用ID */
-  ApplicationId?: string | null;
+  ApplicationId?: string;
   /** 应用名称 */
-  ApplicationName?: string | null;
+  ApplicationName?: string;
   /** 应用类型 */
-  ApplicationType?: string | null;
+  ApplicationType?: string;
   /** 集群ID */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 集群名称 */
-  ClusterName?: string | null;
+  ClusterName?: string;
   /** 集群类型 */
-  ClusterType?: string | null;
+  ClusterType?: string;
   /** 命名空间ID */
-  NamespaceId?: string | null;
+  NamespaceId?: string;
   /** 命名空间名称 */
-  NamespaceName?: string | null;
+  NamespaceName?: string;
   /** 机器所在部署组ID */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 部署组名称 */
-  GroupName?: string | null;
+  GroupName?: string;
 }
 
 /** InstanceEnrichedInfo列表结构 */
 declare interface InstanceEnrichedInfoPage {
   /** 总数量 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 列表 */
-  Content?: InstanceEnrichedInfo[] | null;
+  Content?: InstanceEnrichedInfo[];
 }
 
 /** 服务调用监控指标 */
@@ -1815,15 +1815,15 @@ declare interface InvocationIndicator {
   /** 请求平均耗时，单位毫秒 */
   InvocationAvgDuration?: number | null;
   /** 成功请求数时间分布 */
-  InvocationSuccessDistribution?: IndicatorCoord[] | null;
+  InvocationSuccessDistribution?: IndicatorCoord[];
   /** 失败请求数时间分布 */
-  InvocationFailedDistribution?: IndicatorCoord[] | null;
+  InvocationFailedDistribution?: IndicatorCoord[];
   /** 状态码分布 */
-  InvocationStatusDistribution?: IndicatorCoord[] | null;
+  InvocationStatusDistribution?: IndicatorCoord[];
   /** 时延分布 */
-  InvocationDurationDistribution?: IndicatorCoord[] | null;
+  InvocationDurationDistribution?: IndicatorCoord[];
   /** 并发请求次数时间分布 */
-  InvocationQuantityDistribution?: IndicatorCoord[] | null;
+  InvocationQuantityDistribution?: IndicatorCoord[];
 }
 
 /** 监控数据散点图 */
@@ -1867,29 +1867,29 @@ declare interface JvmMonitorData {
 /** 投递kafka配置项 */
 declare interface KafkaDeliveryConfig {
   /** 配置项id */
-  ConfigId?: string | null;
+  ConfigId?: string;
   /** 配置名称 */
-  ConfigName?: string | null;
+  ConfigName?: string;
   /** 采集路径 */
-  CollectPath?: string[] | null;
+  CollectPath?: string[];
   /** kafka vip */
-  KafkaVIp?: string | null;
+  KafkaVIp?: string;
   /** kafka vport */
   KafkaVPort?: string | null;
   /** kafka topic */
-  Topic?: string | null;
+  Topic?: string;
   /** 换行规则 */
-  LineRule?: string | null;
+  LineRule?: string;
   /** 是否需要认证 */
-  EnableAuth?: boolean | null;
+  EnableAuth?: boolean;
   /** 用户名 */
   Username?: string | null;
   /** 密码 */
   Password?: string | null;
   /** 投递的topic和path */
-  KafkaInfos?: DeliveryKafkaInfo[] | null;
+  KafkaInfos?: DeliveryKafkaInfo[];
   /** 是否应用单行规则 */
-  EnableGlobalLineRule?: boolean | null;
+  EnableGlobalLineRule?: boolean;
   /** 自定义分行规则 */
   CustomRule?: string | null;
   /** KafkaAddress */
@@ -2017,29 +2017,29 @@ declare interface MemoryPicture {
 /** 指标 */
 declare interface Metric {
   /** 指标名称 */
-  Name?: string | null;
+  Name?: string;
   /** 指标计算方式 */
-  Function?: string | null;
+  Function?: string;
 }
 
 /** 指标监控数据曲线 */
 declare interface MetricDataCurve {
   /** 指标名称 */
-  MetricName?: string | null;
+  MetricName?: string;
   /** 指标计算方式 */
-  MetricFunction?: string | null;
+  MetricFunction?: string;
   /** 指标数据点集合 */
-  MetricDataPoints?: MetricDataPoint[] | null;
+  MetricDataPoints?: MetricDataPoint[];
 }
 
 /** 监控统计数据点 */
 declare interface MetricDataPoint {
   /** 数据点键 */
-  Key?: string | null;
+  Key?: string;
   /** 数据点值 */
-  Value?: string | null;
+  Value?: string;
   /** 数据点标签 */
-  Tag?: string | null;
+  Tag?: string;
 }
 
 /** 监控统计数据点Map集合（单元化网关使用） */
@@ -2055,21 +2055,21 @@ declare interface MetricDataPointMap {
 /** 单值指标 */
 declare interface MetricDataSingleValue {
   /** 指标 */
-  MetricName: string | null;
+  MetricName?: string;
   /** 统计方式 */
-  MetricFunction: string | null;
+  MetricFunction?: string;
   /** 指标值 */
-  MetricDataValue: string | null;
+  MetricDataValue?: string;
   /** 日环比 */
-  DailyPercent: number | null;
+  DailyPercent?: number;
 }
 
 /** 指标维度 */
 declare interface MetricDimension {
   /** 指标维度名称 */
-  Name?: string | null;
+  Name?: string;
   /** 指标维度取值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 指标维度多值匹配 */
@@ -2203,35 +2203,35 @@ declare interface MultiValueDataPoints {
 /** 命名空间 */
 declare interface Namespace {
   /** 命名空间ID */
-  NamespaceId?: string | null;
+  NamespaceId?: string;
   /** 命名空间编码 */
-  NamespaceCode?: string | null;
+  NamespaceCode?: string;
   /** 命名空间名称 */
-  NamespaceName?: string | null;
+  NamespaceName?: string;
   /** 命名空间描述 */
-  NamespaceDesc?: string | null;
+  NamespaceDesc?: string;
   /** 默认命名空间 */
-  IsDefault?: string | null;
+  IsDefault?: string;
   /** 命名空间状态 */
-  NamespaceStatus?: string | null;
+  NamespaceStatus?: string;
   /** 删除标识 */
-  DeleteFlag?: boolean | null;
+  DeleteFlag?: boolean;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 集群数组，仅携带集群ID，集群名称，集群类型等基础信息。 */
-  ClusterList?: Cluster[] | null;
+  ClusterList?: Cluster[];
   /** 集群ID */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 集群资源类型 */
-  NamespaceResourceType?: string | null;
+  NamespaceResourceType?: string;
   /** 命名空间类型 */
-  NamespaceType?: string | null;
+  NamespaceType?: string;
   /** 是否开启高可用 */
-  IsHaEnable?: string | null;
+  IsHaEnable?: string;
   /** KubeInjectEnable值 */
-  KubeInjectEnable?: boolean | null;
+  KubeInjectEnable?: boolean;
 }
 
 /** 提供给前端，控制按钮是否显示 */
@@ -2247,25 +2247,25 @@ declare interface OperationInfo {
 /** 提供给前端控制按钮显示逻辑的字段 */
 declare interface OperationInfoDetail {
   /** 不显示的原因 */
-  DisabledReason?: string | null;
+  DisabledReason?: string;
   /** 该按钮是否可点击 */
-  Enabled?: boolean | null;
+  Enabled?: boolean;
   /** 是否显示该按钮 */
-  Supported?: boolean | null;
+  Supported?: boolean;
 }
 
 /** TSF基本资源信息概览 */
 declare interface OverviewBasicResourceUsage {
   /** 应用总数 */
-  ApplicationCount?: number | null;
+  ApplicationCount?: number;
   /** 命名空间总数 */
-  NamespaceCount?: number | null;
+  NamespaceCount?: number;
   /** 部署组个数 */
-  GroupCount?: number | null;
+  GroupCount?: number;
   /** 程序包存储空间用量，单位字节 */
-  PackageSpaceUsed?: number | null;
+  PackageSpaceUsed?: number;
   /** 已注册实例数 */
-  ConsulInstanceCount?: number | null;
+  ConsulInstanceCount?: number;
 }
 
 /** tsf-privilege模块，分页数据集列表 */
@@ -2317,31 +2317,31 @@ declare interface PathRewritePage {
 /** 描述程序包关联信息 */
 declare interface PkgBind {
   /** 应用id */
-  ApplicationId?: string | null;
+  ApplicationId?: string;
   /** 部署组id */
-  GroupId?: string | null;
+  GroupId?: string;
 }
 
 /** 包信息 */
 declare interface PkgInfo {
   /** 程序包ID */
-  PkgId?: string | null;
+  PkgId?: string;
   /** 程序包名 */
-  PkgName?: string | null;
+  PkgName?: string;
   /** 程序包类型 */
-  PkgType?: string | null;
+  PkgType?: string;
   /** 程序包版本 */
-  PkgVersion?: string | null;
+  PkgVersion?: string;
   /** 程序包描述 */
-  PkgDesc?: string | null;
+  PkgDesc?: string;
   /** 上传时间 */
-  UploadTime?: string | null;
+  UploadTime?: string;
   /** 程序包MD5 */
-  Md5?: string | null;
+  Md5?: string;
   /** 程序包状态 */
-  PkgPubStatus?: number | null;
+  PkgPubStatus?: number;
   /** 程序包关联关系 */
-  PkgBindInfo?: PkgBind[] | null;
+  PkgBindInfo?: PkgBind[];
 }
 
 /** 包列表 */
@@ -2349,13 +2349,13 @@ declare interface PkgList {
   /** 程序包总量 */
   TotalCount?: number;
   /** 程序包信息列表 */
-  Content?: PkgInfo[] | null;
+  Content?: PkgInfo[];
   /** 程序包仓库id */
-  RepositoryId?: string | null;
+  RepositoryId?: string;
   /** 程序包仓库类型 */
-  RepositoryType?: string | null;
+  RepositoryType?: string;
   /** 程序包仓库名称 */
-  RepositoryName?: string | null;
+  RepositoryName?: string;
 }
 
 /** 服务端口 */
@@ -2369,39 +2369,39 @@ declare interface Ports {
 /** tsf-privilege模块 Program数据集 */
 declare interface Program {
   /** 数据集ID */
-  ProgramId?: string | null;
+  ProgramId?: string;
   /** 数据集名称 */
-  ProgramName?: string | null;
+  ProgramName?: string;
   /** 数据集描述 */
   ProgramDesc?: string | null;
   /** 删除标识，true: 可以删除; false: 不可删除 */
   DeleteFlag?: boolean | null;
   /** 创建时间 */
-  CreationTime?: number | null;
+  CreationTime?: number;
   /** 最后更新时间 */
-  LastUpdateTime?: number | null;
+  LastUpdateTime?: number;
   /** 数据项列表，无值时返回空数组 */
-  ProgramItemList?: ProgramItem[] | null;
+  ProgramItemList?: ProgramItem[];
 }
 
 /** tsf-privilege模块，数据项 */
 declare interface ProgramItem {
   /** 数据项ID */
-  ProgramItemId?: string | null;
+  ProgramItemId?: string;
   /** 资源 */
-  Resource?: Resource | null;
+  Resource?: Resource;
   /** 数据值列表 */
-  ValueList?: string[] | null;
+  ValueList?: string[];
   /** 全选标识，true: 全选；false: 非全选 */
-  IsAll?: boolean | null;
+  IsAll?: boolean;
   /** 创建时间 */
-  CreationTime?: number | null;
+  CreationTime?: number;
   /** 最后更新时间 */
-  LastUpdateTime?: number | null;
+  LastUpdateTime?: number;
   /** 删除标识，true: 可删除；false: 不可删除 */
-  DeleteFlag?: boolean | null;
+  DeleteFlag?: boolean;
   /** 数据集ID */
-  ProgramId?: string | null;
+  ProgramId?: string;
 }
 
 /** 属性字段 */
@@ -2423,9 +2423,9 @@ declare interface ProtocolPort {
   /** 容器端口 */
   TargetPort: number;
   /** 主机端口 */
-  NodePort?: number | null;
+  NodePort?: number;
   /** 端口名称 */
-  Name?: string | null;
+  Name?: string;
 }
 
 /** 分位数据模型 */
@@ -2445,21 +2445,21 @@ declare interface RepositoryInfo {
   /** 仓库ID */
   RepositoryId?: string;
   /** 仓库名称 */
-  RepositoryName?: string | null;
+  RepositoryName?: string;
   /** 仓库类型（默认仓库：default，私有仓库：private） */
-  RepositoryType?: string | null;
+  RepositoryType?: string;
   /** 仓库描述 */
-  RepositoryDesc?: string | null;
+  RepositoryDesc?: string;
   /** 仓库是否正在被使用 */
-  IsUsed?: boolean | null;
+  IsUsed?: boolean;
   /** 仓库创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 仓库桶名称 */
-  BucketName?: string | null;
+  BucketName?: string;
   /** 仓库桶所在地域 */
-  BucketRegion?: string | null;
+  BucketRegion?: string;
   /** 仓库目录 */
-  Directory?: string | null;
+  Directory?: string;
 }
 
 /** 仓库列表 */
@@ -2467,41 +2467,41 @@ declare interface RepositoryList {
   /** 仓库总量 */
   TotalCount?: number;
   /** 仓库信息列表 */
-  Content?: RepositoryInfo[] | null;
+  Content?: RepositoryInfo[];
 }
 
 /** tsf-privilege 模块，资源 */
 declare interface Resource {
   /** 资源ID */
-  ResourceId?: string | null;
+  ResourceId?: string;
   /** 资源编码 */
-  ResourceCode?: string | null;
+  ResourceCode?: string;
   /** 资源名称 */
-  ResourceName?: string | null;
+  ResourceName?: string;
   /** 资源所属产品编码 */
-  ServiceCode?: string | null;
+  ServiceCode?: string;
   /** 选取资源使用的Action */
-  ResourceAction?: string | null;
+  ResourceAction?: string;
   /** 资源数据查询的ID字段名 */
-  IdField?: string | null;
+  IdField?: string;
   /** 资源数据查询的名称字段名 */
-  NameField?: string | null;
+  NameField?: string;
   /** 资源数据查询的ID过滤字段名 */
-  SelectIdsField?: string | null;
+  SelectIdsField?: string;
   /** 创建时间 */
-  CreationTime?: number | null;
+  CreationTime?: number;
   /** 最后更新时间 */
-  LastUpdateTime?: number | null;
+  LastUpdateTime?: number;
   /** 删除标识 */
-  DeleteFlag?: boolean | null;
+  DeleteFlag?: boolean;
   /** 资源描述 */
-  ResourceDesc?: string | null;
+  ResourceDesc?: string;
   /** 是否可以选择全部 */
-  CanSelectAll?: boolean | null;
+  CanSelectAll?: boolean;
   /** 资源数据查询的模糊查询字段名 */
-  SearchWordField?: string | null;
+  SearchWordField?: string;
   /** 排序 */
-  Index?: number | null;
+  Index?: number;
 }
 
 /** k8s env 的 ResourceFieldRef */
@@ -2513,57 +2513,57 @@ declare interface ResourceFieldRef {
 /** 资源任务转态结果 */
 declare interface ResourceTaskStatusResult {
   /** 任务的执行状态 */
-  TaskStatus?: number | null;
+  TaskStatus?: number;
 }
 
 /** ScalableRule值 */
 declare interface ScalableRule {
   /** RuleId值 */
-  RuleId?: string | null;
+  RuleId?: string;
   /** Name值 */
-  Name?: string | null;
+  Name?: string;
   /** ExpandVmCountLimit值 */
-  ExpandVmCountLimit?: number | null;
+  ExpandVmCountLimit?: number;
   /** ShrinkVmCountLimit值 */
-  ShrinkVmCountLimit?: number | null;
+  ShrinkVmCountLimit?: number;
   /** GroupCount值 */
-  GroupCount?: number | null;
+  GroupCount?: number;
   /** 备注 */
-  Desc?: string | null;
+  Desc?: string;
   /** 备注 */
-  Description?: string | null;
+  Description?: string;
   /** 是否关闭指标伸缩, 默认0, 0:打开指标伸缩 1:关闭指标伸缩 */
-  DisableMetricAS?: number | null;
+  DisableMetricAS?: number;
   /** 开启定时伸缩规则, 默认0, 0:关闭定时伸缩 1:开启定时伸缩 */
-  EnableCronAS?: number | null;
+  EnableCronAS?: number;
 }
 
 /** tsf 容器集群节点调度策略 */
 declare interface SchedulingStrategy {
   /** NONE：不使用调度策略；CROSS_AZ：跨可用区部署 */
-  Type: string | null;
+  Type: string;
   /** - */
-  NodeScheduleStrategyType?: string | null;
+  NodeScheduleStrategyType?: string;
   /** - */
-  NodeScheduleOptions?: CommonOption[] | null;
+  NodeScheduleOptions?: CommonOption[];
   /** - */
-  StrongAffinityList?: CommonOption[] | null;
+  StrongAffinityList?: CommonOption[];
   /** - */
-  WeakAffinityList?: CommonOption[] | null;
+  WeakAffinityList?: CommonOption[];
   /** - */
-  WeakAffinityWeight?: number | null;
+  WeakAffinityWeight?: number;
   /** - */
-  AvailableZoneScatterScheduleType?: string | null;
+  AvailableZoneScatterScheduleType?: string;
   /** - */
-  AvailableZoneScatterScheduleRules?: AvailableZoneScatterScheduleRule[] | null;
+  AvailableZoneScatterScheduleRules?: AvailableZoneScatterScheduleRule[];
   /** - */
-  PodScheduleStrategyType?: string | null;
+  PodScheduleStrategyType?: string;
   /** - */
-  CustomPodSchedule?: CustomPodSchedule | null;
+  CustomPodSchedule?: CustomPodSchedule;
   /** - */
-  TolerateScheduleType?: string | null;
+  TolerateScheduleType?: string;
   /** - */
-  CustomTolerateSchedules?: CustomTolerateSchedule[] | null;
+  CustomTolerateSchedules?: CustomTolerateSchedule[];
 }
 
 /** 服务配置 */
@@ -2573,15 +2573,15 @@ declare interface ServiceConfig {
   /** 端口信息列表 */
   Ports: Ports[];
   /** 健康检查配置 */
-  HealthCheck?: HealthCheckConfig | null;
+  HealthCheck?: HealthCheckConfig;
 }
 
 /** 注册配置治理信息 */
 declare interface ServiceGovernanceConfig {
   /** 是否开启服务注册治理 */
-  EnableGovernance?: boolean | null;
+  EnableGovernance?: boolean;
   /** 服务治理类型 */
-  GovernanceType?: string | null;
+  GovernanceType?: string;
   /** 独享实例列表 */
   ExclusiveInstances?: ExclusiveInstance[] | null;
 }
@@ -2635,9 +2635,9 @@ declare interface ServiceSetting {
 /** 服务统计结果 */
 declare interface ServiceStatisticsResult {
   /** 请求模板路径:type为接口时返回，服务时不返回 */
-  Path?: string | null;
+  Path?: string;
   /** 请求方法:type为接口时返回，服务时不返回 */
-  Method?: string | null;
+  Method?: string;
   /** 微服务Id */
   MicroserviceId?: string;
   /** 微服务名称 */
@@ -2651,57 +2651,57 @@ declare interface ServiceStatisticsResult {
   /** 响应耗时曲线 */
   MetricDataCurves?: MetricDataCurve[];
   /** 实例id */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 实例name */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 部署组id */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 部署组name */
-  GroupName?: string | null;
+  GroupName?: string;
   /** 部署组类型 */
-  ClusterType?: string | null;
+  ClusterType?: string;
   /** 部署组是否存在 */
-  GroupExist?: number | null;
+  GroupExist?: number;
   /** 实例是否存在，仅限cvm */
-  InstanceExist?: number | null;
+  InstanceExist?: number;
   /** 应用id */
-  ApplicationId?: string | null;
+  ApplicationId?: string;
   /** 微服务类型 */
-  MicroserviceType?: string | null;
+  MicroserviceType?: string;
   /** cpu使用率 */
-  CpuPercent?: number | null;
+  CpuPercent?: number;
   /** 已用堆大小,单位KB */
-  HeapUsed?: number | null;
+  HeapUsed?: number;
   /** 数据库 */
-  DbName?: string | null;
+  DbName?: string;
   /** Script值 */
-  Script?: string | null;
+  Script?: string;
   /** 数据库类型 */
-  DbType?: string | null;
+  DbType?: string;
   /** Apdex值 */
-  Apdex?: number | null;
+  Apdex?: number;
   /** Qps值 */
-  Qps?: number | null;
+  Qps?: number;
   /** 实例在线数 */
-  InstanceOnlineCount?: number | null;
+  InstanceOnlineCount?: number;
   /** 实例总数 */
-  InstanceTotalCount?: number | null;
+  InstanceTotalCount?: number;
   /** normal/error */
-  Status?: string | null;
+  Status?: string;
   /** normal/warn/error */
-  ErrorRateLevel?: string | null;
+  ErrorRateLevel?: string;
   /** normal/warn/error */
-  AvgTimeConsumingLevel?: string | null;
+  AvgTimeConsumingLevel?: string;
   /** normal/warn/error */
-  ApdexLevel?: string | null;
+  ApdexLevel?: string;
 }
 
 /** 服务统计结果集 */
 declare interface ServiceStatisticsResults {
   /** 返回结果 */
-  Content?: ServiceStatisticsResult[] | null;
+  Content?: ServiceStatisticsResult[];
   /** 条数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
 }
 
 /** 分片参数 */
@@ -2715,61 +2715,61 @@ declare interface ShardArgument {
 /** 简单应用 */
 declare interface SimpleApplication {
   /** 应用ID */
-  ApplicationId?: string | null;
+  ApplicationId?: string;
   /** 应用名称 */
-  ApplicationName?: string | null;
+  ApplicationName?: string;
   /** 应用类型 */
-  ApplicationType?: string | null;
+  ApplicationType?: string;
   /** 应用微服务类型 */
-  MicroserviceType?: string | null;
+  MicroserviceType?: string;
   /** ApplicationDesc */
-  ApplicationDesc?: string | null;
+  ApplicationDesc?: string;
   /** ProgLang */
-  ProgLang?: string | null;
+  ProgLang?: string;
   /** ApplicationResourceType */
-  ApplicationResourceType?: string | null;
+  ApplicationResourceType?: string;
   /** CreateTime */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** UpdateTime */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** ApigatewayServiceId */
-  ApigatewayServiceId?: string | null;
+  ApigatewayServiceId?: string;
   /** ApplicationRuntimeType */
-  ApplicationRuntimeType?: string | null;
+  ApplicationRuntimeType?: string;
   /** Apm业务系统id */
-  AmpInstanceId?: string | null;
+  AmpInstanceId?: string;
   /** Apm业务系统Name */
-  ApmInstanceName?: string | null;
+  ApmInstanceName?: string;
 }
 
 /** 部署组 */
 declare interface SimpleGroup {
   /** 部署组ID */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 部署组名称 */
-  GroupName?: string | null;
+  GroupName?: string;
   /** 应用ID */
-  ApplicationId?: string | null;
+  ApplicationId?: string;
   /** 应用名称 */
-  ApplicationName?: string | null;
+  ApplicationName?: string;
   /** 应用类型 */
-  ApplicationType?: string | null;
+  ApplicationType?: string;
   /** 集群ID */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 集群名称 */
-  ClusterName?: string | null;
+  ClusterName?: string;
   /** 集群类型 */
-  ClusterType?: string | null;
+  ClusterType?: string;
   /** 命名空间ID */
-  NamespaceId?: string | null;
+  NamespaceId?: string;
   /** 命名空间名称 */
-  NamespaceName?: string | null;
+  NamespaceName?: string;
   /** 启动参数 */
-  StartupParameters?: string | null;
+  StartupParameters?: string;
   /** 部署组资源类型 */
-  GroupResourceType?: string | null;
+  GroupResourceType?: string;
   /** 应用微服务类型 */
-  AppMicroServiceType?: string | null;
+  AppMicroServiceType?: string;
 }
 
 /** 日志投递kafka配置描述的缩简版 */
@@ -2783,21 +2783,21 @@ declare interface SimpleKafkaDeliveryConfig {
 /** 标准输出日志 */
 declare interface StdoutLogV2 {
   /** 实例ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 日志内容 */
-  Content?: string | null;
+  Content?: string;
   /** 日志时间戳 */
-  Timestamp?: number | null;
+  Timestamp?: number;
   /** 实例IP */
-  InstanceIp?: string | null;
+  InstanceIp?: string;
 }
 
 /** 标签 */
 declare interface Tag {
   /** 标签键 */
-  TagKey?: string | null;
+  TagKey?: string;
   /** 标签值 */
-  TagValue?: string | null;
+  TagValue?: string;
 }
 
 /** 工作流图中的边 */
@@ -2805,53 +2805,53 @@ declare interface TaskFlowEdge {
   /** 节点 ID */
   NodeId?: string;
   /** 子节点 ID */
-  ChildNodeId?: string | null;
+  ChildNodeId?: string;
   /** 是否核心任务,Y/N */
-  CoreNode?: string | null;
+  CoreNode?: string;
   /** 边类型 */
-  EdgeType?: string | null;
+  EdgeType?: string;
   /** 任务节点类型 */
   NodeType?: string;
   /** X轴坐标位置 */
-  PositionX?: string | null;
+  PositionX?: string;
   /** Y轴坐标位置 */
-  PositionY?: string | null;
+  PositionY?: string;
   /** 图 ID */
-  GraphId?: string | null;
+  GraphId?: string;
   /** 工作流 ID */
-  FlowId?: string | null;
+  FlowId?: string;
   /** 节点名称 */
-  NodeName?: string | null;
+  NodeName?: string;
   /** 任务ID */
-  TaskId?: string | null;
+  TaskId?: string;
   /** 任务历史ID */
-  TaskLogId?: string | null;
+  TaskLogId?: string;
 }
 
 /** 工作流最近批次的状态 */
 declare interface TaskFlowLastBatchState {
   /** 批次ID */
-  FlowBatchId?: string | null;
+  FlowBatchId?: string;
   /** 批次历史ID */
-  FlowBatchLogId?: string | null;
+  FlowBatchLogId?: string;
   /** 状态,WAITING/SUCCESS/FAILED/RUNNING/TERMINATING */
-  State?: string | null;
+  State?: string;
 }
 
 /** 任务id */
 declare interface TaskId {
   /** 任务ID */
-  TaskId?: string | null;
+  TaskId?: string;
 }
 
 /** 任务最近一次执行状态 */
 declare interface TaskLastExecuteStatus {
   /** 批次ID */
-  BatchId?: string | null;
+  BatchId?: string;
   /** 运行状态，RUNNING/SUCCESS/FAIL/HALF/TERMINATED */
-  State?: string | null;
+  State?: string;
   /** 批次历史ID */
-  BatchLogId?: string | null;
+  BatchLogId?: string;
 }
 
 /** 任务定义 */
@@ -2919,15 +2919,15 @@ declare interface TaskRule {
 /** tcr仓库信息 */
 declare interface TcrRepoInfo {
   /** 地域（填数字） */
-  Region?: string | null;
+  Region?: string;
   /** 实例id */
-  RegistryId?: string | null;
+  RegistryId?: string;
   /** 实例名 */
-  RegistryName?: string | null;
+  RegistryName?: string;
   /** 命名空间 */
-  Namespace?: string | null;
+  Namespace?: string;
   /** 仓库名 */
-  RepoName?: string | null;
+  RepoName?: string;
 }
 
 /** jvm监控数据线程数据封装 */
@@ -3015,17 +3015,17 @@ declare interface TsfPageBusinessLogV2 {
 /** Tsf分页集群对象 */
 declare interface TsfPageCluster {
   /** 总条数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 集群列表 */
-  Content?: Cluster[] | null;
+  Content?: Cluster[];
 }
 
 /** Tsf分页集群对象 */
 declare interface TsfPageClusterV2 {
   /** 集群总数目 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 集群列表 */
-  Content?: ClusterV2[] | null;
+  Content?: ClusterV2[];
 }
 
 /** TsfPage */
@@ -3103,9 +3103,9 @@ declare interface TsfPageGatewayPlugin {
 /** TSF机器实例分页对象 */
 declare interface TsfPageInstance {
   /** 机器实例总数目 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 机器实例列表 */
-  Content?: Instance[] | null;
+  Content?: Instance[];
 }
 
 /** 微服务列表信息 */
@@ -3127,25 +3127,25 @@ declare interface TsfPageMsInstance {
 /** Tsf命名空间分页对象 */
 declare interface TsfPageNamespace {
   /** 命名空间总条数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 命名空间列表 */
-  Content?: Namespace[] | null;
+  Content?: Namespace[];
 }
 
 /** TSF分页简单应用对象 */
 declare interface TsfPageSimpleApplication {
   /** 总条数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 简单应用列表 */
-  Content?: SimpleApplication[] | null;
+  Content?: SimpleApplication[];
 }
 
 /** TSF简单部署组分页列表 */
 declare interface TsfPageSimpleGroup {
   /** 总条数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 简单部署组列表 */
-  Content?: SimpleGroup[] | null;
+  Content?: SimpleGroup[];
 }
 
 /** 标准输出日志列表 */
@@ -3187,9 +3187,9 @@ declare interface TsfPageUnitRuleV2 {
 /** 列表中部署组分页信息 */
 declare interface TsfPageVmGroup {
   /** 虚拟机部署组总数目 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 虚拟机部署组列表信息 */
-  Content?: VmGroupSimple[] | null;
+  Content?: VmGroupSimple[];
 }
 
 /** 微服务网关单元化命名空间 */
@@ -3393,41 +3393,41 @@ declare interface VmGroupOther {
 /** 虚拟机部署组列表简要字段 */
 declare interface VmGroupSimple {
   /** 部署组ID */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 部署组名称 */
-  GroupName?: string | null;
+  GroupName?: string;
   /** 应用类型 */
-  ApplicationType?: string | null;
+  ApplicationType?: string;
   /** 部署组描述 */
-  GroupDesc?: string | null;
+  GroupDesc?: string;
   /** 部署组更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 集群ID */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 部署组启动参数 */
-  StartupParameters?: string | null;
+  StartupParameters?: string;
   /** 命名空间ID */
-  NamespaceId?: string | null;
+  NamespaceId?: string;
   /** 部署组创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 集群名称 */
-  ClusterName?: string | null;
+  ClusterName?: string;
   /** 应用ID */
-  ApplicationId?: string | null;
+  ApplicationId?: string;
   /** 应用名称 */
-  ApplicationName?: string | null;
+  ApplicationName?: string;
   /** 命名空间名称 */
-  NamespaceName?: string | null;
+  NamespaceName?: string;
   /** 应用微服务类型 */
-  MicroserviceType?: string | null;
+  MicroserviceType?: string;
   /** 部署组资源类型 */
-  GroupResourceType?: string | null;
+  GroupResourceType?: string;
   /** 部署组更新时间戳 */
-  UpdatedTime?: number | null;
+  UpdatedTime?: number;
   /** 部署应用描述信息 */
-  DeployDesc?: string | null;
+  DeployDesc?: string;
   /** 部署组备注 */
-  Alias?: string | null;
+  Alias?: string;
 }
 
 /** 容器卷挂载信息 */
@@ -3439,9 +3439,9 @@ declare interface VolumeInfo {
   /** 数据卷配置 */
   VolumeConfig?: string;
   /** - */
-  ConfigMapOptions?: ConfigMapOption[] | null;
+  ConfigMapOptions?: ConfigMapOption[];
   /** - */
-  EmptyDirOption?: EmptyDirOption | null;
+  EmptyDirOption?: EmptyDirOption;
 }
 
 /** 容器卷挂载点信息 */
