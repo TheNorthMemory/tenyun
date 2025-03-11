@@ -1072,6 +1072,18 @@ declare interface BindOrganizationMemberAuthAccountResponse {
   RequestId?: string;
 }
 
+declare interface BindOrganizationPolicySubAccountRequest {
+  /** 策略ID。 */
+  PolicyId: number;
+  /** 组织管理员子账号Uin列表。最大5个 */
+  OrgSubAccountUins: number[];
+}
+
+declare interface BindOrganizationPolicySubAccountResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CancelOrganizationMemberAuthAccountRequest {
   /** 成员Uin。 */
   MemberUin: number;
@@ -1082,6 +1094,18 @@ declare interface CancelOrganizationMemberAuthAccountRequest {
 }
 
 declare interface CancelOrganizationMemberAuthAccountResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CancelOrganizationPolicySubAccountRequest {
+  /** 策略ID。 */
+  PolicyId: number;
+  /** 组织管理员子账号Uin列表。最大5个 */
+  OrgSubAccountUins: number[];
+}
+
+declare interface CancelOrganizationPolicySubAccountResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3471,8 +3495,12 @@ declare interface Organization {
   AttachPolicy(data: AttachPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachPolicyResponse>;
   /** 绑定组织成员和组织管理员子账号的授权关系 {@link BindOrganizationMemberAuthAccountRequest} {@link BindOrganizationMemberAuthAccountResponse} */
   BindOrganizationMemberAuthAccount(data: BindOrganizationMemberAuthAccountRequest, config?: AxiosRequestConfig): AxiosPromise<BindOrganizationMemberAuthAccountResponse>;
+  /** 绑定成员访问授权策略和组织管理员子账号 {@link BindOrganizationPolicySubAccountRequest} {@link BindOrganizationPolicySubAccountResponse} */
+  BindOrganizationPolicySubAccount(data: BindOrganizationPolicySubAccountRequest, config?: AxiosRequestConfig): AxiosPromise<BindOrganizationPolicySubAccountResponse>;
   /** 取消组织成员和组织管理员子账号的授权关系 {@link CancelOrganizationMemberAuthAccountRequest} {@link CancelOrganizationMemberAuthAccountResponse} */
   CancelOrganizationMemberAuthAccount(data: CancelOrganizationMemberAuthAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CancelOrganizationMemberAuthAccountResponse>;
+  /** 解绑成员访问授权策略和组织管理员子账号 {@link CancelOrganizationPolicySubAccountRequest} {@link CancelOrganizationPolicySubAccountResponse} */
+  CancelOrganizationPolicySubAccount(data: CancelOrganizationPolicySubAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CancelOrganizationPolicySubAccountResponse>;
   /** 成员账号删除检查 {@link CheckAccountDeleteRequest} {@link CheckAccountDeleteResponse} */
   CheckAccountDelete(data: CheckAccountDeleteRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAccountDeleteResponse>;
   /** 清空SAML身份提供商配置信息 {@link ClearExternalSAMLIdentityProviderRequest} {@link ClearExternalSAMLIdentityProviderResponse} */

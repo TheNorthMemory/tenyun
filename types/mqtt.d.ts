@@ -140,6 +140,40 @@ declare interface MQTTAuthenticatorItem {
   Remark?: string | null;
 }
 
+/** MQTT客户端信息 */
+declare interface MQTTClientInfo {
+  /** 客户端唯一标识 */
+  ClientId?: string | null;
+  /** 客户端网络地址 */
+  ClientAddress?: string | null;
+  /** MQTT 协议版本，4 表示 MQTT 3.1.1 */
+  ProtocolVersion?: number | null;
+  /** 保持连接时间，单位：秒 */
+  Keepalive?: number | null;
+  /** 连接状态，CONNECTED 已连接，DISCONNECTED 未连接 */
+  ConnectionStatus?: string | null;
+  /** 客户端创建时间 */
+  CreateTime?: number | null;
+  /** 上次建立连接时间 */
+  ConnectTime?: number | null;
+  /** 上次断开连接时间，仅对持久会话（cleanSession=false）并且客户端当前未连接时有意义 */
+  DisconnectTime?: number | null;
+  /** 客户端的订阅列表 */
+  MQTTClientSubscriptions?: MQTTClientSubscription[] | null;
+}
+
+/** MQTT 订阅关系 */
+declare interface MQTTClientSubscription {
+  /** topic 订阅 */
+  TopicFilter?: string;
+  /** 服务质量等级 */
+  Qos?: number;
+  /** 堆积数量 */
+  Lag?: number;
+  /** 投递未确认数量 */
+  Inflight?: number;
+}
+
 /** MQTTEndpoint */
 declare interface MQTTEndpointItem {
   /** 类型 */
@@ -200,6 +234,28 @@ declare interface MQTTInstanceItem {
   MaxCaNum?: number | null;
   /** 最大订阅数 */
   MaxSubscription?: number | null;
+}
+
+/** 消息记录 */
+declare interface MQTTMessageItem {
+  /** 消息ID */
+  MsgId?: string | null;
+  /** 消息tag */
+  Tags?: string | null;
+  /** 消息key */
+  Keys?: string | null;
+  /** 客户端地址 */
+  ProducerAddr?: string | null;
+  /** 消息发送时间 */
+  ProduceTime?: string | null;
+  /** 死信重发次数 */
+  DeadLetterResendTimes?: number | null;
+  /** 死信重发成功次数 */
+  DeadLetterResendSuccessTimes?: number | null;
+  /** 子topic */
+  SubTopic?: string | null;
+  /** 消息质量等级 */
+  Qos?: string | null;
 }
 
 /** MQTT 主题详情 */
@@ -682,6 +738,22 @@ declare interface DescribeCaCertificatesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeClientListRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 客户端名 */
+  ClientId?: string;
+  /** 客户端数量限制,最大1024，默认1024 */
+  Number?: string;
+}
+
+declare interface DescribeClientListResponse {
+  /** 客户端列表 */
+  Clients?: MQTTClientInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDeviceCertificateRequest {
   /** 设备证书sn */
   DeviceCertificateSn: string;
@@ -764,6 +836,18 @@ declare interface DescribeInsPublicEndpointsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInsVPCEndpointsRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeInsVPCEndpointsResponse {
+  /** 接入点 */
+  Endpoints?: MQTTEndpointItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceListRequest {
   /** 查询条件列表,支持以下子弹InstanceName：集群名模糊搜索InstanceId：集群id精确搜索InstanceStatus：集群状态搜索 */
   Filters?: Filter[];
@@ -840,6 +924,34 @@ declare interface DescribeInstanceResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMessageListRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 主题 */
+  Topic: string;
+  /** 开始时间 */
+  StartTime: number;
+  /** 结束时间 */
+  EndTime: number;
+  /** 请求任务id */
+  TaskRequestId: string;
+  /** 查询起始位置 */
+  Offset?: number;
+  /** 查询结果限制数量 */
+  Limit?: number;
+}
+
+declare interface DescribeMessageListResponse {
+  /** 查询总数 */
+  TotalCount?: number | null;
+  /** 消息记录列表 */
+  Data?: MQTTMessageItem[] | null;
+  /** 请求任务id */
+  TaskRequestId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeProductSKUListRequest {
 }
 
@@ -848,6 +960,20 @@ declare interface DescribeProductSKUListResponse {
   TotalCount?: number | null;
   /** mqtt商品配置信息 */
   MQTTProductSkuList?: ProductSkuItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSharedSubscriptionLagRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 共享订阅表达式 */
+  SharedSubscription: string;
+}
+
+declare interface DescribeSharedSubscriptionLagResponse {
+  /** 堆积值 */
+  Lag?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1209,18 +1335,26 @@ declare interface Mqtt {
   DescribeCaCertificate(data: DescribeCaCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaCertificateResponse>;
   /** 查询集群CA证书列表 {@link DescribeCaCertificatesRequest} {@link DescribeCaCertificatesResponse} */
   DescribeCaCertificates(data: DescribeCaCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaCertificatesResponse>;
+  /** 查询 MQTT 客户端列表 {@link DescribeClientListRequest} {@link DescribeClientListResponse} */
+  DescribeClientList(data: DescribeClientListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientListResponse>;
   /** 查询设备证书详情 {@link DescribeDeviceCertificateRequest} {@link DescribeDeviceCertificateResponse} */
   DescribeDeviceCertificate(data: DescribeDeviceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceCertificateResponse>;
   /** 查询设备证书 {@link DescribeDeviceCertificatesRequest} {@link DescribeDeviceCertificatesResponse} */
   DescribeDeviceCertificates(data: DescribeDeviceCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceCertificatesResponse>;
   /** 查询MQTT实例公网接入点 {@link DescribeInsPublicEndpointsRequest} {@link DescribeInsPublicEndpointsResponse} */
   DescribeInsPublicEndpoints(data: DescribeInsPublicEndpointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInsPublicEndpointsResponse>;
+  /** 查询MQTT实例VPC接入点 {@link DescribeInsVPCEndpointsRequest} {@link DescribeInsVPCEndpointsResponse} */
+  DescribeInsVPCEndpoints(data: DescribeInsVPCEndpointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInsVPCEndpointsResponse>;
   /** 查询MQTT实例详情信息 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
   /** 获取MQTT实例列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */
   DescribeInstanceList(data?: DescribeInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceListResponse>;
+  /** 查询MQTT消息列表 {@link DescribeMessageListRequest} {@link DescribeMessageListResponse} */
+  DescribeMessageList(data: DescribeMessageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageListResponse>;
   /** 获取MQTT产品售卖规格 {@link DescribeProductSKUListRequest} {@link DescribeProductSKUListResponse} */
   DescribeProductSKUList(data?: DescribeProductSKUListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductSKUListResponse>;
+  /** 查询共享订阅堆积 {@link DescribeSharedSubscriptionLagRequest} {@link DescribeSharedSubscriptionLagResponse} */
+  DescribeSharedSubscriptionLag(data: DescribeSharedSubscriptionLagRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSharedSubscriptionLagResponse>;
   /** 查询MQTT主题详情 {@link DescribeTopicRequest} {@link DescribeTopicResponse} */
   DescribeTopic(data: DescribeTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicResponse>;
   /** 查询MQTT主题列表 {@link DescribeTopicListRequest} {@link DescribeTopicListResponse} */

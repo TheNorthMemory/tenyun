@@ -937,6 +937,8 @@ declare interface CreateAICallRequest {
   VadSilenceTime?: number;
   /** 通话内容提取配置 */
   ExtractConfig?: AICallExtractConfigElement[];
+  /** 模型温度控制 */
+  Temperature?: number;
 }
 
 declare interface CreateAICallResponse {

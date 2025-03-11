@@ -202,6 +202,8 @@ declare interface KnowledgeSet {
   CreateTime?: string | null;
   /** 更新时间 */
   UpdateTime?: string | null;
+  /** 知识库的meta信息 */
+  Meta?: string;
 }
 
 /** 查询知识库列表返回 */
@@ -335,12 +337,16 @@ declare interface UploadKnowledgeDocumentSetRsp {
 }
 
 declare interface CreateKnowledgeSetRequest {
+  /** 环境ID */
+  EnvId: string;
   /** 知识库标识 */
   Name: string;
   /** 知识库名称 */
   Title: string;
   /** 描述 */
   Desc?: string;
+  /** 知识库的meta信息 */
+  Meta?: string;
 }
 
 declare interface CreateKnowledgeSetResponse {
@@ -349,6 +355,8 @@ declare interface CreateKnowledgeSetResponse {
 }
 
 declare interface DeleteKnowledgeDocumentSetRequest {
+  /** 环境ID */
+  EnvId: string;
   /** 知识库标识 */
   CollectionView: string;
   /** 删除时制定的条件 */
@@ -363,6 +371,8 @@ declare interface DeleteKnowledgeDocumentSetResponse {
 }
 
 declare interface DeleteKnowledgeSetRequest {
+  /** 环境ID */
+  EnvId: string;
   /** 知识库标识 */
   Name: string;
 }
@@ -419,6 +429,8 @@ declare interface DescribeDataSourceListResponse {
 }
 
 declare interface DescribeKnowledgeDocumentSetDetailRequest {
+  /** 环境ID */
+  EnvId: string;
   /** 知识库标识 */
   CollectionView: string;
   /** 文件名 */
@@ -435,6 +447,8 @@ declare interface DescribeKnowledgeDocumentSetDetailResponse {
 }
 
 declare interface DescribeKnowledgeDocumentSetListRequest {
+  /** 环境ID */
+  EnvId: string;
   /** 知识库标识 */
   CollectionView: string;
   /** 查询条件 */
@@ -449,10 +463,14 @@ declare interface DescribeKnowledgeDocumentSetListResponse {
 }
 
 declare interface DescribeKnowledgeSetListRequest {
+  /** 环境ID */
+  EnvId: string;
   /** 知识库标识，精准查询 */
   Name?: string;
   /** 知识库名称，精准查询 */
   Title?: string;
+  /** 分页起始位 */
+  Offset?: number;
   /** 查询条数 */
   Limit?: number;
   /** NoPage标识不分页 */
@@ -489,6 +507,8 @@ declare interface SearchDocListResponse {
 }
 
 declare interface UpdateKnowledgeSetRequest {
+  /** 环境ID */
+  EnvId: string;
   /** 知识库标识 */
   Name: string;
   /** 知识库名称 */
@@ -497,6 +517,8 @@ declare interface UpdateKnowledgeSetRequest {
   Desc?: string;
   /** 状态;ENABLED启用；NOT_ENABLED不启用 */
   Active?: string;
+  /** 知识库的meta信息 */
+  Meta?: string;
 }
 
 declare interface UpdateKnowledgeSetResponse {
@@ -505,11 +527,13 @@ declare interface UpdateKnowledgeSetResponse {
 }
 
 declare interface UploadKnowledgeDocumentSetRequest {
+  /** 环境ID */
+  EnvId: string;
   /** 知识库标识 */
   CollectionView: string;
   /** 状态;ENABLED启用；NOT_ENABLED不启用 */
   FileName: string;
-  /** 文件存储位置的可读地址 */
+  /** 腾讯云文件存储位置的可读地址 */
   CosUrl: string;
   /** 文件类型，例如: .docx, .md */
   DocumentType?: string;
@@ -546,7 +570,7 @@ declare interface Lowcode {
   /** 用于精确查找与查询条件完全匹配知识库下文件集合 {@link DescribeKnowledgeDocumentSetListRequest} {@link DescribeKnowledgeDocumentSetListResponse} */
   DescribeKnowledgeDocumentSetList(data: DescribeKnowledgeDocumentSetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKnowledgeDocumentSetListResponse>;
   /** 查询环境下的知识库列表 {@link DescribeKnowledgeSetListRequest} {@link DescribeKnowledgeSetListResponse} */
-  DescribeKnowledgeSetList(data?: DescribeKnowledgeSetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKnowledgeSetListResponse>;
+  DescribeKnowledgeSetList(data: DescribeKnowledgeSetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKnowledgeSetListResponse>;
   /** 知识库搜索文档接口 {@link SearchDocListRequest} {@link SearchDocListResponse} */
   SearchDocList(data: SearchDocListRequest, config?: AxiosRequestConfig): AxiosPromise<SearchDocListResponse>;
   /** 更新知识库 {@link UpdateKnowledgeSetRequest} {@link UpdateKnowledgeSetResponse} */

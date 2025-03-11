@@ -1206,6 +1206,8 @@ declare interface Policy {
   SourceName?: string | null;
   /** 策略ID */
   Id?: number | null;
+  /** 引擎类型 */
+  EngineGeneration?: string;
 }
 
 /** 策略集合 */

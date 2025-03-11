@@ -85,13 +85,13 @@ declare interface InstanceInfo {
 /** 网络信息 */
 declare interface Network {
   /** VpcId(VPC网络下有效) */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 子网Id(VPC网络下有效)。 */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 内网访问IP。 */
-  Vip?: string | null;
+  Vip?: string;
   /** 内网访问Port。 */
-  Port?: number | null;
+  Port?: number;
   /** 旧 ip 保留时长，单位天 */
   PreserveDuration?: number;
   /** 旧 ip 到期时间 */
@@ -147,9 +147,9 @@ declare interface SecurityGroup {
 /** 标签键值对 */
 declare interface Tag {
   /** 标签键 */
-  TagKey: string | null;
+  TagKey: string;
   /** 标签值 */
-  TagValue: string | null;
+  TagValue: string;
 }
 
 declare interface AssociateSecurityGroupsRequest {

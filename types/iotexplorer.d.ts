@@ -130,12 +130,36 @@ declare interface CloudStorageAIServiceTask {
   Result?: string;
   /** 任务输出文件列表 */
   Files?: string[];
+  /** 任务输出文件信息列表 */
+  FilesInfo?: CloudStorageAIServiceTaskFileInfo[];
   /** 创建时间 */
   CreateTime?: number;
   /** 最后更新时间 */
   UpdateTime?: number;
   /** 自定义任务 ID */
   CustomId?: string;
+}
+
+/** 云存 AI 任务输出文件信息 */
+declare interface CloudStorageAIServiceTaskFileInfo {
+  /** 文件名称（含扩展名） */
+  FileName?: string;
+  /** 文件大小（单位：bytes） */
+  FileSize?: number;
+  /** 文件下载 URL */
+  DownloadURL?: string;
+  /** 文件的 MIME Type */
+  MimeType?: string;
+  /** 视频文件元数据（仅当文件为视频类型时包含该字段） */
+  VideoMetaInfo?: CloudStorageAIServiceTaskVideoMetaInfo;
+}
+
+/** 云存 AI 任务输出视频文件元数据 */
+declare interface CloudStorageAIServiceTaskVideoMetaInfo {
+  /** 视频对应的缩略图的文件名称（含扩展名） */
+  ThumbnailFileName?: string;
+  /** 视频时长（单位：毫秒） */
+  DurationMilliSeconds?: number;
 }
 
 /** 云存事件 */
@@ -1859,6 +1883,14 @@ declare interface DescribeCloudStorageAIServiceTasksRequest {
   UserId?: string;
   /** 通道 ID */
   ChannelId?: number;
+  /** 设备名称列表。当需要同时查询多台设备的任务列表时传入，优先级高于参数 `DeviceName` */
+  DeviceNames?: string[];
+  /** 查询任务时间范围的起始时间（秒级 UNIX 时间戳） */
+  StartTime?: number;
+  /** 查询任务时间范围的结束时间（秒级 UNIX 时间戳） */
+  EndTime?: number;
+  /** 下载 URL 的过期时间。若传入该参数，则响应中将包含所有文件的下载 URL */
+  FileURLExpireTime?: number;
 }
 
 declare interface DescribeCloudStorageAIServiceTasksResponse {

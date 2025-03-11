@@ -408,58 +408,62 @@ declare interface RoomInfo {
   RecordLang?: string;
   /** 录制类型 0 仅录制混流（默认） ;1 录制混流+单流，该模式下除混流录制基础上，分别录制老师、台上学生的音视频流，每路录制都会产生相应的录制费用 。示例：0 */
   RecordStream?: number;
+  /** 板书截图生成类型。0 不生成板书；1 全量模式；2 单页去重模式 */
+  WhiteBoardSnapshotMode?: number;
 }
 
 /** 房间列表 */
 declare interface RoomItem {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 房间ID */
-  RoomId?: number | null;
+  RoomId?: number;
   /** 房间状态。0 未开始 ；1进行中 ；2 已结束；3已过期 */
-  Status?: number | null;
+  Status?: number;
   /** 开始时间 */
-  StartTime?: number | null;
+  StartTime?: number;
   /** 结束时间 */
-  EndTime?: number | null;
+  EndTime?: number;
   /** 实际开始时间 */
-  RealStartTime?: number | null;
+  RealStartTime?: number;
   /** 实际结束时间 */
-  RealEndTime?: number | null;
+  RealEndTime?: number;
   /** 头像区域，摄像头视频画面的分辨率。可以有如下取值：1 标清2 高清3 全高清 */
-  Resolution?: number | null;
+  Resolution?: number;
   /** 最大允许连麦人数。已废弃，使用字段 MaxMicNumber */
-  MaxRTCMember?: number | null;
+  MaxRTCMember?: number;
   /** 房间录制地址。已废弃，使用新字段 RecordUrl */
-  ReplayUrl?: string | null;
+  ReplayUrl?: string;
   /** 录制地址（协议为https)。仅在房间结束后存在。 */
-  RecordUrl?: string | null;
+  RecordUrl?: string;
   /** 课堂同时最大可与老师进行连麦互动的人数，该参数支持正式上课/开播前调用修改房间修改。小班课取值范围[0,16]，大班课取值范围[0,1]，当取值为0时表示当前课堂/直播，不支持连麦互动。 */
-  MaxMicNumber?: number | null;
+  MaxMicNumber?: number;
   /** 打开学生麦克风/摄像头的授权开关 */
-  EnableDirectControl?: number | null;
+  EnableDirectControl?: number;
   /** 开启专注模式。 0 收看全部角色音视频(默认) 1 只看老师和助教 */
-  InteractionMode?: number | null;
+  InteractionMode?: number;
   /** 横竖屏。0：横屏开播（默认值）; 1：竖屏开播，当前仅支持移动端的纯视频类型 */
-  VideoOrientation?: number | null;
+  VideoOrientation?: number;
   /** 开启课后评分。 0：不开启(默认) 1：开启 */
-  IsGradingRequiredPostClass?: number | null;
+  IsGradingRequiredPostClass?: number;
   /** 房间类型。0:小班课（默认值）；1:大班课；2:1V1（后续扩展）注：大班课的布局(layout)只有三分屏 */
-  RoomType?: number | null;
+  RoomType?: number;
   /** 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟 */
-  EndDelayTime?: number | null;
+  EndDelayTime?: number;
   /** 直播类型：0 常规（默认）1 伪直播 */
-  LiveType?: number | null;
+  LiveType?: number;
   /** 伪直播回放链接 */
-  RecordLiveUrl?: string | null;
+  RecordLiveUrl?: string;
   /** 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1的时候有效 */
-  EnableAutoStart?: number | null;
+  EnableAutoStart?: number;
   /** 录制文件背景图片，支持png、jpg、jpeg、bmp格式，暂不支持透明通道 */
-  RecordBackground?: string | null;
+  RecordBackground?: string;
   /** 录制自定义场景，仅recordlayout=9的时候此参数有效,数据内容为用户自定义场景参数，数据格式为json键值对方式，其中键值对的value为string类型。 */
-  RecordScene?: string | null;
+  RecordScene?: string;
   /** 录制自定义语言，仅recordlayout=9的时候此参数有效 */
   RecordLang?: string;
+  /** 板书截图生成类型。0 不生成板书；1 全量模式；2 单页去重模式 */
+  WhiteBoardSnapshotMode?: number;
 }
 
 /** 场景配置 */
@@ -822,6 +826,8 @@ declare interface CreateRoomRequest {
   RecordLang?: string;
   /** 录制类型 0 仅录制混流（默认） ;1 录制混流+单流，该模式下除混流录制基础上，分别录制老师、台上学生的音视频流，每路录制都会产生相应的录制费用 。示例：0 */
   RecordStream?: number;
+  /** 板书截图生成类型。0 不生成板书；1 全量模式；2 单页去重模式 */
+  WhiteBoardSnapshotMode?: number;
 }
 
 declare interface CreateRoomResponse {
@@ -1312,13 +1318,13 @@ declare interface DescribeRoomResponse {
   /** 上课后是否禁止自动录制。可以有以下取值：0 不禁止录制（自动开启录制，默认值）1 禁止录制注：如果该配置取值为0，录制将从上课后开始，课堂结束后停止。 */
   DisableRecord?: number;
   /** 助教UserId列表。 */
-  Assistants?: string[] | null;
+  Assistants?: string[];
   /** 录制地址（协议为https)。仅在房间结束后存在。 */
-  RecordUrl?: string | null;
+  RecordUrl?: string;
   /** 课堂状态。0为未开始，1为已开始，2为已结束，3为已过期。 */
-  Status?: number | null;
+  Status?: number;
   /** 房间绑定的群组ID */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 打开学生麦克风/摄像头的授权开关 */
   EnableDirectControl?: number;
   /** 开启专注模式。0 收看全部角色音视频(默认)1 只看老师和助教 */
@@ -1351,6 +1357,8 @@ declare interface DescribeRoomResponse {
   RecordStream?: number;
   /** 录制模板。房间子类型为视频+白板（SubType=videodoc）时默认为3，房间子类型为纯视频（SubType=video）时默认为0。录制模板枚举值参考：https://cloud.tencent.com/document/product/1639/89744 */
   RecordLayout?: number;
+  /** 板书截图生成类型。0 不生成板书；1 全量模式；2 单页去重模式 */
+  WhiteBoardSnapshotMode?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1708,6 +1716,8 @@ declare interface ModifyRoomRequest {
   RecordScene?: string;
   /** 录制自定义语言，仅recordlayout=9的时候此参数有效 */
   RecordLang?: string;
+  /** 板书截图生成类型。0 不生成板书；1 全量模式；2 单页去重模式 */
+  WhiteBoardSnapshotMode?: number;
 }
 
 declare interface ModifyRoomResponse {

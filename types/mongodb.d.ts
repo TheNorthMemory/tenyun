@@ -137,9 +137,9 @@ declare interface DBInstancePrice {
 /** 数据库实例 URI 形式的连接串访问地址示例。 */
 declare interface DbURL {
   /** 指 URI 类别，包括：，- CLUSTER_ALL：指通过该 URI 连接库实例的主节点，可读写。- CLUSTER_READ_READONLY：指通过该 URI 连接实例只读节点。- CLUSTER_READ_SECONDARY：指通过该 URI 连接实例从节点。- CLUSTER_READ_SECONDARY_AND_READONLY：指通过该 URI 连接实例只读从节点。- CLUSTER_PRIMARY_AND_SECONDARY：指通过该 URI 连接实例 主节点与从节点。- MONGOS_ALL：指通过该 URI 连接每个 Mongos 节点，可读写。- MONGOS_READ_READONLY：指通过该 URI 连接 Mongos 的只读节点。- MONGOS_READ_SECONDARY：指通过该 URI 连接 Mongos 的从节点。- MONGOS_READ_PRIMARY_AND_SECONDARY：指通过该URI 连接 Mongos 的主节点与从节点。- MONGOS_READ_SECONDARY_AND_READONLY：指通过该URI 连接 Mongos 的从节点与只读节点。 */
-  URLType: string;
+  URLType?: string;
   /** 实例 URI 形式的连接串访问地址示例。 */
-  Address: string;
+  Address?: string;
 }
 
 /** 按key回档，用于筛选数据的键值对 */

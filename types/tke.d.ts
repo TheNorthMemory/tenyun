@@ -133,7 +133,7 @@ declare interface ExternalNodePoolInfo {
   /** 第三方节点Runtime配置 */
   RuntimeConfig?: RuntimeConfig;
   /** 节点数 */
-  NodesNum?: number | null;
+  NodesNum?: number;
 }
 
 /** 过滤器 */
@@ -910,11 +910,11 @@ declare namespace V20180525 {
     /** addon的版本 */
     AddonVersion?: string;
     /** addon的参数，是一个json格式的base64转码后的字符串 */
-    RawValues?: string | null;
+    RawValues?: string;
     /** addon的状态 */
-    Phase?: string | null;
+    Phase?: string;
     /** addon失败的原因 */
-    Reason?: string | null;
+    Reason?: string;
     /** addon的创建时间 */
     CreateTime?: string;
   }
@@ -932,7 +932,7 @@ declare namespace V20180525 {
     /** chart名称 */
     Name?: string;
     /** chart的标签 */
-    Label?: string | null;
+    Label?: string;
     /** chart的版本 */
     LatestVersion?: string;
   }
@@ -970,29 +970,29 @@ declare namespace V20180525 {
     /** 存储仓库所属地域，比如COS广州(ap-guangzhou) */
     StorageRegion?: string;
     /** 存储服务提供方，默认腾讯云 */
-    Provider?: string | null;
+    Provider?: string;
     /** 对象存储桶名称，如果是COS必须是tke-backup-前缀开头 */
-    Bucket?: string | null;
+    Bucket?: string;
     /** 对象存储桶路径 */
-    Path?: string | null;
+    Path?: string;
     /** 存储仓库状态 */
-    State?: string | null;
+    State?: string;
     /** 详细状态信息 */
-    Message?: string | null;
+    Message?: string;
     /** 最后一次检查时间 */
-    LastValidationTime?: string | null;
+    LastValidationTime?: string;
   }
 
   /** cuDNN的版本信息 */
   interface CUDNN {
     /** cuDNN的版本 */
-    Version: string | null;
+    Version: string;
     /** cuDNN的名字 */
-    Name: string | null;
+    Name: string;
     /** cuDNN的Doc名字 */
-    DocName?: string | null;
+    DocName?: string;
     /** cuDNN的Dev名字 */
-    DevName?: string | null;
+    DevName?: string;
   }
 
   /** cloudrun安全特性能力 */
@@ -1114,9 +1114,9 @@ declare namespace V20180525 {
     /** 伸缩组状态(开启 enabled 开启中 enabling 关闭 disabled 关闭中 disabling 更新中 updating 删除中 deleting 开启缩容中 scaleDownEnabling 关闭缩容中 scaleDownDisabling) */
     Status?: string;
     /** 节点是否设置成不可调度 */
-    IsUnschedulable?: boolean | null;
+    IsUnschedulable?: boolean;
     /** 伸缩组的label列表 */
-    Labels?: Label[] | null;
+    Labels?: Label[];
     /** 创建时间 */
     CreatedTime?: string;
   }
@@ -1272,7 +1272,7 @@ declare namespace V20180525 {
     /** 是否启用 */
     Enable?: boolean;
     /** 其他资源数量 */
-    OtherCount?: number | null;
+    OtherCount?: number;
   }
 
   /** 集群等级变配记录 */
@@ -1334,7 +1334,7 @@ declare namespace V20180525 {
   /** 集群属性 */
   interface ClusterProperty {
     /** 节点hostname命名模式 */
-    NodeNameType?: string | null;
+    NodeNameType?: string;
   }
 
   /** 弹性容器集群公网访问负载均衡信息 */
@@ -1368,13 +1368,13 @@ declare namespace V20180525 {
     /** 集群异常的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败 */
     ClusterFailedNodeNum?: number;
     /** 集群已关机的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败 */
-    ClusterClosedNodeNum?: number | null;
+    ClusterClosedNodeNum?: number;
     /** 集群关机中的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败 */
-    ClusterClosingNodeNum?: number | null;
+    ClusterClosingNodeNum?: number;
     /** 集群是否开启删除保护 */
-    ClusterDeletionProtection?: boolean | null;
+    ClusterDeletionProtection?: boolean;
     /** 集群是否可审计 */
-    ClusterAuditEnabled?: boolean | null;
+    ClusterAuditEnabled?: boolean;
   }
 
   /** 集群版本信息 */
@@ -1456,7 +1456,7 @@ declare namespace V20180525 {
   /** 自定义驱动信息 */
   interface CustomDriver {
     /** 自定义GPU驱动地址链接 */
-    Address?: string | null;
+    Address?: string;
   }
 
   /** 自定义DNS配置 */
@@ -1480,17 +1480,17 @@ declare namespace V20180525 {
   /** 描述了k8s节点数据盘相关配置与信息。 */
   interface DataDisk {
     /** 云盘类型 */
-    DiskType: string | null;
+    DiskType: string;
     /** 文件系统(ext3/ext4/xfs) */
-    FileSystem: string | null;
+    FileSystem: string;
     /** 云盘大小(G） */
-    DiskSize: number | null;
+    DiskSize: number;
     /** 是否自动化格式盘并挂载 */
-    AutoFormatAndMount: boolean | null;
+    AutoFormatAndMount: boolean;
     /** 挂载目录 */
-    MountTarget: string | null;
+    MountTarget: string;
     /** 挂载设备名或分区名，当且仅当添加已有节点时需要 */
-    DiskPartition: string | null;
+    DiskPartition: string;
   }
 
   /** Eks 自定义域名服务器 配置 */
@@ -1504,9 +1504,9 @@ declare namespace V20180525 {
   /** GPU驱动和CUDA的版本信息 */
   interface DriverVersion {
     /** GPU驱动或者CUDA的版本 */
-    Version: string | null;
+    Version: string;
     /** GPU驱动或者CUDA的名字 */
-    Name: string | null;
+    Name: string;
   }
 
   /** ECM增强服务 */
@@ -1544,27 +1544,27 @@ declare namespace V20180525 {
   /** 边缘容器参数描述 */
   interface EdgeArgsFlag {
     /** 参数名 */
-    Name?: string | null;
+    Name?: string;
     /** 参数类型 */
-    Type?: string | null;
+    Type?: string;
     /** 参数描述 */
-    Usage?: string | null;
+    Usage?: string;
     /** 参数默认值 */
-    Default?: string | null;
+    Default?: string;
     /** 参数可选范围（目前包含range和in两种，"[]"代表range，如"[1, 5]"表示参数必须>=1且 <=5, "()"代表in， 如"('aa', 'bb')"表示参数只能为字符串'aa'或者'bb'，该参数为空表示不校验） */
-    Constraint?: string | null;
+    Constraint?: string;
   }
 
   /** 边缘容器集群可用的自定义参数 */
   interface EdgeAvailableExtraArgs {
     /** kube-apiserver可用的自定义参数 */
-    KubeAPIServer?: EdgeArgsFlag[] | null;
+    KubeAPIServer?: EdgeArgsFlag[];
     /** kube-controller-manager可用的自定义参数 */
-    KubeControllerManager?: EdgeArgsFlag[] | null;
+    KubeControllerManager?: EdgeArgsFlag[];
     /** kube-scheduler可用的自定义参数 */
-    KubeScheduler?: EdgeArgsFlag[] | null;
+    KubeScheduler?: EdgeArgsFlag[];
     /** kubelet可用的自定义参数 */
-    Kubelet?: EdgeArgsFlag[] | null;
+    Kubelet?: EdgeArgsFlag[];
   }
 
   /** 边缘计算集群信息 */
@@ -1590,17 +1590,17 @@ declare namespace V20180525 {
     /** 边缘集群版本 */
     EdgeClusterVersion?: string;
     /** 节点最大Pod数 */
-    MaxNodePodNum?: number | null;
+    MaxNodePodNum?: number;
     /** 集群高级设置 */
-    ClusterAdvancedSettings?: EdgeClusterAdvancedSettings | null;
+    ClusterAdvancedSettings?: EdgeClusterAdvancedSettings;
     /** 边缘容器集群级别 */
-    Level?: string | null;
+    Level?: string;
     /** 是否支持自动提升集群配置 */
-    AutoUpgradeClusterLevel?: boolean | null;
+    AutoUpgradeClusterLevel?: boolean;
     /** 集群付费模式，支持POSTPAID_BY_HOUR或者PREPAID */
-    ChargeType?: string | null;
+    ChargeType?: string;
     /** 边缘集群组件的版本 */
-    EdgeVersion?: string | null;
+    EdgeVersion?: string;
     /** 集群绑定的云标签 */
     TagSpecification?: TagSpecification | null;
   }
@@ -1610,35 +1610,35 @@ declare namespace V20180525 {
     /** 集群自定义参数 */
     ExtraArgs?: EdgeClusterExtraArgs | null;
     /** 运行时类型，支持"docker"和"containerd"，默认为docker */
-    Runtime?: string | null;
+    Runtime?: string;
     /** 集群kube-proxy转发模式，支持"iptables"和"ipvs"，默认为iptables */
-    ProxyMode?: string | null;
+    ProxyMode?: string;
   }
 
   /** 边缘容器集群master自定义参数 */
   interface EdgeClusterExtraArgs {
     /** kube-apiserver自定义参数，参数格式为["k1=v1", "k1=v2"]， 例如["max-requests-inflight=500","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"] */
-    KubeAPIServer?: string[] | null;
+    KubeAPIServer?: string[];
     /** kube-controller-manager自定义参数 */
-    KubeControllerManager?: string[] | null;
+    KubeControllerManager?: string[];
     /** kube-scheduler自定义参数 */
-    KubeScheduler?: string[] | null;
+    KubeScheduler?: string[];
   }
 
   /** 边缘计算集群内网访问LB信息 */
   interface EdgeClusterInternalLB {
     /** 是否开启内网访问LB */
-    Enabled: boolean | null;
+    Enabled: boolean;
     /** 内网访问LB关联的子网Id */
-    SubnetId?: string[] | null;
+    SubnetId?: string[];
   }
 
   /** 边缘计算集群公网访问负载均衡信息 */
   interface EdgeClusterPublicLB {
     /** 是否开启公网访问LB */
-    Enabled: boolean | null;
+    Enabled: boolean;
     /** 允许访问的公网cidr */
-    AllowFromCidrs?: string[] | null;
+    AllowFromCidrs?: string[];
   }
 
   /** 用以帮助用户自动创建EIP的配置 */
@@ -1864,9 +1864,9 @@ declare namespace V20180525 {
   /** 修改标签失败的资源 */
   interface FailedResource {
     /** 资源六段式 */
-    Resource?: string | null;
+    Resource?: string;
     /** 执行失败的原因 */
-    Error?: string | null;
+    Error?: string;
   }
 
   /** 过滤器 */
@@ -1880,15 +1880,15 @@ declare namespace V20180525 {
   /** GPU相关的参数，包括驱动版本，CUDA版本，cuDNN版本以及是否开启MIG */
   interface GPUArgs {
     /** 是否启用MIG特性 */
-    MIGEnable?: boolean | null;
+    MIGEnable?: boolean;
     /** GPU驱动版本信息 */
     Driver?: DriverVersion;
     /** CUDA版本信息 */
-    CUDA?: DriverVersion | null;
+    CUDA?: DriverVersion;
     /** cuDNN版本信息 */
-    CUDNN?: CUDNN | null;
+    CUDNN?: CUDNN;
     /** 自定义GPU驱动信息 */
-    CustomDriver?: CustomDriver | null;
+    CustomDriver?: CustomDriver;
   }
 
   /** Probe中的HttpGet */
@@ -1954,13 +1954,13 @@ declare namespace V20180525 {
   /** 镜像信息 */
   interface ImageInstance {
     /** 镜像别名 */
-    Alias?: string | null;
+    Alias?: string;
     /** 操作系统名称 */
-    OsName?: string | null;
+    OsName?: string;
     /** 镜像ID */
-    ImageId?: string | null;
+    ImageId?: string;
     /** 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值) */
-    OsCustomizeType?: string | null;
+    OsCustomizeType?: string;
   }
 
   /** 从镜像仓库拉取镜像的凭据 */
@@ -1986,17 +1986,17 @@ declare namespace V20180525 {
     /** 实例的状态（running 运行中，initializing 初始化中，failed 异常） */
     InstanceState?: string;
     /** 实例是否封锁状态 */
-    DrainStatus?: string | null;
+    DrainStatus?: string;
     /** 节点配置 */
-    InstanceAdvancedSettings?: InstanceAdvancedSettings | null;
+    InstanceAdvancedSettings?: InstanceAdvancedSettings;
     /** 添加时间 */
     CreatedTime?: string;
     /** 节点内网IP */
-    LanIP?: string | null;
+    LanIP?: string;
     /** 资源池ID */
-    NodePoolId?: string | null;
+    NodePoolId?: string;
     /** 自动伸缩组ID */
-    AutoscalingGroupId?: string | null;
+    AutoscalingGroupId?: string;
   }
 
   /** 描述了k8s集群相关配置与信息。 */
@@ -2090,9 +2090,9 @@ declare namespace V20180525 {
     /** 任务生命周期process 运行中paused 已停止pauing 正在停止done 已完成timeout 已超时aborted 已取消pending 还未开始 */
     LifeState?: string;
     /** 升级开始时间 */
-    StartAt?: string | null;
+    StartAt?: string;
     /** 升级结束时间 */
-    EndAt?: string | null;
+    EndAt?: string;
     /** 升级前检查结果 */
     CheckResult?: InstanceUpgradePreCheckResult;
     /** 升级步骤详情 */
@@ -2270,9 +2270,9 @@ declare namespace V20180525 {
   /** 节点统计列表 */
   interface NodeCountSummary {
     /** 手动管理的节点 */
-    ManuallyAdded?: ManuallyAdded | null;
+    ManuallyAdded?: ManuallyAdded;
     /** 自动管理的节点 */
-    AutoscalingAdded?: AutoscalingAdded | null;
+    AutoscalingAdded?: AutoscalingAdded;
   }
 
   /** 节点池描述 */
@@ -2348,13 +2348,13 @@ declare namespace V20180525 {
   /** NodePool的运行时配置 */
   interface NodePoolRuntime {
     /** 节点池ID */
-    NodePoolId?: string | null;
+    NodePoolId?: string;
     /** 运行时类型 */
-    RuntimeType?: string | null;
+    RuntimeType?: string;
     /** 运行时版本 */
-    RuntimeVersion?: string | null;
+    RuntimeVersion?: string;
     /** 节点池名称 */
-    NodePoolName?: string | null;
+    NodePoolName?: string;
   }
 
   /** OIDC认证相关配置 */
@@ -2418,11 +2418,11 @@ declare namespace V20180525 {
   /** 可选运行时 */
   interface OptionalRuntimes {
     /** 运行时类型 */
-    RuntimeType?: string | null;
+    RuntimeType?: string;
     /** 运行时版本列表 */
-    RuntimeVersions?: string[] | null;
+    RuntimeVersions?: string[];
     /** 该类型的默认运行时版本 */
-    DefaultVersion?: string | null;
+    DefaultVersion?: string;
   }
 
   /** 应用市场安装的Pending应用 */
@@ -2484,25 +2484,25 @@ declare namespace V20180525 {
   /** 某机型可支持的最大 VPC-CNI 模式的 Pod 数量 */
   interface PodLimitsByType {
     /** TKE共享网卡非固定IP模式可支持的Pod数量 */
-    TKERouteENINonStaticIP?: number | null;
+    TKERouteENINonStaticIP?: number;
     /** TKE共享网卡固定IP模式可支持的Pod数量 */
-    TKERouteENIStaticIP?: number | null;
+    TKERouteENIStaticIP?: number;
     /** TKE独立网卡模式可支持的Pod数量 */
-    TKEDirectENI?: number | null;
+    TKEDirectENI?: number;
     /** TKE中继网卡模式可支持的Pod数量 */
-    TKESubENI?: number | null;
+    TKESubENI?: number;
   }
 
   /** 机型信息和其可支持的最大VPC-CNI模式Pod数量信息 */
   interface PodLimitsInstance {
     /** 机型所在可用区 */
-    Zone?: string | null;
+    Zone?: string;
     /** 机型所属机型族 */
-    InstanceFamily?: string | null;
+    InstanceFamily?: string;
     /** 实例机型名称 */
-    InstanceType?: string | null;
+    InstanceType?: string;
     /** 机型可支持的最大VPC-CNI模式Pod数量信息 */
-    PodLimits?: PodLimitsByType | null;
+    PodLimits?: PodLimitsByType;
   }
 
   /** Pod所在的节点信息 */
@@ -3092,17 +3092,17 @@ declare namespace V20180525 {
     /** 应用命名空间 */
     Namespace?: string;
     /** 应用版本 */
-    Revision?: number | null;
+    Revision?: number;
     /** 应用状态 */
-    Status?: string | null;
+    Status?: string;
     /** 应用制品名称 */
-    Chart?: string | null;
+    Chart?: string;
     /** 应用制品版本 */
-    AppVersion?: string | null;
+    AppVersion?: string;
     /** 应用更新时间 */
-    UpdatedTime?: string | null;
+    UpdatedTime?: string;
     /** 应用描述 */
-    Description?: string | null;
+    Description?: string;
   }
 
   /** 应用市场自定义参数 */
@@ -3240,11 +3240,11 @@ declare namespace V20180525 {
     /** 路由表类型。 */
     RouteTableType?: string;
     /** 路由表CIDR。 */
-    RouteTableCidrBlock?: string | null;
+    RouteTableCidrBlock?: string;
     /** 路由表名称。 */
-    RouteTableName?: string | null;
+    RouteTableName?: string;
     /** 路由表ID。 */
-    RouteTableId?: string | null;
+    RouteTableId?: string;
   }
 
   /** 集群路由表对象 */
@@ -3288,9 +3288,9 @@ declare namespace V20180525 {
   /** 运行时配置 */
   interface RuntimeConfig {
     /** 运行时类型 */
-    RuntimeType?: string | null;
+    RuntimeType?: string;
     /** 运行时版本 */
-    RuntimeVersion?: string | null;
+    RuntimeVersion?: string;
   }
 
   /** master节点缩容参数 */
@@ -3326,13 +3326,13 @@ declare namespace V20180525 {
     /** 名称 */
     Name?: string;
     /** 开始时间 */
-    StartAt?: string | null;
+    StartAt?: string;
     /** 结束时间 */
-    EndAt?: string | null;
+    EndAt?: string;
     /** 当前状态 */
-    Status?: string | null;
+    Status?: string;
     /** 执行信息 */
-    Message?: string | null;
+    Message?: string;
   }
 
   /** 子网信息 */
@@ -3368,29 +3368,29 @@ declare namespace V20180525 {
     /** 集群ID */
     ClusterId?: string;
     /** 审计开关的详细信息 */
-    Audit?: SwitchInfo | null;
+    Audit?: SwitchInfo;
     /** 事件开关的详细信息 */
-    Event?: SwitchInfo | null;
+    Event?: SwitchInfo;
     /** 普通日志的详细信息 */
-    Log?: SwitchInfo | null;
+    Log?: SwitchInfo;
     /** master 日志详细信息 */
-    MasterLog?: SwitchInfo | null;
+    MasterLog?: SwitchInfo;
   }
 
   /** 日志开关详细信息 */
   interface SwitchInfo {
     /** 开启标识符 true代表开启 */
-    Enable?: boolean | null;
+    Enable?: boolean;
     /** CLS日志集ID */
-    LogsetId?: string | null;
+    LogsetId?: string;
     /** CLS日志主题ID */
-    TopicId?: string | null;
+    TopicId?: string;
     /** 当前log-agent版本 */
-    Version?: string | null;
+    Version?: string;
     /** 是否可升级 */
-    UpgradeAble?: boolean | null;
+    UpgradeAble?: boolean;
     /** CLS日志主题所属region */
-    TopicRegion?: string | null;
+    TopicRegion?: string;
   }
 
   /** 标签绑定的资源类型，当前支持类型："cluster" */
@@ -3404,7 +3404,7 @@ declare namespace V20180525 {
   /** 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到云主机实例。 */
   interface TagSpecification {
     /** 标签绑定的资源类型，当前支持类型："cluster" */
-    ResourceType?: string | null;
+    ResourceType?: string;
     /** 标签对列表 */
     Tags?: Tag[] | null;
   }
@@ -3426,11 +3426,11 @@ declare namespace V20180525 {
     /** 生命周期pending : 步骤未开始running: 步骤执行中success: 步骤成功完成failed: 步骤失败 */
     LifeState?: string;
     /** 步骤开始时间 */
-    StartAt?: string | null;
+    StartAt?: string;
     /** 步骤结束时间 */
-    EndAt?: string | null;
+    EndAt?: string;
     /** 若步骤生命周期为failed,则此字段显示错误信息 */
-    FailedMsg?: string | null;
+    FailedMsg?: string;
   }
 
   /** 探针使用TcpSocket检测容器 */
@@ -3452,9 +3452,9 @@ declare namespace V20180525 {
   /** 不可用原因 */
   interface UnavailableReason {
     /** 实例ID */
-    InstanceId?: string | null;
+    InstanceId?: string;
     /** 原因 */
-    Reason?: string | null;
+    Reason?: string;
   }
 
   /** 可升级节点信息 */
@@ -3464,7 +3464,7 @@ declare namespace V20180525 {
     /** 节点的当前版本 */
     Version?: string;
     /** 当前版本的最新小版本 */
-    LatestVersion?: string | null;
+    LatestVersion?: string;
     /** RuntimeVersion */
     RuntimeVersion?: string;
     /** RuntimeLatestVersion */
@@ -3486,11 +3486,11 @@ declare namespace V20180525 {
   /** 版本信息 */
   interface VersionInstance {
     /** 版本名称 */
-    Name?: string | null;
+    Name?: string;
     /** 版本信息 */
-    Version?: string | null;
+    Version?: string;
     /** Remark */
-    Remark?: string | null;
+    Remark?: string;
   }
 
   /** 虚拟节点 */
@@ -3502,7 +3502,7 @@ declare namespace V20180525 {
     /** 虚拟节点状态 */
     Phase?: string;
     /** 创建时间 */
-    CreatedTime?: string | null;
+    CreatedTime?: string;
   }
 
   /** 虚拟节点池 */
@@ -4802,9 +4802,9 @@ declare namespace V20180525 {
     /** 版本列表 */
     Versions?: string[];
     /** 边缘集群最新版本 */
-    EdgeVersionLatest?: string | null;
+    EdgeVersionLatest?: string;
     /** 边缘集群当前版本 */
-    EdgeVersionCurrent?: string | null;
+    EdgeVersionCurrent?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5436,7 +5436,7 @@ declare namespace V20180525 {
 
   interface DescribeEdgeAvailableExtraArgsResponse {
     /** 集群版本 */
-    ClusterVersion?: string | null;
+    ClusterVersion?: string;
     /** 可用的自定义参数 */
     AvailableExtraArgs?: EdgeAvailableExtraArgs | null;
     /** 唯一请求 ID，每次请求都会返回。 */
@@ -5466,7 +5466,7 @@ declare namespace V20180525 {
 
   interface DescribeEdgeClusterExtraArgsResponse {
     /** 集群自定义参数 */
-    ClusterExtraArgs?: EdgeClusterExtraArgs | null;
+    ClusterExtraArgs?: EdgeClusterExtraArgs;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5500,15 +5500,15 @@ declare namespace V20180525 {
 
   interface DescribeEdgeClusterUpgradeInfoResponse {
     /** 可升级的集群组件及其版本 */
-    ComponentVersion?: string | null;
+    ComponentVersion?: string;
     /** 边缘集群当前版本 */
-    EdgeVersionCurrent?: string | null;
+    EdgeVersionCurrent?: string;
     /** 边缘组件镜像仓库地址前缀，包含域名和命名空间 */
-    RegistryPrefix?: string | null;
+    RegistryPrefix?: string;
     /** 集群升级状态，可能值：running、updating、failed */
-    ClusterUpgradeStatus?: string | null;
+    ClusterUpgradeStatus?: string;
     /** 集群升级中状态或者失败原因 */
-    ClusterUpgradeStatusReason?: string | null;
+    ClusterUpgradeStatusReason?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5520,7 +5520,7 @@ declare namespace V20180525 {
 
   interface DescribeEdgeLogSwitchesResponse {
     /** 集群日志开关集合 */
-    SwitchSet?: string[] | null;
+    SwitchSet?: string[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5614,25 +5614,25 @@ declare namespace V20180525 {
 
   interface DescribeExternalNodeSupportConfigResponse {
     /** 用于分配集群容器和服务 IP 的 CIDR，不得与 VPC CIDR 冲突，也不得与同 VPC 内其他集群 CIDR 冲突。且网段范围必须在内网网段内，例如:10.1.0.0/14, 192.168.0.1/18,172.16.0.0/16。 */
-    ClusterCIDR?: string | null;
+    ClusterCIDR?: string;
     /** 集群网络插件类型，支持：CiliumBGP、CiliumVXLan */
-    NetworkType?: string | null;
+    NetworkType?: string;
     /** 子网ID */
-    SubnetId?: string | null;
+    SubnetId?: string;
     /** 是否开启第三方节点专线连接支持 */
-    Enabled?: boolean | null;
+    Enabled?: boolean;
     /** 节点所属交换机的BGP AS 号 */
-    AS?: string | null;
+    AS?: string;
     /** 节点所属交换机的交换机 IP */
-    SwitchIP?: string | null;
+    SwitchIP?: string;
     /** 开启第三方节点池状态 */
     Status?: string;
     /** 如果开启失败原因 */
-    FailedReason?: string | null;
+    FailedReason?: string;
     /** 内网访问地址 */
-    Master?: string | null;
+    Master?: string;
     /** 镜像仓库代理地址 */
-    Proxy?: string | null;
+    Proxy?: string;
     /** 用于记录开启第三方节点的过程进行到哪一步了 */
     Progress?: Step[] | null;
     /** 是否开启第三方节点公网连接支持 */
@@ -5640,7 +5640,7 @@ declare namespace V20180525 {
     /** 注册节点公网版公网连接地址 */
     PublicConnectUrl?: string;
     /** 注册节点公网版自定义域名 */
-    PublicCustomDomain?: string | null;
+    PublicCustomDomain?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6664,7 +6664,7 @@ declare namespace V20180525 {
 
   interface GetTkeAppChartListResponse {
     /** 所支持的chart列表 */
-    AppCharts?: AppChart[] | null;
+    AppCharts?: AppChart[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

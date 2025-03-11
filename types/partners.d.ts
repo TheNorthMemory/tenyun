@@ -174,6 +174,22 @@ declare interface AgentSalesmanElem {
   CreateTime?: string;
 }
 
+/** 客户增量激励考核信息列表 */
+declare interface ClientIncreaseInfoList {
+  /** 客户UIN */
+  ClientUin?: string;
+  /** 是否参与增量政策，Y：是，N：否 */
+  IsJoinIncrease?: string;
+  /** 增量考核关联时间 */
+  IncreaseUseAssociateDate?: string;
+  /** 参与增量考核的原始客户等级 */
+  TLevel?: string;
+  /** 增量考核目标,分 */
+  IncreaseGoal?: string;
+  /** 完成订单金额,分 */
+  TotalBaseAmt?: string;
+}
+
 /** 订单价格详情 */
 declare interface DealGoodsPriceNewElem {
   /** 实付金额（单位：分） */
@@ -550,6 +566,18 @@ declare interface DescribeClientBalanceNewResponse {
   RequestId?: string;
 }
 
+declare interface DescribeClientJoinIncreaseListRequest {
+  /** 客户UIN列表 */
+  ClientUins: string[];
+}
+
+declare interface DescribeClientJoinIncreaseListResponse {
+  /** 已审核代客列表 */
+  List?: ClientIncreaseInfoList[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRebateInfosNewRequest {
   /** 返佣月份，如2018-02 */
   RebateMonth?: string;
@@ -687,6 +715,8 @@ declare interface Partners {
   DescribeAgentSelfPayDealsV2(data: DescribeAgentSelfPayDealsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentSelfPayDealsV2Response>;
   /** 查询客户余额（新） {@link DescribeClientBalanceNewRequest} {@link DescribeClientBalanceNewResponse} */
   DescribeClientBalanceNew(data: DescribeClientBalanceNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientBalanceNewResponse>;
+  /** 查询客户参与增量激励考核信息 {@link DescribeClientJoinIncreaseListRequest} {@link DescribeClientJoinIncreaseListResponse} */
+  DescribeClientJoinIncreaseList(data: DescribeClientJoinIncreaseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientJoinIncreaseListResponse>;
   /** 【已切换至DescribeRebateInfosNew】查询代理商返佣信息 {@link DescribeRebateInfosRequest} {@link DescribeRebateInfosResponse} */
   DescribeRebateInfos(data?: DescribeRebateInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRebateInfosResponse>;
   /** 查询代理商返佣信息V2 {@link DescribeRebateInfosNewRequest} {@link DescribeRebateInfosNewResponse} */

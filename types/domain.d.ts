@@ -1461,7 +1461,7 @@ declare interface TransferProhibitionBatchRequest {
 
 declare interface TransferProhibitionBatchResponse {
   /** 日志ID */
-  LogId: number;
+  LogId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1475,7 +1475,7 @@ declare interface UpdateProhibitionBatchRequest {
 
 declare interface UpdateProhibitionBatchResponse {
   /** 日志ID */
-  LogId: number;
+  LogId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

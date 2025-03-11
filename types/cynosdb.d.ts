@@ -670,6 +670,8 @@ declare interface CynosdbClusterDetail {
   NetworkType?: string | null;
   /** 备可用区属性 */
   SlaveZoneAttr?: SlaveZoneAttrItem[] | null;
+  /** 版本标签 */
+  CynosVersionTag?: string;
 }
 
 /** 实例错误日志返回类型 */
@@ -3705,7 +3707,7 @@ declare interface DescribeProjectSecurityGroupsResponse {
 }
 
 declare interface DescribeProxiesRequest {
-  /** 集群ID（该参数必传，例如cynosdbmysql-xxxxxx） */
+  /** 集群 ID（该参数必传，例如 cynosdbmysql-2u2mh111）。 */
   ClusterId?: string;
   /** 返回数量，默认为 20，最大值为 100 */
   Limit?: number;

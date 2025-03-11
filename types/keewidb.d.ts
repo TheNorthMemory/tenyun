@@ -165,7 +165,7 @@ declare interface InstanceInfo {
   /** 客户端最大连接数可设置的最大值。 */
   ClientLimitMax?: number;
   /** 实例的节点详细信息。 */
-  NodeSet?: NodeInfo[] | null;
+  NodeSet?: NodeInfo[];
   /** 实例所在的地域信息，比如ap-guangzhou。 */
   Region?: string;
   /** 实例内存容量，单位：GB。KeeWiDB 内存容量 */
