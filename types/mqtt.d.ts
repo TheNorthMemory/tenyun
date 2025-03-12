@@ -9,29 +9,29 @@ declare interface AuthorizationPolicyItem {
   /** 集群ID */
   InstanceId?: string;
   /** 规则名 */
-  PolicyName?: string | null;
+  PolicyName?: string;
   /** 规则语法版本 */
-  Version?: number | null;
+  Version?: number;
   /** 越小越优先 */
-  Priority?: number | null;
+  Priority?: number;
   /** allow/deny */
-  Effect?: string | null;
+  Effect?: string;
   /** connect、pub、sub */
-  Actions?: string | null;
+  Actions?: string;
   /** 资源 */
-  Resources?: string | null;
+  Resources?: string;
   /** client */
-  ClientId?: string | null;
+  ClientId?: string;
   /** 用户 */
-  Username?: string | null;
+  Username?: string;
   /** IP地址 */
-  Ip?: string | null;
+  Ip?: string;
   /** 0，1，2 */
-  Qos?: string | null;
+  Qos?: string;
   /** 1：表示匹配retain消息2：表示匹配非retain消息3：表示匹配retain和非retain消息 */
-  Retain?: number | null;
+  Retain?: number;
   /** 描述 */
-  Remark?: string | null;
+  Remark?: string;
   /** 1713164969433 */
   CreatedTime?: number;
   /** 1713164969433 */
@@ -41,9 +41,17 @@ declare interface AuthorizationPolicyItem {
 /** 策略规则优先级 */
 declare interface AuthorizationPolicyPriority {
   /** 策略id */
-  Id: number | null;
+  Id: number;
   /** 优先级 */
-  Priority: number | null;
+  Priority: number;
+}
+
+/** HTTP 认证器body */
+declare interface BodyItem {
+  /** body key */
+  Key: string;
+  /** body key */
+  Value: string;
 }
 
 /** CA证书信息 */
@@ -59,27 +67,27 @@ declare interface CaCertificateItem {
   /** 验证证书内容 */
   VerificationCertificate?: string;
   /** ca状态 */
-  Status?: string | null;
+  Status?: string;
   /** 上次激活时间 */
-  LastActivationTime?: number | null;
+  LastActivationTime?: number;
   /** 创建时间 */
-  CreatedTime?: number | null;
+  CreatedTime?: number;
   /** 预销毁时间 */
-  UpdateTime?: number | null;
+  UpdateTime?: number;
   /** 上次去激活时间 */
-  LastInactivationTime?: number | null;
+  LastInactivationTime?: number;
   /** Ca证书颁发者CN */
-  CaIssuerCn?: string | null;
+  CaIssuerCn?: string;
   /** 生效时间 */
-  NotBeforeTime?: number | null;
+  NotBeforeTime?: number;
   /** 失效时间 */
-  NotAfterTime?: number | null;
+  NotAfterTime?: number;
 }
 
 /** 设备证书信息 */
 declare interface DeviceCertificateItem {
   /** 客户端id */
-  ClientId?: string | null;
+  ClientId?: string;
   /** 设备证书 */
   DeviceCertificate?: string;
   /** 设备证书Sn */
@@ -92,20 +100,22 @@ declare interface DeviceCertificateItem {
   Format?: string;
   /** 证书状态 ACTIVE,//激活 INACTIVE,//未激活 REVOKED,//吊销 PENDING_ACTIVATION,//注册待激活 */
   Status?: string;
+  /** 组织单位 */
+  OrganizationalUnit?: string;
   /** 上次激活时间 */
-  LastActivationTime?: number | null;
+  LastActivationTime?: number;
   /** 上次取消激活时间 */
-  LastInactivationTime?: number | null;
+  LastInactivationTime?: number;
   /** 创建时间 */
   CreatedTime?: number;
   /** 预销毁时间 */
-  UpdateTime?: number | null;
+  UpdateTime?: number;
   /** 证书来源：API, 手动注册 JITP 自动注册 */
-  CertificateSource?: string | null;
+  CertificateSource?: string;
   /** 证书失效日期 */
-  NotAfterTime?: number | null;
+  NotAfterTime?: number;
   /** 证书生效开始日期 */
-  NotBeforeTime?: number | null;
+  NotBeforeTime?: number;
 }
 
 /** 查询过滤器 */
@@ -116,6 +126,14 @@ declare interface Filter {
   Values: string[];
 }
 
+/** HTTP 认证器header */
+declare interface HeaderItem {
+  /** header key */
+  Key: string;
+  /** header value */
+  Value: string;
+}
+
 /** IP规则 */
 declare interface IpRule {
   /** IP地址 */
@@ -123,43 +141,43 @@ declare interface IpRule {
   /** 是否允许放行 */
   Allow: boolean;
   /** 备注信息 */
-  Remark: string | null;
+  Remark: string;
 }
 
 /** MQTT认证器信息 */
 declare interface MQTTAuthenticatorItem {
   /** 认证器类型: JWT：JWT认证器 JWKS：JWKS认证器 BYOC：一端一证认证器 */
-  Type?: string | null;
+  Type?: string;
   /** 认证器配置 */
-  Config?: string | null;
+  Config?: string;
   /** 认证器状态 */
-  Status?: string | null;
+  Status?: string;
   /** 创建时间 */
-  CreateTime?: number | null;
+  CreateTime?: number;
   /** 说明 */
-  Remark?: string | null;
+  Remark?: string;
 }
 
 /** MQTT客户端信息 */
 declare interface MQTTClientInfo {
   /** 客户端唯一标识 */
-  ClientId?: string | null;
+  ClientId?: string;
   /** 客户端网络地址 */
-  ClientAddress?: string | null;
+  ClientAddress?: string;
   /** MQTT 协议版本，4 表示 MQTT 3.1.1 */
-  ProtocolVersion?: number | null;
+  ProtocolVersion?: number;
   /** 保持连接时间，单位：秒 */
-  Keepalive?: number | null;
+  Keepalive?: number;
   /** 连接状态，CONNECTED 已连接，DISCONNECTED 未连接 */
-  ConnectionStatus?: string | null;
+  ConnectionStatus?: string;
   /** 客户端创建时间 */
-  CreateTime?: number | null;
+  CreateTime?: number;
   /** 上次建立连接时间 */
-  ConnectTime?: number | null;
+  ConnectTime?: number;
   /** 上次断开连接时间，仅对持久会话（cleanSession=false）并且客户端当前未连接时有意义 */
-  DisconnectTime?: number | null;
+  DisconnectTime?: number;
   /** 客户端的订阅列表 */
-  MQTTClientSubscriptions?: MQTTClientSubscription[] | null;
+  MQTTClientSubscriptions?: MQTTClientSubscription[];
 }
 
 /** MQTT 订阅关系 */
@@ -177,19 +195,19 @@ declare interface MQTTClientSubscription {
 /** MQTTEndpoint */
 declare interface MQTTEndpointItem {
   /** 类型 */
-  Type?: string | null;
+  Type?: string;
   /** 接入点 */
-  Url?: string | null;
+  Url?: string;
   /** vpc信息 */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 子网信息 */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 主机 */
-  Host?: string | null;
+  Host?: string;
   /** 端口 */
-  Port?: number | null;
+  Port?: number;
   /** 接入点ip */
-  Ip?: string | null;
+  Ip?: string;
 }
 
 /** MQTT 实例信息 */
@@ -207,55 +225,55 @@ declare interface MQTTInstanceItem {
   /** 实例主题数上限 */
   TopicNumLimit?: number;
   /** 备注信息 */
-  Remark?: string | null;
+  Remark?: string;
   /** 主题数量 */
   TopicNum?: number;
   /** 商品规格 */
   SkuCode?: string;
   /** 弹性TPS限流值 */
-  TpsLimit?: number | null;
+  TpsLimit?: number;
   /** 创建时间 */
-  CreateTime?: number | null;
+  CreateTime?: number;
   /** 单客户端最大订阅数量 */
-  MaxSubscriptionPerClient?: number | null;
+  MaxSubscriptionPerClient?: number;
   /** 客户端连接数上线 */
-  ClientNumLimit?: number | null;
+  ClientNumLimit?: number;
   /** 是否自动续费 */
-  RenewFlag?: number | null;
+  RenewFlag?: number;
   /** 计费模式， POSTPAID，按量计费 PREPAID，包年包月 */
-  PayMode?: string | null;
+  PayMode?: string;
   /** 到期时间，秒为单位 */
-  ExpiryTime?: number | null;
+  ExpiryTime?: number;
   /** 预销毁时间 */
-  DestroyTime?: number | null;
+  DestroyTime?: number;
   /** 授权规则条数限制 */
-  AuthorizationPolicyLimit?: number | null;
+  AuthorizationPolicyLimit?: number;
   /** 最大ca配额 */
-  MaxCaNum?: number | null;
+  MaxCaNum?: number;
   /** 最大订阅数 */
-  MaxSubscription?: number | null;
+  MaxSubscription?: number;
 }
 
 /** 消息记录 */
 declare interface MQTTMessageItem {
   /** 消息ID */
-  MsgId?: string | null;
+  MsgId?: string;
   /** 消息tag */
-  Tags?: string | null;
+  Tags?: string;
   /** 消息key */
-  Keys?: string | null;
+  Keys?: string;
   /** 客户端地址 */
-  ProducerAddr?: string | null;
+  ProducerAddr?: string;
   /** 消息发送时间 */
-  ProduceTime?: string | null;
+  ProduceTime?: string;
   /** 死信重发次数 */
-  DeadLetterResendTimes?: number | null;
+  DeadLetterResendTimes?: number;
   /** 死信重发成功次数 */
-  DeadLetterResendSuccessTimes?: number | null;
+  DeadLetterResendSuccessTimes?: number;
   /** 子topic */
-  SubTopic?: string | null;
+  SubTopic?: string;
   /** 消息质量等级 */
-  Qos?: string | null;
+  Qos?: string;
 }
 
 /** MQTT 主题详情 */
@@ -265,7 +283,7 @@ declare interface MQTTTopicItem {
   /** 主题名称 */
   Topic?: string;
   /** 主题描述 */
-  Remark?: string | null;
+  Remark?: string;
 }
 
 /** MQTT集群用户信息 */
@@ -291,47 +309,47 @@ declare interface PriceTag {
   /** 计费项标签 */
   Code?: string;
   /** 步长 */
-  Step?: number | null;
+  Step?: number;
 }
 
 /** MQTT ProductSkuItem */
 declare interface ProductSkuItem {
   /** 规格类型BASIC：基础版PRO ：专业版 */
-  InstanceType?: string | null;
+  InstanceType?: string;
   /** 规格代码 */
-  SkuCode?: string | null;
+  SkuCode?: string;
   /** 是否售卖 */
-  OnSale?: boolean | null;
+  OnSale?: boolean;
   /** topic num限制 */
-  TopicNumLimit?: number | null;
+  TopicNumLimit?: number;
   /** tps */
-  TpsLimit?: number | null;
+  TpsLimit?: number;
   /** 客户端连接数 */
-  ClientNumLimit?: number | null;
+  ClientNumLimit?: number;
   /** 单客户端最大订阅数 */
-  MaxSubscriptionPerClient?: number | null;
+  MaxSubscriptionPerClient?: number;
   /** 授权规则条数 */
-  AuthorizationPolicyLimit?: number | null;
+  AuthorizationPolicyLimit?: number;
   /** 计费项信息 */
-  PriceTags?: PriceTag[] | null;
+  PriceTags?: PriceTag[];
 }
 
 /** 公网访问安全规则 */
 declare interface PublicAccessRule {
   /** ip网段信息 */
-  IpRule: string | null;
+  IpRule: string;
   /** 允许或者拒绝 */
-  Allow: boolean | null;
+  Allow: boolean;
   /** 备注信息 */
-  Remark?: string | null;
+  Remark?: string;
 }
 
 /** 标签数据 */
 declare interface Tag {
   /** 标签名称 */
-  TagKey: string | null;
+  TagKey: string;
   /** 标签值 */
-  TagValue: string | null;
+  TagValue: string;
 }
 
 /** 标签过滤器 */
@@ -418,6 +436,34 @@ declare interface CreateAuthorizationPolicyRequest {
 }
 
 declare interface CreateAuthorizationPolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateHttpAuthenticatorRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** jwks端点 */
+  Endpoint: string;
+  /** 最大并发连接数，默认8，范围：1-20 */
+  Concurrency?: number;
+  /** 网络请求方法 Get 或 Post，默认post */
+  Method?: string;
+  /** 认证器是否开启：open-启用；close-关闭 */
+  Status?: string;
+  /** 说明 */
+  Remark?: string;
+  /** 连接超时时间，单位：秒，范围：1-30 */
+  ConnectTimeout?: number;
+  /** 请求超时时间，单位：秒，范围：1-30 */
+  ReadTimeout?: number;
+  /** 转发请求header */
+  Header?: HeaderItem[];
+  /** 转发请求body */
+  Body?: BodyItem[];
+}
+
+declare interface CreateHttpAuthenticatorResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -719,7 +765,7 @@ declare interface DescribeCaCertificateResponse {
   /** 证书格式 */
   Format?: string;
   /** Ca证书颁发者CN */
-  CaIssuerCn?: string | null;
+  CaIssuerCn?: string;
   /** 生效开始时间 */
   NotBeforeTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -785,11 +831,13 @@ declare interface DescribeDeviceCertificateResponse {
   /** 证书格式 */
   Format?: string;
   /** 客户端id */
-  ClientId?: string | null;
+  ClientId?: string;
   /** API, 手动注册 JITP 自动注册 */
   CertificateSource?: string;
   /** 证书生效开始时间 */
   NotBeforeTime?: number;
+  /** 组织单位 */
+  OrganizationalUnit?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -861,7 +909,7 @@ declare interface DescribeInstanceListRequest {
 
 declare interface DescribeInstanceListResponse {
   /** 查询总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 实例列表 */
   Data?: MQTTInstanceItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -943,9 +991,9 @@ declare interface DescribeMessageListRequest {
 
 declare interface DescribeMessageListResponse {
   /** 查询总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 消息记录列表 */
-  Data?: MQTTMessageItem[] | null;
+  Data?: MQTTMessageItem[];
   /** 请求任务id */
   TaskRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -957,9 +1005,9 @@ declare interface DescribeProductSKUListRequest {
 
 declare interface DescribeProductSKUListResponse {
   /** 查询总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** mqtt商品配置信息 */
-  MQTTProductSkuList?: ProductSkuItem[] | null;
+  MQTTProductSkuList?: ProductSkuItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -991,7 +1039,7 @@ declare interface DescribeTopicListRequest {
 
 declare interface DescribeTopicListResponse {
   /** 查询总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 主题列表 */
   Data?: MQTTTopicItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1031,7 +1079,7 @@ declare interface DescribeUserListRequest {
 
 declare interface DescribeUserListResponse {
   /** 查询总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 角色信息列表 */
   Data?: MQTTUserItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1070,6 +1118,34 @@ declare interface ModifyAuthorizationPolicyRequest {
 }
 
 declare interface ModifyAuthorizationPolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyHttpAuthenticatorRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 端点 */
+  Endpoint?: string;
+  /** 认证器状态：open-启用；close-关闭 */
+  Status?: string;
+  /** 最大并发连接数，默认8，范围：1-20 */
+  Concurrency?: number;
+  /** 连接超时时间，单位：秒，范围：1-30 */
+  ConnectTimeout?: number;
+  /** 请求超时时间，单位：秒，范围：1-30 */
+  ReadTimeout?: number;
+  /** 说明 */
+  Remark?: string;
+  /** 请求方法，GET 或者 POST */
+  Method?: string;
+  /** 请求header */
+  Header?: HeaderItem[];
+  /** 请求body */
+  Body?: BodyItem[];
+}
+
+declare interface ModifyHttpAuthenticatorResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1295,6 +1371,8 @@ declare interface Mqtt {
   ApplyRegistrationCode(data: ApplyRegistrationCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyRegistrationCodeResponse>;
   /** 创建授权策略 {@link CreateAuthorizationPolicyRequest} {@link CreateAuthorizationPolicyResponse} */
   CreateAuthorizationPolicy(data: CreateAuthorizationPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuthorizationPolicyResponse>;
+  /** 创建一个MQTTHTTP认证器 {@link CreateHttpAuthenticatorRequest} {@link CreateHttpAuthenticatorResponse} */
+  CreateHttpAuthenticator(data: CreateHttpAuthenticatorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHttpAuthenticatorResponse>;
   /** 为MQTT实例创建公网接入点 {@link CreateInsPublicEndpointRequest} {@link CreateInsPublicEndpointResponse} */
   CreateInsPublicEndpoint(data: CreateInsPublicEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInsPublicEndpointResponse>;
   /** 购买MQTT实例 {@link CreateInstanceRequest} {@link CreateInstanceResponse} */
@@ -1363,6 +1441,8 @@ declare interface Mqtt {
   DescribeUserList(data: DescribeUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserListResponse>;
   /** 修改授权策略 {@link ModifyAuthorizationPolicyRequest} {@link ModifyAuthorizationPolicyResponse} */
   ModifyAuthorizationPolicy(data: ModifyAuthorizationPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuthorizationPolicyResponse>;
+  /** 修改MQTTHTTP认证器 {@link ModifyHttpAuthenticatorRequest} {@link ModifyHttpAuthenticatorResponse} */
+  ModifyHttpAuthenticator(data: ModifyHttpAuthenticatorRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHttpAuthenticatorResponse>;
   /** 更新MQTT实例公网接入点 {@link ModifyInsPublicEndpointRequest} {@link ModifyInsPublicEndpointResponse} */
   ModifyInsPublicEndpoint(data: ModifyInsPublicEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInsPublicEndpointResponse>;
   /** 修改MQTT实例属性 {@link ModifyInstanceRequest} {@link ModifyInstanceResponse} */

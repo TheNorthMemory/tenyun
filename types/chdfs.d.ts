@@ -357,17 +357,17 @@ declare interface DescribeFileSystemResponse {
   /** 文件系统 */
   FileSystem?: FileSystem;
   /** 文件系统已使用容量（byte） */
-  CapacityUsed?: number | null;
+  CapacityUsed?: number;
   /** 已使用COS归档存储容量（byte） */
-  ArchiveCapacityUsed?: number | null;
+  ArchiveCapacityUsed?: number;
   /** 已使用COS标准存储容量（byte） */
-  StandardCapacityUsed?: number | null;
+  StandardCapacityUsed?: number;
   /** 已使用COS低频存储容量（byte） */
-  DegradeCapacityUsed?: number | null;
+  DegradeCapacityUsed?: number;
   /** 已使用COS深度归档存储容量（byte） */
-  DeepArchiveCapacityUsed?: number | null;
+  DeepArchiveCapacityUsed?: number;
   /** 已使用COS智能分层存储容量（byte） */
-  IntelligentCapacityUsed?: number | null;
+  IntelligentCapacityUsed?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

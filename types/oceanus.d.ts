@@ -560,6 +560,10 @@ declare interface JobV1 {
   RunningCpu?: number | null;
   /** 使用内存数量 */
   RunningMem?: number | null;
+  /** 是否开了默认告警 */
+  OpenJobDefaultAlarm?: number | null;
+  /** 操作中描述 */
+  ProgressDesc?: string | null;
 }
 
 /** 日志查询的每行日志信息 */
@@ -1027,9 +1031,11 @@ declare interface TreeJobSets {
   /** 0:代表没开启调优任务，1:开启智能调优，2:代表定时调优 */
   ScalingType?: number | null;
   /** RunningCpu */
-  RunningCpu?: number;
+  RunningCpu?: number | null;
   /** RunningMem */
-  RunningMem?: number;
+  RunningMem?: number | null;
+  /** sql */
+  DecodeSqlCode?: string | null;
 }
 
 /** 树状结构资源对象 */
@@ -1263,6 +1269,8 @@ declare interface CreateJobRequest {
   Tags?: Tag[];
   /** 作业描述 */
   Description?: string;
+  /** 开启默认告警 */
+  OpenJobDefaultAlarm?: number;
 }
 
 declare interface CreateJobResponse {

@@ -1321,7 +1321,7 @@ declare interface CreateCCPrecisionPolicyRequest {
   Protocol: string;
   /** 域名 */
   Domain: string;
-  /** 策略方式，可取值alg表示验证码，drop表示丢弃 */
+  /** 策略方式，可取值alg表示验证码，drop表示丢弃，trans表示放行 */
   PolicyAction: string;
   /** 策略记录 */
   PolicyList: CCPrecisionPlyRecord[];

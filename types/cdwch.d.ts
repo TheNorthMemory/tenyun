@@ -705,7 +705,7 @@ declare interface DescribeInstanceKeyValConfigsResponse {
 declare interface DescribeInstanceNodesRequest {
   /** 集群实例ID */
   InstanceId: string;
-  /** 集群角色类型，默认为 "data"数据节点 */
+  /** 集群角色类型，“DATA” 为数据节点、“COMMON” 为 ZooKeeper 节点，默认为 "DATA" 数据节点。 */
   NodeRole?: string;
   /** 分页参数，第一页为0，第二页为10 */
   Offset?: number;
@@ -719,9 +719,9 @@ declare interface DescribeInstanceNodesRequest {
 
 declare interface DescribeInstanceNodesResponse {
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例节点总数 */
-  InstanceNodesList: InstanceNode[] | null;
+  InstanceNodesList?: InstanceNode[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
