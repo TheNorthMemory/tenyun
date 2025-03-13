@@ -143,7 +143,7 @@ declare interface RumProject {
   /** 日志接入点，用户忽略。 */
   AccessPoint?: string;
   /** kafka旁路配置信息 */
-  Kafka?: Kafka;
+  Kafka?: Kafka | null;
 }
 
 /** rum 日志对象 */

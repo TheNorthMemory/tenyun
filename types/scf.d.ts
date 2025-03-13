@@ -150,6 +150,8 @@ declare interface DomainInfo {
   CertConfig?: CertConf;
   /** web 应用防火墙配置 */
   WafConfig?: WafConf;
+  /** 标签 */
+  Tags?: Tag[];
 }
 
 /** 公网访问固定ip配置 */
@@ -700,6 +702,8 @@ declare interface TriggerInfo {
   TriggerAttribute?: string;
   /** 客户自定义触发器描述 */
   Description?: string | null;
+  /** 与此触发器关联的资源。目前仅函数URL关联的自定义域名会返回 */
+  BoundResources?: string;
 }
 
 /** 已使用的信息 */
@@ -837,6 +841,8 @@ declare interface CreateCustomDomainRequest {
   CertConfig?: CertConf;
   /** web 应用防火墙配置 */
   WafConfig?: WafConf;
+  /** 标签 */
+  Tags?: Tag[];
 }
 
 declare interface CreateCustomDomainResponse {
@@ -1144,6 +1150,8 @@ declare interface GetCustomDomainResponse {
   CertConfig?: CertConf;
   /** web 应用防火墙配置 */
   WafConfig?: WafConf;
+  /** 标签 */
+  Tags?: Tag[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -117,23 +117,23 @@ declare interface DataSourceQueryOption {
 /** 删除文档出参 */
 declare interface DeleteKnowledgeDocumentSetRsp {
   /** 删除文档数量。 */
-  AffectedCount?: number | null;
+  AffectedCount?: number;
 }
 
 /** 上传知识库文档返回结果 */
 declare interface DescribeKnowledgeDocumentSetDetailRsp {
   /** 获取的数量。 */
-  Count?: number | null;
+  Count?: number;
   /** 文档信息 */
-  DocumentSet?: KnowledgeDocumentSet | null;
+  DocumentSet?: KnowledgeDocumentSet;
 }
 
 /** 删除文档出参 */
 declare interface DescribeKnowledgeDocumentSetListRsp {
   /** 文件集 */
-  DocumentSets?: QureyKnowledgeDocumentSet[] | null;
+  DocumentSets?: QureyKnowledgeDocumentSet[];
   /** 条数 */
-  Count?: number | null;
+  Count?: number;
 }
 
 /** 删除文档时查询入参 */
@@ -149,59 +149,59 @@ declare interface DocumentQuery {
 /** 文档信息 */
 declare interface KnowledgeDocumentSet {
   /** 文档id */
-  DocumentSetId?: string | null;
+  DocumentSetId?: string;
   /** 文档名 */
-  DocumentSetName?: string | null;
+  DocumentSetName?: string;
   /** 文件完整内容。 */
-  Text?: string | null;
+  Text?: string;
   /** 文件内容前 200个字符。 */
-  TextPrefix?: string | null;
+  TextPrefix?: string;
   /** 文件详情 */
-  DocumentSetInfo?: KnowledgeDocumentSetInfo | null;
+  DocumentSetInfo?: KnowledgeDocumentSetInfo;
   /** 文件拆分信息 */
-  SplitterPreprocess?: KnowledgeSplitterPreprocess | null;
+  SplitterPreprocess?: KnowledgeSplitterPreprocess;
   /** 未使用 */
-  Name?: string | null;
+  Name?: string;
   /** 文档标题 */
-  FileTitle?: string | null;
+  FileTitle?: string;
   /** 文档元信息，必须为jsonstring */
-  FileMetaData?: string | null;
+  FileMetaData?: string;
   /** 作者 */
-  Author?: string | null;
+  Author?: string;
 }
 
 /** 文档信息 */
 declare interface KnowledgeDocumentSetInfo {
   /** 文件的字符数。 */
-  TextLength?: number | null;
+  TextLength?: number;
   /** 文件的字节数。 */
-  ByteLength?: number | null;
+  ByteLength?: number;
   /** 文件被预处理、Embedding 向量化的进度。 */
-  IndexedProgress?: number | null;
+  IndexedProgress?: number;
   /** 文件预处理、Embedding 向量化的状态。New：等待解析。Loading：文件解析中。Failure：文件解析、写入出错。Ready：文件解析、写入完成。 */
-  IndexedStatus?: string | null;
+  IndexedStatus?: string;
   /** 文件创建时间。 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 文件最后更新时间。 */
-  LastUpdateTime?: string | null;
+  LastUpdateTime?: string;
   /** 文件关键字。 */
-  Keywords?: string | null;
+  Keywords?: string;
 }
 
 /** 知识库信息 */
 declare interface KnowledgeSet {
   /** 知识库标识 */
-  Name?: string | null;
+  Name?: string;
   /** 知识库名称 */
-  Title?: string | null;
+  Title?: string;
   /** 描述 */
-  Desc?: string | null;
+  Desc?: string;
   /** 状态，NOT_ENABLED未启用ENABLED 已启用 */
-  Active?: string | null;
+  Active?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 知识库的meta信息 */
   Meta?: string;
 }
@@ -209,17 +209,17 @@ declare interface KnowledgeSet {
 /** 查询知识库列表返回 */
 declare interface KnowledgeSetRsp {
   /** 总数 */
-  Total?: number | null;
+  Total?: number;
   /** 知识库列表 */
-  KnowledgeSets?: KnowledgeSet[] | null;
+  KnowledgeSets?: KnowledgeSet[];
 }
 
 /** 文件拆分信息 */
 declare interface KnowledgeSplitterPreprocess {
   /** 在对文件拆分时，配置是否将 Title 追加到切分后的段落后面一并 Embedding。取值如下所示：false：不追加。true：将段落 Title 追加到切分后的段落。 */
-  AppendTitleToChunk?: boolean | null;
+  AppendTitleToChunk?: boolean;
   /** 在对文件拆分时，配置是否将关键字 keywords 追加到切分后的段落一并 Embedding。取值如下所示：false：不追加。true：将全文的 keywords 追加到切分后的段落。 */
-  AppendKeywordsToChunk?: boolean | null;
+  AppendKeywordsToChunk?: boolean;
 }
 
 /** 查询条件 */
@@ -241,43 +241,43 @@ declare interface PageQuery {
 /** 搜索数据的集合 */
 declare interface QureyKnowledgeDocumentSet {
   /** 文件id */
-  DocumentSetId?: string | null;
+  DocumentSetId?: string;
   /** 文件名 */
-  DocumentSetName?: string | null;
+  DocumentSetName?: string;
   /** 文件内容前 200个字符。 */
-  TextPrefix?: string | null;
+  TextPrefix?: string;
   /** 文件拆分信息 */
-  SplitterPreprocess?: KnowledgeSplitterPreprocess | null;
+  SplitterPreprocess?: KnowledgeSplitterPreprocess;
   /** 文件详情 */
-  DocumentSetInfo?: QureyKnowledgeDocumentSetInfo | null;
+  DocumentSetInfo?: QureyKnowledgeDocumentSetInfo;
   /** 文件标题 */
-  FileTitle?: string | null;
+  FileTitle?: string;
   /** 文件元信息，必须为jsonstring */
-  FileMetaData?: string | null;
+  FileMetaData?: string;
   /** name */
-  Name?: string | null;
+  Name?: string;
   /** 作者 */
-  Author?: string | null;
+  Author?: string;
 }
 
 /** 查询文件集合信息详情 */
 declare interface QureyKnowledgeDocumentSetInfo {
   /** 文件的字符数。 */
-  TextLength?: number | null;
+  TextLength?: number;
   /** 文件的字节数。 */
-  ByteLength?: number | null;
+  ByteLength?: number;
   /** 文件被预处理、Embedding 向量化的进度。 */
-  IndexedProgress?: number | null;
+  IndexedProgress?: number;
   /** 文件预处理、Embedding 向量化的状态。New：等待解析。Loading：文件解析中。Failure：文件解析、写入出错。Ready：文件解析、写入完成。 */
-  IndexedStatus?: string | null;
+  IndexedStatus?: string;
   /** 错误信息 */
-  IndexedErrorMsg?: string | null;
+  IndexedErrorMsg?: string;
   /** 文件创建时间。 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 文件最后更新时间。 */
-  LastUpdateTime?: string | null;
+  LastUpdateTime?: string;
   /** 文件关键字。 */
-  Keywords?: string | null;
+  Keywords?: string;
 }
 
 /** 数据源关联的的信息 */
@@ -327,13 +327,13 @@ declare interface TicketAuthInfo {
 /** 上传知识库文档返回结果 */
 declare interface UploadKnowledgeDocumentSetRsp {
   /** 给文件分配的 ID 信息。 */
-  DocumentSetId?: string | null;
+  DocumentSetId?: string;
   /** 文件名 */
-  DocumentSetName?: string | null;
+  DocumentSetName?: string;
   /** 文件标题 */
-  FileTitle?: string | null;
+  FileTitle?: string;
   /** 文件元信息，为jsonstring */
-  FileMetaData?: string | null;
+  FileMetaData?: string;
 }
 
 declare interface CreateKnowledgeSetRequest {

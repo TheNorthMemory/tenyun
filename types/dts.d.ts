@@ -37,11 +37,11 @@ declare interface CheckStep {
 /** 校验任务运行详情 */
 declare interface CheckStepInfo {
   /** 任务开始时间 */
-  StartAt: string | null;
+  StartAt?: string;
   /** 任务结束时间 */
-  EndAt: string | null;
+  EndAt?: string;
   /** 任务步骤信息 */
-  Progress: ProcessProgress | null;
+  Progress?: ProcessProgress;
 }
 
 /** 数据同步中的列信息 */
@@ -87,7 +87,7 @@ declare interface CompareAbstractInfo {
 /** 列选项 */
 declare interface CompareColumnItem {
   /** 列名 */
-  ColumnName?: string | null;
+  ColumnName?: string;
 }
 
 /** 一致性校验详细信息 */
@@ -107,27 +107,27 @@ declare interface CompareDetailInfo {
 /** 一致性对比对象配置 */
 declare interface CompareObject {
   /** 对象模式 整实例-all,部分对象-partial */
-  ObjectMode: string | null;
+  ObjectMode: string;
   /** 对象列表 */
-  ObjectItems?: CompareObjectItem[] | null;
+  ObjectItems?: CompareObjectItem[];
   /** 高级对象类型，目前只支持mongodb链路。如index(索引),shardkey(片键),schema(库表) */
-  AdvancedObjects?: string[] | null;
+  AdvancedObjects?: string[];
 }
 
 /** 一致性校验库表对象 */
 declare interface CompareObjectItem {
   /** 数据库名 */
-  DbName: string | null;
+  DbName: string;
   /** 数据库选择模式: all 为当前对象下的所有对象,partial 为部分对象 */
-  DbMode: string | null;
+  DbMode: string;
   /** schema名称 */
-  SchemaName?: string | null;
+  SchemaName?: string;
   /** 表选择模式: all 为当前对象下的所有表对象,partial 为部分表对象 */
-  TableMode?: string | null;
+  TableMode?: string;
   /** 用于一致性校验的表配置，当 TableMode 为 partial 时，需要填写 */
-  Tables?: CompareTableItem[] | null;
+  Tables?: CompareTableItem[];
   /** 视图选择模式: all 为当前对象下的所有视图对象,partial 为部分视图对象(一致性校验不校验视图，当前参数未启作用) */
-  ViewMode?: string | null;
+  ViewMode?: string;
   /** 用于一致性校验的视图配置，当 ViewMode 为 partial 时， 需要填写(一致性校验不校验视图，当前参数未启作用) */
   Views?: CompareViewItem[] | null;
 }
@@ -135,29 +135,29 @@ declare interface CompareObjectItem {
 /** 一致性校验选项 */
 declare interface CompareOptions {
   /** 对比方式：dataCheck(完整数据对比)、sampleDataCheck(抽样数据对比)、rowsCount(行数对比), 默认为dataCheck */
-  Method?: string | null;
+  Method?: string;
   /** 抽样比例;范围0,100。默认为100 */
-  SampleRate?: number | null;
+  SampleRate?: number;
   /** 线程数，取值1-5，默认为1 */
-  ThreadCount?: number | null;
+  ThreadCount?: number;
 }
 
 /** 用于一致性校验的表配置 */
 declare interface CompareTableItem {
   /** 表名称 */
-  TableName?: string | null;
+  TableName?: string;
   /** column 模式，all 为全部，partial 表示部分(该参数仅对数据同步任务有效) */
-  ColumnMode?: string | null;
+  ColumnMode?: string;
   /** 当 ColumnMode 为 partial 时必填(该参数仅对数据同步任务有效) */
-  Columns?: CompareColumnItem[] | null;
+  Columns?: CompareColumnItem[];
 }
 
 /** 数据一致性校验结果 */
 declare interface CompareTaskInfo {
   /** 一致性校验任务Id */
-  CompareTaskId: string | null;
+  CompareTaskId?: string;
   /** 一致性校验结果，包括：unstart(未启动)、running(校验中)、canceled(已终止)、failed(校验任务失败)、inconsistent(不一致)、consistent(一致)、notexist(不存在校验任务) */
-  Status: string | null;
+  Status?: string;
 }
 
 /** 一致性校验对象信息 */
@@ -195,7 +195,7 @@ declare interface CompareTaskItem {
 /** 用于一致性校验的视图配置 */
 declare interface CompareViewItem {
   /** 视图名 */
-  ViewName?: string | null;
+  ViewName?: string;
 }
 
 /** 冲突处理里的详细描述 */
@@ -211,119 +211,119 @@ declare interface ConflictHandleOption {
 /** 数据一致性校验选项， 默认为不开启一致性校验 */
 declare interface ConsistencyOption {
   /** 一致性检测类型: full(全量检测迁移对象)、noCheck(不检测)、notConfigured(未配置) */
-  Mode?: string | null;
+  Mode?: string;
 }
 
 /** 实例信息 */
 declare interface DBEndpointInfo {
   /** 实例所在地域 */
-  Region: string | null;
+  Region: string;
   /** 实例网络接入类型，如：extranet(外网)、ipv6(公网ipv6)、cvm(云主机自建)、dcg(专线接入)、vpncloud(vpn接入的实例)、cdb(云数据库)、ccn(云联网)、intranet(自研上云)、vpc(私有网络)等，注意具体可选值依赖当前链路 */
-  AccessType: string | null;
+  AccessType: string;
   /** 实例数据库类型，如：mysql,redis,mongodb,postgresql,mariadb,percona 等 */
-  DatabaseType: string | null;
+  DatabaseType: string;
   /** 节点类型，为空或者simple表示普通节点、cluster表示集群节点；对于mongo业务，取值为replicaset(mongodb副本集)、standalone(mongodb单节点)、cluster(mongodb集群)；对于redis实例，为空或simple(单节点)、cluster(集群)、cluster-cache(cache集群)、cluster-proxy(代理集群) */
-  NodeType: string | null;
+  NodeType: string;
   /** 数据库信息 */
-  Info: DBInfo[] | null;
+  Info: DBInfo[];
   /** 实例服务提供商，如:"aliyun","others" */
-  Supplier?: string | null;
+  Supplier?: string;
   /** MongoDB可定义如下的参数: ['AuthDatabase':'admin', 'AuthFlag': "1",	'AuthMechanism':"SCRAM-SHA-1"] */
-  ExtraAttr?: KeyValuePairOption[] | null;
+  ExtraAttr?: KeyValuePairOption[];
   /** 数据库所属网络环境，AccessType为云联网(ccn)时必填， UserIDC表示用户IDC、TencentVPC表示腾讯云VPC； */
-  DatabaseNetEnv?: string | null;
+  DatabaseNetEnv?: string;
   /** tdsql连接方式：proxy-通过tdsql proxy主机访问各个set节点，注意只有在自研上云的网络环境下才能通过这种方式连接，Info中只需要提供proxy主机信息。set-直连set节点，如选择直连set方式，Info中需要正确填写proxy主机信息及所有set节点信息。源端是tdsqlmysql类型必填。 */
-  ConnectType?: string | null;
+  ConnectType?: string;
 }
 
 /** 数据库信息 */
 declare interface DBInfo {
   /** 表示节点角色，针对分布式数据库，如mongodb中的mongos节点。tdsqlmysql的可选项：proxy表示节点类型为主机，set表示节点类型为节点。proxy类型必须填在数组第一项。tdsqlmysql类型的源/目标配置必填。 */
-  Role?: string | null;
+  Role?: string;
   /** 内核版本，针对mariadb的不同内核版本等 */
-  DbKernel?: string | null;
+  DbKernel?: string;
   /** 实例的IP地址，对于公网、专线、VPN、云联网、自研上云、VPC等接入方式此项必填 */
-  Host?: string | null;
+  Host?: string;
   /** 实例的端口，对于公网、云主机自建、专线、VPN、云联网、自研上云、VPC等接入方式此项必填 */
-  Port?: number | null;
+  Port?: number;
   /** 实例的用户名 */
-  User?: string | null;
+  User?: string;
   /** 实例的密码 */
-  Password?: string | null;
+  Password?: string;
   /** CVM实例短ID，格式如：ins-olgl39y8；与云服务器控制台页面显示的实例ID相同；如果接入类型为云主机自建的方式，此项必填 */
-  CvmInstanceId?: string | null;
+  CvmInstanceId?: string;
   /** VPN网关ID，格式如：vpngw-9ghexg7q；如果接入类型为vpncloud的方式，此项必填 */
-  UniqVpnGwId?: string | null;
+  UniqVpnGwId?: string;
   /** 专线网关ID，格式如：dcg-0rxtqqxb；如果接入类型为专线接入的方式，此项必填 */
-  UniqDcgId?: string | null;
+  UniqDcgId?: string;
   /** 数据库实例ID，格式如：cdb-powiqx8q；如果接入类型为云数据库的方式，此项必填 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 云联网ID，如：ccn-afp6kltc */
-  CcnGwId?: string | null;
+  CcnGwId?: string;
   /** 私有网络ID，格式如：vpc-92jblxto；如果接入类型为vpc、vpncloud、ccn、dcg的方式，此项必填 */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 私有网络下的子网ID，格式如：subnet-3paxmkdz；如果接入类型为vpc、vpncloud、ccn、dcg的方式，此项必填 */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 数据库版本，当实例为RDS实例时才有效，格式如：5.6或者5.7，默认为5.6 */
-  EngineVersion?: string | null;
+  EngineVersion?: string;
   /** 实例所属账号 */
-  Account?: string | null;
+  Account?: string;
   /** 跨账号迁移时的角色,只允许[a-zA-Z0-9\-\_]+ */
-  AccountRole?: string | null;
+  AccountRole?: string;
   /** 资源所属账号 为空或self(表示本账号内资源)、other(表示其他账户资源) */
-  AccountMode?: string | null;
+  AccountMode?: string;
   /** 临时密钥Id，可通过申请扮演角色临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48197，其中角色资源RoleArn的定义可参考DTS跨账号迁移文档(https://cloud.tencent.com/document/product/571/54117)第4节中关于角色的定义。 */
-  TmpSecretId?: string | null;
+  TmpSecretId?: string;
   /** 临时密钥Id，可通过申请扮演角色临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48197，其中角色资源RoleArn的定义可参考DTS跨账号迁移文档(https://cloud.tencent.com/document/product/571/54117)第4节中关于角色的定义。 */
-  TmpSecretKey?: string | null;
+  TmpSecretKey?: string;
   /** 临时密钥Id，可通过申请扮演角色临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48197，其中角色资源RoleArn的定义可参考DTS跨账号迁移文档(https://cloud.tencent.com/document/product/571/54117)第4节中关于角色的定义。 */
-  TmpToken?: string | null;
+  TmpToken?: string;
   /** tdsql的分片id。如节点类型为set必填。 */
-  SetId?: string | null;
+  SetId?: string;
 }
 
 /** 迁移对象信息，在配置库表视图等对象信息时大小写敏感 */
 declare interface DBItem {
   /** 需要迁移或同步的库名，当ObjectMode为partial时，此项必填 */
-  DbName?: string | null;
+  DbName?: string;
   /** 迁移或同步后的库名，默认与源库相同 */
-  NewDbName?: string | null;
+  NewDbName?: string;
   /** 迁移或同步的 schema */
-  SchemaName?: string | null;
+  SchemaName?: string;
   /** 迁移或同步后的 schema name */
-  NewSchemaName?: string | null;
+  NewSchemaName?: string;
   /** DB选择模式: all(为当前对象下的所有对象)，partial(部分对象)，当ObjectMode为partial时，此项必填 */
-  DBMode?: string | null;
+  DBMode?: string;
   /** schema选择模式: all(为当前对象下的所有对象)，partial(部分对象) */
-  SchemaMode?: string | null;
+  SchemaMode?: string;
   /** 表选择模式: all(为当前对象下的所有对象)，partial(部分对象)，当DBMode为partial时此项必填 */
-  TableMode?: string | null;
+  TableMode?: string;
   /** 表图对象集合，当 TableMode 为 partial 时，此项需要填写 */
-  Tables?: TableItem[] | null;
+  Tables?: TableItem[];
   /** 视图选择模式: all 为当前对象下的所有视图对象,partial 为部分视图对象 */
-  ViewMode?: string | null;
+  ViewMode?: string;
   /** 视图对象集合，当 ViewMode 为 partial 时， 此项需要填写 */
-  Views?: ViewItem[] | null;
+  Views?: ViewItem[];
   /** postgresql独有参数，角色选择模式: all 为当前对象下的所有角色对象,partial 为部分角色对象 */
-  RoleMode?: string | null;
+  RoleMode?: string;
   /** postgresql独有参数，当 RoleMode 为 partial 时， 此项需要填写 */
-  Roles?: RoleItem[] | null;
+  Roles?: RoleItem[];
   /** 选择要同步的模式，partial为部分，all为整选 */
-  FunctionMode?: string | null;
+  FunctionMode?: string;
   /** 选择要同步的模式，partial为部分，all为整选 */
-  TriggerMode?: string | null;
+  TriggerMode?: string;
   /** 选择要同步的模式，partial为部分，all为整选 */
-  EventMode?: string | null;
+  EventMode?: string;
   /** 选择要同步的模式，partial为部分，all为整选 */
-  ProcedureMode?: string | null;
+  ProcedureMode?: string;
   /** FunctionMode取值为partial时需要填写 */
-  Functions?: string[] | null;
+  Functions?: string[];
   /** ProcedureMode取值为partial时需要填写 */
-  Procedures?: string[] | null;
+  Procedures?: string[];
   /** EventMode取值为partial时需要填写 */
-  Events?: string[] | null;
+  Events?: string[];
   /** TriggerMode取值为partial时需要填写 */
-  Triggers?: string[] | null;
+  Triggers?: string[];
 }
 
 /** 需要同步的库表对象 */
@@ -367,9 +367,9 @@ declare interface Database {
 /** 迁移对象选项，需要告知迁移服务迁移哪些库表对象 */
 declare interface DatabaseTableObject {
   /** 迁移对象类型 all(全实例)，partial(部分对象) */
-  ObjectMode: string | null;
+  ObjectMode: string;
   /** 迁移对象，当 ObjectMode 为 partial 时，不为空 */
-  Databases?: DBItem[] | null;
+  Databases?: DBItem[];
   /** 高级对象类型，如trigger、function、procedure、event。注意：如果要迁移同步高级对象，此配置中应该包含对应的高级对象类型 */
   AdvancedObjects?: string[] | null;
 }
@@ -479,11 +479,11 @@ declare interface DifferenceRowDetail {
 /** 订阅任务的kafka分区规则。符合库名和表名正则表达式的数据将按照RuleType计算该条数据将被投递的kafka分区。如果配置了多个规则，将按照配置的顺序，第一条命中的规则生效。 */
 declare interface DistributeRule {
   /** 规则类型。非mongo产品的枚举值为: table-按表名分区，pk-按表名+主键分区，cols-按列名分区。mongo的枚举值为：collection-按集合名分区、collectionAndObjectId-按集合+主键分区。 */
-  RuleType: string | null;
+  RuleType: string;
   /** 库名匹配规则，请填写正则表达式 */
-  DbPattern: string | null;
+  DbPattern: string;
   /** 表名匹配规则，如果 DatabaseType 为 mongodb，则匹配集合名 */
-  TablePattern: string | null;
+  TablePattern: string;
   /** 列名。如果 RuleType 为 cols，此项必填。订阅任务会用该列的值计算分区。mongo没有按列分区，因此也不用传这个字段。 */
   Columns?: string[] | null;
 }
@@ -503,105 +503,105 @@ declare interface DynamicOptions {
 /** 数据同步中的描述源端和目的端的信息 */
 declare interface Endpoint {
   /** 地域英文名，如：ap-guangzhou */
-  Region?: string | null;
+  Region?: string;
   /** 节点类型，proxy表示节点类型为主机，set表示节点类型为节点。proxy类型必须填在数组第一项。tdsqlmysql类型的源/目标配置必填 */
-  Role?: string | null;
+  Role?: string;
   /** 数据库内核类型，tdsql中用于区分不同内核：percona,mariadb,mysql。注意TDSQL-C MySQL、TDSQL PostgreSQL无需填写此项值。 */
-  DbKernel?: string | null;
+  DbKernel?: string;
   /** 数据库实例ID，格式如：cdb-powiqx8q */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 实例的IP地址，接入类型为非cdb时此项必填 */
-  Ip?: string | null;
+  Ip?: string;
   /** 实例端口，接入类型为非cdb时此项必填 */
-  Port?: number | null;
+  Port?: number;
   /** 用户名，对于访问需要用户名密码认证的实例必填 */
-  User?: string | null;
+  User?: string;
   /** 密码，对于访问需要用户名密码认证的实例必填 */
-  Password?: string | null;
+  Password?: string;
   /** 数据库名，数据库为cdwpg时，需要提供 */
-  DbName?: string | null;
+  DbName?: string;
   /** 私有网络ID，对于私有网络、专线、VPN的接入方式此项必填，格式如：vpc-92jblxto */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 私有网络下的子网ID，对于私有网络、专线、VPN的接入方式此项必填，格式如：subnet-3paxmkdz */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** CVM实例短ID，格式如：ins-olgl39y8，与云服务器控制台页面显示的实例ID相同。如果是CVM自建实例，需要传递此字段 */
-  CvmInstanceId?: string | null;
+  CvmInstanceId?: string;
   /** 专线网关ID，对于专线接入类型此项必填，格式如：dcg-0rxtqqxb */
-  UniqDcgId?: string | null;
+  UniqDcgId?: string;
   /** VPN网关ID，对于vpn接入类型此项必填，格式如：vpngw-9ghexg7q */
-  UniqVpnGwId?: string | null;
+  UniqVpnGwId?: string;
   /** 云联网ID，对于云联网接入类型此项必填，如：ccn-afp6kltc */
-  CcnId?: string | null;
+  CcnId?: string;
   /** 云厂商类型，当实例为RDS实例时，填写为aliyun, 其他情况均填写others，默认为others */
-  Supplier?: string | null;
+  Supplier?: string;
   /** 数据库版本，当实例为RDS实例时才有效，其他实例忽略，格式如：5.6或者5.7，默认为5.6 */
-  EngineVersion?: string | null;
+  EngineVersion?: string;
   /** 实例所属账号，如果为跨账号实例此项必填 */
-  Account?: string | null;
+  Account?: string;
   /** 资源所属账号 为空或self(表示本账号内资源)、other(表示跨账号资源) */
-  AccountMode?: string | null;
+  AccountMode?: string;
   /** 跨账号同步时的角色，只允许[a-zA-Z0-9\-\_]+，如果为跨账号实例此项必填 */
-  AccountRole?: string | null;
+  AccountRole?: string;
   /** 外部角色id */
-  RoleExternalId?: string | null;
+  RoleExternalId?: string;
   /** 临时密钥Id，可通过申请扮演角色临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48197，其中角色资源RoleArn的定义可参考DTS跨账号同步文档(https://cloud.tencent.com/document/product/571/68729)第4节中关于角色的定义。 */
-  TmpSecretId?: string | null;
+  TmpSecretId?: string;
   /** 临时密钥Id，可通过申请扮演角色临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48197，其中角色资源RoleArn的定义可参考DTS跨账号同步文档(https://cloud.tencent.com/document/product/571/68729)第4节中关于角色的定义。 */
-  TmpSecretKey?: string | null;
+  TmpSecretKey?: string;
   /** 临时密钥Id，可通过申请扮演角色临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48197，其中角色资源RoleArn的定义可参考DTS跨账号同步文档(https://cloud.tencent.com/document/product/571/68729)第4节中关于角色的定义。 */
-  TmpToken?: string | null;
+  TmpToken?: string;
   /** 是否走加密传输、UnEncrypted表示不走加密传输，Encrypted表示走加密传输，默认UnEncrypted */
-  EncryptConn?: string | null;
+  EncryptConn?: string;
   /** 数据库所属网络环境，AccessType为云联网(ccn)时必填， UserIDC表示用户IDC、TencentVPC表示腾讯云VPC； */
-  DatabaseNetEnv?: string | null;
+  DatabaseNetEnv?: string;
   /** 数据库为跨账号云联网下的实例时、表示云联网所属主账号 */
-  CcnOwnerUin?: string | null;
+  CcnOwnerUin?: string;
   /** 数据库为cynos、且是cynos集群内的一个子数据库实例时、该参数为该子实例的ID */
-  ChildInstanceId?: string | null;
+  ChildInstanceId?: string;
   /** 数据库为cynos、且是cynos集群内的一个子数据库实例时、该参数为该子实例的类型、例如：只读实例传ro、读写实例传rw */
-  ChildInstanceType?: string | null;
+  ChildInstanceType?: string;
   /** tdsql的分片id。如节点类型为set必填。 */
-  SetId?: string | null;
+  SetId?: string;
 }
 
 /** 数据订阅的实例节点信息 */
 declare interface EndpointItem {
   /** 源库所在地域。如果 AccessType 为 ccn，请填vpc所在地域，因为此时不知道源库在哪个地域。其他接入方式，请填订阅任务所在地域，因为确保订阅任务与源库在同一地域是最优的网络方案。 */
-  DatabaseRegion: string | null;
+  DatabaseRegion: string;
   /** 用户名 */
-  User: string | null;
+  User: string;
   /** 密码。作为入参时必填，作为出参时为空。 */
-  Password: string | null;
+  Password: string;
   /** 目标实例ID。如果 AccessType 为 cdb，此项必填。配置InstanceId时会查询并校验实例信息。mysql的查询接口经过了鉴权，请确保子用户有 cdb:DescribeDBInstances 的接口权限。 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 云主机ID。如果 AccessType 为 cvm，此项必填。 */
-  CvmInstanceId?: string | null;
+  CvmInstanceId?: string;
   /** 专线网关ID。如果 AccessType 为 dcg，此项必填。 */
-  UniqDcgId?: string | null;
+  UniqDcgId?: string;
   /** 云联网ID。如果 AccessType 为 ccn，此项必填。 */
-  CcnId?: string | null;
+  CcnId?: string;
   /** vpn网关ID。如果 AccessType 为 vpncloud，此项必填。 */
-  UniqVpnGwId?: string | null;
+  UniqVpnGwId?: string;
   /** VpcID。如果 AccessType 为 dcg\ccn\vpncloud\vpc，此项必填。 */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 子网ID。如果 AccessType 为 dcg\ccn\vpncloud\vpc，此项必填。 */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 数据库地址，支持域名与IP。如果 AccessType 为 dcg\ccn\vpncloud\vpc\extranet\intranet，此项必填。 */
-  HostName?: string | null;
+  HostName?: string;
   /** 数据库端口。如果 AccessType 为 dcg\ccn\vpncloud\vpc\extranet\intranet\cvm，此项必填。 */
-  Port?: number | null;
+  Port?: number;
   /** 是否走加密传输，枚举值：UnEncrypted-不加密，Encrypted-加密。只有mysql支持，不填默认不加密，其他产品不填。 */
-  EncryptConn?: string | null;
+  EncryptConn?: string;
   /** 数据库网络环境。如果 AccessType 为 ccn 此项必填。枚举值：UserIDC-自建idc，TencentVPC-腾讯云，Aws-aws，AliYun-阿里云，Others-其他。 */
-  DatabaseNetEnv?: string | null;
+  DatabaseNetEnv?: string;
   /** 云联网网关所属的主账号uin、跨账号云联网需要。 */
-  CcnOwnerUin?: string | null;
+  CcnOwnerUin?: string;
   /** 为业务添加的额外信息。参数名作key，参数值作value。 tdpg必填参数：PgDatabase-订阅的库名；mongo选填参数：InstanceType-实例类型：replicaset-副本集，cluster-分片集，主要用于控制台跳转到mongo实例页面，如不填不影响任务运行；全业务选填参数：EngineVersion-内核版本。 */
-  ExtraAttr?: KeyValuePairOption[] | null;
+  ExtraAttr?: KeyValuePairOption[];
   /** 数据库为cynos、且是cynos集群内的一个子数据库实例时、该参数为该子实例的ID */
-  ChildInstanceId?: string | null;
+  ChildInstanceId?: string;
   /** 数据库为cynos、且是cynos集群内的一个子数据库实例时、该参数为该子实例的类型、例如：只读实例传ro、读写实例传rw */
-  ChildInstanceType?: string | null;
+  ChildInstanceType?: string;
 }
 
 /** 错误信息及其解决方案 */
@@ -609,21 +609,21 @@ declare interface ErrInfo {
   /** 错误原因 */
   Reason?: string;
   /** 错误信息 */
-  Message?: string | null;
+  Message?: string;
   /** 解决方案 */
-  Solution?: string | null;
+  Solution?: string;
 }
 
 /** 任务错误信息 */
 declare interface ErrorInfoItem {
   /** 错误码 */
-  Code?: string | null;
+  Code?: string;
   /** 解决方案 */
-  Solution?: string | null;
+  Solution?: string;
   /** 错误日志信息 */
-  ErrorLog?: string | null;
+  ErrorLog?: string;
   /** 文档提示 */
-  HelpDoc?: string | null;
+  HelpDoc?: string;
 }
 
 /** kafka消费者组详情 */
@@ -633,7 +633,7 @@ declare interface GroupInfo {
   /** 消费者组名称 */
   ConsumerGroupName?: string;
   /** 消费者组备注 */
-  Description?: string | null;
+  Description?: string;
   /** 消费组偏移量。该字段是为了兼容以前单Partition的情况，取值为最后一个分区的偏移量。各分区的偏移量详见StateOfPartition字段 */
   ConsumerGroupOffset?: number;
   /** 消费组未消费的数据量。该字段是为了兼容以前单Partition的情况，取值为最后一个分区未消费的数据量。各分区未消费数据量详见StateOfPartition字段 */
@@ -649,7 +649,7 @@ declare interface GroupInfo {
   /** 消费者组状态，包括Dead、Empty、Stable等，只有Dead和Empty两种状态可以执行reset操作 */
   ConsumerGroupState?: string;
   /** 每个消费者正在消费的分区 */
-  PartitionAssignment?: PartitionAssignment[] | null;
+  PartitionAssignment?: PartitionAssignment[];
 }
 
 /** 迁移任务列表 */
@@ -709,77 +709,77 @@ declare interface KafkaOption {
 /** 存放配置时的额外信息 */
 declare interface KeyValuePairOption {
   /** 选项key */
-  Key?: string | null;
+  Key?: string;
   /** 选项value */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 任务操作信息，包含迁移任务的所有操作列表，及迁移任务在当前状态下允许的操作列表 */
 declare interface MigrateAction {
   /** 任务的所有操作列表 */
-  AllAction: string[] | null;
+  AllAction?: string[];
   /** 任务在当前状态下允许的操作列表 */
-  AllowedAction: string[] | null;
+  AllowedAction?: string[];
 }
 
 /** 查询迁移实例列表的实例对象 */
 declare interface MigrateDBItem {
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例名称 */
-  InstanceName: string;
+  InstanceName?: string;
   /** 实例Vip */
-  Vip: string;
+  Vip?: string;
   /** 实例Vport */
-  Vport: number;
+  Vport?: number;
   /** 是否可以作为迁移对象，1-可以，0-不可以 */
-  Usable: number;
+  Usable?: number;
   /** 不可以作为迁移对象的原因 */
-  Hint: string;
+  Hint?: string;
 }
 
 /** 迁移执行过程信息 */
 declare interface MigrateDetailInfo {
   /** 总步骤数 */
-  StepAll?: number | null;
+  StepAll?: number;
   /** 当前步骤 */
-  StepNow?: number | null;
+  StepNow?: number;
   /** 主从差距，MB；只在任务正常，迁移或者同步的最后一步（追Binlog的阶段才有校），如果是非法值，返回-1 */
-  MasterSlaveDistance?: number | null;
+  MasterSlaveDistance?: number;
   /** 主从差距，秒；只在任务正常，迁移或者同步的最后一步（追Binlog的阶段才有校），如果是非法值，返回-1 */
-  SecondsBehindMaster?: number | null;
+  SecondsBehindMaster?: number;
   /** 步骤信息 */
-  StepInfo?: StepDetailInfo[] | null;
+  StepInfo?: StepDetailInfo[];
 }
 
 /** 迁移选项，描述任务如何执行迁移等一系列配置信息 */
 declare interface MigrateOption {
   /** 迁移对象选项，需要告知迁移服务迁移哪些库表对象 */
-  DatabaseTable: DatabaseTableObject | null;
+  DatabaseTable: DatabaseTableObject;
   /** 迁移类型，full(全量迁移)，structure(结构迁移)，fullAndIncrement(全量加增量迁移)， 默认为fullAndIncrement;注意redis,keewidb产品只支持fullAndIncrement类型。 */
-  MigrateType?: string | null;
+  MigrateType?: string;
   /** 数据一致性校验选项， 默认为不开启一致性校验 */
-  Consistency?: ConsistencyOption | null;
+  Consistency?: ConsistencyOption;
   /** 是否迁移账号，true(迁移账号)，false(不迁移账号) */
-  IsMigrateAccount?: boolean | null;
+  IsMigrateAccount?: boolean;
   /** 是否用源库Root账户覆盖目标库，值包括：false-不覆盖，true-覆盖，选择库表或者结构迁移时应该为false，注意只对旧版迁移有效 */
-  IsOverrideRoot?: boolean | null;
+  IsOverrideRoot?: boolean;
   /** 是否在迁移时设置目标库只读(仅对mysql有效)，true(设置只读)、false(不设置只读，默认此值) */
-  IsDstReadOnly?: boolean | null;
+  IsDstReadOnly?: boolean;
   /** 其他附加信息，对于特定库可设置额外参数，Redis可定义如下的参数: ["DstWriteMode":normal, 目标库写入模式,可取值clearData(清空目标实例数据)、overwrite(以覆盖写的方式执行任务)、normal(跟正常流程一样，不做额外动作) "IsDstReadOnly":true, 是否在迁移时设置目标库只读,true(设置只读)、false(不设置只读) "ClientOutputBufferHardLimit":512, 从机缓冲区的硬性容量限制(MB) "ClientOutputBufferSoftLimit":512, 从机缓冲区的软性容量限制(MB) "ClientOutputBufferPersistTime":60, 从机缓冲区的软性限制持续时间(秒) "ReplBacklogSize":512, 环形缓冲区容量限制(MB) "ReplTimeout":120， 复制超时时间(秒) "IsExpireKey":"true",过期key自动淘汰] */
-  ExtraAttr?: KeyValuePairOption[] | null;
+  ExtraAttr?: KeyValuePairOption[];
   /** pgsql迁移分类：logical(逻辑迁移)、physical(物理迁移) */
-  MigrateWay?: string | null;
+  MigrateWay?: string;
 }
 
 /** 数据数据订阅的对象，用于修改订阅对象接口。与SubscribeObject结构类似，只是类型和参数名不同。 */
 declare interface ModifiedSubscribeObject {
   /** 订阅对象的类型，枚举值为：0-库，1-表(该值对于mongo任务来说，是集合) 。注意：mongo只支持全实例、单库或者单集合订阅，因此该字段不要与SubscribeObjectType冲突。如：SubscribeObjectType=4，表示mongo单库订阅，那么该字段应该传0。 */
-  ObjectsType: number | null;
+  ObjectsType: number;
   /** 订阅数据库的名称 */
-  DatabaseName: string | null;
+  DatabaseName: string;
   /** 订阅数据库中表(或集合)的名称。如果 ObjectsType 为 1，那么此字段为必填，且不为空； */
-  TableNames?: string[] | null;
+  TableNames?: string[];
 }
 
 /** kafka消费者组的分区详情 */
@@ -809,9 +809,9 @@ declare interface Objects {
 /** 数据订阅kafka分区中checkpoint信息 */
 declare interface OffsetTimeMap {
   /** kafka分区编号 */
-  PartitionNo?: number | null;
+  PartitionNo?: number;
   /** kafka offset */
-  Offset?: number | null;
+  Offset?: number;
 }
 
 /** OnlineDDL类型 */
@@ -861,69 +861,69 @@ declare interface PartitionAssignment {
 /** mongo输出聚合设置。输出默认 Change Event */
 declare interface PipelineInfo {
   /** 聚合运算符：$addFields、$match、$project、$replaceRoot、$redact、$replaceWith、$set、$unset。其中 $replaceWith、$set、$unset 只有当订阅实例是4.2及以上版本可选。 */
-  AggOp?: string | null;
+  AggOp?: string;
   /** 聚合表达式。必须是json格式 */
-  AggCmd?: string | null;
+  AggCmd?: string;
 }
 
 /** 任务步骤信息 */
 declare interface ProcessProgress {
   /** 步骤的状态， 包括：notStarted(未开始)、running(运行中)、success(成功)、failed(失败)等 */
-  Status?: string | null;
+  Status?: string;
   /** 进度信息 */
-  Percent?: number | null;
+  Percent?: number;
   /** 总的步骤数 */
-  StepAll?: number | null;
+  StepAll?: number;
   /** 当前进行的步骤 */
-  StepNow?: number | null;
+  StepNow?: number;
   /** 当前步骤输出提示信息 */
-  Message?: string | null;
+  Message?: string;
   /** 步骤信息 */
-  Steps?: StepDetailInfo[] | null;
+  Steps?: StepDetailInfo[];
 }
 
 /** 错误信息及告警信息对象 */
 declare interface ProcessStepTip {
   /** 提示信息 */
-  Message?: string | null;
+  Message?: string;
   /** 解决方案 */
-  Solution?: string | null;
+  Solution?: string;
   /** 文档提示 */
-  HelpDoc?: string | null;
+  HelpDoc?: string;
 }
 
 /** 迁移和同步任务限速的详细信息 */
 declare interface RateLimitOption {
   /** 当前生效的全量导出线程数，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为16 */
-  CurrentDumpThread: number | null;
+  CurrentDumpThread: number;
   /** 默认的全量导出线程数，该字段仅在出参有意义 */
-  DefaultDumpThread: number | null;
+  DefaultDumpThread: number;
   /** 当前生效的全量导出Rps，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为50000000 */
-  CurrentDumpRps: number | null;
+  CurrentDumpRps: number;
   /** 默认的全量导出Rps，该字段仅在出参有意义 */
-  DefaultDumpRps: number | null;
+  DefaultDumpRps: number;
   /** 当前生效的全量导入线程数，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为16 */
-  CurrentLoadThread: number | null;
+  CurrentLoadThread: number;
   /** 默认的全量导入线程数，该字段仅在出参有意义 */
-  DefaultLoadThread: number | null;
+  DefaultLoadThread: number;
   /** 当前生效的全量导入Rps，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为50000000 */
-  CurrentLoadRps: number | null;
+  CurrentLoadRps: number;
   /** 默认的全量导入Rps，该字段仅在出参有意义 */
-  DefaultLoadRps: number | null;
+  DefaultLoadRps: number;
   /** 当前生效的增量导入线程数，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为128 */
-  CurrentSinkerThread: number | null;
+  CurrentSinkerThread: number;
   /** 默认的增量导入线程数，该字段仅在出参有意义 */
-  DefaultSinkerThread: number | null;
+  DefaultSinkerThread: number;
   /** enum:"no"/"yes"、no表示用户未设置过限速、yes表示设置过限速，该字段仅在出参有意义 */
-  HasUserSetRateLimit: string | null;
+  HasUserSetRateLimit: string;
 }
 
 /** 角色对象，postgresql独有参数 */
 declare interface RoleItem {
   /** 角色名称 */
-  RoleName?: string | null;
+  RoleName?: string;
   /** 迁移后的角色名称 */
-  NewRoleName?: string | null;
+  NewRoleName?: string;
 }
 
 /** mongodb行校验不一致详细信息 */
@@ -959,23 +959,23 @@ declare interface SkippedItem {
 /** 步骤信息 */
 declare interface StepDetailInfo {
   /** 步骤序列 */
-  StepNo?: number | null;
+  StepNo?: number;
   /** 步骤展现名称 */
-  StepName?: string | null;
+  StepName?: string;
   /** 步骤英文标识 */
-  StepId?: string | null;
+  StepId?: string;
   /** 步骤状态:success(成功)、failed(失败)、running(执行中)、notStarted(未执行)、默认为notStarted */
-  Status?: string | null;
+  Status?: string;
   /** 当前步骤开始的时间，格式为"yyyy-mm-dd hh:mm:ss"，该字段不存在或者为空是无意义 */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 步骤错误信息 */
-  StepMessage?: string | null;
+  StepMessage?: string;
   /** 执行进度 */
-  Percent?: number | null;
+  Percent?: number;
   /** 错误信息 */
-  Errors?: ProcessStepTip[] | null;
+  Errors?: ProcessStepTip[];
   /** 告警提示 */
-  Warnings?: ProcessStepTip[] | null;
+  Warnings?: ProcessStepTip[];
 }
 
 /** 单个步骤的详细信息 */
@@ -1025,27 +1025,27 @@ declare interface SubsErr {
 /** 订阅校验任务的各步骤信息。 */
 declare interface SubscribeCheckStepInfo {
   /** 步骤名称 */
-  StepName?: string | null;
+  StepName?: string;
   /** 步骤Id */
-  StepId?: string | null;
+  StepId?: string;
   /** 步骤编号，从 1 开始 */
-  StepNo?: number | null;
+  StepNo?: number;
   /** 当前步骤状态，可能值为 notStarted,running,finished,failed */
-  Status?: string | null;
+  Status?: string;
   /** 当前步骤进度 */
-  Percent?: number | null;
+  Percent?: number;
   /** 错误提示 */
-  Errors?: SubscribeCheckStepTip[] | null;
+  Errors?: SubscribeCheckStepTip[];
   /** 告警提示 */
-  Warnings?: SubscribeCheckStepTip[] | null;
+  Warnings?: SubscribeCheckStepTip[];
 }
 
 /** 订阅校验任务的提示信息 */
 declare interface SubscribeCheckStepTip {
   /** 错误或告警的详细信息 */
-  Message?: string | null;
+  Message?: string;
   /** 帮助文档 */
-  HelpDoc?: string | null;
+  HelpDoc?: string;
 }
 
 /** 订阅实例信息 */
@@ -1055,27 +1055,27 @@ declare interface SubscribeInfo {
   /** 数据订阅实例的名称 */
   SubscribeName?: string;
   /** 订阅实例发送数据的kafka topic */
-  Topic?: string | null;
+  Topic?: string;
   /** 订阅实例的类型，目前支持 cynosdbmysql,mariadb,mongodb,mysql,percona,tdpg,tdsqlpercona(tdsqlmysql) */
   Product?: string;
   /** 订阅的数据库实例ID（如果订阅的是云数据库）如果实例不是腾讯云上的，此值为空。 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 云数据库状态：running 运行中，isolated 已隔离，offline 已下线。如果不是云上，此值为空 */
-  InstanceStatus?: string | null;
+  InstanceStatus?: string;
   /** 数据订阅生命周期状态，可能的值为：正常 normal, 隔离中 isolating, 已隔离 isolated, 下线中 offlining, 按量转包年包月中 post2PrePayIng */
   Status?: string;
   /** 数据订阅状态，可能的值为：未启动 notStarted, 校验中 checking, 校验不通过 checkNotPass, 校验通过 checkPass, 启动中 starting, 运行中 running, 异常出错 error */
   SubsStatus?: string;
   /** 上次修改时间，时间格式如：Y-m-d h:m:s */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
   /** 创建时间，时间格式如：Y-m-d h:m:s */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 隔离时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00 */
-  IsolateTime?: string | null;
+  IsolateTime?: string;
   /** 包年包月任务的到期时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00 */
-  ExpireTime?: string | null;
+  ExpireTime?: string;
   /** 下线时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00 */
-  OfflineTime?: string | null;
+  OfflineTime?: string;
   /** 计费方式，0 - 包年包月，1 - 按量计费 */
   PayType?: number;
   /** 自动续费标识。只有当 PayType=0，该值才有意义。枚举值：0-不自动续费，1-自动续费 */
@@ -1083,11 +1083,11 @@ declare interface SubscribeInfo {
   /** 数据订阅实例所属地域 */
   Region?: string;
   /** 接入方式。枚举值：extranet(公网) vpncloud(vpn接入) dcg(专线接入) ccn(云联网) cdb(云数据库) cvm(云主机自建) intranet(自研上云) vpc(私有网络vpc) */
-  AccessType?: string | null;
+  AccessType?: string;
   /** 数据库节点信息 */
-  Endpoints?: EndpointItem[] | null;
+  Endpoints?: EndpointItem[];
   /** 数据订阅版本, 当前只支持 kafka 版本。 */
-  SubscribeVersion?: string | null;
+  SubscribeVersion?: string;
   /** 标签 */
   Tags?: TagItem[] | null;
   /** 任务报错信息，如果有的话。 */
@@ -1097,19 +1097,19 @@ declare interface SubscribeInfo {
 /** 订阅的kafka分区数和分区规则。mariadb，percona，tdsqlmysql，tdpg不支持自定义分区，所以DistributeRules和DefaultRuleType可以不填，但是NumberOfPartitions是必填。 */
 declare interface SubscribeKafkaConfig {
   /** kafka分区数量，枚举值为1，4，8 */
-  NumberOfPartitions: number | null;
+  NumberOfPartitions: number;
   /** 分区规则。当NumberOfPartitions > 1时，该项必填。 */
-  DistributeRules?: DistributeRule[] | null;
+  DistributeRules?: DistributeRule[];
   /** 默认分区策略。当NumberOfPartitions > 1时，该项必填。不满足DistributeRules中正则表达式的数据，将按照默认分区策略计算分区。非mongo产品的枚举值为: table-按表名分区，pk-按表名+主键分区。mongo的枚举值为：collection-按集合名分区。该字段与DistributeRules搭配使用，如果配置了该字段，视为配置了一条DistributeRules。 */
-  DefaultRuleType?: string | null;
+  DefaultRuleType?: string;
 }
 
 /** 订阅的数据库表信息，用于配置和查询订阅任务接口。 */
 declare interface SubscribeObject {
   /** 订阅数据的类型，枚举值：database-数据库，table-数据库的表(如果 DatabaseType 为 mongodb，则表示集合) */
-  ObjectType: string | null;
+  ObjectType: string;
   /** 订阅的数据库名称 */
-  Database: string | null;
+  Database: string;
   /** 订阅数据库中表的名称。如果 DatabaseType 为 mongodb，填集合名。mongodb只支持订阅单库或者单集合。 */
   Tables?: string[] | null;
 }
@@ -1117,11 +1117,11 @@ declare interface SubscribeObject {
 /** 数据同步配置多节点数据库的节点信息。多节点数据库，如tdsqlmysql使用该结构；单节点数据库，如mysql使用Endpoint。 */
 declare interface SyncDBEndpointInfos {
   /** 数据库所在地域 */
-  Region: string | null;
+  Region: string;
   /** 实例网络接入类型，如：extranet(外网)、ipv6(公网ipv6)、cvm(云主机自建)、dcg(专线接入)、vpncloud(vpn接入的实例)、cdb(云数据库)、ccn(云联网)、intranet(自研上云)、vpc(私有网络)等，注意具体可选值依赖当前链路 */
-  AccessType: string | null;
+  AccessType: string;
   /** 实例数据库类型，如：mysql,redis,mongodb,postgresql,mariadb,percona 等 */
-  DatabaseType: string | null;
+  DatabaseType: string;
   /** 数据库信息。注意：如果数据库类型为tdsqlmysql，此处Endpoint数组的顺序应满足规则：proxy节点放在set节点之前。如果SrcConnectType选择proxy接入则只需要填写proxy节点即可。如果选择set接入，数组中第一个set节点必须是shardkey范围起始为0的分片 */
   Info: Endpoint[] | null;
 }
@@ -1247,13 +1247,13 @@ declare interface Table {
 /** 表对象集合，当 TableMode 为 partial 时，此项需要填写 */
 declare interface TableItem {
   /** 迁移的表名，大小写敏感 */
-  TableName?: string | null;
+  TableName?: string;
   /** 迁移后的表名，当TableEditMode为rename时此项必填，注意此配置与TmpTables互斥，只能使用其中一种 */
-  NewTableName?: string | null;
+  NewTableName?: string;
   /** 迁移临时表，注意此配置与NewTableName互斥，只能使用其中一种。当配置的同步对象为表级别且TableEditMode为pt时此项有意义，针对pt-osc等工具在迁移过程中产生的临时表进行同步，需要提前将可能的临时表配置在这里，否则不会同步任何临时表。示例，如要对t1进行pt-osc操作，此项配置应该为["\_t1\_new","\_t1\_old"]；如要对t1进行gh-ost操作，此项配置应该为["\_t1\_ghc","\_t1\_gho","\_t1\_del"]，pt-osc与gh-ost产生的临时表可同时配置。 */
-  TmpTables?: string[] | null;
+  TmpTables?: string[];
   /** 编辑表类型，rename(表映射)，pt(同步附加表) */
-  TableEditMode?: string | null;
+  TableEditMode?: string;
 }
 
 /** 标签过滤 */
@@ -1267,9 +1267,9 @@ declare interface TagFilter {
 /** 标签 */
 declare interface TagItem {
   /** 标签键 */
-  TagKey?: string | null;
+  TagKey?: string;
   /** 标签值 */
-  TagValue?: string | null;
+  TagValue?: string;
 }
 
 /** 单topic和自定义topic的描述。投递到单topic时，该数组的最后一项会被视为默认分区策略，所有未匹配到的数据都会按该策略投递，默认策略只支持 投递至partition0、按表名、表名+主键三种。 */
@@ -1293,27 +1293,27 @@ declare interface TopicRule {
 /** 计费状态信息 */
 declare interface TradeInfo {
   /** 交易订单号 */
-  DealName?: string | null;
+  DealName?: string;
   /** 上一次交易订单号 */
-  LastDealName?: string | null;
+  LastDealName?: string;
   /** 实例规格，包括：micro、small、medium、large、xlarge、2xlarge等 */
-  InstanceClass?: string | null;
+  InstanceClass?: string;
   /** 计费任务状态， normal(计费或待计费)、resizing(变配中)、reversing(冲正中，比较短暂的状态)、isolating(隔离中，比较短暂的状态)、isolated(已隔离)、offlining(下线中)、offlined(已下线)、notBilled(未计费) */
-  TradeStatus?: string | null;
+  TradeStatus?: string;
   /** 到期时间，格式为"yyyy-mm-dd hh:mm:ss" */
-  ExpireTime?: string | null;
+  ExpireTime?: string;
   /** 下线时间，格式为"yyyy-mm-dd hh:mm:ss" */
-  OfflineTime?: string | null;
+  OfflineTime?: string;
   /** 隔离时间，格式为"yyyy-mm-dd hh:mm:ss" */
-  IsolateTime?: string | null;
+  IsolateTime?: string;
   /** 下线原因 */
-  OfflineReason?: string | null;
+  OfflineReason?: string;
   /** 隔离原因 */
-  IsolateReason?: string | null;
+  IsolateReason?: string;
   /** 付费类型，包括：postpay(后付费)、prepay(预付费) */
-  PayType?: string | null;
+  PayType?: string;
   /** 任务计费类型，包括：billing(计费)、notBilling(不计费)、 promotions(促销活动中) */
-  BillingType?: string | null;
+  BillingType?: string;
 }
 
 /** 数据同步view的描述 */
@@ -1327,9 +1327,9 @@ declare interface View {
 /** 视图对象 */
 declare interface ViewItem {
   /** 视图名称 */
-  ViewName?: string | null;
+  ViewName?: string;
   /** 迁移后的视图名称 */
-  NewViewName?: string | null;
+  NewViewName?: string;
 }
 
 declare interface CompleteMigrateJobRequest {
@@ -2722,7 +2722,7 @@ declare namespace V20180330 {
     /** 步骤状态:0-默认值,1-成功,2-失败,3-执行中,4-未执行 */
     Status?: number;
     /** 当前步骤开始的时间，格式为"yyyy-mm-dd hh:mm:ss"，该字段不存在或者为空是无意义 */
-    StartTime?: string | null;
+    StartTime?: string;
   }
 
   /** 源实例信息 */
@@ -2764,7 +2764,7 @@ declare namespace V20180330 {
   /** 查询订阅配置的错误信息 */
   interface SubsErr {
     /** 错误信息 */
-    Message?: string | null;
+    Message?: string;
   }
 
   /** 订阅实例信息 */
@@ -2796,7 +2796,7 @@ declare namespace V20180330 {
     /** 最近一次修改的消费时间起点，如果从未修改则为零值 */
     ConsumeStartTime?: string;
     /** 自动续费标识。只有当 PayType=0，该值才有意义。枚举值：0-不自动续费，1-自动续费 */
-    AutoRenewFlag?: number | null;
+    AutoRenewFlag?: number;
     /** 数据订阅实例所属地域 */
     Region?: string;
     /** 计费方式，0 - 包年包月，1 - 按量计费 */
@@ -2816,17 +2816,17 @@ declare namespace V20180330 {
     /** 标签 */
     Tags?: TagItem[] | null;
     /** 订阅实例版本；txdts-旧版数据订阅,kafka-kafka版本数据订阅 */
-    SubscribeVersion?: string | null;
+    SubscribeVersion?: string;
   }
 
   /** 数据订阅的对象 */
   interface SubscribeObject {
     /** 数据订阅对象的类型，0-数据库，1-数据库内的表 */
-    ObjectsType: number | null;
+    ObjectsType: number;
     /** 订阅数据库的名称 */
-    DatabaseName: string | null;
+    DatabaseName: string;
     /** 订阅数据库中表名称数组 */
-    TableNames?: string[] | null;
+    TableNames?: string[];
   }
 
   /** 标签过滤 */
@@ -2842,7 +2842,7 @@ declare namespace V20180330 {
     /** 标签键值 */
     TagKey: string;
     /** 标签值 */
-    TagValue?: string | null;
+    TagValue?: string;
   }
 
   interface ActivateSubscribeRequest {

@@ -1454,6 +1454,18 @@ declare interface TemplateInfo {
   Seals?: SealInfo[] | null;
 }
 
+/** 模版对应的合同类型 */
+declare interface TemplateUserFlowType {
+  /** 合同类型id */
+  UserFlowTypeId?: string;
+  /** 合同类型名称 */
+  Name?: string;
+  /** 合同类型的具体描述 */
+  Description?: string;
+  /** 每个合同类型绑定的模版数量 */
+  TemplateNum?: number;
+}
+
 /** 此结构体 (UploadFile) 用于描述多文件上传的文件信息。 */
 declare interface UploadFile {
   /** Base64编码后的文件内容 */
@@ -3355,7 +3367,7 @@ declare interface DescribeFlowTemplatesRequest {
   Agent?: Agent;
   /** 查询内容控制**0**：模板列表及详情（默认）**1**：仅模板列表 */
   ContentType?: number;
-  /** 搜索过滤的条件，本字段允许您通过指定模板 ID 或模板名称来进行查询。模板 ID：Key设置为 template-id ，Values为您想要查询的 模板 ID 列表。 主企业模板 ID：Key设置为 share-template-id ，Values为您想要查询的 主企业模板 ID 列表。用来查询主企业分享模板到子企业场景下，子企业的模板信息，在此情境下，参数 Agent.ProxyOrganizationId（子企业的组织ID）为必填项。 模板名称：Key设置为 template-name ，Values为您想要查询的模板名称列表。 */
+  /** 搜索过滤的条件，本字段允许您通过指定模板 ID 或模板名称来进行查询。模板 ID：Key设置为 template-id ，Values为您想要查询的 模板 ID 列表。 主企业模板 ID：Key设置为 share-template-id ，Values为您想要查询的 主企业模板 ID 列表。用来查询主企业分享模板到子企业场景下，子企业的模板信息，在此情境下，参数 Agent.ProxyOrganizationId（子企业的组织ID）为必填项。 模板名称：Key设置为 template-name ，Values为您想要查询的模板名称列表。模板的用户合同类型：Key设置为 user-flow-type-id ，Values为您想要查询的用户模版类型id列表。 */
   Filters?: Filter[];
   /** 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。注：`1.offset从0开始，即第一页为0。``2.默认从第一页返回。` */
   Offset?: number;
@@ -3632,6 +3644,24 @@ declare interface DescribeUserAutoSignStatusResponse {
   LicenseType?: number;
   /** 用户开通自动签指定使用的印章，为空则未设置印章，需重新进入开通链接设置印章。 */
   SealId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUserFlowTypeRequest {
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+  /** 搜索过滤的条件，本字段允许您通过指定模板 ID 或模板名称来进行查询。模板 ID：Key设置为 template-id ，Values为您想要查询的 模板 ID 列表。 主企业模板 ID：Key设置为 share-template-id ，Values为您想要查询的 主企业模板 ID 列表。用来查询主企业分享模板到子企业场景下，子企业的模板信息，在此情境下，参数 Agent.ProxyOrganizationId（子企业的组织ID）为必填项。 模板名称：Key设置为 template-name ，Values为您想要查询的模板名称列表。模板的用户合同类型：Key设置为 user-flow-type-id ，Values为您想要查询的用户模版类型id列表。 */
+  Filters?: Filter[];
+  /** 查询绑定了模版的用户合同类型 false（默认值），查询用户合同类型 true，查询绑定了模版的用户合同类型 */
+  QueryBindTemplate?: boolean;
+}
+
+declare interface DescribeUserFlowTypeResponse {
+  /** 查询到的所有用户合同类型列表 */
+  AllUserFlowTypes?: TemplateUserFlowType[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4121,6 +4151,8 @@ declare interface Ess {
   DescribeThirdPartyAuthCode(data: DescribeThirdPartyAuthCodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeThirdPartyAuthCodeResponse>;
   /** 获取个人用户自动签的开通状态 {@link DescribeUserAutoSignStatusRequest} {@link DescribeUserAutoSignStatusResponse} */
   DescribeUserAutoSignStatus(data: DescribeUserAutoSignStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserAutoSignStatusResponse>;
+  /** 查询用户模版类型 {@link DescribeUserFlowTypeRequest} {@link DescribeUserFlowTypeResponse} */
+  DescribeUserFlowType(data: DescribeUserFlowTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserFlowTypeResponse>;
   /** 查询用户实名状态 {@link DescribeUserVerifyStatusRequest} {@link DescribeUserVerifyStatusResponse} */
   DescribeUserVerifyStatus(data: DescribeUserVerifyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserVerifyStatusResponse>;
   /** 关闭个人用户自动签功能 {@link DisableUserAutoSignRequest} {@link DisableUserAutoSignResponse} */

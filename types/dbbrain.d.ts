@@ -255,13 +255,13 @@ declare interface HealthScoreInfo {
 /** 实例健康详情。 */
 declare interface HealthStatus {
   /** 健康分数，满分100。 */
-  HealthScore: number;
+  HealthScore?: number;
   /** 健康等级，取值包括："HEALTH" - 健康；"SUB_HEALTH" - 亚健康；"RISK"- 危险；"HIGH_RISK" - 高危。 */
-  HealthLevel: string;
+  HealthLevel?: string;
   /** 总扣分分数。 */
-  ScoreLost: number;
+  ScoreLost?: number;
   /** 扣分详情。 */
-  ScoreDetails: ScoreDetail[] | null;
+  ScoreDetails?: ScoreDetail[];
 }
 
 /** 推荐的索引 */
@@ -391,15 +391,15 @@ declare interface InstanceInfo {
   /** 实例审计日志运行状态：normal： 运行中； paused： 欠费暂停。 */
   AuditRunningStatus?: string;
   /** 内网vip。 */
-  InternalVip?: string | null;
+  InternalVip?: string;
   /** 内网port。 */
-  InternalVport?: number | null;
+  InternalVport?: number;
   /** 创建时间。 */
   CreateTime?: string;
   /** 所属集群ID（仅对集群数据库产品该字段非空，如TDSQL-C）。 */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 所属集群名称（仅对集群数据库产品该字段非空，如TDSQL-C）。 */
-  ClusterName?: string | null;
+  ClusterName?: string;
   /** 自建MySQL的Agent状态，"not_deployed" - 未部署，"deploying" - 部署中，"connected" - 连接正常，"deploy_failed" - 连接失败，"monitoring" - 连接正常，"stopped" - 暂停连接，"connect_failed" - 连接失败，unknown - 未知。 */
   AgentStatus?: string;
   /** 自建MySQL的实例状态，"not_attached" - 未连接，"attached" - 连接正常，"failed" - 连接失败，"stopped" - 停止监控，unknown- 未知。 */
@@ -1073,7 +1073,7 @@ declare interface CreateDBDiagReportTaskRequest {
 
 declare interface CreateDBDiagReportTaskResponse {
   /** 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。 */
-  AsyncRequestId?: number | null;
+  AsyncRequestId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1387,7 +1387,7 @@ declare interface DescribeAuditInstanceListRequest {
 
 declare interface DescribeAuditInstanceListResponse {
   /** 符合条件的实例个数。 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 实例详情。 */
   Items?: AuditInstance[];
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1775,7 +1775,7 @@ declare interface DescribeRedisBigKeyAnalysisTasksRequest {
 
 declare interface DescribeRedisBigKeyAnalysisTasksResponse {
   /** 任务总数。 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 任务列表。 */
   Tasks?: RedisBigKeyTask[];
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -2472,13 +2472,13 @@ declare namespace V20191016 {
   /** 实例健康详情。 */
   interface HealthStatus {
     /** 健康分数，满分100。 */
-    HealthScore: number;
+    HealthScore?: number;
     /** 健康等级，取值包括："HEALTH" - 健康；"SUB_HEALTH" - 亚健康；"RISK"- 危险；"HIGH_RISK" - 高危。 */
-    HealthLevel: string;
+    HealthLevel?: string;
     /** 总扣分分数。 */
-    ScoreLost: number;
+    ScoreLost?: number;
     /** 扣分详情。 */
-    ScoreDetails: ScoreDetail[] | null;
+    ScoreDetails?: ScoreDetail[];
   }
 
   /** 实例基础信息。 */
@@ -2566,15 +2566,15 @@ declare namespace V20191016 {
     /** 实例审计日志运行状态：normal： 运行中； paused： 欠费暂停。 */
     AuditRunningStatus?: string;
     /** 内网vip。 */
-    InternalVip?: string | null;
+    InternalVip?: string;
     /** 内网port。 */
-    InternalVport?: number | null;
+    InternalVport?: number;
     /** 创建时间。 */
     CreateTime?: string;
     /** 所属集群ID（仅对集群数据库产品该字段非空，如TDSQL-C）。 */
-    ClusterId?: string | null;
+    ClusterId?: string;
     /** 所属集群名称（仅对集群数据库产品该字段非空，如TDSQL-C）。 */
-    ClusterName?: string | null;
+    ClusterName?: string;
   }
 
   /** 指标信息。 */
@@ -2896,7 +2896,7 @@ declare namespace V20191016 {
 
   interface CreateDBDiagReportTaskResponse {
     /** 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。 */
-    AsyncRequestId?: number | null;
+    AsyncRequestId?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

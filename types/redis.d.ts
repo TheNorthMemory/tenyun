@@ -3007,7 +3007,7 @@ declare interface SwitchProxyResponse {
 }
 
 declare interface UpgradeInstanceRequest {
-  /** 待变更实例 ID。 */
+  /** 待变更实例 ID。请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
   /** 指实例每个分片内存变更后的大小。单位 MB。每次只能修改参数MemSize、RedisShardNum和RedisReplicasNum其中的一个，不能同时修改。且修改其中一个参数时，其他两个参数需输入实例原有的配置规格。缩容时，缩容后的规格务必要大于等于使用容量的1.3倍，否则将执行失败。 */
   MemSize: number;
@@ -3017,6 +3017,8 @@ declare interface UpgradeInstanceRequest {
   RedisReplicasNum?: number;
   /** 多AZ实例，增加副本时的节点信息，包括副本的 ID 编号及可用区信息。非多AZ实例不需要配置该参数。 */
   NodeSet?: RedisNodeInfo[];
+  /** 切换时间。 - 1：维护时间窗操作：在设置的维护时间窗内执行操作。请通过接口[DescribeMaintenanceWindow](https://cloud.tencent.com/document/product/239/46336)查询设置的维护时间窗时间段。缩副本、扩缩分片、扩内存均支持在维护时间窗执行操作。- 2：立即操作：默认切换时刻。操作将立即执行，无需等待维护时间窗。 */
+  SwitchOption?: number;
 }
 
 declare interface UpgradeInstanceResponse {

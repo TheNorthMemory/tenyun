@@ -1340,6 +1340,20 @@ declare interface TemplateInfo {
   TemplateVersion?: string;
   /** 模板可用状态的取值通常为以下两种：1：启用（默认），表示模板处于启用状态，可以被用户正常使用。2：停用，表示模板处于停用状态，禁止用户使用该模板。 */
   Available?: number;
+  /** 模版的用户合同类型 */
+  UserFlowType?: UserFlowType;
+}
+
+/** 模版对应的合同类型 */
+declare interface TemplateUserFlowType {
+  /** 合同类型id */
+  UserFlowTypeId?: string;
+  /** 用户合同类型名称 */
+  Name?: string;
+  /** 每个合同类型绑定的模版数量 */
+  TemplateNum?: number;
+  /** 合同类型的具体描述 */
+  Description?: string;
 }
 
 /** 此结构体 (UploadFile) 用于描述多文件上传的文件信息。 */
@@ -1364,6 +1378,16 @@ declare interface UsageDetail {
   Cancel?: number;
   /** 消耗渠道 */
   FlowChannel?: string;
+}
+
+/** 用户合同类型信息 */
+declare interface UserFlowType {
+  /** 用户合同类型id */
+  UserFlowTypeId?: string;
+  /** 用户合同类型名称 */
+  Name?: string;
+  /** 用户合同类型的描述信息 */
+  Description?: string;
 }
 
 /** 接口调用的员工信息 */
@@ -3215,6 +3239,8 @@ declare interface DescribeTemplatesRequest {
   WithPdfUrl?: boolean;
   /** 操作者的信息 */
   Operator?: UserInfo;
+  /** 用户合同类型id */
+  UserFlowTypeId?: string;
 }
 
 declare interface DescribeTemplatesResponse {
@@ -3252,6 +3278,22 @@ declare interface DescribeUsageResponse {
   Total?: number;
   /** 用量明细 */
   Details?: UsageDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUserFlowTypeRequest {
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 此接口下面信息必填。 渠道应用标识: Agent.AppId 第三方平台子客企业标识: Agent.ProxyOrganizationOpenId 第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId 第三方平台子客企业和员工必须已经经过实名认证 */
+  Agent: Agent;
+  /** 搜索过滤的条件，本字段允许您通过指定模板 ID 或模板名称来进行查询。 模板的用户合同类型：Key设置为 user-flow-type-id ，Values为您想要查询的用户模版类型id列表。 */
+  Filters?: Filter[];
+  /** 查询绑定了模版的用户合同类型false（默认值），查询用户合同类型true，查询绑定了模版的用户合同类型 */
+  QueryBindTemplate?: boolean;
+}
+
+declare interface DescribeUserFlowTypeResponse {
+  /** 查询到的所有用户合同类型列表 */
+  AllUserFlowTypes?: TemplateUserFlowType[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5119,6 +5161,8 @@ declare interface Essbasic {
   DescribeTemplates(data: DescribeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplatesResponse>;
   /** 合同消耗数量查询 {@link DescribeUsageRequest} {@link DescribeUsageResponse} */
   DescribeUsage(data: DescribeUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsageResponse>;
+  /** 查询用户合同类型 {@link DescribeUserFlowTypeRequest} {@link DescribeUserFlowTypeResponse} */
+  DescribeUserFlowType(data: DescribeUserFlowTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserFlowTypeResponse>;
   /** 获取控制台下载合同页面跳转链接 {@link GetDownloadFlowUrlRequest} {@link GetDownloadFlowUrlResponse} */
   GetDownloadFlowUrl(data: GetDownloadFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<GetDownloadFlowUrlResponse>;
   /** 管理企业扩展服务 {@link ModifyExtendedServiceRequest} {@link ModifyExtendedServiceResponse} */

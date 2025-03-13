@@ -3505,14 +3505,14 @@ declare interface SaveDocRequest {
   FileType: string;
   /** 平台cos路径，与DescribeStorageCredential接口查询UploadPath参数保持一致 */
   CosUrl: string;
-  /** ETag 全称为 Entity Tag，是对象被创建时标识对象内容的信息标签，可用于检查对象的内容是否发生变化 */
+  /** ETag 全称为 Entity Tag，是对象被创建时标识对象内容的信息标签，可用于检查对象的内容是否发生变化 成功上传cos后，从返回头中获取 */
   ETag: string;
-  /** cos_hash x-cos-hash-crc64ecma 头部中的 CRC64编码进行校验上传到云端的文件和本地文件的一致性 */
+  /** cos_hash x-cos-hash-crc64ecma 头部中的 CRC64编码进行校验上传到云端的文件和本地文件的一致性 成功上传cos后，从返回头中获取 */
   CosHash: string;
   /** 文件大小 */
   Size: string;
-  /** 标签适用范围 1：全部，2：按条件范围 */
-  AttrRange: number;
+  /** 标签适用范围，默认填0即可 */
+  AttrRange?: number;
   /** 来源(0 源文件导入 1 网页导入) */
   Source?: number;
   /** 网页(或自定义链接)地址 */
@@ -3527,7 +3527,7 @@ declare interface SaveDocRequest {
   ExpireEnd?: string;
   /** 是否引用链接 */
   IsRefer?: boolean;
-  /** 文档操作类型：1：批量导入（批量导入问答对）；2:文档导入（正常导入单个文档） */
+  /** 文档操作类型：1：批量导入（批量导入问答对）；2:文档导入（正常导入单个文档） 默认为1 请注意，opt=1的时候请从知识引擎页面下载excel模板 */
   Opt?: number;
   /** 分类ID */
   CateBizId?: string;
@@ -3795,7 +3795,7 @@ declare interface Lke {
   RetryRelease(data: RetryReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<RetryReleaseResponse>;
   /** 重排序 {@link RunReRankRequest} {@link RunReRankResponse} */
   RunReRank(data?: RunReRankRequest, config?: AxiosRequestConfig): AxiosPromise<RunReRankResponse>;
-  /** 保存文档 {@link SaveDocRequest} {@link SaveDocResponse} */
+  /** 知识库文档问答保存 {@link SaveDocRequest} {@link SaveDocResponse} */
   SaveDoc(data: SaveDocRequest, config?: AxiosRequestConfig): AxiosPromise<SaveDocResponse>;
   /** 终止文档解析 {@link StopDocParseRequest} {@link StopDocParseResponse} */
   StopDocParse(data: StopDocParseRequest, config?: AxiosRequestConfig): AxiosPromise<StopDocParseResponse>;

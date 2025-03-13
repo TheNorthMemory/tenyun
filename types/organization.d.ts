@@ -2982,6 +2982,22 @@ declare interface UpdateOrganizationMemberResponse {
   RequestId?: string;
 }
 
+declare interface UpdateOrganizationMembersPolicyRequest {
+  /** 成员Uin列表。最多10个 */
+  MemberUins: number[];
+  /** 成员访问策略Id。可通过DescribeOrganizationMemberPolicies获取 */
+  PolicyId: number;
+  /** 成员访问身份ID。可通过ListOrganizationIdentity获取 */
+  IdentityId: number;
+  /** 策略描述。最大长度为128个字符 */
+  Description?: string;
+}
+
+declare interface UpdateOrganizationMembersPolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateOrganizationNodeRequest {
   /** 节点ID。可以通过[DescribeOrganizationNodes](https://cloud.tencent.com/document/product/850/82926)获取 */
   NodeId: number;
@@ -3705,6 +3721,8 @@ declare interface Organization {
   UpdateOrganizationMember(data: UpdateOrganizationMemberRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOrganizationMemberResponse>;
   /** 修改绑定成员邮箱 {@link UpdateOrganizationMemberEmailBindRequest} {@link UpdateOrganizationMemberEmailBindResponse} */
   UpdateOrganizationMemberEmailBind(data: UpdateOrganizationMemberEmailBindRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOrganizationMemberEmailBindResponse>;
+  /** 修改组织成员访问策略 {@link UpdateOrganizationMembersPolicyRequest} {@link UpdateOrganizationMembersPolicyResponse} */
+  UpdateOrganizationMembersPolicy(data: UpdateOrganizationMembersPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOrganizationMembersPolicyResponse>;
   /** 更新企业组织节点 {@link UpdateOrganizationNodeRequest} {@link UpdateOrganizationNodeResponse} */
   UpdateOrganizationNode(data: UpdateOrganizationNodeRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOrganizationNodeResponse>;
   /** 编辑策略 {@link UpdatePolicyRequest} {@link UpdatePolicyResponse} */

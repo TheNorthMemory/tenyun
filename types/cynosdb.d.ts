@@ -4002,6 +4002,8 @@ declare interface ExportInstanceErrorLogsRequest {
 declare interface ExportInstanceErrorLogsResponse {
   /** 错误日志导出内容 */
   ErrorLogItems?: ErrorLogItemExport[] | null;
+  /** 错误日志字符串 */
+  FileContent?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

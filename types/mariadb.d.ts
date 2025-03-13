@@ -1106,6 +1106,8 @@ declare interface DescribeBackupFilesResponse {
   Files?: InstanceBackupFileItem[];
   /** 总条目数 */
   TotalCount?: number;
+  /** 文件下载链接路径前缀 */
+  UrlPrefix?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1131,9 +1133,9 @@ declare interface DescribeBinlogTimeRequest {
 
 declare interface DescribeBinlogTimeResponse {
   /** 开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 结束时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -25,29 +25,29 @@ declare interface Inbound {
 /** 实例信息，用于实例列表 */
 declare interface InstanceInfo {
   /** 实例ID。 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 实例自定义名称。 */
-  Name?: string | null;
+  Name?: string;
   /** 用户APPID。 */
-  AppId?: number | null;
+  AppId?: number;
   /** 地域。 */
-  Region?: string | null;
+  Region?: string;
   /** 可用区。 */
-  Zone?: string | null;
+  Zone?: string;
   /** 产品。 */
-  Product?: string | null;
+  Product?: string;
   /** 网络信息。 */
-  Networks?: Network[] | null;
+  Networks?: Network[];
   /** 分片信息。 */
-  ShardNum?: number | null;
+  ShardNum?: number;
   /** 副本数。 */
-  ReplicaNum?: number | null;
+  ReplicaNum?: number;
   /** CPU. */
-  Cpu?: number | null;
+  Cpu?: number;
   /** 内存。 */
-  Memory?: number | null;
+  Memory?: number;
   /** 磁盘。 */
-  Disk?: number | null;
+  Disk?: number;
   /** 健康得分。 */
   HealthScore?: number | null;
   /** 异常告警。 */
@@ -55,31 +55,31 @@ declare interface InstanceInfo {
   /** 所属项目。 */
   Project?: string | null;
   /** 所属标签。 */
-  ResourceTags?: Tag[] | null;
+  ResourceTags?: Tag[];
   /** 创建时间。 */
-  CreatedAt?: string | null;
+  CreatedAt?: string;
   /** 资源状态。 */
-  Status?: string | null;
+  Status?: string;
   /** 引擎名称。 */
-  EngineName?: string | null;
+  EngineName?: string;
   /** 引擎版本。 */
-  EngineVersion?: string | null;
+  EngineVersion?: string;
   /** api版本 */
-  ApiVersion?: string | null;
+  ApiVersion?: string;
   /** 计费模式。 */
-  PayMode?: number | null;
+  PayMode?: number;
   /** 差异化扩展信息, json格式。 */
-  Extend?: string | null;
+  Extend?: string;
   /** 过期时间。 */
-  ExpiredAt?: string | null;
+  ExpiredAt?: string;
   /** 是否不过期(永久)。 */
-  IsNoExpired?: boolean | null;
+  IsNoExpired?: boolean;
   /** 外网地址。 */
-  WanAddress?: string | null;
+  WanAddress?: string;
   /** 隔离时间 */
-  IsolateAt?: string | null;
+  IsolateAt?: string;
   /** 是否自动续费。0: 不自动续费(可以支持特权不停服)；1:自动续费；2:到期不续费. */
-  AutoRenew?: number | null;
+  AutoRenew?: number;
 }
 
 /** 网络信息 */
@@ -98,10 +98,10 @@ declare interface Network {
   ExpireTime?: string;
 }
 
-/** 实例pod信息，仅包含 pod 名称 */
+/** 实例pod信息， pod 名称 */
 declare interface NodeInfo {
   /** Pod名称。 */
-  Name?: string | null;
+  Name?: string;
 }
 
 /** 安全组出站规则 */
@@ -189,7 +189,7 @@ declare interface DescribeInstanceNodesRequest {
 
 declare interface DescribeInstanceNodesResponse {
   /** 实例pod列表。 */
-  Items?: NodeInfo[] | null;
+  Items?: NodeInfo[];
   /** 查询结果总数量。 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -229,7 +229,7 @@ declare interface DescribeInstancesRequest {
 
 declare interface DescribeInstancesResponse {
   /** 实例列表。 */
-  Items?: InstanceInfo[] | null;
+  Items?: InstanceInfo[];
   /** 实例总数。 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -267,7 +267,7 @@ declare interface Vdb {
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
   /** 查询实例安全组详情 {@link DescribeDBSecurityGroupsRequest} {@link DescribeDBSecurityGroupsResponse} */
   DescribeDBSecurityGroups(data: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
-  /** 实例pod列表（仅返回 pod 名称） {@link DescribeInstanceNodesRequest} {@link DescribeInstanceNodesResponse} */
+  /** 实例pod列表（返回 pod 名称、状态） {@link DescribeInstanceNodesRequest} {@link DescribeInstanceNodesResponse} */
   DescribeInstanceNodes(data: DescribeInstanceNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceNodesResponse>;
   /** 查询实例列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;

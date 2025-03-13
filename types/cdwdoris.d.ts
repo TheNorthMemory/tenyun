@@ -1523,6 +1523,8 @@ declare interface DescribeSlowQueryRecordsDownloadRequest {
   SortField?: string;
   /** 排序方式 */
   SortOrder?: string;
+  /** user */
+  UserName?: string;
 }
 
 declare interface DescribeSlowQueryRecordsDownloadResponse {
@@ -1565,6 +1567,8 @@ declare interface DescribeSlowQueryRecordsRequest {
   SortField?: string;
   /** 排序方式 */
   SortOrder?: string;
+  /** user */
+  UserName?: string;
 }
 
 declare interface DescribeSlowQueryRecordsResponse {

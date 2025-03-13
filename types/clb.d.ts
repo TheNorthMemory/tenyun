@@ -1553,6 +1553,8 @@ declare interface CreateListenerRequest {
   H2cSwitch?: boolean;
   /** TCP_SSL监听器支持关闭SSL后仍然支持混绑，此参数为关闭开关 */
   SslCloseSwitch?: boolean;
+  /** 数据压缩模式 */
+  DataCompressMode?: string;
 }
 
 declare interface CreateListenerResponse {
@@ -1745,6 +1747,8 @@ declare interface DeleteLoadBalancerListenersResponse {
 declare interface DeleteLoadBalancerRequest {
   /** 要删除的负载均衡实例 ID数组，数组大小最大支持20。 */
   LoadBalancerIds: string[];
+  /** 是否强制删除clb。为true表示强制删除，为false表示不是强制删除，需要做拦截校验。 */
+  ForceDelete?: boolean;
 }
 
 declare interface DeleteLoadBalancerResponse {

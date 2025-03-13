@@ -5,13 +5,13 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 付费信息详情 */
 declare interface ChargeAttribute {
   /** 到期时间 */
-  CurDeadline?: string | null;
+  CurDeadline?: string;
   /** 付费方式 */
   PayMode?: string;
   /** 自动付费标识：0:默认未设置 1:自动续费 2 不自动续费 */
-  AutoRenewFlag?: number | null;
+  AutoRenewFlag?: number;
   /** 资源ID */
-  ResourceId?: string | null;
+  ResourceId?: string;
 }
 
 /** 客户侧集群管理节点信息 */
@@ -39,7 +39,7 @@ declare interface ClientNodeAttribute {
   /** cvmId */
   InstanceId?: string;
   /** 自定义挂载点 */
-  MountPoint?: string | null;
+  MountPoint?: string;
 }
 
 /** 查询Client Token */
@@ -141,17 +141,17 @@ declare interface MappedBucket {
   /** 数据流动的自动策略, 包含加载与沉降。策略可以是多种的组合按需加载(OnDemandImport)自动加载元数据(AutoImportMeta)自动加载数据(AutoImportData)周期加载(PeriodImport)周期沉降(PeriodExport)立即沉降(ImmediateExport) */
   DataRepositoryTaskAutoStrategy?: string[];
   /** 绑定bucket的数据流动策略ID */
-  RuleId?: string | null;
+  RuleId?: string;
   /** 规则备注与描述 */
-  RuleDescription?: string | null;
+  RuleDescription?: string;
   /** 桶关联状态 0：关联中 1：关联完成 */
   Status?: number;
   /** 是否使用全球加速域名 */
-  AccelerateFlag?: boolean | null;
+  AccelerateFlag?: boolean;
   /** 桶所在的园区 */
-  BucketRegion?: string | null;
+  BucketRegion?: string;
   /** 自定义Endpoint */
-  Endpoint?: string | null;
+  Endpoint?: string;
 }
 
 /** 角色凭证 */
@@ -165,9 +165,9 @@ declare interface RoleToken {
 /** vpc子网信息 */
 declare interface SubnetInfo {
   /** vpc id */
-  VpcId: string | null;
+  VpcId: string;
   /** 子网ID */
-  SubnetId?: string | null;
+  SubnetId?: string;
 }
 
 /** 文件系统关联的标签 */
@@ -397,9 +397,9 @@ declare interface DescribeFileSystemsRequest {
 
 declare interface DescribeFileSystemsResponse {
   /** 文件系统列表 */
-  FSAttributeList: FSAttribute[];
+  FSAttributeList?: FSAttribute[];
   /** 总共的文件系统数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

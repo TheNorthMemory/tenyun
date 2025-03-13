@@ -204,6 +204,10 @@ declare interface DatasetGroup {
   AnnotationSpecification?: string | null;
   /** 标注Schema是否配置 */
   AnnotationSchemaConfigured?: boolean | null;
+  /** 创建者名称 */
+  CreatorNickname?: string | null;
+  /** cfs路径是否有修改 */
+  IsCfsUpdated?: boolean | null;
 }
 
 /** 数据集详情 */
@@ -270,6 +274,10 @@ declare interface DatasetInfo {
   AnnotationSpecification?: string | null;
   /** 标注Schema是否配置 */
   AnnotationSchemaConfigured?: boolean | null;
+  /** 创建者名称 */
+  CreatorNickname?: string | null;
+  /** cfs路径是否有修改 */
+  IsCfsUpdated?: boolean | null;
 }
 
 /** 默认内网调用信息 */

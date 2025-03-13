@@ -1348,6 +1348,8 @@ declare interface DescribeBackupFilesResponse {
   Files?: InstanceBackupFileItem[];
   /** 总条目数 */
   TotalCount?: number;
+  /** 下载链接前缀 */
+  UrlPrefix?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1501,9 +1503,9 @@ declare interface DescribeDCDBBinlogTimeRequest {
 
 declare interface DescribeDCDBBinlogTimeResponse {
   /** 开始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 结束时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -845,9 +845,9 @@ declare interface JobLogResult {
 /** 配置格式 */
 declare interface KVPair {
   /** 配置的key值 */
-  Key: string | null;
+  Key: string;
   /** 配置的value值 */
-  Value: string | null;
+  Value: string;
 }
 
 /** Kafka连接信息 */
@@ -1065,23 +1065,23 @@ declare interface NotebookSessionStatementBatchInformation {
 /** NotebookSessionStatement详情。 */
 declare interface NotebookSessionStatementInfo {
   /** 完成时间戳 */
-  Completed: number | null;
+  Completed?: number;
   /** 开始时间戳 */
-  Started: number | null;
+  Started?: number;
   /** 完成进度，百分制 */
-  Progress: number | null;
+  Progress?: number;
   /** Session Statement唯一标识 */
-  StatementId: string;
+  StatementId?: string;
   /** Session Statement状态，包含：waiting（排队中）、running（运行中）、available（正常）、error（异常）、cancelling（取消中）、cancelled（已取消） */
-  State: string;
+  State?: string;
   /** Statement输出信息 */
-  OutPut: StatementOutput | null;
+  OutPut?: StatementOutput | null;
   /** 批任务id */
   BatchId?: string | null;
   /** 运行语句 */
-  Code?: string | null;
+  Code?: string;
   /** 任务ID */
-  TaskId?: string | null;
+  TaskId?: string;
 }
 
 /** notebook session列表信息。 */
@@ -1497,27 +1497,27 @@ declare interface SparkSessionBatchLogOperate {
 /** statement信息 */
 declare interface StatementInformation {
   /** SQL任务唯一ID */
-  TaskId?: string | null;
+  TaskId?: string;
   /** SQL内容 */
-  SQL?: string | null;
+  SQL?: string;
 }
 
 /** notebook session statement输出信息。 */
 declare interface StatementOutput {
   /** 执行总数 */
-  ExecutionCount: number | null;
+  ExecutionCount?: number;
   /** Statement数据 */
-  Data: KVPair[] | null;
+  Data?: KVPair[] | null;
   /** Statement状态:ok,error */
-  Status: string | null;
+  Status?: string;
   /** 错误名称 */
-  ErrorName: string | null;
+  ErrorName?: string;
   /** 错误类型 */
-  ErrorValue: string | null;
+  ErrorValue?: string | null;
   /** 错误堆栈信息 */
-  ErrorMessage: string[] | null;
+  ErrorMessage?: string[] | null;
   /** SQL类型任务结果返回 */
-  SQLResult?: string | null;
+  SQLResult?: string;
 }
 
 /** spark流任务统计信息 */
@@ -1791,9 +1791,9 @@ declare interface TaskResultInfo {
   /** 任务唯一ID */
   TaskId?: string;
   /** 数据源名称，当前任务执行时候选中的默认数据源 */
-  DatasourceConnectionName?: string | null;
+  DatasourceConnectionName?: string;
   /** 数据库名称，当前任务执行时候选中的默认数据库 */
-  DatabaseName?: string | null;
+  DatabaseName?: string;
   /** 当前执行的SQL，一个任务包含一个SQL */
   SQL?: string;
   /** 执行任务的类型，现在分为DDL、DML、DQL */
@@ -1815,7 +1815,7 @@ declare interface TaskResultInfo {
   /** 结果的schema信息 */
   ResultSchema?: Column[] | null;
   /** 结果信息，反转义后，外层数组的每个元素为一行数据 */
-  ResultSet?: string | null;
+  ResultSet?: string;
   /** 分页信息，如果没有更多结果数据，nextToken为空 */
   NextToken?: string;
   /** 任务执行进度num/100(%) */
@@ -1827,7 +1827,7 @@ declare interface TaskResultInfo {
   /** 任务耗时，单位： ms */
   TotalTime?: number;
   /** 获取结果消耗的时间 */
-  QueryResultTime?: number | null;
+  QueryResultTime?: number;
 }
 
 /** 批量顺序执行任务集合 */
@@ -2773,6 +2773,8 @@ declare interface CreateSparkAppTaskRequest {
   JobName: string;
   /** spark作业程序入参，以空格分隔；一般用于周期性调用使用 */
   CmdArgs?: string;
+  /** 任务来源信息 */
+  SourceInfo?: KVPair[];
 }
 
 declare interface CreateSparkAppTaskResponse {
@@ -2809,6 +2811,8 @@ declare interface CreateSparkSessionBatchSQLRequest {
   IsInherit?: number;
   /** 用户自定义主键，需唯一 */
   CustomKey?: string;
+  /** 任务来源信息 */
+  SourceInfo?: KVPair[];
 }
 
 declare interface CreateSparkSessionBatchSQLResponse {
@@ -2853,6 +2857,8 @@ declare interface CreateTaskRequest {
   DataEngineName?: string;
   /** 标准spark执行任务resourceGroupName */
   ResourceGroupName?: string;
+  /** 任务来源信息 */
+  SourceInfo?: KVPair[];
 }
 
 declare interface CreateTaskResponse {
@@ -2893,6 +2899,8 @@ declare interface CreateTasksRequest {
   ResourceGroupName?: string;
   /** 是否使用multi- statement方式运行一批次任务，true: 是，false: 否 */
   IsMultiStatement?: boolean;
+  /** 任务来源信息 */
+  SourceInfo?: KVPair[];
 }
 
 declare interface CreateTasksResponse {
@@ -3253,6 +3261,8 @@ declare interface DescribeDataEngineEventsRequest {
   Limit?: number;
   /** 偏移量，默认为0 */
   Offset?: number;
+  /** 资源组id */
+  SessionId?: string;
 }
 
 declare interface DescribeDataEngineEventsResponse {
@@ -3535,6 +3545,8 @@ declare interface DescribeNotebookSessionStatementSqlResultRequest {
   NextToken?: string;
   /** 批次Id */
   BatchId?: string;
+  /** 返回结果集中字段值长度截取，如果超过该长度则截取到该长度 */
+  DataFieldCutLen?: number;
 }
 
 declare interface DescribeNotebookSessionStatementSqlResultResponse {
@@ -3925,6 +3937,8 @@ declare interface DescribeTaskResultRequest {
   MaxResults?: number;
   /** 是否转化数据类型 */
   IsTransformDataType?: boolean;
+  /** 返回结果集中字段长度截取，如果字段值长度超过该长度则截取到该长度 */
+  DataFieldCutLen?: number;
 }
 
 declare interface DescribeTaskResultResponse {
@@ -3995,6 +4009,8 @@ declare interface DescribeTasksOverviewRequest {
   Filters?: Filter[];
   /** 引擎名 */
   DataEngineName?: string;
+  /** DataEngine-dm8bjs29 */
+  HouseIds?: string[];
 }
 
 declare interface DescribeTasksOverviewResponse {

@@ -4902,6 +4902,24 @@ declare interface ModifyUserLevelResponse {
   RequestId?: string;
 }
 
+declare interface ModifyUserSignatureClassRequest {
+  /** 域名 */
+  Domain?: string;
+  /** 规则类型ID */
+  TypeID?: string;
+  /** 规则类型状态，0:关闭，1:开启 */
+  Status?: number;
+}
+
+declare interface ModifyUserSignatureClassResponse {
+  /** 规则类型ID */
+  TypeID?: string;
+  /** 规则类型状态，0：关闭，1：开启 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyUserSignatureRuleRequest {
   /** 域名 */
   Domain: string;
@@ -5108,6 +5126,24 @@ declare interface SwitchElasticModeRequest {
 }
 
 declare interface SwitchElasticModeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateProtectionModesRequest {
+  /** 域名 */
+  Domain: string;
+  /** 资源类型 */
+  Edition: string;
+  /** 大类规则ID */
+  TypeIDs: string[];
+  /** 0表示观察，1表示拦截 */
+  Mode: number;
+}
+
+declare interface UpdateProtectionModesResponse {
+  /** 操作结果 */
+  CommonRsp?: CommonRspData | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5505,6 +5541,8 @@ declare interface Waf {
   ModifySpartaProtectionMode(data: ModifySpartaProtectionModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySpartaProtectionModeResponse>;
   /** 修改用户防护规则等级 {@link ModifyUserLevelRequest} {@link ModifyUserLevelResponse} */
   ModifyUserLevel(data: ModifyUserLevelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserLevelResponse>;
+  /** 切换规则类型生效开关 {@link ModifyUserSignatureClassRequest} {@link ModifyUserSignatureClassResponse} */
+  ModifyUserSignatureClass(data?: ModifyUserSignatureClassRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserSignatureClassResponse>;
   /** 修改用户防护规则 {@link ModifyUserSignatureRuleRequest} {@link ModifyUserSignatureRuleResponse} */
   ModifyUserSignatureRule(data: ModifyUserSignatureRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserSignatureRuleResponse>;
   /** 修改用户防护规则V2 {@link ModifyUserSignatureRuleV2Request} {@link ModifyUserSignatureRuleV2Response} */
@@ -5527,6 +5565,8 @@ declare interface Waf {
   SwitchDomainRules(data?: SwitchDomainRulesRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDomainRulesResponse>;
   /** 切换弹性QPS的开关 {@link SwitchElasticModeRequest} {@link SwitchElasticModeResponse} */
   SwitchElasticMode(data: SwitchElasticModeRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchElasticModeResponse>;
+  /** 批量更新规则防护模式 {@link UpdateProtectionModesRequest} {@link UpdateProtectionModesResponse} */
+  UpdateProtectionModes(data: UpdateProtectionModesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProtectionModesResponse>;
   /** 编辑SAAS型接入的紧急CC防护状态 {@link UpsertCCAutoStatusRequest} {@link UpsertCCAutoStatusResponse} */
   UpsertCCAutoStatus(data: UpsertCCAutoStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpsertCCAutoStatusResponse>;
   /** Waf CC V2 Upsert接口 {@link UpsertCCRuleRequest} {@link UpsertCCRuleResponse} */

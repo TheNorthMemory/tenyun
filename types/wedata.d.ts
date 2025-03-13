@@ -1530,6 +1530,50 @@ declare interface DutyScheduleDetailsInfo {
   Duty: Duty[] | null;
 }
 
+/** 引擎任务信息 */
+declare interface EngineTaskInfo {
+  /** 1 */
+  EngineSubmitTime?: string | null;
+  /** 1 */
+  EngineExeTime?: string | null;
+  /** 1 */
+  EngineExeTimes?: number | null;
+  /** 1 */
+  CuConsume?: number | null;
+  /** 1 */
+  ResourceUsage?: number | null;
+  /** 1 */
+  EngineName?: string | null;
+  /** 1 */
+  EngineExeStatus?: string | null;
+  /** 1 */
+  TaskKind?: string | null;
+  /** 1 */
+  TaskType?: string | null;
+  /** 1 */
+  TaskContent?: string | null;
+  /** 1 */
+  InputBytesSum?: number | null;
+  /** 1 */
+  ShuffleReadBytesSum?: number | null;
+  /** 1 */
+  ShuffleReadRecordsSum?: number | null;
+  /** 1 */
+  OutputRecordsSum?: number | null;
+  /** 1 */
+  OutputBytesSum?: number | null;
+  /** 1 */
+  OutputFilesNum?: number | null;
+  /** 1 */
+  OutputSmallFilesNum?: number | null;
+  /** 1 */
+  WaitTime?: number | null;
+  /** 1 */
+  QueryResultTime?: number | null;
+  /** 1 */
+  CmdArgs?: string | null;
+}
+
 /** 事件连续时间实例信息 */
 declare interface EventBatchCaseDTO {
   /** 事件实例id */
@@ -3162,6 +3206,38 @@ declare interface RecordsSpeed {
   Values: SpeedValue[] | null;
 }
 
+/** 上报任务详情 */
+declare interface ReportTaskDetail {
+  /** 1 */
+  EngineTaskId?: string | null;
+  /** 1 */
+  EngineExeStatus?: string | null;
+  /** 1 */
+  EngineExeStartTime?: string | null;
+  /** 1 */
+  EngineExeEndTime?: string | null;
+  /** 1 */
+  TaskTypeId?: number | null;
+  /** 1 */
+  BusinessInfo?: string | null;
+  /** 1 */
+  EngineTaskInfo?: EngineTaskInfo | null;
+}
+
+/** 上报任务信息 */
+declare interface ReportTaskListInfo {
+  /** 1 */
+  Rows?: TaskInfoVo[] | null;
+  /** 1 */
+  PageNum?: number | null;
+  /** 1 */
+  PageSize?: number | null;
+  /** 1 */
+  TotalCount?: number | null;
+  /** 1 */
+  TotalPageNumber?: number | null;
+}
+
 /** 资源管理目录树节点 */
 declare interface ResourcePathTree {
   /** 资源名字 */
@@ -4378,6 +4454,10 @@ declare interface TableLineageInfo {
   DatabaseName?: string | null;
   /** DatabaseId */
   DatabaseId?: string | null;
+  /** 数据来源 */
+  DataFromType?: string | null;
+  /** 采集id */
+  CollectJobId?: string | null;
 }
 
 /** 表的元数据信息 */
@@ -4754,6 +4834,46 @@ declare interface TaskImportInfo {
   WorkFlowName?: string | null;
   /** 重名任务处理策略, 0:跳过,不导入; 1: 重命名 */
   TaskNameExistMode?: number | null;
+}
+
+/** 任务信息 */
+declare interface TaskInfoVo {
+  /** 1 */
+  AppID?: string | null;
+  /** 1 */
+  ProjectId?: string | null;
+  /** 1 */
+  TaskId?: string | null;
+  /** 1 */
+  TaskName?: string | null;
+  /** 1 */
+  TaskTypeId?: number | null;
+  /** 1 */
+  OnwerUid?: string | null;
+  /** 1 */
+  InChargeId?: string | null;
+  /** 1 */
+  InstanceId?: string | null;
+  /** 1 */
+  JobId?: string | null;
+  /** 1 */
+  EngineType?: string | null;
+  /** 1 */
+  EngineName?: string | null;
+  /** 1 */
+  EngineSubType?: string | null;
+  /** 1 */
+  EngineTaskId?: string | null;
+  /** 1 */
+  EngineExeStatus?: string | null;
+  /** 1 */
+  EngineExeUser?: string | null;
+  /** 1 */
+  EngineExeStartTime?: string | null;
+  /** 1 */
+  EngineExeEndTime?: string | null;
+  /** 1 */
+  ProductSource?: string | null;
 }
 
 /** 任务属性 */
@@ -7116,7 +7236,7 @@ declare interface DescribeBatchOperateTaskResponse {
 }
 
 declare interface DescribeColumnLineageRequest {
-  /** 查询方向，INPUT,OUTPUT,BOTH枚举值 */
+  /** 查询方向枚举值- INPUT- OUTPUT- BOTH */
   Direction: string;
   /** 字段信息 */
   Data: ColumnLineageInfo;
@@ -7132,7 +7252,7 @@ declare interface DescribeColumnLineageRequest {
 
 declare interface DescribeColumnLineageResponse {
   /** 字段血缘信息 */
-  ColumnAggregationLineage: ColumnAggregationLineage | null;
+  ColumnAggregationLineage?: ColumnAggregationLineage | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8455,6 +8575,74 @@ declare interface DescribeRealTimeTaskSpeedResponse {
   RequestId?: string;
 }
 
+declare interface DescribeReportTaskDetailRequest {
+  /** 页码 */
+  PageNum?: number;
+  /** 每页条数 */
+  PageSize?: number;
+  /** 租户id */
+  TenantId?: string;
+  /** 项目id */
+  ProjectId?: string;
+  /** 任务id */
+  TaskId?: string;
+  /** 实例id */
+  InstanceId?: string;
+  /** 作业id */
+  JobId?: string;
+  /** 引擎任务id */
+  EngineTaskId?: string;
+  /** 产品模块 */
+  ProductSource?: string;
+  /** 主账号 */
+  OnwerUid?: string;
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+}
+
+declare interface DescribeReportTaskDetailResponse {
+  /** 1 */
+  Data?: ReportTaskDetail | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeReportTaskListRequest {
+  /** 页码 */
+  PageNum?: number;
+  /** 每页条数 */
+  PageSize?: number;
+  /** 租户id */
+  TenantId?: string;
+  /** 项目id */
+  ProjectId?: string;
+  /** 任务id */
+  TaskId?: string;
+  /** 实例id */
+  InstanceId?: string;
+  /** 作业id */
+  JobId?: string;
+  /** 引擎任务id */
+  EngineTaskId?: string;
+  /** 产品模块 */
+  ProductSource?: string;
+  /** 主账号 */
+  OnwerUid?: string;
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+}
+
+declare interface DescribeReportTaskListResponse {
+  /** 1 */
+  Data?: ReportTaskListInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeResourceManagePathTreesRequest {
   /** 项目ID */
   ProjectId?: string;
@@ -9038,7 +9226,7 @@ declare interface DescribeTableLineageInfoResponse {
 }
 
 declare interface DescribeTableLineageRequest {
-  /** 查询方向，INPUT,OUTPUT,BOTH枚举值 */
+  /** 查询方向枚举值- INPUT- OUTPUT- BOTH */
   Direction: string;
   /** 表信息 */
   Data: TableLineageInfo;
@@ -11546,6 +11734,10 @@ declare interface Wedata {
   DescribeRealTimeTaskMetricOverview(data: DescribeRealTimeTaskMetricOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRealTimeTaskMetricOverviewResponse>;
   /** 实时任务同步速度趋势 {@link DescribeRealTimeTaskSpeedRequest} {@link DescribeRealTimeTaskSpeedResponse} */
   DescribeRealTimeTaskSpeed(data: DescribeRealTimeTaskSpeedRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRealTimeTaskSpeedResponse>;
+  /** 获取用量大盘任务详情 {@link DescribeReportTaskDetailRequest} {@link DescribeReportTaskDetailResponse} */
+  DescribeReportTaskDetail(data?: DescribeReportTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReportTaskDetailResponse>;
+  /** 查询用量大盘任务列表 {@link DescribeReportTaskListRequest} {@link DescribeReportTaskListResponse} */
+  DescribeReportTaskList(data?: DescribeReportTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReportTaskListResponse>;
   /** 获取资源管理目录树 {@link DescribeResourceManagePathTreesRequest} {@link DescribeResourceManagePathTreesResponse} */
   DescribeResourceManagePathTrees(data?: DescribeResourceManagePathTreesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceManagePathTreesResponse>;
   /** 查询规则详情 {@link DescribeRuleRequest} {@link DescribeRuleResponse} */

@@ -931,7 +931,7 @@ declare interface DescribeCustomDnsHostSetRequest {
 
 declare interface DescribeCustomDnsHostSetResponse {
   /** 自定义DNS Host 列表 */
-  DnsHostSet?: CustomDnsHost[] | null;
+  DnsHostSet?: CustomDnsHost[];
   /** 自定义DNS Host总数 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */

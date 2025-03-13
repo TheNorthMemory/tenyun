@@ -139,13 +139,13 @@ declare interface Cluster {
 /** cmq DeadLetterPolicy */
 declare interface CmqDeadLetterPolicy {
   /** 死信队列。 */
-  DeadLetterQueue?: string | null;
+  DeadLetterQueue?: string;
   /** 死信队列策略。0:最大接收次数;1:最大未消费时间 */
-  Policy?: number | null;
+  Policy?: number;
   /** 最大未消费过期时间。Policy为1时必选。范围300-43200，单位秒，需要小于消息最大保留时间MsgRetentionSeconds。 */
-  MaxTimeToLive?: number | null;
+  MaxTimeToLive?: number;
   /** 最大接收次数。Policy为0时必选，范围在1到1000。 */
-  MaxReceiveCount?: number | null;
+  MaxReceiveCount?: number;
 }
 
 /** Cmq DeadLetterSource */
@@ -153,7 +153,7 @@ declare interface CmqDeadLetterSource {
   /** 消息队列ID。 */
   QueueId?: string | null;
   /** 消息队列名字。 */
-  QueueName?: string | null;
+  QueueName?: string;
 }
 
 /** cmq 批量queue属性信息 */
@@ -163,31 +163,31 @@ declare interface CmqQueue {
   /** 消息队列名字。 */
   QueueName?: string;
   /** 每秒钟生产消息条数的限制，消费消息的大小是该值的1.1倍。 */
-  Qps?: number | null;
+  Qps?: number;
   /** 带宽限制。 */
-  Bps?: number | null;
+  Bps?: number;
   /** 飞行消息最大保留时间，需要小于消息保留周期。 */
-  MaxDelaySeconds?: number | null;
+  MaxDelaySeconds?: number;
   /** 最大堆积消息数。取值范围在公测期间为 1,000,000 - 10,000,000，正式上线后范围可达到 1000,000-1000,000,000。默认取值在公测期间为 10,000,000，正式上线后为 100,000,000。 */
   MaxMsgHeapNum?: number;
   /** 消息接收长轮询等待时间。取值范围0 - 30秒，默认值0。 */
-  PollingWaitSeconds?: number | null;
+  PollingWaitSeconds?: number;
   /** 消息保留周期。取值范围60-1296000秒（1min-15天），默认值345600秒（4 天）。 */
-  MsgRetentionSeconds?: number | null;
+  MsgRetentionSeconds?: number;
   /** 消息可见性超时。取值范围1 - 43200秒（即12小时内），默认值30。 */
-  VisibilityTimeout?: number | null;
+  VisibilityTimeout?: number;
   /** 消息最大长度。取值范围1024 - 1048576 Byte（即1K - 1024K），默认值65536。 */
-  MaxMsgSize?: number | null;
+  MaxMsgSize?: number;
   /** 回溯队列的消息回溯时间最大值，取值范围0 - 43200秒，0表示不开启消息回溯。 */
-  RewindSeconds?: number | null;
+  RewindSeconds?: number;
   /** 队列的创建时间。返回 Unix 时间戳，精确到毫秒。 */
-  CreateTime?: number | null;
+  CreateTime?: number;
   /** 最后一次修改队列属性的时间。返回 Unix 时间戳，精确到毫秒。 */
-  LastModifyTime?: number | null;
+  LastModifyTime?: number;
   /** 在队列中处于 Active 状态（不处于被消费状态）的消息总数，为近似值。 */
-  ActiveMsgNum?: number | null;
+  ActiveMsgNum?: number;
   /** 在队列中处于 Inactive 状态（正处于被消费状态）的消息总数，为近似值。 */
-  InactiveMsgNum?: number | null;
+  InactiveMsgNum?: number;
   /** 延迟消息数。 */
   DelayMsgNum?: number | null;
   /** 已调用 DelMsg 接口删除，但还在回溯保留时间内的消息数量。 */
@@ -209,69 +209,69 @@ declare interface CmqQueue {
   /** 消息轨迹。true表示开启，false表示不开启。 */
   Trace?: boolean | null;
   /** 租户id */
-  TenantId?: string | null;
+  TenantId?: string;
   /** 命名空间名称 */
-  NamespaceName?: string | null;
+  NamespaceName?: string;
   /** 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败 */
-  Status?: number | null;
+  Status?: number;
   /** 最大未确认消息数量 */
-  MaxUnackedMsgNum?: number | null;
+  MaxUnackedMsgNum?: number;
   /** 最大消息堆积大小（字节） */
-  MaxMsgBacklogSize?: number | null;
+  MaxMsgBacklogSize?: number;
   /** 队列可回溯存储空间，取值范围1024MB - 10240MB，0表示不开启 */
-  RetentionSizeInMB?: number | null;
+  RetentionSizeInMB?: number;
 }
 
 /** cmq订阅返回参数 */
 declare interface CmqSubscription {
   /** 订阅名字，在单个地域同一账号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
-  SubscriptionName?: string | null;
+  SubscriptionName?: string;
   /** 订阅 ID。订阅 ID 在拉取监控数据时会用到。 */
-  SubscriptionId?: string | null;
+  SubscriptionId?: string;
   /** 订阅拥有者的 APPID。 */
   TopicOwner?: number | null;
   /** 该订阅待投递的消息数。 */
-  MsgCount?: number | null;
+  MsgCount?: number;
   /** 最后一次修改订阅属性的时间。返回 Unix 时间戳，精确到毫秒。 */
-  LastModifyTime?: number | null;
+  LastModifyTime?: number;
   /** 订阅的创建时间。返回 Unix 时间戳，精确到毫秒。 */
-  CreateTime?: number | null;
+  CreateTime?: number;
   /** 表示订阅接收消息的过滤策略。 */
   BindingKey?: string[] | null;
   /** 接收通知的 endpoint，根据协议 protocol 区分：对于 HTTP，endpoint 必须以http://开头，host 可以是域名或 IP；对于 queue，则填 queueName。 */
-  Endpoint?: string | null;
+  Endpoint?: string;
   /** 描述用户创建订阅时选择的过滤策略：filterType = 1表示用户使用 filterTag 标签过滤filterType = 2表示用户使用 bindingKey 过滤。 */
-  FilterTags?: string[] | null;
+  FilterTags?: string[];
   /** 订阅的协议，目前支持两种协议：HTTP、queue。使用 HTTP 协议，用户需自己搭建接受消息的 Web Server。使用 queue，消息会自动推送到 CMQ queue，用户可以并发地拉取消息。 */
-  Protocol?: string | null;
+  Protocol?: string;
   /** 向 endpoint 推送消息出现错误时，CMQ 推送服务器的重试策略。取值有：（1）BACKOFF_RETRY，退避重试。每隔一定时间重试一次，重试够一定次数后，就把该消息丢弃，继续推送下一条消息；（2）EXPONENTIAL_DECAY_RETRY，指数衰退重试。每次重试的间隔是指数递增的，例如开始 1s，后面是 2s，4s，8s...由于 Topic 消息的周期是一天，所以最多重试一天就把消息丢弃。默认值是 EXPONENTIAL_DECAY_RETRY。 */
-  NotifyStrategy?: string | null;
+  NotifyStrategy?: string;
   /** 推送内容的格式。取值：（1）JSON；（2）SIMPLIFIED，即 raw 格式。如果 protocol 是 queue，则取值必须为 SIMPLIFIED。如果 protocol 是 HTTP，两个值均可以，默认值是 JSON。 */
-  NotifyContentFormat?: string | null;
+  NotifyContentFormat?: string;
   /** 订阅所属的主题名称 */
-  TopicName?: string | null;
+  TopicName?: string;
 }
 
 /** cmq topic返回信息展示字段 */
 declare interface CmqTopic {
   /** 主题的 ID。 */
-  TopicId?: string | null;
+  TopicId?: string;
   /** 主题名称。 */
-  TopicName?: string | null;
+  TopicName?: string;
   /** 消息在主题中最长存活时间，从发送到该主题开始经过此参数指定的时间后，不论消息是否被成功推送给用户都将被删除，单位为秒。固定为一天（86400秒），该属性不能修改。 */
-  MsgRetentionSeconds?: number | null;
+  MsgRetentionSeconds?: number;
   /** 消息最大长度。取值范围1024 - 1048576Byte（即1 - 1024K），默认值为1048576。 */
-  MaxMsgSize?: number | null;
+  MaxMsgSize?: number;
   /** 每秒钟发布消息的条数。 */
-  Qps?: number | null;
+  Qps?: number;
   /** 描述用户创建订阅时选择的过滤策略：FilterType = 1表示用户使用 FilterTag 标签过滤;FilterType = 2表示用户使用 BindingKey 过滤。 */
-  FilterType?: number | null;
+  FilterType?: number;
   /** 主题的创建时间。返回 Unix 时间戳，精确到毫秒。 */
-  CreateTime?: number | null;
+  CreateTime?: number;
   /** 最后一次修改主题属性的时间。返回 Unix 时间戳，精确到毫秒。 */
-  LastModifyTime?: number | null;
+  LastModifyTime?: number;
   /** 当前该主题中消息数目（消息堆积数）。 */
-  MsgCount?: number | null;
+  MsgCount?: number;
   /** 创建者 Uin，CAM 鉴权 resource 由该字段组合而成。 */
   CreateUin?: number | null;
   /** 关联的标签。 */
@@ -279,23 +279,23 @@ declare interface CmqTopic {
   /** 消息轨迹。true表示开启，false表示不开启。 */
   Trace?: boolean | null;
   /** 租户id */
-  TenantId?: string | null;
+  TenantId?: string;
   /** 命名空间名称 */
-  NamespaceName?: string | null;
+  NamespaceName?: string;
   /** 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败 */
-  Status?: number | null;
+  Status?: number;
   /** 0表示pulsar，1表示rocketmq */
-  BrokerType?: number | null;
+  BrokerType?: number;
   /** 订阅数量 */
-  SubscriptionCount?: number | null;
+  SubscriptionCount?: number;
 }
 
 /** cmq TransactionPolicy */
 declare interface CmqTransactionPolicy {
   /** 第一次回查时间。 */
-  FirstQueryInterval: number | null;
+  FirstQueryInterval?: number;
   /** 最大查询次数。 */
-  MaxQueryCount: number | null;
+  MaxQueryCount?: number;
 }
 
 /** 消费者 */
@@ -980,14 +980,6 @@ declare interface RabbitMQPrivateNode {
   DiskUsage?: string | null;
   /** Rabbitmq的Erlang进程数 */
   ProcessNumber?: number | null;
-}
-
-/** RabbitMQ专享版云服务器 */
-declare interface RabbitMQPrivateVirtualHost {
-  /** 虚拟主机的名字 */
-  VirtualHostName?: string | null;
-  /** 虚拟主机的描述 */
-  Description?: string | null;
 }
 
 /** RabbitMQ队列列表消费者信息 */
@@ -1842,7 +1834,7 @@ declare interface VpcEndpointInfo {
   SubnetId: string;
   /** vpc接入点信息 */
   VpcEndpoint: string;
-  /** vpc接入点状态OFF/ON/CREATING/DELETING */
+  /** vpc接入点状态 OFF/ON/CREATING/DELETING */
   VpcDataStreamEndpointStatus?: string | null;
 }
 
@@ -2875,7 +2867,7 @@ declare interface DescribeCmqQueuesResponse {
   /** 数量 */
   TotalCount?: number;
   /** 队列列表 */
-  QueueList?: CmqQueue[] | null;
+  QueueList?: CmqQueue[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2899,7 +2891,7 @@ declare interface DescribeCmqSubscriptionDetailResponse {
   /** 总数 */
   TotalCount?: number;
   /** Subscription属性集合 */
-  SubscriptionSet?: CmqSubscription[] | null;
+  SubscriptionSet?: CmqSubscription[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2933,7 +2925,7 @@ declare interface DescribeCmqTopicsRequest {
 
 declare interface DescribeCmqTopicsResponse {
   /** 主题列表 */
-  TopicList?: CmqTopic[] | null;
+  TopicList?: CmqTopic[];
   /** 全量主题数量 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3492,24 +3484,6 @@ declare interface DescribeRabbitMQVipInstancesResponse {
   TotalCount?: number;
   /** 实例信息列表 */
   Instances?: RabbitMQVipInstance[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeRabbitMQVirtualHostListRequest {
-  /** 不适用，默认参数 */
-  InstanceId: string;
-  /** 偏移量 */
-  Offset?: number;
-  /** 一页限制 */
-  Limit?: number;
-}
-
-declare interface DescribeRabbitMQVirtualHostListResponse {
-  /** 集群列表数量 */
-  TotalCount?: number;
-  /** 集群列表 */
-  VirtualHostList?: RabbitMQPrivateVirtualHost[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5265,8 +5239,6 @@ declare interface Tdmq {
   DescribeRabbitMQVipInstances(data?: DescribeRabbitMQVipInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQVipInstancesResponse>;
   /** 查询RabbitMQ vhost列表 {@link DescribeRabbitMQVirtualHostRequest} {@link DescribeRabbitMQVirtualHostResponse} */
   DescribeRabbitMQVirtualHost(data: DescribeRabbitMQVirtualHostRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQVirtualHostResponse>;
-  /** @deprecated RabbitMQ专享版查询虚拟主机列表 {@link DescribeRabbitMQVirtualHostListRequest} {@link DescribeRabbitMQVirtualHostListResponse} */
-  DescribeRabbitMQVirtualHostList(data: DescribeRabbitMQVirtualHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQVirtualHostListResponse>;
   /** 获取单个RocketMQ集群信息 {@link DescribeRocketMQClusterRequest} {@link DescribeRocketMQClusterResponse} */
   DescribeRocketMQCluster(data: DescribeRocketMQClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQClusterResponse>;
   /** 获取RocketMQ的集群列表 {@link DescribeRocketMQClustersRequest} {@link DescribeRocketMQClustersResponse} */

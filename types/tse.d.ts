@@ -377,35 +377,39 @@ declare interface CloudNativeAPIGatewayVpcConfig {
 /** 配置文件 */
 declare interface ConfigFile {
   /** 配置文件id */
-  Id?: number | null;
+  Id?: number;
   /** 配置文件名称 */
-  Name?: string | null;
+  Name?: string;
   /** 配置文件命名空间 */
-  Namespace?: string | null;
+  Namespace?: string;
   /** 配置文件组 */
-  Group?: string | null;
+  Group?: string;
   /** 配置文件内容 */
-  Content?: string | null;
+  Content?: string;
   /** 配置文件格式 */
-  Format?: string | null;
+  Format?: string;
   /** 配置文件注释 */
-  Comment?: string | null;
+  Comment?: string;
   /** 配置文件状态 */
-  Status?: string | null;
+  Status?: string;
   /** 配置文件标签数组 */
-  Tags?: ConfigFileTag[] | null;
+  Tags?: ConfigFileTag[];
   /** 配置文件创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 配置文件创建者 */
-  CreateBy?: string | null;
+  CreateBy?: string;
   /** 配置文件修改时间 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
   /** 配置文件修改者 */
-  ModifyBy?: string | null;
+  ModifyBy?: string;
   /** 配置文件发布时间 */
-  ReleaseTime?: string | null;
+  ReleaseTime?: string;
   /** 配置文件发布者 */
-  ReleaseBy?: string | null;
+  ReleaseBy?: string;
+  /** 配置文件类型 */
+  ConfigFileSupportedClient?: number;
+  /** 配置文件持久化 */
+  ConfigFilePersistent?: ConfigFilePersistent;
 }
 
 /** 配置文件组 */
@@ -456,6 +460,16 @@ declare interface ConfigFileGroupTag {
   Value?: string | null;
 }
 
+/** 配置文件持久化 */
+declare interface ConfigFilePersistent {
+  /** 文件编码 */
+  Encoding?: string;
+  /** 文件下发路径 */
+  Path?: string;
+  /** 文件后置命令 */
+  PostCmd?: string;
+}
+
 /** 发布详情 */
 declare interface ConfigFilePublishInfo {
   /** 发布名称 */
@@ -483,39 +497,43 @@ declare interface ConfigFilePublishInfo {
 /** 配置文件发布 */
 declare interface ConfigFileRelease {
   /** 配置文件发布id */
-  Id?: number | null;
+  Id?: number;
   /** 配置文件发布名称 */
-  Name?: string | null;
+  Name?: string;
   /** 配置文件发布命名空间 */
-  Namespace?: string | null;
+  Namespace?: string;
   /** 配置文件发布组 */
-  Group?: string | null;
+  Group?: string;
   /** 配置文件发布文件名称 */
-  FileName?: string | null;
+  FileName?: string;
   /** 配置文件发布内容 */
-  Content?: string | null;
+  Content?: string;
   /** 配置文件发布注释 */
-  Comment?: string | null;
+  Comment?: string;
   /** 配置文件发布Md5 */
-  Md5?: string | null;
+  Md5?: string;
   /** 配置文件发布版本 */
-  Version?: number | null;
+  Version?: number;
   /** 配置文件发布创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 配置文件发布创建者 */
-  CreateBy?: string | null;
+  CreateBy?: string;
   /** 配置文件发布修改时间 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
   /** 配置文件发布修改者 */
-  ModifyBy?: string | null;
+  ModifyBy?: string;
   /** 发布描述 */
-  ReleaseDescription?: string | null;
+  ReleaseDescription?: string;
   /** 是否生效 */
-  Active?: boolean | null;
+  Active?: boolean;
   /** 格式 */
-  Format?: string | null;
+  Format?: string;
   /** 配置文件ID */
-  ConfigFileId?: string | null;
+  ConfigFileId?: string;
+  /** 配置文件类型 */
+  ConfigFileSupportedClient?: number;
+  /** 配置文件持久化 */
+  ConfigFilePersistent?: ConfigFilePersistent;
 }
 
 /** 配置发布删除 */
@@ -535,49 +553,53 @@ declare interface ConfigFileReleaseDeletion {
 /** 配置文件发布历史 */
 declare interface ConfigFileReleaseHistory {
   /** 配置文件发布历史记录id */
-  Id?: number | null;
+  Id?: number;
   /** 配置文件发布历史名称 */
-  Name?: string | null;
+  Name?: string;
   /** 配置文件发布历史命名空间 */
-  Namespace?: string | null;
+  Namespace?: string;
   /** 配置文件发布历史组 */
-  Group?: string | null;
+  Group?: string;
   /** 配置文件发布历史名称 */
-  FileName?: string | null;
+  FileName?: string;
   /** 配置文件发布历史内容 */
-  Content?: string | null;
+  Content?: string;
   /** 配置文件发布历史格式 */
-  Format?: string | null;
+  Format?: string;
   /** 配置文件发布历史注释 */
-  Comment?: string | null;
+  Comment?: string;
   /** 配置文件发布历史Md5 */
-  Md5?: string | null;
+  Md5?: string;
   /** 配置文件发布历史类型 */
-  Type?: string | null;
+  Type?: string;
   /** 配置文件发布历史状态 */
-  Status?: string | null;
+  Status?: string;
   /** 配置文件发布历史标签组 */
-  Tags?: ConfigFileTag[] | null;
+  Tags?: ConfigFileTag[];
   /** 配置文件发布创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 配置文件发布创建者 */
-  CreateBy?: string | null;
+  CreateBy?: string;
   /** 配置文件发布修改时间 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
   /** 配置文件发布修改者 */
-  ModifyBy?: string | null;
+  ModifyBy?: string;
   /** 发布描述 */
-  ReleaseDescription?: string | null;
+  ReleaseDescription?: string;
   /** 原因，用于失败时原因展示 */
-  ReleaseReason?: string | null;
+  ReleaseReason?: string;
+  /** 配置文件类型 */
+  ConfigFileSupportedClient?: number;
+  /** 配置文件持久化 */
+  ConfigFilePersistent?: ConfigFilePersistent;
 }
 
 /** 配置文件标签 */
 declare interface ConfigFileTag {
   /** key-value 键 */
-  Key?: string | null;
+  Key?: string;
   /** key-value 值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 配置文件模板 */

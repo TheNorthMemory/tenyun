@@ -167,7 +167,7 @@ declare interface ObjectTypeJsonParse {
 /** 护栏策略触发日志 */
 declare interface PolicyTriggerLog {
   /** 演练ID */
-  TaskId?: number | null;
+  TaskId?: number;
   /** 名称 */
   Name?: string | null;
   /** 类型，0--触发，1--恢复 */
@@ -863,7 +863,7 @@ declare interface DescribeTaskPolicyTriggerLogRequest {
 
 declare interface DescribeTaskPolicyTriggerLogResponse {
   /** 触发日志 */
-  TriggerLogs?: PolicyTriggerLog[] | null;
+  TriggerLogs?: PolicyTriggerLog[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

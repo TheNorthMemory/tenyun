@@ -199,13 +199,13 @@ declare interface DescribeFileTicketRequest {
 
 declare interface DescribeFileTicketResponse {
   /** 返回值, 0:成功, 其他值请查看“返回值”定义 */
-  Result: number;
+  Result?: number;
   /** 上传url(任务来源为2时:Post方法（100:apk,101:txt）, 任务来源为1时:put方法) */
-  UploadUrl: string;
+  UploadUrl?: string;
   /** 上传url鉴权信息(任务来源为1时上传需要, Authorization参数值) */
-  UploadSign: string | null;
+  UploadSign?: string;
   /** 上传文件ID(任务来源为1时提交诊断任务需要) */
-  FildID: string | null;
+  FildID?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -253,11 +253,11 @@ declare interface DescribeScanTaskListRequest {
 
 declare interface DescribeScanTaskListResponse {
   /** 返回值, 0:成功, 其他值请查看“返回值”定义 */
-  Result: number;
+  Result?: number;
   /** 任务总数量 */
-  Total: number;
+  Total?: number;
   /** 诊断任务数据列表 */
-  Data: AppTaskData[] | null;
+  Data?: AppTaskData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -301,13 +301,13 @@ declare interface DescribeScanTaskStatusRequest {
 
 declare interface DescribeScanTaskStatusResponse {
   /** 返回值, 0:成功, 其他值请查看“返回值”定义 */
-  Result: number;
+  Result?: number;
   /** 0:默认值(待检测/待咨询), 1.检测中, 4:任务完成/咨询完成, 5:任务失败, 6:咨询中; */
-  Status: number;
+  Status?: number;
   /** 诊断失败的错误信息 */
-  ErrMsg: string | null;
+  ErrMsg?: string;
   /** 任务流详情 */
-  FlowSteps: TaskFlowStepsInfo[] | null;
+  FlowSteps?: TaskFlowStepsInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
