@@ -381,15 +381,15 @@ declare interface ResetDeviceResult {
 /** SDK日志项 */
 declare interface SDKLogItem {
   /** 产品ID */
-  ProductId: string;
+  ProductId?: string;
   /** 设备名称 */
-  DeviceName: string;
+  DeviceName?: string;
   /** 日志等级 */
-  Level: string;
+  Level?: string;
   /** 日志时间 */
-  DateTime: string;
+  DateTime?: string;
   /** 日志内容 */
-  Content: string;
+  Content?: string;
 }
 
 /** 搜索关键词 */
@@ -851,7 +851,7 @@ declare interface DescribeDeviceShadowRequest {
 
 declare interface DescribeDeviceShadowResponse {
   /** 设备影子数据 */
-  Data: string;
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1225,9 +1225,9 @@ declare interface DescribeResourceTasksRequest {
 
 declare interface DescribeResourceTasksResponse {
   /** 资源任务列表 */
-  TaskInfos: FirmwareTaskInfo[] | null;
+  TaskInfos?: FirmwareTaskInfo[] | null;
   /** 资源任务总数 */
-  Total: number | null;
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1411,11 +1411,11 @@ declare interface ListSDKLogRequest {
 
 declare interface ListSDKLogResponse {
   /** 日志检索上下文 */
-  Context: string;
+  Context?: string;
   /** 是否还有日志，如有仍有日志，下次查询的请求带上当前请求返回的Context */
-  Listover: boolean;
+  Listover?: boolean;
   /** 日志列表 */
-  Results: SDKLogItem[];
+  Results?: SDKLogItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3505,7 +3505,7 @@ declare interface Iotcloud {
   DescribeDeviceResource(data: DescribeDeviceResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceResourceResponse>;
   /** 获取设备资源列表 {@link DescribeDeviceResourcesRequest} {@link DescribeDeviceResourcesResponse} */
   DescribeDeviceResources(data: DescribeDeviceResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceResourcesResponse>;
-  /** 获取设备影子 {@link DescribeDeviceShadowRequest} {@link DescribeDeviceShadowResponse} */
+  /** 获取设备影子（旧） {@link DescribeDeviceShadowRequest} {@link DescribeDeviceShadowResponse} */
   DescribeDeviceShadow(data: DescribeDeviceShadowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceShadowResponse>;
   /** 获取设备列表 {@link DescribeDevicesRequest} {@link DescribeDevicesResponse} */
   DescribeDevices(data: DescribeDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicesResponse>;

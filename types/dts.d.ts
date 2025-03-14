@@ -5,15 +5,15 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 数据库不一致的详情，mongodb业务用到 */
 declare interface AdvancedObjectsItem {
   /** 对象类型,可能得值有：account,index,shardkey,schema */
-  ObjectType?: string | null;
+  ObjectType?: string;
   /** 源端分块 */
-  SrcChunk?: string | null;
+  SrcChunk?: string;
   /** 目标端分块 */
-  DstChunk?: string | null;
+  DstChunk?: string;
   /** 源端值 */
-  SrcItem?: string | null;
+  SrcItem?: string;
   /** 目标端值 */
-  DstItem?: string | null;
+  DstItem?: string;
 }
 
 /** 检查步骤 */
@@ -47,9 +47,9 @@ declare interface CheckStepInfo {
 /** 数据同步中的列信息 */
 declare interface Column {
   /** 列名 */
-  ColumnName?: string | null;
+  ColumnName?: string;
   /** 新列名 */
-  NewColumnName?: string | null;
+  NewColumnName?: string;
 }
 
 /** 一致性校验摘要信息 */
@@ -201,11 +201,11 @@ declare interface CompareViewItem {
 /** 冲突处理里的详细描述 */
 declare interface ConflictHandleOption {
   /** 条件覆盖的列 */
-  ConditionColumn?: string | null;
+  ConditionColumn?: string;
   /** 条件覆盖操作 */
-  ConditionOperator?: string | null;
+  ConditionOperator?: string;
   /** 条件覆盖优先级处理 */
-  ConditionOrderInSrcAndDst?: string | null;
+  ConditionOrderInSrcAndDst?: string;
 }
 
 /** 数据一致性校验选项， 默认为不开启一致性校验 */
@@ -329,39 +329,39 @@ declare interface DBItem {
 /** 需要同步的库表对象 */
 declare interface Database {
   /** 需要迁移或同步的库名，当ObjectMode为Partial时，此项必填 */
-  DbName?: string | null;
+  DbName?: string;
   /** 迁移或同步后的库名，默认与源库相同 */
-  NewDbName?: string | null;
+  NewDbName?: string;
   /** DB选择模式: All(为当前对象下的所有对象)，Partial(部分对象)，当Mode为Partial时，此项必填。注意，高级对象的同步不依赖此值，如果整库同步此处应该为All。 */
-  DbMode?: string | null;
+  DbMode?: string;
   /** 迁移或同步的 schema */
-  SchemaName?: string | null;
+  SchemaName?: string;
   /** 迁移或同步后的 schema name */
-  NewSchemaName?: string | null;
+  NewSchemaName?: string;
   /** 表选择模式: All(为当前对象下的所有对象)，Partial(部分对象)，当DBMode为Partial时此项必填，如果整库同步此处应该为All。 */
-  TableMode?: string | null;
+  TableMode?: string;
   /** 表图对象集合，当 TableMode 为 Partial 时，此项需要填写 */
-  Tables?: Table[] | null;
+  Tables?: Table[];
   /** 视图选择模式: All 为当前对象下的所有视图对象,Partial 为部分视图对象，如果整库同步此处应该为All。 */
-  ViewMode?: string | null;
+  ViewMode?: string;
   /** 视图对象集合，当 ViewMode 为 Partial 时， 此项需要填写 */
-  Views?: View[] | null;
+  Views?: View[];
   /** 选择要同步的模式，Partial为部分，All为整选，如果整库同步此处应该为All。 */
-  FunctionMode?: string | null;
+  FunctionMode?: string;
   /** FunctionMode取值为Partial时需要填写 */
-  Functions?: string[] | null;
+  Functions?: string[];
   /** 选择要同步的模式，Partial为部分，All为整选，如果整库同步此处应该为All。 */
-  ProcedureMode?: string | null;
+  ProcedureMode?: string;
   /** ProcedureMode取值为Partial时需要填写 */
-  Procedures?: string[] | null;
+  Procedures?: string[];
   /** 触发器迁移模式，All(为当前对象下的所有对象)，Partial(部分对象)，如果整库同步此处应该为All。数据同步暂不支持此高级对象。 */
-  TriggerMode?: string | null;
+  TriggerMode?: string;
   /** 当TriggerMode为partial，指定要迁移的触发器名称 */
-  Triggers?: string[] | null;
+  Triggers?: string[];
   /** 事件迁移模式，All(为当前对象下的所有对象)，Partial(部分对象)，如果整库同步此处应该为All。数据同步暂不支持此高级对象。 */
-  EventMode?: string | null;
+  EventMode?: string;
   /** 当EventMode为partial，指定要迁移的事件名称 */
-  Events?: string[] | null;
+  Events?: string[];
 }
 
 /** 迁移对象选项，需要告知迁移服务迁移哪些库表对象 */
@@ -377,7 +377,7 @@ declare interface DatabaseTableObject {
 /** 数据同步中的ddl同步处理 */
 declare interface DdlOption {
   /** ddl类型，如Database,Table,View,Index等 */
-  DdlObject?: string | null;
+  DdlObject?: string;
   /** ddl具体值，对于Database可取值[Create,Drop,Alter]对于Table可取值[Create,Drop,Alter,Truncate,Rename]对于View可取值[Create,Drop]对于Index可取值[Create,Drop] */
   DdlValue?: string[] | null;
 }
@@ -405,7 +405,7 @@ declare interface DetailCheckItem {
 /** 数据库不一致的详情，mongodb业务用到 */
 declare interface DifferenceAdvancedObjectsDetail {
   /** 总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 不一致详情 */
   Items?: AdvancedObjectsItem[] | null;
 }
@@ -491,13 +491,13 @@ declare interface DistributeRule {
 /** 数据同步中的选项 */
 declare interface DynamicOptions {
   /** 所要同步的DML和DDL的选项，Insert(插入操作)、Update(更新操作)、Delete(删除操作)、DDL(结构同步)，PartialDDL(自定义,和DdlOptions一起起作用 )；必填、dts会用该值覆盖原有的值 */
-  OpTypes: string[] | null;
+  OpTypes: string[];
   /** DDL同步选项，具体描述要同步那些DDL; 当OpTypes取值PartialDDL时、字段不能为空；必填、dts会用该值覆盖原有的值 */
-  DdlOptions: DdlOption[] | null;
+  DdlOptions: DdlOption[];
   /** 冲突处理选项，ReportError(报错)、Ignore(忽略)、Cover(覆盖)、ConditionCover(条件覆盖); 目前目标端为kafka的链路不支持修改该配置 */
-  ConflictHandleType?: string | null;
+  ConflictHandleType?: string;
   /** 冲突处理的详细选项，如条件覆盖中的条件行和条件操作；不能部分更新该选项的内部字段；有更新时、需要全量更新该字段 */
-  ConflictHandleOption?: ConflictHandleOption | null;
+  ConflictHandleOption?: ConflictHandleOption;
 }
 
 /** 数据同步中的描述源端和目的端的信息 */
@@ -797,13 +797,13 @@ declare interface MonitorInfo {
 /** 同步的数据库对对象描述 */
 declare interface Objects {
   /** 同步对象类型 Partial(部分对象) */
-  Mode?: string | null;
+  Mode?: string;
   /** 同步对象，当 Mode 为 Partial 时，不为空 */
   Databases?: Database[] | null;
   /** 高级对象类型，如function、procedure。注意：如果要迁移同步高级对象，此配置中应该包含对应的高级对象类型。当需要同步高级对象时，初始化类型必须包含结构初始化类型，即任务的Options.InitType字段值为Structure或Full */
-  AdvancedObjects?: string[] | null;
+  AdvancedObjects?: string[];
   /** OnlineDDL类型，冗余字段不做配置用途 */
-  OnlineDDL?: OnlineDDL | null;
+  OnlineDDL?: OnlineDDL;
 }
 
 /** 数据订阅kafka分区中checkpoint信息 */
@@ -817,37 +817,37 @@ declare interface OffsetTimeMap {
 /** OnlineDDL类型 */
 declare interface OnlineDDL {
   /** 状态 */
-  Status: string | null;
+  Status: string;
 }
 
 /** 数据同步中的选项 */
 declare interface Options {
   /** 同步初始化选项，Data(全量数据初始化)、Structure(结构初始化)、Full(全量数据且结构初始化，默认)、None(仅增量) */
-  InitType?: string | null;
+  InitType?: string;
   /** 同名表的处理，ReportErrorAfterCheck(前置校验并报错，默认)、ExecuteAfterIgnore(忽略并继续执行) */
-  DealOfExistSameTable?: string | null;
+  DealOfExistSameTable?: string;
   /** 冲突处理选项，ReportError(报错，默认为该值)、Ignore(忽略)、Cover(覆盖)、ConditionCover(条件覆盖) */
-  ConflictHandleType?: string | null;
+  ConflictHandleType?: string;
   /** 是否添加附加列 */
-  AddAdditionalColumn?: boolean | null;
+  AddAdditionalColumn?: boolean;
   /** 所要同步的DML和DDL的选项，Insert(插入操作)、Update(更新操作)、Delete(删除操作)、DDL(结构同步)， PartialDDL(自定义,和DdlOptions一起配合使用)。注意，这里至少需要包含DML中的一种。 */
   OpTypes?: string[] | null;
   /** 冲突处理的详细选项，如条件覆盖中的条件行和条件操作 */
-  ConflictHandleOption?: ConflictHandleOption | null;
+  ConflictHandleOption?: ConflictHandleOption;
   /** DDL同步选项，具体描述要同步那些DDL */
   DdlOptions?: DdlOption[] | null;
   /** kafka同步选项 */
-  KafkaOption?: KafkaOption | null;
+  KafkaOption?: KafkaOption;
   /** 任务限速信息 */
-  RateLimitOption?: RateLimitOption | null;
+  RateLimitOption?: RateLimitOption;
   /** 自动重试的时间窗口设置 */
-  AutoRetryTimeRangeMinutes?: number | null;
+  AutoRetryTimeRangeMinutes?: number;
   /** 同步到kafka链路指定位点。目前只支持时间格式：2023-12-20T19:24:23+08:00。如果没有指定位点，为空。 */
-  StartPosition?: string | null;
+  StartPosition?: string;
   /** 同步到kafka链路是否过滤掉begin和commit消息。目前仅mysql2kafka链路支持 */
-  FilterBeginCommit?: boolean | null;
+  FilterBeginCommit?: boolean;
   /** 同步到kafka链路是否过滤掉checkpoint消息。目前仅mysql2kafka链路支持 */
-  FilterCheckpoint?: boolean | null;
+  FilterCheckpoint?: boolean;
 }
 
 /** 数据订阅中kafka消费者组的分区分配情况。该数据是实时查询的，如果需要最新数据，需重新掉接口查询。 */
@@ -981,21 +981,21 @@ declare interface StepDetailInfo {
 /** 单个步骤的详细信息 */
 declare interface StepInfo {
   /** 步骤编号 */
-  StepNo?: number | null;
+  StepNo?: number;
   /** 步骤名 */
-  StepName?: string | null;
+  StepName?: string;
   /** 步骤标号 */
-  StepId?: string | null;
+  StepId?: string;
   /** 当前步骤状态,可能返回有 notStarted(未开始)、running(校验中)、failed(校验任务失败)、finished(完成)、skipped(跳过)、paused(暂停) */
-  Status?: string | null;
+  Status?: string;
   /** 步骤开始时间，可能为空 */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 错误信息 */
   Errors?: StepTip[] | null;
   /** 警告信息 */
   Warnings?: StepTip[] | null;
   /** 当前步骤进度，范围为[0-100]，若为-1表示当前步骤不支持查看进度 */
-  Progress?: number | null;
+  Progress?: number;
 }
 
 /** 当前步骤错误信息或者警告信息 */
@@ -1129,119 +1129,119 @@ declare interface SyncDBEndpointInfos {
 /** 同步任务的步骤信息 */
 declare interface SyncDetailInfo {
   /** 总步骤数 */
-  StepAll?: number | null;
+  StepAll?: number;
   /** 当前步骤 */
-  StepNow?: number | null;
+  StepNow?: number;
   /** 总体进度 */
-  Progress?: number | null;
+  Progress?: number;
   /** 当前步骤进度，范围为[0-100]，若为-1表示当前步骤不支持查看进度 */
-  CurrentStepProgress?: number | null;
+  CurrentStepProgress?: number;
   /** 同步两端数据量差距 */
-  MasterSlaveDistance?: number | null;
+  MasterSlaveDistance?: number;
   /** 同步两端时间差距 */
-  SecondsBehindMaster?: number | null;
+  SecondsBehindMaster?: number;
   /** 总体描述信息 */
-  Message?: string | null;
+  Message?: string;
   /** 详细步骤信息 */
   StepInfos?: StepInfo[] | null;
   /** 不能发起一致性校验的原因 */
-  CauseOfCompareDisable?: string | null;
+  CauseOfCompareDisable?: string;
   /** 任务的错误和解决方案信息 */
-  ErrInfo?: ErrInfo | null;
+  ErrInfo?: ErrInfo;
 }
 
 /** 同步任务信息 */
 declare interface SyncJobInfo {
   /** 同步任务id，如：sync-btso140 */
-  JobId?: string | null;
+  JobId?: string;
   /** 同步任务名 */
-  JobName?: string | null;
+  JobName?: string;
   /** 付款方式，PostPay(按量付费)、PrePay(包年包月) */
-  PayMode?: string | null;
+  PayMode?: string;
   /** 运行模式，Immediate(表示立即运行，默认为此项值)、Timed(表示定时运行) */
-  RunMode?: string | null;
+  RunMode?: string;
   /** 期待运行时间，格式为 yyyy-mm-dd hh:mm:ss */
-  ExpectRunTime?: string | null;
+  ExpectRunTime?: string;
   /** 支持的所有操作 */
-  AllActions?: string[] | null;
+  AllActions?: string[];
   /** 当前状态能进行的操作 */
-  Actions?: string[] | null;
+  Actions?: string[];
   /** 同步选项 */
-  Options?: Options | null;
+  Options?: Options;
   /** 同步库表对象 */
-  Objects?: Objects | null;
+  Objects?: Objects;
   /** 任务规格 */
-  Specification?: string | null;
+  Specification?: string;
   /** 过期时间，格式为 yyyy-mm-dd hh:mm:ss */
-  ExpireTime?: string | null;
+  ExpireTime?: string;
   /** 源端地域，如：ap-guangzhou等 */
-  SrcRegion?: string | null;
+  SrcRegion?: string;
   /** 源端数据库类型，mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql等 */
-  SrcDatabaseType?: string | null;
+  SrcDatabaseType?: string;
   /** 源端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云) */
-  SrcAccessType?: string | null;
+  SrcAccessType?: string;
   /** 源端信息，单节点数据库使用 */
-  SrcInfo?: Endpoint | null;
+  SrcInfo?: Endpoint;
   /** 枚举值：cluster、single。源库为单节点数据库使用single，多节点使用cluster */
-  SrcNodeType?: string | null;
+  SrcNodeType?: string;
   /** 源端信息，多节点数据库使用 */
-  SrcInfos?: SyncDBEndpointInfos | null;
+  SrcInfos?: SyncDBEndpointInfos;
   /** 目标端地域，如：ap-guangzhou等 */
-  DstRegion?: string | null;
+  DstRegion?: string;
   /** 目标端数据库类型，mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql等 */
-  DstDatabaseType?: string | null;
+  DstDatabaseType?: string;
   /** 目标端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云) */
-  DstAccessType?: string | null;
+  DstAccessType?: string;
   /** 目标端信息，单节点数据库使用 */
-  DstInfo?: Endpoint | null;
+  DstInfo?: Endpoint;
   /** 枚举值：cluster、single。目标库为单节点数据库使用single，多节点使用cluster */
-  DstNodeType?: string | null;
+  DstNodeType?: string;
   /** 目标端信息，多节点数据库使用 */
-  DstInfos?: SyncDBEndpointInfos | null;
+  DstInfos?: SyncDBEndpointInfos;
   /** 创建时间，格式为 yyyy-mm-dd hh:mm:ss */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 开始时间，格式为 yyyy-mm-dd hh:mm:ss */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 任务状态，UnInitialized(未初始化)、Initialized(已初始化)、Checking(校验中)、CheckPass(校验通过)、CheckNotPass(校验不通过)、ReadyRunning(准备运行)、Running(运行中)、Pausing(暂停中)、Paused(已暂停)、Stopping(停止中)、Stopped(已结束)、ResumableErr(任务错误)、Resuming(恢复中)、Failed(失败)、Released(已释放)、Resetting(重置中)、Unknown(未知) */
-  Status?: string | null;
+  Status?: string;
   /** 结束时间，格式为 yyyy-mm-dd hh:mm:ss */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 标签相关信息 */
-  Tags?: TagItem[] | null;
+  Tags?: TagItem[];
   /** 同步任务运行步骤信息 */
-  Detail?: SyncDetailInfo | null;
+  Detail?: SyncDetailInfo;
   /** 用于计费的状态，可能取值有：Normal(正常状态)、Resizing(变配中)、Renewing(续费中)、Isolating(隔离中)、Isolated(已隔离)、Offlining(下线中)、Offlined(已下线)、NotBilled(未计费)、Recovering(解隔离)、PostPay2Prepaying(按量计费转包年包月中)、PrePay2Postpaying(包年包月转按量计费中) */
-  TradeStatus?: string | null;
+  TradeStatus?: string;
   /** 同步链路规格，如micro,small,medium,large */
-  InstanceClass?: string | null;
+  InstanceClass?: string;
   /** 自动续费标识，当PayMode值为PrePay则此项配置有意义，取值为：1（表示自动续费）、0（不自动续费） */
-  AutoRenew?: number | null;
+  AutoRenew?: number;
   /** 下线时间，格式为 yyyy-mm-dd hh:mm:ss */
-  OfflineTime?: string | null;
+  OfflineTime?: string;
   /** 动态修改对象，修改任务的状态等 */
-  OptObjStatus?: string | null;
+  OptObjStatus?: string;
   /** 自动重试时间段设置 */
-  AutoRetryTimeRangeMinutes?: number | null;
+  AutoRetryTimeRangeMinutes?: number;
   /** 全量导出可重入标识：enum::"yes"/"no"。yes表示当前任务可重入、no表示当前任务处于全量导出且不可重入阶段；如果在该值为no时重启任务导出流程不支持断点续传 */
-  DumperResumeCtrl?: string | null;
+  DumperResumeCtrl?: string;
 }
 
 /** 数据同步库表信息描述 */
 declare interface Table {
   /** 表名 */
-  TableName?: string | null;
+  TableName?: string;
   /** 新表名 */
-  NewTableName?: string | null;
+  NewTableName?: string;
   /** 过滤条件 */
-  FilterCondition?: string | null;
+  FilterCondition?: string;
   /** 是否同步表中所有列，All：当前表下的所有列,Partial(ModifySyncJobConfig接口里的对应字段ColumnMode暂不支持Partial)：当前表下的部分列，通过填充Columns字段详细表信息 */
-  ColumnMode?: string | null;
+  ColumnMode?: string;
   /** 同步的列信息，当ColumnMode为Partial时，必填 */
-  Columns?: Column[] | null;
+  Columns?: Column[];
   /** 同步临时表，注意此配置与NewTableName互斥，只能使用其中一种。当配置的同步对象为表级别且TableEditMode为pt时此项有意义，针对pt-osc等工具在同步过程中产生的临时表进行同步，需要提前将可能的临时表配置在这里，否则不会同步任何临时表。示例，如要对t1进行pt-osc操作，此项配置应该为["\_t1\_new","\_t1\_old"]；如要对t1进行gh-ost操作，此项配置应该为["\_t1\_ghc","\_t1\_gho","\_t1\_del"]，pt-osc与gh-ost产生的临时表可同时配置。 */
-  TmpTables?: string[] | null;
+  TmpTables?: string[];
   /** 编辑表类型，rename(表映射)，pt(同步附加表) */
-  TableEditMode?: string | null;
+  TableEditMode?: string;
 }
 
 /** 表对象集合，当 TableMode 为 partial 时，此项需要填写 */
@@ -1319,9 +1319,9 @@ declare interface TradeInfo {
 /** 数据同步view的描述 */
 declare interface View {
   /** view名 */
-  ViewName?: string | null;
+  ViewName?: string;
   /** 预留字段、目前暂时不支持view的重命名 */
-  NewViewName?: string | null;
+  NewViewName?: string;
 }
 
 /** 视图对象 */
@@ -1555,7 +1555,7 @@ declare interface CreateSubscribeRequest {
 
 declare interface CreateSubscribeResponse {
   /** 数据订阅实例的ID数组 */
-  SubscribeIds?: string[] | null;
+  SubscribeIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1629,13 +1629,13 @@ declare interface DescribeCheckSyncJobResultRequest {
 
 declare interface DescribeCheckSyncJobResultResponse {
   /** 校验任务执行状态，如：notStarted(未开始)、running(校验中)、failed(校验任务失败)、success(任务成功) */
-  Status?: string | null;
+  Status?: string;
   /** 步骤总数 */
-  StepCount?: number | null;
+  StepCount?: number;
   /** 当前所在步骤 */
-  StepCur?: number | null;
+  StepCur?: number;
   /** 总体进度，范围为[0,100] */
-  Progress?: number | null;
+  Progress?: number;
   /** 步骤信息 */
   StepInfos?: StepInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1739,9 +1739,9 @@ declare interface DescribeMigrateDBInstancesRequest {
 
 declare interface DescribeMigrateDBInstancesResponse {
   /** 符合筛选条件的数量 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 实例列表 */
-  Instances?: MigrateDBItem[] | null;
+  Instances?: MigrateDBItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1771,49 +1771,49 @@ declare interface DescribeMigrationDetailRequest {
 
 declare interface DescribeMigrationDetailResponse {
   /** 数据迁移任务ID */
-  JobId?: string | null;
+  JobId?: string;
   /** 数据迁移任务名称 */
-  JobName?: string | null;
+  JobName?: string;
   /** 任务创建(提交)时间，格式为 yyyy-mm-dd hh:mm:ss */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 任务更新时间，格式为 yyyy-mm-dd hh:mm:ss */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 任务开始执行时间，格式为 yyyy-mm-dd hh:mm:ss */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 任务执行结束时间，格式为 yyyy-mm-dd hh:mm:ss */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 迁移任务简要错误信息 */
-  BriefMsg?: string | null;
+  BriefMsg?: string;
   /** 任务状态，取值为：created(创建完成)、checking(校验中)、checkPass(校验通过)、checkNotPass(校验不通过)、readyRun(准备运行)、running(任务运行中)、readyComplete(准备完成)、success(任务成功)、failed(任务失败)、stopping(中止中)、completing(完成中)、pausing(暂停中)、manualPaused(已暂停) */
-  Status?: string | null;
+  Status?: string;
   /** 任务操作信息 */
-  Action?: MigrateAction | null;
+  Action?: MigrateAction;
   /** 迁移执行过程信息，在校验阶段显示校验过程步骤信息，在迁移阶段会显示迁移步骤信息 */
-  StepInfo?: MigrateDetailInfo | null;
+  StepInfo?: MigrateDetailInfo;
   /** 源实例信息 */
-  SrcInfo?: DBEndpointInfo | null;
+  SrcInfo?: DBEndpointInfo;
   /** 目标端信息 */
-  DstInfo?: DBEndpointInfo | null;
+  DstInfo?: DBEndpointInfo;
   /** 数据一致性校验结果 */
-  CompareTask?: CompareTaskInfo | null;
+  CompareTask?: CompareTaskInfo;
   /** 标签信息 */
-  Tags?: TagItem[] | null;
+  Tags?: TagItem[];
   /** 运行模式，取值如：immediate(表示立即运行)、timed(表示定时运行) */
-  RunMode?: string | null;
+  RunMode?: string;
   /** 期待启动时间，当RunMode取值为timed时，此值必填，形如："2006-01-02 15:04:05" */
-  ExpectRunTime?: string | null;
+  ExpectRunTime?: string;
   /** 迁移选项，描述任务如何执行迁移等一系列配置信息 */
-  MigrateOption?: MigrateOption | null;
+  MigrateOption?: MigrateOption;
   /** 校验任务运行详情 */
-  CheckStepInfo?: CheckStepInfo | null;
+  CheckStepInfo?: CheckStepInfo;
   /** 描述计费相关的信息 */
-  TradeInfo?: TradeInfo | null;
+  TradeInfo?: TradeInfo;
   /** 任务错误信息 */
-  ErrorInfo?: ErrorInfoItem[] | null;
+  ErrorInfo?: ErrorInfoItem[];
   /** 全量导出可重入标识：enum::"yes"/"no"。yes表示当前任务可重入、no表示当前任务处于全量导出且不可重入阶段；如果在该值为no时重启任务导出流程不支持断点续传 */
   DumperResumeCtrl?: string;
   /** 任务的限速信息 */
-  RateLimitOption?: RateLimitOption | null;
+  RateLimitOption?: RateLimitOption;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1871,11 +1871,11 @@ declare interface DescribeModifyCheckSyncJobResultResponse {
   /** 校验任务执行状态，如：notStarted(未开始)、running(校验中)、failed(校验任务失败)、success(任务成功) */
   Status?: string;
   /** 校验的步骤总数 */
-  StepCount?: number | null;
+  StepCount?: number;
   /** 当前所在步骤 */
-  StepCur?: number | null;
+  StepCur?: number;
   /** 总体进度，范围为[0,100] */
-  Progress?: number | null;
+  Progress?: number;
   /** 步骤详细信息 */
   StepInfos?: StepInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1905,7 +1905,7 @@ declare interface DescribeSubscribeCheckJobResponse {
   /** 订阅实例ID */
   SubscribeId?: string;
   /** 失败或者报错提示，成功则提示success。 */
-  Message?: string | null;
+  Message?: string;
   /** 任务运行状态，可能值为 running,failed,success */
   Status?: string;
   /** 当前总体进度，范围 0~100 */
@@ -1915,7 +1915,7 @@ declare interface DescribeSubscribeCheckJobResponse {
   /** 当前执行步骤 */
   StepNow?: number;
   /** 各个步骤运行状态 */
-  Steps?: SubscribeCheckStepInfo[] | null;
+  Steps?: SubscribeCheckStepInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1933,23 +1933,23 @@ declare interface DescribeSubscribeDetailResponse {
   /** 订阅的数据库类型，目前支持 cynosdbmysql(tdsql-c mysql版),mariadb,mongodb,mysql,percona,tdpg(tdsql postgresql版),tdsqlpercona(tdsql mysql版) */
   Product?: string;
   /** 订阅的云数据库实例ID，只有订阅云数据库该值才有意义 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 订阅的云数据库实例状态，只有订阅云数据库该值才有意义。可能值为：running, isolated, offline */
-  InstanceStatus?: string | null;
+  InstanceStatus?: string;
   /** 订阅任务计费状态，可能值为：正常normal, 隔离中isolating, 已隔离isolated, 下线中offlining, 按量转包年包月中 post2PrePayIng */
   Status?: string;
   /** 订阅任务状态，可能值为：未启动notStarted, 校验中checking, 校验不通过checkNotPass, 校验通过checkPass, 启动中starting, 运行中running, 异常出错error */
   SubsStatus?: string;
   /** 修改时间，时间格式如：Y-m-d h:m:s */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
   /** 创建时间，时间格式如：Y-m-d h:m:s */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 隔离时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00 */
-  IsolateTime?: string | null;
+  IsolateTime?: string;
   /** 包年包月任务的到期时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00 */
-  ExpireTime?: string | null;
+  ExpireTime?: string;
   /** 下线时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00 */
-  OfflineTime?: string | null;
+  OfflineTime?: string;
   /** 付费方式，可能值为：0-包年包月，1-按量计费 */
   PayType?: number;
   /** 自动续费标识。只有当 PayType=0，该值才有意义。枚举值：0-不自动续费，1-自动续费 */
@@ -1957,31 +1957,31 @@ declare interface DescribeSubscribeDetailResponse {
   /** 任务所在地域 */
   Region?: string;
   /** Kafka topic */
-  Topic?: string | null;
+  Topic?: string;
   /** Kafka服务Broker地址 */
-  Broker?: string | null;
+  Broker?: string;
   /** 数据订阅的类型，当 Product 不为 mongodb 时，可能值为：all-全实例更新；dml-数据更新；ddl-结构更新；dmlAndDdl-数据更新+结构更新。当 Product 为 mongodb 时，可能值为 all-全实例更新；database-订阅单库；collection-订阅单集合 */
-  SubscribeMode?: string | null;
+  SubscribeMode?: string;
   /** 订阅数据格式。如果为空则用的默认格式: mysql\cynosdbmysql\mariadb\percona\tdsqlpercona\tdpg是protobuf，mongo是json。当 DatabaseType 为 mysql和cynosdbmysql 时有三种可选协议：protobuf\avro\json。数据格式详情参考官网的消费demo文档 */
-  Protocol?: string | null;
+  Protocol?: string;
   /** 订阅的数据库表信息 */
-  SubscribeObjects?: SubscribeObject[] | null;
+  SubscribeObjects?: SubscribeObject[];
   /** kafka配置信息 */
-  KafkaConfig?: SubscribeKafkaConfig | null;
+  KafkaConfig?: SubscribeKafkaConfig;
   /** 订阅内置kafka的版本信息 */
-  KafkaVersion?: string | null;
+  KafkaVersion?: string;
   /** 源数据库接入类型，如：extranet(公网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、cdb(云数据库)、cvm(云服务器自建)、intranet(自研上云)、vpc(私有网络vpc)。注意具体可选值依赖当前链路支持能力 */
-  AccessType?: string | null;
+  AccessType?: string;
   /** 接入类型信息 */
-  Endpoints?: EndpointItem[] | null;
+  Endpoints?: EndpointItem[];
   /** mongo输出聚合设置 */
-  PipelineInfo?: PipelineInfo[] | null;
+  PipelineInfo?: PipelineInfo[];
   /** 标签 */
-  Tags?: TagItem[] | null;
+  Tags?: TagItem[];
   /** 订阅任务报错信息 */
   Errors?: SubsErr[] | null;
   /** 为业务添加的额外信息。参数名作key，参数值作value。mysql选填参数：ProcessXA-是否处理XA事务，为true处理，其他不处理。mongo选填参数：SubscribeType-订阅类型，目前只支持changeStream。 */
-  ExtraAttr?: KeyValuePairOption[] | null;
+  ExtraAttr?: KeyValuePairOption[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2033,7 +2033,7 @@ declare interface DescribeSubscribeReturnableResponse {
   /** 实例是否支持退还/退货 */
   IsReturnable?: boolean;
   /** 不支持退还的原因 */
-  ReturnFailMessage?: string | null;
+  ReturnFailMessage?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2071,9 +2071,9 @@ declare interface DescribeSyncJobsRequest {
 
 declare interface DescribeSyncJobsResponse {
   /** 任务数目 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 任务详情数组 */
-  JobList?: SyncJobInfo[] | null;
+  JobList?: SyncJobInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2491,7 +2491,7 @@ declare interface SkipCheckItemRequest {
 
 declare interface SkipCheckItemResponse {
   /** 跳过的提示信息 */
-  Message?: string | null;
+  Message?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2942,7 +2942,7 @@ declare namespace V20180330 {
 
   interface CreateSubscribeResponse {
     /** 数据订阅实例的ID数组 */
-    SubscribeIds: string[] | null;
+    SubscribeIds?: string[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

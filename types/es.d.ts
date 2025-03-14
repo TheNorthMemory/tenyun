@@ -1134,6 +1134,8 @@ declare interface ServerlessIndexMetaField {
   AppId?: number | null;
   /** 索引名 */
   IndexName?: string | null;
+  /** 索引元数据JSON */
+  IndexMetaJson?: string | null;
   /** 索引文档数 */
   IndexDocs?: number | null;
   /** 索引存储大小，单位Byte */

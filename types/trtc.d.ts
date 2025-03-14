@@ -46,6 +46,8 @@ declare interface AgentConfig {
   FilterOneWord?: boolean;
   /** 欢迎消息优先级，0默认，1高优，高优不能被打断。 */
   WelcomeMessagePriority?: number;
+  /** 用于过滤LLM返回内容，不播放括号中的内容。1：中文括号（）2：英文括号()3：中文方括号【】4：英文方括号[]5：英文花括号{}默认值为空，表示不进行过滤。 */
+  FilterBracketsContent?: number;
 }
 
 /** 转推服务加入TRTC房间的机器人参数。 */
@@ -712,7 +714,7 @@ declare interface RowValues {
 
 /** 语音转文字参数 */
 declare interface STTConfig {
-  /** 语音转文字支持识别的语言，默认是"zh" 中文可通过购买「AI智能识别时长包」解锁或领取包月套餐体验版解锁不同语言. 详细说明参考：[AI智能识别计费说明](https://cloud.tencent.com/document/product/647/111976)语音转文本不同套餐版本支持的语言如下：**基础版**：- "zh": 中文- "zh-TW": 中国台湾- "en": 英语**标准版：**- "8k_zh_large": 普方大模型引擎. 当前模型同时支持中文等语言的识别，模型参数量极大，语言模型性能增强，针对电话音频中各类场景、各类中文方言的识别准确率极大提升.- "16k_zh_large": 普方英大模型引擎. 当前模型同时支持中文、英文、多种中文方言等语言的识别，模型参数量极大，语言模型性能增强，针对噪声大、回音大、人声小、人声远等低质量音频的识别准确率极大提升.- "16k_multi_lang": 多语种大模型引擎. 当前模型同时支持英语、日语、韩语、阿拉伯语、菲律宾语、法语、印地语、印尼语、马来语、葡萄牙语、西班牙语、泰语、土耳其语、越南语、德语的识别，可实现15个语种的自动识别(句子/段落级别).- "16k_zh_en": 中英大模型引擎. 当前模型同时支持中文、英语识别，模型参数量极大，语言模型性能增强，针对噪声大、回音大、人声小、人声远等低质量音频的识别准确率极大提升.**高级版：**- "zh-dialect": 中国方言- "zh-yue": 中国粤语- "vi": 越南语- "ja": 日语- "ko": 韩语- "id": 印度尼西亚语- "th": 泰语- "pt": 葡萄牙语- "tr": 土耳其语- "ar": 阿拉伯语- "es": 西班牙语- "hi": 印地语- "fr": 法语- "ms": 马来语- "fil": 菲律宾语- "de": 德语- "it": 意大利语- "ru": 俄语- "sv": 瑞典语- "da": 丹麦语- "no": 挪威语**注意：**如果缺少满足您需求的语言，请联系我们技术人员。 */
+  /** 语音转文字支持识别的语言，默认是"zh" 中文可通过购买「AI智能识别时长包」解锁或领取包月套餐体验版解锁不同语言. 详细说明参考：[AI智能识别计费说明](https://cloud.tencent.com/document/product/647/111976)语音转文本不同套餐版本支持的语言如下：**基础版**：- "zh": 中文（简体）- "zh-TW": 中文（繁体）- "en": 英语**标准版：**- "8k_zh_large": 普方大模型引擎. 当前模型同时支持中文等语言的识别，模型参数量极大，语言模型性能增强，针对电话音频中各类场景、各类中文方言的识别准确率极大提升.- "16k_zh_large": 普方英大模型引擎. 当前模型同时支持中文、英文、多种中文方言等语言的识别，模型参数量极大，语言模型性能增强，针对噪声大、回音大、人声小、人声远等低质量音频的识别准确率极大提升.- "16k_multi_lang": 多语种大模型引擎. 当前模型同时支持英语、日语、韩语、阿拉伯语、菲律宾语、法语、印地语、印尼语、马来语、葡萄牙语、西班牙语、泰语、土耳其语、越南语、德语的识别，可实现15个语种的自动识别(句子/段落级别).- "16k_zh_en": 中英大模型引擎. 当前模型同时支持中文、英语识别，模型参数量极大，语言模型性能增强，针对噪声大、回音大、人声小、人声远等低质量音频的识别准确率极大提升.**高级版：**- "zh-dialect": 中国方言- "zh-yue": 中国粤语- "vi": 越南语- "ja": 日语- "ko": 韩语- "id": 印度尼西亚语- "th": 泰语- "pt": 葡萄牙语- "tr": 土耳其语- "ar": 阿拉伯语- "es": 西班牙语- "hi": 印地语- "fr": 法语- "ms": 马来语- "fil": 菲律宾语- "de": 德语- "it": 意大利语- "ru": 俄语- "sv": 瑞典语- "da": 丹麦语- "no": 挪威语**注意：**如果缺少满足您需求的语言，请联系我们技术人员。 */
   Language?: string;
   /** **发起模糊识别为高级版能力,默认按照高级版收费,仅支持填写基础版和高级版语言.**注意：不支持填写"zh-dialect" */
   AlternativeLanguage?: string[];
@@ -954,7 +956,7 @@ declare interface UserMediaStream {
 declare interface VideoEncode {
   /** 输出流宽，音视频输出时必填。取值范围[0,1920]，单位为像素值。 */
   Width: number;
-  /** 输出流高，音视频输出时必填。取值范围[0,1080]，单位为像素值。 */
+  /** 输出流高，音视频输出时必填。取值范围[0,1920]，单位为像素值。 */
   Height: number;
   /** 输出流帧率，音视频输出时必填。取值范围[1,60]，表示混流的输出帧率可选范围为1到60fps。 */
   Fps: number;
@@ -1835,7 +1837,7 @@ declare interface StartAIConversationRequest {
   STTConfig?: STTConfig;
   /** LLM配置。需符合openai规范，为JSON字符串，示例如下： { &emsp; "LLMType": “大模型类型"， // String 必填，如："openai" &emsp; "Model": "您的模型名称", // String 必填，指定使用的模型 "APIKey": "您的LLM API密钥", // String 必填 &emsp; "APIUrl": "https://api.xxx.com/chat/completions", // String 必填，LLM API访问的URL &emsp; "Streaming": true // Boolean 非必填，指定是否使用流式传输 &emsp;} */
   LLMConfig?: string;
-  /** TTS配置，为JSON字符串，腾讯云TTS示例如下： { &emsp; "AppId": 您的应用ID, // Integer 必填 &emsp; "TTSType": "TTS类型", // String TTS类型, 固定为"tencent" &emsp; "SecretId": "您的密钥ID", // String 必填 &emsp; "SecretKey": "您的密钥Key", // String 必填 &emsp; "VoiceType": 101001, // Integer 必填，音色 ID，包括标准音色与精品音色，精品音色拟真度更高，价格不同于标准音色，请参见语音合成计费概述。完整的音色 ID 列表请参见语音合成音色列表。 &emsp; "Speed": 1.25, // Integer 非必填，语速，范围：[-2，6]，分别对应不同语速： -2: 代表0.6倍 -1: 代表0.8倍 0: 代表1.0倍（默认） 1: 代表1.2倍 2: 代表1.5倍 6: 代表2.5倍 如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。 参数值与实际语速转换，可参考 语速转换 &emsp; "Volume": 5, // Integer 非必填，音量大小，范围：[0，10]，分别对应11个等级的音量，默认值为0，代表正常音量。 &emsp; "PrimaryLanguage": "zh-CN" // String 非必填，主要语言 &emsp;} */
+  /** TTS配置，为JSON字符串，腾讯云TTS示例如下： { &emsp; "AppId": 您的应用ID, // Integer 必填 &emsp; "TTSType": "TTS类型", // String TTS类型, 固定为"tencent" &emsp; "SecretId": "您的密钥ID", // String 必填 &emsp; "SecretKey": "您的密钥Key", // String 必填 &emsp; "VoiceType": 101001, // Integer 必填，音色 ID，包括标准音色与精品音色，精品音色拟真度更高，价格不同于标准音色，请参见语音合成计费概述。完整的音色 ID 列表请参见语音合成音色列表。 &emsp; "Speed": 1.25, // Integer 非必填，语速，范围：[-2，6]，分别对应不同语速： -2: 代表0.6倍 -1: 代表0.8倍 0: 代表1.0倍（默认） 1: 代表1.2倍 2: 代表1.5倍 6: 代表2.5倍 如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。 参数值与实际语速转换，可参考 语速转换 &emsp; "Volume": 5, // Integer 非必填，音量大小，范围：[0，10]，分别对应11个等级的音量，默认值为0，代表正常音量。 &emsp;} */
   TTSConfig?: string;
   /** 数字人配置，为JSON字符串。**数字人配置需要提工单加白后才能使用** */
   AvatarConfig?: string;
@@ -1919,7 +1921,7 @@ declare interface StartPublishCdnStreamRequest {
   RoomIdType: number;
   /** 转推服务加入TRTC房间的机器人参数。 */
   AgentParams: AgentParams;
-  /** 是否转码，0表示无需转码，1表示需要转码。是否收取转码费是由WithTranscoding参数决定的，WithTranscoding为0，表示旁路转推，不会收取转码费用，WithTranscoding为1，表示混流转推，会收取转码费用。 */
+  /** 是否转码，0表示无需转码，1表示需要转码。是否收取转码费是由WithTranscoding参数决定的，WithTranscoding为0，表示旁路转推，不会收取转码费用，WithTranscoding为1，表示混流转推，会收取转码费用。注：混流是必须转码，这个参数需设置为1。 */
   WithTranscoding: number;
   /** 转推流的音频编码参数。由于音频是必转码的（不会收取转码费用），所以启动任务的时候，必须填写。 */
   AudioParams?: McuAudioParams;
@@ -2121,7 +2123,7 @@ declare interface UpdatePublishCdnStreamRequest {
   TaskId: string;
   /** 客户保证同一个任务，每次更新请求中的SequenceNumber递增，防止请求乱序。 */
   SequenceNumber: number;
-  /** 是否转码，0表示无需转码，1表示需要转码。 */
+  /** 是否转码，0表示无需转码，1表示需要转码。注：混流是必须转码，这个参数需设置为1。 */
   WithTranscoding: number;
   /** 更新相关参数，只支持更新参与混音的主播列表参数，不支持更新Codec、采样率、码率和声道数。不填表示不更新此参数。 */
   AudioParams?: McuAudioParams;

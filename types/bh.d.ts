@@ -12,6 +12,20 @@ declare interface ACTemplate {
   Description?: string;
 }
 
+/** 认证信息 */
+declare interface AccessInfo {
+  /** 地址 */
+  Ip?: string;
+  /** 端口 */
+  Port?: number;
+  /** 账号 */
+  User?: string;
+  /** 密码 */
+  Password?: string;
+  /** 唤起链接｜wss链接 */
+  AccessURL?: string;
+}
+
 /** 访问权限 */
 declare interface Acl {
   /** 访问权限ID */
@@ -694,6 +708,40 @@ declare interface User {
   Status?: string;
   /** 权限版本 */
   AclVersion?: number;
+}
+
+declare interface AccessDevicesRequest {
+  /** 资源id */
+  InstanceId: string;
+  /** 账号 */
+  Account: string;
+  /** 运维端登录账号 */
+  LoginAccount: string;
+  /** 运维端登录密码 */
+  LoginPassword: string;
+  /** 密码 */
+  Password?: string;
+  /** 私钥 */
+  PrivateKey?: string;
+  /** 私钥密码 */
+  PrivateKeyPassword?: string;
+  /** 客户端工具 */
+  Exe?: string;
+  /** RDP挂载盘符驱动（mstsc支持） */
+  Drivers?: string[];
+  /** 窗口宽度（RDP支持） */
+  Width?: number;
+  /** 窗口高度（RDP支持） */
+  Height?: number;
+  /** 是否内网访问（默认不是） */
+  IntranetAccess?: boolean;
+}
+
+declare interface AccessDevicesResponse {
+  /** 认证信息 */
+  AccessInfo?: AccessInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface AddDeviceGroupMembersRequest {
@@ -2071,6 +2119,8 @@ declare interface SearchSessionResponse {
 /** {@link Bh 运维安全中心（堡垒机）} */
 declare interface Bh {
   (): Versions;
+  /** 运维登录资产 {@link AccessDevicesRequest} {@link AccessDevicesResponse} */
+  AccessDevices(data: AccessDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<AccessDevicesResponse>;
   /** 添加资产组成员 {@link AddDeviceGroupMembersRequest} {@link AddDeviceGroupMembersResponse} */
   AddDeviceGroupMembers(data: AddDeviceGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<AddDeviceGroupMembersResponse>;
   /** 添加用户组成员 {@link AddUserGroupMembersRequest} {@link AddUserGroupMembersResponse} */

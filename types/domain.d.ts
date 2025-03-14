@@ -5,13 +5,13 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 用于域名预释放详情页面 */
 declare interface AuctionInfo {
   /** 竞拍人 */
-  Bidder?: string | null;
+  Bidder?: string;
   /** 竞拍时间 */
-  AuctionTime?: string | null;
+  AuctionTime?: string;
   /** 竞拍价格 */
-  AuctionPrice?: number | null;
+  AuctionPrice?: number;
   /** 状态 up: 领先 down: 落后 */
-  Status?: string | null;
+  Status?: string;
 }
 
 /** 批量任务状态 */
@@ -27,49 +27,49 @@ declare interface BatchStatus {
 /** 我预定的域名结构体。 */
 declare interface BiddingAppointResult {
   /** business_id */
-  BusinessID?: string | null;
+  BusinessID?: string;
   /** 域名 */
-  Domain?: string | null;
+  Domain?: string;
   /** 预定价格 */
-  AppointPrice?: number | null;
+  AppointPrice?: number;
   /** 预约保证金 */
-  AppointBondPrice?: number | null;
+  AppointBondPrice?: number;
   /** 预约结束时间 */
-  AppointEndTime?: string | null;
+  AppointEndTime?: string;
   /** 预约人数 */
-  AppointNum?: number | null;
+  AppointNum?: number;
   /** 1 已预约，2 竞价中，3 等待出价 4 竞价失败 5 等待支付 6 等待转移，7 转移中 8 交易成功 9 预约持有者赎回 10 竞价持有者赎回 11 其他阶段持有者赎回 12 违约 */
-  Status?: number | null;
+  Status?: number;
 }
 
 /** 我竞价的域名结构体。 */
 declare interface BiddingResult {
   /** business_id */
-  BusinessID?: string | null;
+  BusinessID?: string;
   /** 域名 */
-  Domain?: string | null;
+  Domain?: string;
   /** 当前价格 */
-  CurrentPrice?: number | null;
+  CurrentPrice?: number;
   /** 当前用户昵称 */
-  CurrentNickname?: string | null;
+  CurrentNickname?: string;
   /** 我的出价 */
-  BiddingPrice?: number | null;
+  BiddingPrice?: number;
   /** 竞价保证金 */
-  BiddingBondPrice?: number | null;
+  BiddingBondPrice?: number;
   /** 竞价结束时间 */
-  BiddingEndTime?: string | null;
+  BiddingEndTime?: string;
   /** 竞价标识，1 领先，2 落后 */
-  BiddingFlag?: number | null;
+  BiddingFlag?: number;
   /** 出价次数 */
-  BiddingNum?: number | null;
+  BiddingNum?: number;
   /** 2 竞价中 3 等待出价 4 竞价失败 10 竞价持有者赎回 */
-  Status?: number | null;
+  Status?: number;
 }
 
 /** 我得标的域名结构体。 */
 declare interface BiddingSuccessfulResult {
   /** 支付结束时间 */
-  PayEndTime?: string | null;
+  PayEndTime?: string;
 }
 
 /** 认证资料信息 */
@@ -137,33 +137,33 @@ declare interface CustomDnsHost {
 /** 获取域名基础信息 */
 declare interface DomainBaseInfo {
   /** 域名资源ID。 */
-  DomainId: string;
+  DomainId?: string;
   /** 域名名称。 */
-  DomainName: string;
+  DomainName?: string;
   /** 域名实名认证状态。NotUpload：未实名认证InAudit：实名审核中Approved：实名审核通过Reject：实名审核失败NoAudit: 无需实名认证 */
-  RealNameAuditStatus: string;
+  RealNameAuditStatus?: string;
   /** 域名实名认证不通过原因。 */
-  RealNameAuditUnpassReason: string | null;
+  RealNameAuditUnpassReason?: string | null;
   /** 域名命名审核状态。NotAudit：命名审核未上传Pending：命名审核待上传Auditing：域名命名审核中Approved：域名命名审核通过Rejected：域名命名审核拒绝 */
-  DomainNameAuditStatus: string;
+  DomainNameAuditStatus?: string;
   /** 域名命名审核不通过原因。 */
-  DomainNameAuditUnpassReason: string | null;
+  DomainNameAuditUnpassReason?: string | null;
   /** 注册时间。 */
-  CreationDate: string;
+  CreationDate?: string;
   /** 到期时间 */
-  ExpirationDate: string;
+  ExpirationDate?: string;
   /** 域名状态。ok：正常serverHold：注册局暂停解析 clientHold：注册商暂停解析pendingTransfer：转移中renewingPeriod：续费期redemptionPeriod：偿还期pendingDelete：删除期serverTransferProhibited：注册局禁止转移serverUpdateProhibited：注册局禁止更新serverDeleteProhibited：注册局禁止删除clientTransferProhibited：注册商禁止转移clientUpdateProhibited：注册商禁止更新clientDeleteProhibited：注册商禁止删除serverRenewProhibited: 注册局禁止续费clientRenewProhobited: 注册商禁止续费 */
-  DomainStatus: string[];
+  DomainStatus?: string[];
   /** 域名购买状态。ok：正常RegisterPending：待注册RegisterDoing：注册中RegisterFailed：注册失败AboutToExpire: 即将过期RenewPending：已进入续费期，需要进行续费RenewDoing：续费中RedemptionPending：已进入赎回期，需要进行续费RedemptionDoing：赎回中TransferPending：待转入中TransferTransing：转入中TransferFailed：转入失败 */
-  BuyStatus: string;
+  BuyStatus?: string;
   /** 注册商类型epp: DNSPod, Inc.（烟台帝思普网络科技有限公司）qcloud: Tencent Cloud Computing (Beijing) Limited Liability Company（腾讯云计算（北京）有限责任公司）yunxun: Guangzhou Yunxun Information Technology Co., Ltd.（广州云讯信息科技有限公司）xinnet: Xin Net Technology Corporation（北京新网数码信息技术有限公司） */
-  RegistrarType: string;
+  RegistrarType?: string;
   /** 域名绑定的ns */
-  NameServer: string[];
+  NameServer?: string[];
   /** true：开启锁定false：关闭锁定 */
-  LockTransfer: boolean;
+  LockTransfer?: boolean;
   /** 锁定结束时间 */
-  LockEndTime: string;
+  LockEndTime?: string;
 }
 
 /** 批量操作日志详情 */
@@ -177,13 +177,13 @@ declare interface DomainBatchDetailSet {
   /** 执行状态：doing 执行中。failed 操作失败。success 操作成功。 */
   Status?: string;
   /** 失败原因 */
-  Reason?: string | null;
+  Reason?: string;
   /** 创建时间 */
   CreatedOn?: string;
   /** 更新时间 */
   UpdatedOn?: string;
   /** 订单号 */
-  BigDealId?: string | null;
+  BigDealId?: string;
 }
 
 /** 批量操作记录 */
@@ -229,51 +229,51 @@ declare interface DomainList {
 /** 获取域名基础模板信息 */
 declare interface DomainSimpleInfo {
   /** 域名资源ID。 */
-  DomainId: string;
+  DomainId?: string;
   /** 域名名称。 */
-  DomainName: string;
+  DomainName?: string;
   /** 域名实名认证状态。NotUpload：未实名认证InAudit：实名审核中Approved：实名审核通过Reject：实名审核失败NoAudit: 无需实名认证 */
-  RealNameAuditStatus: string;
+  RealNameAuditStatus?: string;
   /** 域名实名认证不通过原因。 */
-  RealNameAuditUnpassReason: string | null;
+  RealNameAuditUnpassReason?: string;
   /** 域名命名审核状态。NotAudit：命名审核未上传Pending：命名审核待上传Auditing：域名命名审核中Approved：域名命名审核通过Rejected：域名命名审核拒绝 */
-  DomainNameAuditStatus: string;
+  DomainNameAuditStatus?: string;
   /** 域名命名审核不通过原因。 */
-  DomainNameAuditUnpassReason: string | null;
+  DomainNameAuditUnpassReason?: string;
   /** 注册时间。 */
-  CreationDate: string;
+  CreationDate?: string;
   /** 到期时间 */
-  ExpirationDate: string;
+  ExpirationDate?: string;
   /** 域名状态。ok：正常serverHold：注册局暂停解析 clientHold：注册商暂停解析pendingTransfer：转移中renewingPeriod：续费期redemptionPeriod：偿还期pendingDelete：删除期serverTransferProhibited：注册局禁止转移serverUpdateProhibited：注册局禁止更新serverDeleteProhibited：注册局禁止删除clientTransferProhibited：注册商禁止转移clientUpdateProhibited：注册商禁止更新clientDeleteProhibited：注册商禁止删除serverRenewProhibited: 注册局禁止续费clientRenewProhobited: 注册商禁止续费 */
-  DomainStatus: string[];
+  DomainStatus?: string[];
   /** 域名购买状态。ok：正常RegisterPending：待注册RegisterDoing：注册中RegisterFailed：注册失败AboutToExpire: 即将过期RenewPending：已进入续费期，需要进行续费RenewDoing：续费中RedemptionPending：已进入赎回期，需要进行续费RedemptionDoing：赎回中TransferPending：待转入中TransferTransing：转入中TransferFailed：转入失败 */
-  BuyStatus: string;
+  BuyStatus?: string;
   /** 注册商类型epp: DNSPod, Inc.（烟台帝思普网络科技有限公司）qcloud: Tencent Cloud Computing (Beijing) Limited Liability Company（腾讯云计算（北京）有限责任公司）yunxun: Guangzhou Yunxun Information Technology Co., Ltd.（广州云讯信息科技有限公司）xinnet: Xin Net Technology Corporation（北京新网数码信息技术有限公司） */
-  RegistrarType: string;
+  RegistrarType?: string;
   /** 域名绑定的ns */
-  NameServer: string[];
+  NameServer?: string[];
   /** true：开启锁定false：关闭锁定 */
-  LockTransfer: boolean;
+  LockTransfer?: boolean;
   /** 锁定结束时间 */
-  LockEndTime: string;
+  LockEndTime?: string;
   /** 认证类型：I=个人，E=企业 */
-  RegistrantType: string;
+  RegistrantType?: string;
   /** 域名所有者，中文 */
-  OrganizationNameCN: string;
+  OrganizationNameCN?: string;
   /** 域名所有者，英文 */
-  OrganizationName: string;
+  OrganizationName?: string;
   /** 域名联系人，中文 */
-  RegistrantNameCN: string;
+  RegistrantNameCN?: string;
   /** 域名联系人，英文 */
-  RegistrantName: string;
+  RegistrantName?: string;
 }
 
 /** 失败预约预释放域名信息 */
 declare interface FailReservedDomainInfo {
   /** 域名 */
-  Domain?: string | null;
+  Domain?: string;
   /** 预约失败原因 */
-  FailReason?: string | null;
+  FailReason?: string;
 }
 
 /** 手机号邮箱列表 */
@@ -291,41 +291,41 @@ declare interface PhoneEmailData {
 /** 预释放竞价列表 */
 declare interface PreAuctionInfo {
   /** 域名 */
-  Domain?: string | null;
+  Domain?: string;
   /** 竞价倒计时 */
-  BiddingTime?: string | null;
+  BiddingTime?: string;
   /** 出价次数 */
-  BidCount?: number | null;
+  BidCount?: number;
   /** 当前价格 */
-  Price?: number | null;
+  Price?: number;
   /** 用户操作 bid：出价 "noAction"：无法操作 */
-  Op?: string | null;
+  Op?: string;
   /** 业务ID */
-  BusinessId?: string | null;
+  BusinessId?: string;
 }
 
 /** 预释放列表信息 */
 declare interface PreReleaseInfo {
   /** 域名 */
-  Domain?: string | null;
+  Domain?: string;
   /** 预订倒计时 */
-  ReservationTime?: string | null;
+  ReservationTime?: string;
   /** 域名注册时间 */
-  RegTime?: string | null;
+  RegTime?: string;
   /** 域名删除时间 */
-  DelTime?: string | null;
+  DelTime?: string;
   /** 当前人数 */
-  CurrentPeople?: number | null;
+  CurrentPeople?: number;
   /** 当前价格 */
-  Price?: number | null;
+  Price?: number;
   /** 是否收藏 */
-  IsFollow?: boolean | null;
+  IsFollow?: boolean;
   /** 是否已经预约 */
-  IsAppoint?: boolean | null;
+  IsAppoint?: boolean;
   /** 业务ID */
-  BusinessId?: string | null;
+  BusinessId?: string;
   /** 是否为原持有者 */
-  IsDomainUser?: boolean | null;
+  IsDomainUser?: boolean;
 }
 
 /** 域名价格信息 */
@@ -345,25 +345,25 @@ declare interface PriceInfo {
 /** 预释放价格区间配置 */
 declare interface PriceScopeConf {
   /** 最高价格 */
-  MaxPrice?: number | null;
+  MaxPrice?: number;
   /** 最低价格 */
-  MinPrice?: number | null;
+  MinPrice?: number;
   /** 价格幅度 */
-  Price?: number | null;
+  Price?: number;
   /** 保证金 */
-  DepositPrice?: number | null;
+  DepositPrice?: number;
 }
 
 /** 合作商竞价详情 */
 declare interface ReserveBidInfo {
   /** 用户 */
-  User?: string | null;
+  User?: string;
   /** 出价 */
-  Price?: number | null;
+  Price?: number;
   /** 出价时间 */
-  BidTime?: string | null;
+  BidTime?: string;
   /** 当前状态 */
-  BidStatus?: string | null;
+  BidStatus?: string;
 }
 
 /** 查询预释放预约列表域名详情 */
@@ -389,25 +389,25 @@ declare interface ReservedPreDomainInfo {
   /** 1. 预定成功 2. 预定失败（预定失败Reason字段将会被赋值）3. 域名交割中 4. 域名交割完成 */
   ReservedStatus?: number;
   /** 域名预定失败原因 */
-  FailReason?: string | null;
+  FailReason?: string;
   /** 预计变更所有权时间（仅用于参考，实际时间会存在误差） */
-  ChangeOwnerTime?: string | null;
+  ChangeOwnerTime?: string;
   /** 注册时间 */
-  RegTime?: string | null;
+  RegTime?: string;
   /** 到期时间 */
-  ExpireTime?: string | null;
+  ExpireTime?: string;
   /** 资源ID，用于删除资源信息 */
-  ResourceId?: string | null;
+  ResourceId?: string;
   /** 业务ID */
-  BusinessId?: string | null;
+  BusinessId?: string;
 }
 
 /** 预释放域名预约参数补充成功信息 */
 declare interface SucDomainInfo {
   /** 域名 */
-  Domain?: string | null;
+  Domain?: string;
   /** 业务ID */
-  BusinessId?: string | null;
+  BusinessId?: string;
 }
 
 /** Template数据 */
@@ -1049,7 +1049,7 @@ declare interface DescribePreAuctionListRequest {
 
 declare interface DescribePreAuctionListResponse {
   /** 总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 预释放竞价列表 */
   PreAuctionList?: PreAuctionInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1125,7 +1125,7 @@ declare interface DescribePreReleaseListRequest {
 
 declare interface DescribePreReleaseListResponse {
   /** 数量 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 预释放列表 */
   PreReleaseList?: PreReleaseInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */

@@ -640,6 +640,10 @@ declare interface GetServiceStatusResponse {
   ExclusiveHSMEnabled?: boolean;
   /** KMS 订阅信息。 */
   SubscriptionInfo?: string;
+  /** 返回KMS用户密钥使用数量 */
+  CmkUserCount?: number;
+  /** 返回KMS用户密钥规格数量 */
+  CmkLimit?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

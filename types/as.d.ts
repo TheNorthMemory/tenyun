@@ -133,7 +133,7 @@ declare interface AutoScalingGroup {
   /** 容量重平衡功能，仅对伸缩组内的竞价实例有效。取值范围： TRUE，开启该功能，当伸缩组内的竞价实例即将被竞价实例服务自动回收前，AS 主动发起竞价实例销毁流程，如果有配置过缩容 hook，则销毁前 hook 会生效。销毁流程启动后，AS 会异步开启一个扩容活动，用于补齐期望实例数。 FALSE，不开启该功能，则 AS 等待竞价实例被销毁后才会去扩容补齐伸缩组期望实例数。 */
   CapacityRebalance?: boolean;
   /** 实例名称序号相关设置。 */
-  InstanceNameIndexSettings?: InstanceNameIndexSettings | null;
+  InstanceNameIndexSettings?: InstanceNameIndexSettings;
 }
 
 /** 伸缩组简明信息。 */
@@ -165,9 +165,9 @@ declare interface AutoScalingNotification {
 /** 启动配置的数据盘配置信息。若不指定该参数，则默认不购买数据盘，当前仅支持购买的时候指定一个数据盘。 */
 declare interface DataDisk {
   /** 数据盘类型。数据盘类型限制详见[云硬盘类型](https://cloud.tencent.com/document/product/362/2353)。取值范围：LOCAL_BASIC：本地硬盘LOCAL_SSD：本地SSD硬盘CLOUD_BASIC：普通云硬盘CLOUD_PREMIUM：高性能云硬盘CLOUD_SSD：SSD云硬盘CLOUD_HSSD：增强型SSD云硬盘CLOUD_TSSD：极速型SSD云硬盘默认取值与系统盘类型（SystemDisk.DiskType）保持一致。 */
-  DiskType?: string | null;
+  DiskType?: string;
   /** 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[CVM实例配置](https://cloud.tencent.com/document/product/213/2177)。默认值为0，表示不购买数据盘。更多限制详见产品文档。 */
-  DiskSize?: number | null;
+  DiskSize?: number;
   /** 数据盘快照 ID，类似 `snap-l8psqwnt`。 */
   SnapshotId?: string | null;
   /** 数据盘是否随子机销毁。取值范围：TRUE：子机销毁时，销毁数据盘，只支持按小时后付费云盘FALSE：子机销毁时，保留数据盘 */
@@ -265,35 +265,35 @@ declare interface IPv6InternetAccessible {
 /** 实例信息 */
 declare interface Instance {
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 伸缩组ID */
-  AutoScalingGroupId: string;
+  AutoScalingGroupId?: string;
   /** 启动配置ID */
-  LaunchConfigurationId: string;
+  LaunchConfigurationId?: string;
   /** 启动配置名称 */
-  LaunchConfigurationName: string;
+  LaunchConfigurationName?: string;
   /** 生命周期状态，取值如下：IN_SERVICE：运行中CREATING：创建中CREATION_FAILED：创建失败TERMINATING：中止中TERMINATION_FAILED：中止失败ATTACHING：绑定中ATTACH_FAILED：绑定失败DETACHING：解绑中DETACH_FAILED：解绑失败ATTACHING_LB：绑定LB中DETACHING_LB：解绑LB中MODIFYING_LB：修改LB中STARTING：开机中START_FAILED：开机失败STOPPING：关机中STOP_FAILED：关机失败STOPPED：已关机IN_LAUNCHING_HOOK：扩容生命周期挂钩中IN_TERMINATING_HOOK：缩容生命周期挂钩中 */
-  LifeCycleState: string;
+  LifeCycleState?: string;
   /** 健康状态，取值包括HEALTHY和UNHEALTHY */
-  HealthStatus: string;
+  HealthStatus?: string;
   /** 是否加入缩容保护 */
-  ProtectedFromScaleIn: boolean;
+  ProtectedFromScaleIn?: boolean;
   /** 可用区 */
-  Zone: string;
+  Zone?: string;
   /** 创建类型，取值包括AUTO_CREATION, MANUAL_ATTACHING。 */
-  CreationType: string;
+  CreationType?: string;
   /** 实例加入时间 */
-  AddTime: string;
+  AddTime?: string;
   /** 实例类型 */
-  InstanceType: string;
+  InstanceType?: string;
   /** 版本号 */
-  VersionNumber: number;
+  VersionNumber?: number;
   /** 伸缩组名称 */
-  AutoScalingGroupName: string;
+  AutoScalingGroupName?: string;
   /** 预热状态，取值如下：WAITING_ENTER_WARMUP：等待进入预热NO_NEED_WARMUP：无需预热IN_WARMUP：预热中AFTER_WARMUP：完成预热 */
-  WarmupStatus: string;
+  WarmupStatus?: string;
   /** 置放群组id，仅支持指定一个。 */
-  DisasterRecoverGroupIds?: string[] | null;
+  DisasterRecoverGroupIds?: string[];
 }
 
 /** 描述了实例的计费模式 */
@@ -345,17 +345,17 @@ declare interface InternetAccessible {
 /** 执行命令结果。 */
 declare interface InvocationResult {
   /** 实例ID。 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 执行活动ID。 */
-  InvocationId?: string | null;
+  InvocationId?: string;
   /** 执行任务ID。 */
-  InvocationTaskId?: string | null;
+  InvocationTaskId?: string;
   /** 命令ID。 */
-  CommandId?: string | null;
+  CommandId?: string;
   /** 执行任务状态。 */
-  TaskStatus?: string | null;
+  TaskStatus?: string;
   /** 执行异常信息。 */
-  ErrorMessage?: string | null;
+  ErrorMessage?: string;
 }
 
 /** 符合条件的启动配置信息的集合。 */
@@ -399,7 +399,7 @@ declare interface LaunchConfiguration {
   /** 实例标签列表。扩容出来的实例会自动带上标签，最多支持10个标签。 */
   InstanceTags?: InstanceTag[];
   /** 标签列表。 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
   /** 版本号。 */
   VersionNumber?: number;
   /** 更新时间。 */
@@ -423,7 +423,7 @@ declare interface LaunchConfiguration {
   /** 置放群组id，仅支持指定一个。 */
   DisasterRecoverGroupIds?: string[];
   /** 镜像族名称。 */
-  ImageFamily?: string | null;
+  ImageFamily?: string;
   /** 本地专用集群 ID。 */
   DedicatedClusterId?: string;
 }
@@ -449,9 +449,9 @@ declare interface LifecycleActionResultInfo {
 /** 远程命令执行对象。 */
 declare interface LifecycleCommand {
   /** 远程命令ID。若选择执行命令，则此项必填。 */
-  CommandId: string | null;
+  CommandId: string;
   /** 自定义参数。字段类型为 json encoded string。如：{"varA": "222"}。key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。如果未提供该参数取值，将使用 Command 的 DefaultParameters 进行替换。自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。 */
-  Parameters?: string | null;
+  Parameters?: string;
 }
 
 /** 生命周期挂钩 */
@@ -477,7 +477,7 @@ declare interface LifecycleHook {
   /** 生命周期挂钩适用场景 */
   LifecycleTransitionType?: string;
   /** 远程命令执行对象 */
-  LifecycleCommand?: LifecycleCommand | null;
+  LifecycleCommand?: LifecycleCommand;
 }
 
 /** 描述了实例登录相关配置与信息，出于安全性考虑，不会描述敏感信息。 */
@@ -545,7 +545,7 @@ declare interface RefreshActivity {
   /** 刷新活动 ID。 */
   RefreshActivityId?: string;
   /** 原始刷新活动ID，仅在回滚刷新活动中存在。 */
-  OriginRefreshActivityId?: string | null;
+  OriginRefreshActivityId?: string;
   /** 刷新批次信息列表。 */
   RefreshBatchSet?: RefreshBatch[];
   /** 刷新模式。 */
@@ -557,13 +557,13 @@ declare interface RefreshActivity {
   /** 刷新活动状态。取值如下：INIT：初始化中RUNNING：运行中SUCCESSFUL：活动成功FAILED_PAUSE：因刷新批次失败暂停AUTO_PAUSE：因暂停策略自动暂停MANUAL_PAUSE：手动暂停CANCELLED：活动取消FAILED：活动失败 */
   Status?: string;
   /** 当前刷新批次序号。例如，2 表示当前活动正在刷新第二批次的实例。 */
-  CurrentRefreshBatchNum?: number | null;
+  CurrentRefreshBatchNum?: number;
   /** 刷新活动开始时间。 */
   StartTime?: string | null;
   /** 刷新活动结束时间。 */
   EndTime?: string | null;
   /** 刷新活动创建时间。 */
-  CreatedTime?: string | null;
+  CreatedTime?: string;
 }
 
 /** 实例刷新批次信息，包含该批次的刷新状态、实例、起止时间等信息。 */
@@ -587,15 +587,15 @@ declare interface RefreshBatchRelatedInstance {
   /** 刷新实例状态。如果在刷新时实例被移出或销毁，状态会更新为 NOT_FOUND。取值如下：WAITING：待刷新INIT：初始化中RUNNING：刷新中FAILED：刷新失败CANCELLED：已取消SUCCESSFUL：刷新成功NOT_FOUND：实例不存在 */
   InstanceStatus?: string;
   /** 实例刷新中最近一次伸缩活动 ID，可通过 DescribeAutoScalingActivities 接口查询。需注意伸缩活动与实例刷新活动不同，一次实例刷新活动可能包括多次伸缩活动。 */
-  LastActivityId?: string | null;
+  LastActivityId?: string;
   /** 实例刷新状态信息。 */
-  InstanceStatusMessage?: string | null;
+  InstanceStatusMessage?: string;
 }
 
 /** 实例刷新设置。 */
 declare interface RefreshSettings {
   /** 滚动更新设置参数。RefreshMode 为滚动更新该参数必须填写。 */
-  RollingUpdateSettings: RollingUpdateSettings | null;
+  RollingUpdateSettings: RollingUpdateSettings;
   /** 实例后端服务健康状态检查，默认为 FALSE。仅针对绑定应用型负载均衡器的伸缩组生效，开启该检查后，如刷新后实例未通过检查，负载均衡器端口权重始终为 0，且标记为刷新失败。取值范围如下：TRUE：开启检查FALSE：不开启检查 */
   CheckInstanceTargetHealth?: boolean;
 }
@@ -629,13 +629,13 @@ declare interface RunAutomationServiceEnabled {
 /** 描述了 “可观测平台（原名云监控）” 服务相关的信息。 */
 declare interface RunMonitorServiceEnabled {
   /** 是否开启[可观测平台（原名云监控）](https://cloud.tencent.com/document/product/248)服务。取值范围：TRUE：表示开启云监控服务FALSE：表示不开启云监控服务默认取值：TRUE。 */
-  Enabled?: boolean | null;
+  Enabled?: boolean;
 }
 
 /** 描述了 “云安全” 服务相关的信息 */
 declare interface RunSecurityServiceEnabled {
   /** 是否开启[云安全](https://cloud.tencent.com/document/product/296)服务。取值范围：TRUE：表示开启云安全服务FALSE：表示不开启云安全服务默认取值：TRUE。 */
-  Enabled?: boolean | null;
+  Enabled?: boolean;
 }
 
 /** 告警触发策略。 */
@@ -705,7 +705,7 @@ declare interface ServiceSettings {
   /** 开启负载均衡不健康替换服务。若开启则对于负载均衡健康检查判断不健康的实例，弹性伸缩服务会进行替换。若不指定该参数，则默认为 False。 */
   ReplaceLoadBalancerUnhealthy?: boolean;
   /** 不健康替换服务的替换模式。取值范围：RECREATE：重建实例替代原有不健康实例；RESET：对原有不健康实例进行重装系统操作，可保持数据盘、内网IP、实例id等信息不发生变化，实例登录设置、主机名、增强服务和 UserData 与当前启动配置保持一致。默认取值：RECREATE */
-  ReplaceMode?: string | null;
+  ReplaceMode?: string;
   /** 自动更新实例标签。默认取值为 False，配置后如伸缩组标签发生更新，会同步更新（同步更新仅支持新增、修改标签，暂不支持删除标签）伸缩组内运行中状态实例的标签，同步更新非立即生效，存在一定延迟。 */
   AutoUpdateInstanceTags?: boolean;
   /** 期望实例数同步最大最小值。默认值为 False。该参数仅对修改伸缩组接口未传入期望数的场景生效。True: 修改最大值或最小值时，如与当前期望数存在冲突，则同步调整期望数。例如修改时传入最小值 2，当前期望数为 1，则同步调整期望数为 2。False: 修改最大值或最小值时，如与当前期望数存在冲突，报错提示不允许修改。 */
@@ -717,7 +717,7 @@ declare interface SpotMarketOptions {
   /** 竞价出价，例如“1.05” */
   MaxPrice: string;
   /** 竞价请求类型，当前仅支持类型：one-time，默认值为one-time */
-  SpotInstanceType?: string | null;
+  SpotInstanceType?: string;
 }
 
 /** 竞价混合模式下，各计费类型实例的分配策略。包括按量计费实例和竞价计费实例。 */
@@ -734,10 +734,10 @@ declare interface SpotMixedAllocationPolicy {
 
 /** 启动配置的系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。 */
 declare interface SystemDisk {
-  /** 系统盘类型。系统盘类型限制详见[云硬盘类型](https://cloud.tencent.com/document/product/362/2353)。取值范围：LOCAL_BASIC：本地硬盘LOCAL_SSD：本地SSD硬盘CLOUD_BASIC：普通云硬盘CLOUD_PREMIUM：高性能云硬盘CLOUD_SSD：SSD云硬盘默认取值：CLOUD_PREMIUM。 */
-  DiskType?: string | null;
+  /** 系统盘类型。系统盘类型限制详见[云硬盘类型](https://cloud.tencent.com/document/product/362/2353)。取值范围LOCAL_BASIC：本地硬盘LOCAL_SSD：本地SSD硬盘CLOUD_BASIC：普通云硬盘CLOUD_PREMIUM：高性能云硬盘CLOUD_SSD：SSD云硬盘默认取值：CLOUD_PREMIUM。 */
+  DiskType?: string;
   /** 系统盘大小，单位：GB。默认值为 50 */
-  DiskSize?: number | null;
+  DiskSize?: number;
 }
 
 /** 资源类型及标签键值对 */
@@ -747,7 +747,7 @@ declare interface Tag {
   /** 标签值 */
   Value: string;
   /** 标签绑定的资源类型，当前支持类型："auto-scaling-group", "launch-configuration" */
-  ResourceType?: string | null;
+  ResourceType?: string;
 }
 
 /** 负载均衡器目标属性 */
@@ -1455,7 +1455,7 @@ declare interface ExitStandbyRequest {
 
 declare interface ExitStandbyResponse {
   /** 伸缩活动ID。 */
-  ActivityId?: string | null;
+  ActivityId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1464,7 +1464,7 @@ declare interface InstanceMarketOptionsRequest {
   /** 竞价相关选项 */
   SpotOptions: SpotMarketOptions;
   /** 市场选项类型，当前只支持取值：spot */
-  MarketType?: string | null;
+  MarketType?: string;
 }
 
 declare interface ModifyAutoScalingGroupRequest {

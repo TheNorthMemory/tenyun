@@ -77,61 +77,61 @@ declare interface AITemplates {
 /** 增加设备接口返回数据 */
 declare interface AddDeviceData {
   /** 设备iD */
-  DeviceId?: string | null;
+  DeviceId?: string;
   /** 设备编码（国标设备即我们为设备生成的20位国标编码，rtmp 设备为10 位设备编码） */
-  Code?: string | null;
+  Code?: string;
   /** 设备名称 */
-  Name?: string | null;
+  Name?: string;
   /** 设备接入协议，1:RTMP,2:GB,3:GW */
-  AccessProtocol?: number | null;
+  AccessProtocol?: number;
   /** 设备类型，1:IPC,2:NVR */
-  Type?: number | null;
+  Type?: number;
   /** 设备接入服务节点ID */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 设备接入服务节点名称 */
-  ClusterName?: string | null;
+  ClusterName?: string;
   /** 设备流传输协议，1:UDP,2:TCP */
-  TransportProtocol?: number | null;
+  TransportProtocol?: number;
   /** 设备密码 */
-  Password?: string | null;
+  Password?: string;
   /** 设备描述 */
-  Description?: string | null;
+  Description?: string;
   /** 设备状态，0:未注册,1:在线,2:离线,3:禁用 */
-  Status?: number | null;
+  Status?: number;
   /** 设备所属组织ID */
-  OrganizationId?: number | null;
+  OrganizationId?: number;
   /** 设备接入网关ID，从查询网关列表接口中获取（仅网关接入需要） */
-  GatewayId?: string | null;
+  GatewayId?: string;
   /** 网关接入协议类型，1.海康SDK，2.大华SDK，3.宇视SDK，4.Onvif（仅网关接入需要） */
-  ProtocolType?: number | null;
+  ProtocolType?: number;
   /** 设备接入IP（仅网关接入需要） */
-  Ip?: string | null;
+  Ip?: string;
   /** 设备Port（仅网关接入需要） */
-  Port?: number | null;
+  Port?: number;
   /** 设备用户名（仅网关接入需要） */
-  Username?: string | null;
+  Username?: string;
   /** 用户ID */
-  AppId?: number | null;
+  AppId?: number;
 }
 
 /** 增加组织接口返回数据 */
 declare interface AddOrgData {
   /** 组织 ID */
-  OrganizationId?: string | null;
+  OrganizationId?: string;
   /** 组织名称 */
-  Name?: string | null;
+  Name?: string;
   /** 组织父节点 ID */
-  ParentId?: string | null;
+  ParentId?: string;
   /** 组织层级 */
-  Level?: number | null;
+  Level?: number;
   /** 用户ID */
-  AppId?: number | null;
+  AppId?: number;
   /** 组织结构 */
-  ParentIds?: string | null;
+  ParentIds?: string;
   /** 设备总数 */
-  Total?: number | null;
+  Total?: number;
   /** 设备在线数量 */
-  Online?: number | null;
+  Online?: number;
 }
 
 /** 新增录像上云计划返回数据 */
@@ -159,19 +159,19 @@ declare interface AddRecordBackupPlanData {
 /** 新增录像上云模板返回数据 */
 declare interface AddRecordBackupTemplateData {
   /** 模板ID */
-  TemplateId?: string | null;
+  TemplateId?: string;
   /** 模板名称 */
-  TemplateName?: string | null;
+  TemplateName?: string;
   /** 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟） */
-  TimeSections?: RecordTemplateTimeSections[] | null;
+  TimeSections?: RecordTemplateTimeSections[];
   /** 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟） */
-  DevTimeSections?: RecordTemplateTimeSections[] | null;
+  DevTimeSections?: RecordTemplateTimeSections[];
   /** 上云倍速（支持1，2，4倍速） */
-  Scale?: number | null;
+  Scale?: number;
   /** 创建时间 */
-  CreateAt?: string | null;
+  CreateAt?: string;
   /** 更新时间 */
-  UpdateAt?: string | null;
+  UpdateAt?: string;
 }
 
 /** 查询取回任务详情返回数据 */
@@ -193,27 +193,27 @@ declare interface AddRecordRetrieveTaskData {
   /** 取回容量，单位MB */
   Capacity?: number;
   /** 任务描述 */
-  Describe?: string | null;
+  Describe?: string;
 }
 
 /** 设置推拉流鉴权返回数据结构 */
 declare interface AddStreamAuthData {
   /** 鉴权配置ID（uuid） */
-  Id?: string | null;
+  Id?: string;
   /** 是否开播放鉴权（1:开启,0:关闭） */
-  PullState?: number | null;
+  PullState?: number;
   /** 播放密钥（仅支持字母数字，长度0-10位） */
-  PullSecret?: string | null;
+  PullSecret?: string;
   /** 播放过期时间（单位：分钟） */
-  PullExpired?: number | null;
+  PullExpired?: number;
   /** 是否开启推流鉴权（1:开启,0:关闭） */
-  PushState?: number | null;
+  PushState?: number;
   /** 推流密钥（仅支持字母数字，长度0-10位） */
-  PushSecret?: string | null;
+  PushSecret?: string;
   /** 推流过期时间（单位：分钟） */
-  PushExpired?: number | null;
+  PushExpired?: number;
   /** 用户ID */
-  AppId?: number | null;
+  AppId?: number;
 }
 
 /** 通用AI识别结果信息 */
@@ -229,15 +229,15 @@ declare interface BaseAIResultInfo {
 /** 批量操作设备返回结果 */
 declare interface BatchOperateDeviceData {
   /** 任务 ID（用于在查询任务的子任务列表接口ListSubTasks中查询任务进度） */
-  TaskId?: string | null;
+  TaskId?: string;
 }
 
 /** 视频通道码率返回结果 */
 declare interface BitRateInfo {
   /** 通道Id */
-  ChannelId?: string | null;
+  ChannelId?: string;
   /** 码率,单位:kbps */
-  Bitrate?: number | null;
+  Bitrate?: number;
 }
 
 /** 人体识别结果详情 */
@@ -275,11 +275,11 @@ declare interface ChannelAttrInfo {
   /** 设备通道所属的设备ID */
   DeviceId?: string;
   /** 设备通道所属的设备名称 */
-  DeviceName?: string | null;
+  DeviceName?: string;
   /** 设备通道ID */
   ChannelId?: string;
   /** 设备通道名称 */
-  ChannelName?: string | null;
+  ChannelName?: string;
 }
 
 /** 通道及通道所属设备信息 */
@@ -313,249 +313,251 @@ declare interface ChefHatAIResultInfo {
 /** 获取开流地址返回数据 */
 declare interface ControlDeviceStreamData {
   /** flv 流地址 */
-  Flv?: string | null;
+  Flv?: string;
   /** hls 流地址 */
-  Hls?: string | null;
+  Hls?: string;
   /** rtmp 流地址 */
-  Rtmp?: string | null;
+  Rtmp?: string;
 }
 
 /** 查询设备通道信息返回结果 */
 declare interface DescribeDeviceChannelData {
   /** 设备 ID */
-  DeviceId?: string | null;
+  DeviceId?: string;
   /** 通道 ID */
-  ChannelId?: string | null;
+  ChannelId?: string;
   /** 通道编码 */
-  ChannelCode?: string | null;
+  ChannelCode?: string;
   /** 通道名称 */
-  Name?: string | null;
+  Name?: string;
   /** 流状态（0:未传输,1:传输中） */
-  Status?: number | null;
+  Status?: number;
   /** 是否可控 Ptz（0:不可控,1:可控） */
-  PTZType?: number | null;
+  PTZType?: number;
   /** 通道厂商 */
-  Manufacturer?: string | null;
+  Manufacturer?: string;
   /** 通道支持分辨率（分辨率列表由‘/’隔开，国标协议样例（6/3），自定义样例（12800960/640480）） */
-  Resolution?: string | null;
+  Resolution?: string;
   /** 通道在离线状态（0:离线,1:在线） */
-  State?: number | null;
+  State?: number;
   /** 所在地域 */
-  Region?: string | null;
+  Region?: string;
 }
 
 /** 查询设备接口返回数据 */
 declare interface DescribeDeviceData {
   /** 设备ID */
-  DeviceId?: string | null;
+  DeviceId?: string;
   /** 设备编码（国标设备即我们为设备生成的20位国标编码，rtmp 设备为10 位设备编码） */
-  Code?: string | null;
+  Code?: string;
   /** 设备名称 */
-  Name?: string | null;
+  Name?: string;
   /** 设备接入协议，1:RTMP,2:GB,3:GW */
-  AccessProtocol?: number | null;
+  AccessProtocol?: number;
   /** 设备类型，1:IPC,2:NVR */
-  Type?: number | null;
+  Type?: number;
   /** 设备接入服务节点id */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 设备接入服务节点名称 */
-  ClusterName?: string | null;
+  ClusterName?: string;
   /** 设备流传输协议，1:UDP,2:TCP */
-  TransportProtocol?: number | null;
+  TransportProtocol?: number;
   /** 设备密码 */
-  Password?: string | null;
+  Password?: string;
   /** 设备描述 */
-  Description?: string | null;
+  Description?: string;
   /** sip服务ID */
-  SipId?: string | null;
+  SipId?: string;
   /** sip服务域 */
-  SipDomain?: string | null;
+  SipDomain?: string;
   /** sip服务IP地址 */
-  SipIp?: string | null;
+  SipIp?: string;
   /** sip服务端口 */
-  SipPort?: number | null;
+  SipPort?: number;
   /** Rtmp设备推流地址(仅rtmp设备有效) */
-  PushStreamUrl?: string | null;
+  PushStreamUrl?: string;
   /** 设备状态，0:未注册,1:在线,2:离线,3:禁用 */
-  Status?: number | null;
+  Status?: number;
   /** 设备所属组织ID */
-  OrganizationId?: string | null;
+  OrganizationId?: string;
   /** 设备接入网关ID，从查询网关列表接口中获取（仅网关接入需要） */
-  GatewayId?: string | null;
+  GatewayId?: string;
   /** 设备所属网关名称 */
-  GatewayName?: string | null;
+  GatewayName?: string;
   /** 设备网关协议名称 */
-  ProtocolTypeName?: string | null;
+  ProtocolTypeName?: string;
   /** 网关接入协议类型，1.海康SDK，2.大华SDK，3.宇视SDK，4.Onvif（仅网关接入需要） */
-  ProtocolType?: number | null;
+  ProtocolType?: number;
   /** 设备接入IP */
-  Ip?: string | null;
+  Ip?: string;
   /** 设备Port */
-  Port?: number | null;
+  Port?: number;
   /** 设备用户名 */
-  Username?: string | null;
+  Username?: string;
   /** 设备地域 */
-  Region?: string | null;
+  Region?: string;
   /** 设备厂商 */
-  Manufacturer?: string | null;
+  Manufacturer?: string;
   /** 音频关开（0：关闭；1：开启）关闭时丢弃音频 */
-  AudioSwitch?: number | null;
+  AudioSwitch?: number;
   /** 订阅开关（0：关闭；1：开启）默认开启，开启状态下会订阅设备通道变化，仅国标NVR设备有效 */
-  SubscribeSwitch?: number | null;
+  SubscribeSwitch?: number;
   /** RTMP推流地址自定义appName */
-  AppName?: string | null;
+  AppName?: string;
   /** RTMP推流地址自定义streamName */
-  StreamName?: string | null;
+  StreamName?: string;
   /** 是否开启静音帧（0：关闭；1 开启） */
-  SilentFrameSwitch?: number | null;
+  SilentFrameSwitch?: number;
 }
 
 /** 查询设备预置位返回数据 */
 declare interface DescribeDevicePresetData {
   /** 预置位索引 只支持1-10的索引 */
-  Index?: number | null;
+  Index?: number;
   /** 预置位名称 */
-  Name?: string | null;
+  Name?: string;
 }
 
 /** 查询设备可接入集群信息 */
 declare interface DescribeDeviceRegion {
   /** 服务节点描述 */
-  Label?: string | null;
+  Label?: string;
   /** 服务节点 ID（对应为其他接口中所需的 ClusterId） */
-  Value?: string | null;
+  Value?: string;
   /** 地域信息 */
-  Region?: string | null;
+  Region?: string;
 }
 
 /** 查询域名详情数据 */
 declare interface DescribeDomainData {
   /** 域名ID */
-  Id?: string | null;
+  Id?: string;
   /** 播放域名 */
-  PlayDomain?: string | null;
+  PlayDomain?: string;
   /** CNAME 记录值 */
-  InternalDomain?: string | null;
+  InternalDomain?: string;
   /** 是否上传证书（0：否，1：是） */
-  HaveCert?: number | null;
+  HaveCert?: number;
   /** 服务节点 ID */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 服务节点名称 */
-  ClusterName?: string | null;
+  ClusterName?: string;
   /** 用户ID */
-  AppId?: number | null;
+  AppId?: number;
   /** 证书ID */
-  CertId?: string | null;
+  CertId?: string;
   /** 域名类型 0:拉流域名 1:推流域名 */
-  DomainType?: number | null;
+  DomainType?: number;
 }
 
 /** 查询域名可绑定集群数据 */
 declare interface DescribeDomainRegionData {
   /** 服务节点描述 */
-  Label?: string | null;
+  Label?: string;
   /** 服务节点 ID（对应为其他接口中所需的 ClusterId） */
-  Value?: string | null;
+  Value?: string;
   /** 地域信息 */
-  Region?: string | null;
+  Region?: string;
 }
 
 /** 查询网关信息返回结果 */
 declare interface DescribeGatewayData {
   /** 网关索引ID，用于网关查询，更新，删除操作 */
-  GatewayId?: string | null;
+  GatewayId?: string;
   /** 网关编码，由网关设备生成的唯一编码 */
-  GwId?: string | null;
+  GwId?: string;
   /** 网关名称，仅支持中文、英文、数字、_、-，长度不超过32个字符 */
-  Name?: string | null;
+  Name?: string;
   /** 网关描述，仅支持中文、英文、数字、_、-，长度不超过128个字符 */
-  Description?: string | null;
+  Description?: string;
   /** 服务节点id */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 服务节点名称 */
-  ClusterName?: string | null;
+  ClusterName?: string;
   /** 网关状态，0：离线，1:在线 */
-  Status?: number | null;
+  Status?: number;
   /** 网关版本 */
   Version?: GatewayVersion[] | null;
   /** 网关下挂设备数量 */
-  DeviceNum?: number | null;
+  DeviceNum?: number;
   /** 激活时间 */
-  CreatedAt?: string | null;
+  CreatedAt?: string;
   /** 所属地域 */
-  Region?: string | null;
+  Region?: string;
 }
 
 /** 查询网关监控信息返回结果 */
 declare interface DescribeGatewayMonitor {
   /** 设备接入总数 */
-  DeviceTotal?: number | null;
+  DeviceTotal?: number;
   /** 设备在线数 */
-  DeviceOnline?: number | null;
+  DeviceOnline?: number;
   /** 设备离线数 */
-  DeviceOffline?: number | null;
+  DeviceOffline?: number;
   /** 视频通道总数 */
-  ChannelTotal?: number | null;
+  ChannelTotal?: number;
   /** 视频通道在线数 */
-  ChannelOnline?: number | null;
+  ChannelOnline?: number;
   /** 视频通道离线数 */
-  ChannelOffline?: number | null;
+  ChannelOffline?: number;
   /** 网关上行流量,单位kbps */
-  UpFlow?: number | null;
+  UpFlow?: number;
   /** 流在传输中的通道数 */
-  ChannelPull?: number | null;
+  ChannelPull?: number;
   /** 流未传输中的通道数 */
-  ChannelUnPull?: number | null;
+  ChannelUnPull?: number;
 }
 
 /** 查询网关所支持的接入协议 */
 declare interface DescribeGatewayProtocolData {
   /** 接入协议的字典码 */
-  TypeCode?: string | null;
+  TypeCode?: string;
   /** 接入协议类型值 */
-  Value?: number | null;
+  Value?: number;
   /** 接入协议的类型描述 */
-  Label?: string | null;
+  Label?: string;
+  /** 协议值文本 */
+  ValueText?: string;
 }
 
 /** 查询网关服务版本信息返回数据 */
 declare interface DescribeGatewayVersion {
   /** 服务名 */
-  Name?: string | null;
+  Name?: string;
   /** 服务版本 */
-  Version?: string | null;
+  Version?: string;
   /** 服务最新版本 */
-  LatestVersion?: string | null;
+  LatestVersion?: string;
   /** 是否需要更新 */
-  IsUpdate?: boolean | null;
+  IsUpdate?: boolean;
   /** 升级信息 */
-  UpgradeInfo?: string[] | null;
+  UpgradeInfo?: string[];
 }
 
 /** 查询网关服务版本信息返回数据 */
 declare interface DescribeGatewayVersionData {
   /** 网关服务列表 */
-  Services?: DescribeGatewayVersion[] | null;
+  Services?: DescribeGatewayVersion[];
 }
 
 /** 查询组织数据返回结果 */
 declare interface DescribeOrganizationData {
   /** 组织 ID */
-  OrganizationId?: string | null;
+  OrganizationId?: string;
   /** 组织名称 */
-  Name?: string | null;
+  Name?: string;
   /** 组织父节点 ID */
-  ParentId?: string | null;
+  ParentId?: string;
   /** 组织层级 */
-  Level?: number | null;
+  Level?: number;
   /** 用户id */
-  AppId?: number | null;
+  AppId?: number;
   /** 组织结构 */
-  ParentIds?: string | null;
+  ParentIds?: string;
   /** 设备总数 */
-  Total?: number | null;
+  Total?: number;
   /** 设备在线数量 */
-  Online?: number | null;
+  Online?: number;
 }
 
 /** 查询录像上云计划返回数据 */
@@ -583,19 +585,19 @@ declare interface DescribeRecordBackupPlanData {
 /** 查询录像上云模板返回数据 */
 declare interface DescribeRecordBackupTemplateData {
   /** 模板ID */
-  TemplateId?: string | null;
+  TemplateId?: string;
   /** 模板名称 */
-  TemplateName?: string | null;
+  TemplateName?: string;
   /** 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟） */
-  TimeSections?: RecordTemplateTimeSections[] | null;
+  TimeSections?: RecordTemplateTimeSections[];
   /** 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟） */
-  DevTimeSections?: RecordTemplateTimeSections[] | null;
+  DevTimeSections?: RecordTemplateTimeSections[];
   /** 上云倍速（支持1，2，4倍速） */
-  Scale?: number | null;
+  Scale?: number;
   /** 创建时间 */
-  CreateAt?: string | null;
+  CreateAt?: string;
   /** 更新时间 */
-  UpdateAt?: string | null;
+  UpdateAt?: string;
 }
 
 /** 用于查询设备云端录像时间轴信息返回数据 */
@@ -627,7 +629,7 @@ declare interface DescribeRecordRetrieveTaskData {
   /** 任务的设备通道id */
   Channels?: RecordRetrieveTaskChannelInfo[];
   /** 任务描述 */
-  Describe?: string | null;
+  Describe?: string;
   /** 任务通道数量 */
   ChannelCount?: number;
 }
@@ -635,27 +637,27 @@ declare interface DescribeRecordRetrieveTaskData {
 /** 查询推拉流鉴权返回数据结构 */
 declare interface DescribeStreamAuthData {
   /** 鉴权配置ID（uuid） */
-  Id?: string | null;
+  Id?: string;
   /** 是否开播放鉴权（1:开启,0:关闭） */
-  PullState?: number | null;
+  PullState?: number;
   /** 播放密钥（仅支持字母数字，长度0-10位） */
-  PullSecret?: string | null;
+  PullSecret?: string;
   /** 播放过期时间（单位：分钟） */
-  PullExpired?: number | null;
+  PullExpired?: number;
   /** 是否开启推流鉴权（1:开启,0:关闭） */
-  PushState?: number | null;
+  PushState?: number;
   /** 推流密钥（仅支持字母数字，长度0-10位） */
-  PushSecret?: string | null;
+  PushSecret?: string;
   /** 推流过期时间（单位：分钟） */
-  PushExpired?: number | null;
+  PushExpired?: number;
   /** 用户ID */
-  AppId?: number | null;
+  AppId?: number;
 }
 
 /** 查询视频通道码率的返回结果列表 */
 declare interface DescribeVideoBitRateList {
   /** 通道码率列表 */
-  BitRates?: BitRateInfo[] | null;
+  BitRates?: BitRateInfo[];
 }
 
 /** 获取云录像下载URL返回的数据 */
@@ -681,61 +683,61 @@ declare interface FaceMaskAIResultInfo {
 /** 网关设备数据 */
 declare interface GatewayDevice {
   /** 设备ID */
-  DeviceId?: string | null;
+  DeviceId?: string;
   /** 网关接入协议类型 */
-  ProtocolType?: number | null;
+  ProtocolType?: number;
   /** 网关接入协议名称 */
-  ProtocolTypeName?: string | null;
+  ProtocolTypeName?: string;
   /** 设备名称 */
-  Name?: string | null;
+  Name?: string;
   /** 设备类型 */
-  Type?: number | null;
+  Type?: number;
   /** 设备内网IP */
-  Ip?: string | null;
+  Ip?: string;
   /** 设备端口 */
-  Port?: number | null;
+  Port?: number;
   /** 设备下通道数 */
-  ChannelNum?: number | null;
+  ChannelNum?: number;
   /** 设备状态 */
-  Status?: number | null;
+  Status?: number;
 }
 
 /** 网关详情版本信息 */
 declare interface GatewayVersion {
   /** 服务名称 */
-  Name?: string | null;
+  Name?: string;
   /** 服务版本 */
-  Version?: string | null;
+  Version?: string;
 }
 
 /** 查询网关列表返回结果 */
 declare interface GatewaysData {
   /** 网关索引ID */
-  GatewayId?: string | null;
+  GatewayId?: string;
   /** 网关编码 */
-  GwId?: string | null;
+  GwId?: string;
   /** 网关名称，仅支持中文、英文、数字、_、-，长度不超过32个字符 */
-  Name?: string | null;
+  Name?: string;
   /** 网关描述，仅支持中文、英文、数字、_、-，长度不超过128个字符 */
-  Description?: string | null;
+  Description?: string;
   /** 网关所属服务节点ID */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 网关所属服务节点名称 */
-  ClusterName?: string | null;
+  ClusterName?: string;
   /** 网关所属地域 */
-  Region?: string | null;
+  Region?: string;
   /** 网关状态，0：离线，1:在线 */
-  Status?: number | null;
+  Status?: number;
   /** 网关激活时间 */
-  CreatedAt?: string | null;
+  CreatedAt?: string;
   /** 所属网关设备数量 */
-  DeviceNum?: number | null;
+  DeviceNum?: number;
 }
 
 /** ISUP智能安全接入 API返回数据 */
 declare interface ISAPIOutputData {
   /** 输出参数 */
-  OutputData?: string | null;
+  OutputData?: string;
 }
 
 /** 生命周期，云文件生命周期设置，管理文件冷、热存储的时间 */
@@ -797,17 +799,17 @@ declare interface ListForbidplayChannelsData {
 /** 查询网关设备列表返回数据 */
 declare interface ListGatewayDevicesData {
   /** 网关下设备列表 */
-  List?: GatewayDevice[] | null;
+  List?: GatewayDevice[];
   /** 网关下设备总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
 }
 
 /** 查询网关列表返回结果 */
 declare interface ListGatewaysData {
   /** 网关列表 */
-  List?: GatewaysData[] | null;
+  List?: GatewaysData[];
   /** 网关数量 */
-  TotalCount?: number | null;
+  TotalCount?: number;
 }
 
 /** 组织目录下的未添加到实时上云计划中的通道数量返回数据 */
@@ -855,11 +857,11 @@ declare interface ListRecordBackupPlanData {
 /** 查询录像上云计划关联通道的返回数据 */
 declare interface ListRecordBackupPlanDevicesData {
   /** 第几页 */
-  PageNumber?: number | null;
+  PageNumber?: number;
   /** 当前页的设备数量 */
-  PageSize?: number | null;
+  PageSize?: number;
   /** 本次查询的设备通道总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 设备通道信息列表 */
   List?: RecordPlanChannelInfo[] | null;
 }
@@ -867,19 +869,19 @@ declare interface ListRecordBackupPlanDevicesData {
 /** 查询录像上云模板列表返回数据 */
 declare interface ListRecordBackupTemplatesData {
   /** 模板ID */
-  TemplateId?: string | null;
+  TemplateId?: string;
   /** 模板名称 */
-  TemplateName?: string | null;
+  TemplateName?: string;
   /** 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟） */
-  TimeSections?: RecordTemplateTimeSections[] | null;
+  TimeSections?: RecordTemplateTimeSections[];
   /** 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟） */
-  DevTimeSections?: RecordTemplateTimeSections[] | null;
+  DevTimeSections?: RecordTemplateTimeSections[];
   /** 上云倍速（支持1，2，4倍速） */
-  Scale?: number | null;
+  Scale?: number;
   /** 创建时间 */
-  CreateAt?: string | null;
+  CreateAt?: string;
   /** 更新时间 */
-  UpdateAt?: string | null;
+  UpdateAt?: string;
 }
 
 /** 用户下所有实时上云计划中的通道id列表返回数据 */
@@ -911,9 +913,9 @@ declare interface ListSubTasksData {
 /** 查询任务列表 */
 declare interface ListTasksData {
   /** 任务列表 */
-  List?: TaskData[] | null;
+  List?: TaskData[];
   /** 任务数量 */
-  TotalCount?: number | null;
+  TotalCount?: number;
 }
 
 /** AI识别结果在画面中坐标 */
@@ -941,11 +943,11 @@ declare interface OrganizationChannelInfo {
   /** 设备通道所属的设备ID */
   DeviceId?: string;
   /** 设备通道所属的设备名称 */
-  DeviceName?: string | null;
+  DeviceName?: string;
   /** 设备通道ID */
   ChannelId?: string;
   /** 设备通道名称 */
-  ChannelName?: string | null;
+  ChannelName?: string;
   /** 该通道是否在上云计划中，如果是，则不能在添加到其他上云计划|true：在上云计划中，false：不在上云计划中 */
   InPlan?: boolean;
 }
@@ -985,7 +987,7 @@ declare interface PlateContent {
 /** 本地录像播放url数据结构 */
 declare interface PlayRecordData {
   /** 录像播放地址 */
-  Flv?: string | null;
+  Flv?: string;
 }
 
 /** 实时上云计划基础信息 */
@@ -997,9 +999,9 @@ declare interface RecordPlanBaseInfo {
   /** 上云模板ID */
   TemplateId?: string;
   /** 上云计划描述 */
-  Describe?: string | null;
+  Describe?: string;
   /** 码流类型，default:设备默认码流类型，main:主码流，sub:子码流，其他根据设备能力集自定义 */
-  StreamType?: string | null;
+  StreamType?: string;
   /** 云文件生命周期 */
   LifeCycle?: LifeCycleData;
   /** 录像计划状态，1:正常使用中，0:删除中，无法使用 */
@@ -1015,13 +1017,13 @@ declare interface RecordPlanChannelInfo {
   /** 设备通道所属的设备ID */
   DeviceId?: string;
   /** 设备通道所属的设备名称 */
-  DeviceName?: string | null;
+  DeviceName?: string;
   /** 设备通道ID */
   ChannelId?: string;
   /** 设备通道名称 */
-  ChannelName?: string | null;
+  ChannelName?: string;
   /** 所属组织名称 */
-  OrganizationName?: string | null;
+  OrganizationName?: string;
   /** 通道所属设备的接入协议类型 */
   AccessProtocol?: number;
 }
@@ -1035,11 +1037,11 @@ declare interface RecordPlanOptData {
   /** 上云模板ID */
   TemplateId?: string;
   /** 上云计划描述 */
-  Describe?: string | null;
+  Describe?: string;
   /** 云文件生命周期 */
   LifeCycle?: LifeCycleData;
   /** 码流类型，default:设备默认码流类型，main:主码流，sub:子码流，其他根据设备能力集自定义 */
-  StreamType?: string | null;
+  StreamType?: string;
   /** 录像补录模式（0:不启用，1:启用） */
   RepairMode?: number;
 }
@@ -1083,7 +1085,7 @@ declare interface RecordRetrieveTaskDetailsInfo {
   /** 取回容量，单位MB */
   Capacity?: number;
   /** 任务描述 */
-  Describe?: string | null;
+  Describe?: string;
   /** 任务通道数量 */
   ChannelCount?: number;
 }
@@ -1123,7 +1125,7 @@ declare interface RecordTimeLine {
   /** 时间片段结束时间，UTC秒数，例如：1662114146 */
   End?: number;
   /** 对应时间片段的播放url */
-  HlsUrl?: string | null;
+  HlsUrl?: string;
 }
 
 /** 设置通道禁止播流，有通道Id和使能enable字段 */
@@ -1159,7 +1161,7 @@ declare interface SubTaskData {
   /** 任务状态1:NEW,2:RUNNING,3:COMPLETED ,4:FAILED */
   Status?: number;
   /** 任务失败原因 */
-  FailReason?: string | null;
+  FailReason?: string;
   /** 任务进度 */
   Progress?: number;
   /** 操作类型 */
@@ -1177,13 +1179,13 @@ declare interface SubTaskData {
   /** 任务运行时间，单位ms */
   Runtime?: number;
   /** 设备ID */
-  DeviceId?: string | null;
+  DeviceId?: string;
   /** 设备名称 */
-  DeviceName?: string | null;
+  DeviceName?: string;
   /** 通道ID */
-  ChannelId?: string | null;
+  ChannelId?: string;
   /** 通道名称 */
-  ChannelName?: string | null;
+  ChannelName?: string;
 }
 
 /** 查询复杂任务详情返回结果 */
@@ -1193,7 +1195,7 @@ declare interface TaskData {
   /** 任务状态1:NEW,2:RUNNING,3:COMPLETED ,4:FAILED */
   Status?: number;
   /** 失败原因 */
-  FailReason?: string | null;
+  FailReason?: string;
   /** 进度（0-1） */
   Progress?: number;
   /** 任务操作类型，批量任务类型以Batch开头 */
@@ -1221,105 +1223,105 @@ declare interface TaskData {
   /** 任务运行时间，单位ms */
   Runtime?: number;
   /** 设备ID */
-  DeviceId?: string | null;
+  DeviceId?: string;
   /** 设备名称 */
-  DeviceName?: string | null;
+  DeviceName?: string;
   /** 通道ID */
-  ChannelId?: string | null;
+  ChannelId?: string;
   /** 通道名称 */
-  ChannelName?: string | null;
+  ChannelName?: string;
 }
 
 /** 时间片段结构体 */
 declare interface Timeline {
   /** 分片起始时间 */
-  Begin?: number | null;
+  Begin?: number;
   /** 分片结束时间 */
-  End?: number | null;
+  End?: number;
 }
 
 /** 修改设备接口返回数据 */
 declare interface UpdateDeviceData {
   /** 设备ID */
-  DeviceId?: string | null;
+  DeviceId?: string;
   /** 设备编码（国标设备即我们为设备生成的20位国标编码，rtmp 设备为10 位设备编码） */
-  Code?: string | null;
+  Code?: string;
   /** 设备名称 */
-  Name?: string | null;
+  Name?: string;
   /** 设备接入协议，1:RTMP,2:GB,3:GW */
-  AccessProtocol?: number | null;
+  AccessProtocol?: number;
   /** 设备类型，1:IPC,2:NVR */
-  Type?: number | null;
+  Type?: number;
   /** 设备接入服务节点ID */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 设备接入服务节点名称 */
-  ClusterName?: string | null;
+  ClusterName?: string;
   /** 设备流传输协议，1:UDP,2:TCP */
-  TransportProtocol?: number | null;
+  TransportProtocol?: number;
   /** 设备密码 */
-  Password?: string | null;
+  Password?: string;
   /** 设备描述 */
-  Description?: string | null;
+  Description?: string;
   /** 设备状态，0:未注册,1:在线,2:离线,3:禁用 */
-  Status?: number | null;
+  Status?: number;
   /** 设备所属组织ID */
-  OrganizationId?: number | null;
+  OrganizationId?: number;
   /** 设备接入网关ID，从查询网关列表接口中获取（仅网关接入需要） */
-  GatewayId?: string | null;
+  GatewayId?: string;
   /** 网关接入协议类型，1.海康SDK，2.大华SDK，3.宇视SDK，4.Onvif（仅网关接入需要） */
-  ProtocolType?: number | null;
+  ProtocolType?: number;
   /** 设备接入IP */
-  Ip?: string | null;
+  Ip?: string;
   /** 设备Port */
-  Port?: number | null;
+  Port?: number;
   /** 设备用户名 */
-  Username?: string | null;
+  Username?: string;
   /** 用户Id */
-  AppId?: number | null;
+  AppId?: number;
 }
 
 /** 修改网关信息返回结果 */
 declare interface UpdateGatewayData {
   /** 网关索引ID */
-  GatewayId?: string | null;
+  GatewayId?: string;
   /** 网关编码 */
-  GwId?: string | null;
+  GwId?: string;
   /** 网关名称，仅支持中文、英文、数字、_、-，长度不超过32个字符 */
-  Name?: string | null;
+  Name?: string;
   /** 网关描述，仅支持中文、英文、数字、_、-，长度不超过128个字符 */
-  Description?: string | null;
+  Description?: string;
   /** 服务节点ID */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 服务节点名称 */
-  ClusterName?: string | null;
+  ClusterName?: string;
   /** 网关状态，0：离线，1:在线 */
-  Status?: number | null;
+  Status?: number;
   /** 激活时间 */
-  CreatedAt?: number | null;
+  CreatedAt?: number;
   /** 网关密钥 */
-  Secret?: string | null;
+  Secret?: string;
   /** 网关版本信息 */
-  Version?: string | null;
+  Version?: string;
 }
 
 /** 修改组织接口返回数据 */
 declare interface UpdateOrgData {
   /** 组织 ID */
-  OrganizationId?: string | null;
+  OrganizationId?: string;
   /** 组织名称 */
-  Name?: string | null;
+  Name?: string;
   /** 组织父节点 ID */
-  ParentId?: string | null;
+  ParentId?: string;
   /** 组织层级 */
-  Level?: number | null;
+  Level?: number;
   /** 用户ID */
-  AppId?: number | null;
+  AppId?: number;
   /** 组织结构 */
-  ParentIds?: string | null;
+  ParentIds?: string;
   /** 设备总数 */
-  Total?: number | null;
+  Total?: number;
   /** 设备在线数量 */
-  Online?: number | null;
+  Online?: number;
 }
 
 /** 修改录像上云计划返回数据 */
@@ -1365,19 +1367,19 @@ declare interface UpdateRecordBackupPlanModify {
 /** 修改录像上云模板返回数据 */
 declare interface UpdateRecordBackupTemplateData {
   /** 模板ID */
-  TemplateId?: string | null;
+  TemplateId?: string;
   /** 模板名称 */
-  TemplateName?: string | null;
+  TemplateName?: string;
   /** 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟） */
-  TimeSections?: RecordTemplateTimeSections[] | null;
+  TimeSections?: RecordTemplateTimeSections[];
   /** 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟） */
-  DevTimeSections?: RecordTemplateTimeSections[] | null;
+  DevTimeSections?: RecordTemplateTimeSections[];
   /** 上云倍速（支持1，2，4倍速） */
-  Scale?: number | null;
+  Scale?: number;
   /** 创建时间 */
-  CreateAt?: string | null;
+  CreateAt?: string;
   /** 更新时间 */
-  UpdateAt?: string | null;
+  UpdateAt?: string;
 }
 
 /** 修改录像上云模板数据结构 */
@@ -2489,7 +2491,7 @@ declare interface QueryForbidPlayChannelListRequest {
 
 declare interface QueryForbidPlayChannelListResponse {
   /** 返回结果 */
-  Data?: ListForbidplayChannelsData | null;
+  Data?: ListForbidplayChannelsData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

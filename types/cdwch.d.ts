@@ -288,6 +288,8 @@ declare interface InstanceInfo {
   IsWhiteSGs?: boolean | null;
   /** 绑定的安全组 */
   BindSGs?: string[] | null;
+  /** 是否开启公网clb */
+  HasPublicCloudClb?: boolean;
 }
 
 /** 实例节点描述信息 */
@@ -1009,11 +1011,11 @@ declare interface ScaleUpInstanceRequest {
 
 declare interface ScaleUpInstanceResponse {
   /** 流程ID */
-  FlowId: string | null;
+  FlowId?: string | null;
   /** 实例ID */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 错误信息 */
-  ErrorMsg: string | null;
+  ErrorMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

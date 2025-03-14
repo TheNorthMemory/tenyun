@@ -1014,6 +1014,22 @@ declare interface InsightResult {
   Context?: string | null;
 }
 
+/** 设置巡检任务配置 */
+declare interface InspectionTaskSettings {
+  /** 巡检任务的唯一标记 */
+  TaskType: string;
+  /** 巡检任务组名称 */
+  Group?: string;
+  /** 巡检任务名称 */
+  Name?: string;
+  /** 巡检任务参数设置 */
+  TaskSettings?: TaskSettings[];
+  /** 是否选中，”true“ ”false“ */
+  Selected?: string;
+  /** 是否开启监控 */
+  Enable?: string;
+}
+
 /** 实例预付费参数，只有在付费类型为PREPAID时生效。 */
 declare interface InstanceChargePrepaid {
   /** 包年包月时间，默认为1，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11, 12, 24, 36, 48, 60。 */
@@ -2330,6 +2346,18 @@ declare interface Tag {
   TagKey?: string;
   /** 标签值 */
   TagValue?: string;
+}
+
+/** 巡检任务参数 */
+declare interface TaskSettings {
+  /** 参数名称 */
+  Name?: string;
+  /** 参数值 */
+  Value?: string;
+  /** 参数唯一标记 */
+  Key?: string;
+  /** 是否可编辑，”true" "false" */
+  Editable?: string;
 }
 
 /** 时间扩缩容规则 */
@@ -4044,6 +4072,38 @@ declare interface ModifyGlobalConfigResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInspectionSettingsRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 巡检类型，FixedTime/RealTime */
+  Type: string;
+  /** 任务配置 */
+  Settings: InspectionTaskSettings[];
+  /** 开始时间戳 */
+  StartTime?: number;
+  /** 结束时间戳 */
+  EndTime?: number;
+  /** 巡检周期，eg EveryDay EveryWeek EveryMonth */
+  Strategy?: string;
+  /** 每天的开始的时间 */
+  Clock?: string;
+  /** 每周的周几 */
+  DayOfWeek?: string;
+  /** 每月的第几号 */
+  DayOfMonth?: string;
+  /** 巡检作业Id */
+  JobId?: string;
+}
+
+declare interface ModifyInspectionSettingsResponse {
+  /** 返回值描述 */
+  Info?: string;
+  /** 返回成功修改的巡检任务Id */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyInstanceBasicRequest {
   /** 集群实例ID */
   InstanceId: string;
@@ -4669,6 +4729,8 @@ declare interface Emr {
   ModifyAutoScaleStrategy(data: ModifyAutoScaleStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoScaleStrategyResponse>;
   /** 修改YARN资源调度的全局配置 {@link ModifyGlobalConfigRequest} {@link ModifyGlobalConfigResponse} */
   ModifyGlobalConfig(data: ModifyGlobalConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGlobalConfigResponse>;
+  /** 设置巡检任务配置 {@link ModifyInspectionSettingsRequest} {@link ModifyInspectionSettingsResponse} */
+  ModifyInspectionSettings(data: ModifyInspectionSettingsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInspectionSettingsResponse>;
   /** 修改集群名称 {@link ModifyInstanceBasicRequest} {@link ModifyInstanceBasicResponse} */
   ModifyInstanceBasic(data: ModifyInstanceBasicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceBasicResponse>;
   /** 调整Pod数量 {@link ModifyPodNumRequest} {@link ModifyPodNumResponse} */

@@ -1040,6 +1040,22 @@ declare interface DescribeDBInstanceDealResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDBInstanceNamespaceRequest {
+  /** 指定查询数据库所属的实例 ID，支持批量查询。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
+  InstanceId: string;
+  /** 指定查询的数据库名。为空时，返回当前实例的全部数据库列表。 */
+  DbName?: string;
+}
+
+declare interface DescribeDBInstanceNamespaceResponse {
+  /** 查询实例的数据库列表。若未使用 DbName 指定具体查询的数据库，则仅返回查询实例所有的数据库列表，而不返回 Collections 集合信息。 */
+  Databases?: string[];
+  /** 查询的集合信息。指定 DbName 时，则仅返回该数据库下的集合列表。 */
+  Collections?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDBInstanceNodePropertyRequest {
   /** 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同。 */
   InstanceId: string;
@@ -2143,6 +2159,8 @@ declare interface Mongodb {
   DescribeDBBackups(data: DescribeDBBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBBackupsResponse>;
   /** 获取数据库实例订单详情 {@link DescribeDBInstanceDealRequest} {@link DescribeDBInstanceDealResponse} */
   DescribeDBInstanceDeal(data: DescribeDBInstanceDealRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceDealResponse>;
+  /** 查询实例的库表。 {@link DescribeDBInstanceNamespaceRequest} {@link DescribeDBInstanceNamespaceResponse} */
+  DescribeDBInstanceNamespace(data: DescribeDBInstanceNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceNamespaceResponse>;
   /** 查询节点属性 {@link DescribeDBInstanceNodePropertyRequest} {@link DescribeDBInstanceNodePropertyResponse} */
   DescribeDBInstanceNodeProperty(data: DescribeDBInstanceNodePropertyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceNodePropertyResponse>;
   /** 查询实例参数模板列表 {@link DescribeDBInstanceParamTplRequest} {@link DescribeDBInstanceParamTplResponse} */

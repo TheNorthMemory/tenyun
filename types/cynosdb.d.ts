@@ -217,11 +217,11 @@ declare interface BackupFileInfo {
   /** 备份文件时间 */
   SnapshotTime?: string;
   /** 备份ID */
-  BackupId?: number | null;
+  BackupId?: number;
   /** 快照类型，可选值：full，全量；increment，增量 */
-  SnapShotType?: string | null;
+  SnapShotType?: string;
   /** 备份文件备注 */
-  BackupName?: string | null;
+  BackupName?: string;
 }
 
 /** 计费资源信息 */
@@ -237,21 +237,21 @@ declare interface BillingResourceInfo {
 /** 资源包绑定的实例信息 */
 declare interface BindInstanceInfo {
   /** 绑定的集群ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 绑定的实例所在的地域 */
-  InstanceRegion?: string | null;
+  InstanceRegion?: string;
   /** 绑定的实例类型 */
-  InstanceType?: string | null;
+  InstanceType?: string;
   /** 绑定集群下的实例ID */
-  ExtendIds?: string[] | null;
+  ExtendIds?: string[];
 }
 
 /** binlog配置信息 */
 declare interface BinlogConfigInfo {
   /** binlog保留时间 */
-  BinlogSaveDays: number | null;
+  BinlogSaveDays: number;
   /** binlog异地地域备份是否开启 */
-  BinlogCrossRegionsEnable: string | null;
+  BinlogCrossRegionsEnable: string;
   /** binlog异地地域 */
   BinlogCrossRegions?: string[] | null;
 }
@@ -445,17 +445,17 @@ declare interface ClusterParamModifyLog {
 /** 集群从可用区信息 */
 declare interface ClusterSlaveData {
   /** 旧主可用区 */
-  OldMasterZone?: string | null;
+  OldMasterZone?: string;
   /** 旧从可用区 */
   OldSlaveZone?: string[] | null;
   /** 新主可用区 */
-  NewMasterZone?: string | null;
+  NewMasterZone?: string;
   /** 新从可用区 */
   NewSlaveZone?: string[] | null;
   /** 新从可用区属性 */
-  NewSlaveZoneAttr?: SlaveZoneAttrItem[] | null;
+  NewSlaveZoneAttr?: SlaveZoneAttrItem[];
   /** 旧可用区属性 */
-  OldSlaveZoneAttr?: SlaveZoneAttrItem[] | null;
+  OldSlaveZoneAttr?: SlaveZoneAttrItem[];
 }
 
 /** 创建集群任务信息 */
@@ -471,11 +471,11 @@ declare interface CreateClustersData {
 /** 跨地域备份各地域备份信息 */
 declare interface CrossRegionBackupItem {
   /** 备份的目标地域 */
-  CrossRegion?: string | null;
+  CrossRegion?: string;
   /** 目标地域的备份任务ID */
-  BackupId?: string | null;
+  BackupId?: number;
   /** 目标地域的备份状态 */
-  BackupStatus?: string | null;
+  BackupStatus?: string;
 }
 
 /** 集群信息 */
@@ -969,17 +969,17 @@ declare interface CynosdbInstanceGrp {
 /** 数据库权限列表 */
 declare interface DatabasePrivileges {
   /** 数据库 */
-  Db: string | null;
+  Db: string;
   /** 权限列表 */
-  Privileges: string[] | null;
+  Privileges: string[];
 }
 
 /** 数据库表信息 */
 declare interface DatabaseTables {
   /** 数据库名 */
-  Database?: string | null;
+  Database?: string;
   /** 表名称列表 */
-  Tables?: string[] | null;
+  Tables?: string[];
 }
 
 /** 数据库详细信息 */
@@ -993,21 +993,21 @@ declare interface DbInfo {
   /** 排序规则 */
   CollateRule?: string;
   /** 数据库备注 */
-  Description?: string | null;
+  Description?: string;
   /** 用户权限 */
-  UserHostPrivileges?: UserHostPrivilege[] | null;
+  UserHostPrivileges?: UserHostPrivilege[];
   /** 数据库ID */
-  DbId?: number | null;
+  DbId?: number;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 用户appid */
-  AppId?: number | null;
+  AppId?: number;
   /** 用户Uin */
-  Uin?: string | null;
+  Uin?: string;
   /** 集群Id */
-  ClusterId?: string | null;
+  ClusterId?: string;
 }
 
 /** 数据库表 */
@@ -1021,19 +1021,19 @@ declare interface DbTable {
 /** 日志投递信息 */
 declare interface DeliverSummary {
   /** 投递类型，store（存储类），mq（消息通道） */
-  DeliverType?: string | null;
+  DeliverType?: string;
   /** 投递子类型：cls，ckafka。 */
-  DeliverSubType?: string | null;
+  DeliverSubType?: string;
 }
 
 /** 错误日志导出格式 */
 declare interface ErrorLogItemExport {
   /** 时间 */
-  Timestamp?: string | null;
+  Timestamp?: string;
   /** 日志等级，可选值note, warning，error */
-  Level?: string | null;
+  Level?: string;
   /** 日志内容 */
-  Content?: string | null;
+  Content?: string;
 }
 
 /** 交换实例信息 */
@@ -1063,9 +1063,9 @@ declare interface InputAccount {
 /** 实例允许的操作列表 */
 declare interface InstanceAbility {
   /** 实例是否支持强制重启，可选值：yes：支持，no：不支持 */
-  IsSupportForceRestart?: string | null;
+  IsSupportForceRestart?: string;
   /** 不支持强制重启的原因 */
-  NonsupportForceRestartReason?: string | null;
+  NonsupportForceRestartReason?: string;
 }
 
 /** 审计日志搜索条件 */
@@ -1129,23 +1129,23 @@ declare interface InstanceAuditStatus {
 /** 实例日志投递信息 */
 declare interface InstanceCLSDeliveryInfo {
   /** 实例id */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 实例name */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 日志主题id */
-  TopicId?: string | null;
+  TopicId?: string;
   /** 日志主题name */
-  TopicName?: string | null;
+  TopicName?: string;
   /** 日志集id */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 日志集name */
-  GroupName?: string | null;
+  GroupName?: string;
   /** 日志投递地域 */
-  Region?: string | null;
+  Region?: string;
   /** 投递状态creating,running,offlining,offlined */
-  Status?: string | null;
+  Status?: string;
   /** 日志类型 */
-  LogType?: string | null;
+  LogType?: string;
 }
 
 /** 实例初始化配置信息 */
@@ -1173,27 +1173,27 @@ declare interface InstanceInitInfo {
 /** 实例网络信息 */
 declare interface InstanceNetInfo {
   /** 网络类型 */
-  InstanceGroupType?: string | null;
+  InstanceGroupType?: string;
   /** 实例组ID */
-  InstanceGroupId?: string | null;
+  InstanceGroupId?: string;
   /** 私有网络ID */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 子网ID */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 网络类型, 0-基础网络, 1-vpc网络, 2-黑石网络 */
-  NetType?: number | null;
+  NetType?: number;
   /** 私有网络IP */
-  Vip?: string | null;
+  Vip?: string;
   /** 私有网络端口 */
-  Vport?: number | null;
+  Vport?: number;
   /** 外网域名 */
-  WanDomain?: string | null;
+  WanDomain?: string;
   /** 外网IP */
-  WanIP?: string | null;
+  WanIP?: string;
   /** 外网端口 */
-  WanPort?: number | null;
+  WanPort?: number;
   /** 外网开启状态 */
-  WanStatus?: string | null;
+  WanStatus?: string;
 }
 
 /** 实例参数信息 */
@@ -1243,15 +1243,15 @@ declare interface LogRuleTemplateInfo {
 /** 逻辑备份配置信息 */
 declare interface LogicBackupConfigInfo {
   /** 是否开启自动逻辑备份 */
-  LogicBackupEnable?: string | null;
+  LogicBackupEnable?: string;
   /** 自动逻辑备份开始时间 */
-  LogicBackupTimeBeg?: number | null;
+  LogicBackupTimeBeg?: number;
   /** 自动逻辑备份结束时间 */
-  LogicBackupTimeEnd?: number | null;
+  LogicBackupTimeEnd?: number;
   /** 自动逻辑备份保留时间 */
-  LogicReserveDuration?: number | null;
+  LogicReserveDuration?: number;
   /** 是否开启跨地域逻辑备份 */
-  LogicCrossRegionsEnable?: string | null;
+  LogicCrossRegionsEnable?: string;
   /** 逻辑备份所跨地域 */
   LogicCrossRegions?: string[] | null;
 }
@@ -1299,9 +1299,9 @@ declare interface ModifyInstanceData {
   /** 变配前存储上限 */
   OldStorageLimit?: number;
   /** 变配前实例机器类型 */
-  OldDeviceType?: string | null;
+  OldDeviceType?: string;
   /** 变配后实例机器类型 */
-  DeviceType?: string | null;
+  DeviceType?: string;
   /** 升级方式。升级完成后切换或维护时间内切换 */
   UpgradeType?: string;
 }
@@ -1313,7 +1313,7 @@ declare interface ModifyParamItem {
   /** 参数当前值 */
   CurrentValue: string;
   /** 参数旧值（只在出参时有用） */
-  OldValue?: string | null;
+  OldValue?: string;
 }
 
 /** 修改参数信息 */
@@ -1337,27 +1337,27 @@ declare interface Module {
 /** 网络信息 */
 declare interface NetAddr {
   /** 内网ip */
-  Vip?: string | null;
+  Vip?: string;
   /** 内网端口号 */
-  Vport?: number | null;
+  Vport?: number;
   /** 外网域名 */
-  WanDomain?: string | null;
+  WanDomain?: string;
   /** 外网端口号 */
-  WanPort?: number | null;
+  WanPort?: number;
   /** 网络类型（ro-只读,rw/ha-读写） */
-  NetType?: string | null;
+  NetType?: string;
   /** 子网ID */
-  UniqSubnetId?: string | null;
+  UniqSubnetId?: string;
   /** 私有网络ID */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** 描述信息 */
-  Description?: string | null;
+  Description?: string;
   /** 外网IP */
-  WanIP?: string | null;
+  WanIP?: string;
   /** 外网状态 */
-  WanStatus?: string | null;
+  WanStatus?: string;
   /** 实例组ID */
-  InstanceGroupId?: string | null;
+  InstanceGroupId?: string;
 }
 
 /** x08新创建的账号 */
@@ -1377,75 +1377,75 @@ declare interface NewAccount {
 /** 任务信息 */
 declare interface ObjectTask {
   /** 任务自增ID */
-  TaskId?: number | null;
+  TaskId?: number;
   /** 任务类型 */
-  TaskType?: string | null;
+  TaskType?: string;
   /** 任务状态 */
-  TaskStatus?: string | null;
+  TaskStatus?: string;
   /** 任务ID（集群ID|实例组ID|实例ID） */
-  ObjectId?: string | null;
+  ObjectId?: string;
   /** 任务类型 */
-  ObjectType?: string | null;
+  ObjectType?: string;
 }
 
 /** 数据库地址 */
 declare interface OldAddrInfo {
   /** IP */
-  Vip?: string | null;
+  Vip?: string;
   /** 端口 */
-  Vport?: number | null;
+  Vport?: number;
   /** 期望执行回收时间 */
-  ReturnTime?: string | null;
+  ReturnTime?: string;
 }
 
 /** 资源包 */
 declare interface Package {
   /** AppID */
-  AppId?: number | null;
+  AppId?: number;
   /** 资源包唯一ID */
-  PackageId?: string | null;
+  PackageId?: string;
   /** 资源包名称 */
-  PackageName?: string | null;
+  PackageName?: string;
   /** 资源包类型CCU-计算资源包，DISK-存储资源包 */
-  PackageType?: string | null;
+  PackageType?: string;
   /** 资源包使用地域china-中国内地通用，overseas-港澳台及海外通用 */
-  PackageRegion?: string | null;
+  PackageRegion?: string;
   /** 资源包状态creating-创建中；using-使用中；expired-已过期；normal_finish-使用完；apply_refund-申请退费中；refund-已退费。 */
-  Status?: string | null;
+  Status?: string;
   /** 资源包总量 */
-  PackageTotalSpec?: number | null;
+  PackageTotalSpec?: number;
   /** 资源包已使用量 */
-  PackageUsedSpec?: number | null;
+  PackageUsedSpec?: number;
   /** 是否还有库存余量 */
-  HasQuota?: boolean | null;
+  HasQuota?: boolean;
   /** 绑定实例信息 */
-  BindInstanceInfos?: BindInstanceInfo[] | null;
+  BindInstanceInfos?: BindInstanceInfo[];
   /** 生效时间：2022-07-01 00:00:00 */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 失效时间：2022-08-01 00:00:00 */
-  ExpireTime?: string | null;
+  ExpireTime?: string;
   /** 资源包历史绑定（已解绑）实例信息 */
-  HistoryBindResourceInfos?: BindInstanceInfo[] | null;
+  HistoryBindResourceInfos?: BindInstanceInfo[];
 }
 
 /** 资源包明细说明 */
 declare interface PackageDetail {
   /** AppId账户ID */
-  AppId?: number | null;
+  AppId?: number;
   /** 资源包唯一ID */
-  PackageId?: string | null;
+  PackageId?: string;
   /** 实例ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 成功抵扣容量 */
-  SuccessDeductSpec?: number | null;
+  SuccessDeductSpec?: number;
   /** 截止当前，资源包已使用的容量 */
-  PackageTotalUsedSpec?: number | null;
+  PackageTotalUsedSpec?: number;
   /** 抵扣开始时间 */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 抵扣结束时间 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 扩展信息 */
-  ExtendInfo?: string | null;
+  ExtendInfo?: string;
 }
 
 /** 资源包抵扣优先级 */
@@ -1501,7 +1501,7 @@ declare interface ParamInfo {
   /** 默认值 */
   Default?: string;
   /** 参数为enum/string/bool时，可选值列表 */
-  EnumValue?: string[] | null;
+  EnumValue?: string[];
   /** 参数类型为float/integer时的最大值 */
   Max?: string;
   /** 参数类型为float/integer时的最小值 */
@@ -1519,15 +1519,15 @@ declare interface ParamInfo {
   /** 参数描述 */
   Description?: string;
   /** 是否为全局参数 */
-  IsGlobal?: number | null;
+  IsGlobal?: number;
   /** 参数是否可修改 */
-  ModifiableInfo?: ModifiableInfo | null;
+  ModifiableInfo?: ModifiableInfo;
   /** 是否为函数 */
-  IsFunc?: boolean | null;
+  IsFunc?: boolean;
   /** 函数 */
-  Func?: string | null;
+  Func?: string;
   /** 支持公式的参数的默认公式样式 */
-  FuncPattern?: string | null;
+  FuncPattern?: string;
 }
 
 /** 修改参数时，传入参数描述 */
@@ -1563,11 +1563,11 @@ declare interface ParamItemDetail {
   /** 参数描述 */
   Description?: string;
   /** 类型是否为公式 */
-  IsFunc?: boolean | null;
+  IsFunc?: boolean;
   /** 参数配置公式 */
-  Func?: string | null;
+  Func?: string;
   /** 支持公式的参数的默认公式样式 */
-  FuncPattern?: string | null;
+  FuncPattern?: string;
 }
 
 /** 参数变化信息 */
@@ -1621,11 +1621,11 @@ declare interface PolicyRule {
 /** 数据库代理连接池信息 */
 declare interface ProxyConnectionPoolInfo {
   /** 连接池保持阈值：单位（秒） */
-  ConnectionPoolTimeOut: number | null;
+  ConnectionPoolTimeOut: number;
   /** 是否开启了连接池 */
-  OpenConnectionPool?: string | null;
+  OpenConnectionPool?: string;
   /** 连接池类型：SessionConnectionPool（会话级别连接池） */
-  ConnectionPoolType?: string | null;
+  ConnectionPoolType?: string;
 }
 
 /** proxy组 */
@@ -1643,11 +1643,11 @@ declare interface ProxyGroup {
   /** 当前代理版本 */
   CurrentProxyVersion?: string;
   /** 集群ID */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 用户AppId */
-  AppId?: number | null;
+  AppId?: number;
   /** 读写节点开通数据库代理 */
-  OpenRw?: string | null;
+  OpenRw?: string;
 }
 
 /** 数据库代理组详细信息 */
@@ -1735,9 +1735,9 @@ declare interface ProxySpec {
 /** TDSQL-C MySQL支持的proxy版本信息 */
 declare interface ProxyVersionInfo {
   /** proxy版本号 */
-  ProxyVersion?: string | null;
+  ProxyVersion?: string;
   /** 版本描述：GA:稳定版 BETA:尝鲜版，DEPRECATED:过旧， */
-  ProxyVersionType?: string | null;
+  ProxyVersionType?: string;
 }
 
 /** proxy节点可用区内个数 */
@@ -1775,11 +1775,11 @@ declare interface QueryParamFilter {
 /** 资源包信息 */
 declare interface ResourcePackage {
   /** 资源包的唯一ID */
-  PackageId?: string | null;
+  PackageId?: string;
   /** 资源包类型：CCU：计算资源包DISK：存储资源包 */
-  PackageType?: string | null;
+  PackageType?: string;
   /** 当前资源包绑定在当前实例下的抵扣优先级 */
-  DeductionPriority?: number | null;
+  DeductionPriority?: number;
 }
 
 /** 回档任务信息 */
@@ -1825,29 +1825,29 @@ declare interface RollbackDatabase {
 /** 回档实例信息 */
 declare interface RollbackInstanceInfo {
   /** 集群ID */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 集群名称 */
-  ClusterName?: string | null;
+  ClusterName?: string;
   /** vpc信息 */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** 子网信息 */
-  UniqSubnetId?: string | null;
+  UniqSubnetId?: string;
   /** vip信息 */
-  Vip?: string | null;
+  Vip?: string;
   /** vport信息 */
-  Vport?: number | null;
+  Vport?: number;
   /** 实例ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 实例名称 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 状态 */
-  Status?: string | null;
+  Status?: string;
   /** cpu大小 */
-  Cpu?: number | null;
+  Cpu?: number;
   /** 内存大小 */
-  Mem?: number | null;
+  Mem?: number;
   /** 存储大小 */
-  StorageLimit?: number | null;
+  StorageLimit?: number;
 }
 
 /** 回档进度详情 */
@@ -1871,15 +1871,15 @@ declare interface RollbackProcessInfo {
 /** 回档RO组信息 */
 declare interface RollbackRoGroupInfo {
   /** 实例组ID */
-  InstanceGroupId?: string | null;
+  InstanceGroupId?: string;
   /** vpc信息 */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** 子网信息 */
-  UniqSubnetId?: string | null;
+  UniqSubnetId?: string;
   /** vip信息 */
-  Vip?: string | null;
+  Vip?: string;
   /** vport信息 */
-  Vport?: number | null;
+  Vport?: number;
 }
 
 /** 回档数据库及表 */
@@ -1893,9 +1893,9 @@ declare interface RollbackTable {
 /** 回档表信息 */
 declare interface RollbackTableInfo {
   /** 旧表名称 */
-  OldTable: string | null;
+  OldTable: string;
   /** 新表名称 */
-  NewTable: string | null;
+  NewTable: string;
 }
 
 /** 可回档的时间范围 */
@@ -1935,17 +1935,17 @@ declare interface RuleTemplateInfo {
 /** 资源包明细说明 */
 declare interface SalePackageSpec {
   /** 资源包使用地域 */
-  PackageRegion?: string | null;
+  PackageRegion?: string;
   /** 资源包类型CCU-计算资源包DISK-存储资源包 */
-  PackageType?: string | null;
+  PackageType?: string;
   /** 资源包版本base-基础版本，common-通用版本，enterprise-企业版本 */
-  PackageVersion?: string | null;
+  PackageVersion?: string;
   /** 当前版本资源包最小资源数，计算资源单位：个；存储资源：GB */
-  MinPackageSpec?: number | null;
+  MinPackageSpec?: number;
   /** 当前版本资源包最大资源数，计算资源单位：个；存储资源：GB */
-  MaxPackageSpec?: number | null;
+  MaxPackageSpec?: number;
   /** 资源包有效期，单位:天 */
-  ExpireDay?: number | null;
+  ExpireDay?: number;
 }
 
 /** 售卖地域信息 */
@@ -1979,7 +1979,7 @@ declare interface SaleZone {
   /** 物理区 */
   PhysicalZone?: string;
   /** 用户是否有可用区权限 */
-  HasPermission?: boolean | null;
+  HasPermission?: boolean;
   /** 是否为全链路RDMA可用区 */
   IsWholeRdmaZone?: string;
   /** 当前可用区是否允许新购集群，1:允许，0:不允许 */
@@ -2037,19 +2037,19 @@ declare interface ServerlessZoneStockInfo {
 /** 可用区属性项 */
 declare interface SlaveZoneAttrItem {
   /** 可用区 */
-  Zone?: string | null;
+  Zone?: string;
   /** binlog同步方式 */
-  BinlogSyncWay?: string | null;
+  BinlogSyncWay?: string;
 }
 
 /** 备可用区库存信息 */
 declare interface SlaveZoneStockInfo {
   /** 备可用区 */
-  SlaveZone?: string | null;
+  SlaveZone?: string;
   /** 备可用区的库存数量 */
-  StockCount?: number | null;
+  StockCount?: number;
   /** 备可用区是否有库存 */
-  HasStock?: boolean | null;
+  HasStock?: boolean;
 }
 
 /** 实例慢查询信息 */
@@ -2077,35 +2077,35 @@ declare interface SlowQueriesItem {
   /** sql语句md5 */
   SqlMd5?: string;
   /** 远程读取次数数据库内核版本大于3.1.12 */
-  SyncReadCountRemote?: number | null;
+  SyncReadCountRemote?: number;
   /** 远程读取的字节数数据库内核版本大于3.1.12 */
-  SyncReadBytesRemote?: number | null;
+  SyncReadBytesRemote?: number;
   /** 远程读取所花费的时间（微秒）数据库内核版本大于3.1.12 */
-  SyncReadTimeRemote?: number | null;
+  SyncReadTimeRemote?: number;
   /** 远程写入次数数据库内核版本大于3.1.12 */
-  SyncWriteCountRemote?: number | null;
+  SyncWriteCountRemote?: number;
   /** 远程写入的字节数。数据库内核版本大于3.1.12 */
-  SyncWriteBytesRemote?: number | null;
+  SyncWriteBytesRemote?: number;
   /** 远程写入所花费的时间（微秒）。数据库内核版本大于3.1.12 */
-  SyncWriteTimeRemote?: number | null;
+  SyncWriteTimeRemote?: number;
   /** 事务提交延迟（微秒）数据库内核版本大于3.1.12 */
-  TrxCommitDelay?: number | null;
+  TrxCommitDelay?: number;
 }
 
 /** 转换集群log bin开关 */
 declare interface SwitchClusterLogBin {
   /** 状态 */
-  Status?: string | null;
+  Status?: string;
 }
 
 /** mysql表权限 */
 declare interface TablePrivileges {
   /** 数据库名 */
-  Db: string | null;
+  Db: string;
   /** 表名 */
-  TableName: string | null;
+  TableName: string;
   /** 权限列表 */
-  Privileges: string[] | null;
+  Privileges: string[];
 }
 
 /** 集群绑定的标签信息，包含标签键TagKey和标签值TagValue */
@@ -2119,11 +2119,11 @@ declare interface Tag {
 /** TaskMaintainInfo */
 declare interface TaskMaintainInfo {
   /** 执行开始时间(距离0点的秒数) */
-  MaintainStartTime?: number | null;
+  MaintainStartTime?: number;
   /** 持续的时间(单位：秒) */
-  MaintainDuration?: number | null;
+  MaintainDuration?: number;
   /** 可以执行的时间，枚举值：["Mon","Tue","Wed","Thu","Fri", "Sat", "Sun"] */
-  MaintainWeekDays?: string[] | null;
+  MaintainWeekDays?: string[];
 }
 
 /** 任务进度查询 */
@@ -2139,39 +2139,39 @@ declare interface TaskProgressInfo {
 /** 参数模板详情 */
 declare interface TemplateParamInfo {
   /** 当前值 */
-  CurrentValue: string;
+  CurrentValue?: string;
   /** 默认值 */
-  Default: string;
+  Default?: string;
   /** 参数类型为enum时可选的值类型集合 */
-  EnumValue: string[] | null;
+  EnumValue?: string[];
   /** 参数类型为float/integer时的最大值 */
-  Max: string | null;
+  Max?: string;
   /** 参数类型为float/integer时的最小值 */
-  Min: string | null;
+  Min?: string;
   /** 参数名称 */
-  ParamName: string;
+  ParamName?: string;
   /** 是否需要重启 */
-  NeedReboot: number;
+  NeedReboot?: number;
   /** 参数描述 */
-  Description: string;
+  Description?: string;
   /** 参数类型，integer/float/string/enum */
-  ParamType: string;
+  ParamType?: string;
 }
 
 /** 计费询价结果 */
 declare interface TradePrice {
   /** 预付费模式下资源总价，不包含优惠，单位:分 */
-  TotalPrice: number | null;
+  TotalPrice?: number;
   /** 总的折扣，100表示100%不打折 */
-  Discount: number;
+  Discount?: number;
   /** 预付费模式下的优惠后总价, 单位: 分,例如用户享有折扣 =TotalPrice × Discount */
-  TotalPriceDiscount: number | null;
+  TotalPriceDiscount?: number;
   /** 后付费模式下的单位资源价格，不包含优惠，单位:分 */
-  UnitPrice: number | null;
+  UnitPrice?: number;
   /** 优惠后后付费模式下的单位资源价格, 单位: 分,例如用户享有折扣=UnitPricet × Discount */
-  UnitPriceDiscount: number | null;
+  UnitPriceDiscount?: number;
   /** 计费价格单位 */
-  ChargeUnit: string;
+  ChargeUnit?: string;
 }
 
 /** 添加实例或者变配实例时同步升级proxy. */
@@ -2191,9 +2191,9 @@ declare interface UserHostPrivilege {
   /** 授权用户 */
   DbUserName: string;
   /** 客户端ip */
-  DbHost: string | null;
+  DbHost: string;
   /** 用户权限 */
-  DbPrivilege: string | null;
+  DbPrivilege: string;
 }
 
 /** 可用区库存信息 */
@@ -2453,7 +2453,7 @@ declare interface CreateAuditRuleTemplateRequest {
 
 declare interface CreateAuditRuleTemplateResponse {
   /** 生成的规则模板ID。 */
-  RuleTemplateId?: string | null;
+  RuleTemplateId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -2,6 +2,52 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 节省计划覆盖率数据 */
+declare interface SavingPlanCoverageDetail {
+  /** 资源 ID：账单中出账对象 ID，不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID */
+  ResourceId?: string;
+  /** 地域ID */
+  RegionId?: number;
+  /** 产品编码 */
+  ProductCode?: string;
+  /** 子产品编码 */
+  SubProductCode?: string;
+  /** 费用起始日期，格式yyyy-MM-dd */
+  StartDate?: string;
+  /** 费用结束日期，格式yyyy-MM-dd，目前与StartDate相等 */
+  EndDate?: string;
+  /** 节省计划覆盖金额（即节省计划支付金额） */
+  SpCoveredAmount?: number;
+  /** 节省计划未覆盖金额（即优惠后总价） */
+  SpUncoveredAmount?: number;
+  /** 总支出（即节省计划未覆盖金额 + 节省计划覆盖金额） */
+  TotalRealAmount?: number;
+  /** 按量计费预期金额（即折前价 * 折扣） */
+  ExpectedAmount?: number;
+  /** 覆盖率结果，取值[0, 100] */
+  SpCoverage?: number;
+  /** 支付者昵称 */
+  PayerUinName?: string;
+  /** 使用者昵称 */
+  OwnerUinName?: string;
+  /** 支付者uin */
+  PayerUin?: string;
+  /** 计费项名称 */
+  SubBillingItemName?: string;
+  /** 计费细项名称 */
+  BillingItemName?: string;
+  /** 子产品名称 */
+  SubProductName?: string;
+}
+
+/** 节省计划覆盖率聚合数据 */
+declare interface SavingPlanCoverageRate {
+  /** 聚合时间维度，按天聚合格式为yyyy-MM-dd，按月聚合格式为yyyy-MM */
+  DatePoint?: string;
+  /** 覆盖率结果，取值[0, 100] */
+  Rate?: number;
+}
+
 /** 节省计划抵扣明细 */
 declare interface SavingPlanDeductDetail {
   /** 账号id */
@@ -120,6 +166,30 @@ declare interface CreateSavingPlanOrderResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSavingPlanCoverageRequest {
+  /** 费用起始日期，格式yyyy-MM-dd */
+  StartDate: string;
+  /** 费用结束日期，格式yyyy-MM-dd */
+  EndDate: string;
+  /** 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，以此类推 */
+  Offset: number;
+  /** 数量，最大值为200 */
+  Limit: number;
+  /** 取值包括1（缺省值）和2，1表示按天统计覆盖率，2表示按月统计覆盖率，此参数仅影响返回的RateSet聚合粒度，不影响返回的DetailSet */
+  PeriodType?: number;
+}
+
+declare interface DescribeSavingPlanCoverageResponse {
+  /** 节省计划覆盖率明细数据 */
+  DetailSet?: SavingPlanCoverageDetail[];
+  /** 节省计划覆盖率聚合数据 */
+  RateSet?: SavingPlanCoverageRate[];
+  /** 查询命中的节省计划覆盖率明细数据总条数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSavingPlanDeductRequest {
   /** 分页偏移量 */
   Offset: number;
@@ -201,6 +271,8 @@ declare interface Svp {
   (): Versions;
   /** 创建节省计划订单 {@link CreateSavingPlanOrderRequest} {@link CreateSavingPlanOrderResponse} */
   CreateSavingPlanOrder(data: CreateSavingPlanOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSavingPlanOrderResponse>;
+  /** 查询节省计划覆盖率数据 {@link DescribeSavingPlanCoverageRequest} {@link DescribeSavingPlanCoverageResponse} */
+  DescribeSavingPlanCoverage(data: DescribeSavingPlanCoverageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSavingPlanCoverageResponse>;
   /** 查询节省计划抵扣明细 {@link DescribeSavingPlanDeductRequest} {@link DescribeSavingPlanDeductResponse} */
   DescribeSavingPlanDeduct(data: DescribeSavingPlanDeductRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSavingPlanDeductResponse>;
   /** 查询节省计划总览明细 {@link DescribeSavingPlanOverviewRequest} {@link DescribeSavingPlanOverviewResponse} */

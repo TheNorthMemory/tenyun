@@ -3514,6 +3514,20 @@ declare interface CheckDefaultSubnetResponse {
   RequestId?: string;
 }
 
+declare interface CheckGatewayFlowMonitorRequest {
+  /** 网关实例ID，目前我们支持的网关实例类型有，专线网关实例ID，形如，`dcg-ltjahce6`；Nat网关实例ID，形如，`nat-ltjahce6`；VPN网关实例ID，形如，`vpn-ltjahce6`。 */
+  GatewayId: string;
+}
+
+declare interface CheckGatewayFlowMonitorResponse {
+  /** 网关是否启用了流控。true为启用，false未启用。 */
+  Enabled: boolean;
+  /** 网关的带宽。 */
+  Bandwidth: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CheckNetDetectStateRequest {
   /** 探测目的IPv4地址数组，最多两个。 */
   DetectDestinationIp: string[];
@@ -9539,6 +9553,8 @@ declare interface Vpc {
   CheckAssistantCidr(data: CheckAssistantCidrRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAssistantCidrResponse>;
   /** 预判是否可建默认子网 {@link CheckDefaultSubnetRequest} {@link CheckDefaultSubnetResponse} */
   CheckDefaultSubnet(data?: CheckDefaultSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDefaultSubnetResponse>;
+  /** 查询网关是否启用流量监控 {@link CheckGatewayFlowMonitorRequest} {@link CheckGatewayFlowMonitorResponse} */
+  CheckGatewayFlowMonitor(data: CheckGatewayFlowMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<CheckGatewayFlowMonitorResponse>;
   /** 验证网络探测 {@link CheckNetDetectStateRequest} {@link CheckNetDetectStateResponse} */
   CheckNetDetectState(data: CheckNetDetectStateRequest, config?: AxiosRequestConfig): AxiosPromise<CheckNetDetectStateResponse>;
   /** 检查流量镜像的采集端接收端 {@link CheckTrafficMirrorRequest} {@link CheckTrafficMirrorResponse} */

@@ -2506,6 +2506,14 @@ declare interface IntegrationTaskInfo {
   CurrentSyncPosition?: number | null;
 }
 
+/** 键值对 */
+declare interface KVPair {
+  /** 键名 */
+  K: string | null;
+  /** 值 */
+  V: string | null;
+}
+
 /** 表生命周期相关信息 */
 declare interface LifecycleInfo {
   /** 生命周期值 */
@@ -2694,6 +2702,44 @@ declare interface MakePlanTaskOpsDtoCollection {
   PageSize?: number | null;
   /** 记录列表 */
   Items?: MakePlanTaskOpsDto[] | null;
+}
+
+/** 手动工作流触发运行记录实体 */
+declare interface ManualTriggerRecordOpsDto {
+  /** 运行触发记录ID */
+  TriggerId?: string | null;
+  /** 用户提交运行时配置的运行名称 */
+  TriggerName?: string | null;
+  /** 用户提交运行的备注 */
+  Remark?: string | null;
+  /** 数据时间列表 */
+  DatetimeList?: string[] | null;
+  /** 任务数 */
+  TaskCnt?: number | null;
+  /** 实例数 */
+  InstanceCnt?: number | null;
+  /** 已完成的实例数 */
+  FinishedInstanceCnt?: number | null;
+  /** 成功的实例数 */
+  SuccessInstanceCnt?: number | null;
+  /** 记录运行状态 INIT, RUNNING, FINISHED */
+  Status?: string | null;
+  /** 用户提交运行时的入参，主要用于前端反显和记录原始提交信息 */
+  TriggerParams?: string | null;
+  /** 用户主账号ID */
+  OwnerUin?: string | null;
+  /** 用户ID */
+  UserUin?: string | null;
+  /** 用户展示名 */
+  UserName?: string | null;
+  /** 租户ID */
+  TenantId?: string | null;
+  /** 项目ID */
+  ProjectId?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 数据实例时间的时区 */
+  ScheduleTimeZone?: string | null;
 }
 
 /** 离线实例 */
@@ -11379,6 +11425,44 @@ declare interface TriggerEventResponse {
   RequestId?: string;
 }
 
+declare interface TriggerManualTasksRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 触发运行名称 */
+  TriggerName: string;
+  /** 运行范围 ENTIRE_WORKFLOW or SPECIFIED_TASK */
+  TriggerScope: string;
+  /** 运行数据时间列表 */
+  DataTimeList: string[];
+  /** 工作流ID */
+  WorkflowId: string;
+  /** 备注 */
+  Remark?: string;
+  /** 需要运行的任务列表TriggerScope=ENTIRE_WORKFLOW 时无需传此参数，TriggerScope=SPECIFIED_TASK此参数必传 */
+  TaskIds?: string[];
+  /** 用户提交运行时指定的调度资源组，未指定时使用任务配置的调度资源组 */
+  SchedulerResourceGroup?: string;
+  /** 用户提交运行时指定的集成资源组，未指定时使用任务配置的集成资源组 */
+  IntegrationResourceGroup?: string;
+  /** 执行顺序 ASC、RAND、DESC */
+  ExecOrder?: string;
+  /** 自定义参数，最高优先级 */
+  CustomParams?: KVPair[];
+  /** 页面反显使用，无业务含义 */
+  ExtraParams?: string;
+  /** 实例时间的时区 */
+  ScheduleTimeZone?: string;
+}
+
+declare interface TriggerManualTasksResponse {
+  /** 请求来源，WEB 前端；CLIENT 客户端 */
+  RequestFromSource?: string | null;
+  /** 详情结果 */
+  Data?: ManualTriggerRecordOpsDto | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UnlockIntegrationTaskRequest {
   /** 任务id */
   TaskId: string;
@@ -11958,6 +12042,8 @@ declare interface Wedata {
   TriggerDsEvent(data: TriggerDsEventRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerDsEventResponse>;
   /** 触发事件生成事件实例 {@link TriggerEventRequest} {@link TriggerEventResponse} */
   TriggerEvent(data: TriggerEventRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerEventResponse>;
+  /** 手动任务触发运行 {@link TriggerManualTasksRequest} {@link TriggerManualTasksResponse} */
+  TriggerManualTasks(data: TriggerManualTasksRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerManualTasksResponse>;
   /** 解锁实时集成任务 {@link UnlockIntegrationTaskRequest} {@link UnlockIntegrationTaskResponse} */
   UnlockIntegrationTask(data: UnlockIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockIntegrationTaskResponse>;
   /** （仅公有云）数语向Wedata注册，更新相关信息 {@link UpdateDataModelRegistryInfoRequest} {@link UpdateDataModelRegistryInfoResponse} */

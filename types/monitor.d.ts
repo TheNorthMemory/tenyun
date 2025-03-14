@@ -2780,7 +2780,7 @@ declare namespace V20180724 {
 
   interface CreatePolicyGroupResponse {
     /** 创建成功的策略组Id */
-    GroupId: number;
+    GroupId?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

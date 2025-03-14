@@ -5,21 +5,21 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 动作动态参数返回格式 */
 declare interface ActionFieldConfigDetail {
   /** 组件类型可选项如下：input 文本框textarea 多行文本框number 数值输入框select 选择器cascader 级联选择器radio 单选time 时间选择 */
-  Type: string;
+  Type?: string;
   /** 组件label */
-  Lable: string;
+  Lable?: string;
   /** 组件唯一标识， 传回后端时的key */
-  Field: string;
+  Field?: string;
   /** 默认值 */
-  DefaultValue: string | null;
+  DefaultValue?: string | null;
   /** 支持配置项如下,可根据需要选择配置项，不需要配置是设置空{}：{ placeholder: string (占位符) tooltip: string (提示信息) reg: RegExp (对输入内容格式进行正则校验的规则) max: number (对于输入框，限制最大输入字符数，对于数值输入框，设置上限) min: number (对于数值输入框，设置下限) step: number (设置数值输入框的步长，默认为1) format: string (时间选择的格式，如YYYY-MM-DD表示年月日, YYYY-MM-DD HH:mm:ss 表示时分秒) separator: string[] (多行输入框的分隔符，不传或者为空时表示不分隔，直接返回用户输入的文本字符串) multiple: boolean (是否多选,对选择器和级联选择器有效) options: 选择器的选项【支持以下两种形式】直接给定选项数组 { value: string; label: string }[]通过调接口获取选项 { api: string(接口地址), params: string[] (接口参数,对应于参数配置的field，前端根据field对应的所有组件的输入值作为参数查询数据， 为空时在组件加载时直接请求数据) }} */
-  Config: string;
+  Config?: string;
   /** 是否必填 (0 -- 否 1-- 是) */
-  Required: number;
+  Required?: number;
   /** compute配置依赖的其他field满足的条件时通过校验（如：三个表单项中必须至少有一个填写了）[fieldName,{ config: 此项保留，等待后面具体场景细化 }] */
-  Validate: string;
+  Validate?: string;
   /** 是否可见 */
-  Visible: string;
+  Visible?: string;
 }
 
 /** 动作栏位配置结果 */
@@ -105,7 +105,7 @@ declare interface DescribePolicy {
   /** 策略规则 */
   TaskPolicyRule: string;
   /** 护栏策略生效处理策略 1:顺序执行，2:暂停 */
-  TaskPolicyDealType: number | null;
+  TaskPolicyDealType: number;
 }
 
 /** 对象类型 */
@@ -128,6 +128,8 @@ declare interface ObjectType {
   ObjectSupportType?: number | null;
   /** 1.接入层 2.逻辑层 3. 数据层 */
   ArchLayer?: number;
+  /** 是否支持演练生图 */
+  IsArchSvg?: boolean;
 }
 
 /** 对象类型配置 */
@@ -274,6 +276,8 @@ declare interface Task {
   TaskIssue?: string | null;
   /** region信息 */
   TaskRegionName?: string | null;
+  /** 架构ID */
+  TaskArchId?: string;
 }
 
 /** 从经验模板创建演练时需要配置的任务参数 */
@@ -513,7 +517,7 @@ declare interface TaskReportInfo {
   /** 是否有效 */
   Expired?: boolean;
   /** 演练报告cos文件地址 */
-  CosUrl?: string | null;
+  CosUrl?: string;
   /** 演练报告导出日志 */
   Log?: string | null;
   /** 0--未开始，1--正在归档，2--归档成功，3--归档失败 */
@@ -521,7 +525,7 @@ declare interface TaskReportInfo {
   /** 归档时间 */
   ArchiveTime?: string;
   /** 归档ID */
-  ArchiveUuid?: string | null;
+  ArchiveUuid?: string;
 }
 
 /** 经验库 */

@@ -892,16 +892,6 @@ declare interface TWeCallActiveInfo {
   PkgType?: number;
 }
 
-/** TWeCall分类统计数据 */
-declare interface TWeCallCategoryPkgInfo {
-  /** 类型 */
-  PkgType?: number | null;
-  /** 总数 */
-  All?: number | null;
-  /** 已使用数 */
-  Used?: number | null;
-}
-
 /** TWeCall信息 */
 declare interface TWeCallInfo {
   /** Sn信息，SN格式：产品ID_设备名 */
@@ -920,24 +910,6 @@ declare interface TWeCallLicenseInfo {
   TotalNum?: number | null;
   /** 已使用 */
   UsedNum?: number | null;
-}
-
-/** TWeCall设备信息 */
-declare interface TWeCallPkgInfo {
-  /** 包ID */
-  PkgId?: string | null;
-  /** 包类型 */
-  PkgType?: number | null;
-  /** 生效时间 */
-  CreateTime?: number | null;
-  /** 过期时间 */
-  ExpireTime?: number | null;
-  /** 状态 */
-  Status?: number | null;
-  /** 已使用 */
-  LicenseUsedNum?: number | null;
-  /** 总量 */
-  LicenseTotalNum?: number | null;
 }
 
 /** 缩略图信息 */
@@ -1048,20 +1020,6 @@ declare interface ActivateTWeCallLicenseResponse {
   FailureList?: DeviceActiveResult[] | null;
   /** 设备激活成功返回数据 */
   SuccessList?: DeviceActiveResult[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface AssignTWeCallLicenseRequest {
-  /** voip类型 */
-  PkgType: number;
-  /** appId */
-  MiniProgramAppId: string;
-  /** License数，只支持50,500,1000,5000,10000,20000,50000 */
-  DeductNum: number;
-}
-
-declare interface AssignTWeCallLicenseResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3118,30 +3076,6 @@ declare interface GetTWeCallActiveStatusResponse {
   RequestId?: string;
 }
 
-declare interface GetTWeCallPkgListRequest {
-  /** appId */
-  MiniProgramAppId?: string;
-  /** 类型 */
-  PkgType?: number[];
-  /** 状态 */
-  Status?: number[];
-  /** 偏移量 */
-  Offset?: number;
-  /** 每页数据大小 */
-  Limit?: number;
-}
-
-declare interface GetTWeCallPkgListResponse {
-  /** 激活状态 */
-  TWeCallPkgList?: TWeCallPkgInfo[];
-  /** 总数 */
-  Total?: number;
-  /** 分类统计 */
-  TWeCallCategoryPkgList?: TWeCallCategoryPkgInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface GetTopicRuleListRequest {
   /** 请求的页数 */
   PageNum: number;
@@ -3923,8 +3857,6 @@ declare interface Iotexplorer {
   (): Versions;
   /** 激活TWeCall {@link ActivateTWeCallLicenseRequest} {@link ActivateTWeCallLicenseResponse} */
   ActivateTWeCallLicense(data: ActivateTWeCallLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateTWeCallLicenseResponse>;
-  /** @deprecated 分配TWeCall {@link AssignTWeCallLicenseRequest} {@link AssignTWeCallLicenseResponse} */
-  AssignTWeCallLicense(data: AssignTWeCallLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<AssignTWeCallLicenseResponse>;
   /** 绑定云存用户 {@link BindCloudStorageUserRequest} {@link BindCloudStorageUserResponse} */
   BindCloudStorageUser(data: BindCloudStorageUserRequest, config?: AxiosRequestConfig): AxiosPromise<BindCloudStorageUserResponse>;
   /** 批量绑定子设备 {@link BindDevicesRequest} {@link BindDevicesResponse} */
@@ -4145,8 +4077,6 @@ declare interface Iotexplorer {
   GetStudioProductList(data?: GetStudioProductListRequest, config?: AxiosRequestConfig): AxiosPromise<GetStudioProductListResponse>;
   /** 查询TWeCall激活状态 {@link GetTWeCallActiveStatusRequest} {@link GetTWeCallActiveStatusResponse} */
   GetTWeCallActiveStatus(data?: GetTWeCallActiveStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeCallActiveStatusResponse>;
-  /** @deprecated 查询TWeCall包列表 {@link GetTWeCallPkgListRequest} {@link GetTWeCallPkgListResponse} */
-  GetTWeCallPkgList(data?: GetTWeCallPkgListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeCallPkgListResponse>;
   /** 获取规则列表 {@link GetTopicRuleListRequest} {@link GetTopicRuleListResponse} */
   GetTopicRuleList(data: GetTopicRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTopicRuleListResponse>;
   /** 查询微信授权票据 {@link GetWechatDeviceTicketRequest} {@link GetWechatDeviceTicketResponse} */

@@ -941,6 +941,16 @@ declare interface DeleteUserResponse {
   RequestId?: string;
 }
 
+declare interface DeleteWhiteBoardSnapshotRequest {
+  /** 房间ID */
+  RoomId?: number;
+}
+
+declare interface DeleteWhiteBoardSnapshotResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAnswerListRequest {
   /** 问题ID */
   QuestionId: string;
@@ -1473,6 +1483,24 @@ declare interface DescribeUserResponse {
   RequestId?: string;
 }
 
+declare interface DescribeWhiteBoardSnapshotRequest {
+  /** 房间ID */
+  RoomId?: number;
+}
+
+declare interface DescribeWhiteBoardSnapshotResponse {
+  /** 板书截图生成类型。0 不生成板书；1 全量模式；2 单页去重模式 */
+  WhiteBoardSnapshotMode?: number;
+  /** 板书任务状态，0：未开始，1：进行中，2：失败，3：成功，4：已删除 */
+  Status?: number;
+  /** 板书截图链接 */
+  Result?: string[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface EndRoomRequest {
   /** 房间ID。 */
   RoomId: number;
@@ -1986,6 +2014,8 @@ declare interface Lcic {
   DeleteSupervisor(data: DeleteSupervisorRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSupervisorResponse>;
   /** 删除用户 {@link DeleteUserRequest} {@link DeleteUserResponse} */
   DeleteUser(data: DeleteUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserResponse>;
+  /** 删除板书截图 {@link DeleteWhiteBoardSnapshotRequest} {@link DeleteWhiteBoardSnapshotResponse} */
+  DeleteWhiteBoardSnapshot(data?: DeleteWhiteBoardSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWhiteBoardSnapshotResponse>;
   /** 获取房间答题详情 {@link DescribeAnswerListRequest} {@link DescribeAnswerListResponse} */
   DescribeAnswerList(data: DescribeAnswerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAnswerListResponse>;
   /** 获取应用详情 {@link DescribeAppDetailRequest} {@link DescribeAppDetailResponse} */
@@ -2030,6 +2060,8 @@ declare interface Lcic {
   DescribeSupervisors(data: DescribeSupervisorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupervisorsResponse>;
   /** 获取用户信息 {@link DescribeUserRequest} {@link DescribeUserResponse} */
   DescribeUser(data?: DescribeUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResponse>;
+  /** 获取板书截图 {@link DescribeWhiteBoardSnapshotRequest} {@link DescribeWhiteBoardSnapshotResponse} */
+  DescribeWhiteBoardSnapshot(data?: DescribeWhiteBoardSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteBoardSnapshotResponse>;
   /** 结束直播 {@link EndRoomRequest} {@link EndRoomResponse} */
   EndRoom(data: EndRoomRequest, config?: AxiosRequestConfig): AxiosPromise<EndRoomResponse>;
   /** 禁言和取消禁言 {@link ForbidSendMsgRequest} {@link ForbidSendMsgResponse} */

@@ -2580,7 +2580,7 @@ declare interface ServiceConfig {
 declare interface ServiceGovernanceConfig {
   /** 是否开启服务注册治理 */
   EnableGovernance?: boolean;
-  /** 服务治理类型 */
+  /** 服务治理类型（枚举：SHARE、EXCLUSIVE） */
   GovernanceType?: string;
   /** 独享实例列表 */
   ExclusiveInstances?: ExclusiveInstance[] | null;
@@ -3736,7 +3736,7 @@ declare interface CreateApplicationRequest {
   ProgramIdList?: string[];
   /** apm业务系统id */
   ApmInstanceId?: string;
-  /** 编程语言;J - JAVA；C - C/C++；P - Python；G - Go；O - Other； */
+  /** 编程语言: Java；C/C++；Python；Go；Other */
   ProgramLanguage?: string;
   /** 开发框架-SpringCloud/Dubbo/Go-GRPC/Other */
   FrameworkType?: string;
@@ -5919,6 +5919,18 @@ declare interface DescribeMicroserviceResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMicroservicesByGroupIdsRequest {
+  /** 部署组ID列表 */
+  GroupIds: string[];
+}
+
+declare interface DescribeMicroservicesByGroupIdsResponse {
+  /** 微服务信息分页列表 */
+  Result?: TsfPageMicroservice;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeMicroservicesRequest {
   /** 命名空间ID */
   NamespaceId: string;
@@ -7925,6 +7937,8 @@ declare interface Tsf {
   DescribeMicroservice(data: DescribeMicroserviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMicroserviceResponse>;
   /** 获取微服务列表 {@link DescribeMicroservicesRequest} {@link DescribeMicroservicesResponse} */
   DescribeMicroservices(data: DescribeMicroservicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMicroservicesResponse>;
+  /** 通过部署组ID获取微服务 {@link DescribeMicroservicesByGroupIdsRequest} {@link DescribeMicroservicesByGroupIdsResponse} */
+  DescribeMicroservicesByGroupIds(data: DescribeMicroservicesByGroupIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMicroservicesByGroupIdsResponse>;
   /** 查询服务API列表 {@link DescribeMsApiListRequest} {@link DescribeMsApiListResponse} */
   DescribeMsApiList(data: DescribeMsApiListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMsApiListResponse>;
   /** 服务调用监控统计概览 {@link DescribeOverviewInvocationRequest} {@link DescribeOverviewInvocationResponse} */

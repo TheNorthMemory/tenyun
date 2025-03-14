@@ -2,36 +2,6 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
-/** 视频美颜返回结果 */
-declare interface BeautifyVideoOutput {
-  /** 视频美颜输出的url */
-  VideoUrl: string | null;
-  /** 视频美颜输出的视频MD5，用于校验 */
-  VideoMD5: string | null;
-  /** 美颜输出的视频封面图base64字符串 */
-  CoverImage: string | null;
-  /** 视频宽度 */
-  Width: number | null;
-  /** 视频高度 */
-  Height: number | null;
-  /** 每秒传输帧数 */
-  Fps: number | null;
-  /** 视频播放时长，单位为秒 */
-  DurationInSec: number | null;
-}
-
-/** 全局美颜参数，针对所有人脸做美颜。参数全部为0，则为不做美颜 */
-declare interface BeautyParam {
-  /** 美白程度，取值范围[0,100]。0不美白，100代表最高程度。默认值30。 */
-  WhitenLevel?: number;
-  /** 磨皮程度，取值范围[0,100]。0不磨皮，100代表最高程度。默认值30。 */
-  SmoothingLevel?: number;
-  /** 大眼程度，取值范围[0,100]。0不大眼，100代表最高程度。默认值70。 */
-  EyeEnlargeLevel?: number;
-  /** 瘦脸程度，取值范围[0,100]。0不瘦脸，100代表最高程度。默认值70。 */
-  FaceShrinkLevel?: number;
-}
-
 /** 人脸框信息 */
 declare interface FaceRect {
   /** 人脸框左上角横坐标。 */
@@ -104,34 +74,6 @@ declare interface BeautifyPicResponse {
   RequestId?: string;
 }
 
-declare interface BeautifyVideoRequest {
-  /** 视频url地址 */
-  Url: string;
-  /** 美颜参数 - 美白、平滑、大眼和瘦脸。参数值范围[0, 100]。参数值为0，则不做美颜。参数默认值为0。目前默认取数组第一个元素是对所有人脸美颜。 */
-  BeautyParam?: BeautyParam[];
-  /** 目前只支持mp4 */
-  OutputVideoType?: string;
-}
-
-declare interface BeautifyVideoResponse {
-  /** 视频美颜任务的Job id */
-  JobId?: string;
-  /** 预估处理时间，粒度为秒 */
-  EstimatedProcessTime?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CancelBeautifyVideoJobRequest {
-  /** 美颜视频的Job id */
-  JobId: string;
-}
-
-declare interface CancelBeautifyVideoJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateModelRequest {
   /** 图片base64数据，用于试唇色，要求必须是LUT 格式的cube文件转换成512*512的PNG图片。查看 [LUT文件的使用说明](https://cloud.tencent.com/document/product/1172/41701)。了解 [cube文件转png图片小工具](http://yyb.gtimg.com/aiplat/static/qcloud-cube-to-png.html)。 */
   LUTFile: string;
@@ -168,22 +110,6 @@ declare interface GetModelListResponse {
   ModelIdNum?: number;
   /** 素材数据 */
   ModelInfos?: ModelInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface QueryBeautifyVideoJobRequest {
-  /** 视频美颜Job id */
-  JobId: string;
-}
-
-declare interface QueryBeautifyVideoJobResponse {
-  /** 当前任务状态：排队中、处理中、处理失败或者处理完成 */
-  JobStatus?: string;
-  /** 视频美颜输出的结果信息 */
-  BeautifyVideoOutput?: BeautifyVideoOutput | null;
-  /** 当前任务状态码：1：排队中、3: 处理中、5: 处理失败、7:处理完成 */
-  JobStatusCode?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -257,18 +183,12 @@ declare interface Fmu {
   (): Versions;
   /** 人脸美颜 {@link BeautifyPicRequest} {@link BeautifyPicResponse} */
   BeautifyPic(data?: BeautifyPicRequest, config?: AxiosRequestConfig): AxiosPromise<BeautifyPicResponse>;
-  /** @deprecated 视频美颜(此接口目前已下线) {@link BeautifyVideoRequest} {@link BeautifyVideoResponse} */
-  BeautifyVideo(data: BeautifyVideoRequest, config?: AxiosRequestConfig): AxiosPromise<BeautifyVideoResponse>;
-  /** @deprecated 撤销视频美颜任务(此接口目前已下线) {@link CancelBeautifyVideoJobRequest} {@link CancelBeautifyVideoJobResponse} */
-  CancelBeautifyVideoJob(data: CancelBeautifyVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<CancelBeautifyVideoJobResponse>;
   /** 上传唇色素材 {@link CreateModelRequest} {@link CreateModelResponse} */
   CreateModel(data: CreateModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelResponse>;
   /** 删除唇色素材 {@link DeleteModelRequest} {@link DeleteModelResponse} */
   DeleteModel(data: DeleteModelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelResponse>;
   /** 查询唇色素材 {@link GetModelListRequest} {@link GetModelListResponse} */
   GetModelList(data?: GetModelListRequest, config?: AxiosRequestConfig): AxiosPromise<GetModelListResponse>;
-  /** @deprecated 查询视频美颜任务(此接口目前已下线) {@link QueryBeautifyVideoJobRequest} {@link QueryBeautifyVideoJobResponse} */
-  QueryBeautifyVideoJob(data: QueryBeautifyVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBeautifyVideoJobResponse>;
   /** 图片滤镜 {@link StyleImageRequest} {@link StyleImageResponse} */
   StyleImage(data: StyleImageRequest, config?: AxiosRequestConfig): AxiosPromise<StyleImageResponse>;
   /** 图片滤镜（高级版） {@link StyleImageProRequest} {@link StyleImageProResponse} */
