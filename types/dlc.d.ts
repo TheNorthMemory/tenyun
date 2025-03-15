@@ -1130,6 +1130,16 @@ declare interface OpendThirdAccessUserInfo {
   CreateTime?: string | null;
 }
 
+/** 数据优化引擎信息 */
+declare interface OptimizerEngineInfo {
+  /** 引擎资源名称 */
+  HouseName: string | null;
+  /** 引擎资源ID */
+  HouseId: string | null;
+  /** 该参数仅针对spark作业引擎有效，用于执行数据优化任务的资源大小，不填时将采用该引擎所有资源 */
+  HouseSize?: number | null;
+}
+
 /** 数据格式其它类型。 */
 declare interface Other {
   /** 枚举类型，默认值为Json，可选值为[Json, Parquet, ORC, AVRD]之一。 */
@@ -1696,6 +1706,24 @@ declare interface Task {
   SparkSQLTask?: SQLTask;
 }
 
+/** 任务监控信息 */
+declare interface TaskMonitorInfo {
+  /** 任务id */
+  TaskId?: string;
+  /** 引擎名称 */
+  HouseName?: string;
+  /** sql语句 */
+  QuerySQL?: string;
+  /** 任务时间 */
+  CreateTime?: string;
+  /** 执行时间 */
+  UsedTime?: string;
+  /** 数据扫描量 */
+  DataAmount?: string;
+  /** 指标信息 */
+  QueryStats?: string;
+}
+
 /** 任务实例。 */
 declare interface TaskResponseInfo {
   /** 任务所属Database的名称。 */
@@ -2097,6 +2125,14 @@ declare interface AddDMSPartitionsResponse {
 }
 
 declare interface AddOptimizerEnginesRequest {
+  /** 数据目录名称 */
+  Catalog: string;
+  /** 引擎信息列表 */
+  Engines: OptimizerEngineInfo[];
+  /** 数据库名称 */
+  Database?: string;
+  /** 数据表名称 */
+  Table?: string;
 }
 
 declare interface AddOptimizerEnginesResponse {
@@ -3928,6 +3964,30 @@ declare interface DescribeTaskLogResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTaskMonitorInfosRequest {
+  /** 任务ID列表，上限50个 */
+  TaskIdList?: string[];
+  /** 引擎名称 */
+  HouseName?: string;
+  /** 任务创建时间的起始时间 */
+  CreateTimeStart?: string;
+  /** 任务创建时间的结束时间 */
+  CreateTimeEnd?: string;
+  /** 每一页条数 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+}
+
+declare interface DescribeTaskMonitorInfosResponse {
+  /** 任务监控信息列表 */
+  TaskMonitorInfoList?: TaskMonitorInfo[];
+  /** 任务总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTaskResultRequest {
   /** 任务唯一ID，仅支持30天内的任务 */
   TaskId: string;
@@ -4910,7 +4970,7 @@ declare interface Dlc {
   /** DMS元数据新增分区 {@link AddDMSPartitionsRequest} {@link AddDMSPartitionsResponse} */
   AddDMSPartitions(data?: AddDMSPartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<AddDMSPartitionsResponse>;
   /** 添加数据优化资源 {@link AddOptimizerEnginesRequest} {@link AddOptimizerEnginesResponse} */
-  AddOptimizerEngines(data?: AddOptimizerEnginesRequest, config?: AxiosRequestConfig): AxiosPromise<AddOptimizerEnginesResponse>;
+  AddOptimizerEngines(data: AddOptimizerEnginesRequest, config?: AxiosRequestConfig): AxiosPromise<AddOptimizerEnginesResponse>;
   /** 添加用户到工作组 {@link AddUsersToWorkGroupRequest} {@link AddUsersToWorkGroupResponse} */
   AddUsersToWorkGroup(data: AddUsersToWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AddUsersToWorkGroupResponse>;
   /** DMS元数据更新库 {@link AlterDMSDatabaseRequest} {@link AlterDMSDatabaseResponse} */
@@ -5089,6 +5149,8 @@ declare interface Dlc {
   DescribeTablesName(data: DescribeTablesNameRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesNameResponse>;
   /** 查询任务日志 {@link DescribeTaskLogRequest} {@link DescribeTaskLogResponse} */
   DescribeTaskLog(data: DescribeTaskLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLogResponse>;
+  /** 查询任务监控信息 {@link DescribeTaskMonitorInfosRequest} {@link DescribeTaskMonitorInfosResponse} */
+  DescribeTaskMonitorInfos(data?: DescribeTaskMonitorInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskMonitorInfosResponse>;
   /** 查询任务结果(用于: SparkSQL、PrestoSQL) {@link DescribeTaskResultRequest} {@link DescribeTaskResultResponse} */
   DescribeTaskResult(data: DescribeTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResultResponse>;
   /** 查询任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
