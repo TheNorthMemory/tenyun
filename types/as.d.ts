@@ -1430,6 +1430,20 @@ declare interface EnableAutoScalingGroupResponse {
   RequestId?: string;
 }
 
+declare interface EnterStandbyRequest {
+  /** 伸缩组 ID。 */
+  AutoScalingGroupId: string;
+  /** 运行中状态实例列表，不支持传入非运行中状态实例。 */
+  InstanceIds: string[];
+}
+
+declare interface EnterStandbyResponse {
+  /** 伸缩活动ID。 */
+  ActivityId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ExecuteScalingPolicyRequest {
   /** 告警伸缩策略ID，不支持目标追踪策略。 */
   AutoScalingPolicyId: string;
@@ -2022,6 +2036,8 @@ declare interface As {
   DisableAutoScalingGroup(data: DisableAutoScalingGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DisableAutoScalingGroupResponse>;
   /** 启用伸缩组 {@link EnableAutoScalingGroupRequest} {@link EnableAutoScalingGroupResponse} */
   EnableAutoScalingGroup(data: EnableAutoScalingGroupRequest, config?: AxiosRequestConfig): AxiosPromise<EnableAutoScalingGroupResponse>;
+  /** 实例进入备用中状态 {@link EnterStandbyRequest} {@link EnterStandbyResponse} */
+  EnterStandby(data: EnterStandbyRequest, config?: AxiosRequestConfig): AxiosPromise<EnterStandbyResponse>;
   /** 触发伸缩策略 {@link ExecuteScalingPolicyRequest} {@link ExecuteScalingPolicyResponse} */
   ExecuteScalingPolicy(data: ExecuteScalingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteScalingPolicyResponse>;
   /** 实例退出备用中状态 {@link ExitStandbyRequest} {@link ExitStandbyResponse} */

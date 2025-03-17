@@ -26,6 +26,30 @@ declare interface ProductEventList {
   EventList?: EventDetail[];
 }
 
+/** 状态汇总 */
+declare interface TotalStatus {
+  /** 正常状态的数目 */
+  NormalCount?: number;
+  /** 通知状态的数目 */
+  NotifyCount?: number;
+  /** 异常状态的数目 */
+  AbnormalCount?: number | null;
+}
+
+declare interface DescribeEventStatisticsRequest {
+  /** 1. 查询非区域性产品事件时，地域ID指定为：non-regional2. 其他地域ID取值请参考：https://cloud.tencent.com/document/api/213/15692 */
+  RegionId: string;
+  /** 1. 不指定产品列表时将查询所有产品。2. 产品ID示例：cvm、lb、cdb、cdn、crs */
+  ProductIds?: string[];
+}
+
+declare interface DescribeEventStatisticsResponse {
+  /** 正常产品数 */
+  Data?: TotalStatus;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeEventsRequest {
   /** 事件的发生日期 */
   EventDate: string;
@@ -45,6 +69,8 @@ declare interface DescribeEventsResponse {
 /** {@link Tchd 腾讯云健康看板} */
 declare interface Tchd {
   (): Versions;
+  /** 查看事件统计 {@link DescribeEventStatisticsRequest} {@link DescribeEventStatisticsResponse} */
+  DescribeEventStatistics(data: DescribeEventStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventStatisticsResponse>;
   /** 查看事件列表 {@link DescribeEventsRequest} {@link DescribeEventsResponse} */
   DescribeEvents(data: DescribeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventsResponse>;
 }

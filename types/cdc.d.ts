@@ -35,7 +35,7 @@ declare interface DedicatedCluster {
   /** 专用集群所属可用区名称。 */
   Zone?: string;
   /** 专用集群的描述。 */
-  Description?: string | null;
+  Description?: string;
   /** 专用集群的名称。 */
   Name?: string;
   /** 专用集群的生命周期。如"PENDING"。 */
@@ -44,6 +44,8 @@ declare interface DedicatedCluster {
   CreateTime?: string;
   /** 专用集群所属的站点id。 */
   SiteId?: string;
+  /** 专用集群的运营状态 */
+  RunningStatus?: string;
 }
 
 /** 专用宿主机支持的实例规格列表 */
@@ -105,37 +107,37 @@ declare interface DedicatedClusterOrder {
   /** 订单类型，创建CREATE或扩容EXTEND */
   Action?: string;
   /** 子订单详情列表 */
-  DedicatedClusterOrderItems?: DedicatedClusterOrderItem[] | null;
+  DedicatedClusterOrderItems?: DedicatedClusterOrderItem[];
   /** cpu值 */
-  Cpu?: number | null;
+  Cpu?: number;
   /** mem值 */
-  Mem?: number | null;
+  Mem?: number;
   /** gpu值 */
-  Gpu?: number | null;
+  Gpu?: number;
   /** 0代表未支付，1代表已支付 */
-  PayStatus?: number | null;
+  PayStatus?: number;
   /** 支付方式，一次性、按月、按年 */
-  PayType?: string | null;
+  PayType?: string;
   /** 购买时长的单位 */
-  TimeUnit?: string | null;
+  TimeUnit?: string;
   /** 购买时长 */
-  TimeSpan?: number | null;
+  TimeSpan?: number;
   /** 订单类型 */
-  OrderType?: string | null;
+  OrderType?: string;
   /** 验收状态 */
-  CheckStatus?: string;
+  CheckStatus?: string | null;
   /** 交付预期时间 */
-  DeliverExpectTime?: string;
+  DeliverExpectTime?: string | null;
   /** 交付实际完成时间 */
-  DeliverFinishTime?: string;
+  DeliverFinishTime?: string | null;
   /** 验收预期时间 */
-  CheckExpectTime?: string;
+  CheckExpectTime?: string | null;
   /** 验收实际完成时间 */
-  CheckFinishTime?: string;
+  CheckFinishTime?: string | null;
   /** 订单SLA */
-  OrderSLA?: string;
+  OrderSLA?: string | null;
   /** 订单支付计划 */
-  OrderPayPlan?: string;
+  OrderPayPlan?: string | null;
 }
 
 /** 专用集群子订单 */
@@ -173,11 +175,11 @@ declare interface DedicatedClusterOrderItem {
   /** 规格英文名 */
   TypeName?: string;
   /** 规格展示 */
-  ComputeFormat?: string | null;
+  ComputeFormat?: string;
   /** 规格类型 */
-  TypeFamily?: string | null;
+  TypeFamily?: string;
   /** 0未支付，1已支付 */
-  SubOrderPayStatus?: number | null;
+  SubOrderPayStatus?: number;
 }
 
 /** 专用集群配置 */
@@ -185,7 +187,7 @@ declare interface DedicatedClusterType {
   /** 配置id */
   DedicatedClusterTypeId?: string;
   /** 配置描述，对应描述 */
-  Description?: string | null;
+  Description?: string;
   /** 配置名称，对应计算资源类型 */
   Name?: string;
   /** 创建配置的时间 */
@@ -257,7 +259,7 @@ declare interface HostInfo {
   /** 到期时间 */
   ExpireTime?: string;
   /** 宿主机id */
-  HostId?: string | null;
+  HostId?: string;
 }
 
 /** CDC集群内宿主机的统计信息 */
@@ -291,29 +293,29 @@ declare interface HostStatistic {
 /** 入带宽数据 */
 declare interface InBandwidth {
   /** 时间戳 */
-  Timestamps: number[] | null;
+  Timestamps?: number[];
   /** 时间对应的值 */
-  Values: number[] | null;
+  Values?: number[];
 }
 
 /** 本地网络信息 */
 declare interface LocalNetInfo {
   /** 协议 */
-  Protocol: string | null;
+  Protocol?: string;
   /** 网络id */
-  VpcId: string | null;
+  VpcId?: string;
   /** 路由信息 */
-  BGPRoute: string | null;
+  BGPRoute?: string;
   /** 本地IP */
-  LocalIp: string | null;
+  LocalIp?: string;
 }
 
 /** 出带宽数据。 */
 declare interface OutBandwidth {
   /** 时间戳 */
-  Timestamps: number[] | null;
+  Timestamps?: number[];
   /** 对应时间的值 */
-  Values: number[] | null;
+  Values?: number[];
 }
 
 /** RegionZoneInfo信息 */
@@ -327,29 +329,29 @@ declare interface RegionZoneInfo {
 /** 云硬盘的仓库级别信息 */
 declare interface SetInfo {
   /** 云硬盘仓库id */
-  SetId?: string | null;
+  SetId?: string;
   /** 云硬盘仓库名称 */
-  SetName?: string | null;
+  SetName?: string;
   /** 云硬盘仓库类型 */
-  SetType?: string | null;
+  SetType?: string;
   /** 云硬盘仓库容量 */
-  SetSize?: number | null;
+  SetSize?: number;
   /** 云硬盘仓库状态 */
-  SetStatus?: string | null;
+  SetStatus?: string;
   /** 云硬盘仓库创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 读流量 */
-  ReadTraffic?: DetailData | null;
+  ReadTraffic?: DetailData;
   /** 写流量 */
-  WriteTraffic?: DetailData | null;
+  WriteTraffic?: DetailData;
   /** 读IO */
-  ReadIO?: DetailData | null;
+  ReadIO?: DetailData;
   /** 写IO */
-  WriteIO?: DetailData | null;
+  WriteIO?: DetailData;
   /** 平均等待时间 */
-  Await?: DetailData | null;
+  Await?: DetailData;
   /** 利用率 */
-  Util?: DetailData | null;
+  Util?: DetailData;
 }
 
 /** 客户站点信息 */
@@ -359,7 +361,7 @@ declare interface Site {
   /** 站点id */
   SiteId?: string;
   /** 站点描述 */
-  Description?: string | null;
+  Description?: string;
   /** 站点创建时间 */
   CreateTime?: string;
 }
@@ -419,7 +421,7 @@ declare interface SiteDetail {
 /** VPN网关的流量监控数据。 */
 declare interface VpngwBandwidthData {
   /** 出带宽流量 */
-  OutBandwidth?: OutBandwidth | null;
+  OutBandwidth?: OutBandwidth;
   /** 入带宽流量 */
   InBandwidth?: InBandwidth;
 }

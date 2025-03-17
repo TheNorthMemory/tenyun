@@ -47,9 +47,9 @@ declare interface CloudDedicatedZoneResourceSummaryInfo {
 /** 专属可用区资源水位数据扩展信息，包含可用区当地时间等数据。 */
 declare interface ExtraInfo {
   /** 专属可用区当地时间本周一日期 */
-  ThisMondayLocalDate?: string | null;
+  ThisMondayLocalDate?: string;
   /** 专属可用区当地时间上周一日期 */
-  LastMondayLocalDate?: string | null;
+  LastMondayLocalDate?: string;
 }
 
 declare interface DescribeCloudDedicatedZoneHostsRequest {
@@ -79,9 +79,9 @@ declare interface DescribeCloudDedicatedZoneResourceSummaryRequest {
 
 declare interface DescribeCloudDedicatedZoneResourceSummaryResponse {
   /** 资源水位详情 */
-  ResourceSummarySet?: CloudDedicatedZoneResourceSummaryInfo[] | null;
+  ResourceSummarySet?: CloudDedicatedZoneResourceSummaryInfo[];
   /** 资源水位扩展信息 */
-  ExtraInfo?: ExtraInfo | null;
+  ExtraInfo?: ExtraInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

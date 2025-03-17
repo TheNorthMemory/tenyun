@@ -1461,6 +1461,8 @@ declare interface DescribeDBDiagEventsRequest {
   Severities?: number[];
   /** 实例ID列表。 */
   InstanceIds?: string[];
+  /** 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"redis" - 云数据库 Redis，默认为"mysql"。 */
+  Product?: string;
   /** 偏移量，默认0。 */
   Offset?: number;
   /** 返回数量，默认20，最大值为50。 */
@@ -1469,9 +1471,9 @@ declare interface DescribeDBDiagEventsRequest {
 
 declare interface DescribeDBDiagEventsResponse {
   /** 诊断事件的总数目。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 诊断事件的列表。 */
-  Items: DiagHistoryEventItem[];
+  Items?: DiagHistoryEventItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

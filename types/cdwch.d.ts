@@ -450,6 +450,18 @@ declare interface SearchTags {
   AllValue?: number;
 }
 
+/** 副可用区详情 */
+declare interface SecondaryZoneInfo {
+  /** 副可用区 */
+  SecondaryZone?: string | null;
+  /** 可用区可用的子网id */
+  SecondarySubnet?: string | null;
+  /** 可用区可用的子网可用ip的数量 */
+  UserIpNum?: string | null;
+  /** 可用区可用的子网可用ip的数量 */
+  SecondaryUserSubnetIPNum?: number | null;
+}
+
 /** 服务详细信息描述。 */
 declare interface ServiceInfo {
   /** 服务名称 */
@@ -545,6 +557,8 @@ declare interface CreateInstanceNewRequest {
   CommonSpec?: NodeSpec;
   /** 标签列表 */
   TagItems?: Tag[];
+  /** 副可用去信息 */
+  SecondaryZoneInfo?: SecondaryZoneInfo[];
 }
 
 declare interface CreateInstanceNewResponse {
@@ -789,6 +803,8 @@ declare interface DescribeInstancesNewRequest {
   SearchTags?: SearchTags[];
   /** 信息详细与否 */
   IsSimple?: boolean;
+  /** vip列表 */
+  Vips?: string[];
 }
 
 declare interface DescribeInstancesNewResponse {

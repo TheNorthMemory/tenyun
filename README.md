@@ -114,7 +114,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 260+ 款产品，12259+ 服务数</summary>
+<details><summary>共计 260+ 款产品，12262+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -136,7 +136,7 @@ apigateway | [API 网关](https://cloud.tencent.com/document/product/628) | 2018
 apm | [应用性能监控](https://cloud.tencent.com/document/product/1463) | 2021-06-22(13) |
 asr | [语音识别](https://cloud.tencent.com/document/product/1093) | 2019-06-14(32) |
 asw | [应用与服务编排工作流](https://cloud.tencent.com/document/product/1272) | 2020-07-22(9) |
-as | [弹性伸缩](https://cloud.tencent.com/document/product/377) | 2018-04-19(57) |
+as | [弹性伸缩](https://cloud.tencent.com/document/product/377) | 2018-04-19(58) |
 ba | [ICP备案](https://cloud.tencent.com/document/product/243) | 2020-07-20(3) |
 batch | [批量计算](https://cloud.tencent.com/document/product/599) | 2017-03-12(31) |
 bda | [人体分析](https://cloud.tencent.com/document/product/1208) | 2020-03-24(18) |
@@ -235,7 +235,7 @@ habo |  | 2018-12-03(2) |
 hai | [高性能应用服务](https://cloud.tencent.com/document/product/1721) | 2023-08-12(13) |
 hasim | [高可用物联网卡](https://cloud.tencent.com/document/product/1482) | 2021-07-16(22) |
 hcm | [数学作业批改](https://cloud.tencent.com/document/product/1004) | 2018-11-06(1) |
-hunyuan | [腾讯混元大模型](https://cloud.tencent.com/document/product/1729) | 2023-09-01(19) |
+hunyuan | [腾讯混元大模型](https://cloud.tencent.com/document/product/1729) | 2023-09-01(20) |
 iai | [人脸识别](https://cloud.tencent.com/document/product/867) | 2020-03-03(36) | 2018-03-01(33) |
 iap | [身份识别平台](https://cloud.tencent.com/document/product/1782) | 2024-07-13(6) |
 ic | [图片瘦身](https://cloud.tencent.com/document/product/636) | 2019-03-07(9) |
@@ -322,7 +322,7 @@ tcb | [云开发 CloudBase](https://cloud.tencent.com/document/product/876) | 20
 tcbr | [云托管 CloudBase Run](https://cloud.tencent.com/document/product/1243) | 2022-02-17(10+10) |
 tccatalog | [统一Catalog服务](https://cloud.tencent.com/document/product/1784) | 2024-10-24(4) |
 tcex | [腾讯云释义](https://cloud.tencent.com/document/product/1266) | 2020-07-27(2) |
-tchd | [腾讯云健康看板](https://cloud.tencent.com/document/product/1688) | 2023-03-06(1) |
+tchd | [腾讯云健康看板](https://cloud.tencent.com/document/product/1688) | 2023-03-06(2) |
 tci | 腾讯智学课堂分析 | 2019-03-18(41) |
 tcm | [服务网格](https://cloud.tencent.com/document/product/1261) | 2021-04-13(12) |
 tcr | [容器镜像服务](https://cloud.tencent.com/document/product/1141) | 2019-09-24(110) |

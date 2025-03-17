@@ -279,13 +279,13 @@ declare interface BizTaskInfo {
   /** 集群id */
   ClusterId?: string;
   /** 地域 */
-  Region?: string | null;
+  Region?: string;
   /** 任务创建时间 */
   CreateTime?: string;
   /** 延迟执行时间 */
-  DelayTime?: string | null;
+  DelayTime?: string;
   /** 任务失败信息 */
-  ErrMsg?: string | null;
+  ErrMsg?: string;
   /** 异步任务流id */
   FlowId?: number;
   /** 任务输入信息 */
@@ -325,25 +325,25 @@ declare interface BizTaskInfo {
   /** 修改参数任务信息 */
   ModifyParamsData?: ModifyParamsData[] | null;
   /** 创建集群任务信息 */
-  CreateClustersData?: CreateClustersData | null;
+  CreateClustersData?: CreateClustersData;
   /** 集群回档任务信息 */
-  RollbackData?: RollbackData | null;
+  RollbackData?: RollbackData;
   /** 实例变配任务信息 */
-  ModifyInstanceData?: ModifyInstanceData | null;
+  ModifyInstanceData?: ModifyInstanceData;
   /** 手动备份任务信息 */
   ManualBackupData?: ManualBackupData | null;
   /** 修改内核版本任务信息 */
-  ModifyDbVersionData?: ModifyDbVersionData | null;
+  ModifyDbVersionData?: ModifyDbVersionData;
   /** 集群可用区信息 */
-  ClusterSlaveData?: ClusterSlaveData | null;
+  ClusterSlaveData?: ClusterSlaveData;
   /** 转换集群日志 */
   SwitchClusterLogBin?: SwitchClusterLogBin | null;
   /** 修改实例参数数据 */
   ModifyInstanceParamsData?: BizTaskModifyParamsData | null;
   /** 维护时间 */
-  TaskMaintainInfo?: TaskMaintainInfo | null;
+  TaskMaintainInfo?: TaskMaintainInfo;
   /** 实例日志投递信息 */
-  InstanceCLSDeliveryInfos?: InstanceCLSDeliveryInfo[] | null;
+  InstanceCLSDeliveryInfos?: InstanceCLSDeliveryInfo[];
   /** 任务进度信息 */
   TaskProgressInfo?: TaskProgressInfo;
 }
@@ -353,7 +353,7 @@ declare interface BizTaskModifyInstanceParam {
   /** 实例ID */
   InstanceId?: string;
   /** 实例参数修改任务详情 */
-  ModifyInstanceParamList?: ModifyParamItem[] | null;
+  ModifyInstanceParamList?: ModifyParamItem[];
 }
 
 /** 修改参数任务数据 */
@@ -361,9 +361,9 @@ declare interface BizTaskModifyParamsData {
   /** 集群ID */
   ClusterId?: string;
   /** 集群参数修改数据 */
-  ClusterParamList?: ModifyParamItem[] | null;
+  ClusterParamList?: ModifyParamItem[];
   /** 实例参数修改数据 */
-  ModifyInstanceParams?: BizTaskModifyInstanceParam[] | null;
+  ModifyInstanceParams?: BizTaskModifyInstanceParam[];
 }
 
 /** CLS日志投递配置 */
@@ -405,19 +405,19 @@ declare interface ClusterInstanceDetail {
   /** 实例角色 */
   InstanceRole?: string;
   /** 执行开始时间(距离0点的秒数) */
-  MaintainStartTime?: number | null;
+  MaintainStartTime?: number;
   /** 持续的时间(单位：秒) */
-  MaintainDuration?: number | null;
+  MaintainDuration?: number;
   /** 可以执行的时间，枚举值：["Mon","Tue","Wed","Thu","Fri", "Sat", "Sun"] */
-  MaintainWeekDays?: string[] | null;
+  MaintainWeekDays?: string[];
   /** serverless实例子状态 */
-  ServerlessStatus?: string | null;
+  ServerlessStatus?: string;
   /** 实例任务信息 */
-  InstanceTasks?: ObjectTask[] | null;
+  InstanceTasks?: ObjectTask[];
   /** 实例机器类型 */
-  InstanceDeviceType?: string | null;
+  InstanceDeviceType?: string;
   /** 实例存储类型 */
-  InstanceStorageType?: string | null;
+  InstanceStorageType?: string;
   /** 数据库类型 */
   DbMode?: string;
 }
@@ -497,75 +497,75 @@ declare interface CynosdbCluster {
   /** 实例数 */
   InstanceNum: number;
   /** 用户uin */
-  Uin: string | null;
+  Uin: string;
   /** 引擎类型 */
-  DbType: string | null;
+  DbType: string;
   /** 用户appid */
-  AppId: number | null;
+  AppId: number;
   /** 集群状态描述 */
-  StatusDesc: string | null;
+  StatusDesc: string;
   /** 集群创建时间 */
-  CreateTime: string | null;
+  CreateTime: string;
   /** 付费模式。0-按量计费，1-包年包月 */
-  PayMode: number | null;
+  PayMode: number;
   /** 截止时间 */
-  PeriodEndTime: string | null;
+  PeriodEndTime: string;
   /** 集群读写vip */
-  Vip: string | null;
+  Vip: string;
   /** 集群读写vport */
-  Vport: number | null;
+  Vport: number;
   /** 项目id */
-  ProjectID: number | null;
+  ProjectID: number;
   /** 私有网络ID */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 子网ID */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** cynos内核版本 */
-  CynosVersion?: string | null;
+  CynosVersion?: string;
   /** 存储容量 */
-  StorageLimit?: number | null;
+  StorageLimit?: number;
   /** 续费标志 */
-  RenewFlag?: number | null;
+  RenewFlag?: number;
   /** 正在处理的任务 */
-  ProcessingTask?: string | null;
+  ProcessingTask?: string;
   /** 集群的任务数组 */
-  Tasks?: ObjectTask[] | null;
+  Tasks?: ObjectTask[];
   /** 集群绑定的tag数组 */
-  ResourceTags?: Tag[] | null;
+  ResourceTags?: Tag[];
   /** Db类型(NORMAL, SERVERLESS) */
-  DbMode?: string | null;
+  DbMode?: string;
   /** 当Db类型为SERVERLESS时，serverless集群状态，可选值:resumepause */
-  ServerlessStatus?: string | null;
+  ServerlessStatus?: string;
   /** 集群预付费存储值大小 */
-  Storage?: number | null;
+  Storage?: number;
   /** 集群存储为预付费时的存储ID，用于预付费存储变配 */
-  StorageId?: string | null;
+  StorageId?: string;
   /** 集群存储付费模式。0-按量计费，1-包年包月 */
-  StoragePayMode?: number | null;
+  StoragePayMode?: number;
   /** 集群计算规格对应的最小存储值 */
-  MinStorageSize?: number | null;
+  MinStorageSize?: number;
   /** 集群计算规格对应的最大存储值 */
-  MaxStorageSize?: number | null;
+  MaxStorageSize?: number;
   /** 集群网络信息 */
-  NetAddrs?: NetAddr[] | null;
+  NetAddrs?: NetAddr[];
   /** 物理可用区 */
-  PhysicalZone?: string | null;
+  PhysicalZone?: string;
   /** 主可用区 */
-  MasterZone?: string | null;
+  MasterZone?: string;
   /** 是否有从可用区 */
-  HasSlaveZone?: string | null;
+  HasSlaveZone?: string;
   /** 从可用区 */
-  SlaveZones?: string[] | null;
+  SlaveZones?: string[];
   /** 商业类型 */
-  BusinessType?: string | null;
+  BusinessType?: string;
   /** 是否冻结 */
-  IsFreeze?: string | null;
+  IsFreeze?: string;
   /** 订单来源 */
-  OrderSource?: string | null;
+  OrderSource?: string;
   /** 能力 */
-  Ability?: Ability | null;
+  Ability?: Ability;
   /** 实例绑定资源包信息（此处只返回存储资源包，即packageType=DISK） */
-  ResourcePackages?: ResourcePackage[] | null;
+  ResourcePackages?: ResourcePackage[];
 }
 
 /** 集群详情详细信息 */
@@ -579,7 +579,7 @@ declare interface CynosdbClusterDetail {
   /** 可用区 */
   Zone?: string;
   /** 物理可用区 */
-  PhysicalZone?: string | null;
+  PhysicalZone?: string;
   /** 状态 */
   Status?: string;
   /** 状态描述 */
@@ -587,15 +587,15 @@ declare interface CynosdbClusterDetail {
   /** 当Db类型为SERVERLESS时，serverless集群状态，可选值:resumeresumingpausepausing */
   ServerlessStatus?: string;
   /** 存储Id */
-  StorageId?: string | null;
+  StorageId?: string;
   /** 存储大小，单位为G */
-  Storage?: number | null;
+  Storage?: number;
   /** 最大存储规格，单位为G */
-  MaxStorageSize?: number | null;
+  MaxStorageSize?: number;
   /** 最小存储规格，单位为G */
-  MinStorageSize?: number | null;
+  MinStorageSize?: number;
   /** 存储付费类型，1为包年包月，0为按量计费 */
-  StoragePayMode?: number | null;
+  StoragePayMode?: number;
   /** VPC名称 */
   VpcName?: string;
   /** vpc唯一id */
@@ -611,11 +611,11 @@ declare interface CynosdbClusterDetail {
   /** 数据库类型 */
   DbType?: string;
   /** Db类型：NORMALSERVERLESS */
-  DbMode?: string | null;
+  DbMode?: string;
   /** 数据库版本 */
   DbVersion?: string;
   /** 存储空间上限 */
-  StorageLimit?: number | null;
+  StorageLimit?: number;
   /** 使用容量 */
   UsedStorage?: number;
   /** vip地址 */
@@ -625,21 +625,21 @@ declare interface CynosdbClusterDetail {
   /** 集群只读实例的vip地址和vport端口 */
   RoAddr?: Addr[];
   /** 集群支持的功能 */
-  Ability?: Ability | null;
+  Ability?: Ability;
   /** cynos版本 */
-  CynosVersion?: string | null;
+  CynosVersion?: string;
   /** 商业类型 */
-  BusinessType?: string | null;
+  BusinessType?: string;
   /** 是否有从可用区 */
-  HasSlaveZone?: string | null;
+  HasSlaveZone?: string;
   /** 是否冻结 */
-  IsFreeze?: string | null;
+  IsFreeze?: string;
   /** 任务列表 */
-  Tasks?: ObjectTask[] | null;
+  Tasks?: ObjectTask[];
   /** 主可用区 */
-  MasterZone?: string | null;
+  MasterZone?: string;
   /** 从可用区列表 */
-  SlaveZones?: string[] | null;
+  SlaveZones?: string[];
   /** 实例信息 */
   InstanceSet?: ClusterInstanceDetail[];
   /** 付费模式 */
@@ -651,25 +651,25 @@ declare interface CynosdbClusterDetail {
   /** 实例绑定的tag数组信息 */
   ResourceTags?: Tag[];
   /** Proxy状态 */
-  ProxyStatus?: string | null;
+  ProxyStatus?: string;
   /** binlog开关，可选值：ON, OFF */
-  LogBin?: string | null;
+  LogBin?: string;
   /** 是否跳过交易 */
-  IsSkipTrade?: string | null;
+  IsSkipTrade?: string;
   /** pitr类型，可选值：normal, redo_pitr */
-  PitrType?: string | null;
+  PitrType?: string;
   /** 是否打开密码复杂度 */
-  IsOpenPasswordComplexity?: string | null;
+  IsOpenPasswordComplexity?: string;
   /** 网络类型 */
-  NetworkStatus?: string | null;
+  NetworkStatus?: string;
   /** 集群绑定的资源包信息 */
-  ResourcePackages?: ResourcePackage[] | null;
+  ResourcePackages?: ResourcePackage[];
   /** 自动续费标识，1为自动续费，0为到期不续 */
-  RenewFlag?: number | null;
+  RenewFlag?: number;
   /** 节点网络类型 */
-  NetworkType?: string | null;
+  NetworkType?: string;
   /** 备可用区属性 */
-  SlaveZoneAttr?: SlaveZoneAttrItem[] | null;
+  SlaveZoneAttr?: SlaveZoneAttrItem[];
   /** 版本标签 */
   CynosVersionTag?: string;
 }
@@ -769,35 +769,35 @@ declare interface CynosdbInstance {
   /** serverless实例状态, 可选值：resumepause */
   ServerlessStatus?: string;
   /** 预付费存储Id */
-  StorageId?: string | null;
+  StorageId?: string;
   /** 存储付费类型 */
   StoragePayMode?: number;
   /** 物理区 */
   PhysicalZone?: string;
   /** 商业类型 */
-  BusinessType?: string | null;
+  BusinessType?: string;
   /** 任务 */
-  Tasks?: ObjectTask[] | null;
+  Tasks?: ObjectTask[];
   /** 是否冻结 */
-  IsFreeze?: string | null;
+  IsFreeze?: string;
   /** 资源标签 */
   ResourceTags?: Tag[] | null;
   /** 主可用区 */
-  MasterZone?: string | null;
+  MasterZone?: string;
   /** 备可用区 */
   SlaveZones?: string[] | null;
   /** 实例网络信息 */
-  InstanceNetInfo?: InstanceNetInfo[] | null;
+  InstanceNetInfo?: InstanceNetInfo[];
   /** 实例绑定资源包信息（此处只返回计算资源包，即packageType=CCU） */
   ResourcePackages?: ResourcePackage[] | null;
   /** 实例索引形态,可选值【mixedRowColumn（行列混存），onlyRowIndex（仅行存）】 */
-  InstanceIndexMode?: string | null;
+  InstanceIndexMode?: string;
   /** 当前实例支持的能力 */
-  InstanceAbility?: InstanceAbility | null;
+  InstanceAbility?: InstanceAbility;
   /** 实例机器类型 */
-  DeviceType?: string | null;
+  DeviceType?: string;
   /** 实例存储类型 */
-  InstanceStorageType?: string | null;
+  InstanceStorageType?: string;
 }
 
 /** 实例详情 */
@@ -907,11 +907,11 @@ declare interface CynosdbInstanceGroup {
   /** 实例组包含实例信息 */
   InstanceSet?: CynosdbInstance[];
   /** VPC的ID */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** 子网ID */
-  UniqSubnetId?: string | null;
+  UniqSubnetId?: string;
   /** 正在回收IP信息 */
-  OldAddrInfo?: OldAddrInfo | null;
+  OldAddrInfo?: OldAddrInfo;
   /** 正在进行的任务 */
   ProcessingTasks?: string[];
   /** 任务列表 */
@@ -1039,17 +1039,17 @@ declare interface ErrorLogItemExport {
 /** 交换实例信息 */
 declare interface ExchangeInstanceInfo {
   /** 源实例信息 */
-  SrcInstanceInfo?: RollbackInstanceInfo | null;
+  SrcInstanceInfo?: RollbackInstanceInfo;
   /** 目标实例信息 */
-  DstInstanceInfo?: RollbackInstanceInfo | null;
+  DstInstanceInfo?: RollbackInstanceInfo;
 }
 
 /** 交换RO组信息 */
 declare interface ExchangeRoGroupInfo {
   /** 源RO组信息 */
-  SrcRoGroupInfo?: RollbackRoGroupInfo | null;
+  SrcRoGroupInfo?: RollbackRoGroupInfo;
   /** 目标RO组信息 */
-  DstRoGroupInfo?: RollbackRoGroupInfo | null;
+  DstRoGroupInfo?: RollbackRoGroupInfo;
 }
 
 /** 账号，包含accountName和host */
@@ -1223,9 +1223,9 @@ declare interface InstanceSpec {
   /** 最大IO带宽 */
   MaxIoBandWidth?: number;
   /** 地域库存信息 */
-  ZoneStockInfos?: ZoneStockInfo[] | null;
+  ZoneStockInfos?: ZoneStockInfo[];
   /** 库存数量 */
-  StockCount?: number | null;
+  StockCount?: number;
 }
 
 /** 审计日志命中规则模板的基本信息 */
@@ -1477,7 +1477,7 @@ declare interface ParamDetail {
   /** 参数容许的最小值 */
   Min?: string;
   /** 参数的可选枚举值。如果为非枚举值，则为空 */
-  EnumValue?: string[] | null;
+  EnumValue?: string[];
   /** 1：全局参数，0：非全局参数 */
   IsGlobal?: number;
   /** 匹配类型，multiVal */
@@ -1485,13 +1485,13 @@ declare interface ParamDetail {
   /** 匹配目标值，当multiVal时，各个key用，分割 */
   MatchValue?: string;
   /** true-为公式，false-非公式 */
-  IsFunc?: boolean | null;
+  IsFunc?: boolean;
   /** 参数设置为公式时，Func返回设置的公式内容 */
-  Func?: string | null;
+  Func?: string;
   /** 参数是否可修改 */
-  ModifiableInfo?: ModifiableInfo | null;
+  ModifiableInfo?: ModifiableInfo;
   /** 支持公式的参数的默认公式样式 */
-  FuncPattern?: string | null;
+  FuncPattern?: string;
 }
 
 /** 参数信息 */
@@ -1653,17 +1653,17 @@ declare interface ProxyGroup {
 /** 数据库代理组详细信息 */
 declare interface ProxyGroupInfo {
   /** 数据库代理组 */
-  ProxyGroup: ProxyGroup | null;
+  ProxyGroup?: ProxyGroup;
   /** 数据库代理组读写分离信息 */
-  ProxyGroupRwInfo: ProxyGroupRwInfo | null;
+  ProxyGroupRwInfo?: ProxyGroupRwInfo;
   /** 数据库代理节点信息 */
-  ProxyNodes: ProxyNodeInfo[] | null;
+  ProxyNodes?: ProxyNodeInfo[] | null;
   /** 数据库代理连接池信息 */
-  ConnectionPool: ProxyConnectionPoolInfo | null;
+  ConnectionPool?: ProxyConnectionPoolInfo;
   /** 数据库代理网络信息 */
-  NetAddrInfos: NetAddr[] | null;
+  NetAddrInfos?: NetAddr[] | null;
   /** 数据库代理任务集 */
-  Tasks: ObjectTask[] | null;
+  Tasks?: ObjectTask[];
 }
 
 /** 数据库代理组读写分离信息 */
@@ -1681,7 +1681,7 @@ declare interface ProxyGroupRwInfo {
   /** 实例权重数组 */
   InstanceWeights?: ProxyInstanceWeight[];
   /** 是否开通读写节点，yse-是，no-否 */
-  OpenRw?: string | null;
+  OpenRw?: string;
   /** 读写属性，可选值：READWRITE,READONLY */
   RwType?: string;
   /** 事务拆分 */
@@ -1799,19 +1799,19 @@ declare interface RollbackData {
   /** 快照时间 */
   SnapshotTime?: string;
   /** 回档到serverlessls集群时最小CPU */
-  MinCpu?: number | null;
+  MinCpu?: number;
   /** 回档到serverlessls集群时最大CPU */
-  MaxCpu?: number | null;
+  MaxCpu?: number;
   /** 快照ID */
-  SnapShotId?: number | null;
+  SnapShotId?: number;
   /** 回档数据库 */
   RollbackDatabases?: RollbackDatabase[] | null;
   /** 回档数据表 */
   RollbackTables?: RollbackTable[] | null;
   /** 备份文件名称 */
-  BackupFileName?: string | null;
+  BackupFileName?: string;
   /** 回档进程 */
-  RollbackProcess?: RollbackProcessInfo | null;
+  RollbackProcess?: RollbackProcessInfo;
 }
 
 /** 回滚数据库信息 */
@@ -1853,19 +1853,19 @@ declare interface RollbackInstanceInfo {
 /** 回档进度详情 */
 declare interface RollbackProcessInfo {
   /** 是否可以交换vip */
-  IsVipSwitchable?: boolean | null;
+  IsVipSwitchable?: boolean;
   /** vip可交换时间 */
-  VipSwitchableTime?: string | null;
+  VipSwitchableTime?: string;
   /** 交换实例列表 */
   ExchangeInstanceInfoList?: ExchangeInstanceInfo[] | null;
   /** 交换RO组列表 */
   ExchangeRoGroupInfoList?: ExchangeRoGroupInfo[] | null;
   /** 当前步骤 */
-  CurrentStep?: string | null;
+  CurrentStep?: string;
   /** 当前步骤进度 */
-  CurrentStepProgress?: number | null;
+  CurrentStepProgress?: number;
   /** 当前步骤剩余时间 */
-  CurrentStepRemainingTime?: string | null;
+  CurrentStepRemainingTime?: string;
 }
 
 /** 回档RO组信息 */
@@ -2025,13 +2025,13 @@ declare interface ServerlessSpec {
 /** serverless类型的可用区库存信息 */
 declare interface ServerlessZoneStockInfo {
   /** 可用区 */
-  Zone?: string | null;
+  Zone?: string;
   /** 存储量 */
-  StockCount?: number | null;
+  StockCount?: number;
   /** 是否包含库存 */
-  HasStock?: boolean | null;
+  HasStock?: boolean;
   /** 从可用区库存信息 */
-  SlaveZoneStockInfos?: SlaveZoneStockInfo[] | null;
+  SlaveZoneStockInfos?: SlaveZoneStockInfo[];
 }
 
 /** 可用区属性项 */
@@ -2205,7 +2205,7 @@ declare interface ZoneStockInfo {
   /** 库存数量 */
   StockCount?: number;
   /** 备可用区库存信息 */
-  SlaveZoneStockInfos?: SlaveZoneStockInfo[] | null;
+  SlaveZoneStockInfos?: SlaveZoneStockInfo[];
 }
 
 declare interface ActivateInstanceRequest {
@@ -2279,13 +2279,13 @@ declare interface AddInstancesRequest {
 
 declare interface AddInstancesResponse {
   /** 冻结流水，一次开通一个冻结流水。 */
-  TranId?: string | null;
+  TranId?: string;
   /** 后付费订单号。 */
-  DealNames?: string[] | null;
+  DealNames?: string[];
   /** 发货资源id列表。 */
-  ResourceIds?: string[] | null;
+  ResourceIds?: string[];
   /** 大订单号 */
-  BigDealIds?: string[] | null;
+  BigDealIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2603,13 +2603,13 @@ declare interface CreateClustersRequest {
 
 declare interface CreateClustersResponse {
   /** 冻结流水ID */
-  TranId?: string | null;
+  TranId?: string;
   /** 订单号 */
-  DealNames?: string[] | null;
+  DealNames?: string[];
   /** 资源ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取资源ID） */
-  ResourceIds?: string[] | null;
+  ResourceIds?: string[];
   /** 集群ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取集群ID） */
-  ClusterIds?: string[] | null;
+  ClusterIds?: string[];
   /** 大订单号 */
   BigDealIds?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -2851,13 +2851,13 @@ declare interface DescribeAccountAllGrantPrivilegesRequest {
 
 declare interface DescribeAccountAllGrantPrivilegesResponse {
   /** 权限语句 */
-  PrivilegeStatements?: string[] | null;
+  PrivilegeStatements?: string[];
   /** 全局权限 */
-  GlobalPrivileges?: string[] | null;
+  GlobalPrivileges?: string[];
   /** 数据库权限 */
-  DatabasePrivileges?: DatabasePrivileges[] | null;
+  DatabasePrivileges?: DatabasePrivileges[];
   /** 数据库表权限 */
-  TablePrivileges?: TablePrivileges[] | null;
+  TablePrivileges?: TablePrivileges[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2903,7 +2903,7 @@ declare interface DescribeAccountsRequest {
 
 declare interface DescribeAccountsResponse {
   /** 数据库账号列表 */
-  AccountSet?: Account[] | null;
+  AccountSet?: Account[];
   /** 账号总数量 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3033,13 +3033,13 @@ declare interface DescribeBackupConfigResponse {
   /** 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600*24*7=604800 */
   ReserveDuration?: number;
   /** 备份频率，长度为7的数组，分别对应周一到周日的备份方式，full-全量备份，increment-增量备份 */
-  BackupFreq?: string[] | null;
+  BackupFreq?: string[];
   /** 备份方式，logic-逻辑备份，snapshot-快照备份 */
-  BackupType?: string | null;
+  BackupType?: string;
   /** 跨地域逻辑备份配置修改时间 */
-  LogicCrossRegionsConfigUpdateTime?: string | null;
+  LogicCrossRegionsConfigUpdateTime?: string;
   /** 自动逻辑备份配置 */
-  LogicBackupConfig?: LogicBackupConfigInfo | null;
+  LogicBackupConfig?: LogicBackupConfigInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3107,9 +3107,9 @@ declare interface DescribeBinlogConfigRequest {
 
 declare interface DescribeBinlogConfigResponse {
   /** Binlog跨地域配置更新时间 */
-  BinlogCrossRegionsConfigUpdateTime?: string | null;
+  BinlogCrossRegionsConfigUpdateTime?: string;
   /** Binlog配置信息 */
-  BinlogConfig?: BinlogConfigInfo | null;
+  BinlogConfig?: BinlogConfigInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3157,7 +3157,7 @@ declare interface DescribeBinlogsResponse {
   /** 记录总条数 */
   TotalCount?: number;
   /** Binlog列表 */
-  Binlogs?: BinlogItem[] | null;
+  Binlogs?: BinlogItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

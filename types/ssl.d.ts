@@ -253,7 +253,7 @@ declare interface Certificates {
   /** 托管资源类型列表 */
   HostingResourceTypes?: string[];
   /** 托管配置信息 */
-  HostingConfig?: HostingConfig;
+  HostingConfig?: HostingConfig | null;
 }
 
 /** clb实例详情 */
@@ -509,25 +509,25 @@ declare interface DvAuthDetail {
 /** 返回参数键为 DvAuths 的内容。 */
 declare interface DvAuths {
   /** 证书域名验证记录Key */
-  DvAuthKey?: string | null;
+  DvAuthKey?: string;
   /** 证书域名验证记录值 */
-  DvAuthValue?: string | null;
+  DvAuthValue?: string;
   /** 证书域名验证域名值 */
-  DvAuthDomain?: string | null;
+  DvAuthDomain?: string;
   /** 证书域名验证文件路径， 仅FILE、FILE_PROXY使用 */
-  DvAuthPath?: string | null;
+  DvAuthPath?: string;
   /** 证书域名验证子域名 */
-  DvAuthSubDomain?: string | null;
+  DvAuthSubDomain?: string;
   /** 证书域名验证类型，取值：TXT：DNS域名验证添加TXT记录FILE：域名文件验证CNAME：DNS域名验证添加CNAME记录 */
-  DvAuthVerifyType?: string | null;
+  DvAuthVerifyType?: string;
 }
 
 /** 错误异常 */
 declare interface Error {
   /** 异常错误码 */
-  Code?: string | null;
+  Code?: string;
   /** 异常错误信息 */
-  Message?: string | null;
+  Message?: string;
 }
 
 /** 过滤参数列表 */
@@ -541,23 +541,23 @@ declare interface Filter {
 /** 云原生网关证书信息 */
 declare interface GatewayCertificate {
   /** 网关证书ID */
-  Id?: string | null;
+  Id?: string;
   /** 网关证书名称 */
-  Name?: string | null;
+  Name?: string;
   /** 绑定域名 */
-  BindDomains?: string[] | null;
+  BindDomains?: string[];
   /** 证书来源 */
-  CertSource?: string | null;
+  CertSource?: string;
   /** 当前绑定的SSL证书ID */
-  CertId?: string | null;
+  CertId?: string;
 }
 
 /** 托管配置 */
 declare interface HostingConfig {
   /** 托管资源替换时间， 默认为证书过期前30天存在续费证书则替换 */
-  ReplaceTime?: number | null;
+  ReplaceTime?: number;
   /** 托管发送消息类型：0，托管开始前消息提醒（没有续费证书也会收到该提示消息）； 1， 托管开始消息提醒（存在续费证书才会收到消息提醒）； 2， 托管资源替换失败消息提醒； 3 托管资源替换成功消息提醒 */
-  MessageTypes?: number[] | null;
+  MessageTypes?: number[];
   /** 资源替换开始时间 */
   ReplaceStartTime?: string;
   /** 资源替换结束时间 */
@@ -629,19 +629,19 @@ declare interface ManagerInfo {
   /** 具体审核状态信息 */
   StatusInfo?: ManagerStatusInfo[] | null;
   /** 标签 */
-  Tags?: Tags[] | null;
+  Tags?: Tags[];
 }
 
 /** 管理人的四种审核状态 */
 declare interface ManagerStatusInfo {
-  /** 审核类型，枚举值：ov,ev,cs,ev_cs */
-  Type?: string | null;
+  /** 审核类型，枚举值：ov,ev */
+  Type?: string;
   /** 审核状态，枚举值：pending,completed,invalid,submitted,expiring,expired */
-  Status?: string | null;
+  Status?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 过期时间 */
-  ExpireTime?: string | null;
+  ExpireTime?: string;
 }
 
 /** 证书操作日志。 */
@@ -651,13 +651,13 @@ declare interface OperationLog {
   /** 操作时间。 */
   CreatedOn?: string;
   /** 主账号 */
-  Uin?: string | null;
+  Uin?: string;
   /** 子账号 */
-  SubAccountUin?: string | null;
+  SubAccountUin?: string;
   /** 证书ID */
-  CertId?: string | null;
+  CertId?: string;
   /** 每个操作类型都对应一个具体的操作描述。以下是对每个操作类型及其描述的文字说明：1. apply - 表示申请一个免费的证书。2. delete - 表示删除操作。3. download - 表示下载操作。4. upload - 表示上传操作。5. revoke - 表示吊销证书。6. cancelRevoke - 表示取消吊销操作。7. updateAlias - 表示更新备注信息。8. changeProject - 表示将证书分配到某个项目。9. uploadConfirmLetter - 表示上传确认函。10. cancel - 表示取消订单操作。11. replace - 表示重颁发证书。12. downloadConfirmLetter - 表示下载证书吊销确认函。13. editRevokeLetter - 表示上传证书吊销确认函。14. renewVIP - 表示续费付费证书。15. applyVIP - 表示申请付费证书。16. submitInfo - 表示提交资料。17. downloadConfirmLetter - 表示下载确认函模版。18. uploadFromYunAPI - 表示通过云 API 上传。19. transferIn - 表示证书转入操作。20. transferOut - 表示证书转出操作。21. refund - 表示申请退款。22. multiYearsRenew - 表示多年期自动续期。23. modifyDownloadLimit - 表示修改下载限制开关。24. issued - 表示证书签发。25. domainValidationPassed - 表示域名验证完成。26. Resubmit - 表示证书重新申请。 */
-  Type?: string | null;
+  Type?: string;
 }
 
 /** 权益包基本信息 */
@@ -713,27 +713,27 @@ declare interface PackageTransferOutInfo {
 /** 预审核信息列表 */
 declare interface PreAuditInfo {
   /** 证书总年限 */
-  TotalPeriod?: number | null;
+  TotalPeriod?: number;
   /** 证书当前年限 */
-  NowPeriod?: number | null;
+  NowPeriod?: number;
   /** 证书预审核管理人ID */
-  ManagerId?: string | null;
+  ManagerId?: string;
 }
 
 /** 获取证书列表（DescribeCertificates）返回参数键为 Certificates 下，key为 ProjectInfo 的内容。 */
 declare interface ProjectInfo {
   /** 项目名称。 */
-  ProjectName?: string | null;
+  ProjectName?: string;
   /** 项目创建用户 UIN。 */
-  ProjectCreatorUin?: number | null;
+  ProjectCreatorUin?: number;
   /** 项目创建时间。 */
-  ProjectCreateTime?: string | null;
+  ProjectCreateTime?: string;
   /** 项目信息简述。 */
-  ProjectResume?: string | null;
+  ProjectResume?: string;
   /** 用户 UIN。 */
-  OwnerUin?: number | null;
+  OwnerUin?: number;
   /** 项目 ID。 */
-  ProjectId?: string | null;
+  ProjectId?: string;
 }
 
 /** 云资源地域列表 */
@@ -747,13 +747,13 @@ declare interface ResourceTypeRegions {
 /** 吊销证书域名验证信息。 */
 declare interface RevokeDomainValidateAuths {
   /** DV 认证值路径。 */
-  DomainValidateAuthPath?: string | null;
+  DomainValidateAuthPath?: string;
   /** DV 认证 KEY。 */
-  DomainValidateAuthKey?: string | null;
+  DomainValidateAuthKey?: string;
   /** DV 认证值。 */
-  DomainValidateAuthValue?: string | null;
+  DomainValidateAuthValue?: string;
   /** DV 认证域名。 */
-  DomainValidateAuthDomain?: string | null;
+  DomainValidateAuthDomain?: string;
 }
 
 /** 根证书 */
@@ -843,7 +843,7 @@ declare interface SyncTaskBindResourceResult {
   /** 任务ID */
   TaskId?: string;
   /** 关联云资源结果 */
-  BindResourceResult?: BindResourceResult[] | null;
+  BindResourceResult?: BindResourceResult[];
   /** 关联云资源异步查询结果： 0表示查询中， 1表示查询成功。 2表示查询异常； 若状态为1，则查看BindResourceResult结果；若状态为2，则查看Error原因 */
   Status?: number;
   /** 关联云资源错误信息 */
@@ -855,37 +855,37 @@ declare interface SyncTaskBindResourceResult {
 /** TCB访问服务实例 */
 declare interface TCBAccessInstance {
   /** 域名 */
-  Domain?: string | null;
+  Domain?: string;
   /** 状态 */
-  Status?: number | null;
+  Status?: number;
   /** 统一域名状态 */
-  UnionStatus?: number | null;
+  UnionStatus?: number;
   /** 是否被抢占, 被抢占表示域名被其他环境绑定了，需要解绑或者重新绑定。 */
-  IsPreempted?: boolean | null;
+  IsPreempted?: boolean;
   /** icp黑名单封禁状态，0-未封禁，1-封禁 */
-  ICPStatus?: number | null;
+  ICPStatus?: number;
   /** 已绑定证书ID */
-  OldCertificateId?: string | null;
+  OldCertificateId?: string;
 }
 
 /** TCB访问服务列表 */
 declare interface TCBAccessService {
   /** 实例列表 */
-  InstanceList?: TCBAccessInstance[] | null;
+  InstanceList?: TCBAccessInstance[];
   /** 数量 */
-  TotalCount?: number | null;
+  TotalCount?: number;
 }
 
 /** TCB环境 */
 declare interface TCBEnvironment {
   /** 唯一ID */
-  ID?: string | null;
+  ID?: string;
   /** 来源 */
-  Source?: string | null;
+  Source?: string;
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 状态 */
-  Status?: string | null;
+  Status?: string;
 }
 
 /** tcb环境实例详情 - 异步关联云资源数据结构 */
@@ -901,21 +901,21 @@ declare interface TCBEnvironments {
 /** TCB静态托管服务实例 */
 declare interface TCBHostInstance {
   /** 域名 */
-  Domain?: string | null;
+  Domain?: string;
   /** 状态 */
-  Status?: string | null;
+  Status?: string;
   /** 解析状态 */
-  DNSStatus?: string | null;
+  DNSStatus?: string;
   /** 已绑定证书ID */
-  OldCertificateId?: string | null;
+  OldCertificateId?: string;
 }
 
 /** TCB静态托管服务列表 */
 declare interface TCBHostService {
   /** 实例列表 */
-  InstanceList?: TCBHostInstance[] | null;
+  InstanceList?: TCBHostInstance[];
   /** 数量 */
-  TotalCount?: number | null;
+  TotalCount?: number;
 }
 
 /** tcb地域实例详情 - 异步关联云资源数据结构 */
@@ -931,11 +931,11 @@ declare interface TCBInstanceList {
 /** tse实例详情 */
 declare interface TSEInstanceDetail {
   /** 网关ID */
-  GatewayId?: string | null;
+  GatewayId?: string;
   /** 网关名称 */
-  GatewayName?: string | null;
+  GatewayName?: string;
   /** 网关证书列表 */
-  CertificateList?: GatewayCertificate[] | null;
+  CertificateList?: GatewayCertificate[];
 }
 
 /** TSE实例详情 - 异步关联云资源数据结构 */
@@ -1079,11 +1079,11 @@ declare interface UpdateRecordDetail {
   /** secret名称（TKE专用） */
   SecretName?: string | null;
   /** 环境ID */
-  EnvId?: string | null;
+  EnvId?: string;
   /** TCB部署类型 */
-  TCBType?: string | null;
+  TCBType?: string;
   /** 监听器Url(clb专属) */
-  Url?: string | null;
+  Url?: string;
 }
 
 /** 更新记录详情 */
@@ -1107,7 +1107,7 @@ declare interface UpdateRecordInfo {
   /** 部署资源类型列表 */
   ResourceTypes?: string[];
   /** 部署地域列表 */
-  Regions?: string[] | null;
+  Regions?: string[];
   /** 部署状态 */
   Status?: number;
   /** 部署时间 */
@@ -1381,7 +1381,7 @@ declare interface CheckCertificateExistRequest {
 
 declare interface CheckCertificateExistResponse {
   /** 重复的证书ID */
-  RepeatCertId?: string | null;
+  RepeatCertId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1559,7 +1559,7 @@ declare interface DeployCertificateInstanceRequest {
 
 declare interface DeployCertificateInstanceResponse {
   /** 云资源部署任务ID */
-  DeployRecordId?: number | null;
+  DeployRecordId?: number;
   /** 部署任务创建状态；1表示创建成功； 0表示当前存在部署中的任务，未创建新的部署任务；返回值DeployRecordId为部署中的任务ID */
   DeployStatus?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1605,33 +1605,33 @@ declare interface DescribeCertificateBindResourceTaskDetailRequest {
 
 declare interface DescribeCertificateBindResourceTaskDetailResponse {
   /** 关联clb资源详情 */
-  CLB?: ClbInstanceList[] | null;
+  CLB?: ClbInstanceList[];
   /** 关联cdn资源详情 */
-  CDN?: CdnInstanceList[] | null;
+  CDN?: CdnInstanceList[];
   /** 关联waf资源详情 */
-  WAF?: WafInstanceList[] | null;
+  WAF?: WafInstanceList[];
   /** 关联ddos资源详情 */
-  DDOS?: DdosInstanceList[] | null;
+  DDOS?: DdosInstanceList[];
   /** 关联live资源详情 */
-  LIVE?: LiveInstanceList[] | null;
+  LIVE?: LiveInstanceList[];
   /** 关联vod资源详情 */
-  VOD?: VODInstanceList[] | null;
+  VOD?: VODInstanceList[];
   /** 关联tke资源详情 */
-  TKE?: TkeInstanceList[] | null;
+  TKE?: TkeInstanceList[];
   /** 关联apigateway资源详情 */
-  APIGATEWAY?: ApiGatewayInstanceList[] | null;
+  APIGATEWAY?: ApiGatewayInstanceList[];
   /** 关联tcb资源详情 */
-  TCB?: TCBInstanceList[] | null;
+  TCB?: TCBInstanceList[];
   /** 关联teo资源详情 */
-  TEO?: TeoInstanceList[] | null;
+  TEO?: TeoInstanceList[];
   /** 关联云资源异步查询结果： 0表示查询中， 1表示查询成功。 2表示查询异常； 若状态为1，则查看BindResourceResult结果；若状态为2，则查看Error原因 */
   Status?: number;
   /** 当前结果缓存时间 */
   CacheTime?: string;
   /** 关联tse资源详情 */
-  TSE?: TSEInstanceList[] | null;
+  TSE?: TSEInstanceList[];
   /** 关联的COS资源详情 */
-  COS?: COSInstanceList[] | null;
+  COS?: COSInstanceList[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1643,7 +1643,7 @@ declare interface DescribeCertificateBindResourceTaskResultRequest {
 
 declare interface DescribeCertificateBindResourceTaskResultResponse {
   /** 异步任务绑定关联云资源结果列表 */
-  SyncTaskBindResourceResult?: SyncTaskBindResourceResult[] | null;
+  SyncTaskBindResourceResult?: SyncTaskBindResourceResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1655,41 +1655,41 @@ declare interface DescribeCertificateDetailRequest {
 
 declare interface DescribeCertificateDetailResponse {
   /** 证书所属用户主账号 UIN。 */
-  OwnerUin?: string | null;
+  OwnerUin?: string;
   /** 项目 ID。 */
-  ProjectId?: string | null;
+  ProjectId?: string;
   /** 证书来源：trustasia：亚洲诚信，upload：用户上传。wosign：沃通sheca：上海CA */
-  From?: string | null;
+  From?: string;
   /** 证书类型：CA = 客户端证书，SVR = 服务器证书。 */
-  CertificateType?: string | null;
+  CertificateType?: string;
   /** 证书套餐类型：null：用户上传证书（没有套餐类型），2：TrustAsia TLS RSA CA， 3：SecureSite 增强型企业版（EV Pro）， 4：SecureSite 增强型（EV）， 5：SecureSite 企业型专业版（OV Pro），6：SecureSite 企业型（OV）， 7：SecureSite 企业型（OV）通配符， 8：Geotrust 增强型（EV）， 9：Geotrust 企业型（OV）， 10：Geotrust 企业型（OV）通配符， 11：TrustAsia 域名型多域名 SSL 证书， 12：TrustAsia 域名型（DV）通配符， 13：TrustAsia 企业型通配符（OV）SSL 证书（D3）， 14：TrustAsia 企业型（OV）SSL 证书（D3）， 15：TrustAsia 企业型多域名 （OV）SSL 证书（D3）， 16：TrustAsia 增强型 （EV）SSL 证书（D3）， 17：TrustAsia 增强型多域名（EV）SSL 证书（D3）， 18：GlobalSign 企业型（OV）SSL 证书， 19：GlobalSign 企业型通配符 （OV）SSL 证书， 20：GlobalSign 增强型 （EV）SSL 证书， 21：TrustAsia 企业型通配符多域名（OV）SSL 证书（D3）， 22：GlobalSign 企业型多域名（OV）SSL 证书， 23：GlobalSign 企业型通配符多域名（OV）SSL 证书，24：GlobalSign 增强型多域名（EV）SSL 证书，25：Wotrus 域名型证书，26：Wotrus 域名型多域名证书，27：Wotrus 域名型通配符证书，28：Wotrus 企业型证书，29：Wotrus 企业型多域名证书，30：Wotrus 企业型通配符证书，31：Wotrus 增强型证书，32：Wotrus 增强型多域名证书，33：WoTrus-国密域名型证书，34：WoTrus-国密域名型证书（多域名），35：WoTrus-国密域名型证书（通配符），37：WoTrus-国密企业型证书，38：WoTrus-国密企业型证书（多域名），39：WoTrus-国密企业型证书（通配符），40：WoTrus-国密增强型证书，41：WoTrus-国密增强型证书（多域名），42：TrustAsia-域名型证书（通配符多域名），43：DNSPod-企业型(OV)SSL证书44：DNSPod-企业型(OV)通配符SSL证书45：DNSPod-企业型(OV)多域名SSL证书46：DNSPod-增强型(EV)SSL证书47：DNSPod-增强型(EV)多域名SSL证书48：DNSPod-域名型(DV)SSL证书49：DNSPod-域名型(DV)通配符SSL证书50：DNSPod-域名型(DV)多域名SSL证书51：DNSPod（国密）-企业型(OV)SSL证书52：DNSPod（国密）-企业型(OV)通配符SSL证书53：DNSPod（国密）-企业型(OV)多域名SSL证书54：DNSPod（国密）-域名型(DV)SSL证书55：DNSPod（国密）-域名型(DV)通配符SSL证书56：DNSPod（国密）-域名型(DV)多域名SSL证书57：SecureSite 企业型专业版多域名(OV Pro)58：SecureSite 企业型多域名(OV)59：SecureSite 增强型专业版多域名(EV Pro)60：SecureSite 增强型多域名(EV)61：Geotrust 增强型多域名(EV)75：SecureSite 企业型(OV)76：SecureSite 企业型(OV)通配符77：SecureSite 增强型(EV)78：Geotrust 企业型(OV)79：Geotrust 企业型(OV)通配符80：Geotrust 增强型(EV)81：GlobalSign 企业型（OV）SSL证书82：GlobalSign 企业型通配符 （OV）SSL证书83：TrustAsia C1 DV Free85：GlobalSign 增强型 （EV）SSL证书88：GlobalSign 企业型通配符多域名 （OV）SSL证书89：GlobalSign 企业型多域名 （OV）SSL证书90：GlobalSign 增强型多域名（EV） SSL证书91：Geotrust 增强型多域名(EV)92：SecureSite 企业型专业版多域名(OV Pro)93：SecureSite 企业型多域名(OV)94：SecureSite 增强型专业版多域名(EV Pro)95：SecureSite 增强型多域名(EV)96：SecureSite 增强型专业版(EV Pro)97：SecureSite 企业型专业版(OV Pro)98：CFCA 企业型(OV)SSL证书99：CFCA 企业型多域名(OV)SSL证书100：CFCA 企业型通配符(OV)SSL证书101：CFCA 增强型(EV)SSL证书 */
   PackageType?: string | null;
   /** 证书产品名称 */
-  ProductZhName?: string | null;
+  ProductZhName?: string;
   /** 证书绑定通用名称域名。 */
-  Domain?: string | null;
+  Domain?: string;
   /** 备注名称。 */
-  Alias?: string | null;
+  Alias?: string;
   /** 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 自动添加DNS记录，5 = 企业证书，待提交资料，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函，13 = 免费证书待提交资料。14 = 证书已退款。 15 = 证书迁移中 */
-  Status?: number | null;
+  Status?: number;
   /** 状态信息。 取值范围：//通用状态信息1、PRE-REVIEWING：预审核中2、LEGAL-REVIEWING：法务审核中3、CA-REVIEWING：CA审核中4、PENDING-DCV：域名验证中5、WAIT-ISSUE：等待签发（域名验证已通过）//证书审核失败状态信息1、订单审核失败2、CA审核失败，域名未通过安全审查3、域名验证超时，订单自动关闭，请您重新进行证书申请4、证书资料未通过证书CA机构审核，审核人员会致电您证书预留的联系方式，请您留意来电。后续可通过“修改资料”重新提交资料待持续完善 */
   StatusMsg?: string | null;
   /** 验证类型：DNS_AUTO = 自动DNS验证，DNS = 手动DNS验证，FILE = 文件验证，EMAIL = 邮件验证。 */
   VerifyType?: string | null;
   /** 漏洞扫描状态。 */
-  VulnerabilityStatus?: string | null;
+  VulnerabilityStatus?: string;
   /** 证书生效时间。 */
   CertBeginTime?: string | null;
   /** 证书失效时间。 */
   CertEndTime?: string | null;
   /** 证书有效期：单位（月）。 */
-  ValidityPeriod?: string | null;
+  ValidityPeriod?: string;
   /** 证书申请时间。 */
-  InsertTime?: string | null;
+  InsertTime?: string;
   /** CA订单 ID。 */
   OrderId?: string | null;
   /** 证书扩展信息。 */
-  CertificateExtra?: CertificateExtra | null;
+  CertificateExtra?: CertificateExtra;
   /** 私钥证书， 国密证书则为签名证书中的私钥证书 */
   CertificatePrivateKey?: string | null;
   /** 公钥证书， 国密则为签名证书中的公钥证书 */
@@ -1699,31 +1699,31 @@ declare interface DescribeCertificateDetailResponse {
   /** 漏洞扫描评估报告。 */
   VulnerabilityReport?: string | null;
   /** 证书 ID。 */
-  CertificateId?: string | null;
+  CertificateId?: string;
   /** 证书类型名称。 */
   TypeName?: string | null;
   /** 状态描述。 */
-  StatusName?: string | null;
+  StatusName?: string;
   /** 证书包含的多个域名（不包含主域名，主域名使用Domain字段） */
-  SubjectAltName?: string[] | null;
+  SubjectAltName?: string[];
   /** 是否为付费证书。 */
-  IsVip?: boolean | null;
+  IsVip?: boolean;
   /** 是否为泛域名证书。 */
-  IsWildcard?: boolean | null;
+  IsWildcard?: boolean;
   /** 是否为 DV 版证书。 */
-  IsDv?: boolean | null;
+  IsDv?: boolean;
   /** 是否启用了漏洞扫描功能。 */
-  IsVulnerability?: boolean | null;
+  IsVulnerability?: boolean;
   /** 付费证书提交的资料信息。 */
   SubmittedData?: SubmittedData | null;
   /** 是否可续费。 */
-  RenewAble?: boolean | null;
+  RenewAble?: boolean;
   /** 是否可部署。 */
-  Deployable?: boolean | null;
+  Deployable?: boolean;
   /** 关联标签列表。 */
-  Tags?: Tags[] | null;
+  Tags?: Tags[];
   /** 根证书。 */
-  RootCert?: RootCertificates | null;
+  RootCert?: RootCertificates;
   /** 国密加密证书公钥， 仅国密证书有值 */
   EncryptCert?: string | null;
   /** 国密加密私钥证书， 仅国密证书有值 */
@@ -1733,7 +1733,7 @@ declare interface DescribeCertificateDetailResponse {
   /** 加密证书 SHA1指纹 （国密证书特有） */
   EncryptCertFingerprint?: string | null;
   /** 证书加密算法（国密证书特有） */
-  EncryptAlgorithm?: string | null;
+  EncryptAlgorithm?: string;
   /** DV证书吊销验证值 */
   DvRevokeAuthDetail?: DvAuths[] | null;
   /** 证书链信息 */
@@ -1759,7 +1759,7 @@ declare interface DescribeCertificateOperateLogsResponse {
   /** 本次请求返回的日志数量。 */
   TotalCount?: number;
   /** 证书操作日志列表。 */
-  OperateLogs?: OperationLog[] | null;
+  OperateLogs?: OperationLog[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1885,9 +1885,9 @@ declare interface DescribeCertificatesRequest {
 
 declare interface DescribeCertificatesResponse {
   /** 总数量。 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 列表。 */
-  Certificates?: Certificates[] | null;
+  Certificates?: Certificates[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1917,7 +1917,7 @@ declare interface DescribeDeleteCertificatesTaskResultRequest {
 
 declare interface DescribeDeleteCertificatesTaskResultResponse {
   /** 批量删除证书异步任务结果 */
-  DeleteTaskResult?: DeleteTaskResult[] | null;
+  DeleteTaskResult?: DeleteTaskResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1971,7 +1971,7 @@ declare interface DescribeHostApiGatewayInstanceListRequest {
 
 declare interface DescribeHostApiGatewayInstanceListResponse {
   /** apiGateway实例列表,如取不到值返回空数组 */
-  InstanceList?: ApiGatewayInstanceDetail[] | null;
+  InstanceList?: ApiGatewayInstanceDetail[];
   /** 总数，如取不到值返回0 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1999,15 +1999,15 @@ declare interface DescribeHostCdnInstanceListRequest {
 
 declare interface DescribeHostCdnInstanceListResponse {
   /** CDN实例列表，如取不到值返回空数组 */
-  InstanceList?: CdnInstanceDetail[] | null;
+  InstanceList?: CdnInstanceDetail[];
   /** CDN域名总数，如取不到值返回0 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 异步刷新总数，如取不到值返回0 */
-  AsyncTotalNum?: number | null;
+  AsyncTotalNum?: number;
   /** 异步刷新当前执行数，如取不到值返回0 */
-  AsyncOffset?: number | null;
+  AsyncOffset?: number;
   /** 当前缓存读取时间 */
-  AsyncCacheTime?: string | null;
+  AsyncCacheTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2031,15 +2031,15 @@ declare interface DescribeHostClbInstanceListRequest {
 
 declare interface DescribeHostClbInstanceListResponse {
   /** 总数，取不到值返回0 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** CLB实例监听器列表，取不到值返回空数组 */
-  InstanceList?: ClbInstanceDetail[] | null;
+  InstanceList?: ClbInstanceDetail[];
   /** 异步刷新总数，取不到值返回0 */
-  AsyncTotalNum?: number | null;
+  AsyncTotalNum?: number;
   /** 异步刷新当前执行数，取不到值返回0 */
-  AsyncOffset?: number | null;
+  AsyncOffset?: number;
   /** 当前缓存读取时间，去不到值返回空 */
-  AsyncCacheTime?: string | null;
+  AsyncCacheTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2065,15 +2065,15 @@ declare interface DescribeHostCosInstanceListRequest {
 
 declare interface DescribeHostCosInstanceListResponse {
   /** COS实例列表 */
-  InstanceList?: CosInstanceDetail[] | null;
+  InstanceList?: CosInstanceDetail[];
   /** 总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 异步刷新总数 */
-  AsyncTotalNum?: number | null;
+  AsyncTotalNum?: number;
   /** 异步刷新当前执行数 */
-  AsyncOffset?: number | null;
+  AsyncOffset?: number;
   /** 当前缓存读取时间 */
-  AsyncCacheTime?: string | null;
+  AsyncCacheTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2097,9 +2097,9 @@ declare interface DescribeHostDdosInstanceListRequest {
 
 declare interface DescribeHostDdosInstanceListResponse {
   /** DDOS实例列表,取不到值返回空数组 */
-  InstanceList?: DdosInstanceDetail[] | null;
+  InstanceList?: DdosInstanceDetail[];
   /** 总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2115,15 +2115,15 @@ declare interface DescribeHostDeployRecordDetailRequest {
 
 declare interface DescribeHostDeployRecordDetailResponse {
   /** 部署记录总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 证书部署记录列表 */
-  DeployRecordDetailList?: DeployRecordDetail[] | null;
+  DeployRecordDetailList?: DeployRecordDetail[];
   /** 成功总数 */
-  SuccessTotalCount?: number | null;
+  SuccessTotalCount?: number;
   /** 失败总数 */
-  FailedTotalCount?: number | null;
+  FailedTotalCount?: number;
   /** 部署中总数 */
-  RunningTotalCount?: number | null;
+  RunningTotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2141,9 +2141,9 @@ declare interface DescribeHostDeployRecordRequest {
 
 declare interface DescribeHostDeployRecordResponse {
   /** 总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 证书部署记录列表 */
-  DeployRecordList?: DeployRecordInfo[] | null;
+  DeployRecordList?: DeployRecordInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2161,9 +2161,9 @@ declare interface DescribeHostLighthouseInstanceListRequest {
 
 declare interface DescribeHostLighthouseInstanceListResponse {
   /** Lighthouse实例列表,如取不到返回空数组 */
-  InstanceList?: LighthouseInstanceDetail[] | null;
+  InstanceList?: LighthouseInstanceDetail[];
   /** 总数，如取不到返回0 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2183,7 +2183,7 @@ declare interface DescribeHostLiveInstanceListRequest {
 
 declare interface DescribeHostLiveInstanceListResponse {
   /** live实例列表,如取不到值返回空数组 */
-  InstanceList?: LiveInstanceDetail[] | null;
+  InstanceList?: LiveInstanceDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2209,7 +2209,7 @@ declare interface DescribeHostTeoInstanceListRequest {
 
 declare interface DescribeHostTeoInstanceListResponse {
   /** teo实例列表，如取不到值返回空数组 */
-  InstanceList?: TeoInstanceDetail[] | null;
+  InstanceList?: TeoInstanceDetail[];
   /** 总数 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -2235,15 +2235,15 @@ declare interface DescribeHostTkeInstanceListRequest {
 
 declare interface DescribeHostTkeInstanceListResponse {
   /** 总数，取不到值返回0 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** tke实例列表，取不到值返回空数组 */
-  InstanceList?: TkeInstanceDetail[] | null;
+  InstanceList?: TkeInstanceDetail[];
   /** 异步刷新总数，取不到值返回0 */
-  AsyncTotalNum?: number | null;
+  AsyncTotalNum?: number;
   /** 异步刷新当前执行数，取不到值返回0 */
-  AsyncOffset?: number | null;
+  AsyncOffset?: number;
   /** 当前缓存读取时间 */
-  AsyncCacheTime?: string | null;
+  AsyncCacheTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2259,15 +2259,15 @@ declare interface DescribeHostUpdateRecordDetailRequest {
 
 declare interface DescribeHostUpdateRecordDetailResponse {
   /** 总数,如果取不到返回0 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 证书部署记录列表，如果取不到值返回空数组 */
-  RecordDetailList?: UpdateRecordDetails[] | null;
+  RecordDetailList?: UpdateRecordDetails[];
   /** 成功总数,如果取不到返回0 */
-  SuccessTotalCount?: number | null;
+  SuccessTotalCount?: number;
   /** 失败总数,如果取不到返回0 */
-  FailedTotalCount?: number | null;
+  FailedTotalCount?: number;
   /** 部署中总数,如果取不到返回0 */
-  RunningTotalCount?: number | null;
+  RunningTotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2285,9 +2285,9 @@ declare interface DescribeHostUpdateRecordRequest {
 
 declare interface DescribeHostUpdateRecordResponse {
   /** 总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 证书部署记录列表 */
-  DeployRecordList?: UpdateRecordInfo[] | null;
+  DeployRecordList?: UpdateRecordInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2307,9 +2307,9 @@ declare interface DescribeHostVodInstanceListRequest {
 
 declare interface DescribeHostVodInstanceListResponse {
   /** Vod实例列表，如果取不到值返回空数组 */
-  InstanceList?: VodInstanceDetail[] | null;
+  InstanceList?: VodInstanceDetail[];
   /** 总数,如果取不到值返回0 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2329,7 +2329,7 @@ declare interface DescribeHostWafInstanceListRequest {
 
 declare interface DescribeHostWafInstanceListResponse {
   /** WAF实例列表，如果没有取到值返回空数组 */
-  InstanceList?: LiveInstanceDetail[] | null;
+  InstanceList?: WafInstanceDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2447,9 +2447,9 @@ declare interface DownloadCertificateRequest {
 
 declare interface DownloadCertificateResponse {
   /** ZIP base64 编码内容，base64 解码后可保存为 ZIP 文件。 */
-  Content?: string | null;
+  Content?: string;
   /** MIME 类型：application/zip = ZIP 压缩文件。 */
-  ContentType?: string | null;
+  ContentType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2477,9 +2477,9 @@ declare interface ModifyCertificateProjectRequest {
 
 declare interface ModifyCertificateProjectResponse {
   /** 修改所属项目成功的证书集合。 */
-  SuccessCertificates?: string[] | null;
+  SuccessCertificates?: string[];
   /** 修改所属项目失败的证书集合。 */
-  FailCertificates?: string[] | null;
+  FailCertificates?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2545,7 +2545,7 @@ declare interface RevokeCertificateRequest {
 
 declare interface RevokeCertificateResponse {
   /** 吊销证书域名验证信息。 */
-  RevokeDomainValidateAuths?: RevokeDomainValidateAuths[] | null;
+  RevokeDomainValidateAuths?: RevokeDomainValidateAuths[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2655,7 +2655,7 @@ declare interface UpdateCertificateInstanceRequest {
 
 declare interface UpdateCertificateInstanceResponse {
   /** 云资源更新任务ID， DeployRecordId为0表示任务进行中， 重复请求这个接口， 当返回DeployRecordId大于0则表示任务创建成功。 未创建成功则会抛出异常 */
-  DeployRecordId?: number | null;
+  DeployRecordId?: number;
   /** 更新任务创建状态；1表示创建成功； 0表示当前存在更新中的任务，未创建新的更新任务；返回值DeployRecordId为更新中的任务ID */
   DeployStatus?: number;
   /** 更新异步创建任务进度详情 */
@@ -2711,7 +2711,7 @@ declare interface UploadCertificateResponse {
   /** 证书 ID。 */
   CertificateId?: string;
   /** 重复证书的ID */
-  RepeatCertId?: string | null;
+  RepeatCertId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

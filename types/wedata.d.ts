@@ -1532,45 +1532,45 @@ declare interface DutyScheduleDetailsInfo {
 
 /** 引擎任务信息 */
 declare interface EngineTaskInfo {
-  /** 1 */
+  /** 引擎提交时间 */
   EngineSubmitTime?: string | null;
-  /** 1 */
+  /** 引擎执行时间 */
   EngineExeTime?: string | null;
-  /** 1 */
+  /** 引擎执行总时间 */
   EngineExeTimes?: number | null;
-  /** 1 */
+  /** cu消耗 */
   CuConsume?: number | null;
-  /** 1 */
+  /** 资源消耗 */
   ResourceUsage?: number | null;
-  /** 1 */
+  /** 引擎名 */
   EngineName?: string | null;
-  /** 1 */
+  /** 引擎执行状态 */
   EngineExeStatus?: string | null;
-  /** 1 */
+  /** 任务种类 */
   TaskKind?: string | null;
-  /** 1 */
+  /** 任务类型 */
   TaskType?: string | null;
-  /** 1 */
+  /** 任务SQL语句 */
   TaskContent?: string | null;
-  /** 1 */
+  /** 数据扫描总 bytes */
   InputBytesSum?: number | null;
-  /** 1 */
+  /** shuffle read 总 bytes */
   ShuffleReadBytesSum?: number | null;
-  /** 1 */
+  /** shuffle read 总行数 */
   ShuffleReadRecordsSum?: number | null;
-  /** 1 */
+  /** 输出总行数 */
   OutputRecordsSum?: number | null;
-  /** 1 */
+  /** 输出总 bytes */
   OutputBytesSum?: number | null;
-  /** 1 */
+  /** 输出文件数 */
   OutputFilesNum?: number | null;
-  /** 1 */
+  /** 输出小文件数 */
   OutputSmallFilesNum?: number | null;
-  /** 1 */
+  /** 执行等待时间 */
   WaitTime?: number | null;
-  /** 1 */
+  /** 查询结果时间 */
   QueryResultTime?: number | null;
-  /** 1 */
+  /** 入参 */
   CmdArgs?: string | null;
 }
 
@@ -3138,6 +3138,8 @@ declare interface Project {
   Model?: string | null;
   /** 二级菜单 */
   SecondModuleList?: string[] | null;
+  /** 项目负责人 */
+  Owner?: BaseUser | null;
 }
 
 /** 项目的用户对象 */
@@ -3254,33 +3256,33 @@ declare interface RecordsSpeed {
 
 /** 上报任务详情 */
 declare interface ReportTaskDetail {
-  /** 1 */
+  /** 引擎任务id */
   EngineTaskId?: string | null;
-  /** 1 */
+  /** 引擎执行状态，枚举 */
   EngineExeStatus?: string | null;
-  /** 1 */
+  /** 引擎执行开始时间 */
   EngineExeStartTime?: string | null;
-  /** 1 */
+  /** 引擎执行结束时间 */
   EngineExeEndTime?: string | null;
-  /** 1 */
+  /** 任务类型id */
   TaskTypeId?: number | null;
-  /** 1 */
+  /** 业务信息 */
   BusinessInfo?: string | null;
-  /** 1 */
+  /** 引擎任务信息 */
   EngineTaskInfo?: EngineTaskInfo | null;
 }
 
 /** 上报任务信息 */
 declare interface ReportTaskListInfo {
-  /** 1 */
+  /** 任务列表详情 */
   Rows?: TaskInfoVo[] | null;
-  /** 1 */
+  /** 页码 */
   PageNum?: number | null;
-  /** 1 */
+  /** 每页条数 */
   PageSize?: number | null;
-  /** 1 */
+  /** 总记录数 */
   TotalCount?: number | null;
-  /** 1 */
+  /** 总页数 */
   TotalPageNumber?: number | null;
 }
 
@@ -4884,41 +4886,41 @@ declare interface TaskImportInfo {
 
 /** 任务信息 */
 declare interface TaskInfoVo {
-  /** 1 */
+  /** 租户id */
   AppID?: string | null;
-  /** 1 */
+  /** 项目id */
   ProjectId?: string | null;
-  /** 1 */
+  /** 任务id */
   TaskId?: string | null;
-  /** 1 */
+  /** 任务名 */
   TaskName?: string | null;
-  /** 1 */
+  /** 任务类型id */
   TaskTypeId?: number | null;
-  /** 1 */
+  /** 主账号id */
   OnwerUid?: string | null;
-  /** 1 */
+  /** 负责人 */
   InChargeId?: string | null;
-  /** 1 */
+  /** 实例id */
   InstanceId?: string | null;
-  /** 1 */
+  /** jobId */
   JobId?: string | null;
-  /** 1 */
+  /** 引擎类型，DLC、EMR */
   EngineType?: string | null;
-  /** 1 */
+  /** 引擎名称 */
   EngineName?: string | null;
-  /** 1 */
+  /** 引擎子类型 */
   EngineSubType?: string | null;
-  /** 1 */
+  /** 引擎taskId */
   EngineTaskId?: string | null;
-  /** 1 */
+  /** 引擎执行状态，枚举 */
   EngineExeStatus?: string | null;
-  /** 1 */
+  /** 引擎执行用户 */
   EngineExeUser?: string | null;
-  /** 1 */
+  /** 引擎执行开始时间 */
   EngineExeStartTime?: string | null;
-  /** 1 */
+  /** 引擎执行结束时间 */
   EngineExeEndTime?: string | null;
-  /** 1 */
+  /** 数据来源,DATA_INTEGRATION、DATA_EXPLORATION、DATA_QUALITY、OM_CENTER等 */
   ProductSource?: string | null;
 }
 
@@ -8622,30 +8624,10 @@ declare interface DescribeRealTimeTaskSpeedResponse {
 }
 
 declare interface DescribeReportTaskDetailRequest {
-  /** 页码 */
-  PageNum?: number;
-  /** 每页条数 */
-  PageSize?: number;
   /** 租户id */
-  TenantId?: string;
-  /** 项目id */
-  ProjectId?: string;
-  /** 任务id */
-  TaskId?: string;
-  /** 实例id */
-  InstanceId?: string;
-  /** 作业id */
-  JobId?: string;
+  TenantId: string;
   /** 引擎任务id */
-  EngineTaskId?: string;
-  /** 产品模块 */
-  ProductSource?: string;
-  /** 主账号 */
-  OnwerUid?: string;
-  /** 开始时间 */
-  StartTime?: string;
-  /** 结束时间 */
-  EndTime?: string;
+  EngineTaskId: string;
 }
 
 declare interface DescribeReportTaskDetailResponse {
@@ -8672,7 +8654,7 @@ declare interface DescribeReportTaskListRequest {
   JobId?: string;
   /** 引擎任务id */
   EngineTaskId?: string;
-  /** 产品模块 */
+  /** 数据来源,DATA_INTEGRATION、DATA_EXPLORATION、DATA_QUALITY、OM_CENTER等 */
   ProductSource?: string;
   /** 主账号 */
   OnwerUid?: string;
@@ -8683,7 +8665,7 @@ declare interface DescribeReportTaskListRequest {
 }
 
 declare interface DescribeReportTaskListResponse {
-  /** 1 */
+  /** 任务列表信息 */
   Data?: ReportTaskListInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -11819,7 +11801,7 @@ declare interface Wedata {
   /** 实时任务同步速度趋势 {@link DescribeRealTimeTaskSpeedRequest} {@link DescribeRealTimeTaskSpeedResponse} */
   DescribeRealTimeTaskSpeed(data: DescribeRealTimeTaskSpeedRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRealTimeTaskSpeedResponse>;
   /** 获取用量大盘任务详情 {@link DescribeReportTaskDetailRequest} {@link DescribeReportTaskDetailResponse} */
-  DescribeReportTaskDetail(data?: DescribeReportTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReportTaskDetailResponse>;
+  DescribeReportTaskDetail(data: DescribeReportTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReportTaskDetailResponse>;
   /** 查询用量大盘任务列表 {@link DescribeReportTaskListRequest} {@link DescribeReportTaskListResponse} */
   DescribeReportTaskList(data?: DescribeReportTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReportTaskListResponse>;
   /** 获取资源管理目录树 {@link DescribeResourceManagePathTreesRequest} {@link DescribeResourceManagePathTreesResponse} */
