@@ -27,31 +27,31 @@ declare interface AMQPClusterConfig {
 /** 租户AMQP集群详细信息 */
 declare interface AMQPClusterDetail {
   /** 集群基本信息 */
-  Info: AMQPClusterInfo;
+  Info?: AMQPClusterInfo;
   /** 集群配置信息 */
-  Config: AMQPClusterConfig;
+  Config?: AMQPClusterConfig;
   /** 标签 */
-  Tags: Tag[] | null;
+  Tags?: Tag[];
   /** 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败 */
-  Status: number | null;
+  Status?: number;
 }
 
 /** AMQP集群基本信息 */
 declare interface AMQPClusterInfo {
   /** 集群ID */
-  ClusterId: string;
+  ClusterId?: string;
   /** 集群名称 */
-  ClusterName: string;
+  ClusterName?: string;
   /** 地域信息 */
-  Region: string;
+  Region?: string;
   /** 创建时间，毫秒为单位 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 集群说明信息 */
-  Remark: string | null;
+  Remark?: string | null;
   /** 公网接入地址 */
-  PublicEndPoint: string | null;
+  PublicEndPoint?: string | null;
   /** VPC接入地址 */
-  VpcEndPoint: string | null;
+  VpcEndPoint?: string | null;
 }
 
 /** 用户专享集群信息 */
@@ -451,7 +451,7 @@ declare interface ExchangeQuota {
   /** 可创建最大exchange数 */
   MaxExchange?: number;
   /** 已创建exchange数 */
-  UsedExchange?: number | null;
+  UsedExchange?: number;
 }
 
 /** 过滤参数 */
@@ -773,29 +773,29 @@ declare interface QueueQuota {
   /** 可创建最大Queue数 */
   MaxQueue?: number;
   /** 已创建Queue数 */
-  UsedQueue?: number | null;
+  UsedQueue?: number;
 }
 
 /** Rabbitmq路由关系列表成员 */
 declare interface RabbitMQBindingListInfo {
   /** 路由关系id */
-  BindingId?: number | null;
+  BindingId?: number;
   /** Vhost参数 */
-  VirtualHost?: string | null;
+  VirtualHost?: string;
   /** 源exchange名称 */
-  Source?: string | null;
+  Source?: string;
   /** 目标类型,queue或exchange */
-  DestinationType?: string | null;
+  DestinationType?: string;
   /** 目标资源名称 */
-  Destination?: string | null;
+  Destination?: string;
   /** 绑定key */
-  RoutingKey?: string | null;
+  RoutingKey?: string;
   /** 源exchange类型 */
-  SourceExchangeType?: string | null;
+  SourceExchangeType?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 修改时间 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
 }
 
 /** RabbitMQ集群访问信息 */
@@ -817,15 +817,17 @@ declare interface RabbitMQClusterAccessInfo {
   /** Vpc管控台访问地址，示例值，http://1.1.1.1:15672 */
   VpcWebConsoleEndpoint?: string;
   /** 公网管控台开关状态，示例值，OFF/ON/CREATING/DELETING */
-  PublicWebConsoleSwitchStatus?: string | null;
+  PublicWebConsoleSwitchStatus?: string;
   /** Vpc管控台开关状态，示例值，OFF/ON/CREATING/DELETING */
-  VpcWebConsoleSwitchStatus?: string | null;
+  VpcWebConsoleSwitchStatus?: string;
   /** 公网管控台开关状态，示例值，OFF/ON/CREATING/DELETING */
-  PublicDataStreamStatus?: string | null;
+  PublicDataStreamStatus?: string;
   /** Prometheus信息 */
-  PrometheusEndpointInfo?: PrometheusEndpointInfo | null;
+  PrometheusEndpointInfo?: PrometheusEndpointInfo;
   /** 公网域名接入点 */
-  WebConsoleDomainEndpoint?: string | null;
+  WebConsoleDomainEndpoint?: string;
+  /** 控制面所使用的VPC信息 */
+  ControlPlaneEndpointInfo?: VpcEndpointInfo;
 }
 
 /** RabbiteMQ集群基本信息 */
@@ -839,11 +841,11 @@ declare interface RabbitMQClusterInfo {
   /** 创建时间，毫秒为单位 */
   CreateTime?: number;
   /** 集群说明信息 */
-  Remark?: string | null;
+  Remark?: string;
   /** VPC及网络信息 */
   Vpcs?: VpcEndpointInfo[];
   /** 可用区信息 */
-  ZoneIds?: number[] | null;
+  ZoneIds?: number[];
   /** 虚拟主机数量 */
   VirtualHostNumber?: number;
   /** 队列数量 */
@@ -867,15 +869,15 @@ declare interface RabbitMQClusterInfo {
   /** 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败 */
   ClusterStatus?: number;
   /** 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置) */
-  AutoRenewFlag?: number | null;
+  AutoRenewFlag?: number;
   /** 是否开启镜像队列策略。1表示开启，0表示没开启。 */
-  MirrorQueuePolicyFlag?: number | null;
+  MirrorQueuePolicyFlag?: number;
   /** 每秒消费消息数 单位：条/秒 */
-  MessageConsumeRate?: number | null;
+  MessageConsumeRate?: number;
   /** 集群版本信息 */
-  ClusterVersion?: string | null;
+  ClusterVersion?: string;
   /** 计费模式，0-后付费，1-预付费 */
-  PayMode?: number | null;
+  PayMode?: number;
   /** 实例类型，0 专享版、1 Serverless 版 */
   InstanceType?: number;
 }
@@ -899,11 +901,11 @@ declare interface RabbitMQClusterSpecInfo {
 /** RabbiteMQ集群白名单信息 */
 declare interface RabbitMQClusterWhiteListInfo {
   /** 废弃 */
-  WhiteList: string | null;
+  WhiteList?: string;
   /** 公网管控台白名单 */
-  PublicControlConsoleWhiteList: string | null;
+  PublicControlConsoleWhiteList?: string;
   /** 公网数据流白名单 */
-  PublicDataStreamWhiteList: string | null;
+  PublicDataStreamWhiteList?: string;
   /** 公网管控台白名单状态 */
   PublicControlConsoleWhiteListStatus?: string | null;
   /** 公网数据流白名单状态 */
@@ -919,29 +921,29 @@ declare interface RabbitMQExchangeListInfo {
   /** exchange 类型, 支持 "fanout","direct","topic","headers" */
   ExchangeType?: string;
   /** VHost参数 */
-  VirtualHost?: string | null;
+  VirtualHost?: string;
   /** exchange 创建者, "system":"系统创建", "user":"用户创建" */
-  ExchangeCreator?: string | null;
+  ExchangeCreator?: string;
   /** exchange 创建时间 */
-  CreateTimeStamp?: string | null;
+  CreateTimeStamp?: string;
   /** exchange 修改时间 */
-  ModTimeStamp?: string | null;
+  ModTimeStamp?: string;
   /** 输入消息速率 */
   MessageRateIn?: number | null;
   /** 输出消息速率 */
   MessageRateOut?: number | null;
   /** 是否为持久化交换机，true 为持久化，false 为非持久化 */
-  Durable?: boolean | null;
+  Durable?: boolean;
   /** 是否为自动删除交换机，true 为自动删除，false 为非自动删除 */
-  AutoDelete?: boolean | null;
+  AutoDelete?: boolean;
   /** 是否为内部交换机，true 为内部交换机 */
-  Internal?: boolean | null;
+  Internal?: boolean;
   /** 交换机所属实例 ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 生效的策略名称 */
   Policy?: string | null;
   /** 扩展参数 key-value 对象 */
-  Arguments?: string | null;
+  Arguments?: string;
   /** 未调度的延时消息数量 */
   MessagesDelayed?: number | null;
 }
@@ -955,15 +957,15 @@ declare interface RabbitMQPermission {
   /** vhost名 */
   VirtualHost?: string;
   /** 权限类型，declare相关操作，该用户可操作该vhost下的资源名称正则表达式 */
-  ConfigRegexp?: string | null;
+  ConfigRegexp?: string;
   /** 权限类型，消息写入相关操作，该用户可操作该vhost下的资源名称正则表达式 */
-  WriteRegexp?: string | null;
+  WriteRegexp?: string;
   /** 权限类型，消息读取相关操作，该用户可操作该vhost下的资源名称正则表达式 */
-  ReadRegexp?: string | null;
+  ReadRegexp?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 修改时间 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
 }
 
 /** RabbitMQ节点信息 */
@@ -985,7 +987,7 @@ declare interface RabbitMQPrivateNode {
 /** RabbitMQ队列列表消费者信息 */
 declare interface RabbitMQQueueListConsumerDetailInfo {
   /** 消费者数量 */
-  ConsumersNumber: number | null;
+  ConsumersNumber?: number | null;
 }
 
 /** RabbitMQ队列列表成员信息 */
@@ -995,9 +997,9 @@ declare interface RabbitMQQueueListInfo {
   /** 备注说明 */
   Remark?: string | null;
   /** 消费者信息 */
-  ConsumerDetail?: RabbitMQQueueListConsumerDetailInfo | null;
+  ConsumerDetail?: RabbitMQQueueListConsumerDetailInfo;
   /** 队列类型，取值 "classic"，"quorum" */
-  QueueType?: string | null;
+  QueueType?: string;
   /** 消息堆积数 */
   MessageHeapCount?: number | null;
   /** 消息生产速率，每秒 */
@@ -1005,25 +1007,25 @@ declare interface RabbitMQQueueListInfo {
   /** 消息消费速率，每秒 */
   MessageRateOut?: number | null;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 修改时间 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
   /** 队列是否持久化，true 为持久化，false 为非持久化 */
-  Durable?: boolean | null;
+  Durable?: boolean;
   /** 队列是否为自动删除队列，true 为自动删除，false 为非自动删除 */
-  AutoDelete?: boolean | null;
+  AutoDelete?: boolean;
   /** 队列所属实例 ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 队列所属虚拟主机名称 */
-  VirtualHost?: string | null;
+  VirtualHost?: string;
   /** 队列所在主节点名称 */
-  Node?: string | null;
+  Node?: string;
   /** 生效的策略名称 */
   Policy?: string | null;
   /** 扩展参数 key-value 对象 */
-  Arguments?: string | null;
+  Arguments?: string;
   /** 是否独占队列 */
-  Exclusive?: boolean | null;
+  Exclusive?: boolean;
 }
 
 /** RabbitMQ用户实体详情 */
@@ -1035,9 +1037,9 @@ declare interface RabbitMQUser {
   /** 密码，登录时使用 */
   Password?: string;
   /** 用户描述 */
-  Description?: string | null;
+  Description?: string;
   /** 用户标签，用于决定改用户访问RabbitMQ Management的权限范围 */
-  Tags?: string[] | null;
+  Tags?: string[];
   /** 用户创建时间 */
   CreateTime?: string;
   /** 用户最后修改时间 */
@@ -1057,7 +1059,7 @@ declare interface RabbitMQVipInstance {
   /** 实例名称 */
   InstanceName?: string;
   /** 实例版本 */
-  InstanceVersion?: string | null;
+  InstanceVersion?: string;
   /** 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败 */
   Status?: number;
   /** 节点数量 */
@@ -1077,7 +1079,7 @@ declare interface RabbitMQVipInstance {
   /** 0-后付费，1-预付费 */
   PayMode?: number;
   /** 备注信息 */
-  Remark?: string | null;
+  Remark?: string;
   /** 实例配置ID */
   SpecName?: string;
   /** 集群异常。 */
@@ -1087,9 +1089,9 @@ declare interface RabbitMQVipInstance {
   /** 公网接入点 */
   PublicAccessEndpoint?: string | null;
   /** VPC 接入点列表 */
-  Vpcs?: VpcEndpointInfo[] | null;
+  Vpcs?: VpcEndpointInfo[];
   /** 创建时间，毫秒为单位 */
-  CreateTime?: number | null;
+  CreateTime?: number;
   /** 实例类型，0 专享版、1 Serverless 版 */
   InstanceType?: number;
 }
@@ -1101,27 +1103,27 @@ declare interface RabbitMQVirtualHostInfo {
   /** vhost名 */
   VirtualHost?: string;
   /** vhost描述信息 */
-  Description?: string | null;
+  Description?: string;
   /** vhost标签 */
-  Tags?: string[] | null;
+  Tags?: string[];
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 修改时间 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
   /** vhost概览统计信息 */
-  VirtualHostStatistics?: RabbitMQVirtualHostStatistics | null;
+  VirtualHostStatistics?: RabbitMQVirtualHostStatistics;
   /** 消息轨迹开关,true打开,false关闭 */
-  TraceFlag?: boolean | null;
+  TraceFlag?: boolean;
   /** vhost状态，与原生控制台对应，有running、partial、stopped、unknown */
-  Status?: string | null;
+  Status?: string;
   /** 消息堆积数 */
-  MessageHeapCount?: number | null;
+  MessageHeapCount?: number;
   /** 输入消息速率 */
-  MessageRateIn?: number | null;
+  MessageRateIn?: number;
   /** 输出消息速率 */
-  MessageRateOut?: number | null;
+  MessageRateOut?: number;
   /** 是否存在镜像队列策略，true 为存在，false 为不存 */
-  MirrorQueuePolicyFlag?: boolean | null;
+  MirrorQueuePolicyFlag?: boolean;
 }
 
 /** vhost概览统计信息 */
@@ -1799,7 +1801,7 @@ declare interface VirtualHostQuota {
   /** 允许创建最大vhost数 */
   MaxVirtualHost?: number;
   /** 已创建vhost数 */
-  UsedVirtualHost?: number | null;
+  UsedVirtualHost?: number;
 }
 
 /** vcp绑定记录 */
@@ -1835,7 +1837,7 @@ declare interface VpcEndpointInfo {
   /** vpc接入点信息 */
   VpcEndpoint: string;
   /** vpc接入点状态 OFF/ON/CREATING/DELETING */
-  VpcDataStreamEndpointStatus?: string | null;
+  VpcDataStreamEndpointStatus?: string;
 }
 
 /** vpc信息（由UniqVpcId和UniqSubnetId组成） */
@@ -2091,11 +2093,11 @@ declare interface CreateRabbitMQBindingRequest {
 
 declare interface CreateRabbitMQBindingResponse {
   /** 实例名称 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** vhost名称 */
-  VirtualHost?: string | null;
+  VirtualHost?: string;
   /** 路由关系Id */
-  BindingId?: number | null;
+  BindingId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2161,9 +2163,9 @@ declare interface CreateRabbitMQVipInstanceRequest {
 
 declare interface CreateRabbitMQVipInstanceResponse {
   /** 订单号Id */
-  TranId?: string | null;
+  TranId?: string;
   /** 实例Id */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2517,11 +2519,11 @@ declare interface DeleteRabbitMQBindingRequest {
 
 declare interface DeleteRabbitMQBindingResponse {
   /** 实例名称 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** vhost参数 */
-  VirtualHost?: string | null;
+  VirtualHost?: string;
   /** 路由关系Id */
-  BindingId?: number | null;
+  BindingId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2561,9 +2563,9 @@ declare interface DeleteRabbitMQVipInstanceRequest {
 
 declare interface DeleteRabbitMQVipInstanceResponse {
   /** 订单号Id */
-  TranId?: string | null;
+  TranId?: string;
   /** 实例Id */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3233,9 +3235,9 @@ declare interface DescribeRabbitMQBindingsRequest {
 
 declare interface DescribeRabbitMQBindingsResponse {
   /** 路由关系列表 */
-  BindingInfoList?: RabbitMQBindingListInfo[] | null;
+  BindingInfoList?: RabbitMQBindingListInfo[];
   /** 数量 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3265,9 +3267,9 @@ declare interface DescribeRabbitMQExchangesRequest {
 
 declare interface DescribeRabbitMQExchangesResponse {
   /** 策略列表信息 */
-  ExchangeInfoList?: RabbitMQExchangeListInfo[] | null;
+  ExchangeInfoList?: RabbitMQExchangeListInfo[];
   /** 策略结果总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3331,17 +3333,17 @@ declare interface DescribeRabbitMQQueueDetailRequest {
 
 declare interface DescribeRabbitMQQueueDetailResponse {
   /** 实例名称 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** Vhost参数 */
-  VirtualHost?: string | null;
+  VirtualHost?: string;
   /** 队列名称 */
-  QueueName?: string | null;
+  QueueName?: string;
   /** 队列类型,取值classic或quorum */
-  QueueType?: string | null;
+  QueueType?: string;
   /** 在线消费者数量 */
   Consumers?: number | null;
   /** 持久标记 */
-  Durable?: boolean | null;
+  Durable?: boolean;
   /** 自动清除 */
   AutoDelete?: boolean | null;
   /** 备注 */
@@ -3375,7 +3377,7 @@ declare interface DescribeRabbitMQQueueDetailResponse {
   /** MaxInMemoryBytes参数,quorum类型专用 */
   MaxInMemoryBytes?: number | null;
   /** 创建时间戳,单位秒 */
-  CreateTime?: number | null;
+  CreateTime?: number;
   /** 节点 */
   Node?: string | null;
   /** 仲裁队列死信一致性策略 */
@@ -3385,11 +3387,11 @@ declare interface DescribeRabbitMQQueueDetailResponse {
   /** 仲裁队列的初始副本组大小 */
   QuorumInitialGroupSize?: number | null;
   /** 是否为独占队列 */
-  Exclusive?: boolean | null;
+  Exclusive?: boolean;
   /** 生效的策略名 */
   Policy?: string | null;
   /** 扩展参数 key-value */
-  Arguments?: string | null;
+  Arguments?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3415,9 +3417,9 @@ declare interface DescribeRabbitMQQueuesRequest {
 
 declare interface DescribeRabbitMQQueuesResponse {
   /** 列表信息 */
-  QueueInfoList?: RabbitMQQueueListInfo[] | null;
+  QueueInfoList?: RabbitMQQueueListInfo[];
   /** 数量 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3457,9 +3459,9 @@ declare interface DescribeRabbitMQVipInstanceResponse {
   /** 集群规格信息 */
   ClusterSpecInfo?: RabbitMQClusterSpecInfo;
   /** 集群访问 */
-  ClusterNetInfo?: RabbitMQClusterAccessInfo | null;
+  ClusterNetInfo?: RabbitMQClusterAccessInfo;
   /** 集群白名单 */
-  ClusterWhiteListInfo?: RabbitMQClusterWhiteListInfo | null;
+  ClusterWhiteListInfo?: RabbitMQClusterWhiteListInfo;
   /** vhost配额信息 */
   VirtualHostQuota?: VirtualHostQuota;
   /** exchange配额信息 */
@@ -4577,7 +4579,7 @@ declare interface ModifyRabbitMQVipInstanceRequest {
 
 declare interface ModifyRabbitMQVipInstanceResponse {
   /** 实例id */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -176,7 +176,7 @@ declare interface InvocationTask {
   CommandDocument?: CommandDocument;
   /** 执行任务失败时的错误信息。 */
   ErrorInfo?: string;
-  /** 调用来源。 */
+  /** 调用来源。- USER：来源于用户调用。- INVOKER：来源于定时执行。 */
   InvocationSource?: string;
 }
 
@@ -209,7 +209,7 @@ declare interface Invoker {
   /** 执行器是否启用。 */
   Enable?: boolean;
   /** 执行器周期计划。周期执行器会返回此字段。 */
-  ScheduleSettings?: ScheduleSettings | null;
+  ScheduleSettings?: ScheduleSettings;
   /** 创建时间。格式为：YYYY-MM-DDThh:mm:ssZ */
   CreatedTime?: string;
   /** 修改时间。格式为：YYYY-MM-DDThh:mm:ssZ */
@@ -268,9 +268,9 @@ declare interface RegisterCodeInfo {
 declare interface RegisterInstanceInfo {
   /** 注册码ID。 */
   RegisterCodeId?: string;
-  /** 实例ID。 */
+  /** 托管实例ID。 */
   InstanceId?: string;
-  /** 实例名。 */
+  /** 托管实例名。 */
   InstanceName?: string;
   /** 机器ID。 */
   MachineId?: string;
@@ -643,7 +643,7 @@ declare interface DescribeRegisterCodesResponse {
   /** 查询到的注册码总数。 */
   TotalCount?: number;
   /** 注册码信息列表。 */
-  RegisterCodeSet?: RegisterCodeInfo[] | null;
+  RegisterCodeSet?: RegisterCodeInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

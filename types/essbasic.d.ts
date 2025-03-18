@@ -138,7 +138,7 @@ declare interface BaseFlowInfo {
   NeedCreateReview?: boolean;
   /** 填写控件：文件发起使用 */
   Components?: Component[];
-  /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
+  /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议 3 :文书效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
   FlowDisplayType?: number;
 }
 
@@ -704,7 +704,7 @@ declare interface FlowFileInfo {
   CustomShowMap?: string;
   /** 本企业(发起方企业)是否需要签署审批 */
   NeedSignReview?: boolean;
-  /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
+  /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议 3 :文书效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
   FlowDisplayType?: number;
 }
 
@@ -784,7 +784,7 @@ declare interface FlowInfo {
   CcNotifyType?: number;
   /** 个人自动签名的使用场景包括以下, 个人自动签署(即ApproverType设置成个人自动签署时)业务此值必传： **E_PRESCRIPTION_AUTO_SIGN**：电子处方单（医疗自动签） **OTHER** : 通用场景注: `个人自动签名场景是白名单功能，使用前请与对接的客户经理联系沟通。` */
   AutoSignScene?: string;
-  /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
+  /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议 3 :文书效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
   FlowDisplayType?: number;
 }
 
@@ -1198,6 +1198,12 @@ declare interface ResourceUrlInfo {
   Name?: string;
   /** 资源类型 */
   Type?: string;
+}
+
+/** 签署控件的配置信息，用在嵌入式发起的页面配置，包括 - 签署控件 是否默认展示日期. */
+declare interface SignComponentConfig {
+  /** 签署控件默认属性配置，是否默认展示签署日期， 在页面中可以进行修改。- false 展示签署日期（默认）- true 不展示签署日期 ![image](https://qcloudimg.tencent-cloud.cn/raw/448514412e2f69f6129425beda4ff568.png)。 */
+  HideDate?: boolean;
 }
 
 /** 签署二维码的基本信息，用于创建二维码，用户可扫描该二维码进行签署操作。 */
@@ -1971,6 +1977,8 @@ declare interface ChannelCreatePrepareFlowRequest {
   Organization?: OrganizationInfo;
   /** 操作人（用户）信息，不用传 */
   Operator?: UserInfo;
+  /** 签署控件的配置信息，用在嵌入式发起的页面配置，包括- 签署控件 是否默认展示日期. */
+  SignComponentConfig?: SignComponentConfig;
 }
 
 declare interface ChannelCreatePrepareFlowResponse {

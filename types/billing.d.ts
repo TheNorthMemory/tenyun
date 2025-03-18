@@ -549,93 +549,93 @@ declare interface AllocationSummaryByItem {
 /** 分账账单按资源汇总明细 */
 declare interface AllocationSummaryByResource {
   /** 分账单元唯一标识 */
-  TreeNodeUniqKey?: string | null;
+  TreeNodeUniqKey?: string;
   /** 分账单元名称 */
-  TreeNodeUniqKeyName?: string | null;
+  TreeNodeUniqKeyName?: string;
   /** 日期：结算日期 */
-  BillDate?: string | null;
+  BillDate?: string;
   /** 支付者 UIN：支付者的账号 ID，账号 ID 是用户在腾讯云的唯一账号标识 */
-  PayerUin?: string | null;
+  PayerUin?: string;
   /** 使用者 UIN：实际使用资源的账号 ID */
-  OwnerUin?: string | null;
+  OwnerUin?: string;
   /** 操作者 UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的ID或者角色 ID） */
-  OperateUin?: string | null;
+  OperateUin?: string;
   /** 计费模式编码 */
-  PayMode?: string | null;
+  PayMode?: string;
   /** 计费模式：资源的计费模式，区分为包年包月和按量计费 */
-  PayModeName?: string | null;
+  PayModeName?: string;
   /** 交易类型编码 */
-  ActionType?: string | null;
+  ActionType?: string;
   /** 交易类型：明细交易类型 */
-  ActionTypeName?: string | null;
+  ActionTypeName?: string;
   /** 产品编码 */
-  BusinessCode?: string | null;
+  BusinessCode?: string;
   /** 产品名称：用户所采购的各类云产品 */
-  BusinessCodeName?: string | null;
+  BusinessCodeName?: string;
   /** 子产品编码 */
-  ProductCode?: string | null;
+  ProductCode?: string;
   /** 子产品名称：用户采购的具体产品细分类型 */
-  ProductCodeName?: string | null;
+  ProductCodeName?: string;
   /** 地域ID */
-  RegionId?: number | null;
+  RegionId?: number;
   /** 地域名称：资源所属地域 */
-  RegionName?: string | null;
+  RegionName?: string;
   /** 可用区ID */
-  ZoneId?: number | null;
+  ZoneId?: number;
   /** 可用区：资源所属可用区 */
-  ZoneName?: string | null;
+  ZoneName?: string;
   /** 实例类型编码 */
-  InstanceType?: string | null;
+  InstanceType?: string;
   /** 实例类型：购买的产品服务对应的实例类型，包括资源包、RI、SP、竞价实例。常规实例默认展示“-” */
-  InstanceTypeName?: string | null;
+  InstanceTypeName?: string;
   /** 资源ID：不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID； 若该产品被分拆，则展示产品分拆后的分拆项 ID，如 COS 桶 ID，CDN 域名 */
-  ResourceId?: string | null;
+  ResourceId?: string;
   /** 实例名称：用户在控制台为资源设置的名称，如未设置默认为空；若该产品被分拆，则展示分拆产品分拆后的分拆项资源别名 */
-  ResourceName?: string | null;
+  ResourceName?: string;
   /** 分账标签：资源绑定的标签 */
-  Tag?: BillTag[] | null;
+  Tag?: BillTag[];
   /** 项目ID */
-  ProjectId?: number | null;
+  ProjectId?: number;
   /** 项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目 */
-  ProjectName?: string | null;
+  ProjectName?: string;
   /** 费用归集类型：费用来源类型，分摊、归集、未分配0 - 分摊 1 - 归集 -1 - 未分配 */
-  AllocationType?: number | null;
+  AllocationType?: number;
   /** 组件原价：原价 = 组件刊例价 * 组件用量 * 使用时长（如客户享受一口价/合同价则默认不展示，退费类场景也默认不展示），指定价模式 */
-  TotalCost?: string | null;
+  TotalCost?: string;
   /** 预留实例抵扣时长：本产品或服务使用预留实例抵扣的使用时长 */
-  RiTimeSpan?: string | null;
+  RiTimeSpan?: string;
   /** 预留实例抵扣原价：本产品或服务使用预留实例抵扣的组件原价金额 */
-  RiCost?: string | null;
+  RiCost?: string;
   /** 优惠后总价：优惠后总价 =（原价 - 预留实例抵扣原价 - 节省计划抵扣原价）* 折扣率 */
-  RealTotalCost?: string | null;
+  RealTotalCost?: string;
   /** 现金账户支出(元)：通过现金账户支付的金额 */
-  CashPayAmount?: string | null;
+  CashPayAmount?: string;
   /** 代金券支出(元)：使用各类优惠券（如代金券、现金券等）支付的金额 */
-  VoucherPayAmount?: string | null;
+  VoucherPayAmount?: string;
   /** 赠送账户支出(元)：使用赠送金支付的金额 */
-  IncentivePayAmount?: string | null;
+  IncentivePayAmount?: string;
   /** 分成账户支出(元)：通过分成金账户支付的金额 */
-  TransferPayAmount?: string | null;
+  TransferPayAmount?: string;
   /** 分拆项 ID：涉及分拆产品的分拆后的分拆项 ID，如 COS 桶 ID，CDN 域名 */
   SplitItemId?: string | null;
   /** 分拆项名称：涉及分拆产品的分拆后的分拆项 */
   SplitItemName?: string | null;
   /** 开始使用时间：产品服务开始使用时间 */
-  FeeBeginTime?: string | null;
+  FeeBeginTime?: string;
   /** 结束使用时间：产品服务结束使用时间 */
-  FeeEndTime?: string | null;
+  FeeEndTime?: string;
   /** 节省计划抵扣原价：节省计划抵扣原价 = 节省计划包抵扣面值 / 节省计划抵扣率 */
-  SPCost?: string | null;
+  SPCost?: string;
   /** 国内国际编码 */
-  RegionType?: string | null;
+  RegionType?: string;
   /** 国内国际：资源所属区域类型（国内、国际） */
-  RegionTypeName?: string | null;
+  RegionTypeName?: string;
   /** 配置描述：对应资源下各组件名称及用量（如组件为用量累加型计费则为合计用量） */
-  ComponentConfig?: string | null;
+  ComponentConfig?: string;
   /** SPDeduction */
-  SPDeduction?: string | null;
+  SPDeduction?: string;
   /** 账单月 */
-  BillMonth?: string | null;
+  BillMonth?: string;
 }
 
 /** 当前归属单元信息 */
@@ -673,21 +673,21 @@ declare interface AnalyseBusinessDetail {
 /** 成本分析过滤框复杂类型 */
 declare interface AnalyseConditionDetail {
   /** 产品 */
-  Business?: AnalyseBusinessDetail[] | null;
+  Business?: AnalyseBusinessDetail[];
   /** 项目 */
-  Project?: AnalyseProjectDetail[] | null;
+  Project?: AnalyseProjectDetail[];
   /** 地域 */
-  Region?: AnalyseRegionDetail[] | null;
+  Region?: AnalyseRegionDetail[];
   /** 计费模式 */
-  PayMode?: AnalysePayModeDetail[] | null;
+  PayMode?: AnalysePayModeDetail[];
   /** 交易类型 */
-  ActionType?: AnalyseActionTypeDetail[] | null;
+  ActionType?: AnalyseActionTypeDetail[];
   /** 可用区 */
-  Zone?: AnalyseZoneDetail[] | null;
+  Zone?: AnalyseZoneDetail[];
   /** 资源所有者Uin */
-  OwnerUin?: AnalyseOwnerUinDetail[] | null;
+  OwnerUin?: AnalyseOwnerUinDetail[];
   /** 费用类型 */
-  Amount?: AnalyseAmountDetail[] | null;
+  Amount?: AnalyseAmountDetail[];
 }
 
 /** 成本分析查询条件 */
@@ -727,7 +727,7 @@ declare interface AnalyseDetail {
   /** 金额 */
   Total?: string;
   /** 日期明细金额 */
-  TimeDetail?: AnalyseTimeDetail[] | null;
+  TimeDetail?: AnalyseTimeDetail[];
 }
 
 /** 成本分析表头数据复杂类型 */
@@ -879,37 +879,37 @@ declare interface BillDetail {
   /** 操作者UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的 ID 或者角色 ID ） */
   OperateUin?: string;
   /** 标签信息 */
-  Tags?: BillTagInfo[] | null;
+  Tags?: BillTagInfo[];
   /** 产品编码 */
-  BusinessCode?: string | null;
+  BusinessCode?: string;
   /** 子产品编码 */
-  ProductCode?: string | null;
+  ProductCode?: string;
   /** 交易类型编码 */
-  ActionType?: string | null;
+  ActionType?: string;
   /** 地域ID */
-  RegionId?: string | null;
+  RegionId?: string;
   /** 项目ID */
   ProjectId?: number;
   /** 价格属性：该组件除单价、时长外的其他影响折扣定价的属性信息 */
-  PriceInfo?: string[] | null;
+  PriceInfo?: string[];
   /** 关联交易单据ID：和本笔交易关联单据 ID，如，冲销订单，记录原订单、重结订单，退费单记录对应的原购买订单号 */
-  AssociatedOrder?: BillDetailAssociatedOrder | null;
+  AssociatedOrder?: BillDetailAssociatedOrder;
   /** 计算说明：特殊交易类型计费结算的详细计算说明，如退费及变配 */
-  Formula?: string | null;
+  Formula?: string;
   /** 计费规则：各产品详细的计费规则官网说明链接 */
-  FormulaUrl?: string | null;
+  FormulaUrl?: string;
   /** 账单归属日 */
-  BillDay?: string | null;
+  BillDay?: string;
   /** 账单归属月 */
-  BillMonth?: string | null;
+  BillMonth?: string;
   /** 账单记录ID */
-  Id?: string | null;
+  Id?: string;
   /** 国内国际编码 */
-  RegionType?: string | null;
+  RegionType?: string;
   /** 国内国际：资源所属区域类型（国内、国际） */
-  RegionTypeName?: string | null;
+  RegionTypeName?: string;
   /** 备注属性（实例配置）：其他备注信息，如预留实例的预留实例类型和交易类型、CCN 产品的两端地域信息 */
-  ReserveDetail?: string | null;
+  ReserveDetail?: string;
   /** 优惠对象 */
   DiscountObject?: string;
   /** 优惠类型 */
@@ -921,17 +921,17 @@ declare interface BillDetail {
 /** 明细账单关联单据信息 */
 declare interface BillDetailAssociatedOrder {
   /** 新购订单 */
-  PrepayPurchase?: string | null;
+  PrepayPurchase?: string;
   /** 续费订单 */
-  PrepayRenew?: string | null;
+  PrepayRenew?: string;
   /** 升配订单 */
-  PrepayModifyUp?: string | null;
+  PrepayModifyUp?: string;
   /** 冲销订单 */
-  ReverseOrder?: string | null;
+  ReverseOrder?: string;
   /** 优惠调整后订单 */
-  NewOrder?: string | null;
+  NewOrder?: string;
   /** 优惠调整前订单 */
-  Original?: string | null;
+  Original?: string;
 }
 
 /** 账单明细组件对象 */
@@ -951,9 +951,9 @@ declare interface BillDetailComponent {
   /** 组件用量单位：组件用量对应的单位 */
   UsedAmountUnit?: string;
   /** 原始用量/时长：组件被资源包抵扣前的原始用量/时长 */
-  RealTotalMeasure?: string | null;
+  RealTotalMeasure?: string;
   /** 抵扣用量/时长（含资源包）：组件被资源包抵扣的用量/时长 */
-  DeductedMeasure?: string | null;
+  DeductedMeasure?: string;
   /** 使用时长：资源使用的时长 */
   TimeSpan?: string;
   /** 时长单位：资源使用时长的单位 */
@@ -973,37 +973,37 @@ declare interface BillDetailComponent {
   /** 赠送账户支出：使用赠送金支付的金额 */
   IncentivePayAmount?: string;
   /** 分成金账户支出：通过分成金账户支付的金额 */
-  TransferPayAmount?: string | null;
+  TransferPayAmount?: string;
   /** 组件类型编码 */
-  ItemCode?: string | null;
+  ItemCode?: string;
   /** 组件名称编码 */
-  ComponentCode?: string | null;
+  ComponentCode?: string;
   /** 组件单价：组件的折后单价，组件单价 = 刊例价 * 折扣 */
-  ContractPrice?: string | null;
+  ContractPrice?: string;
   /** 实例类型：购买的产品服务对应的实例类型，包括资源包、RI、SP、竞价实例。正常的实例展示默认为不展示 */
-  InstanceType?: string | null;
+  InstanceType?: string;
   /** 预留实例抵扣的使用时长：本产品或服务使用预留实例抵扣的使用时长 */
-  RiTimeSpan?: string | null;
+  RiTimeSpan?: string;
   /** 预留实例抵扣组件原价：本产品或服务使用预留实例抵扣的组件原价金额 */
-  OriginalCostWithRI?: string | null;
+  OriginalCostWithRI?: string;
   /** 节省计划抵扣率：节省计划可用余额额度范围内，节省计划对于此组件打的折扣率 */
-  SPDeductionRate?: string | null;
+  SPDeductionRate?: string;
   /** 节省计划抵扣金额（已废弃） */
   SPDeduction?: string | null;
   /** 节省计划抵扣组件原价：节省计划抵扣原价=节省计划包抵扣金额/节省计划抵扣率 */
-  OriginalCostWithSP?: string | null;
+  OriginalCostWithSP?: string;
   /** 混合折扣率：综合各类折扣抵扣信息后的最终折扣率，混合折扣率 = 优惠后总价 / 组件原价 */
-  BlendedDiscount?: string | null;
+  BlendedDiscount?: string;
   /** 配置描述：资源配置规格信息 */
-  ComponentConfig?: BillDetailComponentConfig[] | null;
+  ComponentConfig?: BillDetailComponentConfig[];
 }
 
 /** 明细账单配置描述结构 */
 declare interface BillDetailComponentConfig {
   /** 配置描述名称 */
-  Name?: string | null;
+  Name?: string;
   /** 配置描述值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 经销账单资源汇总数据对象 */
@@ -1739,45 +1739,45 @@ declare interface Deal {
 /** 计量标准接入类产品支持API接口获取用量明细返回数据结构 */
 declare interface DescribeDosageDetail {
   /** 日期 */
-  Date?: string | null;
+  Date?: string;
   /** 账号 ID 是用户在腾讯云的唯一账号标识 */
-  Uin?: string | null;
+  Uin?: string;
   /** 用量统计类型 */
-  DosageType?: string | null;
+  DosageType?: string;
   /** 产品编码 */
-  ProductCode?: string | null;
+  ProductCode?: string;
   /** 子产品编码 */
-  SubProductCode?: string | null;
+  SubProductCode?: string;
   /** 组件类型编码 */
-  BillingItemCode?: string | null;
+  BillingItemCode?: string;
   /** 组件编码 */
-  SubBillingItemCode?: string | null;
+  SubBillingItemCode?: string;
   /** 产品名称 */
-  ProductCodeName?: string | null;
+  ProductCodeName?: string;
   /** 子产品名称 */
-  SubProductCodeName?: string | null;
+  SubProductCodeName?: string;
   /** 组件类型 */
-  BillingItemCodeName?: string | null;
+  BillingItemCodeName?: string;
   /** 组件 */
-  SubBillingItemCodeName?: string | null;
+  SubBillingItemCodeName?: string;
   /** 用量单位 */
-  DosageUnit?: string | null;
+  DosageUnit?: string;
   /** 用量起始时间 */
-  DosageBeginTime?: string | null;
+  DosageBeginTime?: string;
   /** 用量截止时间 */
-  DosageEndTime?: string | null;
+  DosageEndTime?: string;
   /** 标准用量 */
-  DosageValue?: number | null;
+  DosageValue?: number;
   /** 抵扣用量 */
-  DeductValue?: number | null;
+  DeductValue?: number;
   /** 抵扣余量 */
-  RemainValue?: number | null;
+  RemainValue?: number;
   /** sdkAppId */
-  SdkAppId?: string | null;
+  SdkAppId?: string;
   /** 其他信息 */
-  AttrStr?: JsonObject[] | null;
+  AttrStr?: JsonObject[];
   /** 用量模板名称 */
-  SheetName?: string[] | null;
+  SheetName?: string[];
 }
 
 /** 由时间和值组成的数据结构 */
@@ -1795,7 +1795,7 @@ declare interface DetailSet {
   /** 使用数据明细 */
   DetailPoints?: DetailPoint[];
   /** 实例ID */
-  InstanceID?: string | null;
+  InstanceID?: string;
 }
 
 /** 经销账单明细数据对象 */
@@ -2073,9 +2073,9 @@ declare interface SavingPlanCoverageRate {
 /** 账单多维度汇总消费详情 */
 declare interface SummaryDetail {
   /** 账单维度编码 */
-  GroupKey?: string | null;
+  GroupKey?: string;
   /** 账单维度值 */
-  GroupValue?: string | null;
+  GroupValue?: string;
   /** 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。 */
   TotalCost?: string;
   /** 优惠后总价 */
@@ -2087,9 +2087,9 @@ declare interface SummaryDetail {
   /** 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额 */
   VoucherPayAmount?: string;
   /** 分成金账户支出：通过分成金账户支付的金额 */
-  TransferPayAmount?: string | null;
+  TransferPayAmount?: string;
   /** 产品汇总信息 */
-  Business?: BusinessSummaryInfo[] | null;
+  Business?: BusinessSummaryInfo[];
 }
 
 /** 总数 */
@@ -2727,9 +2727,9 @@ declare interface DescribeBillDetailResponse {
   /** 详情列表 */
   DetailSet?: BillDetail[];
   /** 总记录数，24小时缓存一次，可能比实际总记录数少 */
-  Total?: number | null;
+  Total?: number;
   /** 本次请求的上下文信息，可用于下一次请求的请求参数中，加快查询速度 */
-  Context?: string | null;
+  Context?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3061,15 +3061,15 @@ declare interface DescribeCostExplorerSummaryRequest {
 
 declare interface DescribeCostExplorerSummaryResponse {
   /** 数据条数 */
-  Total?: number | null;
+  Total?: number;
   /** 表头信息 */
-  Header?: AnalyseHeaderDetail | null;
+  Header?: AnalyseHeaderDetail;
   /** 数据明细 */
-  Detail?: AnalyseDetail[] | null;
+  Detail?: AnalyseDetail[];
   /** 数据总计 */
-  TotalDetail?: AnalyseDetail | null;
+  TotalDetail?: AnalyseDetail;
   /** 筛选框 */
-  ConditionValue?: AnalyseConditionDetail | null;
+  ConditionValue?: AnalyseConditionDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3253,13 +3253,13 @@ declare interface DescribeDosageDetailByDateRequest {
 
 declare interface DescribeDosageDetailByDateResponse {
   /** 计量单位 */
-  Unit?: string | null;
+  Unit?: string;
   /** 用量数组 */
-  DetailSets?: DetailSet[] | null;
+  DetailSets?: DetailSet[];
   /** 错误码 */
-  RetCode?: number | null;
+  RetCode?: number;
   /** 错误信息 */
-  RetMsg?: string | null;
+  RetMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

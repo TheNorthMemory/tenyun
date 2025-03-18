@@ -524,7 +524,7 @@ declare interface AssetMachineDetail {
   CpuSize?: number;
   /** Cpu负载 */
   CpuLoad?: string;
-  /** 防护级别：0基础版，1专业版，2旗舰版，3普惠版 */
+  /** 防护级别：0基础版，1专业版，2旗舰版，3轻量版 */
   ProtectLevel?: number;
   /** 风险状态：UNKNOW-未知，RISK-风险，SAFT-安全 */
   RiskStatus?: string;
@@ -2690,6 +2690,8 @@ declare interface HostTagInfo {
   CloudTags?: Tags[];
   /** 主机instance ID */
   InstanceID?: string;
+  /** 主机类型 */
+  MachineType?: string;
 }
 
 /** 忽略的基线检测项信息 */
@@ -3122,7 +3124,7 @@ declare interface Machine {
   MachineType?: string;
   /** 内核版本 */
   KernelVersion?: string;
-  /** 防护版本：BASIC_VERSION 基础版， PRO_VERSION 专业版，Flagship 旗舰版，GENERAL_DISCOUNT 普惠版 */
+  /** 防护版本：BASIC_VERSION 基础版， PRO_VERSION 专业版，Flagship 旗舰版，GENERAL_DISCOUNT 轻量版 */
   ProtectType?: string;
   /** 云标签信息 */
   CloudTags?: Tags[];
@@ -3240,7 +3242,7 @@ declare interface MachineSimple {
   MachineType?: string;
   /** 内核版本 */
   KernelVersion?: string;
-  /** 防护版本 BASIC_VERSION 基础版， PRO_VERSION 专业版，Flagship 旗舰版，GENERAL_DISCOUNT 普惠版. */
+  /** 防护版本 BASIC_VERSION 基础版， PRO_VERSION 专业版，Flagship 旗舰版，GENERAL_DISCOUNT 轻量版. */
   ProtectType?: string;
   /** 授权订单对象 */
   LicenseOrder?: LicenseOrder;
@@ -3510,7 +3512,7 @@ declare interface NetAttackEvent {
   VulSupportDefense?: number;
   /** 是否开启漏洞防御，0关1开 */
   VulDefenceStatus?: number;
-  /** 机器付费版本，0 基础版，1专业版，2旗舰版，3普惠版 */
+  /** 机器付费版本，0 基础版，1专业版，2旗舰版，3轻量版 */
   PayVersion?: number;
   /** cvm uuid */
   Quuid?: string;
@@ -3556,7 +3558,7 @@ declare interface NetAttackEventInfo {
   DstPort?: number;
   /** 攻击次数 */
   Count?: number;
-  /** 机器付费版本，0 基础版，1专业版，2旗舰版，3普惠版 */
+  /** 机器付费版本，0 基础版，1专业版，2旗舰版，3轻量版 */
   PayVersion?: number;
   /** cvm uuid */
   Quuid?: string;
@@ -3970,7 +3972,7 @@ declare interface RansomDefenseBackup {
   BackupTime?: string;
   /** 勒索状态：0无告警, 1有告警 */
   EventStatus?: number;
-  /** 备份状态：0备份中，1正常，2、3失败，4快照已过期，9快照已删除 */
+  /** 备份状态：0备份中，1正常，2、3失败，4快照已过期，5快照数量超出限制，9快照已删除 */
   BackupStatus?: number;
   /** 备份磁盘数量 */
   DiskCount?: number;
@@ -4078,7 +4080,7 @@ declare interface RansomDefenseStrategy {
   IncludeDir?: string;
   /** 包含目录，用;分隔 */
   ExcludeDir?: string;
-  /** 备份模式： 0按周，1按天 */
+  /** 备份模式： 0按周，1按天，2不备份 */
   BackupType?: number;
   /** 备份星期天数（1-7）：1;2;3;4 */
   Weekday?: string;
@@ -4172,8 +4174,10 @@ declare interface RansomDefenseStrategyMachineBackupInfo {
   RollBackStatus?: number;
   /** 备份成功次数 */
   BackupSuccessCount?: number;
-  /** 版本信息：0-基础版 1-专业版 2-旗舰版 3-普惠版 */
+  /** 版本信息：0-基础版 1-专业版 2-旗舰版 3-轻量版 */
   HostVersion?: number;
+  /** 机器所属专区类型 CVM 云服务器, BM 黑石, ECM 边缘计算, LH 轻量应用服务器 ,Other 混合云专区 */
+  MachineType?: string;
 }
 
 /** 防勒索主机列表 */
@@ -4202,10 +4206,12 @@ declare interface RansomDefenseStrategyMachineDetail {
   StrategyId?: number;
   /** 硬盘信息，为空时所有硬盘生效：;分割 diskId1|diskName1;diskId2|diskName2 */
   DiskInfo?: string;
-  /** 版本信息：0-基础版 1-专业版 2-旗舰版 3-普惠版 */
+  /** 版本信息：0-基础版 1-专业版 2-旗舰版 3-轻量版 */
   HostVersion?: number;
   /** 策略名称 */
   StrategyName?: string;
+  /** 机器所属专区类型 CVM 云服务器, BM 黑石, ECM 边缘计算, LH 轻量应用服务器 ,Other 混合云专区 */
+  MachineType?: string;
 }
 
 /** 防勒索机器硬盘配置 */
@@ -5214,7 +5220,7 @@ declare interface VulDefenceEvent {
   Count?: number;
   /** 状态 0: 待处理 1:已防御 2:已处理 3: 已忽略 4: 已删除 */
   Status?: number;
-  /** 0 专业版,1 旗舰版,2 LH普惠版（仅限LH使用）,3 CVM普惠版（仅限CVM使用） */
+  /** 0 专业版,1 旗舰版,2 LH轻量版（仅限LH使用）,3 CVM轻量版（仅限CVM使用） */
   UpgradeType?: number;
   /** 0 不支持修复，1 支持修复 */
   FixType?: number;
@@ -5394,7 +5400,7 @@ declare interface VulEffectHostList {
   Tags?: string[];
   /** 说明 */
   Description?: string;
-  /** 版本信息：0-基础版 1-专业版 2-旗舰版 3-普惠版 */
+  /** 版本信息：0-基础版 1-专业版 2-旗舰版 3-轻量版 */
   HostVersion?: number;
   /** 是否能自动修复 0 :漏洞不可自动修复， 1：可自动修复， 2：客户端已离线， 3：主机不是旗舰版只能手动修复， 4：机型不允许 ，5：修复中 ，6：已修复， 7：检测中 9:修复失败，10:已忽略 11:漏洞只支持linux不支持Windows 12：漏洞只支持Windows不支持linux，13:修复失败但此时主机已离线，14:修复失败但此时主机不是旗舰版， 15:已手动修复 */
   IsSupportAutoFix?: number;
@@ -6193,7 +6199,7 @@ declare interface CreateRansomDefenseStrategyRequest {
   IncludeDir?: string;
   /** 排除目录，;分隔 */
   ExcludeDir?: string;
-  /** 备份模式： 0按周，1按天 */
+  /** 备份模式： 0按周，1按天，2不备份 */
   BackupType?: number;
   /** 定时任务执行星期天数（1-7）：1;2;7 */
   Weekday?: string;
@@ -10381,6 +10387,10 @@ declare interface DescribeRansomDefenseEventsListRequest {
   Order?: string;
   /** 排序字段支持CreateTime */
   By?: string;
+  /** 事件创建起始时间 */
+  CreateBeginTime?: string;
+  /** 事件创建结束时间 */
+  CreateEndTime?: string;
 }
 
 declare interface DescribeRansomDefenseEventsListResponse {

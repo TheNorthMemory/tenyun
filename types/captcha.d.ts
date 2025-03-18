@@ -5,23 +5,23 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** DescribeCaptchaOperData方法 拦截情况type = 2 返回的数据结构 */
 declare interface CaptchaOperDataInterceptUnit {
   /** 时间 */
-  DateKey: string;
+  DateKey?: string;
   /** 停止验证数量 */
-  AllStopCnt: number;
+  AllStopCnt?: number;
   /** 图片停止加载数量 */
-  PicStopCnt: number;
+  PicStopCnt?: number;
   /** 策略拦截数量 */
-  StrategyStopCnt: number;
+  StrategyStopCnt?: number;
 }
 
 /** 操作数据查询方法DescribeCaptchaOperData 的返回结果，安全验证码加载耗时type = 1 */
 declare interface CaptchaOperDataLoadTimeUnit {
   /** 时间 */
-  DateKey: string;
+  DateKey?: string;
   /** Market加载时间 */
-  MarketLoadTime: number;
+  MarketLoadTime?: number;
   /** AppId加载时间 */
-  AppIdLoadTime: number;
+  AppIdLoadTime?: number;
 }
 
 /** DescribeCaptchaOperData 接口 返回数据类型集合 */
@@ -39,19 +39,19 @@ declare interface CaptchaOperDataRes {
 /** DescribeCaptchaOperData方法 尝试次数分布 type = 4 */
 declare interface CaptchaOperDataTryTimesDistributeUnit {
   /** 尝试次数 */
-  TryCount: number;
+  TryCount?: number;
   /** 用户请求数量 */
-  UserCount: number;
+  UserCount?: number;
 }
 
 /** DescribeCaptchaOperData操作数据查询尝试次数 type = 3 */
 declare interface CaptchaOperDataTryTimesUnit {
   /** 时间 */
-  DateKey: string;
+  DateKey?: string;
   /** 平均尝试次数 */
-  CntPerPass: number[];
+  CntPerPass?: number[];
   /** market平均尝试次数 */
-  MarketCntPerPass: number;
+  MarketCntPerPass?: number;
 }
 
 /** 该类型为DescribeCaptchaData 方法返回数据类型 */
@@ -99,13 +99,13 @@ declare interface CaptchaTicketDataRes {
 /** 用户注册的APPID和应用名称对象 */
 declare interface CaptchaUserAllAppId {
   /** 验证码应用ID */
-  CaptchaAppId: number;
+  CaptchaAppId?: number;
   /** 注册应用名称 */
-  AppName: string;
+  AppName?: string;
   /** 腾讯云APPID */
-  TcAppId: number;
+  TcAppId?: number;
   /** 渠道信息 */
-  ChannelInfo: string;
+  ChannelInfo?: string;
 }
 
 /** 拦截率趋势obj */
@@ -123,17 +123,17 @@ declare interface InterceptPerTrendObj {
 /** 拦截策略返回信息 */
 declare interface OutputManageMarketingRiskValue {
   /** 账号 ID。对应输入参数： AccountType 是 1 时，对应 QQ 的 OpenID。AccountType 是 2 时，对应微信的 OpenID/UnionID。AccountType 是 4 时，对应手机号。AccountType 是 8 时，对应 imei、idfa、imeiMD5 或者 idfaMD5。AccountType 是 0 时，对应账号信息。AccountType 是 10004 时，对应手机号的 MD5。 */
-  UserId: string | null;
+  UserId?: string;
   /** 操作时间戳，单位秒（对应输入参数）。 */
-  PostTime: number | null;
+  PostTime?: number;
   /** 对应输入参数，AccountType 是 QQ 或微信开放账号时，用于标识 QQ 或微信用户登录 后关联业务自身的账号 ID。 */
-  AssociateAccount: string | null;
-  /** 业务详情。 */
-  UserIp: string | null;
+  AssociateAccount?: string;
+  /** 业务详情 */
+  UserIp?: string;
   /** 风险值 pass : 无恶意review：需要人工审核reject：拒绝，高风险恶意 */
-  RiskLevel: string | null;
+  RiskLevel?: string;
   /** 风险类型，请查看下面详细说明 账号风险 账号信用低	1	账号近期存在因恶意被处罚历史，网络低活跃，被举报等因素	疑似 低活跃账号	11	账号活跃度与正常用户有差异	垃圾账号	2	疑似批量注册小号，近期存在严重违规或大量举报	疑似小号	21	账号有疑似线上养号，小号等行为	疑似 违规账号	22	账号曾有违规行为、曾被举报过、曾因违规被处罚过等	无效账号	3	送检账号参数无法成功解析，请检查微信 openid 是否有	黑名单	4	该账号在业务侧有过拉黑记录	白名单 5	业务自行有添加过白名单记录行为风险 批量操作	101	存在 ip/设备/环境等因素的聚集性异常	疑似 IP 属性聚集 1011	出现 IP 聚集	疑似 设备属性聚集 1012	出现设备聚集	自动机 103	疑似自动机批量请求	微信登录态无效 104	检查 wxtoken 参数，是否已经失效环境风险 环境异常 201	操作 ip/设备/环境存在异常。当前 ip 为非常用 ip 或恶意 ip 段	疑似 非常用IP请求 2011	当前请求 IP 非该账号常用 IP	疑似 IP 异常 2012	使用 idc 机房 ip 或 使用代理 ip 或 使用恶意 ip 非公网有效 ip 205	传进来的 IP 地址为内网 ip 地址或者 ip 保留地 */
-  RiskType: number[] | null;
+  RiskType?: number[] | null;
 }
 
 /** 验证码拼装Rce结果，Rce结果部分 */
@@ -173,9 +173,9 @@ declare interface RequestTrendObj {
 /** DescribeCaptchaTicketData 返回的数据结构 */
 declare interface TicketAmountUnit {
   /** 时间 */
-  DateKey: string;
+  DateKey?: string;
   /** 票据验证总量 */
-  Amount: number;
+  Amount?: number;
 }
 
 /** 验证码票据校验趋势obj */
@@ -193,17 +193,17 @@ declare interface TicketCheckTrendObj {
 /** DescribeCaptchaTicketData 返回的数据结构 */
 declare interface TicketInterceptUnit {
   /** 时间 */
-  DateKey: string;
+  DateKey?: string;
   /** 票据验证拦截量 */
-  Intercept: number;
+  Intercept?: number;
 }
 
 /** DescribeCaptchaTicketData 返回的数据结构 */
 declare interface TicketThroughUnit {
   /** 时间 */
-  DateKey: string;
+  DateKey?: string;
   /** 票据验证的通过量 */
-  Through: number;
+  Through?: number;
 }
 
 declare interface DescribeCaptchaAppIdInfoRequest {
@@ -401,7 +401,7 @@ declare interface DescribeCaptchaMiniResultResponse {
   /** 1 ticket verification succeeded 票据验证成功7 CaptchaAppId does not match 票据与验证码应用APPID不匹配8 ticket expired 票据超时10 ticket format error 票据格式不正确15 ticket decryption failed 票据解密失败16 CaptchaAppId wrong format 检查验证码应用APPID错误21 (1)ticket error 票据验证错误 (2)diff 一般是由于用户网络较差，导致前端自动容灾，而生成了容灾票据，业务侧可根据需要进行跳过或二次处理25 invalid ticket 无效票据26 system internal error 系统内部错误31 UnauthorizedOperation.Unauthorized 无有效套餐包/账户已欠费100 param err 参数校验错误 */
   CaptchaCode?: number;
   /** 状态描述及验证错误信息 */
-  CaptchaMsg?: string | null;
+  CaptchaMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -435,9 +435,9 @@ declare interface DescribeCaptchaMiniRiskResultResponse {
   /** 1 ticket verification succeeded 票据验证成功7 CaptchaAppId does not match 票据与验证码应用APPID不匹配8 ticket expired 票据超时10 ticket format error 票据格式不正确15 ticket decryption failed 票据解密失败16 CaptchaAppId wrong format 检查验证码应用APPID错误21 ticket error 票据验证错误25 bad visitor 策略拦截26 system internal error 系统内部错误100 param err 参数校验错误 */
   CaptchaCode?: number;
   /** 状态描述及验证错误信息 */
-  CaptchaMsg?: string | null;
+  CaptchaMsg?: string;
   /** 拦截策略返回信息 */
-  ManageMarketingRiskValue?: OutputManageMarketingRiskValue | null;
+  ManageMarketingRiskValue?: OutputManageMarketingRiskValue;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

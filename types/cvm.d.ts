@@ -40,6 +40,12 @@ declare interface ActionTimer {
   InstanceId?: string;
 }
 
+/** 属性信息 */
+declare interface Attribute {
+  /** 实例的自定义数据。 */
+  UserData?: string;
+}
+
 /** 描述预付费模式，即包年包月相关参数。包括购买时长和自动续费逻辑等。 */
 declare interface ChargePrepaid {
   /** 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。 */
@@ -492,6 +498,14 @@ declare interface Instance {
   DefaultLoginPort?: number;
   /** 实例的最新操作错误信息。 */
   LatestOperationErrorMsg?: string | null;
+}
+
+/** 实例属性 */
+declare interface InstanceAttribute {
+  /** 实例 ID。 */
+  InstanceId?: string;
+  /** 实例属性信息。 */
+  Attributes?: Attribute;
 }
 
 /** 描述了实例的计费模式 */
@@ -1888,6 +1902,20 @@ declare interface DescribeInstancesActionTimerResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstancesAttributesRequest {
+  /** 需要获取的实例属性。可选值：UserData: 实例自定义数据 */
+  Attributes: string[];
+  /** 实例ID列表 */
+  InstanceIds: string[];
+}
+
+declare interface DescribeInstancesAttributesResponse {
+  /** 指定的实例属性列表 */
+  InstanceSet?: InstanceAttribute[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstancesModificationRequest {
   /** 一个或多个待查询的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。每次请求批量实例的上限为20。 */
   InstanceIds: string[];
@@ -2111,7 +2139,7 @@ declare interface DescribeTaskInfoResponse {
   /** 查询返回的维修任务总数量。 */
   TotalCount?: number;
   /** 查询返回的维修任务列表。 */
-  RepairTaskInfoSet?: RepairTaskInfo[] | null;
+  RepairTaskInfoSet?: RepairTaskInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2173,8 +2201,10 @@ declare interface EnterRescueModeRequest {
   Password: string;
   /** 救援模式下系统用户名 */
   Username?: string;
-  /** 是否强制关机 */
+  /** 是否强制关机。本参数已弃用，推荐使用StopType，不可以与参数StopType同时使用。 */
   ForceStop?: boolean;
+  /** 实例的关闭模式。取值范围：SOFT_FIRST：表示在正常关闭失败后进行强制关闭HARD：直接强制关闭SOFT：仅软关机默认取值：SOFT。 */
+  StopType?: string;
 }
 
 declare interface EnterRescueModeResponse {
@@ -3138,6 +3168,8 @@ declare interface Cvm {
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** 查询定时任务信息 {@link DescribeInstancesActionTimerRequest} {@link DescribeInstancesActionTimerResponse} */
   DescribeInstancesActionTimer(data?: DescribeInstancesActionTimerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesActionTimerResponse>;
+  /** 批量获取指定实例属性 {@link DescribeInstancesAttributesRequest} {@link DescribeInstancesAttributesResponse} */
+  DescribeInstancesAttributes(data: DescribeInstancesAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesAttributesResponse>;
   /** 查询实例可调整配置 {@link DescribeInstancesModificationRequest} {@link DescribeInstancesModificationResponse} */
   DescribeInstancesModification(data: DescribeInstancesModificationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesModificationResponse>;
   /** 查询实例操作限制 {@link DescribeInstancesOperationLimitRequest} {@link DescribeInstancesOperationLimitResponse} */

@@ -798,7 +798,7 @@ declare interface FlowGroupInfo {
   NeedSignReview?: boolean;
   /** 个人自动签场景。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN */
   AutoSignScene?: string;
-  /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
+  /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议 3 :文书效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
   FlowDisplayType?: number;
 }
 
@@ -1282,6 +1282,12 @@ declare interface SealInfo {
   SealType: string;
   /** 印章名称 */
   SealName: string;
+}
+
+/** 签署控件的配置信息，用在嵌入式发起的页面配置，包括- 签署控件是否默认展示日期. */
+declare interface SignComponentConfig {
+  /** 签署控件默认属性配置，是否默认展示签署日期， 在页面中可以进行修改。- false 展示签署日期（默认）- true 不展示签署日期 ![image](https://qcloudimg.tencent-cloud.cn/raw/448514412e2f69f6129425beda4ff568.png)。 */
+  HideDate?: boolean;
 }
 
 /** 签署二维码的基本信息，用于创建二维码，用户可扫描该二维码进行签署操作。 */
@@ -2677,6 +2683,8 @@ declare interface CreatePrepareFlowRequest {
   InitiatorComponents?: Component[];
   /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
   FlowDisplayType?: number;
+  /** 签署控件的配置信息，用在嵌入式发起的页面配置，包括 - 签署控件 是否默认展示日期. */
+  SignComponentConfig?: SignComponentConfig;
 }
 
 declare interface CreatePrepareFlowResponse {

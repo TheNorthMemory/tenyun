@@ -455,7 +455,7 @@ declare interface CreateDedicatedClusterOrderRequest {
 
 declare interface CreateDedicatedClusterOrderResponse {
   /** 专用集群订单id */
-  DedicatedClusterOrderId?: string | null;
+  DedicatedClusterOrderId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -623,7 +623,7 @@ declare interface DescribeDedicatedClusterHostsRequest {
 
 declare interface DescribeDedicatedClusterHostsResponse {
   /** 宿主机信息 */
-  HostInfoSet?: HostInfo[] | null;
+  HostInfoSet?: HostInfo[];
   /** 宿主机总数 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -679,13 +679,13 @@ declare interface DescribeDedicatedClusterOverviewResponse {
   /** 宿主机数量 */
   HostCount?: number;
   /** vpn通道状态 */
-  VpnConnectionState?: string | null;
+  VpnConnectionState?: string;
   /** vpn网关监控数据 */
-  VpngwBandwidthData?: VpngwBandwidthData | null;
+  VpngwBandwidthData?: VpngwBandwidthData;
   /** 本地网关信息 */
-  LocalNetInfo?: LocalNetInfo | null;
+  LocalNetInfo?: LocalNetInfo;
   /** vpn网关通道监控数据 */
-  VpnConnectionBandwidthData?: VpngwBandwidthData[] | null;
+  VpnConnectionBandwidthData?: VpngwBandwidthData[];
   /** 宿主机资源概览信息 */
   HostDetailInfo?: HostDetailInfo[];
   /** 热备宿主机数量 */

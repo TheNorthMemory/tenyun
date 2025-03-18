@@ -202,6 +202,10 @@ declare interface DomainBatchLogSet {
   Doing?: number;
   /** 批量操作失败个数 */
   Failed?: number;
+  /** 是否付费 */
+  PayStatus?: boolean;
+  /** 大订单ID */
+  BigDealId?: string;
 }
 
 /** 域名列表 */
@@ -461,17 +465,17 @@ declare interface BidDetailPageRequest {
 
 declare interface BidDetailPageResponse {
   /** 域名 */
-  Domain?: string | null;
+  Domain?: string;
   /** 当前域名价格 */
-  CurrentPrice?: number | null;
+  CurrentPrice?: number;
   /** 用户上次出价 */
-  BidPrice?: number | null;
+  BidPrice?: number;
   /** 当前加价幅度 */
-  CurrentPriceScope?: number | null;
+  CurrentPriceScope?: number;
   /** 加价幅度区间配置 */
   PriceScope?: PriceScopeConf[] | null;
   /** 用户当前已经支付了的保证金 */
-  DepositPrice?: number | null;
+  DepositPrice?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -597,7 +601,7 @@ declare interface CreateDomainBatchRequest {
 
 declare interface CreateDomainBatchResponse {
   /** 批量日志ID */
-  LogId?: number | null;
+  LogId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -707,9 +711,9 @@ declare interface DescribeAuctionListRequest {
 
 declare interface DescribeAuctionListResponse {
   /** 竞拍详情列表 */
-  AuctionList?: AuctionInfo[] | null;
+  AuctionList?: AuctionInfo[];
   /** 总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -727,7 +731,7 @@ declare interface DescribeBatchOperationLogDetailsResponse {
   /** 总数量。 */
   TotalCount?: number;
   /** 日志详情列表。 */
-  DomainBatchDetailSet?: DomainBatchDetailSet[] | null;
+  DomainBatchDetailSet?: DomainBatchDetailSet[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -743,7 +747,7 @@ declare interface DescribeBatchOperationLogsResponse {
   /** 总数量 */
   TotalCount?: number;
   /** 日志列表 */
-  DomainBatchLogSet?: DomainBatchLogSet[] | null;
+  DomainBatchLogSet?: DomainBatchLogSet[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -961,7 +965,7 @@ declare interface DescribeDomainNameListRequest {
 
 declare interface DescribeDomainNameListResponse {
   /** 域名信息集合 */
-  DomainSet?: DomainList[] | null;
+  DomainSet?: DomainList[];
   /** 域名总数量 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1127,7 +1131,7 @@ declare interface DescribePreReleaseListResponse {
   /** 数量 */
   TotalCount?: number;
   /** 预释放列表 */
-  PreReleaseList?: PreReleaseInfo[] | null;
+  PreReleaseList?: PreReleaseInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

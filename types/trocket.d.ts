@@ -1802,6 +1802,22 @@ declare interface ResendDeadLetterMessageResponse {
   RequestId?: string;
 }
 
+declare interface ResetConsumerGroupOffsetRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 主题名称 */
+  Topic: string;
+  /** 重置位点时间（单位：毫秒）-1表示重置到最新位点 */
+  ResetTimestamp: number;
+  /** 消费组名称 */
+  ConsumerGroup?: string;
+}
+
+declare interface ResetConsumerGroupOffsetResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Trocket 消息队列 RocketMQ 版} */
 declare interface Trocket {
   (): Versions;
@@ -1917,6 +1933,8 @@ declare interface Trocket {
   ModifyTopic(data: ModifyTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicResponse>;
   /** 重新发送死信消息 {@link ResendDeadLetterMessageRequest} {@link ResendDeadLetterMessageResponse} */
   ResendDeadLetterMessage(data: ResendDeadLetterMessageRequest, config?: AxiosRequestConfig): AxiosPromise<ResendDeadLetterMessageResponse>;
+  /** 重置消费位点 {@link ResetConsumerGroupOffsetRequest} {@link ResetConsumerGroupOffsetResponse} */
+  ResetConsumerGroupOffset(data: ResetConsumerGroupOffsetRequest, config?: AxiosRequestConfig): AxiosPromise<ResetConsumerGroupOffsetResponse>;
 }
 
 export declare type Versions = ["2023-03-08"];

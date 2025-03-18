@@ -41,9 +41,9 @@ declare interface ColumnPrivilege {
 /** 约束类型值的范围 */
 declare interface ConstraintRange {
   /** 约束类型为section时的最小值 */
-  Min?: string | null;
+  Min?: string;
   /** 约束类型为section时的最大值 */
-  Max?: string | null;
+  Max?: string;
 }
 
 /** 云数据库账号信息 */
@@ -61,7 +61,7 @@ declare interface DBAccount {
   /** 只读标记，0：否， 1：该账号的sql请求优先选择备机执行，备机不可用时选择主机执行，2：优先选择备机执行，备机不可用时操作失败。 */
   ReadOnly?: number;
   /** 该字段对只读账号有意义，表示选择主备延迟小于该值的备机 */
-  DelayThresh?: number | null;
+  DelayThresh?: number;
   /** 针对只读账号，设置策略是否固定备机，0：不固定备机，即备机不满足条件与客户端不断开连接，Proxy选择其他可用备机，1：备机不满足条件断开连接，确保一个连接固定备机。 */
   SlaveConst?: number;
   /** 用户最大连接数，0代表无限制 */
@@ -197,13 +197,13 @@ declare interface DBParamValue {
 /** dcn 配置情况 */
 declare interface DCNReplicaConfig {
   /** DCN 运行状态，START为正常运行，STOP为暂停 */
-  RoReplicationMode: string | null;
+  RoReplicationMode?: string;
   /** 延迟复制的类型，DEFAULT为正常，DUE_TIME为指定时间 */
-  DelayReplicationType: string | null;
+  DelayReplicationType?: string;
   /** 延迟复制的指定时间 */
-  DueTime: string | null;
+  DueTime?: string;
   /** 延迟复制时的延迟秒数 */
-  ReplicationDelay: number | null;
+  ReplicationDelay?: number;
 }
 
 /** DCN的状态信息 */
@@ -351,7 +351,7 @@ declare interface InstanceBackupFileItem {
   /** 实例状态 */
   InstanceStatus?: number;
   /** 分片ID */
-  ShardId?: string | null;
+  ShardId?: string;
   /** 文件路径 */
   FilePath?: string;
   /** 文件名 */
@@ -373,9 +373,9 @@ declare interface InstanceBackupFileItem {
 /** 按机型归类的实例可售卖规格信息 */
 declare interface InstanceSpec {
   /** 设备型号 */
-  Machine: string | null;
+  Machine: string;
   /** 该机型对应的可售卖规格列表 */
-  SpecInfos: SpecConfigInfo[] | null;
+  SpecInfos: SpecConfigInfo[];
 }
 
 /** 拉取的日志信息 */
@@ -433,7 +433,7 @@ declare interface ParamDesc {
   /** 当前参数值 */
   Value?: string;
   /** 设置过的值，参数生效后，该值和value一样。 */
-  SetValue?: string | null;
+  SetValue?: string;
   /** 系统默认值 */
   Default?: string;
   /** 参数限制 */
@@ -565,7 +565,7 @@ declare interface SlowLogData {
   /** 账号 */
   User?: string;
   /** 样例Sql */
-  ExampleSql?: string | null;
+  ExampleSql?: string;
   /** 账户的域名 */
   Host?: string;
 }

@@ -1662,6 +1662,26 @@ declare interface PortItem {
   NginxServerId: string;
 }
 
+/** CKafka投递流 */
+declare interface PostCLSFlowInfo {
+  /** 投递流唯一ID */
+  FlowId?: number;
+  /** 1-访问日志 2-攻击日志 */
+  LogType?: number;
+  /** 状态 0-为关闭 1-为启用 */
+  Status?: number;
+  /** CLS所在区域 */
+  CLSRegion?: string;
+  /** CLS日志集合名称 */
+  LogsetName?: string;
+  /** CLS日志集合ID */
+  LogsetID?: string;
+  /** CLS日志主题名称 */
+  LogTopicName?: string;
+  /** CLS日志集合ID */
+  LogTopicID?: string;
+}
+
 /** waf产品 */
 declare interface ProductInfo {
   /** 产品名称 */
@@ -2498,6 +2518,20 @@ declare interface CreateIpAccessControlRequest {
 declare interface CreateIpAccessControlResponse {
   /** 新增的规则对应的ID */
   RuleId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreatePostCLSFlowRequest {
+  /** 投递的CLS所在区域，默认为ap-shanghai */
+  CLSRegion?: string;
+  /** 投递的CLS所在日志集合名称，默认为 waf_post_logset */
+  LogsetName?: string;
+  /** 1-访问日志，2-攻击日志，默认为访问日志。 */
+  LogType?: number;
+}
+
+declare interface CreatePostCLSFlowResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3706,6 +3740,18 @@ declare interface DescribePortsResponse {
   RequestId?: string;
 }
 
+declare interface DescribePostCLSFlowsRequest {
+  /** 1-访问日志，2-攻击日志，默认为访问日志。 */
+  LogType?: number;
+}
+
+declare interface DescribePostCLSFlowsResponse {
+  /** 客户的投递流列表 */
+  PostCLSFlows?: PostCLSFlowInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeProtectionModesRequest {
   /** sparta-waf或clb */
   Edition: string;
@@ -4052,6 +4098,18 @@ declare interface DescribeWebshellStatusResponse {
   Domain?: string;
   /** 开关状态 */
   Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DestroyPostCLSFlowRequest {
+  /** 投递流的流ID */
+  FlowId: number;
+  /** 1-访问日志，2-攻击日志，默认为访问日志。 */
+  LogType?: number;
+}
+
+declare interface DestroyPostCLSFlowResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5301,6 +5359,8 @@ declare interface Waf {
   CreateHost(data: CreateHostRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostResponse>;
   /** IP黑白名单新增接口 {@link CreateIpAccessControlRequest} {@link CreateIpAccessControlResponse} */
   CreateIpAccessControl(data: CreateIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIpAccessControlResponse>;
+  /** 创建CLS投递流任务 {@link CreatePostCLSFlowRequest} {@link CreatePostCLSFlowResponse} */
+  CreatePostCLSFlow(data?: CreatePostCLSFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePostCLSFlowResponse>;
   /** 删除访问日志导出 {@link DeleteAccessExportRequest} {@link DeleteAccessExportResponse} */
   DeleteAccessExport(data: DeleteAccessExportRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccessExportResponse>;
   /** 删除防篡改url {@link DeleteAntiFakeUrlRequest} {@link DeleteAntiFakeUrlResponse} */
@@ -5419,6 +5479,8 @@ declare interface Waf {
   DescribePolicyStatus(data: DescribePolicyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyStatusResponse>;
   /** 获取Saas型WAF防护端口列表 {@link DescribePortsRequest} {@link DescribePortsResponse} */
   DescribePorts(data?: DescribePortsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePortsResponse>;
+  /** 获取CLS投递流任务列表 {@link DescribePostCLSFlowsRequest} {@link DescribePostCLSFlowsResponse} */
+  DescribePostCLSFlows(data?: DescribePostCLSFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePostCLSFlowsResponse>;
   /** 查询tiga引擎下大类规则的防护模式 {@link DescribeProtectionModesRequest} {@link DescribeProtectionModesResponse} */
   DescribeProtectionModes(data: DescribeProtectionModesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectionModesResponse>;
   /** 获取规格限制 {@link DescribeRuleLimitRequest} {@link DescribeRuleLimitResponse} */
@@ -5457,6 +5519,8 @@ declare interface Waf {
   DescribeWafThreatenIntelligence(data?: DescribeWafThreatenIntelligenceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafThreatenIntelligenceResponse>;
   /** 获取域名webshell状态 {@link DescribeWebshellStatusRequest} {@link DescribeWebshellStatusResponse} */
   DescribeWebshellStatus(data: DescribeWebshellStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebshellStatusResponse>;
+  /** 销毁CLS投递流任务 {@link DestroyPostCLSFlowRequest} {@link DestroyPostCLSFlowResponse} */
+  DestroyPostCLSFlow(data: DestroyPostCLSFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyPostCLSFlowResponse>;
   /** 刷新防篡改url {@link FreshAntiFakeUrlRequest} {@link FreshAntiFakeUrlResponse} */
   FreshAntiFakeUrl(data: FreshAntiFakeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<FreshAntiFakeUrlResponse>;
   /** 计费资源购买、续费下单接口 {@link GenerateDealsAndPayNewRequest} {@link GenerateDealsAndPayNewResponse} */

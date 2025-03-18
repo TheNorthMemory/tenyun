@@ -948,6 +948,34 @@ declare interface DetailHost {
   ClientIpCountry: ClientIpCountry | null;
 }
 
+/** 检测长度限制配置条件。 */
+declare interface DetectLengthLimitCondition {
+  /** 匹配条件的参数名称，取值有：body_depth：请求正文包部分的检测深度。 */
+  Name: string;
+  /** 匹配条件的参数值，取值与 Name 成对使用。当 Name 值为 body_depth 时， Values 只支持传入单个值，取值有：8KB；64KB；128KB。 */
+  Values: string[];
+}
+
+/** 检测长度限制 */
+declare interface DetectLengthLimitConfig {
+  /** 检测长度限制的规则列表。 */
+  DetectLengthLimitRules: DetectLengthLimitRule[];
+}
+
+/** 检测长度限制规则详情 */
+declare interface DetectLengthLimitRule {
+  /** 规则Id。仅出参使用。 */
+  RuleId: number;
+  /** 规则名称。仅出参使用。 */
+  RuleName: string;
+  /** 规则描述，仅出参使用。 */
+  Description: string;
+  /** 规则配置条件。仅出参使用。 */
+  Conditions: DetectLengthLimitCondition[];
+  /** 处置方式，取值有：skip：当请求正文数据超过 Conditions 出参中 body_depth 设置的检测深度时，跳过所有请求正文内容的检测；scan：仅检测 Conditions 出参中 body_depth 设置的检测深度，对超出部分的请求正文内容直接截断处理，超出部分的请求正文不会经过安全检测。仅出参使用。 */
+  Action: string;
+}
+
 /** 最新IP白名单列表相比于当前IP白名单列表的区别 */
 declare interface DiffIPWhitelist {
   /** 最新IP白名单列表。 */
@@ -2502,7 +2530,7 @@ declare interface SecEntryValue {
   Sum: number;
 }
 
-/** 安全配置 */
+/** Web安全配置 */
 declare interface SecurityConfig {
   /** 托管规则。如果入参为空或不填，默认使用历史配置。 */
   WafConfig?: WafConfig | null;
@@ -2524,6 +2552,8 @@ declare interface SecurityConfig {
   TemplateConfig?: TemplateConfig | null;
   /** 慢速攻击配置。如果入参为空或不填，默认使用历史配置。 */
   SlowPostConfig?: SlowPostConfig | null;
+  /** 检测长度限制配置。仅出参使用。 */
+  DetectLengthLimitConfig?: DetectLengthLimitConfig | null;
 }
 
 /** 安全策略模板的绑定关系。 */

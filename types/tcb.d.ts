@@ -1309,7 +1309,7 @@ declare interface CreateCloudBaseRunResourceRequest {
 
 declare interface CreateCloudBaseRunResourceResponse {
   /** 返回集群创建是否成功 succ为成功。并且中间无err */
-  Result?: string | null;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1407,11 +1407,11 @@ declare interface CreateCloudBaseRunServerVersionRequest {
 
 declare interface CreateCloudBaseRunServerVersionResponse {
   /** 状态(creating/succ) */
-  Result?: string | null;
+  Result?: string;
   /** 版本名称（只有Result为succ的时候，才会返回VersionName) */
-  VersionName?: string | null;
+  VersionName?: string;
   /** 操作记录id */
-  RunId?: string | null;
+  RunId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1731,11 +1731,11 @@ declare interface DescribeCbrServerVersionResponse {
   /** 版本名称 */
   VersionName?: string;
   /** 备注 */
-  Remark?: string | null;
+  Remark?: string;
   /** Dockefile的路径 */
-  DockerfilePath?: string | null;
+  DockerfilePath?: string;
   /** DockerBuild的目录 */
-  BuildDir?: string | null;
+  BuildDir?: string;
   /** Cpu大小 */
   Cpu?: number;
   /** Mem大小 */
@@ -1745,51 +1745,51 @@ declare interface DescribeCbrServerVersionResponse {
   /** 副本最大值 */
   MaxNum?: number;
   /** 环境变量 */
-  EnvParams?: string | null;
+  EnvParams?: string;
   /** 创建时间 */
   CreatedTime?: string;
   /** 更新时间 */
   UpdatedTime?: string;
   /** 版本的IP */
-  VersionIP?: string | null;
+  VersionIP?: string;
   /** 版本的端口号 */
-  VersionPort?: number | null;
+  VersionPort?: number;
   /** 版本状态 */
-  Status?: string | null;
+  Status?: string;
   /** 枚举（package/repository/image) */
-  UploadType?: string | null;
+  UploadType?: string;
   /** 服务名字 */
-  ServerName?: string | null;
+  ServerName?: string;
   /** 是否对于外网开放 */
-  IsPublic?: boolean | null;
+  IsPublic?: boolean;
   /** vpc id */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 子网实例id */
-  SubnetIds?: string[] | null;
+  SubnetIds?: string[];
   /** 日志采集路径 */
-  CustomLogs?: string | null;
+  CustomLogs?: string;
   /** 监听端口 */
-  ContainerPort?: number | null;
+  ContainerPort?: number;
   /** 延迟多长时间开始健康检查（单位s） */
-  InitialDelaySeconds?: number | null;
+  InitialDelaySeconds?: number;
   /** 镜像地址 */
-  ImageUrl?: string | null;
+  ImageUrl?: string;
   /** 是否有Dockerfile：0-default has, 1-has, 2-has not */
-  HasDockerfile?: number | null;
+  HasDockerfile?: number;
   /** 基础镜像 */
-  BaseImage?: string | null;
+  BaseImage?: string;
   /** 容器启动入口命令 */
-  EntryPoint?: string | null;
+  EntryPoint?: string;
   /** 自动扩缩容策略组 */
-  PolicyDetail?: HpaPolicy[] | null;
+  PolicyDetail?: HpaPolicy[];
   /** Tke集群信息 */
-  TkeClusterInfo?: TkeClusterInfo | null;
+  TkeClusterInfo?: TkeClusterInfo;
   /** 版本工作负载类型；deployment/deamonset */
-  TkeWorkloadType?: string | null;
+  TkeWorkloadType?: string;
   /** 代码包信息 */
-  PackageInfo?: CbrPackageInfo | null;
+  PackageInfo?: CbrPackageInfo;
   /** 仓库信息 */
-  RepoInfo?: CbrRepoInfo | null;
+  RepoInfo?: CbrRepoInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1817,11 +1817,11 @@ declare interface DescribeCloudBaseBuildServiceResponse {
   /** 包版本 */
   PackageVersion?: string;
   /** 下载链接 */
-  DownloadUrl?: string | null;
+  DownloadUrl?: string;
   /** 下载Httpheader */
-  DownloadHeaders?: KVPair[] | null;
+  DownloadHeaders?: KVPair[];
   /** 下载链接是否过期 */
-  OutDate?: boolean | null;
+  OutDate?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1883,7 +1883,7 @@ declare interface DescribeCloudBaseRunAllVpcsRequest {
 
 declare interface DescribeCloudBaseRunAllVpcsResponse {
   /** 所有vpcid */
-  Vpcs: string[] | null;
+  Vpcs?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1897,7 +1897,7 @@ declare interface DescribeCloudBaseRunConfForGateWayRequest {
 
 declare interface DescribeCloudBaseRunConfForGateWayResponse {
   /** 最近更新时间 */
-  LastUpTime?: string | null;
+  LastUpTime?: string;
   /** 配置信息 */
   Data?: CloudBaseRunForGatewayConf[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1947,9 +1947,9 @@ declare interface DescribeCloudBaseRunOperationTypesRequest {
 
 declare interface DescribeCloudBaseRunOperationTypesResponse {
   /** 操作类型 */
-  Action?: string[] | null;
+  Action?: string[];
   /** 服务名列表 */
-  ServerName?: string[] | null;
+  ServerName?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1979,7 +1979,7 @@ declare interface DescribeCloudBaseRunPodListResponse {
   /** 总数 */
   TotalCount?: number;
   /** 容器列表 */
-  PodList?: CloudBaseRunVersionPod[] | null;
+  PodList?: CloudBaseRunVersionPod[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1991,13 +1991,13 @@ declare interface DescribeCloudBaseRunResourceForExtendRequest {
 
 declare interface DescribeCloudBaseRunResourceForExtendResponse {
   /** 集群状态(creating/succ) */
-  ClusterStatus?: string | null;
+  ClusterStatus?: string;
   /** 虚拟集群ID */
-  VirtualClusterId?: string | null;
+  VirtualClusterId?: string;
   /** vpc id信息 */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 地域信息 */
-  Region?: string | null;
+  Region?: string;
   /** 子网信息 */
   SubnetIds?: CloudBaseRunVpcSubnet[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -2011,13 +2011,13 @@ declare interface DescribeCloudBaseRunResourceRequest {
 
 declare interface DescribeCloudBaseRunResourceResponse {
   /** 集群状态(creating/succ) */
-  ClusterStatus?: string | null;
+  ClusterStatus?: string;
   /** 虚拟集群ID */
-  VirtualClusterId?: string | null;
+  VirtualClusterId?: string;
   /** vpc id信息 */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 地域信息 */
-  Region?: string | null;
+  Region?: string;
   /** 子网信息 */
   SubnetIds?: CloudBaseRunVpcSubnet[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -2061,21 +2061,21 @@ declare interface DescribeCloudBaseRunServerRequest {
 
 declare interface DescribeCloudBaseRunServerResponse {
   /** 个数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 版本列表 */
-  VersionItems?: CloudBaseRunServerVersionItem[] | null;
+  VersionItems?: CloudBaseRunServerVersionItem[];
   /** 服务名称 */
-  ServerName?: string | null;
+  ServerName?: string;
   /** 是否对于外网开放 */
-  IsPublic?: boolean | null;
+  IsPublic?: boolean;
   /** 镜像仓库 */
-  ImageRepo?: string | null;
+  ImageRepo?: string;
   /** 流量配置的类型（FLOW,URL_PARAMS) */
-  TrafficType?: string | null;
+  TrafficType?: string;
   /** 服务创建类型，默认为空，一键部署为oneclick */
-  SourceType?: string | null;
+  SourceType?: string;
   /** 服务标签, function: 托管函数 */
-  Tag?: string | null;
+  Tag?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2093,11 +2093,11 @@ declare interface DescribeCloudBaseRunServerVersionResponse {
   /** 版本名称 */
   VersionName?: string;
   /** 备注 */
-  Remark?: string | null;
+  Remark?: string;
   /** Dockefile的路径 */
-  DockerfilePath?: string | null;
+  DockerfilePath?: string;
   /** DockerBuild的目录 */
-  BuildDir?: string | null;
+  BuildDir?: string;
   /** 请使用CPUSize */
   Cpu?: number;
   /** 请使用MemSize */
@@ -2111,63 +2111,63 @@ declare interface DescribeCloudBaseRunServerVersionResponse {
   /** 策略阈值 */
   PolicyThreshold?: number;
   /** 环境变量 */
-  EnvParams?: string | null;
+  EnvParams?: string;
   /** 创建时间 */
   CreatedTime?: string;
   /** 更新时间 */
   UpdatedTime?: string;
   /** 版本的IP */
-  VersionIP?: string | null;
+  VersionIP?: string;
   /** 版本的端口号 */
-  VersionPort?: number | null;
+  VersionPort?: number;
   /** 版本状态 */
-  Status?: string | null;
+  Status?: string;
   /** 代码包的名字 */
-  PackageName?: string | null;
+  PackageName?: string;
   /** 代码版本的名字 */
-  PackageVersion?: string | null;
+  PackageVersion?: string;
   /** 枚举（package/repository/image) */
-  UploadType?: string | null;
+  UploadType?: string;
   /** Repo的类型(gitlab/github/coding) */
-  RepoType?: string | null;
+  RepoType?: string;
   /** 地址 */
-  Repo?: string | null;
+  Repo?: string;
   /** 分支 */
-  Branch?: string | null;
+  Branch?: string;
   /** 服务名字 */
-  ServerName?: string | null;
+  ServerName?: string;
   /** 是否对于外网开放 */
-  IsPublic?: boolean | null;
+  IsPublic?: boolean;
   /** vpc id */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 子网实例id */
   SubnetIds?: string[] | null;
   /** 日志采集路径 */
-  CustomLogs?: string | null;
+  CustomLogs?: string;
   /** 监听端口 */
-  ContainerPort?: number | null;
+  ContainerPort?: number;
   /** 延迟多长时间开始健康检查（单位s） */
-  InitialDelaySeconds?: number | null;
+  InitialDelaySeconds?: number;
   /** 镜像地址 */
-  ImageUrl?: string | null;
+  ImageUrl?: string;
   /** CPU 大小 */
-  CpuSize?: number | null;
+  CpuSize?: number;
   /** MEM 大小 */
-  MemSize?: number | null;
+  MemSize?: number;
   /** 是否有Dockerfile：0-default has, 1-has, 2-has not */
-  HasDockerfile?: number | null;
+  HasDockerfile?: number;
   /** 基础镜像 */
-  BaseImage?: string | null;
+  BaseImage?: string;
   /** 容器启动入口命令 */
-  EntryPoint?: string | null;
+  EntryPoint?: string;
   /** 仓库语言 */
-  RepoLanguage?: string | null;
+  RepoLanguage?: string;
   /** 自动扩缩容策略组 */
   PolicyDetail?: HpaPolicy[] | null;
   /** Tke集群信息 */
   TkeClusterInfo?: TkeClusterInfo | null;
   /** 版本工作负载类型；deployment/deamonset */
-  TkeWorkloadType?: string | null;
+  TkeWorkloadType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2185,11 +2185,11 @@ declare interface DescribeCloudBaseRunVersionResponse {
   /** 版本名称 */
   VersionName?: string;
   /** 备注 */
-  Remark?: string | null;
+  Remark?: string;
   /** Dockefile的路径 */
-  DockerfilePath?: string | null;
+  DockerfilePath?: string;
   /** DockerBuild的目录 */
-  BuildDir?: string | null;
+  BuildDir?: string;
   /** 副本最小值 */
   MinNum?: number;
   /** 副本最大值 */
@@ -2199,55 +2199,55 @@ declare interface DescribeCloudBaseRunVersionResponse {
   /** 策略阈值 */
   PolicyThreshold?: number;
   /** 环境变量 */
-  EnvParams?: string | null;
+  EnvParams?: string;
   /** 创建时间 */
   CreatedTime?: string;
   /** 更新时间 */
   UpdatedTime?: string;
   /** 版本的IP */
-  VersionIP?: string | null;
+  VersionIP?: string;
   /** 版本的端口号 */
-  VersionPort?: number | null;
+  VersionPort?: number;
   /** 版本状态 */
-  Status?: string | null;
+  Status?: string;
   /** 代码包的名字 */
-  PackageName?: string | null;
+  PackageName?: string;
   /** 代码版本的名字 */
-  PackageVersion?: string | null;
+  PackageVersion?: string;
   /** 枚举（package/repository/image) */
-  UploadType?: string | null;
+  UploadType?: string;
   /** Repo的类型(coding/gitlab/github/coding) */
-  RepoType?: string | null;
+  RepoType?: string;
   /** 地址 */
-  Repo?: string | null;
+  Repo?: string;
   /** 分支 */
-  Branch?: string | null;
+  Branch?: string;
   /** 服务名字 */
-  ServerName?: string | null;
+  ServerName?: string;
   /** 是否对于外网开放 */
-  IsPublic?: boolean | null;
+  IsPublic?: boolean;
   /** vpc id */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 子网实例id */
-  SubnetIds?: string[] | null;
+  SubnetIds?: string[];
   /** 日志采集路径 */
-  CustomLogs?: string | null;
+  CustomLogs?: string;
   /** 监听端口 */
-  ContainerPort?: number | null;
+  ContainerPort?: number;
   /** 延迟多长时间开始健康检查（单位s） */
-  InitialDelaySeconds?: number | null;
+  InitialDelaySeconds?: number;
   /** 镜像地址 */
-  ImageUrl?: string | null;
+  ImageUrl?: string;
   /** CPU 大小 */
-  CpuSize?: number | null;
+  CpuSize?: number;
   /** MEM 大小 */
-  MemSize?: number | null;
+  MemSize?: number;
   /** 扩缩容策略详情 */
-  PolicyDetail?: HpaPolicy[] | null;
+  PolicyDetail?: HpaPolicy[];
   /** Cpu的Request值 */
-  Cpu?: number | null;
+  Cpu?: number;
   /** Mem的Request值 */
-  Mem?: number | null;
+  Mem?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2277,7 +2277,7 @@ declare interface DescribeCloudBaseRunVersionSnapshotRequest {
 
 declare interface DescribeCloudBaseRunVersionSnapshotResponse {
   /** 版本历史 */
-  Snapshots?: CloudRunServiceSimpleVersionSnapshot[] | null;
+  Snapshots?: CloudRunServiceSimpleVersionSnapshot[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2905,7 +2905,7 @@ declare interface EstablishCloudBaseRunServerRequest {
 
 declare interface EstablishCloudBaseRunServerResponse {
   /** 创建服务是否成功 */
-  Result?: string | null;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2937,9 +2937,9 @@ declare interface FreezeCloudBaseRunServersRequest {
 
 declare interface FreezeCloudBaseRunServersResponse {
   /** 批量状态成功：succ失败：fail部分：partial（部分成功、部分失败） */
-  Result?: string | null;
+  Result?: string;
   /** 冻结失败服务列表 */
-  FailServerList?: string[] | null;
+  FailServerList?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2959,7 +2959,7 @@ declare interface ModifyCloudBaseRunServerFlowConfRequest {
 
 declare interface ModifyCloudBaseRunServerFlowConfResponse {
   /** 返回结果，succ代表成功 */
-  Result?: string | null;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2993,7 +2993,7 @@ declare interface ModifyCloudBaseRunServerVersionRequest {
 
 declare interface ModifyCloudBaseRunServerVersionResponse {
   /** 返回结果（succ为成功） */
-  Result?: string | null;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3167,9 +3167,9 @@ declare interface RollUpdateCloudBaseRunServerVersionResponse {
   /** succ为成功 */
   Result?: string;
   /** 滚动更新的VersionName */
-  VersionName?: string | null;
+  VersionName?: string;
   /** 操作记录id */
-  RunId?: string | null;
+  RunId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3241,9 +3241,9 @@ declare interface UnfreezeCloudBaseRunServersRequest {
 
 declare interface UnfreezeCloudBaseRunServersResponse {
   /** 批量执行结果成功：succ失败：fail部分：partial（部分成功、部分失败） */
-  Result?: string | null;
+  Result?: string;
   /** 解冻失败列表 */
-  FailServerList?: string[] | null;
+  FailServerList?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

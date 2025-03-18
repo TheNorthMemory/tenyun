@@ -666,6 +666,24 @@ declare interface ModifyProjectResponse {
   RequestId?: string;
 }
 
+declare interface ModifyProjectSecModeRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 安全模式 0：关闭项目共享密钥 1：开启项目共享密钥 */
+  Mode: number;
+  /** 项目密钥 32位 小写英文+数字； 项目密钥模式必填 */
+  Key?: string;
+  /** 自动注册方式0：关闭自动注册1：仅允许现场设备自动注册2：仅允许远端设备自动注册3：允许现场和远端设备均自动注册 */
+  AutoRegister?: number;
+  /** 是否允许远端获取现场设备列表（getGwList）0：不允许1：允许 */
+  FieldListEnable?: number;
+}
+
+declare interface ModifyProjectSecModeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Trro 实时互动-工业能源版} */
 declare interface Trro {
   (): Versions;
@@ -715,6 +733,8 @@ declare interface Trro {
   ModifyPolicy(data: ModifyPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPolicyResponse>;
   /** 修改项目 {@link ModifyProjectRequest} {@link ModifyProjectResponse} */
   ModifyProject(data: ModifyProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectResponse>;
+  /** 修改项目安全模式 {@link ModifyProjectSecModeRequest} {@link ModifyProjectSecModeResponse} */
+  ModifyProjectSecMode(data: ModifyProjectSecModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectSecModeResponse>;
 }
 
 export declare type Versions = ["2022-03-25"];
