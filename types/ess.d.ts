@@ -348,6 +348,8 @@ declare interface CreateFlowOption {
   ShowComponentTypes?: string[];
   /** 发起流程的可嵌入页面结果页配置 */
   ResultPageConfig?: CreateResultPageConfig[];
+  /** 签署控件的配置信息，用在嵌入式发起的页面配置，包括 - 签署控件 是否默认展示日期. */
+  SignComponentConfig?: SignComponentConfig;
 }
 
 /** 发起流程的可嵌入页面操作结果页配置 */
@@ -1745,6 +1747,8 @@ declare interface CreateBatchQuickSignUrlRequest {
   Intention?: Intention;
   /** 缓存签署人信息。在H5签署链接动态领取场景，首次填写后，选择缓存签署人信息，在下次签署人点击领取链接时，会自动将个人信息（姓名、身份证号、手机号）填入，否则需要每次手动填写。注: `若参与方为企业员工时，暂不支持对参与方信息进行缓存` */
   CacheApproverInfo?: boolean;
+  /** 是否允许此链接中签署方批量拒签。 false (默认): 不允许批量拒签 true : 允许批量拒签。注：`合同组暂不支持批量拒签功能。` */
+  CanBatchReject?: boolean;
 }
 
 declare interface CreateBatchQuickSignUrlResponse {
@@ -1781,6 +1785,8 @@ declare interface CreateBatchSignUrlRequest {
   AutoJumpBack?: boolean;
   /** 仅公众号 H5 跳转电子签小程序时，如需签署完成的“返回应用”功能，在获取签署链接接口的 UrlUseEnv 参数需设置为 **WeChatOfficialAccounts**，小程序签署成功的结果页面中才会出现“返回应用”按钮。在用户点击“返回应用”按钮之后，会返回到公众号 H5。 参考 [公众号 H5 跳转电子签小程序](https://qian.tencent.com/developers/company/openwxminiprogram/#23-%E5%85%AC%E4%BC%97%E5%8F%B7-h5-%E4%B8%AD%E8%B7%B3%E8%BD%AC)。 */
   UrlUseEnv?: string;
+  /** 是否允许此链接中签署方批量拒签。 false (默认): 不允许批量拒签 true : 允许批量拒签。注：`合同组暂不支持批量拒签功能。` */
+  CanBatchReject?: boolean;
 }
 
 declare interface CreateBatchSignUrlResponse {
@@ -2681,9 +2687,9 @@ declare interface CreatePrepareFlowRequest {
   Agent?: Agent;
   /** 模板或者合同中的填写控件列表，列表中可支持下列多种填写控件，控件的详细定义参考开发者中心的Component结构体 */
   InitiatorComponents?: Component[];
-  /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
+  /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议 3 :文书效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
   FlowDisplayType?: number;
-  /** 签署控件的配置信息，用在嵌入式发起的页面配置，包括 - 签署控件 是否默认展示日期. */
+  /** 此参数已经废弃，请使用 CreateFlowOption 里面的 SignComponentConfig签署控件的配置信息，用在嵌入式发起的页面配置，包括 - 签署控件 是否默认展示日期. */
   SignComponentConfig?: SignComponentConfig;
 }
 

@@ -362,6 +362,8 @@ declare interface UserIdAndUserName {
   UpdatedAt?: string | null;
   /** 全局角色 */
   GlobalUserName?: string | null;
+  /** 全局角色编码 */
+  GlobalUserCode?: string | null;
   /** 手机号 */
   Mobile?: string | null;
   /** 1 */
@@ -374,6 +376,10 @@ declare interface UserIdAndUserName {
   AppUserName?: string | null;
   /** 1 */
   InValidateAppRange?: boolean | null;
+  /** -1 免激活 0 未激活 1 已激活 空代表待绑定 */
+  EmailActivationStatus?: number | null;
+  /** 1 */
+  Id?: number | null;
 }
 
 /** 用户ID和用户名 */
@@ -466,6 +472,8 @@ declare interface UserRoleListDataUserRoleInfo {
   InValidateAppRange?: boolean | null;
   /** 用户openid */
   AppOpenUserId?: string | null;
+  /** 邮箱激活状态 */
+  EmailActivationStatus?: number | null;
 }
 
 /** 页面组件信息 */

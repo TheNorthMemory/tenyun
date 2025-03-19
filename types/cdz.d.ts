@@ -5,9 +5,9 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** CDZ的母机和子机的对应关系 */
 declare interface CloudDedicatedZoneHostsInfo {
   /** Host的唯一标识uuid */
-  HostUuid?: string | null;
+  HostUuid?: string;
   /** 实例名称数组 */
-  InstancesInfo?: string[] | null;
+  InstancesInfo?: string[];
 }
 
 /** 专属可用区资源统计项数据详情，对应一个具体的垂直产品的资源统计项。 */

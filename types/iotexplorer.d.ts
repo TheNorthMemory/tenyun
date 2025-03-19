@@ -542,6 +542,66 @@ declare interface InstanceDetail {
   MaxDeviceOnlineCount?: number | null;
 }
 
+/** 应用信息 */
+declare interface IotApplication {
+  /** 应用 ID */
+  IotAppID?: string;
+  /** 应用名称 */
+  AppName?: string;
+  /** 应用说明 */
+  Description?: string;
+  /** 开发模式 */
+  DevMode?: number;
+  /** iOS 平台 AppKey */
+  IOSAppKey?: string;
+  /** iOS 平台 AppSecret */
+  IOSAppSecret?: string;
+  /** Android 平台 AppKey */
+  AndroidAppKey?: string;
+  /** Android 平台 AppSecret */
+  AndroidAppSecret?: string;
+  /** 绑定的产品列表，数据为：ProdcutID 数组 JSON 序列化后的字符串 */
+  Products?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 项目ID */
+  ProjectId?: string;
+  /** 信鸽推送APP ID */
+  PushSecretID?: string;
+  /** 信鸽推送SECRET KEY */
+  PushSecretKey?: string;
+  /** iOS平台推送环境 */
+  PushEnvironment?: string;
+  /** 小程序平台 AppKey */
+  MiniProgramAppKey?: string;
+  /** 小程序平台 AppSecret */
+  MiniProgramAppSecret?: string;
+  /** TPNS服务iOS应用AccessID，TPNS全称为腾讯移动推送（Tencent Push Notification Service），详见：https://cloud.tencent.com/document/product/548 */
+  TPNSiOSAccessID?: string;
+  /** TPNS服务iOS应用SecretKey */
+  TPNSiOSSecretKey?: string;
+  /** TPNS服务iOS应用推送环境 */
+  TPNSiOSPushEnvironment?: string;
+  /** TPNS服务Android应用AccessID */
+  TPNSAndroidAccessID?: string;
+  /** TPNS服务Android应用SecretKey */
+  TPNSAndroidSecretKey?: string;
+  /** TPNS服务iOS应用所属地域，详细说明参见 ModifyApplication 同名入参。 */
+  TPNSiOSRegion?: string;
+  /** TPNS服务Android应用所属地域，详细说明参见 ModifyApplication 同名入参。 */
+  TPNSAndroidRegion?: string;
+  /** 自主短信配置APPID */
+  SelfSmsAppId?: string | null;
+  /** 自主短信配置APPKey */
+  SelfSmsAppKey?: string | null;
+  /** 自主短信配置签名 */
+  SelfSmsSign?: string | null;
+  /** 自主短信配置模板ID */
+  SelfSmsTemplateId?: number | null;
+  /** 第三方小程序强提醒开关 0：关闭；1：开启 */
+  WechatNotifyStatus?: number | null;
+}
+
 /** 增值服务数量统计 */
 declare interface LicenseServiceNumInfo {
   /** 服务类型 */
@@ -1114,6 +1174,20 @@ declare interface CancelAssignTWeCallLicenseRequest {
 }
 
 declare interface CancelAssignTWeCallLicenseResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ChangeP2PRouteRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** P2P线路 */
+  RouteId: number;
+}
+
+declare interface ChangeP2PRouteResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2568,6 +2642,20 @@ declare interface DescribeModelDefinitionResponse {
   RequestId?: string;
 }
 
+declare interface DescribeP2PRouteRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+}
+
+declare interface DescribeP2PRouteResponse {
+  /** 当前p2p线路 */
+  RouteId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePackageConsumeTaskRequest {
   /** 任务id */
   TaskId: number;
@@ -3252,6 +3340,46 @@ declare interface ListTopicPolicyResponse {
   RequestId?: string;
 }
 
+declare interface ModifyApplicationRequest {
+  /** 应用ID */
+  IotAppID: string;
+  /** 应用名称 */
+  AppName?: string;
+  /** 应用说明 */
+  Description?: string;
+  /** 关联的产品 */
+  Products?: string;
+  /** 信鸽推送APP ID */
+  PushSecretID?: string;
+  /** 信鸽推送SECRET KEY */
+  PushSecretKey?: string;
+  /** iOS平台推送环境 */
+  PushEnvironment?: string;
+  /** TPNS服务iOS应用AccessID，TPNS全称为腾讯移动推送（Tencent Push Notification Service），详见：https://cloud.tencent.com/document/product/548 */
+  TPNSiOSAccessID?: string;
+  /** TPNS服务iOS应用SecretKey */
+  TPNSiOSSecretKey?: string;
+  /** TPNS服务iOS应用推送环境 */
+  TPNSiOSPushEnvironment?: string;
+  /** TPNS服务Android应用AccessID */
+  TPNSAndroidAccessID?: string;
+  /** TPNS服务Android应用SecretKey */
+  TPNSAndroidSecretKey?: string;
+  /** TPNS服务iOS应用所属地域，广州：ap-guangzhou，上海：ap-shanghai，中国香港：ap-hongkong，新加坡：ap-singapore。 */
+  TPNSiOSRegion?: string;
+  /** TPNS服务Android应用所属地域，广州：ap-guangzhou，上海：ap-shanghai，中国香港：ap-hongkong，新加坡：ap-singapore。 */
+  TPNSAndroidRegion?: string;
+  /** TurnKey小程序托管 */
+  TurnKeySwitch?: number;
+}
+
+declare interface ModifyApplicationResponse {
+  /** 应用信息 */
+  Application?: IotApplication;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCloudStorageAIServiceCallbackRequest {
   /** 产品 ID */
   ProductId: string;
@@ -3869,6 +3997,8 @@ declare interface Iotexplorer {
   CallDeviceActionSync(data: CallDeviceActionSyncRequest, config?: AxiosRequestConfig): AxiosPromise<CallDeviceActionSyncResponse>;
   /** 取消分配TWeCall {@link CancelAssignTWeCallLicenseRequest} {@link CancelAssignTWeCallLicenseResponse} */
   CancelAssignTWeCallLicense(data: CancelAssignTWeCallLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<CancelAssignTWeCallLicenseResponse>;
+  /** p2p线路切换 {@link ChangeP2PRouteRequest} {@link ChangeP2PRouteResponse} */
+  ChangeP2PRoute(data: ChangeP2PRouteRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeP2PRouteResponse>;
   /** 查询设备可升级固件版本 {@link CheckFirmwareUpdateRequest} {@link CheckFirmwareUpdateResponse} */
   CheckFirmwareUpdate(data: CheckFirmwareUpdateRequest, config?: AxiosRequestConfig): AxiosPromise<CheckFirmwareUpdateResponse>;
   /** 设备远程控制 {@link ControlDeviceDataRequest} {@link ControlDeviceDataResponse} */
@@ -4017,6 +4147,8 @@ declare interface Iotexplorer {
   DescribeLoRaFrequency(data?: DescribeLoRaFrequencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoRaFrequencyResponse>;
   /** 查询产品数据模板 {@link DescribeModelDefinitionRequest} {@link DescribeModelDefinitionResponse} */
   DescribeModelDefinition(data: DescribeModelDefinitionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelDefinitionResponse>;
+  /** 查询当前P2P线路 {@link DescribeP2PRouteRequest} {@link DescribeP2PRouteResponse} */
+  DescribeP2PRoute(data: DescribeP2PRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeP2PRouteResponse>;
   /** 查询套餐消耗记录详情 {@link DescribePackageConsumeTaskRequest} {@link DescribePackageConsumeTaskResponse} */
   DescribePackageConsumeTask(data: DescribePackageConsumeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackageConsumeTaskResponse>;
   /** 查询套餐消耗记录列表 {@link DescribePackageConsumeTasksRequest} {@link DescribePackageConsumeTasksResponse} */
@@ -4093,6 +4225,8 @@ declare interface Iotexplorer {
   ListFirmwares(data: ListFirmwaresRequest, config?: AxiosRequestConfig): AxiosPromise<ListFirmwaresResponse>;
   /** 获取Topic列表 {@link ListTopicPolicyRequest} {@link ListTopicPolicyResponse} */
   ListTopicPolicy(data: ListTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopicPolicyResponse>;
+  /** 更新应用 {@link ModifyApplicationRequest} {@link ModifyApplicationResponse} */
+  ModifyApplication(data: ModifyApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationResponse>;
   /** 修改设备云存AI分析服务 {@link ModifyCloudStorageAIServiceRequest} {@link ModifyCloudStorageAIServiceResponse} */
   ModifyCloudStorageAIService(data: ModifyCloudStorageAIServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudStorageAIServiceResponse>;
   /** 修改云存AI分析回调配置 {@link ModifyCloudStorageAIServiceCallbackRequest} {@link ModifyCloudStorageAIServiceCallbackResponse} */

@@ -4,6 +4,8 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 
 /** 取消任务响应 */
 declare interface CancelVRSTaskRsp {
+  /** 任务ID */
+  TaskId?: string | null;
 }
 
 /** 声音复刻任务创建响应 */
@@ -247,7 +249,7 @@ declare interface GetVRSVoiceTypesResponse {
 /** {@link Vrs 声音复刻} */
 declare interface Vrs {
   (): Versions;
-  /** 声音复刻取消任务接口 {@link CancelVRSTaskRequest} {@link CancelVRSTaskResponse} */
+  /** 声音复刻取消任务接口（暂未开放） {@link CancelVRSTaskRequest} {@link CancelVRSTaskResponse} */
   CancelVRSTask(data: CancelVRSTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelVRSTaskResponse>;
   /** 声音复刻任务创建接口 {@link CreateVRSTaskRequest} {@link CreateVRSTaskResponse} */
   CreateVRSTask(data: CreateVRSTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVRSTaskResponse>;

@@ -505,7 +505,7 @@ declare interface AiAnalysisTaskSegmentResult {
 /** 智能标签任务输入类型 */
 declare interface AiAnalysisTaskTagInput {
   /** 视频智能标签模板 ID。 */
-  Definition: number;
+  Definition?: number;
 }
 
 /** 智能标签结果信息 */
@@ -2420,6 +2420,8 @@ declare interface DrmInfo {
   Type: string | null;
   /** SimpleAes 加密信息。 */
   SimpleAesDrm?: SimpleAesDrm | null;
+  /** FairPlay, WideVine， PlayReady 加密信息。 */
+  SpekeDrm?: SpekeDrm;
 }
 
 /** 编辑点播视频文件信息 */
@@ -3824,6 +3826,8 @@ declare interface MediaTranscodeItem {
   AudioStreamSet?: MediaAudioStreamItem[];
   /** 视频流信息。 */
   VideoStreamSet?: MediaVideoStreamItem[];
+  /** 视频转码使用增强项说明，增强项解释hdr：HDR配置wd_fps：插帧帧率配置video_super_resolution：	超分配置repair：综合增强配置denoise：视频降噪配置color_enhance：色彩增强配置scratch：去划痕配置artifact：去伪影（毛刺）配置sharp：细节增强配置low_light：低光照增强配置face_enhance：人脸增强配置 */
+  CallBackExtInfo?: string | null;
 }
 
 /** 点播文件视频流信息 */
@@ -4770,6 +4774,20 @@ declare interface SnapshotByTimeOffsetTemplate {
   UpdateTime: string;
   /** 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式： stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。black：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。black：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。默认值：black 。 */
   FillType: string;
+}
+
+/** FairPlay，WideVine，PlayReady 等Drm加密方式。 */
+declare interface SpekeDrm {
+  /** 资源标记，支持1-128个字符的数字、字母、下划线(_)、中划线(-)。 */
+  ResourceId: string;
+  /** drm厂商访问地址；注: 不同DRM厂商对子流的数量限制不一样，如 pallycon 限制不能超过5条子流，drmtoday厂商最多仅支持9条子流加密 */
+  KeyServerUrl: string;
+  /** 加密初始化向量(32字节字符串)。 */
+  Vector: string;
+  /** 加密方式，FairPlay 默认cbcs，PlayReady，Widevine 默认cenccbcs：PlayReady，Widevine，FairPlay 支持；cenc：PlayReady，Widevine支持； */
+  EncryptionMethod?: string;
+  /** 子流加密规则，默认 preset0preset0：全部子流使用同一个key加密；preset1：每个子流使用不同的key加密； */
+  EncryptionPreset?: string;
 }
 
 /** 媒体传输的地区信息。 */

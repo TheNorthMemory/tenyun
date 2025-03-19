@@ -11,7 +11,7 @@ declare interface ActionFieldConfigDetail {
   /** 组件唯一标识， 传回后端时的key */
   Field?: string;
   /** 默认值 */
-  DefaultValue?: string | null;
+  DefaultValue?: string;
   /** 支持配置项如下,可根据需要选择配置项，不需要配置是设置空{}：{ placeholder: string (占位符) tooltip: string (提示信息) reg: RegExp (对输入内容格式进行正则校验的规则) max: number (对于输入框，限制最大输入字符数，对于数值输入框，设置上限) min: number (对于数值输入框，设置下限) step: number (设置数值输入框的步长，默认为1) format: string (时间选择的格式，如YYYY-MM-DD表示年月日, YYYY-MM-DD HH:mm:ss 表示时分秒) separator: string[] (多行输入框的分隔符，不传或者为空时表示不分隔，直接返回用户输入的文本字符串) multiple: boolean (是否多选,对选择器和级联选择器有效) options: 选择器的选项【支持以下两种形式】直接给定选项数组 { value: string; label: string }[]通过调接口获取选项 { api: string(接口地址), params: string[] (接口参数,对应于参数配置的field，前端根据field对应的所有组件的输入值作为参数查询数据， 为空时在组件加载时直接请求数据) }} */
   Config?: string;
   /** 是否必填 (0 -- 否 1-- 是) */
@@ -69,31 +69,31 @@ declare interface ActionLibraryListResult {
   /** 自定义动作的参数，json string */
   ActionContent?: string;
   /** 二级分类 */
-  ResourceType?: string | null;
+  ResourceType?: string;
   /** 动作描述 */
-  ActionDetail?: string | null;
+  ActionDetail?: string;
   /** 是否允许当前账号使用 */
-  IsAllowed?: boolean | null;
+  IsAllowed?: boolean;
   /** 最佳实践案例的链接地址 */
-  ActionBestCase?: string | null;
+  ActionBestCase?: string;
   /** 对象类型 */
-  ObjectType?: string | null;
+  ObjectType?: string;
   /** 监控指标ID列表 */
-  MetricIdList?: number[] | null;
+  MetricIdList?: number[];
   /** 是否是新动作 */
-  IsNewAction?: boolean | null;
+  IsNewAction?: boolean;
   /** 对象类型ID */
-  ObjectTypeId?: number | null;
+  ObjectTypeId?: number;
 }
 
 /** 应用性能监控产品中应用信息 */
 declare interface ApmServiceInfo {
   /** 业务ID */
-  InstanceId: string | null;
+  InstanceId: string;
   /** 应用名称 */
-  ServiceNameList: string[] | null;
+  ServiceNameList: string[];
   /** 地域ID */
-  RegionId?: number | null;
+  RegionId?: number;
 }
 
 /** 查询-保护策略 */
@@ -119,13 +119,13 @@ declare interface ObjectType {
   /** 对象类型参数 */
   ObjectTypeParams?: ObjectTypeConfig;
   /** tke接口json解析规则，null不需要解析 */
-  ObjectTypeJsonParse?: ObjectTypeJsonParse | null;
+  ObjectTypeJsonParse?: ObjectTypeJsonParse;
   /** 是否包含新动作 */
-  ObjectHasNewAction?: boolean | null;
+  ObjectHasNewAction?: boolean;
   /** 对应在平台架构图中的资源类型名称 */
-  ObjectPlatformName?: string | null;
+  ObjectPlatformName?: string;
   /** 1：平台支持的对象 2：应用支持的部分对象 */
-  ObjectSupportType?: number | null;
+  ObjectSupportType?: number;
   /** 1.接入层 2.逻辑层 3. 数据层 */
   ArchLayer?: number;
   /** 是否支持演练生图 */
@@ -147,9 +147,9 @@ declare interface ObjectTypeConfigFields {
   /** 实例id */
   Header: string;
   /** 字段值是否需要转译，当不需要转译时，此字段返回null */
-  Transfer?: string | null;
+  Transfer?: string;
   /** tke的pod字段信息解析 */
-  JsonParse?: string | null;
+  JsonParse?: string;
   /** 字段类型 0:str 1:list */
   Type?: number;
 }
@@ -157,13 +157,13 @@ declare interface ObjectTypeConfigFields {
 /** 标准pod对象类型下拉数据的解析 */
 declare interface ObjectTypeJsonParse {
   /** 命名空间 */
-  NameSpace?: string | null;
+  NameSpace?: string;
   /** 工作负载名称 */
-  WorkloadName?: string | null;
+  WorkloadName?: string;
   /** 节点IP */
-  LanIP?: string | null;
+  LanIP?: string;
   /** 节点ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
 }
 
 /** 护栏策略触发日志 */
@@ -171,31 +171,31 @@ declare interface PolicyTriggerLog {
   /** 演练ID */
   TaskId?: number;
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 类型，0--触发，1--恢复 */
-  TriggerType?: number | null;
+  TriggerType?: number;
   /** 内容 */
-  Content?: string | null;
+  Content?: string;
   /** 触发时间 */
-  CreatTime?: string | null;
+  CreatTime?: string;
 }
 
 /** 资源下线 */
 declare interface ResourceOffline {
   /** 资源ID */
-  ResourceId?: number | null;
+  ResourceId?: number;
   /** 资源下线时间 */
-  ResourceDeleteTime?: string | null;
+  ResourceDeleteTime?: string;
   /** 资源下线提示 */
-  ResourceDeleteMessage?: string | null;
+  ResourceDeleteMessage?: string;
 }
 
 /** 用于传入创建、编辑标签 */
 declare interface TagWithCreate {
   /** 标签键 */
-  TagKey: string | null;
+  TagKey: string;
   /** 标签值 */
-  TagValue: string | null;
+  TagValue: string;
 }
 
 /** 展示标签列表 */
@@ -215,9 +215,9 @@ declare interface Task {
   /** 任务描述 */
   TaskDescription: string;
   /** 自定义标签 */
-  TaskTag: string | null;
+  TaskTag: string;
   /** 任务状态，1001--未开始 1002--进行中（执行）1003--进行中（暂停）1004--执行结束 */
-  TaskStatus: number | null;
+  TaskStatus: number;
   /** 任务结束状态，表明任务以何种状态结束: 0 -- 尚未结束，1 -- 成功，2-- 失败，3--终止 */
   TaskStatusType: number;
   /** 保护策略 */
@@ -245,11 +245,11 @@ declare interface Task {
   /** 地域ID */
   TaskRegionId: number;
   /** 监控指标列表 */
-  TaskMonitors: TaskMonitor[] | null;
+  TaskMonitors: TaskMonitor[];
   /** 保护策略 */
   TaskPolicy: DescribePolicy | null;
   /** 标签列表 */
-  Tags?: TagWithDescribe[] | null;
+  Tags?: TagWithDescribe[];
   /** 关联的演练计划ID */
   TaskPlanId?: number | null;
   /** 关联的演练计划名称 */
@@ -257,15 +257,15 @@ declare interface Task {
   /** 关联的应用ID */
   ApplicationId?: string | null;
   /** 关联的应用名称 */
-  ApplicationName?: string | null;
+  ApplicationName?: string;
   /** 关联的告警指标 */
-  AlarmPolicy?: string[] | null;
+  AlarmPolicy?: string[];
   /** 关联的APM服务 */
-  ApmServiceList?: ApmServiceInfo[] | null;
+  ApmServiceList?: ApmServiceInfo[];
   /** 关联的隐患验证项ID */
   VerifyId?: number | null;
   /** 护栏处理方式，1--顺序回滚，2--演练暂停 */
-  PolicyDealType?: number | null;
+  PolicyDealType?: number;
   /** 计划开始时间 */
   TaskPlanStartTime?: string | null;
   /** 计划结束时间 */
@@ -275,7 +275,7 @@ declare interface Task {
   /** 问题和改进 */
   TaskIssue?: string | null;
   /** region信息 */
-  TaskRegionName?: string | null;
+  TaskRegionName?: string;
   /** 架构ID */
   TaskArchId?: string;
 }
@@ -305,7 +305,7 @@ declare interface TaskGroup {
   /** 分组标题 */
   TaskGroupTitle: string;
   /** 分组描述 */
-  TaskGroupDescription: string | null;
+  TaskGroupDescription: string;
   /** 任务分组顺序 */
   TaskGroupOrder: number;
   /** 对象类型ID */
@@ -323,9 +323,9 @@ declare interface TaskGroup {
   /** 不参演的实例列表 */
   TaskGroupDiscardInstanceList?: string[];
   /** 参演实例列表 */
-  TaskGroupSelectedInstanceList?: string[] | null;
+  TaskGroupSelectedInstanceList?: string[];
   /** 机器选取规则 */
-  TaskGroupInstancesExecuteRule?: TaskGroupInstancesExecuteRules[] | null;
+  TaskGroupInstancesExecuteRule?: TaskGroupInstancesExecuteRules[];
 }
 
 /** 任务分组动作 */
@@ -339,9 +339,9 @@ declare interface TaskGroupAction {
   /** 分组动作顺序 */
   TaskGroupActionOrder: number;
   /** 分组动作通用配置 */
-  TaskGroupActionGeneralConfiguration: string | null;
+  TaskGroupActionGeneralConfiguration: string;
   /** 分组动作自定义配置 */
-  TaskGroupActionCustomConfiguration: string | null;
+  TaskGroupActionCustomConfiguration: string;
   /** 分组动作状态 */
   TaskGroupActionStatus: number;
   /** 动作分组创建时间 */
@@ -353,23 +353,23 @@ declare interface TaskGroupAction {
   /** 状态类型: 0 -- 无状态，1 -- 成功，2-- 失败，3--终止，4--跳过 */
   TaskGroupActionStatusType: number;
   /** RandomId */
-  TaskGroupActionRandomId: number | null;
+  TaskGroupActionRandomId: number;
   /** RecoverId */
-  TaskGroupActionRecoverId: number | null;
+  TaskGroupActionRecoverId: number;
   /** ExecuteId */
-  TaskGroupActionExecuteId: number | null;
+  TaskGroupActionExecuteId: number;
   /** 调用api类型，0:tat, 1:云api */
-  ActionApiType?: number | null;
+  ActionApiType?: number;
   /** 1:故障，2:恢复 */
-  ActionAttribute?: number | null;
+  ActionAttribute?: number;
   /** 动作类型：平台、自定义 */
-  ActionType?: string | null;
+  ActionType?: string;
   /** 是否可重试 */
-  IsExecuteRedo?: boolean | null;
+  IsExecuteRedo?: boolean;
   /** 动作风险级别 */
-  ActionRisk?: string | null;
+  ActionRisk?: string;
   /** 动作运行时间 */
-  TaskGroupActionExecuteTime?: number | null;
+  TaskGroupActionExecuteTime?: number;
   /** 动作开始执行时间 */
   TaskGroupActionStartTime?: string;
 }
@@ -413,7 +413,7 @@ declare interface TaskGroupInstance {
   /** 实例ID */
   TaskGroupInstanceId: number;
   /** 实例ID */
-  TaskGroupInstanceObjectId: string | null;
+  TaskGroupInstanceObjectId: string;
   /** 实例动作执行状态 */
   TaskGroupInstanceStatus: number;
   /** 实例创建时间 */
@@ -423,25 +423,25 @@ declare interface TaskGroupInstance {
   /** 状态类型: 0 -- 无状态，1 -- 成功，2-- 失败，3--终止，4--跳过 */
   TaskGroupInstanceStatusType: number;
   /** 执行开始时间 */
-  TaskGroupInstanceStartTime: string | null;
+  TaskGroupInstanceStartTime: string;
   /** 执行结束时间 */
-  TaskGroupInstanceEndTime: string | null;
+  TaskGroupInstanceEndTime: string;
   /** 实例动作执行日志 */
   TaskGroupInstanceExecuteLog?: string | null;
   /** 实例是否可重试 */
-  TaskGroupInstanceIsRedo?: boolean | null;
+  TaskGroupInstanceIsRedo?: boolean;
   /** 动作实例执行时间 */
-  TaskGroupInstanceExecuteTime?: number | null;
+  TaskGroupInstanceExecuteTime?: number;
 }
 
 /** 机器选取规则 */
 declare interface TaskGroupInstancesExecuteRules {
   /** 实例选取模式 */
-  TaskGroupInstancesExecuteMode?: number | null;
+  TaskGroupInstancesExecuteMode?: number;
   /** 按比例选取模式下选取比例 */
-  TaskGroupInstancesExecutePercent?: number | null;
+  TaskGroupInstancesExecutePercent?: number;
   /** 按数量选取模式下选取数量 */
-  TaskGroupInstancesExecuteNum?: number | null;
+  TaskGroupInstancesExecuteNum?: number;
 }
 
 /** 任务列表信息 */
@@ -453,7 +453,7 @@ declare interface TaskListItem {
   /** 任务描述 */
   TaskDescription?: string;
   /** 任务标签 */
-  TaskTag?: string | null;
+  TaskTag?: string;
   /** 任务状态(1001 -- 未开始 1002 -- 进行中 1003 -- 暂停中 1004 -- 任务结束) */
   TaskStatus?: number;
   /** 任务创建时间 */
@@ -461,19 +461,19 @@ declare interface TaskListItem {
   /** 任务更新时间 */
   TaskUpdateTime?: string;
   /** 0--未开始，1--进行中，2--已完成 */
-  TaskPreCheckStatus?: number | null;
+  TaskPreCheckStatus?: number;
   /** 环境检查是否通过 */
-  TaskPreCheckSuccess?: boolean | null;
+  TaskPreCheckSuccess?: boolean;
   /** 演练是否符合预期 1-符合预期 2-不符合预期 */
-  TaskExpect?: number | null;
+  TaskExpect?: number;
   /** 关联应用ID */
-  ApplicationId?: string | null;
+  ApplicationId?: string;
   /** 关联应用名称 */
-  ApplicationName?: string | null;
+  ApplicationName?: string;
   /** 验证项ID */
-  VerifyId?: number | null;
+  VerifyId?: number;
   /** 状态类型: 0 -- 无状态，1 -- 成功，2-- 失败，3--终止 */
-  TaskStatusType?: number | null;
+  TaskStatusType?: number;
   /** 架构ID */
   ArchId?: string;
   /** 架构名称 */
@@ -485,7 +485,7 @@ declare interface TaskMonitor {
   /** 演练监控指标ID */
   TaskMonitorId: number;
   /** 监控指标ID */
-  MetricId: number | null;
+  MetricId: number;
   /** 监控指标对象类型ID */
   TaskMonitorObjectTypeId: number;
   /** 指标名称 */
@@ -493,17 +493,17 @@ declare interface TaskMonitor {
   /** 实例ID列表 */
   InstancesIds: string[];
   /** 中文指标 */
-  MetricChineseName: string | null;
+  MetricChineseName: string;
   /** 单位 */
-  Unit: string | null;
+  Unit: string;
 }
 
 /** 演练人员组织 */
 declare interface TaskOrg {
   /** 演练角色 */
-  TaskRole?: string | null;
+  TaskRole?: string;
   /** 负责人 */
-  TaskOperator?: string | null;
+  TaskOperator?: string;
 }
 
 /** 演练报告状态信息 */
@@ -537,7 +537,7 @@ declare interface Template {
   /** 经验库描述 */
   TemplateDescription?: string;
   /** 自定义标签 */
-  TemplateTag?: string | null;
+  TemplateTag?: string;
   /** 使用状态。1 ---- 使用中，2 --- 停用 */
   TemplateIsUsed?: number;
   /** 经验库创建时间 */
@@ -559,15 +559,15 @@ declare interface Template {
   /** 护栏监控 */
   TemplatePolicy?: TemplatePolicy | null;
   /** 标签列表 */
-  Tags?: TagWithDescribe[] | null;
+  Tags?: TagWithDescribe[];
   /** 经验来源 0-自建 1-专家推荐 */
-  TemplateSource?: number | null;
+  TemplateSource?: number;
   /** apm应用信息 */
-  ApmServiceList?: ApmServiceInfo[] | null;
+  ApmServiceList?: ApmServiceInfo[];
   /** 告警指标 */
-  AlarmPolicy?: string[] | null;
+  AlarmPolicy?: string[];
   /** 护栏处理方式，1--顺序回滚，2--演练暂停 */
-  PolicyDealType?: number | null;
+  PolicyDealType?: number;
 }
 
 /** 任务分组 */
@@ -579,7 +579,7 @@ declare interface TemplateGroup {
   /** 分组标题 */
   Title: string;
   /** 分组描述 */
-  Description: string | null;
+  Description: string;
   /** 分组顺序 */
   Order: number;
   /** 执行模式。1 --- 顺序执行，2 --- 阶段执行 */
@@ -601,9 +601,9 @@ declare interface TemplateGroupAction {
   /** 分组动作顺序 */
   Order: number;
   /** 分组动作通用配置 */
-  GeneralConfiguration: string | null;
+  GeneralConfiguration: string;
   /** 分组动作自定义配置 */
-  CustomConfiguration: string | null;
+  CustomConfiguration: string;
   /** 动作分组创建时间 */
   CreateTime: string;
   /** 动作分组更新时间 */
@@ -611,19 +611,19 @@ declare interface TemplateGroupAction {
   /** 动作名称 */
   ActionTitle: string;
   /** 自身随机id */
-  RandomId: number | null;
+  RandomId: number;
   /** 恢复动作id */
-  RecoverId: number | null;
+  RecoverId: number;
   /** 执行动作id */
-  ExecuteId: number | null;
+  ExecuteId: number;
   /** 调用api类型，0:tat, 1:云api */
-  ActionApiType?: number | null;
+  ActionApiType?: number;
   /** 1:故障，2:恢复 */
-  ActionAttribute?: number | null;
+  ActionAttribute?: number;
   /** 动作类型：平台和自定义 */
-  ActionType?: string | null;
+  ActionType?: string;
   /** 动作风险等级，1:低风险 2:中风险 3:高风险 */
-  ActionRisk?: string | null;
+  ActionRisk?: string;
   /** 故障表现 */
   FailurePerformance?: string;
 }
@@ -637,7 +637,7 @@ declare interface TemplateListItem {
   /** 经验库描述 */
   TemplateDescription?: string;
   /** 经验库标签 */
-  TemplateTag?: string | null;
+  TemplateTag?: string;
   /** 经验库状态。1 -- 使用中，2 -- 停用 */
   TemplateIsUsed?: number;
   /** 经验库创建时间 */
@@ -647,7 +647,7 @@ declare interface TemplateListItem {
   /** 经验库关联的任务数量 */
   TemplateUsedNum?: number;
   /** 经验库来源 0-自建经验 1-专家推荐 */
-  TemplateSource?: number | null;
+  TemplateSource?: number;
 }
 
 /** 监控指标 */
@@ -655,13 +655,13 @@ declare interface TemplateMonitor {
   /** pk */
   MonitorId?: number;
   /** 监控指标ID */
-  MetricId?: number | null;
+  MetricId?: number;
   /** 监控指标对象类型ID */
   ObjectTypeId?: number;
   /** 指标名称 */
   MetricName?: string;
   /** 中文指标 */
-  MetricChineseName?: string | null;
+  MetricChineseName?: string;
 }
 
 /** 保护策略 */
@@ -755,7 +755,7 @@ declare interface DescribeActionFieldConfigListResponse {
   /** 动作栏位配置列表 */
   Results?: ActionFieldConfigResult[];
   /** 资源下线信息 */
-  ResourceOffline?: ResourceOffline[] | null;
+  ResourceOffline?: ResourceOffline[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

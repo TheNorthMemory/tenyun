@@ -1581,7 +1581,7 @@ declare interface DeleteCloudBaseRunServerVersionRequest {
 
 declare interface DeleteCloudBaseRunServerVersionResponse {
   /** 返回结果，succ为成功 */
-  Result?: string | null;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1999,7 +1999,7 @@ declare interface DescribeCloudBaseRunResourceForExtendResponse {
   /** 地域信息 */
   Region?: string;
   /** 子网信息 */
-  SubnetIds?: CloudBaseRunVpcSubnet[] | null;
+  SubnetIds?: CloudBaseRunVpcSubnet[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

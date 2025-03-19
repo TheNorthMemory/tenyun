@@ -154,6 +154,66 @@ declare interface AuditLogFilter {
   ExecTime?: number;
 }
 
+/** redis自治事件任务详情 */
+declare interface AutonomyActionVo {
+  /** 自治任务ID。 */
+  ActionId?: number;
+  /** 自治事件ID。 */
+  EventId?: number;
+  /** 类型：支持RedisAutoScaleUp */
+  Type?: string;
+  /** 自治任务触发时间。 */
+  TriggerTime?: string;
+  /** 自治任务创建时间。 */
+  CreateTime?: string;
+  /** 自治任务更新时间 */
+  UpdateTime?: string;
+  /** 自治任务完成时间。 */
+  FinishTime?: string;
+  /** 剩余时间，单位：秒。 */
+  ExpireTime?: number;
+  /** 触发原因。 */
+  Reason?: string;
+  /** 自治任务状态：支持 RUNNING，FINISHED，TERMINATED，CANCELLED */
+  Status?: string;
+}
+
+/** 自治事件详情 */
+declare interface AutonomyEventVo {
+  /** 自治事件ID。 */
+  EventId?: number;
+  /** 自治事件类型：支持RunningAutoRecovery，RedisAutoScale */
+  Type?: string;
+  /** 自治事件状态：支持 RUNNING，FINISHED，TERMINATED */
+  Status?: string;
+  /** 触发原因。 */
+  Reason?: string;
+  /** 自治任务触发时间。 */
+  TriggerTime?: number;
+  /** 自治任务最后触发时间。 */
+  LastTriggerTime?: number;
+  /** 自治任务创建时间。 */
+  CreateTime?: number;
+  /** 自治任务更新时间。 */
+  UpdateTime?: number;
+  /** 自治任务完成时间；非结束状态的时候，该值无意义。 */
+  FinishTime?: number;
+}
+
+/** 自治用户配置详情 */
+declare interface AutonomyUserProfileInfo {
+  /** 是否开启自治。 */
+  Enabled?: boolean;
+  /** 用户Uin。 */
+  Uin?: string;
+  /** 内存上限。 */
+  MemoryUpperLimit?: number;
+  /** 指标阈值规则。 */
+  ThresholdRule?: MetricThreshold;
+  /** 自治功能类型。 */
+  EnabledItems?: string[];
+}
+
 /** 联系人contact描述。 */
 declare interface ContactItem {
   /** 联系人id。 */
@@ -428,6 +488,16 @@ declare interface MailConfiguration {
   ContactPerson?: number[];
   /** 联系组id, 联系人/联系组不能都为空。 */
   ContactGroup?: number[];
+}
+
+/** 自治指标阈值 */
+declare interface MetricThreshold {
+  /** 指标。 */
+  Metric?: string;
+  /** 阈值。 */
+  Threshold?: number;
+  /** 时间间隔。 */
+  Duration?: number;
 }
 
 /** Mongodb索引项 */
@@ -1002,6 +1072,20 @@ declare interface AddUserContactResponse {
   RequestId?: string;
 }
 
+declare interface CancelDBAutonomyActionRequest {
+  /** 自治任务ID。 */
+  ActionId: number;
+  /** 实列ID。 */
+  InstanceId: string;
+  /** 服务产品类型，支持值包括： "redis" - 云数据库 Redis。 */
+  Product: string;
+}
+
+declare interface CancelDBAutonomyActionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CancelKillTaskRequest {
   /** 实例ID。 */
   InstanceId: string;
@@ -1012,6 +1096,22 @@ declare interface CancelKillTaskRequest {
 declare interface CancelKillTaskResponse {
   /** kill会话任务终止成功返回1。 */
   Status: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CancelRedisBigKeyAnalysisTasksRequest {
+  /** 自治任务ID。 */
+  AsyncRequestIds: number[];
+  /** 实列ID。 */
+  InstanceId: string;
+  /** 服务产品类型，支持值包括： "redis" - 云数据库 Redis。 */
+  Product: string;
+}
+
+declare interface CancelRedisBigKeyAnalysisTasksResponse {
+  /** 终止大Key任务结果；0-成功。 */
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1240,6 +1340,22 @@ declare interface CreateSqlFilterResponse {
   RequestId?: string;
 }
 
+declare interface CreateUserAutonomyProfileRequest {
+  /** 配置类型，为需要配置的功能枚举值，目前包含一下枚举值：AutonomyGlobal（自治功能全局配置）、RedisAutoScaleUp（Redis自治扩容配置） */
+  ProfileType: string;
+  /** 实列ID。 */
+  InstanceId: string;
+  /** 服务产品类型，支持值包括： "redis" - 云数据库 Redis。 */
+  Product: string;
+  /** 自治功能相关配置，标准JSON字符串格式。 */
+  ProfileInfo?: string;
+}
+
+declare interface CreateUserAutonomyProfileResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAuditLogFileRequest {
   /** 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB。 */
   Product: string;
@@ -1412,6 +1528,48 @@ declare interface DescribeAuditLogFilesResponse {
   TotalCount?: number | null;
   /** 审计日志文件详情。 */
   Items?: AuditLogFile[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDBAutonomyActionsRequest {
+  /** 事件ID。 */
+  EventId: number;
+  /** 实列ID。 */
+  InstanceId: string;
+  /** 服务产品类型，支持值包括： "redis" - 云数据库 Redis。 */
+  Product: string;
+}
+
+declare interface DescribeDBAutonomyActionsResponse {
+  /** 自治事件总数。 */
+  TotalCount?: number;
+  /** 自治事件列表。 */
+  Actions?: AutonomyActionVo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDBAutonomyEventsRequest {
+  /** 服务产品类型，支持值包括： "redis" - 云数据库 Redis。 */
+  Product: string;
+  /** 实列ID。 */
+  InstanceId: string;
+  /** 开始时间。 */
+  StartTime: string;
+  /** 结束时间。 */
+  EndTime: string;
+  /** 分页参数，默认值为0。 */
+  Offset?: number;
+  /** 分页参数，默认值为20。 */
+  Limit?: number;
+}
+
+declare interface DescribeDBAutonomyEventsResponse {
+  /** 自治事件列表总数。 */
+  TotalCount?: number;
+  /** 自治事件列表。 */
+  Events?: AutonomyEventVo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2164,6 +2322,26 @@ declare interface DescribeTopSpaceTablesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUserAutonomyProfileRequest {
+  /** 配置类型，为需要配置的功能枚举值，目前包含一下枚举值：AutonomyGlobal（自治功能全局配置）、RedisAutoScaleUp（Redis自治扩容配置）。 */
+  ProfileType: string;
+  /** 实列ID。 */
+  InstanceId: string;
+  /** 服务产品类型，支持值包括： "redis" - 云数据库 Redis。 */
+  Product: string;
+}
+
+declare interface DescribeUserAutonomyProfileResponse {
+  /** 配置类型，为需要配置的功能枚举值，目前包含一下枚举值：AutonomyGlobal（自治功能全局配置）、RedisAutoScaleUp（Redis自治扩容配置）。 */
+  ProfileType?: string;
+  /** 更新时间。 */
+  UpdateTime?: string;
+  /** 自治用户配置。 */
+  ProfileInfo?: AutonomyUserProfileInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUserSqlAdviceRequest {
   /** 实例ID。 */
   InstanceId: string;
@@ -2300,6 +2478,22 @@ declare interface ModifySqlFiltersRequest {
 }
 
 declare interface ModifySqlFiltersResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyUserAutonomyProfileRequest {
+  /** 配置类型，为需要配置的功能枚举值，目前包含一下枚举值：AutonomyGlobal（自治功能全局配置）、RedisAutoScaleUp（Redis自治扩容配置） */
+  ProfileType: string;
+  /** 实列ID。 */
+  InstanceId: string;
+  /** 服务产品类型，支持值包括： "redis" - 云数据库 Redis。 */
+  Product: string;
+  /** 自治功能相关配置，标准JSON字符串格式。 */
+  NewProfileInfo?: string;
+}
+
+declare interface ModifyUserAutonomyProfileResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3445,8 +3639,12 @@ declare interface Dbbrain {
   (): Versions;
   /** 添加联系人信息 {@link AddUserContactRequest} {@link AddUserContactResponse} */
   AddUserContact(data: AddUserContactRequest, config?: AxiosRequestConfig): AxiosPromise<AddUserContactResponse>;
+  /** 终止自治任务（单次） {@link CancelDBAutonomyActionRequest} {@link CancelDBAutonomyActionResponse} */
+  CancelDBAutonomyAction(data: CancelDBAutonomyActionRequest, config?: AxiosRequestConfig): AxiosPromise<CancelDBAutonomyActionResponse>;
   /** 终止中断会话任务 {@link CancelKillTaskRequest} {@link CancelKillTaskResponse} */
   CancelKillTask(data: CancelKillTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelKillTaskResponse>;
+  /** 终止大Key任务 {@link CancelRedisBigKeyAnalysisTasksRequest} {@link CancelRedisBigKeyAnalysisTasksResponse} */
+  CancelRedisBigKeyAnalysisTasks(data: CancelRedisBigKeyAnalysisTasksRequest, config?: AxiosRequestConfig): AxiosPromise<CancelRedisBigKeyAnalysisTasksResponse>;
   /** 关闭数据审计 {@link CloseAuditServiceRequest} {@link CloseAuditServiceResponse} */
   CloseAuditService(data: CloseAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CloseAuditServiceResponse>;
   /** 创建审计日志文件 {@link CreateAuditLogFileRequest} {@link CreateAuditLogFileResponse} */
@@ -3469,6 +3667,8 @@ declare interface Dbbrain {
   CreateSecurityAuditLogExportTask(data: CreateSecurityAuditLogExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityAuditLogExportTaskResponse>;
   /** 创建实例SQL限流任务 {@link CreateSqlFilterRequest} {@link CreateSqlFilterResponse} */
   CreateSqlFilter(data: CreateSqlFilterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSqlFilterResponse>;
+  /** 开启自治功能 {@link CreateUserAutonomyProfileRequest} {@link CreateUserAutonomyProfileResponse} */
+  CreateUserAutonomyProfile(data: CreateUserAutonomyProfileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserAutonomyProfileResponse>;
   /** 删除审计日志文件 {@link DeleteAuditLogFileRequest} {@link DeleteAuditLogFileResponse} */
   DeleteAuditLogFile(data: DeleteAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditLogFileResponse>;
   /** 删除健康报告生成任务 {@link DeleteDBDiagReportTasksRequest} {@link DeleteDBDiagReportTasksResponse} */
@@ -3489,6 +3689,10 @@ declare interface Dbbrain {
   DescribeAuditInstanceList(data: DescribeAuditInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditInstanceListResponse>;
   /** 查询审计日志文件 {@link DescribeAuditLogFilesRequest} {@link DescribeAuditLogFilesResponse} */
   DescribeAuditLogFiles(data: DescribeAuditLogFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogFilesResponse>;
+  /** 查询自治事件任务列表 {@link DescribeDBAutonomyActionsRequest} {@link DescribeDBAutonomyActionsResponse} */
+  DescribeDBAutonomyActions(data: DescribeDBAutonomyActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBAutonomyActionsResponse>;
+  /** 查询自治事件列表 {@link DescribeDBAutonomyEventsRequest} {@link DescribeDBAutonomyEventsResponse} */
+  DescribeDBAutonomyEvents(data: DescribeDBAutonomyEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBAutonomyEventsResponse>;
   /** 获取诊断事件详情 {@link DescribeDBDiagEventRequest} {@link DescribeDBDiagEventResponse} */
   DescribeDBDiagEvent(data: DescribeDBDiagEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBDiagEventResponse>;
   /** 获取诊断事件列表 {@link DescribeDBDiagEventsRequest} {@link DescribeDBDiagEventsResponse} */
@@ -3551,6 +3755,8 @@ declare interface Dbbrain {
   DescribeTopSpaceTableTimeSeries(data: DescribeTopSpaceTableTimeSeriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopSpaceTableTimeSeriesResponse>;
   /** 获取Top表的空间统计信息 {@link DescribeTopSpaceTablesRequest} {@link DescribeTopSpaceTablesResponse} */
   DescribeTopSpaceTables(data: DescribeTopSpaceTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopSpaceTablesResponse>;
+  /** 查询自治功能配置 {@link DescribeUserAutonomyProfileRequest} {@link DescribeUserAutonomyProfileResponse} */
+  DescribeUserAutonomyProfile(data: DescribeUserAutonomyProfileRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserAutonomyProfileResponse>;
   /** 获取SQL优化建议 {@link DescribeUserSqlAdviceRequest} {@link DescribeUserSqlAdviceResponse} */
   DescribeUserSqlAdvice(data: DescribeUserSqlAdviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserSqlAdviceResponse>;
   /** 中断MySql会话线程 {@link KillMySqlThreadsRequest} {@link KillMySqlThreadsResponse} */
@@ -3563,6 +3769,8 @@ declare interface Dbbrain {
   ModifyDiagDBInstanceConf(data: ModifyDiagDBInstanceConfRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDiagDBInstanceConfResponse>;
   /** 更改实例限流任务状态 {@link ModifySqlFiltersRequest} {@link ModifySqlFiltersResponse} */
   ModifySqlFilters(data: ModifySqlFiltersRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySqlFiltersResponse>;
+  /** 修改自治功能（实例级） {@link ModifyUserAutonomyProfileRequest} {@link ModifyUserAutonomyProfileResponse} */
+  ModifyUserAutonomyProfile(data: ModifyUserAutonomyProfileRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserAutonomyProfileResponse>;
   /** 开通数据库审计 {@link OpenAuditServiceRequest} {@link OpenAuditServiceResponse} */
   OpenAuditService(data: OpenAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenAuditServiceResponse>;
   /** 更新Agent状态 {@link UpdateAgentSwitchRequest} {@link UpdateAgentSwitchResponse} */

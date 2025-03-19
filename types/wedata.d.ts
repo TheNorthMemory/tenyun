@@ -2656,6 +2656,8 @@ declare interface MakePlanOpsDto {
   ScheduleTimeZone?: string;
   /** 执行应用参数 */
   AppParam?: string;
+  /** 补录计划时间范围的类型： DATA_TIME：实例数据时间；SCHEDULE_TIME 计划调度时间 */
+  TimeType?: string;
 }
 
 /** 补录计划集合 */
@@ -2740,6 +2742,8 @@ declare interface ManualTriggerRecordOpsDto {
   CreateTime?: string | null;
   /** 数据实例时间的时区 */
   ScheduleTimeZone?: string | null;
+  /** 时间类型，DATA_TIME：数据时间、SCHEDULE_TIME：计划调度时间, 为空时会被当成DATA_TIME处理 */
+  TimeType?: string;
 }
 
 /** 离线实例 */
@@ -10100,6 +10104,10 @@ declare interface InstanceApiOpsRequest {
   OnlyRerun?: boolean;
   /** 时区 */
   ScheduleTimeZone?: string;
+  /** 计划调度时间 */
+  ScheduleTimeFrom?: string;
+  /** 计划调度时间 */
+  ScheduleTimeTo?: string;
 }
 
 declare interface JudgeResourceFileRequest {
@@ -11434,6 +11442,8 @@ declare interface TriggerManualTasksRequest {
   ExtraParams?: string;
   /** 实例时间的时区 */
   ScheduleTimeZone?: string;
+  /** 时间类型，DATA_TIME：数据时间、SCHEDULE_TIME：计划调度时间, 为空时会被当成DATA_TIME处理 */
+  TimeType?: string;
 }
 
 declare interface TriggerManualTasksResponse {

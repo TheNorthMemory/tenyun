@@ -3511,7 +3511,7 @@ declare interface SaveDocRequest {
   CosHash: string;
   /** 文件大小 */
   Size: string;
-  /** 标签适用范围，默认填0即可 */
+  /** 标签适用范围，需要传参为1 */
   AttrRange?: number;
   /** 来源(0 源文件导入 1 网页导入) */
   Source?: number;

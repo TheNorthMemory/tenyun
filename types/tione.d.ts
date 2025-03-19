@@ -1300,6 +1300,10 @@ declare interface ServiceInfo {
   ServiceEIP?: ServiceEIP | null;
   /** 服务端口，默认为8501 */
   ServicePort?: number | null;
+  /** 服务的优雅退出时限。单位为秒，默认值为30，最小为1 */
+  TerminationGracePeriodSeconds?: number;
+  /** 服务实例停止前执行的命令，执行完毕或执行时间超过优雅退出时限后实例结束 */
+  PreStopCommand?: string[];
 }
 
 /** 服务的限流限速等配置 */
@@ -1785,6 +1789,10 @@ declare interface CreateModelServiceRequest {
   DeployType?: string;
   /** 单副本下的实例数，仅在部署类型为DIST时生效，默认1 */
   InstancePerReplicas?: number;
+  /** 30 */
+  TerminationGracePeriodSeconds?: number;
+  /** ["sleep","60"] */
+  PreStopCommand?: string[];
 }
 
 declare interface CreateModelServiceResponse {
@@ -2453,6 +2461,10 @@ declare interface ModifyModelServiceRequest {
   ServicePort?: number;
   /** 单副本下的实例数，仅在部署类型为DIST时生效，默认1 */
   InstancePerReplicas?: number;
+  /** 30 */
+  TerminationGracePeriodSeconds?: number;
+  /** ["sleep","60"] */
+  PreStopCommand?: string[];
 }
 
 declare interface ModifyModelServiceResponse {

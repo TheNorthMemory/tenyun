@@ -77,9 +77,9 @@ declare interface IdentityPolicy {
   /** CAM预设策略名称。PolicyType 为预设策略时有效且必选 */
   PolicyName?: string;
   /** 策略类型。取值 1-自定义策略 2-预设策略；默认值2 */
-  PolicyType?: number | null;
+  PolicyType?: number;
   /** 自定义策略内容，遵循CAM策略语法。PolicyType 为自定义策略时有效且必选 */
-  PolicyDocument?: string | null;
+  PolicyDocument?: string;
 }
 
 /** 用户加入的用户组 */
@@ -99,53 +99,53 @@ declare interface JoinedGroups {
 /** 查询目标关联的SCP策略列表 */
 declare interface ListPoliciesForTarget {
   /** 策略Id */
-  StrategyId: number;
+  StrategyId?: number;
   /** 策略名称 */
-  StrategyName: string;
+  StrategyName?: string;
   /** 备注信息 */
-  Remark: string | null;
+  Remark?: string;
   /** 关联的账号或节点 */
-  Uin: number;
+  Uin?: number;
   /** 关联类型 1-节点 2-用户 */
-  Type: number;
+  Type?: number;
   /** 策略创建时间 */
-  AddTime: string | null;
+  AddTime?: string;
   /** 策略更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string;
   /** 部门名称 */
-  Name: string | null;
+  Name?: string;
   /** 策略绑定时间 */
-  AttachTime: string | null;
+  AttachTime?: string;
 }
 
 /** 企业组织策略列表 */
 declare interface ListPolicyNode {
   /** 策略创建时间 */
-  AddTime: string | null;
+  AddTime?: string;
   /** 策略绑定次数 */
-  AttachedTimes: number | null;
+  AttachedTimes?: number;
   /** 策略描述信息 */
-  Description: string | null;
+  Description?: string;
   /** 策略名称 */
-  PolicyName: string;
+  PolicyName?: string;
   /** 策略Id */
-  PolicyId: number;
+  PolicyId?: number;
   /** 策略更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string;
   /** 策略类型 1-自定义 2-预设 */
-  Type: number;
+  Type?: number;
 }
 
 /** 查询某个指定SCP策略关联的目标列表 */
 declare interface ListTargetsForPolicyNode {
   /** scp账号uin或节点Id */
-  Uin: number;
+  Uin?: number;
   /** 关联类型 1-节点关联 2-用户关联 */
-  RelatedType: number;
+  RelatedType?: number;
   /** 账号或者节点名称 */
-  Name: string | null;
+  Name?: string;
   /** 绑定时间 */
-  AddTime: string;
+  AddTime?: string;
 }
 
 /** 我的共享单元列表详情 */
@@ -161,15 +161,15 @@ declare interface ManagerShareUnit {
   /** 共享单元地域。 */
   Area?: string;
   /** 描述。 */
-  Description?: string | null;
+  Description?: string;
   /** 创建时间。 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 共享单元资源数。 */
-  ShareResourceNum?: number | null;
+  ShareResourceNum?: number;
   /** 共享单元成员数。 */
-  ShareMemberNum?: number | null;
+  ShareMemberNum?: number;
   /** 共享范围。取值：1-仅允许集团组织内共享 2-允许共享给任意账号 */
-  ShareScope?: number | null;
+  ShareScope?: number;
 }
 
 /** 成员管理身份 */
@@ -191,9 +191,9 @@ declare interface MemberMainInfo {
 /** 部门主要信息 */
 declare interface NodeMainInfo {
   /** 部门ID */
-  NodeId: number | null;
+  NodeId?: number;
   /** 部门名称 */
-  NodeName: string | null;
+  NodeName?: string;
 }
 
 /** 不允许删除的原因。 */
@@ -221,13 +221,13 @@ declare interface NotAllowReason {
 /** 按月获取组织财务信息 */
 declare interface OrgFinancialByMonth {
   /** 记录ID。 */
-  Id: number | null;
+  Id?: number;
   /** 月份，格式：yyyy-mm，示例：2021-01。 */
-  Month: string | null;
+  Month?: string;
   /** 消耗金额，单元：元。 */
-  TotalCost: number | null;
+  TotalCost?: number;
   /** 比上月增长率%。正数增长，负数下降，空值无法统计。 */
-  GrowthRate?: string | null;
+  GrowthRate?: string;
 }
 
 /** 组织身份 */
@@ -395,13 +395,13 @@ declare interface OrgPermission {
 /** 组织产品财务信息 */
 declare interface OrgProductFinancial {
   /** 产品Code。 */
-  ProductName: string | null;
+  ProductName?: string;
   /** 产品名。 */
-  ProductCode: string | null;
+  ProductCode?: string;
   /** 产品消耗，单位：元。 */
-  TotalCost: number | null;
+  TotalCost?: number;
   /** 占比%。 */
-  Ratio?: string | null;
+  Ratio?: string;
 }
 
 /** 集团服务设置 */
@@ -683,7 +683,7 @@ declare interface ShareResource {
   /** 共享资源ID。 */
   ResourceId?: string;
   /** 产品资源ID。 */
-  ProductResourceId?: string | null;
+  ProductResourceId?: string;
 }
 
 /** 共享单元成员 */
@@ -691,7 +691,7 @@ declare interface ShareUnitMember {
   /** 共享成员Uin。 */
   ShareMemberUin?: number;
   /** 创建时间。 */
-  CreateTime?: string | null;
+  CreateTime?: string;
 }
 
 /** 共享单元资源 */
@@ -701,23 +701,23 @@ declare interface ShareUnitResource {
   /** 共享资源类型。 */
   Type?: string;
   /** 创建时间。 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 产品资源ID。 */
   ProductResourceId?: string;
   /** 共享单元成员数。 */
-  SharedMemberNum?: number | null;
+  SharedMemberNum?: number;
   /** 使用中共享单元成员数。 */
-  SharedMemberUseNum?: number | null;
+  SharedMemberUseNum?: number;
   /** 共享管理员OwnerUin。 */
-  ShareManagerUin?: number | null;
+  ShareManagerUin?: number;
 }
 
 /** 标签键值对 */
 declare interface Tag {
   /** 标签键 */
-  TagKey: string | null;
+  TagKey: string;
   /** 标签值 */
-  TagValue: string | null;
+  TagValue: string;
 }
 
 /** 标签合规信息 */
@@ -935,7 +935,7 @@ declare interface AddOrganizationMemberEmailRequest {
 
 declare interface AddOrganizationMemberEmailResponse {
   /** 绑定Id */
-  BindId?: number | null;
+  BindId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1943,17 +1943,17 @@ declare interface DescribePolicyResponse {
   /** 策略Id。 */
   PolicyId?: number;
   /** 策略名称。 */
-  PolicyName?: string | null;
+  PolicyName?: string;
   /** 策略类型。1-自定义 2-预设策略 */
   Type?: number;
   /** 策略描述。 */
-  Description?: string | null;
+  Description?: string;
   /** 策略文档。 */
-  PolicyDocument?: string | null;
+  PolicyDocument?: string;
   /** 策略更新时间。 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 策略创建时间。 */
-  AddTime?: string | null;
+  AddTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -951,7 +951,7 @@ declare interface DescribeDomainBaseInfoResponse {
   /** 域名信息 */
   DomainInfo?: DomainBaseInfo;
   /** 用户Uin */
-  Uin?: string | null;
+  Uin?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

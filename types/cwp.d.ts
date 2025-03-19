@@ -2692,6 +2692,10 @@ declare interface HostTagInfo {
   InstanceID?: string;
   /** 主机类型 */
   MachineType?: string;
+  /** 可用区名称 */
+  RegionName?: string;
+  /** 可用区ID */
+  RegionId?: number;
 }
 
 /** 忽略的基线检测项信息 */
@@ -4060,6 +4064,8 @@ declare interface RansomDefenseRollbackTask {
   RegionInfo?: RegionInfo;
   /** 主机示例ID */
   InstanceId?: string;
+  /** 主机类型 */
+  MachineType?: string;
 }
 
 /** 主机列表查询接口相应数据HostList的TagList节点 */
@@ -9127,7 +9133,7 @@ declare interface DescribeImportMachineInfoRequest {
   ImportType: string;
   /** 该参数已作废. */
   IsQueryProMachine?: boolean;
-  /** 过滤条件：Version - String 是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版 | Flagship：旗舰版 | ProtectedMachines：专业版+旗舰版） | BASIC_PROPOST_GENERAL_DISCOUNT：普惠版+专业版按量计费+基础版主机 | UnFlagship：专业版预付费+专业版后付费+基础版+普惠版 */
+  /** 过滤条件：Version - String 是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版 | Flagship：旗舰版 | ProtectedMachines：专业版+旗舰版） | BASIC_PROPOST_GENERAL_DISCOUNT：轻量版+专业版按量计费+基础版主机 | UnFlagship：专业版预付费+专业版后付费+基础版+轻量版 */
   Filters?: Filters[];
 }
 
@@ -9284,7 +9290,7 @@ declare interface DescribeLicenseGeneralResponse {
   FlagshipVersionLicenseCnt?: number;
   /** 专业版总授权数(有效订单) */
   ProVersionLicenseCnt?: number;
-  /** 普惠版总授权数(有效订单的授权数) */
+  /** 轻量版总授权数(有效订单的授权数) */
   CwpVersionLicenseCnt?: number;
   /** 可用惠普版授权数 */
   AvailableLHLicenseCnt?: number;
@@ -9344,7 +9350,7 @@ declare interface DescribeLicenseWhiteConfigResponse {
   FlagShip?: VersionWhiteConfig;
   /** 专业版 配置信息 */
   Professional?: VersionWhiteConfig;
-  /** 普惠版 配置信息 */
+  /** 轻量版 配置信息 */
   PrattWhitney?: VersionWhiteConfig;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -9644,7 +9650,7 @@ declare interface DescribeMachineGeneralResponse {
   DeadlineMachineCnt?: number;
   /** 未防护机器数 */
   NotProtectMachineCnt?: number;
-  /** 已防护普惠版机器数（Lighthouse机器） */
+  /** 已防护轻量机器数（Lighthouse机器） */
   LHGeneralDiscountCnt?: number;
   /** 比较昨日新增的主机数 */
   CompareYesterdayMachineCnt?: number;
@@ -9702,7 +9708,7 @@ declare interface DescribeMachineInfoResponse {
   ProVersionDeadline?: string;
   /** 是否有资产扫描记录，0无，1有 */
   HasAssetScan?: number;
-  /** 防护版本：BASIC_VERSION 基础版，PRO_VERSION 专业版，Flagship 旗舰版，GENERAL_DISCOUNT 普惠版 */
+  /** 防护版本：BASIC_VERSION 基础版，PRO_VERSION 专业版，Flagship 旗舰版，GENERAL_DISCOUNT 轻量版 */
   ProtectType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -10938,7 +10944,7 @@ declare interface DescribeScanVulSettingResponse {
   EndTime?: string;
   /** 一键扫描超时时长，如：1800秒（s） */
   ClickTimeout?: number;
-  /** 为空默认扫描全部专业版、旗舰版、普惠版主机，不为空只扫描选中主机 */
+  /** 为空默认扫描全部专业版、旗舰版、轻量版主机，不为空只扫描选中主机 */
   Uuids?: string[];
   /** 0版本比对,2版本比对+poc */
   ScanMethod?: number;
@@ -11456,7 +11462,7 @@ declare interface DescribeVersionStatisticsResponse {
   ProVersionNum?: number;
   /** 旗舰版数量 */
   UltimateVersionNum?: number;
-  /** 普惠版数量 */
+  /** 轻量版数量 */
   GeneralVersionNum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -14463,7 +14469,7 @@ declare interface ScanVulSettingRequest {
   EndTime?: string;
   /** 是否开启扫描 1开启 0不开启 */
   EnableScan?: number;
-  /** 为空默认扫描全部专业版、旗舰版、普惠版主机，不为空只扫描选中主机 */
+  /** 为空默认扫描全部专业版、旗舰版、轻量版主机，不为空只扫描选中主机 */
   Uuids?: string[];
   /** 0版本比对，2版本比对+poc */
   ScanMethod?: number;

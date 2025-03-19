@@ -19,19 +19,19 @@ declare interface AdvancedObjectsItem {
 /** 检查步骤 */
 declare interface CheckStep {
   /** 步骤编号 */
-  StepNo?: number | null;
+  StepNo?: number;
   /** 步骤Id， 如：ConnectDBCheck、VersionCheck、SrcPrivilegeCheck等，具体校验项和源目标实例相关 */
-  StepId?: string | null;
+  StepId?: string;
   /** 步骤名称 */
-  StepName?: string | null;
+  StepName?: string;
   /** 此检查步骤的结果，pass(校验通过)、failed(校验失败)、notStarted(校验还未开始进行)、blocked(检验阻塞)、warning(校验有告警，但仍通过) */
-  StepStatus?: string | null;
+  StepStatus?: string;
   /** 此检查步骤的错误消息 */
-  StepMessage?: string | null;
+  StepMessage?: string;
   /** 每个检查步骤里的具体检查项 */
-  DetailCheckItems?: DetailCheckItem[] | null;
+  DetailCheckItems?: DetailCheckItem[];
   /** 是否已跳过 */
-  HasSkipped?: boolean | null;
+  HasSkipped?: boolean;
 }
 
 /** 校验任务运行详情 */
@@ -55,33 +55,33 @@ declare interface Column {
 /** 一致性校验摘要信息 */
 declare interface CompareAbstractInfo {
   /** 校验配置参数 */
-  Options?: CompareOptions | null;
+  Options?: CompareOptions;
   /** 一致性校验对比对象 */
-  Objects?: CompareObject | null;
+  Objects?: CompareObject;
   /** 对比结论: same,different */
-  Conclusion?: string | null;
+  Conclusion?: string;
   /** 任务状态: success,failed */
-  Status?: string | null;
+  Status?: string;
   /** 总的表数量 */
-  TotalTables?: number | null;
+  TotalTables?: number;
   /** 已校验的表数量 */
-  CheckedTables?: number | null;
+  CheckedTables?: number;
   /** 不一致的表数量 */
-  DifferentTables?: number | null;
+  DifferentTables?: number;
   /** 跳过校验的表数量 */
-  SkippedTables?: number | null;
+  SkippedTables?: number;
   /** 预估表总数 */
-  NearlyTableCount?: number | null;
+  NearlyTableCount?: number;
   /** 不一致的数据行数量 */
-  DifferentRows?: number | null;
+  DifferentRows?: number;
   /** 源库行数，当对比类型为**行数对比**时此项有意义 */
-  SrcSampleRows?: number | null;
+  SrcSampleRows?: number;
   /** 目标库行数，当对比类型为**行数对比**时此项有意义 */
-  DstSampleRows?: number | null;
+  DstSampleRows?: number;
   /** 开始时间 */
-  StartedAt?: string | null;
+  StartedAt?: string;
   /** 结束时间 */
-  FinishedAt?: string | null;
+  FinishedAt?: string;
 }
 
 /** 列选项 */
@@ -93,15 +93,15 @@ declare interface CompareColumnItem {
 /** 一致性校验详细信息 */
 declare interface CompareDetailInfo {
   /** 数据不一致的表详情 */
-  Difference?: DifferenceDetail | null;
+  Difference?: DifferenceDetail;
   /** 跳过校验的表详情 */
-  Skipped?: SkippedDetail | null;
+  Skipped?: SkippedDetail;
   /** 数据库不一致的详情，mongodb业务用到 */
-  DifferenceAdvancedObjects?: DifferenceAdvancedObjectsDetail | null;
+  DifferenceAdvancedObjects?: DifferenceAdvancedObjectsDetail;
   /** 数据不一致的详情，mongodb业务用到 */
-  DifferenceData?: DifferenceDataDetail | null;
+  DifferenceData?: DifferenceDataDetail;
   /** 数据行不一致的详情，mongodb业务用到 */
-  DifferenceRow?: DifferenceRowDetail | null;
+  DifferenceRow?: DifferenceRowDetail;
 }
 
 /** 一致性对比对象配置 */
@@ -111,7 +111,7 @@ declare interface CompareObject {
   /** 对象列表 */
   ObjectItems?: CompareObjectItem[];
   /** 高级对象类型，目前只支持mongodb链路。如index(索引),shardkey(片键),schema(库表) */
-  AdvancedObjects?: string[];
+  AdvancedObjects?: string[] | null;
 }
 
 /** 一致性校验库表对象 */
@@ -163,33 +163,33 @@ declare interface CompareTaskInfo {
 /** 一致性校验对象信息 */
 declare interface CompareTaskItem {
   /** 任务id */
-  JobId?: string | null;
+  JobId?: string;
   /** 对比任务 Id */
-  CompareTaskId?: string | null;
+  CompareTaskId?: string;
   /** 对比任务名称 */
-  TaskName?: string | null;
+  TaskName?: string;
   /** 对比任务状态, 可能的值：created - 创建完成；readyRun - 等待运行；running - 运行中；success - 成功；stopping - 结束中；failed - 失败；canceled - 已终止 */
-  Status?: string | null;
+  Status?: string;
   /** 对比任务配置 */
-  Config?: CompareObject | null;
+  Config?: CompareObject;
   /** 对比任务校验详情 */
-  CheckProcess?: ProcessProgress | null;
+  CheckProcess?: ProcessProgress;
   /** 对比任务运行详情 */
-  CompareProcess?: ProcessProgress | null;
+  CompareProcess?: ProcessProgress;
   /** 对比结果, 可能的值：same - 一致；different - 不一致；skipAll - 跳过 */
-  Conclusion?: string | null;
+  Conclusion?: string;
   /** 任务创建时间 */
-  CreatedAt?: string | null;
+  CreatedAt?: string;
   /** 任务启动时间 */
-  StartedAt?: string | null;
+  StartedAt?: string;
   /** 对比结束时间 */
-  FinishedAt?: string | null;
+  FinishedAt?: string;
   /** 对比类型，dataCheck(完整数据对比)、sampleDataCheck(抽样数据对比)、rowsCount(行数对比) */
-  Method?: string | null;
+  Method?: string;
   /** 对比配置信息 */
-  Options?: CompareOptions | null;
+  Options?: CompareOptions;
   /** 一致性校验提示信息 */
-  Message?: string | null;
+  Message?: string;
 }
 
 /** 用于一致性校验的视图配置 */
@@ -385,21 +385,21 @@ declare interface DdlOption {
 /** 每个检查步骤里的具体检查项 */
 declare interface DetailCheckItem {
   /** 检查项的名称，如：源实例权限检查 */
-  CheckItemName?: string | null;
+  CheckItemName?: string;
   /** 检查项详细内容 */
-  Description?: string | null;
+  Description?: string;
   /** pass(通过)，failed(失败), warning(校验有警告，但仍通过) */
-  CheckResult?: string | null;
+  CheckResult?: string;
   /** 检查项失败原因 */
-  FailureReason?: string | null;
+  FailureReason?: string;
   /** 解决方案 */
-  Solution?: string | null;
+  Solution?: string;
   /** 运行报错日志 */
-  ErrorLog?: string[] | null;
+  ErrorLog?: string[];
   /** 详细帮助的文档链接 */
-  HelpDoc?: string[] | null;
+  HelpDoc?: string[];
   /** 跳过风险文案 */
-  SkipInfo?: string | null;
+  SkipInfo?: string;
 }
 
 /** 数据库不一致的详情，mongodb业务用到 */
@@ -413,25 +413,25 @@ declare interface DifferenceAdvancedObjectsDetail {
 /** 数据不一致详情 */
 declare interface DifferenceData {
   /** 数据库名 */
-  Db?: string | null;
+  Db?: string;
   /** 集合 */
-  Table?: string | null;
+  Table?: string;
   /** 源端ID */
-  SrcChunk?: string | null;
+  SrcChunk?: string;
   /** 目标端ID */
-  DstChunk?: string | null;
+  DstChunk?: string;
   /** 源端值 */
-  SrcItem?: string | null;
+  SrcItem?: string;
   /** 目标端值 */
-  DstItem?: string | null;
+  DstItem?: string;
   /** 更新时间 */
-  UpdatedAt?: string | null;
+  UpdatedAt?: string;
 }
 
 /** mongodb数据不一致性详情 */
 declare interface DifferenceDataDetail {
   /** 总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** mongo数据不一致详细列表 */
   Items?: DifferenceData[] | null;
 }
@@ -439,39 +439,39 @@ declare interface DifferenceDataDetail {
 /** 数据不一致的表详情 */
 declare interface DifferenceDetail {
   /** 数据不一致的表数量 */
-  TotalCount: number | null;
+  TotalCount?: number;
   /** 校验不一致的表详情 */
-  Items: DifferenceItem[] | null;
+  Items?: DifferenceItem[] | null;
 }
 
 /** 校验不一致的表详情 */
 declare interface DifferenceItem {
   /** 数据库名 */
-  Db?: string | null;
+  Db?: string;
   /** 表名 */
-  Table?: string | null;
+  Table?: string;
   /** 分块号 */
-  Chunk?: number | null;
+  Chunk?: number;
   /** 源库数值 */
-  SrcItem?: string | null;
+  SrcItem?: string;
   /** 目标库数值 */
-  DstItem?: string | null;
+  DstItem?: string;
   /** 索引名称 */
-  IndexName?: string | null;
+  IndexName?: string;
   /** 索引下边界 */
-  LowerBoundary?: string | null;
+  LowerBoundary?: string;
   /** 索引上边界 */
-  UpperBoundary?: string | null;
+  UpperBoundary?: string;
   /** 对比消耗时间,单位为 ms */
-  CostTime?: number | null;
+  CostTime?: number;
   /** 完成时间 */
-  FinishedAt?: string | null;
+  FinishedAt?: string;
 }
 
 /** mongodb行数校验不一致性详情结果 */
 declare interface DifferenceRowDetail {
   /** 不一致总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 不一致列表 */
   Items?: RowsCountDifference[] | null;
 }
@@ -655,43 +655,43 @@ declare interface GroupInfo {
 /** 迁移任务列表 */
 declare interface JobItem {
   /** 数据迁移任务ID */
-  JobId?: string | null;
+  JobId?: string;
   /** 数据迁移任务名称 */
-  JobName?: string | null;
+  JobName?: string;
   /** 任务创建(提交)时间，格式为 yyyy-mm-dd hh:mm:ss */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 任务更新时间，格式为 yyyy-mm-dd hh:mm:ss */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 任务开始执行时间，格式为 yyyy-mm-dd hh:mm:ss */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 任务执行结束时间，格式为 yyyy-mm-dd hh:mm:ss */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 迁移任务错误信息 */
-  BriefMsg?: string | null;
+  BriefMsg?: string;
   /** 任务状态，取值为：creating(创建中)、created(创建完成)、checking(校验中)、checkPass(校验通过)、checkNotPass(校验不通过)、readyRun(准备运行)、running(任务运行)、readyComplete(准备完成)、success(任务成功)、failed(任务失败)、stopping(中止中)、completing(完成中)、pausing(暂停中)、manualPaused(已暂停) */
-  Status?: string | null;
+  Status?: string;
   /** 任务运行模式，值包括：immediate(立即运行)，timed(定时运行) */
-  RunMode?: string | null;
+  RunMode?: string;
   /** 期待启动时间，当RunMode取值为timed时，此值必填，形如：2022-07-11 16:20:49 */
-  ExpectRunTime?: string | null;
+  ExpectRunTime?: string;
   /** 任务操作信息 */
-  Action?: MigrateAction | null;
+  Action?: MigrateAction;
   /** 迁移执行过程信息 */
-  StepInfo?: MigrateDetailInfo | null;
+  StepInfo?: MigrateDetailInfo;
   /** 源实例信息 */
-  SrcInfo?: DBEndpointInfo | null;
+  SrcInfo?: DBEndpointInfo;
   /** 目标端信息 */
-  DstInfo?: DBEndpointInfo | null;
+  DstInfo?: DBEndpointInfo;
   /** 数据一致性校验结果 */
-  CompareTask?: CompareTaskInfo | null;
+  CompareTask?: CompareTaskInfo;
   /** 计费状态信息 */
-  TradeInfo?: TradeInfo | null;
+  TradeInfo?: TradeInfo;
   /** 标签信息 */
-  Tags?: TagItem[] | null;
+  Tags?: TagItem[];
   /** 自动重试时间段信息 */
-  AutoRetryTimeRangeMinutes?: number | null;
+  AutoRetryTimeRangeMinutes?: number;
   /** 全量导出可重入标识：enum::"yes"/"no"。yes表示当前任务可重入、no表示当前任务处于全量导出且不可重入阶段；如果在该值为no时重启任务导出流程不支持断点续传 */
-  DumperResumeCtrl?: string | null;
+  DumperResumeCtrl?: string;
 }
 
 /** 目标端为kakfa时添加的同步选项字段 */
@@ -929,31 +929,31 @@ declare interface RoleItem {
 /** mongodb行校验不一致详细信息 */
 declare interface RowsCountDifference {
   /** 数据库名 */
-  Db?: string | null;
+  Db?: string;
   /** 集合 */
-  Table?: string | null;
+  Table?: string;
   /** 源端行数 */
-  SrcCount?: number | null;
+  SrcCount?: number;
   /** 目标端行数 */
-  DstCount?: number | null;
+  DstCount?: number;
 }
 
 /** 跳过校验的表详情 */
 declare interface SkippedDetail {
   /** 跳过的表数量 */
-  TotalCount: number | null;
+  TotalCount?: number;
   /** 跳过校验的表详情 */
-  Items: SkippedItem[] | null;
+  Items?: SkippedItem[] | null;
 }
 
 /** 跳过校验的表详情 */
 declare interface SkippedItem {
   /** 数据库名 */
-  Db?: string | null;
+  Db?: string;
   /** 表名 */
-  Table?: string | null;
+  Table?: string;
   /** 未发起检查的原因 */
-  Reason?: string | null;
+  Reason?: string;
 }
 
 /** 步骤信息 */
@@ -1457,7 +1457,7 @@ declare interface CreateCompareTaskRequest {
 
 declare interface CreateCompareTaskResponse {
   /** 数据对比任务 ID，形如：dts-8yv4w2i1-cmp-37skmii9 */
-  CompareTaskId?: string | null;
+  CompareTaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1667,9 +1667,9 @@ declare interface DescribeCompareReportRequest {
 
 declare interface DescribeCompareReportResponse {
   /** 一致性校验摘要信息 */
-  Abstract?: CompareAbstractInfo | null;
+  Abstract?: CompareAbstractInfo;
   /** 一致性校验详细信息 */
-  Detail?: CompareDetailInfo | null;
+  Detail?: CompareDetailInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1689,9 +1689,9 @@ declare interface DescribeCompareTasksRequest {
 
 declare interface DescribeCompareTasksResponse {
   /** 数量 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 一致性校验列表 */
-  Items?: CompareTaskItem[] | null;
+  Items?: CompareTaskItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1753,13 +1753,13 @@ declare interface DescribeMigrationCheckJobRequest {
 
 declare interface DescribeMigrationCheckJobResponse {
   /** 校验任务执行状态，如：notStarted(未开始)、running(校验中)、failed(校验任务失败)、success(任务成功) */
-  Status: string | null;
+  Status?: string;
   /** 校验任务结果输出简要信息 */
-  BriefMsg: string | null;
+  BriefMsg?: string;
   /** 检查步骤 */
-  StepInfo: CheckStep[] | null;
+  StepInfo?: CheckStep[];
   /** 校验结果，如：checkPass(校验通过)、checkNotPass(校验未通过) */
-  CheckFlag: string;
+  CheckFlag?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1855,9 +1855,9 @@ declare interface DescribeMigrationJobsRequest {
 
 declare interface DescribeMigrationJobsResponse {
   /** 迁移任务数量 */
-  TotalCount: number | null;
+  TotalCount?: number;
   /** 迁移任务列表 */
-  JobList: JobItem[] | null;
+  JobList?: JobItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2756,7 +2756,7 @@ declare namespace V20180330 {
     /** 当实例为RDS实例时，填写为aliyun, 其他情况均填写others */
     Supplier?: string;
     /** 云联网ID，如：ccn-afp6kltc */
-    CcnId?: string | null;
+    CcnId?: string;
     /** 数据库版本，当实例为RDS实例时才有效，格式如：5.6或者5.7，默认为5.6 */
     EngineVersion?: string;
   }
@@ -3024,61 +3024,61 @@ declare namespace V20180330 {
 
   interface DescribeSubscribeConfResponse {
     /** 订阅实例ID */
-    SubscribeId: string;
+    SubscribeId?: string;
     /** 订阅实例名称 */
-    SubscribeName: string;
+    SubscribeName?: string;
     /** 订阅通道 */
-    ChannelId: string;
+    ChannelId?: string;
     /** 订阅数据库类型 */
-    Product: string;
+    Product?: string;
     /** 被订阅的实例 */
-    InstanceId: string;
+    InstanceId?: string;
     /** 被订阅的实例的状态，可能的值有running,offline,isolate */
-    InstanceStatus: string;
+    InstanceStatus?: string;
     /** 订阅实例状态，可能的值有unconfigure-未配置，configuring-配置中，configured-已配置 */
-    SubsStatus: string;
+    SubsStatus?: string;
     /** 订阅实例生命周期状态，可能的值有：normal-正常，isolating-隔离中，isolated-已隔离，offlining-下线中 */
-    Status: string;
+    Status?: string;
     /** 订阅实例创建时间 */
-    CreateTime: string;
+    CreateTime?: string;
     /** 订阅实例被隔离时间 */
-    IsolateTime: string;
+    IsolateTime?: string;
     /** 订阅实例到期时间 */
-    ExpireTime: string;
+    ExpireTime?: string;
     /** 订阅实例下线时间 */
-    OfflineTime: string;
+    OfflineTime?: string;
     /** 订阅实例消费时间起点。 */
-    ConsumeStartTime: string;
+    ConsumeStartTime?: string;
     /** 订阅实例计费类型，1-小时计费，0-包年包月 */
-    PayType: number;
+    PayType?: number;
     /** 订阅通道Vip */
-    Vip: string;
+    Vip?: string;
     /** 订阅通道Port */
-    Vport: number;
+    Vport?: number;
     /** 订阅通道所在VpcId */
-    UniqVpcId: string;
+    UniqVpcId?: string;
     /** 订阅通道所在SubnetId */
-    UniqSubnetId: string;
+    UniqSubnetId?: string;
     /** 当前SDK消费时间位点 */
-    SdkConsumedTime: string;
+    SdkConsumedTime?: string;
     /** 订阅SDK IP地址 */
-    SdkHost: string;
+    SdkHost?: string;
     /** 订阅对象类型0-全实例订阅，1-DDL数据订阅，2-DML结构订阅，3-DDL数据订阅+DML结构订阅 */
-    SubscribeObjectType: number;
+    SubscribeObjectType?: number;
     /** 订阅对象，当SubscribeObjectType 为0时，此字段为空数组 */
-    SubscribeObjects: SubscribeObject[];
+    SubscribeObjects?: SubscribeObject[];
     /** 修改时间 */
-    ModifyTime: string;
+    ModifyTime?: string;
     /** 地域 */
-    Region: string;
+    Region?: string;
     /** 订阅实例的标签 */
-    Tags: TagItem[] | null;
+    Tags?: TagItem[];
     /** 自动续费标识,0-不自动续费，1-自动续费 */
-    AutoRenewFlag: number | null;
+    AutoRenewFlag?: number;
     /** 数据订阅版本。老版订阅填txdts，kafka版填kafka */
-    SubscribeVersion: string;
+    SubscribeVersion?: string;
     /** 错误信息 */
-    Errors: SubsErr[] | null;
+    Errors?: SubsErr[] | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

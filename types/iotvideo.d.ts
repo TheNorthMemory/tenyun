@@ -644,6 +644,20 @@ declare interface CancelDeviceFirmwareTaskResponse {
   RequestId?: string;
 }
 
+declare interface ChangeP2PRouteRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** P2P线路 */
+  RouteId: number;
+}
+
+declare interface ChangeP2PRouteResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CheckForwardAuthRequest {
   /** 控制台Skey */
   Skey: string;
@@ -1928,6 +1942,20 @@ declare interface DescribeP2PInfoResponse {
   P2PInfo?: string;
   /** 上报时间 */
   ReportTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeP2PRouteRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+}
+
+declare interface DescribeP2PRouteResponse {
+  /** 当前p2p线路 */
+  RouteId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5921,6 +5949,8 @@ declare interface Iotvideo {
   CancelAIModelApplication(data: CancelAIModelApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<CancelAIModelApplicationResponse>;
   /** 取消设备升级任务 {@link CancelDeviceFirmwareTaskRequest} {@link CancelDeviceFirmwareTaskResponse} */
   CancelDeviceFirmwareTask(data: CancelDeviceFirmwareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelDeviceFirmwareTaskResponse>;
+  /** p2p线路切换 {@link ChangeP2PRouteRequest} {@link ChangeP2PRouteResponse} */
+  ChangeP2PRoute(data: ChangeP2PRouteRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeP2PRouteResponse>;
   /** 判断是否开启转发的权限 {@link CheckForwardAuthRequest} {@link CheckForwardAuthResponse} */
   CheckForwardAuth(data: CheckForwardAuthRequest, config?: AxiosRequestConfig): AxiosPromise<CheckForwardAuthResponse>;
   /** 设备远程控制 {@link ControlDeviceDataRequest} {@link ControlDeviceDataResponse} */
@@ -6045,6 +6075,8 @@ declare interface Iotvideo {
   DescribeModelDefinition(data: DescribeModelDefinitionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelDefinitionResponse>;
   /** 拉取设备p2p信息 {@link DescribeP2PInfoRequest} {@link DescribeP2PInfoResponse} */
   DescribeP2PInfo(data: DescribeP2PInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeP2PInfoResponse>;
+  /** 查询当前P2P线路 {@link DescribeP2PRouteRequest} {@link DescribeP2PRouteResponse} */
+  DescribeP2PRoute(data: DescribeP2PRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeP2PRouteResponse>;
   /** 查询套餐消耗记录详情 {@link DescribePackageConsumeTaskRequest} {@link DescribePackageConsumeTaskResponse} */
   DescribePackageConsumeTask(data: DescribePackageConsumeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackageConsumeTaskResponse>;
   /** 查询套餐消耗记录列表 {@link DescribePackageConsumeTasksRequest} {@link DescribePackageConsumeTasksResponse} */
