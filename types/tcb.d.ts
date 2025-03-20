@@ -109,7 +109,7 @@ declare interface CbrRepoInfo {
   /** 仓库语言 */
   RepoLanguage?: string;
   /** 分支名称 */
-  Branch?: string | null;
+  Branch?: string;
 }
 
 /** cloudrun安全特性能力 */
@@ -219,11 +219,11 @@ declare interface CloudBaseProjectVersion {
 /** emptydir 数据卷详细信息 */
 declare interface CloudBaseRunEmptyDirVolumeSource {
   /** 启用emptydir数据卷 */
-  EnableEmptyDirVolume?: boolean | null;
+  EnableEmptyDirVolume?: boolean;
   /** "","Memory","HugePages" */
-  Medium?: string | null;
+  Medium?: string;
   /** emptydir数据卷大小 */
-  SizeLimit?: string | null;
+  SizeLimit?: string;
 }
 
 /** 独立网关云托管服务配置信息 */
@@ -349,7 +349,7 @@ declare interface CloudBaseRunServerVersionItem {
 /** 主机路径挂载参数 */
 declare interface CloudBaseRunServiceVolumeHostPath {
   /** 主机路径 */
-  Path?: string | null;
+  Path?: string;
 }
 
 /** 对标 EKS VolumeMount */
@@ -369,37 +369,37 @@ declare interface CloudBaseRunServiceVolumeMount {
 /** CloudBaseRun 的 Side 描述定义 */
 declare interface CloudBaseRunSideSpec {
   /** 容器镜像 */
-  ContainerImage?: string | null;
+  ContainerImage?: string;
   /** 容器端口 */
-  ContainerPort?: number | null;
+  ContainerPort?: number;
   /** 容器的名称 */
-  ContainerName?: string | null;
+  ContainerName?: string;
   /** kv的json字符串 */
-  EnvVar?: string | null;
+  EnvVar?: string;
   /** InitialDelaySeconds 延迟多长时间启动健康检查 */
-  InitialDelaySeconds?: number | null;
+  InitialDelaySeconds?: number;
   /** CPU大小 */
-  Cpu?: number | null;
+  Cpu?: number;
   /** 内存大小（单位：M） */
-  Mem?: number | null;
+  Mem?: number;
   /** 安全特性 */
-  Security?: CloudBaseSecurityContext | null;
+  Security?: CloudBaseSecurityContext;
   /** 挂载信息 */
-  VolumeMountInfos?: CloudBaseRunVolumeMount[] | null;
+  VolumeMountInfos?: CloudBaseRunVolumeMount[];
 }
 
 /** 版本流量占比 */
 declare interface CloudBaseRunVersionFlowItem {
   /** 版本名称 */
-  VersionName: string | null;
+  VersionName: string;
   /** 流量占比 */
-  FlowRatio?: number | null;
+  FlowRatio?: number;
   /** 流量参数键值对（URL参数/HEADERS参数） */
-  UrlParam?: ObjectKV | null;
+  UrlParam?: ObjectKV;
   /** 优先级 */
-  Priority?: number | null;
+  Priority?: number;
   /** 是否是默认兜底版本 */
-  IsDefaultPriority?: boolean | null;
+  IsDefaultPriority?: boolean;
 }
 
 /** pod信息 */
@@ -409,137 +409,137 @@ declare interface CloudBaseRunVersionPod {
   /** pod name */
   PodId?: string;
   /** pod ip */
-  PodIp?: string | null;
+  PodIp?: string;
   /** 状态 */
   Status?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
 }
 
 /** cfs挂载点 */
 declare interface CloudBaseRunVolumeMount {
   /** 资源名 */
-  Name?: string | null;
+  Name?: string;
   /** 挂载路径 */
-  MountPath?: string | null;
+  MountPath?: string;
   /** 是否只读 */
-  ReadOnly?: boolean | null;
+  ReadOnly?: boolean;
   /** Nfs挂载信息 */
   NfsVolumes?: CloudBaseRunNfsVolumeSource[] | null;
   /** 挂载配置 */
-  MountPropagation?: string | null;
+  MountPropagation?: string;
 }
 
 /** vpc信息 */
 declare interface CloudBaseRunVpcInfo {
   /** vpc的id */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 子网id */
-  SubnetIds?: string[] | null;
+  SubnetIds?: string[];
   /** 创建类型(0=继承; 1=新建; 2=指定) */
-  CreateType?: number | null;
+  CreateType?: number;
 }
 
 /** 子网信息 */
 declare interface CloudBaseRunVpcSubnet {
   /** 子网id */
-  Id?: string | null;
+  Id?: string;
   /** 子网的ipv4 */
-  Cidr?: string | null;
+  Cidr?: string;
   /** 可用区 */
-  Zone?: string | null;
+  Zone?: string;
   /** 类型 */
-  Type?: string | null;
+  Type?: string;
   /** subnet类型 */
-  Target?: string | null;
+  Target?: string;
   /** 地域 */
-  Region?: string | null;
+  Region?: string;
   /** 名字 */
-  Name?: string | null;
+  Name?: string;
 }
 
 /** cloudrun安全特性 */
 declare interface CloudBaseSecurityContext {
   /** 安全特性 */
-  Capabilities?: CloudBaseCapabilities | null;
+  Capabilities?: CloudBaseCapabilities;
 }
 
 /** CloudRunServiceSimpleVersionSnapshot 信息 */
 declare interface CloudRunServiceSimpleVersionSnapshot {
   /** 版本名 */
-  VersionName?: string | null;
+  VersionName?: string;
   /** 版本备注 */
-  Remark?: string | null;
+  Remark?: string;
   /** cpu规格 */
-  Cpu?: number | null;
+  Cpu?: number;
   /** 内存规格 */
-  Mem?: number | null;
+  Mem?: number;
   /** 最小副本数 */
-  MinNum?: number | null;
+  MinNum?: number;
   /** 最大副本数 */
-  MaxNum?: number | null;
+  MaxNum?: number;
   /** 镜像url */
-  ImageUrl?: string | null;
+  ImageUrl?: string;
   /** 扩容策略 */
-  PolicyType?: string | null;
+  PolicyType?: string;
   /** 策略阈值 */
-  PolicyThreshold?: number | null;
+  PolicyThreshold?: number;
   /** 环境参数 */
-  EnvParams?: string | null;
+  EnvParams?: string;
   /** 容器端口 */
-  ContainerPort?: number | null;
+  ContainerPort?: number;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 更新类型 */
-  UploadType?: string | null;
+  UploadType?: string;
   /** dockerfile路径 */
-  DockerfilePath?: string | null;
+  DockerfilePath?: string;
   /** 构建路径 */
-  BuildDir?: string | null;
+  BuildDir?: string;
   /** repo类型 */
-  RepoType?: string | null;
+  RepoType?: string;
   /** 仓库 */
-  Repo?: string | null;
+  Repo?: string;
   /** 分支 */
-  Branch?: string | null;
+  Branch?: string;
   /** 环境id */
-  EnvId?: string | null;
+  EnvId?: string;
   /** 服务名 */
-  ServerName?: string | null;
+  ServerName?: string;
   /** package名字 */
-  PackageName?: string | null;
+  PackageName?: string;
   /** package版本 */
-  PackageVersion?: string | null;
+  PackageVersion?: string;
   /** 自定义log路径 */
-  CustomLogs?: string | null;
+  CustomLogs?: string;
   /** 延时健康检查时间 */
-  InitialDelaySeconds?: number | null;
+  InitialDelaySeconds?: number;
   /** snapshot名 */
-  SnapshotName?: string | null;
+  SnapshotName?: string;
   /** 镜像信息 */
-  ImageInfo?: CloudBaseRunImageInfo | null;
+  ImageInfo?: CloudBaseRunImageInfo;
   /** 代码仓库信息 */
-  CodeDetail?: CloudBaseCodeRepoDetail | null;
+  CodeDetail?: CloudBaseCodeRepoDetail;
   /** 状态 */
-  Status?: string | null;
+  Status?: string;
 }
 
 /** 服务的volume */
 declare interface CloudRunServiceVolume {
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** NFS的挂载方式 */
-  NFS?: CloudBaseRunNfsVolumeSource | null;
+  NFS?: CloudBaseRunNfsVolumeSource;
   /** secret名称 */
-  SecretName?: string | null;
+  SecretName?: string;
   /** 是否开启临时目录逐步废弃，请使用 EmptyDir */
-  EnableEmptyDirVolume?: boolean | null;
+  EnableEmptyDirVolume?: boolean;
   /** emptydir数据卷详细信息 */
-  EmptyDir?: CloudBaseRunEmptyDirVolumeSource | null;
+  EmptyDir?: CloudBaseRunEmptyDirVolumeSource;
   /** 主机路径挂载信息 */
-  HostPath?: CloudBaseRunServiceVolumeHostPath | null;
+  HostPath?: CloudBaseRunServiceVolumeHostPath;
 }
 
 /** cls日志信息 */
@@ -881,9 +881,9 @@ declare interface GatewayVersionItem {
 /** 扩缩容策略 */
 declare interface HpaPolicy {
   /** 策略类型 */
-  PolicyType?: string | null;
+  PolicyType?: string;
   /** 策略阈值 */
-  PolicyThreshold?: number | null;
+  PolicyThreshold?: number;
 }
 
 /** 键值对 */
@@ -1155,11 +1155,11 @@ declare interface Tag {
 /** tke集群信息 */
 declare interface TkeClusterInfo {
   /** 集群ID */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 集群的vpcId */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 版本内网CLB所在子网Id */
-  VersionClbSubnetId?: string | null;
+  VersionClbSubnetId?: string;
 }
 
 /** 安全网关自定义配置 */
@@ -2872,6 +2872,22 @@ declare interface DestroyStaticStoreResponse {
   RequestId?: string;
 }
 
+declare interface EditAuthConfigRequest {
+  /** 环境id */
+  EnvId: string;
+  /** 手机号登录配置 "TRUE", "FALSE", "LOGIN_ONLY" */
+  PhoneNumberLogin?: string;
+  /** 匿名登录配置 "TRUE", "FALSE" */
+  AnonymousLogin?: string;
+  /** 用户名密码登录配置 "TRUE", "FALSE" */
+  UsernameLogin?: string;
+}
+
+declare interface EditAuthConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface EstablishCloudBaseRunServerRequest {
   /** 环境id */
   EnvId: string;
@@ -3395,6 +3411,8 @@ declare interface Tcb {
   DestroyStandaloneGateway(data: DestroyStandaloneGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyStandaloneGatewayResponse>;
   /** 销毁静态资源 {@link DestroyStaticStoreRequest} {@link DestroyStaticStoreResponse} */
   DestroyStaticStore(data: DestroyStaticStoreRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyStaticStoreResponse>;
+  /** 编辑登录配置 {@link EditAuthConfigRequest} {@link EditAuthConfigResponse} */
+  EditAuthConfig(data: EditAuthConfigRequest, config?: AxiosRequestConfig): AxiosPromise<EditAuthConfigResponse>;
   /** 创建云应用服务 {@link EstablishCloudBaseRunServerRequest} {@link EstablishCloudBaseRunServerResponse} */
   EstablishCloudBaseRunServer(data: EstablishCloudBaseRunServerRequest, config?: AxiosRequestConfig): AxiosPromise<EstablishCloudBaseRunServerResponse>;
   /** 创建或修改安全网关路由 {@link EstablishWxGatewayRouteRequest} {@link EstablishWxGatewayRouteResponse} */

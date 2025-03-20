@@ -5,19 +5,19 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 高级过滤规则 */
 declare interface AdvanceFilterRuleInfo {
   /** 过滤字段 */
-  Key: string | null;
+  Key: string;
   /** 过滤规则，0:等于，1:字段存在，2:字段不存在 */
-  Rule: number | null;
+  Rule: number;
   /** 过滤值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 告警多维分析一些配置信息 */
 declare interface AlarmAnalysisConfig {
   /** 键。支持以下key：SyntaxRule：语法规则，value支持 0：Lucene语法；1： CQL语法。QueryIndex：执行语句序号。value支持 -1：自定义； 1：执行语句1； 2：执行语句2。CustomQuery：检索语句。 QueryIndex为-1时有效且必填，value示例： "* | select count(*) as count"。Fields：字段。value支持 __SOURCE__；__FILENAME__；__HOSTNAME__；__TIMESTAMP__；__INDEX_STATUS__；__PKG_LOGID__；__TOPIC__。Format：显示形式。value支持 1：每条日志一行；2：每条日志每个字段一行。Limit：最大日志条数。 value示例： 5。 */
-  Key: string | null;
+  Key: string;
   /** 值。键对应值如下：SyntaxRule：语法规则，value支持 0：Lucene语法；1： CQL语法。QueryIndex：执行语句序号。value支持 -1：自定义； 1：执行语句1； 2：执行语句2。CustomQuery：检索语句。 QueryIndex为-1时有效且必填，value示例： "* | select count(*) as count"。Fields：字段。value支持 __SOURCE__；__FILENAME__；__HOSTNAME__；__TIMESTAMP__；__INDEX_STATUS__；__PKG_LOGID__；__TOPIC__。Format：显示形式。value支持 1：每条日志一行；2：每条日志每个字段一行。Limit：最大日志条数。 value示例： 5。 */
-  Value: string | null;
+  Value: string;
 }
 
 /** 告警分类信息 */
@@ -55,21 +55,21 @@ declare interface AlarmInfo {
   /** 自定义通知模板 */
   MessageTemplate?: string | null;
   /** 自定义回调模板 */
-  CallBack?: CallBackInfo | null;
+  CallBack?: CallBackInfo;
   /** 多维分析设置 */
-  Analysis?: AnalysisDimensional[] | null;
-  /** 分组触发状态。1：开启，0：关闭（默认） */
-  GroupTriggerStatus?: boolean | null;
+  Analysis?: AnalysisDimensional[];
+  /** 分组触发状态。true：开启，false：关闭（默认） */
+  GroupTriggerStatus?: boolean;
   /** 分组触发条件。 */
-  GroupTriggerCondition?: string[] | null;
+  GroupTriggerCondition?: string[];
   /** 监控对象类型。0:执行语句共用监控对象;1:每个执行语句单独选择监控对象。 */
-  MonitorObjectType?: number | null;
+  MonitorObjectType?: number;
   /** 告警级别。0:警告(Warn);1:提醒(Info);2:紧急 (Critical)。 */
-  AlarmLevel?: number | null;
+  AlarmLevel?: number;
   /** 告警附加分类字段。 */
-  Classifications?: AlarmClassification[] | null;
+  Classifications?: AlarmClassification[];
   /** 多触发条件。与Condition互斥。 */
-  MultiConditions?: MultiCondition[] | null;
+  MultiConditions?: MultiCondition[];
 }
 
 /** 告警通知渠道组详细配置 */
@@ -77,27 +77,27 @@ declare interface AlarmNotice {
   /** 告警通知渠道组名称。 */
   Name?: string;
   /** 告警通知渠道组绑定的标签信息。 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
   /** 告警模板的类型。可选值： Trigger - 告警触发 Recovery - 告警恢复 All - 告警触发和告警恢复 */
   Type?: string;
   /** 告警通知模板接收者信息。 */
-  NoticeReceivers?: NoticeReceiver[] | null;
+  NoticeReceivers?: NoticeReceiver[];
   /** 告警通知模板回调信息。 */
-  WebCallbacks?: WebCallback[] | null;
+  WebCallbacks?: WebCallback[];
   /** 告警通知模板ID。 */
-  AlarmNoticeId?: string | null;
+  AlarmNoticeId?: string;
   /** 通知规则。 */
-  NoticeRules?: NoticeRule[] | null;
+  NoticeRules?: NoticeRule[];
   /** 免登录操作告警开关。参数值： 1：关闭 2：开启（默认开启） */
-  AlarmShieldStatus?: number | null;
+  AlarmShieldStatus?: number;
   /** 调用链接域名。http:// 或者 https:// 开头，不能/结尾 */
-  JumpDomain?: string | null;
+  JumpDomain?: string;
   /** 投递相关信息。 */
   AlarmNoticeDeliverConfig?: AlarmNoticeDeliverConfig | null;
   /** 创建时间。 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 最近更新时间。 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
 }
 
 /** 通知渠道投递日志配置信息 */
@@ -105,7 +105,7 @@ declare interface AlarmNoticeDeliverConfig {
   /** 通知渠道投递日志配置信息。 */
   DeliverConfig?: DeliverConfig;
   /** 投递失败原因。 */
-  ErrMsg?: string | null;
+  ErrMsg?: string;
 }
 
 /** 告警屏蔽任务配置 */
@@ -121,7 +121,7 @@ declare interface AlarmShieldInfo {
   /** 屏蔽类型。1：屏蔽所有通知，2：按照Rule参数屏蔽匹配规则的通知。 */
   Type?: number;
   /** 屏蔽规则，当Type为2时必填。规则填写方式详见[产品文档](https://cloud.tencent.com/document/product/614/103178)。 */
-  Rule?: string | null;
+  Rule?: string;
   /** 屏蔽原因。 */
   Reason?: string;
   /** 规则创建来源。1. 控制台，2.api，3.告警通知 */
@@ -139,19 +139,19 @@ declare interface AlarmShieldInfo {
 /** 告警对象 */
 declare interface AlarmTarget {
   /** 日志主题ID。 */
-  TopicId: string | null;
+  TopicId: string;
   /** 查询语句。 */
-  Query: string | null;
+  Query: string;
   /** 告警对象序号；从1开始递增。 */
-  Number: number | null;
+  Number: number;
   /** 查询范围起始时间相对于告警执行时间的偏移，单位为分钟，取值为非正，最大值为0，最小值为-1440。 */
-  StartTimeOffset: number | null;
+  StartTimeOffset: number;
   /** 查询范围终止时间相对于告警执行时间的偏移，单位为分钟，取值为非正，须大于StartTimeOffset，最大值为0，最小值为-1440。 */
-  EndTimeOffset: number | null;
+  EndTimeOffset: number;
   /** 日志集ID。 */
-  LogsetId: string | null;
+  LogsetId: string;
   /** 检索语法规则，默认值为0。0：Lucene语法，1：CQL语法。详细说明参见检索条件语法规则 */
-  SyntaxRule?: number | null;
+  SyntaxRule?: number;
 }
 
 /** 告警对象 */
@@ -173,17 +173,17 @@ declare interface AlarmTargetInfo {
   /** 查询范围终止时间相对于告警执行时间的偏移，单位为分钟，取值为非正，须大于StartTimeOffset，最大值为0，最小值为-1440。 */
   EndTimeOffset?: number;
   /** 检索语法规则，默认值为0。0：Lucene语法，1：CQL语法。详细说明参见检索条件语法规则 */
-  SyntaxRule?: number | null;
+  SyntaxRule?: number;
   /** 主题类型。0: 日志主题，1: 指标主题 */
-  BizType?: number | null;
+  BizType?: number;
 }
 
 /** 告警通知渠道组详情 */
 declare interface AlertHistoryNotice {
   /** 通知渠道组名称 */
-  Name?: string;
+  Name: string;
   /** 通知渠道组ID */
-  AlarmNoticeId?: string;
+  AlarmNoticeId: string;
 }
 
 /** 告警历史详情 */
@@ -215,21 +215,21 @@ declare interface AlertHistoryRecord {
   /** 告警发生时间，毫秒级Unix时间戳 */
   CreateTime: number;
   /** 告警分组触发时对应的分组信息 */
-  GroupTriggerCondition?: GroupTriggerConditionInfo[] | null;
+  GroupTriggerCondition?: GroupTriggerConditionInfo[];
   /** 告警级别，0代表警告(Warn)，1代表提醒(Info)，2代表紧急 (Critical) */
-  AlarmLevel?: number | null;
+  AlarmLevel?: number;
   /** 监控对象类型。0:执行语句共用监控对象; 1:每个执行语句单独选择监控对象。 */
-  MonitorObjectType?: number | null;
+  MonitorObjectType?: number;
 }
 
 /** 多维分析的分析维度 */
 declare interface AnalysisDimensional {
   /** 分析名称 */
-  Name: string | null;
+  Name: string;
   /** 分析类型：query，field ，original */
-  Type: string | null;
+  Type: string;
   /** 分析内容 */
-  Content: string | null;
+  Content: string;
   /** 多维分析配置。当Analysis的Type字段为query（自定义）时，支持{"Key": "SyntaxRule", // 语法规则"Value": "1" //0：Lucene语法 ，1： CQL语法}当Analysis的Type字段为field（top5）时, 支持 { "Key": "QueryIndex", "Value": "-1" // -1：自定义， 1：执行语句1， 2：执行语句2},{ "Key": "CustomQuery", //检索语句。 QueryIndex为-1时有效且必填 "Value": "* | select count(*) as count"},{ "Key": "SyntaxRule", // 查不到这个字段也是老语法（Lucene） "Value": "0"//0:Lucene, 1:CQL} 当Analysis的Type字段为original（原始日志）时, 支持{ "Key": "Fields", "Value": "__SOURCE__,__HOSTNAME__,__TIMESTAMP__,__PKG_LOGID__,__TAG__.pod_ip"}, { "Key": "QueryIndex", "Value": "-1" // -1：自定义， 1：执行语句1， 2：执行语句2},{ "Key": "CustomQuery", // //检索语句。 QueryIndex为-1时有效且必填 "Value": "* | select count(*) as count"},{ "Key": "Format", //显示形式。1：每条日志一行，2：每条日志每个字段一行 "Value": "2"},{ "Key": "Limit", //最大日志条数 "Value": "5"},{ "Key": "SyntaxRule", // 查不到这个字段也是老语法 "Value": "0"//0:Lucene, 1:CQL} */
   ConfigInfo?: AlarmAnalysisConfig[];
 }
@@ -247,7 +247,7 @@ declare interface CallBackInfo {
   /** 回调时的Body。可将各类告警变量放在请求内容中，详见[帮助文档](https://cloud.tencent.com/document/product/614/74718)。如下示例：```{"TopicId": "{{ .QueryLog[0][0].topicId }}","key": "{{.Alarm}}","time": "{{ .QueryLog[0][0].time }}","log": "{{ .QueryLog[0][0].content.__CONTENT__ }}","namespace": "{{ .QueryLog[0][0].content.__TAG__.namespace }}"}``` */
   Body: string;
   /** 回调时的HTTP请求头部字段。例如：下面请求头部字段来告知服务器请求主体的内容类型为JSON。```"Content-Type: application/json"``` */
-  Headers?: string[] | null;
+  Headers?: string[];
 }
 
 /** CKafka的描述-需要投递到的kafka信息 */
@@ -277,9 +277,11 @@ declare interface CloudProductLogTaskInfo {
   /** 日志主题ID */
   TopicId?: string;
   /** 日志配置拓展信息， 一般用于存储额外的日志投递配置 */
-  Extend?: string | null;
+  Extend?: string;
   /** 日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS */
-  LogType?: string | null;
+  LogType?: string;
+  /** 任务状态， 0创建中 1创建完成 2 删除中 */
+  Status?: number;
 }
 
 /** 采集配置信息 */
@@ -291,9 +293,9 @@ declare interface CollectConfig {
 /** 采集配置信息 */
 declare interface CollectInfo {
   /** 采集类型，必填字段。0：元数据配置。1：指定Pod Label。 */
-  Type: number | null;
+  Type: number;
   /** 指定采集类型的采集配置信息。当Type为0时，CollectConfigs不允许为空。当Type为1时，CollectConfigs为空时，表示选择所有Pod Label；否则CollectConfigs为指定Pod Label。 */
-  CollectConfigs?: CollectConfig[] | null;
+  CollectConfigs?: CollectConfig[];
 }
 
 /** 日志分析的列属性 */
@@ -331,17 +333,17 @@ declare interface ConfigExtraInfo {
   /** 类型：container_stdout、container_file、host_file */
   Type?: string;
   /** 节点文件配置信息 */
-  HostFile?: HostFileInfo | null;
+  HostFile?: HostFileInfo;
   /** 容器文件路径信息 */
-  ContainerFile?: ContainerFileInfo | null;
+  ContainerFile?: ContainerFileInfo;
   /** 容器标准输出信息 */
-  ContainerStdout?: ContainerStdoutInfo | null;
+  ContainerStdout?: ContainerStdoutInfo;
   /** 日志格式化方式 */
-  LogFormat?: string | null;
+  LogFormat?: string;
   /** 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表极简日志，multiline_log代表多行日志，fullregex_log代表完整正则，默认为minimalist_log */
-  LogType?: string | null;
+  LogType?: string;
   /** 提取规则，如果设置了ExtractRule，则必须设置LogType */
-  ExtractRule?: ExtractRuleInfo | null;
+  ExtractRule?: ExtractRuleInfo;
   /** 采集黑名单路径列表 */
   ExcludePaths?: ExcludePathInfo[] | null;
   /** 更新时间 */
@@ -349,21 +351,21 @@ declare interface ConfigExtraInfo {
   /** 创建时间 */
   CreateTime?: string;
   /** 用户自定义解析字符串 */
-  UserDefineRule?: string | null;
+  UserDefineRule?: string;
   /** 机器组ID */
   GroupId?: string;
   /** 自建采集配置标 */
-  ConfigFlag?: string | null;
+  ConfigFlag?: string;
   /** 日志集ID */
-  LogsetId?: string | null;
+  LogsetId?: string;
   /** 日志集name */
-  LogsetName?: string | null;
+  LogsetName?: string;
   /** 日志主题name */
-  TopicName?: string | null;
+  TopicName?: string;
   /** 采集相关配置信息。详情见 CollectInfo复杂类型配置。 */
-  CollectInfos?: CollectInfo[] | null;
+  CollectInfos?: CollectInfo[];
   /** 高级采集配置。 Json字符串， Key/Value定义为如下：- ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时- ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数- ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false样例：{"ClsAgentFileTimeout":0,"ClsAgentMaxDepth":10,"ClsAgentParseFailMerge":true} */
-  AdvancedConfig?: string | null;
+  AdvancedConfig?: string;
 }
 
 /** 采集规则配置信息 */
@@ -371,27 +373,27 @@ declare interface ConfigInfo {
   /** 采集规则配置ID */
   ConfigId?: string;
   /** 采集规则配置名称 */
-  Name?: string | null;
+  Name?: string;
   /** 日志格式化方式 */
-  LogFormat?: string | null;
+  LogFormat?: string;
   /** 日志采集路径 */
-  Path?: string | null;
+  Path?: string;
   /** 采集的日志类型。- json_log代表：JSON-文件日志（详见[使用 JSON 提取模式采集日志](https://cloud.tencent.com/document/product/614/17419)）；- delimiter_log代表：分隔符-文件日志（详见[使用分隔符提取模式采集日志](https://cloud.tencent.com/document/product/614/17420)）；- minimalist_log代表：单行全文-文件日志（详见[使用单行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17421)）；- fullregex_log代表：单行完全正则-文件日志（详见[使用单行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52365)）；- multiline_log代表：多行全文-文件日志（详见[使用多行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17422)）；- multiline_fullregex_log代表：多行完全正则-文件日志（详见[使用多行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52366)）；- user_define_log代表：组合解析（适用于多格式嵌套的日志，详见[使用组合解析提取模式采集日志](https://cloud.tencent.com/document/product/614/61310)）；- service_syslog代表：syslog 采集（详见[采集 Syslog](https://cloud.tencent.com/document/product/614/81454)）；- windows_event_log代表：Windows事件日志（详见[采集 Windows 事件日志](https://cloud.tencent.com/document/product/614/96678)）。 */
-  LogType?: string | null;
+  LogType?: string;
   /** 提取规则，如果设置了ExtractRule，则必须设置LogType */
-  ExtractRule?: ExtractRuleInfo | null;
+  ExtractRule?: ExtractRuleInfo;
   /** 采集黑名单路径列表 */
   ExcludePaths?: ExcludePathInfo[] | null;
   /** 采集配置所属日志主题ID即TopicId */
   Output?: string;
   /** 更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 创建时间 */
   CreateTime?: string;
   /** 用户自定义解析字符串，详见[使用组合解析提取模式采集日志](https://cloud.tencent.com/document/product/614/61310)。 */
-  UserDefineRule?: string | null;
+  UserDefineRule?: string;
   /** 高级采集配置。 Json字符串， Key/Value定义为如下：- ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时- ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数- ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false样例：`{\"ClsAgentFileTimeout\":0,\"ClsAgentMaxDepth\":10,\"ClsAgentParseFailMerge\":true}`控制台默认占位值：`{\"ClsAgentDefault\":0}` */
-  AdvancedConfig?: string | null;
+  AdvancedConfig?: string;
 }
 
 /** 控制台分享配置 */
@@ -435,15 +437,15 @@ declare interface ConsoleSharingParam {
 /** 投递任务出入参 Content */
 declare interface ConsumerContent {
   /** 是否投递 TAG 信息。当EnableTag为true时，表示投递TAG元信息。 */
-  EnableTag: boolean | null;
+  EnableTag: boolean;
   /** 需要投递的元数据列表，目前仅支持：\_\_SOURCE\_\_，\_\_FILENAME\_\_，\_\_TIMESTAMP\_\_，\_\_HOSTNAME\_\_和\_\_PKGID\_\_ */
-  MetaFields: string[] | null;
+  MetaFields: string[];
   /** 当EnableTag为true时，必须填写TagJsonNotTiled字段。TagJsonNotTiled用于标识tag信息是否json平铺。TagJsonNotTiled为true时不平铺，示例：TAG信息：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`不平铺：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`TagJsonNotTiled为false时平铺，示例：TAG信息：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`平铺：`{"__TAG__.fieldA":200,"__TAG__.fieldB":"text"}` */
-  TagJsonNotTiled?: boolean | null;
+  TagJsonNotTiled?: boolean;
   /** 投递时间戳精度，可选项 [1：秒；2：毫秒] ，默认是1。 */
-  TimestampAccuracy?: number | null;
+  TimestampAccuracy?: number;
   /** 投递Json格式。JsonType为0：和原始日志一致，不转义。示例：日志原文：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`投递到Ckafka：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`JsonType为1：转义。示例：日志原文：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`投递到Ckafka：`{"a":"aa","b":"{\"b1\":\"b1b1\", \"c1\":\"c1c1\"}"}` */
-  JsonType?: number | null;
+  JsonType?: number;
 }
 
 /** 自建k8s-容器文件路径信息 */
@@ -461,9 +463,9 @@ declare interface ContainerFileInfo {
   /** pod标签信息 */
   IncludeLabels?: string[] | null;
   /** 工作负载信息 */
-  WorkLoad?: ContainerWorkLoadInfo | null;
+  WorkLoad?: ContainerWorkLoadInfo;
   /** 需要排除的namespace可以多个，用分隔号分割,例如A,B */
-  ExcludeNamespace?: string | null;
+  ExcludeNamespace?: string;
   /** 需要排除的pod标签信息 */
   ExcludeLabels?: string[] | null;
   /** metadata信息 */
@@ -475,15 +477,15 @@ declare interface ContainerStdoutInfo {
   /** 是否所有容器 */
   AllContainers: boolean;
   /** container为空表所有的，不为空采集指定的容器 */
-  Container?: string | null;
+  Container?: string;
   /** namespace可以多个，用分隔号分割,例如A,B；为空或者没有这个字段，表示所有namespace */
-  Namespace?: string | null;
+  Namespace?: string;
   /** pod标签信息 */
   IncludeLabels?: string[] | null;
   /** 工作负载信息 */
   WorkLoads?: ContainerWorkLoadInfo[] | null;
   /** 需要排除的namespace可以多个，用分隔号分割,例如A,B */
-  ExcludeNamespace?: string | null;
+  ExcludeNamespace?: string;
   /** 需要排除的pod标签信息 */
   ExcludeLabels?: string[] | null;
   /** metadata信息 */
@@ -1683,7 +1685,7 @@ declare interface CheckRechargeKafkaServerRequest {
 
 declare interface CheckRechargeKafkaServerResponse {
   /** Kafka集群可访问状态，0：可正常访问 ... */
-  Status?: number | null;
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1967,7 +1969,7 @@ declare interface CreateCosRechargeRequest {
 
 declare interface CreateCosRechargeResponse {
   /** COS导入任务id */
-  Id?: string | null;
+  Id?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2551,7 +2553,7 @@ declare interface DescribeAlarmNoticesRequest {
 
 declare interface DescribeAlarmNoticesResponse {
   /** 告警通知模板列表。 */
-  AlarmNotices?: AlarmNotice[] | null;
+  AlarmNotices?: AlarmNotice[];
   /** 符合条件的告警通知模板总数。 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -2709,7 +2711,7 @@ declare interface DescribeConsumerResponse {
   /** CKafka的描述 */
   Ckafka?: Ckafka;
   /** 压缩方式[0:NONE；2:SNAPPY；3:LZ4] */
-  Compression?: number | null;
+  Compression?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2725,7 +2727,7 @@ declare interface DescribeCosRechargesRequest {
 
 declare interface DescribeCosRechargesResponse {
   /** 见: CosRechargeInfo 结构描述 */
-  Data?: CosRechargeInfo[] | null;
+  Data?: CosRechargeInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2811,17 +2813,17 @@ declare interface DescribeIndexRequest {
 
 declare interface DescribeIndexResponse {
   /** 日志主题ID */
-  TopicId: string;
+  TopicId?: string;
   /** 是否生效 */
-  Status: boolean;
+  Status?: boolean;
   /** 索引配置信息 */
-  Rule: RuleInfo | null;
+  Rule?: RuleInfo | null;
   /** 索引修改时间，初始值为索引创建时间。 */
-  ModifyTime: string;
+  ModifyTime?: string;
   /** 内置保留字段（`__FILENAME__`，`__HOSTNAME__`及`__SOURCE__`）是否包含至全文索引* false:不包含* true:包含 */
-  IncludeInternalFields: boolean | null;
+  IncludeInternalFields?: boolean;
   /** 元数据字段（前缀为`__TAG__`的字段）是否包含至全文索引* 0:仅包含开启键值索引的元数据字段* 1:包含所有元数据字段* 2:不包含任何元数据字段 */
-  MetadataFlag: number | null;
+  MetadataFlag?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2961,7 +2963,7 @@ declare interface DescribeMachineGroupsRequest {
 
 declare interface DescribeMachineGroupsResponse {
   /** 机器组信息列表 */
-  MachineGroups?: MachineGroupInfo[] | null;
+  MachineGroups?: MachineGroupInfo[];
   /** 分页的总数目 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -2993,7 +2995,7 @@ declare interface DescribeMachinesResponse {
   /** 是否开启服务日志 */
   ServiceLogging?: boolean;
   /** 总数目 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3009,7 +3011,7 @@ declare interface DescribeNoticeContentsRequest {
 
 declare interface DescribeNoticeContentsResponse {
   /** 通知内容模板列表。 */
-  NoticeContents?: NoticeContentTemplate[] | null;
+  NoticeContents?: NoticeContentTemplate[];
   /** 符合条件的通知内容模板总数。 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3079,7 +3081,7 @@ declare interface DescribeShippersRequest {
 
 declare interface DescribeShippersResponse {
   /** 投递规则列表 */
-  Shippers?: ShipperInfo[] | null;
+  Shippers?: ShipperInfo[];
   /** 本次查询获取到的总数 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3119,7 +3121,7 @@ declare interface DescribeWebCallbacksRequest {
 
 declare interface DescribeWebCallbacksResponse {
   /** 告警渠道回调配置列表。 */
-  WebCallbacks?: WebCallbackInfo[] | null;
+  WebCallbacks?: WebCallbackInfo[];
   /** 符合条件的通知内容配置总数。 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3753,7 +3755,7 @@ declare interface PreviewKafkaRechargeResponse {
   /** 日志样例，PreviewType为2时返回 */
   LogSample?: string;
   /** 日志预览结果 */
-  LogData?: string | null;
+  LogData?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3829,13 +3831,13 @@ declare interface SearchCosRechargeInfoRequest {
 
 declare interface SearchCosRechargeInfoResponse {
   /** 匹配到的存储桶下的某个文件的前几行数据 */
-  Data?: string[] | null;
+  Data?: string[];
   /** 匹配到的存储桶下的文件个数 */
   Sum?: number;
   /** 当前预览文件路径 */
-  Path?: string | null;
+  Path?: string;
   /** 预览获取数据失败原因 */
-  Msg?: string | null;
+  Msg?: string;
   /** 状态 */
   Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3903,7 +3905,7 @@ declare interface SearchLogResponse {
   /** 日志统计分析结果的列属性当UseNewAnalysis为true时生效 */
   Columns?: Column[] | null;
   /** 本次统计分析使用的采样率 */
-  SamplingRate?: number | null;
+  SamplingRate?: number;
   /** 使用多日志主题检索时，各个日志主题的基本信息，例如报错信息。 */
   Topics?: SearchLogTopics | null;
   /** 唯一请求 ID，每次请求都会返回。 */

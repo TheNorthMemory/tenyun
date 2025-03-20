@@ -114,7 +114,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 260+ 款产品，12280+ 服务数</summary>
+<details><summary>共计 260+ 款产品，12293+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -160,7 +160,7 @@ car | [应用云渲染](https://cloud.tencent.com/document/product/1547) | 2022-
 cat | [云拨测](https://cloud.tencent.com/document/product/280) | 2018-04-09(12) |
 cbs | [云硬盘](https://cloud.tencent.com/document/product/362) | 2017-03-12(46) |
 ccc | [云联络中心](https://cloud.tencent.com/document/product/679) | 2020-02-10(64) |
-cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(172) |
+cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(173) |
 cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 2020-12-14(21) |
 cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(81+3) |
 cds | [T-Sec-数据安全审计（DSA）](https://cloud.tencent.com/document/product/856) | 2018-04-20(5) |
@@ -271,8 +271,8 @@ mgobe | [游戏联机对战引擎](https://cloud.tencent.com/document/product/10
 mmps | [小程序安全](https://cloud.tencent.com/document/product/1223) | 2020-07-10(15) |
 mna | [多网聚合加速](https://cloud.tencent.com/document/product/1385) | 2021-01-19(43) |
 mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) | 2019-07-25(51) | 2018-04-08(13) |
-monitor | [腾讯云可观测平台](https://cloud.tencent.com/document/product/248) | 2023-06-16(1) | 2018-07-24(159) |
-mps | [媒体处理](https://cloud.tencent.com/document/product/862) | 2019-06-12(119) |
+monitor | [腾讯云可观测平台](https://cloud.tencent.com/document/product/248) | 2023-06-16(1) | 2018-07-24(160) |
+mps | [媒体处理](https://cloud.tencent.com/document/product/862) | 2019-06-12(128) |
 mqtt | [消息队列 MQTT 版](https://cloud.tencent.com/document/product/1778) | 2024-05-16(52) |
 mrs | [医疗报告结构化](https://cloud.tencent.com/document/product/1314) | 2020-09-10(11) |
 ms | [移动应用安全](https://cloud.tencent.com/document/product/283) | 2018-04-08(23) |
@@ -291,7 +291,7 @@ postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/
 privatedns | [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) | 2020-10-28(24) |
 pts | [云压测](https://cloud.tencent.com/document/product/1484) | 2021-07-28(48) |
 rce | [全栈式风控引擎](https://cloud.tencent.com/document/product/1343) | 2020-11-03(11) |
-redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 2018-04-12(109) |
+redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 2018-04-12(110) |
 region | [地域管理系统](https://cloud.tencent.com/document/product/1596) | 2022-06-27(3) |
 rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(54) |
 scf | [云函数](https://cloud.tencent.com/document/product/583) | 2018-04-16(52+7) |
@@ -318,7 +318,7 @@ tbaas | [腾讯云区块链服务平台 TBaaS](https://cloud.tencent.com/documen
 tbm |  | 2018-01-29(9) |
 tbp | [腾讯智能对话平台](https://cloud.tencent.com/document/product/1060) | 2019-06-27(2) | 2019-03-11(4) |
 tcaplusdb | [游戏数据库 TcaplusDB](https://cloud.tencent.com/document/product/596) | 2019-08-23(53) |
-tcb | [云开发 CloudBase](https://cloud.tencent.com/document/product/876) | 2018-06-08(89+195) |
+tcb | [云开发 CloudBase](https://cloud.tencent.com/document/product/876) | 2018-06-08(90+195) |
 tcbr | [云托管 CloudBase Run](https://cloud.tencent.com/document/product/1243) | 2022-02-17(10+10) |
 tccatalog | [统一Catalog服务](https://cloud.tencent.com/document/product/1784) | 2024-10-24(4) |
 tcex | [腾讯云释义](https://cloud.tencent.com/document/product/1266) | 2020-07-27(2) |

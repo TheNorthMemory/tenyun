@@ -5,55 +5,55 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 动作信息 */
 declare interface Action {
   /** 动作id */
-  Id?: number | null;
+  Id?: number;
   /** 动作名 */
-  Name?: string | null;
+  Name?: string;
 }
 
 /** 详细动作信息 */
 declare interface ActionDetail {
   /** 动作id */
-  Id?: number | null;
+  Id?: number;
   /** 动作名称 */
-  Name?: string | null;
+  Name?: string;
   /** 动作类型 */
-  ActionType?: string | null;
+  ActionType?: string;
   /** 动作说明 */
-  ActionDesc?: string | null;
+  ActionDesc?: string;
   /** 消息类型，orgin/custom/model */
-  MsgType?: string | null;
+  MsgType?: string;
   /** 消息内容,有效值为x-json:后的字段 */
-  MsgContent?: string | null;
+  MsgContent?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 设备唯一标识 */
-  WID?: string | null;
+  WID?: string;
   /** 关联故障列表 */
-  LinkRuleSet?: LinkRule[] | null;
+  LinkRuleSet?: LinkRule[];
   /** 动作下沉配置,有效值为x-json:后的字段 */
-  SinkConfig?: string | null;
+  SinkConfig?: string;
 }
 
 /** 动作对象 */
 declare interface ActionObj {
   /** 动作id */
-  Id?: number | null;
+  Id?: number;
   /** 动作名称 */
-  Name?: string | null;
+  Name?: string;
   /** 动作类型。（app/推送消息至应用-携带空间设备：无,appWithNearbyDevices/推送至应用-携带空间设备：携带,device/推送消息至设备-指定设备,nearbyDevices/推送消息至设备-事件所在范围内的设备,toAlarm/转换为告警,toNotification/转换为通知） */
-  Type?: string | null;
+  Type?: string;
   /** 动作说明 */
-  Desc?: string | null;
+  Desc?: string;
   /** 消息类型，orgin/custom/model */
-  MsgType?: string | null;
+  MsgType?: string;
   /** 消息内容 */
-  MsgContent?: string | null;
+  MsgContent?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 动作下沉配置 */
-  SinkConfig?: string | null;
+  SinkConfig?: string;
   /** 具体应用（appid）/具体设备（DIN/subID） */
-  ApplyDevice?: string | null;
+  ApplyDevice?: string;
 }
 
 /** 添加设备信息 */
@@ -71,99 +71,99 @@ declare interface AddDeviceInfo {
 /** 行政区划数据结构 */
 declare interface AdministrationData {
   /** 行政区划编码 */
-  AdministrationCode?: string | null;
+  AdministrationCode?: string;
   /** 行政区划名称 */
-  AdministrationName?: string | null;
+  AdministrationName?: string;
 }
 
 /** 行政区划详情 */
 declare interface AdministrativeDetail {
   /** 行政区域类型编码 */
-  AdministrativeTypeCode?: string | null;
+  AdministrativeTypeCode?: string;
   /** 行政区域编码 */
-  AdministrativeCode?: string | null;
+  AdministrativeCode?: string;
   /** 行政区域名称 */
-  AdministrativeName?: string | null;
+  AdministrativeName?: string;
 }
 
 /** 告警信息 */
 declare interface AlarmInfo {
   /** 工作空间id */
-  WorkspaceId?: number | null;
+  WorkspaceId?: number;
   /** 告警ID */
-  Id?: string | null;
+  Id?: string;
   /** 告警状态 */
-  Status?: string | null;
+  Status?: string;
   /** 告警时间 */
-  Time?: number | null;
+  Time?: number;
   /** 告警业务类型 */
-  Type?: string | null;
+  Type?: string;
   /** 告警业务类型名称 */
-  TypeName?: string | null;
+  TypeName?: string;
   /** 子告警类型 */
-  SubType?: string | null;
+  SubType?: string;
   /** 子告警类型名称 */
-  SubTypeName?: string | null;
+  SubTypeName?: string;
   /** 告警级别id */
-  Level?: number | null;
+  Level?: number;
   /** 告警级别名称 */
-  LevelName?: string | null;
+  LevelName?: string;
   /** 上报应用appid */
-  AppId?: number | null;
+  AppId?: number;
   /** 设备wid */
-  WID?: string | null;
+  WID?: string;
   /** 设备名称 */
-  DeviceName?: string | null;
+  DeviceName?: string;
   /** 空间位置 */
-  Position?: string | null;
+  Position?: string;
   /** 上报图片 */
-  ReportImg?: ReportImg | null;
+  ReportImg?: ReportImg;
   /** 告警描述 */
-  Desc?: string | null;
+  Desc?: string;
   /** 处理人 */
-  HandlePersonSet?: HandlerPersonInfo[] | null;
+  HandlePersonSet?: HandlerPersonInfo[];
   /** 处理记录 */
-  HandleRecordSet?: HandleRecordInfo[] | null;
+  HandleRecordSet?: HandleRecordInfo[];
   /** 扩展信息 */
-  Extend?: string | null;
+  Extend?: string;
   /** 应用扩展字段1 */
-  ExtendOne?: string | null;
+  ExtendOne?: string;
   /** 应用扩展字段2 */
-  ExtendTwo?: string | null;
+  ExtendTwo?: string;
   /** 应用透传字段,有效字段为x-json后的字段 */
-  Echo?: string | null;
+  Echo?: string;
 }
 
 /** 告警级别详情 */
 declare interface AlarmLevelInfo {
   /** 级别id */
-  LevelId?: number | null;
+  LevelId?: number;
   /** 级别名称 */
-  LevelName?: string | null;
+  LevelName?: string;
 }
 
 /** 告警状态返回结构体 */
 declare interface AlarmStatusData {
   /** 告警状态ID */
-  StatusID?: string | null;
+  StatusID?: string;
   /** 告警状态名称 */
-  StatusName?: string | null;
+  StatusName?: string;
   /** 告警状态类型 */
-  StatusType?: string | null;
+  StatusType?: string;
 }
 
 /** 告警类型详情信息 */
 declare interface AlarmTypeDetailInfo {
   /** 告警类型id */
-  Id?: number | null;
+  Id?: number;
   /** 父节点id */
-  ParentId?: number | null;
+  ParentId?: number;
   /** 0-标准告警类型，1-自定义告警类型 */
-  Type?: number | null;
+  Type?: number;
   /** 告警名称类型 */
-  Name?: string | null;
+  Name?: string;
   /** 告警类型英文名称 */
-  EnglishName?: string | null;
+  EnglishName?: string;
 }
 
 /** 告警类型 */
@@ -177,231 +177,231 @@ declare interface AlarmTypeInfo {
 /** API参数信息 */
 declare interface ApiContent {
   /** 所属API的id */
-  Id?: string | null;
+  Id?: string;
   /** 参数名称 */
-  Name?: string | null;
+  Name?: string;
   /** 参数类型 */
-  Type?: string | null;
+  Type?: string;
   /** 是否为动态值 */
-  Dynamic?: boolean | null;
+  Dynamic?: boolean;
   /** 是否必填 */
-  Required?: boolean | null;
+  Required?: boolean;
   /** 参数值 */
-  Value?: string | null;
+  Value?: string;
   /** 默认值 */
-  DefaultValue?: string | null;
+  DefaultValue?: string;
 }
 
 /** API描述 */
 declare interface ApiInfo {
   /** API的id */
-  ApiId?: string | null;
+  ApiId?: string;
   /** API名称 */
-  Name?: string | null;
+  Name?: string;
   /** API所属应用的id */
-  AppId?: string | null;
+  AppId?: string;
   /** API所属的项目空间的id */
-  WorkspaceId?: string | null;
+  WorkspaceId?: string;
   /** API所属目录的编码 */
-  PoiCode?: string | null;
+  PoiCode?: string;
   /** 接口分类0. 其他服务 1. IOT服务 2. 空间服务 3.微应用服务 4.场景服务 5.AI算法服务 6.任务算法服务 7.第三方服务 */
-  Type?: number | null;
+  Type?: number;
   /** 数据授权 0:否 1:是 */
-  DataAudit?: number | null;
+  DataAudit?: number;
   /** 是否需要申请 0:否 1:是 */
-  ApplyAudit?: number | null;
+  ApplyAudit?: number;
   /** API详情 */
-  Description?: string | null;
+  Description?: string;
   /** API地址 */
-  Address?: string | null;
+  Address?: string;
   /** 请求方法类型 */
-  Method?: string | null;
+  Method?: string;
   /** API状态 */
-  Status?: number | null;
+  Status?: number;
   /** API预览地址 */
-  PreviewUrl?: string | null;
+  PreviewUrl?: string;
   /** query参数 */
-  QueryParams?: ApiContent[] | null;
+  QueryParams?: ApiContent[];
   /** 路径参数 */
-  PathParams?: ApiContent[] | null;
+  PathParams?: ApiContent[];
   /** 请求头 */
-  RequestHeaders?: ApiContent[] | null;
+  RequestHeaders?: ApiContent[];
   /** 响应头 */
-  ResponseHeaders?: ApiContent[] | null;
+  ResponseHeaders?: ApiContent[];
   /** 是否为公共空间接口 */
-  IsCommonSpace?: boolean | null;
+  IsCommonSpace?: boolean;
   /** 请求体（base64编码） */
-  Body?: string | null;
+  Body?: string;
   /** 响应体（base64编码） */
-  ResponseBody?: string | null;
+  ResponseBody?: string;
   /** 接口方式 1.http 2消息通知服务 */
-  Style?: number | null;
+  Style?: number;
 }
 
 /** API列表 */
 declare interface ApiInfoList {
   /** API列表 */
-  ApiInfo?: ApiInfo[] | null;
+  ApiInfo?: ApiInfo[];
   /** 数据总条数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
 }
 
 /** 应用描述 */
 declare interface ApplicationInfo {
   /** 应用分配的appId */
-  ApplicationId?: string | null;
+  ApplicationId?: string;
   /** 应用中文名 */
-  Name?: string | null;
+  Name?: string;
   /** 应用地址 */
-  Address?: string | null;
+  Address?: string;
   /** 应用logo */
-  ApplicationLogo?: ApplicationLogo | null;
+  ApplicationLogo?: ApplicationLogo;
   /** 应用类型，0:saas应用 1:平台应用 */
-  Type?: number | null;
+  Type?: number;
   /** engine */
-  EnglishName?: string | null;
+  EnglishName?: string;
   /** 能源管理应用 */
-  Description?: string | null;
+  Description?: string;
 }
 
 /** 应用列表 */
 declare interface ApplicationList {
   /** 应用列表 */
-  ApplicationInfoList?: ApplicationInfo[] | null;
+  ApplicationInfoList?: ApplicationInfo[];
   /** 当前查询条件命中的数据总条数 */
-  TotalCount?: string | null;
+  TotalCount?: string;
 }
 
 /** 应用logo */
 declare interface ApplicationLogo {
   /** logo图片对应的fileId */
-  FileId?: string | null;
+  FileId?: string;
   /** logo图片地址 */
-  Url?: string | null;
+  Url?: string;
 }
 
 /** 应用Token令牌信息 */
 declare interface ApplicationTokenInfo {
   /** 应用申请调用API的令牌 */
-  Token?: string | null;
+  Token?: string;
 }
 
 /** 批量新增设备接口返回结果 */
 declare interface BatchCreateDeviceRes {
   /** 新增成功的设备列表 */
-  SuccessSet?: CreateDeviceSucceeded[] | null;
+  SuccessSet?: CreateDeviceSucceeded[];
   /** 新增失败的设备列表 */
-  FailSet?: CreateDeviceFailed[] | null;
+  FailSet?: CreateDeviceFailed[];
 }
 
 /** 批量消息上报结果 */
 declare interface BatchReportAppMessageRes {
   /** 上报数量 */
-  TotalElements?: number | null;
+  TotalElements?: number;
   /** 提交数量（推送成功） */
-  Commit?: number | null;
+  Commit?: number;
   /** 消息推送结果列表 */
-  SpanMap?: ReportMsgRes[] | null;
+  SpanMap?: ReportMsgRes[];
 }
 
 /** 建筑列表响应体 */
 declare interface BuildingListRes {
   /** 建筑列表 */
-  BuildingProfileList?: BuildingProfile[] | null;
+  BuildingProfileList?: BuildingProfile[];
 }
 
 /** 建筑模型信息 */
 declare interface BuildingModel {
   /** 构件ID */
-  ElementId?: string | null;
+  ElementId?: string;
   /** 构件名称 */
-  ElementName?: string | null;
+  ElementName?: string;
   /** 模型类型 */
-  ModelType?: string | null;
+  ModelType?: string;
   /** 模型URL */
-  ModelUrl?: string | null;
+  ModelUrl?: string;
 }
 
 /** 建模模型信息响应体 */
 declare interface BuildingModelRes {
   /** 建模模型信息出参 */
-  Models?: BuildingModel[] | null;
+  Models?: BuildingModel[];
 }
 
 /** 建筑概要信息 */
 declare interface BuildingProfile {
   /** 建筑id */
-  BuildingId?: string | null;
+  BuildingId?: string;
   /** 建筑名称 */
-  BuildingName?: string | null;
+  BuildingName?: string;
   /** 空间编码 */
-  SpaceCode?: string | null;
+  SpaceCode?: string;
   /** 经度 */
-  Longitude?: number | null;
+  Longitude?: number;
   /** 纬度 */
-  Latitude?: number | null;
+  Latitude?: number;
   /** 地址 */
-  Address?: string | null;
+  Address?: string;
 }
 
 /** 查询建筑信息响应体 */
 declare interface BuildingProfileRes {
   /** 建筑概要信息 */
-  BuildingProfile?: BuildingProfile | null;
+  BuildingProfile?: BuildingProfile;
 }
 
 /** 视频扩展信息结果 */
 declare interface CameraExtendInfoRes {
   /** 存储方式 (nvr或cosmtav) */
-  SaveType?: string | null;
+  SaveType?: string;
   /** 云存储天数（save_type是cosmtav时这个参数才有效） */
-  SaveDay?: number | null;
+  SaveDay?: number;
   /** 实时分辨率 */
-  LiveResolution?: number | null;
+  LiveResolution?: number;
   /** 历史分辨率 */
-  HistoryResolution?: number | null;
+  HistoryResolution?: number;
 }
 
 /** 设备控制结果 */
 declare interface ControlDeviceRes {
   /** 设备Id */
-  WID?: string | null;
+  WID?: string;
   /** 指令接受, 0表示成功 */
-  Code?: number | null;
+  Code?: number;
   /** 控制结果 */
-  Result?: string | null;
+  Result?: string;
   /** 批量大于1时，可用此seq进行链路追踪 */
-  Seq?: string | null;
+  Seq?: string;
 }
 
 /** 设备控制后返回结果集合 */
 declare interface ControlDeviceSet {
   /** 设备控制后返回结果集合 */
-  Set?: ControlDeviceRes[] | null;
+  Set?: ControlDeviceRes[];
 }
 
 /** 导入失败设备信息 */
 declare interface CreateDeviceFailed {
   /** 产品id */
-  ProductId?: number | null;
+  ProductId?: number;
   /** 父设备wid，不为空表示导入自设备 */
-  ParentWID?: string | null;
+  ParentWID?: string;
   /** 失败原因 */
-  Reason?: string | null;
+  Reason?: string;
   /** 设备sn序列号 */
-  SN?: string | null;
+  SN?: string;
 }
 
 /** 导入成功设备信息 */
 declare interface CreateDeviceSucceeded {
   /** 产品id */
-  ProductId?: number | null;
+  ProductId?: number;
   /** 父设备wid，不为空表示导入自设备 */
-  ParentWID?: string | null;
+  ParentWID?: string;
   /** 设备编码 */
-  WID?: string | null;
+  WID?: string;
   /** 设备sn序列号 */
-  SN?: string | null;
+  SN?: string;
 }
 
 /** 自定义字段 */
@@ -415,105 +415,105 @@ declare interface CustomField {
 /** 自定义字段 */
 declare interface CustomFieldInfo {
   /** 字段id */
-  Id?: number | null;
+  Id?: number;
   /** 字段key */
-  Key?: string | null;
+  Key?: string;
   /** 字段名 */
-  Name?: string | null;
+  Name?: string;
   /** 字段值 */
-  Val?: string | null;
+  Val?: string;
 }
 
 /** 动作列表查询结果 */
 declare interface DescribeActionListRes {
   /** 第几页 */
-  PageNumber?: number | null;
+  PageNumber?: number;
   /** 每页条数 */
-  PageSize?: number | null;
+  PageSize?: number;
   /** 总页数 */
-  TotalPage?: number | null;
+  TotalPage?: number;
   /** 总条数 */
-  TotalRow?: number | null;
+  TotalRow?: number;
   /** 动作列表查询集合 */
-  ActionDetailSet?: ActionDetail[] | null;
+  ActionDetailSet?: ActionDetail[];
 }
 
 /** 根据Tag获取行政区划列表返回结构 */
 declare interface DescribeAdministrationByTagRes {
   /** 行政区划列表 */
-  List?: AdministrationData[] | null;
+  List?: AdministrationData[];
 }
 
 /** 告警级别枚举获取 */
 declare interface DescribeAlarmLevelListRes {
   /** 告警级别枚举获取数组 */
-  AlarmLevelSet?: AlarmLevelInfo[] | null;
+  AlarmLevelSet?: AlarmLevelInfo[];
 }
 
 /** 告警列表回包 */
 declare interface DescribeAlarmListRes {
   /** 第几页 */
-  PageNumber?: number | null;
+  PageNumber?: number;
   /** 每页条数 */
-  PageSize?: number | null;
+  PageSize?: number;
   /** 总页数 */
-  TotalPage?: number | null;
+  TotalPage?: number;
   /** 总条数 */
-  TotalRow?: number | null;
+  TotalRow?: number;
   /** 告警列表集合 */
-  AlarmInfoSet?: AlarmInfo[] | null;
+  AlarmInfoSet?: AlarmInfo[];
 }
 
 /** 告警状态列表返回 */
 declare interface DescribeAlarmStatusListRes {
   /** 告警状态返回结构 */
-  List?: AlarmStatusData[] | null;
+  List?: AlarmStatusData[];
 }
 
 /** 告警类型列表回包 */
 declare interface DescribeAlarmTypeListRes {
   /** 告警类型查询列表 */
-  AlarmTypeSet?: AlarmTypeDetailInfo[] | null;
+  AlarmTypeSet?: AlarmTypeDetailInfo[];
 }
 
 /** 通过城市id查询工作空间列表 */
 declare interface DescribeCityWorkspaceListRes {
   /** 通过城市id查询工作空间列表结果 */
-  WorkspaceSet?: WorkspaceInfo[] | null;
+  WorkspaceSet?: WorkspaceInfo[];
 }
 
 /** 设备分组信息 */
 declare interface DescribeDeviceGroupListRes {
   /** 设备分组list */
-  List?: DescribeGroupInfo[] | null;
+  List?: DescribeGroupInfo[];
 }
 
 /** 设备列表查询结果 */
 declare interface DescribeDeviceListRes {
   /** 第几页 */
-  PageNumber?: number | null;
+  PageNumber?: number;
   /** 每页条数 */
-  PageSize?: number | null;
+  PageSize?: number;
   /** 总页数 */
-  TotalPage?: number | null;
+  TotalPage?: number;
   /** 总条数 */
-  TotalRow?: number | null;
+  TotalRow?: number;
   /** 设备信息集合 */
-  DeviceDataSet?: DeviceDataInfo[] | null;
+  DeviceDataSet?: DeviceDataInfo[];
 }
 
 /** 事件列表查询结果 */
 declare interface DescribeEventListRes {
   /** 第几页 */
-  PageNumber?: number | null;
+  PageNumber?: number;
   /** 每页条数 */
-  PageSize?: number | null;
+  PageSize?: number;
   /** 总页数 */
-  TotalPage?: number | null;
+  TotalPage?: number;
   /** 总条数 */
-  TotalRow?: number | null;
+  TotalRow?: number;
   /** 事件信息列表 */
-  EventDetailSet?: EventDetail[] | null;
+  EventDetailSet?: EventDetail[];
 }
 
 /** 分组信息实体类 */
@@ -523,81 +523,81 @@ declare interface DescribeGroupInfo {
   /** 设备分组名称 */
   Name?: string;
   /** 分组描述 */
-  Description?: string | null;
+  Description?: string;
   /** 分组父级ID */
-  ParentId?: number | null;
+  ParentId?: number;
 }
 
 /** 联动规则列表查询结果 */
 declare interface DescribeLinkRuleListRes {
   /** 第几页 */
-  PageNumber?: number | null;
+  PageNumber?: number;
   /** 每页条数 */
-  PageSize?: number | null;
+  PageSize?: number;
   /** 总页数 */
-  TotalPage?: number | null;
+  TotalPage?: number;
   /** 总条数 */
-  TotalRow?: number | null;
+  TotalRow?: number;
   /** 联动规则列表 */
-  LinkRuleSet?: LinkRuleInfo[] | null;
+  LinkRuleSet?: LinkRuleInfo[];
 }
 
 /** 设备数据信息 */
 declare interface DeviceDataInfo {
   /** 设备ID， wid */
-  WID?: string | null;
+  WID?: string;
   /** 设备名称 */
-  DeviceName?: string | null;
+  DeviceName?: string;
   /** 设备类型Id */
-  DeviceTypeCode?: string | null;
+  DeviceTypeCode?: string;
   /** 设备类型名称 */
-  DeviceTypeName?: string | null;
+  DeviceTypeName?: string;
   /** 产品Id */
-  ProductId?: number | null;
+  ProductId?: number;
   /** 产品名称 */
-  ProductName?: string | null;
+  ProductName?: string;
   /** 产品能力:信令数据、音视频。二进制数值中第0位表示信令数据、第1位表示音视频 。1（信令数据），3（具有信令数据以及音视频能力）。 */
-  ProductAbility?: number | null;
+  ProductAbility?: number;
   /** 设备位置信息 */
-  SpaceInfoSet?: DeviceSpaceInfo[] | null;
+  SpaceInfoSet?: DeviceSpaceInfo[];
   /** 模型id */
-  ModelId?: string | null;
+  ModelId?: string;
   /** 模型名称 */
-  ModelName?: string | null;
+  ModelName?: string;
   /** 设备标签名，非必填 */
-  DeviceTagSet?: string[] | null;
+  DeviceTagSet?: string[];
   /** 激活状态（1激活、0未激活） */
-  IsActive?: number | null;
+  IsActive?: number;
   /** 激活时间 */
-  ActiveTime?: string | null;
+  ActiveTime?: string;
   /** 推流状态（推流中、未推流） 仅摄像机有的状态 */
-  IsLive?: boolean | null;
+  IsLive?: boolean;
   /** 设备所属父设备id（子设备才有） */
-  ParentWID?: string | null;
+  ParentWID?: string;
   /** 设备所有父设备名称（子设备才有） */
-  ParentWIDName?: string | null;
+  ParentWIDName?: string;
   /** 序列号 */
-  SN?: string | null;
+  SN?: string;
   /** 设备点位坐标值 */
-  Location?: DeviceLocation | null;
+  Location?: DeviceLocation;
   /** 自定义字段 */
-  FieldList?: CustomFieldInfo[] | null;
+  FieldList?: CustomFieldInfo[];
   /** 分组信息 */
-  GroupInfo?: string | null;
+  GroupInfo?: string;
   /** 通信在/离线状态（online=normal+fault，offline） */
-  DeviceStatus?: string | null;
+  DeviceStatus?: string;
   /** 设备业务状态（normal、fault、offline） */
-  Status?: string | null;
+  Status?: string;
 }
 
 /** 设备点位坐标值 */
 declare interface DeviceLocation {
   /** 点位X坐标值 */
-  X?: number | null;
+  X?: number;
   /** 点位Y坐标值 */
-  Y?: number | null;
+  Y?: number;
   /** 点位Z坐标值 */
-  Z?: number | null;
+  Z?: number;
 }
 
 /** 设备修改信息入参 */
@@ -611,397 +611,397 @@ declare interface DeviceModifyInfo {
 /** 设备影子信息 */
 declare interface DeviceShadowInfo {
   /** 设备ID */
-  WID?: string | null;
+  WID?: string;
   /** 设备影子数据,返回有效数据为"x-json:"后字段 */
-  DeviceShadow?: string | null;
+  DeviceShadow?: string;
   /** 设备影子更新时间 */
-  DeviceShadowUpdateTime?: string | null;
+  DeviceShadowUpdateTime?: string;
 }
 
 /** 设备影子查询列表 */
 declare interface DeviceShadowRes {
   /** 第几页 */
-  PageNumber?: number | null;
+  PageNumber?: number;
   /** 每页条数 */
-  PageSize?: number | null;
+  PageSize?: number;
   /** 总页数 */
-  TotalPage?: number | null;
+  TotalPage?: number;
   /** 总条数 */
-  TotalRow?: number | null;
+  TotalRow?: number;
   /** 设备影子列表 */
-  Set?: DeviceShadowInfo[] | null;
+  Set?: DeviceShadowInfo[];
 }
 
 /** 设备位置信息 */
 declare interface DeviceSpaceInfo {
   /** 空间Id */
-  Id?: string | null;
+  Id?: string;
   /** 空间名字 */
-  Name?: string | null;
+  Name?: string;
   /** 空间级别 */
-  Level?: number | null;
+  Level?: number;
   /** 空间编码 */
-  Code?: string | null;
+  Code?: string;
 }
 
 /** 设备挂接的空间信息 */
 declare interface DeviceSpaceInfoRes {
   /** 建筑id */
-  BuildingId?: string | null;
+  BuildingId?: string;
   /** 构件id */
-  ElementId?: string | null;
+  ElementId?: string;
   /** 构件类型 */
-  EntityType?: string | null;
+  EntityType?: string;
   /** 构件名称 */
-  ElementName?: string | null;
+  ElementName?: string;
   /** 构件级别 */
-  Level?: number | null;
+  Level?: number;
   /** 底部标高（单位mm） */
-  BottomHeight?: number | null;
+  BottomHeight?: number;
   /** 空间编码 */
-  SpaceCode?: string | null;
+  SpaceCode?: string;
 }
 
 /** 设备状态信息 */
 declare interface DeviceStatusInfo {
   /** 设备ID */
-  WID?: string | null;
+  WID?: string;
   /** 设备状态（online=normal+fault、offline） */
-  DeviceStatus?: string | null;
+  DeviceStatus?: string;
   /** 设备状态更新时间 */
-  DeviceStatusUpdateTime?: string | null;
+  DeviceStatusUpdateTime?: string;
   /** 设备业务状态（normal、fault、offline） */
-  Status?: string | null;
+  Status?: string;
   /** 推流状态。推流中-true，未推流-false */
-  IsAlive?: boolean | null;
+  IsAlive?: boolean;
 }
 
 /** 设备状态获取接口结果 */
 declare interface DeviceStatusRes {
   /** 第几页 */
-  PageNumber?: number | null;
+  PageNumber?: number;
   /** 每页条数 */
-  PageSize?: number | null;
+  PageSize?: number;
   /** 总页数 */
-  TotalPage?: number | null;
+  TotalPage?: number;
   /** 总条数 */
-  TotalRow?: number | null;
+  TotalRow?: number;
   /** 设备状态信息列表 */
-  DeviceStatusSet?: DeviceStatusInfo[] | null;
+  DeviceStatusSet?: DeviceStatusInfo[];
 }
 
 /** 设备状态统计结果 */
 declare interface DeviceStatusStatRes {
   /** 工作空间Id */
-  WorkspaceId?: number | null;
+  WorkspaceId?: number;
   /** 汇总数。在线（正常+故障） + 离线 */
-  Total?: number | null;
+  Total?: number;
   /** 正常数 */
-  NormalSum?: number | null;
+  NormalSum?: number;
   /** 离线数 */
-  OfflineSum?: number | null;
+  OfflineSum?: number;
   /** 故障数 */
-  FaultSum?: number | null;
+  FaultSum?: number;
   /** 设备类型概览列表 */
-  DeviceTypeOverviewSet?: DeviceTypeOverview[] | null;
+  DeviceTypeOverviewSet?: DeviceTypeOverview[];
   /** 设备类型统计列表 */
-  StatLevelSet?: StatLevel[] | null;
+  StatLevelSet?: StatLevel[];
 }
 
 /** 设备标签信息 */
 declare interface DeviceTagInfo {
   /** 标签Id */
-  TagId?: number | null;
+  TagId?: number;
   /** 标签名字 */
-  TagName?: string | null;
+  TagName?: string;
 }
 
 /** 设备标签列表查询结果 */
 declare interface DeviceTagRes {
   /** 第几页 */
-  PageNumber?: number | null;
+  PageNumber?: number;
   /** 每页条数 */
-  PageSize?: number | null;
+  PageSize?: number;
   /** 总页数 */
-  TotalPage?: number | null;
+  TotalPage?: number;
   /** 总条数 */
-  TotalRow?: number | null;
+  TotalRow?: number;
   /** 设备标签列表 */
-  Set?: DeviceTagInfo[] | null;
+  Set?: DeviceTagInfo[];
 }
 
 /** 设备类型 */
 declare interface DeviceType {
   /** 设备类型编码 */
-  Code?: string | null;
+  Code?: string;
   /** 设备类型名称 */
-  Name?: string | null;
+  Name?: string;
   /** 父设备类型编码 */
-  ParentCode?: string | null;
+  ParentCode?: string;
   /** 父设备类型名称 */
-  ParentName?: string | null;
+  ParentName?: string;
   /** 是否子系统，1是 */
-  IsSubsystem?: number | null;
+  IsSubsystem?: number;
 }
 
 /** 设备类型概览信息 */
 declare interface DeviceTypeOverview {
   /** 设备类型值 */
-  DeviceType?: string | null;
+  DeviceType?: string;
   /** 设备类型名称 */
-  Name?: string | null;
+  Name?: string;
   /** 汇总数。在线（正常+故障） + 离线 */
-  Total?: number | null;
+  Total?: number;
   /** 正常数 */
-  Normal?: number | null;
+  Normal?: number;
   /** 离线数 */
-  Offline?: number | null;
+  Offline?: number;
   /** 故障数 */
-  Fault?: number | null;
+  Fault?: number;
 }
 
 /** 设备类型列表 */
 declare interface DeviceTypeSet {
   /** 设备类型列表 */
-  Set?: DeviceType[] | null;
+  Set?: DeviceType[];
 }
 
 /** 构件地理坐标 */
 declare interface ElementCoordinates {
   /** 经度 */
-  Longitude?: number | null;
+  Longitude?: number;
   /** 纬度 */
-  Latitude?: number | null;
+  Latitude?: number;
   /** 高程 */
-  Altitude?: number | null;
+  Altitude?: number;
 }
 
 /** 构件概要信息 */
 declare interface ElementProfile {
   /** 建筑id */
-  BuildingId?: string | null;
+  BuildingId?: string;
   /** 构件id */
-  ElementId?: string | null;
+  ElementId?: string;
   /** 构件类型 */
-  EntityType?: string | null;
+  EntityType?: string;
   /** 构件名称 */
-  ElementName?: string | null;
+  ElementName?: string;
   /** 构件空间级别 */
-  Level?: number | null;
+  Level?: number;
   /** 底部标高（单位mm） */
-  BottomHeight?: number | null;
+  BottomHeight?: number;
   /** 排序 */
-  Sort?: number | null;
+  Sort?: number;
   /** 空间编码 */
-  SpaceCode?: string | null;
+  SpaceCode?: string;
   /** 空间分类编码 */
-  SpaceTypeCode?: string | null;
+  SpaceTypeCode?: string;
   /** 空间分类名称 */
-  SpaceTypeName?: string | null;
+  SpaceTypeName?: string;
   /** 父级构件id */
-  ParentElementId?: string | null;
+  ParentElementId?: string;
   /** 空间层级类型编码 */
-  SpacePoiId?: string | null;
+  SpacePoiId?: string;
   /** 构件描述 */
-  ElementDesc?: string | null;
+  ElementDesc?: string;
   /** 删除标记 */
-  IsDelete?: number | null;
+  IsDelete?: number;
 }
 
 /** 构件分页查询响应体 */
 declare interface ElementProfilePageRes {
   /** 构件总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 构件列表 */
-  List?: ElementProfile[] | null;
+  List?: ElementProfile[];
 }
 
 /** 构件树节点信息 */
 declare interface ElementProfileTreeNode {
   /** 构件概要信息 */
-  ElementProfile?: ElementProfile | null;
+  ElementProfile?: ElementProfile;
   /** 子节点信息 */
-  Children?: ElementProfileTreeNode[] | null;
+  Children?: ElementProfileTreeNode[];
 }
 
 /** 构件树响应体 */
 declare interface ElementProfileTreeRes {
   /** 建筑id */
-  BuildingId?: string | null;
+  BuildingId?: string;
   /** 父级构件id */
-  ParentElementId?: string | null;
+  ParentElementId?: string;
   /** 构件树 */
-  Root?: ElementProfileTreeNode | null;
+  Root?: ElementProfileTreeNode;
 }
 
 /** 构件属性信息 */
 declare interface ElementProperty {
   /** 属性名称 */
-  Name?: string | null;
+  Name?: string;
   /** 属性描述 */
-  Description?: string | null;
+  Description?: string;
   /** 属性内容 */
-  Content?: string | null;
+  Content?: string;
 }
 
 /** 构件属性信息响应体 */
 declare interface ElementPropertyRes {
   /** 建筑id */
-  BuildingId?: string | null;
+  BuildingId?: string;
   /** 构件id */
-  ElementId?: string | null;
+  ElementId?: string;
   /** 构件属性集合 */
-  PropertySet?: ElementProperty[] | null;
+  PropertySet?: ElementProperty[];
   /** 构件地理坐标 */
-  Coordinates?: ElementCoordinates | null;
+  Coordinates?: ElementCoordinates;
   /** 构件偏移量 */
-  Translate?: ElementTranslate | null;
+  Translate?: ElementTranslate;
   /** 构件名称 */
-  ElementName?: string | null;
+  ElementName?: string;
   /** 构件类型代码 */
-  EntityTypeCode?: string | null;
+  EntityTypeCode?: string;
   /** 构件类型名称 */
-  EntityTypeName?: string | null;
+  EntityTypeName?: string;
 }
 
 /** 构件平移信息 */
 declare interface ElementTranslate {
   /** X方向偏移量 */
-  X?: number | null;
+  X?: number;
   /** Y方向偏移量 */
-  Y?: number | null;
+  Y?: number;
   /** Z方向偏移量 */
-  Z?: number | null;
+  Z?: number;
 }
 
 /** 空结果返回 */
 declare interface EmptyRes {
   /** 返回请求状态,成功ok，失败error */
-  Msg?: string | null;
+  Msg?: string;
 }
 
 /** 事件信息 */
 declare interface Event {
   /** 事件id或动作Id */
-  Id?: number | null;
+  Id?: number;
   /** 事件名称或动作名称 */
-  Name?: string | null;
+  Name?: string;
 }
 
 /** 事件详细信息 */
 declare interface EventDetail {
   /** 事件id */
-  Id?: number | null;
+  Id?: number;
   /** 事件名 */
-  Name?: string | null;
+  Name?: string;
   /** 事件触发类型 */
-  TriggerType?: string | null;
+  TriggerType?: string;
   /** 事件触发条件，返回为x-json后的字段 */
-  TriggerCondition?: string | null;
+  TriggerCondition?: string;
   /** 有效期 */
-  ValidPeriod?: string | null;
+  ValidPeriod?: string;
   /** 关联规则列表 */
-  LinkRuleSet?: LinkRule[] | null;
+  LinkRuleSet?: LinkRule[];
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 设备类型，当触发类型为deviceType时返回 */
-  DeviceType?: string | null;
+  DeviceType?: string;
   /** 设备的wid，当触发类型是device返回 */
-  WID?: string | null;
+  WID?: string;
 }
 
 /** 事件对象 */
 declare interface EventObj {
   /** 事件id */
-  Id?: number | null;
+  Id?: number;
   /** 事件名称 */
-  Name?: string | null;
+  Name?: string;
   /** 事件触发类型名称 */
-  Type?: string | null;
+  Type?: string;
   /** 时间触发条件 */
-  Condition?: string | null;
+  Condition?: string;
 }
 
 /** 文件下载URL */
 declare interface FileDownloadURL {
   /** 下载地址 */
-  FileURL?: string | null;
+  FileURL?: string;
 }
 
 /** 文件信息 */
 declare interface FileInfo {
   /** 文件id */
-  FileId?: string | null;
+  FileId?: string;
   /** 名称 */
-  ReportName?: string | null;
+  ReportName?: string;
 }
 
 /** 获取文件上传URL接口回包 */
 declare interface FileUploadURL {
   /** 上传地址 */
-  UploadURL?: string | null;
+  UploadURL?: string;
   /** 文件Id */
-  FileId?: string | null;
+  FileId?: string;
   /** 下载地址 */
-  DownloadURL?: string | null;
+  DownloadURL?: string;
 }
 
 /** 告警处理记录 */
 declare interface HandleRecordInfo {
   /** 告警处理记录id */
-  Id?: number | null;
+  Id?: number;
   /** 描述 */
-  Description?: string | null;
+  Description?: string;
   /** 名称 */
-  Name?: string | null;
+  Name?: string;
   /** 操作类型 */
-  OperationType?: string | null;
+  OperationType?: string;
   /** 处理时间 */
-  Time?: string | null;
+  Time?: string;
   /** 类型 */
-  Type?: string | null;
+  Type?: string;
   /** 文件列表 */
-  FileSet?: FileInfo[] | null;
+  FileSet?: FileInfo[];
   /** 应用appid */
-  AppId?: number | null;
+  AppId?: number;
   /** 扩展字段1，存非孪生中台用户id */
-  ExtendOne?: string | null;
+  ExtendOne?: string;
 }
 
 /** 告警处理人列表 */
 declare interface HandlerPersonInfo {
   /** 用户id */
-  Id?: string | null;
+  Id?: string;
   /** 用户名 */
-  Name?: string | null;
+  Name?: string;
 }
 
 /** 关联规则信息 */
 declare interface LinkRule {
   /** 关联联动规则id */
-  Id?: number | null;
+  Id?: number;
   /** 关联联动规则名字 */
-  Name?: string | null;
+  Name?: string;
 }
 
 /** 联动规则信息 */
 declare interface LinkRuleInfo {
   /** 联动id */
-  Id?: number | null;
+  Id?: number;
   /** 联动名称 */
-  Name?: string | null;
+  Name?: string;
   /** 事件列表 */
-  EventSet?: Event[] | null;
+  EventSet?: Event[];
   /** 动作列表 */
-  ActionSet?: Action[] | null;
+  ActionSet?: Action[];
   /** 状态：0开，-1关 */
-  Status?: number | null;
+  Status?: number;
   /** 起始时间 */
-  BeginDate?: string | null;
+  BeginDate?: string;
   /** 结束时间 */
-  EndDate?: string | null;
+  EndDate?: string;
   /** 有效周期内容,有效字段为x-json后的字段 */
-  ValidPeriod?: string | null;
+  ValidPeriod?: string;
 }
 
 /** 上报消息概要 */
@@ -1017,35 +1017,35 @@ declare interface MessageProfile {
 /** 模型基础信息 */
 declare interface ModelInfo {
   /** 工作空间id */
-  WorkspaceId?: number | null;
+  WorkspaceId?: number;
   /** 模型名称 */
-  ModelName?: string | null;
+  ModelName?: string;
   /** 物模型id */
-  ModelId?: string | null;
+  ModelId?: string;
   /** 关联产品信息 */
-  RelatedProduct?: RelatedProduct[] | null;
+  RelatedProduct?: RelatedProduct[];
   /** 设备类型名 */
-  DeviceTypeName?: string | null;
+  DeviceTypeName?: string;
   /** 设备类型id */
-  DeviceType?: string | null;
+  DeviceType?: string;
   /** 物模型类型，产品模型/标准模型 */
-  ModelType?: number | null;
+  ModelType?: number;
   /** 模型参数内容,有效字段为"x-json:"后的字段 */
-  ModelParams?: string | null;
+  ModelParams?: string;
 }
 
 /** 模型列表查询结果 */
 declare interface ModelSet {
   /** 第几页 */
-  PageNumber?: number | null;
+  PageNumber?: number;
   /** 每页条数 */
-  PageSize?: number | null;
+  PageSize?: number;
   /** 总页数 */
-  TotalPage?: number | null;
+  TotalPage?: number;
   /** 总条数 */
-  TotalRow?: number | null;
+  TotalRow?: number;
   /** 模型基础信息 */
-  Set?: ModelInfo[] | null;
+  Set?: ModelInfo[];
 }
 
 /** 设备自定义值修改信息入参 */
@@ -1093,81 +1093,81 @@ declare interface ProcessRecordInfo {
 /** 产品信息 */
 declare interface ProductInfo {
   /** 工作空间id */
-  WorkspaceId?: number | null;
+  WorkspaceId?: number;
   /** 产品PID */
-  ProductId?: number | null;
+  ProductId?: number;
   /** 产品名称 */
-  ProductName?: string | null;
+  ProductName?: string;
   /** 设备类型 */
-  DeviceTypeName?: string | null;
+  DeviceTypeName?: string;
   /** 设备类型id */
-  DeviceTypeId?: string | null;
+  DeviceTypeId?: string;
   /** 产品属性，如：网关（1）、直连设备（2）、子设备（3） */
-  Attribute?: number | null;
+  Attribute?: number;
   /** 产品型号 */
-  ProductType?: string | null;
+  ProductType?: string;
   /** 产品能力:信令数据、音视频。二进制数值中第0位表示信令数据、第1位表示音视频 。1（信令数据），3（具有信令数据以及音视频能力）。 */
-  ProductAbility?: number | null;
+  ProductAbility?: number;
   /** 生产厂商 */
-  Manufacturer?: string | null;
+  Manufacturer?: string;
   /** 维保厂商 */
-  MaintenanceMfr?: string | null;
+  MaintenanceMfr?: string;
   /** 物模型名称 */
-  ModelName?: string | null;
+  ModelName?: string;
   /** 物模型id */
-  ModelId?: string | null;
+  ModelId?: string;
   /** 物模型类型，产品模型/标准模型 */
-  ModelType?: number | null;
+  ModelType?: number;
 }
 
 /** 产品列表查询结果 */
 declare interface ProductSet {
   /** 第几页 */
-  PageNumber?: number | null;
+  PageNumber?: number;
   /** 每页条数 */
-  PageSize?: number | null;
+  PageSize?: number;
   /** 总页数 */
-  TotalPage?: number | null;
+  TotalPage?: number;
   /** 总条数 */
-  TotalRow?: number | null;
+  TotalRow?: number;
   /** 产品信息列表 */
-  Product?: ProductInfo[] | null;
+  Product?: ProductInfo[];
 }
 
 /** 视频流Raw协议信息 */
 declare interface RawInfo {
   /** 加密向量（如果视频网关选择流为非加密传输这个参数可忽略） */
-  SM4Vector?: string | null;
+  SM4Vector?: string;
   /** 专线ip (非专线接入可忽略) */
-  NATIP?: string | null;
+  NATIP?: string;
   /** 客户端握手鉴权参数 */
-  StreamToken?: string | null;
+  StreamToken?: string;
   /** 拉流端口 */
-  Port?: number | null;
+  Port?: number;
   /** 视频流加密key,目前为AES128加密KEY（如果视频网关选择流为非加密传输这个参数可忽略） */
-  StreamEnKey?: string | null;
+  StreamEnKey?: string;
   /** 拉流公网地址（非公网接入时，这个地址是内网地址） */
-  IP?: string | null;
+  IP?: string;
   /** 拉流内网地址 */
-  InnerIP?: string | null;
+  InnerIP?: string;
 }
 
 /** 录像信息 */
 declare interface RecordInfo {
   /** 本录像片段开始时间（s） */
-  StartTime?: number | null;
+  StartTime?: number;
   /** 本录像片段结束时间（s） */
-  EndTime?: number | null;
+  EndTime?: number;
   /** 录像片段文件url */
-  VideoURL?: string | null;
+  VideoURL?: string;
 }
 
 /** 关联产品信息 */
 declare interface RelatedProduct {
   /** 关联产品pid */
-  Id?: number | null;
+  Id?: number;
   /** 关联产品名字 */
-  Name?: string | null;
+  Name?: string;
 }
 
 /** 单条消息上报请求 */
@@ -1193,43 +1193,43 @@ declare interface ReportAppMessage {
 /** 上报图片列表 */
 declare interface ReportImg {
   /** 类型 */
-  Type?: number | null;
+  Type?: number;
   /** 数据 */
-  Data?: string | null;
+  Data?: string;
 }
 
 /** 上报消息结果 */
 declare interface ReportMsgRes {
   /** 上报消息对应下标的16位标识Id, 即第几个消息 */
-  ReportId?: string | null;
+  ReportId?: string;
   /** 上报消息结果，1表示成功推送，0表示推送失败 */
-  ReportStatus?: number | null;
+  ReportStatus?: number;
 }
 
 /** 规则详情查询结果 */
 declare interface RuleDetailRes {
   /** 联动id */
-  RuleId?: number | null;
+  RuleId?: number;
   /** 联动名称 */
-  RuleName?: string | null;
+  RuleName?: string;
   /** 联动说明 */
-  RuleDesc?: string | null;
+  RuleDesc?: string;
   /** 1 全天有效，0：固定时间段有效 */
-  ValidType?: number | null;
+  ValidType?: number;
   /** 有效期，json字符串（全天有效时为空） */
-  ValidPeriod?: string | null;
+  ValidPeriod?: string;
   /** 起始时间 */
-  BeginDate?: string | null;
+  BeginDate?: string;
   /** 结束时间 */
-  EndDate?: string | null;
+  EndDate?: string;
   /** 启用状态。1-启用，0-停用 */
-  Status?: number | null;
+  Status?: number;
   /** 触发规则，事件的组合 */
-  EventRule?: string | null;
+  EventRule?: string;
   /** 事件对象集合 */
-  EventInfoSet?: EventObj[] | null;
+  EventInfoSet?: EventObj[];
   /** 动作对象集合 */
-  ActionInfoSet?: ActionObj[] | null;
+  ActionInfoSet?: ActionObj[];
 }
 
 /** 保存or修改设备分组回包 */
@@ -1251,13 +1251,13 @@ declare interface SceneInfo {
 /** 场景列表响应体 */
 declare interface SceneListRes {
   /** 场景列表 */
-  SceneList?: SceneInfo[] | null;
+  SceneList?: SceneInfo[];
 }
 
 /** 查询项目空间楼栋数量与建筑面积响应体 */
 declare interface SpaceDataListStatsRes {
   /** 楼栋数量与建筑面积列表 */
-  List?: SpaceDataStats[] | null;
+  List?: SpaceDataStats[];
 }
 
 /** 项目空间楼栋数量与建筑面积出参 */
@@ -1283,259 +1283,259 @@ declare interface SpaceDataTotalStatsRes {
 /** 查询指定空间id列表响应 */
 declare interface SpaceDeviceIdListRes {
   /** 设备id列表 */
-  DeviceIds?: string[] | null;
+  DeviceIds?: string[];
 }
 
 /** 设备-空间绑定关系 */
 declare interface SpaceDeviceRelation {
   /** 设备id */
-  DeviceId?: string | null;
+  DeviceId?: string;
   /** 构件id */
-  ElementId?: string | null;
+  ElementId?: string;
 }
 
 /** 设备-空间绑定关系响应体 */
 declare interface SpaceDeviceRelationRes {
   /** 设备空间绑定关系列表 */
-  SpaceDeviceRelationList?: SpaceDeviceRelation[] | null;
+  SpaceDeviceRelationList?: SpaceDeviceRelation[];
 }
 
 /** 项目空间详细信息 */
 declare interface SpaceInfo {
   /** 项目空间id */
-  WorkspaceId?: number | null;
+  WorkspaceId?: number;
   /** 租户id */
-  TenantId?: number | null;
+  TenantId?: number;
   /** 英文名 */
-  EnglishName?: string | null;
+  EnglishName?: string;
   /** 中文名 */
-  ChineseName?: string | null;
+  ChineseName?: string;
   /** 项目空间描述 */
-  Description?: string | null;
+  Description?: string;
   /** 项目空间状态:0 启用 1 停用 -1 已删除 */
-  Status?: number | null;
+  Status?: number;
   /** 是否是公共空间 */
-  IsCommWorkspace?: boolean | null;
+  IsCommWorkspace?: boolean;
   /** 有效期开始时间 */
-  ValidityStartTime?: string | null;
+  ValidityStartTime?: string;
   /** 有效期结束时间 */
-  ValidityEndTime?: string | null;
+  ValidityEndTime?: string;
   /** 选中状态 */
-  Selected?: number | null;
+  Selected?: number;
   /** 系统生成状态 */
-  IsSystem?: number | null;
+  IsSystem?: number;
 }
 
 /** 空间层级关系 */
 declare interface SpaceRelation {
   /** 构件id */
-  ElementId?: string | null;
+  ElementId?: string;
   /** 构件名称 */
-  ElementName?: string | null;
+  ElementName?: string;
   /** 空间层级 */
-  Level?: number | null;
+  Level?: number;
   /** 空间编码 */
-  SpaceCode?: string | null;
+  SpaceCode?: string;
   /** 父级空间编码 */
-  ParentSpaceCode?: string | null;
+  ParentSpaceCode?: string;
   /** 子构件信息 */
-  Children?: SpaceRelation[] | null;
+  Children?: SpaceRelation[];
 }
 
 /** 空间层级关系响应体 */
 declare interface SpaceRelationRes {
   /** 空间层级关系 */
-  SpaceRelation?: SpaceRelation | null;
+  SpaceRelation?: SpaceRelation;
 }
 
 /** 空间分类 */
 declare interface SpaceType {
   /** 空间分类编码 */
-  SpaceTypeCode?: string | null;
+  SpaceTypeCode?: string;
   /** 空间分类名称 */
-  SpaceTypeName?: string | null;
+  SpaceTypeName?: string;
 }
 
 /** 空间分类列表响应体 */
 declare interface SpaceTypeListRes {
   /** 空间分类列表 */
-  SpaceTypeList?: SpaceType[] | null;
+  SpaceTypeList?: SpaceType[];
 }
 
 /** 部门用户 */
 declare interface SsoDepartment {
   /** 部门ID */
-  DepartmentId?: string | null;
+  DepartmentId?: string;
   /** 部门名称 */
-  Name?: string | null;
+  Name?: string;
   /** 父级部门ID */
-  ParentDepartmentId?: string | null;
+  ParentDepartmentId?: string;
 }
 
 /** 部门用户结果 */
 declare interface SsoDepartmentsResult {
   /** 总数 */
-  Total?: number | null;
+  Total?: number;
   /** 部门列表 */
-  Departments?: SsoDepartment[] | null;
+  Departments?: SsoDepartment[];
 }
 
 /** 部门用户 */
 declare interface SsoTeamUser {
   /** 用户ID */
-  UserId?: string | null;
+  UserId?: string;
   /** 用户名称 */
-  RealName?: string | null;
+  RealName?: string;
   /** 用户类型，1-超级管理员；2-1号管理员；3-普通管理员；99-普通用户 */
-  UserType?: string | null;
+  UserType?: string;
   /** 所属租户ID */
-  TenantId?: string | null;
+  TenantId?: string;
   /** 邮箱 */
-  Email?: string | null;
+  Email?: string;
   /** 电话 */
-  Phone?: string | null;
+  Phone?: string;
   /** 用户状态 */
-  Status?: number | null;
+  Status?: number;
   /** 创建时间 */
-  CreateAt?: number | null;
+  CreateAt?: number;
   /** 部门ID */
-  DepartmentId?: string | null;
+  DepartmentId?: string;
   /** 部门名称 */
-  DepartmentName?: string | null;
+  DepartmentName?: string;
   /** 是否关联权限 */
-  LinkFilter?: number | null;
+  LinkFilter?: number;
 }
 
 /** 空间用户结果 */
 declare interface SsoTeamUserResult {
   /** 总数 */
-  Total?: number | null;
+  Total?: number;
   /** 部门用户列表 */
-  Users?: SsoTeamUser[] | null;
+  Users?: SsoTeamUser[];
 }
 
 /** 用户结果 */
 declare interface SsoUser {
   /** 用户ID */
-  UserId?: string | null;
+  UserId?: string;
   /** 用户昵称 */
-  UserName?: string | null;
+  UserName?: string;
   /** 用户名称 */
-  RealName?: string | null;
+  RealName?: string;
   /** 用户类型，1-超级管理员；2-1号管理员；3-普通管理员；99-普通用户 */
-  UserType?: string | null;
+  UserType?: string;
   /** 所属租户ID */
-  TenantId?: string | null;
+  TenantId?: string;
   /** 所属组ID */
-  UserGroup?: string | null;
+  UserGroup?: string;
   /** 邮箱 */
-  Email?: string | null;
+  Email?: string;
   /** 电话 */
-  Phone?: string | null;
+  Phone?: string;
   /** 用户状态，0待审核，1正常启用，2禁用 */
-  Status?: number | null;
+  Status?: number;
   /** 创建时间 */
-  CreateAt?: number | null;
+  CreateAt?: number;
   /** 更新时间 */
-  UpdateAt?: number | null;
+  UpdateAt?: number;
   /** 是否属于团队，0不可用，1属于，2不属 */
-  BelongTeam?: number | null;
+  BelongTeam?: number;
   /** 部门ID */
-  DepartmentId?: string | null;
+  DepartmentId?: string;
   /** 部门名称 */
-  DepartmentName?: string | null;
+  DepartmentName?: string;
   /** 子账户ID */
-  DepartmentUserId?: number | null;
+  DepartmentUserId?: number;
   /** 密码 */
-  Password?: string | null;
+  Password?: string;
 }
 
 /** 租户人员结果 */
 declare interface SsoUserResult {
   /** 总数 */
-  Total?: number | null;
+  Total?: number;
   /** 租户人员数据 */
-  Users?: SsoUser[] | null;
+  Users?: SsoUser[];
 }
 
 /** 设备类型统计 */
 declare interface StatDeviceType {
   /** 汇总数。在线（正常+故障） + 离线 */
-  Total?: number | null;
+  Total?: number;
   /** 正常数 */
-  Normal?: number | null;
+  Normal?: number;
   /** 离线数 */
-  Offline?: number | null;
+  Offline?: number;
   /** 故障数 */
-  Fault?: number | null;
+  Fault?: number;
   /** 设备名 */
-  Name?: string | null;
+  Name?: string;
   /** 设备类型 */
-  DeviceType?: string | null;
+  DeviceType?: string;
 }
 
 /** 层级统计 */
 declare interface StatLevel {
   /** 汇总数。在线（正常+故障） + 离线 */
-  Total?: number | null;
+  Total?: number;
   /** 正常数 */
-  NormalSum?: number | null;
+  NormalSum?: number;
   /** 离线数 */
-  OfflineSum?: number | null;
+  OfflineSum?: number;
   /** 故障数 */
-  FaultSum?: number | null;
+  FaultSum?: number;
   /** 空间id */
-  SpaceCode?: string | null;
+  SpaceCode?: string;
   /** 设备类型统计列表 */
-  StatDeviceTypeSet?: StatDeviceType[] | null;
+  StatDeviceTypeSet?: StatDeviceType[];
 }
 
 /** 云录像接口结果 */
 declare interface VideoCloudRecordRes {
   /** 录像信息总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 录像信息列表 */
-  RecordSet?: RecordInfo[] | null;
+  RecordSet?: RecordInfo[];
 }
 
 /** 视频流查询结果 */
 declare interface VideoRecordStreamRes {
   /** FLV协议格式视频流 */
-  FLV?: string | null;
+  FLV?: string;
   /** RTMP协议格式视频流 */
-  RTMP?: string | null;
+  RTMP?: string;
   /** HLS协议格式视频流 */
-  HLS?: string | null;
+  HLS?: string;
   /** WebRtc协议格式视频流 */
-  WebRTC?: string | null;
+  WebRTC?: string;
   /** RAW协议格式视频流 */
-  RAW?: RawInfo | null;
+  RAW?: RawInfo;
   /** 视频流的唯一标识 */
-  Stream?: string | null;
+  Stream?: string;
 }
 
 /** 工作空间信息描述 */
 declare interface WorkspaceInfo {
   /** 工作空间Id */
-  WorkspaceId?: number | null;
+  WorkspaceId?: number;
   /** 工作空间中文名字 */
-  ChineseName?: string | null;
+  ChineseName?: string;
   /** 工作空间描述 */
-  Description?: string | null;
+  Description?: string;
   /** 工作空间是否删除状态 */
-  Status?: number | null;
+  Status?: number;
   /** 该工作空间绑定的区/县的行政区名字 */
-  ParkName?: string | null;
+  ParkName?: string;
   /** 该工作空间绑定的区/县的行政区编码 */
-  ParkNum?: string | null;
+  ParkNum?: string;
   /** 获取该工作空间绑定的区/县的上级行政区划信息 */
-  AdministrativeDetailSet?: AdministrativeDetail[] | null;
+  AdministrativeDetailSet?: AdministrativeDetail[];
 }
 
 /** 项目空间列表 */
 declare interface WorkspaceInfoList {
   /** 项目空间列表 */
-  List?: SpaceInfo[] | null;
+  List?: SpaceInfo[];
 }
 
 declare interface AddAlarmProcessRecordRequest {

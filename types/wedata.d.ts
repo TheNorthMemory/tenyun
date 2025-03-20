@@ -6336,6 +6336,8 @@ declare interface CreateDsFolderRequest {
   FolderName: string;
   /** 父文件夹ID */
   ParentsFolderId?: string;
+  /** 文件夹来源 template管理，orchestrationSpace 编排空间 */
+  FolderForm?: string;
 }
 
 declare interface CreateDsFolderResponse {
@@ -7594,6 +7596,16 @@ declare interface DescribeDsFolderTreeRequest {
   TaskNodeId?: string;
   /** 工作流类型, 使用场景: 任务复制,选择工作流. 取值范围- cycle 周期工作流- manual 手动工作流 */
   WorkflowType?: string;
+  /** 任务类型id列表 */
+  TaskTypeIdList?: number[];
+  /** 责任人id列表 */
+  InChargeIdList?: string[];
+  /** 自身责任人 */
+  OnlyMe?: boolean;
+  /** 是否包含代码模版 */
+  IncludeCodeTemplate?: boolean;
+  /** 编排空间 或代码模版 orchestrationSpace 编排空间 template模版管理 */
+  FolderForm?: string;
 }
 
 declare interface DescribeDsFolderTreeResponse {

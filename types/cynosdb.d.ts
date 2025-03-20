@@ -4323,7 +4323,7 @@ declare interface ModifyBackupConfigRequest {
   ReserveDuration?: number;
   /** 该参数目前不支持修改，无需填写。备份频率，长度为7的数组，分别对应周一到周日的备份方式，full-全量备份，increment-增量备份 */
   BackupFreq?: string[];
-  /** 该参数目前不支持修改，无需填写。备份方式，logic-逻辑备份，snapshot-快照备份 */
+  /** 该参数目前不支持修改，无需填写。 */
   BackupType?: string;
   /** 逻辑备份配置 */
   LogicBackupConfig?: LogicBackupConfigInfo;

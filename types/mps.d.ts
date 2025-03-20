@@ -62,7 +62,7 @@ declare interface ActionConfigInfo {
 
 /** 编排原子任务 */
 declare interface Activity {
-  /** 原子任务类型：input: 起始节点output：终止节点action-trans：转码action-samplesnapshot：采样截图action-AIAnalysis: 分析action-AIRecognition：识别action-aiReview：审核action-animated-graphics：转动图action-image-sprite：雪碧图action-snapshotByTimeOffset: 时间点截图action-adaptive-substream：自适应码流action-AIQualityControl：媒体质检 */
+  /** 原子任务类型：input: 起始节点output：终止节点action-trans：转码action-samplesnapshot：采样截图action-AIAnalysis: 分析action-AIRecognition：识别action-aiReview：审核action-animated-graphics：转动图action-image-sprite：雪碧图action-snapshotByTimeOffset: 时间点截图action-adaptive-substream：自适应码流action-AIQualityControl：媒体质检action-SmartSubtitles：智能字幕 */
   ActivityType: string | null;
   /** 后驱节点索引数组 */
   ReardriveIndex?: number[] | null;
@@ -92,6 +92,8 @@ declare interface ActivityPara {
   AiRecognitionTask?: AiRecognitionTaskInput | null;
   /** 媒体质检任务 */
   QualityControlTask?: AiQualityControlTaskInput | null;
+  /** 智能字幕任务 */
+  SmartSubtitlesTask?: SmartSubtitlesTaskInput | null;
 }
 
 /** 编排子任务输出 */
@@ -116,11 +118,13 @@ declare interface ActivityResItem {
   AnalysisTask?: ScheduleAnalysisTaskResult | null;
   /** 媒体质检任务输出 */
   QualityControlTask?: ScheduleQualityControlTaskResult | null;
+  /** 智能字幕任务输出 */
+  SmartSubtitlesTask?: ScheduleSmartSubtitleTaskResult | null;
 }
 
 /** 编排任务输出 */
 declare interface ActivityResult {
-  /** 原子任务类型。Transcode：转码。SampleSnapshot：采样截图。AnimatedGraphics：转动图。SnapshotByTimeOffset：时间点截图。ImageSprites：雪碧图。AdaptiveDynamicStreaming：自适应码流。AiContentReview：内容审核。AIRecognition：智能识别。AIAnalysis：智能分析。AiQualityControl：媒体质检。 */
+  /** 原子任务类型。Transcode：转码。SampleSnapshot：采样截图。AnimatedGraphics：转动图。SnapshotByTimeOffset：时间点截图。ImageSprites：雪碧图。AdaptiveDynamicStreaming：自适应码流。AiContentReview：内容审核。AIRecognition：智能识别。AIAnalysis：智能分析。AiQualityControl：媒体质检。SmartSubtitles：智能字幕。 */
   ActivityType?: string;
   /** 原子任务输出。 */
   ActivityResItem?: ActivityResItem;
@@ -1442,6 +1446,44 @@ declare interface AsrFullTextConfigureInfoForUpdate {
   SubtitleFormat?: string;
   /** 视频源语言。 */
   SourceLanguage?: string | null;
+}
+
+/** 智能字幕热词参数 */
+declare interface AsrHotWordsConfigure {
+  /** 热词开关 */
+  Switch?: string | null;
+  /** 热词库ID */
+  LibraryId?: string | null;
+}
+
+/** 热词库查询返回结果集 */
+declare interface AsrHotwordsSet {
+  /** 热词库 Id */
+  HotwordsId?: string | null;
+  /** 当前热词库状态，数值表示绑定该热词库的智能字幕模板数量。Status 为 0 ，表示该热词库没有被智能字幕模版引用可以删除；Status 不为 0，表示该热词库不能被删除。 */
+  Status?: number | null;
+  /** 热词库名称 */
+  Name?: string | null;
+  /** 热词库中的热词数量 */
+  WordCount?: number | null;
+  /** 热词文件上传时的文件名 */
+  FileName?: string | null;
+  /** 热词库创建时间 ISOUTC 时间格式 2006-01-02T15:04:05Z */
+  CreateTime?: string | null;
+  /** 热词库创建时间 ISOUTC 时间格式 2006-01-02T15:04:05Z */
+  UpdateTime?: string | null;
+  /** 0：临时热词库1：文件热词库 */
+  Type?: number | null;
+}
+
+/** 单个热词信息 */
+declare interface AsrHotwordsSetItem {
+  /** 热词的序号 */
+  Id?: number | null;
+  /** 热词文本 */
+  Text?: string | null;
+  /** 词语权重，取值范围 1-10,11,100 */
+  Weight?: number | null;
 }
 
 /** 语音关键词识别控制参数。 */
@@ -4372,6 +4414,24 @@ declare interface RawImageWatermarkInput {
   RepeatType?: string;
 }
 
+/** 自定义智能字幕参数 */
+declare interface RawSmartSubtitleParameter {
+  /** 智能字幕字幕语言类型0: 源语言1: 翻译语言2: 源语言+翻译语言当TranslateSwitch为OFF时仅支持取0当TranslateSwitch为ON时仅支持取1或2 */
+  SubtitleType: number;
+  /** 智能字幕视频源语言当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语zh-PY：中英粤zh-medical：中文医疗yue：中文粤语vi：越南语ms：马来语id：印度尼西亚语fil：菲律宾语th：泰语pt：葡萄牙语tr：土耳其语ar：阿拉伯语es：西班牙语hi：印地语fr：法语de：德语zh_dialect：中文方言 */
+  VideoSrcLanguage: string;
+  /** 智能字幕文件格式 vtt: WebVTT 格式不填或填空：不生成字幕文件 */
+  SubtitleFormat?: string | null;
+  /** 字幕翻译开关ON: 开启翻译OFF: 关闭翻译 */
+  TranslateSwitch?: string | null;
+  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语fr：法语es：西班牙语it：意大利语de：德语tr：土耳其语ru：俄语pt：葡萄牙语vi：越南语id：印度尼西亚语ms：马来语th：泰语ar：阿拉伯语hi：印地语 */
+  TranslateDstLanguage?: string | null;
+  /** ASR热词库参数 */
+  AsrHotWordsConfigure?: AsrHotWordsConfigure | null;
+  /** 自定义参数 */
+  ExtInfo?: string;
+}
+
 /** 自定义转码的规格参数。 */
 declare interface RawTranscodeParameter {
   /** 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。 */
@@ -4586,6 +4646,26 @@ declare interface ScheduleReviewTaskResult {
   FinishTime?: string | null;
 }
 
+/** 编排智能字幕任务结果类型 */
+declare interface ScheduleSmartSubtitleTaskResult {
+  /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
+  Status?: string;
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369) 列表。 */
+  ErrCodeExt?: string;
+  /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
+  ErrCode?: number;
+  /** 错误信息。 */
+  Message?: string;
+  /** 识别任务的输入。 */
+  Input?: SmartSubtitlesTaskInput | null;
+  /** 识别任务的输出。 */
+  Output?: SmartSubtitlesResult[] | null;
+  /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  BeginProcessTime?: string | null;
+  /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  FinishTime?: string | null;
+}
+
 /** 编排任务信息 */
 declare interface ScheduleTask {
   /** 编排任务 ID。 */
@@ -4730,6 +4810,148 @@ declare interface SimpleAesDrm {
   Key: string | null;
   /** 加密初始化向量(32字节字符串)。 */
   Vector?: string | null;
+}
+
+/** 语音全文识别结果。 */
+declare interface SmartSubtitleTaskAsrFullTextResult {
+  /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
+  Status?: string;
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369) 列表。 */
+  ErrCodeExt?: string;
+  /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
+  ErrCode?: number;
+  /** 错误信息。 */
+  Message?: string;
+  /** 语音全文识别任务输入信息。 */
+  Input?: SmartSubtitleTaskResultInput | null;
+  /** 语音全文识别任务输出信息。 */
+  Output?: SmartSubtitleTaskAsrFullTextResultOutput | null;
+  /** 任务进度。 */
+  Progress?: number | null;
+}
+
+/** 语音全文识别结果。 */
+declare interface SmartSubtitleTaskAsrFullTextResultOutput {
+  /** 语音全文识别片段列表。 */
+  SegmentSet?: SmartSubtitleTaskAsrFullTextSegmentItem[] | null;
+  /** 字幕文件地址。 */
+  SubtitlePath?: string;
+}
+
+/** 语音全文识别片段。 */
+declare interface SmartSubtitleTaskAsrFullTextSegmentItem {
+  /** 识别片段置信度。取值：0~100。 */
+  Confidence?: number;
+  /** 识别片段起始的偏移时间，单位：秒。 */
+  StartTimeOffset?: number;
+  /** 识别片段终止的偏移时间，单位：秒。 */
+  EndTimeOffset?: number;
+  /** 识别文本。 */
+  Text?: string;
+  /** 字词时间戳信息。 */
+  Wordlist?: WordResult[] | null;
+}
+
+/** 智能字幕翻译的输入。 */
+declare interface SmartSubtitleTaskResultInput {
+  /** 智能字幕模板 ID。 */
+  Definition?: number;
+  /** 智能字幕自定义参数，当 Definition 填 0 时有效。该参数用于高度定制场景，建议您优先使用 Definition 指定智能字幕参数。 */
+  RawParameter?: RawSmartSubtitleParameter | null;
+}
+
+/** 翻译结果。 */
+declare interface SmartSubtitleTaskTransTextResult {
+  /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
+  Status?: string;
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369) 列表。 */
+  ErrCodeExt?: string;
+  /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
+  ErrCode?: number;
+  /** 错误信息。 */
+  Message?: string;
+  /** 翻译任务输入信息。 */
+  Input?: SmartSubtitleTaskResultInput | null;
+  /** 翻译任务输出信息。 */
+  Output?: SmartSubtitleTaskTransTextResultOutput | null;
+  /** 任务进度。 */
+  Progress?: number | null;
+}
+
+/** 翻译结果。 */
+declare interface SmartSubtitleTaskTransTextResultOutput {
+  /** 翻译片段列表。 */
+  SegmentSet?: SmartSubtitleTaskTransTextSegmentItem[] | null;
+  /** 字幕文件地址。 */
+  SubtitlePath?: string;
+}
+
+/** 翻译片段。 */
+declare interface SmartSubtitleTaskTransTextSegmentItem {
+  /** 识别片段置信度。取值：0~100。 */
+  Confidence?: number;
+  /** 识别片段起始的偏移时间，单位：秒。 */
+  StartTimeOffset?: number;
+  /** 识别片段终止的偏移时间，单位：秒。 */
+  EndTimeOffset?: number;
+  /** 识别文本。 */
+  Text?: string;
+  /** 翻译文本。 */
+  Trans?: string;
+  /** 字词时间戳信息。 */
+  Wordlist?: WordResult[] | null;
+}
+
+/** 智能字幕模板详情 */
+declare interface SmartSubtitleTemplateItem {
+  /** 智能字幕模板唯一标识 */
+  Definition?: number;
+  /** 智能字幕模板名称 */
+  Name?: string | null;
+  /** 智能字幕模板描述信息 */
+  Comment?: string | null;
+  /** 模板类型，取值范围：* Preset：系统预置模板；* Custom：用户自定义模板。 */
+  Type?: string | null;
+  /** ASR热词库参数 */
+  AsrHotWordsConfigure?: AsrHotWordsConfigure | null;
+  /** 模板关联热词库名称 */
+  AsrHotWordsLibraryName?: string | null;
+  /** 智能字幕视频源语言当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语zh-PY：中英粤zh-medical：中文医疗yue：中文粤语vi：越南语ms：马来语id：印度尼西亚语fil：菲律宾语th：泰语pt：葡萄牙语tr：土耳其语ar：阿拉伯语es：西班牙语hi：印地语fr：法语de：德语zh_dialect：中文方言 */
+  VideoSrcLanguage?: string;
+  /** 智能字幕文件格式 vtt: WebVTT 格式不填或填空：不生成字幕文件 */
+  SubtitleFormat?: string | null;
+  /** 智能字幕字幕语言类型0: 源语言1: 翻译语言2: 源语言+翻译语言当TranslateSwitch为OFF时仅支持取0当TranslateSwitch为ON时仅支持取1或2 */
+  SubtitleType?: number;
+  /** 字幕翻译开关ON: 开启翻译OFF: 关闭翻译 */
+  TranslateSwitch?: string | null;
+  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语fr：法语es：西班牙语it：意大利语de：德语tr：土耳其语ru：俄语pt：葡萄牙语vi：越南语id：印度尼西亚语ms：马来语th：泰语ar：阿拉伯语hi：印地语 */
+  TranslateDstLanguage?: string | null;
+  /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  CreateTime?: string;
+  /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  UpdateTime?: string;
+  /** 智能字幕预设模板别名 */
+  AliasName?: string | null;
+}
+
+/** 智能字幕结果。 */
+declare interface SmartSubtitlesResult {
+  /** 任务的类型，取值范围：AsrFullTextRecognition：语音全文识别，TransTextRecognition：语音翻译。 */
+  Type?: string;
+  /** 语音全文识别结果，当 Type 为 AsrFullTextRecognition 时有效。 */
+  AsrFullTextTask?: SmartSubtitleTaskAsrFullTextResult | null;
+  /** 翻译结果，当 Type 为TransTextRecognition 时有效。 */
+  TransTextTask?: SmartSubtitleTaskTransTextResult | null;
+}
+
+/** 智能字幕输入结构体 */
+declare interface SmartSubtitlesTaskInput {
+  /** 智能字幕模板 ID 。 */
+  Definition?: number;
+  /** 用户扩展字段，一般场景不用填。 */
+  UserExtPara?: string;
+  /** 智能字幕自定义参数，当 Definition 填 0 时有效。 该参数用于高度定制场景，建议您优先使用 Definition 指定智能字幕参数。 */
+  RawParameter?: RawSmartSubtitleParameter | null;
 }
 
 /** 对视频按指定时间点截图任务输入参数类型 */
@@ -5474,6 +5696,8 @@ declare interface WorkflowTask {
   AiRecognitionResultSet?: AiRecognitionResult[];
   /** 媒体质检任务的执行状态与结果。 */
   AiQualityControlTaskResult?: ScheduleQualityControlTaskResult | null;
+  /** 智能字幕任务的执行结果 */
+  SmartSubtitlesTaskResult?: SmartSubtitlesResult[] | null;
 }
 
 /** 输入规则，当上传视频命中该规则时，即触发工作流。 */
@@ -5622,16 +5846,36 @@ declare interface CreateAnimatedGraphicsTemplateResponse {
   RequestId?: string;
 }
 
+declare interface CreateAsrHotwordsRequest {
+  /** 0 临时热词 1 文件热词 */
+  Type: number;
+  /** 热词库名称 */
+  Name: string;
+  /** 热词库文本，Type为 0 必选 */
+  Content?: string;
+  /** 热词库文件的 base64 的内容，Type 为 1 必选 */
+  FileContent?: string;
+  /** 上传的文件名 */
+  FileName?: string;
+}
+
+declare interface CreateAsrHotwordsResponse {
+  /** 热词库 id */
+  HotwordsId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateContentReviewTemplateRequest {
   /** 内容审核模板名称，长度限制：64 个字符。 */
   Name?: string;
   /** 内容审核模板描述信息，长度限制：256 个字符。 */
   Comment?: string;
-  /** 令人反感的信息的控制参数。 */
+  /** 鉴黄任务控制参数。 */
   PornConfigure?: PornConfigureInfo;
-  /** 令人不安全的信息的控制参数。 */
+  /** 涉暴任务控制参数。 */
   TerrorismConfigure?: TerrorismConfigureInfo;
-  /** 令人不适宜的信息的控制参数。 */
+  /** 涉敏任务控制参数。 */
   PoliticalConfigure?: PoliticalConfigureInfo;
   /** 违禁控制参数。违禁内容包括：谩骂；涉毒违法。注意：此参数尚未支持。 */
   ProhibitedConfigure?: ProhibitedConfigureInfo;
@@ -5780,6 +6024,32 @@ declare interface CreateScheduleRequest {
 declare interface CreateScheduleResponse {
   /** 编排 ID。 */
   ScheduleId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSmartSubtitleTemplateRequest {
+  /** 智能字幕模板名称长度限制：64 个字符。 */
+  Name: string;
+  /** 智能字幕视频源语言当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语zh-PY：中英粤zh-medical：中文医疗yue：中文粤语vi：越南语ms：马来语id：印度尼西亚语fil：菲律宾语th：泰语pt：葡萄牙语tr：土耳其语ar：阿拉伯语es：西班牙语hi：印地语fr：法语de：德语zh_dialect：中文方言 */
+  VideoSrcLanguage: string;
+  /** 智能字幕字幕语言类型0: 源语言1: 翻译语言2: 源语言+翻译语言当TranslateSwitch为OFF时仅支持取0当TranslateSwitch为ON时仅支持取1或2 */
+  SubtitleType: number;
+  /** 智能字幕模板描述信息长度限制：256 个字符。 */
+  Comment?: string;
+  /** 智能字幕文件格式 vtt: WebVTT 格式不填或填空：不生成字幕文件 */
+  SubtitleFormat?: string;
+  /** ASR热词库参数 */
+  AsrHotWordsConfigure?: AsrHotWordsConfigure;
+  /** 字幕翻译开关ON: 开启翻译OFF: 关闭翻译 */
+  TranslateSwitch?: string;
+  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语fr：法语es：西班牙语it：意大利语de：德语tr：土耳其语ru：俄语pt：葡萄牙语vi：越南语id：印度尼西亚语ms：马来语th：泰语ar：阿拉伯语hi：印地语 */
+  TranslateDstLanguage?: string;
+}
+
+declare interface CreateSmartSubtitleTemplateResponse {
+  /** 智能字幕模板唯一标识。 */
+  Definition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6052,6 +6322,16 @@ declare interface DeleteAnimatedGraphicsTemplateResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAsrHotwordsRequest {
+  /** 删除的热词库 id */
+  HotwordsId: string;
+}
+
+declare interface DeleteAsrHotwordsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteContentReviewTemplateRequest {
   /** 内容审核模板唯一标识。 */
   Definition: number;
@@ -6118,6 +6398,16 @@ declare interface DeleteScheduleRequest {
 }
 
 declare interface DeleteScheduleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSmartSubtitleTemplateRequest {
+  /** 智能字幕模板唯一标识。 */
+  Definition: number;
+}
+
+declare interface DeleteSmartSubtitleTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6304,6 +6594,80 @@ declare interface DescribeAnimatedGraphicsTemplatesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAsrHotwordsListRequest {
+  /** 检索参数，根据热词库 id 查询 */
+  HotwordsId?: string;
+  /** 检索参数，根据热词库名称查询 */
+  Name?: string;
+  /** 分页偏移量，默认值：0。 */
+  Offset?: number;
+  /** 返回记录条数，默认返回所有热词库 */
+  Limit?: number;
+  /** 热词排序顺序0：升序（默认）1：降序 */
+  OrderType?: number;
+  /** 根据某个字段排序，默认使用创建时间，使用非法字段视为默认情况- CreateTime：创建时间排序- UpdateTime：更新时间排序- Name：热词库名称排序- WordCount：热词数量排序- HotwordsId：热词库 id 排序 */
+  OrderBy?: string;
+  /** 0 临时热词 1 文件热词 */
+  Types?: number[];
+}
+
+declare interface DescribeAsrHotwordsListResponse {
+  /** 总热词库数量 */
+  TotalCount?: number;
+  /** 分页偏移量，默认值：0。 */
+  Offset?: number;
+  /** 返回记录条数，默认返回所有热词库 */
+  Limit?: number;
+  /** 热词库列表 */
+  AsrHotwordsSet?: AsrHotwordsSet[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAsrHotwordsRequest {
+  /** 需要查询的热词库 id**注意：HotwordsId 与 Name 必须选择填写一个，如果同时填写，HotwordsId 优先级高于 Name** */
+  HotwordsId?: string;
+  /** 热词库名称，**注意：HotwordsId 与 Name 必须选择填写一个，如果同时填写，HotwordsId 优先级高于 Name** */
+  Name?: string;
+  /** 分页偏移量，默认值：0。 */
+  Offset?: number;
+  /** 返回记录条数，默认值：10，最大值：100。 */
+  Limit?: number;
+  /** 热词排序字段，目前可选值为- Default：默认文件中的顺序- Weight：权重排序- Lexical：热词文本排序 */
+  OrderBy?: string;
+  /** 热词排序顺序 0：升序（默认） 1：降序 */
+  OrderType?: number;
+}
+
+declare interface DescribeAsrHotwordsResponse {
+  /** 需要查询的热词库 id */
+  HotwordsId?: string;
+  /** 当前热词库 id 状态，为 0 表示查询的时刻，没有模板绑定这个热词库，可以删除 */
+  Status?: number | null;
+  /** 热词库的名称 */
+  Name?: string | null;
+  /** 临时热词库为 0，返回创建时候的字符串文件热词库为 1，返回创建是上传的文件内容 */
+  Type?: number | null;
+  /** 热词文件上传时的文件名 */
+  FileName?: string | null;
+  /** 查询返回的热词库列表 */
+  HotWords?: AsrHotwordsSetItem[];
+  /** 热词库文本，根据 Type 区分如果 Type 为 0，是热词库字符串如果 Type 是 1，是热词库文本文件的文件内容 base64 编码 */
+  Content?: string | null;
+  /** 当前热词库包含的词语数量 */
+  WordCount?: number | null;
+  /** 分页偏移量，默认值：0。 */
+  Offset?: number | null;
+  /** 返回记录条数，默认值：10，最大值：100。 */
+  Limit?: number | null;
+  /** 热词库创建时间 ISOUTC 格式 "2006-01-02T15:04:05Z" */
+  CreateTime?: string | null;
+  /** 热词库修改时间 ISOUTC 格式 "2006-01-02T15:04:05Z" */
+  UpdateTime?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeContentReviewTemplatesRequest {
   /** 智能审核模板唯一标识过滤条件，数组长度限制：50。 */
   Definitions?: number[];
@@ -6480,6 +6844,28 @@ declare interface DescribeSchedulesResponse {
   TotalCount?: number;
   /** 编排信息数组。 */
   ScheduleInfoSet?: SchedulesInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSmartSubtitleTemplatesRequest {
+  /** 智能字幕模板唯一标识过滤条件，数组长度限制：10。 */
+  Definitions?: number[];
+  /** 分页偏移量，默认值：0。 */
+  Offset?: number;
+  /** 返回记录条数，默认值：10，最大值：100。 */
+  Limit?: number;
+  /** 模板类型过滤条件，不填则返回所有，可选值：* Preset：系统预置模板；* Custom：用户自定义模板。 */
+  Type?: string;
+  /** 智能字幕模板标识过滤条件，长度限制：64 个字符。 */
+  Name?: string;
+}
+
+declare interface DescribeSmartSubtitleTemplatesResponse {
+  /** 符合过滤条件的记录总数。 */
+  TotalCount?: number;
+  /** 智能字幕模板详情列表。 */
+  SmartSubtitleTemplateSet?: SmartSubtitleTemplateItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7140,6 +7526,24 @@ declare interface ModifyAnimatedGraphicsTemplateResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAsrHotwordsRequest {
+  /** 热词库 id */
+  HotwordsId: string;
+  /** 热词库名称 */
+  Name?: string;
+  /** 热词库文本 */
+  Content?: string;
+  /** 热词库文件的 base64 的内容，Type 为 1 必选 */
+  FileContent?: string;
+  /** 热词文件上传时的文件名 */
+  FileName?: string;
+}
+
+declare interface ModifyAsrHotwordsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyContentReviewTemplateRequest {
   /** 内容审核模板唯一标识。 */
   Definition: number;
@@ -7300,6 +7704,32 @@ declare interface ModifyScheduleRequest {
 }
 
 declare interface ModifyScheduleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySmartSubtitleTemplateRequest {
+  /** 智能字幕模板唯一标识 */
+  Definition: number;
+  /** 字幕翻译开关ON: 开启翻译OFF: 关闭翻译 */
+  TranslateSwitch?: string;
+  /** 智能字幕模板名称长度限制：64 个字符。 */
+  Name?: string;
+  /** 智能字幕模板描述信息长度限制：256 个字符。 */
+  Comment?: string;
+  /** 智能字幕视频源语言当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语zh-PY：中英粤zh-medical：中文医疗yue：中文粤语vi：越南语ms：马来语id：印度尼西亚语fil：菲律宾语th：泰语pt：葡萄牙语tr：土耳其语ar：阿拉伯语es：西班牙语hi：印地语fr：法语de：德语zh_dialect：中文方言 */
+  VideoSrcLanguage?: string;
+  /** 智能字幕文件格式 vtt: WebVTT 格式不填或填空：不生成字幕文件 */
+  SubtitleFormat?: string;
+  /** 智能字幕字幕语言类型0: 源语言1: 翻译语言2: 源语言+翻译语言当TranslateSwitch为OFF时仅支持取0当TranslateSwitch为ON时仅支持取1或2 */
+  SubtitleType?: number;
+  /** ASR热词库参数 */
+  AsrHotWordsConfigure?: AsrHotWordsConfigure;
+  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语fr：法语es：西班牙语it：意大利语de：德语tr：土耳其语ru：俄语pt：葡萄牙语vi：越南语id：印度尼西亚语ms：马来语th：泰语ar：阿拉伯语hi：印地语 */
+  TranslateDstLanguage?: string;
+}
+
+declare interface ModifySmartSubtitleTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7607,6 +8037,10 @@ declare interface ProcessMediaRequest {
   TaskType?: string;
   /** 资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。 */
   ResourceId?: string;
+  /** 智能字幕 */
+  SmartSubtitlesTask?: SmartSubtitlesTaskInput;
+  /** 是否跳过元信息获取，可选值： 0：表示不跳过 1：表示跳过 默认值：0 */
+  SkipMateData?: number;
 }
 
 declare interface ProcessMediaResponse {
@@ -7715,6 +8149,8 @@ declare interface Mps {
   CreateAdaptiveDynamicStreamingTemplate(data: CreateAdaptiveDynamicStreamingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAdaptiveDynamicStreamingTemplateResponse>;
   /** 创建转动图模板 {@link CreateAnimatedGraphicsTemplateRequest} {@link CreateAnimatedGraphicsTemplateResponse} */
   CreateAnimatedGraphicsTemplate(data: CreateAnimatedGraphicsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAnimatedGraphicsTemplateResponse>;
+  /** 创建智能字幕热词库 {@link CreateAsrHotwordsRequest} {@link CreateAsrHotwordsResponse} */
+  CreateAsrHotwords(data: CreateAsrHotwordsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAsrHotwordsResponse>;
   /** 创建内容审核模板 {@link CreateContentReviewTemplateRequest} {@link CreateContentReviewTemplateResponse} */
   CreateContentReviewTemplate(data?: CreateContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContentReviewTemplateResponse>;
   /** 创建雪碧图模板 {@link CreateImageSpriteTemplateRequest} {@link CreateImageSpriteTemplateResponse} */
@@ -7729,6 +8165,8 @@ declare interface Mps {
   CreateSampleSnapshotTemplate(data: CreateSampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSampleSnapshotTemplateResponse>;
   /** 创建编排 {@link CreateScheduleRequest} {@link CreateScheduleResponse} */
   CreateSchedule(data: CreateScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScheduleResponse>;
+  /** 创建智能字幕模板 {@link CreateSmartSubtitleTemplateRequest} {@link CreateSmartSubtitleTemplateResponse} */
+  CreateSmartSubtitleTemplate(data: CreateSmartSubtitleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSmartSubtitleTemplateResponse>;
   /** 创建指定时间点截图模板 {@link CreateSnapshotByTimeOffsetTemplateRequest} {@link CreateSnapshotByTimeOffsetTemplateResponse} */
   CreateSnapshotByTimeOffsetTemplate(data?: CreateSnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotByTimeOffsetTemplateResponse>;
   /** 创建媒体传输事件 {@link CreateStreamLinkEventRequest} {@link CreateStreamLinkEventResponse} */
@@ -7761,6 +8199,8 @@ declare interface Mps {
   DeleteAdaptiveDynamicStreamingTemplate(data: DeleteAdaptiveDynamicStreamingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAdaptiveDynamicStreamingTemplateResponse>;
   /** 删除转动图模板 {@link DeleteAnimatedGraphicsTemplateRequest} {@link DeleteAnimatedGraphicsTemplateResponse} */
   DeleteAnimatedGraphicsTemplate(data: DeleteAnimatedGraphicsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAnimatedGraphicsTemplateResponse>;
+  /** 删除智能字幕热词库 {@link DeleteAsrHotwordsRequest} {@link DeleteAsrHotwordsResponse} */
+  DeleteAsrHotwords(data: DeleteAsrHotwordsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAsrHotwordsResponse>;
   /** 删除内容审核模板 {@link DeleteContentReviewTemplateRequest} {@link DeleteContentReviewTemplateResponse} */
   DeleteContentReviewTemplate(data: DeleteContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteContentReviewTemplateResponse>;
   /** 删除雪碧图模板 {@link DeleteImageSpriteTemplateRequest} {@link DeleteImageSpriteTemplateResponse} */
@@ -7775,6 +8215,8 @@ declare interface Mps {
   DeleteSampleSnapshotTemplate(data: DeleteSampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSampleSnapshotTemplateResponse>;
   /** 删除编排 {@link DeleteScheduleRequest} {@link DeleteScheduleResponse} */
   DeleteSchedule(data: DeleteScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScheduleResponse>;
+  /** 删除智能字幕模板 {@link DeleteSmartSubtitleTemplateRequest} {@link DeleteSmartSubtitleTemplateResponse} */
+  DeleteSmartSubtitleTemplate(data: DeleteSmartSubtitleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSmartSubtitleTemplateResponse>;
   /** 删除指定时间点截图模板 {@link DeleteSnapshotByTimeOffsetTemplateRequest} {@link DeleteSnapshotByTimeOffsetTemplateResponse} */
   DeleteSnapshotByTimeOffsetTemplate(data: DeleteSnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotByTimeOffsetTemplateResponse>;
   /** 删除媒体传输事件 {@link DeleteStreamLinkEventRequest} {@link DeleteStreamLinkEventResponse} */
@@ -7801,6 +8243,10 @@ declare interface Mps {
   DescribeAdaptiveDynamicStreamingTemplates(data?: DescribeAdaptiveDynamicStreamingTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAdaptiveDynamicStreamingTemplatesResponse>;
   /** 获取转动图模板列表 {@link DescribeAnimatedGraphicsTemplatesRequest} {@link DescribeAnimatedGraphicsTemplatesResponse} */
   DescribeAnimatedGraphicsTemplates(data?: DescribeAnimatedGraphicsTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAnimatedGraphicsTemplatesResponse>;
+  /** 查询智能字幕热词库详情 {@link DescribeAsrHotwordsRequest} {@link DescribeAsrHotwordsResponse} */
+  DescribeAsrHotwords(data?: DescribeAsrHotwordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAsrHotwordsResponse>;
+  /** 查询智能字幕热词库列表 {@link DescribeAsrHotwordsListRequest} {@link DescribeAsrHotwordsListResponse} */
+  DescribeAsrHotwordsList(data?: DescribeAsrHotwordsListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAsrHotwordsListResponse>;
   /** 获取智能审核模板列表 {@link DescribeContentReviewTemplatesRequest} {@link DescribeContentReviewTemplatesResponse} */
   DescribeContentReviewTemplates(data?: DescribeContentReviewTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentReviewTemplatesResponse>;
   /** 反查媒体传输安全组绑定的Flow信息 {@link DescribeGroupAttachFlowsByIdRequest} {@link DescribeGroupAttachFlowsByIdResponse} */
@@ -7819,6 +8265,8 @@ declare interface Mps {
   DescribeSampleSnapshotTemplates(data?: DescribeSampleSnapshotTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleSnapshotTemplatesResponse>;
   /** 查询编排 {@link DescribeSchedulesRequest} {@link DescribeSchedulesResponse} */
   DescribeSchedules(data?: DescribeSchedulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSchedulesResponse>;
+  /** 获取智能字幕模板列表 {@link DescribeSmartSubtitleTemplatesRequest} {@link DescribeSmartSubtitleTemplatesResponse} */
+  DescribeSmartSubtitleTemplates(data?: DescribeSmartSubtitleTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmartSubtitleTemplatesResponse>;
   /** 获取指定时间点截图模板列表 {@link DescribeSnapshotByTimeOffsetTemplatesRequest} {@link DescribeSnapshotByTimeOffsetTemplatesResponse} */
   DescribeSnapshotByTimeOffsetTemplates(data?: DescribeSnapshotByTimeOffsetTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotByTimeOffsetTemplatesResponse>;
   /** 查询媒体传输开通状态 {@link DescribeStreamLinkActivateStateRequest} {@link DescribeStreamLinkActivateStateResponse} */
@@ -7887,6 +8335,8 @@ declare interface Mps {
   ModifyAdaptiveDynamicStreamingTemplate(data: ModifyAdaptiveDynamicStreamingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAdaptiveDynamicStreamingTemplateResponse>;
   /** 修改转动图模板 {@link ModifyAnimatedGraphicsTemplateRequest} {@link ModifyAnimatedGraphicsTemplateResponse} */
   ModifyAnimatedGraphicsTemplate(data: ModifyAnimatedGraphicsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAnimatedGraphicsTemplateResponse>;
+  /** 修改智能字幕热词库 {@link ModifyAsrHotwordsRequest} {@link ModifyAsrHotwordsResponse} */
+  ModifyAsrHotwords(data: ModifyAsrHotwordsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAsrHotwordsResponse>;
   /** 修改内容审核模板 {@link ModifyContentReviewTemplateRequest} {@link ModifyContentReviewTemplateResponse} */
   ModifyContentReviewTemplate(data: ModifyContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContentReviewTemplateResponse>;
   /** 修改雪碧图模板 {@link ModifyImageSpriteTemplateRequest} {@link ModifyImageSpriteTemplateResponse} */
@@ -7901,6 +8351,8 @@ declare interface Mps {
   ModifySampleSnapshotTemplate(data: ModifySampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySampleSnapshotTemplateResponse>;
   /** 修改编排 {@link ModifyScheduleRequest} {@link ModifyScheduleResponse} */
   ModifySchedule(data: ModifyScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyScheduleResponse>;
+  /** 修改智能字幕模板 {@link ModifySmartSubtitleTemplateRequest} {@link ModifySmartSubtitleTemplateResponse} */
+  ModifySmartSubtitleTemplate(data: ModifySmartSubtitleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySmartSubtitleTemplateResponse>;
   /** 修改指定时间点截图模板 {@link ModifySnapshotByTimeOffsetTemplateRequest} {@link ModifySnapshotByTimeOffsetTemplateResponse} */
   ModifySnapshotByTimeOffsetTemplate(data: ModifySnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotByTimeOffsetTemplateResponse>;
   /** 修改媒体传输事件 {@link ModifyStreamLinkEventRequest} {@link ModifyStreamLinkEventResponse} */

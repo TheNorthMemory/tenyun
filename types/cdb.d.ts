@@ -3186,6 +3186,22 @@ declare interface DescribeBinlogsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCPUExpandStrategyInfoRequest {
+  /** 实例 ID 。 */
+  InstanceId: string;
+}
+
+declare interface DescribeCPUExpandStrategyInfoResponse {
+  /** 策略类型。可选值 auto、manual。如果返回为NULL说明尚未开通弹性扩容策略 */
+  Type?: string | null;
+  /** 手动扩容的 CPU 。Type为 manual 时有效。 */
+  ExpandCpu?: number | null;
+  /** 自动扩容策略。Type 为 auto 时有效 */
+  AutoStrategy?: AutoStrategy | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCdbProxyInfoRequest {
   /** 实例ID */
   InstanceId: string;
@@ -5433,6 +5449,8 @@ declare interface Cdb {
   DescribeBinlogBackupOverview(data: DescribeBinlogBackupOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogBackupOverviewResponse>;
   /** 查询二进制日志备份文件列表 {@link DescribeBinlogsRequest} {@link DescribeBinlogsResponse} */
   DescribeBinlogs(data: DescribeBinlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogsResponse>;
+  /** 查询实例的 CPU 弹性扩容策略信息 {@link DescribeCPUExpandStrategyInfoRequest} {@link DescribeCPUExpandStrategyInfoResponse} */
+  DescribeCPUExpandStrategyInfo(data: DescribeCPUExpandStrategyInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCPUExpandStrategyInfoResponse>;
   /** 查询数据库代理详情 {@link DescribeCdbProxyInfoRequest} {@link DescribeCdbProxyInfoResponse} */
   DescribeCdbProxyInfo(data: DescribeCdbProxyInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdbProxyInfoResponse>;
   /** 查询数据库可用区及售卖规格 {@link DescribeCdbZoneConfigRequest} {@link DescribeCdbZoneConfigResponse} */

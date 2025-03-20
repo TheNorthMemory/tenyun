@@ -116,7 +116,7 @@ declare interface Bundle {
   InternetChargeType?: string;
   /** 套餐售卖状态,取值:‘AVAILABLE’(可用) , ‘SOLD_OUT’(售罄) */
   BundleSalesState?: string;
-  /** 套餐类型。取值范围：STARTER_BUNDLE：入门型GENERAL_BUNDLE：通用型ENTERPRISE_BUNDLE：企业型STORAGE_BUNDLE：存储型EXCLUSIVE_BUNDLE：专属型HK_EXCLUSIVE_BUNDLE：香港专属型 CAREFREE_BUNDLE：无忧型BEFAST_BUNDLE：蜂驰型 EXCLUSIVE_BUNDLE_02：境外专属Ⅱ型NEWCOMER_BUNDLE：新客专享GAME_PORTAL_BUNDLE：游戏专区ECONOMY_BUNDLE：经济型RAZOR_SPEED_BUNDLE：锐驰型 */
+  /** 套餐类型。取值范围：GENERAL_BUNDLE：通用型STORAGE_BUNDLE：存储型ENTERPRISE_BUNDLE：企业型EXCLUSIVE_BUNDLE：专属型BEFAST_BUNDLE：蜂驰型 STARTER_BUNDLE：入门型CAREFREE_BUNDLE：无忧型RAZOR_SPEED_BUNDLE：锐驰型 */
   BundleType?: string;
   /** 套餐类型描述信息。 */
   BundleTypeDescription?: string;
@@ -767,13 +767,13 @@ declare interface Price {
 /** 描述地域信息。 */
 declare interface RegionInfo {
   /** 地域名称，例如，ap-guangzhou。 */
-  Region: string;
+  Region?: string;
   /** 地域描述，例如，华南地区(广州)。 */
-  RegionName: string;
-  /** 地域是否可用状态，取值仅为AVAILABLE。 */
-  RegionState: string;
+  RegionName?: string;
+  /** 地域是否可用状态，取值仅为AVAILABLE（表示可用状态）。 */
+  RegionState?: string;
   /** 是否中国大陆地域 */
-  IsChinaMainland: boolean;
+  IsChinaMainland?: boolean;
 }
 
 /** 续费云硬盘包年包月相关参数设置。 */
@@ -1349,9 +1349,9 @@ declare interface DescribeBundlesRequest {
   Offset?: number;
   /** 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。 */
   Limit?: number;
-  /** 过滤器列表。bundle-id按照【套餐 ID】进行过滤。类型：String必选：否support-platform-type按照【系统类型】进行过滤。取值： LINUX_UNIX(Linux/Unix系统) ;WINDOWS(Windows 系统)类型：String必选：否bundle-type按照 【套餐类型进行过滤】。取值：GENERAL_BUNDLE (通用型套餐); STORAGE_BUNDLE(存储型套餐);ENTERPRISE_BUNDLE( 企业型套餐);EXCLUSIVE_BUNDLE(专属型套餐);BEFAST_BUNDLE(蜂驰型套餐);STARTER_BUNDLE(入门型套餐);CAREFREE_BUNDLE(无忧型套餐);类型：String必选：否bundle-state按照【套餐状态】进行过滤。取值: ONLINE(在线); OFFLINE(下线);类型：String必选：否每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 BundleIds 和 Filters。 */
+  /** 过滤器列表。bundle-id按照【套餐 ID】进行过滤。类型：String必选：否support-platform-type按照【系统类型】进行过滤。取值： LINUX_UNIX(Linux/Unix系统) ;WINDOWS(Windows 系统)类型：String必选：否bundle-type按照 【套餐类型进行过滤】。取值：GENERAL_BUNDLE (通用型套餐); STORAGE_BUNDLE(存储型套餐);ENTERPRISE_BUNDLE( 企业型套餐);EXCLUSIVE_BUNDLE(专属型套餐);BEFAST_BUNDLE(蜂驰型套餐);STARTER_BUNDLE(入门型套餐);CAREFREE_BUNDLE(无忧型套餐);RAZOR_SPEED_BUNDLE(锐驰型套餐)类型：String必选：否bundle-state按照【套餐状态】进行过滤。取值: ONLINE(在线); OFFLINE(下线);类型：String必选：否每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 BundleIds 和 Filters。 */
   Filters?: Filter[];
-  /** 可用区列表。默认为全部可用区。 */
+  /** 可用区列表。默认为全部可用区。可用区可通过接口 [DescribeZones](https://cloud.tencent.com/document/product/1207/57513) 查询 */
   Zones?: string[];
 }
 

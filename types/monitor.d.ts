@@ -1303,6 +1303,30 @@ declare namespace V20180724 {
     GrafanaDashboardURL?: string;
   }
 
+  /** prometheus集成指标详情 */
+  interface IntegrationMetric {
+    /** 指标名 */
+    MetricName?: string;
+    /** 指标名称 */
+    Name?: string;
+    /** 统计类型 */
+    MetricType?: string;
+    /** 单位 */
+    Unit?: string;
+    /** 指标详细描述 */
+    Description?: string;
+  }
+
+  /** prometheus集成分组指标 */
+  interface IntegrationMetricGroup {
+    /** 分组标识 */
+    Group?: string;
+    /** 指标详情 */
+    Metrics?: IntegrationMetric[];
+    /** 分组名称 */
+    GroupName?: string;
+  }
+
   /** k8s中标签，一般以数组的方式存在 */
   interface Label {
     /** map表中的Name */
@@ -4377,6 +4401,18 @@ declare namespace V20180724 {
     RequestId?: string;
   }
 
+  interface DescribePrometheusIntegrationMetricsRequest {
+    /** 集成类型标识。取值参考DescribePrometheusIntegrations接口返回中IntegrationSet[i].Code参数 */
+    IntegrationCode: string;
+  }
+
+  interface DescribePrometheusIntegrationMetricsResponse {
+    /** 集成指标详情分组 */
+    IntegrationMetricSet?: IntegrationMetricGroup[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribePrometheusRecordRulesRequest {
     /** Prometheus 实例 ID */
     InstanceId: string;
@@ -5647,6 +5683,8 @@ declare interface Monitor {
   DescribePrometheusInstances(data: V20180724.DescribePrometheusInstancesRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribePrometheusInstancesResponse>;
   /** 获取2.0实例列表 {@link V20180724.DescribePrometheusInstancesOverviewRequest} {@link V20180724.DescribePrometheusInstancesOverviewResponse} */
   DescribePrometheusInstancesOverview(data: V20180724.DescribePrometheusInstancesOverviewRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribePrometheusInstancesOverviewResponse>;
+  /** 获取prometheus集成指标 {@link V20180724.DescribePrometheusIntegrationMetricsRequest} {@link V20180724.DescribePrometheusIntegrationMetricsResponse} */
+  DescribePrometheusIntegrationMetrics(data: V20180724.DescribePrometheusIntegrationMetricsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribePrometheusIntegrationMetricsResponse>;
   /** 获取聚合规则列表，包含关联集群内的资源 {@link V20180724.DescribePrometheusRecordRulesRequest} {@link V20180724.DescribePrometheusRecordRulesResponse} */
   DescribePrometheusRecordRules(data: V20180724.DescribePrometheusRecordRulesRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribePrometheusRecordRulesResponse>;
   /** 列出 Prometheus 服务所有可用的地域 {@link V20180724.DescribePrometheusRegionsRequest} {@link V20180724.DescribePrometheusRegionsResponse} */

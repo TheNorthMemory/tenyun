@@ -1609,7 +1609,7 @@ declare interface ChannelCreateBatchSignUrlRequest {
   AutoJumpBack?: boolean;
   /** 仅公众号 H5 跳转电子签小程序时，如需签署完成的“返回应用”功能，在获取签署链接接口的 UrlUseEnv 参数需设置为 **WeChatOfficialAccounts**，小程序签署成功的结果页面中才会出现“返回应用”按钮。在用户点击“返回应用”按钮之后，会返回到公众号 H5。 参考 [公众号 H5 跳转电子签小程序](https://qian.tencent.com/developers/company/openwxminiprogram/#23-%E5%85%AC%E4%BC%97%E5%8F%B7-h5-%E4%B8%AD%E8%B7%B3%E8%BD%AC)。 */
   UrlUseEnv?: string;
-  /** 是否允许此链接中签署方批量拒签。 false (默认): 不允许批量拒签 true : 允许批量拒签。注：`合同组暂不支持批量拒签功能。` */
+  /** 是否允许此链接中签署方批量拒签。 false (默认): 不允许批量拒签 true : 允许批量拒签。注：`1. 合同组暂不支持批量拒签功能。2. 如果是链接直接跳转至详情页（JumpToDetail参数为true），也不支持批量拒签功能` */
   CanBatchReject?: boolean;
 }
 

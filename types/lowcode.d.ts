@@ -479,7 +479,7 @@ declare interface DescribeKnowledgeSetListRequest {
 
 declare interface DescribeKnowledgeSetListResponse {
   /** 知识库列表 */
-  Data?: KnowledgeSetRsp | null;
+  Data?: KnowledgeSetRsp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

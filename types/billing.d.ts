@@ -829,9 +829,9 @@ declare interface BillBusinessLink {
 /** 组件类型筛选列表 */
 declare interface BillComponent {
   /** 组件类型编码 */
-  ComponentCode: string | null;
+  ComponentCode: string;
   /** 组件类型：用户购买的产品或服务对应的组件大类 */
-  ComponentCodeName: string | null;
+  ComponentCodeName: string;
 }
 
 /** 日期筛选列表 */
@@ -1479,13 +1479,13 @@ declare interface ConsumptionRegionSummaryDataItem {
   /** 产品消费详情 */
   Business?: ConsumptionBusinessSummaryDataItem[];
   /** 现金 */
-  CashPayAmount?: string | null;
+  CashPayAmount?: string;
   /** 代金券 */
-  VoucherPayAmount?: string | null;
+  VoucherPayAmount?: string;
   /** 赠送金 */
-  IncentivePayAmount?: string | null;
+  IncentivePayAmount?: string;
   /** 分成金 */
-  TransferPayAmount?: string | null;
+  TransferPayAmount?: string;
 }
 
 /** 消耗按资源汇总过滤条件 */
@@ -2697,7 +2697,7 @@ declare interface DescribeBillDetailForOrganizationResponse {
   /** 总记录数，24小时缓存一次，可能比实际总记录数少 */
   Total?: number | null;
   /** 本次请求的上下文信息，可用于下一次请求的请求参数中，加快查询速度 */
-  Context?: string | null;
+  Context?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

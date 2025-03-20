@@ -243,7 +243,7 @@ declare interface DiagHistoryEventItem {
   /** 实例 ID 。 */
   InstanceId?: string;
   /** 保留字段。 */
-  Metric?: string | null;
+  Metric?: string;
   /** 地域。 */
   Region?: string;
 }
@@ -379,11 +379,11 @@ declare interface InstanceConfs {
   /** 实例概览开关，Yes/No。 */
   OverviewDisplay?: string;
   /** redis大key分析的自定义分割符，仅redis使用 */
-  KeyDelimiters?: string[] | null;
+  KeyDelimiters?: string[];
   /** 分片节点数量。 */
-  ShardNum?: string | null;
+  ShardNum?: string;
   /** 是否开启大key周期性分析，仅redis产品有效。 */
-  AnalysisTopKey?: string | null;
+  AnalysisTopKey?: string;
 }
 
 /** 实例id */
@@ -521,11 +521,11 @@ declare interface MongoDBIndex {
 /** 监控数据（浮点型） */
 declare interface MonitorFloatMetric {
   /** 指标名称。 */
-  Metric: string;
+  Metric?: string;
   /** 指标单位。 */
-  Unit: string;
+  Unit?: string;
   /** 指标值。 */
-  Values: number[] | null;
+  Values?: number[];
 }
 
 /** 单位时间间隔内的监控指标数据（浮点型） */
@@ -741,7 +741,7 @@ declare interface SchemaSpaceData {
   /** 行数。 */
   TableRows?: number;
   /** 库中所有表对应的独立物理文件大小加和（MB）。 */
-  PhysicalFileSize?: number | null;
+  PhysicalFileSize?: number;
 }
 
 /** 库空间时序数据 */
@@ -755,13 +755,13 @@ declare interface SchemaSpaceTimeSeries {
 /** 扣分详情。 */
 declare interface ScoreDetail {
   /** 扣分项分类，取值包括：可用性、可维护性、性能及可靠性。 */
-  IssueType: string;
+  IssueType?: string;
   /** 扣分总分。 */
-  ScoreLost: number;
+  ScoreLost?: number;
   /** 扣分总分上限。 */
-  ScoreLostMax: number;
+  ScoreLostMax?: number;
   /** 扣分项列表。 */
-  Items: ScoreItem[] | null;
+  Items?: ScoreItem[];
 }
 
 /** 诊断扣分项。 */
@@ -2594,11 +2594,11 @@ declare namespace V20191016 {
     /** 诊断项。 */
     DiagItem?: string;
     /** 实例 ID 。 */
-    InstanceId?: string | null;
+    InstanceId?: string;
     /** 保留字段 */
-    Metric?: string | null;
+    Metric?: string;
     /** 地域 */
-    Region?: string | null;
+    Region?: string;
   }
 
   /** 异常事件信息。 */
@@ -2700,7 +2700,7 @@ declare namespace V20191016 {
     /** 实例概览开关，Yes/No。 */
     OverviewDisplay?: string;
     /** redis大key分析的自定义分割符，仅redis使用 */
-    KeyDelimiters?: string[] | null;
+    KeyDelimiters?: string[];
   }
 
   /** 查询实例列表，返回实例的相关信息的对象。 */
@@ -2804,7 +2804,7 @@ declare namespace V20191016 {
     /** 指标单位。 */
     Unit?: string;
     /** 指标值。 */
-    Values?: number[] | null;
+    Values?: number[];
   }
 
   /** 单位时间间隔内的监控指标数据（浮点型） */
@@ -2822,7 +2822,7 @@ declare namespace V20191016 {
     /** 指标单位。 */
     Unit?: string;
     /** 指标值。 */
-    Values?: number[] | null;
+    Values?: number[];
   }
 
   /** 单位时间间隔内的监控指标数据 */
@@ -2864,7 +2864,7 @@ declare namespace V20191016 {
     /** 行数。 */
     TableRows?: number;
     /** 库中所有表对应的独立物理文件大小加和（MB）。 */
-    PhysicalFileSize?: number | null;
+    PhysicalFileSize?: number;
   }
 
   /** 库空间时序数据 */
@@ -2878,13 +2878,13 @@ declare namespace V20191016 {
   /** 扣分详情。 */
   interface ScoreDetail {
     /** 扣分项分类，取值包括：可用性、可维护性、性能及可靠性。 */
-    IssueType: string;
+    IssueType?: string;
     /** 扣分总分。 */
-    ScoreLost: number;
+    ScoreLost?: number;
     /** 扣分总分上限。 */
-    ScoreLostMax: number;
+    ScoreLostMax?: number;
     /** 扣分项列表。 */
-    Items: ScoreItem[] | null;
+    Items?: ScoreItem[];
   }
 
   /** 诊断扣分项。 */

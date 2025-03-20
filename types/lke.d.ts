@@ -2336,6 +2336,8 @@ declare interface DescribeTokenUsageResponse {
   SplitTokenUsage?: number;
   /** Rag检索次数 */
   RagSearchUsage?: number;
+  /** 联网搜索次数 */
+  InternetSearchUsage?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

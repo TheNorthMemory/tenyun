@@ -2888,6 +2888,16 @@ declare interface ReleaseWanAddressResponse {
   RequestId?: string;
 }
 
+declare interface RemoveReplicationGroupRequest {
+  /** 复制组ID */
+  GroupId: string;
+}
+
+declare interface RemoveReplicationGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RemoveReplicationInstanceRequest {
   /** 复制组 ID。例如：crs-rpl-m3zt****。请登录[Redis 控制台](https://console.cloud.tencent.com/redis/replication)的全球复制组列表获取复制组 ID。 */
   GroupId: string;
@@ -3289,6 +3299,8 @@ declare interface Redis {
   OpenSSL(data: OpenSSLRequest, config?: AxiosRequestConfig): AxiosPromise<OpenSSLResponse>;
   /** 关闭外网接口 {@link ReleaseWanAddressRequest} {@link ReleaseWanAddressResponse} */
   ReleaseWanAddress(data: ReleaseWanAddressRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseWanAddressResponse>;
+  /** 删除复制组 {@link RemoveReplicationGroupRequest} {@link RemoveReplicationGroupResponse} */
+  RemoveReplicationGroup(data: RemoveReplicationGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveReplicationGroupResponse>;
   /** 移除复制组成员 {@link RemoveReplicationInstanceRequest} {@link RemoveReplicationInstanceResponse} */
   RemoveReplicationInstance(data: RemoveReplicationInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveReplicationInstanceResponse>;
   /** 续费实例 {@link RenewInstanceRequest} {@link RenewInstanceResponse} */

@@ -273,11 +273,11 @@ declare interface ProductInfo {
 /** 产品元数据 */
 declare interface ProductMetadata {
   /** 产品创建时间 */
-  CreationDate: number;
+  CreationDate?: number;
   /** 创建者 Uin */
-  CreateUserId: number;
+  CreateUserId?: number;
   /** 账号 Uin */
-  UserId: number;
+  UserId?: number;
 }
 
 /** 产品属性 */
@@ -873,9 +873,9 @@ declare interface DescribeDevicesRequest {
 
 declare interface DescribeDevicesResponse {
   /** 设备总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 设备详细信息列表 */
-  Devices: DeviceInfo[];
+  Devices?: DeviceInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1133,13 +1133,13 @@ declare interface DescribeProductResourcesResponse {
 
 declare interface DescribeProductResponse {
   /** 产品ID */
-  ProductId: string;
+  ProductId?: string;
   /** 产品名 */
-  ProductName: string;
+  ProductName?: string;
   /** 产品元数据 */
-  ProductMetadata: ProductMetadata;
+  ProductMetadata?: ProductMetadata;
   /** 产品属性 */
-  ProductProperties: ProductProperties;
+  ProductProperties?: ProductProperties;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1185,9 +1185,9 @@ declare interface DescribeProductsRequest {
 
 declare interface DescribeProductsResponse {
   /** 产品总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 产品详细信息列表 */
-  Products: ProductInfo[];
+  Products?: ProductInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1375,7 +1375,7 @@ declare interface ListLogRequest {
   MinTime: number;
   /** 日志结束时间，毫秒级时间戳 */
   MaxTime: number;
-  /** 查询关键字，可以同时支持键值查询和文本查询，例如，查询某key的值为value，并且包含某word的日志，该参数为：key:value word。键值或文本可以包含多个，以空格隔开。其中可以索引的key包括：requestid、productid、devicename、scene、content。一个典型的查询示例：productid:ABCDE12345 devicename:test scene:SHADOW content:Device%20connect publish */
+  /** 查询关键字，可以同时支持键值查询和文本查询，例如，查询某key的值为value，并且包含某word的日志，该参数为：key:vlue worda。键值或文本可以包含多个，以空格隔开。其中可以索引的key包括：requestid、productid、devicename、scene、content。一个典型的查询示例：productid:ABCDE12345 devicename:test scene:SHADOW content:Device%20connect publish */
   Keywords?: string;
   /** 日志检索上下文 */
   Context?: string;
@@ -1385,13 +1385,13 @@ declare interface ListLogRequest {
 
 declare interface ListLogResponse {
   /** 日志上下文 */
-  Context: string;
+  Context?: string;
   /** 是否还有日志，如有仍有日志，下次查询的请求带上当前请求返回的Context */
-  Listover: boolean;
+  Listover?: boolean;
   /** 日志列表 */
-  Results: CLSLogItem[];
+  Results?: CLSLogItem[];
   /** 日志总条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3507,7 +3507,7 @@ declare interface Iotcloud {
   DescribeDeviceResources(data: DescribeDeviceResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceResourcesResponse>;
   /** 获取设备影子（旧） {@link DescribeDeviceShadowRequest} {@link DescribeDeviceShadowResponse} */
   DescribeDeviceShadow(data: DescribeDeviceShadowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceShadowResponse>;
-  /** 获取设备列表 {@link DescribeDevicesRequest} {@link DescribeDevicesResponse} */
+  /** 获取设备列表（新） {@link DescribeDevicesRequest} {@link DescribeDevicesResponse} */
   DescribeDevices(data: DescribeDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicesResponse>;
   /** 查询固件信息 {@link DescribeFirmwareRequest} {@link DescribeFirmwareResponse} */
   DescribeFirmware(data: DescribeFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareResponse>;
@@ -3541,7 +3541,7 @@ declare interface Iotcloud {
   DescribeProductTask(data: DescribeProductTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductTaskResponse>;
   /** 获取产品级任务列表 {@link DescribeProductTasksRequest} {@link DescribeProductTasksResponse} */
   DescribeProductTasks(data: DescribeProductTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductTasksResponse>;
-  /** 获取产品列表 {@link DescribeProductsRequest} {@link DescribeProductsResponse} */
+  /** 获取产品列表（旧） {@link DescribeProductsRequest} {@link DescribeProductsResponse} */
   DescribeProducts(data: DescribeProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductsResponse>;
   /** 查询推送资源任务统计信息 {@link DescribePushResourceTaskStatisticsRequest} {@link DescribePushResourceTaskStatisticsResponse} */
   DescribePushResourceTaskStatistics(data: DescribePushResourceTaskStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePushResourceTaskStatisticsResponse>;

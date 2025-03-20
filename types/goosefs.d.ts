@@ -159,7 +159,7 @@ declare interface RoleToken {
   /** 角色名 */
   RoleName?: string;
   /** 用于goosefs client/sdk等 */
-  Token?: string | null;
+  Token?: string;
 }
 
 /** vpc子网信息 */
