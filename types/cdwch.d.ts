@@ -35,19 +35,19 @@ declare interface BackUpJobDisplay {
 /** 备份表信息 */
 declare interface BackupTableContent {
   /** 数据库 */
-  Database: string | null;
+  Database: string;
   /** 表 */
-  Table: string | null;
+  Table: string;
   /** 表总字节数 */
-  TotalBytes: number | null;
+  TotalBytes: number;
   /** 虚拟cluster */
-  VCluster?: string | null;
+  VCluster?: string;
   /** 表ip */
-  Ips?: string | null;
+  Ips?: string;
   /** zk路径 */
-  ZooPath?: string | null;
+  ZooPath?: string;
   /** cvm的ip地址 */
-  Rip?: string | null;
+  Rip?: string;
 }
 
 /** 集群计费相关信息 */
@@ -75,25 +75,25 @@ declare interface CkUserAlterInfo {
 /** 用于返回XML格式的配置文件和内容以及其他配置文件有关的信息 */
 declare interface ClusterConfigsInfoFromEMR {
   /** 配置文件名称 */
-  FileName: string;
+  FileName?: string;
   /** 配置文件对应的相关属性信息 */
-  FileConf: string;
+  FileConf?: string;
   /** 配置文件对应的其他属性信息 */
-  KeyConf: string;
+  KeyConf?: string;
   /** 配置文件的内容，base64编码 */
-  OriParam: string;
+  OriParam?: string;
   /** 用于表示当前配置文件是不是有过修改后没有重启，提醒用户需要重启 */
-  NeedRestart: number;
+  NeedRestart?: number;
   /** 保存配置文件的路径 */
-  FilePath: string | null;
+  FilePath?: string;
 }
 
 /** clickhouse vcluster信息 */
 declare interface ClusterInfo {
   /** vcluster名字 */
-  ClusterName: string | null;
+  ClusterName?: string;
   /** 当前cluster的IP列表 */
-  NodeIps: string[] | null;
+  NodeIps?: string[];
 }
 
 /** 配置文件修改信息 */
@@ -179,7 +179,7 @@ declare interface InstanceConfigItem {
 /** Instance表detail字段 */
 declare interface InstanceDetail {
   /** 告警策略是否可用 */
-  EnableAlarmStrategy?: boolean | null;
+  EnableAlarmStrategy?: boolean;
 }
 
 /** 实例描述信息 */
@@ -311,17 +311,17 @@ declare interface InstanceNode {
   /** 节点所属的分组信息 */
   NodeGroups?: GroupInfo[];
   /** VPC IP */
-  Rip?: string | null;
+  Rip?: string;
   /** ture的时候表示该节点上部署了chproxy进程 */
-  IsCHProxy?: boolean | null;
+  IsCHProxy?: boolean;
   /** 节点状态 */
-  Status?: string | null;
+  Status?: string;
   /** 节点uuid */
-  UUID?: string | null;
+  UUID?: string;
   /** 区 */
-  Zone?: string | null;
+  Zone?: string;
   /** 区描述 */
-  ZoneDesc?: string | null;
+  ZoneDesc?: string;
   /** 真实资源id */
   RealResourceId?: string;
 }
@@ -329,31 +329,31 @@ declare interface InstanceNode {
 /** 集群状态抽象后的结构体 */
 declare interface InstanceStateInfo {
   /** 集群状态，例如：Serving */
-  InstanceState?: string | null;
+  InstanceState?: string;
   /** 集群操作创建时间 */
-  FlowCreateTime?: string | null;
+  FlowCreateTime?: string;
   /** 集群操作名称 */
-  FlowName?: string | null;
+  FlowName?: string;
   /** 集群操作进度 */
-  FlowProgress?: number | null;
+  FlowProgress?: number;
   /** 集群状态描述，例如：运行中 */
-  InstanceStateDesc?: string | null;
+  InstanceStateDesc?: string;
   /** 集群流程错误信息，例如：“创建失败，资源不足” */
-  FlowMsg?: string | null;
+  FlowMsg?: string;
   /** 当前步骤的名称，例如：”购买资源中“ */
-  ProcessName?: string | null;
+  ProcessName?: string;
   /** 请求id */
-  RequestId?: string | null;
+  RequestId?: string;
   /** 流程的二级名称 */
-  ProcessSubName?: string | null;
+  ProcessSubName?: string;
 }
 
 /** kv配置，多层级item */
 declare interface MapConfigItem {
   /** key */
-  ConfKey: string;
+  ConfKey?: string;
   /** 列表 */
-  Items: InstanceConfigInfo[];
+  Items?: InstanceConfigInfo[];
 }
 
 /** 创建集群时的规格 */
@@ -401,33 +401,33 @@ declare interface NodesSummary {
 /** 资源规格描述信息 */
 declare interface ResourceSpec {
   /** 规格名称，例如“SCH1" */
-  Name: string;
+  Name?: string;
   /** cpu核数 */
-  Cpu: number;
+  Cpu?: number;
   /** 内存大小，单位G */
-  Mem: number;
+  Mem?: number;
   /** 分类标记，STANDARD/BIGDATA/HIGHIO分别表示标准型/大数据型/高IO */
-  Type: string;
+  Type?: string;
   /** 系统盘描述信息 */
-  SystemDisk: DiskSpec;
+  SystemDisk?: DiskSpec;
   /** 数据盘描述信息 */
-  DataDisk: DiskSpec;
+  DataDisk?: DiskSpec;
   /** 最大节点数目限制 */
-  MaxNodeSize: number;
+  MaxNodeSize?: number;
   /** 是否可用，false代表售罄 */
-  Available: boolean | null;
+  Available?: boolean;
   /** 规格描述信息 */
-  ComputeSpecDesc: string | null;
+  ComputeSpecDesc?: string;
   /** 规格名 */
-  DisplayName: string | null;
+  DisplayName?: string;
   /** 库存数 */
-  InstanceQuota: number | null;
+  InstanceQuota?: number;
 }
 
 /** 策略详情 */
 declare interface ScheduleStrategy {
   /** 备份桶名称 */
-  CosBucketName?: string | null;
+  CosBucketName?: string;
   /** 备份保留天数 */
   RetainDays?: number;
   /** 备份的天 */
@@ -437,7 +437,7 @@ declare interface ScheduleStrategy {
   /** 策略id */
   ScheduleId?: number;
   /** 下次备份时间 */
-  NextBackupTime?: string | null;
+  NextBackupTime?: string;
 }
 
 /** 列表页搜索的标记列表 */
@@ -453,21 +453,21 @@ declare interface SearchTags {
 /** 副可用区详情 */
 declare interface SecondaryZoneInfo {
   /** 副可用区 */
-  SecondaryZone?: string | null;
+  SecondaryZone?: string;
   /** 可用区可用的子网id */
-  SecondarySubnet?: string | null;
+  SecondarySubnet?: string;
   /** 可用区可用的子网可用ip的数量 */
-  UserIpNum?: string | null;
+  UserIpNum?: string;
   /** 可用区可用的子网可用ip的数量 */
-  SecondaryUserSubnetIPNum?: number | null;
+  SecondaryUserSubnetIPNum?: number;
 }
 
 /** 服务详细信息描述。 */
 declare interface ServiceInfo {
   /** 服务名称 */
-  Name?: string | null;
+  Name?: string;
   /** 服务的版本 */
-  Version?: string | null;
+  Version?: string;
 }
 
 /** 表权限 */
@@ -595,7 +595,7 @@ declare interface DescribeBackUpJobDetailRequest {
 
 declare interface DescribeBackUpJobDetailResponse {
   /** 备份表详情 */
-  TableContents: BackupTableContent[] | null;
+  TableContents?: BackupTableContent[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -669,7 +669,7 @@ declare interface DescribeCkSqlApisRequest {
 
 declare interface DescribeCkSqlApisResponse {
   /** 返回的查询数据，大部分情况是list，也可能是bool */
-  ReturnData?: string | null;
+  ReturnData?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -763,7 +763,7 @@ declare interface DescribeInstanceShardsRequest {
 
 declare interface DescribeInstanceShardsResponse {
   /** 实例shard信息 */
-  InstanceShardsList?: string | null;
+  InstanceShardsList?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -845,7 +845,7 @@ declare interface DestroyInstanceRequest {
 
 declare interface DestroyInstanceResponse {
   /** 作业id */
-  FlowID?: string | null;
+  FlowID?: string;
   /** 集群id */
   InstanceID?: string;
   /** 错误信息 */
@@ -889,7 +889,7 @@ declare interface ModifyInstanceKeyValConfigsRequest {
 
 declare interface ModifyInstanceKeyValConfigsResponse {
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** ID */
   FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -953,11 +953,11 @@ declare interface ResizeDiskRequest {
 
 declare interface ResizeDiskResponse {
   /** 流程ID */
-  FlowId?: string | null;
+  FlowId?: string;
   /** 实例ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -977,11 +977,11 @@ declare interface ScaleCNOutUpInstanceRequest {
 
 declare interface ScaleCNOutUpInstanceResponse {
   /** 流程ID */
-  FlowId?: string | null;
+  FlowId?: string;
   /** 实例ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1005,11 +1005,11 @@ declare interface ScaleOutInstanceRequest {
 
 declare interface ScaleOutInstanceResponse {
   /** 流程ID */
-  FlowId?: string | null;
+  FlowId?: string;
   /** 实例ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1027,11 +1027,11 @@ declare interface ScaleUpInstanceRequest {
 
 declare interface ScaleUpInstanceResponse {
   /** 流程ID */
-  FlowId?: string | null;
+  FlowId?: string;
   /** 实例ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

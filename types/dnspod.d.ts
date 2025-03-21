@@ -444,6 +444,32 @@ declare interface DomainShareUserInfo {
   SubDomain?: string | null;
 }
 
+/** 生成的文件信息 */
+declare interface FileInfo {
+  /** 文件 id。 */
+  FileId?: number;
+  /** 文件生成时间。 */
+  CreatedOn?: string;
+  /** 文件最后更新时间。 */
+  UpdatedOn?: string;
+  /** 文件涉及到的域名。 */
+  Domains?: string[];
+  /** 文件名称。 */
+  Name?: string;
+  /** 文件下载链接。 */
+  FileUrl?: string | null;
+  /** 生成文件的任务 id。 */
+  JobId?: number;
+  /** 生成文件的进度。100 表示 完成度为100%。 */
+  Progress?: number;
+  /** 文件状态。OK：已完成RUNNING：正在生成中ERROR：生成失败CANCELED：文件已取消生成CANCELING：文件正在取消生成EXPIRED：文件已过期 */
+  Status?: string;
+  /** 生成文件的任务类型。RECORD_LOG：解析量数据RECORD_EXPORT：导出解析记录DOMAIN_EXPORT：导出域名列表 */
+  Type?: string;
+  /** 剩余时间 */
+  LeftTime?: LeftTime | null;
+}
+
 /** 域名分组列表 */
 declare interface GroupInfo {
   /** 分组ID */
@@ -462,6 +488,16 @@ declare interface KeyValue {
   Key: string;
   /** 值 */
   Value?: string | null;
+}
+
+/** 批量生成文件剩余时间 */
+declare interface LeftTime {
+  /** 剩余天数 */
+  Days?: number | null;
+  /** 剩余小时数 */
+  Hours?: number | null;
+  /** 剩余分钟数 */
+  Mins?: number | null;
 }
 
 /** 自定义线路分组详细信息 */
@@ -772,6 +808,18 @@ declare interface SnapshotRecord {
   Reason?: string | null;
 }
 
+/** 批量导出子域名解析量查询条件 */
+declare interface SubDomainsAnalyticsParamsItem {
+  /** 要查询解析量的主域名。 */
+  Domain: string | null;
+  /** 要查询解析量的子域名主机头。 */
+  SubDomain?: string | null;
+  /** 查询子域名列表的偏移量。没有指定查询的 Subdomain 参数时，根据分页参数返回每页子域名解析量。 */
+  Offset?: number | null;
+  /** 查询子域名列表的每页条数。没有指定查询的 Subdomain 参数时，根据分页参数返回每页子域名解析量。 */
+  Limit?: number | null;
+}
+
 /** 子域名别名解析量统计信息 */
 declare interface SubdomainAliasAnalyticsItem {
   /** 子域名解析量统计查询信息 */
@@ -1072,6 +1120,24 @@ declare interface CreateDomainResponse {
   RequestId?: string;
 }
 
+declare interface CreateDomainsAnalyticsFileRequest {
+  /** 需要查询解析量的域名数组。 */
+  Domains: string[];
+  /** 查询解析量的时间区间起点。如：2023-01-01。 */
+  StartDate: string;
+  /** 查询解析量的统计维度。默认为 DATE。DATE：按天统计HOUR：按小时统计 */
+  DNSFormat?: string;
+  /** 查询解析量的时间区间终点。如：2023-01-01。默认为当天。 */
+  EndDate?: string;
+}
+
+declare interface CreateDomainsAnalyticsFileResponse {
+  /** 当前批量任务 id。 */
+  JobId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateLineGroupCopyRequest {
   /** 域名 */
   Domain: string;
@@ -1182,6 +1248,26 @@ declare interface CreateSnapshotRequest {
 }
 
 declare interface CreateSnapshotResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSubDomainsAnalyticsFileRequest {
+  /** 需要查询解析量的域名数组。 */
+  Domains: SubDomainsAnalyticsParamsItem[];
+  /** 查询解析量的时间区间起点。如：2023-01-01。 */
+  StartDate: string;
+  /** 查询解析量子域名类型。1：子域名2：无解析量子域名 */
+  SubDomainType: number;
+  /** 查询解析量的统计维度。默认为 DATE。DATE：按天统计HOUR：按小时统计 */
+  DNSFormat?: string;
+  /** 查询解析量的时间区间终点。如：2023-01-01。默认为当天。 */
+  EndDate?: string;
+}
+
+declare interface CreateSubDomainsAnalyticsFileResponse {
+  /** 当前批量任务 id。 */
+  JobId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1628,6 +1714,18 @@ declare interface DescribeDomainWhoisRequest {
 declare interface DescribeDomainWhoisResponse {
   /** 域名Whois信息 */
   Info?: WhoisInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFileInfoByJobIdRequest {
+  /** 任务ID */
+  JobId: number;
+}
+
+declare interface DescribeFileInfoByJobIdResponse {
+  /** 生成文件相关信息 */
+  FileInfo?: FileInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2507,6 +2605,8 @@ declare interface Dnspod {
   CreateDomainCustomLine(data: CreateDomainCustomLineRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainCustomLineResponse>;
   /** 创建域名分组 {@link CreateDomainGroupRequest} {@link CreateDomainGroupResponse} */
   CreateDomainGroup(data: CreateDomainGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainGroupResponse>;
+  /** 批量导出域名解析量 {@link CreateDomainsAnalyticsFileRequest} {@link CreateDomainsAnalyticsFileResponse} */
+  CreateDomainsAnalyticsFile(data: CreateDomainsAnalyticsFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainsAnalyticsFileResponse>;
   /** 创建域名的线路分组 {@link CreateLineGroupRequest} {@link CreateLineGroupResponse} */
   CreateLineGroup(data: CreateLineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLineGroupResponse>;
   /** 复制域名的线路分组 {@link CreateLineGroupCopyRequest} {@link CreateLineGroupCopyResponse} */
@@ -2519,6 +2619,8 @@ declare interface Dnspod {
   CreateRecordGroup(data: CreateRecordGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordGroupResponse>;
   /** 创建快照 {@link CreateSnapshotRequest} {@link CreateSnapshotResponse} */
   CreateSnapshot(data: CreateSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotResponse>;
+  /** 批量导出子域名解析量 {@link CreateSubDomainsAnalyticsFileRequest} {@link CreateSubDomainsAnalyticsFileResponse} */
+  CreateSubDomainsAnalyticsFile(data: CreateSubDomainsAnalyticsFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubDomainsAnalyticsFileResponse>;
   /** 创建添加子域名 Zone 域解析时所需要的 TXT 记录值 {@link CreateSubdomainValidateTXTValueRequest} {@link CreateSubdomainValidateTXTValueResponse} */
   CreateSubdomainValidateTXTValue(data: CreateSubdomainValidateTXTValueRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubdomainValidateTXTValueResponse>;
   /** 添加TXT记录 {@link CreateTXTRecordRequest} {@link CreateTXTRecordResponse} */
@@ -2571,6 +2673,8 @@ declare interface Dnspod {
   DescribeDomainShareUserList(data: DescribeDomainShareUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainShareUserListResponse>;
   /** 获取域名Whois信息 {@link DescribeDomainWhoisRequest} {@link DescribeDomainWhoisResponse} */
   DescribeDomainWhois(data: DescribeDomainWhoisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainWhoisResponse>;
+  /** 根据任务ID获取生成的文件信息 {@link DescribeFileInfoByJobIdRequest} {@link DescribeFileInfoByJobIdResponse} */
+  DescribeFileInfoByJobId(data: DescribeFileInfoByJobIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileInfoByJobIdResponse>;
   /** 获取域名的线路分组列表 {@link DescribeLineGroupListRequest} {@link DescribeLineGroupListResponse} */
   DescribeLineGroupList(data: DescribeLineGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLineGroupListResponse>;
   /** 获取各套餐配置详情 {@link DescribePackageDetailRequest} {@link DescribePackageDetailResponse} */

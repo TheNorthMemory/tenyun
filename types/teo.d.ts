@@ -4842,6 +4842,24 @@ declare interface DescribeSecurityIPGroupResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSecurityPolicyRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 安全策略类型，可使用以下参数值进行查询： ZoneDefaultPolicy：用于指定查询站点级策略；Template：用于指定查询策略模板，需要同时指定 TemplateId 参数；Host：用于指定查询域名级策略（注意：当使用域名来指定域名服务策略时，仅支持已经应用了域名级策略的域名服务或者策略模板）。 */
+  Entity?: string;
+  /** 指定策略模板 ID。当 Entity 参数值为 Template 时，使用本参数指定策略模板的 ID 查询模板配置。 */
+  TemplateId?: string;
+  /** 指定域名。当 Entity 参数值为 Host 时，使用本参数指定的域名级策略查询域名配置，例如：使用 www.example.com ，配置该域名的域名级策略。 */
+  Host?: string;
+}
+
+declare interface DescribeSecurityPolicyResponse {
+  /** 安全策略配置。 */
+  SecurityPolicy?: SecurityPolicy | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSecurityTemplateBindingsRequest {
   /** 要查询的站点 ID。 */
   ZoneId: string;
@@ -4861,7 +4879,7 @@ declare interface DescribeTimingL4DataRequest {
   StartTime: string;
   /** 结束时间。 */
   EndTime: string;
-  /** 查询指标，取值有：l4Flow_connections: 访问连接数；l4Flow_flux: 访问总流量；l4Flow_inFlux: 访问入流量；l4Flow_outFlux: 访问出流量。 */
+  /** 查询指标，取值有：l4Flow_connections: 访问并发连接数；l4Flow_flux: 访问总流量；l4Flow_inFlux: 访问入流量；l4Flow_outFlux: 访问出流量；l4Flow_inBandwidth: 访问入向带宽峰值；l4Flow_outBandwidth: 访问出向带宽峰值。 */
   MetricNames: string[];
   /** 站点 ID 集合，此参数必填。 */
   ZoneIds?: string[];
@@ -4871,7 +4889,7 @@ declare interface DescribeTimingL4DataRequest {
   Interval?: string;
   /** 过滤条件，详细的过滤条件Key值如下：ruleId：按照转发规则 ID 进行过滤。proxyId：按照四层代理实例 ID 进行过滤。 */
   Filters?: QueryCondition[];
-  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据；global：全球数据。不填默认取值为global。 */
+  /** 数据归属地区。该参数已废弃。请在 Filters.country 中按客户端地域过滤数据。 */
   Area?: string;
 }
 
@@ -4895,9 +4913,9 @@ declare interface DescribeTimingL7AnalysisDataRequest {
   ZoneIds?: string[];
   /** 查询时间粒度，取值有：min: 1分钟；5min: 5分钟；hour: 1小时；day: 1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：2 小时范围内以 min 粒度查询，2 天范围内以 5min 粒度查询，7 天范围内以 hour 粒度查询，超过 7 天以 day 粒度查询。 */
   Interval?: string;
-  /** 过滤条件，详细的过滤条件 Key 值如下：country：按照国家/地区进行过滤，国家/地区遵循 ISO 3166-1 alpha-2 规范。示例值：CN。province：按照省份进行过滤，此参数只支持服务区域为中国大陆。省份代码参考境内省份映射表，示例值：22。isp：按照运营商进行过滤，此参数只支持服务区域为中国大陆。对应的 Value 可选项如下： 2：中国电信； 26：中国联通； 1046：中国移动； 3947：中国铁通； 38：教育网； 43：长城宽带； 0：其他运营商。domain：按照子域名进行过滤，示例值： www.example.com。url：按照 URL Path 进行过滤，示例值：/content 或 /content/test.jpg。若填写 url 参数，则最多可查询近 30 天的数据。referer：按照 Referer 请求头部进行过滤，示例值：http://www.example.com/。若填写 referer 参数，则最多可查询近 30 天的数据；resourceType：按照资源类型进行过滤，资源类型一般是文件后缀，示例值：.jpg。若填写 resourceType 参数，则最多可查询近 30 天的数据；protocol：按照 HTTP 协议版本进行过滤。对应的 Value 可选项如下： HTTP/1.0； HTTP/1.1； HTTP/2.0； HTTP/3； WebSocket。socket：按照 HTTP协议类型进行过滤。对应的 Value 可选项如下： HTTP：HTTP 协议； HTTPS：HTTPS 协议； QUIC：QUIC 协议。statusCode：按照边缘状态码进行过滤。若填写 statusCode 参数，则最多可查询近 30 天的数据。对应的 Value 可选项如下： 1XX：1xx类型的状态码； 2XX：2xx类型的状态码； 3XX：3xx类型的状态码； 4XX：4xx类型的状态码； 5XX：5xx类型的状态码； 在 [0,600) 范围内的整数。browserType：按照浏览器类型进行过滤。若填写 browserType 参数，则最多可查询近 30 天的数据。对应 Value 的可选项如下： Firefox：Firefox浏览器； Chrome：Chrome浏览器； Safari：Safari浏览器； Other：其他浏览器类型； Empty：浏览器类型为空； Bot：搜索引擎爬虫； MicrosoftEdge：MicrosoftEdge浏览器； IE：IE浏览器； Opera：Opera浏览器； QQBrowser：QQ浏览器； LBBrowser：LB浏览器； MaxthonBrowser：Maxthon浏览器； SouGouBrowser：搜狗浏览器； BIDUBrowser：百度浏览器； TaoBrowser：淘浏览器； UBrowser：UC浏览器。deviceType：按照设备类型进行过滤。若填写 deviceType 参数，则最多可查询近 30 天的数据。对应 Value 的可选项如下： TV：TV设备； Tablet：Tablet设备； Mobile：Mobile设备； Desktop：Desktop设备； Other：其他设备类型； Empty：设备类型为空。operatingSystemType：按照操作系统类型进行过滤。若填写 operatingSystemType 参数，则最多可查询近 30 天的数据。对应 Value 的可选项如下： Linux：Linux操作系统； MacOS：MacOs操作系统； Android：Android操作系统； IOS：IOS操作系统； Windows：Windows操作系统； NetBSD：NetBSD； ChromiumOS：ChromiumOS； Bot：搜索引擎爬虫； Other：其他类型的操作系统； Empty：操作系统为空。tlsVersion：按照 TLS 版本进行过滤。若填写 tlsVersion 参数，则最多可查询近 30 天的数据。对应 Value 的可选项如下： TLS1.0； TLS1.1； TLS1.2； TLS1.3。ipVersion：按照 IP 版本进行过滤。对应 Value 的可选项如下： 4：IPv4； 6：IPv6。cacheType：按照缓存状态进行过滤。对应 Value 的可选项如下： hit：请求命中 EdgeOne 节点缓存，资源由节点缓存提供。资源部分命中缓存也会记录为 hit。 miss：请求未命中 EdgeOne 节点缓存，资源由源站提供。 dynamic：请求的资源无法缓存/未配置被节点缓存，资源由源站提供。 other：无法被识别的缓存状态。边缘函数响应的请求会记录为 other。clientIp：按照客户端 IP 进行过滤。 */
+  /** 过滤条件，详细的过滤条件 Key 值如下：country：按照国家/地区进行过滤，国家/地区遵循 ISO 3166-1 alpha-2 规范。示例值：CN。province：按照省份进行过滤，此参数只支持服务区域为中国大陆。省份代码参考境内省份映射表，示例值：22。isp：按照运营商进行过滤，此参数只支持服务区域为中国大陆。对应的 Value 可选项如下： 2：中国电信； 26：中国联通； 1046：中国移动； 3947：中国铁通； 38：教育网； 43：长城宽带； 0：其他运营商。domain：按照子域名进行过滤，示例值： www.example.com。url：按照 URL Path 进行过滤，示例值：/content 或 /content/test.jpg。若填写 url 参数，则最多可查询近 30 天的数据。referer：按照 Referer 请求头部进行过滤，示例值：http://www.example.com/。若填写 referer 参数，则最多可查询近 30 天的数据；resourceType：按照资源类型进行过滤，资源类型一般是文件后缀，示例值：.jpg。若填写 resourceType 参数，则最多可查询近 30 天的数据；protocol：按照 HTTP 协议版本进行过滤。对应的 Value 可选项如下： HTTP/1.0； HTTP/1.1； HTTP/2.0； HTTP/3； WebSocket。socket：按照 HTTP协议类型进行过滤。对应的 Value 可选项如下： HTTP：HTTP 协议； HTTPS：HTTPS 协议； QUIC：QUIC 协议。statusCode：按照边缘状态码进行过滤。若填写 statusCode 参数，则最多可查询近 30 天的数据。对应的 Value 可选项如下： 1XX：1xx类型的状态码； 2XX：2xx类型的状态码； 3XX：3xx类型的状态码； 4XX：4xx类型的状态码； 5XX：5xx类型的状态码； 在 [0,600) 范围内的整数。browserType：按照浏览器类型进行过滤。若填写 browserType 参数，则最多可查询近 30 天的数据。对应 Value 的可选项如下： Firefox：Firefox浏览器； Chrome：Chrome浏览器； Safari：Safari浏览器； Other：其他浏览器类型； Empty：浏览器类型为空； Bot：搜索引擎爬虫； MicrosoftEdge：MicrosoftEdge浏览器； IE：IE浏览器； Opera：Opera浏览器； QQBrowser：QQ浏览器； LBBrowser：LB浏览器； MaxthonBrowser：Maxthon浏览器； SouGouBrowser：搜狗浏览器； BIDUBrowser：百度浏览器； TaoBrowser：淘浏览器； UBrowser：UC浏览器。deviceType：按照设备类型进行过滤。若填写 deviceType 参数，则最多可查询近 30 天的数据。对应 Value 的可选项如下： TV：TV设备； Tablet：Tablet设备； Mobile：Mobile设备； Desktop：Desktop设备； Other：其他设备类型； Empty：设备类型为空。operatingSystemType：按照操作系统类型进行过滤。若填写 operatingSystemType 参数，则最多可查询近 30 天的数据。对应 Value 的可选项如下： Linux：Linux操作系统； MacOS：MacOs操作系统； Android：Android操作系统； IOS：IOS操作系统； Windows：Windows操作系统； NetBSD：NetBSD； ChromiumOS：ChromiumOS； Bot：搜索引擎爬虫； Other：其他类型的操作系统； Empty：操作系统为空。tlsVersion：按照 TLS 版本进行过滤。若填写 tlsVersion 参数，则最多可查询近 30 天的数据。对应 Value 的可选项如下： TLS1.0； TLS1.1； TLS1.2； TLS1.3。ipVersion：按照 IP 版本进行过滤。对应 Value 的可选项如下： 4：IPv4； 6：IPv6。cacheType：按照缓存状态进行过滤。对应 Value 的可选项如下： hit：请求命中 EdgeOne 节点缓存，资源由节点缓存提供。资源部分命中缓存也会记录为 hit。 miss：请求未命中 EdgeOne 节点缓存，资源由源站提供。 dynamic：请求的资源无法缓存/未配置被节点缓存，资源由源站提供。 other：无法被识别的缓存状态。边缘函数响应的请求会记录为 other。clientIp：按照客户端 IP 进行过滤。若填写 clientIp 参数，则最多可查询近 30 天的数据。userAgent：按照 User-Agent 请求头部进行过滤。若填写 userAgent 参数，则最多可查询近 30 天的数据。 */
   Filters?: QueryCondition[];
-  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据；global：全球数据。不填默认取值为 global。 */
+  /** 数据归属地区。该参数已废弃。请在 Filters.country 中按客户端地域过滤数据。 */
   Area?: string;
 }
 
@@ -4941,17 +4959,17 @@ declare interface DescribeTopL7AnalysisDataRequest {
   StartTime: string;
   /** 结束时间。 */
   EndTime: string;
-  /** 查询的指标，取值有： l7Flow_outFlux_country：按国家/地区维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_province：按中国大陆境内省份维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_statusCode：按状态码维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_domain：按域名维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_url：按 URL Path 维度统计 L7 EdgeOne 响应流量指标; l7Flow_outFlux_resourceType：按资源类型维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_sip：按客户端 IP 维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_referers：按 Referer 维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_ua_device：按设备类型维度统计 L7 EdgeOne 响应流量指标; l7Flow_outFlux_ua_browser：按浏览器类型维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_ua_os：按操作系统类型维度统计 L7 EdgeOne 响应流量指标； l7Flow_request_country：按国家/地区维度统计 L7 访问请求数指标； l7Flow_request_province：按中国大陆境内省份维度统计 L7 访问请求数指标； l7Flow_request_statusCode：按状态码维度统计 L7 访问请求数指标； l7Flow_request_domain：按域名维度统计 L7 访问请求数指标； l7Flow_request_url：按 URL Path 维度统计 L7 访问请求数指标; l7Flow_request_resourceType：按资源类型维度统计 L7 访问请求数指标； l7Flow_request_sip：按客户端 IP 维度统计 L7 访问请求数指标； l7Flow_request_referer：按 Referer 维度统计 L7 访问请求数指标； l7Flow_request_ua_device：按设备类型维度统计 L7 访问请求数指标; l7Flow_request_ua_browser：按浏览器类型维度统计 L7 访问请求数指标； l7Flow_request_ua_os：按操作系统类型维度统计 L7 访问请求数指标。 */
+  /** 查询的指标，取值有： l7Flow_outFlux_country：按国家/地区维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_province：按中国大陆境内省份维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_statusCode：按状态码维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_domain：按域名维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_url：按 URL Path 维度统计 L7 EdgeOne 响应流量指标; l7Flow_outFlux_resourceType：按资源类型维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_sip：按客户端 IP 维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_referers：按 Referer 维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_ua_device：按设备类型维度统计 L7 EdgeOne 响应流量指标; l7Flow_outFlux_ua_browser：按浏览器类型维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_ua_os：按操作系统类型维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_ua：按 User-Agent 维度统计 L7 EdgeOne 响应流量指标； l7Flow_request_country：按国家/地区维度统计 L7 访问请求数指标； l7Flow_request_province：按中国大陆境内省份维度统计 L7 访问请求数指标； l7Flow_request_statusCode：按状态码维度统计 L7 访问请求数指标； l7Flow_request_domain：按域名维度统计 L7 访问请求数指标； l7Flow_request_url：按 URL Path 维度统计 L7 访问请求数指标; l7Flow_request_resourceType：按资源类型维度统计 L7 访问请求数指标； l7Flow_request_sip：按客户端 IP 维度统计 L7 访问请求数指标； l7Flow_request_referer：按 Referer 维度统计 L7 访问请求数指标； l7Flow_request_ua_device：按设备类型维度统计 L7 访问请求数指标; l7Flow_request_ua_browser：按浏览器类型维度统计 L7 访问请求数指标； l7Flow_request_ua_os：按操作系统类型维度统计 L7 访问请求数指标； l7Flow_request_ua：按 User-Agent 维度统计 L7 访问请求数指标。 */
   MetricName: string;
   /** 站点 ID 集合，此参数必填。 */
   ZoneIds?: string[];
   /** 查询前多少个 top 数据，最大值为1000。不填默认为10，表示查询 top10 的数据。 */
   Limit?: number;
-  /** 过滤条件，详细的过滤条件 Key 值如下：country：按照国家/地区进行过滤，国家/地区遵循 ISO 3166-1 alpha-2 规范。示例值：CN。province：按照省份进行过滤，此参数只支持服务区域为中国大陆。省份代码参考境内省份映射表，示例值：22。isp：按照运营商进行过滤，此参数只支持服务区域为中国大陆。对应的 Value 可选项如下： 2：中国电信； 26：中国联通； 1046：中国移动； 3947：中国铁通； 38：教育网； 43：长城宽带； 0：其他运营商。domain：按照子域名进行过滤，示例值： www.example.com。url：按照 URL Path 进行过滤，示例值：/content 或 /content/test.jpg。若填写 url 参数，则最多可查询近 30 天的数据。referer：按照 Referer 请求头部进行过滤，示例值：http://www.example.com/。若填写 referer 参数，则最多可查询近 30 天的数据；resourceType：按照资源类型进行过滤，资源类型一般是文件后缀，示例值：.jpg。若填写 resourceType 参数，则最多可查询近 30 天的数据；protocol：按照 HTTP 协议版本进行过滤。对应的 Value 可选项如下： HTTP/1.0； HTTP/1.1； HTTP/2.0； HTTP/3； WebSocket。socket：按照 HTTP协议类型进行过滤。对应的 Value 可选项如下： HTTP：HTTP 协议； HTTPS：HTTPS 协议； QUIC：QUIC 协议。statusCode：按照边缘状态码进行过滤。若填写 statusCode 参数，则最多可查询近 30 天的数据。对应的 Value 可选项如下： 1XX：1xx类型的状态码； 2XX：2xx类型的状态码； 3XX：3xx类型的状态码； 4XX：4xx类型的状态码； 5XX：5xx类型的状态码； 在 [0,600) 范围内的整数。browserType：按照浏览器类型进行过滤。若填写 browserType 参数，则最多可查询近 30 天的数据。对应 Value 的可选项如下： Firefox：Firefox浏览器； Chrome：Chrome浏览器； Safari：Safari浏览器； Other：其他浏览器类型； Empty：浏览器类型为空； Bot：搜索引擎爬虫； MicrosoftEdge：MicrosoftEdge浏览器； IE：IE浏览器； Opera：Opera浏览器； QQBrowser：QQ浏览器； LBBrowser：LB浏览器； MaxthonBrowser：Maxthon浏览器； SouGouBrowser：搜狗浏览器； BIDUBrowser：百度浏览器； TaoBrowser：淘浏览器； UBrowser：UC浏览器。deviceType：按照设备类型进行过滤。若填写 deviceType 参数，则最多可查询近 30 天的数据。对应 Value 的可选项如下： TV：TV设备； Tablet：Tablet设备； Mobile：Mobile设备； Desktop：Desktop设备； Other：其他设备类型； Empty：设备类型为空。operatingSystemType：按照操作系统类型进行过滤。若填写 operatingSystemType 参数，则最多可查询近 30 天的数据。对应 Value 的可选项如下： Linux：Linux操作系统； MacOS：MacOs操作系统； Android：Android操作系统； IOS：IOS操作系统； Windows：Windows操作系统； NetBSD：NetBSD； ChromiumOS：ChromiumOS； Bot：搜索引擎爬虫； Other：其他类型的操作系统； Empty：操作系统为空。tlsVersion：按照 TLS 版本进行过滤。若填写 tlsVersion 参数，则最多可查询近 30 天的数据。对应 Value 的可选项如下： TLS1.0； TLS1.1； TLS1.2； TLS1.3。ipVersion：按照 IP 版本进行过滤。对应 Value 的可选项如下： 4：IPv4； 6：IPv6。cacheType：按照缓存状态进行过滤。对应 Value 的可选项如下： hit：请求命中 EdgeOne 节点缓存，资源由节点缓存提供。资源部分命中缓存也会记录为 hit。 miss：请求未命中 EdgeOne 节点缓存，资源由源站提供。 dynamic：请求的资源无法缓存/未配置被节点缓存，资源由源站提供。 other：无法被识别的缓存状态。边缘函数响应的请求会记录为 other。clientIp：按照客户端 IP 进行过滤。 */
+  /** 过滤条件，详细的过滤条件 Key 值如下：country：按照国家/地区进行过滤，国家/地区遵循 ISO 3166-1 alpha-2 规范。示例值：CN。province：按照省份进行过滤，此参数只支持服务区域为中国大陆。省份代码参考境内省份映射表，示例值：22。isp：按照运营商进行过滤，此参数只支持服务区域为中国大陆。对应的 Value 可选项如下： 2：中国电信； 26：中国联通； 1046：中国移动； 3947：中国铁通； 38：教育网； 43：长城宽带； 0：其他运营商。domain：按照子域名进行过滤，示例值： www.example.com。url：按照 URL Path 进行过滤，示例值：/content 或 /content/test.jpg。若填写 url 参数，则最多可查询近 30 天的数据。referer：按照 Referer 请求头部进行过滤，示例值：http://www.example.com/。若填写 referer 参数，则最多可查询近 30 天的数据；resourceType：按照资源类型进行过滤，资源类型一般是文件后缀，示例值：.jpg。若填写 resourceType 参数，则最多可查询近 30 天的数据；protocol：按照 HTTP 协议版本进行过滤。对应的 Value 可选项如下： HTTP/1.0； HTTP/1.1； HTTP/2.0； HTTP/3； WebSocket。socket：按照 HTTP协议类型进行过滤。对应的 Value 可选项如下： HTTP：HTTP 协议； HTTPS：HTTPS 协议； QUIC：QUIC 协议。statusCode：按照边缘状态码进行过滤。若填写 statusCode 参数，则最多可查询近 30 天的数据。对应的 Value 可选项如下： 1XX：1xx类型的状态码； 2XX：2xx类型的状态码； 3XX：3xx类型的状态码； 4XX：4xx类型的状态码； 5XX：5xx类型的状态码； 在 [0,600) 范围内的整数。browserType：按照浏览器类型进行过滤。若填写 browserType 参数，则最多可查询近 30 天的数据。对应 Value 的可选项如下： Firefox：Firefox浏览器； Chrome：Chrome浏览器； Safari：Safari浏览器； Other：其他浏览器类型； Empty：浏览器类型为空； Bot：搜索引擎爬虫； MicrosoftEdge：MicrosoftEdge浏览器； IE：IE浏览器； Opera：Opera浏览器； QQBrowser：QQ浏览器； LBBrowser：LB浏览器； MaxthonBrowser：Maxthon浏览器； SouGouBrowser：搜狗浏览器； BIDUBrowser：百度浏览器； TaoBrowser：淘浏览器； UBrowser：UC浏览器。deviceType：按照设备类型进行过滤。若填写 deviceType 参数，则最多可查询近 30 天的数据。对应 Value 的可选项如下： TV：TV设备； Tablet：Tablet设备； Mobile：Mobile设备； Desktop：Desktop设备； Other：其他设备类型； Empty：设备类型为空。operatingSystemType：按照操作系统类型进行过滤。若填写 operatingSystemType 参数，则最多可查询近 30 天的数据。对应 Value 的可选项如下： Linux：Linux操作系统； MacOS：MacOs操作系统； Android：Android操作系统； IOS：IOS操作系统； Windows：Windows操作系统； NetBSD：NetBSD； ChromiumOS：ChromiumOS； Bot：搜索引擎爬虫； Other：其他类型的操作系统； Empty：操作系统为空。tlsVersion：按照 TLS 版本进行过滤。若填写 tlsVersion 参数，则最多可查询近 30 天的数据。对应 Value 的可选项如下： TLS1.0； TLS1.1； TLS1.2； TLS1.3。ipVersion：按照 IP 版本进行过滤。对应 Value 的可选项如下： 4：IPv4； 6：IPv6。cacheType：按照缓存状态进行过滤。对应 Value 的可选项如下： hit：请求命中 EdgeOne 节点缓存，资源由节点缓存提供。资源部分命中缓存也会记录为 hit。 miss：请求未命中 EdgeOne 节点缓存，资源由源站提供。 dynamic：请求的资源无法缓存/未配置被节点缓存，资源由源站提供。 other：无法被识别的缓存状态。边缘函数响应的请求会记录为 other。clientIp：按照客户端 IP 进行过滤。若填写 clientIp 参数，则最多可查询近 30 天的数据。userAgent：按照 User-Agent 请求头部进行过滤。若填写 userAgent 参数，则最多可查询近 30 天的数据。 */
   Filters?: QueryCondition[];
   /** 查询时间粒度，取值有：min: 1分钟；5min: 5分钟；hour: 1小时；day: 1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：2 小时范围内以 min 粒度查询，2 天范围内以 5min 粒度查询，7 天范围内以 hour 粒度查询，超过 7 天以 day 粒度查询。 */
   Interval?: string;
-  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据；global：全球数据。不填默认取值为global。 */
+  /** 数据归属地区。该参数已废弃。请在 Filters.country 中按客户端地域过滤数据。 */
   Area?: string;
 }
 
@@ -6233,6 +6251,8 @@ declare interface Teo {
   DescribeSecurityIPGroup(data: DescribeSecurityIPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityIPGroupResponse>;
   /** 查询安全 IP 组（已废弃） {@link DescribeSecurityIPGroupInfoRequest} {@link DescribeSecurityIPGroupInfoResponse} */
   DescribeSecurityIPGroupInfo(data: DescribeSecurityIPGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityIPGroupInfoResponse>;
+  /** 查询安全防护配置详情 {@link DescribeSecurityPolicyRequest} {@link DescribeSecurityPolicyResponse} */
+  DescribeSecurityPolicy(data: DescribeSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPolicyResponse>;
   /** 查询指定策略模板的绑定关系列表 {@link DescribeSecurityTemplateBindingsRequest} {@link DescribeSecurityTemplateBindingsResponse} */
   DescribeSecurityTemplateBindings(data: DescribeSecurityTemplateBindingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityTemplateBindingsResponse>;
   /** 查询四层流量时序数据 {@link DescribeTimingL4DataRequest} {@link DescribeTimingL4DataResponse} */

@@ -7,27 +7,27 @@ declare interface AppInfoItem {
   /** 小程序apiiid */
   AppPackage?: string;
   /** 小程序应用名称 */
-  AppName?: string | null;
+  AppName?: string;
   /** 小程序应用版本 */
-  AppVersion?: string | null;
+  AppVersion?: string;
   /** 应用平台, 0:android, 1:ios, 2:小程序 */
   Platform?: number;
   /** 小程序隐私诊断报告下载链接 */
-  ReportUrl?: string | null;
+  ReportUrl?: string;
   /** 小程序隐私诊断报告名称 */
-  ReportTitle?: string | null;
+  ReportTitle?: string;
   /** 小程序隐私诊断堆栈报告下载链接 */
-  BehaviorUrl?: string | null;
+  BehaviorUrl?: string;
   /** 小程序隐私诊断堆栈报告名称 */
-  BehaviorTitle?: string | null;
+  BehaviorTitle?: string;
   /** 诊断风险项数量 */
-  HighRiskCount?: number | null;
+  HighRiskCount?: number;
   /** 隐私申明文件名称 */
-  PrivacyTextName?: string | null;
+  PrivacyTextName?: string;
   /** 软件MD5 */
-  SoftwareMD5?: string | null;
+  SoftwareMD5?: string;
   /** 隐私文本MD5 */
-  PrivacyTextMD5?: string | null;
+  PrivacyTextMD5?: string;
 }
 
 /** 应用隐私合规诊断任务数据 */
@@ -39,7 +39,7 @@ declare interface AppTaskData {
   /** 0:默认值(待检测/待咨询), 1.检测中, 2:待评估, 3:评估中, 4:任务完成/咨询完成, 5:任务失败, 6:咨询中; */
   TaskStatus?: number;
   /** 错误信息 */
-  TaskErrMsg?: string | null;
+  TaskErrMsg?: string;
   /** 任务来源,0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android); */
   Source?: number;
   /** 应用信息 */
@@ -49,7 +49,7 @@ declare interface AppTaskData {
   /** 任务完成时间(更新时间) */
   EndTime?: string;
   /** 联系人信息 */
-  ContactName?: string | null;
+  ContactName?: string;
 }
 
 /** 翼扬诊断小程序报告数据 */
@@ -129,17 +129,17 @@ declare interface ResourceUsageInfoData {
 /** 任务流步骤详情 */
 declare interface TaskFlowStepsInfo {
   /** 流程编号 */
-  FlowNo: string | null;
+  FlowNo?: string;
   /** 流程名称 */
-  FlowName: string;
+  FlowName?: string;
   /** 流程状态, 其他值:进行中, 2:成功, 3:失败 */
-  FlowStatus: number;
+  FlowStatus?: number;
   /** 流程状态描述 */
-  FlowStateDesc: string | null;
+  FlowStateDesc?: string;
   /** 流程启动时间 */
-  StartTime: string | null;
+  StartTime?: string;
   /** 流程完成时间 */
-  EndTime: string | null;
+  EndTime?: string;
 }
 
 declare interface CreateAppScanTaskRepeatRequest {
@@ -309,9 +309,9 @@ declare interface DescribeFlySecMiniAppReportUrlRequest {
 
 declare interface DescribeFlySecMiniAppReportUrlResponse {
   /** 返回值, 0:成功, 其他值请查看“返回值”定义 */
-  Ret: number;
+  Ret?: number;
   /** 诊断报告下载链接 */
-  Url: string | null;
+  Url?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -331,11 +331,11 @@ declare interface DescribeFlySecMiniAppScanReportListRequest {
 
 declare interface DescribeFlySecMiniAppScanReportListResponse {
   /** 返回值, 0:成功, 其他值请查看“返回值”定义 */
-  Ret: number;
+  Ret?: number;
   /** 诊断报告数据 */
-  Data: FlySecMiniAppReportData[] | null;
+  Data?: FlySecMiniAppReportData[];
   /** 诊断任务数 */
-  Total: number | null;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -353,11 +353,11 @@ declare interface DescribeFlySecMiniAppScanTaskListRequest {
 
 declare interface DescribeFlySecMiniAppScanTaskListResponse {
   /** 返回值, 0:成功, 其他值请查看“返回值”定义 */
-  Ret: number;
+  Ret?: number;
   /** 诊断任务数据列表 */
-  Data: FlySecMiniAppTaskData[] | null;
+  Data?: FlySecMiniAppTaskData[];
   /** 诊断任务数 */
-  Total: number | null;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -391,15 +391,15 @@ declare interface DescribeFlySecMiniAppScanTaskStatusRequest {
 
 declare interface DescribeFlySecMiniAppScanTaskStatusResponse {
   /** 返回值, 0:成功, 其他值请查看“返回值”定义 */
-  Ret: number;
+  Ret?: number;
   /** 诊断状态, 0:排队中, 1:成功, 2:失败, 3:进行中 */
-  Status: number;
+  Status?: number;
   /** 诊断失败错误码 */
-  Errno: number | null;
+  Errno?: number;
   /** 小程序名称 */
-  MiniAppName: string | null;
+  MiniAppName?: string;
   /** 小程序版本 */
-  MiniAppVersion: string | null;
+  MiniAppVersion?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -443,9 +443,9 @@ declare interface DescribeScanTaskListResponse {
   /** 返回值, 0:成功, 其他值请查看“返回值”定义 */
   Result?: number;
   /** 诊断任务数据列表 */
-  Data?: AppTaskData[] | null;
+  Data?: AppTaskData[];
   /** 任务总数量 */
-  Total?: number | null;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -465,13 +465,13 @@ declare interface DescribeScanTaskReportUrlRequest {
 
 declare interface DescribeScanTaskReportUrlResponse {
   /** 返回值, 0:成功, 其他值请查看“返回值”定义 */
-  Result: number;
+  Result?: number;
   /** 诊断报告/堆栈信息下载链接 */
-  ReportUrl: string;
+  ReportUrl?: string;
   /** 诊断报告/堆栈名称 */
-  ReportTitle: string | null;
+  ReportTitle?: string;
   /** 诊断json结果内容 */
-  ReportResult: string | null;
+  ReportResult?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

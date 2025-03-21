@@ -4506,28 +4506,6 @@ declare interface ModifyEnvironmentRoleResponse {
   RequestId?: string;
 }
 
-declare interface ModifyPublicNetworkAccessPointRequest {
-  /** 集群名字 */
-  ClusterId: string;
-  /** 是否开启 */
-  PublicNetworkAccessPointStatus: boolean;
-  /** 必填，公网控制台的开关/Vpc控制台的开关，示例值，Public/Vpc */
-  SwitchOwner?: string;
-  /** Vpc */
-  VpcId?: string;
-  /** 子网 */
-  SubnetId?: string;
-  /** 子网下面指定ip作为vpc接入点 */
-  SelectIp?: string;
-}
-
-declare interface ModifyPublicNetworkAccessPointResponse {
-  /** 修改结果 */
-  ModifyResult?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ModifyPublicNetworkSecurityPolicyRequest {
   /** 集群id */
   InstanceId: string;
@@ -5341,8 +5319,6 @@ declare interface Tdmq {
   ModifyEnvironmentAttributes(data: ModifyEnvironmentAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvironmentAttributesResponse>;
   /** 修改环境角色授权 {@link ModifyEnvironmentRoleRequest} {@link ModifyEnvironmentRoleResponse} */
   ModifyEnvironmentRole(data: ModifyEnvironmentRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvironmentRoleResponse>;
-  /** RabbitMQ专享版修改公网管控台，vpc15672开关 {@link ModifyPublicNetworkAccessPointRequest} {@link ModifyPublicNetworkAccessPointResponse} */
-  ModifyPublicNetworkAccessPoint(data: ModifyPublicNetworkAccessPointRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPublicNetworkAccessPointResponse>;
   /** 修改公网安全策略 {@link ModifyPublicNetworkSecurityPolicyRequest} {@link ModifyPublicNetworkSecurityPolicyResponse} */
   ModifyPublicNetworkSecurityPolicy(data: ModifyPublicNetworkSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPublicNetworkSecurityPolicyResponse>;
   /** 修改RabbitMQ的权限 {@link ModifyRabbitMQPermissionRequest} {@link ModifyRabbitMQPermissionResponse} */

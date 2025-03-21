@@ -51,45 +51,45 @@ declare interface SavingPlanCoverageRate {
 /** 节省计划抵扣明细 */
 declare interface SavingPlanDeductDetail {
   /** 账号id */
-  OwnerUin?: string | null;
+  OwnerUin?: string;
   /** 账号名称 */
-  OwnerUinName?: string | null;
+  OwnerUinName?: string;
   /** 抵扣账号id */
-  PayerUin?: string | null;
+  PayerUin?: string;
   /** 抵扣账号名称 */
-  PayerUinName?: string | null;
+  PayerUinName?: string;
   /** 节省计划资源id */
-  SpId?: string | null;
+  SpId?: string;
   /** 产品编码 */
-  ProductCode?: string | null;
+  ProductCode?: string;
   /** 产品名称 */
-  ProductName?: string | null;
+  ProductName?: string;
   /** 子产品编码 */
-  SubProductCode?: string | null;
+  SubProductCode?: string;
   /** 子产品名称 */
-  SubProductName?: string | null;
+  SubProductName?: string;
   /** 交易ID */
-  OutTradeNo?: string | null;
+  OutTradeNo?: string;
   /** 地域id */
-  RegionId?: number | null;
+  RegionId?: number;
   /** 地域名称 */
-  RegionName?: string | null;
+  RegionName?: string;
   /** 地区id */
-  ZoneId?: number | null;
+  ZoneId?: number;
   /** 地区名称 */
-  ZoneName?: string | null;
+  ZoneName?: string;
   /** 开始使用时间 */
-  SpStartTime?: string | null;
+  SpStartTime?: string;
   /** 结束使用时间 */
-  SpEndTime?: string | null;
+  SpEndTime?: string;
   /** 折扣时间 */
-  DeductTime?: string | null;
+  DeductTime?: string;
   /** 抵扣金额，单位分 */
-  DeductAmount?: string | null;
+  DeductAmount?: string;
   /** 抵扣折扣率 */
-  DeductDiscount?: string | null;
+  DeductDiscount?: string;
   /** 抵扣比率 */
-  DeductRate?: string | null;
+  DeductRate?: string;
 }
 
 /** 节省计划总览明细数据 */
@@ -237,7 +237,7 @@ declare interface DescribeSavingPlanOverviewRequest {
 
 declare interface DescribeSavingPlanOverviewResponse {
   /** 节省计划总览明细数据 */
-  Overviews?: SavingPlanOverviewDetail[] | null;
+  Overviews?: SavingPlanOverviewDetail[];
   /** 查询命中的节省计划总览明细数据总条数 */
   Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */

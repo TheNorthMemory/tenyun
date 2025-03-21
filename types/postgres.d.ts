@@ -177,7 +177,7 @@ declare interface DBBackup {
   /** 外网下载地址 */
   ExternalAddr?: string;
   /** 备份集ID */
-  SetId?: string | null;
+  SetId?: string;
 }
 
 /** 描述实例的详细信息 */
@@ -265,21 +265,21 @@ declare interface DBInstance {
 /** 描述实例的网络连接信息。 */
 declare interface DBInstanceNetInfo {
   /** DNS域名 */
-  Address: string;
+  Address?: string;
   /** IP地址 */
-  Ip: string;
+  Ip?: string;
   /** 连接Port地址 */
-  Port: number;
+  Port?: number;
   /** 网络类型，1、inner（基础网络内网地址）；2、private（私有网络内网地址）；3、public（基础网络或私有网络的外网地址）； */
-  NetType: string;
+  NetType?: string;
   /** 网络连接状态，1、initing（未开通）；2、opened（已开通）；3、closed（已关闭）；4、opening（开通中）；5、closing（关闭中）； */
-  Status: string;
+  Status?: string;
   /** 私有网络ID */
-  VpcId: string | null;
+  VpcId?: string;
   /** 子网ID */
-  SubnetId: string | null;
+  SubnetId?: string;
   /** 连接数据库的协议类型，当前支持：postgresql、mssql（MSSQL兼容语法） */
-  ProtocolType: string | null;
+  ProtocolType?: string;
 }
 
 /** 描述实例节点信息，包括节点类型、节点所在可用区、节点所在专属集群。 */
@@ -289,41 +289,41 @@ declare interface DBNode {
   /** 节点所在可用区，例如 ap-guangzhou-1。 */
   Zone: string;
   /** 专属集群ID */
-  DedicatedClusterId?: string | null;
+  DedicatedClusterId?: string;
 }
 
 /** 描述数据库详细信息，包括所有者、字符编码等 */
 declare interface Database {
   /** 数据库名 */
-  DatabaseName?: string | null;
+  DatabaseName?: string;
   /** 数据库所有者 */
-  DatabaseOwner?: string | null;
+  DatabaseOwner?: string;
   /** 数据库字符编码 */
-  Encoding?: string | null;
+  Encoding?: string;
   /** 数据库排序规则 */
-  Collate?: string | null;
+  Collate?: string;
   /** 数据库字符分类 */
-  Ctype?: string | null;
+  Ctype?: string;
   /** 数据库是否允许连接 */
-  AllowConn?: boolean | null;
+  AllowConn?: boolean;
   /** 数据库最大连接数，-1表示无限制 */
-  ConnLimit?: number | null;
+  ConnLimit?: number;
   /** 数据库权限列表 */
-  Privileges?: string | null;
+  Privileges?: string;
 }
 
 /** 描述数据库中某个对象所属的类型、是在哪个数据库、模式、表中的对象。 */
 declare interface DatabaseObject {
   /** 支持使用的数据库对象类型有：account,database,schema,sequence,procedure,type,function,table,view,matview,column。 */
-  ObjectType: string | null;
+  ObjectType: string;
   /** 所描述的数据库对象名称 */
-  ObjectName: string | null;
+  ObjectName: string;
   /** 所要描述的数据库对象，所属的数据库名称。当描述对象类型不为database时，此参数必选。 */
-  DatabaseName?: string | null;
+  DatabaseName?: string;
   /** 所要描述的数据库对象，所属的模式名称。当描述对象不为database、schema时，此参数必选。 */
-  SchemaName?: string | null;
+  SchemaName?: string;
   /** 所要描述的数据库对象，所属的表名称。当描述的对象类型为column时，此参数必填。 */
-  TableName?: string | null;
+  TableName?: string;
 }
 
 /** 指定账号对数据库对象拥有的权限列表 */
@@ -337,27 +337,27 @@ declare interface DatabasePrivilege {
 /** 专属集群相关信息，用于查询用户的专属集群列表 */
 declare interface DedicatedCluster {
   /** 专属集群ID */
-  DedicatedClusterId?: string | null;
+  DedicatedClusterId?: string;
   /** 专属集群名称 */
-  Name?: string | null;
+  Name?: string;
   /** 专属集群所在可用区 */
-  Zone?: string | null;
+  Zone?: string;
   /** 灾备集群 */
-  StandbyDedicatedClusterSet?: string[] | null;
+  StandbyDedicatedClusterSet?: string[];
   /** 实例数量 */
-  InstanceCount?: number | null;
+  InstanceCount?: number;
   /** Cpu总量 */
-  CpuTotal?: number | null;
+  CpuTotal?: number;
   /** Cpu可用数量 */
-  CpuAvailable?: number | null;
+  CpuAvailable?: number;
   /** 内存总量 */
-  MemTotal?: number | null;
+  MemTotal?: number;
   /** 内存可用量 */
-  MemAvailable?: number | null;
+  MemAvailable?: number;
   /** 磁盘总量 */
-  DiskTotal?: number | null;
+  DiskTotal?: number;
   /** 磁盘可用量 */
-  DiskAvailable?: number | null;
+  DiskAvailable?: number;
 }
 
 /** 慢SQL 统计分析接口返回详情 */
@@ -367,7 +367,7 @@ declare interface Detail {
   /** 输入时间范围内所有慢sql总条数 */
   TotalCallNum?: number;
   /** 慢SQL统计分析列表 */
-  AnalysisItems?: AnalysisItems[] | null;
+  AnalysisItems?: AnalysisItems[];
 }
 
 /** 慢SQL耗时分段分析 */
@@ -381,17 +381,17 @@ declare interface DurationAnalysis {
 /** KMS密钥信息 */
 declare interface EncryptionKey {
   /** KMS实例加密的KeyId。 */
-  KeyId?: string | null;
+  KeyId?: string;
   /** KMS实例加密Key的别名。 */
-  KeyAlias?: string | null;
+  KeyAlias?: string;
   /** 实例加密密钥DEK的密文。 */
-  DEKCipherTextBlob?: string | null;
+  DEKCipherTextBlob?: string;
   /** 密钥是否启用，1-启用， 0-未启用。 */
-  IsEnabled?: number | null;
+  IsEnabled?: number;
   /** KMS密钥所在地域。 */
-  KeyRegion?: string | null;
+  KeyRegion?: string;
   /** DEK密钥创建时间。 */
-  CreateTime?: string | null;
+  CreateTime?: string;
 }
 
 /** 错误日志详情 */
@@ -409,31 +409,31 @@ declare interface ErrLogDetail {
 /** 参数修改事件信息 */
 declare interface EventInfo {
   /** 参数名 */
-  ParamName?: string | null;
+  ParamName?: string;
   /** 原参数值 */
-  OldValue?: string | null;
+  OldValue?: string;
   /** 本次修改期望参数值 */
-  NewValue?: string | null;
+  NewValue?: string;
   /** 后台参数修改开始时间 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
   /** 后台参数生效开始时间 */
-  EffectiveTime?: string | null;
+  EffectiveTime?: string;
   /** 修改状态 */
-  State?: string | null;
+  State?: string;
   /** 操作者（一般为用户sub UIN） */
-  Operator?: string | null;
+  Operator?: string;
   /** 时间日志。 */
-  EventLog?: string | null;
+  EventLog?: string;
 }
 
 /** 修改参数条目，以参数为维度 */
 declare interface EventItem {
   /** 参数名 */
-  ParamName: string | null;
+  ParamName?: string;
   /** 修改事件数 */
-  EventCount: number | null;
+  EventCount?: number;
   /** 修改时间详情 */
-  EventDetail: EventInfo[] | null;
+  EventDetail?: EventInfo[];
 }
 
 /** 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称等* 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。* 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
@@ -481,21 +481,21 @@ declare interface ModifyPrivilege {
 /** 网络相关信息。（该数据结构已废弃，网络相关信息使用DBInstanceNetInfo） */
 declare interface NetworkAccess {
   /** 网络资源id，实例id或RO组id */
-  ResourceId: string | null;
+  ResourceId?: string;
   /** 资源类型，1-实例 2-RO组 */
-  ResourceType: number | null;
+  ResourceType?: number;
   /** 私有网络ID */
-  VpcId: string | null;
+  VpcId?: string;
   /** IPV4地址 */
-  Vip: string | null;
+  Vip?: string;
   /** IPV6地址 */
-  Vip6: string | null;
+  Vip6?: string;
   /** 访问端口 */
-  Vport: number | null;
+  Vport?: number;
   /** 子网ID */
-  SubnetId: string | null;
+  SubnetId?: string;
   /** 网络状态，1-申请中，2-使用中，3-删除中，4-已删除 */
-  VpcStatus: number | null;
+  VpcStatus?: number;
 }
 
 /** 单条SlowQuery信息 */
@@ -723,15 +723,15 @@ declare interface ReadOnlyGroup {
 /** 描述地域的编码和状态等信息 */
 declare interface RegionInfo {
   /** 该地域对应的英文名称 */
-  Region: string;
+  Region?: string;
   /** 该地域对应的中文名称 */
-  RegionName: string;
+  RegionName?: string;
   /** 该地域对应的数字编号 */
-  RegionId: number;
+  RegionId?: number;
   /** 可用状态，UNAVAILABLE表示不可用，AVAILABLE表示可用 */
-  RegionState: string;
+  RegionState?: string;
   /** 该地域是否支持国际站售卖，0：不支持，1：支持 */
-  SupportInternational: number | null;
+  SupportInternational?: number;
 }
 
 /** 安全组信息 */
@@ -755,63 +755,63 @@ declare interface SecurityGroup {
 /** serverless账号描述 */
 declare interface ServerlessDBAccount {
   /** 用户名 */
-  DBUser?: string | null;
+  DBUser?: string;
   /** 密码 */
-  DBPassword?: string | null;
+  DBPassword?: string;
   /** 连接数限制 */
-  DBConnLimit?: number | null;
+  DBConnLimit?: number;
 }
 
 /** serverless实例描述 */
 declare interface ServerlessDBInstance {
   /** 实例id，唯一标识符 */
-  DBInstanceId?: string | null;
+  DBInstanceId?: string;
   /** 实例名称 */
-  DBInstanceName?: string | null;
+  DBInstanceName?: string;
   /** 实例状态 */
-  DBInstanceStatus?: string | null;
+  DBInstanceStatus?: string;
   /** 地域 */
-  Region?: string | null;
+  Region?: string;
   /** 可用区 */
-  Zone?: string | null;
+  Zone?: string;
   /** 项目id */
-  ProjectId?: number | null;
+  ProjectId?: number;
   /** 私有网络Id */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 子网id */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 字符集 */
-  DBCharset?: string | null;
+  DBCharset?: string;
   /** 数据库版本 */
-  DBVersion?: string | null;
+  DBVersion?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 实例网络信息 */
-  DBInstanceNetInfo?: ServerlessDBInstanceNetInfo[] | null;
+  DBInstanceNetInfo?: ServerlessDBInstanceNetInfo[];
   /** 实例账户信息 */
-  DBAccountSet?: ServerlessDBAccount[] | null;
+  DBAccountSet?: ServerlessDBAccount[];
   /** 实例下的db信息 */
-  DBDatabaseList?: string[] | null;
+  DBDatabaseList?: string[];
   /** 实例绑定的标签数组 */
-  TagList?: Tag[] | null;
+  TagList?: Tag[];
   /** 数据库内核版本 */
-  DBKernelVersion?: string | null;
+  DBKernelVersion?: string;
   /** 数据库主要版本 */
-  DBMajorVersion?: string | null;
+  DBMajorVersion?: string;
 }
 
 /** serverless实例网络信息描述 */
 declare interface ServerlessDBInstanceNetInfo {
   /** 地址 */
-  Address?: string | null;
+  Address?: string;
   /** ip地址 */
-  Ip?: string | null;
+  Ip?: string;
   /** 端口号 */
-  Port?: number | null;
+  Port?: number;
   /** 状态 */
-  Status?: string | null;
+  Status?: string;
   /** 网络类型 */
-  NetType?: string | null;
+  NetType?: string;
 }
 
 /** 慢查询详情 */
@@ -827,43 +827,43 @@ declare interface SlowlogDetail {
 /** 描述某个地域下某个可用区的可售卖规格详细信息。 */
 declare interface SpecInfo {
   /** 地域英文编码，对应RegionSet的Region字段 */
-  Region: string;
+  Region?: string;
   /** 区域英文编码，对应ZoneSet的Zone字段 */
-  Zone: string;
+  Zone?: string;
   /** 规格详细信息列表 */
-  SpecItemInfoList: SpecItemInfo[];
+  SpecItemInfoList?: SpecItemInfo[];
   /** 支持KMS的地域 */
-  SupportKMSRegions: string[] | null;
+  SupportKMSRegions?: string[];
 }
 
 /** 描述一种规格的信息 */
 declare interface SpecItemInfo {
   /** 规格ID */
-  SpecCode: string;
+  SpecCode?: string;
   /** PostgreSQL的版本编号 */
-  Version: string;
+  Version?: string;
   /** 内核编号对应的完整版本名称 */
-  VersionName: string;
+  VersionName?: string;
   /** CPU核数 */
-  Cpu: number;
+  Cpu?: number;
   /** 内存大小，单位：MB */
-  Memory: number;
+  Memory?: number;
   /** 该规格所支持最大存储容量，单位：GB */
-  MaxStorage: number;
+  MaxStorage?: number;
   /** 该规格所支持最小存储容量，单位：GB */
-  MinStorage: number;
+  MinStorage?: number;
   /** 该规格的预估QPS */
-  Qps: number;
+  Qps?: number;
   /** 【该字段废弃】 */
-  Pid: number;
+  Pid?: number;
   /** 机器类型 */
-  Type: string;
+  Type?: string;
   /** PostgreSQL的主要版本编号 */
-  MajorVersion: string | null;
+  MajorVersion?: string;
   /** PostgreSQL的内核版本编号 */
-  KernelVersion: string | null;
+  KernelVersion?: string;
   /** 是否支持TDE数据加密功能，0-不支持，1-支持 */
-  IsSupportTDE: number | null;
+  IsSupportTDE?: number;
 }
 
 /** 实例绑定的标签信息，包含标签键TagKey和标签值TagValue */
@@ -877,19 +877,19 @@ declare interface Tag {
 /** 任务的详情信息 */
 declare interface TaskDetail {
   /** 当前执行的子任务步骤名称。 */
-  CurrentStep?: string | null;
+  CurrentStep?: string;
   /** 当前任务所拥有的子步骤描述。 */
-  AllSteps?: string | null;
+  AllSteps?: string;
   /** 任务的输入参数。 */
-  Input?: string | null;
+  Input?: string;
   /** 任务的输出参数。 */
-  Output?: string | null;
+  Output?: string;
   /** 指定实例配置完成变更后的切换时间，默认值：00: 此任务不需要切换1：立即切换2：指定时间切换3：维护时间窗口内切换。 */
-  SwitchTag?: number | null;
+  SwitchTag?: number;
   /** 指定的切换时间。 */
-  SwitchTime?: string | null;
+  SwitchTime?: string;
   /** 任务的提示信息。 */
-  Message?: string | null;
+  Message?: string;
 }
 
 /** 任务列表信息 */
@@ -903,13 +903,13 @@ declare interface TaskSet {
   /** 任务的开始时间。 */
   StartTime?: string;
   /** 任务的结束时间。 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 任务的运行状态，包括Running,Success,WaitSwitch,Fail,Pause。 */
   Status?: string;
   /** 任务的执行进度，取值范围0-100。 */
   Progress?: number;
   /** 任务的详情信息 */
-  TaskDetail?: TaskDetail | null;
+  TaskDetail?: TaskDetail;
 }
 
 /** 数据库版本号信息 */
@@ -1019,11 +1019,11 @@ declare interface CloneDBInstanceRequest {
 
 declare interface CloneDBInstanceResponse {
   /** 订单号。 */
-  DealName?: string | null;
+  DealName?: string;
   /** 订单流水号。 */
-  BillId?: string | null;
+  BillId?: string;
   /** 克隆出的新实例ID，当前只支持后付费返回该值。 */
-  DBInstanceId?: string | null;
+  DBInstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1123,7 +1123,7 @@ declare interface CreateDBInstanceNetworkAccessRequest {
 
 declare interface CreateDBInstanceNetworkAccessResponse {
   /** 流程ID。 */
-  FlowId?: number | null;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1365,7 +1365,7 @@ declare interface CreateReadOnlyGroupNetworkAccessRequest {
 
 declare interface CreateReadOnlyGroupNetworkAccessResponse {
   /** 流程ID。 */
-  FlowId?: number | null;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1397,9 +1397,9 @@ declare interface CreateReadOnlyGroupRequest {
 
 declare interface CreateReadOnlyGroupResponse {
   /** 只读组ID */
-  ReadOnlyGroupId: string;
+  ReadOnlyGroupId?: string;
   /** 流程ID */
-  FlowId: number | null;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1479,7 +1479,7 @@ declare interface DeleteDBInstanceNetworkAccessRequest {
 
 declare interface DeleteDBInstanceNetworkAccessResponse {
   /** 流程ID。 */
-  FlowId?: number | null;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1519,7 +1519,7 @@ declare interface DeleteReadOnlyGroupNetworkAccessRequest {
 
 declare interface DeleteReadOnlyGroupNetworkAccessResponse {
   /** 流程ID。 */
-  FlowId?: number | null;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1531,7 +1531,7 @@ declare interface DeleteReadOnlyGroupRequest {
 
 declare interface DeleteReadOnlyGroupResponse {
   /** 流程ID */
-  FlowId?: number | null;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1607,13 +1607,13 @@ declare interface DescribeBackupDownloadRestrictionResponse {
   /** 备份文件下载限制类型，NONE 无限制，内外网都可以下载；INTRANET 只允许内网下载；CUSTOMIZE 自定义限制下载的vpc或ip。 */
   RestrictionType?: string;
   /** vpc限制效力，ALLOW 允许；DENY 拒绝。 */
-  VpcRestrictionEffect?: string | null;
+  VpcRestrictionEffect?: string;
   /** 允许或拒绝下载备份文件的vpcId列表。 */
-  VpcIdSet?: string[] | null;
+  VpcIdSet?: string[];
   /** ip限制效力，ALLOW 允许；DENY 拒绝。 */
-  IpRestrictionEffect?: string | null;
+  IpRestrictionEffect?: string;
   /** 允许或拒绝下载备份文件的ip列表。 */
-  IpSet?: string[] | null;
+  IpSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2051,7 +2051,7 @@ declare interface DescribeEncryptionKeysRequest {
 
 declare interface DescribeEncryptionKeysResponse {
   /** 实例密钥信息列表。 */
-  EncryptionKeys?: EncryptionKey[] | null;
+  EncryptionKeys?: EncryptionKey[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2237,7 +2237,7 @@ declare interface DescribeServerlessDBInstancesResponse {
   /** 查询结果数 */
   TotalCount?: number;
   /** 查询结果 */
-  DBInstanceSet?: ServerlessDBInstance[] | null;
+  DBInstanceSet?: ServerlessDBInstance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2293,9 +2293,9 @@ declare interface DescribeSlowQueryListResponse {
   /** 查询到的慢日志数量，最大值为10000条。 */
   TotalCount?: number;
   /** 查询到的慢日志耗时分段分析结果。 */
-  DurationAnalysis?: DurationAnalysis[] | null;
+  DurationAnalysis?: DurationAnalysis[];
   /** 查询到的慢日志详细信息集合。 */
-  RawSlowQueryList?: RawSlowQuery[] | null;
+  RawSlowQueryList?: RawSlowQuery[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3075,7 +3075,7 @@ declare interface Postgres {
   CloneDBInstance(data: CloneDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CloneDBInstanceResponse>;
   /** 关闭实例公网地址 {@link CloseDBExtranetAccessRequest} {@link CloseDBExtranetAccessResponse} */
   CloseDBExtranetAccess(data: CloseDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseDBExtranetAccessResponse>;
-  /** 关闭serverlessDB实例公网地址 {@link CloseServerlessDBExtranetAccessRequest} {@link CloseServerlessDBExtranetAccessResponse} */
+  /** 【废弃】关闭serverlessDB实例公网地址 {@link CloseServerlessDBExtranetAccessRequest} {@link CloseServerlessDBExtranetAccessResponse} */
   CloseServerlessDBExtranetAccess(data?: CloseServerlessDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseServerlessDBExtranetAccessResponse>;
   /** 创建数据库账号 {@link CreateAccountRequest} {@link CreateAccountResponse} */
   CreateAccount(data: CreateAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountResponse>;
@@ -3099,7 +3099,7 @@ declare interface Postgres {
   CreateReadOnlyGroup(data: CreateReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReadOnlyGroupResponse>;
   /** 创建RO组网络 {@link CreateReadOnlyGroupNetworkAccessRequest} {@link CreateReadOnlyGroupNetworkAccessResponse} */
   CreateReadOnlyGroupNetworkAccess(data: CreateReadOnlyGroupNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReadOnlyGroupNetworkAccessResponse>;
-  /** 创建ServerlessDB实例 {@link CreateServerlessDBInstanceRequest} {@link CreateServerlessDBInstanceResponse} */
+  /** 【废弃】创建ServerlessDB实例 {@link CreateServerlessDBInstanceRequest} {@link CreateServerlessDBInstanceResponse} */
   CreateServerlessDBInstance(data: CreateServerlessDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServerlessDBInstanceResponse>;
   /** 删除数据库账号 {@link DeleteAccountRequest} {@link DeleteAccountResponse} */
   DeleteAccount(data: DeleteAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountResponse>;
@@ -3117,7 +3117,7 @@ declare interface Postgres {
   DeleteReadOnlyGroup(data: DeleteReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReadOnlyGroupResponse>;
   /** 删除RO组网络 {@link DeleteReadOnlyGroupNetworkAccessRequest} {@link DeleteReadOnlyGroupNetworkAccessResponse} */
   DeleteReadOnlyGroupNetworkAccess(data: DeleteReadOnlyGroupNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReadOnlyGroupNetworkAccessResponse>;
-  /** 删除ServerlessDB实例 {@link DeleteServerlessDBInstanceRequest} {@link DeleteServerlessDBInstanceResponse} */
+  /** 【废弃】删除ServerlessDB实例 {@link DeleteServerlessDBInstanceRequest} {@link DeleteServerlessDBInstanceResponse} */
   DeleteServerlessDBInstance(data?: DeleteServerlessDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServerlessDBInstanceResponse>;
   /** 查询数据库账号的权限信息 {@link DescribeAccountPrivilegesRequest} {@link DescribeAccountPrivilegesResponse} */
   DescribeAccountPrivileges(data: DescribeAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountPrivilegesResponse>;
@@ -3191,7 +3191,7 @@ declare interface Postgres {
   DescribeReadOnlyGroups(data?: DescribeReadOnlyGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReadOnlyGroupsResponse>;
   /** 查询售卖地域 {@link DescribeRegionsRequest} {@link DescribeRegionsResponse} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
-  /** 查询ServerlessDB实例列表 {@link DescribeServerlessDBInstancesRequest} {@link DescribeServerlessDBInstancesResponse} */
+  /** 【废弃】查询ServerlessDB实例列表 {@link DescribeServerlessDBInstancesRequest} {@link DescribeServerlessDBInstancesResponse} */
   DescribeServerlessDBInstances(data?: DescribeServerlessDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessDBInstancesResponse>;
   /** 获取慢查询统计分析列表 {@link DescribeSlowQueryAnalysisRequest} {@link DescribeSlowQueryAnalysisResponse} */
   DescribeSlowQueryAnalysis(data: DescribeSlowQueryAnalysisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowQueryAnalysisResponse>;
@@ -3261,7 +3261,7 @@ declare interface Postgres {
   ModifySwitchTimePeriod(data: ModifySwitchTimePeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySwitchTimePeriodResponse>;
   /** 开通实例公网地址 {@link OpenDBExtranetAccessRequest} {@link OpenDBExtranetAccessResponse} */
   OpenDBExtranetAccess(data: OpenDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenDBExtranetAccessResponse>;
-  /** 开通serverlessDB实例公网地址 {@link OpenServerlessDBExtranetAccessRequest} {@link OpenServerlessDBExtranetAccessResponse} */
+  /** 【废弃】开通serverlessDB实例公网地址 {@link OpenServerlessDBExtranetAccessRequest} {@link OpenServerlessDBExtranetAccessResponse} */
   OpenServerlessDBExtranetAccess(data?: OpenServerlessDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenServerlessDBExtranetAccessResponse>;
   /** 均衡只读组内实例的负载 {@link RebalanceReadOnlyGroupRequest} {@link RebalanceReadOnlyGroupResponse} */
   RebalanceReadOnlyGroup(data: RebalanceReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RebalanceReadOnlyGroupResponse>;

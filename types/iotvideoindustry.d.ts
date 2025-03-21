@@ -5,47 +5,47 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 异动事件走势列表 */
 declare interface AbnormalEvents {
   /** 对应查询日期 */
-  Date: string | null;
+  Date?: string;
   /** 列表信息 */
-  Info: AbnormalEventsInfo[] | null;
+  Info?: AbnormalEventsInfo[];
 }
 
 /** 异动事件走势元素 */
 declare interface AbnormalEventsInfo {
   /** 类型值 */
-  Key: number | null;
+  Key?: number;
   /** 类型总数 */
-  Count: number | null;
+  Count?: number;
 }
 
 /** 查询全部设备出参 */
 declare interface AllDeviceInfo {
   /** 设备唯一标识 */
-  DeviceId: string | null;
+  DeviceId: string;
   /** 设备类型；2：IPC */
-  DeviceType: number | null;
+  DeviceType: number;
   /** 设备状态；0：设备不在线；1：设备在线；2：设备隔离中；3：设备未注册 */
-  Status?: number | null;
+  Status?: number;
   /** 创建时间 */
-  CreateTime?: number | null;
+  CreateTime?: number;
   /** 设备扩展属性 */
-  ExtraInformation?: string | null;
+  ExtraInformation?: string;
   /** 设备名称 */
-  NickName?: string | null;
+  NickName?: string;
   /** 设备绑定分组路径 */
-  GroupPath?: string | null;
+  GroupPath?: string;
   /** 设备编码 */
-  DeviceCode?: string | null;
+  DeviceCode?: string;
   /** 是否存在录像,，0:不存在；1：存在 */
-  IsRecord?: number | null;
+  IsRecord?: number;
   /** 该设备是否可录制 */
-  Recordable?: number | null;
+  Recordable?: number;
   /** 设备接入协议 */
-  Protocol?: string | null;
+  Protocol?: string;
   /** 组Id */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 组名 */
-  GroupName?: string | null;
+  GroupName?: string;
 }
 
 /** 国标通道详细信息 */
@@ -55,27 +55,27 @@ declare interface ChannelDetail {
   /** 通道唯一标识 */
   ChannelId?: string;
   /** 通道类型 0：未知；1：视频通道；2：音频通道；3：告警通道 */
-  ChannelType?: number | null;
+  ChannelType?: number;
   /** 20位国标通道编码 */
-  ChannelCode?: string | null;
+  ChannelCode?: string;
   /** 通道扩展信息 */
-  ExtraInformation?: string | null;
+  ExtraInformation?: string;
   /** 通道在线状态 */
-  Status?: number | null;
+  Status?: number;
   /** 通道是否存在录像标识 0：无录像；1：有录像 */
-  IsRecord?: number | null;
+  IsRecord?: number;
   /** 通道所属设备唯一标识 */
-  DeviceId?: string | null;
+  DeviceId?: string;
   /** 通道所属虚拟组织的ID */
-  BusinessGroupId?: string | null;
+  BusinessGroupId?: string;
 }
 
 /** GB28181通道 */
 declare interface ChannelItem {
   /** 设备唯一标识 */
-  DeviceId: string | null;
+  DeviceId: string;
   /** 通道唯一标识 */
-  ChannelId: string | null;
+  ChannelId: string;
 }
 
 /** DescribeDeviceStreams的出参复杂类型 */
@@ -121,9 +121,9 @@ declare interface DevGroupInfo {
 /** 用于描述唯一一个设备 */
 declare interface DeviceItem {
   /** 设备唯一标识 */
-  DeviceId?: string | null;
+  DeviceId?: string;
   /** 通道唯一标识 */
-  ChannelId?: string | null;
+  ChannelId?: string;
 }
 
 /** 查询设备统计返回值 */
@@ -137,11 +137,11 @@ declare interface DeviceMonitorValue {
 /** 设备事件列表 */
 declare interface Events {
   /** 开始时间，秒级时间戳 */
-  EventTime?: number | null;
+  EventTime?: number;
   /** 事件类型 1:注册 2:心跳 4:录制异常 5:播放异常 6:流中断 */
-  EventType?: number | null;
+  EventType?: number;
   /** 事件描述 */
-  EventDesc?: string | null;
+  EventDesc?: string;
   /** 设备类型 */
   DeviceType?: number;
   /** 设备地址 */
@@ -153,37 +153,37 @@ declare interface Events {
   /** 事件日志 */
   EventLog?: string;
   /** 设备备注名称 */
-  DeviceName?: string | null;
+  DeviceName?: string;
 }
 
 /** 分组下设备信息 */
 declare interface GroupDeviceItem {
   /** 设备唯一标识 */
-  DeviceId: string | null;
+  DeviceId: string;
   /** 设备名称 */
-  NickName?: string | null;
+  NickName?: string;
   /** 设备状态 */
-  Status?: number | null;
+  Status?: number;
   /** 扩展信息 */
-  ExtraInformation?: string | null;
+  ExtraInformation?: string;
   /** 设备类型 */
-  DeviceType?: number | null;
+  DeviceType?: number;
   /** rtsp地址 */
-  RTSPUrl?: string | null;
+  RTSPUrl?: string;
   /** 设备编码 */
-  DeviceCode?: string | null;
+  DeviceCode?: string;
   /** 是否存在录像 */
-  IsRecord?: number | null;
+  IsRecord?: number;
   /** 该设备是否可录制 */
-  Recordable?: number | null;
+  Recordable?: number;
   /** 设备接入协议 */
-  Protocol?: string | null;
+  Protocol?: string;
   /** 设备创建时间 */
-  CreateTime?: number | null;
+  CreateTime?: number;
   /** 设备通道总数 */
-  ChannelNum?: number | null;
+  ChannelNum?: number;
   /** 设备视频通道总数 */
-  VideoChannelNum?: number | null;
+  VideoChannelNum?: number;
 }
 
 /** 分组信息详情 */
@@ -205,35 +205,35 @@ declare interface GroupInfo {
   /** 创建时间 */
   CreateTime?: number;
   /** 分组状态 */
-  GroupStatus?: number | null;
+  GroupStatus?: number;
   /** 设备不存在时产生的错误 */
-  Error?: string | null;
+  Error?: string;
 }
 
 /** 分组信息 */
 declare interface GroupItem {
   /** 分组名称 */
-  GroupName: string | null;
+  GroupName: string;
   /** 父分组ID */
-  ParentId: string | null;
+  ParentId: string;
   /** 分组ID */
-  GroupId: string | null;
+  GroupId: string;
   /** 分组路径 */
-  GroupPath?: string | null;
+  GroupPath?: string;
   /** 分组描述 */
-  GroupDescribe?: string | null;
+  GroupDescribe?: string;
   /** 分组绑定设备数 */
-  DeviceNum?: number | null;
+  DeviceNum?: number;
   /** 子分组数量 */
-  SubGroupNum?: number | null;
+  SubGroupNum?: number;
   /** 分组附加信息 */
-  ExtraInformation?: string | null;
+  ExtraInformation?: string;
   /** 分组类型 */
-  GroupType?: string | null;
+  GroupType?: string;
   /** 创建时间 */
-  CreateTime?: number | null;
+  CreateTime?: number;
   /** 分组状态 */
-  GroupStatus?: number | null;
+  GroupStatus?: number;
 }
 
 /** 频道信息 */
@@ -257,9 +257,9 @@ declare interface LiveChannelInfo {
 /** 直播频道详情 */
 declare interface LiveChannelItem {
   /** 频道ID */
-  ChannelId: string;
+  ChannelId?: string;
   /** 频道名称 */
-  ChannelName: string;
+  ChannelName?: string;
 }
 
 /** 直播录制详情item */
@@ -321,55 +321,55 @@ declare interface MessageForward {
 /** 预置位结构出参 */
 declare interface PresetItem {
   /** 预置位ID */
-  PresetId: number | null;
+  PresetId?: number;
   /** 预置位名称 */
-  PresetName: string | null;
+  PresetName?: string;
   /** 预置位状态 0:未设置预置位 1:已设置预置位 2:已设置预置位&看守位 */
-  Status: number;
+  Status?: number;
   /** 预置位启用时的自动归位时间 */
-  ResetTime: number;
+  ResetTime?: number;
 }
 
 /** 录制计划详情 */
 declare interface RecordPlanDetail {
   /** 计划ID */
-  PlanId: string | null;
+  PlanId?: string;
   /** 计划名称 */
-  Name: string | null;
+  Name?: string;
   /** 时间模板ID */
-  TimeTemplateId: string | null;
+  TimeTemplateId?: string;
   /** 时间模板名称 */
-  TimeTemplateName: string | null;
+  TimeTemplateName?: string;
   /** 绑定的通道列表 */
-  Channels: ChannelItem[] | null;
+  Channels?: ChannelItem[];
   /** 存储周期（天） */
-  RecordStorageTime: number | null;
+  RecordStorageTime?: number;
 }
 
 /** 录制计划详情 */
 declare interface RecordPlanItem {
   /** 计划ID */
-  PlanId: string | null;
+  PlanId?: string;
   /** 计划名称 */
-  Name: string | null;
+  Name?: string;
   /** 时间模板ID */
-  TimeTemplateId: string | null;
+  TimeTemplateId?: string;
   /** 时间模板名称 */
-  TimeTemplateName: string | null;
+  TimeTemplateName?: string;
   /** 录制类型 */
-  EventId: number | null;
+  EventId?: number;
   /** 绑定的设备列表 */
-  Devices: DeviceItem[] | null;
+  Devices?: DeviceItem[];
   /** 录像存储天数 */
-  RecordStorageTime?: number | null;
+  RecordStorageTime?: number;
 }
 
 /** 大盘统计-录像存储统计 出参RecordStatistic */
 declare interface RecordStatistic {
   /** 时间戳 */
-  Time: number | null;
+  Time?: number;
   /** 统计结果 */
-  Value: RecordStatisticValue | null;
+  Value?: RecordStatisticValue;
 }
 
 /** 大盘统计-录像存储统计 出参Value */
@@ -385,45 +385,45 @@ declare interface RecordStatisticValue {
 /** 普通设备的录像详情 */
 declare interface RecordTaskItem {
   /** 录像任务ID */
-  RecordTaskId: string | null;
+  RecordTaskId?: string;
   /** 录制计划ID */
-  RecordPlanId: string | null;
+  RecordPlanId?: string;
   /** 本录制片段开始时间 */
-  StartTime: number | null;
+  StartTime?: number;
   /** 本录制片段结束时间 */
-  EndTime: number | null;
+  EndTime?: number;
   /** 录制模式 */
-  EventId: number | null;
+  EventId?: number;
   /** 本录制片段对应的录制文件URL */
-  VideoUrl: string | null;
+  VideoUrl?: string;
   /** 本录制片段当前的录制状态 */
-  RecordStatus: number | null;
+  RecordStatus?: number;
   /** 场景ID */
-  SceneId: number | null;
+  SceneId?: number;
   /** 告警ID */
-  WarnId: number | null;
+  WarnId?: number;
   /** 录制id，NVR下属设备有效 */
-  RecordId: string | null;
+  RecordId?: string;
 }
 
 /** 场景列表元素 */
 declare interface SceneItem {
   /** 场景ID */
-  IntId: number | null;
+  IntId?: number;
   /** 用户UIN */
-  Uin: string | null;
+  Uin?: string;
   /** 场景名称 */
-  SceneName: string | null;
+  SceneName?: string;
   /** 触发规则 */
-  SceneTrigger: string | null;
+  SceneTrigger?: string;
   /** 录制时长 秒 */
-  RecordDuration: number | null;
+  RecordDuration?: number;
   /** 存储时长 天 */
-  StoreDuration: number | null;
+  StoreDuration?: number;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 修改时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** SIIP服务器相关配置项 */
@@ -463,15 +463,15 @@ declare interface StreamAddress {
 /** 时间模板详情 */
 declare interface TimeTemplateItem {
   /** 时间模板ID */
-  TemplateId: string | null;
+  TemplateId: string;
   /** 模板名称 */
-  Name: string | null;
+  Name: string;
   /** 是否全时录制，即7*24小时录制 0-否 1-是 */
-  IsAllWeek: number | null;
+  IsAllWeek: number;
   /** 是否为自定义模板 0-否 1-是 */
-  Type?: number | null;
+  Type?: number;
   /** 时间片段详情 */
-  TimeTemplateSpecs?: TimeTemplateSpec[] | null;
+  TimeTemplateSpecs?: TimeTemplateSpec[];
 }
 
 /** 在操作时间模板时，用于描述各个时间片段 */
@@ -487,29 +487,29 @@ declare interface TimeTemplateSpec {
 /** 告警列表出参 */
 declare interface WarningsData {
   /** 唯一ID */
-  Id?: number | null;
+  Id?: number;
   /** 设备ID */
-  DeviceId?: string | null;
+  DeviceId?: string;
   /** 设备名称 */
-  DeviceName?: string | null;
+  DeviceName?: string;
   /** 告警通道 */
-  WarnChannel?: string | null;
+  WarnChannel?: string;
   /** 告警级别 1: "一级警情", 2: "二级警情", 3: "三级警情", 4: "四级警情", */
-  WarnLevel?: number | null;
+  WarnLevel?: number;
   /** 告警级别名称 */
-  WarnLevelName?: string | null;
+  WarnLevelName?: string;
   /** 告警方式 2 设备报警 5 视频报警 6 设备故障报警 */
-  WarnMode?: number | null;
+  WarnMode?: number;
   /** 告警方式名称 */
-  WarnModeName?: string | null;
+  WarnModeName?: string;
   /** 告警类型 2: { Name: "设备报警", WarnType: map[int]string{ 1: "视频丢失报警", 2: "设备防拆报警", 3: "存储设备磁盘满报警", 4: "设备高温报警", 5: "设备低温报警", }, }, 5: { Name: "视频报警", WarnType: map[int]string{ 1: "人工视频报警", 2: "运动目标检测报警", 3: "遗留物检测报警", 4: "物体移除检测报警", 5: "绊线检测报警", 6: "入侵检测报警", 7: "逆行检测报警", 8: "徘徊检测报警", 9: "流量统计报警", 10: "密度检测报警", 11: "视频异常检测报警", 12: "快速移动报警", }, }, 6: { Name: "设备故障报警", WarnType: map[int]string{ 1: "存储设备磁盘故障报警", 2: "存储设备风扇故障报警", }, } */
-  WarnType?: number | null;
+  WarnType?: number;
   /** 是否删除 */
-  Del?: number | null;
+  Del?: number;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
 }
 
 declare interface BindGroupDevicesRequest {
@@ -629,9 +629,9 @@ declare interface CreateDeviceGroupRequest {
 
 declare interface CreateDeviceGroupResponse {
   /** 响应结果，“OK”为成功，其他为失败 */
-  Status?: string | null;
+  Status?: string;
   /** 分组ID */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -649,11 +649,11 @@ declare interface CreateDeviceRequest {
 
 declare interface CreateDeviceResponse {
   /** 设备编码 */
-  DeviceCode?: string | null;
+  DeviceCode?: string;
   /** 设备唯一标识 */
-  DeviceId?: string | null;
+  DeviceId?: string;
   /** 设备虚拟组信息，仅在创建NVR时返回该值 */
-  VirtualGroupId?: string | null;
+  VirtualGroupId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -667,9 +667,9 @@ declare interface CreateLiveChannelRequest {
 
 declare interface CreateLiveChannelResponse {
   /** 直播频道ID */
-  LiveChannelId: string | null;
+  LiveChannelId?: string;
   /** 直播频道推流地址 */
-  PushStreamAddress: string | null;
+  PushStreamAddress?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -689,7 +689,7 @@ declare interface CreateLiveRecordPlanRequest {
 
 declare interface CreateLiveRecordPlanResponse {
   /** 录制计划名称 */
-  PlanId: string | null;
+  PlanId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -713,7 +713,7 @@ declare interface CreateMessageForwardRequest {
 
 declare interface CreateMessageForwardResponse {
   /** 配置ID */
-  IntId: number | null;
+  IntId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -773,7 +773,7 @@ declare interface CreateSceneRequest {
 
 declare interface CreateSceneResponse {
   /** 场景ID */
-  IntId: number | null;
+  IntId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -813,7 +813,7 @@ declare interface DeleteDeviceGroupRequest {
 
 declare interface DeleteDeviceGroupResponse {
   /** 响应结果 */
-  Status: string | null;
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -825,7 +825,7 @@ declare interface DeleteDeviceRequest {
 
 declare interface DeleteDeviceResponse {
   /** 操作结果 OK-成功； 其他-失败 */
-  Status: string | null;
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -913,7 +913,7 @@ declare interface DeleteTimeTemplateRequest {
 
 declare interface DeleteTimeTemplateResponse {
   /** 操作结果，OK：成功，其他：失败 */
-  Status?: string | null;
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -949,7 +949,7 @@ declare interface DescribeAbnormalEventsRequest {
 
 declare interface DescribeAbnormalEventsResponse {
   /** 异动事件走势列表 */
-  Data: AbnormalEvents[] | null;
+  Data?: AbnormalEvents[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -969,9 +969,9 @@ declare interface DescribeAllDeviceListRequest {
 
 declare interface DescribeAllDeviceListResponse {
   /** 设备总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 设备详细信息列表 */
-  Devices?: AllDeviceInfo[] | null;
+  Devices?: AllDeviceInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -987,9 +987,9 @@ declare interface DescribeBindSceneChannelsRequest {
 
 declare interface DescribeBindSceneChannelsResponse {
   /** 总数 */
-  Total: number | null;
+  Total?: number;
   /** 通道列表 */
-  List: ChannelItem[] | null;
+  List?: ChannelItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1005,9 +1005,9 @@ declare interface DescribeBindSceneDevicesRequest {
 
 declare interface DescribeBindSceneDevicesResponse {
   /** 总数 */
-  Total: number | null;
+  Total?: number;
   /** 设备列表 */
-  List: DeviceItem[] | null;
+  List?: DeviceItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1075,9 +1075,9 @@ declare interface DescribeChannelsByLiveRecordPlanRequest {
 
 declare interface DescribeChannelsByLiveRecordPlanResponse {
   /** 总个数 */
-  TotalCount: number | null;
+  TotalCount?: number;
   /** 通道详情数组 */
-  LiveChannels: LiveChannelItem[] | null;
+  LiveChannels?: LiveChannelItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1099,9 +1099,9 @@ declare interface DescribeChannelsRequest {
 
 declare interface DescribeChannelsResponse {
   /** 通道总数 */
-  TotalCount: number | null;
+  TotalCount?: number;
   /** 通道详情列表 */
-  Channels: ChannelDetail[] | null;
+  Channels?: ChannelDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1141,9 +1141,9 @@ declare interface DescribeDeviceEventRequest {
 
 declare interface DescribeDeviceEventResponse {
   /** 总数 */
-  TotalCount: number | null;
+  TotalCount?: number;
   /** 事件列表 */
-  Events: Events[] | null;
+  Events?: Events[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1155,7 +1155,7 @@ declare interface DescribeDeviceGroupRequest {
 
 declare interface DescribeDeviceGroupResponse {
   /** 设备所在分组信息 */
-  DevGroups?: DevGroupInfo[] | null;
+  DevGroups?: DevGroupInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1173,9 +1173,9 @@ declare interface DescribeDeviceListRequest {
 
 declare interface DescribeDeviceListResponse {
   /** 设备总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 设备详细信息列表 */
-  Devices: AllDeviceInfo[] | null;
+  Devices?: AllDeviceInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1245,7 +1245,7 @@ declare interface DescribeGroupByIdRequest {
 
 declare interface DescribeGroupByIdResponse {
   /** 分组信息详情 */
-  Group: GroupItem | null;
+  Group?: GroupItem;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1257,7 +1257,7 @@ declare interface DescribeGroupByPathRequest {
 
 declare interface DescribeGroupByPathResponse {
   /** 分组信息详情 */
-  Group: GroupItem | null;
+  Group?: GroupItem;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1279,9 +1279,9 @@ declare interface DescribeGroupDevicesRequest {
 
 declare interface DescribeGroupDevicesResponse {
   /** 分组绑定的设备数 */
-  TotalCount: number | null;
+  TotalCount?: number;
   /** 设备详情列表 */
-  DeviceList: GroupDeviceItem[] | null;
+  DeviceList?: GroupDeviceItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1293,7 +1293,7 @@ declare interface DescribeGroupsRequest {
 
 declare interface DescribeGroupsResponse {
   /** 分组详细信息列表 */
-  Groups: GroupInfo[] | null;
+  Groups?: GroupInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1311,9 +1311,9 @@ declare interface DescribeIPCChannelsRequest {
 
 declare interface DescribeIPCChannelsResponse {
   /** 通道总数 */
-  TotalCount: number | null;
+  TotalCount?: number;
   /** 通道详情列表 */
-  DeviceList: GroupDeviceItem[] | null;
+  DeviceList?: GroupDeviceItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1347,19 +1347,19 @@ declare interface DescribeLiveChannelRequest {
 
 declare interface DescribeLiveChannelResponse {
   /** 频道ID */
-  LiveChannelId: string | null;
+  LiveChannelId?: string;
   /** 频道名称 */
-  LiveChannelName: string | null;
+  LiveChannelName?: string;
   /** 直播频道类型 1：固定直播；2：移动直播 */
-  LiveChannelType: number | null;
+  LiveChannelType?: number;
   /** 通道直播状态：1: 未推流，2: 推流中 */
-  LiveStatus: number | null;
+  LiveStatus?: number;
   /** 推流地址 */
-  PushStreamAddress: string | null;
+  PushStreamAddress?: string;
   /** 创建时间 */
-  CreateTime: string[] | null;
+  CreateTime?: string[];
   /** 修改时间 */
-  UpdateTime: string[] | null;
+  UpdateTime?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1441,9 +1441,9 @@ declare interface DescribeLiveVideoListRequest {
 
 declare interface DescribeLiveVideoListResponse {
   /** 总的条数 */
-  Total?: number | null;
+  Total?: number;
   /** 录制任务详情数组 */
-  RecordList?: LiveRecordItem[] | null;
+  RecordList?: LiveRecordItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1455,25 +1455,27 @@ declare interface DescribeMessageForwardRequest {
 
 declare interface DescribeMessageForwardResponse {
   /** 区域ID */
-  RegionId: string | null;
+  RegionId?: string;
   /** 区域名称 */
-  RegionName: string | null;
+  RegionName?: string;
   /** 实例ID */
-  Instance: string | null;
+  Instance?: string;
   /** 实例名称 */
-  InstanceName: string | null;
+  InstanceName?: string;
   /** 配置ID */
-  IntId: number | null;
+  IntId?: number;
   /** json数组， 转发类型 1: 告警 2:GPS */
-  MessageType: string | null;
+  MessageType?: string;
   /** kafka topic id */
-  TopicId: string | null;
+  TopicId?: string;
   /** 配置创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string;
   /** 用户Uin信息 */
-  Uin: string | null;
+  Uin?: string;
   /** kafka topic 名称 */
-  TopicName: string | null;
+  TopicName?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1503,7 +1505,7 @@ declare interface DescribeMonitorDataByDateRequest {
 
 declare interface DescribeMonitorDataByDateResponse {
   /** 统计数据列表 */
-  Data: RecordStatistic[] | null;
+  Data?: RecordStatistic[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1517,7 +1519,7 @@ declare interface DescribePresetListRequest {
 
 declare interface DescribePresetListResponse {
   /** 预置列表 */
-  Data: PresetItem[] | null;
+  Data?: PresetItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1537,7 +1539,7 @@ declare interface DescribeRecordDatesByChannelRequest {
 
 declare interface DescribeRecordDatesByChannelResponse {
   /** 含有录像文件的日期列表 */
-  Dates?: string[] | null;
+  Dates?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1587,7 +1589,7 @@ declare interface DescribeRecordingPlanByIdRequest {
 
 declare interface DescribeRecordingPlanByIdResponse {
   /** 录制计划详情 */
-  Plan?: RecordPlanDetail | null;
+  Plan?: RecordPlanDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1597,9 +1599,9 @@ declare interface DescribeRecordingPlansRequest {
 
 declare interface DescribeRecordingPlansResponse {
   /** 录制计划详情·列表 */
-  Plans?: RecordPlanDetail[] | null;
+  Plans?: RecordPlanDetail[];
   /** 录制计划总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1621,21 +1623,21 @@ declare interface DescribeSceneRequest {
 
 declare interface DescribeSceneResponse {
   /** 场景ID */
-  IntId: number | null;
+  IntId?: number;
   /** 录制时长(秒) */
-  RecordDuration: number | null;
+  RecordDuration?: number;
   /** 场景名称 */
-  SceneName: string | null;
+  SceneName?: string;
   /** 场景触发规则 */
-  SceneTrigger: string | null;
+  SceneTrigger?: string;
   /** 存储时长 (天) */
-  StoreDuration: number | null;
+  StoreDuration?: number;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string;
   /** 用户Uin */
-  Uin: string;
+  Uin?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1649,9 +1651,9 @@ declare interface DescribeScenesRequest {
 
 declare interface DescribeScenesResponse {
   /** 场景总数 */
-  Total: number | null;
+  Total?: number;
   /** 场景列表 */
-  List: SceneItem[] | null;
+  List?: SceneItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1679,19 +1681,19 @@ declare interface DescribeStatisticSummaryRequest {
 
 declare interface DescribeStatisticSummaryResponse {
   /** 录制设备总数 */
-  RecordingDevice: number | null;
+  RecordingDevice?: number;
   /** 非录制设备总数 */
-  NonRecordingDevice: number | null;
+  NonRecordingDevice?: number;
   /** 观看流量总数。为直播观看流量与点播观看流量之和。单位：GB */
-  WatchFlux: number | null;
+  WatchFlux?: number;
   /** 累计有效存储容量总数。单位：GB */
-  StorageUsage: number | null;
+  StorageUsage?: number;
   /** X-P2P分享流量。单位 Byte */
-  P2PFluxTotal: number | null;
+  P2PFluxTotal?: number;
   /** X-P2P峰值带宽。 单位bps */
-  P2PPeakValue: number | null;
+  P2PPeakValue?: number;
   /** RTMP推流路数 ( 直播推流) */
-  LivePushTotal: number | null;
+  LivePushTotal?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1711,9 +1713,9 @@ declare interface DescribeSubGroupsRequest {
 
 declare interface DescribeSubGroupsResponse {
   /** 子分组详情列表 */
-  GroupList: GroupItem[] | null;
+  GroupList?: GroupItem[];
   /** 子分组总数 */
-  TotalCount: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1747,9 +1749,9 @@ declare interface DescribeVideoListByChannelRequest {
 
 declare interface DescribeVideoListByChannelResponse {
   /** 录像详情列表 */
-  VideoList: RecordTaskItem[] | null;
+  VideoList?: RecordTaskItem[];
   /** 录像总数 */
-  TotalCount: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1807,7 +1809,7 @@ declare interface DescribeWarnModRequest {
 
 declare interface DescribeWarnModResponse {
   /** 告警类型 */
-  Data: string | null;
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1833,9 +1835,9 @@ declare interface DescribeWarningsRequest {
 
 declare interface DescribeWarningsResponse {
   /** 总数 */
-  Total?: number | null;
+  Total?: number;
   /** 告警列表 */
-  Data?: WarningsData[] | null;
+  Data?: WarningsData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1853,7 +1855,7 @@ declare interface DescribeXP2PDataRequest {
 
 declare interface DescribeXP2PDataResponse {
   /** [log_time,cdn_bytes , p2p_bytes, online_people, stuck_times, stuck_people,request,request_success,request_fail,play_fail][时间戳,cdn流量(字节) , p2p流量(字节), 在线人数, 卡播次数, 卡播人数,起播请求次数,起播成功次数,起播失败次数,播放失败次数, pcdn cdn流量（字节), pcdn路由流量(字节), 上传流量(字节)][1481016480, 46118502414, 75144943171, 61691, 3853, 0,0,0,0,0, 0, 0, 0] */
-  Data: string | null;
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1873,7 +1875,7 @@ declare interface GetRecordDatesByDevRequest {
 
 declare interface GetRecordDatesByDevResponse {
   /** 含有录像文件的日期列表 */
-  Dates?: string[] | null;
+  Dates?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1885,7 +1887,7 @@ declare interface GetRecordPlanByDevRequest {
 
 declare interface GetRecordPlanByDevResponse {
   /** 录制计划详情 */
-  Plan?: RecordPlanItem | null;
+  Plan?: RecordPlanItem;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1897,7 +1899,7 @@ declare interface GetRecordPlanByIdRequest {
 
 declare interface GetRecordPlanByIdResponse {
   /** 录制计划详情 */
-  Plan?: RecordPlanItem | null;
+  Plan?: RecordPlanItem;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1907,9 +1909,9 @@ declare interface GetRecordPlansRequest {
 
 declare interface GetRecordPlansResponse {
   /** 录制计划详情·列表 */
-  Plans: RecordPlanItem[] | null;
+  Plans?: RecordPlanItem[];
   /** 录制计划总数 */
-  TotalCount: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1921,7 +1923,7 @@ declare interface GetTimeTemplateByIdRequest {
 
 declare interface GetTimeTemplateByIdResponse {
   /** 时间模板详情 */
-  Template?: TimeTemplateItem | null;
+  Template?: TimeTemplateItem;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1931,7 +1933,7 @@ declare interface GetTimeTemplatesRequest {
 
 declare interface GetTimeTemplatesResponse {
   /** 时间模板列表 */
-  Templates?: TimeTemplateItem[] | null;
+  Templates?: TimeTemplateItem[];
   /** 时间模板总数 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1957,9 +1959,9 @@ declare interface GetVideoListByConRequest {
 
 declare interface GetVideoListByConResponse {
   /** 录像详情列表 */
-  VideoList?: RecordTaskItem[] | null;
+  VideoList?: RecordTaskItem[];
   /** 录像总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2029,7 +2031,7 @@ declare interface ModifyDeviceDataRequest {
 
 declare interface ModifyDeviceDataResponse {
   /** 操作结果,“OK”表示成功，其他表示失败。 */
-  Status?: string | null;
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2195,7 +2197,7 @@ declare interface UpdateDevicePassWordRequest {
 
 declare interface UpdateDevicePassWordResponse {
   /** 操作结果，“OK”表示成功，其他表示失败。 */
-  Status?: string | null;
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

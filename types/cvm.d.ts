@@ -204,6 +204,8 @@ declare interface DisasterRecoverGroup {
   InstanceIds?: string[];
   /** 分散置放群组创建时间。 */
   CreateTime?: string;
+  /** 置放群组亲和度 */
+  Affinity?: number;
   /** 置放群组关联的标签列表。 */
   Tags?: Tag[];
 }

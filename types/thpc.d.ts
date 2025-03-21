@@ -115,7 +115,7 @@ declare interface ComputeNode {
 /** 计算节点概览。 */
 declare interface ComputeNodeOverview {
   /** 计算节点ID。 */
-  NodeId: string | null;
+  NodeId?: string;
 }
 
 /** 描述了数据盘的信息 */
@@ -293,7 +293,7 @@ declare interface ManagerNode {
 /** 管控节点概览。 */
 declare interface ManagerNodeOverview {
   /** 管控节点ID。 */
-  NodeId: string | null;
+  NodeId?: string;
 }
 
 /** 节点活动信息。 */
@@ -729,7 +729,7 @@ declare interface CreateClusterRequest {
 
 declare interface CreateClusterResponse {
   /** 集群ID。 */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -907,7 +907,7 @@ declare interface DescribeInitNodeScriptsRequest {
 
 declare interface DescribeInitNodeScriptsResponse {
   /** 节点初始化脚本列表。 */
-  InitNodeScriptSet?: NodeScript[] | null;
+  InitNodeScriptSet?: NodeScript[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1140,7 +1140,7 @@ declare namespace V20220401 {
   /** 计算节点概览。 */
   interface ComputeNodeOverview {
     /** 计算节点ID。 */
-    NodeId: string | null;
+    NodeId?: string;
   }
 
   /** 描述了数据盘的信息 */
@@ -1282,7 +1282,7 @@ declare namespace V20220401 {
   /** 管控节点概览。 */
   interface ManagerNodeOverview {
     /** 管控节点ID。 */
-    NodeId: string | null;
+    NodeId?: string;
   }
 
   /** 节点活动信息。 */
@@ -1546,7 +1546,7 @@ declare namespace V20220401 {
 
   interface CreateClusterResponse {
     /** 集群ID。 */
-    ClusterId?: string | null;
+    ClusterId?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -1784,7 +1784,7 @@ declare namespace V20211109 {
   /** 计算节点概览。 */
   interface ComputeNodeOverview {
     /** 计算节点ID。 */
-    NodeId: string | null;
+    NodeId?: string;
   }
 
   /** 描述了数据盘的信息 */
@@ -1872,7 +1872,7 @@ declare namespace V20211109 {
   /** 管控节点概览。 */
   interface ManagerNodeOverview {
     /** 管控节点ID。 */
-    NodeId: string | null;
+    NodeId?: string;
   }
 
   /** 描述了实例的抽象位置 */
@@ -1980,7 +1980,7 @@ declare namespace V20211109 {
 
   interface CreateClusterResponse {
     /** 集群ID。 */
-    ClusterId?: string | null;
+    ClusterId?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

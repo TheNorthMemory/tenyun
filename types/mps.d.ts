@@ -4465,7 +4465,7 @@ declare interface RawWatermarkParameter {
 /** 地区信息。 */
 declare interface RegionInfo {
   /** 地区名称。 */
-  Name: string;
+  Name?: string;
 }
 
 /** 延播平滑吐流配置。 */

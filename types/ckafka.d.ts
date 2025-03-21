@@ -9,9 +9,9 @@ declare interface Acl {
   /** 资源名称，和resourceType相关如当resourceType为TOPIC时，则该字段表示topic名称，当resourceType为GROUP时，该字段表示group名称 */
   ResourceName?: string;
   /** 用户列表，默认为User:*，表示任何user都可以访问，当前用户只能是用户列表中包含的用户 */
-  Principal?: string | null;
+  Principal?: string;
   /** 默认\*,表示任何host都可以访问，当前ckafka不支持host为\*，但是后面开源kafka的产品化会直接支持 */
-  Host?: string | null;
+  Host?: string;
   /** Acl操作方式(0:UNKNOWN，1:ANY，2:ALL，3:READ，4:WRITE，5:CREATE，6:DELETE，7:ALTER，8:DESCRIBE，9:CLUSTER_ACTION，10:DESCRIBE_CONFIGS，11:ALTER_CONFIGS，12:IDEMPOTEN_WRITE) */
   Operation?: number;
   /** 权限类型(0:UNKNOWN，1:ANY，2:DENY，3:ALLOW) */
@@ -21,31 +21,31 @@ declare interface Acl {
 /** AclRule列表接口出参 */
 declare interface AclRule {
   /** ACL规则名 */
-  RuleName?: string | null;
+  RuleName?: string;
   /** ckafka集群实例Id */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** ACL规则匹配类型，目前只支持前缀匹配，枚举值列表：PREFIXED */
-  PatternType?: string | null;
+  PatternType?: string;
   /** 表示前缀匹配的前缀的值 */
-  Pattern?: string | null;
+  Pattern?: string;
   /** Acl资源类型,目前只支持Topic,枚举值列表：Topic */
-  ResourceType?: string | null;
+  ResourceType?: string;
   /** 该规则所包含的ACL信息 */
-  AclList?: string | null;
+  AclList?: string;
   /** 规则所创建的时间 */
-  CreateTimeStamp?: string | null;
+  CreateTimeStamp?: string;
   /** 预设ACL规则是否应用到新增的topic中 */
-  IsApplied?: number | null;
+  IsApplied?: number;
   /** 规则更新时间 */
-  UpdateTimeStamp?: string | null;
+  UpdateTimeStamp?: string;
   /** 规则的备注 */
-  Comment?: string | null;
+  Comment?: string;
   /** 其中一个显示的对应的TopicName */
-  TopicName?: string | null;
+  TopicName?: string;
   /** 应用该ACL规则的Topic数 */
-  TopicCount?: number | null;
+  TopicCount?: number;
   /** patternType的中文显示 */
-  PatternTypeTitle?: string | null;
+  PatternTypeTitle?: string;
 }
 
 /** 表示ACL 规则的四元组信息 */
@@ -65,7 +65,7 @@ declare interface AclRuleResp {
   /** 总数据条数 */
   TotalCount?: number;
   /** AclRule列表 */
-  AclRuleList?: AclRule[] | null;
+  AclRuleList?: AclRule[];
 }
 
 /** 数据处理-解析参数 */
@@ -73,11 +73,11 @@ declare interface AnalyseParam {
   /** 解析格式，JSON，DELIMITER分隔符，REGULAR正则提取，SOURCE处理上层所有结果 */
   Format: string;
   /** 分隔符、正则表达式 */
-  Regex?: string | null;
+  Regex?: string;
   /** 需再次处理的KEY——模式 */
-  InputValueType?: string | null;
+  InputValueType?: string;
   /** 需再次处理的KEY——KEY表达式 */
-  InputValue?: string | null;
+  InputValue?: string;
 }
 
 /** 存储着分配给该消费者的 partition 信息 */
@@ -85,13 +85,13 @@ declare interface Assignment {
   /** assingment版本信息 */
   Version?: number;
   /** topic信息列表 */
-  Topics?: GroupInfoTopics[] | null;
+  Topics?: GroupInfoTopics[];
 }
 
 /** 批量解析 */
 declare interface BatchAnalyseParam {
   /** ONE_BY_ONE单条输出，MERGE合并输出 */
-  Format: string | null;
+  Format: string;
 }
 
 /** 批量发送消息内容 */
@@ -133,11 +133,11 @@ declare interface BatchModifyTopicInfo {
 /** 批量修改topic属性结果 */
 declare interface BatchModifyTopicResultDTO {
   /** ckafka集群实例Id */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 主题名 */
-  TopicName?: string | null;
+  TopicName?: string;
   /** 操作返回码 */
-  ReturnCode?: string | null;
+  ReturnCode?: string;
   /** 操作返回信息 */
   Message?: string;
 }
@@ -145,127 +145,127 @@ declare interface BatchModifyTopicResultDTO {
 /** 主题占用Broker磁盘大小 */
 declare interface BrokerTopicData {
   /** 主题名称 */
-  TopicName?: string | null;
+  TopicName?: string;
   /** 主题Id */
-  TopicId?: string | null;
+  TopicId?: string;
   /** 主题占用Broker 容量大小 */
-  DataSize?: number | null;
+  DataSize?: number;
 }
 
 /** broker维度topic 流量排行指标 */
 declare interface BrokerTopicFlowData {
   /** 主题名 */
-  TopicName?: string | null;
+  TopicName?: string;
   /** 主题Id */
-  TopicId?: string | null;
+  TopicId?: string;
   /** Topic 流量(MB) */
-  TopicTraffic?: string | null;
+  TopicTraffic?: string;
 }
 
 /** ClickHouse连接源参数 */
 declare interface ClickHouseConnectParam {
   /** ClickHouse的连接port */
-  Port: number | null;
+  Port: number;
   /** ClickHouse连接源的用户名 */
-  UserName: string | null;
+  UserName: string;
   /** ClickHouse连接源的密码 */
-  Password: string | null;
+  Password: string;
   /** ClickHouse连接源的实例资源 */
-  Resource: string | null;
+  Resource: string;
   /** ClickHouse连接源是否为自建集群 */
-  SelfBuilt: boolean | null;
+  SelfBuilt: boolean;
   /** ClickHouse连接源的实例vip，当为腾讯云实例时，必填 */
-  ServiceVip?: string | null;
+  ServiceVip?: string;
   /** ClickHouse连接源的vpcId，当为腾讯云实例时，必填 */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** 是否更新到关联的Datahub任务 */
-  IsUpdate?: boolean | null;
+  IsUpdate?: boolean;
 }
 
 /** ClickHouse修改连接源参数 */
 declare interface ClickHouseModifyConnectParam {
   /** ClickHouse连接源的实例资源【不支持修改】 */
-  Resource: string | null;
+  Resource: string;
   /** ClickHouse的连接port【不支持修改】 */
-  Port?: number | null;
+  Port?: number;
   /** ClickHouse连接源的实例vip【不支持修改】 */
-  ServiceVip?: string | null;
+  ServiceVip?: string;
   /** ClickHouse连接源的vpcId【不支持修改】 */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** ClickHouse连接源的用户名 */
-  UserName?: string | null;
+  UserName?: string;
   /** ClickHouse连接源的密码 */
-  Password?: string | null;
+  Password?: string;
   /** ClickHouse连接源是否为自建集群【不支持修改】 */
-  SelfBuilt?: boolean | null;
+  SelfBuilt?: boolean;
   /** 是否更新到关联的Datahub任务，默认为true */
-  IsUpdate?: boolean | null;
+  IsUpdate?: boolean;
 }
 
 /** ClickHouse类型入参 */
 declare interface ClickHouseParam {
   /** ClickHouse的集群 */
-  Cluster: string | null;
+  Cluster: string;
   /** ClickHouse的数据库名 */
-  Database: string | null;
+  Database: string;
   /** ClickHouse的数据表名 */
-  Table: string | null;
+  Table: string;
   /** ClickHouse的schema */
-  Schema: ClickHouseSchema[] | null;
+  Schema: ClickHouseSchema[];
   /** 实例资源 */
-  Resource: string | null;
+  Resource: string;
   /** ClickHouse的连接ip */
-  Ip?: string | null;
+  Ip?: string;
   /** ClickHouse的连接port */
-  Port?: number | null;
+  Port?: number;
   /** ClickHouse的用户名 */
-  UserName?: string | null;
+  UserName?: string;
   /** ClickHouse的密码 */
-  Password?: string | null;
+  Password?: string;
   /** 实例vip */
-  ServiceVip?: string | null;
+  ServiceVip?: string;
   /** 实例的vpcId */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** 是否为自建集群 */
-  SelfBuilt?: boolean | null;
+  SelfBuilt?: boolean;
   /** ClickHouse是否抛弃解析失败的消息，默认为true */
-  DropInvalidMessage?: boolean | null;
+  DropInvalidMessage?: boolean;
   /** ClickHouse 类型，emr-clickhouse : "emr";cdw-clickhouse : "cdwch";自建 : "" */
-  Type?: string | null;
+  Type?: string;
   /** 当设置成员参数DropInvalidMessageToCls设置为true时,DropInvalidMessage参数失效 */
-  DropCls?: DropCls | null;
+  DropCls?: DropCls;
   /** 每批次投递到 ClickHouse 表消息数量，默认为 1000 条。提高该参数值，有利于减少往 ClickHouse 投递的次数，但在错误消息过多及网络不稳定等极端情况下时，可能导致频繁重试影响效率。 */
-  BatchSize?: number | null;
+  BatchSize?: number;
   /** 每次从 topic 中拉取消息大小，默认为 1MB，即至少要从 topic 中批量拉取 1MB 消息，才进行数据投递到 ClickHouse 操作。提高该参数值，有利于减少往 ClickHouse 投递的次数，但在错误消息过多及网络不稳定等极端情况下时，可能导致频繁重试影响效率。 */
-  ConsumerFetchMinBytes?: number | null;
+  ConsumerFetchMinBytes?: number;
   /** 每次从 topic 拉取消息最大等待时间，当超过当前最大等待时间时，即使没有拉取到 ConsumerFetchMinBytes 大小，也将进行 ClickHouse 投递操作。提高该参数值，有利于减少往 ClickHouse 投递的次数，但在错误消息过多及网络不稳定等极端情况下时，可能导致频繁重试影响效率。 */
-  ConsumerFetchMaxWaitMs?: number | null;
+  ConsumerFetchMaxWaitMs?: number;
 }
 
 /** ClickHouse的Schema */
 declare interface ClickHouseSchema {
   /** 表的列名 */
-  ColumnName: string | null;
+  ColumnName: string;
   /** 该列对应的jsonKey名 */
-  JsonKey: string | null;
+  JsonKey: string;
   /** 表列项的类型 */
-  Type: string | null;
+  Type: string;
   /** 列项是否允许为空 */
-  AllowNull: boolean | null;
+  AllowNull: boolean;
 }
 
 /** Cls类型入参 */
 declare interface ClsParam {
   /** 生产的信息是否为json格式 */
-  DecodeJson: boolean | null;
+  DecodeJson: boolean;
   /** cls日志主题id */
-  Resource: string | null;
+  Resource: string;
   /** cls日志集id */
-  LogSet?: string | null;
+  LogSet?: string;
   /** 当DecodeJson为false时必填 */
-  ContentKey?: string | null;
+  ContentKey?: string;
   /** 指定消息中的某字段内容作为cls日志的时间。字段内容格式需要是秒级时间戳 */
-  TimeField?: string | null;
+  TimeField?: string;
 }
 
 /** 集群信息实体 */
@@ -275,45 +275,45 @@ declare interface ClusterInfo {
   /** 集群名称 */
   ClusterName?: string;
   /** 集群最大磁盘 单位GB */
-  MaxDiskSize?: number | null;
+  MaxDiskSize?: number;
   /** 集群最大带宽 单位MB/s */
-  MaxBandWidth?: number | null;
+  MaxBandWidth?: number;
   /** 集群当前可用磁盘 单位GB */
-  AvailableDiskSize?: number | null;
+  AvailableDiskSize?: number;
   /** 集群当前可用带宽 单位MB/s */
-  AvailableBandWidth?: number | null;
+  AvailableBandWidth?: number;
   /** 集群所属可用区，表明集群归属的可用区 */
-  ZoneId?: number | null;
+  ZoneId?: number;
   /** 集群节点所在的可用区，若该集群为跨可用区集群，则包含该集群节点所在的多个可用区。 */
-  ZoneIds?: number[] | null;
+  ZoneIds?: number[];
 }
 
 /** 高级配置对象 */
 declare interface Config {
   /** 消息保留时间 */
-  Retention?: number | null;
+  Retention?: number;
   /** 最小同步复制数 */
-  MinInsyncReplicas?: number | null;
+  MinInsyncReplicas?: number;
   /** 日志清理模式，默认 delete。delete：日志按保存时间删除；compact：日志按 key 压缩；compact, delete：日志按 key 压缩且会保存时间删除。 */
-  CleanUpPolicy?: string | null;
+  CleanUpPolicy?: string;
   /** Segment 分片滚动的时长 */
-  SegmentMs?: number | null;
+  SegmentMs?: number;
   /** 0表示 false。 1表示 true。 */
-  UncleanLeaderElectionEnable?: number | null;
+  UncleanLeaderElectionEnable?: number;
   /** Segment 分片滚动的字节数 */
-  SegmentBytes?: number | null;
+  SegmentBytes?: number;
   /** 最大消息字节数 */
-  MaxMessageBytes?: number | null;
+  MaxMessageBytes?: number;
   /** 消息保留文件大小 */
-  RetentionBytes?: number | null;
+  RetentionBytes?: number;
   /** 消息保存的时间类型 */
-  LogMsgTimestampType?: string | null;
+  LogMsgTimestampType?: string;
 }
 
 /** 返回连接源的Id */
 declare interface ConnectResourceResourceIdResp {
   /** 连接源的Id */
-  ResourceId?: string | null;
+  ResourceId?: string;
 }
 
 /** Connection信息 */
@@ -359,33 +359,33 @@ declare interface ConsumerRecord {
   /** 位点 */
   Offset?: number;
   /** 消息key */
-  Key?: string | null;
+  Key?: string;
   /** 消息value */
-  Value?: string | null;
+  Value?: string;
   /** 消息时间戳 */
-  Timestamp?: number | null;
+  Timestamp?: number;
   /** 消息headers */
-  Headers?: string | null;
+  Headers?: string;
 }
 
 /** Cos Datahub 任务接入参数 */
 declare interface CosParam {
   /** cos 存储桶名称 */
-  BucketName: string | null;
+  BucketName: string;
   /** 地域代码 */
-  Region: string | null;
+  Region: string;
   /** 对象名称 */
-  ObjectKey?: string | null;
+  ObjectKey?: string;
   /** 汇聚消息量的大小（单位：MB) */
-  AggregateBatchSize?: number | null;
+  AggregateBatchSize?: number;
   /** 汇聚的时间间隔（单位：小时） */
-  AggregateInterval?: number | null;
+  AggregateInterval?: number;
   /** 消息汇聚后的文件格式（支持csv, json） */
-  FormatOutputType?: string | null;
+  FormatOutputType?: string;
   /** 转储的对象目录前缀 */
-  ObjectKeyPrefix?: string | null;
+  ObjectKeyPrefix?: string;
   /** 根据strptime 时间格式化的分区格式 */
-  DirectoryTimeFormat?: string | null;
+  DirectoryTimeFormat?: string;
 }
 
 /** 创建数据转储返回值 */
@@ -393,19 +393,19 @@ declare interface CreateDatahubTaskRes {
   /** 转储任务id */
   TaskId?: string;
   /** 数据转储Id */
-  DatahubId?: string | null;
+  DatahubId?: string;
 }
 
 /** 创建后付费接口返回的 Data 数据结构 */
 declare interface CreateInstancePostData {
   /** CreateInstancePre返回固定为0，不能作为CheckTaskStatus的查询条件。只是为了保证和后台数据结构对齐。 */
-  FlowId?: number | null;
+  FlowId?: number;
   /** 订单号列表 */
-  DealNames?: string[] | null;
+  DealNames?: string[];
   /** ckafka集群实例Id，当购买多个实例时，默认返回购买的第一个实例 id */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 订单和购买实例对应映射列表 */
-  DealNameInstanceIdMapping?: DealInstanceDTO[] | null;
+  DealNameInstanceIdMapping?: DealInstanceDTO[];
 }
 
 /** 后付费实例相关接口返回结构 */
@@ -415,7 +415,7 @@ declare interface CreateInstancePostResp {
   /** 接口返回消息，当接口报错时提示错误信息 */
   ReturnMessage?: string;
   /** 返回的Data数据 */
-  Data?: CreateInstancePostData | null;
+  Data?: CreateInstancePostData;
 }
 
 /** 创建预付费接口返回的Data */
@@ -451,33 +451,33 @@ declare interface CreateTopicResp {
 /** Ctsdb连接源参数 */
 declare interface CtsdbConnectParam {
   /** Ctsdb的连接port */
-  Port?: number | null;
+  Port?: number;
   /** Ctsdb连接源的实例vip */
-  ServiceVip?: string | null;
+  ServiceVip?: string;
   /** Ctsdb连接源的vpcId */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** Ctsdb连接源的用户名 */
-  UserName?: string | null;
+  UserName?: string;
   /** Ctsdb连接源的密码 */
-  Password?: string | null;
+  Password?: string;
   /** Ctsdb连接源的实例资源 */
-  Resource?: string | null;
+  Resource?: string;
 }
 
 /** Ctsdb连接源参数(更新) */
 declare interface CtsdbModifyConnectParam {
   /** Ctsdb的连接port */
-  Port?: number | null;
+  Port?: number;
   /** Ctsdb连接源的实例vip */
-  ServiceVip?: string | null;
+  ServiceVip?: string;
   /** Ctsdb连接源的vpcId */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** Ctsdb连接源的用户名 */
-  UserName?: string | null;
+  UserName?: string;
   /** Ctsdb连接源的密码 */
-  Password?: string | null;
+  Password?: string;
   /** Ctsdb连接源的实例资源 */
-  Resource?: string | null;
+  Resource?: string;
 }
 
 /** Ctsdb类型入参 */
@@ -531,7 +531,7 @@ declare interface DatahubResource {
 /** Datahub请求的taskid */
 declare interface DatahubTaskIdRes {
   /** 任务id */
-  TaskId?: string | null;
+  TaskId?: string;
 }
 
 /** Datahub任务信息 */
@@ -2454,14 +2454,14 @@ declare interface AclResponse {
   /** 符合条件的总数据条数 */
   TotalCount?: number;
   /** ACL列表 */
-  AclList?: Acl[] | null;
+  AclList?: Acl[];
 }
 
 declare interface AppIdResponse {
   /** 符合要求的所有AppId数量 */
   TotalCount?: number;
   /** 符合要求的App Id列表 */
-  AppIdList?: number[] | null;
+  AppIdList?: number[];
 }
 
 declare interface AuthorizeTokenRequest {
@@ -2548,7 +2548,7 @@ declare interface CancelAuthorizationTokenResponse {
 
 declare interface CdcClusterResponse {
   /** 任务ID */
-  TaskId?: number | null;
+  TaskId?: number;
 }
 
 declare interface CheckCdcClusterRequest {
@@ -2567,19 +2567,19 @@ declare interface ConsumerGroupResponse {
   /** 符合条件的消费组数量 */
   TotalCount?: number;
   /** 主题列表 */
-  TopicList?: ConsumerGroupTopic[] | null;
+  TopicList?: ConsumerGroupTopic[];
   /** 消费分组List */
-  GroupList?: ConsumerGroup[] | null;
+  GroupList?: ConsumerGroup[];
   /** 所有分区数量 */
-  TotalPartition?: number | null;
+  TotalPartition?: number;
   /** 监控的分区列表 */
-  PartitionListForMonitor?: Partition[] | null;
+  PartitionListForMonitor?: Partition[];
   /** 主题总数 */
-  TotalTopic?: number | null;
+  TotalTopic?: number;
   /** 监控的主题列表 */
-  TopicListForMonitor?: ConsumerGroupTopic[] | null;
+  TopicListForMonitor?: ConsumerGroupTopic[];
   /** 监控的组列表 */
-  GroupListForMonitor?: Group[] | null;
+  GroupListForMonitor?: Group[];
 }
 
 declare interface CreateAclRequest {

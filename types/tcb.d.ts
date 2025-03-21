@@ -2,22 +2,6 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
-/** 活动信息 */
-declare interface ActivityInfoItem {
-  /** 活动id */
-  ActivityId?: number;
-  /** 记录插入时间 */
-  CreateTime?: string;
-  /** 记录最后一次变更时间 */
-  UpdateTime?: string;
-  /** 活动开始时间 */
-  StartTime?: string;
-  /** 活动结束时间 */
-  ExpireTime?: string;
-  /** 自定义备注信息 */
-  Tag?: string;
-}
-
 /** 活动详情 */
 declare interface ActivityRecordItem {
   /** 用户uin */
@@ -1630,18 +1614,6 @@ declare interface DeleteWxGatewayRouteRequest {
 }
 
 declare interface DeleteWxGatewayRouteResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeActivityInfoRequest {
-  /** 活动id列表 */
-  ActivityIdList?: number[];
-}
-
-declare interface DescribeActivityInfoResponse {
-  /** 活动详情 */
-  ActivityInfoList: ActivityInfoItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3303,8 +3275,6 @@ declare interface Tcb {
   DeleteGatewayVersion(data: DeleteGatewayVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGatewayVersionResponse>;
   /** 删除安全网关路由 {@link DeleteWxGatewayRouteRequest} {@link DeleteWxGatewayRouteResponse} */
   DeleteWxGatewayRoute(data: DeleteWxGatewayRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWxGatewayRouteResponse>;
-  /** 查询活动信息 {@link DescribeActivityInfoRequest} {@link DescribeActivityInfoResponse} */
-  DescribeActivityInfo(data?: DescribeActivityInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeActivityInfoResponse>;
   /** 查询活动记录信息 {@link DescribeActivityRecordRequest} {@link DescribeActivityRecordResponse} */
   DescribeActivityRecord(data: DescribeActivityRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeActivityRecordResponse>;
   /** 获取安全域名列表 {@link DescribeAuthDomainsRequest} {@link DescribeAuthDomainsResponse} */

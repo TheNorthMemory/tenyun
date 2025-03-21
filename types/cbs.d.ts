@@ -5,13 +5,13 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 定期快照高级保留策略，四个参数都为必选参数 */
 declare interface AdvancedRetentionPolicy {
   /** 保留最新快照Days天内的每天最新的一个快照，取值范围：[0, 100] */
-  Days: number | null;
+  Days: number;
   /** 保留最新快照Weeks周内的每周最新的一个快照，取值范围：[0, 100] */
-  Weeks: number | null;
+  Weeks: number;
   /** 保留最新快照Months月内的每月最新的一个快照， 取值范围：[0, 100] */
-  Months: number | null;
+  Months: number;
   /** 保留最新快照Years年内的每年最新的一个快照，取值范围：[0, 100] */
-  Years: number | null;
+  Years: number;
 }
 
 /** 本参数用于快照组回滚接口的入参，表示回滚的云盘、快照列表。 */
@@ -51,7 +51,7 @@ declare interface AutoSnapshotPolicy {
   /** 定期快照策略的状态。取值范围： NORMAL：正常 ISOLATED：已隔离 */
   AutoSnapshotPolicyState?: string;
   /** 是否是跨账号复制快照快照, 1：是, 0: 不是 */
-  IsCopyToRemote?: number | null;
+  IsCopyToRemote?: number;
   /** 使用该定期快照策略创建出来的快照是否永久保留。 */
   IsPermanent?: boolean;
   /** 定期快照下次触发的时间。 */
@@ -69,17 +69,17 @@ declare interface AutoSnapshotPolicy {
   /** 复制的目标账户ID */
   CopyToAccountUin?: string | null;
   /** 已绑定当前定期快照策略的实例ID列表。 */
-  InstanceIdSet?: string[] | null;
+  InstanceIdSet?: string[];
   /** 该定期快照创建的快照可以保留的月数。 */
-  RetentionMonths?: number | null;
+  RetentionMonths?: number;
   /** 该定期快照创建的快照最大保留数量。 */
-  RetentionAmount?: number | null;
+  RetentionAmount?: number;
   /** 定期快照高级保留策略。 */
   AdvancedRetentionPolicy?: AdvancedRetentionPolicy | null;
   /** 该复制快照策略的源端账户ID */
   CopyFromAccountUin?: string | null;
   /** 标签。 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
 }
 
 /** 描述独享集群的详细信息。 */
@@ -111,7 +111,7 @@ declare interface CdcSize {
   /** 独享集群的总容量大小，单位GiB */
   DiskTotal?: number;
   /** 独享集群的可用容量大小，单位GiB */
-  DiskAvailable?: number | null;
+  DiskAvailable?: number;
 }
 
 /** 描述购买云盘时的费用明细。 */

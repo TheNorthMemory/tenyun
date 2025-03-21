@@ -3888,14 +3888,6 @@ declare interface DescribeReportTasksResponse {
   RequestId?: string;
 }
 
-declare interface DescribeRuleDetailRequest {
-}
-
-declare interface DescribeRuleDetailResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeRuleListRequest {
 }
 
@@ -4881,8 +4873,6 @@ declare interface Dsgc {
   DescribeReportTaskDownloadUrl(data: DescribeReportTaskDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReportTaskDownloadUrlResponse>;
   /** 获取资产报表任务列表 {@link DescribeReportTasksRequest} {@link DescribeReportTasksResponse} */
   DescribeReportTasks(data: DescribeReportTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReportTasksResponse>;
-  /** 查询分类规则详情 {@link DescribeRuleDetailRequest} {@link DescribeRuleDetailResponse} */
-  DescribeRuleDetail(data?: DescribeRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleDetailResponse>;
   /** 查询分类下规则列表 {@link DescribeRuleListRequest} {@link DescribeRuleListResponse} */
   DescribeRuleList(data?: DescribeRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleListResponse>;
   /** 查询cos敏感数据分布 {@link DescribeSensitiveCOSDataDistributionRequest} {@link DescribeSensitiveCOSDataDistributionResponse} */

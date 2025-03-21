@@ -1573,13 +1573,13 @@ declare interface ParamItemDetail {
 /** 参数变化信息 */
 declare interface ParamItemInfo {
   /** 参数名字 */
-  ParamName?: string | null;
+  ParamName?: string;
   /** 参数新值 */
-  NewValue?: string | null;
+  NewValue?: string;
   /** 参数旧值 */
-  OldValue?: string | null;
+  OldValue?: string;
   /** 参数公式 */
-  ValueFunction?: string | null;
+  ValueFunction?: string;
 }
 
 /** 参数模板信息 */
@@ -3175,7 +3175,7 @@ declare interface DescribeChangedParamsAfterUpgradeResponse {
   /** 参数个数 */
   TotalCount?: number;
   /** 实例参数列表 */
-  Items?: ParamItemInfo[] | null;
+  Items?: ParamItemInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3241,7 +3241,7 @@ declare interface DescribeClusterDetailDatabasesRequest {
 
 declare interface DescribeClusterDetailDatabasesResponse {
   /** 数据库信息 */
-  DbInfos?: DbInfo[] | null;
+  DbInfos?: DbInfo[];
   /** 总数 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3309,7 +3309,7 @@ declare interface DescribeClusterParamLogsResponse {
   /** 记录总数 */
   TotalCount?: number;
   /** 参数修改记录 */
-  ClusterParamLogs?: ClusterParamModifyLog[] | null;
+  ClusterParamLogs?: ClusterParamModifyLog[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3327,7 +3327,7 @@ declare interface DescribeClusterParamsResponse {
   /** 参数个数 */
   TotalCount?: number;
   /** 实例参数列表 */
-  Items?: ParamInfo[] | null;
+  Items?: ParamInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3339,17 +3339,17 @@ declare interface DescribeClusterPasswordComplexityRequest {
 
 declare interface DescribeClusterPasswordComplexityResponse {
   /** 数据字典参数 */
-  ValidatePasswordDictionary?: ParamInfo | null;
+  ValidatePasswordDictionary?: ParamInfo;
   /** 密码长度 */
-  ValidatePasswordLength?: ParamInfo | null;
+  ValidatePasswordLength?: ParamInfo;
   /** 大小写敏感字符个数 */
-  ValidatePasswordMixedCaseCount?: ParamInfo | null;
+  ValidatePasswordMixedCaseCount?: ParamInfo;
   /** 数字个数 */
-  ValidatePasswordNumberCount?: ParamInfo | null;
+  ValidatePasswordNumberCount?: ParamInfo;
   /** 密码等级 */
-  ValidatePasswordPolicy?: ParamInfo | null;
+  ValidatePasswordPolicy?: ParamInfo;
   /** 特殊字符个数 */
-  ValidatePasswordSpecialCharCount?: ParamInfo | null;
+  ValidatePasswordSpecialCharCount?: ParamInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3469,9 +3469,9 @@ declare interface DescribeInstanceErrorLogsRequest {
 
 declare interface DescribeInstanceErrorLogsResponse {
   /** 日志条数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 错误日志列表 */
-  ErrorLogs?: CynosdbErrorLogItem[] | null;
+  ErrorLogs?: CynosdbErrorLogItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3725,7 +3725,7 @@ declare interface DescribeProxiesResponse {
   /** 数据库代理组数 */
   TotalCount?: number;
   /** 数据库代理组列表 */
-  ProxyGroupInfos?: ProxyGroupInfo[] | null;
+  ProxyGroupInfos?: ProxyGroupInfo[];
   /** 数据库代理节点 */
   ProxyNodeInfos?: ProxyNodeInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3817,7 +3817,7 @@ declare interface DescribeResourcePackageListResponse {
   /** 资源包总数 */
   Total?: number;
   /** 资源包明细 */
-  Detail?: Package[] | null;
+  Detail?: Package[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3839,7 +3839,7 @@ declare interface DescribeResourcePackageSaleSpecResponse {
   /** 可售卖资源包规格总数 */
   Total?: number;
   /** 资源包明细说明 */
-  Detail?: SalePackageSpec[] | null;
+  Detail?: SalePackageSpec[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3865,9 +3865,9 @@ declare interface DescribeRollbackTimeRangeRequest {
 
 declare interface DescribeRollbackTimeRangeResponse {
   /** 有效回归时间范围开始时间点（已废弃） */
-  TimeRangeStart?: string | null;
+  TimeRangeStart?: string;
   /** 有效回归时间范围结束时间点（已废弃） */
-  TimeRangeEnd?: string | null;
+  TimeRangeEnd?: string;
   /** 可回档时间范围 */
   RollbackTimeRanges?: RollbackTimeRange[];
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3917,9 +3917,9 @@ declare interface DescribeSupportProxyVersionRequest {
 
 declare interface DescribeSupportProxyVersionResponse {
   /** 支持的数据库代理版本集合 */
-  SupportProxyVersions?: string[] | null;
+  SupportProxyVersions?: string[];
   /** 当前proxy版本号 */
-  CurrentProxyVersion?: string | null;
+  CurrentProxyVersion?: string;
   /** 代理版本详情 */
   SupportProxyVersionDetail?: ProxyVersionInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -4001,7 +4001,7 @@ declare interface ExportInstanceErrorLogsRequest {
 
 declare interface ExportInstanceErrorLogsResponse {
   /** 错误日志导出内容 */
-  ErrorLogItems?: ErrorLogItemExport[] | null;
+  ErrorLogItems?: ErrorLogItemExport[];
   /** 错误日志字符串 */
   FileContent?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -4137,9 +4137,9 @@ declare interface InquirePriceModifyRequest {
 
 declare interface InquirePriceModifyResponse {
   /** 实例价格 */
-  InstancePrice?: TradePrice | null;
+  InstancePrice?: TradePrice;
   /** 存储价格 */
-  StoragePrice?: TradePrice | null;
+  StoragePrice?: TradePrice;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4181,7 +4181,7 @@ declare interface IsolateClusterRequest {
 
 declare interface IsolateClusterResponse {
   /** 任务流ID(后付费或者serverless资源返回，如果需要同步任务状态，请使用DescribeFlow接口) */
-  FlowId?: number | null;
+  FlowId?: number;
   /** 退款订单号(预付费资源返回，如果需要同步订单状态，请使用计费产品的DescribeDealsByCond同步订单状态) */
   DealNames?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -4475,11 +4475,11 @@ declare interface ModifyClusterStorageRequest {
 
 declare interface ModifyClusterStorageResponse {
   /** 冻结流水ID */
-  TranId?: string | null;
+  TranId?: string;
   /** 大订单号 */
-  BigDealIds?: string[] | null;
+  BigDealIds?: string[];
   /** 订单号 */
-  DealNames?: string[] | null;
+  DealNames?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4939,15 +4939,15 @@ declare interface RenewClustersRequest {
 
 declare interface RenewClustersResponse {
   /** 预付费总订单号 */
-  BigDealIds?: string[] | null;
+  BigDealIds?: string[];
   /** 退款订单号 */
-  DealNames?: string[] | null;
+  DealNames?: string[];
   /** 冻结流水，一次开通一个冻结流水 */
-  TranId?: string | null;
+  TranId?: string;
   /** 每个订单号对应的发货资源id列表 */
-  ResourceIds?: string[] | null;
+  ResourceIds?: string[];
   /** 集群id列表 */
-  ClusterIds?: string[] | null;
+  ClusterIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5093,13 +5093,13 @@ declare interface RollbackToNewClusterRequest {
 
 declare interface RollbackToNewClusterResponse {
   /** 冻结流水ID */
-  TranId?: string | null;
+  TranId?: string;
   /** 订单号 */
-  DealNames?: string[] | null;
+  DealNames?: string[];
   /** 资源ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取资源ID） */
-  ResourceIds?: string[] | null;
+  ResourceIds?: string[];
   /** 集群ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取集群ID） */
-  ClusterIds?: string[] | null;
+  ClusterIds?: string[];
   /** 大订单号 */
   BigDealIds?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -5135,7 +5135,7 @@ declare interface SearchClusterTablesRequest {
 
 declare interface SearchClusterTablesResponse {
   /** 数据表列表 */
-  Tables?: DatabaseTables[] | null;
+  Tables?: DatabaseTables[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5301,9 +5301,9 @@ declare interface UpgradeInstanceRequest {
 
 declare interface UpgradeInstanceResponse {
   /** 冻结流水ID */
-  TranId?: string | null;
+  TranId?: string;
   /** 大订单号 */
-  BigDealIds?: string[] | null;
+  BigDealIds?: string[];
   /** 订单号 */
   DealNames?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */

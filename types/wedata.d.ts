@@ -1104,6 +1104,8 @@ declare interface DatabaseMeta {
   ModifiedTimeByTables?: number | null;
   /** 库下表的最新访问时间 */
   LastAccessTimeByTables?: number | null;
+  /** 库guid */
+  DatabaseGuid?: string | null;
 }
 
 /** 数据源对象 */
@@ -9942,6 +9944,8 @@ declare interface GenHiveTableDDLSqlRequest {
   SinkSchemaName?: string;
   /** 获取源信息的环境 */
   Env?: string;
+  /** doris写入模式配置 */
+  WriteMode?: string;
 }
 
 declare interface GenHiveTableDDLSqlResponse {

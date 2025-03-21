@@ -251,11 +251,11 @@ declare interface DCDBShardInfo {
   /** Proxy版本 */
   ProxyVersion?: string;
   /** 付费模型 */
-  Paymode?: string | null;
+  Paymode?: string;
   /** 分片的主可用区 */
-  ShardMasterZone?: string | null;
+  ShardMasterZone?: string;
   /** 分片的从可用区列表 */
-  ShardSlaveZones?: string[] | null;
+  ShardSlaveZones?: string[];
   /** CPU核数 */
   Cpu?: number;
   /** 分片ShardKey的范围（总共64个哈希值），例如： 0-31，32-63 */
@@ -493,7 +493,7 @@ declare interface ParamDesc {
   /** 当前参数值 */
   Value?: string;
   /** 设置过的值，参数生效后，该值和value一样。未设置过就不返回该字段。 */
-  SetValue?: string | null;
+  SetValue?: string;
   /** 系统默认值 */
   Default?: string;
   /** 参数限制 */
@@ -707,9 +707,9 @@ declare interface SlowLogData {
   /** 账号 */
   User?: string;
   /** 样例Sql */
-  ExampleSql?: string | null;
+  ExampleSql?: string;
   /** 账户的域名 */
-  Host?: string | null;
+  Host?: string;
 }
 
 /** 按机型分类的规格配置 */
@@ -781,35 +781,35 @@ declare interface Tag {
 /** 临时实例 */
 declare interface TmpInstance {
   /** 应用ID */
-  AppId?: number | null;
+  AppId?: number;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 实例备注 */
-  InstanceRemark?: string | null;
+  InstanceRemark?: string;
   /** 0:非临时实例 ,1:无效临时实例, 2:回档成功的有效临时实例 */
-  TempType?: number | null;
+  TempType?: number;
   /** 实例状态,0:待初始化,1:流程处理中,2:有效状态,-1:已隔离，-2：已下线 */
-  Status?: number | null;
+  Status?: number;
   /** 实例 ID，形如：tdsql-ow728lmc。 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 实例虚IP */
-  Vip?: string | null;
+  Vip?: string;
   /** 实例虚端口 */
-  Vport?: number | null;
+  Vport?: number;
   /** 有效期结束时间 */
-  PeriodEndTime?: string | null;
+  PeriodEndTime?: string;
   /** 源实例 ID，形如：tdsql-ow728lmc。 */
-  SrcInstanceId?: string | null;
+  SrcInstanceId?: string;
   /** 实例状态描述 */
-  StatusDesc?: string | null;
+  StatusDesc?: string;
   /** 实例所在地域 */
-  Region?: string | null;
+  Region?: string;
   /** 实例所在可用区 */
-  Zone?: string | null;
+  Zone?: string;
   /** 实例虚IPv6 */
-  Vipv6?: string | null;
+  Vipv6?: string;
   /** 实例IPv6标志 */
-  Ipv6Flag?: number | null;
+  Ipv6Flag?: number;
 }
 
 /** 用户任务信息 */
@@ -1423,9 +1423,9 @@ declare interface DescribeDBSecurityGroupsResponse {
   /** 安全组详情。 */
   Groups?: SecurityGroup[];
   /** 实例VIP */
-  VIP?: string | null;
+  VIP?: string;
   /** 实例端口 */
-  VPort?: string | null;
+  VPort?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1775,7 +1775,7 @@ declare interface DescribeDCDBShardsResponse {
   /** 分片信息列表 */
   Shards?: DCDBShardInfo[];
   /** 灾备标志，0-无，1-主实例，2-灾备实例 */
-  DcnFlag?: number | null;
+  DcnFlag?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

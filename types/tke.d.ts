@@ -317,9 +317,9 @@ declare interface LifecycleConfig {
 /** 节点池弹性伸缩配置 */
 declare interface MachineSetScaling {
   /** 节点池最小副本数 */
-  MinReplicas?: number | null;
+  MinReplicas?: number;
   /** 节点池最大副本数 */
-  MaxReplicas?: number | null;
+  MaxReplicas?: number;
   /** 节点池扩容策略。ZoneEquality：多可用区打散；ZonePriority：首选可用区优先； */
   CreatePolicy?: string | null;
 }
@@ -327,13 +327,13 @@ declare interface MachineSetScaling {
 /** 托管节点池自动升级配置 */
 declare interface MachineUpgradeSettings {
   /** 是否开启自动升级 */
-  AutoUpgrade?: boolean | null;
+  AutoUpgrade?: boolean;
   /** 运维窗口 */
-  UpgradeOptions?: AutoUpgradeOptions | null;
+  UpgradeOptions?: AutoUpgradeOptions;
   /** 升级项 */
   Components?: string[] | null;
   /** 升级时，最大不可升级的节点数 */
-  MaxUnavailable?: IntOrString | null;
+  MaxUnavailable?: IntOrString;
 }
 
 /** 托管节点池Management配置 */
@@ -399,9 +399,9 @@ declare interface NativeNodeInfo {
   /** 安全组列表 */
   SecurityGroupIDs?: string[] | null;
   /** VPC 唯一 ID */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 子网唯一 ID */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** OS的名称 */
   OsImage?: string | null;
   /** **原生节点对应的实例 ID**- ins-q47ofw6 表示这个实例是一个 CVM 的实例- eks-f8mvyaep 表示这个实例是一个 CXM 的实例 */
@@ -411,25 +411,25 @@ declare interface NativeNodeInfo {
 /** 原生节点池信息 */
 declare interface NativeNodePoolInfo {
   /** 伸缩配置 */
-  Scaling?: MachineSetScaling | null;
+  Scaling?: MachineSetScaling;
   /** 子网列表 */
   SubnetIds?: string[];
   /** 安全组列表 */
   SecurityGroupIds?: string[] | null;
   /** 自动升级配置 */
-  UpgradeSettings?: MachineUpgradeSettings | null;
+  UpgradeSettings?: MachineUpgradeSettings;
   /** 是否开启自愈能力 */
   AutoRepair?: boolean | null;
   /** 节点计费类型 */
   InstanceChargeType?: string;
   /** 包年包月机型计费配置 */
-  InstanceChargePrepaid?: InstanceChargePrepaid | null;
+  InstanceChargePrepaid?: InstanceChargePrepaid;
   /** 系统盘配置 */
   SystemDisk?: Disk;
   /** 密钥 ID 列表 */
   KeyIds?: string[] | null;
   /** Machine 系统配置 */
-  Management?: ManagementConfig | null;
+  Management?: ManagementConfig;
   /** 故障自愈规则名称 */
   HealthCheckPolicyName?: string | null;
   /** 原生节点池hostName模式串 */
@@ -437,23 +437,23 @@ declare interface NativeNodePoolInfo {
   /** kubelet 自定义参数 */
   KubeletArgs?: string[] | null;
   /** 预定义脚本 */
-  Lifecycle?: LifecycleConfig | null;
+  Lifecycle?: LifecycleConfig;
   /** 运行时根目录 */
-  RuntimeRootDir?: string | null;
+  RuntimeRootDir?: string;
   /** 是否开启弹性伸缩 */
-  EnableAutoscaling?: boolean | null;
+  EnableAutoscaling?: boolean;
   /** 机型列表 */
   InstanceTypes?: string[];
   /** 期望节点数 */
-  Replicas?: number | null;
+  Replicas?: number;
   /** 就绪 Machine 个数 */
   ReadyReplicas?: number;
   /** 公网带宽设置 */
-  InternetAccessible?: InternetAccessible | null;
+  InternetAccessible?: InternetAccessible;
   /** 原生节点池数据盘 */
   DataDisks?: DataDisk[] | null;
   /** 原生节点机型 Native, NativeCVM */
-  MachineType?: string | null;
+  MachineType?: string;
 }
 
 /** 节点统计列表 */
@@ -2456,7 +2456,7 @@ declare namespace V20180525 {
     /** Pod类型：intel、amd、v100、t4、a10\*gnv4、a10\*gnv4v等。 */
     Type?: string;
     /** Pod是GPU时，表示GPU卡数 */
-    Gpu?: string | null;
+    Gpu?: string;
     /** 计费类型PREPAID：Pod调度到包月超级节点POSTPAID_BY_HOUR：按量计费RESERVED_INSTANCE：上个周期被预留券抵扣SPOT：竞价实例TPOD：特惠实例 */
     ChargeType?: string;
     /** 命名空间 */
@@ -2468,17 +2468,17 @@ declare namespace V20180525 {
   /** 可被预留券抵扣的 Pod 某种规格的抵扣率 */
   interface PodDeductionRate {
     /** Pod的 CPU */
-    Cpu?: number | null;
+    Cpu?: number;
     /** Pod 的内存 */
-    Memory?: number | null;
+    Memory?: number;
     /** Pod 的类型 */
-    Type?: string | null;
+    Type?: string;
     /** Pod 的 GPU 卡数，Pod 类型为 GPU 时有效。 */
-    GpuNum?: string | null;
+    GpuNum?: string;
     /** 这种规格的 Pod总数 */
-    TotalNum?: number | null;
+    TotalNum?: number;
     /** 这种规格的 Pod被预留券抵扣的数量 */
-    DeductionNum?: number | null;
+    DeductionNum?: number;
   }
 
   /** 某机型可支持的最大 VPC-CNI 模式的 Pod 数量 */
@@ -2508,15 +2508,15 @@ declare namespace V20180525 {
   /** Pod所在的节点信息 */
   interface PodNodeInfo {
     /** 集群 ID */
-    ClusterId?: string | null;
+    ClusterId?: string;
     /** 节点名称 */
-    NodeName?: string | null;
+    NodeName?: string;
     /** 可用区 */
-    Zone?: string | null;
+    Zone?: string;
     /** 命名空间 */
-    Namespace?: string | null;
+    Namespace?: string;
     /** Pod 名称 */
-    Name?: string | null;
+    Name?: string;
   }
 
   /** 健康检查探测参数 */
@@ -3176,25 +3176,25 @@ declare namespace V20180525 {
   /** 预留券的使用率信息 */
   interface ReservedInstanceUtilizationRate {
     /** 使用率 */
-    Rate?: number | null;
+    Rate?: number;
     /** 预留券数量 */
-    Num?: number | null;
+    Num?: number;
     /** 核数 */
-    CPU?: number | null;
+    CPU?: number;
     /** 内存 */
-    Memory?: number | null;
+    Memory?: number;
     /** 预留券类型 */
-    Type?: string | null;
+    Type?: string;
     /** GPU 卡数 */
-    GpuNum?: string | null;
+    GpuNum?: string;
     /** 可用区 */
-    Zone?: string | null;
+    Zone?: string;
     /** 集群 ID */
-    ClusterId?: string | null;
+    ClusterId?: string;
     /** 节点名称 */
-    NodeName?: string | null;
+    NodeName?: string;
     /** Pod 数量 */
-    PodNum?: number | null;
+    PodNum?: number;
   }
 
   /** 资源删除选项 */
@@ -3352,15 +3352,15 @@ declare namespace V20180525 {
   /** 超级节点上的资源统计 */
   interface SuperNodeResource {
     /** 节点名称 */
-    NodeName?: string | null;
+    NodeName?: string;
     /** 节点上的资源总数 */
-    Num?: number | null;
+    Num?: number;
     /** 节点上的总核数 */
-    Cpu?: number | null;
+    Cpu?: number;
     /** 节点上的总内存数 */
-    Memory?: number | null;
+    Memory?: number;
     /** 节点上的总 GPU 卡数 */
-    Gpu?: number | null;
+    Gpu?: number;
   }
 
   /** 集群日志开关集合 */

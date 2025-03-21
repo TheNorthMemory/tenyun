@@ -117,11 +117,11 @@ declare interface BGPIPInstanceSpecification {
 /** 高防IP资产实例的使用信息统计 */
 declare interface BGPIPInstanceUsages {
   /** 已使用的端口规则数，单位条 */
-  PortRulesUsage: number;
+  PortRulesUsage?: number;
   /** 已使用的域名规则数，单位条 */
-  DomainRulesUsage: number;
+  DomainRulesUsage?: number;
   /** 最近7天的攻击次数，单位次 */
-  Last7DayAttackCount: number;
+  Last7DayAttackCount?: number;
 }
 
 /** L7规则 */
@@ -267,11 +267,11 @@ declare interface BGPInstanceSpecification {
 /** 高防包资产实例的使用信息统计 */
 declare interface BGPInstanceUsages {
   /** 已使用的防护次数，单位次 */
-  ProtectCountUsage: number;
+  ProtectCountUsage?: number;
   /** 已防护的IP数，单位个 */
-  ProtectIPNumberUsage: number;
+  ProtectIPNumberUsage?: number;
   /** 最近7天的攻击次数，单位次 */
-  Last7DayAttackCount: number;
+  Last7DayAttackCount?: number;
 }
 
 /** 黑白名单IP */
@@ -307,19 +307,19 @@ declare interface BoundIpInfo {
 /** CC分级策略 */
 declare interface CCLevelPolicy {
   /** 实例Id */
-  InstanceId: string;
+  InstanceId?: string;
   /** Ip */
-  Ip: string;
+  Ip?: string;
   /** 协议 */
-  Protocol: string;
+  Protocol?: string;
   /** 域名 */
-  Domain: string;
+  Domain?: string;
   /** 防护等级，可取值default表示默认策略，loose表示宽松，strict表示严格 */
-  Level: string;
+  Level?: string;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 修改时间 */
-  ModifyTime: string;
+  ModifyTime?: string;
 }
 
 /** CC精准防护配置项 */
@@ -337,43 +337,43 @@ declare interface CCPrecisionPlyRecord {
 /** CC精准防护策略信息 */
 declare interface CCPrecisionPolicy {
   /** 策略Id */
-  PolicyId: string;
+  PolicyId?: string;
   /** 实例Id */
-  InstanceId: string;
+  InstanceId?: string;
   /** Ip地址 */
-  Ip: string;
+  Ip?: string;
   /** 协议 */
-  Protocol: string;
+  Protocol?: string;
   /** 域名 */
-  Domain: string;
+  Domain?: string;
   /** 策略方式（丢弃或验证码） */
-  PolicyAction: string;
+  PolicyAction?: string;
   /** 策略列表 */
-  PolicyList: CCPrecisionPlyRecord[];
+  PolicyList?: CCPrecisionPlyRecord[];
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 修改时间 */
-  ModifyTime: string;
+  ModifyTime?: string;
 }
 
 /** CC频率限制策略 */
 declare interface CCReqLimitPolicy {
   /** 策略Id */
-  PolicyId: string;
+  PolicyId?: string;
   /** 实例Id */
-  InstanceId: string;
+  InstanceId?: string;
   /** Ip地址 */
-  Ip: string;
+  Ip?: string;
   /** 协议，可取值HTTP，HTTPS */
-  Protocol: string;
+  Protocol?: string;
   /** 域名 */
-  Domain: string;
+  Domain?: string;
   /** 策略项 */
-  PolicyRecord: CCReqLimitPolicyRecord;
+  PolicyRecord?: CCReqLimitPolicyRecord;
   /** 创建时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 修改时间 */
-  ModifyTime: string;
+  ModifyTime?: string;
 }
 
 /** CC频率限制策略项字段 */
@@ -515,9 +515,9 @@ declare interface ConnectLimitRelation {
 /** DDoS防护的AI防护开关 */
 declare interface DDoSAIRelation {
   /** AI防护开关，取值[on(开启)off(关闭)] */
-  DDoSAI: string;
+  DDoSAI?: string;
   /** AI防护开关所属的资源实例 */
-  InstanceDetailList: InstanceRelation[];
+  InstanceDetailList?: InstanceRelation[];
 }
 
 /** DDoS防护的区域封禁配置 */
@@ -1321,7 +1321,7 @@ declare interface CreateCCPrecisionPolicyRequest {
   Protocol: string;
   /** 域名 */
   Domain: string;
-  /** 策略方式，可取值alg表示验证码，drop表示丢弃，trans表示放行 */
+  /** 策略方式，可取值alg表示人机校验，drop表示丢弃，trans表示放行 */
   PolicyAction: string;
   /** 策略记录 */
   PolicyList: CCPrecisionPlyRecord[];
@@ -2715,9 +2715,9 @@ declare interface DescribeOverviewDDoSEventListRequest {
 
 declare interface DescribeOverviewDDoSEventListResponse {
   /** 记录总数 */
-  Total: number;
+  Total?: number;
   /** 事件列表 */
-  EventList: OverviewDDoSEvent[];
+  EventList?: OverviewDDoSEvent[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

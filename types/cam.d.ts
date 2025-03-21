@@ -931,19 +931,19 @@ declare interface DescribeOIDCConfigRequest {
 
 declare interface DescribeOIDCConfigResponse {
   /** 身份提供商类型 11角色身份提供商 */
-  ProviderType: number;
+  ProviderType?: number;
   /** 身份提供商URL */
-  IdentityUrl: string;
+  IdentityUrl?: string;
   /** 签名公钥 */
-  IdentityKey: string;
+  IdentityKey?: string;
   /** 客户端id */
-  ClientId: string[];
+  ClientId?: string[];
   /** 状态：0:未设置，11:已开启，2:已禁用 */
-  Status: number;
+  Status?: number;
   /** 描述 */
-  Description: string;
+  Description?: string;
   /** 名称 */
-  Name: string;
+  Name?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

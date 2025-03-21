@@ -1271,9 +1271,9 @@ declare interface InternetPriceDetail {
   /** 付费单价，单位：元，仅后付费价格查询返回。 */
   UnitPrice?: number;
   /** 折扣后的价格，单位：元。 */
-  DiscountPrice?: number | null;
+  DiscountPrice?: number;
   /** 计价单元，可取值范围： HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）。 */
-  ChargeUnit?: string | null;
+  ChargeUnit?: string;
   /** 原价，单位：元，仅预付费价格查询返回。 */
   OriginalPrice?: number;
 }
@@ -1369,23 +1369,23 @@ declare interface IpField {
 /** IP地理位置信息 */
 declare interface IpGeolocationInfo {
   /** 国家信息 */
-  Country?: string | null;
+  Country?: string;
   /** 省、州、郡一级行政区域信息 */
-  Province?: string | null;
+  Province?: string;
   /** 市一级行政区域信息 */
-  City?: string | null;
+  City?: string;
   /** 市内区域信息 */
-  Region?: string | null;
+  Region?: string;
   /** 接入运营商信息 */
-  Isp?: string | null;
+  Isp?: string;
   /** 骨干运营商名称 */
-  AsName?: string | null;
+  AsName?: string;
   /** 骨干运营商AS号 */
-  AsId?: string | null;
+  AsId?: string;
   /** 注释信息。目前的填充值为移动接入用户的APN值，如无APN属性则为空 */
-  Comment?: string | null;
+  Comment?: string;
   /** IP地址 */
-  AddressIp?: string | null;
+  AddressIp?: string;
 }
 
 /** `IPv6`地址信息。 */
@@ -1955,7 +1955,7 @@ declare interface Quota {
   /** 配额数量 */
   QuotaLimit?: number;
   /** 配额所属的网络组 */
-  QuotaGroup?: string | null;
+  QuotaGroup?: string;
 }
 
 /** 安全组被引用信息 */
@@ -2609,9 +2609,9 @@ declare interface TrafficFlow {
   /** 实际流量，单位为 字节 */
   Value?: number;
   /** 格式化后的流量，单位见参数 FormatUnit */
-  FormatValue?: number | null;
+  FormatValue?: number;
   /** 格式化后流量的单位 */
-  FormatUnit?: string | null;
+  FormatUnit?: string;
 }
 
 /** 流量镜像实例 */
@@ -2685,7 +2685,7 @@ declare interface TrafficPackage {
   /** 流量包唯一ID */
   TrafficPackageId?: string;
   /** 流量包名称 */
-  TrafficPackageName?: string | null;
+  TrafficPackageName?: string;
   /** 流量包总量，单位GB */
   TotalAmount?: number;
   /** 流量包剩余量，单位GB */
@@ -2699,7 +2699,7 @@ declare interface TrafficPackage {
   /** 已使用的流量，单位GB */
   UsedAmount?: number;
   /** 流量包标签 */
-  TagSet?: Tag[] | null;
+  TagSet?: Tag[];
   /** 区分闲时流量包与全时流量包 */
   DeductType?: string;
 }
@@ -2795,7 +2795,7 @@ declare interface UsedDetail {
   /** 流量包唯一ID */
   TrafficPackageId?: string;
   /** 流量包名称 */
-  TrafficPackageName?: string | null;
+  TrafficPackageName?: string;
   /** 流量包总量 */
   TotalAmount?: TrafficFlow;
   /** 本次抵扣 */

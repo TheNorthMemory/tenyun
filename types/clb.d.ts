@@ -970,9 +970,9 @@ declare interface RewriteLocationMap {
 
 /** 重定向目标的信息 */
 declare interface RewriteTarget {
-  /** 重定向目标的监听器ID注意：此字段可能返回 null，表示无重定向。 */
+  /** 重定向目标的监听器ID，该字段仅配置了重定向时有效。 */
   TargetListenerId?: string | null;
-  /** 重定向目标的转发规则ID注意：此字段可能返回 null，表示无重定向。 */
+  /** 重定向目标的转发规则ID，该字段仅配置了重定向时有效。 */
   TargetLocationId?: string | null;
   /** 重定向状态码 */
   RewriteCode?: number | null;
@@ -1256,7 +1256,7 @@ declare interface TargetGroupInstance {
   BindIP: string;
   /** 目标组实例的端口 */
   Port?: number;
-  /** 目标组实例的权重 */
+  /** 目标组实例的权重v2目标组需要配置权重，调用CreateTargetGroup接口创建目标组时该参数与创建接口中的Weight参数必填其一。 */
   Weight?: number;
   /** 目标组实例的新端口 */
   NewPort?: number;
@@ -1673,7 +1673,7 @@ declare interface CreateTargetGroupRequest {
   VpcId?: string;
   /** 目标组的默认端口， 后续添加服务器时可使用该默认端口。Port和TargetGroupInstances.N中的port二者必填其一。 */
   Port?: number;
-  /** 目标组绑定的后端服务器 */
+  /** 目标组绑定的后端服务器，单次最多支持50个。 */
   TargetGroupInstances?: TargetGroupInstance[];
   /** 目标组类型，当前支持v1(旧版目标组), v2(新版目标组), 默认为v1(旧版目标组)。 */
   Type?: string;

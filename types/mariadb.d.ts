@@ -209,9 +209,9 @@ declare interface DCNReplicaConfig {
 /** DCN的状态信息 */
 declare interface DCNReplicaStatus {
   /** DCN 的运行状态，START为正常运行，STOP为暂停， */
-  Status: string | null;
+  Status?: string;
   /** 当前延迟情况，取备实例的 master 节点的 delay 值 */
-  Delay: number;
+  Delay?: number;
 }
 
 /** 数据库信息 */
@@ -621,35 +621,35 @@ declare interface Tag {
 /** 临时实例 */
 declare interface TmpInstance {
   /** 应用ID */
-  AppId?: number | null;
+  AppId?: number;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 实例备注 */
-  InstanceRemark?: string | null;
+  InstanceRemark?: string;
   /** 0:非临时实例 ,1:无效临时实例, 2:回档成功的有效临时实例 */
-  TempType?: number | null;
+  TempType?: number;
   /** 实例状态,0:待初始化,1:流程处理中,2:有效状态,-1:已隔离，-2：已下线 */
-  Status?: number | null;
+  Status?: number;
   /** 实例 ID，形如：tdsql-ow728lmc。 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 实例虚IP */
-  Vip?: string | null;
+  Vip?: string;
   /** 实例虚端口 */
-  Vport?: number | null;
+  Vport?: number;
   /** 有效期结束时间 */
-  PeriodEndTime?: string | null;
+  PeriodEndTime?: string;
   /** 源实例 ID，形如：tdsql-ow728lmc。 */
-  SrcInstanceId?: string | null;
+  SrcInstanceId?: string;
   /** 实例状态描述 */
-  StatusDesc?: string | null;
+  StatusDesc?: string;
   /** 实例所在地域 */
-  Region?: string | null;
+  Region?: string;
   /** 实例所在可用区 */
-  Zone?: string | null;
+  Zone?: string;
   /** 实例虚IPv6 */
-  Vipv6?: string | null;
+  Vipv6?: string;
   /** 实例IPv6标志 */
-  Ipv6Flag?: number | null;
+  Ipv6Flag?: number;
 }
 
 /** 视图权限信息 */
@@ -1119,9 +1119,9 @@ declare interface DescribeBackupTimeRequest {
 
 declare interface DescribeBackupTimeResponse {
   /** 返回的配置数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例备份时间配置信息 */
-  Items: DBBackupTimeConfig[] | null;
+  Items?: DBBackupTimeConfig[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1397,9 +1397,9 @@ declare interface DescribeDBSecurityGroupsResponse {
   /** 安全组详情。 */
   Groups?: SecurityGroup[];
   /** 实例VIP。 */
-  VIP?: string | null;
+  VIP?: string;
   /** 实例端口。 */
-  VPort?: string | null;
+  VPort?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

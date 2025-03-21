@@ -13,39 +13,39 @@ declare interface Aggregation {
   /** 内存排序次数。 */
   SortCount?: number;
   /** 慢查模板概览。 */
-  SlowLogs?: string[] | null;
+  SlowLogs?: string[];
 }
 
 /** 通知模板 */
 declare interface AlarmProfileList {
   /** 0-不是 1-是 */
-  IsWebHook?: number | null;
+  IsWebHook?: number;
   /** 接收告警用户数量 */
-  ReceiveUinCount?: number | null;
+  ReceiveUinCount?: number;
   /** 语言 */
-  Lang?: string | null;
+  Lang?: string;
   /** 模板类型 */
-  TemplateType?: string | null;
+  TemplateType?: string;
   /** 备注 */
-  Remark?: string | null;
+  Remark?: string;
   /** 接收组数量 */
-  ReceiveGroupCount?: number | null;
+  ReceiveGroupCount?: number;
   /** 更新用户的uin */
-  UpdateUin?: number | null;
+  UpdateUin?: number;
   /** 接收类型 */
-  ReceiveType?: number[] | null;
+  ReceiveType?: number[];
   /** 接收用户信息 */
-  ReceiveInfo?: ReceiveInfo[] | null;
+  ReceiveInfo?: ReceiveInfo[];
   /** 更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 模板名 */
-  TemplateName?: string | null;
+  TemplateName?: string;
   /** 发送渠道 */
-  SendChannel?: number[] | null;
+  SendChannel?: number[];
   /** 模板id */
-  TemplateId?: number | null;
+  TemplateId?: number;
   /** webhook数量 */
-  WebHookCount?: number | null;
+  WebHookCount?: number;
 }
 
 /** 告警规则 */
@@ -113,19 +113,19 @@ declare interface AuditInstanceInfo {
   /** 实例所在地域。 */
   Region?: string;
   /** 资源Tags。 */
-  ResourceTags?: string[] | null;
+  ResourceTags?: string[];
 }
 
 /** 审计日志文件 */
 declare interface AuditLogFile {
   /** 审计日志文件生成异步任务ID。 */
-  AsyncRequestId?: number | null;
+  AsyncRequestId?: number;
   /** 审计日志文件名称。 */
   FileName?: string;
   /** 审计日志文件创建时间。格式为 : "2019-03-20 17:09:13"。 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 文件状态值。可能返回的值为："creating" - 生成中;"failed" - 创建失败;"success" - 已生成; */
-  Status?: string | null;
+  Status?: string;
   /** 文件大小，单位为 KB。 */
   FileSize?: number;
   /** 审计日志下载地址。 */
@@ -615,17 +615,17 @@ declare interface ProfileInfo {
 /** 接收组信息 */
 declare interface ReceiveInfo {
   /** 接收组 */
-  ReceiveGroup?: number[] | null;
+  ReceiveGroup?: number[];
   /** 最后接收时间 */
-  EndReceiveTime?: string | null;
+  EndReceiveTime?: string;
   /** 接收名 */
-  ReceiveName?: string | null;
+  ReceiveName?: string;
   /** 推送渠道 */
-  SendChannel?: number[] | null;
+  SendChannel?: number[];
   /** 开始时间 */
-  StartReceiveTime?: string | null;
+  StartReceiveTime?: string;
   /** 接收用户列表 */
-  ReceiveUin?: ReceiveUin[] | null;
+  ReceiveUin?: ReceiveUin[];
 }
 
 /** 接收用户 */
@@ -781,25 +781,25 @@ declare interface ScoreItem {
 /** 安全审计日志导出任务信息 */
 declare interface SecLogExportTaskInfo {
   /** 异步任务Id。 */
-  AsyncRequestId: number;
+  AsyncRequestId?: number;
   /** 任务开始时间。 */
-  StartTime: string | null;
+  StartTime?: string;
   /** 任务结束时间。 */
-  EndTime: string | null;
+  EndTime?: string;
   /** 任务创建时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 任务状态。 */
-  Status: string;
+  Status?: string;
   /** 任务执行进度。 */
-  Progress: number;
+  Progress?: number;
   /** 导出日志开始时间。 */
-  LogStartTime: string | null;
+  LogStartTime?: string;
   /** 导出日志结束时间。 */
-  LogEndTime: string | null;
+  LogEndTime?: string;
   /** 日志文件总大小，单位KB。 */
-  TotalSize: number | null;
+  TotalSize?: number;
   /** 风险等级列表。0 无风险；1 低风险；2 中风险；3 高风险。 */
-  DangerLevels: number[] | null;
+  DangerLevels?: number[];
 }
 
 /** 实时会话访问来源详情。 */
@@ -831,17 +831,17 @@ declare interface SlowLogInfoItem {
   /** 数据库 */
   Database?: string;
   /** User来源 */
-  UserName?: string | null;
+  UserName?: string;
   /** IP来源 */
-  UserHost?: string | null;
+  UserHost?: string;
   /** 执行时间,单位秒 */
   QueryTime?: number;
   /** 锁时间,单位秒 */
-  LockTime?: number | null;
+  LockTime?: number;
   /** 扫描行数 */
-  RowsExamined?: number | null;
+  RowsExamined?: number;
   /** 返回行数 */
-  RowsSent?: number | null;
+  RowsSent?: number;
 }
 
 /** 慢日志TopSql */
@@ -919,21 +919,21 @@ declare interface StatDimension {
 /** 统计分析维度下的统计数据详情 */
 declare interface StatisticDataInfo {
   /** 统计维度的值。 */
-  Name?: string | null;
+  Name?: string;
   /** 平均时间。 */
-  TimeAvg?: number | null;
+  TimeAvg?: number;
   /** 总时间。 */
-  TimeSum?: number | null;
+  TimeSum?: number;
   /** 数量。 */
-  Count?: number | null;
+  Count?: number;
 }
 
 /** sql会话统计信息 */
 declare interface StatisticInfo {
   /** 统计分析的维度。 */
-  Dimension?: string | null;
+  Dimension?: string;
   /** 统计分析的维度下的统计数据详情。 */
-  Data?: StatisticDataInfo[] | null;
+  Data?: StatisticDataInfo[];
 }
 
 /** 表结构。 */
@@ -1045,13 +1045,13 @@ declare interface TopHotKeys {
 /** 用户配置的相关信息，包括邮件配置。 */
 declare interface UserProfile {
   /** 配置的id。 */
-  ProfileId?: string | null;
+  ProfileId?: string;
   /** 配置类型，支持值包括："dbScan_mail_configuration" - 数据库巡检邮件配置，"scheduler_mail_configuration" - 定期生成邮件配置。 */
-  ProfileType?: string | null;
+  ProfileType?: string;
   /** 配置级别，支持值包括："User" - 用户级别，"Instance" - 实例级别，其中数据库巡检邮件配置为用户级别，定期生成邮件配置为实例级别。 */
-  ProfileLevel?: string | null;
+  ProfileLevel?: string;
   /** 配置名称。 */
-  ProfileName?: string | null;
+  ProfileName?: string;
   /** 配置详情。 */
   ProfileInfo?: ProfileInfo;
 }
@@ -2904,25 +2904,25 @@ declare namespace V20191016 {
   /** 安全审计日志导出任务信息 */
   interface SecLogExportTaskInfo {
     /** 异步任务Id。 */
-    AsyncRequestId: number;
+    AsyncRequestId?: number;
     /** 任务开始时间。 */
-    StartTime: string | null;
+    StartTime?: string;
     /** 任务结束时间。 */
-    EndTime: string | null;
+    EndTime?: string;
     /** 任务创建时间。 */
-    CreateTime: string;
+    CreateTime?: string;
     /** 任务状态。 */
-    Status: string;
+    Status?: string;
     /** 任务执行进度。 */
-    Progress: number;
+    Progress?: number;
     /** 导出日志开始时间。 */
-    LogStartTime: string | null;
+    LogStartTime?: string;
     /** 导出日志结束时间。 */
-    LogEndTime: string | null;
+    LogEndTime?: string;
     /** 日志文件总大小，单位KB。 */
-    TotalSize: number | null;
+    TotalSize?: number;
     /** 风险等级列表。0 无风险；1 低风险；2 中风险；3 高风险。 */
-    DangerLevels: number[] | null;
+    DangerLevels?: number[];
   }
 
   /** 慢日志来源地址详情。 */
@@ -3046,13 +3046,13 @@ declare namespace V20191016 {
   /** 用户配置的相关信息，包括邮件配置。 */
   interface UserProfile {
     /** 配置的id。 */
-    ProfileId?: string | null;
+    ProfileId?: string;
     /** 配置类型。 */
-    ProfileType?: string | null;
+    ProfileType?: string;
     /** 配置级别，"User"或"Instance"。 */
-    ProfileLevel?: string | null;
+    ProfileLevel?: string;
     /** 配置名称。 */
-    ProfileName?: string | null;
+    ProfileName?: string;
     /** 配置详情。 */
     ProfileInfo?: ProfileInfo;
   }
