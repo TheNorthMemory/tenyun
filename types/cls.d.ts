@@ -1079,17 +1079,17 @@ declare interface MachineGroupInfo {
   /** 创建时间 */
   CreateTime?: string;
   /** 机器组绑定的标签列表 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
   /** 是否开启机器组自动更新 */
-  AutoUpdate?: string | null;
+  AutoUpdate?: string;
   /** 升级开始时间，建议业务低峰期升级LogListener */
-  UpdateStartTime?: string | null;
+  UpdateStartTime?: string;
   /** 升级结束时间，建议业务低峰期升级LogListener */
-  UpdateEndTime?: string | null;
+  UpdateEndTime?: string;
   /** 是否开启服务日志，用于记录因Loglistener 服务自身产生的log，开启后，会创建内部日志集cls_service_logging和日志主题loglistener_status,loglistener_alarm,loglistener_business，不产生计费 */
-  ServiceLogging?: boolean | null;
+  ServiceLogging?: boolean;
   /** 机器组中机器离线定期清理时间 */
-  DelayCleanupTime?: number | null;
+  DelayCleanupTime?: number;
   /** 机器组元数据信息列表 */
   MetaTags?: MetaTagInfo[];
   /** 操作系统类型，0: Linux，1: windows */
@@ -1109,7 +1109,7 @@ declare interface MachineInfo {
   /** 机器的IP */
   Ip?: string;
   /** 机器实例ID */
-  InstanceID?: string | null;
+  InstanceID?: string;
   /** 机器状态，0:异常，1:正常 */
   Status?: number;
   /** 机器离线时间，空为正常，异常返回具体时间 */
@@ -1137,9 +1137,9 @@ declare interface MetaTagInfo {
 /** 过滤器 */
 declare interface MetricLabel {
   /** 指标名称 */
-  Key: string | null;
+  Key: string;
   /** 指标内容 */
-  Value: string | null;
+  Value: string;
 }
 
 /** 告警策略中监控任务的执行时间点 */
@@ -1149,15 +1149,15 @@ declare interface MonitorTime {
   /** 执行的周期，或者定制执行的时间节点。单位为分钟，取值范围为1~1440。当type为`Period`,`Fixed`时，time字段生效。 */
   Time?: number;
   /** 执行的周期cron表达式。示例：`"1 * * * *"` 从左到右每个field的含义 Minutes field, Hours field,Day of month field,Month field,Day of week field， 不支持秒级别。当type为`Cron`时，CronExpression字段生效。 */
-  CronExpression?: string | null;
+  CronExpression?: string;
 }
 
 /** 多触发条件。 */
 declare interface MultiCondition {
   /** 触发条件。 */
-  Condition?: string | null;
+  Condition?: string;
   /** 告警级别。0:警告(Warn); 1:提醒(Info); 2:紧急 (Critical)。- 不填则默认为0。 */
-  AlarmLevel?: number | null;
+  AlarmLevel?: number;
 }
 
 /** 多日志主题检索相关信息 */
@@ -1173,41 +1173,41 @@ declare interface NoticeContent {
   /** 渠道类型Email:邮件;Sms:短信;WeChat:微信;Phone:电话;WeCom:企业微信;DingTalk:钉钉;Lark:飞书;Http:自定义回调; */
   Type: string;
   /** 告警触发通知内容模板。 */
-  TriggerContent?: NoticeContentInfo | null;
+  TriggerContent?: NoticeContentInfo;
   /** 告警恢复通知内容模板。 */
-  RecoveryContent?: NoticeContentInfo | null;
+  RecoveryContent?: NoticeContentInfo;
 }
 
 /** 通知模板内容 */
 declare interface NoticeContentInfo {
   /** 通知内容模板标题信息。部分通知渠道类型不支持“标题”，请参照腾讯云控制台页面。 */
-  Title?: string | null;
+  Title?: string;
   /** 通知内容模板正文信息。 */
-  Content?: string | null;
+  Content?: string;
   /** 请求头（Request Headers）：在HTTP请求中，请求头包含了客户端向服务器发送的附加信息，如用户代理、授权凭证、期望的响应格式等。仅“自定义回调”支持该配置。 */
-  Headers?: string[] | null;
+  Headers?: string[];
 }
 
 /** 通知内容模板信息 */
 declare interface NoticeContentTemplate {
   /** 通知内容模板ID。 */
-  NoticeContentId?: string | null;
+  NoticeContentId?: string;
   /** 通知内容模板名称 */
-  Name?: string | null;
+  Name?: string;
   /** 语言类型。0： 中文1： 英文 */
-  Type?: number | null;
+  Type?: number;
   /** 通知内容模板信息。 */
-  NoticeContents?: NoticeContent[] | null;
+  NoticeContents?: NoticeContent[];
   /** 通知内容模板标记。0： 用户自定义1： 系统内置 */
-  Flag?: number | null;
+  Flag?: number;
   /** 创建者主账号。 */
-  Uin?: number | null;
+  Uin?: number;
   /** 创建/修改者子账号。 */
-  SubUin?: number | null;
+  SubUin?: number;
   /** 创建时间 秒级时间戳。 */
-  CreateTime?: number | null;
+  CreateTime?: number;
   /** 更新时间 秒级时间戳。 */
-  UpdateTime?: number | null;
+  UpdateTime?: number;
 }
 
 /** 告警通知接收者信息 */
@@ -1219,7 +1219,7 @@ declare interface NoticeReceiver {
   /** 通知接收渠道。- Email - 邮件- Sms - 短信- WeChat - 微信- Phone - 电话 */
   ReceiverChannels: string[];
   /** 通知内容模板ID，使用Default-zh引用默认模板（中文），使用Default-en引用DefaultTemplate(English)。 */
-  NoticeContentId?: string | null;
+  NoticeContentId?: string;
   /** 允许接收信息的开始时间。格式：`15:04:05`。必填 */
   StartTime?: string;
   /** 允许接收信息的结束时间。格式：`15:04:05`。必填 */
@@ -1231,19 +1231,19 @@ declare interface NoticeReceiver {
 /** 通知规则 */
 declare interface NoticeRule {
   /** 匹配规则 JSON串。**rule规则树格式为嵌套结构体JSON字符串**`{"Value":"AND","Type":"Operation","Children":[{"Value":"OR","Type":"Operation","Children":[{"Type":"Condition","Value":"Level","Children":[{"Value":"In","Type":"Compare"},{"Value":"[1,0]","Type":"Value"}]},{"Type":"Condition","Value":"Level","Children":[{"Value":"NotIn","Type":"Compare"},{"Value":"[2]","Type":"Value"}]}]}]}`**rule规则树限制规则如下**：- 顶层rule中Type可取值：`Condition`，`Operation`- Type为`Operation`的子节点支持的Type可取值：`Condition`，`Operation`- Type为`Condition`的子节点支持的Type可取值：`String`，`Compare`，`Array`，`TimeRange`，`Value`，`Key`- 其他Type无子节点- 当rule Type为`Operation`时，value可取值：`AND`，`OR`- 当rule Type为`Condition`时，value不可为空，子节点个数不能小于2 - 当子节点Type为 `Compare` 时，value可取值：`>`，`<`，`>=`，`<=`，`=`，`!=`，`Between`，`NotBetween`，`=~`，`!=~`，`In`，`NotIn` - value为`Between`，`NotBetween`时，下一个子节点value必须是长度为2的数组 - value为`=~`，`!=~`时，下一个子节点value必须是一个正则表达式 - value为`In`，`NotIn`时， 下一个子节点value必须是一个数组**业务参数含义**：- Type：Condition 表示是规则条件，Value：Level 表示告警等级 - 子节点Type支持`Compare`，Value支持`In`，`NotIn` - 下一个子节点value支持的值：0（警告），1（提醒），2 （紧急）以下示例表示：告警等级属于提醒`{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"Level\",\"Children\":[{\"Value\":\"In\",\"Type\":\"Compare\"},{\"Value\":\"[1]\",\"Type\":\"Value\"}]}]}`- Type：Condition 表示是规则条件，Value：NotifyType 表示通知类型 - 子节点Type支持`Compare`，Value支持`In`，`NotIn` - 下一个子节点value支持的值：1（告警通知），2 （恢复通知）以下示例表示：通知类型属于告警通知或通知类型不属于恢复通知`{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"NotifyType\",\"Children\":[{\"Value\":\"In\",\"Type\":\"Compare\"},{\"Value\":\"[1]\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"NotifyType\",\"Children\":[{\"Value\":\"NotIn\",\"Type\":\"Compare\"},{\"Value\":\"[2]\",\"Type\":\"Value\"}]}]}]}`- Type：Condition 表示是规则条件，Value：AlarmID 表示告警策略 - 子节点Type支持`Compare`，Value支持`In`，`NotIn` - 下一个子节点value支持的值：告警策略id数组以下示例表示：告警策略属于alarm-53af048c-254b-4c73-bb48-xxx,alarm-6dfa8bc5-08da-4d64-b6cb-xxx或告警策略不属于alarm-1036314c-1e49-4cee-a8fb-xxx`"{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"AlarmID\",\"Children\":[{\"Value\":\"In\",\"Type\":\"Compare\"},{\"Value\":\"[\\\"alarm-53af048c-254b-4c73-bb48-xxx\\\",\\\"alarm-6dfa8bc5-08da-4d64-b6cb-xxx\\\"]\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"AlarmID\",\"Children\":[{\"Value\":\"NotIn\",\"Type\":\"Compare\"},{\"Value\":\"[\\\"alarm-1036314c-1e49-4cee-a8fb-xxx\\\"]\",\"Type\":\"Value\"}]}]}]}"`- Type：Condition 表示是规则条件，Value：AlarmName 表示告警策略名称 - 子节点Type支持`Compare`，Value支持`=~`，`!=~` - 下一个子节点value支持的值：必须是正则表达式以下示例表示：告警策略名称正则匹配^test$或告警策略名称正则不匹配^hahaha$`{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"AlarmName\",\"Children\":[{\"Value\":\"=~\",\"Type\":\"Compare\"},{\"Value\":\"^test$\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"AlarmName\",\"Children\":[{\"Value\":\"!=~\",\"Type\":\"Compare\"},{\"Value\":\"^hahaha$\",\"Type\":\"Value\"}]}]}]}`- Type：Condition 表示是规则条件，Value：Label 表示告警分类字段 - 子节点Type支持`Compare`，Value支持`In`，`NotIn`，`=~`，`!=~` - 下一个子节点value支持的值：`In`，`NotIn` 时value是数组，`=~`，`!=~`时value是正则表达式以下示例表示：告警分类字段key1属于v1或告警分类字段key2不属于v2或告警分类字段key3正则匹配^test$或告警分类字段key4正则不匹配^hahaha$`{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"Label\",\"Children\":[{\"Value\":\"key1\",\"Type\":\"Key\"},{\"Value\":\"In\",\"Type\":\"Compare\"},{\"Value\":\"[\\\"v1\\\"]\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Label\",\"Children\":[{\"Value\":\"key2\",\"Type\":\"Key\"},{\"Value\":\"NotIn\",\"Type\":\"Compare\"},{\"Value\":\"[\\\"v2\\\"]\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Label\",\"Children\":[{\"Value\":\"key3\",\"Type\":\"Key\"},{\"Value\":\"=~\",\"Type\":\"Compare\"},{\"Value\":\"^test$\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Label\",\"Children\":[{\"Value\":\"key4\",\"Type\":\"Key\"},{\"Value\":\"!=~\",\"Type\":\"Compare\"},{\"Value\":\"^hahaha$\",\"Type\":\"Value\"}]}]}]}`- Type：Condition 表示是规则条件，Value：NotifyTime 表示通知时间 - 子节点Type支持`Compare`，Value支持`Between `，`NotBetween ` - 下一个子节点value支持的值：长度为2，格式为`14:20:36`的字符串数组以下示例表示：通知时间在指定范围内14:18:36至14:33:36或通知时间不在指定范围内14:20:36至14:30:36`{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"NotifyTime\",\"Children\":[{\"Value\":\"Between\",\"Type\":\"Compare\"},{\"Value\":\"[\\\"14:18:36\\\",\\\"14:33:36\\\"]\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"NotifyTime\",\"Children\":[{\"Value\":\"NotBetween\",\"Type\":\"Compare\"},{\"Value\":\"[\\\"14:20:36\\\",\\\"14:30:36\\\"]\",\"Type\":\"Value\"}]}]}]}`- Type：Condition 表示是规则条件，Value：Duration 表示告警持续时间 - 子节点Type支持`Compare`，Value支持`>`，`<`，`>=`，`<=` - 下一个子节点value支持的值：整型值单位分钟以下示例表示：告警持续时间大于1分钟或告警持续时间大于等于2分钟或告警持续时间小于3分钟或告警持续时间小于等于4分钟`{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"Duration\",\"Children\":[{\"Value\":\">\",\"Type\":\"Compare\"},{\"Value\":1,\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Duration\",\"Children\":[{\"Value\":\">=\",\"Type\":\"Compare\"},{\"Value\":2,\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Duration\",\"Children\":[{\"Value\":\"<\",\"Type\":\"Compare\"},{\"Value\":3,\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Duration\",\"Children\":[{\"Value\":\"<=\",\"Type\":\"Compare\"},{\"Value\":4,\"Type\":\"Value\"}]}]}]}` */
-  Rule?: string | null;
+  Rule?: string;
   /** 告警通知接收者信息。 */
-  NoticeReceivers?: NoticeReceiver[] | null;
+  NoticeReceivers?: NoticeReceiver[];
   /** 告警通知模板回调信息，包括企业微信、钉钉、飞书。 */
-  WebCallbacks?: WebCallback[] | null;
+  WebCallbacks?: WebCallback[];
   /** 告警升级开关。`true`：开启告警升级、`false`：关闭告警升级，默认：false */
-  Escalate?: boolean | null;
+  Escalate?: boolean;
   /** 告警升级条件。`1`：无人认领且未恢复、`2`：未恢复，默认为1- 无人认领且未恢复：告警没有恢复并且没有人认领则升级- 未恢复：当前告警持续未恢复则升级 */
-  Type?: number | null;
+  Type?: number;
   /** 告警升级间隔。单位：分钟，范围`[1，14400]` */
-  Interval?: number | null;
+  Interval?: number;
   /** 告警升级后下一个环节的通知渠道配置 */
-  EscalateNotice?: EscalateNoticeInfo | null;
+  EscalateNotice?: EscalateNoticeInfo;
 }
 
 /** Parquet内容 */
@@ -1259,7 +1259,7 @@ declare interface ParquetKeyInfo {
   /** 数据类型，目前支持6种类型：string、boolean、int32、int64、float、double */
   KeyType: string;
   /** 解析失败赋值信息 */
-  KeyNonExistingField: string | null;
+  KeyNonExistingField: string;
 }
 
 /** 日志主题分区信息 */
@@ -1379,9 +1379,9 @@ declare interface ScheduledSqlTaskInfo {
   /** 源topicId的地域信息 */
   SrcTopicRegion?: string;
   /** 语法规则，0：Lucene语法，1：CQL语法 */
-  SyntaxRule?: number | null;
+  SyntaxRule?: number;
   /** 是否开启投递服务日志。1：关闭，2：开启。 */
-  HasServicesLog?: number | null;
+  HasServicesLog?: number;
 }
 
 /** 多日志主题检索错误信息 */
@@ -1431,29 +1431,29 @@ declare interface ShipperInfo {
   /** 是否生效 */
   Status?: boolean;
   /** 投递日志的过滤规则 */
-  FilterRules?: FilterRuleInfo[] | null;
+  FilterRules?: FilterRuleInfo[];
   /** 投递日志的分区规则，支持strftime的时间格式表示 */
   Partition?: string;
   /** 投递日志的压缩配置 */
-  Compress?: CompressInfo | null;
+  Compress?: CompressInfo;
   /** 投递日志的内容格式配置 */
-  Content?: ContentInfo | null;
+  Content?: ContentInfo;
   /** 投递日志的创建时间 */
   CreateTime?: string;
   /** 投递文件命名配置，0：随机数命名，1：投递时间命名，默认0（随机数命名） */
-  FilenameMode?: number | null;
+  FilenameMode?: number;
   /** 投递数据范围的开始时间点 */
-  StartTime?: number | null;
+  StartTime?: number;
   /** 投递数据范围的结束时间点 */
-  EndTime?: number | null;
+  EndTime?: number;
   /** 历史数据投递的进度（仅当用户选择的数据内中历史数据时才有效） */
-  Progress?: number | null;
+  Progress?: number;
   /** 历史数据全部投递完成剩余的时间（仅当用户选择的数据中有历史数据时才有效） */
-  RemainTime?: number | null;
+  RemainTime?: number;
   /** 历史任务状态：0：实时任务1：任务准备中2：任务运行中3：任务运行异常4：任务运行结束 */
-  HistoryStatus?: number | null;
+  HistoryStatus?: number;
   /** cos桶类型 */
-  StorageType?: string | null;
+  StorageType?: string;
 }
 
 /** 投递任务信息 */
@@ -1531,7 +1531,7 @@ declare interface TopicInfo {
   /** 云产品二级标识，日志主题由其它云产品创建时，该字段会显示云产品名称及其日志类型的二级分类，例如TKE-Audit、TKE-Event。部分云产品仅有云产品标识(AssumerName)，无该字段。 */
   SubAssumerName?: string;
   /** 主题描述 */
-  Describes?: string | null;
+  Describes?: string;
   /** 开启日志沉降，标准存储的生命周期， hotPeriod < Period。标准存储为 hotPeriod, 低频存储则为 Period-hotPeriod。（主题类型需为日志主题）HotPeriod=0为没有开启日志沉降。 */
   HotPeriod?: number;
   /** 主题类型。- 0: 日志主题 - 1: 指标主题 */
@@ -1539,7 +1539,7 @@ declare interface TopicInfo {
   /** 免鉴权开关。 false：关闭； true：开启。开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。 */
   IsWebTracking?: boolean;
   /** 日志主题扩展信息 */
-  Extends?: TopicExtendInfo | null;
+  Extends?: TopicExtendInfo;
   /** 异步迁移任务ID */
   TopicAsyncTaskID?: string;
   /** 异步迁移状态 */
@@ -1567,19 +1567,19 @@ declare interface WebCallback {
   /** 回调地址，最大支持1024个字节。也可使用WebCallbackId引用集成配置中的URL，此时该字段请填写为空字符串。 */
   Url: string;
   /** 集成配置ID。 */
-  WebCallbackId?: string | null;
+  WebCallbackId?: string;
   /** 回调方法。可选值：- POST（默认值）- PUT注意：- 参数CallbackType为Http时为必选，其它回调方式无需填写。 */
-  Method?: string | null;
+  Method?: string;
   /** 通知内容模板ID，使用Default-zh引用默认模板（中文），使用Default-en引用DefaultTemplate(English)。 */
-  NoticeContentId?: string | null;
+  NoticeContentId?: string;
   /** 提醒类型。0：不提醒；1：指定人；2：所有人 */
-  RemindType?: number | null;
+  RemindType?: number;
   /** 电话列表。 */
-  Mobiles?: string[] | null;
+  Mobiles?: string[];
   /** 用户ID列表。 */
-  UserIds?: string[] | null;
+  UserIds?: string[];
   /** 该参数已废弃，请使用NoticeContentId。 */
-  Headers?: string[] | null;
+  Headers?: string[];
   /** 该参数已废弃，请使用NoticeContentId。 */
   Body?: string | null;
   /** 序号。- 入参无效。- 出参有效。 */

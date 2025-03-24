@@ -446,11 +446,11 @@ declare interface DescribeGeneralOTSpanListResponse {
 
 declare interface DescribeGeneralSpanListRequest {
   /** 业务系统 ID */
-  InstanceId?: string;
+  InstanceId: string;
   /** Span 查询开始时间戳（单位：秒） */
-  StartTime?: number;
+  StartTime: number;
   /** Span 查询结束时间戳（单位：秒） */
-  EndTime?: number;
+  EndTime: number;
   /** 通用过滤参数 */
   Filters?: Filter[];
   /** 排序现支持的 Key 有：- startTime(开始时间)- endTime(结束时间)- duration(响应时间)现支持的 Value 有：- desc(降序排序)- asc(升序排序) */
@@ -473,20 +473,20 @@ declare interface DescribeGeneralSpanListResponse {
 }
 
 declare interface DescribeMetricRecordsRequest {
+  /** 业务系统 ID */
+  InstanceId: string;
   /** 指标列表 */
   Metrics: QueryMetricItem[];
-  /** 业务系统 ID */
-  InstanceId?: string;
   /** 开始时间（单位为秒） */
-  StartTime?: number;
+  StartTime: number;
   /** 结束时间（单位为秒） */
-  EndTime?: number;
+  EndTime: number;
+  /** 聚合维度 */
+  GroupBy: string[];
   /** 过滤条件 */
   Filters?: Filter[];
   /** Or 过滤条件 */
   OrFilters?: Filter[];
-  /** 聚合维度 */
-  GroupBy?: string[];
   /** 排序现支持的 Key 有：- startTime(开始时间)- endTime(结束时间)- duration(响应时间)现支持的 Value 有：- desc(降序排序)- asc(升序排序) */
   OrderBy?: OrderBy;
   /** 业务名称，控制台用户请填写taw。 */
@@ -517,14 +517,14 @@ declare interface DescribeServiceOverviewRequest {
   InstanceId: string;
   /** 指标列表 */
   Metrics: QueryMetricItem[];
+  /** 开始时间（单位：秒） */
+  StartTime: number;
+  /** 结束时间（单位：秒） */
+  EndTime: number;
   /** 聚合维度 */
   GroupBy: string[];
   /** 过滤条件 */
   Filters?: Filter[];
-  /** 开始时间（单位：秒） */
-  StartTime?: number;
-  /** 结束时间（单位：秒） */
-  EndTime?: number;
   /** 排序方式Value 填写：- asc：对查询指标进行升序排序- desc：对查询指标进行降序排序 */
   OrderBy?: OrderBy;
   /** 每页大小 */
@@ -546,9 +546,9 @@ declare interface DescribeTagValuesRequest {
   /** 维度名 */
   TagKey: string;
   /** 开始时间（单位为秒） */
-  StartTime?: number;
+  StartTime: number;
   /** 结束时间（单位为秒） */
-  EndTime?: number;
+  EndTime: number;
   /** 过滤条件 */
   Filters?: Filter[];
   /** Or 过滤条件 */
@@ -662,7 +662,7 @@ declare interface Apm {
   /** 通用查询 OpenTelemetry 调用链列表 {@link DescribeGeneralOTSpanListRequest} {@link DescribeGeneralOTSpanListResponse} */
   DescribeGeneralOTSpanList(data: DescribeGeneralOTSpanListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralOTSpanListResponse>;
   /** 通用查询调用链列表 {@link DescribeGeneralSpanListRequest} {@link DescribeGeneralSpanListResponse} */
-  DescribeGeneralSpanList(data?: DescribeGeneralSpanListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralSpanListResponse>;
+  DescribeGeneralSpanList(data: DescribeGeneralSpanListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralSpanListResponse>;
   /** 通用指标列表接口 {@link DescribeMetricRecordsRequest} {@link DescribeMetricRecordsResponse} */
   DescribeMetricRecords(data: DescribeMetricRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMetricRecordsResponse>;
   /** 获取应用概览数据 {@link DescribeServiceOverviewRequest} {@link DescribeServiceOverviewResponse} */

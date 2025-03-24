@@ -41,7 +41,7 @@ declare interface ClusterActivity {
   /** 集群活动状态。取值范围：PENDING：等待运行RUNNING：运行中SUCCESSFUL：活动成功PARTIALLY_SUCCESSFUL：活动部分成功FAILED：活动失败 */
   ActivityStatus?: string;
   /** 集群活动状态码。 */
-  ActivityStatusCode?: string | null;
+  ActivityStatusCode?: string;
   /** 集群活动结果详情。 */
   ResultDetail?: string | null;
   /** 集群活动起因。 */
@@ -51,9 +51,9 @@ declare interface ClusterActivity {
   /** 集群活动相关节点活动集合。 */
   RelatedNodeActivitySet?: NodeActivity[];
   /** 集群活动开始时间。 */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 集群活动结束时间。 */
-  EndTime?: string | null;
+  EndTime?: string;
 }
 
 /** 集群概览信息。 */
@@ -71,7 +71,7 @@ declare interface ClusterOverview {
   /** 集群调度器。 */
   SchedulerType?: string;
   /** 集群调度器版本。 */
-  SchedulerVersion?: string | null;
+  SchedulerVersion?: string;
   /** 计算节点数量。 */
   ComputeNodeCount?: number;
   /** 计算节点概览。 */
@@ -213,9 +213,9 @@ declare interface GooseFSxOption {
 /** GooseFSx存储选项概览信息。 */
 declare interface GooseFSxOptionOverview {
   /** 文件系统master的ip和端口列表。 */
-  Masters?: string[] | null;
+  Masters?: string[];
   /** 文件系统的本地挂载路径。GooseFSx目前只支持挂载在/goosefsx/{文件系统ID}_proxy/目录下。 */
-  LocalPath?: string | null;
+  LocalPath?: string;
 }
 
 /** 描述了实例的计费模式 */
@@ -1074,7 +1074,7 @@ declare namespace V20220401 {
     /** 集群活动状态。取值范围：PENDING：等待运行RUNNING：运行中SUCCESSFUL：活动成功PARTIALLY_SUCCESSFUL：活动部分成功FAILED：活动失败 */
     ActivityStatus?: string;
     /** 集群活动状态码。 */
-    ActivityStatusCode?: string | null;
+    ActivityStatusCode?: string;
     /** 集群活动结果详情。 */
     ResultDetail?: string | null;
     /** 集群活动起因。 */
@@ -1084,9 +1084,9 @@ declare namespace V20220401 {
     /** 集群活动相关节点活动集合。 */
     RelatedNodeActivitySet?: NodeActivity[];
     /** 集群活动开始时间。 */
-    StartTime?: string | null;
+    StartTime?: string;
     /** 集群活动结束时间。 */
-    EndTime?: string | null;
+    EndTime?: string;
   }
 
   /** 集群概览信息。 */

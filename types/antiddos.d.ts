@@ -856,18 +856,6 @@ declare interface Layer7Rule {
   Vport?: number;
 }
 
-/** 域名与协议纬度的CC防护阈值 */
-declare interface ListenerCcThreholdConfig {
-  /** 域名 */
-  Domain: string;
-  /** 协议（可取值https） */
-  Protocol: string;
-  /** 开关状态（0：关闭，1：开启） */
-  CCEnable: number;
-  /** cc防护阈值 */
-  CCThreshold: number;
-}
-
 /** L7规则 */
 declare interface NewL7RuleEntry {
   /** 转发协议，取值[http, https] */
@@ -1030,44 +1018,6 @@ declare interface PortSegment {
   EndPort: number;
 }
 
-/** 防护阈值配置相关信息 */
-declare interface ProtectThresholdRelation {
-  /** DDoS防护等级，取值[low(宽松)middle(适中)high(严格)] */
-  DDoSLevel: string;
-  /** DDoS清洗阈值，单位Mbps */
-  DDoSThreshold: number;
-  /** DDoS的AI防护开关，取值[on(开启)off(关闭)] */
-  DDoSAI: string;
-  /** CC清洗开关，取值[0(关闭)1(开启)] */
-  CCEnable: number;
-  /** CC清洗阈值，单位QPS */
-  CCThreshold: number;
-  /** 所属的资源实例 */
-  InstanceDetailList: InstanceRelation[];
-  /** 域名与协议纬度的防护阈值 */
-  ListenerCcThresholdList: ListenerCcThreholdConfig[];
-  /** SYN FLOOD流量阈值 */
-  SynFloodThreshold: number | null;
-  /** SYN FLOOD包量阈值 */
-  SynFloodPktThreshold: number | null;
-  /** UDP FLOOD流量阈值 */
-  UdpFloodThreshold: number | null;
-  /** UDP FLOOD包量阈值 */
-  UdpFloodPktThreshold: number | null;
-  /** ACK FLOOD流量阈值 */
-  AckFloodThreshold: number | null;
-  /** ACK FLOOD包量阈值 */
-  AckFloodPktThreshold: number | null;
-  /** SYNACK FLOOD流量阈值 */
-  SynAckFloodThreshold: number | null;
-  /** SYNACK FLOOD包量阈值 */
-  SynAckFloodPktThreshold: number | null;
-  /** RST FLOOD流量阈值 */
-  RstFloodThreshold: number | null;
-  /** RST FLOOD包量阈值 */
-  RstFloodPktThreshold: number | null;
-}
-
 /** 协议封禁配置 */
 declare interface ProtocolBlockConfig {
   /** TCP封禁，取值[0(封禁关)，1(封禁开)] */
@@ -1129,21 +1079,21 @@ declare interface RuleInstanceRelation {
 /** 调度域名信息 */
 declare interface SchedulingDomainInfo {
   /** 调度域名 */
-  Domain: string;
+  Domain?: string;
   /** 线路IP列表 */
-  LineIPList: IPLineInfo[];
+  LineIPList?: IPLineInfo[];
   /** 调度方式，当前仅支持优先级的方式，取值[priority] */
-  Method: string;
+  Method?: string;
   /** 调度域名解析记录的TTL值 */
-  TTL: number;
+  TTL?: number;
   /** 运行状态，取值[0：未运行1：运行中2：运行异常] */
-  Status: number;
+  Status?: number;
   /** 创建时间 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 最后修改时间 */
-  ModifyTime: string;
+  ModifyTime?: string;
   /** 域名名称 */
-  UsrDomainName: string | null;
+  UsrDomainName?: string | null;
 }
 
 /** 源站信息 */
@@ -1922,20 +1872,6 @@ declare interface DescribeBizTrendResponse {
   RequestId?: string;
 }
 
-declare interface DescribeBlackWhiteIpListRequest {
-  /** 资源实例ID */
-  InstanceId: string;
-}
-
-declare interface DescribeBlackWhiteIpListResponse {
-  /** 黑名单IP列表 */
-  BlackIpList: string[];
-  /** 白名单IP列表 */
-  WhiteIpList: string[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeCCLevelListRequest {
   /** DDoS防护子产品代号（bgp-multip表示高防包） */
   Business: string;
@@ -2508,30 +2444,6 @@ declare interface DescribeListPortAclListResponse {
   Total: number;
   /** 端口acl策略 */
   AclList: AclConfigRelation[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeListProtectThresholdConfigRequest {
-  /** 页起始偏移，取值为(页码-1)*一页条数 */
-  Offset: number;
-  /** 一页条数，当Limit=0时，默认一页条数为100;最大取值为100 */
-  Limit: number;
-  /** 资源实例ID搜索, 支持资源实例前缀通配搜索，例如bgp-*表示获取高防包类型的资源实例 */
-  FilterInstanceId: string;
-  /** IP搜索 */
-  FilterIp?: string;
-  /** 域名搜索(查询域名与协议的CC防护阈值时使用） */
-  FilterDomain?: string;
-  /** 协议搜索(查询域名与协议的CC防护阈值时使用） */
-  FilterProtocol?: string;
-}
-
-declare interface DescribeListProtectThresholdConfigResponse {
-  /** 总记录数 */
-  Total: number;
-  /** 防护阈值配置列表 */
-  ConfigList: ProtectThresholdRelation[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3149,8 +3061,6 @@ declare interface Antiddos {
   DescribeBizMonitorTrend(data: DescribeBizMonitorTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBizMonitorTrendResponse>;
   /** 获取高防IP业务流量曲线 {@link DescribeBizTrendRequest} {@link DescribeBizTrendResponse} */
   DescribeBizTrend(data: DescribeBizTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBizTrendResponse>;
-  /** @deprecated 获取DDoS防护的IP黑白名单 {@link DescribeBlackWhiteIpListRequest} {@link DescribeBlackWhiteIpListResponse} */
-  DescribeBlackWhiteIpList(data: DescribeBlackWhiteIpListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlackWhiteIpListResponse>;
   /** 获取CC防护等级列表 {@link DescribeCCLevelListRequest} {@link DescribeCCLevelListResponse} */
   DescribeCCLevelList(data: DescribeCCLevelListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCLevelListResponse>;
   /** 获取CC分级策略 {@link DescribeCCLevelPolicyRequest} {@link DescribeCCLevelPolicyResponse} */
@@ -3199,8 +3109,6 @@ declare interface Antiddos {
   DescribeListPacketFilterConfig(data: DescribeListPacketFilterConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListPacketFilterConfigResponse>;
   /** 获取DDoS防护的端口acl策略列表 {@link DescribeListPortAclListRequest} {@link DescribeListPortAclListResponse} */
   DescribeListPortAclList(data: DescribeListPortAclListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListPortAclListResponse>;
-  /** @deprecated 获取防护阈值配置列表 {@link DescribeListProtectThresholdConfigRequest} {@link DescribeListProtectThresholdConfigResponse} */
-  DescribeListProtectThresholdConfig(data: DescribeListProtectThresholdConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListProtectThresholdConfigResponse>;
   /** 获取DDoS防护的协议封禁配置列表 {@link DescribeListProtocolBlockConfigRequest} {@link DescribeListProtocolBlockConfigResponse} */
   DescribeListProtocolBlockConfig(data: DescribeListProtocolBlockConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListProtocolBlockConfigResponse>;
   /** 获取智能调度域名列表 {@link DescribeListSchedulingDomainRequest} {@link DescribeListSchedulingDomainResponse} */

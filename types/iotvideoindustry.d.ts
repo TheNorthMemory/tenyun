@@ -129,9 +129,9 @@ declare interface DeviceItem {
 /** 查询设备统计返回值 */
 declare interface DeviceMonitorValue {
   /** 统计值 */
-  Value: number | null;
+  Value?: number;
   /** 统计时间 */
-  Time: number | null;
+  Time?: number;
 }
 
 /** 设备事件列表 */
@@ -239,19 +239,19 @@ declare interface GroupItem {
 /** 频道信息 */
 declare interface LiveChannelInfo {
   /** 频道ID */
-  LiveChannelId: string | null;
+  LiveChannelId?: string;
   /** 频道名称 */
-  LiveChannelName: string | null;
+  LiveChannelName?: string;
   /** 频道类型 */
-  LiveChannelType: number | null;
+  LiveChannelType?: number;
   /** 通道直播状态：1: 未推流，2: 推流中 */
-  LiveStatus: number | null;
+  LiveStatus?: number;
   /** 推流地址 */
-  PushStreamAddress: string | null;
+  PushStreamAddress?: string;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string;
   /** 修改时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string;
 }
 
 /** 直播频道详情 */
@@ -295,27 +295,27 @@ declare interface LiveRecordPlanItem {
 /** 消息转发配置信息 */
 declare interface MessageForward {
   /** 配置ID */
-  IntId: number | null;
+  IntId?: number;
   /** 用户Uin */
-  Uin: string | null;
+  Uin?: string;
   /** json数组， 转发类型 1: 告警 2:GPS */
-  MessageType: string | null;
+  MessageType?: string;
   /** 区域ID */
-  RegionId: string | null;
+  RegionId?: string;
   /** 区域名称 */
-  RegionName: string | null;
+  RegionName?: string;
   /** 实例ID */
-  Instance: string | null;
+  Instance?: string;
   /** 实例名称 */
-  InstanceName: string | null;
+  InstanceName?: string;
   /** kafka topic id */
-  TopicId: string | null;
+  TopicId?: string;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string;
   /** topic 名称 */
-  TopicName: string | null;
+  TopicName?: string;
 }
 
 /** 预置位结构出参 */
@@ -1173,9 +1173,9 @@ declare interface DescribeDeviceListRequest {
 
 declare interface DescribeDeviceListResponse {
   /** 设备总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 设备详细信息列表 */
-  Devices?: AllDeviceInfo[] | null;
+  Devices?: AllDeviceInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1333,9 +1333,9 @@ declare interface DescribeLiveChannelListRequest {
 
 declare interface DescribeLiveChannelListResponse {
   /** 频道总数 */
-  Total?: number | null;
+  Total?: number;
   /** 频道信息数组 */
-  LiveChannels?: LiveChannelInfo[] | null;
+  LiveChannels?: LiveChannelInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1489,9 +1489,9 @@ declare interface DescribeMessageForwardsRequest {
 
 declare interface DescribeMessageForwardsResponse {
   /** 配置总数 */
-  Total: number | null;
+  Total?: number;
   /** 配置列表 */
-  List: MessageForward[] | null;
+  List?: MessageForward[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

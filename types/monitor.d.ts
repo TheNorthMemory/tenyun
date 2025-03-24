@@ -1471,6 +1471,38 @@ declare namespace V20180724 {
     Value: string[];
   }
 
+  /** ModifyConditionsTemplateRequestCondition，Condition入参字段值 */
+  interface ModifyConditionsTemplateRequestCondition {
+    /** 统计周期 */
+    CalcPeriod: string;
+    /** 统计方式 */
+    CalcType: string;
+    /** 持续周期 */
+    ContinuePeriod: string;
+    /** 指标ID */
+    MetricID: number;
+    /** 统计值 */
+    CalcValue: string;
+    /** 告警通知周期 */
+    AlarmNotifyPeriod?: string;
+    /** 告警通知方式 */
+    AlarmNotifyType?: number;
+    /** 规则ID */
+    RuleID?: number;
+  }
+
+  /** ModifyConditionsTemplateRequestEventCondition */
+  interface ModifyConditionsTemplateRequestEventCondition {
+    /** 告警通知周期 */
+    AlarmNotifyPeriod: string;
+    /** 告警通知方式 */
+    AlarmNotifyType: string;
+    /** 事件ID */
+    EventID: string;
+    /** 规则ID */
+    RuleID?: number;
+  }
+
   /** 修改告警策略组传入的指标阈值条件 */
   interface ModifyPolicyGroupCondition {
     /** 指标id */
@@ -2689,6 +2721,36 @@ declare namespace V20180724 {
   interface CreateAlertRuleResponse {
     /** 规则 ID */
     RuleId?: string | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface CreateConditionsTemplateRequest {
+    /** 固定值，monitor */
+    Module: string;
+    /** 视图名 */
+    ViewName: string;
+    /** 组名 */
+    GroupName: string;
+    /** 是否为与关系 */
+    IsUnionRule?: number;
+    /** 备注 */
+    Remark?: string;
+    /** 父ID */
+    ParentGroupID?: number;
+    /** 是否屏蔽 */
+    IsShielded?: number;
+    /** 复合告警表达式 */
+    ComplexExpression?: string;
+    /** 指标告警条件 */
+    Conditions?: ModifyConditionsTemplateRequestCondition[];
+    /** 事件告警条件 */
+    EventConditions?: ModifyConditionsTemplateRequestEventCondition[];
+  }
+
+  interface CreateConditionsTemplateResponse {
+    /** 模板策略组ID */
+    GroupID?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5511,6 +5573,8 @@ declare interface Monitor {
   CreateAlarmShield(data: V20180724.CreateAlarmShieldRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CreateAlarmShieldResponse>;
   /** 创建告警规则 {@link V20180724.CreateAlertRuleRequest} {@link V20180724.CreateAlertRuleResponse} */
   CreateAlertRule(data: V20180724.CreateAlertRuleRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CreateAlertRuleResponse>;
+  /** 创建告警条件模板 {@link V20180724.CreateConditionsTemplateRequest} {@link V20180724.CreateConditionsTemplateResponse} */
+  CreateConditionsTemplate(data: V20180724.CreateConditionsTemplateRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CreateConditionsTemplateResponse>;
   /** 创建 exporter 集成 {@link V20180724.CreateExporterIntegrationRequest} {@link V20180724.CreateExporterIntegrationResponse} */
   CreateExporterIntegration(data: V20180724.CreateExporterIntegrationRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CreateExporterIntegrationResponse>;
   /** 创建 Grafana 实例 {@link V20180724.CreateGrafanaInstanceRequest} {@link V20180724.CreateGrafanaInstanceResponse} */

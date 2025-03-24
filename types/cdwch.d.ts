@@ -17,19 +17,23 @@ declare interface AttachCBSSpec {
 /** 备份任务详情 */
 declare interface BackUpJobDisplay {
   /** 备份任务id */
-  JobId: number;
+  JobId?: number;
   /** 备份任务名 */
-  Snapshot: string;
+  Snapshot?: string;
   /** 任务类型(元数据),(数据) */
-  BackUpType: string;
+  BackUpType?: string;
   /** 备份数据量 */
-  BackUpSize: number;
+  BackUpSize?: number;
   /** 任务创建时间 */
-  BackUpTime: string;
+  BackUpTime?: string;
   /** 任务过期时间 */
-  ExpireTime: string;
+  ExpireTime?: string;
   /** 任务状态 */
-  JobStatus: string;
+  JobStatus?: string;
+  /** 处理数据量 */
+  ProcessSize?: number;
+  /** 错误原因 */
+  ErrorReason?: string;
 }
 
 /** 备份表信息 */
@@ -112,10 +116,10 @@ declare interface ConfigSubmitContext {
 declare interface DatabasePrivilegeInfo {
   /** 数据库名称 */
   DatabaseName: string;
-  /** //库表权限，SELECT、INSERT_ALL、ALTER、TRUNCATE、DROP_TABLE、CREATE_TABLE、DROP_DATABASE */
-  DatabasePrivileges?: string[] | null;
-  /** // 库下面的表权限 */
-  TablePrivilegeList?: TablePrivilegeInfo[] | null;
+  /** 库表权限，SELECT、INSERT_ALL、ALTER、TRUNCATE、DROP_TABLE、CREATE_TABLE、DROP_DATABASE */
+  DatabasePrivileges?: string[];
+  /** 库下面的表权限 */
+  TablePrivilegeList?: TablePrivilegeInfo[];
 }
 
 /** 磁盘规格描述 */
@@ -185,109 +189,109 @@ declare interface InstanceDetail {
 /** 实例描述信息 */
 declare interface InstanceInfo {
   /** 集群实例ID, "cdw-xxxx" 字符串类型 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 集群实例名称 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 状态,Init 创建中; Serving 运行中； Deleted已销毁；Deleting 销毁中；Modify 集群变更中； */
-  Status?: string | null;
+  Status?: string;
   /** 版本 */
-  Version?: string | null;
+  Version?: string;
   /** 地域, ap-guangzhou */
-  Region?: string | null;
+  Region?: string;
   /** 可用区， ap-guangzhou-3 */
-  Zone?: string | null;
+  Zone?: string;
   /** 私有网络名称 */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 子网名称 */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 付费类型，"hour", "prepay" */
-  PayMode?: string | null;
+  PayMode?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 过期时间 */
-  ExpireTime?: string | null;
+  ExpireTime?: string;
   /** 数据节点描述信息 */
-  MasterSummary?: NodesSummary | null;
+  MasterSummary?: NodesSummary;
   /** zookeeper节点描述信息 */
-  CommonSummary?: NodesSummary | null;
+  CommonSummary?: NodesSummary;
   /** 高可用，“true" "false" */
-  HA?: string | null;
+  HA?: string;
   /** 访问地址，例如 "10.0.0.1:9000" */
-  AccessInfo?: string | null;
+  AccessInfo?: string;
   /** 记录ID，数值型 */
-  Id?: number | null;
+  Id?: number;
   /** regionId, 表示地域 */
-  RegionId?: number | null;
+  RegionId?: number;
   /** 可用区说明，例如 "广州二区" */
-  ZoneDesc?: string | null;
+  ZoneDesc?: string;
   /** 错误流程说明信息 */
-  FlowMsg?: string | null;
+  FlowMsg?: string;
   /** 状态描述，例如“运行中”等 */
-  StatusDesc?: string | null;
+  StatusDesc?: string;
   /** 自动续费标记 */
-  RenewFlag?: boolean | null;
+  RenewFlag?: boolean;
   /** 标签列表 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
   /** 监控信息 */
-  Monitor?: string | null;
+  Monitor?: string;
   /** 是否开通日志 */
-  HasClsTopic?: boolean | null;
+  HasClsTopic?: boolean;
   /** 日志主题ID */
-  ClsTopicId?: string | null;
+  ClsTopicId?: string;
   /** 日志集ID */
-  ClsLogSetId?: string | null;
+  ClsLogSetId?: string;
   /** 是否支持xml配置管理 */
-  EnableXMLConfig?: number | null;
+  EnableXMLConfig?: number;
   /** 区域 */
-  RegionDesc?: string | null;
+  RegionDesc?: string;
   /** 弹性网卡地址 */
-  Eip?: string | null;
+  Eip?: string;
   /** 冷热分层系数 */
-  CosMoveFactor?: number | null;
+  CosMoveFactor?: number;
   /** external/local/yunti */
-  Kind?: string | null;
+  Kind?: string;
   /** 是否弹性ck */
-  IsElastic?: boolean | null;
+  IsElastic?: boolean;
   /** 集群详细状态 */
-  InstanceStateInfo?: InstanceStateInfo | null;
+  InstanceStateInfo?: InstanceStateInfo;
   /** ZK高可用 */
-  HAZk?: boolean | null;
+  HAZk?: boolean;
   /** 挂载盘,默认0:没有类型；1:裸盘;2:lvm */
-  MountDiskType?: number | null;
-  /** 无 */
-  CHProxyVip?: string | null;
+  MountDiskType?: number;
+  /** chproxy连接ip */
+  CHProxyVip?: string;
   /** cos buket的名字 */
-  CosBucketName?: string | null;
+  CosBucketName?: string;
   /** 是否可以挂载云盘 */
-  CanAttachCbs?: boolean | null;
+  CanAttachCbs?: boolean;
   /** 是否可以挂载云盘阵列 */
-  CanAttachCbsLvm?: boolean | null;
+  CanAttachCbsLvm?: boolean;
   /** 是否可以挂载cos */
-  CanAttachCos?: boolean | null;
+  CanAttachCos?: boolean;
   /** 服务信息 */
-  Components?: ServiceInfo[] | null;
+  Components?: ServiceInfo[];
   /** 可升级的内核版本 */
-  UpgradeVersions?: string | null;
+  UpgradeVersions?: string;
   /** ex-index */
-  EsIndexId?: string | null;
+  EsIndexId?: string;
   /** username */
-  EsIndexUsername?: string | null;
+  EsIndexUsername?: string;
   /** password */
-  EsIndexPassword?: string | null;
+  EsIndexPassword?: string;
   /** true */
-  HasEsIndex?: boolean | null;
+  HasEsIndex?: boolean;
   /** true */
-  IsSecondaryZone?: boolean | null;
+  IsSecondaryZone?: boolean;
   /** desc */
-  SecondaryZoneInfo?: string | null;
+  SecondaryZoneInfo?: string;
   /** 是否clickhouse-keeper */
-  ClickHouseKeeper?: boolean | null;
+  ClickHouseKeeper?: boolean;
   /** 实例扩展信息 */
-  Details?: InstanceDetail | null;
+  Details?: InstanceDetail;
   /** 安全组白名单 */
-  IsWhiteSGs?: boolean | null;
+  IsWhiteSGs?: boolean;
   /** 绑定的安全组 */
-  BindSGs?: string[] | null;
+  BindSGs?: string[];
   /** 是否开启公网clb */
   HasPublicCloudClb?: boolean;
 }
@@ -369,33 +373,33 @@ declare interface NodeSpec {
 /** 节点角色描述信息 */
 declare interface NodesSummary {
   /** 机型，如 S1 */
-  Spec: string;
+  Spec?: string;
   /** 节点数目 */
-  NodeSize: number;
+  NodeSize?: number;
   /** cpu核数，单位个 */
-  Core: number;
+  Core?: number;
   /** 内存大小，单位G */
-  Memory: number;
+  Memory?: number;
   /** 磁盘大小，单位G */
-  Disk: number;
+  Disk?: number;
   /** 磁盘类型 */
-  DiskType: string;
+  DiskType?: string;
   /** 磁盘描述 */
-  DiskDesc: string;
+  DiskDesc?: string;
   /** 挂载云盘信息 */
-  AttachCBSSpec: AttachCBSSpec | null;
+  AttachCBSSpec?: AttachCBSSpec;
   /** 子产品类型 */
-  SubProductType?: string | null;
+  SubProductType?: string;
   /** 规格对应的核数 */
-  SpecCore?: number | null;
+  SpecCore?: number;
   /** 规格对应的内存大小 */
-  SpecMemory?: number | null;
+  SpecMemory?: number;
   /** 磁盘的数量 */
-  DiskCount?: number | null;
+  DiskCount?: number;
   /** 磁盘的最大大小 */
-  MaxDiskSize?: number | null;
+  MaxDiskSize?: number;
   /** 是否为加密云盘 */
-  Encrypt?: number | null;
+  Encrypt?: number;
 }
 
 /** 资源规格描述信息 */
@@ -563,9 +567,9 @@ declare interface CreateInstanceNewRequest {
 
 declare interface CreateInstanceNewResponse {
   /** 流程ID */
-  FlowId?: string | null;
+  FlowId?: string;
   /** 实例ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 错误信息 */
   ErrorMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -615,7 +619,11 @@ declare interface DescribeBackUpJobRequest {
 
 declare interface DescribeBackUpJobResponse {
   /** 任务列表 */
-  BackUpJobs: BackUpJobDisplay[] | null;
+  BackUpJobs?: BackUpJobDisplay[];
+  /** 错误描述 */
+  ErrorMsg?: string;
+  /** 数量 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -649,7 +657,9 @@ declare interface DescribeBackUpTablesRequest {
 
 declare interface DescribeBackUpTablesResponse {
   /** 可备份表列表 */
-  AvailableTables: BackupTableContent[];
+  AvailableTables?: BackupTableContent[];
+  /** 错误描述 */
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -777,15 +787,19 @@ declare interface DescribeInstanceStateResponse {
   /** 集群状态，例如：Serving */
   InstanceState?: string;
   /** 集群操作创建时间 */
-  FlowCreateTime?: string | null;
+  FlowCreateTime?: string;
   /** 集群操作名称 */
-  FlowName?: string | null;
+  FlowName?: string;
   /** 集群操作进度 */
-  FlowProgress?: number | null;
+  FlowProgress?: number;
   /** 集群状态描述，例如：运行中 */
-  InstanceStateDesc?: string | null;
+  InstanceStateDesc?: string;
   /** 集群流程错误信息，例如：“创建失败，资源不足” */
-  FlowMsg?: string | null;
+  FlowMsg?: string;
+  /** 当前步骤的名称，例如：”购买资源中“ */
+  ProcessName?: string;
+  /** 当前步骤的名称，例如：”购买资源中“ */
+  ProcessSubName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -833,7 +847,7 @@ declare interface DescribeSpecResponse {
   /** 数据节点规格描述 */
   DataSpec?: ResourceSpec[];
   /** 云盘列表 */
-  AttachCBSSpec?: DiskSpec[] | null;
+  AttachCBSSpec?: DiskSpec[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

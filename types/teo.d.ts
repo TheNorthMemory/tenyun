@@ -982,7 +982,7 @@ declare interface DetailHost {
 declare interface DetectLengthLimitCondition {
   /** 匹配条件的参数名称，取值有：body_depth：请求正文包部分的检测深度。 */
   Name: string;
-  /** 匹配条件的参数值，取值与 Name 成对使用。当 Name 值为 body_depth 时， Values 只支持传入单个值，取值有：8KB；64KB；128KB。 */
+  /** 匹配条件的参数值，取值与 Name 成对使用。当 Name 值为 body_depth 时， Values 只支持传入单个值，取值有：10KB；64KB；128KB。 */
   Values: string[];
 }
 
@@ -5538,6 +5538,18 @@ declare interface ModifyL4ProxyStatusResponse {
   RequestId?: string;
 }
 
+declare interface ModifyL7AccRulePriorityRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 站点 ID 下完整的规则 ID 列表，规则 ID 列表可以通过 [查询七层加速规则](https://cloud.tencent.com/document/product/1552/115820) 获取，最终优先级顺序将调整成规则 ID 列表的顺序，从前往后依次执行。 */
+  RuleIds: string[];
+}
+
+declare interface ModifyL7AccRulePriorityResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyL7AccRuleRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -6329,6 +6341,8 @@ declare interface Teo {
   ModifyL4ProxyStatus(data: ModifyL4ProxyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL4ProxyStatusResponse>;
   /** 修改七层加速规则 {@link ModifyL7AccRuleRequest} {@link ModifyL7AccRuleResponse} */
   ModifyL7AccRule(data: ModifyL7AccRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL7AccRuleResponse>;
+  /** 修改七层加速规则优先级 {@link ModifyL7AccRulePriorityRequest} {@link ModifyL7AccRulePriorityResponse} */
+  ModifyL7AccRulePriority(data: ModifyL7AccRulePriorityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL7AccRulePriorityResponse>;
   /** 修改七层加速全局配置 {@link ModifyL7AccSettingRequest} {@link ModifyL7AccSettingResponse} */
   ModifyL7AccSetting(data: ModifyL7AccSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL7AccSettingResponse>;
   /** 修改负载均衡实例 {@link ModifyLoadBalancerRequest} {@link ModifyLoadBalancerResponse} */

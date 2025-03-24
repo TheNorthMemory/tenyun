@@ -128,7 +128,7 @@ aiart | [大模型图像创作引擎](https://cloud.tencent.com/document/product
 ame | [正版曲库直通车](https://cloud.tencent.com/document/product/1155) | 2019-09-16(31) |
 ams | [音频内容安全](https://cloud.tencent.com/document/product/1219) | 2020-12-29(5) | 2020-06-08(7) |
 anicloud | [动效素材服务](https://cloud.tencent.com/document/product/1641) | 2022-09-23(3) |
-antiddos | [T-Sec-DDoS防护(Anti-DDoS)](https://cloud.tencent.com/document/product/1021) | 2020-03-09(96) |
+antiddos | [T-Sec-DDoS防护(Anti-DDoS)](https://cloud.tencent.com/document/product/1021) | 2020-03-09(94) |
 apcas | [汽车精准获客服务](https://cloud.tencent.com/document/product/1244) | 2020-11-27(7) |
 ape | [正版图库直通车](https://cloud.tencent.com/document/product/1181) | 2020-05-13(8) |
 api | [云 API](https://cloud.tencent.com/document/product/1278) | 2020-11-06(3) |
@@ -248,7 +248,7 @@ ims | [图片内容安全](https://cloud.tencent.com/document/product/1125) | 20
 ioa | [iOA 零信任安全管理系统](https://cloud.tencent.com/document/product/1092) | 2022-06-01(5) |
 iot | [加速物联网套件](https://cloud.tencent.com/document/product/568) | 2018-01-23(45) |
 iotcloud | [物联网通信](https://cloud.tencent.com/document/product/634) | 2021-04-08(73) | 2018-06-14(69) |
-iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(159) |
+iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(160) |
 iottid | [物联网设备身份认证](https://cloud.tencent.com/document/product/1086) | 2019-04-11(9) |
 iotvideo | [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) | 2021-11-25(107) | 2020-12-15(79)<br/>2019-11-26(68) |
 iotvideoindustry | [物联网智能视频服务（行业版）](https://cloud.tencent.com/document/product/1361) | 2020-12-01(104) |
@@ -260,7 +260,7 @@ kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 201
 lcic | [实时互动-教育版](https://cloud.tencent.com/document/product/1639) | 2022-08-17(70) |
 lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(109) |
 live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(195) |
-lke | [大模型知识引擎](https://cloud.tencent.com/document/product/1759) | 2023-11-30(99) |
+lke | [大模型知识引擎](https://cloud.tencent.com/document/product/1759) | 2023-11-30(98) |
 lkeap | [知识引擎原子能力](https://cloud.tencent.com/document/product/1772) | 2024-05-22(26) |
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(10) |
 mall | [商场客留大数据](https://cloud.tencent.com/document/product/1707) | 2023-05-18(1) |
@@ -271,7 +271,7 @@ mgobe | [游戏联机对战引擎](https://cloud.tencent.com/document/product/10
 mmps | [小程序安全](https://cloud.tencent.com/document/product/1223) | 2020-07-10(15) |
 mna | [多网聚合加速](https://cloud.tencent.com/document/product/1385) | 2021-01-19(43) |
 mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) | 2019-07-25(51) | 2018-04-08(13) |
-monitor | [腾讯云可观测平台](https://cloud.tencent.com/document/product/248) | 2023-06-16(1) | 2018-07-24(160) |
+monitor | [腾讯云可观测平台](https://cloud.tencent.com/document/product/248) | 2023-06-16(1) | 2018-07-24(161) |
 mps | [媒体处理](https://cloud.tencent.com/document/product/862) | 2019-06-12(128) |
 mqtt | [消息队列 MQTT 版](https://cloud.tencent.com/document/product/1778) | 2024-05-16(52) |
 mrs | [医疗报告结构化](https://cloud.tencent.com/document/product/1314) | 2020-09-10(11) |
@@ -332,7 +332,7 @@ tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021
 tdmq | [消息队列 TDMQ](https://cloud.tencent.com/document/product/1179) | 2020-02-17(149) |
 tds | [设备安全](https://cloud.tencent.com/document/product/1628) | 2022-08-01(4) |
 tem | [弹性微服务](https://cloud.tencent.com/document/product/1371) | 2021-07-01(50) | 2020-12-21(17) |
-teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) | 2022-09-01(141) | 2022-01-06(5) |
+teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) | 2022-09-01(142) | 2022-01-06(5) |
 thpc | [高性能计算平台](https://cloud.tencent.com/document/product/1527) | 2023-03-21(23) | 2022-04-01(16)<br/>2021-11-09(4) |
 tia | [智能钛机器学习](https://cloud.tencent.com/document/product/851) | 2018-02-26(10) |
 tic | [资源编排 TIC](https://cloud.tencent.com/document/product/1213) | 2020-11-17(13) |

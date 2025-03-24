@@ -217,7 +217,7 @@ declare interface DescribeSavingPlanDeductRequest {
 
 declare interface DescribeSavingPlanDeductResponse {
   /** 查询命中的节省计划抵扣明细数据总条数 */
-  Total?: number | null;
+  Total?: number;
   /** 查询命中的节省计划抵扣明细数据明细 */
   Deducts?: SavingPlanDeductDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */

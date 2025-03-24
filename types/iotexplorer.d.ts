@@ -2794,6 +2794,24 @@ declare interface DescribeTopicRuleResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUnbindedDevicesRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 分页偏移量 */
+  Offset: number;
+  /** 分页的页大小 */
+  Limit: number;
+}
+
+declare interface DescribeUnbindedDevicesResponse {
+  /** 未绑定的设备列表 */
+  UnbindedDevices: BindDeviceInfo[] | null;
+  /** 设备的总数量 */
+  Total: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeVideoLicenseRequest {
   /** 实例ID */
   InstanceId: string;
@@ -4167,6 +4185,8 @@ declare interface Iotexplorer {
   DescribeTopicPolicy(data: DescribeTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicPolicyResponse>;
   /** 获取规则信息 {@link DescribeTopicRuleRequest} {@link DescribeTopicRuleResponse} */
   DescribeTopicRule(data: DescribeTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicRuleResponse>;
+  /** 获取未绑定的设备列表 {@link DescribeUnbindedDevicesRequest} {@link DescribeUnbindedDevicesResponse} */
+  DescribeUnbindedDevices(data: DescribeUnbindedDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnbindedDevicesResponse>;
   /** 查询视频激活码统计概览 {@link DescribeVideoLicenseRequest} {@link DescribeVideoLicenseResponse} */
   DescribeVideoLicense(data: DescribeVideoLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoLicenseResponse>;
   /** 直接绑定设备和家庭 {@link DirectBindDeviceInFamilyRequest} {@link DirectBindDeviceInFamilyResponse} */

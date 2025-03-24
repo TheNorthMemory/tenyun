@@ -162,6 +162,8 @@ declare interface CBSInstance {
   InstanceId?: string;
   /** 云盘是否为共享型云盘。 */
   Shareable?: boolean;
+  /** emr节点ID */
+  EmrResourceId?: string;
 }
 
 /** 容器集群Pod服务CLB设置 */
@@ -1440,6 +1442,26 @@ declare interface NodeHardwareInfo {
   TkeClusterId?: string;
 }
 
+/** 节点续费询价明细 */
+declare interface NodeRenewPriceDetail {
+  /** 计费类型，包月为1、包销为3 */
+  ChargeType?: number;
+  /** emr资源id */
+  EmrResourceId?: string;
+  /** 节点类型 */
+  NodeType?: string;
+  /** 节点内网ip */
+  Ip?: string;
+  /** 当前到期时间 */
+  ExpireTime?: string;
+  /** 原价 */
+  OriginalCost?: number;
+  /** 折扣价 */
+  DiscountCost?: number;
+  /** 节点子项续费询价明细列表 */
+  RenewPriceDetails?: RenewPriceDetail[];
+}
+
 /** 规格管理，规格类型描述 */
 declare interface NodeResource {
   /** 配置Id */
@@ -1874,6 +1896,20 @@ declare interface RenewInstancesInfo {
   RootStorageType?: number;
   /** 数据盘信息 */
   MCMultiDisk?: MultiDiskMC[] | null;
+}
+
+/** 节点子项续费询价明细 */
+declare interface RenewPriceDetail {
+  /** 计费项名称 */
+  BillingName?: string;
+  /** 折扣 */
+  Policy?: number;
+  /** 数量 */
+  Quantity?: number;
+  /** 原价 */
+  OriginalCost?: number;
+  /** 折扣价 */
+  DiscountCost?: number;
 }
 
 /** 定时伸缩任务策略 */
@@ -2761,6 +2797,8 @@ declare interface AttachDisksRequest {
   DiskSpec?: NodeSpecDiskV2;
   /** 可选参数，不传该参数则仅执行挂载操作。传入True时，会在挂载成功后将云硬盘设置为随云主机销毁模式，仅对按量计费云硬盘有效。 */
   DeleteWithInstance?: boolean;
+  /** 新挂磁盘时可支持配置的服务名称列表 */
+  SelectiveConfServices?: string[];
 }
 
 declare interface AttachDisksResponse {
@@ -3499,13 +3537,23 @@ declare interface DescribeNodeDataDisksRequest {
   InstanceId: string;
   /** 节点CVM实例Id列表 */
   CvmInstanceIds: string[];
+  /** 查询云盘的过滤条件 */
+  Filters?: Filters[];
+  /** 模糊搜索 */
+  InnerSearch?: string;
+  /** 每页返回数量，默认值为100，最大值为100。 */
+  Limit?: number;
+  /** 数据偏移值 */
+  Offset?: number;
 }
 
 declare interface DescribeNodeDataDisksResponse {
   /** 总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 云盘列表 */
-  CBSList: CBSInstance[] | null;
+  CBSList?: CBSInstance[] | null;
+  /** 云盘最大容量 */
+  MaxSize?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3856,6 +3904,8 @@ declare interface InquirePriceRenewEmrResponse {
   TimeUnit?: string;
   /** 实例续费的时长。 */
   TimeSpan?: number;
+  /** 节点续费询价明细列表 */
+  NodeRenewPriceDetails?: NodeRenewPriceDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3944,6 +3994,8 @@ declare interface InquiryPriceRenewInstanceResponse {
   TimeSpan?: number;
   /** 价格详情 */
   PriceDetail?: PriceDetail[] | null;
+  /** 节点续费询价明细列表 */
+  NodeRenewPriceDetails?: NodeRenewPriceDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4321,12 +4373,14 @@ declare interface ResetYarnConfigResponse {
 declare interface ResizeDataDisksRequest {
   /** EMR集群实例ID */
   InstanceId: string;
-  /** 需要扩容的云盘ID */
-  DiskIds: string[];
   /** 需要扩充的容量值，容量值需要大于原容量，并且为10的整数倍 */
   DiskSize: number;
   /** 需要扩容的节点ID列表 */
   CvmInstanceIds: string[];
+  /** 需要扩容的云盘ID */
+  DiskIds?: string[];
+  /** 是否扩容全部云硬盘 */
+  ResizeAll?: boolean;
 }
 
 declare interface ResizeDataDisksResponse {
@@ -4757,7 +4811,7 @@ declare interface Emr {
   ModifyYarnQueueV2(data: ModifyYarnQueueV2Request, config?: AxiosRequestConfig): AxiosPromise<ModifyYarnQueueV2Response>;
   /** yarn资源调度-重置 {@link ResetYarnConfigRequest} {@link ResetYarnConfigResponse} */
   ResetYarnConfig(data: ResetYarnConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ResetYarnConfigResponse>;
-  /** 云盘扩容 {@link ResizeDataDisksRequest} {@link ResizeDataDisksResponse} */
+  /** 云数据盘扩容 {@link ResizeDataDisksRequest} {@link ResizeDataDisksResponse} */
   ResizeDataDisks(data: ResizeDataDisksRequest, config?: AxiosRequestConfig): AxiosPromise<ResizeDataDisksResponse>;
   /** 创建流程作业 {@link RunJobFlowRequest} {@link RunJobFlowResponse} */
   RunJobFlow(data: RunJobFlowRequest, config?: AxiosRequestConfig): AxiosPromise<RunJobFlowResponse>;

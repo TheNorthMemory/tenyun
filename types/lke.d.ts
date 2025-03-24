@@ -3428,18 +3428,6 @@ declare interface RenameDocResponse {
   RequestId?: string;
 }
 
-declare interface ResetSessionRequest {
-  /** 会话ID */
-  SessionId: string;
-  /** 是否仅清空会话关联 */
-  IsOnlyEmptyTheDialog?: boolean;
-}
-
-declare interface ResetSessionResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface RetryDocAuditRequest {
   /** 应用ID */
   BotBizId: string;
@@ -3787,8 +3775,6 @@ declare interface Lke {
   ReconstructDocument(data?: ReconstructDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<ReconstructDocumentResponse>;
   /** 文档重命名 {@link RenameDocRequest} {@link RenameDocResponse} */
   RenameDoc(data?: RenameDocRequest, config?: AxiosRequestConfig): AxiosPromise<RenameDocResponse>;
-  /** 重置会话 {@link ResetSessionRequest} {@link ResetSessionResponse} */
-  ResetSession(data: ResetSessionRequest, config?: AxiosRequestConfig): AxiosPromise<ResetSessionResponse>;
   /** 文档审核重试 {@link RetryDocAuditRequest} {@link RetryDocAuditResponse} */
   RetryDocAudit(data: RetryDocAuditRequest, config?: AxiosRequestConfig): AxiosPromise<RetryDocAuditResponse>;
   /** 文档解析重试 {@link RetryDocParseRequest} {@link RetryDocParseResponse} */

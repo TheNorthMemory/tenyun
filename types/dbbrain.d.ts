@@ -543,7 +543,7 @@ declare interface MonitorMetric {
   /** 指标单位。 */
   Unit?: string;
   /** 指标值。 */
-  Values?: number[] | null;
+  Values?: number[];
 }
 
 /** 单位时间间隔内的监控指标数据 */
@@ -1251,6 +1251,8 @@ declare interface CreateProxySessionKillTaskRequest {
   InstanceId: string;
   /** 服务产品类型，支持值包括： "redis" - 云数据库 Redis。 */
   Product: string;
+  /** 实列代理ID。 */
+  InstanceProxyId?: string;
 }
 
 declare interface CreateProxySessionKillTaskResponse {
@@ -1739,13 +1741,13 @@ declare interface DescribeHealthScoreRequest {
   InstanceId: string;
   /** 获取健康得分的时间，时间格式如：2019-09-10 12:13:14。 */
   Time: string;
-  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。 */
+  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，默认为"mysql"。 */
   Product: string;
 }
 
 declare interface DescribeHealthScoreResponse {
   /** 健康得分以及异常扣分项。 */
-  Data: HealthScoreInfo;
+  Data?: HealthScoreInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3358,7 +3360,7 @@ declare namespace V20191016 {
     InstanceId: string;
     /** 获取健康得分的时间。 */
     Time: string;
-    /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。 */
+    /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，默认为"mysql"。 */
     Product: string;
   }
 

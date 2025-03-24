@@ -117,13 +117,13 @@ declare interface DiskSpecPlus {
 /** 错误日志详细信息 */
 declare interface ErrorLogDetail {
   /** 用户名称 */
-  UserName: string | null;
+  UserName?: string | null;
   /** 数据库 */
-  Database: string | null;
+  Database?: string | null;
   /** 报错时间 */
-  ErrorTime: string | null;
+  ErrorTime?: string | null;
   /** 报错信息 */
-  ErrorMessage: string | null;
+  ErrorMessage?: string | null;
 }
 
 /** user_config */

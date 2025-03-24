@@ -21,19 +21,19 @@ declare interface Activity {
   /** 活动开始时间 */
   StartTime?: string;
   /** 活动结束时间 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 云服务器实例ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
 }
 
 /** agent运行模式 */
 declare interface AgentRunningMode {
   /** 场景类型，支持WINDOWS */
-  Scene: string | null;
+  Scene: string;
   /** 运行Agent的User */
-  User: string | null;
+  User: string;
   /** 运行Agent的Session */
-  Session: string | null;
+  Session: string;
 }
 
 /** 计算环境 */
@@ -51,31 +51,31 @@ declare interface AnonymousComputeEnv {
 /** 应用程序信息 */
 declare interface Application {
   /** 应用程序的交付方式，包括PACKAGE、LOCAL 两种取值，分别指远程存储的软件包、计算环境本地。 */
-  DeliveryForm: string | null;
+  DeliveryForm: string;
   /** 任务执行命令。与Commands不能同时指定。 */
-  Command?: string | null;
+  Command?: string;
   /** 应用程序软件包的远程存储路径 */
-  PackagePath?: string | null;
+  PackagePath?: string;
   /** 应用使用Docker的相关配置。在使用Docker配置的情况下，DeliveryForm 为 LOCAL 表示直接使用Docker镜像内部的应用软件，通过Docker方式运行；DeliveryForm 为 PACKAGE，表示将远程应用包注入到Docker镜像后，通过Docker方式运行。为避免Docker不同版本的兼容性问题，Docker安装包及相关依赖由Batch统一负责，对于已安装Docker的自定义镜像，请卸载后再使用Docker特性。 */
-  Docker?: Docker | null;
+  Docker?: Docker;
   /** 任务执行命令信息。与Command不能同时指定。 */
-  Commands?: CommandLine[] | null;
+  Commands?: CommandLine[];
 }
 
 /** 授权认证信息 */
 declare interface Authentication {
   /** 授权场景，例如COS */
-  Scene: string | null;
+  Scene: string;
   /** SecretId */
-  SecretId: string | null;
+  SecretId: string;
   /** SecretKey */
-  SecretKey: string | null;
+  SecretKey: string;
 }
 
 /** 任务执行信息描述。 */
 declare interface CommandLine {
   /** 任务执行命令。 */
-  Command: string | null;
+  Command: string;
 }
 
 /** 计算环境创建信息。 */
@@ -83,25 +83,25 @@ declare interface ComputeEnvCreateInfo {
   /** 计算环境 ID */
   EnvId?: string;
   /** 计算环境名称 */
-  EnvName?: string | null;
+  EnvName?: string;
   /** 计算环境描述 */
-  EnvDescription?: string | null;
+  EnvDescription?: string;
   /** 计算环境类型，仅支持“MANAGED”类型 */
   EnvType?: string;
   /** 计算环境参数 */
   EnvData?: EnvData;
   /** 数据盘挂载选项 */
-  MountDataDisks?: MountDataDisk[] | null;
+  MountDataDisks?: MountDataDisk[];
   /** 输入映射 */
-  InputMappings?: InputMapping[] | null;
+  InputMappings?: InputMapping[];
   /** 授权信息 */
-  Authentications?: Authentication[] | null;
+  Authentications?: Authentication[];
   /** 通知信息 */
-  Notifications?: Notification[] | null;
+  Notifications?: Notification[];
   /** 计算节点期望个数 */
   DesiredComputeNodeCount?: number;
   /** 计算环境标签列表 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
 }
 
 /** 计算环境属性数据 */
@@ -219,9 +219,9 @@ declare interface DataDisk {
 /** 依赖关系 */
 declare interface Dependence {
   /** 依赖关系的起点任务名称 */
-  StartTask: string | null;
+  StartTask: string;
   /** 依赖关系的终点任务名称 */
-  EndTask: string | null;
+  EndTask: string;
 }
 
 /** Docker容器信息 */
@@ -239,7 +239,7 @@ declare interface Docker {
   /** 拉取Docker镜像失败时延迟时间。单位：秒。 */
   DelayOnRetry?: number;
   /** Docker命令运行参数。 */
-  DockerRunOption?: string | null;
+  DockerRunOption?: string;
 }
 
 /** 描述了实例的增强服务启用情况与其设置，如云安全，云监控等实例 Agent */
@@ -337,9 +337,9 @@ declare interface EnvDataCpm {
 /** 环境变量 */
 declare interface EnvVar {
   /** 环境变量名称 */
-  Name: string | null;
+  Name: string;
   /** 环境变量取值 */
-  Value: string | null;
+  Value: string;
 }
 
 /** 事件配置 */
@@ -353,9 +353,9 @@ declare interface EventConfig {
 /** 自定义键值对 */
 declare interface EventVar {
   /** 自定义键 */
-  Name: string | null;
+  Name: string;
   /** 自定义值 */
-  Value: string | null;
+  Value: string;
 }
 
 /** 扩展数据 */
@@ -379,11 +379,11 @@ declare interface Filter {
 /** 输入映射 */
 declare interface InputMapping {
   /** 源端路径 */
-  SourcePath: string | null;
+  SourcePath: string;
   /** 目的端路径 */
-  DestinationPath: string | null;
+  DestinationPath: string;
   /** 挂载配置项参数 */
-  MountOptionParameter?: string | null;
+  MountOptionParameter?: string;
 }
 
 /** 描述实例的信息 */
@@ -567,15 +567,15 @@ declare interface JobView {
   /** 作业优先级 */
   Priority?: number;
   /** 位置信息 */
-  Placement?: Placement | null;
+  Placement?: Placement;
   /** 创建时间 */
   CreateTime?: string;
   /** 结束时间 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 任务统计指标 */
   TaskMetrics?: TaskMetrics;
   /** 作业绑定的标签列表。 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
 }
 
 /** 本地磁盘规格 */
@@ -605,9 +605,9 @@ declare interface LoginSettings {
 /** 数据盘挂载选项 */
 declare interface MountDataDisk {
   /** 挂载点，Linux系统合法路径，或Windows系统盘符,比如"H:\\" */
-  LocalPath: string | null;
+  LocalPath: string;
   /** 文件系统类型，Linux系统下支持"EXT3"和"EXT4"两种，默认"EXT3"；Windows系统下仅支持"NTFS" */
-  FileSystemType?: string | null;
+  FileSystemType?: string;
 }
 
 /** 计算环境 */
@@ -737,25 +737,25 @@ declare interface Placement {
 /** 重定向信息 */
 declare interface RedirectInfo {
   /** 标准输出重定向路径; */
-  StdoutRedirectPath?: string | null;
+  StdoutRedirectPath?: string;
   /** 标准错误重定向路径 */
-  StderrRedirectPath?: string | null;
+  StderrRedirectPath?: string;
   /** 标准输出重定向文件名，支持三个占位符${BATCH_JOB_ID}、${BATCH_TASK_NAME}、${BATCH_TASK_INSTANCE_INDEX} */
-  StdoutRedirectFileName?: string | null;
+  StdoutRedirectFileName?: string;
   /** 标准错误重定向文件名，支持三个占位符${BATCH_JOB_ID}、${BATCH_TASK_NAME}、${BATCH_TASK_INSTANCE_INDEX} */
-  StderrRedirectFileName?: string | null;
+  StderrRedirectFileName?: string;
 }
 
 /** 本地重定向信息 */
 declare interface RedirectLocalInfo {
   /** 标准输出重定向本地路径 */
-  StdoutLocalPath?: string | null;
+  StdoutLocalPath?: string;
   /** 标准错误重定向本地路径 */
-  StderrLocalPath?: string | null;
+  StderrLocalPath?: string;
   /** 标准输出重定向本地文件名，支持三个占位符${BATCH_JOB_ID}、${BATCH_TASK_NAME}、${BATCH_TASK_INSTANCE_INDEX} */
-  StdoutLocalFileName?: string | null;
+  StdoutLocalFileName?: string;
   /** 标准错误重定向本地文件名，支持三个占位符${BATCH_JOB_ID}、${BATCH_TASK_NAME}、${BATCH_TASK_INSTANCE_INDEX} */
-  StderrLocalFileName?: string | null;
+  StderrLocalFileName?: string;
 }
 
 /** 描述了 “云自动化助手” 服务相关的信息 */
@@ -811,9 +811,9 @@ declare interface SystemDisk {
 /** 标签。 */
 declare interface Tag {
   /** 标签键。 */
-  Key: string | null;
+  Key: string;
   /** 标签值。 */
-  Value: string | null;
+  Value: string;
 }
 
 /** 任务 */
@@ -861,37 +861,37 @@ declare interface TaskInstanceLog {
   /** 任务实例 */
   TaskInstanceIndex?: number;
   /** 标准输出日志（Base64编码，解码后最大日志长度2048字节） */
-  StdoutLog?: string | null;
+  StdoutLog?: string;
   /** 标准错误日志（Base64编码，解码后最大日志长度2048字节） */
-  StderrLog?: string | null;
+  StderrLog?: string;
   /** 标准输出重定向路径 */
-  StdoutRedirectPath?: string | null;
+  StdoutRedirectPath?: string;
   /** 标准错误重定向路径 */
-  StderrRedirectPath?: string | null;
+  StderrRedirectPath?: string;
   /** 标准输出重定向文件名 */
-  StdoutRedirectFileName?: string | null;
+  StdoutRedirectFileName?: string;
   /** 标准错误重定向文件名 */
-  StderrRedirectFileName?: string | null;
+  StderrRedirectFileName?: string;
 }
 
 /** 任务实例统计指标 */
 declare interface TaskInstanceMetrics {
   /** Submitted个数 */
-  SubmittedCount?: number | null;
+  SubmittedCount?: number;
   /** Pending个数 */
-  PendingCount?: number | null;
+  PendingCount?: number;
   /** Runnable个数 */
-  RunnableCount?: number | null;
+  RunnableCount?: number;
   /** Starting个数 */
-  StartingCount?: number | null;
+  StartingCount?: number;
   /** Running个数 */
-  RunningCount?: number | null;
+  RunningCount?: number;
   /** Succeed个数 */
-  SucceedCount?: number | null;
+  SucceedCount?: number;
   /** FailedInterrupted个数 */
-  FailedInterruptedCount?: number | null;
+  FailedInterruptedCount?: number;
   /** Failed个数 */
-  FailedCount?: number | null;
+  FailedCount?: number;
 }
 
 /** 任务实例视图信息 */
@@ -901,19 +901,19 @@ declare interface TaskInstanceView {
   /** 任务实例状态 */
   TaskInstanceState?: string;
   /** 应用程序执行结束的exit code */
-  ExitCode?: number | null;
+  ExitCode?: number;
   /** 任务实例状态原因，任务实例失败时，会记录失败原因 */
   StateReason?: string;
   /** 任务实例运行时所在计算节点（例如CVM）的InstanceId。任务实例未运行或者完结时，本字段为空。任务实例重试时，本字段会随之变化 */
-  ComputeNodeInstanceId?: string | null;
+  ComputeNodeInstanceId?: string;
   /** 创建时间 */
   CreateTime?: string;
   /** 启动时间 */
-  LaunchTime?: string | null;
+  LaunchTime?: string;
   /** 开始运行时间 */
-  RunningTime?: string | null;
+  RunningTime?: string;
   /** 结束时间 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 重定向信息 */
   RedirectInfo?: RedirectInfo;
   /** 任务实例状态原因详情，任务实例失败时，会记录失败原因 */
@@ -923,21 +923,21 @@ declare interface TaskInstanceView {
 /** 任务统计指标 */
 declare interface TaskMetrics {
   /** Submitted个数 */
-  SubmittedCount?: number | null;
+  SubmittedCount?: number;
   /** Pending个数 */
-  PendingCount?: number | null;
+  PendingCount?: number;
   /** Runnable个数 */
-  RunnableCount?: number | null;
+  RunnableCount?: number;
   /** Starting个数 */
-  StartingCount?: number | null;
+  StartingCount?: number;
   /** Running个数 */
-  RunningCount?: number | null;
+  RunningCount?: number;
   /** Succeed个数 */
-  SucceedCount?: number | null;
+  SucceedCount?: number;
   /** FailedInterrupted个数 */
-  FailedInterruptedCount?: number | null;
+  FailedInterruptedCount?: number;
   /** Failed个数 */
-  FailedCount?: number | null;
+  FailedCount?: number;
 }
 
 /** 任务模板信息 */
@@ -1113,27 +1113,27 @@ declare interface DescribeComputeEnvCreateInfoRequest {
 
 declare interface DescribeComputeEnvCreateInfoResponse {
   /** 计算环境 ID */
-  EnvId: string;
+  EnvId?: string;
   /** 计算环境名称 */
-  EnvName: string;
+  EnvName?: string;
   /** 计算环境描述 */
-  EnvDescription: string | null;
+  EnvDescription?: string;
   /** 计算环境类型，仅支持“MANAGED”类型 */
-  EnvType: string;
+  EnvType?: string;
   /** 计算环境参数 */
-  EnvData: EnvData;
+  EnvData?: EnvData;
   /** 数据盘挂载选项 */
-  MountDataDisks: MountDataDisk[];
+  MountDataDisks?: MountDataDisk[];
   /** 输入映射 */
-  InputMappings: InputMapping[];
+  InputMappings?: InputMapping[];
   /** 授权信息 */
-  Authentications: Authentication[];
+  Authentications?: Authentication[];
   /** 通知信息 */
-  Notifications: Notification[];
+  Notifications?: Notification[];
   /** 计算节点期望个数 */
-  DesiredComputeNodeCount: number;
+  DesiredComputeNodeCount?: number;
   /** 计算环境绑定的标签列表 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1279,7 +1279,7 @@ declare interface DescribeJobResponse {
   /** 作业绑定的标签列表。 */
   Tags?: Tag[] | null;
   /** 下一步动作 */
-  NextAction?: string | null;
+  NextAction?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

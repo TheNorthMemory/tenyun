@@ -3110,6 +3110,8 @@ declare interface ProdSchedulerTask {
   TaskName?: string | null;
   /** 生产调度任务任务类型 */
   CycleType?: number | null;
+  /** 生产任务类型 */
+  TaskType?: string;
 }
 
 /** 项目信息 */
@@ -3692,6 +3694,18 @@ declare interface RuleGroup {
   DsEnvType?: number | null;
   /** EMR集群部署方式：CVM/TKE */
   ClusterDeployType?: string | null;
+  /** 任务名称 */
+  Name?: string | null;
+  /** 执行详情 */
+  ExecDetail?: string | null;
+  /** 事中关联任务数量 */
+  PipelineTaskCount?: number | null;
+  /** 有效规则数 */
+  EnableRuleCount?: number | null;
+  /** 任务描述 */
+  Description?: string | null;
+  /** 监控创建人 */
+  CreateUserName?: string;
 }
 
 /** 规则组执行结果 */
@@ -3796,6 +3810,18 @@ declare interface RuleGroupExecStrategy {
   TriggerTypes?: string[] | null;
   /** DLC资源组 */
   DlcGroupName?: string | null;
+  /** 任务名称 */
+  RuleGroupName?: string;
+  /** 数据库名称 */
+  DatabaseName?: string;
+  /** schema名称 */
+  SchemaName?: string;
+  /** 表名称 */
+  TableName?: string;
+  /** 数据源id */
+  DatasourceId?: string;
+  /** 任务描述 */
+  Description?: string;
 }
 
 /** 规则组分页 */
@@ -3846,6 +3872,8 @@ declare interface RuleGroupSubscribe {
   RuleId?: number | null;
   /** 规则名称 */
   RuleName?: string | null;
+  /** 发送对象 */
+  AlarmMessageRule?: string | null;
 }
 
 /** 表绑定规则组信息 */

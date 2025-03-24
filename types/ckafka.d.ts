@@ -293,21 +293,21 @@ declare interface Config {
   /** 消息保留时间 */
   Retention?: number;
   /** 最小同步复制数 */
-  MinInsyncReplicas?: number;
+  MinInsyncReplicas?: number | null;
   /** 日志清理模式，默认 delete。delete：日志按保存时间删除；compact：日志按 key 压缩；compact, delete：日志按 key 压缩且会保存时间删除。 */
-  CleanUpPolicy?: string;
+  CleanUpPolicy?: string | null;
   /** Segment 分片滚动的时长 */
-  SegmentMs?: number;
+  SegmentMs?: number | null;
   /** 0表示 false。 1表示 true。 */
-  UncleanLeaderElectionEnable?: number;
+  UncleanLeaderElectionEnable?: number | null;
   /** Segment 分片滚动的字节数 */
-  SegmentBytes?: number;
+  SegmentBytes?: number | null;
   /** 最大消息字节数 */
-  MaxMessageBytes?: number;
+  MaxMessageBytes?: number | null;
   /** 消息保留文件大小 */
-  RetentionBytes?: number;
+  RetentionBytes?: number | null;
   /** 消息保存的时间类型 */
-  LogMsgTimestampType?: string;
+  LogMsgTimestampType?: string | null;
 }
 
 /** 返回连接源的Id */
@@ -421,13 +421,13 @@ declare interface CreateInstancePostResp {
 /** 创建预付费接口返回的Data */
 declare interface CreateInstancePreData {
   /** CreateInstancePre返回固定为0，不能作为CheckTaskStatus的查询条件。只是为了保证和后台数据结构对齐。 */
-  FlowId?: number | null;
+  FlowId?: number;
   /** 订单号列表 */
-  DealNames?: string[] | null;
+  DealNames?: string[];
   /** ckafka集群实例Id，当购买多个实例时，默认返回购买的第一个实例 id */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 订单和购买实例对应映射列表 */
-  DealNameInstanceIdMapping?: DealInstanceDTO[] | null;
+  DealNameInstanceIdMapping?: DealInstanceDTO[];
 }
 
 /** 预付费实例相关接口返回结构 */
@@ -437,7 +437,7 @@ declare interface CreateInstancePreResp {
   /** 成功消息 */
   ReturnMessage?: string;
   /** 操作型返回的Data数据 */
-  Data?: CreateInstancePreData | null;
+  Data?: CreateInstancePreData;
   /** 删除时间。目前该参数字段已废弃，将会在未来被删除 */
   DeleteRouteTimestamp?: string | null;
 }
@@ -483,9 +483,9 @@ declare interface CtsdbModifyConnectParam {
 /** Ctsdb类型入参 */
 declare interface CtsdbParam {
   /** 连接管理实例资源 */
-  Resource?: string | null;
+  Resource?: string;
   /** Ctsdb的metric */
-  CtsdbMetric?: string | null;
+  CtsdbMetric?: string;
 }
 
 /** Datahub资源配置 */
@@ -545,21 +545,21 @@ declare interface DatahubTaskInfo {
   /** 状态，-1创建失败，0创建中，1运行中，2删除中，3已删除，4删除失败，5暂停中，6已暂停，7暂停失败，8恢复中，9恢复失败 */
   Status?: number;
   /** 数据源 */
-  SourceResource?: DatahubResource | null;
+  SourceResource?: DatahubResource;
   /** 数据目标 */
-  TargetResource?: DatahubResource | null;
+  TargetResource?: DatahubResource;
   /** 任务创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 异常信息 */
-  ErrorMessage?: string | null;
+  ErrorMessage?: string;
   /** 创建进度百分比 */
-  TaskProgress?: number | null;
+  TaskProgress?: number;
   /** 任务当前处于的步骤 */
-  TaskCurrentStep?: string | null;
+  TaskCurrentStep?: string;
   /** Datahub转储Id */
-  DatahubId?: string | null;
+  DatahubId?: string;
   /** 步骤列表 */
-  StepList?: string[] | null;
+  StepList?: string[];
 }
 
 /** Datahub主题 */
@@ -585,7 +585,7 @@ declare interface DatahubTopicResp {
   /** 主题名称 */
   TopicName?: string;
   /** 主题Id */
-  TopicId?: string | null;
+  TopicId?: string;
 }
 
 /** 数据处理——Value处理参数——转换时间格式参数 */
@@ -593,53 +593,53 @@ declare interface DateParam {
   /** 时间格式 */
   Format?: string;
   /** 输入类型，string，unix时间戳，默认string */
-  TargetType?: string | null;
+  TargetType?: string;
   /** 时区，默认GMT+8 */
-  TimeZone?: string | null;
+  TimeZone?: string;
 }
 
 /** 预付费/后付费接口中，订单和 CKafka 实例映射数据结构 */
 declare interface DealInstanceDTO {
   /** 订单流水 */
-  DealName?: string | null;
+  DealName?: string;
   /** 订单流水对应购买的 CKafka 实例 id 列表 */
-  InstanceIdList?: string[] | null;
+  InstanceIdList?: string[];
 }
 
 /** topic链接信息 */
 declare interface DescribeConnectInfoResultDTO {
   /** ip地址 */
-  IpAddr: string | null;
+  IpAddr?: string | null;
   /** 连结时间 */
-  Time: string | null;
+  Time?: string | null;
   /** 是否支持的版本 */
-  IsUnSupportVersion: boolean | null;
+  IsUnSupportVersion?: boolean;
 }
 
 /** 查询连接源具体数据的返参 */
 declare interface DescribeConnectResource {
   /** 连接源的Id */
-  ResourceId?: string | null;
+  ResourceId?: string;
   /** 连接源名称 */
-  ResourceName?: string | null;
+  ResourceName?: string;
   /** 连接源描述 */
-  Description?: string | null;
+  Description?: string;
   /** 连接源类型 */
-  Type?: string | null;
+  Type?: string;
   /** 连接源的状态 */
-  Status?: number | null;
+  Status?: number;
   /** 连接源的创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 连接源的异常信息 */
-  ErrorMessage?: string | null;
+  ErrorMessage?: string;
   /** 该连接源关联的Datahub任务数 */
-  DatahubTaskCount?: number | null;
+  DatahubTaskCount?: number;
   /** 连接源的当前所处步骤 */
-  CurrentStep?: string | null;
+  CurrentStep?: string;
   /** 创建进度百分比 */
-  TaskProgress?: number | null;
+  TaskProgress?: number;
   /** 步骤列表 */
-  StepList?: string[] | null;
+  StepList?: string[];
   /** Dts配置，Type为DTS时返回 */
   DtsConnectParam?: DtsConnectParam | null;
   /** MongoDB配置，Type为MONGODB时返回 */
@@ -669,21 +669,21 @@ declare interface DescribeConnectResource {
 /** 查询连接源具体数据的返参 */
 declare interface DescribeConnectResourceResp {
   /** 连接源的Id */
-  ResourceId?: string | null;
+  ResourceId?: string;
   /** 连接源名称 */
-  ResourceName?: string | null;
+  ResourceName?: string;
   /** 连接源描述 */
-  Description?: string | null;
+  Description?: string;
   /** 连接源类型 */
-  Type?: string | null;
+  Type?: string;
   /** 连接源的状态 */
-  Status?: number | null;
+  Status?: number;
   /** 连接源的创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 连接源的异常信息 */
-  ErrorMessage?: string | null;
+  ErrorMessage?: string;
   /** 连接源的当前所处步骤 */
-  CurrentStep?: string | null;
+  CurrentStep?: string;
   /** 步骤列表 */
   StepList?: string[] | null;
   /** MySQL配置，Type为MYSQL或TDSQL_C_MYSQL时返回 */
@@ -717,7 +717,7 @@ declare interface DescribeConnectResourcesResp {
   /** 连接源个数 */
   TotalCount?: number;
   /** 连接源数据 */
-  ConnectResourceList?: DescribeConnectResource[] | null;
+  ConnectResourceList?: DescribeConnectResource[];
 }
 
 /** 查询Datahub任务信息 */
@@ -731,27 +731,27 @@ declare interface DescribeDatahubTaskRes {
   /** 状态，-1创建失败，0创建中，1运行中，2删除中，3已删除，4删除失败，5暂停中，6已暂停，7暂停失败，8恢复中，9恢复失败 */
   Status?: number;
   /** 数据源 */
-  SourceResource?: DatahubResource | null;
+  SourceResource?: DatahubResource;
   /** 数据目标 */
-  TargetResource?: DatahubResource | null;
+  TargetResource?: DatahubResource;
   /** Connection列表 */
-  Connections?: Connection[] | null;
+  Connections?: Connection[];
   /** 任务创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 消息处理规则 */
   TransformParam?: TransformParam | null;
   /** 数据接入ID */
-  DatahubId?: string | null;
+  DatahubId?: string;
   /** 绑定的SchemaId */
-  SchemaId?: string | null;
+  SchemaId?: string;
   /** 绑定的Schema名称 */
-  SchemaName?: string | null;
+  SchemaName?: string;
   /** 数据处理规则 */
   TransformsParam?: TransformsParam | null;
   /** 异常信息 */
-  ErrorMessage?: string | null;
+  ErrorMessage?: string;
   /** 任务标签列表 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
 }
 
 /** 查询Datahub任务列表 */
@@ -759,7 +759,7 @@ declare interface DescribeDatahubTasksRes {
   /** 任务总数 */
   TotalCount?: number;
   /** Datahub任务信息列表 */
-  TaskList?: DatahubTaskInfo[] | null;
+  TaskList?: DatahubTaskInfo[];
 }
 
 /** Datahub Topic详情 */
@@ -775,7 +775,7 @@ declare interface DescribeDatahubTopicResp {
   /** 过期时间 */
   RetentionMs?: number;
   /** 备注 */
-  Note?: string | null;
+  Note?: string;
   /** 用户名 */
   UserName?: string;
   /** 密码 */
@@ -783,7 +783,7 @@ declare interface DescribeDatahubTopicResp {
   /** 状态，1使用中，2删除中 */
   Status?: number;
   /** 服务路由地址 */
-  Address?: string | null;
+  Address?: string;
 }
 
 /** Datahub主题列表 */
@@ -791,7 +791,7 @@ declare interface DescribeDatahubTopicsResp {
   /** 总数 */
   TotalCount?: number;
   /** Topic列表 */
-  TopicList?: DatahubTopicDTO[] | null;
+  TopicList?: DatahubTopicDTO[];
 }
 
 /** DescribeGroup返回实体 */
@@ -805,77 +805,77 @@ declare interface DescribeGroup {
 /** Doris 连接源参数 */
 declare interface DorisConnectParam {
   /** Doris jdbc 负载均衡连接 port，通常映射到 fe 的 9030 端口 */
-  Port: number | null;
+  Port: number;
   /** Doris 连接源的用户名 */
-  UserName: string | null;
+  UserName: string;
   /** Doris 连接源的密码 */
-  Password: string | null;
+  Password: string;
   /** Doris 连接源的实例资源 */
-  Resource: string | null;
+  Resource: string;
   /** Doris 连接源的实例vip，当为腾讯云实例时，必填 */
-  ServiceVip?: string | null;
+  ServiceVip?: string;
   /** Doris 连接源的vpcId，当为腾讯云实例时，必填 */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** 是否更新到关联的Datahub任务 */
-  IsUpdate?: boolean | null;
+  IsUpdate?: boolean;
   /** Doris 连接源是否为自建集群 */
-  SelfBuilt?: boolean | null;
+  SelfBuilt?: boolean;
   /** Doris 的 http 负载均衡连接 port，通常映射到 be 的 8040 端口 */
-  BePort?: number | null;
+  BePort?: number;
 }
 
 /** Doris 连接源修改参数 */
 declare interface DorisModifyConnectParam {
   /** Doris 连接源的实例资源 */
-  Resource: string | null;
+  Resource: string;
   /** Doris jdbc 负载均衡连接 port，通常映射到 fe 的 9030 端口 */
-  Port?: number | null;
+  Port?: number;
   /** Doris 连接源的实例vip，当为腾讯云实例时，必填 */
-  ServiceVip?: string | null;
+  ServiceVip?: string;
   /** Doris 连接源的vpcId，当为腾讯云实例时，必填 */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** Doris 连接源的用户名 */
-  UserName?: string | null;
+  UserName?: string;
   /** Doris 连接源的密码 */
-  Password?: string | null;
+  Password?: string;
   /** 是否更新到关联的Datahub任务 */
-  IsUpdate?: boolean | null;
+  IsUpdate?: boolean;
   /** Doris 连接源是否为自建集群 */
-  SelfBuilt?: boolean | null;
+  SelfBuilt?: boolean;
   /** Doris 的 http 负载均衡连接 port，通常映射到 be 的 8040 端口 */
-  BePort?: number | null;
+  BePort?: number;
 }
 
 /** dip失败消息写入cls的配置 */
 declare interface DropCls {
   /** 是否投递到cls */
-  DropInvalidMessageToCls?: boolean | null;
+  DropInvalidMessageToCls?: boolean;
   /** 投递cls的地域 */
-  DropClsRegion?: string | null;
+  DropClsRegion?: string;
   /** 投递cls的账号 */
-  DropClsOwneruin?: string | null;
+  DropClsOwneruin?: string;
   /** 投递cls的主题 */
-  DropClsTopicId?: string | null;
+  DropClsTopicId?: string;
   /** 投递cls的日志集id */
-  DropClsLogSet?: string | null;
+  DropClsLogSet?: string;
 }
 
 /** Dts连接源参数 */
 declare interface DtsConnectParam {
   /** Dts的连接port */
-  Port: number | null;
+  Port: number;
   /** Dts消费分组的Id */
-  GroupId: string | null;
+  GroupId: string;
   /** Dts消费分组的账号 */
-  UserName: string | null;
+  UserName: string;
   /** Dts消费分组的密码 */
-  Password: string | null;
+  Password: string;
   /** Dts实例Id */
-  Resource: string | null;
+  Resource: string;
   /** Dts订阅的topic */
-  Topic: string | null;
+  Topic: string;
   /** 是否更新到关联的Datahub任务 */
-  IsUpdate?: boolean | null;
+  IsUpdate?: boolean;
 }
 
 /** Dts修改连接源参数 */
@@ -899,21 +899,21 @@ declare interface DtsModifyConnectParam {
 /** Dts类型入参 */
 declare interface DtsParam {
   /** Dts实例Id */
-  Resource: string | null;
+  Resource: string;
   /** Dts的连接ip */
-  Ip?: string | null;
+  Ip?: string;
   /** Dts的连接port */
-  Port?: number | null;
+  Port?: number;
   /** Dts订阅的topic */
-  Topic?: string | null;
+  Topic?: string;
   /** Dts消费分组的Id */
-  GroupId?: string | null;
+  GroupId?: string;
   /** Dts消费分组的账号 */
-  GroupUser?: string | null;
+  GroupUser?: string;
   /** Dts消费分组的密码 */
-  GroupPassword?: string | null;
+  GroupPassword?: string;
   /** false同步原始数据，true同步解析后的json格式数据,默认true */
-  TranSql?: boolean | null;
+  TranSql?: boolean;
 }
 
 /** 动态硬盘扩容配置 */
@@ -943,19 +943,19 @@ declare interface DynamicRetentionTime {
 /** Es连接源参数 */
 declare interface EsConnectParam {
   /** Es的连接port */
-  Port: number | null;
+  Port: number;
   /** Es连接源的用户名 */
-  UserName: string | null;
+  UserName: string;
   /** Es连接源的密码 */
-  Password: string | null;
+  Password: string;
   /** Es连接源的实例资源 */
-  Resource: string | null;
+  Resource: string;
   /** Es连接源是否为自建集群 */
-  SelfBuilt: boolean | null;
+  SelfBuilt: boolean;
   /** Es连接源的实例vip，当为腾讯云实例时，必填 */
-  ServiceVip?: string | null;
+  ServiceVip?: string;
   /** Es连接源的vpcId，当为腾讯云实例时，必填 */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** 是否更新到关联的Datahub任务 */
   IsUpdate?: boolean | null;
 }
@@ -963,73 +963,73 @@ declare interface EsConnectParam {
 /** Es修改连接源参数 */
 declare interface EsModifyConnectParam {
   /** Es连接源的实例资源【不支持修改】 */
-  Resource: string | null;
+  Resource: string;
   /** Es的连接port【不支持修改】 */
-  Port?: number | null;
+  Port?: number;
   /** Es连接源的实例vip【不支持修改】 */
-  ServiceVip?: string | null;
+  ServiceVip?: string;
   /** Es连接源的vpcId【不支持修改】 */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** Es连接源的用户名 */
-  UserName?: string | null;
+  UserName?: string;
   /** Es连接源的密码 */
-  Password?: string | null;
+  Password?: string;
   /** Es连接源是否为自建集群【不支持修改】 */
-  SelfBuilt?: boolean | null;
+  SelfBuilt?: boolean;
   /** 是否更新到关联的Datahub任务 */
-  IsUpdate?: boolean | null;
+  IsUpdate?: boolean;
 }
 
 /** Es类型入参 */
 declare interface EsParam {
   /** Es实例资源Id */
-  Resource: string | null;
+  Resource: string;
   /** Es的连接port */
-  Port?: number | null;
+  Port?: number;
   /** Es用户名 */
-  UserName?: string | null;
+  UserName?: string;
   /** Es密码 */
-  Password?: string | null;
+  Password?: string;
   /** 是否为自建集群 */
-  SelfBuilt?: boolean | null;
+  SelfBuilt?: boolean;
   /** 实例vip */
-  ServiceVip?: string | null;
+  ServiceVip?: string;
   /** 实例的vpcId */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** Es是否抛弃解析失败的消息 */
-  DropInvalidMessage?: boolean | null;
+  DropInvalidMessage?: boolean;
   /** Es自定义index名称 */
-  Index?: string | null;
+  Index?: string;
   /** Es自定义日期后缀 */
-  DateFormat?: string | null;
+  DateFormat?: string;
   /** 非json格式数据的自定义key */
-  ContentKey?: string | null;
+  ContentKey?: string;
   /** Es是否抛弃非json格式的消息 */
-  DropInvalidJsonMessage?: boolean | null;
+  DropInvalidJsonMessage?: boolean;
   /** 转储到Es中的文档ID取值字段名 */
-  DocumentIdField?: string | null;
+  DocumentIdField?: string;
   /** Es自定义index名称的类型，STRING，JSONPATH，默认为STRING */
-  IndexType?: string | null;
+  IndexType?: string;
   /** 当设置成员参数DropInvalidMessageToCls设置为true时,DropInvalidMessage参数失效 */
-  DropCls?: DropCls | null;
+  DropCls?: DropCls;
   /** 转储到ES的消息为Database的binlog时，如果需要同步数据库操作，即增删改的操作到ES时填写数据库表主键 */
-  DatabasePrimaryKey?: string | null;
+  DatabasePrimaryKey?: string;
   /** 死信队列 */
-  DropDlq?: FailureParam | null;
+  DropDlq?: FailureParam;
   /** 使用数据订阅格式导入 es 时，消息与 es 索引字段映射关系。不填默认为默认字段匹配 */
-  RecordMappingList?: EsRecordMapping[] | null;
+  RecordMappingList?: EsRecordMapping[];
   /** 消息要映射为 es 索引中 @timestamp 的字段，如果当前配置为空，则使用消息的时间戳进行映射 */
-  DateField?: string | null;
+  DateField?: string;
   /** 用来区分当前索引映射，属于新建索引还是存量索引。"EXIST_MAPPING"：从存量索引中选择；"NEW_MAPPING"：新建索引 */
-  RecordMappingMode?: string | null;
+  RecordMappingMode?: string;
 }
 
 /** 消息字段与 es 索引的映射关系 */
 declare interface EsRecordMapping {
   /** es 索引成员名称 */
-  ColumnName?: string | null;
+  ColumnName?: string;
   /** 消息字段名称 */
-  JsonKey?: string | null;
+  JsonKey?: string;
 }
 
 /** EventBus配置 */
@@ -1059,9 +1059,9 @@ declare interface FailureParam {
   /** 重试次数 */
   MaxRetryAttempts?: number;
   /** DIP Topic类型死信队列 */
-  TopicParam?: TopicParam | null;
+  TopicParam?: TopicParam;
   /** 死信队列类型，CKAFKA，TOPIC */
-  DlqType?: string | null;
+  DlqType?: string;
 }
 
 /** 数据处理——处理链 */
@@ -1069,19 +1069,19 @@ declare interface FieldParam {
   /** 解析 */
   Analyse: AnalyseParam;
   /** 二次解析 */
-  SecondaryAnalyse?: SecondaryAnalyseParam | null;
+  SecondaryAnalyse?: SecondaryAnalyseParam;
   /** 数据处理 */
-  SMT?: SMTParam[] | null;
+  SMT?: SMTParam[];
   /** 测试结果 */
-  Result?: string | null;
+  Result?: string;
   /** 解析结果 */
-  AnalyseResult?: SMTParam[] | null;
+  AnalyseResult?: SMTParam[];
   /** 二次解析结果 */
-  SecondaryAnalyseResult?: SMTParam[] | null;
+  SecondaryAnalyseResult?: SMTParam[];
   /** JSON格式解析结果 */
-  AnalyseJsonResult?: string | null;
+  AnalyseJsonResult?: string;
   /** JSON格式二次解析结果 */
-  SecondaryAnalyseJsonResult?: string | null;
+  SecondaryAnalyseJsonResult?: string;
 }
 
 /** 查询过滤器>描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等> * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。> * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。> */
@@ -1127,7 +1127,7 @@ declare interface GroupInfoTopics {
   /** 分配的 topic 名称 */
   Topic?: string;
   /** 分配的 partition 信息 */
-  Partitions?: number[] | null;
+  Partitions?: number[];
 }
 
 /** 组偏移量分区对象 */
@@ -1137,7 +1137,7 @@ declare interface GroupOffsetPartition {
   /** consumer 提交的 offset 位置 */
   Offset?: number;
   /** 支持消费者提交消息时，传入 metadata 作为它用，当前一般为空字符串 */
-  Metadata?: string | null;
+  Metadata?: string;
   /** 错误码 */
   ErrorCode?: number;
   /** 当前 partition 最新的 offset */
@@ -1151,13 +1151,13 @@ declare interface GroupOffsetTopic {
   /** 主题名称 */
   Topic?: string;
   /** 该主题分区数组，其中每个元素为一个 json object */
-  Partitions?: GroupOffsetPartition[] | null;
+  Partitions?: GroupOffsetPartition[];
 }
 
 /** InquireCkafkaPrice接口询价返回值 */
 declare interface InquireCkafkaPriceResp {
   /** 实例价格 */
-  InstancePrice?: InquiryPrice | null;
+  InstancePrice?: InquiryPrice;
   /** 公网带宽价格 */
   PublicNetworkBandwidthPrice?: InquiryPrice | null;
 }
@@ -1165,15 +1165,15 @@ declare interface InquireCkafkaPriceResp {
 /** 询价返回参数 */
 declare interface InquiryBasePrice {
   /** 单位原价 */
-  UnitPrice?: number | null;
+  UnitPrice?: number;
   /** 折扣单位价格 */
-  UnitPriceDiscount?: number | null;
+  UnitPriceDiscount?: number;
   /** 合计原价 */
-  OriginalPrice?: number | null;
+  OriginalPrice?: number;
   /** 折扣合计价格 */
-  DiscountPrice?: number | null;
+  DiscountPrice?: number;
   /** 折扣(单位是%) */
-  Discount?: number | null;
+  Discount?: number;
   /** 商品数量 */
   GoodsNum?: number | null;
   /** 付费货币 */
@@ -1185,7 +1185,7 @@ declare interface InquiryBasePrice {
   /** 购买时长单位("m"按月, "h"按小时) */
   TimeUnit?: string | null;
   /** 购买数量 */
-  Value?: number | null;
+  Value?: number;
 }
 
 /** 详细类别的价格 */
@@ -1199,7 +1199,7 @@ declare interface InquiryDetailPrice {
   /** 额外Topic价格 */
   TopicPrice?: InquiryBasePrice | null;
   /** 实例套餐价格 */
-  InstanceTypePrice?: InquiryBasePrice | null;
+  InstanceTypePrice?: InquiryBasePrice;
 }
 
 /** 购买硬盘参数 */
@@ -1213,25 +1213,25 @@ declare interface InquiryDiskParam {
 /** 询价返回参数 */
 declare interface InquiryPrice {
   /** 单位原价 */
-  UnitPrice?: number | null;
+  UnitPrice?: number;
   /** 折扣单位价格 */
-  UnitPriceDiscount?: number | null;
+  UnitPriceDiscount?: number;
   /** 合计原价 */
-  OriginalPrice?: number | null;
+  OriginalPrice?: number;
   /** 折扣合计价格 */
-  DiscountPrice?: number | null;
+  DiscountPrice?: number;
   /** 折扣(单位是%) */
-  Discount?: number | null;
+  Discount?: number;
   /** 商品数量 */
-  GoodsNum?: number | null;
+  GoodsNum?: number;
   /** 付费货币 */
-  Currency?: string | null;
+  Currency?: string;
   /** 硬盘专用返回参数 */
   DiskType?: string | null;
   /** 购买时长 */
-  TimeSpan?: number | null;
+  TimeSpan?: number;
   /** 购买时长单位("m"按月, "h"按小时) */
-  TimeUnit?: string | null;
+  TimeUnit?: string;
   /** 购买数量 */
   Value?: number | null;
   /** 详细类别的价格 */
@@ -1255,7 +1255,7 @@ declare interface Instance {
   /** 实例的状态。0: 创建中，1: 运行中，2: 删除中, 3: 已删除, 5: 隔离中, 7: 升级中, -1: 创建失败 */
   Status?: number;
   /** 是否开源实例。开源：true，不开源：false */
-  IfCommunity?: boolean | null;
+  IfCommunity?: boolean;
 }
 
 /** 实例购买付费参数 */
@@ -1317,31 +1317,31 @@ declare interface InstanceDetail {
   /** 标识tag */
   Tags?: Tag[];
   /** kafka版本信息 */
-  Version?: string | null;
+  Version?: string;
   /** 跨可用区 */
-  ZoneIds?: number[] | null;
+  ZoneIds?: number[];
   /** ckafka售卖类型 */
-  Cvm?: number | null;
+  Cvm?: number;
   /** ckafka集群实例类型 */
-  InstanceType?: string | null;
+  InstanceType?: string;
   /** ckafka集群实例磁盘类型 */
-  DiskType?: string | null;
+  DiskType?: string;
   /** 当前规格最大Topic数 */
-  MaxTopicNumber?: number | null;
+  MaxTopicNumber?: number;
   /** 当前规格最大Partition数 */
-  MaxPartitionNumber?: number | null;
+  MaxPartitionNumber?: number;
   /** 计划升级配置时间 */
-  RebalanceTime?: string | null;
+  RebalanceTime?: string;
   /** 实例当前partition数量 */
-  PartitionNumber?: number | null;
+  PartitionNumber?: number;
   /** ckafka集群实例公网带宽类型 */
-  PublicNetworkChargeType?: string | null;
+  PublicNetworkChargeType?: string;
   /** 公网带宽 最小3Mbps 最大999Mbps 仅专业版支持填写 */
-  PublicNetwork?: number | null;
+  PublicNetwork?: number;
   /** ckafka集群实例底层集群类型 */
-  ClusterType?: string | null;
+  ClusterType?: string;
   /** 实例功能列表 */
-  Features?: string[] | null;
+  Features?: string[];
 }
 
 /** 实例 / topic 维度限流策略 */
@@ -1367,21 +1367,21 @@ declare interface KVParam {
   /** key-value二次解析分隔符 */
   Regex: string;
   /** 保留源Key，默认为false不保留 */
-  KeepOriginalKey?: string | null;
+  KeepOriginalKey?: string;
 }
 
 /** Kafka连接源参数 */
 declare interface KafkaConnectParam {
   /** Kafka连接源的实例资源, 非自建时必填，NetworkType=VPC时传clb实例id */
-  Resource?: string | null;
+  Resource?: string;
   /** 是否为自建集群 */
-  SelfBuilt?: boolean | null;
+  SelfBuilt?: boolean;
   /** 是否更新到关联的Dip任务 */
   IsUpdate?: boolean | null;
   /** Kafka连接的broker地址, NetworkType=PUBLIC公网时必填 */
-  BrokerAddress?: string | null;
+  BrokerAddress?: string;
   /** CKafka连接源的实例资源地域, 跨地域时必填 */
-  Region?: string | null;
+  Region?: string;
 }
 
 /** Ckafka配置 */
@@ -1407,23 +1407,23 @@ declare interface KafkaParam {
   /** 启用容错实例/开启死信队列 */
   EnableToleration?: boolean | null;
   /** Qps 限制 */
-  QpsLimit?: number | null;
+  QpsLimit?: number;
   /** Table到Topic的路由，「分发到多个topic」开关打开时必传 */
   TableMappings?: TableMapping[] | null;
   /** 「分发到多个topic」开关，默认为false */
-  UseTableMapping?: boolean | null;
+  UseTableMapping?: boolean;
   /** 使用的Topic是否需要自动创建（目前只支持SOURCE流入任务，如果不使用分发到多个topic，需要在Topic字段填写需要自动创建的topic名） */
-  UseAutoCreateTopic?: boolean | null;
+  UseAutoCreateTopic?: boolean;
   /** 写入Topic时是否进行压缩，不开启填"none"，开启的话，填写"open"。 */
-  CompressionType?: string | null;
+  CompressionType?: string;
   /** 源topic消息1条扩增成msgMultiple条写入目标topic(该参数目前只有ckafka流入ckafka适用) */
-  MsgMultiple?: number | null;
+  MsgMultiple?: number;
   /** 数据同步专用参数, 正常数据处理可为空, 实例级别同步: 仅同步元数据填写"META_SYNC_INSTANCE_TYPE", 同步元数据及全部topic内消息的填写"META_AND_DATA_SYNC_INSTANCE_TYPE"; topic级别同步: 选中的源和目标topic中的消息(需要目标实例也包含该topic)填写"DATA_SYNC_TYPE" */
-  ConnectorSyncType?: string | null;
+  ConnectorSyncType?: string;
   /** 数据同步专用参数, 当通过时,希望下游的消息写入分区与上游的一致,则填true,但下游分区小于上游时,会报错; 不需要一致则为false, 默认为false */
-  KeepPartition?: boolean | null;
+  KeepPartition?: boolean;
   /** 正则匹配Topic列表 */
-  TopicRegularExpression?: string | null;
+  TopicRegularExpression?: string;
 }
 
 /** 小写字符解析 */
@@ -1443,61 +1443,61 @@ declare interface MapParam {
 /** MariaDB连接源参数 */
 declare interface MariaDBConnectParam {
   /** MariaDB的连接port */
-  Port: number | null;
+  Port: number;
   /** MariaDB连接源的用户名 */
-  UserName: string | null;
+  UserName: string;
   /** MariaDB连接源的密码 */
-  Password: string | null;
+  Password: string;
   /** MariaDB连接源的实例资源 */
-  Resource: string | null;
+  Resource: string;
   /** MariaDB连接源的实例vip，当为腾讯云实例时，必填 */
-  ServiceVip?: string | null;
+  ServiceVip?: string;
   /** MariaDB连接源的vpcId，当为腾讯云实例时，必填 */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** 是否更新到关联的Datahub任务 */
-  IsUpdate?: boolean | null;
+  IsUpdate?: boolean;
 }
 
 /** MariaDB连接源参数 */
 declare interface MariaDBModifyConnectParam {
   /** MariaDB连接源的实例资源【不支持修改】 */
-  Resource: string | null;
+  Resource: string;
   /** MariaDB的连接port【不支持修改】 */
-  Port?: number | null;
+  Port?: number;
   /** MariaDB连接源的实例vip【不支持修改】 */
-  ServiceVip?: string | null;
+  ServiceVip?: string;
   /** MariaDB连接源的vpcId【不支持修改】 */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** MariaDB连接源的用户名 */
-  UserName?: string | null;
+  UserName?: string;
   /** MariaDB连接源的密码 */
-  Password?: string | null;
+  Password?: string;
   /** 是否更新到关联的Datahub任务 */
-  IsUpdate?: boolean | null;
+  IsUpdate?: boolean;
 }
 
 /** MariaDB类型入参 */
 declare interface MariaDBParam {
   /** MariaDB的数据库名称，"*"为全数据库 */
-  Database: string | null;
+  Database: string;
   /** MariaDB的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"数据库名.数据表名"的格式进行填写 */
-  Table: string | null;
+  Table: string;
   /** 该MariaDB在连接管理内的Id */
-  Resource: string | null;
+  Resource: string;
   /** 复制存量信息(schema_only不复制, initial全量)，默认值initial */
-  SnapshotMode?: string | null;
+  SnapshotMode?: string;
   /** 格式：库1.表1:字段1,字段2;库2.表2:字段2，表之间;（分号）隔开，字段之间,（逗号）隔开。不指定的表默认取表的主键 */
-  KeyColumns?: string | null;
+  KeyColumns?: string;
   /** 当Table输入的是前缀时，该项值为true，否则为false */
-  IsTablePrefix?: boolean | null;
+  IsTablePrefix?: boolean;
   /** 输出格式，DEFAULT、CANAL_1、CANAL_2 */
-  OutputFormat?: string | null;
+  OutputFormat?: string;
   /** 如果该值为all，则DDL数据以及DML数据也会写入到选中的topic；若该值为dml，则只有DML数据写入到选中的topic */
-  IncludeContentChanges?: string | null;
+  IncludeContentChanges?: string;
   /** 如果该值为true，且MySQL中"binlog_rows_query_log_events"配置项的值为"ON"，则流入到topic的数据包含原SQL语句；若该值为false，流入到topic的数据不包含原SQL语句 */
-  IncludeQuery?: boolean | null;
+  IncludeQuery?: boolean;
   /** 如果该值为 true，则消息中会携带消息结构体对应的schema，如果该值为false则不会携带 */
-  RecordWithSchema?: boolean | null;
+  RecordWithSchema?: boolean;
 }
 
 /** 修改实例属性的配置对象 */
@@ -1513,227 +1513,227 @@ declare interface ModifyInstanceAttributesConfig {
 /** MongoDB连接源参数 */
 declare interface MongoDBConnectParam {
   /** MongoDB的连接port */
-  Port: number | null;
+  Port: number;
   /** MongoDB连接源的用户名 */
-  UserName: string | null;
+  UserName: string;
   /** MongoDB连接源的密码 */
-  Password: string | null;
+  Password: string;
   /** MongoDB连接源的实例资源 */
-  Resource: string | null;
+  Resource: string;
   /** MongoDB连接源是否为自建集群 */
-  SelfBuilt: boolean | null;
+  SelfBuilt: boolean;
   /** MongoDB连接源的实例vip，当为腾讯云实例时，必填 */
-  ServiceVip?: string | null;
+  ServiceVip?: string;
   /** MongoDB连接源的vpcId，当为腾讯云实例时，必填 */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** 是否更新到关联的Datahub任务 */
-  IsUpdate?: boolean | null;
+  IsUpdate?: boolean;
 }
 
 /** MongoDB修改连接源参数 */
 declare interface MongoDBModifyConnectParam {
   /** MongoDB连接源的实例资源【不支持修改】 */
-  Resource: string | null;
+  Resource: string;
   /** MongoDB的连接port【不支持修改】 */
-  Port?: number | null;
+  Port?: number;
   /** MongoDB连接源的实例vip【不支持修改】 */
-  ServiceVip?: string | null;
+  ServiceVip?: string;
   /** MongoDB连接源的vpcId【不支持修改】 */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** MongoDB连接源的用户名 */
-  UserName?: string | null;
+  UserName?: string;
   /** MongoDB连接源的密码 */
-  Password?: string | null;
+  Password?: string;
   /** MongoDB连接源是否为自建集群【不支持修改】 */
-  SelfBuilt?: boolean | null;
+  SelfBuilt?: boolean;
   /** 是否更新到关联的Datahub任务 */
-  IsUpdate?: boolean | null;
+  IsUpdate?: boolean;
 }
 
 /** MongoDB类型入参 */
 declare interface MongoDBParam {
   /** MongoDB的数据库名称 */
-  Database: string | null;
+  Database: string;
   /** MongoDB的集群 */
-  Collection: string | null;
+  Collection: string;
   /** 是否复制存量数据，默认传参true */
-  CopyExisting: boolean | null;
+  CopyExisting: boolean;
   /** 实例资源 */
-  Resource: string | null;
+  Resource: string;
   /** MongoDB的连接ip */
-  Ip?: string | null;
+  Ip?: string;
   /** MongoDB的连接port */
-  Port?: number | null;
+  Port?: number;
   /** MongoDB数据库用户名 */
-  UserName?: string | null;
+  UserName?: string;
   /** MongoDB数据库密码 */
-  Password?: string | null;
+  Password?: string;
   /** 监听事件类型，为空时表示全选。取值包括insert,update,replace,delete,invalidate,drop,dropdatabase,rename，多个类型间使用,逗号分隔 */
-  ListeningEvent?: string | null;
+  ListeningEvent?: string;
   /** 主从优先级，默认主节点 */
-  ReadPreference?: string | null;
+  ReadPreference?: string;
   /** 聚合管道 */
-  Pipeline?: string | null;
+  Pipeline?: string;
   /** 是否为自建集群 */
-  SelfBuilt?: boolean | null;
+  SelfBuilt?: boolean;
 }
 
 /** MQTT连接源参数 */
 declare interface MqttConnectParam {
   /** MQTT连接源的用户名 */
-  UserName: string | null;
+  UserName: string;
   /** MQTT连接源的密码 */
-  Password: string | null;
+  Password: string;
   /** MQTT连接源的实例资源 */
-  Resource: string | null;
+  Resource: string;
   /** MQTT Instance vpc-id */
-  UniqVpcId: string | null;
+  UniqVpcId: string;
   /** 是否为自建集群 */
-  SelfBuilt?: boolean | null;
+  SelfBuilt?: boolean;
   /** 是否更新到关联的Dip任务 */
-  IsUpdate?: boolean | null;
+  IsUpdate?: boolean;
   /** MQTT连接源的实例资源地域, 跨地域时必填 */
-  Region?: string | null;
+  Region?: string;
 }
 
 /** 创建MQTT 为Source的Data Hub Task参数 */
 declare interface MqttParam {
   /** 需要同步的MQTT Topic列表, CSV格式 */
-  Topics: string | null;
+  Topics: string;
   /** MQTT clean-session */
-  CleanSession: boolean | null;
+  CleanSession: boolean;
   /** MQTT instance-id */
-  Resource?: string | null;
+  Resource?: string;
   /** MQTT实例VIP */
-  Ip?: string | null;
+  Ip?: string;
   /** MQTT VIP 端口 */
-  Port?: number | null;
+  Port?: number;
   /** MQTT实例用户名 */
-  UserName?: string | null;
+  UserName?: string;
   /** MQTT实例内账户密码 */
-  Password?: string | null;
+  Password?: string;
   /** QoS */
-  Qos?: number | null;
+  Qos?: number;
   /** tasks.max 订阅Topic的并发Task个数, 默认为1; 当设置大于1时, 使用Shared Subscription */
-  MaxTasks?: number | null;
+  MaxTasks?: number;
   /** MQTT 实例的Service VIP */
-  ServiceVip?: string | null;
+  ServiceVip?: string;
   /** MQTT实例的VPC ID */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** 是否为自建集群, MQTT只支持非自建集群 */
-  SelfBuilt?: boolean | null;
+  SelfBuilt?: boolean;
 }
 
 /** MySQL连接源参数 */
 declare interface MySQLConnectParam {
   /** MySQL的连接port */
-  Port: number | null;
+  Port: number;
   /** MySQL连接源的用户名 */
-  UserName: string | null;
+  UserName: string;
   /** MySQL连接源的密码 */
-  Password: string | null;
+  Password: string;
   /** MySQL连接源的实例资源 */
-  Resource: string | null;
+  Resource: string;
   /** MySQL连接源的实例vip，当为腾讯云实例时，必填 */
-  ServiceVip?: string | null;
+  ServiceVip?: string;
   /** MySQL连接源的vpcId，当为腾讯云实例时，必填 */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** 是否更新到关联的Datahub任务 */
   IsUpdate?: boolean | null;
   /** 当type为TDSQL_C_MYSQL时，必填 */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** Mysql 连接源是否为自建集群 */
-  SelfBuilt?: boolean | null;
+  SelfBuilt?: boolean;
 }
 
 /** MySQL修改连接源参数 */
 declare interface MySQLModifyConnectParam {
   /** MySQL连接源的实例资源【不支持修改】 */
-  Resource: string | null;
+  Resource: string;
   /** MySQL的连接port【不支持修改】 */
-  Port?: number | null;
+  Port?: number;
   /** MySQL连接源的实例vip【不支持修改】 */
-  ServiceVip?: string | null;
+  ServiceVip?: string;
   /** MySQL连接源的vpcId【不支持修改】 */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** MySQL连接源的用户名 */
-  UserName?: string | null;
+  UserName?: string;
   /** MySQL连接源的密码 */
-  Password?: string | null;
+  Password?: string;
   /** 是否更新到关联的Datahub任务 */
-  IsUpdate?: boolean | null;
+  IsUpdate?: boolean;
   /** 当type为TDSQL_C_MYSQL时 */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 是否是自建的集群 */
-  SelfBuilt?: boolean | null;
+  SelfBuilt?: boolean;
 }
 
 /** MySQL类型入参 */
 declare interface MySQLParam {
   /** MySQL的数据库名称，"*"为全数据库 */
-  Database: string | null;
+  Database: string;
   /** MySQL的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"数据库名.数据表名"的格式进行填写，需要填入正则表达式时，格式为"数据库名\\.数据表名" */
-  Table: string | null;
+  Table: string;
   /** 该MySQL在连接管理内的Id */
-  Resource: string | null;
+  Resource: string;
   /** 复制存量信息(schema_only不复制, initial全量)，默认值initial */
-  SnapshotMode?: string | null;
+  SnapshotMode?: string;
   /** 存放MySQL的Ddl信息的Topic，为空则默认不存放 */
-  DdlTopic?: string | null;
+  DdlTopic?: string;
   /** "TABLE" 表示读取项为 table，"QUERY" 表示读取项为 query */
-  DataSourceMonitorMode?: string | null;
+  DataSourceMonitorMode?: string;
   /** 当 "DataMonitorMode"="TABLE" 时，传入需要读取的 Table；当 "DataMonitorMode"="QUERY" 时，传入需要读取的查询 sql 语句 */
-  DataSourceMonitorResource?: string | null;
+  DataSourceMonitorResource?: string;
   /** "TIMESTAMP" 表示增量列为时间戳类型，"INCREMENT" 表示增量列为自增 id 类型 */
-  DataSourceIncrementMode?: string | null;
+  DataSourceIncrementMode?: string;
   /** 传入需要监听的列名称 */
-  DataSourceIncrementColumn?: string | null;
+  DataSourceIncrementColumn?: string;
   /** "HEAD" 表示复制存量 + 增量数据，"TAIL" 表示只复制增量数据 */
-  DataSourceStartFrom?: string | null;
+  DataSourceStartFrom?: string;
   /** "INSERT" 表示使用 Insert 模式插入，"UPSERT" 表示使用 Upsert 模式插入 */
-  DataTargetInsertMode?: string | null;
+  DataTargetInsertMode?: string;
   /** 当 "DataInsertMode"="UPSERT" 时，传入当前 upsert 时依赖的主键 */
-  DataTargetPrimaryKeyField?: string | null;
+  DataTargetPrimaryKeyField?: string;
   /** 表与消息间的映射关系 */
-  DataTargetRecordMapping?: RecordMapping[] | null;
+  DataTargetRecordMapping?: RecordMapping[];
   /** 事件路由到特定主题的正则表达式，默认为(.*) */
-  TopicRegex?: string | null;
+  TopicRegex?: string;
   /** TopicRegex的引用组，指定$1、$2等 */
-  TopicReplacement?: string | null;
+  TopicReplacement?: string;
   /** 格式：库1.表1:字段1,字段2;库2.表2:字段2，表之间;（分号）隔开，字段之间,（逗号）隔开。不指定的表默认取表的主键 */
-  KeyColumns?: string | null;
+  KeyColumns?: string;
   /** Mysql 是否抛弃解析失败的消息，默认为true */
-  DropInvalidMessage?: boolean | null;
+  DropInvalidMessage?: boolean;
   /** 当设置成员参数DropInvalidMessageToCls设置为true时,DropInvalidMessage参数失效 */
-  DropCls?: DropCls | null;
+  DropCls?: DropCls;
   /** 输出格式，DEFAULT、CANAL_1、CANAL_2 */
-  OutputFormat?: string | null;
+  OutputFormat?: string;
   /** 当Table输入的是前缀时，该项值为true，否则为false */
-  IsTablePrefix?: boolean | null;
+  IsTablePrefix?: boolean;
   /** 如果该值为all，则DDL数据以及DML数据也会写入到选中的topic；若该值为dml，则只有DML数据写入到选中的topic */
-  IncludeContentChanges?: string | null;
+  IncludeContentChanges?: string;
   /** 如果该值为true，且MySQL中"binlog_rows_query_log_events"配置项的值为"ON"，则流入到topic的数据包含原SQL语句；若该值为false，流入到topic的数据不包含原SQL语句 */
-  IncludeQuery?: boolean | null;
+  IncludeQuery?: boolean;
   /** 如果该值为 true，则消息中会携带消息结构体对应的schema，如果该值为false则不会携带 */
-  RecordWithSchema?: boolean | null;
+  RecordWithSchema?: boolean;
   /** 存放信令表的数据库名称 */
-  SignalDatabase?: string | null;
+  SignalDatabase?: string;
   /** 输入的table是否为正则表达式，如果该选项以及IsTablePrefix同时为true，该选项的判断优先级高于IsTablePrefix */
-  IsTableRegular?: boolean | null;
+  IsTableRegular?: boolean;
   /** 信号表 */
   SignalTable?: string | null;
   /** datetime 类型字段转换为时间戳的时区 */
-  DateTimeZone?: string | null;
+  DateTimeZone?: string;
   /** 自建 */
-  SelfBuilt?: boolean | null;
+  SelfBuilt?: boolean;
 }
 
 /** 操作类型返回的Data结构 */
 declare interface OperateResponseData {
   /** 流程Id */
-  FlowId?: number | null;
+  FlowId?: number;
   /** RouteIdDto */
-  RouteDTO?: RouteDTO | null;
+  RouteDTO?: RouteDTO;
 }
 
 /** 分区实体 */
@@ -1745,9 +1745,9 @@ declare interface Partition {
 /** 分区和位移 */
 declare interface PartitionOffset {
   /** 分区 */
-  Partition?: string | null;
+  Partition?: string;
   /** 位点偏移量 */
-  Offset?: number | null;
+  Offset?: number;
 }
 
 /** partition信息 */
@@ -1761,75 +1761,75 @@ declare interface Partitions {
 /** PostgreSQL连接源参数 */
 declare interface PostgreSQLConnectParam {
   /** PostgreSQL的连接port */
-  Port: number | null;
+  Port: number;
   /** PostgreSQL连接源的用户名 */
-  UserName: string | null;
+  UserName: string;
   /** PostgreSQL连接源的密码 */
-  Password: string | null;
+  Password: string;
   /** PostgreSQL连接源的实例资源 */
-  Resource: string | null;
+  Resource: string;
   /** PostgreSQL连接源的实例vip，当为腾讯云实例时，必填 */
-  ServiceVip?: string | null;
+  ServiceVip?: string;
   /** PostgreSQL连接源的vpcId，当为腾讯云实例时，必填 */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** 当type为TDSQL_C_POSTGRESQL时，必填 */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 是否更新到关联的Datahub任务 */
-  IsUpdate?: boolean | null;
+  IsUpdate?: boolean;
   /** PostgreSQL连接源是否为自建集群 */
-  SelfBuilt?: boolean | null;
+  SelfBuilt?: boolean;
 }
 
 /** PostgreSQL修改连接源参数 */
 declare interface PostgreSQLModifyConnectParam {
   /** PostgreSQL连接源的实例资源【不支持修改】 */
-  Resource: string | null;
+  Resource: string;
   /** PostgreSQL的连接port【不支持修改】 */
-  Port?: number | null;
+  Port?: number;
   /** PostgreSQL连接源的实例vip【不支持修改】 */
-  ServiceVip?: string | null;
+  ServiceVip?: string;
   /** PostgreSQL连接源的vpcId【不支持修改】 */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** PostgreSQL连接源的用户名 */
-  UserName?: string | null;
+  UserName?: string;
   /** PostgreSQL连接源的密码 */
-  Password?: string | null;
+  Password?: string;
   /** 当type为TDSQL_C_POSTGRESQL时，该参数才有值【不支持修改】 */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 是否更新到关联的Datahub任务 */
-  IsUpdate?: boolean | null;
+  IsUpdate?: boolean;
   /** 是否为自建集群 */
-  SelfBuilt?: boolean | null;
+  SelfBuilt?: boolean;
 }
 
 /** PostgreSQL类型入参 */
 declare interface PostgreSQLParam {
   /** PostgreSQL的数据库名称 */
-  Database: string | null;
+  Database: string;
   /** PostgreSQL的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"Schema名.数据表名"的格式进行填写，需要填入正则表达式时，格式为"Schema名\\.数据表名" */
-  Table: string | null;
+  Table: string;
   /** 该PostgreSQL在连接管理内的Id */
-  Resource: string | null;
+  Resource: string;
   /** 插件名(decoderbufs/pgoutput)，默认为decoderbufs */
-  PluginName: string | null;
+  PluginName: string;
   /** 复制存量信息(never增量, initial全量)，默认为initial */
-  SnapshotMode?: string | null;
+  SnapshotMode?: string;
   /** 上游数据格式(JSON/Debezium), 当数据库同步模式为默认字段匹配时,必填 */
-  DataFormat?: string | null;
+  DataFormat?: string;
   /** "INSERT" 表示使用 Insert 模式插入，"UPSERT" 表示使用 Upsert 模式插入 */
-  DataTargetInsertMode?: string | null;
+  DataTargetInsertMode?: string;
   /** 当 "DataInsertMode"="UPSERT" 时，传入当前 upsert 时依赖的主键 */
-  DataTargetPrimaryKeyField?: string | null;
+  DataTargetPrimaryKeyField?: string;
   /** 表与消息间的映射关系 */
-  DataTargetRecordMapping?: RecordMapping[] | null;
+  DataTargetRecordMapping?: RecordMapping[];
   /** 是否抛弃解析失败的消息，默认为true */
-  DropInvalidMessage?: boolean | null;
+  DropInvalidMessage?: boolean;
   /** 输入的table是否为正则表达式 */
-  IsTableRegular?: boolean | null;
+  IsTableRegular?: boolean;
   /** 格式：库1.表1:字段1,字段2;库2.表2:字段2，表之间;（分号）隔开，字段之间,（逗号）隔开。不指定的表默认取表的主键 */
-  KeyColumns?: string | null;
+  KeyColumns?: string;
   /** 如果该值为 true，则消息中会携带消息结构体对应的schema，如果该值为false则不会携带 */
-  RecordWithSchema?: boolean | null;
+  RecordWithSchema?: boolean;
 }
 
 /** 消息价格实体 */
@@ -1857,11 +1857,11 @@ declare interface PrometheusDTO {
   /** vport */
   SourcePort?: number;
   /** broker地址 */
-  BrokerIp?: string | null;
+  BrokerIp?: string;
   /** VPC ID信息 */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 子网ID信息 */
-  SubnetId?: string | null;
+  SubnetId?: string;
 }
 
 /** Prometheus 监控返回 */
@@ -1879,7 +1879,7 @@ declare interface RecordMapping {
   /** 消息的 key 名称 */
   JsonKey?: string | null;
   /** 消息类型 */
-  Type?: string | null;
+  Type?: string;
   /** 消息是否允许为空 */
   AllowNull?: boolean | null;
   /** 对应映射列名称 */
@@ -1913,23 +1913,23 @@ declare interface Region {
   /** 区域名称 */
   AreaName?: string;
   /** 地域代码 */
-  RegionCode?: string | null;
+  RegionCode?: string;
   /** 地域代码（V3版本） */
-  RegionCodeV3?: string | null;
+  RegionCodeV3?: string;
   /** NONE:默认值不支持任何特殊类型 实例类型 */
-  Support?: string | null;
+  Support?: string;
   /** 是否支持ipv6, 0：表示不支持，1：表示支持 */
-  Ipv6?: number | null;
+  Ipv6?: number;
   /** 是否支持跨可用区, 0：表示不支持，1：表示支持 */
-  MultiZone?: number | null;
+  MultiZone?: number;
 }
 
 /** RenewCkafkaInstance接口出参bigDealIds */
 declare interface RenewCkafkaInstanceResp {
   /** 订单号 */
-  BigDealId?: string | null;
+  BigDealId?: string;
   /** 子订单号 */
-  DealName?: string | null;
+  DealName?: string;
 }
 
 /** 数据处理——Value处理参数——替换参数 */
@@ -1955,11 +1955,11 @@ declare interface Route {
   /** 域名port */
   DomainPort?: number | null;
   /** 时间戳 */
-  DeleteTimestamp?: string | null;
+  DeleteTimestamp?: string;
   /** 子网Id */
   Subnet?: string | null;
   /** 虚拟IP列表(1对1 broker节点) */
-  BrokerVipList?: VipEntity[] | null;
+  BrokerVipList?: VipEntity[];
   /** 私有网络Id */
   VpcId?: string | null;
 }
@@ -1967,7 +1967,7 @@ declare interface Route {
 /** RouteDTO */
 declare interface RouteDTO {
   /** 路由Id */
-  RouteId?: number | null;
+  RouteId?: number;
 }
 
 /** 数据处理ROW输出格式配置 */
@@ -1975,9 +1975,9 @@ declare interface RowParam {
   /** 行内容，KEY_VALUE，VALUE */
   RowContent: string;
   /** key和value间的分隔符 */
-  KeyValueDelimiter?: string | null;
+  KeyValueDelimiter?: string;
   /** 元素建的分隔符 */
-  EntryDelimiter?: string | null;
+  EntryDelimiter?: string;
 }
 
 /** 数据处理——数据处理参数 */
@@ -1989,93 +1989,93 @@ declare interface SMTParam {
   /** 数据类型，ORIGINAL原始，STRING，INT64，FLOAT64，BOOLEAN，MAP，ARRAY */
   SchemeType: string;
   /** 数据处理VALUE */
-  Value?: string | null;
+  Value?: string;
   /** VALUE处理 */
-  ValueOperate?: ValueParam | null;
+  ValueOperate?: ValueParam;
   /** 原始VALUE */
-  OriginalValue?: string | null;
+  OriginalValue?: string;
   /** VALUE处理链 */
-  ValueOperates?: ValueParam[] | null;
+  ValueOperates?: ValueParam[];
 }
 
 /** SQLServer连接源参数 */
 declare interface SQLServerConnectParam {
   /** SQLServer的连接port */
-  Port: number | null;
+  Port: number;
   /** SQLServer连接源的用户名 */
-  UserName: string | null;
+  UserName: string;
   /** SQLServer连接源的密码 */
-  Password: string | null;
+  Password: string;
   /** SQLServer连接源的实例资源 */
-  Resource: string | null;
+  Resource: string;
   /** SQLServer连接源的实例vip，当为腾讯云实例时，必填 */
-  ServiceVip?: string | null;
+  ServiceVip?: string;
   /** SQLServer连接源的vpcId，当为腾讯云实例时，必填 */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** 是否更新到关联的Dip任务 */
-  IsUpdate?: boolean | null;
+  IsUpdate?: boolean;
 }
 
 /** SQLServer修改连接源参数 */
 declare interface SQLServerModifyConnectParam {
   /** SQLServer连接源的实例资源【不支持修改】 */
-  Resource: string | null;
+  Resource: string;
   /** SQLServer的连接port【不支持修改】 */
-  Port?: number | null;
+  Port?: number;
   /** SQLServer连接源的实例vip【不支持修改】 */
-  ServiceVip?: string | null;
+  ServiceVip?: string;
   /** SQLServer连接源的vpcId【不支持修改】 */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** SQLServer连接源的用户名 */
-  UserName?: string | null;
+  UserName?: string;
   /** SQLServer连接源的密码 */
-  Password?: string | null;
+  Password?: string;
   /** 是否更新到关联的Dip任务 */
-  IsUpdate?: boolean | null;
+  IsUpdate?: boolean;
 }
 
 /** SQLServer类型入参 */
 declare interface SQLServerParam {
   /** SQLServer的数据库名称 */
-  Database: string | null;
+  Database: string;
   /** SQLServer的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"数据库名.数据表名"的格式进行填写 */
-  Table: string | null;
+  Table: string;
   /** 该SQLServer在连接管理内的Id */
-  Resource: string | null;
+  Resource: string;
   /** 复制存量信息(schema_only增量, initial全量)，默认为initial */
-  SnapshotMode?: string | null;
+  SnapshotMode?: string;
 }
 
 /** 标准版销售信息 */
 declare interface SaleInfo {
   /** 手动设置的flag标志 */
-  Flag: boolean | null;
+  Flag?: boolean;
   /** ckakfa版本号(1.1.1/2.4.2/0.10.2) */
-  Version: string | null;
+  Version?: string;
   /** 专业版、标准版标志 */
-  Platform: string | null;
+  Platform?: string;
   /** 售罄标志：true售罄 */
-  SoldOut: boolean | null;
+  SoldOut?: boolean;
 }
 
 /** 实例缩容应答 */
 declare interface ScalingDownResp {
   /** 订单号列表 */
-  DealNames?: string[] | null;
+  DealNames?: string[];
 }
 
 /** Scf类型入参 */
 declare interface ScfParam {
   /** SCF云函数函数名 */
-  FunctionName: string | null;
+  FunctionName: string;
   /** SCF云函数命名空间, 默认为default */
-  Namespace?: string | null;
+  Namespace?: string;
   /** SCF云函数版本及别名, 默认为$DEFAULT */
-  Qualifier?: string | null;
+  Qualifier?: string;
   /** 每批最大发送消息数, 默认为1000 */
-  BatchSize?: number | null;
+  BatchSize?: number;
   /** SCF调用失败后重试次数, 默认为5 */
-  MaxRetries?: number | null;
+  MaxRetries?: number;
 }
 
 /** 数据处理——二次解析参数 */
@@ -2095,11 +2095,11 @@ declare interface SubscribedInfo {
   /** 订阅的主题名 */
   TopicName?: string;
   /** 订阅的分区 */
-  Partition?: number[] | null;
+  Partition?: number[];
   /** 分区offset信息 */
-  PartitionOffset?: PartitionOffset[] | null;
+  PartitionOffset?: PartitionOffset[];
   /** 订阅的主题ID */
-  TopicId?: string | null;
+  TopicId?: string;
 }
 
 /** 数据处理——Value处理参数——截取参数 */
@@ -2133,15 +2133,15 @@ declare interface Tag {
 /** Tdw类型入参 */
 declare interface TdwParam {
   /** Tdw的bid */
-  Bid: string | null;
+  Bid: string;
   /** Tdw的tid */
-  Tid: string | null;
+  Tid: string;
   /** 默认true */
-  IsDomestic?: boolean | null;
+  IsDomestic?: boolean;
   /** TDW地址，默认tl-tdbank-tdmanager.tencent-distribute.com */
-  TdwHost?: string | null;
+  TdwHost?: string;
   /** TDW端口，默认8099 */
-  TdwPort?: number | null;
+  TdwPort?: number;
 }
 
 /** 返回的topic对象 */
@@ -2165,7 +2165,7 @@ declare interface TopicDetail {
   /** topic副本数 最小值 1,最大值 3 */
   ReplicaNum?: number;
   /** 备注 */
-  Note?: string | null;
+  Note?: string;
   /** 创建时间 */
   CreateTime?: number;
   /** 是否开启ip鉴权白名单，true表示开启，false表示不开启 */
@@ -2173,17 +2173,17 @@ declare interface TopicDetail {
   /** ip白名单中ip个数 */
   IpWhiteListCount?: number;
   /** 数据备份cos bucket: 转存到cos 的bucket地址 */
-  ForwardCosBucket?: string | null;
+  ForwardCosBucket?: string;
   /** 数据备份cos 状态： 1 不开启数据备份，0 开启数据备份 */
   ForwardStatus?: number;
   /** 数据备份到cos的周期频率 */
   ForwardInterval?: number;
   /** 高级配置 */
-  Config?: Config | null;
+  Config?: Config;
   /** 消息保留时间配置(用于动态配置变更记录) */
-  RetentionTimeConfig?: TopicRetentionTimeConfigRsp | null;
+  RetentionTimeConfig?: TopicRetentionTimeConfigRsp;
   /** 0:正常，1：已删除，2：删除中 */
-  Status?: number | null;
+  Status?: number;
   /** 标签列表 */
   Tags?: Tag[] | null;
 }
@@ -2211,11 +2211,11 @@ declare interface TopicFlowRankingResult {
   /** 消费者组消费速度排行速度 */
   ConsumeSpeed?: ConsumerGroupSpeed[];
   /** Topic 消息堆积/占用磁盘排行 */
-  TopicMessageHeap?: TopicMessageHeapRanking[] | null;
+  TopicMessageHeap?: TopicMessageHeapRanking[];
   /** Broker Ip 列表 */
-  BrokerIp?: string[] | null;
+  BrokerIp?: string[];
   /** 单个broker 节点 Topic占用的数据大小 */
-  BrokerTopicData?: BrokerTopicData[] | null;
+  BrokerTopicData?: BrokerTopicData[];
   /** 单个Broker 节点Topic 流量的大小(单位MB) */
   BrokerTopicFlowData?: BrokerTopicFlowData[];
 }
@@ -2223,21 +2223,21 @@ declare interface TopicFlowRankingResult {
 /** topic副本及详细信息 */
 declare interface TopicInSyncReplicaInfo {
   /** 分区名称 */
-  Partition: string;
+  Partition?: string;
   /** Leader Id */
-  Leader: number;
+  Leader?: number;
   /** 副本集 */
-  Replica: string;
+  Replica?: string;
   /** ISR */
-  InSyncReplica: string;
+  InSyncReplica?: string;
   /** 起始Offset */
-  BeginOffset: number | null;
+  BeginOffset?: number;
   /** 末端Offset */
-  EndOffset: number | null;
+  EndOffset?: number;
   /** 消息数 */
-  MessageCount: number | null;
+  MessageCount?: number;
   /** 未同步副本集 */
-  OutOfSyncReplica: string | null;
+  OutOfSyncReplica?: string;
 }
 
 /** Topic 副本及详情数据集合 */
@@ -2251,17 +2251,17 @@ declare interface TopicInSyncReplicaResult {
 /** topic消息堆积、占用磁盘排行 */
 declare interface TopicMessageHeapRanking {
   /** 主题ID */
-  TopicId?: string | null;
+  TopicId?: string;
   /** 主题名称 */
-  TopicName?: string | null;
+  TopicName?: string;
   /** 分区数 */
-  PartitionNum?: number | null;
+  PartitionNum?: number;
   /** 副本数 */
-  ReplicaNum?: number | null;
+  ReplicaNum?: number;
   /** Topic 流量 */
-  TopicTraffic?: string | null;
+  TopicTraffic?: string;
   /** topic消息堆积/占用磁盘 */
-  MessageHeap?: number | null;
+  MessageHeap?: number;
 }
 
 /** Topic配置 */
@@ -2273,13 +2273,13 @@ declare interface TopicParam {
   /** Offset类型为timestamp时必传，传时间戳，精确到秒 */
   StartTime?: number | null;
   /** Topic的TopicId【出参】 */
-  TopicId?: string | null;
+  TopicId?: string;
   /** 写入Topic时是否进行压缩，不开启填"none"，开启的话，可选择"gzip", "snappy", "lz4"中的一个进行填写。 */
-  CompressionType?: string | null;
+  CompressionType?: string;
   /** 使用的Topic是否需要自动创建（目前只支持SOURCE流入任务） */
-  UseAutoCreateTopic?: boolean | null;
+  UseAutoCreateTopic?: boolean;
   /** 源topic消息1条扩增成msgMultiple条写入目标topic(该参数目前只有ckafka流入ckafka适用) */
-  MsgMultiple?: number | null;
+  MsgMultiple?: number;
 }
 
 /** 分区详情 */
@@ -2297,19 +2297,19 @@ declare interface TopicPartitionDO {
 /** 统一返回的TopicResponse */
 declare interface TopicResult {
   /** 返回的主题信息列表 */
-  TopicList?: Topic[] | null;
+  TopicList?: Topic[];
   /** 符合条件的 topic 数量 */
-  TotalCount?: number | null;
+  TotalCount?: number;
 }
 
 /** Topic消息保留时间配置返回信息 */
 declare interface TopicRetentionTimeConfigRsp {
   /** 期望值，即用户配置的Topic消息保留时间(单位分钟) */
-  Expect?: number | null;
+  Expect?: number;
   /** 当前值，即当前生效值(可能存在动态调整，单位分钟) */
-  Current?: number | null;
+  Current?: number;
   /** 最近变更时间 */
-  ModTimeStamp?: number | null;
+  ModTimeStamp?: number;
 }
 
 /** DescribeTopicSubscribeGroup接口出参 */
@@ -2319,9 +2319,9 @@ declare interface TopicSubscribeGroup {
   /** 消费分组状态数量信息 */
   StatusCountInfo?: string;
   /** 消费分组信息 */
-  GroupsInfo?: GroupInfoResponse[] | null;
+  GroupsInfo?: GroupInfoResponse[];
   /** 此次请求是否异步的状态。实例里分组较少的会直接返回结果,Status为1。当分组较多时,会异步更新缓存，Status为0时不会返回分组信息，直至Status为1更新完毕返回结果。 */
-  Status?: number | null;
+  Status?: number;
 }
 
 /** 数据处理参数 */
@@ -2343,11 +2343,11 @@ declare interface TransformParam {
   /** 过滤器 */
   FilterParam?: FilterMapParam[];
   /** 测试结果 */
-  Result?: string | null;
+  Result?: string;
   /** 解析结果 */
-  AnalyseResult?: MapParam[] | null;
+  AnalyseResult?: MapParam[];
   /** 底层引擎是否使用eb */
-  UseEventBus?: boolean | null;
+  UseEventBus?: boolean;
 }
 
 /** 数据处理参数 */
@@ -2357,27 +2357,27 @@ declare interface TransformsParam {
   /** 处理链 */
   FieldChain: FieldParam[];
   /** 过滤器 */
-  FilterParam?: FilterMapParam[] | null;
+  FilterParam?: FilterMapParam[];
   /** 失败处理 */
-  FailureParam?: FailureParam | null;
+  FailureParam?: FailureParam;
   /** 测试结果 */
-  Result?: string | null;
+  Result?: string;
   /** 数据来源 */
-  SourceType?: string | null;
+  SourceType?: string;
   /** 输出格式，JSON，ROW，默认为JSON */
-  OutputFormat?: string | null;
+  OutputFormat?: string;
   /** 输出格式为ROW必填 */
-  RowParam?: RowParam | null;
+  RowParam?: RowParam;
   /** 是否保留数据源Topic元数据信息（源Topic、Partition、Offset），默认为false */
-  KeepMetadata?: boolean | null;
+  KeepMetadata?: boolean;
   /** 数组解析 */
-  BatchAnalyse?: BatchAnalyseParam | null;
+  BatchAnalyse?: BatchAnalyseParam;
 }
 
 /** Url解析 */
 declare interface UrlDecodeParam {
   /** 编码 */
-  CharsetName?: string | null;
+  CharsetName?: string;
 }
 
 /** 用户实体 */
@@ -2445,7 +2445,7 @@ declare interface ZoneInfo {
   /** true为售罄，false为未售罄 */
   SoldOut?: string;
   /** 标准版售罄信息 */
-  SalesInfo?: SaleInfo[] | null;
+  SalesInfo?: SaleInfo[];
   /** 额外标识 */
   ExtraFlag?: string;
 }
@@ -2819,7 +2819,7 @@ declare interface CreateInstancePostResponse {
 declare interface CreateInstancePreRequest {
   /** ckafka集群实例Name，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-) */
   InstanceName: string;
-  /** 可用区。当购买多可用区实例时，当前参数为主可用区。需要保证传入的参数和 SubnetId 所在子网属于同一个可用区 */
+  /** 可用区。当购买多可用区实例时，当前参数为主可用区。 [查看可用区](https://cloud.tencent.com/document/product/597/55246) */
   ZoneId: number;
   /** 预付费购买时长，例如 "1m",就是一个月 */
   Period: string;
@@ -3903,16 +3903,16 @@ declare interface GroupOffsetResponse {
   /** 符合调节的总结果数 */
   TotalCount?: number;
   /** 该主题分区数组，其中每个元素为一个 json object */
-  TopicList?: GroupOffsetTopic[] | null;
+  TopicList?: GroupOffsetTopic[];
 }
 
 declare interface GroupResponse {
   /** 计数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** GroupList */
-  GroupList?: DescribeGroup[] | null;
+  GroupList?: DescribeGroup[];
   /** 消费分组配额 */
-  GroupCountQuota?: number | null;
+  GroupCountQuota?: number;
 }
 
 declare interface InquireCkafkaPriceRequest {
@@ -3993,43 +3993,43 @@ declare interface InstanceAttributesResponse {
   /** 当前创建主题数 */
   CreatedTopics?: number;
   /** 标签数组 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
   /** 过期时间 */
-  ExpireTime?: number | null;
+  ExpireTime?: number;
   /** 可用区列表 */
-  ZoneIds?: number[] | null;
+  ZoneIds?: number[];
   /** ckafka集群实例版本 */
-  Version?: string | null;
+  Version?: string;
   /** 最大分组数 */
-  MaxGroupNum?: number | null;
+  MaxGroupNum?: number;
   /** 售卖类型,0:标准版,1:专业版 */
-  Cvm?: number | null;
+  Cvm?: number;
   /** 类型 */
-  InstanceType?: string | null;
+  InstanceType?: string;
   /** 表示该实例支持的特性。FEATURE_SUBNET_ACL:表示acl策略支持设置子网。 */
-  Features?: string[] | null;
+  Features?: string[];
   /** 动态消息保留策略 */
-  RetentionTimeConfig?: DynamicRetentionTime | null;
+  RetentionTimeConfig?: DynamicRetentionTime;
   /** 最大连接数 */
-  MaxConnection?: number | null;
+  MaxConnection?: number;
   /** 公网带宽 */
-  PublicNetwork?: number | null;
+  PublicNetwork?: number;
   /** 时间 */
-  DeleteRouteTimestamp?: string | null;
+  DeleteRouteTimestamp?: string;
   /** 剩余创建分区数 */
-  RemainingPartitions?: number | null;
+  RemainingPartitions?: number;
   /** 剩余创建主题数 */
-  RemainingTopics?: number | null;
+  RemainingTopics?: number;
   /** 动态硬盘扩容策略 */
-  DynamicDiskConfig?: DynamicDiskConfig | null;
+  DynamicDiskConfig?: DynamicDiskConfig;
   /** 实例计费类型 */
-  InstanceChargeType?: string | null;
+  InstanceChargeType?: string;
   /** 集群类型 */
-  ClusterType?: string | null;
+  ClusterType?: string;
   /** 免费分区数量 */
   FreePartitionNumber?: number;
   /** 弹性带宽上浮值 */
-  ElasticFloatBandwidth?: number | null;
+  ElasticFloatBandwidth?: number;
   /** ssl自定义证书id */
   CustomCertId?: string;
   /** 集群topic默认 unclean.leader.election.enable配置: 1 开启 0 关闭 */
@@ -4038,7 +4038,7 @@ declare interface InstanceAttributesResponse {
 
 declare interface InstanceDeleteResponse {
   /** 删除实例返回的任务Id */
-  FlowId?: number | null;
+  FlowId?: number;
 }
 
 declare interface InstanceDetailResponse {
@@ -4050,9 +4050,9 @@ declare interface InstanceDetailResponse {
 
 declare interface InstanceResponse {
   /** 符合条件的实例列表 */
-  InstanceList?: Instance[] | null;
+  InstanceList?: Instance[];
   /** 符合条件的结果总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
 }
 
 declare interface InstanceScalingDownRequest {
@@ -4360,7 +4360,7 @@ declare interface RenewCkafkaInstanceResponse {
 
 declare interface RouteResponse {
   /** 路由信息列表 */
-  Routers?: Route[] | null;
+  Routers?: Route[];
 }
 
 declare interface SendMessageRequest {
@@ -4381,7 +4381,7 @@ declare interface TaskStatusResponse {
   /** 任务状态:0 成功1 失败2 进行中 */
   Status?: number;
   /** 输出信息 */
-  Output?: string | null;
+  Output?: string;
 }
 
 declare interface TopicAttributesResponse {
@@ -4390,7 +4390,7 @@ declare interface TopicAttributesResponse {
   /** 创建时间 */
   CreateTime?: number;
   /** 主题备注 */
-  Note?: string | null;
+  Note?: string;
   /** 分区个数 */
   PartitionNum?: number;
   /** IP 白名单开关，1：打开； 0：关闭 */
@@ -4402,25 +4402,25 @@ declare interface TopicAttributesResponse {
   /** 分区详情 */
   Partitions?: TopicPartitionDO[];
   /** ACL预设策略开关，1：打开； 0：关闭 */
-  EnableAclRule?: number | null;
+  EnableAclRule?: number;
   /** 预设策略列表 */
-  AclRuleList?: AclRule[] | null;
+  AclRuleList?: AclRule[];
   /** topic 限流策略 */
-  QuotaConfig?: InstanceQuotaConfigResp | null;
+  QuotaConfig?: InstanceQuotaConfigResp;
   /** 副本数 */
-  ReplicaNum?: number | null;
+  ReplicaNum?: number;
 }
 
 declare interface TopicDetailResponse {
   /** 返回的主题详情列表 */
-  TopicList?: TopicDetail[] | null;
+  TopicList?: TopicDetail[];
   /** 符合条件的所有主题详情数量 */
   TotalCount?: number;
 }
 
 declare interface UserResponse {
   /** 符合条件的用户列表 */
-  Users?: User[] | null;
+  Users?: User[];
   /** 符合条件的总用户数 */
   TotalCount?: number;
 }
@@ -4437,29 +4437,29 @@ declare interface ZoneResponse {
   /** 后付费消息单价 */
   MessagePrice?: Price;
   /** 用户独占集群信息 */
-  ClusterInfo?: ClusterInfo[] | null;
+  ClusterInfo?: ClusterInfo[];
   /** 购买标准版配置 */
-  Standard?: string | null;
+  Standard?: string;
   /** 购买标准版S2配置 */
-  StandardS2?: string | null;
+  StandardS2?: string;
   /** 购买专业版配置 */
-  Profession?: string | null;
+  Profession?: string;
   /** 购买物理独占版配置 */
-  Physical?: string | null;
+  Physical?: string;
   /** 公网带宽 最小3Mbps 最大999Mbps 仅专业版支持填写 */
-  PublicNetwork?: string | null;
+  PublicNetwork?: string;
   /** 公网带宽配置 */
-  PublicNetworkLimit?: string | null;
+  PublicNetworkLimit?: string;
   /** 请求Id */
-  RequestId?: string | null;
+  RequestId?: string;
   /** 版本 */
-  Version?: string | null;
+  Version?: string;
   /** 分页offset */
-  Offset?: number | null;
+  Offset?: number;
   /** 分页limit */
-  Limit?: number | null;
+  Limit?: number;
   /** 是否必须录入tag */
-  ForceCheckTag?: boolean | null;
+  ForceCheckTag?: boolean;
 }
 
 /** {@link Ckafka 消息队列 CKafka 版} */

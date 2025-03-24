@@ -89,7 +89,7 @@ declare interface Cluster {
   /** 集群是否健康，1表示健康，0表示异常 */
   Healthy?: number;
   /** 集群健康信息 */
-  HealthyInfo?: string;
+  HealthyInfo?: string | null;
   /** 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败 */
   Status?: number;
   /** 最大命名空间数量 */
@@ -103,37 +103,37 @@ declare interface Cluster {
   /** 最大存储容量 */
   MaxStorageCapacity?: number;
   /** 集群版本 */
-  Version?: string;
+  Version?: string | null;
   /** 公网访问接入点 */
-  PublicEndPoint?: string;
+  PublicEndPoint?: string | null;
   /** VPC访问接入点 */
-  VpcEndPoint?: string;
+  VpcEndPoint?: string | null;
   /** 命名空间数量 */
-  NamespaceNum?: number;
+  NamespaceNum?: number | null;
   /** 已使用存储限制，MB为单位 */
-  UsedStorageBudget?: number;
+  UsedStorageBudget?: number | null;
   /** 最大生产消息速率，以条数为单位 */
-  MaxPublishRateInMessages?: number;
+  MaxPublishRateInMessages?: number | null;
   /** 最大推送消息速率，以条数为单位 */
-  MaxDispatchRateInMessages?: number;
+  MaxDispatchRateInMessages?: number | null;
   /** 最大生产消息速率，以字节为单位 */
-  MaxPublishRateInBytes?: number;
+  MaxPublishRateInBytes?: number | null;
   /** 最大推送消息速率，以字节为单位 */
-  MaxDispatchRateInBytes?: number;
+  MaxDispatchRateInBytes?: number | null;
   /** 已创建主题数 */
-  TopicNum?: number;
+  TopicNum?: number | null;
   /** 最长消息延时，以秒为单位 */
-  MaxMessageDelayInSeconds?: number;
+  MaxMessageDelayInSeconds?: number | null;
   /** 是否开启公网访问，不填时默认开启 */
-  PublicAccessEnabled?: boolean;
+  PublicAccessEnabled?: boolean | null;
   /** 标签 */
-  Tags?: Tag[];
+  Tags?: Tag[] | null;
   /** 计费模式：0: 按量计费1: 包年包月 */
-  PayMode?: number;
+  PayMode?: number | null;
   /** 项目ID */
-  ProjectId?: number;
+  ProjectId?: number | null;
   /** 项目名字 */
-  ProjectName?: string;
+  ProjectName?: string | null;
   /** 是否支持升级专业版实例 */
   UpgradeProInstance?: boolean;
 }
@@ -303,15 +303,15 @@ declare interface CmqTransactionPolicy {
 /** 消费者 */
 declare interface Consumer {
   /** 消费者开始连接的时间。 */
-  ConnectedSince?: string;
+  ConnectedSince?: string | null;
   /** 消费者地址。 */
-  ConsumerAddr?: string;
+  ConsumerAddr?: string | null;
   /** 消费者名称。 */
-  ConsumerName?: string;
+  ConsumerName?: string | null;
   /** 消费者版本。 */
-  ClientVersion?: string;
+  ClientVersion?: string | null;
   /** 消费者连接的主题分区号 */
-  Partition?: number;
+  Partition?: number | null;
 }
 
 /** 消费日志 */
@@ -335,9 +335,9 @@ declare interface ConsumerLog {
 /** 消费信息 */
 declare interface ConsumerLogs {
   /** 记录数。 */
-  TotalCount?: number;
+  TotalCount?: number | null;
   /** 消费日志。 */
-  ConsumerLogSets?: ConsumerLog[];
+  ConsumerLogSets?: ConsumerLog[] | null;
 }
 
 /** 消费详情 */
@@ -363,17 +363,17 @@ declare interface ConsumerStats {
 /** 消费进度详情 */
 declare interface ConsumersSchedule {
   /** 当前分区id。 */
-  Partitions?: number;
+  Partitions?: number | null;
   /** 消息数量。 */
-  NumberOfEntries?: number;
+  NumberOfEntries?: number | null;
   /** 消息积压数量。 */
-  MsgBacklog?: number;
+  MsgBacklog?: number | null;
   /** 消费者每秒分发消息的数量之和。 */
   MsgRateOut?: string;
   /** 消费者每秒消息的byte。 */
   MsgThroughputOut?: string;
   /** 超时丢弃比例。 */
-  MsgRateExpired?: string;
+  MsgRateExpired?: string | null;
 }
 
 /** Topic&Group维度的权限配置 */
@@ -393,7 +393,7 @@ declare interface DetailedRolePerm {
 /** 实例维度组合数组 */
 declare interface DimensionInstance {
   /** 实例的维度组合 */
-  Dimensions: DimensionOpt[];
+  Dimensions: DimensionOpt[] | null;
 }
 
 /** 指标维度对象 */
@@ -421,11 +421,11 @@ declare interface Environment {
   /** 命名空间名称 */
   NamespaceName?: string;
   /** Topic数量 */
-  TopicNum?: number;
+  TopicNum?: number | null;
   /** 消息保留策略 */
-  RetentionPolicy?: RetentionPolicy;
+  RetentionPolicy?: RetentionPolicy | null;
   /** 是否自动创建订阅 */
-  AutoSubscriptionCreation?: boolean;
+  AutoSubscriptionCreation?: boolean | null;
 }
 
 /** 环境角色集合 */
@@ -447,9 +447,9 @@ declare interface EnvironmentRole {
 /** 批量绑定名字空间和角色权限关系 */
 declare interface EnvironmentRoleSet {
   /** 需要绑定的命名空间Id，不重复且存在资源 */
-  EnvironmentId: string;
+  EnvironmentId: string | null;
   /** 名字空间需要绑定的权限，枚举为 "consume" "produce" 组合，但是不为空 */
-  Permissions: string[];
+  Permissions: string[] | null;
 }
 
 /** exchange使用配额信息 */
@@ -491,7 +491,7 @@ declare interface InstanceNodeDistribution {
   /** 有调度任务且没有切回的可用区，此标识为true */
   NodePermWipeFlag?: boolean;
   /** 可用区状态 */
-  ZoneStatus?: string;
+  ZoneStatus?: string | null;
 }
 
 /** 面向运营端的虚拟集群信息 */
@@ -533,13 +533,13 @@ declare interface InternalTenant {
   /** 命名空间最大消费TPS */
   MaxDispatchTps?: number;
   /** 命名空间最大消费带宽，byte为单位 */
-  MaxDispatchRateInBytes?: number;
+  MaxDispatchRateInBytes?: number | null;
   /** 命名空间最大生产带宽，byte为单位 */
-  MaxPublishRateInBytes?: number;
+  MaxPublishRateInBytes?: number | null;
   /** 消息最大保留空间，MB为单位 */
-  MaxRetentionSizeInMB?: number;
+  MaxRetentionSizeInMB?: number | null;
   /** public Access Enabled */
-  PublicAccessEnabled?: boolean;
+  PublicAccessEnabled?: boolean | null;
 }
 
 /** 迁移topic列表数据 */
@@ -571,31 +571,31 @@ declare interface MsgLog {
 /** 分区topic */
 declare interface PartitionsTopic {
   /** 最后一次间隔内发布消息的平均byte大小。 */
-  AverageMsgSize?: string;
+  AverageMsgSize?: string | null;
   /** 消费者数量。 */
-  ConsumerCount?: string;
+  ConsumerCount?: string | null;
   /** 被记录下来的消息总数。 */
-  LastConfirmedEntry?: string;
+  LastConfirmedEntry?: string | null;
   /** 最后一个ledger创建的时间。 */
-  LastLedgerCreatedTimestamp?: string;
+  LastLedgerCreatedTimestamp?: string | null;
   /** 本地和复制的发布者每秒发布消息的速率。 */
-  MsgRateIn?: string;
+  MsgRateIn?: string | null;
   /** 本地和复制的消费者每秒分发消息的数量之和。 */
-  MsgRateOut?: string;
+  MsgRateOut?: string | null;
   /** 本地和复制的发布者每秒发布消息的byte。 */
-  MsgThroughputIn?: string;
+  MsgThroughputIn?: string | null;
   /** 本地和复制的消费者每秒分发消息的byte。 */
-  MsgThroughputOut?: string;
+  MsgThroughputOut?: string | null;
   /** 被记录下来的消息总数。 */
-  NumberOfEntries?: string;
+  NumberOfEntries?: string | null;
   /** 子分区id。 */
-  Partitions?: number;
+  Partitions?: number | null;
   /** 生产者数量。 */
-  ProducerCount?: string;
+  ProducerCount?: string | null;
   /** 以byte计算的所有消息存储总量。 */
-  TotalSize?: string;
+  TotalSize?: string | null;
   /** topic类型描述。 */
-  TopicType?: number;
+  TopicType?: number | null;
 }
 
 /** 消息生产信息 */
@@ -639,31 +639,31 @@ declare interface PublicAccessRule {
 /** 生产者信息 */
 declare interface Publisher {
   /** 生产者id */
-  ProducerId?: number;
+  ProducerId?: number | null;
   /** 生产者名称 */
-  ProducerName?: string;
+  ProducerName?: string | null;
   /** 生产者地址 */
-  Address?: string;
+  Address?: string | null;
   /** 客户端版本 */
-  ClientVersion?: string;
+  ClientVersion?: string | null;
   /** 消息生产速率（条/秒） */
-  MsgRateIn?: number;
+  MsgRateIn?: number | null;
   /** 消息生产吞吐速率（字节/秒） */
-  MsgThroughputIn?: number;
+  MsgThroughputIn?: number | null;
   /** 平均消息大小（字节） */
-  AverageMsgSize?: number;
+  AverageMsgSize?: number | null;
   /** 连接时间 */
-  ConnectedSince?: string;
+  ConnectedSince?: string | null;
   /** 生产者连接的主题分区号 */
-  Partition?: number;
+  Partition?: number | null;
 }
 
 /** Pulsar 网络接入点信息 */
 declare interface PulsarNetworkAccessPointInfo {
   /** vpc的id，支撑网和公网接入点，该字段为空 */
-  VpcId?: string;
+  VpcId?: string | null;
   /** 子网id，支撑网和公网接入点，该字段为空 */
-  SubnetId?: string;
+  SubnetId?: string | null;
   /** 接入地址 */
   Endpoint?: string;
   /** 实例id */
@@ -671,17 +671,17 @@ declare interface PulsarNetworkAccessPointInfo {
   /** 接入点类型：0：支撑网接入点 1：VPC接入点 2：公网接入点 */
   RouteType?: number;
   /** 0：本地域访问，由于并没有配置跨地域容灾，所该类型的接入点，无法进行异地切换、异地访问切回；1：本地域访问，由于配置了跨地域容灾，随时可以进行异地切换，该状态用于主集群的接入点2：跨地域访问，已经完成了异地切换，该状态用于源集群的接入点，该状态下的接入点不可删除3：跨地域访问，随时可以进行异地访问切回，该状态用于目标集群的接入点，该状态下的接入点不可删除4:跨地域访问，目标集群已经完成异地切回，等待删除状态 */
-  OperationType?: number;
+  OperationType?: number | null;
   /** 接入点类型 */
-  AccessPointsType?: string;
+  AccessPointsType?: string | null;
   /** 带宽，目前只有公网会有这个值 */
-  Bandwidth?: number;
+  Bandwidth?: number | null;
   /** 类 */
-  SecurityPolicy?: SecurityPolicy[];
+  SecurityPolicy?: SecurityPolicy[] | null;
   /** 是否是标准的接入点 true是标准的 false不是标准的 */
-  StandardAccessPoint?: boolean;
+  StandardAccessPoint?: boolean | null;
   /** 可用区信息 */
-  ZoneName?: string;
+  ZoneName?: string | null;
 }
 
 /** Pulsar专业版集群信息 */
@@ -699,19 +699,19 @@ declare interface PulsarProClusterInfo {
   /** 集群版本 */
   Version?: string;
   /** 节点分布情况 */
-  NodeDistribution?: InstanceNodeDistribution[];
+  NodeDistribution?: InstanceNodeDistribution[] | null;
   /** 最大储存容量，单位：MB */
   MaxStorage?: number;
   /** 是否可以修改路由 */
-  CanEditRoute?: boolean;
+  CanEditRoute?: boolean | null;
   /** 代表是专业版和小规格专业版的不同计费规格PULSAR.P1固定存储PULSAR.P2弹性存储 */
-  BillingLabelVersion?: string;
+  BillingLabelVersion?: string | null;
   /** 实例到期时间戳，毫秒级精度。 */
-  ExpireTime?: number;
+  ExpireTime?: number | null;
   /** 是否开启自动创建主题true就是开启了，false是关闭 */
-  AutoCreateTopicStatus?: boolean;
+  AutoCreateTopicStatus?: boolean | null;
   /** 自动创建主题的默认分区数，如果没开启就是0 */
-  DefaultPartitionNumber?: number;
+  DefaultPartitionNumber?: number | null;
   /** 用户自定义的租户别名，如果没有，会复用专业集群 ID */
   Tenant?: string;
 }
@@ -729,9 +729,9 @@ declare interface PulsarProClusterSpecInfo {
   /** 最大主题分区数 */
   MaxTopics?: number;
   /** 规格外弹性TPS */
-  ScalableTps?: number;
+  ScalableTps?: number | null;
   /** 32或者128当前集群topic的最大分区数 */
-  MaxPartitions?: number;
+  MaxPartitions?: number | null;
   /** 商品最大延迟消息数量。0代表没有限制 */
   MaxDelayedMessages?: number;
 }
@@ -759,23 +759,23 @@ declare interface PulsarProInstance {
   /** 0-后付费，1-预付费 */
   PayMode?: number;
   /** 备注信息 */
-  Remark?: string;
+  Remark?: string | null;
   /** 实例配置ID */
   SpecName?: string;
   /** 规格外弹性TPS */
-  ScalableTps?: number;
+  ScalableTps?: number | null;
   /** VPC的id */
-  VpcId?: string;
+  VpcId?: string | null;
   /** 子网id */
-  SubnetId?: string;
+  SubnetId?: string | null;
   /** 峰值带宽。单位：mbps */
   MaxBandWidth?: number;
   /** 集群的标签列表 */
-  Tags?: Tag[];
+  Tags?: Tag[] | null;
   /** 集群创建时间 */
-  CreateTime?: string;
+  CreateTime?: string | null;
   /** 代表是专业版和小规格专业版的不同计费规格PULSAR.P1固定存储PULSAR.P2弹性存储 */
-  BillingLabelVersion?: string;
+  BillingLabelVersion?: string | null;
   /** 自定义租户 */
   Tenant?: string;
 }
@@ -1635,11 +1635,11 @@ declare interface Role {
 /** 安全策略 */
 declare interface SecurityPolicy {
   /** ip或者网段 */
-  Route?: string;
+  Route?: string | null;
   /** 策略 true就是允许，白名单或者 false 拒绝 黑名单 */
-  Policy?: boolean;
+  Policy?: boolean | null;
   /** 备注 */
-  Remark?: string;
+  Remark?: string | null;
 }
 
 /** 服务方信息 */
@@ -1665,41 +1665,41 @@ declare interface Subscription {
   /** 环境（命名空间）名称。 */
   EnvironmentId?: string;
   /** 消费者开始连接的时间。 */
-  ConnectedSince?: string;
+  ConnectedSince?: string | null;
   /** 消费者地址。 */
-  ConsumerAddr?: string;
+  ConsumerAddr?: string | null;
   /** 消费者数量。 */
-  ConsumerCount?: string;
+  ConsumerCount?: string | null;
   /** 消费者名称。 */
-  ConsumerName?: string;
+  ConsumerName?: string | null;
   /** 堆积的消息数量。 */
-  MsgBacklog?: string;
+  MsgBacklog?: string | null;
   /** 于TTL，此订阅下没有被发送而是被丢弃的比例。 */
-  MsgRateExpired?: string;
+  MsgRateExpired?: string | null;
   /** 消费者每秒分发消息的数量之和。 */
-  MsgRateOut?: string;
+  MsgRateOut?: string | null;
   /** 消费者每秒消息的byte。 */
-  MsgThroughputOut?: string;
+  MsgThroughputOut?: string | null;
   /** 订阅名称。 */
-  SubscriptionName?: string;
+  SubscriptionName?: string | null;
   /** 消费者集合。 */
-  ConsumerSets?: Consumer[];
+  ConsumerSets?: Consumer[] | null;
   /** 是否在线。 */
-  IsOnline?: boolean;
+  IsOnline?: boolean | null;
   /** 消费进度集合。 */
-  ConsumersScheduleSets?: ConsumersSchedule[];
+  ConsumersScheduleSets?: ConsumersSchedule[] | null;
   /** 备注。 */
-  Remark?: string;
+  Remark?: string | null;
   /** 创建时间。 */
-  CreateTime?: string;
+  CreateTime?: string | null;
   /** 最近修改时间。 */
-  UpdateTime?: string;
+  UpdateTime?: string | null;
   /** 订阅类型，Exclusive，Shared，Failover， Key_Shared，空或NULL表示未知， */
-  SubType?: string;
+  SubType?: string | null;
   /** 是否由于未 ack 数到达上限而被 block */
-  BlockedSubscriptionOnUnackedMsgs?: boolean;
+  BlockedSubscriptionOnUnackedMsgs?: boolean | null;
   /** 未 ack 消息数上限 */
-  MaxUnackedMsgNum?: number;
+  MaxUnackedMsgNum?: number | null;
 }
 
 /** 订阅关系 */
@@ -1715,59 +1715,59 @@ declare interface SubscriptionTopic {
 /** 标签的key/value的类型 */
 declare interface Tag {
   /** 标签的key的值 */
-  TagKey: string;
+  TagKey: string | null;
   /** 标签的Value的值 */
-  TagValue: string;
+  TagValue: string | null;
 }
 
 /** 主题实例 */
 declare interface Topic {
   /** 最后一次间隔内发布消息的平均byte大小。 */
-  AverageMsgSize?: string;
+  AverageMsgSize?: string | null;
   /** 消费者数量。 */
-  ConsumerCount?: string;
+  ConsumerCount?: string | null;
   /** 被记录下来的消息总数。 */
-  LastConfirmedEntry?: string;
+  LastConfirmedEntry?: string | null;
   /** 最后一个ledger创建的时间。 */
-  LastLedgerCreatedTimestamp?: string;
+  LastLedgerCreatedTimestamp?: string | null;
   /** 本地和复制的发布者每秒发布消息的速率。 */
-  MsgRateIn?: string;
+  MsgRateIn?: string | null;
   /** 本地和复制的消费者每秒分发消息的数量之和。 */
-  MsgRateOut?: string;
+  MsgRateOut?: string | null;
   /** 本地和复制的发布者每秒发布消息的byte。 */
-  MsgThroughputIn?: string;
+  MsgThroughputIn?: string | null;
   /** 本地和复制的消费者每秒分发消息的byte。 */
-  MsgThroughputOut?: string;
+  MsgThroughputOut?: string | null;
   /** 被记录下来的消息总数。 */
-  NumberOfEntries?: string;
+  NumberOfEntries?: string | null;
   /** 分区数<=0：topic下无子分区。 */
-  Partitions?: number;
+  Partitions?: number | null;
   /** 生产者数量。 */
-  ProducerCount?: string;
+  ProducerCount?: string | null;
   /** 以byte计算的所有消息存储总量。 */
-  TotalSize?: string;
+  TotalSize?: string | null;
   /** 分区topic里面的子分区。 */
-  SubTopicSets?: PartitionsTopic[];
+  SubTopicSets?: PartitionsTopic[] | null;
   /** topic类型描述：0：普通消息；1：全局顺序消息；2：局部顺序消息；3：重试队列；4：死信队列；5：事务消息。 */
-  TopicType?: number;
+  TopicType?: number | null;
   /** 环境（命名空间）名称。 */
-  EnvironmentId?: string;
+  EnvironmentId?: string | null;
   /** 主题名称。 */
-  TopicName?: string;
+  TopicName?: string | null;
   /** 说明，128个字符以内。 */
-  Remark?: string;
+  Remark?: string | null;
   /** 创建时间。 */
-  CreateTime?: string;
+  CreateTime?: string | null;
   /** 最近修改时间。 */
-  UpdateTime?: string;
+  UpdateTime?: string | null;
   /** 生产者上限。 */
-  ProducerLimit?: string;
+  ProducerLimit?: string | null;
   /** 消费者上限。 */
-  ConsumerLimit?: string;
+  ConsumerLimit?: string | null;
   /** 0: 非持久非分区1: 非持久分区2: 持久非分区3: 持久分区 */
-  PulsarTopicType?: number;
+  PulsarTopicType?: number | null;
   /** 未消费消息过期时间，单位：秒 */
-  MsgTTL?: number;
+  MsgTTL?: number | null;
   /** 集群 ID */
   ClusterId?: string;
   /** 用户自定义的租户别名，如果没有，会复用专业集群 ID */
@@ -1801,9 +1801,9 @@ declare interface TopicStats {
 /** 主题实例 */
 declare interface Topic_Simplification {
   /** 主题名称。 */
-  TopicName?: string;
+  TopicName?: string | null;
   /** 0: 非持久非分区1: 非持久分区2: 持久非分区3: 持久分区 */
-  PulsarTopicType?: number;
+  PulsarTopicType?: number | null;
 }
 
 /** 消息轨迹结果 */
@@ -1835,7 +1835,7 @@ declare interface VpcBindRecord {
   /** Vpc的Port */
   Port?: number;
   /** 说明，128个字符以内 */
-  Remark?: string;
+  Remark?: string | null;
 }
 
 /** VPC配置信息 */
