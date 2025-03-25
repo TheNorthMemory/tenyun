@@ -326,6 +326,14 @@ declare interface GooseFS {
   NameSpace?: string | null;
 }
 
+/** GosseFSx的配置 */
+declare interface GooseFSx {
+  /** goosefsx实例id */
+  Id?: string;
+  /** GooseFSx实例需要挂载的路径 */
+  Path?: string;
+}
+
 /** gpu 详情 */
 declare interface GpuDetail {
   /** GPU 显卡类型；枚举值: V100 A100 T4 */
@@ -680,6 +688,8 @@ declare interface ModelInfo {
   ModelSource?: string;
   /** cos路径信息 */
   CosPathInfo?: CosPathInfo;
+  /** GooseFSx的配置，ModelSource为GooseFSx时有效 */
+  GooseFSx?: GooseFSx;
   /** 模型对应的算法框架，预留 */
   AlgorithmFramework?: string | null;
   /** 默认为 NORMAL, 已加速模型: ACCELERATE, 自动学习模型 AUTO_ML */

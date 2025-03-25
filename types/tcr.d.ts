@@ -463,9 +463,9 @@ declare interface RetentionPolicy {
 /** 版本保留规则 */
 declare interface RetentionRule {
   /** 支持的策略，可选值为latestPushedK（保留最新推送多少个版本）nDaysSinceLastPush（保留近天内推送） */
-  Key: string | null;
+  Key: string;
   /** 规则设置下的对应值 */
-  Value: number | null;
+  Value: number;
 }
 
 /** 版本保留执行的规则 */
@@ -679,19 +679,19 @@ declare interface TcrNamespaceInfo {
 /** Tcr镜像仓库信息 */
 declare interface TcrRepositoryInfo {
   /** 仓库名称 */
-  Name: string;
+  Name?: string;
   /** 命名空间名称 */
-  Namespace: string;
+  Namespace?: string;
   /** 创建时间，格式"2006-01-02 15:04:05.999999999 -0700 MST" */
-  CreationTime: string;
+  CreationTime?: string;
   /** 是否公开 */
-  Public: boolean;
+  Public?: boolean;
   /** 仓库详细描述 */
-  Description: string | null;
+  Description?: string;
   /** 简单描述 */
-  BriefDescription: string | null;
+  BriefDescription?: string;
   /** 更新时间，格式"2006-01-02 15:04:05.999999999 -0700 MST" */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** 触发器触发条件 */
@@ -817,7 +817,7 @@ declare interface WebhookTrigger {
   /** 触发器所属命名空间 Id */
   NamespaceId?: number;
   /** 触发器所属命名空间名称 */
-  NamespaceName?: string | null;
+  NamespaceName?: string;
 }
 
 /** 触发器日志 */
@@ -2029,9 +2029,9 @@ declare interface DescribeRepositoriesRequest {
   NamespaceName?: string;
   /** 指定镜像仓库，不填写默认查询指定命名空间下所有镜像仓库 */
   RepositoryName?: string;
-  /** 页数，用于分页 */
+  /** 页数，第几页，用于分页 */
   Offset?: number;
-  /** 每页个数，用于分页 */
+  /** 每页个数，用于分页，最大值为100 */
   Limit?: number;
   /** 基于字段排序，支持的值有-creation_time,-name, -update_time */
   SortBy?: string;
@@ -2237,9 +2237,9 @@ declare interface DescribeWebhookTriggerRequest {
 
 declare interface DescribeWebhookTriggerResponse {
   /** 触发器总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 触发器列表 */
-  Triggers: WebhookTrigger[];
+  Triggers?: WebhookTrigger[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

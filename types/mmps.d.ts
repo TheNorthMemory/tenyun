@@ -369,17 +369,17 @@ declare interface DescribeFlySecMiniAppScanTaskParamRequest {
 
 declare interface DescribeFlySecMiniAppScanTaskParamResponse {
   /** 返回值, 0:成功, 其他值请查看“返回值”定义 */
-  Ret: number;
+  Ret?: number;
   /** 小程序AppID */
-  MiniAppID: string;
+  MiniAppID?: string;
   /** 诊断模式 1:基础诊断，2:深度诊断 */
-  Mode: number;
+  Mode?: number;
   /** 小程序测试账号(自有账号体系需提供,其他情况不需要) */
-  MiniAppTestAccount: string | null;
+  MiniAppTestAccount?: string;
   /** 小程序测试密码(自有账号体系需提供,其他情况不需要) */
-  MiniAppTestPwd: string | null;
+  MiniAppTestPwd?: string;
   /** 诊断扫描版本 0:正式版 1:体验版 */
-  ScanVersion: number | null;
+  ScanVersion?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

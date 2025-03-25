@@ -33,7 +33,7 @@ declare interface TotalStatus {
   /** 通知状态的数目 */
   NotifyCount?: number;
   /** 异常状态的数目 */
-  AbnormalCount?: number | null;
+  AbnormalCount?: number;
 }
 
 declare interface DescribeEventStatisticsRequest {

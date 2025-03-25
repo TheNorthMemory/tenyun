@@ -2074,13 +2074,13 @@ declare interface DescribeQAResponse {
   Answer?: string;
   /** 自定义参数 */
   CustomParam?: string;
-  /** 来源 */
+  /** 来源 1-文档生成问答对 2-批量导入问答对 3-单条手动录入问答对 */
   Source?: number;
   /** 来源描述 */
   SourceDesc?: string;
   /** 更新时间 */
   UpdateTime?: string;
-  /** 状态 */
+  /** 状态 1-未校验 2-未发布 3-发布中 4-已发布 5-发布失败 6-不采纳 7-审核中 8-审核失败 9-审核失败申诉后人工审核中 11-审核失败申诉后人工审核不通过 12-已过期 13-超量失效 14-超量失效恢复 19-学习中 20-学习失败 */
   Status?: number;
   /** 状态描述 */
   StatusDesc?: string;

@@ -155,15 +155,15 @@ declare interface MuskPromptInfo {
 /** HAI 实例的网络配置和消耗情况 */
 declare interface NetworkStatus {
   /** HAI 的实例 ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 公网 IP 地址 */
   AddressIp?: string | null;
   /** 出带宽上限，单位Mbps */
   Bandwidth?: number | null;
   /** 流量包总量，单位GB */
-  TotalTrafficAmount?: number | null;
+  TotalTrafficAmount?: number;
   /** 流量包剩余量，单位GB */
-  RemainingTrafficAmount?: number | null;
+  RemainingTrafficAmount?: number;
 }
 
 /** 费用数据结构体 */
@@ -179,21 +179,21 @@ declare interface Price {
 /** 地域列表 */
 declare interface RegionInfo {
   /** ap-guangzhou */
-  Region?: string | null;
+  Region?: string;
   /** 华南地区(广州) */
-  RegionName?: string | null;
+  RegionName?: string;
   /** 地域是否可用状态AVAILABLE：可用 */
-  RegionState?: string | null;
+  RegionState?: string;
   /** 学术加速是否支持：NO_NEED_SUPPORT表示不需支持；NOT_SUPPORT_YET表示暂未支持；ALREADY_SUPPORT表示已经支持。对于ALREADY_SUPPORT的地域才需进一步调用DescribeScholarRocketStatus查看学术加速是开启还是关闭 */
-  ScholarRocketSupportState?: string | null;
+  ScholarRocketSupportState?: string;
 }
 
 /** 场景详情 */
 declare interface SceneInfo {
   /** 场景id */
-  SceneId?: string | null;
+  SceneId?: string;
   /** 场景名 */
-  SceneName?: string | null;
+  SceneName?: string;
 }
 
 /** 描述了操作系统所在块设备即系统盘的信息 */
@@ -307,7 +307,7 @@ declare interface DescribeRegionsRequest {
 
 declare interface DescribeRegionsResponse {
   /** 地域列表 */
-  RegionSet?: RegionInfo[] | null;
+  RegionSet?: RegionInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -319,7 +319,7 @@ declare interface DescribeScenesRequest {
 
 declare interface DescribeScenesResponse {
   /** 场景详情 */
-  SceneSet?: SceneInfo[] | null;
+  SceneSet?: SceneInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

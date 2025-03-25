@@ -256,6 +256,8 @@ declare interface AlarmReceiverInfo {
   WecomGroup?: number | null;
   /** 飞书群，0：未设置，1：成功，2：失败 */
   LarkGroup?: number | null;
+  /** 发送结果 大json格式 */
+  AlarmMessageSendResult?: string | null;
 }
 
 /** 审批列表信息 */
@@ -4864,6 +4866,8 @@ declare interface TaskAlarmInfo {
   DingDingWebHooks?: string | null;
   /** 业务类型, 0-非默认, 1-默认 */
   BusinessType?: number | null;
+  /** alarm message rule */
+  AlarmMessageRule?: string | null;
 }
 
 /** 周期单位统计 */
@@ -5739,9 +5743,17 @@ declare interface WorkflowTaskCountOpsDto {
 }
 
 declare interface AddProjectUserRoleRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 用户uin */
+  UserIds: string[];
+  /** 角色id */
+  RoleIds: string[];
 }
 
 declare interface AddProjectUserRoleResponse {
+  /** 返回数据 */
+  Data?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11601,7 +11613,7 @@ declare interface UploadResourceResponse {
 declare interface Wedata {
   (): Versions;
   /** 添加项目用户角色 {@link AddProjectUserRoleRequest} {@link AddProjectUserRoleResponse} */
-  AddProjectUserRole(data?: AddProjectUserRoleRequest, config?: AxiosRequestConfig): AxiosPromise<AddProjectUserRoleResponse>;
+  AddProjectUserRole(data: AddProjectUserRoleRequest, config?: AxiosRequestConfig): AxiosPromise<AddProjectUserRoleResponse>;
   /** 批量创建任务告警规则 {@link BatchCreateIntegrationTaskAlarmsRequest} {@link BatchCreateIntegrationTaskAlarmsResponse} */
   BatchCreateIntegrationTaskAlarms(data: BatchCreateIntegrationTaskAlarmsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchCreateIntegrationTaskAlarmsResponse>;
   /** 异步批量创建任务版本 {@link BatchCreateTaskVersionAsyncRequest} {@link BatchCreateTaskVersionAsyncResponse} */

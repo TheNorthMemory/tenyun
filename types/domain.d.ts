@@ -143,7 +143,7 @@ declare interface DomainBaseInfo {
   /** 域名实名认证状态。NotUpload：未实名认证InAudit：实名审核中Approved：实名审核通过Reject：实名审核失败NoAudit: 无需实名认证 */
   RealNameAuditStatus?: string;
   /** 域名实名认证不通过原因。 */
-  RealNameAuditUnpassReason?: string | null;
+  RealNameAuditUnpassReason?: string;
   /** 域名命名审核状态。NotAudit：命名审核未上传Pending：命名审核待上传Auditing：域名命名审核中Approved：域名命名审核通过Rejected：域名命名审核拒绝 */
   DomainNameAuditStatus?: string;
   /** 域名命名审核不通过原因。 */

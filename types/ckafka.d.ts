@@ -179,7 +179,7 @@ declare interface ClickHouseConnectParam {
   /** ClickHouse连接源的vpcId，当为腾讯云实例时，必填 */
   UniqVpcId?: string;
   /** 是否更新到关联的Datahub任务 */
-  IsUpdate?: boolean;
+  IsUpdate?: boolean | null;
 }
 
 /** ClickHouse修改连接源参数 */
@@ -359,13 +359,13 @@ declare interface ConsumerRecord {
   /** 位点 */
   Offset?: number;
   /** 消息key */
-  Key?: string;
+  Key?: string | null;
   /** 消息value */
-  Value?: string;
+  Value?: string | null;
   /** 消息时间戳 */
   Timestamp?: number;
   /** 消息headers */
-  Headers?: string;
+  Headers?: string | null;
 }
 
 /** Cos Datahub 任务接入参数 */
@@ -2475,7 +2475,7 @@ declare interface AuthorizeTokenRequest {
 
 declare interface AuthorizeTokenResponse {
   /** 0 成功 */
-  Result?: number | null;
+  Result?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2541,7 +2541,7 @@ declare interface CancelAuthorizationTokenRequest {
 
 declare interface CancelAuthorizationTokenResponse {
   /** 0 成功 非0 失败 */
-  Result?: number | null;
+  Result?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2558,7 +2558,7 @@ declare interface CheckCdcClusterRequest {
 
 declare interface CheckCdcClusterResponse {
   /** 返回结果状态Success */
-  Result?: string | null;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2989,7 +2989,7 @@ declare interface CreateTokenRequest {
 
 declare interface CreateTokenResponse {
   /** token串 */
-  Result?: string | null;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3127,7 +3127,7 @@ declare interface DeleteDatahubTaskRequest {
 
 declare interface DeleteDatahubTaskResponse {
   /** 操作结果 */
-  Result?: DatahubTaskIdRes | null;
+  Result?: DatahubTaskIdRes;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3329,7 +3329,7 @@ declare interface DescribeConnectResourceRequest {
 
 declare interface DescribeConnectResourceResponse {
   /** 连接源的Id */
-  Result?: DescribeConnectResourceResp | null;
+  Result?: DescribeConnectResourceResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3459,7 +3459,7 @@ declare interface DescribeDatahubTopicsRequest {
 
 declare interface DescribeDatahubTopicsResponse {
   /** 主题列表 */
-  Result?: DescribeDatahubTopicsResp | null;
+  Result?: DescribeDatahubTopicsResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3473,7 +3473,7 @@ declare interface DescribeGroupInfoRequest {
 
 declare interface DescribeGroupInfoResponse {
   /** 返回的结果 */
-  Result?: GroupInfoResponse[] | null;
+  Result?: GroupInfoResponse[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3611,7 +3611,7 @@ declare interface DescribeRegionRequest {
 
 declare interface DescribeRegionResponse {
   /** 返回地域枚举结果列表 */
-  Result?: Region[] | null;
+  Result?: Region[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3731,7 +3731,7 @@ declare interface DescribeTopicRequest {
 
 declare interface DescribeTopicResponse {
   /** 返回的结果 */
-  Result?: TopicResult | null;
+  Result?: TopicResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4070,7 +4070,7 @@ declare interface InstanceScalingDownRequest {
 
 declare interface InstanceScalingDownResponse {
   /** 返回结果 */
-  Result?: ScalingDownResp | null;
+  Result?: ScalingDownResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4151,7 +4151,7 @@ declare interface ModifyDatahubTaskRequest {
 
 declare interface ModifyDatahubTaskResponse {
   /** 任务id */
-  Result?: DatahubTaskIdRes | null;
+  Result?: DatahubTaskIdRes;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

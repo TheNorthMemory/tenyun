@@ -481,9 +481,9 @@ declare interface ContainerWorkLoadInfo {
   /** 工作负载的名称 */
   Name: string;
   /** 容器名 */
-  Container?: string | null;
+  Container?: string;
   /** 命名空间 */
-  Namespace?: string | null;
+  Namespace?: string;
 }
 
 /** 投递日志的内容格式配置 */
@@ -501,39 +501,39 @@ declare interface ContentInfo {
 /** cos导入配置信息 */
 declare interface CosRechargeInfo {
   /** COS导入配置ID */
-  Id?: string | null;
+  Id?: string;
   /** 日志主题ID */
-  TopicId?: string | null;
+  TopicId?: string;
   /** 日志集ID */
-  LogsetId?: string | null;
+  LogsetId?: string;
   /** COS导入任务名称 */
-  Name?: string | null;
+  Name?: string;
   /** COS存储桶 */
-  Bucket?: string | null;
+  Bucket?: string;
   /** COS存储桶所在地域 */
-  BucketRegion?: string | null;
+  BucketRegion?: string;
   /** COS文件所在文件夹的前缀 */
-  Prefix?: string | null;
+  Prefix?: string;
   /** 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表单行全文；默认为minimalist_log */
-  LogType?: string | null;
+  LogType?: string;
   /** 状态 status 0: 已创建, 1: 运行中, 2: 已停止, 3: 已完成, 4: 运行失败。 */
-  Status?: number | null;
+  Status?: number;
   /** 是否启用: 0： 未启用 ， 1：启用 */
-  Enable?: number | null;
+  Enable?: number;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 进度条百分值 */
-  Progress?: number | null;
+  Progress?: number;
   /** supported: "", "gzip", "lzop", "snappy”; 默认空 */
-  Compress?: string | null;
+  Compress?: string;
   /** 见： ExtractRuleInfo 结构描述 */
-  ExtractRuleInfo?: ExtractRuleInfo | null;
+  ExtractRuleInfo?: ExtractRuleInfo;
   /** COS导入任务类型。1：一次性导入任务；2：持续性导入任务。 */
-  TaskType?: number | null;
+  TaskType?: number;
   /** 元数据。支持 bucket，object。 */
-  Metadata?: string[] | null;
+  Metadata?: string[];
 }
 
 /** csv内容描述 */
@@ -557,23 +557,23 @@ declare interface DashboardInfo {
   /** 仪表盘名字 */
   DashboardName?: string;
   /** 仪表盘数据 */
-  Data?: string | null;
+  Data?: string;
   /** 创建仪表盘的时间 */
   CreateTime?: string;
   /** AssumerUin非空则表示创建该日志主题的服务方Uin */
-  AssumerUin?: number | null;
+  AssumerUin?: number;
   /** RoleName非空则表示创建该日志主题的服务方使用的角色 */
-  RoleName?: string | null;
+  RoleName?: string;
   /** AssumerName非空则表示创建该日志主题的服务方名称 */
-  AssumerName?: string | null;
+  AssumerName?: string;
   /** 日志主题绑定的标签信息 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
   /** 仪表盘所在地域： 为了兼容老的地域。 */
-  DashboardRegion?: string | null;
+  DashboardRegion?: string;
   /** 修改仪表盘的时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 仪表盘对应的topic相关信息 */
-  DashboardTopicInfos?: DashboardTopicInfo[] | null;
+  DashboardTopicInfos?: DashboardTopicInfo[];
 }
 
 /** 仪表盘订阅通知方式 */
@@ -585,7 +585,7 @@ declare interface DashboardNoticeMode {
   /** 仪表盘通知渠道。 支持：["Email","Sms","WeChat","Phone"]。 当ReceiverType是 Email 或 Wecom 时，ReceiverChannels不能赋值。 */
   ReceiverChannels?: string[] | null;
   /** 回调Url。 当ReceiverType是 Wecom 时，Url必填。 当ReceiverType不是 Wecom 时，Url不能填写。 */
-  Url?: string | null;
+  Url?: string;
 }
 
 /** 仪表盘订阅相关数据 */
@@ -597,13 +597,13 @@ declare interface DashboardSubscribeData {
   /** 仪表盘订阅模板变量。 */
   TemplateVariables?: DashboardTemplateVariable[] | null;
   /** 时区。参考：https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#SHANGHAI */
-  Timezone?: string | null;
+  Timezone?: string;
   /** 语言。 zh 中文、en`英文。 */
-  SubscribeLanguage?: string | null;
+  SubscribeLanguage?: string;
   /** 调用链接域名。http:// 或者 https:// 开头，不能/结尾 */
-  JumpDomain?: string | null;
+  JumpDomain?: string;
   /** 自定义跳转链接。 */
-  JumpUrl?: string | null;
+  JumpUrl?: string;
 }
 
 /** 仪表盘订阅模板变量 */
@@ -659,11 +659,11 @@ declare interface DataTransformTaskInfo {
   /** 加工逻辑函数。 */
   EtlContent?: string;
   /** 数据加工类型。0：标准加工任务；1：前置加工任务。 */
-  DataTransformType?: number | null;
+  DataTransformType?: number;
   /** 保留失败日志状态。 1:不保留，2:保留 */
-  KeepFailureLog?: number | null;
+  KeepFailureLog?: number;
   /** 失败日志的字段名称 */
-  FailureLogKey?: string | null;
+  FailureLogKey?: string;
 }
 
 /** 投递配置入参 */
@@ -679,7 +679,7 @@ declare interface DeliverConfig {
 /** 键值索引自动配置，启用后自动将日志内的字段添加到键值索引中，包括日志中后续新增的字段。 */
 declare interface DynamicIndex {
   /** 键值索引自动配置开关 */
-  Status?: boolean | null;
+  Status?: boolean;
 }
 
 /** 升级通知 */
@@ -689,13 +689,13 @@ declare interface EscalateNoticeInfo {
   /** 告警通知模板回调信息。 */
   WebCallbacks: WebCallback[];
   /** 告警升级开关。`true`：开启告警升级、`false`：关闭告警升级，默认：false */
-  Escalate?: boolean | null;
+  Escalate?: boolean;
   /** 告警升级间隔。单位：分钟，范围`[1，14400]` */
-  Interval?: number | null;
+  Interval?: number;
   /** 升级条件。`1`：无人认领且未恢复、`2`：未恢复，默认为1- 无人认领且未恢复：告警没有恢复并且没有人认领则升级- 未恢复：当前告警持续未恢复则升级 */
-  Type?: number | null;
+  Type?: number;
   /** 告警升级后下一个环节的通知渠道配置，最多可配置5个环节。 */
-  EscalateNotice?: EscalateNoticeInfo | null;
+  EscalateNotice?: EscalateNoticeInfo;
 }
 
 /** Windows事件日志采集配置 */
@@ -749,25 +749,25 @@ declare interface ExportInfo {
   /** 语法规则。 默认值为0。0：Lucene语法，1：CQL语法。 */
   SyntaxRule?: number;
   /** 导出字段 */
-  DerivedFields?: string[] | null;
+  DerivedFields?: string[];
 }
 
 /** 日志提取规则 */
 declare interface ExtractRuleInfo {
   /** 时间字段的key名字，TikeKey和TimeFormat必须成对出现 */
-  TimeKey?: string | null;
+  TimeKey?: string;
   /** 时间字段的格式，参考c语言的strftime函数对于时间的格式说明输出参数 */
-  TimeFormat?: string | null;
+  TimeFormat?: string;
   /** 分隔符类型日志的分隔符，只有LogType为delimiter_log时有效 */
-  Delimiter?: string | null;
+  Delimiter?: string;
   /** 整条日志匹配规则，只有LogType为fullregex_log时有效 */
-  LogRegex?: string | null;
+  LogRegex?: string;
   /** 行首匹配规则，只有LogType为multiline_log或fullregex_log时有效 */
-  BeginRegex?: string | null;
+  BeginRegex?: string;
   /** 取的每个字段的key名字，为空的key代表丢弃这个字段，只有LogType为delimiter_log时有效，json_log的日志使用json本身的key。限制100个。 */
   Keys?: string[] | null;
   /** 日志过滤规则列表（旧版），需要过滤日志的key，及其对应的regex。 注意：2.9.3及以上版本LogListener ，建议使用AdvanceFilterRules配置日志过滤规则。 */
-  FilterKeyRegex?: KeyRegexInfo[] | null;
+  FilterKeyRegex?: KeyRegexInfo[];
   /** 解析失败日志是否上传，true表示上传，false表示不上传 */
   UnMatchUpLoadSwitch?: boolean | null;
   /** 失败日志的key，当UnMatchUpLoadSwitch为true时必填 */
@@ -775,19 +775,19 @@ declare interface ExtractRuleInfo {
   /** 增量采集模式下的回溯数据量，默认：-1（全量采集）；其他非负数表示增量采集（从最新的位置，往前采集${Backtracking}字节（Byte）的日志）最大支持1073741824（1G）。注意：- COS导入不支持此字段。 */
   Backtracking?: number | null;
   /** 是否为Gbk编码。 0：否；1：是。注意- 目前取0值时，表示UTF-8编码- COS导入不支持此字段。 */
-  IsGBK?: number | null;
+  IsGBK?: number;
   /** 是否为标准json。 0：否； 1：是。- 标准json指采集器使用业界标准开源解析器进行json解析，非标json指采集器使用CLS自研json解析器进行解析，两种解析器没有本质区别，建议客户使用标准json进行解析。 */
   JsonStandard?: number | null;
   /** syslog传输协议，取值为tcp或者udp，只有在LogType为service_syslog时生效，其余类型无需填写。注意：- 该字段适用于：创建采集规则配置、修改采集规则配置。- COS导入不支持此字段。 */
-  Protocol?: string | null;
+  Protocol?: string;
   /** syslog系统日志采集指定采集器监听的地址和端口 ，形式：[ip]:[port]，只有在LogType为service_syslog时生效，其余类型无需填写。注意：- 该字段适用于：创建采集规则配置、修改采集规则配置。- COS导入不支持此字段。 */
-  Address?: string | null;
+  Address?: string;
   /** rfc3164：指定系统日志采集使用RFC3164协议解析日志。rfc5424：指定系统日志采集使用RFC5424协议解析日志。auto：自动匹配rfc3164或者rfc5424其中一种协议。只有在LogType为service_syslog时生效，其余类型无需填写。注意：- 该字段适用于：创建采集规则配置、修改采集规则配置- COS导入不支持此字段。 */
-  ParseProtocol?: string | null;
+  ParseProtocol?: string;
   /** 元数据类型。0: 不使用元数据信息；1:使用机器组元数据；2:使用用户自定义元数据；3:使用采集配置路径。注意：- COS导入不支持此字段。 */
   MetadataType?: number;
   /** 采集配置路径正则表达式。```请用"()"标识路径中目标字段对应的正则表达式，解析时将"()"视为捕获组，并以__TAG__.{i}:{目标字段}的形式与日志一起上报，其中i为捕获组的序号。若不希望以序号为键名，可以通过命名捕获组"(?<{键名}>{正则})"自定义键名，并以__TAG__.{键名}:{目标字段}的形式与日志一起上报。最多支持5个捕获组```注意：- MetadataType为3时必填。- COS导入不支持此字段。 */
-  PathRegex?: string | null;
+  PathRegex?: string;
   /** 用户自定义元数据信息。注意：- MetadataType为2时必填。- COS导入不支持此字段。 */
   MetaTags?: MetaTagInfo[];
   /** Windows事件日志采集规则，只有在LogType为windows_event_log时生效，其余类型无需填写。 */
@@ -829,7 +829,7 @@ declare interface FullTextInfo {
   /** 全文索引的分词符，其中的每个字符代表一个分词符；仅支持英文符号、\n\t\r及转义符\；注意：\n\t\r本身已被转义，直接使用双引号包裹即可作为入参，无需再次转义。使用API Explorer进行调试时请使用JSON参数输入方式，以避免\n\t\r被重复转义 */
   Tokenizer: string;
   /** 是否包含中文 */
-  ContainZH?: boolean | null;
+  ContainZH?: boolean;
 }
 
 /** 分组触发条件 */
@@ -873,7 +873,7 @@ declare interface JsonInfo {
   /** 元数据信息列表, 可选值为 __SOURCE__、__FILENAME__、__TIMESTAMP__、__HOSTNAME__。 */
   MetaFields: string[] | null;
   /** 投递Json格式，0：字符串方式投递；1:以结构化方式投递 */
-  JsonType?: number | null;
+  JsonType?: number;
 }
 
 /** kafka协议消费内容 */
@@ -885,7 +885,7 @@ declare interface KafkaConsumerContent {
   /** 元数据信息列表, 可选值为：\_\_SOURCE\_\_、\_\_FILENAME\_\_、\_\_TIMESTAMP\_\_、\_\_HOSTNAME\_\_、\_\_PKGID\_\_Format为0时，此字段不需要赋值 */
   MetaFields: string[];
   /** tag数据处理方式：1:不平铺（默认值）；2:平铺。不平铺示例：TAG信息：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`不平铺：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`平铺示例：TAG信息：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`平铺：`{"__TAG__.fieldA":200,"__TAG__.fieldB":"text"}` */
-  TagTransaction?: number | null;
+  TagTransaction?: number;
   /** 消费数据Json格式：1：不转义（默认格式）2：转义投递Json格式。JsonType为1：和原始日志一致，不转义。示例：日志原文：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`投递到Ckafka：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`JsonType为2：转义。示例：日志原文：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`投递到Ckafka：`{"a":"aa","b":"{\"b1\":\"b1b1\", \"c1\":\"c1c1\"}"}` */
   JsonType?: number;
 }
@@ -893,47 +893,47 @@ declare interface KafkaConsumerContent {
 /** Kafka访问协议 */
 declare interface KafkaProtocolInfo {
   /** 协议类型，支持的协议类型包括 plaintext、sasl_plaintext 或 sasl_ssl。建议使用 sasl_ssl，此协议会进行连接加密同时需要用户认证。入参必填 */
-  Protocol?: string | null;
+  Protocol?: string;
   /** 加密类型，支持 PLAIN、SCRAM-SHA-256 或 SCRAM-SHA-512。当Protocol为sasl_plaintext或sasl_ssl时必填 */
-  Mechanism?: string | null;
+  Mechanism?: string;
   /** 用户名。当Protocol为sasl_plaintext或sasl_ssl时必填 */
-  UserName?: string | null;
+  UserName?: string;
   /** 用户密码。当Protocol为sasl_plaintext或sasl_ssl时必填 */
-  Password?: string | null;
+  Password?: string;
 }
 
 /** Kafka导入配置信息 */
 declare interface KafkaRechargeInfo {
   /** Kafka数据订阅配置的ID。 */
-  Id?: string | null;
+  Id?: string;
   /** 日志主题ID */
-  TopicId?: string | null;
+  TopicId?: string;
   /** Kafka导入任务名称 */
-  Name?: string | null;
+  Name?: string;
   /** 导入Kafka类型，0: 腾讯云CKafka，1: 用户自建Kafka */
-  KafkaType?: number | null;
+  KafkaType?: number;
   /** 腾讯云CKafka实例ID，KafkaType为0时必填 */
-  KafkaInstance?: string | null;
+  KafkaInstance?: string;
   /** 服务地址 */
-  ServerAddr?: string | null;
+  ServerAddr?: string;
   /** ServerAddr是否为加密连接 */
-  IsEncryptionAddr?: boolean | null;
+  IsEncryptionAddr?: boolean;
   /** 加密访问协议，IsEncryptionAddr参数为true时必填 */
   Protocol?: KafkaProtocolInfo;
   /** 用户需要导入的Kafka相关topic列表，多个topic之间使用半角逗号隔开 */
-  UserKafkaTopics?: string | null;
+  UserKafkaTopics?: string;
   /** 用户Kafka消费组名称 */
-  ConsumerGroupName?: string | null;
+  ConsumerGroupName?: string;
   /** 状态 ，1：运行中；2：暂停。 */
-  Status?: number | null;
+  Status?: number;
   /** 导入数据位置，-2:最早（默认），-1：最晚 */
-  Offset?: number | null;
+  Offset?: number;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 日志导入规则 */
-  LogRechargeRule?: LogRechargeRuleInfo | null;
+  LogRechargeRule?: LogRechargeRuleInfo;
 }
 
 /** 需要过滤日志的key，及其对应的regex */
@@ -967,13 +967,13 @@ declare interface LogContextInfo {
   /** 日志时间戳 */
   BTime?: number;
   /** 日志来源主机名称 */
-  HostName?: string | null;
+  HostName?: string;
   /** 原始日志(仅在日志创建索引异常时有值) */
-  RawLog?: string | null;
+  RawLog?: string;
   /** 日志创建索引异常原因(仅在日志创建索引异常时有值) */
-  IndexStatus?: string | null;
+  IndexStatus?: string;
   /** 日志内容的高亮描述信息 */
-  HighLights?: HighLightItem[] | null;
+  HighLights?: HighLightItem[];
 }
 
 /** 日志结果信息 */
@@ -993,13 +993,13 @@ declare interface LogInfo {
   /** 请求包内日志的ID */
   PkgLogId?: string;
   /** 日志内容的Json序列化字符串 */
-  LogJson?: string | null;
+  LogJson?: string;
   /** 日志来源主机名称 */
-  HostName?: string | null;
+  HostName?: string;
   /** 原始日志(仅在日志创建索引异常时有值) */
-  RawLog?: string | null;
+  RawLog?: string;
   /** 日志创建索引异常原因(仅在日志创建索引异常时有值) */
-  IndexStatus?: string | null;
+  IndexStatus?: string;
 }
 
 /** 日志中的KV对 */
@@ -1025,27 +1025,27 @@ declare interface LogRechargeRuleInfo {
   /** 使用默认时间，true：开启（默认值）， flase：关闭 */
   DefaultTimeSwitch: boolean;
   /** 整条日志匹配规则，只有RechargeType为fullregex_log时有效 */
-  LogRegex?: string | null;
+  LogRegex?: string;
   /** 解析失败日志是否上传，true表示上传，false表示不上传 */
   UnMatchLogSwitch?: boolean;
   /** 解析失败日志的键名称 */
-  UnMatchLogKey?: string | null;
+  UnMatchLogKey?: string;
   /** 解析失败日志时间来源，0: 系统当前时间，1: Kafka消息时间戳 */
-  UnMatchLogTimeSrc?: number | null;
+  UnMatchLogTimeSrc?: number;
   /** 默认时间来源，0: 系统当前时间，1: Kafka消息时间戳 */
-  DefaultTimeSrc?: number | null;
+  DefaultTimeSrc?: number;
   /** 时间字段 */
-  TimeKey?: string | null;
+  TimeKey?: string;
   /** 时间提取正则表达式 */
-  TimeRegex?: string | null;
+  TimeRegex?: string;
   /** 时间字段格式 */
-  TimeFormat?: string | null;
+  TimeFormat?: string;
   /** 时间字段时区 */
-  TimeZone?: string | null;
+  TimeZone?: string;
   /** 元数据信息，Kafka导入支持kafka_topic,kafka_partition,kafka_offset,kafka_timestamp */
-  Metadata?: string[] | null;
+  Metadata?: string[];
   /** 日志Key列表，RechargeType为full_regex_log时必填 */
-  Keys?: string[] | null;
+  Keys?: string[];
   /** json解析模式，开启首层数据解析 */
   ParseArray?: boolean;
 }
@@ -1059,9 +1059,9 @@ declare interface LogsetInfo {
   /** 创建时间 */
   CreateTime?: string;
   /** 云产品标识，日志集由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE */
-  AssumerName?: string | null;
+  AssumerName?: string;
   /** 日志集绑定的标签 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
   /** 日志集下日志主题的数目 */
   TopicCount?: number;
   /** 若AssumerName非空，则表示创建该日志集的服务方角色 */
@@ -1387,11 +1387,11 @@ declare interface ScheduledSqlTaskInfo {
 /** 多日志主题检索错误信息 */
 declare interface SearchLogErrors {
   /** 日志主题ID */
-  TopicId?: string | null;
+  TopicId?: string;
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 错误码 */
-  ErrorCodeStr?: string | null;
+  ErrorCodeStr?: string;
 }
 
 /** 多日志主题检索topic信息 */
@@ -1401,15 +1401,15 @@ declare interface SearchLogInfos {
   /** 日志存储生命周期 */
   Period?: number;
   /** 透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时 */
-  Context?: string | null;
+  Context?: string;
 }
 
 /** 多主题检索返回信息 */
 declare interface SearchLogTopics {
   /** 多日志主题检索对应的错误信息 */
-  Errors?: SearchLogErrors[] | null;
+  Errors?: SearchLogErrors[];
   /** 多日志主题检索各日志主题信息 */
-  Infos?: SearchLogInfos[] | null;
+  Infos?: SearchLogInfos[];
 }
 
 /** 投递规则 */

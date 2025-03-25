@@ -91,23 +91,23 @@ declare interface AttachedPolicyOfRole {
 /** 用户关联的策略详情 */
 declare interface AttachedUserPolicy {
   /** 策略ID */
-  PolicyId: string;
+  PolicyId?: string;
   /** 策略名 */
-  PolicyName: string;
+  PolicyName?: string;
   /** 策略描述 */
-  Description: string;
+  Description?: string;
   /** 创建时间 */
-  AddTime: string;
+  AddTime?: string;
   /** 策略类型(1表示自定义策略，2表示预设策略) */
-  StrategyType: string;
+  StrategyType?: string;
   /** 创建模式(1表示按产品或项目权限创建的策略，其他表示策略语法创建的策略) */
-  CreateMode: string;
+  CreateMode?: string;
   /** 随组关联信息 */
-  Groups: AttachedUserPolicyGroupInfo[] | null;
+  Groups?: AttachedUserPolicyGroupInfo[] | null;
   /** 是否已下线(0:否 1:是) */
-  Deactived: number | null;
+  Deactived?: number | null;
   /** 已下线的产品列表 */
-  DeactivedDetail: string[] | null;
+  DeactivedDetail?: string[] | null;
 }
 
 /** 用户关联策略(随组关联)信息 */

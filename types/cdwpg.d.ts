@@ -242,39 +242,39 @@ declare interface InstanceOperation {
 
 /** 精简集群信息 */
 declare interface InstanceSimpleInfoNew {
-  /** 1 */
+  /** ID */
   ID?: number | null;
-  /** 1 */
+  /** 集群Id */
   InstanceId?: string | null;
-  /** 1 */
+  /** 集群名字 */
   InstanceName?: string | null;
-  /** 1 */
+  /** 内核版本 */
   Version?: string | null;
-  /** 1 */
+  /** 地域 */
   Region?: string | null;
-  /** 1 */
+  /** 地域Id */
   RegionId?: number | null;
-  /** 1 */
+  /** 地域详情 */
   RegionDesc?: string | null;
-  /** 1 */
+  /** 地区 */
   Zone?: string | null;
-  /** 1 */
+  /** 地区id */
   ZoneId?: number | null;
-  /** 1 */
+  /** 地区详情 */
   ZoneDesc?: string | null;
-  /** 1 */
+  /** 私有网络 */
   VpcId?: string | null;
-  /** 1 */
+  /** 子网 */
   SubnetId?: string | null;
-  /** 1 */
+  /** 开始时间 */
   CreateTime?: string | null;
-  /** 1 */
+  /** 过期时间 */
   ExpireTime?: string | null;
-  /** 1 */
+  /** 访问地址 */
   AccessInfo?: string | null;
-  /** 1 */
+  /** 计费方式 */
   PayMode?: string | null;
-  /** 1 */
+  /** 自动续费 */
   RenewFlag?: boolean | null;
 }
 
@@ -396,7 +396,7 @@ declare interface ResourceInfo {
   Count: number | null;
   /** 磁盘信息 */
   DiskSpec: CBSSpecInfo | null;
-  /** 资源类型，DATA */
+  /** 节点类型，cn 或dn */
   Type: string | null;
 }
 
@@ -424,37 +424,37 @@ declare interface SearchTags {
 
 /** 集群信息 */
 declare interface SimpleInstanceInfo {
-  /** 1 */
+  /** ID */
   ID?: number | null;
-  /** 1 */
+  /** 集群Id */
   InstanceId?: string | null;
-  /** 1 */
+  /** 集群名字 */
   InstanceName?: string | null;
-  /** 1 */
+  /** 内核版本 */
   Version?: string | null;
-  /** 1 */
+  /** 地域 */
   Region?: string | null;
-  /** 1 */
+  /** 地区 */
   Zone?: string | null;
-  /** 1 */
+  /** 私有网络 */
   UserVPCID?: string | null;
-  /** 1 */
+  /** 子网 */
   UserSubnetID?: string | null;
-  /** 1 */
+  /** 开始时间 */
   CreateTime?: string | null;
-  /** 1 */
+  /** 到期时间 */
   ExpireTime?: string | null;
-  /** 1 */
+  /** 访问地址 */
   AccessInfo?: string | null;
-  /** 1 */
+  /** 自动续费开关，0为不自动续费，1为自动续费 */
   RenewFlag?: number | null;
-  /** 1 */
+  /** 计费方式 */
   ChargeProperties?: ChargeProperties | null;
-  /** 1 */
+  /** 资源集合 */
   Resources?: ResourceInfo[] | null;
-  /** 1 */
+  /** 标签列表 */
   Tags?: Tag[] | null;
-  /** 1 */
+  /** 集群状态 */
   Status?: number | null;
 }
 
@@ -729,24 +729,24 @@ declare interface DescribeInstancesResponse {
 }
 
 declare interface DescribeSimpleInstancesRequest {
-  /** 11 */
+  /** 用集群id搜索 */
   SearchInstanceId?: string;
-  /** 11 */
+  /** 用集群名字搜索 */
   SearchInstanceName?: string;
-  /** 11 */
+  /** 分页参数，第一页为0，第二页为10 */
   Offset?: number;
-  /** 11 */
+  /** 分页参数，分页步长，默认为10 */
   Limit?: number;
-  /** 11 */
+  /** 用标签列表搜索 */
   SearchTags?: string[];
 }
 
 declare interface DescribeSimpleInstancesResponse {
-  /** 1 */
+  /** 集群列表总数 */
   TotalCount?: number | null;
-  /** 1 */
+  /** 集群列表详情 */
   InstancesList?: InstanceSimpleInfoNew[] | null;
-  /** - */
+  /** 错误信息 */
   ErrorMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

@@ -364,6 +364,8 @@ declare interface CreateFlowOption {
   HideShowDeadline?: boolean;
   /** 是否允许发起合同步骤跳过指定签署方步骤**true**：允许**false**：（默认）不允许 */
   CanSkipAddApprover?: boolean;
+  /** 是否可以编辑签署人包括新增，修改，删除 （默认） false -可以编辑签署人 true - 可以编辑签署人注意：如果设置参数为 false， 则 参数签署人 [FlowApproverList](https://qian.tencent.com/developers/partnerApis/embedPages/ChannelCreatePrepareFlow) 不能为空 */
+  ForbidEditApprover?: boolean;
   /** 定制化发起合同弹窗的描述信息，长度不能超过500，只能由中文、字母、数字和标点组成。 */
   CustomCreateFlowDescription?: string;
   /** 禁止编辑填写控件**true**：禁止编辑填写控件**false**：（默认）允许编辑填写控件 */

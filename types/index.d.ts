@@ -56,6 +56,7 @@ import Cdz, { Versions as CdzVersions } from "./cdz";
 import Cfg, { Versions as CfgVersions } from "./cfg";
 import Cfs, { Versions as CfsVersions } from "./cfs";
 import Cfw, { Versions as CfwVersions } from "./cfw";
+import Chc, { Versions as ChcVersions } from "./chc";
 import Chdfs, { Versions as ChdfsVersions } from "./chdfs";
 import Ciam, { Versions as CiamVersions } from "./ciam";
 import Cii, { Versions as CiiVersions } from "./cii";
@@ -320,6 +321,7 @@ export declare type SERVICE_VERSIONS = {
   cfg: CfgVersions,
   cfs: CfsVersions,
   cfw: CfwVersions,
+  chc: ChcVersions,
   chdfs: ChdfsVersions,
   ciam: CiamVersions,
   cii: CiiVersions,
@@ -654,6 +656,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   cfs: Cfs,
   /** {@link Cfw 云防火墙} */
   cfw: Cfw,
+  /** {@link Chc 云托付物理服务器} */
+  chc: Chc,
   /** {@link Chdfs 云 HDFS} */
   chdfs: Chdfs,
   /** {@link Ciam 账号风控平台} */

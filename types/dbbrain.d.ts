@@ -214,6 +214,26 @@ declare interface AutonomyUserProfileInfo {
   EnabledItems?: string[];
 }
 
+/** redis延迟分布区间详情 */
+declare interface CmdCostGroup {
+  /** 该延迟区间内命令数占总命令数百分比 */
+  Percent?: number;
+  /** 延迟区间上界，单位ms */
+  CostUpperLimit?: string;
+  /** 延迟区间下界，单位ms */
+  CostLowerLimit?: string;
+  /** 该延迟区间内命令次数 */
+  Count?: number;
+}
+
+/** redis命令延迟趋势 */
+declare interface CmdPerfInfo {
+  /** redis命令 */
+  Command?: string;
+  /** 监控数据 */
+  SeriesData?: MonitorMetricSeriesData;
+}
+
 /** 联系人contact描述。 */
 declare interface ContactItem {
   /** 联系人id。 */
@@ -652,6 +672,14 @@ declare interface RedisBigKeyTask {
   Progress?: number;
   /** 任务包含的分片节点序号列表。 */
   ShardIds?: number[];
+}
+
+/** redis访问命令详情 */
+declare interface RedisCmdInfo {
+  /** redis命令 */
+  Cmd?: string;
+  /** 命令次数 */
+  Count?: number;
 }
 
 /** redis key空间信息。 */
@@ -1527,9 +1555,9 @@ declare interface DescribeAuditLogFilesRequest {
 
 declare interface DescribeAuditLogFilesResponse {
   /** 符合条件的审计日志文件个数。 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 审计日志文件详情。 */
-  Items?: AuditLogFile[] | null;
+  Items?: AuditLogFile[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1686,6 +1714,36 @@ declare interface DescribeDBDiagReportTasksResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDBPerfTimeSeriesRequest {
+  /** 需要获取性能趋势的实例ID。 */
+  InstanceId: string;
+  /** 开始时间。 */
+  StartTime: string;
+  /** 结束时间。 */
+  EndTime: string;
+  /** 指标名称，多个指标之间用逗号分隔。 */
+  Metric: string;
+  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB */
+  Product: string;
+  /** 需要获取性能趋势的集群ID。 */
+  ClusterId?: string;
+  /** 性能数据统计粒度。 */
+  Period?: number;
+  /** 实列节点ID。 */
+  InstanceNodeId?: string;
+  /** 实列代理ID。 */
+  InstanceProxyId?: string;
+  /** 代理节点ID。 */
+  ProxyId?: string;
+}
+
+declare interface DescribeDBPerfTimeSeriesResponse {
+  /** 实列性能数据。 */
+  Data?: MonitorMetricSeriesData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDBSpaceStatusRequest {
   /** 实例 ID 。 */
   InstanceId: string;
@@ -1811,9 +1869,9 @@ declare interface DescribeMailProfileRequest {
 
 declare interface DescribeMailProfileResponse {
   /** 邮件配置详情。 */
-  ProfileList?: UserProfile[] | null;
+  ProfileList?: UserProfile[];
   /** 邮件配置总数。 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1940,6 +1998,66 @@ declare interface DescribeRedisBigKeyAnalysisTasksResponse {
   TotalCount?: number;
   /** 任务列表。 */
   Tasks?: RedisBigKeyTask[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRedisCmdPerfTimeSeriesRequest {
+  /** 实例 ID */
+  InstanceId: string;
+  /** 服务产品类型，仅仅支持值 "redis" - 云数据库 Redis。 */
+  Product: string;
+  /** 开始时间，如“2025-03-17T00:00:00+00:00”。0天 < 当前服务器时间 - 开始时间 <= 10天。 */
+  StartTime: string;
+  /** 结束时间，如“2025-03-17T01:00:00+00:00”，0天 < 结束时间 - 开始时间 <= 10天。 */
+  EndTime: string;
+  /** 需要分析的redis命令 */
+  CommandList: string[];
+  /** 监控指标，以逗号分隔 */
+  Metric: string;
+  /** 监控指标时间粒度，单位秒，若不提供则根据开始时间和结束时间取默认值 */
+  Period?: number;
+}
+
+declare interface DescribeRedisCmdPerfTimeSeriesResponse {
+  /** redis命令延迟趋势 */
+  CmdPerfList?: CmdPerfInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRedisCommandCostStatisticsRequest {
+  /** 实例 ID */
+  InstanceId: string;
+  /** 开始时间，如“2025-03-17T00:00:00+00:00”。0天 < 当前服务器时间 - 开始时间 <= 10天。 */
+  StartTime: string;
+  /** 结束时间，如“2025-03-17T01:00:00+00:00”，0天 < 结束时间 - 开始时间 <= 10天。 */
+  EndTime: string;
+  /** 服务产品类型，仅仅支持值 "redis" - 云数据库 Redis。 */
+  Product: string;
+}
+
+declare interface DescribeRedisCommandCostStatisticsResponse {
+  /** redis延迟分布区间 */
+  CmdCostGroups?: CmdCostGroup[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRedisCommandOverviewRequest {
+  /** 实例 ID */
+  InstanceId: string;
+  /** 开始时间，如“2025-03-17T00:00:00+00:00”。0天 < 当前服务器时间 - 开始时间 <= 10天。 */
+  StartTime: string;
+  /** 结束时间，如“2025-03-17T01:00:00+00:00”，0天 < 结束时间 - 开始时间 <= 10天。 */
+  EndTime: string;
+  /** 服务产品类型，仅仅支持值 "redis" - 云数据库 Redis。 */
+  Product: string;
+}
+
+declare interface DescribeRedisCommandOverviewResponse {
+  /** redis访问命令统计 */
+  CmdList?: RedisCmdInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3386,9 +3504,9 @@ declare namespace V20191016 {
 
   interface DescribeMailProfileResponse {
     /** 邮件配置详情。 */
-    ProfileList?: UserProfile[] | null;
+    ProfileList?: UserProfile[];
     /** 邮件模板总数。 */
-    TotalCount?: number | null;
+    TotalCount?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3703,6 +3821,8 @@ declare interface Dbbrain {
   DescribeDBDiagHistory(data: DescribeDBDiagHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBDiagHistoryResponse>;
   /** 查询健康报告生成任务列表 {@link DescribeDBDiagReportTasksRequest} {@link DescribeDBDiagReportTasksResponse} */
   DescribeDBDiagReportTasks(data?: DescribeDBDiagReportTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBDiagReportTasksResponse>;
+  /** 获取性能趋势 {@link DescribeDBPerfTimeSeriesRequest} {@link DescribeDBPerfTimeSeriesResponse} */
+  DescribeDBPerfTimeSeries(data: DescribeDBPerfTimeSeriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBPerfTimeSeriesResponse>;
   /** 获取指定时间段内的实例空间使用概览 {@link DescribeDBSpaceStatusRequest} {@link DescribeDBSpaceStatusResponse} */
   DescribeDBSpaceStatus(data: DescribeDBSpaceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSpaceStatusResponse>;
   /** 获取实例信息列表 {@link DescribeDiagDBInstancesRequest} {@link DescribeDiagDBInstancesResponse} */
@@ -3725,6 +3845,12 @@ declare interface Dbbrain {
   DescribeProxySessionKillTasks(data: DescribeProxySessionKillTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxySessionKillTasksResponse>;
   /** 查询redis大key分析任务列表 {@link DescribeRedisBigKeyAnalysisTasksRequest} {@link DescribeRedisBigKeyAnalysisTasksResponse} */
   DescribeRedisBigKeyAnalysisTasks(data: DescribeRedisBigKeyAnalysisTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisBigKeyAnalysisTasksResponse>;
+  /** 查询命令延迟趋势 {@link DescribeRedisCmdPerfTimeSeriesRequest} {@link DescribeRedisCmdPerfTimeSeriesResponse} */
+  DescribeRedisCmdPerfTimeSeries(data: DescribeRedisCmdPerfTimeSeriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisCmdPerfTimeSeriesResponse>;
+  /** 查询命令延迟分布 {@link DescribeRedisCommandCostStatisticsRequest} {@link DescribeRedisCommandCostStatisticsResponse} */
+  DescribeRedisCommandCostStatistics(data: DescribeRedisCommandCostStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisCommandCostStatisticsResponse>;
+  /** 查询访问命令统计 {@link DescribeRedisCommandOverviewRequest} {@link DescribeRedisCommandOverviewResponse} */
+  DescribeRedisCommandOverview(data: DescribeRedisCommandOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisCommandOverviewResponse>;
   /** 获取Redis实例proxy实时会话详情 {@link DescribeRedisProcessListRequest} {@link DescribeRedisProcessListResponse} */
   DescribeRedisProcessList(data: DescribeRedisProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisProcessListResponse>;
   /** 查询redis实例大key列表 {@link DescribeRedisTopBigKeysRequest} {@link DescribeRedisTopBigKeysResponse} */

@@ -1216,13 +1216,13 @@ declare namespace V20180525 {
     /** 集群创建过程状态 */
     Status?: string;
     /** 最后一次探测到该状态的时间 */
-    LastProbeTime?: string | null;
+    LastProbeTime?: string;
     /** 最后一次转换到该过程的时间 */
-    LastTransitionTime?: string | null;
+    LastTransitionTime?: string;
     /** 转换到该过程的简明原因 */
-    Reason?: string | null;
+    Reason?: string;
     /** 转换到该过程的更多信息 */
-    Message?: string | null;
+    Message?: string;
   }
 
   /** 接入k8s 的认证信息 */
@@ -1248,7 +1248,7 @@ declare namespace V20180525 {
   /** 弹性容器集群内网访问LB信息 */
   interface ClusterInternalLB {
     /** 是否开启内网访问LB */
-    Enabled: boolean | null;
+    Enabled: boolean;
     /** 内网访问LB关联的子网Id */
     SubnetId?: string | null;
   }
@@ -1340,15 +1340,15 @@ declare namespace V20180525 {
   /** 弹性容器集群公网访问负载均衡信息 */
   interface ClusterPublicLB {
     /** 是否开启公网访问LB */
-    Enabled: boolean | null;
+    Enabled: boolean;
     /** 允许访问的来源CIDR列表 */
-    AllowFromCidrs?: string[] | null;
+    AllowFromCidrs?: string[];
     /** 安全策略放通单个IP或CIDR(例如: "192.168.1.0/24",默认为拒绝所有) */
-    SecurityPolicies?: string[] | null;
+    SecurityPolicies?: string[];
     /** 外网访问相关的扩展参数，格式为json */
-    ExtraParam?: string | null;
+    ExtraParam?: string;
     /** 新内外网功能，需要传递安全组 */
-    SecurityGroup?: string | null;
+    SecurityGroup?: string;
   }
 
   /** 集群状态信息 */
@@ -2370,11 +2370,11 @@ declare namespace V20180525 {
   /** 策略实例信息 */
   interface OpenConstraintInfo {
     /** 策略实例名称 */
-    Name?: string | null;
+    Name?: string;
     /** 策略实例关联事件数 */
-    EventNums?: number | null;
+    EventNums?: number;
     /** 实例yaml详情base64编码 */
-    YamlDetail?: string | null;
+    YamlDetail?: string;
   }
 
   /** opa策略信息 */
@@ -4136,7 +4136,7 @@ declare namespace V20180525 {
 
   interface CreateEksLogConfigResponse {
     /** 日志采集topicid */
-    TopicId?: string | null;
+    TopicId?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

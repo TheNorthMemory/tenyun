@@ -298,16 +298,6 @@ declare interface PurgeTask {
   CreateTime: string;
 }
 
-/** 刷新用量及刷新配额 */
-declare interface Quota {
-  /** 单次批量提交配额上限。 */
-  Batch: number;
-  /** 每日提交配额上限。 */
-  Total: number;
-  /** 每日剩余的可提交配额。 */
-  Available: number;
-}
-
 /** 查询对象及其对应的访问明细数据 */
 declare interface ResourceData {
   /** 资源名称，根据查询条件不同分为以下几类：具体域名：表示该域名明细数据multiDomains：表示多域名汇总明细数据项目 ID：指定项目查询时，显示为项目 IDall：账号维度明细数据 */
@@ -372,66 +362,6 @@ declare interface WebSocket {
   Switch: string;
   /** 设置超时时间，单位为秒，最大超时时间65秒。 */
   Timeout?: number | null;
-}
-
-declare interface AddEcdnDomainRequest {
-  /** 域名。 */
-  Domain: string;
-  /** 源站配置。 */
-  Origin: Origin;
-  /** 域名加速区域，mainland，overseas或global，分别表示中国境内加速，海外加速或全球加速。 */
-  Area: string;
-  /** 项目id，默认0。 */
-  ProjectId?: number;
-  /** IP黑白名单配置。 */
-  IpFilter?: IpFilter;
-  /** IP限频配置。 */
-  IpFreqLimit?: IpFreqLimit;
-  /** 源站响应头部配置。 */
-  ResponseHeader?: ResponseHeader;
-  /** 节点缓存配置。 */
-  CacheKey?: CacheKey;
-  /** 缓存规则配置。 */
-  Cache?: Cache;
-  /** Https配置。 */
-  Https?: Https;
-  /** 访问协议强制跳转配置。 */
-  ForceRedirect?: ForceRedirect;
-  /** 域名绑定的标签 */
-  Tag?: Tag[];
-  /** WebSocket配置 */
-  WebSocket?: WebSocket;
-}
-
-declare interface AddEcdnDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateVerifyRecordRequest {
-  /** 要取回的域名 */
-  Domain: string;
-}
-
-declare interface CreateVerifyRecordResponse {
-  /** 子解析 */
-  SubDomain: string;
-  /** 解析值 */
-  Record: string;
-  /** 解析类型 */
-  RecordType: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteEcdnDomainRequest {
-  /** 待删除域名。 */
-  Domain: string;
-}
-
-declare interface DeleteEcdnDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
 }
 
 declare interface DescribeDomainsConfigRequest {
@@ -562,18 +492,6 @@ declare interface DescribeIpStatusResponse {
   RequestId?: string;
 }
 
-declare interface DescribePurgeQuotaRequest {
-}
-
-declare interface DescribePurgeQuotaResponse {
-  /** Url刷新用量及配额。 */
-  UrlPurge: Quota;
-  /** 目录刷新用量及配额。 */
-  PathPurge: Quota;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribePurgeTasksRequest {
   /** 查询刷新类型。url：查询 url 刷新记录；path：查询目录刷新记录。 */
   PurgeType?: string;
@@ -602,20 +520,6 @@ declare interface DescribePurgeTasksResponse {
   RequestId?: string;
 }
 
-declare interface PurgePathCacheRequest {
-  /** 要刷新的目录列表，必须包含协议头部。 */
-  Paths: string[];
-  /** 刷新类型，flush 代表刷新有更新的资源，delete 表示刷新全部资源。 */
-  FlushType: string;
-}
-
-declare interface PurgePathCacheResponse {
-  /** 刷新任务Id。 */
-  TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface PurgeUrlsCacheRequest {
   /** 要刷新的Url列表，必须包含协议头部。 */
   Urls: string[];
@@ -628,67 +532,9 @@ declare interface PurgeUrlsCacheResponse {
   RequestId?: string;
 }
 
-declare interface StartEcdnDomainRequest {
-  /** 待启用域名。 */
-  Domain: string;
-}
-
-declare interface StartEcdnDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface StopEcdnDomainRequest {
-  /** 待停用域名。 */
-  Domain: string;
-}
-
-declare interface StopEcdnDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface UpdateDomainConfigRequest {
-  /** 域名。 */
-  Domain: string;
-  /** 源站配置。 */
-  Origin?: Origin;
-  /** 项目id。 */
-  ProjectId?: number;
-  /** IP黑白名单配置。 */
-  IpFilter?: IpFilter;
-  /** IP限频配置。 */
-  IpFreqLimit?: IpFreqLimit;
-  /** 源站响应头部配置。 */
-  ResponseHeader?: ResponseHeader;
-  /** 节点缓存配置。 */
-  CacheKey?: CacheKey;
-  /** 缓存规则配置。 */
-  Cache?: Cache;
-  /** Https配置。 */
-  Https?: Https;
-  /** 访问协议强制跳转配置。 */
-  ForceRedirect?: ForceRedirect;
-  /** 域名加速区域，mainland，overseas或global，分别表示中国境内加速，海外加速或全球加速。 */
-  Area?: string;
-  /** WebSocket配置 */
-  WebSocket?: WebSocket;
-}
-
-declare interface UpdateDomainConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 /** {@link Ecdn 全站加速网络} */
 declare interface Ecdn {
   (): Versions;
-  /** @deprecated 新增加速域名 {@link AddEcdnDomainRequest} {@link AddEcdnDomainResponse} */
-  AddEcdnDomain(data: AddEcdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<AddEcdnDomainResponse>;
-  /** @deprecated 生成解析记录 {@link CreateVerifyRecordRequest} {@link CreateVerifyRecordResponse} */
-  CreateVerifyRecord(data: CreateVerifyRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVerifyRecordResponse>;
-  /** @deprecated 删除加速域名 {@link DeleteEcdnDomainRequest} {@link DeleteEcdnDomainResponse} */
-  DeleteEcdnDomain(data: DeleteEcdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEcdnDomainResponse>;
   /** 查询域名基本信息 {@link DescribeDomainsRequest} {@link DescribeDomainsResponse} */
   DescribeDomains(data?: DescribeDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsResponse>;
   /** 查询域名详细配置 {@link DescribeDomainsConfigRequest} {@link DescribeDomainsConfigResponse} */
@@ -701,20 +547,10 @@ declare interface Ecdn {
   DescribeEcdnStatistics(data: DescribeEcdnStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEcdnStatisticsResponse>;
   /** 查询平台服务节点IP {@link DescribeIpStatusRequest} {@link DescribeIpStatusResponse} */
   DescribeIpStatus(data: DescribeIpStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpStatusResponse>;
-  /** @deprecated 查询刷新用量配额 {@link DescribePurgeQuotaRequest} {@link DescribePurgeQuotaResponse} */
-  DescribePurgeQuota(data?: DescribePurgeQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeQuotaResponse>;
   /** 刷新历史查询 {@link DescribePurgeTasksRequest} {@link DescribePurgeTasksResponse} */
   DescribePurgeTasks(data?: DescribePurgeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeTasksResponse>;
-  /** @deprecated 刷新目录 {@link PurgePathCacheRequest} {@link PurgePathCacheResponse} */
-  PurgePathCache(data: PurgePathCacheRequest, config?: AxiosRequestConfig): AxiosPromise<PurgePathCacheResponse>;
   /** 刷新 URL {@link PurgeUrlsCacheRequest} {@link PurgeUrlsCacheResponse} */
   PurgeUrlsCache(data: PurgeUrlsCacheRequest, config?: AxiosRequestConfig): AxiosPromise<PurgeUrlsCacheResponse>;
-  /** @deprecated 启用加速域名 {@link StartEcdnDomainRequest} {@link StartEcdnDomainResponse} */
-  StartEcdnDomain(data: StartEcdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<StartEcdnDomainResponse>;
-  /** @deprecated 停用加速域名 {@link StopEcdnDomainRequest} {@link StopEcdnDomainResponse} */
-  StopEcdnDomain(data: StopEcdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<StopEcdnDomainResponse>;
-  /** @deprecated 更新域名配置 {@link UpdateDomainConfigRequest} {@link UpdateDomainConfigResponse} */
-  UpdateDomainConfig(data: UpdateDomainConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDomainConfigResponse>;
 }
 
 export declare type Versions = ["2019-10-12"];
