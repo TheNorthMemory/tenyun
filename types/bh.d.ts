@@ -711,19 +711,21 @@ declare interface User {
 }
 
 declare interface AccessDevicesRequest {
-  /** 资源id */
-  InstanceId: string;
-  /** 账号 */
+  /** 资产的登录账号 */
   Account: string;
   /** 运维端登录账号 */
-  LoginAccount: string;
+  LoginAccount?: string;
   /** 运维端登录密码 */
-  LoginPassword: string;
-  /** 密码 */
+  LoginPassword?: string;
+  /** 资产ID */
+  DeviceId?: number;
+  /** 资源id(优先使用DeviceId) */
+  InstanceId?: string;
+  /** 未托管密码私钥时，填入 */
   Password?: string;
-  /** 私钥 */
+  /** 未托管密码私钥时，填入 */
   PrivateKey?: string;
-  /** 私钥密码 */
+  /** 未托管密码私钥时，填入 */
   PrivateKeyPassword?: string;
   /** 客户端工具 */
   Exe?: string;
@@ -735,6 +737,8 @@ declare interface AccessDevicesRequest {
   Height?: number;
   /** 是否内网访问（默认不是） */
   IntranetAccess?: boolean;
+  /** 是否自动管理访问串，删掉过期的，新建可用的（默认false） */
+  AutoManageAccessCredential?: boolean;
 }
 
 declare interface AccessDevicesResponse {

@@ -5,23 +5,23 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 应用信息 */
 declare interface ApplicationInfo {
   /** 应用id */
-  ApplicationId?: string | null;
+  ApplicationId?: string;
   /** 应用名称 */
-  ApplicationName?: string | null;
+  ApplicationName?: string;
   /** 应用描述 */
-  Description?: string | null;
+  Description?: string;
   /** 应用的环境配置 */
-  ConfigEnvironment?: string | null;
+  ConfigEnvironment?: string;
   /** 系统盘大小下限 */
-  MinSystemDiskSize?: number | null;
+  MinSystemDiskSize?: number;
   /** 应用类型，目前该项取值可以为PRIVATE_APPLICATION或者PUBLIC_APPLICATION */
-  ApplicationType?: string | null;
+  ApplicationType?: string;
   /** 应用状态：CREATING-创建中；ONLINE -正常在线；DELETING -删除中；ARREARS - 欠费隔离示例值：ONLINE */
-  ApplicationState?: string | null;
+  ApplicationState?: string;
   /** 应用创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 应用大小 */
-  ApplicationSize?: number | null;
+  ApplicationSize?: number;
 }
 
 /** 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等- 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。- 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
@@ -93,27 +93,27 @@ declare interface InstanceChargePrepaid {
 /** 套餐价格 */
 declare interface ItemPrice {
   /** 原单价 */
-  UnitPrice?: number | null;
+  UnitPrice?: number;
   /** 折扣后单价 */
-  DiscountUnitPrice?: number | null;
+  DiscountUnitPrice?: number;
   /** 折扣 */
-  Discount?: number | null;
+  Discount?: number;
   /** 单位：时/月 */
-  ChargeUnit?: string | null;
+  ChargeUnit?: string;
   /** 商品数量 */
-  Amount?: number | null;
+  Amount?: number;
 }
 
 /** 分实例价格 */
 declare interface ItemPriceDetail {
   /** 实例id */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 实例价格详情 */
-  InstancePrice?: ItemPrice | null;
+  InstancePrice?: ItemPrice;
   /** 磁盘价格详情 */
-  CloudDiskPrice?: ItemPrice | null;
+  CloudDiskPrice?: ItemPrice;
   /** 该实例的总价钱 */
-  InstanceTotalPrice?: ItemPrice | null;
+  InstanceTotalPrice?: ItemPrice;
 }
 
 /** 登录服务详情 */
@@ -169,11 +169,11 @@ declare interface NetworkStatus {
 /** 费用数据结构体 */
 declare interface Price {
   /** 实例价格信息 */
-  InstancePrice?: ItemPrice | null;
+  InstancePrice?: ItemPrice;
   /** 云盘价格信息 */
-  CloudDiskPrice?: ItemPrice | null;
+  CloudDiskPrice?: ItemPrice;
   /** 分实例价格 */
-  PriceDetailSet?: ItemPriceDetail[] | null;
+  PriceDetailSet?: ItemPriceDetail[];
 }
 
 /** 地域列表 */
@@ -361,7 +361,7 @@ declare interface InquirePriceRunInstancesRequest {
 
 declare interface InquirePriceRunInstancesResponse {
   /** 发货参数对应的价格组合，当DryRun=True，会返回空 */
-  Price?: Price | null;
+  Price?: Price;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

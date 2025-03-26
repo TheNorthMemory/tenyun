@@ -2110,107 +2110,107 @@ declare namespace V20180525 {
   /** 集群巡检诊断的默认目录类型 */
   interface KubeJarvisStateCatalogue {
     /** 目录级别，支持参数：first：一级目录second：二级目录 */
-    CatalogueLevel?: string | null;
+    CatalogueLevel?: string;
     /** 目录名 */
-    CatalogueName?: string | null;
+    CatalogueName?: string;
   }
 
   /** 集群巡检诊断结果 */
   interface KubeJarvisStateDiagnostic {
     /** 诊断开始时间 */
-    StartTime?: string | null;
+    StartTime?: string;
     /** 诊断结束时间 */
-    EndTime?: string | null;
+    EndTime?: string;
     /** 诊断目录 */
-    Catalogues?: KubeJarvisStateCatalogue[] | null;
+    Catalogues?: KubeJarvisStateCatalogue[];
     /** 诊断类型 */
-    Type?: string | null;
+    Type?: string;
     /** 诊断名称 */
-    Name?: string | null;
+    Name?: string;
     /** 诊断描述 */
-    Desc?: string | null;
+    Desc?: string;
     /** 诊断结果列表 */
-    Results?: KubeJarvisStateResultsItem[] | null;
+    Results?: KubeJarvisStateResultsItem[];
     /** 诊断结果统计 */
-    Statistics?: KubeJarvisStateStatistic[] | null;
+    Statistics?: KubeJarvisStateStatistic[];
   }
 
   /** 集群巡检诊断概览 */
   interface KubeJarvisStateDiagnosticOverview {
     /** 诊断目录 */
-    Catalogues?: KubeJarvisStateCatalogue[] | null;
+    Catalogues?: KubeJarvisStateCatalogue[];
     /** 诊断结果统计 */
-    Statistics?: KubeJarvisStateStatistic[] | null;
+    Statistics?: KubeJarvisStateStatistic[];
   }
 
   /** 集群巡检检查结果概览 */
   interface KubeJarvisStateInspectionOverview {
     /** 集群ID */
-    ClusterId?: string | null;
+    ClusterId?: string;
     /** 诊断结果统计 */
-    Statistics?: KubeJarvisStateStatistic[] | null;
+    Statistics?: KubeJarvisStateStatistic[];
     /** 诊断结果详情 */
-    Diagnostics?: KubeJarvisStateDiagnosticOverview[] | null;
+    Diagnostics?: KubeJarvisStateDiagnosticOverview[];
   }
 
   /** 集群巡检检查结果 */
   interface KubeJarvisStateInspectionResult {
     /** 集群ID */
-    ClusterId?: string | null;
+    ClusterId?: string;
     /** 诊断开始时间 */
-    StartTime?: string | null;
+    StartTime?: string;
     /** 诊断结束时间 */
-    EndTime?: string | null;
+    EndTime?: string;
     /** 诊断结果统计 */
-    Statistics?: KubeJarvisStateStatistic[] | null;
+    Statistics?: KubeJarvisStateStatistic[];
     /** 诊断结果详情 */
-    Diagnostics?: KubeJarvisStateDiagnostic[] | null;
+    Diagnostics?: KubeJarvisStateDiagnostic[];
     /** 查询巡检报告相关报错 */
-    Error?: string | null;
+    Error?: string;
   }
 
   /** 集群巡检结果历史列表 */
   interface KubeJarvisStateInspectionResultsItem {
     /** 巡检结果名称 */
-    Name?: string | null;
+    Name?: string;
     /** 诊断结果统计 */
-    Statistics?: KubeJarvisStateStatistic[] | null;
+    Statistics?: KubeJarvisStateStatistic[];
   }
 
   /** 集群巡检诊断对象信息 */
   interface KubeJarvisStateResultObjInfo {
     /** 对象属性名称 */
-    PropertyName?: string | null;
+    PropertyName?: string;
     /** 对象属性值 */
-    PropertyValue?: string | null;
+    PropertyValue?: string;
   }
 
   /** 集群巡检诊断结果详情信息 */
   interface KubeJarvisStateResultsItem {
     /** 诊断结果级别 */
-    Level?: string | null;
+    Level?: string;
     /** 诊断对象名 */
-    ObjName?: string | null;
+    ObjName?: string;
     /** 诊断对象信息 */
     ObjInfo?: KubeJarvisStateResultObjInfo[] | null;
     /** 诊断项标题 */
-    Title?: string | null;
+    Title?: string;
     /** 诊断项描述 */
-    Desc?: string | null;
+    Desc?: string;
     /** 诊断建议 */
     Proposal?: string | null;
     /** 诊断建议文档链接 */
-    ProposalDocUrl?: string | null;
+    ProposalDocUrl?: string;
     /** 诊断建议文档名称 */
-    ProposalDocName?: string | null;
+    ProposalDocName?: string;
   }
 
   /** 集群巡检统计结果 */
   interface KubeJarvisStateStatistic {
     /** 诊断结果的健康水平 */
-    HealthyLevel?: string | null;
+    HealthyLevel?: string;
     /** 诊断结果的统计 */
-    Count?: number | null;
+    Count?: number;
   }
 
   /** k8s中标签，一般以数组的方式存在 */

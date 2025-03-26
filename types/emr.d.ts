@@ -371,7 +371,7 @@ declare interface ClusterInstancesInfo {
 /** 集群间绑定使用信息 */
 declare interface ClusterRelationMeta {
   /** 集群类型 */
-  ClusterType?: string | null;
+  ClusterType?: string;
   /** 集群id列表 */
   ClusterIdList?: string[] | null;
 }
@@ -645,7 +645,7 @@ declare interface EmrListInstance {
   /** 集群ID */
   ClusterId?: string;
   /** 常见状态描述：集群生产中,集群运行中,集群创建中,集群已关闭,集群已删除 */
-  StatusDesc?: string | null;
+  StatusDesc?: string;
   /** 集群名字 */
   ClusterName?: string;
   /** 集群地域 */
@@ -665,45 +665,47 @@ declare interface EmrListInstance {
   /** emr ID */
   Id?: number;
   /** 产品ID */
-  ProductId?: number | null;
+  ProductId?: number;
   /** 项目ID */
-  ProjectId?: number | null;
+  ProjectId?: number;
   /** 区域 */
-  RegionId?: number | null;
+  RegionId?: number;
   /** 子网ID */
-  SubnetId?: number | null;
+  SubnetId?: number;
   /** 网络ID */
-  VpcId?: number | null;
+  VpcId?: number;
   /** 地区 */
-  Zone?: string | null;
+  Zone?: string;
   /** 状态码, 取值为-2(集群已删除), -1(集群已关闭), 0(集群生产中), 2(集群运行中), 3(集群创建中) */
-  Status?: number | null;
+  Status?: number;
   /** 实例标签 */
   Tags?: Tag[] | null;
   /** 告警信息 */
-  AlarmInfo?: string | null;
+  AlarmInfo?: string;
   /** 是否是woodpecker集群 */
-  IsWoodpeckerCluster?: number | null;
+  IsWoodpeckerCluster?: number;
   /** Vpc中文 */
-  VpcName?: string | null;
+  VpcName?: string;
   /** 子网中文 */
-  SubnetName?: string | null;
+  SubnetName?: string;
   /** 字符串VpcId */
-  UniqVpcId?: string | null;
+  UniqVpcId?: string;
   /** 字符串子网 */
-  UniqSubnetId?: string | null;
+  UniqSubnetId?: string;
   /** 集群类型 */
-  ClusterClass?: string | null;
+  ClusterClass?: string;
   /** 是否为跨AZ集群 */
-  IsMultiZoneCluster?: boolean | null;
+  IsMultiZoneCluster?: boolean;
   /** 是否手戳集群 */
-  IsHandsCluster?: boolean | null;
+  IsHandsCluster?: boolean;
   /** 体外客户端组件信息 */
   OutSideSoftInfo?: SoftDependInfo[] | null;
   /** 当前集群的应用场景是否支持体外客户端 */
-  IsSupportOutsideCluster?: boolean | null;
+  IsSupportOutsideCluster?: boolean;
   /** 是否专有集群场景集群 */
-  IsDedicatedCluster?: boolean | null;
+  IsDedicatedCluster?: boolean;
+  /** 集群支持克隆 */
+  IsSupportClone?: boolean;
 }
 
 /** Emr询价描述 */
@@ -1925,7 +1927,7 @@ declare interface RepeatStrategy {
   /** 一次执行规则，当RepeatType为"NONE"时有效 */
   NotRepeat?: NotRepeatStrategy | null;
   /** 规则过期时间，超过该时间后，规则将自动置为暂停状态，形式为"2020-07-23 00:00:00"。必须填写 */
-  Expire?: string | null;
+  Expire?: string;
   /** 周期性规则开始时间 */
   StartTime?: string;
 }
@@ -2973,7 +2975,7 @@ declare interface CreateInstanceRequest {
 
 declare interface CreateInstanceResponse {
   /** 实例ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3711,11 +3713,11 @@ declare interface DescribeServiceNodeInfosRequest {
 
 declare interface DescribeServiceNodeInfosResponse {
   /** 总数量 */
-  TotalCnt?: number | null;
+  TotalCnt?: number;
   /** 进程信息 */
   ServiceNodeList?: ServiceNodeDetailInfo[] | null;
   /** 集群所有节点的别名序列化 */
-  AliasInfo?: string | null;
+  AliasInfo?: string;
   /** 支持的FlagNode列表 */
   SupportNodeFlagFilterList?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3871,7 +3873,7 @@ declare interface DescribeYarnScheduleHistoryResponse {
   /** 任务详情 */
   Tasks?: SchedulerTaskInfo[] | null;
   /** 任务详情总数 */
-  Total?: number | null;
+  Total?: number;
   /** 调度类型筛选列表 */
   SchedulerNameList?: string[] | null;
   /** 状态筛选列表 */
@@ -4337,9 +4339,9 @@ declare interface ModifyYarnDeployRequest {
 
 declare interface ModifyYarnDeployResponse {
   /** 为false不点亮部署生效、重置 */
-  IsDraft?: boolean | null;
+  IsDraft?: boolean;
   /** 错误信息，预留 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

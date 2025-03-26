@@ -99,9 +99,9 @@ declare interface KeyMetadata {
 /** 检索条件 */
 declare interface LookupAttribute {
   /** AttributeKey的有效取值范围是:RequestId、EventName、ReadOnly、Username、ResourceType、ResourceName和AccessKeyId，EventId */
-  AttributeKey: string | null;
+  AttributeKey: string;
   /** AttributeValue的值 */
-  AttributeValue?: string | null;
+  AttributeValue?: string;
 }
 
 /** 资源类型 */

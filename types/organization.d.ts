@@ -1843,6 +1843,10 @@ declare interface DescribeOrganizationMembersRequest {
   Product?: string;
   /** 成员标签搜索列表，最大10个 */
   Tags?: Tag[];
+  /** 组织单元ID */
+  NodeId?: number;
+  /** 组织单元名称 */
+  NodeName?: string;
 }
 
 declare interface DescribeOrganizationMembersResponse {

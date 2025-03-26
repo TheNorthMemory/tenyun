@@ -891,6 +891,8 @@ declare interface DescribeClustersRequest {
   Offset?: number;
   /** 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
   Limit?: number;
+  /** cluster-type 按照【集群类型】进行过滤 类型：String 必选：否 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。 */
+  Filters?: Filter[];
 }
 
 declare interface DescribeClustersResponse {

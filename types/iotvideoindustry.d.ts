@@ -287,9 +287,9 @@ declare interface LiveRecordItem {
 /** 直播录制计划详情 */
 declare interface LiveRecordPlanItem {
   /** 计划ID */
-  PlanId: string | null;
+  PlanId?: string;
   /** 计划名称 */
-  PlanName: string | null;
+  PlanName?: string;
 }
 
 /** 消息转发配置信息 */
@@ -375,11 +375,11 @@ declare interface RecordStatistic {
 /** 大盘统计-录像存储统计 出参Value */
 declare interface RecordStatisticValue {
   /** 期望执行时间 秒 */
-  ExpectTimeLen: number | null;
+  ExpectTimeLen?: number;
   /** 实际执行时间 秒 */
-  RecordTimeLen: number | null;
+  RecordTimeLen?: number;
   /** 存储大小 G */
-  FileSize: number | null;
+  FileSize?: number;
 }
 
 /** 普通设备的录像详情 */
@@ -441,23 +441,23 @@ declare interface ServerConfiguration {
 /** 某天的统计数额 */
 declare interface StatisticItem {
   /** 日期。格式【YYYY-MM-DD】 */
-  Date?: string | null;
+  Date?: string;
   /** 统计数额 */
-  Sum?: number | null;
+  Sum?: number;
 }
 
 /** 拉流地址，只有在推流情况下才有 */
 declare interface StreamAddress {
   /** 流ID */
-  StreamId?: string | null;
+  StreamId?: string;
   /** rtsp流地址 */
-  RtspAddr?: string | null;
+  RtspAddr?: string;
   /** rtmp流地址 */
-  RtmpAddr?: string | null;
+  RtmpAddr?: string;
   /** hls流地址 */
-  HlsAddr?: string | null;
+  HlsAddr?: string;
   /** flv流地址 */
-  FlvAddr?: string | null;
+  FlvAddr?: string;
 }
 
 /** 时间模板详情 */
@@ -477,11 +477,11 @@ declare interface TimeTemplateItem {
 /** 在操作时间模板时，用于描述各个时间片段 */
 declare interface TimeTemplateSpec {
   /** 一周中的周几 */
-  DayofWeek: number | null;
+  DayofWeek: number;
   /** 时间片段的开始时分。格式【HH:MM】 */
-  BeginTime: string | null;
+  BeginTime: string;
   /** 时间片段的结束时分。格式【HH:MM】 */
-  EndTime: string | null;
+  EndTime: string;
 }
 
 /** 告警列表出参 */

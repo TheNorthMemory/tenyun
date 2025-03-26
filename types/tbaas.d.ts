@@ -21,15 +21,15 @@ declare interface ChainMakerContractResult {
   /** 交易结果码 */
   Code?: number;
   /** 交易结果码含义 */
-  CodeMessage?: string | null;
+  CodeMessage?: string;
   /** 交易ID */
-  TxId?: string | null;
+  TxId?: string;
   /** Gas使用量 */
-  GasUsed?: number | null;
+  GasUsed?: number;
   /** 合约返回消息 */
-  Message?: string | null;
+  Message?: string;
   /** 合约函数返回，base64编码 */
-  Result?: string | null;
+  Result?: string;
 }
 
 /** 长安链交易查询结果 */
@@ -37,19 +37,19 @@ declare interface ChainMakerTransactionResult {
   /** 交易结果码 */
   Code?: number;
   /** 交易结果码含义 */
-  CodeMessage?: string | null;
+  CodeMessage?: string;
   /** 交易ID */
-  TxId?: string | null;
+  TxId?: string;
   /** Gas使用量 */
-  GasUsed?: number | null;
+  GasUsed?: number;
   /** 区块高度 */
-  BlockHeight?: number | null;
+  BlockHeight?: number;
   /** 合约执行结果 */
-  ContractEvent?: string | null;
+  ContractEvent?: string;
   /** 合约返回信息 */
-  Message?: string | null;
+  Message?: string;
   /** 交易时间，单位是秒 */
-  Timestamp?: number | null;
+  Timestamp?: number;
 }
 
 /** 背书组织及其节点列表 */
@@ -79,17 +79,17 @@ declare interface SignCertCsr {
 /** 交易显示概述信息 */
 declare interface Transaction {
   /** 交易ID */
-  TxId?: string | null;
+  TxId?: string;
   /** 合约名称 */
-  ChaincodeName?: string | null;
+  ChaincodeName?: string;
   /** 交易发送者 */
-  Sender?: string | null;
+  Sender?: string;
   /** 交易创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 交易所在区块高度 */
-  BlockHeight?: number | null;
+  BlockHeight?: number;
   /** 交易在区块中的序号 */
-  TxIndex?: number | null;
+  TxIndex?: number;
 }
 
 /** 交易列表项信息 */
@@ -529,7 +529,7 @@ declare interface InvokeChainMakerDemoContractRequest {
 
 declare interface InvokeChainMakerDemoContractResponse {
   /** 交易结果 */
-  Result?: ChainMakerContractResult | null;
+  Result?: ChainMakerContractResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -647,11 +647,11 @@ declare interface QueryChainMakerDemoBlockTransactionRequest {
 
 declare interface QueryChainMakerDemoBlockTransactionResponse {
   /** 区块交易 */
-  Result?: ChainMakerTransactionResult[] | null;
+  Result?: ChainMakerTransactionResult[];
   /** 区块高度 */
   BlockHeight?: number;
   /** 交易数量 */
-  TxCount?: number | null;
+  TxCount?: number;
   /** 区块时间戳，单位是秒 */
   BlockTimestamp?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -673,7 +673,7 @@ declare interface QueryChainMakerDemoContractRequest {
 
 declare interface QueryChainMakerDemoContractResponse {
   /** 交易结果 */
-  Result?: ChainMakerContractResult | null;
+  Result?: ChainMakerContractResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -689,7 +689,7 @@ declare interface QueryChainMakerDemoTransactionRequest {
 
 declare interface QueryChainMakerDemoTransactionResponse {
   /** 交易结果 */
-  Result?: ChainMakerTransactionResult | null;
+  Result?: ChainMakerTransactionResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

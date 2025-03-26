@@ -177,7 +177,7 @@ declare interface DCDBInstanceInfo {
   /** 付费模式 */
   Paymode?: string;
   /** 实例处于异步任务状态时，表示异步任务流程ID */
-  Locker?: number | null;
+  Locker?: number;
   /** 外网状态，0-未开通；1-已开通；2-关闭；3-开通中 */
   WanStatus?: number;
   /** 该实例是否支持审计。1-支持；0-不支持 */
@@ -185,27 +185,27 @@ declare interface DCDBInstanceInfo {
   /** Cpu核数 */
   Cpu?: number;
   /** 实例IPv6标志 */
-  Ipv6Flag?: number | null;
+  Ipv6Flag?: number;
   /** 内网IPv6 */
-  Vipv6?: string | null;
+  Vipv6?: string;
   /** 外网IPv6 */
-  WanVipv6?: string | null;
+  WanVipv6?: string;
   /** 外网IPv6端口 */
-  WanPortIpv6?: number | null;
+  WanPortIpv6?: number;
   /** 外网IPv6状态 */
-  WanStatusIpv6?: number | null;
+  WanStatusIpv6?: number;
   /** DCN标志，0-无，1-主实例，2-灾备实例 */
-  DcnFlag?: number | null;
+  DcnFlag?: number;
   /** DCN状态，0-无，1-创建中，2-同步中，3-已断开 */
-  DcnStatus?: number | null;
+  DcnStatus?: number;
   /** DCN灾备实例数 */
-  DcnDstNum?: number | null;
+  DcnDstNum?: number;
   /** 1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型） */
-  InstanceType?: number | null;
+  InstanceType?: number;
   /** 实例标签信息 */
-  ResourceTags?: ResourceTag[] | null;
+  ResourceTags?: ResourceTag[];
   /** 数据库引擎版本 */
-  DbVersionId?: string | null;
+  DbVersionId?: string;
 }
 
 /** 描述分布式数据库分片信息。 */
@@ -635,7 +635,7 @@ declare interface ShardBriefInfo {
   /** 分片Cpu核数 */
   Cpu?: number;
   /** DB节点信息 */
-  NodesInfo?: NodeInfo[] | null;
+  NodesInfo?: NodeInfo[];
 }
 
 /** 分片信息 */
@@ -1059,7 +1059,7 @@ declare interface CreateDCDBInstanceResponse {
   /** 长订单号。可以据此调用 DescribeOrders 查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。 */
   DealName?: string;
   /** 订单对应的实例 ID 列表，如果此处没有返回实例 ID，可以通过订单查询接口获取。还可通过实例查询接口查询实例是否创建完成。 */
-  InstanceIds?: string[] | null;
+  InstanceIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1291,9 +1291,9 @@ declare interface DescribeAccountsRequest {
 
 declare interface DescribeAccountsResponse {
   /** 实例ID，透传入参。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 实例用户列表。 */
-  Users: DBAccount[] | null;
+  Users?: DBAccount[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1581,41 +1581,41 @@ declare interface DescribeDCDBInstanceDetailResponse {
   /** 分片信息 */
   Shards?: ShardBriefInfo[];
   /** 内网IPv6 */
-  Vip6?: string | null;
+  Vip6?: string;
   /** 实例Cpu核数 */
-  Cpu?: number | null;
+  Cpu?: number;
   /** 实例QPS */
-  Qps?: number | null;
+  Qps?: number;
   /** DB引擎 */
-  DbEngine?: string | null;
+  DbEngine?: string;
   /** 是否支持IPv6 */
-  Ipv6Flag?: number | null;
+  Ipv6Flag?: number;
   /** 外网IPv6地址，公网可访问 */
-  WanVipv6?: string | null;
+  WanVipv6?: string;
   /** 外网状态，0-未开通；1-已开通；2-关闭；3-开通中；4-关闭中 */
-  WanStatusIpv6?: number | null;
+  WanStatusIpv6?: number;
   /** 外网IPv6端口 */
-  WanPortIpv6?: number | null;
+  WanPortIpv6?: number;
   /** 标签信息 */
   ResourceTags?: ResourceTag[];
   /** DCN标志，0-无，1-主实例，2-灾备实例 */
-  DcnFlag?: number | null;
+  DcnFlag?: number;
   /** DCN状态，0-无，1-创建中，2-同步中，3-已断开 */
-  DcnStatus?: number | null;
+  DcnStatus?: number;
   /** DCN灾备实例数 */
-  DcnDstNum?: number | null;
+  DcnDstNum?: number;
   /** 1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型） */
-  InstanceType?: number | null;
+  InstanceType?: number;
   /** 实例是否支持设置用户连接数限制，内核为10.1暂不支持。 */
-  IsMaxUserConnectionsSupported?: boolean | null;
+  IsMaxUserConnectionsSupported?: boolean;
   /** 对外显示的数据库版本 */
-  DbVersionId?: string | null;
+  DbVersionId?: string;
   /** 加密状态, 0-未开启，1-已开启 */
-  EncryptStatus?: number | null;
+  EncryptStatus?: number;
   /** 独享集群类型，0:公有云, 1:金融围笼, 2:CDC集群 */
-  ExclusterType?: number | null;
+  ExclusterType?: number;
   /** VPC就近访问 */
-  RsAccessStrategy?: number | null;
+  RsAccessStrategy?: number;
   /** 尚未回收的网络资源 */
   ReservedNetResources?: ReservedNetResource[];
   /** 是否支持物理复制 */

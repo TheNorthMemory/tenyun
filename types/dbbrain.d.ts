@@ -533,9 +533,9 @@ declare interface MongoDBIndex {
   /** 得分。 */
   Score?: number;
   /** 推荐索引列表。 */
-  IndexesToBuild?: IndexesToBuild[] | null;
+  IndexesToBuild?: IndexesToBuild[];
   /** 无效索引列表。 */
-  IndexesToDrop?: IndexesToDrop[] | null;
+  IndexesToDrop?: IndexesToDrop[];
 }
 
 /** 监控数据（浮点型） */
@@ -651,9 +651,9 @@ declare interface ReceiveInfo {
 /** 接收用户 */
 declare interface ReceiveUin {
   /** 用户名 */
-  UinName?: string | null;
+  UinName?: string;
   /** 用户id */
-  Uin?: string | null;
+  Uin?: string;
 }
 
 /** Redis大Key分析任务详情。 */

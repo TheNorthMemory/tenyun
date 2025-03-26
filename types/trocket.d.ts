@@ -487,25 +487,25 @@ declare interface SourceClusterGroupConfig {
 /** 源集群主题配置 */
 declare interface SourceClusterTopicConfig {
   /** 主题名称 */
-  TopicName: string | null;
+  TopicName: string;
   /** 主题类型，5.x版本UNSPECIFIED 未指定NORMAL 普通消息FIFO 顺序消息DELAY 延迟消息TRANSACTION 事务消息4.x版本Normal 普通消息PartitionedOrder 分区顺序消息Transaction 事务消息DelayScheduled 延时消息 */
-  TopicType: string | null;
+  TopicType: string;
   /** 队列数 */
-  QueueNum: number | null;
+  QueueNum: number;
   /** 备注信息 */
-  Remark?: string | null;
+  Remark?: string;
   /** 是否已导入，作为入参时无效 */
-  Imported?: boolean | null;
+  Imported?: boolean;
   /** 命名空间，仅4.x集群有效 */
-  Namespace?: string | null;
+  Namespace?: string;
   /** 导入状态，Unknown 未知，AlreadyExists 已存在，Success 成功，Failure 失败 */
-  ImportStatus?: string | null;
+  ImportStatus?: string;
   /** 4.x的命名空间，出参使用 */
-  NamespaceV4?: string | null;
+  NamespaceV4?: string;
   /** 4.x的主题名，出参使用 */
-  TopicNameV4?: string | null;
+  TopicNameV4?: string;
   /** 4.x的完整命名空间，出参使用 */
-  FullNamespaceV4?: string | null;
+  FullNamespaceV4?: string;
 }
 
 /** MQTT客户端数据流量统计 */
@@ -579,7 +579,7 @@ declare interface TopicConsumeStats {
   /** 订阅规则 */
   SubString?: string;
   /** 最后消费进度更新时间 */
-  LastUpdateTime?: number | null;
+  LastUpdateTime?: number;
 }
 
 /** 列表上的主题信息 */
@@ -1539,7 +1539,7 @@ declare interface DescribeTopicListRequest {
 
 declare interface DescribeTopicListResponse {
   /** 查询总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 主题列表 */
   Data?: TopicItem[];
   /** 唯一请求 ID，每次请求都会返回。 */

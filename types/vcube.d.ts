@@ -9,7 +9,7 @@ declare interface AppInfo {
   /** 用户appid */
   AppId?: string;
   /** 应用名称 */
-  AppName?: string | null;
+  AppName?: string;
   /** Ios 包名 */
   BundleId?: string | null;
   /** Andorid 包名 */
@@ -37,19 +37,19 @@ declare interface ApplicationInfo {
   /** 应用类型，formal： 正式应用，test：测试应用 */
   AppType?: string;
   /** license数组 */
-  Licenses?: License[];
+  Licenses?: License[] | null;
   /** license 秘钥 */
-  LicenseKey?: string | null;
+  LicenseKey?: string;
   /** 安卓应用的唯一标识 */
   PackageName?: string | null;
   /** 创建时间 */
-  CreatedAt?: string | null;
+  CreatedAt?: string;
   /** 更新时间 */
-  UpdatedAt?: string | null;
+  UpdatedAt?: string;
   /** 用户应用Id */
-  ApplicationId?: number | null;
+  ApplicationId?: number;
   /** 视立方下载license的url */
-  LicenseUrl?: string | null;
+  LicenseUrl?: string;
   /** 优图美视信息列表 */
   XMagics?: XMagicInfo[] | null;
   /** Mac 进程名 */
@@ -65,23 +65,23 @@ declare interface ApplicationInfo {
 /** 功能描述模型 */
 declare interface Feature {
   /** 索引 */
-  Id: number;
+  Id?: number;
   /** 功能ID */
-  FeatureId: number;
+  FeatureId?: number;
   /** 功能名称 */
-  Name: string;
+  Name?: string;
   /** 功能类型 */
-  Type: string;
+  Type?: string;
   /** 是否可以申请试用 */
-  Trial: boolean;
+  Trial?: boolean;
   /** 可以试用的次数 */
-  TrialCount: number;
+  TrialCount?: number;
   /** 可以试用的时长，单位天 */
-  Duration: number;
+  Duration?: number;
   /** 创建时间 */
-  CreatedAt: string | null;
+  CreatedAt?: string;
   /** 更新时间 */
-  UpdatedAt: string | null;
+  UpdatedAt?: string;
 }
 
 /** 视立方应用license */
@@ -99,143 +99,145 @@ declare interface License {
   /** license是测试：test还是正式：formal */
   LicenseType?: string;
   /** 测试license 是否可以续期 */
-  Renewal?: boolean | null;
+  Renewal?: boolean;
   /** license索引 */
   LicenseId?: number;
   /** license名称 */
-  Name?: string | null;
+  Name?: string;
   /** 测试license 是否升级 */
-  Update?: boolean | null;
+  Update?: boolean;
   /** 兼容老的licenseUrl */
   OldLicenseUrl?: string | null;
   /** 视立方url分组 */
   Group?: number | null;
   /** 过期：true ，未过期：其它 */
-  Expired?: boolean | null;
+  Expired?: boolean;
   /** 返回还有多少秒过期，过期返回0 */
   RestTime?: number | null;
   /** 创建时间 */
-  CreatedAt?: string | null;
+  CreatedAt?: string;
   /** 更新时间 */
-  UpdatedAt?: string | null;
+  UpdatedAt?: string;
   /** 计费资源相关信息 */
   Resource?: RenewResource | null;
   /** 是否为马甲包 */
-  IsVest?: boolean | null;
+  IsVest?: boolean;
 }
 
 /** license 资源信息 */
 declare interface LicenseResourceInfo {
   /** 授权功能Id */
-  Id: number;
+  Id?: number;
   /** 用户appid */
-  AppId: string;
+  AppId?: string;
   /** 有效期时长 */
-  Duration: string | null;
+  Duration?: string | null;
   /** 功能Id */
-  FeatureId: number;
+  FeatureId?: number;
   /** 此license资源的开始生效时间 */
-  StartTime: string | null;
+  StartTime?: string;
   /** 此license资源的生效结束时间 */
-  EndTime: string | null;
+  EndTime?: string;
   /** 创建时间 */
-  CreatedAt: string;
+  CreatedAt?: string;
   /** 更新时间 */
-  UpdatedAt: string;
+  UpdatedAt?: string;
   /** 此资源是否可用于续期和更新有效期 */
-  IsUse: boolean | null;
+  IsUse?: boolean;
   /** 此资源的状态 */
-  Status: number | null;
+  Status?: number;
   /** 销毁时间 */
-  IsolatedTimestamp: string | null;
+  IsolatedTimestamp?: string | null;
   /** 功能模块名称 */
-  Name: string | null;
+  Name?: string;
   /** 功能模块类型 */
-  Type: string | null;
+  Type?: string;
   /** 资源包信息 */
-  Package: Package | null;
+  Package?: Package | null;
   /** 应用信息 */
-  Application: AppInfo | null;
+  Application?: AppInfo | null;
   /** 资源Id */
-  ResourceId?: string | null;
+  ResourceId?: string;
   /** 自动续费状态 */
-  AutoRenewFlag?: number | null;
+  AutoRenewFlag?: number;
 }
 
 /** license 资源信息 */
 declare interface LicenseResourceSimpleInfo {
   /** 授权功能Id */
-  Id: number;
+  Id?: number;
   /** 用户appid */
-  AppId: string;
+  AppId?: string;
   /** 有效期时长 */
-  Duration: string | null;
+  Duration?: string | null;
   /** 功能Id */
-  FeatureId: number;
+  FeatureId?: number;
   /** 此license资源的开始生效时间 */
-  StartTime: string | null;
+  StartTime?: string;
   /** 此license资源的生效结束时间 */
-  EndTime: string | null;
+  EndTime?: string;
   /** 创建时间 */
-  CreatedAt: string;
+  CreatedAt?: string;
   /** 更新时间 */
-  UpdatedAt: string;
+  UpdatedAt?: string;
   /** 此资源是否可用于续期和更新有效期 */
-  IsUse: boolean | null;
+  IsUse?: boolean;
   /** 此资源的状态 */
-  Status: number | null;
+  Status?: number;
   /** 销毁时间 */
-  IsolatedTimestamp: string | null;
+  IsolatedTimestamp?: string | null;
   /** 功能模块名称 */
-  Name: string | null;
+  Name?: string;
   /** 功能模块类型 */
-  Type: string | null;
+  Type?: string;
   /** 资源包信息 */
-  Package: Package | null;
+  Package?: Package | null;
   /** 资源id */
-  ResourceId?: string | null;
+  ResourceId?: string;
   /** 自动续费状态 */
-  AutoRenewFlag?: number | null;
+  AutoRenewFlag?: number;
 }
 
 /** 视立方产品概览页新闻动态 */
 declare interface NewsInfo {
+  /** 新闻Id */
+  Id?: number;
 }
 
 /** 资源包结构 */
 declare interface Package {
   /** 资源包Id */
-  Id: number;
+  Id?: number;
   /** 资源包资源Id */
-  BizResourceId: string;
+  BizResourceId?: string;
   /** 站点 中国站还是国际站 */
-  Site: string;
+  Site?: string;
   /** 资源包开始生效时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 资源包过期时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 资源包退费时间 */
-  RefundTime: string | null;
+  RefundTime?: string | null;
   /** 资源包名称 */
-  Name: string;
+  Name?: string;
   /** 资源包类型ID,对应点播：PackageId 对应直播：TypeId */
-  Type: string | null;
+  Type?: string;
 }
 
 /** 自动续期资源info */
 declare interface RenewResource {
   /** 资源Id */
-  ResourceId?: string | null;
+  ResourceId?: string;
   /** 自动续期标记，0：默认，1：自动续期，2：不续期 */
-  AutoRenewFlag?: number | null;
+  AutoRenewFlag?: number;
   /** 资源冻结时间 */
   IsolatedTimestamp?: string | null;
   /** 资源销毁状态 */
   Refund?: boolean | null;
   /** 子产品码 */
-  SubProductCode?: string | null;
+  SubProductCode?: string;
   /** 资源到期时间 */
-  EndTime?: string | null;
+  EndTime?: string;
 }
 
 /** 视频功能描述模型 */
@@ -245,23 +247,23 @@ declare interface VideoFeature {
   /** 功能ID */
   FeatureId?: number;
   /** 功能名称 */
-  Name?: string | null;
+  Name?: string;
   /** 功能类型 */
-  Type?: string | null;
+  Type?: string;
   /** 是否可以申请试用 */
-  Trial?: boolean | null;
+  Trial?: boolean;
   /** 可以试用的次数 */
   TrialCount?: number | null;
   /** 可以试用的时长，单位天 */
   Duration?: number | null;
   /** 创建时间 */
-  CreatedAt?: string | null;
+  CreatedAt?: string;
   /** 更新时间 */
-  UpdatedAt?: string | null;
+  UpdatedAt?: string;
   /** 功能所属业务方 */
-  BizType?: string | null;
+  BizType?: string;
   /** 平台类型 */
-  Platform?: string | null;
+  Platform?: string;
 }
 
 /** 优图的的功能，Trial 为true的可以开通测试 */
@@ -293,7 +295,7 @@ declare interface XMagicInfo {
   /** 用户公司行业类型 */
   CompanyType?: string | null;
   /** 优图套餐类型 */
-  Plan?: string | null;
+  Plan?: string;
   /** 测试版还是正式版 test | formal */
   LicenseType?: string;
   /** 0: 预申请，需要补充申请信息 1: 审批通过，xmagic已签发，正在生效中 2: 提交完申请资料后待运营审核状态 3: 申请被驳回，需要重新修改申请资料 4: 应用包名被修改后触发xmagic审批，当前xmagic已暂停生效 5: 应用修改包名后，审批未通过状态，可以重新修改应用PB，状态会回到4 */
@@ -307,25 +309,25 @@ declare interface XMagicInfo {
   /** 续期次数， LicenseType=test时有此字段 */
   RenewalCount?: number | null;
   /** 历次审批的回复 */
-  Reply?: string[] | null;
+  Reply?: string[];
   /** 创建时间 */
   CreatedAt?: string;
   /** 修改时间 */
   UpdatedAt?: string;
   /** 用户更新信息的时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 是否过期 */
   Expired?: boolean | null;
   /** 返回还剩多少秒过期，过期后返回0 */
   RestTime?: number | null;
   /** single: 原子能力,combined:套餐 */
-  XMagicType?: string | null;
+  XMagicType?: string;
   /** 优图模块名称，自动中英文 */
-  Name?: string | null;
+  Name?: string;
   /** 优图资源信息 */
   Resource?: RenewResource | null;
   /** 是否是马甲包 */
-  IsVest?: boolean | null;
+  IsVest?: boolean;
 }
 
 /** 优图美视资源包 */
@@ -345,21 +347,21 @@ declare interface XMagicResource {
   /** 资源是否已使用 */
   XMagic?: boolean | null;
   /** 资源开始生效时间 */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 资源结束生效时间 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 资源包是否过期 */
-  Expired?: boolean | null;
+  Expired?: boolean;
   /** 功能模块名称 */
-  Name?: string | null;
+  Name?: string;
   /** single: 原子能力,combined:套餐 */
-  XMagicType?: string | null;
+  XMagicType?: string;
   /** xmagic:优图， avatar：虚拟人 */
-  BizType?: string | null;
+  BizType?: string;
   /** 资源Id */
-  ResourceId?: string | null;
+  ResourceId?: string;
   /** 资源是否可以使用 */
-  IsUse?: boolean | null;
+  IsUse?: boolean;
 }
 
 /** 优图美视资源包 */
@@ -377,9 +379,9 @@ declare interface XMagicResourceSimpleInfo {
   /** 更新时间 */
   UpdatedAt?: string;
   /** 资源开始生效时间 */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 资源结束生效时间 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 应用信息 */
   Application?: AppInfo | null;
   /** 开通的优图功能信息 */
@@ -389,17 +391,17 @@ declare interface XMagicResourceSimpleInfo {
   /** 操作日期记录 */
   Operation?: string[] | null;
   /** 是否可以使用 */
-  IsUse?: boolean | null;
+  IsUse?: boolean;
   /** single: 原子能力,combined:套餐 */
-  XMagicType?: string | null;
+  XMagicType?: string;
   /** 功能模块名称 */
-  Name?: string | null;
+  Name?: string;
   /** 资源所属业务方 xmagic：优图，avatar：虚拟形象 */
-  BizType?: string | null;
+  BizType?: string;
   /** 资源id */
-  ResourceId?: string | null;
+  ResourceId?: string;
   /** 资源自动续费状态 */
-  AutoRenewFlag?: number | null;
+  AutoRenewFlag?: number;
 }
 
 /** 优图简单信息 */
@@ -413,15 +415,17 @@ declare interface XMagicSimpleInfo {
 /** 可以开通测试的功能 */
 declare interface XMagicTrial {
   /** 功能名称 */
-  Name: string;
+  Name?: string;
   /** 可以申请的次数 */
-  TrialCount: number;
+  TrialCount?: number;
   /** 每次申请的时长单位：天 */
-  Duration: number;
+  Duration?: number;
   /** 功能类别 */
-  Plan: string;
+  Plan?: string;
   /** single: 原子能力,combined:套餐 */
-  XMagicType: string;
+  XMagicType?: string;
+  /** vod：点播 live：直播 */
+  BizType?: string;
 }
 
 declare interface CreateActivityLicenseRequest {
@@ -433,13 +437,13 @@ declare interface CreateActivityLicenseResponse {
   /** 用户appid */
   AppId?: string;
   /** app名称 */
-  AppName?: string | null;
+  AppName?: string;
   /** ios包名 */
-  BundleId?: string | null;
+  BundleId?: string;
   /** 安卓包名 */
   PackageName?: string;
   /** 有效时长 */
-  Duration?: number | null;
+  Duration?: number;
   /** 开始时间 */
   StartTime?: string;
   /** 结束时间 */
@@ -449,9 +453,9 @@ declare interface CreateActivityLicenseResponse {
   /** license 授权文件下载链接 */
   LicenseUrl?: string;
   /** license剩余天数，最后一天以及过期显示0 */
-  ResidueDay?: number | null;
+  ResidueDay?: number;
   /** license剩余秒数 */
-  Residue?: number | null;
+  Residue?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -529,7 +533,7 @@ declare interface CreateLicenseResponse {
 }
 
 declare interface CreateTestXMagicRequest {
-  /** 应用id */
+  /** 将腾讯特效创建到哪个应用下 */
   ApplicationId: number;
   /** 营业执照 */
   CompanyPermit?: string;
@@ -617,9 +621,9 @@ declare interface DescribeFeatureListRequest {
 
 declare interface DescribeFeatureListResponse {
   /** 功能列表 */
-  FeatureList?: VideoFeature[] | null;
+  FeatureList?: VideoFeature[];
   /** 优图功能列表 */
-  XMagicFeatureList?: XMagicFeature[] | null;
+  XMagicFeatureList?: XMagicFeature[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -681,7 +685,7 @@ declare interface DescribeTrialFeatureResponse {
   /** 可以开通的优图测试功能 */
   XMagicTrial?: XMagicTrial | null;
   /** 可以开通的优图测试功能列表 */
-  XMagicTrialList?: XMagicTrial[] | null;
+  XMagicTrialList?: XMagicTrial[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -827,9 +831,9 @@ declare interface DescribeXMagicResourceListRequest {
 
 declare interface DescribeXMagicResourceListResponse {
   /** 优图资源包信息 */
-  Resources?: XMagicResourceSimpleInfo[] | null;
+  Resources?: XMagicResourceSimpleInfo[];
   /** 资源数量 */
-  Count?: number | null;
+  Count?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -843,9 +847,9 @@ declare interface DescribeXMagicResourceRequest {
 
 declare interface DescribeXMagicResourceResponse {
   /** 优图资源包信息 */
-  Resources?: XMagicResource[] | null;
+  Resources?: XMagicResource[];
   /** 资源数量 */
-  Count?: number | null;
+  Count?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -917,7 +921,7 @@ declare interface ModifyPresetApplicationResponse {
 }
 
 declare interface ModifyTrialLicenseRequest {
-  /** 执照ID */
+  /** 授权ID */
   LicenseId: string;
 }
 
@@ -1021,11 +1025,11 @@ declare interface Vcube {
   CreateApplicationAndBindLicense(data: CreateApplicationAndBindLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationAndBindLicenseResponse>;
   /** 创建视频播放license {@link CreateApplicationAndVideoRequest} {@link CreateApplicationAndVideoResponse} */
   CreateApplicationAndVideo(data: CreateApplicationAndVideoRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationAndVideoResponse>;
-  /** 创建播发器web基础版 {@link CreateApplicationAndWebPlayerLicenseRequest} {@link CreateApplicationAndWebPlayerLicenseResponse} */
+  /** 创建播放器web基础版 {@link CreateApplicationAndWebPlayerLicenseRequest} {@link CreateApplicationAndWebPlayerLicenseResponse} */
   CreateApplicationAndWebPlayerLicense(data: CreateApplicationAndWebPlayerLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationAndWebPlayerLicenseResponse>;
   /** 绑定license {@link CreateLicenseRequest} {@link CreateLicenseResponse} */
   CreateLicense(data: CreateLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLicenseResponse>;
-  /** 创建测试XMagic {@link CreateTestXMagicRequest} {@link CreateTestXMagicResponse} */
+  /** 创建测试版腾讯特效 {@link CreateTestXMagicRequest} {@link CreateTestXMagicResponse} */
   CreateTestXMagic(data: CreateTestXMagicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTestXMagicResponse>;
   /** 创建测试应用并开通测试 license {@link CreateTrialApplicationAndLicenseRequest} {@link CreateTrialApplicationAndLicenseResponse} */
   CreateTrialApplicationAndLicense(data: CreateTrialApplicationAndLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrialApplicationAndLicenseResponse>;
@@ -1059,7 +1063,7 @@ declare interface Vcube {
   DescribeXMagicResource(data: DescribeXMagicResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeXMagicResourceResponse>;
   /** 查询优图美视资源包列表 {@link DescribeXMagicResourceListRequest} {@link DescribeXMagicResourceListResponse} */
   DescribeXMagicResourceList(data: DescribeXMagicResourceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeXMagicResourceListResponse>;
-  /** 编辑更改应用 {@link ModifyApplicationRequest} {@link ModifyApplicationResponse} */
+  /** 更改应用名称 {@link ModifyApplicationRequest} {@link ModifyApplicationResponse} */
   ModifyApplication(data: ModifyApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationResponse>;
   /** 修改正式应用包名 {@link ModifyFormalApplicationRequest} {@link ModifyFormalApplicationResponse} */
   ModifyFormalApplication(data: ModifyFormalApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFormalApplicationResponse>;

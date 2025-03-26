@@ -150,6 +150,8 @@ declare interface ClusterConfigsHistory {
 
 /** 用于返回XML格式的配置文件和内容以及其他配置文件有关的信息 */
 declare interface ClusterConfigsInfoFromEMR {
+  /** 计算组id */
+  ComputeGroupId?: string;
   /** 配置文件名称 */
   FileName?: string;
   /** 配置文件对应的相关属性信息 */
@@ -280,6 +282,8 @@ declare interface DataBaseAuditRecord {
   State?: string;
   /** 是否是查询 */
   IsQuery?: boolean;
+  /** 计算组 */
+  ComputeGroup?: string;
 }
 
 /** 磁盘规格描述 */
@@ -438,6 +442,8 @@ declare interface InstanceInfo {
   MonitorMode?: number;
   /** cn节点信息 */
   CNSummary?: NodesSummary;
+  /** 计算组个数 */
+  ComputeGroupCount?: number;
 }
 
 /** 实例节点描述信息 */
@@ -468,6 +474,8 @@ declare interface InstanceNode {
   Zone?: string;
   /** 创建时间 */
   CreateTime?: string;
+  /** 计算组ID */
+  ComputeGroupId?: string;
 }
 
 /** 集群操作描述 */
@@ -494,6 +502,8 @@ declare interface InstanceOperation {
   JobId?: number;
   /** 操作明细 */
   OperationDetail?: string;
+  /** 计算组id */
+  ComputerGroupId?: string;
 }
 
 /** 网络信息 */
@@ -546,6 +556,10 @@ declare interface NodeInfos {
   Zone?: string;
   /** 创建时间 */
   CreateTime?: string;
+  /** 计算组id */
+  ComputeGroupId?: string;
+  /** rip */
+  RIp?: string;
 }
 
 /** 节点角色描述信息 */
@@ -748,6 +762,8 @@ declare interface SlowQueryRecord {
   CatalogName?: string;
   /** cpu执行时间 */
   CpuTimeMs?: number;
+  /** 计算组 */
+  ComputeGroup?: string;
 }
 
 /** 标签描述 */
@@ -820,6 +836,8 @@ declare interface ZoneInfo {
   Encrypt?: number;
   /** 是否为主力园区 */
   Main?: boolean;
+  /** 0表示未开通容器化，1表示已开通容器化 */
+  ContainerEnabled?: number;
 }
 
 declare interface ActionAlterUserRequest {
@@ -829,6 +847,10 @@ declare interface ActionAlterUserRequest {
   ApiType: string;
   /** 用户权限类型 0:普通用户 1:管理员 */
   UserPrivilege?: number;
+  /** 计算组列表 */
+  ComputeGroups?: string[];
+  /** 集群ID */
+  InstanceId?: string;
 }
 
 declare interface ActionAlterUserResponse {
@@ -1255,6 +1277,8 @@ declare interface DescribeDatabaseAuditDownloadRequest {
   Catalogs?: string[];
   /** 是否是查询 */
   IsQuery?: boolean[];
+  /** 计算组列表 */
+  ComputeGroups?: string[];
 }
 
 declare interface DescribeDatabaseAuditDownloadResponse {
@@ -1295,6 +1319,8 @@ declare interface DescribeDatabaseAuditRecordsRequest {
   Catalogs?: string[];
   /** 是否是查询 */
   IsQuery?: boolean[];
+  /** 计算组列表 */
+  ComputeGroups?: string[];
 }
 
 declare interface DescribeDatabaseAuditRecordsResponse {
@@ -1383,6 +1409,8 @@ declare interface DescribeInstanceOperationsRequest {
   StartTime?: string;
   /** 结束时间 */
   EndTime?: string;
+  /** 计算组ID */
+  ComputeGroupId?: string;
 }
 
 declare interface DescribeInstanceOperationsResponse {
@@ -1467,6 +1495,8 @@ declare interface DescribeInstancesRequest {
   Limit?: number;
   /** 搜索标签列表，没匹配到则不过滤集群列表 */
   SearchTags?: SearchTags[];
+  /** 0 : 存算一体,1：存算分离,2:ALL */
+  InstanceType?: number;
 }
 
 declare interface DescribeInstancesResponse {
@@ -1525,6 +1555,8 @@ declare interface DescribeSlowQueryRecordsDownloadRequest {
   SortOrder?: string;
   /** user */
   UserName?: string;
+  /** 计算组列表 */
+  ComputeGroups?: string[];
 }
 
 declare interface DescribeSlowQueryRecordsDownloadResponse {
@@ -1569,6 +1601,8 @@ declare interface DescribeSlowQueryRecordsRequest {
   SortOrder?: string;
   /** user */
   UserName?: string;
+  /** 计算组列表 */
+  ComputeGroups?: string[];
 }
 
 declare interface DescribeSlowQueryRecordsResponse {
@@ -1593,6 +1627,8 @@ declare interface DescribeSpecRequest {
   Zones?: string[];
   /** 机型名称 */
   SpecName?: string;
+  /** 是否存算分离 */
+  IsSSC?: boolean;
 }
 
 declare interface DescribeSpecResponse {
@@ -1845,6 +1881,10 @@ declare interface ModifyUserPrivilegesV3Request {
   UserPrivileges: UpdateUserPrivileges;
   /** 用户链接来自的 IP */
   WhiteHost?: string;
+  /** 更新类型，默认0，1为更新绑定计算组 */
+  UpdateType?: number;
+  /** 需绑定计算组列表 */
+  UpdateComputeGroups?: string[];
 }
 
 declare interface ModifyUserPrivilegesV3Response {

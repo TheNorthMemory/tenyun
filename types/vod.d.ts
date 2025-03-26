@@ -1686,11 +1686,11 @@ declare namespace V20180717 {
   /** CLS日志主题信息。 */
   interface CLSTopicInfo {
     /** 日志主题 ID。 */
-    TopicId?: string | null;
+    TopicId?: string;
     /** 日志主题名。 */
-    TopicName?: string | null;
+    TopicName?: string;
     /** 日志集 ID。 */
-    LogsetId?: string | null;
+    LogsetId?: string;
   }
 
   /** 画布信息。制作视频时，如果源素材（视频或者图片）不能填满输出的视频窗口，将用设置的画布进行背景绘制。 */
@@ -4338,9 +4338,9 @@ declare namespace V20180717 {
     /** 音画质检测输入音视频的元信息。 */
     MetaData?: MediaMetaData | null;
     /** 音画质检测任务输入。 */
-    Input?: QualityInspectTaskInput | null;
+    Input?: QualityInspectTaskInput;
     /** 音画质检测任务输出。 */
-    Output?: QualityInspectTaskOutput | null;
+    Output?: QualityInspectTaskOutput;
     /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
     SessionId?: string;
     /** 来源上下文，用于透传用户请求信息，音画质检测完成回调将返回该字段值，最长 1000 个字符。 */
@@ -4380,25 +4380,25 @@ declare namespace V20180717 {
     /** 截帧间隔，单位为秒。 */
     ScreenshotInterval?: number;
     /** 视频画面抖动重影检测的控制参数。 */
-    JitterConfigure?: JitterConfigureInfo | null;
+    JitterConfigure?: JitterConfigureInfo;
     /** 视频画面模糊检测的控制参数。 */
-    BlurConfigure?: BlurConfigureInfo | null;
+    BlurConfigure?: BlurConfigureInfo;
     /** 视频画面低光、过曝检测的控制参数。 */
-    AbnormalLightingConfigure?: AbnormalLightingConfigureInfo | null;
+    AbnormalLightingConfigure?: AbnormalLightingConfigureInfo;
     /** 视频画面花屏检测的控制参数。 */
-    CrashScreenConfigure?: CrashScreenConfigureInfo | null;
+    CrashScreenConfigure?: CrashScreenConfigureInfo;
     /** 视频画面黑边、白边、黑屏、白屏检测的控制参数。 */
-    BlackWhiteEdgeConfigure?: BlackWhiteEdgeConfigureInfo | null;
+    BlackWhiteEdgeConfigure?: BlackWhiteEdgeConfigureInfo;
     /** 视频画面噪点检测的控制参数。 */
-    NoiseConfigure?: NoiseConfigureInfo | null;
+    NoiseConfigure?: NoiseConfigureInfo;
     /** 视频画面马赛克检测的控制参数。 */
-    MosaicConfigure?: MosaicConfigureInfo | null;
+    MosaicConfigure?: MosaicConfigureInfo;
     /** 视频画面二维码检测的控制参数。 */
-    QRCodeConfigure?: QRCodeConfigureInfo | null;
+    QRCodeConfigure?: QRCodeConfigureInfo;
     /** 视频画面质量评价的控制参数。 */
-    QualityEvaluationConfigure?: QualityEvaluationConfigureInfo | null;
+    QualityEvaluationConfigure?: QualityEvaluationConfigureInfo;
     /** 音频（静音、低音、爆音）检测的控制参数。 */
-    VoiceConfigure?: VoiceConfigureInfo | null;
+    VoiceConfigure?: VoiceConfigureInfo;
     /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
     CreateTime?: string;
     /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
@@ -4478,27 +4478,27 @@ declare namespace V20180717 {
   /** 音画质重生任务 */
   interface RebuildMediaTask {
     /** 任务 ID。 */
-    TaskId: string;
+    TaskId?: string;
     /** 任务流状态，取值：PROCESSING：处理中；FINISH：已完成。 */
-    Status: string;
+    Status?: string;
     /** 错误码，0 表示成功，其他值表示失败：40000：输入参数不合法，请检查输入参数；60000：源文件错误（如视频数据损坏），请确认源文件是否正常；70000：内部服务错误，建议重试。 */
-    ErrCode: number;
+    ErrCode?: number;
     /** 错误信息。 */
-    Message: string;
+    Message?: string;
     /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368) 列表。 */
-    ErrCodeExt: string;
+    ErrCodeExt?: string;
     /** 音画质重生任务进度，取值范围 [0-100] 。 */
-    Progress: number;
+    Progress?: number;
     /** 音画质重生任务的输入。 */
-    Input: RebuildMediaTaskInput | null;
+    Input?: RebuildMediaTaskInput;
     /** 音画质重生任务的输出。 */
-    Output: RebuildMediaTaskOutput | null;
+    Output?: RebuildMediaTaskOutput;
     /** 音画质重生输出视频的元信息。 */
-    MetaData: MediaMetaData | null;
+    MetaData?: MediaMetaData;
     /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
-    SessionId: string;
+    SessionId?: string;
     /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
-    SessionContext: string;
+    SessionContext?: string;
   }
 
   /** 音画质重生任务的输入。 */
@@ -4509,7 +4509,7 @@ declare namespace V20180717 {
     StartTimeOffset?: number;
     /** 结束偏移时间，单位：秒，不填表示截取到视频末尾。 */
     EndTimeOffset?: number;
-    /** 音画质重生模版号。 */
+    /** 音画质重生模板号。 */
     Definition?: number;
     /** 画质修复控制参数。 */
     RepairInfo?: RepairInfo;
@@ -4542,17 +4542,17 @@ declare namespace V20180717 {
   /** 音画质重生任务输出 */
   interface RebuildMediaTaskOutput {
     /** 文件类型，例如 mp4、flv 等。 */
-    FileType: string;
+    FileType?: string;
     /** 媒体文件播放地址。 */
-    FileUrl: string;
+    FileUrl?: string;
     /** 媒体文件 ID。 */
-    FileId: string;
+    FileId?: string;
     /** 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。 */
-    MediaName: string;
+    MediaName?: string;
     /** 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。默认值：0，表示其他分类。 */
-    ClassId: number;
+    ClassId?: number;
     /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
-    ExpireTime: string;
+    ExpireTime?: string;
   }
 
   /** 音画质重生模板详情。 */
@@ -4696,7 +4696,7 @@ declare namespace V20180717 {
   /** 智能去除水印任务的输入。 */
   interface RemoveWaterMarkTaskInput {
     /** 媒体文件 ID。 */
-    FileId: string;
+    FileId?: string;
   }
 
   /** 智能去除水印任务的输出。 */
@@ -4716,23 +4716,23 @@ declare namespace V20180717 {
   /** 智能去除水印任务信息，仅当 TaskType 为 RemoveWatermark，该字段有值。 */
   interface RemoveWatermarkTask {
     /** 任务 ID 。 */
-    TaskId: string;
+    TaskId?: string;
     /** 任务流状态，取值：PROCESSING：处理中；FINISH：已完成。 */
-    Status: string;
+    Status?: string;
     /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368) 列表。 */
-    ErrCodeExt: string;
+    ErrCodeExt?: string;
     /** 错误码，0 表示成功，其他值表示失败：40000：输入参数不合法，请检查输入参数；60000：源文件错误（如视频数据损坏），请确认源文件是否正常；70000：内部服务错误，建议重试。 */
-    ErrCode: number;
+    ErrCode?: number;
     /** 错误信息。 */
-    Message: string;
+    Message?: string;
     /** 智能去除水印任务的输入。 */
-    Input: RemoveWaterMarkTaskInput | null;
+    Input?: RemoveWaterMarkTaskInput;
     /** 智能去除水印任务的输出。 */
-    Output: RemoveWaterMarkTaskOutput | null;
+    Output?: RemoveWaterMarkTaskOutput | null;
     /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
-    SessionId: string;
+    SessionId?: string;
     /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
-    SessionContext: string;
+    SessionContext?: string;
   }
 
   /** 画质修复控制参数 */
@@ -5590,9 +5590,9 @@ declare namespace V20180717 {
     /** 是否去除音频数据，取值：0：保留；1：去除。 */
     RemoveAudio?: number;
     /** 视频流配置参数，仅当 RemoveVideo 为 0，该字段有效。 */
-    VideoTemplate?: VideoTemplateInfo | null;
+    VideoTemplate?: VideoTemplateInfo;
     /** 音频流配置参数，仅当 RemoveAudio 为 0，该字段有效 。 */
-    AudioTemplate?: AudioTemplateInfo | null;
+    AudioTemplate?: AudioTemplateInfo;
     /** 极速高清转码参数。 */
     TEHDConfig?: TEHDConfig | null;
     /** 封装格式过滤条件，可选值：Video：视频格式，可以同时包含视频流和音频流的封装格式；PureAudio：纯音频格式，只能包含音频流的封装格式板。 */
@@ -5934,29 +5934,29 @@ declare namespace V20180717 {
   /** 水印模板详情 */
   interface WatermarkTemplate {
     /** 水印模板唯一标识。 */
-    Definition: number;
+    Definition?: number;
     /** 水印类型，取值：image：图片水印；text：文字水印。 */
-    Type: string;
+    Type?: string;
     /** 水印模板名称。 */
-    Name: string;
+    Name?: string;
     /** 模板描述信息。 */
-    Comment: string;
+    Comment?: string;
     /** 水印图片原点距离视频图像原点的水平位置。当字符串以 % 结尾，表示水印 Left 为视频宽度指定百分比的位置，如 10% 表示 Left 为视频宽度的 10%；当字符串以 px 结尾，表示水印 Left 为视频宽度指定像素的位置，如 100px 表示 Left 为 100 像素。 */
-    XPos: string;
+    XPos?: string;
     /** 水印图片原点距离视频图像原点的垂直位置。当字符串以 % 结尾，表示水印 Top 为视频高度指定百分比的位置，如 10% 表示 Top 为视频高度的 10%；当字符串以 px 结尾，表示水印 Top 为视频高度指定像素的位置，如 100px 表示 Top 为 100 像素。 */
-    YPos: string;
+    YPos?: string;
     /** 图片水印模板，仅当 Type 为 image，该字段有效。 */
-    ImageTemplate: ImageWatermarkTemplate | null;
+    ImageTemplate?: ImageWatermarkTemplate | null;
     /** 文字水印模板，仅当 Type 为 text，该字段有效。 */
-    TextTemplate: TextWatermarkTemplateInput | null;
+    TextTemplate?: TextWatermarkTemplateInput | null;
     /** SVG 水印模板，当 Type 为 svg，该字段有效。 */
-    SvgTemplate: SvgWatermarkInput | null;
+    SvgTemplate?: SvgWatermarkInput | null;
     /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-    CreateTime: string;
+    CreateTime?: string;
     /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-    UpdateTime: string;
+    UpdateTime?: string;
     /** 原点位置，可选值：topLeft：表示坐标原点位于视频图像左上角，水印原点为图片或文字的左上角；topRight：表示坐标原点位于视频图像的右上角，水印原点为图片或文字的右上角；bottomLeft：表示坐标原点位于视频图像的左下角，水印原点为图片或文字的左下角；bottomRight：表示坐标原点位于视频图像的右下角，水印原点为图片或文字的右下。； */
-    CoordinateOrigin: string;
+    CoordinateOrigin?: string;
   }
 
   /** 全景录制信息 */

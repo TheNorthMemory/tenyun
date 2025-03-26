@@ -1581,7 +1581,7 @@ declare interface RocketMQVipInstance {
   /** 实例名称 */
   InstanceName?: string;
   /** 实例版本 */
-  InstanceVersion?: string | null;
+  InstanceVersion?: string;
   /** 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败，6 - 变配中，7 - 变配失败 */
   Status?: number;
   /** 节点数量 */
@@ -1605,15 +1605,15 @@ declare interface RocketMQVipInstance {
   /** 实例配置ID */
   SpecName?: string;
   /** 最大可设置消息保留时间，小时为单位 */
-  MaxRetention?: number | null;
+  MaxRetention?: number;
   /** 最小可设置消息保留时间，小时为单位 */
-  MinRetention?: number | null;
+  MinRetention?: number;
   /** 实例消息保留时间，小时为单位 */
-  Retention?: number | null;
+  Retention?: number;
   /** 是否开启ACL鉴权 */
-  AclEnabled?: boolean | null;
+  AclEnabled?: boolean;
   /** 销毁时间 */
-  DestroyTime?: number | null;
+  DestroyTime?: number;
 }
 
 /** 角色实例 */
@@ -4681,7 +4681,7 @@ declare interface ModifyRocketMQInstanceSpecRequest {
 
 declare interface ModifyRocketMQInstanceSpecResponse {
   /** 订单号 */
-  OrderId?: string | null;
+  OrderId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

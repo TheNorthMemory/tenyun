@@ -32,7 +32,7 @@ declare interface Backend {
   Type?: string;
   /** 后端服务的唯一 ID，如 ins-abcd1234 */
   InstanceId?: string;
-  /** 后端服务的监听端口 */
+  /** 后端服务的监听端口，如果是全端口段监听器绑定的全监听目标组场景，此端口返回0，表示无效端口，绑定的后端服务的端口随监听器端口。 */
   Port?: number;
   /** 后端服务的转发权重，取值范围：[0, 100]，默认为 10。 */
   Weight?: number;
@@ -1199,27 +1199,27 @@ declare interface TargetGroupAssociation {
 /** 目标组绑定的后端服务器 */
 declare interface TargetGroupBackend {
   /** 目标组ID */
-  TargetGroupId: string;
+  TargetGroupId?: string;
   /** 后端服务的类型，可取：CVM、ENI（即将支持） */
-  Type: string;
+  Type?: string;
   /** 后端服务的唯一 ID */
-  InstanceId: string;
-  /** 后端服务的监听端口 */
-  Port: number;
+  InstanceId?: string;
+  /** 后端服务的监听端口，全端口段监听器此字段返回0，代表无效端口，即不支持设置。 */
+  Port?: number;
   /** 后端服务的转发权重，取值范围：[0, 100]，默认为 10。 */
-  Weight: number;
+  Weight?: number;
   /** 后端服务的外网 IP */
-  PublicIpAddresses: string[] | null;
+  PublicIpAddresses?: string[] | null;
   /** 后端服务的内网 IP */
-  PrivateIpAddresses: string[] | null;
+  PrivateIpAddresses?: string[] | null;
   /** 后端服务的实例名称 */
-  InstanceName: string | null;
+  InstanceName?: string | null;
   /** 后端服务被绑定的时间 */
-  RegisteredTime: string | null;
+  RegisteredTime?: string | null;
   /** 弹性网卡唯一ID */
-  EniId: string | null;
+  EniId?: string | null;
   /** 后端服务的可用区ID */
-  ZoneId: number | null;
+  ZoneId?: number | null;
 }
 
 /** 目标组信息 */
@@ -1230,7 +1230,7 @@ declare interface TargetGroupInfo {
   VpcId?: string;
   /** 目标组的名字 */
   TargetGroupName?: string;
-  /** 目标组的默认端口 */
+  /** 目标组的默认端口，全监听目标组此字段返回0，表示无效端口。 */
   Port?: number | null;
   /** 目标组的创建时间 */
   CreatedTime?: string;
@@ -1248,17 +1248,19 @@ declare interface TargetGroupInfo {
   Tag?: TagInfo[];
   /** 默认权重。只有v2类型目标组返回该字段。当返回为NULL时， 表示未设置默认权重。 */
   Weight?: number | null;
+  /** 是否全监听目标组 */
+  FullListenSwitch?: boolean;
 }
 
 /** 目标组实例 */
 declare interface TargetGroupInstance {
   /** 目标组实例的内网IP */
   BindIP: string;
-  /** 目标组实例的端口 */
+  /** 目标组实例的端口，全监听目标组不支持传此字段。 */
   Port?: number;
   /** 目标组实例的权重v2目标组需要配置权重，调用CreateTargetGroup接口创建目标组时该参数与创建接口中的Weight参数必填其一。 */
   Weight?: number;
-  /** 目标组实例的新端口 */
+  /** 目标组实例的新端口，全监听目标组不支持传此字段。 */
   NewPort?: number;
 }
 
@@ -1671,7 +1673,7 @@ declare interface CreateTargetGroupRequest {
   TargetGroupName?: string;
   /** 目标组的vpcid属性，不填则使用默认vpc */
   VpcId?: string;
-  /** 目标组的默认端口， 后续添加服务器时可使用该默认端口。Port和TargetGroupInstances.N中的port二者必填其一。 */
+  /** 目标组的默认端口， 后续添加服务器时可使用该默认端口。全监听目标组不支持此参数，非全监听目标组Port和TargetGroupInstances.N中的port二者必填其一。 */
   Port?: number;
   /** 目标组绑定的后端服务器，单次最多支持50个。 */
   TargetGroupInstances?: TargetGroupInstance[];
@@ -1683,6 +1685,8 @@ declare interface CreateTargetGroupRequest {
   Tags?: TagInfo[];
   /** 后端服务默认权重。 取值范围[0, 100] 设置该值后，添加后端服务到目标组时， 若后端服务不单独设置权重， 则使用这里的默认权重。 */
   Weight?: number;
+  /** 全监听目标组标识，为true表示是全监听目标组，false表示不是全监听目标组。 */
+  FullListenSwitch?: boolean;
 }
 
 declare interface CreateTargetGroupResponse {
@@ -2687,7 +2691,7 @@ declare interface ModifyLoadBalancerAttributesResponse {
 }
 
 declare interface ModifyLoadBalancerMixIpTargetRequest {
-  /** 负载均衡实例ID数组。 */
+  /** 负载均衡实例ID数组，默认支持20个负载均衡实例ID。 */
   LoadBalancerIds: string[];
   /** 开启/关闭IPv6FullChain负载均衡7层监听器支持混绑IPv4/IPv6目标特性。 */
   MixIpTarget: boolean;
@@ -2757,7 +2761,7 @@ declare interface ModifyTargetGroupAttributeRequest {
   TargetGroupId: string;
   /** 目标组的新名称。 */
   TargetGroupName?: string;
-  /** 目标组的新默认端口。 */
+  /** 目标组的新默认端口。全监听目标组不支持此参数。 */
   Port?: number;
   /** 后端服务默认权重。 取值范围[0, 100] 设置该值后，添加后端服务到目标组时， 若后端服务不单独设置权重， 则使用这里的默认权重。 */
   Weight?: number;
@@ -3135,7 +3139,7 @@ declare interface Clb {
   ModifyListener(data: ModifyListenerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyListenerResponse>;
   /** 修改负载均衡实例的属性 {@link ModifyLoadBalancerAttributesRequest} {@link ModifyLoadBalancerAttributesResponse} */
   ModifyLoadBalancerAttributes(data: ModifyLoadBalancerAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerAttributesResponse>;
-  /** 修改IPv6FullChain负载均衡7层监听器支持混绑目标特性 {@link ModifyLoadBalancerMixIpTargetRequest} {@link ModifyLoadBalancerMixIpTargetResponse} */
+  /** 修改IPv6负载均衡7层监听器支持混绑目标特性 {@link ModifyLoadBalancerMixIpTargetRequest} {@link ModifyLoadBalancerMixIpTargetResponse} */
   ModifyLoadBalancerMixIpTarget(data: ModifyLoadBalancerMixIpTargetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerMixIpTargetResponse>;
   /** 升级为性能容量型实例 {@link ModifyLoadBalancerSlaRequest} {@link ModifyLoadBalancerSlaResponse} */
   ModifyLoadBalancerSla(data: ModifyLoadBalancerSlaRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerSlaResponse>;

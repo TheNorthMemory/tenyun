@@ -167,7 +167,7 @@ declare interface DeviceOrderBaseInfo {
   /** 机房id */
   IdcId?: number;
   /** 机房名称 */
-  IdcName?: string | null;
+  IdcName?: string;
   /** 设备类型 */
   DeviceType?: string;
   /** 备注 */
@@ -439,23 +439,23 @@ declare interface OtherDevReceivingInfo {
 /** 到访人员 */
 declare interface Personnel {
   /** 证件号码 */
-  IDCardNumber: string | null;
+  IDCardNumber: string;
   /** 证件类型。对应关系如下：IDENTITY_CARD: 身份证,HONG_KONG_AND_MACAO_PASS: 港澳通行证',PASSPORT: 护照,DRIVING_LICENSE: 驾照,OTHER: 其他 */
-  IDCardType: string | null;
+  IDCardType: string;
   /** 公司名称 */
-  Company: string | null;
+  Company: string;
   /** 语言。对应关系：ENGLISH: 英文, CHINESE: 中文 */
-  LanguageType: string | null;
+  LanguageType: string;
   /** 姓名 */
-  Name: string | null;
+  Name: string;
   /** 电话 */
-  TelNumber: string | null;
+  TelNumber: string;
   /** 职位 */
-  Position?: string | null;
+  Position?: string;
   /** 微信 */
-  Wechat?: string | null;
+  Wechat?: string;
   /** 邮箱 */
-  Email?: string | null;
+  Email?: string;
 }
 
 /** 人员到访工单基本信息 */
@@ -563,13 +563,13 @@ declare interface RackUsage {
 /** 客户自行上门信息 */
 declare interface SelfOperation {
   /** 联系人员电话 */
-  StuffContact: string | null;
+  StuffContact: string;
   /** 身份证号 */
-  StuffIDCard: string | null;
+  StuffIDCard: string;
   /** 人员姓名 */
-  StuffName: string | null;
+  StuffName: string;
   /** 上门时间 */
-  OperationTime: string | null;
+  OperationTime: string;
 }
 
 /** 服务器设备型号 */
@@ -687,7 +687,7 @@ declare interface WorkOrderData {
   /** 工单创建时间 */
   CreateTime?: string;
   /** 工单完成时间 */
-  FinishTime?: string | null;
+  FinishTime?: string;
 }
 
 /** 带有分类的工单类型列表 */

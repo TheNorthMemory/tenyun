@@ -4674,6 +4674,8 @@ declare interface TableMeta {
   ErrorTips?: string | null;
   /** 是否支持select or ddl */
   IfSupportCreateAndDDL?: CreateAndDDLSupport | null;
+  /** 字段数量 */
+  ColumnCount?: number | null;
 }
 
 /** 表附加信息 */

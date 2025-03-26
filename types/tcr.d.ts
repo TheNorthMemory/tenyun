@@ -35,13 +35,13 @@ declare interface AutoDelStrategyInfoResp {
   /** 总数目 */
   TotalCount?: number;
   /** 自动删除策略列表 */
-  StrategyInfo?: AutoDelStrategyInfo[] | null;
+  StrategyInfo?: AutoDelStrategyInfo[];
 }
 
 /** 命名空间漏洞白名单列表 */
 declare interface CVEWhitelistItem {
   /** 漏洞白名单 ID */
-  CVEID?: string | null;
+  CVEID?: string;
 }
 
 /** 自定义域名信息 */
@@ -61,7 +61,7 @@ declare interface DescribeApplicationTriggerLogPersonalResp {
   /** 返回总数 */
   TotalCount?: number;
   /** 触发日志列表 */
-  LogInfo?: TriggerLogResp[] | null;
+  LogInfo?: TriggerLogResp[];
 }
 
 /** 拉取触发器列表返回值 */
@@ -83,7 +83,7 @@ declare interface FavorResp {
   /** 收藏仓库的总数 */
   TotalCount?: number;
   /** 仓库信息数组 */
-  RepoInfo?: Favors[] | null;
+  RepoInfo?: Favors[];
 }
 
 /** 仓库收藏 */
@@ -93,17 +93,17 @@ declare interface Favors {
   /** 仓库类型 */
   RepoType?: string;
   /** Pull总共的次数 */
-  PullCount?: number | null;
+  PullCount?: number;
   /** 仓库收藏次数 */
-  FavorCount?: number | null;
+  FavorCount?: number;
   /** 仓库是否公开 */
-  Public?: number | null;
+  Public?: number;
   /** 是否为官方所有 */
-  IsQcloudOfficial?: boolean | null;
+  IsQcloudOfficial?: boolean;
   /** 仓库Tag的数量 */
-  TagCount?: number | null;
+  TagCount?: number;
   /** Logo */
-  Logo?: string | null;
+  Logo?: string;
   /** 地域 */
   Region?: string;
   /** 地域的Id */
@@ -215,9 +215,9 @@ declare interface PeerReplicationOption {
 /** 策略 */
 declare interface Permission {
   /** 资源路径，目前仅支持Namespace */
-  Resource: string | null;
+  Resource: string;
   /** 动作，目前仅支持：tcr:PushRepository、tcr:PullRepository、tcr:CreateRepository、tcr:CreateHelmChart、tcr:DescribeHelmCharts */
-  Actions: string[] | null;
+  Actions: string[];
 }
 
 /** 地域信息 */
@@ -265,13 +265,13 @@ declare interface Registry {
   /** 实例内部访问地址 */
   InternalEndpoint?: string;
   /** 实例云标签 */
-  TagSpecification?: TagSpecification | null;
+  TagSpecification?: TagSpecification;
   /** 实例过期时间（预付费） */
-  ExpiredAt?: string | null;
+  ExpiredAt?: string;
   /** 实例付费类型，0表示后付费，1表示预付费 */
-  PayMod?: number | null;
+  PayMod?: number;
   /** 预付费续费标识，0表示手动续费，1表示自动续费，2不续费并且不通知 */
-  RenewFlag?: number | null;
+  RenewFlag?: number;
   /** 是否开启实例删除保护，false表示不开启 */
   DeletionProtection?: boolean;
 }
@@ -297,11 +297,11 @@ declare interface RegistryCondition {
 /** 实例状态 */
 declare interface RegistryStatus {
   /** 实例的Id */
-  RegistryId: string;
+  RegistryId?: string;
   /** 实例的状态 */
-  Status: string;
+  Status?: string;
   /** 附加状态 */
-  Conditions: RegistryCondition[] | null;
+  Conditions?: RegistryCondition[];
 }
 
 /** 同步规则过滤器 */
@@ -403,25 +403,25 @@ declare interface RepoIsExistResp {
 /** 查询共享版仓库信息返回 */
 declare interface RepositoryInfoResp {
   /** 镜像仓库名字 */
-  RepoName: string;
+  RepoName?: string;
   /** 镜像仓库类型 */
-  RepoType: string;
+  RepoType?: string;
   /** 镜像仓库服务地址 */
-  Server: string;
+  Server?: string;
   /** 创建时间 */
-  CreationTime: string;
+  CreationTime?: string;
   /** 镜像仓库描述 */
-  Description: string | null;
+  Description?: string;
   /** 是否为公有镜像 */
-  Public: number;
+  Public?: number;
   /** 下载次数 */
-  PullCount: number;
+  PullCount?: number;
   /** 收藏次数 */
-  FavorCount: number;
+  FavorCount?: number;
   /** 是否为用户收藏 */
-  IsUserFavor: boolean;
+  IsUserFavor?: boolean;
   /** 是否为腾讯云官方镜像 */
-  IsQcloudOfficial: boolean;
+  IsQcloudOfficial?: boolean;
 }
 
 /** 用户配额返回值 */
@@ -491,13 +491,13 @@ declare interface RetentionTask {
 /** 指定tag镜像内容相同的tag列表 */
 declare interface SameImagesResp {
   /** tag列表 */
-  SameImages: string[] | null;
+  SameImages?: string[];
 }
 
 /** 作业调度信息 */
 declare interface Schedule {
   /** 类型：Hourly, Daily, Weekly, Custom, Manual, Dryrun, None */
-  Type: string;
+  Type?: string;
 }
 
 /** 获取满足输入搜索条件的用户镜像仓库 */
@@ -527,27 +527,27 @@ declare interface SecurityPolicy {
 /** 服务级账号 */
 declare interface ServiceAccount {
   /** 服务级账号名 */
-  Name?: string | null;
+  Name?: string;
   /** 描述 */
-  Description?: string | null;
+  Description?: string;
   /** 是否禁用 */
-  Disable?: boolean | null;
+  Disable?: boolean;
   /** 过期时间 */
-  ExpiresAt?: number | null;
+  ExpiresAt?: number;
   /** 创建时间 */
   CreateTime?: string | null;
   /** 更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 策略 */
-  Permissions?: Permission[] | null;
+  Permissions?: Permission[];
 }
 
 /** 云标签Tag */
 declare interface Tag {
   /** 云标签的key */
-  Key: string | null;
+  Key: string;
   /** 云标签的值 */
-  Value: string | null;
+  Value: string;
 }
 
 /** 镜像tag信息 */
@@ -563,7 +563,7 @@ declare interface TagInfo {
   /** 制品的创建时间 */
   CreationTime?: string;
   /** 制品创建至今时间长度 */
-  DurationDays?: string | null;
+  DurationDays?: string;
   /** 标注的制品作者 */
   Author?: string;
   /** 标注的制品平台 */
@@ -599,9 +599,9 @@ declare interface TagInfoResp {
 /** 云标签 */
 declare interface TagSpecification {
   /** 默认值为instance */
-  ResourceType: string | null;
+  ResourceType: string;
   /** 云标签数组 */
-  Tags: Tag[] | null;
+  Tags: Tag[];
 }
 
 /** 任务详情 */
@@ -613,27 +613,27 @@ declare interface TaskDetail {
   /** 任务状态 */
   TaskStatus?: string;
   /** 任务的状态信息 */
-  TaskMessage?: string | null;
+  TaskMessage?: string;
   /** 任务开始时间 */
   CreatedTime?: string;
   /** 任务结束时间 */
-  FinishedTime?: string | null;
+  FinishedTime?: string;
 }
 
 /** 镜像信息 */
 declare interface TcrImageInfo {
   /** 哈希值 */
-  Digest: string;
+  Digest?: string;
   /** 镜像体积（单位：字节） */
-  Size: number;
+  Size?: number;
   /** Tag名称 */
-  ImageVersion: string;
+  ImageVersion?: string;
   /** 更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 制品类型 */
-  Kind: string | null;
+  Kind?: string;
   /** KMS 签名信息 */
-  KmsSignature: string | null;
+  KmsSignature?: string;
 }
 
 /** 实例登录令牌 */
@@ -663,9 +663,9 @@ declare interface TcrNamespaceInfo {
   /** 命名空间的Id */
   NamespaceId?: number;
   /** 实例云标签 */
-  TagSpecification?: TagSpecification | null;
+  TagSpecification?: TagSpecification;
   /** 命名空间元数据 */
-  Metadata?: KeyValueString[] | null;
+  Metadata?: KeyValueString[];
   /** 漏洞白名单列表 */
   CVEWhitelistItems?: CVEWhitelistItem[];
   /** 扫描级别，true为自动，false为手动 */
@@ -699,71 +699,71 @@ declare interface TriggerInvokeCondition {
   /** 触发方式 */
   InvokeMethod?: string;
   /** 触发表达式 */
-  InvokeExpr?: string | null;
+  InvokeExpr?: string;
 }
 
 /** 触发器触发参数 */
 declare interface TriggerInvokePara {
   /** AppId */
-  AppId: string | null;
+  AppId?: string;
   /** TKE集群ID */
-  ClusterId: string | null;
+  ClusterId?: string;
   /** TKE集群命名空间 */
-  Namespace: string | null;
+  Namespace?: string;
   /** TKE集群工作负载名称 */
-  ServiceName: string | null;
+  ServiceName?: string;
   /** TKE集群工作负载中容器名称 */
-  ContainerName: string | null;
+  ContainerName?: string;
   /** TKE集群地域数字ID */
-  ClusterRegion: number | null;
+  ClusterRegion?: number;
 }
 
 /** 触发器触发结果 */
 declare interface TriggerInvokeResult {
   /** 请求TKE返回值 */
-  ReturnCode?: number | null;
+  ReturnCode?: number;
   /** 请求TKE返回信息 */
-  ReturnMsg?: string | null;
+  ReturnMsg?: string;
 }
 
 /** 触发器日志 */
 declare interface TriggerLogResp {
   /** 仓库名称 */
-  RepoName?: string | null;
+  RepoName?: string;
   /** Tag名称 */
-  TagName?: string | null;
+  TagName?: string;
   /** 触发器名称 */
-  TriggerName?: string | null;
+  TriggerName?: string;
   /** 触发方式 */
-  InvokeSource?: string | null;
+  InvokeSource?: string;
   /** 触发动作 */
-  InvokeAction?: string | null;
+  InvokeAction?: string;
   /** 触发时间 */
-  InvokeTime?: string | null;
+  InvokeTime?: string;
   /** 触发条件 */
-  InvokeCondition?: TriggerInvokeCondition | null;
+  InvokeCondition?: TriggerInvokeCondition;
   /** 触发参数 */
-  InvokePara?: TriggerInvokePara | null;
+  InvokePara?: TriggerInvokePara;
   /** 触发结果 */
-  InvokeResult?: TriggerInvokeResult | null;
+  InvokeResult?: TriggerInvokeResult;
 }
 
 /** 触发器返回值 */
 declare interface TriggerResp {
   /** 触发器名称 */
-  TriggerName?: string | null;
+  TriggerName?: string;
   /** 触发来源 */
-  InvokeSource?: string | null;
+  InvokeSource?: string;
   /** 触发动作 */
-  InvokeAction?: string | null;
+  InvokeAction?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 触发条件 */
-  InvokeCondition?: TriggerInvokeCondition | null;
+  InvokeCondition?: TriggerInvokeCondition;
   /** 触发器参数 */
-  InvokePara?: TriggerInvokePara | null;
+  InvokePara?: TriggerInvokePara;
 }
 
 /** vpc和domain信息 */
@@ -783,11 +783,11 @@ declare interface VpcAndDomainInfo {
 /** vpc私有域名解析状态 */
 declare interface VpcPrivateDomainStatus {
   /** 地域 */
-  Region: string | null;
+  Region?: string;
   /** unique vpc id */
-  VpcId: string | null;
+  VpcId?: string;
   /** ENABLE代表已经开启，DISABLE代表未开启，ERROR代表查询出错 */
-  Status: string | null;
+  Status?: string;
 }
 
 /** 触发器目标 */
@@ -871,7 +871,7 @@ declare interface CheckInstanceNameResponse {
   /** 检查结果，true为合法，false为非法 */
   IsValidated?: boolean;
   /** 1: Illegal（名称非法）, 2:Reserved（名字保留）, 3:Existed（名字已存在） */
-  DetailCode?: number | null;
+  DetailCode?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1007,13 +1007,13 @@ declare interface CreateInstanceTokenRequest {
 
 declare interface CreateInstanceTokenResponse {
   /** 用户名 */
-  Username?: string | null;
+  Username?: string;
   /** 访问凭证 */
   Token?: string;
   /** 访问凭证过期时间戳，是一个时间戳数字，无单位 */
   ExpTime?: number;
   /** 长期凭证的TokenId，短期凭证没有TokenId */
-  TokenId?: string | null;
+  TokenId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

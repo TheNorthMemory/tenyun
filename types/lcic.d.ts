@@ -597,7 +597,7 @@ declare interface BatchCreateGroupWithMembersResponse {
 declare interface BatchCreateRoomRequest {
   /** 低代码平台的SdkAppId。 */
   SdkAppId: number;
-  /** 创建房间ID列表 */
+  /** 创建课堂ID列表 */
   RoomInfos: RoomInfo[];
 }
 
@@ -766,19 +766,19 @@ declare interface CreateGroupWithSubGroupResponse {
 }
 
 declare interface CreateRoomRequest {
-  /** 房间名称。 */
+  /** 课堂名称。 */
   Name: string;
-  /** 预定的房间开始时间，unix时间戳（秒）。 */
+  /** 预定的课堂开始时间，unix时间戳（秒）。 */
   StartTime: number;
-  /** 预定的房间结束时间，unix时间戳（秒）。 */
+  /** 预定的课堂结束时间，unix时间戳（秒）。 */
   EndTime: number;
   /** 低代码互动课堂的SdkAppId。 */
   SdkAppId: number;
   /** 头像区域，摄像头视频画面的分辨率。可以有如下取值：1 标清2 高清3 全高清 */
   Resolution: number;
-  /** 设置房间/课堂同时最大可与老师进行连麦互动的人数，该参数支持正式上课/开播前调用修改房间修改。小班课取值范围[0,16]，大班课取值范围[0,1]，当取值为0时表示当前课堂/直播，不支持连麦互动。该取值影响计费，请根据业务实际情况设置。计费规则见“购买指南”下“计费概述”。 */
+  /** 设置课堂同时最大可与老师进行连麦互动的人数，该参数支持正式上课/开播前调用修改房间修改。小班课取值范围[0,16]，大班课取值范围[0,1]，当取值为0时表示当前课堂/直播，不支持连麦互动。该取值影响计费，请根据业务实际情况设置。计费规则见“购买指南”下“计费概述”。 */
   MaxMicNumber: number;
-  /** 房间子类型，可以有以下取值：videodoc 文档+视频video 纯视频 */
+  /** 课堂子类型，可以有以下取值：videodoc 文档+视频video 纯视频 */
   SubType: string;
   /** 老师ID。通过[注册用户]接口获取的UserId。指定后该用户在房间内拥有老师权限。 */
   TeacherId?: string;
@@ -798,7 +798,7 @@ declare interface CreateRoomRequest {
   AudienceType?: number;
   /** 录制模板。未配置时默认取值0。录制模板枚举值参考：https://cloud.tencent.com/document/product/1639/89744 */
   RecordLayout?: number;
-  /** 房间绑定的群组ID,非空时限制组成员进入 */
+  /** 课堂绑定的群组ID,非空时限制组成员进入 */
   GroupId?: string;
   /** 是否允许老师/助教直接控制学生的摄像头/麦克风。可以有以下取值：0 不允许直接控制（需同意，默认值）1 允许直接控制（无需同意） */
   EnableDirectControl?: number;
@@ -808,7 +808,7 @@ declare interface CreateRoomRequest {
   VideoOrientation?: number;
   /** 开启课后评分。 0：不开启(默认) 1：开启 */
   IsGradingRequiredPostClass?: number;
-  /** 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (预留参数，暂未开放)注：大班课的布局(layout)只有三分屏 */
+  /** 课堂类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (预留参数，暂未开放)注：大班课的布局(layout)只有三分屏 */
   RoomType?: number;
   /** 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟 */
   EndDelayTime?: number;
@@ -910,7 +910,7 @@ declare interface DeleteRecordResponse {
 }
 
 declare interface DeleteRoomRequest {
-  /** 房间ID。 */
+  /** 课堂ID。 */
   RoomId: number;
 }
 
@@ -990,7 +990,7 @@ declare interface DescribeAppDetailResponse {
 }
 
 declare interface DescribeCurrentMemberListRequest {
-  /** 房间Id。 */
+  /** 课堂Id。 */
   RoomId: number;
   /** 分页查询当前页数，从1开始递增。 */
   Page: number;
@@ -1296,18 +1296,18 @@ declare interface DescribeRoomForbiddenUserResponse {
 }
 
 declare interface DescribeRoomRequest {
-  /** 房间Id。 */
+  /** 课堂Id。 */
   RoomId: number;
   /** 请求RTMP推流链接，0：否，1：是，默认为0。 */
   RTMPStreamingURL?: number;
 }
 
 declare interface DescribeRoomResponse {
-  /** 房间名称。 */
+  /** 课堂名称。 */
   Name?: string;
-  /** 预定的房间开始时间，unix时间戳（秒）。 */
+  /** 预定的课堂开始时间，unix时间戳（秒）。 */
   StartTime?: number;
-  /** 预定的房间结束时间，unix时间戳（秒）。 */
+  /** 预定的课堂结束时间，unix时间戳（秒）。 */
   EndTime?: number;
   /** 老师的UserId。 */
   TeacherId?: string;
@@ -1317,13 +1317,13 @@ declare interface DescribeRoomResponse {
   AudienceType?: number;
   /** 头像区域，摄像头视频画面的分辨率。可以有如下取值：1 标清2 高清3 全高清 */
   Resolution?: number;
-  /** 设置房间/课堂同时最大可与老师进行连麦互动的人数，该参数支持正式上课/开播前调用修改房间修改。小班课取值范围[0,16]，大班课取值范围[0,1]，当取值为0时表示当前课堂/直播，不支持连麦互动。 */
+  /** 设置课堂同时最大可与老师进行连麦互动的人数，该参数支持正式上课/开播前调用修改房间修改。小班课取值范围[0,16]，大班课取值范围[0,1]，当取值为0时表示当前课堂/直播，不支持连麦互动。 */
   MaxMicNumber?: number;
   /** 进入课堂时是否自动连麦。可以有以下取值：0 不自动连麦（需要手动申请上麦，默认值）1 自动连麦 */
   AutoMic?: number;
   /** 高音质模式。可以有以下取值：0 不开启高音质（默认值）1 开启高音质 */
   AudioQuality?: number;
-  /** 房间子类型，可以有以下取值：videodoc 文档+视频video 纯视频 */
+  /** 课堂子类型，可以有以下取值：videodoc 文档+视频video 纯视频 */
   SubType?: string;
   /** 上课后是否禁止自动录制。可以有以下取值：0 不禁止录制（自动开启录制，默认值）1 禁止录制注：如果该配置取值为0，录制将从上课后开始，课堂结束后停止。 */
   DisableRecord?: number;
@@ -1333,7 +1333,7 @@ declare interface DescribeRoomResponse {
   RecordUrl?: string;
   /** 课堂状态。0为未开始，1为已开始，2为已结束，3为已过期。 */
   Status?: number;
-  /** 房间绑定的群组ID */
+  /** 课堂绑定的群组ID */
   GroupId?: string;
   /** 打开学生麦克风/摄像头的授权开关 */
   EnableDirectControl?: number;
@@ -1341,9 +1341,9 @@ declare interface DescribeRoomResponse {
   InteractionMode?: number;
   /** 横竖屏。0：横屏开播（默认值）; 1：竖屏开播，当前仅支持移动端的纯视频类型 */
   VideoOrientation?: number;
-  /** 该房间是否开启了课后评分功能。0：未开启 1：开启 */
+  /** 该课堂是否开启了课后评分功能。0：未开启 1：开启 */
   IsGradingRequiredPostClass?: number;
-  /** 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展)注：大班课的布局(layout)只有三分屏 */
+  /** 课堂类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展)注：大班课的布局(layout)只有三分屏 */
   RoomType?: number;
   /** 录制时长 */
   VideoDuration?: number;
@@ -1374,7 +1374,7 @@ declare interface DescribeRoomResponse {
 }
 
 declare interface DescribeRoomStatisticsRequest {
-  /** 房间Id。 */
+  /** 课堂Id。 */
   RoomId: number;
   /** 分页查询当前页数，从1开始递增。 */
   Page: number;
@@ -1395,9 +1395,9 @@ declare interface DescribeRoomStatisticsResponse {
   RealStartTime?: number;
   /** 秒级unix时间戳，实际房间结束时间。 */
   RealEndTime?: number;
-  /** 房间消息总数。 */
+  /** 课堂消息总数。 */
   MessageCount?: number;
-  /** 房间连麦总数。 */
+  /** 课堂连麦总数。 */
   MicCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1528,7 +1528,7 @@ declare interface ForbidSendMsgResponse {
 }
 
 declare interface GetRoomEventRequest {
-  /** 房间Id。 */
+  /** 课堂Id。 */
   RoomId: number;
   /** 应用Id。 */
   SdkAppId: number;
@@ -1541,7 +1541,7 @@ declare interface GetRoomEventRequest {
 }
 
 declare interface GetRoomEventResponse {
-  /** 该房间的事件总数，keyword搜索不影响该值。 */
+  /** 该课堂的事件总数，keyword搜索不影响该值。 */
   Total?: number;
   /** 详细事件内容。包含相应的类型、发生的时间戳。 */
   Events?: EventInfo[];
@@ -1552,7 +1552,7 @@ declare interface GetRoomEventResponse {
 declare interface GetRoomMessageRequest {
   /** 低代码互动课堂的SdkAppId。 */
   SdkAppId: number;
-  /** 房间Id。 */
+  /** 课堂Id。 */
   RoomId: number;
   /** 消息序列。获取该序列以前的消息(不包含该seq消息) */
   Seq?: number;
@@ -1585,7 +1585,7 @@ declare interface GetRoomsRequest {
 declare interface GetRoomsResponse {
   /** 总数 */
   Total?: number;
-  /** 房间列表 */
+  /** 课堂列表 */
   Rooms?: RoomItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1610,7 +1610,7 @@ declare interface GetWatermarkResponse {
 }
 
 declare interface KickUserFromRoomRequest {
-  /** 房间Id。 */
+  /** 课堂Id。 */
   RoomId: number;
   /** 低代码平台的SdkAppId。 */
   SdkAppId: number;
@@ -1956,7 +1956,7 @@ declare interface UnbindDocumentFromRoomResponse {
 declare interface UnblockKickedUserRequest {
   /** 低代码平台的SdkAppId。 */
   SdkAppId: number;
-  /** 房间Id。 */
+  /** 课堂Id。 */
   RoomId: number;
   /** 需要解禁踢出的成员Id。 */
   UserId: string;
@@ -1976,7 +1976,7 @@ declare interface Lcic {
   BatchAddGroupMember(data: BatchAddGroupMemberRequest, config?: AxiosRequestConfig): AxiosPromise<BatchAddGroupMemberResponse>;
   /** 批量创建群组 {@link BatchCreateGroupWithMembersRequest} {@link BatchCreateGroupWithMembersResponse} */
   BatchCreateGroupWithMembers(data: BatchCreateGroupWithMembersRequest, config?: AxiosRequestConfig): AxiosPromise<BatchCreateGroupWithMembersResponse>;
-  /** 批量创建房间 {@link BatchCreateRoomRequest} {@link BatchCreateRoomResponse} */
+  /** 批量创建课堂 {@link BatchCreateRoomRequest} {@link BatchCreateRoomResponse} */
   BatchCreateRoom(data: BatchCreateRoomRequest, config?: AxiosRequestConfig): AxiosPromise<BatchCreateRoomResponse>;
   /** 批量删除群组成员 {@link BatchDeleteGroupMemberRequest} {@link BatchDeleteGroupMemberResponse} */
   BatchDeleteGroupMember(data: BatchDeleteGroupMemberRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteGroupMemberResponse>;
@@ -1994,7 +1994,7 @@ declare interface Lcic {
   CreateGroupWithMembers(data: CreateGroupWithMembersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGroupWithMembersResponse>;
   /** 创建联合群组 {@link CreateGroupWithSubGroupRequest} {@link CreateGroupWithSubGroupResponse} */
   CreateGroupWithSubGroup(data: CreateGroupWithSubGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGroupWithSubGroupResponse>;
-  /** 创建房间 {@link CreateRoomRequest} {@link CreateRoomResponse} */
+  /** 创建课堂 {@link CreateRoomRequest} {@link CreateRoomResponse} */
   CreateRoom(data: CreateRoomRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoomResponse>;
   /** 创建巡课 {@link CreateSupervisorRequest} {@link CreateSupervisorResponse} */
   CreateSupervisor(data: CreateSupervisorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSupervisorResponse>;
@@ -2008,7 +2008,7 @@ declare interface Lcic {
   DeleteGroupMember(data: DeleteGroupMemberRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupMemberResponse>;
   /** 删除指定房间的录制文件 {@link DeleteRecordRequest} {@link DeleteRecordResponse} */
   DeleteRecord(data: DeleteRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordResponse>;
-  /** 删除房间 {@link DeleteRoomRequest} {@link DeleteRoomResponse} */
+  /** 删除课堂 {@link DeleteRoomRequest} {@link DeleteRoomResponse} */
   DeleteRoom(data: DeleteRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoomResponse>;
   /** 删除巡课 {@link DeleteSupervisorRequest} {@link DeleteSupervisorResponse} */
   DeleteSupervisor(data: DeleteSupervisorRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSupervisorResponse>;
@@ -2016,11 +2016,11 @@ declare interface Lcic {
   DeleteUser(data: DeleteUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserResponse>;
   /** 删除板书截图 {@link DeleteWhiteBoardSnapshotRequest} {@link DeleteWhiteBoardSnapshotResponse} */
   DeleteWhiteBoardSnapshot(data?: DeleteWhiteBoardSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWhiteBoardSnapshotResponse>;
-  /** 获取房间答题详情 {@link DescribeAnswerListRequest} {@link DescribeAnswerListResponse} */
+  /** 获取课堂答题详情 {@link DescribeAnswerListRequest} {@link DescribeAnswerListResponse} */
   DescribeAnswerList(data: DescribeAnswerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAnswerListResponse>;
   /** 获取应用详情 {@link DescribeAppDetailRequest} {@link DescribeAppDetailResponse} */
   DescribeAppDetail(data: DescribeAppDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppDetailResponse>;
-  /** 获取当前房间的成员列表 {@link DescribeCurrentMemberListRequest} {@link DescribeCurrentMemberListResponse} */
+  /** 获取当前课堂的成员列表 {@link DescribeCurrentMemberListRequest} {@link DescribeCurrentMemberListResponse} */
   DescribeCurrentMemberList(data: DescribeCurrentMemberListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCurrentMemberListResponse>;
   /** 开发商信息获取 {@link DescribeDeveloperRequest} {@link DescribeDeveloperResponse} */
   DescribeDeveloper(data?: DescribeDeveloperRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeveloperResponse>;
@@ -2046,11 +2046,11 @@ declare interface Lcic {
   DescribeRecordStream(data: DescribeRecordStreamRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordStreamResponse>;
   /** 查询录制任务ID {@link DescribeRecordTaskRequest} {@link DescribeRecordTaskResponse} */
   DescribeRecordTask(data: DescribeRecordTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordTaskResponse>;
-  /** 获取房间配置信息 {@link DescribeRoomRequest} {@link DescribeRoomResponse} */
+  /** 获取课堂配置信息 {@link DescribeRoomRequest} {@link DescribeRoomResponse} */
   DescribeRoom(data: DescribeRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomResponse>;
   /** 获取房间中被禁言成员列表 {@link DescribeRoomForbiddenUserRequest} {@link DescribeRoomForbiddenUserResponse} */
   DescribeRoomForbiddenUser(data: DescribeRoomForbiddenUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomForbiddenUserResponse>;
-  /** 获取房间统计信息 {@link DescribeRoomStatisticsRequest} {@link DescribeRoomStatisticsResponse} */
+  /** 获取课堂统计信息 {@link DescribeRoomStatisticsRequest} {@link DescribeRoomStatisticsResponse} */
   DescribeRoomStatistics(data: DescribeRoomStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoomStatisticsResponse>;
   /** 获取课堂评分列表 {@link DescribeScoreListRequest} {@link DescribeScoreListResponse} */
   DescribeScoreList(data: DescribeScoreListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScoreListResponse>;
@@ -2062,19 +2062,19 @@ declare interface Lcic {
   DescribeUser(data?: DescribeUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResponse>;
   /** 获取板书截图 {@link DescribeWhiteBoardSnapshotRequest} {@link DescribeWhiteBoardSnapshotResponse} */
   DescribeWhiteBoardSnapshot(data?: DescribeWhiteBoardSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteBoardSnapshotResponse>;
-  /** 结束直播 {@link EndRoomRequest} {@link EndRoomResponse} */
+  /** 结束课堂 {@link EndRoomRequest} {@link EndRoomResponse} */
   EndRoom(data: EndRoomRequest, config?: AxiosRequestConfig): AxiosPromise<EndRoomResponse>;
   /** 禁言和取消禁言 {@link ForbidSendMsgRequest} {@link ForbidSendMsgResponse} */
   ForbidSendMsg(data: ForbidSendMsgRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidSendMsgResponse>;
-  /** 获取房间事件 {@link GetRoomEventRequest} {@link GetRoomEventResponse} */
+  /** 获取课堂事件 {@link GetRoomEventRequest} {@link GetRoomEventResponse} */
   GetRoomEvent(data: GetRoomEventRequest, config?: AxiosRequestConfig): AxiosPromise<GetRoomEventResponse>;
-  /** 获取房间历史消息 {@link GetRoomMessageRequest} {@link GetRoomMessageResponse} */
+  /** 获取课堂历史消息 {@link GetRoomMessageRequest} {@link GetRoomMessageResponse} */
   GetRoomMessage(data: GetRoomMessageRequest, config?: AxiosRequestConfig): AxiosPromise<GetRoomMessageResponse>;
-  /** 获取房间列表 {@link GetRoomsRequest} {@link GetRoomsResponse} */
+  /** 获取课堂列表 {@link GetRoomsRequest} {@link GetRoomsResponse} */
   GetRooms(data: GetRoomsRequest, config?: AxiosRequestConfig): AxiosPromise<GetRoomsResponse>;
   /** 获取水印设置 {@link GetWatermarkRequest} {@link GetWatermarkResponse} */
   GetWatermark(data: GetWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<GetWatermarkResponse>;
-  /** 踢出房间用户 {@link KickUserFromRoomRequest} {@link KickUserFromRoomResponse} */
+  /** 踢出课堂用户 {@link KickUserFromRoomRequest} {@link KickUserFromRoomResponse} */
   KickUserFromRoom(data: KickUserFromRoomRequest, config?: AxiosRequestConfig): AxiosPromise<KickUserFromRoomResponse>;
   /** 源账号登录 {@link LoginOriginIdRequest} {@link LoginOriginIdResponse} */
   LoginOriginId(data: LoginOriginIdRequest, config?: AxiosRequestConfig): AxiosPromise<LoginOriginIdResponse>;
@@ -2084,7 +2084,7 @@ declare interface Lcic {
   ModifyApp(data: ModifyAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppResponse>;
   /** 修改群组 {@link ModifyGroupRequest} {@link ModifyGroupResponse} */
   ModifyGroup(data: ModifyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGroupResponse>;
-  /** 修改房间 {@link ModifyRoomRequest} {@link ModifyRoomResponse} */
+  /** 修改课堂 {@link ModifyRoomRequest} {@link ModifyRoomResponse} */
   ModifyRoom(data: ModifyRoomRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoomResponse>;
   /** 修改用户信息 {@link ModifyUserProfileRequest} {@link ModifyUserProfileResponse} */
   ModifyUserProfile(data: ModifyUserProfileRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserProfileResponse>;
@@ -2102,13 +2102,13 @@ declare interface Lcic {
   SetWatermark(data: SetWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<SetWatermarkResponse>;
   /** 开启录制 {@link StartRecordRequest} {@link StartRecordResponse} */
   StartRecord(data: StartRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StartRecordResponse>;
-  /** 开始直播 {@link StartRoomRequest} {@link StartRoomResponse} */
+  /** 开始课堂 {@link StartRoomRequest} {@link StartRoomResponse} */
   StartRoom(data: StartRoomRequest, config?: AxiosRequestConfig): AxiosPromise<StartRoomResponse>;
   /** 停止录制 {@link StopRecordRequest} {@link StopRecordResponse} */
   StopRecord(data: StopRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StopRecordResponse>;
   /** 文档从房间解绑 {@link UnbindDocumentFromRoomRequest} {@link UnbindDocumentFromRoomResponse} */
   UnbindDocumentFromRoom(data: UnbindDocumentFromRoomRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindDocumentFromRoomResponse>;
-  /** 解禁房间被踢用户 {@link UnblockKickedUserRequest} {@link UnblockKickedUserResponse} */
+  /** 解禁课堂被踢用户 {@link UnblockKickedUserRequest} {@link UnblockKickedUserResponse} */
   UnblockKickedUser(data: UnblockKickedUserRequest, config?: AxiosRequestConfig): AxiosPromise<UnblockKickedUserResponse>;
 }
 

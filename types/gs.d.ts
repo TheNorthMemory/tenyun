@@ -7,11 +7,11 @@ declare interface AndroidApp {
   /** 安卓应用 Id */
   AndroidAppId?: string;
   /** 安卓应用名称 */
-  Name?: string | null;
+  Name?: string;
   /** 安卓应用状态（上架、下架） */
   State?: string;
   /** 安卓应用版本列表 */
-  AndroidAppVersionInfo?: AndroidAppVersionInfo[] | null;
+  AndroidAppVersionInfo?: AndroidAppVersionInfo[];
   /** 安卓应用创建时间 */
   CreateTime?: string;
 }
@@ -33,13 +33,13 @@ declare interface AndroidInstance {
   /** 实例所在区域 */
   AndroidInstanceRegion?: string;
   /** 实例可用区 */
-  AndroidInstanceZone?: string | null;
+  AndroidInstanceZone?: string;
   /** 实例状态：INITIALIZING，NORMAL，PROCESSING */
   State?: string;
   /** 实例规格 */
   AndroidInstanceType?: string;
   /** 实例镜像 ID */
-  AndroidInstanceImageId?: string | null;
+  AndroidInstanceImageId?: string;
   /** 分辨率宽度 */
   Width?: number;
   /** 分辨率高度 */
@@ -59,11 +59,11 @@ declare interface AndroidInstance {
 /** 安卓实例应用信息 */
 declare interface AndroidInstanceAppInfo {
   /** 应用id */
-  AndroidAppId?: string | null;
+  AndroidAppId?: string;
   /** 应用名称 */
-  Name?: string | null;
+  Name?: string;
   /** 应用版本 */
-  AndroidAppVersion?: string | null;
+  AndroidAppVersion?: string;
   /** 应用包名 */
   PackageName?: string;
   /** 应用包版本 */
@@ -75,13 +75,13 @@ declare interface AndroidInstanceAppInfo {
 /** 安卓实例镜像信息 */
 declare interface AndroidInstanceImage {
   /** 镜像 ID */
-  AndroidInstanceImageId?: string | null;
+  AndroidInstanceImageId?: string;
   /** 镜像名称，由业务方自定义，仅用于展示 */
-  AndroidInstanceImageName?: string | null;
+  AndroidInstanceImageName?: string;
   /** 镜像状态 */
-  AndroidInstanceImageState?: string | null;
+  AndroidInstanceImageState?: string;
   /** 镜像可用区 */
-  AndroidInstanceImageZone?: string | null;
+  AndroidInstanceImageZone?: string;
 }
 
 /** 安卓实例标签 */
@@ -95,9 +95,9 @@ declare interface AndroidInstanceLabel {
 /** 安卓实例任务信息 */
 declare interface AndroidInstanceTask {
   /** 任务ID */
-  TaskId?: string | null;
+  TaskId?: string;
   /** 实例ID */
-  AndroidInstanceId?: string | null;
+  AndroidInstanceId?: string;
 }
 
 /** 安卓实例任务状态信息 */
@@ -109,14 +109,14 @@ declare interface AndroidInstanceTaskStatus {
   /** 实例ID */
   AndroidInstanceId?: string;
   /** 任务执行结果描述，针对某些任务，可以是可解析的 json */
-  TaskResult?: string | null;
+  TaskResult?: string;
 }
 
 /** 过滤 */
 declare interface Filter {
-  /** "aaa" */
+  /** 字段名 */
   Name: string;
-  /** ["bbb", "ccc"] */
+  /** 字段值列表 */
   Values: string[];
 }
 
@@ -143,7 +143,7 @@ declare interface SyncExecuteCommandResult {
   /** 实例ID */
   InstanceId?: string;
   /** 命令执行输出内容 */
-  Output?: string | null;
+  Output?: string;
   /** 命令执行结果 */
   Status?: string;
 }
@@ -191,7 +191,7 @@ declare interface CreateAndroidInstanceImageRequest {
 
 declare interface CreateAndroidInstanceImageResponse {
   /** 安卓实例镜像 ID */
-  AndroidInstanceImageId?: string | null;
+  AndroidInstanceImageId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -349,7 +349,7 @@ declare interface DescribeAndroidAppsRequest {
 
 declare interface DescribeAndroidAppsResponse {
   /** 安卓应用列表 */
-  Apps?: AndroidApp[] | null;
+  Apps?: AndroidApp[];
   /** 安卓应用列表长度 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -363,7 +363,7 @@ declare interface DescribeAndroidInstanceAppsRequest {
 
 declare interface DescribeAndroidInstanceAppsResponse {
   /** 安卓应用列表 */
-  Apps?: AndroidInstanceAppInfo[] | null;
+  Apps?: AndroidInstanceAppInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -379,9 +379,9 @@ declare interface DescribeAndroidInstanceImagesRequest {
 
 declare interface DescribeAndroidInstanceImagesResponse {
   /** 镜像总数 */
-  Total?: number | null;
+  Total?: number;
   /** 镜像列表 */
-  AndroidInstanceImages?: AndroidInstanceImage[] | null;
+  AndroidInstanceImages?: AndroidInstanceImage[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -413,7 +413,7 @@ declare interface DescribeAndroidInstanceTasksStatusRequest {
 
 declare interface DescribeAndroidInstanceTasksStatusResponse {
   /** 任务状态集合 */
-  TaskStatusSet?: AndroidInstanceTaskStatus[] | null;
+  TaskStatusSet?: AndroidInstanceTaskStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -501,7 +501,7 @@ declare interface InstallAndroidInstancesAppRequest {
 
 declare interface InstallAndroidInstancesAppResponse {
   /** 任务集合 */
-  TaskSet?: AndroidInstanceTask[] | null;
+  TaskSet?: AndroidInstanceTask[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -567,7 +567,7 @@ declare interface RebootAndroidInstancesRequest {
 
 declare interface RebootAndroidInstancesResponse {
   /** 任务集合 */
-  TaskSet?: AndroidInstanceTask[] | null;
+  TaskSet?: AndroidInstanceTask[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -583,7 +583,7 @@ declare interface ResetAndroidInstancesRequest {
 
 declare interface ResetAndroidInstancesResponse {
   /** 任务集合 */
-  TaskSet?: AndroidInstanceTask[] | null;
+  TaskSet?: AndroidInstanceTask[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -631,7 +631,7 @@ declare interface StartAndroidInstancesRequest {
 
 declare interface StartAndroidInstancesResponse {
   /** 任务集合 */
-  TaskSet?: AndroidInstanceTask[] | null;
+  TaskSet?: AndroidInstanceTask[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -679,7 +679,7 @@ declare interface StopAndroidInstancesRequest {
 
 declare interface StopAndroidInstancesResponse {
   /** 任务集合 */
-  TaskSet?: AndroidInstanceTask[] | null;
+  TaskSet?: AndroidInstanceTask[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -781,7 +781,7 @@ declare interface UninstallAndroidInstancesAppRequest {
 
 declare interface UninstallAndroidInstancesAppResponse {
   /** 任务集合 */
-  TaskSet?: AndroidInstanceTask[] | null;
+  TaskSet?: AndroidInstanceTask[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

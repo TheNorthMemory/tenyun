@@ -143,11 +143,11 @@ declare interface DBInstance {
   /** 最大 Qps 值 */
   Qps?: number;
   /** 付费模式 */
-  Paymode?: string | null;
+  Paymode?: string;
   /** 实例处于异步任务时的异步任务流程ID */
-  Locker?: number | null;
+  Locker?: number;
   /** 实例目前运行状态描述 */
-  StatusDesc?: string | null;
+  StatusDesc?: string;
   /** 外网状态，0-未开通；1-已开通；2-关闭；3-开通中 */
   WanStatus?: number;
   /** 该实例是否支持审计。1-支持；0-不支持 */
@@ -159,31 +159,31 @@ declare interface DBInstance {
   /** 实例CPU核数 */
   Cpu?: number;
   /** 实例IPv6标志 */
-  Ipv6Flag?: number | null;
+  Ipv6Flag?: number;
   /** 内网IPv6 */
-  Vipv6?: string | null;
+  Vipv6?: string;
   /** 外网IPv6 */
-  WanVipv6?: string | null;
+  WanVipv6?: string;
   /** 外网IPv6端口 */
-  WanPortIpv6?: number | null;
+  WanPortIpv6?: number;
   /** 外网IPv6状态 */
-  WanStatusIpv6?: number | null;
+  WanStatusIpv6?: number;
   /** 数据库引擎 */
-  DbEngine?: string | null;
+  DbEngine?: string;
   /** 数据库版本 */
-  DbVersion?: string | null;
+  DbVersion?: string;
   /** DCN标志，0-无，1-主实例，2-灾备实例 */
-  DcnFlag?: number | null;
+  DcnFlag?: number;
   /** DCN状态，0-无，1-创建中，2-同步中，3-已断开 */
-  DcnStatus?: number | null;
+  DcnStatus?: number;
   /** DCN灾备实例数 */
-  DcnDstNum?: number | null;
+  DcnDstNum?: number;
   /** 1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型） */
-  InstanceType?: number | null;
+  InstanceType?: number;
   /** 实例标签信息 */
-  ResourceTags?: ResourceTag[] | null;
+  ResourceTags?: ResourceTag[];
   /** 数据库版本 */
-  DbVersionId?: string | null;
+  DbVersionId?: string;
 }
 
 /** 云数据库参数信息。 */
@@ -839,7 +839,7 @@ declare interface CreateDBInstanceRequest {
   SubnetId?: string;
   /** 项目 ID，可以通过查看项目列表获取，不传则关联到默认项目 */
   ProjectId?: number;
-  /** 数据库引擎版本，当前可选：8.0，5.7，10.1，10.0。 */
+  /** 数据库引擎版本，当前可选：8.0，5.7，10.1。 */
   DbVersionId?: string;
   /** 实例名称， 可以通过该字段自主的设置实例的名字 */
   InstanceName?: string;
@@ -865,7 +865,7 @@ declare interface CreateDBInstanceResponse {
   /** 长订单号。可以据此调用 DescribeOrders 查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。 */
   DealName?: string;
   /** 订单对应的实例 ID 列表，如果此处没有返回实例 ID，可以通过订单查询接口获取。还可通过实例查询接口查询实例是否创建完成。 */
-  InstanceIds?: string[] | null;
+  InstanceIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1227,7 +1227,7 @@ declare interface DescribeDBInstanceDetailResponse {
   /** 是否支持数据加密。1-支持；0-不支持 */
   IsEncryptSupported?: number;
   /** 内网IPv6 */
-  Vip6?: string | null;
+  Vip6?: string;
   /** 实例Cpu核数 */
   Cpu?: number;
   /** 产品类型ID */
@@ -1235,43 +1235,43 @@ declare interface DescribeDBInstanceDetailResponse {
   /** 最大QPS */
   Qps?: number;
   /** 是否支持IPv6 */
-  Ipv6Flag?: number | null;
+  Ipv6Flag?: number;
   /** 外网IPv6地址，公网可访问 */
-  WanVipv6?: string | null;
+  WanVipv6?: string;
   /** 外网状态，0-未开通；1-已开通；2-关闭；3-开通中；4-关闭中 */
-  WanStatusIpv6?: number | null;
+  WanStatusIpv6?: number;
   /** 外网IPv6端口 */
-  WanPortIpv6?: number | null;
+  WanPortIpv6?: number;
   /** 数据库引擎 */
-  DbEngine?: string | null;
+  DbEngine?: string;
   /** 数据库版本 */
-  DbVersion?: string | null;
+  DbVersion?: string;
   /** 标签信息 */
   ResourceTags?: ResourceTag[];
   /** DCN标志，0-无，1-主实例，2-灾备实例 */
-  DcnFlag?: number | null;
+  DcnFlag?: number;
   /** DCN状态，0-无，1-创建中，2-同步中，3-已断开 */
-  DcnStatus?: number | null;
+  DcnStatus?: number;
   /** DCN灾备实例数 */
-  DcnDstNum?: number | null;
+  DcnDstNum?: number;
   /** 1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型） */
-  InstanceType?: number | null;
+  InstanceType?: number;
   /** 实例的各个DB节点信息 */
-  NodesInfo?: NodeInfo[] | null;
+  NodesInfo?: NodeInfo[];
   /** 实例是否支持设置用户连接数限制，内核为10.1暂不支持。 */
-  IsMaxUserConnectionsSupported?: boolean | null;
+  IsMaxUserConnectionsSupported?: boolean;
   /** 对外显示的数据库版本 */
-  DbVersionId?: string | null;
+  DbVersionId?: string;
   /** 加密状态, 0-未开启，1-已开启 */
-  EncryptStatus?: number | null;
+  EncryptStatus?: number;
   /** DCN的配置信息 */
   ReplicaConfig?: DCNReplicaConfig | null;
   /** DCN的运行状态 */
   ReplicaStatus?: DCNReplicaStatus | null;
   /** 独享集群类型，0:公有云, 1:金融围笼, 2:CDC集群 */
-  ExclusterType?: number | null;
+  ExclusterType?: number;
   /** VPC就近访问 */
-  RsAccessStrategy?: number | null;
+  RsAccessStrategy?: number;
   /** 尚未回收的网络资源 */
   ReservedNetResources?: ReservedNetResource[];
   /** 是否支持物理复制 */

@@ -777,13 +777,13 @@ declare interface ContainerEvent {
 /** 获取部署组 */
 declare interface ContainerGroupDeploy {
   /** 部署组id */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 分组名称 */
-  GroupName?: string | null;
+  GroupName?: string;
   /** 实例总数 */
-  InstanceNum?: number | null;
+  InstanceNum?: number;
   /** 已启动实例总数 */
-  CurrentNum?: number | null;
+  CurrentNum?: number;
   /** 镜像server */
   Server?: string | null;
   /** 镜像名，如/tsf/nginx */
@@ -801,7 +801,7 @@ declare interface ContainerGroupDeploy {
   /** 0:公网 1:集群内访问 2：NodePort */
   AccessType?: number | null;
   /** 端口映射 */
-  ProtocolPorts?: ProtocolPort[] | null;
+  ProtocolPorts?: ProtocolPort[];
   /** 更新方式：0:快速更新 1:滚动更新 */
   UpdateType?: number | null;
   /** 更新间隔,单位秒 */
@@ -831,13 +831,13 @@ declare interface ContainerGroupDeploy {
   /** 健康检查配置信息，若不指定该参数，则默认不设置健康检查。 */
   HealthCheckSettings?: HealthCheckSettings | null;
   /** 是否部署Agent容器 */
-  DeployAgent?: boolean | null;
+  DeployAgent?: boolean;
   /** 部署组备注 */
   Alias?: string | null;
   /** 是否创建 k8s service */
-  DisableService?: boolean | null;
+  DisableService?: boolean;
   /** service 是否为 headless 类型 */
-  HeadlessService?: boolean | null;
+  HeadlessService?: boolean;
   /** TcrRepoInfo值 */
   TcrRepoInfo?: TcrRepoInfo | null;
   /** 数据卷信息，list */
@@ -847,19 +847,19 @@ declare interface ContainerGroupDeploy {
   /** KubeInjectEnable值 */
   KubeInjectEnable?: boolean | null;
   /** 仓库类型 (person, tcr) */
-  RepoType?: string | null;
+  RepoType?: string;
   /** 预热配置设置 */
-  WarmupSetting?: WarmupSetting | null;
+  WarmupSetting?: WarmupSetting;
   /** Envoy网关服务配置 */
   GatewayConfig?: GatewayConfig | null;
   /** 容器名称 */
-  ContainerName?: string | null;
+  ContainerName?: string;
   /** 附加容器列表 */
-  AdditionalContainerList?: GroupContainerInfo[] | null;
+  AdditionalContainerList?: GroupContainerInfo[];
   /** 内部容器列表 */
-  InternalContainerList?: GroupContainerInfo[] | null;
+  InternalContainerList?: GroupContainerInfo[];
   /** service列表 */
-  ServiceSettingList?: ServiceSetting[] | null;
+  ServiceSettingList?: ServiceSetting[];
 }
 
 /** 容器部署组详情 */
@@ -1361,35 +1361,35 @@ declare interface GroupContainerInfo {
   /** 镜像版本名称 */
   TagName: string;
   /** 容器名字 */
-  ContainerName?: string | null;
+  ContainerName?: string;
   /** 镜像名 */
-  RepoName?: string | null;
+  RepoName?: string;
   /** 仓库类型,tcr，address，personal，默认personal */
-  RepoType?: string | null;
+  RepoType?: string;
   /** tcr仓库信息 */
-  TcrRepoInfo?: TcrRepoInfo | null;
+  TcrRepoInfo?: TcrRepoInfo;
   /** 镜像server */
-  Server?: string | null;
+  Server?: string;
   /** 凭证名字 */
-  SecretName?: string | null;
+  SecretName?: string;
   /** jvm 参数 */
-  JvmOpts?: string | null;
+  JvmOpts?: string;
   /** 容器最大的 CPU 核数，对应 K8S 的 limit */
-  CpuLimit?: string | null;
+  CpuLimit?: string;
   /** 容器分配的 CPU 核数，对应 K8S 的 request */
-  CpuRequest?: string | null;
+  CpuRequest?: string;
   /** 容器分配的内存 MiB 数，对应 K8S 的 request */
-  MemRequest?: string | null;
+  MemRequest?: string;
   /** 容器最大的内存 MiB 数，对应 K8S 的 limit */
-  MemLimit?: string | null;
+  MemLimit?: string;
   /** 健康检查配置信息 */
-  HealthCheckSettings?: HealthCheckSettings | null;
+  HealthCheckSettings?: HealthCheckSettings;
   /** 环境变量 */
-  Envs?: Env[] | null;
+  Envs?: Env[];
   /** 环境变量,作为入参时不用填 */
-  UserEnvs?: Env[] | null;
+  UserEnvs?: Env[];
   /** 数据卷挂载点信息 */
-  VolumeMountInfoList?: VolumeMountInfo[] | null;
+  VolumeMountInfoList?: VolumeMountInfo[];
 }
 
 /** 分组日使用统计对象 */
@@ -1604,6 +1604,8 @@ declare interface ImageRepository {
   CreateMode?: string;
   /** 仓库名，等同reponame字段 */
   RepoName?: string;
+  /** 仓库类型 */
+  RepoType?: string;
 }
 
 /** 镜像仓库列表 */
@@ -2589,47 +2591,49 @@ declare interface ServiceGovernanceConfig {
 /** 容器网络设置。 */
 declare interface ServiceSetting {
   /** 0:公网, 1:集群内访问, 2：NodePort, 3: VPC 内网访问 */
-  AccessType: number | null;
+  AccessType: number;
   /** 容器端口映射 */
-  ProtocolPorts: ProtocolPort[] | null;
+  ProtocolPorts: ProtocolPort[];
   /** 子网ID */
-  SubnetId: string | null;
+  SubnetId: string;
   /** 是否创建 k8s service，默认为 false */
-  DisableService?: boolean | null;
+  DisableService?: boolean;
   /** service 是否为 headless 类型 */
-  HeadlessService?: boolean | null;
+  HeadlessService?: boolean;
   /** 当为 true 且 DisableService 也为 true 时，会删除之前创建的 service，请小心使用 */
-  AllowDeleteService?: boolean | null;
+  AllowDeleteService?: boolean;
   /** 开启SessionAffinity，true为开启，false为不开启，默认为false */
-  OpenSessionAffinity?: boolean | null;
+  OpenSessionAffinity?: boolean;
   /** SessionAffinity会话时间，默认10800 */
-  SessionAffinityTimeoutSeconds?: number | null;
+  SessionAffinityTimeoutSeconds?: number;
   /** 服务名称 */
-  ServiceName?: string | null;
+  ServiceName?: string;
   /** 外部流量策略 */
-  ExternalTrafficStrategy?: string | null;
+  ExternalTrafficStrategy?: string;
   /** 外部流量策略 */
-  ExternalTrafficPolicy?: string | null;
+  ExternalTrafficPolicy?: string;
   /** 负载均衡提供者 */
-  LoadBalancerProvisioner?: string | null;
+  LoadBalancerProvisioner?: string;
   /** 负载均衡类型 */
-  LoadBalancingType?: string | null;
+  LoadBalancingType?: string;
   /** k8s负载均衡内网vip */
-  ClusterIp?: string | null;
+  ClusterIp?: string;
   /** 禁用服务Int记录 */
-  DisableServiceInt?: number | null;
+  DisableServiceInt?: number;
   /** 开启SessionAffinity Int记录 */
-  OpenSessionAffinityInt?: number | null;
+  OpenSessionAffinityInt?: number;
   /** 开启HeadlessService int记录 */
-  HeadlessServiceInt?: number | null;
+  HeadlessServiceInt?: number;
   /** 服务名称 */
-  Name?: string | null;
+  Name?: string;
   /** VPC网络ID */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 负载均衡VIP */
-  LoadBalancingIp?: string | null;
+  LoadBalancingIp?: string;
   /** 负载均衡id */
-  LoadBalancerId?: string | null;
+  LoadBalancerId?: string;
+  /** 已存在的负载均衡id */
+  ExistingLoadBalancerId?: string;
 }
 
 /** 服务统计结果 */
@@ -3003,13 +3007,15 @@ declare interface TsfPageBusinessLogConfig {
 /** 业务日志列表 */
 declare interface TsfPageBusinessLogV2 {
   /** 总条数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 业务日志列表 */
-  Content?: BusinessLogV2[] | null;
+  Content?: BusinessLogV2[];
   /** 游标ID */
   ScrollId?: string | null;
   /** 查询状态 */
   Status?: string | null;
+  /** 查询es时，使用searchAfter返回的游标 */
+  SearchAfter?: string[] | null;
 }
 
 /** Tsf分页集群对象 */
@@ -3151,13 +3157,15 @@ declare interface TsfPageSimpleGroup {
 /** 标准输出日志列表 */
 declare interface TsfPageStdoutLogV2 {
   /** 总条数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 标准输出日志列表 */
-  Content?: StdoutLogV2[] | null;
+  Content?: StdoutLogV2[];
   /** 游标ID */
   ScrollId?: string | null;
   /** 查询状态 */
   Status?: string | null;
+  /** 游标ID */
+  SearchAfter?: string[] | null;
 }
 
 /** 单元化命名空间翻页对象 */
@@ -3287,11 +3295,11 @@ declare interface ValueFrom {
 /** 虚拟机部署组信息 */
 declare interface VmGroup {
   /** 部署组ID */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 部署组名称 */
-  GroupName?: string | null;
+  GroupName?: string;
   /** 部署组状态 */
-  GroupStatus?: string | null;
+  GroupStatus?: string;
   /** 程序包ID */
   PackageId?: string | null;
   /** 程序包名称 */
@@ -3299,53 +3307,53 @@ declare interface VmGroup {
   /** 程序包版本号 */
   PackageVersion?: string | null;
   /** 集群ID */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 集群名称 */
-  ClusterName?: string | null;
+  ClusterName?: string;
   /** 命名空间ID */
-  NamespaceId?: string | null;
+  NamespaceId?: string;
   /** 命名空间名称 */
-  NamespaceName?: string | null;
+  NamespaceName?: string;
   /** 应用ID */
-  ApplicationId?: string | null;
+  ApplicationId?: string;
   /** 应用名称 */
-  ApplicationName?: string | null;
+  ApplicationName?: string;
   /** 部署组机器数目 */
-  InstanceCount?: number | null;
+  InstanceCount?: number;
   /** 部署组运行中机器数目 */
-  RunInstanceCount?: number | null;
+  RunInstanceCount?: number;
   /** 部署组启动参数信息 */
   StartupParameters?: string | null;
   /** 部署组创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 部署组更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 部署组停止机器数目 */
-  OffInstanceCount?: number | null;
+  OffInstanceCount?: number;
   /** 部署组描述信息 */
   GroupDesc?: string | null;
   /** 微服务类型 */
-  MicroserviceType?: string | null;
+  MicroserviceType?: string;
   /** 应用类型 */
-  ApplicationType?: string | null;
+  ApplicationType?: string;
   /** 部署组资源类型 */
-  GroupResourceType?: string | null;
+  GroupResourceType?: string;
   /** 部署组更新时间戳 */
-  UpdatedTime?: number | null;
+  UpdatedTime?: number;
   /** 部署应用描述信息 */
   DeployDesc?: string | null;
   /** 滚动发布的更新方式 */
-  UpdateType?: number | null;
+  UpdateType?: number;
   /** 发布是否启用beta批次 */
-  DeployBetaEnable?: boolean | null;
+  DeployBetaEnable?: boolean;
   /** 滚动发布的批次比例列表 */
-  DeployBatch?: number[] | null;
+  DeployBatch?: number[];
   /** 滚动发布的批次执行方式 */
-  DeployExeMode?: string | null;
+  DeployExeMode?: string;
   /** 滚动发布的每个批次的等待时间 */
-  DeployWaitTime?: number | null;
+  DeployWaitTime?: number;
   /** 是否开启了健康检查 */
-  EnableHealthCheck?: boolean | null;
+  EnableHealthCheck?: boolean;
   /** 健康检查配置 */
   HealthCheckSettings?: HealthCheckSettings | null;
   /** 程序包类型 */
@@ -3357,19 +3365,31 @@ declare interface VmGroup {
   /** 部署组备注 */
   Alias?: string | null;
   /** javaagent信息 */
-  AgentProfileList?: AgentProfile[] | null;
+  AgentProfileList?: AgentProfile[];
   /** 预热属性配置 */
-  WarmupSetting?: WarmupSetting | null;
+  WarmupSetting?: WarmupSetting;
   /** Envoy网关配置 */
   GatewayConfig?: GatewayConfig | null;
   /** 批次是否开启健康检查 */
-  EnableBatchHealthCheck?: boolean | null;
+  EnableBatchHealthCheck?: boolean;
+  /** 是否开启cgroup控制内存cpu */
+  FilebeatCgroupEnable?: boolean | null;
+  /** filebeat使用cpu上限 */
+  FilebeatMaxCpu?: number | null;
+  /** filebeat使用内存上限 */
+  FilebeatMaxMem?: number | null;
+  /** 仓库ID */
+  RepositoryId?: string | null;
+  /** 仓库名称 */
+  RepositoryName?: string | null;
+  /** 仓库类型 */
+  RepositoryType?: string | null;
 }
 
 /** 虚拟机部署组其他字段 */
 declare interface VmGroupOther {
   /** 部署组ID */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 程序包ID */
   PackageId?: string | null;
   /** 程序包名称 */
@@ -3377,15 +3397,15 @@ declare interface VmGroupOther {
   /** 程序包版本 */
   PackageVersion?: string | null;
   /** 部署组实例数 */
-  InstanceCount?: number | null;
+  InstanceCount?: number;
   /** 部署组运行中实例数 */
-  RunInstanceCount?: number | null;
+  RunInstanceCount?: number;
   /** 部署组中停止实例数 */
-  OffInstanceCount?: number | null;
+  OffInstanceCount?: number;
   /** 部署组状态 */
-  GroupStatus?: string | null;
+  GroupStatus?: string;
   /** 服务配置信息是否匹配 */
-  IsNotEqualServiceConfig?: boolean | null;
+  IsNotEqualServiceConfig?: boolean;
   /** HealthCheckSettings */
   HealthCheckSettings?: HealthCheckSettings | null;
 }
@@ -5224,7 +5244,7 @@ declare interface DescribeContainerGroupDeployInfoRequest {
 
 declare interface DescribeContainerGroupDeployInfoResponse {
   /** 获取部署组 */
-  Result?: ContainerGroupDeploy | null;
+  Result?: ContainerGroupDeploy;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5566,7 +5586,7 @@ declare interface DescribeGroupRequest {
 
 declare interface DescribeGroupResponse {
   /** 虚拟机部署组详情 */
-  Result?: VmGroup | null;
+  Result?: VmGroup;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7342,11 +7362,13 @@ declare interface SearchBusinessLogRequest {
   BatchType?: string;
   /** 游标ID */
   ScrollId?: string;
+  /** 查询es使用searchAfter时，游标 */
+  SearchAfter?: string[];
 }
 
 declare interface SearchBusinessLogResponse {
   /** 业务日志列表 */
-  Result?: TsfPageBusinessLogV2 | null;
+  Result?: TsfPageBusinessLogV2;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7376,11 +7398,13 @@ declare interface SearchStdoutLogRequest {
   BatchType?: string;
   /** 游标ID */
   ScrollId?: string;
+  /** 查询es使用searchAfter时，游标 */
+  SearchAfter?: string[];
 }
 
 declare interface SearchStdoutLogResponse {
   /** 标准输出日志列表 */
-  Result?: TsfPageStdoutLogV2 | null;
+  Result?: TsfPageStdoutLogV2;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
