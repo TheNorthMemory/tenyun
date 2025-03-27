@@ -68,24 +68,24 @@ declare interface ChargeProperties {
 
 /** ConfigHistory1 */
 declare interface ConfigHistory {
-  /** id1 */
-  Id: number;
+  /** id */
+  Id?: number;
   /** 实例名 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 创建时间 */
-  CreatedAt: string;
+  CreatedAt?: string;
   /** 更新时间 */
-  UpdatedAt: string;
+  UpdatedAt?: string;
   /** dn/cn */
-  NodeType: string;
+  NodeType?: string;
   /** 参数名 */
-  ParamName: string;
+  ParamName?: string;
   /** 新参数值 */
-  ParamNewValue: string;
+  ParamNewValue?: string;
   /** 旧参数值 */
-  ParamOldValue: string;
+  ParamOldValue?: string;
   /** 状态 doing/success */
-  Status: string;
+  Status?: string;
 }
 
 /** 参数 */

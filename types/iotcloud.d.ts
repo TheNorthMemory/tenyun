@@ -145,23 +145,23 @@ declare interface DeviceLabel {
 /** 设备资源详细信息 */
 declare interface DeviceResourceInfo {
   /** 产品ID */
-  ProductID: string;
+  ProductID?: string;
   /** 产品名 */
-  ProductName: string;
+  ProductName?: string;
   /** 资源名称 */
-  Name: string;
+  Name?: string;
   /** 资源文件md5 */
-  Md5: string;
+  Md5?: string;
   /** 资源文件大小 */
-  Size: number;
+  Size?: number;
   /** 资源更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 设备名称 */
-  DeviceName: string;
+  DeviceName?: string;
   /** 设备资源上传状态 */
-  Status: number;
+  Status?: number;
   /** 设备资源上传百分比 */
-  Percent: number;
+  Percent?: number;
 }
 
 /** 设备属性 */
@@ -756,7 +756,7 @@ declare interface DescribeDeviceResourceRequest {
 
 declare interface DescribeDeviceResourceResponse {
   /** 设备资源详情 */
-  Result: DeviceResourceInfo;
+  Result?: DeviceResourceInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -778,9 +778,9 @@ declare interface DescribeDeviceResourcesRequest {
 
 declare interface DescribeDeviceResourcesResponse {
   /** 资源总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 资源列表 */
-  Result: DeviceResourceInfo[] | null;
+  Result?: DeviceResourceInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1106,7 +1106,7 @@ declare interface DescribeProductResourceRequest {
 
 declare interface DescribeProductResourceResponse {
   /** 资源详情 */
-  Result: ProductResourceInfo | null;
+  Result?: ProductResourceInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

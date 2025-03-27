@@ -1601,7 +1601,7 @@ declare interface RocketMQVipInstance {
   /** 0-后付费，1-预付费 */
   PayMode?: number;
   /** 备注信息 */
-  Remark?: string | null;
+  Remark?: string;
   /** 实例配置ID */
   SpecName?: string;
   /** 最大可设置消息保留时间，小时为单位 */

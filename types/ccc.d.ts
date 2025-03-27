@@ -656,8 +656,10 @@ declare interface StaffInfo {
   Nick?: string;
   /** 座席工号 */
   StaffNumber?: string;
-  /** 用户角色id */
+  /** 用户角色id一个用户绑定了多个角色时以RoleIdList为准 */
   RoleId?: number;
+  /** 用户角色id列表 */
+  RoleIdList?: number;
   /** 所属技能组列表 */
   SkillGroupList?: SkillGroupItem[];
   /** 最后修改时间 */
@@ -794,6 +796,14 @@ declare interface TelCdrInfo {
   VoicemailRecordURL?: string[];
   /** 通话中语音留言ASR文本信息地址 */
   VoicemailAsrURL?: string[];
+}
+
+/** 时间范围，24 小时制，格式为 09:00:00 */
+declare interface TimeRange {
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
 }
 
 /** 上传音频文件信息 */
@@ -971,8 +981,8 @@ declare interface CreateAutoCalloutTaskRequest {
   Callees: string[];
   /** 主叫号码列表 */
   Callers: string[];
-  /** 呼叫使用的Ivr */
-  IvrId: number;
+  /** 呼叫使用的 IVR Id，不填时需要填写 AIAgentId */
+  IvrId?: number;
   /** 任务名 */
   Name?: string;
   /** 任务描述 */
@@ -987,6 +997,12 @@ declare interface CreateAutoCalloutTaskRequest {
   UUI?: string;
   /** 被叫属性 */
   CalleeAttributes?: CalleeAttribute[];
+  /** IANA 时区名称，参考 https://datatracker.ietf.org/doc/html/draft-ietf-netmod-iana-timezones */
+  TimeZone?: string;
+  /** 可用时间段 */
+  AvailableTime?: TimeRange[];
+  /** 智能体 ID，不填写时需要填写 IvrId */
+  AIAgentId?: number;
 }
 
 declare interface CreateAutoCalloutTaskResponse {
@@ -1161,6 +1177,10 @@ declare interface CreatePredictiveDialingCampaignRequest {
   UUI?: string;
   /** 被叫属性 */
   CalleeAttributes?: CalleeAttribute[];
+  /** IANA 时区名称，参考 https://datatracker.ietf.org/doc/html/draft-ietf-netmod-iana-timezones */
+  TimeZone?: string;
+  /** 可用时间段 */
+  AvailableTime?: TimeRange[];
 }
 
 declare interface CreatePredictiveDialingCampaignResponse {

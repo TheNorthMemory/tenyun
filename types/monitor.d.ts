@@ -317,6 +317,12 @@ declare namespace V20180724 {
     TagOperation?: string | null;
     /** 通知模板绑定内容模板信息 */
     NoticeTmplBindInfos?: NoticeContentTmplBindInfo[];
+    /** 模板通知的等级 */
+    HierarchicalNotices?: AlarmHierarchicalNotice[] | null;
+    /** 通知模板绑定内容模板信息，同NoticeTmplBindInfos */
+    NoticeContentTmplBindInfos?: NoticeContentTmplBindInfo[] | null;
+    /** 预设配置id */
+    PredefinedConfigID?: string | null;
   }
 
   /** 告警策略指标触发条件 */
@@ -2461,6 +2467,8 @@ declare namespace V20180724 {
     EndTime?: number | null;
     /** 通知周期 1-7表示周一到周日 */
     Weekday?: number[] | null;
+    /** 组名 */
+    GroupMembers?: string | null;
   }
 
   /** 告警通知模板 - 用户通知详情 */
@@ -3540,7 +3548,7 @@ declare namespace V20180724 {
     MonitorTypes?: string[];
     /** 根据命名空间过滤，不同策略类型的值详见[策略类型列表](https://cloud.tencent.com/document/product/248/50397)当Dimension不为空时，该项为必填项 */
     Namespaces?: string[];
-    /** 告警对象列表，JSON 字符串。外层数组，对应多个实例，内层为对象的维度。例如“云服务器-基础监控”可写为：`[ {"Dimensions": {"unInstanceId": "ins-qr8d555g"}}, {"Dimensions": {"unInstanceId": "ins-qr8d555h"}} ]`具体也可以参考下方的示例 2。不同云产品参数示例详见 [维度信息Dimensions列表](https://cloud.tencent.com/document/product/248/50397)注意：如果NeedCorrespondence传入1，即需要返回策略与实例对应关系，请传入不多于20个告警对象维度，否则容易请求超时 */
+    /** 告警对象列表，JSON 字符串。外层数组，对应多个实例，内层为对象的维度。例如“云服务器-基础监控”可写为：`[[{"name":"unInstanceId","value":"ins-qr888845g"}]]`具体也可以参考下方的示例 2。不同云产品参数示例详见 [维度信息Dimensions列表](https://cloud.tencent.com/document/product/248/50397)注意：如果NeedCorrespondence传入1，即需要返回策略与实例对应关系，请传入不多于20个告警对象维度，否则容易请求超时 */
     Dimensions?: string;
     /** 根据接收人搜索，可以使用“访问管理”的 [拉取子用户 ListUsers](https://cloud.tencent.com/document/product/598/34587) 接口获取用户列表 或 [查询子用户 GetUser](https://cloud.tencent.com/document/product/598/34590) 接口查询子用户详情，此处填入返回结果中的 `Uid` 字段 */
     ReceiverUids?: number[];
@@ -3582,6 +3590,8 @@ declare namespace V20180724 {
     ReceiverOnCallFormIDs?: string[];
     /** 通知内容模板ID筛选 */
     NoticeContentTmplIDs?: string[];
+    /** 是否为预设策略，1是，0否 */
+    IsPredefined?: number;
   }
 
   interface DescribeAlarmPoliciesResponse {

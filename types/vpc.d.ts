@@ -4489,6 +4489,8 @@ declare interface CreateVpcEndPointRequest {
   SecurityGroupId?: string;
   /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
   Tags?: Tag[];
+  /** 协议类型，支持 Ipv4，Ipv6，默认 Ipv4 */
+  IpAddressType?: string;
 }
 
 declare interface CreateVpcEndPointResponse {
@@ -4513,6 +4515,8 @@ declare interface CreateVpcEndPointServiceRequest {
   ServiceType?: string;
   /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
   Tags?: Tag[];
+  /** 协议类型，支持 Ipv4，Ipv6，默认 Ipv4。 */
+  IpAddressType?: string;
 }
 
 declare interface CreateVpcEndPointServiceResponse {
@@ -5213,6 +5217,8 @@ declare interface DeleteTrafficPackagesResponse {
 declare interface DeleteVpcEndPointRequest {
   /** 终端节点ID。 */
   EndPointId: string;
+  /** 协议类型，支持 Ipv4，Ipv6，默认 Ipv4。 */
+  IpAddressType?: string;
 }
 
 declare interface DeleteVpcEndPointResponse {
@@ -5223,6 +5229,8 @@ declare interface DeleteVpcEndPointResponse {
 declare interface DeleteVpcEndPointServiceRequest {
   /** 终端节点ID。 */
   EndPointServiceId: string;
+  /** 协议类型，支持 Ipv4，Ipv6，默认 Ipv4。 */
+  IpAddressType?: string;
 }
 
 declare interface DeleteVpcEndPointServiceResponse {
@@ -7067,6 +7075,8 @@ declare interface DescribeVpcEndPointRequest {
   Limit?: number;
   /** 终端节点ID列表。 */
   EndPointId?: string[];
+  /** 协议类型，支持 Ipv4，Ipv6，默认 Ipv4。 */
+  IpAddressType?: string;
 }
 
 declare interface DescribeVpcEndPointResponse {
@@ -7089,6 +7099,8 @@ declare interface DescribeVpcEndPointServiceRequest {
   EndPointServiceIds?: string[];
   /** 不支持同时传入参数 Filters 。 列出授权给当前账号的终端节点服务信息。可以配合EndPointServiceIds参数进行过滤，哪些终端节点服务授权了该账户。 */
   IsListAuthorizedEndPointService?: boolean;
+  /** 协议类型，支持 Ipv4，Ipv6，默认 Ipv4。 */
+  IpAddressType?: string;
 }
 
 declare interface DescribeVpcEndPointServiceResponse {
@@ -7701,6 +7713,8 @@ declare interface EnableVpcEndPointConnectRequest {
   EndPointId: string[];
   /** 是否接受终端节点连接请求。 true：自动接受。 false：不自动接受。 */
   AcceptFlag: boolean;
+  /** 协议类型，支持 Ipv4，Ipv6，默认 Ipv4。 */
+  IpAddressType?: string;
 }
 
 declare interface EnableVpcEndPointConnectResponse {
@@ -8737,6 +8751,8 @@ declare interface ModifyVpcEndPointAttributeRequest {
   EndPointName?: string;
   /** 安全组ID列表。 */
   SecurityGroupIds?: string[];
+  /** 协议类型，支持 Ipv4，Ipv6，默认 Ipv4。 */
+  IpAddressType?: string;
 }
 
 declare interface ModifyVpcEndPointAttributeResponse {
@@ -8755,6 +8771,8 @@ declare interface ModifyVpcEndPointServiceAttributeRequest {
   AutoAcceptFlag?: boolean;
   /** 后端服务的ID，比如lb-xxx。 */
   ServiceInstanceId?: string;
+  /** 协议类型，支持 Ipv4，Ipv6，默认 Ipv4。 */
+  IpAddressType?: string;
 }
 
 declare interface ModifyVpcEndPointServiceAttributeResponse {

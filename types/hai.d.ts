@@ -35,49 +35,49 @@ declare interface Filter {
 /** 实例信息 */
 declare interface Instance {
   /** 实例id */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 实例名称 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 实例状态：PENDING：表示创建中LAUNCH_FAILED：表示创建失败RUNNING：表示运行中ARREARS：表示待回收STOPPED_NO_CHARGE：表示关机不收费TERMINATING：表示销毁中TERMINATED：表示已销毁 */
-  InstanceState?: string | null;
+  InstanceState?: string;
   /** 应用名称 */
-  ApplicationName?: string | null;
+  ApplicationName?: string;
   /** 算力套餐名称 */
-  BundleName?: string | null;
+  BundleName?: string;
   /** 实例所包含的GPU卡数 */
-  GPUCount?: number | null;
+  GPUCount?: number;
   /** 算力 */
-  GPUPerformance?: string | null;
+  GPUPerformance?: string;
   /** 显存 */
-  GPUMemory?: string | null;
+  GPUMemory?: string;
   /** CPU核数 */
-  CPU?: string | null;
+  CPU?: string;
   /** 内存 */
-  Memory?: string | null;
+  Memory?: string;
   /** 系统盘数据 */
-  SystemDisk?: SystemDisk | null;
+  SystemDisk?: SystemDisk;
   /** 内网ip地址 */
-  PrivateIpAddresses?: string[] | null;
+  PrivateIpAddresses?: string[];
   /** 公网ip地址 */
-  PublicIpAddresses?: string[] | null;
+  PublicIpAddresses?: string[];
   /** 安全组ID */
-  SecurityGroupIds?: string[] | null;
+  SecurityGroupIds?: string[];
   /** 实例最新操作 */
-  LatestOperation?: string | null;
+  LatestOperation?: string;
   /** 实例最新操作状态：SUCCESS：表示操作成功OPERATING：表示操作执行中FAILED：表示操作失败 */
-  LatestOperationState?: string | null;
+  LatestOperationState?: string;
   /** 实例创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 公网出带宽上限，默认10Mbps */
-  MaxOutBandwidth?: string | null;
+  MaxOutBandwidth?: string;
   /** 每月免费流量，默认500G */
-  MaxFreeTraffic?: string | null;
+  MaxFreeTraffic?: string;
   /** 应用配置环境 */
-  ConfigurationEnvironment?: string | null;
+  ConfigurationEnvironment?: string;
   /** 实例包含的登录服务详情 */
-  LoginServices?: LoginService[] | null;
+  LoginServices?: LoginService[];
   /** 应用服务的操作系统类型 */
-  OSType?: string | null;
+  OSType?: string;
 }
 
 /** 实例预付费入参 */
@@ -119,7 +119,7 @@ declare interface ItemPriceDetail {
 /** 登录服务详情 */
 declare interface LoginService {
   /** 登录方式名称 */
-  ServiceName?: string | null;
+  ServiceName?: string;
 }
 
 /** 某服务的登录配置 */
@@ -273,9 +273,9 @@ declare interface DescribeInstancesRequest {
 
 declare interface DescribeInstancesResponse {
   /** 实例总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 分页实例详情 */
-  InstanceSet?: Instance[] | null;
+  InstanceSet?: Instance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -333,7 +333,7 @@ declare interface DescribeServiceLoginSettingsRequest {
 
 declare interface DescribeServiceLoginSettingsResponse {
   /** 服务登录配置详情 */
-  LoginSettings?: LoginSetting[] | null;
+  LoginSettings?: LoginSetting[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

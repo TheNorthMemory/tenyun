@@ -93,7 +93,7 @@ declare interface MetricData {
   /** 表数据 */
   DataSet?: DatePoint[];
   /** 查询范围内的请求总量 */
-  MetricCount?: number | null;
+  MetricCount?: number;
 }
 
 /** 私有域解析账号 */
@@ -121,7 +121,7 @@ declare interface PrivateZone {
   /** 记录数 */
   RecordCount?: number;
   /** 备注 */
-  Remark?: string | null;
+  Remark?: string;
   /** 绑定的Vpc列表 */
   VpcSet?: VpcInfo[];
   /** 私有域绑定VPC状态，未关联vpc：SUSPEND，已关联VPC：ENABLED，关联VPC失败：FAILED */
@@ -131,21 +131,21 @@ declare interface PrivateZone {
   /** 标签键值对集合 */
   Tags?: TagInfo[];
   /** 绑定的关联账号的vpc列表 */
-  AccountVpcSet?: AccountVpcInfoOutput[] | null;
+  AccountVpcSet?: AccountVpcInfoOutput[];
   /** 是否自定义TLD */
-  IsCustomTld?: boolean | null;
+  IsCustomTld?: boolean;
   /** CNAME加速状态：开通：ENABLED, 关闭，DISABLED */
   CnameSpeedupStatus?: string;
   /** 转发规则名称 */
-  ForwardRuleName?: string | null;
+  ForwardRuleName?: string;
   /** 转发规则类型：云上到云下，DOWN；云下到云上，UP，目前只支持DOWN */
-  ForwardRuleType?: string | null;
+  ForwardRuleType?: string;
   /** 转发的地址 */
-  ForwardAddress?: string | null;
+  ForwardAddress?: string;
   /** 终端节点名称 */
   EndPointName?: string | null;
   /** 已删除的vpc */
-  DeletedVpcSet?: VpcInfo[] | null;
+  DeletedVpcSet?: VpcInfo[];
 }
 
 /** 私有域信息 */
@@ -163,7 +163,7 @@ declare interface PrivateZoneRecord {
   /** 记录缓存时间，数值越小生效越快，取值1-86400s, 默认 600 */
   TTL?: number;
   /** MX优先级：记录类型为MX时必填。取值范围：5,10,15,20,30,40,50 */
-  MX?: number | null;
+  MX?: number;
   /** 记录状态：ENABLED */
   Status?: string;
   /** 记录权重，值为1-100 */
@@ -175,9 +175,9 @@ declare interface PrivateZoneRecord {
   /** 附加信息 */
   Extra?: string | null;
   /** 0暂停，1启用 */
-  Enabled?: number | null;
+  Enabled?: number;
   /** 备注 */
-  Remark?: string | null;
+  Remark?: string;
 }
 
 /** 标签 */

@@ -36,25 +36,25 @@ declare namespace V20180717 {
   /** AI 智能分析模板详情 */
   interface AIAnalysisTemplateItem {
     /** 智能分析模板唯一标识。 */
-    Definition: number;
+    Definition?: number;
     /** 智能分析模板名称。 */
-    Name: string;
+    Name?: string;
     /** 智能分析模板描述信息。 */
-    Comment: string;
+    Comment?: string;
     /** 智能分类任务控制参数。 */
-    ClassificationConfigure: ClassificationConfigureInfo | null;
+    ClassificationConfigure?: ClassificationConfigureInfo;
     /** 智能标签任务控制参数。 */
-    TagConfigure: TagConfigureInfo | null;
+    TagConfigure?: TagConfigureInfo;
     /** 智能封面任务控制参数。 */
-    CoverConfigure: CoverConfigureInfo | null;
+    CoverConfigure?: CoverConfigureInfo;
     /** 智能按帧标签任务控制参数。 */
-    FrameTagConfigure: FrameTagConfigureInfo | null;
+    FrameTagConfigure?: FrameTagConfigureInfo;
     /** 智能精彩集锦任务控制参数。 */
-    HighlightConfigure: HighlightsConfigureInfo;
+    HighlightConfigure?: HighlightsConfigureInfo;
     /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-    CreateTime: string;
+    CreateTime?: string;
     /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-    UpdateTime: string;
+    UpdateTime?: string;
   }
 
   /** 视频内容识别模板详情 */
@@ -68,23 +68,23 @@ declare namespace V20180717 {
     /** 模板类型，取值：Preset：系统预置模板；Custom：用户自定义模板。 */
     Type?: string;
     /** 头尾识别控制参数。 */
-    HeadTailConfigure?: HeadTailConfigureInfo | null;
+    HeadTailConfigure?: HeadTailConfigureInfo;
     /** 拆条识别控制参数。 */
-    SegmentConfigure?: SegmentConfigureInfo | null;
+    SegmentConfigure?: SegmentConfigureInfo;
     /** 人脸识别控制参数。 */
-    FaceConfigure?: FaceConfigureInfo | null;
+    FaceConfigure?: FaceConfigureInfo;
     /** 文本全文识别控制参数。 */
-    OcrFullTextConfigure?: OcrFullTextConfigureInfo | null;
+    OcrFullTextConfigure?: OcrFullTextConfigureInfo;
     /** 文本关键词识别控制参数。 */
-    OcrWordsConfigure?: OcrWordsConfigureInfo | null;
+    OcrWordsConfigure?: OcrWordsConfigureInfo;
     /** 语音全文识别控制参数。注意：本参数已不再维护，推荐使用 AsrTranslateConfigure 参数发起语音翻译识别（当 DstLanguage 不填或填空字符串时，则不进行翻译，计费项和语音全文识别一致）。 */
-    AsrFullTextConfigure?: AsrFullTextConfigureInfo | null;
+    AsrFullTextConfigure?: AsrFullTextConfigureInfo;
     /** 语音关键词识别控制参数。 */
-    AsrWordsConfigure?: AsrWordsConfigureInfo | null;
+    AsrWordsConfigure?: AsrWordsConfigureInfo;
     /** 语音翻译识别控制参数。 */
-    AsrTranslateConfigure?: AsrTranslateConfigureInfo | null;
+    AsrTranslateConfigure?: AsrTranslateConfigureInfo;
     /** 物体识别控制参数。 */
-    ObjectConfigure?: ObjectConfigureInfo | null;
+    ObjectConfigure?: ObjectConfigureInfo;
     /** 截图时间间隔，单位：秒。 */
     ScreenshotInterval?: number;
     /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
@@ -200,23 +200,23 @@ declare namespace V20180717 {
   /** 智能分析结果 */
   interface AiAnalysisResult {
     /** 任务的类型，可以取的值有：Classification：智能分类Cover：智能封面Tag：智能标签FrameTag：智能按帧标签Highlight：智能精彩集锦 */
-    Type: string;
+    Type?: string;
     /** 视频内容分析智能分类任务的查询结果，当任务类型为 Classification 时有效。 */
-    ClassificationTask: AiAnalysisTaskClassificationResult | null;
+    ClassificationTask?: AiAnalysisTaskClassificationResult;
     /** 视频内容分析智能封面任务的查询结果，当任务类型为 Cover 时有效。 */
-    CoverTask: AiAnalysisTaskCoverResult | null;
+    CoverTask?: AiAnalysisTaskCoverResult;
     /** 视频内容分析智能标签任务的查询结果，当任务类型为 Tag 时有效。 */
-    TagTask: AiAnalysisTaskTagResult | null;
+    TagTask?: AiAnalysisTaskTagResult;
     /** 视频内容分析智能按帧标签任务的查询结果，当任务类型为 FrameTag 时有效。 */
-    FrameTagTask: AiAnalysisTaskFrameTagResult | null;
+    FrameTagTask?: AiAnalysisTaskFrameTagResult;
     /** 视频内容分析智能精彩集锦任务的查询结果，当任务类型为 Highlight 时有效。 */
-    HighlightTask: AiAnalysisTaskHighlightResult | null;
+    HighlightTask?: AiAnalysisTaskHighlightResult;
   }
 
   /** 智能分类任务输入类型 */
   interface AiAnalysisTaskClassificationInput {
     /** 视频智能分类模板 ID。 */
-    Definition: number;
+    Definition?: number;
   }
 
   /** 智能分类结果信息 */
@@ -242,7 +242,7 @@ declare namespace V20180717 {
     /** 智能分类任务输入。 */
     Input?: AiAnalysisTaskClassificationInput;
     /** 智能分类任务输出。 */
-    Output?: AiAnalysisTaskClassificationOutput | null;
+    Output?: AiAnalysisTaskClassificationOutput;
     /** 智能分类任务进度，取值范围 [0-100] 。 */
     Progress?: number;
     /** 智能分类任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
@@ -254,7 +254,7 @@ declare namespace V20180717 {
   /** 智能分类任务输入类型 */
   interface AiAnalysisTaskCoverInput {
     /** 视频智能封面模板 ID。 */
-    Definition: number;
+    Definition?: number;
   }
 
   /** 智能封面结果信息 */
@@ -280,7 +280,7 @@ declare namespace V20180717 {
     /** 智能封面任务输入。 */
     Input?: AiAnalysisTaskCoverInput;
     /** 智能封面任务输出。 */
-    Output?: AiAnalysisTaskCoverOutput | null;
+    Output?: AiAnalysisTaskCoverOutput;
     /** 智能封面任务进度，取值范围 [0-100] 。 */
     Progress?: number;
     /** 智能封面任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
@@ -292,7 +292,7 @@ declare namespace V20180717 {
   /** 智能按帧标签任务输入类型 */
   interface AiAnalysisTaskFrameTagInput {
     /** 视频智能按帧标签模板 ID。 */
-    Definition: number;
+    Definition?: number;
   }
 
   /** 智能按帧标签结果信息 */
@@ -318,7 +318,7 @@ declare namespace V20180717 {
     /** 智能按帧标签任务输入。 */
     Input?: AiAnalysisTaskFrameTagInput;
     /** 智能按帧标签任务输出。 */
-    Output?: AiAnalysisTaskFrameTagOutput | null;
+    Output?: AiAnalysisTaskFrameTagOutput;
     /** 智能按帧标签任务进度，取值范围 [0-100] 。 */
     Progress?: number;
     /** 智能按帧标签任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
@@ -330,7 +330,7 @@ declare namespace V20180717 {
   /** 智能精彩片段任务输入类型 */
   interface AiAnalysisTaskHighlightInput {
     /** 视频智能精彩片段模板 ID。 */
-    Definition: number;
+    Definition?: number;
   }
 
   /** 智能精彩片段结果信息 */
@@ -356,7 +356,7 @@ declare namespace V20180717 {
     /** 智能精彩片段任务输入。 */
     Input?: AiAnalysisTaskHighlightInput;
     /** 智能精彩片段任务输出。 */
-    Output?: AiAnalysisTaskHighlightOutput | null;
+    Output?: AiAnalysisTaskHighlightOutput;
     /** 智能精彩片段任务进度，取值范围 [0-100] 。 */
     Progress?: number;
     /** 智能精彩片段任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
@@ -374,7 +374,7 @@ declare namespace V20180717 {
   /** 智能标签任务输入类型 */
   interface AiAnalysisTaskTagInput {
     /** 视频智能标签模板 ID。 */
-    Definition: number;
+    Definition?: number;
   }
 
   /** 智能标签结果信息 */
@@ -400,7 +400,7 @@ declare namespace V20180717 {
     /** 智能标签任务输入。 */
     Input?: AiAnalysisTaskTagInput;
     /** 智能标签任务输出。 */
-    Output?: AiAnalysisTaskTagOutput | null;
+    Output?: AiAnalysisTaskTagOutput;
     /** 智能标签任务进度，取值范围 [0-100] 。 */
     Progress?: number;
     /** 智能标签任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
@@ -446,23 +446,23 @@ declare namespace V20180717 {
     /** 任务的类型，取值范围：FaceRecognition：人脸识别，AsrWordsRecognition：语音关键词识别，OcrWordsRecognition：文本关键词识别，AsrFullTextRecognition：语音全文识别，AsrTranslateRecognition：语音翻译识别，OcrFullTextRecognition：文本全文识别，HeadTailRecognition：视频片头片尾识别，ObjectRecognition：物体识别。 */
     Type?: string;
     /** 视频片头片尾识别结果，当 Type 为 HeadTailRecognition 时有效。 */
-    HeadTailTask?: AiRecognitionTaskHeadTailResult | null;
+    HeadTailTask?: AiRecognitionTaskHeadTailResult;
     /** 视频拆条识别结果，当 Type 为 SegmentRecognition 时有效。 */
-    SegmentTask?: AiRecognitionTaskSegmentResult | null;
+    SegmentTask?: AiRecognitionTaskSegmentResult;
     /** 人脸识别结果，当 Type 为 FaceRecognition 时有效。 */
-    FaceTask?: AiRecognitionTaskFaceResult | null;
+    FaceTask?: AiRecognitionTaskFaceResult;
     /** 语音关键词识别结果，当 Type 为 AsrWordsRecognition 时有效。 */
-    AsrWordsTask?: AiRecognitionTaskAsrWordsResult | null;
+    AsrWordsTask?: AiRecognitionTaskAsrWordsResult;
     /** 语音全文识别结果，当 Type 为 AsrFullTextRecognition 时有效。 */
-    AsrFullTextTask?: AiRecognitionTaskAsrFullTextResult | null;
+    AsrFullTextTask?: AiRecognitionTaskAsrFullTextResult;
     /** 语音翻译结果，当 Type 为 AsrTranslateRecognition 时有效。 */
-    AsrTranslateTask?: AiRecognitionTaskAsrTranslateResult | null;
+    AsrTranslateTask?: AiRecognitionTaskAsrTranslateResult;
     /** 文本关键词识别结果，当 Type 为 OcrWordsRecognition 时有效。 */
-    OcrWordsTask?: AiRecognitionTaskOcrWordsResult | null;
+    OcrWordsTask?: AiRecognitionTaskOcrWordsResult;
     /** 文本全文识别结果，当 Type 为 OcrFullTextRecognition 时有效。 */
-    OcrFullTextTask?: AiRecognitionTaskOcrFullTextResult | null;
+    OcrFullTextTask?: AiRecognitionTaskOcrFullTextResult;
     /** 物体识别结果，当 Type 为 ObjectRecognition 时有效。 */
-    ObjectTask?: AiRecognitionTaskObjectResult | null;
+    ObjectTask?: AiRecognitionTaskObjectResult;
   }
 
   /** 语音全文识别结果。 */
@@ -478,7 +478,7 @@ declare namespace V20180717 {
     /** 语音全文识别任务输入信息。 */
     Input?: AiRecognitionTaskAsrFullTextResultInput;
     /** 语音全文识别任务输出信息。 */
-    Output?: AiRecognitionTaskAsrFullTextResultOutput | null;
+    Output?: AiRecognitionTaskAsrFullTextResultOutput;
     /** 语音全文识别任务进度，取值范围 [0-100] 。 */
     Progress?: number;
     /** 语音全文识别任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
@@ -490,7 +490,7 @@ declare namespace V20180717 {
   /** 语音全文识别的输入。 */
   interface AiRecognitionTaskAsrFullTextResultInput {
     /** 语音全文识别模板 ID。 */
-    Definition: number;
+    Definition?: number;
   }
 
   /** 语音全文识别结果。 */
@@ -524,13 +524,13 @@ declare namespace V20180717 {
   /** 语音全文识别片段。 */
   interface AiRecognitionTaskAsrFullTextSegmentItem {
     /** 识别片段置信度。取值：0~100。 */
-    Confidence: number;
+    Confidence?: number;
     /** 识别片段起始的偏移时间，单位：秒。 */
-    StartTimeOffset: number;
+    StartTimeOffset?: number;
     /** 识别片段终止的偏移时间，单位：秒。 */
-    EndTimeOffset: number;
+    EndTimeOffset?: number;
     /** 识别文本。 */
-    Text: string;
+    Text?: string;
   }
 
   /** 语音翻译结果。 */
@@ -546,7 +546,7 @@ declare namespace V20180717 {
     /** 语音翻译任务输入信息。 */
     Input?: AiRecognitionTaskAsrTranslateResultInput;
     /** 语音翻译任务输出信息。 */
-    Output?: AiRecognitionTaskAsrTranslateResultOutput | null;
+    Output?: AiRecognitionTaskAsrTranslateResultOutput;
     /** 语音翻译任务进度，取值范围 [0-100] 。 */
     Progress?: number;
     /** 语音翻译任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
@@ -600,7 +600,7 @@ declare namespace V20180717 {
     /** 语音关键词识别任务输入信息。 */
     Input?: AiRecognitionTaskAsrWordsResultInput;
     /** 语音关键词识别任务输出信息。 */
-    Output?: AiRecognitionTaskAsrWordsResultOutput | null;
+    Output?: AiRecognitionTaskAsrWordsResultOutput;
     /** 语音关键词识别任务进度，取值范围 [0-100] 。 */
     Progress?: number;
     /** 语音关键词识别任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
@@ -612,15 +612,15 @@ declare namespace V20180717 {
   /** 语音关键词识别输入。 */
   interface AiRecognitionTaskAsrWordsResultInput {
     /** 语音关键词识别模板 ID。 */
-    Definition: number;
+    Definition?: number;
   }
 
   /** 语音关键词识别结果。 */
   interface AiRecognitionTaskAsrWordsResultItem {
     /** 语音关键词。 */
-    Word: string;
+    Word?: string;
     /** 语音关键词出现的时间片段列表。 */
-    SegmentSet: AiRecognitionTaskAsrWordsSegmentItem[];
+    SegmentSet?: AiRecognitionTaskAsrWordsSegmentItem[];
   }
 
   /** 语音关键词识别输出。 */
@@ -636,11 +636,11 @@ declare namespace V20180717 {
   /** 语音识别片段。 */
   interface AiRecognitionTaskAsrWordsSegmentItem {
     /** 识别片段起始的偏移时间，单位：秒。 */
-    StartTimeOffset: number;
+    StartTimeOffset?: number;
     /** 识别片段终止的偏移时间，单位：秒。 */
-    EndTimeOffset: number;
+    EndTimeOffset?: number;
     /** 识别片段置信度。取值：0~100。 */
-    Confidence: number;
+    Confidence?: number;
   }
 
   /** 人脸识别结果。 */
@@ -656,7 +656,7 @@ declare namespace V20180717 {
     /** 人脸识别任务输入信息。 */
     Input?: AiRecognitionTaskFaceResultInput;
     /** 人脸识别任务输出信息。 */
-    Output?: AiRecognitionTaskFaceResultOutput | null;
+    Output?: AiRecognitionTaskFaceResultOutput;
     /** 人脸识别任务进度，取值范围 [0-100] 。 */
     Progress?: number;
     /** 人脸识别任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
@@ -668,19 +668,19 @@ declare namespace V20180717 {
   /** 人脸识别输入。 */
   interface AiRecognitionTaskFaceResultInput {
     /** 人脸识别模板 ID。 */
-    Definition: number;
+    Definition?: number;
   }
 
   /** 人脸识别结果 */
   interface AiRecognitionTaskFaceResultItem {
     /** 人物唯一标识 ID。 */
-    Id: string;
+    Id?: string;
     /** 人物库类型，表示识别出的人物来自哪个人物库：Default：默认人物库；UserDefine：用户自定义人物库。 */
-    Type: string;
+    Type?: string;
     /** 人物名称。 */
-    Name: string;
+    Name?: string;
     /** 人物出现的片段结果集。 */
-    SegmentSet: AiRecognitionTaskFaceSegmentItem[];
+    SegmentSet?: AiRecognitionTaskFaceSegmentItem[];
   }
 
   /** 智能人脸识别输出。 */
@@ -696,13 +696,13 @@ declare namespace V20180717 {
   /** 人脸识别结果片段 */
   interface AiRecognitionTaskFaceSegmentItem {
     /** 识别片段起始的偏移时间，单位：秒。 */
-    StartTimeOffset: number;
+    StartTimeOffset?: number;
     /** 识别片段终止的偏移时间，单位：秒。 */
-    EndTimeOffset: number;
+    EndTimeOffset?: number;
     /** 识别片段置信度。取值：0~100。 */
-    Confidence: number;
+    Confidence?: number;
     /** 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。 */
-    AreaCoordSet: number[];
+    AreaCoordSet?: number[];
   }
 
   /** 视频片头片尾识别结果。 */
@@ -718,7 +718,7 @@ declare namespace V20180717 {
     /** 视频片头片尾识别任务输入信息。 */
     Input?: AiRecognitionTaskHeadTailResultInput;
     /** 视频片头片尾识别任务输出信息。 */
-    Output?: AiRecognitionTaskHeadTailResultOutput | null;
+    Output?: AiRecognitionTaskHeadTailResultOutput;
     /** 视频片头片尾识别任务进度，取值范围 [0-100] 。 */
     Progress?: number;
     /** 视频片头片尾识别任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
@@ -730,19 +730,19 @@ declare namespace V20180717 {
   /** 视频片头片尾识别的输入。 */
   interface AiRecognitionTaskHeadTailResultInput {
     /** 视频片头片尾识别模板 ID。 */
-    Definition: number;
+    Definition?: number;
   }
 
   /** 视频片头片尾识别输出。 */
   interface AiRecognitionTaskHeadTailResultOutput {
     /** 片头识别置信度。取值：0~100。 */
-    HeadConfidence: number;
+    HeadConfidence?: number;
     /** 视频片头的结束时间点，单位：秒。 */
-    HeadTimeOffset: number;
+    HeadTimeOffset?: number;
     /** 片尾识别置信度。取值：0~100。 */
-    TailConfidence: number;
+    TailConfidence?: number;
     /** 视频片尾的开始时间点，单位：秒。 */
-    TailTimeOffset: number;
+    TailTimeOffset?: number;
   }
 
   /** 视频内容识别输入参数类型 */
@@ -764,7 +764,7 @@ declare namespace V20180717 {
     /** 物体识别任务输入信息。 */
     Input?: AiRecognitionTaskObjectResultInput;
     /** 物体识别任务输出信息。 */
-    Output?: AiRecognitionTaskObjectResultOutput | null;
+    Output?: AiRecognitionTaskObjectResultOutput;
     /** 物体识别任务进度，取值范围 [0-100] 。 */
     Progress?: number;
     /** 物体识别任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
@@ -776,7 +776,7 @@ declare namespace V20180717 {
   /** 物体识别任务输入类型。 */
   interface AiRecognitionTaskObjectResultInput {
     /** 物体识别模板 ID。 */
-    Definition: number;
+    Definition?: number;
   }
 
   /** 单个物体识别结果。 */
@@ -836,7 +836,7 @@ declare namespace V20180717 {
     /** 文本全文识别任务输入信息。 */
     Input?: AiRecognitionTaskOcrFullTextResultInput;
     /** 文本全文识别任务输出信息。 */
-    Output?: AiRecognitionTaskOcrFullTextResultOutput | null;
+    Output?: AiRecognitionTaskOcrFullTextResultOutput;
     /** 文本全文识别任务进度，取值范围 [0-100] 。 */
     Progress?: number;
     /** 文本全文识别任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
@@ -848,7 +848,7 @@ declare namespace V20180717 {
   /** 文本全文识别输入。 */
   interface AiRecognitionTaskOcrFullTextResultInput {
     /** 文本全文识别模板 ID。 */
-    Definition: number;
+    Definition?: number;
   }
 
   /** 文本全文识别输出。 */
@@ -864,21 +864,21 @@ declare namespace V20180717 {
   /** 文本全文识别片段。 */
   interface AiRecognitionTaskOcrFullTextSegmentItem {
     /** 识别片段起始的偏移时间，单位：秒。 */
-    StartTimeOffset: number;
+    StartTimeOffset?: number;
     /** 识别片段终止的偏移时间，单位：秒。 */
-    EndTimeOffset: number;
+    EndTimeOffset?: number;
     /** 识别片段结果集。 */
-    TextSet: AiRecognitionTaskOcrFullTextSegmentTextItem[];
+    TextSet?: AiRecognitionTaskOcrFullTextSegmentTextItem[];
   }
 
   /** 文本全文识别片段。 */
   interface AiRecognitionTaskOcrFullTextSegmentTextItem {
     /** 识别片段置信度。取值：0~100。 */
-    Confidence: number;
+    Confidence?: number;
     /** 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。 */
-    AreaCoordSet: number[];
+    AreaCoordSet?: number[];
     /** 识别文本。 */
-    Text: string;
+    Text?: string;
   }
 
   /** 文本关键识别结果。 */
@@ -894,7 +894,7 @@ declare namespace V20180717 {
     /** 文本关键词识别任务输入信息。 */
     Input?: AiRecognitionTaskOcrWordsResultInput;
     /** 文本关键词识别任务输出信息。 */
-    Output?: AiRecognitionTaskOcrWordsResultOutput | null;
+    Output?: AiRecognitionTaskOcrWordsResultOutput;
     /** 文本关键词识别任务进度，取值范围 [0-100] 。 */
     Progress?: number;
     /** 文本关键词识别任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
@@ -906,15 +906,15 @@ declare namespace V20180717 {
   /** 文本关键词识别输入。 */
   interface AiRecognitionTaskOcrWordsResultInput {
     /** 文本关键词识别模板 ID。 */
-    Definition: number;
+    Definition?: number;
   }
 
   /** 文本关键词识别结果。 */
   interface AiRecognitionTaskOcrWordsResultItem {
     /** 文本关键词。 */
-    Word: string;
+    Word?: string;
     /** 文本关键出现的片段列表。 */
-    SegmentSet: AiRecognitionTaskOcrWordsSegmentItem[];
+    SegmentSet?: AiRecognitionTaskOcrWordsSegmentItem[];
   }
 
   /** 文本关键词识别输出。 */
@@ -930,13 +930,13 @@ declare namespace V20180717 {
   /** 文本识别片段。 */
   interface AiRecognitionTaskOcrWordsSegmentItem {
     /** 识别片段起始的偏移时间，单位：秒。 */
-    StartTimeOffset: number;
+    StartTimeOffset?: number;
     /** 识别片段终止的偏移时间，单位：秒。 */
-    EndTimeOffset: number;
+    EndTimeOffset?: number;
     /** 识别片段置信度。取值：0~100。 */
-    Confidence: number;
+    Confidence?: number;
     /** 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。 */
-    AreaCoordSet: number[];
+    AreaCoordSet?: number[];
   }
 
   /** 视频拆条结果。 */
@@ -950,9 +950,9 @@ declare namespace V20180717 {
     /** 错误信息。 */
     Message?: string;
     /** 视频拆条任务输入信息。 */
-    Input?: AiRecognitionTaskSegmentResultInput | null;
+    Input?: AiRecognitionTaskSegmentResultInput;
     /** 视频拆条任务输出信息。 */
-    Output?: AiRecognitionTaskSegmentResultOutput | null;
+    Output?: AiRecognitionTaskSegmentResultOutput;
     /** 视频拆条任务进度，取值范围 [0-100] 。 */
     Progress?: number;
     /** 视频拆条任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
@@ -964,7 +964,7 @@ declare namespace V20180717 {
   /** 视频拆条输入。 */
   interface AiRecognitionTaskSegmentResultInput {
     /** 视频拆条模板 ID。 */
-    Definition: number;
+    Definition?: number;
   }
 
   /** 视频拆条输出。 */
@@ -980,19 +980,19 @@ declare namespace V20180717 {
   /** 视频拆条片段。 */
   interface AiRecognitionTaskSegmentSegmentItem {
     /** 文件 ID。仅当处理的是点播文件并且拆条生成的子片段为点播文件时有效。 */
-    FileId: string;
+    FileId?: string;
     /** 视频拆条片段 Url。 */
-    SegmentUrl: string;
+    SegmentUrl?: string;
     /** 拆条片段置信度。取值：0~100。 */
-    Confidence: number;
+    Confidence?: number;
     /** 拆条片段起始的偏移时间，单位：秒。 */
-    StartTimeOffset: number;
+    StartTimeOffset?: number;
     /** 拆条片段终止的偏移时间，单位：秒。 */
-    EndTimeOffset: number;
+    EndTimeOffset?: number;
     /** 拆条封面图片 Url。 */
-    CovImgUrl: string;
+    CovImgUrl?: string;
     /** 特殊字段，请忽略。 */
-    SpecialInfo: string;
+    SpecialInfo?: string;
   }
 
   /** 音视频审核 Asr 文字涉及令人不适宜的信息、违规任务输入参数类型 */
@@ -1190,7 +1190,7 @@ declare namespace V20180717 {
     /** 音视频审核 Ocr 文字涉及令人不适宜信息的任务输入。 */
     Input?: AiReviewPoliticalOcrTaskInput;
     /** 音视频审核 Ocr 文字涉及令人不适宜信息的任务输出。 */
-    Output?: AiReviewPoliticalOcrTaskOutput | null;
+    Output?: AiReviewPoliticalOcrTaskOutput;
     /** 音视频审核 Ocr 文字涉及令人不适宜信息的任务进度，取值范围 [0-100] 。 */
     Progress?: number;
   }
@@ -1208,7 +1208,7 @@ declare namespace V20180717 {
     /** 音视频审核涉及令人不适宜信息的任务输入。 */
     Input?: AiReviewPoliticalTaskInput;
     /** 音视频审核涉及令人不适宜信息的任务输出。 */
-    Output?: AiReviewPoliticalTaskOutput | null;
+    Output?: AiReviewPoliticalTaskOutput;
     /** 音视频审核涉及令人不适宜信息的任务进度，取值范围 [0-100] 。 */
     Progress?: number;
   }
@@ -1226,7 +1226,7 @@ declare namespace V20180717 {
     /** 音视频审核 Asr 文字涉及令人反感的信息的任务输入。 */
     Input?: AiReviewPornAsrTaskInput;
     /** 音视频审核 Asr 文字涉及令人反感的信息的任务输出。 */
-    Output?: AiReviewPornAsrTaskOutput | null;
+    Output?: AiReviewPornAsrTaskOutput;
     /** 音视频审核 Asr 文字涉及令人反感的信息的任务进度，取值范围 [0-100] 。 */
     Progress?: number;
   }
@@ -1244,7 +1244,7 @@ declare namespace V20180717 {
     /** 音视频审核 Ocr 文字涉及令人反感的信息的任务输入。 */
     Input?: AiReviewPornOcrTaskInput;
     /** Ocr 文字音视频审核涉及令人反感的信息的任务输出。 */
-    Output?: AiReviewPornOcrTaskOutput | null;
+    Output?: AiReviewPornOcrTaskOutput;
     /** Ocr 文字音视频审核涉及令人反感的信息的任务进度，取值范围 [0-100] 。 */
     Progress?: number;
   }
@@ -1262,7 +1262,7 @@ declare namespace V20180717 {
     /** 音视频审核涉及令人反感的信息的任务输入。 */
     Input?: AiReviewPornTaskInput;
     /** 音视频审核涉及令人反感的信息的任务输出。 */
-    Output?: AiReviewPornTaskOutput | null;
+    Output?: AiReviewPornTaskOutput;
     /** 音视频审核涉及令人反感的信息的任务进度，取值范围 [0-100] 。 */
     Progress?: number;
   }
@@ -1280,7 +1280,7 @@ declare namespace V20180717 {
     /** 音视频审核 Asr 文字鉴违禁任务输入。 */
     Input?: AiReviewProhibitedAsrTaskInput;
     /** 音视频审核 Asr 文字鉴违禁任务输出。 */
-    Output?: AiReviewProhibitedAsrTaskOutput | null;
+    Output?: AiReviewProhibitedAsrTaskOutput;
     /** 音视频审核 Asr 文字鉴违禁任务进度，取值范围 [0-100] 。 */
     Progress?: number;
   }
@@ -1298,7 +1298,7 @@ declare namespace V20180717 {
     /** 音视频审核 Ocr 文字鉴违禁任务输入。 */
     Input?: AiReviewProhibitedOcrTaskInput;
     /** 音视频审核 Ocr 文字鉴违禁任务输出。 */
-    Output?: AiReviewProhibitedOcrTaskOutput | null;
+    Output?: AiReviewProhibitedOcrTaskOutput;
     /** 音视频审核 Ocr 文字鉴违禁任务进度，取值范围 [0-100] 。 */
     Progress?: number;
   }
@@ -1316,7 +1316,7 @@ declare namespace V20180717 {
     /** 音视频审核 Ocr 文字涉及令人不安全的信息的任务输入。 */
     Input?: AiReviewTerrorismOcrTaskInput;
     /** 音视频审核 Ocr 文字涉及令人不安全的信息的任务输出。 */
-    Output?: AiReviewTerrorismOcrTaskOutput | null;
+    Output?: AiReviewTerrorismOcrTaskOutput;
     /** 音视频审核 Ocr 文字涉及令人不安全的信息的任务进度，取值范围 [0-100] 。 */
     Progress?: number;
   }
@@ -1334,7 +1334,7 @@ declare namespace V20180717 {
     /** 音视频审核涉及令人不安全的信息的任务输入。 */
     Input?: AiReviewTerrorismTaskInput;
     /** 音视频审核涉及令人不安全的信息的任务输出。 */
-    Output?: AiReviewTerrorismTaskOutput | null;
+    Output?: AiReviewTerrorismTaskOutput;
     /** 音视频审核涉及令人不安全的信息的任务进度，取值范围 [0-100] 。 */
     Progress?: number;
   }
@@ -1384,9 +1384,9 @@ declare namespace V20180717 {
   /** AI 样本管理，人脸信息。 */
   interface AiSampleFaceInfo {
     /** 人脸图片 ID。 */
-    FaceId: string;
+    FaceId?: string;
     /** 人脸图片地址。 */
-    Url: string;
+    Url?: string;
   }
 
   /** AI 样本管理，人脸数据操作。 */
@@ -1402,31 +1402,31 @@ declare namespace V20180717 {
   /** AI 样本管理，处理失败的人脸信息 */
   interface AiSampleFailFaceInfo {
     /** 对应入参 FaceContents 中错误图片下标，从 0 开始。 */
-    Index: number;
+    Index?: number;
     /** 错误码，取值：0：成功；其他：失败。 */
-    ErrCode: number;
+    ErrCode?: number;
     /** 错误描述。 */
-    Message: string;
+    Message?: string;
   }
 
   /** AI 样本管理，人物信息。 */
   interface AiSamplePerson {
     /** 人物 ID。 */
-    PersonId: string;
+    PersonId?: string;
     /** 人物名称。 */
-    Name: string;
+    Name?: string;
     /** 人物描述。 */
-    Description: string;
+    Description?: string;
     /** 人脸信息。 */
-    FaceInfoSet: AiSampleFaceInfo[];
+    FaceInfoSet?: AiSampleFaceInfo[];
     /** 人物标签。 */
-    TagSet: string[];
+    TagSet?: string[];
     /** 应用场景。 */
-    UsageSet: string[];
+    UsageSet?: string[];
     /** 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-    CreateTime: string;
+    CreateTime?: string;
     /** 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-    UpdateTime: string;
+    UpdateTime?: string;
   }
 
   /** AI 样本管理，标签操作。 */
@@ -1440,15 +1440,15 @@ declare namespace V20180717 {
   /** AI 样本管理，关键词输出信息。 */
   interface AiSampleWord {
     /** 关键词。 */
-    Keyword: string;
+    Keyword?: string;
     /** 关键词标签。 */
-    TagSet: string[];
+    TagSet?: string[];
     /** 关键词应用场景。 */
-    UsageSet: string[];
+    UsageSet?: string[];
     /** 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-    CreateTime: string;
+    CreateTime?: string;
     /** 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-    UpdateTime: string;
+    UpdateTime?: string;
   }
 
   /** AI 样本管理，关键词输入信息。 */
@@ -1732,25 +1732,25 @@ declare namespace V20180717 {
   /** 视频裁剪结果文件信息（2017 版） */
   interface ClipFileInfo2017 {
     /** 错误码0：成功；其他值：失败。 */
-    ErrCode: number;
+    ErrCode?: number;
     /** 错误描述。 */
-    Message: string;
+    Message?: string;
     /** 输出目标文件的文件 ID。 */
-    FileId: string;
+    FileId?: string;
     /** 输出目标文件的文件地址。 */
-    FileUrl: string;
+    FileUrl?: string;
     /** 输出目标文件的文件类型。 */
-    FileType: string;
+    FileType?: string;
   }
 
   /** 视频剪辑任务信息，该结构仅用于对 2017 版[视频剪辑](https://cloud.tencent.com/document/product/266/10156)接口发起的任务。 */
   interface ClipTask2017 {
     /** 视频剪辑任务 ID。 */
-    TaskId: string;
+    TaskId?: string;
     /** 视频剪辑任务源文件 ID。 */
-    SrcFileId: string;
+    SrcFileId?: string;
     /** 视频剪辑输出的文件信息。 */
-    FileInfo: ClipFileInfo2017;
+    FileInfo?: ClipFileInfo2017;
   }
 
   /** 色彩增强控制参数 */
@@ -1906,23 +1906,23 @@ declare namespace V20180717 {
   /** 视频拼接源文件信息（2017 版） */
   interface ConcatFileInfo2017 {
     /** 错误码0：成功；其他值：失败。 */
-    ErrCode: number;
+    ErrCode?: number;
     /** 错误信息。 */
-    Message: string;
+    Message?: string;
     /** 视频拼接源文件的 ID。 */
-    FileId: string;
+    FileId?: string;
     /** 视频拼接源文件的地址。 */
-    FileUrl: string;
+    FileUrl?: string;
     /** 视频拼接源文件的格式。 */
-    FileType: string;
+    FileType?: string;
   }
 
   /** 视频拼接任务信息，该结构仅用于对 2017 版[视频拼接](https://cloud.tencent.com/document/product/266/7821)接口发起的任务。 */
   interface ConcatTask2017 {
     /** 视频拼接任务 ID。 */
-    TaskId: string;
+    TaskId?: string;
     /** 视频拼接源文件信息。 */
-    FileInfoSet: ConcatFileInfo2017[];
+    FileInfoSet?: ConcatFileInfo2017[];
   }
 
   /** 图片Ocr 文字鉴别信息的任务结果类型 */
@@ -1964,15 +1964,15 @@ declare namespace V20180717 {
     /** 音视频审核模板描述信息，长度限制：256 个字符。 */
     Comment?: string;
     /** 鉴别涉及令人反感的信息的控制参数。 */
-    PornConfigure?: PornConfigureInfo | null;
+    PornConfigure?: PornConfigureInfo;
     /** 鉴别涉及令人不安全的信息的控制参数。 */
-    TerrorismConfigure?: TerrorismConfigureInfo | null;
+    TerrorismConfigure?: TerrorismConfigureInfo;
     /** 鉴别涉及令人不适宜的信息的控制参数。 */
-    PoliticalConfigure?: PoliticalConfigureInfo | null;
+    PoliticalConfigure?: PoliticalConfigureInfo;
     /** 违禁控制参数。违禁内容包括：谩骂；涉毒违法。 */
-    ProhibitedConfigure?: ProhibitedConfigureInfo | null;
+    ProhibitedConfigure?: ProhibitedConfigureInfo;
     /** 用户自定义音视频审核控制参数。 */
-    UserDefineConfigure?: UserDefineConfigureInfo | null;
+    UserDefineConfigure?: UserDefineConfigureInfo;
     /** 音视频审核结果是否进入音视频审核墙（对音视频审核结果进行人工复核）的开关。ON：是；OFF：否。 */
     ReviewWallSwitch?: string;
     /** 截帧间隔，单位为秒。当不填时，默认截帧间隔为 1 秒，最小值为 0.5 秒。 */
@@ -2004,7 +2004,7 @@ declare namespace V20180717 {
   /** 对视频截图做封面任务输出类型 */
   interface CoverBySnapshotTaskOutput {
     /** 封面 URL。 */
-    CoverUrl: string;
+    CoverUrl?: string;
   }
 
   /** 智能封面任务控制参数 */
@@ -2034,21 +2034,21 @@ declare namespace V20180717 {
   /** 视频截取雪碧图任务，该结构仅用于对 2017 版[截取雪碧图](https://cloud.tencent.com/document/product/266/8101)接口发起的任务。 */
   interface CreateImageSpriteTask2017 {
     /** 截图雪碧图任务 ID。 */
-    TaskId: string;
+    TaskId?: string;
     /** 错误码0：成功；其他值：失败。 */
-    ErrCode: number;
+    ErrCode?: number;
     /** 错误信息。 */
-    Message: string;
+    Message?: string;
     /** 截取雪碧图文件 ID。 */
-    FileId: string;
+    FileId?: string;
     /** 雪碧图规格，参见[雪碧图截图模板](https://cloud.tencent.com/document/product/266/33480)。 */
-    Definition: number;
+    Definition?: number;
     /** 雪碧图小图总数量。 */
-    TotalCount: number;
+    TotalCount?: number;
     /** 截取雪碧图输出的地址。 */
-    ImageSpriteUrlSet: string[];
+    ImageSpriteUrlSet?: string[];
     /** 雪碧图子图位置与时间关系 WebVtt 文件地址。 */
-    WebVttUrl: string;
+    WebVttUrl?: string;
   }
 
   /** DNS解析验证信息 */
@@ -2076,31 +2076,31 @@ declare namespace V20180717 {
   /** 获取文件属性任务信息 */
   interface DescribeFileAttributesTask {
     /** 任务 ID。 */
-    TaskId: string;
+    TaskId?: string;
     /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
-    Status: string;
+    Status?: string;
     /** 错误码，0 表示成功，其他值表示失败：40000：输入参数不合法，请检查输入参数；60000：源文件错误（如视频数据损坏），请确认源文件是否正常；70000：内部服务错误，建议重试。 */
-    ErrCode: number;
+    ErrCode?: number;
     /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368) 列表。 */
-    ErrCodeExt: string;
+    ErrCodeExt?: string;
     /** 错误信息。 */
-    Message: string;
+    Message?: string;
     /** 任务进度，取值范围 [0-100] 。 */
-    Progress: number;
+    Progress?: number;
     /** 媒体文件 ID。 */
-    FileId: string;
+    FileId?: string;
     /** 获取媒体文件属性任务的输出。 */
-    Output: DescribeFileAttributesTaskOutput | null;
+    Output?: DescribeFileAttributesTaskOutput | null;
     /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
-    SessionId: string;
+    SessionId?: string;
     /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
-    SessionContext: string;
+    SessionContext?: string;
   }
 
   /** 获取文件属性任务输出 */
   interface DescribeFileAttributesTaskOutput {
     /** 媒体文件的 Md5 值。 */
-    Md5: string;
+    Md5?: string;
     /** 媒体文件的 Sha1 值。 */
     Sha1?: string;
   }
@@ -2610,11 +2610,11 @@ declare namespace V20180717 {
   /** 智能精彩集锦片段列表。 */
   interface HighlightSegmentItem {
     /** 置信度。 */
-    Confidence: number;
+    Confidence?: number;
     /** 片段起始时间偏移。 */
-    StartTimeOffset: number;
+    StartTimeOffset?: number;
     /** 片段结束时间偏移。 */
-    EndTimeOffset: number;
+    EndTimeOffset?: number;
   }
 
   /** 智能精彩片段任务控制参数 */
@@ -2886,59 +2886,59 @@ declare namespace V20180717 {
   /** 智能分类结果 */
   interface MediaAiAnalysisClassificationItem {
     /** 智能分类的类别名称。 */
-    Classification: string;
+    Classification?: string;
     /** 智能分类的可信度，取值范围是 0 到 100。 */
-    Confidence: number;
+    Confidence?: number;
   }
 
   /** 智能封面信息 */
   interface MediaAiAnalysisCoverItem {
     /** 智能封面地址。 */
-    CoverUrl: string;
+    CoverUrl?: string;
     /** 智能封面的可信度，取值范围是 0 到 100。 */
-    Confidence: number;
+    Confidence?: number;
   }
 
   /** 智能按帧标签结果信息 */
   interface MediaAiAnalysisFrameTagItem {
     /** 按帧标签名称。 */
-    Tag: string;
+    Tag?: string;
     /** 按帧标签名称的分类列表，CategorySet.N 表示第 N+1级分类。比如 Tag 为“塔楼”时，CategorySet 包含两个元素：CategorySet.0 为“场景”，CategorySet.1为 “建筑”，表示按帧标签为“塔楼”，且第1级分类是“场景”，第2级分类是“建筑”。 */
-    CategorySet: string[];
+    CategorySet?: string[];
     /** 按帧标签的可信度，取值范围是 0 到 100。 */
-    Confidence: number;
+    Confidence?: number;
   }
 
   /** 按帧标签片段列表 */
   interface MediaAiAnalysisFrameTagSegmentItem {
     /** 按帧标签起始的偏移时间。 */
-    StartTimeOffset: number;
+    StartTimeOffset?: number;
     /** 按帧标签结束的偏移时间。 */
-    EndTimeOffset: number;
+    EndTimeOffset?: number;
     /** 时间片段内的标签列表。 */
-    TagSet: MediaAiAnalysisFrameTagItem[];
+    TagSet?: MediaAiAnalysisFrameTagItem[];
   }
 
   /** 智能精彩片段信息 */
   interface MediaAiAnalysisHighlightItem {
     /** 智能精彩集锦地址。 */
-    HighlightUrl: string;
+    HighlightUrl?: string;
     /** 智能精彩集锦封面地址。 */
-    CovImgUrl: string;
+    CovImgUrl?: string;
     /** 智能精彩集锦的可信度，取值范围是 0 到 100。 */
-    Confidence: number;
+    Confidence?: number;
     /** 智能精彩集锦持续时间。 */
-    Duration: number;
+    Duration?: number;
     /** 智能精彩集锦子片段列表，精彩集锦片段由这些子片段拼接生成。 */
-    SegmentSet: HighlightSegmentItem[];
+    SegmentSet?: HighlightSegmentItem[];
   }
 
   /** 智能标签结果信息 */
   interface MediaAiAnalysisTagItem {
     /** 标签名称。 */
-    Tag: string;
+    Tag?: string;
     /** 标签的可信度，取值范围是 0 到 100。 */
-    Confidence: number;
+    Confidence?: number;
   }
 
   /** 点播文件视频转动图结果信息 */
@@ -3026,7 +3026,7 @@ declare namespace V20180717 {
     /** 媒体转推 ID。 */
     CastId?: string;
     /** 转推状态，取值有：Working ：运行中；Scheduled ：等待定时时间到达后启动；Stopped ：已经停止转推；Idle ：空闲。 */
-    Status?: string | null;
+    Status?: string;
   }
 
   /** 分类信息描述 */
@@ -4816,9 +4816,9 @@ declare namespace V20180717 {
     /** 错误信息。 */
     Message?: string;
     /** 音视频审核任务的输入。 */
-    Input?: ReviewAudioVideoTaskInput | null;
+    Input?: ReviewAudioVideoTaskInput;
     /** 音视频审核任务的输出。 */
-    Output?: ReviewAudioVideoTaskOutput | null;
+    Output?: ReviewAudioVideoTaskOutput;
     /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
     SessionId?: string;
     /** 来源上下文，用于透传用户请求信息，音视频审核完成回调将返回该字段值，最长 1000 个字符。 */
@@ -4928,9 +4928,9 @@ declare namespace V20180717 {
     /** 启播时间，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
     StartPlayTime?: string;
     /** 播放时长，单位为秒。 */
-    Duration?: number | null;
+    Duration?: number;
     /** 播放进度，单位为秒。 */
-    Progress?: number | null;
+    Progress?: number;
   }
 
   /** 轮播任务信息 */
@@ -4952,9 +4952,9 @@ declare namespace V20180717 {
     /** 轮播播放地址。 */
     Url?: string;
     /** 创建时间，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
-    CreateTime?: string | null;
+    CreateTime?: string;
     /** 更新时间，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
-    UpdateTime?: string | null;
+    UpdateTime?: string;
     /** 过期时间，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)，过期后将停止播单的播放。“9999-12-31T23:59:59+08:00”表示永不过期。 */
     ExpiredTime?: string;
   }
@@ -5062,11 +5062,11 @@ declare namespace V20180717 {
   /** 截图输出信息（2017 版） */
   interface SnapshotByTimeOffset2017 {
     /** 错误码0：成功；其他值：失败。 */
-    ErrCode: number;
+    ErrCode?: number;
     /** 截图的具体时间点，单位：毫秒。 */
-    TimeOffset: number;
+    TimeOffset?: number;
     /** 截图输出文件地址。 */
-    Url: string;
+    Url?: string;
   }
 
   /** 视频指定时间点截图任务信息，该结构仅用于 2017 版[指定时间点截图](https://cloud.tencent.com/document/product/266/8102)接口发起的任务。 */
@@ -5400,13 +5400,13 @@ declare namespace V20180717 {
   /** 临时凭证 */
   interface TempCertificate {
     /** 临时安全证书 Id。 */
-    SecretId: string;
+    SecretId?: string;
     /** 临时安全证书 Key。 */
-    SecretKey: string;
+    SecretKey?: string;
     /** Token 值。 */
-    Token: string;
+    Token?: string;
     /** 证书无效的时间，返回 Unix 时间戳，精确到秒。 */
-    ExpiredTime: number;
+    ExpiredTime?: number;
   }
 
   /** 鉴别涉及令人不安全的信息的任务控制参数 */
@@ -6718,7 +6718,7 @@ declare namespace V20180717 {
   interface CreateSubAppIdRequest {
     /** 应用名称，长度限制：40个字符。 */
     Name: string;
-    /** 应用简介，长度限制： 300个字符。 */
+    /** 应用简介，长度限制： 300个字符。不填则应用简介默认为空。 */
     Description?: string;
   }
 
@@ -8230,7 +8230,7 @@ declare namespace V20180717 {
     /** 符合过滤条件的记录总数。 */
     TotalCount?: number;
     /** 转码模板详情列表。 */
-    TranscodeTemplateSet?: TranscodeTemplate[] | null;
+    TranscodeTemplateSet?: TranscodeTemplate[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -8688,9 +8688,9 @@ declare namespace V20180717 {
     SubAppId?: number;
     /** 转动图模板名称，长度限制：64 个字符。 */
     Name?: string;
-    /** 动图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
+    /** 动图宽度（或长边）的最大值，取值范围：0 和 [32, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
     Width?: number;
-    /** 动图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
+    /** 动图高度（或短边）的最大值，取值范围：0 和 [32, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
     Height?: number;
     /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
     ResolutionAdaptive?: string;
@@ -8860,9 +8860,9 @@ declare namespace V20180717 {
     SubAppId?: number;
     /** 雪碧图模板名称，长度限制：64 个字符。 */
     Name?: string;
-    /** 雪碧图中小图的宽度，取值范围： [128, 4096]，单位：px。 */
+    /** 雪碧图中小图的宽度，取值范围： [32, 4096]，单位：px。 */
     Width?: number;
-    /** 雪碧图中小图的高度，取值范围： [128, 4096]，单位：px。 */
+    /** 雪碧图中小图的高度，取值范围： [32, 4096]，单位：px。 */
     Height?: number;
     /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
     ResolutionAdaptive?: string;
@@ -8874,7 +8874,7 @@ declare namespace V20180717 {
     RowCount?: number;
     /** 雪碧图中小图的列数。 */
     ColumnCount?: number;
-    /** 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式： stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。默认值：black 。 */
+    /** 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式： stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。默认值：black 。 */
     FillType?: string;
     /** 模板描述信息，长度限制：256 个字符。 */
     Comment?: string;
@@ -9110,9 +9110,9 @@ declare namespace V20180717 {
     SubAppId?: number;
     /** 采样截图模板名称，长度限制：64 个字符。 */
     Name?: string;
-    /** 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
+    /** 截图宽度（或长边）的最大值，取值范围：0 和 [32, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
     Width?: number;
-    /** 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
+    /** 截图高度（或短边）的最大值，取值范围：0 和 [32, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
     Height?: number;
     /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
     ResolutionAdaptive?: string;
@@ -9140,9 +9140,9 @@ declare namespace V20180717 {
     SubAppId?: number;
     /** 指定时间点截图模板名称，长度限制：64 个字符。 */
     Name?: string;
-    /** 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
+    /** 截图宽度（或长边）的最大值，取值范围：0 和 [32, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
     Width?: number;
-    /** 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
+    /** 截图高度（或短边）的最大值，取值范围：0 和 [32, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
     Height?: number;
     /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
     ResolutionAdaptive?: string;

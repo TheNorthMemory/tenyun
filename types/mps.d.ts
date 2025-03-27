@@ -202,6 +202,8 @@ declare interface AdaptiveStreamTemplate {
   RemoveAudio?: number;
   /** 是否移除视频流，取值范围：0：否，1：是。 */
   RemoveVideo?: number;
+  /** 音频参数信息列表。注意：参数数组长度最大为64。 */
+  AudioList?: AudioTemplateInfo[] | null;
 }
 
 /** 外挂字幕。 */
@@ -1548,6 +1550,8 @@ declare interface AudioTemplateInfo {
   SampleRate: number;
   /** 音频通道方式，可选值：1：单通道2：双通道6：5.1声道当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为5.1声道。默认值：2。 */
   AudioChannel?: number;
+  /** 合并音轨信息。注意：此字段只是自适应转码生效， */
+  TrackChannelInfo?: AudioTrackChannelInfo | null;
 }
 
 /** 音频流配置参数 */
@@ -1562,6 +1566,16 @@ declare interface AudioTemplateInfoForUpdate {
   AudioChannel?: number | null;
   /** 指定输出要保留的音频轨道。默认是全部保留源的。 */
   StreamSelects?: number[] | null;
+}
+
+/** 音轨信息 */
+declare interface AudioTrackChannelInfo {
+  /** 是否开启混音，可选值：0：表示不开启混音1：表示开启混音默认值：0 */
+  ChannelsRemix?: number | null;
+  /** 合并音轨输入类型，可选值：trask：表示使用音轨id；trask_channel： 表示使用音轨id和声道id；默认：trask。注意：如果原视频是多声道，建议使用trask_channel。 */
+  SelectType?: string | null;
+  /** 音轨信息 */
+  InputTrackInfo?: TrackInfo[] | null;
 }
 
 /** AWS S3 文件是上传触发器。 */
@@ -2852,6 +2866,10 @@ declare interface HighlightSegmentItem {
   EndTimeOffset?: number;
   /** 片段标签 */
   SegmentTags?: string[] | null;
+  /** 直播切片对应直播起始时间点，采用 ISO 日期格式。 */
+  BeginTime?: string | null;
+  /** 直播切片对应直播结束时间点，采用 ISO 日期格式。 */
+  EndTime?: string | null;
 }
 
 /** 图片编码格式参数 */
@@ -4782,6 +4800,8 @@ declare interface SegmentRecognitionItem {
   AudioEndTime?: number;
   /** 直播拆条用，人物位置参考信息用于横转竖。 */
   PersonPositionUrl?: string;
+  /** 指定人物ID。 */
+  PersonId?: string;
 }
 
 /** 切片特殊配置信息。 */
@@ -5222,6 +5242,14 @@ declare interface TextWatermarkTemplateInputForUpdate {
   FontAlpha?: number;
   /** 文字内容，长度不超过100个字符。 */
   TextContent?: string;
+}
+
+/** 音轨信息 */
+declare interface TrackInfo {
+  /** 音轨和声道数字，说明：当：SelectType值为trask，此值为整数类型，例如：1；当：SelectType值为trask_channel，此值为小数类型，例如：1.0；默认值：1.0注意：整数部分代表音轨序号，以小数部分代表声道。音轨序号即为音轨的stream index，支持输入0和正整数。小数部分最多支持2位小数，并且仅支持0-63，但是如果Codec为aac/eac3/ac3时，小数部分仅支持0-15。例如：对于stream index为1的音轨，1.0代表这个音轨的第1个声道，1.1代表这个音轨的第2个声道。 */
+  TrackNum?: string | null;
+  /** 声道音量大小，说明：当：AudioChannel的值为1时，此值长度为1；当：AudioChannel的值为2时，此值长度为2；当：AudioChannel的值为6时，此值长度大于2。此值数组值取值范围：[-60, 6]，其中-60代表静音、0代表保持原音量，6表示原音量增加一倍，默认值为-60。注意：支持3位小数。 */
+  ChannelVolume?: number[] | null;
 }
 
 /** 转码任务输入参数类型 */

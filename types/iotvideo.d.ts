@@ -43,25 +43,25 @@ declare interface AIModelUsageInfo {
 /** 查询设备历史 */
 declare interface ActionHistory {
   /** 设备名称 */
-  DeviceName: string;
+  DeviceName?: string;
   /** 动作Id */
-  ActionId: string;
+  ActionId?: string;
   /** 动作名称 */
-  ActionName: string;
+  ActionName?: string;
   /** 请求时间 */
-  ReqTime: number;
+  ReqTime?: number;
   /** 响应时间 */
-  RspTime: number;
+  RspTime?: number;
   /** 输入参数 */
-  InputParams: string | null;
+  InputParams?: string | null;
   /** 输出参数 */
-  OutputParams: string | null;
+  OutputParams?: string | null;
   /** 调用方式 */
-  Calling: string;
+  Calling?: string;
   /** 调用Id */
-  ClientToken: string;
+  ClientToken?: string;
   /** 调用状态 */
-  Status: string;
+  Status?: string;
 }
 
 /** 账户流水 */
@@ -191,9 +191,9 @@ declare interface DeviceCommLogItem {
 /** 设备历史数据结构 */
 declare interface DeviceDataHistoryItem {
   /** 时间点，毫秒时间戳 */
-  Time: string;
+  Time?: string;
   /** 字段取值 */
-  Value: string;
+  Value?: string;
 }
 
 /** 设备详细信息 */
@@ -225,93 +225,93 @@ declare interface DeviceSignatureInfo {
 /** 设备上下线日志记录 */
 declare interface DeviceStatusLogItem {
   /** 时间 */
-  Time: string;
+  Time?: string;
   /** 状态类型： Online 上线，Offline 下线 */
-  Type: string;
+  Type?: string;
   /** 日志信息 */
-  Data: string;
+  Data?: string;
 }
 
 /** 设备固件更新状态 */
 declare interface DeviceUpdateStatus {
   /** 设备名 */
-  DeviceName: string;
+  DeviceName?: string;
   /** 最后处理时间 */
-  LastProcessTime: number;
+  LastProcessTime?: number;
   /** 状态 */
-  Status: number;
+  Status?: number;
   /** 错误消息 */
-  ErrMsg: string;
+  ErrMsg?: string;
   /** 返回码 */
-  Retcode: number;
+  Retcode?: number;
   /** 目标更新版本 */
-  DstVersion: string;
+  DstVersion?: string;
   /** 下载中状态时的下载进度 */
-  Percent: number | null;
+  Percent?: number | null;
   /** 原版本号 */
-  OriVersion: string | null;
+  OriVersion?: string | null;
   /** 任务ID */
-  TaskId: number | null;
+  TaskId?: number | null;
 }
 
 /** 设备事件的搜索结果项 */
 declare interface EventHistoryItem {
   /** 事件的时间戳 */
-  TimeStamp: number | null;
+  TimeStamp?: number | null;
   /** 事件的产品ID */
-  ProductId: string | null;
+  ProductId?: string | null;
   /** 事件的设备名称 */
-  DeviceName: string | null;
+  DeviceName?: string | null;
   /** 事件的标识符ID */
-  EventId: string | null;
+  EventId?: string | null;
   /** 事件的类型 */
-  Type: string | null;
+  Type?: string | null;
   /** 事件的数据 */
-  Data: string | null;
+  Data?: string | null;
 }
 
 /** 设备固件详细信息 */
 declare interface FirmwareInfo {
   /** 固件版本 */
-  Version: string;
+  Version?: string;
   /** 固件MD5值 */
-  Md5sum: string;
+  Md5sum?: string;
   /** 固件创建时间 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 产品名称 */
-  ProductName: string;
+  ProductName?: string;
   /** 固件名称 */
-  Name: string;
+  Name?: string;
   /** 固件描述 */
-  Description: string;
+  Description?: string;
   /** 产品ID */
-  ProductId: string;
+  ProductId?: string;
   /** 固件升级模块 */
-  FwType: string | null;
+  FwType?: string | null;
 }
 
 /** 固件升级任务信息 */
 declare interface FirmwareTaskInfo {
   /** 任务ID */
-  TaskId: number | null;
+  TaskId?: number | null;
   /** 任务状态 */
-  Status: number | null;
+  Status?: number | null;
   /** 任务类型 */
-  Type: number | null;
+  Type?: number | null;
   /** 任务创建时间 */
-  CreateTime: number | null;
+  CreateTime?: number | null;
 }
 
 /** 消息数量统计 */
 declare interface MessageCntStats {
   /** 统计日期 */
-  Date: string;
+  Date?: string;
   /** 物模型上行消息数 */
-  UpMsgCnt: number | null;
+  UpMsgCnt?: number | null;
   /** 物模型下行消息数 */
-  DownMsgCnt: number | null;
+  DownMsgCnt?: number | null;
   /** ntp消息数 */
-  NtpMsgCnt: number | null;
+  NtpMsgCnt?: number | null;
 }
 
 /** 云存套餐包消耗统计 */
@@ -365,51 +365,51 @@ declare interface PackageInfo {
 /** 产品模型定义 */
 declare interface ProductModelDefinition {
   /** 产品ID */
-  ProductId: string;
+  ProductId?: string;
   /** 模型定义 */
-  ModelDefine: string;
+  ModelDefine?: string;
   /** 更新时间，秒级时间戳 */
-  UpdateTime: number;
+  UpdateTime?: number;
   /** 创建时间，秒级时间戳 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 产品所属分类的模型快照（产品创建时刻的） */
-  CategoryModel: string | null;
+  CategoryModel?: string | null;
   /** 产品的连接类型的模型 */
-  NetTypeModel: string | null;
+  NetTypeModel?: string | null;
 }
 
 /** 产品分类实体 */
 declare interface ProductTemplate {
   /** 实体ID */
-  Id: number;
+  Id?: number;
   /** 分类字段 */
-  CategoryKey: string;
+  CategoryKey?: string;
   /** 分类名称 */
-  CategoryName: string;
+  CategoryName?: string;
   /** 上层实体ID */
-  ParentId: number;
+  ParentId?: number;
   /** 物模型 */
-  ModelTemplate: string;
+  ModelTemplate?: string;
   /** 排列顺序 */
-  ListOrder: number | null;
+  ListOrder?: number | null;
   /** 分类图标地址 */
-  IconUrl: string | null;
+  IconUrl?: string | null;
   /** 九宫格图片地址 */
-  IconUrlGrid: string | null;
+  IconUrlGrid?: string | null;
 }
 
 /** SDK日志项 */
 declare interface SDKLogItem {
   /** 产品ID */
-  ProductID: string;
+  ProductID?: string;
   /** 设备名称 */
-  DeviceName: string;
+  DeviceName?: string;
   /** 日志等级 */
-  Level: string;
+  Level?: string;
   /** 日志时间 */
-  DateTime: string;
+  DateTime?: string;
   /** 日志内容 */
-  Content: string;
+  Content?: string;
 }
 
 /** 搜索关键词 */
@@ -423,9 +423,9 @@ declare interface SearchKeyword {
 /** 状态统计信息 */
 declare interface StatusStatistic {
   /** 任务状态 */
-  Status: number | null;
+  Status?: number | null;
   /** 统计总数 */
-  Total: number | null;
+  Total?: number | null;
 }
 
 /** TRTC调用参数 */
@@ -453,57 +453,57 @@ declare interface ThumbnailURLInfoList {
 /** 批次元数据 */
 declare interface VideoBatch {
   /** 批次ID */
-  Id: number;
+  Id?: number;
   /** 用户ID */
-  UserId: string;
+  UserId?: string;
   /** 产品ID */
-  ProductId: string;
+  ProductId?: string;
   /** 状态：1：待创建设备 2：创建中 3：已完成 */
-  Status: number;
+  Status?: number;
   /** 设备前缀 */
-  DevPre: string;
+  DevPre?: string;
   /** 设备数量 */
-  DevNum: number;
+  DevNum?: number;
   /** 已创建设备数量 */
-  DevNumCreated: number;
+  DevNumCreated?: number;
   /** 批次下载地址 */
-  BatchURL: string;
+  BatchURL?: string;
   /** 创建时间。unix时间戳 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 修改时间。unix时间戳 */
-  UpdateTime: number;
+  UpdateTime?: number;
 }
 
 /** video产品元数据 */
 declare interface VideoProduct {
   /** 产品ID */
-  ProductId: string;
+  ProductId?: string;
   /** 产品名称 */
-  ProductName: string;
+  ProductName?: string;
   /** 产品设备类型（普通设备)	1.普通设备 */
-  DeviceType: number;
+  DeviceType?: number;
   /** 认证方式：2：PSK */
-  EncryptionType: number;
+  EncryptionType?: number;
   /** 设备功能码 */
-  Features: string[];
+  Features?: string[];
   /** 操作系统 */
-  ChipOs: string;
+  ChipOs?: string;
   /** 芯片厂商id */
-  ChipManufactureId: string;
+  ChipManufactureId?: string;
   /** 芯片id */
-  ChipId: string;
+  ChipId?: string;
   /** 产品描述信息 */
-  ProductDescription: string;
+  ProductDescription?: string;
   /** 创建时间unix时间戳 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 修改时间unix时间戳 */
-  UpdateTime: number;
+  UpdateTime?: number;
   /** 连接类型，wifi表示WIFI连接，cellular表示4G连接 */
-  NetType: string | null;
+  NetType?: string | null;
   /** 产品品类,113:摄像头,567:儿童手表,595:可视对讲门锁 */
-  CategoryId: number | null;
+  CategoryId?: number | null;
   /** 产品有效年限 */
-  ProductVaildYears: number | null;
+  ProductVaildYears?: number | null;
 }
 
 declare interface ApplyAIModelRequest {
@@ -541,7 +541,7 @@ declare interface BatchUpdateFirmwareRequest {
 
 declare interface BatchUpdateFirmwareResponse {
   /** 任务ID */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -573,9 +573,9 @@ declare interface CallDeviceActionAsyncRequest {
 
 declare interface CallDeviceActionAsyncResponse {
   /** 调用Id */
-  ClientToken: string | null;
+  ClientToken?: string | null;
   /** 异步调用状态 */
-  Status: string | null;
+  Status?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -731,7 +731,7 @@ declare interface CreateBatchRequest {
 
 declare interface CreateBatchResponse {
   /** 批次ID */
-  BatchId: number;
+  BatchId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -745,19 +745,19 @@ declare interface CreateCOSCredentialsRequest {
 
 declare interface CreateCOSCredentialsResponse {
   /** COS存储桶名称 */
-  StorageBucket: string;
+  StorageBucket?: string;
   /** COS存储桶区域 */
-  StorageRegion: string;
+  StorageRegion?: string;
   /** COS存储桶路径 */
-  StoragePath: string;
+  StoragePath?: string;
   /** COS上传用的SecretID */
-  SecretID: string;
+  SecretID?: string;
   /** COS上传用的SecretKey */
-  SecretKey: string;
+  SecretKey?: string;
   /** COS上传用的Token */
-  Token: string;
+  Token?: string;
   /** 密钥信息过期时间 */
-  ExpiredTime: number;
+  ExpiredTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -921,7 +921,7 @@ declare interface CreateProductRequest {
 
 declare interface CreateProductResponse {
   /** 产品详情 */
-  Data: VideoProduct;
+  Data?: VideoProduct;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -933,9 +933,9 @@ declare interface CreateTaskFileUrlRequest {
 
 declare interface CreateTaskFileUrlResponse {
   /** 任务文件上传链接 */
-  Url: string;
+  Url?: string;
   /** 任务文件名 */
-  FileName: string;
+  FileName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1035,9 +1035,9 @@ declare interface DescribeAIModelApplicationsRequest {
 
 declare interface DescribeAIModelApplicationsResponse {
   /** 申请记录数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 申请记录数组 */
-  Applications: AIModelApplication[];
+  Applications?: AIModelApplication[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1051,17 +1051,17 @@ declare interface DescribeAIModelChannelRequest {
 
 declare interface DescribeAIModelChannelResponse {
   /** 推送类型。ckafka：消息队列；forward：http/https推送 */
-  Type: string;
+  Type?: string;
   /** 第三方推送地址 */
-  ForwardAddress: string | null;
+  ForwardAddress?: string | null;
   /** 第三方推送密钥 */
-  ForwardKey: string | null;
+  ForwardKey?: string | null;
   /** ckafka地域 */
-  CKafkaRegion: string | null;
+  CKafkaRegion?: string | null;
   /** ckafka实例 */
-  CKafkaInstance: string | null;
+  CKafkaInstance?: string | null;
   /** ckafka订阅主题 */
-  CKafkaTopic: string | null;
+  CKafkaTopic?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1079,9 +1079,9 @@ declare interface DescribeAIModelUsageRequest {
 
 declare interface DescribeAIModelUsageResponse {
   /** AI模型资源包总量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** AI模型资源包信息数组 */
-  UsageInfo: AIModelUsageInfo[];
+  UsageInfo?: AIModelUsageInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1099,9 +1099,9 @@ declare interface DescribeAIModelsRequest {
 
 declare interface DescribeAIModelsResponse {
   /** AI模型数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** AI模型信息数组 */
-  Models: AIModelInfo[];
+  Models?: AIModelInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1161,7 +1161,7 @@ declare interface DescribeBatchRequest {
 
 declare interface DescribeBatchResponse {
   /** 批次详情 */
-  Data: VideoBatch;
+  Data?: VideoBatch;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1177,9 +1177,9 @@ declare interface DescribeBatchsRequest {
 
 declare interface DescribeBatchsResponse {
   /** 批次数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 批次列表详情 */
-  Data: VideoBatch[];
+  Data?: VideoBatch[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1443,9 +1443,9 @@ declare interface DescribeCloudStorageUsersRequest {
 
 declare interface DescribeCloudStorageUsersResponse {
   /** 用户总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 用户信息 */
-  Users: CloudStorageUserInfo[];
+  Users?: CloudStorageUserInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1559,7 +1559,7 @@ declare interface DescribeDeviceDataRequest {
 
 declare interface DescribeDeviceDataResponse {
   /** 设备数据 */
-  Data: string;
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1575,11 +1575,11 @@ declare interface DescribeDeviceDataStatsRequest {
 
 declare interface DescribeDeviceDataStatsResponse {
   /** 累计注册设备数 */
-  RegisterCnt: number | null;
+  RegisterCnt?: number | null;
   /** 设备数量列表 */
-  Data: DeviceCntStats[] | null;
+  Data?: DeviceCntStats[] | null;
   /** 总数 */
-  Total: number | null;
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1683,13 +1683,13 @@ declare interface DescribeDeviceStatusLogRequest {
 
 declare interface DescribeDeviceStatusLogResponse {
   /** 数据是否已全部返回，true 表示数据全部返回，false 表示还有数据待返回，可将 Context 作为入参，继续查询返回结果。 */
-  Listover: boolean | null;
+  Listover?: boolean | null;
   /** 检索上下文，当 ListOver 为false时，可以用此上下文，继续读取后续数据 */
-  Context: string | null;
+  Context?: string | null;
   /** 日志数据结果数组，返回对应时间点及取值。 */
-  Results: DeviceStatusLogItem[] | null;
+  Results?: DeviceStatusLogItem[] | null;
   /** 日志数据结果总条数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1723,21 +1723,21 @@ declare interface DescribeFirmwareRequest {
 
 declare interface DescribeFirmwareResponse {
   /** 固件版本号 */
-  Version: string;
+  Version?: string;
   /** 产品ID */
-  ProductId: string;
+  ProductId?: string;
   /** 固件名称 */
-  Name: string | null;
+  Name?: string | null;
   /** 固件描述 */
-  Description: string | null;
+  Description?: string | null;
   /** 固件Md5值 */
-  Md5sum: string | null;
+  Md5sum?: string | null;
   /** 固件上传的秒级时间戳 */
-  Createtime: number | null;
+  Createtime?: number | null;
   /** 产品名称 */
-  ProductName: string;
+  ProductName?: string;
   /** 固件升级模块 */
-  FwType: string | null;
+  FwType?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1757,9 +1757,9 @@ declare interface DescribeFirmwareTaskDevicesRequest {
 
 declare interface DescribeFirmwareTaskDevicesResponse {
   /** 固件升级任务的设备总数 */
-  Total: number | null;
+  Total?: number | null;
   /** 固件升级任务的设备列表 */
-  Devices: DeviceUpdateStatus[];
+  Devices?: DeviceUpdateStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1775,7 +1775,7 @@ declare interface DescribeFirmwareTaskDistributionRequest {
 
 declare interface DescribeFirmwareTaskDistributionResponse {
   /** 固件升级任务状态分布信息 */
-  StatusInfos: StatusStatistic[];
+  StatusInfos?: StatusStatistic[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1791,21 +1791,21 @@ declare interface DescribeFirmwareTaskRequest {
 
 declare interface DescribeFirmwareTaskResponse {
   /** 固件任务ID */
-  TaskId: number | null;
+  TaskId?: number | null;
   /** 固件任务状态 */
-  Status: number | null;
+  Status?: number | null;
   /** 固件任务创建时间，单位:秒 */
-  CreateTime: number | null;
+  CreateTime?: number | null;
   /** 固件任务升级类型 */
-  Type: number | null;
+  Type?: number | null;
   /** 产品名称 */
-  ProductName: string | null;
+  ProductName?: string | null;
   /** 固件任务升级模式。originalVersion（按版本号升级）、filename（提交文件升级）、devicenames（按设备名称升级） */
-  UpgradeMode: string | null;
+  UpgradeMode?: string | null;
   /** 产品ID */
-  ProductId: string | null;
+  ProductId?: string | null;
   /** 原始固件版本号，在UpgradeMode是originalVersion升级模式下会返回 */
-  OriginalVersion: string | null;
+  OriginalVersion?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1819,11 +1819,11 @@ declare interface DescribeFirmwareTaskStatisticsRequest {
 
 declare interface DescribeFirmwareTaskStatisticsResponse {
   /** 升级成功的设备总数 */
-  SuccessTotal: number | null;
+  SuccessTotal?: number | null;
   /** 升级失败的设备总数 */
-  FailureTotal: number | null;
+  FailureTotal?: number | null;
   /** 正在升级的设备总数 */
-  UpgradingTotal: number | null;
+  UpgradingTotal?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1843,9 +1843,9 @@ declare interface DescribeFirmwareTasksRequest {
 
 declare interface DescribeFirmwareTasksResponse {
   /** 固件升级任务列表 */
-  TaskInfos: FirmwareTaskInfo[] | null;
+  TaskInfos?: FirmwareTaskInfo[] | null;
   /** 固件升级任务总数 */
-  Total: number | null;
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2025,9 +2025,9 @@ declare interface DescribeProductsRequest {
 
 declare interface DescribeProductsResponse {
   /** 总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 产品详情列表 */
-  Data: VideoProduct[];
+  Data?: VideoProduct[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2039,17 +2039,17 @@ declare interface DescribePushChannelRequest {
 
 declare interface DescribePushChannelResponse {
   /** 推送类型。ckafka：消息队列；forward：http/https推送 */
-  Type: string;
+  Type?: string;
   /** 第三方推送地址 */
-  ForwardAddress: string | null;
+  ForwardAddress?: string | null;
   /** 第三方推送密钥，为空表示不使用鉴权token。 */
-  ForwardKey: string | null;
+  ForwardKey?: string | null;
   /** ckafka地域 */
-  CKafkaRegion: string | null;
+  CKafkaRegion?: string | null;
   /** ckafka实例 */
-  CKafkaInstance: string | null;
+  CKafkaInstance?: string | null;
   /** ckafka订阅主题 */
-  CKafkaTopic: string | null;
+  CKafkaTopic?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2069,11 +2069,11 @@ declare interface DescribeSDKLogRequest {
 
 declare interface DescribeSDKLogResponse {
   /** 日志检索上下文 */
-  Context: string;
+  Context?: string;
   /** 是否还有日志，如有仍有日志，下次查询的请求带上当前请求返回的Context */
-  Listover: boolean;
+  Listover?: boolean;
   /** 日志列表 */
-  Results: SDKLogItem[];
+  Results?: SDKLogItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2141,7 +2141,7 @@ declare interface GetAllFirmwareVersionRequest {
 
 declare interface GetAllFirmwareVersionResponse {
   /** 固件可用版本列表 */
-  Version: string[];
+  Version?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2155,7 +2155,7 @@ declare interface GetFirmwareURLRequest {
 
 declare interface GetFirmwareURLResponse {
   /** 固件URL */
-  Url: string;
+  Url?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2201,9 +2201,9 @@ declare interface ListFirmwaresRequest {
 
 declare interface ListFirmwaresResponse {
   /** 固件总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 固件列表 */
-  Firmwares: FirmwareInfo[];
+  Firmwares?: FirmwareInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2509,7 +2509,7 @@ declare interface UpdateAIModelChannelRequest {
 
 declare interface UpdateAIModelChannelResponse {
   /** 第三方推送密钥，如果选择自动生成则会返回此字段 */
-  ForwardKey: string | null;
+  ForwardKey?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2592,25 +2592,25 @@ declare namespace V20201215 {
   /** 查询设备历史 */
   interface ActionHistory {
     /** 设备名称 */
-    DeviceName: string;
+    DeviceName?: string;
     /** 动作Id */
-    ActionId: string;
+    ActionId?: string;
     /** 动作名称 */
-    ActionName: string;
+    ActionName?: string;
     /** 请求时间 */
-    ReqTime: number;
+    ReqTime?: number;
     /** 响应时间 */
-    RspTime: number;
+    RspTime?: number;
     /** 输入参数 */
-    InputParams: string | null;
+    InputParams?: string | null;
     /** 输出参数 */
-    OutputParams: string | null;
+    OutputParams?: string | null;
     /** 调用方式 */
-    Calling: string;
+    Calling?: string;
     /** 调用Id */
-    ClientToken: string;
+    ClientToken?: string;
     /** 调用状态 */
-    Status: string;
+    Status?: string;
   }
 
   /** 账户流水 */
@@ -2644,17 +2644,17 @@ declare namespace V20201215 {
   /** 云存时间轴接口返回数据 */
   interface CloudStorageTimeData {
     /** 云存时间轴信息列表 */
-    TimeList: CloudStorageTimeInfo[];
+    TimeList?: CloudStorageTimeInfo[];
     /** 播放地址 */
-    VideoURL: string;
+    VideoURL?: string;
   }
 
   /** 云存时间轴信息 */
   interface CloudStorageTimeInfo {
     /** 开始时间 */
-    StartTime: number;
+    StartTime?: number;
     /** 结束时间 */
-    EndTime: number;
+    EndTime?: number;
   }
 
   /** 云存用户信息 */
@@ -2682,19 +2682,19 @@ declare namespace V20201215 {
   /** 设备通讯日志查询返回条目 */
   interface DeviceCommLogItem {
     /** 时间 */
-    Time: string;
+    Time?: string;
     /** 日志类型，device 设备上行，shadow 服务端下行。 */
-    Type: string;
+    Type?: string;
     /** 通讯数据。 */
-    Data: string;
+    Data?: string;
   }
 
   /** 设备历史数据结构 */
   interface DeviceDataHistoryItem {
     /** 时间点，毫秒时间戳 */
-    Time: string;
+    Time?: string;
     /** 字段取值 */
-    Value: string;
+    Value?: string;
   }
 
   /** 设备详细信息 */
@@ -2718,129 +2718,129 @@ declare namespace V20201215 {
   /** 设备上下线日志记录 */
   interface DeviceStatusLogItem {
     /** 时间 */
-    Time: string;
+    Time?: string;
     /** 状态类型： Online 上线，Offline 下线 */
-    Type: string;
+    Type?: string;
     /** 日志信息 */
-    Data: string;
+    Data?: string;
   }
 
   /** 设备固件更新状态 */
   interface DeviceUpdateStatus {
     /** 设备名 */
-    DeviceName: string;
+    DeviceName?: string;
     /** 最后处理时间 */
-    LastProcessTime: number;
+    LastProcessTime?: number;
     /** 状态 */
-    Status: number;
+    Status?: number;
     /** 错误消息 */
-    ErrMsg: string;
+    ErrMsg?: string;
     /** 返回码 */
-    Retcode: number;
+    Retcode?: number;
     /** 目标更新版本 */
-    DstVersion: string;
+    DstVersion?: string;
     /** 下载中状态时的下载进度 */
-    Percent: number | null;
+    Percent?: number | null;
     /** 原版本号 */
-    OriVersion: string | null;
+    OriVersion?: string | null;
     /** 任务ID */
-    TaskId: number | null;
+    TaskId?: number | null;
   }
 
   /** 设备事件的搜索结果项 */
   interface EventHistoryItem {
     /** 事件的时间戳 */
-    TimeStamp: number | null;
+    TimeStamp?: number | null;
     /** 事件的产品ID */
-    ProductId: string | null;
+    ProductId?: string | null;
     /** 事件的设备名称 */
-    DeviceName: string | null;
+    DeviceName?: string | null;
     /** 事件的标识符ID */
-    EventId: string | null;
+    EventId?: string | null;
     /** 事件的类型 */
-    Type: string | null;
+    Type?: string | null;
     /** 事件的数据 */
-    Data: string | null;
+    Data?: string | null;
   }
 
   /** 设备固件详细信息 */
   interface FirmwareInfo {
     /** 固件版本 */
-    Version: string;
+    Version?: string;
     /** 固件MD5值 */
-    Md5sum: string;
+    Md5sum?: string;
     /** 固件创建时间 */
-    CreateTime: number;
+    CreateTime?: number;
     /** 产品名称 */
-    ProductName: string;
+    ProductName?: string;
     /** 固件名称 */
-    Name: string;
+    Name?: string;
     /** 固件描述 */
-    Description: string;
+    Description?: string;
     /** 产品ID */
-    ProductId: string;
+    ProductId?: string;
   }
 
   /** 固件升级任务信息 */
   interface FirmwareTaskInfo {
     /** 任务ID */
-    TaskId: number | null;
+    TaskId?: number | null;
     /** 任务状态 */
-    Status: number | null;
+    Status?: number | null;
     /** 任务类型 */
-    Type: number | null;
+    Type?: number | null;
     /** 任务创建时间 */
-    CreateTime: number | null;
+    CreateTime?: number | null;
   }
 
   /** 产品模型定义 */
   interface ProductModelDefinition {
     /** 产品ID */
-    ProductId: string;
+    ProductId?: string;
     /** 模型定义 */
-    ModelDefine: string;
+    ModelDefine?: string;
     /** 更新时间，秒级时间戳 */
-    UpdateTime: number;
+    UpdateTime?: number;
     /** 创建时间，秒级时间戳 */
-    CreateTime: number;
+    CreateTime?: number;
     /** 产品所属分类的模型快照（产品创建时刻的） */
-    CategoryModel: string | null;
+    CategoryModel?: string | null;
     /** 产品的连接类型的模型 */
-    NetTypeModel: string | null;
+    NetTypeModel?: string | null;
   }
 
   /** 产品分类实体 */
   interface ProductTemplate {
     /** 实体ID */
-    Id: number;
+    Id?: number;
     /** 分类字段 */
-    CategoryKey: string;
+    CategoryKey?: string;
     /** 分类名称 */
-    CategoryName: string;
+    CategoryName?: string;
     /** 上层实体ID */
-    ParentId: number;
+    ParentId?: number;
     /** 物模型 */
-    ModelTemplate: string;
+    ModelTemplate?: string;
     /** 排列顺序 */
-    ListOrder: number | null;
+    ListOrder?: number | null;
     /** 分类图标地址 */
-    IconUrl: string | null;
+    IconUrl?: string | null;
     /** 九宫格图片地址 */
-    IconUrlGrid: string | null;
+    IconUrlGrid?: string | null;
   }
 
   /** SDK日志项 */
   interface SDKLogItem {
     /** 产品ID */
-    ProductID: string;
+    ProductID?: string;
     /** 设备名称 */
-    DeviceName: string;
+    DeviceName?: string;
     /** 日志等级 */
-    Level: string;
+    Level?: string;
     /** 日志时间 */
-    DateTime: string;
+    DateTime?: string;
     /** 日志内容 */
-    Content: string;
+    Content?: string;
   }
 
   /** 搜索关键词 */
@@ -2854,61 +2854,63 @@ declare namespace V20201215 {
   /** 状态统计信息 */
   interface StatusStatistic {
     /** 任务状态 */
-    Status: number | null;
+    Status?: number | null;
     /** 统计总数 */
-    Total: number | null;
+    Total?: number | null;
   }
 
   /** 批次元数据 */
   interface VideoBatch {
     /** 批次ID */
-    Id: number;
+    Id?: number;
     /** 用户ID */
-    UserId: string;
+    UserId?: string;
     /** 产品ID */
-    ProductId: string;
+    ProductId?: string;
     /** 状态：1：待创建设备 2：创建中 3：已完成 */
-    Status: number;
+    Status?: number;
     /** 设备前缀 */
-    DevPre: string;
+    DevPre?: string;
     /** 设备数量 */
-    DevNum: number;
+    DevNum?: number;
     /** 已创建设备数量 */
-    DevNumCreated: number;
+    DevNumCreated?: number;
     /** 批次下载地址 */
-    BatchURL: string;
+    BatchURL?: string;
     /** 创建时间。unix时间戳 */
-    CreateTime: number;
+    CreateTime?: number;
     /** 修改时间。unix时间戳 */
-    UpdateTime: number;
+    UpdateTime?: number;
   }
 
   /** video产品元数据 */
   interface VideoProduct {
     /** 产品ID */
-    ProductId: string;
+    ProductId?: string;
     /** 产品名称 */
-    ProductName: string;
+    ProductName?: string;
     /** 产品设备类型（普通设备)	1.普通设备 */
-    DeviceType: number;
+    DeviceType?: number;
     /** 认证方式：2：PSK */
-    EncryptionType: number;
+    EncryptionType?: number;
     /** 设备功能码 */
-    Features: string[];
+    Features?: string[];
     /** 操作系统 */
-    ChipOs: string;
+    ChipOs?: string;
     /** 芯片厂商id */
-    ChipManufactureId: string;
+    ChipManufactureId?: string;
     /** 芯片id */
-    ChipId: string;
+    ChipId?: string;
     /** 产品描述信息 */
-    ProductDescription: string;
+    ProductDescription?: string;
     /** 创建时间unix时间戳 */
-    CreateTime: number;
+    CreateTime?: number;
     /** 修改时间unix时间戳 */
-    UpdateTime: number;
+    UpdateTime?: number;
     /** 连接类型，wifi表示WIFI连接，cellular表示4G连接 */
-    NetType: string | null;
+    NetType?: string | null;
+    /** 产品品类id，113：摄像头 */
+    CategoryId?: number | null;
   }
 
   interface ApplyAIModelRequest {
@@ -2944,7 +2946,7 @@ declare namespace V20201215 {
 
   interface BatchUpdateFirmwareResponse {
     /** 任务ID */
-    TaskId: number;
+    TaskId?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3064,7 +3066,7 @@ declare namespace V20201215 {
 
   interface CreateBatchResponse {
     /** 批次ID */
-    BatchId: number;
+    BatchId?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3078,19 +3080,19 @@ declare namespace V20201215 {
 
   interface CreateCOSCredentialsResponse {
     /** COS存储桶名称 */
-    StorageBucket: string;
+    StorageBucket?: string;
     /** COS存储桶区域 */
-    StorageRegion: string;
+    StorageRegion?: string;
     /** COS存储桶路径 */
-    StoragePath: string;
+    StoragePath?: string;
     /** COS上传用的SecretID */
-    SecretID: string;
+    SecretID?: string;
     /** COS上传用的SecretKey */
-    SecretKey: string;
+    SecretKey?: string;
     /** COS上传用的Token */
-    Token: string;
+    Token?: string;
     /** 密钥信息过期时间 */
-    ExpiredTime: number;
+    ExpiredTime?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3202,7 +3204,7 @@ declare namespace V20201215 {
 
   interface CreateProductResponse {
     /** 产品详情 */
-    Data: VideoProduct;
+    Data?: VideoProduct;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3214,9 +3216,9 @@ declare namespace V20201215 {
 
   interface CreateTaskFileUrlResponse {
     /** 任务文件上传链接 */
-    Url: string;
+    Url?: string;
     /** 任务文件名 */
-    FileName: string;
+    FileName?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3294,9 +3296,9 @@ declare namespace V20201215 {
 
   interface DescribeAIModelApplicationsResponse {
     /** 申请记录数量 */
-    TotalCount: number;
+    TotalCount?: number;
     /** 申请记录数组 */
-    Applications: AIModelApplication[];
+    Applications?: AIModelApplication[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3310,17 +3312,17 @@ declare namespace V20201215 {
 
   interface DescribeAIModelChannelResponse {
     /** 推送类型。ckafka：消息队列；forward：http/https推送 */
-    Type: string;
+    Type?: string;
     /** 第三方推送地址 */
-    ForwardAddress: string | null;
+    ForwardAddress?: string | null;
     /** 第三方推送密钥 */
-    ForwardKey: string | null;
+    ForwardKey?: string | null;
     /** ckafka地域 */
-    CKafkaRegion: string | null;
+    CKafkaRegion?: string | null;
     /** ckafka实例 */
-    CKafkaInstance: string | null;
+    CKafkaInstance?: string | null;
     /** ckafka订阅主题 */
-    CKafkaTopic: string | null;
+    CKafkaTopic?: string | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3338,9 +3340,9 @@ declare namespace V20201215 {
 
   interface DescribeAIModelUsageResponse {
     /** AI模型资源包总量 */
-    TotalCount: number;
+    TotalCount?: number;
     /** AI模型资源包信息数组 */
-    UsageInfo: AIModelUsageInfo[];
+    UsageInfo?: AIModelUsageInfo[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3358,9 +3360,9 @@ declare namespace V20201215 {
 
   interface DescribeAIModelsResponse {
     /** AI模型数量 */
-    TotalCount: number;
+    TotalCount?: number;
     /** AI模型信息数组 */
-    Models: AIModelInfo[];
+    Models?: AIModelInfo[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3404,7 +3406,7 @@ declare namespace V20201215 {
 
   interface DescribeBatchResponse {
     /** 批次详情 */
-    Data: VideoBatch;
+    Data?: VideoBatch;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3420,9 +3422,9 @@ declare namespace V20201215 {
 
   interface DescribeBatchsResponse {
     /** 批次数量 */
-    TotalCount: number;
+    TotalCount?: number;
     /** 批次列表详情 */
-    Data: VideoBatch[];
+    Data?: VideoBatch[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3568,9 +3570,9 @@ declare namespace V20201215 {
 
   interface DescribeCloudStorageUsersResponse {
     /** 用户总数 */
-    TotalCount: number;
+    TotalCount?: number;
     /** 用户信息 */
-    Users: CloudStorageUserInfo[];
+    Users?: CloudStorageUserInfo[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3684,7 +3686,7 @@ declare namespace V20201215 {
 
   interface DescribeDeviceDataResponse {
     /** 设备数据 */
-    Data: string;
+    Data?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3764,13 +3766,13 @@ declare namespace V20201215 {
 
   interface DescribeDeviceStatusLogResponse {
     /** 数据是否已全部返回，true 表示数据全部返回，false 表示还有数据待返回，可将 Context 作为入参，继续查询返回结果。 */
-    Listover: boolean | null;
+    Listover?: boolean | null;
     /** 检索上下文，当 ListOver 为false时，可以用此上下文，继续读取后续数据 */
-    Context: string | null;
+    Context?: string | null;
     /** 日志数据结果数组，返回对应时间点及取值。 */
-    Results: DeviceStatusLogItem[] | null;
+    Results?: DeviceStatusLogItem[] | null;
     /** 日志数据结果总条数 */
-    TotalCount: number | null;
+    TotalCount?: number | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3804,19 +3806,19 @@ declare namespace V20201215 {
 
   interface DescribeFirmwareResponse {
     /** 固件版本号 */
-    Version: string;
+    Version?: string;
     /** 产品ID */
-    ProductId: string;
+    ProductId?: string;
     /** 固件名称 */
-    Name: string | null;
+    Name?: string | null;
     /** 固件描述 */
-    Description: string | null;
+    Description?: string | null;
     /** 固件Md5值 */
-    Md5sum: string | null;
+    Md5sum?: string | null;
     /** 固件上传的秒级时间戳 */
-    Createtime: number | null;
+    Createtime?: number | null;
     /** 产品名称 */
-    ProductName: string;
+    ProductName?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3836,9 +3838,9 @@ declare namespace V20201215 {
 
   interface DescribeFirmwareTaskDevicesResponse {
     /** 固件升级任务的设备总数 */
-    Total: number | null;
+    Total?: number | null;
     /** 固件升级任务的设备列表 */
-    Devices: DeviceUpdateStatus[];
+    Devices?: DeviceUpdateStatus[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3854,7 +3856,7 @@ declare namespace V20201215 {
 
   interface DescribeFirmwareTaskDistributionResponse {
     /** 固件升级任务状态分布信息 */
-    StatusInfos: StatusStatistic[];
+    StatusInfos?: StatusStatistic[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3870,21 +3872,21 @@ declare namespace V20201215 {
 
   interface DescribeFirmwareTaskResponse {
     /** 固件任务ID */
-    TaskId: number | null;
+    TaskId?: number | null;
     /** 固件任务状态 */
-    Status: number | null;
+    Status?: number | null;
     /** 固件任务创建时间，单位:秒 */
-    CreateTime: number | null;
+    CreateTime?: number | null;
     /** 固件任务升级类型 */
-    Type: number | null;
+    Type?: number | null;
     /** 产品名称 */
-    ProductName: string | null;
+    ProductName?: string | null;
     /** 固件任务升级模式。originalVersion（按版本号升级）、filename（提交文件升级）、devicenames（按设备名称升级） */
-    UpgradeMode: string | null;
+    UpgradeMode?: string | null;
     /** 产品ID */
-    ProductId: string | null;
+    ProductId?: string | null;
     /** 原始固件版本号，在UpgradeMode是originalVersion升级模式下会返回 */
-    OriginalVersion: string | null;
+    OriginalVersion?: string | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3898,11 +3900,11 @@ declare namespace V20201215 {
 
   interface DescribeFirmwareTaskStatisticsResponse {
     /** 升级成功的设备总数 */
-    SuccessTotal: number | null;
+    SuccessTotal?: number | null;
     /** 升级失败的设备总数 */
-    FailureTotal: number | null;
+    FailureTotal?: number | null;
     /** 正在升级的设备总数 */
-    UpgradingTotal: number | null;
+    UpgradingTotal?: number | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3922,9 +3924,9 @@ declare namespace V20201215 {
 
   interface DescribeFirmwareTasksResponse {
     /** 固件升级任务列表 */
-    TaskInfos: FirmwareTaskInfo[] | null;
+    TaskInfos?: FirmwareTaskInfo[] | null;
     /** 固件升级任务总数 */
-    Total: number | null;
+    Total?: number | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4018,9 +4020,9 @@ declare namespace V20201215 {
 
   interface DescribeProductsResponse {
     /** 总数 */
-    TotalCount: number;
+    TotalCount?: number;
     /** 产品详情列表 */
-    Data: VideoProduct[];
+    Data?: VideoProduct[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4040,11 +4042,11 @@ declare namespace V20201215 {
 
   interface DescribeSDKLogResponse {
     /** 日志检索上下文 */
-    Context: string;
+    Context?: string;
     /** 是否还有日志，如有仍有日志，下次查询的请求带上当前请求返回的Context */
-    Listover: boolean;
+    Listover?: boolean;
     /** 日志列表 */
-    Results: SDKLogItem[];
+    Results?: SDKLogItem[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4086,7 +4088,7 @@ declare namespace V20201215 {
 
   interface GetAllFirmwareVersionResponse {
     /** 固件可用版本列表 */
-    Version: string[];
+    Version?: string[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4100,7 +4102,7 @@ declare namespace V20201215 {
 
   interface GetFirmwareURLResponse {
     /** 固件URL */
-    Url: string;
+    Url?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4146,9 +4148,9 @@ declare namespace V20201215 {
 
   interface ListFirmwaresResponse {
     /** 固件总数 */
-    TotalCount: number;
+    TotalCount?: number;
     /** 固件列表 */
-    Firmwares: FirmwareInfo[];
+    Firmwares?: FirmwareInfo[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4414,7 +4416,7 @@ declare namespace V20201215 {
 
   interface UpdateAIModelChannelResponse {
     /** 第三方推送密钥，如果选择自动生成则会返回此字段 */
-    ForwardKey: string | null;
+    ForwardKey?: string | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4666,25 +4668,25 @@ declare namespace V20191126 {
   /** 产品信息摘要 */
   interface ProductBase {
     /** 产品ID */
-    ProductId: string;
+    ProductId?: string;
     /** 产器型号(APP产品,为APP包名) */
-    ProductModel: string;
+    ProductModel?: string;
     /** 产品名称 */
-    ProductName: string;
+    ProductName?: string;
     /** 产品描述信息 */
-    ProductDescription: string;
+    ProductDescription?: string;
     /** 创建时间，UNIX 时间戳，单位秒 */
-    CreateTime: number;
+    CreateTime?: number;
     /** 物模型发布版本号,0代表物模型尚未发布 */
-    IotModelRevision: number;
+    IotModelRevision?: number;
     /** 产品密钥 */
-    SecretKey: string;
+    SecretKey?: string;
     /** 设备功能码ypsxth : 音频双向通话;	spdxth : 视频单向通话(监控);NVR0824 : NVR设备,大于8路，小于等于24路;WifiKeepalive : Wifi保活(低功耗产品);Alexa : Alexa接入;Google : Google接入; */
-    FuncCode: string[] | null;
+    FuncCode?: string[] | null;
     /** 产品类别，0 : 普通视频设备；1 : NVR设备 */
-    ProductCate: number | null;
-    /** 产品地域China-Mainland（中国大陆）China-Hong Kong, Macao and Taiwan（港澳台地区）America（美国）Europe（欧洲）India（印度）Other-Overseas（其他境外地区） */
-    ProductRegion: string | null;
+    ProductCate?: number | null;
+    /** 产品地域China-Mainland（中国大陆）China-Hong Kong, Macao and Taiwan（港澳台地区）America（美国）Europe（欧洲）Other-Overseas（其他境外地区） */
+    ProductRegion?: string | null;
   }
 
   /** 产品信息 */
@@ -4970,7 +4972,7 @@ declare namespace V20191126 {
     ChipManufactureId?: string;
     /** 主芯片ID */
     ChipId?: string;
-    /** 地域：China-Mainland（中国大陆）China-Hong Kong, Macao and Taiwan（港澳台地区）America（美国）Europe（欧洲）India（印度）Other-Overseas（其他境外地区） */
+    /** 地域：China-Mainland（中国大陆）China-Hong Kong, Macao and Taiwan（港澳台地区）America（美国）Europe（欧洲）Other-Overseas（其他境外地区） */
     ProductRegion?: string;
     /** 设备类型, 0-普通视频设备，1-NVR设备 */
     ProductCate?: number;

@@ -117,19 +117,19 @@ declare interface CdcSize {
 /** 描述购买云盘时的费用明细。 */
 declare interface DetailPrice {
   /** 描述计费项目名称。 */
-  PriceTitle: string | null;
+  PriceTitle?: string;
   /** 描述计费项目显示名称，用户控制台展示。 */
-  PriceName: string;
+  PriceName?: string;
   /** 预付费云盘预支费用的原价，单位：元。 */
-  OriginalPrice: number | null;
+  OriginalPrice?: number | null;
   /** 预付费云盘预支费用的折扣价，单位：元。 */
-  DiscountPrice: number | null;
+  DiscountPrice?: number | null;
   /** 后付费云盘原单价，单位：元。 */
-  UnitPrice: number | null;
+  UnitPrice?: number | null;
   /** 后付费云盘折扣单价，单位：元。 */
-  UnitPriceDiscount: number | null;
+  UnitPriceDiscount?: number | null;
   /** 后付费云盘的计价单元，取值范围：HOUR：表示后付费云盘的计价单元是按小时计算。 */
-  ChargeUnit: string | null;
+  ChargeUnit?: string | null;
   /** 高精度预付费云盘预支费用的原价，单位：元。 */
   OriginalPriceHigh?: string | null;
   /** 高精度预付费云盘预支费用的折扣价，单位：元。 */
@@ -357,7 +357,7 @@ declare interface PrepayPrice {
   /** 后付费云盘原单价，单位：元。 */
   UnitPrice?: number | null;
   /** 计费项目明细列表。 */
-  DetailPrices?: DetailPrice[] | null;
+  DetailPrices?: DetailPrice[];
 }
 
 /** 描述预付费或后付费云盘的价格。 */

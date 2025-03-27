@@ -345,23 +345,27 @@ declare interface BusinessLogConfig {
   /** 配置项名称 */
   ConfigName?: string;
   /** 配置项日志路径 */
-  ConfigPath?: string | null;
+  ConfigPath?: string;
   /** 配置项描述 */
   ConfigDesc?: string | null;
   /** 配置项标签 */
   ConfigTags?: string | null;
   /** 配置项对应的ES管道 */
-  ConfigPipeline?: string | null;
+  ConfigPipeline?: string;
   /** 配置项创建时间 */
   ConfigCreateTime?: string | null;
   /** 配置项更新时间 */
   ConfigUpdateTime?: string | null;
   /** 配置项解析规则 */
-  ConfigSchema?: BusinessLogConfigSchema | null;
+  ConfigSchema?: BusinessLogConfigSchema;
   /** 配置项关联部署组 */
   ConfigAssociatedGroups?: BusinesLogConfigAssociatedGroup[] | null;
   /** 配置项关联部署组 */
-  ConfigAssociatedGroupList?: BusinessLogConfigAssociatedGroup[] | null;
+  ConfigAssociatedGroupList?: BusinessLogConfigAssociatedGroup[];
+  /** 是否开启filebeat高级配置开关 */
+  FilebeatConfigEnable?: boolean | null;
+  /** close_timeout参数 */
+  FilebeatCloseTimeout?: number | null;
 }
 
 /** 业务日志配置关联部署组信息 */
@@ -2940,8 +2944,10 @@ declare interface ThreadPicture {
   ThreadCount?: CurvePoint[];
   /** 活跃线程数 */
   ThreadActive?: CurvePoint[];
-  /** 守护线程数 */
+  /** 守护线程数 拼写错误，废弃 */
   DeamonThreadCount?: CurvePoint[];
+  /** 守护线程数 */
+  DaemonThreadCount?: CurvePoint[];
 }
 
 /** 尽量调度 */
@@ -5002,7 +5008,7 @@ declare interface DescribeBusinessLogConfigRequest {
 
 declare interface DescribeBusinessLogConfigResponse {
   /** 日志配置项 */
-  Result?: BusinessLogConfig | null;
+  Result?: BusinessLogConfig;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5874,7 +5880,7 @@ declare interface DescribeJvmMonitorRequest {
 
 declare interface DescribeJvmMonitorResponse {
   /** Java实例jvm监控数据 */
-  Result?: JvmMonitorData | null;
+  Result?: JvmMonitorData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

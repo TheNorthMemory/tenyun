@@ -1005,10 +1005,10 @@ declare namespace V20180525 {
 
   /** EKS Instnace CBS volume */
   interface CbsVolume {
-    /** cbs volume 数据卷名称 */
-    Name: string;
     /** 腾讯云cbs盘Id */
     CbsDiskId: string;
+    /** cbs volume 数据卷名称 */
+    Name: string;
   }
 
   /** 集群信息结构体 */
@@ -1399,50 +1399,50 @@ declare namespace V20180525 {
     Image: string;
     /** 容器名 */
     Name: string;
-    /** 容器启动命令 */
-    Commands?: string[];
     /** 容器启动参数 */
     Args?: string[];
-    /** 容器内操作系统的环境变量 */
-    EnvironmentVars?: EnvironmentVariable[];
+    /** 容器启动命令 */
+    Commands?: string[];
     /** CPU，制改容器最多可使用的核数，该值不可超过容器实例的总核数。单位：核。 */
     Cpu?: number;
-    /** 内存，限制该容器最多可使用的内存值，该值不可超过容器实例的总内存值。单位：GiB */
-    Memory?: number;
-    /** 数据卷挂载信息 */
-    VolumeMounts?: VolumeMount[] | null;
     /** 当前状态 */
-    CurrentState?: ContainerState | null;
-    /** 重启次数 */
-    RestartCount?: number | null;
-    /** 容器工作目录 */
-    WorkingDir?: string | null;
-    /** 存活探针 */
-    LivenessProbe?: LivenessOrReadinessProbe | null;
-    /** 就绪探针 */
-    ReadinessProbe?: LivenessOrReadinessProbe | null;
+    CurrentState?: ContainerState;
+    /** 容器内操作系统的环境变量 */
+    EnvironmentVars?: EnvironmentVariable[];
     /** Gpu限制 */
     GpuLimit?: number | null;
+    /** 存活探针 */
+    LivenessProbe?: LivenessOrReadinessProbe | null;
+    /** 内存，限制该容器最多可使用的内存值，该值不可超过容器实例的总内存值。单位：GiB */
+    Memory?: number;
+    /** 就绪探针 */
+    ReadinessProbe?: LivenessOrReadinessProbe | null;
+    /** 重启次数 */
+    RestartCount?: number | null;
     /** 容器的安全上下文 */
     SecurityContext?: SecurityContext | null;
+    /** 数据卷挂载信息 */
+    VolumeMounts?: VolumeMount[] | null;
+    /** 容器工作目录 */
+    WorkingDir?: string;
   }
 
   /** 容器状态 */
   interface ContainerState {
+    /** 容器运行退出码 */
+    ExitCode?: number | null;
+    /** 容器运行结束时间 */
+    FinishTime?: string | null;
+    /** 容器状态信息 */
+    Message?: string | null;
+    /** 容器状态 Reason */
+    Reason?: string | null;
+    /** 容器重启次数 */
+    RestartCount?: number | null;
     /** 容器运行开始时间 */
     StartTime?: string | null;
     /** 容器状态：created, running, exited, unknown */
     State?: string;
-    /** 容器运行结束时间 */
-    FinishTime?: string | null;
-    /** 容器运行退出码 */
-    ExitCode?: number | null;
-    /** 容器状态 Reason */
-    Reason?: string | null;
-    /** 容器状态信息 */
-    Message?: string | null;
-    /** 容器重启次数 */
-    RestartCount?: number | null;
   }
 
   /** 集群中控制器的状态描述 */
@@ -1462,11 +1462,11 @@ declare namespace V20180525 {
   /** 自定义DNS配置 */
   interface DNSConfig {
     /** DNS 服务器IP地址列表 */
-    Nameservers?: string[] | null;
-    /** DNS搜索域列表 */
-    Searches?: string[] | null;
+    Nameservers?: string[];
     /** 对象选项列表，每个对象由name和value（可选）构成 */
-    Options?: DNSConfigOption[] | null;
+    Options?: DNSConfigOption[];
+    /** DNS搜索域列表 */
+    Searches?: string[];
   }
 
   /** DNS配置选项 */
@@ -1653,52 +1653,52 @@ declare namespace V20180525 {
 
   /** EksContainerInstance实例类型 */
   interface EksCi {
+    /** 自动为用户创建的EipId */
+    AutoCreatedEipId?: string;
+    /** 为容器实例关联 CAM 角色，value 填写 CAM 角色名称，容器实例可获取该 CAM 角色包含的权限策略，方便 容器实例 内的程序进行如购买资源、读写存储等云资源操作。 */
+    CamRoleName?: string;
+    /** 容器列表 */
+    Containers?: Container[];
+    /** CPU大小 */
+    Cpu?: number;
+    /** CPU类型 */
+    CpuType?: string;
+    /** 接到请求后的系统创建时间。 */
+    CreationTime?: string;
+    /** 容器实例绑定的Eip地址，注意可能为空 */
+    EipAddress?: string | null;
     /** EKS Cotainer Instance Id */
     EksCiId?: string;
     /** EKS Cotainer Instance Name */
     EksCiName?: string;
-    /** 内存大小 */
-    Memory?: number;
-    /** CPU大小 */
-    Cpu?: number;
-    /** 安全组ID */
-    SecurityGroupIds?: string[];
-    /** 容器组的重启策略 */
-    RestartPolicy?: string | null;
-    /** 返回容器组创建状态：Pending，Running，Succeeded，Failed。其中：Failed （运行失败）指的容器组退出，RestartPolilcy为Never， 有容器exitCode非0；Succeeded（运行成功）指的是容器组退出了，RestartPolicy为Never或onFailure，所有容器exitCode都为0；Failed和Succeeded这两种状态都会停止运行，停止计费。Pending是创建中，Running是 运行中。 */
-    Status?: string | null;
-    /** 接到请求后的系统创建时间。 */
-    CreationTime?: string | null;
-    /** 容器全部成功退出后的时间 */
-    SucceededTime?: string | null;
-    /** 容器列表 */
-    Containers?: Container[] | null;
     /** 数据卷信息 */
-    EksCiVolume?: EksCiVolume | null;
-    /** 容器组运行的安全上下文 */
-    SecurityContext?: SecurityContext | null;
-    /** 内网ip地址 */
-    PrivateIp?: string | null;
-    /** 容器实例绑定的Eip地址，注意可能为空 */
-    EipAddress?: string | null;
-    /** GPU类型。如无使用GPU则不返回 */
-    GpuType?: string | null;
-    /** CPU类型 */
-    CpuType?: string | null;
+    EksCiVolume?: EksCiVolume;
     /** GPU卡数量 */
-    GpuCount?: number | null;
-    /** 实例所属VPC的Id */
-    VpcId?: string | null;
-    /** 实例所属子网Id */
-    SubnetId?: string | null;
+    GpuCount?: number;
+    /** GPU类型。如无使用GPU则不返回 */
+    GpuType?: string;
     /** 初始化容器列表 */
     InitContainers?: Container[] | null;
-    /** 为容器实例关联 CAM 角色，value 填写 CAM 角色名称，容器实例可获取该 CAM 角色包含的权限策略，方便 容器实例 内的程序进行如购买资源、读写存储等云资源操作。 */
-    CamRoleName?: string | null;
-    /** 自动为用户创建的EipId */
-    AutoCreatedEipId?: string | null;
+    /** 内存大小 */
+    Memory?: number;
     /** 容器状态是否持久化 */
     PersistStatus?: boolean | null;
+    /** 内网ip地址 */
+    PrivateIp?: string;
+    /** 容器组的重启策略 */
+    RestartPolicy?: string;
+    /** 容器组运行的安全上下文 */
+    SecurityContext?: SecurityContext | null;
+    /** 安全组ID */
+    SecurityGroupIds?: string[];
+    /** 返回容器组创建状态：Pending，Running，Succeeded，Failed。其中：Failed （运行失败）指的容器组退出，RestartPolilcy为Never， 有容器exitCode非0；Succeeded（运行成功）指的是容器组退出了，RestartPolicy为Never或onFailure，所有容器exitCode都为0；Failed和Succeeded这两种状态都会停止运行，停止计费。Pending是创建中，Running是 运行中。 */
+    Status?: string;
+    /** 实例所属子网Id */
+    SubnetId?: string;
+    /** 容器全部成功退出后的时间 */
+    SucceededTime?: string;
+    /** 实例所属VPC的Id */
+    VpcId?: string;
   }
 
   /** EksCi地域信息 */
@@ -2224,11 +2224,11 @@ declare namespace V20180525 {
   /** 健康探针 */
   interface LivenessOrReadinessProbe {
     /** 探针参数 */
-    Probe: Probe | null;
-    /** HttpGet检测参数 */
-    HttpGet?: HttpGet | null;
+    Probe: Probe;
     /** 容器内检测命令参数 */
     Exec?: Exec | null;
+    /** HttpGet检测参数 */
+    HttpGet?: HttpGet;
     /** TcpSocket检测的端口参数 */
     TcpSocket?: TcpSocket | null;
   }
@@ -2259,10 +2259,10 @@ declare namespace V20180525 {
   interface NfsVolume {
     /** nfs volume 数据卷名称 */
     Name: string;
-    /** NFS 服务器地址 */
-    Server: string;
     /** NFS 数据卷路径 */
     Path: string;
+    /** NFS 服务器地址 */
+    Server: string;
     /** 默认为 False */
     ReadOnly?: boolean;
   }
@@ -2365,6 +2365,22 @@ declare namespace V20180525 {
     AutoCreateClientId?: string[] | null;
     /** 创建PodIdentityWebhook组件 */
     AutoInstallPodIdentityWebhookAddon?: boolean | null;
+  }
+
+  /** 操作系统描述 */
+  interface OSImage {
+    /** os聚合名称 */
+    SeriesName?: string;
+    /** os别名 */
+    Alias?: string;
+    /** os名称 */
+    OsName?: string;
+    /** 操作系统类型(分为定制和非定制，取值分别为:DOCKER_CUSTOMIZE、GENERAL) */
+    OsCustomizeType?: string;
+    /** os是否下线(online表示在线,offline表示下线) */
+    Status?: string;
+    /** 镜像id */
+    ImageId?: string;
   }
 
   /** 策略实例信息 */
@@ -2521,16 +2537,16 @@ declare namespace V20180525 {
 
   /** 健康检查探测参数 */
   interface Probe {
+    /** Minimum consecutive failures for the probe to be considered failed after having succeeded.Defaults to 3. Minimum value is 1. */
+    FailureThreshold?: number | null;
     /** Number of seconds after the container has started before liveness probes are initiated. */
     InitialDelaySeconds?: number | null;
-    /** Number of seconds after which the probe times out.Defaults to 1 second. Minimum value is 1. */
-    TimeoutSeconds?: number | null;
     /** How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is 1. */
     PeriodSeconds?: number | null;
     /** Minimum consecutive successes for the probe to be considered successful after having failed.Defaults to 1. Must be 1 for liveness. Minimum value is 1. */
     SuccessThreshold?: number | null;
-    /** Minimum consecutive failures for the probe to be considered failed after having succeeded.Defaults to 3. Minimum value is 1. */
-    FailureThreshold?: number | null;
+    /** Number of seconds after which the probe times out.Defaults to 1 second. Minimum value is 1. */
+    TimeoutSeconds?: number | null;
   }
 
   /** 托管Prometheus agent信息 */
@@ -3436,7 +3452,7 @@ declare namespace V20180525 {
   /** 探针使用TcpSocket检测容器 */
   interface TcpSocket {
     /** TcpSocket检测的端口 */
-    Port?: number | null;
+    Port?: number;
   }
 
   /** kubernetes Taint */
@@ -3533,16 +3549,16 @@ declare namespace V20180525 {
 
   /** 数据卷挂载路径信息 */
   interface VolumeMount {
-    /** volume名称 */
-    Name: string | null;
     /** 挂载路径 */
     MountPath: string | null;
+    /** volume名称 */
+    Name: string | null;
+    /** 传播挂载方式 */
+    MountPropagation?: string | null;
     /** 是否只读 */
     ReadOnly?: boolean | null;
     /** 子路径 */
     SubPath?: string | null;
-    /** 传播挂载方式 */
-    MountPropagation?: string | null;
     /** 子路径表达式 */
     SubPathExpr?: string | null;
   }
@@ -5402,9 +5418,9 @@ declare namespace V20180525 {
 
   interface DescribeEKSContainerInstanceRegionsResponse {
     /** EKS Container Instance支持的地域信息 */
-    Regions: EksCiRegionInfo[] | null;
+    Regions?: EksCiRegionInfo[];
     /** 总数 */
-    TotalCount: number;
+    TotalCount?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5739,6 +5755,18 @@ declare namespace V20180525 {
   interface DescribeLogSwitchesResponse {
     /** 集群日志开关集合 */
     SwitchSet?: Switch[] | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeOSImagesRequest {
+  }
+
+  interface DescribeOSImagesResponse {
+    /** 镜像信息列表 */
+    OSImageSeriesSet?: OSImage[] | null;
+    /** 镜像数量 */
+    TotalCount?: number | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -7420,7 +7448,7 @@ declare namespace V20180525 {
 
   interface UpdateEKSContainerInstanceResponse {
     /** 容器实例 ID */
-    EksCiId?: string | null;
+    EksCiId?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -7833,6 +7861,8 @@ declare interface Tke {
   DescribeLogConfigs(data: V20180525.DescribeLogConfigsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeLogConfigsResponse>;
   /** 查询集群日志开关列表 {@link V20180525.DescribeLogSwitchesRequest} {@link V20180525.DescribeLogSwitchesResponse} */
   DescribeLogSwitches(data: V20180525.DescribeLogSwitchesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeLogSwitchesResponse>;
+  /** 获取OS聚合信息 {@link V20180525.DescribeOSImagesRequest} {@link V20180525.DescribeOSImagesResponse} */
+  DescribeOSImages(data: V20180525.DescribeOSImagesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeOSImagesResponse>;
   /** 查询opa策略列表 {@link V20180525.DescribeOpenPolicyListRequest} {@link V20180525.DescribeOpenPolicyListResponse} */
   DescribeOpenPolicyList(data: V20180525.DescribeOpenPolicyListRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeOpenPolicyListResponse>;
   /** 查询超级节点上正在运行中Pod的计费信息 {@link V20180525.DescribePodChargeInfoRequest} {@link V20180525.DescribePodChargeInfoResponse} */

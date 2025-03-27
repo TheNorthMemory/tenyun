@@ -121,7 +121,7 @@ declare interface ApplyChainMakerBatchUserCertRequest {
 
 declare interface ApplyChainMakerBatchUserCertResponse {
   /** 成功生成的用户证书的base64编码字符串列表，与SignUserCsrList一一对应 */
-  SignUserCrtList: string[] | null;
+  SignUserCrtList?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -507,7 +507,7 @@ declare interface InvokeChainMakerContractRequest {
 
 declare interface InvokeChainMakerContractResponse {
   /** 交易结果 */
-  Result?: ChainMakerContractResult | null;
+  Result?: ChainMakerContractResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -605,11 +605,11 @@ declare interface QueryChainMakerBlockTransactionRequest {
 
 declare interface QueryChainMakerBlockTransactionResponse {
   /** 区块交易 */
-  Result?: ChainMakerTransactionResult[] | null;
+  Result?: ChainMakerTransactionResult[];
   /** 区块高度 */
   BlockHeight?: number;
   /** 交易数量 */
-  TxCount?: number | null;
+  TxCount?: number;
   /** 区块时间戳，单位是秒 */
   BlockTimestamp?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -631,7 +631,7 @@ declare interface QueryChainMakerContractRequest {
 
 declare interface QueryChainMakerContractResponse {
   /** 交易结果 */
-  Result?: ChainMakerContractResult | null;
+  Result?: ChainMakerContractResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -705,7 +705,7 @@ declare interface QueryChainMakerTransactionRequest {
 
 declare interface QueryChainMakerTransactionResponse {
   /** 交易结果 */
-  Result?: ChainMakerTransactionResult | null;
+  Result?: ChainMakerTransactionResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

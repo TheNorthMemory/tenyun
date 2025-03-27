@@ -535,7 +535,7 @@ declare interface ServiceAccount {
   /** 过期时间 */
   ExpiresAt?: number;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 更新时间 */
   UpdateTime?: string;
   /** 策略 */
@@ -1627,9 +1627,9 @@ declare interface DescribeExternalEndpointStatusRequest {
 
 declare interface DescribeExternalEndpointStatusResponse {
   /** 开启公网访问状态，开启中（Opening）、已开启（Opened）、关闭（Closed） */
-  Status: string;
+  Status?: string;
   /** 原因 */
-  Reason: string | null;
+  Reason?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1731,9 +1731,9 @@ declare interface DescribeImageManifestsResponse {
   /** 镜像的配置信息 */
   Config?: string;
   /** 镜像的Labels信息 */
-  Labels?: KeyValueString[] | null;
+  Labels?: KeyValueString[];
   /** 镜像大小，单位：byte */
-  Size?: number | null;
+  Size?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1787,13 +1787,17 @@ declare interface DescribeImagesResponse {
 declare interface DescribeImmutableTagRulesRequest {
   /** 实例 Id */
   RegistryId: string;
+  /** 页数，默认为1 */
+  Page?: number;
+  /** 每页展示个数，最大值为100 */
+  PageSize?: number;
 }
 
 declare interface DescribeImmutableTagRulesResponse {
   /** 规则列表 */
-  Rules?: ImmutableTagRule[] | null;
+  Rules?: ImmutableTagRule[];
   /** 未创建规则的命名空间 */
-  EmptyNs?: string[] | null;
+  EmptyNs?: string[];
   /** 规则总量 */
   Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1823,7 +1827,7 @@ declare interface DescribeInstanceCustomizedDomainRequest {
 
 declare interface DescribeInstanceCustomizedDomainResponse {
   /** 域名信息列表 */
-  DomainInfoList?: CustomizedDomainInfo[] | null;
+  DomainInfoList?: CustomizedDomainInfo[];
   /** 总个数 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1877,7 +1881,7 @@ declare interface DescribeInstancesResponse {
   /** 总实例个数 */
   TotalCount?: number;
   /** 实例信息列表 */
-  Registries?: Registry[] | null;
+  Registries?: Registry[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1889,7 +1893,7 @@ declare interface DescribeInternalEndpointDnsStatusRequest {
 
 declare interface DescribeInternalEndpointDnsStatusResponse {
   /** vpc私有域名解析状态列表 */
-  VpcSet: VpcPrivateDomainStatus[] | null;
+  VpcSet?: VpcPrivateDomainStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2123,7 +2127,7 @@ declare interface DescribeServiceAccountsRequest {
 
 declare interface DescribeServiceAccountsResponse {
   /** 服务级账号列表 */
-  ServiceAccounts?: ServiceAccount[] | null;
+  ServiceAccounts?: ServiceAccount[];
   /** 服务级账户数量 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */

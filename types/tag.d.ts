@@ -51,9 +51,9 @@ declare interface ResourceTag {
 /** 资源及关联的标签(键和值)。 */
 declare interface ResourceTagMapping {
   /** 资源六段式。腾讯云使用资源六段式描述一个资源。例如：ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}。 */
-  Resource: string;
+  Resource?: string;
   /** 资源关联的标签列表 */
-  Tags: TagInfo[];
+  Tags?: TagInfo[];
 }
 
 /** 表示一个标签键值对 */

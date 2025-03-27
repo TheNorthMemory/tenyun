@@ -676,6 +676,8 @@ declare interface DatasourceConnectionConfig {
   TDSQLPostgreSql?: DataSourceInfo | null;
   /** Doris数据源连接的属性 */
   TCHouseD?: TCHouseD | null;
+  /** TccHive数据目录连接信息 */
+  TccHive?: TccHive;
 }
 
 /** 数据源信息 */
@@ -803,7 +805,7 @@ declare interface HiveInfo {
   /** emr集群名称 */
   InstanceName?: string | null;
   /** EMR集群中hive组件的版本号 */
-  HiveVersion?: string | null;
+  HiveVersion?: string;
   /** Kerberos详细信息 */
   KerberosInfo?: KerberosInfo | null;
   /** 是否开启Kerberos */
@@ -952,6 +954,22 @@ declare interface MysqlInfo {
   InstanceId?: string | null;
   /** 数据库实例名称，和数据库侧保持一致 */
   InstanceName?: string | null;
+}
+
+/** 网络配置信息 */
+declare interface NetWork {
+  /** 服务clbip */
+  ClbIp?: string;
+  /** 服务clbPort */
+  ClbPort?: string;
+  /** vpc实例id */
+  VpcId?: string;
+  /** vpc网段 */
+  VpcCidrBlock?: string;
+  /** 子网实例id */
+  SubnetId?: string;
+  /** 子网网段 */
+  SubnetCidrBlock?: string;
 }
 
 /** 网络配置 */
@@ -1559,21 +1577,21 @@ declare interface StreamingStatistics {
 /** Doirs数据源详细信息 */
 declare interface TCHouseD {
   /** 数据源实例的唯一ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 数据源名称 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 数据源的JDBC */
-  JdbcUrl?: string | null;
+  JdbcUrl?: string;
   /** 用于访问数据源的用户 */
-  User?: string | null;
+  User?: string;
   /** 数据源访问密码，需要base64编码 */
-  Password?: string | null;
+  Password?: string;
   /** 数据源的VPC和子网信息 */
   Location?: DatasourceConnectionLocation | null;
   /** 默认数据库名 */
-  DbName?: string | null;
+  DbName?: string;
   /** 访问信息 */
-  AccessInfo?: string | null;
+  AccessInfo?: string;
 }
 
 /** 表字段描述信息 */
@@ -1882,6 +1900,24 @@ declare interface TasksOverview {
   TaskRunningCount: number;
   /** 当前时间范围的总任务个数 */
   TotalTaskCount: number;
+}
+
+/** TccHive数据结构 */
+declare interface TccHive {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 终端节点服务ID */
+  EndpointServiceId?: string;
+  /** thrift连接地址 */
+  MetaStoreUrl?: string;
+  /** hive版本 */
+  HiveVersion?: string;
+  /** 网络信息 */
+  TccConnection?: NetWork;
+  /** Hms终端节点服务ID */
+  HmsEndpointServiceId?: string;
 }
 
 /** 文本格式 */

@@ -90,31 +90,31 @@ declare interface DeviceCertificateItem {
   ClientId?: string;
   /** 设备证书 */
   DeviceCertificate?: string;
-  /** 设备证书Sn */
+  /** 设备证书SN序列号，用于唯一标识一个设备证书 */
   DeviceCertificateSn?: string;
   /** 设备证书Cn */
   DeviceCertificateCn?: string;
-  /** 签发ca的序列号 */
+  /** 签发该证书的CA证书的序列号 */
   CaSn?: string;
-  /** 证书格式 */
+  /** 证书格式，当前仅支持PEM */
   Format?: string;
-  /** 证书状态 ACTIVE,//激活 INACTIVE,//未激活 REVOKED,//吊销 PENDING_ACTIVATION,//注册待激活 */
+  /** 设备证书状态 ACTIVE：激活 INACTIVE：未激活 REVOKED：吊销 PENDING_ACTIVATION：注册待激活 */
   Status?: string;
   /** 组织单位 */
   OrganizationalUnit?: string;
-  /** 上次激活时间 */
+  /** 上次激活时间，毫秒级时间戳 。 */
   LastActivationTime?: number;
-  /** 上次取消激活时间 */
+  /** 上次取消激活时间，毫秒级时间戳 。 */
   LastInactivationTime?: number;
-  /** 创建时间 */
+  /** 创建时间，毫秒级时间戳 。 */
   CreatedTime?: number;
-  /** 预销毁时间 */
+  /** 更新时间，毫秒级时间戳 。 */
   UpdateTime?: number;
   /** 证书来源：API, 手动注册 JITP 自动注册 */
   CertificateSource?: string;
-  /** 证书失效日期 */
+  /** 证书失效日期，毫秒级时间戳 。 */
   NotAfterTime?: number;
-  /** 证书生效开始日期 */
+  /** 证书生效开始日期，毫秒级时间戳 。 */
   NotBeforeTime?: number;
 }
 
@@ -238,7 +238,7 @@ declare interface MQTTInstanceItem {
   MaxSubscriptionPerClient?: number;
   /** 客户端连接数上线 */
   ClientNumLimit?: number;
-  /** 是否自动续费。仅包年包月就去那生效。1:自动续费0:非自动续费 */
+  /** 是否自动续费。仅包年包月集群生效。1:自动续费0:非自动续费 */
   RenewFlag?: number;
   /** 计费模式， POSTPAID，按量计费 PREPAID，包年包月 */
   PayMode?: string;
@@ -369,9 +369,9 @@ declare interface VpcInfo {
 }
 
 declare interface ActivateCaCertificateRequest {
-  /** 集群id */
+  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
   InstanceId: string;
-  /** 证书序列号 */
+  /** CA证书的SN序列号，可以从 [DescribeCaCertificates](https://cloud.tencent.com/document/api/1778/116206)接口、控制台、证书文件中获得。 */
   CaSn: string;
 }
 
@@ -583,7 +583,7 @@ declare interface CreateUserRequest {
   InstanceId: string;
   /** 用户名，不能为空，只支持数字 大小写字母 分隔符("_","-")，不能超过 32 个字符 */
   Username: string;
-  /** 密码，该字段为空时候则后端会默认生成 */
+  /** 密码，该字段为空时候则后端会默认生成。用户自定义密码时，不能为空，只支持数字 大小写字母 分隔符("_","-")，不能超过 64 个字符。 */
   Password?: string;
   /** 备注，长度不超过128个字符。 */
   Remark?: string;
@@ -645,7 +645,7 @@ declare interface DeleteAuthorizationPolicyResponse {
 declare interface DeleteCaCertificateRequest {
   /** 实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
   InstanceId: string;
-  /** 证书序列号，可以从 [DescribeCaCertificates](https://cloud.tencent.com/document/api/1778/116206)接口、控制台、证书文件中获得。 */
+  /** CA证书序列号，可以从 [DescribeCaCertificates](https://cloud.tencent.com/document/api/1778/116206)接口、控制台、证书文件中获得。 */
   CaSn: string;
 }
 
@@ -677,7 +677,7 @@ declare interface DeleteInsPublicEndpointResponse {
 }
 
 declare interface DeleteInstanceRequest {
-  /** 实例ID */
+  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
   InstanceId: string;
 }
 
@@ -737,36 +737,36 @@ declare interface DescribeAuthorizationPoliciesResponse {
 }
 
 declare interface DescribeCaCertificateRequest {
-  /** ca证书sn */
+  /** CA证书的SN序列号，可以从 [DescribeCaCertificates](https://cloud.tencent.com/document/api/1778/116206)接口、控制台、证书文件中获得。 */
   CaSn: string;
-  /** 集群id */
+  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
   InstanceId: string;
 }
 
 declare interface DescribeCaCertificateResponse {
-  /** 创建时间 */
+  /** 创建时间，毫秒级时间戳 。 */
   CreatedTime?: number;
-  /** 上次更新时间 */
+  /** 上次更新时间，毫秒级时间戳 。 */
   UpdateTime?: number;
-  /** 失效日期 */
+  /** 失效日期，毫秒级时间戳 。 */
   NotAfterTime?: number;
-  /** 上次激活时间 */
+  /** 上次激活时间，毫秒级时间戳 。 */
   LastActivationTime?: number;
-  /** 上次吊销时间 */
+  /** 上次吊销时间，毫秒级时间戳 。 */
   LastInactivationTime?: number;
-  /** 证书状态 */
+  /** CA证书状态 ACTIVE：激活INACTIVE：未激活 */
   Status?: string;
   /** 证书序列号 */
   CaSn?: string;
-  /** common name */
+  /** 证书的CN（Common Name），证书中用于标识主体的名称，通常是域名或组织名称 */
   CaCn?: string;
   /** 证书内容 */
   CaCertificate?: string;
-  /** 证书格式 */
+  /** 证书格式，当仅支持PEM格式 */
   Format?: string;
   /** Ca证书颁发者CN */
   CaIssuerCn?: string;
-  /** 生效开始时间 */
+  /** 生效开始时间，毫秒级时间戳 。 */
   NotBeforeTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -787,7 +787,7 @@ declare interface DescribeCaCertificatesResponse {
 declare interface DescribeClientListRequest {
   /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
   InstanceId: string;
-  /** 客户端名 */
+  /** 客户端ID */
   ClientId?: string;
   /** 客户端数量限制,最大1024，默认1024 */
   Number?: string;
@@ -843,22 +843,22 @@ declare interface DescribeDeviceCertificateResponse {
 }
 
 declare interface DescribeDeviceCertificatesRequest {
-  /** 实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
   InstanceId: string;
-  /** 支持搜索参数ClientId：客户端idCaSn：所属的CA证书SNDeviceCertificateSn：设备证书SNDeviceCertificateCn：设备证书CNOrganizationalUnit：证书OUNotAfterEnd：过期时间小于等于指定时间的证书NotAfterStart：过期时间大于等于指定时间的证书Status：证书状态 */
+  /** 支持搜索参数ClientId：客户端id，根据实际业务使用获取CaSn：所属的CA证书SN序列号 可以从 [查询集群CA证书列表](https://cloud.tencent.com/document/api/1778/116206) 或者实际业务使用获取DeviceCertificateSn：设备证书SN序列号 可从[查询设备证书详情](https://cloud.tencent.com/document/api/1778/113748) 获取DeviceCertificateCn：设备证书CN 可从[查询设备证书详情](https://cloud.tencent.com/document/api/1778/113748) 获取OrganizationalUnit：证书OUNotAfterEnd：过期时间小于等于指定时间的证书NotAfterStart：过期时间大于等于指定时间的证书Status：设备证书状态 ACTIVE（激活）； INACTIVE（未激活）REVOKED（吊销）；PENDING_ACTIVATION（注册待激活） */
   Filters?: Filter[];
-  /** 分页limit */
+  /** 分页limit，默认20，最大100 */
   Limit?: number;
-  /** 分页偏移量 */
+  /** 分页偏移量，默认0 */
   Offset?: number;
-  /** CREATE_TIME_DESC, 创建时间降序 CREATE_TIME_ASC,创建时间升序 UPDATE_TIME_DESC,更新时间降序 UPDATE_TIME_ASC,更新时间升序 */
+  /** 排序规则 CREATE_TIME_DESC, 创建时间降序 CREATE_TIME_ASC,创建时间升序 UPDATE_TIME_DESC,更新时间降序 UPDATE_TIME_ASC,更新时间升序 */
   OrderBy?: string;
 }
 
 declare interface DescribeDeviceCertificatesResponse {
   /** 总数 */
   TotalCount?: number;
-  /** 设备证书 */
+  /** 设备证书列表 */
   Data?: DeviceCertificateItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1033,7 +1033,7 @@ declare interface DescribeTopicListRequest {
   Filters?: Filter[];
   /** 查询起始位置，默认0。 */
   Offset?: number;
-  /** 查询结果限制数量，默认0，最大20 */
+  /** 查询结果限制数量，默认20，最大20 */
   Limit?: number;
 }
 
@@ -1299,15 +1299,15 @@ declare interface PublishMessageResponse {
 }
 
 declare interface RegisterCaCertificateRequest {
-  /** 集群id */
+  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
   InstanceId: string;
-  /** CA证书 */
+  /** CA证书内容，自签CA可参考 [自定义 X.509 证书实现 “一机一证”](https://cloud.tencent.com/document/product/1778/114817) 签发自签CA */
   CaCertificate: string;
-  /** 验证证书 */
+  /** 验证证书内容，可参考 [自定义 X.509 证书实现 “一机一证”](https://cloud.tencent.com/document/product/1778/114817) 手动注册CA证书章节 */
   VerificationCertificate: string;
-  /** 证书格式，不传默认PEM格式 */
+  /** 证书格式，不传默认PEM格式，当前仅支持PEM格式 */
   Format?: string;
-  /** 证书状态，不传默认ACTIVE状态 ACTIVE,//激活 INACTIVE,//未激活 REVOKED,//吊销 PENDING_ACTIVATION,//注册待激活 */
+  /** 证书状态，不传默认ACTIVE状态 ACTIVE：激活 INACTIVE：未激活 */
   Status?: string;
 }
 
@@ -1317,17 +1317,17 @@ declare interface RegisterCaCertificateResponse {
 }
 
 declare interface RegisterDeviceCertificateRequest {
-  /** 集群id */
+  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
   InstanceId: string;
-  /** 设备证书 */
+  /** 设备证书内容，可参考 [使用 CA 证书生成服务端/客户端证书](https://cloud.tencent.com/document/product/1778/114817) 生成 */
   DeviceCertificate: string;
   /** 关联的CA证书SN */
   CaSn: string;
-  /** 客户端ID */
+  /** 客户端ID，需要关联该证书的客户端ID。根据实际业务使用填写 */
   ClientId?: string;
-  /** 证书格式 */
+  /** 证书格式，默认为PEM，当前仅支持PEM格式 */
   Format?: string;
-  /** ACTIVE,//激活 INACTIVE,//未激活 REVOKED,//吊销 PENDING_ACTIVATION,//注册待激活 */
+  /** 客户端证书状态，默认激活状态（ACTIVE）ACTIVE：激活 INACTIVE：未激活 REVOKED：吊销 PENDING_ACTIVATION：注册待激活 */
   Status?: string;
 }
 
