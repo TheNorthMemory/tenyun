@@ -88,6 +88,8 @@ declare interface ClusterOverview {
   AutoScalingType?: string;
   /** 集群所属私有网络ID。 */
   VpcId?: string;
+  /** 集群类型 */
+  ClusterType?: string;
 }
 
 /** 计算节点信息。 */

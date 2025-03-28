@@ -485,7 +485,7 @@ declare interface DistributeRule {
   /** 表名匹配规则，如果 DatabaseType 为 mongodb，则匹配集合名 */
   TablePattern: string;
   /** 列名。如果 RuleType 为 cols，此项必填。订阅任务会用该列的值计算分区。mongo没有按列分区，因此也不用传这个字段。 */
-  Columns?: string[] | null;
+  Columns?: string[];
 }
 
 /** 数据同步中的选项 */
@@ -943,7 +943,7 @@ declare interface SkippedDetail {
   /** 跳过的表数量 */
   TotalCount?: number;
   /** 跳过校验的表详情 */
-  Items?: SkippedItem[] | null;
+  Items?: SkippedItem[];
 }
 
 /** 跳过校验的表详情 */
@@ -1001,15 +1001,15 @@ declare interface StepInfo {
 /** 当前步骤错误信息或者警告信息 */
 declare interface StepTip {
   /** 错误码 */
-  Code?: string | null;
+  Code?: string;
   /** 错误信息 */
-  Message?: string | null;
+  Message?: string;
   /** 解决方式 */
-  Solution?: string | null;
+  Solution?: string;
   /** 帮助文档 */
-  HelpDoc?: string | null;
+  HelpDoc?: string;
   /** 当前步骤跳过信息 */
-  SkipInfo?: string | null;
+  SkipInfo?: string;
 }
 
 /** 订阅报错信息 */
@@ -2686,7 +2686,7 @@ declare namespace V20180330 {
     /** 任务错误信息提示，当任务发生错误时，不为null或者空值 */
     ErrorInfo?: ErrorInfo[];
     /** 标签 */
-    Tags?: TagItem[] | null;
+    Tags?: TagItem[];
     /** 源实例为集群时且接入为非cdb时源实例信息 */
     SrcInfoMulti?: SrcInfo[] | null;
   }

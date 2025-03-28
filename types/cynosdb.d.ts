@@ -181,19 +181,19 @@ declare interface AuditRuleTemplateInfo {
   /** 规则模板的过滤条件 */
   RuleFilters?: RuleFilters[];
   /** 规则模板描述。 */
-  Description?: string | null;
+  Description?: string;
   /** 规则模板创建时间。 */
   CreateAt?: string;
   /** 规则模板修改时间。 */
-  UpdateAt?: string | null;
+  UpdateAt?: string;
   /** 告警等级。1-低风险，2-中风险，3-高风险。 */
-  AlarmLevel?: number | null;
+  AlarmLevel?: number;
   /** 告警策略。0-不告警，1-告警。 */
-  AlarmPolicy?: number | null;
+  AlarmPolicy?: number;
   /** 模板状态。0-无任务 ，1-修改中。 */
-  Status?: number | null;
+  Status?: number;
   /** 规则模板应用在哪些在实例。 */
-  AffectedInstances?: string[] | null;
+  AffectedInstances?: string[];
 }
 
 /** 备份文件信息 */
@@ -3001,7 +3001,7 @@ declare interface DescribeAuditRuleTemplatesResponse {
   /** 符合查询条件的实例总数。 */
   TotalCount?: number;
   /** 规则模板详细信息列表。 */
-  Items?: AuditRuleTemplateInfo[] | null;
+  Items?: AuditRuleTemplateInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

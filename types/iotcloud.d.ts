@@ -23,9 +23,9 @@ declare interface BindDeviceInfo {
 /** 子产品信息 */
 declare interface BindProductInfo {
   /** 产品ID */
-  ProductId: string;
+  ProductId?: string;
   /** 产品名 */
-  ProductName: string;
+  ProductName?: string;
 }
 
 /** 代理订阅信息 */
@@ -525,21 +525,21 @@ declare interface CreateDeviceRequest {
 
 declare interface CreateDeviceResponse {
   /** 设备名称 */
-  DeviceName: string;
+  DeviceName?: string;
   /** 对称加密密钥，base64编码。采用对称加密时返回该参数 */
-  DevicePsk: string;
+  DevicePsk?: string;
   /** 设备证书，用于 TLS 建立链接时校验客户端身份。采用非对称加密时返回该参数 */
-  DeviceCert: string;
+  DeviceCert?: string;
   /** 设备私钥，用于 TLS 建立链接时校验客户端身份，腾讯云后台不保存，请妥善保管。采用非对称加密时返回该参数 */
-  DevicePrivateKey: string;
+  DevicePrivateKey?: string;
   /** LoRa设备的DevEui，当设备是LoRa设备时，会返回该字段 */
-  LoraDevEui: string;
+  LoraDevEui?: string;
   /** LoRa设备的MoteType，当设备是LoRa设备时，会返回该字段 */
-  LoraMoteType: number;
+  LoraMoteType?: number;
   /** LoRa设备的AppKey，当设备是LoRa设备时，会返回该字段 */
-  LoraAppKey: string;
+  LoraAppKey?: string;
   /** LoRa设备的NwkKey，当设备是LoRa设备时，会返回该字段 */
-  LoraNwkKey: string;
+  LoraNwkKey?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -2050,7 +2050,7 @@ declare interface SQLServerParam {
 declare interface SaleInfo {
   /** 手动设置的flag标志 */
   Flag?: boolean;
-  /** ckakfa版本号(1.1.1/2.4.2/0.10.2) */
+  /** ckafka版本号(1.1.1/2.4.2/0.10.2) */
   Version?: string;
   /** 专业版、标准版标志 */
   Platform?: string;
@@ -2589,7 +2589,7 @@ declare interface CreateAclRequest {
   ResourceType: number;
   /** Acl操作方式，(2:ALL，3:READ，4:WRITE，5:CREATE，6:DELETE，7:ALTER，8:DESCRIBE，9:CLUSTER_ACTION，10:DESCRIBE_CONFIGS，11:ALTER_CONFIGS，12:IDEMPOTENT_WRITE) */
   Operation: number;
-  /** 权限类型，(2:DENY，3:ALLOW)，当前ckakfa支持ALLOW(相当于白名单)，其它用于后续兼容开源kafka的acl时使用 */
+  /** 权限类型，(2:DENY，3:ALLOW)，当前ckafka支持ALLOW(相当于白名单)，其它用于后续兼容开源kafka的acl时使用 */
   PermissionType: number;
   /** 资源名称，和resourceType相关，如当resourceType为TOPIC时，则该字段表示topic名称，当resourceType为GROUP时，该字段表示group名称，当resourceType为CLUSTER时，该字段可为空。 */
   ResourceName?: string;
@@ -3079,7 +3079,7 @@ declare interface DeleteAclRequest {
   ResourceName: string;
   /** Acl操作方式，(2:ALL，3:READ，4:WRITE，5:CREATE，6:DELETE，7:ALTER，8:DESCRIBE，9:CLUSTER_ACTION，10:DESCRIBE_CONFIGS，11:ALTER_CONFIGS，12:IDEMPOTENT_WRITE) */
   Operation: number;
-  /** 权限类型，(2:DENY，3:ALLOW)，当前ckakfa支持ALLOW(相当于白名单)，其它用于后续兼容开源kafka的acl时使用 */
+  /** 权限类型，(2:DENY，3:ALLOW)，当前ckafka支持ALLOW(相当于白名单)，其它用于后续兼容开源kafka的acl时使用 */
   PermissionType: number;
   /** 默认为\*，表示任何host都可以访问，当前ckafka不支持host为\*，但是后面开源kafka的产品化会直接支持 */
   Host?: string;

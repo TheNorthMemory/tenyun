@@ -4354,20 +4354,6 @@ declare interface ImportRocketMQTopicsResponse {
   RequestId?: string;
 }
 
-declare interface ModifyAMQPClusterRequest {
-  /** 集群ID */
-  ClusterId: string;
-  /** 3-64个字符，只能包含字母、数字、“-”及“_” */
-  ClusterName: string;
-  /** 说明信息，不超过128个字符 */
-  Remark?: string;
-}
-
-declare interface ModifyAMQPClusterResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ModifyClusterRequest {
   /** Pulsar 集群的ID，需要更新的集群Id。 */
   ClusterId: string;
@@ -5305,8 +5291,6 @@ declare interface Tdmq {
   ImportRocketMQConsumerGroups(data: ImportRocketMQConsumerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportRocketMQConsumerGroupsResponse>;
   /** 平滑迁移：导入topic列表 {@link ImportRocketMQTopicsRequest} {@link ImportRocketMQTopicsResponse} */
   ImportRocketMQTopics(data: ImportRocketMQTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportRocketMQTopicsResponse>;
-  /** @deprecated 更新Amqp集群信息 {@link ModifyAMQPClusterRequest} {@link ModifyAMQPClusterResponse} */
-  ModifyAMQPCluster(data: ModifyAMQPClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAMQPClusterResponse>;
   /** 更新集群信息 {@link ModifyClusterRequest} {@link ModifyClusterResponse} */
   ModifyCluster(data: ModifyClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterResponse>;
   /** 修改cmq队列属性 {@link ModifyCmqQueueAttributeRequest} {@link ModifyCmqQueueAttributeResponse} */

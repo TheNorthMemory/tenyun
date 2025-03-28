@@ -219,15 +219,15 @@ declare interface GetOverSummaryRequest {
 
 declare interface GetOverSummaryResponse {
   /** 用户参与应用的统计指标 */
-  AppCounter?: ResourceCounterData | null;
+  AppCounter?: ResourceCounterData;
   /** 用户部署应用的统计指标 */
-  UserCounter?: ResourceCounterData | null;
+  UserCounter?: ResourceCounterData;
   /** 用户参与的应用总数 */
-  AppCnt?: number | null;
+  AppCnt?: number;
   /** 用户部署的应用总数 */
-  DeployCnt?: number | null;
+  DeployCnt?: number;
   /** 部署网络子链总数 */
-  ChainCnt?: number | null;
+  ChainCnt?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

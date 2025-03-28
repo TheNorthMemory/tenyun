@@ -978,7 +978,7 @@ declare interface InvoiceGeneralInfo {
 declare interface InvoiceItem {
   /** 识别结果。OK：表示识别成功；FailedOperation.UnsupportedInvoice：表示不支持识别；FailedOperation.UnKnowError：表示识别失败；其它错误码见各个票据接口的定义。 */
   Code?: string;
-  /** 识别出的图片所属的票据类型。-1：未知类型0：出租车发票1：定额发票2：火车票3：增值税发票5：机票行程单8：通用机打发票9：汽车票10：轮船票11：增值税发票（卷票）12：购车发票13：过路过桥费发票15：非税发票16：全电发票17：医疗发票18：完税凭证19：海关缴款书 */
+  /** 识别出的图片所属的票据类型。-1：未知类型0：出租车发票1：定额发票2：火车票3：增值税发票5：机票行程单8：通用机打发票9：汽车票10：轮船票11：增值税发票（卷票）12：购车发票13：过路过桥费发票15：非税发票16：全电发票17：医疗发票18：完税凭证19：海关缴款书20：银行回单 */
   Type?: number;
   /** 该发票在原图片中的四点坐标。 */
   Polygon?: Polygon;
@@ -1848,14 +1848,6 @@ declare interface SingleInvoiceItem {
   CustomsPaymentReceipt?: CustomsPaymentReceipt | null;
   /** 银行回单 */
   BankSlip?: BankSlip | null;
-}
-
-/** 智慧表单上传文件信息 */
-declare interface SmartFormFileUrl {
-  /** 文件url地址 */
-  FileUrl: string;
-  /** 文件的顺序，顺序从1开始 */
-  FileOrderNumber: number;
 }
 
 /** 门头照识别结果 */
@@ -3256,26 +3248,6 @@ declare interface ClassifyStoreNameResponse {
   RequestId?: string;
 }
 
-declare interface CreateAIFormTaskRequest {
-  /** 多个文件的URL列表 */
-  FileList: SmartFormFileUrl[];
-  /** 备注信息1 */
-  FirstNotes?: string;
-  /** 备注信息2 */
-  SecondNotes?: string;
-  /** 文件类型 */
-  FileType?: number;
-}
-
-declare interface CreateAIFormTaskResponse {
-  /** 本次识别任务的唯一身份ID */
-  TaskId?: string | null;
-  /** 本次识别任务的操作URL，有效期自生成之时起共24小时 */
-  OperateUrl?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DriverLicenseOCRRequest {
   /** 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -3664,18 +3636,6 @@ declare interface GetOCRTokenResponse {
   RequestId?: string;
 }
 
-declare interface GetTaskStateRequest {
-  /** 智慧表单任务唯一身份ID */
-  TaskId: string;
-}
-
-declare interface GetTaskStateResponse {
-  /** 1:任务识别完成，还未提交2:任务已手动关闭3:任务已提交4:任务识别中5:超时：任务超过了可操作的24H时限6:任务识别失败 */
-  TaskState?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface HKIDCardOCRRequest {
   /** 是否返回人像照片。 */
   ReturnHeadImage?: boolean;
@@ -3939,11 +3899,11 @@ declare interface MLIDCardOCRResponse {
 }
 
 declare interface MLIDPassportOCRRequest {
-  /** 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。 */
+  /** 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。建议卡片部分占据图片2/3以上。 */
   ImageBase64?: string;
   /** 是否返回图片，默认false */
   RetImage?: boolean;
-  /** 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。 */
+  /** 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。 */
   ImageUrl?: string;
 }
 
@@ -4465,7 +4425,7 @@ declare interface RecognizeGeneralInvoiceRequest {
   ImageBase64?: string;
   /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：单边介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
-  /** 需要识别的票据类型列表，为空或不填表示识别全部类型。当传入单个类型时，图片均采用该票类型进行处理。暂不支持多个参数进行局部控制。0：出租车发票1：定额发票2：火车票3：增值税发票5：机票行程单8：通用机打发票9：汽车票10：轮船票11：增值税发票（卷票 ）12：购车发票13：过路过桥费发票15：非税发票16：全电发票17：医疗发票18：完税凭证19：海关缴款书-1：其他发票 */
+  /** 需要识别的票据类型列表，为空或不填表示识别全部类型。当传入单个类型时，图片均采用该票类型进行处理。暂不支持多个参数进行局部控制。0：出租车发票1：定额发票2：火车票3：增值税发票5：机票行程单8：通用机打发票9：汽车票10：轮船票11：增值税发票（卷票 ）12：购车发票13：过路过桥费发票15：非税发票16：全电发票17：医疗发票18：完税凭证19：海关缴款书20：银行回单-1：其他发票 */
   Types?: number[];
   /** 是否开启其他票识别，默认值为true，开启后可支持其他发票的智能识别。 */
   EnableOther?: boolean;
@@ -5025,10 +4985,12 @@ declare interface SmartStructuralProRequest {
   ItemNames?: string[];
   /** 是否开启全文字段识别 */
   ReturnFullText?: boolean;
-  /** 配置id支持：General -- 通用场景 InvoiceEng -- 国际invoice模版 WayBillEng --海运订单模板CustomsDeclaration -- 进出口报关单WeightNote -- 磅单MedicalMeter -- 血压仪表识别BillOfLading -- 海运提单EntrustmentBook -- 海运托书WordRecognize -- 手写英文作文模版Statement -- 对账单识别模板BookingConfirmation -- 配舱通知书识别模板 */
+  /** 配置id支持：General -- 通用场景 InvoiceEng -- 国际invoice模版 WayBillEng --海运订单模板CustomsDeclaration -- 进出口报关单WeightNote -- 磅单MedicalMeter -- 血压仪表识别BillOfLading -- 海运提单EntrustmentBook -- 海运托书WordRecognize -- 手写英文作文模版Statement -- 对账单识别模板BookingConfirmation -- 配舱通知书识别模板AirWayBill -- 航空运单识别模板DispatchWeightNote -- 磅单发货单识别模板ReceiptWeightNote -- 磅单收货单识别模板 */
   ConfigId?: string;
   /** 是否开启全文字段坐标值的识别 */
   EnableCoord?: boolean;
+  /** 是否开启父子key识别，默认是 */
+  OutputParentKey?: boolean;
 }
 
 declare interface SmartStructuralProResponse {
@@ -5254,28 +5216,6 @@ declare interface VatInvoiceVerifyNewResponse {
   RequestId?: string;
 }
 
-declare interface VatInvoiceVerifyRequest {
-  /** 发票代码， 一张发票一天只能查询5次。 */
-  InvoiceCode: string;
-  /** 发票号码（8位） */
-  InvoiceNo: string;
-  /** 开票日期（不支持当天发票查询，支持五年以内开具的发票），格式：“YYYY-MM-DD”，如：2019-12-20。 */
-  InvoiceDate: string;
-  /** 根据票种传递对应值，如果报参数错误，请仔细检查每个票种对应的值增值税专用发票：开具金额（不含税）增值税普通发票、增值税电子普通发票（含通行费发票）、增值税普通发票（卷票）：校验码后6位区块链发票：不含税金额/校验码，例如：“285.01/856ab”机动车销售统一发票：不含税价货物运输业增值税专用发票：合计金额二手车销售统一发票：车价合计 */
-  Additional: string;
-}
-
-declare interface VatInvoiceVerifyResponse {
-  /** 增值税发票信息，详情请点击左侧链接。 */
-  Invoice?: VatInvoice;
-  /** 机动车销售统一发票信息 */
-  VehicleInvoiceInfo?: VehicleInvoiceInfo;
-  /** 二手车销售统一发票信息 */
-  UsedVehicleInvoiceInfo?: UsedVehicleInvoiceInfo;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface VatRollInvoiceOCRRequest {
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -5449,8 +5389,6 @@ declare interface Ocr {
   ClassifyDetectOCR(data?: ClassifyDetectOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ClassifyDetectOCRResponse>;
   /** 商户照片分类 {@link ClassifyStoreNameRequest} {@link ClassifyStoreNameResponse} */
   ClassifyStoreName(data?: ClassifyStoreNameRequest, config?: AxiosRequestConfig): AxiosPromise<ClassifyStoreNameResponse>;
-  /** @deprecated 创建智慧表单文件识别任务 {@link CreateAIFormTaskRequest} {@link CreateAIFormTaskResponse} */
-  CreateAIFormTask(data: CreateAIFormTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIFormTaskResponse>;
   /** 驾驶证识别 {@link DriverLicenseOCRRequest} {@link DriverLicenseOCRResponse} */
   DriverLicenseOCR(data?: DriverLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<DriverLicenseOCRResponse>;
   /** 完税证明识别 {@link DutyPaidProofOCRRequest} {@link DutyPaidProofOCRResponse} */
@@ -5485,8 +5423,6 @@ declare interface Ocr {
   GetOCRResult(data: GetOCRResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetOCRResultResponse>;
   /** 获取OCR Token {@link GetOCRTokenRequest} {@link GetOCRTokenResponse} */
   GetOCRToken(data: GetOCRTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetOCRTokenResponse>;
-  /** @deprecated 查询智慧表单任务状态 {@link GetTaskStateRequest} {@link GetTaskStateResponse} */
-  GetTaskState(data: GetTaskStateRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskStateResponse>;
   /** 中国香港身份证识别 {@link HKIDCardOCRRequest} {@link HKIDCardOCRResponse} */
   HKIDCardOCR(data?: HKIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<HKIDCardOCRResponse>;
   /** 港澳台居住证识别 {@link HmtResidentPermitOCRRequest} {@link HmtResidentPermitOCRResponse} */
@@ -5591,8 +5527,6 @@ declare interface Ocr {
   TrainTicketOCR(data?: TrainTicketOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TrainTicketOCRResponse>;
   /** 增值税发票识别 {@link VatInvoiceOCRRequest} {@link VatInvoiceOCRResponse} */
   VatInvoiceOCR(data?: VatInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VatInvoiceOCRResponse>;
-  /** @deprecated 增值税发票核验 {@link VatInvoiceVerifyRequest} {@link VatInvoiceVerifyResponse} */
-  VatInvoiceVerify(data: VatInvoiceVerifyRequest, config?: AxiosRequestConfig): AxiosPromise<VatInvoiceVerifyResponse>;
   /** 增值税发票核验（新版） {@link VatInvoiceVerifyNewRequest} {@link VatInvoiceVerifyNewResponse} */
   VatInvoiceVerifyNew(data: VatInvoiceVerifyNewRequest, config?: AxiosRequestConfig): AxiosPromise<VatInvoiceVerifyNewResponse>;
   /** 增值税发票（卷票）识别 {@link VatRollInvoiceOCRRequest} {@link VatRollInvoiceOCRResponse} */

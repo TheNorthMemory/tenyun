@@ -27,27 +27,27 @@ declare interface AddMemberInfo {
 /** 音频素材信息 */
 declare interface AudioMaterial {
   /** 素材元信息。 */
-  MetaData: MediaMetaData;
+  MetaData?: MediaMetaData;
   /** 素材媒体文件的播放 URL 地址。 */
-  MaterialUrl: string;
+  MaterialUrl?: string;
   /** 素材媒体文件的封面图片地址。 */
-  CoverUrl: string;
+  CoverUrl?: string;
   /** 素材状态。 */
-  MaterialStatus: MaterialStatus | null;
+  MaterialStatus?: MaterialStatus | null;
   /** 素材媒体文件的原始 URL 地址。 */
-  OriginalUrl: string;
+  OriginalUrl?: string;
   /** 云点播媒资 FileId。 */
-  VodFileId: string;
+  VodFileId?: string;
 }
 
 /** 音频流信息。 */
 declare interface AudioStreamInfo {
   /** 码率，单位：bps。 */
-  Bitrate: number;
+  Bitrate?: number;
   /** 采样率，单位：hz。 */
-  SamplingRate: number;
+  SamplingRate?: number;
   /** 编码格式。 */
-  Codec: string;
+  Codec?: string;
 }
 
 /** 音频轨道上的音频片段信息。 */
@@ -105,29 +105,29 @@ declare interface ClassCreatedEvent {
 /** 分类删除事件。 */
 declare interface ClassDeletedEvent {
   /** 删除的分类归属。 */
-  Owner: Entity;
+  Owner?: Entity;
   /** 删除的分类路径列表。 */
-  ClassPathSet: string[];
+  ClassPathSet?: string[];
 }
 
 /** 分类信息 */
 declare interface ClassInfo {
   /** 归属者。 */
-  Owner: Entity;
+  Owner?: Entity;
   /** 分类路径。 */
-  ClassPath: string;
+  ClassPath?: string;
 }
 
 /** 分类移动事件。 */
 declare interface ClassMovedEvent {
   /** 源分类归属。 */
-  SourceOwner: Entity;
+  SourceOwner?: Entity;
   /** 源分类路径列表。 */
-  SourceClassPathSet: string[];
+  SourceClassPathSet?: string[];
   /** 目标分类归属。 */
-  DestinationOwner: Entity;
+  DestinationOwner?: Entity;
   /** 目标分类归属。 */
-  DestinationClassPath: string;
+  DestinationClassPath?: string;
 }
 
 /** COS 发布信息。 */
@@ -159,35 +159,35 @@ declare interface Entity {
 /** 回调事件内容。 */
 declare interface EventContent {
   /** 事件类型，可取值有：Storage.NewFileCreated：新文件产生事件；Project.StreamConnect.StatusChanged：云转推项目状态变更事件；Project.Switcher.StatusChanged：导播台项目状态变更事件；Material.Imported：媒体导入事件；Material.Added：媒体添加事件；Material.Moved：媒体移动事件；Material.Modified：媒体变更事件；Material.Deleted：媒体删除事件；Class.Created：分类新增事件；Class.Moved：分类移动事件；Class.Deleted：分类删除事件；Task.VideoExportCompleted：视频导出完成事件； Project.MediaCast.StatusChanged：点播转直播项目状态变更事件。 */
-  EventType: string;
+  EventType?: string;
   /** 操作者，表示触发事件的操作者。如果是 `cmeid_system` 表示平台管理员操作。 */
-  Operator: string;
+  Operator?: string;
   /** 新文件产生事件。仅当 EventType 为 Storage.NewFileCreated 时有效。 */
-  StorageNewFileCreatedEvent: StorageNewFileCreatedEvent;
+  StorageNewFileCreatedEvent?: StorageNewFileCreatedEvent;
   /** 云转推项目状态变更事件。仅当 EventType 为 Project.StreamConnect.StatusChanged 时有效。 */
-  ProjectStreamConnectStatusChangedEvent: ProjectStreamConnectStatusChangedEvent;
+  ProjectStreamConnectStatusChangedEvent?: ProjectStreamConnectStatusChangedEvent;
   /** 导播台项目状态变更事件。仅当 EventType 为 Project.Switcher.StatusChanged 时有效。 */
-  ProjectSwitcherStatusChangedEvent: ProjectSwitcherStatusChangedEvent | null;
+  ProjectSwitcherStatusChangedEvent?: ProjectSwitcherStatusChangedEvent | null;
   /** 媒体导入事件。仅当 EventType 为 Material.Imported 时有效。 */
-  MaterialImportedEvent: MaterialImportedEvent | null;
+  MaterialImportedEvent?: MaterialImportedEvent | null;
   /** 媒体添加事件。仅当 EventType 为 Material.Added 时有效。 */
-  MaterialAddedEvent: MaterialAddedEvent | null;
+  MaterialAddedEvent?: MaterialAddedEvent | null;
   /** 媒体移动事件。仅当 EventType 为 Material.Moved 时有效。 */
-  MaterialMovedEvent: MaterialMovedEvent | null;
+  MaterialMovedEvent?: MaterialMovedEvent | null;
   /** 媒体更新事件。仅当 EventType 为 Material.Modified 时有效。 */
-  MaterialModifiedEvent: MaterialModifiedEvent | null;
+  MaterialModifiedEvent?: MaterialModifiedEvent | null;
   /** 媒体删除事件。仅当 EventType 为 Material.Deleted 时有效。 */
-  MaterialDeletedEvent: MaterialDeletedEvent | null;
+  MaterialDeletedEvent?: MaterialDeletedEvent | null;
   /** 分类创建事件。仅当 EventType 为 Class.Created 时有效。 */
-  ClassCreatedEvent: ClassCreatedEvent | null;
+  ClassCreatedEvent?: ClassCreatedEvent | null;
   /** 分类移动事件。仅当 EventType 为 Class.Moved 时有效。 */
-  ClassMovedEvent: ClassMovedEvent | null;
+  ClassMovedEvent?: ClassMovedEvent | null;
   /** 分类删除事件。仅当 EventType 为 Class.Deleted 时有效。 */
-  ClassDeletedEvent: ClassDeletedEvent | null;
+  ClassDeletedEvent?: ClassDeletedEvent | null;
   /** 视频导出完成事件。仅当 EventType 为 Task.VideoExportCompleted 时有效。 */
-  VideoExportCompletedEvent: VideoExportCompletedEvent | null;
+  VideoExportCompletedEvent?: VideoExportCompletedEvent | null;
   /** 点播转直播项目状态变更事件。仅当 EventType 为 Project.MediaCast.StatusChanged 时有效。 */
-  ProjectMediaCastStatusChangedEvent: ProjectMediaCastStatusChangedEvent | null;
+  ProjectMediaCastStatusChangedEvent?: ProjectMediaCastStatusChangedEvent | null;
 }
 
 /** 媒资绑定资源信息，包含媒资绑定模板 ID 和文件信息。 */
@@ -203,17 +203,17 @@ declare interface ExternalMediaInfo {
 /** 图片素材信息 */
 declare interface ImageMaterial {
   /** 图片高度，单位：px。 */
-  Height: number;
+  Height?: number;
   /** 图片宽度，单位：px。 */
-  Width: number;
+  Width?: number;
   /** 素材媒体文件的展示 URL 地址。 */
-  MaterialUrl: string;
+  MaterialUrl?: string;
   /** 图片大小，单位：字节。 */
-  Size: number;
+  Size?: number;
   /** 素材媒体文件的原始 URL 地址。 */
-  OriginalUrl: string;
+  OriginalUrl?: string;
   /** 云点播媒资 FileId。 */
-  VodFileId: string;
+  VodFileId?: string;
 }
 
 /** 导入媒资信息 */
@@ -235,13 +235,13 @@ declare interface IntegerRange {
 /** 加入的团队信息 */
 declare interface JoinTeamInfo {
   /** 团队 ID。 */
-  TeamId: string;
+  TeamId?: string;
   /** 团队名称。 */
-  Name: string;
+  Name?: string;
   /** 团队成员个数。 */
-  MemberCount: number;
+  MemberCount?: number;
   /** 成员在团队中的角色，取值有：Owner：团队所有者，添加团队成员及修改团队成员解决时不能填此角色；Admin：团队管理员；Member：普通成员。 */
-  Role: string;
+  Role?: string;
 }
 
 /** 快手视频发布信息。 */
@@ -253,13 +253,13 @@ declare interface KuaishouPublishInfo {
 /** 链接类型的素材信息 */
 declare interface LinkMaterial {
   /** 链接类型取值:CLASS: 分类链接; MATERIAL：素材链接。 */
-  LinkType: string;
+  LinkType?: string;
   /** 链接状态取值： Normal：正常 ；NotFound：链接目标不存在； Forbidden：无权限。 */
-  LinkStatus: string;
+  LinkStatus?: string;
   /** 素材链接详细信息，当LinkType="MATERIAL"时有值。 */
-  LinkMaterialInfo: LinkMaterialInfo | null;
+  LinkMaterialInfo?: LinkMaterialInfo | null;
   /** 分类链接目标信息，当LinkType=“CLASS”时有值。 */
-  LinkClassInfo: ClassInfo | null;
+  LinkClassInfo?: ClassInfo | null;
 }
 
 /** 链接素材信息 */
@@ -291,51 +291,51 @@ declare interface LiveStreamClipProjectInput {
 /** 登录态信息 */
 declare interface LoginStatusInfo {
   /** 用户 Id。 */
-  UserId: string;
+  UserId?: string;
   /** 用户登录状态。Online：在线；Offline：离线。 */
-  Status: string;
+  Status?: string;
 }
 
 /** 媒体添加事件。 */
 declare interface MaterialAddedEvent {
   /** 添加的媒体 Id 列表。 */
-  MaterialIdSet: string[];
+  MaterialIdSet?: string[];
   /** 添加的媒体归属。 */
-  Owner: Entity;
+  Owner?: Entity;
   /** 添加的媒体分类路径。 */
-  ClassPath: string;
+  ClassPath?: string;
 }
 
 /** 媒体基本信息。 */
 declare interface MaterialBasicInfo {
   /** 媒体 Id。 */
-  MaterialId: string;
+  MaterialId?: string;
   /** 媒体类型，取值为： AUDIO :音频; VIDEO :视频; IMAGE :图片; LINK :链接. OTHER : 其他. */
-  MaterialType: string;
+  MaterialType?: string;
   /** 媒体归属实体。 */
-  Owner: Entity;
+  Owner?: Entity;
   /** 媒体名称。 */
-  Name: string;
+  Name?: string;
   /** 媒体文件的创建时间，使用 ISO 日期格式。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 媒体文件的最近更新时间（如修改视频属性、发起视频处理等会触发更新媒体文件信息的操作），使用 ISO 日期格式。 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 媒体的分类路径。 */
-  ClassPath: string;
+  ClassPath?: string;
   /** 预置标签列表。 */
-  PresetTagSet: PresetTagInfo[];
+  PresetTagSet?: PresetTagInfo[];
   /** 人工标签列表。 */
-  TagSet: string[];
+  TagSet?: string[];
   /** 媒体文件的预览图。 */
-  PreviewUrl: string;
+  PreviewUrl?: string;
   /** 媒体绑定的标签信息列表 。该字段已废弃。 */
-  TagInfoSet: MaterialTagInfo[] | null;
+  TagInfoSet?: MaterialTagInfo[] | null;
 }
 
 /** 媒体删除事件。 */
 declare interface MaterialDeletedEvent {
   /** 删除的媒体 Id 列表。 */
-  MaterialIdSet: string[];
+  MaterialIdSet?: string[];
 }
 
 /** 媒体导入事件 */
@@ -369,38 +369,38 @@ declare interface MaterialInfo {
 /** 媒体更新事件。 */
 declare interface MaterialModifiedEvent {
   /** 媒体 Id。 */
-  MaterialId: string;
+  MaterialId?: string;
   /** 更新后的媒体名称。如未更新则为空。 */
-  Name: string;
+  Name?: string;
   /** 更新后的媒体预置标签列表。如未更新媒体预置标签，则该字段为空数组。 */
-  PresetTagIdSet: string[];
+  PresetTagIdSet?: string[];
   /** 更新后的媒体自定义标签列表。如未更新媒体自定义标签，则该字段为空数组。 */
-  TagSet: string[];
+  TagSet?: string[];
 }
 
 /** 媒体移动事件 */
 declare interface MaterialMovedEvent {
   /** 要移动的媒体 Id 列表。 */
-  MaterialIdSet: string[];
+  MaterialIdSet?: string[];
   /** 源媒体归属。 */
-  SourceOwner: Entity;
+  SourceOwner?: Entity;
   /** 源媒体分类路径。 */
-  SourceClassPath: string;
+  SourceClassPath?: string;
   /** 目标媒体分类归属。 */
-  DestinationOwner: Entity;
+  DestinationOwner?: Entity;
   /** 目标媒体分类路径。 */
-  DestinationClassPath: string;
+  DestinationClassPath?: string;
 }
 
 /** 素材的状态，目前仅包含素材编辑可用状态。 */
 declare interface MaterialStatus {
   /** 素材编辑可用状态，取值有：NORMAL：正常，可直接用于编辑；ABNORMAL : 异常，不可用于编辑；PROCESSING：处理中，暂不可用于编辑。 */
-  EditorUsableStatus: string;
+  EditorUsableStatus?: string;
 }
 
 /** 素材标签信息 */
 declare interface MaterialTagInfo {
-  /** 标签类型，取值为：PRESET：预置标签； */
+  /** 标签类型，取值为：PRESET：预置标签。 */
   Type: string;
   /** 标签 Id 。当标签类型为 PRESET 时，标签 Id 为预置标签 Id 。 */
   Id: string;
@@ -431,9 +431,9 @@ declare interface MediaCastDestinationStatus {
   /** 输出源 Id，由系统分配。 */
   Id?: string;
   /** 输出源直播地址。 */
-  PushUrl: string;
+  PushUrl?: string;
   /** 输出源的状态。取值有： Working ：运行中； Stopped：停止输出； Failed：输出失败。 */
-  Status: string;
+  Status?: string;
 }
 
 /** 点播转直播输出媒体配置。 */
@@ -447,17 +447,17 @@ declare interface MediaCastOutputMediaSetting {
 /** 点播转直播播放信息。 */
 declare interface MediaCastPlayInfo {
   /** 点播转直播项目运行状态，取值有： Working : 运行中； Idle: 空闲状态。 */
-  Status: string;
+  Status?: string;
   /** 当前播放的输入源 Id。 */
   CurrentSourceId?: string;
   /** 当前播放的输入源的播放位置，单位：秒。 */
-  CurrentSourcePosition: number;
+  CurrentSourcePosition?: number;
   /** 当前播放的输入源时长，单位：秒。 */
-  CurrentSourceDuration: number;
+  CurrentSourceDuration?: number;
   /** 输出源状态信息。 */
-  DestinationStatusSet: MediaCastDestinationStatus[];
+  DestinationStatusSet?: MediaCastDestinationStatus[];
   /** 已经循环播放的次数。 */
-  LoopCount: number;
+  LoopCount?: number;
 }
 
 /** 播放控制参数。 */
@@ -505,7 +505,7 @@ declare interface MediaCastProjectInput {
 /** 点播转直播输入源信息。 */
 declare interface MediaCastSourceInfo {
   /** 输入源 Id，由系统分配。 */
-  Id?: string | null;
+  Id?: string;
   /** 输入源的媒体类型，取值有：CME：多媒体创作引擎的媒体文件；VOD：云点播的媒资文件。EXTERNAL：非多媒体创建引擎或者云点播的媒资文件。 */
   Type?: string;
   /** 云点播媒体文件 ID。当 Type = VOD 时必填。 */
@@ -543,37 +543,37 @@ declare interface MediaCastVideoSetting {
 /** 雪碧图 */
 declare interface MediaImageSpriteInfo {
   /** 雪碧图小图的高度。 */
-  Height: number;
+  Height?: number;
   /** 雪碧图小图的宽度。 */
-  Width: number;
+  Width?: number;
   /** 雪碧图小图的总数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 截取雪碧图输出的地址。 */
-  ImageUrlSet: string[];
+  ImageUrlSet?: string[];
   /** 雪碧图子图位置与时间关系的 WebVtt 文件地址。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。 */
-  WebVttUrl: string;
+  WebVttUrl?: string;
 }
 
 /** 文件元信息。 */
 declare interface MediaMetaData {
   /** 大小。 */
-  Size: number;
+  Size?: number;
   /** 容器类型。 */
-  Container: string;
+  Container?: string;
   /** 视频流码率平均值与音频流码率平均值之和，单位：bps。 */
-  Bitrate: number;
+  Bitrate?: number;
   /** 视频流高度的最大值，单位：px。 */
-  Height: number;
+  Height?: number;
   /** 视频流宽度的最大值，单位：px。 */
-  Width: number;
+  Width?: number;
   /** 时长，单位：秒。 */
-  Duration: number;
+  Duration?: number;
   /** 视频拍摄时的选择角度，单位：度 */
-  Rotate: number;
+  Rotate?: number;
   /** 视频流信息。 */
-  VideoStreamInfoSet: VideoStreamInfo[];
+  VideoStreamInfoSet?: VideoStreamInfo[];
   /** 音频流信息。 */
-  AudioStreamInfoSet: AudioStreamInfo[];
+  AudioStreamInfoSet?: AudioStreamInfo[];
 }
 
 /** 媒体处理视频合成任务的预处理操作。 */
@@ -631,9 +631,9 @@ declare interface MediaTransitionItem {
 /** 其他类型素材 */
 declare interface OtherMaterial {
   /** 素材媒体文件的播放 URL 地址。 */
-  MaterialUrl: string;
+  MaterialUrl?: string;
   /** 云点播媒资 FileId。 */
-  VodFileId: string;
+  VodFileId?: string;
 }
 
 /** 企鹅号发布信息。 */
@@ -651,19 +651,19 @@ declare interface PenguinMediaPlatformPublishInfo {
 /** 平台信息。 */
 declare interface PlatformInfo {
   /** 平台标识。 */
-  Platform: string;
+  Platform?: string;
   /** 平台描述。 */
-  Description: string;
+  Description?: string;
   /** 云点播子应用 Id。 */
-  VodSubAppId: number;
+  VodSubAppId?: number;
   /** 平台绑定的 license Id。 */
-  LicenseId: string;
+  LicenseId?: string;
   /** 平台状态，可取值为：Normal：正常，可使用。；Stopped：已停用，暂无法使用；Expired：已过期，需要重新购买会员包。 */
-  Status: string;
+  Status?: string;
   /** 创建时间，格式按照 ISO 8601 标准表示。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 更新时间，格式按照 ISO 8601 标准表示。 */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** 预置标签信息 */
@@ -679,25 +679,25 @@ declare interface PresetTagInfo {
 /** 项目信息。 */
 declare interface ProjectInfo {
   /** 项目 Id。 */
-  ProjectId: string;
+  ProjectId?: string;
   /** 项目名称。 */
-  Name: string;
+  Name?: string;
   /** 画布宽高比。 */
-  AspectRatio: string;
+  AspectRatio?: string;
   /** 项目类别，取值有：VIDEO_EDIT：视频编辑。SWITCHER：导播台。VIDEO_SEGMENTATION：视频拆条。STREAM_CONNECT：云转推。RECORD_REPLAY：录制回放。 */
-  Category: string;
+  Category?: string;
   /** 归属者。 */
-  Owner: Entity;
+  Owner?: Entity;
   /** 项目封面图片地址。 */
-  CoverUrl: string;
+  CoverUrl?: string;
   /** 云转推项目信息，仅当项目类别取值 STREAM_CONNECT 时有效。 */
-  StreamConnectProjectInfo: StreamConnectProjectInfo | null;
+  StreamConnectProjectInfo?: StreamConnectProjectInfo | null;
   /** 点播转直播项目信息，仅当项目类别取值为 MEDIA_CAST 时有效。 */
-  MediaCastProjectInfo: MediaCastProjectInfo | null;
+  MediaCastProjectInfo?: MediaCastProjectInfo | null;
   /** 项目更新时间，格式按照 ISO 8601 标准表示。 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 项目创建时间，格式按照 ISO 8601 标准表示。 */
-  CreateTime: string;
+  CreateTime?: string;
 }
 
 /** 点播转直播项目状态变更事件。 */
@@ -861,11 +861,11 @@ declare interface StreamConnectOutputInfo {
 /** 云转推输出断流信息 */
 declare interface StreamConnectOutputInterruptInfo {
   /** 云转推输出标识。 */
-  Id: string;
+  Id?: string;
   /** 云转推输出名称。 */
-  Name: string;
+  Name?: string;
   /** 云转推输出地址。 */
-  Url: string;
+  Url?: string;
 }
 
 /** 云转推项目信息，包含输入源、输出源、当前转推开始时间等信息。 */
@@ -935,33 +935,33 @@ declare interface SwitcherProjectInput {
 /** 任务基础信息。 */
 declare interface TaskBaseInfo {
   /** 任务 Id。 */
-  TaskId: string;
+  TaskId?: string;
   /** 任务类型，取值有：VIDEO_EDIT_PROJECT_EXPORT：项目导出。 */
-  TaskType: string;
+  TaskType?: string;
   /** 任务状态，取值有：PROCESSING：处理中：SUCCESS：成功；FAIL：失败。 */
-  Status: string;
+  Status?: string;
   /** 任务进度，取值为：0~100。 */
-  Progress: number;
+  Progress?: number;
   /** 错误码。0：成功；其他值：失败。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 错误信息。 */
-  ErrMsg: string;
+  ErrMsg?: string;
   /** 创建时间，格式按照 ISO 8601 标准表示。 */
-  CreateTime: string;
+  CreateTime?: string;
 }
 
 /** 团队信息 */
 declare interface TeamInfo {
   /** 团队 ID。 */
-  TeamId: string;
+  TeamId?: string;
   /** 团队名称。 */
-  Name: string;
+  Name?: string;
   /** 团队成员个数 */
   MemberCount?: number;
   /** 团队创建时间，格式按照 ISO 8601 标准表示。 */
   CreateTime?: string;
   /** 团队最后更新时间，格式按照 ISO 8601 标准表示。 */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** 团队成员信息 */
@@ -1003,9 +1003,9 @@ declare interface ThirdPartyPublishInfo {
 /** 时间范围 */
 declare interface TimeRange {
   /** 开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-  StartTime: string | null;
+  StartTime: string;
   /** 结束时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
-  EndTime: string | null;
+  EndTime: string;
 }
 
 /** 云点播导出信息。 */
@@ -1045,29 +1045,29 @@ declare interface VideoEditProjectOutput {
 /** 视频编辑模板素材信息。 */
 declare interface VideoEditTemplateMaterial {
   /** 视频编辑模板宽高比。 */
-  AspectRatio: string;
+  AspectRatio?: string;
   /** 卡槽信息。 */
-  SlotSet: SlotInfo[];
+  SlotSet?: SlotInfo[];
   /** 模板预览视频 URL 地址 。 */
-  PreviewVideoUrl: string;
+  PreviewVideoUrl?: string;
 }
 
 /** 视频编码配置 */
 declare interface VideoEncodingPreset {
   /** 配置 ID。 */
-  Id: number;
+  Id?: number;
   /** 配置名。 */
-  Name: string;
+  Name?: string;
   /** 封装格式，可选值：mp4 ；mov 。 */
-  Container: string;
+  Container?: string;
   /** 是否去除视频数据，可选值：0：保留；1：去除。默认值：0。 */
-  RemoveVideo: number;
+  RemoveVideo?: number;
   /** 是否去除音频数据，可选值：0：保留；1：去除。默认值：0。 */
-  RemoveAudio: number;
+  RemoveAudio?: number;
   /** 视频编码配置中的视频设置。 */
-  VideoSetting: VideoEncodingPresetVideoSetting;
+  VideoSetting?: VideoEncodingPresetVideoSetting;
   /** 视频编码配置中的音频设置。 */
-  AudioSetting: VideoEncodingPresetAudioSetting;
+  AudioSetting?: VideoEncodingPresetAudioSetting;
 }
 
 /** 视频编码配置中的音频设置 */
@@ -1149,21 +1149,21 @@ declare interface VideoExportExtensionArgs {
 /** 视频素材信息 */
 declare interface VideoMaterial {
   /** 素材元信息。 */
-  MetaData: MediaMetaData;
+  MetaData?: MediaMetaData;
   /** 雪碧图信息。 */
-  ImageSpriteInfo: MediaImageSpriteInfo;
+  ImageSpriteInfo?: MediaImageSpriteInfo;
   /** 素材媒体文件的播放 URL 地址。 */
-  MaterialUrl: string;
+  MaterialUrl?: string;
   /** 素材媒体文件的封面图片地址。 */
-  CoverUrl: string;
+  CoverUrl?: string;
   /** 媒体文件分辨率。取值为：LD/SD/HD/FHD/2K/4K。 */
-  Resolution: string;
+  Resolution?: string;
   /** 素材状态。 */
-  MaterialStatus: MaterialStatus | null;
+  MaterialStatus?: MaterialStatus | null;
   /** 素材媒体文件的原始 URL 地址。 */
-  OriginalUrl: string;
+  OriginalUrl?: string;
   /** 云点播媒资 FileId。 */
-  VodFileId: string;
+  VodFileId?: string;
 }
 
 /** 视频拆条项目的输入信息。 */
@@ -1177,15 +1177,15 @@ declare interface VideoSegmentationProjectInput {
 /** 视频流信息。 */
 declare interface VideoStreamInfo {
   /** 码率，单位：bps。 */
-  Bitrate: number;
+  Bitrate?: number;
   /** 高度，单位：px。 */
-  Height: number;
+  Height?: number;
   /** 宽度，单位：px。 */
-  Width: number;
+  Width?: number;
   /** 编码格式。 */
-  Codec: string;
+  Codec?: string;
   /** 帧率，单位：hz。 */
-  Fps: number;
+  Fps?: number;
 }
 
 /** 视频轨的视频片段信息。 */
@@ -1369,7 +1369,7 @@ declare interface CreateTeamRequest {
 
 declare interface CreateTeamResponse {
   /** 创建的团队 ID。 */
-  TeamId: string;
+  TeamId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1393,7 +1393,7 @@ declare interface CreateVideoEncodingPresetRequest {
 
 declare interface CreateVideoEncodingPresetResponse {
   /** 模板 ID。 */
-  Id: number;
+  Id?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1527,7 +1527,7 @@ declare interface DescribeClassRequest {
 
 declare interface DescribeClassResponse {
   /** 分类信息列表。 */
-  ClassInfoSet: ClassInfo[];
+  ClassInfoSet?: ClassInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1545,9 +1545,9 @@ declare interface DescribeJoinTeamsRequest {
 
 declare interface DescribeJoinTeamsResponse {
   /** 符合条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 团队列表。 */
-  TeamSet: JoinTeamInfo[];
+  TeamSet?: JoinTeamInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1597,9 +1597,9 @@ declare interface DescribePlatformsRequest {
 
 declare interface DescribePlatformsResponse {
   /** 符合查询条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 平台信息列表。 */
-  PlatformInfoSet: PlatformInfo[];
+  PlatformInfoSet?: PlatformInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1649,9 +1649,9 @@ declare interface DescribeResourceAuthorizationRequest {
 
 declare interface DescribeResourceAuthorizationResponse {
   /** 符合条件的资源授权记录总数。 */
-  TotalCount: number | null;
+  TotalCount?: number;
   /** 授权信息列表。 */
-  AuthorizationInfoSet: AuthorizationInfo[];
+  AuthorizationInfoSet?: AuthorizationInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1667,9 +1667,9 @@ declare interface DescribeSharedSpaceRequest {
 
 declare interface DescribeSharedSpaceResponse {
   /** 查询到的共享空间总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 各个共享空间对应的授权者信息。 */
-  AuthorizerSet: Authorizer[];
+  AuthorizerSet?: Authorizer[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1745,9 +1745,9 @@ declare interface DescribeTeamMembersRequest {
 
 declare interface DescribeTeamMembersResponse {
   /** 符合条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 团队成员列表。 */
-  MemberSet: TeamMemberInfo[];
+  MemberSet?: TeamMemberInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1765,15 +1765,15 @@ declare interface DescribeTeamsRequest {
 
 declare interface DescribeTeamsResponse {
   /** 符合条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 团队列表。 */
-  TeamSet: TeamInfo[];
+  TeamSet?: TeamInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeVideoEncodingPresetsRequest {
-  /** 平台名称，指定访问的平台。 */
+  /** 平台名称，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。 */
   Platform: string;
   /** 要查询的配置 ID 列表。填写该参数则按照配置 ID 进行查询。 */
   Ids?: number[];
@@ -1785,9 +1785,9 @@ declare interface DescribeVideoEncodingPresetsRequest {
 
 declare interface DescribeVideoEncodingPresetsResponse {
   /** 符合条件的编码配置总个数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 视频编码配置信息。 */
-  VideoEncodingPresetSet: VideoEncodingPreset[];
+  VideoEncodingPresetSet?: VideoEncodingPreset[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1923,9 +1923,9 @@ declare interface FlattenListMediaRequest {
 
 declare interface FlattenListMediaResponse {
   /** 符合条件的记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 该分类路径下及其子分类下的所有媒体基础信息列表。 */
-  MaterialInfoSet: MaterialInfo[];
+  MaterialInfoSet?: MaterialInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1941,7 +1941,7 @@ declare interface GenerateVideoSegmentationSchemeByAiRequest {
 
 declare interface GenerateVideoSegmentationSchemeByAiResponse {
   /** 视频智能拆条任务 Id 。 */
-  TaskId: string;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2187,7 +2187,7 @@ declare interface ModifyTeamResponse {
 }
 
 declare interface ModifyVideoEncodingPresetRequest {
-  /** 平台名称，指定访问的平台。 */
+  /** 平台名称，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。 */
   Platform: string;
   /** 配置 ID。 */
   Id: number;
@@ -2209,7 +2209,7 @@ declare interface ModifyVideoEncodingPresetResponse {
 }
 
 declare interface MoveClassRequest {
-  /** 平台名称，指定访问的平台。 */
+  /** 平台名称，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。 */
   Platform: string;
   /** 归属者。 */
   Owner: Entity;
@@ -2243,7 +2243,7 @@ declare interface MoveResourceResponse {
 }
 
 declare interface ParseEventRequest {
-  /** 平台名称，指定访问的平台。 */
+  /** 平台名称，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。 */
   Platform: string;
   /** 回调事件内容。 */
   EventContent: string;

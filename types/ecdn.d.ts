@@ -547,9 +547,9 @@ declare interface Ecdn {
   DescribeEcdnStatistics(data: DescribeEcdnStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEcdnStatisticsResponse>;
   /** 查询平台服务节点IP {@link DescribeIpStatusRequest} {@link DescribeIpStatusResponse} */
   DescribeIpStatus(data: DescribeIpStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpStatusResponse>;
-  /** 刷新历史查询 {@link DescribePurgeTasksRequest} {@link DescribePurgeTasksResponse} */
+  /** @deprecated 刷新历史查询 {@link DescribePurgeTasksRequest} {@link DescribePurgeTasksResponse} */
   DescribePurgeTasks(data?: DescribePurgeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeTasksResponse>;
-  /** 刷新 URL {@link PurgeUrlsCacheRequest} {@link PurgeUrlsCacheResponse} */
+  /** @deprecated 刷新 URL {@link PurgeUrlsCacheRequest} {@link PurgeUrlsCacheResponse} */
   PurgeUrlsCache(data: PurgeUrlsCacheRequest, config?: AxiosRequestConfig): AxiosPromise<PurgeUrlsCacheResponse>;
 }
 

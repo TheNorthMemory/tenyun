@@ -78,6 +78,8 @@ declare interface Delta {
   Role?: string;
   /** 内容详情。 */
   Content?: string;
+  /** 思维链内容。 ReasoningConent参数仅支持出参，且只有deepseek-r1模型会返回。 */
+  ReasoningContent?: string;
 }
 
 /** 离线文档列表回包 */

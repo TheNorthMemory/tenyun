@@ -578,6 +578,28 @@ declare interface DescribeClientJoinIncreaseListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeClientSwitchTraTaskInfoRequest {
+  /** 代客UIN */
+  ClientUin: string;
+  /** 1：代理，2：代采 */
+  SwitchType: number;
+}
+
+declare interface DescribeClientSwitchTraTaskInfoResponse {
+  /** 客户UIN */
+  ClientUin?: string;
+  /** 切换类型：代理,代采 */
+  SwitchType?: string;
+  /** ok，符合，fail，不符合 */
+  Result?: string;
+  /** 切换链接 */
+  SwitchUrl?: string;
+  /** 不符合的原因 */
+  ResultMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRebateInfosNewRequest {
   /** 返佣月份，如2018-02 */
   RebateMonth?: string;
@@ -717,6 +739,8 @@ declare interface Partners {
   DescribeClientBalanceNew(data: DescribeClientBalanceNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientBalanceNewResponse>;
   /** 查询客户参与增量激励考核信息 {@link DescribeClientJoinIncreaseListRequest} {@link DescribeClientJoinIncreaseListResponse} */
   DescribeClientJoinIncreaseList(data: DescribeClientJoinIncreaseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientJoinIncreaseListResponse>;
+  /** 查询客户交易类型切换任务信息 {@link DescribeClientSwitchTraTaskInfoRequest} {@link DescribeClientSwitchTraTaskInfoResponse} */
+  DescribeClientSwitchTraTaskInfo(data: DescribeClientSwitchTraTaskInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientSwitchTraTaskInfoResponse>;
   /** 【已切换至DescribeRebateInfosNew】查询代理商返佣信息 {@link DescribeRebateInfosRequest} {@link DescribeRebateInfosResponse} */
   DescribeRebateInfos(data?: DescribeRebateInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRebateInfosResponse>;
   /** 查询代理商返佣信息V2 {@link DescribeRebateInfosNewRequest} {@link DescribeRebateInfosNewResponse} */

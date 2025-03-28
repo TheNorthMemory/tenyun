@@ -600,6 +600,8 @@ declare interface IotApplication {
   SelfSmsTemplateId?: number | null;
   /** 第三方小程序强提醒开关 0：关闭；1：开启 */
   WechatNotifyStatus?: number | null;
+  /** 互联互通产品ID列表 */
+  InterconnectionProducts?: string | null;
 }
 
 /** 增值服务数量统计 */
@@ -840,6 +842,8 @@ declare interface ProductEntry {
   Rate?: string | null;
   /** 有效期 */
   Period?: string | null;
+  /** 互联互通标识 */
+  IsInterconnection?: number | null;
 }
 
 /** 产品模型定义 */

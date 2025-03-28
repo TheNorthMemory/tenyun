@@ -17,7 +17,7 @@ declare interface AclConfig {
   /** 动作，可取值：drop， transmit， forward */
   Action: string;
   /** 策略优先级，数字越小，级别越高，该规则越靠前匹配，取值1-1000 */
-  Priority?: number | null;
+  Priority?: number;
 }
 
 /** 端口acl策略配置与高防资源关联 */
@@ -31,13 +31,13 @@ declare interface AclConfigRelation {
 /** Anycast转外套餐详情 */
 declare interface AnycastOutPackRelation {
   /** 业务带宽(单位M) */
-  NormalBandwidth?: number | null;
+  NormalBandwidth?: number;
   /** 转发规则数 */
-  ForwardRulesLimit?: number | null;
+  ForwardRulesLimit?: number;
   /** 自动续费标记 */
-  AutoRenewFlag?: number | null;
+  AutoRenewFlag?: number;
   /** 到期时间 */
-  CurDeadline?: string | null;
+  CurDeadline?: string;
 }
 
 /** 高防IP资产实例信息 */
@@ -63,37 +63,37 @@ declare interface BGPIPInstance {
   /** 资产实例所属的三网套餐包详情，注意：当资产实例不是三网套餐包的实例时，此字段为null */
   StaticPackRelation?: StaticPackRelation | null;
   /** 区分高防IP境外线路 */
-  ZoneId?: number | null;
+  ZoneId?: number;
   /** 区分集群 */
-  Tgw?: number | null;
+  Tgw?: number;
   /** 高防弹性公网IP状态，包含'CREATING'(创建中),'BINDING'(绑定中),'BIND'(已绑定),'UNBINDING'(解绑中),'UNBIND'(已解绑),'OFFLINING'(释放中),'BIND_ENI'(绑定悬空弹性网卡)。只对高防弹性公网IP实例有效。 */
-  EipAddressStatus?: string | null;
+  EipAddressStatus?: string;
   /** 是否高防弹性公网IP实例，是为1，否为0。 */
-  EipFlag?: number | null;
+  EipFlag?: number;
   /** 资产实例所属的高防弹性公网IP套餐包详情，注意：当资产实例不是高防弹性公网IP套餐包的实例时，此字段为null */
   EipAddressPackRelation?: EipAddressPackRelation | null;
   /** 高防弹性公网IP关联的实例信息。注意：当资产实例不是高防弹性公网IP实例时，此字段为null */
   EipAddressInfo?: EipAddressRelation | null;
   /** 建议客户接入的域名，客户可使用域名接入。 */
-  Domain?: string | null;
+  Domain?: string;
   /** 是否开启安全加速，是为1，否为0。 */
   DamDDoSStatus?: number;
   /** 是否Ipv6版本的IP, 是为1，否为0 */
-  V6Flag?: number | null;
+  V6Flag?: number;
   /** 是否渠道版高防IP，是为1，否为0 */
-  BGPIPChannelFlag?: number | null;
+  BGPIPChannelFlag?: number;
   /** 资源关联标签 */
-  TagInfoList?: TagInfo[] | null;
+  TagInfoList?: TagInfo[];
   /** 资产实例所属的全力防护套餐包详情，注意：当资产实例不是全力防护套餐包的实例时，此字段为null */
   AnycastOutPackRelation?: AnycastOutPackRelation | null;
   /** 资源实例版本 */
-  InstanceVersion?: number | null;
+  InstanceVersion?: number;
   /** 重保实例 */
-  ConvoyId?: string | null;
+  ConvoyId?: string;
   /** 带宽后付费 */
-  ElasticBandwidth?: number | null;
+  ElasticBandwidth?: number;
   /** 是否为EO代播的ip: 1是，0不是 */
-  EOFlag?: number | null;
+  EOFlag?: number;
 }
 
 /** 高防IP资产实例的规格信息 */
@@ -179,7 +179,7 @@ declare interface BGPIPL7RuleEntry {
   /** 规则配置失败时的详细错误原因(仅当Status=2时有效)，1001证书不存在，1002证书获取失败，1003证书上传失败，1004证书已过期 */
   ErrCode?: number;
   /** 版本 */
-  Version?: number | null;
+  Version?: number;
 }
 
 /** 高防包资产实例信息 */
@@ -217,25 +217,25 @@ declare interface BGPInstance {
   /** 攻击封堵套餐标记 */
   VitalityVersion?: number;
   /** 网络线路 */
-  Line?: number | null;
+  Line?: number;
   /** 不计费的业务带宽 */
-  FreeServiceBandwidth?: number | null;
+  FreeServiceBandwidth?: number;
   /** 弹性业务带宽开关 */
   ElasticServiceBandwidth?: number;
   /** 赠送的业务带宽 */
   GiftServiceBandWidth?: number;
   /** 修改时间 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
   /** 是否是基础防护加强版 0: 不是 1: 是 */
-  BasicPlusFlag?: number | null;
+  BasicPlusFlag?: number;
   /** 是否标准版2.0 0: 包含标准版2.0 1: 只查询标准版2.0 2: 不查标准版2.0 */
-  PlanCntFlag?: number | null;
+  PlanCntFlag?: number;
   /** 是否跨区域产品 0: 不包含跨区域产品 1: 中国大陆跨区域产品 2: 非中国大陆跨区域产品 */
-  TransRegionFlag?: number | null;
+  TransRegionFlag?: number;
   /** 是否为超级高防包 */
-  SuperPackFlag?: number | null;
+  SuperPackFlag?: number;
   /** 所属ZoneId */
-  ZoneId?: number | null;
+  ZoneId?: number;
 }
 
 /** 高防包资产实例的规格信息 */
@@ -249,19 +249,19 @@ declare interface BGPInstanceSpecification {
   /** 自动续费状态，取值[0：没有开启自动续费1：开启了自动续费] */
   AutoRenewFlag?: number;
   /** 联合产品标记，0代表普通高防包，1代表联合高防包 */
-  UnionPackFlag?: number | null;
+  UnionPackFlag?: number;
   /** 业务带宽 */
-  ServiceBandWidth?: number | null;
+  ServiceBandWidth?: number;
   /** 战斗服版本标记，0表示普通高防包，1表示战斗服高防包 */
-  BattleEditionFlag?: number | null;
+  BattleEditionFlag?: number;
   /** 渠道版标记，0表示普通高防包，1表示渠道版高防包 */
-  ChannelEditionFlag?: number | null;
+  ChannelEditionFlag?: number;
   /** 高防包企业版标记，0表示普通高防包；1表示企业版高防包 */
-  EnterpriseFlag?: number | null;
+  EnterpriseFlag?: number;
   /** 高防包企业版弹性阈值，0表示未开启；大于0为弹性防护阈值 */
-  ElasticLimit?: number | null;
+  ElasticLimit?: number;
   /** 降配后的防护能力，单位Gbps */
-  DownGradeProtect?: number | null;
+  DownGradeProtect?: number;
 }
 
 /** 高防包资产实例的使用信息统计 */
@@ -301,7 +301,7 @@ declare interface BoundIpInfo {
   /** 运营商，绑定操作为必填项，解绑操作可不填。0：电信；1：联通；2：移动；5：BGP */
   IspCode?: number;
   /** 域名化资产对应的域名 */
-  Domain?: string | null;
+  Domain?: string;
 }
 
 /** CC分级策略 */
@@ -585,15 +585,15 @@ declare interface EipAddressPackRelation {
 /** 高防弹性公网IP关联信息 */
 declare interface EipAddressRelation {
   /** 高防弹性公网IP绑定的实例地区，例如hk代表中国香港 */
-  EipAddressRegion?: string | null;
+  EipAddressRegion?: string;
   /** 绑定的资源实例ID。可能是一个CVM。 */
-  EipBoundRscIns?: string | null;
+  EipBoundRscIns?: string;
   /** 绑定的弹性网卡ID */
-  EipBoundRscEni?: string | null;
+  EipBoundRscEni?: string;
   /** 绑定的资源内网ip */
-  EipBoundRscVip?: string | null;
+  EipBoundRscVip?: string;
   /** 修改时间 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
 }
 
 /** EIP所属的云产品信息 */
@@ -607,7 +607,7 @@ declare interface EipProductInfo {
   /** IP所属的云产品实例ID，例如是弹性网卡的IP，InstanceId为弹性网卡的ID(eni-*); 如果是托管IP没有对应的资源实例ID,InstanceId为"" */
   InstanceId: string;
   /** 域名化资产对应的域名 */
-  Domain?: string | null;
+  Domain?: string;
 }
 
 /** 转发监听器 */
@@ -665,7 +665,7 @@ declare interface IPLineInfo {
   /** 资源flag，0：高防包资源，1：高防IP资源，2：非高防资源IP */
   ResourceFlag?: number;
   /** 域名化资产对应的域名 */
-  Domain?: string | null;
+  Domain?: string;
 }
 
 /** 实例7层规则 */
@@ -735,7 +735,7 @@ declare interface L4RuleSource {
   /** 8000 */
   Port?: number | null;
   /** 备份源站，1: 备份源站，0: 普通源站 */
-  Backup?: number | null;
+  Backup?: number;
 }
 
 /** L7规则 */
@@ -765,7 +765,7 @@ declare interface L7RuleEntry {
   /** HTTPS协议的CC防护状态，取值[0(关闭), 1(开启)] */
   CCEnable?: number;
   /** 是否开启Https协议使用Http回源，取值[0(关闭), 1(开启)]，不填写默认是关闭 */
-  HttpsToHttpEnable?: number | null;
+  HttpsToHttpEnable?: number;
   /** 证书来源，当转发协议为https时必须填，取值[2(腾讯云托管证书)]，当转发协议为http时也可以填0 */
   CertType?: number;
   /** 当证书来源为自有证书时，此字段必须填写证书内容；(因已不再支持自有证书，此字段已弃用，请不用填写此字段) */
@@ -777,7 +777,7 @@ declare interface L7RuleEntry {
   /** cc防护状态，取值[0(关闭), 1(开启)] */
   CCStatus?: number;
   /** 接入端口值 */
-  VirtualPort?: number | null;
+  VirtualPort?: number;
   /** 当证书来源为腾讯云托管证书时，此字段必须填写托管证书ID */
   SSLId?: string;
   /** 同ruleId */
@@ -907,13 +907,13 @@ declare interface NewL7RuleEntry {
   /** 是否开启Https协议使用Http回源，取值[0(关闭), 1(开启)]，不填写默认是关闭 */
   HttpsToHttpEnable?: number;
   /** 接入端口值 */
-  VirtualPort?: number | null;
+  VirtualPort?: number;
   /** http强制跳转https，1表示打开，0表示关闭 */
   RewriteHttps?: number;
   /** 规则配置失败时的详细错误原因(仅当Status=2时有效)，1001证书不存在，1002证书获取失败，1003证书上传失败，1004证书已过期 */
   ErrCode?: number;
   /** 版本 */
-  Version?: number | null;
+  Version?: number;
 }
 
 /** 防护概览DDoS攻击事件 */
@@ -1093,7 +1093,7 @@ declare interface SchedulingDomainInfo {
   /** 最后修改时间 */
   ModifyTime?: string;
   /** 域名名称 */
-  UsrDomainName?: string | null;
+  UsrDomainName?: string;
 }
 
 /** 源站信息 */
@@ -1119,15 +1119,15 @@ declare interface SpeedValue {
 /** 三网高防套餐详情 */
 declare interface StaticPackRelation {
   /** 保底带宽 */
-  ProtectBandwidth?: number | null;
+  ProtectBandwidth?: number;
   /** 业务带宽 */
-  NormalBandwidth?: number | null;
+  NormalBandwidth?: number;
   /** 转发规则 */
-  ForwardRulesLimit?: number | null;
+  ForwardRulesLimit?: number;
   /** 自动续费标记 */
-  AutoRenewFlag?: number | null;
+  AutoRenewFlag?: number;
   /** 到期时间 */
-  CurDeadline?: string | null;
+  CurDeadline?: string;
 }
 
 /** 操作返回码，只用于返回成功的情况 */
@@ -1751,9 +1751,9 @@ declare interface DescribeBasicDeviceStatusResponse {
   /** 返回资源及状态，状态码：1 - 封堵状态2 - 正常状态3 - 攻击状态 */
   Data?: KeyValue[];
   /** 域名化资产的名称 */
-  CLBData?: KeyValue[] | null;
+  CLBData?: KeyValue[];
   /** cnamewaf资源状态 */
-  CnameWafData?: KeyValue[] | null;
+  CnameWafData?: KeyValue[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1833,7 +1833,7 @@ declare interface DescribeBizMonitorTrendResponse {
   /** 统计纬度 */
   MetricName?: string;
   /** 返回DataList中的最大值 */
-  MaxData?: number | null;
+  MaxData?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1867,7 +1867,7 @@ declare interface DescribeBizTrendResponse {
   /** 统计纬度 */
   MetricName?: string;
   /** 返回DataList中的最大值 */
-  MaxData?: number | null;
+  MaxData?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2017,7 +2017,7 @@ declare interface DescribeCCTrendResponse {
   /** 值数组 */
   Data?: number[];
   /** 资源ID */
-  Id?: string | null;
+  Id?: string;
   /** 指标，取值[inqps(总请求峰值，dropqps(攻击请求峰值))，incount(请求次数), dropcount(攻击次数)] */
   MetricName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -2147,7 +2147,7 @@ declare interface DescribeDDoSTrendResponse {
   /** 值数组，攻击流量带宽单位为Mbps，包速率单位为pps */
   Data?: number[];
   /** 资源ID */
-  Id?: string | null;
+  Id?: string;
   /** 指标，取值[bps(攻击流量带宽，pps(攻击包速率))] */
   MetricName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */

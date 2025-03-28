@@ -1394,7 +1394,7 @@ declare interface Ipv6Address {
   Address: string;
   /** 是否是主`IP`。 */
   Primary?: boolean;
-  /** `EIP`实例`ID`，形如：`eip-hxlqja90`。 */
+  /** `EIP`实例`ID`，形如：`eip-hxlqja90`。作为入参数时，可通过[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取。 */
   AddressId?: string;
   /** 描述信息。 */
   Description?: string;
@@ -1404,7 +1404,7 @@ declare interface Ipv6Address {
   State?: string;
   /** 如果 IPv6地址是 ULA 类型，绑定的公网IP地址。 */
   PublicIpAddress?: string | null;
-  /** `IPv6`地址的类型: `GUA`, `OTHER`, `ULA` */
+  /** `IPv6`地址的类型: `GUA`(全球单播地址), `OTHER`(非GUA/ULA地址), `ULA`(唯一本地地址) */
   AddressType?: string | null;
 }
 
@@ -1750,15 +1750,15 @@ declare interface NetworkInterface {
   Attachment?: NetworkInterfaceAttachment | null;
   /** 可用区。 */
   Zone?: string;
-  /** 创建时间。 */
+  /** 创建时间。格式：YYYY-MM-DD hh:mm:ss。示例值：2020-10-28 08:23:59 */
   CreatedTime?: string;
   /** `IPv6`地址列表。 */
   Ipv6AddressSet?: Ipv6Address[];
   /** 标签键值对。 */
   TagSet?: Tag[];
-  /** 网卡类型。0 - 弹性网卡；1 - evm弹性网卡。 */
+  /** 网卡类型。“0”-辅助网卡，“1”-主网卡，“2”：中继网卡 */
   EniType?: number;
-  /** 网卡绑定的子机类型：cvm，eks。 */
+  /** 网卡绑定的子机类型：cvm（普通CVM子机），eks（弹性容器服务Elastic Kubernetes Service）， hai（高性能应用服务Hyper Application Inventor）。 */
   Business?: string | null;
   /** 网卡所关联的CDC实例ID。 */
   CdcId?: string | null;
@@ -1766,7 +1766,7 @@ declare interface NetworkInterface {
   AttachType?: number | null;
   /** 用于保留网卡主IP的资源ID用于保留网卡主IP的资源ID。用于删除网卡时作为入参数。 */
   ResourceId?: string | null;
-  /** 服务质量级别：`DEFAULT`：默认`PT`：云金`AU`：云银`AG`：云铜 */
+  /** 服务质量级别：PT（云金）、AU（云银）、AG(云铜）、DEFAULT（默认）。可选值：PT（云金）、AU（云银）、AG(云铜）、DEFAULT（默认）。 */
   QosLevel?: string | null;
 }
 
@@ -1847,7 +1847,7 @@ declare interface Price {
 /** 内网IP信息 */
 declare interface PrivateIpAddressSpecification {
   /** 内网IP地址。 */
-  PrivateIpAddress: string;
+  PrivateIpAddress?: string;
   /** 是否是主IP。 */
   Primary?: boolean;
   /** 公网IP地址。 */
@@ -1860,7 +1860,7 @@ declare interface PrivateIpAddressSpecification {
   IsWanIpBlocked?: boolean;
   /** IP状态：PENDING：生产中MIGRATING：迁移中DELETING：删除中AVAILABLE：可用的 */
   State?: string;
-  /** IP服务质量等级，可选值：PT、AU、AG、DEFAULT，分别代表云金、云银、云铜、默认四个等级。 */
+  /** IP服务质量等级，可选值：PT（云金）、AU（云银）、AG(云铜）、DEFAULT（默认）。 */
   QosLevel?: string;
 }
 
@@ -3231,7 +3231,7 @@ declare interface AllocateIp6AddressesBandwidthResponse {
 }
 
 declare interface AssignIpv6AddressesRequest {
-  /** 弹性网卡实例`ID`，形如：`eni-m6dyj72l`。 */
+  /** 弹性网卡实例`ID`，形如：`eni-m6dyj72l`。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。 */
   NetworkInterfaceId: string;
   /** 指定的`IPv6`地址列表，单次最多指定10个。与入参`Ipv6AddressCount`合并计算配额。与Ipv6AddressCount必填一个。 */
   Ipv6Addresses?: Ipv6Address[];
@@ -3277,13 +3277,13 @@ declare interface AssignIpv6SubnetCidrBlockResponse {
 }
 
 declare interface AssignPrivateIpAddressesRequest {
-  /** 弹性网卡实例ID，例如：eni-m6dyj72l。 */
+  /** 弹性网卡实例ID，例如：eni-m6dyj72l。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。 */
   NetworkInterfaceId: string;
   /** 指定的内网IP信息，单次最多指定10个。与SecondaryPrivateIpAddressCount至少提供一个。 */
   PrivateIpAddresses?: PrivateIpAddressSpecification[];
   /** 新申请的内网IP地址个数，与PrivateIpAddresses至少提供一个。内网IP地址个数总和不能超过配额数，详见弹性网卡使用限制。 */
   SecondaryPrivateIpAddressCount?: number;
-  /** IP服务质量等级，和SecondaryPrivateIpAddressCount配合使用，可选值：PT、AU、AG、DEFAULT，分别代表云金、云银、云铜、默认四个等级。 */
+  /** IP服务质量等级，和SecondaryPrivateIpAddressCount配合使用，可选值：PT（云金）、AU（云银）、AG(云铜）、DEFAULT（默认）。 */
   QosLevel?: string;
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
@@ -3407,9 +3407,9 @@ declare interface AssociateNetworkAclSubnetsResponse {
 }
 
 declare interface AssociateNetworkInterfaceSecurityGroupsRequest {
-  /** 弹性网卡实例ID。形如：eni-pxir56ns。每次请求的实例的上限为100。本接口不支持主网卡绑定安全组。 */
+  /** 弹性网卡实例ID。形如：eni-pxir56ns。每次请求的实例的上限为100。本接口不支持主网卡绑定安全组。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。 */
   NetworkInterfaceIds: string[];
-  /** 安全组实例ID，例如：sg-33ocnj9n，可通过DescribeSecurityGroups获取。每次请求的实例的上限为100。 */
+  /** 安全组实例ID，例如：sg-33ocnj9n，可通过DescribeSecurityGroups获取。每次请求的实例的上限为100。可通过[DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808)接口获取。 */
   SecurityGroupIds: string[];
 }
 
@@ -3445,9 +3445,9 @@ declare interface AttachClassicLinkVpcResponse {
 }
 
 declare interface AttachNetworkInterfaceRequest {
-  /** 弹性网卡实例ID，例如：eni-m6dyj72l。 */
+  /** 弹性网卡实例ID，例如：eni-m6dyj72l。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。 */
   NetworkInterfaceId: string;
-  /** CVM实例ID。形如：ins-r8hr2upy。 */
+  /** CVM实例ID。形如：ins-r8hr2upy。可通过[DescribeInstances](https://cloud.tencent.com/document/product/213/15728)接口获取。 */
   InstanceId: string;
   /** 网卡的挂载类型：0 标准型，1扩展型，默认值0。 */
   AttachType?: number;
@@ -3637,21 +3637,21 @@ declare interface CreateAddressTemplateResponse {
 }
 
 declare interface CreateAndAttachNetworkInterfaceRequest {
-  /** VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。 */
+  /** VPC实例ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。 */
   VpcId: string;
   /** 弹性网卡名称，最大长度不能超过60个字节。 */
   NetworkInterfaceName: string;
-  /** 弹性网卡所在的子网实例ID，例如：subnet-0ap8nwca。 */
+  /** 弹性网卡所在的子网实例ID，例如：subnet-0ap8nwca。可通过[DescribeSubnets](https://cloud.tencent.com/document/product/215/15784)接口获取。 */
   SubnetId: string;
-  /** 云服务器实例ID。 */
+  /** 云服务器实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/213/15728)接口获取。 */
   InstanceId: string;
   /** 指定的内网IP信息，单次最多指定10个。 */
   PrivateIpAddresses?: PrivateIpAddressSpecification[];
   /** 新申请的内网IP地址个数，内网IP地址个数总和不能超过配额数。 */
   SecondaryPrivateIpAddressCount?: number;
-  /** IP服务质量等级，和SecondaryPrivateIpAddressCount配合使用，可选值：PT、AU、AG、DEFAULT，分别代表云金、云银、云铜、默认四个等级。 */
+  /** IP服务质量等级，和SecondaryPrivateIpAddressCount配合使用，可选值：PT（云金）、AU（云银）、AG(云铜）、DEFAULT（默认）。 */
   QosLevel?: string;
-  /** 指定绑定的安全组，例如：['sg-1dd51d']。 */
+  /** 指定绑定的安全组，例如：['sg-1dd51d']。可通过[DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808)接口获取。 */
   SecurityGroupIds?: string[];
   /** 弹性网卡描述，可任意命名，但不得超过60个字符。 */
   NetworkInterfaceDescription?: string;
@@ -4125,19 +4125,19 @@ declare interface CreateNetworkAclResponse {
 }
 
 declare interface CreateNetworkInterfaceRequest {
-  /** VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。 */
+  /** VPC实例ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。 */
   VpcId: string;
   /** 弹性网卡名称，最大长度不能超过60个字节。 */
   NetworkInterfaceName: string;
-  /** 弹性网卡所在的子网实例ID，例如：subnet-0ap8nwca。 */
+  /** 弹性网卡所在的子网实例ID，例如：subnet-0ap8nwca。可通过[DescribeSubnets](https://cloud.tencent.com/document/product/215/15784)接口获取。 */
   SubnetId: string;
   /** 弹性网卡描述，可任意命名，但不得超过60个字符。 */
   NetworkInterfaceDescription?: string;
   /** 新申请的内网IP地址个数，内网IP地址个数总和不能超过配额数。配额数查询：[DescribeVpcLimits](https://cloud.tencent.com/document/api/215/42942)。 */
   SecondaryPrivateIpAddressCount?: number;
-  /** IP服务质量等级，和SecondaryPrivateIpAddressCount配合使用，可选值：PT、AU、AG、DEFAULT，分别代表云金、云银、云铜、默认四个等级。 */
+  /** IP服务质量等级，和SecondaryPrivateIpAddressCount配合使用，可选值：PT（云金）、AU（云银）、AG(云铜）、DEFAULT（默认）。 */
   QosLevel?: string;
-  /** 指定绑定的安全组，例如：['sg-1dd51d']。 */
+  /** 指定绑定的安全组，例如：['sg-1dd51d']。可通过[DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808)接口获取。 */
   SecurityGroupIds?: string[];
   /** 指定的内网IP信息，单次最多指定10个。 */
   PrivateIpAddresses?: PrivateIpAddressSpecification[];
@@ -6381,9 +6381,9 @@ declare interface DescribeNetworkInterfaceLimitResponse {
 }
 
 declare interface DescribeNetworkInterfacesRequest {
-  /** 弹性网卡实例ID查询。形如：eni-pxir56ns。每次请求的实例的上限为100。参数不支持同时指定NetworkInterfaceIds和Filters。 */
+  /** 弹性网卡实例ID查询。形如：eni-pxir56ns。每次请求的实例的上限为100。参数不支持同时指定NetworkInterfaceIds和Filters。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。 */
   NetworkInterfaceIds?: string[];
-  /** 过滤条件，参数不支持同时指定NetworkInterfaceIds和Filters。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。subnet-id - String - （过滤条件）所属子网实例ID，形如：subnet-f49l6u0z。network-interface-id - String - （过滤条件）弹性网卡实例ID，形如：eni-5k56k7k7。attachment.instance-id - String - （过滤条件）绑定的云服务器实例ID，形如：ins-3nqpdn3i。groups.security-group-id - String - （过滤条件）绑定的安全组实例ID，例如：sg-f9ekbxeq。network-interface-name - String - （过滤条件）网卡实例名称。network-interface-description - String - （过滤条件）网卡实例描述。address-ip - String - （过滤条件）内网IPv4地址，单IP后缀模糊匹配，多IP精确匹配。可以与`ip-exact-match`配合做单IP的精确匹配查询。ip-exact-match - Boolean - （过滤条件）内网IPv4精确匹配查询，存在多值情况，只取第一个。tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。使用请参考示例2tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。is-primary - Boolean - 是否必填：否 - （过滤条件）按照是否主网卡进行过滤。值为true时，仅过滤主网卡；值为false时，仅过滤辅助网卡；此过滤参数未提供时，同时过滤主网卡和辅助网卡。eni-type - String -是否必填：否- （过滤条件）按照网卡类型进行过滤。“0”-辅助网卡，“1”-主网卡，“2”：中继网卡。eni-qos - String -是否必填：否- （过滤条件）按照网卡服务质量进行过滤。“AG”-服务质量为云铜，“AU”-服务质量为云银。address-ipv6 - String - 是否必填：否 -（过滤条件）内网IPv6地址过滤，支持多ipv6地址查询，如果和address-ip一起使用取交集。public-address-ip - String - （过滤条件）公网IPv4地址，精确匹配。 */
+  /** 过滤条件，参数不支持同时指定NetworkInterfaceIds和Filters。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。subnet-id - String - （过滤条件）所属子网实例ID，形如：subnet-f49l6u0z。可通过[DescribeSubnets](https://cloud.tencent.com/document/product/215/15784)接口获取。network-interface-id - String - （过滤条件）弹性网卡实例ID，形如：eni-5k56k7k7。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。attachment.instance-id - String - （过滤条件）绑定的云服务器实例ID，形如：ins-3nqpdn3i。可通过[DescribeInstances](https://cloud.tencent.com/document/product/213/15728)接口获取。groups.security-group-id - String - （过滤条件）绑定的安全组实例ID，例如：sg-f9ekbxeq。可通过[DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808)接口获取。network-interface-name - String - （过滤条件）网卡实例名称。network-interface-description - String - （过滤条件）网卡实例描述。address-ip - String - （过滤条件）内网IPv4地址，单IP后缀模糊匹配，多IP精确匹配。可以与`ip-exact-match`配合做单IP的精确匹配查询。ip-exact-match - Boolean - （过滤条件）内网IPv4精确匹配查询，存在多值情况，只取第一个。tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。使用请参考示例2tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。is-primary - Boolean - 是否必填：否 - （过滤条件）按照是否主网卡进行过滤。值为true时，仅过滤主网卡；值为false时，仅过滤辅助网卡；此过滤参数未提供时，同时过滤主网卡和辅助网卡。eni-type - String -是否必填：否- （过滤条件）按照网卡类型进行过滤。“0”-辅助网卡，“1”-主网卡，“2”：中继网卡。eni-qos - String -是否必填：否- （过滤条件）按照网卡服务质量进行过滤。PT（云金）、AU（云银）、AG(云铜）、DEFAULT（默认）。address-ipv6 - String - 是否必填：否 -（过滤条件）内网IPv6地址过滤，支持多ipv6地址查询，如果和address-ip一起使用取交集。public-address-ip - String - （过滤条件）公网IPv4地址，精确匹配。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -7417,9 +7417,9 @@ declare interface DetachClassicLinkVpcResponse {
 }
 
 declare interface DetachNetworkInterfaceRequest {
-  /** 弹性网卡实例ID，例如：eni-m6dyj72l。 */
+  /** 弹性网卡实例ID，例如：eni-m6dyj72l。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。 */
   NetworkInterfaceId: string;
-  /** CVM实例ID。形如：ins-r8hr2upy。 */
+  /** CVM实例ID。形如：ins-r8hr2upy。可通过[DescribeInstances](https://cloud.tencent.com/document/product/213/15728)接口获取。 */
   InstanceId: string;
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
@@ -7921,13 +7921,13 @@ declare interface LockCcnsResponse {
 }
 
 declare interface MigrateNetworkInterfaceRequest {
-  /** 弹性网卡实例ID，例如：eni-m6dyj72l。 */
+  /** 弹性网卡实例ID，例如：eni-m6dyj72l。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。 */
   NetworkInterfaceId: string;
-  /** 弹性网卡当前绑定的CVM实例ID。形如：ins-r8hr2upy。 */
+  /** 弹性网卡当前绑定的CVM实例ID。形如：ins-r8hr2upy。可通过[DescribeInstances](https://cloud.tencent.com/document/product/213/15728)接口获取。 */
   SourceInstanceId: string;
-  /** 待迁移的目的CVM实例ID。 */
+  /** 待迁移的目的CVM实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/213/15728)接口获取。 */
   DestinationInstanceId: string;
-  /** 网卡绑定类型：0 标准型 1 扩展型。 */
+  /** 网卡绑定类型：0 标准型 1 扩展型。默认：0。 */
   AttachType?: number;
 }
 
@@ -8341,7 +8341,7 @@ declare interface ModifyIp6TranslatorResponse {
 }
 
 declare interface ModifyIpv6AddressesAttributeRequest {
-  /** 弹性网卡实例`ID`，形如：`eni-m6dyj72l`。 */
+  /** 弹性网卡实例`ID`，形如：`eni-m6dyj72l`。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。 */
   NetworkInterfaceId: string;
   /** 指定的内网IPv6地址信息。 */
   Ipv6Addresses: Ipv6Address[];
@@ -8473,13 +8473,13 @@ declare interface ModifyNetworkAclQuintupleEntriesResponse {
 }
 
 declare interface ModifyNetworkInterfaceAttributeRequest {
-  /** 弹性网卡实例ID，例如：eni-pxir56ns。 */
+  /** 弹性网卡实例ID，例如：eni-pxir56ns。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。 */
   NetworkInterfaceId: string;
   /** 弹性网卡名称，最大长度不能超过60个字节。 */
   NetworkInterfaceName?: string;
   /** 弹性网卡描述，可任意命名，但不得超过60个字符。 */
   NetworkInterfaceDescription?: string;
-  /** 指定绑定的安全组，例如:['sg-1dd51d']。 */
+  /** 指定绑定的安全组，例如:['sg-1dd51d']。可通过[DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808)接口获取。 */
   SecurityGroupIds?: string[];
   /** 网卡trunking模式设置，Enable-开启，Disable--关闭，默认关闭。 */
   TrunkingFlag?: string;
@@ -8491,11 +8491,11 @@ declare interface ModifyNetworkInterfaceAttributeResponse {
 }
 
 declare interface ModifyNetworkInterfaceQosRequest {
-  /** 弹性网卡ID，支持批量修改。 */
+  /** 弹性网卡ID，支持批量修改。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。 */
   NetworkInterfaceIds: string[];
-  /** 服务质量，可选值：PT、AU、AG、DEFAULT，分别代表云金、云银、云铜、默认四个等级。 */
+  /** 服务质量，可选值：PT（云金）、AU（云银）、AG(云铜）、DEFAULT（默认）。 */
   QosLevel?: string;
-  /** DirectSend端口范围最大值。 */
+  /** DirectSend端口范围最大值。最大值: 65535。 */
   DirectSendMaxPort?: number;
 }
 
@@ -8505,7 +8505,7 @@ declare interface ModifyNetworkInterfaceQosResponse {
 }
 
 declare interface ModifyPrivateIpAddressesAttributeRequest {
-  /** 弹性网卡实例ID，例如：eni-m6dyj72l。 */
+  /** 弹性网卡实例ID，例如：eni-m6dyj72l。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。 */
   NetworkInterfaceId: string;
   /** 指定的内网IP信息。 */
   PrivateIpAddresses: PrivateIpAddressSpecification[];
@@ -9403,7 +9403,7 @@ declare interface TransformAddressResponse {
 }
 
 declare interface UnassignIpv6AddressesRequest {
-  /** 弹性网卡实例`ID`，形如：`eni-m6dyj72l`。 */
+  /** 弹性网卡实例`ID`，形如：`eni-m6dyj72l`。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。 */
   NetworkInterfaceId: string;
   /** 指定的`IPv6`地址列表，单次最多指定10个。 */
   Ipv6Addresses: Ipv6Address[];
@@ -9439,11 +9439,11 @@ declare interface UnassignIpv6SubnetCidrBlockResponse {
 }
 
 declare interface UnassignPrivateIpAddressesRequest {
-  /** 弹性网卡实例ID，例如：eni-m6dyj72l。 */
+  /** 弹性网卡实例ID，例如：eni-m6dyj72l。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。 */
   NetworkInterfaceId: string;
   /** 指定的内网IP信息，单次最多指定10个。 */
   PrivateIpAddresses: PrivateIpAddressSpecification[];
-  /** 网卡绑定的子机实例ID，该参数仅用于指定网卡退还IP并解绑子机的场景，如果不涉及解绑子机，请勿填写。 */
+  /** 网卡绑定的子机实例ID，该参数仅用于指定网卡退还IP并解绑子机的场景，如果不涉及解绑子机，请勿填写。可通过[DescribeInstances](https://cloud.tencent.com/document/product/213/15728)接口获取。 */
   InstanceId?: string;
 }
 

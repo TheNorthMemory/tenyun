@@ -2735,7 +2735,7 @@ declare interface CreateClsLogTopicRequest {
 
 declare interface CreateClsLogTopicResponse {
   /** 主题ID */
-  TopicId: string | null;
+  TopicId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3165,9 +3165,9 @@ declare interface DescribeDomainsConfigRequest {
 
 declare interface DescribeDomainsConfigResponse {
   /** 域名列表 */
-  Domains: DetailDomain[];
+  Domains?: DetailDomain[];
   /** 符合查询条件的域名总数用于分页查询 */
-  TotalNumber: number;
+  TotalNumber?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3295,9 +3295,9 @@ declare interface DescribeIpStatusRequest {
 
 declare interface DescribeIpStatusResponse {
   /** 节点列表 */
-  Ips: IpStatus[];
+  Ips?: IpStatus[];
   /** 节点总个数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3317,9 +3317,9 @@ declare interface DescribeIpVisitRequest {
 
 declare interface DescribeIpVisitResponse {
   /** 数据统计的时间粒度，支持5min, day，分别表示5分钟，1天的时间粒度。 */
-  Interval: string;
+  Interval?: string;
   /** 各个资源的回源数据详情。 */
-  Data: ResourceData[];
+  Data?: ResourceData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3429,9 +3429,9 @@ declare interface DescribePurgeTasksRequest {
 
 declare interface DescribePurgeTasksResponse {
   /** 详细刷新记录 */
-  PurgeLogs: PurgeTask[] | null;
+  PurgeLogs?: PurgeTask[] | null;
   /** 任务总数，用于分页 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3493,9 +3493,9 @@ declare interface DescribeReportDataRequest {
 
 declare interface DescribeReportDataResponse {
   /** 域名维度数据详情 */
-  DomainReport: ReportData[];
+  DomainReport?: ReportData[];
   /** 项目维度数据详情 */
-  ProjectReport: ReportData[];
+  ProjectReport?: ReportData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3697,9 +3697,9 @@ declare interface DescribeUrlViolationsRequest {
 
 declare interface DescribeUrlViolationsResponse {
   /** 违规 URL 详情 */
-  UrlRecordList: ViolationUrl[] | null;
+  UrlRecordList?: ViolationUrl[] | null;
   /** 记录总数，用于分页 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3857,19 +3857,19 @@ declare interface ListClsTopicDomainsRequest {
 
 declare interface ListClsTopicDomainsResponse {
   /** 开发者ID */
-  AppId: number;
+  AppId?: number;
   /** 渠道 */
-  Channel: string;
+  Channel?: string;
   /** 日志集ID */
-  LogsetId: string;
+  LogsetId?: string;
   /** 日志主题ID */
-  TopicId: string;
+  TopicId?: string;
   /** 域名区域配置，其中可能含有已删除的域名，如果要再传回ManageClsTopicDomains接口，需要结合ListCdnDomains接口排除掉已删除的域名 */
-  DomainAreaConfigs: DomainAreaConfig[];
+  DomainAreaConfigs?: DomainAreaConfig[];
   /** 日志主题名称 */
-  TopicName: string;
+  TopicName?: string;
   /** 日志主题最近更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4017,11 +4017,11 @@ declare interface ListTopClsLogDataRequest {
 
 declare interface ListTopClsLogDataResponse {
   /** 数据列表 */
-  Data: ClsLogIpData[];
+  Data?: ClsLogIpData[];
   /** 获取到Top总记录数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 获取到的不重复IP条数 */
-  IpCount: number;
+  IpCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4243,7 +4243,7 @@ declare interface SearchClsLogRequest {
 
 declare interface SearchClsLogResponse {
   /** 查询结果 */
-  Logs: ClsSearchLogs;
+  Logs?: ClsSearchLogs;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

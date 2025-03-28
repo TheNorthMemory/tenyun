@@ -1541,6 +1541,8 @@ declare interface CreateBasicDBInstancesRequest {
   Collation?: string;
   /** 系统时区，默认：China Standard Time */
   TimeZone?: string;
+  /** 磁盘加密标识，0-不加密，1-加密 */
+  DiskEncryptFlag?: number;
 }
 
 declare interface CreateBasicDBInstancesResponse {
@@ -1663,6 +1665,8 @@ declare interface CreateCloudDBInstancesRequest {
   MultiNodes?: boolean;
   /** 备节点可用区，默认为空。当MultiNodes = true时，主节点和备节点可用区不能全部相同。备机可用区集合最小为2个，最大不超过5个。 */
   DrZones?: string[];
+  /** 磁盘加密标识，0-不加密，1-加密 */
+  DiskEncryptFlag?: number;
 }
 
 declare interface CreateCloudDBInstancesResponse {
@@ -1721,6 +1725,8 @@ declare interface CreateCloudReadOnlyDBInstancesRequest {
   Collation?: string;
   /** 系统时区，默认：China Standard Time */
   TimeZone?: string;
+  /** 磁盘加密标识，0-不加密，1-加密 */
+  DiskEncryptFlag?: number;
 }
 
 declare interface CreateCloudReadOnlyDBInstancesResponse {
@@ -2524,6 +2530,8 @@ declare interface DescribeDBInstancesAttributeResponse {
   XEventStatus?: string;
   /** 多节点备机只读信息 */
   MultiDrReadableInfo?: DrReadableInfo[];
+  /** 是否开启磁盘加密，1-开启，0-未开启 */
+  IsDiskEncryptFlag?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -181,11 +181,11 @@ declare interface DeviceCntStats {
 /** 设备通讯日志查询返回条目 */
 declare interface DeviceCommLogItem {
   /** 时间 */
-  Time: string;
+  Time?: string;
   /** 日志类型，device 设备上行，shadow 服务端下行。 */
-  Type: string;
+  Type?: string;
   /** 通讯数据。 */
-  Data: string;
+  Data?: string;
 }
 
 /** 设备历史数据结构 */
@@ -1298,6 +1298,10 @@ declare interface DescribeCloudStorageOrderResponse {
   Status?: number;
   /** 通道id */
   ChannelId?: number;
+  /** 订单金额，单位为分 */
+  Price?: number | null;
+  /** 支付金额，单位为分 */
+  Amount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2011,7 +2015,7 @@ declare interface DescribeProductRequest {
 
 declare interface DescribeProductResponse {
   /** 产品详情 */
-  Data: VideoProduct;
+  Data?: VideoProduct;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4006,7 +4010,7 @@ declare namespace V20201215 {
 
   interface DescribeProductResponse {
     /** 产品详情 */
-    Data: VideoProduct;
+    Data?: VideoProduct;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

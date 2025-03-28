@@ -148,7 +148,7 @@ declare interface IpRule {
 declare interface MQTTAuthenticatorItem {
   /** 认证器类型JWT：JWT认证器JWKS：JWKS认证器HTTP：HTTP认证器 */
   Type?: string;
-  /** HTTP认证器headers（请求头）：标准请求头和自定义请求头endpoint（接入点）：认证服务器接入点method（http请求方法）：POST/GETreadTimeout（读超时时间）：读取认证服务器数据超时时间，单位秒connectTimeout（连接超时时间）：连接认证服务器超时时间，单位秒body（请求体）：http请求体concurrency（并发数）：最大并发请求数样例：{"headers":[{"key":"Content-type","value":"application/json"},{"key":"username","value":"${Username}"}],"endpoint":"https://127.0.0.1:443","method":"POST","readTimeout":10,"connectTimeout":10,"body":[{"key":"client-id","value":"${ClientId}"}],"concurrency":8}参考 [认证管理概述](https://cloud.tencent.com/document/product/1778/114813) */
+  /** JWT认证器字段说明from（认证字段） password：从password字段获取认证字段 username：从username字段获取认证字段secret（签名方式） hmac-based：hmac-based签名方式 public-key：public-key签名方式secret（密钥），hmac-based需要配置密钥public-key（公钥），public-key签名方式需要配置样例：{"from":"password","secret":"secret282698","algorithm":"hmac-based"}JWKS认证器字段说明endpoint（接入点）：公钥获取服务器接入地址refreshInterval（认证内容）：公钥集合刷新周期from（认证字段） password：从password字段获取认证字段 username：从username字段获取认证字段text：公钥集合样例：{"endpoint":"127.0.0.1","refreshInterval":60,"from":"password"}HTTP认证器headers（请求头）：标准请求头和自定义请求头endpoint（接入点）：认证服务器接入点method（http请求方法）：POST/GETreadTimeout（读超时时间）：读取认证服务器数据超时时间，单位秒connectTimeout（连接超时时间）：连接认证服务器超时时间，单位秒body（请求体）：http请求体concurrency（并发数）：最大并发请求数量样例：{"headers":[{"key":"Content-type","value":"application/json"},{"key":"username","value":"${Username}"}],"endpoint":"https://127.0.0.1:443","method":"POST","readTimeout":10,"connectTimeout":10,"body":[{"key":"client-id","value":"${ClientId}"}],"concurrency":8}参考 [认证管理概述](https://cloud.tencent.com/document/product/1778/114813) */
   Config?: string;
   /** 认证器状态open：认证器打开close：认证器关闭 */
   Status?: string;
@@ -164,7 +164,7 @@ declare interface MQTTClientInfo {
   ClientId?: string;
   /** 客户端网络地址 */
   ClientAddress?: string;
-  /** MQTT 协议版本3：表示MQTT 3.1版本4：表示 MQTT 3.1.15: 标识MQTT 5.0协议 */
+  /** MQTT 协议版本3：表示MQTT 3.1版本4：表示 MQTT 3.1.15：表示MQTT 5.0协议 */
   ProtocolVersion?: number;
   /** 保持连接时间，单位：秒 */
   Keepalive?: number;
@@ -264,7 +264,7 @@ declare interface MQTTMessageItem {
   Keys?: string;
   /** 客户端地址 */
   ProducerAddr?: string;
-  /** 消息发送时间 */
+  /** 消息发送时间，格式 日期时间：YYYY-MM-DD hh:mm:ss */
   ProduceTime?: string;
   /** 死信重发次数 */
   DeadLetterResendTimes?: number;
@@ -272,7 +272,7 @@ declare interface MQTTMessageItem {
   DeadLetterResendSuccessTimes?: number;
   /** 子topic */
   SubTopic?: string;
-  /** 消息质量等级 */
+  /** 消息质量等级0：至多一次1：至少一次2：精确一次 */
   Qos?: string;
 }
 
@@ -407,35 +407,39 @@ declare interface ApplyRegistrationCodeResponse {
 }
 
 declare interface CreateAuthorizationPolicyRequest {
-  /** 实例ID */
+  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
   InstanceId: string;
-  /** 策略名称 */
+  /** 策略名称，不能为空，3-64个字符，支持中文、字母、数字、“-”及“_”。 */
   PolicyName: string;
-  /** 策略版本 */
+  /** 策略版本,默认为1，当前仅支持1 */
   PolicyVersion: number;
-  /** 策略优先级，越小越优先 */
+  /** 策略优先级，越小越优先，不能重复 */
   Priority: number;
-  /** allow、deny */
+  /** 决策：allow 允许deny 拒绝 */
   Effect: string;
-  /** connect、pub、sub */
+  /** 操作connect：连接pub：发布sub：订阅 */
   Actions: string;
-  /** 1,匹配保留消息；2,匹配非保留消息，3.匹配所有消息 */
+  /** 条件-保留消息1,匹配保留消息；2,匹配非保留消息，3.匹配保留和非保留消息 */
   Retain: number;
-  /** 0、1、2 */
+  /** 条件：服务质量0：最多一次1：最少一次2：精确一次 */
   Qos: string;
-  /** 资源 */
+  /** 资源，需要匹配的订阅 */
   Resources?: string;
-  /** 用户名 */
+  /** 条件-用户名 */
   Username?: string;
-  /** 客户端 */
+  /** 条件：客户端ID，支持正则 */
   ClientId?: string;
-  /** IP地址 */
+  /** 条件：客户端IP地址，支持IP或者CIDR */
   Ip?: string;
-  /** 备注信息 */
+  /** 备注信息，最长 128 字符 */
   Remark?: string;
 }
 
 declare interface CreateAuthorizationPolicyResponse {
+  /** 集群Id */
+  InstanceId?: string;
+  /** 策略id */
+  Id?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -917,12 +921,12 @@ declare interface DescribeInstanceListResponse {
 }
 
 declare interface DescribeInstanceRequest {
-  /** 实例ID */
+  /** 实例ID [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029) */
   InstanceId: string;
 }
 
 declare interface DescribeInstanceResponse {
-  /** 实例类型BASIC 基础版PRO 专业版 */
+  /** 实例类型BASIC 基础版PRO 专业版PLATINUM 铂金版 */
   InstanceType?: string;
   /** 实例ID */
   InstanceId?: string;
@@ -938,7 +942,7 @@ declare interface DescribeInstanceResponse {
   CreatedTime?: number;
   /** 备注信息 */
   Remark?: string;
-  /** 实例状态 */
+  /** 实例状态， RUNNING, 运行中 MAINTAINING，维护中 ABNORMAL，异常 OVERDUE，欠费 DESTROYED，已删除 CREATING，创建中 MODIFYING，变配中 CREATE_FAILURE，创建失败 MODIFY_FAILURE，变配失败 DELETING，删除中 */
   InstanceStatus?: string;
   /** 实例规格 */
   SkuCode?: string;
@@ -952,13 +956,13 @@ declare interface DescribeInstanceResponse {
   DeviceCertificateProvisionType?: string;
   /** 自动注册设备证书时是否自动激活 */
   AutomaticActivation?: boolean;
-  /** 是否自动续费 */
+  /** 是否自动续费。仅包年包月集群生效。 1:自动续费 0:非自动续费 */
   RenewFlag?: number;
   /** 计费模式， POSTPAID，按量计费 PREPAID，包年包月 */
   PayMode?: string;
-  /** 到期时间，秒为单位 */
+  /** 到期时间，毫秒级时间戳 */
   ExpiryTime?: number;
-  /** 预销毁时间 */
+  /** 预销毁时间，毫秒级时间戳 */
   DestroyTime?: number;
   /** TLS,单向认证 mTLS,双向认证 BYOC;一机一证 */
   X509Mode?: string;
@@ -968,24 +972,26 @@ declare interface DescribeInstanceResponse {
   RegistrationCode?: string;
   /** 集群最大订阅数 */
   MaxSubscription?: number;
+  /** 授权策略开关 */
+  AuthorizationPolicy?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeMessageListRequest {
-  /** 实例ID */
+  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
   InstanceId: string;
-  /** 主题 */
+  /** 要查询的一级Topic，可从 [查询MQTT主题列表](https://cloud.tencent.com/document/product/1778/111082) 获取。 */
   Topic: string;
-  /** 开始时间 */
+  /** 开始时间，毫秒级时间戳 。 */
   StartTime: number;
-  /** 结束时间 */
+  /** 结束时间，毫秒级时间戳 。 */
   EndTime: number;
-  /** 请求任务id */
+  /** 请求任务id，用于相同查询参数下查询加速，第一次查询时无需传递，第一次查询会根据本次查询参数生成查询任务ID，保留查询条件，查询下一页消息时可传递第一次查询返回的任务ID。 */
   TaskRequestId: string;
-  /** 查询起始位置 */
+  /** 查询起始位置，默认0 */
   Offset?: number;
-  /** 查询结果限制数量 */
+  /** 查询结果限制数量，默认20，最大50 */
   Limit?: number;
 }
 
@@ -1185,18 +1191,20 @@ declare interface ModifyInstanceCertBindingResponse {
 }
 
 declare interface ModifyInstanceRequest {
-  /** 实例ID */
+  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
   InstanceId: string;
-  /** 要修改实例名称 */
+  /** 要修改实例名称，不能为空, 3-64个字符，只能包含数字、字母、“-”和“_”。 */
   Name?: string;
-  /** 要修改的备注信息 */
+  /** 要修改的备注信息，最多64个字符。 */
   Remark?: string;
-  /** 要变更的配置规格 */
+  /** 需要变更的配置规格基础版和增强版集群不能升配到铂金版规格，铂金版集群不能降配至基础版和增强版规格。 */
   SkuCode?: string;
   /** 客户端证书注册方式：JITP：自动注册API：手动通过API注册 */
   DeviceCertificateProvisionType?: string;
   /** 自动注册证书是否自动激活 */
   AutomaticActivation?: boolean;
+  /** 授权策略开关 */
+  AuthorizationPolicy?: boolean;
 }
 
 declare interface ModifyInstanceResponse {

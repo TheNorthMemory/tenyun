@@ -5764,9 +5764,9 @@ declare namespace V20180525 {
 
   interface DescribeOSImagesResponse {
     /** 镜像信息列表 */
-    OSImageSeriesSet?: OSImage[] | null;
+    OSImageSeriesSet?: OSImage[];
     /** 镜像数量 */
-    TotalCount?: number | null;
+    TotalCount?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

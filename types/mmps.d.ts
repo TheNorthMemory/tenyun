@@ -489,13 +489,13 @@ declare interface DescribeScanTaskStatusRequest {
 
 declare interface DescribeScanTaskStatusResponse {
   /** 返回值, 0:成功, 其他值请查看“返回值”定义 */
-  Result: number;
+  Result?: number;
   /** 0:默认值(待检测/待咨询), 1.检测中, 4:任务完成/咨询完成, 5:任务失败, 6:咨询中; */
-  Status: number;
+  Status?: number;
   /** 诊断失败的错误信息 */
-  ErrMsg: string | null;
+  ErrMsg?: string;
   /** 任务流详情 */
-  FlowSteps: TaskFlowStepsInfo[] | null;
+  FlowSteps?: TaskFlowStepsInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

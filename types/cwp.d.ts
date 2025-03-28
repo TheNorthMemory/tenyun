@@ -4360,6 +4360,8 @@ declare interface ReverseShell {
   Pid?: number;
   /** 威胁等级：0中危，1高危 */
   RiskLevel?: number;
+  /** 命令详情的转义后内容，供正则加白全字符串匹配使用 */
+  CmdLineQuote?: string;
 }
 
 /** 反弹Shell数据详情 */
@@ -4418,6 +4420,8 @@ declare interface ReverseShellEventInfo {
   MachineStatus?: string;
   /** 处理时间 */
   ModifyTime?: string;
+  /** 命令详情的转义后内容，供正则加白全字符串匹配使用 */
+  CmdLineQuote?: string;
 }
 
 /** 反弹Shell规则 */
@@ -14410,6 +14414,10 @@ declare interface ScanTaskAgainRequest {
 }
 
 declare interface ScanTaskAgainResponse {
+  /** 下发成功的主机数 */
+  SuccessCount?: number;
+  /** 基础版(不支持扫描)主机数 */
+  BasicVersionCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

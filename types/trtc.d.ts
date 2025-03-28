@@ -1289,6 +1289,8 @@ declare interface DescribeCloudRecordingRequest {
   SdkAppId: number;
   /** 录制任务的唯一Id，在启动录制成功后会返回。 */
   TaskId: string;
+  /** 转推录制任务发起时所填，标识一次录制 */
+  RecorderKey?: string;
 }
 
 declare interface DescribeCloudRecordingResponse {
@@ -1298,6 +1300,8 @@ declare interface DescribeCloudRecordingResponse {
   Status?: string;
   /** 录制文件信息。 */
   StorageFileList?: StorageFile[];
+  /** 转推录制任务发起时所填，标识一次录制 */
+  RecorderKey?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

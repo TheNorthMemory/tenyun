@@ -29,23 +29,23 @@ declare interface Project {
 /** 资源标签键值 */
 declare interface ResourceIdTag {
   /** 资源唯一标识 */
-  ResourceId: string | null;
+  ResourceId?: string | null;
   /** 标签键值对 */
-  TagKeyValues: TagInfo[] | null;
+  TagKeyValues?: TagInfo[] | null;
 }
 
 /** 资源标签 */
 declare interface ResourceTag {
   /** 资源所在地域 */
-  ResourceRegion: string | null;
+  ResourceRegion?: string | null;
   /** 业务类型 */
-  ServiceType: string | null;
+  ServiceType?: string | null;
   /** 资源前缀 */
-  ResourcePrefix: string | null;
+  ResourcePrefix?: string | null;
   /** 资源唯一标记 */
-  ResourceId: string | null;
+  ResourceId?: string | null;
   /** 资源标签 */
-  Tags: TagInfo[] | null;
+  Tags?: TagInfo[] | null;
 }
 
 /** 资源及关联的标签(键和值)。 */
@@ -589,9 +589,9 @@ declare interface GetResourcesRequest {
 
 declare interface GetResourcesResponse {
   /** 获取的下一页的Token值 */
-  PaginationToken: string;
+  PaginationToken?: string;
   /** 资源及关联的标签(键和值)列表 */
-  ResourceTagMappingList: ResourceTagMapping[];
+  ResourceTagMappingList?: ResourceTagMapping[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
