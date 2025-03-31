@@ -67,9 +67,9 @@ declare interface AuditInstanceFilters {
 /** 审计实例详情 */
 declare interface AuditInstanceInfo {
   /** 项目ID */
-  ProjectId?: number | null;
+  ProjectId?: number;
   /** 标签信息 */
-  TagList?: Tag[] | null;
+  TagList?: Tag[];
 }
 
 /** 审计日志详细信息 */
@@ -103,21 +103,21 @@ declare interface AuditLog {
   /** 执行线程ID。 */
   ThreadId?: number;
   /** 扫描行数。 */
-  CheckRows?: number | null;
+  CheckRows?: number;
   /** cpu执行时间，微秒。 */
-  CpuTime?: number | null;
+  CpuTime?: number;
   /** IO等待时间，微秒。 */
-  IoWaitTime?: number | null;
+  IoWaitTime?: number;
   /** 锁等待时间，微秒。 */
-  LockWaitTime?: number | null;
+  LockWaitTime?: number;
   /** 事务持续等待时间，微秒。 */
-  TrxLivingTime?: number | null;
+  TrxLivingTime?: number;
   /** 开始时间，与timestamp构成一个精确到纳秒的时间。 */
-  NsTime?: number | null;
+  NsTime?: number;
   /** 日志命中规则模板的基本信息 */
-  TemplateInfo?: LogRuleTemplateInfo[] | null;
+  TemplateInfo?: LogRuleTemplateInfo[];
   /** 事务ID */
-  TrxId?: number | null;
+  TrxId?: number;
 }
 
 /** 审计日志文件 */
@@ -169,7 +169,7 @@ declare interface AuditLogFilter {
 /** 规则审计的过滤条件 */
 declare interface AuditRuleFilters {
   /** 单条审计规则。 */
-  RuleFilters: RuleFilters[] | null;
+  RuleFilters: RuleFilters[];
 }
 
 /** 审计规则模板的详情 */
@@ -1024,6 +1024,10 @@ declare interface DeliverSummary {
   DeliverType?: string;
   /** 投递子类型：cls，ckafka。 */
   DeliverSubType?: string;
+  /** 投递者 */
+  DeliverConsumer?: string;
+  /** 投递者名称 */
+  DeliverConsumerName?: string;
 }
 
 /** 错误日志导出格式 */
@@ -1083,13 +1087,13 @@ declare interface InstanceAuditRule {
   /** 实例ID。 */
   InstanceId?: string;
   /** 是否是规则审计。true-规则审计，false-全审计。 */
-  AuditRule?: boolean | null;
+  AuditRule?: boolean;
   /** 审计规则详情。仅当AuditRule=true时有效。 */
-  AuditRuleFilters?: AuditRuleFilters[] | null;
+  AuditRuleFilters?: AuditRuleFilters[];
   /** 是否是审计策略 */
-  OldRule?: boolean | null;
+  OldRule?: boolean;
   /** 实例应用的规则模板详情 */
-  RuleTemplates?: RuleTemplateInfo[] | null;
+  RuleTemplates?: RuleTemplateInfo[];
 }
 
 /** 实例审计详情信息 */
@@ -1099,31 +1103,31 @@ declare interface InstanceAuditStatus {
   /** 审计状态。ON-表示审计已开启，OFF-表示审计关闭。 */
   AuditStatus?: string;
   /** 日志保留时长。 */
-  LogExpireDay?: number | null;
+  LogExpireDay?: number;
   /** 高频存储时长。 */
-  HighLogExpireDay?: number | null;
+  HighLogExpireDay?: number;
   /** 低频存储时长。 */
-  LowLogExpireDay?: number | null;
+  LowLogExpireDay?: number;
   /** 日志存储量。 */
-  BillingAmount?: number | null;
+  BillingAmount?: number;
   /** 高频存储量。 */
-  HighRealStorage?: number | null;
+  HighRealStorage?: number;
   /** 低频存储量。 */
-  LowRealStorage?: number | null;
+  LowRealStorage?: number;
   /** 是否为全审计。true-表示全审计。 */
-  AuditAll?: boolean | null;
+  AuditAll?: boolean;
   /** 审计开通时间。 */
-  CreateAt?: string | null;
+  CreateAt?: string;
   /** 实例相关信息。 */
-  InstanceInfo?: AuditInstanceInfo | null;
+  InstanceInfo?: AuditInstanceInfo;
   /** 总存储量。 */
-  RealStorage?: number | null;
+  RealStorage?: number;
   /** 实例所应用的规则模板。 */
-  RuleTemplateIds?: string[] | null;
+  RuleTemplateIds?: string[];
   /** 是否开启日志投递：ON，OFF */
-  Deliver?: string | null;
+  Deliver?: string;
   /** 日志投递类型 */
-  DeliverSummary?: DeliverSummary[] | null;
+  DeliverSummary?: DeliverSummary[];
 }
 
 /** 实例日志投递信息 */
@@ -1231,13 +1235,13 @@ declare interface InstanceSpec {
 /** 审计日志命中规则模板的基本信息 */
 declare interface LogRuleTemplateInfo {
   /** 模板ID */
-  RuleTemplateId?: string | null;
+  RuleTemplateId?: string;
   /** 规则模板名 */
-  RuleTemplateName?: string | null;
+  RuleTemplateName?: string;
   /** 告警等级。1-低风险，2-中风险，3-高风险。 */
-  AlarmLevel?: string | null;
+  AlarmLevel?: string;
   /** 规则模板变更状态：0-未变更；1-已变更；2-已删除 */
-  RuleTemplateStatus?: number | null;
+  RuleTemplateStatus?: number;
 }
 
 /** 逻辑备份配置信息 */
@@ -1919,17 +1923,17 @@ declare interface RuleFilters {
 /** 规则模板内容 */
 declare interface RuleTemplateInfo {
   /** 规则模板ID。 */
-  RuleTemplateId?: string | null;
+  RuleTemplateId?: string;
   /** 规则模板名称。 */
-  RuleTemplateName?: string | null;
+  RuleTemplateName?: string;
   /** 规则内容。 */
-  RuleFilters?: RuleFilters[] | null;
+  RuleFilters?: RuleFilters[];
   /** 告警等级。1-低风险，2-中风险，3-高风险。 */
-  AlarmLevel?: number | null;
+  AlarmLevel?: number;
   /** 告警策略。0-不告警，1-告警。 */
-  AlarmPolicy?: number | null;
+  AlarmPolicy?: number;
   /** 规则描述。 */
-  Description?: string | null;
+  Description?: string;
 }
 
 /** 资源包明细说明 */

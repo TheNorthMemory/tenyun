@@ -8272,7 +8272,7 @@ declare namespace V20180717 {
     /** 符合过滤条件的记录总数。 */
     TotalCount?: number;
     /** 水印模板详情列表。 */
-    WatermarkTemplateSet?: WatermarkTemplate[] | null;
+    WatermarkTemplateSet?: WatermarkTemplate[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

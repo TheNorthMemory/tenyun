@@ -796,12 +796,18 @@ declare interface ModelInfo {
   Temperature?: ModelParameter | null;
   /** 最多能生成的token数量 */
   MaxTokens?: ModelParameter | null;
-  /** 模型来源 Hunyuan：腾讯混元大模型,Industry：腾讯云行业大模型,Experience：新模型体验 */
+  /** 模型来源 Hunyuan：腾讯混元大模型,Industry：腾讯云行业大模型,Experience：新模型体验,Custom自定义模型 */
   Source?: string;
   /** 模型图标 */
   Icon?: string;
   /** 是否免费 */
   IsFree?: boolean;
+  /** 模型对话框可输入的上限 */
+  InputLenLimit?: number | null;
+  /** 支持工作流的类型 0:模型不支持; 1: 模型支持工作流； 2： 模型支持效果不佳； */
+  SupportWorkflowStatus?: number | null;
+  /** 模型类别 generate：生成模型，thought：思考模型 */
+  ModelCategory?: string;
 }
 
 /** 模型参数范围 */

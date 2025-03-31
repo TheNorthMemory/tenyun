@@ -830,6 +830,18 @@ declare interface Variable {
   Value: string;
 }
 
+declare interface AbortAgentCruiseDialingCampaignRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 任务 ID */
+  CampaignId: number;
+}
+
+declare interface AbortAgentCruiseDialingCampaignResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AbortPredictiveDialingCampaignRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -972,6 +984,36 @@ declare interface CreateAdminURLRequest {
 declare interface CreateAdminURLResponse {
   /** 登录链接 */
   URL?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAgentCruiseDialingCampaignRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 任务名称 */
+  Name: string;
+  /** 座席账号 */
+  Agent: string;
+  /** 单轮并发呼叫量 1-20 */
+  ConcurrencyNumber: number;
+  /** 任务启动时间，Unix 时间戳，到此时间后会自动启动任务 */
+  StartTime: number;
+  /** 任务结束时间，Unix 时间戳，到此时间后会自动终止任务 */
+  EndTime: number;
+  /** 被叫列表，支持 E.164 或不带国家码形式的号码 */
+  Callees?: string[];
+  /** 主叫列表，使用管理端展示的号码格式 */
+  Callers?: string[];
+  /** 被叫呼叫顺序 0 随机 1 顺序 */
+  CallOrder?: number;
+  /** 调用方自定义数据，最大长度 1024 */
+  UUI?: string;
+}
+
+declare interface CreateAgentCruiseDialingCampaignResponse {
+  /** 生成的任务 ID */
+  CampaignId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1322,6 +1364,38 @@ declare interface DescribeActiveCarrierPrivilegeNumberResponse {
   ActiveCarrierPrivilegeNumbers?: ActiveCarrierPrivilegeNumber[];
   /** 待审核单号 */
   PendingApplicantIds?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAgentCruiseDialingCampaignRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 任务 ID */
+  CampaignId: number;
+}
+
+declare interface DescribeAgentCruiseDialingCampaignResponse {
+  /** 任务名称 */
+  Name?: string;
+  /** 座席账号 */
+  Agent?: string;
+  /** 单轮并发呼叫量 1-20 */
+  ConcurrencyNumber?: number;
+  /** 任务启动时间，Unix 时间戳，到此时间后会自动启动任务 */
+  StartTime?: number;
+  /** 任务结束时间，Unix 时间戳，到此时间后会自动终止任务 */
+  EndTime?: number;
+  /** 被叫呼叫顺序 0 随机 1 顺序 */
+  CallOrder?: number;
+  /** 调用方自定义数据，最大长度 1024 */
+  UUI?: string;
+  /** 任务状态 0 未启动 1 运行中 2 已完成 3 已终止 */
+  State?: number;
+  /** 被叫总数 */
+  TotalCalleeCount?: number;
+  /** 已呼被叫数 */
+  CalledCalleeCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2058,6 +2132,20 @@ declare interface StopAutoCalloutTaskResponse {
   RequestId?: string;
 }
 
+declare interface TransferToManualRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 会话ID */
+  SessionId: string;
+  /** 技能组Id */
+  SkillGroupId: number;
+}
+
+declare interface TransferToManualResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UnbindNumberCallOutSkillGroupRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -2165,6 +2253,8 @@ declare interface UploadIvrAudioResponse {
 /** {@link Ccc 云联络中心} */
 declare interface Ccc {
   (): Versions;
+  /** 停止座席巡航式外呼任务 {@link AbortAgentCruiseDialingCampaignRequest} {@link AbortAgentCruiseDialingCampaignResponse} */
+  AbortAgentCruiseDialingCampaign(data: AbortAgentCruiseDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<AbortAgentCruiseDialingCampaignResponse>;
   /** 停止预测式外呼任务 {@link AbortPredictiveDialingCampaignRequest} {@link AbortPredictiveDialingCampaignResponse} */
   AbortPredictiveDialingCampaign(data: AbortPredictiveDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<AbortPredictiveDialingCampaignResponse>;
   /** 绑定号码外呼技能组 {@link BindNumberCallOutSkillGroupRequest} {@link BindNumberCallOutSkillGroupResponse} */
@@ -2177,6 +2267,8 @@ declare interface Ccc {
   CreateAICall(data: CreateAICallRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAICallResponse>;
   /** 创建管理端访问链接 {@link CreateAdminURLRequest} {@link CreateAdminURLResponse} */
   CreateAdminURL(data: CreateAdminURLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAdminURLResponse>;
+  /** 创建座席巡航式外呼任务 {@link CreateAgentCruiseDialingCampaignRequest} {@link CreateAgentCruiseDialingCampaignResponse} */
+  CreateAgentCruiseDialingCampaign(data: CreateAgentCruiseDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgentCruiseDialingCampaignResponse>;
   /** 创建自动外呼任务 {@link CreateAutoCalloutTaskRequest} {@link CreateAutoCalloutTaskResponse} */
   CreateAutoCalloutTask(data: CreateAutoCalloutTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAutoCalloutTaskResponse>;
   /** 新建技能组 {@link CreateCCCSkillGroupRequest} {@link CreateCCCSkillGroupResponse} */
@@ -2211,6 +2303,8 @@ declare interface Ccc {
   DescribeAICallExtractResult(data: DescribeAICallExtractResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAICallExtractResultResponse>;
   /** 查询生效运营商白名单规则 {@link DescribeActiveCarrierPrivilegeNumberRequest} {@link DescribeActiveCarrierPrivilegeNumberResponse} */
   DescribeActiveCarrierPrivilegeNumber(data: DescribeActiveCarrierPrivilegeNumberRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeActiveCarrierPrivilegeNumberResponse>;
+  /** 查询座席巡航式外呼任务 {@link DescribeAgentCruiseDialingCampaignRequest} {@link DescribeAgentCruiseDialingCampaignResponse} */
+  DescribeAgentCruiseDialingCampaign(data: DescribeAgentCruiseDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentCruiseDialingCampaignResponse>;
   /** 查询自动外呼任务详情 {@link DescribeAutoCalloutTaskRequest} {@link DescribeAutoCalloutTaskResponse} */
   DescribeAutoCalloutTask(data: DescribeAutoCalloutTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoCalloutTaskResponse>;
   /** 批量查询自动外呼任务 {@link DescribeAutoCalloutTasksRequest} {@link DescribeAutoCalloutTasksResponse} */
@@ -2283,6 +2377,8 @@ declare interface Ccc {
   ResumePredictiveDialingCampaign(data: ResumePredictiveDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<ResumePredictiveDialingCampaignResponse>;
   /** 停止自动外呼任务 {@link StopAutoCalloutTaskRequest} {@link StopAutoCalloutTaskResponse} */
   StopAutoCalloutTask(data: StopAutoCalloutTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopAutoCalloutTaskResponse>;
+  /** 转接人工 {@link TransferToManualRequest} {@link TransferToManualResponse} */
+  TransferToManual(data: TransferToManualRequest, config?: AxiosRequestConfig): AxiosPromise<TransferToManualResponse>;
   /** 解绑号码外呼技能组 {@link UnbindNumberCallOutSkillGroupRequest} {@link UnbindNumberCallOutSkillGroupResponse} */
   UnbindNumberCallOutSkillGroup(data: UnbindNumberCallOutSkillGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindNumberCallOutSkillGroupResponse>;
   /** 解绑坐席所属技能组 {@link UnbindStaffSkillGroupListRequest} {@link UnbindStaffSkillGroupListResponse} */

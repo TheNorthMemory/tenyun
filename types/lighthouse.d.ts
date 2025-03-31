@@ -440,15 +440,15 @@ declare interface Filter {
 
 /** 描述防火墙规则信息。 */
 declare interface FirewallRule {
-  /** 协议，取值：TCP，UDP，ICMP，ALL，ICMPv6。 */
+  /** 协议，取值：TCP，UDP，ICMP，ALL，ICMPv6。- 使用ICMP协议时，只支持CidrBlock，不支持使用Port、Ipv6CidrBlock参数；- 使用ICMPv6协议时，只支持Ipv6CidrBlock，不支持使用Port、Ipv6CidrBlock参数； */
   Protocol: string;
-  /** 端口，取值：ALL，单独的端口，逗号分隔的离散端口，减号分隔的端口范围。 */
+  /** 端口，取值：ALL，单独的端口，逗号分隔的离散端口，减号分隔的端口范围。注意：单独的端口与离散端口不能同时存在。 */
   Port?: string;
   /** IPv4网段或 IPv4地址(互斥)。示例值：0.0.0.0/0。和Ipv6CidrBlock互斥，两者都不指定时，如果Protocol不是ICMPv6，则取默认值0.0.0.0/0。 */
   CidrBlock?: string;
   /** IPv6网段或IPv6地址(互斥)。示例值：::/0。和CidrBlock互斥，两者都不指定时，如果Protocol是ICMPv6，则取默认值::/0。 */
   Ipv6CidrBlock?: string;
-  /** 取值：ACCEPT，DROP。默认为 ACCEPT。 */
+  /** 取值：ACCEPT（允许），DROP（拒绝）。默认为 ACCEPT。 */
   Action?: string;
   /** 防火墙规则描述。 */
   FirewallRuleDescription?: string;

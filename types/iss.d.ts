@@ -680,6 +680,24 @@ declare interface FaceMaskAIResultInfo {
   FaceMaskInfo?: BaseAIResultInfo[];
 }
 
+/** 抓拍结果信息 */
+declare interface GBDeviceSnapInfo {
+  /** 文件名称 */
+  FileName?: string;
+  /** 下载地址，空值表示存储图片过期 */
+  DownloadUrl?: string;
+  /** 图片大小，单位B */
+  ImageSize?: number;
+  /** 文件的创建时间 */
+  CreatedTime?: string;
+  /** 图片的接收时间 */
+  ReceivedTime?: string;
+  /** 预览地址，空值表示存储图片过期 */
+  PreviewUrl?: string;
+  /** 国标信令会话ID，同时对应控制设备抓拍 ( ControlDeviceSnapshot )接口返回的request_id */
+  SessionId?: string;
+}
+
 /** 网关设备数据 */
 declare interface GatewayDevice {
   /** 设备ID */
@@ -1688,6 +1706,22 @@ declare interface ControlDevicePresetResponse {
   RequestId?: string;
 }
 
+declare interface ControlDeviceSnapshotRequest {
+  /** 通道ID */
+  ChannelId: string;
+  /** 连拍张数，可选值范围1～10 */
+  SnapNum: number;
+  /** 抓拍间隔时间，可选值范围1～1800 */
+  Interval: number;
+  /** 图片存储时间，默认 7 天，仅支持（7, 15, 30, 60, 90, 180, 365）天 */
+  Expire?: number;
+}
+
+declare interface ControlDeviceSnapshotResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ControlDeviceStreamRequest {
   /** 通道 ID（从通道查询接口DescribeDeviceChannel中获取） */
   ChannelId: string;
@@ -2208,6 +2242,30 @@ declare interface ListAITasksResponse {
   TotalCount?: number;
   /** AI任务列表 */
   Data?: ListAITaskData | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListDeviceSnapshotsRequest {
+  /** 通道ID */
+  ChannelId: string;
+  /** 设备ID（该字段暂不生效） */
+  DeviceId?: string;
+  /** 查询开始时间，默认查询当天 */
+  Start?: number;
+  /** 查询结束时间，默认查询当天 */
+  End?: number;
+  /** 分页页码，默认1 */
+  PageNumber?: number;
+  /** 分页大小，默认200，最大2000 */
+  PageSize?: number;
+}
+
+declare interface ListDeviceSnapshotsResponse {
+  /** 抓拍结果信息列表 */
+  Data?: GBDeviceSnapInfo[];
+  /** 抓拍结果总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2737,6 +2795,8 @@ declare interface Iss {
   ControlDevicePTZ(data: ControlDevicePTZRequest, config?: AxiosRequestConfig): AxiosPromise<ControlDevicePTZResponse>;
   /** 预置位操作 {@link ControlDevicePresetRequest} {@link ControlDevicePresetResponse} */
   ControlDevicePreset(data: ControlDevicePresetRequest, config?: AxiosRequestConfig): AxiosPromise<ControlDevicePresetResponse>;
+  /** 控制设备抓拍 {@link ControlDeviceSnapshotRequest} {@link ControlDeviceSnapshotResponse} */
+  ControlDeviceSnapshot(data: ControlDeviceSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<ControlDeviceSnapshotResponse>;
   /** 获取开流地址 {@link ControlDeviceStreamRequest} {@link ControlDeviceStreamResponse} */
   ControlDeviceStream(data: ControlDeviceStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ControlDeviceStreamResponse>;
   /** 本地录像回放控制 {@link ControlRecordRequest} {@link ControlRecordResponse} */
@@ -2817,6 +2877,8 @@ declare interface Iss {
   DescribeVideoDownloadUrl(data: DescribeVideoDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoDownloadUrlResponse>;
   /** 获取AI任务列表 {@link ListAITasksRequest} {@link ListAITasksResponse} */
   ListAITasks(data?: ListAITasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListAITasksResponse>;
+  /** 获取设备抓拍结果列表 {@link ListDeviceSnapshotsRequest} {@link ListDeviceSnapshotsResponse} */
+  ListDeviceSnapshots(data: ListDeviceSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<ListDeviceSnapshotsResponse>;
   /** 获取设备列表 {@link ListDevicesRequest} {@link ListDevicesResponse} */
   ListDevices(data: ListDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<ListDevicesResponse>;
   /** 查询网关下设备列表 {@link ListGatewayDevicesRequest} {@link ListGatewayDevicesResponse} */

@@ -1165,7 +1165,7 @@ declare interface SyncJobInfo {
   /** 支持的所有操作 */
   AllActions?: string[];
   /** 当前状态能进行的操作 */
-  Actions?: string[];
+  Actions?: string[] | null;
   /** 同步选项 */
   Options?: Options;
   /** 同步库表对象 */

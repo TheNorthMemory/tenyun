@@ -5253,11 +5253,11 @@ declare interface Tdmq {
   DescribeRocketMQRoles(data: DescribeRocketMQRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQRolesResponse>;
   /** 获取RocketMQ平滑迁移任务详情 {@link DescribeRocketMQSmoothMigrationTaskRequest} {@link DescribeRocketMQSmoothMigrationTaskResponse} */
   DescribeRocketMQSmoothMigrationTask(data: DescribeRocketMQSmoothMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQSmoothMigrationTaskResponse>;
-  /** 获取RocketMQ平滑迁移任务列表 {@link DescribeRocketMQSmoothMigrationTaskListRequest} {@link DescribeRocketMQSmoothMigrationTaskListResponse} */
+  /** @deprecated 获取RocketMQ平滑迁移任务列表 {@link DescribeRocketMQSmoothMigrationTaskListRequest} {@link DescribeRocketMQSmoothMigrationTaskListResponse} */
   DescribeRocketMQSmoothMigrationTaskList(data: DescribeRocketMQSmoothMigrationTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQSmoothMigrationTaskListResponse>;
-  /** 平滑迁移：获取源集群的group列表 {@link DescribeRocketMQSourceClusterGroupListRequest} {@link DescribeRocketMQSourceClusterGroupListResponse} */
+  /** @deprecated 平滑迁移：获取源集群的group列表 {@link DescribeRocketMQSourceClusterGroupListRequest} {@link DescribeRocketMQSourceClusterGroupListResponse} */
   DescribeRocketMQSourceClusterGroupList(data: DescribeRocketMQSourceClusterGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQSourceClusterGroupListResponse>;
-  /** 平滑迁移：获取源集群的topic列表 {@link DescribeRocketMQSourceClusterTopicListRequest} {@link DescribeRocketMQSourceClusterTopicListResponse} */
+  /** @deprecated 平滑迁移：获取源集群的topic列表 {@link DescribeRocketMQSourceClusterTopicListRequest} {@link DescribeRocketMQSourceClusterTopicListResponse} */
   DescribeRocketMQSourceClusterTopicList(data: DescribeRocketMQSourceClusterTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQSourceClusterTopicListResponse>;
   /** 获取RocketMQ消费组订阅关系 {@link DescribeRocketMQSubscriptionsRequest} {@link DescribeRocketMQSubscriptionsResponse} */
   DescribeRocketMQSubscriptions(data: DescribeRocketMQSubscriptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQSubscriptionsResponse>;

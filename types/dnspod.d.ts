@@ -315,7 +315,7 @@ declare interface DomainInfo {
   /** cname加速启用状态 */
   CnameSpeedup?: string;
   /** 域名备注 */
-  Remark?: string | null;
+  Remark?: string;
   /** 域名Punycode */
   Punycode?: string;
   /** 域名DNS状态 */
@@ -341,15 +341,15 @@ declare interface DomainInfo {
   /** 腾讯云账户Uin */
   Uin?: string;
   /** 域名实际使用的NS列表 */
-  ActualNsList?: string[] | null;
+  ActualNsList?: string[];
   /** 域名的记录数量 */
   RecordCount?: number;
   /** 域名所有者的账户昵称 */
-  OwnerNick?: string | null;
+  OwnerNick?: string;
   /** 是否在付费套餐宽限期 */
-  IsGracePeriod?: string | null;
+  IsGracePeriod?: string;
   /** 是否在付费套餐缓冲期 */
-  VipBuffered?: string | null;
+  VipBuffered?: string;
   /** VIP套餐有效期开始时间 */
   VipStartAt?: string | null;
   /** VIP套餐有效期结束时间 */
@@ -359,9 +359,9 @@ declare interface DomainInfo {
   /** VIP套餐资源ID */
   VipResourceId?: string | null;
   /** 是否是子域名。 */
-  IsSubDomain?: boolean | null;
+  IsSubDomain?: boolean;
   /** 域名关联的标签列表 */
-  TagList?: TagItem[] | null;
+  TagList?: TagItem[];
   /** 是否启用搜索引擎推送 */
   SearchEnginePush?: string;
   /** 是否开启辅助 DNS */
@@ -433,15 +433,15 @@ declare interface DomainShareUserInfo {
   /** 共享记录ID */
   DomainShareId?: number;
   /** 共享模式。r-只读；w-可写；rw-可读写。 */
-  Mode?: string | null;
+  Mode?: string;
   /** 共享到的用户昵称 */
-  Nickname?: string | null;
+  Nickname?: string;
   /** 共享到的用户UIN */
-  QCloudUIN?: string | null;
+  QCloudUIN?: string;
   /** 共享状态。enabled-有效；pause-无效。 */
-  Status?: string | null;
+  Status?: string;
   /** 共享的子域名 */
-  SubDomain?: string | null;
+  SubDomain?: string;
 }
 
 /** 生成的文件信息 */
@@ -487,7 +487,7 @@ declare interface KeyValue {
   /** 键 */
   Key: string;
   /** 值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 批量生成文件剩余时间 */
@@ -585,21 +585,21 @@ declare interface LockInfo {
 /** 批量添加记录返回结构 */
 declare interface ModifyRecordBatchDetail {
   /** 见RecordInfoBatchModify */
-  RecordList: BatchRecordInfo[] | null;
+  RecordList?: BatchRecordInfo[];
   /** 任务编号 */
-  Id: number;
+  Id?: number;
   /** 域名 */
-  Domain: string | null;
+  Domain?: string;
   /** 域名等级 */
-  DomainGrade: string | null;
+  DomainGrade?: string;
   /** 错误信息 */
-  ErrMsg: string | null;
+  ErrMsg?: string | null;
   /** 该条任务运行状态 */
-  Status: string | null;
+  Status?: string;
   /** 操作类型 */
-  Operation: string | null;
+  Operation?: string | null;
   /** 域名ID */
-  DomainId: number | null;
+  DomainId?: number;
 }
 
 /** 套餐配置明细 */
@@ -685,63 +685,63 @@ declare interface RecordGroupInfo {
 /** 记录信息 */
 declare interface RecordInfo {
   /** 记录 ID 。 */
-  Id: number;
+  Id?: number;
   /** 子域名(主机记录)。 */
-  SubDomain: string;
+  SubDomain?: string;
   /** 记录类型, 详见 DescribeRecordType 接口。 */
-  RecordType: string;
+  RecordType?: string;
   /** 解析记录的线路，详见 DescribeRecordLineList 接口。 */
-  RecordLine: string;
+  RecordLine?: string;
   /** 解析记录的线路 ID ，详见 DescribeRecordLineList 接口。 */
-  RecordLineId: string;
+  RecordLineId?: string;
   /** 记录值。 */
-  Value: string;
+  Value?: string;
   /** 记录权重值。 */
-  Weight: number | null;
+  Weight?: number | null;
   /** 记录的 MX 记录值，非 MX 记录类型，默认为 0。 */
-  MX: number;
+  MX?: number;
   /** 记录的 TTL 值。 */
-  TTL: number;
+  TTL?: number;
   /** 记录状态。0表示禁用，1表示启用。 */
-  Enabled: number;
+  Enabled?: number;
   /** 该记录的 D 监控状态。"Ok" : 服务器正常。"Warn" : 该记录有报警, 服务器返回 4XX。"Down" : 服务器宕机。"" : 该记录未开启 D 监控。 */
-  MonitorStatus: string;
+  MonitorStatus?: string;
   /** 记录的备注。 */
-  Remark: string | null;
+  Remark?: string;
   /** 记录最后更新时间。 */
-  UpdatedOn: string;
+  UpdatedOn?: string;
   /** 域名 ID 。 */
-  DomainId: number;
+  DomainId?: number;
 }
 
 /** 记录列表元素 */
 declare interface RecordListItem {
   /** 记录Id */
-  RecordId: number;
+  RecordId?: number;
   /** 记录值 */
-  Value: string;
+  Value?: string;
   /** 记录状态，启用：ENABLE，暂停：DISABLE */
-  Status: string;
+  Status?: string;
   /** 更新时间 */
-  UpdatedOn: string;
+  UpdatedOn?: string;
   /** 主机名 */
-  Name: string;
+  Name?: string;
   /** 记录线路 */
-  Line: string;
+  Line?: string;
   /** 线路Id */
-  LineId: string;
+  LineId?: string;
   /** 记录类型 */
-  Type: string;
+  Type?: string;
   /** 记录权重，用于负载均衡记录 */
-  Weight: number | null;
+  Weight?: number | null;
   /** 记录监控状态，正常：OK，告警：WARN，宕机：DOWN，未设置监控或监控暂停则为空 */
-  MonitorStatus: string;
+  MonitorStatus?: string;
   /** 记录备注说明 */
-  Remark: string;
+  Remark?: string;
   /** 记录缓存时间 */
-  TTL: number;
+  TTL?: number;
   /** MX值，只有MX记录有 */
-  MX: number | null;
+  MX?: number;
   /** 是否是默认的ns记录 */
   DefaultNS?: boolean;
 }
@@ -849,7 +849,7 @@ declare interface TagItem {
   /** 标签键 */
   TagKey: string;
   /** 标签值 */
-  TagValue?: string | null;
+  TagValue?: string;
 }
 
 /** 标签过滤条件 */
@@ -1624,8 +1624,8 @@ declare interface DescribeDomainLogListRequest {
 }
 
 declare interface DescribeDomainLogListResponse {
-  /** 域名信息 */
-  LogList?: string[] | null;
+  /** 域名日志信息 */
+  LogList?: string[];
   /** 分页大小 */
   PageSize?: number;
   /** 日志总条数 */
@@ -1955,7 +1955,7 @@ declare interface DescribeRecordSnapshotRollbackResultResponse {
   /** 回滚状态 */
   Status?: string;
   /** 失败的记录信息 */
-  FailedRecordList?: SnapshotRecord[] | null;
+  FailedRecordList?: SnapshotRecord[];
   /** 所属域名 */
   Domain?: string | null;
   /** 回滚进度 */

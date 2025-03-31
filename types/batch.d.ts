@@ -673,9 +673,9 @@ declare interface NamedCpmComputeEnv {
 /** 通知信息 */
 declare interface Notification {
   /** CMQ主题名字，要求主题名有效且关联订阅 */
-  TopicName: string | null;
+  TopicName: string;
   /** 事件配置 */
-  EventConfigs: EventConfig[] | null;
+  EventConfigs: EventConfig[];
 }
 
 /** 操作系统类型 */
@@ -703,7 +703,7 @@ declare interface OutputMapping {
   /** 目的端路径 */
   DestinationPath: string;
   /** 输出映射选项 */
-  OutputMappingOption?: OutputMappingOption | null;
+  OutputMappingOption?: OutputMappingOption;
 }
 
 /** 输出映射配置 */
@@ -719,7 +719,7 @@ declare interface OutputMappingConfig {
 /** 输出映射选项 */
 declare interface OutputMappingOption {
   /** 容器场景下,输出选项从实例映射到容器内的实例侧的工作空间。BATCH_WORKSPACE: 工作空间为BATCH在实例内定义的工作空间，BATCH侧保证作业之间的隔离。（默认）GLOBAL_WORKSPACE: 工作空间为实例操作系统空间。 */
-  Workspace?: string | null;
+  Workspace?: string;
 }
 
 /** 描述了实例的抽象位置，包括其所在的可用区，所属的项目，宿主机（仅专用宿主机产品可用），母机IP等 */

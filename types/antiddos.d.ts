@@ -173,7 +173,7 @@ declare interface BGPIPL7RuleEntry {
   /** 是否开启Https协议使用Http回源，取值[0(关闭), 1(开启)]，不填写默认是关闭 */
   HttpsToHttpEnable?: number;
   /** 接入端口值 */
-  VirtualPort?: number | null;
+  VirtualPort?: number;
   /** http强制跳转https，1表示打开，0表示关闭 */
   RewriteHttps?: number;
   /** 规则配置失败时的详细错误原因(仅当Status=2时有效)，1001证书不存在，1002证书获取失败，1003证书上传失败，1004证书已过期 */

@@ -294,6 +294,12 @@ declare interface DefaultNginxGatewayCallInfo {
   Host?: string | null;
 }
 
+/** 编码后的启动命令信息 */
+declare interface EncodedStartCmdInfo {
+  /** 任务的启动命令，以base64格式输入，注意转换时需要完整输入{"StartCmd":"","PsStartCmd":"","WorkerStartCmd":""} */
+  StartCmdInfo?: string;
+}
+
 /** 环境变量 */
 declare interface EnvVar {
   /** 环境变量key */
@@ -1946,6 +1952,62 @@ declare interface CreateTrainingModelResponse {
   RequestId?: string;
 }
 
+declare interface CreateTrainingTaskRequest {
+  /** 训练任务名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
+  Name: string;
+  /** 计费模式，eg：PREPAID 包年包月（资源组）;POSTPAID_BY_HOUR 按量计费 */
+  ChargeType: string;
+  /** 资源配置，需填写对应算力规格ID和节点数量，算力规格ID查询接口为DescribeBillingSpecsPrice，eg：[{"Role":"WORKER", "InstanceType": "TI.S.MEDIUM.POST", "InstanceNum": 1}] */
+  ResourceConfigInfos: ResourceConfigInfo[];
+  /** 训练框架名称，通过DescribeTrainingFrameworks接口查询，eg：SPARK、PYSPARK、TENSORFLOW、PYTORCH */
+  FrameworkName?: string;
+  /** 训练框架版本，通过DescribeTrainingFrameworks接口查询，eg：1.15、1.9 */
+  FrameworkVersion?: string;
+  /** 训练框架环境，通过DescribeTrainingFrameworks接口查询，eg：tf1.15-py3.7-cpu、torch1.9-py3.8-cuda11.1-gpu */
+  FrameworkEnvironment?: string;
+  /** 预付费专用资源组ID，通过DescribeBillingResourceGroups接口查询 */
+  ResourceGroupId?: string;
+  /** 标签配置 */
+  Tags?: Tag[];
+  /** 自定义镜像信息 */
+  ImageInfo?: ImageInfo;
+  /** COS代码包路径 */
+  CodePackagePath?: CosPathInfo;
+  /** 任务的启动命令，按任务训练模式输入，如遇特殊字符导致配置失败，可使用EncodedStartCmdInfo参数 */
+  StartCmdInfo?: StartCmdInfo;
+  /** 训练模式，通过DescribeTrainingFrameworks接口查询，eg：PS_WORKER、DDP、MPI、HOROVOD */
+  TrainingMode?: string;
+  /** 数据配置，依赖DataSource字段，数量不超过10个 */
+  DataConfigs?: DataConfig[];
+  /** VPC Id */
+  VpcId?: string;
+  /** 子网Id */
+  SubnetId?: string;
+  /** COS训练输出路径 */
+  Output?: CosPathInfo;
+  /** CLS日志配置 */
+  LogConfig?: LogConfig;
+  /** 调优参数，不超过2048个字符 */
+  TuningParameters?: string;
+  /** 是否上报日志 */
+  LogEnable?: boolean;
+  /** 备注，不超过1024个字符 */
+  Remark?: string;
+  /** 数据来源，eg：DATASET、COS、CFS、CFSTurbo、HDFS、GooseFSx */
+  DataSource?: string;
+  /** 回调地址，用于创建/启动/停止训练任务的异步回调。回调格式&内容详见：[[TI-ONE接口回调说明]](https://cloud.tencent.com/document/product/851/84292) */
+  CallbackUrl?: string;
+  /** 编码后的任务启动命令，与StartCmdInfo同时配置时，仅当前参数生效 */
+  EncodedStartCmdInfo?: EncodedStartCmdInfo;
+}
+
+declare interface CreateTrainingTaskResponse {
+  /** 训练任务ID */
+  Id?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteDatasetRequest {
   /** 数据集id */
   DatasetId: string;
@@ -2014,6 +2076,16 @@ declare interface DeleteTrainingModelVersionRequest {
 }
 
 declare interface DeleteTrainingModelVersionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteTrainingTaskRequest {
+  /** 训练任务ID */
+  Id: string;
+}
+
+declare interface DeleteTrainingTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2504,6 +2576,16 @@ declare interface StartNotebookResponse {
   RequestId?: string;
 }
 
+declare interface StartTrainingTaskRequest {
+  /** 训练任务ID */
+  Id: string;
+}
+
+declare interface StartTrainingTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopModelAccelerateTaskRequest {
   /** 模型加速任务ID */
   ModelAccTaskId: string;
@@ -2524,6 +2606,16 @@ declare interface StopNotebookRequest {
 }
 
 declare interface StopNotebookResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopTrainingTaskRequest {
+  /** 训练任务ID */
+  Id: string;
+}
+
+declare interface StopTrainingTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3257,6 +3349,8 @@ declare interface Tione {
   CreatePresignedNotebookUrl(data: CreatePresignedNotebookUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePresignedNotebookUrlResponse>;
   /** 导入模型 {@link CreateTrainingModelRequest} {@link CreateTrainingModelResponse} */
   CreateTrainingModel(data: CreateTrainingModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrainingModelResponse>;
+  /** 创建模型训练任务 {@link CreateTrainingTaskRequest} {@link CreateTrainingTaskResponse} */
+  CreateTrainingTask(data: CreateTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrainingTaskResponse>;
   /** 删除数据集 {@link DeleteDatasetRequest} {@link DeleteDatasetResponse} */
   DeleteDataset(data: DeleteDatasetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDatasetResponse>;
   /** 删除模型服务 {@link DeleteModelServiceRequest} {@link DeleteModelServiceResponse} */
@@ -3269,6 +3363,8 @@ declare interface Tione {
   DeleteTrainingModel(data: DeleteTrainingModelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingModelResponse>;
   /** 删除模型版本 {@link DeleteTrainingModelVersionRequest} {@link DeleteTrainingModelVersionResponse} */
   DeleteTrainingModelVersion(data: DeleteTrainingModelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingModelVersionResponse>;
+  /** 删除训练任务 {@link DeleteTrainingTaskRequest} {@link DeleteTrainingTaskResponse} */
+  DeleteTrainingTask(data: DeleteTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingTaskResponse>;
   /** 查询资源组节点列表 {@link DescribeBillingResourceGroupRequest} {@link DescribeBillingResourceGroupResponse} */
   DescribeBillingResourceGroup(data: DescribeBillingResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceGroupResponse>;
   /** 查询资源组详情 {@link DescribeBillingResourceGroupsRequest} {@link DescribeBillingResourceGroupsResponse} */
@@ -3319,10 +3415,14 @@ declare interface Tione {
   PushTrainingMetrics(data?: PushTrainingMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<PushTrainingMetricsResponse>;
   /** 启动Notebook {@link StartNotebookRequest} {@link StartNotebookResponse} */
   StartNotebook(data: StartNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<StartNotebookResponse>;
+  /** 启动模型训练任务 {@link StartTrainingTaskRequest} {@link StartTrainingTaskResponse} */
+  StartTrainingTask(data: StartTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StartTrainingTaskResponse>;
   /** 停止模型加速任务 {@link StopModelAccelerateTaskRequest} {@link StopModelAccelerateTaskResponse} */
   StopModelAccelerateTask(data: StopModelAccelerateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopModelAccelerateTaskResponse>;
   /** 停止Notebook {@link StopNotebookRequest} {@link StopNotebookResponse} */
   StopNotebook(data: StopNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<StopNotebookResponse>;
+  /** 停止模型训练任务 {@link StopTrainingTaskRequest} {@link StopTrainingTaskResponse} */
+  StopTrainingTask(data: StopTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopTrainingTaskResponse>;
   /** 创建存储库 {@link V20191022.CreateCodeRepositoryRequest} {@link V20191022.CreateCodeRepositoryResponse} */
   CreateCodeRepository(data: V20191022.CreateCodeRepositoryRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.CreateCodeRepositoryResponse>;
   /** 创建Notebook实例 {@link V20191022.CreateNotebookInstanceRequest} {@link V20191022.CreateNotebookInstanceResponse} */

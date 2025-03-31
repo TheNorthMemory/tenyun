@@ -266,6 +266,18 @@ declare interface CreateAndroidInstancesResponse {
   RequestId?: string;
 }
 
+declare interface CreateAndroidInstancesScreenshotRequest {
+  /** 实例 ID 列表 */
+  AndroidInstanceIds: string[];
+}
+
+declare interface CreateAndroidInstancesScreenshotResponse {
+  /** 任务列表 */
+  TaskSet?: AndroidInstanceTask[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSessionRequest {
   /** 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变） */
   UserId: string;
@@ -819,6 +831,8 @@ declare interface Gs {
   CreateAndroidInstanceWebShell(data: CreateAndroidInstanceWebShellRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidInstanceWebShellResponse>;
   /** 创建安卓实例 {@link CreateAndroidInstancesRequest} {@link CreateAndroidInstancesResponse} */
   CreateAndroidInstances(data: CreateAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidInstancesResponse>;
+  /** 安卓实例截图 {@link CreateAndroidInstancesScreenshotRequest} {@link CreateAndroidInstancesScreenshotResponse} */
+  CreateAndroidInstancesScreenshot(data: CreateAndroidInstancesScreenshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidInstancesScreenshotResponse>;
   /** 创建会话 {@link CreateSessionRequest} {@link CreateSessionResponse} */
   CreateSession(data: CreateSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSessionResponse>;
   /** 删除安卓实例镜像 {@link DeleteAndroidInstanceImagesRequest} {@link DeleteAndroidInstanceImagesResponse} */

@@ -225,13 +225,13 @@ declare interface FirmwareInfo {
 /** 固件升级任务信息 */
 declare interface FirmwareTaskInfo {
   /** 任务ID */
-  TaskId: number | null;
+  TaskId?: number | null;
   /** 任务状态 */
-  Status: number | null;
+  Status?: number | null;
   /** 任务类型 */
-  Type: number | null;
+  Type?: number | null;
   /** 任务创建时间 */
-  CreateTime: number | null;
+  CreateTime?: number | null;
 }
 
 /** 内容日志项 */
