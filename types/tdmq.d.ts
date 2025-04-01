@@ -892,6 +892,10 @@ declare interface RabbitMQClusterInfo {
   PayMode?: number;
   /** 实例类型，0 专享版、1 Serverless 版 */
   InstanceType?: number;
+  /** 开始隔离时间 */
+  IsolatedTime?: number;
+  /** 是否为容器实例，默认 true */
+  Container?: boolean;
 }
 
 /** RabbitMQ集群规格信息 */
@@ -1106,6 +1110,8 @@ declare interface RabbitMQVipInstance {
   CreateTime?: number;
   /** 实例类型，0 专享版、1 Serverless 版 */
   InstanceType?: number;
+  /** 隔离时间，毫秒为单位 */
+  IsolatedTime?: number;
 }
 
 /** RabbitMQ的vhost详情 */

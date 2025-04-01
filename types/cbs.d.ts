@@ -680,7 +680,7 @@ declare interface CreateSnapshotGroupResponse {
 
 declare interface CreateSnapshotRequest {
   /** 需要创建快照的云硬盘ID，可通过[DescribeDisks](/document/product/362/16315)接口查询。 */
-  DiskId: string;
+  DiskId?: string;
   /** 快照名称，不传则新快照名称默认为“未命名”。 */
   SnapshotName?: string;
   /** 快照的到期时间，到期后该快照将会自动删除,需要传入UTC时间下的ISO-8601标准时间格式,例如:2022-01-08T09:47:55+00:00,。到期时间最小可设置为一天后的当前时间。 */
@@ -1284,7 +1284,7 @@ declare interface Cbs {
   /** 创建云硬盘 {@link CreateDisksRequest} {@link CreateDisksResponse} */
   CreateDisks(data: CreateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDisksResponse>;
   /** 创建快照 {@link CreateSnapshotRequest} {@link CreateSnapshotResponse} */
-  CreateSnapshot(data: CreateSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotResponse>;
+  CreateSnapshot(data?: CreateSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotResponse>;
   /** 创建快照组 {@link CreateSnapshotGroupRequest} {@link CreateSnapshotGroupResponse} */
   CreateSnapshotGroup(data: CreateSnapshotGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotGroupResponse>;
   /** 删除定期快照策略 {@link DeleteAutoSnapshotPoliciesRequest} {@link DeleteAutoSnapshotPoliciesResponse} */

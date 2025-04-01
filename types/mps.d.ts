@@ -1950,7 +1950,7 @@ declare interface CoverConfigureInfoForUpdate {
 declare interface CreateInput {
   /** 输入名称，可填大小写、数字和下划线，长度为[1, 32]。 */
   InputName: string;
-  /** 输入的协议，可选[SRT|RTP|RTMP_PUSH|RTMP_PULL|RTSP_PULL|RIST]。 */
+  /** 输入的协议，可选[SRT|RTP|RTMP|RTMP_PULL|RTSP_PULL|RIST]。 */
   Protocol: string;
   /** 输入描述，长度为[0, 255]。 */
   Description?: string;
@@ -2138,7 +2138,7 @@ declare interface CreateOutputSRTSettings {
 
 /** 创建媒体传输流的输出SRT的目标地址。 */
 declare interface CreateOutputSRTSettingsDestinations {
-  /** 输出的IP。 */
+  /** 输出的IP或域名。 */
   Ip: string;
   /** 输出的端口。 */
   Port: number;
@@ -3962,7 +3962,7 @@ declare interface ModifyOutputInfo {
   OutputName: string;
   /** 输出的描述。 */
   Description: string;
-  /** 输出的转推协议，支持SRT|RTP|RTMP|RTMP_PULL|RTSP|RIST。 */
+  /** 输出的转推协议，支持SRT|RTP|RTMP|RTMP_PULL|RTSP_PULL|RIST。 */
   Protocol: string;
   /** 转推SRT的配置。 */
   SRTSettings?: CreateOutputSRTSettings;
@@ -4530,7 +4530,7 @@ declare interface SRTAddressDestination {
 
 /** SRT输入源地址。 */
 declare interface SRTSourceAddressReq {
-  /** 对端IP。 */
+  /** 对端IP或域名。 */
   Ip: string;
   /** 对端端口。 */
   Port: number;
@@ -6115,7 +6115,7 @@ declare interface CreateStreamLinkEventRequest {
 
 declare interface CreateStreamLinkEventResponse {
   /** 创建的Event信息。 */
-  Info: DescribeEvent;
+  Info?: DescribeEvent;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7003,15 +7003,15 @@ declare interface DescribeStreamLinkFlowLogsRequest {
 
 declare interface DescribeStreamLinkFlowLogsResponse {
   /** 日志信息列表。 */
-  Infos: FlowLogInfo[];
+  Infos?: FlowLogInfo[];
   /** 当前页码。 */
-  PageNum: number;
+  PageNum?: number;
   /** 每页大小。 */
-  PageSize: number;
+  PageSize?: number;
   /** 总数量。 */
-  TotalNum: number;
+  TotalNum?: number;
   /** 总页数。 */
-  TotalPage: number;
+  TotalPage?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7035,7 +7035,7 @@ declare interface DescribeStreamLinkFlowMediaStatisticsRequest {
 
 declare interface DescribeStreamLinkFlowMediaStatisticsResponse {
   /** 传输流的媒体数据列表。 */
-  Infos: FlowMediaInfo[];
+  Infos?: FlowMediaInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7051,9 +7051,9 @@ declare interface DescribeStreamLinkFlowRealtimeStatusRequest {
 
 declare interface DescribeStreamLinkFlowRealtimeStatusResponse {
   /** 查询时间，单位s。 */
-  Timestamp: number;
+  Timestamp?: number;
   /** 实时数据信息列表。 */
-  Datas: FlowRealtimeStatusItem[];
+  Datas?: FlowRealtimeStatusItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7113,7 +7113,7 @@ declare interface DescribeStreamLinkFlowStatisticsRequest {
 
 declare interface DescribeStreamLinkFlowStatisticsResponse {
   /** 传输流的媒体数据列表。 */
-  Infos: FlowStatisticsArray[];
+  Infos?: FlowStatisticsArray[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7127,15 +7127,15 @@ declare interface DescribeStreamLinkFlowsRequest {
 
 declare interface DescribeStreamLinkFlowsResponse {
   /** 流的配置信息列表。 */
-  Infos: DescribeFlow[];
+  Infos?: DescribeFlow[];
   /** 当前页数。 */
-  PageNum: number;
+  PageNum?: number;
   /** 每页大小。 */
-  PageSize: number;
+  PageSize?: number;
   /** 总数量。 */
-  TotalNum: number;
+  TotalNum?: number;
   /** 总页数。 */
-  TotalPage: number;
+  TotalPage?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7835,7 +7835,7 @@ declare interface ModifyStreamLinkOutputInfoRequest {
 
 declare interface ModifyStreamLinkOutputInfoResponse {
   /** 修改后的Output配置。 */
-  Info: DescribeOutput;
+  Info?: DescribeOutput;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

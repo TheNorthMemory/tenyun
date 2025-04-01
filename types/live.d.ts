@@ -2313,9 +2313,9 @@ declare interface CreateLiveStreamMonitorResponse {
 declare interface CreateLiveTimeShiftRuleRequest {
   /** 推流域名。 */
   DomainName: string;
-  /** 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。 */
+  /** 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。注：如果需要对所有AppName生效，可填写“*”。 */
   AppName: string;
-  /** 流名称。注：如果本参数设置为非空字符串，规则将只对此推流起作用。 */
+  /** 流名称。注：如果本参数设置为非空字符串，规则将只对此推流起作用。如果需要对所有StreamName生效，可填写“*”。 */
   StreamName: string;
   /** 模板 ID。 */
   TemplateId: number;

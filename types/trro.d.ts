@@ -2,6 +2,22 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 云端录制文件上传到云存储的参数（对象存储cos） */
+declare interface CloudStorage {
+  /** 腾讯云对象存储COS以及第三方云存储账号信息0：腾讯云对象存储 COS1：AWS【注意】目前第三方云存储仅支持AWS，更多第三方云存储陆续支持中示例值：0 */
+  Vendor: number;
+  /** 腾讯云对象存储的[地域信息]（https://cloud.tencent.com/document/product/436/6224) */
+  Region: string;
+  /** 云存储桶名称。 */
+  Bucket: string;
+  /** 云存储的access_key账号信息。若存储至腾讯云对象存储COS，请前往https://console.cloud.tencent.com/cam/capi 查看或创建，对应链接中密钥字段的SecretId值。 */
+  AccessKey: string;
+  /** 云存储的secret_key账号信息。若存储至腾讯云对象存储COS，请前往https://console.cloud.tencent.com/cam/capi 查看或创建，对应链接中密钥字段的SecretKey值。 */
+  SecretKey: string;
+  /** 云存储bucket 的指定位置，由字符串数组组成。合法的字符串范围az,AZ,0~9,'_'和'-'，举个例子，录制文件xxx.m3u8在 ["prefix1", "prefix2"]作用下，会变成prefix1/prefix2/TaskId/xxx.m3u8。 */
+  FileNamePrefix?: string[];
+}
+
 /** 查询用户设备的授权绑定情况 */
 declare interface Device {
   /** 设备ID */
@@ -96,6 +112,14 @@ declare interface ProjectInfo {
   PolicyMode?: string;
   /** 项目信息修改时间 */
   ModifyTime?: string;
+}
+
+/** 转推参数，一个任务最多支持10个推流URL。 */
+declare interface PublishParams {
+  /** 腾讯云直播推流地址url */
+  PublishUrl: string;
+  /** 是否是腾讯云CDN，0为转推非腾讯云CDN，1为转推腾讯CDN，不携带该参数默认为1。 */
+  IsTencentUrl: number;
 }
 
 /** 最新会话信息 */
@@ -226,6 +250,36 @@ declare interface SessionIntervalStatistic {
   NotBadSessionRatio: number;
 }
 
+/** 原视频流参数列表 */
+declare interface VideoList {
+  /** 项目id */
+  ProjectId: string;
+  /** 设备id */
+  DeviceId: string;
+  /** 流id */
+  VideoStreamId: number;
+  /** 子画面在输出时的宽度，单位为像素值，不填默认为0。 */
+  Width: number;
+  /** 子画面在输出时的高度，单位为像素值，不填默认为0。 */
+  Height: number;
+}
+
+/** 转推视频参数 */
+declare interface VideoParams {
+  /** 输出流宽，音视频输出时必填。取值范围[0,1920]，单位为像素值。 */
+  Width: number;
+  /** 输出流高，音视频输出时必填。取值范围[0,1080]，单位为像素值。 */
+  Height: number;
+  /** 输出流帧率，音视频输出时必填。取值范围[1,60]，表示混流的输出帧率可选范围为1到60fps。 */
+  Fps: number;
+  /** 输出流码率，音视频输出时必填。取值范围[1,10000]，单位为kbps。 */
+  BitRate: number;
+  /** 输出流gop，音视频输出时必填。取值范围[1,5]，单位为秒。 */
+  Gop: number;
+  /** 转推视频流列表 */
+  VideoList: VideoList[];
+}
+
 declare interface BatchDeleteDevicesRequest {
   /** 目标删除设备所属项目ID */
   ProjectId: string;
@@ -270,6 +324,30 @@ declare interface BoundLicensesResponse {
   RequestId?: string;
 }
 
+declare interface CreateCloudRecordingRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 设备id */
+  DeviceId: string;
+  /** 视频流号 */
+  VideoStreamId: number;
+  /** 腾讯云对象存储COS以及第三方云存储的账号信息 */
+  CloudStorage: CloudStorage;
+  /** 如果是aac或者mp4文件格式，超过长度限制后，系统会自动拆分视频文件。单位：分钟。默认为1440min（24h），取值范围为1-1440。【单文件限制最大为2G，满足文件大小 >2G 或录制时长度 > 24h任意一个条件，文件都会自动切分】 Hls 格式录制此参数不生效。 */
+  MaxMediaFileDuration?: number;
+  /** 输出文件的格式（存储至COS等第三方存储时有效）。0：输出文件为hls格式。1：输出文件格式为hls+mp4。2：输出文件格式为hls+aac 。3：(默认)输出文件格式为mp4。4：输出文件格式为aac。 */
+  OutputFormat?: number;
+  /** 房间内持续没有主播的状态超过MaxIdleTime的时长，自动停止录制，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于 86400秒(24小时)。 示例值：30 */
+  MaxIdleTime?: number;
+}
+
+declare interface CreateCloudRecordingResponse {
+  /** 云录制服务分配的任务 ID。任务 ID 是对一次录制生命周期过程的唯一标识，结束录制时会失去意义。任务 ID需要业务保存下来，作为下次针对这个录制任务操作的参数。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDeviceRequest {
   /** 创建设备所归属的项目ID */
   ProjectId: string;
@@ -300,6 +378,16 @@ declare interface CreateProjectRequest {
 declare interface CreateProjectResponse {
   /** 项目ID，长度为16位 */
   ProjectId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCloudRecordingRequest {
+  /** 录制任务的唯一Id，在启动录制成功后会返回。 */
+  TaskId: string;
+}
+
+declare interface DeleteCloudRecordingResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -612,6 +700,24 @@ declare interface GetLicensesResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCallbackUrlRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 回调URL */
+  CallbackUrl: string;
+  /** 回调签名密钥，用于校验回调信息的完整性 */
+  SignKey?: string;
+}
+
+declare interface ModifyCallbackUrlResponse {
+  /** 响应码，0：成功，其他：失败 */
+  Code?: number;
+  /** 响应消息，ok:成功，其他：失败 */
+  Msg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDeviceRequest {
   /** 要修改设备归属项目的项目ID */
   ProjectId: string;
@@ -684,6 +790,34 @@ declare interface ModifyProjectSecModeResponse {
   RequestId?: string;
 }
 
+declare interface StartPublishLiveStreamRequest {
+  /** 是否转码，0表示无需转码，1表示需要转码。是否收取转码费是由WithTranscoding参数决定的，WithTranscoding为0，表示旁路转推，不会收取转码费用，WithTranscoding为1，表示混流转推，会收取转码费用。 示例值：1 */
+  WithTranscoding: number;
+  /** 所有参与混流转推的主播持续离开TRTC房间或切换成观众超过MaxIdleTime的时长，自动停止转推，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于 86400秒(24小时)。 */
+  MaxIdleTime: number;
+  /** 转推视频参数 */
+  VideoParams: VideoParams;
+  /** 转推的URL参数，一个任务最多支持10个推流URL */
+  PublishParams: PublishParams[];
+}
+
+declare interface StartPublishLiveStreamResponse {
+  /** 用于唯一标识转推任务，由腾讯云服务端生成，后续停止请求需要携带TaskiD参数。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopPublishLiveStreamRequest {
+  /** 唯一标识转推任务。 */
+  TaskId: string;
+}
+
+declare interface StopPublishLiveStreamResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Trro 实时互动-工业能源版} */
 declare interface Trro {
   (): Versions;
@@ -693,10 +827,14 @@ declare interface Trro {
   BatchDeletePolicy(data: BatchDeletePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeletePolicyResponse>;
   /** 设备绑定license {@link BoundLicensesRequest} {@link BoundLicensesResponse} */
   BoundLicenses(data: BoundLicensesRequest, config?: AxiosRequestConfig): AxiosPromise<BoundLicensesResponse>;
+  /** 开始云端录制 {@link CreateCloudRecordingRequest} {@link CreateCloudRecordingResponse} */
+  CreateCloudRecording(data: CreateCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudRecordingResponse>;
   /** 创建设备 {@link CreateDeviceRequest} {@link CreateDeviceResponse} */
   CreateDevice(data: CreateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceResponse>;
   /** 创建项目 {@link CreateProjectRequest} {@link CreateProjectResponse} */
   CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
+  /** 停止云端录制 {@link DeleteCloudRecordingRequest} {@link DeleteCloudRecordingResponse} */
+  DeleteCloudRecording(data: DeleteCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudRecordingResponse>;
   /** 删除项目 {@link DeleteProjectRequest} {@link DeleteProjectResponse} */
   DeleteProject(data: DeleteProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectResponse>;
   /** 查询设备信息 {@link DescribeDeviceInfoRequest} {@link DescribeDeviceInfoResponse} */
@@ -727,6 +865,8 @@ declare interface Trro {
   GetLicenseStat(data?: GetLicenseStatRequest, config?: AxiosRequestConfig): AxiosPromise<GetLicenseStatResponse>;
   /** 查看license列表 {@link GetLicensesRequest} {@link GetLicensesResponse} */
   GetLicenses(data: GetLicensesRequest, config?: AxiosRequestConfig): AxiosPromise<GetLicensesResponse>;
+  /** 修改录制和转推回调URL {@link ModifyCallbackUrlRequest} {@link ModifyCallbackUrlResponse} */
+  ModifyCallbackUrl(data: ModifyCallbackUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCallbackUrlResponse>;
   /** 修改设备信息 {@link ModifyDeviceRequest} {@link ModifyDeviceResponse} */
   ModifyDevice(data: ModifyDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceResponse>;
   /** 修改权限 {@link ModifyPolicyRequest} {@link ModifyPolicyResponse} */
@@ -735,6 +875,10 @@ declare interface Trro {
   ModifyProject(data: ModifyProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectResponse>;
   /** 修改项目安全模式 {@link ModifyProjectSecModeRequest} {@link ModifyProjectSecModeResponse} */
   ModifyProjectSecMode(data: ModifyProjectSecModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectSecModeResponse>;
+  /** 开启旁路转推 {@link StartPublishLiveStreamRequest} {@link StartPublishLiveStreamResponse} */
+  StartPublishLiveStream(data: StartPublishLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StartPublishLiveStreamResponse>;
+  /** 停止旁路转推 {@link StopPublishLiveStreamRequest} {@link StopPublishLiveStreamResponse} */
+  StopPublishLiveStream(data: StopPublishLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StopPublishLiveStreamResponse>;
 }
 
 export declare type Versions = ["2022-03-25"];

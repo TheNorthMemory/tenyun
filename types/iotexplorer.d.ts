@@ -59,15 +59,15 @@ declare interface AuthMiniProgramAppInfo {
 /** 获取返回列表的详情。 */
 declare interface BatchProductionInfo {
   /** 量产ID */
-  BatchProductionId: string;
+  BatchProductionId?: string;
   /** 产品ID */
-  ProductId: string;
+  ProductId?: string;
   /** 烧录方式 */
-  BurnMethod: number;
+  BurnMethod?: number;
   /** 创建时间 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 产品名称 */
-  ProductName: string;
+  ProductName?: string;
 }
 
 /** BindDeviceInfo */
@@ -152,6 +152,16 @@ declare interface CloudStorageAIServiceTaskFileInfo {
   MimeType?: string;
   /** 视频文件元数据（仅当文件为视频类型时包含该字段） */
   VideoMetaInfo?: CloudStorageAIServiceTaskVideoMetaInfo;
+  /** 文件标签 */
+  Labels?: CloudStorageAIServiceTaskFileLabel[];
+}
+
+/** 云存 AI 任务输出文件标签 */
+declare interface CloudStorageAIServiceTaskFileLabel {
+  /** key1 */
+  Key?: string;
+  /** value1 */
+  Value?: string;
 }
 
 /** 云存 AI 任务输出视频文件元数据 */
@@ -261,21 +271,21 @@ declare interface DeviceActiveResult {
 /** DeviceData */
 declare interface DeviceData {
   /** 设备证书，用于 TLS 建立链接时校验客户端身份。采用非对称加密时返回该参数。 */
-  DeviceCert: string | null;
+  DeviceCert?: string | null;
   /** 设备名称。 */
-  DeviceName: string | null;
+  DeviceName?: string | null;
   /** 设备私钥，用于 TLS 建立链接时校验客户端身份，腾讯云后台不保存，请妥善保管。采用非对称加密时返回该参数。 */
-  DevicePrivateKey: string | null;
+  DevicePrivateKey?: string | null;
   /** 对称加密密钥，base64编码。采用对称加密时返回该参数。 */
-  DevicePsk: string | null;
+  DevicePsk?: string | null;
 }
 
 /** 设备历史数据结构 */
 declare interface DeviceDataHistoryItem {
   /** 时间点，毫秒时间戳 */
-  Time: string;
+  Time?: string;
   /** 字段取值 */
-  Value: string;
+  Value?: string;
 }
 
 /** 设备固件信息 */
@@ -291,47 +301,47 @@ declare interface DeviceFirmwareInfo {
 /** 设备详细信息 */
 declare interface DeviceInfo {
   /** 设备名 */
-  DeviceName: string;
+  DeviceName?: string;
   /** 0: 离线, 1: 在线, 2: 获取失败, 3 未激活 */
-  Status: number;
+  Status?: number;
   /** 设备密钥，密钥加密的设备返回 */
-  DevicePsk: string;
+  DevicePsk?: string;
   /** 首次上线时间 */
-  FirstOnlineTime: number | null;
+  FirstOnlineTime?: number | null;
   /** 最后一次上线时间 */
-  LoginTime: number | null;
+  LoginTime?: number | null;
   /** 设备创建时间 */
-  CreateTime: number | null;
+  CreateTime?: number | null;
   /** 设备固件版本 */
-  Version: string | null;
+  Version?: string | null;
   /** 设备证书 */
-  DeviceCert: string | null;
+  DeviceCert?: string | null;
   /** 日志级别 */
-  LogLevel: number | null;
+  LogLevel?: number | null;
   /** LoRaWAN 设备地址 */
-  DevAddr: string | null;
+  DevAddr?: string | null;
   /** LoRaWAN 应用密钥 */
-  AppKey: string | null;
+  AppKey?: string | null;
   /** LoRaWAN 设备唯一标识 */
-  DevEUI: string | null;
+  DevEUI?: string | null;
   /** LoRaWAN 应用会话密钥 */
-  AppSKey: string | null;
+  AppSKey?: string | null;
   /** LoRaWAN 网络会话密钥 */
-  NwkSKey: string | null;
+  NwkSKey?: string | null;
   /** 创建人Id */
-  CreateUserId: number | null;
+  CreateUserId?: number | null;
   /** 创建人昵称 */
-  CreatorNickName: string | null;
+  CreatorNickName?: string | null;
   /** 启用/禁用状态 */
-  EnableState: number | null;
+  EnableState?: number | null;
   /** 产品ID */
-  ProductId: string | null;
+  ProductId?: string | null;
   /** 产品名称 */
-  ProductName: string | null;
+  ProductName?: string | null;
   /** 设备类型（设备、子设备、网关） */
-  DeviceType: string | null;
+  DeviceType?: string | null;
   /** 是否是 lora 设备 */
-  IsLora: boolean | null;
+  IsLora?: boolean | null;
 }
 
 /** 设备位置详情 */
@@ -377,17 +387,17 @@ declare interface DevicesItem {
 /** 设备事件的搜索结果项 */
 declare interface EventHistoryItem {
   /** 事件的时间戳 */
-  TimeStamp: number | null;
+  TimeStamp?: number | null;
   /** 事件的产品ID */
-  ProductId: string | null;
+  ProductId?: string | null;
   /** 事件的设备名称 */
-  DeviceName: string | null;
+  DeviceName?: string | null;
   /** 事件的标识符ID */
-  EventId: string | null;
+  EventId?: string | null;
   /** 事件的类型 */
-  Type: string | null;
+  Type?: string | null;
   /** 事件的数据 */
-  Data: string | null;
+  Data?: string | null;
 }
 
 /** 子设备详情 */
@@ -417,11 +427,11 @@ declare interface FamilySubDevice {
 /** 围栏告警位置点 */
 declare interface FenceAlarmPoint {
   /** 围栏告警时间 */
-  AlarmTime: number;
+  AlarmTime?: number;
   /** 围栏告警位置的经度 */
-  Longitude: number;
+  Longitude?: number;
   /** 围栏告警位置的纬度 */
-  Latitude: number;
+  Latitude?: number;
 }
 
 /** 围栏绑定的设备信息 */
@@ -447,15 +457,15 @@ declare interface FenceBindProductItem {
 /** 围栏事件详情 */
 declare interface FenceEventItem {
   /** 围栏事件的产品Id */
-  ProductId: string;
+  ProductId?: string;
   /** 围栏事件的设备名称 */
-  DeviceName: string;
+  DeviceName?: string;
   /** 围栏Id */
-  FenceId: number;
+  FenceId?: number;
   /** 围栏事件的告警类型（In，进围栏报警；Out，出围栏报警；InOrOut，进围栏或者出围栏均报警） */
-  AlertType: string;
+  AlertType?: string;
   /** 围栏事件的设备位置信息 */
-  Data: FenceAlarmPoint;
+  Data?: FenceAlarmPoint;
 }
 
 /** 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等- 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。- 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
@@ -534,7 +544,7 @@ declare interface InstanceDetail {
   ForwardCurrentTPS?: number | null;
   /** 实例单元数 */
   CellNum?: number | null;
-  /** 实例Tag */
+  /** 实例Tag，企业实例必传 */
   BillingTag?: string | null;
   /** 每日消息数 */
   EverydayFreeMessageCount?: number | null;
@@ -619,25 +629,25 @@ declare interface LicenseServiceNumInfo {
 /** LoRa自定义频点信息 */
 declare interface LoRaFrequencyEntry {
   /** 频点唯一ID */
-  FreqId: string;
+  FreqId?: string;
   /** 频点名称 */
-  FreqName: string;
+  FreqName?: string;
   /** 频点描述 */
-  Description: string;
+  Description?: string;
   /** 数据上行信道 */
-  ChannelsDataUp: number[];
+  ChannelsDataUp?: number[];
   /** 数据下行信道RX1 */
-  ChannelsDataRX1: number[];
+  ChannelsDataRX1?: number[];
   /** 数据下行信道RX2 */
-  ChannelsDataRX2: number[];
+  ChannelsDataRX2?: number[];
   /** 入网上行信道 */
-  ChannelsJoinUp: number[];
+  ChannelsJoinUp?: number[];
   /** 入网下行RX1信道 */
-  ChannelsJoinRX1: number[];
+  ChannelsJoinRX1?: number[];
   /** 入网下行RX2信道 */
-  ChannelsJoinRX2: number[];
+  ChannelsJoinRX2?: number[];
   /** 创建时间 */
-  CreateTime: number;
+  CreateTime?: number;
 }
 
 /** LoRa 网关信息 */
@@ -729,25 +739,25 @@ declare interface PackageInfo {
 /** 围栏详细信息(包含创建时间及更新时间) */
 declare interface PositionFenceInfo {
   /** 围栏信息 */
-  GeoFence: PositionFenceItem;
+  GeoFence?: PositionFenceItem;
   /** 围栏创建时间 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 围栏更新时间 */
-  UpdateTime: number;
+  UpdateTime?: number;
 }
 
 /** 围栏信息 */
 declare interface PositionFenceItem {
   /** 围栏Id */
-  FenceId: number;
+  FenceId?: number;
   /** 位置空间Id */
-  SpaceId: string;
+  SpaceId?: string;
   /** 围栏名称 */
-  FenceName: string;
+  FenceName?: string;
   /** 围栏描述 */
-  FenceDesc: string;
+  FenceDesc?: string;
   /** 围栏区域信息，采用 GeoJSON 格式 */
-  FenceArea: string;
+  FenceArea?: string;
 }
 
 /** 位置点 */
@@ -791,11 +801,11 @@ declare interface PositionSpaceInfo {
 /** 产品设备位置信息 */
 declare interface ProductDevicesPositionItem {
   /** 设备位置列表 */
-  Items: DevicePositionItem[];
+  Items?: DevicePositionItem[];
   /** 产品标识 */
-  ProductId: string;
+  ProductId?: string;
   /** 设备位置数量 */
-  Total: number;
+  Total?: number;
 }
 
 /** 产品详情 */
@@ -849,59 +859,59 @@ declare interface ProductEntry {
 /** 产品模型定义 */
 declare interface ProductModelDefinition {
   /** 产品ID */
-  ProductId: string;
+  ProductId?: string;
   /** 模型定义 */
-  ModelDefine: string;
+  ModelDefine?: string;
   /** 更新时间，秒级时间戳 */
-  UpdateTime: number;
+  UpdateTime?: number;
   /** 创建时间，秒级时间戳 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 产品所属分类的模型快照（产品创建时刻的） */
-  CategoryModel: string | null;
+  CategoryModel?: string | null;
   /** 产品的连接类型的模型 */
-  NetTypeModel: string | null;
+  NetTypeModel?: string | null;
 }
 
 /** 项目详情 */
 declare interface ProjectEntry {
   /** 项目ID */
-  ProjectId: string;
+  ProjectId?: string;
   /** 项目名称 */
-  ProjectName: string;
+  ProjectName?: string;
   /** 项目描述 */
-  ProjectDesc: string;
+  ProjectDesc?: string;
   /** 创建时间，unix时间戳 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 更新时间，unix时间戳 */
-  UpdateTime: number;
+  UpdateTime?: number;
 }
 
 /** 项目详情 */
 declare interface ProjectEntryEx {
   /** 项目ID */
-  ProjectId: string;
+  ProjectId?: string;
   /** 项目名称 */
-  ProjectName: string;
+  ProjectName?: string;
   /** 项目描述 */
-  ProjectDesc: string;
+  ProjectDesc?: string;
   /** 项目创建时间，unix时间戳 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 项目更新时间，unix时间戳 */
-  UpdateTime: number;
+  UpdateTime?: number;
   /** 产品数量 */
-  ProductCount: number;
+  ProductCount?: number;
   /** NativeApp数量 */
-  NativeAppCount: number;
+  NativeAppCount?: number;
   /** WebApp数量 */
-  WebAppCount: number;
+  WebAppCount?: number;
   /** 实例ID */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 应用数量 */
-  ApplicationCount: number | null;
+  ApplicationCount?: number | null;
   /** 设备注册总数 */
-  DeviceCount: number | null;
+  DeviceCount?: number | null;
   /** 是否开通物联使能 */
-  EnableOpenState: number | null;
+  EnableOpenState?: number | null;
 }
 
 /** 已注册通信类型信息 */
@@ -933,15 +943,15 @@ declare interface SearchKeyword {
 /** TRTC 的参数 可以用来加入房间 */
 declare interface TRTCParams {
   /** TRTC入参: TRTC的实例ID */
-  SdkAppId: number;
+  SdkAppId?: number;
   /** TRTC入参: 用户加入房间的ID */
-  UserId: string;
+  UserId?: string;
   /** TRTC入参: 用户的签名用来鉴权 */
-  UserSig: string;
+  UserSig?: string;
   /** TRTC入参: 加入的TRTC房间名称 */
-  StrRoomId: string;
+  StrRoomId?: string;
   /** TRTC入参: 校验TRTC的KEY */
-  PrivateKey: string;
+  PrivateKey?: string;
 }
 
 /** TWeCall设备激活信息 */
@@ -987,23 +997,23 @@ declare interface ThumbnailURLInfoList {
 /** Topic信息, 包括Topic名字和权限 */
 declare interface TopicItem {
   /** Topic名称 */
-  TopicName: string;
+  TopicName?: string;
   /** Topic权限 , 1上报 2下发 */
-  Privilege: number;
+  Privilege?: number;
 }
 
 /** TopicRule结构 */
 declare interface TopicRule {
   /** 规则名称。 */
-  RuleName: string;
+  RuleName?: string;
   /** 规则的SQL语句，如： SELECT * FROM 'pid/dname/event'，然后对其进行base64编码，得：U0VMRUNUICogRlJPTSAncGlkL2RuYW1lL2V2ZW50Jw== */
-  Sql: string;
+  Sql?: string;
   /** 规则描述。 */
-  Description: string | null;
+  Description?: string | null;
   /** 行为的JSON字符串。 */
-  Actions: string | null;
+  Actions?: string | null;
   /** 是否禁用规则 */
-  RuleDisabled: boolean | null;
+  RuleDisabled?: boolean | null;
 }
 
 /** 规则信息 */
@@ -1465,7 +1475,7 @@ declare interface CreateLoRaFrequencyRequest {
 
 declare interface CreateLoRaFrequencyResponse {
   /** LoRa频点信息 */
-  Data: LoRaFrequencyEntry;
+  Data?: LoRaFrequencyEntry;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1491,7 +1501,7 @@ declare interface CreateLoRaGatewayRequest {
 
 declare interface CreateLoRaGatewayResponse {
   /** LoRa 网关信息 */
-  Gateway: LoRaGatewayItem;
+  Gateway?: LoRaGatewayItem;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1653,9 +1663,9 @@ declare interface DeleteDeviceRequest {
 
 declare interface DeleteDeviceResponse {
   /** 删除的结果代码 */
-  ResultCode: string | null;
+  ResultCode?: string | null;
   /** 删除的结果信息 */
-  ResultMessage: string | null;
+  ResultMessage?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1667,9 +1677,9 @@ declare interface DeleteDevicesRequest {
 
 declare interface DeleteDevicesResponse {
   /** 删除的结果代码 */
-  ResultCode: string | null;
+  ResultCode?: string | null;
   /** 删除的结果信息 */
-  ResultMessage: string | null;
+  ResultMessage?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1839,9 +1849,9 @@ declare interface DescribeBindedProductsRequest {
 
 declare interface DescribeBindedProductsResponse {
   /** 当前分页的子产品数组 */
-  Products: BindProductInfo[];
+  Products?: BindProductInfo[];
   /** 绑定的子产品总数量 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1855,9 +1865,9 @@ declare interface DescribeCloudStorageAIServiceCallbackResponse {
   /** 推送类型。http：HTTP 回调 */
   Type?: string;
   /** HTTP 回调 URL */
-  CallbackUrl?: string | null;
+  CallbackUrl?: string;
   /** HTTP 回调鉴权 Token */
-  CallbackToken?: string | null;
+  CallbackToken?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1893,6 +1903,8 @@ declare interface DescribeCloudStorageAIServiceResponse {
 declare interface DescribeCloudStorageAIServiceTaskRequest {
   /** 任务 ID */
   TaskId: string;
+  /** 下载 URL 的过期时间。若传入该参数，则响应中将包含所有文件的下载 URL */
+  FileURLExpireTime?: number;
 }
 
 declare interface DescribeCloudStorageAIServiceTaskResponse {
@@ -2227,15 +2239,15 @@ declare interface DescribeDeviceBindGatewayRequest {
 
 declare interface DescribeDeviceBindGatewayResponse {
   /** 网关产品ID */
-  GatewayProductId: string | null;
+  GatewayProductId?: string | null;
   /** 网关设备名 */
-  GatewayDeviceName: string | null;
+  GatewayDeviceName?: string | null;
   /** 网关产品名称 */
-  GatewayName: string | null;
+  GatewayName?: string | null;
   /** 设备对应产品所属的主账号名称 */
-  GatewayProductOwnerName: string | null;
+  GatewayProductOwnerName?: string | null;
   /** 设备对应产品所属的主账号 UIN */
-  GatewayProductOwnerUin: string | null;
+  GatewayProductOwnerUin?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2309,7 +2321,7 @@ declare interface DescribeDeviceFirmwaresRequest {
 
 declare interface DescribeDeviceFirmwaresResponse {
   /** 固件信息列表 */
-  Firmwares: DeviceFirmwareInfo[] | null;
+  Firmwares?: DeviceFirmwareInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2553,11 +2565,11 @@ declare interface DescribeGatewayBindDevicesRequest {
 
 declare interface DescribeGatewayBindDevicesResponse {
   /** 子设备信息。 */
-  Devices: BindDeviceInfo[];
+  Devices?: BindDeviceInfo[];
   /** 子设备总数。 */
-  Total: number;
+  Total?: number;
   /** 子设备所属的产品名。 */
-  ProductName: string;
+  ProductName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2641,7 +2653,7 @@ declare interface DescribeModelDefinitionRequest {
 
 declare interface DescribeModelDefinitionResponse {
   /** 产品数据模板 */
-  Model: ProductModelDefinition;
+  Model?: ProductModelDefinition;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2845,7 +2857,7 @@ declare interface DirectBindDeviceInFamilyRequest {
 
 declare interface DirectBindDeviceInFamilyResponse {
   /** 返回设备信息 */
-  AppDeviceInfo: AppDeviceInfo;
+  AppDeviceInfo?: AppDeviceInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2977,7 +2989,7 @@ declare interface GetCOSURLRequest {
 
 declare interface GetCOSURLResponse {
   /** 固件URL */
-  Url: string;
+  Url?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3293,7 +3305,7 @@ declare interface InvokeExternalSourceAIServiceTaskResponse {
   /** 任务 ID */
   TaskId?: string;
   /** 任务信息 */
-  TaskInfo?: CloudStorageAIServiceTask | null;
+  TaskInfo?: CloudStorageAIServiceTask;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3473,7 +3485,7 @@ declare interface ModifyLoRaFrequencyRequest {
 
 declare interface ModifyLoRaFrequencyResponse {
   /** 频点信息 */
-  Data: LoRaFrequencyEntry;
+  Data?: LoRaFrequencyEntry;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3499,7 +3511,7 @@ declare interface ModifyLoRaGatewayRequest {
 
 declare interface ModifyLoRaGatewayResponse {
   /** 返回网关数据 */
-  Gateway: LoRaGatewayItem;
+  Gateway?: LoRaGatewayItem;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3953,9 +3965,9 @@ declare interface UpdateDevicesEnableStateRequest {
 
 declare interface UpdateDevicesEnableStateResponse {
   /** 删除的结果代码 */
-  ResultCode: string | null;
+  ResultCode?: string | null;
   /** 删除的结果信息 */
-  ResultMessage: string | null;
+  ResultMessage?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

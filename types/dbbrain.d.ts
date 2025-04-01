@@ -303,21 +303,21 @@ declare interface GroupItem {
 /** 健康报告任务详情。 */
 declare interface HealthReportTask {
   /** 异步任务请求 ID。 */
-  AsyncRequestId: number;
+  AsyncRequestId?: number;
   /** 任务的触发来源，支持的取值包括："DAILY_INSPECTION" - 实例巡检；"SCHEDULED" - 定时生成；"MANUAL" - 手动触发。 */
-  Source: string;
+  Source?: string;
   /** 任务完成进度，单位%。 */
-  Progress: number;
+  Progress?: number;
   /** 任务创建时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 任务开始执行时间。 */
-  StartTime: string;
+  StartTime?: string;
   /** 任务完成执行时间。 */
-  EndTime: string;
+  EndTime?: string;
   /** 任务所属实例的基础信息。 */
-  InstanceInfo: InstanceBasicInfo;
+  InstanceInfo?: InstanceBasicInfo;
   /** 健康报告中的健康信息。 */
-  HealthStatus: HealthStatus;
+  HealthStatus?: HealthStatus;
 }
 
 /** 获取健康得分返回的详情。 */
@@ -342,6 +342,8 @@ declare interface HealthStatus {
   ScoreLost?: number;
   /** 扣分详情。 */
   ScoreDetails?: ScoreDetail[];
+  /** 健康等级版本，默认为"V1" */
+  HealthLevelVersion?: string;
 }
 
 /** 推荐的索引 */
@@ -390,6 +392,24 @@ declare interface InstanceBasicInfo {
   Product?: string;
   /** 实例引擎版本。 */
   EngineVersion?: string;
+  /** CPU数量，对于Redis为0。 */
+  Cpu?: number;
+  /** 实例部署模式。 */
+  DeployMode?: string;
+  /** 实例内存配置。 */
+  InstanceConf?: RedisInstanceConf;
+  /** DBbrain是否支持该实例。 */
+  IsSupported?: boolean;
+  /** 实例内存，单位MB。 */
+  Memory?: number;
+  /** 实例地域。 */
+  Region?: string;
+  /** 实例子网统一ID，对于redis为空字符串。 */
+  UniqSubnetId?: string;
+  /** 实例私有网络统一ID，对于redis为空字符串。 */
+  UniqVpcId?: string;
+  /** 实例磁盘容量，对于Redis为0。 */
+  Volume?: number;
 }
 
 /** 实例配置。 */
@@ -680,6 +700,16 @@ declare interface RedisCmdInfo {
   Cmd?: string;
   /** 命令次数 */
   Count?: number;
+}
+
+/** Redis实例内存配置参数 */
+declare interface RedisInstanceConf {
+  /** 副本数量 */
+  ReplicasNum?: string;
+  /** 分片数量 */
+  ShardNum?: string;
+  /** 分片内存大小，单位MB */
+  ShardSize?: string;
 }
 
 /** redis key空间信息。 */
@@ -1195,7 +1225,7 @@ declare interface CreateDBDiagReportTaskRequest {
   ContactPerson?: number[];
   /** 接收邮件的联系组ID数组。 */
   ContactGroup?: number[];
-  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，默认值为"mysql"。 */
+  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，"redis" - 云数据库 Redis，默认值为"mysql"。 */
   Product?: string;
 }
 
@@ -1211,15 +1241,15 @@ declare interface CreateDBDiagReportUrlRequest {
   InstanceId: string;
   /** 健康报告相应的任务ID，可通过DescribeDBDiagReportTasks查询。 */
   AsyncRequestId: number;
-  /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。 */
+  /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，默认为"mysql"。 */
   Product?: string;
 }
 
 declare interface CreateDBDiagReportUrlResponse {
   /** 健康报告浏览地址。 */
-  ReportUrl: string;
+  ReportUrl?: string;
   /** 健康报告浏览地址到期时间戳（秒）。 */
-  ExpireTime: number;
+  ExpireTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1609,7 +1639,7 @@ declare interface DescribeDBDiagEventRequest {
   InstanceId: string;
   /** 事件 ID 。通过“获取实例诊断历史DescribeDBDiagHistory”获取。 */
   EventId?: number;
-  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，默认为"mysql"。 */
+  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，"redis" - 云数据库 Redis，默认为"mysql"。 */
   Product?: string;
 }
 
@@ -1691,7 +1721,7 @@ declare interface DescribeDBDiagReportTasksRequest {
   EndTime?: string;
   /** 实例ID数组，用于筛选指定实例的任务列表。 */
   InstanceIds?: string[];
-  /** 任务的触发来源，支持的取值包括："DAILY_INSPECTION" - 实例巡检；"SCHEDULED" - 定时生成；"MANUAL" - 手动触发。 */
+  /** 任务的触发来源，支持的取值包括："DAILY_INSPECTION" - 实例巡检；"SCHEDULED" - 计划任务；"MANUAL" - 手动触发。 */
   Sources?: string[];
   /** 报告的健康等级，支持的取值包括："HEALTH" - 健康；"SUB_HEALTH" - 亚健康；"RISK" - 危险；"HIGH_RISK" - 高危。 */
   HealthLevels?: string;
@@ -1701,15 +1731,15 @@ declare interface DescribeDBDiagReportTasksRequest {
   Offset?: number;
   /** 返回数量，默认20，最大值为100。 */
   Limit?: number;
-  /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。 */
+  /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，默认为"mysql"。 */
   Product?: string;
 }
 
 declare interface DescribeDBDiagReportTasksResponse {
   /** 任务总数目。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 任务列表。 */
-  Tasks: HealthReportTask[];
+  Tasks?: HealthReportTask[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2795,6 +2825,8 @@ declare namespace V20191016 {
     ScoreLost?: number;
     /** 扣分详情。 */
     ScoreDetails?: ScoreDetail[];
+    /** 健康等级版本，默认为V1 */
+    HealthLevelVersion?: string;
   }
 
   /** 实例基础信息。 */
@@ -2811,6 +2843,24 @@ declare namespace V20191016 {
     Product?: string;
     /** 实例引擎版本。 */
     EngineVersion?: string;
+    /** CPU数量，对于Redis为0。 */
+    Cpu?: number;
+    /** 实例部署模式。 */
+    DeployMode?: string;
+    /** 实例内存配置。 */
+    InstanceConf?: RedisInstanceConf;
+    /** DBbrain是否支持该实例。 */
+    IsSupported?: boolean;
+    /** 实例内存，单位MB。 */
+    Memory?: number;
+    /** 实例地域。 */
+    Region?: string;
+    /** 实例子网统一ID，对于redis为空字符串。 */
+    UniqSubnetId?: string;
+    /** 实例私有网络统一ID，对于redis为空字符串。 */
+    UniqVpcId?: string;
+    /** 实例磁盘容量，对于Redis为0。 */
+    Volume?: number;
   }
 
   /** 实例配置。 */
@@ -2959,6 +3009,16 @@ declare namespace V20191016 {
     Language: string;
     /** 邮件模板的内容。 */
     MailConfiguration: MailConfiguration;
+  }
+
+  /** Redis实例内存配置参数 */
+  interface RedisInstanceConf {
+    /** 副本数量 */
+    ReplicasNum?: string;
+    /** 分片数量 */
+    ShardNum?: string;
+    /** 分片内存大小，单位MB */
+    ShardSize?: string;
   }
 
   /** SchemaItem数组 */
@@ -3206,7 +3266,7 @@ declare namespace V20191016 {
     ContactPerson?: number[];
     /** 接收邮件的联系组ID数组。 */
     ContactGroup?: number[];
-    /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，默认值为"mysql"。 */
+    /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，"redis" - 云数据库 Redis，默认值为"mysql"。 */
     Product?: string;
   }
 
@@ -3222,7 +3282,7 @@ declare namespace V20191016 {
     InstanceId: string;
     /** 健康报告相应的任务ID，可通过DescribeDBDiagReportTasks查询。 */
     AsyncRequestId: number;
-    /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。 */
+    /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，默认为"mysql"。 */
     Product?: string;
   }
 
@@ -3344,7 +3404,7 @@ declare namespace V20191016 {
     InstanceId: string;
     /** 事件 ID 。通过“获取实例诊断历史DescribeDBDiagHistory”获取。 */
     EventId?: number;
-    /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，默认为"mysql"。 */
+    /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，"redis" - 云数据库 Redis，默认为"mysql"。 */
     Product?: string;
   }
 
@@ -3400,7 +3460,7 @@ declare namespace V20191016 {
     EndTime?: string;
     /** 实例ID数组，用于筛选指定实例的任务列表。 */
     InstanceIds?: string[];
-    /** 任务的触发来源，支持的取值包括："DAILY_INSPECTION" - 实例巡检；"SCHEDULED" - 定时生成；"MANUAL" - 手动触发。 */
+    /** 任务的触发来源，支持的取值包括："DAILY_INSPECTION" - 实例巡检；"SCHEDULED" - 计划任务；"MANUAL" - 手动触发。 */
     Sources?: string[];
     /** 报告的健康等级，支持的取值包括："HEALTH" - 健康；"SUB_HEALTH" - 亚健康；"RISK" - 危险；"HIGH_RISK" - 高危。 */
     HealthLevels?: string;
@@ -3410,7 +3470,7 @@ declare namespace V20191016 {
     Offset?: number;
     /** 返回数量，默认20。 */
     Limit?: number;
-    /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。 */
+    /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL；"redis" - 云数据库 Redis，默认为"mysql"。 */
     Product?: string;
   }
 

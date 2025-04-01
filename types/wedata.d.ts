@@ -366,6 +366,44 @@ declare interface BaseClusterInfo {
   CdwUserName?: string | null;
 }
 
+/** 基础角色对象 */
+declare interface BaseRole {
+  /** 角色id */
+  RoleId?: string;
+  /** 角色名称 */
+  RoleName?: string | null;
+  /** 角色昵称 */
+  DisplayName?: string | null;
+  /** 描述 */
+  Description?: string | null;
+  /** 角色类型, 分为System,Tenant,Project,Commercial */
+  RoleType?: string | null;
+  /** 系统预设 */
+  SystemDefault?: boolean | null;
+  /** 自定义参数 */
+  Parameters?: string | null;
+  /** 成员统计 */
+  MemberCount?: number | null;
+  /** 权限 */
+  Privileges?: RolePrivilege[] | null;
+  /** 操作者 */
+  Operator?: BaseUser | null;
+  /** 操作时间 */
+  OperateTime?: number | null;
+  /** 创建时间 */
+  CreateTime?: number | null;
+  /** 创建时间 */
+  CreateTimeStr?: string | null;
+  /** 更新时间 */
+  UpdateTimeStr?: string | null;
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** 创建人 */
+  Creator?: string | null;
+}
+
 /** 租户基础信息 */
 declare interface BaseTenant {
   /** 租户id */
@@ -3036,6 +3074,20 @@ declare interface OrganizationalFunction {
   EnvType?: string | null;
   /** 函数资源文件类型 */
   FunctionResourceFileType?: string | null;
+}
+
+/** 角色列表分页信息 */
+declare interface PageRoles {
+  /** 角色信息 */
+  Rows?: BaseRole[] | null;
+  /** 页码 */
+  PageNumber?: number | null;
+  /** 分页大小 */
+  PageSize?: number | null;
+  /** 总个数 */
+  TotalCount?: number | null;
+  /** 总分页页码 */
+  TotalPageNumber?: number | null;
 }
 
 /** 键值对 */
@@ -8751,6 +8803,42 @@ declare interface DescribeResourceManagePathTreesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRoleListRequest {
+  /** 返回所有角色。 */
+  ShowAllRoles?: boolean;
+  /** 需要返回的角色类型(system,tenant,project) */
+  IncludeRoleTypes?: string[];
+  /** 返回角色绑定人员统计，仅私有化版本支持 */
+  DescribeMemberCount?: boolean;
+  /** 返回操作者信息，私有化多租户版本 */
+  DescribeOperator?: boolean;
+  /** 系统角色 */
+  DescribeSystemRoleOnly?: boolean;
+  /** 自定义角色 */
+  DescribeCustomRoleOnly?: boolean;
+  /** 查看权限 */
+  DescribePrivileges?: boolean;
+  /** 筛选角色id */
+  RoleIds?: string[];
+  /** 项目id */
+  ProjectId?: string;
+  /** 页码 */
+  PageNumber?: number;
+  /** 分页信息 */
+  PageSize?: number;
+  /** 查询字段 */
+  Filters?: Filter[];
+  /** 排序字段 */
+  OrderFields?: OrderFields[];
+}
+
+declare interface DescribeRoleListResponse {
+  /** 角色列表 */
+  Data?: PageRoles;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRuleDimStatRequest {
   /** 项目id */
   ProjectId: string;
@@ -11563,6 +11651,20 @@ declare interface UpdateDataModelRegistryInfoResponse {
   RequestId?: string;
 }
 
+declare interface UpdateProjectUserRoleRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 用户id */
+  UserIds: string[];
+  /** 角色id */
+  RoleIds: string[];
+}
+
+declare interface UpdateProjectUserRoleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateWorkflowOwnerRequest {
   /** 项目Id */
   ProjectId: string;
@@ -11874,6 +11976,8 @@ declare interface Wedata {
   DescribeReportTaskList(data?: DescribeReportTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReportTaskListResponse>;
   /** 获取资源管理目录树 {@link DescribeResourceManagePathTreesRequest} {@link DescribeResourceManagePathTreesResponse} */
   DescribeResourceManagePathTrees(data?: DescribeResourceManagePathTreesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceManagePathTreesResponse>;
+  /** 获取角色列表信息 {@link DescribeRoleListRequest} {@link DescribeRoleListResponse} */
+  DescribeRoleList(data?: DescribeRoleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoleListResponse>;
   /** 查询规则详情 {@link DescribeRuleRequest} {@link DescribeRuleResponse} */
   DescribeRule(data?: DescribeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleResponse>;
   /** 数据质量触发维度分布统计接口 {@link DescribeRuleDimStatRequest} {@link DescribeRuleDimStatResponse} */
@@ -12098,6 +12202,8 @@ declare interface Wedata {
   UnlockIntegrationTask(data: UnlockIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockIntegrationTaskResponse>;
   /** （仅公有云）数语向Wedata注册，更新相关信息 {@link UpdateDataModelRegistryInfoRequest} {@link UpdateDataModelRegistryInfoResponse} */
   UpdateDataModelRegistryInfo(data: UpdateDataModelRegistryInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDataModelRegistryInfoResponse>;
+  /** 修改项目用户角色 {@link UpdateProjectUserRoleRequest} {@link UpdateProjectUserRoleResponse} */
+  UpdateProjectUserRole(data: UpdateProjectUserRoleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProjectUserRoleResponse>;
   /** 修改工作流责任人 {@link UpdateWorkflowOwnerRequest} {@link UpdateWorkflowOwnerResponse} */
   UpdateWorkflowOwner(data: UpdateWorkflowOwnerRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateWorkflowOwnerResponse>;
   /** 开发空间-保存任务信息 {@link UploadContentRequest} {@link UploadContentResponse} */

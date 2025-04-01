@@ -268,6 +268,12 @@ declare interface ClassifyDetectInfo {
   Rect: Rect;
 }
 
+/** 支持模版的单个属性配置 */
+declare interface ConfigAdvanced {
+  /** 模版的单个属性配置 */
+  Scene?: string;
+}
+
 /** 卡证字段信息返回值 */
 declare interface ContentInfo {
   /** 字段内容 */
@@ -2984,6 +2990,18 @@ declare interface WordItem {
   DetectedText?: string;
   /** 四点坐标 */
   Coord?: Polygon;
+  /** 描述性信息 */
+  AdvancedInfo?: string;
+  /** 单词的四点坐标 */
+  WordCoord?: WordPolygon[];
+}
+
+/** 单词坐标信息 */
+declare interface WordPolygon {
+  /** 文本块内容 */
+  DetectedText?: string;
+  /** 四点坐标 */
+  Coord?: Polygon;
 }
 
 /** 识别出来的单词信息包括单词（包括单词Character和单词置信度confidence） */
@@ -4985,12 +5003,14 @@ declare interface SmartStructuralProRequest {
   ItemNames?: string[];
   /** 是否开启全文字段识别 */
   ReturnFullText?: boolean;
-  /** 配置id支持：General -- 通用场景 InvoiceEng -- 国际invoice模版 WayBillEng --海运订单模板CustomsDeclaration -- 进出口报关单WeightNote -- 磅单MedicalMeter -- 血压仪表识别BillOfLading -- 海运提单EntrustmentBook -- 海运托书WordRecognize -- 手写英文作文模版Statement -- 对账单识别模板BookingConfirmation -- 配舱通知书识别模板AirWayBill -- 航空运单识别模板DispatchWeightNote -- 磅单发货单识别模板ReceiptWeightNote -- 磅单收货单识别模板 */
+  /** 配置id支持：General -- 通用场景 InvoiceEng -- 国际invoice模版 WayBillEng --海运订单模板CustomsDeclaration -- 进出口报关单WeightNote -- 磅单MedicalMeter -- 血压仪表识别BillOfLading -- 海运提单EntrustmentBook -- 海运托书WordRecognize -- 手写英文作文模版Statement -- 对账单识别模板BookingConfirmation -- 配舱通知书识别模板AirWayBill -- 航空运单识别模板DispatchWeightNote -- 磅单发货单识别模板ReceiptWeightNote -- 磅单收货单识别模板ArticalRecognize -- 手写作文模版 */
   ConfigId?: string;
   /** 是否开启全文字段坐标值的识别 */
   EnableCoord?: boolean;
   /** 是否开启父子key识别，默认是 */
   OutputParentKey?: boolean;
+  /** 模版的单个属性配置 */
+  ConfigAdvanced?: ConfigAdvanced;
 }
 
 declare interface SmartStructuralProResponse {

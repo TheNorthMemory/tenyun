@@ -14,6 +14,8 @@ declare interface AndroidApp {
   AndroidAppVersionInfo?: AndroidAppVersionInfo[];
   /** 安卓应用创建时间 */
   CreateTime?: string;
+  /** 用户 Id */
+  UserId?: string;
 }
 
 /** 安卓应用版本信息 */
@@ -357,6 +359,8 @@ declare interface DescribeAndroidAppsRequest {
   Limit?: number;
   /** 应用ID数组 */
   AndroidAppIds?: string[];
+  /** 过滤条件 */
+  Filters?: Filter[];
 }
 
 declare interface DescribeAndroidAppsResponse {

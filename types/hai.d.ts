@@ -125,9 +125,9 @@ declare interface LoginService {
 /** 某服务的登录配置 */
 declare interface LoginSetting {
   /** 服务名称 */
-  ServiceName?: string | null;
+  ServiceName?: string;
   /** 服务登录url */
-  Url?: string | null;
+  Url?: string;
 }
 
 /** musk prompt详情 */
@@ -198,12 +198,12 @@ declare interface SceneInfo {
 
 /** 描述了操作系统所在块设备即系统盘的信息 */
 declare interface SystemDisk {
-  /** 系统盘类型。系统盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：LOCAL_BASIC：本地硬盘LOCAL_SSD：本地SSD硬盘CLOUD_BASIC：普通云硬盘CLOUD_SSD：SSD云硬盘CLOUD_PREMIUM：高性能云硬盘CLOUD_BSSD：通用性SSD云硬盘默认取值：当前有库存的硬盘类型。 */
-  DiskType?: string | null;
+  /** 系统盘类型。取值范围：CLOUD_PREMIUM：高性能云硬盘CLOUD_HSSD：增强型SSD云盘默认取值：当前有库存的硬盘类型。 */
+  DiskType?: string;
   /** 系统盘大小，单位：GB。默认值为 80 */
-  DiskSize?: number | null;
+  DiskSize?: number;
   /** 系统盘分区盘符 */
-  DiskName?: string | null;
+  DiskName?: string;
 }
 
 declare interface CreateMuskPromptRequest {
@@ -239,9 +239,9 @@ declare interface DescribeApplicationsRequest {
 
 declare interface DescribeApplicationsResponse {
   /** 应用总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 分页返回的应用列表 */
-  ApplicationSet?: ApplicationInfo[] | null;
+  ApplicationSet?: ApplicationInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -255,7 +255,7 @@ declare interface DescribeInstanceNetworkStatusResponse {
   /** 查询结果集长度 */
   TotalCount?: number;
   /** 查询结果集 */
-  NetworkStatusSet?: NetworkStatus[] | null;
+  NetworkStatusSet?: NetworkStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

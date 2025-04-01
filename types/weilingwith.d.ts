@@ -2903,7 +2903,7 @@ declare interface Weilingwith {
   DescribeBuildingProfile(data: DescribeBuildingProfileRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBuildingProfileResponse>;
   /** 获取视频扩展信息 {@link DescribeCameraExtendInfoRequest} {@link DescribeCameraExtendInfoResponse} */
   DescribeCameraExtendInfo(data: DescribeCameraExtendInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCameraExtendInfoResponse>;
-  /** 通过城市id查询工作空间列表 {@link DescribeCityWorkspaceListRequest} {@link DescribeCityWorkspaceListResponse} */
+  /** @deprecated 通过城市id查询工作空间列表 {@link DescribeCityWorkspaceListRequest} {@link DescribeCityWorkspaceListResponse} */
   DescribeCityWorkspaceList(data: DescribeCityWorkspaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCityWorkspaceListResponse>;
   /** 设备分组列表 {@link DescribeDeviceGroupListRequest} {@link DescribeDeviceGroupListResponse} */
   DescribeDeviceGroupList(data: DescribeDeviceGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceGroupListResponse>;

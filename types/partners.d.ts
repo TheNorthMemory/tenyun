@@ -94,6 +94,8 @@ declare interface AgentClientElem {
   SalesName?: string;
   /** 客户名称，此字段和控制台返回一致。 */
   ClientName?: string;
+  /** 增量目标金额(分) */
+  IncreaseGoal?: string;
 }
 
 /** 描述代理商代付的订单信息 */
