@@ -836,6 +836,8 @@ declare interface GatewayItem {
   LongAccessId?: string;
   /** Donut接入域名 */
   AccessDomain?: string;
+  /** 标签键值对 */
+  Tags?: Tag[];
 }
 
 /** 网关版本详情 */
@@ -2780,7 +2782,7 @@ declare interface DescribeWxGatewayRoutesResponse {
 
 declare interface DescribeWxGatewaysRequest {
   /** 环境ID */
-  EnvId: string;
+  EnvId?: string;
   /** 网关ID */
   GatewayId?: string;
   /** 服务名称，精确匹配 */
@@ -3374,7 +3376,7 @@ declare interface Tcb {
   /** 查看安全网关路由 {@link DescribeWxGatewayRoutesRequest} {@link DescribeWxGatewayRoutesResponse} */
   DescribeWxGatewayRoutes(data: DescribeWxGatewayRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWxGatewayRoutesResponse>;
   /** 查看安全网关 {@link DescribeWxGatewaysRequest} {@link DescribeWxGatewaysResponse} */
-  DescribeWxGateways(data: DescribeWxGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWxGatewaysResponse>;
+  DescribeWxGateways(data?: DescribeWxGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWxGatewaysResponse>;
   /** 销毁环境 {@link DestroyEnvRequest} {@link DestroyEnvResponse} */
   DestroyEnv(data: DestroyEnvRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyEnvResponse>;
   /** 销毁小租户网关 {@link DestroyStandaloneGatewayRequest} {@link DestroyStandaloneGatewayResponse} */

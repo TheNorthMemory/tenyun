@@ -401,29 +401,29 @@ declare interface BotJavaScript {
 /** BOT记录详细内容 */
 declare interface BotRecord {
   /** 动作，取值为以为3个类型中的一个："intercept","permit","monitor"，分别表示： 拦截， 放行，监控 */
-  Action: string;
+  Action?: string;
   /** 会话总次数 */
-  Nums: number;
+  Nums?: number;
   /** BotType=UB时，表示预测标签，取值如下： "crawler_unregular", "crawler_regular", "request_repeat", "credential_miss_user", "credential_without_user", "credential_only_action", "credential_user_password", "credential_cracking", "credential_stuffing", "brush_sms", "brush_captcha", "reg_malicious"BotType=TCB时，表示Bot分类，取值如下： "Uncategorised", "Search engine bot", "Site monitor", "Screenshot creator", "Link checker", "Web scraper", "Vulnerability scanner", "Virus scanner", "Speed tester", "Feed Fetcher", "Tool", "Marketing"BotType=UCB时，为二期接口，暂时未定义内容 */
-  RuleName: string;
+  RuleName?: string;
   /** 会话持续时间 */
-  SessionDuration: number;
+  SessionDuration?: number;
   /** 访问源IP */
-  SrcIp: string;
+  SrcIp?: string;
   /** 异常特征 */
-  BotFeature: string[];
+  BotFeature?: string[];
   /** 最新检测时间 */
-  Time: string;
+  Time?: string;
   /** BOT得分 */
-  Score: number;
+  Score?: number;
   /** 平均速率 */
-  AvgSpeed: number;
+  AvgSpeed?: number;
   /** BotType=TCB，表示TCB名称 */
-  TcbDetail: string | null;
+  TcbDetail?: string | null;
   /** BOT记录唯一ID，用于查询访问详情 */
-  Id: string;
+  Id?: string;
   /** 域名 */
-  Domain: string | null;
+  Domain?: string | null;
 }
 
 /** Bot记录的排序选项 */
@@ -1041,15 +1041,15 @@ declare interface DomainFilter {
 /** 日志包下载链接详情 */
 declare interface DomainLog {
   /** 日志包起始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 日志包结束时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 日志包下载链接 */
-  LogPath: string;
+  LogPath?: string;
   /** 日志包对应加速区域mainland：境内overseas：境外 */
-  Area: string;
+  Area?: string;
   /** 日志包文件名 */
-  LogName: string;
+  LogName?: string;
   /** 文件大小，单位: Byte */
   FileSize?: number | null;
 }
@@ -1339,17 +1339,17 @@ declare interface IpFreqLimit {
 /** 节点 IP 信息 */
 declare interface IpStatus {
   /** 节点 IP */
-  Ip: string;
+  Ip?: string;
   /** 节点所属区域 */
-  District: string;
+  District?: string;
   /** 节点所属运营商 */
-  Isp: string;
+  Isp?: string;
   /** 节点所在城市 */
-  City: string;
+  City?: string;
   /** 节点状态online：上线状态，正常调度服务中offline：下线状态 */
-  Status: string;
+  Status?: string;
   /** 节点 IPV6 */
-  Ipv6: string | null;
+  Ipv6?: string | null;
 }
 
 /** Ipv6源站启用配置，不可更改 */
@@ -1753,19 +1753,19 @@ declare interface PurgeTask {
 /** 预热任务详情 */
 declare interface PushTask {
   /** 预热任务 ID */
-  TaskId: string;
+  TaskId?: string;
   /** 预热 URL */
-  Url: string;
+  Url?: string;
   /** 预热任务状态fail：预热失败done：预热成功process：预热中invalid：预热无效(源站返回4xx或5xx状态码) */
-  Status: string;
+  Status?: string;
   /** 预热进度百分比 */
-  Percent: number;
+  Percent?: number;
   /** 预热任务提交时间 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 预热区域mainland：境内overseas：境外global：全球 */
-  Area: string;
+  Area?: string;
   /** 预热任务更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
 }
 
 /** 七牛元对象存储回源鉴权配置 */
@@ -2279,7 +2279,7 @@ declare interface SchemeKey {
 /** scdn相关的配置 */
 declare interface SecurityConfig {
   /** scdn 安全配置开关，取值有：on：开启off：关闭 */
-  Switch: string;
+  Switch?: string;
 }
 
 /** SEO 搜索引擎优化配置，默认为关闭状态 */
@@ -2457,17 +2457,17 @@ declare interface TopDetailDataMore {
 /** CLS主题信息 */
 declare interface TopicInfo {
   /** 主题ID */
-  TopicId: string;
+  TopicId?: string;
   /** 主题名字 */
-  TopicName: string;
+  TopicName?: string;
   /** 是否启用投递 */
-  Enabled: number;
+  Enabled?: number;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 归属于cdn或ecdn */
-  Channel: string | null;
+  Channel?: string | null;
   /** cls侧是否已经被删除 */
-  Deleted: string | null;
+  Deleted?: string | null;
 }
 
 /** 图片优化-TpgAdapter配置 */
@@ -2735,7 +2735,7 @@ declare interface CreateClsLogTopicRequest {
 
 declare interface CreateClsLogTopicResponse {
   /** 主题ID */
-  TopicId?: string | null;
+  TopicId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2853,11 +2853,11 @@ declare interface CreateVerifyRecordResponse {
   /** 解析类型 */
   RecordType?: string;
   /** 文件验证 URL 指引 */
-  FileVerifyUrl?: string | null;
+  FileVerifyUrl?: string;
   /** 文件校验域名列表 */
-  FileVerifyDomains?: string[] | null;
+  FileVerifyDomains?: string[];
   /** 文件校验文件名 */
-  FileVerifyName?: string | null;
+  FileVerifyName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3069,9 +3069,9 @@ declare interface DescribeCertDomainsRequest {
 
 declare interface DescribeCertDomainsResponse {
   /** 已接入CDN的域名列表 */
-  Domains: string[] | null;
+  Domains?: string[];
   /** 已配置证书的CDN域名列表 */
-  CertifiedDomains: string[] | null;
+  CertifiedDomains?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3119,7 +3119,7 @@ declare interface DescribeDiagnoseReportResponse {
   /** 源站检测信息 */
   OriginInfo?: DiagnoseData;
   /** 刷新检测信息 */
-  PurgeInfo?: DiagnoseData | null;
+  PurgeInfo?: DiagnoseData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3147,7 +3147,7 @@ declare interface DescribeDistrictIspDataRequest {
 
 declare interface DescribeDistrictIspDataResponse {
   /** 地区运营商数据明细 */
-  Data?: DistrictIspInfo[] | null;
+  Data?: DistrictIspInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3267,13 +3267,13 @@ declare interface DescribeImageConfigRequest {
 
 declare interface DescribeImageConfigResponse {
   /** WebpAdapter配置 */
-  WebpAdapter: WebpAdapter | null;
+  WebpAdapter?: WebpAdapter;
   /** TpgAdapter配置 */
-  TpgAdapter: TpgAdapter | null;
+  TpgAdapter?: TpgAdapter;
   /** GuetzliAdapter配置 */
-  GuetzliAdapter: GuetzliAdapter | null;
+  GuetzliAdapter?: GuetzliAdapter;
   /** AvifAdapter配置项 */
-  AvifAdapter: AvifAdapter | null;
+  AvifAdapter?: AvifAdapter;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3429,9 +3429,9 @@ declare interface DescribePurgeTasksRequest {
 
 declare interface DescribePurgeTasksResponse {
   /** 详细刷新记录 */
-  PurgeLogs?: PurgeTask[] | null;
+  PurgeLogs?: PurgeTask[];
   /** 任务总数，用于分页 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3467,9 +3467,9 @@ declare interface DescribePushTasksRequest {
 
 declare interface DescribePushTasksResponse {
   /** 预热历史记录 */
-  PushLogs?: PushTask[] | null;
+  PushLogs?: PushTask[];
   /** 任务总数，用于分页 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3741,9 +3741,9 @@ declare interface DisableCachesRequest {
 
 declare interface DisableCachesResponse {
   /** 提交结果 */
-  CacheOptResult?: CacheOptResult | null;
+  CacheOptResult?: CacheOptResult;
   /** 任务ID */
-  TaskId?: string | null;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3783,9 +3783,9 @@ declare interface EnableCachesRequest {
 
 declare interface EnableCachesResponse {
   /** 结果列表 */
-  CacheOptResult?: CacheOptResult | null;
+  CacheOptResult?: CacheOptResult;
   /** 任务ID */
-  TaskId?: string | null;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3823,9 +3823,9 @@ declare interface GetDisableRecordsRequest {
 
 declare interface GetDisableRecordsResponse {
   /** 封禁历史记录 */
-  UrlRecordList?: UrlRecord[] | null;
+  UrlRecordList?: UrlRecord[];
   /** 任务总数，用于分页 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3869,7 +3869,7 @@ declare interface ListClsTopicDomainsResponse {
   /** 日志主题名称 */
   TopicName?: string;
   /** 日志主题最近更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

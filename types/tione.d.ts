@@ -1248,6 +1248,10 @@ declare interface ServiceGroup {
   ReplicasCount?: number | null;
   /** 服务组下期望的pod数 */
   AvailableReplicasCount?: number | null;
+  /** 服务组的subuin */
+  SubUin?: string;
+  /** 服务组的app_id */
+  AppId?: number;
 }
 
 /** 推理服务在集群中的信息 */
@@ -1295,7 +1299,7 @@ declare interface ServiceInfo {
   /** 定时伸缩策略 */
   ScaleStrategy?: string | null;
   /** 定时停止的配置 */
-  ScheduledAction?: string | null;
+  ScheduledAction?: ScheduledAction | null;
   /** 实例列表 */
   PodList?: string[] | null;
   /** Pod列表信息 */

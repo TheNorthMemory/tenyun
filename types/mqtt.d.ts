@@ -314,15 +314,15 @@ declare interface PriceTag {
 
 /** MQTT ProductSkuItem */
 declare interface ProductSkuItem {
-  /** 规格类型BASIC：基础版PRO ：专业版 */
+  /** 规格类型BASIC：基础版PRO ：专业版PLATINUM： 铂金版 */
   InstanceType?: string;
   /** 规格代码 */
   SkuCode?: string;
-  /** 是否售卖 */
+  /** 是否售卖1: 可售卖0: 不可售卖 */
   OnSale?: boolean;
   /** topic num限制 */
   TopicNumLimit?: number;
-  /** tps */
+  /** MQTT 集群下每秒钟生产消息量和消费消息量之和。详细计算方式参考 [计费概述](https://cloud.tencent.com/document/product/1778/109698) */
   TpsLimit?: number;
   /** 客户端连接数 */
   ClientNumLimit?: number;
@@ -363,9 +363,9 @@ declare interface TagFilter {
 /** VPC信息 */
 declare interface VpcInfo {
   /** VPC ID */
-  VpcId: string;
+  VpcId?: string;
   /** 子网ID */
-  SubnetId: string;
+  SubnetId?: string;
 }
 
 declare interface ActivateCaCertificateRequest {

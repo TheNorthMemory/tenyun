@@ -61,87 +61,87 @@ declare interface BatchRecordInfo {
 /** 批量添加域名返回结构 */
 declare interface CreateDomainBatchDetail {
   /** 见RecordInfoBatch */
-  RecordList: CreateDomainBatchRecord[] | null;
+  RecordList?: CreateDomainBatchRecord[];
   /** 任务编号 */
-  Id: number;
+  Id?: number;
   /** 域名 */
-  Domain: string | null;
+  Domain?: string;
   /** 域名等级 */
-  DomainGrade: string | null;
+  DomainGrade?: string;
   /** 错误信息 */
-  ErrMsg: string | null;
+  ErrMsg?: string | null;
   /** 该条任务运行状态 */
-  Status: string | null;
+  Status?: string;
   /** 操作类型 */
-  Operation: string | null;
+  Operation?: string;
 }
 
 /** 批量添加域名任务中的记录信息 */
 declare interface CreateDomainBatchRecord {
   /** 子域名(主机记录)。 */
-  SubDomain: string | null;
+  SubDomain?: string;
   /** 记录类型, 详见 DescribeRecordType 接口 */
-  RecordType: string | null;
+  RecordType?: string;
   /** 解析记录的线路，详见 DescribeRecordLineList 接口 */
-  RecordLine: string | null;
+  RecordLine?: string;
   /** 记录值 */
-  Value: string | null;
+  Value?: string;
   /** 记录的 TTL 值 */
-  TTL: number | null;
+  TTL?: number;
   /** 记录添加状态 */
-  Status: string | null;
+  Status?: string;
   /** 操作类型 */
-  Operation: string | null;
+  Operation?: string;
   /** 错误信息 */
-  ErrMsg: string | null;
+  ErrMsg?: string | null;
   /** 此条记录在列表中的ID */
-  Id: number;
+  Id?: number;
 }
 
 /** 批量添加记录返回结构 */
 declare interface CreateRecordBatchDetail {
   /** 见RecordInfoBatch */
-  RecordList: CreateRecordBatchRecord[] | null;
+  RecordList?: CreateRecordBatchRecord[];
   /** 任务编号 */
-  Id: number;
+  Id?: number;
   /** 域名 */
-  Domain: string | null;
+  Domain?: string;
   /** 域名等级 */
-  DomainGrade: string | null;
+  DomainGrade?: string;
   /** 错误信息 */
-  ErrMsg: string | null;
+  ErrMsg?: string | null;
   /** 该条任务运行状态 */
-  Status: string | null;
+  Status?: string;
   /** 操作类型 */
-  Operation: string | null;
+  Operation?: string | null;
   /** 域名ID */
-  DomainId: number | null;
+  DomainId?: number;
 }
 
 /** 批量添加记录任务中的记录信息 */
 declare interface CreateRecordBatchRecord {
   /** 子域名(主机记录)。 */
-  SubDomain: string | null;
+  SubDomain?: string;
   /** 记录类型, 详见 DescribeRecordType 接口 */
-  RecordType: string | null;
+  RecordType?: string;
   /** 解析记录的线路，详见 DescribeRecordLineList 接口 */
-  RecordLine: string | null;
+  RecordLine?: string;
   /** 记录值 */
-  Value: string | null;
+  Value?: string;
   /** 记录的 TTL 值 */
-  TTL: number | null;
+  TTL?: number;
   /** 记录添加状态 */
-  Status: string | null;
+  Status?: string;
   /** 操作类型 */
-  Operation: string | null;
+  Operation?: string | null;
   /** 错误信息 */
-  ErrMsg: string | null;
+  ErrMsg?: string | null;
   /** 此条记录在列表中的ID */
-  Id: number;
+  Id?: number;
   /** 记录的MX权重 */
-  MX: number | null;
+  MX?: number;
   /** 记录的权重 */
-  Weight?: number | null;
+  Weight?: number;
 }
 
 /** 自定义线路详情 */
@@ -199,21 +199,21 @@ declare interface DeleteRecordBatchDetail {
 /** 查看任务详情返回结构 */
 declare interface DescribeBatchTaskDetail {
   /** 见BatchRecordInfo */
-  RecordList: BatchRecordInfo[] | null;
+  RecordList?: BatchRecordInfo[];
   /** 任务编号 */
-  Id: number;
+  Id?: number;
   /** 域名 */
-  Domain: string | null;
+  Domain?: string | null;
   /** 域名等级 */
-  DomainGrade: string | null;
+  DomainGrade?: string;
   /** 错误信息 */
-  ErrMsg: string | null;
+  ErrMsg?: string | null;
   /** 该条任务运行状态 */
-  Status: string | null;
+  Status?: string;
   /** 操作类型 */
-  Operation: string | null;
+  Operation?: string | null;
   /** 域名ID */
-  DomainId: number | null;
+  DomainId?: number | null;
 }
 
 /** 域名别名解析量统计信息 */
@@ -467,7 +467,7 @@ declare interface FileInfo {
   /** 生成文件的任务类型。RECORD_LOG：解析量数据RECORD_EXPORT：导出解析记录DOMAIN_EXPORT：导出域名列表 */
   Type?: string;
   /** 剩余时间 */
-  LeftTime?: LeftTime | null;
+  LeftTime?: LeftTime;
 }
 
 /** 域名分组列表 */
@@ -493,11 +493,11 @@ declare interface KeyValue {
 /** 批量生成文件剩余时间 */
 declare interface LeftTime {
   /** 剩余天数 */
-  Days?: number | null;
+  Days?: number;
   /** 剩余小时数 */
-  Hours?: number | null;
+  Hours?: number;
   /** 剩余分钟数 */
-  Mins?: number | null;
+  Mins?: number;
 }
 
 /** 自定义线路分组详细信息 */
@@ -979,7 +979,7 @@ declare interface CheckRecordSnapshotRollbackRequest {
 
 declare interface CheckRecordSnapshotRollbackResponse {
   /** 错误原因 */
-  Reason?: string | null;
+  Reason?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1005,9 +1005,9 @@ declare interface CheckSnapshotRollbackResponse {
   /** 值为 1，表示超时 */
   Timeout?: number | null;
   /** 检查失败数量 */
-  Failed?: number | null;
+  Failed?: number;
   /** 失败记录信息 */
-  FailedRecordList?: SnapshotRecord[] | null;
+  FailedRecordList?: SnapshotRecord[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -31,29 +31,29 @@ declare interface ApolloEnvParam {
 /** 指标伸缩行为 */
 declare interface AutoScalerBehavior {
   /** 扩容行为配置 */
-  ScaleUp?: AutoScalerRules | null;
+  ScaleUp?: AutoScalerRules;
   /** 缩容行为配置 */
-  ScaleDown?: AutoScalerRules | null;
+  ScaleDown?: AutoScalerRules;
 }
 
 /** 扩容策略 */
 declare interface AutoScalerPolicy {
   /** 类型，Pods */
-  Type?: string | null;
+  Type?: string;
   /** 数量 */
-  Value?: number | null;
+  Value?: number;
   /** 扩容周期 */
-  PeriodSeconds?: number | null;
+  PeriodSeconds?: number;
 }
 
 /** 指标伸缩的规则 */
 declare interface AutoScalerRules {
   /** 稳定窗口时间，扩容时默认0，缩容时默认300 */
-  StabilizationWindowSeconds?: number | null;
+  StabilizationWindowSeconds?: number;
   /** 选择策略依据 */
-  SelectPolicy?: string | null;
+  SelectPolicy?: string;
   /** 扩缩容策略 */
-  Policies?: AutoScalerPolicy[] | null;
+  Policies?: AutoScalerPolicy[];
 }
 
 /** 服务治理引擎绑定的kubernetes信息 */
@@ -297,7 +297,7 @@ declare interface CloudNativeAPIGatewayStrategy {
 /** 弹性伸缩策略 */
 declare interface CloudNativeAPIGatewayStrategyAutoScalerConfig {
   /** 最大副本数 */
-  MaxReplicas?: number | null;
+  MaxReplicas?: number;
   /** 指标列表 */
   Metrics?: CloudNativeAPIGatewayStrategyAutoScalerConfigMetric[] | null;
   /** 是否开启指标伸缩 */
@@ -319,11 +319,11 @@ declare interface CloudNativeAPIGatewayStrategyAutoScalerConfigMetric {
   /** 指标类型- Resource */
   Type?: string;
   /** 指标资源名称- cpu- memory */
-  ResourceName?: string | null;
+  ResourceName?: string;
   /** 指标目标类型，目前只支持百分比Utilization */
-  TargetType?: string | null;
+  TargetType?: string;
   /** 指标目标值 */
-  TargetValue?: number | null;
+  TargetValue?: number;
 }
 
 /** 策略绑定的网关分组信息 */
@@ -357,13 +357,13 @@ declare interface CloudNativeAPIGatewayStrategyCronScalerConfig {
 /** 定时伸缩配置参数 */
 declare interface CloudNativeAPIGatewayStrategyCronScalerConfigParam {
   /** 定时伸缩周期 */
-  Period?: string | null;
+  Period?: string;
   /** 定时伸缩开始时间 */
-  StartAt?: string | null;
+  StartAt?: string;
   /** 定时伸缩目标节点数，不超过指标伸缩中定义的最大节点数 */
-  TargetReplicas?: number | null;
+  TargetReplicas?: number;
   /** 定时伸缩cron表达式，无需输入 */
-  Crontab?: string | null;
+  Crontab?: string;
 }
 
 /** 云原生API网关vpc配置。 */
@@ -2089,7 +2089,7 @@ declare interface CreateAutoScalerResourceStrategyResponse {
   /** 是否成功 */
   Result?: boolean;
   /** 策略Id */
-  StrategyId?: string | null;
+  StrategyId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

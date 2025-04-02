@@ -5,25 +5,25 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 账号工厂基线项 */
 declare interface AccountFactoryItem {
   /** 账号工厂基线项唯一标识，只能包含英文字母、数字和@、,._[]-:()（）【】+=，。，长度2-128个字符。 */
-  Identifier?: string | null;
+  Identifier?: string;
   /** 基线项名称，功能项名字唯一，仅支持英文字母、数宇、汉字、符号@、＆_[]-的组合，1-25个中文或英文字符。 */
-  Name?: string | null;
+  Name?: string;
   /** 基线项英文名称，基线项名字唯一，仅支持英文字母、数字、空格、符号@、＆_[]-的组合，1-64个英文字符。 */
-  NameEn?: string | null;
+  NameEn?: string;
   /** 基线项权重，数值小权重越高，取值范围大于等于0。 */
-  Weight?: number | null;
+  Weight?: number;
   /** 基线项是否必填，1必填，0非必填 */
-  Required?: number | null;
+  Required?: number;
   /** 基线项依赖项，N的取值范围与该基线项依赖的其它基线项个数有关。 */
-  DependsOn?: DependsOnItem[] | null;
+  DependsOn?: DependsOnItem[];
   /** 基线描述，长度为2~256个英文或中文字符，默认值为空。 */
-  Description?: string | null;
+  Description?: string;
   /** 基线项英文描述，长度为2~1024个英文字符，默认值为空。 */
-  DescriptionEn?: string | null;
+  DescriptionEn?: string;
   /** 基线分类，长度为2~32个英文或中文字符，不能为空。 */
-  Classify?: string | null;
+  Classify?: string;
   /** 基线英文分类，长度为2~64个英文字符，不能为空。 */
-  ClassifyEn?: string | null;
+  ClassifyEn?: string;
 }
 
 /** 账号工厂基线配置项 */
@@ -37,41 +37,41 @@ declare interface BaselineConfigItem {
 /** 账号工厂基线信息 */
 declare interface BaselineInfoItem {
   /** 账号工厂基线项唯一标识，只能包含英文字母、数字和@、,._[]-:()（）【】+=，。，长度2-128个字符。 */
-  Identifier?: string | null;
+  Identifier?: string;
   /** 账号工厂基线项配置，不同的基线项配置参数不同。 */
-  Configuration?: string | null;
+  Configuration?: string;
   /** 基线应用的账号数量。 */
-  ApplyCount?: number | null;
+  ApplyCount?: number;
 }
 
 /** 基线项部署任务信息列表 */
 declare interface BaselineStepTaskInfo {
   /** 任务唯一Id，只能包含英文字母、数字，是16个字符的随机字符串。 */
-  TaskId?: string | null;
+  TaskId?: string;
   /** 基线功能项唯一标识，只能包含英文字母、数字和@、,._[]-:()（）【】+=，。，长度2-128个字符。 */
-  Identifier?: string | null;
+  Identifier?: string;
   /** 被应用基线项的成员账号uin */
-  MemberUin?: number | null;
+  MemberUin?: number;
   /** 基线项应用的状态,Running表示基线项应用中,Success表示基线项应用成功,Failed表示基线项应用失败,Pending表示基线项待应用,Skipped表示基线项被跳过 */
-  Status?: string | null;
+  Status?: string;
   /** 错误码 */
-  ErrCode?: string | null;
+  ErrCode?: string;
   /** 错误信息 */
-  ErrMessage?: string | null;
+  ErrMessage?: string;
   /** 基线项部署输出 */
-  Output?: string | null;
+  Output?: string;
   /** 创建时间，按照ISO8601标准表示，格式为yyyy-MM-dd hh:mm:ss。 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 更新时间，按照ISO8601标准表示，格式为yyyy-MM-dd hh:mm:ss。 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
 }
 
 /** 依赖项 */
 declare interface DependsOnItem {
   /** 依赖项类型，只有LandingZoneSetUp或AccountFactorySetUp。LandingZoneSetUp表示landingZone的依赖项；AccountFactorySetUp表示账号工厂的依赖项 */
-  Type?: string | null;
+  Type?: string;
   /** 功能项唯一标识，只能包含英文字母、数字和@、,._[]-:()（）【】+=，。，长度2-128个字符。 */
-  Identifier?: string | null;
+  Identifier?: string;
 }
 
 declare interface BatchApplyAccountBaselinesRequest {
@@ -91,15 +91,15 @@ declare interface GetAccountFactoryBaselineRequest {
 
 declare interface GetAccountFactoryBaselineResponse {
   /** 资源所属主账号uin。 */
-  OwnerUin?: number | null;
+  OwnerUin?: number;
   /** 基线项名称，基线项名字唯一，仅支持英文字母、数宇、汉字、符号@、＆_[]-的组合，1-25个中文或英文字符。 */
-  Name?: string | null;
+  Name?: string;
   /** 基线项配置列表。 */
-  BaselineConfigItems?: BaselineInfoItem[] | null;
+  BaselineConfigItems?: BaselineInfoItem[];
   /** 创建时间，按照ISO8601标准表示，格式为yyyy-MM-dd hh:mm:ss。 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 更新时间，按照ISO8601标准表示，格式为yyyy-MM-dd hh:mm:ss。 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

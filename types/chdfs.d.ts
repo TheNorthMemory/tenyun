@@ -104,7 +104,7 @@ declare interface RestoreTask {
   RestoreTaskId?: number;
   /** 回热任务文件路径 */
   FilePath?: string;
-  /** 回热任务类型（1：标准；2：极速；3：批量，暂时仅支持极速） */
+  /** 回热任务类型（1：标准；2：极速；3：批量，暂时仅支持标准） */
   Type?: number;
   /** 指定恢复出的临时副本的有效时长（单位天） */
   Days?: number;

@@ -870,6 +870,26 @@ declare interface SessionItem {
   AllConn: number;
 }
 
+/** redis top慢日志聚合详情。 */
+declare interface SlowLogAgg {
+  /** 命令模版。 */
+  Cmd?: string;
+  /** 命令详情。 */
+  Detail?: string;
+  /** 执行次数。 */
+  ExecTimes?: number;
+  /** 总耗时。 */
+  QueryTime?: number;
+  /** 平均执行时间。 */
+  QueryTimeAvg?: number;
+  /** 最大执行时间。 */
+  QueryTimeMax?: number;
+  /** 最小执行时间。 */
+  QueryTimeMin?: number;
+  /** 总耗时占比 */
+  QueryTimeRatio?: number;
+}
+
 /** 慢日志来源地址详情。 */
 declare interface SlowLogHost {
   /** 来源地址。 */
@@ -964,6 +984,18 @@ declare interface SlowLogUser {
   Ratio?: number;
   /** 该来源用户名的慢日志数目。 */
   Count?: number;
+}
+
+/** 分段耗时 SQL 分布 */
+declare interface SqlCostDistribution {
+  /** sql条数。 */
+  Count?: number;
+  /** 分段耗时下边界，单位是秒。 */
+  From?: number;
+  /** 分段耗时上边界，单位是秒。 */
+  To?: number;
+  /** 耗时占比。 */
+  Ratio?: number;
 }
 
 /** 会话统计的维度信息,可以多个维度 */
@@ -2112,6 +2144,36 @@ declare interface DescribeRedisProcessListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRedisSlowLogTopSqlsRequest {
+  /** 实例 ID 。 */
+  InstanceId: string;
+  /** 开始时间，如“2019-09-10 12:13:14”。 */
+  StartTime: string;
+  /** 截止时间，如“2019-09-11 10:13:14”，截止时间与开始时间的间隔小于7天。 */
+  EndTime: string;
+  /** 服务产品类型，支持值： "redis" - 云数据库 Redis。 */
+  Product: string;
+  /** Redis Proxy节点ID。 */
+  InstanceProxyId?: string;
+  /** 排序键，支持ExecTimes,QueryTime,QueryTimeMax,QueryTimeAvg等排序键，默认为QueryTime。 */
+  SortBy?: string;
+  /** 排序方式，支持ASC（升序）以及DESC（降序），默认为DESC。 */
+  OrderBy?: string;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+}
+
+declare interface DescribeRedisSlowLogTopSqlsResponse {
+  /** 符合条件的记录总数。 */
+  TotalCount?: number;
+  /** 慢日志 top sql 列表。 */
+  Rows?: SlowLogAgg[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRedisTopBigKeysRequest {
   /** 实例ID。 */
   InstanceId: string;
@@ -2224,6 +2286,32 @@ declare interface DescribeSecurityAuditLogExportTasksResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSlowLogQueryTimeStatsRequest {
+  /** 实例 ID 。 */
+  InstanceId: string;
+  /** 开始时间，如“2019-09-10 12:13:14”。 */
+  StartTime: string;
+  /** 截止时间，如“2019-09-11 10:13:14”，截止时间与开始时间的间隔小于7天。 */
+  EndTime: string;
+  /** "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，默认为"mysql"。 */
+  Product: string;
+  /** Proxy节点ID。 */
+  InstanceProxyId?: string;
+  /** 实列节点ID。 */
+  InstanceNodeId?: string;
+  /** 查询类型，目前支持值：mongod，mongos。 */
+  Type?: string;
+}
+
+declare interface DescribeSlowLogQueryTimeStatsResponse {
+  /** 符合条件的记录总数。 */
+  TotalCount?: number;
+  /** 慢日志 top sql 列表。 */
+  Items?: SqlCostDistribution[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSlowLogTimeSeriesStatsRequest {
   /** 实例 ID 。 */
   InstanceId: string;
@@ -2231,8 +2319,14 @@ declare interface DescribeSlowLogTimeSeriesStatsRequest {
   StartTime: string;
   /** 结束时间，如“2019-09-10 12:13:14”，结束时间与开始时间的间隔最大可为7天。 */
   EndTime: string;
-  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，默认为"mysql"。 */
+  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，默认为"mysql"。 */
   Product?: string;
+  /** Proxy节点ID。 */
+  InstanceProxyId?: string;
+  /** 实列节点ID。 */
+  InstanceNodeId?: string;
+  /** 查询类型，目前支持值：mongod，mongos。 */
+  Type?: string;
 }
 
 declare interface DescribeSlowLogTimeSeriesStatsResponse {
@@ -3003,6 +3097,26 @@ declare namespace V20191016 {
     Timestamp?: number[];
   }
 
+  /** 关系型数据库线程 */
+  interface MySqlProcess {
+    /** 线程ID。 */
+    ID: string;
+    /** 线程的操作账号名。 */
+    User: string;
+    /** 线程的操作主机地址。 */
+    Host: string;
+    /** 线程的操作数据库。 */
+    DB: string;
+    /** 线程的操作状态。 */
+    State: string;
+    /** 线程的执行类型。 */
+    Command: string;
+    /** 线程的操作时长，单位秒。 */
+    Time: string;
+    /** 线程的操作语句。 */
+    Info: string;
+  }
+
   /** 用户配置的信息 */
   interface ProfileInfo {
     /** 语言, 如"zh"。 */
@@ -3571,6 +3685,38 @@ declare namespace V20191016 {
     RequestId?: string;
   }
 
+  interface DescribeMySqlProcessListRequest {
+    /** 实例ID。 */
+    InstanceId: string;
+    /** 线程的ID，用于筛选线程列表。 */
+    ID?: number;
+    /** 线程的操作账号名，用于筛选线程列表。 */
+    User?: string;
+    /** 线程的操作主机地址，用于筛选线程列表。 */
+    Host?: string;
+    /** 线程的操作数据库，用于筛选线程列表。 */
+    DB?: string;
+    /** 线程的操作状态，用于筛选线程列表。 */
+    State?: string;
+    /** 线程的执行类型，用于筛选线程列表。 */
+    Command?: string;
+    /** 线程的操作时长最小值，单位秒，用于筛选操作时长大于该值的线程列表。 */
+    Time?: number;
+    /** 线程的操作语句，用于筛选线程列表。 */
+    Info?: string;
+    /** 返回数量，默认20。 */
+    Limit?: number;
+    /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。 */
+    Product?: string;
+  }
+
+  interface DescribeMySqlProcessListResponse {
+    /** 实时线程列表。 */
+    ProcessList?: MySqlProcess[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeSecurityAuditLogDownloadUrlsRequest {
     /** 安全审计组Id。 */
     SecAuditGroupId: string;
@@ -3913,6 +4059,8 @@ declare interface Dbbrain {
   DescribeRedisCommandOverview(data: DescribeRedisCommandOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisCommandOverviewResponse>;
   /** 获取Redis实例proxy实时会话详情 {@link DescribeRedisProcessListRequest} {@link DescribeRedisProcessListResponse} */
   DescribeRedisProcessList(data: DescribeRedisProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisProcessListResponse>;
+  /** 获取redis慢SQL模板列表 {@link DescribeRedisSlowLogTopSqlsRequest} {@link DescribeRedisSlowLogTopSqlsResponse} */
+  DescribeRedisSlowLogTopSqls(data: DescribeRedisSlowLogTopSqlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisSlowLogTopSqlsResponse>;
   /** 查询redis实例大key列表 {@link DescribeRedisTopBigKeysRequest} {@link DescribeRedisTopBigKeysResponse} */
   DescribeRedisTopBigKeys(data: DescribeRedisTopBigKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisTopBigKeysResponse>;
   /** 获取redis top热key {@link DescribeRedisTopHotKeysRequest} {@link DescribeRedisTopHotKeysResponse} */
@@ -3923,6 +4071,8 @@ declare interface Dbbrain {
   DescribeSecurityAuditLogDownloadUrls(data: DescribeSecurityAuditLogDownloadUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityAuditLogDownloadUrlsResponse>;
   /** 查询安全审计日志导出任务列表 {@link DescribeSecurityAuditLogExportTasksRequest} {@link DescribeSecurityAuditLogExportTasksResponse} */
   DescribeSecurityAuditLogExportTasks(data: DescribeSecurityAuditLogExportTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityAuditLogExportTasksResponse>;
+  /** 获取慢日志分段耗时统计 {@link DescribeSlowLogQueryTimeStatsRequest} {@link DescribeSlowLogQueryTimeStatsResponse} */
+  DescribeSlowLogQueryTimeStats(data: DescribeSlowLogQueryTimeStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogQueryTimeStatsResponse>;
   /** 获取慢日志统计柱状图 {@link DescribeSlowLogTimeSeriesStatsRequest} {@link DescribeSlowLogTimeSeriesStatsResponse} */
   DescribeSlowLogTimeSeriesStats(data: DescribeSlowLogTimeSeriesStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogTimeSeriesStatsResponse>;
   /** 获取慢SQL模板列表 {@link DescribeSlowLogTopSqlsRequest} {@link DescribeSlowLogTopSqlsResponse} */
@@ -3999,6 +4149,8 @@ declare interface Dbbrain {
   DescribeHealthScore(data: V20191016.DescribeHealthScoreRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.DescribeHealthScoreResponse>;
   /** 获取邮件配置 {@link V20191016.DescribeMailProfileRequest} {@link V20191016.DescribeMailProfileResponse} */
   DescribeMailProfile(data: V20191016.DescribeMailProfileRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.DescribeMailProfileResponse>;
+  /** 查询实时线程列表 {@link V20191016.DescribeMySqlProcessListRequest} {@link V20191016.DescribeMySqlProcessListResponse} */
+  DescribeMySqlProcessList(data: V20191016.DescribeMySqlProcessListRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.DescribeMySqlProcessListResponse>;
   /** 查询安全审计日志导出文件下载链接 {@link V20191016.DescribeSecurityAuditLogDownloadUrlsRequest} {@link V20191016.DescribeSecurityAuditLogDownloadUrlsResponse} */
   DescribeSecurityAuditLogDownloadUrls(data: V20191016.DescribeSecurityAuditLogDownloadUrlsRequest, config: AxiosRequestConfig & V20191016.VersionHeader): AxiosPromise<V20191016.DescribeSecurityAuditLogDownloadUrlsResponse>;
   /** 查询安全审计日志导出任务列表 {@link V20191016.DescribeSecurityAuditLogExportTasksRequest} {@link V20191016.DescribeSecurityAuditLogExportTasksResponse} */

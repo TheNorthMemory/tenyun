@@ -4285,6 +4285,8 @@ declare interface ResetAccountPasswordResponse {
 declare interface RestartDBInstanceRequest {
   /** 数据库实例ID，形如mssql-njj2mtpl */
   InstanceId: string;
+  /** 重启设置，0-立刻重启，1-维护时间窗口内重启，默认0 */
+  WaitSwitch?: number;
 }
 
 declare interface RestartDBInstanceResponse {

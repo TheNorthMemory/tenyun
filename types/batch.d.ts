@@ -182,14 +182,6 @@ declare interface ComputeNodeMetrics {
   AbnormalCount?: number;
 }
 
-/** 黑石私有网络 */
-declare interface CpmVirtualPrivateCloud {
-  /** 黑石私有网络ID */
-  VpcId: string;
-  /** 黑石子网ID */
-  SubnetId: string;
-}
-
 /** 描述了数据盘的信息 */
 declare interface DataDisk {
   /** 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[存储概述](https://cloud.tencent.com/document/product/213/4952)。默认值为0，表示不购买数据盘。更多限制详见产品文档。 */
@@ -286,52 +278,6 @@ declare interface EnvData {
   Zones?: string[];
   /** 私有网络列表，支持跨私有网络创建CVM实例。与VirtualPrivateCloud和Zones不能同时指定。 */
   VirtualPrivateClouds?: VirtualPrivateCloud[];
-}
-
-/** 黑石计算环境数据 */
-declare interface EnvDataCpm {
-  /** 黑石可用区名称列表。如ap-guangzhou-bls-1。不是Batch可用区名称。目前仅支持一个可用区名称。 */
-  Zones: string[];
-  /** 购买的机型ID。 */
-  InstanceTypes: string[];
-  /** 购买时长单位，取值：m(月)。 */
-  TimeUnit: string;
-  /** 购买时长。 */
-  TimeSpan: number;
-  /** RAID类型ID。 */
-  RaidId: number;
-  /** 部署服务器的操作系统ID。通过批量计算接口DescribeCpmOsInfo查询操作系统信息。 */
-  OsTypeId: number;
-  /** 黑石VPC列表，目前仅支持一个VPC。 */
-  VirtualPrivateClouds: CpmVirtualPrivateCloud[];
-  /** 是否安装安全Agent，取值：1(安装) 0(不安装)，默认取值0。 */
-  NeedSecurityAgent?: number;
-  /** 是否安装监控Agent，取值：1(安装) 0(不安装)，默认取值0。 */
-  NeedMonitorAgent?: number;
-  /** 自动续费标志位，取值：1(自动续费) 0(不自动续费)，默认取值0。 */
-  AutoRenewFlag?: number;
-  /** 数据盘是否格式化，取值：1(格式化) 0(不格式化)，默认取值为1。 */
-  IsZoning?: number;
-  /** 指定数据盘的文件系统格式，当前支持 ext4和xfs选项， 默认为ext4。 参数适用于数据盘和Linux， 且在IsZoning为1时生效。 */
-  FileSystem?: string;
-  /** 设置Linux root或Windows Administrator的密码。若不设置此参数，默认情况下会随机生成密码，并以站内信方式通知到用户。 */
-  Password?: string;
-  /** 是否分配弹性公网IP，取值：1(分配) 0(不分配)，默认取值0。 */
-  ApplyEip?: number;
-  /** 弹性公网IP计费模式，取值：flow(按流量计费) bandwidth(按带宽计费)，默认取值flow。 */
-  EipPayMode?: string;
-  /** 弹性公网IP带宽限制，单位Mb。 */
-  EipBandwidth?: number;
-  /** 自定义镜像ID，取值生效时用自定义镜像部署物理机。 */
-  ImageId?: string;
-  /** 系统盘根分区大小，单位为G，默认取值10G。 */
-  SysRootSpace?: number;
-  /** /data分区大小，单位为G。如果系统盘还有剩余大小，会分配给/data分区。（特殊情况：如果剩余空间不足10G，并且没有指定/data分区，则剩余空间会分配给Root分区）。 */
-  SysDataSpace?: number;
-  /** 是否开启超线程，取值：1(开启) 0(关闭)，默认取值1。 */
-  HyperThreading?: number;
-  /** 指定的内网IP列表，不指定时自动分配。 */
-  LanIps?: string[];
 }
 
 /** 环境变量 */
@@ -642,58 +588,12 @@ declare interface NamedComputeEnv {
   NotificationTarget?: string;
 }
 
-/** 黑石计算环境 */
-declare interface NamedCpmComputeEnv {
-  /** 计算环境名称 */
-  EnvName: string;
-  /** 计算环境具体参数 */
-  EnvData: EnvDataCpm;
-  /** 计算节点期望个数 */
-  DesiredComputeNodeCount: number;
-  /** 计算环境描述 */
-  EnvDescription?: string;
-  /** 计算环境管理类型， 取值MANAGED。 */
-  EnvType?: string;
-  /** 授权信息 */
-  Authentications?: Authentication[];
-  /** 输入映射信息 */
-  InputMappings?: InputMapping[];
-  /** 通知信息 */
-  Notifications?: Notification;
-  /** 非活跃节点处理策略，默认“RECREATE”，即对于实例创建失败或异常退还的计算节点，定期重新创建实例资源。 */
-  ActionIfComputeNodeInactive?: string;
-  /** 对于实例创建失败或异常退还的计算节点，定期重新创建实例资源的最大重试次数，最大值100，如果不设置的话，系统会设置一个默认值，当前为7。 */
-  ResourceMaxRetryCount?: number;
-  /** 标签列表。通过指定该参数可以支持绑定标签到黑石计算环境。每个黑石计算环境最多绑定10个标签。 */
-  Tags?: Tag[];
-  /** 表示通知信息的通知目标类型。取值范围：CMQ，TDMQ_CMQ。CMQ:表示向腾讯云CMQ发送消息。TDMQ_CMQ：表示向腾讯云TDMQ_CMQ发送消息。默认值为CMQ。注：腾讯云计划于2022年6月前正式下线消息队列 CMQ，建议使用TDMQ_CMQ。参考文档：[CMQ迁移到TDMQ_CMQ](https://cloud.tencent.com/document/product/406/60860) */
-  NotificationTarget?: string;
-}
-
 /** 通知信息 */
 declare interface Notification {
   /** CMQ主题名字，要求主题名有效且关联订阅 */
   TopicName: string;
   /** 事件配置 */
   EventConfigs: EventConfig[];
-}
-
-/** 操作系统类型 */
-declare interface OsInfo {
-  /** 操作系统ID。 */
-  OsTypeId?: number;
-  /** 操作系统名称。 */
-  OsName?: string;
-  /** 操作系统名称描述。 */
-  OsDescription?: string;
-  /** 操作系统英文名称。 */
-  OsEnglishDescription?: string;
-  /** 操作系统的分类，如CentOs Debian。 */
-  OsClass?: string;
-  /** 标识镜像分类。public:公共镜像; private: 专属镜像。 */
-  ImageTag?: string;
-  /** 操作系统，ext4文件下所支持的最大的磁盘大小。单位为T。 */
-  MaxPartitionSize?: number;
 }
 
 /** 输出映射 */
@@ -1010,22 +910,6 @@ declare interface CreateComputeEnvResponse {
   RequestId?: string;
 }
 
-declare interface CreateCpmComputeEnvRequest {
-  /** 计算环境信息 */
-  ComputeEnv: NamedCpmComputeEnv;
-  /** 位置信息 */
-  Placement?: Placement;
-  /** 用于保证请求幂等性的字符串。该字符串由用户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
-  ClientToken?: string;
-}
-
-declare interface CreateCpmComputeEnvResponse {
-  /** 计算环境ID */
-  EnvId: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateTaskTemplateRequest {
   /** 任务模板名称 */
   TaskTemplateName: string;
@@ -1208,18 +1092,6 @@ declare interface DescribeComputeEnvsResponse {
   ComputeEnvSet: ComputeEnvView[];
   /** 计算环境数量 */
   TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeCpmOsInfoRequest {
-  /** 黑石设备类型代号。 可以从[DescribeDeviceClass](https://cloud.tencent.com/document/api/386/32911)查询设备类型列表。 */
-  DeviceClassCode?: string;
-}
-
-declare interface DescribeCpmOsInfoResponse {
-  /** 操作系统信息列表。 */
-  OsInfoSet: OsInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1538,8 +1410,6 @@ declare interface Batch {
   AttachInstances(data: AttachInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AttachInstancesResponse>;
   /** 创建计算环境 {@link CreateComputeEnvRequest} {@link CreateComputeEnvResponse} */
   CreateComputeEnv(data: CreateComputeEnvRequest, config?: AxiosRequestConfig): AxiosPromise<CreateComputeEnvResponse>;
-  /** 创建黑石计算环境 {@link CreateCpmComputeEnvRequest} {@link CreateCpmComputeEnvResponse} */
-  CreateCpmComputeEnv(data: CreateCpmComputeEnvRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCpmComputeEnvResponse>;
   /** 创建任务模板 {@link CreateTaskTemplateRequest} {@link CreateTaskTemplateResponse} */
   CreateTaskTemplate(data: CreateTaskTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskTemplateResponse>;
   /** 删除计算环境 {@link DeleteComputeEnvRequest} {@link DeleteComputeEnvResponse} */
@@ -1560,8 +1430,6 @@ declare interface Batch {
   DescribeComputeEnvCreateInfos(data?: DescribeComputeEnvCreateInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComputeEnvCreateInfosResponse>;
   /** 获取计算环境列表 {@link DescribeComputeEnvsRequest} {@link DescribeComputeEnvsResponse} */
   DescribeComputeEnvs(data?: DescribeComputeEnvsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeComputeEnvsResponse>;
-  /** 查询批量计算黑石操作系统信息 {@link DescribeCpmOsInfoRequest} {@link DescribeCpmOsInfoResponse} */
-  DescribeCpmOsInfo(data?: DescribeCpmOsInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCpmOsInfoResponse>;
   /** 获取批量计算可用区机型配置信息 {@link DescribeCvmZoneInstanceConfigInfosRequest} {@link DescribeCvmZoneInstanceConfigInfosResponse} */
   DescribeCvmZoneInstanceConfigInfos(data?: DescribeCvmZoneInstanceConfigInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCvmZoneInstanceConfigInfosResponse>;
   /** 查询实例分类信息 {@link DescribeInstanceCategoriesRequest} {@link DescribeInstanceCategoriesResponse} */

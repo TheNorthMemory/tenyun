@@ -2044,7 +2044,7 @@ declare interface CreateOutputInfo {
   OutputName: string;
   /** 输出描述。 */
   Description: string;
-  /** 输出的转推协议，支持SRT|RTP|RTMP|RTMP_PULL|RTSP|RIST。 */
+  /** 输出的转推协议，支持SRT|RTP|RTMP|RTMP_PULL|RTSP_PULL|RIST。 */
   Protocol: string;
   /** 输出地区。 */
   OutputRegion: string;
@@ -7065,7 +7065,7 @@ declare interface DescribeStreamLinkFlowRequest {
 
 declare interface DescribeStreamLinkFlowResponse {
   /** 流的配置信息。 */
-  Info: DescribeFlow;
+  Info?: DescribeFlow;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7089,7 +7089,7 @@ declare interface DescribeStreamLinkFlowSRTStatisticsRequest {
 
 declare interface DescribeStreamLinkFlowSRTStatisticsResponse {
   /** 传输流的SRT质量数据列表。 */
-  Infos: FlowSRTInfo[];
+  Infos?: FlowSRTInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8385,7 +8385,7 @@ declare interface Mps {
   ModifySnapshotByTimeOffsetTemplate(data: ModifySnapshotByTimeOffsetTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotByTimeOffsetTemplateResponse>;
   /** 修改媒体传输事件 {@link ModifyStreamLinkEventRequest} {@link ModifyStreamLinkEventResponse} */
   ModifyStreamLinkEvent(data: ModifyStreamLinkEventRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStreamLinkEventResponse>;
-  /** 修改媒体传输流 {@link ModifyStreamLinkFlowRequest} {@link ModifyStreamLinkFlowResponse} */
+  /** 修改媒体传输 Flow 信息 {@link ModifyStreamLinkFlowRequest} {@link ModifyStreamLinkFlowResponse} */
   ModifyStreamLinkFlow(data: ModifyStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStreamLinkFlowResponse>;
   /** 修改媒体传输输入 {@link ModifyStreamLinkInputRequest} {@link ModifyStreamLinkInputResponse} */
   ModifyStreamLinkInput(data: ModifyStreamLinkInputRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStreamLinkInputResponse>;

@@ -412,6 +412,8 @@ declare interface NodeInfo {
   NodeId?: string;
   /** DB节点角色，取值为master或者slave */
   Role?: string;
+  /** 节点所在可用区 */
+  Zone?: string;
 }
 
 /** 参数约束 */
@@ -474,6 +476,8 @@ declare interface RegionInfo {
   ZoneList?: ZonesInfo[];
   /** 可选择的主可用区和从可用区 */
   AvailableChoice?: ZoneChooseInfo[];
+  /** Cpu类型，如：英特尔：Intel/AMD，海光：Hygon */
+  CpuType?: string;
 }
 
 /** 保留的网络资源信息 */
@@ -859,6 +863,8 @@ declare interface CreateDBInstanceRequest {
   DcnInstanceId?: string;
   /** DCN同步模式，0：异步， 1：强同步 */
   DcnSyncMode?: number;
+  /** cpu类型，英特尔：Intel/AMD，海光：Hygon，默认Intel/AMD */
+  CpuType?: string;
 }
 
 declare interface CreateDBInstanceResponse {
@@ -973,6 +979,8 @@ declare interface CreateHourDBInstanceRequest {
   RollbackTime?: string;
   /** DCN同步模式，0：异步， 1：强同步 */
   DcnSyncMode?: number;
+  /** cpu类型，英特尔：Intel/AMD，海光：Hygon，默认Intel/AMD */
+  CpuType?: string;
 }
 
 declare interface CreateHourDBInstanceResponse {
@@ -1282,16 +1290,20 @@ declare interface DescribeDBInstanceDetailResponse {
   IsDcnSwitchSupported?: number;
   /** proxy版本号 */
   ProxyVersion?: string;
+  /** Cpu类型，如：英特尔：Intel/AMD，海光：Hygon */
+  CpuType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeDBInstanceSpecsRequest {
+  /** Cpu类型，如：英特尔：Intel/AMD，海光：Hygon，默认Intel/AMD */
+  CpuType?: string;
 }
 
 declare interface DescribeDBInstanceSpecsResponse {
   /** 按机型分类的可售卖规格列表 */
-  Specs: InstanceSpec[];
+  Specs?: InstanceSpec[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1629,13 +1641,15 @@ declare interface DescribePriceRequest {
   Paymode?: string;
   /** 价格金额单位，不传默认单位为分，取值： * pent：分* microPent：微分 */
   AmountUnit?: string;
+  /** Cpu类型，如：英特尔：Intel/AMD，海光：Hygon，默认Intel/AMD */
+  CpuType?: string;
 }
 
 declare interface DescribePriceResponse {
   /** 原价 * 单位：默认为分，若请求参数带有AmountUnit，参考AmountUnit描述* 币种：国内站为人民币，国际站为美元 */
-  OriginalPrice: number;
+  OriginalPrice?: number;
   /** 实际价格，受折扣等影响，可能和原价不同* 单位：默认为分，若请求参数带有AmountUnit，参考AmountUnit描述* 币种：国内站人民币，国际站美元 */
-  Price: number;
+  Price?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2173,13 +2187,15 @@ declare interface RestartDBInstancesResponse {
 declare interface SwitchDBInstanceHARequest {
   /** 实例Id，形如 tdsql-ow728lmc */
   InstanceId: string;
-  /** 切换的目标区域，会自动选择该可用区中延迟最低的节点 */
+  /** 指定可用区标识符，具体含义由zoneMode参数决定。 - 当zoneMode为target时表示目标可用区 - 当zoneMode为avoid时表示需避开的故障可用区 */
   Zone: string;
+  /** 可用区模式选择器，定义zone参数的语义类型。 - 默认值：target- 可选值：target, avoid */
+  ZoneMode?: string;
 }
 
 declare interface SwitchDBInstanceHAResponse {
   /** 异步流程Id */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -89,11 +89,11 @@ declare interface Cdc {
   /** 独享集群状态。取值范围：NORMAL：正常；CLOSED：关闭，此时将不可使用该独享集群创建新的云硬盘；FAULT：独享集群状态异常，此时独享集群将不可操作，腾讯云运维团队将会及时修复该集群；ISOLATED：因未及时续费导致独享集群被隔离，此时将不可使用该独享集群创建新的云硬盘，对应的云硬盘也将不可操作。 */
   CdcState?: string;
   /** 独享集群所属的[可用区](/document/product/213/15753)ID。 */
-  Zone?: string | null;
+  Zone?: string;
   /** 独享集群实例名称。 */
   CdcName?: string;
   /** 独享集群的资源容量大小。 */
-  CdcResource?: CdcSize | null;
+  CdcResource?: CdcSize;
   /** 独享集群实例id。 */
   CdcId?: string;
   /** 独享集群类型。取值范围：CLOUD_BASIC：表示普通云硬盘集群CLOUD_PREMIUM：表示高性能云硬盘集群CLOUD_SSD：SSD表示SSD云硬盘集群。 */
@@ -275,9 +275,9 @@ declare interface DiskConfig {
   /** 云盘介质类型。取值范围：CLOUD_BASIC：表示普通云硬盘CLOUD_PREMIUM：表示高性能云硬盘CLOUD_SSD：SSD表示SSD云硬盘。 */
   DiskType?: string;
   /** 云盘大小变化的最小步长，单位GB。 */
-  StepSize: number | null;
+  StepSize?: number;
   /** 额外的性能区间。 */
-  ExtraPerformanceRange: number[] | null;
+  ExtraPerformanceRange?: number[] | null;
   /** 实例机型。 */
   DeviceClass?: string | null;
   /** 云盘类型。取值范围：SYSTEM_DISK：表示系统盘DATA_DISK：表示数据盘。 */
@@ -287,7 +287,7 @@ declare interface DiskConfig {
   /** 最大可配置云盘大小，单位GB。 */
   MaxDiskSize?: number;
   /** 描述预付费或后付费云盘的价格。 */
-  Price?: Price | null;
+  Price?: Price;
 }
 
 /** 过滤条件 */

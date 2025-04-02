@@ -3228,6 +3228,8 @@ declare interface ProjectUserRole {
   OwnerUin?: string | null;
   /** 租户iD */
   AppId?: string | null;
+  /** 是否项目负责人 */
+  IsProjectOwner?: boolean | null;
 }
 
 /** 项目下的用户集合 */

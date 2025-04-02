@@ -33,13 +33,13 @@ declare interface AttachEntityOfPolicy {
   /** 实体ID */
   Id?: string;
   /** 实体名称 */
-  Name?: string | null;
+  Name?: string;
   /** 实体Uin */
-  Uin?: number | null;
+  Uin?: number;
   /** 关联类型。1 用户关联 ； 2 用户组关联 3 角色关联 */
   RelatedType?: number;
   /** 策略关联时间 */
-  AttachmentTime?: string | null;
+  AttachmentTime?: string;
 }
 
 /** 关联策略信息 */
@@ -47,15 +47,15 @@ declare interface AttachPolicyInfo {
   /** 策略id */
   PolicyId?: number;
   /** 策略名称 */
-  PolicyName?: string | null;
+  PolicyName?: string;
   /** 创建时间 */
-  AddTime?: string | null;
+  AddTime?: string;
   /** 创建来源，1 通过控制台创建, 2 通过策略语法创建 */
-  CreateMode?: number | null;
+  CreateMode?: number;
   /** 取值为User和QCS。User代表自定义策略，QCS代表系统策略 */
-  PolicyType?: string | null;
+  PolicyType?: string;
   /** 策略备注 */
-  Remark?: string | null;
+  Remark?: string;
   /** 策略关联操作者主账号 */
   OperateOwnerUin?: string | null;
   /** 策略关联操作者ID，如果UinType为0表示子账号Uin，如果UinType为1表示角色ID */
@@ -63,9 +63,9 @@ declare interface AttachPolicyInfo {
   /** 取值为0和1。OperateUinType为0表示OperateUin字段是子账号Uin。如果OperateUinType为1表示OperateUin字段是角色ID */
   OperateUinType?: number | null;
   /** 是否已下线，1代表已下线，0代表未下线 */
-  Deactived?: number | null;
+  Deactived?: number;
   /** 已下线的产品列表 */
-  DeactivedDetail?: string[] | null;
+  DeactivedDetail?: string[];
 }
 
 /** 角色关联的策略信息 */
@@ -77,15 +77,15 @@ declare interface AttachedPolicyOfRole {
   /** 绑定时间 */
   AddTime?: string;
   /** 策略类型，User表示自定义策略，QCS表示预设策略 */
-  PolicyType?: string | null;
+  PolicyType?: string;
   /** 策略创建方式，1表示按产品功能或项目权限创建，其他表示按策略语法创建 */
   CreateMode?: number;
   /** 是否已下线(0:否 1:是) */
-  Deactived?: number | null;
+  Deactived?: number;
   /** 已下线的产品列表 */
-  DeactivedDetail?: string[] | null;
+  DeactivedDetail?: string[];
   /** 策略描述 */
-  Description?: string | null;
+  Description?: string;
 }
 
 /** 用户关联的策略详情 */
@@ -103,11 +103,11 @@ declare interface AttachedUserPolicy {
   /** 创建模式(1表示按产品或项目权限创建的策略，其他表示策略语法创建的策略) */
   CreateMode?: string;
   /** 随组关联信息 */
-  Groups?: AttachedUserPolicyGroupInfo[] | null;
+  Groups?: AttachedUserPolicyGroupInfo[];
   /** 是否已下线(0:否 1:是) */
-  Deactived?: number | null;
+  Deactived?: number;
   /** 已下线的产品列表 */
-  DeactivedDetail?: string[] | null;
+  DeactivedDetail?: string[];
 }
 
 /** 用户关联策略(随组关联)信息 */
@@ -297,11 +297,11 @@ declare interface PolicyVersionDetail {
 /** 策略版本列表元素结构 */
 declare interface PolicyVersionItem {
   /** 策略版本号 */
-  VersionId?: number | null;
+  VersionId?: number;
   /** 策略版本创建时间 */
-  CreateDate?: string | null;
+  CreateDate?: string;
   /** 是否是正在生效的版本。0表示不是，1表示是 */
-  IsDefaultVersion?: number | null;
+  IsDefaultVersion?: number;
 }
 
 /** 消息接收人信息 */
@@ -323,9 +323,9 @@ declare interface Receiver {
   /** 是否主联系人 */
   IsReceiverOwner?: number;
   /** 是否允许微信接收通知 */
-  WechatFlag?: number | null;
+  WechatFlag?: number;
   /** 账号uin */
-  Uin?: number | null;
+  Uin?: number;
 }
 
 /** 角色详细信息 */
@@ -483,9 +483,9 @@ declare interface WeChatWorkSubAccount {
   /** 邮箱 */
   Email?: string;
   /** 企业微信UserId */
-  WeChatWorkUserId?: string | null;
+  WeChatWorkUserId?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
 }
 
 declare interface AddUserRequest {
@@ -693,7 +693,7 @@ declare interface CreatePolicyVersionRequest {
 
 declare interface CreatePolicyVersionResponse {
   /** 策略版本号 */
-  VersionId?: number | null;
+  VersionId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -715,7 +715,7 @@ declare interface CreateRoleRequest {
 
 declare interface CreateRoleResponse {
   /** 角色ID */
-  RoleId?: string | null;
+  RoleId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -959,7 +959,7 @@ declare interface DescribeRoleListRequest {
 
 declare interface DescribeRoleListResponse {
   /** 角色详情列表。 */
-  List?: RoleInfo[] | null;
+  List?: RoleInfo[];
   /** 角色总数 */
   TotalNum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -979,7 +979,7 @@ declare interface DescribeSafeAuthFlagCollResponse {
   /** 异地登录保护设置 */
   OffsiteFlag?: OffsiteFlag;
   /** 是否提示信任设备1 ：提示 0: 不提示 */
-  PromptTrust?: number | null;
+  PromptTrust?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1181,21 +1181,21 @@ declare interface GetPolicyRequest {
 
 declare interface GetPolicyResponse {
   /** 策略名。 */
-  PolicyName?: string | null;
+  PolicyName?: string;
   /** 策略描述。 */
-  Description?: string | null;
+  Description?: string;
   /** 1 表示自定义策略，2 表示预设策略。 */
-  Type?: number | null;
+  Type?: number;
   /** 策略创建时间。 */
-  AddTime?: string | null;
+  AddTime?: string;
   /** 策略最近更新时间。 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 策略文档。 */
-  PolicyDocument?: string | null;
+  PolicyDocument?: string;
   /** 备注。 */
   PresetAlias?: string | null;
   /** 是否是服务相关策略，0代表不是服务相关策略，1代表是服务相关策略。 */
-  IsServiceLinkedRolePolicy?: number | null;
+  IsServiceLinkedRolePolicy?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1355,9 +1355,9 @@ declare interface GetUserResponse {
   /** 邮箱 */
   Email?: string;
   /** 最近一次登录ip */
-  RecentlyLoginIP?: string | null;
+  RecentlyLoginIP?: string;
   /** 最近一次登录时间 */
-  RecentlyLoginTime?: string | null;
+  RecentlyLoginTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1489,9 +1489,9 @@ declare interface ListEntitiesForPolicyRequest {
 
 declare interface ListEntitiesForPolicyResponse {
   /** 实体总数 */
-  TotalNum?: number | null;
+  TotalNum?: number;
   /** 实体列表 */
-  List?: AttachEntityOfPolicy[] | null;
+  List?: AttachEntityOfPolicy[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1569,7 +1569,7 @@ declare interface ListPoliciesResponse {
   /** 策略数组，数组每个成员包括 policyId、policyName、addTime、type、description、 createMode 字段。其中： policyId：策略 id policyName：策略名addTime：策略创建时间type：1 表示自定义策略，2 表示预设策略 description：策略描述 createMode：1 表示按业务权限创建的策略，其他值表示可以查看策略语法和通过策略语法更新策略Attachments: 关联的用户数ServiceType: 策略关联的产品IsAttached: 当需要查询标记实体是否已经关联策略时不为null。0表示未关联策略，1表示已关联策略 */
   List?: StrategyInfo[];
   /** 保留字段 */
-  ServiceTypeList?: string[] | null;
+  ServiceTypeList?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1581,7 +1581,7 @@ declare interface ListPolicyVersionsRequest {
 
 declare interface ListPolicyVersionsResponse {
   /** 策略版本列表 */
-  Versions?: PolicyVersionItem[] | null;
+  Versions?: PolicyVersionItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

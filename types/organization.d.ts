@@ -1335,6 +1335,8 @@ declare interface CreateRoleConfigurationResponse {
 declare interface CreateSCIMCredentialRequest {
   /** 空间ID。z-前缀开头，后面是12位随机数字/小写字母 */
   ZoneId: string;
+  /** 过期时间（秒），最小1小时，最大99年。如果不传则默认一年过期 */
+  ExpireDuration?: number;
 }
 
 declare interface CreateSCIMCredentialResponse {

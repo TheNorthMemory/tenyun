@@ -131,7 +131,7 @@ declare interface IncrementalMigrationStrategyInfo {
   /** 源站类型。取值有：HTTP：HTTP 源。 */
   OriginType?: string;
   /** 回源源站配置。 */
-  HttpOriginConfig?: IncrementalMigrationHttpOriginConfig | null;
+  HttpOriginConfig?: IncrementalMigrationHttpOriginConfig;
 }
 
 /** 排序依据。 */

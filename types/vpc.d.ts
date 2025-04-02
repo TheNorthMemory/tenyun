@@ -1578,6 +1578,24 @@ declare interface NatGatewayDestinationIpPortTranslationNatRule {
   CreatedTime?: string | null;
 }
 
+/** nat网关流量监控明细。 */
+declare interface NatGatewayFlowMonitorDetail {
+  /** 来源`IP`。 */
+  PrivateIpAddress?: string;
+  /** 入包量。 */
+  InPkg?: number;
+  /** 出包量。 */
+  OutPkg?: number;
+  /** 入流量，单位：`Byte`。 */
+  InTraffic?: number;
+  /** 出流量，单位：`Byte`。 */
+  OutTraffic?: number;
+  /** 并发连接数。仅标准型nat支持此参数。 */
+  ConcurrentConnectionCount?: number;
+  /** 新建连接速率。仅标准型nat支持此参数。 */
+  NewConnectionRate?: number;
+}
+
 /** NAT地域地区对象 */
 declare interface NatRegionInfoWithArea {
 }
@@ -6224,6 +6242,30 @@ declare interface DescribeNatGatewayDirectConnectGatewayRouteResponse {
   RequestId?: string;
 }
 
+declare interface DescribeNatGatewayFlowMonitorDetailRequest {
+  /** 时间点。表示要查询的时刻。聚合粒度为60、300时，会查询最近一个整分钟开始的聚合周期；聚合粒度为3600时，会查询最近一个整点开始的聚合周期；聚合粒度为86400时，会查询最近一个整天开始的聚合周期。形如：`2019-03-24T10:51:23+08:00`。 */
+  TimePoint: string;
+  /** NAT网关的ID，形如：`nat-ig8xpno8`。 */
+  NatGatewayId: string;
+  /** 展示排序靠前的数据。默认值：10，表示默认展示排序前 10 的数据。最大值：100。 */
+  TopN?: number;
+  /** 排序字段。支持：入包量`InPkg`、出包量`OutPkg`、入流量`InTraffic`、出流量`OutTraffic`，标准型nat额外支持 并发连接数`ConcurrentConnectionCount` 、新建连接速率`NewConnectionRate`。默认值`OutTraffic`。 */
+  OrderField?: string;
+  /** 聚合时间粒度。支持：60、300、3600、86400，即按照1分钟、5分钟、1小时、1天进行聚合查询。 */
+  AggregationTimeRange?: number;
+  /** 是否查询全部指标。默认值：True，表示查询全部指标。 */
+  AllMetricMode?: boolean;
+}
+
+declare interface DescribeNatGatewayFlowMonitorDetailResponse {
+  /** 符合条件的对象数。 */
+  TotalCount?: number;
+  /** 网关流量监控明细。 */
+  NatGatewayFlowMonitorDetailSet?: NatGatewayFlowMonitorDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeNatGatewaySourceIpTranslationNatRulesRequest {
   /** NAT网关统一 ID，形如：`nat-123xx454`。 */
   NatGatewayId: string;
@@ -9891,6 +9933,8 @@ declare interface Vpc {
   DescribeNatGatewayDestinationIpPortTranslationNatRules(data?: DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse>;
   /** 查询专线绑定NAT路由 {@link DescribeNatGatewayDirectConnectGatewayRouteRequest} {@link DescribeNatGatewayDirectConnectGatewayRouteResponse} */
   DescribeNatGatewayDirectConnectGatewayRoute(data: DescribeNatGatewayDirectConnectGatewayRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatGatewayDirectConnectGatewayRouteResponse>;
+  /** 查询nat网关流控明细 {@link DescribeNatGatewayFlowMonitorDetailRequest} {@link DescribeNatGatewayFlowMonitorDetailResponse} */
+  DescribeNatGatewayFlowMonitorDetail(data: DescribeNatGatewayFlowMonitorDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatGatewayFlowMonitorDetailResponse>;
   /** 查询NAT网关SNAT转发规则 {@link DescribeNatGatewaySourceIpTranslationNatRulesRequest} {@link DescribeNatGatewaySourceIpTranslationNatRulesResponse} */
   DescribeNatGatewaySourceIpTranslationNatRules(data: DescribeNatGatewaySourceIpTranslationNatRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatGatewaySourceIpTranslationNatRulesResponse>;
   /** 查询NAT网关 {@link DescribeNatGatewaysRequest} {@link DescribeNatGatewaysResponse} */

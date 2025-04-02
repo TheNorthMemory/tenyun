@@ -132,6 +132,10 @@ declare interface DatasourceInfo {
   DbTypeName?: string | null;
   /** 开启vpc */
   UseVPC?: boolean | null;
+  /** 所属人ID */
+  Owner?: string | null;
+  /** 所属人名称 */
+  OwnerName?: string | null;
 }
 
 /** 数据源详情列表 */
@@ -302,6 +306,12 @@ declare interface Project {
   ManagePlatform?: string | null;
   /** 定制化参数 */
   ConfigList?: ProjectConfigList[] | null;
+  /** 创建人 */
+  CreatedUserName?: string | null;
+  /** 所属人id */
+  Owner?: string | null;
+  /** 所属人 */
+  OwnerName?: string | null;
 }
 
 /** 定制化查询 */
@@ -943,6 +953,10 @@ declare interface DescribeUserProjectListRequest {
   PageNo?: number;
   /** 无 */
   PageSize?: number;
+  /** 是否过滤掉企业管理员 */
+  IsFilterPerAuthUser?: boolean;
+  /** 是否过滤掉当前用户 */
+  IsFilterCurrentUser?: boolean;
 }
 
 declare interface DescribeUserProjectListResponse {
@@ -997,6 +1011,10 @@ declare interface DescribeUserRoleProjectListRequest {
   ProjectId: number;
   /** 是否只获取绑定企微应用的 */
   IsOnlyBindAppUser?: boolean;
+  /** 是否获取全部数据 */
+  AllPage?: boolean;
+  /** 角色编码 */
+  RoleCode?: string;
 }
 
 declare interface DescribeUserRoleProjectListResponse {

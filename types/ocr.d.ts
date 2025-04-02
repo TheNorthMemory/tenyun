@@ -348,44 +348,6 @@ declare interface DetectedWords {
   Character: string;
 }
 
-/** 文档元素字段 */
-declare interface DocumentElement {
-  /** 文档元素索引 */
-  Index?: number | null;
-  /** 元素类型，包括paragraph、table、formula、figure、title、header、footer、figure_text */
-  Type?: string | null;
-  /** 元素内容，当type为figure或formula(公式识别关闭)时该字段内容为图片的位置 */
-  Text?: string | null;
-  /** 元素坐标，左上角(x1, y1)，右上角(x2, y2)，右下角(x3, y3)，左下角(x4, y4) */
-  Polygon?: Polygon | null;
-  /** 元素层级 */
-  Level?: number | null;
-  /** 入参开启EnableInsetImage后返回，表示在InsetImagePackage中的内嵌图片名称 */
-  InsetImageName?: string | null;
-  /** 嵌套的文档元素信息，一般包含的是文档内嵌入图片的文字识别结果 */
-  Elements?: DocumentElement[] | null;
-}
-
-/** 单页文档识别的内容 */
-declare interface DocumentRecognizeInfo {
-  /** 输入PDF文件的页码，从1开始。输入图片的话值始终为1 */
-  PageNumber?: number | null;
-  /** 旋转角度 */
-  Angle?: number | null;
-  /** AI算法识别处理后的图片高度 */
-  Height?: number | null;
-  /** AI算法识别处理后的图片宽度 */
-  Width?: number | null;
-  /** 图片的原始高度，输入PDF文件则表示单页PDF转图片之后的图片高度 */
-  OriginHeight?: number | null;
-  /** 图片的原始宽度，输入PDF文件则表示单页PDF转图片之后的图片宽度 */
-  OriginWidth?: number | null;
-  /** 文档元素信息 */
-  Elements?: DocumentElement[] | null;
-  /** 旋转角度 */
-  RotatedAngle?: number | null;
-}
-
 /** 识别出的字段 */
 declare interface DutyPaidProofInfo {
   /** 识别出的字段名称(关键字)，支持以下字段：税号 、纳税人识别号 、纳税人名称 、金额合计大写 、金额合计小写 、填发日期 、税务机关 、填票人。 */
@@ -1656,12 +1618,6 @@ declare interface RailwayTicketInfo {
   UnifiedSocialCreditCodeOfPurchaser?: string;
   /** 原发票号码 */
   NumberOfOriginalInvoice?: string;
-}
-
-/** ReconstructDocument配置选项 */
-declare interface ReconstructDocumentConfig {
-  /** 生成的Markdown中是否嵌入图片 */
-  EnableInsetImage?: boolean;
 }
 
 /** 矩形坐标 */
@@ -4752,32 +4708,6 @@ declare interface RecognizeValidIDCardOCRResponse {
   RequestId?: string;
 }
 
-declare interface ReconstructDocumentRequest {
-  /** PDF,Image */
-  FileType: string;
-  /** 图片的 Base64 值。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经Base64编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。 */
-  FileBase64?: string;
-  /** 图片的 Url 地址。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经 Base64 编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  FileUrl?: string;
-  /** 当传入文件是PDF类型（IsPdf=true）时，用来指定pdf识别的起始页码，识别的页码包含当前值。 */
-  FileStartPageNumber?: number;
-  /** 当传入文件是PDF类型（IsPdf=true）时，用来指定pdf识别的结束页码，识别的页码包含当前值。单次调用，最多支持10页pdf的智能识别。 */
-  FileEndPageNumber?: number;
-  /** 配置选项，支持配置是否在生成的Markdown中是否嵌入图片 */
-  Config?: ReconstructDocumentConfig;
-}
-
-declare interface ReconstructDocumentResponse {
-  /** 识别生成的Markdown文件base64编码的字符串 */
-  MarkdownBase64?: string | null;
-  /** 输入文件中嵌入的图片放在一个文件夹中打包为.zip压缩文件，识别生成的Markdown文件通过路径关联插入本文件夹中的图片。 */
-  InsetImagePackage?: string | null;
-  /** 输入文件中嵌入的图片中文字内容的识别结果 */
-  DocumentRecognizeInfo?: DocumentRecognizeInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ResidenceBookletOCRRequest {
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -5517,8 +5447,6 @@ declare interface Ocr {
   RecognizeTravelCardOCR(data?: RecognizeTravelCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTravelCardOCRResponse>;
   /** 有效身份证件识别（鉴伪版） {@link RecognizeValidIDCardOCRRequest} {@link RecognizeValidIDCardOCRResponse} */
   RecognizeValidIDCardOCR(data?: RecognizeValidIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeValidIDCardOCRResponse>;
-  /** 智能文档识别 {@link ReconstructDocumentRequest} {@link ReconstructDocumentResponse} */
-  ReconstructDocument(data: ReconstructDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<ReconstructDocumentResponse>;
   /** 户口本识别 {@link ResidenceBookletOCRRequest} {@link ResidenceBookletOCRResponse} */
   ResidenceBookletOCR(data?: ResidenceBookletOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ResidenceBookletOCRResponse>;
   /** 网约车驾驶证识别 {@link RideHailingDriverLicenseOCRRequest} {@link RideHailingDriverLicenseOCRResponse} */
