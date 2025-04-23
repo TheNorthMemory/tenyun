@@ -646,7 +646,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   cdwch: Cdwch,
   /** {@link Cdwdoris 腾讯云数据仓库 TCHouse-D} */
   cdwdoris: Cdwdoris,
-  /** {@link Cdwpg 云数据仓库 PostgreSQL} */
+  /** {@link Cdwpg 腾讯云数据仓库TCHouse-P} */
   cdwpg: Cdwpg,
   /** {@link Cdz 专属可用区} */
   cdz: Cdz,

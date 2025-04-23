@@ -620,6 +620,10 @@ declare interface RegionInfo {
   IsInternationalSite?: number;
   /** 桶 */
   Bucket?: string;
+  /** 存算分离集群数 */
+  SSCCount?: number;
+  /** 是否开通存算分离 */
+  EnableSSC?: boolean;
 }
 
 /** 资源规格描述信息 */

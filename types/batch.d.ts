@@ -184,27 +184,27 @@ declare interface ComputeNodeMetrics {
 
 /** 描述了数据盘的信息 */
 declare interface DataDisk {
-  /** 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[存储概述](https://cloud.tencent.com/document/product/213/4952)。默认值为0，表示不购买数据盘。更多限制详见产品文档。 */
+  /** 数据盘大小，单位：GiB。最小调整步长为10GiB，不同数据盘类型取值范围不同，具体限制详见：[存储概述](https://cloud.tencent.com/document/product/213/4952)。默认值为0，表示不购买数据盘。更多限制详见产品文档。 */
   DiskSize: number;
   /** 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：LOCAL_BASIC：本地硬盘 LOCAL_SSD：本地SSD硬盘LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定CLOUD_BASIC：普通云硬盘 CLOUD_PREMIUM：高性能云硬盘CLOUD_SSD：SSD云硬盘 CLOUD_HSSD：增强型SSD云硬盘 CLOUD_TSSD：极速型SSD云硬盘CLOUD_BSSD：通用型SSD云硬盘默认取值：LOCAL_BASIC。该参数对`ResizeInstanceDisk`接口无效。 */
   DiskType?: string;
   /** 数据盘ID。该参数目前仅用于`DescribeInstances`等查询类接口的返回参数，不可用于`RunInstances`等写接口的入参。 */
   DiskId?: string;
-  /** 数据盘是否随子机销毁。取值范围：true：子机销毁时，销毁数据盘，只支持按小时后付费云盘 false：子机销毁时，保留数据盘 默认取值：true 该参数目前仅用于 `RunInstances` 接口。 */
+  /** 数据盘是否随子机销毁。取值范围：true：子机销毁时，销毁数据盘，只支持按小时后付费云盘false：子机销毁时，保留数据盘默认取值：true 该参数目前仅用于 `RunInstances` 接口。 */
   DeleteWithInstance?: boolean;
   /** 数据盘快照ID。选择的数据盘快照大小需小于数据盘大小。 */
   SnapshotId?: string;
-  /** 数据盘是加密。取值范围：true：加密 false：不加密 默认取值：false 该参数目前仅用于 `RunInstances` 接口。 */
+  /** 数据盘是否加密。取值范围：true：加密false：不加密默认取值：false该参数目前仅用于 `RunInstances` 接口。 */
   Encrypt?: boolean;
   /** 自定义CMK对应的ID，取值为UUID或者类似kms-abcd1234。用于加密云盘。该参数目前仅用于 `RunInstances` 接口。 */
   KmsKeyId?: string;
-  /** 云硬盘性能，单位：MB/s */
+  /** 云硬盘性能，单位：MiB/s。使用此参数可给云硬盘购买额外的性能。当前仅支持极速型云盘（CLOUD_TSSD）和增强型SSD云硬盘（CLOUD_HSSD） */
   ThroughputPerformance?: number;
   /** 所属的独享集群ID。 */
   CdcId?: string;
   /** 突发性能 注：内测中。 */
   BurstPerformance?: boolean;
-  /** 磁盘名称，长度不超过128 个字符。该参数正在邀测中，暂未开放使用。 */
+  /** 磁盘名称，长度不超过128 个字符。 */
   DiskName?: string;
 }
 
@@ -380,7 +380,7 @@ declare interface InstanceTypeQuotaItem {
   Zone?: string;
   /** 实例机型。 */
   InstanceType?: string;
-  /** 实例计费模式。取值范围： PREPAID：表示预付费，即包年包月POSTPAID_BY_HOUR：表示后付费，即按量计费CDHPAID：表示[专用宿主机](https://cloud.tencent.com/document/product/416)付费，即只对`专用宿主机`计费，不对`专用宿主机`上的实例计费。`SPOTPAID`：表示竞价实例付费。 */
+  /** 实例计费模式。取值范围： PREPAID：表示预付费，即包年包月POSTPAID_BY_HOUR：表示后付费，即按量计费CDHPAID：表示[专用宿主机](https://cloud.tencent.com/document/product/416)付费，即只对`专用宿主机`计费，不对`专用宿主机`上的实例计费。SPOTPAID：表示竞价实例付费。 */
   InstanceChargeType?: string;
   /** 网卡类型，例如：25代表25G网卡 */
   NetworkCard?: number;
@@ -432,7 +432,7 @@ declare interface InternetAccessible {
   InternetMaxBandwidthOut?: number;
   /** 是否分配公网IP。取值范围：true：表示分配公网IPfalse：表示不分配公网IP当公网带宽大于0Mbps时，可自由选择开通与否，默认开通公网IP；当公网带宽为0，则不允许分配公网IP。该参数仅在RunInstances接口中作为入参使用。 */
   PublicIpAssigned?: boolean;
-  /** 带宽包ID。可通过[`DescribeBandwidthPackages`](https://cloud.tencent.com/document/api/215/19209)接口返回值中的`BandwidthPackageId`获取。该参数仅在RunInstances接口中作为入参使用。 */
+  /** 带宽包ID。可通过[ DescribeBandwidthPackages ](https://cloud.tencent.com/document/api/215/19209)接口返回值中的`BandwidthPackageId`获取。该参数仅在RunInstances接口中作为入参使用。 */
   BandwidthPackageId?: string;
 }
 
@@ -688,9 +688,9 @@ declare interface SpotMarketOptions {
 declare interface StorageBlock {
   /** HDD本地存储类型，值为：LOCAL_PRO. */
   Type?: string;
-  /** HDD本地存储的最小容量 */
+  /** HDD本地存储的最小容量。单位：GiB。 */
   MinSize?: number;
-  /** HDD本地存储的最大容量 */
+  /** HDD本地存储的最大容量。单位：GiB。 */
   MaxSize?: number;
 }
 
@@ -700,11 +700,11 @@ declare interface SystemDisk {
   DiskType?: string;
   /** 系统盘ID。该参数目前仅用于`DescribeInstances`等查询类接口的返回参数，不可用于`RunInstances`等写接口的入参。 */
   DiskId?: string;
-  /** 系统盘大小，单位：GB。默认值为 50 */
+  /** 系统盘大小，单位：GiB。默认值为 50 */
   DiskSize?: number;
   /** 所属的独享集群ID。 */
   CdcId?: string;
-  /** 磁盘名称，长度不超过128 个字符。该参数正在邀测中，暂未开放使用。 */
+  /** 磁盘名称，长度不超过128 个字符。 */
   DiskName?: string;
 }
 
@@ -872,7 +872,7 @@ declare interface TaskView {
 declare interface VirtualPrivateCloud {
   /** 私有网络ID，形如`vpc-xxx`。有效的VpcId可通过登录[控制台](https://console.cloud.tencent.com/vpc/vpc?rid=1)查询；也可以调用接口 [DescribeVpcEx](/document/api/215/1372) ，从接口返回中的`unVpcId`字段获取。若在创建子机时VpcId与SubnetId同时传入`DEFAULT`，则强制使用默认vpc网络。 */
   VpcId: string;
-  /** 私有网络子网ID，形如`subnet-xxx`。有效的私有网络子网ID可通过登录[控制台](https://console.cloud.tencent.com/vpc/subnet?rid=1)查询；也可以调用接口 [DescribeSubnets](/document/api/215/15784) ，从接口返回中的`unSubnetId`字段获取。若在创建子机时SubnetId与VpcId同时传入`DEFAULT`，则强制使用默认vpc网络。 */
+  /** 私有网络子网ID，形如`subnet-xxx`。有效的私有网络子网ID可通过登录[控制台](https://console.cloud.tencent.com/vpc/subnet?rid=1)查询；也可以调用接口 [DescribeSubnets](https://cloud.tencent.com/document/product/215/15784) ，从接口返回中的`SubnetId `字段获取。若在创建子机时SubnetId与VpcId同时传入`DEFAULT`，则强制使用默认vpc网络。 */
   SubnetId: string;
   /** 是否用作公网网关。公网网关只有在实例拥有公网IP以及处于私有网络下时才能正常使用。取值范围：true：表示用作公网网关false：表示不作为公网网关默认取值：false。 */
   AsVpcGateway?: boolean;

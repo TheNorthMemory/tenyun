@@ -16,6 +16,16 @@ declare interface AndroidApp {
   CreateTime?: string;
   /** 用户 Id */
   UserId?: string;
+  /** 应用模式（NORMAL : 普通模式；ADVANCED : 高级模式） */
+  AppMode?: string;
+}
+
+/** 安卓应用Cos数据 */
+declare interface AndroidAppCosInfo {
+  /** 安卓应用ID */
+  AndroidAppId: string;
+  /** 应用名称（支持 apk 和 tgz 两种格式文件，当应用 AppMode 为 NORMAL 时，只支持上传 apk 类型文件，当应用 AppMode 为 ADVANCED 高级模式时，只支持上传 tgz 类型文件） */
+  FileName?: string;
 }
 
 /** 安卓应用版本信息 */
@@ -26,6 +36,8 @@ declare interface AndroidAppVersionInfo {
   State?: string;
   /** 安卓应用版本创建时间 */
   CreateTime?: string;
+  /** shell 命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效） */
+  Command?: string;
 }
 
 /** 安卓实例信息 */
@@ -56,6 +68,8 @@ declare interface AndroidInstance {
   Name?: string;
   /** 用户ID */
   UserId?: string;
+  /** 内网 IP */
+  PrivateIP?: string;
 }
 
 /** 安卓实例应用信息 */
@@ -112,6 +126,20 @@ declare interface AndroidInstanceTaskStatus {
   AndroidInstanceId?: string;
   /** 任务执行结果描述，针对某些任务，可以是可解析的 json */
   TaskResult?: string;
+  /** 任务类型 */
+  TaskType?: string;
+  /** 任务创建时间 */
+  CreateTime?: string;
+  /** 任务完成时间 */
+  CompleteTime?: string;
+}
+
+/** COS协议参数 */
+declare interface COSOptions {
+  /** 存储桶 */
+  Bucket: string;
+  /** 存储区域 */
+  Region: string;
 }
 
 /** 过滤 */
@@ -132,6 +160,18 @@ declare interface LabelRequirement {
   Values?: string[];
 }
 
+/** S3协议参数 */
+declare interface S3Options {
+  /** 存储节点 */
+  EndPoint: string;
+  /** 存储桶 */
+  Bucket: string;
+  /** 密钥 ID */
+  AccessKeyId: string;
+  /** 密钥 Key */
+  SecretAccessKey: string;
+}
+
 /** 同步安卓实例镜像信息 */
 declare interface SyncAndroidInstanceImage {
   /** 镜像 ID */
@@ -148,6 +188,30 @@ declare interface SyncExecuteCommandResult {
   Output?: string;
   /** 命令执行结果 */
   Status?: string;
+}
+
+declare interface BackUpAndroidInstanceToStorageRequest {
+  /** 安卓实例ID */
+  AndroidInstanceId: string;
+  /** 存储服务器类型，如 COS、S3。注意：使用 COS 和 S3 都将占用外网带宽。 */
+  StorageType: string;
+  /** 自定义对象Key */
+  ObjectKey: string;
+  /** 包含的路径，支持仅含一个通配符*，通配符不能出现在路径开始 */
+  Includes?: string[];
+  /** 需要排除路径，支持仅含一个通配符*，通配符不能出现在路径开始 */
+  Excludes?: string[];
+  /** COS协议选项 */
+  COSOptions?: COSOptions;
+  /** S3存储协议选项 */
+  S3Options?: S3Options;
+}
+
+declare interface BackUpAndroidInstanceToStorageResponse {
+  /** 实例任务 ID */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface ConnectAndroidInstanceRequest {
@@ -180,6 +244,38 @@ declare interface CopyAndroidInstanceRequest {
 declare interface CopyAndroidInstanceResponse {
   /** 任务ID */
   TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAndroidAppRequest {
+  /** 安卓应用名字 */
+  Name: string;
+  /** 用户 Id */
+  UserId?: string;
+  /** 应用模式（NORMAL : 普通模式、只支持 apk 文件上传，为默认值；ADVANCED : 高级模式、只支持上传 tgz 文件 和 自定义 shell 命令执行） */
+  AppMode?: string;
+}
+
+declare interface CreateAndroidAppResponse {
+  /** 应用ID */
+  AndroidAppId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAndroidAppVersionRequest {
+  /** 应用ID */
+  AndroidAppId: string;
+  /** 应用包下载地址 */
+  DownloadUrl?: string;
+  /** shell 命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效） */
+  Command?: string;
+}
+
+declare interface CreateAndroidAppVersionResponse {
+  /** 应用版本 */
+  AndroidAppVersion?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -280,6 +376,34 @@ declare interface CreateAndroidInstancesScreenshotResponse {
   RequestId?: string;
 }
 
+declare interface CreateCosCredentialRequest {
+  /** Cos 密钥类型， Mobile 移动端, PC 桌面, AndroidApp 安卓应用 */
+  CosType: string;
+  /** 云手机 Cos 数据 */
+  AndroidAppCosInfo?: AndroidAppCosInfo;
+}
+
+declare interface CreateCosCredentialResponse {
+  /** Cos SecretID */
+  SecretID?: string;
+  /** Cos SecretKey */
+  SecretKey?: string;
+  /** Cos Session */
+  SessionToken?: string;
+  /** Cos Bucket */
+  CosBucket?: string;
+  /** Cos Region */
+  CosRegion?: string;
+  /** Cos 操作路径 */
+  Path?: string;
+  /** Cos 密钥的起始时间 */
+  StartTime?: number;
+  /** Cos 密钥的失效时间 */
+  ExpiredTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSessionRequest {
   /** 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变） */
   UserId: string;
@@ -326,6 +450,28 @@ declare interface CreateSessionResponse {
   RoleNumber?: string;
   /** 【互动云游】角色；Player表示玩家；Viewer表示观察者 */
   Role?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAndroidAppRequest {
+  /** 应用ID */
+  AndroidAppId: string;
+}
+
+declare interface DeleteAndroidAppResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAndroidAppVersionRequest {
+  /** 安卓应用 Id */
+  AndroidAppId: string;
+  /** 安卓应用版本 */
+  AndroidAppVersion: string;
+}
+
+declare interface DeleteAndroidAppVersionResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -423,13 +569,21 @@ declare interface DescribeAndroidInstanceLabelsResponse {
 }
 
 declare interface DescribeAndroidInstanceTasksStatusRequest {
-  /** 任务ID列表 */
-  TaskIds: string[];
+  /** 任务 ID 列表 */
+  TaskIds?: string[];
+  /** 条件过滤器 */
+  Filter?: Filter[];
+  /** 偏移量，默认为 0 */
+  Offset?: number;
+  /** 限制量，默认为20，最大值为100 */
+  Limit?: number;
 }
 
 declare interface DescribeAndroidInstanceTasksStatusResponse {
   /** 任务状态集合 */
   TaskStatusSet?: AndroidInstanceTaskStatus[];
+  /** 任务总数量 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -522,6 +676,36 @@ declare interface InstallAndroidInstancesAppResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAndroidAppRequest {
+  /** 安卓应用 Id */
+  AndroidAppId: string;
+  /** 安卓应用名称 */
+  Name: string;
+  /** 用户 Id */
+  UserId?: string;
+}
+
+declare interface ModifyAndroidAppResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAndroidAppVersionRequest {
+  /** 安卓应用 Id */
+  AndroidAppId: string;
+  /** 安卓应用版本 Id */
+  AndroidAppVersion: string;
+  /** 安卓应用版本名称 */
+  AndroidAppVersionName: string;
+  /** shell 命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效） */
+  Command?: string;
+}
+
+declare interface ModifyAndroidAppVersionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAndroidInstanceInformationRequest {
   /** 安卓实例 ID */
   AndroidInstanceId: string;
@@ -537,12 +721,16 @@ declare interface ModifyAndroidInstanceInformationResponse {
 declare interface ModifyAndroidInstanceResolutionRequest {
   /** 安卓实例 ID */
   AndroidInstanceId: string;
-  /** 分辨率宽度。建议按照以下数值设置，避免出现性能不足问题：实例类型为单开（A1）、双开（A2）、三开（ A3）：建议设置为 1080实例类型为 四开（A4） 及以上：建议设置为 720 */
+  /** 分辨率宽度。建议按照以下数值设置，避免出现性能不足问题：实例类型为单开（A1）：建议设置为 1080实例类型为双开（A2） 及以上：建议设置为 720 */
   Width: number;
-  /** 分辨率高度。建议按照以下数值设置，避免出现性能不足问题：实例类型为单开（A1）、双开（A2）、三开（ A3）：建议设置为 1920实例类型为 四开（A4） 及以上：建议设置为 1280 */
+  /** 分辨率高度。建议按照以下数值设置，避免出现性能不足问题：实例类型为单开（A1）：建议设置为 1920实例类型为双开（A2） 及以上：建议设置为 1280 */
   Height: number;
   /** 每英寸像素点。如果不填，系统将会计算一个合理的数值。修改 DPI 可能会导致 App 异常退出，请谨慎使用！分辨率为 720x1280：建议配置为 320分辨率为 1080x1920：建议配置为 480 */
   DPI?: number;
+  /** 帧率。ResolutionType 为 PHYSICAL 时才会修改帧率。另外建议按照以下数值设置，避免出现性能不足问题： 实例类型为单开（A1）：建议设置为 60 实例类型为双开（A2） 及以上：建议设置为 30 */
+  FPS?: number;
+  /** 修改分辨率类型。修改物理分辨率，需要重启才能生效。OVERRIDE：默认值，修改覆盖（显示）分辨率PHYSICAL：修改物理分辨率 */
+  ResolutionType?: string;
 }
 
 declare interface ModifyAndroidInstanceResolutionResponse {
@@ -560,6 +748,26 @@ declare interface ModifyAndroidInstancesLabelsRequest {
 }
 
 declare interface ModifyAndroidInstancesLabelsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAndroidInstancesResolutionRequest {
+  /** 安卓实例 ID 列表 */
+  AndroidInstanceIds: string[];
+  /** 分辨率宽度。建议按照以下数值设置，避免出现性能不足问题：实例类型为单开（A1）：建议设置为 1080实例类型为双开（A2） 及以上：建议设置为 720 */
+  Width: number;
+  /** 分辨率高度。建议按照以下数值设置，避免出现性能不足问题：实例类型为单开（A1）：建议设置为 1920实例类型为双开（A2） 及以上：建议设置为 1280 */
+  Height: number;
+  /** 每英寸像素点。分辨率为 720x1280：建议配置为 320分辨率为 1080x1920：建议配置为 480 */
+  DPI: number;
+  /** 帧率。ResolutionType 为 PHYSICAL 时才会修改帧率。另外建议按照以下数值设置，避免出现性能不足问题：实例类型为单开（A1）：建议设置为 60实例类型为双开（A2） 及以上：建议设置为 30 */
+  FPS?: number;
+  /** 修改分辨率类型。修改物理分辨率，需要重启才能生效。OVERRIDE：默认值，修改覆盖（显示）分辨率PHYSICAL：修改物理分辨率 */
+  ResolutionType?: string;
+}
+
+declare interface ModifyAndroidInstancesResolutionResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -612,6 +820,26 @@ declare interface RestartAndroidInstancesAppRequest {
 }
 
 declare interface RestartAndroidInstancesAppResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RestoreAndroidInstanceFromStorageRequest {
+  /** 安卓实例ID */
+  AndroidInstanceId: string;
+  /** 自定义备份对象Key */
+  ObjectKey: string;
+  /** 存储服务器类型，如 COS、S3。注意：使用 COS 和 S3 都将占用外网带宽。 */
+  StorageType: string;
+  /** COS协议选项 */
+  COSOptions?: COSOptions;
+  /** S3存储协议选项 */
+  S3Options?: S3Options;
+}
+
+declare interface RestoreAndroidInstanceFromStorageResponse {
+  /** 实例任务 ID */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -821,10 +1049,16 @@ declare interface UploadFileToAndroidInstancesResponse {
 /** {@link Gs 云游戏} */
 declare interface Gs {
   (): Versions;
+  /** 备份安卓实例到指定存储 {@link BackUpAndroidInstanceToStorageRequest} {@link BackUpAndroidInstanceToStorageResponse} */
+  BackUpAndroidInstanceToStorage(data: BackUpAndroidInstanceToStorageRequest, config?: AxiosRequestConfig): AxiosPromise<BackUpAndroidInstanceToStorageResponse>;
   /** 连接安卓实例 {@link ConnectAndroidInstanceRequest} {@link ConnectAndroidInstanceResponse} */
   ConnectAndroidInstance(data: ConnectAndroidInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ConnectAndroidInstanceResponse>;
   /** 复制安卓实例 {@link CopyAndroidInstanceRequest} {@link CopyAndroidInstanceResponse} */
   CopyAndroidInstance(data: CopyAndroidInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CopyAndroidInstanceResponse>;
+  /** 创建安卓应用 {@link CreateAndroidAppRequest} {@link CreateAndroidAppResponse} */
+  CreateAndroidApp(data: CreateAndroidAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidAppResponse>;
+  /** 创建安卓应用版本 {@link CreateAndroidAppVersionRequest} {@link CreateAndroidAppVersionResponse} */
+  CreateAndroidAppVersion(data: CreateAndroidAppVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidAppVersionResponse>;
   /** 创建安卓实例镜像 {@link CreateAndroidInstanceImageRequest} {@link CreateAndroidInstanceImageResponse} */
   CreateAndroidInstanceImage(data: CreateAndroidInstanceImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidInstanceImageResponse>;
   /** 创建安卓实例标签 {@link CreateAndroidInstanceLabelRequest} {@link CreateAndroidInstanceLabelResponse} */
@@ -837,8 +1071,14 @@ declare interface Gs {
   CreateAndroidInstances(data: CreateAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidInstancesResponse>;
   /** 安卓实例截图 {@link CreateAndroidInstancesScreenshotRequest} {@link CreateAndroidInstancesScreenshotResponse} */
   CreateAndroidInstancesScreenshot(data: CreateAndroidInstancesScreenshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidInstancesScreenshotResponse>;
+  /** 创建 Cos 临时密钥 {@link CreateCosCredentialRequest} {@link CreateCosCredentialResponse} */
+  CreateCosCredential(data: CreateCosCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosCredentialResponse>;
   /** 创建会话 {@link CreateSessionRequest} {@link CreateSessionResponse} */
   CreateSession(data: CreateSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSessionResponse>;
+  /** 删除安卓应用 {@link DeleteAndroidAppRequest} {@link DeleteAndroidAppResponse} */
+  DeleteAndroidApp(data: DeleteAndroidAppRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAndroidAppResponse>;
+  /** 删除安卓应用版本 {@link DeleteAndroidAppVersionRequest} {@link DeleteAndroidAppVersionResponse} */
+  DeleteAndroidAppVersion(data: DeleteAndroidAppVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAndroidAppVersionResponse>;
   /** 删除安卓实例镜像 {@link DeleteAndroidInstanceImagesRequest} {@link DeleteAndroidInstanceImagesResponse} */
   DeleteAndroidInstanceImages(data: DeleteAndroidInstanceImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAndroidInstanceImagesResponse>;
   /** 删除安卓实例标签 {@link DeleteAndroidInstanceLabelRequest} {@link DeleteAndroidInstanceLabelResponse} */
@@ -852,7 +1092,7 @@ declare interface Gs {
   /** 查询安卓实例标签 {@link DescribeAndroidInstanceLabelsRequest} {@link DescribeAndroidInstanceLabelsResponse} */
   DescribeAndroidInstanceLabels(data?: DescribeAndroidInstanceLabelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAndroidInstanceLabelsResponse>;
   /** 查询安卓实例任务状态 {@link DescribeAndroidInstanceTasksStatusRequest} {@link DescribeAndroidInstanceTasksStatusResponse} */
-  DescribeAndroidInstanceTasksStatus(data: DescribeAndroidInstanceTasksStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAndroidInstanceTasksStatusResponse>;
+  DescribeAndroidInstanceTasksStatus(data?: DescribeAndroidInstanceTasksStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAndroidInstanceTasksStatusResponse>;
   /** 查询安卓实例 {@link DescribeAndroidInstancesRequest} {@link DescribeAndroidInstancesResponse} */
   DescribeAndroidInstances(data?: DescribeAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAndroidInstancesResponse>;
   /** 获取并发总数和运行数 {@link DescribeInstancesCountRequest} {@link DescribeInstancesCountResponse} */
@@ -863,12 +1103,18 @@ declare interface Gs {
   ExecuteCommandOnAndroidInstances(data: ExecuteCommandOnAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteCommandOnAndroidInstancesResponse>;
   /** 安装安卓实例应用 {@link InstallAndroidInstancesAppRequest} {@link InstallAndroidInstancesAppResponse} */
   InstallAndroidInstancesApp(data: InstallAndroidInstancesAppRequest, config?: AxiosRequestConfig): AxiosPromise<InstallAndroidInstancesAppResponse>;
+  /** 修改安卓应用 {@link ModifyAndroidAppRequest} {@link ModifyAndroidAppResponse} */
+  ModifyAndroidApp(data: ModifyAndroidAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidAppResponse>;
+  /** 修改安卓应用版本 {@link ModifyAndroidAppVersionRequest} {@link ModifyAndroidAppVersionResponse} */
+  ModifyAndroidAppVersion(data: ModifyAndroidAppVersionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidAppVersionResponse>;
   /** 修改安卓实例信息 {@link ModifyAndroidInstanceInformationRequest} {@link ModifyAndroidInstanceInformationResponse} */
   ModifyAndroidInstanceInformation(data: ModifyAndroidInstanceInformationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidInstanceInformationResponse>;
   /** 修改安卓实例分辨率 {@link ModifyAndroidInstanceResolutionRequest} {@link ModifyAndroidInstanceResolutionResponse} */
   ModifyAndroidInstanceResolution(data: ModifyAndroidInstanceResolutionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidInstanceResolutionResponse>;
   /** 批量修改安卓实例的标签 {@link ModifyAndroidInstancesLabelsRequest} {@link ModifyAndroidInstancesLabelsResponse} */
   ModifyAndroidInstancesLabels(data: ModifyAndroidInstancesLabelsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidInstancesLabelsResponse>;
+  /** 批量修改安卓实例分辨率 {@link ModifyAndroidInstancesResolutionRequest} {@link ModifyAndroidInstancesResolutionResponse} */
+  ModifyAndroidInstancesResolution(data: ModifyAndroidInstancesResolutionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidInstancesResolutionResponse>;
   /** 批量修改安卓实例的用户ID {@link ModifyAndroidInstancesUserIdRequest} {@link ModifyAndroidInstancesUserIdResponse} */
   ModifyAndroidInstancesUserId(data: ModifyAndroidInstancesUserIdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidInstancesUserIdResponse>;
   /** 重启安卓实例 {@link RebootAndroidInstancesRequest} {@link RebootAndroidInstancesResponse} */
@@ -877,6 +1123,8 @@ declare interface Gs {
   ResetAndroidInstances(data: ResetAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ResetAndroidInstancesResponse>;
   /** 重启安卓实例应用 {@link RestartAndroidInstancesAppRequest} {@link RestartAndroidInstancesAppResponse} */
   RestartAndroidInstancesApp(data: RestartAndroidInstancesAppRequest, config?: AxiosRequestConfig): AxiosPromise<RestartAndroidInstancesAppResponse>;
+  /** 指定存储还原安卓实例 {@link RestoreAndroidInstanceFromStorageRequest} {@link RestoreAndroidInstanceFromStorageResponse} */
+  RestoreAndroidInstanceFromStorage(data: RestoreAndroidInstanceFromStorageRequest, config?: AxiosRequestConfig): AxiosPromise<RestoreAndroidInstanceFromStorageResponse>;
   /** 保存游戏存档 {@link SaveGameArchiveRequest} {@link SaveGameArchiveResponse} */
   SaveGameArchive(data: SaveGameArchiveRequest, config?: AxiosRequestConfig): AxiosPromise<SaveGameArchiveResponse>;
   /** 开机安卓实例 {@link StartAndroidInstancesRequest} {@link StartAndroidInstancesResponse} */

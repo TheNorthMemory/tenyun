@@ -17,7 +17,7 @@ declare interface AddInstanceResult {
 /** 高级选项设置 */
 declare interface AdvanceSettings {
   /** 子任务单机并发数限制，默认值为2 */
-  SubTaskConcurrency?: number | null;
+  SubTaskConcurrency?: number;
 }
 
 /** 亲和规则 */
@@ -255,33 +255,33 @@ declare interface ApplicationAttribute {
 /** 分页的应用描述信息字段 */
 declare interface ApplicationForPage {
   /** 应用ID */
-  ApplicationId?: string | null;
+  ApplicationId?: string;
   /** 应用名称 */
-  ApplicationName?: string | null;
+  ApplicationName?: string;
   /** 应用描述 */
   ApplicationDesc?: string | null;
   /** 应用类型 */
-  ApplicationType?: string | null;
+  ApplicationType?: string;
   /** 微服务类型 */
-  MicroserviceType?: string | null;
+  MicroserviceType?: string;
   /** 编程语言 */
-  ProgLang?: string | null;
+  ProgLang?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 应用资源类型 */
-  ApplicationResourceType?: string | null;
+  ApplicationResourceType?: string;
   /** 应用runtime类型 */
-  ApplicationRuntimeType?: string | null;
+  ApplicationRuntimeType?: string;
   /** Apigateway的serviceId */
-  ApigatewayServiceId?: string | null;
+  ApigatewayServiceId?: string;
   /** 应用备注名 */
   ApplicationRemarkName?: string | null;
   /** 服务配置信息列表 */
   ServiceConfigList?: ServiceConfig[] | null;
   /** IgnoreCreateImageRepository */
-  IgnoreCreateImageRepository?: boolean | null;
+  IgnoreCreateImageRepository?: boolean;
   /** Apm业务系统id */
   ApmInstanceId?: string | null;
   /** Apm业务系统Name */
@@ -291,15 +291,15 @@ declare interface ApplicationForPage {
   /** 应用微服务子类型 */
   MicroserviceSubType?: string | null;
   /** 应用编程语言类型 */
-  ProgramLanguage?: string | null;
+  ProgramLanguage?: string;
   /** 开发框架类型[SpringCloud，Dubbo，Go-GRPC，Other] */
-  FrameworkType?: string | null;
+  FrameworkType?: string;
   /** 注册配置治理信息 */
-  ServiceGovernanceConfig?: ServiceGovernanceConfig | null;
+  ServiceGovernanceConfig?: ServiceGovernanceConfig;
   /** 微服务类型列表 */
   MicroserviceTypeList?: string[] | null;
   /** 是否同时创建镜像仓库 */
-  CreateSameNameImageRepository?: boolean | null;
+  CreateSameNameImageRepository?: boolean;
 }
 
 /** 打散调度规则 */
@@ -363,9 +363,9 @@ declare interface BusinessLogConfig {
   /** 配置项关联部署组 */
   ConfigAssociatedGroupList?: BusinessLogConfigAssociatedGroup[];
   /** 是否开启filebeat高级配置开关 */
-  FilebeatConfigEnable?: boolean | null;
+  FilebeatConfigEnable?: boolean;
   /** close_timeout参数 */
-  FilebeatCloseTimeout?: number | null;
+  FilebeatCloseTimeout?: number;
 }
 
 /** 业务日志配置关联部署组信息 */
@@ -562,6 +562,8 @@ declare interface ClusterV2 {
   KuberneteNativeSecret?: string | null;
   /** 是否开启cls日志功能 */
   EnableLogCollection?: boolean;
+  /** 集群状态的原因 */
+  Reason?: string;
 }
 
 /** 通用选项 */
@@ -613,11 +615,11 @@ declare interface Config {
 /** ConfigMap可选项 */
 declare interface ConfigMapOption {
   /** - */
-  Key?: string | null;
+  Key?: string;
   /** - */
-  Path?: string | null;
+  Path?: string;
   /** - */
-  Mode?: string | null;
+  Mode?: string;
 }
 
 /** 配置项发布信息 */
@@ -761,21 +763,21 @@ declare interface ContainGroupResult {
 /** 返回容器的事件，比如 k8s deployment 或者 pod 的 events */
 declare interface ContainerEvent {
   /** 第一次出现的时间，以 ms 为单位的时间戳 */
-  FirstTimestamp: number | null;
+  FirstTimestamp?: number;
   /** 最后一次出现的时间，以 ms 为单位的时间戳 */
-  LastTimestamp: number | null;
+  LastTimestamp?: number;
   /** 级别 */
-  Type: string | null;
+  Type?: string;
   /** 资源类型 */
-  Kind: string | null;
+  Kind?: string;
   /** 资源名称 */
-  Name: string | null;
+  Name?: string;
   /** 内容 */
-  Reason: string | null;
+  Reason?: string;
   /** 详细描述 */
-  Message: string | null;
+  Message?: string;
   /** 出现次数 */
-  Count: number | null;
+  Count?: number;
 }
 
 /** 获取部署组 */
@@ -869,15 +871,15 @@ declare interface ContainerGroupDeploy {
 /** 容器部署组详情 */
 declare interface ContainerGroupDetail {
   /** 部署组ID */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 分组名称 */
-  GroupName?: string | null;
+  GroupName?: string;
   /** 实例总数 */
   InstanceNum?: number | null;
   /** 已启动实例总数 */
-  CurrentNum?: number | null;
+  CurrentNum?: number;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 镜像server */
   Server?: string | null;
   /** 镜像名，如/tsf/nginx */
@@ -885,21 +887,21 @@ declare interface ContainerGroupDetail {
   /** 镜像版本名称 */
   TagName?: string | null;
   /** 集群ID */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 集群名称 */
-  ClusterName?: string | null;
+  ClusterName?: string;
   /** 命名空间ID */
-  NamespaceId?: string | null;
+  NamespaceId?: string;
   /** 命名空间名称 */
-  NamespaceName?: string | null;
+  NamespaceName?: string;
   /** 应用ID */
-  ApplicationId?: string | null;
+  ApplicationId?: string;
   /** 负载均衡ip */
-  LbIp?: string | null;
+  LbIp?: string;
   /** 应用类型 */
-  ApplicationType?: string | null;
+  ApplicationType?: string;
   /** Service ip */
-  ClusterIp?: string | null;
+  ClusterIp?: string;
   /** NodePort端口，只有公网和NodePort访问方式才有值 */
   NodePort?: number | null;
   /** 最大分配的 CPU 核数，对应 K8S limit */
@@ -909,21 +911,21 @@ declare interface ContainerGroupDetail {
   /** 0:公网 1:集群内访问 2：NodePort */
   AccessType?: number | null;
   /** 更新方式：0:快速更新 1:滚动更新 */
-  UpdateType?: number | null;
+  UpdateType?: number;
   /** 更新间隔,单位秒 */
   UpdateIvl?: number | null;
   /** 端口数组对象 */
-  ProtocolPorts?: ProtocolPort[] | null;
+  ProtocolPorts?: ProtocolPort[];
   /** 环境变量数组对象 */
-  Envs?: Env[] | null;
+  Envs?: Env[];
   /** 应用名称 */
-  ApplicationName?: string | null;
+  ApplicationName?: string;
   /** pod错误信息描述 */
   Message?: string | null;
   /** 部署组状态 */
-  Status?: string | null;
+  Status?: string;
   /** 服务类型 */
-  MicroserviceType?: string | null;
+  MicroserviceType?: string;
   /** 初始分配的 CPU 核数，对应 K8S request */
   CpuRequest?: string | null;
   /** 初始分配的内存 MiB 数，对应 K8S request */
@@ -931,11 +933,11 @@ declare interface ContainerGroupDetail {
   /** 子网id */
   SubnetId?: string | null;
   /** 部署组资源类型 */
-  GroupResourceType?: string | null;
+  GroupResourceType?: string;
   /** 部署组实例个数 */
-  InstanceCount?: number | null;
+  InstanceCount?: number;
   /** 部署组更新时间戳 */
-  UpdatedTime?: number | null;
+  UpdatedTime?: number;
   /** kubernetes滚动更新策略的MaxSurge参数 */
   MaxSurge?: string | null;
   /** kubernetes滚动更新策略的MaxUnavailable参数 */
@@ -943,7 +945,7 @@ declare interface ContainerGroupDetail {
   /** 部署组健康检查设置 */
   HealthCheckSettings?: HealthCheckSettings | null;
   /** 允许PlainYamlDeploy */
-  AllowPlainYamlDeploy?: boolean | null;
+  AllowPlainYamlDeploy?: boolean;
   /** 是否不等于ServiceConfig */
   IsNotEqualServiceConfig?: boolean | null;
   /** 仓库名 */
@@ -977,7 +979,7 @@ declare interface ContainerGroupOther {
   /** 健康检查相关字段 */
   HealthCheckSettings?: HealthCheckSettings | null;
   /** 服务配置信息是否匹配 */
-  IsNotEqualServiceConfig?: boolean | null;
+  IsNotEqualServiceConfig?: boolean;
 }
 
 /** cos临时账号信息 */
@@ -1035,9 +1037,9 @@ declare interface CurvePoint {
 /** 自定义Pod调度规则 */
 declare interface CustomPodSchedule {
   /** - */
-  ForceSchedule?: ForceSchedule | null;
+  ForceSchedule?: ForceSchedule;
   /** - */
-  TrySchedule?: TrySchedule | null;
+  TrySchedule?: TrySchedule;
 }
 
 /** 自定义容忍调度规则列表 */
@@ -1159,7 +1161,7 @@ declare interface ExclusiveInstance {
 /** 容器 env 的 FieldRef */
 declare interface FieldRef {
   /** k8s 的 FieldPath */
-  FieldPath?: string | null;
+  FieldPath?: string;
 }
 
 /** 文件配置项 */
@@ -1239,31 +1241,31 @@ declare interface Filter {
 /** 强制调度配置 */
 declare interface ForceSchedule {
   /** - */
-  AffinityList?: Affinity[] | null;
+  AffinityList?: Affinity[];
   /** - */
-  AntiAffinityList?: Affinity[] | null;
+  AntiAffinityList?: Affinity[];
 }
 
 /** 网关分组简单信息 */
 declare interface GatewayApiGroupVo {
   /** 分组ID */
-  GroupId: string | null;
+  GroupId?: string;
   /** 分组名称 */
-  GroupName: string | null;
+  GroupName?: string;
   /** 分组下API个数 */
-  GroupApiCount: number | null;
+  GroupApiCount?: number;
   /** 分组API列表 */
-  GroupApis: GatewayGroupApiVo[] | null;
+  GroupApis?: GatewayGroupApiVo[];
   /** 网关实例的类型 */
-  GatewayInstanceType: string | null;
+  GatewayInstanceType?: string;
   /** 网关实例ID */
-  GatewayInstanceId: string | null;
+  GatewayInstanceId?: string;
 }
 
 /** TSF Envoy网关服务配置 */
 declare interface GatewayConfig {
   /** 服务名称 */
-  Name: string | null;
+  Name: string;
 }
 
 /** api分组已绑定的网关部署组 */
@@ -1341,23 +1343,23 @@ declare interface GatewayPluginBoundParam {
 /** 网关部署组、分组、API列表数据 */
 declare interface GatewayVo {
   /** 网关部署组ID */
-  GatewayDeployGroupId: string | null;
+  GatewayDeployGroupId?: string;
   /** 网关部署组名称 */
-  GatewayDeployGroupName: string | null;
+  GatewayDeployGroupName?: string;
   /** API 分组个数 */
-  GroupNum: number | null;
+  GroupNum?: number;
   /** API 分组列表 */
-  Groups: GatewayApiGroupVo[] | null;
+  Groups?: GatewayApiGroupVo[];
 }
 
 /** API监控明细数据 */
 declare interface GroupApiUseStatistics {
   /** 总调用数 */
-  TopStatusCode: ApiUseStatisticsEntity[] | null;
+  TopStatusCode?: ApiUseStatisticsEntity[];
   /** 平均错误率 */
-  TopTimeCost: ApiUseStatisticsEntity[] | null;
+  TopTimeCost?: ApiUseStatisticsEntity[];
   /** 分位值对象 */
-  Quantile: QuantileEntity | null;
+  Quantile?: QuantileEntity;
 }
 
 /** 部署组容器信息 */
@@ -1835,13 +1837,13 @@ declare interface InvocationIndicator {
 /** 监控数据散点图 */
 declare interface InvocationMetricScatterPlot {
   /** 时间轴截止时间，GMT，精确到毫秒 */
-  EndTime: number;
+  EndTime?: number;
   /** 时间粒度 */
-  StartTime: number;
+  StartTime?: number;
   /** 时间轴开始时间，GMT，精确到毫秒 */
-  Period: number;
+  Period?: number;
   /** 多值数据点集合 */
-  DataPoints: MultiValueDataPoints[] | null;
+  DataPoints?: MultiValueDataPoints[];
 }
 
 /** DescribeJvmMonitor查询jvm监控数据接口返回数据封装 */
@@ -1955,9 +1957,9 @@ declare interface LaneInfo {
 /** 泳道分页查询 */
 declare interface LaneInfos {
   /** 总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 泳道信息列表 */
-  Content?: LaneInfo[] | null;
+  Content?: LaneInfo[];
 }
 
 /** 泳道规则 */
@@ -2193,7 +2195,7 @@ declare interface MsInstance {
 /** 多值数据 */
 declare interface MultiValue {
   /** 数据点 */
-  Values?: number[] | null;
+  Values?: number[];
 }
 
 /** 多值数据点集合 */
@@ -2243,11 +2245,11 @@ declare interface Namespace {
 /** 提供给前端，控制按钮是否显示 */
 declare interface OperationInfo {
   /** 初始化按钮的控制信息 */
-  Init: OperationInfoDetail | null;
+  Init?: OperationInfoDetail;
   /** 添加实例按钮的控制信息 */
-  AddInstance: OperationInfoDetail | null;
+  AddInstance?: OperationInfoDetail;
   /** 销毁机器的控制信息 */
-  Destroy: OperationInfoDetail | null;
+  Destroy?: OperationInfoDetail;
 }
 
 /** 提供给前端控制按钮显示逻辑的字段 */
@@ -2513,7 +2515,7 @@ declare interface Resource {
 /** k8s env 的 ResourceFieldRef */
 declare interface ResourceFieldRef {
   /** k8s 的 Resource */
-  Resource?: string | null;
+  Resource?: string;
 }
 
 /** 资源任务转态结果 */
@@ -2877,9 +2879,9 @@ declare interface TaskRecord {
   /** 超时时间 */
   TimeOut?: number;
   /** 重试次数 */
-  RetryCount?: number | null;
+  RetryCount?: number;
   /** 重试间隔 */
-  RetryInterval?: number | null;
+  RetryInterval?: number;
   /** 触发规则 */
   TaskRule?: TaskRule;
   /** 是否启用任务,ENABLED/DISABLED */
@@ -2887,23 +2889,23 @@ declare interface TaskRecord {
   /** 任务ID */
   TaskId?: string;
   /** 判断任务成功的操作符 */
-  SuccessOperator?: string | null;
+  SuccessOperator?: string;
   /** 判断任务成功的阈值 */
-  SuccessRatio?: number | null;
+  SuccessRatio?: number;
   /** 分片数量 */
-  ShardCount?: number | null;
+  ShardCount?: number;
   /** 高级设置 */
-  AdvanceSettings?: AdvanceSettings | null;
+  AdvanceSettings?: AdvanceSettings;
   /** 分片参数 */
-  ShardArguments?: ShardArgument[] | null;
+  ShardArguments?: ShardArgument[];
   /** 所属工作流ID */
-  BelongFlowIds?: string[] | null;
+  BelongFlowIds?: string[];
   /** 任务历史ID */
-  TaskLogId?: string | null;
+  TaskLogId?: string;
   /** 触发类型 */
-  TriggerType?: string | null;
+  TriggerType?: string;
   /** 任务参数，长度限制10000个字符 */
-  TaskArgument?: string | null;
+  TaskArgument?: string;
 }
 
 /** 翻页查询的任务记录返回 */
@@ -2919,7 +2921,7 @@ declare interface TaskRule {
   /** 触发规则类型, Cron/Repeat */
   RuleType: string;
   /** Cron类型规则，cron表达式。 */
-  Expression?: string | null;
+  Expression?: string;
   /** 时间间隔， 单位毫秒 */
   RepeatInterval?: number | null;
 }
@@ -2953,9 +2955,9 @@ declare interface ThreadPicture {
 /** 尽量调度 */
 declare interface TrySchedule {
   /** - */
-  AffinityList?: Affinity[] | null;
+  AffinityList?: Affinity[];
   /** - */
-  AntiAffinityList?: Affinity[] | null;
+  AntiAffinityList?: Affinity[];
 }
 
 /** 配置中心 */
@@ -2995,19 +2997,19 @@ declare interface TsfPageApiGroupInfo {
 /** 应用分页信息 */
 declare interface TsfPageApplication {
   /** 应用总数目 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 应用信息列表 */
-  Content?: ApplicationForPage[] | null;
+  Content?: ApplicationForPage[];
   /** 获取部署组实例列表返回的原始批次个数 */
-  SpecTotalCount?: number | null;
+  SpecTotalCount?: number;
 }
 
 /** 业务日志配置项列表 */
 declare interface TsfPageBusinessLogConfig {
   /** 总条数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 业务日志配置项列表 */
-  Content?: BusinessLogConfig[] | null;
+  Content?: BusinessLogConfig[];
 }
 
 /** 业务日志列表 */
@@ -3021,7 +3023,7 @@ declare interface TsfPageBusinessLogV2 {
   /** 查询状态 */
   Status?: string | null;
   /** 查询es时，使用searchAfter返回的游标 */
-  SearchAfter?: string[] | null;
+  SearchAfter?: string[];
 }
 
 /** Tsf分页集群对象 */
@@ -3091,9 +3093,9 @@ declare interface TsfPageFileConfig {
 /** 文件配置项发布信息列表 */
 declare interface TsfPageFileConfigRelease {
   /** 数量 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 列表 */
-  Content?: FileConfigRelease[] | null;
+  Content?: FileConfigRelease[];
 }
 
 /** GatewayDeployGroup 翻页对象 */
@@ -3107,9 +3109,9 @@ declare interface TsfPageGatewayDeployGroup {
 /** GatewayPlugin 翻页对象 */
 declare interface TsfPageGatewayPlugin {
   /** 记录总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 记录实体列表 */
-  Content?: GatewayPlugin[] | null;
+  Content?: GatewayPlugin[];
 }
 
 /** TSF机器实例分页对象 */
@@ -3171,7 +3173,7 @@ declare interface TsfPageStdoutLogV2 {
   /** 查询状态 */
   Status?: string | null;
   /** 游标ID */
-  SearchAfter?: string[] | null;
+  SearchAfter?: string[];
 }
 
 /** 单元化命名空间翻页对象 */
@@ -3193,9 +3195,9 @@ declare interface TsfPageUnitRule {
 /** 单元化规则翻页对象 */
 declare interface TsfPageUnitRuleV2 {
   /** 记录总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 记录实体列表 */
-  Content?: UnitRule[] | null;
+  Content?: UnitRule[];
 }
 
 /** 列表中部署组分页信息 */
@@ -3213,13 +3215,13 @@ declare interface UnitNamespace {
   /** 命名空间Name */
   NamespaceName: string;
   /** 单元化命名空间ID */
-  Id?: string | null;
+  Id?: string;
   /** 网关实体ID */
-  GatewayInstanceId?: string | null;
+  GatewayInstanceId?: string;
   /** 创建时间 */
-  CreatedTime?: string | null;
+  CreatedTime?: string;
   /** 更新时间 */
-  UpdatedTime?: string | null;
+  UpdatedTime?: string;
 }
 
 /** 微服务网关单元化规则 */
@@ -3289,13 +3291,13 @@ declare interface UnitRuleTag {
 /** k8s env 的 ValueFrom */
 declare interface ValueFrom {
   /** k8s env 的 FieldRef */
-  FieldRef?: FieldRef | null;
+  FieldRef?: FieldRef;
   /** k8s env 的 ResourceFieldRef */
   ResourceFieldRef?: ResourceFieldRef | null;
   /** k8s env的configMapKeyRef */
-  ConfigMapKeyRef?: CommonRef | null;
+  ConfigMapKeyRef?: CommonRef;
   /** k8s env 的 secretKeyRef */
-  SecretKeyRef?: CommonRef | null;
+  SecretKeyRef?: CommonRef;
 }
 
 /** 虚拟机部署组信息 */
@@ -3379,17 +3381,17 @@ declare interface VmGroup {
   /** 批次是否开启健康检查 */
   EnableBatchHealthCheck?: boolean;
   /** 是否开启cgroup控制内存cpu */
-  FilebeatCgroupEnable?: boolean | null;
+  FilebeatCgroupEnable?: boolean;
   /** filebeat使用cpu上限 */
-  FilebeatMaxCpu?: number | null;
+  FilebeatMaxCpu?: number;
   /** filebeat使用内存上限 */
-  FilebeatMaxMem?: number | null;
+  FilebeatMaxMem?: number;
   /** 仓库ID */
-  RepositoryId?: string | null;
+  RepositoryId?: string;
   /** 仓库名称 */
-  RepositoryName?: string | null;
+  RepositoryName?: string;
   /** 仓库类型 */
-  RepositoryType?: string | null;
+  RepositoryType?: string;
 }
 
 /** 虚拟机部署组其他字段 */
@@ -3566,9 +3568,9 @@ declare interface ApiDetailResponse {
   /** API 的 content type */
   RequestContentType?: string | null;
   /** API 能否调试 */
-  CanRun?: boolean | null;
+  CanRun?: boolean;
   /** API 状态 0:离线 1:在线，默认0 */
-  Status?: number | null;
+  Status?: number;
   /** API 描述 */
   Description?: string | null;
 }
@@ -3700,7 +3702,7 @@ declare interface CreateApiGroupRequest {
 
 declare interface CreateApiGroupResponse {
   /** API分组ID */
-  Result?: string | null;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3732,7 +3734,7 @@ declare interface CreateApiRateLimitRuleWithDetailRespRequest {
 
 declare interface CreateApiRateLimitRuleWithDetailRespResponse {
   /** 创建的规则 ID */
-  Result?: ApiRateLimitRule | null;
+  Result?: ApiRateLimitRule;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3844,7 +3846,7 @@ declare interface CreateConfigRequest {
 
 declare interface CreateConfigResponse {
   /** true：创建成功；false：创建失败 */
-  Result: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3884,7 +3886,7 @@ declare interface CreateConfigTemplateWithDetailRespRequest {
 
 declare interface CreateConfigTemplateWithDetailRespResponse {
   /** 创建成功，返回 ID */
-  Result?: ConfigTemplate | null;
+  Result?: ConfigTemplate;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3910,7 +3912,7 @@ declare interface CreateConfigWithDetailRespRequest {
 
 declare interface CreateConfigWithDetailRespResponse {
   /** 配置项 */
-  Result?: Config | null;
+  Result?: Config;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4000,7 +4002,7 @@ declare interface CreateFileConfigRequest {
 
 declare interface CreateFileConfigResponse {
   /** true：创建成功；false：创建失败 */
-  Result: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4032,7 +4034,7 @@ declare interface CreateFileConfigWithDetailRespRequest {
 
 declare interface CreateFileConfigWithDetailRespResponse {
   /** 文件配置项 */
-  Result?: FileConfig | null;
+  Result?: FileConfig;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4092,7 +4094,7 @@ declare interface CreateLaneRequest {
 
 declare interface CreateLaneResponse {
   /** 泳道ID */
-  Result: string | null;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4114,7 +4116,7 @@ declare interface CreateLaneRuleRequest {
 
 declare interface CreateLaneRuleResponse {
   /** 泳道规则Id */
-  Result?: string | null;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4198,7 +4200,7 @@ declare interface CreatePathRewritesWithDetailRespRequest {
 
 declare interface CreatePathRewritesWithDetailRespResponse {
   /** 返回路径重写规则 ID */
-  Result?: string[] | null;
+  Result?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4238,7 +4240,7 @@ declare interface CreatePublicConfigRequest {
 
 declare interface CreatePublicConfigResponse {
   /** true：创建成功；false：创建失败 */
-  Result: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4262,7 +4264,7 @@ declare interface CreatePublicConfigWithDetailRespRequest {
 
 declare interface CreatePublicConfigWithDetailRespResponse {
   /** 公共配置项 ID */
-  Result?: Config | null;
+  Result?: Config;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4360,7 +4362,7 @@ declare interface CreateUnitNamespacesRequest {
 
 declare interface CreateUnitNamespacesResponse {
   /** 是否成功 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4377,8 +4379,8 @@ declare interface CreateUnitRuleRequest {
 }
 
 declare interface CreateUnitRuleResponse {
-  /** 是否成功 */
-  Result?: boolean | null;
+  /** 是否成功，成功：true，失败：false。； */
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4396,7 +4398,7 @@ declare interface CreateUnitRuleWithDetailRespRequest {
 
 declare interface CreateUnitRuleWithDetailRespResponse {
   /** 单元化规则信息 */
-  Result?: UnitRule | null;
+  Result?: UnitRule;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4434,7 +4436,7 @@ declare interface DeleteApplicationRequest {
 
 declare interface DeleteApplicationResponse {
   /** 删除应用操作是否成功。true：操作成功。false：操作失败。 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4496,7 +4498,7 @@ declare interface DeleteFileConfigRequest {
 
 declare interface DeleteFileConfigResponse {
   /** 删除结果 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4560,7 +4562,7 @@ declare interface DeleteLaneRuleRequest {
 
 declare interface DeleteLaneRuleResponse {
   /** 操作状态 */
-  Result: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4626,7 +4628,7 @@ declare interface DeletePublicConfigRequest {
 
 declare interface DeletePublicConfigResponse {
   /** true：删除成功；false：删除失败 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4676,7 +4678,7 @@ declare interface DeleteUnitNamespacesRequest {
 
 declare interface DeleteUnitNamespacesResponse {
   /** 是否成功 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4688,7 +4690,7 @@ declare interface DeleteUnitRuleRequest {
 
 declare interface DeleteUnitRuleResponse {
   /** 是否成功 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4774,7 +4776,7 @@ declare interface DeployContainerGroupRequest {
 
 declare interface DeployContainerGroupResponse {
   /** 部署容器应用是否成功。true：成功。false：失败。 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4856,7 +4858,7 @@ declare interface DescribeApiGroupRequest {
 
 declare interface DescribeApiGroupResponse {
   /** API分组信息 */
-  Result: ApiGroupInfo | null;
+  Result?: ApiGroupInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4884,7 +4886,7 @@ declare interface DescribeApiGroupsRequest {
 
 declare interface DescribeApiGroupsResponse {
   /** 翻页结构体 */
-  Result?: TsfPageApiGroupInfo | null;
+  Result?: TsfPageApiGroupInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4996,7 +4998,7 @@ declare interface DescribeBasicResourceUsageRequest {
 
 declare interface DescribeBasicResourceUsageResponse {
   /** TSF基本资源信息 */
-  Result?: OverviewBasicResourceUsage | null;
+  Result?: OverviewBasicResourceUsage;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5028,7 +5030,7 @@ declare interface DescribeBusinessLogConfigsRequest {
 
 declare interface DescribeBusinessLogConfigsResponse {
   /** 业务日志配置列表 */
-  Result?: TsfPageBusinessLogConfig | null;
+  Result?: TsfPageBusinessLogConfig;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5096,7 +5098,7 @@ declare interface DescribeConfigReleaseLogsRequest {
 
 declare interface DescribeConfigReleaseLogsResponse {
   /** 分页的配置项发布历史列表 */
-  Result?: TsfPageConfigReleaseLog | null;
+  Result?: TsfPageConfigReleaseLog;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5122,7 +5124,7 @@ declare interface DescribeConfigReleasesRequest {
 
 declare interface DescribeConfigReleasesResponse {
   /** 分页的配置发布信息 */
-  Result?: TsfPageConfigRelease | null;
+  Result?: TsfPageConfigRelease;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5174,7 +5176,7 @@ declare interface DescribeConfigTemplateRequest {
 
 declare interface DescribeConfigTemplateResponse {
   /** 导入结果 */
-  Result?: ConfigTemplate | null;
+  Result?: ConfigTemplate;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5198,7 +5200,7 @@ declare interface DescribeConfigsRequest {
 
 declare interface DescribeConfigsResponse {
   /** 分页后的配置项列表 */
-  Result: TsfPageConfig | null;
+  Result?: TsfPageConfig;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5376,7 +5378,7 @@ declare interface DescribeEnabledUnitRuleRequest {
 
 declare interface DescribeEnabledUnitRuleResponse {
   /** 单元化规则对象 */
-  Result?: UnitRule | null;
+  Result?: UnitRule;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5402,7 +5404,7 @@ declare interface DescribeFileConfigReleasesRequest {
 
 declare interface DescribeFileConfigReleasesResponse {
   /** 配置项发布信息列表 */
-  Result?: TsfPageFileConfigRelease | null;
+  Result?: TsfPageFileConfigRelease;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5426,7 +5428,7 @@ declare interface DescribeFileConfigsRequest {
 
 declare interface DescribeFileConfigsResponse {
   /** 文件配置项列表 */
-  Result: TsfPageFileConfig | null;
+  Result?: TsfPageFileConfig;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5528,7 +5530,7 @@ declare interface DescribeGroupBusinessLogConfigsRequest {
 
 declare interface DescribeGroupBusinessLogConfigsResponse {
   /** 业务日志配置列表 */
-  Result?: TsfPageBusinessLogConfig | null;
+  Result?: TsfPageBusinessLogConfig;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5580,7 +5582,7 @@ declare interface DescribeGroupReleaseRequest {
 
 declare interface DescribeGroupReleaseResponse {
   /** 部署组发布的相关信息 */
-  Result?: GroupRelease | null;
+  Result?: GroupRelease;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5900,7 +5902,7 @@ declare interface DescribeLaneRulesRequest {
 
 declare interface DescribeLaneRulesResponse {
   /** 泳道规则列表 */
-  Result?: LaneRules | null;
+  Result?: LaneRules;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5920,7 +5922,7 @@ declare interface DescribeLanesRequest {
 
 declare interface DescribeLanesResponse {
   /** 泳道列表 */
-  Result: LaneInfos | null;
+  Result?: LaneInfos;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5940,7 +5942,7 @@ declare interface DescribeMicroserviceRequest {
 
 declare interface DescribeMicroserviceResponse {
   /** 微服务详情实例列表 */
-  Result?: TsfPageMsInstance | null;
+  Result?: TsfPageMsInstance;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5982,7 +5984,7 @@ declare interface DescribeMicroservicesRequest {
 
 declare interface DescribeMicroservicesResponse {
   /** 微服务分页列表信息 */
-  Result?: TsfPageMicroservice | null;
+  Result?: TsfPageMicroservice;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6006,9 +6008,9 @@ declare interface DescribeMsApiListResponse {
 }
 
 declare interface DescribeOverviewInvocationRequest {
-  /** 命名空间ID */
+  /** 命名空间ID， 此参数必填 */
   NamespaceId?: string;
-  /** 监控统计类型，可选值：SumReqAmount、AvgFailureRate、AvgTimeCost，分别对应请求量、请求错误率、平均响应耗时 */
+  /** 监控统计类型，必填，可选值：SumReqAmount、AvgFailureRate、AvgTimeCost，分别对应请求量、请求错误率、平均响应耗时 */
   Type?: string;
   /** 监控统计数据粒度，可选值：60、3600、86400，分别对应1分钟、1小时、1天 */
   Period?: number;
@@ -6020,7 +6022,7 @@ declare interface DescribeOverviewInvocationRequest {
 
 declare interface DescribeOverviewInvocationResponse {
   /** 监控统计数据列表 */
-  Result: MetricDataPoint[] | null;
+  Result?: MetricDataPoint[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6154,7 +6156,7 @@ declare interface DescribePublicConfigReleaseLogsRequest {
 
 declare interface DescribePublicConfigReleaseLogsResponse {
   /** 分页后的公共配置项发布历史列表 */
-  Result?: TsfPageConfigReleaseLog | null;
+  Result?: TsfPageConfigReleaseLog;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6174,7 +6176,7 @@ declare interface DescribePublicConfigReleasesRequest {
 
 declare interface DescribePublicConfigReleasesResponse {
   /** 公共配置发布信息 */
-  Result?: TsfPageConfigRelease | null;
+  Result?: TsfPageConfigRelease;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6212,7 +6214,7 @@ declare interface DescribePublicConfigSummaryRequest {
 
 declare interface DescribePublicConfigSummaryResponse {
   /** 分页的全局配置统计信息列表 */
-  Result: TsfPageConfig | null;
+  Result?: TsfPageConfig;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6234,7 +6236,7 @@ declare interface DescribePublicConfigsRequest {
 
 declare interface DescribePublicConfigsResponse {
   /** 分页后的全局配置项列表 */
-  Result: TsfPageConfig | null;
+  Result?: TsfPageConfig;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6246,7 +6248,7 @@ declare interface DescribeReleasedConfigRequest {
 
 declare interface DescribeReleasedConfigResponse {
   /** 已发布的配置内容 */
-  Result?: string | null;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6538,7 +6540,7 @@ declare interface DescribeUnitNamespacesRequest {
 
 declare interface DescribeUnitNamespacesResponse {
   /** 单元化命名空间对象列表 */
-  Result?: TsfPageUnitNamespace | null;
+  Result?: TsfPageUnitNamespace;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6550,7 +6552,7 @@ declare interface DescribeUnitRuleRequest {
 
 declare interface DescribeUnitRuleResponse {
   /** 单元化规则对象 */
-  Result: UnitRule | null;
+  Result?: UnitRule;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6570,7 +6572,7 @@ declare interface DescribeUnitRulesRequest {
 
 declare interface DescribeUnitRulesResponse {
   /** 分页列表信息 */
-  Result?: TsfPageUnitRule[] | null;
+  Result?: TsfPageUnitRule[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6590,7 +6592,7 @@ declare interface DescribeUnitRulesV2Request {
 
 declare interface DescribeUnitRulesV2Response {
   /** 分页列表信息 */
-  Result?: TsfPageUnitRuleV2 | null;
+  Result?: TsfPageUnitRuleV2;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6630,7 +6632,7 @@ declare interface DescribeUsableUnitNamespacesRequest {
 
 declare interface DescribeUsableUnitNamespacesResponse {
   /** 单元化命名空间对象列表 */
-  Result?: TsfPageUnitNamespace | null;
+  Result?: TsfPageUnitNamespace;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6642,7 +6644,7 @@ declare interface DisableLaneRuleRequest {
 
 declare interface DisableLaneRuleResponse {
   /** 操作状态。成功：true，失败：false */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6678,7 +6680,7 @@ declare interface DisableUnitRouteRequest {
 
 declare interface DisableUnitRouteResponse {
   /** 返回结果，成功失败 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6690,7 +6692,7 @@ declare interface DisableUnitRuleRequest {
 
 declare interface DisableUnitRuleResponse {
   /** 是否成功 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6742,7 +6744,7 @@ declare interface EnableLaneRuleRequest {
 
 declare interface EnableLaneRuleResponse {
   /** 操作状态。成功：true，失败：false */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6777,8 +6779,8 @@ declare interface EnableUnitRouteRequest {
 }
 
 declare interface EnableUnitRouteResponse {
-  /** 返回结果，成功失败 */
-  Result?: boolean | null;
+  /** 返回结果。成功：true，失败：false。 */
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6789,8 +6791,8 @@ declare interface EnableUnitRuleRequest {
 }
 
 declare interface EnableUnitRuleResponse {
-  /** 是否成功 */
-  Result?: boolean | null;
+  /** 是否成功，成功：true，失败：false。 */
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6882,7 +6884,7 @@ declare interface ModifyClusterResponse {
 }
 
 declare interface ModifyContainerGroupRequest {
-  /** 部署组ID */
+  /** 部署组ID 必填项 */
   GroupId?: string;
   /** 0:公网 1:集群内访问 2：NodePort */
   AccessType?: number;
@@ -6900,7 +6902,7 @@ declare interface ModifyContainerGroupRequest {
 
 declare interface ModifyContainerGroupResponse {
   /** 更新部署组是否成功。true：成功。false：失败。 */
-  Result: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6972,7 +6974,7 @@ declare interface ModifyLaneRuleRequest {
 
 declare interface ModifyLaneRuleResponse {
   /** 操作状态。成功：true，失败：false */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7240,7 +7242,7 @@ declare interface ReleaseConfigWithDetailRespRequest {
 
 declare interface ReleaseConfigWithDetailRespResponse {
   /** 配置项发布 ID */
-  Result?: ConfigRelease | null;
+  Result?: ConfigRelease;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7255,8 +7257,8 @@ declare interface ReleaseFileConfigRequest {
 }
 
 declare interface ReleaseFileConfigResponse {
-  /** 发布结果 */
-  Result: boolean | null;
+  /** 发布结果，成功：true，失败：false。 */
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7272,7 +7274,7 @@ declare interface ReleasePublicConfigRequest {
 
 declare interface ReleasePublicConfigResponse {
   /** true：发布成功；false：发布失败 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7310,7 +7312,7 @@ declare interface RevocationPublicConfigRequest {
 
 declare interface RevocationPublicConfigResponse {
   /** true：撤销成功；false：撤销失败 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7321,8 +7323,8 @@ declare interface RevokeFileConfigRequest {
 }
 
 declare interface RevokeFileConfigResponse {
-  /** 撤回结果 */
-  Result?: boolean | null;
+  /** 撤回结果，成功：true，失败：false。 */
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7573,7 +7575,7 @@ declare interface UpdateApiGroupRequest {
 
 declare interface UpdateApiGroupResponse {
   /** 返回结果，true: 成功, false: 失败 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7679,7 +7681,7 @@ declare interface UpdateHealthCheckSettingsRequest {
 
 declare interface UpdateHealthCheckSettingsResponse {
   /** 更新健康检查配置操作是否成功。true：操作成功。false：操作失败。 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7710,8 +7712,8 @@ declare interface UpdateUnitRuleRequest {
 }
 
 declare interface UpdateUnitRuleResponse {
-  /** 是否成功 */
-  Result?: boolean | null;
+  /** 是否成功，成功：true，失败：false。 */
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7945,7 +7947,7 @@ declare interface Tsf {
   DescribeImageRepository(data?: DescribeImageRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRepositoryResponse>;
   /** 查询镜像版本列表 {@link DescribeImageTagsRequest} {@link DescribeImageTagsResponse} */
   DescribeImageTags(data?: DescribeImageTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageTagsResponse>;
-  /** 查询调用监控指标 {@link DescribeInovcationIndicatorsRequest} {@link DescribeInovcationIndicatorsResponse} */
+  /** @deprecated 查询调用监控指标 {@link DescribeInovcationIndicatorsRequest} {@link DescribeInovcationIndicatorsResponse} */
   DescribeInovcationIndicators(data: DescribeInovcationIndicatorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInovcationIndicatorsResponse>;
   /** 查询机器列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;

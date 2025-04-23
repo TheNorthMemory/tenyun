@@ -2227,6 +2227,12 @@ declare interface DescribeCloudBaseRunVersionResponse {
 }
 
 declare interface DescribeCloudBaseRunVersionRsByConditionRequest {
+  /** 环境ID；EnvId和ClusterId不能同时为空 */
+  EnvId?: string;
+  /** 集群ID；EnvId和ClusterId不能同时为空 */
+  ClusterId?: string;
+  /** 过滤网关服务开关 */
+  FilterGwSwitch?: boolean;
 }
 
 declare interface DescribeCloudBaseRunVersionRsByConditionResponse {

@@ -423,7 +423,7 @@ declare interface CreateRegisterCodeRequest {
   RegisterLimit?: number;
   /** 该注册码的有效时间，单位为小时。默认值为 4。- 若传入值小于等于 99999，则以小时为单位设置有效时间。- 若传入值大于 99999，则设置为长期有效。 */
   EffectiveTime?: number;
-  /** 该注册码限制tat_agent只能从IpAddressRange所描述公网出口进行注册。默认不做限制。 */
+  /** 限制注册码只能从 IpAddressRange 所描述公网出口进行注册。默认为空，即无任何限制。取值应为标准 IPv4 或 CIDRv4 格式。例如 192.168.1.1 或 192.168.0.0/16。 */
   IpAddressRange?: string;
 }
 
@@ -651,7 +651,7 @@ declare interface DescribeRegisterCodesResponse {
 declare interface DescribeRegisterInstancesRequest {
   /** 托管实例 id。参数不支持同时指定 `InstanceIds` 和 `Filters` 。 */
   InstanceIds?: string[];
-  /** 过滤器列表。参数不支持同时指定 `InstanceIds` 和 `Filters` 。- instance-name按照【托管实例名称】进行过滤。类型：String必选：否- instance-id按照【托管实例ID】进行过滤。类型：String必选：否- register-code-id按照【托管实例注册码ID】进行过滤。可通过 [DescribeRegisterCodes(查询注册码)](https://cloud.tencent.com/document/api/1340/96925) 接口获取。类型：String必选：否- sys-name按照【操作系统类型】进行过滤，取值：Linux | Windows。类型：String必选：否 */
+  /** 过滤器列表。参数不支持同时指定 `InstanceIds` 和 `Filters` 。- instance-name按照【托管实例名称】进行过滤。类型：String必选：否- instance-id按照【托管实例ID】进行过滤。类型：String必选：否- register-code-id按照【托管实例注册码ID】进行过滤。可通过 [DescribeRegisterCodes(查询注册码)](https://cloud.tencent.com/document/api/1340/96925) 接口获取。类型：String必选：否- sys-name按照【操作系统类型】进行过滤，取值：Linux | Windows。类型：String必选：否- tag-key按照【标签键】进行过滤。类型：String必选：否- tag-value按照【标签值】进行过滤。类型：String必选：否- tag:tag-key按照【标签键值对】进行过滤。 tag-key使用具体的标签键进行替换。类型：String必选：否例如 Filter 为 {"Name": "tag:key1", "Values": ["v1", "v2"] } ，即查询所有标签为 key1:v1 或 key1:v2 的资源。 */
   Filters?: Filter[];
   /** 偏移量，默认为 0。 */
   Offset?: number;

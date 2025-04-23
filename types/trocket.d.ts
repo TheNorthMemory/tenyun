@@ -38,6 +38,8 @@ declare interface ConsumerClient {
   Version?: string;
   /** 客户端消费堆积 */
   ConsumerLag?: number | null;
+  /** 消费者客户端类型（grpc；remoting；http） */
+  ChannelProtocol?: string;
 }
 
 /** map结构返回 */
@@ -380,6 +382,28 @@ declare interface MessageTrackItem {
   ExceptionDesc?: string | null;
 }
 
+/** 迁移中的主题 */
+declare interface MigratingTopic {
+  /** 主题名称 */
+  TopicName?: string;
+  /** 迁移状态 S_RW_D_NA 源集群读写 S_RW_D_R 源集群读写目标集群读 S_RW_D_RW 源集群读写目标集群读写 S_R_D_RW 源集群读目标集群读写 S_NA_D_RW 目标集群读写 */
+  MigrationStatus?: string;
+  /** 是否完成健康检查 */
+  HealthCheckPassed?: boolean;
+  /** 上次健康检查返回的错误信息，仅在HealthCheckPassed为false时有效。 NotChecked 未执行检查， Unknown 未知错误, TopicNotImported 主题未导入, TopicNotExistsInSourceCluster 主题在源集群中不存在, TopicNotExistsInTargetCluster 主题在目标集群中不存在, ConsumerConnectedOnTarget 目标集群上存在消费者连接, SourceTopicHasNewMessagesIn5Minutes 源集群主题前5分钟内有新消息写入, TargetTopicHasNewMessagesIn5Minutes 目标集群主题前5分钟内有新消息写入, SourceTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入, TargetTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入, ConsumerGroupCountNotMatch 订阅组数量不一致, SourceTopicHasUnconsumedMessages 源集群主题存在未消费消息, */
+  HealthCheckError?: string;
+  /** 命名空间，仅4.x集群有效 */
+  Namespace?: string;
+  /** 4.x的命名空间 */
+  NamespaceV4?: string | null;
+  /** 4.x的主题名称 */
+  TopicNameV4?: string | null;
+  /** 4.x的完整命名空间 */
+  FullNamespaceV4?: string | null;
+  /** 上次健康检查返回的错误列表 */
+  HealthCheckErrorList?: string[];
+}
+
 /** MQTT客户端监控 */
 declare interface PacketStatistics {
   /** 类型 */
@@ -606,12 +630,38 @@ declare interface TopicItem {
   MsgTTL?: number | null;
 }
 
+/** 迁移主题修改状态后的结果 */
+declare interface TopicStageChangeResult {
+  /** 主题名称 */
+  TopicName?: string;
+  /** 是否成功 */
+  Success?: boolean;
+  /** 命名空间，仅4.x有效 */
+  Namespace?: string;
+}
+
 /** VPC信息 */
 declare interface VpcInfo {
   /** VPC ID */
   VpcId: string;
   /** 子网ID */
   SubnetId: string;
+}
+
+declare interface ChangeMigratingTopicToNextStageRequest {
+  /** 任务ID */
+  TaskId: string;
+  /** 主题名称列表 */
+  TopicNameList: string[];
+  /** 命名空间列表，仅4.x集群有效，与TopicNameList一一对应 */
+  NamespaceList?: string[];
+}
+
+declare interface ChangeMigratingTopicToNextStageResponse {
+  /** 迁移主题状态修改的结果列表 */
+  Results?: TopicStageChangeResult[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface CreateConsumerGroupRequest {
@@ -886,6 +936,16 @@ declare interface DeleteRoleRequest {
 }
 
 declare interface DeleteRoleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSmoothMigrationTaskRequest {
+  /** 任务ID */
+  TaskId: string;
+}
+
+declare interface DeleteSmoothMigrationTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1474,6 +1534,70 @@ declare interface DescribeMessageTraceResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMigratingGroupStatsRequest {
+  /** 迁移任务ID */
+  TaskId: string;
+  /** 消费组名称 */
+  GroupName: string;
+  /** 命名空间 */
+  Namespace?: string;
+}
+
+declare interface DescribeMigratingGroupStatsResponse {
+  /** 源集群消费组堆积 */
+  SourceConsumeLag?: number;
+  /** 目标集群消费组堆积 */
+  TargetConsumeLag?: number;
+  /** 源集群连接客户端列表 */
+  SourceConsumerClients?: ConsumerClient[];
+  /** 目标集群连接客户端列表 */
+  TargetConsumerClients?: ConsumerClient[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMigratingTopicListRequest {
+  /** 任务ID */
+  TaskId: string;
+  /** 查询条件列表 */
+  Filters?: Filter[];
+  /** 查询起始位置 */
+  Offset?: number;
+  /** 查询结果限制数量 */
+  Limit?: number;
+}
+
+declare interface DescribeMigratingTopicListResponse {
+  /** 查询总数 */
+  TotalCount?: number;
+  /** 主题列表 */
+  MigrateTopics?: MigratingTopic[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMigratingTopicStatsRequest {
+  /** 任务ID */
+  TaskId: string;
+  /** 主题名称 */
+  TopicName: string;
+  /** 命名空间，仅4.x集群有效 */
+  Namespace?: string;
+}
+
+declare interface DescribeMigratingTopicStatsResponse {
+  /** 源集群的消费者数量 */
+  SourceClusterConsumerCount?: number;
+  /** 目标集群的消费者数量 */
+  TargetClusterConsumerCount?: number;
+  /** 源集群消费组列表 */
+  SourceClusterConsumerGroups?: string[];
+  /** 目标集群消费组列表 */
+  TargetClusterConsumerGroups?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeProductSKUsRequest {
 }
 
@@ -1500,6 +1624,26 @@ declare interface DescribeRoleListResponse {
   TotalCount?: number | null;
   /** 角色信息列表 */
   Data?: RoleItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSourceClusterGroupListRequest {
+  /** 任务ID */
+  TaskId: string;
+  /** 查询条件列表 */
+  Filters?: Filter[];
+  /** 查询起始位置 */
+  Offset?: number;
+  /** 查询结果限制数量 */
+  Limit?: number;
+}
+
+declare interface DescribeSourceClusterGroupListResponse {
+  /** 查询总数 */
+  TotalCount?: number;
+  /** 消费组配置列表 */
+  Groups?: SourceClusterGroupConfig[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1578,6 +1722,28 @@ declare interface DescribeTopicResponse {
   SubscriptionData?: SubscriptionData[];
   /** 消息保留时长 */
   MsgTTL?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DoHealthCheckOnMigratingTopicRequest {
+  /** 任务ID */
+  TaskId: string;
+  /** 主题名称 */
+  TopicName: string;
+  /** 是否忽略当前检查 */
+  IgnoreCheck?: boolean;
+  /** 命名空间，仅4.x集群有效 */
+  Namespace?: string;
+}
+
+declare interface DoHealthCheckOnMigratingTopicResponse {
+  /** 是否通过 */
+  Passed?: boolean;
+  /** 健康检查返回的错误信息NotChecked 未执行检查， Unknown 未知错误, TopicNotImported 主题未导入, TopicNotExistsInSourceCluster 主题在源集群中不存在, TopicNotExistsInTargetCluster 主题在目标集群中不存在, ConsumerConnectedOnTarget 目标集群上存在消费者连接, SourceTopicHasNewMessagesIn5Minutes 源集群主题前5分钟内有新消息写入, TargetTopicHasNewMessagesIn5Minutes 目标集群主题前5分钟内有新消息写入, SourceTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入, TargetTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入, ConsumerGroupCountNotMatch 订阅组数量不一致, SourceTopicHasUnconsumedMessages 源集群主题存在未消费消息, */
+  Reason?: string | null;
+  /** 健康检查返回的错误信息列表 */
+  ReasonList?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1786,6 +1952,20 @@ declare interface ModifyTopicResponse {
   RequestId?: string;
 }
 
+declare interface RemoveMigratingTopicRequest {
+  /** 任务ID */
+  TaskId: string;
+  /** 主题名称 */
+  TopicName: string;
+  /** 命名空间，仅迁移至4.x集群有效 */
+  Namespace?: string;
+}
+
+declare interface RemoveMigratingTopicResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ResendDeadLetterMessageRequest {
   /** 集群ID */
   InstanceId: string;
@@ -1818,9 +1998,25 @@ declare interface ResetConsumerGroupOffsetResponse {
   RequestId?: string;
 }
 
+declare interface RollbackMigratingTopicStageRequest {
+  /** 任务ID */
+  TaskId: string;
+  /** 主题名称 */
+  TopicName: string;
+  /** 命名空间，仅4.x集群有效 */
+  Namespace?: string;
+}
+
+declare interface RollbackMigratingTopicStageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Trocket 消息队列 RocketMQ 版} */
 declare interface Trocket {
   (): Versions;
+  /** 平滑迁移：修改迁移中的Topic状态进入下一步 {@link ChangeMigratingTopicToNextStageRequest} {@link ChangeMigratingTopicToNextStageResponse} */
+  ChangeMigratingTopicToNextStage(data: ChangeMigratingTopicToNextStageRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeMigratingTopicToNextStageResponse>;
   /** 创建消费组 {@link CreateConsumerGroupRequest} {@link CreateConsumerGroupResponse} */
   CreateConsumerGroup(data: CreateConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerGroupResponse>;
   /** 创建集群 {@link CreateInstanceRequest} {@link CreateInstanceResponse} */
@@ -1851,6 +2047,8 @@ declare interface Trocket {
   DeleteMQTTUser(data: DeleteMQTTUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMQTTUserResponse>;
   /** 删除角色 {@link DeleteRoleRequest} {@link DeleteRoleResponse} */
   DeleteRole(data: DeleteRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoleResponse>;
+  /** 删除平滑迁移任务 {@link DeleteSmoothMigrationTaskRequest} {@link DeleteSmoothMigrationTaskResponse} */
+  DeleteSmoothMigrationTask(data: DeleteSmoothMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSmoothMigrationTaskResponse>;
   /** 删除主题 {@link DeleteTopicRequest} {@link DeleteTopicResponse} */
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
   /** 查询消费者客户端详情 {@link DescribeConsumerClientRequest} {@link DescribeConsumerClientResponse} */
@@ -1897,16 +2095,26 @@ declare interface Trocket {
   DescribeMessageList(data: DescribeMessageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageListResponse>;
   /** 查询消息轨迹 {@link DescribeMessageTraceRequest} {@link DescribeMessageTraceResponse} */
   DescribeMessageTrace(data: DescribeMessageTraceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageTraceResponse>;
+  /** 查看迁移消费组的实时数据 {@link DescribeMigratingGroupStatsRequest} {@link DescribeMigratingGroupStatsResponse} */
+  DescribeMigratingGroupStats(data: DescribeMigratingGroupStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigratingGroupStatsResponse>;
+  /** 平滑迁移：查询Topic迁移状态列表 {@link DescribeMigratingTopicListRequest} {@link DescribeMigratingTopicListResponse} */
+  DescribeMigratingTopicList(data: DescribeMigratingTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigratingTopicListResponse>;
+  /** 查询迁移主题的实时数据 {@link DescribeMigratingTopicStatsRequest} {@link DescribeMigratingTopicStatsResponse} */
+  DescribeMigratingTopicStats(data: DescribeMigratingTopicStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigratingTopicStatsResponse>;
   /** 查询产品售卖规格 {@link DescribeProductSKUsRequest} {@link DescribeProductSKUsResponse} */
   DescribeProductSKUs(data?: DescribeProductSKUsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductSKUsResponse>;
   /** 查询角色列表 {@link DescribeRoleListRequest} {@link DescribeRoleListResponse} */
   DescribeRoleList(data: DescribeRoleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoleListResponse>;
+  /** 平滑迁移：获取源集群的group列表 {@link DescribeSourceClusterGroupListRequest} {@link DescribeSourceClusterGroupListResponse} */
+  DescribeSourceClusterGroupList(data: DescribeSourceClusterGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSourceClusterGroupListResponse>;
   /** 查询主题详情 {@link DescribeTopicRequest} {@link DescribeTopicResponse} */
   DescribeTopic(data: DescribeTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicResponse>;
   /** 查询主题列表 {@link DescribeTopicListRequest} {@link DescribeTopicListResponse} */
   DescribeTopicList(data: DescribeTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicListResponse>;
   /** 查询消费组订阅的主题列表 {@link DescribeTopicListByGroupRequest} {@link DescribeTopicListByGroupResponse} */
   DescribeTopicListByGroup(data: DescribeTopicListByGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicListByGroupResponse>;
+  /** 迁移主题健康检查 {@link DoHealthCheckOnMigratingTopicRequest} {@link DoHealthCheckOnMigratingTopicResponse} */
+  DoHealthCheckOnMigratingTopic(data: DoHealthCheckOnMigratingTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DoHealthCheckOnMigratingTopicResponse>;
   /** 导入 Group 元数据 {@link ImportSourceClusterConsumerGroupsRequest} {@link ImportSourceClusterConsumerGroupsResponse} */
   ImportSourceClusterConsumerGroups(data: ImportSourceClusterConsumerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportSourceClusterConsumerGroupsResponse>;
   /** 导入 Topic 元数据 {@link ImportSourceClusterTopicsRequest} {@link ImportSourceClusterTopicsResponse} */
@@ -1931,10 +2139,14 @@ declare interface Trocket {
   ModifyRole(data: ModifyRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoleResponse>;
   /** 修改主题属性 {@link ModifyTopicRequest} {@link ModifyTopicResponse} */
   ModifyTopic(data: ModifyTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicResponse>;
+  /** 移除正在平滑迁移的主题 {@link RemoveMigratingTopicRequest} {@link RemoveMigratingTopicResponse} */
+  RemoveMigratingTopic(data: RemoveMigratingTopicRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveMigratingTopicResponse>;
   /** 重新发送死信消息 {@link ResendDeadLetterMessageRequest} {@link ResendDeadLetterMessageResponse} */
   ResendDeadLetterMessage(data: ResendDeadLetterMessageRequest, config?: AxiosRequestConfig): AxiosPromise<ResendDeadLetterMessageResponse>;
   /** 重置消费位点 {@link ResetConsumerGroupOffsetRequest} {@link ResetConsumerGroupOffsetResponse} */
   ResetConsumerGroupOffset(data: ResetConsumerGroupOffsetRequest, config?: AxiosRequestConfig): AxiosPromise<ResetConsumerGroupOffsetResponse>;
+  /** 回滚主题迁移进度至上一阶段 {@link RollbackMigratingTopicStageRequest} {@link RollbackMigratingTopicStageResponse} */
+  RollbackMigratingTopicStage(data: RollbackMigratingTopicStageRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackMigratingTopicStageResponse>;
 }
 
 export declare type Versions = ["2023-03-08"];

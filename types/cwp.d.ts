@@ -2914,6 +2914,10 @@ declare interface LicenseBindDetail {
   IsSwitchBind?: boolean;
   /** 主机额外信息 */
   MachineExtraInfo?: MachineExtraInfo;
+  /** RUNNING 运行中 STOPPED 已关机 EXPIRED 待回收 */
+  InstanceState?: string;
+  /** ONLINE 已离线 OFFLINE 防护中UNINSTALLED 未安装客户端 */
+  AgentState?: string;
 }
 
 /** 授权绑定任务详情 */
@@ -3086,8 +3090,12 @@ declare interface Machine {
   MachineName?: string;
   /** 主机系统。 */
   MachineOs?: string;
-  /** 主机状态。OFFLINE: 离线 ONLINE: 在线SHUTDOWN: 已关机UNINSTALLED: 未防护 */
+  /** 主机状态。 OFFLINE: 离线 ONLINE: 在线 SHUTDOWN: 已关机 UNINSTALLED: 未防护 */
   MachineStatus?: string;
+  /** ONLINE 防护中; OFFLINE 已离线;UNINStALLED 未安装 */
+  AgentStatus?: string;
+  /** RUNNING 运行中; STOPED 已关机; EXPIRED 待回收 */
+  InstanceStatus?: string;
   /** 主机安全Uuid，若客户端长时间不在线将返回空字符。 */
   Uuid?: string;
   /** CVM或BM机器唯一Uuid。 */
@@ -3408,6 +3416,10 @@ declare interface MalwareInfo {
   MachineExtraInfo?: MachineExtraInfo;
   /** 参考链接 */
   References?: string[];
+  /** 木马文件是否存在 */
+  FileExists?: boolean;
+  /** 木马进程是否存在 */
+  ProcessExists?: boolean;
 }
 
 /** 恶意文件风险提示列表信息 */
@@ -4422,6 +4434,8 @@ declare interface ReverseShellEventInfo {
   ModifyTime?: string;
   /** 命令详情的转义后内容，供正则加白全字符串匹配使用 */
   CmdLineQuote?: string;
+  /** 风险等级 */
+  RiskLevel?: number;
 }
 
 /** 反弹Shell规则 */
@@ -9049,7 +9063,7 @@ declare interface DescribeHostLoginListRequest {
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 过滤条件。Quuid - String - 是否必填：否 - 云服务器uuidUuid - String - 是否必填：否 - 主机安全唯一UuidMachineName - String - 是否必填：否 - 主机别名Ip - String - 是否必填：否 - 主机ipInstanceID - String - 是否必填：否 - 主机实例IDSrcIp - String - 是否必填：否 - 来源ip筛选UserName - String - 是否必填：否 - 用户名筛选Status - string - 是否必填：否 - 状态筛选1:正常登录；5：已加白,14:已处理，15：已忽略LoginTimeBegin - String - 是否必填：否 - 按照修改时间段筛选，开始时间LoginTimeEnd - String - 是否必填：否 - 按照修改时间段筛选，结束时间RiskLevel - string - 是否必填：否 - 状态筛选0:高危；1：可疑 */
+  /** 过滤条件。Quuid - String - 是否必填：否 - 云服务器uuidUuid - String - 是否必填：否 - 主机安全唯一UuidMachineName - String - 是否必填：否 - 主机别名Ip - String - 是否必填：否 - 主机ipInstanceID - String - 是否必填：否 - 主机实例IDSrcIp - String - 是否必填：否 - 来源ip筛选UserName - String - 是否必填：否 - 用户名筛选Status - string - 是否必填：否 - 状态筛选：2:待处理；5：已加白,14:已处理，15：已忽略LoginTimeBegin - String - 是否必填：否 - 按照修改时间段筛选，开始时间LoginTimeEnd - String - 是否必填：否 - 按照修改时间段筛选，结束时间RiskLevel - string - 是否必填：否 - 状态筛选0:高危；1：可疑 */
   Filters?: Filter[];
   /** 排序方式：根据请求次数排序：asc-升序/desc-降序 */
   Order?: string;
@@ -9060,7 +9074,7 @@ declare interface DescribeHostLoginListRequest {
 declare interface DescribeHostLoginListResponse {
   /** 总数 */
   TotalCount?: number;
-  /** 登录审计列表 */
+  /** 异常登录列表 */
   HostLoginList?: HostLoginList[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -9849,7 +9863,7 @@ declare interface DescribeMachinesRequest {
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 过滤条件。Ips - String - 是否必填：否 - 通过ip查询 Names - String - 是否必填：否 - 通过实例名查询 InstanceIds - String - 是否必填：否 - 通过实例id查询 Status - String - 是否必填：否 - 客户端在线状态（OFFLINE: 离线/关机 | ONLINE: 在线 | UNINSTALLED：未安装 | AGENT_OFFLINE 离线| AGENT_SHUTDOWN 已关机）Version - String 是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版 | Flagship : 旗舰版 | ProtectedMachines: 专业版+旗舰版）Risk - String 是否必填: 否 - 风险主机( yes ) Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )每个过滤条件只支持一个值，暂不支持多个值“或”关系查询Quuid - String - 是否必填: 否 - 云服务器uuid 最大100条.AddedOnTheFifteen- String 是否必填: 否 - 是否只查询15天内新增的主机( 1：是) TagId- String 是否必填: 否 - 查询指定标签关联的主机列表 */
+  /** 过滤条件。Ips - String - 是否必填：否 - 通过ip查询 Names - String - 是否必填：否 - 通过实例名查询 InstanceIds - String - 是否必填：否 - 通过实例id查询 Version - String 是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版 | Flagship : 旗舰版 | ProtectedMachines: 专业版+旗舰版）Risk - String 是否必填: 否 - 风险主机( yes ) Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )每个过滤条件只支持一个值，暂不支持多个值“或”关系查询Quuid - String - 是否必填: 否 - 云服务器uuid 最大100条.AddedOnTheFifteen- String 是否必填: 否 - 是否只查询15天内新增的主机( 1：是) TagId- String 是否必填: 否 - 查询指定标签关联的主机列表 AgentStatus- String 是否必填: 否 - ALL 全部; ONLINE 防护中; OFFLINE 已离线;UNINSTALLED 未安装 MachineStatus- String 是否必填: 否 - ALL 全部; RUNNING 运行中; STOPPED 已关机; EXPIRED 待回收 */
   Filters?: Filter[];
   /** 机器所属业务ID列表 */
   ProjectIds?: number[];
@@ -12787,6 +12801,8 @@ declare interface ExportFileTamperEventsRequest {
   Fileds?: string[];
   /** 需要导出的字段 */
   Fields?: string;
+  /** 需要导出的字段 */
+  Where?: string[];
 }
 
 declare interface ExportFileTamperEventsResponse {
@@ -15141,7 +15157,7 @@ declare interface Cwp {
   DescribeHistoryService(data?: DescribeHistoryServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHistoryServiceResponse>;
   /** 主机信息与标签信息查询 {@link DescribeHostInfoRequest} {@link DescribeHostInfoResponse} */
   DescribeHostInfo(data?: DescribeHostInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostInfoResponse>;
-  /** 获取登录审计列表 {@link DescribeHostLoginListRequest} {@link DescribeHostLoginListResponse} */
+  /** 获取异常登录列表 {@link DescribeHostLoginListRequest} {@link DescribeHostLoginListResponse} */
   DescribeHostLoginList(data?: DescribeHostLoginListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostLoginListResponse>;
   /** 获取全网热点漏洞 {@link DescribeHotVulTopRequest} {@link DescribeHotVulTopResponse} */
   DescribeHotVulTop(data?: DescribeHotVulTopRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHotVulTopResponse>;

@@ -410,6 +410,8 @@ declare interface RoomInfo {
   RecordStream?: number;
   /** 板书截图生成类型。0 不生成板书（默认）；1 全量模式；2 单页去重模式 */
   WhiteBoardSnapshotMode?: number;
+  /** 字幕转写功能开关：0关闭，1开启，默认关闭 */
+  SubtitlesTranscription?: number;
 }
 
 /** 房间列表 */
@@ -464,6 +466,8 @@ declare interface RoomItem {
   RecordLang?: string;
   /** 板书截图生成类型。0 不生成板书；1 全量模式；2 单页去重模式 */
   WhiteBoardSnapshotMode?: number;
+  /** 字幕转写功能开关：0关闭，1开启，默认关闭 */
+  SubtitlesTranscription?: number;
 }
 
 /** 场景配置 */
@@ -774,7 +778,7 @@ declare interface CreateRoomRequest {
   EndTime: number;
   /** 低代码互动课堂的SdkAppId。 */
   SdkAppId: number;
-  /** 头像区域，摄像头视频画面的分辨率。可以有如下取值：1 标清2 高清3 全高清 */
+  /** 头像区域，摄像头视频画面的分辨率。可以有如下取值：1 标清2 高清3 全高清注意：连麦人数（MaxMicNumber）>6时，仅可使用标清 */
   Resolution: number;
   /** 设置课堂同时最大可与老师进行连麦互动的人数，该参数支持正式上课/开播前调用修改房间修改。小班课取值范围[0,16]，大班课取值范围[0,1]，当取值为0时表示当前课堂/直播，不支持连麦互动。该取值影响计费，请根据业务实际情况设置。计费规则见“购买指南”下“计费概述”。 */
   MaxMicNumber: number;
@@ -828,6 +832,8 @@ declare interface CreateRoomRequest {
   RecordStream?: number;
   /** 板书截图生成类型。0 不生成板书（默认）；1 全量模式；2 单页去重模式 */
   WhiteBoardSnapshotMode?: number;
+  /** 字幕转写功能开关：0关闭，1开启，默认关闭 */
+  SubtitlesTranscription?: number;
 }
 
 declare interface CreateRoomResponse {
@@ -1369,6 +1375,8 @@ declare interface DescribeRoomResponse {
   RecordLayout?: number;
   /** 板书截图生成类型。0 不生成板书；1 全量模式；2 单页去重模式 */
   WhiteBoardSnapshotMode?: number;
+  /** 字幕转写功能开关：0关闭，1开启，默认关闭 */
+  SubtitlesTranscription?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1558,6 +1566,8 @@ declare interface GetRoomMessageRequest {
   Seq?: number;
   /** 消息拉取的条数。最大数量不能超过套餐包限制。 */
   Limit?: number;
+  /** 请求消息的userId */
+  UserId?: string;
 }
 
 declare interface GetRoomMessageResponse {
@@ -1746,6 +1756,8 @@ declare interface ModifyRoomRequest {
   RecordLang?: string;
   /** 板书截图生成类型。0 不生成板书；1 全量模式；2 单页去重模式 */
   WhiteBoardSnapshotMode?: number;
+  /** 字幕转写功能开关：0关闭，1开启，默认关闭 */
+  SubtitlesTranscription?: number;
 }
 
 declare interface ModifyRoomResponse {
@@ -1800,6 +1812,8 @@ declare interface SendRoomNormalMessageRequest {
   CloudCustomData?: string;
   /** 昵称，当FromAccount没有在房间中，需要填写NickName，当FromAccount在房间中，填写NickName无意义 */
   NickName?: string;
+  /** 消息的优先级，默认优先级 Normal。可以指定3种优先级，从高到低依次为 High、Normal 和 Low，区分大小写。 */
+  Priority?: string;
 }
 
 declare interface SendRoomNormalMessageResponse {

@@ -183,9 +183,9 @@ declare interface CloudStorageEvent {
   /** 事件ID */
   EventId: string;
   /** 事件录像上传状态，Finished: 全部上传成功 Partial: 部分上传成功 Failed: 上传失败 */
-  UploadStatus?: string | null;
+  UploadStatus?: string;
   /** 事件自定义数据 */
-  Data?: string | null;
+  Data?: string;
 }
 
 /** 云存事件及其关联的云存 AI 任务 */
@@ -238,6 +238,22 @@ declare interface CloudStorageTimeInfo {
 declare interface CloudStorageUserInfo {
   /** 用户ID */
   UserId?: string;
+}
+
+/** 云存上报统计信息 */
+declare interface CountDataInfo {
+  /** 视频上报异常次数 */
+  VideoExceptionNum?: number;
+  /** 视频上报成功次数 */
+  VideoSuccessNum?: number;
+  /** 视频上报成功率 */
+  VideoSuccessRate?: string;
+  /** 事件上报异常次数 */
+  EventExceptionNum?: number;
+  /** 事件上报成功次数 */
+  EventSuccessNum?: number;
+  /** 事件上报成功率 */
+  EventSuccessRate?: string;
 }
 
 /** 设备激活详情信息 */
@@ -351,21 +367,21 @@ declare interface DeviceInfo {
 /** 设备位置详情 */
 declare interface DevicePositionItem {
   /** 设备名称 */
-  DeviceName: string;
+  DeviceName?: string;
   /** 位置信息时间 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 设备经度信息 */
-  Longitude: number;
+  Longitude?: number;
   /** 设备纬度信息 */
-  Latitude: number;
+  Latitude?: number;
 }
 
 /** 设备签名 */
 declare interface DeviceSignatureInfo {
   /** 设备名 */
-  DeviceName: string;
+  DeviceName?: string;
   /** 设备签名 */
-  DeviceSignature: string;
+  DeviceSignature?: string;
 }
 
 /** 设备的用户 */
@@ -992,6 +1008,24 @@ declare interface TWeCallLicenseInfo {
   UsedNum?: number;
 }
 
+/** 视频语义搜索结果 */
+declare interface TargetInfo {
+  /** 视频唯一ID */
+  Id?: string;
+  /** 产品ID */
+  ProductId?: string;
+  /** 设备名称 */
+  DeviceName?: string;
+  /** 视频起始时间（毫秒级Unix时间戳） */
+  StartTimeMs?: number;
+  /** 视频结束时间（毫秒级Unix时间戳） */
+  EndTimeMs?: number;
+  /** 用户自定义事件ID，后续扩展使用 */
+  EventId?: string;
+  /** 视频内容摘要 */
+  Summary?: string;
+}
+
 /** 缩略图信息 */
 declare interface ThumbnailURLInfoList {
   /** 缩略图访问地址 */
@@ -1056,6 +1090,16 @@ declare interface VideoLicenseEntity {
   UsedCount?: number;
   /** 即将过期的激活码数量 */
   ExpiresSoonCount?: number;
+}
+
+/** TWeSee 语义理解结果 */
+declare interface VisionRecognitionResult {
+  /** 任务状态（1：失败；2：成功但结果为空；3：成功且结果非空） */
+  Status?: number;
+  /** 识别到的目标类型。可能取值：- `person`：人- `vehicle`：车辆- `dog`：狗- `cat`：猫- `fire`：火焰- `smoke`：烟雾- `package`：快递包裹- `license_plate`：车牌 */
+  DetectedClassifications?: string[];
+  /** 视频摘要文本 */
+  Summary?: string;
 }
 
 /** 微信硬件设备信息 */
@@ -1606,6 +1650,38 @@ declare interface CreateTRTCSignaturesWithRoomIdRequest {
 declare interface CreateTRTCSignaturesWithRoomIdResponse {
   /** 返回参数数组 */
   TRTCParamList?: TRTCParams[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateTWeSeeRecognitionTaskRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 输入视频 / 图片的 URL */
+  InputURL: string;
+  /** 自定义事件 ID */
+  CustomId?: string;
+  /** 是否保存该事件使其可被搜索 */
+  EnableSearch?: boolean;
+  /** 事件起始时间事件起始时间（毫秒级 UNIX 时间戳，若不传则默认为接口调用时间） */
+  StartTimeMs?: number;
+  /** 事件结束时间事件起始时间（毫秒级 UNIX 时间戳，若不传则默认为接口调用时间） */
+  EndTimeMs?: number;
+  /** 算法配置 */
+  Config?: string;
+  /** 是否自定义设备，为 true 时不检查设备存在性，默认为 false */
+  IsCustomDevice?: boolean;
+  /** 输入类型。可选值：- `video`：视频（默认值）- `image`：图片 */
+  InputType?: string;
+  /** 摘要服务质量。可选值：- `minutely`：分钟级（默认值）- `immediate`：立即 */
+  SummaryQOS?: string;
+}
+
+declare interface CreateTWeSeeRecognitionTaskResponse {
+  /** 任务 ID */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2236,6 +2312,26 @@ declare interface DescribeCloudStorageUsersResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCsReportCountDataInfoRequest {
+  /** 产品id */
+  ProductId: string;
+  /** 设备名 */
+  DeviceName: string;
+  /** 统计开始时间戳 */
+  StartTime: number;
+  /** 统计结束时间戳 */
+  EndTime: number;
+  /** 设备通道 */
+  ChannelId?: number;
+}
+
+declare interface DescribeCsReportCountDataInfoResponse {
+  /** 云存上报统计信息 */
+  Data?: CountDataInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDeviceBindGatewayRequest {
   /** 产品Id */
   ProductId: string;
@@ -2784,6 +2880,28 @@ declare interface DescribeStudioProductResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTWeSeeConfigRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 用户ID */
+  UserId?: string;
+  /** 通道ID */
+  ChannelId?: number;
+}
+
+declare interface DescribeTWeSeeConfigResponse {
+  /** 是否开启视频摘要 */
+  EnableSummary?: boolean;
+  /** 是否开启视频搜索 */
+  EnableSearch?: boolean;
+  /** 配置参数 */
+  Config?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTopicPolicyRequest {
   /** 产品ID */
   ProductId: string;
@@ -3256,6 +3374,26 @@ declare interface InheritCloudStorageUserResponse {
   RequestId?: string;
 }
 
+declare interface InvokeAISearchServiceRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 自然语言查询 */
+  Query: string;
+  /** 搜索结果总结的语言类型，支持的类型有：en-US、zh-CN、id-ID、th-TH */
+  SummaryLang?: string;
+}
+
+declare interface InvokeAISearchServiceResponse {
+  /** 基于搜索结果的总结 */
+  Summary?: string;
+  /** 视频结果集 */
+  Targets?: TargetInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface InvokeCloudStorageAIServiceTaskRequest {
   /** 产品 ID */
   ProductId: string;
@@ -3312,6 +3450,42 @@ declare interface InvokeExternalSourceAIServiceTaskResponse {
   TaskId?: string;
   /** 任务信息 */
   TaskInfo?: CloudStorageAIServiceTask;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface InvokeTWeSeeRecognitionTaskRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 输入视频 / 图片的 URL */
+  InputURL: string;
+  /** 自定义事件 ID */
+  CustomId?: string;
+  /** 是否保存该事件使其可被搜索 */
+  EnableSearch?: boolean;
+  /** 事件起始时间事件起始时间（毫秒级 UNIX 时间戳，若不传则默认为接口调用时间） */
+  StartTimeMs?: number;
+  /** 事件结束时间事件起始时间（毫秒级 UNIX 时间戳，若不传则默认为接口调用时间） */
+  EndTimeMs?: number;
+  /** 算法配置 */
+  Config?: string;
+  /** 是否自定义设备，为 true 时不检查设备存在性，默认为 false */
+  IsCustomDevice?: boolean;
+  /** 输入类型。可选值：- `video`：视频（默认值）- `image`：图片 */
+  InputType?: string;
+  /** 摘要服务质量。可选值：- `minutely`：分钟级（默认值）- `immediate`：立即 */
+  SummaryQOS?: string;
+}
+
+declare interface InvokeTWeSeeRecognitionTaskResponse {
+  /** 任务 ID */
+  TaskId?: string;
+  /** 任务是否执行完成 */
+  Completed?: boolean;
+  /** 语义理解任务结果（仅当 Completed 为 true 时包含该出参） */
+  Result?: VisionRecognitionResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3622,6 +3796,28 @@ declare interface ModifyStudioProductRequest {
 declare interface ModifyStudioProductResponse {
   /** 产品描述 */
   Product?: ProductEntry;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyTWeSeeConfigRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 用户ID */
+  UserId?: string;
+  /** 通道ID */
+  ChannelId?: number;
+  /** 是否开启视频摘要，不传则不修改 */
+  EnableSummary?: boolean;
+  /** 是否开启视频搜索，不传则不修改 */
+  EnableSearch?: boolean;
+  /** 配置参数，不传则不修改 */
+  Config?: string;
+}
+
+declare interface ModifyTWeSeeConfigResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4075,6 +4271,8 @@ declare interface Iotexplorer {
   CreateStudioProduct(data: CreateStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStudioProductResponse>;
   /** 自定义房间id创建TRTC通话参数 {@link CreateTRTCSignaturesWithRoomIdRequest} {@link CreateTRTCSignaturesWithRoomIdResponse} */
   CreateTRTCSignaturesWithRoomId(data: CreateTRTCSignaturesWithRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTRTCSignaturesWithRoomIdResponse>;
+  /** 创建 TWeSee 语义理解任务 {@link CreateTWeSeeRecognitionTaskRequest} {@link CreateTWeSeeRecognitionTaskResponse} */
+  CreateTWeSeeRecognitionTask(data: CreateTWeSeeRecognitionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeSeeRecognitionTaskResponse>;
   /** 创建Topic {@link CreateTopicPolicyRequest} {@link CreateTopicPolicyResponse} */
   CreateTopicPolicy(data: CreateTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicPolicyResponse>;
   /** 创建规则 {@link CreateTopicRuleRequest} {@link CreateTopicRuleResponse} */
@@ -4145,6 +4343,8 @@ declare interface Iotexplorer {
   DescribeCloudStorageTime(data: DescribeCloudStorageTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageTimeResponse>;
   /** 拉取云存用户列表 {@link DescribeCloudStorageUsersRequest} {@link DescribeCloudStorageUsersResponse} */
   DescribeCloudStorageUsers(data: DescribeCloudStorageUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageUsersResponse>;
+  /** 获取云存上报统计信息 {@link DescribeCsReportCountDataInfoRequest} {@link DescribeCsReportCountDataInfoResponse} */
+  DescribeCsReportCountDataInfo(data: DescribeCsReportCountDataInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCsReportCountDataInfoResponse>;
   /** 查看设备详情 {@link DescribeDeviceRequest} {@link DescribeDeviceResponse} */
   DescribeDevice(data: DescribeDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceResponse>;
   /** 查询设备绑定的网关设备 {@link DescribeDeviceBindGatewayRequest} {@link DescribeDeviceBindGatewayResponse} */
@@ -4157,7 +4357,7 @@ declare interface Iotexplorer {
   DescribeDeviceFirmWare(data: DescribeDeviceFirmWareRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceFirmWareResponse>;
   /** 获取设备当前固件信息 {@link DescribeDeviceFirmwaresRequest} {@link DescribeDeviceFirmwaresResponse} */
   DescribeDeviceFirmwares(data: DescribeDeviceFirmwaresRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceFirmwaresResponse>;
-  /** 获取实时位置解析 {@link DescribeDeviceLocationSolveRequest} {@link DescribeDeviceLocationSolveResponse} */
+  /** @deprecated 获取实时位置解析 {@link DescribeDeviceLocationSolveRequest} {@link DescribeDeviceLocationSolveResponse} */
   DescribeDeviceLocationSolve(data: DescribeDeviceLocationSolveRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceLocationSolveResponse>;
   /** 拉取有效云存套餐列表 {@link DescribeDevicePackagesRequest} {@link DescribeDevicePackagesResponse} */
   DescribeDevicePackages(data: DescribeDevicePackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicePackagesResponse>;
@@ -4203,6 +4403,8 @@ declare interface Iotexplorer {
   DescribeSpaceFenceEventList(data: DescribeSpaceFenceEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpaceFenceEventListResponse>;
   /** 获取产品详情 {@link DescribeStudioProductRequest} {@link DescribeStudioProductResponse} */
   DescribeStudioProduct(data: DescribeStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStudioProductResponse>;
+  /** 查询 TWeSee 配置 {@link DescribeTWeSeeConfigRequest} {@link DescribeTWeSeeConfigResponse} */
+  DescribeTWeSeeConfig(data: DescribeTWeSeeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeSeeConfigResponse>;
   /** 查看Topic详情 {@link DescribeTopicPolicyRequest} {@link DescribeTopicPolicyResponse} */
   DescribeTopicPolicy(data: DescribeTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicPolicyResponse>;
   /** 获取规则信息 {@link DescribeTopicRuleRequest} {@link DescribeTopicRuleResponse} */
@@ -4257,10 +4459,14 @@ declare interface Iotexplorer {
   GetWechatDeviceTicket(data: GetWechatDeviceTicketRequest, config?: AxiosRequestConfig): AxiosPromise<GetWechatDeviceTicketResponse>;
   /** 继承云存用户 {@link InheritCloudStorageUserRequest} {@link InheritCloudStorageUserResponse} */
   InheritCloudStorageUser(data: InheritCloudStorageUserRequest, config?: AxiosRequestConfig): AxiosPromise<InheritCloudStorageUserResponse>;
+  /** 视频语义搜索 {@link InvokeAISearchServiceRequest} {@link InvokeAISearchServiceResponse} */
+  InvokeAISearchService(data: InvokeAISearchServiceRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeAISearchServiceResponse>;
   /** 同步执行设备云存AI分析任务 {@link InvokeCloudStorageAIServiceTaskRequest} {@link InvokeCloudStorageAIServiceTaskResponse} */
   InvokeCloudStorageAIServiceTask(data: InvokeCloudStorageAIServiceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeCloudStorageAIServiceTaskResponse>;
   /** 同步执行外部视频AI分析任务 {@link InvokeExternalSourceAIServiceTaskRequest} {@link InvokeExternalSourceAIServiceTaskResponse} */
   InvokeExternalSourceAIServiceTask(data: InvokeExternalSourceAIServiceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeExternalSourceAIServiceTaskResponse>;
+  /** 同步执行 TWeSee 语义理解任务 {@link InvokeTWeSeeRecognitionTaskRequest} {@link InvokeTWeSeeRecognitionTaskResponse} */
+  InvokeTWeSeeRecognitionTask(data: InvokeTWeSeeRecognitionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeTWeSeeRecognitionTaskResponse>;
   /** 获取设备的历史事件 {@link ListEventHistoryRequest} {@link ListEventHistoryResponse} */
   ListEventHistory(data: ListEventHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<ListEventHistoryResponse>;
   /** 获取固件列表 {@link ListFirmwaresRequest} {@link ListFirmwaresResponse} */
@@ -4293,6 +4499,8 @@ declare interface Iotexplorer {
   ModifySpaceProperty(data: ModifySpacePropertyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySpacePropertyResponse>;
   /** 修改产品 {@link ModifyStudioProductRequest} {@link ModifyStudioProductResponse} */
   ModifyStudioProduct(data: ModifyStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStudioProductResponse>;
+  /** 修改 TWeSee 配置 {@link ModifyTWeSeeConfigRequest} {@link ModifyTWeSeeConfigResponse} */
+  ModifyTWeSeeConfig(data: ModifyTWeSeeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTWeSeeConfigResponse>;
   /** 更新Topic {@link ModifyTopicPolicyRequest} {@link ModifyTopicPolicyResponse} */
   ModifyTopicPolicy(data: ModifyTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicPolicyResponse>;
   /** 修改规则 {@link ModifyTopicRuleRequest} {@link ModifyTopicRuleResponse} */

@@ -2,6 +2,14 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** Agent调试信息 */
+declare interface AgentDebugInfo {
+  /** 工具、大模型的输入信息，json */
+  Input?: string | null;
+  /** 工具、大模型的输出信息，json */
+  Output?: string | null;
+}
+
 /** 思考事件过程信息 */
 declare interface AgentProcedure {
   /** 索引 */
@@ -340,6 +348,14 @@ declare interface Credentials {
   TmpSecretKey?: string | null;
 }
 
+/** 文档列表筛选标识位 */
+declare interface DocFilterFlag {
+  /** 标识位 */
+  Flag?: string;
+  /** 标识值 */
+  Value?: boolean;
+}
+
 /** 文档片段 */
 declare interface DocSegment {
   /** 片段ID */
@@ -408,6 +424,12 @@ declare interface EmbeddingObject {
   Embedding?: number[];
 }
 
+/** 扩展信息 */
+declare interface ExtraInfo {
+  /** ECharts信息 */
+  EChartsInfo?: string[] | null;
+}
+
 /** 实时上传的文件信息 */
 declare interface FileInfo {
   /** 文件名称 */
@@ -456,6 +478,14 @@ declare interface HistorySummary {
   User?: string | null;
 }
 
+/** 意图达成方式 */
+declare interface IntentAchievement {
+  /** 意图达成方式，qa:问答回复、doc：文档回复、workflow：工作流回复，llm：大模型回复 */
+  Name?: string;
+  /** 意图达成方式描述 */
+  Desc?: string;
+}
+
 /** 请求的API信息 */
 declare interface InvokeAPI {
   /** 请求方法，如GET/POST等 */
@@ -502,7 +532,7 @@ declare interface KnowledgeDetail {
 declare interface KnowledgeQaConfig {
   /** 欢迎语，200字符以内 */
   Greeting?: string | null;
-  /** 角色描述，300字符以内 */
+  /** 角色描述，4000字符以内。通过填写描述，设定应用的 #角色名称、 #风格特点 及可达成的#意图。建议按照下面的模板填写，且自定义意图建议不超过5个。#角色名称：#风格特点：#输出要求：#能力限制：能够达成以下用户意图##意图名称：##意图描述：##意图示例：##意图实现： */
   RoleDescription?: string | null;
   /** 生成模型配置 */
   Model?: AppModel | null;
@@ -524,6 +554,10 @@ declare interface KnowledgeQaConfig {
   Plugins?: KnowledgeQaPlugin[] | null;
   /** 思考模型配置 */
   ThoughtModel?: AppModel | null;
+  /** 意图达成方式优先级 */
+  IntentAchievements?: IntentAchievement[] | null;
+  /** 是否开启图文检索 */
+  ImageTextRetrieval?: boolean | null;
 }
 
 /** 应用管理输出配置 */
@@ -698,6 +732,8 @@ declare interface ListDocItem {
   Processing?: number[] | null;
   /** 文档创建落库时间 */
   CreateTime?: string | null;
+  /** 文档所属分类ID */
+  CateBizId?: string;
 }
 
 /** 问答详情数据 */
@@ -884,6 +920,8 @@ declare interface MsgRecord {
   QuoteInfos?: QuoteInfo[] | null;
   /** Agent的思考过程信息 */
   AgentThought?: AgentThought | null;
+  /** 扩展信息 */
+  ExtraInfo?: ExtraInfo | null;
 }
 
 /** 聊天详情Refer */
@@ -926,6 +964,8 @@ declare interface PluginToolReqParam {
   DefaultValue?: string;
   /** 子参数,ParamType 是OBJECT 或 ARRAY<>类型有用 */
   SubParams?: PluginToolReqParam[];
+  /** 插件参数配置是否隐藏不可见，true-隐藏不可见，false-可见 */
+  GlobalHidden?: boolean;
 }
 
 /** 文本的坐标，以四个顶点坐标表示注意：此字段可能返回 null，表示取不到有效值 */
@@ -970,6 +1010,8 @@ declare interface ProcedureDebugging {
   TaskFlow?: TaskFlowSummary | null;
   /** 工作流调试信息 */
   WorkFlow?: WorkFlowSummary | null;
+  /** Agent调试信息 */
+  Agent?: AgentDebugInfo | null;
 }
 
 /** 获取QA分类分组 */
@@ -1683,7 +1725,7 @@ declare interface CreateRejectedQuestionResponse {
 }
 
 declare interface CreateReleaseRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 发布描述 */
   Desc?: string;
@@ -2528,6 +2570,8 @@ declare interface GetDocPreviewResponse {
   Bucket?: string;
   /** 存在文档重命名情况下的新名称, 评测端优先使用这个名称 */
   NewName?: string;
+  /** 文件md结果cos临时地址 */
+  ParseResultCosUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2597,6 +2641,8 @@ declare interface GetMsgRecordRequest {
   BotAppKey?: string;
   /** 场景, 体验: 1; 正式: 2 */
   Scene?: number;
+  /** 传该值，代表拉取该记录id的前后总共count条消息记录 */
+  MidRecordId?: string;
 }
 
 declare interface GetMsgRecordResponse {
@@ -2857,6 +2903,10 @@ declare interface ListDocRequest {
   QueryType?: string;
   /** 分类ID */
   CateBizId?: string;
+  /** 文件类型分类筛选 */
+  FileTypes?: string[];
+  /** 文档列表筛选标识位 */
+  FilterFlag?: DocFilterFlag[];
 }
 
 declare interface ListDocResponse {
@@ -2993,7 +3043,7 @@ declare interface ListRejectedQuestionResponse {
 }
 
 declare interface ListReleaseConfigPreviewRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 页码 */
   PageNumber: number;
@@ -3361,7 +3411,7 @@ declare interface ModifyRejectedQuestionResponse {
 declare interface QueryRewriteRequest {
   /** 需要改写的问题 */
   Question: string;
-  /** 需要改写的多轮历史会话 */
+  /** 需要改写的多轮历史会话，每轮历史对话需要包含user（问）和assistant（答）成对输入，由于模型字符限制，最多提供4轮对话。 */
   Messages: Message[];
   /** 模型名称 */
   Model?: string;
@@ -3701,7 +3751,7 @@ declare interface Lke {
   GetEmbedding(data: GetEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<GetEmbeddingResponse>;
   /** 点踩点赞数据统计 {@link GetLikeDataCountRequest} {@link GetLikeDataCountResponse} */
   GetLikeDataCount(data: GetLikeDataCountRequest, config?: AxiosRequestConfig): AxiosPromise<GetLikeDataCountResponse>;
-  /** 获取聊天历史请求 {@link GetMsgRecordRequest} {@link GetMsgRecordResponse} */
+  /** 获取聊天历史 {@link GetMsgRecordRequest} {@link GetMsgRecordResponse} */
   GetMsgRecord(data: GetMsgRecordRequest, config?: AxiosRequestConfig): AxiosPromise<GetMsgRecordResponse>;
   /** 查询文档解析任务结果 {@link GetReconstructDocumentResultRequest} {@link GetReconstructDocumentResultResponse} */
   GetReconstructDocumentResult(data: GetReconstructDocumentResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetReconstructDocumentResultResponse>;
@@ -3789,7 +3839,7 @@ declare interface Lke {
   RetryRelease(data: RetryReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<RetryReleaseResponse>;
   /** 重排序（已下线） {@link RunReRankRequest} {@link RunReRankResponse} */
   RunReRank(data?: RunReRankRequest, config?: AxiosRequestConfig): AxiosPromise<RunReRankResponse>;
-  /** 知识库文档问答保存 {@link SaveDocRequest} {@link SaveDocResponse} */
+  /** 知识库文档录入 {@link SaveDocRequest} {@link SaveDocResponse} */
   SaveDoc(data: SaveDocRequest, config?: AxiosRequestConfig): AxiosPromise<SaveDocResponse>;
   /** 终止文档解析 {@link StopDocParseRequest} {@link StopDocParseResponse} */
   StopDocParse(data: StopDocParseRequest, config?: AxiosRequestConfig): AxiosPromise<StopDocParseResponse>;

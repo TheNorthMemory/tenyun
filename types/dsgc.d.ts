@@ -3683,6 +3683,10 @@ declare interface DescribeDSPALevelGroupsRequest {
   DspaId: string;
   /** 分级组名称 */
   Name?: string;
+  /** 每页返回的记录数 */
+  Limit?: number;
+  /** 从第几条记录开始返回 */
+  Offset?: number;
 }
 
 declare interface DescribeDSPALevelGroupsResponse {

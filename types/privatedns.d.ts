@@ -288,7 +288,7 @@ declare interface CreatePrivateZoneRequest {
 }
 
 declare interface CreatePrivateZoneResponse {
-  /** 私有域ID, zone-xxxxxx */
+  /** 私有域ID, zone-12345678 */
   ZoneId?: string;
   /** 私有域名 */
   Domain?: string;
@@ -469,7 +469,7 @@ declare interface DescribePrivateZoneRecordListResponse {
 }
 
 declare interface DescribePrivateZoneRequest {
-  /** 域名，格式必须是标准的TLD */
+  /** 私有域id */
   ZoneId: string;
 }
 
@@ -507,6 +507,8 @@ declare interface DescribeRequestDataRequest {
   Filters?: Filter[];
   /** 请求量统计结束时间，格式：2020-11-22 23:59:59 */
   TimeRangeEnd?: string;
+  /** 是否导出：true导出，false不导出 */
+  Export?: boolean;
 }
 
 declare interface DescribeRequestDataResponse {
@@ -514,6 +516,8 @@ declare interface DescribeRequestDataResponse {
   Data?: MetricData[];
   /** 请求量单位时间: Day：天，Hour：小时 */
   Interval?: string;
+  /** 导出数据下载地址 */
+  Url?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -570,7 +574,7 @@ declare interface ModifyPrivateZoneVpcRequest {
 }
 
 declare interface ModifyPrivateZoneVpcResponse {
-  /** 私有域ID, zone-xxxxxx */
+  /** 私有域ID, zone-12345ds6 */
   ZoneId?: string;
   /** 解析域关联的VPC列表 */
   VpcSet?: VpcInfo[];

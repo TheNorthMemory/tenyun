@@ -174,6 +174,26 @@ declare interface BlockIgnoreRule {
   FwType?: number;
 }
 
+/** 防火墙实例运行状态 */
+declare interface CfwInsStatus {
+  /** 防火墙实例id */
+  CfwInsId?: string;
+  /** 防火墙类型，nat：nat防火墙；ew：vpc间防火墙 */
+  FwType?: string;
+  /** 实例所属地域 */
+  Region?: string;
+  /** 实例运行状态，Running：正常运行；BypassAutoFix：bypass修复；Updating：升级中；Expand：扩容中；BypassManual：手动触发bypass中；BypassAuto：自动触发bypass中 */
+  Status?: string;
+  /** 事件时间 */
+  EventTime?: string;
+  /** 恢复时间 */
+  RecoverTime?: string;
+  /** 实例名称 */
+  CfwInsName?: string;
+  /** Normal: 正常模式OnlyRoute: 透明模式 */
+  TrafficMode?: string;
+}
+
 /** NAT防火墙Dnat规则 */
 declare interface CfwNatDnatRule {
   /** 网络协议，可选值：TCP、UDP。 */
@@ -380,6 +400,10 @@ declare interface DescAcItem {
   TargetName?: string;
   /** 规则最近命中时间 */
   LastHitTime?: string;
+  /** 地区简称 */
+  CountryKey?: string;
+  /** 省份、城市简称 */
+  CityKey?: string;
 }
 
 /** NAT防火墙Dnat规则列表 */
@@ -548,6 +572,8 @@ declare interface EnterpriseSecurityGroupRuleRuleInfo {
   BetaList?: EnterpriseSecurityGroupRuleBetaInfo[];
   /** 规则id 等同RuleUuid */
   Id?: number;
+  /** 域名解析的IP统计 */
+  DnsParseCount?: SgDnsParseCount;
 }
 
 /** 防火墙网段信息 */
@@ -1066,7 +1092,7 @@ declare interface SecurityGroupRule {
   DestType: string;
   /** 访问控制策略中设置的流量通过云防火墙的方式。取值：accept：放行drop：拒绝 */
   RuleAction: string;
-  /** 描述 */
+  /** 规则描述 用于规则使用或者场景的描述，最多支持50个字符 */
   Description: string;
   /** 规则顺序，-1表示最低，1表示最高，请勿和外层Type冲突（和外层的Type配合使用，当中间插入时，指定添加位置） */
   OrderIndex: string;
@@ -1108,6 +1134,14 @@ declare interface SequenceData {
   OrderIndex: number;
   /** 修改后执行顺序 */
   NewOrderIndex: number;
+}
+
+/** 企业安全组域名解析的IP统计 */
+declare interface SgDnsParseCount {
+  /** 有效下发的IP个数，离散数据 */
+  ValidCount?: number;
+  /** 未下发的IP个数，离散数据 */
+  InvalidCount?: number;
 }
 
 /** StaticInfo 告警柱形图统计信息 */
@@ -2246,6 +2280,18 @@ declare interface DescribeCfwEipsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCfwInsStatusRequest {
+}
+
+declare interface DescribeCfwInsStatusResponse {
+  /** 防火墙实例运行状态 */
+  CfwInsStatus?: CfwInsStatus[] | null;
+  /** 0 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDefenseSwitchRequest {
 }
 
@@ -2372,6 +2418,8 @@ declare interface DescribeFwEdgeIpsResponse {
   RegionLst?: string[];
   /** 实例类型列表 */
   InstanceTypeLst?: string[];
+  /** 串行模式开关个数 */
+  SerilCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3669,6 +3717,8 @@ declare interface Cfw {
   DescribeBlockStaticList(data: DescribeBlockStaticListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlockStaticListResponse>;
   /** 查询防火墙弹性公网IP {@link DescribeCfwEipsRequest} {@link DescribeCfwEipsResponse} */
   DescribeCfwEips(data: DescribeCfwEipsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfwEipsResponse>;
+  /** cfw实例运行状态查询 {@link DescribeCfwInsStatusRequest} {@link DescribeCfwInsStatusResponse} */
+  DescribeCfwInsStatus(data?: DescribeCfwInsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfwInsStatusResponse>;
   /** 获取入侵防御按钮列表 {@link DescribeDefenseSwitchRequest} {@link DescribeDefenseSwitchResponse} */
   DescribeDefenseSwitch(data?: DescribeDefenseSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefenseSwitchResponse>;
   /** 查询新版安全组下发进度 {@link DescribeEnterpriseSGRuleProgressRequest} {@link DescribeEnterpriseSGRuleProgressResponse} */

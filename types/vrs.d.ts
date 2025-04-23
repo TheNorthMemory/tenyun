@@ -147,6 +147,8 @@ declare interface CreateVRSTaskRequest {
   TaskType?: number;
   /** 校验音频ID。（仅基础版声音复刻使用） */
   VPRAudioId?: string;
+  /** 是否开启语音增强，0 - 关闭，1 - 开启 。默认关闭语音增强仅适用于一句话复刻场景 */
+  EnableVoiceEnhance?: number;
 }
 
 declare interface CreateVRSTaskResponse {

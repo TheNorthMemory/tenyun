@@ -45,6 +45,10 @@ declare interface AssumeRoleRequest {
   Tags?: Tag[];
   /** 调用者身份uin */
   SourceIdentity?: string;
+  /** MFA序列号，与进行调用的CAM用户关联的MFA设备的标识号。格式qcs::cam:uin/${ownerUin}::mfa/${mfaType}。mfaType支持softToken（软token） */
+  SerialNumber?: string;
+  /** mfa身份验证码。 */
+  TokenCode?: string;
 }
 
 declare interface AssumeRoleResponse {
@@ -144,6 +148,26 @@ declare interface GetFederationTokenResponse {
   RequestId?: string;
 }
 
+declare interface GetSessionTokenRequest {
+  /** MFA序列号，与进行调用的CAM用户关联的MFA设备的标识号。格式qcs::cam:uin/${ownerUin}::mfa/${mfaType}。mfaType支持softToken（软token） */
+  SerialNumber: string;
+  /** mfa身份验证码。 */
+  TokenCode: string;
+  /** 指定临时证书的有效期，单位：秒，默认1800秒，主账号最长可设定有效期为7200秒，子账号最长可设定有效期为129600秒。 */
+  DurationSeconds?: number;
+}
+
+declare interface GetSessionTokenResponse {
+  /** 临时访问凭证 */
+  Credentials?: Credentials;
+  /** 证书无效的时间，返回 Unix 时间戳，精确到秒 */
+  ExpiredTime?: number;
+  /** 临时访问凭证的过期时间，以 iso8601 格式的 UTC 时间表示 */
+  Expiration?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface QueryApiKeyRequest {
   /** 待查询的账号uin(不填默认查当前账号uin) */
   TargetUin?: number;
@@ -169,6 +193,8 @@ declare interface Sts {
   GetCallerIdentity(data?: GetCallerIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<GetCallerIdentityResponse>;
   /** 获取联合身份临时访问凭证 {@link GetFederationTokenRequest} {@link GetFederationTokenResponse} */
   GetFederationToken(data: GetFederationTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetFederationTokenResponse>;
+  /** 获取MFA临时证书 {@link GetSessionTokenRequest} {@link GetSessionTokenResponse} */
+  GetSessionToken(data: GetSessionTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetSessionTokenResponse>;
   /** 拉取API密钥列表 {@link QueryApiKeyRequest} {@link QueryApiKeyResponse} */
   QueryApiKey(data?: QueryApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<QueryApiKeyResponse>;
 }

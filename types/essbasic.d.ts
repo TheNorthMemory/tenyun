@@ -800,7 +800,7 @@ declare interface FlowResourceUrlInfo {
   ResourceUrlInfos?: ResourceUrlInfo[];
 }
 
-/** 电子文档的控件填充信息。按照控件类型进行相应的填充。当控件的 ComponentType='TEXT'时，FormField.ComponentValue填入文本内容```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "文本内容"}```当控件的 ComponentType='MULTI_LINE_TEXT'时，FormField.ComponentValue填入文本内容，支持自动换行。```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "多行文本内容"}```当控件的 ComponentType='CHECK_BOX'时，FormField.ComponentValue填入true或false文本```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "true"}```当控件的 ComponentType='FILL_IMAGE'时，FormField.ComponentValue填入图片的资源ID```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxxx"}```当控件的 ComponentType='ATTACHMENT'时，FormField.ComponentValue填入附件图片的资源ID列表，以逗号分隔，单个附件控件最多支持6个资源ID；```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx1,yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx2,yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx3"}```当控件的 ComponentType='SELECTOR'时，FormField.ComponentValue填入选择的选项内容；```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "选择的内容"}```当控件的 ComponentType='DATE'时，FormField.ComponentValue填入日期内容；```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "2023年01月01日"}```当控件的 ComponentType='DISTRICT'时，FormField.ComponentValue填入省市区内容；```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "广东省深圳市福田区"}```【数据表格传参说明】当控件的 ComponentType='DYNAMIC_TABLE'时，FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）输入示例1：```{ "headers":[ { "content":"head1" }, { "content":"head2" }, { "content":"head3" } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```输入示例2（表格表头宽度比例配置）：```{ "headers":[ { "content":"head1", "widthPercent": 30 }, { "content":"head2", "widthPercent": 30 }, { "content":"head3", "widthPercent": 40 } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```输入示例3（表格设置字体加粗颜色）：```{ "headers":[ { "content":"head1" }, { "content":"head2" }, { "content":"head3" } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123", "style": {"color": "#b50000", "fontSize": 12,"bold": true,"align": "CENTER"} }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456", "style": {"color": "#b50000", "fontSize": 12,"bold": true,"align": "LEFT"} }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789", "style": {"color": "#b500bf", "fontSize": 12,"bold": false,"align": "RIGHT"} } ] }}```表格参数说明| 名称 | 类型 | 描述 || ------------------- | ------- | ------------------------------------------------- || headers | Array | 表头：不超过10列，不支持单元格合并，字数不超过100 || rowCount | Integer | 表格内容最大行数 || cells.N.rowStart | Integer | 单元格坐标：行起始index || cells.N.rowEnd | Integer | 单元格坐标：行结束index || cells.N.columnStart | Integer | 单元格坐标：列起始index || cells.N.columnEnd | Integer | 单元格坐标：列结束index || cells.N.content | String | 单元格内容，字数不超过100 || cells.N.style | String | 单元格字体风格配置 ，风格配置的json字符串 如： {"font":"黑体","fontSize":12,"color":"#FFFFFF","bold":true,"align":"CENTER"} |表格参数headers说明widthPercent Integer 表头单元格列占总表头的比例，例如1：30表示 此列占表头的30%，不填写时列宽度平均拆分；例如2：总2列，某一列填写40，剩余列可以为空，按照60计算。；例如3：总3列，某一列填写30，剩余2列可以为空，分别为(100-30)/2=35content String 表头单元格内容，字数不超过100style String 为字体风格设置 风格支持： font : 目前支持 黑体、宋体; fontSize： 6-72; color：000000-FFFFFF 字符串形如： "#FFFFFF" 或者 "0xFFFFFF"; bold ： 是否加粗， true ： 加粗 false： 不加粗; align: 对其方式， 支持 LEFT / RIGHT / CENTER */
+/** 电子文档的控件填充信息。按照控件类型进行相应的填充。当控件的 ComponentType='TEXT'时，FormField.ComponentValue填入文本内容```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "文本内容"}```当控件的 ComponentType='MULTI_LINE_TEXT'时，FormField.ComponentValue填入文本内容，支持自动换行。```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "多行文本内容"}```当控件的 ComponentType='CHECK_BOX'时，FormField.ComponentValue填入true或false文本```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "true"}```当控件的 ComponentType='FILL_IMAGE'时，FormField.ComponentValue填入图片的资源ID```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxxx"}```当控件的 ComponentType='ATTACHMENT'时，FormField.ComponentValue填入附件图片的资源ID列表，以逗号分隔，单个附件控件最多支持6个资源ID；```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx1,yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx2,yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx3"}```当控件的 ComponentType='SELECTOR'时，FormField.ComponentValue填入选择的选项内容；```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "选择的内容"}```当控件的 ComponentType='DATE'时，FormField.ComponentValue填入日期内容；```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "2023年01月01日"}```当控件的 ComponentType='DISTRICT'时，FormField.ComponentValue填入省市区内容；```FormField输入示例：{ "ComponentId": "componentId1", "ComponentValue": "广东省深圳市福田区"}```【数据表格传参说明】当控件的 ComponentType='DYNAMIC_TABLE'时，FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）输入示例1：```{ "headers":[ { "content":"head1" }, { "content":"head2" }, { "content":"head3" } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```输入示例2（表格表头宽度比例配置）：```{ "headers":[ { "content":"head1", "widthPercent": 30 }, { "content":"head2", "widthPercent": 30 }, { "content":"head3", "widthPercent": 40 } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123" }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456" }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789" } ] }}```输入示例3（表格设置字体加粗颜色）：```{ "headers":[ { "content":"head1" }, { "content":"head2" }, { "content":"head3" } ], "rowCount":3, "body":{ "cells":[ { "rowStart":1, "rowEnd":1, "columnStart":1, "columnEnd":1, "content":"123", "style": {"color": "#b50000", "fontSize": 12,"bold": true,"align": "CENTER"} }, { "rowStart":2, "rowEnd":3, "columnStart":1, "columnEnd":2, "content":"456", "style": {"color": "#b50000", "fontSize": 12,"bold": true,"align": "LEFT"} }, { "rowStart":3, "rowEnd":3, "columnStart":3, "columnEnd":3, "content":"789", "style": {"color": "#b500bf", "fontSize": 12,"bold": false,"align": "RIGHT"} } ] }}```输入示例4（表格设置表头不合成到文件）：```{ "headers": [ { "content": "序号" }, { "content": "品牌" }, { "content": "商品名称" }, { "content": "粒径" }, { "content": "规格" }, { "content": "数量(包)" }, { "content": "重量(吨)" } ], "rowCount": 5, "body": { "cells": [ { "rowStart": 1, "rowEnd": 1, "columnStart": 1, "columnEnd": 1, "content": "1" }, { "rowStart": 1, "rowEnd": 1, "columnStart": 2, "columnEnd": 2, "content": "品牌名称1" }, { "rowStart": 1, "rowEnd": 1, "columnStart": 3, "columnEnd": 3, "content": "商品名称1" }, { "rowStart": 1, "rowEnd": 1, "columnStart": 4, "columnEnd": 4, "content": "7#" }, { "rowStart": 1, "rowEnd": 1, "columnStart": 5, "columnEnd": 5, "content": "20" }, { "rowStart": 1, "rowEnd": 1, "columnStart": 6, "columnEnd": 6, "content": "50" }, { "rowStart": 1, "rowEnd": 1, "columnStart": 7, "columnEnd": 7, "content": "1.000" }, { "rowStart": 2, "rowEnd": 2, "columnStart": 1, "columnEnd": 1, "content": "2" }, { "rowStart": 2, "rowEnd": 2, "columnStart": 2, "columnEnd": 2, "content": "品牌名称2" }, { "rowStart": 2, "rowEnd": 2, "columnStart": 3, "columnEnd": 3, "content": "商品名称2" }, { "rowStart": 2, "rowEnd": 2, "columnStart": 4, "columnEnd": 4, "content": "5#" }, { "rowStart": 2, "rowEnd": 2, "columnStart": 5, "columnEnd": 5, "content": "20" }, { "rowStart": 2, "rowEnd": 2, "columnStart": 6, "columnEnd": 6, "content": "20" }, { "rowStart": 2, "rowEnd": 2, "columnStart": 7, "columnEnd": 7, "content": "0.400" }, { "rowStart": 3, "rowEnd": 3, "columnStart": 1, "columnEnd": 1, "content": "3" }, { "rowStart": 3, "rowEnd": 3, "columnStart": 2, "columnEnd": 2, "content": "品牌名称3" }, { "rowStart": 3, "rowEnd": 3, "columnStart": 3, "columnEnd": 3, "content": "商品名称3" }, { "rowStart": 3, "rowEnd": 3, "columnStart": 4, "columnEnd": 4, "content": "2#" }, { "rowStart": 3, "rowEnd": 3, "columnStart": 5, "columnEnd": 5, "content": "20" }, { "rowStart": 3, "rowEnd": 3, "columnStart": 6, "columnEnd": 6, "content": "5" }, { "rowStart": 3, "rowEnd": 3, "columnStart": 7, "columnEnd": 7, "content": "0.100" }, { "rowStart": 4, "rowEnd": 4, "columnStart": 1, "columnEnd": 1, "content": "4" }, { "rowStart": 4, "rowEnd": 4, "columnStart": 2, "columnEnd": 2, "content": "品牌名称4" }, { "rowStart": 4, "rowEnd": 4, "columnStart": 3, "columnEnd": 3, "content": "商品名称4" }, { "rowStart": 4, "rowEnd": 4, "columnStart": 4, "columnEnd": 4, "content": "3#" }, { "rowStart": 4, "rowEnd": 4, "columnStart": 5, "columnEnd": 5, "content": "20" }, { "rowStart": 4, "rowEnd": 4, "columnStart": 6, "columnEnd": 6, "content": "10" }, { "rowStart": 4, "rowEnd": 4, "columnStart": 7, "columnEnd": 7, "content": "0.200" }, { "rowStart": 5, "rowEnd": 5, "columnStart": 1, "columnEnd": 5, "content": "合计" }, { "rowStart": 5, "rowEnd": 5, "columnStart": 6, "columnEnd": 6, "content": "85" }, { "rowStart": 5, "rowEnd": 5, "columnStart": 7, "columnEnd": 7, "content": "1.700" } ] }, "settings": { "headerRowDisplay": false }}```表格参数说明| 名称 | 类型 | 描述 || ------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------- || headers | Array | 表头：不超过10列，不支持单元格合并，字数不超过100 || rowCount | Integer | 表格内容最大行数 || cells.N.rowStart | Integer | 单元格坐标：行起始index || cells.N.rowEnd | Integer | 单元格坐标：行结束index || cells.N.columnStart | Integer | 单元格坐标：列起始index || cells.N.columnEnd | Integer | 单元格坐标：列结束index || cells.N.content | String | 单元格内容，字数不超过100 || cells.N.style | String | 单元格字体风格配置 ，风格配置的json字符串 如： {"font":"黑体","fontSize":12,"color":"#FFFFFF","bold":true,"align":"CENTER"} || settings | Object | 表格全局设定。目前支持设置表头不显示，示例：{"headerRowDisplay":false} |表格参数headers说明widthPercent Integer 表头单元格列占总表头的比例，例如1：30表示 此列占表头的30%，不填写时列宽度平均拆分；例如2：总2列，某一列填写40，剩余列可以为空，按照60计算。；例如3：总3列，某一列填写30，剩余2列可以为空，分别为(100-30)/2=35content String 表头单元格内容，字数不超过100style String 为字体风格设置 风格支持： font : 目前支持 黑体、宋体; fontSize： 6-72; color：000000-FFFFFF 字符串形如： "#FFFFFF" 或者 "0xFFFFFF"; bold ： 是否加粗， true ： 加粗 false： 不加粗; align: 对其方式， 支持 LEFT / RIGHT / CENTER */
 declare interface FormField {
   /** 控件填充值，ComponentType和传入值格式对应关系如下： TEXT : 文本内容 MULTI_LINE_TEXT : 文本内容， 可以用 \n 来控制换行位置 CHECK_BOX : true/false FILL_IMAGE、ATTACHMENT : 附件的FileId，需要通过UploadFiles接口上传获取 SELECTOR : 选项值 DYNAMIC_TABLE - 传入json格式的表格内容，详见说明：[数据表格](https://qian.tencent.com/developers/partner/dynamic_table) DATE : 格式化：xxxx年xx月xx日（例如：2024年05月28日） DISTRICT : 省市区行政区控件，需填写ComponentValue为省市区行政区字符串内容控件值约束说明： 特殊控件 填写约束 企业全称控件 企业名称中文字符中文括号 统一社会信用代码控件 企业注册的统一社会信用代码 法人名称控件 最大50个字符，2到25个汉字或者1到50个字母 签署意见控件 签署意见最大长度为50字符 签署人手机号控件 国内手机号 13,14,15,16,17,18,19号段长度11位 签署人身份证控件 合法的身份证号码检查 控件名称 控件名称最大长度为20字符，不支持表情 单行文本控件 只允许输入中文，英文，数字，中英文标点符号，不支持表情 多行文本控件 只允许输入中文，英文，数字，中英文标点符号，不支持表情 勾选框控件 选择填字符串true，不选填字符串false 选择器控件 同单行文本控件约束，填写选择值中的字符串 数字控件 请输入有效的数字(可带小数点) 日期控件 格式：yyyy年mm月dd日 附件控件 JPG或PNG图片，上传数量限制，1到6个，最大6个附件，填写上传的资源ID 图片控件 JPG或PNG图片，填写上传的图片资源ID 邮箱控件 有效的邮箱地址, w3c标准 地址控件 只允许输入中文，英文，数字，中英文标点符号，不支持表情 省市区控件 只允许输入中文，英文，数字，中英文标点符号，不支持表情 性别控件 选择值中的字符串 学历控件 选择值中的字符串 */
   ComponentValue: string;
@@ -1050,6 +1050,18 @@ declare interface PermissionGroup {
   Hide?: number;
   /** 权限集合 */
   Permissions?: Permission[];
+}
+
+/** 预设的动态签署方的补充信息，仅匹配对应信息的签署方才能领取合同。暂时仅对个人参与方生效。 */
+declare interface PresetApproverInfo {
+  /** 预设参与方姓名。 */
+  Name?: string;
+  /** 预设参与方手机号。 */
+  Mobile?: string;
+  /** 预设参与方证件号，需要和IdCardType同时传入。证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成(如存在X，请大写)。 */
+  IdCardNumber?: string;
+  /** 预设参与方的证件类型，需要与IdCardNumber同时传入。证件类型，支持以下类型ID_CARD: 居民身份证 */
+  IdCardType?: string;
 }
 
 /** 同步的员工的信息 */
@@ -1571,6 +1583,8 @@ declare interface ChannelCreateBatchQuickSignUrlRequest {
   CacheApproverInfo?: boolean;
   /** 是否允许此链接中签署方批量拒签。 false (默认): 不允许批量拒签 true : 允许批量拒签。注：`合同组暂不支持批量拒签功能。` */
   CanBatchReject?: boolean;
+  /** 预设的动态签署方的补充信息，仅匹配对应信息的签署方才能领取合同。暂时仅对个人参与方生效。 */
+  PresetApproverInfo?: PresetApproverInfo;
 }
 
 declare interface ChannelCreateBatchQuickSignUrlResponse {
@@ -1583,15 +1597,15 @@ declare interface ChannelCreateBatchQuickSignUrlResponse {
 declare interface ChannelCreateBatchSignUrlRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId第三方平台子客企业和员工必须已经过实名认证 */
   Agent: Agent;
-  /** 签署方经办人的姓名。经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。注：`请确保和合同中填入的一致`，`除动态签署人或子客员工经办人场景外，此参数必填` */
+  /** 签署方经办人的姓名。经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。注：请确保和合同中填入的一致。在动态签署人补充链接场景中，可以通过传入这个值，对补充的个人参与方信息进行限制。仅匹配传入姓名的参与方才能补充合同。此参数预设信息功能暂时仅支持个人动态参与方。 */
   Name?: string;
-  /** 手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。请确认手机号所有方为此业务通知方。注：`请确保和合同中填入的一致, 若无法保持一致，请确保在发起和生成批量签署链接时传入相同的参与方证件信息`，`除动态签署人或子客员工经办人场景外，此参数必填` */
+  /** 手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。请确认手机号所有方为此业务通知方。注：请确保和合同中填入的一致, 若无法保持一致，请确保在发起和生成批量签署链接时传入相同的参与方证件信息。在生成动态签署人补充链接场景中，可以通过传入此值，对补充的个人参与方信息进行限制。仅匹配传入手机号的参与方才能补充合同。此参数预设信息功能暂时仅支持个人动态参与方。 */
   Mobile?: string;
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator?: UserInfo;
-  /** 证件类型，支持以下类型**ID_CARD** : 中国大陆居民身份证 (默认值)**HONGKONG_AND_MACAO** : 中国港澳居民来往内地通行证**HONGKONG_MACAO_AND_TAIWAN** : 中国港澳台居民居住证(格式同中国大陆居民身份证)注：`请确保和合同中填入的一致` */
+  /** 证件类型，支持以下类型**ID_CARD** : 中国大陆居民身份证 (默认值)**HONGKONG_AND_MACAO** : 中国港澳居民来往内地通行证**HONGKONG_MACAO_AND_TAIWAN** : 中国港澳台居民居住证(格式同中国大陆居民身份证)注：1. `请确保和合同中填入的一致`。2. `在生成动态签署人补充链接场景中，可以通过传入此值，对补充的个人参与方信息进行限制。仅匹配传入证件类型的参与方才能补充合同。此参数预设信息功能暂时仅支持个人动态参与方，且需要和证件号参数一同传递，不能单独进行限制。` */
   IdCardType?: string;
-  /** 证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。注：`请确保和合同中填入的一致` */
+  /** 证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。注：1. `请确保和合同中填入的一致`。2. `在生成动态签署人补充链接场景中，可以通过传入此值，对补充的个人参与方信息进行限制。仅匹配传入证件号的参与方才能补充合同。此参数预设信息功能暂时仅支持个人动态参与方。` */
   IdCardNumber?: string;
   /** 通知用户方式：**NONE** : 不通知（默认）**SMS** : 短信通知（发送短信通知到Mobile参数所传的手机号） */
   NotifyType?: string;
@@ -3005,13 +3019,13 @@ declare interface CreateSignUrlsRequest {
   GenerateType?: string;
   /** SaaS平台企业员工签署方的企业名称如果名称中包含英文括号()，请使用中文括号（）代替。 注: `1.GenerateType为"NOT_CHANNEL"时必填` `2.获取B端动态签署人领取链接时,可指定此字段来预先设定签署人的企业,预设后只能以该企业身份去领取合同并完成签署` */
   OrganizationName?: string;
-  /** 合同流程里边参与方的姓名。注: `GenerateType为"PERSON"(即个人签署方)时必填` */
+  /** 合同流程里边参与方的姓名。注: 1. `GenerateType为"PERSON"(即个人签署方)时必填`。2. `在动态签署人补充链接场景中，可以通过传入这个值，对补充的个人参与方信息进行限制。仅匹配传入姓名的参与方才能补充合同。此参数预设信息功能暂时仅支持个人动态参与方。` */
   Name?: string;
-  /** 合同流程里边签署方经办人手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。注: `GenerateType为"PERSON"或"FOLLOWER"时必填` */
+  /** 合同流程里边签署方经办人手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。注: 1. `GenerateType为"PERSON"或"FOLLOWER"时必填。`2. `在动态签署人补充链接场景中，可以通过传入此值，对补充的个人参与方信息进行限制。仅匹配传入手机号的参与方才能补充合同。此参数预设信息功能暂时仅支持个人动态参与方。` */
   Mobile?: string;
-  /** 证件类型，支持以下类型ID_CARD : 中国大陆居民身份证HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证) */
+  /** 证件类型，支持以下类型ID_CARD : 中国大陆居民身份证HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)`注：在动态签署人补充链接场景中，可以通过传入此值，对补充的个人参与方信息进行限制。仅匹配传入证件类型的参与方才能补充合同。此参数预设信息功能暂时仅支持个人动态参与方，且需要和证件号参数一同传递，不能单独进行限制。` */
   IdCardType?: string;
-  /** 证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成(如存在X，请大写)。港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
+  /** 证件号码，应符合以下规则居民身份证号码应为18位字符串，由数字和大写字母X组成(如存在X，请大写)。港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。`注：在动态签署人补充链接场景中，可以通过传入此值，对补充的个人参与方信息进行限制。仅匹配传入证件号的参与方才能补充合同。此参数预设信息功能暂时仅支持个人动态参与方。` */
   IdCardNumber?: string;
   /** 第三方平台子客企业的企业的标识, 即OrganizationOpenId。 注: `1.GenerateType为"CHANNEL"时必填` `2.获取B端动态签署人领取链接时,可指定此字段来预先设定签署人的平台子客企业,预设后只能以该平台子客企业身份去领取合同并完成签署` */
   OrganizationOpenId?: string;
@@ -3394,6 +3408,20 @@ declare interface OperateChannelTemplateResponse {
   ProxyOrganizationOpenIds?: string[];
   /** 操作失败信息数组 */
   FailMessageList?: AuthFailMessage[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface OperateTemplateRequest {
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId（模板的归属企业）第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId （操作人） */
+  Agent: Agent;
+  /** 模板ID，为32位字符串。 */
+  TemplateId: string;
+  /** 操作类型，可取值如下:DELETE: 删除ENABLE: 启用DISABLE: 停用 */
+  OperateType: string;
+}
+
+declare interface OperateTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5187,6 +5215,8 @@ declare interface Essbasic {
   ModifyFlowDeadline(data: ModifyFlowDeadlineRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFlowDeadlineResponse>;
   /** 第三方应用模板库管理 {@link OperateChannelTemplateRequest} {@link OperateChannelTemplateResponse} */
   OperateChannelTemplate(data: OperateChannelTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<OperateChannelTemplateResponse>;
+  /** 企业模板管理 {@link OperateTemplateRequest} {@link OperateTemplateResponse} */
+  OperateTemplate(data: OperateTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<OperateTemplateResponse>;
   /** 准备待发起文件 {@link PrepareFlowsRequest} {@link PrepareFlowsResponse} */
   PrepareFlows(data: PrepareFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<PrepareFlowsResponse>;
   /** 同步企业信息 {@link SyncProxyOrganizationRequest} {@link SyncProxyOrganizationResponse} */

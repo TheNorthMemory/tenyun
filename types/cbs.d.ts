@@ -943,15 +943,15 @@ declare interface DescribeSnapshotSharePermissionResponse {
 declare interface DescribeSnapshotsRequest {
   /** 要查询快照的ID列表。参数不支持同时指定`SnapshotIds`和`Filters`。 */
   SnapshotIds?: string[];
-  /** 过滤条件。参数不支持同时指定`SnapshotIds`和`Filters`。snapshot-id - Array of String - 是否必填：否 -（过滤条件）按照快照的ID过滤。快照ID形如：`snap-11112222`。snapshot-name - Array of String - 是否必填：否 -（过滤条件）按照快照名称过滤。snapshot-state - Array of String - 是否必填：否 -（过滤条件）按照快照状态过滤。 (NORMAL：正常 | CREATING：创建中 | ROLLBACKING：回滚中。)disk-usage - Array of String - 是否必填：否 -（过滤条件）按创建快照的云盘类型过滤。 (SYSTEM_DISK：代表系统盘 | DATA_DISK：代表数据盘。)project-id - Array of String - 是否必填：否 -（过滤条件）按云硬盘所属项目ID过滤。disk-id - Array of String - 是否必填：否 -（过滤条件）按照创建快照的云硬盘ID过滤。zone - Array of String - 是否必填：否 -（过滤条件）按照[可用区](/document/product/213/15753)过滤。encrypt - Array of String - 是否必填：否 -（过滤条件）按是否加密盘快照过滤。 (TRUE：表示加密盘快照 | FALSE：表示非加密盘快照。)snapshot-type- Array of String - 是否必填：否 -（过滤条件）根据snapshot-type指定的快照类型查询对应的快照。(SHARED_SNAPSHOT：表示共享过来的快照 | PRIVATE_SNAPSHOT：表示自己私有快照。) */
+  /** 过滤条件。参数不支持同时指定SnapshotIds和Filters。snapshot-id按照云硬盘快照ID进行过滤类型：String必选：否snapshot-name按照云硬盘快照名称进行过滤类型：String必选：否snapshot-state按照云硬盘快照状态进行过滤类型：String必选：否取值范围：NORMAL：正常 CREATING：创建中 ROLLBACKING：回滚中 COPYING_FROM_REMOTE：跨地域复制中 CHECKING_COPIED：复制校验中TORECYCLE：待回收disk-usage按照云硬盘使用用途进行过滤类型：String必选：否取值范围：SYSTEM_DISK：代表系统盘DATA_DISK：代表数据盘project-id按云硬盘所属项目ID过滤类型：String必选：否disk-id按照云硬盘ID进行过滤，一次最多只能传入10个值类型：String必选：否encrypt按是否加密进行过滤类型：String必选：否snapshot-type按快照归属类型查询类型：String必选：否取值范围：SHARED_SNAPSHOT：表示共享过来的快照PRIVATE_SNAPSHOT：表示自己的私有快照 */
   Filters?: Filter[];
   /** 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](/document/product/362/15633)中的相关小节。 */
   Limit?: number;
-  /** 快照列表排序的依据字段。取值范围：CREATE_TIME：依据快照的创建时间排序默认按创建时间排序。 */
+  /** 快照列表排序的依据字段。取值范围：CREATE_TIME：依据快照的创建时间排序默认按创建时间排序 */
   OrderField?: string;
   /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考API[简介](/document/product/362/15633)中的相关小节。 */
   Offset?: number;
-  /** 输出云盘列表的排列顺序。取值范围：ASC：升序排列DESC：降序排列。 */
+  /** 输出云盘列表的排列顺序。取值范围： ASC：升序排列 DESC：降序排列。 */
   Order?: string;
 }
 
@@ -1091,7 +1091,7 @@ declare interface InquiryPriceResizeDiskResponse {
 }
 
 declare interface ModifyAutoSnapshotPolicyAttributeRequest {
-  /** 定期快照策略ID。 */
+  /** 定期快照策略ID。可以通过[查询定期快照策略](https://cloud.tencent.com/document/product/362/33556)API查询。 */
   AutoSnapshotPolicyId: string;
   /** 是否激活定期快照策略，FALSE表示未激活，TRUE表示激活，默认为TRUE。 */
   IsActivated?: boolean;
@@ -1239,7 +1239,7 @@ declare interface ResizeDiskResponse {
 }
 
 declare interface TerminateDisksRequest {
-  /** 需退还的云盘ID列表。 */
+  /** 需退还的云盘ID列表，通过[DescribeDisks](/document/product/362/16315)接口查询。 */
   DiskIds: string[];
   /** 销毁云盘时删除关联的非永久保留快照。0 表示非永久快照不随云盘销毁而销毁，1表示非永久快照随云盘销毁而销毁，默认取0。快照是否永久保留可以通过DescribeSnapshots接口返回的快照详情的IsPermanent字段来判断，true表示永久快照，false表示非永久快照。 */
   DeleteSnapshot?: number;

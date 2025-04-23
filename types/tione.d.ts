@@ -38,6 +38,14 @@ declare interface Choice {
   Index?: number;
 }
 
+/** 代码仓库配置 */
+declare interface CodeRepoConfig {
+  /** 代码仓库Id */
+  Id: string;
+  /** 代码仓下载目标地址 */
+  TargetPath: string;
+}
+
 /** 容器信息 */
 declare interface Container {
   /** 名字 */
@@ -122,6 +130,8 @@ declare interface DataConfig {
   LocalDiskSource?: LocalDisk | null;
   /** CBS配置信息 */
   CBSSource?: CBSConfig | null;
+  /** 主机路径信息 */
+  HostPathSource?: HostPath;
 }
 
 /** 数据点 */
@@ -378,6 +388,12 @@ declare interface HorizontalPodAutoscaler {
   HpaMetrics: Option[] | null;
 }
 
+/** 主机路径挂载配置 */
+declare interface HostPath {
+  /** 需要挂载的主机路径 */
+  Path?: string;
+}
+
 /** 模型专业参数 */
 declare interface HyperParameter {
   /** 最大nnz数 */
@@ -548,6 +564,18 @@ declare interface LogConfig {
   LogsetId: string | null;
   /** 日志需要投递到cls的主题 */
   TopicId: string | null;
+}
+
+/** 单条日志数据结构 */
+declare interface LogIdentity {
+  /** 单条日志的ID */
+  Id: string | null;
+  /** 单条日志的内容 */
+  Message: string | null;
+  /** 这条日志对应的Pod名称 */
+  PodName: string | null;
+  /** 日志的时间戳（RFC3339格式的时间字符串） */
+  Timestamp: string | null;
 }
 
 /** 对话输入内容 */
@@ -1580,6 +1608,8 @@ declare interface TrainingTaskDetail {
   Status?: string;
   /** 回调地址 */
   CallbackUrl?: string | null;
+  /** 任务关联的代码仓库配置 */
+  CodeRepos?: CodeRepoConfig[];
 }
 
 /** 出参类型 */
@@ -2003,6 +2033,8 @@ declare interface CreateTrainingTaskRequest {
   CallbackUrl?: string;
   /** 编码后的任务启动命令，与StartCmdInfo同时配置时，仅当前参数生效 */
   EncodedStartCmdInfo?: EncodedStartCmdInfo;
+  /** 代码仓库配置 */
+  CodeRepos?: CodeRepoConfig[];
 }
 
 declare interface CreateTrainingTaskResponse {
@@ -2240,6 +2272,38 @@ declare interface DescribeInferTemplatesRequest {
 declare interface DescribeInferTemplatesResponse {
   /** 模板列表 */
   FrameworkTemplates: InferTemplateGroup[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLogsRequest {
+  /** 服务类型，TRAIN为任务式建模, NOTEBOOK为Notebook, INFER为在线服务, BATCH为批量预测枚举值：- TRAIN- NOTEBOOK- INFER- BATCH */
+  Service: string;
+  /** 日志查询开始时间（RFC3339格式的时间字符串），默认值为当前时间的前一个小时 */
+  StartTime?: string;
+  /** 日志查询结束时间（RFC3339格式的时间字符串），默认值为当前时间 */
+  EndTime?: string;
+  /** 日志查询条数，默认值100，最大值100 */
+  Limit?: number;
+  /** 服务ID，和Service参数对应，不同Service的服务ID获取方式不同，具体如下：- Service类型为TRAIN： 调用[DescribeTrainingTask接口](/document/product/851/75089)查询训练任务详情，ServiceId为接口返回值中Response.TrainingTaskDetail.LatestInstanceId- Service类型为NOTEBOOK： 调用[DescribeNotebook接口](/document/product/851/95662)查询Notebook详情，ServiceId为接口返回值中Response.NotebookDetail.PodName- Service类型为INFER： 调用[DescribeModelServiceGroup接口](/document/product/851/82285)查询服务组详情，ServiceId为接口返回值中Response.ServiceGroup.Services.ServiceId- Service类型为BATCH： 调用[DescribeBatchTask接口](/document/product/851/80180)查询跑批任务详情，ServiceId为接口返回值中Response.BatchTaskDetail.LatestInstanceId */
+  ServiceId?: string;
+  /** Pod的名称，即需要查询服务对应的Pod，和Service参数对应，不同Service的PodName获取方式不同，具体如下：- Service类型为TRAIN： 调用[DescribeTrainingTaskPods接口](/document/product/851/75088)查询训练任务pod列表，PodName为接口返回值中Response.PodNames- Service类型为NOTEBOOK： 调用[DescribeNotebook接口](/document/product/851/95662)查询Notebook详情，PodName为接口返回值中Response.NotebookDetail.PodName- Service类型为INFER： 调用[DescribeModelService接口](/document/product/851/82287)查询单个服务详情，PodName为接口返回值中Response.Service.ServiceInfo.PodInfos- Service类型为BATCH： 调用[DescribeBatchTask接口](/document/product/851/80180)查询跑批任务详情，PodName为接口返回值中Response.BatchTaskDetail. PodList注：支持结尾通配符* */
+  PodName?: string;
+  /** 排序方向（可选值为ASC, DESC ），默认为DESC */
+  Order?: string;
+  /** 按哪个字段排序（可选值为Timestamp），默认值为Timestamp */
+  OrderField?: string;
+  /** 日志查询上下文，查询下一页的时候需要回传这个字段，该字段来自本接口的返回 */
+  Context?: string;
+  /** 过滤条件注意: 1. Filter.Name：目前只支持Key（也就是按关键字过滤日志）2. Filter.Values：表示过滤日志的关键字；Values为多个的时候表示同时满足3. Filter. Negative和Filter. Fuzzy没有使用 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeLogsResponse {
+  /** 分页的游标 */
+  Context?: string | null;
+  /** 日志数组 */
+  Content?: LogIdentity[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3385,6 +3449,8 @@ declare interface Tione {
   DescribeDatasets(data?: DescribeDatasetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasetsResponse>;
   /** @deprecated 查询推理镜像模板 {@link DescribeInferTemplatesRequest} {@link DescribeInferTemplatesResponse} */
   DescribeInferTemplates(data?: DescribeInferTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInferTemplatesResponse>;
+  /** 获取日志 {@link DescribeLogsRequest} {@link DescribeLogsResponse} */
+  DescribeLogs(data: DescribeLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogsResponse>;
   /** 查询模型优化任务详情 {@link DescribeModelAccelerateTaskRequest} {@link DescribeModelAccelerateTaskResponse} */
   DescribeModelAccelerateTask(data: DescribeModelAccelerateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelAccelerateTaskResponse>;
   /** 查询优化模型版本列表 {@link DescribeModelAccelerateVersionsRequest} {@link DescribeModelAccelerateVersionsResponse} */

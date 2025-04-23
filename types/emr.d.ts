@@ -2997,6 +2997,8 @@ declare interface CreateSLInstanceRequest {
   Tags?: Tag[];
   /** 预付费参数 */
   PrePaySetting?: PrePaySetting;
+  /** 唯一随机标识，时效性为5分钟，需要调用者指定 防止客户端重复创建资源，例如 a9a90aa6-****-****-****-fae360632808 */
+  ClientToken?: string;
 }
 
 declare interface CreateSLInstanceResponse {
@@ -3426,6 +3428,32 @@ declare interface DescribeInsightListResponse {
   TotalCount?: number;
   /** 洞察结果数组 */
   ResultList?: InsightResult[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInspectionTaskResultRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 类型 */
+  Type?: string;
+  /** 开始时间 */
+  StartTime?: number;
+  /** 结束时间 */
+  EndTime?: number;
+  /** 分页大小 */
+  Limit?: number;
+  /** 分页偏移量 */
+  Offset?: number;
+}
+
+declare interface DescribeInspectionTaskResultResponse {
+  /** 巡检任务记录，base64编码 */
+  InspectionResultInfo?: string;
+  /** 记录总数 */
+  Total?: number;
+  /** 类别信息，base64编码，{"FixedTime": "定时", "RealTime": "及时"} */
+  TypeInfo?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4307,6 +4335,8 @@ declare interface ModifySLInstanceRequest {
   Zone: string;
   /** 该区域变配后的目标节点数量，所有区域节点总数应大于等于3，小于等于50。 */
   NodeNum: number;
+  /** 唯一随机标识，时效性为5分钟，需要调用者指定 防止客户端重复创建资源，例如 a9a90aa6-****-****-****-fae360632808 */
+  ClientToken?: string;
 }
 
 declare interface ModifySLInstanceResponse {
@@ -4731,6 +4761,8 @@ declare interface Emr {
   DescribeImpalaQueries(data: DescribeImpalaQueriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImpalaQueriesResponse>;
   /** 获取洞察结果 {@link DescribeInsightListRequest} {@link DescribeInsightListResponse} */
   DescribeInsightList(data: DescribeInsightListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInsightListResponse>;
+  /** 获取巡检任务结果列表 {@link DescribeInspectionTaskResultRequest} {@link DescribeInspectionTaskResultResponse} */
+  DescribeInspectionTaskResult(data: DescribeInspectionTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInspectionTaskResultResponse>;
   /** 查询待续费节点信息 {@link DescribeInstanceRenewNodesRequest} {@link DescribeInstanceRenewNodesResponse} */
   DescribeInstanceRenewNodes(data: DescribeInstanceRenewNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceRenewNodesResponse>;
   /** 查询集群实例信息 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */

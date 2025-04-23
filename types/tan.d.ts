@@ -19,7 +19,7 @@ declare interface CreateBlockNodeRecordsResponse {
 /** {@link Tan 碳引擎} */
 declare interface Tan {
   (): Versions;
-  /** 推送节点数据 {@link CreateBlockNodeRecordsRequest} {@link CreateBlockNodeRecordsResponse} */
+  /** @deprecated 推送节点数据 {@link CreateBlockNodeRecordsRequest} {@link CreateBlockNodeRecordsResponse} */
   CreateBlockNodeRecords(data: CreateBlockNodeRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBlockNodeRecordsResponse>;
 }
 

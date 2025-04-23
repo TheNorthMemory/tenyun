@@ -882,6 +882,8 @@ declare interface IDCardInfoResult {
   ImageUrl?: string;
   /** 身份证头像照片的地址（人像面） */
   PortraitUrl?: string;
+  /** 整型错误码 */
+  IntErrorCode?: number;
 }
 
 /** IDCardResult */
@@ -950,7 +952,7 @@ declare interface InvoiceItem {
   Type?: number;
   /** 该发票在原图片中的四点坐标。 */
   Polygon?: Polygon;
-  /** 识别出的图片在混贴票据图片中的旋转角度。 */
+  /** 识别出切图后各图片的旋转角度。 */
   Angle?: number;
   /** 识别到的内容。 */
   SingleInvoiceInfos?: SingleInvoiceItem;
@@ -4929,7 +4931,7 @@ declare interface SmartStructuralProRequest {
   ImageBase64?: string;
   /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
   PdfPageNumber?: number;
-  /** 自定义结构化功能需返回的字段名称，例：若客户只想返回姓名、性别两个字段的识别结果，则输入ItemNames=["姓名","性别"] */
+  /** 自定义结构化功能需返回的字段名称，例：若客户想新增返回姓名、性别两个字段的识别结果，则输入ItemNames=["姓名","性别"] */
   ItemNames?: string[];
   /** 是否开启全文字段识别 */
   ReturnFullText?: boolean;

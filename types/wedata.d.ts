@@ -298,6 +298,8 @@ declare interface Apply {
   ApproveProjectName?: string | null;
   /** 审批id */
   ApplyId?: string | null;
+  /** 扩展字段 */
+  Metadata?: string;
 }
 
 /** 修改审批单状态 */
@@ -1958,6 +1960,68 @@ declare interface InstanceCondition {
   ProductName?: string | null;
 }
 
+/** 调度实例详情 */
+declare interface InstanceDetailVO {
+  /** 实例唯一标识 */
+  InstanceKey?: string | null;
+  /** 项目ID */
+  ProjectId?: string | null;
+  /** 文件夹ID */
+  FolderId?: string | null;
+  /** 文件夹名称 */
+  FolderName?: string | null;
+  /** 工作流ID */
+  WorkflowId?: string | null;
+  /** 工作流名称 */
+  WorkflowName?: string | null;
+  /** 负责人列表 */
+  InChargeList?: string[] | null;
+  /** 任务ID */
+  TaskId?: string | null;
+  /** 任务名称 */
+  TaskName?: string | null;
+  /** **任务周期类型**支持过滤多个，条件间为 或 的过滤关系* O: ONEOFF_CYCLE* Y: YEAR_CYCLE* M: MONTH_CYCLE* W: WEEK_CYCLE* D: DAY_CYCLE* H: HOUR_CYCLE* I: MINUTE_CYCLE* C: CRONTAB_CYCLE */
+  TaskCycleType?: string | null;
+  /** 任务类型 */
+  TaskType?: TaskTypeOpsDto | null;
+  /** 执行资源组ID */
+  ExecutorGroupId?: string | null;
+  /** 资源组名称 */
+  ExecutorGroupName?: string | null;
+  /** 实例数据时间 */
+  CurRunDate?: string | null;
+  /** 下一个实例数据时间 */
+  NextCurDate?: string | null;
+  /** 每次运行失败，下发重试次数限制 */
+  TryLimit?: number | null;
+  /** 当前运行已下发运行次数 */
+  Tries?: number | null;
+  /** 累计运行次数 */
+  TotalRunNum?: number | null;
+  /** 生命周期编号 */
+  LifeRoundNum?: number | null;
+  /** **实例类型**- 0 表示补录类型- 1 表示周期实例- 2 表示非周期实例 */
+  InstanceType?: number | null;
+  /** **实例状态**- [0] 表示 等待事件- [12] 表示 等待上游- [6, 7, 9, 10, 18] 表示 等待运行- [1, 19, 22] 表示 运行中- [21] 表示 跳过运行- [3] 表示 失败重试- [8, 4, 5, 13] 表示 失败- [2] 表示 成功 */
+  InstanceState?: number | null;
+  /** 计划调度时间 */
+  SchedulerTime?: string | null;
+  /** 运行开始时间 */
+  StartTime?: string | null;
+  /** 运行完成时间 */
+  EndTime?: string | null;
+  /** 耗费时间 */
+  CostTime?: string | null;
+  /** **实例运行触发类型**- RERUN 表示重跑- ADDITION 表示补录- PERIODIC 表示周期- APERIODIC 表示非周期- RERUN_SKIP_RUN 表示重跑 - 空跑- ADDITION_SKIP_RUN 表示补录 - 空跑- PERIODIC_SKIP_RUN 表示周期 - 空跑- APERIODIC_SKIP_RUN 表示非周期 - 空跑- MANUAL_TRIGGER 表示手动触发- RERUN_MANUAL_TRIGGER 表示手动触发 - 重跑 */
+  InstanceRunType?: string | null;
+  /** **下发执行ID** */
+  ExecutionJobId?: string | null;
+  /** **实例生命周期列表** */
+  InstanceLifeCycleList?: InstanceLifeCycleVO[] | null;
+  /** **实例最近一次的执行日志** */
+  LatestLog?: InstanceLogVO | null;
+}
+
 /** 下载日志详情 */
 declare interface InstanceDownloadLogInfo {
   /** 文件名 */
@@ -2004,13 +2068,41 @@ declare interface InstanceLifeCycleOpsDto {
   TaskType?: TaskTypeOpsDto | null;
 }
 
+/** 调度实例详情 */
+declare interface InstanceLifeCycleVO {
+  /** 实例唯一标识 */
+  InstanceKey?: string | null;
+  /** **实例状态**- [0] 表示 等待事件- [12] 表示 等待上游- [6, 7, 9, 10, 18] 表示 等待运行- [1, 19, 22] 表示 运行中- [21] 表示 跳过运行- [3] 表示 失败重试- [8, 4, 5, 13] 表示 失败- [2] 表示 成功 */
+  InstanceState?: number | null;
+  /** 生命周期编号 */
+  LifeRoundNum?: number | null;
+  /** **实例运行触发类型**- RERUN 表示重跑- ADDITION 表示补录- PERIODIC 表示周期- APERIODIC 表示非周期- RERUN_SKIP_RUN 表示重跑 - 空跑- ADDITION_SKIP_RUN 表示补录 - 空跑- PERIODIC_SKIP_RUN 表示周期 - 空跑- APERIODIC_SKIP_RUN 表示非周期 - 空跑- MANUAL_TRIGGER 表示手动触发- RERUN_MANUAL_TRIGGER 表示手动触发 - 重跑 */
+  RunType?: string | null;
+  /** 失败重试次数 */
+  Tries?: number | null;
+  /** **实例生命周期列表** */
+  LifeCycleDetailList?: InstanceLifeDetailDto[] | null;
+  /** **实例代码文件**该文件内容为当次执行实例运行使用的代码，仅部分任务支持 */
+  CodeFileName?: string | null;
+  /** **下发执行ID** */
+  ExecutionJobId?: string | null;
+  /** 日志所在执行节点 */
+  BrokerIp?: string | null;
+  /** 日志文件名 */
+  OriginFileName?: string | null;
+  /** **实例日志类型**- run: 运行; - kill: 终止 */
+  LogType?: string | null;
+  /** 耗费时间 */
+  CostTime?: string | null;
+}
+
 /** 实例生命周期detail */
 declare interface InstanceLifeDetailDto {
-  /** 实例状态 */
+  /** **实例状态**- [0] 表示 等待事件- [12] 表示 等待上游- [6, 7, 9, 10, 18] 表示 等待运行- [1, 19, 22] 表示 运行中- [21] 表示 跳过运行- [3] 表示 失败重试- [8, 4, 5, 13] 表示 失败- [2] 表示 成功 */
   State?: string | null;
   /** 该状态开始时间 */
   StartTime?: string | null;
-  /** 实例生命周期阶段状态 */
+  /** **实例生命周期阶段状态**- WAIT_UPSTREAM 表示 等待事件/上游状态- WAIT_RUN 表示 等待运行状态- RUNNING 表示 运行中状态- COMPLETE 表示 终态-完成- FAILED 表示 终态-失败重试- EXPIRED 表示 终态-失败- SKIP_RUNNING 表示 终态-被上游分支节点跳过的分支- HISTORY 表示 兼容历史实例 */
   DetailState?: string | null;
   /** 该状态结束时间 */
   EndTime?: string | null;
@@ -2128,6 +2220,38 @@ declare interface InstanceLogList {
   TaskName?: string | null;
   /** 耗费时间 */
   CostTime?: string | null;
+}
+
+/** 实例日志内容 */
+declare interface InstanceLogVO {
+  /** 实例唯一标识 */
+  InstanceKey?: string | null;
+  /** 项目ID */
+  ProjectId?: string | null;
+  /** **实例状态**- [0] 表示 等待事件- [12] 表示 等待上游- [6, 7, 9, 10, 18] 表示 等待运行- [1, 19, 22] 表示 运行中- [21] 表示 跳过运行- [3] 表示 失败重试- [8, 4, 5, 13] 表示 失败- [2] 表示 成功 */
+  InstanceState?: number | null;
+  /** **实例运行触发类型**- RERUN 表示重跑- ADDITION 表示补录- PERIODIC 表示周期- APERIODIC 表示非周期- RERUN_SKIP_RUN 表示重跑 - 空跑- ADDITION_SKIP_RUN 表示补录 - 空跑- PERIODIC_SKIP_RUN 表示周期 - 空跑- APERIODIC_SKIP_RUN 表示非周期 - 空跑- MANUAL_TRIGGER 表示手动触发- RERUN_MANUAL_TRIGGER 表示手动触发 - 重跑 */
+  RunType?: string | null;
+  /** 开始运行时间 */
+  StartTime?: string | null;
+  /** 运行完成时间 */
+  EndTime?: string | null;
+  /** **运行代码内容** */
+  CodeInfo?: string | null;
+  /** **运行代码文件大小**单位KB */
+  CodeFileSize?: string | null;
+  /** 日志所在节点信息 */
+  BrokerIp?: string | null;
+  /** **日志内容** */
+  LogInfo?: string | null;
+  /** **日志文件大小**单位KB */
+  LogFileSize?: string | null;
+  /** **本次查询返回的日志行数** */
+  LineCount?: number | null;
+  /** 执行平台日志分页查询参数, 每次请求透明传入。第一页查询时值为空字符串 */
+  ExtInfo?: string | null;
+  /** 日志分页查询，是否最后一页 */
+  IsEnd?: boolean | null;
 }
 
 /** 查询实时任务实例当前的节点信息 */
@@ -2280,6 +2404,22 @@ declare interface InstanceOpsInfoPage {
   Items?: InstanceOpsDto[] | null;
 }
 
+/** 实例列表分页实体 */
+declare interface InstancePageVO {
+  /** **总条数** */
+  TotalCount?: number | null;
+  /** **总分页数** */
+  TotalPage?: number | null;
+  /** 页码 */
+  PageNumber?: number | null;
+  /** 每页条目数 */
+  PageSize?: number | null;
+  /** 总分页数 */
+  PageCount?: number | null;
+  /** 数据列表 */
+  Items?: InstanceVO[] | null;
+}
+
 /** 实例检索条件 */
 declare interface InstanceSearchCondition {
   /** 任务调度周期类型 */
@@ -2316,6 +2456,56 @@ declare interface InstanceStatisticInfo {
   ReportTime?: string | null;
   /** 1 */
   Count?: number | null;
+}
+
+/** 调度运行实例实体 */
+declare interface InstanceVO {
+  /** **实例唯一标识** */
+  InstanceKey?: string | null;
+  /** 项目ID */
+  ProjectId?: string | null;
+  /** 文件夹ID */
+  FolderId?: string | null;
+  /** 文件夹名称 */
+  FolderName?: string | null;
+  /** 工作流ID */
+  WorkflowId?: string | null;
+  /** 工作流名称 */
+  WorkflowName?: string | null;
+  /** 负责人列表 */
+  InChargeList?: string[] | null;
+  /** 任务ID */
+  TaskId?: string | null;
+  /** 任务名称 */
+  TaskName?: string | null;
+  /** 任务类型 */
+  TaskType?: TaskTypeOpsDto | null;
+  /** **任务周期类型**支持过滤多个，条件间为 或 的过滤关系* O: ONEOFF_CYCLE* Y: YEAR_CYCLE* M: MONTH_CYCLE* W: WEEK_CYCLE* D: DAY_CYCLE* H: HOUR_CYCLE* I: MINUTE_CYCLE* C: CRONTAB_CYCLE */
+  TaskCycleType?: string | null;
+  /** 实例数据时间 */
+  CurRunDate?: string | null;
+  /** 每次运行失败，下发重试次数限制 */
+  TryLimit?: number | null;
+  /** **失败重试次数**再次使用 手动重跑 或 补录实例等方式触发运行时，会被重置为 0 后重新计数 */
+  Tries?: number | null;
+  /** 累计运行次数 */
+  TotalRunNum?: number | null;
+  /** **实例类型**- 0 表示补录类型- 1 表示周期实例- 2 表示非周期实例 */
+  InstanceType?: number | null;
+  /** **实例状态**- [0] 表示 等待事件- [12] 表示 等待上游- [6, 7, 9, 10, 18] 表示 等待运行- [1, 19, 22] 表示 运行中- [21] 表示 跳过运行- [3] 表示 失败重试- [8, 4, 5, 13] 表示 失败- [2] 表示 成功 */
+  InstanceState?: number | null;
+  /** 运行开始时间 */
+  StartTime?: string | null;
+  /** 运行完成时间 */
+  EndTime?: string | null;
+  /** 耗费时间 */
+  CostTime?: string | null;
+  /** 计划调度时间 */
+  SchedulerTime?: string | null;
+  /** 执行资源组ID */
+  ExecutorGroupId?: string | null;
+  /** 资源组名称 */
+  ExecutorGroupName?: string | null;
 }
 
 /** 实例日志信息 */
@@ -3514,6 +3704,8 @@ declare interface Rule {
   ProjectId?: string | null;
   /** 项目名称 */
   ProjectName?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
 }
 
 /** 规则配置 */
@@ -3815,9 +4007,13 @@ declare interface RuleGroupExecResult {
   /** 实例状态 */
   InstanceStatus?: string | null;
   /** 实例运行的开始时间 */
-  StartTime?: string;
+  StartTime?: string | null;
   /** 实例运行的结束时间 */
-  FinishTime?: string;
+  FinishTime?: string | null;
+  /** 监控名称 */
+  RuleGroupName?: string | null;
+  /** 判断是否屏蔽监控 0.屏蔽 1.不屏蔽 */
+  RuleGroupExist?: string | null;
 }
 
 /** 规则组执行结果分页 */
@@ -4728,6 +4924,14 @@ declare interface TableMeta {
   ErrorTips?: string | null;
   /** 是否支持select or ddl */
   IfSupportCreateAndDDL?: CreateAndDDLSupport | null;
+  /** 资产来源 历史默认值都是CRAWLER */
+  DataFromType?: string | null;
+  /** 引擎侧责任人 */
+  EngineOwner?: string | null;
+  /** 数据分层UUID */
+  DataLayerUuid?: string | null;
+  /** 数据分层名称 */
+  DataLayerName?: string | null;
   /** 字段数量 */
   ColumnCount?: number | null;
 }
@@ -8080,6 +8284,8 @@ declare interface DescribeInstanceLogFileRequest {
   InstanceLifeDetailDtoList?: InstanceLifeDetailDto[];
   /** 当前生命周期数 */
   CurrentLifeRound?: number;
+  /** 最大生命周期数 */
+  MaxLifeRound?: number;
   /** 当前生命周期重试次数 */
   Tries?: number;
   /** 动态获取日志信息标识 */
@@ -10131,6 +10337,36 @@ declare interface GetFileInfoResponse {
   RequestId?: string;
 }
 
+declare interface GetInstanceLogRequest {
+  /** **项目ID** */
+  ProjectId: string;
+  /** **实例唯一标识** */
+  InstanceKey: string;
+  /** 生命周期编号 */
+  LifeRoundNum: number;
+  /** **时区**timeZone, 默认UTC+8 */
+  ScheduleTimeZone?: string;
+  /** **日志所在执行机Ip** */
+  BrokerIp?: string;
+  /** **日志文件**实例详情中 executionJobId 为空时，但 originFileName 不为空时，入参中必须包含 originFileName 与 brokerIp如果 executionJobId 与 originFileName 都为空，则说明实例未下发执行或没有产生日志。例如分支节点 或 归并节点 */
+  OriginFileName?: string;
+  /** **执行ID**实例详情中 executionJobId 不为空时，入参中需包含executionJobId 。originFileName 与 brokerIp为非必要参数 */
+  ExecutionJobId?: string;
+  /** **日志级别**默认All- Info- Debug- Warn- Error- All */
+  LogLevel?: string;
+  /** **获取日志的开始行 行号**默认 1 */
+  StartLineNum?: number;
+  /** **获取日志的结束行 行号**默认 10000 */
+  EndLineCount?: number;
+}
+
+declare interface GetInstanceLogResponse {
+  /** 调度实例详情 */
+  Data?: InstanceLogVO | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetIntegrationNodeColumnSchemaRequest {
   /** 字段示例（json格式） */
   ColumnContent?: string;
@@ -10181,6 +10417,22 @@ declare interface GetOfflineInstanceListResponse {
   Total?: number;
   /** 实例详情 */
   List?: OfflineInstance[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetTaskInstanceRequest {
+  /** **项目ID** */
+  ProjectId: string;
+  /** **实例唯一标识** */
+  InstanceKey: string;
+  /** **时区**timeZone, 默认UTC+8 */
+  ScheduleTimeZone?: string;
+}
+
+declare interface GetTaskInstanceResponse {
+  /** 调度实例详情 */
+  Data?: InstanceDetailVO | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10334,6 +10586,54 @@ declare interface KillScheduleInstancesRequest {
 declare interface KillScheduleInstancesResponse {
   /** 结果 */
   Data?: BatchOperateResultOpsDto;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListInstancesRequest {
+  /** **项目ID** */
+  ProjectId: string;
+  /** **实例计划调度时间**过滤起始时间，时间格式为 yyyy-MM-dd HH:mm:ss */
+  ScheduleTimeFrom: string;
+  /** **实例计划调度时间**过滤截止时间，时间格式为 yyyy-MM-dd HH:mm:ss */
+  ScheduleTimeTo: string;
+  /** **页码，整型**配合pageSize使用且不能小于1， 默认值1 */
+  PageNumber?: number;
+  /** **每页数目，整型**配合pageNumber使用且不能大于200, 默认值 10 */
+  PageSize?: number;
+  /** **查询结果排序字段**- SCHEDULE_DATE 表示 计划调度时间- START_TIME 表示 实例开始执行时间- END_TIME 表示 实例结束执行时间- COST_TIME 表示 实例执行时长 */
+  SortColumn?: string;
+  /** **实例排序方式**- ASC - DESC */
+  SortType?: string;
+  /** **实例类型**- 0 表示补录类型- 1 表示周期实例- 2 表示非周期实例 */
+  InstanceType?: number;
+  /** **实例执行状态**支持过滤多个，条件间为 或 的过滤关系- [0] 表示 等待事件- [12] 表示 等待上游- [6, 7, 9, 10, 18] 表示 等待运行- [1, 19, 22] 表示 运行中- [21] 表示 跳过运行- [3] 表示 失败重试- [8, 4, 5, 13] 表示 失败- [2] 表示 成功 */
+  InstanceStateList?: number[];
+  /** **任务类型Id**- 支持过滤多个，条件间为 或 的过滤关系- 可以通过接口 DescribeAllTaskType 获取项目支持的全部任务类型 */
+  TaskTypeIdList?: number[];
+  /** **任务周期类型**支持过滤多个，条件间为 或 的过滤关系* O: ONEOFF_CYCLE* Y: YEAR_CYCLE* M: MONTH_CYCLE* W: WEEK_CYCLE* D: DAY_CYCLE* H: HOUR_CYCLE* I: MINUTE_CYCLE* C: CRONTAB_CYCLE */
+  TaskCycleList?: string[];
+  /** **任务名称 或 任务ID**支持模糊搜索过滤, 多个用 英文逗号, 分割 */
+  Keyword?: string;
+  /** **任务负责人**支持过滤多个，条件间为 或 的过滤关系 */
+  InChargeList?: string[];
+  /** **任务所属文件件**支持过滤多个，条件间为 或 的过滤关系可以通过接口 FindAllFolder 获取项目下的所有文件夹列表 */
+  TaskFolderIdList?: string[];
+  /** **任务所属工作流**支持过滤多个，条件间为 或 的过滤关系可以通过接口 DescribeOpsWorkflows 获取项目下的所有工作流列表 */
+  WorkflowIdList?: string[];
+  /** **执行资源组Id**支持过滤多个，条件间为 或 的过滤关系可以通过接口 DescribeNormalSchedulerExecutorGroups 获取项目下的所有调度资源组列表可以通过接口 DescribeNormalIntegrationExecutorGroups 获取项目下的所有集成资源组列表 */
+  ExecutorGroupIdList?: string[];
+  /** **开始时间**过滤起始时间，时间格式为 yyyy-MM-dd HH:mm:ss */
+  StartTimeFrom?: string;
+  /** **开始时间**过滤截止时间，时间格式为 yyyy-MM-dd HH:mm:ss */
+  StartTimeTo?: string;
+  /** **时区**timeZone, 默认UTC+8 */
+  ScheduleTimeZone?: string;
+}
+
+declare interface ListInstancesResponse {
+  /** 实例结果集 */
+  Data?: InstancePageVO;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12102,18 +12402,24 @@ declare interface Wedata {
   GetCosToken(data: GetCosTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetCosTokenResponse>;
   /** 开发空间-获取数据开发脚本信息 {@link GetFileInfoRequest} {@link GetFileInfoResponse} */
   GetFileInfo(data: GetFileInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetFileInfoResponse>;
+  /** 查询调度实例日志内容 {@link GetInstanceLogRequest} {@link GetInstanceLogResponse} */
+  GetInstanceLog(data: GetInstanceLogRequest, config?: AxiosRequestConfig): AxiosPromise<GetInstanceLogResponse>;
   /** 提取数据集成节点字段Schema {@link GetIntegrationNodeColumnSchemaRequest} {@link GetIntegrationNodeColumnSchemaResponse} */
   GetIntegrationNodeColumnSchema(data?: GetIntegrationNodeColumnSchemaRequest, config?: AxiosRequestConfig): AxiosPromise<GetIntegrationNodeColumnSchemaResponse>;
   /** 获取离线任务实例列表(新) {@link GetOfflineDIInstanceListRequest} {@link GetOfflineDIInstanceListResponse} */
   GetOfflineDIInstanceList(data: GetOfflineDIInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<GetOfflineDIInstanceListResponse>;
   /** 获取离线任务实例 {@link GetOfflineInstanceListRequest} {@link GetOfflineInstanceListResponse} */
   GetOfflineInstanceList(data: GetOfflineInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<GetOfflineInstanceListResponse>;
+  /** 获取调度实例详情 {@link GetTaskInstanceRequest} {@link GetTaskInstanceResponse} */
+  GetTaskInstance(data: GetTaskInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskInstanceResponse>;
   /** 【资源管理】判断资源文件是否存在 {@link JudgeResourceFileRequest} {@link JudgeResourceFileResponse} */
   JudgeResourceFile(data: JudgeResourceFileRequest, config?: AxiosRequestConfig): AxiosPromise<JudgeResourceFileResponse>;
   /** 数据补录-按补录计划批量终止实例 {@link KillOpsMakePlanInstancesRequest} {@link KillOpsMakePlanInstancesResponse} */
   KillOpsMakePlanInstances(data: KillOpsMakePlanInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<KillOpsMakePlanInstancesResponse>;
   /** 实例运维-批量终止l实例 {@link KillScheduleInstancesRequest} {@link KillScheduleInstancesResponse} */
   KillScheduleInstances(data?: KillScheduleInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<KillScheduleInstancesResponse>;
+  /** 获取调度实例列表 {@link ListInstancesRequest} {@link ListInstancesResponse} */
+  ListInstances(data: ListInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ListInstancesResponse>;
   /** 锁定实时集成任务 {@link LockIntegrationTaskRequest} {@link LockIntegrationTaskResponse} */
   LockIntegrationTask(data: LockIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<LockIntegrationTaskResponse>;
   /** 修改审批单状态 {@link ModifyApproveStatusRequest} {@link ModifyApproveStatusResponse} */

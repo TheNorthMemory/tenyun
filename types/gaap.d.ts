@@ -17,21 +17,21 @@ declare interface AccessConfiguration {
 /** 根据源站查询的可用加速区域信息及对应的可选带宽和并发量。 */
 declare interface AccessRegionDetial {
   /** 区域ID */
-  RegionId: string;
+  RegionId?: string;
   /** 区域的中文或英文名称 */
-  RegionName: string;
+  RegionName?: string;
   /** 可选的并发量取值数组 */
-  ConcurrentList: number[];
+  ConcurrentList?: number[];
   /** 可选的带宽取值数组 */
-  BandwidthList: number[];
+  BandwidthList?: number[];
   /** 机房所属大区 */
-  RegionArea: string;
+  RegionArea?: string;
   /** 机房所属大区名 */
-  RegionAreaName: string;
+  RegionAreaName?: string;
   /** 机房类型, dc表示DataCenter数据中心, ec表示EdgeComputing边缘节点 */
-  IDCType: string;
+  IDCType?: string;
   /** 特性位图，每个bit位代表一种特性，其中：0，表示不支持该特性；1，表示支持该特性。特性位图含义如下（从右往左）：第1个bit，支持4层加速；第2个bit，支持7层加速；第3个bit，支持Http3接入；第4个bit，支持IPv6；第5个bit，支持精品BGP接入；第6个bit，支持三网接入；第7个bit，支持接入段Qos加速。 */
-  FeatureBitmap: number | null;
+  FeatureBitmap?: number;
 }
 
 /** 域名就近接入配置 */
@@ -61,9 +61,9 @@ declare interface BindRealServer {
   /** 该源站所占权重 */
   RealServerWeight?: number;
   /** 源站健康检查状态，其中：0表示正常；1表示异常。未开启健康检查状态时，该状态始终为正常。 */
-  RealServerStatus?: number | null;
+  RealServerStatus?: number;
   /** 源站的端口号 */
-  RealServerPort?: number | null;
+  RealServerPort?: number;
   /** 当源站为域名时，域名被解析成一个或者多个IP，该字段表示其中异常的IP列表。状态异常，但该字段为空时，表示域名解析异常。 */
   DownIPList?: string[];
   /** 源站主备角色：master表示主，slave表示备，该参数必须在监听器打开了源站主备模式。 */
@@ -81,7 +81,7 @@ declare interface BindRealServerInfo {
   /** 项目ID */
   ProjectId?: number;
   /** 标签列表 */
-  TagSet?: TagPair[] | null;
+  TagSet?: TagPair[];
 }
 
 /** 接口扩展参数 */
@@ -101,17 +101,17 @@ declare interface Certificate {
   /** 证书类型。 */
   CertificateType?: number;
   /** 证书名称。 */
-  CertificateAlias?: string | null;
+  CertificateAlias?: string;
   /** 证书创建时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。 */
   CreateTime?: number;
   /** 证书生效起始时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。 */
-  BeginTime?: number | null;
+  BeginTime?: number;
   /** 证书过期时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。 */
-  EndTime?: number | null;
+  EndTime?: number;
   /** 证书签发者通用名称。 */
-  IssuerCN?: string | null;
+  IssuerCN?: string;
   /** 证书主题通用名称。 */
-  SubjectCN?: string | null;
+  SubjectCN?: string;
 }
 
 /** 证书别名信息 */
@@ -129,39 +129,39 @@ declare interface CertificateDetail {
   /** 证书类型。 */
   CertificateType?: number;
   /** 证书名字。 */
-  CertificateAlias?: string | null;
+  CertificateAlias?: string;
   /** 证书内容。 */
   CertificateContent?: string;
   /** 密钥内容。仅当证书类型为SSL证书时，返回该字段。 */
-  CertificateKey?: string | null;
+  CertificateKey?: string;
   /** 创建时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。 */
-  CreateTime?: number | null;
+  CreateTime?: number;
   /** 证书生效起始时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。 */
-  BeginTime?: number | null;
+  BeginTime?: number;
   /** 证书过期时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。 */
-  EndTime?: number | null;
+  EndTime?: number;
   /** 证书签发者通用名称。 */
-  IssuerCN?: string | null;
+  IssuerCN?: string;
   /** 证书主题通用名称。 */
-  SubjectCN?: string | null;
+  SubjectCN?: string;
 }
 
 /** 国家地区映射关系（名称和编码） */
 declare interface CountryAreaMap {
   /** 国家名称。 */
-  NationCountryName: string;
+  NationCountryName?: string;
   /** 国家编码。 */
-  NationCountryInnerCode: string;
+  NationCountryInnerCode?: string;
   /** 地区名称。 */
-  GeographicalZoneName: string;
+  GeographicalZoneName?: string;
   /** 地区编码。 */
-  GeographicalZoneInnerCode: string;
+  GeographicalZoneInnerCode?: string;
   /** 大洲名称。 */
-  ContinentName: string;
+  ContinentName?: string;
   /** 大洲编码。 */
-  ContinentInnerCode: string;
+  ContinentInnerCode?: string;
   /** 标注信息 */
-  Remark: string | null;
+  Remark?: string;
 }
 
 /** 网络加速的目标地址信息 */
@@ -199,7 +199,7 @@ declare interface Domain {
   /** 所属项目 */
   ProjectId?: number;
   /** 默认入口 */
-  DefaultValue?: string | null;
+  DefaultValue?: string;
   /** 通道数量 */
   ProxyCount?: number;
   /** 创建时间，使用UNIX时间戳 */
@@ -207,9 +207,9 @@ declare interface Domain {
   /** 更新时间，使用UNIX时间戳 */
   UpdateTime?: number | null;
   /** 标签列表 */
-  TagSet?: TagPair[] | null;
+  TagSet?: TagPair[];
   /** 封禁解封状态：BANNED表示已封禁，RECOVER表示已解封或未封禁，BANNING表示封禁中，RECOVERING表示解封中，BAN_FAILED表示封禁失败，RECOVER_FAILED表示解封失败。 */
-  BanStatus?: string | null;
+  BanStatus?: string;
 }
 
 /** 域名解析就近访问配置详情 */
@@ -239,15 +239,15 @@ declare interface DomainErrorPageInfo {
   /** 原始错误码 */
   ErrorNos?: number[];
   /** 新的错误码 */
-  NewErrorNo?: number | null;
+  NewErrorNo?: number;
   /** 需要清理的响应头 */
-  ClearHeaders?: string[] | null;
+  ClearHeaders?: string[];
   /** 需要设置的响应头 */
-  SetHeaders?: HttpHeaderParam[] | null;
+  SetHeaders?: HttpHeaderParam[];
   /** 设置的响应体(不包括 HTTP头) */
-  Body?: string | null;
+  Body?: string;
   /** 规则状态,0为成功 */
-  Status?: number | null;
+  Status?: number;
 }
 
 /** 按照域名分类的7层监听器转发规则信息 */
@@ -257,49 +257,49 @@ declare interface DomainRuleSet {
   /** 该域名对应的转发规则列表。 */
   RuleSet?: RuleInfo[];
   /** 该域名对应的服务器证书ID，值为default时，表示使用默认证书（监听器配置的证书）。 */
-  CertificateId?: string | null;
+  CertificateId?: string;
   /** 该域名对应服务器证书名称。 */
-  CertificateAlias?: string | null;
+  CertificateAlias?: string;
   /** 该域名对应的客户端证书ID，值为default时，表示使用默认证书（监听器配置的证书）。 */
-  ClientCertificateId?: string | null;
+  ClientCertificateId?: string;
   /** 该域名对应客户端证书名称。 */
-  ClientCertificateAlias?: string | null;
+  ClientCertificateAlias?: string;
   /** 该域名对应基础认证配置ID。 */
-  BasicAuthConfId?: string | null;
+  BasicAuthConfId?: string;
   /** 基础认证开关，其中：0，表示未开启；1，表示已开启。 */
-  BasicAuth?: number | null;
+  BasicAuth?: number;
   /** 该域名对应基础认证配置名称。 */
-  BasicAuthConfAlias?: string | null;
+  BasicAuthConfAlias?: string;
   /** 该域名对应源站认证证书ID。 */
-  RealServerCertificateId?: string | null;
+  RealServerCertificateId?: string;
   /** 源站认证开关，其中：0，表示未开启；1，表示已开启。 */
-  RealServerAuth?: number | null;
+  RealServerAuth?: number;
   /** 该域名对应源站认证证书名称。 */
-  RealServerCertificateAlias?: string | null;
+  RealServerCertificateAlias?: string;
   /** 该域名对应通道认证证书ID。 */
-  GaapCertificateId?: string | null;
+  GaapCertificateId?: string;
   /** 通道认证开关，其中：0，表示未开启；1，表示已开启。 */
-  GaapAuth?: number | null;
+  GaapAuth?: number;
   /** 该域名对应通道认证证书名称。 */
-  GaapCertificateAlias?: string | null;
+  GaapCertificateAlias?: string;
   /** 源站认证域名。 */
-  RealServerCertificateDomain?: string | null;
+  RealServerCertificateDomain?: string;
   /** 多客户端证书时，返回多个证书的id和别名 */
-  PolyClientCertificateAliasInfo?: CertificateAliasInfo[] | null;
+  PolyClientCertificateAliasInfo?: CertificateAliasInfo[];
   /** 多源站证书时，返回多个证书的id和别名 */
-  PolyRealServerCertificateAliasInfo?: CertificateAliasInfo[] | null;
+  PolyRealServerCertificateAliasInfo?: CertificateAliasInfo[];
   /** 域名的状态。0表示运行中，1表示变更中，2表示删除中。 */
-  DomainStatus?: number | null;
+  DomainStatus?: number;
   /** 封禁解封状态：BANNED表示已封禁，RECOVER表示已解封或未封禁，BANNING表示封禁中，RECOVERING表示解封中，BAN_FAILED表示封禁失败，RECOVER_FAILED表示解封失败。 */
-  BanStatus?: string | null;
+  BanStatus?: string;
   /** Http3特性标识，其中：0表示关闭；1表示启用。 */
-  Http3Supported?: number | null;
+  Http3Supported?: number;
   /** 是否为默认域名 */
-  IsDefaultServer?: boolean | null;
+  IsDefaultServer?: boolean;
   /** TLS套件包 */
-  TLSCiphers?: string | null;
+  TLSCiphers?: string;
   /** TLS版本 */
-  TLSSupportVersion?: string[] | null;
+  TLSSupportVersion?: string[];
 }
 
 /** 过滤条件 */
@@ -335,21 +335,21 @@ declare interface GroupStatisticsInfo {
 /** HTTP类型监听器信息 */
 declare interface HTTPListener {
   /** 监听器ID */
-  ListenerId: string;
+  ListenerId?: string;
   /** 监听器名称 */
-  ListenerName: string;
+  ListenerName?: string;
   /** 监听器端口 */
-  Port: number;
+  Port?: number;
   /** 监听器创建时间，Unix时间戳 */
-  CreateTime: number;
+  CreateTime?: number;
   /** 监听器协议， HTTP表示HTTP，HTTPS表示HTTPS，此结构取值HTTP */
-  Protocol: string;
+  Protocol?: string;
   /** 监听器状态，其中：0表示运行中；1表示创建中；2表示销毁中；3表示源站调整中；4表示配置变更中。 */
-  ListenerStatus: number;
+  ListenerStatus?: number;
   /** 监听器的通道ID，如果监听器属于通道组，则为null */
-  ProxyId: string | null;
+  ProxyId?: string;
   /** 监听器的通道组ID，如果监听器属于通道，则为null */
-  GroupId: string | null;
+  GroupId?: string | null;
 }
 
 /** HTTPS类型监听器信息 */
@@ -371,25 +371,25 @@ declare interface HTTPSListener {
   /** 监听器创建时间，Unix时间戳 */
   CreateTime?: number;
   /** 服务器SSL证书的别名 */
-  CertificateAlias?: string | null;
+  CertificateAlias?: string;
   /** 监听器客户端CA证书ID */
   ClientCertificateId?: string | null;
   /** 监听器认证方式。其中，0表示单向认证；1表示双向认证。 */
-  AuthType?: number | null;
+  AuthType?: number;
   /** 客户端CA证书别名 */
   ClientCertificateAlias?: string | null;
   /** 多客户端CA证书别名信息 */
-  PolyClientCertificateAliasInfo?: CertificateAliasInfo[] | null;
+  PolyClientCertificateAliasInfo?: CertificateAliasInfo[];
   /** 是否支持Http3，其中：0，不支持Http3接入；1，持Http3接入。注意：如果支持了Http3的功能，那么该监听器会占用对应的UDP接入端口，不可再创建相同端口的UDP监听器。 */
-  Http3Supported?: number | null;
+  Http3Supported?: number;
   /** 监听器的通道ID，如果监听器属于通道组，则为null */
-  ProxyId?: string | null;
+  ProxyId?: string;
   /** 监听器的通道组ID，如果监听器属于通道，则为null */
   GroupId?: string | null;
   /** 支持的TLS版本 */
-  TLSSupportVersion?: string[] | null;
+  TLSSupportVersion?: string[];
   /** 支持的TLS密码套件 */
-  TLSCiphers?: string | null;
+  TLSCiphers?: string;
 }
 
 /** 描述HTTP的包头参数 */
@@ -449,17 +449,17 @@ declare interface NewRealServer {
 /** 加速通道接入点详细信息(包含id、地域、ip等） */
 declare interface ProxyAccessInfo {
   /** 地域ID */
-  RegionId?: string | null;
+  RegionId?: string;
   /** 地域名称 */
-  RegionName?: string | null;
+  RegionName?: string;
   /** 通道ID */
-  ProxyId?: string | null;
+  ProxyId?: string;
   /** 通道接入ip */
-  Vip?: string | null;
+  Vip?: string;
   /** 三网通道VIP列表 */
-  VipList?: IPDetail[] | null;
+  VipList?: IPDetail[];
   /** 接入点IDC类型。ec或dc */
-  SourceRegionIdcType?: string | null;
+  SourceRegionIdcType?: string;
 }
 
 /** 通道组详情信息 */
@@ -489,23 +489,23 @@ declare interface ProxyGroupDetail {
   /** 通道组ID */
   GroupId?: string;
   /** 标签列表 */
-  TagSet?: TagPair[] | null;
+  TagSet?: TagPair[];
   /** 安全策略ID，当设置了安全策略时，存在该字段。 */
-  PolicyId?: string | null;
+  PolicyId?: string;
   /** 通道组版本 */
-  Version?: string | null;
+  Version?: string;
   /** 通道获取客户端IP的方式，0表示TOA，1表示Proxy Protocol */
-  ClientIPMethod?: number[] | null;
+  ClientIPMethod?: number[];
   /** IP版本，可取值：IPv4、IPv6，默认值IPv4 */
-  IPAddressVersion?: string | null;
+  IPAddressVersion?: string;
   /** 通道组套餐类型：Thunder表示标准通道组，Accelerator表示银牌加速通道组，CrossBorder表示跨境通道组。 */
-  PackageType?: string | null;
+  PackageType?: string;
   /** 支持Http3特性的标识，其中：0表示关闭；1表示启用。 */
-  Http3Supported?: number | null;
+  Http3Supported?: number;
   /** 特性位图，每个bit位代表一种特性，其中：0，表示不支持该特性；1，表示支持该特性。特性位图含义如下（从右往左）：第1个bit，支持4层加速；第2个bit，支持7层加速；第3个bit，支持Http3接入；第4个bit，支持IPv6；第5个bit，支持精品BGP接入；第6个bit，支持三网接入；第7个bit，支持接入段Qos加速。 */
-  FeatureBitmap?: number | null;
+  FeatureBitmap?: number;
   /** 是否支持设置TLS设置0表示不支持；1表示支持。 */
-  IsSupportTLSChoice?: number | null;
+  IsSupportTLSChoice?: number;
 }
 
 /** 通道组详情列表 */
@@ -515,7 +515,7 @@ declare interface ProxyGroupInfo {
   /** 通道组域名 */
   Domain?: string | null;
   /** 通道组名称 */
-  GroupName?: string | null;
+  GroupName?: string;
   /** 项目ID */
   ProjectId?: number;
   /** 目标地域 */
@@ -525,15 +525,15 @@ declare interface ProxyGroupInfo {
   /** 标签列表。 */
   TagSet?: TagPair[];
   /** 通道组版本 */
-  Version?: string | null;
+  Version?: string;
   /** 创建时间 */
-  CreateTime?: number | null;
+  CreateTime?: number;
   /** 通道组是否包含微软通道 */
-  ProxyType?: number | null;
+  ProxyType?: number;
   /** 支持Http3特性的标识，其中：0表示关闭；1表示启用。 */
-  Http3Supported?: number | null;
+  Http3Supported?: number;
   /** 特性位图，每个bit位代表一种特性，其中：0，表示不支持该特性；1，表示支持该特性。特性位图含义如下（从右往左）：第1个bit，支持4层加速；第2个bit，支持7层加速；第3个bit，支持Http3接入；第4个bit，支持IPv6；第5个bit，支持精品BGP接入；第6个bit，支持三网接入；第7个bit，支持接入段Qos加速。 */
-  FeatureBitmap?: number | null;
+  FeatureBitmap?: number;
 }
 
 /** 通道ID */
@@ -545,7 +545,7 @@ declare interface ProxyIdDict {
 /** 通道信息 */
 declare interface ProxyInfo {
   /** （旧参数，请使用ProxyId）通道实例ID。 */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 创建时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。 */
   CreateTime?: number;
   /** 项目ID。 */
@@ -569,7 +569,7 @@ declare interface ProxyInfo {
   /** 通道版本号：1.0，2.0，3.0。 */
   Version?: string;
   /** （新参数）通道实例ID。 */
-  ProxyId?: string | null;
+  ProxyId?: string;
   /** 1，该通道可缩扩容；0，该通道无法缩扩容。 */
   Scalarable?: number;
   /** 支持的协议类型。 */
@@ -579,45 +579,45 @@ declare interface ProxyInfo {
   /** 安全策略ID，当设置了安全策略时，存在该字段。 */
   PolicyId?: string | null;
   /** 接入地域详细信息，包括地域ID和地域名。 */
-  AccessRegionInfo?: RegionDetail | null;
+  AccessRegionInfo?: RegionDetail;
   /** 源站地域详细信息，包括地域ID和地域名。 */
-  RealServerRegionInfo?: RegionDetail | null;
+  RealServerRegionInfo?: RegionDetail;
   /** 通道转发IP */
   ForwardIP?: string;
   /** 标签列表，不存在标签时，该字段为空列表。 */
-  TagSet?: TagPair[] | null;
+  TagSet?: TagPair[];
   /** 是否支持安全组配置 */
-  SupportSecurity?: number | null;
+  SupportSecurity?: number;
   /** 计费类型: 0表示按带宽计费 1表示按流量计费。 */
-  BillingType?: number | null;
+  BillingType?: number;
   /** 关联了解析的域名列表 */
-  RelatedGlobalDomains?: string[] | null;
+  RelatedGlobalDomains?: string[];
   /** 配置变更时间 */
   ModifyConfigTime?: number | null;
   /** 通道类型，100表示THUNDER通道，103表示微软合作通道 */
-  ProxyType?: number | null;
+  ProxyType?: number;
   /** 通道获取客户端IP的方式，0表示TOA，1表示Proxy Protocol */
-  ClientIPMethod?: number[] | null;
+  ClientIPMethod?: number[];
   /** IP版本：IPv4、IPv6 */
-  IPAddressVersion?: string | null;
+  IPAddressVersion?: string;
   /** 网络类型：normal表示常规BGP，cn2表示精品BGP，triple表示三网，secure_eip表示定制安全EIP */
-  NetworkType?: string | null;
+  NetworkType?: string;
   /** 通道套餐类型：Thunder表示标准通道，Accelerator表示银牌加速通道，CrossBorder表示跨境通道。 */
-  PackageType?: string | null;
+  PackageType?: string;
   /** 封禁解封状态：BANNED表示已封禁，RECOVER表示已解封或未封禁，BANNING表示封禁中，RECOVERING表示解封中，BAN_FAILED表示封禁失败，RECOVER_FAILED表示解封失败。 */
-  BanStatus?: string | null;
+  BanStatus?: string;
   /** IP列表 */
-  IPList?: IPDetail[] | null;
+  IPList?: IPDetail[];
   /** 支持Http3协议的标识，其中：0表示关闭；1表示启用。 */
-  Http3Supported?: number | null;
+  Http3Supported?: number;
   /** 是否在封禁黑名单中，其中：0表示不在黑名单中，1表示在黑名单中。 */
-  InBanBlacklist?: number | null;
+  InBanBlacklist?: number;
   /** 特性位图，每个bit位代表一种特性，其中：0，表示不支持该特性；1，表示支持该特性。特性位图含义如下（从右往左）：第1个bit，支持4层加速；第2个bit，支持7层加速；第3个bit，支持Http3接入；第4个bit，支持IPv6；第5个bit，支持精品BGP接入；第6个bit，支持三网接入；第7个bit，支持接入段Qos加速。 */
-  FeatureBitmap?: number | null;
+  FeatureBitmap?: number;
   /** 是否是开启了auto scale的通道，0表示否，1表示是。 */
-  IsAutoScaleProxy?: number | null;
+  IsAutoScaleProxy?: number;
   /** 是否允许设置TLS配置0表示不支持；1表示支持。 */
-  IsSupportTLSChoice?: number | null;
+  IsSupportTLSChoice?: number;
 }
 
 /** 内部接口使用，返回可以查询统计数据的通道和对应的监听器信息 */
@@ -681,19 +681,19 @@ declare interface RealServerStatus {
 /** 区域信息详情 */
 declare interface RegionDetail {
   /** 区域ID */
-  RegionId: string;
+  RegionId?: string;
   /** 区域英文名或中文名 */
-  RegionName: string;
+  RegionName?: string;
   /** 机房所属大区 */
-  RegionArea: string;
+  RegionArea?: string;
   /** 机房所属大区名 */
-  RegionAreaName: string;
+  RegionAreaName?: string;
   /** 机房类型, dc表示DataCenter数据中心, ec表示EdgeComputing边缘节点 */
-  IDCType: string;
+  IDCType?: string;
   /** 特性位图，每个bit位代表一种特性，其中：0，表示不支持该特性；1，表示支持该特性。特性位图含义如下（从右往左）：第1个bit，支持4层加速；第2个bit，支持7层加速；第3个bit，支持Http3接入；第4个bit，支持IPv6；第5个bit，支持精品BGP接入；第6个bit，支持三网接入；第7个bit，支持接入段Qos加速。 */
-  FeatureBitmap: number | null;
+  FeatureBitmap?: number;
   /** 接入区域支持的能力 */
-  SupportFeature: SupportFeature | null;
+  SupportFeature?: SupportFeature | null;
 }
 
 /** 7层监听器转发规则健康检查相关参数 */
@@ -711,11 +711,11 @@ declare interface RuleCheckParams {
   /** 健康检查的检查域名。当调用ModifyRuleAttribute时，不支持修改该参数。 */
   Domain?: string;
   /** 源站服务失败统计频率 */
-  FailedCountInter?: number | null;
+  FailedCountInter?: number;
   /** 源站健康性检查阀值，超过该阀值会屏蔽服务 */
-  FailedThreshold?: number | null;
+  FailedThreshold?: number;
   /** 源站健康性检测超出阀值后，屏蔽的时间 */
-  BlockInter?: number | null;
+  BlockInter?: number;
 }
 
 /** 7层监听器转发规则信息 */
@@ -743,11 +743,11 @@ declare interface RuleInfo {
   /** 源站的服务状态，0表示异常，1表示正常。未开启健康检查时，该状态始终未正常。只要有一个源站健康状态为异常时，该状态为异常，具体源站的状态请查看RealServerSet。 */
   BindStatus?: number;
   /** 通道转发到源站的请求所携带的host，其中default表示直接转发接收到的host。 */
-  ForwardHost?: string | null;
+  ForwardHost?: string;
   /** 服务器名称指示（ServerNameIndication，简称SNI）开关。ON表示开启，OFF表示关闭。 */
-  ServerNameIndicationSwitch?: string | null;
+  ServerNameIndicationSwitch?: string;
   /** 服务器名称指示（ServerNameIndication，简称SNI），当SNI开关打开时，该字段必填。 */
-  ServerNameIndication?: string | null;
+  ServerNameIndication?: string;
   /** 强转HTTPS指示，当传递值为https:时表示强转为https */
   ForcedRedirect?: string | null;
 }
@@ -775,13 +775,13 @@ declare interface SecurityPolicyRuleOut {
   /** 规则别名 */
   AliasName?: string;
   /** 目标端口范围 */
-  DestPortRange?: string | null;
+  DestPortRange?: string;
   /** 规则ID */
   RuleId?: string;
   /** 要匹配的协议类型（TCP/UDP） */
-  Protocol?: string | null;
+  Protocol?: string;
   /** 安全策略ID */
-  PolicyId?: string | null;
+  PolicyId?: string;
 }
 
 /** 网络加速的原地址信息 */
@@ -833,21 +833,21 @@ declare interface TCPListener {
   /** 监听器绑定的源站状态， 其中：0表示异常；1表示正常。 */
   BindStatus?: number;
   /** 监听器绑定的源站信息 */
-  RealServerSet?: BindRealServer[] | null;
+  RealServerSet?: BindRealServer[];
   /** 监听器创建时间，Unix时间戳 */
   CreateTime?: number;
   /** 监听器获取客户端 IP 的方式，0表示TOA, 1表示Proxy Protocol */
-  ClientIPMethod?: number | null;
+  ClientIPMethod?: number;
   /** 健康阈值，表示连续检查成功多少次后认定源站健康。范围为1到10 */
-  HealthyThreshold?: number | null;
+  HealthyThreshold?: number;
   /** 不健康阈值，表示连续检查失败多少次数后认为源站不健康。范围为1到10 */
-  UnhealthyThreshold?: number | null;
+  UnhealthyThreshold?: number;
   /** 源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启 */
-  FailoverSwitch?: number | null;
+  FailoverSwitch?: number;
   /** 是否开启会话保持选项：0关闭， 非0开启，非0值为会话保持时间 */
-  SessionPersist?: number | null;
+  SessionPersist?: number;
   /** 监听器的通道ID，如果监听器属于通道组，则为null */
-  ProxyId?: string | null;
+  ProxyId?: string;
   /** 监听器的通道组ID，如果监听器属于通道，则为null */
   GroupId?: string | null;
 }
@@ -877,7 +877,7 @@ declare interface UDPListener {
   /** 监听器端口 */
   Port?: number;
   /** 监听器转发源站端口，仅V1版本通道或通道组监听器有效 */
-  RealServerPort?: number | null;
+  RealServerPort?: number;
   /** 监听器绑定源站类型 */
   RealServerType?: string;
   /** 监听器协议， UDP */
@@ -893,33 +893,33 @@ declare interface UDPListener {
   /** 监听器创建时间，Unix时间戳 */
   CreateTime?: number;
   /** 是否开启会话保持选项：0关闭， 非0开启，非0值为会话保持时间 */
-  SessionPersist?: number | null;
+  SessionPersist?: number;
   /** 源站健康检查时间间隔，单位：秒。时间间隔取值在[5，300]之间。 */
-  DelayLoop?: number | null;
+  DelayLoop?: number;
   /** 源站健康检查响应超时时间，单位：秒。超时时间取值在[2，60]之间。超时时间应小于健康检查时间间隔DelayLoop。 */
-  ConnectTimeout?: number | null;
+  ConnectTimeout?: number;
   /** 健康阈值，表示连续检查成功多少次后认定源站健康。范围为1到10 */
-  HealthyThreshold?: number | null;
+  HealthyThreshold?: number;
   /** 不健康阈值，表示连续检查失败多少次数后认为源站不健康。范围为1到10 */
-  UnhealthyThreshold?: number | null;
+  UnhealthyThreshold?: number;
   /** 源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启 */
-  FailoverSwitch?: number | null;
+  FailoverSwitch?: number;
   /** 源站是否开启健康检查：1开启，0关闭。 */
-  HealthCheck?: number | null;
+  HealthCheck?: number;
   /** UDP源站健康类型。PORT表示检查端口，PING表示PING。 */
-  CheckType?: string | null;
+  CheckType?: string;
   /** UDP源站健康检查探测端口。 */
-  CheckPort?: number | null;
+  CheckPort?: number;
   /** UDP源站健康检查端口探测报文类型：TEXT表示文本。仅在健康检查类型为PORT时使用。 */
-  ContextType?: string | null;
+  ContextType?: string;
   /** UDP源站健康检查端口探测发送报文。仅在健康检查类型为PORT时使用。 */
-  SendContext?: string | null;
+  SendContext?: string;
   /** UDP源站健康检查端口探测接收报文。仅在健康检查类型为PORT时使用。 */
-  RecvContext?: string | null;
+  RecvContext?: string;
   /** 监听器的通道ID，如果监听器属于通道组，则为null */
-  ProxyId?: string | null;
+  ProxyId?: string;
   /** 监听器的通道组ID，如果监听器属于通道，则为null */
-  GroupId?: string | null;
+  GroupId?: string;
 }
 
 declare interface AddRealServersRequest {
@@ -1627,7 +1627,7 @@ declare interface DescribeBlackHeaderRequest {
 
 declare interface DescribeBlackHeaderResponse {
   /** 禁用的自定义header列表 */
-  BlackHeaders?: string[] | null;
+  BlackHeaders?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1687,9 +1687,9 @@ declare interface DescribeCustomHeaderRequest {
 
 declare interface DescribeCustomHeaderResponse {
   /** 规则id */
-  RuleId: string | null;
+  RuleId?: string;
   /** 自定义header列表 */
-  Headers: HttpHeaderParam[] | null;
+  Headers?: HttpHeaderParam[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1709,13 +1709,13 @@ declare interface DescribeDestRegionsResponse {
 }
 
 declare interface DescribeDomainErrorPageInfoByIdsRequest {
-  /** 定制错误ID列表,最多支持10个 */
+  /** 定制错误ID列表，最多支持10个 */
   ErrorPageIds: string[];
 }
 
 declare interface DescribeDomainErrorPageInfoByIdsResponse {
   /** 定制错误响应配置集 */
-  ErrorPageSet: DomainErrorPageInfo[] | null;
+  ErrorPageSet?: DomainErrorPageInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1729,7 +1729,7 @@ declare interface DescribeDomainErrorPageInfoRequest {
 
 declare interface DescribeDomainErrorPageInfoResponse {
   /** 定制错误响应配置集 */
-  ErrorPageSet: DomainErrorPageInfo[] | null;
+  ErrorPageSet?: DomainErrorPageInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2015,9 +2015,9 @@ declare interface DescribeProxyGroupListRequest {
 
 declare interface DescribeProxyGroupListResponse {
   /** 通道组总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 通道组列表。 */
-  ProxyGroupList: ProxyGroupInfo[] | null;
+  ProxyGroupList?: ProxyGroupInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2287,7 +2287,7 @@ declare interface DescribeTaskStatusResponse {
   /** 任务状态：RUNNING，FAIL，SUCCESS */
   Status?: string;
   /** 任务ID */
-  TaskId?: string | null;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2399,9 +2399,9 @@ declare interface InquiryPriceCreateProxyResponse {
   /** 通道的流量费用折扣价格，单位:元/GB */
   DiscountFlowUnitPrice?: number | null;
   /** 精品BGP的带宽费用价格，单位: 元/Mbps/天 */
-  Cn2BandwidthPrice?: number | null;
+  Cn2BandwidthPrice?: number;
   /** 精品BGP的折后带宽费用价格，单位: 元/Mbps/天 */
-  Cn2BandwidthPriceWithDiscount?: number | null;
+  Cn2BandwidthPriceWithDiscount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

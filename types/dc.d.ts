@@ -449,7 +449,7 @@ declare interface Tag {
 }
 
 declare interface AcceptDirectConnectTunnelRequest {
-  /** 专用通道ID。 */
+  /** 专用通道ID。可以通过[DescribeDirectConnectTunnel](https://cloud.tencent.com/document/product/216/19819)接口获取。 */
   DirectConnectTunnelId: string;
 }
 

@@ -2087,6 +2087,8 @@ declare interface CreateAuditLogFileRequest {
   Filter?: AuditLogFilter;
   /** 过滤条件。可按设置的过滤条件过滤日志。 */
   LogFilter?: InstanceAuditLogFilters[];
+  /** 下载筛选列 */
+  ColumnFilter?: string[];
 }
 
 declare interface CreateAuditLogFileResponse {
@@ -4761,9 +4763,9 @@ declare interface ModifyInstanceParamResponse {
 }
 
 declare interface ModifyInstancePasswordComplexityRequest {
-  /** 实例短 ID 列表。 */
+  /** 要修改密码复杂度的实例 ID。说明：支持输入多个实例 ID 进行修改。 */
   InstanceIds: string[];
-  /** 要修改的参数列表。每一个元素是Name和CurrentValue的组合。Name是参数名，CurrentValue是要修改成的值。8.0版本Name支持范围：["validate_password.policy","validate_password.length","validate_password.mixed_case_count","validate_password.number_count","validate_password.special_char_count"],5.6和5.7版本支持范围：["validate_password_policy","validate_password_length","validate_password_mixed_case_count","validate_password_number_count","validate_password_special_char_count"] */
+  /** 要修改的密码复杂度的选项。每一个选项是以组合形式写入的，一个组合包括 Name 和 CurrentValue，其中 Name 表示对应选项的参数名，CurrentValue 表示参数值。例如：[{"Name": "validate_password.length", "CurrentValue": "10"}]，表示将密码的最小字符数修改为10。说明：不同数据库版本的实例，支持修改的密码复杂度的选项如下。1. MySQL 8.0：选项 validate_password.policy，表示密码复杂度的开关，值为 LOW 时表示关闭；值为 MEDIUM 时表示开启。温馨提示：如需修改具体的密码策略，此选项的值需为 MEDIUM。选项 validate_password.length，表示密码总长度的最小字符数。选项 validate_password.mixed_case_count，表示小写和大写字母的最小字符数。选项 validate_password.number_count，表示数字的最小字符数。选项 validate_password.special_char_count，表示特殊字符的最小字符数。2. MySQL 5.6、MySQL 5.7：选项 validate_password_policy，表示密码复杂度的开关，值为 LOW 时表示关闭；值为 MEDIUM 时表示开启。温馨提示：如需修改具体的密码策略，此选项的值需为 MEDIUM。选项 validate_password_length，表示密码总长度的最小字符数。选项 validate_password_mixed_case_count，表示小写和大写字母的最小字符数。选项 validate_password_number_count，表示数字的最小字符数。选项 validate_password_special_char_count，表示特殊字符的最小字符数。 */
   ParamList?: Parameter[];
 }
 
@@ -5075,9 +5077,9 @@ declare interface StartBatchRollbackResponse {
 declare interface StartCpuExpandRequest {
   /** 实例 ID 。 */
   InstanceId: string;
-  /** 扩容类型。可选值：auto：代表进行自动扩容manual：代表进行手动扩容 */
+  /** 扩容类型。auto 自动 manual 立即生效 timeInterval 按时间段 period 按周期 */
   Type: string;
-  /** 手动扩容时，扩容的CPU核心数。Type 为 manual 时必传。 */
+  /** 手动扩容时，扩容的 CPU 核心数。说明：1. Type 为 manual 时必传。2. 扩容的 CPU 核心数上限为当前实例 CPU 核心数，比如8核16G最大可手动扩容的 CPU 核心数为8，即范围为1 - 8。 */
   ExpandCpu?: number;
   /** 自动扩容策略。Type 为 auto 时必传。 */
   AutoStrategy?: AutoStrategy;
@@ -5645,7 +5647,7 @@ declare interface Cdb {
   RestartDBInstances(data: RestartDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RestartDBInstancesResponse>;
   /** 回档数据库表 {@link StartBatchRollbackRequest} {@link StartBatchRollbackResponse} */
   StartBatchRollback(data: StartBatchRollbackRequest, config?: AxiosRequestConfig): AxiosPromise<StartBatchRollbackResponse>;
-  /** 开启CPU弹性扩容 {@link StartCpuExpandRequest} {@link StartCpuExpandResponse} */
+  /** 开启 CPU 弹性扩容 {@link StartCpuExpandRequest} {@link StartCpuExpandResponse} */
   StartCpuExpand(data: StartCpuExpandRequest, config?: AxiosRequestConfig): AxiosPromise<StartCpuExpandResponse>;
   /** 开启复制 {@link StartReplicationRequest} {@link StartReplicationResponse} */
   StartReplication(data: StartReplicationRequest, config?: AxiosRequestConfig): AxiosPromise<StartReplicationResponse>;

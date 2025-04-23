@@ -60,6 +60,8 @@ declare interface ApplicationInfo {
   DomainList?: string[] | null;
   /** 账号AppId */
   AppId?: string;
+  /** 扩展包名数量上限 */
+  NameLimit?: number;
 }
 
 /** 功能描述模型 */

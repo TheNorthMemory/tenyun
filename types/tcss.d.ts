@@ -578,7 +578,7 @@ declare interface ClusterInfoItem {
   ClusterNodeNum?: number;
   /** 集群区域 */
   Region?: string;
-  /** 防护状态: 已防护: Defended 未防护: UnDefended */
+  /** 防护状态: 已防护: Defended 未防护: UnDefended部分防护: PartDefened */
   DefenderStatus?: string;
   /** 集群状态 */
   ClusterStatus?: string;
@@ -1386,8 +1386,10 @@ declare interface EscapeWhiteListInfo {
   ImageName?: string;
   /** 白名单记录ID */
   ID?: number;
-  /** 关联主机数量 */
+  /** 关联主机数量（包含普通节点和超级节点数量） */
   HostCount?: number;
+  /** 关联超级节点数量 */
+  SuperNodeCount?: number;
   /** 关联容器数量 */
   ContainerCount?: number;
   /** 加白事件类型 */
@@ -1970,8 +1972,10 @@ declare interface ImagesInfo {
   CreateTime?: string;
   /** 镜像大小 */
   Size?: number;
-  /** 主机个数 */
+  /** 主机个数(包含普通节点数和超级节点数) */
   HostCnt?: number;
+  /** 超级节点数 */
+  SuperNodeCnt?: number;
   /** 容器个数 */
   ContainerCnt?: number;
   /** 扫描时间 */
@@ -3518,8 +3522,10 @@ declare interface VulAffectedImageInfo {
   ImageID?: string;
   /** 镜像名称 */
   ImageName?: string;
-  /** 关联的主机数 */
+  /** 关联的主机数(包含普通节点数和超级节点数) */
   HostCount?: number;
+  /** 关联的超级节点数 */
+  SuperNodeCount?: number;
   /** 关联的容器数 */
   ContainerCount?: number;
   /** 组件列表 */
@@ -5912,10 +5918,12 @@ declare interface DescribeAssetImageDetailResponse {
   CreateTime?: string;
   /** 镜像大小 */
   Size?: number;
-  /** 关联主机个数 */
+  /** 关联主机个数(包含普通节点数和超级节点数) */
   HostCnt?: number;
   /** 关联容器个数 */
   ContainerCnt?: number;
+  /** 超级节点数 */
+  SuperNodeCnt?: number;
   /** 最近扫描时间 */
   ScanTime?: string;
   /** 漏洞个数 */
@@ -8172,6 +8180,8 @@ declare interface DescribePurchaseStateInfoResponse {
   DefendClusterCoresCnt?: number;
   /** 已防护主机核数 */
   DefendHostCoresCnt?: number;
+  /** 试用的专业版核数 */
+  TrialCoresCnt?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

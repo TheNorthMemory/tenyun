@@ -488,6 +488,16 @@ declare interface CtsdbParam {
   CtsdbMetric?: string;
 }
 
+/** CVM和IP信息 */
+declare interface CvmAndIpInfo {
+  /** ckafka集群实例Id */
+  CkafkaInstanceId?: string | null;
+  /** CVM实例ID */
+  InstanceId?: string;
+  /** IP地址 */
+  Ip?: string | null;
+}
+
 /** Datahub资源配置 */
 declare interface DatahubResource {
   /** 资源类型 */
@@ -1424,6 +1434,14 @@ declare interface KafkaParam {
   KeepPartition?: boolean;
   /** 正则匹配Topic列表 */
   TopicRegularExpression?: string;
+}
+
+/** CVM和IP 信息列表 */
+declare interface ListCvmAndIpInfoRsp {
+  /** cvm和IP 列表 */
+  CvmList?: CvmAndIpInfo[] | null;
+  /** 实例数据量 */
+  TotalCount?: number | null;
 }
 
 /** 小写字符解析 */
@@ -3374,6 +3392,18 @@ declare interface DescribeConsumerGroupResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCvmInfoRequest {
+  /** ckafka集群实例Id */
+  InstanceId: string;
+}
+
+declare interface DescribeCvmInfoResponse {
+  /** 返回结果 */
+  Result?: ListCvmAndIpInfoRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDatahubGroupOffsetsRequest {
   /** （过滤条件）按照实例 ID 过滤 */
   Name: string;
@@ -3770,6 +3800,28 @@ declare interface DescribeTopicSyncReplicaRequest {
 declare interface DescribeTopicSyncReplicaResponse {
   /** 返回topic 副本详情 */
   Result?: TopicInSyncReplicaResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTypeInstancesRequest {
+  /** （过滤条件）按照实例ID过滤 */
+  InstanceId?: string;
+  /** （过滤条件）按照实例名称过滤，支持模糊查询 */
+  SearchWord?: string;
+  /** （过滤条件）实例的状态。0：创建中，1：运行中，2：删除中，不填默认返回全部 */
+  Status?: number[];
+  /** 偏移量，不填默认为0 */
+  Offset?: number;
+  /** 返回数量，不填则默认10，最大值100 */
+  Limit?: number;
+  /** 匹配标签key值。 */
+  TagKey?: string;
+}
+
+declare interface DescribeTypeInstancesResponse {
+  /** 返回的结果 */
+  Result?: InstanceResponse;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4329,9 +4381,9 @@ declare interface ModifyTopicAttributesRequest {
   RetentionBytes?: number;
   /** 标签列表 */
   Tags?: Tag[];
-  /** 生产限流，单位 MB/s */
+  /** 生产限流，单位 MB/s；设置为-1，则生产不限流 */
   QuotaProducerByteRate?: number;
-  /** 消费限流，单位 MB/s */
+  /** 消费限流，单位 MB/s；设置为-1，则消费不限流 */
   QuotaConsumerByteRate?: number;
   /** topic副本数 最小值 1,最大值 3 */
   ReplicaNum?: number;
@@ -4551,6 +4603,8 @@ declare interface Ckafka {
   DescribeConnectResources(data?: DescribeConnectResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConnectResourcesResponse>;
   /** 查询消费分组信息 {@link DescribeConsumerGroupRequest} {@link DescribeConsumerGroupResponse} */
   DescribeConsumerGroup(data: DescribeConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerGroupResponse>;
+  /** 获取实例的CVM信息 {@link DescribeCvmInfoRequest} {@link DescribeCvmInfoResponse} */
+  DescribeCvmInfo(data: DescribeCvmInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCvmInfoResponse>;
   /** 获取Datahub消费分组offset {@link DescribeDatahubGroupOffsetsRequest} {@link DescribeDatahubGroupOffsetsResponse} */
   DescribeDatahubGroupOffsets(data: DescribeDatahubGroupOffsetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatahubGroupOffsetsResponse>;
   /** 查询Datahub任务信息 {@link DescribeDatahubTaskRequest} {@link DescribeDatahubTaskResponse} */
@@ -4595,6 +4649,8 @@ declare interface Ckafka {
   DescribeTopicSubscribeGroup(data: DescribeTopicSubscribeGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicSubscribeGroupResponse>;
   /** 获取Topic 同步副本信息 {@link DescribeTopicSyncReplicaRequest} {@link DescribeTopicSyncReplicaResponse} */
   DescribeTopicSyncReplica(data: DescribeTopicSyncReplicaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicSyncReplicaResponse>;
+  /** 获取实例列表 {@link DescribeTypeInstancesRequest} {@link DescribeTypeInstancesResponse} */
+  DescribeTypeInstances(data?: DescribeTypeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTypeInstancesResponse>;
   /** 查询用户信息 {@link DescribeUserRequest} {@link DescribeUserResponse} */
   DescribeUser(data: DescribeUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResponse>;
   /** 查询Datahub Topic消息 {@link FetchDatahubMessageByOffsetRequest} {@link FetchDatahubMessageByOffsetResponse} */

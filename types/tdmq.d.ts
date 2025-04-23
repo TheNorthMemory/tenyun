@@ -1338,6 +1338,10 @@ declare interface RocketMQGroup {
   GroupType?: string | null;
   /** 重试次数 */
   RetryMaxTimes?: number | null;
+  /** 实例ID */
+  InstanceId?: string | null;
+  /** 命名空间 */
+  Namespace?: string | null;
 }
 
 /** RocketMQ消费组配置信息 */
@@ -1534,6 +1538,10 @@ declare interface RocketMQTopic {
   CreateTime?: number;
   /** 创建时间，以毫秒为单位 */
   UpdateTime?: number;
+  /** 实例ID */
+  InstanceId?: string | null;
+  /** 命名空间 */
+  Namespace?: string | null;
   /** 最后写入时间，单位为秒 */
   LastUpdateTime?: number | null;
   /** 订阅数量 */

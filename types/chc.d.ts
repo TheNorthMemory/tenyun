@@ -877,7 +877,7 @@ declare interface CreateQuitWorkOrderRequest {
   IdcId: number;
   /** 设备类型，server, netDevice, otherDevice */
   DeviceType: string;
-  /** 下架选择 1.自行解决 2.由腾讯IDC负责 3.不涉及下架，如：其他设备退出 */
+  /** 下架选择 1.自行解决 2.由腾讯IDC负责 */
   StuffOption: string;
   /** 关电确认 1.授权时关电 2.关电前需要确认 */
   IsPowerOffConfirm: string;
@@ -994,6 +994,30 @@ declare interface CreateServerModelResponse {
   DevModel?: string;
   /** 版本 */
   Version?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSpeciallyQuitWorkOrderRequest {
+  /** 机房id */
+  IdcId: number;
+  /** 设备类型：otherDevice。此接口只支持其他设备 */
+  DeviceType: string;
+  /** 交接方式 1.物流上门收货 2.客户上门自提 */
+  HandoverMethod: string;
+  /** 物流上门收货必传 */
+  LogisticsReceipt?: LogisticsReceipt;
+  /** 客户上门自提必传 */
+  CustomerReceipt?: CustomerReceipt;
+  /** 备注信息 */
+  Remark?: string;
+  /** 当设备类型为otherDevice，此参数必传 */
+  OtherDeviceList?: OtherDevReceivingInfo[];
+}
+
+declare interface CreateSpeciallyQuitWorkOrderResponse {
+  /** 创建的工单信息 */
+  WorkOrderSet?: WorkOrderTinyInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1195,6 +1219,8 @@ declare interface DescribeModelVersionListRequest {
   Checked?: boolean;
   /** 园区ID，当 Checked 参数传 True 时，该参数必须传值 */
   CampusId?: number;
+  /** 型号关键字，可以实现模糊匹配搜索功能 */
+  ModelName?: string;
 }
 
 declare interface DescribeModelVersionListResponse {
@@ -1413,6 +1439,8 @@ declare interface Chc {
   CreateReceivingWorkOrder(data: CreateReceivingWorkOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReceivingWorkOrderResponse>;
   /** 创建服务器型号 {@link CreateServerModelRequest} {@link CreateServerModelResponse} */
   CreateServerModel(data: CreateServerModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServerModelResponse>;
+  /** 创建临时设备退出工单 {@link CreateSpeciallyQuitWorkOrderRequest} {@link CreateSpeciallyQuitWorkOrderResponse} */
+  CreateSpeciallyQuitWorkOrder(data: CreateSpeciallyQuitWorkOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSpeciallyQuitWorkOrderResponse>;
   /** 获取机房内可用的型号列表 {@link DescribeAvailableModelListRequest} {@link DescribeAvailableModelListResponse} */
   DescribeAvailableModelList(data: DescribeAvailableModelListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableModelListResponse>;
   /** 获取园区列表 {@link DescribeCampusListRequest} {@link DescribeCampusListResponse} */

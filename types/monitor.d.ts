@@ -2311,6 +2311,14 @@ declare namespace V20180724 {
     RuleName?: string | null;
   }
 
+  /** DescribePolicyObjectCount接口返回的地域统计 */
+  interface RegionPolicyObjectCount {
+    /** 地域 */
+    Region: string;
+    /** 绑定的实例数量 */
+    Count: number;
+  }
+
   /** 多写配置 */
   interface RemoteWrite {
     /** 多写url */
@@ -4127,6 +4135,22 @@ declare namespace V20180724 {
     RequestId?: string;
   }
 
+  interface DescribePolicyObjectCountRequest {
+    /** 固定值，为"monitor" */
+    Module: string;
+    /** 策略组Id */
+    GroupId: number;
+  }
+
+  interface DescribePolicyObjectCountResponse {
+    /** 是否为多地域 */
+    IsMultiRegion?: boolean | null;
+    /** 地域统计列表 */
+    RegionList?: RegionPolicyObjectCount[] | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeProductEventListRequest {
     /** 接口模块名，固定值"monitor" */
     Module: string;
@@ -4753,6 +4777,14 @@ declare namespace V20180724 {
     RequestId?: string;
   }
 
+  interface ExportPrometheusReadOnlyDynamicAPIRequest {
+  }
+
+  interface ExportPrometheusReadOnlyDynamicAPIResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface GetMonitorDataRequest {
     /** 命名空间，如QCE/CVM。各个云产品的详细命名空间说明请参阅各个产品[监控指标](https://cloud.tencent.com/document/product/248/6140)文档 */
     Namespace: string;
@@ -4766,7 +4798,7 @@ declare namespace V20180724 {
     StartTime?: string;
     /** 结束时间，如2018-09-22T20:51:23+08:00，默认为当前时间。 EndTime不能小于StartTime */
     EndTime?: string;
-    /** 返回多种统计方式数据。avg, max, min (1,2,4)可以自由组合 */
+    /** 返回多种统计方式数据。avg, max, min (1,2,4)可以自由组合。注意: 仅支持对API配置文档中展示的统计方式返回对应的统计数据。如所需的统计方式不满足您的查询需求，请提工单反馈。 */
     SpecifyStatistics?: number;
   }
 
@@ -5727,6 +5759,8 @@ declare interface Monitor {
   DescribePolicyGroupInfo(data: V20180724.DescribePolicyGroupInfoRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribePolicyGroupInfoResponse>;
   /** 获取基础策略告警组列表 {@link V20180724.DescribePolicyGroupListRequest} {@link V20180724.DescribePolicyGroupListResponse} */
   DescribePolicyGroupList(data: V20180724.DescribePolicyGroupListRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribePolicyGroupListResponse>;
+  /** 查询策略组在每个地域下面绑定的对象数统计 {@link V20180724.DescribePolicyObjectCountRequest} {@link V20180724.DescribePolicyObjectCountResponse} */
+  DescribePolicyObjectCount(data: V20180724.DescribePolicyObjectCountRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribePolicyObjectCountResponse>;
   /** 获取产品事件列表 {@link V20180724.DescribeProductEventListRequest} {@link V20180724.DescribeProductEventListResponse} */
   DescribeProductEventList(data: V20180724.DescribeProductEventListRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeProductEventListResponse>;
   /** 查询云产品列表 {@link V20180724.DescribeProductListRequest} {@link V20180724.DescribeProductListResponse} */
@@ -5791,6 +5825,8 @@ declare interface Monitor {
   EnableGrafanaSSO(data: V20180724.EnableGrafanaSSORequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.EnableGrafanaSSOResponse>;
   /** 设置SSO登录是否鉴权 {@link V20180724.EnableSSOCamCheckRequest} {@link V20180724.EnableSSOCamCheckResponse} */
   EnableSSOCamCheck(data: V20180724.EnableSSOCamCheckRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.EnableSSOCamCheckResponse>;
+  /** Prometheus 内部只读 api 代理 {@link V20180724.ExportPrometheusReadOnlyDynamicAPIRequest} {@link V20180724.ExportPrometheusReadOnlyDynamicAPIResponse} */
+  ExportPrometheusReadOnlyDynamicAPI(data: V20180724.ExportPrometheusReadOnlyDynamicAPIRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.ExportPrometheusReadOnlyDynamicAPIResponse>;
   /** 拉取指标监控数据 {@link V20180724.GetMonitorDataRequest} {@link V20180724.GetMonitorDataResponse} */
   GetMonitorData(data: V20180724.GetMonitorDataRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.GetMonitorDataResponse>;
   /** 获取 Prometheus Agent 管理相关的命令行 {@link V20180724.GetPrometheusAgentManagementCommandRequest} {@link V20180724.GetPrometheusAgentManagementCommandResponse} */

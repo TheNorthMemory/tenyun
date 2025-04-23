@@ -150,6 +150,22 @@ declare interface CloudStorageUserInfo {
   UserId: string;
 }
 
+/** 云存上报统计信息 */
+declare interface CountDataInfo {
+  /** 视频上报异常次数 */
+  VideoExceptionNum?: number;
+  /** 视频上报成功次数 */
+  VideoSuccessNum?: number;
+  /** 视频上报成功率 */
+  VideoSuccessRate?: string;
+  /** 事件上报异常次数 */
+  EventExceptionNum?: number;
+  /** 事件上报成功次数 */
+  EventSuccessNum?: number;
+  /** 事件上报成功率 */
+  EventSuccessRate?: string;
+}
+
 /** 数据转发描述 */
 declare interface DataForward {
   /** 产品ID。 */
@@ -1450,6 +1466,26 @@ declare interface DescribeCloudStorageUsersResponse {
   TotalCount?: number;
   /** 用户信息 */
   Users?: CloudStorageUserInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCsReportCountDataInfoRequest {
+  /** 产品id */
+  ProductId: string;
+  /** 设备名 */
+  DeviceName: string;
+  /** 统计开始时间戳 */
+  StartTime: number;
+  /** 统计结束时间戳 */
+  EndTime: number;
+  /** 设备通道 */
+  ChannelId?: number;
+}
+
+declare interface DescribeCsReportCountDataInfoResponse {
+  /** 云存上报统计信息 */
+  Data?: CountDataInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6037,6 +6073,8 @@ declare interface Iotvideo {
   DescribeCloudStorageTime(data: DescribeCloudStorageTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageTimeResponse>;
   /** 拉取云存用户列表 {@link DescribeCloudStorageUsersRequest} {@link DescribeCloudStorageUsersResponse} */
   DescribeCloudStorageUsers(data: DescribeCloudStorageUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageUsersResponse>;
+  /** 获取云存上报统计信息 {@link DescribeCsReportCountDataInfoRequest} {@link DescribeCsReportCountDataInfoResponse} */
+  DescribeCsReportCountDataInfo(data: DescribeCsReportCountDataInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCsReportCountDataInfoResponse>;
   /** 获取数据转发列表 {@link DescribeDataForwardListRequest} {@link DescribeDataForwardListResponse} */
   DescribeDataForwardList(data: DescribeDataForwardListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataForwardListResponse>;
   /** 查看设备详情 {@link DescribeDeviceRequest} {@link DescribeDeviceResponse} */

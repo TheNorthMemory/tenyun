@@ -202,7 +202,7 @@ declare interface AdaptiveStreamTemplate {
   RemoveAudio?: number;
   /** 是否移除视频流，取值范围：0：否，1：是。 */
   RemoveVideo?: number;
-  /** 音频参数信息列表。注意：参数数组长度最大为64。 */
+  /** 音频参数信息列表。注意：参数只在自适应转码使用音轨合并多音轨时使用, 参数数组长度最大为64。 */
   AudioList?: AudioTemplateInfo[] | null;
 }
 
@@ -245,7 +245,7 @@ declare interface AiAnalysisResult {
 /** 智能分类任务输入类型 */
 declare interface AiAnalysisTaskClassificationInput {
   /** 视频智能分类模板 ID。 */
-  Definition: number;
+  Definition?: number;
 }
 
 /** 智能分类结果信息 */
@@ -273,7 +273,7 @@ declare interface AiAnalysisTaskClassificationResult {
 /** 智能分类任务输入类型 */
 declare interface AiAnalysisTaskCoverInput {
   /** 视频智能封面模板 ID。 */
-  Definition: number;
+  Definition?: number;
 }
 
 /** 智能封面结果信息 */
@@ -335,7 +335,7 @@ declare interface AiAnalysisTaskDelLogoResult {
 /** 智能分类任务输入类型 */
 declare interface AiAnalysisTaskDescriptionInput {
   /** 视频智能描述模板 ID。 */
-  Definition: number;
+  Definition?: number;
 }
 
 /** 智能描述结果信息 */
@@ -361,7 +361,7 @@ declare interface AiAnalysisTaskDescriptionResult {
 /** 智能按帧标签任务输入类型 */
 declare interface AiAnalysisTaskFrameTagInput {
   /** 视频智能按帧标签模板 ID。 */
-  Definition: number;
+  Definition?: number;
 }
 
 /** 智能按帧标签结果信息 */
@@ -389,13 +389,13 @@ declare interface AiAnalysisTaskFrameTagResult {
 /** 片头片尾任务输入类型 */
 declare interface AiAnalysisTaskHeadTailInput {
   /** 片头片尾识别模板 ID。 */
-  Definition: number;
+  Definition?: number;
 }
 
 /** 片头片尾结果信息 */
 declare interface AiAnalysisTaskHeadTailOutput {
   /** 片头pts。 */
-  HeadTimeOffset: number | null;
+  HeadTimeOffset?: number | null;
   /** 片尾pts。 */
   TailTimeOffset?: number | null;
 }
@@ -417,7 +417,7 @@ declare interface AiAnalysisTaskHeadTailResult {
 /** 智能精彩片段任务输入类型 */
 declare interface AiAnalysisTaskHighlightInput {
   /** 视频智能精彩片段模板 ID。 */
-  Definition: number;
+  Definition?: number;
 }
 
 /** 智能精彩片段结果信息 */
@@ -476,14 +476,14 @@ declare interface AiAnalysisTaskHorizontalToVerticalResult {
 declare interface AiAnalysisTaskInput {
   /** 视频内容分析模板 ID。 */
   Definition: number;
-  /** 扩展参数，其值为序列化的 json字符串。注意：此参数为定制需求参数，参考如下：智能檫除：https://cloud.tencent.com/document/product/862/101530智能拆条：https://cloud.tencent.com/document/product/862/112098高光集锦：https://cloud.tencent.com/document/product/862/107280智能横转竖：https://cloud.tencent.com/document/product/862/112112 */
+  /** 扩展参数，其值为序列化的 json字符串。注意：此参数为定制需求参数，参考如下：[智能檫除](https://cloud.tencent.com/document/product/862/101530)[智能拆条](https://cloud.tencent.com/document/product/862/112098)[高光集锦](https://cloud.tencent.com/document/product/862/107280)[智能横转竖](https://cloud.tencent.com/document/product/862/112112) */
   ExtendedParameter?: string | null;
 }
 
 /** 拆条任务输入类型 */
 declare interface AiAnalysisTaskSegmentInput {
   /** 拆条任务模板 ID。 */
-  Definition: number;
+  Definition?: number;
 }
 
 /** 智能拆条结果信息 */
@@ -635,7 +635,7 @@ declare interface AiRecognitionTaskAsrFullTextResult {
 /** 语音全文识别的输入。 */
 declare interface AiRecognitionTaskAsrFullTextResultInput {
   /** 语音全文识别模板 ID。 */
-  Definition: number;
+  Definition?: number;
 }
 
 /** 语音全文识别结果。 */
@@ -681,15 +681,15 @@ declare interface AiRecognitionTaskAsrWordsResult {
 /** 语音关键词识别输入。 */
 declare interface AiRecognitionTaskAsrWordsResultInput {
   /** 语音关键词识别模板 ID。 */
-  Definition: number;
+  Definition?: number;
 }
 
 /** 语音关键词识别结果。 */
 declare interface AiRecognitionTaskAsrWordsResultItem {
   /** 语音关键词。 */
-  Word: string;
+  Word?: string;
   /** 语音关键词出现的时间片段列表。 */
-  SegmentSet: AiRecognitionTaskAsrWordsSegmentItem[];
+  SegmentSet?: AiRecognitionTaskAsrWordsSegmentItem[];
 }
 
 /** 语音关键词识别输出。 */
@@ -701,11 +701,11 @@ declare interface AiRecognitionTaskAsrWordsResultOutput {
 /** 语音识别片段。 */
 declare interface AiRecognitionTaskAsrWordsSegmentItem {
   /** 识别片段起始的偏移时间，单位：秒。 */
-  StartTimeOffset: number;
+  StartTimeOffset?: number;
   /** 识别片段终止的偏移时间，单位：秒。 */
-  EndTimeOffset: number;
+  EndTimeOffset?: number;
   /** 识别片段置信度。取值：0~100。 */
-  Confidence: number;
+  Confidence?: number;
 }
 
 /** 人脸识别结果。 */
@@ -727,7 +727,7 @@ declare interface AiRecognitionTaskFaceResult {
 /** 人脸识别输入。 */
 declare interface AiRecognitionTaskFaceResultInput {
   /** 人脸识别模板 ID。 */
-  Definition: number;
+  Definition?: number;
 }
 
 /** 人脸识别结果 */
@@ -769,13 +769,13 @@ declare interface AiRecognitionTaskFaceResultOutput {
 /** 人脸识别结果片段 */
 declare interface AiRecognitionTaskFaceSegmentItem {
   /** 识别片段起始的偏移时间，单位：秒。 */
-  StartTimeOffset: number;
+  StartTimeOffset?: number;
   /** 识别片段终止的偏移时间，单位：秒。 */
-  EndTimeOffset: number;
+  EndTimeOffset?: number;
   /** 识别片段置信度。取值：0~100。 */
-  Confidence: number;
+  Confidence?: number;
   /** 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。 */
-  AreaCoordSet: number[];
+  AreaCoordSet?: number[];
 }
 
 /** 视频内容识别输入参数类型 */
@@ -803,15 +803,15 @@ declare interface AiRecognitionTaskObjectResult {
 /** 物体识别任务输入类型。 */
 declare interface AiRecognitionTaskObjectResultInput {
   /** 物体识别模板 ID。 */
-  Definition: number;
+  Definition?: number;
 }
 
 /** 单个物体识别结果。 */
 declare interface AiRecognitionTaskObjectResultItem {
   /** 识别的物体名称。 */
-  Name: string;
+  Name?: string;
   /** 物体出现的片段列表。 */
-  SegmentSet: AiRecognitionTaskObjectSeqmentItem[];
+  SegmentSet?: AiRecognitionTaskObjectSeqmentItem[];
 }
 
 /** 智能物体识别输出。 */
@@ -823,13 +823,13 @@ declare interface AiRecognitionTaskObjectResultOutput {
 /** 物体识别结果片段。 */
 declare interface AiRecognitionTaskObjectSeqmentItem {
   /** 识别片段起始的偏移时间，单位：秒。 */
-  StartTimeOffset: number;
+  StartTimeOffset?: number;
   /** 识别片段终止的偏移时间，单位：秒。 */
-  EndTimeOffset: number;
+  EndTimeOffset?: number;
   /** 识别片段置信度。取值：0~100。 */
-  Confidence: number;
+  Confidence?: number;
   /** 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。 */
-  AreaCoordSet: number[];
+  AreaCoordSet?: number[];
 }
 
 /** 文本全文识别结果。 */
@@ -851,7 +851,7 @@ declare interface AiRecognitionTaskOcrFullTextResult {
 /** 文本全文识别输入。 */
 declare interface AiRecognitionTaskOcrFullTextResultInput {
   /** 文本全文识别模板 ID。 */
-  Definition: number;
+  Definition?: number;
 }
 
 /** 文本全文识别输出。 */
@@ -863,21 +863,21 @@ declare interface AiRecognitionTaskOcrFullTextResultOutput {
 /** 文本全文识别片段。 */
 declare interface AiRecognitionTaskOcrFullTextSegmentItem {
   /** 识别片段起始的偏移时间，单位：秒。 */
-  StartTimeOffset: number;
+  StartTimeOffset?: number;
   /** 识别片段终止的偏移时间，单位：秒。 */
-  EndTimeOffset: number;
+  EndTimeOffset?: number;
   /** 识别片段结果集。 */
-  TextSet: AiRecognitionTaskOcrFullTextSegmentTextItem[];
+  TextSet?: AiRecognitionTaskOcrFullTextSegmentTextItem[];
 }
 
 /** 文本全文识别片段。 */
 declare interface AiRecognitionTaskOcrFullTextSegmentTextItem {
   /** 识别片段置信度。取值：0~100。 */
-  Confidence: number;
+  Confidence?: number;
   /** 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。 */
-  AreaCoordSet: number[];
+  AreaCoordSet?: number[];
   /** 识别文本。 */
-  Text: string;
+  Text?: string;
 }
 
 /** 文本关键识别结果。 */
@@ -905,9 +905,9 @@ declare interface AiRecognitionTaskOcrWordsResultInput {
 /** 文本关键词识别结果。 */
 declare interface AiRecognitionTaskOcrWordsResultItem {
   /** 文本关键词。 */
-  Word: string;
+  Word?: string;
   /** 文本关键出现的片段列表。 */
-  SegmentSet: AiRecognitionTaskOcrWordsSegmentItem[];
+  SegmentSet?: AiRecognitionTaskOcrWordsSegmentItem[];
 }
 
 /** 文本关键词识别输出。 */
@@ -919,13 +919,13 @@ declare interface AiRecognitionTaskOcrWordsResultOutput {
 /** 文本识别片段。 */
 declare interface AiRecognitionTaskOcrWordsSegmentItem {
   /** 识别片段起始的偏移时间，单位：秒。 */
-  StartTimeOffset: number;
+  StartTimeOffset?: number;
   /** 识别片段终止的偏移时间，单位：秒。 */
-  EndTimeOffset: number;
+  EndTimeOffset?: number;
   /** 识别片段置信度。取值：0~100。 */
-  Confidence: number;
+  Confidence?: number;
   /** 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。 */
-  AreaCoordSet: number[];
+  AreaCoordSet?: number[];
 }
 
 /** 翻译结果。 */
@@ -949,7 +949,7 @@ declare interface AiRecognitionTaskTransTextResult {
 /** 翻译的输入。 */
 declare interface AiRecognitionTaskTransTextResultInput {
   /** 翻译模板 ID。 */
-  Definition: number;
+  Definition?: number;
 }
 
 /** 翻译结果。 */
@@ -985,11 +985,11 @@ declare interface AiReviewPoliticalAsrTaskInput {
 /** Asr 文字敏感信息 */
 declare interface AiReviewPoliticalAsrTaskOutput {
   /** Asr 文字敏感评分，分值为0到100。 */
-  Confidence: number;
+  Confidence?: number;
   /** Asr 文字敏感结果建议，取值范围：pass。review。block。 */
-  Suggestion: string;
+  Suggestion?: string;
   /** Asr 文字敏感嫌疑的视频片段列表。 */
-  SegmentSet: MediaContentReviewAsrTextSegmentItem[];
+  SegmentSet?: MediaContentReviewAsrTextSegmentItem[];
 }
 
 /** 内容审核 Ocr 文字敏感任务输入参数类型 */
@@ -1001,11 +1001,11 @@ declare interface AiReviewPoliticalOcrTaskInput {
 /** Ocr 文字敏感信息 */
 declare interface AiReviewPoliticalOcrTaskOutput {
   /** Ocr 文字敏感评分，分值为0到100。 */
-  Confidence: number;
+  Confidence?: number;
   /** Ocr 文字敏感结果建议，取值范围：pass。review。block。 */
-  Suggestion: string;
+  Suggestion?: string;
   /** Ocr 文字有敏感嫌疑的视频片段列表。 */
-  SegmentSet: MediaContentReviewOcrTextSegmentItem[];
+  SegmentSet?: MediaContentReviewOcrTextSegmentItem[];
 }
 
 /** 内容审核敏感任务输入参数类型 */
@@ -1017,45 +1017,45 @@ declare interface AiReviewPoliticalTaskInput {
 /** 涉敏信息 */
 declare interface AiReviewPoliticalTaskOutput {
   /** 视频涉敏评分，分值为0到100。 */
-  Confidence: number;
+  Confidence?: number;
   /** 涉敏结果建议，取值范围：pass。review。block。 */
-  Suggestion: string;
+  Suggestion?: string;
   /** 视频涉敏结果标签。内容审核模板[画面涉敏任务控制参数](https://cloud.tencent.com/document/api/862/37615)里 LabelSet 参数与此参数取值范围的对应关系：violation_photo：violation_photo：违规图标。其他（即 politician/entertainment/sport/entrepreneur/scholar/celebrity/military）：politician：涉敏人物。 */
-  Label: string;
+  Label?: string;
   /** 有涉敏嫌疑的视频片段列表。 */
-  SegmentSet: MediaContentReviewPoliticalSegmentItem[];
+  SegmentSet?: MediaContentReviewPoliticalSegmentItem[];
 }
 
 /** 内容审核 Asr 文字鉴黄任务输入参数类型 */
 declare interface AiReviewPornAsrTaskInput {
   /** 鉴黄模板 ID。 */
-  Definition: number;
+  Definition?: number;
 }
 
 /** Asr 文字涉黄信息 */
 declare interface AiReviewPornAsrTaskOutput {
   /** Asr 文字涉黄评分，分值为0到100。 */
-  Confidence: number;
+  Confidence?: number;
   /** Asr 文字涉黄结果建议，取值范围：pass。review。block。 */
-  Suggestion: string;
+  Suggestion?: string;
   /** Asr 文字有涉黄嫌疑的视频片段列表。 */
-  SegmentSet: MediaContentReviewAsrTextSegmentItem[];
+  SegmentSet?: MediaContentReviewAsrTextSegmentItem[];
 }
 
 /** 内容审核 Ocr 文字鉴黄任务输入参数类型 */
 declare interface AiReviewPornOcrTaskInput {
   /** 鉴黄模板 ID。 */
-  Definition: number;
+  Definition?: number;
 }
 
 /** Ocr 文字涉黄信息 */
 declare interface AiReviewPornOcrTaskOutput {
   /** Ocr 文字涉黄评分，分值为0到100。 */
-  Confidence: number;
+  Confidence?: number;
   /** Ocr 文字涉黄结果建议，取值范围：pass。review。block。 */
-  Suggestion: string;
+  Suggestion?: string;
   /** Ocr 文字有涉黄嫌疑的视频片段列表。 */
-  SegmentSet: MediaContentReviewOcrTextSegmentItem[];
+  SegmentSet?: MediaContentReviewOcrTextSegmentItem[];
 }
 
 /** 内容审核鉴黄任务输入参数类型 */
@@ -1067,45 +1067,45 @@ declare interface AiReviewPornTaskInput {
 /** 鉴黄结果信息 */
 declare interface AiReviewPornTaskOutput {
   /** 视频鉴黄评分，分值为0到100。 */
-  Confidence: number;
+  Confidence?: number;
   /** 鉴黄结果建议，取值范围：pass。review。block。 */
-  Suggestion: string;
+  Suggestion?: string;
   /** 视频鉴黄结果标签，取值范围：porn：色情。sexy：性感。vulgar：低俗。intimacy：亲密行为。 */
-  Label: string;
+  Label?: string;
   /** 有涉黄嫌疑的视频片段列表。 */
-  SegmentSet: MediaContentReviewSegmentItem[];
+  SegmentSet?: MediaContentReviewSegmentItem[];
 }
 
 /** 内容审核 Asr 文字鉴违禁任务输入参数类型 */
 declare interface AiReviewProhibitedAsrTaskInput {
   /** 鉴违禁模板 ID。 */
-  Definition: number;
+  Definition?: number;
 }
 
 /** Asr 文字涉违禁信息 */
 declare interface AiReviewProhibitedAsrTaskOutput {
   /** Asr 文字涉违禁评分，分值为0到100。 */
-  Confidence: number;
+  Confidence?: number;
   /** Asr 文字涉违禁结果建议，取值范围：pass。review。block。 */
-  Suggestion: string;
+  Suggestion?: string;
   /** Asr 文字有涉违禁嫌疑的视频片段列表。 */
-  SegmentSet: MediaContentReviewAsrTextSegmentItem[];
+  SegmentSet?: MediaContentReviewAsrTextSegmentItem[];
 }
 
 /** 内容审核 Ocr 文字鉴违禁任务输入参数类型 */
 declare interface AiReviewProhibitedOcrTaskInput {
   /** 鉴违禁模板 ID。 */
-  Definition: number;
+  Definition?: number;
 }
 
 /** Ocr 文字涉违禁信息 */
 declare interface AiReviewProhibitedOcrTaskOutput {
   /** Ocr 文字涉违禁评分，分值为0到100。 */
-  Confidence: number;
+  Confidence?: number;
   /** Ocr 文字涉违禁结果建议，取值范围：pass。review。block。 */
-  Suggestion: string;
+  Suggestion?: string;
   /** Ocr 文字有涉违禁嫌疑的视频片段列表。 */
-  SegmentSet: MediaContentReviewOcrTextSegmentItem[];
+  SegmentSet?: MediaContentReviewOcrTextSegmentItem[];
 }
 
 /** 内容审核 Asr 文字敏感任务结果类型 */
@@ -1277,11 +1277,11 @@ declare interface AiReviewTerrorismOcrTaskInput {
 /** Ocr 文字涉敏信息 */
 declare interface AiReviewTerrorismOcrTaskOutput {
   /** Ocr 文字涉敏评分，分值为0到100。 */
-  Confidence: number;
+  Confidence?: number;
   /** Ocr 文字涉敏结果建议，取值范围：pass。review。block。 */
-  Suggestion: string;
+  Suggestion?: string;
   /** Ocr 文字有涉敏嫌疑的视频片段列表。 */
-  SegmentSet: MediaContentReviewOcrTextSegmentItem[];
+  SegmentSet?: MediaContentReviewOcrTextSegmentItem[];
 }
 
 /** 内容审核涉敏任务输入参数类型 */
@@ -1305,9 +1305,9 @@ declare interface AiReviewTerrorismTaskOutput {
 /** AI 样本管理，人脸信息。 */
 declare interface AiSampleFaceInfo {
   /** 人脸图片 ID。 */
-  FaceId: string;
+  FaceId?: string;
   /** 人脸图片地址。 */
-  Url: string;
+  Url?: string;
 }
 
 /** AI 样本管理，人脸数据操作。 */
@@ -1333,21 +1333,21 @@ declare interface AiSampleFailFaceInfo {
 /** AI 样本管理，人物信息。 */
 declare interface AiSamplePerson {
   /** 人物 ID。 */
-  PersonId: string;
+  PersonId?: string;
   /** 人物名称。 */
-  Name: string;
+  Name?: string;
   /** 人物描述。 */
-  Description: string;
+  Description?: string;
   /** 人脸信息。 */
-  FaceInfoSet: AiSampleFaceInfo[];
+  FaceInfoSet?: AiSampleFaceInfo[];
   /** 人物标签。 */
-  TagSet: string[];
+  TagSet?: string[];
   /** 应用场景。 */
-  UsageSet: string[];
+  UsageSet?: string[];
   /** 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** AI 样本管理，标签操作。 */
@@ -1447,7 +1447,7 @@ declare interface AsrFullTextConfigureInfoForUpdate {
   /** 生成的字幕文件格式，填空字符串表示不生成字幕文件，可选值：vtt：生成 WebVTT 字幕文件。 */
   SubtitleFormat?: string;
   /** 视频源语言。 */
-  SourceLanguage?: string | null;
+  SourceLanguage?: string;
 }
 
 /** 智能字幕热词参数 */
@@ -1542,11 +1542,11 @@ declare interface AudioSeparateConfig {
 
 /** 音频流配置参数 */
 declare interface AudioTemplateInfo {
-  /** 音频流的编码格式。当不需要对音频进行转码时，可选值为：copy。当外层参数 Container 为 mp3 时，可选值为：mp3。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：aac；ac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：aac：更适合 mp4；mp3：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：aac；mp3。 */
+  /** 音频流的编码格式。当不需要对音频进行转码时，可选值为：copy。当外层参数 Container 为 mp3 时，可选值为：mp3。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：aac；ac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：aac：更适合 mp4；mp3：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：aac；mp3;eac3：自适应转码音轨合并时使用。 */
   Codec: string;
-  /** 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。当取值为 0，表示音频码率和原始音频保持一致。 */
+  /** 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。当取值为 0，表示音频码率和原始音频保持一致。注意：如果使用自适应转码音轨合并TrackChannelInfo参数，取值范围：1）、不能填0；2）、Codec为：aac时，取值范围：[26, 256];3）、Codec为：ac3时，取值范围：[26, 640];4)、Codec为：eac3时，取值范围：[26, 6144]，备注：当SampleRate为44100HZ，最大值为：5644，当SampleRate为48000HZ，最大值为：6144， */
   Bitrate: number;
-  /** 音频流的采样率，可选值：320004410048000单位：Hz。 */
+  /** 音频流的采样率，不同编码标准支持的采样率选项不同。详细参考[音频采样率支持范围文档](https://cloud.tencent.com/document/product/862/77166)单位：Hz注意：请确保源音频流的采样率在上述选项范围内，否则可能导致转码失败！ */
   SampleRate: number;
   /** 音频通道方式，可选值：1：单通道2：双通道6：5.1声道当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为5.1声道。默认值：2。 */
   AudioChannel?: number;
@@ -1560,7 +1560,7 @@ declare interface AudioTemplateInfoForUpdate {
   Codec?: string | null;
   /** 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。 当取值为 0，表示音频码率和原始音频保持一致。 */
   Bitrate?: number | null;
-  /** 音频流的采样率，可选值：320004410048000单位：Hz。 */
+  /** 音频流的采样率，不同编码标准支持的采样率选项不同。详细参考[音频采样率支持范围文档](https://cloud.tencent.com/document/product/862/77166)单位：Hz注意：请确保源音频流的采样率在上述选项范围内，否则可能导致转码失败！ */
   SampleRate?: number | null;
   /** 音频通道方式，可选值：1：单通道2：双通道6：5.1声道当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为5.1声道。 */
   AudioChannel?: number | null;
@@ -1572,7 +1572,7 @@ declare interface AudioTemplateInfoForUpdate {
 declare interface AudioTrackChannelInfo {
   /** 是否开启混音，可选值：0：表示不开启混音1：表示开启混音默认值：0 */
   ChannelsRemix?: number | null;
-  /** 合并音轨输入类型，可选值：trask：表示使用音轨id；trask_channel： 表示使用音轨id和声道id；默认：trask。注意：如果原视频是多声道，建议使用trask_channel。 */
+  /** 合并音轨输入类型，可选值：track：表示使用音轨id；track_channel： 表示使用音轨id和声道id；默认：track。注意：如果原视频是多声道，建议使用track_channel。 */
   SelectType?: string | null;
   /** 音轨信息 */
   InputTrackInfo?: TrackInfo[] | null;
@@ -1881,27 +1881,27 @@ declare interface ContainerDiagnoseResultItem {
 /** 内容审核模板详情 */
 declare interface ContentReviewTemplateItem {
   /** 内容审核模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 内容审核模板名称，长度限制：64 个字符。 */
-  Name: string;
+  Name?: string;
   /** 内容审核模板描述信息，长度限制：256 个字符。 */
-  Comment: string;
+  Comment?: string;
   /** 鉴黄控制参数。 */
-  PornConfigure: PornConfigureInfo | null;
+  PornConfigure?: PornConfigureInfo | null;
   /** 涉敏控制参数。 */
-  TerrorismConfigure: TerrorismConfigureInfo | null;
+  TerrorismConfigure?: TerrorismConfigureInfo | null;
   /** 涉敏控制参数。 */
-  PoliticalConfigure: PoliticalConfigureInfo | null;
+  PoliticalConfigure?: PoliticalConfigureInfo | null;
   /** 违禁控制参数。违禁内容包括：谩骂；涉毒违法。 */
-  ProhibitedConfigure: ProhibitedConfigureInfo | null;
+  ProhibitedConfigure?: ProhibitedConfigureInfo | null;
   /** 用户自定义内容审核控制参数。 */
-  UserDefineConfigure: UserDefineConfigureInfo | null;
+  UserDefineConfigure?: UserDefineConfigureInfo | null;
   /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 模板类型，取值范围：* Preset：系统预置模板；* Custom：用户自定义模板。 */
-  Type: string | null;
+  Type?: string | null;
 }
 
 /** 绑定到 COS 的输入规则。 */
@@ -2022,11 +2022,11 @@ declare interface CreateInputSRTSettings {
   Mode?: string;
   /** 流Id，可选大小写字母、数字和特殊字符（.#!:&,=_-），长度为0~512。具体格式可以参考：https://github.com/Haivision/srt/blob/master/docs/features/access-control.md#standard-keys。 */
   StreamId?: string;
-  /** 延迟，默认0，单位ms，范围为[0, 3000]。 */
+  /** 延迟，默认120，单位ms，范围为[0, 3000]。 */
   Latency?: number;
   /** 接收延迟，默认120，单位ms，范围为[0, 3000]。 */
   RecvLatency?: number;
-  /** 对端延迟，默认0，单位ms，范围为[0, 3000]。 */
+  /** 对端延迟，默认120，单位ms，范围为[0, 3000]。 */
   PeerLatency?: number;
   /** 对端超时时间，默认5000，单位ms，范围为[1000, 10000]。 */
   PeerIdleTimeout?: number;
@@ -2048,6 +2048,10 @@ declare interface CreateOutputInfo {
   Protocol: string;
   /** 输出地区。 */
   OutputRegion: string;
+  /** 输出类型：Internet/TencentCSS */
+  OutputType?: string;
+  /** 输出模块类型，包括Pinpoint（单点输出，最多支持四路并发输出）；MultiMesh（多路输出，支持大于四路的并发输出，目前可以达到200路）。默认类型为 Pinpoint 输出。对于单个 Flow 一个区域最多只能有一个 MultiMesh 输出 */
+  OutputKind?: string;
   /** 输出的SRT的配置。 */
   SRTSettings?: CreateOutputSRTSettings;
   /** 输出的RTMP的配置。 */
@@ -2062,8 +2066,6 @@ declare interface CreateOutputInfo {
   SecurityGroupIds?: string[];
   /** 可用区，output最多只支持输入一个可用区。 */
   Zones?: string[];
-  /** 输出类型：Internet/TencentCSS/StreamLive */
-  OutputType?: string;
   /** 输出的RIST的配置。 */
   RISTSettings?: CreateOutputRistSettings;
   /** 对于含有多个音/视频轨的流，可以指定需要使用的轨道 */
@@ -2120,11 +2122,11 @@ declare interface CreateOutputSRTSettings {
   Destinations: CreateOutputSRTSettingsDestinations[];
   /** 转推SRT的流Id，可选大小写字母、数字和特殊字符（.#!:&,=_-），长度为0~512。 */
   StreamId?: string;
-  /** 转推SRT的总延迟，默认0，单位ms，范围为[0, 3000]。此参数同时设置了发送方和接收方的延迟（recvlatency和peerlatency）为相同的值。建议配置为至少3倍RTT，以确保在网络拥塞时能够有效处理数据包的重传和确认 */
+  /** 转推SRT的延迟，默认120，单位ms，范围为[0, 3000]。此参数同时设置了发送方和接收方的延迟（recvlatency和peerlatency）为相同的值。建议配置为至少3倍RTT，以确保在网络拥塞时能够有效处理数据包的重传和确认 */
   Latency?: number;
   /** 转推SRT的接收延迟，默认120，单位ms，范围为[0, 3000]。 此参数表示接收方用于缓存数据包的时间长度 */
   RecvLatency?: number;
-  /** 转推SRT的对端延迟，默认0，单位ms，范围为[0, 3000]。 此参数由发送方设置，用于告知接收方其期望的延迟缓冲时间 */
+  /** 转推SRT的对端延迟，默认120，单位ms，范围为[0, 3000]。 此参数由发送方设置，用于告知接收方其期望的延迟缓冲时间 */
   PeerLatency?: number;
   /** 转推SRT的对端空闲超时时间，默认5000，单位ms，范围为[1000, 10000]。 如果连接在设定的超时时间内没有活动，将会被关闭 */
   PeerIdleTimeout?: number;
@@ -2236,6 +2238,8 @@ declare interface DescribeInput {
   Zones?: string[];
   /** 输入的RIST配置信息。 */
   RISTSettings?: DescribeInputRISTSettings | null;
+  /** 输入模块配置相关的URL信息，包含提供的推流地址，或者配置的第三方源流地址 */
+  StreamUrls?: StreamUrlDetail[];
 }
 
 /** 查询输入的HLS配置信息。 */
@@ -2312,6 +2316,8 @@ declare interface DescribeOutput {
   OutputName?: string;
   /** 输出类型。 */
   OutputType?: string;
+  /** 输出模块类型，包括Pinpoint（单点输出，最多支持四路并发输出）；MultiMesh（多路输出，支持大于四路的并发输出，目前可以达到200路）。默认类型为 Pinpoint 输出。对于单个 Flow 一个区域最多只能有一个 MultiMesh 输出。 */
+  OutputKind?: string;
   /** 输出描述。 */
   Description?: string | null;
   /** 输出协议。 */
@@ -2344,6 +2350,8 @@ declare interface DescribeOutput {
   RISTSettings?: DescribeOutputRISTSettings | null;
   /** 对于含有多个音/视频轨的流，可以指定需要使用的轨道 */
   PidSelector?: PidSelector;
+  /** 输出模块配置，相关的URL，包括提供的拉流地址，或者配置的输出到第三方的转推地址 */
+  StreamUrls?: StreamUrlDetail[];
 }
 
 /** 查询输出的HLS拉流URL信息。 */
@@ -2397,11 +2405,11 @@ declare interface DescribeOutputRTMPSettings {
 /** 查询输出的RTP配置信息。 */
 declare interface DescribeOutputRTPSettings {
   /** 转推RTP的目标地址信息列表。 */
-  Destinations: RTPAddressDestination[] | null;
+  Destinations?: RTPAddressDestination[] | null;
   /** 是否FEC。 */
-  FEC: string | null;
+  FEC?: string | null;
   /** 空闲超时时间。 */
-  IdleTimeout: number | null;
+  IdleTimeout?: number | null;
 }
 
 /** 查询输出的RTSP拉流URL信息。 */
@@ -2917,35 +2925,35 @@ declare interface ImageSpriteTaskInput {
 /** 雪碧图模板详情 */
 declare interface ImageSpriteTemplate {
   /** 雪碧图模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 模板类型，取值范围：Preset：系统预置模板；Custom：用户自定义模板。 */
-  Type: string;
+  Type?: string;
   /** 雪碧图模板名称。 */
-  Name: string;
+  Name?: string;
   /** 雪碧图中小图的宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
-  Width: number;
+  Width?: number;
   /** 雪碧图中小图的高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
-  Height: number;
+  Height?: number;
   /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
-  ResolutionAdaptive: string;
+  ResolutionAdaptive?: string;
   /** 采样类型。 */
-  SampleType: string;
+  SampleType?: string;
   /** 采样间隔。 */
-  SampleInterval: number;
+  SampleInterval?: number;
   /** 雪碧图中小图的行数。 */
-  RowCount: number;
+  RowCount?: number;
   /** 雪碧图中小图的列数。 */
-  ColumnCount: number;
+  ColumnCount?: number;
   /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式： stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。默认值：black 。 */
-  FillType: string;
+  FillType?: string;
   /** 模板描述信息。 */
-  Comment: string;
+  Comment?: string;
   /** 图片格式。 */
-  Format: string;
+  Format?: string;
 }
 
 /** 图片任务输入参数 */
@@ -2983,13 +2991,13 @@ declare interface ImageWatermarkInputForUpdate {
 /** 图片水印模板 */
 declare interface ImageWatermarkTemplate {
   /** 水印图片地址。 */
-  ImageUrl: string;
+  ImageUrl?: string;
   /** 水印的宽度。支持 %、px 两种格式：当字符串以 % 结尾，表示水印 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；当字符串以 px 结尾，表示水印 Width 单位为像素，如 100px 表示 Width 为 100 像素。 */
-  Width: string;
+  Width?: string;
   /** 水印的高度。支持 %、px 两种格式：当字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；当字符串以 px 结尾，表示水印 Height 单位为像素，如 100px 表示 Height 为 100 像素；0px：表示 Height 按照 Width 对视频宽度的比例缩放。 */
-  Height: string;
+  Height?: string;
   /** 水印重复类型。使用场景：水印为动态图像。取值范围：once：动态水印播放完后，不再出现；repeat_last_frame：水印播放完后，停留在最后一帧；repeat：水印循环播放，直到视频结束。 */
-  RepeatType: string;
+  RepeatType?: string;
 }
 
 /** 输入地址信息。 */
@@ -3159,23 +3167,23 @@ declare interface LiveStreamAiRecognitionResultItem {
 /** 直播 AI 内容审核图片敏感结果 */
 declare interface LiveStreamAiReviewImagePoliticalResult {
   /** 嫌疑片段起始的 PTS 时间，单位：秒。 */
-  StartPtsTime: number;
+  StartPtsTime?: number;
   /** 嫌疑片段结束的 PTS 时间，单位：秒。 */
-  EndPtsTime: number;
+  EndPtsTime?: number;
   /** 嫌疑片段敏感分数。 */
-  Confidence: number;
+  Confidence?: number;
   /** 嫌疑片段鉴黄结果建议，取值范围：passreviewblock */
-  Suggestion: string;
+  Suggestion?: string;
   /** 视频敏感结果标签，取值范围：politician：敏感人物。violation_photo：违规图标。 */
-  Label: string;
+  Label?: string;
   /** 敏感人物、违规图标名字。 */
-  Name: string;
+  Name?: string;
   /** 敏感人物、违规图标出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。 */
-  AreaCoordSet: number[];
+  AreaCoordSet?: number[];
   /** 嫌疑图片 URL （图片不会永久存储，到达PicUrlExpireTime 时间点后图片将被删除）。 */
-  Url: string;
+  Url?: string;
   /** 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  PicUrlExpireTime: string;
+  PicUrlExpireTime?: string;
 }
 
 /** 直播 AI 内容审核图片鉴黄结果 */
@@ -3199,19 +3207,19 @@ declare interface LiveStreamAiReviewImagePornResult {
 /** 直播 AI 内容审核图片涉敏结果 */
 declare interface LiveStreamAiReviewImageTerrorismResult {
   /** 嫌疑片段起始的 PTS 时间，单位：秒。 */
-  StartPtsTime: number;
+  StartPtsTime?: number;
   /** 嫌疑片段结束的 PTS 时间，单位：秒。 */
-  EndPtsTime: number;
+  EndPtsTime?: number;
   /** 嫌疑片段涉敏分数。 */
-  Confidence: number;
+  Confidence?: number;
   /** 嫌疑片段涉敏结果建议，取值范围：passreviewblock */
-  Suggestion: string;
+  Suggestion?: string;
   /** 视频涉敏结果标签，取值范围：guns：武器枪支。crowd：人群聚集。police：警察部队。bloody：血腥画面。banners：涉敏旗帜。militant：武装分子。explosion：爆炸火灾。terrorists：涉敏人物。 */
-  Label: string;
+  Label?: string;
   /** 嫌疑图片 URL （图片不会永久存储，到达PicUrlExpireTime 时间点后图片将被删除）。 */
-  Url: string;
+  Url?: string;
   /** 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  PicUrlExpireTime: string;
+  PicUrlExpireTime?: string;
 }
 
 /** 直播流 AI 审核结果 */
@@ -3251,13 +3259,13 @@ declare interface LiveStreamAiReviewVoicePornResult {
 /** 直播识别 Asr 全文识别 */
 declare interface LiveStreamAsrFullTextRecognitionResult {
   /** 识别文本。 */
-  Text: string;
+  Text?: string;
   /** 识别片段起始的 PTS 时间，单位：秒。 */
-  StartPtsTime: number;
+  StartPtsTime?: number;
   /** 识别片段终止的 PTS 时间，单位：秒。 */
-  EndPtsTime: number;
+  EndPtsTime?: number;
   /** 识别片段置信度。取值：0~100。 */
-  Confidence: number;
+  Confidence?: number;
   /** 识别开始UTC时间。 */
   StartTime?: string | null;
   /** 识别结束UTC时间。 */
@@ -3403,15 +3411,15 @@ declare interface LiveStreamTaskNotifyConfig {
 /** 直播实时翻译结果 */
 declare interface LiveStreamTransTextRecognitionResult {
   /** 识别文本。 */
-  Text: string;
+  Text?: string;
   /** 翻译片段起始的 PTS 时间，单位：秒。 */
-  StartPtsTime: number;
+  StartPtsTime?: number;
   /** 翻译片段终止的 PTS 时间，单位：秒。 */
-  EndPtsTime: number;
+  EndPtsTime?: number;
   /** 翻译片段置信度。取值：0~100。 */
-  Confidence: number;
+  Confidence?: number;
   /** 翻译文本。 */
-  Trans: string;
+  Trans?: string;
   /** 翻译开始UTC时间。 */
   StartTime?: string | null;
   /** 翻译结束UTC时间。 */
@@ -3431,17 +3439,17 @@ declare interface LowLightEnhanceConfig {
 /** 智能分类结果 */
 declare interface MediaAiAnalysisClassificationItem {
   /** 智能分类的类别名称。 */
-  Classification: string;
+  Classification?: string;
   /** 智能分类的可信度，取值范围是 0 到 100。 */
-  Confidence: number;
+  Confidence?: number;
 }
 
 /** 智能封面信息 */
 declare interface MediaAiAnalysisCoverItem {
   /** 智能封面存储路径。 */
-  CoverPath: string;
+  CoverPath?: string;
   /** 智能封面的可信度，取值范围是 0 到 100。 */
-  Confidence: number;
+  Confidence?: number;
 }
 
 /** 智能描述信息 */
@@ -3461,21 +3469,21 @@ declare interface MediaAiAnalysisDescriptionItem {
 /** 智能按帧标签结果信息 */
 declare interface MediaAiAnalysisFrameTagItem {
   /** 按帧标签名称。 */
-  Tag: string;
+  Tag?: string;
   /** 按帧标签名称的分类列表，CategorySet.N 表示第 N+1级分类。比如 Tag 为“塔楼”时，CategorySet 包含两个元素：CategorySet.0 为“场景”，CategorySet.1为 “建筑”，表示按帧标签为“塔楼”，且第1级分类是“场景”，第2级分类是“建筑”。 */
-  CategorySet: string[];
+  CategorySet?: string[];
   /** 按帧标签的可信度，取值范围是 0 到 100。 */
-  Confidence: number;
+  Confidence?: number;
 }
 
 /** 按帧标签片段列表 */
 declare interface MediaAiAnalysisFrameTagSegmentItem {
   /** 按帧标签起始的偏移时间。 */
-  StartTimeOffset: number;
+  StartTimeOffset?: number;
   /** 按帧标签结束的偏移时间。 */
-  EndTimeOffset: number;
+  EndTimeOffset?: number;
   /** 时间片段内的标签列表。 */
-  TagSet: MediaAiAnalysisFrameTagItem[];
+  TagSet?: MediaAiAnalysisFrameTagItem[];
 }
 
 /** 智能精彩片段信息 */
@@ -3495,35 +3503,35 @@ declare interface MediaAiAnalysisHighlightItem {
 /** 智能标签结果信息 */
 declare interface MediaAiAnalysisTagItem {
   /** 标签名称。 */
-  Tag: string;
+  Tag?: string;
   /** 标签的可信度，取值范围是 0 到 100。 */
-  Confidence: number;
+  Confidence?: number;
 }
 
 /** 视频转动图结果信息 */
 declare interface MediaAnimatedGraphicsItem {
   /** 转动图文件的存储位置。 */
-  Storage: TaskOutputStorage;
+  Storage?: TaskOutputStorage;
   /** 转动图的文件路径。 */
-  Path: string;
+  Path?: string;
   /** 转动图模板 ID，参见[转动图参数模板](https://cloud.tencent.com/document/product/862/37042)。 */
-  Definition: number;
+  Definition?: number;
   /** 动图格式，如 gif。 */
-  Container: string;
+  Container?: string;
   /** 动图的高度，单位：px。 */
-  Height: number;
+  Height?: number;
   /** 动图的宽度，单位：px。 */
-  Width: number;
+  Width?: number;
   /** 动图码率，单位：bps。 */
-  Bitrate: number;
+  Bitrate?: number;
   /** 动图大小，单位：字节。 */
-  Size: number;
+  Size?: number;
   /** 动图的md5值。 */
-  Md5: string;
+  Md5?: string;
   /** 动图在视频中的起始时间偏移，单位：秒。 */
-  StartTimeOffset: number;
+  StartTimeOffset?: number;
   /** 动图在视频中的结束时间偏移，单位：秒。 */
-  EndTimeOffset: number;
+  EndTimeOffset?: number;
 }
 
 /** 点播文件音频流信息 */
@@ -3545,75 +3553,75 @@ declare interface MediaAudioStreamItem {
 /** 内容审核 Asr 文字审核嫌疑片段 */
 declare interface MediaContentReviewAsrTextSegmentItem {
   /** 嫌疑片段起始的偏移时间，单位：秒。 */
-  StartTimeOffset: number;
+  StartTimeOffset?: number;
   /** 嫌疑片段结束的偏移时间，单位：秒。 */
-  EndTimeOffset: number;
+  EndTimeOffset?: number;
   /** 嫌疑片段置信度。 */
-  Confidence: number;
+  Confidence?: number;
   /** 嫌疑片段审核结果建议，取值范围：pass。review。block。 */
-  Suggestion: string;
+  Suggestion?: string;
   /** 嫌疑关键词列表。 */
-  KeywordSet: string[];
+  KeywordSet?: string[];
 }
 
 /** 内容审核 Ocr 文字审核嫌疑片段 */
 declare interface MediaContentReviewOcrTextSegmentItem {
   /** 嫌疑片段起始的偏移时间，单位：秒。 */
-  StartTimeOffset: number;
+  StartTimeOffset?: number;
   /** 嫌疑片段结束的偏移时间，单位：秒。 */
-  EndTimeOffset: number;
+  EndTimeOffset?: number;
   /** 嫌疑片段置信度。 */
-  Confidence: number;
+  Confidence?: number;
   /** 嫌疑片段审核结果建议，取值范围：pass。review。block。 */
-  Suggestion: string;
+  Suggestion?: string;
   /** 嫌疑关键词列表。 */
-  KeywordSet: string[];
+  KeywordSet?: string[];
   /** 嫌疑文字出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。 */
-  AreaCoordSet: number[];
+  AreaCoordSet?: number[];
   /** 嫌疑图片 URL （图片不会永久存储，到达PicUrlExpireTime 时间点后图片将被删除）。 */
-  Url: string;
+  Url?: string;
   /** 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  PicUrlExpireTime: string;
+  PicUrlExpireTime?: string;
 }
 
 /** 内容审核涉敏嫌疑片段 */
 declare interface MediaContentReviewPoliticalSegmentItem {
   /** 嫌疑片段起始的偏移时间，单位：秒。 */
-  StartTimeOffset: number;
+  StartTimeOffset?: number;
   /** 嫌疑片段结束的偏移时间，单位：秒。 */
-  EndTimeOffset: number;
+  EndTimeOffset?: number;
   /** 嫌疑片段涉敏分数。 */
-  Confidence: number;
+  Confidence?: number;
   /** 嫌疑片段涉敏结果建议，取值范围：pass。review。block。 */
-  Suggestion: string;
+  Suggestion?: string;
   /** 涉敏人物、违规图标名字。 */
-  Name: string;
+  Name?: string;
   /** 嫌疑片段涉敏结果标签。内容审核模板[画面涉敏任务控制参数](https://cloud.tencent.com/document/api/862/37615)里 LabelSet 参数与此参数取值范围的对应关系：violation_photo：violation_photo：违规图标。politician：nation_politician：国家领导人；province_politician: 省部级领导人；bureau_politician：厅局级领导人；county_politician：县处级领导人；rural_politician：乡科级领导人；sensitive_politician：涉敏人物；foreign_politician：国外领导人。entertainment：sensitive_entertainment：敏感娱乐人物。sport：sensitive_sport：敏感体育人物。entrepreneur：sensitive_entrepreneur：敏感商业人物。scholar：sensitive_scholar：敏感教育学者。celebrity：sensitive_celebrity：敏感知名人物；historical_celebrity：历史知名人物。military：sensitive_military：敏感军事人物。 */
-  Label: string;
+  Label?: string;
   /** 嫌疑图片 URL （图片不会永久存储，到达 PicUrlExpireTime 时间点后图片将被删除）。 */
-  Url: string;
+  Url?: string;
   /** 涉敏人物、违规图标出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。 */
-  AreaCoordSet: number[];
+  AreaCoordSet?: number[];
   /** 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  PicUrlExpireTime: string;
+  PicUrlExpireTime?: string;
 }
 
 /** 内容审核涉黄/涉敏嫌疑片段 */
 declare interface MediaContentReviewSegmentItem {
   /** 嫌疑片段起始的偏移时间，单位：秒。 */
-  StartTimeOffset: number;
+  StartTimeOffset?: number;
   /** 嫌疑片段结束的偏移时间，单位：秒。 */
-  EndTimeOffset: number;
+  EndTimeOffset?: number;
   /** 嫌疑片段涉黄分数。 */
-  Confidence: number;
+  Confidence?: number;
   /** 嫌疑片段鉴黄结果标签。 */
-  Label: string;
+  Label?: string;
   /** 嫌疑片段鉴黄结果建议，取值范围：pass。review。block。 */
-  Suggestion: string;
+  Suggestion?: string;
   /** 嫌疑图片 URL （图片不会永久存储，到达 PicUrlExpireTime 时间点后图片将被删除）。 */
-  Url: string;
+  Url?: string;
   /** 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  PicUrlExpireTime: string;
+  PicUrlExpireTime?: string;
 }
 
 /** 雪碧图信息 */
@@ -3853,11 +3861,11 @@ declare interface MediaSnapshotByTimeOffsetItem {
 /** 指定时间点截图信息 */
 declare interface MediaSnapshotByTimePicInfoItem {
   /** 该张截图对应视频文件中的时间偏移，单位为秒。 */
-  TimeOffset: number;
+  TimeOffset?: number;
   /** 该张截图的路径。 */
-  Path: string;
+  Path?: string;
   /** 截图如果被打上了水印，被打水印的模板 ID 列表。 */
-  WaterMarkDefinition: number[];
+  WaterMarkDefinition?: number[];
 }
 
 /** 转码信息 */
@@ -3932,7 +3940,7 @@ declare interface ModifyInput {
   SRTSettings: CreateInputSRTSettings;
   /** RTP的配置信息。 */
   RTPSettings: CreateInputRTPSettings;
-  /** 输入的协议，可选[SRT|RTP|RTMP_PUSH|RTMP_PULL|RTSP_PULL|RIST]。	- */
+  /** 输入的协议，可选[SRT|RTP|RTMP|RTMP_PULL|RTSP_PULL|RIST]。	- */
   Protocol?: string;
   /** 输入的主备开关，可选[OPEN|CLOSE]。 */
   FailOver?: string;
@@ -3964,6 +3972,8 @@ declare interface ModifyOutputInfo {
   Description: string;
   /** 输出的转推协议，支持SRT|RTP|RTMP|RTMP_PULL|RTSP_PULL|RIST。 */
   Protocol: string;
+  /** 输出模块类型，包括Pinpoint（单点输出，最多支持四路并发输出）；MultiMesh（多路输出，支持大于四路的并发输出，目前可以达到200路）。默认类型为 Pinpoint 输出。对于单个 Flow 一个区域最多只能有一个 MultiMesh 输出。 */
+  OutputKind?: string;
   /** 转推SRT的配置。 */
   SRTSettings?: CreateOutputSRTSettings;
   /** 转推RTP的配置。 */
@@ -4561,31 +4571,31 @@ declare interface SampleSnapshotTaskInput {
 /** 采样截图模板详情 */
 declare interface SampleSnapshotTemplate {
   /** 采样截图模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 模板类型，取值范围：Preset：系统预置模板；Custom：用户自定义模板。 */
-  Type: string;
+  Type?: string;
   /** 采样截图模板名称。 */
-  Name: string;
+  Name?: string;
   /** 模板描述信息。 */
-  Comment: string;
+  Comment?: string;
   /** 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
-  Width: number;
+  Width?: number;
   /** 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
-  Height: number;
+  Height?: number;
   /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
-  ResolutionAdaptive: string;
+  ResolutionAdaptive?: string;
   /** 图片格式。 */
-  Format: string;
+  Format?: string;
   /** 采样截图类型。 */
-  SampleType: string;
+  SampleType?: string;
   /** 采样间隔。 */
-  SampleInterval: number;
+  SampleInterval?: number;
   /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式： stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。默认值：black 。 */
-  FillType: string;
+  FillType?: string;
 }
 
 /** 编排视频分析任务结果类型 */
@@ -5020,11 +5030,11 @@ declare interface SnapshotByTimeOffsetTemplate {
 
 /** FairPlay，WideVine，PlayReady 等Drm加密方式。 */
 declare interface SpekeDrm {
-  /** 资源标记，支持1-128个字符的数字、字母、下划线(_)、中划线(-)。 */
+  /** 资源标记，该字段内容为用户自定义；支持1-128个字符的数字、字母、下划线(_)、中划线(-)。 */
   ResourceId: string;
-  /** drm厂商访问地址；注: 不同DRM厂商对子流的数量限制不一样，如 pallycon 限制不能超过5条子流，drmtoday厂商最多仅支持9条子流加密 */
+  /** DRM厂商访问地址，该字段内容从DRM厂商获取。注: 不同DRM厂商对子流的数量限制不一样，如 PallyCon 限制不能超过5条子流，DRMtoday厂商最多仅支持9条子流加密 */
   KeyServerUrl: string;
-  /** 加密初始化向量(32字节字符串)。 */
+  /** 加密初始化向量(32字节字符串)，该字段内容为用户自定义。 */
   Vector: string;
   /** 加密方式，FairPlay 默认cbcs，PlayReady，Widevine 默认cenccbcs：PlayReady，Widevine，FairPlay 支持；cenc：PlayReady，Widevine支持； */
   EncryptionMethod?: string;
@@ -5036,6 +5046,16 @@ declare interface SpekeDrm {
 declare interface StreamLinkRegionInfo {
   /** 媒体直传输的地区信息列表。 */
   Regions: RegionInfo[];
+}
+
+/** 描述 URL 的完整信息 */
+declare interface StreamUrlDetail {
+  /** 会描述运营商信息等 */
+  Label?: string;
+  /** URL */
+  Url?: string;
+  /** Playback: 拉流播放地址； RelayDestination：转推目的地址；SourceCaptureUrl：回源拉流地址；IngestEndpoint：推流地址 */
+  Type?: string;
 }
 
 /** 字幕流配置参数。 */
@@ -5246,9 +5266,9 @@ declare interface TextWatermarkTemplateInputForUpdate {
 
 /** 音轨信息 */
 declare interface TrackInfo {
-  /** 音轨和声道数字，说明：当：SelectType值为trask，此值为整数类型，例如：1；当：SelectType值为trask_channel，此值为小数类型，例如：1.0；默认值：1.0注意：整数部分代表音轨序号，以小数部分代表声道。音轨序号即为音轨的stream index，支持输入0和正整数。小数部分最多支持2位小数，并且仅支持0-63，但是如果Codec为aac/eac3/ac3时，小数部分仅支持0-15。例如：对于stream index为1的音轨，1.0代表这个音轨的第1个声道，1.1代表这个音轨的第2个声道。 */
+  /** 音轨和声道数字，说明：当：SelectType值为track，此值为整数类型，例如：1；当：SelectType值为track_channel，此值为小数类型，例如：1.0；默认值：1.0注意：整数部分代表音轨序号，以小数部分代表声道。音轨序号即为音轨的stream index，支持输入0和正整数。小数部分最多支持2位小数，并且仅支持0-63，但是如果Codec为aac/eac3/ac3时，小数部分仅支持0-15。例如：对于stream index为1的音轨，1.0代表这个音轨的第1个声道，1.1代表这个音轨的第2个声道。 */
   TrackNum?: string | null;
-  /** 声道音量大小，说明：当：AudioChannel的值为1时，此值长度为1；当：AudioChannel的值为2时，此值长度为2；当：AudioChannel的值为6时，此值长度大于2。此值数组值取值范围：[-60, 6]，其中-60代表静音、0代表保持原音量，6表示原音量增加一倍，默认值为-60。注意：支持3位小数。 */
+  /** 声道音量大小，说明：当：AudioChannel的值为1时，此数组长度为1，例如：[6]；当：AudioChannel的值为2时，此数组长度为2，例如：[0,6]；当：AudioChannel的值为6时，此数组长度大于2小于16，例如：[-60,0,0,6]。此值数组值取值范围：[-60, 6]，其中-60代表静音、0代表保持原音量，6表示原音量增加一倍，默认值为-60。注意：支持3位小数。 */
   ChannelVolume?: number[] | null;
 }
 
@@ -5516,7 +5536,7 @@ declare interface VideoTemplateInfo {
   SegmentType?: number | null;
   /** 帧率分母部分注意：值必须大于0 */
   FpsDenominator?: number | null;
-  /** 3D视频拼接方式，仅mv-hevc，3D视频生效，可选值：side_by_side：左右视角top_bottom：上下视角默认值:side_by_side */
+  /** 3D视频拼接方式，仅mv-hevc，3D视频生效，可选值：side_by_side：原视频内容左右排列布局top_bottom：原视频内容上下排列布局计费将按照切分后的分辨率尺寸上报用量及计费；默认值:side_by_side */
   Stereo3dType?: string | null;
   /** Profile，适用于不同场景。baseline: 只支持I/P帧，并只支持无交错的场景，适用于视频通话、手机视频等场景。main: 主流Profile，提供I帧、P帧、B帧，并支持无交错模式和交错模式。主要用在主流的音视频消费产品如视频播放器、流媒体传输设备上。high: 最高编码等级，在Main Profile上添加了8X8的预测，并支持自定义量化。广泛应用在蓝光存储、高清电视等场景。default：随原视频自动填充。 仅编码标准选择h264时出现该配置， 支持 baseline/main/high，默认为：default */
   VideoProfile?: string | null;
@@ -5576,7 +5596,7 @@ declare interface VideoTemplateInfoForUpdate {
   SegmentType?: number | null;
   /** 帧率分母部分注意：值必须大于0 */
   FpsDenominator?: number | null;
-  /** 3D视频拼接方式，仅mv-hevc，3D视频生效，可选值：side_by_side：左右视角top_bottom：上下视角默认值:side_by_side */
+  /** 3D视频拼接方式，仅mv-hevc，3D视频生效，可选值：side_by_side：原视频内容左右排列布局top_bottom：原视频内容上下排列布局计费将按照切分后的分辨率尺寸上报用量及计费；默认值:side_by_side */
   Stereo3dType?: string | null;
   /** Profile，适用于不同场景。 baseline: 只支持I/P帧，并只支持无交错的场景，适用于视频通话、手机视频等场景。 main: 主流Profile，提供I帧、P帧、B帧，并支持无交错模式和交错模式。主要用在主流的音视频消费产品如视频播放器、流媒体传输设备上。 high: 最高编码等级，在Main Profile上添加了8X8的预测，并支持自定义量化。广泛应用在蓝光存储、高清电视等场景。default：随原视频自动填充仅编码标准选择h264时出现该配置，默认为：default */
   VideoProfile?: string | null;
@@ -5633,29 +5653,29 @@ declare interface WatermarkInput {
 /** 水印模板详情 */
 declare interface WatermarkTemplate {
   /** 水印模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 水印类型，取值：image：图片水印；text：文字水印。 */
-  Type: string;
+  Type?: string;
   /** 水印模板名称。 */
-  Name: string;
+  Name?: string;
   /** 模板描述信息。 */
-  Comment: string;
+  Comment?: string;
   /** 水印图片原点距离视频图像原点的水平位置。当字符串以 % 结尾，表示水印 Left 为视频宽度指定百分比的位置，如 10% 表示 Left 为视频宽度的 10%；当字符串以 px 结尾，表示水印 Left 为视频宽度指定像素的位置，如 100px 表示 Left 为 100 像素。 */
-  XPos: string;
+  XPos?: string;
   /** 水印图片原点距离视频图像原点的垂直位置。当字符串以 % 结尾，表示水印 Top 为视频高度指定百分比的位置，如 10% 表示 Top 为视频高度的 10%；当字符串以 px 结尾，表示水印 Top 为视频高度指定像素的位置，如 100px 表示 Top 为 100 像素。 */
-  YPos: string;
+  YPos?: string;
   /** 图片水印模板，仅当 Type 为 image，该字段有效。 */
-  ImageTemplate: ImageWatermarkTemplate | null;
+  ImageTemplate?: ImageWatermarkTemplate | null;
   /** 文字水印模板，仅当 Type 为 text，该字段有效。 */
-  TextTemplate: TextWatermarkTemplateInput | null;
+  TextTemplate?: TextWatermarkTemplateInput | null;
   /** SVG 水印模板，当 Type 为 svg，该字段有效。 */
-  SvgTemplate: SvgWatermarkInput | null;
+  SvgTemplate?: SvgWatermarkInput | null;
   /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 原点位置，可选值：topLeft：表示坐标原点位于视频图像左上角，水印原点为图片或文字的左上角；topRight：表示坐标原点位于视频图像的右上角，水印原点为图片或文字的右上角；bottomLeft：表示坐标原点位于视频图像的左下角，水印原点为图片或文字的左下角；bottomRight：表示坐标原点位于视频图像的右下角，水印原点为图片或文字的右下。； */
-  CoordinateOrigin: string;
+  CoordinateOrigin?: string;
 }
 
 /** 字词信息。 */

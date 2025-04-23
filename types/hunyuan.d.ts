@@ -70,6 +70,20 @@ declare interface ErrorMsg {
   Code?: number;
 }
 
+/** 3D文件 */
+declare interface File3D {
+  /** 3D文件的格式。取值范围：GIF, OBJ */
+  Type?: string;
+  /** 文件的Url */
+  Url?: string;
+}
+
+/** 3D文件列表 */
+declare interface File3Ds {
+  /** 3D文件列表 */
+  File3D?: File3D[];
+}
+
 /** 已上传的文件对象。 */
 declare interface FileObject {
   /** 文件标识符，可在各个API中引用。 */
@@ -449,7 +463,7 @@ declare interface ChatCompletionsRequest {
   TopP?: number;
   /** 说明：1. 影响模型输出多样性，模型已有默认参数，不传值时使用各模型推荐值，不推荐用户修改。2. 取值区间为 [0.0, 2.0]。较高的数值会使输出更加多样化和不可预测，而较低的数值会使其更加集中和确定。 */
   Temperature?: number;
-  /** 功能增强（如搜索）开关。说明：1. hunyuan-lite 无功能增强（如搜索）能力，该参数对 hunyuan-lite 版本不生效。2. 未传值时默认打开开关。3. 关闭时将直接由主模型生成回复内容，可以降低响应时延（对于流式输出时的首字时延尤为明显）。但在少数场景里，回复效果可能会下降。4. 安全审核能力不属于功能增强范围，不受此字段影响。5. 2025-04-20 00:00:00起，由默认开启状态转为默认关闭状态。 */
+  /** 功能增强（如搜索）开关。说明：1. hunyuan-lite 无功能增强（如搜索）能力，该参数对 hunyuan-lite 版本不生效。2. 未传值时默认关闭开关。3. 关闭时将直接由主模型生成回复内容，可以降低响应时延（对于流式输出时的首字时延尤为明显）。但在少数场景里，回复效果可能会下降。4. 安全审核能力不属于功能增强范围，不受此字段影响。5. 2025-04-20 00:00:00起，由默认开启状态转为默认关闭状态。 */
   EnableEnhancement?: boolean;
   /** 可调用的工具列表，仅对 hunyuan-turbo、hunyuan-functioncall 模型生效。 */
   Tools?: Tool[];
@@ -818,6 +832,24 @@ declare interface QueryHunyuanImageJobResponse {
   RequestId?: string;
 }
 
+declare interface QueryHunyuanTo3DJobRequest {
+  /** 任务ID */
+  JobId?: string;
+}
+
+declare interface QueryHunyuanTo3DJobResponse {
+  /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
+  Status?: string;
+  /** 生成的3D文件数组 */
+  ResultFile3Ds?: File3Ds[];
+  /** 错误码 */
+  ErrorCode?: string;
+  /** 错误信息 */
+  ErrorMessage?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RunThreadRequest {
   /** 会话 ID */
   ThreadID: string;
@@ -908,6 +940,24 @@ declare interface SubmitHunyuanImageJobResponse {
   RequestId?: string;
 }
 
+declare interface SubmitHunyuanTo3DJobRequest {
+  /** 3D内容的描述，中文正向提示词。最多支持200个 utf-8 字符，ImageBase64、ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。 */
+  Prompt?: string;
+  /** 输入图 Base64 数据。最多支持200个 utf-8 字符，ImageBase64、ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。 */
+  ImageBase64?: string;
+  /** 输入图Url。最多支持200个 utf-8 字符，ImageBase64、ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。 */
+  ImageUrl?: string;
+  /** 生成数量。默认1，当前限制只能为1。 */
+  Num?: number;
+}
+
+declare interface SubmitHunyuanTo3DJobResponse {
+  /** 任务id */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface TextToImageLiteRequest {
   /** 文本描述。算法将根据输入的文本智能生成与之相关的图像。建议详细描述画面主体、细节、场景等，文本描述越丰富，生成效果越精美。不能为空，推荐使用中文。最多可传256个 utf-8 字符。 */
   Prompt: string;
@@ -965,6 +1015,8 @@ declare interface Hunyuan {
   QueryHunyuanImageChatJob(data?: QueryHunyuanImageChatJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryHunyuanImageChatJobResponse>;
   /** 查询混元生图任务 {@link QueryHunyuanImageJobRequest} {@link QueryHunyuanImageJobResponse} */
   QueryHunyuanImageJob(data: QueryHunyuanImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryHunyuanImageJobResponse>;
+  /** 查询混元生3D任务 {@link QueryHunyuanTo3DJobRequest} {@link QueryHunyuanTo3DJobResponse} */
+  QueryHunyuanTo3DJob(data?: QueryHunyuanTo3DJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryHunyuanTo3DJobResponse>;
   /** 执行会话 {@link RunThreadRequest} {@link RunThreadResponse} */
   RunThread(data: RunThreadRequest, config?: AxiosRequestConfig): AxiosPromise<RunThreadResponse>;
   /** 设置付费模式 {@link SetPayModeRequest} {@link SetPayModeResponse} */
@@ -973,6 +1025,8 @@ declare interface Hunyuan {
   SubmitHunyuanImageChatJob(data: SubmitHunyuanImageChatJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitHunyuanImageChatJobResponse>;
   /** 提交混元生图任务 {@link SubmitHunyuanImageJobRequest} {@link SubmitHunyuanImageJobResponse} */
   SubmitHunyuanImageJob(data: SubmitHunyuanImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitHunyuanImageJobResponse>;
+  /** 提交混元生3D任务 {@link SubmitHunyuanTo3DJobRequest} {@link SubmitHunyuanTo3DJobResponse} */
+  SubmitHunyuanTo3DJob(data?: SubmitHunyuanTo3DJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitHunyuanTo3DJobResponse>;
   /** 文生图轻量版 {@link TextToImageLiteRequest} {@link TextToImageLiteResponse} */
   TextToImageLite(data: TextToImageLiteRequest, config?: AxiosRequestConfig): AxiosPromise<TextToImageLiteResponse>;
 }

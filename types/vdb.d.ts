@@ -250,6 +250,8 @@ declare interface CreateInstanceRequest {
 }
 
 declare interface CreateInstanceResponse {
+  /** 实例 ID。 */
+  InstanceIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

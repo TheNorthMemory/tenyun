@@ -84,9 +84,9 @@ declare interface TagInfo {
 
 /** 规则与目标组的关联关系。 */
 declare interface TargetGroupAssociation {
-  /** 网关负载均衡实例ID。 */
+  /** 网关负载均衡实例ID，可以通过[DescribeGatewayLoadBalancers](https://cloud.tencent.com/document/product/1782/111683)获取网关负载均衡ID。 */
   LoadBalancerId: string;
-  /** 目标组ID。 */
+  /** 目标组ID，可以通过[DescribeTargetGroups](https://cloud.tencent.com/document/product/214/40554)获取目标组ID。 */
   TargetGroupId: string;
 }
 
@@ -119,7 +119,7 @@ declare interface TargetGroupBackend {
 /** 目标组健康检查详情 */
 declare interface TargetGroupHealthCheck {
   /** 是否开启健康检查。 */
-  HealthSwitch: boolean;
+  HealthSwitch?: boolean;
   /** 健康检查使用的协议。支持PING和TCP两种方式，默认为PING。- icmp: 使用PING的方式进行健康检查- tcp: 使用TCP连接的方式进行健康检查 */
   Protocol?: string;
   /** 健康检查端口，探测协议为tcp时，该参数必填。 */
@@ -128,9 +128,9 @@ declare interface TargetGroupHealthCheck {
   Timeout?: number;
   /** 检测间隔时间。 默认为5秒。 可配置范围：2 - 300秒。 */
   IntervalTime?: number;
-  /** 检测健康阈值。 默认为3秒。 可配置范围：2 - 10次。 */
+  /** 检测健康阈值。 默认为3次。 可配置范围：2 - 10次。 */
   HealthNum?: number;
-  /** 检测不健康阈值。 默认为3秒。 可配置范围：2 - 10次。 */
+  /** 检测不健康阈值。 默认为3次。 可配置范围：2 - 10次。 */
   UnHealthNum?: number;
 }
 
@@ -162,6 +162,8 @@ declare interface TargetGroupInfo {
   AssociatedRuleCount?: number | null;
   /** 目标组内的实例数量。 */
   RegisteredInstancesCount?: number | null;
+  /** 目标组的标签。 */
+  Tag?: TagInfo[];
 }
 
 /** 目标组实例 */
@@ -195,7 +197,7 @@ declare interface AssociateTargetGroupsResponse {
 declare interface CreateGatewayLoadBalancerRequest {
   /** 网关负载均衡后端目标设备所属的私有网络 ID，如vpc-azd4dt1c，可以通过 [DescribeVpcs](https://cloud.tencent.com/document/product/215/15778) 接口获取。 */
   VpcId: string;
-  /** 网关负载均衡后端目标设备所属的私有网络的子网ID。 */
+  /** 网关负载均衡后端目标设备所属的私有网络的子网ID。可通过[DescribeSubnets](https://cloud.tencent.com/document/product/215/15784)接口获取。 */
   SubnetId: string;
   /** 网关负载均衡实例名称。可支持输入1-60个字符。不填写时默认自动生成。 */
   LoadBalancerName?: string;
@@ -203,12 +205,12 @@ declare interface CreateGatewayLoadBalancerRequest {
   Number?: number;
   /** 购买网关负载均衡的同时，给负载均衡打上标签，最大支持20个标签键值对。 */
   Tags?: TagInfo[];
-  /** 网关负载均衡实例计费类型，当前只支持传POSTPAID_BY_HOUR，默认是POSTPAID_BY_HOUR。 */
+  /** 网关负载均衡实例计费类型，当前只支持传POSTPAID_BY_HOUR（按量计费），默认是POSTPAID_BY_HOUR。 */
   LBChargeType?: string;
 }
 
 declare interface CreateGatewayLoadBalancerResponse {
-  /** 由网关负载均衡实例唯一 ID 组成的数组。存在某些场景，如创建出现延迟时，此字段可能返回为空；此时可以根据接口返回的RequestId或DealName参数，通过DescribeTaskStatus接口查询创建的资源ID。 */
+  /** 由网关负载均衡实例唯一 ID 组成的数组。存在某些场景，如创建出现延迟时，此字段可能返回为空；此时可以根据接口返回的RequestId或DealName参数，通过[DescribeTaskStatus](https://cloud.tencent.com/document/api/1782/111700)接口查询创建的资源ID。 */
   LoadBalancerIds?: string[] | null;
   /** 订单号。 */
   DealName?: string | null;
@@ -219,7 +221,7 @@ declare interface CreateGatewayLoadBalancerResponse {
 declare interface CreateTargetGroupRequest {
   /** 目标组名称，限定60个字符。 */
   TargetGroupName?: string;
-  /** 目标组的vpcid属性，不填则使用默认vpc */
+  /** 网关负载均衡后端目标组所属的网络 ID，如vpc-12345678，可以通过 [DescribeVpcs](https://cloud.tencent.com/document/product/215/15778) 接口获取。 不填此参数则默认为DefaultVPC。 */
   VpcId?: string;
   /** 目标组的默认端口， 后续添加服务器时可使用该默认端口。Port和TargetGroupInstances.N中的port二者必填其一。仅支持6081。 */
   Port?: number;
@@ -233,6 +235,8 @@ declare interface CreateTargetGroupRequest {
   ScheduleAlgorithm?: string;
   /** 是否支持全死全活。默认支持。 */
   AllDeadToAlive?: boolean;
+  /** 标签。 */
+  Tags?: TagInfo[];
 }
 
 declare interface CreateTargetGroupResponse {
@@ -243,7 +247,7 @@ declare interface CreateTargetGroupResponse {
 }
 
 declare interface DeleteGatewayLoadBalancerRequest {
-  /** 要删除的网关负载均衡实例 ID数组，数组大小最大支持20。 */
+  /** 要删除的网关负载均衡实例 ID数组，数组大小最大支持20。可通过[DescribeGatewayLoadBalancers](https://cloud.tencent.com/document/api/1782/111683) 接口获取。 */
   LoadBalancerIds: string[];
 }
 
@@ -253,7 +257,7 @@ declare interface DeleteGatewayLoadBalancerResponse {
 }
 
 declare interface DeleteTargetGroupsRequest {
-  /** 目标组ID列表。 */
+  /** 目标组ID列表。 可以通过接口[DescribeTargetGroups](https://cloud.tencent.com/document/product/214/40554)获取。 */
   TargetGroupIds: string[];
 }
 
@@ -263,7 +267,7 @@ declare interface DeleteTargetGroupsResponse {
 }
 
 declare interface DeregisterTargetGroupInstancesRequest {
-  /** 目标组ID。 */
+  /** 目标组ID。可通过[DescribeTargetGroupList](https://cloud.tencent.com/document/api/1782/111692)接口获取。 */
   TargetGroupId: string;
   /** 待解绑的服务器信息。 */
   TargetGroupInstances: TargetGroupInstance[];
@@ -297,7 +301,7 @@ declare interface DescribeGatewayLoadBalancersResponse {
 }
 
 declare interface DescribeTargetGroupInstanceStatusRequest {
-  /** 目标组唯一id */
+  /** 目标组唯一id。可通过[DescribeTargetGroupList](https://cloud.tencent.com/document/api/1782/111692)接口获取。 */
   TargetGroupId: string;
   /** 目标组绑定的后端服务ip列表 */
   TargetGroupInstanceIps?: string[];
@@ -311,9 +315,9 @@ declare interface DescribeTargetGroupInstanceStatusResponse {
 }
 
 declare interface DescribeTargetGroupInstancesRequest {
-  /** 过滤条件，当前仅支持TargetGroupId，BindIP，InstanceId过滤。- TargetGroupId - String - 是否必填：否 - （过滤条件）目标组ID，如“lbtg-5xunivs0”。- BindIP - String - 是否必填：否 - （过滤条件）目标组绑定实例的内网IP地址，如“10.1.1.1”- InstanceId - String - 是否必填：否 - （过滤条件）目标组绑定实例的名称，如“ins-mxzlf9ke” */
+  /** 过滤条件，当前仅支持TargetGroupId，BindIP，InstanceId过滤。- TargetGroupId - String - 是否必填：否 - （过滤条件）目标组ID，如“lbtg-5xunivs0”。可通过[DescribeTargetGroupList](https://cloud.tencent.com/document/api/1782/111692)接口获取。- BindIP - String - 是否必填：否 - （过滤条件）目标组绑定实例的内网IP地址，如“10.1.1.1”。- InstanceId - String - 是否必填：否 - （过滤条件）目标组绑定实例的名称，如“ins-mxzlf9ke”。可通过[DescribeInstances](https://cloud.tencent.com/document/product/213/15728) 接口获取。 */
   Filters: Filter[];
-  /** 显示数量限制，默认20。 */
+  /** 显示数量限制，默认20，最大1000。 */
   Limit?: number;
   /** 显示的偏移量，默认为0。 */
   Offset?: number;
@@ -333,11 +337,11 @@ declare interface DescribeTargetGroupInstancesResponse {
 declare interface DescribeTargetGroupListRequest {
   /** 目标组ID数组。 */
   TargetGroupIds?: string[];
-  /** 过滤条件数组。- TargetGroupVpcId - String - 是否必填：否 - （过滤条件）按照目标组所属的私有网络过滤，如“vpc-bhqk****”。- TargetGroupName - String - 是否必填：否 - （过滤条件）按照目标组的名称过滤，如“tg_name” */
+  /** 过滤条件数组。- TargetGroupVpcId - String - 是否必填：否 - （过滤条件）按照目标组所属的私有网络过滤，可以通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)获取，如“vpc-bhqk****”。- TargetGroupName - String - 是否必填：否 - （过滤条件）按照目标组的名称过滤，如“tg_name” */
   Filters?: Filter[];
-  /** 显示的偏移起始量。 */
+  /** 显示的偏移起始量，默认为0。 */
   Offset?: number;
-  /** 显示条数限制，默认为20。 */
+  /** 显示条数限制，默认为20，最大值为1000。 */
   Limit?: number;
 }
 
@@ -351,13 +355,13 @@ declare interface DescribeTargetGroupListResponse {
 }
 
 declare interface DescribeTargetGroupsRequest {
-  /** 目标组ID，与Filters互斥。 */
+  /** 目标组ID。 */
   TargetGroupIds?: string[];
-  /** 显示条数限制，默认为20。 */
+  /** 显示条数限制，默认为20，最大值为1000。 */
   Limit?: number;
-  /** 显示的偏移起始量。 */
+  /** 显示的偏移起始量，默认为0。 */
   Offset?: number;
-  /** 过滤条件数组。- TargetGroupVpcId - String - 是否必填：否 - （过滤条件）按照目标组所属的私有网络过滤，如“vpc-bhqk****”。- TargetGroupName - String - 是否必填：否 - （过滤条件）按照目标组的名称过滤，如“tg_name” */
+  /** 过滤条件数组。- TargetGroupVpcId - String - 是否必填：否 - （过滤条件）按照目标组所属的私有网络过滤，可以通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)获取，如“vpc-bhqk****”。- TargetGroupName - String - 是否必填：否 - （过滤条件）按照目标组的名称过滤，如“tg_name” */
   Filters?: Filter[];
 }
 
@@ -409,7 +413,7 @@ declare interface InquirePriceCreateGatewayLoadBalancerResponse {
 }
 
 declare interface ModifyGatewayLoadBalancerAttributeRequest {
-  /** 网关负载均衡的唯一ID。 */
+  /** 网关负载均衡的唯一ID。可通过[DescribeGatewayLoadBalancers](https://cloud.tencent.com/document/api/1782/111683) 接口获取。 */
   LoadBalancerId: string;
   /** 网关负载均衡实例名称。可支持输入1-60个字符。 */
   LoadBalancerName?: string;
@@ -423,7 +427,7 @@ declare interface ModifyGatewayLoadBalancerAttributeResponse {
 }
 
 declare interface ModifyTargetGroupAttributeRequest {
-  /** 目标组的ID。 */
+  /** 目标组的ID，可以通过[DescribeTargetGroups](https://cloud.tencent.com/document/product/214/40554)获取。 */
   TargetGroupId: string;
   /** 目标组的新名称。 */
   TargetGroupName?: string;
@@ -439,7 +443,7 @@ declare interface ModifyTargetGroupAttributeResponse {
 }
 
 declare interface ModifyTargetGroupInstancesWeightRequest {
-  /** 目标组ID。 */
+  /** 目标组ID。可通过[DescribeTargetGroupList](https://cloud.tencent.com/document/api/1782/111692)接口获取。 */
   TargetGroupId: string;
   /** 实例绑定配置数组。 */
   TargetGroupInstances: TargetGroupInstance[];
@@ -451,7 +455,7 @@ declare interface ModifyTargetGroupInstancesWeightResponse {
 }
 
 declare interface RegisterTargetGroupInstancesRequest {
-  /** 目标组ID */
+  /** 目标组ID。可通过[DescribeTargetGroupList](https://cloud.tencent.com/document/api/1782/111692)接口获取。 */
   TargetGroupId: string;
   /** 服务器实例数组 */
   TargetGroupInstances: TargetGroupInstance[];

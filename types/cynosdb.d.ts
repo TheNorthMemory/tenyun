@@ -420,6 +420,8 @@ declare interface ClusterInstanceDetail {
   InstanceStorageType?: string;
   /** 数据库类型 */
   DbMode?: string;
+  /** 节点列表 */
+  NodeList?: string[];
 }
 
 /** 参数修改记录 */
@@ -798,6 +800,10 @@ declare interface CynosdbInstance {
   DeviceType?: string;
   /** 实例存储类型 */
   InstanceStorageType?: string;
+  /** 未知字段 */
+  CynosVersionTag?: string;
+  /** libradb 节点信息 */
+  NodeList?: string[];
 }
 
 /** 实例详情 */
@@ -1308,6 +1314,10 @@ declare interface ModifyInstanceData {
   DeviceType?: string;
   /** 升级方式。升级完成后切换或维护时间内切换 */
   UpgradeType?: string;
+  /** libra节点数量 */
+  LibraNodeCount?: number;
+  /** 原libra节点数量 */
+  OldLibraNodeCount?: number;
 }
 
 /** 修改的实例参数信息 */
@@ -1318,6 +1328,8 @@ declare interface ModifyParamItem {
   CurrentValue: string;
   /** 参数旧值（只在出参时有用） */
   OldValue?: string;
+  /** libra组件类型 */
+  Component?: string;
 }
 
 /** 修改参数信息 */
@@ -2433,6 +2445,8 @@ declare interface CreateAuditLogFileRequest {
   Filter?: AuditLogFilter;
   /** 审计日志过滤条件 */
   LogFilter?: InstanceAuditLogFilter[];
+  /** 审计日志列 */
+  ColumnFilter?: string[];
 }
 
 declare interface CreateAuditLogFileResponse {
@@ -3878,6 +3892,22 @@ declare interface DescribeRollbackTimeRangeResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSSLStatusRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 实例ID */
+  InstanceId?: string;
+}
+
+declare interface DescribeSSLStatusResponse {
+  /** yes-开启，no-关闭 */
+  IsOpenSSL?: string | null;
+  /** 证书下载地址 */
+  DownloadUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeServerlessInstanceSpecsRequest {
   /** 可用区 */
   Zone?: string;
@@ -3908,6 +3938,20 @@ declare interface DescribeServerlessStrategyResponse {
   AutoScaleUp?: string;
   /** 集群是否允许向下缩容，可选范围yesno */
   AutoScaleDown?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSlaveZonesRequest {
+  /** 可用区 */
+  Zone: string;
+  /** 云架集群ID */
+  OssClusterId?: number;
+}
+
+declare interface DescribeSlaveZonesResponse {
+  /** 从可用区 */
+  SlaveZones?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4858,6 +4902,22 @@ declare interface OpenReadOnlyInstanceExclusiveAccessResponse {
   RequestId?: string;
 }
 
+declare interface OpenSSLRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 实例ID */
+  InstanceId?: string;
+}
+
+declare interface OpenSSLResponse {
+  /** 任务流ID */
+  FlowId?: number | null;
+  /** 任务id */
+  TaskId?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface OpenWanRequest {
   /** 实例组id */
   InstanceGrpId?: string;
@@ -5525,10 +5585,14 @@ declare interface Cynosdb {
   DescribeResourcesByDealName(data?: DescribeResourcesByDealNameRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesByDealNameResponse>;
   /** 查询回档时间范围 {@link DescribeRollbackTimeRangeRequest} {@link DescribeRollbackTimeRangeResponse} */
   DescribeRollbackTimeRange(data: DescribeRollbackTimeRangeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTimeRangeResponse>;
+  /** 查询实例SSL状态 {@link DescribeSSLStatusRequest} {@link DescribeSSLStatusResponse} */
+  DescribeSSLStatus(data: DescribeSSLStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSSLStatusResponse>;
   /** 查询Serverless实例可选规格 {@link DescribeServerlessInstanceSpecsRequest} {@link DescribeServerlessInstanceSpecsResponse} */
   DescribeServerlessInstanceSpecs(data?: DescribeServerlessInstanceSpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessInstanceSpecsResponse>;
   /** 查询serverless策略 {@link DescribeServerlessStrategyRequest} {@link DescribeServerlessStrategyResponse} */
   DescribeServerlessStrategy(data: DescribeServerlessStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessStrategyResponse>;
+  /** 查询从可用区 {@link DescribeSlaveZonesRequest} {@link DescribeSlaveZonesResponse} */
+  DescribeSlaveZones(data: DescribeSlaveZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlaveZonesResponse>;
   /** 查询支持的数据库代理版本 {@link DescribeSupportProxyVersionRequest} {@link DescribeSupportProxyVersionResponse} */
   DescribeSupportProxyVersion(data: DescribeSupportProxyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupportProxyVersionResponse>;
   /** 查询任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
@@ -5627,6 +5691,8 @@ declare interface Cynosdb {
   OpenClusterTransparentEncrypt(data: OpenClusterTransparentEncryptRequest, config?: AxiosRequestConfig): AxiosPromise<OpenClusterTransparentEncryptResponse>;
   /** 开通只读实例独有访问接入组 {@link OpenReadOnlyInstanceExclusiveAccessRequest} {@link OpenReadOnlyInstanceExclusiveAccessResponse} */
   OpenReadOnlyInstanceExclusiveAccess(data: OpenReadOnlyInstanceExclusiveAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenReadOnlyInstanceExclusiveAccessResponse>;
+  /** 开启SSL加密 {@link OpenSSLRequest} {@link OpenSSLResponse} */
+  OpenSSL(data: OpenSSLRequest, config?: AxiosRequestConfig): AxiosPromise<OpenSSLResponse>;
   /** 开通外网 {@link OpenWanRequest} {@link OpenWanResponse} */
   OpenWan(data?: OpenWanRequest, config?: AxiosRequestConfig): AxiosPromise<OpenWanResponse>;
   /** 暂停serverless集群 {@link PauseServerlessRequest} {@link PauseServerlessResponse} */

@@ -77,43 +77,43 @@ declare interface StatusNode {
   /** 下一个节点 */
   NextNode?: string;
   /** 审批意见模型 */
-  Opinion?: ApproveOpinion | null;
+  Opinion?: ApproveOpinion;
   /** scf函数名称 */
-  ScfName?: string | null;
+  ScfName?: string;
   /** 状态（0：待审批，1：审批通过，2：拒绝，3：scf执行失败，4：scf执行成功）18: 外部审批中 */
-  SubStatus?: number | null;
+  SubStatus?: number;
   /** 审批节点审批人 */
-  ApprovedUin?: number[] | null;
+  ApprovedUin?: number[];
   /** 审批时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 审批意见信息 审批节点:审批人意见 执行节点:scf函数执行日志 */
-  Msg?: string | null;
+  Msg?: string;
   /** 有权限审批该节点的uin */
-  Users?: ApproveUser | null;
+  Users?: ApproveUser;
   /** 是否有权限审批该节点 */
-  IsApprove?: boolean | null;
+  IsApprove?: boolean;
   /** 审批id */
-  ApproveId?: string | null;
+  ApproveId?: string;
   /** 审批方式 0或签 1会签 */
-  ApproveMethod?: number | null;
+  ApproveMethod?: number;
   /** 审批节点审批类型，1人工审批 2自动通过 3自动决绝 4外部审批scf */
-  ApproveType?: number | null;
+  ApproveType?: number;
   /** 外部审批类型 scf:0或null ; CKafka:1 */
-  CallMethod?: number | null;
+  CallMethod?: number;
   /** CKafka - 接入资源ID */
-  DataHubId?: string | null;
+  DataHubId?: string;
   /** CKafka - 任务名称 */
-  TaskName?: string | null;
+  TaskName?: string;
   /** CKafka - 地域 */
-  CKafkaRegion?: string | null;
+  CKafkaRegion?: string;
   /** 外部审批Url */
-  ExternalUrl?: string | null;
+  ExternalUrl?: string;
   /** 并行节点 3-4 */
-  ParallelNodes?: string | null;
+  ParallelNodes?: string;
   /** scf拒绝时返回信息 */
-  RejectedCloudFunctionMsg?: string | null;
+  RejectedCloudFunctionMsg?: string;
   /** 上一个节点 */
-  PrevNode?: string | null;
+  PrevNode?: string;
 }
 
 declare interface GetBpaasApproveDetailRequest {
@@ -127,25 +127,25 @@ declare interface GetBpaasApproveDetailResponse {
   /** 申请人主账号 */
   ApplyOwnUin?: number;
   /** 申请人昵称 */
-  ApplyUinNick?: string | null;
+  ApplyUinNick?: string;
   /** 审批流id */
   BpaasId?: number;
   /** 审批流名称 */
   BpaasName?: string;
   /** 申请参数 */
-  ApplicationParams?: ApplyParam[] | null;
+  ApplicationParams?: ApplyParam[];
   /** 申请原因 */
-  Reason?: string | null;
+  Reason?: string;
   /** 申请时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 申请单状态 */
-  Status?: number | null;
+  Status?: number;
   /** 节点信息 */
-  Nodes?: StatusNode[] | null;
+  Nodes?: StatusNode[];
   /** 正在审批的节点id */
-  ApprovingNodeId?: string | null;
+  ApprovingNodeId?: string;
   /** 更新时间，时间格式：2021-12-12 10:12:10 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

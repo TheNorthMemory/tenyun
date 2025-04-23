@@ -26,6 +26,18 @@ declare interface AccessInfo {
   AccessURL?: string;
 }
 
+/** 访问白名单规则 */
+declare interface AccessWhiteListRule {
+  /** 规则ID */
+  Id?: number;
+  /** IP或者网段 */
+  Source?: string;
+  /** 备注信息 */
+  Remark?: string;
+  /** 修改时间 */
+  ModifyTime?: string;
+}
+
 /** 访问权限 */
 declare interface Acl {
   /** 访问权限ID */
@@ -384,6 +396,28 @@ declare interface OperationEvent {
   SignValue?: string;
 }
 
+/** 运维任务信息 */
+declare interface OperationTask {
+  /** 运维任务主键ID */
+  Id?: number;
+  /** 运维任务ID */
+  OperationId?: string;
+  /** 运维任务名称 */
+  Name?: string;
+  /** 创建用户 */
+  UserName?: string;
+  /** 运维人员姓名 */
+  RealName?: string;
+  /** 任务类型，1 - 手工执行任务， 2 - 周期性任务 */
+  Type?: number;
+  /** 周期性任务执行间隔，单位天 */
+  Period?: number;
+  /** 执行账户 */
+  NextTime?: string;
+  /** 下一次执行时间 */
+  FirstTime?: string;
+}
+
 /** 堡垒机服务信息 */
 declare interface Resource {
   /** 服务实例ID，如bh-saas-s3ed4r5e */
@@ -662,6 +696,8 @@ declare interface SessionResult {
   AppAssetKind?: number;
   /** 应用资产url */
   AppAssetUrl?: string;
+  /** 回放类型 默认0, 1-rfb 2-mp4 3-ssh */
+  ReplayType?: number;
 }
 
 /** 资产标签 */
@@ -670,6 +706,28 @@ declare interface TagFilter {
   TagKey: string;
   /** 标签值 */
   TagValue?: string[];
+}
+
+/** 运维父任务执行结果 */
+declare interface TaskResult {
+  /** 运维任务结果日志ID */
+  Id?: string;
+  /** 运维任务ID */
+  OperationId?: string;
+  /** 运维任务名称 */
+  Name?: string;
+  /** 执行任务来源IP */
+  FromIp?: string;
+  /** 运维任务所属用户 */
+  UserName?: string;
+  /** 运维任务所属用户的姓名 */
+  RealName?: string;
+  /** 运维任务执行状态 1 - 执行中，2 - 成功，3 - 失败，4 - 部分失败 */
+  Status?: number;
+  /** 运维任务开始时间 */
+  StartTime?: string;
+  /** 运维任务结束时间 */
+  EndTime?: string;
 }
 
 /** 用户信息 */
@@ -808,6 +866,20 @@ declare interface BindDeviceResourceRequest {
 }
 
 declare interface BindDeviceResourceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAccessWhiteListRuleRequest {
+  /** ip 10.10.10.1或者网段10.10.10.0/24，最小长度4字节，最大长度40字节。 */
+  Source: string;
+  /** 备注信息，最小长度0字符，最大长度40字符。 */
+  Remark?: string;
+}
+
+declare interface CreateAccessWhiteListRuleResponse {
+  /** 新建成功后返回的记录ID */
+  Id?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -982,6 +1054,34 @@ declare interface CreateDeviceGroupResponse {
   RequestId?: string;
 }
 
+declare interface CreateOperationTaskRequest {
+  /** 运维任务名称 */
+  Name: string;
+  /** 运维任务类型,1 - 手工执行, 2 - 周期性自动执行 */
+  Type: number;
+  /** 执行账号 */
+  Account: string;
+  /** 超时时间,单位秒 */
+  Timeout: number;
+  /** 执行脚本内容 */
+  Script: string;
+  /** 执行主机集合，满足条件以下三个条件：1. 资产绑定可用的专业版或国密版堡垒机服务；2、资产类型为linux资产；3、用户具有资产权限，且资产添加了指定执行账号 */
+  DeviceIdSet: number[];
+  /** 执行间隔，单位天. 手工执行时无需传入 */
+  Period?: number;
+  /** 首次执行日期 默认1970-01-01T08:00:01+08:00,手工执行时无需传入 */
+  FirstTime?: string;
+  /** Script参数是否需要进行base64编码后传递，1-需要进行base64编码后传递，非1值-不需要进行base64编码后传递 */
+  Encoding?: number;
+}
+
+declare interface CreateOperationTaskResponse {
+  /** 运维任务ID */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateResourceRequest {
   /** 部署region */
   DeployRegion: string;
@@ -1058,6 +1158,16 @@ declare interface CreateUserResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAccessWhiteListRulesRequest {
+  /** 待删除的ID集合 */
+  IdSet: number[];
+}
+
+declare interface DeleteAccessWhiteListRulesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAclsRequest {
   /** 待删除的权限ID集合 */
   IdSet: number[];
@@ -1130,6 +1240,16 @@ declare interface DeleteDevicesResponse {
   RequestId?: string;
 }
 
+declare interface DeleteOperationTasksRequest {
+  /** 运维任务ID集合 */
+  IdSet: number[];
+}
+
+declare interface DeleteOperationTasksResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteUserGroupMembersRequest {
   /** 用户组ID */
   Id: number;
@@ -1186,6 +1306,30 @@ declare interface DeployResourceRequest {
 }
 
 declare interface DeployResourceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAccessWhiteListRulesRequest {
+  /** 用户ID集合，非必需，如果使用IdSet参数则忽略Name参数 */
+  IdSet?: number[];
+  /** 来源IP或网段，模糊查询，最大长度64字符 */
+  Name?: string;
+  /** 分页偏移位置，默认0 */
+  Offset?: number;
+  /** 每页条目数量，默认20 */
+  Limit?: number;
+}
+
+declare interface DescribeAccessWhiteListRulesResponse {
+  /** 记录总数 */
+  TotalCount?: number;
+  /** 访问白名单规则列表 */
+  AccessWhiteListRuleSet?: AccessWhiteListRule[];
+  /** 是否放开全部来源IP，如果为true，TotalCount为0，AccessWhiteListRuleSet为空 */
+  AllowAny?: boolean;
+  /** 是否开启自动添加来源IP, 如果为true, 在开启访问白名单的情况下将自动添加来源IP */
+  AllowAuto?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1489,6 +1633,26 @@ declare interface DescribeOperationEventResponse {
   /** 操作日志列表 */
   OperationEventSet?: OperationEvent[];
   /** 总记录数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeOperationTaskRequest {
+  /** 运维任务名称 */
+  Name?: string;
+  /** 运维任务类型，1 - 手工执行任务， 2 - 周期性任务 */
+  Type?: number;
+  /** 分页偏移位置，默认值为0 */
+  Offset?: number;
+  /** 每页条目数，默认20 */
+  Limit?: number;
+}
+
+declare interface DescribeOperationTaskResponse {
+  /** 运维任务列表 */
+  OperationTasks?: OperationTask[];
+  /** 任务总数 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1802,6 +1966,34 @@ declare interface ModifyOAuthSettingResponse {
   RequestId?: string;
 }
 
+declare interface ModifyOperationTaskRequest {
+  /** 任务Id */
+  Id: number;
+  /** 任务名称 */
+  Name: string;
+  /** 任务类型, 1 - 手工执行, 2 - 周期性自动执行 */
+  Type: number;
+  /** 执行账号 */
+  Account: string;
+  /** 超时时间,单位秒 */
+  Timeout: number;
+  /** 执行脚本内容 */
+  Script: string;
+  /** 执行主机集合，满足条件以下三个条件：1. 资产绑定可用的专业版或国密版堡垒机服务；2、资产类型为linux资产；3、用户具有资产权限，且资产添加了指定执行账号 */
+  DeviceIdSet: number[];
+  /** 执行间隔，单位天. 手工执行时无需传入 */
+  Period?: number;
+  /** 首次执行日期，默认1970-01-01T08:00:01+08:00,手工执行时无需传入 */
+  FirstTime?: string;
+  /** Script参数是否需要进行base64编码后传递，1-需要进行base64编码后传递，非1值-不需要进行base64编码后传递 */
+  Encoding?: number;
+}
+
+declare interface ModifyOperationTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyResourceRequest {
   /** 需要开通服务的资源ID */
   ResourceId: string;
@@ -1908,6 +2100,16 @@ declare interface RunChangePwdTaskRequest {
 }
 
 declare interface RunChangePwdTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RunOperationTaskRequest {
+  /** 运维任务ID */
+  Id: number;
+}
+
+declare interface RunOperationTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2120,6 +2322,56 @@ declare interface SearchSessionResponse {
   RequestId?: string;
 }
 
+declare interface SearchSubtaskResultByIdRequest {
+  /** 运维任务名称 */
+  Name?: string;
+  /** 查询偏移 */
+  Offset?: number;
+  /** 分页的页内记录数，默认为20，最大200 */
+  Limit?: number;
+  /** 运维父任务执行日志ID */
+  Id?: string;
+  /** 运维父任务执行状态 */
+  Status?: number[];
+}
+
+declare interface SearchSubtaskResultByIdResponse {
+  /** 记录数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SearchTaskResultRequest {
+  /** 搜索区间的开始时间 */
+  StartTime?: string;
+  /** 搜索区间的结束时间 */
+  EndTime?: string;
+  /** 运维任务ID */
+  OperationId?: string;
+  /** 运维任务名称 */
+  Name?: string;
+  /** 用户名，长度不超过20 */
+  UserName?: string;
+  /** 姓名，长度不超过20 */
+  RealName?: string;
+  /** 任务类型1 手工运维任务2 定时任务3 账号推送任务 */
+  TaskType?: number[];
+  /** 查询偏移 */
+  Offset?: number;
+  /** 分页的页内记录数，默认为20，最大200 */
+  Limit?: number;
+}
+
+declare interface SearchTaskResultResponse {
+  /** 记录数 */
+  TotalCount?: number;
+  /** 运维任务执行结果 */
+  TaskResult?: TaskResult[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Bh 运维安全中心（堡垒机）} */
 declare interface Bh {
   (): Versions;
@@ -2135,6 +2387,8 @@ declare interface Bh {
   BindDeviceAccountPrivateKey(data: BindDeviceAccountPrivateKeyRequest, config?: AxiosRequestConfig): AxiosPromise<BindDeviceAccountPrivateKeyResponse>;
   /** 修改资产绑定的堡垒机服务 {@link BindDeviceResourceRequest} {@link BindDeviceResourceResponse} */
   BindDeviceResource(data: BindDeviceResourceRequest, config?: AxiosRequestConfig): AxiosPromise<BindDeviceResourceResponse>;
+  /** 添加访问白名单规则 {@link CreateAccessWhiteListRuleRequest} {@link CreateAccessWhiteListRuleResponse} */
+  CreateAccessWhiteListRule(data: CreateAccessWhiteListRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessWhiteListRuleResponse>;
   /** 新建访问权限 {@link CreateAclRequest} {@link CreateAclResponse} */
   CreateAcl(data: CreateAclRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAclResponse>;
   /** 创建手工资产同步任务 {@link CreateAssetSyncJobRequest} {@link CreateAssetSyncJobResponse} */
@@ -2147,12 +2401,16 @@ declare interface Bh {
   CreateDeviceAccount(data: CreateDeviceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceAccountResponse>;
   /** 新建资产组 {@link CreateDeviceGroupRequest} {@link CreateDeviceGroupResponse} */
   CreateDeviceGroup(data: CreateDeviceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceGroupResponse>;
+  /** 创建运维任务 {@link CreateOperationTaskRequest} {@link CreateOperationTaskResponse} */
+  CreateOperationTask(data: CreateOperationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOperationTaskResponse>;
   /** 创建堡垒机实例 {@link CreateResourceRequest} {@link CreateResourceResponse} */
   CreateResource(data: CreateResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceResponse>;
   /** 新建用户 {@link CreateUserRequest} {@link CreateUserResponse} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
   /** 新建用户组 {@link CreateUserGroupRequest} {@link CreateUserGroupResponse} */
   CreateUserGroup(data: CreateUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserGroupResponse>;
+  /** 删除访问白名单规则 {@link DeleteAccessWhiteListRulesRequest} {@link DeleteAccessWhiteListRulesResponse} */
+  DeleteAccessWhiteListRules(data: DeleteAccessWhiteListRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccessWhiteListRulesResponse>;
   /** 删除访问权限 {@link DeleteAclsRequest} {@link DeleteAclsResponse} */
   DeleteAcls(data: DeleteAclsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAclsResponse>;
   /** 删除修改密码任务 {@link DeleteChangePwdTaskRequest} {@link DeleteChangePwdTaskResponse} */
@@ -2167,6 +2425,8 @@ declare interface Bh {
   DeleteDeviceGroups(data: DeleteDeviceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceGroupsResponse>;
   /** 删除主机 {@link DeleteDevicesRequest} {@link DeleteDevicesResponse} */
   DeleteDevices(data: DeleteDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDevicesResponse>;
+  /** 删除运维任务 {@link DeleteOperationTasksRequest} {@link DeleteOperationTasksResponse} */
+  DeleteOperationTasks(data: DeleteOperationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOperationTasksResponse>;
   /** 删除用户组成员 {@link DeleteUserGroupMembersRequest} {@link DeleteUserGroupMembersResponse} */
   DeleteUserGroupMembers(data: DeleteUserGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserGroupMembersResponse>;
   /** 删除用户组 {@link DeleteUserGroupsRequest} {@link DeleteUserGroupsResponse} */
@@ -2175,6 +2435,8 @@ declare interface Bh {
   DeleteUsers(data: DeleteUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsersResponse>;
   /** 开通服务 {@link DeployResourceRequest} {@link DeployResourceResponse} */
   DeployResource(data: DeployResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeployResourceResponse>;
+  /** 查询访问白名单规则列表 {@link DescribeAccessWhiteListRulesRequest} {@link DescribeAccessWhiteListRulesResponse} */
+  DescribeAccessWhiteListRules(data?: DescribeAccessWhiteListRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessWhiteListRulesResponse>;
   /** 查询访问权限列表 {@link DescribeAclsRequest} {@link DescribeAclsResponse} */
   DescribeAcls(data?: DescribeAclsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAclsResponse>;
   /** 查询资产同步状态 {@link DescribeAssetSyncStatusRequest} {@link DescribeAssetSyncStatusResponse} */
@@ -2199,6 +2461,8 @@ declare interface Bh {
   DescribeLoginEvent(data?: DescribeLoginEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginEventResponse>;
   /** 查询操作日志 {@link DescribeOperationEventRequest} {@link DescribeOperationEventResponse} */
   DescribeOperationEvent(data?: DescribeOperationEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOperationEventResponse>;
+  /** 获取运维任务 {@link DescribeOperationTaskRequest} {@link DescribeOperationTaskResponse} */
+  DescribeOperationTask(data?: DescribeOperationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOperationTaskResponse>;
   /** 查询堡垒机服务信息 {@link DescribeResourcesRequest} {@link DescribeResourcesResponse} */
   DescribeResources(data?: DescribeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesResponse>;
   /** 查询用户组成员列表 {@link DescribeUserGroupMembersRequest} {@link DescribeUserGroupMembersResponse} */
@@ -2221,6 +2485,8 @@ declare interface Bh {
   ModifyDeviceGroup(data: ModifyDeviceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceGroupResponse>;
   /** 设置OAuth认证参数 {@link ModifyOAuthSettingRequest} {@link ModifyOAuthSettingResponse} */
   ModifyOAuthSetting(data: ModifyOAuthSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOAuthSettingResponse>;
+  /** 修改运维任务 {@link ModifyOperationTaskRequest} {@link ModifyOperationTaskResponse} */
+  ModifyOperationTask(data: ModifyOperationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOperationTaskResponse>;
   /** 资源变配 {@link ModifyResourceRequest} {@link ModifyResourceResponse} */
   ModifyResource(data: ModifyResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceResponse>;
   /** 修改用户信息 {@link ModifyUserRequest} {@link ModifyUserResponse} */
@@ -2235,6 +2501,8 @@ declare interface Bh {
   ResetUser(data: ResetUserRequest, config?: AxiosRequestConfig): AxiosPromise<ResetUserResponse>;
   /** 执行改密任务 {@link RunChangePwdTaskRequest} {@link RunChangePwdTaskResponse} */
   RunChangePwdTask(data: RunChangePwdTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RunChangePwdTaskResponse>;
+  /** 执行运维任务 {@link RunOperationTaskRequest} {@link RunOperationTaskResponse} */
+  RunOperationTask(data: RunOperationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RunOperationTaskResponse>;
   /** 搜索审计日志 {@link SearchAuditLogRequest} {@link SearchAuditLogResponse} */
   SearchAuditLog(data: SearchAuditLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchAuditLogResponse>;
   /** 命令执行检索 {@link SearchCommandRequest} {@link SearchCommandResponse} */
@@ -2249,6 +2517,10 @@ declare interface Bh {
   SearchSession(data?: SearchSessionRequest, config?: AxiosRequestConfig): AxiosPromise<SearchSessionResponse>;
   /** 命令检索 {@link SearchSessionCommandRequest} {@link SearchSessionCommandResponse} */
   SearchSessionCommand(data: SearchSessionCommandRequest, config?: AxiosRequestConfig): AxiosPromise<SearchSessionCommandResponse>;
+  /** 查询运维子任务执行结果 {@link SearchSubtaskResultByIdRequest} {@link SearchSubtaskResultByIdResponse} */
+  SearchSubtaskResultById(data?: SearchSubtaskResultByIdRequest, config?: AxiosRequestConfig): AxiosPromise<SearchSubtaskResultByIdResponse>;
+  /** 搜索运维任务执行结果 {@link SearchTaskResultRequest} {@link SearchTaskResultResponse} */
+  SearchTaskResult(data?: SearchTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<SearchTaskResultResponse>;
 }
 
 export declare type Versions = ["2023-04-18"];

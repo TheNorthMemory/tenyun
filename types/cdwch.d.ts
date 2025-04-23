@@ -571,7 +571,7 @@ declare interface CreateInstanceNewResponse {
   /** 实例ID */
   InstanceId?: string;
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -637,15 +637,15 @@ declare interface DescribeBackUpScheduleResponse {
   /** 备份是否开启 */
   BackUpOpened?: boolean;
   /** 元数据备份策略 */
-  MetaStrategy?: ScheduleStrategy | null;
+  MetaStrategy?: ScheduleStrategy;
   /** 表数据备份策略 */
-  DataStrategy?: ScheduleStrategy | null;
+  DataStrategy?: ScheduleStrategy;
   /** 备份表列表 */
-  BackUpContents?: BackupTableContent[] | null;
+  BackUpContents?: BackupTableContent[];
   /** 备份的状态 */
   BackUpStatus?: number;
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -723,7 +723,7 @@ declare interface DescribeInstanceKeyValConfigsResponse {
   /** 配置的多层级参数列表 */
   MapConfigItems?: MapConfigItem[] | null;
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

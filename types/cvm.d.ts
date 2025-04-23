@@ -30,13 +30,13 @@ declare interface ActionTimer {
   TimerAction?: string;
   /** 执行时间，按照ISO8601标准表示，并且使用UTC时间。格式为 YYYY-MM-DDThh:mm:ssZ。例如 2018-05-29T11:26:40Z，执行时间必须大于当前时间5分钟。 */
   ActionTime?: string;
-  /** 扩展数据 */
+  /** 扩展数据。仅做出参使用。 */
   Externals?: Externals;
-  /** 定时器ID。 */
+  /** 定时器ID。仅做出参使用。 */
   ActionTimerId?: string;
-  /** 定时器状态，取值范围：UNDO：未触发DOING：触发中DONE：已经触发 */
+  /** 定时器状态，仅做出参使用。取值范围：UNDO：未执行 DOING：正在执行DONE：执行完成。 */
   Status?: string;
-  /** 定时器对应的实例ID。 */
+  /** 定时器对应的实例ID。仅做出参使用。 */
   InstanceId?: string;
 }
 
@@ -164,27 +164,27 @@ declare interface CpuTopology {
 
 /** 描述了数据盘的信息 */
 declare interface DataDisk {
-  /** 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[存储概述](https://cloud.tencent.com/document/product/213/4952)。默认值为0，表示不购买数据盘。更多限制详见产品文档。 */
+  /** 数据盘大小，单位：GiB。最小调整步长为10GiB，不同数据盘类型取值范围不同，具体限制详见：[存储概述](https://cloud.tencent.com/document/product/213/4952)。默认值为0，表示不购买数据盘。更多限制详见产品文档。 */
   DiskSize: number;
   /** 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：LOCAL_BASIC：本地硬盘 LOCAL_SSD：本地SSD硬盘LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定CLOUD_BASIC：普通云硬盘 CLOUD_PREMIUM：高性能云硬盘CLOUD_SSD：SSD云硬盘 CLOUD_HSSD：增强型SSD云硬盘 CLOUD_TSSD：极速型SSD云硬盘CLOUD_BSSD：通用型SSD云硬盘默认取值：LOCAL_BASIC。该参数对`ResizeInstanceDisk`接口无效。 */
   DiskType?: string;
   /** 数据盘ID。该参数目前仅用于`DescribeInstances`等查询类接口的返回参数，不可用于`RunInstances`等写接口的入参。 */
   DiskId?: string;
-  /** 数据盘是否随子机销毁。取值范围：true：子机销毁时，销毁数据盘，只支持按小时后付费云盘 false：子机销毁时，保留数据盘 默认取值：true 该参数目前仅用于 `RunInstances` 接口。 */
+  /** 数据盘是否随子机销毁。取值范围：true：子机销毁时，销毁数据盘，只支持按小时后付费云盘false：子机销毁时，保留数据盘默认取值：true 该参数目前仅用于 `RunInstances` 接口。 */
   DeleteWithInstance?: boolean;
   /** 数据盘快照ID。选择的数据盘快照大小需小于数据盘大小。 */
   SnapshotId?: string;
-  /** 数据盘是加密。取值范围：true：加密 false：不加密 默认取值：false 该参数目前仅用于 `RunInstances` 接口。 */
+  /** 数据盘是否加密。取值范围：true：加密false：不加密默认取值：false该参数目前仅用于 `RunInstances` 接口。 */
   Encrypt?: boolean;
   /** 自定义CMK对应的ID，取值为UUID或者类似kms-abcd1234。用于加密云盘。该参数目前仅用于 `RunInstances` 接口。 */
   KmsKeyId?: string;
-  /** 云硬盘性能，单位：MB/s */
+  /** 云硬盘性能，单位：MiB/s。使用此参数可给云硬盘购买额外的性能。当前仅支持极速型云盘（CLOUD_TSSD）和增强型SSD云硬盘（CLOUD_HSSD） */
   ThroughputPerformance?: number;
   /** 所属的独享集群ID。 */
   CdcId?: string;
   /** 突发性能 注：内测中。 */
   BurstPerformance?: boolean;
-  /** 磁盘名称，长度不超过128 个字符。该参数正在邀测中，暂未开放使用。 */
+  /** 磁盘名称，长度不超过128 个字符。 */
   DiskName?: string;
 }
 
@@ -202,7 +202,7 @@ declare interface DisasterRecoverGroup {
   CurrentNum?: number;
   /** 分散置放群组内，云服务器id列表。 */
   InstanceIds?: string[];
-  /** 分散置放群组创建时间。 */
+  /** 分散置放群组创建时间。按照`ISO8601`标准表示，并且使用`UTC`时间。格式为：`YYYY-MM-DDThh:mm:ssZ`。 */
   CreateTime?: string;
   /** 置放群组亲和度 */
   Affinity?: number;
@@ -405,9 +405,9 @@ declare interface ImageOsList {
 /** 镜像配额 */
 declare interface ImageQuota {
   /** 已使用配额 */
-  UsedQuota: number;
+  UsedQuota?: number;
   /** 总配额 */
-  TotalQuota: number;
+  TotalQuota?: number;
 }
 
 /** 导入镜像的数据盘信息 */
@@ -432,7 +432,7 @@ declare interface Instance {
   RestrictState?: string;
   /** 实例名称。 */
   InstanceName?: string;
-  /** 实例计费模式。取值范围：`PREPAID`：表示预付费，即包年包月`POSTPAID_BY_HOUR`：表示后付费，即按量计费`CDHPAID`：`专用宿主机`付费，即只对`专用宿主机`计费，不对`专用宿主机`上的实例计费。`SPOTPAID`：表示竞价实例付费。 */
+  /** 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。取值范围：PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费CDHPAID：独享子机（基于专用宿主机创建，宿主机部分的资源不收费）SPOTPAID：竞价付费CDCPAID：专用集群付费 */
   InstanceChargeType?: string;
   /** 实例系统盘信息。 */
   SystemDisk?: SystemDisk;
@@ -460,7 +460,7 @@ declare interface Instance {
   SecurityGroupIds?: string[];
   /** 实例登录设置。目前只返回实例所关联的密钥。 */
   LoginSettings?: LoginSettings;
-  /** 实例状态。取值范围：PENDING：表示创建中LAUNCH_FAILED：表示创建失败RUNNING：表示运行中STOPPED：表示关机STARTING：表示开机中STOPPING：表示关机中REBOOTING：表示重启中SHUTDOWN：表示停止待销毁TERMINATING：表示销毁中。 */
+  /** 实例状态。状态类型详见[实例状态表](https://cloud.tencent.com/document/api/213/15753) */
   InstanceState?: string;
   /** 实例关联的标签列表。 */
   Tags?: Tag[];
@@ -556,7 +556,7 @@ declare interface InstanceTypeConfig {
   GPU?: number;
   /** CPU核数，单位：核。 */
   CPU?: number;
-  /** 内存容量，单位：`GB`。 */
+  /** 内存容量，单位：`GiB`。 */
   Memory?: number;
   /** FPGA核数，单位：核。 */
   FPGA?: number;
@@ -580,7 +580,7 @@ declare interface InstanceTypeQuotaItem {
   Zone?: string;
   /** 实例机型。 */
   InstanceType?: string;
-  /** 实例计费模式。取值范围： PREPAID：表示预付费，即包年包月POSTPAID_BY_HOUR：表示后付费，即按量计费CDHPAID：表示[专用宿主机](https://cloud.tencent.com/document/product/416)付费，即只对`专用宿主机`计费，不对`专用宿主机`上的实例计费。`SPOTPAID`：表示竞价实例付费。 */
+  /** 实例计费模式。取值范围： PREPAID：表示预付费，即包年包月POSTPAID_BY_HOUR：表示后付费，即按量计费CDHPAID：表示[专用宿主机](https://cloud.tencent.com/document/product/416)付费，即只对`专用宿主机`计费，不对`专用宿主机`上的实例计费。SPOTPAID：表示竞价实例付费。 */
   InstanceChargeType?: string;
   /** 网卡类型，例如：25代表25G网卡 */
   NetworkCard?: number;
@@ -632,7 +632,7 @@ declare interface InternetAccessible {
   InternetMaxBandwidthOut?: number;
   /** 是否分配公网IP。取值范围：true：表示分配公网IPfalse：表示不分配公网IP当公网带宽大于0Mbps时，可自由选择开通与否，默认开通公网IP；当公网带宽为0，则不允许分配公网IP。该参数仅在RunInstances接口中作为入参使用。 */
   PublicIpAssigned?: boolean;
-  /** 带宽包ID。可通过[`DescribeBandwidthPackages`](https://cloud.tencent.com/document/api/215/19209)接口返回值中的`BandwidthPackageId`获取。该参数仅在RunInstances接口中作为入参使用。 */
+  /** 带宽包ID。可通过[ DescribeBandwidthPackages ](https://cloud.tencent.com/document/api/215/19209)接口返回值中的`BandwidthPackageId`获取。该参数仅在RunInstances接口中作为入参使用。 */
   BandwidthPackageId?: string;
 }
 
@@ -648,7 +648,7 @@ declare interface InternetBandwidthConfig {
 
 /** 描述了网络计费 */
 declare interface InternetChargeTypeConfig {
-  /** 网络计费模式。 */
+  /** 网络计费类型。取值范围：BANDWIDTH_PREPAID：预付费按带宽结算TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费BANDWIDTH_PACKAGE：带宽包用户默认取值：非带宽包用户默认与子机付费类型保持一致，比如子机付费类型为预付费，网络计费类型默认为预付费；子机付费类型为后付费，网络计费类型默认为后付费。 */
   InternetChargeType?: string;
   /** 网络计费模式描述信息。 */
   Description?: string;
@@ -702,7 +702,7 @@ declare interface KeyPair {
   KeyId?: string;
   /** 密钥对名称。 */
   KeyName?: string;
-  /** 密钥对所属的项目`ID`。 */
+  /** 密钥对所属的项目 `ID`，ProjectId 为 0 时表示默认项目。 */
   ProjectId?: number;
   /** 密钥对描述信息。 */
   Description?: string;
@@ -810,7 +810,7 @@ declare interface LaunchTemplateVersionInfo {
   IsDefaultVersion?: boolean;
   /** 实例启动模板版本描述信息。 */
   LaunchTemplateVersionDescription?: string;
-  /** 创建者。 */
+  /** 创建者的AppId。 */
   CreatedBy?: string;
 }
 
@@ -1142,9 +1142,9 @@ declare interface SpotPaidQuota {
 declare interface StorageBlock {
   /** HDD本地存储类型，值为：LOCAL_PRO. */
   Type?: string;
-  /** HDD本地存储的最小容量 */
+  /** HDD本地存储的最小容量。单位：GiB。 */
   MinSize?: number;
-  /** HDD本地存储的最大容量 */
+  /** HDD本地存储的最大容量。单位：GiB。 */
   MaxSize?: number;
 }
 
@@ -1162,11 +1162,11 @@ declare interface SystemDisk {
   DiskType?: string;
   /** 系统盘ID。该参数目前仅用于`DescribeInstances`等查询类接口的返回参数，不可用于`RunInstances`等写接口的入参。 */
   DiskId?: string;
-  /** 系统盘大小，单位：GB。默认值为 50 */
+  /** 系统盘大小，单位：GiB。默认值为 50 */
   DiskSize?: number;
   /** 所属的独享集群ID。 */
   CdcId?: string;
-  /** 磁盘名称，长度不超过128 个字符。该参数正在邀测中，暂未开放使用。 */
+  /** 磁盘名称，长度不超过128 个字符。 */
   DiskName?: string;
 }
 
@@ -1198,7 +1198,7 @@ declare interface TargetOS {
 declare interface VirtualPrivateCloud {
   /** 私有网络ID，形如`vpc-xxx`。有效的VpcId可通过登录[控制台](https://console.cloud.tencent.com/vpc/vpc?rid=1)查询；也可以调用接口 [DescribeVpcEx](/document/api/215/1372) ，从接口返回中的`unVpcId`字段获取。若在创建子机时VpcId与SubnetId同时传入`DEFAULT`，则强制使用默认vpc网络。 */
   VpcId: string;
-  /** 私有网络子网ID，形如`subnet-xxx`。有效的私有网络子网ID可通过登录[控制台](https://console.cloud.tencent.com/vpc/subnet?rid=1)查询；也可以调用接口 [DescribeSubnets](/document/api/215/15784) ，从接口返回中的`unSubnetId`字段获取。若在创建子机时SubnetId与VpcId同时传入`DEFAULT`，则强制使用默认vpc网络。 */
+  /** 私有网络子网ID，形如`subnet-xxx`。有效的私有网络子网ID可通过登录[控制台](https://console.cloud.tencent.com/vpc/subnet?rid=1)查询；也可以调用接口 [DescribeSubnets](https://cloud.tencent.com/document/product/215/15784) ，从接口返回中的`SubnetId `字段获取。若在创建子机时SubnetId与VpcId同时传入`DEFAULT`，则强制使用默认vpc网络。 */
   SubnetId: string;
   /** 是否用作公网网关。公网网关只有在实例拥有公网IP以及处于私有网络下时才能正常使用。取值范围：true：表示用作公网网关false：表示不作为公网网关默认取值：false。 */
   AsVpcGateway?: boolean;
@@ -1247,9 +1247,9 @@ declare interface AllocateHostsResponse {
 declare interface AssociateInstancesKeyPairsRequest {
   /** 一个或多个待操作的实例ID，每次请求批量实例的上限为100。可以通过以下方式获取可用的实例ID：通过登录[控制台](https://console.cloud.tencent.com/cvm/index)查询实例ID。通过调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) ，取返回信息中的`InstanceId`获取实例ID。 */
   InstanceIds: string[];
-  /** 一个或多个待操作的密钥对ID，每次请求批量密钥对的上限为100。密钥对ID形如：`skey-3glfot13`。可以通过以下方式获取可用的密钥ID：通过登录[控制台](https://console.cloud.tencent.com/cvm/sshkey)查询密钥ID。通过调用接口 [DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699) ，取返回信息中的`KeyId`获取密钥对ID。 */
+  /** 一个或多个待操作的密钥对ID，每次请求批量密钥对的上限为100。可以通过以下方式获取可用的密钥ID：通过登录[控制台](https://console.cloud.tencent.com/cvm/sshkey)查询密钥ID。通过调用接口 [DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699) ，取返回信息中的`KeyId`获取密钥对ID。 */
   KeyIds: string[];
-  /** 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再绑定密钥。取值范围：true：表示在正常关机失败后进行强制关机。false：表示在正常关机失败后不进行强制关机。默认取值：false。 */
+  /** 是否强制关机，默认值为 false。常规场景下，建议手动关机后绑定密钥。取值范围：true：先执行强制关机，再绑定密钥。false：不执行强制关机，仅支持对已关机状态实例进行绑定操作。 */
   ForceStop?: boolean;
 }
 
@@ -1259,9 +1259,9 @@ declare interface AssociateInstancesKeyPairsResponse {
 }
 
 declare interface AssociateSecurityGroupsRequest {
-  /** 要绑定的`安全组ID`，类似sg-efil73jd，只支持绑定单个安全组。 */
+  /** 要绑定的`安全组ID`，类似sg-efil73jd，只支持绑定单个安全组。可通过 [DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808) 接口返回值中的`SecurityGroupId`获取。 */
   SecurityGroupIds: string[];
-  /** 被绑定的`实例ID`，类似ins-lesecurk，支持指定多个实例，每次请求批量实例的上限为100。 */
+  /** 被绑定的`实例ID`，类似ins-lesecurk，支持指定多个实例，每次请求批量实例的上限为100。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。 */
   InstanceIds: string[];
 }
 
@@ -1307,13 +1307,13 @@ declare interface ConfigureChcDeployVpcResponse {
 }
 
 declare interface ConvertOperatingSystemsRequest {
-  /** 执行操作系统转换的实例 ID */
+  /** 执行操作系统转换的实例 ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。仅支持操作系统为 CentOS 7、CentOS 8 的实例执行转换。 */
   InstanceIds: string[];
-  /** 是否最小规模转换 */
+  /** 是否最小规模转换。默认值：false */
   MinimalConversion?: boolean;
-  /** 是否只预检 */
+  /** 是否只预检。默认值：false */
   DryRun?: boolean;
-  /** 转换的目标操作系统类型。仅支持 TencentOS。 */
+  /** 转换的目标操作系统类型。仅支持 TencentOS。默认值：TencentOS */
   TargetOSType?: string;
 }
 
@@ -1379,23 +1379,23 @@ declare interface CreateHpcClusterResponse {
 }
 
 declare interface CreateImageRequest {
-  /** 镜像名称 */
+  /** 镜像名称。最多支持60个字符。 */
   ImageName: string;
-  /** 需要制作镜像的实例ID。基于实例创建镜像时，为必填参数。 */
+  /** 需要制作镜像的实例ID。基于实例创建镜像时，为必填参数。InstanceId 和 SnapshotIds 为二选一必填参数。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。 */
   InstanceId?: string;
-  /** 镜像描述 */
+  /** 镜像描述。最多支持 256 个字符。 */
   ImageDescription?: string;
   /** 是否执行强制关机以制作镜像。取值范围：true：表示关机之后制作镜像false：表示开机状态制作镜像默认取值：false。开机状态制作镜像，可能导致部分数据未备份，影响数据安全。 */
   ForcePoweroff?: string;
   /** 创建Windows镜像时是否启用Sysprep。取值范围：true或false，传true表示启用Sysprep，传false表示不启用，默认取值为false。关于Sysprep的详情请参考[链接](https://cloud.tencent.com/document/product/213/43498)。 */
   Sysprep?: string;
-  /** 基于实例创建整机镜像时，指定包含在镜像里的数据盘ID */
+  /** 基于实例创建整机镜像时，指定包含在镜像里的数据盘ID。DataDiskIds 只能在指定 InstanceId 实例所包含的数据盘范围内指定。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的 `DataDisks` 获取。 */
   DataDiskIds?: string[];
-  /** 基于快照创建镜像，指定快照ID，必须包含一个系统盘快照。不可与InstanceId同时传入。 */
+  /** 基于快照创建镜像，指定快照ID，必须包含一个系统盘快照。不可与 InstanceId 同时传入。InstanceId 和 SnapshotIds 为二选一必填参数。可通过 [DescribeSnapshots](https://cloud.tencent.com/document/product/362/15647) 接口返回值中的`SnapshotId`获取。 */
   SnapshotIds?: string[];
   /** 检测本次请求的是否成功，但不会对操作的资源产生任何影响。默认取值为false。 */
   DryRun?: boolean;
-  /** 标签描述列表。通过指定该参数可以同时绑定标签到自定义镜像。 */
+  /** 标签描述列表。通过指定该参数可以同时绑定标签到自定义镜像。可通过 [DescribeTags](https://cloud.tencent.com/document/api/651/35316) 接口返回值中的 `TagKey` 和 `TagValue` 获取。 */
   TagSpecification?: TagSpecification[];
   /** 镜像族 */
   ImageFamily?: string;
@@ -1411,7 +1411,7 @@ declare interface CreateImageResponse {
 declare interface CreateKeyPairRequest {
   /** 密钥对名称，可由数字，字母和下划线组成，长度不超过25个字符。 */
   KeyName: string;
-  /** 密钥对创建后所属的项目ID。可以通过以下方式获取项目ID：通过项目列表查询项目ID。通过调用接口 [DescribeProjects](https://cloud.tencent.com/document/api/651/78725)，取返回信息中的`projectId `获取项目ID。 */
+  /** 密钥对创建后所属的项目ID，ProjectId为0表示默认项目。可以通过以下方式获取项目ID：通过项目列表查询项目ID。通过调用接口 [DescribeProjects](https://cloud.tencent.com/document/api/651/78725)，取返回信息中的`projectId `获取项目ID。 */
   ProjectId: number;
   /** 标签描述列表。通过指定该参数可以同时绑定标签到密钥对。 */
   TagSpecification?: TagSpecification[];
@@ -1577,11 +1577,11 @@ declare interface DeleteHpcClustersResponse {
 }
 
 declare interface DeleteImagesRequest {
-  /** 准备删除的镜像Id列表 */
+  /** 删除的镜像 ID 列表。可通过 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) 接口返回值中的`ImageId`获取。 */
   ImageIds: string[];
-  /** 是否删除镜像关联的快照 */
+  /** 是否删除镜像关联的快照。默认值：false */
   DeleteBindedSnap?: boolean;
-  /** 检测是否支持删除镜像 */
+  /** 检测是否支持删除镜像。默认值：false */
   DryRun?: boolean;
 }
 
@@ -1591,7 +1591,7 @@ declare interface DeleteImagesResponse {
 }
 
 declare interface DeleteInstancesActionTimerRequest {
-  /** 定时任务ID列表，可以通过DescribeInstancesActionTimer接口查询。只能删除未执行的定时任务。 */
+  /** 定时任务ID列表，可以通过[ DescribeInstancesActionTimer ](https://cloud.tencent.com/document/product/213/103950)接口查询。只能删除未执行的定时任务。 */
   ActionTimerIds: string[];
 }
 
@@ -1611,7 +1611,7 @@ declare interface DeleteKeyPairsResponse {
 }
 
 declare interface DeleteLaunchTemplateRequest {
-  /** 启动模板ID。 */
+  /** 启动模板ID。可通过 [DescribeLaunchTemplates](https://cloud.tencent.com/document/api/213/66322) 接口返回值中的`LaunchTemplateId`获取。 */
   LaunchTemplateId: string;
 }
 
@@ -1621,9 +1621,9 @@ declare interface DeleteLaunchTemplateResponse {
 }
 
 declare interface DeleteLaunchTemplateVersionsRequest {
-  /** 启动模板ID。 */
+  /** 启动模板ID。可通过 [DescribeLaunchTemplates](https://cloud.tencent.com/document/api/213/66322) 接口返回值中的`LaunchTemplateId`获取。 */
   LaunchTemplateId: string;
-  /** 实例启动模板版本列表。 */
+  /** 实例启动模板版本列表。可通过 [DescribeLaunchTemplateVersions](https://cloud.tencent.com/document/api/213/66323) 接口返回值中的`LaunchTemplateVersion`获取。 */
   LaunchTemplateVersions: number[];
 }
 
@@ -1633,7 +1633,7 @@ declare interface DeleteLaunchTemplateVersionsResponse {
 }
 
 declare interface DescribeAccountQuotaRequest {
-  /** zone按照【可用区】进行过滤。可用区形如：ap-guangzhou-1。类型：String必选：否可选项：可用区列表quota-type按照【配额类型】进行过滤。配额类型形如：PostPaidQuotaSet。类型：String必选：否可选项：PostPaidQuotaSet,DisasterRecoverGroupQuotaSet,PrePaidQuotaSet,SpotPaidQuotaSet */
+  /** zone按照【可用区】进行过滤。可用区形如：ap-guangzhou-1。类型：String必选：否可选项：可用区列表quota-type按照【配额类型】进行过滤。配额类型形如：PostPaidQuotaSet。类型：String必选：否可选项：PostPaidQuotaSet: 后付费配额PrePaidQuotaSet: 预付费配额SpotPaidQuotaSet: 竞价配额ImageQuotaSet: 镜像配额DisasterRecoverGroupQuotaSet: 置放群组配额 */
   Filters?: Filter[];
 }
 
@@ -1871,13 +1871,13 @@ declare interface DescribeInstanceTypeConfigsResponse {
 }
 
 declare interface DescribeInstanceVncUrlRequest {
-  /** 一个操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) API返回值中的`InstanceId`获取。 */
+  /** 一个操作的实例ID。可通过[ DescribeInstances ](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。 */
   InstanceId: string;
 }
 
 declare interface DescribeInstanceVncUrlResponse {
   /** 实例的管理终端地址。 */
-  InstanceVncUrl: string;
+  InstanceVncUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1885,13 +1885,13 @@ declare interface DescribeInstanceVncUrlResponse {
 declare interface DescribeInstancesActionTimerRequest {
   /** 定时任务ID列表。 */
   ActionTimerIds?: string[];
-  /** 按照一个或者多个实例ID查询。 */
+  /** 按照一个或者多个实例ID查询。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。 */
   InstanceIds?: string[];
   /** 定时器动作，目前仅支持销毁一个值：TerminateInstances。 */
   TimerAction?: string;
-  /** 执行时间的结束范围，用于条件筛选，格式如2018-05-01 19:00:00。 */
+  /** 定时任务执行时间的结束范围，用于条件筛选，格式如2018-05-01 19:00:00。 */
   EndActionTime?: string;
-  /** 执行时间的开始范围，用于条件筛选，格式如2018-05-01 19:00:00。 */
+  /** 定时任务执行时间的开始范围，用于条件筛选，格式如2018-05-01 19:00:00。 */
   StartActionTime?: string;
   /** 定时任务状态列表。UNDO：未执行 DOING：正在执行DONE：执行完成。 */
   StatusList?: string[];
@@ -1907,7 +1907,7 @@ declare interface DescribeInstancesActionTimerResponse {
 declare interface DescribeInstancesAttributesRequest {
   /** 需要获取的实例属性。可选值：UserData: 实例自定义数据 */
   Attributes: string[];
-  /** 实例ID列表 */
+  /** 实例ID列表。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。 */
   InstanceIds: string[];
 }
 
@@ -1921,7 +1921,7 @@ declare interface DescribeInstancesAttributesResponse {
 declare interface DescribeInstancesModificationRequest {
   /** 一个或多个待查询的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。每次请求批量实例的上限为20。 */
   InstanceIds: string[];
-  /** status按照【配置规格状态】进行过滤。配置规格状态形如：SELL、UNAVAILABLE。类型：String必选：否每次请求的`Filters`的上限为10，`Filter.Values`的上限为2。 */
+  /** status按照【配置规格状态】进行过滤。配置规格状态形如：SELL(表示实例可售卖)、UNAVAILABLE(表示实例不可用)。类型：String必选：否每次请求的`Filters`的上限为10，`Filter.Values`的上限为2。 */
   Filters?: Filter[];
 }
 
@@ -1937,7 +1937,7 @@ declare interface DescribeInstancesModificationResponse {
 declare interface DescribeInstancesOperationLimitRequest {
   /** 按照一个或者多个实例ID查询，可通过[DescribeInstances](https://cloud.tencent.com/document/api/213/15728)API返回值中的InstanceId获取。实例ID形如：ins-xxxxxxxx。（此参数的具体格式可参考API[简介](https://cloud.tencent.com/document/api/213/15688)的ids.N一节）。每次请求的实例的上限为100。 */
   InstanceIds: string[];
-  /** 实例操作。 INSTANCE_DEGRADE：实例降配操作 */
+  /** 实例操作。 INSTANCE_DEGRADE：实例降配操作 INTERNET_CHARGE_TYPE_CHANGE：实例调整带宽付费模式操作 */
   Operation: string;
 }
 
@@ -2147,7 +2147,7 @@ declare interface DescribeTaskInfoResponse {
 }
 
 declare interface DescribeZoneInstanceConfigInfosRequest {
-  /** zone按照【可用区】进行过滤。可用区形如：ap-guangzhou-1。类型：String必选：否可选项：可用区列表instance-family按照【实例机型系列】进行过滤。实例机型系列形如：S1、I1、M1等。具体取值参见[实例类型](https://cloud.tencent.com/document/product/213/11518)描述。类型：String必选：否instance-type按照【实例机型】进行过滤。不同实例机型指定了不同的资源规格，具体取值可通过调用接口 [DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/product/213/15749) 来获得最新的规格表或参见[实例类型](https://cloud.tencent.com/document/product/213/11518)描述。若不指定该参数，则默认查询筛选条件下所有机型。类型：String必选：否instance-charge-type按照【实例计费模式】进行过滤。(PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费 )类型：String必选：否sort-keys按关键字进行排序,格式为排序字段加排序方式，中间用冒号分隔。 例如： 按cpu数逆序排序 "cpu:desc", 按mem大小顺序排序 "mem:asc"类型：String必选：否每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。 */
+  /** zone按照【可用区】进行过滤。可用区形如：ap-guangzhou-1。类型：String必选：否可选项：可用区列表instance-family按照【实例机型系列】进行过滤。实例机型系列形如：S1、I1、M1等。具体取值参见[实例类型](https://cloud.tencent.com/document/product/213/11518)描述。类型：String必选：否instance-type按照【实例机型】进行过滤。不同实例机型指定了不同的资源规格，具体取值可通过调用接口 [DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/product/213/15749) 来获得最新的规格表或参见[实例类型](https://cloud.tencent.com/document/product/213/11518)描述。若不指定该参数，则默认查询筛选条件下所有机型。类型：String必选：否instance-charge-type按照【实例计费模式】进行过滤。(PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费 | CDHPAID：表示独享子机 | SPOTPAID：表示竞价付费 | CDCPAID：表示专用集群付费)类型：String必选：否sort-keys按关键字进行排序,格式为排序字段加排序方式，中间用冒号分隔。 例如： 按cpu数逆序排序 "cpu:desc", 按mem大小顺序排序 "mem:asc"类型：String必选：否每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。 */
   Filters?: Filter[];
 }
 
@@ -2173,9 +2173,9 @@ declare interface DescribeZonesResponse {
 declare interface DisassociateInstancesKeyPairsRequest {
   /** 一个或多个待操作的实例ID，每次请求批量实例的上限为100。可以通过以下方式获取可用的实例ID：通过登录[控制台](https://console.cloud.tencent.com/cvm/index)查询实例ID。通过调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) ，取返回信息中的 `InstanceId` 获取实例ID。 */
   InstanceIds: string[];
-  /** 密钥对ID列表，每次请求批量密钥对的上限为100。密钥对ID形如：`skey-11112222`。可以通过以下方式获取可用的密钥ID：通过登录[控制台](https://console.cloud.tencent.com/cvm/sshkey)查询密钥ID。通过调用接口 [DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699) ，取返回信息中的 `KeyId` 获取密钥对ID。 */
+  /** 密钥对ID列表，列表长度上限为100。可以通过以下方式获取可用的密钥ID：通过登录[控制台](https://console.cloud.tencent.com/cvm/sshkey)查询密钥ID。通过调用接口 [DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699) ，取返回信息中的 `KeyId` 获取密钥对ID。 */
   KeyIds: string[];
-  /** 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再解绑密钥。取值范围：true：表示在正常关机失败后进行强制关机。false：表示在正常关机失败后不进行强制关机。默认取值：false。 */
+  /** 是否强制关机，默认值为 false。常规场景下，建议手动关机后解绑密钥。取值范围：true：先执行强制关机，再解绑密钥。false：不执行强制关机，仅支持对已关机状态实例进行解绑操作。 */
   ForceStop?: boolean;
 }
 
@@ -2185,9 +2185,9 @@ declare interface DisassociateInstancesKeyPairsResponse {
 }
 
 declare interface DisassociateSecurityGroupsRequest {
-  /** 要解绑的`安全组ID`，类似sg-efil73jd，只支持解绑单个安全组。 */
+  /** 要解绑的`安全组ID`，类似sg-efil73jd，只支持解绑单个安全组。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`SecurityGroupIds`获取实例绑定的安全组。 */
   SecurityGroupIds: string[];
-  /** 被解绑的`实例ID`，类似ins-lesecurk，支持指定多个实例，每次请求批量实例的上限为100。 */
+  /** 被解绑的`实例ID`，类似ins-lesecurk，支持指定多个实例，每次请求批量实例的上限为100。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。 */
   InstanceIds: string[];
 }
 
@@ -2215,7 +2215,7 @@ declare interface EnterRescueModeResponse {
 }
 
 declare interface ExitRescueModeRequest {
-  /** 退出救援模式的实例id */
+  /** 退出救援模式的实例id。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。 */
   InstanceId: string;
 }
 
@@ -2225,17 +2225,17 @@ declare interface ExitRescueModeResponse {
 }
 
 declare interface ExportImagesRequest {
-  /** COS存储桶名称 */
+  /** COS存储桶名称。可通过 [List Buckets](https://cloud.tencent.com/document/product/436/8291) 接口查询请求者名下的所有存储桶列表或特定地域下的存储桶列表。 */
   BucketName: string;
-  /** 镜像ID列表。调用 ExportImages 接口时，参数 ImageIds 和 SnapshotIds 为二选一必填参数，目前参数 SnapshotIds 暂未对外开放。 */
+  /** 镜像ID列表。调用 ExportImages 接口时，参数 ImageIds 和 SnapshotIds 为二选一必填参数，目前参数 SnapshotIds 暂未对外开放。可通过 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) 接口返回值中的`ImageId`获取。 */
   ImageIds?: string[];
   /** 镜像文件导出格式。取值范围：RAW，QCOW2，VHD，VMDK。默认为RAW */
   ExportFormat?: string;
-  /** 导出文件的名称前缀列表 */
+  /** 导出文件的名称前缀列表。默认导出文件无名称前缀。 */
   FileNamePrefixList?: string[];
-  /** 是否只导出系统盘 */
+  /** 是否只导出系统盘。默认值：false */
   OnlyExportRootDisk?: boolean;
-  /** 检测镜像是否支持导出 */
+  /** 检测镜像是否支持导出。默认值：false */
   DryRun?: boolean;
   /** 角色名称。默认为CVM_QcsRole，发起请求前请确认是否存在该角色，以及是否已正确配置COS写入权限。 */
   RoleName?: string;
@@ -2244,7 +2244,7 @@ declare interface ExportImagesRequest {
 declare interface ExportImagesResponse {
   /** 导出镜像任务ID */
   TaskId?: number;
-  /** 导出镜像的COS文件名列表 */
+  /** 导出镜像的COS文件名列表。其中，文件名格式如下。* 系统盘：前缀名_镜像ID_system_快照ID.镜像格式* 数据盘：前缀名_镜像ID_data_快照ID.镜像格式 */
   CosPaths?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2287,7 +2287,7 @@ declare interface ImportImageResponse {
 }
 
 declare interface ImportInstancesActionTimerRequest {
-  /** 实例id列表，可以通过DescribeInstances接口查询到。 */
+  /** 实例id列表，可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。 */
   InstanceIds: string[];
   /** 定时器任务信息，目前仅支持定时销毁。 */
   ActionTimer: ActionTimer;
@@ -2295,7 +2295,7 @@ declare interface ImportInstancesActionTimerRequest {
 
 declare interface ImportInstancesActionTimerResponse {
   /** 定时器id列表 */
-  ActionTimerIds: string[];
+  ActionTimerIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2443,9 +2443,9 @@ declare interface InquiryPriceResetInstancesTypeResponse {
 }
 
 declare interface InquiryPriceResizeInstanceDisksRequest {
-  /** 待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。 */
+  /** 待操作的实例ID。可通过[ DescribeInstances ](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。 */
   InstanceId: string;
-  /** 待扩容的数据盘配置信息。只支持扩容非弹性数据盘（[`DescribeDisks`](https://cloud.tencent.com/document/api/362/16315)接口返回值中的`Portable`为`false`表示非弹性）。数据盘容量单位：GB。最小扩容步长：10G。关于数据盘类型的选择请参考硬盘产品简介。可选数据盘类型受到实例类型`InstanceType`限制。另外允许扩容的最大容量也因数据盘类型的不同而有所差异。您必须指定参数DataDisks与SystemDisk的其中一个，但不能同时指定。</dx-alert> */
+  /** 待扩容的数据盘配置信息。只支持扩容非弹性数据盘[ DescribeDisks ](https://cloud.tencent.com/document/api/362/16315)接口返回值中的`Portable`为`false`表示非弹性）。数据盘容量单位：GB。最小扩容步长：10G。关于数据盘类型的选择请参考硬盘产品简介。可选数据盘类型受到实例类型`InstanceType`限制。另外允许扩容的最大容量也因数据盘类型的不同而有所差异。您必须指定参数DataDisks与SystemDisk的其中一个，但不能同时指定。</dx-alert> */
   DataDisks?: DataDisk[];
   /** 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再重置用户密码。取值范围：true：表示在正常关机失败后进行强制关机false：表示在正常关机失败后不进行强制关机默认取值：false。强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。 */
   ForceStop?: boolean;
@@ -2467,7 +2467,7 @@ declare interface InquiryPriceRunInstancesRequest {
   InstanceChargeType?: string;
   /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。 */
   InstanceChargePrepaid?: InstanceChargePrepaid;
-  /** 实例机型。不同实例机型指定了不同的资源规格，具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。若不指定该参数，则默认机型为S1.SMALL1。 */
+  /** 实例机型。不同实例机型指定了不同的资源规格。对于付费模式为PREPAID或POSTPAID_BY_HOUR的实例创建，具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。若不指定该参数，则系统将根据当前地域的资源售卖情况动态指定默认机型。对于付费模式为CDHPAID的实例创建，该参数以"CDH_"为前缀，根据CPU和内存配置生成，具体形式为：CDH_XCXG，例如对于创建CPU为1核，内存为1G大小的专用宿主机的实例，该参数应该为CDH_1C1G。 */
   InstanceType?: string;
   /** 实例系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。 */
   SystemDisk?: SystemDisk;
@@ -2483,7 +2483,7 @@ declare interface InquiryPriceRunInstancesRequest {
   InstanceName?: string;
   /** 实例登录设置。通过该参数可以设置实例的登录方式密码、密钥或保持镜像的原始登录设置。默认情况下会随机生成密码，并以站内信方式知会到用户。 */
   LoginSettings?: LoginSettings;
-  /** 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。若不指定该参数，则默认不绑定安全组。 */
+  /** 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的`SecurityGroupId`字段来获取。若不指定该参数，则默认不绑定安全组。 */
   SecurityGroupIds?: string[];
   /** 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认开启云监控、云安全服务。 */
   EnhancedService?: EnhancedService;
@@ -2624,7 +2624,7 @@ declare interface ModifyImageSharePermissionResponse {
 }
 
 declare interface ModifyInstanceDiskTypeRequest {
-  /** 待操作的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/9388) 接口返回值中的`InstanceId`获取。 */
+  /** 待操作的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。 */
   InstanceId: string;
   /** 实例数据盘配置信息，只需要指定要转换的目标云硬盘的介质类型，指定DiskType的值，当前只支持一个数据盘转化。只支持CDHPAID类型实例指定CdcId参数。 */
   DataDisks?: DataDisk[];
@@ -2640,11 +2640,11 @@ declare interface ModifyInstanceDiskTypeResponse {
 declare interface ModifyInstancesAttributeRequest {
   /** 一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/213/15728) API返回值中的`InstanceId`获取。每次请求允许操作的实例数量上限是100。 */
   InstanceIds: string[];
-  /** 修改后实例名称。可任意命名，但不得超过60个字符。必须指定InstanceName与SecurityGroups的其中一个，但不能同时设置</dx-alert> */
+  /** 修改后实例名称。可任意命名，但不得超过60个字符。 */
   InstanceName?: string;
   /** 提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16 KB。关于获取此参数的详细介绍，请参阅 [Windows](https://cloud.tencent.com/document/product/213/17526) 和 [Linux](https://cloud.tencent.com/document/product/213/17525) 启动时运行命令。 */
   UserData?: string;
-  /** 指定实例的修改后的安全组Id列表，子机将重新关联指定列表的安全组，原本关联的安全组会被解绑。必须指定SecurityGroups与InstanceName的其中一个，但不能同时设置</dx-alert> */
+  /** 指定实例的修改后的安全组Id列表，子机将重新关联指定列表的安全组，原本关联的安全组会被解绑。 */
   SecurityGroups?: string[];
   /** 给实例绑定用户角色，传空值为解绑操作 */
   CamRoleName?: string;
@@ -2666,11 +2666,11 @@ declare interface ModifyInstancesAttributeResponse {
 declare interface ModifyInstancesChargeTypeRequest {
   /** 一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为30。 */
   InstanceIds: string[];
-  /** 修改后实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。PREPAID：预付费，即包年包月。POSTPAID_BY_HOUR：后付费，即按量付费。 */
+  /** 修改后实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。 PREPAID：预付费，即包年包月。 POSTPAID_BY_HOUR：后付费，即按量付费。 */
   InstanceChargeType: string;
   /** 修改后预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。</dx-alert> */
   InstanceChargePrepaid?: InstanceChargePrepaid;
-  /** 是否同时切换弹性数据云盘计费模式。取值范围：true：表示切换弹性数据云盘计费模式false：表示不切换弹性数据云盘计费模式默认取值：false。 */
+  /** 是否同时切换弹性数据云盘计费模式。取值范围： true：表示切换弹性数据云盘计费模式 false：表示不切换弹性数据云盘计费模式默认取值：false。 */
   ModifyPortableDataDisk?: boolean;
 }
 
@@ -2696,7 +2696,7 @@ declare interface ModifyInstancesDisasterRecoverGroupResponse {
 declare interface ModifyInstancesProjectRequest {
   /** 一个或多个待操作的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) API返回值中的`InstanceId`获取。每次请求允许操作的实例数量上限是100。 */
   InstanceIds: string[];
-  /** 项目ID。项目可以使用[AddProject](https://cloud.tencent.com/document/api/651/81952)接口创建。可通过[`DescribeProject`](https://cloud.tencent.com/document/api/651/78725) API返回值中的`projectId`获取。后续使用[DescribeInstances](https://cloud.tencent.com/document/api/213/15728)接口查询实例时，项目ID可用于过滤结果。 */
+  /** 项目ID。项目可以使用[ AddProject ](https://cloud.tencent.com/document/api/651/81952)接口创建。可通过[ DescribeProject ](https://cloud.tencent.com/document/api/651/78725) 接口返回值中的`projectId`获取。后续使用[DescribeInstances](https://cloud.tencent.com/document/api/213/15728)接口查询实例时，项目ID可用于过滤结果。 */
   ProjectId: number;
 }
 
@@ -2734,7 +2734,7 @@ declare interface ModifyInstancesVpcAttributeResponse {
 }
 
 declare interface ModifyKeyPairAttributeRequest {
-  /** 密钥对ID，密钥对ID形如：`skey-xxxxxxxx`。可以通过以下方式获取可用的密钥 ID：通过登录[控制台](https://console.cloud.tencent.com/cvm/sshkey)查询密钥 ID。通过调用接口 [DescribeKeyPairs](https://cloud.tencent.com/document/api/213/9403) ，取返回信息中的 `KeyId` 获取密钥对 ID。 */
+  /** 密钥对ID。可以通过以下方式获取可用的密钥 ID：通过登录[控制台](https://console.cloud.tencent.com/cvm/sshkey)查询密钥 ID。通过调用接口 [DescribeKeyPairs](https://cloud.tencent.com/document/api/213/9403) ，取返回信息中的 `KeyId` 获取密钥对 ID。 */
   KeyId: string;
   /** 修改后的密钥对名称，可由数字，字母和下划线组成，长度不超过25个字符。 */
   KeyName?: string;
@@ -2748,9 +2748,9 @@ declare interface ModifyKeyPairAttributeResponse {
 }
 
 declare interface ModifyLaunchTemplateDefaultVersionRequest {
-  /** 启动模板ID。 */
+  /** 启动模板ID。可通过 [DescribeLaunchTemplates](https://cloud.tencent.com/document/api/213/66322) 接口返回值中的`LaunchTemplateId `获取。 */
   LaunchTemplateId: string;
-  /** 待设置的默认版本号。 */
+  /** 待设置的默认版本号。可通过 [DescribeLaunchTemplateVersions](https://cloud.tencent.com/document/api/213/66323) 接口返回值中的`LaunchTemplateVersion`获取。 */
   DefaultVersion: number;
 }
 
@@ -2760,7 +2760,7 @@ declare interface ModifyLaunchTemplateDefaultVersionResponse {
 }
 
 declare interface ProgramFpgaImageRequest {
-  /** 实例的ID信息。 */
+  /** 实例的ID信息。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。 */
   InstanceId: string;
   /** FPGA镜像文件的COS URL地址。 */
   FPGAUrl: string;
@@ -2934,7 +2934,7 @@ declare interface ResetInstancesPasswordResponse {
 declare interface ResetInstancesTypeRequest {
   /** 一个或多个待操作的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。本接口目前仅支持每次操作1个实例。 */
   InstanceIds: string[];
-  /** 调整后的实例机型。不同实例机型指定了不同的资源规格，具体取值可通过调用接口[`DescribeInstanceTypeConfigs`](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例类型](https://cloud.tencent.com/document/product/213/11518)描述。 */
+  /** 调整后的实例机型。不同实例机型指定了不同的资源规格，具体取值可通过调用接口[ DescribeInstanceTypeConfigs ](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例类型](https://cloud.tencent.com/document/product/213/11518)描述。 */
   InstanceType: string;
   /** 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机。取值范围：true：表示在正常关机失败后进行强制关机false：表示在正常关机失败后不进行强制关机默认取值：false。强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。 */
   ForceStop?: boolean;
@@ -2946,13 +2946,13 @@ declare interface ResetInstancesTypeResponse {
 }
 
 declare interface ResizeInstanceDisksRequest {
-  /** 待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。 */
+  /** 待操作的实例ID。可通过[ DescribeInstances ](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。 */
   InstanceId: string;
-  /** 待扩容的数据盘配置信息。只支持扩容非弹性数据盘（[`DescribeDisks`](https://cloud.tencent.com/document/api/362/16315)接口返回值中的`Portable`为`false`表示非弹性）。数据盘容量单位：GB。最小扩容步长：10G。关于数据盘类型的选择请参考[硬盘产品简介](https://cloud.tencent.com/document/product/362/2353)。可选数据盘类型受到实例类型`InstanceType`限制。另外允许扩容的最大容量也因数据盘类型的不同而有所差异。您必须指定参数DataDisks与SystemDisk的其中一个，但不能同时指定。</dx-alert> */
+  /** 待扩容的数据盘配置信息，仅支持指定待扩容盘的目的容量。只支持扩容非弹性数据盘（[ DescribeDisks ](https://cloud.tencent.com/document/api/362/16315)接口返回值中的`Portable`为`false`表示非弹性）。数据盘容量单位：GiB。最小扩容步长：10GiB。关于数据盘类型的选择请参考[硬盘产品简介](https://cloud.tencent.com/document/product/362/2353)。可选数据盘类型受到实例类型`InstanceType`限制。另外允许扩容的最大容量也因数据盘类型的不同而有所差异。您必须指定参数DataDisks与SystemDisk的其中一个，但不能同时指定。</dx-alert> */
   DataDisks?: DataDisk[];
-  /** 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再重置用户密码。取值范围：true：表示在正常关机失败后进行强制关机false：表示在正常关机失败后不进行强制关机默认取值：false。强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。 */
+  /** 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再扩容实例磁盘。取值范围：true：表示在正常关机失败后进行强制关机false：表示在正常关机失败后不进行强制关机默认取值：false。强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。 */
   ForceStop?: boolean;
-  /** 待扩容的系统盘配置信息。只支持扩容云盘。您必须指定参数DataDisks与SystemDisk的其中一个，但不能同时指定。</dx-alert> */
+  /** 待扩容的系统盘配置信息，仅支持指定待扩容盘的目的容量。只支持扩容云盘。您必须指定参数DataDisks与SystemDisk的其中一个，但不能同时指定。</dx-alert> */
   SystemDisk?: SystemDisk;
   /** 扩容云盘的方式是否为在线扩容。 */
   ResizeOnline?: boolean;
@@ -2988,7 +2988,7 @@ declare interface RunInstancesRequest {
   InstanceName?: string;
   /** 实例登录设置。通过该参数可以设置实例的登录方式密码、密钥或保持镜像的原始登录设置。默认情况下会随机生成密码，并以站内信方式知会到用户。 */
   LoginSettings?: LoginSettings;
-  /** 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。 */
+  /** 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的 sgId 字段来获取。若不指定该参数，则绑定指定项目下的默认安全组，如默认安全组不存在则将自动创建。 */
   SecurityGroupIds?: string[];
   /** 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认公共镜像开启云监控、云安全服务；自定义镜像与镜像市场镜像默认不开启云监控，云安全服务，而使用镜像里保留的服务。 */
   EnhancedService?: EnhancedService;
@@ -3048,7 +3048,7 @@ declare interface StopInstancesRequest {
   ForceStop?: boolean;
   /** 实例的关闭模式。取值范围：SOFT_FIRST：表示在正常关闭失败后进行强制关闭HARD：直接强制关闭SOFT：仅软关机默认取值：SOFT。 */
   StopType?: string;
-  /** 按量计费实例关机收费模式。取值范围：KEEP_CHARGING：关机继续收费STOP_CHARGING：关机停止收费默认取值：KEEP_CHARGING。该参数只针对部分按量计费云硬盘实例生效，详情参考[按量计费实例关机不收费说明](https://cloud.tencent.com/document/product/213/19918) */
+  /** 按量计费实例关机收费模式。取值范围：KEEP_CHARGING：关机继续收费STOP_CHARGING：关机停止收费默认取值：KEEP_CHARGING。该参数只针对部分按量计费实例生效，详情参考[按量计费实例关机不收费说明](https://cloud.tencent.com/document/product/213/19918) */
   StoppedMode?: string;
 }
 
@@ -3058,19 +3058,19 @@ declare interface StopInstancesResponse {
 }
 
 declare interface SyncImagesRequest {
-  /** 镜像ID列表 ，镜像ID可以通过如下方式获取：通过[DescribeImages](https://cloud.tencent.com/document/api/213/15715)接口返回的`ImageId`获取。通过[镜像控制台](https://console.cloud.tencent.com/cvm/image)获取。镜像ID必须满足限制：镜像ID对应的镜像状态必须为`NORMAL`。镜像状态请参考[镜像数据表](https://cloud.tencent.com/document/product/213/15753)。 */
+  /** 镜像ID列表 ，镜像ID可以通过如下方式获取：通过[DescribeImages](https://cloud.tencent.com/document/api/213/15715)接口返回的`ImageId`获取，镜像ID对应的镜像状态必须为`NORMAL`。通过[镜像控制台](https://console.cloud.tencent.com/cvm/image)获取。 */
   ImageIds: string[];
-  /** 目的同步地域列表，必须满足如下限制：必须是一个合法的Region。如果是自定义镜像，则目标同步地域不能为源地域。如果是共享镜像，则目的同步地域仅支持源地域，表示将共享镜像复制为源地域的自定义镜像。暂不支持部分地域同步，请参考[复制镜像](https://cloud.tencent.com/document/product/213/4943)。具体地域参数请参考[Region](https://cloud.tencent.com/document/product/213/6091)。 */
+  /** 目的同步地域列表，必须满足如下限制：必须是一个合法的Region。如果是自定义镜像，则目标同步地域不能为源地域。如果是共享镜像，则目的同步地域仅支持源地域，表示将共享镜像复制为源地域的自定义镜像。如果是自定义镜像复制为加密自定义镜像，则目的同步地域仅支持源地域，表示将自定义镜像复制为源地域的加密自定义镜像。暂不支持部分地域同步，请参考[复制镜像](https://cloud.tencent.com/document/product/213/4943)。具体地域参数请参考[Region](https://cloud.tencent.com/document/product/213/6091)。 */
   DestinationRegions: string[];
   /** 检测是否支持发起同步镜像。默认值: false */
   DryRun?: boolean;
-  /** 目标镜像名称。默认使用源镜像名称。 */
+  /** 目标镜像名称。默认使用源镜像名称。最多支持 60 个字符。 */
   ImageName?: string;
   /** 是否需要返回目的地域的镜像ID。默认值: false */
   ImageSetRequired?: boolean;
-  /** 是否复制为加密自定义镜像。默认值为 false。复制加密自定义镜像仅支持同地域。 */
+  /** 是否复制为加密自定义镜像。默认值为 false。复制加密自定义镜像仅支持同地域， 即 DestinationRegions 仅支持填写指定镜像所在地域。 */
   Encrypt?: boolean;
-  /** 加密自定义镜像使用的 KMS 密钥 ID。仅当复制加密镜像时，即 Encrypt 为 true 时，此参数有效；不指定 KmsKeyId，默认使用 CBS 云产品 KMS 密钥。 */
+  /** 加密自定义镜像使用的 KMS 密钥 ID。仅当复制加密镜像时，即 Encrypt 为 true 时，此参数有效；不指定 KmsKeyId，默认使用 CBS 云产品 KMS 密钥。KMS 密钥 ID 通过[KMS 控制台](https://console.cloud.tencent.com/kms2)获取。 */
   KmsKeyId?: string;
 }
 

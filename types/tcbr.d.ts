@@ -228,6 +228,10 @@ declare interface ServerBaseConfig {
   LogParseType?: string;
   /** 服务标签, function: 函数托管 */
   Tag?: string;
+  /** 内网访问开关 close | open */
+  InternalAccess?: string;
+  /** 内网域名 */
+  InternalDomain?: string;
 }
 
 /** 服务基本信息 */
@@ -248,6 +252,8 @@ declare interface ServerBaseInfo {
   CustomDomainNames?: string[];
   /** 服务类型: function 云函数2.0；container 容器服务 */
   ServerType?: string;
+  /** 流量类型，目前只有 FLOW */
+  TrafficType?: string;
 }
 
 /** 服务管理任务信息 */

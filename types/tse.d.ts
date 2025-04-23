@@ -61,21 +61,21 @@ declare interface BoundK8SInfo {
   /** 绑定的kubernetes集群ID */
   BoundClusterId: string;
   /** 绑定的kubernetes的集群类型，分tke和eks两种 */
-  BoundClusterType: string | null;
+  BoundClusterType: string;
   /** 服务同步模式，all为全量同步，demand为按需同步 */
-  SyncMode?: string | null;
+  SyncMode?: string;
   /** 绑定的kubernetes集群所在地域 */
-  BindRegion?: string | null;
+  BindRegion?: string;
 }
 
 /** CLB多可用区信息 */
 declare interface CLBMultiRegion {
   /** 是否启用多可用区 */
-  CLBMultiZoneFlag?: boolean | null;
+  CLBMultiZoneFlag?: boolean;
   /** 主可用区信息 */
-  CLBMasterZone?: string | null;
+  CLBMasterZone?: string;
   /** 备可用区信息 */
-  CLBSlaveZone?: string | null;
+  CLBSlaveZone?: string;
 }
 
 /** 灰度规则 Priority - Rule */
@@ -89,77 +89,77 @@ declare interface CanaryPriorityRule {
 /** 证书信息 */
 declare interface CertificateInfo {
   /** 唯一id */
-  Id?: string | null;
+  Id?: string;
 }
 
 /** 灰度规则列表 */
 declare interface CloudAPIGatewayCanaryRuleList {
   /** 灰度规则 */
-  CanaryRuleList?: CloudNativeAPIGatewayCanaryRule[] | null;
+  CanaryRuleList?: CloudNativeAPIGatewayCanaryRule[];
   /** 总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
 }
 
 /** 含百分比流量配置的服务 */
 declare interface CloudNativeAPIGatewayBalancedService {
   /** 服务 ID，作为入参时，必填 */
-  ServiceID?: string | null;
+  ServiceID?: string;
   /** 服务名称，作为入参时，无意义 */
-  ServiceName?: string | null;
+  ServiceName?: string;
   /** Upstream 名称，作为入参时，无意义 */
-  UpstreamName?: string | null;
+  UpstreamName?: string;
   /** 百分比，10 即 10%，范围0-100 */
-  Percent?: number | null;
+  Percent?: number;
 }
 
 /** 灰度规则 */
 declare interface CloudNativeAPIGatewayCanaryRule {
   /** 优先级，值范围为 0 到 100；值越大，优先级越高；不同规则间优先级不可重复 */
-  Priority: number | null;
+  Priority: number;
   /** 是否启用规则 */
-  Enabled: boolean | null;
+  Enabled: boolean;
   /** 参数匹配条件 */
-  ConditionList?: CloudNativeAPIGatewayCanaryRuleCondition[] | null;
+  ConditionList?: CloudNativeAPIGatewayCanaryRuleCondition[];
   /** 服务的流量百分比配置 */
   BalancedServiceList?: CloudNativeAPIGatewayBalancedService[] | null;
   /** 归属服务 ID */
-  ServiceId?: string | null;
+  ServiceId?: string;
   /** 归属服务名称 */
-  ServiceName?: string | null;
+  ServiceName?: string;
   /** 灰度规则类别Standard｜Lane */
-  RuleType?: string | null;
+  RuleType?: string;
   /** 全链路灰度策略多个条件之间的匹配方式，与AND，或OR */
-  MatchType?: string | null;
+  MatchType?: string;
   /** 泳道组ID */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 泳道组名称 */
-  GroupName?: string | null;
+  GroupName?: string;
   /** 泳道ID */
-  LaneId?: string | null;
+  LaneId?: string;
   /** 泳道名称 */
-  LaneName?: string | null;
+  LaneName?: string;
   /** 泳道匹配规则：严格STRICT｜宽松PERMISSIVE */
-  MatchMode?: string | null;
+  MatchMode?: string;
   /** 泳道标签 */
-  LaneTag?: string | null;
+  LaneTag?: string;
 }
 
 /** 灰度规则中的条件配置 */
 declare interface CloudNativeAPIGatewayCanaryRuleCondition {
   /** 条件类型，支持 path, method, query, header, cookie, body 和 system。 */
-  Type: string | null;
+  Type: string;
   /** 参数名 */
-  Key?: string | null;
+  Key?: string;
   /** 操作符，支持 "le", "eq", "lt", "ne", "ge", "gt", "regex", "exists", "in", "not in", "prefix" ,"exact", "regex" 等 */
-  Operator?: string | null;
+  Operator?: string;
   /** 目标参数值 */
-  Value?: string | null;
+  Value?: string;
   /** 分隔符，当 Operator 为 in 或者 not in 时生效。支持值为英文逗号，英文分号，空格，换行符。 */
-  Delimiter?: string | null;
+  Delimiter?: string;
   /** 全局配置 Id */
-  GlobalConfigId?: string | null;
+  GlobalConfigId?: string;
   /** 全局配置名称 */
-  GlobalConfigName?: string | null;
+  GlobalConfigName?: string;
 }
 
 /** 云原生API网关配置信息。 */
@@ -167,45 +167,45 @@ declare interface CloudNativeAPIGatewayConfig {
   /** 控制台类型。 */
   ConsoleType?: string;
   /** HTTP链接地址。 */
-  HttpUrl?: string | null;
+  HttpUrl?: string;
   /** HTTPS链接地址。 */
   HttpsUrl?: string;
   /** 网络类型, Open|Internal。 */
   NetType?: string;
   /** 管理员用户名。 */
-  AdminUser?: string | null;
+  AdminUser?: string;
   /** 管理员密码。 */
-  AdminPassword?: string | null;
+  AdminPassword?: string;
   /** 网络状态, Open|Closed|Updating */
-  Status?: string | null;
+  Status?: string;
   /** 网络访问策略 */
   AccessControl?: NetworkAccessControl | null;
   /** 内网子网 ID */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 内网VPC ID */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 负载均衡的描述 */
-  Description?: string | null;
+  Description?: string;
   /** 负载均衡的规格类型 */
-  SlaType?: string | null;
+  SlaType?: string;
   /** clb规格名称 */
-  SlaName?: string | null;
+  SlaName?: string;
   /** clb vip */
-  Vip?: string | null;
+  Vip?: string;
   /** 带宽 */
-  InternetMaxBandwidthOut?: number | null;
+  InternetMaxBandwidthOut?: number;
   /** 是否多可用区 */
-  MultiZoneFlag?: boolean | null;
+  MultiZoneFlag?: boolean;
   /** 主可用区 */
-  MasterZoneId?: string | null;
+  MasterZoneId?: string;
   /** 备可用区 */
-  SlaveZoneId?: string | null;
+  SlaveZoneId?: string;
   /** 主可用区名称 */
-  MasterZoneName?: string | null;
+  MasterZoneName?: string;
   /** 备可用区名称 */
-  SlaveZoneName?: string | null;
+  SlaveZoneName?: string;
   /** 网络 id */
-  NetworkId?: string | null;
+  NetworkId?: string;
 }
 
 /** 云原生API网关节点信息。 */
@@ -215,27 +215,27 @@ declare interface CloudNativeAPIGatewayNode {
   /** 节点 ip */
   NodeIp?: string;
   /** Zone id */
-  ZoneId?: string | null;
+  ZoneId?: string;
   /** Zone */
-  Zone?: string | null;
+  Zone?: string;
   /** 分组ID */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 分组名 */
-  GroupName?: string | null;
+  GroupName?: string;
   /** 状态 */
-  Status?: string | null;
+  Status?: string;
   /** 节点权重 */
-  Weight?: number | null;
+  Weight?: number;
   /** 是否默认权重 */
-  IsDefaultWeight?: boolean | null;
+  IsDefaultWeight?: boolean;
 }
 
 /** 云原生API网关节点配置。 */
 declare interface CloudNativeAPIGatewayNodeConfig {
   /** 节点配置, 1c2g|2c4g|4c8g|8c16g。 */
-  Specification: string | null;
+  Specification: string;
   /** 节点数量，2-9。 */
-  Number: number | null;
+  Number: number;
 }
 
 /** 云原生网关Tse 限流插件配置 */
@@ -245,19 +245,19 @@ declare interface CloudNativeAPIGatewayRateLimitDetail {
   /** qps阈值 */
   QpsThresholds?: QpsThreshold[];
   /** 需要进行流量控制的请求路径 */
-  Path?: string | null;
+  Path?: string;
   /** 需要进行流量控制的请求头Key */
-  Header?: string | null;
+  Header?: string;
   /** 限流依据ip service consumer credential path header */
   LimitBy?: string;
   /** 外部redis配置 */
-  ExternalRedis?: ExternalRedis | null;
+  ExternalRedis?: ExternalRedis;
   /** 计数器策略 local 单机redis 默认redisexternal_redis 外部redis */
-  Policy?: string | null;
+  Policy?: string;
   /** 响应配置，响应策略为text */
-  RateLimitResponse?: RateLimitResponse | null;
+  RateLimitResponse?: RateLimitResponse;
   /** 请求转发地址 */
-  RateLimitResponseUrl?: string | null;
+  RateLimitResponseUrl?: string;
   /** 响应策略url请求转发text 响应配置default 直接返回 */
   ResponseType?: string;
   /** 是否隐藏限流客户端响应头 */
@@ -277,19 +277,19 @@ declare interface CloudNativeAPIGatewayStrategy {
   /** 策略ID */
   StrategyId?: string;
   /** 策略名称 */
-  StrategyName?: string | null;
+  StrategyName?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 更新时间 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
   /** 策略描述 */
-  Description?: string | null;
+  Description?: string;
   /** 弹性伸缩配置 */
-  Config?: CloudNativeAPIGatewayStrategyAutoScalerConfig | null;
+  Config?: CloudNativeAPIGatewayStrategyAutoScalerConfig;
   /** 网关实例ID */
-  GatewayId?: string | null;
+  GatewayId?: string;
   /** 定时伸缩配置 */
-  CronConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig | null;
+  CronConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig;
   /** 最大节点数 */
   MaxReplicas?: number | null;
 }
@@ -329,15 +329,15 @@ declare interface CloudNativeAPIGatewayStrategyAutoScalerConfigMetric {
 /** 策略绑定的网关分组信息 */
 declare interface CloudNativeAPIGatewayStrategyBindingGroupInfo {
   /** 网关分组ID */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 节点配置 */
-  NodeConfig?: CloudNativeAPIGatewayNodeConfig | null;
+  NodeConfig?: CloudNativeAPIGatewayNodeConfig;
   /** 绑定时间 */
-  BindTime?: string | null;
+  BindTime?: string;
   /** 网关分组名称 */
-  GroupName?: string | null;
+  GroupName?: string;
   /** 绑定状态 */
-  Status?: string | null;
+  Status?: string;
 }
 
 /** 定时伸缩策略配置 */
@@ -369,9 +369,9 @@ declare interface CloudNativeAPIGatewayStrategyCronScalerConfigParam {
 /** 云原生API网关vpc配置。 */
 declare interface CloudNativeAPIGatewayVpcConfig {
   /** 私有网络ID。 */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 子网ID。 */
-  SubnetId?: string | null;
+  SubnetId?: string;
 }
 
 /** 配置文件 */
@@ -415,49 +415,49 @@ declare interface ConfigFile {
 /** 配置文件组 */
 declare interface ConfigFileGroup {
   /** 配置文件组id */
-  Id?: number | null;
+  Id?: number;
   /** 配置文件组名称 */
-  Name?: string | null;
+  Name?: string;
   /** 命名空间 */
-  Namespace?: string | null;
+  Namespace?: string;
   /** 备注 */
-  Comment?: string | null;
+  Comment?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 创建者 */
-  CreateBy?: string | null;
+  CreateBy?: string;
   /** 修改时间 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
   /** 修改者 */
-  ModifyBy?: string | null;
+  ModifyBy?: string;
   /** 文件数 */
-  FileCount?: number | null;
+  FileCount?: number;
   /** 关联用户，link_users */
-  UserIds?: string[] | null;
+  UserIds?: string[];
   /** 组id，link_groups */
-  GroupIds?: string[] | null;
+  GroupIds?: string[];
   /** remove_link_users */
-  RemoveUserIds?: string[] | null;
+  RemoveUserIds?: string[];
   /** remove_link_groups */
-  RemoveGroupIds?: string[] | null;
+  RemoveGroupIds?: string[];
   /** 是否可编辑 */
-  Editable?: boolean | null;
+  Editable?: boolean;
   /** 归属者 */
-  Owner?: string | null;
+  Owner?: string;
   /** 部门 */
-  Department?: string | null;
+  Department?: string;
   /** 业务 */
-  Business?: string | null;
+  Business?: string;
   /** 配置文件组标签 */
-  ConfigFileGroupTags?: ConfigFileGroupTag[] | null;
+  ConfigFileGroupTags?: ConfigFileGroupTag[];
 }
 
 /** 配置文件标签 */
 declare interface ConfigFileGroupTag {
   /** key-value 键 */
-  Key?: string | null;
+  Key?: string;
   /** key-value 值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 配置文件持久化 */
@@ -539,15 +539,15 @@ declare interface ConfigFileRelease {
 /** 配置发布删除 */
 declare interface ConfigFileReleaseDeletion {
   /** 命名空间 */
-  Namespace?: string | null;
+  Namespace?: string;
   /** 配置分组 */
-  Group?: string | null;
+  Group?: string;
   /** 文件名称 */
-  FileName?: string | null;
+  FileName?: string;
   /** 发布版本 */
-  ReleaseVersion?: string | null;
+  ReleaseVersion?: string;
   /** 配置发布ID */
-  Id?: number | null;
+  Id?: number;
 }
 
 /** 配置文件发布历史 */
@@ -605,33 +605,33 @@ declare interface ConfigFileTag {
 /** 配置文件模板 */
 declare interface ConfigFileTemplate {
   /** 配置文件模板id */
-  Id?: number | null;
+  Id?: number;
   /** 配置文件模板名称 */
-  Name?: string | null;
+  Name?: string;
   /** 配置文件模板内容 */
-  Content?: string | null;
+  Content?: string;
   /** 配置文件模板格式 */
-  Format?: string | null;
+  Format?: string;
   /** 配置文件模板注释 */
-  Comment?: string | null;
+  Comment?: string;
   /** 配置文件模板创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 配置文件模板创建者 */
-  CreateBy?: string | null;
+  CreateBy?: string;
   /** 配置文件模板修改时间 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
   /** 配置文件模板修改者 */
-  ModifyBy?: string | null;
+  ModifyBy?: string;
 }
 
 /** 创建云原生API网关响应结果。 */
 declare interface CreateCloudNativeAPIGatewayResult {
   /** 云原生API网关ID。 */
-  GatewayId: string;
+  GatewayId?: string;
   /** 云原生网关状态。 */
-  Status: string;
+  Status?: string;
   /** 任务ID */
-  TaskId?: string | null;
+  TaskId?: string;
 }
 
 /** 创建网关分组信息 */
@@ -641,25 +641,25 @@ declare interface CreateCloudNativeAPIGatewayServerGroupResult {
   /** 分组id */
   GroupId?: string;
   /** 状态 */
-  Status?: string | null;
+  Status?: string;
   /** 任务ID */
-  TaskId?: string | null;
+  TaskId?: string;
 }
 
 /** 创建云原生网关服务结果 */
 declare interface CreateGatewayServiceResult {
   /** 网关服务ID */
-  ServiceId?: string | null;
+  ServiceId?: string;
 }
 
 /** 创建kong客户端公网结果 */
 declare interface CreatePublicNetworkResult {
   /** 网关实例ID */
-  GatewayId?: string | null;
+  GatewayId?: string;
   /** 分组ID */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 客户端公网网络ID */
-  NetworkId?: string | null;
+  NetworkId?: string;
 }
 
 /** 删除云原生API网关响应结果。 */
@@ -679,7 +679,7 @@ declare interface DeleteNativeGatewayServerGroupResult {
   /** 删除状态 */
   Status?: string;
   /** 任务ID */
-  TaskId?: string | null;
+  TaskId?: string;
 }
 
 /** 获取云原生API网关实例网络配置结果。 */
@@ -689,11 +689,11 @@ declare interface DescribeCloudNativeAPIGatewayConfigResult {
   /** 分组网络配置列表。 */
   ConfigList?: CloudNativeAPIGatewayConfig[];
   /** 分组子网信息 */
-  GroupSubnetId?: string | null;
+  GroupSubnetId?: string;
   /** 分组VPC信息 */
-  GroupVpcId?: string | null;
+  GroupVpcId?: string;
   /** 分组ID */
-  GroupId?: string | null;
+  GroupId?: string;
 }
 
 /** 获取网关节点信息 */
@@ -725,95 +725,95 @@ declare interface DescribeCloudNativeAPIGatewayResult {
   /** 云原生API网关创建时间。 */
   CreateTime?: string;
   /** 实例的标签信息 */
-  Tags?: InstanceTagInfo[] | null;
+  Tags?: InstanceTagInfo[];
   /** 是否开启 cls 日志 */
-  EnableCls?: boolean | null;
+  EnableCls?: boolean;
   /** 付费模式，0表示后付费，1预付费 */
-  TradeType?: number | null;
+  TradeType?: number;
   /** 实例版本，当前支持开发版、标准版、专业版【TRIAL、STANDARD、PROFESSIONAL】 */
-  FeatureVersion?: string | null;
+  FeatureVersion?: string;
   /** 公网出流量带宽，[1,2048]Mbps */
-  InternetMaxBandwidthOut?: number | null;
+  InternetMaxBandwidthOut?: number;
   /** 自动续费标记，0表示默认状态(用户未设置，即初始状态)；1表示自动续费，2表示明确不自动续费(用户设置)，若业务无续费概念或无需自动续费，需要设置为0 */
-  AutoRenewFlag?: number | null;
+  AutoRenewFlag?: number;
   /** 到期时间，预付费时使用 */
-  CurDeadline?: string | null;
+  CurDeadline?: string;
   /** 隔离时间，实例隔离时使用 */
-  IsolateTime?: string | null;
+  IsolateTime?: string;
   /** 是否开启客户端公网。 */
-  EnableInternet?: boolean | null;
+  EnableInternet?: boolean;
   /** 实例实际的地域信息 */
-  EngineRegion?: string | null;
+  EngineRegion?: string;
   /** Ingress class名称 */
-  IngressClassName?: string | null;
+  IngressClassName?: string;
   /** 公网计费方式。可选取值 BANDWIDTH | TRAFFIC ，表示按带宽和按流量计费。 */
-  InternetPayMode?: string | null;
+  InternetPayMode?: string;
   /** 云原生API网关小版本号 */
-  GatewayMinorVersion?: string | null;
+  GatewayMinorVersion?: string;
   /** 实例监听的端口信息 */
-  InstancePort?: InstancePort | null;
+  InstancePort?: InstancePort;
   /** 公网CLB默认类型 */
-  LoadBalancerType?: string | null;
+  LoadBalancerType?: string;
   /** 公网IP地址列表 */
-  PublicIpAddresses?: string[] | null;
+  PublicIpAddresses?: string[];
 }
 
 /** 获取云原生API网关实例协议端口列表响应结果 */
 declare interface DescribeGatewayInstancePortResult {
   /** 云原生API网关ID */
-  GatewayId?: string | null;
+  GatewayId?: string;
   /** 网关实例协议端口列表 */
-  GatewayInstancePortList?: GatewayInstanceSchemeAndPorts[] | null;
+  GatewayInstancePortList?: GatewayInstanceSchemeAndPorts[];
 }
 
 /** 根据公网IP查询云原生网关实例信息出参 */
 declare interface DescribeInstanceInfoByIpResult {
   /** 实例id */
-  GatewayId?: string | null;
+  GatewayId?: string;
   /** 分组id */
-  GroupId?: string | null;
+  GroupId?: string;
 }
 
 /** 实例地域信息描述 */
 declare interface DescribeInstanceRegionInfo {
   /** 引擎部署地域信息 */
-  EngineRegion?: string | null;
+  EngineRegion?: string;
   /** 引擎在该地域的副本数 */
-  Replica?: number | null;
+  Replica?: number;
   /** 引擎在该地域的规格id */
-  SpecId?: string | null;
+  SpecId?: string;
   /** 客户端内网的网络信息 */
-  IntranetVpcInfos?: VpcInfo[] | null;
+  IntranetVpcInfos?: VpcInfo[];
   /** 控制台内网的网络信息 */
-  ConsoleIntranetVpcInfos?: VpcInfo[] | null;
+  ConsoleIntranetVpcInfos?: VpcInfo[];
   /** 是否开公网 */
-  EnableClientInternet?: boolean | null;
+  EnableClientInternet?: boolean;
   /** 限流客户端内网的网络信息 */
-  LimiterIntranetVpcInfos?: VpcInfo[] | null;
+  LimiterIntranetVpcInfos?: VpcInfo[];
   /** 是否为主地域，仅在服务治理中心多地域有效 */
-  MainRegion?: boolean | null;
+  MainRegion?: boolean;
   /** 该地域所在的EKS集群 */
-  EKSClusterID?: string | null;
+  EKSClusterID?: string;
 }
 
 /** 获取云原生api网关公网地址信息响应结果 */
 declare interface DescribePublicAddressConfigResult {
   /** 网关实例id */
-  GatewayId?: string | null;
+  GatewayId?: string;
   /** 公网地址信息 */
-  ConfigList?: PublicAddressConfig[] | null;
+  ConfigList?: PublicAddressConfig[];
   /** 总个数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
 }
 
 /** 查询客户端公网信息 */
 declare interface DescribePublicNetworkResult {
   /** 网关实例ID */
-  GatewayId?: string | null;
+  GatewayId?: string;
   /** 网关分组ID */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 客户端公网信息 */
-  PublicNetwork?: CloudNativeAPIGatewayConfig | null;
+  PublicNetwork?: CloudNativeAPIGatewayConfig;
 }
 
 /** 获取WAF保护域名列表 */
@@ -825,13 +825,13 @@ declare interface DescribeWafDomainsResult {
 /** 获取WAF保护资源状态 */
 declare interface DescribeWafProtectionResult {
   /** 全局防护状态 */
-  GlobalStatus?: string | null;
+  GlobalStatus?: string;
   /** 服务防护状态 */
-  ServicesStatus?: ServiceWafStatus[] | null;
+  ServicesStatus?: ServiceWafStatus[];
   /** 路由防护状态 */
-  RouteStatus?: RouteWafStatus[] | null;
+  RouteStatus?: RouteWafStatus[];
   /** 对象防护状态 */
-  ObjectStatus?: string | null;
+  ObjectStatus?: string;
 }
 
 /** 引擎的初始管理账号，当前仅支持Apollo引擎 */
@@ -867,13 +867,13 @@ declare interface EnvAddressInfo {
   /** config公网ip */
   ConfigInternetServiceIp?: string;
   /** config内网访问地址 */
-  ConfigIntranetAddress?: string | null;
+  ConfigIntranetAddress?: string;
   /** 是否开启config内网clb */
-  EnableConfigIntranet?: boolean | null;
+  EnableConfigIntranet?: boolean;
   /** 客户端公网带宽 */
-  InternetBandWidth?: number | null;
+  InternetBandWidth?: number;
   /** 客户端公网CLB多可用区信息 */
-  CLBMultiRegion?: CLBMultiRegion | null;
+  CLBMultiRegion?: CLBMultiRegion;
 }
 
 /** 环境具体信息 */
@@ -907,19 +907,19 @@ declare interface EnvInfo {
   /** 客户端带宽 */
   ClientBandWidth?: number;
   /** 客户端内网开关 */
-  EnableConfigIntranet?: boolean | null;
+  EnableConfigIntranet?: boolean;
 }
 
 /** 云原生网关限流插件外部redis配置 */
 declare interface ExternalRedis {
   /** redis ip */
-  RedisHost: string | null;
+  RedisHost: string;
   /** redis密码 */
-  RedisPassword: string | null;
+  RedisPassword: string;
   /** redis端口 */
-  RedisPort: number | null;
+  RedisPort: number;
   /** 超时时间 ms */
-  RedisTimeout: number | null;
+  RedisTimeout: number;
 }
 
 /** 查询过滤通用对象 */
@@ -933,9 +933,9 @@ declare interface Filter {
 /** 网关实例协议端口列表 */
 declare interface GatewayInstanceSchemeAndPorts {
   /** 端口协议，可选HTTP、HTTPS、TCP和UDP */
-  Scheme?: string | null;
+  Scheme?: string;
   /** 端口列表 */
-  PortList?: number[] | null;
+  PortList?: number[];
 }
 
 /** 服务别名结构信息 */
@@ -949,15 +949,15 @@ declare interface GovernanceAlias {
   /** 服务别名指向的服务命名空间 */
   Namespace?: string;
   /** 服务别名的描述信息 */
-  Comment?: string | null;
+  Comment?: string;
   /** 服务别名创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 服务别名修改时间 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
   /** 服务别名ID */
-  Id?: string | null;
+  Id?: string;
   /** 该服务别名是否可以编辑 */
-  Editable?: boolean | null;
+  Editable?: boolean;
 }
 
 /** 治理中心实例信息。 */
@@ -969,35 +969,35 @@ declare interface GovernanceInstance {
   /** 实例所在命名空间名。 */
   Namespace?: string;
   /** 实例ip地址。 */
-  Host?: string | null;
+  Host?: string;
   /** 实例端口信息。 */
-  Port?: number | null;
+  Port?: number;
   /** 通信协议。 */
-  Protocol?: string | null;
+  Protocol?: string;
   /** 版本信息。 */
-  Version?: string | null;
+  Version?: string;
   /** 负载均衡权重。 */
-  Weight?: number | null;
+  Weight?: number;
   /** 是否开启健康检查。 */
-  EnableHealthCheck?: boolean | null;
+  EnableHealthCheck?: boolean;
   /** 实例是否健康。 */
-  Healthy?: boolean | null;
+  Healthy?: boolean;
   /** 实例是否隔离。 */
-  Isolate?: boolean | null;
+  Isolate?: boolean;
   /** 实例创建时间。 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 实例修改时间。 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
   /** 元数据数组。 */
-  Metadatas?: Metadata[] | null;
+  Metadatas?: Metadata[];
   /** 上报心跳间隔。 */
-  Ttl?: number | null;
+  Ttl?: number;
   /** 版本信息。 */
-  InstanceVersion?: string | null;
+  InstanceVersion?: string;
   /** 状态信息 */
-  HealthStatus?: string | null;
+  HealthStatus?: string;
   /** 描述 */
-  Comment?: string | null;
+  Comment?: string;
 }
 
 /** 实例信息 */
@@ -1059,57 +1059,57 @@ declare interface GovernanceInstanceUpdate {
 /** 服务契约接口定义 */
 declare interface GovernanceInterfaceDescription {
   /** 契约接口ID */
-  ID?: string | null;
+  ID?: string;
   /** 方法名称 */
-  Method?: string | null;
+  Method?: string;
   /** 路径/接口名称 */
-  Path?: string | null;
+  Path?: string;
   /** 内容 */
-  Content?: string | null;
+  Content?: string;
   /** 创建来源 */
-  Source?: string | null;
+  Source?: string;
   /** 信息摘要 */
-  Revision?: string | null;
+  Revision?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 修改时间 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
   /** 接口名称 */
-  Name?: string | null;
+  Name?: string;
 }
 
 /** 治理中心命名空间 */
 declare interface GovernanceNamespace {
   /** 命名空间名称。 */
-  Name?: string | null;
+  Name?: string;
   /** 命名空间描述信息。 */
-  Comment?: string | null;
+  Comment?: string;
   /** 创建时间。 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 修改时间。 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
   /** 命名空间下总服务数据量 */
-  TotalServiceCount?: number | null;
+  TotalServiceCount?: number;
   /** 命名空间下总健康实例数量 */
-  TotalHealthInstanceCount?: number | null;
+  TotalHealthInstanceCount?: number;
   /** 命名空间下总实例数量 */
-  TotalInstanceCount?: number | null;
+  TotalInstanceCount?: number;
   /** 命名空间ID */
-  Id?: string | null;
+  Id?: string;
   /** 是否可以编辑 */
-  Editable?: boolean | null;
+  Editable?: boolean;
   /** 可以操作此命名空间的用户ID列表 */
-  UserIds?: string[] | null;
+  UserIds?: string[];
   /** 可以操作此命名空间的用户组ID列表 */
-  GroupIds?: string[] | null;
+  GroupIds?: string[];
   /** 移除可以操作此命名空间的用户ID列表 */
-  RemoveUserIds?: string[] | null;
+  RemoveUserIds?: string[];
   /** 移除可以操作此命名空间的用户组ID列表 */
-  RemoveGroupIds?: string[] | null;
+  RemoveGroupIds?: string[];
   /** 该命名空间下的服务对哪些命名空间可见 */
-  ServiceExportTo?: string[] | null;
+  ServiceExportTo?: string[];
   /** 是否开启同步到全局注册中心 */
-  SyncToGlobalRegistry?: boolean | null;
+  SyncToGlobalRegistry?: boolean;
 }
 
 /** 治理中心命名空间输入参数 */
@@ -1139,37 +1139,37 @@ declare interface GovernanceService {
   /** 命名空间名称。 */
   Namespace?: string;
   /** 元数据信息数组。 */
-  Metadatas?: Metadata[] | null;
+  Metadatas?: Metadata[];
   /** 描述信息。 */
-  Comment?: string | null;
+  Comment?: string;
   /** 创建时间。 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 修改时间。 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
   /** 服务所属部门。 */
-  Department?: string | null;
+  Department?: string;
   /** 服务所属业务。 */
-  Business?: string | null;
+  Business?: string;
   /** 健康服务实例数 */
-  HealthyInstanceCount?: number | null;
+  HealthyInstanceCount?: number;
   /** 服务实例总数 */
-  TotalInstanceCount?: number | null;
+  TotalInstanceCount?: number;
   /** 服务ID */
-  Id?: string | null;
+  Id?: string;
   /** 是否可以编辑 */
-  Editable?: boolean | null;
+  Editable?: boolean;
   /** 可以编辑该资源的用户ID */
-  UserIds?: string[] | null;
+  UserIds?: string[];
   /** 可以编辑该资源的用户组ID */
-  GroupIds?: string[] | null;
+  GroupIds?: string[];
   /** 移除可以编辑该资源的用户ID */
-  RemoveUserIds?: string[] | null;
+  RemoveUserIds?: string[];
   /** 移除可以编辑该资源的用户组ID */
-  RemoveGroupIds?: string[] | null;
+  RemoveGroupIds?: string[];
   /** 该服务对哪些命名空间可见 */
-  ExportTo?: string[] | null;
+  ExportTo?: string[];
   /** 该服务信息摘要签名 */
-  Revision?: string | null;
+  Revision?: string;
   /** 是否开启同步到全局注册中心 */
   SyncToGlobalRegistry?: boolean;
 }
@@ -1177,37 +1177,37 @@ declare interface GovernanceService {
 /** 服务契约定义 */
 declare interface GovernanceServiceContract {
   /** 契约名称 */
-  Name: string | null;
+  Name: string;
   /** 所属服务命名空间 */
-  Namespace: string | null;
+  Namespace: string;
   /** 协议 */
-  Protocol: string | null;
+  Protocol: string;
   /** 契约ID */
-  ID?: string | null;
+  ID?: string;
   /** 所属服务名称 */
-  Service?: string | null;
+  Service?: string;
   /** 版本 */
-  Version?: string | null;
+  Version?: string;
   /** 信息摘要 */
-  Revision?: string | null;
+  Revision?: string;
   /** 额外内容描述 */
-  Content?: string | null;
+  Content?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 修改时间 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
   /** 契约接口列表 */
-  Interfaces?: GovernanceInterfaceDescription[] | null;
+  Interfaces?: GovernanceInterfaceDescription[];
 }
 
 /** 服务契约版本信息 */
 declare interface GovernanceServiceContractVersion {
   /** 契约版本 */
-  Version?: string | null;
+  Version?: string;
   /** 契约名称 */
-  Name?: string | null;
+  Name?: string;
   /** 唯一名称 */
-  Key?: string | null;
+  Key?: string;
 }
 
 /** 治理中心服务入参 */
@@ -1241,13 +1241,13 @@ declare interface GovernanceServiceInput {
 /** 实例监听端口信息 */
 declare interface InstancePort {
   /** 监听的 http 端口范围。 */
-  HttpPort?: string | null;
+  HttpPort?: string;
   /** 监听的 https 端口范围。 */
-  HttpsPort?: string | null;
+  HttpsPort?: string;
   /** 监听的 tcp 端口范围。 */
-  TcpPort?: string | null;
+  TcpPort?: string;
   /** 监听的 udp 端口范围。 */
-  UdpPort?: string | null;
+  UdpPort?: string;
 }
 
 /** 引擎实例的标签信息 */
@@ -1281,9 +1281,9 @@ declare interface InternetConfig {
 /** 键值对 */
 declare interface KVMapping {
   /** key */
-  Key?: string | null;
+  Key?: string;
   /** value */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 键值对 */
@@ -1297,33 +1297,33 @@ declare interface KVPair {
 /** Key/Value结构 */
 declare interface KeyValue {
   /** 条件的Key */
-  Key?: string | null;
+  Key?: string;
   /** 条件的Value */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** Kong网关主动健康检查配置 */
 declare interface KongActiveHealthCheck {
   /** 主动健康检查健康探测间隔，单位：秒，0表示不开启 */
-  HealthyInterval?: number | null;
+  HealthyInterval?: number;
   /** 主动健康检查异常探测间隔，单位：秒，0表示不开启 */
-  UnHealthyInterval?: number | null;
+  UnHealthyInterval?: number;
   /** 在 GET HTTP 请求中使用的路径，以作为主动运行状况检查的探测器运行。默认： ”/”。 */
-  HttpPath?: string | null;
+  HttpPath?: string;
   /** GET HTTP 请求的超时时间，单位：秒。默认 60。 */
-  Timeout?: number | null;
+  Timeout?: number;
 }
 
 /** 云原生网关证书 */
 declare interface KongCertificate {
   /** 无 */
-  Cert?: KongCertificatesPreview | null;
+  Cert?: KongCertificatesPreview;
 }
 
 /** kong证书列表 */
 declare interface KongCertificatesList {
   /** 证书列表总数 */
-  Total?: number | null;
+  Total?: number;
   /** 无 */
   CertificatesList?: KongCertificatesPreview[] | null;
   /** 证书列表总页数 */
@@ -1333,41 +1333,41 @@ declare interface KongCertificatesList {
 /** 云原生网关证书预览信息 */
 declare interface KongCertificatesPreview {
   /** 证书名称 */
-  Name?: string | null;
+  Name?: string;
   /** Id */
-  Id?: string | null;
+  Id?: string;
   /** 绑定的域名 */
-  BindDomains?: string[] | null;
+  BindDomains?: string[];
   /** 证书状态：expired(已过期) active(生效中) */
-  Status?: string | null;
+  Status?: string;
   /** 证书pem格式 */
-  Crt?: string | null;
+  Crt?: string;
   /** 证书私钥 */
-  Key?: string | null;
+  Key?: string;
   /** 证书过期时间 */
-  ExpireTime?: string | null;
+  ExpireTime?: string;
   /** 证书上传时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 证书签发时间 */
-  IssueTime?: string | null;
+  IssueTime?: string;
   /** 证书来源：native(kong自定义证书) ssl(ssl平台证书) */
-  CertSource?: string | null;
+  CertSource?: string;
   /** ssl平台证书Id */
-  CertId?: string | null;
+  CertId?: string;
 }
 
 /** Kong网关被动健康检查配置 */
 declare interface KongPassiveHealthCheck {
   /** 后端target协议类型，被动健康检查支持http和tcp，主动健康检查支持http */
-  Type?: string | null;
+  Type?: string;
 }
 
 /** 云原生网关路由信息 */
 declare interface KongRoutePreview {
   /** 服务ID */
-  ID: string | null;
+  ID: string;
   /** 服务名字 */
-  Name?: string | null;
+  Name?: string;
   /** 无 */
   Methods?: string[] | null;
   /** 无 */
@@ -1375,25 +1375,25 @@ declare interface KongRoutePreview {
   /** 无 */
   Hosts?: string[] | null;
   /** 无 */
-  Protocols?: string[] | null;
+  Protocols?: string[];
   /** 无 */
-  PreserveHost?: boolean | null;
+  PreserveHost?: boolean;
   /** 无 */
-  HttpsRedirectStatusCode?: number | null;
+  HttpsRedirectStatusCode?: number;
   /** 无 */
-  StripPath?: boolean | null;
+  StripPath?: boolean;
   /** 无 */
-  CreatedTime?: string | null;
+  CreatedTime?: string;
   /** 是否开启了强制HTTPS */
   ForceHttps?: boolean | null;
   /** 服务名 */
-  ServiceName?: string | null;
+  ServiceName?: string;
   /** 服务ID */
-  ServiceID?: string | null;
+  ServiceID?: string;
   /** 目的端口 */
-  DestinationPorts?: number[] | null;
+  DestinationPorts?: number[];
   /** 路由的Headers */
-  Headers?: KVMapping[] | null;
+  Headers?: KVMapping[];
   /** 是否缓存请求body，默认true */
   RequestBuffering?: boolean;
   /** 是否缓存响应body，默认true */
@@ -1405,45 +1405,45 @@ declare interface KongRoutePreview {
 /** 云原生网关服务详细信息 */
 declare interface KongServiceDetail {
   /** 服务ID */
-  ID: string | null;
+  ID: string;
   /** 服务名字 */
-  Name?: string | null;
+  Name?: string;
   /** 后端协议 */
-  Protocol?: string | null;
+  Protocol?: string;
   /** 后端路径 */
   Path?: string | null;
   /** 后端延时，单位ms */
-  Timeout?: number | null;
+  Timeout?: number;
   /** 重试次数 */
-  Retries?: number | null;
+  Retries?: number;
   /** 标签 */
   Tags?: string[] | null;
   /** 后端配置 */
-  UpstreamInfo?: KongUpstreamInfo | null;
+  UpstreamInfo?: KongUpstreamInfo;
   /** 后端类型 */
-  UpstreamType?: string | null;
+  UpstreamType?: string;
   /** 是否可编辑 */
-  Editable?: boolean | null;
+  Editable?: boolean;
   /** 创建时间 */
-  CreatedTime?: string | null;
+  CreatedTime?: string;
 }
 
 /** 云原生网关服务预览信息 */
 declare interface KongServicePreview {
   /** 服务ID */
-  ID: string | null;
+  ID: string;
   /** 服务名字 */
-  Name?: string | null;
+  Name?: string;
   /** 标签 */
-  Tags?: string[] | null;
+  Tags?: string[];
   /** 后端配置 */
-  UpstreamInfo?: KongUpstreamInfo | null;
+  UpstreamInfo?: KongUpstreamInfo;
   /** 后端类型 */
-  UpstreamType?: string | null;
+  UpstreamType?: string;
   /** 创建时间 */
-  CreatedTime?: string | null;
+  CreatedTime?: string;
   /** 是否可编辑 */
-  Editable?: boolean | null;
+  Editable?: boolean;
   /** 请求路径 */
   Path?: string | null;
 }
@@ -1451,117 +1451,117 @@ declare interface KongServicePreview {
 /** kong服务路由列表 */
 declare interface KongServiceRouteList {
   /** 无 */
-  RouteList?: KongRoutePreview[] | null;
+  RouteList?: KongRoutePreview[];
   /** 总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
 }
 
 /** kong实例的服务列表 */
 declare interface KongServices {
   /** kong实例的服务列表 */
-  ServiceList?: KongServicePreview[] | null;
+  ServiceList?: KongServicePreview[];
   /** 列表总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
 }
 
 /** Kong Upstream中的Target */
 declare interface KongTarget {
   /** Host */
-  Host: string | null;
+  Host: string;
   /** 端口 */
-  Port: number | null;
+  Port: number;
   /** 权重 */
-  Weight: number | null;
+  Weight: number;
   /** 健康状态 */
-  Health?: string | null;
+  Health?: string;
   /** 创建时间 */
-  CreatedTime?: string | null;
+  CreatedTime?: string;
   /** Target的来源 */
-  Source?: string | null;
+  Source?: string;
   /** CVM实例ID */
-  CvmInstanceId?: string | null;
+  CvmInstanceId?: string;
   /** CVM实例名称 */
-  CvmInstanceName?: string | null;
+  CvmInstanceName?: string;
   /** target标签 */
-  Tags?: string[] | null;
+  Tags?: string[];
 }
 
 /** 服务的后端配置 */
 declare interface KongUpstreamInfo {
   /** IP或域名 */
-  Host?: string | null;
+  Host?: string;
   /** 端口 */
-  Port?: number | null;
+  Port?: number;
   /** 服务来源ID */
-  SourceID?: string | null;
+  SourceID?: string;
   /** 命名空间 */
-  Namespace?: string | null;
+  Namespace?: string;
   /** 服务（注册中心或Kubernetes中的服务）名字 */
-  ServiceName?: string | null;
+  ServiceName?: string;
   /** 服务后端类型是IPList时提供 */
   Targets?: KongTarget[] | null;
   /** 服务来源类型 */
-  SourceType?: string | null;
+  SourceType?: string;
   /** SCF函数类型 */
-  ScfType?: string | null;
+  ScfType?: string;
   /** SCF函数命名空间 */
-  ScfNamespace?: string | null;
+  ScfNamespace?: string;
   /** SCF函数名 */
-  ScfLambdaName?: string | null;
+  ScfLambdaName?: string;
   /** SCF函数版本 */
-  ScfLambdaQualifier?: string | null;
+  ScfLambdaQualifier?: string;
   /** 冷启动时间，单位秒 */
-  SlowStart?: number | null;
+  SlowStart?: number;
   /** 负载均衡算法，默认为 round-robin，还支持 least-connections，consisten_hashing */
-  Algorithm?: string | null;
+  Algorithm?: string;
   /** CVM弹性伸缩组ID */
-  AutoScalingGroupID?: string | null;
+  AutoScalingGroupID?: string;
   /** CVM弹性伸缩组端口 */
-  AutoScalingCvmPort?: number | null;
+  AutoScalingCvmPort?: number;
   /** CVM弹性伸缩组使用的CVM TAT命令状态 */
-  AutoScalingTatCmdStatus?: string | null;
+  AutoScalingTatCmdStatus?: string;
   /** CVM弹性伸缩组生命周期挂钩状态 */
-  AutoScalingHookStatus?: string | null;
+  AutoScalingHookStatus?: string;
   /** 服务来源的名字 */
-  SourceName?: string | null;
+  SourceName?: string;
   /** 精确的服务来源类型，新建服务来源时候传入的类型 */
-  RealSourceType?: string | null;
+  RealSourceType?: string;
   /** upstream健康状态HEALTHY（健康）, UNHEALTHY（异常）, HEALTHCHECKS_OFF（未开启）和NONE（不支持健康检查） */
-  HealthStatus?: string | null;
+  HealthStatus?: string;
   /** 云函数是否开启CAM鉴权，不填时默认为开启(true) */
-  ScfCamAuthEnable?: boolean | null;
+  ScfCamAuthEnable?: boolean;
   /** 云函数是否开启Base64编码，默认为false */
-  ScfIsBase64Encoded?: boolean | null;
+  ScfIsBase64Encoded?: boolean;
   /** 云函数是否开启响应集成，默认为false */
-  ScfIsIntegratedResponse?: boolean | null;
+  ScfIsIntegratedResponse?: boolean;
 }
 
 /** kong后端upstream列表 */
 declare interface KongUpstreamList {
   /** 无 */
-  UpstreamList?: KongUpstreamPreview[] | null;
+  UpstreamList?: KongUpstreamPreview[];
 }
 
 /** 云原生网关Upstream信息 */
 declare interface KongUpstreamPreview {
   /** 服务ID */
-  ID: string | null;
+  ID: string;
   /** 服务名字 */
-  Name?: string | null;
+  Name?: string;
   /** 后端配置 */
-  Target?: KongTarget[] | null;
+  Target?: KongTarget[];
 }
 
 /** 参数限流的规则 */
 declare interface LimitRule {
   /** 请求匹配条件 */
-  Filters?: RuleFilter[] | null;
+  Filters?: RuleFilter[];
   /** 参数限流依据组合 */
-  LimitBy?: KeyValue[] | null;
+  LimitBy?: KeyValue[];
   /** 限流阈值 */
-  QpsThresholds?: QpsThreshold[] | null;
+  QpsThresholds?: QpsThreshold[];
   /** 精确限流阈值 */
-  AccurateQpsThresholds?: AccurateQpsThreshold[] | null;
+  AccurateQpsThresholds?: AccurateQpsThreshold[];
 }
 
 /** 获取云原生API网关实例列表响应结果。 */
@@ -1599,19 +1599,19 @@ declare interface ListFilter {
 /** 新增Location字段，展示zone/region/campus */
 declare interface Location {
   /** 大区 */
-  Region?: string | null;
+  Region?: string;
   /** 可用区 */
-  Zone?: string | null;
+  Zone?: string;
   /** 机房 */
-  Campus?: string | null;
+  Campus?: string;
 }
 
 /** 元数据信息 */
 declare interface Metadata {
   /** 元数据键名。 */
-  Key: string | null;
+  Key: string;
   /** 元数据键值。不填则默认为空字符串。 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** Nacos副本信息 */
@@ -1623,19 +1623,19 @@ declare interface NacosReplica {
   /** 状态 */
   Status?: string;
   /** 子网ID */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 可用区ID */
-  Zone?: string | null;
+  Zone?: string;
   /** 可用区ID */
-  ZoneId?: string | null;
+  ZoneId?: string;
   /** VPC ID */
-  VpcId?: string | null;
+  VpcId?: string;
 }
 
 /** nacos服务端接口列表，用于云监控 */
 declare interface NacosServerInterface {
   /** 接口名 */
-  Interface: string | null;
+  Interface?: string;
 }
 
 /** 云原生网关分组信息 */
@@ -1655,19 +1655,19 @@ declare interface NativeGatewayServerGroup {
   /** 是否是默认分组。0：否。1：是。 */
   IsFirstGroup?: number;
   /** 关联策略信息 */
-  BindingStrategy?: CloudNativeAPIGatewayStrategy | null;
+  BindingStrategy?: CloudNativeAPIGatewayStrategy;
   /** 网关实例 id */
-  GatewayId?: string | null;
+  GatewayId?: string;
   /** 带宽 */
-  InternetMaxBandwidthOut?: number | null;
+  InternetMaxBandwidthOut?: number;
   /** 修改时间 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
   /** 子网id */
-  SubnetIds?: string | null;
+  SubnetIds?: string;
   /** 分组默认权重 */
-  DefaultWeight?: number | null;
+  DefaultWeight?: number;
   /** 弹性节点 */
-  ElasticNumber?: number | null;
+  ElasticNumber?: number;
 }
 
 /** 网关分组列表 */
@@ -1709,35 +1709,35 @@ declare interface NetworkAccessControl {
 /** 北极星日志主题信息 */
 declare interface PolarisCLSTopicInfo {
   /** 日志集ID */
-  LogSetId?: string | null;
+  LogSetId?: string;
   /** 日志集名称 */
-  LogSetName?: string | null;
+  LogSetName?: string;
   /** 日志主题ID */
-  TopicId?: string | null;
+  TopicId?: string;
   /** 日志主题名称 */
-  TopicName?: string | null;
+  TopicName?: string;
 }
 
 /** 查询Limiter的接入地址 */
 declare interface PolarisLimiterAddress {
   /** VPC接入IP列表 */
-  IntranetAddress: string | null;
+  IntranetAddress?: string;
 }
 
 /** 公网地址信息 */
 declare interface PublicAddressConfig {
   /** 公网 ip */
-  Vip?: string | null;
+  Vip?: string;
   /** 公网最大带宽 */
-  InternetMaxBandwidthOut?: number | null;
+  InternetMaxBandwidthOut?: number;
   /** 公网所属分组 id */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 公网所属分组名 */
-  GroupName?: string | null;
+  GroupName?: string;
   /** 公网负载均衡 id */
-  NetworkId?: string | null;
+  NetworkId?: string;
   /** 公网负载均衡描述 */
-  Description?: string | null;
+  Description?: string;
 }
 
 /** 云原生网关限流插件Qps阈值 */
@@ -1751,49 +1751,49 @@ declare interface QpsThreshold {
 /** 配置发布版本信息 */
 declare interface ReleaseVersion {
   /** 配置发布的版本 */
-  Name?: string | null;
+  Name?: string;
   /** 是否生效 */
-  Active?: boolean | null;
+  Active?: boolean;
   /** 配置发布的ID */
-  Id?: string | null;
+  Id?: string;
   /** 配置发布的命名空间 */
-  Namespace?: string | null;
+  Namespace?: string;
   /** 配置发布的分组 */
-  Group?: string | null;
+  Group?: string;
   /** 配置发布的文件名 */
-  FileName?: string | null;
+  FileName?: string;
 }
 
 /** 路由 WAF 状态 */
 declare interface RouteWafStatus {
   /** 路由的名字 */
-  Name?: string | null;
+  Name?: string;
   /** 路由的 ID */
-  Id?: string | null;
+  Id?: string;
   /** 路由是否开启 WAF 防护 */
-  Status?: string | null;
+  Status?: string;
   /** 方法 */
-  Methods?: string[] | null;
+  Methods?: string[];
   /** 路径 */
-  Paths?: string[] | null;
+  Paths?: string[];
   /** 域名 */
-  Hosts?: string[] | null;
+  Hosts?: string[];
   /** 路由对应服务的名字 */
-  ServiceName?: string | null;
+  ServiceName?: string;
   /** 路由对应服务的ID */
-  ServiceId?: string | null;
+  ServiceId?: string;
 }
 
 /** 限流规则的Filter */
 declare interface RuleFilter {
   /** 限流条件的Key */
-  Key?: string | null;
+  Key?: string;
   /** 限流条件的Values */
-  Values?: string[] | null;
+  Values?: string[];
   /** 操作符 */
-  Operator?: string | null;
+  Operator?: string;
   /** header或query对应的name */
-  Name?: string | null;
+  Name?: string;
 }
 
 /** 微服务注册引擎实例 */
@@ -1815,61 +1815,61 @@ declare interface SREInstance {
   /** Vpc iD */
   VpcId?: string;
   /** 子网ID */
-  SubnetIds?: string[] | null;
+  SubnetIds?: string[];
   /** 是否开启持久化存储 */
-  EnableStorage?: boolean | null;
+  EnableStorage?: boolean;
   /** 数据存储方式 */
-  StorageType?: string | null;
+  StorageType?: string;
   /** 云硬盘容量 */
-  StorageCapacity?: number | null;
+  StorageCapacity?: number;
   /** 计费方式 */
-  Paymode?: string | null;
+  Paymode?: string;
   /** EKS集群的ID */
-  EKSClusterID?: string | null;
+  EKSClusterID?: string;
   /** 集群创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 环境配置信息列表 */
-  EnvInfos?: EnvInfo[] | null;
+  EnvInfos?: EnvInfo[];
   /** 引擎所在的区域 */
-  EngineRegion?: string | null;
+  EngineRegion?: string;
   /** 注册引擎是否开启公网 */
-  EnableInternet?: boolean | null;
+  EnableInternet?: boolean;
   /** 私有网络列表信息 */
-  VpcInfos?: VpcInfo[] | null;
+  VpcInfos?: VpcInfo[];
   /** 服务治理相关信息列表 */
-  ServiceGovernanceInfos?: ServiceGovernanceInfo[] | null;
+  ServiceGovernanceInfos?: ServiceGovernanceInfo[];
   /** 实例的标签信息 */
-  Tags?: KVPair[] | null;
+  Tags?: KVPair[];
   /** 引擎实例是否开启控制台公网访问地址 */
-  EnableConsoleInternet?: boolean | null;
+  EnableConsoleInternet?: boolean;
   /** 引擎实例是否开启控制台内网访问地址 */
-  EnableConsoleIntranet?: boolean | null;
+  EnableConsoleIntranet?: boolean;
   /** 引擎实例是否展示参数配置页面 */
-  ConfigInfoVisible?: boolean | null;
+  ConfigInfoVisible?: boolean;
   /** 引擎实例控制台默认密码 */
-  ConsoleDefaultPwd?: string | null;
+  ConsoleDefaultPwd?: string;
   /** 交易付费类型，0后付费/1预付费 */
-  TradeType?: number | null;
+  TradeType?: number;
   /** 自动续费标记：0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费 */
-  AutoRenewFlag?: number | null;
+  AutoRenewFlag?: number;
   /** 预付费到期时间 */
-  CurDeadline?: string | null;
+  CurDeadline?: string;
   /** 隔离开始时间 */
-  IsolateTime?: string | null;
+  IsolateTime?: string;
   /** 实例地域相关的描述信息 */
-  RegionInfos?: DescribeInstanceRegionInfo[] | null;
+  RegionInfos?: DescribeInstanceRegionInfo[];
   /** 所在EKS环境，分为common和yunti */
-  EKSType?: string | null;
+  EKSType?: string;
   /** 引擎的产品版本 */
-  FeatureVersion?: string | null;
+  FeatureVersion?: string;
   /** 引擎实例是否开启客户端内网访问地址 */
-  EnableClientIntranet?: boolean | null;
+  EnableClientIntranet?: boolean;
   /** 存储额外配置选项 */
-  StorageOption?: StorageOption[] | null;
+  StorageOption?: StorageOption[];
   /** Zookeeper的额外环境数据信息 */
-  ZookeeperRegionInfo?: ZookeeperRegionInfo | null;
+  ZookeeperRegionInfo?: ZookeeperRegionInfo;
   /** 部署架构 */
-  DeployMode?: string | null;
+  DeployMode?: string;
 }
 
 /** 服务治理相关的信息 */
@@ -1891,19 +1891,19 @@ declare interface ServiceGovernanceInfo {
   /** 服务治理限流server引擎绑定的网络信息 */
   LimiterVpcInfos?: VpcInfo[];
   /** 引擎关联CLS日志主题信息 */
-  CLSTopics?: PolarisCLSTopicInfo[] | null;
+  CLSTopics?: PolarisCLSTopicInfo[];
 }
 
 /** 服务的 WAF 状态 */
 declare interface ServiceWafStatus {
   /** 服务的名字 */
-  Name?: string | null;
+  Name?: string;
   /** 服务的 ID */
-  Id?: string | null;
+  Id?: string;
   /** 服务的类型 */
-  Type?: string | null;
+  Type?: string;
   /** 服务是否开启 WAF 防护 */
-  Status?: string | null;
+  Status?: string;
 }
 
 /** 服务来源 */
@@ -1911,37 +1911,37 @@ declare interface SourceInfo {
   /** 微服务引擎接入IP地址信息 */
   Addresses?: string[];
   /** 微服务引擎VPC信息 */
-  VpcInfo?: SourceInstanceVpcInfo | null;
+  VpcInfo?: SourceInstanceVpcInfo;
   /** 微服务引擎鉴权信息 */
-  Auth?: SourceInstanceAuth | null;
+  Auth?: SourceInstanceAuth;
 }
 
 /** 实例鉴权信息 */
 declare interface SourceInstanceAuth {
   /** 用户名 */
-  Username?: string | null;
+  Username?: string;
   /** 账户密码 */
-  Password?: string | null;
+  Password?: string;
   /** 访问凭据 token */
-  AccessToken?: string | null;
+  AccessToken?: string;
 }
 
 /** 微服务引擎实例的VPC信息 */
 declare interface SourceInstanceVpcInfo {
   /** 微服务引擎VPC信息 */
-  VpcID?: string | null;
+  VpcID?: string;
   /** 微服务引擎子网信息 */
-  SubnetID?: string | null;
+  SubnetID?: string;
 }
 
 /** 存储的额外选项 */
 declare interface StorageOption {
   /** 存储对象，分为snap和txn两种 */
-  Name?: string | null;
+  Name?: string;
   /** 存储类型，分为三类CLOUD_PREMIUM/CLOUD_SSD/CLOUD_SSD_PLUS，分别对应高性能云硬盘、SSD云硬盘、增强型SSD云硬盘 */
-  Type?: string | null;
+  Type?: string;
   /** 存储容量，[50, 3200]的范围 */
-  Capacity?: number | null;
+  Capacity?: number;
 }
 
 /** 更新云原生API网关响应结果。 */
@@ -1951,33 +1951,33 @@ declare interface UpdateCloudNativeAPIGatewayResult {
   /** 云原生网关状态。 */
   Status?: string;
   /** 任务ID */
-  TaskId?: string | null;
+  TaskId?: string;
 }
 
 /** 云原生网关健康检查配置 */
 declare interface UpstreamHealthCheckConfig {
   /** 开启主动健康检查 */
-  EnableActiveHealthCheck?: boolean | null;
+  EnableActiveHealthCheck?: boolean;
   /** 主动健康检查配置 */
-  ActiveHealthCheck?: KongActiveHealthCheck | null;
+  ActiveHealthCheck?: KongActiveHealthCheck;
   /** 开启被动健康检查 */
-  EnablePassiveHealthCheck?: boolean | null;
+  EnablePassiveHealthCheck?: boolean;
   /** 被动健康检查配置 */
-  PassiveHealthCheck?: KongPassiveHealthCheck | null;
+  PassiveHealthCheck?: KongPassiveHealthCheck;
   /** 连续健康阈值，单位：次 */
-  Successes?: number | null;
+  Successes?: number;
   /** 连续异常阈值，单位：次 */
-  Failures?: number | null;
+  Failures?: number;
   /** 超时阈值，单位：次 */
-  Timeouts?: number | null;
+  Timeouts?: number;
   /** 健康HTTP状态码 */
-  HealthyHttpStatuses?: number[] | null;
+  HealthyHttpStatuses?: number[];
   /** 异常HTTP状态码 */
-  UnhealthyHttpStatuses?: number[] | null;
+  UnhealthyHttpStatuses?: number[];
   /** 健康检查监控上报的数据屏蔽权重为0的节点 */
   IgnoreZeroWeightNodes?: boolean | null;
   /** 健康检查支持权重为0节点 */
-  ZeroWeightHeathCheck?: boolean | null;
+  ZeroWeightHeathCheck?: boolean;
 }
 
 /** 私有网络信息 */
@@ -1987,29 +1987,29 @@ declare interface VpcInfo {
   /** 子网ID */
   SubnetId: string;
   /** 内网访问地址 */
-  IntranetAddress?: string | null;
+  IntranetAddress?: string;
   /** 负载均衡均衡接入点子网ID */
-  LbSubnetId?: string | null;
+  LbSubnetId?: string;
 }
 
 /** Zookeeper的地域额外信息记录 */
 declare interface ZookeeperRegionInfo {
   /** 部署架构信息- SingleRegion: 普通单地域- MultiRegion: 普通多地域场景- MasterSlave: 两地域，主备地域场景 */
-  DeployMode?: string | null;
+  DeployMode?: string;
   /** 主地域的额外信息 */
-  MainRegion?: ZookeeperRegionMyIdInfo | null;
+  MainRegion?: ZookeeperRegionMyIdInfo;
   /** 其他地域的额外信息 */
-  OtherRegions?: ZookeeperRegionMyIdInfo[] | null;
+  OtherRegions?: ZookeeperRegionMyIdInfo[];
 }
 
 /** Zookeeper的地域信息的 myid 信息记录 */
 declare interface ZookeeperRegionMyIdInfo {
   /** 地域信息 */
-  Region?: string | null;
+  Region?: string;
   /** myid 的起始号段 */
-  MyIdStart?: number | null;
+  MyIdStart?: number;
   /** myid 的结束号段 */
-  MyIdEnd?: number | null;
+  MyIdEnd?: number;
 }
 
 /** Zookeeper副本信息 */
@@ -2021,21 +2021,21 @@ declare interface ZookeeperReplica {
   /** 状态 */
   Status?: string;
   /** 子网ID */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 可用区ID */
-  Zone?: string | null;
+  Zone?: string;
   /** 可用区ID */
-  ZoneId?: string | null;
+  ZoneId?: string;
   /** 别名 */
-  AliasName?: string | null;
+  AliasName?: string;
   /** VPC ID */
-  VpcId?: string | null;
+  VpcId?: string;
 }
 
 /** Zookeeper服务端接口列表，用于云监控 */
 declare interface ZookeeperServerInterface {
   /** 接口名 */
-  Interface: string | null;
+  Interface?: string;
 }
 
 declare interface BindAutoScalerResourceStrategyToGroupsRequest {
@@ -2127,7 +2127,7 @@ declare interface CreateCloudNativeAPIGatewayCertificateRequest {
 
 declare interface CreateCloudNativeAPIGatewayCertificateResponse {
   /** 创建证书结果 */
-  Result?: CertificateInfo | null;
+  Result?: CertificateInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2143,7 +2143,7 @@ declare interface CreateCloudNativeAPIGatewayPublicNetworkRequest {
 
 declare interface CreateCloudNativeAPIGatewayPublicNetworkResponse {
   /** 返回结果 */
-  Result?: CreatePublicNetworkResult | null;
+  Result?: CreatePublicNetworkResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2277,7 +2277,7 @@ declare interface CreateCloudNativeAPIGatewayServiceRequest {
 
 declare interface CreateCloudNativeAPIGatewayServiceResponse {
   /** 网关服务创建结果 */
-  Result?: CreateGatewayServiceResult | null;
+  Result?: CreateGatewayServiceResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2307,7 +2307,7 @@ declare interface CreateConfigFileResponse {
   /** 是否创建成功 */
   Result?: boolean;
   /** 创建的配置文件Id */
-  ConfigFileId?: string | null;
+  ConfigFileId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2445,7 +2445,7 @@ declare interface CreateNativeGatewayServerGroupRequest {
 
 declare interface CreateNativeGatewayServerGroupResponse {
   /** 网关分组创建信息 */
-  Result?: CreateCloudNativeAPIGatewayServerGroupResult | null;
+  Result?: CreateCloudNativeAPIGatewayServerGroupResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2483,9 +2483,9 @@ declare interface CreateOrUpdateConfigFileAndReleaseResponse {
   /** 操作是否成功 */
   Result?: boolean;
   /** 配置发布Id */
-  ConfigFileReleaseId?: string | null;
+  ConfigFileReleaseId?: string;
   /** 配置文件Id */
-  ConfigFileId?: string | null;
+  ConfigFileId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2867,7 +2867,7 @@ declare interface DescribeCloudNativeAPIGatewayCertificateDetailsRequest {
 
 declare interface DescribeCloudNativeAPIGatewayCertificateDetailsResponse {
   /** 无 */
-  Result?: KongCertificate | null;
+  Result?: KongCertificate;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2911,7 +2911,7 @@ declare interface DescribeCloudNativeAPIGatewayInfoByIpRequest {
 
 declare interface DescribeCloudNativeAPIGatewayInfoByIpResponse {
   /** 出参 */
-  Result?: DescribeInstanceInfoByIpResult | null;
+  Result?: DescribeInstanceInfoByIpResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2941,7 +2941,7 @@ declare interface DescribeCloudNativeAPIGatewayPortsRequest {
 
 declare interface DescribeCloudNativeAPIGatewayPortsResponse {
   /** 云原生API网关实例协议端口列表响应结果 */
-  Result?: DescribeGatewayInstancePortResult | null;
+  Result?: DescribeGatewayInstancePortResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2989,7 +2989,7 @@ declare interface DescribeCloudNativeAPIGatewayRoutesRequest {
 
 declare interface DescribeCloudNativeAPIGatewayRoutesResponse {
   /** 无 */
-  Result?: KongServiceRouteList | null;
+  Result?: KongServiceRouteList;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3021,7 +3021,7 @@ declare interface DescribeCloudNativeAPIGatewayServicesRequest {
 
 declare interface DescribeCloudNativeAPIGatewayServicesResponse {
   /** 无 */
-  Result?: KongServices | null;
+  Result?: KongServices;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3199,7 +3199,7 @@ declare interface DescribeConfigFileRequest {
 
 declare interface DescribeConfigFileResponse {
   /** 配置文件 */
-  ConfigFile?: ConfigFile | null;
+  ConfigFile?: ConfigFile;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3385,7 +3385,7 @@ declare interface DescribeGovernanceServiceContractsResponse {
   /** 返回条数 */
   Size?: number;
   /** 契约定义列表 */
-  ServiceContracts?: GovernanceServiceContract[] | null;
+  ServiceContracts?: GovernanceServiceContract[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3451,7 +3451,7 @@ declare interface DescribeNacosReplicasResponse {
   /** 引擎实例副本信息 */
   Replicas?: NacosReplica[];
   /** 副本个数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3557,7 +3557,7 @@ declare interface DescribePublicNetworkRequest {
 
 declare interface DescribePublicNetworkResponse {
   /** 获取云原生API网关公网详情响应结果。 */
-  Result?: DescribePublicNetworkResult | null;
+  Result?: DescribePublicNetworkResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3583,17 +3583,17 @@ declare interface DescribeSREInstanceAccessAddressResponse {
   /** apollo多环境公网ip */
   EnvAddressInfos?: EnvAddressInfo[];
   /** 控制台公网访问地址 */
-  ConsoleInternetAddress?: string | null;
+  ConsoleInternetAddress?: string;
   /** 控制台内网访问地址 */
-  ConsoleIntranetAddress?: string | null;
+  ConsoleIntranetAddress?: string;
   /** 客户端公网带宽 */
-  InternetBandWidth?: number | null;
+  InternetBandWidth?: number;
   /** 控制台公网带宽 */
-  ConsoleInternetBandWidth?: number | null;
+  ConsoleInternetBandWidth?: number;
   /** 北极星限流server节点接入IP */
   LimiterAddressInfos?: PolarisLimiterAddress[] | null;
   /** InternetAddress 的公网 CLB 多可用区信息 */
-  CLBMultiRegion?: CLBMultiRegion | null;
+  CLBMultiRegion?: CLBMultiRegion;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3629,7 +3629,7 @@ declare interface DescribeUpstreamHealthCheckConfigRequest {
 
 declare interface DescribeUpstreamHealthCheckConfigResponse {
   /** 健康检查配置 */
-  Result?: UpstreamHealthCheckConfig | null;
+  Result?: UpstreamHealthCheckConfig;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3641,7 +3641,7 @@ declare interface DescribeWafDomainsRequest {
 
 declare interface DescribeWafDomainsResponse {
   /** 已被 WAF 防护域名 */
-  Result?: DescribeWafDomainsResult | null;
+  Result?: DescribeWafDomainsResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3675,7 +3675,7 @@ declare interface DescribeZookeeperReplicasResponse {
   /** 注册引擎实例副本信息 */
   Replicas?: ZookeeperReplica[];
   /** 副本个数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4105,18 +4105,18 @@ declare interface PublishConfigFilesResponse {
   /** 配置文件发布是否成功 */
   Result?: boolean;
   /** 配置文件发布Id */
-  ConfigFileReleaseId?: string | null;
+  ConfigFileReleaseId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface RateLimitResponse {
   /** 自定义响应体 */
-  Body?: string | null;
+  Body?: string;
   /** Headers */
-  Headers?: KVMapping[] | null;
+  Headers?: KVMapping[];
   /** http状态码 */
-  HttpStatus?: number | null;
+  HttpStatus?: number;
 }
 
 declare interface RestartSREInstanceRequest {
@@ -4222,7 +4222,7 @@ declare interface UpdateUpstreamHealthCheckConfigRequest {
 
 declare interface UpdateUpstreamHealthCheckConfigResponse {
   /** 是否成功 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4238,7 +4238,7 @@ declare interface UpdateUpstreamTargetsRequest {
 
 declare interface UpdateUpstreamTargetsResponse {
   /** 是否更新成功 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

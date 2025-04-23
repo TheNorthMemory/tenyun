@@ -62,6 +62,8 @@ declare interface AlarmInfo {
   GroupTriggerStatus?: boolean;
   /** 分组触发条件。 */
   GroupTriggerCondition?: string[];
+  /** 告警策略绑定的标签信息。 */
+  Tags?: Tag[];
   /** 监控对象类型。0:执行语句共用监控对象;1:每个执行语句单独选择监控对象。 */
   MonitorObjectType?: number;
   /** 告警级别。0:警告(Warn);1:提醒(Info);2:紧急 (Critical)。 */
@@ -858,11 +860,11 @@ declare interface GroupTriggerConditionInfo {
   Value: string;
 }
 
-/** 日志内容高亮描述信息 */
+/** 符合检索条件的关键词，一般用于高亮显示。仅支持键值检索，不支持全文检索 */
 declare interface HighLightItem {
-  /** 高亮的日志Key */
+  /** 高亮的日志字段名称 */
   Key?: string;
-  /** 高亮的语法 */
+  /** 高亮的关键词 */
   Values?: string[];
 }
 
@@ -1010,6 +1012,8 @@ declare interface LogInfo {
   PkgId?: string;
   /** 请求包内日志的ID */
   PkgLogId?: string;
+  /** 符合检索条件的关键词，一般用于高亮显示。仅支持键值检索，不支持全文检索 */
+  HighLights?: HighLightItem[];
   /** 日志内容的Json序列化字符串 */
   LogJson?: string;
   /** 日志来源主机名称 */
@@ -1576,6 +1580,8 @@ declare interface ValueInfo {
   SqlFlag?: boolean;
   /** 是否包含中文，long及double类型字段需为false */
   ContainZH?: boolean;
+  /** 字段别名 */
+  Alias?: string;
 }
 
 /** 回调地址 */
@@ -2406,6 +2412,18 @@ declare interface DeleteConsumerRequest {
 }
 
 declare interface DeleteConsumerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCosRechargeRequest {
+  /** COS导入配置Id */
+  Id: string;
+  /** 日志主题Id */
+  TopicId: string;
+}
+
+declare interface DeleteCosRechargeResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3889,6 +3907,8 @@ declare interface SearchLogRequest {
   SamplingRate?: number;
   /** 为true代表使用新的检索结果返回方式，输出参数AnalysisRecords和Columns有效为false时代表使用老的检索结果返回方式, 输出AnalysisResults和ColNames有效两种返回方式在编码格式上有少量区别，建议使用true */
   UseNewAnalysis?: boolean;
+  /** 是否高亮符合检索条件的关键词，一般用于高亮显示。仅支持键值检索，不支持全文检索 */
+  HighLight?: boolean;
 }
 
 declare interface SearchLogResponse {
@@ -4023,6 +4043,8 @@ declare interface Cls {
   DeleteConsoleSharing(data: DeleteConsoleSharingRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsoleSharingResponse>;
   /** 删除投递配置 {@link DeleteConsumerRequest} {@link DeleteConsumerResponse} */
   DeleteConsumer(data: DeleteConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsumerResponse>;
+  /** 删除cos导入任务 {@link DeleteCosRechargeRequest} {@link DeleteCosRechargeResponse} */
+  DeleteCosRecharge(data: DeleteCosRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCosRechargeResponse>;
   /** 删除仪表盘订阅 {@link DeleteDashboardSubscribeRequest} {@link DeleteDashboardSubscribeResponse} */
   DeleteDashboardSubscribe(data: DeleteDashboardSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDashboardSubscribeResponse>;
   /** 删除数据加工任务 {@link DeleteDataTransformRequest} {@link DeleteDataTransformResponse} */

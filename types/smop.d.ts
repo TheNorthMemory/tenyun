@@ -65,7 +65,7 @@ declare interface SubmitTaskEventResponse {
 /** {@link Smop 腾讯安心用户运营平台} */
 declare interface Smop {
   (): Versions;
-  /** 提交任务事件 {@link SubmitTaskEventRequest} {@link SubmitTaskEventResponse} */
+  /** @deprecated 提交任务事件 {@link SubmitTaskEventRequest} {@link SubmitTaskEventResponse} */
   SubmitTaskEvent(data: SubmitTaskEventRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTaskEventResponse>;
 }
 

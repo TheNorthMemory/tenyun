@@ -18,6 +18,14 @@ declare interface DeviceFingerprint {
   Description?: string;
 }
 
+/** 独享版集群 */
+declare interface ExclusiveHSM {
+  /** 独享集群Id */
+  HsmClusterId?: string;
+  /** 独享集群名称 */
+  HsmClusterName?: string;
+}
+
 /** 返回CMK列表信息 */
 declare interface Key {
   /** CMK的全局唯一标识。 */
@@ -644,6 +652,8 @@ declare interface GetServiceStatusResponse {
   CmkUserCount?: number;
   /** 返回KMS用户密钥规格数量 */
   CmkLimit?: number;
+  /** 返回独享集群组 */
+  ExclusiveHSMList?: ExclusiveHSM[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

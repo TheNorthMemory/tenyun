@@ -17,31 +17,35 @@ declare interface AnalysisTaskResults {
   /** 任务创建时间，毫秒时间戳 */
   InstanceStartTime?: number;
   /** 任务结束时间，毫秒时间戳 */
-  InstanceCompleteTime?: number | null;
+  InstanceCompleteTime?: number;
   /** 任务状态：0 初始化， 1 执行中， 2 执行成功，3 数据写入中，4 排队中。-1 执行失败，-3 已取消。 */
   State?: number;
   /** 任务SQL语句 */
   SQL?: string;
   /** 计算资源名字 */
-  DataEngineName?: string | null;
+  DataEngineName?: string;
   /** 单位毫秒，引擎内执行耗时 */
-  JobTimeSum?: number | null;
-  /** 单位秒，CU资源消耗 */
-  TaskTimeSum?: number | null;
+  JobTimeSum?: number;
+  /** 单位秒，统计参与计算所用 Spark Executor 每个 core 的 CPU 执行时长总和 */
+  TaskTimeSum?: number;
   /** 数据扫描总行数 */
-  InputRecordsSum?: number | null;
+  InputRecordsSum?: number;
   /** 数据扫描总 bytes */
-  InputBytesSum?: number | null;
+  InputBytesSum?: number;
   /** 输出总行数 */
-  OutputRecordsSum?: number | null;
+  OutputRecordsSum?: number;
   /** 输出总 bytes */
-  OutputBytesSum?: number | null;
+  OutputBytesSum?: number;
   /** shuffle read 总 bytes */
-  ShuffleReadBytesSum?: number | null;
+  ShuffleReadBytesSum?: number;
   /** shuffle read 总行数 */
-  ShuffleReadRecordsSum?: number | null;
+  ShuffleReadRecordsSum?: number;
   /** 洞察结果类型分类，一个 json 数组，有如下几种类型：SPARK-StageScheduleDelay（资源抢占）, SPARK-ShuffleFailure（Shuffle异常）, SPARK-SlowTask（慢task）, SPARK-DataSkew（数据倾斜）, SPARK-InsufficientResource（磁盘或内存不足） */
-  AnalysisStatus?: string | null;
+  AnalysisStatus?: string;
+  /** 任务输出文件总数 */
+  OutputFilesNum?: number;
+  /** 任务输出小文件总数 */
+  OutputSmallFilesNum?: number;
 }
 
 /** 元数据基本对象 */
@@ -79,41 +83,41 @@ declare interface Asset {
 /** spark session batch SQL的消耗信息 */
 declare interface BatchSQLCostInfo {
   /** 任务id */
-  BatchId?: string | null;
+  BatchId?: string;
   /** 引擎名称 */
-  DataEngineName?: string | null;
+  DataEngineName?: string;
   /** 引擎id */
-  DataEngineId?: string | null;
+  DataEngineId?: string;
   /** 本次消耗，单位cu */
-  Cost?: number | null;
+  Cost?: number;
   /** 时间开销，秒 */
-  TimeCost?: number | null;
+  TimeCost?: number;
   /** 操作者 */
-  Operator?: string | null;
+  Operator?: string;
 }
 
 /** SparkSQL批任务信息 */
 declare interface BatchSqlTask {
   /** SQL子任务唯一标识 */
-  TaskId?: string | null;
+  TaskId?: string;
   /** 运行SQL */
-  ExecuteSQL?: string | null;
+  ExecuteSQL?: string;
   /** 任务信息，成功则返回：Task Success!，失败则返回异常信息 */
-  Message?: string | null;
+  Message?: string;
 }
 
 /** chdfs产品vpc信息 */
 declare interface CHDFSProductVpcInfo {
   /** vpc id */
-  VpcId?: string | null;
+  VpcId?: string;
   /** vpc名称 */
-  VpcName?: string | null;
+  VpcName?: string;
   /** vpc子网信息列表 */
-  VpcCidrBlock?: VpcCidrBlock[] | null;
+  VpcCidrBlock?: VpcCidrBlock[];
   /** 规则Id */
-  RuleId?: number | null;
+  RuleId?: number;
   /** 权限组Id */
-  AccessGroupId?: string | null;
+  AccessGroupId?: string;
 }
 
 /** CSV类型数据格式 */
@@ -147,19 +151,19 @@ declare interface Column {
   /** 对该类的注释。 */
   Comment?: string | null;
   /** 表示整个 numeric 的长度 */
-  Precision?: number | null;
+  Precision?: number;
   /** 表示小数部分的长度 */
-  Scale?: number | null;
+  Scale?: number;
   /** 是否为null */
-  Nullable?: string | null;
+  Nullable?: string;
   /** 字段位置，小的在前 */
-  Position?: number | null;
+  Position?: number;
   /** 字段创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 字段修改时间 */
-  ModifiedTime?: string | null;
+  ModifiedTime?: string;
   /** 是否为分区字段 */
-  IsPartition?: boolean | null;
+  IsPartition?: boolean;
   /** 数据脱敏策略信息 */
   DataMaskStrategyInfo?: DataMaskStrategyInfo | null;
 }
@@ -211,13 +215,13 @@ declare interface CrontabResumeSuspendStrategy {
 /** DLC 数据目录访问权限 */
 declare interface DLCCatalogAccess {
   /** VPCID */
-  VpcId: string | null;
+  VpcId: string;
   /** 产品类型 */
-  Product: string | null;
+  Product: string;
   /** 描述信息 */
-  Description?: string | null;
+  Description?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
 }
 
 /** 迁移列对象 */
@@ -381,7 +385,7 @@ declare interface DataEngineBasicInfo {
 /** 引擎配置信息 */
 declare interface DataEngineConfigInstanceInfo {
   /** 引擎ID */
-  DataEngineId?: string | null;
+  DataEngineId?: string;
   /** 用户自定义配置项集合 */
   DataEngineConfigPairs?: DataEngineConfigPair[];
   /** 作业集群资源参数配置模板 */
@@ -399,23 +403,23 @@ declare interface DataEngineConfigPair {
 /** 集群大版本镜像信息。 */
 declare interface DataEngineImageVersion {
   /** 镜像大版本ID */
-  ImageVersionId: string;
+  ImageVersionId?: string;
   /** 镜像大版本名称 */
-  ImageVersion: string;
+  ImageVersion?: string;
   /** 镜像大版本描述 */
-  Description: string | null;
+  Description?: string;
   /** 是否为公共版本：1：公共；2：私有 */
-  IsPublic: number;
+  IsPublic?: number;
   /** 集群类型：SparkSQL/PrestoSQL/SparkBatch */
-  EngineType: string;
+  EngineType?: string;
   /** 版本状态：1：初始化；2：上线；3：下线 */
-  IsSharedEngine: number;
+  IsSharedEngine?: number;
   /** 版本状态：1：初始化；2：上线；3：下线 */
-  State: number;
+  State?: number;
   /** 插入时间 */
-  InsertTime: string;
+  InsertTime?: string;
   /** 更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** DataEngine详细信息 */
@@ -579,25 +583,25 @@ declare interface DataFormat {
 /** 数据治理规则 */
 declare interface DataGovernPolicy {
   /** 治理规则类型，Customize: 自定义；Intelligence: 智能治理 */
-  RuleType?: string | null;
+  RuleType?: string;
   /** 治理引擎 */
-  GovernEngine?: string | null;
+  GovernEngine?: string;
 }
 
 /** 数据脱敏策略信息 */
 declare interface DataMaskStrategyInfo {
   /** 策略名称 */
-  StrategyName?: string | null;
+  StrategyName?: string;
   /** MASK_SHOW_FIRST_4; MASK_SHOW_LAST_4;MASK_HASH; MASK_DATE_SHOW_YEAR; MASK_NULL; MASK_DEFAULT 等 */
-  StrategyType?: string | null;
+  StrategyType?: string;
   /** 策略描述 */
-  StrategyDesc?: string | null;
+  StrategyDesc?: string;
   /** 用户组策略列表 */
   Groups?: GroupInfo[] | null;
   /** 用户子账号uin列表，按;拼接 */
-  Users?: string | null;
+  Users?: string;
   /** 策略Id */
-  StrategyId?: string | null;
+  StrategyId?: string;
 }
 
 /** 数据源详细信息 */
@@ -627,7 +631,7 @@ declare interface DatabaseInfo {
   /** 数据库属性列表。 */
   Properties?: Property[] | null;
   /** 数据库cos路径 */
-  Location?: string | null;
+  Location?: string;
 }
 
 /** 数据库对象 */
@@ -635,7 +639,7 @@ declare interface DatabaseResponseInfo {
   /** 数据库名称。 */
   DatabaseName?: string;
   /** 数据库描述信息，长度 0~256。 */
-  Comment?: string | null;
+  Comment?: string;
   /** 允许针对数据库的属性元数据信息进行指定。 */
   Properties?: Property[] | null;
   /** 数据库创建时间戳，单位：s。 */
@@ -643,15 +647,15 @@ declare interface DatabaseResponseInfo {
   /** 数据库更新时间戳，单位：s。 */
   ModifiedTime?: string | null;
   /** cos存储路径 */
-  Location?: string | null;
+  Location?: string;
   /** 建库用户昵称 */
-  UserAlias?: string | null;
+  UserAlias?: string;
   /** 建库用户ID */
-  UserSubUin?: string | null;
+  UserSubUin?: string;
   /** 数据治理配置项 */
   GovernPolicy?: DataGovernPolicy | null;
   /** 数据库ID（无效字段） */
-  DatabaseId?: string | null;
+  DatabaseId?: string;
 }
 
 /** 数据源属性 */
@@ -709,13 +713,13 @@ declare interface DatasourceConnectionInfo {
   /** 数据源绑定的计算引擎信息 */
   DataEngines?: DataEngineInfo[] | null;
   /** 创建人 */
-  UserAlias?: string | null;
+  UserAlias?: string;
   /** 网络配置列表 */
   NetworkConnectionSet?: NetworkConnection[] | null;
   /** 连通性状态：0（未测试，默认）、1（正常）、2（失败） */
-  ConnectivityState?: number | null;
+  ConnectivityState?: number;
   /** 连通性测试提示信息 */
-  ConnectivityTips?: string | null;
+  ConnectivityTips?: string;
 }
 
 /** 数据源连接的网络信息 */
@@ -757,13 +761,13 @@ declare interface Execution {
 /** FavorInfo */
 declare interface FavorInfo {
   /** 优先事项 */
-  Priority?: number | null;
+  Priority?: number;
   /** Catalog名称 */
-  Catalog?: string | null;
+  Catalog?: string;
   /** DataBase名称 */
-  DataBase?: string | null;
+  DataBase?: string;
   /** Table名称 */
-  Table?: string | null;
+  Table?: string;
 }
 
 /** 查询列表过滤条件参数 */
@@ -777,9 +781,9 @@ declare interface Filter {
 /** 数据脱敏用户组信息 */
 declare interface GroupInfo {
   /** 用户组ID */
-  WorkGroupId?: number | null;
+  WorkGroupId?: number;
   /** 策略类型 */
-  StrategyType?: string | null;
+  StrategyType?: string;
 }
 
 /** hive类型数据源的信息 */
@@ -895,13 +899,13 @@ declare interface LakeFsInfo {
   /** 创建时候的时间戳 */
   CreateTimeStamp?: number;
   /** 是否是用户默认桶，0：默认桶，1：非默认桶 */
-  DefaultBucket?: number | null;
+  DefaultBucket?: number;
   /** 托管存储short name */
-  ShortName?: string | null;
+  ShortName?: string;
   /** 桶描述信息 */
-  Description?: string | null;
+  Description?: string;
   /** 托管桶状态，当前取值为：creating、bind、readOnly、isolate */
-  Status?: string | null;
+  Status?: string;
 }
 
 /** 元数据加锁内容 */
@@ -927,15 +931,15 @@ declare interface LockComponentInfo {
 /** 绑定融合桶信息 */
 declare interface MountPointAssociates {
   /** 桶Id */
-  BucketId?: string | null;
+  BucketId?: string;
   /** vpcId */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 子网地址 */
-  VpcCidrBlock?: string | null;
+  VpcCidrBlock?: string;
   /** 权限组Id */
-  AccessGroupId?: string | null;
+  AccessGroupId?: string;
   /** 权限规则Id */
-  AccessRuleId?: number | null;
+  AccessRuleId?: number;
 }
 
 /** Mysql类型数据源信息 */
@@ -975,25 +979,25 @@ declare interface NetWork {
 /** 网络配置 */
 declare interface NetworkConnection {
   /** 网络配置id */
-  Id?: number | null;
+  Id?: number;
   /** 网络配置唯一标志符 */
-  AssociateId?: string | null;
+  AssociateId?: string;
   /** 计算引擎id */
-  HouseId?: string | null;
+  HouseId?: string;
   /** 数据源id(已废弃) */
-  DatasourceConnectionId?: string | null;
+  DatasourceConnectionId?: string;
   /** 网络配置状态（0-初始化，1-正常） */
   State?: number | null;
   /** 创建时间 */
-  CreateTime?: number | null;
+  CreateTime?: number;
   /** 修改时间 */
   UpdateTime?: number | null;
   /** 创建用户Appid */
   Appid?: number | null;
   /** 计算引擎名称 */
-  HouseName?: string | null;
+  HouseName?: string;
   /** 网络配置名称 */
-  DatasourceConnectionName?: string | null;
+  DatasourceConnectionName?: string;
   /** 网络配置类型 */
   NetworkConnectionType?: number | null;
   /** 创建用户uin */
@@ -1031,17 +1035,17 @@ declare interface NotebookSessionInfo {
   /** 依赖的pyspark虚拟环境地址，当前支持：cosn://和lakefs://两种路径 */
   ProgramArchives?: string[] | null;
   /** 指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu） */
-  DriverSize?: string | null;
+  DriverSize?: string;
   /** 指定的Executor规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu） */
-  ExecutorSize?: string | null;
+  ExecutorSize?: string;
   /** 指定的Executor数量，默认为1 */
-  ExecutorNumbers?: number | null;
+  ExecutorNumbers?: number;
   /** 代理用户，默认为root */
-  ProxyUser?: string | null;
+  ProxyUser?: string;
   /** 指定的Session超时时间，单位秒，默认3600秒 */
-  TimeoutInSecond?: number | null;
+  TimeoutInSecond?: number;
   /** Spark任务返回的AppId */
-  SparkAppId?: string | null;
+  SparkAppId?: string;
   /** Session唯一标识 */
   SessionId?: string;
   /** Session状态，包含：not_started（未启动）、starting（已启动）、idle（等待输入）、busy(正在运行statement)、shutting_down（停止）、error（异常）、dead（已退出）、killed（被杀死）、success（正常停止） */
@@ -1051,21 +1055,21 @@ declare interface NotebookSessionInfo {
   /** 其它信息 */
   AppInfo?: KVPair[] | null;
   /** Spark ui地址 */
-  SparkUiUrl?: string | null;
+  SparkUiUrl?: string;
   /** 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于ExecutorNumbers */
-  ExecutorMaxNumbers?: number | null;
+  ExecutorMaxNumbers?: number;
   /** session类型，group：资源组下session independent：独立资源session， 不依赖资源组 */
-  SessionType?: string | null;
+  SessionType?: string;
   /** 引擎id */
-  DataEngineId?: string | null;
+  DataEngineId?: string;
   /** 资源组id */
-  ResourceGroupId?: string | null;
+  ResourceGroupId?: string;
   /** 资源组名称 */
-  ResourceGroupName?: string | null;
+  ResourceGroupName?: string;
   /** session，pod大小 */
-  PodSize?: number | null;
+  PodSize?: number;
   /** pod数量 */
-  PodNumbers?: number | null;
+  PodNumbers?: number;
 }
 
 /** 按批提交Statement运行SQL任务。 */
@@ -1073,9 +1077,9 @@ declare interface NotebookSessionStatementBatchInformation {
   /** 任务详情列表 */
   NotebookSessionStatementBatch?: NotebookSessionStatementInfo[] | null;
   /** 当前批任务是否运行完成 */
-  IsAvailable?: boolean | null;
+  IsAvailable?: boolean;
   /** Session唯一标识 */
-  SessionId?: string | null;
+  SessionId?: string;
   /** Batch唯一标识 */
   BatchId?: string | null;
 }
@@ -1095,7 +1099,7 @@ declare interface NotebookSessionStatementInfo {
   /** Statement输出信息 */
   OutPut?: StatementOutput | null;
   /** 批任务id */
-  BatchId?: string | null;
+  BatchId?: string;
   /** 运行语句 */
   Code?: string;
   /** 任务ID */
@@ -1109,11 +1113,11 @@ declare interface NotebookSessions {
   /** Session唯一标识 */
   SessionId?: string;
   /** 代理用户，默认为root */
-  ProxyUser?: string | null;
+  ProxyUser?: string;
   /** Session状态，包含：not_started（未启动）、starting（已启动）、idle（等待输入）、busy(正在运行statement)、shutting_down（停止）、error（异常）、dead（已退出）、killed（被杀死）、success（正常停止） */
   State?: string;
   /** Spark任务返回的AppId */
-  SparkAppId?: string | null;
+  SparkAppId?: string;
   /** Session名称 */
   Name?: string;
   /** Session创建时间 */
@@ -1121,39 +1125,39 @@ declare interface NotebookSessions {
   /** 引擎名称 */
   DataEngineName?: string;
   /** 最新的运行时间 */
-  LastRunningTime?: string | null;
+  LastRunningTime?: string;
   /** 创建者 */
   Creator?: string;
   /** spark ui地址 */
-  SparkUiUrl?: string | null;
+  SparkUiUrl?: string;
   /** session类型，group：资源组session independent：独立资源session，不依赖资源组 */
-  SessionType?: string | null;
+  SessionType?: string;
   /** 引擎id */
-  DataEngineId?: string | null;
+  DataEngineId?: string;
   /** 资源组id */
-  ResourceGroupId?: string | null;
+  ResourceGroupId?: string;
   /** 资源组名字 */
-  ResourceGroupName?: string | null;
+  ResourceGroupName?: string;
 }
 
 /** 开通了第三方访问的用户信息 */
 declare interface OpendThirdAccessUserInfo {
   /** id信息 */
-  Id?: number | null;
+  Id?: number;
   /** 用户主UIN */
-  Uin?: string | null;
+  Uin?: string;
   /** 用户AppId */
-  AppId?: string | null;
+  AppId?: string;
   /** 开通时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
 }
 
 /** 数据优化引擎信息 */
 declare interface OptimizerEngineInfo {
   /** 引擎资源名称 */
-  HouseName: string | null;
+  HouseName: string;
   /** 引擎资源ID */
-  HouseId: string | null;
+  HouseId: string;
   /** 该参数仅针对spark作业引擎有效，用于执行数据优化任务的资源大小，不填时将采用该引擎所有资源 */
   HouseSize?: number | null;
 }
@@ -1167,13 +1171,13 @@ declare interface Other {
 /** 非DLC产品CHDFS绑定 */
 declare interface OtherCHDFSBinding {
   /** 产品名称 */
-  ProductName?: string | null;
+  ProductName?: string;
   /** 用户名称（该字段已废弃） */
-  SuperUser?: string[] | null;
+  SuperUser?: string[];
   /** vpc配置信息 */
-  VpcInfo?: CHDFSProductVpcInfo[] | null;
+  VpcInfo?: CHDFSProductVpcInfo[];
   /** 是否与该桶绑定（该字段已废弃） */
-  IsBind?: boolean | null;
+  IsBind?: boolean;
 }
 
 /** 其他数据源 */
@@ -1191,11 +1195,11 @@ declare interface Partition {
   /** 对分区的描述。 */
   Comment?: string;
   /** 隐式分区转换策略 */
-  Transform?: string | null;
+  Transform?: string;
   /** 转换策略参数 */
   TransformArgs?: string[] | null;
   /** 创建时间 */
-  CreateTime?: number | null;
+  CreateTime?: number;
 }
 
 /** 权限对象 */
@@ -1241,9 +1245,9 @@ declare interface Policy {
 /** 策略集合 */
 declare interface Policys {
   /** 策略集合 */
-  PolicySet: Policy[] | null;
+  PolicySet?: Policy[] | null;
   /** 策略总数 */
-  TotalCount: number | null;
+  TotalCount?: number;
 }
 
 /** Presto监控指标 */
@@ -1271,7 +1275,7 @@ declare interface PythonSparkImage {
   /** spark镜像名称 */
   SparkImageVersion?: string;
   /** spark镜像描述信息 */
-  Description?: string | null;
+  Description?: string;
   /** 创建时间 */
   CreateTime?: string;
   /** 更新时间 */
@@ -1281,19 +1285,19 @@ declare interface PythonSparkImage {
 /** ResourceInfo */
 declare interface ResourceInfo {
   /** 归属类型 */
-  AttributionType?: string | null;
+  AttributionType?: string;
   /** 资源类型 */
-  ResourceType?: string | null;
+  ResourceType?: string;
   /** 引擎名称 */
-  Name?: string | null;
+  Name?: string;
   /** 如资源类型为spark-sql 取值为Name, 如为spark-batch 取值为session app_name */
-  Instance?: string | null;
+  Instance?: string;
   /** 亲和性 */
   Favor?: FavorInfo[] | null;
   /** 状态 */
-  Status?: number | null;
+  Status?: number;
   /** 标准引擎资源组信息 */
-  ResourceGroupName?: string | null;
+  ResourceGroupName?: string;
 }
 
 /** SQL查询任务 */
@@ -1307,61 +1311,63 @@ declare interface SQLTask {
 /** script实例。 */
 declare interface Script {
   /** 脚本Id，长度36字节。 */
-  ScriptId?: string | null;
+  ScriptId?: string;
   /** 脚本名称，长度0-25。 */
-  ScriptName?: string | null;
+  ScriptName?: string;
   /** 脚本描述，长度0-50。 */
   ScriptDesc?: string | null;
   /** 默认关联数据库。 */
-  DatabaseName?: string | null;
+  DatabaseName?: string;
   /** SQL描述，长度0-10000。 */
   SQLStatement?: string | null;
   /** 更新时间戳， 单位：ms。 */
-  UpdateTime?: number | null;
+  UpdateTime?: number;
 }
 
 /** Spark批作业集群Session资源配置模板； */
 declare interface SessionResourceTemplate {
   /** driver规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge */
-  DriverSize?: string | null;
+  DriverSize?: string;
   /** executor规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge */
-  ExecutorSize?: string | null;
+  ExecutorSize?: string;
   /** 指定executor数量，最小值为1，最大值小于集群规格 */
-  ExecutorNums?: number | null;
+  ExecutorNums?: number;
   /** 指定executor max数量（动态配置场景下），最小值为1，最大值小于集群规格（当ExecutorMaxNumbers小于ExecutorNums时，改值设定为ExecutorNums） */
-  ExecutorMaxNumbers?: number | null;
+  ExecutorMaxNumbers?: number;
+  /** 运行时参数 */
+  RunningTimeParameters?: DataEngineConfigPair[];
 }
 
 /** 混合表中，change表的数据保存时间，单位为天 */
 declare interface SmartOptimizerChangeTablePolicy {
   /** change表的数据保存时间，单位为天 */
-  DataRetentionTime?: number | null;
+  DataRetentionTime?: number;
 }
 
 /** SmartOptimizerIndexPolicy */
 declare interface SmartOptimizerIndexPolicy {
   /** 开启索引 */
-  IndexEnable?: string | null;
+  IndexEnable?: string;
 }
 
 /** SmartOptimizerLifecyclePolicy */
 declare interface SmartOptimizerLifecyclePolicy {
   /** 生命周期启用 */
-  LifecycleEnable?: string | null;
+  LifecycleEnable?: string;
   /** 过期时间 */
-  Expiration?: number | null;
+  Expiration?: number;
   /** 是否删表 */
-  DropTable?: boolean | null;
+  DropTable?: boolean;
   /** 过期字段 */
-  ExpiredField?: string | null;
+  ExpiredField?: string;
   /** 过期字段格式 */
-  ExpiredFieldFormat?: string | null;
+  ExpiredFieldFormat?: string;
 }
 
 /** SmartOptimizerPolicy */
 declare interface SmartOptimizerPolicy {
   /** 是否继承 */
-  Inherit?: string | null;
+  Inherit?: string;
   /** ResourceInfo */
   Resources?: ResourceInfo[] | null;
   /** SmartOptimizerWrittenPolicy */
@@ -1377,7 +1383,7 @@ declare interface SmartOptimizerPolicy {
 /** SmartOptimizerWrittenPolicy */
 declare interface SmartOptimizerWrittenPolicy {
   /** none/enable/disable/default */
-  WrittenEnable?: string | null;
+  WrittenEnable?: string;
 }
 
 /** SmartPolicyRequest */
@@ -1391,17 +1397,17 @@ declare interface SmartPolicy {
 /** SmartPolicyBaseInfo */
 declare interface SmartPolicyBaseInfo {
   /** 用户uin */
-  Uin: string | null;
+  Uin: string;
   /** Catalog/Database/Table */
-  PolicyType?: string | null;
+  PolicyType?: string;
   /** Catalog名称 */
-  Catalog?: string | null;
+  Catalog?: string;
   /** 数据库名称 */
-  Database?: string | null;
+  Database?: string;
   /** 表名称 */
-  Table?: string | null;
+  Table?: string;
   /** 用户appid */
-  AppId?: string | null;
+  AppId?: string;
 }
 
 /** spark作业详情。 */
@@ -1503,11 +1509,11 @@ declare interface SparkMonitorMetrics {
 /** SparkSQL批任务运行日志 */
 declare interface SparkSessionBatchLog {
   /** 日志步骤：BEG/CS/DS/DSS/DSF/FINF/RTO/CANCEL/CT/DT/DTS/DTF/FINT/EXCE */
-  Step?: string | null;
+  Step?: string;
   /** 时间 */
-  Time?: string | null;
+  Time?: string;
   /** 日志提示 */
-  Message?: string | null;
+  Message?: string;
   /** 日志操作 */
   Operate?: SparkSessionBatchLogOperate[] | null;
 }
@@ -1515,9 +1521,9 @@ declare interface SparkSessionBatchLog {
 /** SparkSQL批任务日志操作信息。 */
 declare interface SparkSessionBatchLogOperate {
   /** 操作提示 */
-  Text?: string | null;
+  Text?: string;
   /** 操作类型：COPY、LOG、UI、RESULT、List、TAB */
-  Operate?: string | null;
+  Operate?: string;
   /** 补充信息：如：taskid、sessionid、sparkui等 */
   Supplement?: KVPair[] | null;
 }
@@ -1597,23 +1603,23 @@ declare interface TCHouseD {
 /** 表字段描述信息 */
 declare interface TColumn {
   /** 字段名称 */
-  Name: string | null;
+  Name: string;
   /** 字段类型 */
-  Type: string | null;
+  Type: string;
   /** 字段描述 */
-  Comment?: string | null;
+  Comment?: string;
   /** 字段默认值 */
-  Default?: string | null;
+  Default?: string;
   /** 字段是否是非空 */
-  NotNull?: boolean | null;
+  NotNull?: boolean;
   /** 表示整个 numeric 的长度,取值1-38 */
-  Precision?: number | null;
+  Precision?: number;
   /** 表示小数部分的长度Scale小于Precision */
-  Scale?: number | null;
+  Scale?: number;
   /** 字段位置，小的在前 */
-  Position?: number | null;
+  Position?: number;
   /** 是否为分区字段 */
-  IsPartition?: boolean | null;
+  IsPartition?: boolean;
 }
 
 /** 表分区字段信息 */
@@ -1643,17 +1649,17 @@ declare interface TableBaseInfo {
   /** 数据表名字 */
   TableName: string;
   /** 该数据表所属数据源名字 */
-  DatasourceConnectionName?: string | null;
+  DatasourceConnectionName?: string;
   /** 该数据表备注 */
   TableComment?: string | null;
   /** 具体类型，表or视图 */
-  Type?: string | null;
+  Type?: string;
   /** 数据格式类型，hive，iceberg等 */
-  TableFormat?: string | null;
+  TableFormat?: string;
   /** 建表用户昵称 */
-  UserAlias?: string | null;
+  UserAlias?: string;
   /** 建表用户ID */
-  UserSubUin?: string | null;
+  UserSubUin?: string;
   /** 数据治理配置项 */
   GovernPolicy?: DataGovernPolicy | null;
   /** 库数据治理是否关闭，关闭：true，开启：false */
@@ -1687,23 +1693,23 @@ declare interface TableResponseInfo {
   /** 数据表分块信息。 */
   Partitions?: Partition[] | null;
   /** 数据存储路径。 */
-  Location?: string | null;
+  Location?: string;
   /** 数据表属性信息。 */
   Properties?: Property[] | null;
   /** 数据表更新时间, 单位: ms。 */
-  ModifiedTime?: string | null;
+  ModifiedTime?: string;
   /** 数据表创建时间,单位: ms。 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 数据格式。 */
-  InputFormat?: string | null;
+  InputFormat?: string;
   /** 数据表存储大小（单位：Byte） */
-  StorageSize?: number | null;
+  StorageSize?: number;
   /** 数据表行数 */
-  RecordCount?: number | null;
+  RecordCount?: number;
   /** xxxx */
-  MapMaterializedViewName?: string | null;
+  MapMaterializedViewName?: string;
   /** 访问热点 */
-  HeatValue?: number | null;
+  HeatValue?: number;
   /** InputFormat的缩写 */
   InputFormatShort?: string;
 }
@@ -1767,7 +1773,7 @@ declare interface TaskResponseInfo {
   /** 数据影响统计信息。 */
   RowAffectInfo?: string;
   /** 任务结果数据表。 */
-  DataSet?: string | null;
+  DataSet?: string;
   /** 失败信息, 例如：errorMessage。该字段已废弃。 */
   Error?: string;
   /** 任务执行进度num/100(%) */
@@ -1777,47 +1783,47 @@ declare interface TaskResponseInfo {
   /** 执行SQL的引擎类型 */
   TaskType?: string;
   /** 任务进度明细 */
-  ProgressDetail?: string | null;
+  ProgressDetail?: string;
   /** 任务结束时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 计算资源id */
-  DataEngineId?: string | null;
+  DataEngineId?: string;
   /** 执行sql的子uin */
-  OperateUin?: string | null;
+  OperateUin?: string;
   /** 计算资源名字 */
-  DataEngineName?: string | null;
+  DataEngineName?: string;
   /** 导入类型是本地导入还是cos */
-  InputType?: string | null;
+  InputType?: string;
   /** 导入配置 */
-  InputConf?: string | null;
+  InputConf?: string;
   /** 数据条数 */
-  DataNumber?: number | null;
+  DataNumber?: number;
   /** 查询数据能不能下载 */
-  CanDownload?: boolean | null;
+  CanDownload?: boolean;
   /** 用户别名 */
-  UserAlias?: string | null;
+  UserAlias?: string;
   /** spark应用作业名 */
-  SparkJobName?: string | null;
+  SparkJobName?: string;
   /** spark应用作业Id */
-  SparkJobId?: string | null;
+  SparkJobId?: string;
   /** spark应用入口jar文件 */
-  SparkJobFile?: string | null;
+  SparkJobFile?: string;
   /** spark ui url */
-  UiUrl?: string | null;
+  UiUrl?: string;
   /** 任务耗时，单位： ms */
-  TotalTime?: number | null;
+  TotalTime?: number;
   /** spark app job执行task的程序入口参数 */
-  CmdArgs?: string | null;
+  CmdArgs?: string;
   /** 集群镜像大版本名称 */
-  ImageVersion?: string | null;
+  ImageVersion?: string;
   /** driver规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge */
-  DriverSize?: string | null;
+  DriverSize?: string;
   /** executor规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge */
-  ExecutorSize?: string | null;
+  ExecutorSize?: string;
   /** 指定executor数量，最小值为1，最大值小于集群规格 */
-  ExecutorNums?: number | null;
+  ExecutorNums?: number;
   /** 指定executor max数量（动态配置场景下），最小值为1，最大值小于集群规格（当ExecutorMaxNumbers小于ExecutorNums时，改值设定为ExecutorNums） */
-  ExecutorMaxNumbers?: number | null;
+  ExecutorMaxNumbers?: number;
   /** 任务公共指标数据 */
   CommonMetrics?: CommonMetrics | null;
   /** spark任务指标数据 */
@@ -1825,11 +1831,11 @@ declare interface TaskResponseInfo {
   /** presto任务指标数据 */
   PrestoMonitorMetrics?: PrestoMonitorMetrics | null;
   /** 结果文件格式：默认为csv */
-  ResultFormat?: string | null;
+  ResultFormat?: string;
   /** 引擎类型，SparkSQL：SparkSQL 引擎；SparkBatch：Spark作业引擎；PrestoSQL：Presto引擎 */
-  EngineTypeDetail?: string | null;
+  EngineTypeDetail?: string;
   /** spark引擎资源组名称 */
-  ResourceGroupName?: string | null;
+  ResourceGroupName?: string;
 }
 
 /** 任务结果信息。 */
@@ -1925,19 +1931,19 @@ declare interface TextFile {
   /** 文本类型，本参数取值为TextFile。 */
   Format?: string;
   /** 处理文本用的正则表达式。 */
-  Regex?: string | null;
+  Regex?: string;
 }
 
 /** 用户详细信息 */
 declare interface UserDetailInfo {
   /** 用户Id */
-  UserId?: string | null;
+  UserId?: string;
   /** 返回的信息类型，Group：返回的当前用户的工作组信息；DataAuth：返回的当前用户的数据权限信息；EngineAuth：返回的当前用户的引擎权限信息 */
-  Type?: string | null;
+  Type?: string;
   /** 用户类型：ADMIN：管理员 COMMON：一般用户 */
-  UserType?: string | null;
+  UserType?: string;
   /** 用户描述信息 */
-  UserDescription?: string | null;
+  UserDescription?: string;
   /** 数据权限信息集合 */
   DataPolicyInfo?: Policys | null;
   /** 引擎权限集合 */
@@ -1945,11 +1951,13 @@ declare interface UserDetailInfo {
   /** 绑定到该用户的工作组集合信息 */
   WorkGroupInfo?: WorkGroups | null;
   /** 用户别名 */
-  UserAlias?: string | null;
+  UserAlias?: string;
   /** 行过滤集合 */
   RowFilterInfo?: Policys | null;
   /** 账号类型 */
-  AccountType?: string | null;
+  AccountType?: string;
+  /** 数据源权限集合 */
+  CatalogPolicyInfo?: Policys | null;
 }
 
 /** 绑定到同一个工作组的用户Id的集合 */
@@ -1963,23 +1971,25 @@ declare interface UserIdSetOfWorkGroupId {
 /** 授权用户信息 */
 declare interface UserInfo {
   /** 用户Id，和子用户uin相同 */
-  UserId: string;
+  UserId?: string;
   /** 用户描述信息，方便区分不同用户 */
-  UserDescription: string | null;
+  UserDescription?: string;
   /** 单独给用户绑定的权限集合 */
-  PolicySet: Policy[] | null;
+  PolicySet?: Policy[] | null;
   /** 当前用户的创建者 */
-  Creator: string;
+  Creator?: string;
   /** 创建时间，格式如2021-07-28 16:19:32 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 关联的工作组集合 */
-  WorkGroupSet: WorkGroupMessage[] | null;
+  WorkGroupSet?: WorkGroupMessage[] | null;
   /** 是否是主账号 */
-  IsOwner: boolean | null;
+  IsOwner?: boolean;
   /** 用户类型。ADMIN：管理员 COMMON：普通用户。 */
-  UserType: string | null;
+  UserType?: string;
   /** 用户别名 */
-  UserAlias: string | null;
+  UserAlias?: string;
+  /** 账号类型 */
+  AccountType?: string;
 }
 
 /** 用户部分信息 */
@@ -2011,21 +2021,21 @@ declare interface UserRole {
   /** 角色描述信息 */
   Desc?: string;
   /** 角色名称 */
-  RoleName?: string | null;
+  RoleName?: string;
   /** 创建者UIN */
-  Creator?: string | null;
+  Creator?: string;
   /** cos授权路径列表 */
-  CosPermissionList?: CosPermission[] | null;
+  CosPermissionList?: CosPermission[];
   /** cam策略json */
-  PermissionJson?: string | null;
+  PermissionJson?: string;
 }
 
 /** 用户信息集合 */
 declare interface Users {
   /** 用户信息集合 */
-  UserSet: UserMessage[] | null;
+  UserSet?: UserMessage[] | null;
   /** 用户总数 */
-  TotalCount: number | null;
+  TotalCount?: number;
 }
 
 /** 视图基本配置信息 */
@@ -2057,41 +2067,41 @@ declare interface ViewResponseInfo {
 /** VPC子网信息 */
 declare interface VpcCidrBlock {
   /** 子网Id */
-  CidrId?: string | null;
+  CidrId?: string;
   /** 子网网段 */
-  CidrAddr?: string | null;
+  CidrAddr?: string;
 }
 
 /** vpc信息 */
 declare interface VpcInfo {
   /** vpc Id */
-  VpcId?: string | null;
+  VpcId?: string;
   /** vpc子网 */
-  VpcCidrBlock?: string | null;
+  VpcCidrBlock?: string;
   /** 规则Id */
-  RuleId?: number | null;
+  RuleId?: number;
   /** 权限组Id */
-  AccessGroupId?: string | null;
+  AccessGroupId?: string;
 }
 
 /** 工作组详细信息 */
 declare interface WorkGroupDetailInfo {
   /** 工作组Id */
-  WorkGroupId?: number | null;
+  WorkGroupId?: number;
   /** 工作组名称 */
-  WorkGroupName?: string | null;
+  WorkGroupName?: string;
   /** 包含的信息类型。User：用户信息；DataAuth：数据权限；EngineAuth:引擎权限 */
-  Type?: string | null;
+  Type?: string;
   /** 工作组上绑定的用户集合 */
-  UserInfo?: Users | null;
+  UserInfo?: Users;
   /** 数据权限集合 */
-  DataPolicyInfo?: Policys | null;
+  DataPolicyInfo?: Policys;
   /** 引擎权限集合 */
-  EnginePolicyInfo?: Policys | null;
+  EnginePolicyInfo?: Policys;
   /** 工作组描述信息 */
-  WorkGroupDescription?: string | null;
+  WorkGroupDescription?: string;
   /** 行过滤信息集合 */
-  RowFilterInfo?: Policys | null;
+  RowFilterInfo?: Policys;
   /** 数据目录权限集 */
   CatalogPolicyInfo?: Policy | null;
 }
@@ -2111,7 +2121,7 @@ declare interface WorkGroupInfo {
   /** 工作组名称 */
   WorkGroupName?: string;
   /** 工作组描述 */
-  WorkGroupDescription?: string | null;
+  WorkGroupDescription?: string;
   /** 工作组关联的用户数量 */
   UserNum?: number;
   /** 工作组关联的用户集合 */
@@ -2131,7 +2141,7 @@ declare interface WorkGroupMessage {
   /** 工作组名称 */
   WorkGroupName?: string;
   /** 工作组描述 */
-  WorkGroupDescription?: string | null;
+  WorkGroupDescription?: string;
   /** 创建者 */
   Creator?: string;
   /** 工作组创建的时间，形如2021-07-28 16:19:32 */
@@ -2141,9 +2151,9 @@ declare interface WorkGroupMessage {
 /** 工作组集合 */
 declare interface WorkGroups {
   /** 工作组信息集合 */
-  WorkGroupSet: WorkGroupMessage[] | null;
+  WorkGroupSet?: WorkGroupMessage[] | null;
   /** 工作组总数 */
-  TotalCount: number | null;
+  TotalCount?: number;
 }
 
 declare interface AddDMSPartitionsRequest {
@@ -2381,7 +2391,7 @@ declare interface CheckDataEngineConfigPairsValidityResponse {
   /** 参数有效性：ture:有效，false:至少存在一个无效参数； */
   IsAvailable?: boolean;
   /** 无效参数集合 */
-  UnavailableConfig?: string[] | null;
+  UnavailableConfig?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2451,7 +2461,7 @@ declare interface CreateCHDFSBindingProductRequest {
 
 declare interface CreateCHDFSBindingProductResponse {
   /** 绑定信息 */
-  MountPointAssociates?: MountPointAssociates[] | null;
+  MountPointAssociates?: MountPointAssociates[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2699,7 +2709,7 @@ declare interface CreateNotebookSessionResponse {
   /** Session唯一标识 */
   SessionId?: string;
   /** Spark任务返回的AppId */
-  SparkAppId?: string | null;
+  SparkAppId?: string;
   /** Session状态，包含：not_started（未启动）、starting（已启动）、idle（等待输入）、busy(正在运行statement)、shutting_down（停止）、error（异常）、dead（已退出）、killed（被杀死）、success（正常停止） */
   State?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -2835,7 +2845,7 @@ declare interface CreateSparkAppRequest {
 
 declare interface CreateSparkAppResponse {
   /** App唯一标识 */
-  SparkAppId?: string | null;
+  SparkAppId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2973,7 +2983,7 @@ declare interface CreateTaskRequest {
 
 declare interface CreateTaskResponse {
   /** 任务ID */
-  TaskId?: string | null;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3173,13 +3183,15 @@ declare interface DescribeAdvancedStoreLocationRequest {
 
 declare interface DescribeAdvancedStoreLocationResponse {
   /** 是否启用高级设置：0-否，1-是 */
-  Enable: number;
+  Enable?: number;
   /** 查询结果保存cos路径 */
-  StoreLocation: string;
+  StoreLocation?: string;
   /** 是否有托管存储权限 */
-  HasLakeFs: boolean;
+  HasLakeFs?: boolean;
   /** 托管存储状态，HasLakeFs等于true时，该值才有意义 */
-  LakeFsStatus: string | null;
+  LakeFsStatus?: string;
+  /** 托管存储桶类型 */
+  BucketType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3215,13 +3227,13 @@ declare interface DescribeDMSDatabaseRequest {
 
 declare interface DescribeDMSDatabaseResponse {
   /** 数据库名称 */
-  Name?: string | null;
+  Name?: string;
   /** schema名称 */
-  SchemaName?: string | null;
+  SchemaName?: string;
   /** 存储地址 */
-  Location?: string | null;
+  Location?: string;
   /** 数据对象 */
-  Asset?: Asset | null;
+  Asset?: Asset;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3285,41 +3297,41 @@ declare interface DescribeDMSTableRequest {
 
 declare interface DescribeDMSTableResponse {
   /** 基础对象 */
-  Asset?: Asset | null;
+  Asset?: Asset;
   /** 视图文本 */
-  ViewOriginalText?: string | null;
+  ViewOriginalText?: string;
   /** 视图文本 */
-  ViewExpandedText?: string | null;
+  ViewExpandedText?: string;
   /** hive维护版本 */
-  Retention?: number | null;
+  Retention?: number;
   /** 存储对象 */
-  Sds?: DMSSds | null;
+  Sds?: DMSSds;
   /** 分区列 */
   PartitionKeys?: DMSColumn[] | null;
   /** 分区 */
   Partitions?: DMSPartition[] | null;
   /** 表类型 */
-  Type?: string | null;
+  Type?: string;
   /** 数据库名称 */
-  DbName?: string | null;
+  DbName?: string;
   /** Schame名称 */
-  SchemaName?: string | null;
+  SchemaName?: string;
   /** 存储大小 */
-  StorageSize?: number | null;
+  StorageSize?: number;
   /** 记录数量 */
-  RecordCount?: number | null;
+  RecordCount?: number;
   /** 生命周期 */
-  LifeTime?: number | null;
+  LifeTime?: number;
   /** 最后访问时间 */
-  LastAccessTime?: string | null;
+  LastAccessTime?: string;
   /** 数据更新时间 */
-  DataUpdateTime?: string | null;
+  DataUpdateTime?: string;
   /** 结构更新时间 */
-  StructUpdateTime?: string | null;
+  StructUpdateTime?: string;
   /** 列 */
   Columns?: DMSColumn[] | null;
   /** 表名称 */
-  Name?: string | null;
+  Name?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3359,7 +3371,7 @@ declare interface DescribeDMSTablesResponse {
   /** DMS元数据列表信息 */
   TableList?: DMSTableInfo[] | null;
   /** 统计值 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3379,13 +3391,13 @@ declare interface DescribeDataEngineEventsResponse {
   /** 事件详细信息 */
   Events?: HouseEventsInfo[] | null;
   /** 分页号 */
-  Page?: number | null;
+  Page?: number;
   /** 分页大小 */
-  Size?: number | null;
+  Size?: number;
   /** 总页数 */
-  TotalPages?: number | null;
+  TotalPages?: number;
   /** 总条数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3465,7 +3477,7 @@ declare interface DescribeDataEnginesResponse {
   /** 数据引擎列表 */
   DataEngines?: DataEngineInfo[] | null;
   /** 总条数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3667,17 +3679,17 @@ declare interface DescribeNotebookSessionStatementSqlResultResponse {
   /** schema */
   ResultSchema?: Column[];
   /** 分页信息 */
-  NextToken?: string | null;
+  NextToken?: string;
   /** 存储结果地址 */
-  OutputPath?: string | null;
+  OutputPath?: string;
   /** 引擎计算耗时 */
-  UseTime?: number | null;
+  UseTime?: number;
   /** 结果条数 */
-  AffectRows?: number | null;
+  AffectRows?: number;
   /** 数据扫描量 */
-  DataAmount?: number | null;
+  DataAmount?: number;
   /** spark ui地址 */
-  UiUrl?: string | null;
+  UiUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3749,17 +3761,17 @@ declare interface DescribeResultDownloadRequest {
 
 declare interface DescribeResultDownloadResponse {
   /** 下载文件路径 */
-  Path?: string | null;
+  Path?: string;
   /** 任务状态 init | queue | format | compress | success| timeout | error */
   Status?: string;
   /** 任务异常原因 */
-  Reason?: string | null;
+  Reason?: string;
   /** 临时SecretId */
-  SecretId?: string | null;
+  SecretId?: string;
   /** 临时SecretKey */
-  SecretKey?: string | null;
+  SecretKey?: string;
   /** 临时Token */
-  Token?: string | null;
+  Token?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3907,7 +3919,7 @@ declare interface DescribeStoreLocationRequest {
 
 declare interface DescribeStoreLocationResponse {
   /** 返回用户设置的结果存储位置路径，如果未设置则返回空字符串："" */
-  StoreLocation: string | null;
+  StoreLocation?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4027,13 +4039,13 @@ declare interface DescribeTaskLogRequest {
 
 declare interface DescribeTaskLogResponse {
   /** 下一次分页参数 */
-  Context?: string | null;
+  Context?: string;
   /** 是否获取完结 */
-  ListOver?: boolean | null;
+  ListOver?: boolean;
   /** 日志详情 */
-  Results?: JobLogResult[] | null;
+  Results?: JobLogResult[];
   /** 日志url */
-  LogUrl?: string | null;
+  LogUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4127,9 +4139,9 @@ declare interface DescribeTasksCostInfoRequest {
 
 declare interface DescribeTasksCostInfoResponse {
   /** 下一页的标识 */
-  SearchAfter?: string | null;
+  SearchAfter?: string;
   /** 返回的数据，字符串类型的二维数组，首行为列中文名称 */
-  Data?: string | null;
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4229,7 +4241,7 @@ declare interface DescribeUserDataEngineConfigRequest {
 
 declare interface DescribeUserDataEngineConfigResponse {
   /** 用户引擎自定义配置项列表。 */
-  DataEngineConfigInstanceInfos?: DataEngineConfigInstanceInfo[] | null;
+  DataEngineConfigInstanceInfos?: DataEngineConfigInstanceInfo[];
   /** 配置项总数。 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -4289,7 +4301,7 @@ declare interface DescribeUserTypeRequest {
 
 declare interface DescribeUserTypeResponse {
   /** 用户类型。ADMIN：管理员 COMMON：普通用户 */
-  UserType?: string | null;
+  UserType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4549,13 +4561,13 @@ declare interface ListTaskJobLogDetailRequest {
 
 declare interface ListTaskJobLogDetailResponse {
   /** 下一次分页参数 */
-  Context?: string | null;
+  Context?: string;
   /** 是否获取完结 */
-  ListOver?: boolean | null;
+  ListOver?: boolean;
   /** 日志详情 */
-  Results?: JobLogResult[] | null;
-  /** 日志url */
-  LogUrl?: string | null;
+  Results?: JobLogResult[];
+  /** 日志url(字段已废弃) */
+  LogUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4771,7 +4783,7 @@ declare interface QueryInternalTableWarehouseResponse {
 declare interface QueryResultRequest {
   /** 任务ID */
   TaskId: string;
-  /** lastReadFile为上一次读取的文件，lastReadOffset为上一次读取到的位置 */
+  /** objectListMarker={marker}&lastReadFile={filename}&lastReadOffsetlastReadFile为上一次读取的文件，lastReadOffset为上一次读取到的位置 */
   NextToken?: string;
 }
 
@@ -4783,7 +4795,7 @@ declare interface QueryResultResponse {
   /** schema */
   ResultSchema?: Column[];
   /** 分页信息 */
-  NextToken?: string | null;
+  NextToken?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4805,9 +4817,9 @@ declare interface QueryTaskCostDetailRequest {
 
 declare interface QueryTaskCostDetailResponse {
   /** 下一页的标识 */
-  SearchAfter?: string | null;
+  SearchAfter?: string;
   /** 返回的数据 */
-  Data?: string | null;
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

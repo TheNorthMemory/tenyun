@@ -194,9 +194,9 @@ declare interface BackupPolicy {
 declare interface BandwidthPackage {
   /** 带宽包唯一标识Id */
   BandwidthPackageId?: string;
-  /** 带宽包类型，包括'BGP','SINGLEISP','ANYCAST','SINGLEISP_CMCC','SINGLEISP_CTCC','SINGLEISP_CUCC' */
+  /** 带宽包类型，包括：BGP: 普通BGP共享带宽包HIGH_QUALITY_BGP: 精品BGP共享带宽包ANYCAST：公网加速带宽包SINGLEISP_CMCC: 中国移动共享带宽包SINGLEISP_CTCC: 中国电信共享带宽包SINGLEISP_CUCC: 中国联通共享带宽包 */
   NetworkType?: string;
-  /** 带宽包计费类型，包括:'TOP5_POSTPAID_BY_MONTH':按月后付费TOP5计费 'PERCENT95_POSTPAID_BY_MONTH':按月后付费月95计费'ENHANCED95_POSTPAID_BY_MONTH':按月后付费增强型95计费'FIXED_PREPAID_BY_MONTH':包月预付费计费‘PEAK_BANDWIDTH_POSTPAID_BY_DAY’: 后付费日结按带宽计费 */
+  /** 带宽包计费类型, 包括:ENHANCED95_POSTPAID_BY_MONTH: 后付费-增强型95计费PRIMARY_TRAFFIC_POSTPAID_BY_HOUR: 后付费-按主流量计费BANDWIDTH_POSTPAID_BY_DAY: 常规BGP-后付费-按带宽计费FIXED_PREPAID_BY_MONTH: 常规BGP-预付费PEAK_BANDWIDTH_POSTPAID_BY_DAY: 静态单线-后付费-按日结算TOP5_POSTPAID_BY_MONTH: 后付费-TOP5计费，如需使用，请提交工单申请 */
   ChargeType?: string;
   /** 带宽包名称 */
   BandwidthPackageName?: string;
@@ -224,9 +224,9 @@ declare interface BandwidthPackageBillBandwidth {
 declare interface BandwidthRange {
   /** 资源ID。 */
   ResourceId?: string;
-  /** 带宽下限，单位：Mbps。 */
+  /** 带宽下限，单位：Mbps。计费类型以及对应的带宽下限：- TOP5_POSTPAID_BY_MONTH: 默认无下限- BANDWIDTH_POSTPAID_BY_DAY: 50- FIXED_PREPAID_BY_MONTH: 100- ENHANCED95_POSTPAID_BY_MONTH: 300- PEAK_BANDWIDTH_POSTPAID_BY_DAY: 50- PRIMARY_TRAFFIC_POSTPAID_BY_HOUR: 50 */
   BandwidthLowerLimit?: number;
-  /** 带宽上限，单位：Mbps。 */
+  /** 带宽上限，单位：Mbps。计费类型以及对应的带宽上限：- TOP5_POSTPAID_BY_MONTH: 默认无上限- BANDWIDTH_POSTPAID_BY_DAY: 300- FIXED_PREPAID_BY_MONTH: 5000- ENHANCED95_POSTPAID_BY_MONTH: 5000- PEAK_BANDWIDTH_POSTPAID_BY_DAY: 300- PRIMARY_TRAFFIC_POSTPAID_BY_HOUR: 2000 */
   BandwidthUpperLimit?: number;
 }
 
@@ -605,9 +605,9 @@ declare interface CcnRouteTableSelectPolicy {
 /** 用于发布云联网的cidr信息 */
 declare interface CidrForCcn {
   /** local cidr值。 */
-  Cidr?: string | null;
+  Cidr?: string;
   /** 是否发布到了云联网。 */
-  PublishedToVbc?: boolean | null;
+  PublishedToVbc?: boolean;
 }
 
 /** 私有网络和基础网络互通设备 */
@@ -1002,21 +1002,21 @@ declare interface FilterObject {
 
 /** 流日志 */
 declare interface FlowLog {
-  /** 私用网络ID或者统一ID，建议使用统一ID。 */
+  /** 私用网络唯一ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。 */
   VpcId?: string;
   /** 流日志唯一ID。 */
   FlowLogId?: string;
   /** 流日志实例名字。 */
   FlowLogName?: string;
-  /** 流日志所属资源类型，VPC|SUBNET|NETWORKINTERFACE|CCN|NAT|DCG。 */
+  /** 流日志所属资源类型：VPC(私有网络)，SUBNET（子网），NETWORKINTERFACE（网卡），CCN（云联网），NAT（网络地址转化），DCG（专线网关）。 */
   ResourceType?: string;
   /** 资源唯一ID。 */
   ResourceId?: string;
-  /** 流日志采集类型，ACCEPT|REJECT|ALL。 */
+  /** 流日志采集类型，ACCEPT（允许），REJECT（拒绝），ALL（全部）。 */
   TrafficType?: string;
   /** 流日志存储ID。 */
   CloudLogId?: string;
-  /** 流日志存储ID状态。 */
+  /** 流日志存储ID状态。SUCCESS（成功），DELETED（删除）。 */
   CloudLogState?: string;
   /** 流日志描述信息。 */
   FlowLogDescription?: string;
@@ -1027,11 +1027,11 @@ declare interface FlowLog {
   /** 是否启用，true-启用，false-停用。 */
   Enable?: boolean;
   /** 消费端类型：cls、ckafka。 */
-  StorageType?: string | null;
+  StorageType?: string;
   /** 消费端信息，当消费端类型为ckafka时返回。 */
-  FlowLogStorage?: FlowLogStorage | null;
+  FlowLogStorage?: FlowLogStorage;
   /** 流日志存储ID对应的地域信息。 */
-  CloudLogRegion?: string | null;
+  CloudLogRegion?: string;
 }
 
 /** 流日志存储信息 */
@@ -1039,7 +1039,7 @@ declare interface FlowLogStorage {
   /** 存储实例Id，当流日志存储类型为ckafka时，必填。 */
   StorageId: string;
   /** 主题Id，当流日志存储类型为ckafka时，必填。 */
-  StorageTopic?: string | null;
+  StorageTopic?: string;
 }
 
 /** 网关流量监控明细 */
@@ -1072,6 +1072,26 @@ declare interface GatewayQos {
   CreateTime?: string;
 }
 
+/** 全局路由对象。 */
+declare interface GlobalRoute {
+  /** 作为出参展示，表示VPC唯一Id，。 */
+  VpcId?: string;
+  /** 全局路由唯一Id。 */
+  GlobalRouteId?: string;
+  /** Ipv4目标网段。 */
+  DestinationCidrBlock?: string;
+  /** 下一跳类型，支持 NORMAL_CVM。 */
+  GatewayType?: string;
+  /** 下一跳对象，如果GatewayType类型是NORMAL_CVM填写子机IP。 */
+  GatewayId?: string;
+  /** 备注。 */
+  Description?: string;
+  /** 创建时间。 */
+  CreatedTime?: string;
+  /** 支持的 ECMP算法有：- ECMP_QUINTUPLE_HASH：五元组hash- ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash- ECMP_DESTINATION_IP_HASH：目的IP hash- ECMP_SOURCE_IP_HASH：源IP hash。 */
+  SubnetRouteAlgorithm?: string;
+}
+
 /** 描述 HAVIP 信息 */
 declare interface HaVip {
   /** `HAVIP`的`ID`，是`HAVIP`的唯一标识。 */
@@ -1097,25 +1117,25 @@ declare interface HaVip {
   /** 使用havip的业务标识。 */
   Business?: string;
   /** `HAVIP`的飘移范围。 */
-  HaVipAssociationSet?: HaVipAssociation[] | null;
+  HaVipAssociationSet?: HaVipAssociation[];
   /** 是否开启`HAVIP`的飘移范围校验。 */
-  CheckAssociate?: boolean | null;
+  CheckAssociate?: boolean;
   /** CDC实例ID。 */
-  CdcId?: string | null;
+  CdcId?: string;
   /** HAVIP 刷新时间。该参数只作为出参数。以下场景会触发 FlushTime 被刷新：1）子机发出免费 ARP 触发 HAVIP 漂移；2）手动HAVIP解绑网卡; 没有更新时默认值：0000-00-00 00:00:00 */
-  FlushedTime?: string | null;
+  FlushedTime?: string;
   /** 标签键值对。 */
-  TagSet?: Tag[] | null;
+  TagSet?: Tag[];
 }
 
 /** HaVip绑定的子机/网卡（用于限制HaVip飘移的范围，并不是真正的飘移动作）。 */
 declare interface HaVipAssociation {
   /** HaVip绑定的子机或网卡唯一ID。 */
-  InstanceId: string | null;
+  InstanceId: string;
   /** HaVip实例唯一ID。 */
-  HaVipId?: string | null;
+  HaVipId?: string;
   /** HaVip绑定的类型。取值:CVM, ENI。 */
-  InstanceType?: string | null;
+  InstanceType?: string;
 }
 
 /** VPN通道健康检查配置 */
@@ -1141,41 +1161,41 @@ declare interface HighPriorityModifyItem {
 /** 高优路由表条目信息 */
 declare interface HighPriorityRoute {
   /** 高优路由表唯一 ID */
-  HighPriorityRouteTableId?: string | null;
+  HighPriorityRouteTableId?: string;
   /** 高优路由表条目唯一 ID */
-  HighPriorityRouteId?: string | null;
+  HighPriorityRouteId?: string;
   /** 目标网段 */
-  DestinationCidrBlock?: string | null;
+  DestinationCidrBlock?: string;
   /** 网关类型 */
-  GatewayType?: string | null;
+  GatewayType?: string;
   /** 网关唯一ID */
-  GatewayId?: string | null;
+  GatewayId?: string;
   /** 高优路由条目描述 */
-  Description?: string | null;
+  Description?: string;
   /** ECMP算法，支持的算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。 */
-  SubnetRouteAlgorithm?: string | null;
+  SubnetRouteAlgorithm?: string;
   /** 出参展示，是否为CDC属性高优路由 */
-  IsCdc?: boolean | null;
+  IsCdc?: boolean;
   /** 出参展示，CDC 唯一ID */
-  CdcId?: string | null;
+  CdcId?: string;
   /** 创建时间。 */
-  CreatedTime?: string | null;
+  CreatedTime?: string;
 }
 
 /** 高优路由表信息 */
 declare interface HighPriorityRouteTable {
   /** 高优路由表唯一 ID。 */
-  HighPriorityRouteTableId?: string | null;
+  HighPriorityRouteTableId?: string;
   /** VPC实例ID。 */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 高优路由表名称。 */
-  Name?: string | null;
+  Name?: string;
   /** 高优路由表关联的子网列表。 */
-  SubnetSet?: string[] | null;
+  SubnetSet?: string[];
   /** 高优路由表条目信息 */
-  HighPriorityRouteSet?: HighPriorityRoute[] | null;
+  HighPriorityRouteSet?: HighPriorityRoute[];
   /** 创建时间。 */
-  CreatedTime?: string | null;
+  CreatedTime?: string;
 }
 
 /** IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议 */
@@ -1222,6 +1242,12 @@ declare interface IPSECOptionsSpecification {
   IntegrityAlgorithm?: string;
 }
 
+/** 返回多运营商IPv6 Cidr Block */
+declare interface ISPIPv6CidrBlock {
+  /** IPv6 Cidr 的类型：`GUA`(全球单播地址), `ULA`(唯一本地地址) */
+  AddressType?: string;
+}
+
 /** 云联网实例绑定路由表信息 */
 declare interface InstanceBind {
   /** 云联网ID。 */
@@ -1250,6 +1276,14 @@ declare interface InstanceChargePrepaid {
   Period: number;
   /** 自动续费标识。取值范围： NOTIFY_AND_AUTO_RENEW：通知过期且自动续费， NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费。默认：NOTIFY_AND_AUTO_RENEW */
   RenewFlag?: string;
+}
+
+/** 云服务器巨帧状态 */
+declare interface InstanceJumbo {
+  /** 实例ID。 */
+  InstanceId?: string;
+  /** 实例是否支持巨帧。 */
+  JumboState?: boolean;
 }
 
 /** 用于描述实例的统计信息 */
@@ -1403,9 +1437,9 @@ declare interface Ipv6Address {
   /** `IPv6`地址状态：`PENDING`：生产中`MIGRATING`：迁移中`DELETING`：删除中`AVAILABLE`：可用的 */
   State?: string;
   /** 如果 IPv6地址是 ULA 类型，绑定的公网IP地址。 */
-  PublicIpAddress?: string | null;
-  /** `IPv6`地址的类型: `GUA`(全球单播地址), `OTHER`(非GUA/ULA地址), `ULA`(唯一本地地址) */
-  AddressType?: string | null;
+  PublicIpAddress?: string;
+  /** `IPv6`地址的类型: `GUA`(全球单播地址), `ULA`(唯一本地地址) */
+  AddressType?: string;
 }
 
 /** IPv6子网段对象。 */
@@ -1459,7 +1493,7 @@ declare interface LocalGateway {
   /** 本地网关创建时间 */
   CreateTime?: string;
   /** 标签键值对。 */
-  TagSet?: Tag[] | null;
+  TagSet?: Tag[];
   /** 本地网关实例ID（计划起用） */
   LocalGatewayId?: string;
 }
@@ -1693,9 +1727,9 @@ declare interface NetworkAclEntry {
   /** 优先级，从1开始。 */
   Priority?: number;
   /** IPv4网络ACL条目唯一ID。当修改ACL条目时，NetworkAclIpv4EntryId和NetworkAclIpv6EntryID至少提供一个。 */
-  NetworkAclIpv4EntryId?: string | null;
+  NetworkAclIpv4EntryId?: string;
   /** IPv6网络ACL条目唯一ID。当修改ACL条目时，NetworkAclIpv4EntryId和NetworkAclIpv6EntryId至少提供一个。 */
-  NetworkAclIpv6EntryId?: string | null;
+  NetworkAclIpv6EntryId?: string;
 }
 
 /** 网络ACL规则集合 */
@@ -1845,13 +1879,13 @@ declare interface PeerConnection {
 /** 安全组策略统计 */
 declare interface PolicyStatistics {
   /** 入站IPv4总数 */
-  IngressIPv4TotalCount: number | null;
+  IngressIPv4TotalCount: number;
   /** 入站IPv6总数 */
-  IngressIPv6TotalCount: number | null;
+  IngressIPv6TotalCount: number;
   /** 出站IPv4总数 */
-  EgressIPv4TotalCount: number | null;
+  EgressIPv4TotalCount: number;
   /** 出站IPv6总数 */
-  EgressIPv6TotalCount: number | null;
+  EgressIPv6TotalCount: number;
 }
 
 /** 价格 */
@@ -1966,7 +2000,7 @@ declare interface ProductQuota {
 
 /** 描述配额信息 */
 declare interface Quota {
-  /** 配额名称，取值范围：- `TOTAL_EIP_QUOTA`：用户当前地域下EIP的配额数；- `DAILY_EIP_APPLY`：用户当前地域下今日申购次数；- `DAILY_PUBLIC_IP_ASSIGN`：用户当前地域下，重新分配公网 IP次数；- `TOTAL_EIP6_QUOTA`：用户当前地域下，传统弹性公网IPv6的配额数；- `BGP_EIPv6_QUOTA`：用户当前地域下，可申请的 BGP 弹性公网IPv6 的配额数；- `SINGLEISP_EIPv6_QUOTA`：用户当前地域下，可申请的静态单线弹性公网IPv6 的配额数； */
+  /** 配额名称，取值范围：- `TOTAL_EIP_QUOTA`：用户当前地域下EIP的配额数；- `DAILY_EIP_APPLY`：用户当前地域下今日申购次数；- `DAILY_PUBLIC_IP_ASSIGN`：用户当前地域下，重新分配公网 IP次数；- `TOTAL_EIP6_QUOTA`：用户当前地域下，传统弹性公网IPv6的配额数；- `BGP_EIPv6_QUOTA`：用户当前地域下，可申请的 BGP 弹性公网IPv6 的配额数；- `SINGLEISP_EIPv6_QUOTA`：用户当前地域下，可申请的静态单线弹性公网IPv6 的配额数；- `TOTAL_BANDWIDTHPKG_QUOTA`：用户当前地域下，可申请的带宽包总配额；- `PRIMARY_TRAFFIC_SINGLE_BWP_QUOTA`：用户当前地域下，可申请的静态单线主流量带宽包配额数；- `PRIMARY_TRAFFIC_BGP_BWP_QUOTA`：用户当前地域下，可申请的BGP主流量带宽包配额数；- `BandwidthGuaranteedRatio`：用户当前地域下，保底带宽包默认保底比例；- `TezBandwidthGuaranteedRatio`：用户当前地域下，边缘可用区保底带宽包默认保底比例； */
   QuotaId?: string;
   /** 当前数量 */
   QuotaCurrent?: number;
@@ -2173,9 +2207,9 @@ declare interface RouteConflict {
 /** 用于修改入路由表ECMP算法。现在支持的算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。 */
 declare interface RouteECMPAlgorithm {
   /** 目标网段 */
-  DestinationCidrBlock?: string | null;
+  DestinationCidrBlock?: string;
   /** 支持的 ECMP算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。 */
-  SubnetRouteAlgorithm?: string | null;
+  SubnetRouteAlgorithm?: string;
 }
 
 /** 路由表选择策略信息 */
@@ -2219,15 +2253,15 @@ declare interface RouteTable {
   /** 标签键值对。 */
   TagSet?: Tag[];
   /** local路由是否发布云联网。 */
-  LocalCidrForCcn?: CidrForCcn[] | null;
+  LocalCidrForCcn?: CidrForCcn[];
 }
 
 /** 路由表关联关系 */
 declare interface RouteTableAssociation {
   /** 子网实例ID。 */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 路由表实例ID。 */
-  RouteTableId?: string | null;
+  RouteTableId?: string;
 }
 
 /** 安全组对象 */
@@ -2247,7 +2281,7 @@ declare interface SecurityGroup {
   /** 标签键值对。 */
   TagSet?: Tag[];
   /** 安全组更新时间。 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
 }
 
 /** 安全组关联的实例统计 */
@@ -2293,39 +2327,39 @@ declare interface SecurityGroupLimitSet {
 /** 安全组规则对象 */
 declare interface SecurityGroupPolicy {
   /** 安全组规则索引号，值会随着安全组规则的变更动态变化。使用PolicyIndex时，请先调用`DescribeSecurityGroupPolicies`获取到规则的PolicyIndex，并且结合返回值中的Version一起使用处理规则。 */
-  PolicyIndex?: number | null;
+  PolicyIndex?: number;
   /** 协议, 取值: TCP,UDP,ICMP,ICMPv6,ALL。 */
-  Protocol?: string | null;
+  Protocol?: string;
   /** 端口(all, 离散port, range)。说明：如果Protocol设置为ALL，则Port也需要设置为all。 */
-  Port?: string | null;
+  Port?: string;
   /** 协议端口ID或者协议端口组ID。ServiceTemplate和Protocol+Port互斥。 */
-  ServiceTemplate?: ServiceTemplateSpecification | null;
+  ServiceTemplate?: ServiceTemplateSpecification;
   /** 网段或IP(互斥)，特殊说明：0.0.0.0/n 都会映射为0.0.0.0/0。作为入参时，可使用字符串`MY_PUBLIC_IP`指代发起请求的公网IP地址。 */
-  CidrBlock?: string | null;
+  CidrBlock?: string;
   /** 网段或IPv6(互斥)。作为入参时，可使用字符串`MY_PUBLIC_IP`指代发起请求的公网IPv6地址。 */
-  Ipv6CidrBlock?: string | null;
+  Ipv6CidrBlock?: string;
   /** 安全组实例ID，例如：sg-ohuuioma。 */
-  SecurityGroupId?: string | null;
+  SecurityGroupId?: string;
   /** IP地址ID或者IP地址组ID。 */
-  AddressTemplate?: AddressTemplateSpecification | null;
+  AddressTemplate?: AddressTemplateSpecification;
   /** ACCEPT 或 DROP。 */
-  Action?: string | null;
+  Action?: string;
   /** 安全组规则描述。作为入参时，当未传递该参数或值为空，且参数CidrBlock或Ipv6CidrBlock值为MY_PUBLIC_IP时，该参数的值将会被自动填充为Replaced-From-MY_PUBLIC_IP。 */
-  PolicyDescription?: string | null;
+  PolicyDescription?: string;
   /** 安全组最近修改时间。 */
-  ModifyTime?: string | null;
+  ModifyTime?: string;
 }
 
 /** 安全组规则集合 */
 declare interface SecurityGroupPolicySet {
   /** 安全组规则当前版本。用户每次更新安全规则版本会自动加1，防止更新的路由规则已过期，不填不考虑冲突。 */
-  Version?: string | null;
+  Version?: string;
   /** 出站规则。 */
-  Egress?: SecurityGroupPolicy[] | null;
+  Egress?: SecurityGroupPolicy[];
   /** 入站规则。 */
-  Ingress?: SecurityGroupPolicy[] | null;
+  Ingress?: SecurityGroupPolicy[];
   /** 安全组策略条目统计。只用于出参。 */
-  PolicyStatistics?: PolicyStatistics | null;
+  PolicyStatistics?: PolicyStatistics;
 }
 
 /** SecurityPolicyDatabase策略 */
@@ -2577,9 +2611,9 @@ declare interface Subnet {
   /** 标签键值对。 */
   TagSet?: Tag[];
   /** CDC实例ID。 */
-  CdcId?: string | null;
+  CdcId?: string;
   /** 是否是CDC所属子网。0:否 1:是 */
-  IsCdcSubnet?: number | null;
+  IsCdcSubnet?: number;
 }
 
 /** 子网对象 */
@@ -2657,11 +2691,11 @@ declare interface TrafficMirror {
   /** 流量镜像创建时间。 */
   CreateTime?: string;
   /** 流量镜像的类型。 */
-  Type?: string | null;
+  Type?: string;
   /** 流量镜像所属的子网ID。 */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 流量镜接收目标资源信息，当接收目标为ENI和CLB时返回。 */
-  TargetInfo?: TrafficMirrorTargetResourceInfo[] | null;
+  TargetInfo?: TrafficMirrorTargetResourceInfo[];
 }
 
 /** 流量镜像五元组过滤规则对象 */
@@ -2685,9 +2719,9 @@ declare interface TrafficMirrorTarget {
   /** 流量镜像接收IP组，均衡规则，支持ENI/FIVE_TUPLE_FLOW（vpc），FIVE_TUPLE_FLOW（公网IP） */
   AlgHash?: string;
   /** 流量镜像的接收endpoint（公网IP） */
-  TargetEndPoints?: string[] | null;
+  TargetEndPoints?: string[];
   /** 流量镜像的接收类型，分别为：IP/ENI/CLB */
-  TargetType?: string | null;
+  TargetType?: string;
 }
 
 /** 流量镜像接收流量信息，当接收目标为ENI和CLB时返回 */
@@ -2860,6 +2894,8 @@ declare interface VpcInfo {
   TagSet?: Tag[];
   /** 辅助CIDR */
   AssistantCidrSet?: AssistantCidr[] | null;
+  /** 返回多运营商IPv6 Cidr Block */
+  Ipv6CidrBlockSet?: ISPIPv6CidrBlock[] | null;
 }
 
 /** 终端节点服务的服务白名单对象详情。 */
@@ -2911,9 +2947,9 @@ declare interface VpcPrivateIpAddress {
 /** Vpc任务结果详细信息。 */
 declare interface VpcTaskResultDetailInfo {
   /** 资源ID。 */
-  ResourceId: string | null;
+  ResourceId?: string;
   /** 状态。 */
-  Status: string | null;
+  Status?: string;
 }
 
 /** VPN通道对象。 */
@@ -3091,13 +3127,13 @@ declare interface AcceptVpcPeeringConnectionResponse {
 }
 
 declare interface AddBandwidthPackageResourcesRequest {
-  /** 资源唯一ID，当前支持EIP资源和LB资源，形如'eip-xxxx', 'lb-xxxx' */
+  /** 资源唯一ID，当前支持EIP资源和LB资源，形如'eip-xxxx', 'lb-xxxx'。EIP资源列表可通过[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取，LB资源列表可通过[DescribeLoadBalancers](https://cloud.tencent.com/document/api/214/30685)接口获取。 */
   ResourceIds: string[];
-  /** 带宽包唯一标识ID，形如'bwp-xxxx' */
+  /** 带宽包唯一标识ID，形如'bwp-xxxx'，可以使用[DescribeBandwidthPackages](https://cloud.tencent.com/document/product/215/19209)接口查询BandwidthPackageId。 */
   BandwidthPackageId?: string;
-  /** 带宽包类型，当前支持'BGP'、'HIGH_QUALITY_BGP'、'ANYCAST'、'SINGLEISP_CUCC'、'SINGLEISP_CMCC'、'SINGLEISP_CTCC'等类型。 */
+  /** 带宽包类型，可选值：BGP: 普通BGP共享带宽包HIGH_QUALITY_BGP: 精品BGP共享带宽包ANYCAST：公网加速带宽包SINGLEISP_CMCC: 中国移动共享带宽包SINGLEISP_CTCC: 中国电信共享带宽包SINGLEISP_CUCC: 中国联通共享带宽包 */
   NetworkType?: string;
-  /** 资源类型，包括'Address', 'LoadBalance' */
+  /** 资源类型，可选值：Address：弹性公网IPLoadBalance：负载均衡 */
   ResourceType?: string;
   /** 带宽包协议类型。当前支持'ipv4'和'ipv6'协议类型。 */
   Protocol?: string;
@@ -3269,11 +3305,15 @@ declare interface AssignIpv6AddressesResponse {
 declare interface AssignIpv6CidrBlockRequest {
   /** `VPC`实例`ID`，形如：`vpc-f49l6u0z`。 */
   VpcId: string;
+  /** 申请IPv6 Cidr 的类型，`GUA`(全球单播地址), `ULA`(唯一本地地址)。 */
+  AddressType?: string;
 }
 
 declare interface AssignIpv6CidrBlockResponse {
   /** 分配的 `IPv6` 网段。形如：`3402:4e00:20:1000::/56`。 */
   Ipv6CidrBlock?: string;
+  /** 申请IPv6 Cidr 的类型，`GUA`, `ULA` */
+  AddressType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3657,7 +3697,7 @@ declare interface CreateAddressTemplateResponse {
 declare interface CreateAndAttachNetworkInterfaceRequest {
   /** VPC实例ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。 */
   VpcId: string;
-  /** 弹性网卡名称，最大长度不能超过60个字节。 */
+  /** 弹性网卡名称，最大长度不能超过60个字符。 */
   NetworkInterfaceName: string;
   /** 弹性网卡所在的子网实例ID，例如：subnet-0ap8nwca。可通过[DescribeSubnets](https://cloud.tencent.com/document/product/215/15784)接口获取。 */
   SubnetId: string;
@@ -3705,23 +3745,23 @@ declare interface CreateAssistantCidrResponse {
 }
 
 declare interface CreateBandwidthPackageRequest {
-  /** 带宽包类型, 默认值: BGP, 可选值:BGP: 普通BGP共享带宽包HIGH_QUALITY_BGP: 精品BGP共享带宽包SINGLEISP_CMCC: 中国移动共享带宽包SINGLEISP_CTCC: 中国电信共享带宽包SINGLEISP_CUCC: 中国联通共享带宽包 */
+  /** 带宽包类型, 默认值: BGP, 可选值:BGP: 普通BGP共享带宽包HIGH_QUALITY_BGP: 精品BGP共享带宽包SINGLEISP_CMCC: 中国移动共享带宽包SINGLEISP_CTCC: 中国电信共享带宽包SINGLEISP_CUCC: 中国联通共享带宽包注意：仅部分地域支持三网带宽包和精品BGP带宽包。 */
   NetworkType?: string;
-  /** 带宽包计费类型, 默认为: ENHANCED95_POSTPAID_BY_MONTH, 可选值:TOP5_POSTPAID_BY_MONTH: 按月后付费TOP5计费PERCENT95_POSTPAID_BY_MONTH: 按月后付费月95计费FIXED_PREPAID_BY_MONTH: 包月预付费计费ENHANCED95_POSTPAID_BY_MONTH: 按月后付费增强型95计费PEAK_BANDWIDTH_POSTPAID_BY_DAY: 后付费日结按带宽计费PRIMARY_TRAFFIC_POSTPAID_BY_HOUR: 后付费按主流量计费 */
+  /** 带宽包计费类型, 默认为: ENHANCED95_POSTPAID_BY_MONTH, 可选值:ENHANCED95_POSTPAID_BY_MONTH: 后付费-增强型95计费PRIMARY_TRAFFIC_POSTPAID_BY_HOUR: 后付费-按主流量计费BANDWIDTH_POSTPAID_BY_DAY: 常规BGP-后付费-按带宽计费FIXED_PREPAID_BY_MONTH: 常规BGP-预付费PEAK_BANDWIDTH_POSTPAID_BY_DAY: 静态单线-后付费-按日结算TOP5_POSTPAID_BY_MONTH: 后付费-TOP5计费，如需使用，请提交工单申请 */
   ChargeType?: string;
-  /** 带宽包名称。 */
+  /** 带宽包名称。名称长度小于60，只包含数字、字母和下划线。 */
   BandwidthPackageName?: string;
-  /** 带宽包数量(传统账户类型只能填1), 标准账户类型取值范围为1~20。 */
+  /** 带宽包数量(传统账户类型只能填1), 标准账户类型取值范围为1~20。默认为1。 */
   BandwidthPackageCount?: number;
-  /** 带宽包限速大小。单位：Mbps，-1表示不限速。不同计费类型的带宽包对应不同的带宽上下限。 */
+  /** 带宽包限速大小。单位：Mbps，-1表示不限速。带宽包计费类型对应的带宽上下限可参考：[BandwidthRange](https://cloud.tencent.com/document/api/215/15824) */
   InternetMaxBandwidth?: number;
   /** 需要关联的标签列表。 */
   Tags?: Tag[];
   /** 带宽包协议类型。当前支持'ipv4'和'ipv6'协议带宽包，默认值是'ipv4'。 */
   Protocol?: string;
-  /** 预付费包月带宽包的购买时长，单位: 月，取值范围: 1~60。 */
+  /** 预付费包月带宽包的购买时长，单位: 月，取值范围: 1~60。预付费计费类型必传。 */
   TimeSpan?: number;
-  /** 网络出口，默认值：center_egress1 */
+  /** 网络出口，默认值：center_egress1，其它可选值：center_egress2、center_egress3。 */
   Egress?: string;
 }
 
@@ -3889,23 +3929,23 @@ declare interface CreateDirectConnectGatewayResponse {
 }
 
 declare interface CreateFlowLogRequest {
-  /** 流日志实例名字。 */
+  /** 流日志实例名字。长度为不超过60个字节。 */
   FlowLogName: string;
-  /** 流日志所属资源类型，VPC|SUBNET|NETWORKINTERFACE|CCN|NAT|DCG。 */
+  /** 流日志所属资源类型，VPC(私有网络)，SUBNET（子网），NETWORKINTERFACE（网卡），CCN（云联网），NAT（网络地址转化），DCG（专线网关）。当选择VPC， SUBNET，CCN，DCG时，请通过工单加入白名单。 */
   ResourceType: string;
   /** 资源唯一ID。 */
   ResourceId: string;
-  /** 流日志采集类型，ACCEPT|REJECT|ALL。 */
+  /** 流日志采集类型，ACCEPT（允许），REJECT（拒绝），ALL（全部）。 */
   TrafficType: string;
-  /** 私用网络ID或者统一ID，建议使用统一ID，当ResourceType为CCN时不填，其他类型必填。 */
+  /** 私用网络唯一ID。当ResourceType为CCN时不填，其他类型必填。 */
   VpcId?: string;
   /** 流日志实例描述。 */
   FlowLogDescription?: string;
-  /** 流日志存储ID。 */
+  /** 流日志存储ID（cls的日志主题ID，可通过[DescribeTopics](https://cloud.tencent.com/document/api/1179/46086)接口获取。）。当StorageType为cls时，CloudLogId为必选。 */
   CloudLogId?: string;
   /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
   Tags?: Tag[];
-  /** 消费端类型：cls、ckafka。默认值cls。 */
+  /** 消费端类型：cls、ckafka。默认值cls。当选择kafka时，请通过工单加入白名单。 */
   StorageType?: string;
   /** 流日志消费端信息，当消费端类型为ckafka时，必填。 */
   FlowLogStorage?: FlowLogStorage;
@@ -3916,6 +3956,20 @@ declare interface CreateFlowLogRequest {
 declare interface CreateFlowLogResponse {
   /** 创建的流日志信息。 */
   FlowLog?: FlowLog[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateGlobalRoutesRequest {
+  /** VPC唯一Id。 */
+  VpcId: string;
+  /** 全局路由对象。创建时必填参数： 'GatewayType'，'GatewayId'，'DestinationCidrBlock'。 */
+  GlobalRoutes: GlobalRoute[];
+}
+
+declare interface CreateGlobalRoutesResponse {
+  /** 全局路由对象。 */
+  GlobalRouteSet?: GlobalRoute[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4797,7 +4851,7 @@ declare interface DeleteAssistantCidrResponse {
 }
 
 declare interface DeleteBandwidthPackageRequest {
-  /** 待删除带宽包唯一ID */
+  /** 待删除带宽包唯一ID，可以使用[DescribeBandwidthPackages](https://cloud.tencent.com/document/product/215/19209)接口查询BandwidthPackageId。 */
   BandwidthPackageId: string;
 }
 
@@ -4887,13 +4941,25 @@ declare interface DeleteDirectConnectGatewayResponse {
 }
 
 declare interface DeleteFlowLogRequest {
-  /** 流日志唯一ID。 */
+  /** 流日志唯一ID。可通过[CreateFlowLog](https://cloud.tencent.com/document/product/215/35015)接口创建；可通过[DescribeFlowLogs](https://cloud.tencent.com/document/product/215/35012)接口获取。 */
   FlowLogId: string;
-  /** 私用网络ID或者统一ID，建议使用统一ID，删除云联网流日志时，可不填，其他流日志类型必填。 */
+  /** 私用网络唯一ID。删除云联网流日志时，可不填，其他流日志类型必填。可通过[DescribeFlowLogs](https://cloud.tencent.com/document/product/215/35012)接口获取流日志对应的私有网络唯一ID。也可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取当前账户的私有网络唯一ID。 */
   VpcId?: string;
 }
 
 declare interface DeleteFlowLogResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteGlobalRoutesRequest {
+  /** VPC唯一Id。 */
+  VpcId: string;
+  /** 全局路由实例唯一Id列表。 */
+  GlobalRouteIds: string[];
+}
+
+declare interface DeleteGlobalRoutesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5035,7 +5101,7 @@ declare interface DeleteNetworkAclResponse {
 }
 
 declare interface DeleteNetworkInterfaceRequest {
-  /** 弹性网卡实例ID，例如：eni-m6dyj72l。 */
+  /** 弹性网卡实例ID，例如：eni-m6dyj72l。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。 */
   NetworkInterfaceId: string;
 }
 
@@ -5477,25 +5543,25 @@ declare interface DescribeAssistantCidrResponse {
 }
 
 declare interface DescribeBandwidthPackageBandwidthRangeRequest {
-  /** 带宽包资源ID列表，单次查询上限20。 */
+  /** 带宽包资源ID列表，单次查询上限20。可以使用[DescribeBandwidthPackages](https://cloud.tencent.com/document/product/215/19209)接口查询BandwidthPackageId。 */
   BandwidthPackageIds?: string[];
 }
 
 declare interface DescribeBandwidthPackageBandwidthRangeResponse {
-  /** 带宽包带宽上下限详细信息。 */
+  /** 带宽包带宽上下限详细信息。ResourceId：带宽包id、BandwidthLowerLimit：带宽下限、BandwidthUpperLimit：带宽上限。 */
   BandwidthRangeSet?: BandwidthRange[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeBandwidthPackageBillUsageRequest {
-  /** 后付费共享带宽包的唯一ID */
+  /** 后付费共享带宽包的唯一ID，可以使用[DescribeBandwidthPackages](https://cloud.tencent.com/document/api/215/19209)接口获取BandwidthPackageId。 */
   BandwidthPackageId: string;
 }
 
 declare interface DescribeBandwidthPackageBillUsageResponse {
   /** 当前计费用量 */
-  BandwidthPackageBillBandwidthSet: BandwidthPackageBillBandwidth[];
+  BandwidthPackageBillBandwidthSet?: BandwidthPackageBillBandwidth[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5513,7 +5579,7 @@ declare interface DescribeBandwidthPackageQuotaResponse {
 declare interface DescribeBandwidthPackageResourcesRequest {
   /** 标识 共享带宽包 的唯一 ID 列表。共享带宽包 唯一 ID 形如：`bwp-11112222`。 */
   BandwidthPackageId: string;
-  /** 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`AddressIds`和`Filters`。详细的过滤条件如下： resource-id - String - 是否必填：否 - （过滤条件）按照 共享带宽包内资源 的唯一 ID 过滤。共享带宽包内资源 唯一 ID 形如：eip-11112222。 resource-type - String - 是否必填：否 - （过滤条件）按照 共享带宽包内资源 类型过滤，目前仅支持 弹性IP 和 负载均衡 两种类型，可选值为 Address 和 LoadBalance。 */
+  /** 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。详细的过滤条件如下： resource-id - String - 是否必填：否 - （过滤条件）按照 共享带宽包内资源 的唯一 ID 过滤。共享带宽包内资源 唯一 ID 形如：eip-11112222。 resource-type - String - 是否必填：否 - （过滤条件）按照 共享带宽包内资源 类型过滤，目前仅支持 弹性IP 和 负载均衡 两种类型，可选值为 Address 和 LoadBalance。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/11646)中的相关小节。 */
   Offset?: number;
@@ -5533,7 +5599,7 @@ declare interface DescribeBandwidthPackageResourcesResponse {
 declare interface DescribeBandwidthPackagesRequest {
   /** 带宽包唯一ID列表 */
   BandwidthPackageIds?: string[];
-  /** 每次请求的`Filters`的上限为10。参数不支持同时指定`BandwidthPackageIds`和`Filters`。详细的过滤条件如下： bandwidth-package-id - String - 是否必填：否 - （过滤条件）按照带宽包的唯一标识ID过滤。 bandwidth-package-name - String - 是否必填：否 - （过滤条件）按照 带宽包名称过滤。不支持模糊过滤。 network-type - String - 是否必填：否 - （过滤条件）按照带宽包的类型过滤。类型包括'HIGH_QUALITY_BGP','BGP','SINGLEISP'和'ANYCAST'。 charge-type - String - 是否必填：否 - （过滤条件）按照带宽包的计费类型过滤。计费类型包括: 'TOP5_POSTPAID_BY_MONTH':按月后付费TOP5计费 'PERCENT95_POSTPAID_BY_MONTH':按月后付费月95计费'ENHANCED95_POSTPAID_BY_MONTH':按月后付费增强型95计费'FIXED_PREPAID_BY_MONTH':包月预付费计费‘PEAK_BANDWIDTH_POSTPAID_BY_DAY’: 后付费日结按带宽计费 resource.resource-type - String - 是否必填：否 - （过滤条件）按照带宽包资源类型过滤。资源类型包括'Address'和'LoadBalance' resource.resource-id - String - 是否必填：否 - （过滤条件）按照带宽包资源Id过滤。资源Id形如'eip-xxxx','lb-xxxx' resource.address-ip - String - 是否必填：否 - （过滤条件）按照带宽包资源Ip过滤。 tag-key - String - 是否必填：否 - （过滤条件）按照标签键进行过滤。 tag-value - String - 是否必填：否 - （过滤条件）按照标签值进行过滤。 tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。tag-key使用具体的标签键进行替换。 */
+  /** 每次请求的`Filters`的上限为10。参数不支持同时指定`BandwidthPackageIds`和`Filters`。详细的过滤条件如下： bandwidth-package-id - String - 是否必填：否 - （过滤条件）按照带宽包的唯一标识ID过滤。 bandwidth-package-name - String - 是否必填：否 - （过滤条件）按照 带宽包名称过滤。不支持模糊过滤。 network-type - String - 是否必填：否 - （过滤条件）按照带宽包的类型过滤。网络类型可参考[BandwidthPackage](https://cloud.tencent.com/document/api/215/15824)。 charge-type - String - 是否必填：否 - （过滤条件）按照带宽包的计费类型过滤。计费类型可参考[BandwidthPackage](https://cloud.tencent.com/document/api/215/15824)。 resource.resource-type - String - 是否必填：否 - （过滤条件）按照带宽包资源类型过滤。资源类型包括'Address'和'LoadBalance' resource.resource-id - String - 是否必填：否 - （过滤条件）按照带宽包资源Id过滤。资源Id形如'eip-xxxx','lb-xxxx' resource.address-ip - String - 是否必填：否 - （过滤条件）按照带宽包资源Ip过滤。 tag-key - String - 是否必填：否 - （过滤条件）按照标签键进行过滤。 tag-value - String - 是否必填：否 - （过滤条件）按照标签值进行过滤。 tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。tag-key使用具体的标签键进行替换。 */
   Filters?: Filter[];
   /** 查询带宽包偏移量，默认为0。关于Offset的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小结。 */
   Offset?: number;
@@ -5913,9 +5979,9 @@ declare interface DescribeDirectConnectGatewaysResponse {
 }
 
 declare interface DescribeFlowLogRequest {
-  /** 私用网络ID或者统一ID，建议使用统一ID。 */
+  /** 私用网络唯一ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。该接口不支持拉取CCN类型的流日志，所以该字段为必选。 */
   VpcId: string;
-  /** 流日志唯一ID。 */
+  /** 流日志唯一ID。可通过[CreateFlowLog](https://cloud.tencent.com/document/product/215/35015)接口创建；可通过[DescribeFlowLogs](https://cloud.tencent.com/document/product/215/35012)接口获取； */
   FlowLogId: string;
 }
 
@@ -5927,29 +5993,29 @@ declare interface DescribeFlowLogResponse {
 }
 
 declare interface DescribeFlowLogsRequest {
-  /** 私用网络ID或者统一ID，建议使用统一ID。 */
+  /** 私用网络唯一ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。 */
   VpcId?: string;
-  /** 流日志唯一ID。 */
+  /** 流日志唯一ID。可通过[CreateFlowLog](https://cloud.tencent.com/document/product/215/35015)接口创建。 */
   FlowLogId?: string;
   /** 流日志实例名字。 */
   FlowLogName?: string;
-  /** 流日志所属资源类型，VPC|SUBNET|NETWORKINTERFACE。 */
+  /** 流日志所属资源类型：VPC(私有网络)，SUBNET（子网），NETWORKINTERFACE（网卡），CCN（云联网），NAT（网络地址转化），DCG（专线网关）。 */
   ResourceType?: string;
   /** 资源唯一ID。 */
   ResourceId?: string;
-  /** 流日志采集类型，ACCEPT|REJECT|ALL。 */
+  /** 流日志采集类型，ACCEPT（允许），REJECT（拒绝），ALL（全部）。 */
   TrafficType?: string;
   /** 流日志存储ID。 */
   CloudLogId?: string;
-  /** 流日志存储ID状态。 */
+  /** 流日志存储ID状态。SUCCESS（成功），DELETED（删除） */
   CloudLogState?: string;
-  /** 按某个字段排序,支持字段：flowLogName,createTime，默认按CreatedTime。 */
+  /** 按某个字段排序,支持字段：flowLogName,createTime，默认按createTime。 */
   OrderField?: string;
   /** 升序（ASC）还是降序（DESC）,默认：DESC。 */
   OrderDirection?: string;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 每页行数，默认为10。 */
+  /** 每页行数，默认为10。范围1-100。 */
   Limit?: number;
   /** 过滤条件，参数不支持同时指定FlowLogId和Filters。tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。 */
   Filters?: Filter;
@@ -6014,6 +6080,26 @@ declare interface DescribeGatewayFlowQosResponse {
   GatewayQosSet: GatewayQos[];
   /** 符合条件的实例数量。 */
   TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeGlobalRoutesRequest {
+  /** 过滤条件。global-route-id - String - （过滤条件）如全局路由唯一 Id，形如：gr-bmenrwu2。vpc-id - String - （过滤条件）VPC唯一Id， 形如： vpc-mcqaoy0f。gateway-id - String - （过滤条件）下一跳对象。gateway-type - String - 是否必填：否 - （过滤条件）按下一跳类型进行过滤。支持 NORMAL_CVMcdc-id - String - （过滤条件）CDC实例ID，形如：cluster-gbo27yc4。description - String - （过滤条件）描述。dest-cidr - String - （过滤条件）Ipv4目标网段。subnet-route-algorithm - String - （过滤条件）支持的 ECMP算法有： - ECMP_QUINTUPLE_HASH：五元组hash - ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash - ECMP_DESTINATION_IP_HASH：目的IP hash - ECMP_SOURCE_IP_HASH：源IP hash */
+  Filters?: Filter[];
+  /** 偏移量。 */
+  Offset?: number;
+  /** 请求对象个数。 */
+  Limit?: number;
+  /** 全局路由唯一Id列表。 */
+  GlobalRouteIds?: string[];
+}
+
+declare interface DescribeGlobalRoutesResponse {
+  /** 全局路由对象。 */
+  GlobalRouteSet?: GlobalRoute[];
+  /** 符合条件的实例数量。 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6102,6 +6188,18 @@ declare interface DescribeIPv6AddressesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceJumboRequest {
+  /** CVM实例ID列表。限制每次i最多查询10个实例。 */
+  InstanceIds: string[];
+}
+
+declare interface DescribeInstanceJumboResponse {
+  /** 云服务器巨帧状态 */
+  InstanceJumboSet?: InstanceJumbo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeIp6AddressesRequest {
   /** 标识 IPv6 的唯一 ID 列表。IPv6 唯一 ID 形如：`eip-11112222`。参数不支持同时指定`Ip6AddressIds`和`Filters`。 */
   Ip6AddressIds?: string[];
@@ -6185,7 +6283,7 @@ declare interface DescribeIpGeolocationInfosResponse {
 }
 
 declare interface DescribeLocalGatewayRequest {
-  /** 查询条件：vpc-id：按照VPCID过滤，local-gateway-name：按照本地网关名称过滤，名称支持模糊搜索，local-gateway-id：按照本地网关实例ID过滤，cdc-id：按照cdc实例ID过滤查询。 */
+  /** 支持的过滤条件如下:\nvpc-id:按照VPCID过滤。\nlocal-gateway-name:本地网关名称,支持模糊查询。\nlocal-gateway-id:本地网关实例ID。\ncdc-id:cdc实例ID。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/11646)中的相关小节。 */
   Offset?: number;
@@ -6425,7 +6523,7 @@ declare interface DescribeNetworkInterfaceLimitResponse {
 declare interface DescribeNetworkInterfacesRequest {
   /** 弹性网卡实例ID查询。形如：eni-pxir56ns。每次请求的实例的上限为100。参数不支持同时指定NetworkInterfaceIds和Filters。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。 */
   NetworkInterfaceIds?: string[];
-  /** 过滤条件，参数不支持同时指定NetworkInterfaceIds和Filters。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。subnet-id - String - （过滤条件）所属子网实例ID，形如：subnet-f49l6u0z。可通过[DescribeSubnets](https://cloud.tencent.com/document/product/215/15784)接口获取。network-interface-id - String - （过滤条件）弹性网卡实例ID，形如：eni-5k56k7k7。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。attachment.instance-id - String - （过滤条件）绑定的云服务器实例ID，形如：ins-3nqpdn3i。可通过[DescribeInstances](https://cloud.tencent.com/document/product/213/15728)接口获取。groups.security-group-id - String - （过滤条件）绑定的安全组实例ID，例如：sg-f9ekbxeq。可通过[DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808)接口获取。network-interface-name - String - （过滤条件）网卡实例名称。network-interface-description - String - （过滤条件）网卡实例描述。address-ip - String - （过滤条件）内网IPv4地址，单IP后缀模糊匹配，多IP精确匹配。可以与`ip-exact-match`配合做单IP的精确匹配查询。ip-exact-match - Boolean - （过滤条件）内网IPv4精确匹配查询，存在多值情况，只取第一个。tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。使用请参考示例2tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。is-primary - Boolean - 是否必填：否 - （过滤条件）按照是否主网卡进行过滤。值为true时，仅过滤主网卡；值为false时，仅过滤辅助网卡；此过滤参数未提供时，同时过滤主网卡和辅助网卡。eni-type - String -是否必填：否- （过滤条件）按照网卡类型进行过滤。“0”-辅助网卡，“1”-主网卡，“2”：中继网卡。eni-qos - String -是否必填：否- （过滤条件）按照网卡服务质量进行过滤。PT（云金）、AU（云银）、AG(云铜）、DEFAULT（默认）。address-ipv6 - String - 是否必填：否 -（过滤条件）内网IPv6地址过滤，支持多ipv6地址查询，如果和address-ip一起使用取交集。public-address-ip - String - （过滤条件）公网IPv4地址，精确匹配。 */
+  /** 过滤条件，参数不支持同时指定NetworkInterfaceIds和Filters。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。subnet-id - String - （过滤条件）所属子网实例ID，形如：subnet-f49l6u0z。可通过[DescribeSubnets](https://cloud.tencent.com/document/product/215/15784)接口获取。network-interface-id - String - （过滤条件）弹性网卡实例ID，形如：eni-5k56k7k7。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。attachment.instance-id - String - （过滤条件）绑定的云服务器实例ID，形如：ins-3nqpdn3i。可通过[DescribeInstances](https://cloud.tencent.com/document/product/213/15728)接口获取。groups.security-group-id - String - （过滤条件）绑定的安全组实例ID，例如：sg-f9ekbxeq。可通过[DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808)接口获取。network-interface-name - String - （过滤条件）网卡实例名称。network-interface-description - String - （过滤条件）网卡实例描述。address-ip - String - （过滤条件）内网IPv4地址，单IP后缀模糊匹配，多IP精确匹配。可以与`ip-exact-match`配合做单IP的精确匹配查询。ip-exact-match - Boolean - （过滤条件）内网IPv4精确匹配查询，存在多值情况，只取第一个。tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。使用请参考示例2tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。is-primary - Boolean - 是否必填：否 - （过滤条件）按照是否主网卡进行过滤。值为true时，仅过滤主网卡；值为false时，仅过滤辅助网卡；此过滤参数未提供时，同时过滤主网卡和辅助网卡。eni-type - String -是否必填：否- （过滤条件）按照网卡类型进行过滤。“0”-辅助网卡，“1”-主网卡，“2”：中继网卡。eni-qos - String -是否必填：否- （过滤条件）按照网卡服务质量进行过滤。PT（云金）、AU（云银）、AG(云铜）、DEFAULT（默认）。address-ipv6 - String - 是否必填：否 -（过滤条件）内网IPv6地址过滤，支持多ipv6地址查询，如果和address-ip一起使用取交集。public-address-ip - String - （过滤条件）公网IPv4地址，精确匹配。address-type - String - （过滤条件）IPv6 Cidr 的类型，精确匹配。`GUA`(全球单播地址), `ULA`(唯一本地地址)。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -6969,7 +7067,7 @@ declare interface DescribeSubnetResourceDashboardResponse {
 declare interface DescribeSubnetsRequest {
   /** 子网实例ID查询。形如：subnet-pxir56ns。每次请求的实例的上限为100。参数不支持同时指定SubnetIds和Filters。 */
   SubnetIds?: string[];
-  /** 过滤条件，参数不支持同时指定SubnetIds和Filters。subnet-id - String - （过滤条件）Subnet实例名称。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。cidr-block - String - （过滤条件）子网网段，形如: 192.168.1.0 。is-default - Boolean - （过滤条件）是否是默认子网。is-remote-vpc-snat - Boolean - （过滤条件）是否为VPC SNAT地址池子网。subnet-name - String - （过滤条件）子网名称。zone - String - （过滤条件）可用区。tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。cdc-id - String - 是否必填：否 - （过滤条件）按照cdc信息进行过滤。过滤出来制定cdc下的子网。is-cdc-subnet - String - 是否必填：否 - （过滤条件）按照是否是cdc子网进行过滤。取值：“0”-非cdc子网，“1”--cdc子网ipv6-cidr-block - String - （过滤条件）IPv6子网网段，形如: 2402:4e00:1717:8700::/64 。isp-type - String - （过滤条件）运营商类型，形如: BGP 。 */
+  /** 过滤条件，参数不支持同时指定SubnetIds和Filters。subnet-id - String - （过滤条件）Subnet实例名称。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。cidr-block - String - （过滤条件）子网网段，形如: 192.168.1.0 。is-default - Boolean - （过滤条件）是否是默认子网。is-remote-vpc-snat - Boolean - （过滤条件）是否为VPC SNAT地址池子网。subnet-name - String - （过滤条件）子网名称。zone - String - （过滤条件）可用区。tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。cdc-id - String - 是否必填：否 - （过滤条件）按照cdc信息进行过滤。过滤出来制定cdc下的子网。is-cdc-subnet - String - 是否必填：否 - （过滤条件）按照是否是cdc子网进行过滤。取值：“0”-非cdc子网，“1”--cdc子网ipv6-cidr-block - String - （过滤条件）IPv6子网网段，形如: 2402:4e00:1717:8700::/64 。isp-type - String - （过滤条件）运营商类型，形如: BGP 。address-type - String - （过滤条件）IPv6 Cidr 的类型，精确匹配。`GUA`(全球单播地址), `ULA`(唯一本地地址)。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: string;
@@ -7295,7 +7393,7 @@ declare interface DescribeVpcTaskResultResponse {
 declare interface DescribeVpcsRequest {
   /** VPC实例ID。形如：vpc-f49l6u0z。每次请求的实例的上限为100。参数不支持同时指定VpcIds和Filters。 */
   VpcIds?: string[];
-  /** 过滤条件，不支持同时指定VpcIds和Filters参数。支持的过滤条件如下：vpc-name：VPC实例名称，支持模糊查询。is-default ：是否默认VPC。vpc-id ：VPC实例ID，例如：vpc-f49l6u0z。cidr-block：VPC的CIDR。tag-key ：按照标签键进行过滤，非必填参数。tag:tag-key：按照标签键值对进行过滤，非必填参数。 其中 tag-key 请使用具体的标签键进行替换，可参考示例2。 **说明：**若同一个过滤条件（Filter）存在多个Values，则同一Filter下Values间的关系为逻辑或（OR）关系；若存在多个过滤条件（Filter），Filter之间的关系为逻辑与（AND）关系。ipv6-cidr-block - String - （过滤条件）IPv6子网网段，形如: 2402:4e00:1717:8700::/64 。isp-type - String - （过滤条件）运营商类型，形如: BGP 取值范围：'BGP'-默认, 'CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联通。 */
+  /** 过滤条件，不支持同时指定VpcIds和Filters参数。支持的过滤条件如下：vpc-name：VPC实例名称，支持模糊查询。is-default ：是否默认VPC。vpc-id ：VPC实例ID，例如：vpc-f49l6u0z。cidr-block：VPC的CIDR。tag-key ：按照标签键进行过滤，非必填参数。tag:tag-key：按照标签键值对进行过滤，非必填参数。 其中 tag-key 请使用具体的标签键进行替换，可参考示例2。 **说明：**若同一个过滤条件（Filter）存在多个Values，则同一Filter下Values间的关系为逻辑或（OR）关系；若存在多个过滤条件（Filter），Filter之间的关系为逻辑与（AND）关系。ipv6-cidr-block - String - （过滤条件）IPv6子网网段，形如: 2402:4e00:1717:8700::/64 。isp-type - String - （过滤条件）运营商类型，形如: BGP 取值范围：'BGP'-默认, 'CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联通。address-type - String - （过滤条件）IPv6 Cidr 的类型，精确匹配。`GUA`(全球单播地址), `ULA`(唯一本地地址)。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: string;
@@ -7497,7 +7595,7 @@ declare interface DisableCcnRoutesResponse {
 }
 
 declare interface DisableFlowLogsRequest {
-  /** 流日志Id。 */
+  /** 流日志Id。可通过[CreateFlowLog](https://cloud.tencent.com/document/product/215/35015)接口创建；可通过[DescribeFlowLogs](https://cloud.tencent.com/document/product/215/35012)接口获取。 */
   FlowLogIds: string[];
 }
 
@@ -7629,9 +7727,9 @@ declare interface DisassociateNetworkAclSubnetsResponse {
 }
 
 declare interface DisassociateNetworkInterfaceSecurityGroupsRequest {
-  /** 弹性网卡实例ID。形如：eni-pxir56ns。每次请求的实例的上限为100。 */
+  /** 弹性网卡实例ID。形如：eni-pxir56ns。每次请求的实例的上限为100。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。 */
   NetworkInterfaceIds: string[];
-  /** 安全组实例ID，例如：sg-33ocnj9n，可通过DescribeSecurityGroups获取。每次请求的实例的上限为100。 */
+  /** 安全组实例ID，例如：sg-33ocnj9n，可通过[DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808)接口获取。每次请求的实例的上限为100。 */
   SecurityGroupIds: string[];
 }
 
@@ -7705,7 +7803,7 @@ declare interface EnableCcnRoutesResponse {
 }
 
 declare interface EnableFlowLogsRequest {
-  /** 流日志Id。 */
+  /** 流日志Id。可通过[CreateFlowLog](https://cloud.tencent.com/document/product/215/35015)接口创建；可通过[DescribeFlowLogs](https://cloud.tencent.com/document/product/215/35012)接口获取。 */
   FlowLogIds: string[];
 }
 
@@ -7962,6 +8060,20 @@ declare interface LockCcnsResponse {
   RequestId?: string;
 }
 
+declare interface MigrateBandwidthPackageResourcesRequest {
+  /** 当前资源所在的共享带宽包ID */
+  BandwidthPackageId: string;
+  /** 要迁移的目标共享带宽包的ID */
+  TargetBandwidthPackageId: string;
+  /** 要迁移的资源的ID列表 */
+  ResourceIds: string[];
+}
+
+declare interface MigrateBandwidthPackageResourcesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface MigrateNetworkInterfaceRequest {
   /** 弹性网卡实例ID，例如：eni-m6dyj72l。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。 */
   NetworkInterfaceId: string;
@@ -7979,9 +8091,9 @@ declare interface MigrateNetworkInterfaceResponse {
 }
 
 declare interface MigratePrivateIpAddressRequest {
-  /** 当内网IP绑定的弹性网卡实例ID，例如：eni-m6dyj72l。 */
+  /** 当内网IP绑定的弹性网卡实例ID，例如：eni-m6dyj72l。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。 */
   SourceNetworkInterfaceId: string;
-  /** 待迁移的目的弹性网卡实例ID。 */
+  /** 待迁移的目的弹性网卡实例ID。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。 */
   DestinationNetworkInterfaceId: string;
   /** 迁移的内网IP地址，例如：10.0.0.6。 */
   PrivateIpAddress: string;
@@ -8103,7 +8215,7 @@ declare interface ModifyBandwidthPackageAttributeRequest {
   BandwidthPackageId: string;
   /** 带宽包名称 */
   BandwidthPackageName: string;
-  /** 带宽包计费模式，示例 ：'TOP5_POSTPAID_BY_MONTH'（后付费-TOP5计费） */
+  /** 带宽包计费模式，可选值:ENHANCED95_POSTPAID_BY_MONTH: 后付费-增强型95计费PRIMARY_TRAFFIC_POSTPAID_BY_HOUR: 后付费-按主流量计费BANDWIDTH_POSTPAID_BY_DAY: 常规BGP-后付费-按带宽计费FIXED_PREPAID_BY_MONTH: 常规BGP-预付费PEAK_BANDWIDTH_POSTPAID_BY_DAY: 静态单线-后付费-按日结算TOP5_POSTPAID_BY_MONTH: 后付费-TOP5计费，如需使用，请提交工单申请 */
   ChargeType?: string;
 }
 
@@ -8113,9 +8225,9 @@ declare interface ModifyBandwidthPackageAttributeResponse {
 }
 
 declare interface ModifyBandwidthPackageBandwidthRequest {
-  /** 带宽包限速大小。单位：Mbps。 */
+  /** 带宽包限速大小。单位：Mbps。带宽包计费类型对应的带宽上下限可参考：[BandwidthRange](https://cloud.tencent.com/document/api/215/15824) */
   InternetMaxBandwidth: number;
-  /** 共享带宽包ID */
+  /** 共享带宽包ID，可以使用[DescribeBandwidthPackages](https://cloud.tencent.com/document/product/215/19209)接口查询BandwidthPackageId。 */
   BandwidthPackageId: string;
 }
 
@@ -8235,13 +8347,13 @@ declare interface ModifyDirectConnectGatewayAttributeResponse {
 }
 
 declare interface ModifyFlowLogAttributeRequest {
-  /** 流日志唯一ID。 */
+  /** 流日志唯一ID。可通过[CreateFlowLog](https://cloud.tencent.com/document/product/215/35015)接口创建；可通过[DescribeFlowLogs](https://cloud.tencent.com/document/product/215/35012)接口获取。 */
   FlowLogId: string;
-  /** 私用网络ID或者统一ID，建议使用统一ID，修改云联网流日志属性时可不填，其他流日志类型必填。 */
+  /** 私用网络唯一ID。修改云联网流日志属性时可不填，其他流日志类型必填。 */
   VpcId?: string;
-  /** 流日志实例名字。 */
+  /** 流日志实例名字。长度为不超过60字节。 */
   FlowLogName?: string;
-  /** 流日志实例描述。 */
+  /** 流日志实例描述。长度为不超过512字节。 */
   FlowLogDescription?: string;
 }
 
@@ -8260,6 +8372,34 @@ declare interface ModifyGatewayFlowQosRequest {
 }
 
 declare interface ModifyGatewayFlowQosResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyGlobalRouteECMPAlgorithmRequest {
+  /** VPC唯一Id。 */
+  VpcId: string;
+  /** Ipv4目标网段。 */
+  DestinationCidrBlock?: string;
+  /** 支持的 ECMP算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。 */
+  SubnetRouteAlgorithm?: string;
+  /** CDC 集群唯一 ID。 */
+  CdcId?: string;
+}
+
+declare interface ModifyGlobalRouteECMPAlgorithmResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyGlobalRoutesRequest {
+  /** VPC唯一Id。 */
+  VpcId: string;
+  /** 全局路由对象。仅支持修改：'Description'，其他字段暂不支持。 */
+  GlobalRoutes: GlobalRoute[];
+}
+
+declare interface ModifyGlobalRoutesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8883,6 +9023,8 @@ declare interface ModifyVpnConnectionAttributeRequest {
   CustomerGatewayId?: string;
   /** 健康检查配置 */
   HealthCheckConfig?: HealthCheckConfig;
+  /** BGP隧道配置 */
+  BgpConfig?: BgpConfig;
 }
 
 declare interface ModifyVpnConnectionAttributeResponse {
@@ -9065,12 +9207,12 @@ declare interface ReleaseIp6AddressesBandwidthResponse {
 }
 
 declare interface RemoveBandwidthPackageResourcesRequest {
-  /** 带宽包唯一标识ID，形如'bwp-xxxx' */
-  BandwidthPackageId?: string;
-  /** 资源类型，包括‘Address’, ‘LoadBalance’ */
-  ResourceType?: string;
-  /** 资源ID，可支持资源形如'eip-xxxx', 'lb-xxxx' */
+  /** 资源唯一ID，当前支持EIP资源和LB资源，形如'eip-xxxx', 'lb-xxxx'。EIP资源列表可通过[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取，LB资源列表可通过[DescribeLoadBalancers](https://cloud.tencent.com/document/api/214/30685)接口获取。 */
   ResourceIds?: string[];
+  /** 带宽包唯一标识ID，形如'bwp-xxxx'，可以使用[DescribeBandwidthPackages](https://cloud.tencent.com/document/product/215/19209)接口查询BandwidthPackageId。 */
+  BandwidthPackageId?: string;
+  /** 资源类型，可选值：Address：弹性公网IPLoadBalance：负载均衡 */
+  ResourceType?: string;
 }
 
 declare interface RemoveBandwidthPackageResourcesResponse {
@@ -9655,6 +9797,8 @@ declare interface Vpc {
   CreateDirectConnectGatewayCcnRoutes(data: CreateDirectConnectGatewayCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDirectConnectGatewayCcnRoutesResponse>;
   /** 创建流日志 {@link CreateFlowLogRequest} {@link CreateFlowLogResponse} */
   CreateFlowLog(data: CreateFlowLogRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowLogResponse>;
+  /** 创建全局路由 {@link CreateGlobalRoutesRequest} {@link CreateGlobalRoutesResponse} */
+  CreateGlobalRoutes(data: CreateGlobalRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGlobalRoutesResponse>;
   /** 创建HAVIP {@link CreateHaVipRequest} {@link CreateHaVipResponse} */
   CreateHaVip(data: CreateHaVipRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHaVipResponse>;
   /** 创建高优路由表 {@link CreateHighPriorityRouteTableRequest} {@link CreateHighPriorityRouteTableResponse} */
@@ -9761,6 +9905,8 @@ declare interface Vpc {
   DeleteDirectConnectGatewayCcnRoutes(data: DeleteDirectConnectGatewayCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDirectConnectGatewayCcnRoutesResponse>;
   /** 删除流日志 {@link DeleteFlowLogRequest} {@link DeleteFlowLogResponse} */
   DeleteFlowLog(data: DeleteFlowLogRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFlowLogResponse>;
+  /** 删除全局路由。 {@link DeleteGlobalRoutesRequest} {@link DeleteGlobalRoutesResponse} */
+  DeleteGlobalRoutes(data: DeleteGlobalRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGlobalRoutesResponse>;
   /** 删除HAVIP {@link DeleteHaVipRequest} {@link DeleteHaVipResponse} */
   DeleteHaVip(data: DeleteHaVipRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHaVipResponse>;
   /** 删除高优路由表 {@link DeleteHighPriorityRouteTablesRequest} {@link DeleteHighPriorityRouteTablesResponse} */
@@ -9901,7 +10047,7 @@ declare interface Vpc {
   DescribeDirectConnectGatewayCcnRoutes(data: DescribeDirectConnectGatewayCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDirectConnectGatewayCcnRoutesResponse>;
   /** 查询专线网关 {@link DescribeDirectConnectGatewaysRequest} {@link DescribeDirectConnectGatewaysResponse} */
   DescribeDirectConnectGateways(data?: DescribeDirectConnectGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDirectConnectGatewaysResponse>;
-  /** 查询流日志实例信息 {@link DescribeFlowLogRequest} {@link DescribeFlowLogResponse} */
+  /** 查询VPC流日志实例信息 {@link DescribeFlowLogRequest} {@link DescribeFlowLogResponse} */
   DescribeFlowLog(data: DescribeFlowLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowLogResponse>;
   /** 查询流日志集合 {@link DescribeFlowLogsRequest} {@link DescribeFlowLogsResponse} */
   DescribeFlowLogs(data?: DescribeFlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowLogsResponse>;
@@ -9909,6 +10055,8 @@ declare interface Vpc {
   DescribeGatewayFlowMonitorDetail(data: DescribeGatewayFlowMonitorDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayFlowMonitorDetailResponse>;
   /** 查询网关来访IP流控带宽 {@link DescribeGatewayFlowQosRequest} {@link DescribeGatewayFlowQosResponse} */
   DescribeGatewayFlowQos(data: DescribeGatewayFlowQosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayFlowQosResponse>;
+  /** 查询全局路由列表。 {@link DescribeGlobalRoutesRequest} {@link DescribeGlobalRoutesResponse} */
+  DescribeGlobalRoutes(data?: DescribeGlobalRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGlobalRoutesResponse>;
   /** 查询HAVIP列表 {@link DescribeHaVipsRequest} {@link DescribeHaVipsResponse} */
   DescribeHaVips(data?: DescribeHaVipsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHaVipsResponse>;
   /** 查询高优路由表 {@link DescribeHighPriorityRouteTablesRequest} {@link DescribeHighPriorityRouteTablesResponse} */
@@ -9917,6 +10065,8 @@ declare interface Vpc {
   DescribeHighPriorityRoutes(data: DescribeHighPriorityRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHighPriorityRoutesResponse>;
   /** 查询弹性公网IPv6列表 {@link DescribeIPv6AddressesRequest} {@link DescribeIPv6AddressesResponse} */
   DescribeIPv6Addresses(data?: DescribeIPv6AddressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPv6AddressesResponse>;
+  /** 查询指定云服务器是否支持巨帧 {@link DescribeInstanceJumboRequest} {@link DescribeInstanceJumboResponse} */
+  DescribeInstanceJumbo(data: DescribeInstanceJumboRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceJumboResponse>;
   /** 查询传统弹性公网IPv6列表 {@link DescribeIp6AddressesRequest} {@link DescribeIp6AddressesResponse} */
   DescribeIp6Addresses(data?: DescribeIp6AddressesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIp6AddressesResponse>;
   /** 查询账户在指定地域IPV6转换实例和规则的配额 {@link DescribeIp6TranslatorQuotaRequest} {@link DescribeIp6TranslatorQuotaResponse} */
@@ -10137,6 +10287,8 @@ declare interface Vpc {
   LockCcnBandwidths(data: LockCcnBandwidthsRequest, config?: AxiosRequestConfig): AxiosPromise<LockCcnBandwidthsResponse>;
   /** 安全锁定云联网实例 {@link LockCcnsRequest} {@link LockCcnsResponse} */
   LockCcns(data?: LockCcnsRequest, config?: AxiosRequestConfig): AxiosPromise<LockCcnsResponse>;
+  /** 共享带宽包资源迁移接口 {@link MigrateBandwidthPackageResourcesRequest} {@link MigrateBandwidthPackageResourcesResponse} */
+  MigrateBandwidthPackageResources(data: MigrateBandwidthPackageResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<MigrateBandwidthPackageResourcesResponse>;
   /** 弹性网卡迁移 {@link MigrateNetworkInterfaceRequest} {@link MigrateNetworkInterfaceResponse} */
   MigrateNetworkInterface(data: MigrateNetworkInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<MigrateNetworkInterfaceResponse>;
   /** 弹性网卡内网IP迁移 {@link MigratePrivateIpAddressRequest} {@link MigratePrivateIpAddressResponse} */
@@ -10181,6 +10333,10 @@ declare interface Vpc {
   ModifyFlowLogAttribute(data: ModifyFlowLogAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFlowLogAttributeResponse>;
   /** 调整网关流控带宽 {@link ModifyGatewayFlowQosRequest} {@link ModifyGatewayFlowQosResponse} */
   ModifyGatewayFlowQos(data: ModifyGatewayFlowQosRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGatewayFlowQosResponse>;
+  /** 修改全局路由ECMP的HASH算法 {@link ModifyGlobalRouteECMPAlgorithmRequest} {@link ModifyGlobalRouteECMPAlgorithmResponse} */
+  ModifyGlobalRouteECMPAlgorithm(data: ModifyGlobalRouteECMPAlgorithmRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGlobalRouteECMPAlgorithmResponse>;
+  /** 修改全局路由。 {@link ModifyGlobalRoutesRequest} {@link ModifyGlobalRoutesResponse} */
+  ModifyGlobalRoutes(data: ModifyGlobalRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGlobalRoutesResponse>;
   /** 修改HAVIP属性 {@link ModifyHaVipAttributeRequest} {@link ModifyHaVipAttributeResponse} */
   ModifyHaVipAttribute(data: ModifyHaVipAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHaVipAttributeResponse>;
   /** 修改高优路由表条目属性 {@link ModifyHighPriorityRouteAttributeRequest} {@link ModifyHighPriorityRouteAttributeResponse} */

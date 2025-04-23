@@ -40,6 +40,42 @@ declare interface AICallExtractResultInfo {
   Number?: number;
 }
 
+/** AI时延明细 */
+declare interface AILatencyDetail {
+  /** 对话ID */
+  RoundId?: string;
+  /** asr时延（毫秒） */
+  ASRLatency?: number;
+  /** tts时延（毫秒） */
+  TTSLatency?: number;
+  /** llm时延（毫秒） */
+  LLMLatency?: number;
+  /** 端到端时延（毫秒） */
+  ETELatency?: number;
+}
+
+/** AI时延统计 */
+declare interface AILatencyStatistics {
+  /** asr时延统计 */
+  ASRLatency?: AILatencyStatisticsInfo;
+  /** tts时延统计 */
+  TTSLatency?: AILatencyStatisticsInfo;
+  /** llm时延统计 */
+  LLMLatency?: AILatencyStatisticsInfo;
+  /** 端到端时延统计 */
+  ETELatency?: AILatencyStatisticsInfo;
+}
+
+/** AI时延统计 */
+declare interface AILatencyStatisticsInfo {
+  /** 最小值 */
+  MinLatency?: number;
+  /** 中位数 */
+  MiddleLatency?: number;
+  /** p90 */
+  P90Latency?: number;
+}
+
 /** AI转人工配置项 */
 declare interface AITransferItem {
   /** 转人工的function calling 名称 */
@@ -730,6 +766,8 @@ declare interface TelCdrInfo {
   Time?: number;
   /** 呼入呼出方向 0 呼入 1 呼出 */
   Direction?: number;
+  /** 通话类型 1 呼出 2 呼入 3 音频呼入 5 预测式外呼 6 内线呼叫 */
+  CallType?: number;
   /** 通话时长 */
   Duration?: number;
   /** 录音信息 */
@@ -738,7 +776,7 @@ declare interface TelCdrInfo {
   RecordId?: string;
   /** 座席信息 */
   SeatUser?: SeatUserInfo;
-  /** EndStatus与EndStatusString一一对应，具体枚举如下：**场景 EndStatus	EndStatusString	状态说明**电话呼入&呼出	1 ok 正常结束电话呼入&呼出	0 error 系统错误电话呼入 102 ivrGiveUp IVR 期间用户放弃电话呼入 103 waitingGiveUp 会话排队期间用户放弃电话呼入 104 ringingGiveUp 会话振铃期间用户放弃电话呼入 105 noSeatOnline 无座席在线电话呼入 106 notWorkTime 非工作时间 电话呼入 107 ivrEnd IVR 后直接结束电话呼入 100 blackList 呼入黑名单 电话呼出 2 unconnected	未接通电话呼出 108 restrictedCallee	被叫因高风险受限电话呼出 109 tooManyRequest 超频电话呼出 110 restrictedArea 外呼盲区电话呼出 111 restrictedTime	外呼时间限制 电话呼出 201 unknown	未知状态电话呼出 202 notAnswer	未接听电话呼出 203 userReject	拒接挂断电话呼出 204 powerOff	关机电话呼出 205 numberNotExist	空号电话呼出 206 busy	通话中电话呼出 207 outOfCredit	欠费电话呼出 208 operatorError	运营商线路异常电话呼出 209 callerCancel	主叫取消电话呼出 210 notInService	不在服务区电话呼入&呼出	211 clientError 客户端错误电话呼出 212 carrierBlocked 运营商拦截 */
+  /** EndStatus与EndStatusString一一对应，具体枚举如下：**场景 EndStatus	EndStatusString	状态说明**电话呼入&呼出	1 ok 正常通话电话呼入&呼出	0 error 异常结束电话呼入 102 ivrGiveUp IVR 期间用户放弃电话呼入 103 waitingGiveUp 排队时用户放弃电话呼入 104 ringingGiveUp 振铃时用户放弃电话呼入 105 noSeatOnline 无座席在线电话呼入 106 notWorkTime 非工作时间 电话呼入 107 ivrEnd IVR 后直接结束电话呼入 100 blackList 黑名单 电话呼出 2 unconnected	未接通电话呼出 108 restrictedCallee	被叫因高风险受限电话呼出 109 tooManyRequest 外呼超频限制电话呼出 110 restrictedArea 外呼区域限制电话呼出 111 restrictedTime	外呼时间限制 电话呼出 201 unknown	未知状态电话呼出 202 notAnswer 被叫未接听电话呼出 203 userReject	被叫拒接挂断电话呼出 204 powerOff	被叫关机电话呼出 205 numberNotExist	被叫空号电话呼出 206 busy	被叫忙电话呼出 207 outOfCredit	被叫欠费电话呼出 208 operatorError	运营商线路异常电话呼出 209 callerCancel	主叫取消电话呼出 210 notInService	被叫不在服务区电话呼入&呼出	211 clientError 客户端错误电话呼出 212 carrierBlocked 运营商拦截 */
   EndStatus?: number;
   /** 技能组名称 */
   SkillGroup?: string;
@@ -760,7 +798,7 @@ declare interface TelCdrInfo {
   ServeParticipants?: ServeParticipant[];
   /** 技能组ID */
   SkillGroupId?: number;
-  /** EndStatus与EndStatusString一一对应，具体枚举如下：**场景 EndStatus	EndStatusString	状态说明**电话呼入&呼出	1 ok 正常结束电话呼入&呼出	0 error 系统错误电话呼入 102 ivrGiveUp IVR 期间用户放弃电话呼入 103 waitingGiveUp 会话排队期间用户放弃电话呼入 104 ringingGiveUp 会话振铃期间用户放弃电话呼入 105 noSeatOnline 无座席在线电话呼入 106 notWorkTime 非工作时间 电话呼入 107 ivrEnd IVR 后直接结束电话呼入 100 blackList 呼入黑名单 电话呼出 2 unconnected	未接通电话呼出 108 restrictedCallee	被叫因高风险受限电话呼出 109 tooManyRequest 超频电话呼出 110 restrictedArea 外呼盲区电话呼出 111 restrictedTime	外呼时间限制 电话呼出 201 unknown	未知状态电话呼出 202 notAnswer	未接听电话呼出 203 userReject	拒接挂断电话呼出 204 powerOff	关机电话呼出 205 numberNotExist	空号电话呼出 206 busy	通话中电话呼出 207 outOfCredit	欠费电话呼出 208 operatorError	运营商线路异常电话呼出 209 callerCancel	主叫取消电话呼出 210 notInService	不在服务区电话呼入&呼出	211 clientError 客户端错误电话呼出 212 carrierBlocked 运营商拦截 */
+  /** EndStatus与EndStatusString一一对应，具体枚举如下：**场景 EndStatus	EndStatusString	状态说明**电话呼入&呼出	1 ok 正常通话电话呼入&呼出	0 error 异常结束电话呼入 102 ivrGiveUp IVR 期间用户放弃电话呼入 103 waitingGiveUp 排队时用户放弃电话呼入 104 ringingGiveUp 振铃时用户放弃电话呼入 105 noSeatOnline 无座席在线电话呼入 106 notWorkTime 非工作时间 电话呼入 107 ivrEnd IVR 后直接结束电话呼入 100 blackList 黑名单 电话呼出 2 unconnected	未接通电话呼出 108 restrictedCallee	被叫因高风险受限电话呼出 109 tooManyRequest 外呼超频限制电话呼出 110 restrictedArea 外呼区域限制电话呼出 111 restrictedTime	外呼时间限制 电话呼出 201 unknown	未知状态电话呼出 202 notAnswer 被叫未接听电话呼出 203 userReject	被叫拒接挂断电话呼出 204 powerOff	被叫关机电话呼出 205 numberNotExist	被叫空号电话呼出 206 busy	被叫忙电话呼出 207 outOfCredit	被叫欠费电话呼出 208 operatorError	运营商线路异常电话呼出 209 callerCancel	主叫取消电话呼出 210 notInService	被叫不在服务区电话呼入&呼出	211 clientError 客户端错误电话呼出 212 carrierBlocked 运营商拦截 */
   EndStatusString?: string;
   /** 会话开始时间戳，UNIX 秒级时间戳 */
   StartTimestamp?: number;
@@ -895,7 +933,7 @@ declare interface CreateAIAgentCallRequest {
   Callers?: string[];
   /** 提示词变量 */
   PromptVariables?: Variable[];
-  /** 通用变量： 提示词变量 欢迎语变量 dify变量 1. dify-inputs-xxx 为dify的inputs变量2. dify-inputs-user 为dify的user值3. dify-inputs-conversation_id 为dify的conversation_id值 */
+  /** 通用变量： 提示词变量 欢迎语变量 欢迎语延迟播放(秒级)：welcome-message-delay dify变量 1. dify-inputs-xxx 为dify的inputs变量2. dify-inputs-user 为dify的user值3. dify-inputs-conversation_id 为dify的conversation_id值 */
   Variables?: Variable[];
 }
 
@@ -963,7 +1001,7 @@ declare interface CreateAICallRequest {
   ExtractConfig?: AICallExtractConfigElement[];
   /** 模型温度控制 */
   Temperature?: number;
-  /** 通用变量： 提示词变量 欢迎语变量 dify变量 1. dify-inputs-xxx 为dify的inputs变量2. dify-inputs-user 为dify的user值3. dify-inputs-conversation_id 为dify的conversation_id值 */
+  /** 通用变量： 提示词变量 欢迎语变量 欢迎语延迟播放(秒级)：welcome-message-delay dify变量 1. dify-inputs-xxx 为dify的inputs变量2. dify-inputs-user 为dify的user值3. dify-inputs-conversation_id 为dify的conversation_id值 */
   Variables?: Variable[];
 }
 
@@ -1290,6 +1328,18 @@ declare interface CreateUserSigResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCCCSkillGroupRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 技能组ID */
+  SkillGroupId: number;
+}
+
+declare interface DeleteCCCSkillGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteExtensionRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -1342,6 +1392,26 @@ declare interface DescribeAICallExtractResultRequest {
 declare interface DescribeAICallExtractResultResponse {
   /** 结果列表 */
   ResultList?: AICallExtractResultElement[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAILatencyRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 会话 ID */
+  SessionId: string;
+  /** 查找起始时间 */
+  StartTime: number;
+  /** 1737350008 */
+  EndTime: number;
+}
+
+declare interface DescribeAILatencyResponse {
+  /** 时延明细数据 -1表示无对应数据 */
+  AILatencyDetail?: AILatencyDetail[];
+  /** 时延统计数据 -1表示无对应数据 */
+  AILatencyStatistics?: AILatencyStatistics;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1982,6 +2052,18 @@ declare interface DisableCCCPhoneNumberResponse {
   RequestId?: string;
 }
 
+declare interface ForceMemberOfflineRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 客服ID */
+  UserId: string;
+}
+
+declare interface ForceMemberOfflineResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface HangUpCallRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -2104,6 +2186,18 @@ declare interface ResetExtensionPasswordRequest {
 declare interface ResetExtensionPasswordResponse {
   /** 重置后密码 */
   Password?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RestoreMemberOnlineRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 客服ID */
+  UserId: string;
+}
+
+declare interface RestoreMemberOnlineResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2293,6 +2387,8 @@ declare interface Ccc {
   CreateStaff(data: CreateStaffRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStaffResponse>;
   /** 创建用户数据签名 {@link CreateUserSigRequest} {@link CreateUserSigResponse} */
   CreateUserSig(data: CreateUserSigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserSigResponse>;
+  /** 删除客服技能组 {@link DeleteCCCSkillGroupRequest} {@link DeleteCCCSkillGroupResponse} */
+  DeleteCCCSkillGroup(data: DeleteCCCSkillGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCCCSkillGroupResponse>;
   /** 删除话机账号 {@link DeleteExtensionRequest} {@link DeleteExtensionResponse} */
   DeleteExtension(data: DeleteExtensionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteExtensionResponse>;
   /** 删除预测式外呼任务 {@link DeletePredictiveDialingCampaignRequest} {@link DeletePredictiveDialingCampaignResponse} */
@@ -2301,6 +2397,8 @@ declare interface Ccc {
   DeleteStaff(data: DeleteStaffRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStaffResponse>;
   /** 查询 AI 通话内容提取结果 {@link DescribeAICallExtractResultRequest} {@link DescribeAICallExtractResultResponse} */
   DescribeAICallExtractResult(data: DescribeAICallExtractResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAICallExtractResultResponse>;
+  /** 获取 AI 耗时 {@link DescribeAILatencyRequest} {@link DescribeAILatencyResponse} */
+  DescribeAILatency(data: DescribeAILatencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAILatencyResponse>;
   /** 查询生效运营商白名单规则 {@link DescribeActiveCarrierPrivilegeNumberRequest} {@link DescribeActiveCarrierPrivilegeNumberResponse} */
   DescribeActiveCarrierPrivilegeNumber(data: DescribeActiveCarrierPrivilegeNumberRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeActiveCarrierPrivilegeNumberResponse>;
   /** 查询座席巡航式外呼任务 {@link DescribeAgentCruiseDialingCampaignRequest} {@link DescribeAgentCruiseDialingCampaignResponse} */
@@ -2357,6 +2455,8 @@ declare interface Ccc {
   DescribeTelSession(data: DescribeTelSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTelSessionResponse>;
   /** 停用号码 {@link DisableCCCPhoneNumberRequest} {@link DisableCCCPhoneNumberResponse} */
   DisableCCCPhoneNumber(data: DisableCCCPhoneNumberRequest, config?: AxiosRequestConfig): AxiosPromise<DisableCCCPhoneNumberResponse>;
+  /** 强制客服下线 {@link ForceMemberOfflineRequest} {@link ForceMemberOfflineResponse} */
+  ForceMemberOffline(data: ForceMemberOfflineRequest, config?: AxiosRequestConfig): AxiosPromise<ForceMemberOfflineResponse>;
   /** 挂断电话 {@link HangUpCallRequest} {@link HangUpCallResponse} */
   HangUpCall(data: HangUpCallRequest, config?: AxiosRequestConfig): AxiosPromise<HangUpCallResponse>;
   /** 修改公司资质申请 {@link ModifyCompanyApplyRequest} {@link ModifyCompanyApplyResponse} */
@@ -2373,6 +2473,8 @@ declare interface Ccc {
   PausePredictiveDialingCampaign(data: PausePredictiveDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<PausePredictiveDialingCampaignResponse>;
   /** 重置话机注册密码 {@link ResetExtensionPasswordRequest} {@link ResetExtensionPasswordResponse} */
   ResetExtensionPassword(data: ResetExtensionPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetExtensionPasswordResponse>;
+  /** 恢复客服上线 {@link RestoreMemberOnlineRequest} {@link RestoreMemberOnlineResponse} */
+  RestoreMemberOnline(data: RestoreMemberOnlineRequest, config?: AxiosRequestConfig): AxiosPromise<RestoreMemberOnlineResponse>;
   /** 恢复预测式外呼任务 {@link ResumePredictiveDialingCampaignRequest} {@link ResumePredictiveDialingCampaignResponse} */
   ResumePredictiveDialingCampaign(data: ResumePredictiveDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<ResumePredictiveDialingCampaignResponse>;
   /** 停止自动外呼任务 {@link StopAutoCalloutTaskRequest} {@link StopAutoCalloutTaskResponse} */

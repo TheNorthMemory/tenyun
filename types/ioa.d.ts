@@ -24,10 +24,22 @@ declare interface Condition {
   PageNum?: number;
 }
 
+/** 提交送检任务相应数据 */
+declare interface CreateDLPFileDetectionTaskData {
+  /** 提交任务生成的id，也即requestID。用于后续查询 */
+  DLPFileDetectionTaskID?: string;
+}
+
 /** 响应返回的data */
 declare interface CreateDeviceVirtualGroupRspData {
   /** 返回的自定义分组id */
   Id?: number;
+}
+
+/** 业务响应数据 */
+declare interface CreatePrivilegeCodeRspData {
+  /** 特权码数据 */
+  Code?: string | null;
 }
 
 /** 账号分组信息 */
@@ -80,6 +92,18 @@ declare interface DescribeAccountGroupsPageResp {
   Items?: DescribeAccountGroupsData[];
   /** 分页公共对象 */
   Page?: Paging;
+}
+
+/** 查询文件检测结果响应数据 */
+declare interface DescribeDLPFileDetectResultData {
+  /** 提交任务时的文件md5 */
+  FileMd5?: string;
+  /** 提交任务时的文件名 */
+  FileName?: string;
+  /** 状态：等待检测->正在检测->检测失败/检测成功。或任务不存在 */
+  Status?: string;
+  /** 文件检测结果，json字符串。 */
+  DetectResult?: string;
 }
 
 /** 分页的data数据 */
@@ -146,6 +170,42 @@ declare interface DescribeLocalAccountsPage {
   Page?: Paging;
   /** 获取账号列表响应的单个对象 */
   Items?: DescribeLocalAccountsData[];
+}
+
+/** 软件统计响应对象集合 */
+declare interface DescribeSoftCensusListByDeviceData {
+  /** 终端用户名 */
+  UserName?: string | null;
+  /** mac地址 */
+  MacAddr?: string | null;
+  /** 终端计算机名称 */
+  Name?: string | null;
+  /** 终端组路径名 */
+  GroupNamePath?: string | null;
+  /** IP地址 */
+  Ip?: string | null;
+  /** 唯一标识Mid */
+  Mid?: string | null;
+  /** 企业账户名 */
+  IoaUserName?: string | null;
+  /** 终端分组Id(只支持32位) */
+  GroupId?: number | null;
+  /** 终端组名 */
+  GroupName?: string | null;
+  /** 终端列表Id(只支持32位) */
+  Id?: number | null;
+  /** 软件数量(只支持32位) */
+  SoftNum?: number | null;
+  /** 盗版风险（1=风险;2=未知） */
+  PiracyRisk?: number | null;
+}
+
+/** 业务响应数据 */
+declare interface DescribeSoftCensusListByDevicePageData {
+  /** 软件统计响应对象集合 */
+  Items?: DescribeSoftCensusListByDeviceData[] | null;
+  /** 分页公共对象 */
+  Page?: Paging | null;
 }
 
 /** 业务响应数据 */
@@ -340,6 +400,26 @@ declare interface Sort {
   Order?: string;
 }
 
+declare interface CreateDLPFileDetectionTaskRequest {
+  /** 文件下载链接，要求公网可访问，GET方式访问后为文件 */
+  Url: string;
+  /** 文件名，带后缀 */
+  FileName: string;
+  /** 文件md5，传入相同md5会直接使用之前缓存的结果。> 请注意：不同文件使用相同md5送检，会命中缓存得到旧的检测结果 */
+  FileMd5: string;
+  /** 管理域实例ID，用于CAM管理域权限分配 */
+  DomainInstanceId?: string;
+  /** 回调地址，暂时未使用 */
+  CallBackUrl?: string;
+}
+
+declare interface CreateDLPFileDetectionTaskResponse {
+  /** 创建送检任务响应数据 */
+  Data?: CreateDLPFileDetectionTaskData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDeviceVirtualGroupRequest {
   /** 必填，终端自定义分组名 */
   DeviceVirtualGroupName?: string;
@@ -362,6 +442,20 @@ declare interface CreateDeviceVirtualGroupResponse {
   RequestId?: string;
 }
 
+declare interface CreatePrivilegeCodeRequest {
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
+  /** 必填；设备唯一标识符; */
+  Mid?: string;
+}
+
+declare interface CreatePrivilegeCodeResponse {
+  /** 业务响应数据 */
+  Data?: CreatePrivilegeCodeRspData | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAccountGroupsRequest {
   /** 搜索范围：0-仅当前分组的直接子组，1-当前分组的所有子组。默认为0。 */
   Deepin?: number;
@@ -374,6 +468,20 @@ declare interface DescribeAccountGroupsRequest {
 declare interface DescribeAccountGroupsResponse {
   /** 账号分组详情响应数据 */
   Data?: DescribeAccountGroupsPageResp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDLPFileDetectResultRequest {
+  /** 管理域实例ID，用于CAM管理域权限分配 */
+  DomainInstanceId?: string;
+  /** 查询ID，即提交送检任务接口（CreateDLPFileDetectionTask）返回的任务ID（DLPFileDetectionTaskID） */
+  QueryID?: string;
+}
+
+declare interface DescribeDLPFileDetectResultResponse {
+  /** 查询任务结果 */
+  Data?: DescribeDLPFileDetectResultData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -434,19 +542,43 @@ declare interface DescribeRootAccountGroupResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSoftCensusListByDeviceRequest {
+  /** 必填，系统类型（0: win，1：linux，2: mac，4：android，5：ios ） */
+  OsType?: number;
+  /** 必填，终端分组ID */
+  GroupId?: number;
+  /** 过滤条件、分页参数 Name - String - 是否必填：否 - 操作符: eq,like,ilike - 排序支持：否 - 备注：字段含义，终端名。 UserName - String - 是否必填：否 - 操作符: eq,like,ilike - 排序支持：否 - 备注：字段含义，终端用户名。 IoaUserName - String - 是否必填：否 - 操作符: eq,like,ilike - 排序支持：否 - 备注：字段含义，最近登录账号。 Ip - String - 是否必填：否 - 操作符: eq,like,ilike - 排序支持：否 - 备注：字段含义，IP地址。 MacAddr - String - 是否必填：否 - 操作符: eq,like,ilike - 排序支持：否 - 备注：字段含义，MAC地址。 */
+  Condition?: Condition;
+}
+
+declare interface DescribeSoftCensusListByDeviceResponse {
+  /** 业务响应数据 */
+  Data?: DescribeSoftCensusListByDevicePageData | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Ioa iOA 零信任安全管理系统} */
 declare interface Ioa {
   (): Versions;
+  /** 提交送检任务 {@link CreateDLPFileDetectionTaskRequest} {@link CreateDLPFileDetectionTaskResponse} */
+  CreateDLPFileDetectionTask(data: CreateDLPFileDetectionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDLPFileDetectionTaskResponse>;
   /** 创建终端自定义分组 {@link CreateDeviceVirtualGroupRequest} {@link CreateDeviceVirtualGroupResponse} */
   CreateDeviceVirtualGroup(data?: CreateDeviceVirtualGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceVirtualGroupResponse>;
+  /** 创建特权码、卸载码 {@link CreatePrivilegeCodeRequest} {@link CreatePrivilegeCodeResponse} */
+  CreatePrivilegeCode(data?: CreatePrivilegeCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivilegeCodeResponse>;
   /** 查询账号分组列表 {@link DescribeAccountGroupsRequest} {@link DescribeAccountGroupsResponse} */
   DescribeAccountGroups(data?: DescribeAccountGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountGroupsResponse>;
+  /** 查询文件检测结果 {@link DescribeDLPFileDetectResultRequest} {@link DescribeDLPFileDetectResultResponse} */
+  DescribeDLPFileDetectResult(data?: DescribeDLPFileDetectResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDLPFileDetectResultResponse>;
   /** 查询设备列表详情 {@link DescribeDevicesRequest} {@link DescribeDevicesResponse} */
   DescribeDevices(data?: DescribeDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicesResponse>;
   /** 获取账号列表 {@link DescribeLocalAccountsRequest} {@link DescribeLocalAccountsResponse} */
   DescribeLocalAccounts(data?: DescribeLocalAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLocalAccountsResponse>;
   /** 查询账号根分组 {@link DescribeRootAccountGroupRequest} {@link DescribeRootAccountGroupResponse} */
   DescribeRootAccountGroup(data?: DescribeRootAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRootAccountGroupResponse>;
+  /** 按终端查看软件统计信息 {@link DescribeSoftCensusListByDeviceRequest} {@link DescribeSoftCensusListByDeviceResponse} */
+  DescribeSoftCensusListByDevice(data?: DescribeSoftCensusListByDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSoftCensusListByDeviceResponse>;
 }
 
 export declare type Versions = ["2022-06-01"];

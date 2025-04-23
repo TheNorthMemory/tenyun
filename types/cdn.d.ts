@@ -37,9 +37,9 @@ declare interface AdvanceCacheRule {
 /** 高级配置集合 */
 declare interface AdvanceConfig {
   /** 高级配置名称。 */
-  Name: string | null;
+  Name?: string | null;
   /** 是否支持高级配置，on：支持off：不支持 */
-  Value: string | null;
+  Value?: string | null;
 }
 
 /** 回源的自定义Https配置 */
@@ -575,7 +575,7 @@ declare interface CacheOptResult {
   /** 成功的url列表 */
   SuccessUrls?: string[] | null;
   /** 失败的url列表 */
-  FailUrls: string[] | null;
+  FailUrls?: string[] | null;
 }
 
 /** 组成CacheKey的一部分 */
@@ -613,35 +613,35 @@ declare interface CcTopData {
 /** 访问明细数据类型 */
 declare interface CdnData {
   /** 查询指定的指标名称：flux：流量，单位为 bytebandwidth：带宽，单位为 bpsrequest：请求数，单位为 次fluxHitRate：流量命中率，单位为 %statusCode：状态码，返回 2XX、3XX、4XX、5XX 汇总数据，单位为 个2XX：返回 2XX 状态码汇总及各 2 开头状态码数据，单位为 个3XX：返回 3XX 状态码汇总及各 3 开头状态码数据，单位为 个4XX：返回 4XX 状态码汇总及各 4 开头状态码数据，单位为 个5XX：返回 5XX 状态码汇总及各 5 开头状态码数据，单位为 个或指定查询的某一具体状态码 */
-  Metric: string;
+  Metric?: string;
   /** 明细数据组合 */
-  DetailData: TimestampData[];
+  DetailData?: TimestampData[];
   /** 汇总数据组合 */
-  SummarizedData: SummarizedData;
+  SummarizedData?: SummarizedData;
 }
 
 /** IP 属性信息 */
 declare interface CdnIp {
   /** 指定查询的 IP */
-  Ip: string;
+  Ip?: string;
   /** IP 归属：yes：节点归属于腾讯云 CDNno：节点不属于腾讯云 CDN */
-  Platform: string;
+  Platform?: string;
   /** 节点所处的省份/国家unknown 表示节点位置未知 */
-  Location: string;
+  Location?: string;
   /** 节点上下线历史记录 */
-  History: CdnIpHistory[];
+  History?: CdnIpHistory[];
   /** 节点的所在区域mainland：中国境内加速节点overseas：中国境外加速节点unknown：服务地域无法获取 */
-  Area: string;
+  Area?: string;
   /** 节点的所在城市 */
-  City: string | null;
+  City?: string | null;
 }
 
 /** CDN 节点上下线历史记录 */
 declare interface CdnIpHistory {
   /** 操作类型online：节点上线offline：节点下线 */
-  Status: string;
+  Status?: string;
   /** 操作类型对应的操作时间当该值为 null 时表示无历史状态变更记录 */
-  Datetime: string | null;
+  Datetime?: string | null;
 }
 
 /** https 客户端证书配置 */
@@ -659,13 +659,13 @@ declare interface ClientCert {
 /** 客户端信息 */
 declare interface ClientInfo {
   /** 省份。 */
-  ProvName: string | null;
+  ProvName?: string | null;
   /** 国家。 */
-  Country: string | null;
+  Country?: string | null;
   /** 运营商。 */
-  IspName: string | null;
+  IspName?: string | null;
   /** 客户端IP */
-  Ip: string | null;
+  Ip?: string | null;
 }
 
 /** 通过Cls日志，计算出来的IP每秒访问数量 */
@@ -683,33 +683,33 @@ declare interface ClsLogIpData {
 /** CLS日志搜索对象 */
 declare interface ClsLogObject {
   /** 主题ID */
-  TopicId: string;
+  TopicId?: string;
   /** 主题名字 */
-  TopicName: string;
+  TopicName?: string;
   /** 日志时间 */
-  Timestamp: string;
+  Timestamp?: string;
   /** 日志内容 */
-  Content: string;
+  Content?: string;
   /** 采集路径 */
-  Filename: string;
+  Filename?: string;
   /** 日志来源设备 */
-  Source: string;
+  Source?: string;
 }
 
 /** Cls日志搜索结果 */
 declare interface ClsSearchLogs {
   /** 获取更多检索结果的游标 */
-  Context: string;
+  Context?: string;
   /** 搜索结果是否已经全部返回 */
-  Listover: boolean;
+  Listover?: boolean;
   /** 日志内容信息 */
-  Results: ClsLogObject[];
+  Results?: ClsLogObject[];
 }
 
 /** 是否兼容旧版配置 */
 declare interface Compatibility {
   /** 兼容标志状态码。 */
-  Code: number | null;
+  Code?: number | null;
 }
 
 /** 智能压缩配置，默认对 js、html、css、xml、json、shtml、htm 后缀且大小为 256 ~ 2097152 字节的文件进行 GZIP 压缩 */
@@ -927,81 +927,81 @@ declare interface DetailDomain {
 /** 诊断报告内容数据 */
 declare interface DiagnoseData {
   /** 诊断报告内容 */
-  Data: DiagnoseUnit[] | null;
+  Data?: DiagnoseUnit[] | null;
   /** 当前诊断项是否正常。"ok"：正常"error"：异常"warning"："警告" */
-  Status: string | null;
+  Status?: string | null;
 }
 
 /** 诊断信息 */
 declare interface DiagnoseInfo {
   /** 待诊断的URL。 */
-  DiagnoseUrl: string | null;
+  DiagnoseUrl?: string | null;
   /** 由系统生成的诊断链接。 */
-  DiagnoseLink: string | null;
+  DiagnoseLink?: string | null;
   /** 诊断创建时间。 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 诊断链接过期时间。 */
-  ExpireDate: string | null;
+  ExpireDate?: string | null;
   /** 诊断链接当前访问次数，一个诊断链接最多可访问10次。 */
-  VisitCount: number | null;
+  VisitCount?: number | null;
   /** 访问诊断链接的客户端简易信息 */
-  ClientList: DiagnoseList[] | null;
+  ClientList?: DiagnoseList[] | null;
   /** 域名加速区域 */
-  Area: string | null;
+  Area?: string | null;
 }
 
 /** 客户端访问诊断URL信息列表 */
 declare interface DiagnoseList {
   /** 诊断任务标签。 */
-  DiagnoseTag: string | null;
+  DiagnoseTag?: string | null;
   /** 报告ID，用于获取详细诊断报告。 */
-  ReportId: string | null;
+  ReportId?: string | null;
   /** 客户端信息。 */
-  ClientInfo: ClientInfo[] | null;
+  ClientInfo?: ClientInfo[] | null;
   /** 最终诊断结果。-1：已提交0 ：检测中1 ：检测正常2 ： 检测异常3 ： 诊断页面异常关闭 */
-  FinalDiagnose: number | null;
+  FinalDiagnose?: number | null;
   /** 诊断任务创建时间。 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
 }
 
 /** 诊断报告单元信息 */
 declare interface DiagnoseUnit {
   /** 内容单元英文名称。 */
-  Key: string | null;
+  Key?: string | null;
   /** 内容单元中文名称。 */
-  KeyText: string | null;
+  KeyText?: string | null;
   /** 报告内容。 */
-  Value: string | null;
+  Value?: string | null;
   /** 报告内容。 */
-  ValueText: string | null;
+  ValueText?: string | null;
 }
 
 /** 地区运营商明细数据 */
 declare interface DistrictIspInfo {
   /** 域名 */
-  Domain: string;
+  Domain?: string;
   /** 协议类型 */
-  Protocol: string;
+  Protocol?: string;
   /** IP协议类型 */
-  IpProtocol: string;
+  IpProtocol?: string;
   /** 起始时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 结束时间 */
-  EndTime: string;
+  EndTime?: string;
   /** 时间间隔，单位为分钟 */
-  Interval: number;
+  Interval?: number;
   /** 指标名称 */
-  Metric: string;
+  Metric?: string;
   /** 地区ID */
-  District: number;
+  District?: number;
   /** 运营商ID */
-  Isp: number;
+  Isp?: number;
   /** 指标数据点 */
-  DataPoints: number[];
+  DataPoints?: number[];
   /** 地区名称 */
-  DistrictName: string;
+  DistrictName?: string;
   /** 运营商名称 */
-  IspName: string;
+  IspName?: string;
 }
 
 /** 域名地区配置 */
@@ -1467,9 +1467,9 @@ declare interface MainlandConfig {
 /** 名称与ID映射关系 */
 declare interface MapInfo {
   /** 对象 Id */
-  Id: number;
+  Id?: number;
   /** 对象名称 */
-  Name: string;
+  Name?: string;
 }
 
 /** 浏览器缓存规则配置，用于设置 MaxAge 默认值，默认为关闭状态 */
@@ -1563,7 +1563,7 @@ declare interface OriginCombine {
 /** CDN回源节点IP信息 */
 declare interface OriginIp {
   /** 回源IP段/回源IP，默认返回IP段信息。 */
-  Ip: string;
+  Ip?: string;
 }
 
 /** 跨国回源优化配置，默认为关闭状态 (已下线) */
@@ -1737,17 +1737,17 @@ declare interface PostSize {
 /** 刷新任务详情 */
 declare interface PurgeTask {
   /** 刷新任务 ID */
-  TaskId: string;
+  TaskId?: string;
   /** 刷新 URL */
-  Url: string;
+  Url?: string;
   /** 刷新任务状态fail：刷新失败done：刷新成功process：刷新中 */
-  Status: string;
+  Status?: string;
   /** 刷新类型url：URL 刷新path：目录刷新 */
-  PurgeType: string;
+  PurgeType?: string;
   /** 刷新方式flush：刷新更新资源（仅目录刷新时有此类型）delete：刷新全部资源 */
-  FlushType: string;
+  FlushType?: string;
   /** 刷新任务提交时间 */
-  CreateTime: string;
+  CreateTime?: string;
 }
 
 /** 预热任务详情 */
@@ -1799,13 +1799,13 @@ declare interface Quic {
 /** 刷新/预热 可用量及配额 */
 declare interface Quota {
   /** 单次批量提交配额上限。 */
-  Batch: number;
+  Batch?: number;
   /** 每日提交配额上限。 */
-  Total: number;
+  Total?: number;
   /** 每日剩余的可提交配额。 */
-  Available: number;
+  Available?: number;
   /** 配额的区域。 */
-  Area: string;
+  Area?: string;
 }
 
 /** 分片回源配置，默认为开启状态 */
@@ -1861,9 +1861,9 @@ declare interface RefererRule {
 /** 区域映射id和子区域id的关联信息。 */
 declare interface RegionMapRelation {
   /** 区域ID。 */
-  RegionId: number;
+  RegionId?: number;
   /** 子区域ID列表 */
-  SubRegionIdList: number[];
+  SubRegionIdList?: number[];
 }
 
 /** 远程鉴权规则配置，可以包含多种规则配置。RemoteAuthenticationRules和Server 互斥，只需要配置其中一个。若只配置Server ，RemoteAuthenticationRules中详细规则参数将采用默认参数；默认参数值见各个配置项中说明； */
@@ -1895,17 +1895,17 @@ declare interface RemoteAuthenticationRule {
 /** CDN报表数据 */
 declare interface ReportData {
   /** 项目ID/域名ID。 */
-  ResourceId: string;
+  ResourceId?: string;
   /** 项目名称/域名。 */
-  Resource: string;
+  Resource?: string;
   /** 流量总和/带宽最大值，单位分别为bytes，bps。 */
-  Value: number;
+  Value?: number;
   /** 单个资源占总体百分比。 */
-  Percentage: number;
+  Percentage?: number;
   /** 计费流量总和/计费带宽最大值，单位分别为bytes，bps。 */
-  BillingValue: number;
+  BillingValue?: number;
   /** 计费数值占总体百分比。 */
-  BillingPercentage: number;
+  BillingPercentage?: number;
 }
 
 /** 自定义请求头配置，默认为关闭状态 */
@@ -1919,9 +1919,9 @@ declare interface RequestHeader {
 /** 计费数据明细 */
 declare interface ResourceBillingData {
   /** 资源名称，根据查询条件不同分为以下几类：某一个具体域名：表示该域名明细数据multiDomains：表示多域名汇总明细数据某一个项目 ID：指定项目查询时，显示为项目 IDall：账号维度数据明细 */
-  Resource: string;
+  Resource?: string;
   /** 计费数据详情 */
-  BillingData: CdnData[];
+  BillingData?: CdnData[];
 }
 
 /** 查询对象及其对应的访问明细数据 */
@@ -1935,9 +1935,9 @@ declare interface ResourceData {
 /** 查询对象及其对应的回源明细数据 */
 declare interface ResourceOriginData {
   /** 资源名称，根据查询条件不同分为以下几类：具体域名：表示该域名明细数据multiDomains：表示多域名汇总明细数据项目 ID：指定项目查询时，显示为项目 IDall：账号维度明细数据 */
-  Resource: string;
+  Resource?: string;
   /** 回源数据详情 */
-  OriginData: CdnData[];
+  OriginData?: CdnData[];
 }
 
 /** 自定义响应头配置，默认为关闭状态 */
@@ -2399,9 +2399,9 @@ declare interface StatusCodeCacheRule {
 /** 明细数据的汇总值，各指标根据其特性不同拥有不同汇总方式 */
 declare interface SummarizedData {
   /** 汇总方式，存在以下几种：sum：累加求和max：最大值，带宽模式下，采用 5 分钟粒度汇总数据，计算峰值带宽avg：平均值 */
-  Name: string;
+  Name?: string;
   /** 汇总后的数据值 */
-  Value: number;
+  Value?: number;
 }
 
 /** 域名标签配置 */
@@ -2423,9 +2423,9 @@ declare interface TimestampData {
 /** 排序类型数据结构 */
 declare interface TopData {
   /** 资源名称，根据查询条件不同分为以下几类：具体域名：表示该域名明细数据multiDomains：表示多域名汇总明细数据项目 ID：指定项目查询时，显示为项目 IDall：账号维度明细数据 */
-  Resource: string;
+  Resource?: string;
   /** 排序结果详情 */
-  DetailData: TopDetailData[];
+  DetailData?: TopDetailData[];
 }
 
 /** 排序类型数据结构 */
@@ -2439,9 +2439,9 @@ declare interface TopDataMore {
 /** 排序类型的数据结构 */
 declare interface TopDetailData {
   /** 数据类型的名称 */
-  Name: string;
+  Name?: string;
   /** 数据值 */
-  Value: number;
+  Value?: number;
 }
 
 /** 排序类型的数据结构，同时附带上该项的在总值的占比 */
@@ -2523,13 +2523,13 @@ declare interface TrafficPackage {
 /** 封禁url的详细信息 */
 declare interface UrlRecord {
   /** 状态(disable表示封禁，enable表示解封) */
-  Status: string | null;
+  Status?: string | null;
   /** 对应的url */
-  RealUrl: string | null;
+  RealUrl?: string | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
 }
 
 /** 访问URL重写配置 */

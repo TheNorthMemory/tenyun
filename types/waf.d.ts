@@ -324,6 +324,20 @@ declare interface BatchIpAccessControlItem {
   GroupIds?: number[];
 }
 
+/** 动作策略的匹配规则实体 */
+declare interface BotActionScopeRuleEntry {
+  /** 参数 */
+  Key?: string;
+  /** 匹配符 */
+  Op?: string;
+  /** 参数值 */
+  Value?: string;
+  /** 对于头部字段匹配value的时候指定的头部名 */
+  Name?: string;
+  /** 470后使用此字段存储多值 */
+  ValueArray?: string[];
+}
+
 /** Bot资源信息 */
 declare interface BotPkg {
   /** 资源id */
@@ -368,6 +382,128 @@ declare interface BotQPS {
   RenewFlag: number;
 }
 
+/** 获取场景动作策略列表时的动作策略实体 */
+declare interface BotSceneActionRule {
+  /** 动作策略ID */
+  RuleId?: string;
+  /** 动作策略名称 */
+  RuleName?: string;
+  /** 策略优先级 */
+  Priority?: number;
+  /** 策略生效状态 */
+  Status?: boolean;
+  /** 分数范围 */
+  Score?: BotScoreRuleEntry[];
+  /** 100-宽松、200-中等、300-严格、0-自定义 */
+  Level?: string;
+  /** 生效范围，为空表示全部范围 */
+  Scope?: BotActionScopeRuleEntry[];
+  /** default：默认创建 custom：自定义创建 */
+  Type?: string;
+  /** 匹配范围类型：全局匹配 or 自定义匹配范围 */
+  ScopeType?: string;
+  /** 匹配条件间的与或关系 */
+  ActionMatchType?: string;
+}
+
+/** 场景的详细配置信息 */
+declare interface BotSceneInfo {
+  /** 场景ID */
+  SceneId?: string;
+  /** 场景类型，default:默认场景,custom:非默认场景 */
+  Type?: string;
+  /** 场景名 */
+  SceneName?: string;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** 场景模板类型，登录: login 秒杀:seckill 爬内容：crawl 自定义: custom */
+  BusinessType?: string[];
+  /** 客户端类型，浏览器/H5 : browser 小程序: miniApp App: */
+  ClientType?: string[];
+  /** 优先级 */
+  Priority?: number;
+  /** 匹配范围 */
+  MatchCondition?: BotSceneMatchCondition[];
+  /** 场景开关 */
+  SceneStatus?: boolean;
+  /** 前端对抗开关 */
+  JsInjectStatus?: boolean;
+  /** AI开关 */
+  AIStatus?: boolean;
+  /** TI开关 */
+  TIStatus?: boolean;
+  /** 智能统计开关 */
+  StatisticStatus?: boolean;
+  /** 动作策略数量 */
+  ActionRuleCount?: number;
+  /** 自定义规则数量 */
+  UCBCount?: number;
+  /** 场景的匹配范围，global-全部匹配 custom-自定义匹配范围 */
+  MatchType?: string;
+  /** 匹配条件间的与或关系 */
+  ActionMatchType?: string;
+  /** UA模块开关 */
+  UAStatus?: boolean;
+  /** 简易模式场景：前端对抗对应mysql的记录id */
+  JsInjectRuleId?: number;
+  /** 简易模式场景：前端对抗配置动作 */
+  JsInjectAction?: number;
+  /** 简易模式场景：前端对抗重定向路径 */
+  JsInjectRedirect?: string;
+  /** 简易模式场景：动作策略信息 PS:简易模式只有一个动作策略 */
+  ActionRuleList?: BotSceneActionRule[];
+  /** 简易模式场景：monitor-观察 intercept-拦截 custom-自定义 */
+  BotIdPattern?: string;
+  /** 简易模式场景：bot_id规则总数 */
+  BotIdCount?: number;
+  /** 简易模式场景：观察动作的规则总数 */
+  BotIdMonitorCount?: number;
+  /** 简易模式场景：拦截动作的规则总数 */
+  BotIdInterceptCount?: number;
+  /** 创建场景时选择的规则集 */
+  RuleSetSelection?: string[];
+  /** 改场景的bot token列表 */
+  TokenList?: BotToken[];
+  /** 简易模式场景：重定向动作的规则总数 */
+  BotIdRedirectCount?: number;
+  /** 简易模式场景：人机识别动作的规则总数 */
+  BotIdCaptchaCount?: number;
+  /** 简易模式场景：防护等级 */
+  BotIdProtectLevel?: string;
+  /** 简易模式场景：全局重定向路径 */
+  BotIdGlobalRedirect?: string;
+  /** 简易模式场景：JS校验动作的规则总数 */
+  BotIdJsChallengeCount?: number;
+}
+
+/** 场景匹配条件 */
+declare interface BotSceneMatchCondition {
+  /** 匹配参数 */
+  Key: string;
+  /** 匹配符 */
+  Op: string;
+  /** 匹配值 */
+  Value: string;
+  /** 对于头部字段匹配value的时候指定的头部名 */
+  Name?: string;
+  /** 470后使用此入参存在多值 */
+  ValueArray?: string[];
+}
+
+/** 动作策略的一条分数段实体 */
+declare interface BotScoreRuleEntry {
+  /** 分数区间上限 */
+  Upper: string;
+  /** 分数区间下限 */
+  Lower: string;
+  /** 处置动作 */
+  Action: string;
+  /** 流量标签 */
+  Label: string;
+  /** 重定向 */
+  Redirect?: string;
+}
+
 /** bot的趋势图对象 */
 declare interface BotStatPointItem {
   /** 横坐标 */
@@ -378,6 +514,30 @@ declare interface BotStatPointItem {
   Value: number;
   /** Key对应的页面展示内容 */
   Label: string;
+}
+
+/** bot-token配置 */
+declare interface BotToken {
+  /** 会话名称 */
+  Name?: string;
+  /** 会话描述 */
+  Description?: string;
+  /** 会话id */
+  Id?: string;
+  /** 策略的开关状态 */
+  Status?: boolean;
+  /** 会话位置 */
+  Location?: string;
+  /** 会话key */
+  Key?: string;
+  /** 会话匹配方式，前缀匹配、后缀匹配等 */
+  Operator?: string;
+  /** 会话更新的时间戳 */
+  Timestamp?: number;
+  /** 场景列表，内容为空表示全部场景应用 */
+  Scene?: string[];
+  /** 优先级 */
+  Priority?: number;
 }
 
 /** 数据封装 */
@@ -716,6 +876,14 @@ declare interface DescribeAreaBanAreasRsp {
   CronType?: string;
 }
 
+/** 获取自定义规则列表时的出参 */
+declare interface DescribeBotUCBRuleRsp {
+  /** 规则列表 */
+  Res?: InOutputBotUCBRule[];
+  /** 规则总数 */
+  TotalCount?: number;
+}
+
 /** DescribeCustomRules接口回包中的复杂类型 */
 declare interface DescribeCustomRulesRspRuleListItem {
   /** 动作类型，1代表阻断，2代表人机识别，3代表观察，4代表重定向，5代表JS校验 */
@@ -1034,6 +1202,16 @@ declare interface ExportAccessInfo {
   CreateTime?: string;
 }
 
+/** 设置哪些字段是否存储或转发 */
+declare interface FieldWriteConfig {
+  /** 1:开启 0:不开启 */
+  EnableHeaders?: number;
+  /** 1:开启 0:不开启 */
+  EnableBody?: number;
+  /** 1:开启 0:不开启 */
+  EnableBot?: number;
+}
+
 /** 过滤数组 */
 declare interface FiltersItemNew {
   /** 字段名； 过滤子订单号过滤通过name 为：DealName； value为子订单号 */
@@ -1082,6 +1260,18 @@ declare interface FraudPkg {
   UsedNum?: number;
   /** 续费标志 */
   RenewFlag?: number;
+}
+
+/** 当前开启的、匹配范围为全局、优先级最高的场景信息 */
+declare interface GlobalSceneInfo {
+  /** 场景ID */
+  SceneId?: string;
+  /** 场景名称 */
+  SceneName?: string;
+  /** 场景优先级 */
+  Priority?: number;
+  /** 场景更新时间 */
+  UpdateTime?: number;
 }
 
 /** 计费下单接口出入参Goods */
@@ -1264,6 +1454,78 @@ declare interface HybridPkg {
   UsedNum?: number;
   /** 续费标志 */
   RenewFlag?: number;
+}
+
+/** 修改/新增自定义规则的入参，查询自定义规则列表时的出参 */
+declare interface InOutputBotUCBRule {
+  /** 域名 */
+  Domain: string;
+  /** 规则名称 */
+  Name: string;
+  /** UCB的具体规则项 */
+  Rule: InOutputUCBRuleEntry[];
+  /** 处置动作 */
+  Action: string;
+  /** 规则开关 */
+  OnOff: string;
+  /** 规则类型 */
+  RuleType: number;
+  /** 规则优先级 */
+  Prior: number;
+  /** 修改时间戳 */
+  Timestamp: number;
+  /** 标签 */
+  Label: string;
+  /** 入参ID */
+  Id?: string;
+  /** 场景ID */
+  SceneId?: string;
+  /** 生效时间 */
+  ValidTime?: number;
+  /** 传入的appid */
+  Appid?: number;
+  /** 额外参数 */
+  AdditionArg?: string;
+  /** 规则描述 */
+  Desc?: string;
+  /** 规则ID */
+  RuleId?: string;
+  /** true-系统预设规则 false-自定义规则 */
+  PreDefine?: boolean;
+  /** 定时任务类型 */
+  JobType?: string;
+  /** 定时任务配置 */
+  JobDateTime?: JobDateTime;
+  /** 生效截止时间 */
+  ExpireTime?: number;
+  /** 生效-1,失效-0 */
+  ValidStatus?: number;
+  /** 自定义拦截页面ID */
+  BlockPageId?: number;
+  /** 当Action=intercept时，此字段必填 */
+  ActionList?: UCBActionProportion[];
+}
+
+/** 自定义规则UCB的Rule生效条件 */
+declare interface InOutputUCBRuleEntry {
+  /** 键 */
+  Key?: string;
+  /** 操作符 */
+  Op?: string;
+  /** 值 */
+  Value?: UCBEntryValue;
+  /** 可选的补充操作符 */
+  OpOp?: string;
+  /** 可选的补充参数 */
+  OpArg?: string[];
+  /** 可选的补充值 */
+  OpValue?: number;
+  /** Header参数值时使用 */
+  Name?: string;
+  /** 区域选择 */
+  Areas?: Area[];
+  /** 语言环境 */
+  Lang?: string;
 }
 
 /** 一个实例的详细信息 */
@@ -1663,6 +1925,40 @@ declare interface PortItem {
 }
 
 /** CKafka投递流 */
+declare interface PostCKafkaFlowInfo {
+  /** 投递流唯一ID */
+  FlowId?: number;
+  /** 1-访问日志 2-攻击日志 */
+  LogType?: number;
+  /** 状态 0-为关闭 1-为启用 */
+  Status?: number;
+  /** CKafka所在区域 */
+  CKafkaRegion?: string;
+  /** CKafka实例ID */
+  CKafkaID?: string;
+  /** ckafka地址信息 */
+  Brokers?: string;
+  /** ckafka版本号 */
+  Version?: string;
+  /** 主题名称 */
+  Topic?: string;
+  /** 压缩算法，支持gzip 和 lz4 */
+  Compression?: string;
+  /** 是否支持SASL,0-关闭，1-开启 */
+  SASLEnable?: number;
+  /** SASL用户名 */
+  SASLUser?: string;
+  /** SALS密码 */
+  SASLPassword?: string;
+  /** 描述信息 */
+  Content?: string;
+  /** 1-外网TGW，2-支撑环境，默认为支撑环境 */
+  VipType?: number;
+  /** 配置状态 */
+  WriteConfig?: FieldWriteConfig;
+}
+
+/** CKafka投递流 */
 declare interface PostCLSFlowInfo {
   /** 投递流唯一ID */
   FlowId?: number;
@@ -1928,6 +2224,28 @@ declare interface TimedJob {
   StartDateTime?: number;
   /** 结束时间戳，单位为秒 */
   EndDateTime?: number;
+}
+
+/** bot自定义规则动作灰度 */
+declare interface UCBActionProportion {
+  /** 动作 */
+  Action?: string;
+  /** 比例 */
+  Proportion?: number;
+}
+
+/** 云图API改版后, 不支持将复杂json类型编码成string,因此通过此复杂类型识别传入的不同类型参数值 */
+declare interface UCBEntryValue {
+  /** string类型值 */
+  BasicValue?: string;
+  /** 布尔类型值 */
+  LogicValue?: boolean;
+  /** string数组类型值 */
+  BelongValue?: string[];
+  /** 指示有效的字段 */
+  ValidKey?: string;
+  /** string数组类型值 */
+  MultiValue?: string[];
 }
 
 /** SAASWAF规则回源时的规则数据结构 */
@@ -2522,6 +2840,38 @@ declare interface CreateIpAccessControlResponse {
   RequestId?: string;
 }
 
+declare interface CreatePostCKafkaFlowRequest {
+  /** 投递的CKafka所在区域 */
+  CKafkaRegion: string;
+  /** 客户的CKafka 实例ID */
+  CKafkaID: string;
+  /** 支撑环境是IP:PORT，外网环境是domain:PORT */
+  Brokers: string;
+  /** 默认为none，支持snappy、gzip和lz4压缩，推荐snappy */
+  Compression: string;
+  /** 1-外网TGW，2-支撑环境，默认为支撑环境 */
+  VipType: number;
+  /** 1-访问日志，2-攻击日志，默认为访问日志 */
+  LogType: number;
+  /** 主题名称，默认不传或者传空字符串，默认值为waf_post_access_log */
+  Topic: string;
+  /** kafka集群的版本号 */
+  KafkaVersion: string;
+  /** 是否开启SASL校验，默认不开启，0-关闭，1-开启 */
+  SASLEnable?: number;
+  /** SASL用户名 */
+  SASLUser?: string;
+  /** SASL密码 */
+  SASLPassword?: string;
+  /** 开启访问日志某些字段是否投递 */
+  WriteConfig?: FieldWriteConfig;
+}
+
+declare interface CreatePostCKafkaFlowResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreatePostCLSFlowRequest {
   /** 投递的CLS所在区域，默认为ap-shanghai */
   CLSRegion?: string;
@@ -2594,6 +2944,22 @@ declare interface DeleteAttackWhiteRuleRequest {
 declare interface DeleteAttackWhiteRuleResponse {
   /** 删除失败的规则序号组 */
   FailIds?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteBotSceneUCBRuleRequest {
+  /** 域名 */
+  Domain: string;
+  /** 自定义规则ID */
+  RuleId: string;
+  /** 1.BOT全局白名单处调用时，传"global";2.BOT场景配置时，传具体的场景ID */
+  SceneId: string;
+}
+
+declare interface DeleteBotSceneUCBRuleResponse {
+  /** 正常情况下为null */
+  Data?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3120,6 +3486,84 @@ declare interface DescribeBatchIpAccessControlRequest {
 declare interface DescribeBatchIpAccessControlResponse {
   /** 输出 */
   Data?: BatchIpAccessControlData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBotSceneListRequest {
+  /** 域名 */
+  Domain: string;
+  /** 每页数量 */
+  Limit: number;
+  /** 页码 */
+  Offset: number;
+  /** 场景模板类型，通过此下拉字段进行场景筛选。全部: all 登录: login 秒杀:seckill 爬内容：crawl 自定义: custom */
+  BusinessType?: string[];
+  /** 通过场景名称模糊搜索 */
+  SceneName?: string;
+  /** 是否只显示默认场景 */
+  IsDefault?: boolean;
+  /** 是否仅显示生效场景 */
+  IsValid?: boolean;
+}
+
+declare interface DescribeBotSceneListResponse {
+  /** 符合筛选条件的场景数目 */
+  TotalCount?: number;
+  /** 当TotalCount为0时，返回空 */
+  BotSceneList?: BotSceneInfo[];
+  /** true-简易模式 */
+  SimpleFlag?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBotSceneOverviewRequest {
+  /** 域名 */
+  Domain: string;
+}
+
+declare interface DescribeBotSceneOverviewResponse {
+  /** BOT总开关 */
+  Status?: boolean;
+  /** 场景总数 */
+  SceneCount?: number;
+  /** 生效场景数 */
+  ValidSceneCount?: number;
+  /** 当前开启的、匹配范围为全局、优先级最高的场景 */
+  CurrentGlobalScene?: GlobalSceneInfo | null;
+  /** 自定义规则总数，不包括BOT白名单 */
+  CustomRuleNums?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBotSceneUCBRuleRequest {
+  /** 域名 */
+  Domain: string;
+  /** 翻页组件的起始页 */
+  Skip: number;
+  /** 翻页组件的页数据条数 */
+  Limit: number;
+  /** 排序参数 */
+  Sort: string;
+  /** 1.BOT全局白名单处调用时，传"global";2.BOT场景配置处调用时，传具体的场景ID */
+  SceneId: string;
+  /** 需要过滤的动作 */
+  Operate?: string;
+  /** 需要过滤的规则名称 */
+  Name?: string;
+  /** 兼容老数据和新旧版前端 */
+  VersionFlag?: string;
+  /** 生效方式：0-全部 1-永久生效 2-定时生效 3-周粒度生效 4-月粒度生效 */
+  TimerType?: number;
+  /** 0-全部 1-生效中 2-已过期 */
+  ValidStatus?: number;
+}
+
+declare interface DescribeBotSceneUCBRuleResponse {
+  /** 返回数据包 */
+  Data?: DescribeBotUCBRuleRsp | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3742,6 +4186,18 @@ declare interface DescribePortsResponse {
   RequestId?: string;
 }
 
+declare interface DescribePostCKafkaFlowsRequest {
+  /** 1-访问日志，2-攻击日志，默认为访问日志。 */
+  LogType?: number;
+}
+
+declare interface DescribePostCKafkaFlowsResponse {
+  /** 客户的投递流列表 */
+  PostCKafkaFlows?: PostCKafkaFlowInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePostCLSFlowsRequest {
   /** 1-访问日志，2-攻击日志，默认为访问日志。 */
   LogType?: number;
@@ -4104,6 +4560,18 @@ declare interface DescribeWebshellStatusResponse {
   RequestId?: string;
 }
 
+declare interface DestroyPostCKafkaFlowRequest {
+  /** 投递流的流ID */
+  FlowId: number;
+  /** 1-访问日志，2-攻击日志，默认为访问日志。 */
+  LogType?: number;
+}
+
+declare interface DestroyPostCKafkaFlowResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DestroyPostCLSFlowRequest {
   /** 投递流的流ID */
   FlowId: number;
@@ -4406,6 +4874,38 @@ declare interface ModifyAttackWhiteRuleRequest {
 declare interface ModifyAttackWhiteRuleResponse {
   /** 规则总数 */
   RuleId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyBotSceneStatusRequest {
+  /** 域名 */
+  Domain: string;
+  /** 场景ID */
+  SceneId: string;
+  /** true-开启 false-关闭 */
+  Status: boolean;
+}
+
+declare interface ModifyBotSceneStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyBotSceneUCBRuleRequest {
+  /** 域名 */
+  Domain: string;
+  /** 1.BOT全局白名单处调用时，传"global";2.BOT场景配置时，传具体的场景ID */
+  SceneId: string;
+  /** 规则内容, 增加编码SceneId信息,1.BOT全局白名单处调用时，SceneId为"global", RuleType传10, Action为"permit";2.BOT场景配置时，SceneId为场景ID */
+  Rule?: InOutputBotUCBRule;
+  /** 530改批量操作 */
+  BatchRules?: InOutputBotUCBRule[];
+}
+
+declare interface ModifyBotSceneUCBRuleResponse {
+  /** 正常情况下为null */
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5361,6 +5861,8 @@ declare interface Waf {
   CreateHost(data: CreateHostRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostResponse>;
   /** IP黑白名单新增接口 {@link CreateIpAccessControlRequest} {@link CreateIpAccessControlResponse} */
   CreateIpAccessControl(data: CreateIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIpAccessControlResponse>;
+  /** 创建CKafka投递流任务 {@link CreatePostCKafkaFlowRequest} {@link CreatePostCKafkaFlowResponse} */
+  CreatePostCKafkaFlow(data: CreatePostCKafkaFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePostCKafkaFlowResponse>;
   /** 创建CLS投递流任务 {@link CreatePostCLSFlowRequest} {@link CreatePostCLSFlowResponse} */
   CreatePostCLSFlow(data?: CreatePostCLSFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePostCLSFlowResponse>;
   /** 删除访问日志导出 {@link DeleteAccessExportRequest} {@link DeleteAccessExportResponse} */
@@ -5373,6 +5875,8 @@ declare interface Waf {
   DeleteAttackDownloadRecord(data: DeleteAttackDownloadRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttackDownloadRecordResponse>;
   /** 删除规则引擎白名单 {@link DeleteAttackWhiteRuleRequest} {@link DeleteAttackWhiteRuleResponse} */
   DeleteAttackWhiteRule(data: DeleteAttackWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttackWhiteRuleResponse>;
+  /** 场景化后删除Bot的UCB自定义规则 {@link DeleteBotSceneUCBRuleRequest} {@link DeleteBotSceneUCBRuleResponse} */
+  DeleteBotSceneUCBRule(data: DeleteBotSceneUCBRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBotSceneUCBRuleResponse>;
   /** Waf CC V2 Delete接口 {@link DeleteCCRuleRequest} {@link DeleteCCRuleResponse} */
   DeleteCCRule(data: DeleteCCRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCCRuleResponse>;
   /** 删除自定义规则 {@link DeleteCustomRuleRequest} {@link DeleteCustomRuleResponse} */
@@ -5423,6 +5927,12 @@ declare interface Waf {
   DescribeAutoDenyIP(data: DescribeAutoDenyIPRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoDenyIPResponse>;
   /** 批量防护IP黑白名单查询 {@link DescribeBatchIpAccessControlRequest} {@link DescribeBatchIpAccessControlResponse} */
   DescribeBatchIpAccessControl(data: DescribeBatchIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchIpAccessControlResponse>;
+  /** 获取BOT场景列表与概览 {@link DescribeBotSceneListRequest} {@link DescribeBotSceneListResponse} */
+  DescribeBotSceneList(data: DescribeBotSceneListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBotSceneListResponse>;
+  /** 获取Bot场景全局概览 {@link DescribeBotSceneOverviewRequest} {@link DescribeBotSceneOverviewResponse} */
+  DescribeBotSceneOverview(data: DescribeBotSceneOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBotSceneOverviewResponse>;
+  /** 场景化后Bot获取UCB自定义规则策略 {@link DescribeBotSceneUCBRuleRequest} {@link DescribeBotSceneUCBRuleResponse} */
+  DescribeBotSceneUCBRule(data: DescribeBotSceneUCBRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBotSceneUCBRuleResponse>;
   /** 获取SAAS型接入的紧急CC防护状态 {@link DescribeCCAutoStatusRequest} {@link DescribeCCAutoStatusResponse} */
   DescribeCCAutoStatus(data: DescribeCCAutoStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCCAutoStatusResponse>;
   /** Waf CC V2 Query接口旧版 {@link DescribeCCRuleRequest} {@link DescribeCCRuleResponse} */
@@ -5481,6 +5991,8 @@ declare interface Waf {
   DescribePolicyStatus(data: DescribePolicyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyStatusResponse>;
   /** 获取Saas型WAF防护端口列表 {@link DescribePortsRequest} {@link DescribePortsResponse} */
   DescribePorts(data?: DescribePortsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePortsResponse>;
+  /** 获取CKafka投递流任务列表 {@link DescribePostCKafkaFlowsRequest} {@link DescribePostCKafkaFlowsResponse} */
+  DescribePostCKafkaFlows(data?: DescribePostCKafkaFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePostCKafkaFlowsResponse>;
   /** 获取CLS投递流任务列表 {@link DescribePostCLSFlowsRequest} {@link DescribePostCLSFlowsResponse} */
   DescribePostCLSFlows(data?: DescribePostCLSFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePostCLSFlowsResponse>;
   /** 查询tiga引擎下大类规则的防护模式 {@link DescribeProtectionModesRequest} {@link DescribeProtectionModesResponse} */
@@ -5521,6 +6033,8 @@ declare interface Waf {
   DescribeWafThreatenIntelligence(data?: DescribeWafThreatenIntelligenceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafThreatenIntelligenceResponse>;
   /** 获取域名webshell状态 {@link DescribeWebshellStatusRequest} {@link DescribeWebshellStatusResponse} */
   DescribeWebshellStatus(data: DescribeWebshellStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebshellStatusResponse>;
+  /** 销毁CKafka投递流任务 {@link DestroyPostCKafkaFlowRequest} {@link DestroyPostCKafkaFlowResponse} */
+  DestroyPostCKafkaFlow(data: DestroyPostCKafkaFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyPostCKafkaFlowResponse>;
   /** 销毁CLS投递流任务 {@link DestroyPostCLSFlowRequest} {@link DestroyPostCLSFlowResponse} */
   DestroyPostCLSFlow(data: DestroyPostCLSFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyPostCLSFlowResponse>;
   /** 刷新防篡改url {@link FreshAntiFakeUrlRequest} {@link FreshAntiFakeUrlResponse} */
@@ -5557,6 +6071,10 @@ declare interface Waf {
   ModifyAreaBanStatus(data: ModifyAreaBanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAreaBanStatusResponse>;
   /** 修改规则引擎白名单 {@link ModifyAttackWhiteRuleRequest} {@link ModifyAttackWhiteRuleResponse} */
   ModifyAttackWhiteRule(data: ModifyAttackWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAttackWhiteRuleResponse>;
+  /** bot子场景开关 {@link ModifyBotSceneStatusRequest} {@link ModifyBotSceneStatusResponse} */
+  ModifyBotSceneStatus(data: ModifyBotSceneStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBotSceneStatusResponse>;
+  /** 场景化后更新Bot的UCB自定义规则 {@link ModifyBotSceneUCBRuleRequest} {@link ModifyBotSceneUCBRuleResponse} */
+  ModifyBotSceneUCBRule(data: ModifyBotSceneUCBRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBotSceneUCBRuleResponse>;
   /** Bot_V2 bot总开关更新 {@link ModifyBotStatusRequest} {@link ModifyBotStatusResponse} */
   ModifyBotStatus(data: ModifyBotStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBotStatusResponse>;
   /** 编辑自定义规则 {@link ModifyCustomRuleRequest} {@link ModifyCustomRuleResponse} */

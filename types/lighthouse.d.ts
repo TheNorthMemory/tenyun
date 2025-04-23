@@ -38,13 +38,13 @@ declare interface Blueprint {
   Platform?: string;
   /** 操作系统平台类型，如 LINUX_UNIX、WINDOWS。 */
   PlatformType?: string;
-  /** 镜像类型，如 APP_OS、PURE_OS、PRIVATE。 */
+  /** 镜像类型，如 APP_OS（应用镜像）, PURE_OS（系统镜像）, DOCKER（容器）, PRIVATE（私有镜像）, SHARED（共享镜像）, GAME_PORTAL（游戏专区镜像）。 */
   BlueprintType?: string;
   /** 镜像图片 URL。 */
   ImageUrl?: string;
   /** 镜像所需系统盘大小，单位 GB。 */
   RequiredSystemDiskSize?: number;
-  /** 镜像状态。 */
+  /** 镜像状态，镜镜像状态，NORMAL（正常）、SYNCING（同步中）、OFFLINE（下线）、ISOLATED（已隔离）、CREATEFAILED（创建失败）、SYNCING_FAILED（目的地域同步失败）、ISOLATING（隔离中）、ISOLATED（已隔离）、DELETING（删除中）、DESTROYING（销毁中）。 */
   BlueprintState?: string;
   /** 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
   CreatedTime?: string | null;
@@ -474,13 +474,13 @@ declare interface FirewallRuleInfo {
 
 /** 防火墙模板信息。 */
 declare interface FirewallTemplate {
-  /** 模板Id。 */
+  /** 模板ID。 */
   TemplateId?: string;
   /** 模板名称。 */
   TemplateName?: string;
-  /** 模板类型。 */
+  /** 模板类型。取值: "PRIVATE"(个人模版) */
   TemplateType?: string;
-  /** 模板状态。 */
+  /** 模板状态。取值: "NORMAL"(正常) */
   TemplateState?: string;
   /** 模板创建时间。 */
   CreatedTime?: string;
@@ -510,7 +510,7 @@ declare interface FirewallTemplateApplyRecord {
 declare interface FirewallTemplateApplyRecordDetail {
   /** 实例标识信息。 */
   Instance?: InstanceIdentifier;
-  /** 防火墙模板应用状态。- SUCCESS：成功- FAILED：失败 */
+  /** 防火墙模板应用状态。- SUCCESS：成功- FAILED：失败- RUNNING：运行中 */
   ApplyState?: string;
   /** 防火墙模板应用错误信息。 */
   ErrorMessage?: string;
@@ -1315,7 +1315,7 @@ declare interface DescribeBlueprintsRequest {
   Offset?: number;
   /** 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。 */
   Limit?: number;
-  /** 过滤器列表。blueprint-id按照【镜像 ID】进行过滤。类型：String必选：否镜像 ID ，可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值字段BlueprintSet获取。blueprint-type按照【镜像类型】进行过滤。取值：APP_OS（应用镜像 ）；PURE_OS（系统镜像）；DOCKER（Docker容器镜像）；PRIVATE（自定义镜像）；SHARED（共享镜像）。类型：String必选：否platform-type按照【镜像平台类型】进行过滤。取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）。类型：String必选：否blueprint-name按照【镜像名称】进行过滤。类型：String必选：否blueprint-state按照【镜像状态】进行过滤。类型：String必选：否scene-id按照【使用场景Id】进行过滤。类型：String必选：否场景Id，可通过[查看使用场景列表](https://cloud.tencent.com/document/product/1207/83512)接口获取。每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 BlueprintIds (可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值字段BlueprintSet获取BlueprintId)和 Filters 。 */
+  /** 过滤器列表。blueprint-id按照【镜像 ID】进行过滤。类型：String必选：否镜像 ID ，可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值字段BlueprintSet获取。blueprint-type按照【镜像类型】进行过滤。取值：APP_OS（应用镜像 ）；PURE_OS（系统镜像）；DOCKER（Docker容器镜像）；PRIVATE（自定义镜像）；SHARED（共享镜像）。类型：String必选：否platform-type按照【镜像平台类型】进行过滤。取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）。类型：String必选：否blueprint-name按照【镜像名称】进行过滤。类型：String必选：否blueprint-state按照【镜像状态】进行过滤。类型：String必选：否镜像状态，可通过[数据结构Blueprint](https://cloud.tencent.com/document/api/1207/47576)中的BlueprintState来获取。scene-id按照【使用场景Id】进行过滤。类型：String必选：否场景Id，可通过[查看使用场景列表](https://cloud.tencent.com/document/product/1207/83512)接口获取。每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 BlueprintIds (可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值字段BlueprintSet获取BlueprintId)和 Filters 。 */
   Filters?: Filter[];
 }
 
@@ -1684,18 +1684,6 @@ declare interface DescribeGeneralResourceQuotasRequest {
 declare interface DescribeGeneralResourceQuotasResponse {
   /** 通用资源配额详细信息列表。 */
   GeneralResourceQuotaSet?: GeneralResourceQuota[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeInstanceLoginKeyPairAttributeRequest {
-  /** 实例ID。 */
-  InstanceId: string;
-}
-
-declare interface DescribeInstanceLoginKeyPairAttributeResponse {
-  /** 是否允许使用默认密钥对登录，YES：允许登录 NO：禁止登录。 */
-  PermitLogin: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2244,18 +2232,6 @@ declare interface ModifyInstancesBundleResponse {
   RequestId?: string;
 }
 
-declare interface ModifyInstancesLoginKeyPairAttributeRequest {
-  /** 实例 ID 列表。每次请求批量实例的上限为 100。 */
-  InstanceIds: string[];
-  /** 是否允许使用默认密钥对登录，YES：允许登录；NO：禁止登录 */
-  PermitLogin?: string;
-}
-
-declare interface ModifyInstancesLoginKeyPairAttributeResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ModifyInstancesRenewFlagRequest {
   /** 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。 */
   InstanceIds: string[];
@@ -2653,8 +2629,6 @@ declare interface Lighthouse {
   DescribeFirewallTemplates(data?: DescribeFirewallTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirewallTemplatesResponse>;
   /** 查询通用资源配额信息 {@link DescribeGeneralResourceQuotasRequest} {@link DescribeGeneralResourceQuotasResponse} */
   DescribeGeneralResourceQuotas(data: DescribeGeneralResourceQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralResourceQuotasResponse>;
-  /** @deprecated 查询实例默认登录密钥属性 {@link DescribeInstanceLoginKeyPairAttributeRequest} {@link DescribeInstanceLoginKeyPairAttributeResponse} */
-  DescribeInstanceLoginKeyPairAttribute(data: DescribeInstanceLoginKeyPairAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceLoginKeyPairAttributeResponse>;
   /** 查询实例管理终端地址 {@link DescribeInstanceVncUrlRequest} {@link DescribeInstanceVncUrlResponse} */
   DescribeInstanceVncUrl(data: DescribeInstanceVncUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceVncUrlResponse>;
   /** 查看实例列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
@@ -2727,8 +2701,6 @@ declare interface Lighthouse {
   ModifyInstancesAttribute(data: ModifyInstancesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesAttributeResponse>;
   /** 变更实例套餐 {@link ModifyInstancesBundleRequest} {@link ModifyInstancesBundleResponse} */
   ModifyInstancesBundle(data: ModifyInstancesBundleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesBundleResponse>;
-  /** @deprecated 修改实例默认登录密钥对属性 {@link ModifyInstancesLoginKeyPairAttributeRequest} {@link ModifyInstancesLoginKeyPairAttributeResponse} */
-  ModifyInstancesLoginKeyPairAttribute(data: ModifyInstancesLoginKeyPairAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesLoginKeyPairAttributeResponse>;
   /** 修改实例续费标识 {@link ModifyInstancesRenewFlagRequest} {@link ModifyInstancesRenewFlagResponse} */
   ModifyInstancesRenewFlag(data: ModifyInstancesRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesRenewFlagResponse>;
   /** 修改快照信息 {@link ModifySnapshotAttributeRequest} {@link ModifySnapshotAttributeResponse} */

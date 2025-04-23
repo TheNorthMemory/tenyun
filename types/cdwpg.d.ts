@@ -5,39 +5,39 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 访问信息 */
 declare interface AccessInfo {
   /** 地址 */
-  Address?: string | null;
+  Address?: string;
   /** 协议 */
-  Protocol?: string | null;
+  Protocol?: string;
 }
 
 /** 用于描述账号的实例ID、账号名 */
 declare interface AccountInfo {
   /** 实例ID */
-  InstanceId: string;
+  InstanceId?: string;
   /** 账号名 */
-  UserName: string;
+  UserName?: string;
   /** 账户属性 */
-  Perms?: string[] | null;
+  Perms?: string[];
 }
 
 /** 磁盘规格 */
 declare interface CBSSpec {
   /** 盘类型 */
-  DiskType: string | null;
+  DiskType: string;
   /** 大小 */
-  DiskSize: number | null;
+  DiskSize: number;
   /** 个数 */
-  DiskCount: number | null;
+  DiskCount: number;
 }
 
 /** 磁盘信息 */
 declare interface CBSSpecInfo {
   /** 盘类型 */
-  DiskType: string | null;
+  DiskType: string;
   /** 大小 */
-  DiskSize: number | null;
+  DiskSize: number;
   /** 个数 */
-  DiskCount: number | null;
+  DiskCount: number;
 }
 
 /** 云原生资源规格描述信息 */
@@ -55,15 +55,15 @@ declare interface CNResourceSpec {
 /** 计费时间参数 */
 declare interface ChargeProperties {
   /** 1-需要自动续期 */
-  RenewFlag: number | null;
+  RenewFlag: number;
   /** 订单时间范围 */
-  TimeSpan: number | null;
+  TimeSpan: number;
   /** 时间单位，一般为h和m */
-  TimeUnit: string | null;
+  TimeUnit: string;
   /** 计费类型0-按量计费，1-包年包月 */
-  PayMode?: number | null;
+  PayMode?: number;
   /** PREPAID、POSTPAID_BY_HOUR */
-  ChargeType?: string | null;
+  ChargeType?: string;
 }
 
 /** ConfigHistory1 */
@@ -91,39 +91,39 @@ declare interface ConfigHistory {
 /** 参数 */
 declare interface ConfigParams {
   /** 名字 */
-  ParameterName?: string | null;
+  ParameterName?: string;
   /** 值 */
-  ParameterValue?: string | null;
+  ParameterValue?: string;
   /** 修改前的值 */
-  ParameterOldValue?: string | null;
+  ParameterOldValue?: string;
 }
 
 /** 磁盘规格 */
 declare interface DiskSpecPlus {
   /** 磁盘个数 */
-  DiskCount?: number | null;
+  DiskCount?: number;
   /** 磁盘最大值 */
-  MaxDiskSize?: number | null;
+  MaxDiskSize?: number;
   /** 磁盘最小值 */
-  MinDiskSize?: number | null;
+  MinDiskSize?: number;
   /** 磁盘类型 */
-  DiskType?: string | null;
+  DiskType?: string;
   /** 磁盘类型详情 */
-  DiskDesc?: string | null;
+  DiskDesc?: string;
   /** 机型类型 */
-  CvmClass?: string | null;
+  CvmClass?: string;
 }
 
 /** 错误日志详细信息 */
 declare interface ErrorLogDetail {
   /** 用户名称 */
-  UserName?: string | null;
+  UserName?: string;
   /** 数据库 */
-  Database?: string | null;
+  Database?: string;
   /** 报错时间 */
-  ErrorTime?: string | null;
+  ErrorTime?: string;
   /** 报错信息 */
-  ErrorMessage?: string | null;
+  ErrorMessage?: string;
 }
 
 /** user_config */
@@ -139,63 +139,63 @@ declare interface HbaConfig {
   /** 方法 */
   Method: string;
   /** 是否遮盖 */
-  Mask?: string | null;
+  Mask?: string;
 }
 
 /** 云原生实例详情 */
 declare interface InstanceInfo {
   /** ID值 */
-  ID?: number | null;
+  ID?: number;
   /** 内核版本类型 */
-  InstanceType?: string | null;
+  InstanceType?: string;
   /** 集群名字 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 集群状态 */
-  Status?: string | null;
+  Status?: string;
   /** 集群状态详情 */
-  StatusDesc?: string | null;
+  StatusDesc?: string;
   /** 集群状态信息 */
   InstanceStateInfo?: InstanceStateInfo | null;
   /** 集群id */
-  InstanceID?: string | null;
+  InstanceID?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 地域 */
-  Region?: string | null;
+  Region?: string;
   /** 地区 */
-  Zone?: string | null;
+  Zone?: string;
   /** 地域详情 */
-  RegionDesc?: string | null;
+  RegionDesc?: string;
   /** 地区详情 */
-  ZoneDesc?: string | null;
+  ZoneDesc?: string;
   /** 标签 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
   /** 内核版本 */
-  Version?: string | null;
+  Version?: string;
   /** 字符集 */
-  Charset?: string | null;
+  Charset?: string;
   /** CN节点列表 */
-  CNNodes?: InstanceNodeGroup[] | null;
+  CNNodes?: InstanceNodeGroup[];
   /** DN节点列表 */
-  DNNodes?: InstanceNodeGroup[] | null;
+  DNNodes?: InstanceNodeGroup[];
   /** 地域id */
-  RegionId?: number | null;
+  RegionId?: number;
   /** 地区id */
-  ZoneId?: number | null;
+  ZoneId?: number;
   /** 私有网络 */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 子网 */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 过期时间 */
-  ExpireTime?: string | null;
+  ExpireTime?: string;
   /** 计费方式 */
-  PayMode?: string | null;
+  PayMode?: string;
   /** 自动续费 */
-  RenewFlag?: boolean | null;
+  RenewFlag?: boolean;
   /** 集群id */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 访问信息 */
-  AccessDetails?: AccessInfo[] | null;
+  AccessDetails?: AccessInfo[];
 }
 
 /** Instance node */
@@ -211,11 +211,11 @@ declare interface InstanceNode {
 /** 集群节点信息 */
 declare interface InstanceNodeGroup {
   /** 机型 */
-  SpecName?: string | null;
+  SpecName?: string;
   /** 磁盘信息 */
-  DataDisk?: DiskSpecPlus | null;
+  DataDisk?: DiskSpecPlus;
   /** 机器个数 */
-  CvmCount?: number | null;
+  CvmCount?: number;
 }
 
 /** 集群操作描述 */
@@ -223,83 +223,83 @@ declare interface InstanceOperation {
   /** 操作名称，例如“create_instance"、“scaleout_instance”等 */
   Id?: number;
   /** 集群ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 操作名称描述，例如“创建”，“修改集群名称”等 */
-  Action?: string | null;
+  Action?: string;
   /** 状态 */
-  Status?: number | null;
+  Status?: number;
   /** 操作开始时间 */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 操作结束时间 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 操作上下文 */
-  Context?: string | null;
+  Context?: string;
   /** 操作更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 操作UIN */
-  Uin?: string | null;
+  Uin?: string;
 }
 
 /** 精简集群信息 */
 declare interface InstanceSimpleInfoNew {
   /** ID */
-  ID?: number | null;
+  ID?: number;
   /** 集群Id */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 集群名字 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 内核版本 */
-  Version?: string | null;
+  Version?: string;
   /** 地域 */
-  Region?: string | null;
+  Region?: string;
   /** 地域Id */
-  RegionId?: number | null;
+  RegionId?: number;
   /** 地域详情 */
-  RegionDesc?: string | null;
+  RegionDesc?: string;
   /** 地区 */
-  Zone?: string | null;
+  Zone?: string;
   /** 地区id */
-  ZoneId?: number | null;
+  ZoneId?: number;
   /** 地区详情 */
-  ZoneDesc?: string | null;
+  ZoneDesc?: string;
   /** 私有网络 */
-  VpcId?: string | null;
+  VpcId?: string;
   /** 子网 */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 开始时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 过期时间 */
-  ExpireTime?: string | null;
+  ExpireTime?: string;
   /** 访问地址 */
-  AccessInfo?: string | null;
+  AccessInfo?: string;
   /** 计费方式 */
-  PayMode?: string | null;
+  PayMode?: string;
   /** 自动续费 */
-  RenewFlag?: boolean | null;
+  RenewFlag?: boolean;
 }
 
 /** 集群状态抽象后的结构体 */
 declare interface InstanceStateInfo {
   /** 集群状态，例如：Serving */
-  InstanceState?: string | null;
+  InstanceState?: string;
   /** 集群操作创建时间 */
-  FlowCreateTime?: string | null;
+  FlowCreateTime?: string;
   /** 集群操作名称 */
-  FlowName?: string | null;
+  FlowName?: string;
   /** 集群操作进度 */
-  FlowProgress?: number | null;
+  FlowProgress?: number;
   /** 集群状态描述，例如：运行中 */
-  InstanceStateDesc?: string | null;
+  InstanceStateDesc?: string;
   /** 集群流程错误信息，例如：“创建失败，资源不足” */
-  FlowMsg?: string | null;
+  FlowMsg?: string;
   /** 当前步骤的名称，例如：”购买资源中“ */
-  ProcessName?: string | null;
+  ProcessName?: string;
   /** 集群是否有备份中任务，有为1,无为0 */
-  BackupStatus?: number | null;
+  BackupStatus?: number;
   /** 请求id */
-  RequestId?: string | null;
+  RequestId?: string;
   /** 集群是否有备份中任务，有为1,无为0 */
-  BackupOpenStatus?: number | null;
+  BackupOpenStatus?: number;
 }
 
 /** node参数 */
@@ -313,91 +313,91 @@ declare interface NodeConfigParams {
 /** 慢查询项目信息 */
 declare interface NormQueryItem {
   /** 调用次数 */
-  CallTimes: number | null;
+  CallTimes: number;
   /** 读共享内存块数 */
-  SharedReadBlocks: number | null;
+  SharedReadBlocks: number;
   /** 写共享内存块数 */
-  SharedWriteBlocks: number | null;
+  SharedWriteBlocks: number;
   /** 数据库 */
-  DatabaseName: string | null;
+  DatabaseName: string;
   /** 脱敏后语句 */
-  NormalQuery: string | null;
+  NormalQuery: string;
   /** 执行时间最长的语句 */
-  MaxElapsedQuery: string | null;
+  MaxElapsedQuery: string;
   /** 花费总时间 */
-  CostTime: number | null;
+  CostTime: number;
   /** 客户端ip */
-  ClientIp: string | null;
+  ClientIp: string;
   /** 用户名 */
-  UserName: string | null;
+  UserName: string;
   /** 总次数占比 */
-  TotalCallTimesPercent: number | null;
+  TotalCallTimesPercent: number;
   /** 总耗时占比 */
-  TotalCostTimePercent: number | null;
+  TotalCostTimePercent: number;
   /** 花费最小时间 */
-  MinCostTime: number | null;
+  MinCostTime: number;
   /** 花费最大时间 */
-  MaxCostTime: number | null;
+  MaxCostTime: number;
   /** 最早一条时间 */
-  FirstTime: string | null;
+  FirstTime: string;
   /** 最晚一条时间 */
-  LastTime: string | null;
+  LastTime: string;
   /** 读io总耗时 */
-  ReadCostTime: number | null;
+  ReadCostTime: number;
   /** 写io总耗时 */
-  WriteCostTime: number | null;
+  WriteCostTime: number;
 }
 
 /** ParamDetail 详细 */
 declare interface ParamDetail {
   /** 参数名 */
-  ParamName?: string | null;
+  ParamName?: string;
   /** 默认值 */
-  DefaultValue?: string | null;
+  DefaultValue?: string;
   /** 是否需要重启 */
-  NeedRestart?: boolean | null;
+  NeedRestart?: boolean;
   /** 当前运行值 */
-  RunningValue?: string | null;
+  RunningValue?: string;
   /** 取值范围 */
   ValueRange?: ValueRange;
   /** 单位 */
-  Unit?: string | null;
+  Unit?: string;
   /** 英文简介 */
-  ShortDesc?: string | null;
+  ShortDesc?: string;
   /** 参数名 */
-  ParameterName?: string | null;
+  ParameterName?: string;
 }
 
 /** ParamItem 信息 */
 declare interface ParamItem {
   /** 节点类型, cn/dn */
-  NodeType?: string | null;
+  NodeType?: string;
   /** 节点名 */
-  NodeName?: string | null;
+  NodeName?: string;
   /** 参数个数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 参数信息 */
-  Details?: ParamDetail[] | null;
+  Details?: ParamDetail[];
 }
 
 /** Range范围 */
 declare interface Range {
   /** 最小值 */
-  Min: string | null;
+  Min?: string;
   /** 最大值 */
-  Max: string | null;
+  Max?: string;
 }
 
 /** 资源信息 */
 declare interface ResourceInfo {
   /** 资源名称 */
-  SpecName: string | null;
+  SpecName: string;
   /** 资源数 */
-  Count: number | null;
+  Count: number;
   /** 磁盘信息 */
-  DiskSpec: CBSSpecInfo | null;
+  DiskSpec: CBSSpecInfo;
   /** 节点类型，cn 或dn */
-  Type: string | null;
+  Type: string;
 }
 
 /** 资源规格 */
@@ -425,37 +425,37 @@ declare interface SearchTags {
 /** 集群信息 */
 declare interface SimpleInstanceInfo {
   /** ID */
-  ID?: number | null;
+  ID?: number;
   /** 集群Id */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 集群名字 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 内核版本 */
-  Version?: string | null;
+  Version?: string;
   /** 地域 */
-  Region?: string | null;
+  Region?: string;
   /** 地区 */
-  Zone?: string | null;
+  Zone?: string;
   /** 私有网络 */
-  UserVPCID?: string | null;
+  UserVPCID?: string;
   /** 子网 */
-  UserSubnetID?: string | null;
+  UserSubnetID?: string;
   /** 开始时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 到期时间 */
-  ExpireTime?: string | null;
+  ExpireTime?: string;
   /** 访问地址 */
-  AccessInfo?: string | null;
+  AccessInfo?: string;
   /** 自动续费开关，0为不自动续费，1为自动续费 */
-  RenewFlag?: number | null;
+  RenewFlag?: number;
   /** 计费方式 */
-  ChargeProperties?: ChargeProperties | null;
+  ChargeProperties?: ChargeProperties;
   /** 资源集合 */
-  Resources?: ResourceInfo[] | null;
+  Resources?: ResourceInfo[];
   /** 标签列表 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
   /** 集群状态 */
-  Status?: number | null;
+  Status?: number;
 }
 
 /** 慢SQL日志 */
@@ -479,31 +479,31 @@ declare interface Tag {
 /** 升级信息 */
 declare interface UpgradeItem {
   /** 任务名称 */
-  TaskName?: string | null;
+  TaskName?: string;
   /** 原有内核版本 */
-  SourceVersion?: string | null;
+  SourceVersion?: string;
   /** 目标内核版本 */
-  TargetVersion?: string | null;
+  TargetVersion?: string;
   /** 任务创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 任务结束时间 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 任务完成状态 */
-  Status?: string | null;
+  Status?: string;
   /** 操作者 */
-  OperateUin?: string | null;
+  OperateUin?: string;
 }
 
 /** ValueRange值 */
 declare interface ValueRange {
   /** 参数类型，可以为 enum，string，section; 其中enum表示枚举，类似： utf8,latin1,gbk; string表示返回的参数值是字符串; section表示返回的参数值是一个取值范围，类似：[4-8] */
-  Type?: string | null;
+  Type?: string;
   /** type 取section的时候，返回的参数值 */
-  Range?: Range | null;
+  Range?: Range;
   /** type 取enum的时候，返回参数值 */
-  Enum?: string[] | null;
+  Enum?: string[];
   /** type 取string的时候，返回的参数值 */
-  String?: string | null;
+  String?: string;
 }
 
 declare interface CreateInstanceByApiRequest {
@@ -521,19 +521,21 @@ declare interface CreateInstanceByApiRequest {
   AdminPassword: string;
   /** 资源信息 */
   Resources: ResourceSpecNew[];
-  /** 标签列表 */
+  /** 废弃，用TagItems */
   Tags?: Tag;
   /** 版本 */
   ProductVersion?: string;
+  /** 标签列表 */
+  TagItems?: Tag[];
 }
 
 declare interface CreateInstanceByApiResponse {
   /** 流程ID */
-  FlowId?: string | null;
+  FlowId?: string;
   /** 实例ID */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -549,9 +551,9 @@ declare interface DescribeAccountsRequest {
 
 declare interface DescribeAccountsResponse {
   /** 实例总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 账号数组 */
-  Accounts?: AccountInfo[] | null;
+  Accounts?: AccountInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -637,7 +639,7 @@ declare interface DescribeInstanceNodesRequest {
 
 declare interface DescribeInstanceNodesResponse {
   /** error msg */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 节点列表 */
   InstanceNodes?: InstanceNode[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -687,19 +689,19 @@ declare interface DescribeInstanceStateResponse {
   /** 集群状态，例如：Serving */
   InstanceState?: string;
   /** 集群操作创建时间 */
-  FlowCreateTime?: string | null;
+  FlowCreateTime?: string;
   /** 集群操作名称 */
-  FlowName?: string | null;
+  FlowName?: string;
   /** 集群操作进度 */
-  FlowProgress?: number | null;
+  FlowProgress?: number;
   /** 集群状态描述，例如：运行中 */
-  InstanceStateDesc?: string | null;
+  InstanceStateDesc?: string;
   /** 集群流程错误信息，例如：“创建失败，资源不足” */
-  FlowMsg?: string | null;
+  FlowMsg?: string;
   /** 当前步骤的名称，例如：”购买资源中“ */
-  ProcessName?: string | null;
+  ProcessName?: string;
   /** 集群备份任务开启状态 */
-  BackupStatus?: number | null;
+  BackupStatus?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -719,11 +721,11 @@ declare interface DescribeInstancesRequest {
 
 declare interface DescribeInstancesResponse {
   /** 实例总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 实例数组 */
   InstancesList?: InstanceInfo[] | null;
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -743,11 +745,11 @@ declare interface DescribeSimpleInstancesRequest {
 
 declare interface DescribeSimpleInstancesResponse {
   /** 集群列表总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 集群列表详情 */
-  InstancesList?: InstanceSimpleInfoNew[] | null;
+  InstancesList?: InstanceSimpleInfoNew[];
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -807,9 +809,9 @@ declare interface DescribeUserHbaConfigRequest {
 
 declare interface DescribeUserHbaConfigResponse {
   /** 实例总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** hba数组 */
-  HbaConfigs?: HbaConfig[] | null;
+  HbaConfigs?: HbaConfig[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -863,9 +865,9 @@ declare interface ModifyUserHbaRequest {
 
 declare interface ModifyUserHbaResponse {
   /** 任务id */
-  TaskId?: number | null;
+  TaskId?: number;
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -881,7 +883,7 @@ declare interface ResetAccountPasswordRequest {
 
 declare interface ResetAccountPasswordResponse {
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -917,7 +919,7 @@ declare interface ScaleOutInstanceResponse {
   /** 流程id */
   FlowId?: string;
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -958,7 +960,7 @@ declare interface UpgradeInstanceResponse {
   RequestId?: string;
 }
 
-/** {@link Cdwpg 云数据仓库 PostgreSQL} */
+/** {@link Cdwpg 腾讯云数据仓库TCHouse-P} */
 declare interface Cdwpg {
   (): Versions;
   /** 创建集群 {@link CreateInstanceByApiRequest} {@link CreateInstanceByApiResponse} */

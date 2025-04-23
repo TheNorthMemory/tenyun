@@ -227,7 +227,7 @@ declare interface ChatCompletionsRequest {
   Stream?: boolean;
   /** 控制生成的随机性，较高的值会产生更多样化的输出。 */
   Temperature?: number;
-  /** 最大生成的token数量 */
+  /** 最大生成的token数量，默认为4096，最大可设置为16384 */
   MaxTokens?: number;
 }
 
@@ -313,7 +313,7 @@ declare interface CreateReconstructDocumentFlowResponse {
 }
 
 declare interface CreateSplitDocumentFlowRequest {
-  /** 文件类型。**支持的文件类型：**- `PDF`、`DOC`、`DOCX`、`XLS`、`XLSX`、`PPT`、`PPTX`、`MD`、`TXT`、`PNG`、`JPG`、`JPEG`、`CSV`、`HTML`、`EPUB`**支持的文件大小：** - `PDF` 最大500M - `DOCX`、`DOC`、`PPT`、`PPTX` 最大 200M - `TXT`、`MD` 最大10M - 其他 最大20M */
+  /** 文件类型。**支持的文件类型：**- `PDF`、`DOC`、`DOCX`、`XLS`、`XLSX`、`PPT`、`PPTX`、`MD`、`TXT`、`PNG`、`JPG`、`JPEG`、`CSV`、`HTML`、`EPUB`**支持的文件大小：** - `PDF` 最大300M - `DOCX`、`DOC`、`PPT`、`PPTX` 最大 200M - `TXT`、`MD` 最大10M - 其他 最大20M */
   FileType: string;
   /** 文件的 URL 地址。文件存储于腾讯云的 URL 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 URL 速度和稳定性可能受一定影响。参考：[腾讯云COS文档](https://cloud.tencent.com/document/product/436/7749) */
   FileUrl: string;
@@ -400,6 +400,18 @@ declare interface DescribeDocResponse {
   UpdateTime?: string;
   /** 属性标签 */
   AttributeLabels?: AttributeLabelReferItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetCharacterUsageRequest {
+}
+
+declare interface GetCharacterUsageResponse {
+  /** 已用字符数 */
+  Used?: number;
+  /** 可用字符数 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -715,6 +727,8 @@ declare interface Lkeap {
   DeleteQAs(data: DeleteQAsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQAsResponse>;
   /** 查询文档详情 {@link DescribeDocRequest} {@link DescribeDocResponse} */
   DescribeDoc(data: DescribeDocRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDocResponse>;
+  /** 获取账号下字符使用量与容量 {@link GetCharacterUsageRequest} {@link GetCharacterUsageResponse} */
+  GetCharacterUsage(data?: GetCharacterUsageRequest, config?: AxiosRequestConfig): AxiosPromise<GetCharacterUsageResponse>;
   /** 获取特征向量 {@link GetEmbeddingRequest} {@link GetEmbeddingResponse} */
   GetEmbedding(data: GetEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<GetEmbeddingResponse>;
   /** 查询文档解析任务结果 {@link GetReconstructDocumentResultRequest} {@link GetReconstructDocumentResultResponse} */

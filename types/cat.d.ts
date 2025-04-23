@@ -284,6 +284,34 @@ declare interface DescribeInstantTasksResponse {
   RequestId?: string;
 }
 
+declare interface DescribeNodeGroupsRequest {
+  /** 节点类型。0: 全部 1: IDC 2: LastMile 3: Mobile，不填默认为0 */
+  NodeType?: number[];
+  /** 节点分类。0: 全部 1: PC 2：Mobile，不填默认为0。PC分类包括IDC和LM节点类型，Mobile分类包括Mobile节点类型。与NodeType参数取交集。 */
+  TaskCategory?: number;
+  /** IP类型。0: 全部 1: IPv4 2: IPv6，不填默认为0 */
+  IPType?: number;
+  /** 拨测点描述关键词。 */
+  Name?: string;
+  /** 地域ID。0: 精选拨测点 1: 国内 2: 港澳台 3: 亚太 4: 欧洲与美洲 5: 非洲与大洋洲，不填默认为0 */
+  RegionID?: number;
+  /** 省份或国家ID。0表示全部，不填默认为0 */
+  DistrictID?: number;
+  /** 运营商ID。0: 全部 1: 中国电信 2: 中国联通 3: 中国移动 99: 其他，不填默认为0 */
+  NetServiceID?: number;
+  /** 节点组类型。0: 高级拨测点组 1: 可用性节点 2: 我的拨测点组，不填默认为0 */
+  NodeGroupType?: number;
+  /** 任务类型，如1、2、3、4、5、6、7；1-页面性能、2-文件上传、3-文件下载、4-端口性能、5-网络质量、6-音视频体验、7-域名whois，不填默认为0，不对任务类型做过滤 */
+  TaskType?: number;
+  /** 测试类型，包含定时测试与即时测试。0-定时拨测，其它表示即时拨测。 */
+  ProbeType?: number;
+}
+
+declare interface DescribeNodeGroupsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeNodesRequest {
   /** 节点类型 1 = IDC 2 = LastMile 3 = Mobile */
   NodeType?: number;
@@ -465,6 +493,8 @@ declare interface Cat {
   DescribeDetailedSingleProbeData(data: DescribeDetailedSingleProbeDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDetailedSingleProbeDataResponse>;
   /** 获取历史即时拨测任务 {@link DescribeInstantTasksRequest} {@link DescribeInstantTasksResponse} */
   DescribeInstantTasks(data: DescribeInstantTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstantTasksResponse>;
+  /** 获取拨测点组 {@link DescribeNodeGroupsRequest} {@link DescribeNodeGroupsResponse} */
+  DescribeNodeGroups(data?: DescribeNodeGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodeGroupsResponse>;
   /** 获取拨测节点 {@link DescribeNodesRequest} {@link DescribeNodesResponse} */
   DescribeNodes(data?: DescribeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodesResponse>;
   /** 列出云拨测指标详细数据 {@link DescribeProbeMetricDataRequest} {@link DescribeProbeMetricDataResponse} */
