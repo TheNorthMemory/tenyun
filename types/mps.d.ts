@@ -3062,6 +3062,8 @@ declare interface LiveRecordTemplate {
   Definition?: number;
   /** HLS 配置参数 */
   HLSConfigure?: HLSConfigureInfo;
+  /** MP4配置参数 */
+  MP4Configure?: MP4ConfigureInfo;
   /** 录制模板名称。 */
   Name?: string;
   /** 模板描述信息。 */
@@ -3434,6 +3436,12 @@ declare interface LowLightEnhanceConfig {
   Switch?: string;
   /** 类型，可选值：normal默认值：normal。 */
   Type?: string | null;
+}
+
+/** MP4配置参数 */
+declare interface MP4ConfigureInfo {
+  /** 录制周期，单位：秒，取值范围 10 分钟到720分钟。默认值：60分钟（3600秒）。 */
+  Interval?: number;
 }
 
 /** 智能分类结果 */
@@ -4338,8 +4346,10 @@ declare interface QualityControlData {
   NoAudio?: boolean | null;
   /** 为true时表示视频无视频轨。 */
   NoVideo?: boolean | null;
-  /** 视频无参考质量打分，百分制。 */
+  /** 视频无参考质量评分，百分制。 */
   QualityEvaluationScore?: number | null;
+  /** 视频无参考质量评分，MOS分数。 */
+  QualityEvaluationMeanOpinionScore?: number | null;
   /** 内容质检检出异常项。 */
   QualityControlResultSet?: QualityControlResult[] | null;
   /** 格式诊断检出异常项 */
@@ -5686,6 +5696,8 @@ declare interface WordResult {
   Start?: number;
   /** 字词结束时间戳，单位秒。 */
   End?: number;
+  /** 翻译文本 */
+  Trans?: string;
 }
 
 /** 工作流信息详情。 */
@@ -5971,8 +5983,10 @@ declare interface CreateImageSpriteTemplateResponse {
 }
 
 declare interface CreateLiveRecordTemplateRequest {
-  /** HLS 配置参数 */
-  HLSConfigure: HLSConfigureInfo;
+  /** HLS配置参数，和MP4Configure需要二选一必填。 */
+  HLSConfigure?: HLSConfigureInfo;
+  /** MP4配置参数，和HLSConfigure需要二选一必填。 */
+  MP4Configure?: MP4ConfigureInfo;
   /** 录制模板名称，长度限制：64 个字符。 */
   Name?: string;
   /** 模板描述信息，长度限制：256 个字符。 */
@@ -7575,7 +7589,7 @@ declare interface ModifyAnimatedGraphicsTemplateResponse {
 }
 
 declare interface ModifyAsrHotwordsRequest {
-  /** 热词库 id */
+  /** 热词库 id 如果热词库是文本热词：Name 和 Content 至少填一个 如果热词库是：Name、FileContent 和 FileName 至少填一个 */
   HotwordsId: string;
   /** 热词库名称 */
   Name?: string;
@@ -7651,8 +7665,10 @@ declare interface ModifyImageSpriteTemplateResponse {
 declare interface ModifyLiveRecordTemplateRequest {
   /** 录制模板唯一标识。 */
   Definition: number;
-  /** HLS 配置参数 */
+  /** HLS配置参数，和MP4Configure需要二选一必填。 */
   HLSConfigure?: HLSConfigureInfo;
+  /** MP4配置参数，和HLSConfigure需要二选一必填。 */
+  MP4Configure?: MP4ConfigureInfo;
   /** 录制模板名称，长度限制：64 个字符。 */
   Name?: string;
   /** 模板描述信息，长度限制：256 个字符。 */
@@ -8204,7 +8220,7 @@ declare interface Mps {
   /** 创建雪碧图模板 {@link CreateImageSpriteTemplateRequest} {@link CreateImageSpriteTemplateResponse} */
   CreateImageSpriteTemplate(data: CreateImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageSpriteTemplateResponse>;
   /** 创建直播录制模板 {@link CreateLiveRecordTemplateRequest} {@link CreateLiveRecordTemplateResponse} */
-  CreateLiveRecordTemplate(data: CreateLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveRecordTemplateResponse>;
+  CreateLiveRecordTemplate(data?: CreateLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveRecordTemplateResponse>;
   /** 创建素材样本 {@link CreatePersonSampleRequest} {@link CreatePersonSampleResponse} */
   CreatePersonSample(data: CreatePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonSampleResponse>;
   /** 创建媒体质检模板 {@link CreateQualityControlTemplateRequest} {@link CreateQualityControlTemplateResponse} */

@@ -438,6 +438,20 @@ declare interface ZoneInfo {
   ZoneState?: string;
 }
 
+declare interface CreateDedicatedClusterImageCacheRequest {
+  /** 集群ID */
+  DedicatedClusterId: string;
+  /** 镜像ID */
+  ImageId: string;
+}
+
+declare interface CreateDedicatedClusterImageCacheResponse {
+  /** 任务id */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDedicatedClusterOrderRequest {
   /** 专用集群id */
   DedicatedClusterId: string;
@@ -530,6 +544,18 @@ declare interface CreateSiteRequest {
 declare interface CreateSiteResponse {
   /** 创建Site生成的id */
   SiteId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDedicatedClusterImageCacheRequest {
+  /** 集群id */
+  DedicatedClusterId: string;
+  /** 镜像id */
+  ImageId: string;
+}
+
+declare interface DeleteDedicatedClusterImageCacheResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -897,10 +923,14 @@ declare interface Cdc {
   (): Versions;
   /** 创建专用集群 {@link CreateDedicatedClusterRequest} {@link CreateDedicatedClusterResponse} */
   CreateDedicatedCluster(data: CreateDedicatedClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDedicatedClusterResponse>;
+  /** 创建本地专有集群云上镜像缓存 {@link CreateDedicatedClusterImageCacheRequest} {@link CreateDedicatedClusterImageCacheResponse} */
+  CreateDedicatedClusterImageCache(data: CreateDedicatedClusterImageCacheRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDedicatedClusterImageCacheResponse>;
   /** 创建专用集群订单 {@link CreateDedicatedClusterOrderRequest} {@link CreateDedicatedClusterOrderResponse} */
   CreateDedicatedClusterOrder(data: CreateDedicatedClusterOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDedicatedClusterOrderResponse>;
   /** 创建站点 {@link CreateSiteRequest} {@link CreateSiteResponse} */
   CreateSite(data: CreateSiteRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSiteResponse>;
+  /** 删除本地专用集群镜像缓存 {@link DeleteDedicatedClusterImageCacheRequest} {@link DeleteDedicatedClusterImageCacheResponse} */
+  DeleteDedicatedClusterImageCache(data: DeleteDedicatedClusterImageCacheRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDedicatedClusterImageCacheResponse>;
   /** 删除专用集群 {@link DeleteDedicatedClustersRequest} {@link DeleteDedicatedClustersResponse} */
   DeleteDedicatedClusters(data: DeleteDedicatedClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDedicatedClustersResponse>;
   /** 删除站点 {@link DeleteSitesRequest} {@link DeleteSitesResponse} */

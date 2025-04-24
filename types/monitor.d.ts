@@ -5298,7 +5298,7 @@ declare namespace V20180724 {
   }
 
   interface UpdateAlertRuleRequest {
-    /** Prometheus 高警规则 ID */
+    /** Prometheus 告警规则 ID */
     RuleId: string;
     /** Prometheus 实例 ID */
     InstanceId: string;
@@ -5312,11 +5312,11 @@ declare namespace V20180724 {
     Duration: string;
     /** 告警规则接收组列表(当前规则绑定的接收组列表可通过 DescribeAlertRules 接口获取；用户已有的接收组列表可通过 DescribeAlarmNotices 接口获取) */
     Receivers: string[];
-    /** 报警规则标签列表 */
+    /** 告警规则标签列表 */
     Labels?: PrometheusRuleKV[];
-    /** 报警规则注释列表。告警对象和告警消息是 Prometheus Rule Annotations 的特殊字段，需要通过 annotations 来传递，对应的 Key 分别为summary/description。 */
+    /** 告警规则注释列表。告警对象和告警消息是 Prometheus Rule Annotations 的特殊字段，需要通过 annotations 来传递，对应的 Key 分别为summary/description。 */
     Annotations?: PrometheusRuleKV[];
-    /** 报警策略模板分类(自定义，可不填) */
+    /** 告警策略模板分类(自定义，可不填) */
     Type?: string;
   }
 

@@ -9,23 +9,23 @@ declare interface Autoscaler {
   /** 弹性伸缩最大实例数 */
   MaxReplicas: number;
   /** 指标弹性伸缩策略(指标策略和定时策略必须填写一个) */
-  HorizontalAutoscaler?: HorizontalAutoscaler[] | null;
+  HorizontalAutoscaler?: HorizontalAutoscaler[];
   /** 定时弹性伸缩策略(指标策略和定时策略必须填写一个) */
-  CronHorizontalAutoscaler?: CronHorizontalAutoscaler[] | null;
+  CronHorizontalAutoscaler?: CronHorizontalAutoscaler[];
   /** 弹性伸缩ID */
-  AutoscalerId?: string | null;
+  AutoscalerId?: string;
   /** 弹性伸缩名称 */
-  AutoscalerName?: string | null;
+  AutoscalerName?: string;
   /** 弹性伸缩描述 */
-  Description?: string | null;
+  Description?: string;
   /** 创建日期 */
-  CreateDate?: string | null;
+  CreateDate?: string;
   /** 修改时间 */
-  ModifyDate?: string | null;
+  ModifyDate?: string;
   /** 启用时间 */
   EnableDate?: string | null;
   /** 是否启用 */
-  Enabled?: boolean | null;
+  Enabled?: boolean;
 }
 
 /** 配置 */
@@ -81,7 +81,7 @@ declare interface CronHorizontalAutoscalerSchedule {
   /** 触发事件，小时分钟，用:分割例如00:00（零点零分触发） */
   StartAt: string;
   /** 目标实例数（不大于50） */
-  TargetReplicas?: number | null;
+  TargetReplicas?: number;
 }
 
 /** 分批发布单批次详情 */
@@ -91,35 +91,35 @@ declare interface DeployServiceBatchDetail {
   /** 新实例列表 */
   NewPodList?: DeployServicePodDetail | null;
   /** 当前批次状态："WaitForTimeExceed", "WaitForResume", "Deploying", "Finish", "NotStart" */
-  BatchStatus?: string | null;
+  BatchStatus?: string;
   /** 该批次预计旧实例数量 */
-  PodNum?: number | null;
+  PodNum?: number;
   /** 批次id */
-  BatchIndex?: number | null;
+  BatchIndex?: number;
   /** 旧实例列表 */
-  OldPods?: DeployServicePodDetail[] | null;
+  OldPods?: DeployServicePodDetail[];
   /** 新实例列表 */
-  NewPods?: DeployServicePodDetail[] | null;
+  NewPods?: DeployServicePodDetail[];
   /** =0：手动确认批次；>0：下一批次开始时间戳 */
-  NextBatchStartTime?: number | null;
+  NextBatchStartTime?: number;
 }
 
 /** 分批发布单批次详情 */
 declare interface DeployServicePodDetail {
   /** pod Id */
-  PodId?: string | null;
+  PodId?: string;
   /** pod状态 */
-  PodStatus?: string[] | null;
+  PodStatus?: string[];
   /** pod版本 */
-  PodVersion?: string | null;
+  PodVersion?: string;
   /** pod创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** pod所在可用区 */
-  Zone?: string | null;
+  Zone?: string;
   /** webshell地址 */
-  Webshell?: string | null;
+  Webshell?: string;
   /** 状态 */
-  Status?: string | null;
+  Status?: string;
 }
 
 /** 分批发布策略配置 */
@@ -143,7 +143,7 @@ declare interface DescribeConfigDataListPage {
   /** 记录 */
   Records?: ConfigData[];
   /** 分页游标，用以查询下一页 */
-  ContinueToken?: string | null;
+  ContinueToken?: string;
   /** 剩余数目 */
   RemainingCount?: number | null;
 }
@@ -171,33 +171,33 @@ declare interface EksService {
   /** yaml 内容 */
   Yaml?: string;
   /** 服务名 */
-  ApplicationName?: string | null;
+  ApplicationName?: string;
   /** 版本名 */
-  VersionName?: string | null;
+  VersionName?: string;
   /** 内网ip */
-  ClusterIp?: string[] | null;
+  ClusterIp?: string[];
   /** 外网ip */
-  ExternalIp?: string | null;
+  ExternalIp?: string;
   /** 访问类型，可选值：- EXTERNAL（公网访问）- VPC（vpc内访问）- CLUSTER（集群内访问） */
-  Type?: string | null;
+  Type?: string;
   /** 子网ID，只在类型为vpc访问时才有值 */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 负载均衡ID，只在外网访问和vpc内访问才有值，默认自动创建 */
-  LoadBalanceId?: string | null;
+  LoadBalanceId?: string;
   /** 端口映射 */
-  PortMappings?: PortMapping[] | null;
+  PortMappings?: PortMapping[];
   /** 每种类型访问配置详情 */
-  ServicePortMappingList?: ServicePortMapping[] | null;
+  ServicePortMappingList?: ServicePortMapping[];
   /** 刷新复写所有类型 */
-  FlushAll?: boolean | null;
+  FlushAll?: boolean;
   /** 1: 下次部署自动注入注册中心信息；0：不注入 */
   EnableRegistryNextDeploy?: number | null;
   /** 返回应用id */
-  ApplicationId?: string | null;
+  ApplicationId?: string;
   /** 所有服务IP是否已经ready */
-  AllIpDone?: boolean | null;
+  AllIpDone?: boolean;
   /** clb 域名 */
-  ExternalDomain?: string | null;
+  ExternalDomain?: string;
 }
 
 /** 开启prometheus监控配置 */
@@ -255,13 +255,13 @@ declare interface HorizontalAutoscaler {
   /** 是否启用 */
   Enabled?: boolean;
   /** 阈值（小数，优先使用） */
-  DoubleThreshold?: number | null;
+  DoubleThreshold?: number;
 }
 
 /** Ingress 配置 */
 declare interface IngressInfo {
   /** 环境ID */
-  EnvironmentId: string | null;
+  EnvironmentId: string;
   /** ip version */
   AddressIPVersion: string;
   /** ingress name */
@@ -269,23 +269,23 @@ declare interface IngressInfo {
   /** rules 配置 */
   Rules: IngressRule[];
   /** clb ID */
-  ClbId: string | null;
+  ClbId: string;
   /** 环境namespace */
   ClusterNamespace?: string;
   /** tls 配置 */
   Tls?: IngressTls[] | null;
   /** 环境集群ID */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** clb ip */
-  Vip?: string | null;
+  Vip?: string;
   /** 创建时间 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 是否混合 https，默认 false，可选值 true 代表有 https 协议监听 */
   Mixed?: boolean;
   /** 重定向模式，可选值：- AUTO（自动重定向http到https）- NONE（不使用重定向） */
-  RewriteType?: string | null;
+  RewriteType?: string;
   /** clb 域名 */
-  Domain?: string | null;
+  Domain?: string;
 }
 
 /** ingress rule 配置 */
@@ -293,7 +293,7 @@ declare interface IngressRule {
   /** ingress rule value */
   Http: IngressRuleValue;
   /** host 地址 */
-  Host?: string | null;
+  Host?: string;
   /** 协议，选项为 http， https，默认为 http */
   Protocol?: string;
 }
@@ -337,61 +337,61 @@ declare interface LogConfig {
   /** 收集类型，container_stdout 为标准输出；container_file 为文件； */
   InputType?: string;
   /** 日志集 ID */
-  LogsetId?: string | null;
+  LogsetId?: string;
   /** 日志主题 ID */
-  TopicId?: string | null;
+  TopicId?: string;
   /** 日志提取模式，minimalist_log 为单行全文；multiline_log 为多行全文； fullregex_log 为单行正则； multiline_fullregex_log 为多行正则； json_log 为 json； */
   LogType?: string;
   /** 首行正则表达式，当 LogType 为多行全文、多行正则时生效 */
-  BeginningRegex?: string | null;
+  BeginningRegex?: string;
   /** 收集文件目录，当 InputType=container_file 时生效 */
-  LogPath?: string | null;
+  LogPath?: string;
   /** 收集文件名模式，当 InputType=container_file 时生效 */
-  FilePattern?: string | null;
+  FilePattern?: string;
   /** 创建时间 */
-  CreateDate?: string | null;
+  CreateDate?: string;
   /** 更新时间 */
-  ModifyDate?: string | null;
+  ModifyDate?: string;
   /** 应用 ID */
-  ApplicationId?: string | null;
+  ApplicationId?: string;
   /** 应用名 */
-  ApplicationName?: string | null;
+  ApplicationName?: string;
   /** 导出规则 */
-  ExtractRule?: LogConfigExtractRule | null;
+  ExtractRule?: LogConfigExtractRule;
 }
 
 /** 日志采集的导出规则配置 */
 declare interface LogConfigExtractRule {
   /** 首行正则表达式 */
-  BeginningRegex?: string | null;
+  BeginningRegex?: string;
   /** 提取结果 */
-  Keys?: string[] | null;
+  Keys?: string[];
   /** 过滤键 */
-  FilterKeys?: string[] | null;
+  FilterKeys?: string[];
   /** 过滤值 */
-  FilterRegex?: string[] | null;
+  FilterRegex?: string[];
   /** 日志正则表达式 */
-  LogRegex?: string | null;
+  LogRegex?: string;
   /** 时间字段 */
-  TimeKey?: string | null;
+  TimeKey?: string;
   /** 时间格式 */
-  TimeFormat?: string | null;
+  TimeFormat?: string;
   /** 是否上传解析失败日志 */
-  UnMatchUpload?: string | null;
+  UnMatchUpload?: string;
   /** 解析失败日志的键名称 */
-  UnMatchedKey?: string | null;
+  UnMatchedKey?: string;
   /** tracking */
-  Backtracking?: string | null;
+  Backtracking?: string;
   /** 分隔符 */
-  Delimiter?: string | null;
+  Delimiter?: string;
 }
 
 /** LogConfig 列表结果 */
 declare interface LogConfigListPage {
   /** 记录 */
-  Records?: LogConfig[] | null;
+  Records?: LogConfig[];
   /** 翻页游标 */
-  ContinueToken?: string | null;
+  ContinueToken?: string;
 }
 
 /** 日志输出配置 */
@@ -411,11 +411,11 @@ declare interface LogOutputConf {
 /** 挂载配置信息 */
 declare interface MountedSettingConf {
   /** 配置名称 */
-  ConfigDataName: string | null;
+  ConfigDataName: string;
   /** 挂载路径 */
-  MountedPath: string | null;
+  MountedPath: string;
   /** 配置内容 */
-  Data?: Pair[] | null;
+  Data?: Pair[];
   /** 加密配置名称 */
   SecretDataName?: string | null;
 }
@@ -437,29 +437,29 @@ declare interface NamespaceInfo {
   /** 创建时间 */
   CreatedDate?: string;
   /** 环境名称 */
-  EnvironmentName?: string | null;
+  EnvironmentName?: string;
   /** APM 资源 ID */
-  ApmInstanceId?: string | null;
+  ApmInstanceId?: string;
   /** 环境是否上锁，1为上锁，0则未上锁 */
-  Locked?: number | null;
+  Locked?: number;
   /** 标签 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
   /** 环境类型：test、pre、prod */
-  EnvType?: string | null;
+  EnvType?: string;
 }
 
 /** 命名空间分页 */
 declare interface NamespacePage {
   /** 分页内容 */
-  Records: TemNamespaceInfo[];
+  Records?: TemNamespaceInfo[];
   /** 总数 */
-  Total: number;
+  Total?: number;
   /** 条目数 */
-  Size: number;
+  Size?: number;
   /** 页数 */
-  Pages: number;
+  Pages?: number;
   /** 当前条目 */
-  Current: number | null;
+  Current?: number;
 }
 
 /** 命名空间状态 */
@@ -483,13 +483,13 @@ declare interface NodeInfo {
   /** node名字 */
   Name?: string;
   /** node可用区 */
-  Zone?: string | null;
+  Zone?: string;
   /** node子网ID */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 可用IP数 */
-  AvailableIpCount?: string | null;
+  AvailableIpCount?: string;
   /** cidr块 */
-  Cidr?: string | null;
+  Cidr?: string;
 }
 
 /** 键值对 */
@@ -499,11 +499,11 @@ declare interface Pair {
   /** 值 */
   Value: string;
   /** 类型，default 为自定义，reserved 为系统变量，referenced 为引用配置项 */
-  Type?: string | null;
+  Type?: string;
   /** 配置名称 */
-  Config?: string | null;
+  Config?: string;
   /** 加密配置名称 */
-  Secret?: string | null;
+  Secret?: string;
 }
 
 /** 服务端口映射 */
@@ -539,27 +539,27 @@ declare interface RunVersionPod {
   /** 实例的ip */
   PodIp?: string;
   /** 可用区 */
-  Zone?: string | null;
+  Zone?: string;
   /** 部署版本 */
-  DeployVersion?: string | null;
+  DeployVersion?: string;
   /** 重启次数 */
-  RestartCount?: number | null;
+  RestartCount?: number;
   /** pod是否就绪 */
-  Ready?: boolean | null;
+  Ready?: boolean;
   /** 容器状态 */
-  ContainerState?: string | null;
+  ContainerState?: string;
   /** 实例所在节点信息 */
-  NodeInfo?: NodeInfo | null;
+  NodeInfo?: NodeInfo;
   /** 启动时间 */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 是否健康 */
   Unhealthy?: boolean | null;
   /** 不健康时的提示信息 */
-  UnhealthyWarningMsg?: string | null;
+  UnhealthyWarningMsg?: string;
   /** 版本ID */
-  VersionId?: string | null;
+  VersionId?: string;
   /** 应用名称 */
-  ApplicationName?: string | null;
+  ApplicationName?: string;
 }
 
 /** 服务分页 */
@@ -573,89 +573,89 @@ declare interface ServicePage {
   /** 页数 */
   Pages: number;
   /** 当前条数 */
-  Current?: number | null;
+  Current?: number;
 }
 
 /** 端口映射详细信息结构体 */
 declare interface ServicePortMapping {
   /** 服务类型：如：EXTERNAL，VPC，CLUSTER */
-  Type?: string | null;
+  Type?: string;
   /** 服务名称 */
-  ServiceName?: string | null;
+  ServiceName?: string;
   /** 集群内访问vip */
-  ClusterIp?: string | null;
+  ClusterIp?: string;
   /** 集群外方位vip */
-  ExternalIp?: string | null;
+  ExternalIp?: string;
   /** 子网id */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** vpc id */
-  VpcId?: string | null;
+  VpcId?: string;
   /** LoadBalance Id */
-  LoadBalanceId?: string | null;
+  LoadBalanceId?: string;
   /** yaml 内容 */
-  Yaml?: string | null;
+  Yaml?: string;
   /** 暴露端口列表 */
-  Ports?: number[] | null;
+  Ports?: number[];
   /** 端口映射数组 */
-  PortMappingItemList?: ServicePortMappingItem[] | null;
+  PortMappingItemList?: ServicePortMappingItem[];
   /** clb domain */
-  ExternalDomain?: string | null;
+  ExternalDomain?: string;
 }
 
 /** 服务端口映射条目 */
 declare interface ServicePortMappingItem {
   /** 应用访问端口 */
-  Port?: number | null;
+  Port?: number;
   /** 应用监听端口 */
-  TargetPort?: number | null;
+  TargetPort?: number;
   /** 协议类型 */
-  Protocol?: string | null;
+  Protocol?: string;
 }
 
 /** 服务版本信息列表 */
 declare interface ServiceVersionBrief {
   /** 版本名称 */
-  VersionName: string;
+  VersionName?: string;
   /** 状态 */
-  Status: string;
+  Status?: string;
   /** 是否启动弹性 -- 已废弃 */
-  EnableEs: number;
+  EnableEs?: number;
   /** 当前实例 */
-  CurrentInstances: number;
+  CurrentInstances?: number;
   /** version的id */
-  VersionId: string;
+  VersionId?: string;
   /** 日志输出配置 -- 已废弃 */
-  LogOutputConf: LogOutputConf | null;
+  LogOutputConf?: LogOutputConf | null;
   /** 期望实例 */
-  ExpectedInstances: number | null;
+  ExpectedInstances?: number | null;
   /** 部署方式 */
-  DeployMode: string | null;
+  DeployMode?: string;
   /** 建构任务ID */
-  BuildTaskId: string | null;
+  BuildTaskId?: string;
   /** 环境ID */
-  EnvironmentId: string | null;
+  EnvironmentId?: string;
   /** 环境name */
-  EnvironmentName: string | null;
+  EnvironmentName?: string;
   /** 服务ID */
-  ApplicationId: string | null;
+  ApplicationId?: string;
   /** 服务name */
-  ApplicationName: string | null;
+  ApplicationName?: string;
   /** 是否正在发布中 */
-  UnderDeploying: boolean | null;
+  UnderDeploying?: boolean | null;
   /** 分批次部署状态 */
-  BatchDeployStatus: string | null;
+  BatchDeployStatus?: string;
   /** 可用区 */
-  Zones: string[] | null;
+  Zones?: string[];
   /** 节点信息 */
-  NodeInfos: NodeInfo[] | null;
+  NodeInfos?: NodeInfo[];
   /** 实例信息 */
-  PodList: DescribeRunPodPage | null;
+  PodList?: DescribeRunPodPage | null;
   /** 工作负载信息 */
-  WorkloadInfo: WorkloadInfo | null;
+  WorkloadInfo?: WorkloadInfo | null;
   /** 创建日期 */
-  CreateDate: string | null;
+  CreateDate?: string;
   /** 地域id */
-  RegionId?: string | null;
+  RegionId?: string;
 }
 
 /** 查询过滤器 */
@@ -673,7 +673,7 @@ declare interface StorageConf {
   /** 存储卷路径 */
   StorageVolPath: string;
   /** 存储卷IP */
-  StorageVolIp?: string | null;
+  StorageVolIp?: string;
 }
 
 /** 数据卷挂载信息 */
@@ -687,61 +687,61 @@ declare interface StorageMountConf {
 /** 标签 */
 declare interface Tag {
   /** 标签键 */
-  TagKey?: string | null;
+  TagKey?: string;
   /** 标签值 */
-  TagValue?: string | null;
+  TagValue?: string;
 }
 
 /** 分批发布详情 */
 declare interface TemDeployApplicationDetailInfo {
   /** 分批发布策略 */
-  DeployStrategyConf: DeployStrategyConf | null;
+  DeployStrategyConf?: DeployStrategyConf | null;
   /** 开始时间 */
-  StartTime: string | null;
+  StartTime?: string;
   /** 结束时间 */
-  EndTime: string | null;
+  EndTime?: string;
   /** 当前状态 */
-  Status: string | null;
+  Status?: string;
   /** beta分批详情 */
-  BetaBatchDetail: DeployServiceBatchDetail | null;
+  BetaBatchDetail?: DeployServiceBatchDetail | null;
   /** 其他分批详情 */
-  OtherBatchDetail: DeployServiceBatchDetail[] | null;
+  OtherBatchDetail?: DeployServiceBatchDetail[];
   /** 老版本pod列表 */
-  OldVersionPodList: DescribeRunPodPage | null;
+  OldVersionPodList?: DescribeRunPodPage | null;
   /** 当前批次id */
-  CurrentBatchIndex: number | null;
+  CurrentBatchIndex?: number | null;
   /** 错误原因 */
-  ErrorMessage: string | null;
+  ErrorMessage?: string;
   /** 当前批次状态 */
-  CurrentBatchStatus: string | null;
+  CurrentBatchStatus?: string;
   /** 新版本version */
-  NewDeployVersion: string | null;
+  NewDeployVersion?: string;
   /** 旧版本version */
-  OldDeployVersion: string | null;
+  OldDeployVersion?: string;
   /** 包名称 */
-  NewVersionPackageInfo: string | null;
+  NewVersionPackageInfo?: string;
   /** 下一批次开始时间 */
-  NextBatchStartTime: number | null;
+  NextBatchStartTime?: number | null;
 }
 
 /** 环境启动进程（只统计由环境启动操作触发的应用数量） */
 declare interface TemEnvironmentStartingStatus {
   /** 需要启动的应用数量 */
-  ApplicationNumNeedToStart?: number | null;
+  ApplicationNumNeedToStart?: number;
   /** 已经启动的应用数量 */
-  StartedApplicationNum?: number | null;
+  StartedApplicationNum?: number;
   /** 启动失败的应用数量 */
-  StartFailedApplicationNum?: number | null;
+  StartFailedApplicationNum?: number;
 }
 
 /** 环境停止进程（只统计由环境停止操作触发的应用数量） */
 declare interface TemEnvironmentStoppingStatus {
   /** 需要停止的应用数量 */
-  ApplicationNumNeedToStop?: number | null;
+  ApplicationNumNeedToStop?: number;
   /** 已经停止的应用数量 */
-  StoppedApplicationNum?: number | null;
+  StoppedApplicationNum?: number;
   /** 停止失败的应用数量 */
-  StopFailedApplicationNum?: number | null;
+  StopFailedApplicationNum?: number;
 }
 
 /** 命名空间对象 */
@@ -755,7 +755,7 @@ declare interface TemNamespaceInfo {
   /** 区域名称 */
   Region?: string;
   /** 环境描述 */
-  Description?: string | null;
+  Description?: string;
   /** 状态,1:已销毁;0:正常 */
   Status?: number;
   /** vpc网络 */
@@ -781,61 +781,61 @@ declare interface TemNamespaceInfo {
   /** 环境锁，1为上锁，0则为上锁 */
   Locked?: number;
   /** 用户AppId */
-  AppId?: string | null;
+  AppId?: string;
   /** 用户Uin */
-  Uin?: string | null;
+  Uin?: string;
   /** 用户SubAccountUin */
-  SubAccountUin?: string | null;
+  SubAccountUin?: string;
   /** 集群ID */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 标签 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
   /** 资源是否有权限 */
-  HasAuthority?: boolean | null;
+  HasAuthority?: boolean;
   /** 环境类型: test、pre、prod */
-  EnvType?: string | null;
+  EnvType?: string;
   /** 地域码 */
-  RegionId?: string | null;
+  RegionId?: string;
 }
 
 /** 服务 */
 declare interface TemService {
   /** 主键 */
-  ApplicationId: string | null;
+  ApplicationId?: string;
   /** 服务名 */
-  ApplicationName: string | null;
+  ApplicationName?: string;
   /** 描述 */
-  Description: string | null;
+  Description?: string;
   /** 命名空间id */
-  EnvironmentId: string | null;
+  EnvironmentId?: string;
   /** 创建时间 */
-  CreateDate: string | null;
+  CreateDate?: string;
   /** 修改时间 */
-  ModifyDate: string | null;
+  ModifyDate?: string;
   /** 修改人 */
-  Modifier: string | null;
+  Modifier?: string;
   /** 创建者 */
-  Creator: string | null;
+  Creator?: string;
   /** tcr个人版or企业版 */
-  RepoType: number | null;
+  RepoType?: number;
   /** 企业版实例id */
-  InstanceId: string | null;
+  InstanceId?: string;
   /** 镜像仓库名 */
-  RepoName: string | null;
+  RepoName?: string;
   /** 编程语言 */
-  CodingLanguage: string | null;
+  CodingLanguage?: string;
   /** 部署方式 */
-  DeployMode: string | null;
+  DeployMode?: string;
   /** 环境名称 */
-  EnvironmentName: string | null;
+  EnvironmentName?: string;
   /** 服务当前运行环境的实例信息 */
-  ActiveVersions: ServiceVersionBrief[] | null;
+  ActiveVersions?: ServiceVersionBrief[];
   /** 是否启用链路追踪 */
-  EnableTracing: number | null;
+  EnableTracing?: number;
   /** 标签 */
-  Tags: Tag[] | null;
+  Tags?: Tag[];
   /** 是否有资源权限 */
-  HasAuthority: boolean | null;
+  HasAuthority?: boolean;
 }
 
 /** 版本信息 */
@@ -885,169 +885,169 @@ declare interface TemServiceVersionInfo {
   /** 修改时间 */
   ModifyDate: string;
   /** 挂载配置 */
-  StorageMountConfs: StorageMountConf[] | null;
+  StorageMountConfs: StorageMountConf[];
   /** 版本名称 */
-  VersionName: string | null;
+  VersionName: string;
   /** 日志输出配置 */
   LogOutputConf?: LogOutputConf | null;
   /** 服务名称 */
-  ApplicationName?: string | null;
+  ApplicationName?: string;
   /** 服务描述 */
-  ApplicationDescription?: string | null;
+  ApplicationDescription?: string;
   /** 环境名称 */
-  EnvironmentName?: string | null;
+  EnvironmentName?: string;
   /** 环境ID */
-  EnvironmentId?: string | null;
+  EnvironmentId?: string;
   /** 公网地址 */
-  PublicDomain?: string | null;
+  PublicDomain?: string;
   /** 是否开通公网访问 */
   EnablePublicAccess?: boolean | null;
   /** 现有的实例 */
-  CurrentInstances?: number | null;
+  CurrentInstances?: number;
   /** 期望的实例 */
   ExpectedInstances?: number | null;
   /** 编程语言 */
-  CodingLanguage?: string | null;
+  CodingLanguage?: string;
   /** 程序包名 */
-  PkgName?: string | null;
+  PkgName?: string;
   /** 是否启用弹性伸缩 */
   EsEnable?: number | null;
   /** 弹性策略 */
   EsStrategy?: number | null;
   /** 镜像tag */
-  ImageTag?: string | null;
+  ImageTag?: string;
   /** 是否启用log */
   LogEnable?: number | null;
   /** 最小实例数 */
-  MinAliveInstances?: string | null;
+  MinAliveInstances?: string;
   /** 安全组 */
-  SecurityGroupIds?: string[] | null;
+  SecurityGroupIds?: string[];
   /** 镜像命令 */
-  ImageCommand?: string | null;
+  ImageCommand?: string;
   /** 镜像命令参数 */
   ImageArgs?: string[] | null;
   /** 是否使用默认注册中心配置 */
-  UseRegistryDefaultConfig?: boolean | null;
+  UseRegistryDefaultConfig?: boolean;
   /** eks 访问设置 */
-  Service?: EksService | null;
+  Service?: EksService;
   /** 挂载配置信息 */
-  SettingConfs?: MountedSettingConf[] | null;
+  SettingConfs?: MountedSettingConf[];
   /** log path数组信息 */
-  LogConfs?: string[] | null;
+  LogConfs?: string[];
   /** 启动后立即执行的脚本 */
-  PostStart?: string | null;
+  PostStart?: string;
   /** 停止前执行的脚本 */
-  PreStop?: string | null;
+  PreStop?: string;
   /** 存活探针配置 */
   Liveness?: HealthCheckConfig | null;
   /** 就绪探针配置 */
   Readiness?: HealthCheckConfig | null;
   /** 弹性策略 */
-  HorizontalAutoscaler?: HorizontalAutoscaler[] | null;
+  HorizontalAutoscaler?: HorizontalAutoscaler[];
   /** 定时弹性策略 */
-  CronHorizontalAutoscaler?: CronHorizontalAutoscaler[] | null;
+  CronHorizontalAutoscaler?: CronHorizontalAutoscaler[];
   /** 应用实际可用区 */
-  Zones?: string[] | null;
+  Zones?: string[];
   /** 最新部署时间 */
-  LastDeployDate?: string | null;
+  LastDeployDate?: string;
   /** 最新部署成功时间 */
-  LastDeploySuccessDate?: string | null;
+  LastDeploySuccessDate?: string;
   /** 应用所在node信息 */
-  NodeInfos?: NodeInfo[] | null;
+  NodeInfos?: NodeInfo[];
   /** image类型 -0 为demo -1为正常image */
-  ImageType?: number | null;
+  ImageType?: number;
   /** 是否启用调用链组件 */
-  EnableTracing?: number | null;
+  EnableTracing?: number;
   /** 是否开启调用链上报，只有 EnableTracing=1 时生效（参数已弃用） */
-  EnableTracingReport?: number | null;
+  EnableTracingReport?: number;
   /** 镜像类型：0-个人镜像、1-企业镜像、2-公有镜像 */
-  RepoType?: number | null;
+  RepoType?: number;
   /** 分批发布子状态：batch_updating、batch_updating_waiting_confirm */
-  BatchDeployStatus?: string | null;
+  BatchDeployStatus?: string;
   /** APM 资源 ID */
-  ApmInstanceId?: string | null;
+  ApmInstanceId?: string;
   /** 工作负载信息 */
-  WorkloadInfo?: WorkloadInfo | null;
+  WorkloadInfo?: WorkloadInfo;
   /** 是否启用应用加速 */
-  SpeedUp?: boolean | null;
+  SpeedUp?: boolean;
   /** 启动检测探针配置 */
   StartupProbe?: HealthCheckConfig | null;
   /** 操作系统版本，可选参数：- ALPINE- CENTOS */
-  OsFlavour?: string | null;
+  OsFlavour?: string;
   /** 镜像仓库server */
-  RepoServer?: string | null;
+  RepoServer?: string;
   /** 是否正在发布中 */
-  UnderDeploying?: boolean | null;
+  UnderDeploying?: boolean;
   /** 监控业务指标监控 */
   EnablePrometheusConf?: EnablePrometheusConf | null;
   /** 是否为手动停止 */
-  StoppedManually?: boolean | null;
+  StoppedManually?: boolean;
   /** tcr实例ID */
-  TcrInstanceId?: string | null;
+  TcrInstanceId?: string;
   /** 1：开始自动metrics采集（open-telemetry）；0：关闭metrics采集； */
-  EnableMetrics?: number | null;
+  EnableMetrics?: number;
   /** 用户AppId */
-  AppId?: string | null;
+  AppId?: string;
   /** 用户SubAccountUin */
-  SubAccountUin?: string | null;
+  SubAccountUin?: string;
   /** 用户Uin */
-  Uin?: string | null;
+  Uin?: string;
   /** 地域 */
-  Region?: string | null;
+  Region?: string;
   /** 应用分组ID */
-  GroupId?: string | null;
+  GroupId?: string;
   /** 是否启用注册中心 */
-  EnableRegistry?: number | null;
+  EnableRegistry?: number;
   /** 弹性伸缩数组 */
-  AutoscalerList?: Autoscaler[] | null;
+  AutoscalerList?: Autoscaler[];
   /** 修改人 */
-  Modifier?: string | null;
+  Modifier?: string;
   /** 创建人 */
-  Creator?: string | null;
+  Creator?: string;
   /** 部署策略 */
   DeployStrategyConf?: DeployStrategyConf | null;
   /** 实例列表 */
-  PodList?: DescribeRunPodPage | null;
+  PodList?: DescribeRunPodPage;
   /** 发布时配置是否有修改 */
   ConfEdited?: boolean | null;
   /** 标签 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
   /** 是否编码 */
-  PreStopEncoded?: string | null;
+  PreStopEncoded?: string;
   /** 是否编码 */
-  PostStartEncoded?: string | null;
+  PostStartEncoded?: string;
 }
 
 /** 创建应用，创建仓库参数 */
 declare interface UseDefaultRepoParameters {
   /** 企业版实例名 */
-  EnterpriseInstanceName?: string | null;
+  EnterpriseInstanceName?: string;
   /** 企业版收费类型 0 按量收费 1 包年包月 */
-  EnterpriseInstanceChargeType?: number | null;
+  EnterpriseInstanceChargeType?: number;
   /** 企业版规格：basic-基础班 ，standard-标准版，premium-高级版 */
-  EnterpriseInstanceType?: string | null;
+  EnterpriseInstanceType?: string;
 }
 
 /** 工作负载详情 */
 declare interface WorkloadInfo {
   /** 资源 ID */
-  ClusterId?: string | null;
+  ClusterId?: string;
   /** 应用名 */
-  ApplicationName?: string | null;
+  ApplicationName?: string;
   /** 版本名称 */
-  VersionName?: string | null;
+  VersionName?: string;
   /** Ready实例数 */
-  ReadyReplicas?: number | null;
+  ReadyReplicas?: number;
   /** 实例数 */
-  Replicas?: number | null;
+  Replicas?: number;
   /** Updated实例数 */
-  UpdatedReplicas?: number | null;
+  UpdatedReplicas?: number;
   /** UpdatedReady实例数 */
-  UpdatedReadyReplicas?: number | null;
+  UpdatedReadyReplicas?: number;
   /** 更新版本 */
-  UpdateRevision?: string | null;
+  UpdateRevision?: string;
   /** 当前版本 */
-  CurrentRevision?: string | null;
+  CurrentRevision?: string;
 }
 
 declare interface CreateApplicationAutoscalerRequest {
@@ -1063,7 +1063,7 @@ declare interface CreateApplicationAutoscalerRequest {
 
 declare interface CreateApplicationAutoscalerResponse {
   /** 弹性伸缩策略组合ID */
-  Result?: string | null;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1119,7 +1119,7 @@ declare interface CreateApplicationServiceRequest {
 
 declare interface CreateApplicationServiceResponse {
   /** 是否成功 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1157,7 +1157,7 @@ declare interface CreateCosTokenRequest {
 
 declare interface CreateCosTokenResponse {
   /** 成功时为CosToken对象，失败为null */
-  Result?: CosToken | null;
+  Result?: CosToken;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1195,7 +1195,7 @@ declare interface CreateEnvironmentRequest {
 
 declare interface CreateEnvironmentResponse {
   /** 成功时为环境ID，失败为null */
-  Result?: string | null;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1249,7 +1249,7 @@ declare interface CreateResourceRequest {
 
 declare interface CreateResourceResponse {
   /** 成功与否 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1267,7 +1267,7 @@ declare interface DeleteApplicationAutoscalerRequest {
 
 declare interface DeleteApplicationAutoscalerResponse {
   /** 是否成功 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1303,7 +1303,7 @@ declare interface DeleteApplicationServiceRequest {
 
 declare interface DeleteApplicationServiceResponse {
   /** 是否成功 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1441,7 +1441,7 @@ declare interface DescribeApplicationAutoscalerListRequest {
 
 declare interface DescribeApplicationAutoscalerListResponse {
   /** 弹性伸缩策略组合 */
-  Result?: Autoscaler[] | null;
+  Result?: Autoscaler[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1673,7 +1673,7 @@ declare interface DescribeIngressesRequest {
 
 declare interface DescribeIngressesResponse {
   /** ingress 数组 */
-  Result?: IngressInfo[] | null;
+  Result?: IngressInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1729,7 +1729,7 @@ declare interface DescribeRelatedIngressesRequest {
 
 declare interface DescribeRelatedIngressesResponse {
   /** ingress 数组 */
-  Result?: IngressInfo[] | null;
+  Result?: IngressInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1793,7 +1793,7 @@ declare interface DisableApplicationAutoscalerRequest {
 
 declare interface DisableApplicationAutoscalerResponse {
   /** 是否成功 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1811,7 +1811,7 @@ declare interface EnableApplicationAutoscalerRequest {
 
 declare interface EnableApplicationAutoscalerResponse {
   /** 是否成功 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1829,7 +1829,7 @@ declare interface GenerateApplicationPackageDownloadUrlRequest {
 
 declare interface GenerateApplicationPackageDownloadUrlResponse {
   /** 包下载临时链接 */
-  Result?: string | null;
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1849,7 +1849,7 @@ declare interface ModifyApplicationAutoscalerRequest {
 
 declare interface ModifyApplicationAutoscalerResponse {
   /** 是否成功 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1867,7 +1867,7 @@ declare interface ModifyApplicationInfoRequest {
 
 declare interface ModifyApplicationInfoResponse {
   /** 成功与否 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1885,7 +1885,7 @@ declare interface ModifyApplicationReplicasRequest {
 
 declare interface ModifyApplicationReplicasResponse {
   /** 是否成功 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1905,7 +1905,7 @@ declare interface ModifyApplicationServiceRequest {
 
 declare interface ModifyApplicationServiceResponse {
   /** 是否成功 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1947,7 +1947,7 @@ declare interface ModifyEnvironmentRequest {
 
 declare interface ModifyEnvironmentResponse {
   /** 成功时为环境ID，失败为null */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2003,7 +2003,7 @@ declare interface RestartApplicationPodRequest {
 
 declare interface RestartApplicationPodResponse {
   /** 返回结果 */
-  Result?: boolean | null;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

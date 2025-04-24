@@ -1326,6 +1326,8 @@ declare interface IpFilterPathRule {
   RuleType: string | null;
   /** RuleType 对应类型下的匹配内容：all 时填充 *file 时填充后缀名，如 jpg、txtdirectory 时填充路径，如 /xxx/test/path 时填充绝对路径，如 /xxx/test.html */
   RulePaths: string[] | null;
+  /** 备注信息, 最多支持50个字符 */
+  Remark?: string;
 }
 
 /** 单节点单 IP 访问限频配置，默认为关闭状态 */

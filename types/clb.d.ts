@@ -89,7 +89,7 @@ declare interface BindDetailItem {
   /** 配置绑定的规则 */
   LocationId?: string;
   /** 监听器名字 */
-  ListenerName?: string | null;
+  ListenerName?: string;
   /** 监听器协议 */
   Protocol?: string;
   /** 监听器端口 */

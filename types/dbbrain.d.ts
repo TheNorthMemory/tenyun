@@ -1746,6 +1746,22 @@ declare interface DescribeDBDiagHistoryResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDBDiagReportContentRequest {
+  /** 实例名 */
+  InstanceId: string;
+  /** 异步任务ID */
+  AsyncRequestId: number;
+  /** 服务产品类型，支持值："mysql" - 云数据库 MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，默认为"mysql"。 */
+  Product?: string;
+}
+
+declare interface DescribeDBDiagReportContentResponse {
+  /** 报告内容。 */
+  Report?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDBDiagReportTasksRequest {
   /** 第一个任务的开始时间，用于范围查询，时间格式如：2019-09-10 12:13:14。 */
   StartTime?: string;
@@ -4025,6 +4041,8 @@ declare interface Dbbrain {
   DescribeDBDiagEvents(data: DescribeDBDiagEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBDiagEventsResponse>;
   /** 获取实例诊断历史 {@link DescribeDBDiagHistoryRequest} {@link DescribeDBDiagHistoryResponse} */
   DescribeDBDiagHistory(data: DescribeDBDiagHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBDiagHistoryResponse>;
+  /** 查询健康诊断报告内容 {@link DescribeDBDiagReportContentRequest} {@link DescribeDBDiagReportContentResponse} */
+  DescribeDBDiagReportContent(data: DescribeDBDiagReportContentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBDiagReportContentResponse>;
   /** 查询健康报告生成任务列表 {@link DescribeDBDiagReportTasksRequest} {@link DescribeDBDiagReportTasksResponse} */
   DescribeDBDiagReportTasks(data?: DescribeDBDiagReportTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBDiagReportTasksResponse>;
   /** 获取性能趋势 {@link DescribeDBPerfTimeSeriesRequest} {@link DescribeDBPerfTimeSeriesResponse} */

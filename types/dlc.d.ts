@@ -3196,6 +3196,24 @@ declare interface DescribeAdvancedStoreLocationResponse {
   RequestId?: string;
 }
 
+declare interface DescribeClusterMonitorInfosRequest {
+  /** 引擎Id */
+  DataEngineId: string;
+  /** 任务创建时间的起始时间 */
+  TimeStart?: string;
+  /** 任务创建时间的结束时间 */
+  TimeEnd?: string;
+  /** 指标名称 */
+  MetricName?: string;
+}
+
+declare interface DescribeClusterMonitorInfosResponse {
+  /** 集群监控信息列表 */
+  Info?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDLCCatalogAccessRequest {
   /** 显示条数 */
   Limit?: number;
@@ -5159,6 +5177,8 @@ declare interface Dlc {
   DeleteWorkGroup(data: DeleteWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkGroupResponse>;
   /** 查询高级设置 {@link DescribeAdvancedStoreLocationRequest} {@link DescribeAdvancedStoreLocationResponse} */
   DescribeAdvancedStoreLocation(data?: DescribeAdvancedStoreLocationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAdvancedStoreLocationResponse>;
+  /** 查询集群监控信息 {@link DescribeClusterMonitorInfosRequest} {@link DescribeClusterMonitorInfosResponse} */
+  DescribeClusterMonitorInfos(data: DescribeClusterMonitorInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterMonitorInfosResponse>;
   /** 查询DLCCatalog访问权限 {@link DescribeDLCCatalogAccessRequest} {@link DescribeDLCCatalogAccessResponse} */
   DescribeDLCCatalogAccess(data?: DescribeDLCCatalogAccessRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDLCCatalogAccessResponse>;
   /** DMS元数据获取库 {@link DescribeDMSDatabaseRequest} {@link DescribeDMSDatabaseResponse} */

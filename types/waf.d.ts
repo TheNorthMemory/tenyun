@@ -1616,6 +1616,8 @@ declare interface InstanceInfo {
   Last3MaxQPS?: number;
   /** 最近3天最大带宽 */
   Last3MaxBandwidth?: number;
+  /** 重保增强包 */
+  MajorEventsProPkg?: MajorEventsProPkg;
 }
 
 /** 数据封装 */
@@ -1798,6 +1800,28 @@ declare interface MajorEventsPkg {
   BillingItem?: string;
   /** 护网包状态 */
   HWState?: number;
+}
+
+/** 重保防护资源信息 */
+declare interface MajorEventsProPkg {
+  /** 资源id */
+  ResourceIds?: string;
+  /** 状态 */
+  Status?: number;
+  /** 地域 */
+  Region?: number;
+  /** 开始时间 */
+  BeginTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 申请数量 */
+  InquireNum?: number;
+  /** 使用数量 */
+  UsedNum?: number;
+  /** 续费标志 */
+  RenewFlag?: number;
+  /** 计费项 */
+  BillingItem?: string;
 }
 
 /** 小程序安全接入ID扩展资源信息 */
