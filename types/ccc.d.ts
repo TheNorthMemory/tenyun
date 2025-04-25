@@ -696,6 +696,8 @@ declare interface StaffInfo {
   RoleId?: number;
   /** 用户角色id列表 */
   RoleIdList?: number;
+  /** 用户角色id列表 */
+  RoleList?: number[];
   /** 所属技能组列表 */
   SkillGroupList?: SkillGroupItem[];
   /** 最后修改时间 */

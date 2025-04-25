@@ -12,6 +12,14 @@ declare interface DetailedSingleDataDefine {
   Fields: Field[];
 }
 
+/** 省份(国际)或运营商基本信息 */
+declare interface DistinctOrNetServiceInfo {
+  /** 省份(国际)或运营商ID */
+  ID?: string;
+  /** 名称 */
+  Name?: string;
+}
+
 /** 储存float类型字段 */
 declare interface Field {
   /** 自定义字段编号 */
@@ -86,6 +94,34 @@ declare interface NodeDefineExt {
   CodeType: string | null;
   /** 节点支持的任务类型。1: 页面性能 2: 文件上传 3: 文件下载 4: 端口性能 5: 网络质量 6: 音视频体验 */
   TaskTypes: number[] | null;
+}
+
+/** Node节点基本信息，用于新建任务页面重构节点选择 */
+declare interface NodeInfoBase {
+  /** 节点code */
+  ID?: string;
+  /** 节点名称 */
+  Content?: string;
+}
+
+/** 子节点。用于新建任务重构页面的节点选择 */
+declare interface NodeLeaf {
+  /** 子节点ID */
+  ID?: string;
+  /** 子节点名称 */
+  Content?: string;
+  /** 节点列表 */
+  Children?: NodeInfoBase[];
+}
+
+/** 拨测节点数（新建任务页面重构） */
+declare interface NodeTree {
+  /** 节点ID */
+  ID?: string;
+  /** 节点名称 */
+  Content?: string;
+  /** 子节点 */
+  Children?: NodeLeaf[];
 }
 
 /** 拨测任务 */
@@ -308,6 +344,12 @@ declare interface DescribeNodeGroupsRequest {
 }
 
 declare interface DescribeNodeGroupsResponse {
+  /** 树状节点列表，总共两级 */
+  NodeList?: NodeTree[] | null;
+  /** 省份或国家列表 */
+  DistrictList?: DistinctOrNetServiceInfo[] | null;
+  /** 运营商列表 */
+  NetServiceList?: DistinctOrNetServiceInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

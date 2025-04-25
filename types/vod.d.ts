@@ -5433,7 +5433,7 @@ declare namespace V20180717 {
     StartTimeOffset?: number;
     /** 视频拆条结束的偏移时间，单位：秒。不填或填0，表示转码后的视频持续到原始视频的末尾终止；当数值大于0时（假设为 n），表示转码后的视频持续到原始视频第 n 秒时终止；当数值小于0时（假设为 -n），表示转码后的视频持续到原始视频结束 n 秒前终止。 */
     EndTimeOffset?: number;
-    /** [任务流模板](/document/product/266/11700)名字，如果要对生成的新视频执行任务流时填写。 */
+    /** [任务流](https://cloud.tencent.com/document/product/266/33475)名称。要对生成的新视频自动执行任务流时填写。 */
     ProcedureName?: string;
     /** 视频拆条输出信息。 */
     OutputConfig?: SplitMediaOutputConfig;
@@ -8572,7 +8572,7 @@ declare namespace V20180717 {
     StreamInfos?: EditMediaStreamInfo[];
     /** 编辑模板 ID，取值有 10，20，不填代表使用 10 模板。10：拼接时，以分辨率最高的输入为基准；20：拼接时，以码率最高的输入为基准。 */
     Definition?: number;
-    /** [任务流模板](/document/product/266/11700)名字，如果要对生成的新视频执行任务流时填写。 */
+    /** [任务流](https://cloud.tencent.com/document/product/266/33475)名称，如果要对生成的新视频执行任务流时填写。 */
     ProcedureName?: string;
     /** 编辑后生成的文件配置。 */
     OutputConfig?: EditMediaOutputConfig;
@@ -9624,7 +9624,7 @@ declare namespace V20180717 {
   interface ProcessMediaByProcedureRequest {
     /** 媒体文件 ID。 */
     FileId: string;
-    /** [任务流模板](/document/product/266/11700)名字。 */
+    /** [任务流](https://cloud.tencent.com/document/product/266/33475)名称。 */
     ProcedureName: string;
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;

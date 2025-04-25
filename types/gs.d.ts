@@ -100,6 +100,14 @@ declare interface AndroidInstanceImage {
   AndroidInstanceImageZone?: string;
 }
 
+/** 安卓实例信息 */
+declare interface AndroidInstanceInformation {
+  /** 安卓实例 ID */
+  AndroidInstanceId: string;
+  /** 实例名称 */
+  Name: string;
+}
+
 /** 安卓实例标签 */
 declare interface AndroidInstanceLabel {
   /** 标签键 */
@@ -660,6 +668,24 @@ declare interface ExecuteCommandOnAndroidInstancesResponse {
   RequestId?: string;
 }
 
+declare interface FetchAndroidInstancesLogsRequest {
+  /** 安卓实例 ID 列表 */
+  AndroidInstanceIds: string[];
+  /** cos 桶名称 */
+  BucketName: string;
+  /** cos 桶区域 */
+  BucketRegion: string;
+  /** cos 桶目录，默认为 /log/ */
+  BucketDirectory?: string;
+  /** 下载最近几天的日志，默认值为 1 */
+  RecentDays?: number;
+}
+
+declare interface FetchAndroidInstancesLogsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface InstallAndroidInstancesAppRequest {
   /** 实例ID */
   AndroidInstanceIds: string[];
@@ -734,6 +760,16 @@ declare interface ModifyAndroidInstanceResolutionRequest {
 }
 
 declare interface ModifyAndroidInstanceResolutionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAndroidInstancesInformationRequest {
+  /** 安卓实例信息数据 */
+  AndroidInstanceInformations: AndroidInstanceInformation[];
+}
+
+declare interface ModifyAndroidInstancesInformationResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1101,6 +1137,8 @@ declare interface Gs {
   DestroyAndroidInstances(data: DestroyAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyAndroidInstancesResponse>;
   /** 在安卓实例上异步执行命令 {@link ExecuteCommandOnAndroidInstancesRequest} {@link ExecuteCommandOnAndroidInstancesResponse} */
   ExecuteCommandOnAndroidInstances(data: ExecuteCommandOnAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteCommandOnAndroidInstancesResponse>;
+  /** 批量获取安卓实例日志 {@link FetchAndroidInstancesLogsRequest} {@link FetchAndroidInstancesLogsResponse} */
+  FetchAndroidInstancesLogs(data: FetchAndroidInstancesLogsRequest, config?: AxiosRequestConfig): AxiosPromise<FetchAndroidInstancesLogsResponse>;
   /** 安装安卓实例应用 {@link InstallAndroidInstancesAppRequest} {@link InstallAndroidInstancesAppResponse} */
   InstallAndroidInstancesApp(data: InstallAndroidInstancesAppRequest, config?: AxiosRequestConfig): AxiosPromise<InstallAndroidInstancesAppResponse>;
   /** 修改安卓应用 {@link ModifyAndroidAppRequest} {@link ModifyAndroidAppResponse} */
@@ -1111,6 +1149,8 @@ declare interface Gs {
   ModifyAndroidInstanceInformation(data: ModifyAndroidInstanceInformationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidInstanceInformationResponse>;
   /** 修改安卓实例分辨率 {@link ModifyAndroidInstanceResolutionRequest} {@link ModifyAndroidInstanceResolutionResponse} */
   ModifyAndroidInstanceResolution(data: ModifyAndroidInstanceResolutionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidInstanceResolutionResponse>;
+  /** 批量修改安卓实例信息 {@link ModifyAndroidInstancesInformationRequest} {@link ModifyAndroidInstancesInformationResponse} */
+  ModifyAndroidInstancesInformation(data: ModifyAndroidInstancesInformationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidInstancesInformationResponse>;
   /** 批量修改安卓实例的标签 {@link ModifyAndroidInstancesLabelsRequest} {@link ModifyAndroidInstancesLabelsResponse} */
   ModifyAndroidInstancesLabels(data: ModifyAndroidInstancesLabelsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidInstancesLabelsResponse>;
   /** 批量修改安卓实例分辨率 {@link ModifyAndroidInstancesResolutionRequest} {@link ModifyAndroidInstancesResolutionResponse} */

@@ -2000,7 +2000,7 @@ declare interface ProductQuota {
 
 /** 描述配额信息 */
 declare interface Quota {
-  /** 配额名称，取值范围：- `TOTAL_EIP_QUOTA`：用户当前地域下EIP的配额数；- `DAILY_EIP_APPLY`：用户当前地域下今日申购次数；- `DAILY_PUBLIC_IP_ASSIGN`：用户当前地域下，重新分配公网 IP次数；- `TOTAL_EIP6_QUOTA`：用户当前地域下，传统弹性公网IPv6的配额数；- `BGP_EIPv6_QUOTA`：用户当前地域下，可申请的 BGP 弹性公网IPv6 的配额数；- `SINGLEISP_EIPv6_QUOTA`：用户当前地域下，可申请的静态单线弹性公网IPv6 的配额数；- `TOTAL_BANDWIDTHPKG_QUOTA`：用户当前地域下，可申请的带宽包总配额；- `PRIMARY_TRAFFIC_SINGLE_BWP_QUOTA`：用户当前地域下，可申请的静态单线主流量带宽包配额数；- `PRIMARY_TRAFFIC_BGP_BWP_QUOTA`：用户当前地域下，可申请的BGP主流量带宽包配额数；- `BandwidthGuaranteedRatio`：用户当前地域下，保底带宽包默认保底比例；- `TezBandwidthGuaranteedRatio`：用户当前地域下，边缘可用区保底带宽包默认保底比例； */
+  /** 配额名称，取值范围：- `TOTAL_EIP_QUOTA`：用户当前地域下，EIP的配额数；- `LOCALBGP_EIP_QUOTA`：用户当前地域下，本地BGP IP配额数；- `SINGLEISP_EIP_QUOTA`：用户当前地域下，静态单线 IP 配额数；- `DAILY_EIP_APPLY`：用户当前地域下，除静态单线 IP外今日申购次数；- `DAILY_SINGLEISP_APPLY`：用户当前地域下，静态单线 IP今日申购次数；- `DAILY_PUBLIC_IP_ASSIGN`：用户当前地域下，重新分配公网 IP次数；- `MONTHLY_RECOVER_QUOTA`：用户当前地域下，每月申请指定 IP次数；- `TOTAL_EIP6_QUOTA`：用户当前地域下，传统弹性公网IPv6的配额数；- `BGP_EIPv6_QUOTA`：用户当前地域下，可申请的 BGP 弹性公网IPv6 的配额数；- `SINGLEISP_EIPv6_QUOTA`：用户当前地域下，可申请的静态单线弹性公网IPv6 的配额数；- `TOTAL_BANDWIDTHPKG_QUOTA`：用户当前地域下，可申请的带宽包总配额；- `PRIMARY_TRAFFIC_SINGLE_BWP_QUOTA`：用户当前地域下，可申请的静态单线主流量带宽包配额数；- `PRIMARY_TRAFFIC_BGP_BWP_QUOTA`：用户当前地域下，可申请的BGP主流量带宽包配额数；- `BandwidthGuaranteedRatio`：用户当前地域下，保底带宽包默认保底比例；- `TezBandwidthGuaranteedRatio`：用户当前地域下，边缘可用区保底带宽包默认保底比例； */
   QuotaId?: string;
   /** 当前数量 */
   QuotaCurrent?: number;
@@ -2856,7 +2856,7 @@ declare interface UsedDetail {
   RemainingAmount?: TrafficFlow;
   /** 抵扣时间 */
   Time?: string;
-  /** 资源类型。可能的值: CVM, LB, NAT, HAVIP, EIP */
+  /** 资源类型。可选值: EIP, BWP, LB */
   ResourceType?: string;
   /** 资源ID */
   ResourceId?: string;
@@ -6448,7 +6448,7 @@ declare interface DescribeNetworkAccountTypeRequest {
 }
 
 declare interface DescribeNetworkAccountTypeResponse {
-  /** 用户账号的网络类型，STANDARD为标准用户，LEGACY为传统用户 */
+  /** 用户账号的网络类型，STANDARD为标准账户类型，LEGACY为传统账户类型 */
   NetworkAccountType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

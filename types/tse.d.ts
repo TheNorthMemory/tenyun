@@ -410,6 +410,10 @@ declare interface ConfigFile {
   ConfigFileSupportedClient?: number;
   /** 配置文件持久化 */
   ConfigFilePersistent?: ConfigFilePersistent;
+  /** 是否开启加密算法 */
+  Encrypted?: boolean;
+  /** 加密算法 */
+  EncryptAlgo?: string;
 }
 
 /** 配置文件组 */
@@ -1892,6 +1896,8 @@ declare interface ServiceGovernanceInfo {
   LimiterVpcInfos?: VpcInfo[];
   /** 引擎关联CLS日志主题信息 */
   CLSTopics?: PolarisCLSTopicInfo[];
+  /** 子用户密码 */
+  SubPassword?: string;
 }
 
 /** 服务的 WAF 状态 */

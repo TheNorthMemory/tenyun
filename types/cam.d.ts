@@ -1209,7 +1209,7 @@ declare interface GetPolicyVersionRequest {
 
 declare interface GetPolicyVersionResponse {
   /** 策略版本详情 */
-  PolicyVersion?: PolicyVersionDetail | null;
+  PolicyVersion?: PolicyVersionDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

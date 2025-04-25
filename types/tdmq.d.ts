@@ -984,11 +984,11 @@ declare interface RabbitMQPermission {
   ModifyTime?: string;
 }
 
-/** RabbitMQ节点信息 */
+/** RabbitMQ 节点信息 */
 declare interface RabbitMQPrivateNode {
   /** 节点名字 */
-  NodeName: string | null;
-  /** 节点状态 */
+  NodeName?: string | null;
+  /** 节点状态，running 运行中，down 异常 */
   NodeStatus?: string | null;
   /** CPU使用率 */
   CPUUsage?: string | null;
@@ -2109,9 +2109,9 @@ declare interface CreateProClusterResponse {
 }
 
 declare interface CreateRabbitMQBindingRequest {
-  /** 实例Id */
+  /** 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。 */
   InstanceId: string;
-  /** Vhost名称 */
+  /** VirtualHost 名称，形如 testvhost。有效的 VirtualHost 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，在左侧导航栏点击 Vhost，并在 Vhost 列表中找到Vhost名称。 */
   VirtualHost: string;
   /** 源exchange */
   Source: string;
@@ -2124,7 +2124,7 @@ declare interface CreateRabbitMQBindingRequest {
 }
 
 declare interface CreateRabbitMQBindingResponse {
-  /** 实例名称 */
+  /** 实例 ID */
   InstanceId?: string;
   /** vhost名称 */
   VirtualHost?: string;
@@ -2135,11 +2135,11 @@ declare interface CreateRabbitMQBindingResponse {
 }
 
 declare interface CreateRabbitMQUserRequest {
-  /** 集群实例Id */
+  /** 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。 */
   InstanceId: string;
   /** 用户名，登录时使用 */
   User: string;
-  /** 密码，登录时使用 */
+  /** 密码，登录时使用。规范：不能为空，8-64个字符，至少要包含小写字母、大写字母、数字、特殊字符【()`~!@#$%^&*_=|{}[]:;',.?/】中的两项 */
   Password: string;
   /** 描述 */
   Description?: string;
@@ -2161,21 +2161,21 @@ declare interface CreateRabbitMQUserResponse {
 declare interface CreateRabbitMQVipInstanceRequest {
   /** 可用区 */
   ZoneIds: number[];
-  /** 私有网络VpcId */
+  /** 私有网络ID，形如 vpc-xxx。有效的 VpcId 可通过登录[私有网络](https://console.cloud.tencent.com/vpc/vpc?rid=1)控制台查询；也可以调用接口 [DescribeVpcEx](https://cloud.tencent.com/document/api/215/1372)，从接口返回中的 unVpcId 字段获取。若在创建子机时 VpcId 与 SubnetId 同时传入 DEFAULT，则强制使用默认 vpc 网络。 */
   VpcId: string;
-  /** 私有网络SubnetId */
+  /** 私有网络子网 ID，形如 subnet-xxx。有效的私有网络子网 ID 可通过登录[子网控制台](https://console.cloud.tencent.com/vpc/subnet?rid=1)查询；也可以调用接口 [DescribeSubnets](https://cloud.tencent.com/document/api/215/15784)，从接口返回中的 unSubnetId 字段获取。若在创建子机时 SubnetId 与 VpcId 同时传入 DEFAULT，则强制使用默认 vpc 网络。 */
   SubnetId: string;
   /** 集群名称 */
   ClusterName: string;
-  /** 节点规格,基础型rabbit-vip-basic-1,标准型rabbit-vip-basic-2,高阶1型rabbit-vip-basic-3,高阶2型rabbit-vip-basic-4。不传默认为基础型 */
+  /** 集群的节点规格，需要输入对应的规格标识：2C8G：rabbit-vip-basic-2c8g4C16G：rabbit-vip-basic-4c16g8C32G：rabbit-vip-basic-8c32g16C32G：rabbit-vip-basic-416C64G：rabbit-vip-basic-16c64g2C4G：rabbit-vip-basic-54C8G：rabbit-vip-basic-18C16G（已售罄）：rabbit-vip-basic-2不传默认为 4C8G：rabbit-vip-basic-1 */
   NodeSpec?: string;
   /** 节点数量,多可用区最少为3节点。不传默认单可用区为1,多可用区为3 */
   NodeNum?: number;
   /** 单节点存储规格,不传默认为200G */
   StorageSize?: number;
-  /** 镜像队列,不传默认为false */
+  /** 是否开启默认镜像队列，true 表示为开启，false 表示为不开启。不传默认为 false */
   EnableCreateDefaultHaMirrorQueue?: boolean;
-  /** 预付费使用。自动续费,不传默认为true */
+  /** 仅预付费集群（PayMode 参数为 1 时）使用该参数，表示是否自动续费，true 表示打开自动续费。不传默认为 true */
   AutoRenewFlag?: boolean;
   /** 购买时长,不传默认为1(月) */
   TimeSpan?: number;
@@ -2187,23 +2187,23 @@ declare interface CreateRabbitMQVipInstanceRequest {
   IsIntl?: boolean;
   /** 资源标签列表 */
   ResourceTags?: Tag[];
-  /** 公网带宽大小，单位 M */
+  /** 公网带宽大小，单位 Mbps */
   Bandwidth?: number;
   /** 是否打开公网接入，不传默认为false */
   EnablePublicAccess?: boolean;
 }
 
 declare interface CreateRabbitMQVipInstanceResponse {
-  /** 订单号Id */
+  /** 订单号 ID */
   TranId?: string;
-  /** 实例Id */
+  /** 实例 ID */
   InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface CreateRabbitMQVirtualHostRequest {
-  /** 集群实例Id */
+  /** 实例 ID，形如amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。 */
   InstanceId: string;
   /** vhost名 */
   VirtualHost: string;
@@ -2541,16 +2541,16 @@ declare interface DeleteProClusterResponse {
 }
 
 declare interface DeleteRabbitMQBindingRequest {
-  /** 实例Id */
+  /** 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。 */
   InstanceId: string;
-  /** Vhost参数 */
+  /** VirtualHost 名称，形如 testvhost。有效的 VirtualHost 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，在左侧导航栏点击 Vhost，并在 Vhost 列表中找到Vhost名称。 */
   VirtualHost: string;
   /** 路由关系Id */
   BindingId: number;
 }
 
 declare interface DeleteRabbitMQBindingResponse {
-  /** 实例名称 */
+  /** 实例 ID */
   InstanceId?: string;
   /** vhost参数 */
   VirtualHost?: string;
@@ -2561,11 +2561,11 @@ declare interface DeleteRabbitMQBindingResponse {
 }
 
 declare interface DeleteRabbitMQPermissionRequest {
-  /** 集群实例Id */
+  /** 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。 */
   InstanceId: string;
-  /** 用户名，登录时使用 */
+  /** 用户名，形如 admin。有效的 User 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，点击集群列表中的集群，进入集群详情，并在用户与权限页签中找到用户列表，从而找到用户名称。 */
   User: string;
-  /** vhost名称 */
+  /** VirtualHost 名称，形如 testvhost。有效的 VirtualHost 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，在左侧导航栏点击 Vhost，并在 Vhost 列表中找到 Vhost 名称。 */
   VirtualHost: string;
 }
 
@@ -2575,9 +2575,9 @@ declare interface DeleteRabbitMQPermissionResponse {
 }
 
 declare interface DeleteRabbitMQUserRequest {
-  /** 集群实例Id */
+  /** 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。 */
   InstanceId: string;
-  /** 用户名，登录时使用 */
+  /** 用户名，形如 admin。有效的 User 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，点击集群列表中的集群，进入集群详情，并在用户与权限页签中找到用户列表，从而找到用户名称。 */
   User: string;
 }
 
@@ -2587,25 +2587,25 @@ declare interface DeleteRabbitMQUserResponse {
 }
 
 declare interface DeleteRabbitMQVipInstanceRequest {
-  /** 实例Id */
+  /** 实例 ID，形如amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。 */
   InstanceId: string;
   /** 是否国际站请求，默认 false */
   IsIntl?: boolean;
 }
 
 declare interface DeleteRabbitMQVipInstanceResponse {
-  /** 订单号Id */
+  /** 订单号 ID */
   TranId?: string;
-  /** 实例Id */
+  /** 实例 ID */
   InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DeleteRabbitMQVirtualHostRequest {
-  /** 集群实例Id */
+  /** 实例 ID，形如amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。 */
   InstanceId: string;
-  /** vhost名 */
+  /** VirtualHost 名称，形如 testvhost。有效的 VirtualHost 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，在左侧导航栏点击 Vhost，并在 Vhost 列表中找到Vhost名称。 */
   VirtualHost: string;
 }
 
@@ -3307,26 +3307,26 @@ declare interface DescribeRabbitMQExchangesResponse {
 }
 
 declare interface DescribeRabbitMQNodeListRequest {
-  /** rabbitmq集群ID */
+  /** 实例 ID，形如amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。 */
   InstanceId: string;
-  /** 偏移量 */
+  /** 偏移量，默认值 0 */
   Offset?: number;
-  /** 一页限制 */
+  /** 一页限制,moren */
   Limit?: number;
   /** 模糊搜索节点名字 */
   NodeName?: string;
-  /** 过滤参数的名字和数值现在只有一个nodeStatusrunning/down数组类型，兼容后续添加过滤参数 */
+  /** 过滤参数的名字和数值，当前仅支持根据节点状态筛选。"Name": "nodeStatus""Value": running or down */
   Filters?: Filter[];
-  /** 按指定元素排序，现在只有2个cpuUsage/diskUsage */
+  /** 按指定元素排序，现在只有2个cpuUsage：节点CPU利用率diskUsage：节点磁盘利用率 */
   SortElement?: string;
   /** 升序/降序ascend/descend */
   SortOrder?: string;
 }
 
 declare interface DescribeRabbitMQNodeListResponse {
-  /** 集群列表数量 */
+  /** 集群节点数量 */
   TotalCount?: number;
-  /** 集群列表 */
+  /** 集群节点列表 */
   NodeList?: RabbitMQPrivateNode[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -4523,11 +4523,11 @@ declare interface ModifyPublicNetworkSecurityPolicyResponse {
 }
 
 declare interface ModifyRabbitMQPermissionRequest {
-  /** 集群实例Id */
+  /** 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。 */
   InstanceId: string;
-  /** 用户名，权限关联的用户 */
+  /** 用户名，形如 admin。有效的 User 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，点击集群列表中的集群，进入集群详情，并在用户与权限页签中找到用户列表，从而找到用户名称。 */
   User: string;
-  /** vhost名称 */
+  /** VirtualHost 名称，形如 testvhost。有效的 VirtualHost 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，在左侧导航栏点击 Vhost，并在 Vhost 列表中找到Vhost名称。 */
   VirtualHost: string;
   /** 权限类型，declare相关操作，该用户可操作该vhost下的资源名称正则表达式 */
   ConfigRegexp: string;
@@ -4543,15 +4543,15 @@ declare interface ModifyRabbitMQPermissionResponse {
 }
 
 declare interface ModifyRabbitMQUserRequest {
-  /** 集群实例Id */
+  /** 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。 */
   InstanceId: string;
-  /** 用户名，登录时使用 */
+  /** 用户名，形如 admin。有效的 User 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，点击集群列表中的集群，进入集群详情，并在用户与权限页签中找到用户列表，从而找到用户名称。 */
   User: string;
-  /** 密码，登录时使用 */
+  /** 密码，登录时使用。规范：不能为空，8-64个字符，至少要包含小写字母、大写字母、数字、特殊字符【()`~!@#$%^&*_=|{}[]:;',.?/】中的两项 */
   Password: string;
   /** 描述，不传则不修改 */
   Description?: string;
-  /** 用户标签，用于决定改用户访问RabbitMQ Management的权限范围，不传则不修改 */
+  /** 用户标签，用于决定改用户访问 RabbitMQ Management 的权限范围management：普通控制台用户，monitoring：管理型控制台用户，其他值：非控制台用户 */
   Tags?: string[];
   /** 该用户的最大连接数，不传则不修改 */
   MaxConnections?: number;
@@ -4581,11 +4581,11 @@ declare interface ModifyRabbitMQVipInstanceResponse {
 }
 
 declare interface ModifyRabbitMQVirtualHostRequest {
-  /** 集群实例Id */
+  /** 实例 ID，形如amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。 */
   InstanceId: string;
   /** vhost名 */
   VirtualHost: string;
-  /** 描述 */
+  /** VirtualHost 名称，形如 testvhost。有效的 VirtualHost 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，在左侧导航栏点击 Vhost，并在 Vhost 列表中找到Vhost名称。 */
   Description?: string;
   /** 消息轨迹开关,true打开,false关闭 */
   TraceFlag?: boolean;
@@ -5103,7 +5103,7 @@ declare interface Tdmq {
   CreateRabbitMQBinding(data: CreateRabbitMQBindingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRabbitMQBindingResponse>;
   /** 创建RabbitMQ的用户 {@link CreateRabbitMQUserRequest} {@link CreateRabbitMQUserResponse} */
   CreateRabbitMQUser(data: CreateRabbitMQUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRabbitMQUserResponse>;
-  /** 创建RabbitMQ专享版实例 {@link CreateRabbitMQVipInstanceRequest} {@link CreateRabbitMQVipInstanceResponse} */
+  /** 创建 RabbitMQ 托管版实例 {@link CreateRabbitMQVipInstanceRequest} {@link CreateRabbitMQVipInstanceResponse} */
   CreateRabbitMQVipInstance(data: CreateRabbitMQVipInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRabbitMQVipInstanceResponse>;
   /** 创建RabbitMQ的vhost {@link CreateRabbitMQVirtualHostRequest} {@link CreateRabbitMQVirtualHostResponse} */
   CreateRabbitMQVirtualHost(data: CreateRabbitMQVirtualHostRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRabbitMQVirtualHostResponse>;
@@ -5147,7 +5147,7 @@ declare interface Tdmq {
   DeleteRabbitMQPermission(data: DeleteRabbitMQPermissionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRabbitMQPermissionResponse>;
   /** 删除RabbitMQ的用户 {@link DeleteRabbitMQUserRequest} {@link DeleteRabbitMQUserResponse} */
   DeleteRabbitMQUser(data: DeleteRabbitMQUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRabbitMQUserResponse>;
-  /** 删除RabbitMQ专享版实例 {@link DeleteRabbitMQVipInstanceRequest} {@link DeleteRabbitMQVipInstanceResponse} */
+  /** 删除 RabbitMQ 托管版实例 {@link DeleteRabbitMQVipInstanceRequest} {@link DeleteRabbitMQVipInstanceResponse} */
   DeleteRabbitMQVipInstance(data: DeleteRabbitMQVipInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRabbitMQVipInstanceResponse>;
   /** 删除RabbitMQ的vhost {@link DeleteRabbitMQVirtualHostRequest} {@link DeleteRabbitMQVirtualHostResponse} */
   DeleteRabbitMQVirtualHost(data: DeleteRabbitMQVirtualHostRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRabbitMQVirtualHostResponse>;
@@ -5221,7 +5221,7 @@ declare interface Tdmq {
   DescribeRabbitMQBindings(data: DescribeRabbitMQBindingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQBindingsResponse>;
   /** 查询RabbitMQ exchange 列表 {@link DescribeRabbitMQExchangesRequest} {@link DescribeRabbitMQExchangesResponse} */
   DescribeRabbitMQExchanges(data: DescribeRabbitMQExchangesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQExchangesResponse>;
-  /** RabbitMQ专享版查询节点列表 {@link DescribeRabbitMQNodeListRequest} {@link DescribeRabbitMQNodeListResponse} */
+  /** 查询 RabbitMQ 托管版节点列表 {@link DescribeRabbitMQNodeListRequest} {@link DescribeRabbitMQNodeListResponse} */
   DescribeRabbitMQNodeList(data: DescribeRabbitMQNodeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQNodeListResponse>;
   /** 查询RabbitMQ权限列表 {@link DescribeRabbitMQPermissionRequest} {@link DescribeRabbitMQPermissionResponse} */
   DescribeRabbitMQPermission(data: DescribeRabbitMQPermissionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQPermissionResponse>;

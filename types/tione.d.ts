@@ -2,6 +2,36 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 在线服务的 AuthToken 数据 */
+declare interface AuthToken {
+  /** AuthToken 基础信息 */
+  Base?: AuthTokenBase;
+  /** AuthToken 限流数组 */
+  Limits?: AuthTokenLimit[];
+}
+
+/** AuthToken 的基础信息 */
+declare interface AuthTokenBase {
+  /** token 值 */
+  Value?: string;
+  /** token 别名 */
+  Name?: string;
+  /** token 描述 */
+  Description?: string;
+  /** token 创建时间 */
+  CreateTime?: string;
+  /** token状态 */
+  Status?: string;
+}
+
+/** AuthToken 限流信息 */
+declare interface AuthTokenLimit {
+  /** 限频策略：PerMinute 每分钟限频；PerDay 每日限频 */
+  Strategy?: string;
+  /** 上限值 */
+  Max?: number;
+}
+
 /** CBS存储配置 */
 declare interface CBSConfig {
   /** 存储大小 */
@@ -376,6 +406,22 @@ declare interface HDFSConfig {
   Id: string;
   /** 路径 */
   Path: string;
+}
+
+/** http get 行为 */
+declare interface HTTPGetAction {
+  /** http 路径 */
+  Path?: string;
+}
+
+/** 健康探针 */
+declare interface HealthProbe {
+  /** 存活探针 */
+  LivenessProbe?: Probe;
+  /** 就绪探针 */
+  ReadinessProbe?: Probe;
+  /** 启动探针 */
+  StartupProbe?: Probe;
 }
 
 /** hpa的描述 */
@@ -994,6 +1040,30 @@ declare interface PrivateLinkInfo {
   InnerHttpsAddr?: string[] | null;
   /** 私有连接状态 */
   State?: string | null;
+  /** grpc内网调用地址 */
+  InnerGrpcAddr?: string[];
+}
+
+/** 探针结构信息 */
+declare interface Probe {
+  /** 探针行为 */
+  ProbeAction?: ProbeAction;
+  /** 等待服务启动的延迟 */
+  InitialDelaySeconds?: number;
+  /** 轮询检查时间间隔 */
+  PeriodSeconds?: number;
+  /** 检查超时时长 */
+  TimeoutSeconds?: number;
+  /** 检测失败认定次数 */
+  FailureThreshold?: number;
+  /** 检测成功认定次数，就绪默认 3，存活/启动默认 1 */
+  SuccessThreshold?: number;
+}
+
+/** 探针行为 */
+declare interface ProbeAction {
+  /** http get 行为 */
+  HTTPGet?: HTTPGetAction;
 }
 
 /** RDMA配置 */
@@ -1216,6 +1286,12 @@ declare interface ServiceCallInfoV2 {
   AuthorizationEnable?: boolean | null;
   /** 鉴权token，仅当AuthorizationEnable为true时有效 */
   AuthToken?: string | null;
+  /** LLM token 列表 */
+  AuthTokens?: AuthToken[];
+  /** 是否开启限流 */
+  EnableLimit?: boolean;
+  /** 访问grpc时需携带的虚拟Host */
+  GrpcHost?: string;
 }
 
 /** 服务共享弹性网卡设置 */
@@ -1280,6 +1356,10 @@ declare interface ServiceGroup {
   SubUin?: string;
   /** 服务组的app_id */
   AppId?: number;
+  /** 是否开启鉴权 */
+  AuthorizationEnable?: boolean;
+  /** 限流鉴权 token 列表 */
+  AuthTokens?: AuthToken[];
 }
 
 /** 推理服务在集群中的信息 */
@@ -1352,6 +1432,10 @@ declare interface ServiceInfo {
   TerminationGracePeriodSeconds?: number;
   /** 服务实例停止前执行的命令，执行完毕或执行时间超过优雅退出时限后实例结束 */
   PreStopCommand?: string[];
+  /** 是否启用grpc端口 */
+  GrpcEnable?: boolean;
+  /** 健康探针 */
+  HealthProbe?: HealthProbe;
 }
 
 /** 服务的限流限速等配置 */
@@ -1843,6 +1927,10 @@ declare interface CreateModelServiceRequest {
   TerminationGracePeriodSeconds?: number;
   /** ["sleep","60"] */
   PreStopCommand?: string[];
+  /** 是否启用 grpc 端口 */
+  GrpcEnable?: boolean;
+  /** 健康探针 */
+  HealthProbe?: HealthProbe;
 }
 
 declare interface CreateModelServiceResponse {
@@ -2615,6 +2703,10 @@ declare interface ModifyModelServiceRequest {
   TerminationGracePeriodSeconds?: number;
   /** ["sleep","60"] */
   PreStopCommand?: string[];
+  /** 是否启动grpc端口 */
+  GrpcEnable?: boolean;
+  /** 健康探针 */
+  HealthProbe?: HealthProbe;
 }
 
 declare interface ModifyModelServiceResponse {
