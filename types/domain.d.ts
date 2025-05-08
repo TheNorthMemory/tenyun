@@ -8,7 +8,7 @@ declare interface AuctionInfo {
   Bidder?: string;
   /** 竞拍时间 */
   AuctionTime?: string;
-  /** 竞拍价格 */
+  /** 竞拍价格 单位元 */
   AuctionPrice?: number;
   /** 状态 up: 领先 down: 落后 */
   Status?: string;
@@ -20,19 +20,19 @@ declare interface BatchStatus {
   LogId?: number;
   /** 批量任务状态 doing：进行中 success：成功 failed：失败 partial_success：部分成功 */
   Status?: string;
-  /** 批量任务类型 */
+  /** 批量任务类型new：注册域名renew：续费域名batch_transfer_prohibition_on：开启禁止转移锁batch_transfer_prohibition_off：关闭禁止转移锁batch_update_prohibition_on：开启禁止更新锁batch_update_prohibition_off：关闭禁止更新锁batch_modify_owner：域名转移batch_modify_domain_info：域名信息修改batch_transfer_in：域名转入batch_cancel_transfer_out：域名取消转出 */
   BatchAction?: string;
 }
 
 /** 我预定的域名结构体。 */
 declare interface BiddingAppointResult {
-  /** business_id */
+  /** 预约ID */
   BusinessID?: string;
   /** 域名 */
   Domain?: string;
-  /** 预定价格 */
+  /** 预定价格 单位元 */
   AppointPrice?: number;
-  /** 预约保证金 */
+  /** 预约保证金 单位元 */
   AppointBondPrice?: number;
   /** 预约结束时间 */
   AppointEndTime?: string;
@@ -44,17 +44,17 @@ declare interface BiddingAppointResult {
 
 /** 我竞价的域名结构体。 */
 declare interface BiddingResult {
-  /** business_id */
+  /** 预约ID */
   BusinessID?: string;
   /** 域名 */
   Domain?: string;
-  /** 当前价格 */
+  /** 当前价格 单位元 */
   CurrentPrice?: number;
   /** 当前用户昵称 */
   CurrentNickname?: string;
-  /** 我的出价 */
+  /** 我的出价 单位元 */
   BiddingPrice?: number;
-  /** 竞价保证金 */
+  /** 竞价保证金 单位元 */
   BiddingBondPrice?: number;
   /** 竞价结束时间 */
   BiddingEndTime?: string;
@@ -68,7 +68,7 @@ declare interface BiddingResult {
 
 /** 我得标的域名结构体。 */
 declare interface BiddingSuccessfulResult {
-  /** 支付结束时间 */
+  /** 支付结束时间格式:YYYY-MM-DD HH:mm:ss */
   PayEndTime?: string;
 }
 
@@ -142,15 +142,15 @@ declare interface DomainBaseInfo {
   DomainName?: string;
   /** 域名实名认证状态。NotUpload：未实名认证InAudit：实名审核中Approved：实名审核通过Reject：实名审核失败NoAudit: 无需实名认证 */
   RealNameAuditStatus?: string;
-  /** 域名实名认证不通过原因。 */
+  /** 域名实名认证不通过原因。<具体内容以实名审核机构返回为准> */
   RealNameAuditUnpassReason?: string;
   /** 域名命名审核状态。NotAudit：命名审核未上传Pending：命名审核待上传Auditing：域名命名审核中Approved：域名命名审核通过Rejected：域名命名审核拒绝 */
   DomainNameAuditStatus?: string;
-  /** 域名命名审核不通过原因。 */
+  /** 域名命名审核不通过原因。<具体内容以实名审核机构返回为准> */
   DomainNameAuditUnpassReason?: string | null;
-  /** 注册时间。 */
+  /** 注册时间。格式:YYYY-MM-DD */
   CreationDate?: string;
-  /** 到期时间 */
+  /** 到期时间格式:YYYY-MM-DD */
   ExpirationDate?: string;
   /** 域名状态。ok：正常serverHold：注册局暂停解析 clientHold：注册商暂停解析pendingTransfer：转移中renewingPeriod：续费期redemptionPeriod：偿还期pendingDelete：删除期serverTransferProhibited：注册局禁止转移serverUpdateProhibited：注册局禁止更新serverDeleteProhibited：注册局禁止删除clientTransferProhibited：注册商禁止转移clientUpdateProhibited：注册商禁止更新clientDeleteProhibited：注册商禁止删除serverRenewProhibited: 注册局禁止续费clientRenewProhobited: 注册商禁止续费 */
   DomainStatus?: string[];
@@ -162,7 +162,7 @@ declare interface DomainBaseInfo {
   NameServer?: string[];
   /** true：开启锁定false：关闭锁定 */
   LockTransfer?: boolean;
-  /** 锁定结束时间 */
+  /** 锁定结束时间格式:YYYY-MM-DD HH:mm:ss */
   LockEndTime?: string;
 }
 
@@ -170,13 +170,13 @@ declare interface DomainBaseInfo {
 declare interface DomainBatchDetailSet {
   /** 详情ID */
   Id?: number;
-  /** 类型 new: 注册域名 batch_transfer_prohibition_on:开启禁止转移 batch_transfer_prohibition_off:关闭禁止转移 batch_update_prohibition_on:开启禁止更新 batch_update_prohibition_off:关闭禁止更新 */
+  /** 类型 new：注册域名renew：续费域名batch_transfer_prohibition_on：开启禁止转移锁batch_transfer_prohibition_off：关闭禁止转移锁batch_update_prohibition_on：开启禁止更新锁batch_update_prohibition_off：关闭禁止更新锁batch_modify_owner：域名转移batch_modify_domain_info：域名信息修改batch_transfer_in：域名转入batch_cancel_transfer_out：域名取消转出 */
   Action?: string;
   /** 域名 */
   Domain?: string;
   /** 执行状态：doing 执行中。failed 操作失败。success 操作成功。 */
   Status?: string;
-  /** 失败原因 */
+  /** 失败原因，如果状态成功(Status:success),则该字段为空 */
   Reason?: string;
   /** 创建时间 */
   CreatedOn?: string;
@@ -218,13 +218,13 @@ declare interface DomainList {
   DomainName?: string;
   /** 是否已设置自动续费 。0：未设置 1：已设置2：设置后，关闭 */
   AutoRenew?: number;
-  /** 注册时间。 */
+  /** 注册时间。格式:YYYY-MM-DD HH:mm:ss */
   CreationDate?: string;
-  /** 到期时间。 */
+  /** 到期时间。格式:YYYY-MM-DD HH:mm:ss */
   ExpirationDate?: string;
-  /** 域名后缀 */
+  /** 域名后缀，根据具体域名确定例如:123.com 后缀则为.com123.com.cn 后缀则为.com.cn123.中国 后缀则为.中国 */
   Tld?: string;
-  /** 编码后的后缀（中文会进行编码） */
+  /** 编码后的后缀（中文会进行Punycode编码）根据具体域名确定例如:123.com 后缀则为.com123.com.cn 后缀则为.com.cn123.中国 后缀则为.xn--fiqs8s */
   CodeTld?: string;
   /** 域名购买状态。ok：正常AboutToExpire: 即将到期RegisterPending：注册中RegisterDoing：注册中RegisterFailed：注册失败RenewPending：续费期RenewDoing：续费中RedemptionPending：赎回期RedemptionDoing：赎回中TransferPending：转入中TransferTransing：转入中TransferFailed：转入失败 */
   BuyStatus?: string;
@@ -296,13 +296,13 @@ declare interface PhoneEmailData {
 declare interface PreAuctionInfo {
   /** 域名 */
   Domain?: string;
-  /** 竞价倒计时 */
+  /** 竞价倒计时格式:YYYY-MM-DD HH:mm:ss */
   BiddingTime?: string;
   /** 出价次数 */
   BidCount?: number;
-  /** 当前价格 */
+  /** 当前价格 单位元 */
   Price?: number;
-  /** 用户操作 bid：出价 "noAction"：无法操作 */
+  /** 用户操作 bid：出价 noAction：无法操作 */
   Op?: string;
   /** 业务ID */
   BusinessId?: string;
@@ -312,23 +312,23 @@ declare interface PreAuctionInfo {
 declare interface PreReleaseInfo {
   /** 域名 */
   Domain?: string;
-  /** 预订倒计时 */
+  /** 预订倒计时(YYYY-MM-DD hh:mm:ss) */
   ReservationTime?: string;
-  /** 域名注册时间 */
+  /** 域名注册时间(YYYY-MM-DD hh:mm:ss) */
   RegTime?: string;
-  /** 域名删除时间 */
+  /** 域名删除时间(YYYY-MM-DD hh:mm:ss) */
   DelTime?: string;
   /** 当前人数 */
   CurrentPeople?: number;
   /** 当前价格 */
   Price?: number;
-  /** 是否收藏 */
+  /** 是否收藏true：收藏false：未收藏 */
   IsFollow?: boolean;
-  /** 是否已经预约 */
+  /** 是否已经预约true：预约false：未预约 */
   IsAppoint?: boolean;
   /** 业务ID */
   BusinessId?: string;
-  /** 是否为原持有者 */
+  /** 是否为原持有者true：是原持有人false：非原持有人 */
   IsDomainUser?: boolean;
 }
 
@@ -348,13 +348,13 @@ declare interface PriceInfo {
 
 /** 预释放价格区间配置 */
 declare interface PriceScopeConf {
-  /** 最高价格 */
+  /** 最高价格 单位元 */
   MaxPrice?: number;
-  /** 最低价格 */
+  /** 最低价格 单位元 */
   MinPrice?: number;
-  /** 价格幅度 */
+  /** 价格幅度 单位元 */
   Price?: number;
-  /** 保证金 */
+  /** 保证金 单位元 */
   DepositPrice?: number;
 }
 
@@ -418,7 +418,7 @@ declare interface SucDomainInfo {
 declare interface TemplateInfo {
   /** 模板ID */
   TemplateId?: string;
-  /** 认证状态：未实名认证:NotUpload, 实名审核中:InAudit，已实名认证:Approved，实名审核失败:Reject */
+  /** 认证状态:NotUpload: 未实名认证InAudit: 实名审核中Approved: 已实名认证Reject: 实名审核失败NotVerified: 实名信息待修改 */
   AuditStatus?: string;
   /** 创建时间 */
   CreatedOn?: string;
@@ -445,7 +445,7 @@ declare interface TemplateInfo {
 declare interface BatchModifyDomainInfoRequest {
   /** 批量修改的域名。 */
   Domains: string[];
-  /** 模板ID(可从模板列表接口获取) */
+  /** 模板ID可从DescribeTemplates接口获取 */
   TemplateId: string;
   /** true： 开启60天内禁止转移注册商锁定false：关闭60天内禁止转移注册商锁定默认 true */
   LockTransfer?: boolean;
@@ -459,22 +459,22 @@ declare interface BatchModifyDomainInfoResponse {
 }
 
 declare interface BidDetailPageRequest {
-  /** 业务ID */
+  /** 预约ID可通过[DescribeBiddingList](https://cloud.tencent.com/document/api/242/106598)接口获取 */
   BusinessId: string;
 }
 
 declare interface BidDetailPageResponse {
   /** 域名 */
   Domain?: string;
-  /** 当前域名价格 */
+  /** 当前域名价格 单位元 */
   CurrentPrice?: number;
-  /** 用户上次出价 */
+  /** 用户上次出价 单位元 */
   BidPrice?: number;
-  /** 当前加价幅度 */
+  /** 当前加价幅度 单位元 */
   CurrentPriceScope?: number;
   /** 加价幅度区间配置 */
   PriceScope?: PriceScopeConf[] | null;
-  /** 用户当前已经支付了的保证金 */
+  /** 用户当前已经支付了的保证金 单位元 */
   DepositPrice?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -493,23 +493,23 @@ declare interface BidPreDomainsResponse {
 }
 
 declare interface BiddingPreReleaseRequest {
-  /** 业务ID */
+  /** 业务ID(竞价域名的预约ID) 可通过[DescribeBiddingList](https://cloud.tencent.com/document/api/242/106598)接口获取 */
   BusinessId: string;
-  /** 价格 */
+  /** 价格 单位元 */
   Price: number;
 }
 
 declare interface BiddingPreReleaseResponse {
   /** 是否需要额外支付 */
   IsNeedPay?: boolean;
-  /** 计费请求参数，以Json字符串的形式进行返回。 */
+  /** 计费请求参数，以类Json字符串的形式进行返回。用于计费下单 */
   BillingParam?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface CheckBatchStatusRequest {
-  /** 操作日志 ID数组，最多 200 个 */
+  /** 操作日志 ID数组，最多 200 个可通过任意批量操作接口获取，例如：[BatchModifyDomainInfo](https://cloud.tencent.com/document/product/242/49197)[ModifyDomainDNSBatch](https://cloud.tencent.com/document/product/242/49211)[ModifyDomainOwnerBatch](https://cloud.tencent.com/document/product/242/49196)[UpdateProhibitionBatch](https://cloud.tencent.com/document/api/242/49193)[TransferProhibitionBatch](https://cloud.tencent.com/document/api/242/49194)[TransferInDomainBatch](https://cloud.tencent.com/document/api/242/49195) */
   LogIds: number[];
 }
 
@@ -559,17 +559,17 @@ declare interface CheckDomainResponse {
 }
 
 declare interface CreateCustomDnsHostRequest {
-  /** 域名实例ID */
+  /** 域名实例ID可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941) */
   DomainId: string;
-  /** Dns名称 */
+  /** Dns名称例如：<>.test.com;其中<>就是Dns名称，可以是任意域名允许的格式 */
   DnsName: string;
-  /** IP地址列表 */
+  /** IP地址列表可选择：正常IP地址范围 */
   IpSet: string[];
 }
 
 declare interface CreateCustomDnsHostResponse {
   /** 异步任务ID */
-  LogId: number;
+  LogId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -607,7 +607,7 @@ declare interface CreateDomainBatchResponse {
 }
 
 declare interface CreateDomainRedemptionRequest {
-  /** 域名 ID */
+  /** 域名ID可通过DescribeDomainList接口获取 */
   DomainId: string;
 }
 
@@ -621,7 +621,7 @@ declare interface CreatePhoneEmailRequest {
   Code: string;
   /** 1：手机 2：邮箱 */
   Type: number;
-  /** 验证码(通过SendPhoneEmailCode发送到手机或邮箱的验证码) */
+  /** 验证码通过调用SendPhoneEmailCode接口发送到手机或邮箱的验证码：https://cloud.tencent.com/document/api/242/62666 */
   VerifyCode: string;
 }
 
@@ -645,7 +645,7 @@ declare interface CreateTemplateResponse {
 }
 
 declare interface DeleteBiddingRequest {
-  /** business_id */
+  /** 预约ID可通过[DescribeBiddingList](https://cloud.tencent.com/document/api/242/106598)接口获取 */
   BusinessID?: string;
 }
 
@@ -655,15 +655,15 @@ declare interface DeleteBiddingResponse {
 }
 
 declare interface DeleteCustomDnsHostRequest {
-  /** 域名实例ID */
+  /** 域名实例ID可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941) */
   DomainId: string;
-  /** DNS名称 */
+  /** DNS名称例如：<>.test.com;其中<>就是Dns名称，可以是任意域名允许的格式 */
   DnsName: string;
 }
 
 declare interface DeleteCustomDnsHostResponse {
   /** 异步任务ID */
-  LogId: number;
+  LogId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -691,7 +691,7 @@ declare interface DeleteReservedPreDomainInfoResponse {
 }
 
 declare interface DeleteTemplateRequest {
-  /** 模板ID(可通过模板信息列表获取) */
+  /** 模板ID可通过DescribeTemplates接口获取 */
   TemplateId: string;
 }
 
@@ -701,11 +701,11 @@ declare interface DeleteTemplateResponse {
 }
 
 declare interface DescribeAuctionListRequest {
-  /** 业务ID，通过接口DescribeBiddingList返回结果中获取 */
+  /** 业务ID 通过接口[DescribeBiddingList](https://cloud.tencent.com/document/api/242/106598)返回结果中获取 */
   BusinessId: string;
-  /** 条数，默认10条 */
+  /** 条数，默认10，最大100 */
   Limit?: number;
-  /** 偏移量 */
+  /** 偏移量 默认0 */
   OffSet?: number;
 }
 
@@ -753,7 +753,7 @@ declare interface DescribeBatchOperationLogsResponse {
 }
 
 declare interface DescribeBiddingAppointDetailRequest {
-  /** business_id */
+  /** 预约ID可通过[DescribeBiddingAppointList](https://cloud.tencent.com/document/api/242/106600)接口获取 */
   BusinessID?: string;
 }
 
@@ -762,19 +762,19 @@ declare interface DescribeBiddingAppointDetailResponse {
   Domain?: string;
   /** 预约人数 */
   AppointNum?: number;
-  /** 预约开始时间 */
+  /** 预约开始时间格式:YYYY-MM-DD HH:mm:ss */
   AppointStartTime?: string;
-  /** 预约结束时间 */
+  /** 预约结束时间格式:YYYY-MM-DD HH:mm:ss */
   AppointEndTime?: string;
-  /** 注册时间 */
+  /** 注册时间格式:YYYY-MM-DD HH:mm:ss */
   RegTime?: string;
-  /** 过期时间 */
+  /** 过期时间格式:YYYY-MM-DD HH:mm:ss */
   ExpireTime?: string;
-  /** 删除时间 */
+  /** 删除时间格式:YYYY-MM-DD HH:mm:ss */
   DeleteTime?: string;
-  /** 当前价格 */
+  /** 当前价格 单位元 */
   AppointPrice?: number;
-  /** 预约保证金 */
+  /** 预约保证金 单位元 */
   AppointBondPrice?: number;
   /** 1 已预约，2 竞价中，3 等待出价 4 竞价失败 5 等待支付 6 等待转移，7 转移中 8 交易成功 9 预约持有者赎回 10 竞价持有者赎回 11 其他阶段持有者赎回 12 违约 */
   Status?: number;
@@ -785,15 +785,15 @@ declare interface DescribeBiddingAppointDetailResponse {
 }
 
 declare interface DescribeBiddingAppointListRequest {
-  /** 页码 */
+  /** 页码默认值1 */
   PageNumber: number;
-  /** 每页数量 */
+  /** 每页数量默认：20 取值范围【1，200】 */
   PageSize: number;
   /** 域名 */
   Domain?: string;
-  /** 状态： 1 已预约 9 预约持有者索回 */
+  /** 状态：1 已预约，2 竞价中，3 等待出价 4 竞价失败 5 等待支付 6 等待转移，7 转移中 8 交易成功 9 预约持有者赎回 10 竞价持有者赎回 11 其他阶段持有者赎回 12 违约 */
   Status?: number[];
-  /** 排序字段：AppointEndTime 预约结束时间 */
+  /** 排序字段：默认<空>，不排序可选值：AppointEndTime 预约结束时间BiddingPrice 竞价保证金BiddingEndTime 竞价结束时间 */
   SortField?: string;
   /** 排序规则：asc升序，desc降序 */
   SortOrder?: string;
@@ -809,7 +809,7 @@ declare interface DescribeBiddingAppointListResponse {
 }
 
 declare interface DescribeBiddingDetailRequest {
-  /** business_id */
+  /** 预约ID可通过[DescribeBiddingList](https://cloud.tencent.com/document/api/242/106598)接口获取 */
   BusinessID?: string;
 }
 
@@ -818,21 +818,21 @@ declare interface DescribeBiddingDetailResponse {
   Domain?: string;
   /** 出价次数 */
   BiddingNum?: number;
-  /** 竞价开始时间 */
+  /** 竞价开始时间格式:YYYY-MM-DD HH:mm:ss */
   BiddingStartTime?: string;
-  /** 竞价结束时间 */
+  /** 竞价结束时间格式:YYYY-MM-DD HH:mm:ss */
   BiddingEndTime?: string;
-  /** 注册时间 */
+  /** 注册时间格式:YYYY-MM-DD HH:mm:ss */
   RegTime?: string;
-  /** 过期时间 */
+  /** 过期时间格式:YYYY-MM-DD HH:mm:ss */
   ExpireTime?: string;
-  /** 删除时间 */
+  /** 删除时间格式:YYYY-MM-DD HH:mm:ss */
   DeleteTime?: string;
-  /** 当前价格 */
+  /** 当前价格 单位元 */
   CurrentPrice?: number;
   /** 当前用户昵称 */
   CurrentNickname?: string;
-  /** 竞价保证金 */
+  /** 竞价保证金 单位元 */
   BiddingBondPrice?: number;
   /** 2 竞价中 3 等待出价 4 竞价失败 10 竞价持有者赎回 */
   Status?: number;
@@ -840,7 +840,7 @@ declare interface DescribeBiddingDetailResponse {
   BiddingFlag?: number;
   /** 是否退款，yes表示退款，no表示不退款 */
   BiddingBondRefund?: string;
-  /** 我的出价 */
+  /** 我的出价 单位元 */
   BiddingPrice?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -871,28 +871,28 @@ declare interface DescribeBiddingListResponse {
 }
 
 declare interface DescribeBiddingSuccessfulDetailRequest {
-  /** business_id */
+  /** 预约ID 可通过[DescribeBiddingSuccessfulList](https://cloud.tencent.com/document/api/242/106596)接口获取 */
   BusinessID?: string;
 }
 
 declare interface DescribeBiddingSuccessfulDetailResponse {
   /** 域名 */
   Domain?: string;
-  /** 得标时间 */
+  /** 得标时间格式:YYYY-MM-DD HH:mm:ss */
   SuccessfulTime?: string;
-  /** 得标价格 */
+  /** 得标价格 单位元 */
   SuccessfulPrice?: number;
-  /** 注册时间 */
+  /** 注册时间格式:YYYY-MM-DD HH:mm:ss */
   RegTime?: string;
-  /** 过期时间 */
+  /** 过期时间格式:YYYY-MM-DD HH:mm:ss */
   ExpireTime?: string;
-  /** 删除时间 */
+  /** 删除时间格式:YYYY-MM-DD HH:mm:ss */
   DeleteTime?: string;
-  /** 付款结束时间 */
+  /** 付款结束时间格式:YYYY-MM-DD HH:mm:ss */
   PayEndTime?: string;
   /** 保证金，是否退款，yes表示退款，no表示不退款 */
   BiddingBondRefund?: string;
-  /** 保证金 */
+  /** 保证金 单位元 */
   BiddingBondPrice?: number;
   /** 状态：5 等待支付 6 等待转移， 7 转移中，8 交易成功，11 尾款阶段持有者索回，12 已违约 */
   Status?: number;
@@ -901,15 +901,15 @@ declare interface DescribeBiddingSuccessfulDetailResponse {
 }
 
 declare interface DescribeBiddingSuccessfulListRequest {
-  /** 页码 */
+  /** 页码默认：1 */
   PageNumber: number;
-  /** 每页数量 */
+  /** 每页数量默认：20 取值范围【1，200】 */
   PageSize: number;
   /** 域名 */
   Domain?: string;
   /** 状态：5 等待支付 6 等待转移， 7 转移中，8 交易成功，11 尾款阶段持有者索回，12 已违约 */
   Status?: number[];
-  /** 排序字段：SuccessfulTime 预约结束时间 */
+  /** 排序字段：默认<空>，不排序SuccessfulTime 预约结束时间 */
   SortField?: string;
   /** 排序规则：asc升序，desc降序 */
   SortOrder?: string;
@@ -925,7 +925,7 @@ declare interface DescribeBiddingSuccessfulListResponse {
 }
 
 declare interface DescribeCustomDnsHostSetRequest {
-  /** 域名实例ID(域名基本信息或我的域名列表接口可获取) */
+  /** 域名实例ID可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941) */
   DomainId: string;
   /** 返回数量，默认为20，取值范围[1,100] */
   Limit: number;
@@ -943,7 +943,7 @@ declare interface DescribeCustomDnsHostSetResponse {
 }
 
 declare interface DescribeDomainBaseInfoRequest {
-  /** 域名 */
+  /** 域名可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941) */
   Domain: string;
 }
 
@@ -1003,22 +1003,22 @@ declare interface DescribeDomainSimpleInfoResponse {
 }
 
 declare interface DescribePayWaitDetailRequest {
-  /** 业务ID */
+  /** 业务ID(竞价域名的预约ID) 可通过[DescribeBiddingList](https://cloud.tencent.com/document/api/242/106598)接口获取 */
   BusinessId: string;
 }
 
 declare interface DescribePayWaitDetailResponse {
   /** 域名 */
   Domain?: string;
-  /** 域名类型 */
+  /** 域名类型pay：等待支持sub：已经预订wait：等待出价finish：完成出价 */
   Status?: string;
-  /** 支付结束时间 */
+  /** 支付结束时间 格式:YYYY-MM-DD HH:mm:ss */
   EndTime?: string;
-  /** 域名注册时间 */
+  /** 域名注册时间 格式:YYYY-MM-DD HH:mm:ss */
   RegTime?: string;
-  /** 域名成交价格 */
+  /** 域名成交价格 单位元 */
   Price?: number;
-  /** 待退还保证金 */
+  /** 待退还保证金 单位元 */
   RetDeposit?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1045,9 +1045,9 @@ declare interface DescribePhoneEmailListResponse {
 }
 
 declare interface DescribePreAuctionListRequest {
-  /** 页码 */
+  /** 页码 默认1 */
   PageNumber?: number;
-  /** 条数 */
+  /** 条数 默认20 最大100 */
   PageSize?: number;
 }
 
@@ -1055,7 +1055,7 @@ declare interface DescribePreAuctionListResponse {
   /** 总数 */
   TotalCount?: number;
   /** 预释放竞价列表 */
-  PreAuctionList?: PreAuctionInfo[] | null;
+  PreAuctionList?: PreAuctionInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1081,13 +1081,13 @@ declare interface DescribePreDomainListResponse {
 }
 
 declare interface DescribePreReleaseListRequest {
-  /** 关键词 */
+  /** 单独使用Keywords：使用域名关键词进行搜索Keywords+DomainStart（true）：使用域名开头关键词进行搜索Keywords+DomainEnd（true）：使用域名结尾关键词进行搜索Keywords+DomainStart（true）+DomainEnd（true）：使用域名开头或结尾关键词进行搜索 */
   Keywords?: string;
-  /** 搜索关键字，开头 */
+  /** 是否以域名开头关键词进行搜索true：是false：否 */
   DomainStart?: boolean;
-  /** 搜索关键字结尾 */
+  /** 是否以域名结尾关键词进行搜索true：是false：否 */
   DomainEnd?: boolean;
-  /** 排序 */
+  /** 不同排序规则：1： 价格升序2： 价格降序3： 域名升序4： 结束时间升序5： 店铺推荐升序6： 结束时间降序15: 创建时间升序其他：结束时间升序 */
   Sort?: number;
   /** 起始价格 */
   PriceStart?: number;
@@ -1097,33 +1097,33 @@ declare interface DescribePreReleaseListRequest {
   LengthStart?: number;
   /** 结束域名长度 */
   LengthEnd?: number;
-  /** 页码 */
+  /** 页码（默认为1） */
   PageNumber?: number;
-  /** 每页显示数 */
+  /** 每页显示数（默认为20） */
   PageSize?: number;
-  /** 后缀 */
+  /** 后缀1="com"2="net"4="biz"6="info"7="co"9="cn"10="com.cn"11="wang"12="vip"13="cc"14="net.cn"15="org.cn"16="top"17="asia"18="tv"19="club"20="shop"21 ="中国"23="online"24="xyz"25="网店"26="网址"27="在线"28="ltd"29="fans"30="ren"31="icu" */
   Suffix?: number[];
-  /** 一级分类 */
+  /** 一级分类1:"纯数字"2:"单数字"3:"双数字"4:"三数字"5:"四数字"6:"五数字"7:"六数字"9:"单字母"10:"双字母"11:"三字母"12:"四字母"13:"五字母"14:"单拼"15:"双拼"16:"三拼"17:"杂米"18:"两杂"19:"三杂"20:"四杂" */
   ClassOne?: number;
-  /** 二级分类 */
+  /** 二级分类13:"0开或带4"14:"非0开不带4"15:"不带0,4"0:"非全声母"6:"全声母"16:"不带0,4"32:"全声母"5010:"CVCV" */
   ClassTwo?: number[];
-  /** 三级分类 */
+  /** 三级分类111:"AAA"401:"3A及以上"402:"AA结尾"1122:"AABB"1123:"AABC"1212:"ABAB"1221:"ABBA"1233:"ABCC"501:"4A及以上"502:"3A及以上"503:"AAA开头"504:"AAA结尾"505:"AA开头"506:"AA结尾"507:"三顺子开头"508:"三顺子结尾"11223:"AABBC"12233:"ABBCC"601:"5A及以上"602:"4A及以上"603:"3A及以上"604:"4A开头"605:"4A结尾"606:"AAA开头"607:"AAA结尾"608:"AA开头"609:"AA结尾"610:"ABAB开头"611:"ABAB结尾"612:"AABB开头"613:"AABB结尾"614:"四顺子开头"615:"四顺子结尾"616:"三顺子开头"617:"三顺子结尾"121212:"ABABAB"112233:"AABBCC"123123:"ABCABC"211:"LNN"221:"LLN"121:"NLN"212:"LNL"122:"NLL"1112:"NNNL"2111:"LNNN"1212:"NLNL"2121:"LNLN"1222:"NLLL"2221:"LLLN"1122:"NNLL"2211:"LLNN"31:"W结尾"112:"AAB"122:"ABB"121:"ABA"41:"W结尾"1112:"AAAB"1222:"ABBB"1122:"AABB"1212:"ABAB" */
   ClassThree?: number[];
-  /** 四级分类 */
+  /** 四级分类1:"仅含2种数字"1:"仅含2种数字"2:"仅含3种数字"4:"仅含1种字母"8:"仅含1种数字" */
   ClassFour?: number[];
-  /** 排除关键字，开头 */
+  /** 是否以域名开头排除关键词进行搜索 */
   FilterStart?: boolean;
-  /** 排除关键字，结尾 */
+  /** 是否以域名结尾排除关键词进行搜索 */
   FilterEnd?: boolean;
-  /** 排除关键字 */
+  /** 域名排除关键词单独使用FilterWords：使用排除关键词进行搜索FilterWords+FilterStart（true）：使用域名开头排除关键词进行搜索FilterWords+FilterEnd（true）：使用域名结尾排除关键词进行搜索FilterWords+FilterStart（true）+FilterEnd（true）：使用域名开头或结尾排除关键词进行搜索 */
   FilterWords?: string;
-  /** 交易类型 */
+  /** 交易类型（目前只支持10）10: 预释放域名 */
   TransType?: number;
-  /** 搜索白金域名 */
+  /** 是否搜索白金域名 */
   IsTop?: boolean;
-  /** 结束时间排序啊 desc:倒序 asc:正序 */
+  /** 结束时间排序 desc:倒序 asc:正序 */
   EndTimeSort?: string;
-  /** 结束时间 */
+  /** 结束时间（YYYY-MM-DD） */
   EndTime?: string;
 }
 
@@ -1207,7 +1207,7 @@ declare interface DescribeTemplateListResponse {
 }
 
 declare interface DescribeTemplateRequest {
-  /** 模板ID(模板列表接口可获取) */
+  /** 模板ID通过DescribeTemplateList接口获取:https://cloud.tencent.com/document/api/242/48940 */
   TemplateId: string;
 }
 
@@ -1238,17 +1238,17 @@ declare interface DescribeUnPreDomainDetailResponse {
   Domain?: string;
   /** 预约人数 */
   PreCount?: number;
-  /** 域名注册时间 */
+  /** 域名注册时间 格式:YYYY-MM-DD HH:mm:ss */
   RegTime?: string;
-  /** 域名删除时间 */
+  /** 域名删除时间 格式:YYYY-MM-DD HH:mm:ss */
   DeleteTime?: string;
-  /** 到期时间 */
+  /** 到期时间 格式:YYYY-MM-DD HH:mm:ss */
   ExpireTime?: string;
-  /** 域名状态 */
+  /** 域名状态 bid：出价noAction：无法操作 */
   Status?: string;
-  /** 域名价格 */
+  /** 域名价格 单位元 */
   CurrentPrice?: number;
-  /** 域名保证金 */
+  /** 域名保证金 单位元 */
   AppointBondPrice?: number;
   /** 是否已经预约 */
   IsAppoint?: boolean;
@@ -1261,25 +1261,25 @@ declare interface DescribeUnPreDomainDetailResponse {
 }
 
 declare interface ModifyCustomDnsHostRequest {
-  /** 域名实例ID */
+  /** 域名实例ID可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941) */
   DomainId: string;
-  /** DNS名称 */
+  /** Dns名称 例如：<>.test.com;其中<>就是Dns名称，可以是任意域名允许的格式 */
   DnsName: string;
-  /** IP地址列表 */
+  /** IP地址列表 可选择：正常IP地址范围 */
   IpSet: string[];
 }
 
 declare interface ModifyCustomDnsHostResponse {
   /** 异步任务ID */
-  LogId: number;
+  LogId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface ModifyDomainDNSBatchRequest {
-  /** 批量操作的域名。 */
+  /** 批量操作的域名。一次提交不超过4000个 */
   Domains: string[];
-  /** 域名DNS 数组。 */
+  /** 域名DNS 数组。不少于2个，一般建议2-6个 */
   Dns: string[];
 }
 
@@ -1291,9 +1291,9 @@ declare interface ModifyDomainDNSBatchResponse {
 }
 
 declare interface ModifyDomainOwnerBatchRequest {
-  /** 要过户的域名。 */
+  /** 要过户的域名。一次提交不大于4000个 */
   Domains: string[];
-  /** 转入账户的uin。 */
+  /** 转入账户的主uin。 */
   NewOwnerUin: string;
   /** 是否同时转移对应的 DNS 解析域名，默认false */
   TransferDns?: boolean;
@@ -1341,9 +1341,9 @@ declare interface ModifyTemplateResponse {
 }
 
 declare interface RenewDomainBatchRequest {
-  /** 域名续费的年限。 */
+  /** 域名续费的年限。取值范围[1,9] */
   Period: number;
-  /** 批量续费的域名。 */
+  /** 批量续费的域名。一次提交不大于4000个 */
   Domains: string[];
   /** 付费模式 0手动在线付费，1使用余额付费，2使用特惠包。 */
   PayMode: number;
@@ -1369,11 +1369,11 @@ declare interface RenewDomainBatchResponse {
 declare interface ReservedPreDomainsRequest {
   /** 预约预释放域名列表 */
   DomainList: string[];
-  /** 模板ID */
+  /** 模板ID 可通过[DescribeTemplateList](https://cloud.tencent.com/document/api/242/48940)接口获取 */
   TemplateId: string;
-  /** 结束后是否自动支付尾款，默认开启 传入1关闭 */
+  /** 结束后是否自动支付尾款，默认1 开启 传入0关闭 */
   IsAutoPay?: number;
-  /** 结束后是否自动进行梯度保证金扣除，默认开启 传入1关闭 */
+  /** 结束后是否自动进行梯度保证金扣除，默认1开启 传入0关闭 */
   IsBidAutoPay?: number;
 }
 
@@ -1401,7 +1401,7 @@ declare interface SendPhoneEmailCodeResponse {
 }
 
 declare interface SetDomainAutoRenewRequest {
-  /** 域名ID 例如：domain-123abc */
+  /** 域名实例ID可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941) */
   DomainId: string;
   /** AutoRenew 有三个可选值： 0：不设置自动续费1：设置自动续费2：设置到期后不续费 */
   AutoRenew: number;
@@ -1413,23 +1413,23 @@ declare interface SetDomainAutoRenewResponse {
 }
 
 declare interface SyncCustomDnsHostRequest {
-  /** 域名实例ID */
+  /** 域名实例ID可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941) */
   DomainId: string;
 }
 
 declare interface SyncCustomDnsHostResponse {
   /** 异步任务ID */
-  LogId: number;
+  LogId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface TransferInDomainBatchRequest {
-  /** 转入的域名名称数组。 */
+  /** 转入的域名名称数组。一次提交不大于4000个 */
   Domains: string[];
   /** 域名转移码数组。 */
   PassWords: string[];
-  /** 模板ID。 */
+  /** 模板ID。可通过DescribeTemplates接口获取 */
   TemplateId: string;
   /** 付费模式 0手动在线付费，1使用余额付费。 */
   PayMode: number;
@@ -1457,9 +1457,9 @@ declare interface TransferInDomainBatchResponse {
 }
 
 declare interface TransferProhibitionBatchRequest {
-  /** 批量操作的域名。 */
+  /** 批量操作的域名。一次提交不大于4000个 */
   Domains: string[];
-  /** 是否开启禁止域名转移。True: 开启禁止域名转移状态。False：关闭禁止域名转移状态。 */
+  /** 是否开启禁止域名转移。true: 开启禁止域名转移状态。false：关闭禁止域名转移状态。 */
   Status: boolean;
 }
 
@@ -1471,9 +1471,9 @@ declare interface TransferProhibitionBatchResponse {
 }
 
 declare interface UpdateProhibitionBatchRequest {
-  /** 批量操作的域名。 */
+  /** 批量操作的域名。一次提交不大于4000个 */
   Domains: string[];
-  /** 是否开启禁止域名更新。True:开启禁止域名更新状态。False：关闭禁止域名更新状态。 */
+  /** 是否开启禁止域名更新。true:开启禁止域名更新状态。false：关闭禁止域名更新状态。 */
   Status: boolean;
 }
 

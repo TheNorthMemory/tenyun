@@ -1998,7 +1998,7 @@ declare interface InstanceDetailVO {
   Tries?: number | null;
   /** 累计运行次数 */
   TotalRunNum?: number | null;
-  /** 生命周期编号 */
+  /** **实例生命周期编号，标识实例的某一次执行**例如：周期实例第一次运行的编号为0，用户后期又重跑了该实例，第二次的执行的编号为1 */
   LifeRoundNum?: number | null;
   /** **实例类型**- 0 表示补录类型- 1 表示周期实例- 2 表示非周期实例 */
   InstanceType?: number | null;
@@ -2074,7 +2074,7 @@ declare interface InstanceLifeCycleVO {
   InstanceKey?: string | null;
   /** **实例状态**- [0] 表示 等待事件- [12] 表示 等待上游- [6, 7, 9, 10, 18] 表示 等待运行- [1, 19, 22] 表示 运行中- [21] 表示 跳过运行- [3] 表示 失败重试- [8, 4, 5, 13] 表示 失败- [2] 表示 成功 */
   InstanceState?: number | null;
-  /** 生命周期编号 */
+  /** **实例生命周期编号，标识实例的某一次执行**例如：周期实例第一次运行的编号为0，用户后期又重跑了该实例，第二次执行的编号为1 */
   LifeRoundNum?: number | null;
   /** **实例运行触发类型**- RERUN 表示重跑- ADDITION 表示补录- PERIODIC 表示周期- APERIODIC 表示非周期- RERUN_SKIP_RUN 表示重跑 - 空跑- ADDITION_SKIP_RUN 表示补录 - 空跑- PERIODIC_SKIP_RUN 表示周期 - 空跑- APERIODIC_SKIP_RUN 表示非周期 - 空跑- MANUAL_TRIGGER 表示手动触发- RERUN_MANUAL_TRIGGER 表示手动触发 - 重跑 */
   RunType?: string | null;
@@ -2084,7 +2084,7 @@ declare interface InstanceLifeCycleVO {
   LifeCycleDetailList?: InstanceLifeDetailDto[] | null;
   /** **实例代码文件**该文件内容为当次执行实例运行使用的代码，仅部分任务支持 */
   CodeFileName?: string | null;
-  /** **下发执行ID** */
+  /** **下发执行ID**统一执行平台下发执行到新版执行机标识某次执行的唯一ID，存量老执行机下发执行没有此ID。如果不知道执行机版本是否支持此ID，可以联系腾讯云运维同学 */
   ExecutionJobId?: string | null;
   /** 日志所在执行节点 */
   BrokerIp?: string | null;
@@ -2102,7 +2102,7 @@ declare interface InstanceLifeDetailDto {
   State?: string | null;
   /** 该状态开始时间 */
   StartTime?: string | null;
-  /** **实例生命周期阶段状态**- WAIT_UPSTREAM 表示 等待事件/上游状态- WAIT_RUN 表示 等待运行状态- RUNNING 表示 运行中状态- COMPLETE 表示 终态-完成- FAILED 表示 终态-失败重试- EXPIRED 表示 终态-失败- SKIP_RUNNING 表示 终态-被上游分支节点跳过的分支- HISTORY 表示 兼容历史实例 */
+  /** **实例生命周期阶段状态**- WAIT_UPSTREAM 表示 等待事件/上游状态- WAIT_RUN 表示 等待运行状态- RUNNING 表示 运行中状态- COMPLETE 表示 终态-完成- FAILED 表示 终态-失败重试- EXPIRED 表示 终态-失败- SKIP_RUNNING 表示 终态-被上游分支节点跳过的分支- HISTORY 表示 兼容2024-03-30之前的历史实例，之后实例无需关注次枚举类型 */
   DetailState?: string | null;
   /** 该状态结束时间 */
   EndTime?: string | null;
@@ -2248,7 +2248,7 @@ declare interface InstanceLogVO {
   LogFileSize?: string | null;
   /** **本次查询返回的日志行数** */
   LineCount?: number | null;
-  /** 执行平台日志分页查询参数, 每次请求透明传入。第一页查询时值为空字符串 */
+  /** **分页查询日志时使用，无具体业务含义**第一次查询时值为null 第二次及以后查询时使用上一次查询返回信息中的ExtInfo字段值即可 */
   ExtInfo?: string | null;
   /** 日志分页查询，是否最后一页 */
   IsEnd?: boolean | null;
@@ -3392,6 +3392,20 @@ declare interface Project {
   SecondModuleList?: string[] | null;
   /** 项目负责人 */
   Owner?: BaseUser | null;
+}
+
+/** 查询数据源分页列表 */
+declare interface ProjectPage {
+  /** 分页页码 */
+  PageNumber: number | null;
+  /** 分页大小 */
+  PageSize: number | null;
+  /** 数据源列表 */
+  Rows: Project[] | null;
+  /** 总数 */
+  TotalCount: number | null;
+  /** 总分页页码 */
+  TotalPageNumber: number | null;
 }
 
 /** 项目的用户对象 */
@@ -9981,6 +9995,34 @@ declare interface DescribeTemplateDimCountResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTenantProjectsRequest {
+  /** 第几页 */
+  PageNumber: number;
+  /** 一页几条 */
+  PageSize: number;
+  /** 是否展示关联执行组的信息。正常应该不是从项目列表里获取 */
+  DescribeExecutors?: boolean;
+  /** 是否展示项目管理员信息，减少默认返回的请求内容 */
+  DescribeAdminUsers?: boolean;
+  /** 统计项目人员数量。数据地图需求 */
+  DescribeMemberCount?: boolean;
+  /** 自定义条件查询 */
+  Filters?: Filter[];
+  /** 排序字段 */
+  OrderFields?: OrderField[];
+  /** 默认不提供创建者信息，该参数与CAM交互比较耗时 */
+  DescribeCreator?: boolean;
+  /** 是否展示关联资源池信息 */
+  DescribeResourcePools?: boolean;
+}
+
+declare interface DescribeTenantProjectsResponse {
+  /** 项目列表 */
+  Data?: ProjectPage;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeThirdTaskRunLogRequest {
   /** 任务ID */
   TaskId: string;
@@ -10284,6 +10326,10 @@ declare interface GenHiveTableDDLSqlRequest {
   Env?: string;
   /** doris写入模式配置 */
   WriteMode?: string;
+  /** 任务类型 201（实时）， 202（离线） */
+  TaskType?: number;
+  /** 目标端table名称 */
+  SinkTableName?: string;
 }
 
 declare interface GenHiveTableDDLSqlResponse {
@@ -10342,7 +10388,7 @@ declare interface GetInstanceLogRequest {
   ProjectId: string;
   /** **实例唯一标识** */
   InstanceKey: string;
-  /** 生命周期编号 */
+  /** **实例生命周期编号，标识实例的某一次执行**例如：周期实例第一次运行的编号为0，用户后期又重跑了该实例，第二次执行的编号为1 */
   LifeRoundNum: number;
   /** **时区**timeZone, 默认UTC+8 */
   ScheduleTimeZone?: string;
@@ -10358,6 +10404,8 @@ declare interface GetInstanceLogRequest {
   StartLineNum?: number;
   /** **获取日志的结束行 行号**默认 10000 */
   EndLineCount?: number;
+  /** **分页查询日志时使用，无具体业务含义**第一次查询时值为null 第二次及以后查询时使用上一次查询返回信息中的ExtInfo字段值即可 */
+  ExtInfo?: string;
 }
 
 declare interface GetInstanceLogResponse {
@@ -10593,15 +10641,15 @@ declare interface KillScheduleInstancesResponse {
 declare interface ListInstancesRequest {
   /** **项目ID** */
   ProjectId: string;
-  /** **实例计划调度时间**过滤起始时间，时间格式为 yyyy-MM-dd HH:mm:ss */
+  /** **实例计划调度时间过滤条件**过滤起始时间，时间格式为 yyyy-MM-dd HH:mm:ss */
   ScheduleTimeFrom: string;
-  /** **实例计划调度时间**过滤截止时间，时间格式为 yyyy-MM-dd HH:mm:ss */
+  /** **实例计划调度时间过滤条件**过滤截止时间，时间格式为 yyyy-MM-dd HH:mm:ss */
   ScheduleTimeTo: string;
   /** **页码，整型**配合pageSize使用且不能小于1， 默认值1 */
   PageNumber?: number;
   /** **每页数目，整型**配合pageNumber使用且不能大于200, 默认值 10 */
   PageSize?: number;
-  /** **查询结果排序字段**- SCHEDULE_DATE 表示 计划调度时间- START_TIME 表示 实例开始执行时间- END_TIME 表示 实例结束执行时间- COST_TIME 表示 实例执行时长 */
+  /** **查询结果排序字段**- SCHEDULE_DATE 表示 根据计划调度时间排序- START_TIME 表示 根据实例开始执行时间排序- END_TIME 表示 根据实例结束执行时间排序- COST_TIME 表示 根据实例执行时长排序 */
   SortColumn?: string;
   /** **实例排序方式**- ASC - DESC */
   SortType?: string;
@@ -10623,9 +10671,9 @@ declare interface ListInstancesRequest {
   WorkflowIdList?: string[];
   /** **执行资源组Id**支持过滤多个，条件间为 或 的过滤关系可以通过接口 DescribeNormalSchedulerExecutorGroups 获取项目下的所有调度资源组列表可以通过接口 DescribeNormalIntegrationExecutorGroups 获取项目下的所有集成资源组列表 */
   ExecutorGroupIdList?: string[];
-  /** **开始时间**过滤起始时间，时间格式为 yyyy-MM-dd HH:mm:ss */
+  /** **实例执行开始时间过滤条件**过滤起始时间，时间格式为 yyyy-MM-dd HH:mm:ss */
   StartTimeFrom?: string;
-  /** **开始时间**过滤截止时间，时间格式为 yyyy-MM-dd HH:mm:ss */
+  /** **实例执行开始时间过滤条件**过滤截止时间，时间格式为 yyyy-MM-dd HH:mm:ss */
   StartTimeTo?: string;
   /** **时区**timeZone, 默认UTC+8 */
   ScheduleTimeZone?: string;
@@ -12368,6 +12416,8 @@ declare interface Wedata {
   DescribeTaskTableMetricOverview(data: DescribeTaskTableMetricOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskTableMetricOverviewResponse>;
   /** 查询规则模板维度分布情况 {@link DescribeTemplateDimCountRequest} {@link DescribeTemplateDimCountResponse} */
   DescribeTemplateDimCount(data?: DescribeTemplateDimCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateDimCountResponse>;
+  /** 获取租户全局范围的项目列表 {@link DescribeTenantProjectsRequest} {@link DescribeTenantProjectsResponse} */
+  DescribeTenantProjects(data: DescribeTenantProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTenantProjectsResponse>;
   /** 实例运维-获取第三方运行日志 {@link DescribeThirdTaskRunLogRequest} {@link DescribeThirdTaskRunLogResponse} */
   DescribeThirdTaskRunLog(data: DescribeThirdTaskRunLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeThirdTaskRunLogResponse>;
   /** 数据质量表排行接口 {@link DescribeTopTableStatRequest} {@link DescribeTopTableStatResponse} */
@@ -12456,7 +12506,7 @@ declare interface Wedata {
   ModifyTaskScript(data: ModifyTaskScriptRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskScriptResponse>;
   /** 更新工作流信息 {@link ModifyWorkflowInfoRequest} {@link ModifyWorkflowInfoResponse} */
   ModifyWorkflowInfo(data: ModifyWorkflowInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkflowInfoResponse>;
-  /** 更新工作流调度 {@link ModifyWorkflowScheduleRequest} {@link ModifyWorkflowScheduleResponse} */
+  /** 更新工作流调度（废弃） {@link ModifyWorkflowScheduleRequest} {@link ModifyWorkflowScheduleResponse} */
   ModifyWorkflowSchedule(data: ModifyWorkflowScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkflowScheduleResponse>;
   /** 移动任务到工作流文件夹 {@link MoveTasksToFolderRequest} {@link MoveTasksToFolderResponse} */
   MoveTasksToFolder(data: MoveTasksToFolderRequest, config?: AxiosRequestConfig): AxiosPromise<MoveTasksToFolderResponse>;
@@ -12490,11 +12540,11 @@ declare interface Wedata {
   SubmitCustomFunction(data: SubmitCustomFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitCustomFunctionResponse>;
   /** 提交SQL任务 {@link SubmitSqlTaskRequest} {@link SubmitSqlTaskResponse} */
   SubmitSqlTask(data: SubmitSqlTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitSqlTaskResponse>;
-  /** 提交任务 {@link SubmitTaskRequest} {@link SubmitTaskResponse} */
+  /** 提交任务（废弃） {@link SubmitTaskRequest} {@link SubmitTaskResponse} */
   SubmitTask(data: SubmitTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTaskResponse>;
   /** 提交工作流测试运行任务 {@link SubmitTaskTestRunRequest} {@link SubmitTaskTestRunResponse} */
   SubmitTaskTestRun(data: SubmitTaskTestRunRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTaskTestRunResponse>;
-  /** 提交工作流 {@link SubmitWorkflowRequest} {@link SubmitWorkflowResponse} */
+  /** 提交工作流（废弃） {@link SubmitWorkflowRequest} {@link SubmitWorkflowResponse} */
   SubmitWorkflow(data: SubmitWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitWorkflowResponse>;
   /** 暂停实时集成任务 {@link SuspendIntegrationTaskRequest} {@link SuspendIntegrationTaskResponse} */
   SuspendIntegrationTask(data: SuspendIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SuspendIntegrationTaskResponse>;
@@ -12502,7 +12552,7 @@ declare interface Wedata {
   TaskLog(data: TaskLogRequest, config?: AxiosRequestConfig): AxiosPromise<TaskLogResponse>;
   /** 触发事件 {@link TriggerDsEventRequest} {@link TriggerDsEventResponse} */
   TriggerDsEvent(data: TriggerDsEventRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerDsEventResponse>;
-  /** 触发事件生成事件实例 {@link TriggerEventRequest} {@link TriggerEventResponse} */
+  /** 触发事件生成事件实例（废弃） {@link TriggerEventRequest} {@link TriggerEventResponse} */
   TriggerEvent(data: TriggerEventRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerEventResponse>;
   /** 手动任务触发运行 {@link TriggerManualTasksRequest} {@link TriggerManualTasksResponse} */
   TriggerManualTasks(data: TriggerManualTasksRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerManualTasksResponse>;

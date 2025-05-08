@@ -31,29 +31,29 @@ declare interface DrmSourceObject {
 /** FairPlay 私钥摘要信息。 */
 declare interface FairPlayPemDigestInfo {
   /** fairplay 私钥pem id。 */
-  FairPlayPemId: number | null;
+  FairPlayPemId?: number | null;
   /** 私钥的优先级。 */
-  Priority: number | null;
+  Priority?: number | null;
   /** 私钥的md5 信息。 */
-  Md5Pem: string | null;
+  Md5Pem?: string | null;
   /** ASK的md5信息。 */
-  Md5Ask: string | null;
+  Md5Ask?: string | null;
   /** 私钥解密密钥的md5值。 */
-  Md5PemDecryptKey: string | null;
+  Md5PemDecryptKey?: string | null;
 }
 
 /** DRM加密密钥 */
 declare interface Key {
   /** 加密track类型。Widevine支持SD、HD、UHD1、UHD2、AUDIO。Fairplay只支持HD。 */
-  Track: string;
+  Track?: string;
   /** 密钥ID。 */
-  KeyId: string;
+  KeyId?: string;
   /** 原始Key使用AES-128 ECB模式和SessionKey加密的后的二进制数据，Base64编码的字符串。 */
-  Key: string;
+  Key?: string;
   /** 原始IV使用AES-128 ECB模式和SessionKey加密的后的二进制数据，Base64编码的字符串。 */
-  Iv: string;
+  Iv?: string;
   /** 该key生成时的时间戳 */
-  InsertTimestamp: number | null;
+  InsertTimestamp?: number | null;
 }
 
 /** 设置加密密钥所需的参数 */
@@ -185,9 +185,9 @@ declare interface DescribeDRMLicenseRequest {
 
 declare interface DescribeDRMLicenseResponse {
   /** 内容ID。 */
-  ContentId: string;
+  ContentId?: string;
   /** 加密密钥。 */
-  TXEncryptionToken: string;
+  TXEncryptionToken?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

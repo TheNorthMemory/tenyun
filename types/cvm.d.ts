@@ -358,17 +358,17 @@ declare interface Image {
   ImageId?: string;
   /** 镜像操作系统 */
   OsName?: string;
-  /** 镜像类型 */
+  /** 镜像类型。镜像类型返回值包括：* `PUBLIC_IMAGE` 公共镜像* `PRIVATE_IMAGE` 自定义镜像* `SHARED_IMAGE` 共享镜像 */
   ImageType?: string;
-  /** 镜像创建时间 */
+  /** 镜像创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间，格式为：YYYY-MM-DDThh:mm:ssZ。 */
   CreatedTime?: string;
   /** 镜像名称 */
   ImageName?: string;
   /** 镜像描述 */
   ImageDescription?: string;
-  /** 镜像大小 */
+  /** 镜像大小，单位 GiB。 */
   ImageSize?: number;
-  /** 镜像架构 */
+  /** 镜像架构。镜像架构返回值包括：* `x86_64`* `arm`* `i386` */
   Architecture?: string;
   /** 镜像状态:CREATING-创建中NORMAL-正常CREATEFAILED-创建失败USING-使用中SYNCING-同步中IMPORTING-导入中IMPORTFAILED-导入失败 */
   ImageState?: string;
@@ -376,7 +376,7 @@ declare interface Image {
   Platform?: string;
   /** 镜像创建者 */
   ImageCreator?: string;
-  /** 镜像来源 */
+  /** 镜像来源。镜像来源返回值包括：* `OFFICIAL` 官方镜像* `CREATE_IMAGE` 用户自建镜像* `EXTERNAL_IMPORT` 用户外部导入镜像 */
   ImageSource?: string;
   /** 同步百分比 */
   SyncPercent?: number | null;
@@ -386,12 +386,14 @@ declare interface Image {
   SnapshotSet?: Snapshot[];
   /** 镜像关联的标签列表。 */
   Tags?: Tag[];
-  /** 镜像许可类型 */
+  /** 镜像许可类型。镜像许可类型返回值包括：* `TencentCloud` 腾讯云官方许可* `BYOL` 用户自带许可 */
   LicenseType?: string;
   /** 镜像族 */
   ImageFamily?: string;
   /** 镜像是否废弃 */
   ImageDeprecated?: boolean;
+  /** CDC镜像缓存状态 */
+  CdcCacheStatus?: string;
 }
 
 /** 支持的操作系统类型，根据Windows和Linux分类。 */
@@ -838,6 +840,20 @@ declare interface LoginSettings {
   KeepImageLogin?: string;
 }
 
+/** 自定义metadata */
+declare interface Metadata {
+  /** 自定义metadata键值对列表。 */
+  Items: MetadataItem[];
+}
+
+/** 自定义metadata key和value */
+declare interface MetadataItem {
+  /** 自定义metadata键，需符合正则 ^[a-zA-Z0-9_-]+$，长度 ≤128 字节（大小写敏感）； */
+  Key: string;
+  /** 自定义metadata值，支持任意数据（含二进制），大小 ≤256 KB（大小写敏感）； */
+  Value: string;
+}
+
 /** 描述了单台实例操作次数限制 */
 declare interface OperationCountLimit {
   /** 实例操作。取值范围：`INSTANCE_DEGRADE`：降配操作`INTERNET_CHARGE_TYPE_CHANGE`：修改网络带宽计费模式 */
@@ -1102,7 +1118,7 @@ declare interface RunSecurityServiceEnabled {
 
 /** 镜像分享信息结构 */
 declare interface SharePermission {
-  /** 镜像分享时间 */
+  /** 镜像分享时间。按照 ISO8601 标准表示，并且使用 UTC 时间，格式为：YYYY-MM-DDThh:mm:ssZ。 */
   CreatedTime?: string;
   /** 镜像分享的账户ID */
   AccountId?: string;
@@ -1114,7 +1130,7 @@ declare interface Snapshot {
   SnapshotId?: string;
   /** 创建此快照的云硬盘类型。取值范围：SYSTEM_DISK：系统盘DATA_DISK：数据盘。 */
   DiskUsage?: string;
-  /** 创建此快照的云硬盘大小，单位GB。 */
+  /** 创建此快照的云硬盘大小，单位 GiB。 */
   DiskSize?: number;
 }
 
@@ -1409,7 +1425,7 @@ declare interface CreateImageResponse {
 }
 
 declare interface CreateKeyPairRequest {
-  /** 密钥对名称，可由数字，字母和下划线组成，长度不超过25个字符。 */
+  /** 密钥对名称，可由数字、字母和下划线组成，长度不超过25个字符。密钥对名称不能和已经存在的密钥对名称重复。 */
   KeyName: string;
   /** 密钥对创建后所属的项目ID，ProjectId为0表示默认项目。可以通过以下方式获取项目ID：通过项目列表查询项目ID。通过调用接口 [DescribeProjects](https://cloud.tencent.com/document/api/651/78725)，取返回信息中的`projectId `获取项目ID。 */
   ProjectId: number;
@@ -1481,6 +1497,10 @@ declare interface CreateLaunchTemplateRequest {
   DisableApiTermination?: boolean;
   /** 标签描述列表。通过指定该参数可以绑定标签到实例启动模板。 */
   LaunchTemplateTagSpecification?: TagSpecification[];
+  /** 自定义metadata，支持创建 CVM 时添加自定义元数据键值对。**注：内测中**。 */
+  Metadata?: Metadata;
+  /** 只允许传递 Update 和 Replace 参数，在模板使用自定义 Metadata 且在 RunInstances 也传递 Metadata 时生效。默认采用 Replace。- Update：设模板 t含本参数值为Update、 metadata=[k1:v1, k2:v2] ，则RunInstances（给metadata=[k2:v3]）+ t 创建的 cvm 使用metadata=[k1:v1, k2:v3] - Replace：模板 t含本参数值为Replace、 metadata=[k1:v1, k2:v2] ，则RunInstances（给metadata=[k2:v3]）+ t 创建的 cvm 使用metadata=[k2:v3] **注：内测中**。 */
+  TemplateDataModifyAction?: string;
 }
 
 declare interface CreateLaunchTemplateResponse {
@@ -1547,6 +1567,10 @@ declare interface CreateLaunchTemplateVersionRequest {
   InstanceChargePrepaid?: InstanceChargePrepaid;
   /** 实例销毁保护标志，表示是否允许通过api接口删除实例。取值范围：TRUE：表示开启实例保护，不允许通过api接口删除实例FALSE：表示关闭实例保护，允许通过api接口删除实例默认取值：FALSE。 */
   DisableApiTermination?: boolean;
+  /** 自定义metadata，支持创建 CVM 时添加自定义元数据键值对。**注：内测中**。 */
+  Metadata?: Metadata;
+  /** 只允许传递 Update 和 Replace 参数，在模板使用自定义 Metadata 且在 RunInstances 也传递 Metadata 时生效。默认采用 Replace。- Update：设模板 t含本参数值为Update、 metadata=[k1:v1, k2:v2] ，则RunInstances（给metadata=[k2:v3]）+ t 创建的 cvm 使用metadata=[k1:v1, k2:v3] - Replace：模板 t含本参数值为Replace、 metadata=[k1:v1, k2:v2] ，则RunInstances（给metadata=[k2:v3]）+ t 创建的 cvm 使用metadata=[k2:v3] **注：内测中**。 */
+  TemplateDataModifyAction?: string;
 }
 
 declare interface CreateLaunchTemplateVersionResponse {
@@ -1791,7 +1815,7 @@ declare interface DescribeImageQuotaResponse {
 }
 
 declare interface DescribeImageSharePermissionRequest {
-  /** 需要共享的镜像Id */
+  /** 需要共享的镜像 ID，可通过 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) 接口返回的`ImageId`获取。 */
   ImageId: string;
 }
 
@@ -1805,13 +1829,13 @@ declare interface DescribeImageSharePermissionResponse {
 declare interface DescribeImagesRequest {
   /** 镜像ID列表 。镜像ID如：`img-gvbnzy6f`。array型参数的格式可以参考[API简介](https://cloud.tencent.com/document/api/213/15688)。镜像ID可以通过如下方式获取：通过[DescribeImages](https://cloud.tencent.com/document/api/213/15715)接口返回的`ImageId`获取。通过[镜像控制台](https://console.cloud.tencent.com/cvm/image)获取。 */
   ImageIds?: string[];
-  /** 过滤条件，每次请求的`Filters`的上限为10，`Filters.Values`的上限为5。参数不可以同时指定`ImageIds`和`Filters`。详细的过滤条件如下：image-id按照【镜像ID】进行过滤。类型：String必选：否image-type按照【镜像类型】进行过滤。类型：String必选：否可选项：PRIVATE_IMAGE: 私有镜像 (本账户创建的镜像)PUBLIC_IMAGE: 公共镜像 (腾讯云官方镜像)SHARED_IMAGE: 共享镜像(其他账户共享给本账户的镜像)image-name按照【镜像名称】进行过滤。类型：String必选：否platform按照【镜像平台】进行过滤，如CentOS。类型：String必选：否tag-key按照【标签键】进行过滤。类型：String必选：否tag-value按照【标签值】进行过滤。类型：String必选：否tag:tag-key按照【标签键值对】进行过滤。tag-key使用具体的标签键进行替换。类型：String必选：否 */
+  /** 过滤条件，每次请求的`Filters`的上限为10，`Filters.Values`的上限为5。参数不可以同时指定`ImageIds`和`Filters`。详细的过滤条件如下：image-id按照【镜像ID】进行过滤。类型：String必选：否image-type按照【镜像类型】进行过滤。类型：String必选：否可选项：PRIVATE_IMAGE: 自定义镜像 (本账户创建的镜像)PUBLIC_IMAGE: 公共镜像 (腾讯云官方镜像)SHARED_IMAGE: 共享镜像(其他账户共享给本账户的镜像)image-name按照【镜像名称】进行过滤。支持模糊查询。类型：String必选：否platform按照【镜像平台】进行过滤，如 CentOS，支持模糊匹配。可通过 DescribeImages 接口返回的 Platform 获取。类型：String必选：否tag-key按照【标签键】进行过滤。可通过 GetTags 接口返回的 TagKey 获取。类型：String必选：否tag-value按照【标签值】进行过滤。可通过 GetTags 接口返回的 TagValue 获取。类型：String必选：否tag:tag-key按照【标签键值对】进行过滤。tag-key使用具体的标签键进行替换。可通过 GetTags 接口返回的 TagKey 和 TagValue 获取。类型：String必选：否 */
   Filters?: Filter[];
   /** 偏移量，默认为0。关于Offset详见[API简介](/document/api/213/568)。 */
   Offset?: number;
   /** 数量限制，默认为20，最大值为100。关于Limit详见[API简介](/document/api/213/568)。 */
   Limit?: number;
-  /** 实例类型，如 `S1.SMALL1` */
+  /** 实例类型，如 `S1.SMALL1`。可通过 [DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/product/213/15749) 接口返回的 `InstanceType` 获取。 */
   InstanceType?: string;
 }
 
@@ -2197,9 +2221,9 @@ declare interface DisassociateSecurityGroupsResponse {
 }
 
 declare interface EnterRescueModeRequest {
-  /** 需要进入救援模式的实例id */
+  /** 需要进入救援模式的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。 */
   InstanceId: string;
-  /** 救援模式下系统密码 */
+  /** 救援模式下系统密码。不同操作系统类型密码复杂度限制不一样，具体如下：Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。 */
   Password: string;
   /** 救援模式下系统用户名 */
   Username?: string;
@@ -2499,6 +2523,8 @@ declare interface InquiryPriceRunInstancesRequest {
   TagSpecification?: TagSpecification[];
   /** 实例的市场相关选项，如竞价实例相关参数 */
   InstanceMarketOptions?: InstanceMarketOptionsRequest;
+  /** 自定义metadata，支持创建 CVM 时添加自定义元数据键值对。**注：内测中**。 */
+  Metadata?: Metadata;
   /** 高性能计算集群ID。 */
   HpcClusterId?: string;
   /** 描述了实例CPU拓扑结构的相关信息。若不指定该参数，则按系统资源情况决定。 */
@@ -3010,6 +3036,8 @@ declare interface RunInstancesRequest {
   InstanceMarketOptions?: InstanceMarketOptionsRequest;
   /** 提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16KB。关于获取此参数的详细介绍，请参阅[Windows](https://cloud.tencent.com/document/product/213/17526)和[Linux](https://cloud.tencent.com/document/product/213/17525)启动时运行命令。 */
   UserData?: string;
+  /** 自定义metadata，支持创建 CVM 时添加自定义元数据键值对。**注：内测中**。 */
+  Metadata?: Metadata;
   /** 是否只预检此次请求。true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制和云服务器库存。如果检查不通过，则返回对应错误码；如果检查通过，则返回RequestId.false（默认）：发送正常请求，通过检查后直接创建实例 */
   DryRun?: boolean;
   /** 描述了实例CPU拓扑结构的相关信息。若不指定该参数，则按系统资源情况决定。 */

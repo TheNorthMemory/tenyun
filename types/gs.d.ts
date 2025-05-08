@@ -36,8 +36,10 @@ declare interface AndroidAppVersionInfo {
   State?: string;
   /** 安卓应用版本创建时间 */
   CreateTime?: string;
-  /** shell 命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效） */
+  /** shell 安装命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效） */
   Command?: string;
+  /** shell 卸载命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效） */
+  UninstallCommand?: string;
 }
 
 /** 安卓实例信息 */
@@ -277,8 +279,10 @@ declare interface CreateAndroidAppVersionRequest {
   AndroidAppId: string;
   /** 应用包下载地址 */
   DownloadUrl?: string;
-  /** shell 命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效） */
+  /** 应用 shell 安装命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效） */
   Command?: string;
+  /** 应用 shell 卸载命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效） */
+  UninstallCommand?: string;
 }
 
 declare interface CreateAndroidAppVersionResponse {
@@ -723,8 +727,10 @@ declare interface ModifyAndroidAppVersionRequest {
   AndroidAppVersion: string;
   /** 安卓应用版本名称 */
   AndroidAppVersionName: string;
-  /** shell 命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效） */
+  /** 应用 shell 安装命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效） */
   Command?: string;
+  /** 应用 shell 卸载命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效） */
+  UninstallCommand?: string;
 }
 
 declare interface ModifyAndroidAppVersionResponse {
@@ -816,6 +822,18 @@ declare interface ModifyAndroidInstancesUserIdRequest {
 }
 
 declare interface ModifyAndroidInstancesUserIdResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RebootAndroidInstanceHostsRequest {
+  /** 宿主机序列号集合 */
+  HostSerialNumbers: string[];
+}
+
+declare interface RebootAndroidInstanceHostsResponse {
+  /** 任务 ID 集合，以供任务状态查询，其中 InstanceId 为宿主机序列号 */
+  TaskSet?: AndroidInstanceTask[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1157,6 +1175,8 @@ declare interface Gs {
   ModifyAndroidInstancesResolution(data: ModifyAndroidInstancesResolutionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidInstancesResolutionResponse>;
   /** 批量修改安卓实例的用户ID {@link ModifyAndroidInstancesUserIdRequest} {@link ModifyAndroidInstancesUserIdResponse} */
   ModifyAndroidInstancesUserId(data: ModifyAndroidInstancesUserIdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidInstancesUserIdResponse>;
+  /** 批量重启安卓实例宿主机 {@link RebootAndroidInstanceHostsRequest} {@link RebootAndroidInstanceHostsResponse} */
+  RebootAndroidInstanceHosts(data: RebootAndroidInstanceHostsRequest, config?: AxiosRequestConfig): AxiosPromise<RebootAndroidInstanceHostsResponse>;
   /** 重启安卓实例 {@link RebootAndroidInstancesRequest} {@link RebootAndroidInstancesResponse} */
   RebootAndroidInstances(data: RebootAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RebootAndroidInstancesResponse>;
   /** 重置安卓实例 {@link ResetAndroidInstancesRequest} {@link ResetAndroidInstancesResponse} */

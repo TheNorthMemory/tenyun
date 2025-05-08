@@ -2417,9 +2417,9 @@ declare interface Tag {
 /** 时间戳与其对应的数值 */
 declare interface TimestampData {
   /** 数据统计时间点，采用向前汇总模式以 5 分钟粒度为例，13:35:00 时间点代表的统计数据区间为 13:35:00 至 13:39:59 */
-  Time: string;
+  Time?: string;
   /** 数据值 */
-  Value: number;
+  Value?: number;
 }
 
 /** 排序类型数据结构 */
@@ -3063,7 +3063,7 @@ declare interface DescribeCdnOriginIpResponse {
 declare interface DescribeCertDomainsRequest {
   /** PEM格式证书Base64编码后的字符串 */
   Cert?: string;
-  /** 托管证书ID，Cert和CertId不能均未空，都填写时以CerId为准。 */
+  /** 托管证书ID，Cert和CertId不能均未空，都填写时以CertId为准。 */
   CertId?: string;
   /** 域名所属产品，cdn或ecdn，默认cdn。 */
   Product?: string;
@@ -4011,7 +4011,7 @@ declare interface ListTopClsLogDataRequest {
   Url: string;
   /** 接入渠道，cdn或者ecdn，默认值为cdn */
   Channel?: string;
-  /** 要查询的Top条数，最大值为100，默认为10 */
+  /** 要查询的Top条数，建议最大值100，默认为10 */
   Limit?: number;
   /** 按请求量排序， asc（升序）或者 desc（降序），默认为 desc */
   Sort?: string;
@@ -4481,11 +4481,11 @@ declare interface Cdn {
   CreateDiagnoseUrl(data: CreateDiagnoseUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDiagnoseUrlResponse>;
   /** 动态打包任务提交 {@link CreateEdgePackTaskRequest} {@link CreateEdgePackTaskResponse} */
   CreateEdgePackTask(data: CreateEdgePackTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgePackTaskResponse>;
-  /** 创建SCDN域名 {@link CreateScdnDomainRequest} {@link CreateScdnDomainResponse} */
+  /** @deprecated 创建SCDN域名 {@link CreateScdnDomainRequest} {@link CreateScdnDomainResponse} */
   CreateScdnDomain(data: CreateScdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScdnDomainResponse>;
-  /** 重试创建事件日志任务 {@link CreateScdnFailedLogTaskRequest} {@link CreateScdnFailedLogTaskResponse} */
+  /** @deprecated 重试创建事件日志任务 {@link CreateScdnFailedLogTaskRequest} {@link CreateScdnFailedLogTaskResponse} */
   CreateScdnFailedLogTask(data: CreateScdnFailedLogTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScdnFailedLogTaskResponse>;
-  /** 创建事件日志任务 {@link CreateScdnLogTaskRequest} {@link CreateScdnLogTaskResponse} */
+  /** @deprecated 创建事件日志任务 {@link CreateScdnLogTaskRequest} {@link CreateScdnLogTaskResponse} */
   CreateScdnLogTask(data: CreateScdnLogTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScdnLogTaskResponse>;
   /** 生成解析记录 {@link CreateVerifyRecordRequest} {@link CreateVerifyRecordResponse} */
   CreateVerifyRecord(data: CreateVerifyRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVerifyRecordResponse>;
@@ -4493,11 +4493,11 @@ declare interface Cdn {
   DeleteCdnDomain(data: DeleteCdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCdnDomainResponse>;
   /** 删除日志主题 {@link DeleteClsLogTopicRequest} {@link DeleteClsLogTopicResponse} */
   DeleteClsLogTopic(data: DeleteClsLogTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClsLogTopicResponse>;
-  /** 删除SCDN域名 {@link DeleteScdnDomainRequest} {@link DeleteScdnDomainResponse} */
+  /** @deprecated 删除SCDN域名 {@link DeleteScdnDomainRequest} {@link DeleteScdnDomainResponse} */
   DeleteScdnDomain(data: DeleteScdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScdnDomainResponse>;
   /** 计费数据查询 {@link DescribeBillingDataRequest} {@link DescribeBillingDataResponse} */
   DescribeBillingData(data: DescribeBillingDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingDataResponse>;
-  /** CC统计数据查询 {@link DescribeCcDataRequest} {@link DescribeCcDataResponse} */
+  /** @deprecated CC统计数据查询 {@link DescribeCcDataRequest} {@link DescribeCcDataResponse} */
   DescribeCcData(data: DescribeCcDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcDataResponse>;
   /** 访问数据查询 {@link DescribeCdnDataRequest} {@link DescribeCdnDataResponse} */
   DescribeCdnData(data: DescribeCdnDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdnDataResponse>;
@@ -4509,7 +4509,7 @@ declare interface Cdn {
   DescribeCdnOriginIp(data?: DescribeCdnOriginIpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdnOriginIpResponse>;
   /** 获取SSL证书中的可用域名 {@link DescribeCertDomainsRequest} {@link DescribeCertDomainsResponse} */
   DescribeCertDomains(data?: DescribeCertDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertDomainsResponse>;
-  /** DDoS统计数据查询 {@link DescribeDDoSDataRequest} {@link DescribeDDoSDataResponse} */
+  /** @deprecated DDoS统计数据查询 {@link DescribeDDoSDataRequest} {@link DescribeDDoSDataResponse} */
   DescribeDDoSData(data: DescribeDDoSDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSDataResponse>;
   /** 获取诊断报告(已废弃) {@link DescribeDiagnoseReportRequest} {@link DescribeDiagnoseReportResponse} */
   DescribeDiagnoseReport(data: DescribeDiagnoseReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiagnoseReportResponse>;
@@ -4521,7 +4521,7 @@ declare interface Cdn {
   DescribeDomainsConfig(data?: DescribeDomainsConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsConfigResponse>;
   /** 查询动态打包任务状态列表 {@link DescribeEdgePackTaskStatusRequest} {@link DescribeEdgePackTaskStatusResponse} */
   DescribeEdgePackTaskStatus(data: DescribeEdgePackTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgePackTaskStatusResponse>;
-  /** 查询事件日志统计曲线 {@link DescribeEventLogDataRequest} {@link DescribeEventLogDataResponse} */
+  /** @deprecated 查询事件日志统计曲线 {@link DescribeEventLogDataRequest} {@link DescribeEventLogDataResponse} */
   DescribeEventLogData(data: DescribeEventLogDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventLogDataResponse>;
   /** HTTPS请求包查询 {@link DescribeHttpsPackagesRequest} {@link DescribeHttpsPackagesResponse} */
   DescribeHttpsPackages(data?: DescribeHttpsPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHttpsPackagesResponse>;
@@ -4547,15 +4547,15 @@ declare interface Cdn {
   DescribePushTasks(data?: DescribePushTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePushTasksResponse>;
   /** 查询报表数据 {@link DescribeReportDataRequest} {@link DescribeReportDataResponse} */
   DescribeReportData(data: DescribeReportDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReportDataResponse>;
-  /** 获取BOT统计数据列表 {@link DescribeScdnBotDataRequest} {@link DescribeScdnBotDataResponse} */
+  /** @deprecated 获取BOT统计数据列表 {@link DescribeScdnBotDataRequest} {@link DescribeScdnBotDataResponse} */
   DescribeScdnBotData(data: DescribeScdnBotDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnBotDataResponse>;
-  /** 查询BOT会话记录列表 {@link DescribeScdnBotRecordsRequest} {@link DescribeScdnBotRecordsResponse} */
+  /** @deprecated 查询BOT会话记录列表 {@link DescribeScdnBotRecordsRequest} {@link DescribeScdnBotRecordsResponse} */
   DescribeScdnBotRecords(data: DescribeScdnBotRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnBotRecordsResponse>;
-  /** SCDN域名配置 {@link DescribeScdnConfigRequest} {@link DescribeScdnConfigResponse} */
+  /** @deprecated SCDN域名配置 {@link DescribeScdnConfigRequest} {@link DescribeScdnConfigResponse} */
   DescribeScdnConfig(data: DescribeScdnConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnConfigResponse>;
-  /** 查询SCDN安全防护IP白名单 {@link DescribeScdnIpStrategyRequest} {@link DescribeScdnIpStrategyResponse} */
+  /** @deprecated 查询SCDN安全防护IP白名单 {@link DescribeScdnIpStrategyRequest} {@link DescribeScdnIpStrategyResponse} */
   DescribeScdnIpStrategy(data?: DescribeScdnIpStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnIpStrategyResponse>;
-  /** 获取SCDN的Top数据 {@link DescribeScdnTopDataRequest} {@link DescribeScdnTopDataResponse} */
+  /** @deprecated 获取SCDN的Top数据 {@link DescribeScdnTopDataRequest} {@link DescribeScdnTopDataResponse} */
   DescribeScdnTopData(data: DescribeScdnTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnTopDataResponse>;
   /** TOP 新版数据查询 {@link DescribeTopDataRequest} {@link DescribeTopDataResponse} */
   DescribeTopData(data: DescribeTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopDataResponse>;
@@ -4563,7 +4563,7 @@ declare interface Cdn {
   DescribeTrafficPackages(data?: DescribeTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficPackagesResponse>;
   /** 违规历史查询 {@link DescribeUrlViolationsRequest} {@link DescribeUrlViolationsResponse} */
   DescribeUrlViolations(data?: DescribeUrlViolationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUrlViolationsResponse>;
-  /** Waf统计数据查询 {@link DescribeWafDataRequest} {@link DescribeWafDataResponse} */
+  /** @deprecated Waf统计数据查询 {@link DescribeWafDataRequest} {@link DescribeWafDataResponse} */
   DescribeWafData(data: DescribeWafDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafDataResponse>;
   /** 禁用 URL(已废弃) {@link DisableCachesRequest} {@link DisableCachesResponse} */
   DisableCaches(data: DisableCachesRequest, config?: AxiosRequestConfig): AxiosPromise<DisableCachesResponse>;
@@ -4583,23 +4583,23 @@ declare interface Cdn {
   ListClsTopicDomains(data: ListClsTopicDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<ListClsTopicDomainsResponse>;
   /** 获取诊断任务列表(已废弃) {@link ListDiagnoseReportRequest} {@link ListDiagnoseReportResponse} */
   ListDiagnoseReport(data?: ListDiagnoseReportRequest, config?: AxiosRequestConfig): AxiosPromise<ListDiagnoseReportResponse>;
-  /** 查询SCDN域名列表 {@link ListScdnDomainsRequest} {@link ListScdnDomainsResponse} */
+  /** @deprecated 查询SCDN域名列表 {@link ListScdnDomainsRequest} {@link ListScdnDomainsResponse} */
   ListScdnDomains(data?: ListScdnDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<ListScdnDomainsResponse>;
-  /** 查询SCDN日志下载任务列表 {@link ListScdnLogTasksRequest} {@link ListScdnLogTasksResponse} */
+  /** @deprecated 查询SCDN日志下载任务列表 {@link ListScdnLogTasksRequest} {@link ListScdnLogTasksResponse} */
   ListScdnLogTasks(data?: ListScdnLogTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListScdnLogTasksResponse>;
-  /** 获取Bot攻击的Top数据列表 {@link ListScdnTopBotDataRequest} {@link ListScdnTopBotDataResponse} */
+  /** @deprecated 获取Bot攻击的Top数据列表 {@link ListScdnTopBotDataRequest} {@link ListScdnTopBotDataResponse} */
   ListScdnTopBotData(data: ListScdnTopBotDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListScdnTopBotDataResponse>;
-  /** 获取Bot攻击的Top信息 {@link ListTopBotDataRequest} {@link ListTopBotDataResponse} */
+  /** @deprecated 获取Bot攻击的Top信息 {@link ListTopBotDataRequest} {@link ListTopBotDataResponse} */
   ListTopBotData(data: ListTopBotDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopBotDataResponse>;
-  /** 获取CC攻击Top数据 {@link ListTopCcDataRequest} {@link ListTopCcDataResponse} */
+  /** @deprecated 获取CC攻击Top数据 {@link ListTopCcDataRequest} {@link ListTopCcDataResponse} */
   ListTopCcData(data: ListTopCcDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopCcDataResponse>;
   /** 通过CLS日志计算Top信息 {@link ListTopClsLogDataRequest} {@link ListTopClsLogDataResponse} */
   ListTopClsLogData(data: ListTopClsLogDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopClsLogDataResponse>;
-  /** 获取DDoS攻击Top数据 {@link ListTopDDoSDataRequest} {@link ListTopDDoSDataResponse} */
+  /** @deprecated 获取DDoS攻击Top数据 {@link ListTopDDoSDataRequest} {@link ListTopDDoSDataResponse} */
   ListTopDDoSData(data: ListTopDDoSDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopDDoSDataResponse>;
   /** TOP 数据查询 {@link ListTopDataRequest} {@link ListTopDataResponse} */
   ListTopData(data: ListTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopDataResponse>;
-  /** 获取Waf攻击Top数据 {@link ListTopWafDataRequest} {@link ListTopWafDataResponse} */
+  /** @deprecated 获取Waf攻击Top数据 {@link ListTopWafDataRequest} {@link ListTopWafDataResponse} */
   ListTopWafData(data: ListTopWafDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopWafDataResponse>;
   /** 管理日志主题下绑定的域名 {@link ManageClsTopicDomainsRequest} {@link ManageClsTopicDomainsResponse} */
   ManageClsTopicDomains(data: ManageClsTopicDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<ManageClsTopicDomainsResponse>;
@@ -4617,11 +4617,11 @@ declare interface Cdn {
   SearchClsLog(data: SearchClsLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClsLogResponse>;
   /** 启用加速域名 {@link StartCdnDomainRequest} {@link StartCdnDomainResponse} */
   StartCdnDomain(data: StartCdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<StartCdnDomainResponse>;
-  /** 启动SCDN域名安全防护 {@link StartScdnDomainRequest} {@link StartScdnDomainResponse} */
+  /** @deprecated 启动SCDN域名安全防护 {@link StartScdnDomainRequest} {@link StartScdnDomainResponse} */
   StartScdnDomain(data: StartScdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<StartScdnDomainResponse>;
   /** 停用加速域名 {@link StopCdnDomainRequest} {@link StopCdnDomainResponse} */
   StopCdnDomain(data: StopCdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<StopCdnDomainResponse>;
-  /** 停止SCDN域名安全防护 {@link StopScdnDomainRequest} {@link StopScdnDomainResponse} */
+  /** @deprecated 停止SCDN域名安全防护 {@link StopScdnDomainRequest} {@link StopScdnDomainResponse} */
   StopScdnDomain(data: StopScdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<StopScdnDomainResponse>;
   /** 更新加速域名配置 {@link UpdateDomainConfigRequest} {@link UpdateDomainConfigResponse} */
   UpdateDomainConfig(data: UpdateDomainConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDomainConfigResponse>;
@@ -4629,7 +4629,7 @@ declare interface Cdn {
   UpdateImageConfig(data: UpdateImageConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateImageConfigResponse>;
   /** 修改计费类型 {@link UpdatePayTypeRequest} {@link UpdatePayTypeResponse} */
   UpdatePayType(data: UpdatePayTypeRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePayTypeResponse>;
-  /** 更新SCDN域名配置 {@link UpdateScdnDomainRequest} {@link UpdateScdnDomainResponse} */
+  /** @deprecated 更新SCDN域名配置 {@link UpdateScdnDomainRequest} {@link UpdateScdnDomainResponse} */
   UpdateScdnDomain(data: UpdateScdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateScdnDomainResponse>;
   /** 验证域名解析 {@link VerifyDomainRecordRequest} {@link VerifyDomainRecordResponse} */
   VerifyDomainRecord(data: VerifyDomainRecordRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyDomainRecordResponse>;

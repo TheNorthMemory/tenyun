@@ -2452,8 +2452,14 @@ declare interface InquiryPriceCreateInstanceRequest {
 }
 
 declare interface InquiryPriceCreateInstanceResponse {
-  /** 价格，单位：分 */
+  /** 价格 */
   Price?: number;
+  /** 高精度价格 */
+  HighPrecisionPrice?: number;
+  /** 币种 */
+  Currency?: string;
+  /** 价格金额单位- pent: 分- microPent: 微分 */
+  AmountUnit?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2466,8 +2472,14 @@ declare interface InquiryPriceRenewInstanceRequest {
 }
 
 declare interface InquiryPriceRenewInstanceResponse {
-  /** 价格，单位：分。 */
+  /** 价格 */
   Price?: number;
+  /** 高精度价格 */
+  HighPrecisionPrice?: number;
+  /** 币种 */
+  Currency?: string;
+  /** 价格金额单位- pent: 分- microPent: 微分 */
+  AmountUnit?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2484,8 +2496,14 @@ declare interface InquiryPriceUpgradeInstanceRequest {
 }
 
 declare interface InquiryPriceUpgradeInstanceResponse {
-  /** 价格，单位：分 */
+  /** 价格 */
   Price?: number;
+  /** 高精度价格 */
+  HighPrecisionPrice?: number;
+  /** 币种 */
+  Currency?: string;
+  /** 价格金额单位- pent: 分- microPent: 微分 */
+  AmountUnit?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

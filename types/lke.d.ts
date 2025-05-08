@@ -34,6 +34,10 @@ declare interface AgentProcedure {
   NodeName?: string | null;
   /** 用于展示思考放在哪个回复气泡中 */
   ReplyIndex?: number | null;
+  /** 主agent */
+  SourceAgentName?: string | null;
+  /** 挂号agent */
+  TargetAgentName?: string | null;
 }
 
 /** Agent思考过程调试信息 */
@@ -844,6 +848,10 @@ declare interface ModelInfo {
   SupportWorkflowStatus?: number | null;
   /** 模型类别 generate：生成模型，thought：思考模型 */
   ModelCategory?: string;
+  /** 是否默认模型 */
+  IsDefault?: boolean;
+  /** 角色提示词输入长度限制 */
+  RoleLenLimit?: number;
 }
 
 /** 模型参数范围 */
@@ -2631,13 +2639,13 @@ declare interface GetLikeDataCountResponse {
 declare interface GetMsgRecordRequest {
   /** 类型 */
   Type: number;
-  /** 数量 */
+  /** 数量, 数量需大于2 */
   Count: number;
   /** 会话sessionid */
   SessionId: string;
   /** 最后一条记录ID */
   LastRecordId?: string;
-  /** 应用AppKey, 当Type=5[API访客]时, 该字段必填 */
+  /** 应用AppKey, 当Type=5[API访客]时, 该字段必填 : 获取方式: 1、应用发布后在应用页面[发布管理]-[调用信息]-[API管理]处获取 2、参考 https://cloud.tencent.com/document/product/1759/109469 第二项 */
   BotAppKey?: string;
   /** 场景, 体验: 1; 正式: 2 */
   Scene?: number;
@@ -2723,7 +2731,7 @@ declare interface GetWsTokenRequest {
   Type: number;
   /** 应用AppKey 获取方式: 1、应用发布后在应用页面[发布管理]-[调用信息]-[API管理]处获取 2、参考 https://cloud.tencent.com/document/product/1759/109469 第二项 */
   BotAppKey?: string;
-  /** 访客ID（外部输入，建议唯一，标识当前接入会话的用户） */
+  /** 访客ID（外部输入，建议唯一，标识当前接入会话的用户）长度限制： string(64) */
   VisitorBizId?: string;
   /** 知识标签，用于知识库中知识的检索过滤。该字段即将下线，请使用对话端接口中的 custom_variables 字段替代该字段。 */
   VisitorLabels?: GetWsTokenReq_Label[];
@@ -3553,7 +3561,7 @@ declare interface SaveDocRequest {
   CosUrl: string;
   /** ETag 全称为 Entity Tag，是对象被创建时标识对象内容的信息标签，可用于检查对象的内容是否发生变化 成功上传cos后，从返回头中获取 */
   ETag: string;
-  /** cos_hash x-cos-hash-crc64ecma 头部中的 CRC64编码进行校验上传到云端的文件和本地文件的一致性 成功上传cos后，从返回头中获取 */
+  /** cos_hash x-cos-hash-crc64ecma 头部中的 CRC64编码进行校验上传到云端的文件和本地文件的一致性 成功上传cos后，从返回头中获取请注意：cos_hash为文档唯一性标识，与文件名无关 相同的cos_hash会被判定为重复文档 */
   CosHash: string;
   /** 文件大小 */
   Size: string;

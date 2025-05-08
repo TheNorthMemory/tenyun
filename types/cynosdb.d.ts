@@ -2551,6 +2551,8 @@ declare interface CreateClustersRequest {
   Cpu?: number;
   /** 当DbMode为NORMAL或不填时必选普通实例内存,单位GB */
   Memory?: number;
+  /** 实例数量，数量范围为(0,16]，默认值为2（即一个rw实例+一个ro实例），传递的n表示1个rw实例+n-1个ro实例（规格相同），如需要更精确的集群组成搭配，请使用InstanceInitInfos */
+  InstanceCount?: number;
   /** 该参数无实际意义，已废弃。存储大小，单位GB。 */
   Storage?: number;
   /** 集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（'-','_','.'） */
@@ -2575,8 +2577,6 @@ declare interface CreateClustersRequest {
   ExpectTimeThresh?: number;
   /** 普通实例存储上限，单位GB当DbType为MYSQL，且存储计费模式为预付费时，该参数需不大于cpu与memory对应存储规格上限 */
   StorageLimit?: number;
-  /** 实例数量，数量范围为(0,16] */
-  InstanceCount?: number;
   /** 包年包月购买时长 */
   TimeSpan?: number;
   /** 包年包月购买时长单位，['s','d','m','y'] */
@@ -3901,7 +3901,7 @@ declare interface DescribeSSLStatusRequest {
 
 declare interface DescribeSSLStatusResponse {
   /** yes-开启，no-关闭 */
-  IsOpenSSL?: string | null;
+  IsOpenSSL?: string;
   /** 证书下载地址 */
   DownloadUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -4911,9 +4911,9 @@ declare interface OpenSSLRequest {
 
 declare interface OpenSSLResponse {
   /** 任务流ID */
-  FlowId?: number | null;
+  FlowId?: number;
   /** 任务id */
-  TaskId?: number | null;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

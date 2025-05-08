@@ -56,7 +56,7 @@ declare interface BasicTargetGroupInfo {
   TargetGroupId?: string;
   /** 目标组名称 */
   TargetGroupName?: string;
-  /** 权重 */
+  /** 目标组权重 */
   Weight?: number;
 }
 
@@ -144,11 +144,11 @@ declare interface CertInfo {
 
 /** 证书信息 */
 declare interface CertificateInput {
-  /** 认证类型，UNIDIRECTIONAL：单向认证，MUTUAL：双向认证 */
+  /** 认证类型，UNIDIRECTIONAL：单向认证，MUTUAL：双向认证。默认为 UNIDIRECTIONAL。 */
   SSLMode?: string;
   /** 双向认证时，是否开启客户端认证，ON:开启，OPTIONAL:自适应，默认ON。 */
   SSLVerifyClient?: string;
-  /** 服务端证书的 ID，如果不填写此项则必须上传证书，包括 CertContent，CertKey，CertName。 */
+  /** 服务端证书的 ID，如果不填写此项则必须上传证书，包括 CertContent（服务端证书内容），CertKey（服务端证书密钥），CertName（服务端证书名称）。 */
   CertId?: string;
   /** 客户端证书的 ID，当监听器采用双向认证，即 SSLMode=MUTUAL 时，如果不填写此项则必须上传客户端证书，包括 CertCaContent，CertCaName。 */
   CertCaId?: string;
@@ -442,7 +442,7 @@ declare interface FunctionTarget {
 
 /** 健康检查信息。注意，自定义探测相关参数 目前只有少量区域灰度支持。 */
 declare interface HealthCheck {
-  /** 是否开启健康检查：1（开启）、0（关闭）。 */
+  /** 是否开启健康检查：1（开启）、0（关闭）。默认为开启。 */
   HealthSwitch?: number;
   /** 健康检查的响应超时时间，可选值：2~60，默认值：2，单位：秒。响应超时时间要小于检查间隔时间。 */
   TimeOut?: number;
@@ -456,7 +456,7 @@ declare interface HealthCheck {
   HttpCode?: number | null;
   /** 健康检查路径（仅适用于HTTP/HTTPS转发规则、TCP监听器的HTTP健康检查方式）。 */
   HttpCheckPath?: string | null;
-  /** 健康检查域名（仅适用于HTTP/HTTPS监听器和TCP监听器的HTTP健康检查方式。针对TCP监听器，当使用HTTP健康检查方式时，该参数为必填项）。 */
+  /** 健康检查域名，将在HTTP协议 Host 头字段中携带。（仅适用于HTTP/HTTPS监听器和TCP监听器的HTTP健康检查方式。针对TCP监听器，当使用HTTP健康检查方式时，该参数为必填项）。 */
   HttpCheckDomain?: string | null;
   /** 健康检查方法（仅适用于HTTP/HTTPS转发规则、TCP监听器的HTTP健康检查方式），默认值：HEAD，可选值HEAD或GET。 */
   HttpCheckMethod?: string | null;
@@ -504,7 +504,7 @@ declare interface InternetAccessible {
   InternetChargeType?: string;
   /** 最大出带宽，单位Mbps，仅对公网属性的共享型、性能容量型和独占型 CLB 实例、以及内网属性的性能容量型 CLB 实例生效。- 对于公网属性的共享型和独占型 CLB 实例，最大出带宽的范围为1Mbps-2048Mbps。- 对于公网属性和内网属性的性能容量型 CLB实例，最大出带宽的范围为1Mbps-61440Mbps。（调用CreateLoadBalancer创建LB时不指定此参数则设置为默认值10Mbps。此上限可调整） */
   InternetMaxBandwidthOut?: number;
-  /** 带宽包的类型，如SINGLEISP（单线）、BGP（多线）。 */
+  /** 带宽包的类型，如 BGP（多线）。类型如下：SINGLEISP: 单线BGP: 多线HIGH_QUALITY_BGP: 精品BGP共享带宽包SINGLEISP_CMCC: 中国移动共享带宽包SINGLEISP_CTCC: 中国电信共享带宽包SINGLEISP_CUCC: 中国联通共享带宽包 */
   BandwidthpkgSubType?: string | null;
 }
 
@@ -570,9 +570,9 @@ declare interface LbRsTargets {
 declare interface Listener {
   /** 负载均衡监听器 ID */
   ListenerId?: string;
-  /** 监听器协议 */
+  /** 监听器协议，可选值：TCP、UDP、HTTP、HTTPS、TCP_SSL、QUIC */
   Protocol?: string;
-  /** 监听器端口 */
+  /** 监听器端口，端口范围：1-65535 */
   Port?: number;
   /** 监听器绑定的证书信息 */
   Certificate?: CertificateOutput | null;
@@ -580,7 +580,7 @@ declare interface Listener {
   HealthCheck?: HealthCheck | null;
   /** 请求的调度方式。 WRR、LEAST_CONN、IP_HASH分别表示按权重轮询、最小连接数、IP Hash。 */
   Scheduler?: string | null;
-  /** 会话保持时间 */
+  /** 会话保持时间，单位：秒。可选值：30~3600，默认 0，默认不开启。此参数仅适用于TCP/UDP监听器。 */
   SessionExpireTime?: number | null;
   /** 是否开启SNI特性，1：表示开启，0：表示不开启（本参数仅对于HTTPS监听器有意义） */
   SniSwitch?: number;
@@ -590,9 +590,9 @@ declare interface Listener {
   ListenerName?: string;
   /** 监听器的创建时间。 */
   CreateTime?: string;
-  /** 端口段结束端口 */
+  /** 端口段结束端口，端口范围：2-65535 */
   EndPort?: number;
-  /** 后端服务器类型 */
+  /** 后端服务器类型，可选值：NODE、POLARIS、TARGETGROUP、TARGETGROUP-V2 */
   TargetType?: string | null;
   /** 绑定的目标组基本信息；当监听器绑定目标组时，会返回该字段 */
   TargetGroup?: BasicTargetGroupInfo | null;
@@ -710,7 +710,7 @@ declare interface LoadBalancer {
   AnycastZone?: string;
   /** IP版本，ipv4 | ipv6 */
   AddressIPVersion?: string;
-  /** 数值形式的私有网络 ID。 */
+  /** 数值形式的私有网络 ID，可以通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口获取。 */
   NumericalVpcId?: number;
   /** 负载均衡IP地址所属的运营商。- BGP : BGP（多线）- CMCC：中国移动单线- CTCC：中国电信单线- CUCC：中国联通单线 */
   VipIsp?: string | null;
@@ -910,9 +910,9 @@ declare interface MultiCertInfo {
 
 /** OAuth配置信息。 */
 declare interface OAuth {
-  /** 开启或关闭鉴权。True: 开启;False: 关闭 */
+  /** 开启或关闭鉴权。True: 开启;False: 关闭默认为关闭。 */
   OAuthEnable?: boolean;
-  /** IAP全部故障后，拒绝请求还是放行。BYPASS:通过,REJECT: 拒绝 */
+  /** IAP全部故障后，拒绝请求还是放行。BYPASS: 通过REJECT: 拒绝默认为 BYPASS */
   OAuthFailureStatus?: string;
 }
 
@@ -1457,17 +1457,17 @@ declare interface BatchRegisterTargetsResponse {
 }
 
 declare interface CloneLoadBalancerRequest {
-  /** 负载均衡ID。 */
+  /** 负载均衡ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。 */
   LoadBalancerId: string;
   /** 克隆出负载均衡实例的名称，规则：1-60 个英文、汉字、数字、连接线“-”或下划线“_”。注意：如果名称与系统中已有负载均衡实例的名称相同，则系统将会自动生成此次创建的负载均衡实例的名称。 */
   LoadBalancerName?: string;
-  /** 负载均衡实例所属的项目 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。不传此参数则视为默认项目。 */
+  /** 负载均衡实例所属的项目 ID，默认项目 ID 为0，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。不传此参数则视为默认项目。 */
   ProjectId?: number;
-  /** 仅适用于公网负载均衡。设置跨可用区容灾时的主可用区ID，例如 100001 或 ap-guangzhou-1注：主可用区是需要承载流量的可用区，备可用区默认不承载流量，主可用区不可用时才使用备可用区，平台将为您自动选择最佳备可用区。可通过 [DescribeResources](https://cloud.tencent.com/document/api/214/70213) 接口查询一个地域的主可用区的列表。 */
+  /** 仅适用于公网负载均衡。设置跨可用区容灾时的主可用区ID，可用区 ID 和名称均支持，例如 100001 或 ap-guangzhou-1。注：主可用区是需要承载流量的可用区，备可用区默认不承载流量，主可用区不可用时才使用备可用区，平台将为您自动选择最佳备可用区。可通过 [DescribeResources](https://cloud.tencent.com/document/api/214/70213) 接口查询一个地域的主可用区的列表。 */
   MasterZoneId?: string;
-  /** 仅适用于公网负载均衡。设置跨可用区容灾时的备可用区ID，例如 100001 或 ap-guangzhou-1注：备可用区是主可用区故障后，需要承载流量的可用区。可通过 [DescribeResources](https://cloud.tencent.com/document/api/214/70213) 接口查询一个地域的主/备可用区的列表。 */
+  /** 仅适用于公网负载均衡。设置跨可用区容灾时的备可用区ID，可用区 ID 和名称均支持，例如 100001 或 ap-guangzhou-1。注：备可用区是主可用区故障后，需要承载流量的可用区。可通过 [DescribeResources](https://cloud.tencent.com/document/api/214/70213) 接口查询一个地域的主/备可用区的列表。 */
   SlaveZoneId?: string;
-  /** 仅适用于公网负载均衡。可用区ID，指定可用区以创建负载均衡实例。如：ap-guangzhou-1。不传则查询所有可用区的 CVM 实例。如需指定可用区，可调用查询可用区列表[DescribeZones](https://cloud.tencent.com/document/product/213/15707)接口查询。 */
+  /** 仅适用于公网负载均衡。可用区ID，可用区 ID 和名称均支持，指定可用区以创建负载均衡实例。如：100001 或 ap-guangzhou-1。不传则查询所有可用区的 CVM 实例。如需指定可用区，可调用查询可用区列表 [DescribeZones](https://cloud.tencent.com/document/product/213/15707) 接口查询。 */
   ZoneId?: string;
   /** 仅适用于公网负载均衡。负载均衡的网络计费模式。 */
   InternetAccessible?: InternetAccessible;
@@ -1479,13 +1479,13 @@ declare interface CloneLoadBalancerRequest {
   Tags?: TagInfo[];
   /** 独占集群信息。 */
   ExclusiveCluster?: ExclusiveCluster;
-  /** 带宽包ID，指定此参数时，网络计费方式（InternetAccessible.InternetChargeType）只支持按带宽包计费（BANDWIDTH_PACKAGE）。 */
+  /** 带宽包ID，可以通过 [DescribeBandwidthPackages](https://cloud.tencent.com/document/api/215/19209) 接口获取。指定此参数时，网络计费方式（InternetAccessible.InternetChargeType）只支持按带宽包计费（BANDWIDTH_PACKAGE）。 */
   BandwidthPackageId?: string;
   /** 是否支持绑定跨地域/跨Vpc绑定IP的功能。 */
   SnatPro?: boolean;
   /** 开启绑定跨地域/跨Vpc绑定IP的功能后，创建SnatIp。 */
   SnatIps?: SnatIp[];
-  /** 公网独占集群ID或者CDCId。 */
+  /** 公网独占集群ID或者CDCId，可以通过 [DescribeExclusiveClusters](https://cloud.tencent.com/document/product/214/49278) 接口获取。 */
   ClusterIds?: string[];
   /** 性能容量型规格。clb.c2.medium（标准型）clb.c3.small（高阶型1）clb.c3.medium（高阶型2）clb.c4.small（超强型1）clb.c4.medium（超强型2）clb.c4.large（超强型3）clb.c4.xlarge（超强型4） */
   SlaType?: string;
@@ -1493,7 +1493,7 @@ declare interface CloneLoadBalancerRequest {
   ClusterTag?: string;
   /** 仅适用于私有网络内网负载均衡。内网就近接入时，选择可用区下发。可调用[DescribeZones](https://cloud.tencent.com/document/product/213/15707)接口查询可用区列表。 */
   Zones?: string[];
-  /** EIP 的唯一 ID，形如：eip-11112222，仅适用于内网负载均衡绑定EIP。 */
+  /** EIP 的唯一 ID，形如：eip-qhx8udkc，仅适用于内网负载均衡绑定EIP，可以通过 [DescribeAddresses](https://cloud.tencent.com/document/product/215/16702) 接口查询。 */
   EipAddressId?: string;
 }
 
@@ -1519,9 +1519,9 @@ declare interface CreateClsLogSetResponse {
 }
 
 declare interface CreateListenerRequest {
-  /** 负载均衡实例 ID。 */
+  /** 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。 */
   LoadBalancerId: string;
-  /** 要将监听器创建到哪些端口，每个端口对应一个新的监听器。 */
+  /** 要将监听器创建到哪些端口，每个端口对应一个新的监听器。端口范围：1~65535 */
   Ports: number[];
   /** 监听器协议： TCP | UDP | HTTP | HTTPS | TCP_SSL | QUIC。 */
   Protocol: string;
@@ -1531,9 +1531,9 @@ declare interface CreateListenerRequest {
   HealthCheck?: HealthCheck;
   /** 证书相关信息。参数限制如下：此参数仅适用于TCP_SSL监听器和未开启SNI特性的HTTPS监听器。创建TCP_SSL监听器和未开启SNI特性的HTTPS监听器时，此参数和参数MultiCertInfo至少需要传一个， 但不能同时传入。 */
   Certificate?: CertificateInput;
-  /** 会话保持时间，单位：秒。可选值：30~3600，默认 0，表示不开启。此参数仅适用于TCP/UDP监听器。 */
+  /** 会话保持时间，单位：秒。可选值：30~3600，默认为0，默认不开启。此参数仅适用于TCP/UDP监听器。 */
   SessionExpireTime?: number;
-  /** 监听器转发的方式。可选值：WRR、LEAST_CONN分别表示按权重轮询、最小连接数， 默认为 WRR。此参数仅适用于TCP/UDP/TCP_SSL/QUIC监听器。 */
+  /** 监听器转发的方式。可选值：WRR（按权重轮询）、LEAST_CONN（按最小连接数）、IP_HASH（按 IP 地址哈希）默认为 WRR。此参数仅适用于TCP/UDP/TCP_SSL/QUIC监听器。 */
   Scheduler?: string;
   /** 是否开启SNI特性，此参数仅适用于HTTPS监听器。0表示未开启，1表示开启。 */
   SniSwitch?: number;
@@ -1553,17 +1553,17 @@ declare interface CreateListenerRequest {
   MaxConn?: number;
   /** 监听器最大新增连接数，当前仅性能容量型实例且仅TCP/UDP/TCP_SSL/QUIC监听器支持，不传或者传-1表示监听器维度不限速。基础网络实例不支持该参数。 */
   MaxCps?: number;
-  /** 空闲连接超时时间，此参数仅适用于TCP监听器，单位：秒。取值范围：共享型实例和独占型实例支持：300-900，性能容量型实例支持：300-2000。如需设置请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)。 */
+  /** 空闲连接超时时间，此参数仅适用于TCP监听器，单位：秒。取值范围：共享型实例和独占型实例支持：300-900，性能容量型实例支持：300-1980。如需设置请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)。 */
   IdleConnectTimeout?: number;
-  /** 是否开启SNAT。 */
+  /** 是否开启SNAT，True（开启）、False（关闭） */
   SnatEnable?: boolean;
-  /** 全端口段监听器的结束端口 */
+  /** 全端口段监听器的结束端口，端口范围：2 - 65535 */
   FullEndPorts?: number[];
-  /** 内网http监听器开启h2c开关 */
+  /** 内网http监听器开启h2c开关，True（开启）、False（关闭） */
   H2cSwitch?: boolean;
-  /** TCP_SSL监听器支持关闭SSL后仍然支持混绑，此参数为关闭开关 */
+  /** TCP_SSL监听器支持关闭SSL后仍然支持混绑，此参数为关闭开关。True（关闭）、False（开启） */
   SslCloseSwitch?: boolean;
-  /** 数据压缩模式 */
+  /** 数据压缩模式。可选值：transparent（透传模式）、compatibility（兼容模式） */
   DataCompressMode?: string;
 }
 
@@ -1585,15 +1585,15 @@ declare interface CreateLoadBalancerRequest {
   VpcId?: string;
   /** 在私有网络内购买内网负载均衡实例的情况下，必须指定子网 ID，内网负载均衡实例的 VIP 将从这个子网中产生。创建内网负载均衡实例时，此参数必填，创建公网IPv4负载均衡实例时，不支持指定该参数。 */
   SubnetId?: string;
-  /** 负载均衡实例所属的项目 ID，可以通过 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 接口获取。不填此参数则视为默认项目。 */
+  /** 负载均衡实例所属的项目 ID，默认项目 ID 为0。可以通过 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 接口获取。不填此参数则视为默认项目。 */
   ProjectId?: number;
   /** 仅适用于公网负载均衡。IP版本，可取值：IPV4、IPV6、IPv6FullChain，不区分大小写，默认值 IPV4。说明：取值为IPV6表示为IPV6 NAT64版本；取值为IPv6FullChain，表示为IPv6版本。 */
   AddressIPVersion?: string;
-  /** 创建负载均衡的个数，默认值 1。 */
+  /** 创建负载均衡的个数，默认值 1。创建个数不能超过帐号所能创建的最大值，默认创建最大值为20。 */
   Number?: number;
-  /** 仅适用于公网且IP版本为IPv4的负载均衡。设置跨可用区容灾时的主可用区ID，例如 100001 或 ap-guangzhou-1注：主可用区是需要承载流量的可用区，备可用区默认不承载流量，主可用区不可用时才使用备可用区。目前仅广州、上海、南京、北京、成都、深圳金融、中国香港、首尔、法兰克福、新加坡地域的 IPv4 版本的 CLB 支持主备可用区。可通过 [DescribeResources](https://cloud.tencent.com/document/api/214/70213) 接口查询一个地域的主可用区的列表。【如果您需要体验该功能，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)】 */
+  /** 仅适用于公网且IP版本为IPv4的负载均衡。设置跨可用区容灾时的主可用区ID， 可用区 ID 和名称均支持，例如 100001 或 ap-guangzhou-1注：主可用区是需要承载流量的可用区，备可用区默认不承载流量，主可用区不可用时才使用备可用区。目前仅广州、上海、南京、北京、成都、深圳金融、中国香港、首尔、法兰克福、新加坡地域的 IPv4 版本的 CLB 支持主备可用区。可通过 [DescribeResources](https://cloud.tencent.com/document/api/214/70213) 接口查询一个地域的主可用区的列表。【如果您需要体验该功能，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)】 */
   MasterZoneId?: string;
-  /** 仅适用于公网且IP版本为IPv4的负载均衡。可用区ID，指定可用区以创建负载均衡实例。如：ap-guangzhou-1。 */
+  /** 仅适用于公网且IP版本为IPv4的负载均衡。可用区ID，可用区 ID 和名称均支持，指定可用区以创建负载均衡实例。如：100001 或 ap-guangzhou-1。 */
   ZoneId?: string;
   /** 网络计费模式，最大出带宽。仅对内网属性的性能容量型实例和公网属性的所有实例生效。API接口购买包年包月实例还在灰度中，如您需要体验该功能，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category) */
   InternetAccessible?: InternetAccessible;
@@ -1603,7 +1603,7 @@ declare interface CreateLoadBalancerRequest {
   Tags?: TagInfo[];
   /** 指定VIP申请负载均衡。此参数选填，不填写此参数时自动分配VIP。IPv4和IPv6类型支持此参数，IPv6 NAT64类型不支持。注意：当指定VIP创建内网实例、或公网IPv6 BGP实例时，若VIP不属于指定VPC子网的网段内时，会创建失败；若VIP已被占用，也会创建失败。 */
   Vip?: string;
-  /** 带宽包ID，指定此参数时，网络计费方式（InternetAccessible.InternetChargeType）只支持按带宽包计费（BANDWIDTH_PACKAGE），带宽包的属性即为其结算方式。非上移用户购买的 IPv6 负载均衡实例，且运营商类型非 BGP 时 ，不支持指定具体带宽包id。 */
+  /** 带宽包ID，可以通过 [DescribeBandwidthPackages](https://cloud.tencent.com/document/api/215/19209) 接口获取。指定此参数时，网络计费方式（InternetAccessible.InternetChargeType）只支持按带宽包计费（BANDWIDTH_PACKAGE），带宽包的属性即为其结算方式。非上移用户购买的 IPv6 负载均衡实例，且运营商类型非 BGP 时 ，不支持指定具体带宽包id。 */
   BandwidthPackageId?: string;
   /** 独占型实例信息。若创建独占型的内网负载均衡实例，则此参数必填。 */
   ExclusiveCluster?: ExclusiveCluster;
@@ -1619,9 +1619,9 @@ declare interface CreateLoadBalancerRequest {
   SnatIps?: SnatIp[];
   /** Stgw独占集群的标签。 */
   ClusterTag?: string;
-  /** 仅适用于公网且IP版本为IPv4的负载均衡。设置跨可用区容灾时的备可用区ID，例如 100001 或 ap-guangzhou-1注：备可用区是主可用区故障后，需要承载流量的可用区。可通过 [DescribeResources](https://cloud.tencent.com/document/api/214/70213) 接口查询一个地域的主/备可用区的列表。【如果您需要体验该功能，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)】 */
+  /** 仅适用于公网且IP版本为IPv4的负载均衡。设置跨可用区容灾时的备可用区ID，可用区 ID 和名称均支持，例如 100001 或 ap-guangzhou-1注：备可用区是主可用区故障后，需要承载流量的可用区。可通过 [DescribeResources](https://cloud.tencent.com/document/api/214/70213) 接口查询一个地域的主/备可用区的列表。【如果您需要体验该功能，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)】 */
   SlaveZoneId?: string;
-  /** EIP 的唯一 ID，形如：eip-11112222，仅适用于内网负载均衡绑定EIP。 */
+  /** EIP 的唯一 ID，可以通过 [DescribeAddresses](https://cloud.tencent.com/document/product/215/16702) 接口查询。形如：eip-qhx8udkc，仅适用于内网负载均衡绑定EIP。 */
   EipAddressId?: string;
   /** Target是否放通来自CLB的流量。开启放通（true）：只验证CLB上的安全组；不开启放通（false）：需同时验证CLB和后端实例上的安全组。 */
   LoadBalancerPassToTarget?: boolean;
@@ -1735,9 +1735,9 @@ declare interface DeleteCustomizedConfigResponse {
 }
 
 declare interface DeleteListenerRequest {
-  /** 负载均衡实例ID。 */
+  /** 负载均衡实例ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口查询。 */
   LoadBalancerId: string;
-  /** 要删除的监听器ID。 */
+  /** 要删除的监听器ID，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。 */
   ListenerId: string;
 }
 
@@ -1747,9 +1747,9 @@ declare interface DeleteListenerResponse {
 }
 
 declare interface DeleteLoadBalancerListenersRequest {
-  /** 负载均衡实例ID。 */
+  /** 负载均衡实例ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口查询。 */
   LoadBalancerId: string;
-  /** 指定删除的监听器ID数组，最大为20个。若不填则删除负载均衡的所有监听器。 */
+  /** 指定删除的监听器ID数组，最大为20个。若不填则删除负载均衡的所有监听器，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。 */
   ListenerIds?: string[];
 }
 
@@ -1759,9 +1759,9 @@ declare interface DeleteLoadBalancerListenersResponse {
 }
 
 declare interface DeleteLoadBalancerRequest {
-  /** 要删除的负载均衡实例 ID数组，数组大小最大支持20。 */
+  /** 要删除的负载均衡实例 ID 数组，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取数组大小最大支持20。 */
   LoadBalancerIds: string[];
-  /** 是否强制删除clb。为true表示强制删除，为false表示不是强制删除，需要做拦截校验。 */
+  /** 是否强制删除clb。True表示强制删除，False表示不是强制删除，需要做拦截校验。默认为 False */
   ForceDelete?: boolean;
 }
 
@@ -1799,17 +1799,17 @@ declare interface DeleteRewriteResponse {
 }
 
 declare interface DeleteRuleRequest {
-  /** 负载均衡实例ID。 */
+  /** 负载均衡实例ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口查询。 */
   LoadBalancerId: string;
-  /** 负载均衡监听器ID。 */
+  /** 负载均衡监听器ID，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。 */
   ListenerId: string;
-  /** 要删除的转发规则的ID组成的数组。 */
+  /** 要删除的转发规则的ID组成的数组，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。 */
   LocationIds?: string[];
-  /** 要删除的转发规则的域名，如果是多域名，可以指定多域名列表中的任意一个。 */
+  /** 要删除的转发规则的域名，如果是多域名，可以指定多域名列表中的任意一个，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。 */
   Domain?: string;
-  /** 要删除的转发规则的转发路径。 */
+  /** 要删除的转发规则的转发路径，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。 */
   Url?: string;
-  /** 监听器下必须配置一个默认域名，当需要删除默认域名时，可以指定另一个域名作为新的默认域名，如果新的默认域名是多域名，可以指定多域名列表中的任意一个。 */
+  /** 监听器下必须配置一个默认域名，当需要删除默认域名时，可以指定另一个域名作为新的默认域名，如果新的默认域名是多域名，可以指定多域名列表中的任意一个，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。 */
   NewDefaultServerDomain?: string;
 }
 
@@ -2123,13 +2123,13 @@ declare interface DescribeLBListenersResponse {
 }
 
 declare interface DescribeListenersRequest {
-  /** 负载均衡实例 ID。 */
+  /** 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/api/214/30685) 接口获取。 */
   LoadBalancerId: string;
-  /** 要查询的负载均衡监听器 ID 数组，最大为100个。 */
+  /** 要查询的负载均衡监听器 ID 数组，最大为100个，可以通过 [DescribeListeners](https://cloud.tencent.com/document/api/214/30686) 接口获取。 */
   ListenerIds?: string[];
   /** 要查询的监听器协议类型，取值 TCP | UDP | HTTP | HTTPS | TCP_SSL | QUIC。 */
   Protocol?: string;
-  /** 要查询的监听器的端口。 */
+  /** 要查询的监听器的端口，端口范围：1-65535 */
   Port?: number;
 }
 
@@ -2191,7 +2191,7 @@ declare interface DescribeLoadBalancersDetailRequest {
   Fields?: string[];
   /** 当Fields包含TargetId、TargetAddress、TargetPort、TargetWeight、ListenerId、Protocol、Port、LocationId、Domain、Url等Fields时，必选选择导出目标组的Target或者非目标组Target，取值范围NODE、GROUP。 */
   TargetType?: string;
-  /** 查询负载均衡详细信息列表条件，详细的过滤条件如下： loadbalancer-id - String - 是否必填：否 - （过滤条件）按照 负载均衡ID 过滤，如："lb-12345678"。 project-id - String - 是否必填：否 - （过滤条件）按照 项目ID 过滤，如："0","123"。 network - String - 是否必填：否 - （过滤条件）按照 负载均衡网络类型 过滤，如："Public","Private"。 vip - String - 是否必填：否 - （过滤条件）按照 负载均衡Vip 过滤，如："1.1.1.1","2204::22:3"。 target-ip - String - 是否必填：否 - （过滤条件）按照 后端目标内网Ip 过滤，如："1.1.1.1","2203::214:4"。 vpcid - String - 是否必填：否 - （过滤条件）按照 负载均衡所属vpcId 过滤，如："vpc-12345678"。 zone - String - 是否必填：否 - （过滤条件）按照 负载均衡所属的可用区 过滤，如："ap-guangzhou-1"。 tag-key - String - 是否必填：否 - （过滤条件）按照 负载均衡标签的标签键 过滤，如："name"。 tag:* - String - 是否必填：否 - （过滤条件）按照 负载均衡的标签 过滤，':' 后面跟的是标签键。如：过滤标签键name，标签值zhangsan,lisi，{"Name": "tag:name","Values": ["zhangsan", "lisi"]}。 fuzzy-search - String - 是否必填：否 - （过滤条件）按照 负载均衡Vip，负载均衡名称 模糊搜索，如："1.1"。 */
+  /** 查询负载均衡详细信息列表条件，详细的过滤条件如下：- loadbalancer-id按照【负载均衡ID】进行过滤。例如：lb-rbw5skde。类型：String必选：否获取方式：[DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459)- project-id按照【项目ID】进行过滤。例如： "0"、"123"。类型：String必选：否获取方式：[DescribeProject](https://cloud.tencent.com/document/api/651/78725)- network按照【负载均衡网络类型】进行过滤。例如：Public。类型：String必选：否可选值：Private（内网）、Public（公网）- vip按照【负载均衡 VIP】进行过滤。例如："1.1.1.1","2204::22:3"。类型：String必选：否- vpcid按照【负载均衡所属 VPCID】进行过滤。例如："vpc-12345678"。类型：String必选：否获取方式：[DescribeZones](https://cloud.tencent.com/document/product/213/15707)- target-ip按照【后端目标内网 IP】进行过滤。例如："1.1.1.1","2203::214:4"。类型：String必选：否- zone按照【负载均衡所属的可用区】进行过滤。例如："ap-guangzhou-1"。类型：String必选：否获取方式：[DescribeZones](https://cloud.tencent.com/document/product/213/15707)- tag-key按照【负载均衡标签的标签键】进行过滤，例如："name"。类型：String必选：否获取方式：[DescribeTags](https://cloud.tencent.com/document/api/651/35316)- tag:*按照【负载均衡的标签】进行过滤，':' 后面跟的是标签键。如过滤标签键name，标签值zhangsan,lisi，{"Name": "tag:name","Values": ["zhangsan", "lisi"]}。类型：String必选：否获取方式：[DescribeTagKeys](https://cloud.tencent.com/document/api/651/35318)- fuzzy-search按照【负载均衡VIP，负载均衡名称】模糊搜索，例如："1.1"。类型：String必选：否 */
   Filters?: Filter[];
 }
 
@@ -2231,17 +2231,17 @@ declare interface DescribeLoadBalancersRequest {
   OrderType?: number;
   /** 模糊搜索字段，模糊匹配负载均衡实例的名称、域名、负载均衡实例的 VIP 地址，负载均衡实例ID。 */
   SearchKey?: string;
-  /** 负载均衡实例所属的项目 ID，可以通过[DescribeProject](https://cloud.tencent.com/document/api/651/78725) 接口获取，不传默认所有项目。 */
+  /** 负载均衡实例所属的项目 ID，可以通过[DescribeProject](https://cloud.tencent.com/document/api/651/78725)接口获取，不传默认所有项目。 */
   ProjectId?: number;
   /** 负载均衡是否绑定后端服务，0：没有绑定后端服务，1：绑定后端服务，-1：查询全部。 */
   WithRs?: number;
-  /** 负载均衡实例所属私有网络唯一ID，如 vpc-bhqkbhdx，查找基础网络类型的负载均衡可传入'0'。 */
+  /** 负载均衡实例所属私有网络唯一ID，如 vpc-bhqkbhdx，可以通过[DescribeVpcs](https://cloud.tencent.com/document/api/215/15778)接口获取。查找基础网络类型的负载均衡可传入'0'。 */
   VpcId?: string;
-  /** 安全组ID，如 sg-m1cc****。 */
+  /** 安全组ID，如 sg-m1cc****，可以通过接口[DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808)获取。 */
   SecurityGroup?: string;
   /** 主可用区ID，如 ："100001" （对应的是广州一区）。可通过[DescribeZones](https://cloud.tencent.com/document/product/213/15707)获取可用区列表。 */
   MasterZone?: string;
-  /** 每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。`Filter.Name`和`Filter.Values`皆为必填项。详细的过滤条件如下：- charge-type按照【实例计费模式】进行过滤。实例计费模式例如：PREPAID。类型：String必选：否可选项：PREPAID(预付费)、POSTPAID_BY_HOUR(后付费)- internet-charge-type按照【网络计费模式】进行过滤。网络计费模式例如：BANDWIDTH_PREPAID。类型：String必选：否可选项：BANDWIDTH_PREPAID(预付费按带宽结算)、 TRAFFIC_POSTPAID_BY_HOUR(流量按小时后付费)、BANDWIDTH_POSTPAID_BY_HOUR(带宽按小时后付费)、BANDWIDTH_PACKAGE(带宽包用户)- master-zone-id按照【CLB主可用区ID】进行过滤。例如：100001（对应的是广州一区）。类型：String必选：否获取方式：[DescribeZones](https://cloud.tencent.com/document/product/213/15707)- tag-key按照【CLB 标签的键】进行过滤，例如：tag-key。类型：String必选：否- tag:tag-key按照【CLB标签键值】进行过滤，例如：tag-test。类型：String必选：否- function-name按照【后端绑定SCF云函数的函数名称】进行过滤，例如：helloworld-1744958255。类型：String必选：否获取方式：[ListFunctions](https://cloud.tencent.com/document/api/583/18582)- vip-isp按照【CLB VIP的运营商类型】进行过滤，例如：BGP。类型：String必选：否公网类型可选项：BGP(多线)、CMCC(中国移动)、CTCC(中国电信)、CUCC(中国联通)内网类型可选项：INTERNAL(内网)- sla-type按照【CLB 的性能容量型规格】进行过滤，例如：clb.c4.xlarge。类型：String必选：否可选项：clb.c2.medium(标准型)、clb.c3.small(高阶型1)、clb.c3.medium(高阶型2)、clb.c4.small(超强型1)、clb.c4.medium(超强型2)、clb.c4.large(超强型3)、clb.c4.xlarge(超强型4)具体规格参数参考：- exclusive按照【独占实例】进行过滤。例如：1，代表筛选独占型实例。类型：String必选：否可选项：0、1 */
+  /** 每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。`Filter.Name`和`Filter.Values`皆为必填项。详细的过滤条件如下：- charge-type按照【实例计费模式】进行过滤。实例计费模式例如：PREPAID。类型：String必选：否可选项：PREPAID(预付费)、POSTPAID_BY_HOUR(后付费)- internet-charge-type按照【网络计费模式】进行过滤。网络计费模式例如：BANDWIDTH_PREPAID。类型：String必选：否可选项：BANDWIDTH_PREPAID(预付费按带宽结算)、 TRAFFIC_POSTPAID_BY_HOUR(流量按小时后付费)、BANDWIDTH_POSTPAID_BY_HOUR(带宽按小时后付费)、BANDWIDTH_PACKAGE(带宽包用户)- master-zone-id按照【CLB主可用区ID】进行过滤。例如：100001（对应的是广州一区）。类型：String必选：否获取方式：[DescribeZones](https://cloud.tencent.com/document/product/213/15707)- tag-key按照【CLB 标签的键】进行过滤，例如：tag-key。类型：String必选：否获取方式：[DescribeTags](https://cloud.tencent.com/document/api/651/35316)- tag:tag-key按照【CLB标签键值】进行过滤，例如：tag-test。类型：String必选：否获取方式：[DescribeTagKeys](https://cloud.tencent.com/document/api/651/35318)- function-name按照【后端绑定SCF云函数的函数名称】进行过滤，例如：helloworld-1744958255。类型：String必选：否获取方式：[ListFunctions](https://cloud.tencent.com/document/api/583/18582)- vip-isp按照【CLB VIP的运营商类型】进行过滤，例如：BGP。类型：String必选：否公网类型可选项：BGP(多线)、CMCC(中国移动)、CTCC(中国电信)、CUCC(中国联通)内网类型可选项：INTERNAL(内网)- sla-type按照【CLB 的性能容量型规格】进行过滤，例如：clb.c4.xlarge。类型：String必选：否可选项：clb.c2.medium(标准型)、clb.c3.small(高阶型1)、clb.c3.medium(高阶型2)、clb.c4.small(超强型1)、clb.c4.medium(超强型2)、clb.c4.large(超强型3)、clb.c4.xlarge(超强型4)具体规格参数参考：- exclusive按照【独占实例】进行过滤。例如：1，代表筛选独占型实例。类型：String必选：否可选项：0、1 */
   Filters?: Filter[];
   /** 选择返回的扩充字段，不指定时，扩充字段默认不返回。详细支持的扩充字段如下： TargetCount：绑定的后端服务数量 */
   AdditionalFields?: string[];
@@ -2569,21 +2569,21 @@ declare interface ModifyCustomizedConfigResponse {
 }
 
 declare interface ModifyDomainAttributesRequest {
-  /** 负载均衡实例ID。 */
+  /** 负载均衡实例ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口查询。 */
   LoadBalancerId: string;
-  /** 负载均衡监听器ID。 */
+  /** 负载均衡监听器ID，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。 */
   ListenerId: string;
-  /** 域名（必须是已经创建的转发规则下的域名），如果是多域名，可以指定多域名列表中的任意一个。 */
+  /** 域名（必须是已经创建的转发规则下的域名），如果是多域名，可以指定多域名列表中的任意一个，可以通过[DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。 */
   Domain: string;
   /** 要修改的新域名。NewDomain和NewDomains只能传一个。 */
   NewDomain?: string;
   /** 域名相关的证书信息，注意，仅对启用SNI的监听器适用，不可和MultiCertInfo 同时传入。 */
   Certificate?: CertificateInput;
-  /** 是否开启Http2，注意，只有HTTPS域名才能开启Http2。 */
+  /** 是否开启HTTP2，注意，只有HTTPS域名才能开启HTTP2。True: 开启HTTP2，Fasle: 不开启HTTP2。 */
   Http2?: boolean;
-  /** 是否设为默认域名，注意，一个监听器下只能设置一个默认域名。 */
+  /** 是否设为默认域名，注意，一个监听器下只能设置一个默认域名。True: 设为默认域名，Fasle: 不设置为默认域名。 */
   DefaultServer?: boolean;
-  /** 是否开启Quic，注意，只有HTTPS域名才能开启Quic */
+  /** 是否开启 QUIC，注意，只有 HTTPS 域名才能开启 QUIC。True: 开启 QUIC，False: 不开启QUIC。 */
   Quic?: boolean;
   /** 监听器下必须配置一个默认域名，若要关闭原默认域名，必须同时指定另一个域名作为新的默认域名，如果新的默认域名是多域名，可以指定多域名列表中的任意一个。 */
   NewDefaultServerDomain?: string;
@@ -2599,11 +2599,11 @@ declare interface ModifyDomainAttributesResponse {
 }
 
 declare interface ModifyDomainRequest {
-  /** 负载均衡实例 ID。 */
+  /** 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口查询。 */
   LoadBalancerId: string;
-  /** 负载均衡监听器 ID。 */
+  /** 负载均衡监听器 ID， 可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。 */
   ListenerId: string;
-  /** 监听器下的某个旧域名。 */
+  /** 监听器下的某个旧域名， 可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 查询。 */
   Domain: string;
   /** 新域名，	长度限制为：1-120。有三种使用格式：非正则表达式格式，通配符格式，正则表达式格式。非正则表达式格式只能使用字母、数字、‘-’、‘.’。通配符格式的使用 ‘*’ 只能在开头或者结尾。正则表达式以'~'开头。 */
   NewDomain: string;
@@ -2635,11 +2635,11 @@ declare interface ModifyFunctionTargetsResponse {
 }
 
 declare interface ModifyListenerRequest {
-  /** 负载均衡实例ID。 */
+  /** 负载均衡实例ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口查询。 */
   LoadBalancerId: string;
-  /** 负载均衡监听器ID。 */
+  /** 负载均衡监听器ID，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。 */
   ListenerId: string;
-  /** 新的监听器名称。 */
+  /** 新的监听器名称，最大长度255。 */
   ListenerName?: string;
   /** 会话保持时间，单位：秒。可选值：30~3600，默认 0，表示不开启。此参数仅适用于TCP/UDP监听器。 */
   SessionExpireTime?: number;
@@ -2647,28 +2647,30 @@ declare interface ModifyListenerRequest {
   HealthCheck?: HealthCheck;
   /** 证书相关信息，此参数仅适用于HTTPS/TCP_SSL/QUIC监听器；此参数和MultiCertInfo不能同时传入。 */
   Certificate?: CertificateInput;
-  /** 监听器转发的方式。可选值：WRR、LEAST_CONN分别表示按权重轮询、最小连接数， 默认为 WRR。使用场景：适用于TCP/UDP/TCP_SSL/QUIC监听器。七层监听器的均衡方式应在转发规则中修改。 */
+  /** 监听器转发的方式。可选值：WRR（按权重轮询）、LEAST_CONN（按最小连接数）、IP_HASH（按 IP 地址哈希）分别表示按权重轮询、最小连接数， 默认为 WRR。使用场景：适用于TCP/UDP/TCP_SSL/QUIC监听器。七层监听器的均衡方式应在转发规则中修改。 */
   Scheduler?: string;
   /** 是否开启SNI特性，此参数仅适用于HTTPS监听器。默认0，表示不开启，1表示开启。注意：未开启SNI的监听器可以开启SNI；已开启SNI的监听器不能关闭SNI。 */
   SniSwitch?: number;
   /** 后端目标类型，NODE表示绑定普通节点，TARGETGROUP表示绑定目标组。 */
   TargetType?: string;
-  /** 是否开启长连接，此参数仅适用于HTTP/HTTPS监听器。默认值0表示不开启，1表示开启。 */
+  /** 是否开启长连接，此参数仅适用于HTTP/HTTPS监听器。默认值0表示不开启，1表示开启。若后端服务对连接数上限有限制，则建议谨慎开启。此功能目前处于内测中，如需使用，请提交 [内测申请](https://cloud.tencent.com/apply/p/tsodp6qm21)。 */
   KeepaliveEnable?: number;
-  /** 解绑后端目标时，是否发RST给客户端，此参数仅适用于TCP监听器。 */
+  /** 解绑后端目标时，是否发RST给客户端，此参数仅适用于TCP监听器。True表示发送 RST 给客户端，False表示不发送 RST 给客户端。 */
   DeregisterTargetRst?: boolean;
-  /** 会话保持类型。NORMAL表示默认会话保持类型。QUIC_CID表示根据Quic Connection ID做会话保持。QUIC_CID只支持UDP协议。使用场景：适用于TCP/UDP/TCP_SSL/QUIC监听器。 */
+  /** 会话保持类型。NORMAL表示默认会话保持类型。QUIC_CID表示根据Quic Connection ID做会话保持。QUIC_CID只支持UDP协议。使用场景：适用于TCP/UDP/TCP_SSL/QUIC监听器。默认为 NORMAL。 */
   SessionType?: string;
   /** 证书信息，支持同时传入不同算法类型的多本服务端证书；此参数仅适用于未开启SNI特性的HTTPS监听器。此参数和Certificate不能同时传入。 */
   MultiCertInfo?: MultiCertInfo;
-  /** 监听器粒度并发连接数上限，当前仅性能容量型实例且仅TCP/UDP/TCP_SSL/QUIC监听器支持。取值范围：1-实例规格并发连接上限，其中-1表示关闭监听器粒度并发连接数限速。基础网络实例不支持该参数。 */
+  /** 监听器粒度并发连接数上限，当前仅性能容量型实例且仅TCP/UDP/TCP_SSL/QUIC监听器支持。取值范围：1-实例规格并发连接上限，其中-1表示关闭监听器粒度并发连接数限速。基础网络实例不支持该参数。默认为 -1，表示不限速。 */
   MaxConn?: number;
-  /** 监听器粒度新建连接数上限，当前仅性能容量型实例且仅TCP/UDP/TCP_SSL/QUIC监听器支持。取值范围：1-实例规格新建连接上限，其中-1表示关闭监听器粒度新建连接数限速。基础网络实例不支持该参数。 */
+  /** 监听器粒度新建连接数上限，当前仅性能容量型实例且仅TCP/UDP/TCP_SSL/QUIC监听器支持。取值范围：1-实例规格新建连接上限，其中-1表示关闭监听器粒度新建连接数限速。基础网络实例不支持该参数。默认为 -1 表示不限速。 */
   MaxCps?: number;
-  /** 空闲连接超时时间，此参数仅适用于TCP监听器，单位：秒。默认值：900，取值范围：共享型实例和独占型实例支持：300～900，性能容量型实例支持：300~2000。如需设置超过2000s，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category),最大可设置到3600s。 */
+  /** 空闲连接超时时间，此参数仅适用于TCP监听器，单位：秒。默认值：900，取值范围：共享型实例和独占型实例支持：300～900，性能容量型实例支持：300~1980。如需设置超过2000s，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category),最大可设置到3600s。 */
   IdleConnectTimeout?: number;
-  /** 是否开启SNAT。 */
+  /** 是否开启SNAT， True 表示开启 SNAT，False 表示不开启 SNAT。 */
   SnatEnable?: boolean;
+  /** 数据压缩模式 */
+  DataCompressMode?: string;
 }
 
 declare interface ModifyListenerResponse {
@@ -2677,21 +2679,21 @@ declare interface ModifyListenerResponse {
 }
 
 declare interface ModifyLoadBalancerAttributesRequest {
-  /** 负载均衡的唯一ID */
+  /** 负载均衡的唯一ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。 */
   LoadBalancerId: string;
-  /** 负载均衡实例名称 */
+  /** 负载均衡实例名称，规则：1-60 个英文、汉字、数字、连接线“-”或下划线“_”。 */
   LoadBalancerName?: string;
   /** 设置负载均衡跨地域绑定1.0的后端服务信息 */
   TargetRegionInfo?: TargetRegionInfo;
   /** 网络计费相关参数 */
   InternetChargeInfo?: InternetAccessible;
-  /** Target是否放通来自CLB的流量。开启放通（true）：只验证CLB上的安全组；不开启放通（false）：需同时验证CLB和后端实例上的安全组。 */
+  /** Target是否放通来自CLB的流量。开启放通（true）：只验证CLB上的安全组；不开启放通（false）：需同时验证CLB和后端实例上的安全组。不填则不修改。 */
   LoadBalancerPassToTarget?: boolean;
-  /** 是否开启跨地域绑定2.0功能 */
+  /** 是否开启跨地域绑定2.0功能。不填则不修改。 */
   SnatPro?: boolean;
-  /** 是否开启删除保护 */
+  /** 是否开启删除保护，不填则不修改。 */
   DeleteProtect?: boolean;
-  /** 将负载均衡二级域名由mycloud.com改为tencentclb.com，子域名也会变换。修改后mycloud.com域名将失效。 */
+  /** 将负载均衡二级域名由mycloud.com改为tencentclb.com，子域名也会变换，修改后mycloud.com域名将失效。不填则不修改。 */
   ModifyClassicDomain?: boolean;
 }
 
@@ -2739,11 +2741,11 @@ declare interface ModifyLoadBalancersProjectResponse {
 }
 
 declare interface ModifyRuleRequest {
-  /** 负载均衡实例 ID。 */
+  /** 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。 */
   LoadBalancerId: string;
-  /** 负载均衡监听器 ID。 */
+  /** 负载均衡监听器 ID，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口获取。 */
   ListenerId: string;
-  /** 要修改的转发规则的 ID。 */
+  /** 要修改的转发规则的 ID， 可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口获取。 */
   LocationId: string;
   /** 转发规则的新的转发路径，如不需修改Url，则不需提供此参数。 */
   Url?: string;
@@ -2751,7 +2753,7 @@ declare interface ModifyRuleRequest {
   HealthCheck?: HealthCheck;
   /** 规则的请求转发方式，可选值：WRR、LEAST_CONN、IP_HASH分别表示按权重轮询、最小连接数、按IP哈希， 默认为 WRR。 */
   Scheduler?: string;
-  /** 会话保持时间。取值范围0或30-86400（单位：秒）。 */
+  /** 会话保持时间。取值范围0或30-86400（单位：秒）。默认为0。 */
   SessionExpireTime?: number;
   /** 负载均衡实例与后端服务之间的转发协议，默认HTTP，可取值：HTTP、HTTPS、GRPC。仅HTTPS监听器该参数有效。 */
   ForwardType?: string;

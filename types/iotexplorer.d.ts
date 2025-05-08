@@ -120,10 +120,14 @@ declare interface CloudStorageAIServiceTask {
   ChannelId?: number;
   /** 云存 AI 服务类型。可能取值：- `RealtimeObjectDetect`：目标检测- `Highlight`：视频浓缩- `VideoToText`：视频语义理解 */
   ServiceType?: string;
-  /** 对应云存视频的起始时间 */
+  /** 对应云存视频的起始时间（秒级 UNIX 时间戳） */
   StartTime?: number;
-  /** 对应云存视频的结束时间 */
+  /** 对应云存视频的起始时间（毫秒级 UNIX 时间戳） */
+  StartTimeMs?: number;
+  /** 对应云存视频的结束时间（秒级 UNIX 时间戳） */
   EndTime?: number;
+  /** 对应云存视频的结束时间（毫秒级 UNIX 时间戳） */
+  EndTimeMs?: number;
   /** 任务状态（1：失败；2：成功但结果为空；3：成功且结果非空；4：执行中） */
   Status?: number;
   /** 任务结果 */
@@ -1024,6 +1028,10 @@ declare interface TargetInfo {
   EventId?: string;
   /** 视频内容摘要 */
   Summary?: string;
+  /** 通道ID */
+  ChannelId?: number;
+  /** 缩略图路径 */
+  Thumbnail?: string;
 }
 
 /** 缩略图信息 */
@@ -3383,6 +3391,8 @@ declare interface InvokeAISearchServiceRequest {
   Query: string;
   /** 搜索结果总结的语言类型，支持的类型有：en-US、zh-CN、id-ID、th-TH */
   SummaryLang?: string;
+  /** 通道ID */
+  ChannelId?: number;
 }
 
 declare interface InvokeAISearchServiceResponse {
@@ -3390,6 +3400,8 @@ declare interface InvokeAISearchServiceResponse {
   Summary?: string;
   /** 视频结果集 */
   Targets?: TargetInfo[];
+  /** 视频回放URL */
+  VideoURL?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

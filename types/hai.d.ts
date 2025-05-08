@@ -206,6 +206,22 @@ declare interface SystemDisk {
   DiskName?: string;
 }
 
+declare interface CreateApplicationRequest {
+  /** 需要制作自定义应用的HAI实例ID */
+  InstanceId: string;
+  /** 自定义应用的应用名称 */
+  ApplicationName: string;
+  /** 自定义应用的描述 */
+  ApplicationDescription?: string;
+}
+
+declare interface CreateApplicationResponse {
+  /** HAI自定义应用ID */
+  ApplicationId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateMuskPromptRequest {
   /** workgroup id */
   WorkgroupId: string;
@@ -435,6 +451,8 @@ declare interface TerminateInstancesResponse {
 /** {@link Hai 高性能应用服务} */
 declare interface Hai {
   (): Versions;
+  /** 创建自定义应用 {@link CreateApplicationRequest} {@link CreateApplicationResponse} */
+  CreateApplication(data: CreateApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationResponse>;
   /** 创建Prompt请求任务 {@link CreateMuskPromptRequest} {@link CreateMuskPromptResponse} */
   CreateMuskPrompt(data: CreateMuskPromptRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMuskPromptResponse>;
   /** 查询应用 {@link DescribeApplicationsRequest} {@link DescribeApplicationsResponse} */

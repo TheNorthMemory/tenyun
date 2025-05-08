@@ -53,25 +53,25 @@ declare interface GatewayLoadBalancer {
 /** 描述了单项的价格信息 */
 declare interface ItemPrice {
   /** 后付费单价，单位：元。 */
-  UnitPrice?: number | null;
+  UnitPrice?: number;
   /** 后付费计价单元，可取值范围： HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：实例按小时后付费（POSTPAID_BY_HOUR）。 */
-  ChargeUnit?: string | null;
+  ChargeUnit?: string;
   /** 预支费用的原价，单位：元。 */
   OriginalPrice?: number | null;
   /** 预支费用的折扣价，单位：元。 */
   DiscountPrice?: number | null;
   /** 后付费的折扣单价，单位:元。 */
-  UnitPriceDiscount?: number | null;
+  UnitPriceDiscount?: number;
   /** 折扣，如20.0代表2折。 */
-  Discount?: number | null;
+  Discount?: number;
 }
 
 /** 表示网关负载均衡的价格 */
 declare interface Price {
   /** 描述了实例价格。 */
-  InstancePrice?: ItemPrice | null;
+  InstancePrice?: ItemPrice;
   /** 描述了GLCU的价格。 */
-  LcuPrice?: ItemPrice | null;
+  LcuPrice?: ItemPrice;
 }
 
 /** 网关负载均衡的标签信息 */
@@ -103,17 +103,17 @@ declare interface TargetGroupBackend {
   /** 后端服务的转发权重，取值为0或16 */
   Weight?: number;
   /** 后端服务的外网 IP */
-  PublicIpAddresses?: string[] | null;
+  PublicIpAddresses?: string[];
   /** 后端服务的内网 IP */
-  PrivateIpAddresses?: string[] | null;
+  PrivateIpAddresses?: string[];
   /** 后端服务的实例名称 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 后端服务被绑定的时间 */
-  RegisteredTime?: string | null;
+  RegisteredTime?: string;
   /** 弹性网卡唯一ID */
-  EniId?: string | null;
+  EniId?: string;
   /** 后端服务的可用区ID */
-  ZoneId?: number | null;
+  ZoneId?: number;
 }
 
 /** 目标组健康检查详情 */
@@ -211,9 +211,9 @@ declare interface CreateGatewayLoadBalancerRequest {
 
 declare interface CreateGatewayLoadBalancerResponse {
   /** 由网关负载均衡实例唯一 ID 组成的数组。存在某些场景，如创建出现延迟时，此字段可能返回为空；此时可以根据接口返回的RequestId或DealName参数，通过[DescribeTaskStatus](https://cloud.tencent.com/document/api/1782/111700)接口查询创建的资源ID。 */
-  LoadBalancerIds?: string[] | null;
+  LoadBalancerIds?: string[];
   /** 订单号。 */
-  DealName?: string | null;
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

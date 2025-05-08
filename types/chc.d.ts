@@ -418,6 +418,8 @@ declare interface OrderStep {
   StepName?: string;
   /** 处理人 */
   OwnerName?: string;
+  /** 处理人手机号 */
+  OwnerPhone?: string;
   /** 完成时间 */
   FinishTime?: string;
   /** 此步骤状态 */
@@ -967,7 +969,7 @@ declare interface CreateReceivingWorkOrderRequest {
   ExpressInfo?: ExpressDelivery;
   /** 备注 */
   Remark?: string;
-  /** 服务器收货列表 */
+  /** 服务器收货列表。最大值：200 */
   ServerDeviceList?: ServerReceivingInfo[];
   /** 网络设备收货列表 */
   NetDeviceList?: NetReceivingInfo[];
@@ -975,6 +977,16 @@ declare interface CreateReceivingWorkOrderRequest {
   WireDeviceList?: WireReceivingInfo[];
   /** 其他设备收货列表 */
   OtherDeviceList?: OtherDevReceivingInfo[];
+  /** 收货后自动上架。此参数为true时，后台会自动提设备上架单 */
+  WithRackOn?: boolean;
+  /** 设备上架信息。当WithRackOn为true此参数必传，且sn需要和收货的列表一致 */
+  DeviceRackOnList?: DeviceRackOn[];
+  /** 上架人员 1.自行解决 2.由腾讯IDC负责 */
+  StuffOption?: string;
+  /** 自行解决信息。当StuffOption为1时，此参数必填 */
+  SelfOperationInfo?: SelfOperation;
+  /** 上架后自动开电。此参数为true时，后台会自动提设备开电单 */
+  WithPowerOn?: boolean;
 }
 
 declare interface CreateReceivingWorkOrderResponse {

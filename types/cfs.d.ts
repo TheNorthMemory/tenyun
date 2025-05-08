@@ -1026,6 +1026,8 @@ declare interface SetUserQuotaRequest {
 }
 
 declare interface SetUserQuotaResponse {
+  /** UID/GID信息 */
+  UserId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

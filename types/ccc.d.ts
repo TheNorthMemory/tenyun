@@ -50,6 +50,8 @@ declare interface AILatencyDetail {
   TTSLatency?: number;
   /** llm时延（毫秒） */
   LLMLatency?: number;
+  /** llm首token时延(毫秒) */
+  LLMFirstTokenLatency?: number;
   /** 端到端时延（毫秒） */
   ETELatency?: number;
 }

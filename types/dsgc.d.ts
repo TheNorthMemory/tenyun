@@ -1790,6 +1790,8 @@ declare interface ScanTaskResult {
   ResultDescription?: string;
   /** 结果建议 */
   Suggestion?: string;
+  /** 扫描进度 */
+  Progress?: number;
 }
 
 /** 建议使用的安全产品 */

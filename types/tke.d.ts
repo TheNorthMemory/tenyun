@@ -985,14 +985,14 @@ declare namespace V20180525 {
 
   /** cuDNN的版本信息 */
   interface CUDNN {
-    /** cuDNN的版本 */
-    Version: string;
     /** cuDNN的名字 */
     Name: string;
-    /** cuDNN的Doc名字 */
-    DocName?: string;
+    /** cuDNN的版本 */
+    Version: string;
     /** cuDNN的Dev名字 */
     DevName?: string;
+    /** cuDNN的Doc名字 */
+    DocName?: string;
   }
 
   /** cloudrun安全特性能力 */
@@ -1503,10 +1503,10 @@ declare namespace V20180525 {
 
   /** GPU驱动和CUDA的版本信息 */
   interface DriverVersion {
-    /** GPU驱动或者CUDA的版本 */
-    Version: string;
     /** GPU驱动或者CUDA的名字 */
     Name: string;
+    /** GPU驱动或者CUDA的版本 */
+    Version: string;
   }
 
   /** ECM增强服务 */
@@ -1879,16 +1879,16 @@ declare namespace V20180525 {
 
   /** GPU相关的参数，包括驱动版本，CUDA版本，cuDNN版本以及是否开启MIG */
   interface GPUArgs {
-    /** 是否启用MIG特性 */
-    MIGEnable?: boolean;
-    /** GPU驱动版本信息 */
-    Driver?: DriverVersion;
     /** CUDA版本信息 */
     CUDA?: DriverVersion;
     /** cuDNN版本信息 */
     CUDNN?: CUDNN;
     /** 自定义GPU驱动信息 */
     CustomDriver?: CustomDriver;
+    /** GPU驱动版本信息 */
+    Driver?: DriverVersion;
+    /** 是否启用MIG特性 */
+    MIGEnable?: boolean;
   }
 
   /** Probe中的HttpGet */

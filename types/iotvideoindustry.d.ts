@@ -847,7 +847,7 @@ declare interface DeleteLiveRecordPlanRequest {
 
 declare interface DeleteLiveRecordPlanResponse {
   /** 删除状态描述 */
-  Status: string;
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -936,6 +936,8 @@ declare interface DeleteWarningRequest {
 }
 
 declare interface DeleteWarningResponse {
+  /** 操作个数 */
+  Cnt?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1043,7 +1045,7 @@ declare interface DescribeChannelLocalRecordURLRequest {
 
 declare interface DescribeChannelLocalRecordURLResponse {
   /** 结果 */
-  Data: DescribeRecordStreamData;
+  Data?: DescribeRecordStreamData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1111,15 +1113,15 @@ declare interface DescribeCurrentDeviceDataRequest {
 
 declare interface DescribeCurrentDeviceDataResponse {
   /** 通道数 */
-  Channels: number;
+  Channels?: number;
   /** 设备数 */
-  Devices: number;
+  Devices?: number;
   /** 在线通道数 */
-  OnlineChannels: number;
+  OnlineChannels?: number;
   /** 在线设备数 */
-  OnlineDevices: number;
+  OnlineDevices?: number;
   /** 正在录制通道数 */
-  RecordingChannels: number;
+  RecordingChannels?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1193,7 +1195,7 @@ declare interface DescribeDeviceMonitorDataRequest {
 
 declare interface DescribeDeviceMonitorDataResponse {
   /** 查询设备统计monitor信息列表 */
-  Data: DeviceMonitorValue[];
+  Data?: DeviceMonitorValue[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1217,7 +1219,7 @@ declare interface DescribeDeviceRequest {
 
 declare interface DescribeDeviceResponse {
   /** 设备详情信息 */
-  Device: AllDeviceInfo;
+  Device?: AllDeviceInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1371,15 +1373,15 @@ declare interface DescribeLiveRecordPlanByIdRequest {
 
 declare interface DescribeLiveRecordPlanByIdResponse {
   /** 计划名称 */
-  PlanName: string;
+  PlanName?: string;
   /** 模板ID */
-  TemplateId: string;
+  TemplateId?: string;
   /** 模板名称 */
-  TemplateName: string;
+  TemplateName?: string;
   /** 存储时间 */
-  RecordStorageTime: number;
+  RecordStorageTime?: number;
   /** 计划类型 */
-  PlanType: number;
+  PlanType?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1395,9 +1397,9 @@ declare interface DescribeLiveRecordPlanIdsRequest {
 
 declare interface DescribeLiveRecordPlanIdsResponse {
   /** 总个数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 计划数组 */
-  Plans: LiveRecordPlanItem[];
+  Plans?: LiveRecordPlanItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1411,7 +1413,7 @@ declare interface DescribeLiveStreamRequest {
 
 declare interface DescribeLiveStreamResponse {
   /** 拉流地址，只有在推流情况下才有 */
-  Data: StreamAddress | null;
+  Data?: StreamAddress | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1577,7 +1579,7 @@ declare interface DescribeRecordStreamRequest {
 
 declare interface DescribeRecordStreamResponse {
   /** 结果 */
-  Data: DescribeRecordStreamData;
+  Data?: DescribeRecordStreamData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1727,7 +1729,7 @@ declare interface DescribeSubscriptionStatusRequest {
 
 declare interface DescribeSubscriptionStatusResponse {
   /** 设备GB28181报警订阅状态 1：未开启订阅；2：已开启订阅 */
-  AlarmStatus: number;
+  AlarmStatus?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -320,6 +320,12 @@ declare interface ControlDeviceStreamData {
   Rtmp?: string;
 }
 
+/** 查询国标设备地址列表 */
+declare interface DescribeDeviceAddrList {
+  /** 设备地址列表 */
+  RemoteAddrs?: RemoteAddrInfo[];
+}
+
 /** 查询设备通道信息返回结果 */
 declare interface DescribeDeviceChannelData {
   /** 设备 ID */
@@ -936,6 +942,14 @@ declare interface ListTasksData {
   TotalCount?: number;
 }
 
+/** 本地录像下载任务列表 */
+declare interface ListVideoDownloadTaskData {
+  /** 任务列表 */
+  List?: VideoDownloadTask[];
+  /** 任务总数 */
+  TotalCount?: number;
+}
+
 /** AI识别结果在画面中坐标 */
 declare interface Location {
   /** 左上角 X 坐标轴 */
@@ -1144,6 +1158,14 @@ declare interface RecordTimeLine {
   End?: number;
   /** 对应时间片段的播放url */
   HlsUrl?: string;
+}
+
+/** 设备地址返回结果 */
+declare interface RemoteAddrInfo {
+  /** 设备Id */
+  DeviceId?: string;
+  /** IP地址 */
+  Addr?: string;
 }
 
 /** 设置通道禁止播流，有通道Id和使能enable字段 */
@@ -1442,6 +1464,50 @@ declare interface UpdateRecordTemplateData {
   TimeSections?: RecordTemplateTimeSections[];
 }
 
+/** 本地录像下载任务 */
+declare interface VideoDownloadTask {
+  /** 下载任务 ID */
+  DownloadTaskId?: string;
+  /** 通道 ID */
+  ChannelId?: string;
+  /** 通道名称 */
+  ChannelName?: string;
+  /** 通道编码 */
+  ChannelCode?: string;
+  /** 设备名称 */
+  DeviceName?: string;
+  /** 设备编码 */
+  DeviceCode?: string;
+  /** 任务状态（0：未执行；1：执行中；2 任务完成；3：任务失败） */
+  Status?: number;
+  /** 下载录像时间段 */
+  VideoTimeSection?: string;
+  /** 倍速 */
+  Scale?: number;
+  /** 下载时长 */
+  DownloadTime?: number;
+  /** 录像大小 */
+  VideoSize?: number;
+  /** 任务开始时间 */
+  StartTime?: string;
+  /** 任务结束时间 */
+  EndTime?: string;
+  /** 文件下载地址 */
+  FileDownloadUrl?: string;
+  /** 失败原因 */
+  FailedReason?: string;
+  /** 生命周期规则，热存天数 */
+  Expire?: number;
+  /** mp4预览地址 */
+  PreviewUrl?: string;
+}
+
+/** 录像下载任务数据结构 */
+declare interface VideoDownloadTaskData {
+  /** 下载任务ID */
+  DownloadTaskId?: string;
+}
+
 declare interface AddAITaskRequest {
   /** AI 任务名称。仅支持中文、英文、数字、_、-，长度不超过32个字符 */
   Name: string;
@@ -1648,6 +1714,16 @@ declare interface AddUserDeviceResponse {
   RequestId?: string;
 }
 
+declare interface BatchDeleteVideoDownloadTaskRequest {
+  /** 本地录像下载任务 ID 列表 */
+  DownloadTaskIds?: string[];
+}
+
+declare interface BatchDeleteVideoDownloadTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BatchOperateDeviceRequest {
   /** 设备 ID 数组（从获取设备列表接口ListDevices中获取） */
   DeviceIds: string[];
@@ -1774,6 +1850,30 @@ declare interface ControlRecordTimelineResponse {
   RequestId?: string;
 }
 
+declare interface CreateVideoDownloadTaskRequest {
+  /** 通道ID */
+  ChannelId: string;
+  /** 开始时间 */
+  BeginTime: number;
+  /** 结束时间 */
+  EndTime: number;
+  /** 默认1倍速，支持（1,2,4,8）倍速 */
+  Scale?: number;
+  /** 转码后的mp4文件过期时间（支持7,15,30,60,90,180,365） */
+  Expire?: number;
+  /** 下载文件格式，当前仅支持（1：mp4） */
+  FileType?: number;
+  /** 完成策略（0：拉流失败但是录像不完整则认为任务失败，不生成 MP4；1：拉流失败但是录像不完整则认为任务成功，生成 mp4） */
+  CompletionPolicy?: number;
+}
+
+declare interface CreateVideoDownloadTaskResponse {
+  /** 下载任务返回结果 */
+  Data?: VideoDownloadTaskData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAITaskRequest {
   /** AI任务ID */
   TaskId: string;
@@ -1860,6 +1960,16 @@ declare interface DeleteRecordTemplateRequest {
 }
 
 declare interface DeleteRecordTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteTaskRequest {
+  /** 任务ID */
+  TaskId: string;
+}
+
+declare interface DeleteTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1978,6 +2088,18 @@ declare interface DescribeDomainRequest {
 declare interface DescribeDomainResponse {
   /** 返回数据 */
   Data?: DescribeDomainData[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeGBDeviceAddrRequest {
+  /** 设备ID列表 */
+  DeviceIds: string[];
+}
+
+declare interface DescribeGBDeviceAddrResponse {
+  /** 无 */
+  Data?: DescribeDeviceAddrList;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2516,6 +2638,34 @@ declare interface ListTasksResponse {
   RequestId?: string;
 }
 
+declare interface ListVideoDownloadTaskRequest {
+  /** 设备名称，用于模糊搜索 */
+  DeviceName?: string;
+  /** 通道名称，用于模糊搜索 */
+  ChannelName?: string;
+  /** 任务状态（0：准备中，1：执行中，2：已完成，3：失败） */
+  Status?: number;
+  /** 排序规则（仅支持 StartTime，EndTime，倒序为-StartTime，-EndTime） */
+  SortRule?: string;
+  /** 响应是否携带预览地址(0:不携带；1:携带) */
+  WithPreviewUrl?: number;
+  /** 分页页数 */
+  PageNumber?: number;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 下载任务 ID */
+  DownloadTaskId?: string;
+  /** 下载地址过期时间，单位秒，最大为 1 天， 86400秒 */
+  UrlExpires?: number;
+}
+
+declare interface ListVideoDownloadTaskResponse {
+  /** 本地录像下载任务列表 */
+  Data?: ListVideoDownloadTaskData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface PlayRecordRequest {
   /** 通道 ID（从查询通道DescribeDeviceChannel接口中获取） */
   ChannelId: string;
@@ -2787,6 +2937,8 @@ declare interface Iss {
   AddStreamAuth(data: AddStreamAuthRequest, config?: AxiosRequestConfig): AxiosPromise<AddStreamAuthResponse>;
   /** 新增设备 {@link AddUserDeviceRequest} {@link AddUserDeviceResponse} */
   AddUserDevice(data: AddUserDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<AddUserDeviceResponse>;
+  /** 批量删除本地录像下载任务 {@link BatchDeleteVideoDownloadTaskRequest} {@link BatchDeleteVideoDownloadTaskResponse} */
+  BatchDeleteVideoDownloadTask(data?: BatchDeleteVideoDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteVideoDownloadTaskResponse>;
   /** 批量操作设备 {@link BatchOperateDeviceRequest} {@link BatchOperateDeviceResponse} */
   BatchOperateDevice(data: BatchOperateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<BatchOperateDeviceResponse>;
   /** ISAPI 透传异步回调 {@link CallISAPIRequest} {@link CallISAPIResponse} */
@@ -2803,6 +2955,8 @@ declare interface Iss {
   ControlRecord(data: ControlRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ControlRecordResponse>;
   /** 查询本地录像时间轴 {@link ControlRecordTimelineRequest} {@link ControlRecordTimelineResponse} */
   ControlRecordTimeline(data: ControlRecordTimelineRequest, config?: AxiosRequestConfig): AxiosPromise<ControlRecordTimelineResponse>;
+  /** 创建本地录像下载任务 {@link CreateVideoDownloadTaskRequest} {@link CreateVideoDownloadTaskResponse} */
+  CreateVideoDownloadTask(data: CreateVideoDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVideoDownloadTaskResponse>;
   /** 删除AI任务 {@link DeleteAITaskRequest} {@link DeleteAITaskResponse} */
   DeleteAITask(data: DeleteAITaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAITaskResponse>;
   /** 删除域名 {@link DeleteDomainRequest} {@link DeleteDomainResponse} */
@@ -2821,6 +2975,8 @@ declare interface Iss {
   DeleteRecordRetrieveTask(data: DeleteRecordRetrieveTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordRetrieveTaskResponse>;
   /** 删除实时上云模板 {@link DeleteRecordTemplateRequest} {@link DeleteRecordTemplateResponse} */
   DeleteRecordTemplate(data: DeleteRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordTemplateResponse>;
+  /** 删除任务 {@link DeleteTaskRequest} {@link DeleteTaskResponse} */
+  DeleteTask(data: DeleteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskResponse>;
   /** 删除设备 {@link DeleteUserDeviceRequest} {@link DeleteUserDeviceResponse} */
   DeleteUserDevice(data: DeleteUserDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserDeviceResponse>;
   /** 获取AI任务详情 {@link DescribeAITaskRequest} {@link DescribeAITaskResponse} */
@@ -2839,6 +2995,8 @@ declare interface Iss {
   DescribeDomain(data?: DescribeDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainResponse>;
   /** 查询域名可绑定服务节点 {@link DescribeDomainRegionRequest} {@link DescribeDomainRegionResponse} */
   DescribeDomainRegion(data?: DescribeDomainRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainRegionResponse>;
+  /** 查询国标设备公网地址 {@link DescribeGBDeviceAddrRequest} {@link DescribeGBDeviceAddrResponse} */
+  DescribeGBDeviceAddr(data: DescribeGBDeviceAddrRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGBDeviceAddrResponse>;
   /** 获取网关详情 {@link DescribeGatewayRequest} {@link DescribeGatewayResponse} */
   DescribeGateway(data: DescribeGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayResponse>;
   /** 获取网关监控信息 {@link DescribeGatewayMonitorRequest} {@link DescribeGatewayMonitorResponse} */
@@ -2909,6 +3067,8 @@ declare interface Iss {
   ListSubTasks(data: ListSubTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListSubTasksResponse>;
   /** 查询任务列表 {@link ListTasksRequest} {@link ListTasksResponse} */
   ListTasks(data?: ListTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListTasksResponse>;
+  /** 查询本地录像下载任务列表 {@link ListVideoDownloadTaskRequest} {@link ListVideoDownloadTaskResponse} */
+  ListVideoDownloadTask(data?: ListVideoDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ListVideoDownloadTaskResponse>;
   /** 获取本地录像URL地址 {@link PlayRecordRequest} {@link PlayRecordResponse} */
   PlayRecord(data: PlayRecordRequest, config?: AxiosRequestConfig): AxiosPromise<PlayRecordResponse>;
   /** 查询禁播通道列表 {@link QueryForbidPlayChannelListRequest} {@link QueryForbidPlayChannelListResponse} */

@@ -545,6 +545,8 @@ declare interface UploadKnowledgeDocumentSetRequest {
   FileMetaData?: string;
   /** 文件id */
   DocumentSetId?: string;
+  /** 使用 regex 分割文档 */
+  Delimiter?: string;
 }
 
 declare interface UploadKnowledgeDocumentSetResponse {

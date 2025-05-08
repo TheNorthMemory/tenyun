@@ -210,6 +210,14 @@ declare interface CfwNatDnatRule {
   Description: string;
 }
 
+/** 日志分析的列属性 */
+declare interface Column {
+  /** 列的名字 */
+  Name?: string;
+  /** 列的属性 */
+  Type?: string;
+}
+
 /** 通用的列表检索过滤选项 */
 declare interface CommonFilter {
   /** 检索的键值 */
@@ -764,6 +772,54 @@ declare interface IpStatic {
   StatTime?: string;
 }
 
+/** 日志结果信息 */
+declare interface LogInfo {
+  /** 日志时间，单位ms */
+  Time?: number;
+  /** 日志主题ID */
+  TopicId?: string;
+  /** 日志主题名称 */
+  TopicName?: string;
+  /** 日志来源IP */
+  Source?: string;
+  /** 日志文件名称 */
+  FileName?: string;
+  /** 日志上报请求包的ID */
+  PkgId?: string;
+  /** 请求包内日志的ID */
+  PkgLogId?: string;
+  /** 日志内容的Json序列化字符串 */
+  LogJson?: string | null;
+  /** 日志来源主机名称 */
+  HostName?: string | null;
+  /** 原始日志(仅在日志创建索引异常时有值) */
+  RawLog?: string | null;
+  /** 日志创建索引异常原因(仅在日志创建索引异常时有值) */
+  IndexStatus?: string | null;
+}
+
+/** 日志中的KV对 */
+declare interface LogItem {
+  /** 日志Key */
+  Key?: string;
+  /** 日志Value */
+  Value?: string;
+}
+
+/** LogItem的数组 */
+declare interface LogItems {
+  /** 分析结果返回的KV数据对 */
+  Data?: LogItem[];
+}
+
+/** 多日志主题检索相关信息 */
+declare interface MultiTopicSearchInformation {
+  /** 要检索分析的日志主题ID */
+  TopicId?: string;
+  /** 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时 */
+  Context?: string;
+}
+
 /** Nat防火墙弹性公网ip列表 */
 declare interface NatFwEipsInfo {
   /** 弹性公网ip */
@@ -960,6 +1016,34 @@ declare interface ScanResultInfo {
   LeakNum?: number;
   /** 暴露端口数量 */
   PortNum?: number;
+}
+
+/** 多日志主题检索错误信息 */
+declare interface SearchLogErrors {
+  /** 日志主题ID */
+  TopicId?: string | null;
+  /** 错误信息 */
+  ErrorMsg?: string | null;
+  /** 错误码 */
+  ErrorCodeStr?: string | null;
+}
+
+/** 多日志主题检索topic信息 */
+declare interface SearchLogInfos {
+  /** 日志主题ID */
+  TopicId?: string;
+  /** 日志存储生命周期 */
+  Period?: number;
+  /** 透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时 */
+  Context?: string | null;
+}
+
+/** 多主题检索返回信息 */
+declare interface SearchLogTopics {
+  /** 多日志主题检索对应的错误信息 */
+  Errors?: SearchLogErrors[] | null;
+  /** 多日志主题检索各日志主题信息 */
+  Infos?: SearchLogInfos[] | null;
 }
 
 /** 双向下发的企业安全组规则 */
@@ -3580,6 +3664,58 @@ declare interface RemoveVpcAcRuleResponse {
   RequestId?: string;
 }
 
+declare interface SearchLogRequest {
+  /** 要检索分析的日志的起始时间，Unix时间戳（毫秒） */
+  From: number;
+  /** 要检索分析的日志的结束时间，Unix时间戳（毫秒） */
+  To: number;
+  /** 检索分析语句，最大长度为12KB语句由 [检索条件] | [SQL语句]构成，无需对日志进行统计分析时，可省略其中的管道符 | 及SQL语句使用*或空字符串可查询所有日志 */
+  Query: string;
+  /** 检索语法规则，默认值为0，推荐使用1 。- 0：Lucene语法- 1：CQL语法（日志服务专用检索语法，控制台默认也使用该语法规则）。详细说明参见检索条件语法规则 */
+  SyntaxRule?: number;
+  /** - 要检索分析的日志主题ID，仅能指定一个日志主题。- 如需同时检索多个日志主题，请使用Topics参数。- TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。 */
+  TopicId?: string;
+  /** - 要检索分析的日志主题列表，最大支持50个日志主题。- 检索单个日志主题时请使用TopicId。- TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。 */
+  Topics?: MultiTopicSearchInformation[];
+  /** 原始日志是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc注意：* 仅当检索分析语句(Query)不包含SQL时有效* SQL结果排序方式参考SQL ORDER BY语法 */
+  Sort?: string;
+  /** 表示单次查询返回的原始日志条数，默认为100，最大值为1000。注意：* 仅当检索分析语句(Query)不包含SQL时有效* SQL结果条数指定方式参考SQL LIMIT语法可通过两种方式获取后续更多日志：* Context:透传上次接口返回的Context值，获取后续更多日志，总计最多可获取1万条原始日志* Offset:偏移量，表示从第几行开始返回原始日志，无日志条数限制 */
+  Limit?: number;
+  /** 查询原始日志的偏移量，表示从第几行开始返回原始日志，默认为0。 注意：* 仅当检索分析语句(Query)不包含SQL时有效* 不能与Context参数同时使用* 仅适用于单日志主题检索 */
+  Offset?: number;
+  /** 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时。注意：* 透传该参数时，请勿修改除该参数外的其它参数* 仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context* 仅当检索分析语句(Query)不包含SQL时有效，SQL获取后续结果参考SQL LIMIT语法 */
+  Context?: string;
+  /** 执行统计分析（Query中包含SQL）时，是否对原始日志先进行采样，再进行统计分析。0：自动采样;0～1：按指定采样率采样，例如0.02;1：不采样，即精确分析默认值为1 */
+  SamplingRate?: number;
+  /** 为true代表使用新的检索结果返回方式，输出参数AnalysisRecords和Columns有效为false时代表使用老的检索结果返回方式, 输出AnalysisResults和ColNames有效两种返回方式在编码格式上有少量区别，建议使用true */
+  UseNewAnalysis?: boolean;
+}
+
+declare interface SearchLogResponse {
+  /** 透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时。注意：* 仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context */
+  Context?: string;
+  /** 符合检索条件的日志是否已全部返回，如未全部返回可使用Context参数获取后续更多日志注意：仅当检索分析语句(Query)不包含SQL时有效 */
+  ListOver?: boolean;
+  /** 返回的是否为统计分析（即SQL）结果 */
+  Analysis?: boolean;
+  /** 匹配检索条件的原始日志 */
+  Results?: LogInfo[] | null;
+  /** 日志统计分析结果的列名当UseNewAnalysis为false时生效 */
+  ColNames?: string[] | null;
+  /** 日志统计分析结果当UseNewAnalysis为false时生效 */
+  AnalysisResults?: LogItems[] | null;
+  /** 日志统计分析结果当UseNewAnalysis为true时生效 */
+  AnalysisRecords?: string[] | null;
+  /** 日志统计分析结果的列属性当UseNewAnalysis为true时生效 */
+  Columns?: Column[] | null;
+  /** 本次统计分析使用的采样率 */
+  SamplingRate?: number | null;
+  /** 使用多日志主题检索时，各个日志主题的基本信息，例如报错信息。 */
+  Topics?: SearchLogTopics | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SetNatFwDnatRuleRequest {
   /** 0：cfw新增模式，1：cfw接入模式。 */
   Mode: number;
@@ -3859,6 +3995,8 @@ declare interface Cfw {
   RemoveNatAcRule(data: RemoveNatAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveNatAcRuleResponse>;
   /** 删除VPC间规则 {@link RemoveVpcAcRuleRequest} {@link RemoveVpcAcRuleResponse} */
   RemoveVpcAcRule(data: RemoveVpcAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveVpcAcRuleResponse>;
+  /** 检索分析日志 {@link SearchLogRequest} {@link SearchLogResponse} */
+  SearchLog(data: SearchLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchLogResponse>;
   /** 配置防火墙Dnat规则 {@link SetNatFwDnatRuleRequest} {@link SetNatFwDnatRuleResponse} */
   SetNatFwDnatRule(data: SetNatFwDnatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<SetNatFwDnatRuleResponse>;
   /** 设置防火墙实例弹性公网ip {@link SetNatFwEipRequest} {@link SetNatFwEipResponse} */

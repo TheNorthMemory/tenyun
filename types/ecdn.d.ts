@@ -535,17 +535,17 @@ declare interface PurgeUrlsCacheResponse {
 /** {@link Ecdn 全站加速网络} */
 declare interface Ecdn {
   (): Versions;
-  /** 查询域名基本信息 {@link DescribeDomainsRequest} {@link DescribeDomainsResponse} */
+  /** @deprecated 查询域名基本信息 {@link DescribeDomainsRequest} {@link DescribeDomainsResponse} */
   DescribeDomains(data?: DescribeDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsResponse>;
-  /** 查询域名详细配置 {@link DescribeDomainsConfigRequest} {@link DescribeDomainsConfigResponse} */
+  /** @deprecated 查询域名详细配置 {@link DescribeDomainsConfigRequest} {@link DescribeDomainsConfigResponse} */
   DescribeDomainsConfig(data?: DescribeDomainsConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsConfigResponse>;
-  /** 查询域名日志下载链接 {@link DescribeEcdnDomainLogsRequest} {@link DescribeEcdnDomainLogsResponse} */
+  /** @deprecated 查询域名日志下载链接 {@link DescribeEcdnDomainLogsRequest} {@link DescribeEcdnDomainLogsResponse} */
   DescribeEcdnDomainLogs(data: DescribeEcdnDomainLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEcdnDomainLogsResponse>;
-  /** 域名统计指标查询 {@link DescribeEcdnDomainStatisticsRequest} {@link DescribeEcdnDomainStatisticsResponse} */
+  /** @deprecated 域名统计指标查询 {@link DescribeEcdnDomainStatisticsRequest} {@link DescribeEcdnDomainStatisticsResponse} */
   DescribeEcdnDomainStatistics(data: DescribeEcdnDomainStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEcdnDomainStatisticsResponse>;
-  /** 访问数据查询 {@link DescribeEcdnStatisticsRequest} {@link DescribeEcdnStatisticsResponse} */
+  /** @deprecated 访问数据查询 {@link DescribeEcdnStatisticsRequest} {@link DescribeEcdnStatisticsResponse} */
   DescribeEcdnStatistics(data: DescribeEcdnStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEcdnStatisticsResponse>;
-  /** 查询平台服务节点IP {@link DescribeIpStatusRequest} {@link DescribeIpStatusResponse} */
+  /** @deprecated 查询平台服务节点IP {@link DescribeIpStatusRequest} {@link DescribeIpStatusResponse} */
   DescribeIpStatus(data: DescribeIpStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpStatusResponse>;
   /** @deprecated 刷新历史查询 {@link DescribePurgeTasksRequest} {@link DescribePurgeTasksResponse} */
   DescribePurgeTasks(data?: DescribePurgeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeTasksResponse>;

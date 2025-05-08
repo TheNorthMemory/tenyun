@@ -5447,7 +5447,7 @@ declare namespace V20180717 {
     StartTimeOffset?: number;
     /** 视频拆条结束的偏移时间，单位：秒。不填或填0，表示转码后的视频持续到原始视频的末尾终止；当数值大于0时（假设为 n），表示转码后的视频持续到原始视频第 n 秒时终止；当数值小于0时（假设为 -n），表示转码后的视频持续到原始视频结束 n 秒前终止。 */
     EndTimeOffset?: number;
-    /** [任务流模板](/document/product/266/11700)名字，如果要对生成的新视频执行任务流时填写。 */
+    /** [任务流](https://cloud.tencent.com/document/product/266/33475)名称，如果要对生成的新视频执行任务流时填写。 */
     ProcedureName?: string;
     /** 视频拆条输出信息。 */
     OutputConfig?: SplitMediaOutputConfig;
@@ -5637,11 +5637,11 @@ declare namespace V20180717 {
 
   /** 视频处理任务统计数据。 */
   interface TaskStatData {
-    /** 任务类型。 Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生 QualityInspect: 音画质检测Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）VoiceTranslation: 语音翻译JITTranscoding: 即时转码 */
+    /** 任务类型。 Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生 QualityInspect: 音画质检测Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）VoiceTranslation: 语音翻译JITTranscoding: 即时转码VideoSnapshot: 视频截图 */
     TaskType?: string;
     /** 任务数统计数据概览，用量单位为秒。 */
     Summary?: TaskStatDataItem[];
-    /** 不同规格任务统计数据详情。转码规格：Remuxing: 转封装Audio: 音频转码Standard.H264.SD: H.264编码方式标清转码Standard.H264.HD: H.264编码方式高清转码Standard.H264.FHD: H.264编码方式全高清转码Standard.H264.2K: H.264编码方式2K转码Standard.H264.4K: H.264编码方式4K转码Standard.H265.SD: H.265编码方式标清转码Standard.H265.HD: H.265编码方式高清转码Standard.H265.FHD: H.265编码方式全高清转码Standard.H265.2K: H.265编码方式2K转码Standard.H265.4K: H.265编码方式4K转码TESHD-10.H264.SD: H.264编码方式标清极速高清转码TESHD-10.H264.HD: H.264编码方式高清极速高清转码TESHD-10.H264.FHD: H.264编码方式全高清极速高清转码TESHD-10.H264.2K: H.264编码方式2K极速高清转码TESHD-10.H264.4K: H.264编码方式4K极速高清转码TESHD-10.H265.SD: H.265编码方式标清极速高清转码TESHD-10.H265.HD: H.265编码方式高清极速高清转码TESHD-10.H265.FHD: H.265编码方式全高清极速高清转码TESHD-10.H265.2K: H.265编码方式2K极速高清转码TESHD-10.H265.4K: H.265编码方式4K极速高清转码Edit.Audio: 音频编辑Edit.H264.SD: H.264编码方式标清视频编辑Edit.H264.HD: H.264编码方式高清视频编辑Edit.H264.FHD: H.264编码方式全高清视频编辑Edit.H264.2K: H.264编码方式2K视频编辑Edit.H264.4K: H.264编码方式4K视频编辑Edit.H265.SD: H.265编码方式标清视频编辑Edit.H265.HD: H.265编码方式高清视频编辑Edit.H265.FHD: H.265编码方式全高清视频编辑Edit.H265.2K: H.265编码方式2K视频编辑Edit.H265.4K: H.265编码方式4K视频编辑Edit.TESHD-10.H264.SD: H.264编码方式标清极速高清视频编辑Edit.TESHD-10.H264.HD: H.264编码方式高清极速高清视频编辑Edit.TESHD-10.H264.FHD: H.264编码方式全高清极速高清视频编辑Edit.TESHD-10.H264.2K: H.264编码方式2K极速高清视频编辑Edit.TESHD-10.H264.4K: H.264编码方式4K极速高清视频编辑Edit.TESHD-10.H265.SD: H.265编码方式标清极速高清视频编辑Edit.TESHD-10.H265.HD: H.265编码方式高清极速高清视频编辑Edit.TESHD-10.H265.FHD: H.265编码方式全高清极速高清视频编辑Edit.TESHD-10.H265.2K: H.265编码方式2K极速高清视频编辑Edit.TESHD-10.H265.4K: H.265编码方式4K极速高清视频编辑去水印、音画质重生规格：480P: 短边 ≤ 480px720P: 短边 ≤ 720px1080P: 短边 ≤ 1080px2K: 短边 ≤ 1440px4K: 短边 ≤ 2160px8K: 短边 ≤ 4320pxAudio: 音频即时转码规格：JITTranscoding.H264.SD: H.264编码方式标清即时转码JITTranscoding.H264.HD: H.264编码方式高清即时转码JITTranscoding.H264.FHD: H.264编码方式全高清即时转码JITTranscoding.H264.2K: H.264编码方式2K即时转码JITTranscoding.Audio: 音频即时转码JITTranscoding.Copy: 转封装即时转码 */
+    /** 不同规格任务统计数据详情。转码规格：Remuxing: 转封装Audio: 音频转码Standard.H264.SD: H.264编码方式标清转码Standard.H264.HD: H.264编码方式高清转码Standard.H264.FHD: H.264编码方式全高清转码Standard.H264.2K: H.264编码方式2K转码Standard.H264.4K: H.264编码方式4K转码Standard.H265.SD: H.265编码方式标清转码Standard.H265.HD: H.265编码方式高清转码Standard.H265.FHD: H.265编码方式全高清转码Standard.H265.2K: H.265编码方式2K转码Standard.H265.4K: H.265编码方式4K转码TESHD-10.H264.SD: H.264编码方式标清极速高清转码TESHD-10.H264.HD: H.264编码方式高清极速高清转码TESHD-10.H264.FHD: H.264编码方式全高清极速高清转码TESHD-10.H264.2K: H.264编码方式2K极速高清转码TESHD-10.H264.4K: H.264编码方式4K极速高清转码TESHD-10.H265.SD: H.265编码方式标清极速高清转码TESHD-10.H265.HD: H.265编码方式高清极速高清转码TESHD-10.H265.FHD: H.265编码方式全高清极速高清转码TESHD-10.H265.2K: H.265编码方式2K极速高清转码TESHD-10.H265.4K: H.265编码方式4K极速高清转码Edit.Audio: 音频编辑Edit.H264.SD: H.264编码方式标清视频编辑Edit.H264.HD: H.264编码方式高清视频编辑Edit.H264.FHD: H.264编码方式全高清视频编辑Edit.H264.2K: H.264编码方式2K视频编辑Edit.H264.4K: H.264编码方式4K视频编辑Edit.H265.SD: H.265编码方式标清视频编辑Edit.H265.HD: H.265编码方式高清视频编辑Edit.H265.FHD: H.265编码方式全高清视频编辑Edit.H265.2K: H.265编码方式2K视频编辑Edit.H265.4K: H.265编码方式4K视频编辑Edit.TESHD-10.H264.SD: H.264编码方式标清极速高清视频编辑Edit.TESHD-10.H264.HD: H.264编码方式高清极速高清视频编辑Edit.TESHD-10.H264.FHD: H.264编码方式全高清极速高清视频编辑Edit.TESHD-10.H264.2K: H.264编码方式2K极速高清视频编辑Edit.TESHD-10.H264.4K: H.264编码方式4K极速高清视频编辑Edit.TESHD-10.H265.SD: H.265编码方式标清极速高清视频编辑Edit.TESHD-10.H265.HD: H.265编码方式高清极速高清视频编辑Edit.TESHD-10.H265.FHD: H.265编码方式全高清极速高清视频编辑Edit.TESHD-10.H265.2K: H.265编码方式2K极速高清视频编辑Edit.TESHD-10.H265.4K: H.265编码方式4K极速高清视频编辑去水印、音画质重生规格：480P: 短边 ≤ 480px720P: 短边 ≤ 720px1080P: 短边 ≤ 1080px2K: 短边 ≤ 1440px4K: 短边 ≤ 2160px8K: 短边 ≤ 4320pxAudio: 音频即时转码规格：JITTranscoding.H264.SD: H.264编码方式标清即时转码JITTranscoding.H264.HD: H.264编码方式高清即时转码JITTranscoding.H264.FHD: H.264编码方式全高清即时转码JITTranscoding.H264.2K: H.264编码方式2K即时转码JITTranscoding.Audio: 音频即时转码JITTranscoding.Copy: 转封装即时转码视频截图规格：SnapshotByTimeOffset: 时间点截图SampleSnapshot: 采样截图ImageSprite: 雪碧图 */
     Details?: SpecificationDataItem[];
   }
 
@@ -7833,9 +7833,9 @@ declare namespace V20180717 {
   }
 
   interface DescribeEventConfigResponse {
-    /** 接收事件通知的方式。"PUSH" 为 [HTTP 回调通知](https://cloud.tencent.com/document/product/266/7829)，"PULL" 为 [基于消息队列的可靠通知](https://cloud.tencent.com/document/product/266/7829)。 */
+    /** 接收事件通知的方式。"PUSH" 为 [普通回调](https://cloud.tencent.com/document/product/266/33779)，"PULL" 为 [可靠回调](https://cloud.tencent.com/document/product/266/33779)。 */
     Mode?: string;
-    /** 采用 [HTTP 回调通知](https://cloud.tencent.com/document/product/266/7829) 接收方式时，用于接收 V3 版本事件通知的地址。 */
+    /** 采用 [普通回调](https://cloud.tencent.com/document/product/266/33779) 模式时，用于接收 V3 版本事件通知的地址。 */
     NotificationUrl?: string;
     /** 是否接收 [视频上传完成](https://cloud.tencent.com/document/product/266/7830) 事件通知，"OFF" 为忽略该事件通知，"ON" 为接收事件通知。 */
     UploadMediaCompleteEventSwitch?: string;
@@ -8046,7 +8046,7 @@ declare namespace V20180717 {
     EndTime: string;
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
-    /** 查询视频处理任务类型，目前支持的任务类型包括： Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去除水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生 QualityInspect: 音画质检测 VideoHighlight: 视频智能集锦 VideoTag: 视频智能标签 VideoClassification: 视频智能分类 VideoCover: 视频智能封面 VideoSegment: 视频智能拆条 VideoProduce: 视频制作 MediaCast: 媒体转推Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）VoiceTranslation: 语音翻译JITTranscoding: 即时转码 */
+    /** 查询视频处理任务类型，目前支持的任务类型包括： Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去除水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生 QualityInspect: 音画质检测 VideoHighlight: 视频智能集锦 VideoTag: 视频智能标签 VideoClassification: 视频智能分类 VideoCover: 视频智能封面 VideoSegment: 视频智能拆条 VideoProduce: 视频制作 MediaCast: 媒体转推Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）VoiceTranslation: 语音翻译JITTranscoding: 即时转码VideoSnapshot: 视频截图 */
     Type?: string;
   }
 
@@ -9744,6 +9744,8 @@ declare namespace V20180717 {
     StorageRegion?: string;
     /** 分类ID，用于对媒体进行分类管理，可通过[创建分类](https://cloud.tencent.com/document/product/266/7812)接口，创建分类，获得分类 ID。 */
     ClassId?: number;
+    /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
+    TasksPriority?: number;
     /** 来源上下文，用于透传用户请求信息，当指定 Procedure 任务后，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
     SessionContext?: string;
     /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */

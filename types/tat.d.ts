@@ -308,7 +308,7 @@ declare interface Scene {
 
 /** 周期执行器设置。 */
 declare interface ScheduleSettings {
-  /** 执行策略：- ONCE：单次执行- RECURRENCE：周期执行只有在 CreateInvoker 时才必填，ModifyInvoker 时为非必填 */
+  /** 执行策略：- ONCE：单次执行- RECURRENCE：周期执行 */
   Policy: string;
   /** 触发 Crontab 表达式。Policy 为 RECURRENCE 时，需要指定此字段。Crontab 按北京时间解析。 */
   Recurrence?: string;
@@ -391,19 +391,19 @@ declare interface CreateCommandResponse {
 }
 
 declare interface CreateInvokerRequest {
-  /** 执行器名称。 */
+  /** 执行器名称。长度不超过 120 字符。 */
   Name: string;
-  /** 执行器类型，当前仅支持周期类型执行器，取值：`SCHEDULE` 。 */
+  /** 执行器类型。可选取值（当前仅支持一种）：- `SCHEDULE`：周期类型执行器。 */
   Type: string;
   /** 远程命令ID。可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取。 */
   CommandId: string;
   /** 触发器关联的实例ID。列表上限 100。可通过对应云产品的查询实例接口获取实例 ID。目前支持实例类型：CVM、Lighthouse、TAT 托管实例。实例需要安装 TAT 客户端, 且客户端为 Online 状态。可通过 [DescribeAutomationAgentStatus(查询客户端状态)](https://cloud.tencent.com/document/api/1340/52682) 接口查询客户端状态。 */
   InstanceIds: string[];
-  /** 命令执行用户。 */
+  /** 命令执行用户。长度不超过 256 字符。 */
   Username?: string;
-  /** 命令自定义参数。仅在 CommandId 所指命令的 EnableParameter 为 true 时，才允许设置此参数。可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取命令的 EnableParameter 设置。 */
+  /** 命令自定义参数。字段类型为 JSON encode string。仅在 CommandId 所指命令的 EnableParameter 为 true 时，才允许设置此参数。可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取命令的 EnableParameter 设置。 */
   Parameters?: string;
-  /** 周期执行器设置。当创建周期执行器时，必须指定此参数。 */
+  /** 周期执行器设置。当执行器类型为 `SCHEDULE` 时，必须指定此参数。 */
   ScheduleSettings?: ScheduleSettings;
 }
 
@@ -487,9 +487,9 @@ declare interface DeleteRegisterInstanceResponse {
 }
 
 declare interface DescribeAutomationAgentStatusRequest {
-  /** 待查询的实例ID列表。可通过对应云产品的查询实例接口获取实例 ID。目前支持实例类型：CVM、Lighthouse、TAT 托管实例。参数不支持同时指定 `InstanceIds ` 和 `Filters ` 。 */
+  /** 待查询的实例ID列表。可通过对应云产品的查询实例接口获取实例 ID。目前支持实例类型：CVM、Lighthouse、TAT 托管实例。每次请求的上限为 100。参数不支持同时指定 `InstanceIds ` 和 `Filters ` 。 */
   InstanceIds?: string[];
-  /** - agent-status - String - 是否必填：否 -（过滤条件）按照agent状态过滤，取值：Online 在线，Offline 离线。 - environment - String - 是否必填：否 -（过滤条件）按照agent运行环境查询，取值：Linux, Windows。- instance-id - String - 是否必填：否 -（过滤条件）按照实例ID过滤。 可通过对应云产品的查询实例接口获取实例 ID。目前支持实例类型：CVM、Lighthouse、TAT 托管实例。参数不支持同时指定 `InstanceIds ` 和 `Filters ` 。 */
+  /** - agent-status - String - 是否必填：否 -（过滤条件）按照agent状态过滤，取值：Online 在线，Offline 离线。 - environment - String - 是否必填：否 -（过滤条件）按照agent运行环境查询，取值：Linux, Windows。- instance-id - String - 是否必填：否 -（过滤条件）按照实例ID过滤。 可通过对应云产品的查询实例接口获取实例 ID。目前支持实例类型：CVM、Lighthouse、TAT 托管实例。每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `InstanceIds ` 和 `Filters ` 。 */
   Filters?: Filter[];
   /** 返回数量，默认为20，最大值为100。关于 `Limit` 的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
   Limit?: number;
@@ -587,9 +587,9 @@ declare interface DescribeInvokerRecordsResponse {
 }
 
 declare interface DescribeInvokersRequest {
-  /** 执行器ID列表。参数不支持同时指定 `InvokerIds ` 和 `Filters ` 。 */
+  /** 执行器 ID 列表。每次请求的上限为 100。参数不支持同时指定 `InvokerIds ` 和 `Filters ` 。 */
   InvokerIds?: string[];
-  /** 过滤条件：- invoker-id - String - 是否必填：否 - （过滤条件）按执行器ID过滤。- command-id - String - 是否必填：否 - （过滤条件）按命令ID过滤。可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取。- type - String - 是否必填：否 - （过滤条件）按执行器类型过滤。目前仅支持 SCHEDULE 一种。参数不支持同时指定 `InvokerIds ` 和 `Filters ` 。 */
+  /** 过滤条件：- invoker-id - String - 是否必填：否 - （过滤条件）按执行器ID过滤。- command-id - String - 是否必填：否 - （过滤条件）按命令ID过滤。可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取。- invoker-type - String - 是否必填：否 - （过滤条件）按执行器类型过滤。目前仅支持 SCHEDULE 一种。每次请求的 `Filters` 的上限为 10，`Filter.Values` 的上限为 5。参数不支持同时指定 `InvokerIds` 和 `Filters` 。 */
   Filters?: Filter[];
   /** 返回数量，默认为20，最大值为100。 */
   Limit?: number;
@@ -631,7 +631,7 @@ declare interface DescribeRegionsResponse {
 }
 
 declare interface DescribeRegisterCodesRequest {
-  /** 注册码ID。 */
+  /** 注册码ID。每次请求的上限为 100。参数不支持同时指定 `RegisterCodeIds ` 和 `Filters ` 。 */
   RegisterCodeIds?: string[];
   /** 偏移量，默认为 0。 */
   Offset?: number;
@@ -649,9 +649,9 @@ declare interface DescribeRegisterCodesResponse {
 }
 
 declare interface DescribeRegisterInstancesRequest {
-  /** 托管实例 id。参数不支持同时指定 `InstanceIds` 和 `Filters` 。 */
+  /** 托管实例 id。每次请求的上限为 100。参数不支持同时指定 `InstanceIds` 和 `Filters` 。 */
   InstanceIds?: string[];
-  /** 过滤器列表。参数不支持同时指定 `InstanceIds` 和 `Filters` 。- instance-name按照【托管实例名称】进行过滤。类型：String必选：否- instance-id按照【托管实例ID】进行过滤。类型：String必选：否- register-code-id按照【托管实例注册码ID】进行过滤。可通过 [DescribeRegisterCodes(查询注册码)](https://cloud.tencent.com/document/api/1340/96925) 接口获取。类型：String必选：否- sys-name按照【操作系统类型】进行过滤，取值：Linux | Windows。类型：String必选：否- tag-key按照【标签键】进行过滤。类型：String必选：否- tag-value按照【标签值】进行过滤。类型：String必选：否- tag:tag-key按照【标签键值对】进行过滤。 tag-key使用具体的标签键进行替换。类型：String必选：否例如 Filter 为 {"Name": "tag:key1", "Values": ["v1", "v2"] } ，即查询所有标签为 key1:v1 或 key1:v2 的资源。 */
+  /** 过滤器列表。每次请求的 `Filters` 的上限为 10，`Filter.Values` 的上限为 5。参数不支持同时指定 `InstanceIds` 和 `Filters` 。- instance-name按照【托管实例名称】进行过滤。类型：String必选：否- instance-id按照【托管实例ID】进行过滤。类型：String必选：否- register-code-id按照【托管实例注册码ID】进行过滤。可通过 [DescribeRegisterCodes(查询注册码)](https://cloud.tencent.com/document/api/1340/96925) 接口获取。类型：String必选：否- sys-name按照【操作系统类型】进行过滤，取值：Linux | Windows。类型：String必选：否- tag-key按照【标签键】进行过滤。类型：String必选：否- tag-value按照【标签值】进行过滤。类型：String必选：否- tag:tag-key按照【标签键值对】进行过滤。 tag-key使用具体的标签键进行替换。类型：String必选：否例如 Filter 为 {"Name": "tag:key1", "Values": ["v1", "v2"] } ，即查询所有标签为 key1:v1 或 key1:v2 的资源。 */
   Filters?: Filter[];
   /** 偏移量，默认为 0。 */
   Offset?: number;
@@ -669,7 +669,7 @@ declare interface DescribeRegisterInstancesResponse {
 }
 
 declare interface DescribeScenesRequest {
-  /** 场景 ID 数组。参数不支持同时指定 `SceneIds ` 和 `Filters ` 。 */
+  /** 场景 ID 数组。每次请求的上限为 100。参数不支持同时指定 `SceneIds ` 和 `Filters ` 。 */
   SceneIds?: string[];
   /** 过滤条件。- scene-id - String - 是否必填：否 -（过滤条件）按照场景 ID 过滤。- scene-name - String - 是否必填：否 -（过滤条件）按照场景名称过滤。- created-by - String - 是否必填：否 -（过滤条件）按照场景创建者过滤，目前仅支持 TAT，代表公共场景。每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `SceneIds` 和 `Filters` 。 */
   Filters?: Filter[];
@@ -779,19 +779,19 @@ declare interface ModifyCommandResponse {
 declare interface ModifyInvokerRequest {
   /** 待修改的执行器ID。可通过 [DescribeInvokers(查询执行器)](https://cloud.tencent.com/document/api/1340/61759) 接口获取。 */
   InvokerId: string;
-  /** 待修改的执行器名称。 */
+  /** 待修改的执行器名称。长度不超过 120 字符。 */
   Name?: string;
-  /** 执行器类型，当前仅支持周期类型执行器，取值：`SCHEDULE` 。 */
+  /** 待修改的执行器类型。可选取值（当前仅支持一种）：- `SCHEDULE`：周期类型执行器。 */
   Type?: string;
   /** 待修改的命令ID。可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取。 */
   CommandId?: string;
-  /** 待修改的用户名。 */
+  /** 待修改的用户名。长度不超过 256 字符。 */
   Username?: string;
-  /** 待修改的自定义参数。仅在 CommandId 所指命令的 EnableParameter 为 true 时，才允许设置此参数。可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取命令的 EnableParameter 设置。 */
+  /** 待修改的自定义参数。字段类型为 JSON encode string。仅在 CommandId 所指命令的 EnableParameter 为 true 时，才允许设置此参数。可通过 [DescribeCommands(查询命令详情)](https://cloud.tencent.com/document/api/1340/52681) 接口获取命令的 EnableParameter 设置。 */
   Parameters?: string;
   /** 待修改的实例ID列表。列表长度上限100。可通过对应云产品的查询实例接口获取实例 ID。目前支持实例类型：CVM、Lighthouse、TAT 托管实例。实例需要安装 TAT 客户端, 且客户端为 Online 状态。可通过 [DescribeAutomationAgentStatus(查询客户端状态)](https://cloud.tencent.com/document/api/1340/52682) 接口查询客户端状态。 */
   InstanceIds?: string[];
-  /** 待修改的周期执行器设置。 */
+  /** 待修改的周期执行器设置。要将执行器类型修改为 `SCHEDULE` 时，必须指定此参数。 */
   ScheduleSettings?: ScheduleSettings;
 }
 

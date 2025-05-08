@@ -206,6 +206,8 @@ declare interface CloudNativeAPIGatewayConfig {
   SlaveZoneName?: string;
   /** 网络 id */
   NetworkId?: string;
+  /** 是否为新 ipv6 CLB */
+  IPV6FullChain?: boolean;
 }
 
 /** 云原生API网关节点信息。 */
@@ -1672,6 +1674,10 @@ declare interface NativeGatewayServerGroup {
   DefaultWeight?: number;
   /** 弹性节点 */
   ElasticNumber?: number;
+  /** 是否支持TOA */
+  SupportTOA?: boolean;
+  /** 是否支持IPV6 */
+  SupportIPV6?: boolean;
 }
 
 /** 网关分组列表 */

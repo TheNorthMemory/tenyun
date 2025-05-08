@@ -205,11 +205,11 @@ declare interface DBInstance {
   /** 售卖规格ID */
   DBInstanceClass?: string;
   /** PostgreSQL大版本号，版本信息可从[DescribeDBVersions](https://cloud.tencent.com/document/api/409/89018)获取，目前支持10，11，12，13，14，15这几个大版本。 */
-  DBMajorVersion?: string | null;
+  DBMajorVersion?: string;
   /** PostgreSQL社区大版本+小版本号，如12.4，版本信息可从[DescribeDBVersions](https://cloud.tencent.com/document/api/409/89018)获取。 */
   DBVersion?: string;
   /** PostgreSQL内核版本号，如v12.7_r1.8，版本信息可从[DescribeDBVersions](https://cloud.tencent.com/document/api/409/89018)获取。 */
-  DBKernelVersion?: string | null;
+  DBKernelVersion?: string;
   /** 实例类型，类型有：primary：主实例readonly：只读实例guard：灾备实例temp：临时实例 */
   DBInstanceType?: string;
   /** 实例版本，目前只支持standard（双机高可用版, 一主一从）。 */
@@ -239,23 +239,23 @@ declare interface DBInstance {
   /** 项目ID。 */
   ProjectId?: number;
   /** 实例绑定的标签信息。 */
-  TagList?: Tag[] | null;
+  TagList?: Tag[];
   /** 主实例信息，仅在实例为只读实例时返回。 */
-  MasterDBInstanceId?: string | null;
+  MasterDBInstanceId?: string;
   /** 只读实例数量。 */
-  ReadOnlyInstanceNum?: number | null;
+  ReadOnlyInstanceNum?: number;
   /** 只读实例在只读组中的状态。 */
-  StatusInReadonlyGroup?: string | null;
+  StatusInReadonlyGroup?: string;
   /** 下线时间。 */
-  OfflineTime?: string | null;
+  OfflineTime?: string;
   /** 实例的节点信息。 */
   DBNodeSet?: DBNode[] | null;
   /** 实例是否支持TDE数据加密：0：不支持1：支持默认值：0TDE数据加密可参考[数据透明加密概述](https://cloud.tencent.com/document/product/409/71748) */
-  IsSupportTDE?: number | null;
+  IsSupportTDE?: number;
   /** 数据库引擎，支持：postgresql：云数据库PostgreSQLmssql_compatible：MSSQL兼容-云数据库PostgreSQL默认值：postgresql */
-  DBEngine?: string | null;
+  DBEngine?: string;
   /** 数据库引擎的配置信息，配置格式如下：{"$key1":"$value1", "$key2":"$value2"}各引擎支持如下：mssql_compatible引擎：migrationMode：数据库模式，可选参数，可取值：single-db（单数据库模式），multi-db（多数据库模式）。默认为single-db。defaultLocale：排序区域规则，可选参数，在初始化后不可修改，默认为en_US，可选值如下："af_ZA", "sq_AL", "ar_DZ", "ar_BH", "ar_EG", "ar_IQ", "ar_JO", "ar_KW", "ar_LB", "ar_LY", "ar_MA", "ar_OM", "ar_QA", "ar_SA", "ar_SY", "ar_TN", "ar_AE", "ar_YE", "hy_AM", "az_Cyrl_AZ", "az_Latn_AZ", "eu_ES", "be_BY", "bg_BG", "ca_ES", "zh_HK", "zh_MO", "zh_CN", "zh_SG", "zh_TW", "hr_HR", "cs_CZ", "da_DK", "nl_BE", "nl_NL", "en_AU", "en_BZ", "en_CA", "en_IE", "en_JM", "en_NZ", "en_PH", "en_ZA", "en_TT", "en_GB", "en_US", "en_ZW", "et_EE", "fo_FO", "fa_IR", "fi_FI", "fr_BE", "fr_CA", "fr_FR", "fr_LU", "fr_MC", "fr_CH", "mk_MK", "ka_GE", "de_AT", "de_DE", "de_LI", "de_LU", "de_CH", "el_GR", "gu_IN", "he_IL", "hi_IN", "hu_HU", "is_IS", "id_ID", "it_IT", "it_CH", "ja_JP", "kn_IN", "kok_IN", "ko_KR", "ky_KG", "lv_LV", "lt_LT", "ms_BN", "ms_MY", "mr_IN", "mn_MN", "nb_NO", "nn_NO", "pl_PL", "pt_BR", "pt_PT", "pa_IN", "ro_RO", "ru_RU", "sa_IN", "sr_Cyrl_RS", "sr_Latn_RS", "sk_SK", "sl_SI", "es_AR", "es_BO", "es_CL", "es_CO", "es_CR", "es_DO", "es_EC", "es_SV", "es_GT", "es_HN", "es_MX", "es_NI", "es_PA", "es_PY","es_PE", "es_PR", "es_ES", "es_TRADITIONAL", "es_UY", "es_VE", "sw_KE", "sv_FI", "sv_SE", "tt_RU", "te_IN", "th_TH", "tr_TR", "uk_UA", "ur_IN", "ur_PK", "uz_Cyrl_UZ", "uz_Latn_UZ", "vi_VN"。serverCollationName：排序规则名称，可选参数，在初始化后不可修改，默认为sql_latin1_general_cp1_ci_as，可选值如下："bbf_unicode_general_ci_as", "bbf_unicode_cp1_ci_as", "bbf_unicode_CP1250_ci_as", "bbf_unicode_CP1251_ci_as", "bbf_unicode_cp1253_ci_as", "bbf_unicode_cp1254_ci_as", "bbf_unicode_cp1255_ci_as", "bbf_unicode_cp1256_ci_as", "bbf_unicode_cp1257_ci_as", "bbf_unicode_cp1258_ci_as", "bbf_unicode_cp874_ci_as", "sql_latin1_general_cp1250_ci_as", "sql_latin1_general_cp1251_ci_as", "sql_latin1_general_cp1_ci_as", "sql_latin1_general_cp1253_ci_as", "sql_latin1_general_cp1254_ci_as", "sql_latin1_general_cp1255_ci_as","sql_latin1_general_cp1256_ci_as", "sql_latin1_general_cp1257_ci_as", "sql_latin1_general_cp1258_ci_as", "chinese_prc_ci_as", "cyrillic_general_ci_as", "finnish_swedish_ci_as", "french_ci_as", "japanese_ci_as", "korean_wansung_ci_as", "latin1_general_ci_as", "modern_spanish_ci_as", "polish_ci_as", "thai_ci_as", "traditional_spanish_ci_as", "turkish_ci_as", "ukrainian_ci_as", "vietnamese_ci_as"。 */
-  DBEngineConfig?: string | null;
+  DBEngineConfig?: string;
   /** 实例网络信息列表（此字段已废弃） */
   NetworkAccessList?: NetworkAccess[] | null;
   /** 实例是否支持Ipv6：0：否1：是默认值：0 */
@@ -392,6 +392,8 @@ declare interface EncryptionKey {
   KeyRegion?: string;
   /** DEK密钥创建时间。 */
   CreateTime?: string;
+  /** 密钥所在的KMS服务集群Id，为空表示密钥在默认的KMS集群中，不为空表示在指定的KMS服务集群中 */
+  KMSClusterId?: string;
 }
 
 /** 错误日志详情 */
@@ -543,41 +545,41 @@ declare interface ParamEntry {
 /** 参数详情 */
 declare interface ParamInfo {
   /** 参数ID */
-  ID?: number | null;
+  ID?: number;
   /** 参数名 */
-  Name?: string | null;
+  Name?: string;
   /** 参数值类型：integer（整型）、real（浮点型）、bool（布尔型）、enum（枚举类型）、mutil_enum（枚举类型、支持多选）。当参数类型为integer（整型）、real（浮点型）时，参数的取值范围根据返回值的Max、Min确定； 当参数类型为bool（布尔型）时，参数设置值取值范围是true | false； 当参数类型为enum（枚举类型）、mutil_enum（多枚举类型）时，参数的取值范围由返回值中的EnumValue确定。 */
-  ParamValueType?: string | null;
+  ParamValueType?: string;
   /** 参数值 单位。参数没有单位时，该字段返回空 */
-  Unit?: string | null;
+  Unit?: string;
   /** 参数默认值。以字符串形式返回 */
-  DefaultValue?: string | null;
+  DefaultValue?: string;
   /** 参数当前运行值。以字符串形式返回 */
-  CurrentValue?: string | null;
+  CurrentValue?: string;
   /** 数值类型（integer、real）参数，取值下界 */
-  Max?: number | null;
+  Max?: number;
   /** 枚举类型参数，取值范围 */
   EnumValue?: string[] | null;
   /** 数值类型（integer、real）参数，取值上界 */
-  Min?: number | null;
+  Min?: number;
   /** 参数中文描述 */
-  ParamDescriptionCH?: string | null;
+  ParamDescriptionCH?: string;
   /** 参数英文描述 */
-  ParamDescriptionEN?: string | null;
+  ParamDescriptionEN?: string;
   /** 参数修改，是否重启生效。（true为需要，false为不需要） */
-  NeedReboot?: boolean | null;
+  NeedReboot?: boolean;
   /** 参数中文分类 */
-  ClassificationCN?: string | null;
+  ClassificationCN?: string;
   /** 参数英文分类 */
-  ClassificationEN?: string | null;
+  ClassificationEN?: string;
   /** 是否和规格相关。（true为相关，false为不想关） */
-  SpecRelated?: boolean | null;
+  SpecRelated?: boolean;
   /** 是否为重点参数。（true为重点参数，修改是需要重点关注，可能会影响实例性能） */
-  Advanced?: boolean | null;
+  Advanced?: boolean;
   /** 参数最后一次修改时间 */
-  LastModifyTime?: string | null;
+  LastModifyTime?: string;
   /** 参数主备制约，0：无主备制约关系，1:备机参数值需比主机大，2:主机参数值需比备机大 */
-  StandbyRelated?: number | null;
+  StandbyRelated?: number;
   /** 参数版本关联信息，内容为相应内核版本下的参数详细信息 */
   VersionRelationSet?: ParamVersionRelation[] | null;
   /** 参数规格关联信息，内容为相应规格下的参数详细信息 */
@@ -587,17 +589,17 @@ declare interface ParamInfo {
 /** 各规格下的参数信息 */
 declare interface ParamSpecRelation {
   /** 参数名称 */
-  Name?: string | null;
+  Name?: string;
   /** 参数信息所属规格 */
-  Memory?: string | null;
+  Memory?: string;
   /** 参数在该规格下的默认值 */
-  Value?: string | null;
+  Value?: string;
   /** 参数值单位。参数没有单位时，该字段返回空 */
-  Unit?: string | null;
+  Unit?: string;
   /** 数值类型（integer、real）参数，取值上界 */
-  Max?: number | null;
+  Max?: number;
   /** 数值类型（integer、real）参数，取值下界 */
-  Min?: number | null;
+  Min?: number;
   /** 枚举类型参数，取值范围 */
   EnumValue?: string[] | null;
 }
@@ -605,17 +607,17 @@ declare interface ParamSpecRelation {
 /** 各版本下的参数信息 */
 declare interface ParamVersionRelation {
   /** 参数名称 */
-  Name?: string | null;
+  Name?: string;
   /** 参数信息所属内核版本 */
-  DBKernelVersion?: string | null;
+  DBKernelVersion?: string;
   /** 参数在该版本该规格下的默认值 */
-  Value?: string | null;
+  Value?: string;
   /** 参数值单位。参数没有单位时，该字段返回空 */
-  Unit?: string | null;
+  Unit?: string;
   /** 数值类型（integer、real）参数，取值上界 */
-  Max?: number | null;
+  Max?: number;
   /** 数值类型（integer、real）参数，取值下界 */
-  Min?: number | null;
+  Min?: number;
   /** 枚举类型参数，取值范围 */
   EnumValue?: string[] | null;
 }
@@ -683,15 +685,15 @@ declare interface RawSlowQuery {
 /** 只读组信息 */
 declare interface ReadOnlyGroup {
   /** 只读组标识 */
-  ReadOnlyGroupId?: string | null;
+  ReadOnlyGroupId?: string;
   /** 只读组名字 */
-  ReadOnlyGroupName?: string | null;
+  ReadOnlyGroupName?: string;
   /** 项目id */
-  ProjectId?: number | null;
+  ProjectId?: number;
   /** 主实例id */
-  MasterDBInstanceId?: string | null;
+  MasterDBInstanceId?: string;
   /** 最小保留实例数 */
-  MinDelayEliminateReserve?: number | null;
+  MinDelayEliminateReserve?: number;
   /** 延迟空间大小阈值 */
   MaxReplayLatency?: number;
   /** 延迟大小开关 */
@@ -703,7 +705,7 @@ declare interface ReadOnlyGroup {
   /** 虚拟网络id */
   VpcId?: string;
   /** 子网id */
-  SubnetId?: string | null;
+  SubnetId?: string;
   /** 地域id */
   Region?: string;
   /** 地区id */
@@ -1255,6 +1257,8 @@ declare interface CreateInstancesRequest {
   KMSKeyId?: string;
   /** 使用KMS服务的地域，KMSRegion为空默认使用本地域的KMS，本地域不支持的情况下需自选其他KMS支持的地域。KMSRegion相关介绍参考[开启透明数据加密](https://cloud.tencent.com/document/product/409/71749) */
   KMSRegion?: string;
+  /** 指定KMS服务的集群，KMSClusterId为空使用默认集群的KMS，若选择指定KMS集群，则需要传入KMSClusterId。 KMSClusterId相关介绍参考开启透明数据加密 */
+  KMSClusterId?: string;
   /** 数据库引擎，支持：postgresql：云数据库PostgreSQLmssql_compatible：MSSQL兼容-云数据库PostgreSQL默认值：postgresql */
   DBEngine?: string;
   /** 数据库引擎的配置信息，配置格式如下：{"$key1":"$value1", "$key2":"$value2"}各引擎支持如下：mssql_compatible引擎：migrationMode：数据库模式，可选参数，可取值：single-db（单数据库模式），multi-db（多数据库模式）。默认为single-db。defaultLocale：排序区域规则，可选参数，在初始化后不可修改，默认为en_US，可选值如下："af_ZA", "sq_AL", "ar_DZ", "ar_BH", "ar_EG", "ar_IQ", "ar_JO", "ar_KW", "ar_LB", "ar_LY", "ar_MA", "ar_OM", "ar_QA", "ar_SA", "ar_SY", "ar_TN", "ar_AE", "ar_YE", "hy_AM", "az_Cyrl_AZ", "az_Latn_AZ", "eu_ES", "be_BY", "bg_BG", "ca_ES", "zh_HK", "zh_MO", "zh_CN", "zh_SG", "zh_TW", "hr_HR", "cs_CZ", "da_DK", "nl_BE", "nl_NL", "en_AU", "en_BZ", "en_CA", "en_IE", "en_JM", "en_NZ", "en_PH", "en_ZA", "en_TT", "en_GB", "en_US", "en_ZW", "et_EE", "fo_FO", "fa_IR", "fi_FI", "fr_BE", "fr_CA", "fr_FR", "fr_LU", "fr_MC", "fr_CH", "mk_MK", "ka_GE", "de_AT", "de_DE", "de_LI", "de_LU", "de_CH", "el_GR", "gu_IN", "he_IL", "hi_IN", "hu_HU", "is_IS", "id_ID", "it_IT", "it_CH", "ja_JP", "kn_IN", "kok_IN", "ko_KR", "ky_KG", "lv_LV", "lt_LT", "ms_BN", "ms_MY", "mr_IN", "mn_MN", "nb_NO", "nn_NO", "pl_PL", "pt_BR", "pt_PT", "pa_IN", "ro_RO", "ru_RU", "sa_IN", "sr_Cyrl_RS", "sr_Latn_RS", "sk_SK", "sl_SI", "es_AR", "es_BO", "es_CL", "es_CO", "es_CR", "es_DO", "es_EC", "es_SV", "es_GT", "es_HN", "es_MX", "es_NI", "es_PA", "es_PY","es_PE", "es_PR", "es_ES", "es_TRADITIONAL", "es_UY", "es_VE", "sw_KE", "sv_FI", "sv_SE", "tt_RU", "te_IN", "th_TH", "tr_TR", "uk_UA", "ur_IN", "ur_PK", "uz_Cyrl_UZ", "uz_Latn_UZ", "vi_VN"。serverCollationName：排序规则名称，可选参数，在初始化后不可修改，默认为sql_latin1_general_cp1_ci_as，可选值如下："bbf_unicode_general_ci_as", "bbf_unicode_cp1_ci_as", "bbf_unicode_CP1250_ci_as", "bbf_unicode_CP1251_ci_as", "bbf_unicode_cp1253_ci_as", "bbf_unicode_cp1254_ci_as", "bbf_unicode_cp1255_ci_as", "bbf_unicode_cp1256_ci_as", "bbf_unicode_cp1257_ci_as", "bbf_unicode_cp1258_ci_as", "bbf_unicode_cp874_ci_as", "sql_latin1_general_cp1250_ci_as", "sql_latin1_general_cp1251_ci_as", "sql_latin1_general_cp1_ci_as", "sql_latin1_general_cp1253_ci_as", "sql_latin1_general_cp1254_ci_as", "sql_latin1_general_cp1255_ci_as","sql_latin1_general_cp1256_ci_as", "sql_latin1_general_cp1257_ci_as", "sql_latin1_general_cp1258_ci_as", "chinese_prc_ci_as", "cyrillic_general_ci_as", "finnish_swedish_ci_as", "french_ci_as", "japanese_ci_as", "korean_wansung_ci_as", "latin1_general_ci_as", "modern_spanish_ci_as", "polish_ci_as", "thai_ci_as", "traditional_spanish_ci_as", "turkish_ci_as", "ukrainian_ci_as", "vietnamese_ci_as"。 */
@@ -1989,7 +1993,7 @@ declare interface DescribeDatabaseObjectsResponse {
   /** 查询对象列表。 */
   ObjectSet?: string[] | null;
   /** 查询对象总数量 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2121,19 +2125,19 @@ declare interface DescribeParameterTemplateAttributesRequest {
 
 declare interface DescribeParameterTemplateAttributesResponse {
   /** 参数模板ID */
-  TemplateId?: string | null;
+  TemplateId?: string;
   /** 参数模板包含的参数个数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 参数模板包含的参数信息 */
   ParamInfoSet?: ParamInfo[] | null;
   /** 参数模板名称 */
-  TemplateName?: string | null;
+  TemplateName?: string;
   /** 参数模板适用的数据库版本 */
-  DBMajorVersion?: string | null;
+  DBMajorVersion?: string;
   /** 参数模板适用的数据库引擎 */
-  DBEngine?: string | null;
+  DBEngine?: string;
   /** 参数模板描述 */
-  TemplateDescription?: string | null;
+  TemplateDescription?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2513,11 +2517,11 @@ declare interface ModifyBackupDownloadRestrictionRequest {
   RestrictionType: string;
   /** vpc限制效力，ALLOW 允许；DENY 拒绝。 */
   VpcRestrictionEffect?: string;
-  /** 允许或拒绝下载备份文件的vpcId列表。 */
+  /** 允许或拒绝下载备份文件的vpcId列表。**注意：**该入参会全量替换存量已有集合，非增量更新。修改需传入预期的全量集合。 */
   VpcIdSet?: string[];
   /** ip限制效力，ALLOW 允许；DENY 拒绝。 */
   IpRestrictionEffect?: string;
-  /** 允许或拒绝下载备份文件的ip列表。 */
+  /** 允许或拒绝下载备份文件的ip列表。**注意：**该入参会全量替换存量已有集合，非增量更新。修改需传入预期的全量集合。 */
   IpSet?: string[];
 }
 
@@ -2679,7 +2683,7 @@ declare interface ModifyDBInstanceSSLConfigResponse {
 }
 
 declare interface ModifyDBInstanceSecurityGroupsRequest {
-  /** 实例或只读组要绑定的安全组列表。安全组信息可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来查询。 */
+  /** 实例或只读组要绑定的安全组列表。安全组信息可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来查询。**注意：**该入参会全量替换存量已有集合，非增量更新。修改需传入预期的全量集合。 */
   SecurityGroupIdSet: string[];
   /** 实例ID，DBInstanceId和ReadOnlyGroupId至少传一个；如果都传，忽略ReadOnlyGroupId */
   DBInstanceId?: string;
@@ -3075,7 +3079,7 @@ declare interface Postgres {
   CloneDBInstance(data: CloneDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CloneDBInstanceResponse>;
   /** 关闭实例公网地址 {@link CloseDBExtranetAccessRequest} {@link CloseDBExtranetAccessResponse} */
   CloseDBExtranetAccess(data: CloseDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseDBExtranetAccessResponse>;
-  /** 【废弃】关闭serverlessDB实例公网地址 {@link CloseServerlessDBExtranetAccessRequest} {@link CloseServerlessDBExtranetAccessResponse} */
+  /** @deprecated 【废弃】关闭serverlessDB实例公网地址 {@link CloseServerlessDBExtranetAccessRequest} {@link CloseServerlessDBExtranetAccessResponse} */
   CloseServerlessDBExtranetAccess(data?: CloseServerlessDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseServerlessDBExtranetAccessResponse>;
   /** 创建数据库账号 {@link CreateAccountRequest} {@link CreateAccountResponse} */
   CreateAccount(data: CreateAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountResponse>;
@@ -3099,7 +3103,7 @@ declare interface Postgres {
   CreateReadOnlyGroup(data: CreateReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReadOnlyGroupResponse>;
   /** 创建RO组网络 {@link CreateReadOnlyGroupNetworkAccessRequest} {@link CreateReadOnlyGroupNetworkAccessResponse} */
   CreateReadOnlyGroupNetworkAccess(data: CreateReadOnlyGroupNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReadOnlyGroupNetworkAccessResponse>;
-  /** 【废弃】创建ServerlessDB实例 {@link CreateServerlessDBInstanceRequest} {@link CreateServerlessDBInstanceResponse} */
+  /** @deprecated 【废弃】创建ServerlessDB实例 {@link CreateServerlessDBInstanceRequest} {@link CreateServerlessDBInstanceResponse} */
   CreateServerlessDBInstance(data: CreateServerlessDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServerlessDBInstanceResponse>;
   /** 删除数据库账号 {@link DeleteAccountRequest} {@link DeleteAccountResponse} */
   DeleteAccount(data: DeleteAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountResponse>;
@@ -3117,7 +3121,7 @@ declare interface Postgres {
   DeleteReadOnlyGroup(data: DeleteReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReadOnlyGroupResponse>;
   /** 删除RO组网络 {@link DeleteReadOnlyGroupNetworkAccessRequest} {@link DeleteReadOnlyGroupNetworkAccessResponse} */
   DeleteReadOnlyGroupNetworkAccess(data: DeleteReadOnlyGroupNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReadOnlyGroupNetworkAccessResponse>;
-  /** 【废弃】删除ServerlessDB实例 {@link DeleteServerlessDBInstanceRequest} {@link DeleteServerlessDBInstanceResponse} */
+  /** @deprecated 【废弃】删除ServerlessDB实例 {@link DeleteServerlessDBInstanceRequest} {@link DeleteServerlessDBInstanceResponse} */
   DeleteServerlessDBInstance(data?: DeleteServerlessDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServerlessDBInstanceResponse>;
   /** 查询数据库账号的权限信息 {@link DescribeAccountPrivilegesRequest} {@link DescribeAccountPrivilegesResponse} */
   DescribeAccountPrivileges(data: DescribeAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountPrivilegesResponse>;
@@ -3191,7 +3195,7 @@ declare interface Postgres {
   DescribeReadOnlyGroups(data?: DescribeReadOnlyGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReadOnlyGroupsResponse>;
   /** 查询售卖地域 {@link DescribeRegionsRequest} {@link DescribeRegionsResponse} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
-  /** 【废弃】查询ServerlessDB实例列表 {@link DescribeServerlessDBInstancesRequest} {@link DescribeServerlessDBInstancesResponse} */
+  /** @deprecated 【废弃】查询ServerlessDB实例列表 {@link DescribeServerlessDBInstancesRequest} {@link DescribeServerlessDBInstancesResponse} */
   DescribeServerlessDBInstances(data?: DescribeServerlessDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessDBInstancesResponse>;
   /** 获取慢查询统计分析列表 {@link DescribeSlowQueryAnalysisRequest} {@link DescribeSlowQueryAnalysisResponse} */
   DescribeSlowQueryAnalysis(data: DescribeSlowQueryAnalysisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowQueryAnalysisResponse>;
@@ -3261,7 +3265,7 @@ declare interface Postgres {
   ModifySwitchTimePeriod(data: ModifySwitchTimePeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySwitchTimePeriodResponse>;
   /** 开通实例公网地址 {@link OpenDBExtranetAccessRequest} {@link OpenDBExtranetAccessResponse} */
   OpenDBExtranetAccess(data: OpenDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenDBExtranetAccessResponse>;
-  /** 【废弃】开通serverlessDB实例公网地址 {@link OpenServerlessDBExtranetAccessRequest} {@link OpenServerlessDBExtranetAccessResponse} */
+  /** @deprecated 【废弃】开通serverlessDB实例公网地址 {@link OpenServerlessDBExtranetAccessRequest} {@link OpenServerlessDBExtranetAccessResponse} */
   OpenServerlessDBExtranetAccess(data?: OpenServerlessDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenServerlessDBExtranetAccessResponse>;
   /** 均衡只读组内实例的负载 {@link RebalanceReadOnlyGroupRequest} {@link RebalanceReadOnlyGroupResponse} */
   RebalanceReadOnlyGroup(data: RebalanceReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RebalanceReadOnlyGroupResponse>;

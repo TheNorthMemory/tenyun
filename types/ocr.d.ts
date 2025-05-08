@@ -343,9 +343,9 @@ declare interface DetectedWordCoordPoint {
 /** 识别出来的单字信息包括单字（包括单字Character和单字置信度confidence） */
 declare interface DetectedWords {
   /** 置信度 0 ~100 */
-  Confidence: number;
+  Confidence?: number;
   /** 候选字Character */
-  Character: string;
+  Character?: string;
 }
 
 /** 识别出的字段 */
@@ -3052,6 +3052,8 @@ declare interface BankCardOCRResponse {
   WarningCode?: number[] | null;
   /** 图片质量分数，请求EnableQualityValue时返回（取值范围：0-100，分数越低越模糊，建议阈值≥50）。 */
   QualityValue?: number | null;
+  /** 卡类别， 如： 标准实体银行卡、电子银行卡信息截图 */
+  CardCategory?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4929,13 +4931,15 @@ declare interface SmartStructuralProRequest {
   ImageUrl?: string;
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，WORD，EXCEL，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
-  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为前3页。 */
   PdfPageNumber?: number;
   /** 自定义结构化功能需返回的字段名称，例：若客户想新增返回姓名、性别两个字段的识别结果，则输入ItemNames=["姓名","性别"] */
   ItemNames?: string[];
+  /** true：仅输出自定义字段flase：输出默认字段+自定义字段默认true */
+  ItemNamesShowMode?: boolean;
   /** 是否开启全文字段识别 */
   ReturnFullText?: boolean;
-  /** 配置id支持：General -- 通用场景 InvoiceEng -- 国际invoice模版 WayBillEng --海运订单模板CustomsDeclaration -- 进出口报关单WeightNote -- 磅单MedicalMeter -- 血压仪表识别BillOfLading -- 海运提单EntrustmentBook -- 海运托书WordRecognize -- 手写英文作文模版Statement -- 对账单识别模板BookingConfirmation -- 配舱通知书识别模板AirWayBill -- 航空运单识别模板DispatchWeightNote -- 磅单发货单识别模板ReceiptWeightNote -- 磅单收货单识别模板ArticalRecognize -- 手写作文模版 */
+  /** 配置id支持：General -- 通用场景 InvoiceEng -- 国际invoice模版 WayBillEng --海运订单模板CustomsDeclaration -- 进出口报关单WeightNote -- 磅单MedicalMeter -- 血压仪表识别BillOfLading -- 海运提单EntrustmentBook -- 海运托书WordRecognize -- 手写英文作文模版Statement -- 对账单识别模板BookingConfirmation -- 配舱通知书识别模板AirWayBill -- 航空运单识别模板DispatchWeightNote -- 磅单发货单识别模板ReceiptWeightNote -- 磅单收货单识别模板ArticalRecognize -- 手写作文模版Table -- 表格模版 */
   ConfigId?: string;
   /** 是否开启全文字段坐标值的识别 */
   EnableCoord?: boolean;

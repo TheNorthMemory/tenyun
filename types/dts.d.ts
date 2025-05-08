@@ -2209,8 +2209,6 @@ declare interface ModifyConsumerGroupPasswordRequest {
   ConsumerGroupName: string;
   /** 新密码。字符长度不小于3，不大于32 */
   NewPassword: string;
-  /** 旧密码，非必选 */
-  OldPassword?: string;
 }
 
 declare interface ModifyConsumerGroupPasswordResponse {

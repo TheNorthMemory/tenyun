@@ -2716,6 +2716,18 @@ declare interface ModifyModelServiceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyNotebookTagsRequest {
+  /** Notebook Id */
+  Id: string;
+  /** Notebook修改标签集合 */
+  Tags?: Tag[];
+}
+
+declare interface ModifyNotebookTagsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface PushTrainingMetricsRequest {
   /** 指标数据 */
   Data?: MetricData[];
@@ -3573,6 +3585,8 @@ declare interface Tione {
   DescribeTrainingTasks(data?: DescribeTrainingTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTasksResponse>;
   /** 更新模型服务 {@link ModifyModelServiceRequest} {@link ModifyModelServiceResponse} */
   ModifyModelService(data: ModifyModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelServiceResponse>;
+  /** 修改Notebook标签 {@link ModifyNotebookTagsRequest} {@link ModifyNotebookTagsResponse} */
+  ModifyNotebookTags(data: ModifyNotebookTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotebookTagsResponse>;
   /** 上报训练自定义指标 {@link PushTrainingMetricsRequest} {@link PushTrainingMetricsResponse} */
   PushTrainingMetrics(data?: PushTrainingMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<PushTrainingMetricsResponse>;
   /** 启动Notebook {@link StartNotebookRequest} {@link StartNotebookResponse} */

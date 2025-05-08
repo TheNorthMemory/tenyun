@@ -491,11 +491,11 @@ declare interface CtsdbParam {
 /** CVM和IP信息 */
 declare interface CvmAndIpInfo {
   /** ckafka集群实例Id */
-  CkafkaInstanceId?: string | null;
+  CkafkaInstanceId?: string;
   /** CVM实例ID */
   InstanceId?: string;
   /** IP地址 */
-  Ip?: string | null;
+  Ip?: string;
 }
 
 /** Datahub资源配置 */
@@ -1362,6 +1362,14 @@ declare interface InstanceQuotaConfigResp {
   QuotaConsumerByteRate: number | null;
 }
 
+/** 实例路由 */
+declare interface InstanceRoute {
+  /** ckafka集群实例Id */
+  InstanceId: string;
+  /** 路由Id */
+  RouteId: number;
+}
+
 /** 数据处理——Value处理参数——Jsonpath替换参数 */
 declare interface JsonPathReplaceParam {
   /** 被替换值，Jsonpath表达式 */
@@ -1439,9 +1447,9 @@ declare interface KafkaParam {
 /** CVM和IP 信息列表 */
 declare interface ListCvmAndIpInfoRsp {
   /** cvm和IP 列表 */
-  CvmList?: CvmAndIpInfo[] | null;
+  CvmList?: CvmAndIpInfo[];
   /** 实例数据量 */
-  TotalCount?: number | null;
+  TotalCount?: number;
 }
 
 /** 小写字符解析 */
@@ -1988,6 +1996,16 @@ declare interface RouteDTO {
   RouteId?: number;
 }
 
+/** 路由列表过滤器 */
+declare interface RouteFilter {
+  /** 过滤名称,目前支持security-group-id,按安全组关联过滤 */
+  Name?: string;
+  /** 过滤值,当过滤名称为security-group-id时仅支持传单个value */
+  Values?: string[];
+  /** 过滤关系,支持IN和NOT_IN,默认为IN */
+  Relation?: string;
+}
+
 /** 数据处理ROW输出格式配置 */
 declare interface RowParam {
   /** 行内容，KEY_VALUE，VALUE */
@@ -2100,6 +2118,28 @@ declare interface ScfParam {
 declare interface SecondaryAnalyseParam {
   /** 分隔符 */
   Regex: string;
+}
+
+/** 安全组路由信息 */
+declare interface SecurityGroupRoute {
+  /** 路由信息 */
+  InstanceRoute?: InstanceRoute;
+  /** 关联的安全组列表 */
+  SecurityGroupIds?: string[];
+  /** ckafka集群实例名称 */
+  InstanceName?: string;
+  /** 路由vpcId */
+  VpcId?: string;
+  /** 路由vip */
+  Vip?: string;
+}
+
+/** 安全组路由信息返回结果 */
+declare interface SecurityGroupRouteResp {
+  /** 符合条件的安全组路由信息总数 */
+  TotalCount?: number;
+  /** 符合条件的安全组路由信息列表 */
+  SecurityGroupRoutes?: SecurityGroupRoute[];
 }
 
 /** 值支持一拆多，即将一个值拆为一个数组 */
@@ -3660,6 +3700,26 @@ declare interface DescribeRouteResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSecurityGroupRoutesRequest {
+  /** 路由信息 */
+  InstanceRoute?: InstanceRoute;
+  /** 过滤器 */
+  Filters?: RouteFilter[];
+  /** 分页Offset,默认0 */
+  Offset?: number;
+  /** 分页Limit,默认20 */
+  Limit?: number;
+  /** 关键词,可根据实例id/实例名称/vip模糊搜索 */
+  SearchWord?: string;
+}
+
+declare interface DescribeSecurityGroupRoutesResponse {
+  /** 返回的安全组路由信息结果对象 */
+  Result?: SecurityGroupRouteResp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTaskStatusRequest {
   /** 流程Id */
   FlowId: number;
@@ -4633,6 +4693,8 @@ declare interface Ckafka {
   DescribeRegion(data?: DescribeRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionResponse>;
   /** 查看路由信息 {@link DescribeRouteRequest} {@link DescribeRouteResponse} */
   DescribeRoute(data: DescribeRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteResponse>;
+  /** 查询安全组路由信息列表 {@link DescribeSecurityGroupRoutesRequest} {@link DescribeSecurityGroupRoutesResponse} */
+  DescribeSecurityGroupRoutes(data?: DescribeSecurityGroupRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupRoutesResponse>;
   /** 查询任务状态 {@link DescribeTaskStatusRequest} {@link DescribeTaskStatusResponse} */
   DescribeTaskStatus(data: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
   /** 获取主题列表 {@link DescribeTopicRequest} {@link DescribeTopicResponse} */

@@ -274,7 +274,7 @@ declare interface DeviceDetail {
   DeviceStrategyVer?: string;
   /** NGN策略版本 */
   NGNStrategyVer?: string;
-  /** 最近登录账户的账号 */
+  /** 最近登录账户的账号(账号系统用户账号) */
   IOAUserName?: string;
   /** 设备管控新策略 */
   DeviceNewStrategyVer?: string;
@@ -292,10 +292,12 @@ declare interface DeviceDetail {
   IdentityNewStrategyVer?: string;
   /** 最近登录账号部门 */
   AccountGroupName?: string;
-  /** 最近登录账户的姓名 */
+  /** 最近登录账户的姓名(账号系统用户姓名) */
   AccountName?: string;
   /** 账号组id */
   AccountGroupId?: number;
+  /** 终端备注名 */
+  RemarkName?: string;
 }
 
 /** Filters 条件过滤 */

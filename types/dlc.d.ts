@@ -2028,6 +2028,8 @@ declare interface UserRole {
   CosPermissionList?: CosPermission[];
   /** cam策略json */
   PermissionJson?: string;
+  /** 是否设置为常驻：1非常驻（默认）、2常驻（仅能设置一个常驻） */
+  IsDefault?: number;
 }
 
 /** 用户信息集合 */
@@ -4301,6 +4303,8 @@ declare interface DescribeUserRolesRequest {
   SortBy?: string;
   /** 正序或者倒序，例如：desc */
   Sorting?: string;
+  /** 是否设置为常驻：1非常驻（默认）、2常驻（仅能设置一个常驻） */
+  IsDefault?: number;
 }
 
 declare interface DescribeUserRolesResponse {

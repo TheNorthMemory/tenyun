@@ -1971,9 +1971,9 @@ declare interface CheckMigrateClusterRequest {
   Volume?: number;
   /** 磁盘类型。 CLOUD_SSD: SSD云硬盘; CLOUD_HSSD: 增强型SSD云硬盘 */
   DiskType?: string;
-  /** 集群版节点拓扑配置。 */
+  /** 云盘版节点拓扑配置。 */
   ClusterTopology?: ClusterTopology;
-  /** 迁移实例类型。支持值包括： "CLOUD_NATIVE_CLUSTER" - 标准型集群版实例， "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 加强型集群版实例。 */
+  /** 迁移实例类型。支持值包括： "CLOUD_NATIVE_CLUSTER" - 标准型云盘版实例， "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 加强型云盘版实例。 */
   DeviceType?: string;
   /** 只读实例信息 */
   RoInfo?: MigrateClusterRoInfo[];
@@ -3256,11 +3256,11 @@ declare interface DescribeClusterInfoRequest {
 declare interface DescribeClusterInfoResponse {
   /** 实例名称。 */
   ClusterName?: string;
-  /** 集群读写地址信息。 */
+  /** 云盘版实例的读写地址信息。 */
   ReadWriteAddress?: AddressInfo;
-  /** 集群只读地址信息。 */
+  /** 云盘版实例的只读地址信息。 */
   ReadOnlyAddress?: AddressInfo[];
-  /** 集群节点列表信息。 */
+  /** 云盘版实例的节点列表信息。 */
   NodeList?: ClusterNodeInfo[];
   /** 只读空间保护阈值,单位GB */
   ReadonlyLimit?: number;
@@ -5343,7 +5343,7 @@ declare interface Cdb {
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
   /** 均衡RO组内实例的负载 {@link BalanceRoGroupLoadRequest} {@link BalanceRoGroupLoadResponse} */
   BalanceRoGroupLoad(data: BalanceRoGroupLoadRequest, config?: AxiosRequestConfig): AxiosPromise<BalanceRoGroupLoadResponse>;
-  /** 迁移集群版校验 {@link CheckMigrateClusterRequest} {@link CheckMigrateClusterResponse} */
+  /** 迁移云盘版校验 {@link CheckMigrateClusterRequest} {@link CheckMigrateClusterResponse} */
   CheckMigrateCluster(data: CheckMigrateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CheckMigrateClusterResponse>;
   /** 实例关闭审计服务 {@link CloseAuditServiceRequest} {@link CloseAuditServiceResponse} */
   CloseAuditService(data: CloseAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CloseAuditServiceResponse>;
@@ -5459,7 +5459,7 @@ declare interface Cdb {
   DescribeCdbZoneConfig(data?: DescribeCdbZoneConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdbZoneConfigResponse>;
   /** 查询克隆任务列表 {@link DescribeCloneListRequest} {@link DescribeCloneListResponse} */
   DescribeCloneList(data: DescribeCloneListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloneListResponse>;
-  /** 查询集群版实例信息 {@link DescribeClusterInfoRequest} {@link DescribeClusterInfoResponse} */
+  /** 查询云盘版实例信息 {@link DescribeClusterInfoRequest} {@link DescribeClusterInfoResponse} */
   DescribeClusterInfo(data: DescribeClusterInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInfoResponse>;
   /** @deprecated 查询实例的 CPU 弹性扩容策略 {@link DescribeCpuExpandStrategyRequest} {@link DescribeCpuExpandStrategyResponse} */
   DescribeCpuExpandStrategy(data: DescribeCpuExpandStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCpuExpandStrategyResponse>;

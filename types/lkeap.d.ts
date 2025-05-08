@@ -104,6 +104,10 @@ declare interface DocumentUsage {
   TotalToken?: number;
   /** 文档拆分任务消耗的总token数 */
   TotalTokens?: number;
+  /** 拆分消耗的token数 */
+  SplitTokens?: number;
+  /** mllm消耗的token数 */
+  MllmTokens?: number;
 }
 
 /** 向量 */
@@ -128,6 +132,8 @@ declare interface Message {
   Content?: string;
   /** 思维链内容。ReasoningConent参数仅支持出参，且只有deepseek-r1模型会返回。 */
   ReasoningContent?: string;
+  /** 搜索结果 */
+  SearchResults?: SearchResult[];
 }
 
 /** 问答对信息 */
@@ -194,6 +200,24 @@ declare interface RetrievalSetting {
   ScoreThreshold?: number;
 }
 
+/** 搜索结果 */
+declare interface SearchResult {
+  /** 索引 */
+  Index?: number;
+  /** 链接地址 */
+  Url?: string;
+  /** 标题 */
+  Name?: string;
+  /** 摘要 */
+  Snippet?: string;
+  /** 图标 */
+  Icon?: string;
+  /** 站点 */
+  Site?: string;
+  /** 1740412800 */
+  PublishedTime?: number;
+}
+
 /** 分段配置 */
 declare interface SegmentationConfig {
   /** 最大分片长度 */
@@ -229,6 +253,8 @@ declare interface ChatCompletionsRequest {
   Temperature?: number;
   /** 最大生成的token数量，默认为4096，最大可设置为16384 */
   MaxTokens?: number;
+  /** 是否启用联网搜索 */
+  EnableSearch?: boolean;
 }
 
 declare interface ChatCompletionsResponse {

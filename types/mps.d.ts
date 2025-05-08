@@ -133,13 +133,13 @@ declare interface ActivityResult {
 /** 转自适应码流信息 */
 declare interface AdaptiveDynamicStreamingInfoItem {
   /** 转自适应码流规格。 */
-  Definition: number;
+  Definition?: number;
   /** 打包格式，可能为 HLS和 MPEG-DASH 两种。 */
-  Package: string;
+  Package?: string;
   /** 播放路径。 */
-  Path: string;
+  Path?: string;
   /** 自适应码流文件的存储位置。 */
-  Storage: TaskOutputStorage;
+  Storage?: TaskOutputStorage;
 }
 
 /** 对视频转自适应码流的输入参数类型 */
@@ -1323,11 +1323,11 @@ declare interface AiSampleFaceOperation {
 /** AI 样本管理，处理失败的人脸信息 */
 declare interface AiSampleFailFaceInfo {
   /** 对应入参 FaceContents 中错误图片下标，从 0 开始。 */
-  Index: number;
+  Index?: number;
   /** 错误码，取值：0：成功；其他：失败。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 错误描述。 */
-  Message: string;
+  Message?: string;
 }
 
 /** AI 样本管理，人物信息。 */
@@ -1361,15 +1361,15 @@ declare interface AiSampleTagOperation {
 /** AI 样本管理，关键词输出信息。 */
 declare interface AiSampleWord {
   /** 关键词。 */
-  Keyword: string;
+  Keyword?: string;
   /** 关键词标签。 */
-  TagSet: string[];
+  TagSet?: string[];
   /** 关键词应用场景。 */
-  UsageSet: string[];
+  UsageSet?: string[];
   /** 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** AI 样本管理，关键词输入信息。 */
@@ -1397,29 +1397,29 @@ declare interface AnimatedGraphicTaskInput {
 /** 转动图模板详情。 */
 declare interface AnimatedGraphicsTemplate {
   /** 转动图模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 模板类型，取值范围：Preset：系统预置模板；Custom：用户自定义模板。 */
-  Type: string;
+  Type?: string;
   /** 转动图模板名称。 */
-  Name: string;
+  Name?: string;
   /** 转动图模板描述。 */
-  Comment: string;
+  Comment?: string;
   /** 动图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
-  Width: number;
+  Width?: number;
   /** 动图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
-  Height: number;
+  Height?: number;
   /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
-  ResolutionAdaptive: string;
+  ResolutionAdaptive?: string;
   /** 动图格式。 */
-  Format: string;
+  Format?: string;
   /** 帧率。 */
-  Fps: number;
+  Fps?: number;
   /** 图片质量。 */
-  Quality: number;
+  Quality?: number;
   /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** 去伪影（毛刺）配置 */
@@ -2511,17 +2511,17 @@ declare interface EditMediaOutputConfig {
 /** 编辑视频任务信息 */
 declare interface EditMediaTask {
   /** 任务 ID。 */
-  TaskId: string;
+  TaskId?: string;
   /** 任务状态，取值：PROCESSING：处理中；FINISH：已完成。 */
-  Status: string;
+  Status?: string;
   /** 错误码0：成功；其他值：失败。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 错误信息。 */
-  Message: string;
+  Message?: string;
   /** 视频编辑任务的输入。 */
-  Input: EditMediaTaskInput;
+  Input?: EditMediaTaskInput;
   /** 视频编辑任务的输出。 */
-  Output: EditMediaTaskOutput | null;
+  Output?: EditMediaTaskOutput | null;
 }
 
 /** 编辑视频任务的输入。 */
@@ -3191,19 +3191,19 @@ declare interface LiveStreamAiReviewImagePoliticalResult {
 /** 直播 AI 内容审核图片鉴黄结果 */
 declare interface LiveStreamAiReviewImagePornResult {
   /** 嫌疑片段起始的 PTS 时间，单位：秒。 */
-  StartPtsTime: number;
+  StartPtsTime?: number;
   /** 嫌疑片段结束的 PTS 时间，单位：秒。 */
-  EndPtsTime: number;
+  EndPtsTime?: number;
   /** 嫌疑片段涉黄分数。 */
-  Confidence: number;
+  Confidence?: number;
   /** 嫌疑片段鉴黄结果建议，取值范围：passreviewblock */
-  Suggestion: string;
+  Suggestion?: string;
   /** 视频鉴黄结果标签，取值范围：porn：色情。sexy：性感。vulgar：低俗。intimacy：亲密行为。 */
-  Label: string;
+  Label?: string;
   /** 嫌疑图片 URL （图片不会永久存储，到达PicUrlExpireTime 时间点后图片将被删除）。 */
-  Url: string;
+  Url?: string;
   /** 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  PicUrlExpireTime: string;
+  PicUrlExpireTime?: string;
 }
 
 /** 直播 AI 内容审核图片涉敏结果 */
@@ -3247,15 +3247,15 @@ declare interface LiveStreamAiReviewResultItem {
 /** 直播 AI 内容审核声音鉴黄结果 */
 declare interface LiveStreamAiReviewVoicePornResult {
   /** 嫌疑片段起始的 PTS 时间，单位：秒。 */
-  StartPtsTime: number;
+  StartPtsTime?: number;
   /** 嫌疑片段结束的 PTS 时间，单位：秒。 */
-  EndPtsTime: number;
+  EndPtsTime?: number;
   /** 嫌疑片段涉黄分数。 */
-  Confidence: number;
+  Confidence?: number;
   /** 嫌疑片段鉴黄结果建议，取值范围：passreviewblock */
-  Suggestion: string;
+  Suggestion?: string;
   /** 视频鉴黄结果标签，取值范围：sexual_moan：呻吟。 */
-  Label: string;
+  Label?: string;
 }
 
 /** 直播识别 Asr 全文识别 */
@@ -3279,31 +3279,31 @@ declare interface LiveStreamAsrFullTextRecognitionResult {
 /** 直播 AI Asr 单词识别结果 */
 declare interface LiveStreamAsrWordsRecognitionResult {
   /** 语音关键词。 */
-  Word: string;
+  Word?: string;
   /** 识别片段起始的 PTS 时间，单位：秒。 */
-  StartPtsTime: number;
+  StartPtsTime?: number;
   /** 识别片段终止的 PTS 时间，单位：秒。 */
-  EndPtsTime: number;
+  EndPtsTime?: number;
   /** 识别片段置信度。取值：0~100。 */
-  Confidence: number;
+  Confidence?: number;
 }
 
 /** 直播 AI 人脸识别结果 */
 declare interface LiveStreamFaceRecognitionResult {
   /** 人物唯一标识 ID。 */
-  Id: string;
+  Id?: string;
   /** 人物名称。 */
-  Name: string;
+  Name?: string;
   /** 人物库类型，表示识别出的人物来自哪个人物库：Default：默认人物库；UserDefine：用户自定义人物库。 */
-  Type: string;
+  Type?: string;
   /** 识别片段起始的 PTS 时间，单位：秒。 */
-  StartPtsTime: number;
+  StartPtsTime?: number;
   /** 识别片段终止的 PTS 时间，单位：秒。 */
-  EndPtsTime: number;
+  EndPtsTime?: number;
   /** 识别片段置信度。取值：0~100。 */
-  Confidence: number;
+  Confidence?: number;
   /** 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。 */
-  AreaCoordSet: number[];
+  AreaCoordSet?: number[];
 }
 
 /** 直播 AI 物体识别结果 */
@@ -3325,37 +3325,37 @@ declare interface LiveStreamObjectRecognitionResult {
 /** 直播识别 Ocr 全文识别 */
 declare interface LiveStreamOcrFullTextRecognitionResult {
   /** 语音文本。 */
-  Text: string;
+  Text?: string;
   /** 识别片段起始的 PTS 时间，单位：秒。 */
-  StartPtsTime: number;
+  StartPtsTime?: number;
   /** 识别片段终止的 PTS 时间，单位：秒。 */
-  EndPtsTime: number;
+  EndPtsTime?: number;
   /** 识别片段置信度。取值：0~100。 */
-  Confidence: number;
+  Confidence?: number;
   /** 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。 */
-  AreaCoordSet: number[];
+  AreaCoordSet?: number[];
 }
 
 /** 直播 AI Ocr 单词识别结果 */
 declare interface LiveStreamOcrWordsRecognitionResult {
   /** 文本关键词。 */
-  Word: string;
+  Word?: string;
   /** 识别片段起始的 PTS 时间，单位：秒。 */
-  StartPtsTime: number;
+  StartPtsTime?: number;
   /** 识别片段终止的 PTS 时间，单位：秒。 */
-  EndPtsTime: number;
+  EndPtsTime?: number;
   /** 识别片段置信度。取值：0~100。 */
-  Confidence: number;
+  Confidence?: number;
   /** 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。 */
-  AreaCoords: number[];
+  AreaCoords?: number[];
 }
 
 /** 直播流处理错误信息 */
 declare interface LiveStreamProcessErrorInfo {
   /** 错误码：0表示没有错误；非0表示错误，请参考 Message 错误信息。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 错误信息。 */
-  Message: string;
+  Message?: string;
 }
 
 /** 直播处理任务信息 */
@@ -3635,19 +3635,19 @@ declare interface MediaContentReviewSegmentItem {
 /** 雪碧图信息 */
 declare interface MediaImageSpriteItem {
   /** 雪碧图规格，参见[雪碧图参数模板](https://cloud.tencent.com/document/product/266/33480)。 */
-  Definition: number;
+  Definition?: number;
   /** 雪碧图小图的高度。 */
-  Height: number;
+  Height?: number;
   /** 雪碧图小图的宽度。 */
-  Width: number;
+  Width?: number;
   /** 每一张雪碧图大图里小图的数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 每一张雪碧图大图的路径。 */
-  ImagePathSet: string[];
+  ImagePathSet?: string[];
   /** 雪碧图子图位置与时间关系的 WebVtt 文件路径。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。 */
-  WebVttPath: string;
+  WebVttPath?: string;
   /** 雪碧图文件的存储位置。 */
-  Storage: TaskOutputStorage;
+  Storage?: TaskOutputStorage;
 }
 
 /** 媒体处理的输入对象信息。 */
@@ -3843,17 +3843,17 @@ declare interface MediaProcessTaskTranscodeResult {
 /** 采样截图信息 */
 declare interface MediaSampleSnapshotItem {
   /** 采样截图规格 ID，参见[采样截图参数模板](https://cloud.tencent.com/document/product/266/33480)。 */
-  Definition: number;
+  Definition?: number;
   /** 采样方式，取值范围：Percent：根据百分比间隔采样。Time：根据时间间隔采样。 */
-  SampleType: string;
+  SampleType?: string;
   /** 采样间隔当 SampleType 为 Percent 时，该值表示多少百分比一张图。当 SampleType 为 Time 时，该值表示多少时间间隔一张图，单位秒， 第一张图均为视频首帧。 */
-  Interval: number;
+  Interval?: number;
   /** 截图后文件的存储位置。 */
-  Storage: TaskOutputStorage;
+  Storage?: TaskOutputStorage;
   /** 生成的截图 path 列表。 */
-  ImagePathSet: string[];
+  ImagePathSet?: string[];
   /** 截图如果被打上了水印，被打水印的模板 ID 列表。 */
-  WaterMarkDefinition: number[];
+  WaterMarkDefinition?: number[];
 }
 
 /** 点播文件指定时间点截图信息 */
@@ -5015,27 +5015,27 @@ declare interface SnapshotByTimeOffsetTaskInput {
 /** 时间点截图模板详情 */
 declare interface SnapshotByTimeOffsetTemplate {
   /** 时间点截图模板唯一标识。 */
-  Definition: number;
+  Definition?: number;
   /** 模板类型，取值范围：Preset：系统预置模板；Custom：用户自定义模板。 */
-  Type: string;
+  Type?: string;
   /** 时间点截图模板名称。 */
-  Name: string;
+  Name?: string;
   /** 模板描述信息。 */
-  Comment: string;
+  Comment?: string;
   /** 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
-  Width: number;
+  Width?: number;
   /** 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
-  Height: number;
+  Height?: number;
   /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
-  ResolutionAdaptive: string;
+  ResolutionAdaptive?: string;
   /** 图片格式。 */
-  Format: string;
+  Format?: string;
   /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式： stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。black：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。black：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。默认值：black 。 */
-  FillType: string;
+  FillType?: string;
 }
 
 /** FairPlay，WideVine，PlayReady 等Drm加密方式。 */
@@ -6911,7 +6911,7 @@ declare interface DescribeSchedulesResponse {
 }
 
 declare interface DescribeSmartSubtitleTemplatesRequest {
-  /** 智能字幕模板唯一标识过滤条件，数组长度限制：10。 */
+  /** 智能字幕模板唯一标识过滤条件，数组长度限制：100。 */
   Definitions?: number[];
   /** 分页偏移量，默认值：0。 */
   Offset?: number;
