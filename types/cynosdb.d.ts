@@ -2388,6 +2388,22 @@ declare interface CloseProxyResponse {
   RequestId?: string;
 }
 
+declare interface CloseSSLRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 实例ID */
+  InstanceId?: string;
+}
+
+declare interface CloseSSLResponse {
+  /** 流程ID */
+  FlowId?: number | null;
+  /** 任务id */
+  TaskId?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CloseWanRequest {
   /** 实例组id */
   InstanceGrpId?: string;
@@ -5445,6 +5461,8 @@ declare interface Cynosdb {
   CloseProxy(data: CloseProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CloseProxyResponse>;
   /** 关闭数据库代理连接地址 {@link CloseProxyEndPointRequest} {@link CloseProxyEndPointResponse} */
   CloseProxyEndPoint(data: CloseProxyEndPointRequest, config?: AxiosRequestConfig): AxiosPromise<CloseProxyEndPointResponse>;
+  /** 关闭SSL加密 {@link CloseSSLRequest} {@link CloseSSLResponse} */
+  CloseSSL(data: CloseSSLRequest, config?: AxiosRequestConfig): AxiosPromise<CloseSSLResponse>;
   /** 关闭外网 {@link CloseWanRequest} {@link CloseWanResponse} */
   CloseWan(data?: CloseWanRequest, config?: AxiosRequestConfig): AxiosPromise<CloseWanResponse>;
   /** 复制集群密码复杂度 {@link CopyClusterPasswordComplexityRequest} {@link CopyClusterPasswordComplexityResponse} */

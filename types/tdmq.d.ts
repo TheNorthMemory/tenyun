@@ -1190,6 +1190,10 @@ declare interface RocketMQClusterConfig {
   MaxQueuesPerTopic?: number | null;
   /** topic分布 */
   TopicDistribution?: RocketMQTopicDistribution[] | null;
+  /** 最大角色数量 */
+  MaxRoleNum?: number;
+  /** TPS限额 */
+  MaxTpsLimit?: number;
 }
 
 /** 租户RocketMQ集群详细信息 */
@@ -1254,6 +1258,8 @@ declare interface RocketMQClusterInfo {
   ZoneId?: number | null;
   /** 集群节点所在的可用区，若该集群为跨可用区集群，则包含该集群节点所在的多个可用区。 */
   ZoneIds?: number[] | null;
+  /** 是否已冻结 */
+  IsFrozen?: boolean;
 }
 
 /** RocketMQ近期使用量 */
@@ -1786,6 +1792,10 @@ declare interface Topic {
   ClusterId?: string;
   /** 用户自定义的租户别名，如果没有，会复用专业集群 ID */
   Tenant?: string;
+  /** 是否开启异常消费者隔离 */
+  IsolateConsumerEnable?: boolean;
+  /** 消费者 Ack 超时时间，单位：秒 */
+  AckTimeOut?: number;
 }
 
 /** 主题关键信息 */
@@ -2227,6 +2237,8 @@ declare interface CreateRocketMQClusterRequest {
   Name: string;
   /** 集群描述，128个字符以内 */
   Remark?: string;
+  /** 标签列表 */
+  TagList?: Tag[];
 }
 
 declare interface CreateRocketMQClusterResponse {
@@ -2439,6 +2451,10 @@ declare interface CreateTopicRequest {
   MsgTTL?: number;
   /** 不传默认是原生策略，DefaultPolicy表示当订阅下达到最大未确认消息数 5000 时，服务端将不再向当前订阅下的所有消费者推送消息，DynamicPolicy表示动态调整订阅下的最大未确认消息数，具体配额是在 5000 和消费者数量*20之间取最大值。每个消费者默认最大 unack 消息数为 20，超过该限制时仅影响该消费者，不影响其他消费者。 */
   UnackPolicy?: string;
+  /** 是否开启异常消费者隔离 */
+  IsolateConsumerEnable?: boolean;
+  /** 消费者 Ack 超时时间，单位：秒，范围60-（3600*24） */
+  AckTimeOut?: number;
 }
 
 declare interface CreateTopicResponse {
@@ -3057,6 +3073,8 @@ declare interface DescribeMqMsgTraceRequest {
   GroupName?: string;
   /** 查询死信时该值为true，只对Rocketmq有效 */
   QueryDlqMsg?: boolean;
+  /** 生产时间 */
+  ProduceTime?: string;
 }
 
 declare interface DescribeMqMsgTraceResponse {
@@ -4781,6 +4799,10 @@ declare interface ModifyTopicRequest {
   MsgTTL?: number;
   /** 不传默认是原生策略，DefaultPolicy表示当订阅下达到最大未确认消息数 5000 时，服务端将不再向当前订阅下的所有消费者推送消息，DynamicPolicy表示动态调整订阅下的最大未确认消息数，具体配额是在 5000 和消费者数量*20之间取最大值。每个消费者默认最大 unack 消息数为 20，超过该限制时仅影响该消费者，不影响其他消费者。 */
   UnackPolicy?: string;
+  /** 是否开启异常消费者隔离 */
+  IsolateConsumerEnable?: boolean;
+  /** 消费者 Ack 超时时间，单位：秒，范围60-（3600*24 */
+  AckTimeOut?: number;
 }
 
 declare interface ModifyTopicResponse {
@@ -4873,10 +4895,10 @@ declare interface ResetRocketMQConsumerOffSetRequest {
   NamespaceId: string;
   /** 消费组名称 */
   GroupId: string;
-  /** 主题名称 */
-  Topic: string;
   /** 重置方式，0表示从最新位点开始，1表示从指定时间点开始 */
   Type: number;
+  /** 主题名称 */
+  Topic: string;
   /** 重置指定的时间戳，仅在 Type 为1是生效，以毫秒为单位 */
   ResetTimestamp?: number;
 }

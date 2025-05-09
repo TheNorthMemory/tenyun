@@ -944,6 +944,30 @@ declare interface DspaDiscoveryRuleDetail {
   Status?: number;
 }
 
+/** 分类分级任务相关信息 */
+declare interface DspaDiscoveryTask {
+  /** 任务名称 */
+  Name: string;
+  /** 任务描述 */
+  Description: string;
+  /** 执行周期，0单次 1每天 2每周 3每月 */
+  Period: number;
+  /** 执行计划，0立即 1定时 */
+  Plan: number;
+  /** 任务开关；1 打开，0 关闭 */
+  Enable: number;
+  /** 元数据对象信息 */
+  DataSourceInfo: DspaDiscoveryTaskDataSource;
+  /** 通用规则集开关，0 关闭，1 启用 */
+  GeneralRuleSetEnable: number;
+  /** 任务最新的一次执行结果信息，该字段用于查询任务列表接口 */
+  Result: ScanTaskResult | null;
+  /** 定时开始时间 */
+  TimingStartTime: string | null;
+  /** 关联模板是否更新 */
+  ComplianceUpdate: boolean | null;
+}
+
 /** 描述对象存储类敏感识别扫描人元数据条件。 */
 declare interface DspaDiscoveryTaskCOSCondition {
   /** 数据桶名称 */
@@ -3576,6 +3600,32 @@ declare interface DescribeDSPADiscoveryTaskTablesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDSPADiscoveryTasksRequest {
+  /** DSPA实例ID */
+  DspaId: string;
+  /** 数据源类型，可取值如下：cdb 表示云数据库 MySQL,dcdb 表示TDSQL MySQL版,mariadb 表示云数据库 MariaDB,postgres 表示云数据库 PostgreSQL,cynosdbpg 表示TDSQL-C PostgreSQL版,cynosdbmysql 表示TDSQL-C MySQL版,selfbuilt-db 表示自建数据库 */
+  DataSourceType: string;
+  /** 任务ID */
+  TaskId?: number;
+  /** 任务名称 */
+  Name?: string;
+  /** 任务扫描结果状态，可供选择的状态值有：-1待触发 0待扫描 1扫描中 2扫描终止 3扫描成功 4扫描失败 */
+  StatusList?: number[];
+  /** 偏移量，默认为0 */
+  Offset?: number;
+  /** 返回结果集数量，默认值是10000，最大值为10000，根据该资源的个数限制条件，该资源的个数不会超过10000，所以如果不输入该字段，默认获取全量数据 */
+  Limit?: number;
+}
+
+declare interface DescribeDSPADiscoveryTasksResponse {
+  /** 任务列表 */
+  Items?: DspaDiscoveryTask[];
+  /** 符合条件的任务列表数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDSPAESDataAssetByComplianceIdRequest {
   /** dspa实例id */
   DspaId: string;
@@ -4845,6 +4895,8 @@ declare interface Dsgc {
   DescribeDSPADiscoveryTaskResultDetail(data: DescribeDSPADiscoveryTaskResultDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDSPADiscoveryTaskResultDetailResponse>;
   /** 获取分级分级扫描的表集合 {@link DescribeDSPADiscoveryTaskTablesRequest} {@link DescribeDSPADiscoveryTaskTablesResponse} */
   DescribeDSPADiscoveryTaskTables(data: DescribeDSPADiscoveryTaskTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDSPADiscoveryTaskTablesResponse>;
+  /** 获取分类分级任务信息列表 {@link DescribeDSPADiscoveryTasksRequest} {@link DescribeDSPADiscoveryTasksResponse} */
+  DescribeDSPADiscoveryTasks(data: DescribeDSPADiscoveryTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDSPADiscoveryTasksResponse>;
   /** 查询ES的资产概览统计数据 {@link DescribeDSPAESDataAssetByComplianceIdRequest} {@link DescribeDSPAESDataAssetByComplianceIdResponse} */
   DescribeDSPAESDataAssetByComplianceId(data: DescribeDSPAESDataAssetByComplianceIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDSPAESDataAssetByComplianceIdResponse>;
   /** 查询ES的资产概览统计列表数据 {@link DescribeDSPAESDataAssetDetailRequest} {@link DescribeDSPAESDataAssetDetailResponse} */

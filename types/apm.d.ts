@@ -168,6 +168,10 @@ declare interface ApmInstanceDetail {
   IsSqlInjectionAnalysis?: number;
   /** 限流原因。{1: 正式版限额;2: 试用版限额;4: 试用版到期;8: 账号欠费} */
   StopReason?: number;
+  /** 是否开远程命令执行检测（0=关， 1=开） */
+  IsRemoteCommandExecutionAnalysis?: number;
+  /** 是否开内存马执行检测（0=关， 1=开） */
+  IsMemoryHijackingAnalysis?: number;
 }
 
 /** 指标列表单元 */
@@ -613,6 +617,10 @@ declare interface ModifyApmInstanceRequest {
   IsSqlInjectionAnalysis?: number;
   /** 是否开启组件漏洞检测（0=关,1=开） */
   IsInstrumentationVulnerabilityScan?: number;
+  /** 是否开启远程命令攻击检测 */
+  IsRemoteCommandExecutionAnalysis?: number;
+  /** 是否开启内存马检测 */
+  IsMemoryHijackingAnalysis?: number;
 }
 
 declare interface ModifyApmInstanceResponse {

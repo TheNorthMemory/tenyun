@@ -5,35 +5,35 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** AttributeKey值详情 */
 declare interface AttributeKeyDetail {
   /** 输入框类型 */
-  LabelType: string | null;
+  LabelType: string;
   /** 初始化展示 */
-  Starter: string | null;
+  Starter: string;
   /** 展示排序 */
-  Order: number | null;
+  Order: number;
   /** AttributeKey值 */
-  Value: string | null;
+  Value: string;
   /** 中文标签 */
-  Label: string | null;
+  Label: string;
 }
 
 /** 跟踪集概览 */
 declare interface AuditSummary {
   /** 跟踪集状态，1：开启，0：关闭 */
-  AuditStatus?: number | null;
+  AuditStatus?: number;
   /** COS存储桶名称 */
-  CosBucketName?: string | null;
+  CosBucketName?: string;
   /** 跟踪集名称 */
-  AuditName?: string | null;
+  AuditName?: string;
   /** 日志前缀 */
-  LogFilePrefix?: string | null;
+  LogFilePrefix?: string;
 }
 
 /** cmq地域信息 */
 declare interface CmqRegionInfo {
   /** 地域描述 */
-  CmqRegionName?: string | null;
+  CmqRegionName?: string;
   /** cmq地域 */
-  CmqRegion?: string | null;
+  CmqRegion?: string;
 }
 
 /** cos地域信息 */
@@ -61,7 +61,7 @@ declare interface Event {
   /** 事件名称 */
   EventName?: string;
   /** 证书ID */
-  SecretId?: string | null;
+  SecretId?: string;
   /** 请求来源 */
   EventSource?: string;
   /** 请求ID */
@@ -71,7 +71,7 @@ declare interface Event {
   /** 主账号ID */
   AccountID?: number;
   /** 源IP */
-  SourceIPAddress?: string | null;
+  SourceIPAddress?: string;
   /** 事件名称中文描述（此字段请按需使用，如果您是其他语言使用者，可以忽略该字段描述） */
   EventNameCn?: string;
   /** 资源对 */
@@ -85,15 +85,15 @@ declare interface Event {
 /** 跟踪集数据投递筛选条件 */
 declare interface Filter {
   /** 资源筛选条件 */
-  ResourceFields?: ResourceField[] | null;
+  ResourceFields?: ResourceField[];
 }
 
 /** CMK属性 */
 declare interface KeyMetadata {
   /** 作为密钥更容易辨识，更容易被人看懂的别名 */
-  Alias?: string | null;
+  Alias?: string;
   /** CMK的全局唯一标识 */
-  KeyId?: string | null;
+  KeyId?: string;
 }
 
 /** 检索条件 */
@@ -107,19 +107,19 @@ declare interface LookupAttribute {
 /** 资源类型 */
 declare interface Resource {
   /** 资源类型 */
-  ResourceType?: string | null;
+  ResourceType?: string;
   /** 资源名称 */
-  ResourceName?: string | null;
+  ResourceName?: string;
 }
 
 /** 资源筛选条件 */
 declare interface ResourceField {
   /** 跟踪事件所属产品（支持全部产品或单个产品，如：cam，全部：*） */
-  ResourceType: string | null;
+  ResourceType: string;
   /** 跟踪事件类型（读：Read；写：Write；全部：*） */
-  ActionType: string | null;
+  ActionType: string;
   /** 跟踪事件接口名列表（ResourceType为 * 时，EventNames必须为全部：[""]；指定ResourceType时，支持全部接口：[""]；支持部分接口：["cos", "cls"]，接口列表上限10个） */
-  EventNames: string[] | null;
+  EventNames: string[];
 }
 
 /** 跟踪集存储信息 */
@@ -133,9 +133,9 @@ declare interface Storage {
   /** 存储目录前缀，cos日志文件前缀仅支持字母和数字的组合，3-40个字符 */
   StoragePrefix: string;
   /** 被指定存储用户ID */
-  StorageAccountId?: string | null;
+  StorageAccountId?: string;
   /** 被指定存储用户appid */
-  StorageAppId?: string | null;
+  StorageAppId?: string;
 }
 
 /** 跟踪集列表 */
@@ -269,9 +269,9 @@ declare interface DescribeAuditTrackResponse {
   /** 跟踪集创建时间 */
   CreateTime?: string;
   /** 是否开启将集团成员操作日志投递到集团管理账号或者可信服务管理账号 */
-  TrackForAllMembers?: number | null;
+  TrackForAllMembers?: number;
   /** 数据投递过滤条件 */
-  Filters?: Filter | null;
+  Filters?: Filter;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -313,9 +313,9 @@ declare interface DescribeEventsResponse {
   /** 查看更多日志的凭证 */
   NextToken?: number;
   /** 日志集合 */
-  Events?: Event[] | null;
+  Events?: Event[];
   /** 此字段已经废弃。翻页请使用ListOver配合NextToken，在ListOver为false进行下一页数据读取。 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -347,7 +347,7 @@ declare interface ListAuditsRequest {
 
 declare interface ListAuditsResponse {
   /** 查询跟踪集概要集合 */
-  AuditSummarys?: AuditSummary[] | null;
+  AuditSummarys?: AuditSummary[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -411,13 +411,13 @@ declare interface LookUpEventsRequest {
 
 declare interface LookUpEventsResponse {
   /** 查看更多日志的凭证 */
-  NextToken?: string | null;
+  NextToken?: string;
   /** 日志集合 */
-  Events?: Event[] | null;
+  Events?: Event[];
   /** 日志集合是否结束 */
-  ListOver?: boolean | null;
+  ListOver?: boolean;
   /** 数量 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

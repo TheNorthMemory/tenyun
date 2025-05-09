@@ -40,9 +40,9 @@ declare interface Address {
   InstanceId?: string;
   /** 创建时间。按照`ISO8601`标准表示，并且使用`UTC`时间。格式为：`YYYY-MM-DDThh:mm:ssZ`。 */
   CreatedTime?: string;
-  /** 绑定的弹性网卡ID */
+  /** 绑定的弹性网卡ID，null表示没有绑定弹性网卡。 */
   NetworkInterfaceId?: string;
-  /** 绑定的资源内网ip */
+  /** 绑定的资源内网ip，null表示没有绑定资源内网ip。 */
   PrivateAddressIp?: string;
   /** 资源隔离状态。true表示eip处于隔离状态，false表示资源处于未隔离状态 */
   IsArrears?: boolean;
@@ -56,9 +56,9 @@ declare interface Address {
   CascadeRelease?: boolean;
   /** EIP ALG开启的协议类型。 */
   EipAlgType?: AlgType;
-  /** 弹性公网IP的运营商信息，当前可能返回值包括"CMCC","CTCC","CUCC","BGP" */
+  /** 弹性公网IP的运营商信息，当前可能返回值包括"CMCC"(移动),"CTCC"(电信),"CUCC"(联通),"BGP"(常规BGP)。 */
   InternetServiceProvider?: string;
-  /** 是否本地带宽EIP */
+  /** 是否本地带宽EIP，可选值：true：本地带宽EIPfalse：非本地带宽EIP */
   LocalBgp?: boolean;
   /** 弹性公网IP的带宽值。注意，传统账户类型账户的弹性公网IP没有带宽属性，值为空。 */
   Bandwidth?: number | null;
@@ -66,9 +66,9 @@ declare interface Address {
   InternetChargeType?: string | null;
   /** 弹性公网IP关联的标签列表。 */
   TagSet?: Tag[];
-  /** 到期时间。 */
+  /** 预付费包月带宽IP到期时间。时间格式：YYYY-MM-DDThh:mm:ssZ */
   DeadlineDate?: string | null;
-  /** EIP绑定的实例类型。 */
+  /** EIP绑定的实例类型。可选值：CVM：云服务器NAT：NAT 网关HAVIP：高可用虚拟IPENI：弹性网卡CLB：内网CLBDHCPIP：弹性内网IP */
   InstanceType?: string | null;
   /** 静态单线IP网络出口 */
   Egress?: string | null;
@@ -164,9 +164,9 @@ declare interface AddressTemplateSpecification {
 
 /** ALG协议类型 */
 declare interface AlgType {
-  /** Ftp协议Alg功能是否开启 */
+  /** Ftp协议Alg功能是否开启，可选值：true：开启Ftp协议Alg功能false：不开启Ftp协议Alg功能 */
   Ftp?: boolean;
-  /** Sip协议Alg功能是否开启 */
+  /** Sip协议Alg功能是否开启，可选值：true：开启Sip协议Alg功能false：不开启Sip协议Alg功能 */
   Sip?: boolean;
 }
 
@@ -179,7 +179,7 @@ declare interface AssistantCidr {
   /** 辅助CIDR类型（0：普通辅助CIDR，1：容器辅助CIDR），默认都是0。 */
   AssistantType?: number;
   /** 辅助CIDR拆分的子网。 */
-  SubnetSet?: Subnet[] | null;
+  SubnetSet?: Subnet[];
 }
 
 /** 时间备份策略详情 */
@@ -920,7 +920,7 @@ declare interface DirectConnectSubnet {
 declare interface EndPoint {
   /** 终端节点ID。 */
   EndPointId?: string;
-  /** VPCID。 */
+  /** VPC唯一ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/1108/43663)接口获取。 */
   VpcId?: string;
   /** 子网ID。 */
   SubnetId?: string;
@@ -938,16 +938,16 @@ declare interface EndPoint {
   EndPointVip?: string;
   /** 终端节点状态，ACTIVE：可用，PENDING：待接受，ACCEPTING：接受中，REJECTED：已拒绝，FAILED：失败。 */
   State?: string;
-  /** 创建时间。 */
+  /** 创建时间。格式：YYYY-MM-DD HH:MM:SS。 */
   CreateTime?: string;
   /** 终端节点绑定的安全组实例ID列表。 */
   GroupSet?: string[];
   /** 终端节点服务名称。 */
-  ServiceName?: string | null;
+  ServiceName?: string;
   /** CDC 集群唯一 ID */
-  CdcId?: string | null;
+  CdcId?: string;
   /** 标签键值对。 */
-  TagSet?: Tag[] | null;
+  TagSet?: Tag[];
 }
 
 /** 终端节点服务对象。 */
@@ -962,26 +962,26 @@ declare interface EndPointService {
   ServiceName?: string;
   /** 后端服务的VIP。 */
   ServiceVip?: string;
-  /** 后端服务的ID，比如lb-xxx。 */
+  /** 后端服务的ID，比如lb-lip4e6bp。 */
   ServiceInstanceId?: string;
   /** 是否自动接受。 */
   AutoAcceptFlag?: boolean;
   /** 关联的终端节点个数。 */
-  EndPointCount?: number | null;
+  EndPointCount?: number;
   /** 终端节点对象数组。 */
-  EndPointSet?: EndPoint[] | null;
-  /** 创建时间。 */
+  EndPointSet?: EndPoint[];
+  /** 创建时间。格式为YYYY-MM-DD HH:MM:SS字符串。 */
   CreateTime?: string;
-  /** 挂载的PAAS服务类型，CLB,CDB,CRS */
+  /** 挂载的PAAS服务类型，CLB（负载均衡），CDB（云数据库 MySQL），CRS（云数据库 Redis），GWLB（网关负载均衡）。 */
   ServiceType?: string;
   /** CDC 集群唯一 ID */
-  CdcId?: string | null;
-  /** Uin */
-  ServiceUin?: string | null;
+  CdcId?: string;
+  /** 终端节点服务Uin。 */
+  ServiceUin?: string;
   /** 服务IP类型 */
-  BusinessIpType?: number | null;
+  BusinessIpType?: number;
   /** 标签键值对。 */
-  TagSet?: Tag[] | null;
+  TagSet?: Tag[];
 }
 
 /** 过滤器 */
@@ -1310,7 +1310,7 @@ declare interface InternetPriceDetail {
   UnitPrice?: number;
   /** 折扣后的价格，单位：元。 */
   DiscountPrice?: number;
-  /** 计价单元，可取值范围： HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）。 */
+  /** 计价单元，可取值范围： HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）。 MONTH :表示计价单元是按月来计算。当前涉及该计价单元的场景有：包月按带宽预付费（BANDWIDTH_PREPAID_BY_MONTH）。 */
   ChargeUnit?: string;
   /** 原价，单位：元，仅预付费价格查询返回。 */
   OriginalPrice?: number;
@@ -1661,9 +1661,9 @@ declare interface NetDetect {
   /** 下一跳目的网关，取值与“下一跳类型”相关：下一跳类型为VPN，取值VPN网关ID，形如：vpngw-12345678；下一跳类型为DIRECTCONNECT，取值专线网关ID，形如：dcg-12345678；下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；下一跳类型为NAT，取值Nat网关，形如：nat-12345678；下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；下一跳类型为CCN，取值云联网ID，形如：ccn-12345678；下一跳类型为NONEXTHOP，指定网络探测为无下一跳的网络探测，添加和修改时，不需要指定值，查询时值为空字符串； */
   NextHopDestination?: string;
   /** 下一跳网关名称。 */
-  NextHopName?: string | null;
+  NextHopName?: string;
   /** 网络探测描述。 */
-  NetDetectDescription?: string | null;
+  NetDetectDescription?: string;
   /** 创建时间。 */
   CreateTime?: string;
   /** 标签键值对。 */
@@ -1815,15 +1815,15 @@ declare interface NetworkInterface {
   /** 网卡类型。“0”-辅助网卡，“1”-主网卡，“2”：中继网卡 */
   EniType?: number;
   /** 网卡绑定的子机类型：cvm（普通CVM子机），eks（弹性容器服务Elastic Kubernetes Service）， hai（高性能应用服务Hyper Application Inventor）。 */
-  Business?: string | null;
+  Business?: string;
   /** 网卡所关联的CDC实例ID。 */
-  CdcId?: string | null;
+  CdcId?: string;
   /** 弹性网卡类型：0:标准型/1:扩展型。默认值为0。 */
-  AttachType?: number | null;
+  AttachType?: number;
   /** 用于保留网卡主IP的资源ID用于保留网卡主IP的资源ID。用于删除网卡时作为入参数。 */
-  ResourceId?: string | null;
+  ResourceId?: string;
   /** 服务质量级别：PT（云金）、AU（云银）、AG(云铜）、DEFAULT（默认）。可选值：PT（云金）、AU（云银）、AG(云铜）、DEFAULT（默认）。 */
-  QosLevel?: string | null;
+  QosLevel?: string;
 }
 
 /** 弹性网卡绑定关系 */
@@ -2187,15 +2187,15 @@ declare interface Route {
   /** 路由表实例ID，例如：rtb-azd4dt1c。 */
   RouteTableId?: string;
   /** 创建IPv6目的网段，取值不能在私有网络网段内，例如：2402:4e00:1000:810b::/64。 */
-  DestinationIpv6CidrBlock?: string | null;
+  DestinationIpv6CidrBlock?: string;
   /** 路由唯一策略ID。 */
   RouteItemId?: string;
   /** 路由策略是否发布到云联网。该字段仅做出参使用，作为入参字段时此参数不生效。 */
-  PublishedToVbc?: boolean | null;
+  PublishedToVbc?: boolean;
   /** 路由策略创建时间 */
   CreatedTime?: string;
   /** CDC 集群唯一 ID。 */
-  CdcId?: string | null;
+  CdcId?: string;
 }
 
 /** 路由冲突对象 */
@@ -2413,9 +2413,9 @@ declare interface ServiceTemplateGroup {
 /** 协议端口模板 */
 declare interface ServiceTemplateSpecification {
   /** 协议端口ID，例如：ppm-f5n1f8da。 */
-  ServiceId: string;
+  ServiceId?: string;
   /** 协议端口组ID，例如：ppmg-f5n1f8da。 */
-  ServiceGroupId: string;
+  ServiceGroupId?: string;
 }
 
 /** 协议端口模板信息 */
@@ -2465,7 +2465,7 @@ declare interface SnapshotPolicy {
   /** 保留时间，支持1～365天。 */
   KeepTime: number;
   /** 是否创建新的cos桶，默认为False。 */
-  CreateNewCos: boolean | null;
+  CreateNewCos: boolean;
   /** cos桶所在地域。 */
   CosRegion: string;
   /** cos桶。 */
@@ -2473,13 +2473,13 @@ declare interface SnapshotPolicy {
   /** 快照策略Id。 */
   SnapshotPolicyId?: string;
   /** 时间备份策略。 */
-  BackupPolicies?: BackupPolicy[] | null;
+  BackupPolicies?: BackupPolicy[];
   /** 启用状态，True-启用，False-停用，默认为True。 */
   Enable?: boolean;
   /** 创建时间。 */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 标签键值对。 */
-  TagSet?: Tag[] | null;
+  TagSet?: Tag[];
 }
 
 /** NAT的SNAT规则 */
@@ -2897,22 +2897,22 @@ declare interface VpcInfo {
   /** 标签键值对 */
   TagSet?: Tag[];
   /** 辅助CIDR */
-  AssistantCidrSet?: AssistantCidr[] | null;
+  AssistantCidrSet?: AssistantCidr[];
   /** 返回多运营商IPv6 Cidr Block */
-  Ipv6CidrBlockSet?: ISPIPv6CidrBlock[] | null;
+  Ipv6CidrBlockSet?: ISPIPv6CidrBlock[];
 }
 
 /** 终端节点服务的服务白名单对象详情。 */
 declare interface VpcEndPointServiceUser {
-  /** AppId。 */
+  /** AppId。可通过登录 腾讯云账号中心控制台 获取。 */
   Owner?: number;
-  /** Uin。 */
+  /** 用户Uin。可通过登录 腾讯云账号中心控制台 获取。 */
   UserUin?: string;
   /** 描述信息。 */
   Description?: string;
-  /** 创建时间。 */
+  /** 创建时间。格式为字符串YYYY-MM-DD HH:MM:SS。 */
   CreateTime?: string;
-  /** 终端节点服务ID。 */
+  /** 终端节点服务ID。可通过[DescribeVpcEndPointService](https://cloud.tencent.com/document/product/215/54678)接口获取。 */
   EndPointServiceId?: string;
 }
 
@@ -3407,11 +3407,11 @@ declare interface AssociateDirectConnectGatewayNatGatewayResponse {
 }
 
 declare interface AssociateIPv6AddressRequest {
-  /** 弹性公网IPv6唯一ID，EIPv6 唯一 ID 形如：eipv6-11112222。 */
+  /** 弹性公网IPv6唯一ID，EIPv6 唯一 ID 形如：eipv6-11112222。可以使用[DescribeIPv6Addresses](https://cloud.tencent.com/document/api/215/113677)接口获取IPv6AddressId。 */
   IPv6AddressId: string;
-  /** 要绑定的弹性网卡 ID。 弹性网卡 ID 形如：eni-11112222。NetworkInterfaceId 与 InstanceId 不可同时指定。弹性网卡 ID 可通过登录控制台查询，也可通过DescribeNetworkInterfaces接口返回值中的networkInterfaceId获取。 */
+  /** 要绑定的弹性网卡 ID。 弹性网卡 ID 形如：eni-11112222。NetworkInterfaceId 与 InstanceId 不可同时指定。弹性网卡 ID 可通过登录[控制台](https://console.cloud.tencent.com/vpc/eni?rid=1)查询，也可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/api/215/15817)接口返回值中的networkInterfaceId获取。 */
   NetworkInterfaceId?: string;
-  /** 要绑定的内网 IPv6。如果指定了 NetworkInterfaceId 则也必须指定 PrivateIPv6Address ，表示将 EIP 绑定到指定弹性网卡的指定内网 IP 上。同时要确保指定的 PrivateIPv6Address 是指定的 NetworkInterfaceId 上的一个内网 IPv6。指定弹性网卡的内网 IPv6 可通过登录控制台查询，也可通过DescribeNetworkInterfaces接口返回值中的Ipv6AddressSet.Address获取。 */
+  /** 要绑定的内网 IPv6。如果指定了 NetworkInterfaceId 则也必须指定 PrivateIPv6Address ，表示将 EIP 绑定到指定弹性网卡的指定内网 IP 上。同时要确保指定的 PrivateIPv6Address 是指定的 NetworkInterfaceId 上的一个内网 IPv6。指定弹性网卡的内网 IPv6 可通过登录[控制台](https://console.cloud.tencent.com/vpc/eni?rid=1)查询，也可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/api/215/15817)接口返回值中的Ipv6AddressSet.Address获取。 */
   PrivateIPv6Address?: string;
 }
 
@@ -5429,7 +5429,7 @@ declare interface DescribeAccountAttributesResponse {
 }
 
 declare interface DescribeAddressBandwidthRangeRequest {
-  /** EIP资源ID列表，单次查询上限20。 */
+  /** EIP资源ID列表，单次查询上限20，可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取AddressId。 */
   AddressIds?: string[];
 }
 
@@ -6171,11 +6171,11 @@ declare interface DescribeHighPriorityRoutesResponse {
 }
 
 declare interface DescribeIPv6AddressesRequest {
-  /** 标识 IPv6 的唯一 ID 列。- 传统弹性公网 IPv6 唯一 ID 形如：`eip-11112222`- 弹性公网 IPv6 唯一 ID 形如：`eipv6-11112222`注意：参数不支持同时指定`IPv6AddressIds`和`Filters`。 */
+  /** 标识 IPv6 的唯一 ID 列。可以使用[DescribeIPv6Addresses](https://cloud.tencent.com/document/api/215/113677)接口获取IPv6AddressId。- 传统弹性公网 IPv6 唯一 ID 形如：`eip-11112222`- 弹性公网 IPv6 唯一 ID 形如：`eipv6-11112222`注意：参数不支持同时指定`IPv6AddressIds`和`Filters`。 */
   IPv6AddressIds?: string[];
-  /** 每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。参数不支持同时指定`IPv6AddressIds`和`Filters`。详细的过滤条件如下：- address-id - String - 是否必填：否 - （过滤条件）按照弹性公网IPv6的唯一ID过滤。- public-ipv6-address - String - 是否必填：否 - （过滤条件）按照公网 IPv6 的 IP 地址过滤。- network-interface-id - String - 是否必填：否 - （过滤条件）按照弹性网卡的唯一ID过滤。- instance-id - String - 是否必填：否 - （过滤条件）按照绑定实例的唯一ID过滤。- charge-type - String - 是否必填：否 - （过滤条件）按照计费类型过滤。- private-ipv6-address - String - 是否必填：否 - （过滤条件）按照绑定的内网 IPv6 地址过滤。- egress - String - 是否必填：否 - （过滤条件）按照出口过滤。- address-type - String - 是否必填：否 - （过滤条件）按照IPv6类型 进行过滤。可选值：'EIP6'，'EIPv6'，'WanIPv6'，'HighQualityEIPv6'。默认值是'EIPv6'。- address-isp - String - 是否必填：否 - （过滤条件）按照 运营商类型 进行过滤。可选值：'BGP'，'CMCC'，'CUCC', 'CTCC'。- address-status - String - 是否必填：否 - （过滤条件）按照 EIP 的状态过滤。状态包含：'CREATING'，'BINDING'，'BIND'，'UNBINDING'，'UNBIND'，'OFFLINING'，'BIND_ENI'，'PRIVATE'。- address-name - String - 是否必填：否 - （过滤条件）按照 EIP 名称过滤。不支持模糊过滤。- tag-key - String - 是否必填：否 - （过滤条件）按照标签键进行过滤。- tag-value - String - 是否必填：否 - （过滤条件）按照标签值进行过滤。- tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。tag-key使用具体的标签键进行替换。 */
+  /** 每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。参数不支持同时指定`IPv6AddressIds`和`Filters`。详细的过滤条件如下：- address-id - String - 是否必填：否 - （过滤条件）按照弹性公网IPv6的唯一ID过滤。- public-ipv6-address - String - 是否必填：否 - （过滤条件）按照公网 IPv6 的 IP 地址过滤。- network-interface-id - String - 是否必填：否 - （过滤条件）按照弹性网卡的唯一ID过滤。- instance-id - String - 是否必填：否 - （过滤条件）按照绑定实例的唯一ID过滤。- charge-type - String - 是否必填：否 - （过滤条件）按照计费类型过滤。- private-ipv6-address - String - 是否必填：否 - （过滤条件）按照绑定的内网 IPv6 地址过滤。- egress - String - 是否必填：否 - （过滤条件）按照出口过滤。- address-type - String - 是否必填：否 - （过滤条件）按照IPv6类型 进行过滤。可选值：'EIP6'：传统弹性公网 IPv6，'EIPv6'：弹性公网 IPv6，'WanIPv6'：普通公网 IPv6，'HighQualityEIPv6'：精品弹性公网 IPv6。默认值是'EIPv6'。- address-isp - String - 是否必填：否 - （过滤条件）按照 运营商类型 进行过滤。可选值：'BGP'：常规BGP，'CMCC'：移动，'CUCC'：联通, 'CTCC'：电信。- address-status - String - 是否必填：否 - （过滤条件）按照 EIP 的状态过滤。状态包含：'CREATING'：创建中，'BINDING'：绑定中，'BIND'：已绑，'UNBINDING'：解绑中，'UNBIND'：未绑定，'OFFLINING'：下线中，'BIND_ENI'：绑定了ENI，'PRIVATE'：仅开通内网的IPv6。- address-name - String - 是否必填：否 - （过滤条件）按照 EIP 名称过滤。不支持模糊过滤。- tag-key - String - 是否必填：否 - （过滤条件）按照标签键进行过滤。- tag-value - String - 是否必填：否 - （过滤条件）按照标签值进行过滤。- tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。tag-key使用具体的标签键进行替换。 */
   Filters?: Filter[];
-  /** 是否查询传统型IPv6地址信息。 */
+  /** 是否查询传统型IPv6地址信息。可选值：True：查询传统型IPv6地址信息False：不查询传统型IPv6地址信息默认值：False */
   Traditional?: boolean;
   /** 偏移量，默认为0。关于Offset的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/11646)中的相关小节。 */
   Offset?: number;
@@ -7695,9 +7695,9 @@ declare interface DisassociateDirectConnectGatewayNatGatewayResponse {
 }
 
 declare interface DisassociateIPv6AddressRequest {
-  /** 弹性公网IPv6唯一ID，EIPv6 唯一 ID 形如：eipv6-11112222。 */
+  /** 弹性公网IPv6唯一ID，EIPv6 唯一 ID 形如：eipv6-11112222。可以使用[DescribeIPv6Addresses](https://cloud.tencent.com/document/api/215/113677)接口获取IPv6AddressId。 */
   IPv6AddressId: string;
-  /** 解绑时是否保持绑定弹性网卡。 */
+  /** 解绑时是否保持绑定弹性网卡。可选值：true、false。默认值：false */
   KeepBindWithEni?: boolean;
 }
 
@@ -7953,13 +7953,13 @@ declare interface InquirePriceCreateDirectConnectGatewayResponse {
 }
 
 declare interface InquiryPriceAllocateAddressesRequest {
-  /** EIP计费方式。账号为标准账户类型的用户，可选值：BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费BANDWIDTH_PREPAID_BY_MONTH：包月按带宽预付费TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费默认值：TRAFFIC_POSTPAID_BY_HOUR。 */
-  InternetChargeType?: string;
+  /** EIP计费方式。账号为标准账户类型的用户，可选值：BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费BANDWIDTH_PREPAID_BY_MONTH：包月按带宽预付费TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费 */
+  InternetChargeType: string;
   /** EIP出带宽上限，单位：Mbps。账号为标准账户类型的用户，可选值范围取决于EIP计费方式：BANDWIDTH_POSTPAID_BY_HOUR：1 Mbps 至 100 MbpsBANDWIDTH_PREPAID_BY_MONTH：1 Mbps 至 200 MbpsTRAFFIC_POSTPAID_BY_HOUR：1 Mbps 至 100 Mbps默认值：1 Mbps。账号为传统账户类型的用户，EIP出带宽上限取决于与其绑定的实例的公网出带宽上限，无需传递此参数。 */
   InternetMaxBandwidthOut?: number;
   /** 包月按带宽预付费EIP的计费参数。EIP为包月按带宽预付费时，该参数必传，其余场景不需传递 */
   AddressChargePrepaid?: AddressChargePrepaid;
-  /** EIP类型。默认值：EIP。精品IP，可选值：HighQualityEIP：精品IP注意：仅部分地域支持精品IP。 高防IP，可选值： AntiDDoSEIP：高防IP */
+  /** EIP类型。默认值：EIP。弹性公网IP，可选值：EIP：弹性公网IP精品IP，可选值：HighQualityEIP：精品IP注意：仅新加坡和中国香港支持精品IP。高防IP，可选值：AntiDDoSEIP：高防IP注意：仅部分地域支持高防IP，详情可见弹性公网IP[产品概述](https://cloud.tencent.com/document/product/1199/41646)。 */
   AddressType?: string;
 }
 
@@ -8005,9 +8005,9 @@ declare interface InquiryPriceModifyAddressesBandwidthResponse {
 }
 
 declare interface InquiryPriceRenewAddressesRequest {
-  /** 续费资源实例ID。 */
+  /** 续费资源实例ID。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取AddressId。 */
   AddressIds: string[];
-  /** 包月按带宽预付费EIP的计费参数。EIP为包月按带宽预付费时，该参数必传，其余场景不需传递。 */
+  /** 包月按带宽预付费EIP的计费参数。EIP为包月按带宽预付费时，该参数必传，不支持其他计费模式。 */
   AddressChargePrepaid: AddressChargePrepaid;
 }
 
@@ -8187,7 +8187,7 @@ declare interface ModifyAddressesBandwidthResponse {
 }
 
 declare interface ModifyAddressesRenewFlagRequest {
-  /** EIP唯一标识ID列表，形如'eip-xxxx' */
+  /** EIP唯一标识ID列表，形如'eip-xxxx'，可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取AddressId。 */
   AddressIds: string[];
   /** 自动续费标识。取值范围： NOTIFY_AND_AUTO_RENEW：通知过期且自动续费 NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费 DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费 若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。 示例值：NOTIFY_AND_AUTO_RENEW */
   RenewFlag: string;
@@ -9187,7 +9187,7 @@ declare interface ReleaseAddressesResponse {
 }
 
 declare interface ReleaseIPv6AddressesRequest {
-  /** IPv6地址唯一ID。 */
+  /** IPv6地址唯一ID。可以使用[DescribeIPv6Addresses](https://cloud.tencent.com/document/api/215/113677)接口获取IPv6AddressId。 */
   IPv6AddressIds: string[];
 }
 
@@ -10276,7 +10276,7 @@ declare interface Vpc {
   /** 创建专线网关询价 {@link InquirePriceCreateDirectConnectGatewayRequest} {@link InquirePriceCreateDirectConnectGatewayResponse} */
   InquirePriceCreateDirectConnectGateway(data?: InquirePriceCreateDirectConnectGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceCreateDirectConnectGatewayResponse>;
   /** 弹性公网IP新购询价 {@link InquiryPriceAllocateAddressesRequest} {@link InquiryPriceAllocateAddressesResponse} */
-  InquiryPriceAllocateAddresses(data?: InquiryPriceAllocateAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceAllocateAddressesResponse>;
+  InquiryPriceAllocateAddresses(data: InquiryPriceAllocateAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceAllocateAddressesResponse>;
   /** 创建VPN网关询价 {@link InquiryPriceCreateVpnGatewayRequest} {@link InquiryPriceCreateVpnGatewayResponse} */
   InquiryPriceCreateVpnGateway(data: InquiryPriceCreateVpnGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceCreateVpnGatewayResponse>;
   /** 弹性公网IP调整带宽询价 {@link InquiryPriceModifyAddressesBandwidthRequest} {@link InquiryPriceModifyAddressesBandwidthResponse} */

@@ -2,6 +2,20 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 客户端订阅详情，可用于辅助判断哪些客户端订阅关系不一致 */
+declare interface ClientSubscriptionInfo {
+  /** 客户端ID */
+  ClientId?: string;
+  /** 客户端地址 */
+  ClientAddr?: string;
+  /** 订阅主题 */
+  Topic?: string;
+  /** 订阅表达式 */
+  SubString?: string;
+  /** 订阅方式 */
+  ExpressionType?: string;
+}
+
 /** 消费组信息 */
 declare interface ConsumeGroupItem {
   /** 实例ID */
@@ -138,6 +152,8 @@ declare interface FusionInstanceItem {
   InstanceItemExtraInfo?: InstanceItemExtraInfo | null;
   /** 预销毁时间 */
   DestroyTime?: number | null;
+  /** 所属可用区列表 */
+  ZoneIds?: number[] | null;
 }
 
 /** 实例列表页中的实例信息 */
@@ -202,6 +218,8 @@ declare interface InstanceItemExtraInfo {
   MinRetention?: number | null;
   /** 4.0共享集群状态 */
   InstanceStatus?: number | null;
+  /** 是否已冻结 */
+  IsFrozen?: boolean;
 }
 
 /** IP规则 */
@@ -572,6 +590,8 @@ declare interface SubscriptionData {
   ConsumeMessageOrderly?: boolean | null;
   /** 消费模式: BROADCASTING 广播模式;CLUSTERING 集群模式; */
   MessageModel?: string | null;
+  /** 订阅不一致的客户端列表 */
+  ClientSubscriptionInfos?: ClientSubscriptionInfo[] | null;
 }
 
 /** 标签数据 */
@@ -677,6 +697,8 @@ declare interface CreateConsumerGroupRequest {
   ConsumerGroup?: string;
   /** 备注 */
   Remark?: string;
+  /** 标签列表 */
+  TagList?: Tag[];
 }
 
 declare interface CreateConsumerGroupResponse {
@@ -851,6 +873,8 @@ declare interface CreateTopicRequest {
   Remark?: string;
   /** 消息保留时长 */
   MsgTTL?: number;
+  /** 标签列表 */
+  TagList?: Tag[];
 }
 
 declare interface CreateTopicResponse {
@@ -1001,7 +1025,7 @@ declare interface DescribeConsumerGroupListRequest {
 
 declare interface DescribeConsumerGroupListResponse {
   /** 查询总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 消费组列表 */
   Data?: ConsumeGroupItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1071,7 +1095,7 @@ declare interface DescribeFusionInstanceListRequest {
 
 declare interface DescribeFusionInstanceListResponse {
   /** 查询总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 实例列表 */
   Data?: FusionInstanceItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1091,7 +1115,7 @@ declare interface DescribeInstanceListRequest {
 
 declare interface DescribeInstanceListResponse {
   /** 查询总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 实例列表 */
   Data?: InstanceItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1465,7 +1489,7 @@ declare interface DescribeMessageListRequest {
 
 declare interface DescribeMessageListResponse {
   /** 查询总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 消息记录列表 */
   Data?: MessageItem[] | null;
   /** 一次查询ID */
@@ -1621,7 +1645,7 @@ declare interface DescribeRoleListRequest {
 
 declare interface DescribeRoleListResponse {
   /** 查询总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 角色信息列表 */
   Data?: RoleItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1663,7 +1687,7 @@ declare interface DescribeTopicListByGroupRequest {
 
 declare interface DescribeTopicListByGroupResponse {
   /** 查询总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 主题列表 */
   Data?: SubscriptionData[];
   /** 唯一请求 ID，每次请求都会返回。 */

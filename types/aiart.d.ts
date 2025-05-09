@@ -23,11 +23,11 @@ declare interface Filter {
 /** logo参数 */
 declare interface LogoParam {
   /** 水印 Url */
-  LogoUrl?: string;
+  LogoUrl?: string | null;
   /** 水印 Base64，Url 和 Base64 二选一传入，如果都提供以 Url 为准 */
-  LogoImage?: string;
+  LogoImage?: string | null;
   /** 水印图片位于生成结果图中的坐标，将按照坐标对标识图片进行位置和大小的拉伸匹配 */
-  LogoRect?: LogoRect;
+  LogoRect?: LogoRect | null;
 }
 
 /** 输入框 */

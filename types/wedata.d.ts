@@ -1744,6 +1744,56 @@ declare interface EventCaseOpsDto {
   Description?: string | null;
 }
 
+/** 事件管理- 事件实体 */
+declare interface EventDsDto {
+  /** 事件名称 */
+  Name: string | null;
+  /** 事件类型GENERAL、TIME_SERIES */
+  EventType: string | null;
+  /** 存活时间 */
+  TimeToLive: number | null;
+  /** 存活时间单位 */
+  TimeUnit: string | null;
+  /** 事件分割类型 SECOND、MIN、HOUR、DAY */
+  EventSubType?: string | null;
+  /** 事件广播类型SINGLE、BROADCAST */
+  EventBroadcastType?: string | null;
+  /** 时间格式 */
+  DimensionFormat?: string | null;
+  /** 创建时间 */
+  CreationTs?: string | null;
+  /** 事件所属人 */
+  Owner?: string | null;
+  /** 属性 */
+  Properties?: string | null;
+  /** 描述信息 */
+  Description?: string | null;
+  /** 事件监听者信息 */
+  Listeners?: EventListenerDTO[] | null;
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 项目名称 */
+  ProjectName?: string | null;
+}
+
+/** 事件监听者信息 */
+declare interface EventListenerDTO {
+  /** 关键字，一般为任务id */
+  Key: string | null;
+  /** REST_API、KAFKA */
+  Type: string | null;
+  /** 创建时间 */
+  CreationTs: string | null;
+  /** 配置信息 */
+  PropertiesList: ParamInfoDs[] | null;
+  /** 事件名称 */
+  EventName: string | null;
+  /** 监听者任务信息 */
+  TaskInfo: EventListenerTaskInfo | null;
+  /** 事件所属项目id */
+  EventProjectId: string | null;
+}
+
 /** 事件监听器 */
 declare interface EventListenerOpsDto {
   /** 事件名称 */
@@ -1756,6 +1806,26 @@ declare interface EventListenerOpsDto {
   Properties?: string | null;
   /** 创建时间 */
   CreationTimestamp?: string | null;
+}
+
+/** 监听者任务信息 */
+declare interface EventListenerTaskInfo {
+  /** 任务id */
+  TaskId: string | null;
+  /** 任务名称 */
+  TaskName: string | null;
+  /** 工作流id */
+  WorkflowId: string | null;
+  /** 工作流名称 */
+  WorkflowName: string | null;
+  /** 任务类型id */
+  TaskTypeId: number | null;
+  /** 任务类型名称 */
+  TaskType: string | null;
+  /** 项目id */
+  ProjectId: string | null;
+  /** 任务周期类型 */
+  CycleType?: string | null;
 }
 
 /** 事件详情 */
@@ -6983,6 +7053,40 @@ declare interface CreateTaskFolderResponse {
   RequestId?: string;
 }
 
+declare interface CreateTaskNewRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 工作流id */
+  WorkflowId: string;
+  /** 任务名 */
+  TaskName: string;
+  /** 26离线同步，30Python，31PySpark，32DLC，33Impala，34Hive SQL，35Shell，36Spark SQL，39Spark，40CDW PG，92MapReduce */
+  TaskType: number;
+  /** 扩展属性 */
+  TaskExt?: TaskExtInfo[];
+  /** 产品名称 */
+  ProductName?: string;
+  /** 任务实例初始化策略 */
+  InstanceInitStrategy?: string;
+  /** 画布坐标横轴 */
+  LeftCoordinate?: number;
+  /** 画布坐标纵轴 */
+  TopCoordinate?: number;
+  /** 工作流目录ID */
+  TaskFolderId?: string;
+  /** 指定脚本内容，base64编码 */
+  Content?: string;
+  /** 代码模版ID */
+  CodeTemplateId?: string;
+}
+
+declare interface CreateTaskNewResponse {
+  /** 无 */
+  Data?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateTaskRequest {
   /** 项目Id */
   ProjectId: string;
@@ -11108,6 +11212,34 @@ declare interface ModifyTaskInfoResponse {
   RequestId?: string;
 }
 
+declare interface ModifyTaskLinksDsRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 父任务ID */
+  TaskFrom: string;
+  /** 子任务ID */
+  TaskTo: string;
+  /** 子任务工作流 */
+  WorkflowId: string;
+  /** 父任务工作流 */
+  RealFromWorkflowId: string;
+  /** 请求来源，WEB 前端；CLIENT 客户端 */
+  RequestFromSource?: string;
+  /** 父子任务之间的依赖关系 正常的依赖父任务全部实例 启用 normal_all(1), normal_first_one(2), 正常的依赖父任务 第一个 normal_last_one(3), 正常的依赖父任务 最后一个 normal_any_one(4), 正常的依赖父任务 任意一个 normal_specific_one(5), 正常的依赖父任务 指定的一个 self(6), 自身依赖，可能用不到 非正常的依赖父任务全部实例 启用（向前依赖 明天) non_normal_all_forward(11), non_normal_first_one_forward(12), 非正常的依赖父任务 第一个 non_normal_last_one_forward(13), 非正常的依赖父任务 最后一个 non_normal_any_one_forward(14), 非正常的依赖父任务 任意一个 non_normal_specific_one_forward(15),非正常的依赖父任务 指定一个 非正常的依赖父任务全部实例 启用（向后依赖 昨天） non_normal_all_backward(21), non_normal_first_one_backward(22), 非正常的依赖父任务 第一个 non_normal_last_one_backward(23), 非正常的依赖父任务 最后一个 non_normal_any_one_backward(24), 非正常的依赖父任务 任意一个 non_normal_specific_one_backward(25) 非正常的依赖父任务 指定一个 */
+  LinkDependencyType?: string;
+  /** 额外的属性信息 如分支节点、归并节点信息 */
+  LinkExt?: string;
+}
+
+declare interface ModifyTaskLinksDsResponse {
+  /** 成功或失败 */
+  Data?: boolean | null;
+  /** linkID */
+  LinkId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyTaskLinksRequest {
   /** 项目Id */
   ProjectId: string;
@@ -11267,6 +11399,36 @@ declare interface ProjectBaseInfoOpsRequest {
   IsAdmin?: boolean;
 }
 
+declare interface RegisterDsEventRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 事件名称 */
+  Name: string;
+  /** 事件周期类型 1、分钟：MIN 2、小时 ：HOUR 3、天：DAY */
+  EventSubType: string;
+  /** 事件存活时间，值为大于0的整数 */
+  TimeToLive: string;
+  /** 事件存活时间单位	1、天：DAYS 2、分钟：MINUTES */
+  TimeUnit: string;
+  /** 事件所属人，账号昵称 */
+  Owner: string;
+  /** 事件描述 */
+  Description: string;
+  /** 事件类型GENERAL、TIME_SERIES */
+  EventType?: string;
+  /** 事件广播类型SINGLE、BROADCAST */
+  EventBroadcastType?: string;
+  /** 时间格式 */
+  DimensionFormat?: string;
+}
+
+declare interface RegisterDsEventResponse {
+  /** 事件信息 */
+  Data?: EventDsDto | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RegisterEventListenerRequest {
   /** 关键字，如果是任务，则传任务Id */
   Key: string;
@@ -11333,6 +11495,24 @@ declare interface RemoveWorkflowDsRequest {
 declare interface RemoveWorkflowDsResponse {
   /** 是否删除成功 */
   Data?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RenewWorkflowOwnerDsRequest {
+  /** 工作流ID */
+  ProjectId: string;
+  /** 责任人 */
+  Owner: string;
+  /** 责任人ID */
+  OwnerId: string;
+  /** 工作流ID列表 */
+  WorkflowIds: string[];
+}
+
+declare interface RenewWorkflowOwnerDsResponse {
+  /** 执行结果 */
+  Data?: BatchResultDs;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12015,6 +12195,40 @@ declare interface UpdateProjectUserRoleResponse {
   RequestId?: string;
 }
 
+declare interface UpdateWorkflowInfoRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 操作者名称 */
+  OperatorName: string;
+  /** 工作流id */
+  WorkflowId: string;
+  /** 责任人 */
+  Owner?: string;
+  /** 责任人id */
+  OwnerId?: string;
+  /** 备注 */
+  WorkflowDesc?: string;
+  /** 工作流名称 */
+  WorkflowName?: string;
+  /** 所属文件夹id */
+  FolderId?: string;
+  /** 工作流所属用户分组id 若有多个,分号隔开: a;b;c */
+  UserGroupId?: string;
+  /** 工作流所属用户分组名称 若有多个,分号隔开: a;b;c */
+  UserGroupName?: string;
+  /** 工作流参数列表 */
+  WorkflowParams?: ParamInfo[];
+  /** 用于配置优化参数（线程、内存、CPU核数等），仅作用于Spark SQL节点。多个参数用英文分号分隔。 */
+  GeneralTaskParams?: GeneralTaskParam[];
+}
+
+declare interface UpdateWorkflowInfoResponse {
+  /** true代表成功，false代表失败 */
+  Data?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateWorkflowOwnerRequest {
   /** 项目Id */
   ProjectId: string;
@@ -12140,12 +12354,14 @@ declare interface Wedata {
   CreateRule(data?: CreateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleResponse>;
   /** 创建规则模板 {@link CreateRuleTemplateRequest} {@link CreateRuleTemplateResponse} */
   CreateRuleTemplate(data?: CreateRuleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleTemplateResponse>;
-  /** 创建任务 {@link CreateTaskRequest} {@link CreateTaskResponse} */
+  /** 创建任务（废弃） {@link CreateTaskRequest} {@link CreateTaskResponse} */
   CreateTask(data: CreateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskResponse>;
   /** 创建任务告警规则 {@link CreateTaskAlarmRegularRequest} {@link CreateTaskAlarmRegularResponse} */
   CreateTaskAlarmRegular(data: CreateTaskAlarmRegularRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskAlarmRegularResponse>;
   /** 创建任务文件夹 {@link CreateTaskFolderRequest} {@link CreateTaskFolderResponse} */
   CreateTaskFolder(data: CreateTaskFolderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskFolderResponse>;
+  /** 聚合创建任务 {@link CreateTaskNewRequest} {@link CreateTaskNewResponse} */
+  CreateTaskNew(data: CreateTaskNewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskNewResponse>;
   /** 提交任务版本 {@link CreateTaskVersionDsRequest} {@link CreateTaskVersionDsResponse} */
   CreateTaskVersionDs(data: CreateTaskVersionDsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskVersionDsResponse>;
   /** 创建工作流 {@link CreateWorkflowDsRequest} {@link CreateWorkflowDsResponse} */
@@ -12498,24 +12714,30 @@ declare interface Wedata {
   ModifyTaskAlarmRegular(data: ModifyTaskAlarmRegularRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskAlarmRegularResponse>;
   /** 更新任务 {@link ModifyTaskInfoRequest} {@link ModifyTaskInfoResponse} */
   ModifyTaskInfo(data: ModifyTaskInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskInfoResponse>;
-  /** 添加父任务依赖 {@link ModifyTaskLinksRequest} {@link ModifyTaskLinksResponse} */
+  /** 添加父任务依赖（废弃） {@link ModifyTaskLinksRequest} {@link ModifyTaskLinksResponse} */
   ModifyTaskLinks(data: ModifyTaskLinksRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskLinksResponse>;
+  /** 添加当前任务父任务依赖 {@link ModifyTaskLinksDsRequest} {@link ModifyTaskLinksDsResponse} */
+  ModifyTaskLinksDs(data: ModifyTaskLinksDsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskLinksDsResponse>;
   /** 重命名任务（任务编辑） {@link ModifyTaskNameRequest} {@link ModifyTaskNameResponse} */
   ModifyTaskName(data: ModifyTaskNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskNameResponse>;
   /** 修改任务脚本 {@link ModifyTaskScriptRequest} {@link ModifyTaskScriptResponse} */
   ModifyTaskScript(data: ModifyTaskScriptRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskScriptResponse>;
-  /** 更新工作流信息 {@link ModifyWorkflowInfoRequest} {@link ModifyWorkflowInfoResponse} */
+  /** 更新工作流信息（废弃） {@link ModifyWorkflowInfoRequest} {@link ModifyWorkflowInfoResponse} */
   ModifyWorkflowInfo(data: ModifyWorkflowInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkflowInfoResponse>;
   /** 更新工作流调度（废弃） {@link ModifyWorkflowScheduleRequest} {@link ModifyWorkflowScheduleResponse} */
   ModifyWorkflowSchedule(data: ModifyWorkflowScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkflowScheduleResponse>;
   /** 移动任务到工作流文件夹 {@link MoveTasksToFolderRequest} {@link MoveTasksToFolderResponse} */
   MoveTasksToFolder(data: MoveTasksToFolderRequest, config?: AxiosRequestConfig): AxiosPromise<MoveTasksToFolderResponse>;
-  /** 注册事件（新建事件） {@link RegisterEventRequest} {@link RegisterEventResponse} */
+  /** 注册事件 {@link RegisterDsEventRequest} {@link RegisterDsEventResponse} */
+  RegisterDsEvent(data: RegisterDsEventRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterDsEventResponse>;
+  /** 注册事件（废弃） {@link RegisterEventRequest} {@link RegisterEventResponse} */
   RegisterEvent(data: RegisterEventRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterEventResponse>;
   /** 注册事件监听器 {@link RegisterEventListenerRequest} {@link RegisterEventListenerResponse} */
   RegisterEventListener(data: RegisterEventListenerRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterEventListenerResponse>;
   /** 删除编排空间工作流 {@link RemoveWorkflowDsRequest} {@link RemoveWorkflowDsResponse} */
   RemoveWorkflowDs(data: RemoveWorkflowDsRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveWorkflowDsResponse>;
+  /** 批量更新工作流下任务责任人 {@link RenewWorkflowOwnerDsRequest} {@link RenewWorkflowOwnerDsResponse} */
+  RenewWorkflowOwnerDs(data: RenewWorkflowOwnerDsRequest, config?: AxiosRequestConfig): AxiosPromise<RenewWorkflowOwnerDsResponse>;
   /** 更新工作流下任务调度信息 {@link RenewWorkflowSchedulerInfoDsRequest} {@link RenewWorkflowSchedulerInfoDsResponse} */
   RenewWorkflowSchedulerInfoDs(data: RenewWorkflowSchedulerInfoDsRequest, config?: AxiosRequestConfig): AxiosPromise<RenewWorkflowSchedulerInfoDsResponse>;
   /** 继续实时集成任务 {@link ResumeIntegrationTaskRequest} {@link ResumeIntegrationTaskResponse} */
@@ -12562,7 +12784,9 @@ declare interface Wedata {
   UpdateDataModelRegistryInfo(data: UpdateDataModelRegistryInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDataModelRegistryInfoResponse>;
   /** 修改项目用户角色 {@link UpdateProjectUserRoleRequest} {@link UpdateProjectUserRoleResponse} */
   UpdateProjectUserRole(data: UpdateProjectUserRoleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProjectUserRoleResponse>;
-  /** 修改工作流责任人 {@link UpdateWorkflowOwnerRequest} {@link UpdateWorkflowOwnerResponse} */
+  /** 更新工作流信息【整合】 {@link UpdateWorkflowInfoRequest} {@link UpdateWorkflowInfoResponse} */
+  UpdateWorkflowInfo(data: UpdateWorkflowInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateWorkflowInfoResponse>;
+  /** 修改工作流责任人（废弃） {@link UpdateWorkflowOwnerRequest} {@link UpdateWorkflowOwnerResponse} */
   UpdateWorkflowOwner(data: UpdateWorkflowOwnerRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateWorkflowOwnerResponse>;
   /** 开发空间-保存任务信息 {@link UploadContentRequest} {@link UploadContentResponse} */
   UploadContent(data: UploadContentRequest, config?: AxiosRequestConfig): AxiosPromise<UploadContentResponse>;

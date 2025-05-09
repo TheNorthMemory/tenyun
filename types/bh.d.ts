@@ -540,7 +540,7 @@ declare interface SearchCommandResult {
   FromIp?: string;
   /** 该命令所属会话的会话开始时间 */
   SessionTime?: string;
-  /** 该命令所属会话的会话开始时间（废弃，使用SessionTime） */
+  /** 该命令所属会话的会话开始时间（使用SessionTime） */
   SessTime?: string;
   /** 复核时间 */
   ConfirmTime?: string;
@@ -1015,7 +1015,7 @@ declare interface CreateCmdTemplateRequest {
   Name: string;
   /** 命令列表，\n分隔，最大长度32768字节 */
   CmdList: string;
-  /** 标识cmdlist字段前端是否为base64加密传值.0:表示非base64加密1:表示是base64加密 */
+  /** 标识CmdList字段前端是否为base64加密传值.0:表示非base64加密1:表示是base64加密 */
   Encoding?: number;
 }
 

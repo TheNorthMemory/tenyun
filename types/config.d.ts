@@ -11,31 +11,31 @@ declare interface AggregateResourceInfo {
   /** 资源ID */
   ResourceId?: string;
   /** 地域 */
-  ResourceRegion?: string | null;
+  ResourceRegion?: string;
   /** 资源状态 */
-  ResourceStatus?: string | null;
+  ResourceStatus?: string;
   /** 是否删除 1:已删除 0:未删除 */
-  ResourceDelete?: number | null;
+  ResourceDelete?: number;
   /** 资源创建时间 */
-  ResourceCreateTime?: string | null;
+  ResourceCreateTime?: string;
   /** 标签信息 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
   /** 可用区 */
-  ResourceZone?: string | null;
+  ResourceZone?: string;
   /** 合规状态 */
-  ComplianceResult?: string | null;
+  ComplianceResult?: string;
   /** 资源所属用户ID */
   ResourceOwnerId?: number;
   /** 用户昵称 */
-  ResourceOwnerName?: string | null;
+  ResourceOwnerName?: string;
 }
 
 /** 合规详情 */
 declare interface Annotation {
   /** 资源当前实际配置。长度为0~256位字符，即资源不合规配置 */
-  Configuration: string | null;
+  Configuration: string;
   /** 资源期望配置。长度为0~256位字符，即资源合规配置 */
-  DesiredValue: string | null;
+  DesiredValue: string;
   /** 资源当前配置和期望配置之间的比较运算符。长度为0~16位字符，自定义规则上报评估结果此字段可能为空 */
   Operator?: string;
   /** 当前配置在资源属性结构体中的JSON路径。长度为0~256位字符，自定义规则上报评估结果此字段可能为空 */
@@ -45,57 +45,57 @@ declare interface Annotation {
 /** 规则详情 */
 declare interface ConfigRule {
   /** 规则标识 */
-  Identifier?: string | null;
+  Identifier?: string;
   /** 规则名 */
-  RuleName?: string | null;
+  RuleName?: string;
   /** 规则参数 */
-  InputParameter?: InputParameter[] | null;
+  InputParameter?: InputParameter[];
   /** 规则触发条件 */
-  SourceCondition?: SourceConditionForManage[] | null;
+  SourceCondition?: SourceConditionForManage[];
   /** 规则支持的资源类型，规则仅对指定资源类型的资源生效。 */
-  ResourceType?: string[] | null;
+  ResourceType?: string[];
   /** 规则所属标签 */
-  Labels?: string[] | null;
+  Labels?: string[];
   /** 规则风险等级1:低风险2:中风险3:高风险 */
-  RiskLevel?: number | null;
+  RiskLevel?: number;
   /** 规则对应的函数 */
-  ServiceFunction?: string | null;
+  ServiceFunction?: string;
   /** 创建时间格式：YYYY-MM-DD h:i:s */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 规则描述 */
-  Description?: string | null;
+  Description?: string;
   /** ACTIVE：启用NO_ACTIVE：停止 */
-  Status?: string | null;
+  Status?: string;
   /** 合规： 'COMPLIANT'不合规： 'NON_COMPLIANT'无法应用规则： 'NOT_APPLICABLE' */
-  ComplianceResult?: string | null;
+  ComplianceResult?: string;
   /** ["",""] */
-  Annotation?: Annotation | null;
+  Annotation?: Annotation;
   /** 规则评估时间格式：YYYY-MM-DD h:i:s */
-  ConfigRuleInvokedTime?: string | null;
+  ConfigRuleInvokedTime?: string;
   /** 规则ID */
-  ConfigRuleId?: string | null;
+  ConfigRuleId?: string;
   /** CUSTOMIZE：自定义规则、SYSTEM：托管规则 */
-  IdentifierType?: string | null;
+  IdentifierType?: string;
   /** 合规包ID */
-  CompliancePackId?: string | null;
+  CompliancePackId?: string;
   /** 触发类型ScheduledNotification：周期触发、ConfigurationItemChangeNotification：变更触发 */
-  TriggerType?: TriggerType[] | null;
+  TriggerType?: TriggerType[];
   /** 参数详情 */
-  ManageInputParameter?: InputParameterForManage[] | null;
+  ManageInputParameter?: InputParameterForManage[];
   /** 合规包名称 */
-  CompliancePackName?: string | null;
+  CompliancePackName?: string;
   /** 关联地域 */
-  RegionsScope?: string[] | null;
+  RegionsScope?: string[];
   /** 关联标签 */
-  TagsScope?: Tag[] | null;
+  TagsScope?: Tag[];
   /** 规则对指定资源ID无效，即不对该资源执行评估。 */
-  ExcludeResourceIdsScope?: string[] | null;
+  ExcludeResourceIdsScope?: string[];
   /** 账号组ID */
-  AccountGroupId?: string | null;
+  AccountGroupId?: string;
   /** 账号组名称 */
-  AccountGroupName?: string | null;
+  AccountGroupName?: string;
   /** 规则所属用户ID */
-  RuleOwnerId?: number | null;
+  RuleOwnerId?: number;
   /** 预设规则支持的触发方式ScheduledNotification：周期触发ConfigurationItemChangeNotification：变更触发 */
   ManageTriggerType?: string[];
 }
@@ -129,67 +129,67 @@ declare interface InputParameter {
   /** 参数类型。必填类型：Require，可选类型：Optional。 */
   Type?: string;
   /** 参数值 */
-  Value?: string | null;
+  Value?: string;
 }
 
 /** 规则入参 */
 declare interface InputParameterForManage {
   /** 值类型。数值：Integer， 字符串：String */
-  ValueType?: string | null;
+  ValueType?: string;
   /** 参数Key */
-  ParameterKey?: string | null;
+  ParameterKey?: string;
   /** 参数类型。必填类型：Require，可选类型：Optional。 */
-  Type?: string | null;
+  Type?: string;
   /** 默认值 */
-  DefaultValue?: string | null;
+  DefaultValue?: string;
   /** 描述 */
-  Description?: string | null;
+  Description?: string;
 }
 
 /** 资源列列表信息 */
 declare interface ResourceListInfo {
   /** 资源类型 */
-  ResourceType: string;
+  ResourceType?: string;
   /** 资源名称 */
-  ResourceName: string;
+  ResourceName?: string;
   /** 资源ID */
-  ResourceId: string;
+  ResourceId?: string;
   /** 地域 */
-  ResourceRegion: string | null;
+  ResourceRegion?: string;
   /** 资源状态 */
-  ResourceStatus: string | null;
+  ResourceStatus?: string;
   /** 1 :已删除 2：未删除 */
-  ResourceDelete: number | null;
+  ResourceDelete?: number;
   /** 资源创建时间 */
-  ResourceCreateTime: string | null;
+  ResourceCreateTime?: string;
   /** 标签信息 */
-  Tags: Tag[] | null;
+  Tags?: Tag[];
   /** 可用区 */
-  ResourceZone: string | null;
+  ResourceZone?: string;
   /** 合规状态 */
-  ComplianceResult: string | null;
+  ComplianceResult?: string;
 }
 
 /** 管理端规则条件 */
 declare interface SourceConditionForManage {
   /** 条件为空，合规：COMPLIANT，不合规：NON_COMPLIANT，无法应用：NOT_APPLICABLE */
-  EmptyAs?: string | null;
+  EmptyAs?: string;
   /** 配置路径 */
-  SelectPath?: string | null;
+  SelectPath?: string;
   /** 操作运算符 */
-  Operator?: string | null;
+  Operator?: string;
   /** 是否必须 */
-  Required?: boolean | null;
+  Required?: boolean;
   /** 期望值 */
-  DesiredValue?: string | null;
+  DesiredValue?: string;
 }
 
 /** 标签 */
 declare interface Tag {
   /** 标签key */
-  TagKey?: string | null;
+  TagKey?: string;
   /** 标签value */
-  TagValue?: string | null;
+  TagValue?: string;
 }
 
 /** 规则支持触发类型 */
@@ -197,7 +197,7 @@ declare interface TriggerType {
   /** 触发类型 */
   MessageType: string;
   /** 触发时间周期 */
-  MaximumExecutionFrequency?: string | null;
+  MaximumExecutionFrequency?: string;
 }
 
 declare interface DescribeAggregateDiscoveredResourceRequest {
@@ -215,23 +215,23 @@ declare interface DescribeAggregateDiscoveredResourceRequest {
 
 declare interface DescribeAggregateDiscoveredResourceResponse {
   /** 资源Id */
-  ResourceId?: string | null;
+  ResourceId?: string;
   /** 资源类型 */
-  ResourceType?: string | null;
+  ResourceType?: string;
   /** 资源名 */
-  ResourceName?: string | null;
+  ResourceName?: string;
   /** 资源地域 */
-  ResourceRegion?: string | null;
+  ResourceRegion?: string;
   /** 资源可用区 */
-  ResourceZone?: string | null;
+  ResourceZone?: string;
   /** 资源配置 */
-  Configuration?: string | null;
+  Configuration?: string;
   /** 资源创建时间 */
-  ResourceCreateTime?: string | null;
+  ResourceCreateTime?: string;
   /** 资源标签 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
   /** 资源更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -247,23 +247,23 @@ declare interface DescribeDiscoveredResourceRequest {
 
 declare interface DescribeDiscoveredResourceResponse {
   /** 资源Id */
-  ResourceId?: string | null;
+  ResourceId?: string;
   /** 资源类型 */
-  ResourceType?: string | null;
+  ResourceType?: string;
   /** 资源名 */
-  ResourceName?: string | null;
+  ResourceName?: string;
   /** 资源地域 */
-  ResourceRegion?: string | null;
+  ResourceRegion?: string;
   /** 资源可用区 */
-  ResourceZone?: string | null;
+  ResourceZone?: string;
   /** 资源配置 */
-  Configuration?: string | null;
+  Configuration?: string;
   /** 资源创建时间 */
-  ResourceCreateTime?: string | null;
+  ResourceCreateTime?: string;
   /** 资源标签 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
   /** 资源更新时间 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

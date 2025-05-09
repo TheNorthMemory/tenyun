@@ -461,7 +461,7 @@ declare interface PolicyDetail {
   /** 策略ID。 */
   PolicyId: number;
   /** 策略名称。 */
-  PolicyName?: string | null;
+  PolicyName?: string;
 }
 
 /** 产品资源 */
@@ -563,7 +563,7 @@ declare interface RoleConfigurationProvisionings {
 /** CIC的权限策略 */
 declare interface RolePolicie {
   /** 策略ID。 */
-  RolePolicyId?: number | null;
+  RolePolicyId?: number;
   /** 权限策略名称 */
   RolePolicyName?: string;
   /** 权限策略类型 */
@@ -585,11 +585,11 @@ declare interface RoleProvisioningsTask {
   /** 授权的集团账号目标账号的UIN */
   TargetUin?: number;
   /** 同步的集团账号目标账号的类型，ManagerUin管理账号;MemberUin成员账号 */
-  TargetType?: string | null;
+  TargetType?: string;
   /** 任务类型。 */
-  TaskType?: string | null;
+  TaskType?: string;
   /** 任务状态：InProgress: 进行中，Failed: 失败 3:Success: 成功 */
-  TaskStatus?: string | null;
+  TaskStatus?: string;
 }
 
 /** SAML 签名证书信息 */
@@ -759,7 +759,7 @@ declare interface TaskInfo {
   /** InProgress：任务执行中。 Success：任务执行成功。 Failed：任务执行失败。 */
   Status?: string;
   /** 失败原因 */
-  FailureReason?: string | null;
+  FailureReason?: string;
 }
 
 /** 任务状态信息。 */
