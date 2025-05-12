@@ -328,7 +328,7 @@ declare interface DatabaseObject {
 
 /** 指定账号对数据库对象拥有的权限列表 */
 declare interface DatabasePrivilege {
-  /** 数据库对象，当ObjectType为database时，DataseName/SchemaName/TableName可为空；当ObjectType为schema时，SchemaName/TableName可为空；当ObjectType为column时，TableName不可为空，其余情况均可为空。 */
+  /** 数据库对象，当ObjectType为database时，DatabaseName/SchemaName/TableName可为空；当ObjectType为schema时，SchemaName/TableName可为空；当ObjectType为column时，TableName不可为空，其余情况均可为空。 */
   Object?: DatabaseObject | null;
   /** 指定账号对数据库对象拥有的权限列表 */
   PrivilegeSet?: string[] | null;

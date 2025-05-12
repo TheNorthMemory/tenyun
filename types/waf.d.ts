@@ -5217,6 +5217,10 @@ declare interface ModifyHostStatusResponse {
 }
 
 declare interface ModifyInstanceAttackLogPostRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 攻击日志投递开关 */
+  AttackLogPost: number;
 }
 
 declare interface ModifyInstanceAttackLogPostResponse {
@@ -6136,7 +6140,7 @@ declare interface Waf {
   /** 设置防护域名WAF开关 {@link ModifyHostStatusRequest} {@link ModifyHostStatusResponse} */
   ModifyHostStatus(data: ModifyHostStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostStatusResponse>;
   /** 修改实例攻击日志投递开关 {@link ModifyInstanceAttackLogPostRequest} {@link ModifyInstanceAttackLogPostResponse} */
-  ModifyInstanceAttackLogPost(data?: ModifyInstanceAttackLogPostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceAttackLogPostResponse>;
+  ModifyInstanceAttackLogPost(data: ModifyInstanceAttackLogPostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceAttackLogPostResponse>;
   /** 修改实例的QPS弹性计费开关 {@link ModifyInstanceElasticModeRequest} {@link ModifyInstanceElasticModeResponse} */
   ModifyInstanceElasticMode(data: ModifyInstanceElasticModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceElasticModeResponse>;
   /** 修改实例名称 {@link ModifyInstanceNameRequest} {@link ModifyInstanceNameResponse} */

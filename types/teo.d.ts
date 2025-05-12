@@ -4667,7 +4667,7 @@ declare interface DescribeOriginGroupRequest {
   Offset?: number;
   /** 分页查询限制数目，不填默认为20，取值：1-1000。 */
   Limit?: number;
-  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：origin-group-id 按照【源站组ID】进行过滤。源站组ID形如：origin-2ccgtb24-7dc5-46s2-9r3e-95825d53dwe3a 模糊查询：不支持origin-group-name 按照【源站组名称】进行过滤 模糊查询：支持。使用模糊查询时，仅支持填写一个源站组名称 */
+  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：origin-group-id：按照源站组 ID 进行过滤，不支持模糊查询。源站组 ID 形如：origin-2ccgtb24-7dc5-46s2-9r3e-95825d53dwe3a；origin-group-name： 按照源站组名称进行过滤，使用模糊查询时，仅支持填写一个源站组名称。 */
   Filters?: AdvancedFilter[];
 }
 
@@ -5845,7 +5845,7 @@ declare interface UpgradePlanResponse {
 }
 
 declare interface VerifyOwnershipRequest {
-  /** 站点或者加速域名。 */
+  /** 站点域名或者站点下的加速域名。 */
   Domain: string;
 }
 

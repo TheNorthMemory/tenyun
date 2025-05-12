@@ -398,6 +398,26 @@ declare interface DescribeProbeMetricDataResponse {
   RequestId?: string;
 }
 
+declare interface DescribeProbeMetricTagValuesRequest {
+  /** 分析任务类型，支持以下几种类型：AnalyzeTaskType_Network：网络质量AnalyzeTaskType_Browse：页面性能 AnalyzeTaskType_Transport：端口性能AnalyzeTaskType_UploadDownload：文件传输AnalyzeTaskType_MediaStream：音视频体验 */
+  AnalyzeTaskType?: string;
+  /** 维度标签值，参考：host：任务域名errorInfo：状态类型area：拨测点地区operator：拨测点运营商taskId：任务ID */
+  Key?: string;
+  /** 过滤条件，可以传单个过滤条件也可以拼接多个参数，支持正则匹配 */
+  Filter?: string;
+  /** 过滤条件数组 */
+  Filters?: string[];
+  /** 时间范围 */
+  TimeRange?: string;
+}
+
+declare interface DescribeProbeMetricTagValuesResponse {
+  /** 标签值序列化后的字符串 */
+  TagValueSet?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeProbeNodesRequest {
   /** 节点类型 1 = IDC 2 = LastMile 3 = Mobile */
   NodeType?: number;
@@ -541,6 +561,8 @@ declare interface Cat {
   DescribeNodes(data?: DescribeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodesResponse>;
   /** 列出云拨测指标详细数据 {@link DescribeProbeMetricDataRequest} {@link DescribeProbeMetricDataResponse} */
   DescribeProbeMetricData(data?: DescribeProbeMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProbeMetricDataResponse>;
+  /** 查询云拨测维度标签值 {@link DescribeProbeMetricTagValuesRequest} {@link DescribeProbeMetricTagValuesResponse} */
+  DescribeProbeMetricTagValues(data?: DescribeProbeMetricTagValuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProbeMetricTagValuesResponse>;
   /** 查询拨测节点 {@link DescribeProbeNodesRequest} {@link DescribeProbeNodesResponse} */
   DescribeProbeNodes(data?: DescribeProbeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProbeNodesResponse>;
   /** 分页查询拨测任务列表 {@link DescribeProbeTasksRequest} {@link DescribeProbeTasksResponse} */

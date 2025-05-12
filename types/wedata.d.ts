@@ -530,6 +530,22 @@ declare interface BatchTaskOperateNew {
   JobId?: number | null;
 }
 
+/** 数据地图-数据类目信息 */
+declare interface BizCatalogsInfo {
+  /** 应用id */
+  AppId: string | null;
+  /** 类目id */
+  Id: number | null;
+  /** 类目层级 */
+  Level: number | null;
+  /** 类目名称 */
+  Name: string | null;
+  /** 上级类目id */
+  ParentId: number | null;
+  /** 类目顺序 */
+  Position: number | null;
+}
+
 /** 实时任务同步速度 字节/s */
 declare interface BytesSpeed {
   /** 节点类型 */
@@ -7657,6 +7673,16 @@ declare interface DescribeApproveTypeListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBaseBizCatalogsRequest {
+}
+
+declare interface DescribeBaseBizCatalogsResponse {
+  /** 类目列表 */
+  Data: BizCatalogsInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBatchOperateTaskRequest {
   /** 项目Id */
   ProjectId: string;
@@ -12416,6 +12442,8 @@ declare interface Wedata {
   DescribeApproveList(data: DescribeApproveListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApproveListResponse>;
   /** 获取审批分类列表 {@link DescribeApproveTypeListRequest} {@link DescribeApproveTypeListResponse} */
   DescribeApproveTypeList(data: DescribeApproveTypeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApproveTypeListResponse>;
+  /** 数据类目基础信息列表 {@link DescribeBaseBizCatalogsRequest} {@link DescribeBaseBizCatalogsResponse} */
+  DescribeBaseBizCatalogs(data?: DescribeBaseBizCatalogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaseBizCatalogsResponse>;
   /** 批量操作页面获取任务列表 {@link DescribeBatchOperateTaskRequest} {@link DescribeBatchOperateTaskResponse} */
   DescribeBatchOperateTask(data: DescribeBatchOperateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchOperateTaskResponse>;
   /** 列出字段血缘信息 {@link DescribeColumnLineageRequest} {@link DescribeColumnLineageResponse} */

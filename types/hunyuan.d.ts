@@ -42,6 +42,8 @@ declare interface Delta {
   Content?: string;
   /** 模型生成的工具调用，仅 hunyuan-functioncall 模型支持说明：对于每一次的输出值应该以Id为标识对Type、Name、Arguments字段进行合并。 */
   ToolCalls?: ToolCall[] | null;
+  /** 思维链内容。用于展示模型思考过程，仅 Hunyuan-T1 系列模型可用。注意：在进行多轮对话时，请不要将此字段拼接到 messages 中。请求 messages 的请求参数中包含 reasoning_content，接口将报错。 */
+  ReasoningContent?: string;
 }
 
 /** Embedding 信息。 */
@@ -138,6 +140,16 @@ declare interface Image {
   ImageUrl?: string;
   /** 图片Base64。 */
   ImageBase64?: string;
+}
+
+/** 拍照解题内容 */
+declare interface ImageMessage {
+  /** 角色，可选值包括 system、user、assistant。 */
+  Role: string;
+  /** 文本内容 */
+  Content?: string;
+  /** 多种类型内容（目前支持图片和文本），仅 hunyuan-vision 和 hunyuan-turbo-vision 模型支持 */
+  Contents?: Content[];
 }
 
 /** 具体的图片内容 */
@@ -782,6 +794,32 @@ declare interface GroupChatCompletionsResponse {
   RequestId?: string;
 }
 
+declare interface ImageQuestionRequest {
+  /** 模型名称，可选值包括 hunyuan-vision-image-question。各模型介绍请阅读 [产品概述](https://cloud.tencent.com/document/product/1729/104753) 中的说明。注意：不同的模型计费不同，请根据 [购买指南](https://cloud.tencent.com/document/product/1729/97731) 按需调用。 */
+  Model: string;
+  /** 聊天上下文信息。说明：1. 长度最多为 40，按对话时间从旧到新在数组中排列。2. Message.Role 可选值：system、user、assistant。其中，system 角色可选，如存在则必须位于列表的最开始。user 和 assistant 需交替出现（一问一答），以 user 提问开始，user提问结束，且 Content 不能为空。Role 的顺序示例：[system（可选） user assistant user assistant user ...]。3. Messages 中 Content 总长度不能超过模型输入长度上限（可参考 [产品概述](https://cloud.tencent.com/document/product/1729/104753) 文档），超过则会截断最前面的内容，只保留尾部内容。 */
+  Messages: ImageMessage[];
+  /** 流式调用开关。说明：1. 未传值时默认为非流式调用（false）。2. 流式调用时以 SSE 协议增量返回结果（返回值取 Choices[n].Delta 中的值，需要拼接增量数据才能获得完整结果）。3. 非流式调用时：调用方式与普通 HTTP 请求无异。接口响应耗时较长，**如需更低时延建议设置为 true**。只返回一次最终结果（返回值取 Choices[n].Message 中的值）。注意：通过 SDK 调用时，流式和非流式调用需用**不同的方式**获取返回值，具体参考 SDK 中的注释或示例（在各语言 SDK 代码仓库的 examples/hunyuan/v20230901/ 目录中）。 */
+  Stream?: boolean;
+}
+
+declare interface ImageQuestionResponse {
+  /** Unix 时间戳，单位为秒。 */
+  Created?: number;
+  /** Token 统计信息。按照总 Token 数量计费。 */
+  Usage?: Usage;
+  /** 免责声明。 */
+  Note?: string;
+  /** 本次请求的 RequestId。 */
+  Id?: string;
+  /** 回复内容。 */
+  Choices?: Choice[];
+  /** 错误信息。如果流式返回中服务处理异常，返回该错误信息。 */
+  ErrorMsg?: ErrorMsg | null;
+  /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
+  RequestId?: string;
+}
+
 declare interface QueryHunyuanImageChatJobRequest {
   /** 任务 ID。 */
   JobId?: string;
@@ -1011,6 +1049,8 @@ declare interface Hunyuan {
   GetTokenCount(data: GetTokenCountRequest, config?: AxiosRequestConfig): AxiosPromise<GetTokenCountResponse>;
   /** 群聊 {@link GroupChatCompletionsRequest} {@link GroupChatCompletionsResponse} */
   GroupChatCompletions(data: GroupChatCompletionsRequest, config?: AxiosRequestConfig): AxiosPromise<GroupChatCompletionsResponse>;
+  /** 拍照解题 {@link ImageQuestionRequest} {@link ImageQuestionResponse} */
+  ImageQuestion(data: ImageQuestionRequest, config?: AxiosRequestConfig): AxiosPromise<ImageQuestionResponse>;
   /** 查询混元生图（多轮对话）任务 {@link QueryHunyuanImageChatJobRequest} {@link QueryHunyuanImageChatJobResponse} */
   QueryHunyuanImageChatJob(data?: QueryHunyuanImageChatJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryHunyuanImageChatJobResponse>;
   /** 查询混元生图任务 {@link QueryHunyuanImageJobRequest} {@link QueryHunyuanImageJobResponse} */

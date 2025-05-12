@@ -200,6 +200,16 @@ declare interface DealGoodsPriceNewElem {
   OriginalTotalCost: number;
 }
 
+/** 订单价格详情 */
+declare interface DealPriceDetail {
+  /** 子订单号 */
+  DealName?: string;
+  /** 订单归属人uin（代客uin） */
+  OwnerUin?: string;
+  /** 子产品价格详情列表 */
+  SubProductPriceDetail?: SubProductPriceDetail[];
+}
+
 /** 产品详情 */
 declare interface ProductInfoElem {
   /** 产品属性 */
@@ -246,6 +256,18 @@ declare interface RefundMap {
   DealName?: string;
   /** 退款金额，单位分 */
   RefundAmount?: number;
+}
+
+/** 订单子产品价格详情 */
+declare interface SubProductPriceDetail {
+  /** 子产品名称 */
+  Name?: string;
+  /** 折扣值，=100时表示无折扣，=85时表示8.5折 */
+  DiscountValue?: number;
+  /** 原价，折扣前价格，单位：分 */
+  TotalCost?: number;
+  /** 折后价，单位：分 */
+  RealTotalCost?: number;
 }
 
 /** 解绑客户信息 */
@@ -478,6 +500,22 @@ declare interface DescribeAgentDealsByCacheResponse {
   AgentDealSet?: AgentDealNewElem[];
   /** 符合条件的订单总数量 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAgentDealsPriceDetailByDealNameRequest {
+  /** 下单年份（订单创建时间归属年份） */
+  DealCreatYear: number;
+  /** 子订单号，每个请求最多查询100条 */
+  DealNames: string[];
+  /** 订单归属代客uin */
+  OwnerUin?: string;
+}
+
+declare interface DescribeAgentDealsPriceDetailByDealNameResponse {
+  /** 子订单的费用详情 */
+  DealList?: DealPriceDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -731,6 +769,8 @@ declare interface Partners {
   DescribeAgentClients(data?: DescribeAgentClientsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentClientsResponse>;
   /** 代理商缓存订单查询接口（预付费） {@link DescribeAgentDealsByCacheRequest} {@link DescribeAgentDealsByCacheResponse} */
   DescribeAgentDealsByCache(data: DescribeAgentDealsByCacheRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDealsByCacheResponse>;
+  /** 查询伙伴订单的费用详情 {@link DescribeAgentDealsPriceDetailByDealNameRequest} {@link DescribeAgentDealsPriceDetailByDealNameResponse} */
+  DescribeAgentDealsPriceDetailByDealName(data: DescribeAgentDealsPriceDetailByDealNameRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDealsPriceDetailByDealNameResponse>;
   /** 代理商代付订单查询接口（预付费） {@link DescribeAgentPayDealsV2Request} {@link DescribeAgentPayDealsV2Response} */
   DescribeAgentPayDealsV2(data: DescribeAgentPayDealsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentPayDealsV2Response>;
   /** 代理商查询合并支付的关联订单号 {@link DescribeAgentRelateBigDealIdsRequest} {@link DescribeAgentRelateBigDealIdsResponse} */

@@ -3201,7 +3201,7 @@ declare interface AllocateAddressesRequest {
   InternetMaxBandwidthOut?: number;
   /** 包月按带宽预付费EIP的计费参数。EIP为包月按带宽预付费时，该参数必传，其余场景不需传递 */
   AddressChargePrepaid?: AddressChargePrepaid;
-  /** EIP类型。各种EIP类型详情可参考：[EIP 的 IP 地址类型](https://cloud.tencent.com/document/product/1199/41646)。默认值：EIP。EIP：弹性公网 IP。 AnycastEIP：加速 IP，已开通 [Anycast 公网加速](https://cloud.tencent.com/document/product/644)白名单的用户可选。仅部分地域支持加速IP。HighQualityEIP：精品 IP。仅部分地域支持精品IP。AntiDDoSEIP：高防 IP。仅部分地域支持高防IP。 */
+  /** EIP类型。各种EIP类型详情可参考：[EIP 的 IP 地址类型](https://cloud.tencent.com/document/product/1199/41646)。默认值：EIP。EIP：弹性公网 IP。 AnycastEIP：加速 IP，已开通 [Anycast 公网加速](https://cloud.tencent.com/document/product/644)白名单的用户可选。仅部分地域支持加速IP，详情可见Anycast公网加速[购买指南](https://cloud.tencent.com/document/product/644/12617)。HighQualityEIP：精品 IP。仅新加坡和中国香港支持精品IP。AntiDDoSEIP：高防 IP。仅部分地域支持高防IP，详情可见弹性公网IP[产品概述](https://cloud.tencent.com/document/product/1199/41646)。 */
   AddressType?: string;
   /** Anycast发布域。已开通Anycast公网加速白名单的用户，可选值：ANYCAST_ZONE_GLOBAL：全球发布域（需要额外开通Anycast全球加速白名单）ANYCAST_ZONE_OVERSEAS：境外发布域[已废弃] ANYCAST_ZONE_A：发布域A（已更新为全球发布域）[已废弃] ANYCAST_ZONE_B：发布域B（已更新为全球发布域）默认值：ANYCAST_ZONE_OVERSEAS。 */
   AnycastZone?: string;
@@ -7991,9 +7991,9 @@ declare interface InquiryPriceCreateVpnGatewayResponse {
 }
 
 declare interface InquiryPriceModifyAddressesBandwidthRequest {
-  /** EIP唯一ID */
+  /** EIP唯一ID，可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取AddressId。 */
   AddressIds: string[];
-  /** 新带宽值 */
+  /** 新带宽值，可调整的带宽上限值参考产品文档[带宽上限](https://cloud.tencent.com/document/product/1199/48333)。 */
   InternetMaxBandwidthOut: number;
 }
 
@@ -8469,9 +8469,9 @@ declare interface ModifyIPv6AddressesAttributesResponse {
 }
 
 declare interface ModifyIPv6AddressesBandwidthRequest {
-  /** 弹性公网IPv6地址唯一ID */
+  /** 弹性公网IPv6地址唯一ID，可以使用[DescribeIPv6Addresses](https://cloud.tencent.com/document/api/215/113677)接口获取IPv6AddressId。 */
   IPv6AddressIds: string[];
-  /** 弹性公网IPv6地址网络带宽 */
+  /** 弹性公网IPv6地址网络带宽，可调整的带宽上限值参考产品文档中[IPv6 计费限制说明](https://cloud.tencent.com/document/product/1142/38369)。 */
   InternetMaxBandwidthOut: number;
 }
 
@@ -9519,8 +9519,8 @@ declare interface ResumeSnapshotInstanceResponse {
 }
 
 declare interface ReturnNormalAddressesRequest {
-  /** 普通公网IP 的 IP 地址,示例：101.35.139.183 */
-  AddressIps?: string[];
+  /** 普通公网IP 的 IP 地址，可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取AddressIps。 */
+  AddressIps: string[];
 }
 
 declare interface ReturnNormalAddressesResponse {
@@ -10496,7 +10496,7 @@ declare interface Vpc {
   /** 恢复安全组策略 {@link ResumeSnapshotInstanceRequest} {@link ResumeSnapshotInstanceResponse} */
   ResumeSnapshotInstance(data: ResumeSnapshotInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeSnapshotInstanceResponse>;
   /** 解绑并释放普通公网IP {@link ReturnNormalAddressesRequest} {@link ReturnNormalAddressesResponse} */
-  ReturnNormalAddresses(data?: ReturnNormalAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<ReturnNormalAddressesResponse>;
+  ReturnNormalAddresses(data: ReturnNormalAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<ReturnNormalAddressesResponse>;
   /** 设置云联网各地域出带宽上限或地域间上限 {@link SetCcnRegionBandwidthLimitsRequest} {@link SetCcnRegionBandwidthLimitsResponse} */
   SetCcnRegionBandwidthLimits(data: SetCcnRegionBandwidthLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<SetCcnRegionBandwidthLimitsResponse>;
   /** 设置VPNGW续费标记 {@link SetVpnGatewaysRenewFlagRequest} {@link SetVpnGatewaysRenewFlagResponse} */
