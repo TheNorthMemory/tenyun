@@ -232,6 +232,10 @@ declare interface ServerBaseConfig {
   InternalAccess?: string;
   /** 内网域名 */
   InternalDomain?: string;
+  /** 运行模式 */
+  OperationMode?: string | null;
+  /** 定时扩缩容配置 */
+  TimerScale?: TimerScale[] | null;
 }
 
 /** 服务基本信息 */
@@ -340,6 +344,22 @@ declare interface TaskStepInfo {
   CostTime?: number;
   /** 失败原因 */
   FailReason?: string;
+}
+
+/** 定时扩缩容配置 */
+declare interface TimerScale {
+  /** 循环类型 */
+  CycleType?: string | null;
+  /** 循环起始 */
+  StartDate?: string | null;
+  /** 循环结束 */
+  EndDate?: string | null;
+  /** 起始时间 */
+  StartTime?: string | null;
+  /** 结束时间 */
+  EndTime?: string | null;
+  /** 副本个数 */
+  ReplicaNum?: number | null;
 }
 
 /** 版本流量信息 */

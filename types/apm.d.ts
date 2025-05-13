@@ -621,6 +621,10 @@ declare interface ModifyApmInstanceRequest {
   IsRemoteCommandExecutionAnalysis?: number;
   /** 是否开启内存马检测 */
   IsMemoryHijackingAnalysis?: number;
+  /** 0=全文索引，1=键值索引 */
+  LogIndexType?: number;
+  /** traceId的索引key */
+  LogTraceIdKey?: string;
 }
 
 declare interface ModifyApmInstanceResponse {

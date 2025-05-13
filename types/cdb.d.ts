@@ -3270,22 +3270,6 @@ declare interface DescribeClusterInfoResponse {
   RequestId?: string;
 }
 
-declare interface DescribeCpuExpandStrategyRequest {
-  /** 实例 ID 。 */
-  InstanceId: string;
-}
-
-declare interface DescribeCpuExpandStrategyResponse {
-  /** 策略类型。可选值 auto、manual。 */
-  Type?: string;
-  /** 手动扩容的 CPU 。Type为 manual 时有效。 */
-  ExpandCpu?: string;
-  /** 自动扩容策略。Type 为 auto 时有效 */
-  AutoStrategy?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeDBFeaturesRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
@@ -5461,8 +5445,6 @@ declare interface Cdb {
   DescribeCloneList(data: DescribeCloneListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloneListResponse>;
   /** 查询云盘版实例信息 {@link DescribeClusterInfoRequest} {@link DescribeClusterInfoResponse} */
   DescribeClusterInfo(data: DescribeClusterInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInfoResponse>;
-  /** @deprecated 查询实例的 CPU 弹性扩容策略 {@link DescribeCpuExpandStrategyRequest} {@link DescribeCpuExpandStrategyResponse} */
-  DescribeCpuExpandStrategy(data: DescribeCpuExpandStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCpuExpandStrategyResponse>;
   /** 查询实例版本属性 {@link DescribeDBFeaturesRequest} {@link DescribeDBFeaturesResponse} */
   DescribeDBFeatures(data: DescribeDBFeaturesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBFeaturesResponse>;
   /** 查询数据库导入任务记录 {@link DescribeDBImportRecordsRequest} {@link DescribeDBImportRecordsResponse} */

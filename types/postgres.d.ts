@@ -473,11 +473,11 @@ declare interface LogBackup {
 /** 用于修改数据库对象的权限，其中包含了数据库对象描述的数据结构、需要修改的权限列表以及修改的类型等。 */
 declare interface ModifyPrivilege {
   /** 要修改的数据库对象及权限列表 */
-  DatabasePrivilege?: DatabasePrivilege | null;
+  DatabasePrivilege?: DatabasePrivilege;
   /** 修改的方式，当前仅支持grantObject、revokeObject、alterRole。grantObject代表授权、revokeObject代表收回权、alterRole代表修改账号类型。 */
-  ModifyType?: string | null;
+  ModifyType?: string;
   /** 当ModifyType为revokeObject才需要此参数，参数为true时，撤销权限会级联撤销。默认为false。 */
-  IsCascade?: boolean | null;
+  IsCascade?: boolean;
 }
 
 /** 网络相关信息。（该数据结构已废弃，网络相关信息使用DBInstanceNetInfo） */

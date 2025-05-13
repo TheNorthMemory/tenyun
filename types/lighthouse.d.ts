@@ -478,7 +478,7 @@ declare interface FirewallTemplate {
   TemplateId?: string;
   /** 模板名称。 */
   TemplateName?: string;
-  /** 模板类型。取值: "PRIVATE"(个人模版) */
+  /** 模板类型。取值: "PRIVATE"(个人模板) */
   TemplateType?: string;
   /** 模板状态。取值: "NORMAL"(正常) */
   TemplateState?: string;
@@ -1659,7 +1659,7 @@ declare interface DescribeFirewallTemplateRulesResponse {
 declare interface DescribeFirewallTemplatesRequest {
   /** 防火墙模板ID列表。可通过[DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874)接口返回值字段TemplateSet获取。列表长度最大值为100。 */
   TemplateIds?: string[];
-  /** 过滤器列表。template-id按照【防火墙模板所属的ID】进行过滤。类型：String必选：否template-name按照【防火墙模板所属的名称】进行过滤。类型：String必选：否template-type按照【防火墙模板的类型】进行过滤。类型：String必选：否取值: "PRIVATE"(个人模版)每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 TemplateIds 和 Filters。 */
+  /** 过滤器列表。template-id按照【防火墙模板所属的ID】进行过滤。类型：String必选：否template-name按照【防火墙模板所属的名称】进行过滤。类型：String必选：否template-type按照【防火墙模板的类型】进行过滤。类型：String必选：否取值: "PRIVATE"(个人模板)每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 TemplateIds 和 Filters。 */
   Filters?: Filter[];
   /** 偏移量，默认为 0。 */
   Offset?: number;

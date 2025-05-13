@@ -140,6 +140,10 @@ declare interface BaseFlowInfo {
   Components?: Component[];
   /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议 3 :文书效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
   FlowDisplayType?: number;
+  /** 签署文件资源Id列表，目前仅支持单个文件 */
+  FileIds?: string[];
+  /** 合同签署人信息 */
+  Approvers?: CommonFlowApprover[];
 }
 
 /** 撤销失败的流程信息 */
@@ -308,9 +312,9 @@ declare interface Component {
   ComponentHeight?: number;
   /** **在绝对定位方式方式下**，指定控件所在PDF文件上的页码**在使用文件发起的情况下**，绝对定位方式的填写控件和签署控件支持使用负数来指定控件在PDF文件上的页码，使用负数时，页码从最后一页开始。例如：ComponentPage设置为-1，即代表在PDF文件的最后一页，以此类推。注：1. 页码编号是从1开始编号的。2. 页面编号不能超过PDF文件的页码总数。如果指定的页码超过了PDF文件的页码总数，在填写和签署时会出现错误，导致无法正常进行操作。 */
   ComponentPage?: number;
-  /** **在绝对定位方式和关键字定位方式下**，可以指定控件横向位置的位置，单位为pt（点）。 */
+  /** **在绝对定位方式下**，可以指定控件横向位置的位置，单位为pt（点）。 */
   ComponentPosX?: number;
-  /** **在绝对定位方式和关键字定位方式下**，可以指定控件纵向位置的位置，单位为pt（点）。 */
+  /** **在绝对定位方式下**，可以指定控件纵向位置的位置，单位为pt（点）。 */
   ComponentPosY?: number;
   /** **在所有的定位方式下**，控件的扩展参数，为JSON格式，不同类型的控件会有部分非通用参数。ComponentType为TEXT、MULTI_LINE_TEXT时，支持以下参数： Font：目前只支持黑体、宋体、仿宋 FontSize： 范围6 :72 FontAlign： Left/Right/Center，左对齐/居中/右对齐 FontColor：字符串类型，格式为RGB颜色数字参数样例：`{"FontColor":"255,0,0","FontSize":12}`ComponentType为DATE时，支持以下参数： Font：目前只支持黑体、宋体、仿宋 FontSize： 范围6 :72参数样例：`{"FontColor":"255,0,0","FontSize":12}`ComponentType为FILL_IMAGE时，支持以下参数： NotMakeImageCenter：bool。是否设置图片居中。false：居中（默认）。 true : 不居中 FillMethod : int. 填充方式。0-铺满（默认）；1-等比例缩放ComponentType为SIGN_SIGNATURE类型时，可以**ComponentTypeLimit**参数控制签署方式 HANDWRITE : 需要实时手写的手写签名 HANDWRITTEN_ESIGN : 长效手写签名， 是使用保存到个人中心的印章列表的手写签名(并且包含HANDWRITE) OCR_ESIGN : AI智能识别手写签名 ESIGN : 个人印章类型 SYSTEM_ESIGN : 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署） IMG_ESIGN : 图片印章(该类型支持用户在签署将上传的PNG格式的图片作为签名)参考样例：`{"ComponentTypeLimit": ["SYSTEM_ESIGN"]}`印章的对应关系参考下图![image](https://qcloudimg.tencent-cloud.cn/raw/ee0498856c060c065628a0c5ba780d6b.jpg)ComponentType为SIGN_SEAL 或者 SIGN_PAGING_SEAL类型时，可以通过**ComponentTypeLimit**参数控制签署方签署时要使用的印章类型，支持指定以下印章类型 OFFICIAL : 企业公章 CONTRACT : 合同专用章 FINANCE : 财务专用章 PERSONNEL : 人事专用章 OTHER : 其他参考样例：`{\"ComponentTypeLimit\":[\"PERSONNEL\",\"FINANCE\"]}` 表示改印章签署区,客户需使用人事专用章或财务专用章盖章签署。ComponentType为SIGN_DATE时，支持以下参数： Font :字符串类型目前只支持"黑体"、"宋体"、仿宋，如果不填默认为"黑体" FontSize : 数字类型，范围6-72，默认值为12 FontAlign : 字符串类型，可取Left/Right/Center，对应左对齐/居中/右对齐 Format : 字符串类型，日期格式，必须是以下五种之一 “yyyy m d”，”yyyy年m月d日”，”yyyy/m/d”，”yyyy-m-d”，”yyyy.m.d”。 Gaps : 字符串类型，仅在Format为“yyyy m d”时起作用，格式为用逗号分开的两个整数，例如”2,2”，两个数字分别是日期格式的前后两个空隙中的空格个数如果extra参数为空，默认为”yyyy年m月d日”格式的居中日期特别地，如果extra中Format字段为空或无法被识别，则extra参数会被当作默认值处理（Font，FontSize，Gaps和FontAlign都不会起效）参数样例： ` "{"Format":"yyyy m d","FontSize":12,"Gaps":"2,2", "FontAlign":"Right"}"`ComponentType为SIGN_SEAL、SIGN_SIGNATURE类型时，支持以下参数： PageRanges :PageRange的数组，通过PageRanges属性设置该印章在PDF所有页面上盖章（适用于标书在所有页面盖章的情况）参数样例：` "{"PageRanges":[{"BeginPage":1,"EndPage":-1}]}"`签署印章旋转功能，当ComponentType为SIGN_SIGNATURE、SIGN_DATE、SIGN_SEAL时，可以通过以下参数设置签署图片的旋转角度： Rotate：旋转角度，支持范围：-360：360，为正整数时，为顺时针旋转；为负整数时，为逆时针旋转。 RotateRelation：旋转关联控件，用于指定关联旋转的控件。例如：让印章控件和签署日期控件按照印章控件为中心旋转（此时，设置印章控件的RotateRelation为日期控件的ComponentId，设置日期签署控件的RotateRelation为印章控件的ComponentId）。参数样例：`{"Rotate":-30,"RotateRelation":"Component_Id1"}`签署印章透明度功能设置，当ComponentType为SIGN_SIGNATURE、SIGN_SEAL、SIGN_PAGING_SEAL、SIGN_LEGAL_PERSON_SEAL时，可以通过以下参数设置签署印章的透明度： Opacity：印章透明度，支持范围：0-1，0.7表示70%的透明度，1表示无透明度参数样例：`{"Opacity":0.7}`签署印章大小功能设置，当ComponentType为SIGN_SEAL、SIGN_PAGING_SEAL、SIGN_LEGAL_PERSON_SEAL时，可以通过以下参数设置签署时按照实际印章的大小进行签署，如果印章没有设置大小，那么默认会是4.2cm的印章大小： UseSealSize：使用印章设置的大小盖章，true表示使用印章设置的大小盖章，false表示使用签署控件的大小进行盖章；不传则为false参数样例：`{"UseSealSize":true}`关键字模式下支持关键字找不到的情况下不进行报错的设置 IgnoreKeywordError :1-关键字查找不到时不进行报错场景说明：如果使用关键字进行定位，但是指定的PDF文件中又没有设置的关键字时，发起合同会进行关键字是否存在的校验，如果关键字不存在，会进行报错返回。如果不希望进行报错，可以设置"IgnoreKeywordError"来忽略错误。请注意，如果关键字签署控件对应的签署方在整个PDF文件中一个签署控件都没有，还是会触发报错逻辑。参数样例：` "{"IgnoreKeywordError":1}"`ComponentType为SIGN_VIRTUAL_COMBINATION时，支持以下参数：Children: 绝对定位模式下，用来指定此签批控件的组合子控件 参数样例：`{"Children":["ComponentId_29","ComponentId_27","ComponentId_28","ComponentId_30"]}`ChildrenComponents: 关键字定位模式下，用来指定此签批控件的组合子控件 ChildrenComponent结构体定义: 字段名称 类型 描述 ComponentType string 子控件类型-可选值:SIGN_SIGNATURE,SIGN_DATE,SIGN_SELECTOR,SIGN_MULTI_LINE_TEXT ComponentName string 子控件名称 Placeholder string 子控件提示语 ComponentOffsetX float 控件偏移位置X（相对于父控件（签批控件的ComponentX）） ComponentOffsetY float 控件偏移位置Y 相对于父控件（签批控件的ComponentY）） ComponentWidth float 控件宽 ComponentHeight float 控件高 ComponentExtra string 控件的附属信息，根据ComponentType设置 参数样例：{ "ChildrenComponents": [ { "ComponentType": "SIGN_SIGNATURE", "ComponentName": "个人签名", "Placeholder": "请签名", "ComponentOffsetX": 10, "ComponentOffsetY": 30, "ComponentWidth": 119, "ComponentHeight": 43, "ComponentExtra": "{\"ComponentTypeLimit\":[\"SYSTEM_ESIGN\"]}" }, { "ComponentType": "SIGN_SELECTOR", "ComponentName": "是否同意此协议", "Placeholder": "", "ComponentOffsetX": 50, "ComponentOffsetY": 130, "ComponentWidth": 120, "ComponentHeight": 43, "ComponentExtra": "{\"Values\":[\"同意\",\"不同意\",\"再想想\"],\"FontSize\":12,\"FontAlign\":\"Left\",\"Font\":\"黑体\",\"MultiSelect\":false}" }, { "ComponentType": "SIGN_MULTI_LINE_TEXT", "ComponentName": "批注附言", "Placeholder": "", "ComponentOffsetX": 150, "ComponentOffsetY": 300, "ComponentWidth": 200, "ComponentHeight": 86, "ComponentExtra": "" } ]} */
   ComponentExtra?: string;
@@ -1953,6 +1957,8 @@ declare interface ChannelCreateOrganizationBatchSignUrlRequest {
   Name?: string;
   /** 员工手机号，必须与姓名一起使用。 如果OpenId为空，则此字段不能为空。同时，姓名和手机号码必须与传入合同（FlowId）中的签署人信息一致。 */
   Mobile?: string;
+  /** 合同组Id，传入此参数则可以不传FlowIds */
+  FlowGroupId?: string;
 }
 
 declare interface ChannelCreateOrganizationBatchSignUrlResponse {
@@ -1974,6 +1980,26 @@ declare interface ChannelCreateOrganizationModifyQrCodeResponse {
   QrCodeUrl?: string;
   /** 二维码失效时间 UNIX 时间戳 精确到秒 */
   ExpiredTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ChannelCreatePrepareFlowGroupRequest {
+  /** 合同组中每个合同签署流程的信息，合同组中最少包含2个合同，不能超过50个合同。 */
+  BaseFlowInfos: BaseFlowInfo[];
+  /** 合同组的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。 */
+  FlowGroupName: string;
+  /** 资源类型，取值有： **1**：模板 **2**：文件 */
+  ResourceType: number;
+  /** 合同的发起企业和发起人信息，点击查看合同发起企业和人展示的位置此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId（合同的发起企业）第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId （合同的发起人）合同的发起企业和发起人必需已经完成实名，并加入企业 */
+  Agent?: Agent;
+}
+
+declare interface ChannelCreatePrepareFlowGroupResponse {
+  /** 合同组ID，为32位字符串。建议开发者妥善保存此合同组ID，以便于顺利进行后续操作。 */
+  FlowGroupId?: string;
+  /** 嵌入式发起链接 */
+  PrepareUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5091,6 +5117,8 @@ declare interface Essbasic {
   ChannelCreateOrganizationModifyQrCode(data: ChannelCreateOrganizationModifyQrCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateOrganizationModifyQrCodeResponse>;
   /** 获取发起合同嵌入链接 {@link ChannelCreatePrepareFlowRequest} {@link ChannelCreatePrepareFlowResponse} */
   ChannelCreatePrepareFlow(data: ChannelCreatePrepareFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreatePrepareFlowResponse>;
+  /** 获取发起合同组嵌入链接 {@link ChannelCreatePrepareFlowGroupRequest} {@link ChannelCreatePrepareFlowGroupResponse} */
+  ChannelCreatePrepareFlowGroup(data: ChannelCreatePrepareFlowGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreatePrepareFlowGroupResponse>;
   /** 创建导入处方单个人印章 {@link ChannelCreatePreparedPersonalEsignRequest} {@link ChannelCreatePreparedPersonalEsignResponse} */
   ChannelCreatePreparedPersonalEsign(data: ChannelCreatePreparedPersonalEsignRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreatePreparedPersonalEsignResponse>;
   /** 发起解除协议 {@link ChannelCreateReleaseFlowRequest} {@link ChannelCreateReleaseFlowResponse} */

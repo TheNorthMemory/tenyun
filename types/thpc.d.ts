@@ -963,7 +963,7 @@ declare interface DescribeWorkspacesRequest {
   Offset?: number;
   /** 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
   Limit?: number;
-  /** 过滤列表 */
+  /** zone 按照【可用区】进行过滤 类型：String 必选：否 space-id 按照【工作空间实例ID】进行过滤 类型：String 必选：否 cvm-instance-id 按照【CVM实例ID】进行过滤 类型：String 必选：否 space-state 按照【工作空间状态】进行过滤 类型：String 必选：否 space-name 按照【工作空间别名】进行过滤 类型：String 必选：否 space-charge-type 按照【工作空间实例付费模式】进行过滤 类型：String 必选：否 tag-key 按照【标签键】进行过滤 类型：String 必选：否 tag-value 按照【标签值】进行过滤 类型：String 必选：否 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。 */
   Filters?: Filter[];
 }
 

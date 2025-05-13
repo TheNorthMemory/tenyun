@@ -620,6 +620,8 @@ declare interface CCRuleItems {
   SessionApplied?: number[];
   /** 创建时间 */
   CreateTime?: number;
+  /** 限频方式 */
+  LimitMethod?: string;
 }
 
 /** CC规则总览 */
@@ -748,6 +750,10 @@ declare interface ClbObject {
   ObjectFlowMode?: number;
   /** 数值形式的私有网络 ID */
   NumericalVpcId?: number;
+  /** 修改时间 */
+  ModifyTime?: string;
+  /** 创建时间 */
+  AddTime?: string;
 }
 
 /** Clb-waf地域信息 */
@@ -1504,6 +1510,8 @@ declare interface InOutputBotUCBRule {
   BlockPageId?: number;
   /** 当Action=intercept时，此字段必填 */
   ActionList?: UCBActionProportion[];
+  /** 惩罚时间 */
+  DelayTime?: number;
 }
 
 /** 自定义规则UCB的Rule生效条件 */
@@ -1526,6 +1534,8 @@ declare interface InOutputUCBRuleEntry {
   Areas?: Area[];
   /** 语言环境 */
   Lang?: string;
+  /** 参数匹配 */
+  ParamCompareList?: ParamCompareList[];
 }
 
 /** 一个实例的详细信息 */
@@ -1724,8 +1734,6 @@ declare interface LoadBalancer {
   ListenerId: string;
   /** 负载均衡监听器的名称 */
   ListenerName: string;
-  /** 负载均衡实例的IP */
-  Vip: string;
   /** 负载均衡实例的端口 */
   Vport: number;
   /** 负载均衡LD的地域 */
@@ -1734,6 +1742,8 @@ declare interface LoadBalancer {
   Protocol: string;
   /** 负载均衡监听器所在的zone */
   Zone: string;
+  /** 负载均衡实例的IP。域名化CLB VIP可填空。 */
+  Vip?: string;
   /** 负载均衡的VPCID，公网为-1，内网按实际填写 */
   NumericalVpcId?: number;
   /** 负载均衡的网络类型。OPEN： 公网 INTERNAL ：内网 */
@@ -1862,6 +1872,14 @@ declare interface MiniPkg {
   RenewFlag?: number;
   /** 计费项 */
   BillingItem?: string;
+}
+
+/** bot-自定义规则请求参数比对结构体 */
+declare interface ParamCompareList {
+  /** 请求参数比对的匹配参数 */
+  Key?: string;
+  /** 请求参数比对的匹配值 */
+  Value?: string;
 }
 
 /** PeakPoints数组项 */
@@ -2172,7 +2190,7 @@ declare interface SessionItem {
 
 /** waf斯巴达-编辑防护域名中的端口结构 */
 declare interface SpartaProtectionPort {
-  /** 分配的服务器id */
+  /** 分配的服务器id。首次接入的域名和端口该参数填0，已接入的域名和端口分配的id可以通过DescribeDomainDetailsSaas或DescribeDomains接口获取。 */
   NginxServerId: number;
   /** 端口 */
   Port: string;
@@ -2821,7 +2839,7 @@ declare interface CreateDealsResponse {
 }
 
 declare interface CreateHostRequest {
-  /** 防护域名配置信息 */
+  /** 防护域名配置信息。内网负载均衡器必须携带对应的NumericalVpcId。 */
   Host: HostRecord;
   /** 实例id */
   InstanceID?: string;
@@ -3529,6 +3547,8 @@ declare interface DescribeBotSceneListRequest {
   IsDefault?: boolean;
   /** 是否仅显示生效场景 */
   IsValid?: boolean;
+  /** 要查询的场景id */
+  SceneId?: string;
 }
 
 declare interface DescribeBotSceneListResponse {
@@ -3555,7 +3575,7 @@ declare interface DescribeBotSceneOverviewResponse {
   /** 生效场景数 */
   ValidSceneCount?: number;
   /** 当前开启的、匹配范围为全局、优先级最高的场景 */
-  CurrentGlobalScene?: GlobalSceneInfo | null;
+  CurrentGlobalScene?: GlobalSceneInfo;
   /** 自定义规则总数，不包括BOT白名单 */
   CustomRuleNums?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3583,11 +3603,13 @@ declare interface DescribeBotSceneUCBRuleRequest {
   TimerType?: number;
   /** 0-全部 1-生效中 2-已过期 */
   ValidStatus?: number;
+  /** 规则id */
+  RuleId?: string;
 }
 
 declare interface DescribeBotSceneUCBRuleResponse {
   /** 返回数据包 */
-  Data?: DescribeBotUCBRuleRsp | null;
+  Data?: DescribeBotUCBRuleRsp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3651,7 +3673,7 @@ declare interface DescribeCCRuleResponse {
 declare interface DescribeCertificateVerifyResultRequest {
   /** 域名 */
   Domain: string;
-  /** 证书类型。 0：不检测国际标准证书 1：证书来源为自有证书 2：证书来源为托管证书 */
+  /** 证书类型，此参数和GmCertType不可同时为0。 0：不检测国际标准证书 1：证书来源为自有证书 2：证书来源为托管证书 */
   CertType?: number;
   /** CertType为1时，需要填充此参数，表示自有证书的证书链 */
   Certificate?: string;
@@ -3659,7 +3681,7 @@ declare interface DescribeCertificateVerifyResultRequest {
   CertID?: string;
   /** CertType为1时，需要填充此参数，表示自有证书的私钥 */
   PrivateKey?: string;
-  /** 国密证书类型。0：不检测国密证书 1：证书来源为自有国密证书 2：证书来源为托管国密证书 */
+  /** 国密证书类型，此参数和CertType不可同时为0。0：不检测国密证书 1：证书来源为自有国密证书 2：证书来源为托管国密证书 */
   GmCertType?: number;
   /** GmCertType为1时，需要填充此参数，表示自有国密证书的证书链 */
   GmCert?: string;
@@ -4117,6 +4139,10 @@ declare interface DescribeModuleStatusResponse {
 declare interface DescribeObjectsRequest {
   /** 支持的过滤器:	ObjectId: clb实例ID	VIP: clb实例的公网IP	InstanceId: waf实例ID	Domain: 精准域名	Status: waf防护开关状态: 0关闭，1开启	ClsStatus: waf日志开关: 0关闭，1开启 */
   Filters?: FiltersItemNew[];
+  /** 排序方式，支持asc或者desc */
+  Order?: string;
+  /** 根据哪个字段排序 */
+  By?: string;
 }
 
 declare interface DescribeObjectsResponse {
@@ -4930,6 +4956,8 @@ declare interface ModifyBotSceneUCBRuleRequest {
 declare interface ModifyBotSceneUCBRuleResponse {
   /** 正常情况下为null */
   Data?: string;
+  /** ["1231"] */
+  RuleIdList?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5783,7 +5811,7 @@ declare interface UpsertCCRuleRequest {
   Priority: number;
   /** 动作有效时间 */
   ValidTime: number;
-  /** CC的匹配条件JSON序列化的字符串，示例：[{\"key\":\"Method\",\"args\":[\"=R0VU\"],\"match\":\"0\",\"encodeflag\":true}] Key可选值为 Method、Post、Referer、Cookie、User-Agent、CustomHeader match可选值为，当Key为Method的时候可选值为0（等于）、3（不等于）。 Key为Post的时候可选值为0（等于）、3（不等于），Key为Cookie的时候可选值为0（等于）、2（包含），3（不等于）、7（不包含）、 当Key为Referer的时候可选值为0（等于）、3（不等于）、1（前缀匹配）、6（后缀匹配）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）， 当Key为Cookie的时候可选值为0（等于）、3（不等于）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）， 当Key为User-Agent的时候可选值为0（等于）、3（不等于）、1（前缀匹配）、6（后缀匹配）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）， 当Key为CustomHeader的时候可选值为0（等于）、3（不等于）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）。 args用来表示匹配内容，需要设置encodeflag为true，当Key为Post、Cookie、CustomHeader时，用等号=来分别串接Key和Value，并分别用Base64编码，类似YWJj=YWJj。当Key为Referer、User-Agent时，用等号=来串接Value，类似=YWJj。 */
+  /** CC的匹配条件JSON序列化的字符串，示例：[{\"key\":\"Method\",\"args\":[\"=R0VU\"],\"match\":\"0\",\"encodeflag\":true}] Key可选值为 Method、Post、Referer、Cookie、User-Agent、CustomHeader match可选值为，当Key为Method的时候可选值为0（等于）、3（不等于）。 Key为Post的时候可选值为0（等于）、3（不等于），Key为Cookie的时候可选值为0（等于）、2（包含），3（不等于）、7（不包含）、 当Key为Referer的时候可选值为0（等于）、3（不等于）、1（前缀匹配）、6（后缀匹配）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）， 当Key为Cookie的时候可选值为0（等于）、3（不等于）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）， 当Key为User-Agent的时候可选值为0（等于）、3（不等于）、1（前缀匹配）、6（后缀匹配）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）， 当Key为CustomHeader的时候可选值为0（等于）、3（不等于）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）。 Key为IPLocation时，可选值为13（属于）、14（不属于）。args用来表示匹配内容，需要设置encodeflag为true，当Key为Post、Cookie、CustomHeader时，用等号=来分别串接Key和Value，并分别用Base64编码，类似YWJj=YWJj。当Key为Referer、User-Agent时，用等号=来串接Value，类似=YWJj。 */
   OptionsArr?: string;
   /** waf版本，sparta-waf或者clb-waf */
   Edition?: string;
@@ -5799,6 +5827,8 @@ declare interface UpsertCCRuleRequest {
   CreateTime?: number;
   /** url长度 */
   Length?: number;
+  /** 限频方式 */
+  LimitMethod?: string;
 }
 
 declare interface UpsertCCRuleResponse {

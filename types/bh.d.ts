@@ -296,6 +296,20 @@ declare interface Device {
   SSLCertName?: string;
 }
 
+/** 主机账号 */
+declare interface DeviceAccount {
+  /** 账号ID */
+  Id?: number;
+  /** 主机ID */
+  DeviceId?: number;
+  /** 账号名 */
+  Account?: string;
+  /** true-已托管密码，false-未托管密码 */
+  BoundPassword?: boolean;
+  /** true-已托管私钥，false-未托管私钥 */
+  BoundPrivateKey?: boolean;
+}
+
 /** 网络域 */
 declare interface Domain {
   /** 自增id */
@@ -500,6 +514,22 @@ declare interface Resource {
   IntranetVpcId?: string;
   /** 开通内网访问vpc的网段 */
   IntranetVpcCidr?: string;
+  /** 是否共享clb，true-共享clb，false-独享clb */
+  ShareClb?: boolean;
+  /** 共享clb id */
+  OpenClbId?: string;
+  /** 运营商信息 */
+  LbVipIsp?: string;
+  /** linux资产命令行运维端口 */
+  TUICmdPort?: number;
+  /** linux资产直连端口 */
+  TUIDirectPort?: number;
+  /** 1 默认值，web访问开启，0 web访问关闭，2 web访问开通中，3 web访问关闭中 */
+  WebAccess?: number;
+  /** 1 默认值，客户单访问开启，0 客户端访问关闭，2 客户端访问开通中，3 客户端访问关闭中 */
+  ClientAccess?: number;
+  /** 1 默认值，外网访问开启，0 外网访问关闭，2 外网访问开通中，3 外网访问关闭中 */
+  ExternalAccess?: number;
 }
 
 /** 立即执行改密任务的入参 */
@@ -1303,6 +1333,16 @@ declare interface DeployResourceRequest {
   SubnetName?: string;
   /** 需要开通实例所属的CDC集群ID */
   CdcClusterId?: string;
+  /** 开通堡垒机指定共享的clbId */
+  ShareClbId?: string;
+  /** 0-关闭web访问堡垒机，1-开启web访问堡垒机 */
+  WebAccess?: number;
+  /** 0-关闭客户端访问堡垒机，1-开启客户端访问堡垒机 */
+  ClientAccess?: number;
+  /** 0-关闭内网访问堡垒机，1-开启内网访问堡垒机 */
+  IntranetAccess?: number;
+  /** 0-关闭公网访问堡垒机，1-开启公网访问堡垒机 */
+  ExternalAccess?: number;
 }
 
 declare interface DeployResourceResponse {
@@ -1462,6 +1502,8 @@ declare interface DescribeDeviceAccountsRequest {
 declare interface DescribeDeviceAccountsResponse {
   /** 记录总数 */
   TotalCount?: number;
+  /** 账号信息列表 */
+  DeviceAccountSet?: DeviceAccount[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1997,7 +2039,7 @@ declare interface ModifyOperationTaskResponse {
 declare interface ModifyResourceRequest {
   /** 需要开通服务的资源ID */
   ResourceId: string;
-  /** 已废弃 */
+  /** 状态 */
   Status?: string;
   /** 实例版本 */
   ResourceEdition?: string;

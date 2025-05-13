@@ -264,9 +264,9 @@ declare interface Component {
   ComponentWidth: number;
   /** **在绝对定位方式方式下**，指定控件所在PDF文件上的页码**在使用文件发起的情况下**，绝对定位方式的填写控件和签署控件支持使用负数来指定控件在PDF文件上的页码，使用负数时，页码从最后一页开始。例如：ComponentPage设置为-1，即代表在PDF文件的最后一页，以此类推。注：1. 页码编号是从1开始编号的。2. 页面编号不能超过PDF文件的页码总数。如果指定的页码超过了PDF文件的页码总数，在填写和签署时会出现错误，导致无法正常进行操作。 */
   ComponentPage: number;
-  /** **在绝对定位方式和关键字定位方式下**，可以指定控件横向位置的位置，单位为pt（点）。 */
+  /** **在绝对定位方式下**，可以指定控件横向位置的位置，单位为pt（点）。 */
   ComponentPosX: number;
-  /** **在绝对定位方式和关键字定位方式下**，可以指定控件纵向位置的位置，单位为pt（点）。 */
+  /** **在绝对定位方式下**，可以指定控件纵向位置的位置，单位为pt（点）。 */
   ComponentPosY: number;
   /** 【暂未使用】控件所属文件的序号（取值为：0-N）。 目前单文件的情况下，值一直为0 */
   FileIndex: number;
@@ -2550,7 +2550,7 @@ declare interface CreateOrganizationBatchSignUrlRequest {
   /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。支持填入集团子公司经办人 userId 代发合同。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
   /** 请指定需执行批量签署的流程ID，数量范围为1-100。您可登录腾讯电子签控制台，浏览 "合同"->"合同中心" 以查阅某一合同的FlowId（在页面中显示为合同ID）。用户将利用链接对这些合同实施批量操作。 */
-  FlowIds: string[];
+  FlowIds?: string[];
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
   /** 员工在腾讯电子签平台的独特身份标识，为32位字符串。您可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查阅某位员工的UserId（在页面中显示为用户ID）。UserId必须是传入合同（FlowId）中的签署人。1. 若UserId为空，Name和Mobile 必须提供。2. 若UserId 与 Name，Mobile均存在，将优先采用UserId对应的员工。 */
@@ -2561,6 +2561,8 @@ declare interface CreateOrganizationBatchSignUrlRequest {
   Mobile?: string;
   /** 为签署方经办人在签署合同中的参与方ID，必须与参数FlowIds数组一一对应。您可以通过查询合同接口（DescribeFlowInfo）查询此参数。若传了此参数，则可以不传 UserId, Name, Mobile等参数 */
   RecipientIds?: string[];
+  /** 合同组Id，传入此参数则可以不传FlowIds */
+  FlowGroupId?: string;
 }
 
 declare interface CreateOrganizationBatchSignUrlResponse {
@@ -2662,6 +2664,28 @@ declare interface CreatePersonAuthCertificateImageResponse {
   ValidFrom?: number;
   /** CA证书有效截止时间，格式为Unix标准时间戳（秒）该时间格式化后会合成到个人用户证书证明图片 */
   ValidTo?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreatePrepareFlowGroupRequest {
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 合同（流程）组名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。 */
+  FlowGroupName: string;
+  /** 合同（流程）组的子合同信息，支持2-50个子合同 */
+  FlowGroupInfos: FlowGroupInfo[];
+  /** 资源类型，取值有： **1**：模板 **2**：文件 */
+  ResourceType: number;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+}
+
+declare interface CreatePrepareFlowGroupResponse {
+  /** 合同(流程)组的合同组Id */
+  FlowGroupId?: string;
+  /** 嵌入式合同组发起链接 */
+  PrepareUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4121,6 +4145,8 @@ declare interface Ess {
   CreatePersonAuthCertificateImage(data: CreatePersonAuthCertificateImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonAuthCertificateImageResponse>;
   /** 创建发起流程web页面 {@link CreatePrepareFlowRequest} {@link CreatePrepareFlowResponse} */
   CreatePrepareFlow(data: CreatePrepareFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrepareFlowResponse>;
+  /** 获取发起合同组嵌入链接 {@link CreatePrepareFlowGroupRequest} {@link CreatePrepareFlowGroupResponse} */
+  CreatePrepareFlowGroup(data: CreatePrepareFlowGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrepareFlowGroupResponse>;
   /** 创建导入处方单个人印章 {@link CreatePreparedPersonalEsignRequest} {@link CreatePreparedPersonalEsignResponse} */
   CreatePreparedPersonalEsign(data: CreatePreparedPersonalEsignRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePreparedPersonalEsignResponse>;
   /** 发起解除协议 {@link CreateReleaseFlowRequest} {@link CreateReleaseFlowResponse} */

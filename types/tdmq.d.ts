@@ -3329,7 +3329,7 @@ declare interface DescribeRabbitMQNodeListRequest {
   InstanceId: string;
   /** 偏移量，默认值 0 */
   Offset?: number;
-  /** 一页限制,moren */
+  /** 一页限制，默认值 20 */
   Limit?: number;
   /** 模糊搜索节点名字 */
   NodeName?: string;
@@ -4601,9 +4601,9 @@ declare interface ModifyRabbitMQVipInstanceResponse {
 declare interface ModifyRabbitMQVirtualHostRequest {
   /** 实例 ID，形如amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。 */
   InstanceId: string;
-  /** vhost名 */
-  VirtualHost: string;
   /** VirtualHost 名称，形如 testvhost。有效的 VirtualHost 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，在左侧导航栏点击 Vhost，并在 Vhost 列表中找到Vhost名称。 */
+  VirtualHost: string;
+  /** Virtual Host 描述 */
   Description?: string;
   /** 消息轨迹开关,true打开,false关闭 */
   TraceFlag?: boolean;

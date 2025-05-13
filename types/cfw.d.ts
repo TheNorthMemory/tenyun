@@ -1180,7 +1180,7 @@ declare interface SecurityGroupRule {
   Description: string;
   /** 规则顺序，-1表示最低，1表示最高，请勿和外层Type冲突（和外层的Type配合使用，当中间插入时，指定添加位置） */
   OrderIndex: string;
-  /** 协议；TCP/UDP/ICMP/ANY */
+  /** 协议；TCP/UDP/ICMP/ICMPv6/ANY */
   Protocol?: string;
   /** 访问控制策略的端口。取值：-1/-1：全部端口80：80端口 */
   Port?: string;
@@ -2404,6 +2404,8 @@ declare interface DescribeEnterpriseSGRuleProgressRequest {
 declare interface DescribeEnterpriseSGRuleProgressResponse {
   /** 0-100，代表下发进度百分比 */
   Progress?: number;
+  /** 是否用户中止 用户中止返回true */
+  UserStopped?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

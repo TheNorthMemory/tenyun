@@ -84,14 +84,6 @@ declare interface BindRealServerInfo {
   TagSet?: TagPair[];
 }
 
-/** 接口扩展参数 */
-declare interface Capacity {
-  /** 电信鉴权的Token */
-  CTCCToken?: string;
-  /** 终端所处在的省份，建议不填写由服务端自动获取，若需填写请填写带有省、市、自治区、特别行政区等后缀的省份中文全称 */
-  Province?: string;
-}
-
 /** 服务器证书 */
 declare interface Certificate {
   /** 证书ID */
@@ -162,26 +154,6 @@ declare interface CountryAreaMap {
   ContinentInnerCode?: string;
   /** 标注信息 */
   Remark?: string;
-}
-
-/** 网络加速的目标地址信息 */
-declare interface DestAddressInfo {
-  /** 加速的目标IP，可多ip一起加速 */
-  DestIp: string[];
-}
-
-/** 终端设备信息 */
-declare interface DeviceInfo {
-  /** 设备数据卡所属的运营商1：移动2：电信3：联通4：广电99：其他 */
-  Vendor?: number;
-  /** 设备操作系统1：Android2： IOS99：其他 */
-  OS?: number;
-  /** 设备唯一标识IOS 填写 IDFVAndroid 填写 IMEI */
-  DeviceId?: string;
-  /** 用户手机号码 */
-  PhoneNum?: string;
-  /** 无线信息1：4G2：5G3：WIFI99：其他 */
-  Wireless?: number;
 }
 
 /** 统一域名信息 */
@@ -784,14 +756,6 @@ declare interface SecurityPolicyRuleOut {
   PolicyId?: string;
 }
 
-/** 网络加速的原地址信息 */
-declare interface SrcAddressInfo {
-  /** 内网Ip4地址 */
-  SrcIpv4: string;
-  /** 公网Ip4地址 */
-  SrcPublicIpv4: string;
-}
-
 /** 统计数据信息 */
 declare interface StatisticsDataInfo {
   /** 对应的时间点 */
@@ -1118,28 +1082,6 @@ declare interface CreateDomainRequest {
 }
 
 declare interface CreateDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateFirstLinkSessionRequest {
-  /** 模版ID */
-  TemplateId: string;
-  /** 终端网络信息 */
-  SrcAddressInfo: SrcAddressInfo;
-  /** 加速目标网络信息 */
-  DestAddressInfo: DestAddressInfo;
-  /** 终端设备信息 */
-  DeviceInfo?: DeviceInfo;
-  /** 接口扩展参数，如果是电信用户，需要填充CTCC Token字段 */
-  Capacity?: Capacity;
-}
-
-declare interface CreateFirstLinkSessionResponse {
-  /** 加速成功时返回，单次加速唯一会话Id。。 */
-  SessionId: string | null;
-  /** 剩余的加速时间，单位秒。 */
-  Duration: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1484,16 +1426,6 @@ declare interface DeleteDomainResponse {
   RequestId?: string;
 }
 
-declare interface DeleteFirstLinkSessionRequest {
-  /** 单次加速唯一会话Id */
-  SessionId: string;
-}
-
-declare interface DeleteFirstLinkSessionResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DeleteGlobalDomainDnsRequest {
   /** 解析记录的ID */
   DnsRecordId: number;
@@ -1730,26 +1662,6 @@ declare interface DescribeDomainErrorPageInfoRequest {
 declare interface DescribeDomainErrorPageInfoResponse {
   /** 定制错误响应配置集 */
   ErrorPageSet?: DomainErrorPageInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeFirstLinkSessionRequest {
-  /** 单次加速唯一会话Id */
-  SessionId: string;
-}
-
-declare interface DescribeFirstLinkSessionResponse {
-  /** 会话状态，具体如下：1： 加速中；0： 非加速中。 */
-  Status: number | null;
-  /** 剩余加速时间，单位秒。 */
-  Duration: number | null;
-  /** 加速套餐类型。套餐说明如下：T100K：上/下行保障100kbps；BD4M：下行带宽保障4Mbps；BU4M：上行带宽保障4Mbps。 */
-  SuiteType: string | null;
-  /** 加速终端的公网ip */
-  SrcPublicIpv4: string | null;
-  /** 加速目标ip */
-  DestIpv4: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2869,8 +2781,6 @@ declare interface Gaap {
   CreateDomain(data: CreateDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainResponse>;
   /** 定制域名指定错误码的错误响应 {@link CreateDomainErrorPageInfoRequest} {@link CreateDomainErrorPageInfoResponse} */
   CreateDomainErrorPageInfo(data: CreateDomainErrorPageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainErrorPageInfoResponse>;
-  /** @deprecated 创建接入段加速会话 {@link CreateFirstLinkSessionRequest} {@link CreateFirstLinkSessionResponse} */
-  CreateFirstLinkSession(data: CreateFirstLinkSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFirstLinkSessionResponse>;
   /** 创建域名 {@link CreateGlobalDomainRequest} {@link CreateGlobalDomainResponse} */
   CreateGlobalDomain(data: CreateGlobalDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGlobalDomainResponse>;
   /** 创建域名解析记录 {@link CreateGlobalDomainDnsRequest} {@link CreateGlobalDomainDnsResponse} */
@@ -2901,8 +2811,6 @@ declare interface Gaap {
   DeleteDomain(data: DeleteDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainResponse>;
   /** 删除域名的定制错误 {@link DeleteDomainErrorPageInfoRequest} {@link DeleteDomainErrorPageInfoResponse} */
   DeleteDomainErrorPageInfo(data: DeleteDomainErrorPageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainErrorPageInfoResponse>;
-  /** @deprecated 删除接入段加速会话 {@link DeleteFirstLinkSessionRequest} {@link DeleteFirstLinkSessionResponse} */
-  DeleteFirstLinkSession(data: DeleteFirstLinkSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFirstLinkSessionResponse>;
   /** 删除域名 {@link DeleteGlobalDomainRequest} {@link DeleteGlobalDomainResponse} */
   DeleteGlobalDomain(data: DeleteGlobalDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGlobalDomainResponse>;
   /** 删除域名解析记录 {@link DeleteGlobalDomainDnsRequest} {@link DeleteGlobalDomainDnsResponse} */
@@ -2941,8 +2849,6 @@ declare interface Gaap {
   DescribeDomainErrorPageInfo(data: DescribeDomainErrorPageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainErrorPageInfoResponse>;
   /** 根据定制错误ID查询错误响应 {@link DescribeDomainErrorPageInfoByIdsRequest} {@link DescribeDomainErrorPageInfoByIdsResponse} */
   DescribeDomainErrorPageInfoByIds(data: DescribeDomainErrorPageInfoByIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainErrorPageInfoByIdsResponse>;
-  /** @deprecated 查询接入段加速会话信息 {@link DescribeFirstLinkSessionRequest} {@link DescribeFirstLinkSessionResponse} */
-  DescribeFirstLinkSession(data: DescribeFirstLinkSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirstLinkSessionResponse>;
   /** 查询域名解析列表 {@link DescribeGlobalDomainDnsRequest} {@link DescribeGlobalDomainDnsResponse} */
   DescribeGlobalDomainDns(data: DescribeGlobalDomainDnsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGlobalDomainDnsResponse>;
   /** 查询域名列表 {@link DescribeGlobalDomainsRequest} {@link DescribeGlobalDomainsResponse} */

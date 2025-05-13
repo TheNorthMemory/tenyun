@@ -76,7 +76,7 @@ declare interface ErrorMsg {
 declare interface File3D {
   /** 3D文件的格式。取值范围：GIF, OBJ */
   Type?: string;
-  /** 文件的Url */
+  /** 文件的Url（有效期24小时） */
   Url?: string;
 }
 
@@ -981,16 +981,16 @@ declare interface SubmitHunyuanImageJobResponse {
 declare interface SubmitHunyuanTo3DJobRequest {
   /** 3D内容的描述，中文正向提示词。最多支持200个 utf-8 字符，ImageBase64、ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。 */
   Prompt?: string;
-  /** 输入图 Base64 数据。最多支持200个 utf-8 字符，ImageBase64、ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。 */
+  /** 输入图 Base64 数据。大小：单边分辨率要求不小于50，不大于5000。大小不超过8m（base64编码后会大30%左右，建议实际输入图片不超过6m）格式：jpg，png，jpeg，webp。ImageBase64、ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。 */
   ImageBase64?: string;
-  /** 输入图Url。最多支持200个 utf-8 字符，ImageBase64、ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。 */
+  /** 输入图Url。大小：单边分辨率要求不小于50，不大于5000。大小不超过8m（base64编码后会大30%左右，建议实际输入图片不超过6m）格式：jpg，png，jpeg，webp。ImageBase64/ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。 */
   ImageUrl?: string;
   /** 生成数量。默认1，当前限制只能为1。 */
   Num?: number;
 }
 
 declare interface SubmitHunyuanTo3DJobResponse {
-  /** 任务id */
+  /** 任务id（有效期24小时） */
   JobId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

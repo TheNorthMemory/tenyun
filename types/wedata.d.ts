@@ -330,6 +330,16 @@ declare interface AttributeItemDTO {
   Description?: string | null;
 }
 
+/** AttributeItemVO参数 */
+declare interface AttributeItemDsVO {
+  /** Key值 */
+  Key?: string | null;
+  /** Value值 */
+  Value?: string | null;
+  /** 描述 */
+  Description?: string | null;
+}
+
 /** 集群基础信息 */
 declare interface BaseClusterInfo {
   /** 集群id */
@@ -680,6 +690,28 @@ declare interface ColumnItem {
   ColumnRef?: string | null;
 }
 
+/** 列血缘节点 */
+declare interface ColumnLineage {
+  /** 数据源id */
+  DatasourceId: string;
+  /** database 名称 */
+  DatabaseName: string;
+  /** 表名称 */
+  TableName: string;
+  /** 列名称 */
+  ColumnName: string;
+  /** catalog 名称 */
+  CatalogName?: string;
+  /** schema 名称 */
+  SchemaName?: string;
+  /** 扩展参数 */
+  ExtParams?: ExtParam[];
+  /** 表类型 */
+  TableType?: string;
+  /** 列类型 */
+  ColumnType?: string;
+}
+
 /** 血缘字段信息 */
 declare interface ColumnLineageInfo {
   /** 血缘id */
@@ -728,6 +760,14 @@ declare interface ColumnLineageInfo {
   ExtParams?: LineageParamRecord[] | null;
   /** 表ID */
   TableId?: string | null;
+}
+
+/** 列血缘对 */
+declare interface ColumnLineagePair {
+  /** 列血缘来源方 */
+  Sources: ColumnLineage[];
+  /** 列血缘目标方 */
+  Target: ColumnLineage;
 }
 
 /** 列的元数据 */
@@ -1368,6 +1408,16 @@ declare interface DescribePendingSubmitTaskInfo {
   ExecutorGroupName?: string | null;
 }
 
+/** 批量操作任务列表分页 */
+declare interface DescribeTasksForCodeTemplatePage {
+  /** 总页码数 */
+  PageCount: number | null;
+  /** 内容 */
+  Items?: TaskSimpleVo[] | null;
+  /** 总个数 */
+  TotalCount?: number | null;
+}
+
 /** DiagnoseRep */
 declare interface DiagnoseRep {
   /** 诊断信息内容 */
@@ -1872,6 +1922,14 @@ declare interface EventOpsDto {
   Listeners?: EventListenerOpsDto[] | null;
   /** 事件案例 */
   EventCases?: EventCaseOpsDto[] | null;
+}
+
+/** 扩展参数 */
+declare interface ExtParam {
+  /** key */
+  Key?: string;
+  /** 具体值 */
+  Value?: string;
 }
 
 /** 扩展信息参数 */
@@ -2850,6 +2908,18 @@ declare interface LineageParamRecord {
   Value: string | null;
 }
 
+/** 血缘任务 */
+declare interface LineageTask {
+  /** 任务id */
+  TaskId?: string;
+  /** 任务类型 */
+  TaskType?: string;
+  /** 任务来源 */
+  TaskSource?: string;
+  /** 任务扩展参数 */
+  ExtParams?: ExtParam[];
+}
+
 /** 任务依赖边详情 */
 declare interface LinkOpsDto {
   /** 边的id */
@@ -3264,6 +3334,14 @@ declare interface OpsTaskLinkInfoDto {
   LinkStyle?: string | null;
 }
 
+/** 通用排序字段名和排序方向 */
+declare interface OrderCondition {
+  /** name */
+  Name: string | null;
+  /** 降序DESC; 升序ASC */
+  Direction: string | null;
+}
+
 /** 通用排序字段 */
 declare interface OrderField {
   /** 排序字段名称 */
@@ -3400,6 +3478,14 @@ declare interface ParamInfoDs {
   ParamKey: string;
   /** 参数值 */
   ParamValue: string;
+}
+
+/** ds参数map结构体 */
+declare interface ParamMapDsDto {
+  /** k */
+  Key?: string | null;
+  /** v */
+  Value?: string | null;
 }
 
 /** 分区参数 */
@@ -4792,6 +4878,24 @@ declare interface TableInfo {
   OriginSchemaName?: string | null;
 }
 
+/** 表血缘节点 */
+declare interface TableLineage {
+  /** 数据源id */
+  DatasourceId: string;
+  /** 库名称 */
+  DatabaseName: string;
+  /** 表名称 */
+  TableName: string;
+  /** catalog值 */
+  CatalogName?: string;
+  /** schema名称 */
+  SchemaName?: string;
+  /** 扩展参数 */
+  ExtParams?: ExtParam[];
+  /** table类型 TABLE｜VIEW */
+  TableType?: string;
+}
+
 /** 表血缘详细信息 */
 declare interface TableLineageBaseInfo {
   /** 元数据类型 */
@@ -4892,6 +4996,14 @@ declare interface TableLineageInfo {
   DataFromType?: string | null;
   /** 采集id */
   CollectJobId?: string | null;
+}
+
+/** 表血缘关系对 */
+declare interface TableLineagePair {
+  /** 血缘数据来源表 */
+  Sources: TableLineage[];
+  /** 血缘数据目标表 */
+  Target: TableLineage;
 }
 
 /** 表的元数据信息 */
@@ -5256,12 +5368,58 @@ declare interface TaskByStatus {
   Count?: number;
 }
 
+/** 分页数据集 */
+declare interface TaskCollectionParamDTO {
+  /** 总数据条数 */
+  TotalCount?: number | null;
+  /** 总页数 */
+  PageCount?: number | null;
+  /** 数据 */
+  Items?: TaskFormParams[] | null;
+}
+
+/** 属性配置 */
+declare interface TaskExtDsVO {
+  /** 任务ID */
+  TaskId?: string | null;
+  /** 任务属性 */
+  Properties?: ParamInfoDs[] | null;
+  /** 任务试运行扩展业务属性 */
+  DryRunExtAttributes?: AttributeItemDsVO[] | null;
+  /** 任务试运行动态传参 */
+  DryRunParameter?: AttributeItemDsVO[] | null;
+}
+
 /** 任务扩展信息 */
 declare interface TaskExtInfo {
   /** 键 */
   Key?: string;
   /** 值 */
   Value?: string;
+}
+
+/** 任务参数 */
+declare interface TaskFormParams {
+  /** 任务ID */
+  TaskId?: string | null;
+  /** 参数值 */
+  MapParamList?: ParamMapDsDto[] | null;
+  /** 工作流ID */
+  WorkflowId?: string | null;
+  /** 工作流名称 */
+  WorkflowName?: string | null;
+  /** 负责人ID */
+  InChargeId?: string | null;
+  /** 负责人名称 */
+  InCharge?: string | null;
+  /** 任务名 */
+  TaskName?: string | null;
+  /** 任务类型普通任务：dev子任务：dev_container */
+  ProductName?: string | null;
+  /** 如果最新保存版本和调度版本不一致，显示最新保存版本 */
+  LatestSavedVersion?: string | null;
+  /** 保存版本ID */
+  LatestSavedVersionId?: string | null;
 }
 
 /** 集成任务导入到编排空间配置 */
@@ -5586,6 +5744,30 @@ declare interface TaskOpsDto {
 declare interface TaskScriptContent {
   /** 脚本内容 base64编码 */
   ScriptContent: string | null;
+}
+
+/** 任务信息简易版 */
+declare interface TaskSimpleVo {
+  /** 任务id */
+  TaskId?: string;
+  /** 任务名 */
+  TaskName?: string | null;
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 工作流id */
+  WorkflowId?: string | null;
+  /** 工作流名 */
+  WorkflowName?: string | null;
+  /** 负责人名 */
+  InCharge?: string | null;
+  /** 主账号 */
+  OwnId?: string | null;
+  /** 子账号 */
+  UserId?: string | null;
+  /** 租户id */
+  TenantId?: string | null;
+  /** 任务类型 */
+  TaskTypeId?: number | null;
 }
 
 /** 任务提交预校验详细信息 */
@@ -6633,6 +6815,50 @@ declare interface CountOpsInstanceStateResponse {
   RequestId?: string;
 }
 
+declare interface CreateCodeTemplateRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 模版名 */
+  CodeTemplateName: string;
+  /** 30Python，32DLC，50 DLC-PySpark */
+  TaskType: number;
+  /** 模版描述 */
+  CodeTemplateDesc?: string;
+  /** 文件夹ID */
+  FolderId?: string;
+  /** 指定脚本内容 */
+  Content?: string;
+}
+
+declare interface CreateCodeTemplateResponse {
+  /** 模版id */
+  Data?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCodeTemplateVersionRequest {
+  /** 模版Id */
+  CodeTemplateId: string;
+  /** 项目Id */
+  ProjectId: string;
+  /** 模版关联的任务以及调度参数设置 */
+  Tasks?: TaskFormParams[];
+  /** 代码模本脚本内置参数 */
+  OriginalParams?: string[];
+  /** 提交描述 */
+  VersionRemark?: string;
+  /** true表示：针对新建、已下线状态的任务仅生成开发态保存版本，您可在任务中自行提交到生产。针对调度中、已暂停、已失效的任务生成开发态保存版本并提交到生产（即本次代码模板的改动在调度中生效）； false表示：针对所有状态的任务均仅生成开发态保存版本。 */
+  NeedSubmitScheduleForTemplate?: boolean;
+}
+
+declare interface CreateCodeTemplateVersionResponse {
+  /** 批量操作JobId */
+  Data?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCustomFunctionRequest {
   /** 枚举值：HIVE、SPARK、DLC */
   Type: string;
@@ -7211,6 +7437,20 @@ declare interface DagInstancesRequest {
 declare interface DagInstancesResponse {
   /** 结果 */
   Data?: CollectionInstanceOpsDto;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCodeTemplateRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 模版ID */
+  CodeTemplateId: string;
+}
+
+declare interface DeleteCodeTemplateResponse {
+  /** 是否成功 */
+  Data?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8170,6 +8410,8 @@ declare interface DescribeEventConsumeTasksRequest {
   PageNumber: number;
   /** 每页数目 */
   PageSize: number;
+  /** 项目ID */
+  ProjectId?: string;
 }
 
 declare interface DescribeEventConsumeTasksResponse {
@@ -8243,6 +8485,26 @@ declare interface DescribeFolderWorkflowListRequest {
 declare interface DescribeFolderWorkflowListResponse {
   /** 无 */
   Data?: DescribeFolderWorkflowListData | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFormVersionParamRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 模版Id */
+  CodeTemplateId: string;
+  /** 脚本中的参数 */
+  OriginalParams?: string[];
+  /** 页码 */
+  Page?: number;
+  /** 页号 */
+  Size?: number;
+}
+
+declare interface DescribeFormVersionParamResponse {
+  /** 结果集 */
+  Data?: TaskCollectionParamDTO | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10111,6 +10373,32 @@ declare interface DescribeTaskTableMetricOverviewResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTasksForCodeTemplateRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 页码，最小1 */
+  PageNumber: number;
+  /** 单页大小，最小10，最大200 */
+  PageSize: number;
+  /** 模板id */
+  TemplateId: string;
+  /** 工作流id列表 */
+  WorkflowIdList?: string[];
+  /** 责任人名列表 */
+  OwnerIdList?: string[];
+  /** 任务名 */
+  TaskName?: string;
+  /** 排序提交，目前只支持workflowName */
+  OrderCondition?: OrderCondition;
+}
+
+declare interface DescribeTasksForCodeTemplateResponse {
+  /** 无 */
+  Data?: DescribeTasksForCodeTemplatePage | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTemplateDimCountRequest {
   /** 模板类型 */
   Type?: number;
@@ -11595,6 +11883,28 @@ declare interface RenewWorkflowSchedulerInfoDsResponse {
   RequestId?: string;
 }
 
+declare interface ReportTaskLineageRequest {
+  /** 上报渠道 */
+  ChannelType: string;
+  /** 血缘任务 */
+  Task: LineageTask;
+  /** 项目ID */
+  ProjectId?: string;
+  /** 表血缘关系 */
+  TableLineages?: TableLineagePair[];
+  /** 列血缘关系 */
+  ColumnLineages?: ColumnLineagePair[];
+}
+
+declare interface ReportTaskLineageResponse {
+  /** 请求来源，WEB 前端；CLIENT 客户端 */
+  RequestFromSource?: string | null;
+  /** 上报结果 */
+  Data?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ResumeIntegrationTaskRequest {
   /** 任务id */
   TaskId: string;
@@ -12171,6 +12481,38 @@ declare interface UnlockIntegrationTaskResponse {
   RequestId?: string;
 }
 
+declare interface UpdateCodeTemplateRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 模版id */
+  CodeTemplateId: string;
+  /** 模版名 */
+  CodeTemplateName: string;
+  /** 责任人列表 */
+  InChargeId: string;
+  /** 责任人名称 */
+  InCharge: string;
+  /** 扩展属性 */
+  Ext: TaskExtDsVO;
+  /** 执行机ip */
+  BrokerIp?: string;
+  /** 资源组id */
+  ResourceGroup?: string;
+  /** 模版描述 */
+  CodeTemplateDesc?: string;
+  /** 请求来源，WEB 前端；CLIENT 客户端 */
+  RequestFromSource?: string;
+  /** 脚本是否发生变化 */
+  ScriptChange?: boolean;
+}
+
+declare interface UpdateCodeTemplateResponse {
+  /** 详情 */
+  Data?: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateDataModelRegistryInfoRequest {
   /** 云应用的实例id */
   CloudappId: string;
@@ -12356,6 +12698,10 @@ declare interface Wedata {
   CommitRuleGroupTask(data?: CommitRuleGroupTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CommitRuleGroupTaskResponse>;
   /** 智能运维-统计任务实例状态 {@link CountOpsInstanceStateRequest} {@link CountOpsInstanceStateResponse} */
   CountOpsInstanceState(data: CountOpsInstanceStateRequest, config?: AxiosRequestConfig): AxiosPromise<CountOpsInstanceStateResponse>;
+  /** 创建代码模版 {@link CreateCodeTemplateRequest} {@link CreateCodeTemplateResponse} */
+  CreateCodeTemplate(data: CreateCodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodeTemplateResponse>;
+  /** 提交模版版本 {@link CreateCodeTemplateVersionRequest} {@link CreateCodeTemplateVersionResponse} */
+  CreateCodeTemplateVersion(data: CreateCodeTemplateVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodeTemplateVersionResponse>;
   /** 创建用户自定义函数 {@link CreateCustomFunctionRequest} {@link CreateCustomFunctionResponse} */
   CreateCustomFunction(data: CreateCustomFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomFunctionResponse>;
   /** （仅公有云）创建数据建模，提供给云应用使用，实现"Wedata数据建模"的下单发货 {@link CreateDataModelRequest} {@link CreateDataModelResponse} */
@@ -12394,6 +12740,8 @@ declare interface Wedata {
   CreateWorkflowDs(data: CreateWorkflowDsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkflowDsResponse>;
   /** 拉取dag实例 {@link DagInstancesRequest} {@link DagInstancesResponse} */
   DagInstances(data?: DagInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DagInstancesResponse>;
+  /** 删除代码模版 {@link DeleteCodeTemplateRequest} {@link DeleteCodeTemplateResponse} */
+  DeleteCodeTemplate(data: DeleteCodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCodeTemplateResponse>;
   /** 删除用户自定义函数 {@link DeleteCustomFunctionRequest} {@link DeleteCustomFunctionResponse} */
   DeleteCustomFunction(data?: DeleteCustomFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomFunctionResponse>;
   /** （仅公有云）销毁数据建模，提供给云应用使用，实现Wedata数据建模的销毁 {@link DeleteDataModelRequest} {@link DeleteDataModelResponse} */
@@ -12494,6 +12842,8 @@ declare interface Wedata {
   DescribeFieldBasicInfo(data?: DescribeFieldBasicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFieldBasicInfoResponse>;
   /** 拉取文件夹下的工作流 {@link DescribeFolderWorkflowListRequest} {@link DescribeFolderWorkflowListResponse} */
   DescribeFolderWorkflowList(data: DescribeFolderWorkflowListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFolderWorkflowListResponse>;
+  /** 查询模版提交任务参数 {@link DescribeFormVersionParamRequest} {@link DescribeFormVersionParamResponse} */
+  DescribeFormVersionParam(data: DescribeFormVersionParamRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFormVersionParamResponse>;
   /** 查询函数分类 {@link DescribeFunctionKindsRequest} {@link DescribeFunctionKindsResponse} */
   DescribeFunctionKinds(data?: DescribeFunctionKindsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFunctionKindsResponse>;
   /** 查询函数类型 {@link DescribeFunctionTypesRequest} {@link DescribeFunctionTypesResponse} */
@@ -12658,6 +13008,8 @@ declare interface Wedata {
   DescribeTaskScript(data: DescribeTaskScriptRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskScriptResponse>;
   /** 查询实时任务表粒度指标概览 {@link DescribeTaskTableMetricOverviewRequest} {@link DescribeTaskTableMetricOverviewResponse} */
   DescribeTaskTableMetricOverview(data: DescribeTaskTableMetricOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskTableMetricOverviewResponse>;
+  /** 分页查询引用模板的任务列表 {@link DescribeTasksForCodeTemplateRequest} {@link DescribeTasksForCodeTemplateResponse} */
+  DescribeTasksForCodeTemplate(data: DescribeTasksForCodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksForCodeTemplateResponse>;
   /** 查询规则模板维度分布情况 {@link DescribeTemplateDimCountRequest} {@link DescribeTemplateDimCountResponse} */
   DescribeTemplateDimCount(data?: DescribeTemplateDimCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateDimCountResponse>;
   /** 获取租户全局范围的项目列表 {@link DescribeTenantProjectsRequest} {@link DescribeTenantProjectsResponse} */
@@ -12768,6 +13120,8 @@ declare interface Wedata {
   RenewWorkflowOwnerDs(data: RenewWorkflowOwnerDsRequest, config?: AxiosRequestConfig): AxiosPromise<RenewWorkflowOwnerDsResponse>;
   /** 更新工作流下任务调度信息 {@link RenewWorkflowSchedulerInfoDsRequest} {@link RenewWorkflowSchedulerInfoDsResponse} */
   RenewWorkflowSchedulerInfoDs(data: RenewWorkflowSchedulerInfoDsRequest, config?: AxiosRequestConfig): AxiosPromise<RenewWorkflowSchedulerInfoDsResponse>;
+  /** 任务血缘上报接口 {@link ReportTaskLineageRequest} {@link ReportTaskLineageResponse} */
+  ReportTaskLineage(data: ReportTaskLineageRequest, config?: AxiosRequestConfig): AxiosPromise<ReportTaskLineageResponse>;
   /** 继续实时集成任务 {@link ResumeIntegrationTaskRequest} {@link ResumeIntegrationTaskResponse} */
   ResumeIntegrationTask(data: ResumeIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeIntegrationTaskResponse>;
   /** 抢占锁定集成任务 {@link RobAndLockIntegrationTaskRequest} {@link RobAndLockIntegrationTaskResponse} */
@@ -12808,6 +13162,8 @@ declare interface Wedata {
   TriggerManualTasks(data: TriggerManualTasksRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerManualTasksResponse>;
   /** 解锁实时集成任务 {@link UnlockIntegrationTaskRequest} {@link UnlockIntegrationTaskResponse} */
   UnlockIntegrationTask(data: UnlockIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockIntegrationTaskResponse>;
+  /** 更新代码模版 {@link UpdateCodeTemplateRequest} {@link UpdateCodeTemplateResponse} */
+  UpdateCodeTemplate(data: UpdateCodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCodeTemplateResponse>;
   /** （仅公有云）数语向Wedata注册，更新相关信息 {@link UpdateDataModelRegistryInfoRequest} {@link UpdateDataModelRegistryInfoResponse} */
   UpdateDataModelRegistryInfo(data: UpdateDataModelRegistryInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDataModelRegistryInfoResponse>;
   /** 修改项目用户角色 {@link UpdateProjectUserRoleRequest} {@link UpdateProjectUserRoleResponse} */

@@ -946,26 +946,28 @@ declare interface DspaDiscoveryRuleDetail {
 
 /** 分类分级任务相关信息 */
 declare interface DspaDiscoveryTask {
+  /** 任务ID */
+  TaskId?: number;
   /** 任务名称 */
-  Name: string;
+  Name?: string;
   /** 任务描述 */
-  Description: string;
+  Description?: string;
   /** 执行周期，0单次 1每天 2每周 3每月 */
-  Period: number;
+  Period?: number;
   /** 执行计划，0立即 1定时 */
-  Plan: number;
+  Plan?: number;
   /** 任务开关；1 打开，0 关闭 */
-  Enable: number;
+  Enable?: number;
   /** 元数据对象信息 */
-  DataSourceInfo: DspaDiscoveryTaskDataSource;
+  DataSourceInfo?: DspaDiscoveryTaskDataSource;
   /** 通用规则集开关，0 关闭，1 启用 */
-  GeneralRuleSetEnable: number;
+  GeneralRuleSetEnable?: number;
   /** 任务最新的一次执行结果信息，该字段用于查询任务列表接口 */
-  Result: ScanTaskResult | null;
+  Result?: ScanTaskResult | null;
   /** 定时开始时间 */
-  TimingStartTime: string | null;
+  TimingStartTime?: string | null;
   /** 关联模板是否更新 */
-  ComplianceUpdate: boolean | null;
+  ComplianceUpdate?: boolean | null;
 }
 
 /** 描述对象存储类敏感识别扫描人元数据条件。 */
