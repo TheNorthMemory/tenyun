@@ -326,12 +326,60 @@ declare interface AllocationOverviewTotal {
   TransferPayAmount?: string | null;
 }
 
+/** 分摊比例表达式 */
+declare interface AllocationRationExpression {
+  /** 公摊规则所属分账单元ID */
+  NodeId: number;
+  /** 分账单元所占公摊比例，按占比分摊传0 */
+  Ratio: number;
+}
+
 /** 当前资源命中公摊规则信息 */
 declare interface AllocationRule {
   /** 公摊规则ID */
   RuleId?: number;
   /** 公摊规则名称 */
   RuleName?: string;
+}
+
+/** 分账规则表达式 */
+declare interface AllocationRuleExpression {
+  /** RuleKey：分账维度枚举值：ownerUin - 使用者UIN,operateUin - 操作者UIN,businessCode - 产品一层编码,productCode - 产品二层编码,itemCode - 产品四层编码,projectId - 项目ID,regionId - 地域ID,resourceId - 资源ID,tag - 标签键值对,payMode - 计费模式,instanceType - 实例类型,actionType - 交易类型 */
+  RuleKey?: string;
+  /** 分账维度规则枚举值：in - 是not in - 不是 */
+  Operator?: string;
+  /** 分账维度值，例如当RuleKey为businessCode时，["p_cbs","p_sqlserver"]表示产品一层是"p_cbs","p_sqlserver"的费用 */
+  RuleValue?: string[];
+  /** 分账逻辑连接词，枚举值如下：and - 且or - 或 */
+  Connectors?: string;
+  /** 嵌套规则 */
+  Children?: AllocationRuleExpression[];
+}
+
+/** 公摊规则概览 */
+declare interface AllocationRuleOverview {
+  /** 公摊规则ID */
+  RuleId?: number;
+  /** 公摊规则名称 */
+  RuleName?: string;
+  /** 公摊策略类型枚举值：1 - 自定义分摊占比 2 - 等比分摊 3 - 按占比分摊 */
+  Type?: number;
+  /** 公摊规则最后更新时间 */
+  UpdateTime?: string;
+  /** 分账单元概览 */
+  AllocationNode?: AllocationUnit[];
+}
+
+/** 公摊规则列表 */
+declare interface AllocationRulesSummary {
+  /** 新增公摊规则名称 */
+  Name: string;
+  /** 公摊策略类型，枚举值如下：1 - 自定义分摊占比 2 - 等比分摊3 - 按占比分摊 */
+  Type: number;
+  /** 公摊规则表达式 */
+  RuleDetail: AllocationRuleExpression;
+  /** 公摊比例表达式，按占比分摊不传 */
+  RatioDetail?: AllocationRationExpression[];
 }
 
 /** 分账账单趋势图 */
@@ -638,11 +686,31 @@ declare interface AllocationSummaryByResource {
   BillMonth?: string;
 }
 
+/** 分账目录树 */
+declare interface AllocationTree {
+  /** 分账单元ID */
+  Id?: number;
+  /** 分账单元名称 */
+  Name?: string;
+  /** 分账单元唯一标识 */
+  TreeNodeUniqKey?: string;
+  /** 子树 */
+  Children?: AllocationTree[];
+}
+
 /** 当前归属单元信息 */
 declare interface AllocationTreeNode {
   /** 分账单元唯一标识 */
   TreeNodeUniqKey?: string;
   /** 分账单元名称 */
+  TreeNodeUniqKeyName?: string;
+}
+
+/** 分账单元id和名称 */
+declare interface AllocationUnit {
+  /** 分账单元ID */
+  NodeId?: number;
+  /** 分账规则名称 */
   TreeNodeUniqKeyName?: string;
 }
 
@@ -1948,6 +2016,12 @@ declare interface GatherResourceSummary {
   SplitItemName?: string | null;
 }
 
+/** 归集规则列表 */
+declare interface GatherRuleSummary {
+  /** 分账规则表达式 */
+  RuleDetail: AllocationRuleExpression;
+}
+
 /** Json对象 */
 declare interface JsonObject {
   /** key值 */
@@ -2168,6 +2242,20 @@ declare interface VoucherInfos {
   CreateTime?: string;
 }
 
+declare interface CreateAllocationRuleRequest {
+  /** 公摊规则列表 */
+  RuleList: AllocationRulesSummary;
+  /** 月份，不传默认当前月 */
+  Month?: string;
+}
+
+declare interface CreateAllocationRuleResponse {
+  /** 新增公摊规则ID */
+  Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAllocationTagRequest {
   /** 用户分账标签键 */
   TagKey: string[];
@@ -2178,12 +2266,82 @@ declare interface CreateAllocationTagResponse {
   RequestId?: string;
 }
 
+declare interface CreateAllocationUnitRequest {
+  /** 新增分账单元父节点ID */
+  ParentId: number;
+  /** 新增分账单元名称 */
+  Name?: string;
+  /** 月份，不传默认当前月 */
+  Month?: string;
+}
+
+declare interface CreateAllocationUnitResponse {
+  /** 新增分账单元ID */
+  Id?: number;
+  /** 分账单元唯一标识 */
+  TreeNodeUniqKey?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateGatherRuleRequest {
+  /** 规则所属分账单元ID */
+  Id: number;
+  /** 归集规则详情 */
+  RuleList: GatherRuleSummary;
+  /** 月份，不传默认当前月 */
+  Month?: string;
+}
+
+declare interface CreateGatherRuleResponse {
+  /** 归集规则ID */
+  Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAllocationRuleRequest {
+  /** 所删除公摊规则ID */
+  RuleId: number;
+  /** 月份，不传默认当前月 */
+  Month?: string;
+}
+
+declare interface DeleteAllocationRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAllocationTagRequest {
   /** 用户分账标签键 */
   TagKey: string[];
 }
 
 declare interface DeleteAllocationTagResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAllocationUnitRequest {
+  /** 所删除分账单元ID */
+  Id: number;
+  /** 月份，不传默认当前月 */
+  Month?: string;
+}
+
+declare interface DeleteAllocationUnitResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteGatherRuleRequest {
+  /** 所删除归集规则ID */
+  RuleId: number;
+  /** 月份，不传默认当前月 */
+  Month?: string;
+}
+
+declare interface DeleteGatherRuleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2428,6 +2586,52 @@ declare interface DescribeAllocationOverviewResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAllocationRuleDetailRequest {
+  /** 所查询公摊规则ID */
+  RuleId: number;
+  /** 月份，不传默认当前月 */
+  Month?: string;
+}
+
+declare interface DescribeAllocationRuleDetailResponse {
+  /** 公摊规则ID */
+  Id?: number;
+  /** 公摊规则所属UIN */
+  Uin?: string;
+  /** 公摊规则名称 */
+  Name?: string;
+  /** 公摊策略类型，枚举值如下：1 - 自定义分摊占比 2 - 等比分摊 3 - 按占比分摊 */
+  Type?: number;
+  /** 公摊规则表达式 */
+  RuleDetail?: AllocationRuleExpression;
+  /** 公摊比例表达式，Type为1和2时返回 */
+  RatioDetail?: AllocationRationExpression[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAllocationRuleSummaryRequest {
+  /** 每次获取数据量，最大值1000 */
+  Limit: number;
+  /** 分页偏移量 */
+  Offset: number;
+  /** 月份，不传默认当前月 */
+  Month?: string;
+  /** 公摊策略类型，用于筛选。枚举值如下： 1 - 自定义分摊占比 2 - 等比分摊 3 - 按占比分摊 */
+  Type?: number;
+  /** 公摊规则名称或分账单元名称，用于模糊筛选。 */
+  Name?: string;
+}
+
+declare interface DescribeAllocationRuleSummaryResponse {
+  /** 公摊规则表达式 */
+  RuleList?: AllocationRuleOverview[];
+  /** 规则总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAllocationSummaryByBusinessRequest {
   /** 数量，最大值为1000 */
   Limit: number;
@@ -2578,6 +2782,24 @@ declare interface DescribeAllocationSummaryByResourceResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAllocationTreeRequest {
+  /** 月份，不传默认当前月 */
+  Month?: string;
+}
+
+declare interface DescribeAllocationTreeResponse {
+  /** 分账单元ID */
+  Id?: number;
+  /** 分账单元名称 */
+  Name?: string;
+  /** 分账单元唯一标识 */
+  TreeNodeUniqKey?: string;
+  /** 子树 */
+  Children?: AllocationTree[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAllocationTrendByMonthRequest {
   /** 账单月份，格式为2024-02，不传默认当前月 */
   Month: string;
@@ -2594,6 +2816,36 @@ declare interface DescribeAllocationTrendByMonthResponse {
   Previous?: AllocationBillTrendDetail[];
   /** 费用统计信息 */
   Stat?: AllocationStat;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAllocationUnitDetailRequest {
+  /** 所查询分账单元Id */
+  Id: number;
+  /** 月份，不传默认当前月 */
+  Month?: string;
+}
+
+declare interface DescribeAllocationUnitDetailResponse {
+  /** 分账单元ID */
+  Id?: number;
+  /** 分账单元所属UIN */
+  Uin?: string;
+  /** 分账单元名称 */
+  Name?: string;
+  /** 分账单元父节点ID */
+  ParentId?: number;
+  /** 源组织名称 */
+  SourceName?: string;
+  /** 源组织ID */
+  SourceId?: string;
+  /** 备注说明 */
+  Remark?: string;
+  /** 分账单元标识 */
+  TreeNodeUniqKey?: string;
+  /** 若分账单元设置归集规则，返回归集规则ID，若无分账规则，则不返回 */
+  RuleId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3304,6 +3556,26 @@ declare interface DescribeGatherResourceResponse {
   RequestId?: string;
 }
 
+declare interface DescribeGatherRuleDetailRequest {
+  /** 所查询归集规则ID */
+  Id: number;
+  /** 月份，不传默认当前月 */
+  Month?: string;
+}
+
+declare interface DescribeGatherRuleDetailResponse {
+  /** 归集规则ID */
+  Id?: number;
+  /** 归集规则所属UIN */
+  Uin?: string;
+  /** 归集规则最后更新时间 */
+  UpdateTime?: string;
+  /** 归集规则详情 */
+  RuleDetail?: AllocationRuleExpression;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSavingPlanResourceInfoRequest {
   /** 数量，最大值为100 */
   Limit: number;
@@ -3426,6 +3698,60 @@ declare interface DescribeVoucherUsageDetailsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAllocationRuleRequest {
+  /** 所编辑公摊规则ID */
+  RuleId: number;
+  /** 编辑后公摊规则名称 */
+  Name: string;
+  /** 公摊策略类型，枚举值如下： 1 - 自定义分摊占比 2 - 等比分摊 3 - 按占比分摊 */
+  Type: number;
+  /** 编辑后公摊规则表达式 */
+  RuleDetail: AllocationRuleExpression;
+  /** 编辑后公摊比例表达式 */
+  RatioDetail?: AllocationRationExpression[];
+  /** 月份，不传默认当前月 */
+  Month?: string;
+}
+
+declare interface ModifyAllocationRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAllocationUnitRequest {
+  /** 所修改分账单元ID */
+  Id: number;
+  /** 修改后分账单元名称 */
+  Name?: string;
+  /** 修改后分账单元源组织名称 */
+  SourceName?: string;
+  /** 修改后分账单元源组织ID */
+  SourceId?: string;
+  /** 分账单元备注说明 */
+  Remark?: string;
+  /** 月份，不传默认当前月 */
+  Month?: string;
+}
+
+declare interface ModifyAllocationUnitResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyGatherRuleRequest {
+  /** 所编辑归集规则ID */
+  Id: number;
+  /** 所编辑分账规则详情 */
+  RuleDetail: AllocationRuleExpression;
+  /** 月份，不传默认当前月 */
+  Month?: string;
+}
+
+declare interface ModifyGatherRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface PayDealsRequest {
   /** 需要支付的一个或者多个子订单号，与BigDealIds字段两者必须且仅传一个参数 */
   OrderIds?: string[];
@@ -3455,10 +3781,22 @@ declare interface PayDealsResponse {
 /** {@link Billing 费用中心} */
 declare interface Billing {
   (): Versions;
+  /** 创建公摊规则 {@link CreateAllocationRuleRequest} {@link CreateAllocationRuleResponse} */
+  CreateAllocationRule(data: CreateAllocationRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAllocationRuleResponse>;
   /** 批量设置分账标签 {@link CreateAllocationTagRequest} {@link CreateAllocationTagResponse} */
   CreateAllocationTag(data: CreateAllocationTagRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAllocationTagResponse>;
+  /** 创建分账单元 {@link CreateAllocationUnitRequest} {@link CreateAllocationUnitResponse} */
+  CreateAllocationUnit(data: CreateAllocationUnitRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAllocationUnitResponse>;
+  /** 创建归集规则 {@link CreateGatherRuleRequest} {@link CreateGatherRuleResponse} */
+  CreateGatherRule(data: CreateGatherRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGatherRuleResponse>;
+  /** 公摊规则删除接口 {@link DeleteAllocationRuleRequest} {@link DeleteAllocationRuleResponse} */
+  DeleteAllocationRule(data: DeleteAllocationRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAllocationRuleResponse>;
   /** 批量取消设置分账标签 {@link DeleteAllocationTagRequest} {@link DeleteAllocationTagResponse} */
   DeleteAllocationTag(data: DeleteAllocationTagRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAllocationTagResponse>;
+  /** 删除分账单元 {@link DeleteAllocationUnitRequest} {@link DeleteAllocationUnitResponse} */
+  DeleteAllocationUnit(data: DeleteAllocationUnitRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAllocationUnitResponse>;
+  /** 删除归集规则 {@link DeleteGatherRuleRequest} {@link DeleteGatherRuleResponse} */
+  DeleteGatherRule(data: DeleteGatherRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGatherRuleResponse>;
   /** 获取账户余额 {@link DescribeAccountBalanceRequest} {@link DescribeAccountBalanceResponse} */
   DescribeAccountBalance(data?: DescribeAccountBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountBalanceResponse>;
   /** 查询资源目录筛选条件 {@link DescribeAllocateConditionsRequest} {@link DescribeAllocateConditionsResponse} */
@@ -3471,14 +3809,22 @@ declare interface Billing {
   DescribeAllocationMonthOverview(data?: DescribeAllocationMonthOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllocationMonthOverviewResponse>;
   /** 查询分账账单日概览 {@link DescribeAllocationOverviewRequest} {@link DescribeAllocationOverviewResponse} */
   DescribeAllocationOverview(data: DescribeAllocationOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllocationOverviewResponse>;
+  /** 查询公摊规则详情 {@link DescribeAllocationRuleDetailRequest} {@link DescribeAllocationRuleDetailResponse} */
+  DescribeAllocationRuleDetail(data: DescribeAllocationRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllocationRuleDetailResponse>;
+  /** 查询所有公摊规则概览 {@link DescribeAllocationRuleSummaryRequest} {@link DescribeAllocationRuleSummaryResponse} */
+  DescribeAllocationRuleSummary(data: DescribeAllocationRuleSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllocationRuleSummaryResponse>;
   /** 查询分账账单按产品汇总 {@link DescribeAllocationSummaryByBusinessRequest} {@link DescribeAllocationSummaryByBusinessResponse} */
   DescribeAllocationSummaryByBusiness(data: DescribeAllocationSummaryByBusinessRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllocationSummaryByBusinessResponse>;
   /** 查询分账账单按组件汇总 {@link DescribeAllocationSummaryByItemRequest} {@link DescribeAllocationSummaryByItemResponse} */
   DescribeAllocationSummaryByItem(data: DescribeAllocationSummaryByItemRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllocationSummaryByItemResponse>;
   /** 查询分账账单按资源汇总 {@link DescribeAllocationSummaryByResourceRequest} {@link DescribeAllocationSummaryByResourceResponse} */
   DescribeAllocationSummaryByResource(data: DescribeAllocationSummaryByResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllocationSummaryByResourceResponse>;
+  /** 查询分账目录树 {@link DescribeAllocationTreeRequest} {@link DescribeAllocationTreeResponse} */
+  DescribeAllocationTree(data?: DescribeAllocationTreeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllocationTreeResponse>;
   /** 查询分账账单费用趋势 {@link DescribeAllocationTrendByMonthRequest} {@link DescribeAllocationTrendByMonthResponse} */
   DescribeAllocationTrendByMonth(data: DescribeAllocationTrendByMonthRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllocationTrendByMonthResponse>;
+  /** 查询分账单元详情 {@link DescribeAllocationUnitDetailRequest} {@link DescribeAllocationUnitDetailResponse} */
+  DescribeAllocationUnitDetail(data: DescribeAllocationUnitDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllocationUnitDetailResponse>;
   /** 获取账单异常调整信息 {@link DescribeBillAdjustInfoRequest} {@link DescribeBillAdjustInfoResponse} */
   DescribeBillAdjustInfo(data?: DescribeBillAdjustInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillAdjustInfoResponse>;
   /** 获取账单明细数据 {@link DescribeBillDetailRequest} {@link DescribeBillDetailResponse} */
@@ -3529,6 +3875,8 @@ declare interface Billing {
   DescribeDosageDetailList(data: DescribeDosageDetailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDosageDetailListResponse>;
   /** 查询分账账单资源归集汇总 {@link DescribeGatherResourceRequest} {@link DescribeGatherResourceResponse} */
   DescribeGatherResource(data: DescribeGatherResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatherResourceResponse>;
+  /** 查询归集规则详情 {@link DescribeGatherRuleDetailRequest} {@link DescribeGatherRuleDetailResponse} */
+  DescribeGatherRuleDetail(data: DescribeGatherRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatherRuleDetailResponse>;
   /** 查询节省计划可共享列表详情 {@link DescribeSavingPlanResourceInfoRequest} {@link DescribeSavingPlanResourceInfoResponse} */
   DescribeSavingPlanResourceInfo(data: DescribeSavingPlanResourceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSavingPlanResourceInfoResponse>;
   /** 获取分账标签 {@link DescribeTagListRequest} {@link DescribeTagListResponse} */
@@ -3537,6 +3885,12 @@ declare interface Billing {
   DescribeVoucherInfo(data: DescribeVoucherInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVoucherInfoResponse>;
   /** 获取代金券使用记录 {@link DescribeVoucherUsageDetailsRequest} {@link DescribeVoucherUsageDetailsResponse} */
   DescribeVoucherUsageDetails(data: DescribeVoucherUsageDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVoucherUsageDetailsResponse>;
+  /** 编辑公摊规则 {@link ModifyAllocationRuleRequest} {@link ModifyAllocationRuleResponse} */
+  ModifyAllocationRule(data: ModifyAllocationRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAllocationRuleResponse>;
+  /** 修改分账单元 {@link ModifyAllocationUnitRequest} {@link ModifyAllocationUnitResponse} */
+  ModifyAllocationUnit(data: ModifyAllocationUnitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAllocationUnitResponse>;
+  /** 编辑归集规则 {@link ModifyGatherRuleRequest} {@link ModifyGatherRuleResponse} */
+  ModifyGatherRule(data: ModifyGatherRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGatherRuleResponse>;
   /** 支付订单 {@link PayDealsRequest} {@link PayDealsResponse} */
   PayDeals(data?: PayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<PayDealsResponse>;
 }

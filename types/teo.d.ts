@@ -103,7 +103,7 @@ declare interface AclConfig {
   /** 用户自定义规则。 */
   AclUserRules: AclUserRule[];
   /** 托管定制规则 */
-  Customizes?: AclUserRule[] | null;
+  Customizes?: AclUserRule[];
 }
 
 /** 用户自定义规则 */
@@ -199,7 +199,7 @@ declare interface AlgDetectRule {
   /** 自定义规则。 */
   AlgConditions?: AclCondition[];
   /** Cookie校验和会话行为分析。 */
-  AlgDetectSession?: AlgDetectSession | null;
+  AlgDetectSession?: AlgDetectSession;
   /** 客户端行为校验。 */
   AlgDetectJS?: AlgDetectJS[];
   /** 更新时间。仅出参使用。 */
@@ -1061,9 +1061,9 @@ declare interface DropPageConfig {
   /** 配置开关，取值有：on：开启；off：关闭。 */
   Switch: string;
   /** Waf(托管规则)模块的拦截页面配置。如果为null，默认使用历史配置。 */
-  WafDropPageDetail?: DropPageDetail | null;
+  WafDropPageDetail?: DropPageDetail;
   /** 自定义页面的拦截页面配置。如果为null，默认使用历史配置。 */
-  AclDropPageDetail?: DropPageDetail | null;
+  AclDropPageDetail?: DropPageDetail;
 }
 
 /** 拦截页面的配置信息 */
@@ -1509,9 +1509,9 @@ declare interface ImageOptimize {
 /** 智能分析规则 */
 declare interface IntelligenceRule {
   /** 开关，取值有：on：开启；off：关闭。 */
-  Switch?: string | null;
+  Switch?: string;
   /** 规则详情。 */
-  IntelligenceRuleItems?: IntelligenceRuleItem[] | null;
+  IntelligenceRuleItems?: IntelligenceRuleItem[];
 }
 
 /** Bot智能分析规则详情 */
@@ -2745,11 +2745,11 @@ declare interface SkipCondition {
   /** 匹配Key所使用的匹配方式，取值为：equal：精准匹配，等于；wildcard：通配符匹配，支持 * 通配。 */
   MatchFromType?: string;
   /** 匹配Key的值。 */
-  MatchFrom?: string[] | null;
+  MatchFrom?: string[];
   /** 匹配Content所使用的匹配方式，取值为：equal：精准匹配，等于；wildcard：通配符匹配，支持 * 通配。 */
   MatchContentType?: string;
   /** 匹配Value的值。 */
-  MatchContent?: string[] | null;
+  MatchContent?: string[];
 }
 
 /** 慢速攻击配置。 */
@@ -2771,9 +2771,9 @@ declare interface SlowRateConfig {
   /** 开关，取值有：on：开启；off：关闭。 */
   Switch: string;
   /** 统计的间隔，单位是秒，即在首段包传输结束后，将数据传输轴按照本参数切分，每个分片独立计算慢速攻击。 */
-  Interval?: number | null;
+  Interval?: number;
   /** 统计时应用的速率阈值，单位是bps，即如果本分片中的传输速率没达到本参数的值，则判定为慢速攻击，应用慢速攻击的处置方式。 */
-  Threshold?: number | null;
+  Threshold?: number;
 }
 
 /** 智能加速配置 */

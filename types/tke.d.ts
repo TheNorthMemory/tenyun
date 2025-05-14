@@ -2002,19 +2002,19 @@ declare namespace V20180525 {
   /** 描述了k8s集群相关配置与信息。 */
   interface InstanceAdvancedSettings {
     /** 该节点属于podCIDR大小自定义模式时，可指定节点上运行的pod数量上限 */
-    DesiredPodNumber: number;
+    DesiredPodNumber: number | null;
     /** GPU驱动相关参数,相关的GPU参数获取:https://cloud.tencent.com/document/api/213/15715 */
     GPUArgs: GPUArgs | null;
     /** base64 编码的用户脚本，在初始化节点之前执行，目前只对添加已有节点生效 */
-    PreStartUserScript: string;
+    PreStartUserScript: string | null;
     /** 节点污点 */
     Taints: Taint[] | null;
     /** 数据盘挂载点, 默认不挂载数据盘. 已格式化的 ext3，ext4，xfs 文件系统的数据盘将直接挂载，其他文件系统或未格式化的数据盘将自动格式化为ext4 (tlinux系统格式化成xfs)并挂载，请注意备份数据! 无数据盘或有多块数据盘的云主机此设置不生效。注意，注意，多盘场景请使用下方的DataDisks数据结构，设置对应的云盘类型、云盘大小、挂载路径、是否格式化等信息。 */
-    MountTarget?: string;
+    MountTarget?: string | null;
     /** dockerd --graph 指定值, 默认为 /var/lib/docker */
-    DockerGraphPath?: string;
+    DockerGraphPath?: string | null;
     /** base64 编码的用户脚本, 此脚本会在 k8s 组件运行后执行, 需要用户保证脚本的可重入及重试逻辑, 脚本及其生成的日志文件可在节点的 /data/ccs_userscript/ 路径查看, 如果要求节点需要在进行初始化完成后才可加入调度, 可配合 unschedulable 参数使用, 在 userScript 最后初始化完成后, 添加 kubectl uncordon nodename --kubeconfig=/root/.kube/config 命令使节点加入调度 */
-    UserScript?: string;
+    UserScript?: string | null;
     /** 设置加入的节点是否参与调度，默认值为0，表示参与调度；非0表示不参与调度, 待节点初始化完成之后, 可执行kubectl uncordon nodename使node加入调度. */
     Unschedulable?: number;
     /** 节点Label数组 */

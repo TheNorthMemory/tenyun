@@ -2471,6 +2471,10 @@ declare interface DescribeEnvsRequest {
   IsVisible?: boolean;
   /** 渠道列表，代表可见或不可见渠道由IsVisible参数指定 */
   Channels?: string[];
+  /** 分页参数，单页限制个数 */
+  Limit?: number;
+  /** 分页参数，偏移量 */
+  Offset?: number;
 }
 
 declare interface DescribeEnvsResponse {

@@ -652,6 +652,8 @@ declare interface RecognizeConfig {
   Model?: string;
   /** 填写则翻译，目前支持的语言：中文: zh英语: en越南语: vi日语: ja韩语: ko印度尼西亚语: id泰语: th葡萄牙语: pt土耳其语: tr阿拉伯语: ar西班牙语: es印地语: hi法语: fr马来语: ms菲律宾语: fil德语: de意大利语: it俄语: ru瑞典语: sv挪威语: no丹麦语: da */
   TranslationLanguage?: string;
+  /** 热词表：该参数用于提升识别准确率。 单个热词限制："热词|权重"，单个热词不超过30个字符（最多10个汉字），权重[1-11]或者100，如：“腾讯云|5” 或 “ASR|11”； 热词表限制：多个热词用英文逗号分割，最多支持300个热词，如：“腾讯云|10,语音识别|5,ASR|11”； */
+  HotWordList?: string;
 }
 
 /** 云端录制控制参数。 */

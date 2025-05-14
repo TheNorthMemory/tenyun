@@ -2,6 +2,20 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 用户位置信息 */
+declare interface Approximate {
+  /** 表示 ISO 国家代码 */
+  Country?: string;
+  /** 表示城市名称 */
+  City?: string;
+  /** 表示区域名称 */
+  Region?: string;
+  /** 表示IANA时区 */
+  Timezone?: string;
+  /** 表示详细地址 */
+  Address?: string;
+}
+
 /** 人物描述 */
 declare interface Character {
   /** 人物名称 */
@@ -156,6 +170,12 @@ declare interface ImageMessage {
 declare interface ImageUrl {
   /** 图片的 Url（以 http:// 或 https:// 开头） */
   Url: string | null;
+}
+
+/** 外部知识 */
+declare interface Knowledge {
+  /** 表示具体的知识信息文本 */
+  Text?: string;
 }
 
 /** logo参数 */
@@ -452,6 +472,22 @@ declare interface Usage {
   TotalTokens?: number;
 }
 
+/** 用户位置详细信息 */
+declare interface UserLocation {
+  /** 表示位置类型 */
+  Type?: string;
+  /** 用户近似位置的详细信息 */
+  Approximate?: Approximate;
+}
+
+/** 知识注入相关的参数信息 */
+declare interface WebSearchOptions {
+  /** 表示用户注入的知识信息 */
+  Knowledge?: Knowledge[];
+  /** 用户位置详细信息 */
+  UserLocation?: UserLocation;
+}
+
 declare interface ActivateServiceRequest {
   /** 开通之后，是否关闭后付费；默认为0，不关闭；1为关闭 */
   PayMode?: number;
@@ -503,6 +539,8 @@ declare interface ChatCompletionsRequest {
   EnableRecommendedQuestions?: boolean;
   /** 是否开启深度阅读，默认是false，在值为true时，会返回深度阅读的结果信息。说明:1.深度阅读需要开启插件增强,即设置EnableEnhancement为true,当设置EnableDeepRead为true时EnableEnhancement默认为true；2.目前暂时只支持单文档单轮的深度阅读；3.深度阅读功能的文件上传可以使用FilesUploads接口，具体参数详见FilesUploads接口文档 */
   EnableDeepRead?: boolean;
+  /** 知识注入相关的参数信息 */
+  WebSearchOptions?: WebSearchOptions;
 }
 
 declare interface ChatCompletionsResponse {

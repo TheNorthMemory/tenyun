@@ -635,7 +635,7 @@ declare interface AddNodesRequest {
   SecurityGroupIds?: string[];
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
-  /** 队列名称。不指定则为默认队列。SLURM默认队列为：compute。SGE默认队列为：all.q。 */
+  /** 队列名称。不指定则为默认队列。SLURM默认队列为：compute。 */
   QueueName?: string;
   /** 添加节点角色。默认值：ComputeCompute：计算节点。Login：登录节点。 */
   NodeRole?: string;
@@ -671,7 +671,7 @@ declare interface AttachNodesRequest {
   ClusterId: string;
   /** 节点的实例id列表 */
   ResourceSet: string[];
-  /** 队列名称。不指定则为默认队列：SLURM默认队列为：compute。 SGE默认队列为：all.q。 */
+  /** 队列名称。不指定则为默认队列：SLURM默认队列为：compute。 */
   QueueName?: string;
   /** 指定有效的镜像ID，格式形如img-xxx。目前仅支持公有镜像和特定自定义镜像。如不指定，则该字段是默认镜像。 */
   ImageId?: string;
@@ -695,9 +695,9 @@ declare interface CreateClusterRequest {
   ComputeNode?: ComputeNode;
   /** 指定计算节点的数量。默认取值：0。 */
   ComputeNodeCount?: number;
-  /** 调度器类型。默认取值：SLURM。SGE：SGE调度器。SLURM：SLURM调度器。 */
+  /** 调度器类型。默认取值：SLURM。SLURM：SLURM调度器。 */
   SchedulerType?: string;
-  /** 创建调度器的版本号，可填写版本号为“latest” 和 各调度器支持的版本号；如果是"latest", 则代表创建的是平台当前支持的该类型调度器最新版本。如果不填写，默认创建的是“latest”版本调度器各调度器支持的集群版本：SLURM：21.08.8、23.11.7SGE： 8.1.9 */
+  /** 创建调度器的版本号，可填写版本号为“latest” 和 各调度器支持的版本号；如果是"latest", 则代表创建的是平台当前支持的该类型调度器最新版本。如果不填写，默认创建的是“latest”版本调度器各调度器支持的集群版本：SLURM：21.08.8、23.11.7 */
   SchedulerVersion?: string;
   /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前支持部分公有镜像和自定义镜像。公共镜像请参考[镜像限制](https://cloud.tencent.com/document/product/1527/64818) */
   ImageId?: string;

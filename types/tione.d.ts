@@ -348,6 +348,12 @@ declare interface EnvVar {
   Value?: string | null;
 }
 
+/** 执行命令探针检查行为 */
+declare interface ExecAction {
+  /** 执行命令列表 */
+  Command?: string[];
+}
+
 /** 过滤器 */
 declare interface Filter {
   /** 过滤字段名称 */
@@ -412,6 +418,8 @@ declare interface HDFSConfig {
 declare interface HTTPGetAction {
   /** http 路径 */
   Path?: string;
+  /** 调用端口 */
+  Port?: number;
 }
 
 /** 健康探针 */
@@ -980,6 +988,14 @@ declare interface NotebookSetItem {
   AppId?: string | null;
 }
 
+/** 用于表示百分比或数量 */
+declare interface NumOrPercent {
+  /** Num,Percent ,分别表示数量和百分比，默认为 Num */
+  Type?: string;
+  /** 数值 */
+  Value?: number;
+}
+
 /** 键值对 */
 declare interface Option {
   /** 指标名 */
@@ -1064,6 +1080,12 @@ declare interface Probe {
 declare interface ProbeAction {
   /** http get 行为 */
   HTTPGet?: HTTPGetAction;
+  /** 执行命令检查 行为 */
+  Exec?: ExecAction;
+  /** tcp socket 检查行为 */
+  TCPSocket?: TCPSocketAction;
+  /** 探针类型，默认 HTTPGet，可选值：HTTPGet、Exec、TCPSocket */
+  ActionType?: string;
 }
 
 /** RDMA配置 */
@@ -1154,6 +1176,14 @@ declare interface ResourceInstanceRunningJobInfo {
   TaskId?: string | null;
   /** 任务自定义名称 */
   TaskName?: string | null;
+}
+
+/** 滚动更新策略 */
+declare interface RollingUpdate {
+  /** 滚动更新的最大不可用 */
+  MaxUnavailable?: NumOrPercent;
+  /** 滚动更新的最大新增实例 */
+  MaxSurge?: NumOrPercent;
 }
 
 /** notebook ssh端口配置 */
@@ -1360,6 +1390,8 @@ declare interface ServiceGroup {
   AuthorizationEnable?: boolean;
   /** 限流鉴权 token 列表 */
   AuthTokens?: AuthToken[];
+  /** 用于监控的创建来源字段 */
+  MonitorSource?: string;
 }
 
 /** 推理服务在集群中的信息 */
@@ -1436,6 +1468,8 @@ declare interface ServiceInfo {
   GrpcEnable?: boolean;
   /** 健康探针 */
   HealthProbe?: HealthProbe;
+  /** 滚动更新配置 */
+  RollingUpdate?: RollingUpdate;
 }
 
 /** 服务的限流限速等配置 */
@@ -1475,11 +1509,11 @@ declare interface Spec {
 /** 计费项询价结果 */
 declare interface SpecPrice {
   /** 计费项名称 */
-  SpecName: string;
+  SpecName?: string;
   /** 原价，单位：分。最大值42亿，超过则返回0 */
-  TotalCost: number;
+  TotalCost?: number;
   /** 优惠后的价格，单位：分 */
-  RealTotalCost: number;
+  RealTotalCost?: number;
   /** 计费项数量 */
   SpecCount?: number;
 }
@@ -1516,6 +1550,12 @@ declare interface StatefulSetCondition {
   LastTransitionTime: string | null;
   /** 上次更新的时间 */
   LastUpdateTime?: string | null;
+}
+
+/** tcp socket 健康探针检查行为 */
+declare interface TCPSocketAction {
+  /** 调用端口 */
+  Port?: number;
 }
 
 /** 太极服务的调用信息 */

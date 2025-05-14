@@ -7538,7 +7538,7 @@ declare namespace V20180717 {
     DomainNames?: string[];
     /** 服务区域，取值有：Chinese Mainland：中国大陆。 Asia Pacific Region 1：亚太一区，包括中国香港、中国澳门、新加坡、越南、泰国。 Asia Pacific Region 2：亚太二区，包括中国台湾、日本、马来西亚、印度尼西亚、韩国。 Asia Pacific Region 3：亚太三区，包括菲律宾、印度、澳大利亚和亚太其它国家和地区。 Middle East：中东。 Europe：欧洲。North America：北美。South America：南美。Africa：非洲。默认为中国大陆。 */
     Area?: string;
-    /** 用户所在地区，Area 为 Chinese Mainland 时，取值为以下地区信息，当 Area 为其它值时， 忽略 Districts 参数。Beijing：北京。Inner Mongolia：内蒙古。Shanxi：山西。Hebei：河北。Tianjin：天津。Ningxia：宁夏。Shaanxi：陕西。Gansu：甘肃。Qinghai：青海。Xinjiang：新疆。Heilongjiang：黑龙江。Jilin：吉林。Liaoning：辽宁。Fujian：福建。Jiangsu：江苏。Anhui：安徽。Shandong：山东。Shanghai：上海。Zhejiang：浙江。Henan：河南。Hubei：湖北。Jiangxi：江西。Hunan：湖南。Guizhou：贵州。Yunnan：云南。Chongqing：重庆。Sichuan：四川。Tibet：西藏。Guangdong：广东。Guangxi：广西。Hainan：海南。Hong Kong, Macao and Taiwan：港澳台。Outside Chinese Mainland：海外。Other：其他 。 */
+    /** 用户所在地区，Area 为 Chinese Mainland 时，取值为以下地区信息，当 Area 为其它值时， 忽略 Districts 参数。Beijing：北京。Inner Mongolia：内蒙古。Shanxi：山西。Hebei：河北。Tianjin：天津。Ningxia：宁夏。Shaanxi：陕西。Gansu：甘肃。Qinghai：青海。Xinjiang：新疆。Heilongjiang：黑龙江。Jilin：吉林。Liaoning：辽宁。Fujian：福建。Jiangsu：江苏。Anhui：安徽。Shandong：山东。Shanghai：上海。Zhejiang：浙江。Henan：河南。Hubei：湖北。Jiangxi：江西。Hunan：湖南。Guizhou：贵州。Yunnan：云南。Chongqing：重庆。Sichuan：四川。Xizang：西藏。Guangdong：广东。Guangxi：广西。Hainan：海南。Hong Kong, Macao and Taiwan：港澳台。Outside Chinese Mainland：海外。Other：其他 。 */
     Districts?: string[];
     /** 用户所属运营商信息，Area 为 Chinese Mainland 时，取值为以下运营商信息。当 Area 为其它值时忽略 Isps 参数。China Telecom：中国电信。 China Unicom：中国联通。 CERNET：教育网。Great Wall Broadband Network：长城宽带。China Mobile：中国移动。China Mobile Tietong：中国铁通。ISPs outside Chinese Mainland：海外运营商。Other ISPs：其他运营商。 */
     Isps?: string[];

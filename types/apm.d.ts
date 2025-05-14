@@ -172,6 +172,10 @@ declare interface ApmInstanceDetail {
   IsRemoteCommandExecutionAnalysis?: number;
   /** 是否开内存马执行检测（0=关， 1=开） */
   IsMemoryHijackingAnalysis?: number;
+  /** CLS索引类型(0=全文索引，1=键值索引) */
+  LogIndexType?: number;
+  /** traceId的索引key: 当CLS索引类型为键值索引时生效 */
+  LogTraceIdKey?: string;
 }
 
 /** 指标列表单元 */
@@ -621,9 +625,9 @@ declare interface ModifyApmInstanceRequest {
   IsRemoteCommandExecutionAnalysis?: number;
   /** 是否开启内存马检测 */
   IsMemoryHijackingAnalysis?: number;
-  /** 0=全文索引，1=键值索引 */
+  /** CLS索引类型(0=全文索引，1=键值索引) */
   LogIndexType?: number;
-  /** traceId的索引key */
+  /** traceId的索引key: 当CLS索引类型为键值索引时生效 */
   LogTraceIdKey?: string;
 }
 
