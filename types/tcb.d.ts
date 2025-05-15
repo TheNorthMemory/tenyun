@@ -1706,7 +1706,7 @@ declare interface DescribeCbrServerVersionResponse {
   VersionName?: string;
   /** 备注 */
   Remark?: string;
-  /** Dockefile的路径 */
+  /** Dockerfile的路径 */
   DockerfilePath?: string;
   /** DockerBuild的目录 */
   BuildDir?: string;
@@ -2068,7 +2068,7 @@ declare interface DescribeCloudBaseRunServerVersionResponse {
   VersionName?: string;
   /** 备注 */
   Remark?: string;
-  /** Dockefile的路径 */
+  /** Dockerfile的路径 */
   DockerfilePath?: string;
   /** DockerBuild的目录 */
   BuildDir?: string;

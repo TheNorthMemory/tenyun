@@ -3267,13 +3267,13 @@ declare interface AllocateIPv6AddressesResponse {
 }
 
 declare interface AllocateIp6AddressesBandwidthRequest {
-  /** 需要开通公网访问能力的IPv6地址 */
+  /** 需要开通公网访问能力的IPv6地址，可以使用[DescribeIp6Addresses](https://cloud.tencent.com/document/product/215/40089)接口查询Ip6Addresses。 */
   Ip6Addresses: string[];
-  /** 带宽，单位Mbps。默认是1Mbps */
+  /** 带宽上限，单位Mbps。可调整的带宽上限值参考产品文档中[IPv6 计费限制说明](https://cloud.tencent.com/document/product/1142/38369)。默认值：1Mbps */
   InternetMaxBandwidthOut?: number;
-  /** 网络计费模式。IPv6当前支持"TRAFFIC_POSTPAID_BY_HOUR"，"BANDWIDTH_PACKAGE"。默认网络计费模式是"TRAFFIC_POSTPAID_BY_HOUR"。 */
+  /** 网络计费模式。IPv6当前支持：TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费BANDWIDTH_PACKAGE：共享带宽包付费默认值：TRAFFIC_POSTPAID_BY_HOUR */
   InternetChargeType?: string;
-  /** 带宽包id，上移账号，申请带宽包计费模式的IPv6地址需要传入. */
+  /** 带宽包id，设定该参数且InternetChargeType为BANDWIDTH_PACKAGE，则表示创建的IPv6加入该带宽包并采用带宽包计费。可以使用[DescribeBandwidthPackages](https://cloud.tencent.com/document/product/215/19209)接口查询BandwidthPackageId。 */
   BandwidthPackageId?: string;
   /** 需要关联的标签列表。 */
   Tags?: Tag[];
@@ -6205,9 +6205,9 @@ declare interface DescribeInstanceJumboResponse {
 }
 
 declare interface DescribeIp6AddressesRequest {
-  /** 标识 IPv6 的唯一 ID 列表。IPv6 唯一 ID 形如：`eip-11112222`。参数不支持同时指定`Ip6AddressIds`和`Filters`。 */
+  /** 标识 IPv6 的唯一 ID 列表。IPv6 唯一 ID 形如：`eip-11112222`。参数不支持同时指定`Ip6AddressIds`和`Filters`。可以使用[DescribeIp6Addresses](https://cloud.tencent.com/document/product/215/40089)接口查询Ip6AddressIds。 */
   Ip6AddressIds?: string[];
-  /** 每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。参数不支持同时指定`AddressIds`和`Filters`。详细的过滤条件如下： address-ip - String - 是否必填：否 - （过滤条件）按照 IPv6 的 IP 地址过滤。 network-interface-id - String - 是否必填：否 - （过滤条件）按照弹性网卡的唯一ID过滤。 */
+  /** 每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。参数不支持同时指定`AddressIds`和`Filters`。详细的过滤条件如下： address-ip - String - 是否必填：否 - （过滤条件）按照 IPv6 的 IP 地址过滤。可以使用[DescribeIp6Addresses](https://cloud.tencent.com/document/product/215/40089)接口查询address-ip。 network-interface-id - String - 是否必填：否 - （过滤条件）按照弹性网卡的唯一ID过滤。可以使用[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口查询network-interface-id。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/11646)中的相关小节。 */
   Offset?: number;
@@ -8471,7 +8471,7 @@ declare interface ModifyIPv6AddressesAttributesResponse {
 declare interface ModifyIPv6AddressesBandwidthRequest {
   /** 弹性公网IPv6地址唯一ID，可以使用[DescribeIPv6Addresses](https://cloud.tencent.com/document/api/215/113677)接口获取IPv6AddressId。 */
   IPv6AddressIds: string[];
-  /** 弹性公网IPv6地址网络带宽，可调整的带宽上限值参考产品文档中[IPv6 计费限制说明](https://write.woa.com/document/123652708247588864)。 */
+  /** 弹性公网IPv6地址网络带宽，可调整的带宽上限值参考产品文档中[IPv6 计费限制说明](https://cloud.tencent.com/document/product/1142/38369)。 */
   InternetMaxBandwidthOut: number;
 }
 
@@ -8481,7 +8481,7 @@ declare interface ModifyIPv6AddressesBandwidthResponse {
 }
 
 declare interface ModifyIp6AddressesBandwidthRequest {
-  /** 修改的目标带宽，单位Mbps。可调整的带宽上限值参考产品文档中[IPv6 计费限制说明](https://write.woa.com/document/123652708247588864)。 */
+  /** 修改的目标带宽，单位Mbps。可调整的带宽上限值参考产品文档中[IPv6 计费限制说明](https://cloud.tencent.com/document/product/1142/38369)。 */
   InternetMaxBandwidthOut: number;
   /** IPv6地址。可以使用[DescribeIp6Addresses](https://cloud.tencent.com/document/product/215/40089)接口查询Ip6Addresses。Ip6Addresses和Ip6AddressIds必须且只能传一个。 */
   Ip6Addresses?: string[];

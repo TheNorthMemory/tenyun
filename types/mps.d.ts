@@ -2880,9 +2880,17 @@ declare interface HighlightSegmentItem {
   EndTime?: string | null;
 }
 
+/** 图片框选区域信息 */
+declare interface ImageAreaBoxInfo {
+  /** 图片框选区域类型，可选值：logo：图标；text：文字。默认值：logo。 */
+  Type?: string | null;
+  /** 图片框选区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。示例值：[101, 85, 111, 95] */
+  AreaCoordSet?: number[] | null;
+}
+
 /** 图片编码格式参数 */
 declare interface ImageEncodeConfig {
-  /** 图片格式，取值范围：JPG、BMP、GIF、PNG、WebP，缺省为原图格式。 */
+  /** 图片格式，取值范围：JPEG、PNG、BMP、WebP，缺省为原图格式。不支持动画。 */
   Format?: string | null;
   /** 图片的相对质量，取值范围：1 - 100，数值以原图质量为标准，缺省为原图质量。 */
   Quality?: number | null;
@@ -2892,12 +2900,28 @@ declare interface ImageEncodeConfig {
 declare interface ImageEnhanceConfig {
   /** 超分配置。 */
   SuperResolution?: SuperResolutionConfig | null;
+  /** 综合增强配置。 */
+  ImageQualityEnhance?: ImageQualityEnhanceConfig | null;
   /** 色彩增强配置。 */
   ColorEnhance?: ColorEnhanceConfig | null;
   /** 细节增强配置。 */
   SharpEnhance?: SharpEnhanceConfig | null;
   /** 人脸增强配置。 */
   FaceEnhance?: FaceEnhanceConfig | null;
+}
+
+/** 图片擦除参数 */
+declare interface ImageEraseConfig {
+  /** 图标擦除配置。 */
+  ImageEraseLogo?: ImageEraseLogoConfig | null;
+}
+
+/** 图标擦除配置 */
+declare interface ImageEraseLogoConfig {
+  /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
+  Switch?: string | null;
+  /** 需要擦除的多个框选区域，注意：参数数组长度最大为2。 */
+  ImageAreaBoxes?: ImageAreaBoxInfo[] | null;
 }
 
 /** 综合增强配置 */
@@ -2962,6 +2986,8 @@ declare interface ImageTaskInput {
   EncodeConfig?: ImageEncodeConfig | null;
   /** 图片增强配置。 */
   EnhanceConfig?: ImageEnhanceConfig | null;
+  /** 图片擦除配置。 */
+  EraseConfig?: ImageEraseConfig | null;
 }
 
 /** 图片水印模板输入参数 */

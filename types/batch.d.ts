@@ -14,7 +14,7 @@ declare interface Activity {
   EnvId?: string;
   /** 起因 */
   Cause?: string;
-  /** 活动状态 */
+  /** 活动状态。取值范围：SUBMITTED：已提交PROCESSING：处理中SUCCEED：成功FAILED：失败 */
   ActivityState?: string;
   /** 状态原因 */
   StateReason?: string;
@@ -52,13 +52,13 @@ declare interface AnonymousComputeEnv {
 declare interface Application {
   /** 应用程序的交付方式，包括PACKAGE、LOCAL 两种取值，分别指远程存储的软件包、计算环境本地。 */
   DeliveryForm: string;
-  /** 任务执行命令。与Commands不能同时指定。 */
+  /** 松耦合任务执行命令。与Commands不能同时指定，一般使用Command字段提交任务。 */
   Command?: string;
   /** 应用程序软件包的远程存储路径 */
   PackagePath?: string;
   /** 应用使用Docker的相关配置。在使用Docker配置的情况下，DeliveryForm 为 LOCAL 表示直接使用Docker镜像内部的应用软件，通过Docker方式运行；DeliveryForm 为 PACKAGE，表示将远程应用包注入到Docker镜像后，通过Docker方式运行。为避免Docker不同版本的兼容性问题，Docker安装包及相关依赖由Batch统一负责，对于已安装Docker的自定义镜像，请卸载后再使用Docker特性。 */
   Docker?: Docker;
-  /** 任务执行命令信息。与Command不能同时指定。 */
+  /** 紧耦合任务执行命令信息。与Command不能同时指定。Command和Commands必须指定一个。 */
   Commands?: CommandLine[];
 }
 
@@ -142,7 +142,7 @@ declare interface ComputeNode {
   ComputeNodeId?: string;
   /** 计算节点实例ID，对于CVM场景，即为CVM的InstanceId */
   ComputeNodeInstanceId?: string;
-  /** 计算节点状态 */
+  /** 计算节点状态。取值范围：PENDING：表示创建中SUBMITTED：表示已提交创建CREATING：表示创建中CREATED：表示创建完成CREATION_FAILED：表示创建失败。RUNNING：表示运行中。ABNORMAL：表示节点异常。DELETING：表示删除中。 */
   ComputeNodeState?: string;
   /** CPU核数 */
   Cpu?: number;
@@ -482,11 +482,11 @@ declare interface ItemPrice {
 declare interface Job {
   /** 任务信息 */
   Tasks: Task[];
-  /** 作业名称 */
+  /** 作业名称; 字符串长度限制60. */
   JobName?: string;
-  /** 作业描述 */
+  /** 作业描述；字符串长度限制200. */
   JobDescription?: string;
-  /** 作业优先级，任务（Task）和任务实例（TaskInstance）会继承作业优先级 */
+  /** 作业优先级，任务（Task）和任务实例（TaskInstance）会继承作业优先级；范围0～100，数值越大，优先级越高。 */
   Priority?: number;
   /** 依赖信息 */
   Dependences?: Dependence[];
@@ -504,19 +504,19 @@ declare interface Job {
 
 /** 作业信息 */
 declare interface JobView {
-  /** 作业ID */
+  /** 作业ID；JobId详见[作业列表](https://cloud.tencent.com/document/product/599/15909) */
   JobId?: string;
   /** 作业名称 */
   JobName?: string;
-  /** 作业状态 */
+  /** 作业状态:- SUBMITTED：已提交；- PENDING：等待中；- RUNNABLE：可运行；- STARTING：启动中；- RUNNING：运行中；- SUCCEED：成功；- FAILED：失败；- FAILED_INTERRUPTED：失败后保留实例。 */
   JobState?: string;
   /** 作业优先级 */
   Priority?: number;
   /** 位置信息 */
   Placement?: Placement;
-  /** 创建时间 */
+  /** 创建时间。按照ISO8601标准表示，并且使用UTC时间。格式为：YYYY-MM-DDThh:mm:ssZ */
   CreateTime?: string;
-  /** 结束时间 */
+  /** 结束时间。按照ISO8601标准表示，并且使用UTC时间。格式为：YYYY-MM-DDThh:mm:ssZ */
   EndTime?: string;
   /** 任务统计指标 */
   TaskMetrics?: TaskMetrics;
@@ -560,11 +560,11 @@ declare interface MountDataDisk {
 declare interface NamedComputeEnv {
   /** 计算环境名称 */
   EnvName: string;
-  /** 计算节点期望个数 */
+  /** 计算节点期望个数，最大上限2000. */
   DesiredComputeNodeCount: number;
   /** 计算环境描述 */
   EnvDescription?: string;
-  /** 计算环境管理类型 */
+  /** 计算环境管理类型，枚举如下：MANAGED: 由客户在Batch平台主动创建；THPC_QUEUE: 由THPC平台创建，关联THPC平台的集群队列。 */
   EnvType?: string;
   /** 计算环境具体参数 */
   EnvData?: EnvData;
@@ -798,7 +798,7 @@ declare interface TaskInstanceMetrics {
 declare interface TaskInstanceView {
   /** 任务实例索引 */
   TaskInstanceIndex?: number;
-  /** 任务实例状态 */
+  /** 任务实例状态: - PENDING：等待中；- RUNNABLE：可运行；- STARTING：启动中；- RUNNING：运行中；- SUCCEED：成功；- FAILED：失败；- FAILED_INTERRUPTED：失败后保留实例。 */
   TaskInstanceState?: string;
   /** 应用程序执行结束的exit code */
   ExitCode?: number;
@@ -806,13 +806,13 @@ declare interface TaskInstanceView {
   StateReason?: string;
   /** 任务实例运行时所在计算节点（例如CVM）的InstanceId。任务实例未运行或者完结时，本字段为空。任务实例重试时，本字段会随之变化 */
   ComputeNodeInstanceId?: string;
-  /** 创建时间 */
+  /** 创建时间。按照ISO8601标准表示，并且使用UTC时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
   CreateTime?: string;
-  /** 启动时间 */
+  /** 启动时间。按照ISO8601标准表示，并且使用UTC时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
   LaunchTime?: string;
-  /** 开始运行时间 */
+  /** 开始运行时间。按照ISO8601标准表示，并且使用UTC时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
   RunningTime?: string;
-  /** 结束时间 */
+  /** 结束时间。按照ISO8601标准表示，并且使用UTC时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
   EndTime?: string;
   /** 重定向信息 */
   RedirectInfo?: RedirectInfo;
@@ -860,11 +860,11 @@ declare interface TaskTemplateView {
 declare interface TaskView {
   /** 任务名称 */
   TaskName?: string;
-  /** 任务状态 */
+  /** 任务状态:- PENDING：等待中；- RUNNABLE：可运行；- STARTING：启动中；- RUNNING：运行中；- SUCCEED：成功；- FAILED：失败；- FAILED_INTERRUPTED：失败后保留实例。 */
   TaskState?: string;
-  /** 开始时间 */
+  /** 开始时间。按照ISO8601标准表示，并且使用UTC时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
   CreateTime?: string;
-  /** 结束时间 */
+  /** 结束时间。按照ISO8601标准表示，并且使用UTC时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
   EndTime?: string | null;
 }
 
@@ -883,9 +883,9 @@ declare interface VirtualPrivateCloud {
 }
 
 declare interface AttachInstancesRequest {
-  /** 计算环境ID */
+  /** 计算环境ID，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。 */
   EnvId: string;
-  /** 加入计算环境实例列表 */
+  /** 加入计算环境实例列表，每次请求的实例的上限为100。 */
   Instances: Instance[];
 }
 
@@ -911,11 +911,11 @@ declare interface CreateComputeEnvResponse {
 }
 
 declare interface CreateTaskTemplateRequest {
-  /** 任务模板名称 */
+  /** 任务模板名称，最大长度限制60个字符。 */
   TaskTemplateName: string;
   /** 任务模板内容，参数要求与任务一致 */
   TaskTemplateInfo: Task;
-  /** 任务模板描述 */
+  /** 任务模板描述，最大长度限制200个字符。 */
   TaskTemplateDescription?: string;
   /** 标签列表。通过指定该参数可以支持绑定标签到任务模板。每个任务模板最多绑定10个标签。 */
   Tags?: Tag[];
@@ -929,7 +929,7 @@ declare interface CreateTaskTemplateResponse {
 }
 
 declare interface DeleteComputeEnvRequest {
-  /** 计算环境ID */
+  /** 计算环境ID，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。 */
   EnvId: string;
 }
 
@@ -939,7 +939,7 @@ declare interface DeleteComputeEnvResponse {
 }
 
 declare interface DeleteJobRequest {
-  /** 作业ID */
+  /** 作业ID；JobId详见[作业列表](https://cloud.tencent.com/document/product/599/15909) */
   JobId: string;
 }
 
@@ -949,7 +949,7 @@ declare interface DeleteJobResponse {
 }
 
 declare interface DeleteTaskTemplatesRequest {
-  /** 用于删除任务模板信息 */
+  /** 用于删除任务模板信息，最大数量上限100，环境模版ID通过调用接口 [DescribeTaskTemplates](https://cloud.tencent.com/document/api/599/15902)获取。 */
   TaskTemplateIds: string[];
 }
 
@@ -959,7 +959,7 @@ declare interface DeleteTaskTemplatesResponse {
 }
 
 declare interface DescribeAvailableCvmInstanceTypesRequest {
-  /** 过滤条件。 zone - String - 是否必填：否 -（过滤条件）按照可用区过滤。 instance-family String - 是否必填：否 -（过滤条件）按照机型系列过滤。实例机型系列形如：S1、I1、M1等。 */
+  /** 过滤条件。 zone - String - 是否必填：否 -（过滤条件）按照[可用区](https://cloud.tencent.com/document/product/213/15707)过滤。 instance-family String - 是否必填：否 -（过滤条件）按照[机型系列](https://cloud.tencent.com/document/product/213/15748)过滤。实例机型系列形如：S1、I1、M1等。 */
   Filters?: Filter[];
 }
 
@@ -971,11 +971,11 @@ declare interface DescribeAvailableCvmInstanceTypesResponse {
 }
 
 declare interface DescribeComputeEnvActivitiesRequest {
-  /** 计算环境ID */
+  /** 计算环境ID，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。 */
   EnvId: string;
-  /** 偏移量 */
+  /** 偏移量，默认为0. */
   Offset?: number;
-  /** 返回数量 */
+  /** 返回数量，默认值20，最大值100. */
   Limit?: number;
   /** 过滤条件 compute-node-id - String - 是否必填：否 -（过滤条件）按照计算节点ID过滤。 */
   Filters?: Filter;
@@ -983,15 +983,15 @@ declare interface DescribeComputeEnvActivitiesRequest {
 
 declare interface DescribeComputeEnvActivitiesResponse {
   /** 计算环境中的活动列表 */
-  ActivitySet: Activity[];
+  ActivitySet?: Activity[];
   /** 活动数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeComputeEnvCreateInfoRequest {
-  /** 计算环境ID */
+  /** 计算环境ID，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。 */
   EnvId: string;
 }
 
@@ -1023,13 +1023,13 @@ declare interface DescribeComputeEnvCreateInfoResponse {
 }
 
 declare interface DescribeComputeEnvCreateInfosRequest {
-  /** 计算环境ID列表，与Filters参数不能同时指定。 */
+  /** 计算环境ID列表，与Filters参数不能同时指定，最大限制100。环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。 */
   EnvIds?: string[];
-  /** 过滤条件 zone - String - 是否必填：否 -（过滤条件）按照可用区过滤。 env-id - String - 是否必填：否 -（过滤条件）按照计算环境ID过滤。 env-name - String - 是否必填：否 -（过滤条件）按照计算环境名称过滤。与EnvIds参数不能同时指定。 */
+  /** 过滤条件 zone - String - 是否必填：否 -（过滤条件）按照可用区过滤，可用区通过调用接口 [DescribeZones](https://cloud.tencent.com/document/api/213/15707)获取。 env-id - String - 是否必填：否 -（过滤条件）按照计算环境ID过滤。 env-name - String - 是否必填：否 -（过滤条件）按照计算环境名称过滤。与EnvIds参数不能同时指定。 */
   Filters?: Filter[];
   /** 偏移量 */
   Offset?: number;
-  /** 返回数量 */
+  /** 返回数量，默认值20，最大值100。 */
   Limit?: number;
 }
 
@@ -1048,7 +1048,7 @@ declare interface DescribeComputeEnvRequest {
 }
 
 declare interface DescribeComputeEnvResponse {
-  /** 计算环境ID */
+  /** 计算环境ID，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。 */
   EnvId?: string;
   /** 计算环境名称 */
   EnvName?: string;
@@ -1062,11 +1062,11 @@ declare interface DescribeComputeEnvResponse {
   ComputeNodeMetrics?: ComputeNodeMetrics;
   /** 计算节点期望个数 */
   DesiredComputeNodeCount?: number;
-  /** 计算环境类型 */
+  /** 计算环境管理类型，枚举如下： MANAGED: 由客户在Batch平台主动创建； THPC_QUEUE: 由thpc平台创建，关联thpc平台集群队列。 */
   EnvType?: string;
   /** 计算环境资源类型，当前为CVM和CPM（黑石） */
   ResourceType?: string;
-  /** 下一步动作 */
+  /** 下一步的动作，枚举如下： DELETING: 删除中 */
   NextAction?: string;
   /** 用户添加到计算环境中的计算节点个数 */
   AttachedComputeNodeCount?: number;
@@ -1077,27 +1077,27 @@ declare interface DescribeComputeEnvResponse {
 }
 
 declare interface DescribeComputeEnvsRequest {
-  /** 计算环境ID列表，与Filters参数不能同时指定。 */
+  /** 计算环境ID列表，与Filters参数不能同时指定。最大数量上限100，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。 */
   EnvIds?: string[];
-  /** 过滤条件 zone - String - 是否必填：否 -（过滤条件）按照可用区过滤。 env-id - String - 是否必填：否 -（过滤条件）按照计算环境ID过滤。 env-name - String - 是否必填：否 -（过滤条件）按照计算环境名称过滤。 resource-type - String - 是否必填：否 -（过滤条件）按照计算资源类型过滤，取值CVM或者CPM(黑石)。 tag-key - String - 是否必填：否 -（过滤条件）按照标签键进行过滤。tag-value - String - 是否必填：否 -（过滤条件）按照标签值进行过滤。tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。与EnvIds参数不能同时指定。 */
+  /** 过滤条件 zone - String - 是否必填：否 -（过滤条件）按照可用区过滤，可用区通过调用接口 [DescribeZones](https://cloud.tencent.com/document/api/213/15707)获取。 env-id - String - 是否必填：否 -（过滤条件）按照计算环境ID过滤。 env-name - String - 是否必填：否 -（过滤条件）按照计算环境名称过滤。 resource-type - String - 是否必填：否 -（过滤条件）按照计算资源类型过滤，取值CVM或者CPM(黑石)。 tag-key - String - 是否必填：否 -（过滤条件）按照标签键进行过滤。tag-value - String - 是否必填：否 -（过滤条件）按照标签值进行过滤。tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。与EnvIds参数不能同时指定。 */
   Filters?: Filter[];
   /** 偏移量 */
   Offset?: number;
-  /** 返回数量 */
+  /** 返回数量，默认值20，最大值100。 */
   Limit?: number;
 }
 
 declare interface DescribeComputeEnvsResponse {
   /** 计算环境列表 */
-  ComputeEnvSet: ComputeEnvView[];
+  ComputeEnvSet?: ComputeEnvView[];
   /** 计算环境数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeCvmZoneInstanceConfigInfosRequest {
-  /** 过滤条件。 zone - String - 是否必填：否 -（过滤条件）按照可用区过滤。 instance-family String - 是否必填：否 -（过滤条件）按照机型系列过滤。实例机型系列形如：S1、I1、M1等。 instance-type - String - 是否必填：否 - （过滤条件）按照机型过滤。 instance-charge-type - String - 是否必填：否 -（过滤条件）按照实例计费模式过滤。 ( POSTPAID_BY_HOUR：表示后付费，即按量计费机型 | SPOTPAID：表示竞价付费机型。 ) */
+  /** 过滤条件。 zone - String - 是否必填：否 -（过滤条件）按照[可用区](https://cloud.tencent.com/document/product/213/15707)过滤。 instance-family String - 是否必填：否 -（过滤条件）按照[机型系列](https://cloud.tencent.com/document/product/213/15748)过滤。实例机型系列形如：S1、I1、M1等。 instance-type - String - 是否必填：否 - （过滤条件）按照[机型](https://cloud.tencent.com/document/product/213/15749)过滤。实例机型形如：：S5.12XLARGE128、S5.12XLARGE96等。 instance-charge-type - String - 是否必填：否 -（过滤条件）按照实例计费模式过滤。 ( POSTPAID_BY_HOUR：表示后付费，即按量计费机型 | SPOTPAID：表示竞价付费机型。 ) */
   Filters?: Filter[];
 }
 
@@ -1119,7 +1119,7 @@ declare interface DescribeInstanceCategoriesResponse {
 }
 
 declare interface DescribeJobRequest {
-  /** 作业标识 */
+  /** 作业ID；JobId详见[作业列表](https://cloud.tencent.com/document/product/599/15909) */
   JobId: string;
 }
 
@@ -1134,9 +1134,9 @@ declare interface DescribeJobResponse {
   Priority?: number;
   /** 作业状态 */
   JobState?: string;
-  /** 创建时间 */
+  /** 创建时间。按照ISO8601标准表示，并且使用UTC时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
   CreateTime?: string;
-  /** 结束时间 */
+  /** 结束时间。按照ISO8601标准表示，并且使用UTC时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
   EndTime?: string;
   /** 任务视图信息 */
   TaskSet?: TaskView[];
@@ -1183,11 +1183,11 @@ declare interface DescribeJobSubmitInfoResponse {
 declare interface DescribeJobsRequest {
   /** 作业ID列表，与Filters参数不能同时指定。 */
   JobIds?: string[];
-  /** 过滤条件 job-id - String - 是否必填：否 -（过滤条件）按照作业ID过滤。 job-name - String - 是否必填：否 -（过滤条件）按照作业名称过滤。 job-state - String - 是否必填：否 -（过滤条件）按照作业状态过滤。 zone - String - 是否必填：否 -（过滤条件）按照可用区过滤。 tag-key - String - 是否必填：否 -（过滤条件）按照标签键进行过滤。 tag-value - String - 是否必填：否 -（过滤条件）按照标签值进行过滤。 tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。与JobIds参数不能同时指定。 */
+  /** 过滤条件 job-id - String - 是否必填：否 -（过滤条件）按照作业ID过滤。 job-name - String - 是否必填：否 -（过滤条件）按照作业名称过滤。 job-state - String - 是否必填：否 -（过滤条件）按照作业状态过滤。 - SUBMITTED：已提交； - PENDING：等待中； - RUNNABLE：可运行； - STARTING：启动中； - RUNNING：运行中； - SUCCEED：成功； - FAILED：失败； - FAILED_INTERRUPTED：失败后保留实例。 zone - String - 是否必填：否 -（过滤条件）按照[可用区](https://cloud.tencent.com/document/product/213/15707)过滤。 tag-key - String - 是否必填：否 -（过滤条件）按照标签键进行过滤。 tag-value - String - 是否必填：否 -（过滤条件）按照标签值进行过滤。 tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。与JobIds参数不能同时指定。 */
   Filters?: Filter[];
   /** 偏移量 */
   Offset?: number;
-  /** 返回数量 */
+  /** 返回job数量限制，最大值: 100，默认值: 20. */
   Limit?: number;
 }
 
@@ -1201,29 +1201,29 @@ declare interface DescribeJobsResponse {
 }
 
 declare interface DescribeTaskLogsRequest {
-  /** 作业ID */
+  /** 作业ID。JobId详见[作业列表](https://cloud.tencent.com/document/product/599/15909)。 */
   JobId: string;
   /** 任务名称 */
   TaskName: string;
-  /** 任务实例集合 */
+  /** 任务实例集合；与Offset不能同时指定。 */
   TaskInstanceIndexes?: number[];
-  /** 起始任务实例 */
+  /** 起始任务实例。与TaskInstanceIndexes参数不能同时指定。 */
   Offset?: number;
-  /** 最大任务实例数 */
+  /** 最大任务实例数, 最大值为10. */
   Limit?: number;
 }
 
 declare interface DescribeTaskLogsResponse {
   /** 任务实例总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 任务实例日志详情集合 */
-  TaskInstanceLogSet: TaskInstanceLog[];
+  TaskInstanceLogSet?: TaskInstanceLog[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeTaskRequest {
-  /** 作业ID */
+  /** 作业ID；JobId详见[作业列表](https://cloud.tencent.com/document/product/599/15909) */
   JobId: string;
   /** 任务名称 */
   TaskName: string;
@@ -1231,7 +1231,7 @@ declare interface DescribeTaskRequest {
   Offset?: number;
   /** 返回数量。默认取值100，最大取值1000。 */
   Limit?: number;
-  /** 过滤条件，详情如下： task-instance-type - String - 是否必填： 否 - 按照任务实例状态进行过滤（SUBMITTED：已提交；PENDING：等待中；RUNNABLE：可运行；STARTING：启动中；RUNNING：运行中；SUCCEED：成功；FAILED：失败；FAILED_INTERRUPTED：失败后保留实例）。 */
+  /** 过滤条件，详情如下：task-instance-state - String - 是否必填： 否 - 按照任务实例状态进行过滤（- SUBMITTED：已提交；- PENDING：等待中；- RUNNABLE：可运行；- STARTING：启动中；- RUNNING：运行中；- SUCCEED：成功；- FAILED：失败；- FAILED_INTERRUPTED：失败后保留实例）。 */
   Filters?: Filter[];
 }
 
@@ -1277,9 +1277,9 @@ declare interface DescribeTaskTemplatesResponse {
 }
 
 declare interface DetachInstancesRequest {
-  /** 计算环境ID */
+  /** 计算环境ID，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。 */
   EnvId: string;
-  /** 实例ID列表 */
+  /** 实例ID列表，实例ID通过调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728)获取。 */
   InstanceIds: string[];
 }
 
@@ -1296,9 +1296,9 @@ declare interface InstanceMarketOptionsRequest {
 }
 
 declare interface ModifyComputeEnvRequest {
-  /** 计算环境ID */
+  /** 计算环境ID，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。 */
   EnvId: string;
-  /** 计算节点期望个数 */
+  /** 计算节点期望个数，最大上限2000。 */
   DesiredComputeNodeCount?: number;
   /** 计算环境名称 */
   EnvName?: string;
@@ -1314,11 +1314,11 @@ declare interface ModifyComputeEnvResponse {
 }
 
 declare interface ModifyTaskTemplateRequest {
-  /** 任务模板ID */
+  /** 任务模板ID; 详见[任务模版](https://cloud.tencent.com/document/product/599/15902)。 */
   TaskTemplateId: string;
-  /** 任务模板名称 */
+  /** 任务模板名称；字节长度限制60。 */
   TaskTemplateName?: string;
-  /** 任务模板描述 */
+  /** 任务模板描述；字节长度限制200。 */
   TaskTemplateDescription?: string;
   /** 任务模板信息 */
   TaskTemplateInfo?: Task;
@@ -1330,7 +1330,7 @@ declare interface ModifyTaskTemplateResponse {
 }
 
 declare interface RetryJobsRequest {
-  /** 作业ID列表。 */
+  /** 作业ID列表。最大重试作业数100；JobId详见[作业列表](https://cloud.tencent.com/document/product/599/15909)。 */
   JobIds: string[];
 }
 
@@ -1356,9 +1356,9 @@ declare interface SubmitJobResponse {
 }
 
 declare interface TerminateComputeNodeRequest {
-  /** 计算环境ID */
+  /** 计算环境ID，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。 */
   EnvId: string;
-  /** 计算节点ID */
+  /** 计算节点ID，节点ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。 */
   ComputeNodeId: string;
 }
 
@@ -1368,9 +1368,9 @@ declare interface TerminateComputeNodeResponse {
 }
 
 declare interface TerminateComputeNodesRequest {
-  /** 计算环境ID */
+  /** 计算环境ID，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。 */
   EnvId: string;
-  /** 计算节点ID列表 */
+  /** 计算节点ID列表，最大数量上限100，节点ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。 */
   ComputeNodeIds: string[];
 }
 
@@ -1380,7 +1380,7 @@ declare interface TerminateComputeNodesResponse {
 }
 
 declare interface TerminateJobRequest {
-  /** 作业ID */
+  /** 作业ID；JobId详见[作业列表](https://cloud.tencent.com/document/product/599/15909) */
   JobId: string;
 }
 
@@ -1390,9 +1390,9 @@ declare interface TerminateJobResponse {
 }
 
 declare interface TerminateTaskInstanceRequest {
-  /** 作业ID */
+  /** 作业ID；详见[作业列表](https://cloud.tencent.com/document/product/599/15909)。 */
   JobId: string;
-  /** 任务名称 */
+  /** 任务名称；详见[作业提交信息](https://cloud.tencent.com/document/product/599/15910) */
   TaskName: string;
   /** 任务实例索引 */
   TaskInstanceIndex: number;

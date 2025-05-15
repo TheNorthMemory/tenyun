@@ -17,11 +17,11 @@ declare interface ChargeAttribute {
 /** 客户侧集群管理节点信息 */
 declare interface ClientClusterManagerNodeInfo {
   /** 客户端节点IP */
-  NodeIp: string;
+  NodeIp?: string;
   /** 节点Instance Id */
-  NodeInstanceId: string;
+  NodeInstanceId?: string;
   /** 初始密码 */
-  InitialPassword: string;
+  InitialPassword?: string;
 }
 
 /** 客户端节点属性 */

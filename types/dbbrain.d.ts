@@ -1176,6 +1176,20 @@ declare interface CancelDBAutonomyActionResponse {
   RequestId?: string;
 }
 
+declare interface CancelDBAutonomyEventRequest {
+  /** 自治事件ID。 */
+  EventId: number;
+  /** 实列ID。 */
+  InstanceId: string;
+  /** 服务产品类型，支持值包括： "redis" - 云数据库 Redis。 */
+  Product: string;
+}
+
+declare interface CancelDBAutonomyEventResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CancelKillTaskRequest {
   /** 实例ID。 */
   InstanceId: string;
@@ -1620,6 +1634,44 @@ declare interface DescribeAuditLogFilesResponse {
   TotalCount?: number;
   /** 审计日志文件详情。 */
   Items?: AuditLogFile[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDBAutonomyActionRequest {
+  /** 自治任务ID。 */
+  ActionId: number;
+  /** 实列ID。 */
+  InstanceId: string;
+  /** 服务产品类型，支持值包括： "redis" - 云数据库 Redis。 */
+  Product: string;
+}
+
+declare interface DescribeDBAutonomyActionResponse {
+  /** 自治任务ID。 */
+  ActionId?: number;
+  /** 自治事件ID。 */
+  EventId?: number;
+  /** 任务ID。 */
+  TaskId?: number;
+  /** 类型：支持RedisAutoScaleUp */
+  Type?: string;
+  /** 自治任务触发时间。 */
+  TriggerTime?: string;
+  /** 自治任务创建时间。 */
+  CreateTime?: string;
+  /** 自治任务更新时间。 */
+  UpdateTime?: string;
+  /** 自治任务完成时间。 */
+  FinishTime?: string;
+  /** 剩余时间，单位：秒。 */
+  ExpireTime?: number;
+  /** 触发原因。 */
+  Reason?: string;
+  /** 自治任务状态：支持 RUNNING，FINISHED，TERMINATED，CANCELLED */
+  Status?: string;
+  /** 任务相关的图表等信息。 */
+  Info?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3983,6 +4035,8 @@ declare interface Dbbrain {
   AddUserContact(data: AddUserContactRequest, config?: AxiosRequestConfig): AxiosPromise<AddUserContactResponse>;
   /** 终止自治任务（单次） {@link CancelDBAutonomyActionRequest} {@link CancelDBAutonomyActionResponse} */
   CancelDBAutonomyAction(data: CancelDBAutonomyActionRequest, config?: AxiosRequestConfig): AxiosPromise<CancelDBAutonomyActionResponse>;
+  /** 终止自治事件 {@link CancelDBAutonomyEventRequest} {@link CancelDBAutonomyEventResponse} */
+  CancelDBAutonomyEvent(data: CancelDBAutonomyEventRequest, config?: AxiosRequestConfig): AxiosPromise<CancelDBAutonomyEventResponse>;
   /** 终止中断会话任务 {@link CancelKillTaskRequest} {@link CancelKillTaskResponse} */
   CancelKillTask(data: CancelKillTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelKillTaskResponse>;
   /** 终止大Key任务 {@link CancelRedisBigKeyAnalysisTasksRequest} {@link CancelRedisBigKeyAnalysisTasksResponse} */
@@ -4031,6 +4085,8 @@ declare interface Dbbrain {
   DescribeAuditInstanceList(data: DescribeAuditInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditInstanceListResponse>;
   /** 查询审计日志文件 {@link DescribeAuditLogFilesRequest} {@link DescribeAuditLogFilesResponse} */
   DescribeAuditLogFiles(data: DescribeAuditLogFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogFilesResponse>;
+  /** 查询自治事件任务详情 {@link DescribeDBAutonomyActionRequest} {@link DescribeDBAutonomyActionResponse} */
+  DescribeDBAutonomyAction(data: DescribeDBAutonomyActionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBAutonomyActionResponse>;
   /** 查询自治事件任务列表 {@link DescribeDBAutonomyActionsRequest} {@link DescribeDBAutonomyActionsResponse} */
   DescribeDBAutonomyActions(data: DescribeDBAutonomyActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBAutonomyActionsResponse>;
   /** 查询自治事件列表 {@link DescribeDBAutonomyEventsRequest} {@link DescribeDBAutonomyEventsResponse} */

@@ -2,6 +2,18 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 段落文本框位置：x，y代表左上顶点，width和height代表宽高 */
+declare interface BoundingBox {
+  /** 左上顶点x坐标 */
+  X?: number;
+  /** 左上顶点y坐标 */
+  Y?: number;
+  /** 宽 */
+  Width?: number;
+  /** 高 */
+  Height?: number;
+}
+
 /** 文件翻译任务结果 */
 declare interface GetFileTranslateData {
   /** 任务ID */
@@ -46,6 +58,22 @@ declare interface Task {
   TaskId: string;
 }
 
+/** 大模型图片翻译详情信息 */
+declare interface TransDetail {
+  /** 当前行的原文本 */
+  SourceLineText?: string;
+  /** 当前行的译文 */
+  TargetLineText?: string;
+  /** 段落文本框位置 */
+  BoundingBox?: BoundingBox;
+  /** 行数 */
+  LinesCount?: number;
+  /** 行高 */
+  LineHeight?: number;
+  /** 正常段落spam_code字段为0；如果存在spam_code字段且值大于0（1: 命中垃圾检查；2: 命中安全策略；3: 其他。），则命中安全检查被过滤。 */
+  SpamCode?: number;
+}
+
 declare interface FileTranslateRequest {
   /** 源语言，支持zh：简体中文zh-HK：繁体中文zh-TW：繁体中文zh-TR：繁体中文en：英语ar：阿拉伯语de：德语es：西班牙语fr：法语it：意大利语ja：日语pt：葡萄牙语ru：俄语ko：韩语tr：土耳其语vi：越南语th：泰语 */
   Source: string;
@@ -80,6 +108,20 @@ declare interface GetFileTranslateRequest {
 declare interface GetFileTranslateResponse {
   /** 任务id */
   Data?: GetFileTranslateData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ImageTranslateLLMRequest {
+  /** 输入图 Url。 使用Url的时候，Data参数需要传入""。 图片限制：小于 10MB，分辨率建议600*800以上，格式支持 jpg、jpeg、png。 */
+  Url?: string;
+}
+
+declare interface ImageTranslateLLMResponse {
+  /** 逆时针图片角度，取值范围为0-359 */
+  Angle?: number;
+  /** 翻译详情信息 */
+  TransDetails?: TransDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -237,6 +279,8 @@ declare interface Tmt {
   GetFileTranslate(data: GetFileTranslateRequest, config?: AxiosRequestConfig): AxiosPromise<GetFileTranslateResponse>;
   /** 图片翻译 {@link ImageTranslateRequest} {@link ImageTranslateResponse} */
   ImageTranslate(data: ImageTranslateRequest, config?: AxiosRequestConfig): AxiosPromise<ImageTranslateResponse>;
+  /** 端到端图片翻译 {@link ImageTranslateLLMRequest} {@link ImageTranslateLLMResponse} */
+  ImageTranslateLLM(data?: ImageTranslateLLMRequest, config?: AxiosRequestConfig): AxiosPromise<ImageTranslateLLMResponse>;
   /** 语种识别 {@link LanguageDetectRequest} {@link LanguageDetectResponse} */
   LanguageDetect(data: LanguageDetectRequest, config?: AxiosRequestConfig): AxiosPromise<LanguageDetectResponse>;
   /** 语音翻译 {@link SpeechTranslateRequest} {@link SpeechTranslateResponse} */

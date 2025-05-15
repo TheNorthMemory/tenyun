@@ -58,6 +58,44 @@ declare interface BatchRecordInfo {
   Remark?: string | null;
 }
 
+/** 批量操作筛选域名信息 */
+declare interface BatchSearchDomainInfo {
+  /** 域名 */
+  Domain?: string;
+  /** 域名 ID */
+  DomainId?: number;
+  /** 域名套餐等级 */
+  DomainGrade?: string;
+  /** 记录信息列表 */
+  RecordList?: BatchSearchRecordInfo[];
+}
+
+/** 批量操作筛选记录信息 */
+declare interface BatchSearchRecordInfo {
+  /** 解析记录 ID */
+  RecordId?: number;
+  /** 解析线路 */
+  Area: string;
+  /** 记录备注 */
+  Remark?: string | null;
+  /** TTL(秒) */
+  TTL: number;
+  /** 记录类型 */
+  RecordType: string;
+  /** 记录是否启用 */
+  Enabled?: number;
+  /** 权重 */
+  Weight?: number | null;
+  /** 记录分组 ID */
+  GroupId?: number;
+  /** 子域名 */
+  SubDomain: string;
+  /** 解析值 */
+  Value: string;
+  /** MX优先级 */
+  MX?: number | null;
+}
+
 /** 批量添加域名返回结构 */
 declare interface CreateDomainBatchDetail {
   /** 见RecordInfoBatch */
@@ -1518,6 +1556,36 @@ declare interface DescribeDomainAnalyticsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDomainAndRecordListRequest {
+  /** 搜索所有域名。AllDomain、GroupIdList、DomainList、DomainIdList 参数传任一个即可。优先级为：AllDomain > GroupIdList > DomainList > DomainIdList。 */
+  AllDomain?: string;
+  /** 要搜索的域名列表。 */
+  DomainList?: string[];
+  /** 要搜索的域名 ID 列表。 */
+  DomainIdList?: number[];
+  /** 要搜索的域名分组 ID 列表。 */
+  GroupIdList?: number[];
+  /** 记录类型筛选 */
+  RecordType?: string;
+  /** 子域名筛选 */
+  SubKeyword?: string;
+  /** 记录值筛选 */
+  ValueKeyword?: string;
+  /** 线路筛选 */
+  Area?: string;
+  /** 备注筛选 */
+  Remark?: string;
+  /** 记录状态筛选1：正常0：暂停 */
+  Enabled?: string;
+}
+
+declare interface DescribeDomainAndRecordListResponse {
+  /** 域名列表 */
+  DetailList?: BatchSearchDomainInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDomainCustomLineListRequest {
   /** 域名 */
   Domain: string;
@@ -2653,6 +2721,8 @@ declare interface Dnspod {
   DescribeDomainAliasList(data: DescribeDomainAliasListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainAliasListResponse>;
   /** 域名解析量统计 {@link DescribeDomainAnalyticsRequest} {@link DescribeDomainAnalyticsResponse} */
   DescribeDomainAnalytics(data: DescribeDomainAnalyticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainAnalyticsResponse>;
+  /** 批量操作中搜索域名 {@link DescribeDomainAndRecordListRequest} {@link DescribeDomainAndRecordListResponse} */
+  DescribeDomainAndRecordList(data?: DescribeDomainAndRecordListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainAndRecordListResponse>;
   /** 获取域名的自定义线路列表 {@link DescribeDomainCustomLineListRequest} {@link DescribeDomainCustomLineListResponse} */
   DescribeDomainCustomLineList(data: DescribeDomainCustomLineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainCustomLineListResponse>;
   /** 获取域名筛选列表 {@link DescribeDomainFilterListRequest} {@link DescribeDomainFilterListResponse} */

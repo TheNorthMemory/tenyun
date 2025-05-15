@@ -152,7 +152,7 @@ declare interface DomainBaseInfo {
   CreationDate?: string;
   /** 到期时间格式:YYYY-MM-DD */
   ExpirationDate?: string;
-  /** 域名状态。ok：正常serverHold：注册局暂停解析 clientHold：注册商暂停解析pendingTransfer：转移中renewingPeriod：续费期redemptionPeriod：偿还期pendingDelete：删除期serverTransferProhibited：注册局禁止转移serverUpdateProhibited：注册局禁止更新serverDeleteProhibited：注册局禁止删除clientTransferProhibited：注册商禁止转移clientUpdateProhibited：注册商禁止更新clientDeleteProhibited：注册商禁止删除serverRenewProhibited: 注册局禁止续费clientRenewProhobited: 注册商禁止续费 */
+  /** 域名状态。ok：正常serverHold：注册局暂停解析 clientHold：注册商暂停解析pendingTransfer：转移中renewingPeriod：续费期redemptionPeriod：偿还期pendingDelete：删除期serverTransferProhibited：注册局禁止转移serverUpdateProhibited：注册局禁止更新serverDeleteProhibited：注册局禁止删除clientTransferProhibited：注册商禁止转移clientUpdateProhibited：注册商禁止更新clientDeleteProhibited：注册商禁止删除serverRenewProhibited: 注册局禁止续费clientRenewProhibited: 注册商禁止续费 */
   DomainStatus?: string[];
   /** 域名购买状态。ok：正常RegisterPending：待注册RegisterDoing：注册中RegisterFailed：注册失败AboutToExpire: 即将过期RenewPending：已进入续费期，需要进行续费RenewDoing：续费中RedemptionPending：已进入赎回期，需要进行续费RedemptionDoing：赎回中TransferPending：待转入中TransferTransing：转入中TransferFailed：转入失败 */
   BuyStatus?: string;
@@ -248,7 +248,7 @@ declare interface DomainSimpleInfo {
   CreationDate?: string;
   /** 到期时间 */
   ExpirationDate?: string;
-  /** 域名状态。ok：正常serverHold：注册局暂停解析 clientHold：注册商暂停解析pendingTransfer：转移中renewingPeriod：续费期redemptionPeriod：偿还期pendingDelete：删除期serverTransferProhibited：注册局禁止转移serverUpdateProhibited：注册局禁止更新serverDeleteProhibited：注册局禁止删除clientTransferProhibited：注册商禁止转移clientUpdateProhibited：注册商禁止更新clientDeleteProhibited：注册商禁止删除serverRenewProhibited: 注册局禁止续费clientRenewProhobited: 注册商禁止续费 */
+  /** 域名状态。ok：正常serverHold：注册局暂停解析 clientHold：注册商暂停解析pendingTransfer：转移中renewingPeriod：续费期redemptionPeriod：偿还期pendingDelete：删除期serverTransferProhibited：注册局禁止转移serverUpdateProhibited：注册局禁止更新serverDeleteProhibited：注册局禁止删除clientTransferProhibited：注册商禁止转移clientUpdateProhibited：注册商禁止更新clientDeleteProhibited：注册商禁止删除serverRenewProhibited: 注册局禁止续费clientRenewProhibited: 注册商禁止续费 */
   DomainStatus?: string[];
   /** 域名购买状态。ok：正常RegisterPending：待注册RegisterDoing：注册中RegisterFailed：注册失败AboutToExpire: 即将过期RenewPending：已进入续费期，需要进行续费RenewDoing：续费中RedemptionPending：已进入赎回期，需要进行续费RedemptionDoing：赎回中TransferPending：待转入中TransferTransing：转入中TransferFailed：转入失败 */
   BuyStatus?: string;
@@ -420,9 +420,9 @@ declare interface TemplateInfo {
   TemplateId?: string;
   /** 认证状态:NotUpload: 未实名认证InAudit: 实名审核中Approved: 已实名认证Reject: 实名审核失败NotVerified: 实名信息待修改 */
   AuditStatus?: string;
-  /** 创建时间 */
+  /** 创建时间 格式:YYYY-MM-DD HH:mm:ss */
   CreatedOn?: string;
-  /** 更新时间 */
+  /** 更新时间 格式:YYYY-MM-DD HH:mm:ss */
   UpdatedOn?: string;
   /** 用户UIN */
   UserUin?: string;
@@ -443,9 +443,9 @@ declare interface TemplateInfo {
 }
 
 declare interface BatchModifyDomainInfoRequest {
-  /** 批量修改的域名。 */
+  /** 批量修改的域名数组个数最大不超过4000 */
   Domains: string[];
-  /** 模板ID可从DescribeTemplates接口获取 */
+  /** 模板ID 可从[DescribeTemplateList](https://cloud.tencent.com/document/api/242/48940)接口获取 */
   TemplateId: string;
   /** true： 开启60天内禁止转移注册商锁定false：关闭60天内禁止转移注册商锁定默认 true */
   LockTransfer?: boolean;
@@ -500,9 +500,9 @@ declare interface BiddingPreReleaseRequest {
 }
 
 declare interface BiddingPreReleaseResponse {
-  /** 是否需要额外支付 */
+  /** 是否需要额外支付true: 需要额外支付false: 不需要额外支付 */
   IsNeedPay?: boolean;
-  /** 计费请求参数，以类Json字符串的形式进行返回。用于计费下单 */
+  /** 计费请求参数，以类Json字符串的形式进行返回。json字符串前有一个">"特定标识符号，去掉标识符的字符串可用于计费下单 */
   BillingParam?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -559,7 +559,7 @@ declare interface CheckDomainResponse {
 }
 
 declare interface CreateCustomDnsHostRequest {
-  /** 域名实例ID可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941) */
+  /** 域名实例ID 可通过[DescribeDomainNameList](https://cloud.tencent.com/document/api/242/48941)接口获取 */
   DomainId: string;
   /** Dns名称例如：<>.test.com;其中<>就是Dns名称，可以是任意域名允许的格式 */
   DnsName: string;
@@ -621,7 +621,7 @@ declare interface CreatePhoneEmailRequest {
   Code: string;
   /** 1：手机 2：邮箱 */
   Type: number;
-  /** 验证码通过调用SendPhoneEmailCode接口发送到手机或邮箱的验证码：https://cloud.tencent.com/document/api/242/62666 */
+  /** 验证码通过调用[SendPhoneEmailCode](https://cloud.tencent.com/document/api/242/62666)接口发送到手机或邮箱的验证码 */
   VerifyCode: string;
 }
 
@@ -691,7 +691,7 @@ declare interface DeleteReservedPreDomainInfoResponse {
 }
 
 declare interface DeleteTemplateRequest {
-  /** 模板ID可通过DescribeTemplates接口获取 */
+  /** 模板ID可通过[DescribeTemplateList](https://cloud.tencent.com/document/api/242/48940)接口获取 */
   TemplateId: string;
 }
 
@@ -787,7 +787,7 @@ declare interface DescribeBiddingAppointDetailResponse {
 declare interface DescribeBiddingAppointListRequest {
   /** 页码默认值1 */
   PageNumber: number;
-  /** 每页数量默认：20 取值范围【1，200】 */
+  /** 每页数量默认：20 取值范围[1，200] */
   PageSize: number;
   /** 域名 */
   Domain?: string;
@@ -795,7 +795,7 @@ declare interface DescribeBiddingAppointListRequest {
   Status?: number[];
   /** 排序字段：默认<空>，不排序可选值：AppointEndTime 预约结束时间BiddingPrice 竞价保证金BiddingEndTime 竞价结束时间 */
   SortField?: string;
-  /** 排序规则：asc升序，desc降序 */
+  /** 排序规则：asc:升序desc:降序默认：asc */
   SortOrder?: string;
 }
 
@@ -871,7 +871,7 @@ declare interface DescribeBiddingListResponse {
 }
 
 declare interface DescribeBiddingSuccessfulDetailRequest {
-  /** 预约ID 可通过[DescribeBiddingSuccessfulList](https://cloud.tencent.com/document/api/242/106596)接口获取 */
+  /** 预约ID 可通过[DescribeBiddingList](https://cloud.tencent.com/document/api/242/106598)接口获取 */
   BusinessID?: string;
 }
 
@@ -903,7 +903,7 @@ declare interface DescribeBiddingSuccessfulDetailResponse {
 declare interface DescribeBiddingSuccessfulListRequest {
   /** 页码默认：1 */
   PageNumber: number;
-  /** 每页数量默认：20 取值范围【1，200】 */
+  /** 每页数量默认：20 取值范围[1，200] */
   PageSize: number;
   /** 域名 */
   Domain?: string;
@@ -911,7 +911,7 @@ declare interface DescribeBiddingSuccessfulListRequest {
   Status?: number[];
   /** 排序字段：默认<空>，不排序SuccessfulTime 预约结束时间 */
   SortField?: string;
-  /** 排序规则：asc升序，desc降序 */
+  /** 排序规则：asc：升序desc：降序默认：asc */
   SortOrder?: string;
 }
 
@@ -943,7 +943,7 @@ declare interface DescribeCustomDnsHostSetResponse {
 }
 
 declare interface DescribeDomainBaseInfoRequest {
-  /** 域名可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941) */
+  /** 域名可通过[DescribeDomainNameList](https://cloud.tencent.com/document/api/242/48941)接口获取 */
   Domain: string;
 }
 
@@ -1207,7 +1207,7 @@ declare interface DescribeTemplateListResponse {
 }
 
 declare interface DescribeTemplateRequest {
-  /** 模板ID通过DescribeTemplateList接口获取:https://cloud.tencent.com/document/api/242/48940 */
+  /** 模板ID通过[DescribeTemplateList](https://cloud.tencent.com/document/api/242/48940)接口获取 */
   TemplateId: string;
 }
 
@@ -1401,7 +1401,7 @@ declare interface SendPhoneEmailCodeResponse {
 }
 
 declare interface SetDomainAutoRenewRequest {
-  /** 域名实例ID可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941) */
+  /** 域名实例ID可通过[DescribeDomainNameList](https://cloud.tencent.com/document/api/242/48941)接口获取 */
   DomainId: string;
   /** AutoRenew 有三个可选值： 0：不设置自动续费1：设置自动续费2：设置到期后不续费 */
   AutoRenew: number;
@@ -1429,7 +1429,7 @@ declare interface TransferInDomainBatchRequest {
   Domains: string[];
   /** 域名转移码数组。 */
   PassWords: string[];
-  /** 模板ID。可通过DescribeTemplates接口获取 */
+  /** 模板ID。 可通过[DescribeTemplateList](https://cloud.tencent.com/document/api/242/48940)接口获取 */
   TemplateId: string;
   /** 付费模式 0手动在线付费，1使用余额付费。 */
   PayMode: number;

@@ -1555,13 +1555,13 @@ declare interface CreateListenerRequest {
   MaxCps?: number;
   /** 空闲连接超时时间，此参数仅适用于TCP监听器，单位：秒。取值范围：共享型实例和独占型实例支持：300-900，性能容量型实例支持：300-1980。如需设置请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)。 */
   IdleConnectTimeout?: number;
-  /** 是否开启SNAT，True（开启）、False（关闭） */
+  /** 是否开启SNAT，True（开启）、False（关闭）。默认为关闭。 */
   SnatEnable?: boolean;
   /** 全端口段监听器的结束端口，端口范围：2 - 65535 */
   FullEndPorts?: number[];
-  /** 内网http监听器开启h2c开关，True（开启）、False（关闭） */
+  /** 内网http监听器开启h2c开关，True（开启）、False（关闭）。默认为关闭。 */
   H2cSwitch?: boolean;
-  /** TCP_SSL监听器支持关闭SSL后仍然支持混绑，此参数为关闭开关。True（关闭）、False（开启） */
+  /** TCP_SSL监听器支持关闭SSL后仍然支持混绑，此参数为关闭开关。True（关闭）、False（开启）.默认为关闭。 */
   SslCloseSwitch?: boolean;
   /** 数据压缩模式。可选值：transparent（透传模式）、compatibility（兼容模式） */
   DataCompressMode?: string;
@@ -1763,7 +1763,7 @@ declare interface DeleteLoadBalancerListenersResponse {
 }
 
 declare interface DeleteLoadBalancerRequest {
-  /** 要删除的负载均衡实例 ID 数组，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取数组大小最大支持20。 */
+  /** 要删除的负载均衡实例 ID 数组，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取，数组大小最大支持20。 */
   LoadBalancerIds: string[];
   /** 是否强制删除clb。True表示强制删除，False表示不是强制删除，需要做拦截校验。默认为 False */
   ForceDelete?: boolean;
@@ -1807,11 +1807,11 @@ declare interface DeleteRuleRequest {
   LoadBalancerId: string;
   /** 负载均衡监听器ID，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。 */
   ListenerId: string;
-  /** 要删除的转发规则的ID组成的数组，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。 */
+  /** 要删除的转发规则的ID组成的数组，可以通过 [DescribeLoadBalancersDetail](https://cloud.tencent.com/document/api/214/46916) 接口查询。 */
   LocationIds?: string[];
-  /** 要删除的转发规则的域名，如果是多域名，可以指定多域名列表中的任意一个，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。 */
+  /** 要删除的转发规则的域名，如果是多域名，可以指定多域名列表中的任意一个，可以通过 [DescribeLoadBalancersDetail](https://cloud.tencent.com/document/api/214/46916) 接口查询。 */
   Domain?: string;
-  /** 要删除的转发规则的转发路径，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。 */
+  /** 要删除的转发规则的转发路径，可以通过 [DescribeLoadBalancersDetail](https://cloud.tencent.com/document/api/214/46916) 接口查询。 */
   Url?: string;
   /** 监听器下必须配置一个默认域名，当需要删除默认域名时，可以指定另一个域名作为新的默认域名，如果新的默认域名是多域名，可以指定多域名列表中的任意一个，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。 */
   NewDefaultServerDomain?: string;
@@ -1823,7 +1823,7 @@ declare interface DeleteRuleResponse {
 }
 
 declare interface DeleteTargetGroupsRequest {
-  /** 目标组的ID数组。 */
+  /** 目标组的ID数组，单次最多支持删除20个。 */
   TargetGroupIds: string[];
 }
 
@@ -1855,7 +1855,7 @@ declare interface DeregisterFunctionTargetsResponse {
 declare interface DeregisterTargetGroupInstancesRequest {
   /** 目标组ID。 */
   TargetGroupId: string;
-  /** 待解绑的服务器信息，支持批量解除绑定，单次批量解除数量最多为20个。 */
+  /** 待解绑的服务器信息，支持批量解除绑定，单次批量解除数量最多为20个。在这个接口 Port 参数为必填项。 */
   TargetGroupInstances: TargetGroupInstance[];
 }
 
@@ -2101,7 +2101,7 @@ declare interface DescribeIdleLoadBalancersRequest {
   Offset?: number;
   /** 返回负载均衡实例的数量，默认为20，最大值为100。 */
   Limit?: number;
-  /** 负载均衡所在地域。 */
+  /** 负载均衡所在地域，可以通过 [DescribeRegions](https://cloud.tencent.com/document/product/1596/77930) 查询获取。 */
   LoadBalancerRegion?: string;
 }
 
@@ -2483,7 +2483,7 @@ declare interface InquiryPriceModifyLoadBalancerResponse {
 }
 
 declare interface InquiryPriceRefundLoadBalancerRequest {
-  /** 负载均衡实例ID */
+  /** 负载均衡实例ID。可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。 */
   LoadBalancerId: string;
 }
 
@@ -2659,7 +2659,7 @@ declare interface ModifyListenerRequest {
   TargetType?: string;
   /** 是否开启长连接，此参数仅适用于HTTP/HTTPS监听器。默认值0表示不开启，1表示开启。若后端服务对连接数上限有限制，则建议谨慎开启。此功能目前处于内测中，如需使用，请提交 [内测申请](https://cloud.tencent.com/apply/p/tsodp6qm21)。 */
   KeepaliveEnable?: number;
-  /** 解绑后端目标时，是否发RST给客户端，此参数仅适用于TCP监听器。True表示发送 RST 给客户端，False表示不发送 RST 给客户端。 */
+  /** 解绑后端目标时，是否发RST给客户端，此参数仅适用于TCP监听器。True表示发送 RST 给客户端，False表示不发送 RST 给客户端。不传则表示不修改。 */
   DeregisterTargetRst?: boolean;
   /** 会话保持类型。NORMAL表示默认会话保持类型。QUIC_CID表示根据Quic Connection ID做会话保持。QUIC_CID只支持UDP协议。使用场景：适用于TCP/UDP/TCP_SSL/QUIC监听器。默认为 NORMAL。 */
   SessionType?: string;
@@ -2671,7 +2671,7 @@ declare interface ModifyListenerRequest {
   MaxCps?: number;
   /** 空闲连接超时时间，此参数仅适用于TCP监听器，单位：秒。默认值：900，取值范围：共享型实例和独占型实例支持：300～900，性能容量型实例支持：300~1980。如需设置超过2000s，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category),最大可设置到3600s。 */
   IdleConnectTimeout?: number;
-  /** 是否开启SNAT， True 表示开启 SNAT，False 表示不开启 SNAT。 */
+  /** 是否开启SNAT， True 表示开启 SNAT，False 表示不开启 SNAT。不传则表示不修改。 */
   SnatEnable?: boolean;
   /** 数据压缩模式 */
   DataCompressMode?: string;
@@ -2845,14 +2845,14 @@ declare interface ModifyTargetWeightRequest {
   LoadBalancerId: string;
   /** 负载均衡监听器ID。 */
   ListenerId: string;
+  /** 要修改权重的后端服务列表。 */
+  Targets: Target[];
   /** 转发规则的ID，当绑定机器到七层转发规则时，必须提供此参数或Domain+Url两者之一。 */
   LocationId?: string;
   /** 目标规则的域名，提供LocationId参数时本参数不生效。 */
   Domain?: string;
   /** 目标规则的URL，提供LocationId参数时本参数不生效。 */
   Url?: string;
-  /** 要修改权重的后端服务列表。 */
-  Targets?: Target[];
   /** 后端服务新的转发权重，取值范围：0~100，默认值10。如果设置了 Targets.Weight 参数，则此参数不生效。 */
   Weight?: number;
 }
@@ -2989,7 +2989,7 @@ declare interface SetLoadBalancerSecurityGroupsResponse {
 declare interface SetLoadBalancerStartStatusRequest {
   /** 操作类型。Start：启动实例，Stop：停止实例。 */
   OperationType: string;
-  /** 负载均衡实例ID。 */
+  /** 负载均衡实例ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。 */
   LoadBalancerId: string;
   /** 监听器ID。如果该字段为空，则表示操作负载均衡实例，如果不为空，则表示操作监听器。 */
   ListenerIds?: string[];
@@ -3163,7 +3163,7 @@ declare interface Clb {
   ModifyLoadBalancerAttributes(data: ModifyLoadBalancerAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerAttributesResponse>;
   /** 修改IPv6负载均衡7层监听器支持混绑目标特性 {@link ModifyLoadBalancerMixIpTargetRequest} {@link ModifyLoadBalancerMixIpTargetResponse} */
   ModifyLoadBalancerMixIpTarget(data: ModifyLoadBalancerMixIpTargetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerMixIpTargetResponse>;
-  /** 升级为性能容量型实例 {@link ModifyLoadBalancerSlaRequest} {@link ModifyLoadBalancerSlaResponse} */
+  /** 调整实例的性能容量型规格 {@link ModifyLoadBalancerSlaRequest} {@link ModifyLoadBalancerSlaResponse} */
   ModifyLoadBalancerSla(data: ModifyLoadBalancerSlaRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerSlaResponse>;
   /** 修改负载均衡所属项目 {@link ModifyLoadBalancersProjectRequest} {@link ModifyLoadBalancersProjectResponse} */
   ModifyLoadBalancersProject(data: ModifyLoadBalancersProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancersProjectResponse>;

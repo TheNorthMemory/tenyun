@@ -566,6 +566,44 @@ declare interface BytesSpeed {
   Values: SpeedValue[] | null;
 }
 
+/** 模版详情 */
+declare interface CodeTemplateDetail {
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 模版名称 */
+  CodeTemplateName?: string | null;
+  /** 任务类型 */
+  TaskType?: number | null;
+  /** 代码模版描述 */
+  CodeTemplateDesc?: string | null;
+  /** 文件夹id */
+  FolderId?: string | null;
+  /** 文件夹名称 */
+  FolderName?: string | null;
+  /** 责任人名称 */
+  InCharge?: string | null;
+  /** 责任人id */
+  InChargeId?: string | null;
+  /** 扩展信息 */
+  Ext?: TaskExtDsVO | null;
+  /** 模版id */
+  CodeTemplateId?: string | null;
+  /** 最后更新时间 */
+  LastUpdateTime?: string | null;
+  /** 更新人名称 */
+  UpdateUser?: string | null;
+  /** 更新人id */
+  UpdateUserId?: string | null;
+  /** 执行ip */
+  BrokerIp?: string | null;
+  /** 资源组id */
+  ResourceGroup?: string | null;
+  /** 是否提交 */
+  Submit?: boolean | null;
+  /** 任务脚本是否发生变化 */
+  ScriptChange?: boolean | null;
+}
+
 /** 文件夹列表 */
 declare interface CollectionFolderOpsDto {
   /** 总数 */
@@ -2280,6 +2318,26 @@ declare interface InstanceList {
   TryLimit?: number | null;
 }
 
+/** 日志信息 */
+declare interface InstanceLogByLine {
+  /** 返回行数 */
+  Count?: number | null;
+  /** 内容 */
+  Content?: string[] | null;
+  /** 文件是否读取完 */
+  Over?: boolean | null;
+  /** 实例状态 */
+  InstanceState?: string | null;
+  /** 实例id */
+  InstanceId?: string | null;
+  /** 任务id */
+  TaskId?: string | null;
+  /** 执行机类型 0:老执行机loader 1:新执行机woker */
+  WorkerType?: number | null;
+  /** 日志sql错误信息，包含行列信息 */
+  JobLogErrorTip?: JobLogErrorTip | null;
+}
+
 /** 实例日志简述信息 */
 declare interface InstanceLogInfo {
   /** 任务id */
@@ -2882,6 +2940,16 @@ declare interface IntegrationTaskInfo {
   CurrentSyncPosition?: number | null;
 }
 
+/** 调度任务日志错误提示信息 */
+declare interface JobLogErrorTip {
+  /** 执行日志错误信息 */
+  Content?: string | null;
+  /** 对应sql的行下标 */
+  LineNum?: number | null;
+  /** 对应sql的列下标 */
+  ColumnNum?: number | null;
+}
+
 /** 键值对 */
 declare interface KVPair {
   /** 键名 */
@@ -3442,6 +3510,20 @@ declare interface PageRoles {
   TotalCount?: number | null;
   /** 总分页页码 */
   TotalPageNumber?: number | null;
+}
+
+/** 任务模版分页 */
+declare interface PageTaskTemplateInfo {
+  /** 任务集合信息 */
+  Items?: CodeTemplateDetail[];
+  /** 总页数 */
+  PageCount?: number;
+  /** 总数量 */
+  TotalCount?: number;
+  /** 当前页 */
+  PageNumber?: number;
+  /** 每页显示数 */
+  PageSize?: number;
 }
 
 /** 键值对 */
@@ -10373,6 +10455,26 @@ declare interface DescribeTaskTableMetricOverviewResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTaskTemplatesRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 页号 */
+  PageNumber: number;
+  /** 分页大小 */
+  PageSize: number;
+  /** 排序字段, 仅支持更新时间, 取值示例- UpdateTime */
+  OrderFields?: OrderField[];
+  /** 过滤条件, 取值列表- TemplateName 模版名称- TaskType 支持任务类型- InCharge 责任人- FolderId 文件夹id- Status 提交状态- UpdateStartTime 更新时间,时间区间查询- UpdateEndTime 更新时间,时间区间查询 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeTaskTemplatesResponse {
+  /** 查询项目下所有任务信息,不包括虚拟任务和离线任务 */
+  Data?: PageTaskTemplateInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTasksForCodeTemplateRequest {
   /** 项目Id */
   ProjectId: string;
@@ -10615,6 +10717,40 @@ declare interface DiagnoseProRequest {
 declare interface DiagnoseProResponse {
   /** 结果 */
   Data?: DiagnoseRep;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DownloadLogByLineRequest {
+  /** 开始行 */
+  StartLine: number;
+  /** 读取行 */
+  LineCount: number;
+  /** 项目id */
+  ProjectId: string;
+  /** 任务id */
+  TaskId?: string;
+  /** 实例运行时间 */
+  CurRunDate?: string;
+  /** 任务详情id，用于读取切分的日志文件 */
+  DetailId?: string;
+  /** base64编码的文件路径 */
+  FilePath?: string;
+  /** 任务记录id */
+  RecordId?: string;
+  /** 子job id */
+  SubJobId?: string;
+  /** hiveSql:34,sparkSql:36 dlcSql: 32 */
+  JobType?: string;
+  /** true:解析错误信息。false:不解析错误信息 */
+  ParseErrorTip?: boolean;
+  /** log 0 code 1 result 2 custo 3 */
+  FileType?: number;
+}
+
+declare interface DownloadLogByLineResponse {
+  /** 日志信息 */
+  Data?: InstanceLogByLine | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12504,6 +12640,8 @@ declare interface UpdateCodeTemplateRequest {
   RequestFromSource?: string;
   /** 脚本是否发生变化 */
   ScriptChange?: boolean;
+  /** 转Base64的代码内容 */
+  Content?: string;
 }
 
 declare interface UpdateCodeTemplateResponse {
@@ -13008,6 +13146,8 @@ declare interface Wedata {
   DescribeTaskScript(data: DescribeTaskScriptRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskScriptResponse>;
   /** 查询实时任务表粒度指标概览 {@link DescribeTaskTableMetricOverviewRequest} {@link DescribeTaskTableMetricOverviewResponse} */
   DescribeTaskTableMetricOverview(data: DescribeTaskTableMetricOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskTableMetricOverviewResponse>;
+  /** 查询项目任务模版列表 {@link DescribeTaskTemplatesRequest} {@link DescribeTaskTemplatesResponse} */
+  DescribeTaskTemplates(data: DescribeTaskTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskTemplatesResponse>;
   /** 分页查询引用模板的任务列表 {@link DescribeTasksForCodeTemplateRequest} {@link DescribeTasksForCodeTemplateResponse} */
   DescribeTasksForCodeTemplate(data: DescribeTasksForCodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksForCodeTemplateResponse>;
   /** 查询规则模板维度分布情况 {@link DescribeTemplateDimCountRequest} {@link DescribeTemplateDimCountResponse} */
@@ -13034,6 +13174,8 @@ declare interface Wedata {
   DescribeWorkflowTaskCount(data: DescribeWorkflowTaskCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkflowTaskCountResponse>;
   /** 实例诊断信息-新 {@link DiagnoseProRequest} {@link DiagnoseProResponse} */
   DiagnosePro(data: DiagnoseProRequest, config?: AxiosRequestConfig): AxiosPromise<DiagnoseProResponse>;
+  /** 按行下载日志信息 {@link DownloadLogByLineRequest} {@link DownloadLogByLineResponse} */
+  DownloadLogByLine(data: DownloadLogByLineRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadLogByLineResponse>;
   /** 调试运行集成任务 {@link DryRunDIOfflineTaskRequest} {@link DryRunDIOfflineTaskResponse} */
   DryRunDIOfflineTask(data: DryRunDIOfflineTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DryRunDIOfflineTaskResponse>;
   /** 编排空间批量操作页面查找全部的文件夹 {@link FindAllFolderRequest} {@link FindAllFolderResponse} */

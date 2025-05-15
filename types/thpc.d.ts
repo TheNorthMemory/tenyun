@@ -1012,6 +1012,18 @@ declare interface ModifyWorkspacesAttributeResponse {
   RequestId?: string;
 }
 
+declare interface ModifyWorkspacesRenewFlagRequest {
+  /** 工作空间列表 */
+  SpaceIds: string[];
+  /** 自动续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。 */
+  RenewFlag: string;
+}
+
+declare interface ModifyWorkspacesRenewFlagResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SetAutoScalingConfigurationRequest {
   /** 集群ID。 */
   ClusterId: string;
@@ -1456,7 +1468,7 @@ declare namespace V20220401 {
     SecurityGroupIds?: string[];
     /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
     ClientToken?: string;
-    /** 队列名称。不指定则为默认队列。SLURM默认队列为：compute。SGE默认队列为：all.q。 */
+    /** 队列名称。不指定则为默认队列。SLURM默认队列为：compute。 */
     QueueName?: string;
     /** 添加节点角色。默认值：ComputeCompute：计算节点。Login：登录节点。 */
     NodeRole?: string;
@@ -1520,7 +1532,7 @@ declare namespace V20220401 {
     ComputeNode?: ComputeNode;
     /** 指定计算节点的数量。默认取值：0。 */
     ComputeNodeCount?: number;
-    /** 调度器类型。默认取值：SLURM。SGE：SGE调度器。SLURM：SLURM调度器。 */
+    /** 调度器类型。默认取值：SLURM。SLURM：SLURM调度器。 */
     SchedulerType?: string;
     /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前支持部分公有镜像和自定义镜像。 */
     ImageId?: string;
@@ -1956,7 +1968,7 @@ declare namespace V20211109 {
     ComputeNode?: ComputeNode;
     /** 指定计算节点的数量。默认取值：0。 */
     ComputeNodeCount?: number;
-    /** 调度器类型。SGE：SGE调度器。SLURM：SLURM调度器。 */
+    /** 调度器类型。SLURM：SLURM调度器。 */
     SchedulerType?: string;
     /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜像。 */
     ImageId?: string;
@@ -2065,6 +2077,8 @@ declare interface Thpc {
   ModifyInitNodeScripts(data: ModifyInitNodeScriptsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInitNodeScriptsResponse>;
   /** 修改工作空间的属性 {@link ModifyWorkspacesAttributeRequest} {@link ModifyWorkspacesAttributeResponse} */
   ModifyWorkspacesAttribute(data: ModifyWorkspacesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkspacesAttributeResponse>;
+  /** 修改工作空间的续费标识 {@link ModifyWorkspacesRenewFlagRequest} {@link ModifyWorkspacesRenewFlagResponse} */
+  ModifyWorkspacesRenewFlag(data: ModifyWorkspacesRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkspacesRenewFlagResponse>;
   /** 设置弹性伸缩配置信息 {@link SetAutoScalingConfigurationRequest} {@link SetAutoScalingConfigurationResponse} */
   SetAutoScalingConfiguration(data: SetAutoScalingConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<SetAutoScalingConfigurationResponse>;
   /** 销毁工作空间 {@link TerminateWorkspacesRequest} {@link TerminateWorkspacesResponse} */

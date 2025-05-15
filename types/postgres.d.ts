@@ -1337,7 +1337,7 @@ declare interface CreateReadOnlyDBInstanceRequest {
   NeedSupportIpv6?: number;
   /** 实例名(后续支持) */
   Name?: string;
-  /** 【废弃】不再需要指定，内核版本号与主实例保持一致 */
+  /** 不再需要指定，内核版本号与主实例保持一致 */
   DBVersion?: string;
   /** 专属集群ID */
   DedicatedClusterId?: string;
@@ -2445,7 +2445,7 @@ declare interface InquiryPriceUpgradeDBInstanceRequest {
   Memory: number;
   /** 实例ID，形如postgres-hez4fh0v */
   DBInstanceId: string;
-  /** 【废弃参数，不再生效】，实例计费类型。 */
+  /** 实例计费类型。 */
   InstanceChargeType?: string;
   /** 实例的Cpu大小，单位Core */
   Cpu?: number;
