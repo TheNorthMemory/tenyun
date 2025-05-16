@@ -2854,18 +2854,6 @@ declare interface OpenDBExtranetAccessResponse {
   RequestId?: string;
 }
 
-declare interface OpenServerlessDBExtranetAccessRequest {
-  /** 实例的唯一标识符 */
-  DBInstanceId?: string;
-  /** 实例名称 */
-  DBInstanceName?: string;
-}
-
-declare interface OpenServerlessDBExtranetAccessResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface RebalanceReadOnlyGroupRequest {
   /** 只读组ID */
   ReadOnlyGroupId: string;
@@ -3089,7 +3077,7 @@ declare interface Postgres {
   CreateBaseBackup(data: CreateBaseBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBaseBackupResponse>;
   /** 创建实例网络 {@link CreateDBInstanceNetworkAccessRequest} {@link CreateDBInstanceNetworkAccessResponse} */
   CreateDBInstanceNetworkAccess(data: CreateDBInstanceNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceNetworkAccessResponse>;
-  /** 创建实例（废弃） {@link CreateDBInstancesRequest} {@link CreateDBInstancesResponse} */
+  /** @deprecated 创建实例（废弃） {@link CreateDBInstancesRequest} {@link CreateDBInstancesResponse} */
   CreateDBInstances(data: CreateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstancesResponse>;
   /** 创建数据库 {@link CreateDatabaseRequest} {@link CreateDatabaseResponse} */
   CreateDatabase(data: CreateDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatabaseResponse>;
@@ -3161,7 +3149,7 @@ declare interface Postgres {
   DescribeDBInstanceSecurityGroups(data?: DescribeDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceSecurityGroupsResponse>;
   /** 查询实例列表 {@link DescribeDBInstancesRequest} {@link DescribeDBInstancesResponse} */
   DescribeDBInstances(data?: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
-  /** 获取慢查询日志 （废弃） {@link DescribeDBSlowlogsRequest} {@link DescribeDBSlowlogsResponse} */
+  /** @deprecated 获取慢查询日志 （废弃） {@link DescribeDBSlowlogsRequest} {@link DescribeDBSlowlogsResponse} */
   DescribeDBSlowlogs(data: DescribeDBSlowlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSlowlogsResponse>;
   /** 查询支持的数据库版本 {@link DescribeDBVersionsRequest} {@link DescribeDBVersionsResponse} */
   DescribeDBVersions(data?: DescribeDBVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBVersionsResponse>;
@@ -3209,7 +3197,7 @@ declare interface Postgres {
   DestroyDBInstance(data: DestroyDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyDBInstanceResponse>;
   /** 解隔离实例 {@link DisIsolateDBInstancesRequest} {@link DisIsolateDBInstancesResponse} */
   DisIsolateDBInstances(data: DisIsolateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DisIsolateDBInstancesResponse>;
-  /** 初始化实例（废弃） {@link InitDBInstancesRequest} {@link InitDBInstancesResponse} */
+  /** @deprecated 初始化实例（废弃） {@link InitDBInstancesRequest} {@link InitDBInstancesResponse} */
   InitDBInstances(data: InitDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InitDBInstancesResponse>;
   /** 查询实例创建售卖价格 {@link InquiryPriceCreateDBInstancesRequest} {@link InquiryPriceCreateDBInstancesResponse} */
   InquiryPriceCreateDBInstances(data: InquiryPriceCreateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceCreateDBInstancesResponse>;
@@ -3265,8 +3253,6 @@ declare interface Postgres {
   ModifySwitchTimePeriod(data: ModifySwitchTimePeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySwitchTimePeriodResponse>;
   /** 开通实例公网地址 {@link OpenDBExtranetAccessRequest} {@link OpenDBExtranetAccessResponse} */
   OpenDBExtranetAccess(data: OpenDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenDBExtranetAccessResponse>;
-  /** @deprecated 【废弃】开通serverlessDB实例公网地址 {@link OpenServerlessDBExtranetAccessRequest} {@link OpenServerlessDBExtranetAccessResponse} */
-  OpenServerlessDBExtranetAccess(data?: OpenServerlessDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenServerlessDBExtranetAccessResponse>;
   /** 均衡只读组内实例的负载 {@link RebalanceReadOnlyGroupRequest} {@link RebalanceReadOnlyGroupResponse} */
   RebalanceReadOnlyGroup(data: RebalanceReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RebalanceReadOnlyGroupResponse>;
   /** 将只读实例从只读组中移除 {@link RemoveDBInstanceFromReadOnlyGroupRequest} {@link RemoveDBInstanceFromReadOnlyGroupResponse} */
@@ -3285,7 +3271,7 @@ declare interface Postgres {
   SwitchDBInstancePrimary(data: SwitchDBInstancePrimaryRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDBInstancePrimaryResponse>;
   /** 解除数据库账号锁定 {@link UnlockAccountRequest} {@link UnlockAccountResponse} */
   UnlockAccount(data: UnlockAccountRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockAccountResponse>;
-  /** 升级实例配置（废弃） {@link UpgradeDBInstanceRequest} {@link UpgradeDBInstanceResponse} */
+  /** @deprecated 升级实例配置（废弃） {@link UpgradeDBInstanceRequest} {@link UpgradeDBInstanceResponse} */
   UpgradeDBInstance(data: UpgradeDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDBInstanceResponse>;
   /** 升级实例内核版本号 {@link UpgradeDBInstanceKernelVersionRequest} {@link UpgradeDBInstanceKernelVersionResponse} */
   UpgradeDBInstanceKernelVersion(data: UpgradeDBInstanceKernelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDBInstanceKernelVersionResponse>;

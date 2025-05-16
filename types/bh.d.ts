@@ -156,6 +156,8 @@ declare interface AssetSyncStatus {
   LastStatus?: number;
   /** 同步任务是否正在进行中 */
   InProcess?: boolean;
+  /** 任务错误消息 */
+  ErrMsg?: string;
 }
 
 /** 查询改密计划详情 */
@@ -294,6 +296,8 @@ declare interface Device {
   EnableSSL?: number;
   /** 已上传的SSL证书名称 */
   SSLCertName?: string;
+  /** IOA侧的资源ID */
+  IOAId?: number;
 }
 
 /** 主机账号 */
@@ -372,6 +376,20 @@ declare interface Group {
   Department?: Department;
   /** 个数 */
   Count?: number;
+}
+
+/** 同步过来的ioa用户分组信息 */
+declare interface IOAUserGroup {
+  /** ioa用户组织id */
+  OrgId?: number;
+  /** ioa用户组织名称 */
+  OrgName?: string;
+  /** ioa用户组织id路径 */
+  OrgIdPath?: string;
+  /** ioa用户组织名称路径 */
+  OrgNamePath?: string;
+  /** ioa关联用户源类型 */
+  Source?: number;
 }
 
 /** 登录日志 */
@@ -530,6 +548,12 @@ declare interface Resource {
   ClientAccess?: number;
   /** 1 默认值，外网访问开启，0 外网访问关闭，2 外网访问开通中，3 外网访问关闭中 */
   ExternalAccess?: number;
+  /** 0默认值。0-免费版（试用版）ioa，1-付费版ioa */
+  IOAResource?: number;
+  /** 零信任堡垒机用户扩展包个数。1个扩展包对应20个用户数 */
+  PackageIOAUserCount?: number;
+  /** 零信任堡垒机带宽扩展包个数。一个扩展包表示4M带宽 */
+  PackageIOABandwidth?: number;
 }
 
 /** 立即执行改密任务的入参 */
@@ -796,6 +820,10 @@ declare interface User {
   Status?: string;
   /** 权限版本 */
   AclVersion?: number;
+  /** 用户来源，0-bh,1-ioa */
+  UserFrom?: number;
+  /** ioa同步过来的用户相关信息 */
+  IOAUserGroup?: IOAUserGroup;
 }
 
 declare interface AccessDevicesRequest {
@@ -1787,12 +1815,16 @@ declare interface DescribeUsersRequest {
   AuthorizedDeviceIdSet?: number[];
   /** 查询具有指定应用资产ID访问权限的用户 */
   AuthorizedAppAssetIdSet?: number[];
-  /** 认证方式，0 - 本地, 1 - LDAP, 2 - OAuth, 不传为全部 */
+  /** 认证方式，0 - 本地, 1 - LDAP, 2 - OAuth, 3-ioa 不传为全部 */
   AuthTypeSet?: number[];
   /** 部门ID，用于过滤属于某个部门的用户 */
   DepartmentId?: string;
   /** 参数过滤数组 */
   Filters?: Filter[];
+  /** 是否获取cam用户, 0-否，1-是 */
+  IsCamUser?: number;
+  /** 用户来源，0-bh，1-ioa,不传为全部 */
+  UserFromSet?: number[];
 }
 
 declare interface DescribeUsersResponse {

@@ -1067,44 +1067,46 @@ declare namespace V20180525 {
 
   /** 集群高级配置 */
   interface ClusterAdvancedSettings {
-    /** 是否启用IPVS */
-    IPVS?: boolean;
     /** 是否启用集群节点自动扩缩容(创建集群流程不支持开启此功能) */
     AsEnabled?: boolean;
-    /** 集群使用的runtime类型，包括"docker"和"containerd"两种类型，默认为"docker" */
-    ContainerRuntime?: string;
-    /** 集群中节点NodeName类型（包括 hostname,lan-ip两种形式，默认为lan-ip。如果开启了hostname模式，创建节点时需要设置HostName参数，并且InstanceName需要和HostName一致） */
-    NodeNameType?: string;
-    /** 集群自定义参数 */
-    ExtraArgs?: ClusterExtraArgs;
-    /** 集群网络类型（包括GR(全局路由)和VPC-CNI两种模式，默认为GR。 */
-    NetworkType?: string;
-    /** 集群VPC-CNI模式是否为非固定IP，默认: FALSE 固定IP。 */
-    IsNonStaticIpMode?: boolean;
-    /** 是否启用集群删除保护 */
-    DeletionProtection?: boolean;
-    /** 集群的网络代理模型，目前tke集群支持的网络代理模式有三种：iptables,ipvs,ipvs-bpf，此参数仅在使用ipvs-bpf模式时使用，三种网络模式的参数设置关系如下：iptables模式：IPVS和KubeProxyMode都不设置ipvs模式: 设置IPVS为true, KubeProxyMode不设置ipvs-bpf模式: 设置KubeProxyMode为kube-proxy-bpf使用ipvs-bpf的网络模式需要满足以下条件：1. 集群版本必须为1.14及以上；2. 系统镜像必须是: Tencent Linux 2.4； */
-    KubeProxyMode?: string;
     /** 是否开启审计开关 */
     AuditEnabled?: boolean;
-    /** 审计日志上传到的logset日志集 */
-    AuditLogsetId?: string;
     /** 审计日志上传到的topic */
     AuditLogTopicId?: string;
-    /** 区分共享网卡多IP模式和独立网卡模式，共享网卡多 IP 模式填写"tke-route-eni"，独立网卡模式填写"tke-direct-eni"，默认为共享网卡模式 */
-    VpcCniType?: string;
-    /** 运行时版本 */
-    RuntimeVersion?: string;
-    /** 是否开节点podCIDR大小的自定义模式 */
-    EnableCustomizedPodCIDR?: boolean;
+    /** 审计日志上传到的logset日志集 */
+    AuditLogsetId?: string;
     /** 自定义模式下的基础pod数量 */
     BasePodNumber?: number;
     /** 启用 CiliumMode 的模式，空值表示不启用，“clusterIP” 表示启用 Cilium 支持 ClusterIP */
     CiliumMode?: string;
+    /** 集群使用的runtime类型，包括"docker"和"containerd"两种类型，默认为"docker" */
+    ContainerRuntime?: string;
+    /** 是否启用集群删除保护 */
+    DeletionProtection?: boolean;
+    /** 是否开节点podCIDR大小的自定义模式 */
+    EnableCustomizedPodCIDR?: boolean;
+    /** 元数据拆分存储Etcd配置 */
+    EtcdOverrideConfigs?: EtcdOverrideConfig[];
+    /** 集群自定义参数 */
+    ExtraArgs?: ClusterExtraArgs;
+    /** 是否启用IPVS */
+    IPVS?: boolean;
     /** 集群VPC-CNI模式下是否是双栈集群，默认false，表明非双栈集群。 */
     IsDualStack?: boolean;
+    /** 集群VPC-CNI模式是否为非固定IP，默认: FALSE 固定IP。 */
+    IsNonStaticIpMode?: boolean;
+    /** 集群的网络代理模型，目前tke集群支持的网络代理模式有三种：iptables,ipvs,ipvs-bpf，此参数仅在使用ipvs-bpf模式时使用，三种网络模式的参数设置关系如下：iptables模式：IPVS和KubeProxyMode都不设置ipvs模式: 设置IPVS为true, KubeProxyMode不设置ipvs-bpf模式: 设置KubeProxyMode为kube-proxy-bpf使用ipvs-bpf的网络模式需要满足以下条件：1. 集群版本必须为1.14及以上；2. 系统镜像必须是: Tencent Linux 2.4； */
+    KubeProxyMode?: string;
+    /** 集群网络类型（包括GR(全局路由)和VPC-CNI两种模式，默认为GR。 */
+    NetworkType?: string;
+    /** 集群中节点NodeName类型（包括 hostname,lan-ip两种形式，默认为lan-ip。如果开启了hostname模式，创建节点时需要设置HostName参数，并且InstanceName需要和HostName一致） */
+    NodeNameType?: string;
     /** 是否开启QGPU共享 */
     QGPUShareEnable?: boolean;
+    /** 运行时版本 */
+    RuntimeVersion?: string;
+    /** 区分共享网卡多IP模式和独立网卡模式，共享网卡多 IP 模式填写"tke-route-eni"，独立网卡模式填写"tke-direct-eni"，默认为共享网卡模式 */
+    VpcCniType?: string;
   }
 
   /** 集群关联的伸缩组信息 */
@@ -1235,14 +1237,14 @@ declare namespace V20180525 {
 
   /** 集群master自定义参数 */
   interface ClusterExtraArgs {
+    /** etcd自定义参数，只支持独立集群 */
+    Etcd?: string[] | null;
     /** kube-apiserver自定义参数，参数格式为["k1=v1", "k1=v2"]， 例如["max-requests-inflight=500","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"] */
     KubeAPIServer?: string[] | null;
     /** kube-controller-manager自定义参数 */
     KubeControllerManager?: string[] | null;
     /** kube-scheduler自定义参数 */
     KubeScheduler?: string[] | null;
-    /** etcd自定义参数，只支持独立集群 */
-    Etcd?: string[] | null;
   }
 
   /** 弹性容器集群内网访问LB信息 */
@@ -1767,6 +1769,12 @@ declare namespace V20180525 {
     Value?: string;
   }
 
+  /** 元数据拆分存储Etcd配置 */
+  interface EtcdOverrideConfig {
+    /** k8s资源，支持核心资源，控制类资源，配置及敏感资源 */
+    Resources: string[];
+  }
+
   /** 服务事件 */
   interface Event {
     /** pod名称 */
@@ -1992,7 +2000,7 @@ declare namespace V20180525 {
     /** 添加时间 */
     CreatedTime?: string;
     /** 节点内网IP */
-    LanIP?: string;
+    LanIP?: string | null;
     /** 资源池ID */
     NodePoolId?: string;
     /** 自动伸缩组ID */

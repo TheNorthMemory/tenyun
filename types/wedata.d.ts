@@ -320,6 +320,18 @@ declare interface ApproveType {
   Classification: string;
 }
 
+/** 操作资源DTO */
+declare interface AsyncResourceVO {
+  /** 处理Id */
+  ProcessId?: number | null;
+  /** 资源Id */
+  ResourceId?: string | null;
+  /** 资源名称 */
+  ResourceName?: string | null;
+  /** 自定义信息 */
+  ExtraInfo?: ParamInfo[] | null;
+}
+
 /** aiops基础信息 */
 declare interface AttributeItemDTO {
   /** key */
@@ -600,8 +612,10 @@ declare interface CodeTemplateDetail {
   ResourceGroup?: string | null;
   /** 是否提交 */
   Submit?: boolean | null;
-  /** 任务脚本是否发生变化 */
+  /** 模版脚本是否发生变化 */
   ScriptChange?: boolean | null;
+  /** 代码模版脚本，base64编码返回 */
+  Content?: string | null;
 }
 
 /** 文件夹列表 */
@@ -8057,6 +8071,22 @@ declare interface DescribeBatchOperateTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCodeTemplateDetailRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 模版Id */
+  CodeTemplateId: string;
+  /** 是否需要返回脚本内容，默认false。 */
+  NeedReturnScriptContent?: boolean;
+}
+
+declare interface DescribeCodeTemplateDetailResponse {
+  /** 代码详情 */
+  Data?: CodeTemplateDetail | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeColumnLineageRequest {
   /** 查询方向枚举值- INPUT- OUTPUT- BOTH */
   Direction: string;
@@ -10895,6 +10925,22 @@ declare interface GenHiveTableDDLSqlResponse {
   RequestId?: string;
 }
 
+declare interface GetBatchDetailErrorLogRequest {
+  /** 批量操作ID */
+  JobId: number;
+  /** 资源对象ID */
+  ResourceId: string;
+  /** 项目ID */
+  ProjectId?: string;
+}
+
+declare interface GetBatchDetailErrorLogResponse {
+  /** 日志返回 */
+  Data?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetCosTokenRequest {
   /** 项目id */
   ProjectId: string;
@@ -11188,6 +11234,34 @@ declare interface KillScheduleInstancesRequest {
 declare interface KillScheduleInstancesResponse {
   /** 结果 */
   Data?: BatchOperateResultOpsDto;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListBatchDetailRequest {
+  /** 批量操作历史Id */
+  JobId: number;
+  /** 项目Id */
+  ProjectId?: string;
+}
+
+declare interface ListBatchDetailResponse {
+  /** 批量操作ID */
+  JobId?: number | null;
+  /** 运行类型：ASYNC-异步SYNC-同步 */
+  RunType?: string | null;
+  /** 成功列表 */
+  SuccessResource?: AsyncResourceVO[] | null;
+  /** 失败列表 */
+  FailResource?: AsyncResourceVO[] | null;
+  /** job类型BATCH_DELETE --批量删除：1、任务名称：ResourceNameBATCH_CREATE_VERSION --批量提交：1、任务名称：ResourceId 2、资源组：GroupIdBATCH_MODIFY_DATASOURCE --批量修改数据源：1、任务名称：ResourceNameBATCH_MODIFY_INCHARGE --批量修改责任人：1、任务名称：ResourceNameBATCH_MODIFY_PARAMETER --批量修改参数：1、任务名称：ResourceNameBATCH_MODIFY_SCHEDULE --批量修改调度计划：1、任务名称：ResourceNameBATCH_MODIFY_GROUPID --批量修改资源组：1、任务名称：ResourceNameBATCH_MODIFY_CONFIG --批量修改高级配置：1、任务名称：ResourceNameBATCH_MODIFY_SCHEDULE_PARAMETER --批量修改调度参数：1、任务名称：ResourceNameFORM_CREATE_VERSION--模版提交 */
+  JobType?: string | null;
+  /** CREATING("CREATING", "创建中"),INIT("INIT", "已被创建"),RUNNING("RUNNING", "运行中"),SUCCESS("SUCCESS", "成功"),FAIL("FAIL", "失败"),PART_SUCCESS("PART_SUCCESS", "部分成功"),PART_SUCCESS_WITH_ALARM("PART_SUCCESS_WITH_ALARM", "部分成功有告警"),SUCCESS_WITH_ALARM("SUCCESS_WITH_ALARM", "成功有告警"),UNKNOWN("UNKNOWN", "未知状态"); */
+  JobStatus?: string | null;
+  /** 资源总数 */
+  TotalResource?: number | null;
+  /** 批量提交是是否需要审批，其他的批量操作默认为null */
+  NeedApprove?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12932,6 +13006,8 @@ declare interface Wedata {
   DescribeBaseBizCatalogs(data?: DescribeBaseBizCatalogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaseBizCatalogsResponse>;
   /** 批量操作页面获取任务列表 {@link DescribeBatchOperateTaskRequest} {@link DescribeBatchOperateTaskResponse} */
   DescribeBatchOperateTask(data: DescribeBatchOperateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchOperateTaskResponse>;
+  /** 查询代码模版具体详情 {@link DescribeCodeTemplateDetailRequest} {@link DescribeCodeTemplateDetailResponse} */
+  DescribeCodeTemplateDetail(data: DescribeCodeTemplateDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCodeTemplateDetailResponse>;
   /** 列出字段血缘信息 {@link DescribeColumnLineageRequest} {@link DescribeColumnLineageResponse} */
   DescribeColumnLineage(data: DescribeColumnLineageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeColumnLineageResponse>;
   /** 查询表的所有列元数据 {@link DescribeColumnsMetaRequest} {@link DescribeColumnsMetaResponse} */
@@ -13186,6 +13262,8 @@ declare interface Wedata {
   FreezeTasksByWorkflowIds(data: FreezeTasksByWorkflowIdsRequest, config?: AxiosRequestConfig): AxiosPromise<FreezeTasksByWorkflowIdsResponse>;
   /** 生成建hive表的sql {@link GenHiveTableDDLSqlRequest} {@link GenHiveTableDDLSqlResponse} */
   GenHiveTableDDLSql(data: GenHiveTableDDLSqlRequest, config?: AxiosRequestConfig): AxiosPromise<GenHiveTableDDLSqlResponse>;
+  /** 获取批量操作错误日志 {@link GetBatchDetailErrorLogRequest} {@link GetBatchDetailErrorLogResponse} */
+  GetBatchDetailErrorLog(data: GetBatchDetailErrorLogRequest, config?: AxiosRequestConfig): AxiosPromise<GetBatchDetailErrorLogResponse>;
   /** 开发空间-获取cos token {@link GetCosTokenRequest} {@link GetCosTokenResponse} */
   GetCosToken(data: GetCosTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetCosTokenResponse>;
   /** 开发空间-获取数据开发脚本信息 {@link GetFileInfoRequest} {@link GetFileInfoResponse} */
@@ -13206,6 +13284,8 @@ declare interface Wedata {
   KillOpsMakePlanInstances(data: KillOpsMakePlanInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<KillOpsMakePlanInstancesResponse>;
   /** 实例运维-批量终止l实例 {@link KillScheduleInstancesRequest} {@link KillScheduleInstancesResponse} */
   KillScheduleInstances(data?: KillScheduleInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<KillScheduleInstancesResponse>;
+  /** 获取操作详情列表 {@link ListBatchDetailRequest} {@link ListBatchDetailResponse} */
+  ListBatchDetail(data: ListBatchDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListBatchDetailResponse>;
   /** 获取调度实例列表 {@link ListInstancesRequest} {@link ListInstancesResponse} */
   ListInstances(data: ListInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ListInstancesResponse>;
   /** 锁定实时集成任务 {@link LockIntegrationTaskRequest} {@link LockIntegrationTaskResponse} */

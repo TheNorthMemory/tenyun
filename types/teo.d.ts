@@ -375,13 +375,13 @@ declare interface BotConfig {
   /** 用户画像规则。如果为null，默认使用历史配置。 */
   BotPortraitRule?: BotPortraitRule;
   /** Bot智能分析。如果为null，默认使用历史配置。 */
-  IntelligenceRule?: IntelligenceRule | null;
+  IntelligenceRule?: IntelligenceRule;
   /** Bot自定义规则。如果为null，默认使用历史配置。 */
   BotUserRules?: BotUserRule[];
   /** Bot主动特征识别规则。 */
   AlgDetectRule?: AlgDetectRule[];
   /** Bot托管定制策略，入参可不填，仅出参使用。 */
-  Customizes?: BotUserRule[] | null;
+  Customizes?: BotUserRule[];
 }
 
 /** Bot扩展处置方式，多处置动作组合。 */
@@ -389,7 +389,7 @@ declare interface BotExtendAction {
   /** 处置动作，取值有：monitor：观察；alg：JavaScript挑战；captcha：托管挑战；random：随机，按照ExtendActions分配处置动作和比例；silence：静默；shortdelay：短时响应；longdelay：长时响应。 */
   Action: string;
   /** 处置方式的触发概率，范围0-100。 */
-  Percent?: number | null;
+  Percent?: number;
 }
 
 /** Bot 规则，下列规则ID可参考接口 DescribeBotManagedRules返回的ID信息 */
@@ -399,15 +399,15 @@ declare interface BotManagedRule {
   /** 本规则的ID。仅出参使用。 */
   RuleID?: number;
   /** 放行的规则ID。默认所有规则不配置放行。 */
-  TransManagedIds?: number[] | null;
+  TransManagedIds?: number[];
   /** JS挑战的规则ID。默认所有规则不配置JS挑战。 */
-  AlgManagedIds?: number[] | null;
+  AlgManagedIds?: number[];
   /** 数字验证码的规则ID。默认所有规则不配置数字验证码。 */
-  CapManagedIds?: number[] | null;
+  CapManagedIds?: number[];
   /** 观察的规则ID。默认所有规则不配置观察。 */
-  MonManagedIds?: number[] | null;
+  MonManagedIds?: number[];
   /** 拦截的规则ID。默认所有规则不配置拦截。 */
-  DropManagedIds?: number[] | null;
+  DropManagedIds?: number[];
 }
 
 /** bot 用户画像规则 */
@@ -417,13 +417,13 @@ declare interface BotPortraitRule {
   /** 本规则的ID。仅出参使用。 */
   RuleID?: number;
   /** JS挑战的规则ID。默认所有规则不配置JS挑战。 */
-  AlgManagedIds?: number[] | null;
+  AlgManagedIds?: number[];
   /** 数字验证码的规则ID。默认所有规则不配置数字验证码。 */
-  CapManagedIds?: number[] | null;
+  CapManagedIds?: number[];
   /** 观察的规则ID。默认所有规则不配置观察。 */
-  MonManagedIds?: number[] | null;
+  MonManagedIds?: number[];
   /** 拦截的规则ID。默认所有规则不配置拦截。 */
-  DropManagedIds?: number[] | null;
+  DropManagedIds?: number[];
 }
 
 /** Bot自定义规则 */
@@ -1133,7 +1133,7 @@ declare interface ExceptConfig {
   /** 配置开关，取值有：on：开启；off：关闭。 */
   Switch: string;
   /** 例外规则详情。如果为null，默认使用历史配置。 */
-  ExceptUserRules?: ExceptUserRule[] | null;
+  ExceptUserRules?: ExceptUserRule[];
 }
 
 /** 例外规则的配置，包含生效的条件，生效的范围。 */
@@ -1147,11 +1147,11 @@ declare interface ExceptUserRule {
   /** 规则ID。仅出参使用。默认由底层生成。 */
   RuleID?: number;
   /** 更新时间，如果为null，默认由底层按当前时间生成。 */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 匹配条件。 */
-  ExceptUserRuleConditions?: ExceptUserRuleCondition[] | null;
+  ExceptUserRuleConditions?: ExceptUserRuleCondition[];
   /** 规则生效的范围。 */
-  ExceptUserRuleScope?: ExceptUserRuleScope | null;
+  ExceptUserRuleScope?: ExceptUserRuleScope;
   /** 优先级，取值范围0-100。如果为null，默认由底层设置为0。 */
   RulePriority?: number;
 }
@@ -1173,11 +1173,11 @@ declare interface ExceptUserRuleScope {
   /** 例外规则类型。其中complete模式代表全量数据进行例外，partial模式代表可选择指定模块指定字段进行例外，该字段取值有：complete：完全跳过模式；partial：部分跳过模式。 */
   Type?: string;
   /** 生效的模块，该字段取值有：waf：托管规则；rate：速率限制；acl：自定义规则；cc：cc攻击防护；bot：Bot防护。 */
-  Modules?: string[] | null;
+  Modules?: string[];
   /** 跳过部分规则ID的例外规则详情。如果为null，默认使用历史配置。 */
-  PartialModules?: PartialModule[] | null;
+  PartialModules?: PartialModule[];
   /** 跳过具体字段不去扫描的例外规则详情。如果为null，默认使用历史配置。 */
-  SkipConditions?: SkipCondition[] | null;
+  SkipConditions?: SkipCondition[];
 }
 
 /** 失败原因 */
@@ -1215,9 +1215,9 @@ declare interface Filter {
 /** 慢速攻击的首段包配置。 */
 declare interface FirstPartConfig {
   /** 开关，取值有：on：开启；off：关闭。 */
-  Switch: string | null;
+  Switch: string;
   /** 首段包的统计时长，单位是秒，即期望首段包的统计时长是多少，默认5秒。 */
-  StatTime?: number | null;
+  StatTime?: number;
 }
 
 /** 缓存遵循源站配置。 */
@@ -1525,9 +1525,9 @@ declare interface IntelligenceRuleItem {
 /** IP黑白名单及IP区域控制配置 */
 declare interface IpTableConfig {
   /** 开关，取值有：on：开启；off：关闭； */
-  Switch: string | null;
+  Switch: string;
   /** 基础管控规则。如果为null，默认使用历史配置。 */
-  IpTableRules?: IpTableRule[] | null;
+  IpTableRules?: IpTableRule[];
 }
 
 /** 自定义规则-基础访问管控配置。 */
@@ -1545,7 +1545,7 @@ declare interface IpTableRule {
   /** 规则启用状态。取值有： on：启用； off：未启用。当入参缺省时，按 on 取值。 */
   Status?: string;
   /** 规则名。 */
-  RuleName?: string | null;
+  RuleName?: string;
   /** 匹配内容。支持多值输入。当输入多个匹配值时，请使用英文逗号分隔；当 MatchFrom 为 ua 时，不支持多值输入；当 Operator 为 is_empty 或 not_exists 时，本字段入参值无效。 */
   MatchContent?: string;
 }
@@ -2071,7 +2071,49 @@ declare interface PartialModule {
   /** 模块名称，取值为：waf：托管规则。 */
   Module?: string;
   /** 模块下的需要例外的具体规则ID列表。 */
-  Include?: number[] | null;
+  Include?: number[];
+}
+
+/** 套餐信息 */
+declare interface Plan {
+  /** 套餐类型。取值有：plan-trial: 试用版套餐；plan-personal: 个人版套餐；plan-basic: 基础版套餐；plan-standard: 标准版套餐；plan-enterprise-v2: 企业版套餐；plan-enterprise-model-a: 企业版 Model A 套餐。plan-enterprise: 旧企业版套餐。 */
+  PlanType?: string;
+  /** 套餐 ID。形如 edgeone-2y041pblwaxe。 */
+  PlanId?: string;
+  /** 服务区域，取值有：mainland: 中国大陆；overseas: 全球（不包括中国大陆)；global: 全球（包括中国大陆)。 */
+  Area?: string;
+  /** 套餐状态，取值有：normal：正常状态；expiring-soon：即将到期状态；expired：到期状态；isolated：隔离状态；overdue-isolated：欠费隔离状态。 */
+  Status?: string;
+  /** 付费类型，取值有：0: 后付费；1: 预付费。 */
+  PayMode?: number;
+  /** 套餐绑定的站点信息，包括站点id和站点名称，站点状态。 */
+  ZonesInfo?: ZoneInfo[];
+  /** 套餐内智能加速请求数规格，单位：次。 */
+  SmartRequestCapacity?: number;
+  /** 套餐内VAU规格，单位：个。 */
+  VAUCapacity?: number;
+  /** 套餐内内容加速流量规格，单位：字节。 */
+  AccTrafficCapacity?: number;
+  /** 套餐内智能加速流量规格，单位：字节。 */
+  SmartTrafficCapacity?: number;
+  /** 套餐内DDoS防护流量规格，单位：字节。 */
+  DDoSTrafficCapacity?: number;
+  /** 套餐内安全流量规格，单位：字节。 */
+  SecTrafficCapacity?: number;
+  /** 套餐内安全请求数规格，单位：次。 */
+  SecRequestCapacity?: number;
+  /** 套餐内四层加速流量规格，单位：字节。 */
+  L4TrafficCapacity?: number;
+  /** 套餐内中国大陆网络优化流量规格，单位：字节。 */
+  CrossMLCTrafficCapacity?: number;
+  /** 套餐是否允许绑定新站点，取值有：true: 允许绑定新站点；false: 不允许绑定新站点。 */
+  Bindable?: string;
+  /** 套餐生效时间。 */
+  EnabledTime?: string;
+  /** 套餐过期时间。 */
+  ExpiredTime?: string;
+  /** 套餐所支持的功能，取值有：ContentAcceleration：内容加速功能；SmartAcceleration：智能加速功能；L4：四层加速功能；Waf：高级 Web 防护；QUIC：QUIC功能；CrossMLC：中国大陆网络优化功能；ProcessMedia：媒体处理功能；L4DDoS：四层DDoS防护功能；L7DDoS功能只会出现以下所有规格中的一项L7DDoS.CM30G；七层DDoS防护功能-中国大陆30G保底带宽规格；L7DDoS.CM60G；七层DDoS防护功能-中国大陆60G保底带宽规格；L7DDoS.CM100G；七层DDoS防护功能-中国大陆100G保底带宽规格；L7DDoS.Anycast300G；七层DDoS防护功能-中国大陆以外Anycast300G保底带宽规格；L7DDoS.AnycastUnlimited；七层DDoS防护功能-中国大陆以外Anycast无上限全力防护规格；L7DDoS.CM30G_Anycast300G；七层DDoS防护功能-中国大陆30G保底带宽规格，中国大陆以外Anycast300G保底带宽规格；L7DDoS.CM60G_Anycast300G；七层DDoS防护功能-中国大陆60G保底带宽规格，中国大陆以外Anycast300G保底带宽规格；L7DDoS.CM100G_Anycast300G；七层DDoS防护功能-中国大陆100G保底带宽规格，中国大陆以外Anycast300G保底带宽规格；L7DDoS.CM30G_AnycastUnlimited；七层DDoS防护功能-中国大陆30G保底带宽规格，中国大陆以外Anycast无上限全力防护规格；L7DDoS.CM60G_AnycastUnlimited；七层DDoS防护功能-中国大陆60G保底带宽规格，中国大陆以外Anycast无上限全力防护规格；L7DDoS.CM100G_AnycastUnlimited；七层DDoS防护功能-中国大陆100G保底带宽规格，中国大陆以外Anycast无上限全力防护规格； */
+  Features?: string[];
 }
 
 /** edgeone套餐信息 */
@@ -2183,11 +2225,11 @@ declare interface RateLimitConfig {
   /** 速率限制-用户规则列表。如果为null，默认使用历史配置。 */
   RateLimitUserRules?: RateLimitUserRule[];
   /** 速率限制模板功能。如果为null，默认使用历史配置。 */
-  RateLimitTemplate?: RateLimitTemplate | null;
+  RateLimitTemplate?: RateLimitTemplate;
   /** 智能客户端过滤。如果为null，默认使用历史配置。 */
-  RateLimitIntelligence?: RateLimitIntelligence | null;
+  RateLimitIntelligence?: RateLimitIntelligence;
   /** 速率限制-托管定制规则。如果为null，默认使用历史配置。 */
-  RateLimitCustomizes?: RateLimitUserRule[] | null;
+  RateLimitCustomizes?: RateLimitUserRule[];
 }
 
 /** 智能客户端过滤 */
@@ -2213,13 +2255,13 @@ declare interface RateLimitTemplate {
 /** 模板当前详细配置 */
 declare interface RateLimitTemplateDetail {
   /** 模板等级名称，取值有：sup_loose：超级宽松；loose：宽松；emergency：紧急；normal：适中；strict：严格；close：关闭，仅精准速率限制生效。 */
-  Mode: string | null;
+  Mode: string;
   /** 唯一id。 */
   ID: number;
   /** 模板处置方式，取值有：alg：JavaScript挑战；monitor：观察。 */
-  Action: string | null;
+  Action: string;
   /** 惩罚时间，取值范围0-2天，单位秒。 */
-  PunishTime: number | null;
+  PunishTime: number;
   /** 统计阈值，单位是次，取值范围0-4294967294。 */
   Threshold: number;
   /** 统计周期，取值范围0-120秒。 */
@@ -2667,27 +2709,27 @@ declare interface SecurityAction {
 /** Web安全配置 */
 declare interface SecurityConfig {
   /** 托管规则。如果入参为空或不填，默认使用历史配置。 */
-  WafConfig?: WafConfig | null;
+  WafConfig?: WafConfig;
   /** 速率限制。如果入参为空或不填，默认使用历史配置。 */
-  RateLimitConfig?: RateLimitConfig | null;
+  RateLimitConfig?: RateLimitConfig;
   /** 自定义规则。如果入参为空或不填，默认使用历史配置。 */
-  AclConfig?: AclConfig | null;
+  AclConfig?: AclConfig;
   /** Bot配置。如果入参为空或不填，默认使用历史配置。 */
-  BotConfig?: BotConfig | null;
+  BotConfig?: BotConfig;
   /** 七层防护总开关。如果入参为空或不填，默认使用历史配置。 */
-  SwitchConfig?: SwitchConfig | null;
+  SwitchConfig?: SwitchConfig;
   /** 基础访问管控。如果入参为空或不填，默认使用历史配置。 */
-  IpTableConfig?: IpTableConfig | null;
+  IpTableConfig?: IpTableConfig;
   /** 例外规则配置。如果入参为空或不填，默认使用历史配置。 */
-  ExceptConfig?: ExceptConfig | null;
+  ExceptConfig?: ExceptConfig;
   /** 自定义拦截页面配置。如果入参为空或不填，默认使用历史配置。 */
-  DropPageConfig?: DropPageConfig | null;
+  DropPageConfig?: DropPageConfig;
   /** 模板配置。此处仅出参数使用。 */
-  TemplateConfig?: TemplateConfig | null;
+  TemplateConfig?: TemplateConfig;
   /** 慢速攻击配置。如果入参为空或不填，默认使用历史配置。 */
-  SlowPostConfig?: SlowPostConfig | null;
+  SlowPostConfig?: SlowPostConfig;
   /** 检测长度限制配置。仅出参使用。 */
-  DetectLengthLimitConfig?: DetectLengthLimitConfig | null;
+  DetectLengthLimitConfig?: DetectLengthLimitConfig;
 }
 
 /** 安全策略配置 */
@@ -2757,13 +2799,13 @@ declare interface SlowPostConfig {
   /** 开关，取值有：on：开启；off：关闭。 */
   Switch: string;
   /** 首包配置。 */
-  FirstPartConfig?: FirstPartConfig | null;
+  FirstPartConfig?: FirstPartConfig;
   /** 基础配置。 */
-  SlowRateConfig?: SlowRateConfig | null;
+  SlowRateConfig?: SlowRateConfig;
   /** 慢速攻击的处置动作，取值有：monitor：观察；drop：拦截。 */
-  Action?: string | null;
+  Action?: string;
   /** 本规则的Id。 */
-  RuleId?: number | null;
+  RuleId?: number;
 }
 
 /** 慢速攻击的基础配置。 */
@@ -3210,6 +3252,16 @@ declare interface ZoneConfigParameters {
   ZoneName?: string;
   /** 站点配置信息。 */
   ZoneConfig?: ZoneConfig | null;
+}
+
+/** 返回站点信息 */
+declare interface ZoneInfo {
+  /** 站点id。 */
+  ZoneId?: string;
+  /** 站点名称。 */
+  ZoneName?: string;
+  /** 站点是否停用。取值有：false：非停用；true：停用。 */
+  Paused?: boolean;
 }
 
 /** 站点配置。 */
@@ -4724,6 +4776,28 @@ declare interface DescribeOverviewL7DataResponse {
   TotalCount?: number;
   /** 七层监控类时序流量数据列表。 */
   Data?: TimingDataRecord[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePlansRequest {
+  /** 过滤条件，Filters.Values 的上限为 20。详细的过滤条件如下：plan-type 按照【套餐类型】进行过滤。 可选的类型有： plan-trial：试用版套餐； plan-personal：个人版套餐； plan-basic：基础版套餐； plan-standard：标准版套餐； plan-enterprise：企业版套餐。 plan-id 按照【套餐 ID】进行过滤。套餐 ID 形如：edgeone-268z103ob0sx。area 按照【套餐加速地域】进行过滤。 服务区域，可选的类型有： mainland: 中国大陆； overseas: 全球（不包括中国大陆)； global: 全球（包括中国大陆)。status 按照【套餐状态】进行过滤。 可选的状态有： normal：正常状态； expiring-soon：即将过期； expired：已到期; isolated：已隔离。 */
+  Filters?: Filter[];
+  /** 排序字段，取值有： enable-time：生效时间； expire-time：过期时间。不填写使用默认值 enable-time。 */
+  Order?: string;
+  /** 排序方向，取值有：asc：从小到大排序；desc：从大到小排序。不填写使用默认值 desc。 */
+  Direction?: string;
+  /** 分页查询限制数目。默认值：20，最大值：200。 */
+  Limit?: number;
+  /** 分页查询偏移量。默认值：0。 */
+  Offset?: number;
+}
+
+declare interface DescribePlansResponse {
+  /** 符合条件的套餐个数。 */
+  TotalCount?: number;
+  /** 套餐信息列表。 */
+  Plans?: Plan[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6261,6 +6335,8 @@ declare interface Teo {
   DescribeOriginProtection(data?: DescribeOriginProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginProtectionResponse>;
   /** 查询监控流量时序数据（待废弃） {@link DescribeOverviewL7DataRequest} {@link DescribeOverviewL7DataResponse} */
   DescribeOverviewL7Data(data: DescribeOverviewL7DataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewL7DataResponse>;
+  /** 查询套餐信息列表 {@link DescribePlansRequest} {@link DescribePlansResponse} */
+  DescribePlans(data?: DescribePlansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlansResponse>;
   /** 查询预热任务状态 {@link DescribePrefetchTasksRequest} {@link DescribePrefetchTasksResponse} */
   DescribePrefetchTasks(data?: DescribePrefetchTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrefetchTasksResponse>;
   /** 查询清除缓存历史记录 {@link DescribePurgeTasksRequest} {@link DescribePurgeTasksResponse} */

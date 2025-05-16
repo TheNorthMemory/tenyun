@@ -2920,7 +2920,7 @@ declare interface ImageEraseConfig {
 declare interface ImageEraseLogoConfig {
   /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
   Switch?: string | null;
-  /** 需要擦除的多个框选区域，注意：参数数组长度最大为2。 */
+  /** 需要擦除的多个框选区域，最多开启16个区域。 */
   ImageAreaBoxes?: ImageAreaBoxInfo[] | null;
 }
 

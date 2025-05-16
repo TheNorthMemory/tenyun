@@ -134,6 +134,8 @@ declare interface AuditLogFile {
   DownloadUrl?: string;
   /** 错误信息。 */
   ErrMsg?: string;
+  /** 日志下载进度。 */
+  ProgressRate?: number;
 }
 
 /** 审计日志过滤条件。查询审计日志时，用户过滤返回的审计日志。 */
@@ -4825,7 +4827,7 @@ declare interface OpenAuditServiceRequest {
   LogExpireDay: number;
   /** 高频日志保留时长。 */
   HighLogExpireDay?: number;
-  /** 审计规则。同RuleTemplateIds都不填是全审计。 */
+  /** 审计规则(废弃)。 */
   AuditRuleFilters?: AuditRuleFilters[];
   /** 规则模板ID。同AuditRuleFilters都不填是全审计。 */
   RuleTemplateIds?: string[];

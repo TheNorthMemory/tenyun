@@ -813,9 +813,11 @@ declare interface Inbound {
   /** 规则限定的方向，进站规则为 INPUT */
   Dir?: string;
   /** 地址模块 */
-  AddressModule: string;
+  AddressModule?: string;
+  /** 规则ID，嵌套安全组的规则ID */
+  Id?: string;
   /** 规则描述 */
-  Desc: string;
+  Desc?: string;
 }
 
 /** 实例事件信息 */
@@ -1476,6 +1478,8 @@ declare interface RoInstanceInfo {
   DeadlineTime?: string;
   /** RO实例计费类型，可能返回值：0-包年包月，1-按量计费，2-后付费月结 */
   PayType?: number;
+  /** RO延迟复制状态。 */
+  ReplicationStatus?: string;
 }
 
 /** 只读vip信息 */
@@ -4901,7 +4905,7 @@ declare interface OpenAuditServiceRequest {
   LogExpireDay: number;
   /** 高频审计日志保存时长。支持值包括：7 - 一周30 - 一个月； */
   HighLogExpireDay?: number;
-  /** 审计规则。同RuleTemplateIds都不填是全审计。 */
+  /** 审计规则（该参数已废弃，不再生效）。 */
   AuditRuleFilters?: AuditRuleFilters[];
   /** 规则模板ID。同AuditRuleFilters都不填是全审计。 */
   RuleTemplateIds?: string[];

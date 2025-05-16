@@ -47,13 +47,13 @@ declare interface Device {
 /** 关键词命中位置信息 */
 declare interface HitInfo {
   /** 标识模型命中还是关键词命中 */
-  Type: string | null;
+  Type?: string | null;
   /** 命中关键词 */
-  Keyword: string | null;
+  Keyword?: string | null;
   /** 自定义词库名称 */
-  LibName: string | null;
+  LibName?: string | null;
   /** 位置信息 */
-  Positions: Positions[] | null;
+  Positions?: Positions[] | null;
 }
 
 /** 标识命中的违规关键词位置信息 */
@@ -67,9 +67,9 @@ declare interface Positions {
 /** 账号风险检测结果 */
 declare interface RiskDetails {
   /** 该字段用于返回账号信息检测对应的风险类别，取值为：**RiskAccount**（账号存在风险）、**RiskIP**（IP地址存在风险）、**RiskIMEI**（移动设备识别码存在风险）。 */
-  Label: string;
+  Label?: string;
   /** 该字段用于返回账号信息检测对应的风险等级，取值为：**1**（疑似存在风险）和**2**（存在恶意风险）。 */
-  Level: number;
+  Level?: number;
 }
 
 /** 情感分析结果 */

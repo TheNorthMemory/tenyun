@@ -1209,7 +1209,7 @@ declare interface DescribeTaskLogsRequest {
   TaskInstanceIndexes?: number[];
   /** 起始任务实例。与TaskInstanceIndexes参数不能同时指定。 */
   Offset?: number;
-  /** 最大任务实例数, 最大值为10. */
+  /** 最大任务实例数；默认值为5， 最大值为10。 */
   Limit?: number;
 }
 

@@ -188,6 +188,8 @@ declare interface EmbedTokenInfo {
   TokenNum?: number | null;
   /** 是否单用户多token */
   SingleUserMultiToken?: boolean | null;
+  /** 嵌出显示配置，目前为ChatBI嵌出场景用，TableFilter表示数据表列表过滤，SqlView表示sql查看功能 */
+  ConfigParam?: string | null;
 }
 
 /** 自定义错误信息对象 */
@@ -675,6 +677,8 @@ declare interface CreateEmbedTokenRequest {
   TokenType?: number;
   /** 一次创建的token数 */
   TokenNum?: number;
+  /** 嵌出显示配置，目前为ChatBI嵌出场景用，TableFilter表示数据表列表过滤，SqlView表示sql查看功能 */
+  ConfigParam?: string;
 }
 
 declare interface CreateEmbedTokenResponse {

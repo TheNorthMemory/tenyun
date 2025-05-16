@@ -528,11 +528,11 @@ declare interface EnterpriseSecurityGroupRuleRuleInfo {
   Uuid?: string;
   /** 源规则内容 */
   SourceId?: string;
-  /** 源规则类型 取值范围 0/1/2/3/4/5/6/7/8/9/1000表示ip(net),1表示VPC实例(intance)2表示子网实例(intance)3表示CVM实例(intance)4表示CLB实例(intance)5表示ENI实例(intance)6表示数据库实例(intance)7表示模版(template)8表示标签(tag)9表示地域(region)100表示资产分组(resourcegroup) */
+  /** 源规则类型 取值范围 0/1/2/3/4/5/6/7/8/9/1000表示ip(net),1表示VPC实例(instance)2表示子网实例(instance)3表示CVM实例(instance)4表示CLB实例(instance)5表示ENI实例(instance)6表示数据库实例(instance)7表示模版(template)8表示标签(tag)9表示地域(region)100表示资产分组(resourcegroup) */
   SourceType?: number;
   /** 目的规则内容 */
   TargetId?: string;
-  /** 目的规则类型 取值范围 0/1/2/3/4/5/6/7/8/9/1000表示ip(net),1表示VPC实例(intance)2表示子网实例(intance)3表示CVM实例(intance)4表示CLB实例(intance)5表示ENI实例(intance)6表示数据库实例(intance)7表示模版(template)8表示标签(tag)9表示地域(region)100表示资产分组(resourcegroup) */
+  /** 目的规则类型 取值范围 0/1/2/3/4/5/6/7/8/9/1000表示ip(net),1表示VPC实例(instance)2表示子网实例(instance)3表示CVM实例(instance)4表示CLB实例(instance)5表示ENI实例(instance)6表示数据库实例(instance)7表示模版(template)8表示标签(tag)9表示地域(region)100表示资产分组(resourcegroup) */
   TargetType?: number;
   /** 协议名称取值范围:TCP/ANY/ICMP/UDPANY:表示所有 */
   Protocol?: string;

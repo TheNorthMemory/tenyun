@@ -113,11 +113,25 @@ declare interface GetFileTranslateResponse {
 }
 
 declare interface ImageTranslateLLMRequest {
+  /** 图片数据的Base64字符串，经Base64编码后不超过 9M，分辨率建议600*800以上，支持PNG、JPG、JPEG格式。 */
+  Data: string;
+  /** 目标语言，支持语言列表：- 中文：zh- 繁体（台湾）：zh-TW- 繁体（香港）：zh-HK- 英文：en- 日语：ja- 韩语：ko- 泰语：th- 越南语：vi- 俄语：ru- 德语：de- 法语：fr- 阿拉伯语：ar- 西班牙语：es- 意大利语：it- 印度尼西亚语：id- 马来西亚语：ms- 葡萄牙语：pt- 土耳其语：tr- */
+  Target: string;
   /** 输入图 Url。 使用Url的时候，Data参数需要传入""。 图片限制：小于 10MB，分辨率建议600*800以上，格式支持 jpg、jpeg、png。 */
   Url?: string;
 }
 
 declare interface ImageTranslateLLMResponse {
+  /** 图片数据的Base64字符串，输出格式为JPG。 */
+  Data?: string;
+  /** 原文本主要源语言。 */
+  Source?: string;
+  /** 目标翻译语言。 */
+  Target?: string;
+  /** 图片中的全部原文本。 */
+  SourceText?: string;
+  /** 图片中全部译文。 */
+  TargetText?: string;
   /** 逆时针图片角度，取值范围为0-359 */
   Angle?: number;
   /** 翻译详情信息 */
@@ -280,7 +294,7 @@ declare interface Tmt {
   /** 图片翻译 {@link ImageTranslateRequest} {@link ImageTranslateResponse} */
   ImageTranslate(data: ImageTranslateRequest, config?: AxiosRequestConfig): AxiosPromise<ImageTranslateResponse>;
   /** 端到端图片翻译 {@link ImageTranslateLLMRequest} {@link ImageTranslateLLMResponse} */
-  ImageTranslateLLM(data?: ImageTranslateLLMRequest, config?: AxiosRequestConfig): AxiosPromise<ImageTranslateLLMResponse>;
+  ImageTranslateLLM(data: ImageTranslateLLMRequest, config?: AxiosRequestConfig): AxiosPromise<ImageTranslateLLMResponse>;
   /** 语种识别 {@link LanguageDetectRequest} {@link LanguageDetectResponse} */
   LanguageDetect(data: LanguageDetectRequest, config?: AxiosRequestConfig): AxiosPromise<LanguageDetectResponse>;
   /** 语音翻译 {@link SpeechTranslateRequest} {@link SpeechTranslateResponse} */

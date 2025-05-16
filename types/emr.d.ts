@@ -2536,6 +2536,8 @@ declare interface UserInfoForUserManager {
   PassWord: string;
   /** 备注 */
   ReMark?: string;
+  /** 用户副组 */
+  Groups?: string[];
 }
 
 /** 用户管理列表过滤器 */
@@ -2544,6 +2546,8 @@ declare interface UserManagerFilter {
   UserName?: string;
   /** 用户来源 */
   UserType?: string;
+  /** 组名 */
+  Groups?: string;
 }
 
 /** 用户管理中用户的简要信息 */

@@ -378,38 +378,6 @@ declare interface GetInvokeTxResponse {
   RequestId?: string;
 }
 
-declare interface GetLatesdTransactionListRequest {
-  /** 模块名称，固定字段：transaction */
-  Module: string;
-  /** 操作名称，固定字段：latest_transaction_list */
-  Operation: string;
-  /** 组织ID，固定字段：0 */
-  GroupId: number;
-  /** 通道ID，固定字段：0 */
-  ChannelId: number;
-  /** 获取的最新交易的区块数量，取值范围1~5 */
-  LatestBlockNumber: number;
-  /** 调用接口的组织名称，可以在组织管理列表中获取当前组织的名称 */
-  GroupName: string;
-  /** 需要查询的通道名称，可在通道详情或列表中获取 */
-  ChannelName: string;
-  /** 区块链网络ID，可在区块链网络详情或列表中获取 */
-  ClusterId: string;
-  /** 需要获取的起始交易偏移 */
-  Offset?: number;
-  /** 需要获取的交易数量 */
-  Limit?: number;
-}
-
-declare interface GetLatesdTransactionListResponse {
-  /** 交易总数量 */
-  TotalCount?: number;
-  /** 交易列表 */
-  TransactionList?: TransactionItem[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface GetLatestTransactionListRequest {
   /** 模块名称，固定字段：transaction */
   Module: string;
@@ -803,8 +771,6 @@ declare interface Tbaas {
   GetClusterSummary(data: GetClusterSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<GetClusterSummaryResponse>;
   /** Invoke异步调用结果查询 {@link GetInvokeTxRequest} {@link GetInvokeTxResponse} */
   GetInvokeTx(data: GetInvokeTxRequest, config?: AxiosRequestConfig): AxiosPromise<GetInvokeTxResponse>;
-  /** 获取最新交易列表（已废弃） {@link GetLatesdTransactionListRequest} {@link GetLatesdTransactionListResponse} */
-  GetLatesdTransactionList(data: GetLatesdTransactionListRequest, config?: AxiosRequestConfig): AxiosPromise<GetLatesdTransactionListResponse>;
   /** 获取fabric最新交易列表 {@link GetLatestTransactionListRequest} {@link GetLatestTransactionListResponse} */
   GetLatestTransactionList(data: GetLatestTransactionListRequest, config?: AxiosRequestConfig): AxiosPromise<GetLatestTransactionListResponse>;
   /** 获取交易的详情 {@link GetTransactionDetailForUserRequest} {@link GetTransactionDetailForUserResponse} */
