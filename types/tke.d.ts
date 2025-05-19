@@ -1003,7 +1003,7 @@ declare namespace V20180525 {
     Drop?: string[] | null;
   }
 
-  /** EKS Instnace CBS volume */
+  /** EKS Instance CBS volume */
   interface CbsVolume {
     /** 腾讯云cbs盘Id */
     CbsDiskId: string;
@@ -1669,9 +1669,9 @@ declare namespace V20180525 {
     CreationTime?: string;
     /** 容器实例绑定的Eip地址，注意可能为空 */
     EipAddress?: string | null;
-    /** EKS Cotainer Instance Id */
+    /** EKS Container Instance Id */
     EksCiId?: string;
-    /** EKS Cotainer Instance Name */
+    /** EKS Container Instance Name */
     EksCiName?: string;
     /** 数据卷信息 */
     EksCiVolume?: EksCiVolume;

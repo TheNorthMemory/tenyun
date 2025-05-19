@@ -2486,8 +2486,8 @@ declare interface RuleCondition {
 
 /** 规则引擎操作。 */
 declare interface RuleEngineAction {
-  /** 操作名称。名称需要与参数结构体对应，例如 Name=Cache，则 CacheParameters 必填。Cache：节点缓存 TTL；CacheKey：自定义 Cache Key；CachePrefresh：缓存预刷新；AccessURLRedirect：访问 URL 重定向；UpstreamURLRewrite：回源 URL 重写；QUIC：QUIC；WebSocket：WebSocket；Authentication：Token 鉴权；MaxAge：浏览器缓存 TTL；StatusCodeCache：状态码缓存 TTL；OfflineCache：离线缓存；SmartRouting：智能加速；RangeOriginPull：分片回源 ；UpstreamHTTP2：HTTP2 回源；HostHeader：Host Header 重写；ForceRedirectHTTPS：访问协议强制 HTTPS 跳转配置；OriginPullProtocol：回源 HTTPS；Compression：智能压缩配置；HSTS：HSTS；ClientIPHeader：存储客户端请求 IP 的头部信息配置；OCSPStapling：OCSP 装订；HTTP2：HTTP2 接入；PostMaxSize：POST 请求上传文件流式传输最大限制配置；ClientIPCountry：回源时携带客户端 IP 所属地域信息；UpstreamFollowRedirect：回源跟随重定向参数配置；UpstreamRequest：回源请求参数；TLSConfig：SSL/TLS 安全；ModifyOrigin：修改源站；HTTPUpstreamTimeout：七层回源超时配置；HttpResponse：HTTP 应答；ErrorPage：自定义错误页面；ModifyResponseHeader：修改 HTTP 节点响应头；ModifyRequestHeader：修改 HTTP 节点请求头；ResponseSpeedLimit：单连接下载限速。SetContentIdentifierParameters：设置内容标识符。 */
-  Name: string | null;
+  /** 操作名称。名称需要与参数结构体对应，例如 Name=Cache，则 CacheParameters 必填。Cache：节点缓存 TTL；CacheKey：自定义 Cache Key；CachePrefresh：缓存预刷新；AccessURLRedirect：访问 URL 重定向；UpstreamURLRewrite：回源 URL 重写；QUIC：QUIC；WebSocket：WebSocket；Authentication：Token 鉴权；MaxAge：浏览器缓存 TTL；StatusCodeCache：状态码缓存 TTL；OfflineCache：离线缓存；SmartRouting：智能加速；RangeOriginPull：分片回源 ；UpstreamHTTP2：HTTP2 回源；HostHeader：Host Header 重写；ForceRedirectHTTPS：访问协议强制 HTTPS 跳转配置；OriginPullProtocol：回源 HTTPS；Compression：智能压缩配置；HSTS：HSTS；ClientIPHeader：存储客户端请求 IP 的头部信息配置；OCSPStapling：OCSP 装订；HTTP2：HTTP2 接入；PostMaxSize：POST 请求上传文件流式传输最大限制配置；ClientIPCountry：回源时携带客户端 IP 所属地域信息；UpstreamFollowRedirect：回源跟随重定向参数配置；UpstreamRequest：回源请求参数；TLSConfig：SSL/TLS 安全；ModifyOrigin：修改源站；HTTPUpstreamTimeout：七层回源超时配置；HttpResponse：HTTP 应答；ErrorPage：自定义错误页面；ModifyResponseHeader：修改 HTTP 节点响应头；ModifyRequestHeader：修改 HTTP 节点请求头；ResponseSpeedLimit：单连接下载限速；SetContentIdentifier：设置内容标识符；Vary：Vary 特性配置。该功能灰度中，如需使用，请联系腾讯云客服。 */
+  Name: string;
   /** 节点缓存 TTL 配置参数，当 Name 取值为 Cache 时，该参数必填。 */
   CacheParameters?: CacheParameters | null;
   /** 自定义 Cache Key 配置参数，当 Name 取值为 CacheKey 时，该参数必填。 */
@@ -2554,8 +2554,10 @@ declare interface RuleEngineAction {
   ModifyRequestHeaderParameters?: ModifyRequestHeaderParameters | null;
   /** 单连接下载限速配置参数，当 Name 取值为 ResponseSpeedLimit 时，该参数必填。 */
   ResponseSpeedLimitParameters?: ResponseSpeedLimitParameters | null;
-  /** 内容标识配置参数，当 Name 取值为 HttpResponse 时，该参数必填。 */
+  /** 内容标识配置参数，当 Name 取值为 SetContentIdentifier 时，该参数必填。 */
   SetContentIdentifierParameters?: SetContentIdentifierParameters | null;
+  /** Vary 特性配置参数，当 Name 取值为 Vary 时，该参数必填。该功能灰度中，如需使用，请联系腾讯云客服。 */
+  VaryParameters?: VaryParameters;
 }
 
 /** 规则引擎规则详情。 */
@@ -3102,6 +3104,12 @@ declare interface VanityNameServersIps {
   Name: string;
   /** 自定义名字服务器 IPv4 地址。 */
   IPv4: string;
+}
+
+/** [Vary 特性](https://cloud.tencent.com/document/product/1552/89301) 配置参数。该功能灰度中，如需使用，请联系腾讯云客服。 */
+declare interface VaryParameters {
+  /** Vary 特性配置开关，取值有：on：开启；off：关闭。 */
+  Switch: string;
 }
 
 /** 无 */

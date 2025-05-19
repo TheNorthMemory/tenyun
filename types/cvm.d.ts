@@ -978,7 +978,7 @@ declare interface RepairTaskInfo {
   Product?: string | null;
   /** 任务子类型 */
   TaskSubType?: string | null;
-  /** 任务授权类型 */
+  /** 任务授权类型，当前`AuthType`和维修任务提供的授权选项的对应关系如下：- `"1"`：仅提供【在线迁移授权】- `"2"`：仅提供【停机授权】- `"3"`：仅提供【在线换盘授权】- `"4"`：提供【停机换盘授权】（默认）、【弃盘迁移授权】（可选）- `"5"`：提供【停机授权】（默认）、【弃盘迁移授权】（可选）- `"6"`：仅提供【在线维护授权】- `"7"`：提供【在线维护授权】（默认）、【停机授权】（可选）- `"8"`：仅提供【弃盘迁移授权】 */
   AuthType?: number;
   /** 授权渠道，支持取值：- `Waiting_auth`：待授权- `Customer_auth`：客户操作授权- `System_mandatory_auth`：系统默认授权- `Pre_policy_auth`：预置策略授权 */
   AuthSource?: string;
@@ -2135,9 +2135,9 @@ declare interface DescribeReservedInstancesOfferingsResponse {
 }
 
 declare interface DescribeTaskInfoRequest {
-  /** 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+  /** 返回数量，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
   Limit: number;
-  /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+  /** 偏移量。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
   Offset: number;
   /** 按照指定的产品类型查询，支持取值：- `CVM`：云服务器- `CDH`：专用宿主机- `CPM2.0`：裸金属云服务器未传入或为空时，默认查询全部产品类型。 */
   Product?: string;
@@ -2147,13 +2147,13 @@ declare interface DescribeTaskInfoRequest {
   TaskTypeIds?: number[];
   /** 按照一个或者多个任务ID查询。任务ID形如：`rep-xxxxxxxx`。 */
   TaskIds?: string[];
-  /** 按照一个或者多个实例ID查询。实例ID形如：`ins-xxxxxxxx`。 */
+  /** 按照一个或者多个实例ID查询。实例ID形如：`ins-xxxxxxxx`，可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。 */
   InstanceIds?: string[];
   /** 按照一个或者多个实例名称查询。 */
   Aliases?: string[];
-  /** 时间查询区间的起始位置，会根据任务创建时间`CreateTime`进行过滤。未传入时默认为当天`00:00:00`。 */
+  /** 时间查询区间的起始位置，会根据任务创建时间`CreateTime`进行过滤，格式为`YYYY-MM-DD hh:mm:ss`。未传入时默认为当天`00:00:00`。 */
   StartDate?: string;
-  /** 时间查询区间的终止位置，会根据任务创建时间`CreateTime`进行过滤。未传入时默认为当前时刻。 */
+  /** 时间查询区间的终止位置，会根据任务创建时间`CreateTime`进行过滤，格式为`YYYY-MM-DD hh:mm:ss`。未传入时默认为当前时刻。 */
   EndDate?: string;
   /** 指定返回维修任务列表的排序字段，目前支持：- `CreateTime`：任务创建时间- `AuthTime`：任务授权时间- `EndTime`：任务结束时间未传入时或为空时，默认按`CreateTime`字段进行排序。 */
   OrderField?: string;
@@ -2888,15 +2888,15 @@ declare interface RenewInstancesResponse {
 declare interface RepairTaskControlRequest {
   /** 待授权任务实例对应的产品类型，支持取值：- `CVM`：云服务器- `CDH`：专用宿主机- `CPM2.0`：裸金属云服务器 */
   Product: string;
-  /** 指定待操作的实例ID列表，仅允许对列表中的实例ID相关的维修任务发起授权。 */
+  /** 指定待操作的实例ID列表，仅允许对列表中的实例ID相关的维修任务发起授权，可通过 [DescribeTaskInfo](https://cloud.tencent.com/document/api/213/87933) 接口返回值中的`InstanceId`获取。 */
   InstanceIds: string[];
-  /** 维修任务ID。 */
+  /** 指定待操作的维修任务ID，可通过 [DescribeTaskInfo](https://cloud.tencent.com/document/api/213/87933) 接口返回值中的`TaskId`获取。 */
   TaskId: string;
   /** 操作类型，当前只支持传入`AuthorizeRepair`。 */
   Operate: string;
   /** 预约授权时间，形如`2023-01-01 12:00:00`。预约时间需晚于当前时间至少5分钟，且在48小时之内。 */
   OrderAuthTime?: string;
-  /** 附加的授权处理策略。 */
+  /** 附加的授权处理策略，不传或为空时，按默认授权方式进行处理。对于支持弃盘迁移授权的维修任务，当且仅当传入`LossyLocal`时，代表本次授权可允许发起弃盘迁移。注意：1. 指定`TaskSubMethod`为`LossyLocal`调用接口发起**弃盘迁移授权**时，本地盘实例的**所有本地盘数据都会清空**，相当于**重新部署本地盘实例**。2. 对于非本地盘实例，或不支持弃盘迁移选项的任务，指定`TaskSubMethod`为`LossyLocal`时接口不会报错，不过后端会自动忽略该参数。3. 特别的：如果本地盘实例系统盘是CBS云盘，并且`/etc/fstab`里之前配置了本地盘的自动挂载项，建议可根据业务侧的实际需求，评估是否在对应挂载项追加上`nofail`参数（代表对应挂载点挂载失败不阻塞开机流程）或注释对应的挂载路径。否则授权弃盘迁移后，对应本地盘数据已清空，自动挂载失败会导致实例开机流程失败进入救援模式。具体可参考 [Linux 实例：/etc/fstab 配置错误导致无法登录](https://cloud.tencent.com/document/product/213/72039)。 */
   TaskSubMethod?: string;
 }
 

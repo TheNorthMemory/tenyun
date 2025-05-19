@@ -16,7 +16,7 @@ declare interface AutoScaleUpRule {
 declare interface AutoSnapshotPolicyInfo {
   /** 快照策略ID */
   AutoSnapshotPolicyId?: string;
-  /** 快照策略ID */
+  /** 快照策略名称 */
   PolicyName?: string;
   /** 快照策略创建时间 */
   CreationTime?: string;
@@ -30,7 +30,7 @@ declare interface AutoSnapshotPolicyInfo {
   IsActivated?: number;
   /** 下一次触发快照时间 */
   NextActiveTime?: string;
-  /** 快照策略状态，1代表快照策略状态正常。这里只有一种状态 */
+  /** 快照策略状态，available代表快照策略状态正常。这里只有一种状态 */
   Status?: string;
   /** 账号ID */
   AppId?: number;
@@ -176,7 +176,7 @@ declare interface FileSystemInfo {
   BandwidthLimit?: number;
   /** 文件系统关联的快照策略 */
   AutoSnapshotPolicyId?: string;
-  /** 文件系统处理快照状态 */
+  /** 文件系统处理快照状态,snapping：快照中，normal：正常状态 */
   SnapStatus?: string;
   /** 文件系统容量规格上限单位:GiB */
   Capacity?: number;
@@ -259,29 +259,29 @@ declare interface MigrationTaskInfo {
 /** 挂载点信息 */
 declare interface MountInfo {
   /** 文件系统 ID */
-  FileSystemId: string;
+  FileSystemId?: string;
   /** 挂载点 ID */
-  MountTargetId: string;
+  MountTargetId?: string;
   /** 挂载点 IP */
-  IpAddress: string;
+  IpAddress?: string;
   /** 挂载根目录 */
-  FSID: string;
-  /** 挂载点状态 */
-  LifeCycleState: string;
-  /** 网络类型 */
-  NetworkInterface: string;
+  FSID?: string;
+  /** 挂载点状态，包括creating：创建中；available：运行中；deleting：删除中；create_failed： 创建失败 */
+  LifeCycleState?: string;
+  /** 网络类型，包括VPC,CCN */
+  NetworkInterface?: string;
   /** 私有网络 ID */
-  VpcId: string;
+  VpcId?: string;
   /** 私有网络名称 */
-  VpcName: string;
+  VpcName?: string;
   /** 子网 Id */
-  SubnetId: string;
+  SubnetId?: string;
   /** 子网名称 */
-  SubnetName: string;
+  SubnetName?: string;
   /** CFS Turbo使用的云联网ID */
-  CcnID: string;
+  CcnID?: string;
   /** 云联网中CFS Turbo使用的网段 */
-  CidrBlock: string;
+  CidrBlock?: string;
 }
 
 /** 文件系统绑定权限组信息 */
@@ -371,11 +371,11 @@ declare interface SnapshotOperateLog {
 /** 文件系统快照统计 */
 declare interface SnapshotStatistics {
   /** 地域 */
-  Region: string;
+  Region?: string;
   /** 快照总个数 */
-  SnapshotNumber: number;
-  /** 快照总容量 */
-  SnapshotSize: number;
+  SnapshotNumber?: number;
+  /** 快照总容量，单位是MiB */
+  SnapshotSize?: number;
 }
 
 /** Tag信息单元 */
@@ -417,9 +417,9 @@ declare interface UserQuota {
 }
 
 declare interface BindAutoSnapshotPolicyRequest {
-  /** 快照策略ID */
+  /** 快照策略ID，通过快照策略列表获取 */
   AutoSnapshotPolicyId: string;
-  /** 文件系统列表 */
+  /** 文件系统id列表，用“,”分隔，文件系统id通过查询文件系统列表获得 */
   FileSystemIds: string;
 }
 
@@ -431,7 +431,7 @@ declare interface BindAutoSnapshotPolicyResponse {
 }
 
 declare interface CreateAccessCertRequest {
-  /** 证书描述 */
+  /** 证书描述，不超过64字符 */
   CertDesc: string;
 }
 
@@ -443,17 +443,17 @@ declare interface CreateAccessCertResponse {
 }
 
 declare interface CreateAutoSnapshotPolicyRequest {
-  /** 快照重复时间点,0-23 */
+  /** 快照重复时间点,0-23，小时 */
   Hour: string;
   /** 策略名称 */
   PolicyName?: string;
-  /** 快照重复日期，星期一到星期日。 1代表星期一、7代表星期天 */
+  /** 快照重复日期，星期一到星期日。 1代表星期一、7代表星期天，与DayOfMonth，IntervalDays 三者选一 */
   DayOfWeek?: string;
-  /** 快照保留时长，单位天 */
+  /** 快照保留时长，单位天，默认永久0 */
   AliveDays?: number;
-  /** 快照按月重复，每月1-31号，选择一天，每月将在这一天自动创建快照。 */
+  /** 快照按月重复，每月1-31号，选择一天，每月将在这一天自动创建快照。与DayOfWeek，IntervalDays 三者选一 */
   DayOfMonth?: string;
-  /** 间隔天数 */
+  /** 间隔天数，与DayOfWeek，DayOfMonth 三者选一 */
   IntervalDays?: number;
 }
 
@@ -547,7 +547,7 @@ declare interface CreateCfsPGroupResponse {
 }
 
 declare interface CreateCfsRuleRequest {
-  /** 权限组 ID */
+  /** 权限组 ID，通过创建权限组接口或者创建权限组规则接口获取 */
   PGroupId: string;
   /** 可以填写单个 IP 或者单个网段，例如 10.1.10.11 或者 10.10.1.0/24。默认来访地址为*表示允许所有。同时需要注意，此处需填写 CVM 的内网 IP。 */
   AuthClientIp: string;
@@ -577,9 +577,9 @@ declare interface CreateCfsRuleResponse {
 }
 
 declare interface CreateCfsSnapshotRequest {
-  /** 文件系统id */
+  /** 文件系统 ID，通过查询文件系统接口获取 */
   FileSystemId: string;
-  /** 快照名称 */
+  /** 快照名称，不超过64字符 */
   SnapshotName?: string;
   /** 快照标签 */
   ResourceTags?: TagInfo[];
@@ -657,45 +657,45 @@ declare interface DeleteCfsFileSystemResponse {
 }
 
 declare interface DeleteCfsPGroupRequest {
-  /** 权限组 ID */
+  /** 权限组 ID，通过创建权限组接口或者创建权限组规则接口获取 */
   PGroupId: string;
 }
 
 declare interface DeleteCfsPGroupResponse {
   /** 权限组 ID */
-  PGroupId: string;
+  PGroupId?: string;
   /** 用户 ID */
-  AppId: number;
+  AppId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DeleteCfsRuleRequest {
-  /** 权限组 ID */
+  /** 权限组 ID，通过创建权限组接口或者创建权限组规则接口获取 */
   PGroupId: string;
-  /** 规则 ID */
+  /** 规则 ID，通过查询权限组规则接口获取 */
   RuleId: string;
 }
 
 declare interface DeleteCfsRuleResponse {
   /** 规则 ID */
-  RuleId: string;
+  RuleId?: string;
   /** 权限组 ID */
-  PGroupId: string;
+  PGroupId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DeleteCfsSnapshotRequest {
-  /** 文件系统快照id */
+  /** 文件系统快照id，可通过查询快照列表接口获取 */
   SnapshotId?: string;
-  /** 需要删除的文件文件系统快照ID 列表，快照ID，跟ID列表至少填一项 */
+  /** 需要删除的文件系统快照ID 列表，快照ID，跟ID列表至少填一项 */
   SnapshotIds?: string[];
 }
 
 declare interface DeleteCfsSnapshotResponse {
   /** 文件系统ID */
-  SnapshotId: string;
+  SnapshotId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -723,13 +723,13 @@ declare interface DeleteMountTargetResponse {
 }
 
 declare interface DeleteUserQuotaRequest {
-  /** 文件系统 ID */
+  /** 文件系统 ID，通过查询文件系统接口获取 */
   FileSystemId: string;
-  /** 指定配额类型，包括Uid、Gid、Dir */
+  /** 指定配额类型，包括Uid（按用户ID限制）、Gid（按用户组ID限制）、Dir（按目录限制） */
   UserType: string;
-  /** UID/GID信息 */
+  /** UID/GID信息，和DirectoryPath参数，两者必须填写一个 */
   UserId?: string;
-  /** 设置目录配额的目录的绝对路径 */
+  /** 设置目录配额的目录的绝对路径，和UserId参数，两者必须填写一个 */
   DirectoryPath?: string;
 }
 
@@ -791,11 +791,11 @@ declare interface DescribeBucketListResponse {
 }
 
 declare interface DescribeCfsFileSystemClientsRequest {
-  /** 文件系统 ID。 */
+  /** 文件系统 ID，通过查询文件系统接口获取 */
   FileSystemId: string;
-  /** Offset 分页码 */
+  /** Offset 分页码，默认为0 */
   Offset?: number;
-  /** Limit 页面大小 */
+  /** Limit 页面大小，默认为10，最大值为100 */
   Limit?: number;
 }
 
@@ -815,9 +815,9 @@ declare interface DescribeCfsFileSystemsRequest {
   VpcId?: string;
   /** 子网 ID */
   SubnetId?: string;
-  /** Offset 分页码 */
+  /** Offset 分页码,默认0 */
   Offset?: number;
-  /** Limit 页面大小 */
+  /** Limit 页面大小，默认10 */
   Limit?: number;
   /** 用户自定义名称 */
   CreationToken?: string;
@@ -843,13 +843,13 @@ declare interface DescribeCfsPGroupsResponse {
 }
 
 declare interface DescribeCfsRulesRequest {
-  /** 权限组 ID */
+  /** 权限组 ID，通过创建权限组接口或者创建权限组规则接口获取 */
   PGroupId: string;
 }
 
 declare interface DescribeCfsRulesResponse {
   /** 权限组规则列表 */
-  RuleList: PGroupRuleInfo[];
+  RuleList?: PGroupRuleInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -921,7 +921,7 @@ declare interface DescribeMigrationTasksResponse {
 }
 
 declare interface DescribeMountTargetsRequest {
-  /** 文件系统 ID */
+  /** 文件系统 ID，查询文件系统列表可以获得id */
   FileSystemId: string;
 }
 
@@ -935,7 +935,7 @@ declare interface DescribeMountTargetsResponse {
 }
 
 declare interface DescribeSnapshotOperationLogsRequest {
-  /** 文件系统快照ID */
+  /** 文件系统快照ID，通过快照创建接口获得 */
   SnapshotId: string;
   /** 起始时间 */
   StartTime: string;
@@ -1059,35 +1059,35 @@ declare interface StopMigrationTaskResponse {
 }
 
 declare interface UnbindAutoSnapshotPolicyRequest {
-  /** 需要解绑的文件系统ID列表，用"," 分割 */
+  /** 需要解绑的文件系统ID列表，用"," 分割，文件系统id 通创建文件系统接口获得 */
   FileSystemIds: string;
-  /** 解绑的快照ID */
+  /** 解绑的快照ID，通过创建快照策略接口获得 */
   AutoSnapshotPolicyId: string;
 }
 
 declare interface UnbindAutoSnapshotPolicyResponse {
   /** 快照策略ID */
-  AutoSnapshotPolicyId: string;
+  AutoSnapshotPolicyId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface UpdateAutoSnapshotPolicyRequest {
-  /** 快照策略ID */
+  /** 快照策略ID,查询快照策略列表获取 */
   AutoSnapshotPolicyId: string;
-  /** 快照策略名称 */
+  /** 快照策略名称，不超过64个字符 */
   PolicyName?: string;
-  /** 快照定期备份，按照星期一到星期日。 1代表星期一，7代表星期日 */
+  /** 快照定期备份，按照星期一到星期日。 1代表星期一，7代表星期日，与DayOfMonth，IntervalDays 三者选一个 */
   DayOfWeek?: string;
   /** 快照定期备份在一天的哪一小时 */
   Hour?: string;
-  /** 快照保留日期 */
+  /** 快照保留天数 */
   AliveDays?: number;
   /** 是否激活定期快照功能；1代表激活，0代表未激活 */
   IsActivated?: number;
-  /** 定期快照在每月的第几天创建快照，该参数与DayOfWeek互斥 */
+  /** 定期快照在每月的第几天创建快照，该参数与DayOfWeek,IntervalDays 三者选一 */
   DayOfMonth?: string;
-  /** 间隔天数定期执行快照，该参数与DayOfWeek,DayOfMonth 互斥 */
+  /** 间隔天数定期执行快照，该参数与DayOfWeek,DayOfMonth 三者选一 */
   IntervalDays?: number;
 }
 
@@ -1117,17 +1117,17 @@ declare interface UpdateCfsFileSystemNameResponse {
 }
 
 declare interface UpdateCfsFileSystemPGroupRequest {
-  /** 权限组 ID */
+  /** 权限组 ID，通过创建权限组接口或者创建权限组规则接口获取 */
   PGroupId: string;
-  /** 文件系统 ID */
+  /** 文件系统 ID，通过查询文件系统接口获取 */
   FileSystemId: string;
 }
 
 declare interface UpdateCfsFileSystemPGroupResponse {
   /** 权限组 ID */
-  PGroupId: string;
+  PGroupId?: string;
   /** 文件系统 ID */
-  FileSystemId: string;
+  FileSystemId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1145,7 +1145,7 @@ declare interface UpdateCfsFileSystemSizeLimitResponse {
 }
 
 declare interface UpdateCfsPGroupRequest {
-  /** 权限组 ID */
+  /** 权限组 ID，通过创建权限组接口或者创建权限组规则接口获取 */
   PGroupId: string;
   /** 权限组名称，1-64个字符且只能为中文，字母，数字，下划线或横线 */
   Name?: string;
@@ -1165,17 +1165,17 @@ declare interface UpdateCfsPGroupResponse {
 }
 
 declare interface UpdateCfsRuleRequest {
-  /** 权限组 ID */
+  /** 权限组 ID，通过创建权限组接口或者创建权限组规则接口获取 */
   PGroupId: string;
-  /** 规则 ID */
+  /** 规则 ID，通过查询权限组规则接口获取 */
   RuleId: string;
   /** 可以填写单个 IP 或者单个网段，例如 10.1.10.11 或者 10.10.1.0/24。默认来访地址为*表示允许所有。同时需要注意，此处需填写 CVM 的内网 IP。 */
   AuthClientIp?: string;
   /** 读写权限, 值为RO、RW；其中 RO 为只读，RW 为读写，不填默认为只读 */
   RWPermission?: string;
-  /** 用户权限，值为all_squash、no_all_squash、root_squash、no_root_squash。all_squash：所有访问用户（含 root 用户）都会被映射为匿名用户或用户组。no_all_squash：所有访问用户（含 root 用户）均保持原有的 UID/GID 信息。root_squash：将来访的 root 用户映射为匿名用户或用户组，非 root 用户保持原有的 UID/GID 信息。no_root_squash：与 no_all_squash 效果一致，所有访问用户（含 root 用户）均保持原有的 UID/GID 信息 */
+  /** 用户权限，值为all_squash、no_all_squash、root_squash、no_root_squash，默认值为root_squashall_squash：所有访问用户（含 root 用户）都会被映射为匿名用户或用户组。no_all_squash：所有访问用户（含 root 用户）均保持原有的 UID/GID 信息。root_squash：将来访的 root 用户映射为匿名用户或用户组，非 root 用户保持原有的 UID/GID 信息。no_root_squash：与 no_all_squash 效果一致，所有访问用户（含 root 用户）均保持原有的 UID/GID 信息 */
   UserPermission?: string;
-  /** 规则优先级，参数范围1-100。 其中 1 为最高，100为最低 */
+  /** 规则优先级，参数范围1-100。 其中 1 为最高，100为最低，默认值为100 */
   Priority?: number;
 }
 
@@ -1197,11 +1197,11 @@ declare interface UpdateCfsRuleResponse {
 }
 
 declare interface UpdateCfsSnapshotAttributeRequest {
-  /** 文件系统快照ID */
+  /** 文件系统快照ID,查询文件系统快照列表获取 */
   SnapshotId: string;
-  /** 文件系统快照名称 */
+  /** 文件系统快照名称，与AliveDays 必须填一个 */
   SnapshotName?: string;
-  /** 文件系统快照保留天数 */
+  /** 文件系统快照保留天数，与SnapshotName必须填一个，如果原来是永久保留时间，不允许修改成短期有效期 */
   AliveDays?: number;
 }
 
