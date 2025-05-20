@@ -1044,18 +1044,6 @@ declare interface CloseDBExtranetAccessResponse {
   RequestId?: string;
 }
 
-declare interface CloseServerlessDBExtranetAccessRequest {
-  /** 实例唯一标识符 */
-  DBInstanceId?: string;
-  /** 实例名称 */
-  DBInstanceName?: string;
-}
-
-declare interface CloseServerlessDBExtranetAccessResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateAccountRequest {
   /** 实例ID。 */
   DBInstanceId: string;
@@ -1536,18 +1524,6 @@ declare interface DeleteReadOnlyGroupRequest {
 declare interface DeleteReadOnlyGroupResponse {
   /** 流程ID */
   FlowId?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteServerlessDBInstanceRequest {
-  /** DB实例名称，实例名和实例ID必须至少传一个，如果同时存在，将只以实例ID为准。 */
-  DBInstanceName?: string;
-  /** DB实例ID，实例名和实例ID必须至少传一个，如果同时存在，将只以实例ID为准。 */
-  DBInstanceId?: string;
-}
-
-declare interface DeleteServerlessDBInstanceResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3067,8 +3043,6 @@ declare interface Postgres {
   CloneDBInstance(data: CloneDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CloneDBInstanceResponse>;
   /** 关闭实例公网地址 {@link CloseDBExtranetAccessRequest} {@link CloseDBExtranetAccessResponse} */
   CloseDBExtranetAccess(data: CloseDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseDBExtranetAccessResponse>;
-  /** @deprecated 【废弃】关闭serverlessDB实例公网地址 {@link CloseServerlessDBExtranetAccessRequest} {@link CloseServerlessDBExtranetAccessResponse} */
-  CloseServerlessDBExtranetAccess(data?: CloseServerlessDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseServerlessDBExtranetAccessResponse>;
   /** 创建数据库账号 {@link CreateAccountRequest} {@link CreateAccountResponse} */
   CreateAccount(data: CreateAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountResponse>;
   /** 创建备份计划 {@link CreateBackupPlanRequest} {@link CreateBackupPlanResponse} */
@@ -3109,8 +3083,6 @@ declare interface Postgres {
   DeleteReadOnlyGroup(data: DeleteReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReadOnlyGroupResponse>;
   /** 删除RO组网络 {@link DeleteReadOnlyGroupNetworkAccessRequest} {@link DeleteReadOnlyGroupNetworkAccessResponse} */
   DeleteReadOnlyGroupNetworkAccess(data: DeleteReadOnlyGroupNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReadOnlyGroupNetworkAccessResponse>;
-  /** @deprecated 【废弃】删除ServerlessDB实例 {@link DeleteServerlessDBInstanceRequest} {@link DeleteServerlessDBInstanceResponse} */
-  DeleteServerlessDBInstance(data?: DeleteServerlessDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServerlessDBInstanceResponse>;
   /** 查询数据库账号的权限信息 {@link DescribeAccountPrivilegesRequest} {@link DescribeAccountPrivilegesResponse} */
   DescribeAccountPrivileges(data: DescribeAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountPrivilegesResponse>;
   /** 查询实例的数据库账号列表 {@link DescribeAccountsRequest} {@link DescribeAccountsResponse} */

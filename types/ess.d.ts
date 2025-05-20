@@ -52,7 +52,7 @@ declare interface ApproverInfo {
   ApproverRole?: number;
   /** 可以自定义签署人角色名：收款人、开具人、见证人等，长度不能超过20，只能由中文、字母、数字和下划线组成。注: `如果是用模板发起, 优先使用此处上传的, 如果不传则用模板的配置的` */
   ApproverRoleName?: string;
-  /** 【已废弃】签署意愿确认渠道，默认为WEIXINAPP:人脸识别注: 将要废弃, 用ApproverSignTypes签署人签署合同时的认证方式代替, 新客户可请用ApproverSignTypes来设置 */
+  /** 【已不再使用】签署意愿确认渠道，默认为WEIXINAPP:人脸识别注: 该字段已不再使用, 请用ApproverSignTypes签署人签署合同时的认证方式代替, 新客户可请用ApproverSignTypes来设置 */
   VerifyChannel?: string[];
   /** 签署方在签署合同之前，需要强制阅读合同的时长，可指定为3秒至300秒之间的任意值。若未指定阅读时间，则会按照合同页数大小计算阅读时间，计算规则如下：合同页数少于等于2页，阅读时间为3秒；合同页数为3到5页，阅读时间为5秒；合同页数大于等于6页，阅读时间为10秒。 */
   PreReadTime?: number;
@@ -352,6 +352,8 @@ declare interface CreateFlowOption {
   ResultPageConfig?: CreateResultPageConfig[];
   /** 签署控件的配置信息，用在嵌入式发起的页面配置，包括 - 签署控件 是否默认展示日期. */
   SignComponentConfig?: SignComponentConfig;
+  /** 是否禁止编辑（展示）水印控件属性（默认） false -否 true - 禁止编辑 */
+  ForbidEditWatermark?: boolean;
 }
 
 /** 发起流程的可嵌入页面操作结果页配置 */
@@ -422,6 +424,8 @@ declare interface EmbedUrlOption {
   ShowTemplateComponent?: boolean;
   /** 跳过上传文件，默认为false(展示上传文件页）![image](https://qcloudimg.tencent-cloud.cn/raw/8ca33745cf772e79831dbe5a70e82400.png)- false: 展示上传文件页- true: 不展示上传文件页 注意: 此参数仅针对**EmbedType=CREATE_TEMPLATE(创建模板)和EmbedType=CREATE_CONTRACT_DRAFT_COOPEDIT(创建起草合同)有效**， */
   SkipUploadFile?: boolean;
+  /** 是否禁止编辑（展示）水印控件属性（默认） false -否 true - 禁止编辑 */
+  ForbidEditWatermark?: boolean;
 }
 
 /** 扩展服务开通和授权的详细信息 */
@@ -1857,7 +1861,7 @@ declare interface CreateDocumentRequest {
   PreviewType?: number;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 已废弃字段，客户端Token，保持接口幂等性,最大长度64个字符 */
+  /** 该字段已不再使用 */
   ClientToken?: string;
 }
 
@@ -2237,7 +2241,7 @@ declare interface CreateFlowRequest {
   FlowDescription?: string;
   /** 合同流程的类别分类（可自定义名称，如销售合同/入职合同等），最大长度为200个字符，仅限中文、字母、数字和下划线组成。此合同类型需要跟模板配置的合同类型保持一致。 */
   FlowType?: string;
-  /** 已经废弃字段，客户端Token，保持接口幂等性,最大长度64个字符 */
+  /** 该字段已不再使用 */
   ClientToken?: string;
   /** 合同流程的签署截止时间，格式为Unix标准时间戳（秒），如果未设置签署截止时间，则默认为合同流程创建后的365天时截止。如果在签署截止时间前未完成签署，则合同状态会变为已过期，导致合同作废。 */
   DeadLine?: number;
@@ -2713,7 +2717,7 @@ declare interface CreatePrepareFlowRequest {
   Approvers?: FlowCreateApprover[];
   /** 开启或者关闭智能添加填写区： **OPEN**：开启（默认值） **CLOSE**：关闭 */
   IntelligentStatus?: string;
-  /** 该字段已废弃，请使用InitiatorComponents */
+  /** 该字段已不再使用，请使用InitiatorComponents */
   Components?: Component;
   /** 发起合同个性化参数用于满足创建及页面操作过程中的个性化要求具体定制化内容详见数据接口说明 */
   FlowOption?: CreateFlowOption;
@@ -2733,7 +2737,7 @@ declare interface CreatePrepareFlowRequest {
   InitiatorComponents?: Component[];
   /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议 3 :文书效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
   FlowDisplayType?: number;
-  /** 此参数已经废弃，请使用 CreateFlowOption 里面的 SignComponentConfig签署控件的配置信息，用在嵌入式发起的页面配置，包括 - 签署控件 是否默认展示日期. */
+  /** 此字段已不再使用，请使用 CreateFlowOption 里面的 SignComponentConfig签署控件的配置信息，用在嵌入式发起的页面配置，包括 - 签署控件 是否默认展示日期. */
   SignComponentConfig?: SignComponentConfig;
 }
 
@@ -2757,13 +2761,13 @@ declare interface CreatePreparedPersonalEsignRequest {
   Operator?: UserInfo;
   /** 证件类型，支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同 中国大陆居民身份证) */
   IdCardType?: string;
-  /** 印章图片的base64注：已废弃请先通过UploadFiles接口上传文件，获取 FileId */
+  /** 该字段已不再使用 */
   SealImage?: string;
   /** 是否开启印章图片压缩处理，默认不开启，如需开启请设置为 true。当印章超过 2M 时建议开启，开启后图片的 hash 将发生变化。 */
   SealImageCompress?: boolean;
   /** 手机号码；当需要开通自动签时，该参数必传 */
   Mobile?: string;
-  /** 此字段已废弃，请勿继续使用。 */
+  /** 该字段已不再使用 */
   EnableAutoSign?: boolean;
   /** 印章颜色（参数ProcessSeal=true时生效）默认值：BLACK黑色取值: BLACK 黑色,RED 红色,BLUE 蓝色。 */
   SealColor?: string;
@@ -3991,7 +3995,7 @@ declare interface UploadFilesRequest {
   FileType?: string;
   /** 此参数仅对上传的PDF文件有效。其主要作用是确定是否将PDF中的灰色矩阵置为白色。**true**：将灰色矩阵置为白色。**false**：无需处理，不会将灰色矩阵置为白色（默认）。注: `该参数仅在关键字定位时，需要去除关键字所在的灰框场景下使用。` */
   CoverRect?: boolean;
-  /** 用户自定义ID数组，与上传文件一一对应注: `历史遗留问题，已经废弃，调用接口时不用赋值` */
+  /** 该字段已不再使用 */
   CustomIds?: string[];
   /** 不再使用，上传文件链接数组，最多支持20个URL */
   FileUrls?: string;

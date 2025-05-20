@@ -833,7 +833,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   lighthouse: Lighthouse,
   /** {@link Live 云直播CSS} */
   live: Live,
-  /** {@link Lke 大模型知识引擎} */
+  /** {@link Lke 腾讯云智能体开发平台} */
   lke: Lke,
   /** {@link Lkeap 知识引擎原子能力} */
   lkeap: Lkeap,

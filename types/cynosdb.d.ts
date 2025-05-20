@@ -570,6 +570,8 @@ declare interface CynosdbCluster {
   Ability?: Ability;
   /** 实例绑定资源包信息（此处只返回存储资源包，即packageType=DISK） */
   ResourcePackages?: ResourcePackage[];
+  /** 全球数据库唯一标识 */
+  GdnId?: string;
 }
 
 /** 集群详情详细信息 */
@@ -676,6 +678,10 @@ declare interface CynosdbClusterDetail {
   SlaveZoneAttr?: SlaveZoneAttrItem[];
   /** 版本标签 */
   CynosVersionTag?: string;
+  /** 全球数据库网络唯一标识 */
+  GdnId?: string;
+  /** 集群在全球数据网络中的角色。主集群- primary从集群 - standby如为空，该字段无效 */
+  GdnRole?: string;
 }
 
 /** 实例错误日志返回类型 */
@@ -806,6 +812,8 @@ declare interface CynosdbInstance {
   CynosVersionTag?: string;
   /** libradb 节点信息 */
   NodeList?: string[];
+  /** 全球数据库唯一标识 */
+  GdnId?: string;
 }
 
 /** 实例详情 */
@@ -1634,6 +1642,26 @@ declare interface PolicyRule {
   Id?: string;
   /** 描述 */
   Desc?: string;
+}
+
+/** 访问代理配置 */
+declare interface ProxyConfig {
+  /** 数据库代理组节点个数（该参数不再建议使用，建议使用ProxyZones) */
+  ProxyCount?: number;
+  /** cpu核数 */
+  Cpu?: number;
+  /** 内存 */
+  Mem?: number;
+  /** 连接池类型：SessionConnectionPool(会话级别连接池 ) */
+  ConnectionPoolType?: string;
+  /** 是否开启连接池,yes-开启，no-不开启 */
+  OpenConnectionPool?: string;
+  /** 连接池阈值：单位（秒） */
+  ConnectionPoolTimeOut?: number;
+  /** 描述说明 */
+  Description?: string;
+  /** 数据库节点信息（该参数与ProxyCount需要任选一个输入） */
+  ProxyZones?: ProxyZone[];
 }
 
 /** 数据库代理连接池信息 */
@@ -2635,6 +2663,10 @@ declare interface CreateClustersRequest {
   SlaveZone?: string;
   /** 实例初始化配置信息，主要用于购买集群时选不同规格实例 */
   InstanceInitInfos?: InstanceInitInfo[];
+  /** 全球数据库唯一标识 */
+  GdnId?: string;
+  /** 数据库代理配置 */
+  ProxyConfig?: ProxyConfig;
 }
 
 declare interface CreateClustersResponse {

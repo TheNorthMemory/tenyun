@@ -1456,6 +1456,10 @@ declare interface DescribeInstanceStateResponse {
   InstanceStateDesc?: string;
   /** 集群流程错误信息，例如：“创建失败，资源不足” */
   FlowMsg?: string;
+  /** 流程ProcessId */
+  ProcessId?: string;
+  /** Job名称 */
+  JobName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

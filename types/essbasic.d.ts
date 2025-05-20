@@ -378,6 +378,8 @@ declare interface CreateFlowOption {
   SkipUploadFile?: boolean;
   /** 签署控件的配置信息，用在嵌入式发起的页面配置，包括 - 签署控件 是否默认展示日期. */
   SignComponentConfig?: SignComponentConfig;
+  /** 是否禁止编辑（展示）水印控件属性（默认） false -否 true - 禁止编辑 */
+  ForbidEditWatermark?: boolean;
 }
 
 /** 清理的企业认证流信息 */
@@ -452,6 +454,8 @@ declare interface EmbedUrlOption {
   ShowTemplateComponent?: boolean;
   /** 跳过上传文件，默认为false(展示上传文件页）![image](https://qcloudimg.tencent-cloud.cn/raw/8ca33745cf772e79831dbe5a70e82400.png)- false: 展示上传文件页- true: 不展示上传文件页 注意: 此参数仅针对**EmbedType=CREATE_TEMPLATE(创建模板)有效**， */
   SkipUploadFile?: string;
+  /** 是否禁止编辑（展示）水印控件属性（默认） false -否 true - 禁止编辑 */
+  ForbidEditWatermark?: boolean;
 }
 
 /** 扩展服务开通和授权的详细信息 */
@@ -1563,7 +1567,7 @@ declare interface ChannelCreateBatchCancelFlowUrlResponse {
 }
 
 declare interface ChannelCreateBatchQuickSignUrlRequest {
-  /** 批量签署的流程签署人，其中姓名(ApproverName)、参与人类型(ApproverType)必传，手机号(ApproverMobile)和证件信息(ApproverIdCardType、ApproverIdCardNumber)可任选一种或全部传入。若为个人参与方：ApproverType:"PERSON"若为企业参与方：ApproverType:"ORGANIZATION"。同时若签署方为saas企业员工， OrganizationName 参数需传入参与方企业名称。若签署方为渠道子客企业员工，还需要传 OpenId、OrganizationOpenId。注:`1. 暂不支持签署人拖动签署控件功能，以及签批控件。``2. 当需要通过短信验证码签署时，手机号ApproverMobile需要与发起合同时填写的用户手机号一致。` */
+  /** 批量签署的流程签署人，其中姓名(ApproverName)、参与人类型(ApproverType)必传，手机号(ApproverMobile)和证件信息(ApproverIdCardType、ApproverIdCardNumber)可任选一种或全部传入。若为个人参与方：ApproverType:"PERSON"若为企业参与方：ApproverType:"ORGANIZATION"。同时若签署方为saas企业员工， OrganizationName 参数需传入参与方企业名称。若签署方为渠道子客企业员工，除了 OrganizationName 还需要传 OpenId、OrganizationOpenId。（如果OrganizationOpenId对应子客企业已经认证激活，则可以省略OrganizationName参数）注:`1. 暂不支持签署人拖动签署控件功能，以及签批控件。``2. 当需要通过短信验证码签署时，手机号ApproverMobile需要与发起合同时填写的用户手机号一致。` */
   FlowApproverInfo: FlowApproverInfo;
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 */
   Agent?: Agent;
@@ -1889,7 +1893,7 @@ declare interface ChannelCreateFlowSignUrlRequest {
   Agent: Agent;
   /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
   FlowId: string;
-  /** 流程签署人列表，其中结构体的ApproverType必传。若为个人签署方或saas企业签署方，则Name，Mobile必传。OrganizationName 传对应企业名称。若为子客企业签署方则需传OpenId、OrganizationOpenId，OrganizationName 其他可不传。（如果对应OrganizationOpenId 子客已经认证激活了，则可以省去OrganizationName）此结构体和发起接口参与方结构体复用，除了上述参数外，可传递的参数有：1. RecipientId: 发起合同会返回，可以直接用于指定需要生成链接的签署方。2. ApproverSignTypes: 指定签署方签署时候的认证方式，仅此链接生效。3. SignTypeSelector: 可以指定签署方签署合同的认证校验方式的选择模式。4. Intention: 指定H5签署视频核身的意图配置，仅视频签署需要使用。注:`1. 签署人只能有手写签名、时间类型、印章类型、签批类型的签署控件和内容填写控件，其他类型的签署控件暂时未支持。``2. 生成发起方预览链接时，该字段（FlowApproverInfos）传空或者不传` */
+  /** 流程签署人列表，其中结构体的ApproverType必传。若为个人签署方或saas企业签署方，则Name，Mobile必传。OrganizationName 传对应企业名称。若为子客企业签署方则需传OpenId、OrganizationOpenId、OrganizationName， 其他可不传。（如果对应OrganizationOpenId 子客已经认证激活了，则可以省去OrganizationName）此结构体和发起接口参与方结构体复用，除了上述参数外，可传递的参数有：1. RecipientId: 发起合同会返回，可以直接用于指定需要生成链接的签署方。2. ApproverSignTypes: 指定签署方签署时候的认证方式，仅此链接生效。3. SignTypeSelector: 可以指定签署方签署合同的认证校验方式的选择模式。4. Intention: 指定H5签署视频核身的意图配置，仅视频签署需要使用。注:`1. 签署人只能有手写签名、时间类型、印章类型、签批类型的签署控件和内容填写控件，其他类型的签署控件暂时未支持。``2. 生成发起方预览链接时，该字段（FlowApproverInfos）传空或者不传` */
   FlowApproverInfos?: FlowApproverInfo[];
   /** 用户信息，暂未开放 */
   Operator?: UserInfo;
@@ -2059,7 +2063,7 @@ declare interface ChannelCreatePreparedPersonalEsignRequest {
   SealImageCompress?: boolean;
   /** 手机号码；当需要开通自动签时，该参数必传 */
   Mobile?: string;
-  /** 此字段已废弃，请勿继续使用。 */
+  /** 该字段已不再使用 */
   EnableAutoSign?: boolean;
   /** 设置用户开通自动签时是否绑定个人自动签账号许可。一旦绑定后，将扣减购买的个人自动签账号许可一次（1年有效期），不可解绑释放。不传默认为绑定自动签账号许可。 0-绑定个人自动签账号许可，开通后将扣减购买的个人自动签账号许可一次 1-不绑定，发起合同时将按标准合同套餐进行扣减 */
   LicenseType?: number;

@@ -75,13 +75,13 @@ declare interface BatchSearchRecordInfo {
   /** 解析记录 ID */
   RecordId?: number;
   /** 解析线路 */
-  Area: string;
+  Area?: string;
   /** 记录备注 */
-  Remark?: string | null;
+  Remark?: string;
   /** TTL(秒) */
-  TTL: number;
+  TTL?: number;
   /** 记录类型 */
-  RecordType: string;
+  RecordType?: string;
   /** 记录是否启用 */
   Enabled?: number;
   /** 权重 */
@@ -89,9 +89,9 @@ declare interface BatchSearchRecordInfo {
   /** 记录分组 ID */
   GroupId?: number;
   /** 子域名 */
-  SubDomain: string;
+  SubDomain?: string;
   /** 解析值 */
-  Value: string;
+  Value?: string;
   /** MX优先级 */
   MX?: number | null;
 }

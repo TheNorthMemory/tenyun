@@ -1188,7 +1188,7 @@ declare interface SecurityGroupRule {
   ServiceTemplateId?: string;
   /** （入参时无需填写，自动生成）规则对应的唯一id */
   Id?: string;
-  /** （入参时、Enable已弃用；由通用配置中新增规则启用状态控制）规则状态，true表示启用，false表示禁用 */
+  /** （入参时Enable无意义；由通用配置中新增规则启用状态控制）规则状态，true表示启用，false表示禁用 */
   Enable?: string;
   /** 规则对应的唯一内部id */
   Uid?: string;
@@ -3903,7 +3903,7 @@ declare interface Cfw {
   DescribeSecurityGroupList(data: DescribeSecurityGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupListResponse>;
   /** 查询全部资产信息 {@link DescribeSourceAssetRequest} {@link DescribeSourceAssetResponse} */
   DescribeSourceAsset(data?: DescribeSourceAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSourceAssetResponse>;
-  /** 防火墙开关列表，已废弃，请使用DescribeFwEdgeIps {@link DescribeSwitchListsRequest} {@link DescribeSwitchListsResponse} */
+  /** 防火墙开关列表，请换用DescribeFwEdgeIps {@link DescribeSwitchListsRequest} {@link DescribeSwitchListsResponse} */
   DescribeSwitchLists(data?: DescribeSwitchListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSwitchListsResponse>;
   /** DescribeTLogInfo告警中心概况查询 {@link DescribeTLogInfoRequest} {@link DescribeTLogInfoResponse} */
   DescribeTLogInfo(data: DescribeTLogInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTLogInfoResponse>;

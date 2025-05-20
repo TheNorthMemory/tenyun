@@ -12,15 +12,15 @@ declare interface ApplicationInfo {
   Description?: string;
   /** 应用的环境配置 */
   ConfigEnvironment?: string;
-  /** 系统盘大小下限 */
+  /** 系统盘大小下限，单位GB */
   MinSystemDiskSize?: number;
-  /** 应用类型，目前该项取值可以为PRIVATE_APPLICATION或者PUBLIC_APPLICATION */
+  /** 应用类型，目前该项取值可以为PUBLIC_APPLICATION（公共应用）；PRIVATE_APPLICATION（自定义应用）；COMMUNITY_APPLICATION（社区应用） */
   ApplicationType?: string;
   /** 应用状态：CREATING-创建中；ONLINE -正常在线；DELETING -删除中；ARREARS - 欠费隔离示例值：ONLINE */
   ApplicationState?: string;
-  /** 应用创建时间 */
+  /** 应用创建时间，格式：%Y-%m-%d %H:%M:%S */
   CreateTime?: string;
-  /** 应用大小 */
+  /** 应用大小，单位GB */
   ApplicationSize?: number;
 }
 
@@ -48,11 +48,11 @@ declare interface Instance {
   GPUCount?: number;
   /** 算力 */
   GPUPerformance?: string;
-  /** 显存 */
+  /** 显存，单位：GB */
   GPUMemory?: string;
-  /** CPU核数 */
+  /** CPU核数，单位：核 */
   CPU?: string;
-  /** 内存 */
+  /** 内存，单位：GB */
   Memory?: string;
   /** 系统盘数据 */
   SystemDisk?: SystemDisk;
@@ -66,17 +66,17 @@ declare interface Instance {
   LatestOperation?: string;
   /** 实例最新操作状态：SUCCESS：表示操作成功OPERATING：表示操作执行中FAILED：表示操作失败 */
   LatestOperationState?: string;
-  /** 实例创建时间 */
+  /** 实例创建时间，时间格式："YYYY-MM-DD HH:MM:SS" */
   CreateTime?: string;
-  /** 公网出带宽上限，默认10Mbps */
+  /** 公网出带宽上限，默认10Mbps，单位：Mbps */
   MaxOutBandwidth?: string;
-  /** 每月免费流量，默认500G */
+  /** 每月免费流量，默认500G，单位：GB */
   MaxFreeTraffic?: string;
   /** 应用配置环境 */
   ConfigurationEnvironment?: string;
   /** 实例包含的登录服务详情 */
   LoginServices?: LoginService[];
-  /** 应用服务的操作系统类型 */
+  /** 应用服务的操作系统类型；参数：linux、windows */
   OSType?: string;
 }
 
@@ -178,13 +178,13 @@ declare interface Price {
 
 /** 地域列表 */
 declare interface RegionInfo {
-  /** ap-guangzhou */
+  /** 地域 */
   Region?: string;
-  /** 华南地区(广州) */
+  /** 地域名称 */
   RegionName?: string;
   /** 地域是否可用状态AVAILABLE：可用 */
   RegionState?: string;
-  /** 学术加速是否支持：NO_NEED_SUPPORT表示不需支持；NOT_SUPPORT_YET表示暂未支持；ALREADY_SUPPORT表示已经支持。对于ALREADY_SUPPORT的地域才需进一步调用DescribeScholarRocketStatus查看学术加速是开启还是关闭 */
+  /** 学术加速是否支持：NO_NEED_SUPPORT表示不需支持；NOT_SUPPORT_YET表示暂未支持；ALREADY_SUPPORT表示已经支持。 */
   ScholarRocketSupportState?: string;
 }
 
@@ -200,7 +200,7 @@ declare interface SceneInfo {
 declare interface SystemDisk {
   /** 系统盘类型。取值范围：CLOUD_PREMIUM：高性能云硬盘CLOUD_HSSD：增强型SSD云盘默认取值：当前有库存的硬盘类型。 */
   DiskType?: string;
-  /** 系统盘大小，单位：GB。默认值为 80 */
+  /** 系统盘大小，单位：GB。默认值为 80，取值范围：80-1000 */
   DiskSize?: number;
   /** 系统盘分区盘符 */
   DiskName?: string;
@@ -241,11 +241,11 @@ declare interface CreateMuskPromptResponse {
 declare interface DescribeApplicationsRequest {
   /** 应用id列表 */
   ApplicationIds?: string[];
-  /** 过滤器，跟ApplicationIds不能共用，支持的filter主要有：application-id: 精确匹配;scene-id: 精确匹配;application-name: 模糊匹配;application-type: 精确匹配; */
+  /** 过滤器，跟ApplicationIds不能共用，支持的filter主要有：application-id: 精确匹配;scene-id: 精确匹配，通过调用接口 [DescribeScenes](https://cloud.tencent.com/document/api/1721/101608)获取;application-name: 模糊匹配;application-type: 精确匹配，枚举类型如下：PUBLIC_APPLICATION（公共应用）/ PRIVATE_APPLICATION（自定义应用）/ COMMUNITY_APPLICATION（社区应用）; */
   Filters?: Filter[];
-  /** 偏移量，默认为0 */
+  /** 偏移量，不得小于0，默认为0 */
   Offset?: number;
-  /** 返回量，默认为20MC：1000用户：100 */
+  /** 返回量，不得大于100，默认为20 */
   Limit?: number;
   /** 应用列表排序的依据字段。取值范围："CREATED_TIME"：依据应用的创建时间排序。 "APPLICATION_SIZE"：依据应用的大小排序。默认按应用的创建时间排序。 */
   OrderField?: string;
@@ -263,7 +263,7 @@ declare interface DescribeApplicationsResponse {
 }
 
 declare interface DescribeInstanceNetworkStatusRequest {
-  /** 实例ID数组，单次请求最多不超过100个实例 */
+  /** 实例ID数组，单次请求最多不超过100个实例；实例ID通过调用接口[DescribeInstances](https://cloud.tencent.com/document/api/1721/101612)获取。 */
   InstanceIds: string[];
 }
 
@@ -277,13 +277,13 @@ declare interface DescribeInstanceNetworkStatusResponse {
 }
 
 declare interface DescribeInstancesRequest {
-  /** 实例元组 */
+  /** 实例元组，数量上限100 */
   InstanceIds?: string[];
-  /** 描述键值对过滤器，用于条件过滤查询。目前支持的过滤器有：instance-id，实例id；instance-state，实例状态；charge-type，付费方式；public-ip-address，公网IP过滤 */
+  /** 描述键值对过滤器，用于条件过滤查询。目前支持的过滤器有： instance-id，实例id； instance-state，实例状态：RUNNING，PENDING，STOPPED，ARREARS，STOPPED_NO_CHARGE； charge-type，付费方式：PREPAID_BY_MONTH，POSTPAID_BY_HOUR； public-ip-address，公网IP过滤 */
   Filters?: Filter[];
-  /** 偏移量，默认为0 */
+  /** 偏移量，默认为0，不得大于100 */
   Offset?: number;
-  /** 返回量，默认为20 */
+  /** 返回量，默认为20，不能小于0 */
   Limit?: number;
 }
 
@@ -329,7 +329,7 @@ declare interface DescribeRegionsResponse {
 }
 
 declare interface DescribeScenesRequest {
-  /** 场景id列表 */
+  /** 场景id列表，单次能查询100个场景id */
   SceneIds?: string[];
 }
 
@@ -341,7 +341,7 @@ declare interface DescribeScenesResponse {
 }
 
 declare interface DescribeServiceLoginSettingsRequest {
-  /** 实例id */
+  /** 实例ID通过调用接口[DescribeInstances](https://cloud.tencent.com/document/api/1721/101612)获取。 */
   InstanceId: string;
   /** 服务名称 */
   ServiceName?: string;
@@ -355,15 +355,15 @@ declare interface DescribeServiceLoginSettingsResponse {
 }
 
 declare interface InquirePriceRunInstancesRequest {
-  /** 应用ID */
+  /** 应用ID通过调用接口[DescribeApplications](https://cloud.tencent.com/document/api/1721/101609)获取。 */
   ApplicationId: string;
-  /** 算力套餐类型 */
+  /** 算力套餐类型, 枚举：XL,XL_2X, 3XL, 3XL_2X, 4XL, 24GB_A. */
   BundleType: string;
   /** 实例系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。 */
   SystemDisk?: SystemDisk;
-  /** 购买实例数量。 */
+  /** 购买实例数量，单次请求实例数量上限为10。 */
   InstanceCount?: number;
-  /** 实例显示名称 */
+  /** 实例显示名称，名称长度限制为128个字符。 */
   InstanceName?: string;
   /** 幂等请求token */
   ClientToken?: string;
@@ -383,15 +383,15 @@ declare interface InquirePriceRunInstancesResponse {
 }
 
 declare interface RunInstancesRequest {
-  /** 应用ID */
+  /** 应用ID通过调用接口[DescribeApplications](https://cloud.tencent.com/document/api/1721/101609)获取。 */
   ApplicationId: string;
-  /** 算力套餐类型 */
+  /** 算力套餐类型, 枚举：XL,XL_2X, 3XL, 3XL_2X, 4XL, 24GB_A */
   BundleType: string;
   /** 实例系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。 */
   SystemDisk?: SystemDisk;
-  /** 购买实例数量。 */
+  /** 购买实例数量，单次请求实例数量上限为10. */
   InstanceCount?: number;
-  /** 实例显示名称 */
+  /** 实例显示名称，名称长度限制为128个字符. */
   InstanceName?: string;
   /** 幂等请求的token */
   ClientToken?: string;
@@ -407,7 +407,7 @@ declare interface RunInstancesResponse {
 }
 
 declare interface StartInstanceRequest {
-  /** 实例ID */
+  /** 实例ID可通过DescribeInstances获取实例ID */
   InstanceId: string;
   /** 默认为False，True代表只验证接口连通性 */
   DryRun?: boolean;
@@ -421,7 +421,7 @@ declare interface StartInstanceResponse {
 }
 
 declare interface StopInstanceRequest {
-  /** 实例ID */
+  /** 实例ID可通过DescribeInstances获取实例ID */
   InstanceId: string;
   /** hai实例关机的模式，目前仅支持关机不收费：STOP_CHARGE -- 关闭hai实例，释放计算资源，停止收取计算资源的费用。注意：默认值为STOP_CHARGE */
   StopMode?: string;
@@ -437,7 +437,7 @@ declare interface StopInstanceResponse {
 }
 
 declare interface TerminateInstancesRequest {
-  /** 实例ID列表 */
+  /** 实例ID列表可通过DescribeInstances接口获取ID列表.单次能查询100个InstanceId */
   InstanceIds: string[];
   /** 默认为False，True代表只验证接口连通性 */
   DryRun?: boolean;

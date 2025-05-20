@@ -3156,6 +3156,8 @@ declare interface DescribeClusterFlowStatusDetailResponse {
   FlowTotalStatus?: number;
   /** 流程额外信息NeedExtraDetail为true时返回 */
   FlowExtraDetail?: FlowExtraDetail[] | null;
+  /** 流程描述 */
+  FlowInfo?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -2,6 +2,20 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 智能通话 */
+declare interface AICallConfig {
+  /** 启用语音互动功能 */
+  EnableVoiceInteract?: boolean | null;
+  /** 启用语音通话 */
+  EnableVoiceCall?: boolean | null;
+  /** 启用数智人 */
+  EnableDigitalHuman?: boolean | null;
+  /** 音色配置 */
+  Voice?: VoiceConfig | null;
+  /** 数智人配置 */
+  DigitalHuman?: DigitalHumanConfig | null;
+}
+
 /** Agent调试信息 */
 declare interface AgentDebugInfo {
   /** 工具、大模型的输入信息，json */
@@ -38,6 +52,8 @@ declare interface AgentProcedure {
   SourceAgentName?: string | null;
   /** 挂号agent */
   TargetAgentName?: string | null;
+  /** Agent的图标 */
+  AgentIcon?: string | null;
 }
 
 /** Agent思考过程调试信息 */
@@ -52,6 +68,12 @@ declare interface AgentProcedureDebugging {
   QuoteInfos?: QuoteInfo[] | null;
   /** 具体的参考来源 */
   References?: AgentReference[] | null;
+  /** 展示正在执行的状态 */
+  DisplayStatus?: string | null;
+  /** 云桌面的URL地址 */
+  SandboxUrl?: string | null;
+  /** 云桌面里面通过浏览器打开的URL地址 */
+  DisplayUrl?: string | null;
 }
 
 /** Agent中的参考来源 */
@@ -96,6 +118,8 @@ declare interface AgentThought {
   Procedures?: AgentProcedure[] | null;
   /** TraceId */
   TraceId?: string | null;
+  /** 文件信息 */
+  Files?: FileInfo[] | null;
 }
 
 /** 自定义变量和标签关系数据 */
@@ -352,6 +376,18 @@ declare interface Credentials {
   TmpSecretId?: string | null;
   /** 临时证书密钥Key */
   TmpSecretKey?: string | null;
+  /** 临时证书appid */
+  AppId?: number | null;
+}
+
+/** 数智人配置 */
+declare interface DigitalHumanConfig {
+  /** 数智人资产key */
+  AssetKey?: string;
+  /** 数智人名称 */
+  Name?: string;
+  /** 图像 */
+  Avatar?: string;
 }
 
 /** 文档列表筛选标识位 */
@@ -448,6 +484,8 @@ declare interface FileInfo {
   FileType?: string | null;
   /** 解析后返回的DocID */
   DocId?: string | null;
+  /** 创建时间 */
+  CreatedAt?: string | null;
 }
 
 /** 不满意回复检索过滤 */
@@ -564,6 +602,8 @@ declare interface KnowledgeQaConfig {
   IntentAchievements?: IntentAchievement[] | null;
   /** 是否开启图文检索 */
   ImageTextRetrieval?: boolean | null;
+  /** 配置语音通话参数 */
+  AiCall?: AICallConfig | null;
 }
 
 /** 应用管理输出配置 */
@@ -638,6 +678,8 @@ declare interface KnowledgeQaSingleWorkflow {
   Status?: string;
   /** 工作流是否启用 */
   IsEnable?: boolean;
+  /** 是否开启异步调用工作流 */
+  AsyncWorkflow?: boolean;
 }
 
 /** 检索知识 */
@@ -860,6 +902,8 @@ declare interface ModelInfo {
   RoleLenLimit?: number;
   /** 是否专属并发模型 */
   IsExclusive?: boolean;
+  /** 模型支持智能通话效果 */
+  SupportAiCallStatus?: number;
 }
 
 /** 模型参数范围 */
@@ -938,6 +982,8 @@ declare interface MsgRecord {
   AgentThought?: AgentThought | null;
   /** 扩展信息 */
   ExtraInfo?: ExtraInfo | null;
+  /** 工作流信息 */
+  WorkFlow?: WorkflowInfo | null;
 }
 
 /** 聊天详情Refer */
@@ -972,7 +1018,7 @@ declare interface PluginToolReqParam {
   Name?: string;
   /** 参数描述 */
   Desc?: string;
-  /** 参数类型，0:string, 1:int, 2:float，3:bool 4:object 5:array_string, 6:array_int, 7:array_float, 8:array_bool, 9:array_object */
+  /** 参数类型，0:string, 1:int, 2:float，3:bool 4:object 5:array_string, 6:array_int, 7:array_float, 8:array_bool, 9:array_object, 99:null, 100:upspecified */
   Type?: number;
   /** 参数是否必填 */
   IsRequired?: boolean;
@@ -982,6 +1028,10 @@ declare interface PluginToolReqParam {
   SubParams?: PluginToolReqParam[];
   /** 插件参数配置是否隐藏不可见，true-隐藏不可见，false-可见 */
   GlobalHidden?: boolean;
+  /** OneOf类型参数 */
+  OneOf?: PluginToolReqParam[];
+  /** AnyOf类型参数 */
+  AnyOf?: PluginToolReqParam[];
 }
 
 /** 文本的坐标，以四个顶点坐标表示注意：此字段可能返回 null，表示取不到有效值 */
@@ -1028,6 +1078,8 @@ declare interface ProcedureDebugging {
   WorkFlow?: WorkFlowSummary | null;
   /** Agent调试信息 */
   Agent?: AgentDebugInfo | null;
+  /** 自定义参数 */
+  CustomVariables?: string[];
 }
 
 /** 获取QA分类分组 */
@@ -1464,6 +1516,16 @@ declare interface ValueInfo {
   ValueStrArray?: string[] | null;
 }
 
+/** 音色参数 */
+declare interface VoiceConfig {
+  /** 公有云音色id */
+  VoiceType?: number | null;
+  /** 音色key */
+  TimbreKey?: string | null;
+  /** 音色名称 */
+  VoiceName?: string | null;
+}
+
 /** 解析为 word 文档的结果 */
 declare interface WordRecognizeInfo {
   /** 输入文件的页码数 */
@@ -1482,6 +1544,28 @@ declare interface WorkFlowSummary {
   WorkflowRunId?: string | null;
   /** 节点信息 */
   RunNodes?: WorkflowRunNodeInfo[] | null;
+  /** 选项卡 */
+  OptionCards?: string[] | null;
+  /** 多气泡的输出结果 */
+  Outputs?: string[] | null;
+  /** 工作流发布时间，unix时间戳 */
+  WorkflowReleaseTime?: string | null;
+}
+
+/** 工作流信息 */
+declare interface WorkflowInfo {
+  /** 工作流ID */
+  WorkflowId?: string | null;
+  /** 工作流名称 */
+  WorkflowName?: string | null;
+  /** 工作流运行ID */
+  WorkflowRunId?: string | null;
+  /** 选项卡 */
+  OptionCards?: string[] | null;
+  /** 多气泡的输出结果 */
+  Outputs?: string[] | null;
+  /** 工作流发布时间，unix时间戳 */
+  WorkflowReleaseTime?: string | null;
 }
 
 /** 工作流运行节点信息 */
@@ -3680,7 +3764,7 @@ declare interface VerifyQAResponse {
   RequestId?: string;
 }
 
-/** {@link Lke 大模型知识引擎} */
+/** {@link Lke 腾讯云智能体开发平台} */
 declare interface Lke {
   (): Versions;
   /** 检查标签下的标签值是否存在 {@link CheckAttributeLabelExistRequest} {@link CheckAttributeLabelExistResponse} */

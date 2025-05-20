@@ -1608,6 +1608,24 @@ declare interface AwsSQS {
   S3SecretKey?: string | null;
 }
 
+/** 智能字幕结果。 */
+declare interface BatchSmartSubtitlesResult {
+  /** 智能字幕任务输入信息。 */
+  Input?: SmartSubtitleTaskResultInput | null;
+  /** 智能字幕输出信息 */
+  Outputs?: SmartSubtitleTaskBatchOutput[] | null;
+}
+
+/** 批量任务子任务结果 */
+declare interface BatchSubTaskResult {
+  /** 批量任务输入信息 */
+  InputInfos?: MediaInputInfo[] | null;
+  /** 原始视频的元信息。 */
+  Metadatas?: MediaMetaData[] | null;
+  /** 智能字幕任务的执行结果 */
+  SmartSubtitlesTaskResult?: BatchSmartSubtitlesResult | null;
+}
+
 /** 智能分类任务控制参数 */
 declare interface ClassificationConfigureInfo {
   /** 智能分类任务开关，可选值：ON：开启智能分类任务；OFF：关闭智能分类任务。 */
@@ -4918,6 +4936,22 @@ declare interface SmartSubtitleTaskAsrFullTextSegmentItem {
   Wordlist?: WordResult[] | null;
 }
 
+/** 智能字幕输出信息 */
+declare interface SmartSubtitleTaskBatchOutput {
+  /** 任务进度。 */
+  Progress?: number;
+  /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
+  Status?: string;
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369) 列表。 */
+  ErrCodeExt?: string;
+  /** 错误信息。 */
+  Message?: string;
+  /** 翻译任务输出信息。 */
+  TransTextTask?: SmartSubtitleTaskTransTextResultOutput | null;
+  /** 语音全文识别任务输出信息。 */
+  AsrFullTextTask?: SmartSubtitleTaskAsrFullTextResultOutput | null;
+}
+
 /** 智能字幕翻译的输入。 */
 declare interface SmartSubtitleTaskResultInput {
   /** 智能字幕模板 ID。 */
@@ -5804,6 +5838,34 @@ declare interface BatchDeleteStreamLinkFlowRequest {
 }
 
 declare interface BatchDeleteStreamLinkFlowResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchProcessMediaRequest {
+  /** 媒体处理的文件输入信息。 */
+  InputInfo: MediaInputInfo[];
+  /** 媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。注意：当InputInfo.Type为URL时，该参数是必填项 */
+  OutputStorage?: TaskOutputStorage;
+  /** 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。如果不填，表示与 InputInfo 中文件所在的目录一致。 */
+  OutputDir?: string;
+  /** 智能字幕 */
+  SmartSubtitlesTask?: SmartSubtitlesTaskInput;
+  /** 任务的事件通知信息，不填代表不获取事件通知。 */
+  TaskNotifyConfig?: TaskNotifyConfig;
+  /** 任务流的优先级，数值越大优先级越高，取值范围是-10到 10，不填代表0。 */
+  TasksPriority?: number;
+  /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+  SessionContext?: string;
+  /** 资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。 */
+  ResourceId?: string;
+  /** 是否跳过元信息获取，可选值： 0：表示不跳过 1：表示跳过 默认值：0 */
+  SkipMateData?: number;
+}
+
+declare interface BatchProcessMediaResponse {
+  /** 任务 ID。 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6756,6 +6818,40 @@ declare interface DescribeAsrHotwordsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBatchTaskDetailRequest {
+  /** 视频处理任务的任务 ID。 */
+  TaskId: string;
+}
+
+declare interface DescribeBatchTaskDetailResponse {
+  /** 任务类型，目前取值有：BatchTask：视频工作流批量处理任务。 */
+  TaskType?: string;
+  /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成。 */
+  Status?: string;
+  /** 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  CreateTime?: string;
+  /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  BeginProcessTime?: string;
+  /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  FinishTime?: string;
+  /** 媒体处理任务 ID。 */
+  TaskId?: string;
+  /** 视频处理任务信息，仅当 TaskType 为 BatchTask，该字段有值。 */
+  BatchTaskResult?: BatchSubTaskResult | null;
+  /** 任务的事件通知信息。 */
+  TaskNotifyConfig?: TaskNotifyConfig | null;
+  /** 任务流的优先级，取值范围为 [-10, 10]。 */
+  TasksPriority?: number;
+  /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长50个字符，不带或者带空字符串表示不做去重。 */
+  SessionId?: string;
+  /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长1000个字符。 */
+  SessionContext?: string;
+  /** 扩展信息字段，仅用于特定场景。 */
+  ExtInfo?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeContentReviewTemplatesRequest {
   /** 智能审核模板唯一标识过滤条件，数组长度限制：50。 */
   Definitions?: number[];
@@ -6808,6 +6904,24 @@ declare interface DescribeImageSpriteTemplatesResponse {
   TotalCount?: number;
   /** 雪碧图模板详情列表。 */
   ImageSpriteTemplateSet?: ImageSpriteTemplate[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageTaskDetailRequest {
+  /** 图片处理任务的任务 ID。 */
+  TaskId: string;
+}
+
+declare interface DescribeImageTaskDetailResponse {
+  /** 任务类型，目前取值有：WorkflowTask：工作流处理任务。 */
+  TaskType?: string | null;
+  /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成。 */
+  Status?: string | null;
+  /** 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  CreateTime?: string | null;
+  /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  FinishTime?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8227,6 +8341,8 @@ declare interface Mps {
   (): Versions;
   /** 批量删除媒体传输流 {@link BatchDeleteStreamLinkFlowRequest} {@link BatchDeleteStreamLinkFlowResponse} */
   BatchDeleteStreamLinkFlow(data: BatchDeleteStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteStreamLinkFlowResponse>;
+  /** 批量输入发起媒体处理 {@link BatchProcessMediaRequest} {@link BatchProcessMediaResponse} */
+  BatchProcessMedia(data: BatchProcessMediaRequest, config?: AxiosRequestConfig): AxiosPromise<BatchProcessMediaResponse>;
   /** 批量开启媒体传输流 {@link BatchStartStreamLinkFlowRequest} {@link BatchStartStreamLinkFlowResponse} */
   BatchStartStreamLinkFlow(data: BatchStartStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<BatchStartStreamLinkFlowResponse>;
   /** 批量停止媒体传输流 {@link BatchStopStreamLinkFlowRequest} {@link BatchStopStreamLinkFlowResponse} */
@@ -8337,12 +8453,16 @@ declare interface Mps {
   DescribeAsrHotwords(data?: DescribeAsrHotwordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAsrHotwordsResponse>;
   /** 查询智能字幕热词库列表 {@link DescribeAsrHotwordsListRequest} {@link DescribeAsrHotwordsListResponse} */
   DescribeAsrHotwordsList(data?: DescribeAsrHotwordsListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAsrHotwordsListResponse>;
+  /** 批量任务详情查询 {@link DescribeBatchTaskDetailRequest} {@link DescribeBatchTaskDetailResponse} */
+  DescribeBatchTaskDetail(data: DescribeBatchTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTaskDetailResponse>;
   /** 获取智能审核模板列表 {@link DescribeContentReviewTemplatesRequest} {@link DescribeContentReviewTemplatesResponse} */
   DescribeContentReviewTemplates(data?: DescribeContentReviewTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentReviewTemplatesResponse>;
   /** 反查媒体传输安全组绑定的Flow信息 {@link DescribeGroupAttachFlowsByIdRequest} {@link DescribeGroupAttachFlowsByIdResponse} */
   DescribeGroupAttachFlowsById(data?: DescribeGroupAttachFlowsByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupAttachFlowsByIdResponse>;
   /** 获取雪碧图模板列表 {@link DescribeImageSpriteTemplatesRequest} {@link DescribeImageSpriteTemplatesResponse} */
   DescribeImageSpriteTemplates(data?: DescribeImageSpriteTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageSpriteTemplatesResponse>;
+  /** 查询图片处理任务详情 {@link DescribeImageTaskDetailRequest} {@link DescribeImageTaskDetailResponse} */
+  DescribeImageTaskDetail(data: DescribeImageTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageTaskDetailResponse>;
   /** 获取直播录制模板 {@link DescribeLiveRecordTemplatesRequest} {@link DescribeLiveRecordTemplatesResponse} */
   DescribeLiveRecordTemplates(data?: DescribeLiveRecordTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveRecordTemplatesResponse>;
   /** 获取媒体元信息 {@link DescribeMediaMetaDataRequest} {@link DescribeMediaMetaDataResponse} */

@@ -202,6 +202,8 @@ declare interface CustomSampleMatrix {
   Unit?: string;
   /** 指标序列数组 */
   Streams?: SampleStream[] | null;
+  /** 两个时间点的时间间隔，单位纳秒 */
+  Step?: number;
 }
 
 /** 施压机 DNS 配置 */

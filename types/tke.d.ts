@@ -2393,10 +2393,10 @@ declare namespace V20180525 {
 
   /** 策略实例信息 */
   interface OpenConstraintInfo {
-    /** 策略实例名称 */
-    Name?: string;
     /** 策略实例关联事件数 */
     EventNums?: number;
+    /** 策略实例名称 */
+    Name?: string;
     /** 实例yaml详情base64编码 */
     YamlDetail?: string;
   }
@@ -6611,30 +6611,6 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
-  interface ForwardApplicationRequestV3Request {
-    /** 请求集群addon的访问 */
-    Method: string;
-    /** 请求集群addon的路径 */
-    Path: string;
-    /** 请求集群addon后允许接收的数据格式 */
-    Accept?: string;
-    /** 请求集群addon的数据格式 */
-    ContentType?: string;
-    /** 请求集群addon的数据 */
-    RequestBody?: string;
-    /** 集群名称 */
-    ClusterName?: string;
-    /** 是否编码请求内容 */
-    EncodedBody?: string;
-  }
-
-  interface ForwardApplicationRequestV3Response {
-    /** 请求集群addon后返回的数据 */
-    ResponseBody?: string;
-    /** 唯一请求 ID，每次请求都会返回。 */
-    RequestId?: string;
-  }
-
   interface ForwardTKEEdgeApplicationRequestV3Request {
     /** 请求集群addon的访问 */
     Method: string;
@@ -7969,8 +7945,6 @@ declare interface Tke {
   EnableEventPersistence(data: V20180525.EnableEventPersistenceRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.EnableEventPersistenceResponse>;
   /** 开启vpc-cni容器网络能力 {@link V20180525.EnableVpcCniNetworkTypeRequest} {@link V20180525.EnableVpcCniNetworkTypeResponse} */
   EnableVpcCniNetworkType(data: V20180525.EnableVpcCniNetworkTypeRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.EnableVpcCniNetworkTypeResponse>;
-  /** 操作TKE集群的addon {@link V20180525.ForwardApplicationRequestV3Request} {@link V20180525.ForwardApplicationRequestV3Response} */
-  ForwardApplicationRequestV3(data: V20180525.ForwardApplicationRequestV3Request, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ForwardApplicationRequestV3Response>;
   /** 操作TKEEdge集群的addon {@link V20180525.ForwardTKEEdgeApplicationRequestV3Request} {@link V20180525.ForwardTKEEdgeApplicationRequestV3Response} */
   ForwardTKEEdgeApplicationRequestV3(data: V20180525.ForwardTKEEdgeApplicationRequestV3Request, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ForwardTKEEdgeApplicationRequestV3Response>;
   /** 获取集群规模价格 {@link V20180525.GetClusterLevelPriceRequest} {@link V20180525.GetClusterLevelPriceResponse} */
