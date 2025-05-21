@@ -382,10 +382,12 @@ declare interface NativeNodeInfo {
   GPU?: number | null;
   /** 自动续费标识 */
   RenewFlag?: string;
-  /** 节点计费模式（已弃用） */
+  /** 节点计费模式 */
   PayMode?: string;
   /** 节点内存容量，单位：`GB` */
   Memory?: number;
+  /** 节点系统盘配置信息 */
+  SystemDisk?: Disk;
   /** 公网带宽相关信息设置 */
   InternetAccessible?: InternetAccessible;
   /** 机型所属机型族 */
@@ -396,6 +398,14 @@ declare interface NativeNodeInfo {
   InstanceType?: string;
   /** 包年包月节点计费过期时间 */
   ExpiredTime?: string | null;
+  /** 节点外网 IP */
+  WanIp?: string | null;
+  /** 节点密钥 ID 列表 */
+  KeyIds?: string[] | null;
+  /** 节点GPU相关配置 */
+  GPUParams?: GPUParams | null;
+  /** 数据盘列表 */
+  DataDisks?: DataDisk[] | null;
   /** 安全组列表 */
   SecurityGroupIDs?: string[] | null;
   /** VPC 唯一 ID */
@@ -404,6 +414,8 @@ declare interface NativeNodeInfo {
   SubnetId?: string;
   /** OS的名称 */
   OsImage?: string | null;
+  /** **原生节点的 Machine 类型**- Native 表示 CXM 类型的原生节点- NativeCVM 表示 CVM 类型的原生节点 */
+  MachineType?: string;
   /** **原生节点对应的实例 ID**- ins-q47ofw6 表示这个实例是一个 CVM 的实例- eks-f8mvyaep 表示这个实例是一个 CXM 的实例 */
   InstanceId?: string | null;
 }

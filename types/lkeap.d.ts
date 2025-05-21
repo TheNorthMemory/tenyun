@@ -646,6 +646,28 @@ declare interface ReconstructDocumentSSEResponse {
   RequestId?: string;
 }
 
+declare interface RetrieveKnowledgeRealtimeRequest {
+  /** 知识库ID。 */
+  KnowledgeBaseId: string;
+  /** 用于检索的文本。 */
+  Query: string;
+  /** 实时文件ID列表。 */
+  DocIds?: string[];
+  /** 检索方法，默认使用`HYBRID`混合检索。- `SEMANTIC`：语义检索- `FULL_TEXT`：全文检索- `HYBRID`：混合检索 */
+  RetrievalMethod?: string;
+  /** 检索设置。 */
+  RetrievalSetting?: RetrievalSetting;
+}
+
+declare interface RetrieveKnowledgeRealtimeResponse {
+  /** 检索结果 */
+  Records?: RetrievalRecord[];
+  /** 检索结果数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RetrieveKnowledgeRequest {
   /** 知识库ID。 */
   KnowledgeBaseId: string;
@@ -683,24 +705,6 @@ declare interface RunRerankResponse {
   /** 消耗量，仅返回TotalToken */
   Usage?: Usage;
   /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface UploadDocRealtimeRequest {
-  /** 知识库ID */
-  KnowledgeBaseId: string;
-  /** 文件名，可选。**需带文件类型后缀**，当文件名无法从传入的`FileUrl`获取时需要通过该字段来明确。 */
-  FileName: string;
-  /** 文件类型。**支持的文件类型：**- `PDF`、`DOC`、`DOCX`、`XLS`、`XLSX`、`PPT`、`PPTX`、`MD`、`TXT`、`PNG`、`JPG`、`JPEG`、`CSV`、`HTML`、`EPUB`**支持的文件大小：** - `PDF`、`DOCX`、`DOC`、`PPT`、`PPTX` 最大 200M - `TXT`、`MD` 最大10M - 其他 最大20M */
-  FileType: string;
-  /** 文件的 URL 地址。文件存储于腾讯云的 URL 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 URL 速度和稳定性可能受一定影响。参考：[腾讯云COS文档](https://cloud.tencent.com/document/product/436/7749) */
-  FileUrl: string;
-  /** 过期时间的秒数，最长24小时，默认24小时 */
-  ExpireTime?: number;
-}
-
-declare interface UploadDocRealtimeResponse {
-  /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
   RequestId?: string;
 }
 
@@ -779,12 +783,12 @@ declare interface Lkeap {
   ReconstructDocumentSSE(data: ReconstructDocumentSSERequest, config?: AxiosRequestConfig): AxiosPromise<ReconstructDocumentSSEResponse>;
   /** 检索知识库内容 {@link RetrieveKnowledgeRequest} {@link RetrieveKnowledgeResponse} */
   RetrieveKnowledge(data: RetrieveKnowledgeRequest, config?: AxiosRequestConfig): AxiosPromise<RetrieveKnowledgeResponse>;
+  /** 实时检索知识库内容 {@link RetrieveKnowledgeRealtimeRequest} {@link RetrieveKnowledgeRealtimeResponse} */
+  RetrieveKnowledgeRealtime(data: RetrieveKnowledgeRealtimeRequest, config?: AxiosRequestConfig): AxiosPromise<RetrieveKnowledgeRealtimeResponse>;
   /** 重排序 {@link RunRerankRequest} {@link RunRerankResponse} */
   RunRerank(data: RunRerankRequest, config?: AxiosRequestConfig): AxiosPromise<RunRerankResponse>;
   /** 上传文档 {@link UploadDocRequest} {@link UploadDocResponse} */
   UploadDoc(data: UploadDocRequest, config?: AxiosRequestConfig): AxiosPromise<UploadDocResponse>;
-  /** 实时文档上传 {@link UploadDocRealtimeRequest} {@link UploadDocRealtimeResponse} */
-  UploadDocRealtime(data: UploadDocRealtimeRequest, config?: AxiosRequestConfig): AxiosPromise<UploadDocRealtimeResponse>;
 }
 
 export declare type Versions = ["2024-05-22"];

@@ -484,7 +484,7 @@ declare interface FailedCreateRoleData {
 declare interface FillApproverInfo {
   /** 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。 */
   RecipientId: string;
-  /** 指定企业经办签署人OpenId */
+  /** 指定企业经办签署人OpenId注: `签署人OpenId未实名时，需要传入签署人姓名以及手机号码。` */
   OpenId?: string;
   /** 签署人姓名 */
   ApproverName?: string;
@@ -1280,7 +1280,7 @@ declare interface SignUrlInfo {
   OpenId?: string;
   /** 合同组签署链接对应的合同组id */
   FlowGroupId?: string;
-  /** 二维码，在生成动态签署人跳转封面页链接时返回 */
+  /** 二维码，在生成动态签署人跳转封面页链接时返回注：`此二维码下载链接有效期为5分钟，可下载二维码后本地保存。` */
   SignQrcodeUrl?: string;
 }
 

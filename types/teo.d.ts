@@ -1806,11 +1806,11 @@ declare interface ModifyOriginParameters {
   Origin?: string;
   /** 回源协议配置。当 OriginType 取值为 IPDomain、OriginGroup、LoadBalance 时该参数必填。取值有：http：使用 HTTP 协议；https：使用 HTTPS 协议；follow：协议跟随。 */
   OriginProtocol?: string;
-  /** HTTP 回源端口，取值范围 1～65535。该参数仅当回源协议 OriginProtocol 为 http 或者 follow 时生效。 */
+  /** HTTP 回源端口，取值范围 1～65535。当回源协议 OriginProtocol 为 http 或者 follow 时该参数必填。 */
   HTTPOriginPort?: number;
-  /** HTTPS 回源端口，取值范围 1～65535。该参数仅当回源协议 OriginProtocol 为 https 或者 follow 时生效。 */
+  /** HTTPS 回源端口，取值范围 1～65535。当回源协议 OriginProtocol 为 https 或者 follow 时该参数必填。 */
   HTTPSOriginPort?: number;
-  /** 指定是否允许访问私有对象存储源站，该参数仅当源站类型 OriginType = COS 或 AWSS3 时会生效，取值有：on：使用私有鉴权；off：不使用私有鉴权。不填写时，默认值为off。 */
+  /** 指定是否允许访问私有对象存储源站，当源站类型 OriginType = COS 或 AWSS3 时该参数必填，取值有：on：使用私有鉴权；off：不使用私有鉴权。 */
   PrivateAccess?: string;
   /** 私有鉴权使用参数，该参数仅当 OriginType = AWSS3 且 PrivateAccess = on 时会生效。 */
   PrivateParameters?: OriginPrivateParameters | null;
@@ -1902,6 +1902,8 @@ declare interface OriginDetail {
   PrivateAccess?: string;
   /** 私有鉴权使用参数，该参数仅当源站类型 PrivateAccess = on 时会生效。 */
   PrivateParameters?: PrivateParameter[] | null;
+  /** 当前配置的回源 HOST 头。 */
+  HostHeader?: string;
   /** MO 子应用 ID */
   VodeoSubAppId?: number;
   /** MO 分发范围，取值有： All：全部 Bucket：存储桶 */
@@ -1996,6 +1998,8 @@ declare interface OriginInfo {
   PrivateAccess?: string;
   /** 私有鉴权使用参数，该参数仅当源站类型 PrivateAccess = on 时会生效。 */
   PrivateParameters?: PrivateParameter[];
+  /** 自定义回源 HOST 头，该参数仅当 OriginType=IP_DOMAIN 时生效。如果 OriginType=COS 或 AWS_S3 时，回源 HOST 头将与源站域名保持一致。如果OriginType=ORIGIN_GROUP 或 LB 时，回源 HOST 头遵循源站组内配置，如果没有配置则默认为加速域名。如果 OriginType=VOD 或 SPACE 时，无需配置该头部，按对应的回源域名生效。 */
+  HostHeader?: string;
   /** VODEO 子应用 ID。该参数当 OriginType = VODEO 时必填。 */
   VodeoSubAppId?: number;
   /** VODEO 分发范围，该参数当 OriginType = VODEO 时必填。取值有： All：当前应用下所有存储桶； Bucket：指定的某一个存储桶。 */
@@ -2486,7 +2490,7 @@ declare interface RuleCondition {
 
 /** 规则引擎操作。 */
 declare interface RuleEngineAction {
-  /** 操作名称。名称需要与参数结构体对应，例如 Name=Cache，则 CacheParameters 必填。Cache：节点缓存 TTL；CacheKey：自定义 Cache Key；CachePrefresh：缓存预刷新；AccessURLRedirect：访问 URL 重定向；UpstreamURLRewrite：回源 URL 重写；QUIC：QUIC；WebSocket：WebSocket；Authentication：Token 鉴权；MaxAge：浏览器缓存 TTL；StatusCodeCache：状态码缓存 TTL；OfflineCache：离线缓存；SmartRouting：智能加速；RangeOriginPull：分片回源 ；UpstreamHTTP2：HTTP2 回源；HostHeader：Host Header 重写；ForceRedirectHTTPS：访问协议强制 HTTPS 跳转配置；OriginPullProtocol：回源 HTTPS；Compression：智能压缩配置；HSTS：HSTS；ClientIPHeader：存储客户端请求 IP 的头部信息配置；OCSPStapling：OCSP 装订；HTTP2：HTTP2 接入；PostMaxSize：POST 请求上传文件流式传输最大限制配置；ClientIPCountry：回源时携带客户端 IP 所属地域信息；UpstreamFollowRedirect：回源跟随重定向参数配置；UpstreamRequest：回源请求参数；TLSConfig：SSL/TLS 安全；ModifyOrigin：修改源站；HTTPUpstreamTimeout：七层回源超时配置；HttpResponse：HTTP 应答；ErrorPage：自定义错误页面；ModifyResponseHeader：修改 HTTP 节点响应头；ModifyRequestHeader：修改 HTTP 节点请求头；ResponseSpeedLimit：单连接下载限速；SetContentIdentifier：设置内容标识符；Vary：Vary 特性配置。该功能灰度中，如需使用，请联系腾讯云客服。 */
+  /** 操作名称。名称需要与参数结构体对应，例如 Name=Cache，则 CacheParameters 必填。Cache：节点缓存 TTL；CacheKey：自定义 Cache Key；CachePrefresh：缓存预刷新；AccessURLRedirect：访问 URL 重定向；UpstreamURLRewrite：回源 URL 重写；QUIC：QUIC；WebSocket：WebSocket；Authentication：Token 鉴权；MaxAge：浏览器缓存 TTL；StatusCodeCache：状态码缓存 TTL；OfflineCache：离线缓存；SmartRouting：智能加速；RangeOriginPull：分片回源 ；UpstreamHTTP2：HTTP2 回源；HostHeader：Host Header 重写；ForceRedirectHTTPS：访问协议强制 HTTPS 跳转配置；OriginPullProtocol：回源 HTTPS；Compression：智能压缩配置；HSTS：HSTS；ClientIPHeader：存储客户端请求 IP 的头部信息配置；OCSPStapling：OCSP 装订；HTTP2：HTTP2 接入；PostMaxSize：POST 请求上传文件流式传输最大限制配置；ClientIPCountry：回源时携带客户端 IP 所属地域信息；UpstreamFollowRedirect：回源跟随重定向参数配置；UpstreamRequest：回源请求参数；TLSConfig：SSL/TLS 安全；ModifyOrigin：修改源站；HTTPUpstreamTimeout：七层回源超时配置；HttpResponse：HTTP 应答；ErrorPage：自定义错误页面；ModifyResponseHeader：修改 HTTP 节点响应头；ModifyRequestHeader：修改 HTTP 节点请求头；ResponseSpeedLimit：单连接下载限速；SetContentIdentifier：设置内容标识符；Vary：Vary 特性配置。 */
   Name: string;
   /** 节点缓存 TTL 配置参数，当 Name 取值为 Cache 时，该参数必填。 */
   CacheParameters?: CacheParameters | null;
@@ -2556,7 +2560,7 @@ declare interface RuleEngineAction {
   ResponseSpeedLimitParameters?: ResponseSpeedLimitParameters | null;
   /** 内容标识配置参数，当 Name 取值为 SetContentIdentifier 时，该参数必填。 */
   SetContentIdentifierParameters?: SetContentIdentifierParameters | null;
-  /** Vary 特性配置参数，当 Name 取值为 Vary 时，该参数必填。该功能灰度中，如需使用，请联系腾讯云客服。 */
+  /** Vary 特性配置参数，当 Name 取值为 Vary 时，该参数必填。 */
   VaryParameters?: VaryParameters;
 }
 
@@ -3106,7 +3110,7 @@ declare interface VanityNameServersIps {
   IPv4: string;
 }
 
-/** [Vary 特性](https://cloud.tencent.com/document/product/1552/89301) 配置参数。该功能灰度中，如需使用，请联系腾讯云客服。 */
+/** [Vary 特性](https://cloud.tencent.com/document/product/1552/89301) 配置参数。 */
 declare interface VaryParameters {
   /** Vary 特性配置开关，取值有：on：开启；off：关闭。 */
   Switch: string;
@@ -3755,6 +3759,8 @@ declare interface CreatePrefetchTaskRequest {
   EncodeUrl?: boolean;
   /** 附带的http头部信息。 */
   Headers?: Header[];
+  /** 媒体分片预热控制，取值有：on：开启分片预热，预热描述文件，并递归解析描述文件分片进行预热；off：仅预热提交的描述文件；不填写时，默认值为 off。注意事项：1. 支持的描述文件为 M3U8，对应分片为 TS；2. 要求描述文件能正常请求，并按行业标准描述分片路径；3. 递归解析深度不超过 3 层；4. 解析获取的分片会正常累加每日预热用量，当用量超出配额时，会静默处理，不再执行预热。该参数为白名单功能，如有需要，请联系腾讯云工程师处理。 */
+  PrefetchMediaSegments?: string;
 }
 
 declare interface CreatePrefetchTaskResponse {

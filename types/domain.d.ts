@@ -655,7 +655,7 @@ declare interface DeleteBiddingResponse {
 }
 
 declare interface DeleteCustomDnsHostRequest {
-  /** 域名实例ID可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941) */
+  /** 域名实例ID可通过[DescribeDomainNameList](https://cloud.tencent.com/document/api/242/48941)接口获取 */
   DomainId: string;
   /** DNS名称例如：<>.test.com;其中<>就是Dns名称，可以是任意域名允许的格式 */
   DnsName: string;
@@ -925,7 +925,7 @@ declare interface DescribeBiddingSuccessfulListResponse {
 }
 
 declare interface DescribeCustomDnsHostSetRequest {
-  /** 域名实例ID可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941) */
+  /** 域名实例ID可通过[DescribeDomainNameList](https://cloud.tencent.com/document/api/242/48941)接口获取 */
   DomainId: string;
   /** 返回数量，默认为20，取值范围[1,100] */
   Limit: number;
@@ -1109,7 +1109,7 @@ declare interface DescribePreReleaseListRequest {
   ClassTwo?: number[];
   /** 三级分类111:"AAA"401:"3A及以上"402:"AA结尾"1122:"AABB"1123:"AABC"1212:"ABAB"1221:"ABBA"1233:"ABCC"501:"4A及以上"502:"3A及以上"503:"AAA开头"504:"AAA结尾"505:"AA开头"506:"AA结尾"507:"三顺子开头"508:"三顺子结尾"11223:"AABBC"12233:"ABBCC"601:"5A及以上"602:"4A及以上"603:"3A及以上"604:"4A开头"605:"4A结尾"606:"AAA开头"607:"AAA结尾"608:"AA开头"609:"AA结尾"610:"ABAB开头"611:"ABAB结尾"612:"AABB开头"613:"AABB结尾"614:"四顺子开头"615:"四顺子结尾"616:"三顺子开头"617:"三顺子结尾"121212:"ABABAB"112233:"AABBCC"123123:"ABCABC"211:"LNN"221:"LLN"121:"NLN"212:"LNL"122:"NLL"1112:"NNNL"2111:"LNNN"1212:"NLNL"2121:"LNLN"1222:"NLLL"2221:"LLLN"1122:"NNLL"2211:"LLNN"31:"W结尾"112:"AAB"122:"ABB"121:"ABA"41:"W结尾"1112:"AAAB"1222:"ABBB"1122:"AABB"1212:"ABAB" */
   ClassThree?: number[];
-  /** 四级分类1:"仅含2种数字"1:"仅含2种数字"2:"仅含3种数字"4:"仅含1种字母"8:"仅含1种数字" */
+  /** 四级分类1:"仅含2种数字"2:"仅含3种数字"4:"仅含1种字母"8:"仅含1种数字" */
   ClassFour?: number[];
   /** 是否以域名开头排除关键词进行搜索 */
   FilterStart?: boolean;
@@ -1119,7 +1119,7 @@ declare interface DescribePreReleaseListRequest {
   FilterWords?: string;
   /** 交易类型（目前只支持10）10: 预释放域名 */
   TransType?: number;
-  /** 是否搜索白金域名 */
+  /** 是否搜索白金域名（默认值为false） */
   IsTop?: boolean;
   /** 结束时间排序 desc:倒序 asc:正序 */
   EndTimeSort?: string;
@@ -1261,7 +1261,7 @@ declare interface DescribeUnPreDomainDetailResponse {
 }
 
 declare interface ModifyCustomDnsHostRequest {
-  /** 域名实例ID可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941) */
+  /** 域名实例ID可通过[DescribeDomainNameList](https://cloud.tencent.com/document/api/242/48941)接口获取 */
   DomainId: string;
   /** Dns名称 例如：<>.test.com;其中<>就是Dns名称，可以是任意域名允许的格式 */
   DnsName: string;
@@ -1413,7 +1413,7 @@ declare interface SetDomainAutoRenewResponse {
 }
 
 declare interface SyncCustomDnsHostRequest {
-  /** 域名实例ID可通过DescribeDomainNameList接口获取(https://cloud.tencent.com/document/api/242/48941) */
+  /** 域名实例ID可通过[DescribeDomainNameList](https://cloud.tencent.com/document/api/242/48941)接口获取 */
   DomainId: string;
 }
 

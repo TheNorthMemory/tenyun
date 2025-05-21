@@ -526,6 +526,8 @@ declare interface CynosdbCluster {
   SubnetId?: string;
   /** cynos内核版本 */
   CynosVersion?: string;
+  /** cynos版本标签 */
+  CynosVersionTag?: string;
   /** 存储容量 */
   StorageLimit?: number;
   /** 续费标志 */
@@ -572,6 +574,8 @@ declare interface CynosdbCluster {
   ResourcePackages?: ResourcePackage[];
   /** 全球数据库唯一标识 */
   GdnId?: string;
+  /** 集群角色。主集群- primary，从集群 - standby，如果 GdnId为空，该字段无效。 */
+  GdnRole?: string;
 }
 
 /** 集群详情详细信息 */
@@ -1844,9 +1848,9 @@ declare interface RollbackData {
   RollbackStrategy?: string;
   /** 快照时间 */
   SnapshotTime?: string;
-  /** 回档到serverlessls集群时最小CPU */
+  /** 回档到 Serverless 集群时最小 CPU */
   MinCpu?: number;
-  /** 回档到serverlessls集群时最大CPU */
+  /** 回档到 Serverless 集群时最大 CPU */
   MaxCpu?: number;
   /** 快照ID */
   SnapShotId?: number;

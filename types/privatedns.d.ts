@@ -16,7 +16,7 @@ declare interface AccountVpcInfo {
 
 /** 查询关联账号VPC列表出参 */
 declare interface AccountVpcInfoOut {
-  /** VpcId： vpc-xadsafsdasd */
+  /** VpcId */
   VpcId?: string;
   /** Vpc所属地区: ap-guangzhou, ap-shanghai */
   Region?: string;
@@ -202,7 +202,7 @@ declare interface TldQuota {
 
 /** Vpc信息 */
 declare interface VpcInfo {
-  /** VpcId： vpc-xadsafsdasd */
+  /** VpcId */
   UniqVpcId: string;
   /** Vpc所属地区: ap-guangzhou, ap-shanghai */
   Region: string;

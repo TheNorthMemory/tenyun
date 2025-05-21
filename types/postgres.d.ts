@@ -2346,24 +2346,6 @@ declare interface DisIsolateDBInstancesResponse {
   RequestId?: string;
 }
 
-declare interface InitDBInstancesRequest {
-  /** 实例ID集合。 */
-  DBInstanceIdSet: string[];
-  /** 实例根账号用户名。 */
-  AdminName: string;
-  /** 实例根账号用户名对应的密码。 */
-  AdminPassword: string;
-  /** 实例字符集，目前只支持：UTF8、LATIN1。 */
-  Charset: string;
-}
-
-declare interface InitDBInstancesResponse {
-  /** 实例ID集合。 */
-  DBInstanceIdSet?: string[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface InquiryPriceCreateDBInstancesRequest {
   /** 可用区ID。该参数可以通过调用 DescribeZones 接口的返回值中的Zone字段来获取。 */
   Zone: string;
@@ -3169,8 +3151,6 @@ declare interface Postgres {
   DestroyDBInstance(data: DestroyDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyDBInstanceResponse>;
   /** 解隔离实例 {@link DisIsolateDBInstancesRequest} {@link DisIsolateDBInstancesResponse} */
   DisIsolateDBInstances(data: DisIsolateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DisIsolateDBInstancesResponse>;
-  /** @deprecated 初始化实例（废弃） {@link InitDBInstancesRequest} {@link InitDBInstancesResponse} */
-  InitDBInstances(data: InitDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InitDBInstancesResponse>;
   /** 查询实例创建售卖价格 {@link InquiryPriceCreateDBInstancesRequest} {@link InquiryPriceCreateDBInstancesResponse} */
   InquiryPriceCreateDBInstances(data: InquiryPriceCreateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceCreateDBInstancesResponse>;
   /** 查询实例续费价格 {@link InquiryPriceRenewDBInstanceRequest} {@link InquiryPriceRenewDBInstanceResponse} */

@@ -233,9 +233,9 @@ declare interface ServerBaseConfig {
   /** 内网域名 */
   InternalDomain?: string;
   /** 运行模式 */
-  OperationMode?: string | null;
+  OperationMode?: string;
   /** 定时扩缩容配置 */
-  TimerScale?: TimerScale[] | null;
+  TimerScale?: TimerScale[];
 }
 
 /** 服务基本信息 */
@@ -349,17 +349,17 @@ declare interface TaskStepInfo {
 /** 定时扩缩容配置 */
 declare interface TimerScale {
   /** 循环类型 */
-  CycleType?: string | null;
+  CycleType?: string;
   /** 循环起始 */
-  StartDate?: string | null;
+  StartDate?: string;
   /** 循环结束 */
-  EndDate?: string | null;
+  EndDate?: string;
   /** 起始时间 */
-  StartTime?: string | null;
+  StartTime?: string;
   /** 结束时间 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 副本个数 */
-  ReplicaNum?: number | null;
+  ReplicaNum?: number;
 }
 
 /** 版本流量信息 */

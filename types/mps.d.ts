@@ -2906,6 +2906,14 @@ declare interface ImageAreaBoxInfo {
   AreaCoordSet?: number[] | null;
 }
 
+/** 图片降噪配置 */
+declare interface ImageDenoiseConfig {
+  /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
+  Switch?: string;
+  /** 类型，可选值：weakstrong默认值：weak。 */
+  Type?: string | null;
+}
+
 /** 图片编码格式参数 */
 declare interface ImageEncodeConfig {
   /** 图片格式，取值范围：JPEG、PNG、BMP、WebP，缺省为原图格式。不支持动画。 */
@@ -2918,6 +2926,8 @@ declare interface ImageEncodeConfig {
 declare interface ImageEnhanceConfig {
   /** 超分配置。 */
   SuperResolution?: SuperResolutionConfig | null;
+  /** 降噪配置。 */
+  Denoise?: ImageDenoiseConfig | null;
   /** 综合增强配置。 */
   ImageQualityEnhance?: ImageQualityEnhanceConfig | null;
   /** 色彩增强配置。 */
@@ -2926,6 +2936,8 @@ declare interface ImageEnhanceConfig {
   SharpEnhance?: SharpEnhanceConfig | null;
   /** 人脸增强配置。 */
   FaceEnhance?: FaceEnhanceConfig | null;
+  /** 低光照增强配置。 */
+  LowLightEnhance?: LowLightEnhanceConfig | null;
 }
 
 /** 图片擦除参数 */
@@ -2940,6 +2952,26 @@ declare interface ImageEraseLogoConfig {
   Switch?: string | null;
   /** 需要擦除的多个框选区域，最多开启16个区域。 */
   ImageAreaBoxes?: ImageAreaBoxInfo[] | null;
+}
+
+/** 图片处理结果信息 */
+declare interface ImageProcessTaskOutput {
+  /** 输出文件的路径。 */
+  Path?: string | null;
+  /** 输出文件的存储位置。 */
+  OutputStorage?: TaskOutputStorage | null;
+}
+
+/** 图片处理任务结果类型 */
+declare interface ImageProcessTaskResult {
+  /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
+  Status?: string | null;
+  /** 错误信息。 */
+  Message?: string | null;
+  /** 转码任务的输出。 */
+  Output?: ImageProcessTaskOutput | null;
+  /** 转码进度，取值范围 [0-100] */
+  Progress?: number | null;
 }
 
 /** 综合增强配置 */
@@ -4528,6 +4560,10 @@ declare interface RawTranscodeParameter {
   AudioTemplate?: AudioTemplateInfo;
   /** 极速高清转码参数。 */
   TEHDConfig?: TEHDConfig;
+  /** 扩展参数，序列化的 json 字符串。 */
+  StdExtInfo?: string | null;
+  /** 音视频增强配置 */
+  EnhanceConfig?: EnhanceConfig | null;
 }
 
 /** 自定义水印规格参数。 */
@@ -6321,6 +6357,8 @@ declare interface CreateTranscodeTemplateRequest {
   TEHDConfig?: TEHDConfig;
   /** 音视频增强配置。 */
   EnhanceConfig?: EnhanceConfig;
+  /** 扩展参数，序列化的 json 字符串。 */
+  StdExtInfo?: string;
 }
 
 declare interface CreateTranscodeTemplateResponse {
@@ -6918,6 +6956,8 @@ declare interface DescribeImageTaskDetailResponse {
   TaskType?: string | null;
   /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成。 */
   Status?: string | null;
+  /** 图片处理任务的执行状态与结果。 */
+  ImageProcessTaskResultSet?: ImageProcessTaskResult[] | null;
   /** 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
   CreateTime?: string | null;
   /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */

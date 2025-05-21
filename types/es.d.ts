@@ -1191,6 +1191,10 @@ declare namespace V20180416 {
     TagList?: TagInfo[] | null;
     /** 内存大小 */
     MemSize?: number | null;
+    /** 部署模式，0：单可用区、1：多可用区 */
+    DeployMode?: number;
+    /** 多可用区部署时可用区的详细信息 */
+    MultiZoneInfo?: ZoneDetail[];
   }
 
   /** Logstash节点信息 */
@@ -1743,6 +1747,8 @@ declare namespace V20180416 {
     Zone: string;
     /** 子网ID */
     SubnetId: string;
+    /** 是否为隐藏可用区 */
+    Hidden?: boolean | null;
   }
 
   interface CheckMigrateIndexMetaDataRequest {
@@ -1962,6 +1968,10 @@ declare namespace V20180416 {
     TagList?: TagInfo[];
     /** 可维护时间段 */
     OperationDuration?: OperationDuration;
+    /** 多可用区部署时可用区的详细信息 */
+    MultiZoneInfo?: ZoneDetail[];
+    /** 部署模式，0：单可用区、1：多可用区 */
+    DeployMode?: number;
   }
 
   interface CreateLogstashInstanceResponse {

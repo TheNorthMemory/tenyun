@@ -316,6 +316,8 @@ declare interface Block {
   TextTypeListBlocks?: TextTypeListBlock[];
   /** 体检报告信息 */
   PhysicalExamination?: PhysicalExaminationV1;
+  /** 内窥镜报告V2 */
+  EndoscopyV2?: Check[];
 }
 
 /** 块信息 */
@@ -1648,6 +1650,8 @@ declare interface IndicatorItem {
   Coords?: Coordinate;
   /** 推测结果是否异常 */
   InferNormal?: string;
+  /** 标本 */
+  Sample?: string;
 }
 
 /** 检验指标项结构v2 */
@@ -3386,6 +3390,8 @@ declare interface Template {
   BirthCert?: BirthCert;
   /** 时间轴 */
   Timeline?: TimelineInformation;
+  /** 内窥镜报告V2 */
+  EndoscopyV2?: Check;
 }
 
 /** 文本类型 */

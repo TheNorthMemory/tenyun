@@ -3024,6 +3024,26 @@ declare interface CreateUserMobileChangeUrlResponse {
   RequestId?: string;
 }
 
+declare interface CreateUserNameChangeUrlRequest {
+  /** 操作人信息 */
+  Operator: UserInfo;
+  /** 要跳转的链接类型HTTP：适用于短信通知或H5跳转的电子签小程序HTTP长链接HTTP_SHORT_URL：适用于短信通知或H5跳转的电子签小程序HTTP短链接APP：（默认类型）适用于第三方APP或小程序跳转的电子签小程序路径注：如果不传递，默认值是 HTTP */
+  Endpoint?: string;
+  /** 在用户完成改名后，其自定义数据将通过[企业引导个人更名后回调](https://qian.tencent.com/developers/company/callback_types_staffs#%E5%8D%81%E5%85%AB-%E4%BC%81%E4%B8%9A%E5%BC%95%E5%AF%BC%E4%B8%AA%E4%BA%BA%E6%9B%B4%E5%90%8D%E5%90%8E%E5%9B%9E%E8%B0%83)返回，以便用户确认其个人数据信息。请注意，自定义数据的字符长度上限为1000，且必须采用base64编码格式。 */
+  UserData?: string;
+}
+
+declare interface CreateUserNameChangeUrlResponse {
+  /** 腾讯电子签小程序的个人更名链接。如果没有传递，默认值是 HTTP。 链接的有效期均是 7 天。1.如果EndPoint是APP：得到的链接类似于pages/guide/index?to=MP_PERSONAL_VERIFY&shortKey=yDCZHUyOcExAlcOvNod0, 用法可以参考描述中的"跳转到小程序的实现"2.如果EndPoint是HTTP：得到的链接类似于 https://res.ess.tencent.cn/cdn/h5-activity/jump-mp.html?to=TAG_VERIFY&shortKey=yDCZHUyOcChrfpaswT0d，点击后会跳转到腾讯电子签小程序进行签署3.如果EndPoint是HTTP_SHORT_URL：得到的链接类似于https://essurl.cn/2n**42Nd，点击后会跳转到腾讯电子签小程序进行签署`注：` 生成的链路后面不能再增加参数，防止出错重复参数覆盖原有的参数 */
+  UserVerifyUrl?: string;
+  /** 链接过期时间，为Unix时间戳（单位为秒）。 */
+  ExpireTime?: number;
+  /** 小程序appid，用于半屏拉起电子签小程序， 仅在 Endpoint 设置为 APP 的时候返回 */
+  MiniAppId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateUserVerifyUrlRequest {
   /** 操作人信息 */
   Operator: UserInfo;
@@ -4169,6 +4189,8 @@ declare interface Ess {
   CreateUserAutoSignSealUrl(data: CreateUserAutoSignSealUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserAutoSignSealUrlResponse>;
   /** 生成修改用户手机号链接 {@link CreateUserMobileChangeUrlRequest} {@link CreateUserMobileChangeUrlResponse} */
   CreateUserMobileChangeUrl(data: CreateUserMobileChangeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserMobileChangeUrlResponse>;
+  /** 生成个人更名链接 {@link CreateUserNameChangeUrlRequest} {@link CreateUserNameChangeUrlResponse} */
+  CreateUserNameChangeUrl(data: CreateUserNameChangeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserNameChangeUrlResponse>;
   /** 获取个人用户实名链接 {@link CreateUserVerifyUrlRequest} {@link CreateUserVerifyUrlResponse} */
   CreateUserVerifyUrl(data: CreateUserVerifyUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserVerifyUrlResponse>;
   /** 设置本企业嵌入式页面主题配置 {@link CreateWebThemeConfigRequest} {@link CreateWebThemeConfigResponse} */
