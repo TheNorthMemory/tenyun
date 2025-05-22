@@ -3057,7 +3057,7 @@ declare interface Postgres {
   DescribeClasses(data: DescribeClassesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClassesResponse>;
   /** 查询克隆实例可购买的规格 {@link DescribeCloneDBInstanceSpecRequest} {@link DescribeCloneDBInstanceSpecResponse} */
   DescribeCloneDBInstanceSpec(data: DescribeCloneDBInstanceSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloneDBInstanceSpecResponse>;
-  /** 查询实例备份列表（废弃） {@link DescribeDBBackupsRequest} {@link DescribeDBBackupsResponse} */
+  /** 查询实例备份列表 {@link DescribeDBBackupsRequest} {@link DescribeDBBackupsResponse} */
   DescribeDBBackups(data: DescribeDBBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBBackupsResponse>;
   /** 查询错误日志 {@link DescribeDBErrlogsRequest} {@link DescribeDBErrlogsResponse} */
   DescribeDBErrlogs(data: DescribeDBErrlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBErrlogsResponse>;
@@ -3077,7 +3077,7 @@ declare interface Postgres {
   DescribeDBSlowlogs(data: DescribeDBSlowlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSlowlogsResponse>;
   /** 查询支持的数据库版本 {@link DescribeDBVersionsRequest} {@link DescribeDBVersionsResponse} */
   DescribeDBVersions(data?: DescribeDBVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBVersionsResponse>;
-  /** 获取实例Xlog列表（废弃） {@link DescribeDBXlogsRequest} {@link DescribeDBXlogsResponse} */
+  /** 获取实例Xlog列表 {@link DescribeDBXlogsRequest} {@link DescribeDBXlogsResponse} */
   DescribeDBXlogs(data: DescribeDBXlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBXlogsResponse>;
   /** 查询数据库对象列表 {@link DescribeDatabaseObjectsRequest} {@link DescribeDatabaseObjectsResponse} */
   DescribeDatabaseObjects(data: DescribeDatabaseObjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseObjectsResponse>;
@@ -3101,7 +3101,7 @@ declare interface Postgres {
   DescribeParameterTemplates(data?: DescribeParameterTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParameterTemplatesResponse>;
   /** 查询参数修改事件 {@link DescribeParamsEventRequest} {@link DescribeParamsEventResponse} */
   DescribeParamsEvent(data: DescribeParamsEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamsEventResponse>;
-  /** 查询售卖规格配置（废弃） {@link DescribeProductConfigRequest} {@link DescribeProductConfigResponse} */
+  /** 查询售卖规格配置 {@link DescribeProductConfigRequest} {@link DescribeProductConfigResponse} */
   DescribeProductConfig(data?: DescribeProductConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductConfigResponse>;
   /** 查询只读组列表 {@link DescribeReadOnlyGroupsRequest} {@link DescribeReadOnlyGroupsResponse} */
   DescribeReadOnlyGroups(data?: DescribeReadOnlyGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReadOnlyGroupsResponse>;

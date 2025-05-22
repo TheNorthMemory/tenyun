@@ -734,6 +734,26 @@ declare interface DatasourceConnectionLocation {
   SubnetCidrBlock: string;
 }
 
+/** 任务依赖包信息 */
+declare interface DependencyPackage {
+  /** 依赖包类型 */
+  PackageSource?: string | null;
+  /** 依赖包信息 */
+  MavenPackage?: string | null;
+  /** 依赖包仓库 */
+  MavenRepository?: string | null;
+  /** maven包exclusion信息 */
+  MavenExclusion?: string | null;
+  /** pypi包信息 */
+  PypiPackage?: string | null;
+  /** pypi索引地址 */
+  PypiIndexUrl?: string | null;
+  /** 文件包的类型 */
+  PackageType?: string | null;
+  /** 文件包的路径 */
+  PackagePath?: string | null;
+}
+
 /** Elasticsearch数据源的详细信息 */
 declare interface ElasticsearchInfo {
   /** 数据源ID */
@@ -2843,6 +2863,8 @@ declare interface CreateSparkAppRequest {
   IsInherit?: number;
   /** 是否使用session脚本的sql运行任务：false：否，true：是 */
   IsSessionStarted?: boolean;
+  /** 依赖包信息 */
+  DependencyPackages?: DependencyPackage[];
 }
 
 declare interface CreateSparkAppResponse {
@@ -4745,6 +4767,8 @@ declare interface ModifySparkAppRequest {
   IsInherit?: number;
   /** 是否使用session脚本的sql运行任务：false：否，true：是 */
   IsSessionStarted?: boolean;
+  /** 标准引擎依赖包 */
+  DependencyPackages?: DependencyPackage[];
 }
 
 declare interface ModifySparkAppResponse {

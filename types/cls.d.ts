@@ -600,11 +600,11 @@ declare interface DashboardInfo {
 declare interface DashboardNoticeMode {
   /** 仪表盘通知方式。Uin：腾讯云用户Group：腾讯云用户组Email：自定义EmailWeCom: 企业微信回调 */
   ReceiverType: string;
-  /** 知方式对应的值。 当ReceiverType不是 Wecom 时，Values必填。 */
+  /** 知方式对应的值。 当ReceiverType不是 WeCom 时，Values必填。 */
   Values?: string[];
-  /** 仪表盘通知渠道。 支持：["Email","Sms","WeChat","Phone"]。 当ReceiverType是 Email 或 Wecom 时，ReceiverChannels不能赋值。 */
+  /** 仪表盘通知渠道。 支持：["Email","Sms","WeChat","Phone"]。 当ReceiverType是 Email 或 WeCom 时，ReceiverChannels不能赋值。 */
   ReceiverChannels?: string[] | null;
-  /** 回调Url。 当ReceiverType是 Wecom 时，Url必填。 当ReceiverType不是 Wecom 时，Url不能填写。 */
+  /** 回调Url。 当ReceiverType是 WeCom 时，Url必填。 当ReceiverType不是 WeCom 时，Url不能填写。 */
   Url?: string;
 }
 
@@ -1759,7 +1759,7 @@ declare interface CreateAlarmRequest {
   MultiConditions?: MultiCondition[];
   /** 是否开启告警策略。默认值为true */
   Status?: boolean;
-  /** 该参数已废弃，请使用Status参数控制是否开启告警策略。 */
+  /** 请使用Status参数控制是否开启告警策略。 */
   Enable?: boolean;
   /** 用户自定义告警内容 */
   MessageTemplate?: string;
@@ -1869,7 +1869,7 @@ declare interface CreateConfigExtraRequest {
   ContainerFile?: ContainerFileInfo;
   /** 容器标准输出类型配置。 */
   ContainerStdout?: ContainerStdoutInfo;
-  /** 日志格式化方式，用于容器采集场景。 - 已废弃- stdout-docker-json：用于docker容器采集场景- stdout-containerd：用于containerd容器采集场景 */
+  /** 日志格式化方式，用于容器采集场景。- stdout-docker-json：用于docker容器采集场景- stdout-containerd：用于containerd容器采集场景 */
   LogFormat?: string;
   /** 提取规则，如果设置了ExtractRule，则必须设置LogType */
   ExtractRule?: ExtractRuleInfo;
@@ -3339,7 +3339,7 @@ declare interface ModifyConfigExtraRequest {
   ContainerStdout?: ContainerStdoutInfo;
   /** 采集的日志类型，默认为minimalist_log。支持以下类型：- json_log代表：JSON-文件日志（详见[使用 JSON 提取模式采集日志](https://cloud.tencent.com/document/product/614/17419)）；- delimiter_log代表：分隔符-文件日志（详见[使用分隔符提取模式采集日志](https://cloud.tencent.com/document/product/614/17420)）；- minimalist_log代表：单行全文-文件日志（详见[使用单行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17421)）；- fullregex_log代表：单行完全正则-文件日志（详见[使用单行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52365)）；- multiline_log代表：多行全文-文件日志（详见[使用多行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17422)）；- multiline_fullregex_log代表：多行完全正则-文件日志（详见[使用多行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52366)）；- user_define_log代表：组合解析（适用于多格式嵌套的日志，详见[使用组合解析提取模式采集日志](https://cloud.tencent.com/document/product/614/61310)）。 */
   LogType?: string;
-  /** 日志格式化方式，用于容器采集场景。目前已经废弃- stdout-docker-json：用于docker容器采集场景- stdout-containerd：用于containerd容器采集场景 */
+  /** 日志格式化方式，用于容器采集场景。- stdout-docker-json：用于docker容器采集场景- stdout-containerd：用于containerd容器采集场景 */
   LogFormat?: string;
   /** 提取规则，如果设置了ExtractRule，则必须设置LogType */
   ExtractRule?: ExtractRuleInfo;

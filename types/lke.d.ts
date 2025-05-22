@@ -3677,7 +3677,7 @@ declare interface SaveDocRequest {
   ExpireEnd?: string;
   /** 是否引用链接 */
   IsRefer?: boolean;
-  /** 文档操作类型：1：批量导入（批量导入问答对）；2:文档导入（正常导入单个文档） 默认为1 请注意，opt=1的时候请从知识引擎页面下载excel模板 */
+  /** 文档操作类型：1：批量导入（批量导入问答对）；2:文档导入（正常导入单个文档） 默认为1 请注意，opt=1的时候请从腾讯云智能体开发平台页面下载excel模板 */
   Opt?: number;
   /** 分类ID */
   CateBizId?: string;

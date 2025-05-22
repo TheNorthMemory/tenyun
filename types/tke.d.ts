@@ -114,6 +114,8 @@ declare interface Disk {
   FileSystem?: string;
   /** 挂载目录 */
   MountTarget?: string;
+  /** 云盘ID */
+  DiskId?: string | null;
 }
 
 /** 第三方节点 */

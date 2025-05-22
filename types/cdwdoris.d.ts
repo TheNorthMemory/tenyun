@@ -534,6 +534,12 @@ declare interface NodeInfo {
   Zone?: string;
   /** Id */
   Id?: string;
+  /** RIP */
+  RIp?: string;
+  /** 计算组ID */
+  ComputeGroupId?: string;
+  /** 创建时间 */
+  CreateTime?: string;
 }
 
 /** 节点信息列表 */

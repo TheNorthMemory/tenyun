@@ -1190,6 +1190,8 @@ declare interface PushQualityData {
   Flux?: number;
   /** 推流服务端 IP。 */
   ServerIp?: string;
+  /** 关键帧间隔 GOP ，单位：ms。 */
+  GopSize?: number;
 }
 
 /** 直播拉流当前正在拉的文件信息。 */

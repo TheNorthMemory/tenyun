@@ -676,7 +676,7 @@ declare interface FlowCreateApprover {
   ApproverIdCardNumber?: string;
   /** 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。模板发起合同时，该参数为必填项，可以通过[查询模板信息接口](https://qian.tencent.com/developers/companyApis/templatesAndFiles/DescribeFlowTemplates)获得。文件发起合同时，该参数无需传值。如果开发者后续用合同模板发起合同，建议保存此值，在用合同模板发起合同中需此值绑定对应的签署经办人 。 */
   RecipientId?: string;
-  /** 签署意愿确认渠道，默认为WEIXINAPP:人脸识别注: 将要废弃</font >, `用ApproverSignTypes签署人签署合同时的认证方式代替, 新客户可请用ApproverSignTypes来设置` */
+  /** 签署意愿确认渠道，默认为WEIXINAPP:人脸识别注: 不再使用</font >, `用ApproverSignTypes签署人签署合同时的认证方式代替, 新客户可请用ApproverSignTypes来设置` */
   VerifyChannel?: string[];
   /** 通知签署方经办人的方式, 有以下途径: **sms** : (默认)短信 **none** : 不通知注: `既是发起方又是签署方时，不给此签署方发送短信` */
   NotifyType?: string;
@@ -686,13 +686,13 @@ declare interface FlowCreateApprover {
   PreReadTime?: number;
   /** 签署人userId，仅支持本企业的员工userid， 可在控制台组织管理处获得注： 如果传进来的UserId已经实名， 则忽略ApproverName，ApproverIdCardType，ApproverIdCardNumber，ApproverMobile这四个入参（会用此UserId实名的身份证和登录的手机号覆盖） */
   UserId?: string;
-  /** 字段已经废弃，当前只支持true，默认为true */
+  /** 字段不再使用，当前只支持true，默认为true */
   Required?: boolean;
   /** 在企微场景下使用，需设置参数为**WEWORKAPP**，以表明合同来源于企微。 */
   ApproverSource?: string;
   /** 在企业微信场景下，表明该合同流程为或签，其最大长度为64位字符串。所有参与或签的人员均需具备该标识。注意，在合同中，不同的或签参与人必须保证其CustomApproverTag唯一。如果或签签署人为本方企业微信参与人，则需要指定ApproverSource参数为WEWORKAPP。 */
   CustomApproverTag?: string;
-  /** 已经废弃, 快速注册相关信息 */
+  /** 不再使用</font >, 快速注册相关信息 */
   RegisterInfo?: RegisterInfo;
   /** 签署人个性化能力值，如是否可以转发他人处理、是否可以拒签、是否为动态补充签署人等功能开关。 */
   ApproverOption?: ApproverOption;

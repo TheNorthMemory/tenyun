@@ -45,15 +45,15 @@ declare interface AudioResult {
 /** 音频语言种类检测结果 */
 declare interface AudioResultDetailLanguageResult {
   /** 该字段用于返回对应的语言种类信息。 */
-  Label: string | null;
+  Label?: string | null;
   /** 该参数用于返回当前标签下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高**），越高代表音频越有可能属于当前返回的语种标签； */
-  Score: number | null;
+  Score?: number | null;
   /** 该参数用于返回对应语种标签的片段在音频文件内的开始时间，单位为秒。 */
-  StartTime: number | null;
+  StartTime?: number | null;
   /** 该参数用于返回对应语种标签的片段在音频文件内的结束时间，单位为秒。 */
-  EndTime: number | null;
+  EndTime?: number | null;
   /** *内测中，敬请期待* */
-  SubLabelCode: string | null;
+  SubLabelCode?: string | null;
 }
 
 /** 音频呻吟审核结果 */
@@ -77,13 +77,13 @@ declare interface AudioResultDetailMoanResult {
 /** 音频说话人声纹识别返回结果 */
 declare interface AudioResultDetailSpeakerResult {
   /** 该字段用于返回检测结果需要检测的内容类型。 */
-  Label: string | null;
+  Label?: string | null;
   /** 该字段用于返回呻吟检测的置信度，取值范围：0（置信度最低）-100（置信度最高），越高代表音频越有可能属于说话人声纹。 */
-  Score: number | null;
+  Score?: number | null;
   /** 该字段用于返回对应说话人的片段在音频文件内的开始时间，单位为秒。 */
-  StartTime: number | null;
+  StartTime?: number | null;
   /** 该字段用于返回对应说话人的片段在音频文件内的结束时间，单位为秒。 */
-  EndTime: number | null;
+  EndTime?: number | null;
 }
 
 /** 音频ASR文本审核结果 */
@@ -114,7 +114,7 @@ declare interface AudioSegments {
   OffsetTime?: string | null;
   /** 该字段用于返回音频片段的具体审核结果，详细内容敬请参考AudioResult数据结构的描述。 */
   Result?: AudioResult | null;
-  /** 创建时间 */
+  /** 入库时间 */
   CreatedAt?: string | null;
 }
 
@@ -143,11 +143,11 @@ declare interface HitInfo {
 /** 输入信息详情 */
 declare interface InputInfo {
   /** 该字段表示文件访问类型，取值为**URL**（资源链接）和**COS** (腾讯云对象存储)。 */
-  Type: string | null;
+  Type?: string | null;
   /** 该字段表示文件访问的链接地址，格式为标准URL格式。 备注：当Type为URL时此字段不为空。 */
-  Url: string | null;
+  Url?: string | null;
   /** 该字段表示文件访问的腾讯云存储桶信息。 备注：当Type为COS时此字段不为空。 */
-  BucketInfo: BucketInfo | null;
+  BucketInfo?: BucketInfo | null;
 }
 
 /** 歌曲识别结果 */
@@ -171,15 +171,15 @@ declare interface LabelResults {
 /** 媒体类型 */
 declare interface MediaInfo {
   /** 该字段用于返回传入的媒体文件的编码格式，如wav、mp3、aac、flac、amr、3gp、 m4a、wma、ogg、ape等。 */
-  Codecs: string;
+  Codecs?: string;
   /** 该字段用于返回对传入的流媒体文件进行分片的片段时长，单位为毫秒。**默认值为15秒**，支持用户自定义配置。 */
-  Duration: number;
+  Duration?: number;
   /** *内测中，敬请期待* */
-  Width: number;
+  Width?: number;
   /** *内测中，敬请期待* */
-  Height: number;
+  Height?: number;
   /** *内测中，敬请期待* */
-  Thumbnail: string;
+  Thumbnail?: string;
 }
 
 /** 呻吟低俗检测结果 */
@@ -209,9 +209,9 @@ declare interface Position {
 /** 识别类标签结果信息 */
 declare interface RecognitionResult {
   /** 可能的取值有：Teenager 、Gender */
-  Label: string | null;
+  Label?: string | null;
   /** 识别标签列表 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
 }
 
 /** 说话人结果 */
@@ -239,13 +239,13 @@ declare interface StorageInfo {
 /** 音频切片识别标签 */
 declare interface Tag {
   /** 根据Label字段确定具体名称：当Label 为Teenager 时 Name可能取值有：Teenager 当Label 为Gender 时 Name可能取值有：Male 、Female */
-  Name: string | null;
+  Name?: string | null;
   /** 置信分：0～100，数值越大表示置信度越高 */
-  Score: number | null;
+  Score?: number | null;
   /** 识别开始偏移时间，单位：毫秒 */
-  StartTime: number | null;
+  StartTime?: number | null;
   /** 识别结束偏移时间，单位：毫秒 */
-  EndTime: number | null;
+  EndTime?: number | null;
 }
 
 /** 任务数据 */
@@ -301,13 +301,13 @@ declare interface TaskInput {
 /** 用于返回审核任务输出的标签 */
 declare interface TaskLabel {
   /** 该字段用于返回检测结果所对应的恶意标签。返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。 */
-  Label: string | null;
+  Label?: string | null;
   /** 该字段用于返回当前标签对应的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过 */
-  Suggestion: string | null;
+  Suggestion?: string | null;
   /** 该字段用于返回当前标签（Label）下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容；*色情 0*，则表明该文本不属于色情内容。 */
-  Score: number | null;
+  Score?: number | null;
   /** 该字段用于返回当前标签（Lable）下的二级标签。 */
-  SubLabel: string | null;
+  SubLabel?: string | null;
 }
 
 /** 创建任务时的返回结果 */
@@ -336,7 +336,7 @@ declare interface TextResult {
   Score?: number | null;
   /** 建议您拿到判断结果后的执行操作。建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过 */
   Suggestion?: string | null;
-  /** 自定义词库的类型，自定义词库相关的信息可登录控制台中查看；1：自定义黑白库；2：自定义库； */
+  /** 自定义词库的类型，自定义词库相关的信息可登录控制台中查看；1：自定义黑白库；2：公库； */
   LibType?: number;
   /** 该字段用于返回当前标签（Lable）下的二级标签。注意：此字段可能返回null，表示取不到有效值。 */
   SubLabel?: string | null;

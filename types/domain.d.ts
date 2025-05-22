@@ -1329,7 +1329,7 @@ declare interface ModifyTemplateRequest {
   CertificateInfo: CertificateInfo;
   /** 联系人信息 */
   ContactInfo: ContactInfo;
-  /** 模板ID */
+  /** 模板ID可通过接口: [DescribeTemplateList](https://cloud.tencent.com/document/product/242/48940) */
   TemplateId: string;
 }
 

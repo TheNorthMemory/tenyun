@@ -14,7 +14,6 @@ import Ame, { Versions as AmeVersions } from "./ame";
 import Ams, { Versions as AmsVersions } from "./ams";
 import Anicloud, { Versions as AnicloudVersions } from "./anicloud";
 import Antiddos, { Versions as AntiddosVersions } from "./antiddos";
-import Apcas, { Versions as ApcasVersions } from "./apcas";
 import Ape, { Versions as ApeVersions } from "./ape";
 import Api, { Versions as ApiVersions } from "./api";
 import Apigateway, { Versions as ApigatewayVersions } from "./apigateway";
@@ -279,7 +278,6 @@ export declare type SERVICE_VERSIONS = {
   ams: AmsVersions,
   anicloud: AnicloudVersions,
   antiddos: AntiddosVersions,
-  apcas: ApcasVersions,
   ape: ApeVersions,
   api: ApiVersions,
   apigateway: ApigatewayVersions,
@@ -572,8 +570,6 @@ declare type TenYun = CloudInstance & CloudServices & {
   anicloud: Anicloud,
   /** {@link Antiddos T-Sec-DDoS防护(Anti-DDoS)} */
   antiddos: Antiddos,
-  /** {@link Apcas 汽车精准获客服务} */
-  apcas: Apcas,
   /** {@link Ape 正版图库直通车} */
   ape: Ape,
   /** {@link Api 云 API} */

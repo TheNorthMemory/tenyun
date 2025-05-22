@@ -1205,6 +1205,8 @@ declare namespace V20180416 {
     Ip?: string;
     /** 节点端口 */
     Port?: number;
+    /** 节点所在zone */
+    Zone?: string;
   }
 
   /** Logstash管道信息 */
