@@ -1102,12 +1102,14 @@ declare interface VideoLicenseEntity {
 
 /** TWeSee 语义理解结果 */
 declare interface VisionRecognitionResult {
-  /** 任务状态（1：失败；2：成功但结果为空；3：成功且结果非空） */
+  /** 任务状态（1：分析失败；2：下载/读取视频/图片失败；3：成功） */
   Status?: number;
   /** 识别到的目标类型。可能取值：- `person`：人- `vehicle`：车辆- `dog`：狗- `cat`：猫- `fire`：火焰- `smoke`：烟雾- `package`：快递包裹- `license_plate`：车牌 */
   DetectedClassifications?: string[];
-  /** 视频摘要文本 */
+  /** 摘要文本 */
   Summary?: string;
+  /** 摘要文本（次选语言） */
+  AlternativeSummary?: string;
 }
 
 /** 微信硬件设备信息 */

@@ -86,15 +86,15 @@ declare interface InstanceChargePrepaid {
   Period?: number;
   /** 续费标志可选参数：NOTIFY_AND_MANUAL_RENEW：表示默认状态(用户未设置，即初始状态：若用户有预付费不停服特权，也会对该值进行自动续费)NOTIFY_AND_AUTO_RENEW：表示自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW：表示明确不自动续费(用户设置)默认值：NOTIFY_AND_MANUAL_RENEW */
   RenewFlag?: string;
-  /** 时长单位，默认值MONTH */
+  /** 时长单位，枚举： MONTH, DAY, HOUR；释义：月，日，小时 */
   TimeUnit?: string;
 }
 
 /** 套餐价格 */
 declare interface ItemPrice {
-  /** 原单价 */
+  /** 原单价，元 */
   UnitPrice?: number;
-  /** 折扣后单价 */
+  /** 折扣后单价，元 */
   DiscountUnitPrice?: number;
   /** 折扣 */
   Discount?: number;

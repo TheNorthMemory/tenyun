@@ -2431,9 +2431,9 @@ declare interface CloseSSLRequest {
 
 declare interface CloseSSLResponse {
   /** 流程ID */
-  FlowId?: number | null;
+  FlowId?: number;
   /** 任务id */
-  TaskId?: number | null;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -964,6 +964,8 @@ declare interface GovernanceAlias {
   Id?: string;
   /** 该服务别名是否可以编辑 */
   Editable?: boolean;
+  /** 元数据信息 */
+  Metadatas?: Metadata[] | null;
 }
 
 /** 治理中心实例信息。 */
@@ -1116,6 +1118,8 @@ declare interface GovernanceNamespace {
   ServiceExportTo?: string[];
   /** 是否开启同步到全局注册中心 */
   SyncToGlobalRegistry?: boolean;
+  /** 元数据 */
+  Metadatas?: Metadata[] | null;
 }
 
 /** 治理中心命名空间输入参数 */
@@ -1204,6 +1208,8 @@ declare interface GovernanceServiceContract {
   ModifyTime?: string;
   /** 契约接口列表 */
   Interfaces?: GovernanceInterfaceDescription[];
+  /** 元数据 */
+  Metadatas?: Metadata[] | null;
 }
 
 /** 服务契约版本信息 */
@@ -1295,9 +1301,9 @@ declare interface KVMapping {
 /** 键值对 */
 declare interface KVPair {
   /** 键 */
-  Key: string;
+  Key?: string;
   /** 值 */
-  Value: string;
+  Value?: string;
 }
 
 /** Key/Value结构 */
@@ -1880,6 +1886,14 @@ declare interface SREInstance {
   ZookeeperRegionInfo?: ZookeeperRegionInfo;
   /** 部署架构 */
   DeployMode?: string;
+  /** 全局属性 */
+  GlobalType?: string;
+  /** 所属组类型 */
+  GroupType?: string;
+  /** 组id */
+  GroupId?: string[];
+  /** 是否为主地域 */
+  IsMainRegion?: boolean;
 }
 
 /** 服务治理相关的信息 */

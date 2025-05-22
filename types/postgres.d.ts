@@ -2986,36 +2986,6 @@ declare interface UpgradeDBInstanceMajorVersionResponse {
   RequestId?: string;
 }
 
-declare interface UpgradeDBInstanceRequest {
-  /** 升级后的实例内存大小，单位GB */
-  Memory: number;
-  /** 升级后的实例磁盘大小，单位GB */
-  Storage: number;
-  /** 实例ID，形如postgres-lnp6j617 */
-  DBInstanceId: string;
-  /** 是否自动使用代金券,1是,0否，默认不使用 */
-  AutoVoucher?: number;
-  /** 代金券ID列表，目前仅支持指定一张代金券 */
-  VoucherIds?: string[];
-  /** 活动ID */
-  ActivityId?: number;
-  /** 指定实例配置完成变更后的切换时间，默认为 立即切换，入参为 0 ：立即切换 。1：指定时间切换。 */
-  SwitchTag?: number;
-  /** 切换开始时间 */
-  SwitchStartTime?: string;
-  /** 切换截止时间 */
-  SwitchEndTime?: string;
-}
-
-declare interface UpgradeDBInstanceResponse {
-  /** 交易名字。 */
-  DealName?: string;
-  /** 冻结流水号 */
-  BillId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 /** {@link Postgres 云数据库 PostgreSQL} */
 declare interface Postgres {
   (): Versions;
@@ -3223,8 +3193,6 @@ declare interface Postgres {
   SwitchDBInstancePrimary(data: SwitchDBInstancePrimaryRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDBInstancePrimaryResponse>;
   /** 解除数据库账号锁定 {@link UnlockAccountRequest} {@link UnlockAccountResponse} */
   UnlockAccount(data: UnlockAccountRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockAccountResponse>;
-  /** @deprecated 升级实例配置（废弃） {@link UpgradeDBInstanceRequest} {@link UpgradeDBInstanceResponse} */
-  UpgradeDBInstance(data: UpgradeDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDBInstanceResponse>;
   /** 升级实例内核版本号 {@link UpgradeDBInstanceKernelVersionRequest} {@link UpgradeDBInstanceKernelVersionResponse} */
   UpgradeDBInstanceKernelVersion(data: UpgradeDBInstanceKernelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDBInstanceKernelVersionResponse>;
   /** 升级实例内核大版本 {@link UpgradeDBInstanceMajorVersionRequest} {@link UpgradeDBInstanceMajorVersionResponse} */

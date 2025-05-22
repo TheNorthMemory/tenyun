@@ -881,10 +881,12 @@ declare interface DescribeInstancesRequest {
   TypeList?: number[];
   /** 内部参数，用户可忽略。 */
   MonitorVersion?: string;
-  /** 根据标签的 Key 和 Value 筛选资源。该参数不配置或者数组设置为空值，则不根据标签进行过滤。 */
+  /** 废弃字段。请使用TagList传参。 */
   InstanceTags?: InstanceTagInfo;
   /** 根据标签的 Key 筛选资源，该参数不配置或者数组设置为空值，则不根据标签Key进行过滤。 */
   TagKeys?: string[];
+  /** 根据标签的 Key 和 Value 筛选资源。该参数不配置或者数组设置为空值，则不根据标签进行过滤。 */
+  TagList?: InstanceTagInfo[];
 }
 
 declare interface DescribeInstancesResponse {

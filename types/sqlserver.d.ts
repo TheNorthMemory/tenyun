@@ -1054,7 +1054,7 @@ declare interface ReadOnlyInstanceWeightPair {
 
 /** 地域信息 */
 declare interface RegionInfo {
-  /** 地域英文ID，类似ap-guanghou */
+  /** 地域英文ID，类似ap-guangzhou */
   Region?: string;
   /** 地域中文名称 */
   RegionName?: string;

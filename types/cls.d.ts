@@ -1404,6 +1404,8 @@ declare interface ScheduledSqlTaskInfo {
   SyntaxRule?: number;
   /** 是否开启投递服务日志。1：关闭，2：开启。 */
   HasServicesLog?: number;
+  /** 全文检索标记。1：关闭，2：打开。 */
+  FullQuery?: number;
 }
 
 /** 多日志主题检索错误信息 */
@@ -3577,7 +3579,7 @@ declare interface ModifyMachineGroupRequest {
   GroupId: string;
   /** 机器组名称 */
   GroupName?: string;
-  /** 机器组类型。Type：ip，Values中为ip字符串列表机器组；Type：label，Values中为标签字符串列表机器组。 */
+  /** 机器组类型。 Type：ip，Values中为ip字符串列表机器组；Type：label，Values中为标签字符串列表机器组。 */
   MachineGroupType?: MachineGroupTypeInfo;
   /** 标签列表 */
   Tags?: Tag[];

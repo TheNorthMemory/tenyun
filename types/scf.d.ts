@@ -292,7 +292,7 @@ declare interface ImageConfig {
   ImageUri: string;
   /** 用于企业版TCR获取镜像拉取临时凭证，ImageType为"enterprise"时必填 */
   RegistryId?: string | null;
-  /** 参数已废弃 */
+  /** 该参数即将下线，不推荐用户使用 */
   EntryPoint?: string | null;
   /** 容器的启动命令。该参数为可选参数，如果不填写，则默认使用 Dockerfile 中的 Entrypoint。传入规范，填写可运行的指令，例如 python */
   Command?: string | null;
@@ -554,7 +554,7 @@ declare interface Result {
   BillDuration?: number;
   /** 此次函数执行的Id */
   FunctionRequestId?: string;
-  /** 请求 Invoke 接口，该参数已弃用。请求 InvokeFunction 接口，该参数值为请求执行[状态码](https://cloud.tencent.com/document/product/583/42611)。 */
+  /** 该参数不再维护，不推荐用户继续使用。 */
   InvokeResult?: number;
 }
 

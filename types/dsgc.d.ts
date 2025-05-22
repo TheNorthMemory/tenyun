@@ -963,11 +963,11 @@ declare interface DspaDiscoveryTask {
   /** 通用规则集开关，0 关闭，1 启用 */
   GeneralRuleSetEnable?: number;
   /** 任务最新的一次执行结果信息，该字段用于查询任务列表接口 */
-  Result?: ScanTaskResult | null;
+  Result?: ScanTaskResult;
   /** 定时开始时间 */
   TimingStartTime?: string | null;
   /** 关联模板是否更新 */
-  ComplianceUpdate?: boolean | null;
+  ComplianceUpdate?: boolean;
 }
 
 /** 描述对象存储类敏感识别扫描人元数据条件。 */
@@ -3018,6 +3018,8 @@ declare interface DescribeDSPAAssessmentRiskSideListRequest {
 declare interface DescribeDSPAAssessmentRiskSideListResponse {
   /** 风险面列表 */
   RiskSideItmeList?: Note[];
+  /** 风险面列表 */
+  RiskSideItemList?: Note[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4735,7 +4737,7 @@ declare interface Dsgc {
   CreateAssetSortingReportRetryTask(data: CreateAssetSortingReportRetryTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetSortingReportRetryTaskResponse>;
   /** 创建资产梳理报告任务 {@link CreateAssetSortingReportTaskRequest} {@link CreateAssetSortingReportTaskResponse} */
   CreateAssetSortingReportTask(data: CreateAssetSortingReportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetSortingReportTaskResponse>;
-  /** 创建识别规则 {@link CreateClassificationRuleRequest} {@link CreateClassificationRuleResponse} */
+  /** @deprecated 创建识别规则 {@link CreateClassificationRuleRequest} {@link CreateClassificationRuleResponse} */
   CreateClassificationRule(data?: CreateClassificationRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClassificationRuleResponse>;
   /** 创建风险等级 {@link CreateDSPAAssessmentRiskLevelRequest} {@link CreateDSPAAssessmentRiskLevelResponse} */
   CreateDSPAAssessmentRiskLevel(data: CreateDSPAAssessmentRiskLevelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDSPAAssessmentRiskLevelResponse>;
@@ -4769,9 +4771,9 @@ declare interface Dsgc {
   CreateDSPASelfBuildMetaResource(data: CreateDSPASelfBuildMetaResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDSPASelfBuildMetaResourceResponse>;
   /** 创建规则别名 {@link CreateIdentifyRuleAnotherNameRequest} {@link CreateIdentifyRuleAnotherNameResponse} */
   CreateIdentifyRuleAnotherName(data: CreateIdentifyRuleAnotherNameRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIdentifyRuleAnotherNameResponse>;
-  /** 创建新分类 {@link CreateNewClassificationRequest} {@link CreateNewClassificationResponse} */
+  /** @deprecated 创建新分类 {@link CreateNewClassificationRequest} {@link CreateNewClassificationResponse} */
   CreateNewClassification(data?: CreateNewClassificationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNewClassificationResponse>;
-  /** 创建或复制分级分类模板 {@link CreateOrCopyStandardRequest} {@link CreateOrCopyStandardResponse} */
+  /** @deprecated 创建或复制分级分类模板 {@link CreateOrCopyStandardRequest} {@link CreateOrCopyStandardResponse} */
   CreateOrCopyStandard(data?: CreateOrCopyStandardRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrCopyStandardResponse>;
   /** 查询建议的默认风险等级矩阵 {@link DecribeSuggestRiskLevelMatrixRequest} {@link DecribeSuggestRiskLevelMatrixResponse} */
   DecribeSuggestRiskLevelMatrix(data: DecribeSuggestRiskLevelMatrixRequest, config?: AxiosRequestConfig): AxiosPromise<DecribeSuggestRiskLevelMatrixResponse>;
@@ -4797,9 +4799,9 @@ declare interface Dsgc {
   DescribeBindDBList(data: DescribeBindDBListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindDBListResponse>;
   /** 查询cos资产分布详情 {@link DescribeCOSAssetSensitiveDistributionRequest} {@link DescribeCOSAssetSensitiveDistributionResponse} */
   DescribeCOSAssetSensitiveDistribution(data: DescribeCOSAssetSensitiveDistributionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCOSAssetSensitiveDistributionResponse>;
-  /** 查询分类信息 {@link DescribeClassificationInfoRequest} {@link DescribeClassificationInfoResponse} */
+  /** @deprecated 查询分类信息 {@link DescribeClassificationInfoRequest} {@link DescribeClassificationInfoResponse} */
   DescribeClassificationInfo(data?: DescribeClassificationInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClassificationInfoResponse>;
-  /** 查询标准下所有分类的识别规则数量(不算子分类下的识别规则) {@link DescribeClassificationRuleCountRequest} {@link DescribeClassificationRuleCountResponse} */
+  /** @deprecated 查询标准下所有分类的识别规则数量(不算子分类下的识别规则) {@link DescribeClassificationRuleCountRequest} {@link DescribeClassificationRuleCountResponse} */
   DescribeClassificationRuleCount(data?: DescribeClassificationRuleCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClassificationRuleCountResponse>;
   /** 查询高风险资产top10 {@link DescribeDSPAAssessmentHighRiskTop10OverviewRequest} {@link DescribeDSPAAssessmentHighRiskTop10OverviewResponse} */
   DescribeDSPAAssessmentHighRiskTop10Overview(data: DescribeDSPAAssessmentHighRiskTop10OverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDSPAAssessmentHighRiskTop10OverviewResponse>;
@@ -4923,7 +4925,7 @@ declare interface Dsgc {
   DescribeESAssetSensitiveDistribution(data: DescribeESAssetSensitiveDistributionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeESAssetSensitiveDistributionResponse>;
   /** 获取导出任务结果 {@link DescribeExportTaskResultRequest} {@link DescribeExportTaskResultResponse} */
   DescribeExportTaskResult(data: DescribeExportTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportTaskResultResponse>;
-  /** 查询标准下所有叶子节点分类 {@link DescribeLeafClassificationRequest} {@link DescribeLeafClassificationResponse} */
+  /** @deprecated 查询标准下所有叶子节点分类 {@link DescribeLeafClassificationRequest} {@link DescribeLeafClassificationResponse} */
   DescribeLeafClassification(data?: DescribeLeafClassificationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLeafClassificationResponse>;
   /** 查询mongo的敏感资产分布 {@link DescribeMongoAssetSensitiveDistributionRequest} {@link DescribeMongoAssetSensitiveDistributionResponse} */
   DescribeMongoAssetSensitiveDistribution(data: DescribeMongoAssetSensitiveDistributionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMongoAssetSensitiveDistributionResponse>;
@@ -4933,7 +4935,7 @@ declare interface Dsgc {
   DescribeReportTaskDownloadUrl(data: DescribeReportTaskDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReportTaskDownloadUrlResponse>;
   /** 获取资产报表任务列表 {@link DescribeReportTasksRequest} {@link DescribeReportTasksResponse} */
   DescribeReportTasks(data: DescribeReportTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReportTasksResponse>;
-  /** 查询分类下规则列表 {@link DescribeRuleListRequest} {@link DescribeRuleListResponse} */
+  /** @deprecated 查询分类下规则列表 {@link DescribeRuleListRequest} {@link DescribeRuleListResponse} */
   DescribeRuleList(data?: DescribeRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleListResponse>;
   /** 查询cos敏感数据分布 {@link DescribeSensitiveCOSDataDistributionRequest} {@link DescribeSensitiveCOSDataDistributionResponse} */
   DescribeSensitiveCOSDataDistribution(data: DescribeSensitiveCOSDataDistributionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSensitiveCOSDataDistributionResponse>;
@@ -4959,9 +4961,9 @@ declare interface Dsgc {
   ListDSPACosMetaResources(data: ListDSPACosMetaResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<ListDSPACosMetaResourcesResponse>;
   /** 拉取用户云资源 {@link ListDSPAMetaResourcesRequest} {@link ListDSPAMetaResourcesResponse} */
   ListDSPAMetaResources(data: ListDSPAMetaResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<ListDSPAMetaResourcesResponse>;
-  /** 编辑识别规则 {@link ModifyClassificationRuleRequest} {@link ModifyClassificationRuleResponse} */
+  /** @deprecated 编辑识别规则 {@link ModifyClassificationRuleRequest} {@link ModifyClassificationRuleResponse} */
   ModifyClassificationRule(data?: ModifyClassificationRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClassificationRuleResponse>;
-  /** 修改识别规则状态 {@link ModifyClassificationRuleStateRequest} {@link ModifyClassificationRuleStateResponse} */
+  /** @deprecated 修改识别规则状态 {@link ModifyClassificationRuleStateRequest} {@link ModifyClassificationRuleStateResponse} */
   ModifyClassificationRuleState(data?: ModifyClassificationRuleStateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClassificationRuleStateResponse>;
   /** 修改DSPA评估风险项 {@link ModifyDSPAAssessmentRiskRequest} {@link ModifyDSPAAssessmentRiskResponse} */
   ModifyDSPAAssessmentRisk(data: ModifyDSPAAssessmentRiskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDSPAAssessmentRiskResponse>;
@@ -4991,17 +4993,17 @@ declare interface Dsgc {
   ModifyDSPAESTaskResult(data: ModifyDSPAESTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDSPAESTaskResultResponse>;
   /** 调整任务扫描结果 {@link ModifyDSPATaskResultRequest} {@link ModifyDSPATaskResultResponse} */
   ModifyDSPATaskResult(data: ModifyDSPATaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDSPATaskResultResponse>;
-  /** 修改敏感级别信息 {@link ModifyLevelInfoRequest} {@link ModifyLevelInfoResponse} */
+  /** @deprecated 修改敏感级别信息 {@link ModifyLevelInfoRequest} {@link ModifyLevelInfoResponse} */
   ModifyLevelInfo(data?: ModifyLevelInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLevelInfoResponse>;
-  /** 修改级别名称 {@link ModifyLevelNameRequest} {@link ModifyLevelNameResponse} */
+  /** @deprecated 修改级别名称 {@link ModifyLevelNameRequest} {@link ModifyLevelNameResponse} */
   ModifyLevelName(data?: ModifyLevelNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLevelNameResponse>;
-  /** 修改级别状态 {@link ModifyLevelStateRequest} {@link ModifyLevelStateResponse} */
+  /** @deprecated 修改级别状态 {@link ModifyLevelStateRequest} {@link ModifyLevelStateResponse} */
   ModifyLevelState(data?: ModifyLevelStateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLevelStateResponse>;
-  /** 一个分类合并到另一个分类中（分类拖拽功能） {@link ModifyMergeClassificationRequest} {@link ModifyMergeClassificationResponse} */
+  /** @deprecated 一个分类合并到另一个分类中（分类拖拽功能） {@link ModifyMergeClassificationRequest} {@link ModifyMergeClassificationResponse} */
   ModifyMergeClassification(data?: ModifyMergeClassificationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMergeClassificationResponse>;
-  /** 修改分类信息 {@link ModifyNewClassificationRequest} {@link ModifyNewClassificationResponse} */
+  /** @deprecated 修改分类信息 {@link ModifyNewClassificationRequest} {@link ModifyNewClassificationResponse} */
   ModifyNewClassification(data?: ModifyNewClassificationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNewClassificationResponse>;
-  /** 修改分级分类模板信息 {@link ModifyStandardInfoRequest} {@link ModifyStandardInfoResponse} */
+  /** @deprecated 修改分级分类模板信息 {@link ModifyStandardInfoRequest} {@link ModifyStandardInfoResponse} */
   ModifyStandardInfo(data?: ModifyStandardInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStandardInfoResponse>;
   /** 查询数据库资源实例的DB列表 {@link QueryDSPAMetaResourceDbListRequest} {@link QueryDSPAMetaResourceDbListResponse} */
   QueryDSPAMetaResourceDbList(data: QueryDSPAMetaResourceDbListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryDSPAMetaResourceDbListResponse>;

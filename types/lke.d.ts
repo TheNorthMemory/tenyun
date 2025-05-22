@@ -2176,10 +2176,6 @@ declare interface DescribeDocResponse {
   AttrLabels?: AttrLabel[];
   /** 分类ID */
   CateBizId?: string;
-  /** 文档的用户自定义ID */
-  CustomerKnowledgeId?: string;
-  /** 文档的属性标记，0: 不做用户外部权限校验 */
-  AttributeFlags?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3431,10 +3427,6 @@ declare interface ModifyDocRequest {
   ExpireEnd?: string;
   /** 分类ID */
   CateBizId?: string;
-  /** 文档的用户自定义ID */
-  CustomerKnowledgeId?: string;
-  /** 文档的属性标记，0: 不做用户外部权限校验 */
-  AttributeFlags?: number[];
 }
 
 declare interface ModifyDocResponse {
@@ -3689,10 +3681,6 @@ declare interface SaveDocRequest {
   Opt?: number;
   /** 分类ID */
   CateBizId?: string;
-  /** 文档的用户自定义ID */
-  CustomerKnowledgeId?: string;
-  /** 文档的属性标记，0: 不做用户外部权限校验 */
-  AttributeFlags?: number[];
 }
 
 declare interface SaveDocResponse {

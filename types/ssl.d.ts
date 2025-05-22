@@ -1319,6 +1319,10 @@ declare interface CertificateInfoSubmitRequest {
   TechEmail?: string;
   /** 联系人职位。若没有传ManagerId， 则此字段必传 */
   TechTitle?: string;
+  /** 证书类型 */
+  Type?: number;
+  /** 只针对Dnspod系列证书有效，ca机构类型可为sectigo和digicert */
+  CaType?: string;
 }
 
 declare interface CertificateInfoSubmitResponse {

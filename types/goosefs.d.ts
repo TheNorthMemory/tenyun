@@ -96,6 +96,36 @@ declare interface FSAttribute {
   ChargeAttribute?: ChargeAttribute;
 }
 
+/** Fileset信息 */
+declare interface FilesetInfo {
+  /** Fileset id */
+  FsetId?: string;
+  /** Fileset名称 */
+  FsetName?: string;
+  /** Fileset目录 */
+  FsetDir?: string;
+  /** Fileset容量配额限定值 */
+  QuotaSizeLimit?: string;
+  /** 已使用容量配额 */
+  QuotaSizeUsed?: string;
+  /** 容量配额使用占比 */
+  QuotaSizeUsedPercent?: string;
+  /** Fileset文件数配额限定值 */
+  QuotaFilesLimit?: string;
+  /** 已使用文件数配额 */
+  QuotaFilesUsed?: string;
+  /** 文件数配额使用占比 */
+  QuotaFilesUsedPercent?: string;
+  /** Fileset审计 */
+  AuditState?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 修改时间 */
+  ModifyTime?: string;
+  /** Fileset状态：creating 配置中 active 已生效 modify 修改中 */
+  Status?: string;
+}
+
 /** GooseFSx文件系统的属性 */
 declare interface GooseFSxAttribute {
   /** GooseFSx的型号 */
@@ -282,6 +312,28 @@ declare interface CreateFileSystemResponse {
   RequestId?: string;
 }
 
+declare interface CreateFilesetRequest {
+  /** 文件系统id */
+  FileSystemId: string;
+  /** Fileset名称 */
+  FsetName: string;
+  /** Fileset目录 */
+  FsetDir: string;
+  /** Fileset容量配额（需带单位G） */
+  QuotaSizeLimit?: string;
+  /** Fileset文件数配额 */
+  QuotaFilesLimit?: string;
+  /** Fileset文件删除操作审计 */
+  AuditState?: string;
+}
+
+declare interface CreateFilesetResponse {
+  /** Fileset id */
+  FsetId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCrossVpcSubnetSupportForClientNodeRequest {
   /** 文件系统ID */
   FileSystemId: string;
@@ -300,6 +352,18 @@ declare interface DeleteFileSystemRequest {
 }
 
 declare interface DeleteFileSystemResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteFilesetRequest {
+  /** 文件系统id */
+  FileSystemId: string;
+  /** Fileset id */
+  FsetId: string;
+}
+
+declare interface DeleteFilesetResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -404,6 +468,36 @@ declare interface DescribeFileSystemsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeFilesetGeneralConfigRequest {
+  /** 文件系统id */
+  FileSystemId: string;
+}
+
+declare interface DescribeFilesetGeneralConfigResponse {
+  /** 配额对root用户生效 */
+  EnforceQuotaOnRoot?: string;
+  /** 配置状态 */
+  Status?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFilesetsRequest {
+  /** 文件系统id */
+  FileSystemId: string;
+  /** FsetId列表 */
+  FilesetIds?: string[];
+  /** FsetDir列表 */
+  FilesetDirs?: string[];
+}
+
+declare interface DescribeFilesetsResponse {
+  /** Fileset列表 */
+  FilesetList?: FilesetInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DetachFileSystemBucketRequest {
   /** 文件系统ID */
   FileSystemId: string;
@@ -470,6 +564,36 @@ declare interface QueryDataRepositoryBandwidthResponse {
   RequestId?: string;
 }
 
+declare interface UpdateFilesetGeneralConfigRequest {
+  /** 文件系统id */
+  FileSystemId: string;
+  /** 配额对root用户生效 */
+  EnforceQuotaOnRoot?: string;
+}
+
+declare interface UpdateFilesetGeneralConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateFilesetRequest {
+  /** 文件系统id */
+  FileSystemId: string;
+  /** Fileset id */
+  FsetId: string;
+  /** 容量配额限定值 */
+  QuotaSizeLimit?: string;
+  /** 文件数配额限定值 */
+  QuotaFilesLimit?: string;
+  /** Fileset文件删除操作审计 */
+  AuditState?: string;
+}
+
+declare interface UpdateFilesetResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Goosefs 数据加速器 GooseFS} */
 declare interface Goosefs {
   (): Versions;
@@ -485,10 +609,14 @@ declare interface Goosefs {
   CreateDataRepositoryTask(data: CreateDataRepositoryTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataRepositoryTaskResponse>;
   /** 创建文件系统 {@link CreateFileSystemRequest} {@link CreateFileSystemResponse} */
   CreateFileSystem(data: CreateFileSystemRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileSystemResponse>;
+  /** 创建Fileset {@link CreateFilesetRequest} {@link CreateFilesetResponse} */
+  CreateFileset(data: CreateFilesetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFilesetResponse>;
   /** 为客户端节点删除跨vpc子网访问能力 {@link DeleteCrossVpcSubnetSupportForClientNodeRequest} {@link DeleteCrossVpcSubnetSupportForClientNodeResponse} */
   DeleteCrossVpcSubnetSupportForClientNode(data: DeleteCrossVpcSubnetSupportForClientNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCrossVpcSubnetSupportForClientNodeResponse>;
   /** 删除文件系统 {@link DeleteFileSystemRequest} {@link DeleteFileSystemResponse} */
   DeleteFileSystem(data: DeleteFileSystemRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFileSystemResponse>;
+  /** 删除Fileset {@link DeleteFilesetRequest} {@link DeleteFilesetResponse} */
+  DeleteFileset(data: DeleteFilesetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFilesetResponse>;
   /** 列出集群中所有的客户端节点 {@link DescribeClientNodesRequest} {@link DescribeClientNodesResponse} */
   DescribeClientNodes(data: DescribeClientNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientNodesResponse>;
   /** 查询GooseFS集群客户端凭证 {@link DescribeClusterClientTokenRequest} {@link DescribeClusterClientTokenResponse} */
@@ -503,6 +631,10 @@ declare interface Goosefs {
   DescribeFileSystemBuckets(data: DescribeFileSystemBucketsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileSystemBucketsResponse>;
   /** 列出文件系统 {@link DescribeFileSystemsRequest} {@link DescribeFileSystemsResponse} */
   DescribeFileSystems(data: DescribeFileSystemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileSystemsResponse>;
+  /** 查询Fileset通用配置 {@link DescribeFilesetGeneralConfigRequest} {@link DescribeFilesetGeneralConfigResponse} */
+  DescribeFilesetGeneralConfig(data: DescribeFilesetGeneralConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFilesetGeneralConfigResponse>;
+  /** 查询Fileset列表 {@link DescribeFilesetsRequest} {@link DescribeFilesetsResponse} */
+  DescribeFilesets(data: DescribeFilesetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFilesetsResponse>;
   /** 解绑文件系统与Bucket的映射 {@link DetachFileSystemBucketRequest} {@link DetachFileSystemBucketResponse} */
   DetachFileSystemBucket(data: DetachFileSystemBucketRequest, config?: AxiosRequestConfig): AxiosPromise<DetachFileSystemBucketResponse>;
   /** 扩展文件系统容量 {@link ExpandCapacityRequest} {@link ExpandCapacityResponse} */
@@ -513,6 +645,10 @@ declare interface Goosefs {
   QueryCrossVpcSubnetSupportForClientNode(data: QueryCrossVpcSubnetSupportForClientNodeRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCrossVpcSubnetSupportForClientNodeResponse>;
   /** 查询数据流动带宽 {@link QueryDataRepositoryBandwidthRequest} {@link QueryDataRepositoryBandwidthResponse} */
   QueryDataRepositoryBandwidth(data: QueryDataRepositoryBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<QueryDataRepositoryBandwidthResponse>;
+  /** 修改Fileset {@link UpdateFilesetRequest} {@link UpdateFilesetResponse} */
+  UpdateFileset(data: UpdateFilesetRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFilesetResponse>;
+  /** 修改Fileset通用配置 {@link UpdateFilesetGeneralConfigRequest} {@link UpdateFilesetGeneralConfigResponse} */
+  UpdateFilesetGeneralConfig(data: UpdateFilesetGeneralConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFilesetGeneralConfigResponse>;
 }
 
 export declare type Versions = ["2022-05-19"];
