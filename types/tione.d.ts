@@ -1820,6 +1820,8 @@ declare interface TrainingTaskSetItem {
   SubUin?: string | null;
   /** 任务创建者名称 */
   SubUinName?: string | null;
+  /** 任务AppId */
+  AppId?: string;
 }
 
 /** 大模型生成Token统计 */
