@@ -142,7 +142,7 @@ declare interface DetectInfoText {
   Mobile?: string | null;
   /** 本次流程最终比对库源类型。- 取值范围： 权威库。 业务方自有库（用户上传照片、客户的混合库、混合部署库）。 二次验证库。 人工审核库。 */
   CompareLibType?: string | null;
-  /** 本次流程最终活体类型。- 取值范围： 0：未知 1：数字活体 2：动作活体 3：静默活体 4：一闪活体（动作+光线） */
+  /** 本次流程最终活体类型。- 取值范围： 0：未知 1：数字活体 2：动作活体 3：静默活体 4：一闪活体（动作+光线） 5：远近活体 */
   LivenessMode?: number | null;
   /** nfc重复计费requestId列表。 */
   NFCRequestIds?: string[] | null;
@@ -432,7 +432,7 @@ declare interface CheckIdCardInformationRequest {
 declare interface CheckIdCardInformationResponse {
   /** 相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）。 */
   Sim?: number;
-  /** 业务错误码。- 成功情况返回Success,。- 错误情况请参考下方错误码 列表中FailedOperation部分 */
+  /** 业务错误码。- 成功情况返回Success。- 错误情况请参考下方错误码 列表中FailedOperation部分 */
   Result?: string;
   /** 业务结果描述。 */
   Description?: string;
@@ -503,7 +503,7 @@ declare interface CheckPhoneAndNameResponse {
 }
 
 declare interface DetectAIFakeFacesRequest {
-  /** 传入需要进行检测的带有人脸的图片或视频，使用base64编码的形式。- 图片的Base64值：建议整体图像480x640的分辨率，脸部 大小 100X100 以上。Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。- 视频的Base64值：Base64编码后的大小不超过8M，支持mp4、avi、flv格式。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。视频时长最大支持20s，建议时长2～5s。建议视频分辨率为480x640，帧率在25fps~30fps之间。 */
+  /** 传入需要进行检测的带有人脸的图片或视频（当前仅支持单人脸检测），使用base64编码的形式。- 图片的Base64值：建议整体图像480x640的分辨率，脸部 大小 100X100 以上。Base64编码后的图片数据大小建议不超过3M、最大不可超过10M，仅支持jpg、png格式。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。- 视频的Base64值：Base64编码后的大小建议不超过8M、最大不可超过10M，支持mp4、avi、flv格式。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。视频时长最大支持20s，建议时长2～5s。建议视频分辨率为480x640，帧率在25fps~30fps之间。示例值：/9j/4AAQSkZJRg.....s97n//2Q== */
   FaceInput?: string;
   /** 传入的类型。- 取值范围：1：传入的是图片类型。2：传入的是视频类型。其他：返回错误码InvalidParameter。 */
   FaceInputType?: number;
@@ -535,7 +535,7 @@ declare interface DetectAuthRequest {
   Name?: string;
   /** 认证结束后重定向的回调链接地址。- 最长长度1024位。 */
   RedirectUrl?: string;
-  /** 透传字段，在获取验证结果时返回。 */
+  /** 透传字段，在获取验证结果时返回。- 最长长度1024位。 */
   Extra?: string;
   /** 用于人脸比对的图像数据，使用base64编码。- Base64编码后的图片数据大小不超过3M。- 仅支持jpg、png格式。- 请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。 */
   ImageBase64?: string;
@@ -719,6 +719,10 @@ declare interface GetFaceIdResultRequest {
   IsNeedVideo?: boolean;
   /** 是否需要拉取截帧。- 默认false：不需要。 */
   IsNeedBestFrame?: boolean;
+  /** 是否对回包整体进行加密。 */
+  IsEncryptResponse?: boolean;
+  /** 是否需要对返回中的敏感信息进行加密。 只需指定加密算法Algorithm即可，其余字段传入默认值。 */
+  Encryption?: Encryption;
 }
 
 declare interface GetFaceIdResultResponse {
@@ -738,7 +742,7 @@ declare interface GetFaceIdResultResponse {
   BestFrameBase64?: string | null;
   /** 获取token时透传的信息。 */
   Extra?: string | null;
-  /** plus版：描述当前请求所在设备的风险标签。- 详情如下：01-设备疑似被Root/设备疑似越狱。02-设备疑似被注入。03-设备疑似为模拟器。04-设备疑似存在风险操作。05-摄像头疑似被劫持。06-疑似黑产设备。null-无设备风险。- 增强版：此字段不生效，默认为null。 */
+  /** plus版：描述当前请求所在设备的风险标签。- 详情如下：06-疑似黑产设备。null-无设备风险。- 增强版：此字段不生效，默认为null。 */
   DeviceInfoTag?: string | null;
   /** 行为风险标签。- 仅错误码返回1007（设备疑似被劫持）时返回风险标签。- 标签说明：02：攻击风险 */
   RiskInfoTag?: string | null;
@@ -746,6 +750,10 @@ declare interface GetFaceIdResultResponse {
   LivenessInfoTag?: string | null;
   /** plus版：描述当前请求所在设备的风险等级，共4级。- 详情如下：1 - 安全。2 - 低风险。3 - 中风险。4 - 高危。null - 未获取到风险等级。- 增强版：此字段不生效，默认为null。 */
   DeviceInfoLevel?: string | null;
+  /** 敏感数据加密信息。 */
+  Encryption?: Encryption | null;
+  /** 加密后的数据。 */
+  EncryptedBody?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -787,7 +795,7 @@ declare interface GetFaceIdTokenRequest {
   Extra?: string;
   /** 是否使用cos桶。- 默认为false。- 设置该参数为true后，核身过程中的视频图片将会存储在人脸核身控制台授权cos的bucket中，拉取结果时会返回对应资源完整cos地址。- 开通地址见https://console.cloud.tencent.com/faceid/cos- 【注意】选择该参数为true后将不返回base64数据，请根据接入情况谨慎修改。 */
   UseCos?: boolean;
-  /** 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。 */
+  /** 敏感数据加密信息。对传入信息（姓名、身份证号、自传照片）有加密需求的用户可使用此参数，详情请点击左侧链接。 */
   Encryption?: Encryption;
   /** 用于细分客户使用场景。- 申请开通服务后，可以在腾讯云慧眼人脸核身控制台（https://console.cloud.tencent.com/faceid） 自助接入里面创建，审核通过后即可调用。- 如有疑问，请添加腾讯云人脸核身小助手进行咨询。 */
   RuleId?: string;
@@ -1053,11 +1061,11 @@ declare interface MinorsVerificationRequest {
 
 declare interface MinorsVerificationResponse {
   /** 结果码，收费情况如下。收费结果码：0: 成年-1: 未成年-3: 姓名和身份证号不一致不收费结果码：-2: 未查询到手机号信息-4: 非法身份证号（长度、校验位等不正确）-5: 非法姓名（长度、格式等不正确）-6: 权威数据源服务异常-7: 未查询到身份信息-8: 权威数据源升级中，请稍后再试 */
-  Result: string;
+  Result?: string;
   /** 业务结果描述。 */
-  Description: string;
+  Description?: string;
   /** 该字段的值为年龄区间。格式为[a,b)，[0,8)表示年龄小于8周岁区间，不包括8岁；[8,16)表示年龄8-16周岁区间，不包括16岁；[16,18)表示年龄16-18周岁区间，不包括18岁；[18,+)表示年龄大于18周岁。 */
-  AgeRange: string;
+  AgeRange?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

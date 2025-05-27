@@ -933,6 +933,8 @@ declare interface DescribeDataPerformancePageRequest {
   Env?: string;
   /** 网络状态 */
   NetStatus?: string;
+  /** 是否返回webvitals数据 */
+  WebVitals?: boolean;
 }
 
 declare interface DescribeDataPerformancePageResponse {

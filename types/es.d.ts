@@ -1750,7 +1750,7 @@ declare namespace V20180416 {
     /** 子网ID */
     SubnetId: string;
     /** 是否为隐藏可用区 */
-    Hidden?: boolean | null;
+    Hidden?: boolean;
   }
 
   interface CheckMigrateIndexMetaDataRequest {

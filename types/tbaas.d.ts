@@ -293,9 +293,9 @@ declare interface GetBlockTransactionListForUserRequest {
 
 declare interface GetBlockTransactionListForUserResponse {
   /** 交易总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 交易列表 */
-  TransactionList: TransactionItem[];
+  TransactionList?: TransactionItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -725,7 +725,7 @@ declare interface QueryRequest {
 
 declare interface QueryResponse {
   /** 查询结果数据 */
-  Data: string[];
+  Data?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

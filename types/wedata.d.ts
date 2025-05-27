@@ -1258,6 +1258,14 @@ declare interface DatabaseMeta {
   DatabaseGuid?: string | null;
 }
 
+/** 数据库Schema信息 */
+declare interface DatabaseSchemaIInfo {
+  /** schema名称 */
+  SchemaName?: string | null;
+  /** 数据库名称 */
+  OriginDatabaseName?: string | null;
+}
+
 /** 数据源对象 */
 declare interface DatasourceBaseInfo {
   /** 若数据源列表为绑定数据库，则为db名称 */
@@ -9461,6 +9469,44 @@ declare interface DescribeRealTimeTaskSpeedResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRealViewSchemaPageRequest {
+  /** 页码 */
+  PageNumber: number;
+  /** 每页记录数 */
+  PageSize: number;
+  /** 数据库名称 */
+  DatabaseName: string;
+  /** 数据源id */
+  DatasourceId: string;
+  /** 数据type */
+  DataSourceType: string;
+  /** 项目id */
+  ProjectId: string;
+  /** 环境信息 */
+  Env?: string;
+  /** 项目model */
+  Model?: string;
+  /** dev的数据源Id */
+  DevDatasourceId?: string;
+  /** 过滤字段 */
+  Keyword?: string;
+}
+
+declare interface DescribeRealViewSchemaPageResponse {
+  /** 数据库schema信息列表 */
+  Items?: DatabaseSchemaIInfo[] | null;
+  /** 页码 */
+  PageNumber?: number;
+  /** 每页记录数 */
+  PageSize?: number;
+  /** 总记录数 */
+  TotalCount?: number;
+  /** 总页数 */
+  TotalPage?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeReportTaskDetailRequest {
   /** 租户id */
   TenantId: string;
@@ -13128,6 +13174,8 @@ declare interface Wedata {
   DescribeRealTimeTaskMetricOverview(data: DescribeRealTimeTaskMetricOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRealTimeTaskMetricOverviewResponse>;
   /** 实时任务同步速度趋势 {@link DescribeRealTimeTaskSpeedRequest} {@link DescribeRealTimeTaskSpeedResponse} */
   DescribeRealTimeTaskSpeed(data: DescribeRealTimeTaskSpeedRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRealTimeTaskSpeedResponse>;
+  /** 数据集成分页获取数据库Schema {@link DescribeRealViewSchemaPageRequest} {@link DescribeRealViewSchemaPageResponse} */
+  DescribeRealViewSchemaPage(data: DescribeRealViewSchemaPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRealViewSchemaPageResponse>;
   /** 获取用量大盘任务详情 {@link DescribeReportTaskDetailRequest} {@link DescribeReportTaskDetailResponse} */
   DescribeReportTaskDetail(data: DescribeReportTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReportTaskDetailResponse>;
   /** 查询用量大盘任务列表 {@link DescribeReportTaskListRequest} {@link DescribeReportTaskListResponse} */

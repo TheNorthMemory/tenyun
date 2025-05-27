@@ -3984,13 +3984,13 @@ declare namespace V20180724 {
 
   interface DescribeMonitorResourceInfoResponse {
     /** 电话告警数量 */
-    PhoneAlarmNumber: number;
+    PhoneAlarmNumber?: number;
     /** 高级指标数量 */
-    AdvancedMetricNumber: number;
+    AdvancedMetricNumber?: number;
     /** API调用量 */
-    APIUsageNumber: number;
+    APIUsageNumber?: number;
     /** 告警短信数量 */
-    AlarmSMSNumber: number;
+    AlarmSMSNumber?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

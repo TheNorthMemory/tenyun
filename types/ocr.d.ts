@@ -2164,6 +2164,8 @@ declare interface TextVehicleBack {
   AddressElectronic?: string;
   /** 发证机关 */
   IssueAuthorityElectronic?: string;
+  /** 车身颜色 */
+  CarBodyColor?: string;
 }
 
 /** 行驶证主页正面的识别结果 */

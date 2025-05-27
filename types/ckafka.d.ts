@@ -1060,7 +1060,7 @@ declare interface EventBusParam {
 
 /** 数据处理规则失败处理 */
 declare interface FailureParam {
-  /** 类型，DLQ死信队列，IGNORE_ERROR保留，DROP废弃 */
+  /** 类型，DLQ死信队列，IGNORE_ERROR保留，DROP丢弃 */
   Type: string;
   /** Ckafka类型死信队列 */
   KafkaParam?: KafkaParam;
@@ -2795,6 +2795,8 @@ declare interface CreateDatahubTaskRequest {
   TaskId?: string;
   /** 标签列表 */
   Tags?: Tag[];
+  /** 任务描述信息 */
+  Description?: string;
 }
 
 declare interface CreateDatahubTaskResponse {

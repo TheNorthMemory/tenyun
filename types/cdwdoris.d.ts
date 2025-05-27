@@ -989,6 +989,12 @@ declare interface CreateInstanceNewRequest {
   UserMultiZoneInfos?: NetworkInfo;
   /** 开启多可用区后，用户的所有可用区和子网信息 */
   UserMultiZoneInfoArr?: NetworkInfo[];
+  /** 是否存算分离 */
+  IsSSC?: boolean;
+  /** CU数 */
+  SSCCU?: number;
+  /** 缓存盘大小 */
+  CacheDiskSize?: string;
 }
 
 declare interface CreateInstanceNewResponse {

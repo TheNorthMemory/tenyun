@@ -746,9 +746,9 @@ declare interface CVMAssetVO {
   CWPStatus?: number;
   /** 资产创建时间 */
   AssetCreateTime?: string;
-  /** 公网ip */
+  /** 公网IP */
   PublicIp?: string;
-  /** 私网ip */
+  /** 私网IP */
   PrivateIp?: string;
   /** vpc id */
   VpcId?: string;
@@ -768,9 +768,9 @@ declare interface CVMAssetVO {
   SubnetId?: string;
   /** 子网名 */
   SubnetName?: string;
-  /** uuid */
+  /** 主机安全Agent UUID */
   InstanceUuid?: string;
-  /** qquid */
+  /** 云主机 CVM UUID */
   InstanceQUuid?: string;
   /** os名 */
   OsName?: string;
@@ -1072,7 +1072,7 @@ declare interface DomainAssetVO {
   Tag?: Tag[];
   /** 关联实例类型 */
   SourceType?: string;
-  /** memberiD */
+  /** memberId信息 */
   MemberId?: string;
   /** cc攻击 */
   CCAttack?: number;
@@ -1202,7 +1202,7 @@ declare interface IpAssetListVO {
   CFWStatus?: number;
   /** 资产创建时间 */
   AssetCreateTime?: string;
-  /** 公网ip */
+  /** 公网IP */
   PublicIp?: string;
   /** 公网ip类型 */
   PublicIpType?: number;
@@ -1252,7 +1252,7 @@ declare interface IpAssetListVO {
   Tag?: Tag[];
   /** eip主键 */
   AddressId?: string;
-  /** memberid信息 */
+  /** MemberId信息 */
   MemberId?: string;
   /** 风险服务暴露 */
   RiskExposure?: number;
@@ -1824,7 +1824,7 @@ declare interface SubUserInfo {
   OwnerUin?: string;
   /** 主账号名称 */
   OwnerNickName?: string;
-  /** 所属主账号memberid */
+  /** 所属主账号memberId信息 */
   OwnerMemberID?: string;
   /** 账户类型，0为腾讯云账户，1为AWS账户 */
   CloudType?: number;

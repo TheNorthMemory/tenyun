@@ -875,6 +875,8 @@ declare interface RestartAndroidInstancesAppRequest {
   AndroidInstanceIds: string[];
   /** 应用包名 */
   PackageName: string;
+  /** 启动页。建议指定启动页来启动应用，避免启动失败。如果启动页为空，系统尝试根据 PackageName 启动，但不保证成功。 */
+  Activity?: string;
 }
 
 declare interface RestartAndroidInstancesAppResponse {
@@ -919,6 +921,8 @@ declare interface StartAndroidInstancesAppRequest {
   AndroidInstanceIds: string[];
   /** 应用包名 */
   PackageName: string;
+  /** 启动页。建议指定启动页来启动应用，避免启动失败。如果启动页为空，系统尝试根据 PackageName 启动，但不保证成功。 */
+  Activity?: string;
 }
 
 declare interface StartAndroidInstancesAppResponse {

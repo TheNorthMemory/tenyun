@@ -884,6 +884,16 @@ declare interface GroupGlobalConfs {
   CurrentSpotPaidNodes?: number;
 }
 
+/** 用户组信息 */
+declare interface GroupInfo {
+  /** 组名 */
+  GroupName?: string;
+  /** 备注 */
+  Description?: string;
+  /** 用户列表 */
+  Users?: string[];
+}
+
 /** 进程健康状态 */
 declare interface HealthStatus {
   /** 运行正常 */
@@ -1998,6 +2008,16 @@ declare interface RestartPolicy {
   IsDefault?: string;
 }
 
+/** 用户组的输出结果 */
+declare interface ResultItem {
+  /** 此处为用户组名 */
+  Item?: string;
+  /** 创建用户组是否成功 */
+  Result?: boolean;
+  /** 若是创建失败, 提供失败原因 */
+  Reason?: string;
+}
+
 /** Serverless HBase实例信息 */
 declare interface SLInstanceInfo {
   /** 集群实例字符串ID */
@@ -2910,6 +2930,20 @@ declare interface CreateClusterResponse {
   RequestId?: string;
 }
 
+declare interface CreateGroupsSTDRequest {
+  /** 集群名称 */
+  InstanceId: string;
+  /** 批量用户组信息 */
+  Groups: GroupInfo[];
+}
+
+declare interface CreateGroupsSTDResponse {
+  /** 每个用户组的输出结果 */
+  Data?: ResultItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateInstanceRequest {
   /** 产品ID，不同产品ID表示不同的EMR产品版本。取值范围：51:表示STARROCKS-V1.4.054:表示STARROCKS-V2.0.027:表示KAFKA-V1.0.050:表示KAFKA-V2.0.016:表示EMR-V2.3.020:表示EMR-V2.5.030:表示EMR-V2.6.038:表示EMR-V2.7.025:表示EMR-V3.1.033:表示EMR-V3.2.134:表示EMR-V3.3.037:表示EMR-V3.4.044:表示EMR-V3.5.053:表示EMR-V3.6.0 */
   ProductId: number;
@@ -3026,6 +3060,20 @@ declare interface DeleteAutoScaleStrategyRequest {
 }
 
 declare interface DeleteAutoScaleStrategyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteGroupsSTDRequest {
+  /** 集群名称 */
+  InstanceId: string;
+  /** 用户组名称数组 */
+  GroupNames: string[];
+}
+
+declare interface DeleteGroupsSTDResponse {
+  /** 删除返回结果 */
+  Data?: ResultItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4352,6 +4400,22 @@ declare interface ModifySLInstanceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyUserGroupRequest {
+  /** 用户信息列表 */
+  Users: string[];
+  /** 用户主组，cvm集群为必填参数，tke集群选填 */
+  UserGroup?: string;
+  /** 用户副组 */
+  Groups?: string[];
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface ModifyUserGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyUserManagerPwdRequest {
   /** 集群实例ID */
   InstanceId: string;
@@ -4362,6 +4426,26 @@ declare interface ModifyUserManagerPwdRequest {
 }
 
 declare interface ModifyUserManagerPwdResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyUsersOfGroupSTDRequest {
+  /** 集群名称 */
+  InstanceId: string;
+  /** 用户组名 */
+  Group: string;
+  /** 用户列表 */
+  Users?: string[];
+  /** 用户组描述 */
+  Description?: string;
+  /** 枚举类, ADD, DELETE, SYNC枚举类说明:- ADD: 新增的批量用户, 多次新增相同的用户不会报错- DELETE: 从用户组里删除的批量用户, 删除不存在的用户不会报错- SYNC: 用于同步整个用户组, 当列表为空时代表清空整个用户组默认为SYNC */
+  OperateAction?: string;
+}
+
+declare interface ModifyUsersOfGroupSTDResponse {
+  /** 是否修改成功 */
+  Data?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4727,12 +4811,16 @@ declare interface Emr {
   CreateCloudInstance(data: CreateCloudInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudInstanceResponse>;
   /** 创建EMR集群实例(新) {@link CreateClusterRequest} {@link CreateClusterResponse} */
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
+  /** 用户管理-批量创建用户组 {@link CreateGroupsSTDRequest} {@link CreateGroupsSTDResponse} */
+  CreateGroupsSTD(data: CreateGroupsSTDRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGroupsSTDResponse>;
   /** 创建EMR实例(旧) {@link CreateInstanceRequest} {@link CreateInstanceResponse} */
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
   /** Serverless HBase创建实例 {@link CreateSLInstanceRequest} {@link CreateSLInstanceResponse} */
   CreateSLInstance(data: CreateSLInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSLInstanceResponse>;
   /** 删除自动扩缩容规则 {@link DeleteAutoScaleStrategyRequest} {@link DeleteAutoScaleStrategyResponse} */
   DeleteAutoScaleStrategy(data: DeleteAutoScaleStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAutoScaleStrategyResponse>;
+  /** 用户管理-批量删除用户组 {@link DeleteGroupsSTDRequest} {@link DeleteGroupsSTDResponse} */
+  DeleteGroupsSTD(data: DeleteGroupsSTDRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupsSTDResponse>;
   /** 删除节点规格配置 {@link DeleteNodeResourceConfigRequest} {@link DeleteNodeResourceConfigResponse} */
   DeleteNodeResourceConfig(data: DeleteNodeResourceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNodeResourceConfigResponse>;
   /** 删除用户列表 {@link DeleteUserManagerUserListRequest} {@link DeleteUserManagerUserListResponse} */
@@ -4845,8 +4933,12 @@ declare interface Emr {
   ModifySLInstance(data: ModifySLInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySLInstanceResponse>;
   /** Serverless HBase修改实例名称 {@link ModifySLInstanceBasicRequest} {@link ModifySLInstanceBasicResponse} */
   ModifySLInstanceBasic(data: ModifySLInstanceBasicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySLInstanceBasicResponse>;
+  /** 用户管理-修改用户组 {@link ModifyUserGroupRequest} {@link ModifyUserGroupResponse} */
+  ModifyUserGroup(data: ModifyUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserGroupResponse>;
   /** 修改用户密码（用户管理） {@link ModifyUserManagerPwdRequest} {@link ModifyUserManagerPwdResponse} */
   ModifyUserManagerPwd(data: ModifyUserManagerPwdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserManagerPwdResponse>;
+  /** 用户管理-变更用户组用户信息 {@link ModifyUsersOfGroupSTDRequest} {@link ModifyUsersOfGroupSTDResponse} */
+  ModifyUsersOfGroupSTD(data: ModifyUsersOfGroupSTDRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUsersOfGroupSTDResponse>;
   /** 部署生效（旧） {@link ModifyYarnDeployRequest} {@link ModifyYarnDeployResponse} */
   ModifyYarnDeploy(data: ModifyYarnDeployRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyYarnDeployResponse>;
   /** 修改yarn资源调度的队列信息 {@link ModifyYarnQueueV2Request} {@link ModifyYarnQueueV2Response} */
