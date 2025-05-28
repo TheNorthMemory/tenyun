@@ -237,7 +237,7 @@ declare interface LoginActionFlag {
   /** 0: 非邮箱校验 1: 邮箱校验 */
   Mail?: number;
   /** 0: 非u2f硬件token 1: u2f硬件token */
-  U2FToken?: number | null;
+  U2FToken?: number;
 }
 
 /** 登录和敏感操作flag */
@@ -255,7 +255,7 @@ declare interface LoginActionFlagIntl {
   /** 邮件 */
   Mail?: number;
   /** u2f硬件token */
-  U2FToken?: number | null;
+  U2FToken?: number;
 }
 
 /** 登录和敏感操作flag */
@@ -423,25 +423,25 @@ declare interface StrategyInfo {
 /** 子用户信息 */
 declare interface SubAccountInfo {
   /** 子用户用户 ID */
-  Uin: number;
+  Uin?: number;
   /** 子用户用户名 */
-  Name: string;
+  Name?: string;
   /** 子用户 UID */
-  Uid: number;
+  Uid?: number;
   /** 子用户备注 */
-  Remark: string;
+  Remark?: string;
   /** 子用户能否登录控制台 */
-  ConsoleLogin: number;
+  ConsoleLogin?: number;
   /** 手机号 */
-  PhoneNum: string;
+  PhoneNum?: string;
   /** 区号 */
-  CountryCode: string;
+  CountryCode?: string;
   /** 邮箱 */
-  Email: string;
+  Email?: string;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string;
   /** 昵称 */
-  NickName: string | null;
+  NickName?: string;
 }
 
 /** 子用户信息 */

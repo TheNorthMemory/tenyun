@@ -2,6 +2,16 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 地址级退订配置 */
+declare interface AddressUnsubscribeConfigData {
+  /** 发信地址 */
+  Address?: string;
+  /** 退订链接选项 0: 不加入退订链接 1: 简体中文 2: 英文 3: 繁体中文 4: 西班牙语 5: 法语 6: 德语 7: 日语 8: 韩语 9: 阿拉伯语 10: 泰语 */
+  UnsubscribeConfig?: string;
+  /** 0:关闭，1:开启 */
+  Status?: number;
+}
+
 /** 附件结构，包含附件名和base64之后的附件内容。 */
 declare interface Attachment {
   /** 附件名称，最大支持255个字符长度，不支持部分附件类型，详情请参考[附件类型](https://cloud.tencent.com/document/product/1288/51951)。 */
@@ -548,6 +558,22 @@ declare interface GetStatisticsReportResponse {
   RequestId?: string;
 }
 
+declare interface ListAddressUnsubscribeConfigRequest {
+  /** 偏移量 */
+  Offset?: number;
+  /** 拉取最大条数，不超过100 */
+  Limit?: string;
+}
+
+declare interface ListAddressUnsubscribeConfigResponse {
+  /** 地址级退订配置 */
+  AddressUnsubscribeConfigList?: AddressUnsubscribeConfigData[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListBlackEmailAddressRequest {
   /** 开始日期，格式为YYYY-MM-DD */
   StartDate: string;
@@ -837,6 +863,8 @@ declare interface Ses {
   GetSendEmailStatus(data: GetSendEmailStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetSendEmailStatusResponse>;
   /** 获取发送统计数据 {@link GetStatisticsReportRequest} {@link GetStatisticsReportResponse} */
   GetStatisticsReport(data: GetStatisticsReportRequest, config?: AxiosRequestConfig): AxiosPromise<GetStatisticsReportResponse>;
+  /** 获取地址级退订配置列表 {@link ListAddressUnsubscribeConfigRequest} {@link ListAddressUnsubscribeConfigResponse} */
+  ListAddressUnsubscribeConfig(data?: ListAddressUnsubscribeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ListAddressUnsubscribeConfigResponse>;
   /** 获取黑名单邮箱地址 {@link ListBlackEmailAddressRequest} {@link ListBlackEmailAddressResponse} */
   ListBlackEmailAddress(data: ListBlackEmailAddressRequest, config?: AxiosRequestConfig): AxiosPromise<ListBlackEmailAddressResponse>;
   /** 获取自定义黑名单列表 {@link ListCustomBlacklistRequest} {@link ListCustomBlacklistResponse} */

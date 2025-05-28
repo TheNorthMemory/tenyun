@@ -34,7 +34,7 @@ declare interface Cluster {
   OwnerUin?: string;
   /** 创建者 UIN */
   CreatorUin?: string;
-  /** 集群状态, 1 未初始化,，3 初始化中，2 运行中 */
+  /** 集群状态, 1 未初始化,3 初始化中，2 运行中 */
   Status?: number;
   /** 描述 */
   Remark?: string;
@@ -126,6 +126,8 @@ declare interface Cluster {
   RunningCpu?: number;
   /** 运行的内存 */
   RunningMem?: number;
+  /** setats集群 */
+  Setats?: Setats | null;
 }
 
 /** 工作空间集群组信息 */
@@ -772,6 +774,22 @@ declare interface ResourceRefJobInfo {
   ResourceVersion?: number;
 }
 
+/** 资源引用 */
+declare interface ResourceRefLatest {
+  /** 资源id */
+  ResourceId?: string | null;
+  /** 版本号 */
+  Version?: number | null;
+  /** 资源类型 */
+  Type?: number | null;
+  /** 状态 */
+  Status?: number | null;
+  /** 空间id */
+  WorkspaceId?: string | null;
+  /** 资源名称 */
+  Name?: string | null;
+}
+
 /** Sql Gateway返回Column类型 */
 declare interface ResultColumn {
   /** 名称 */
@@ -882,6 +900,54 @@ declare interface SessionClusterRefItem {
   Version: number | null;
   /** 引用类型，0:用户资源 */
   Type: number | null;
+}
+
+/** setats类型 */
+declare interface Setats {
+  /** setats serialId */
+  SetatsSerialId?: string | null;
+  /** 1 // 停止2 // 运行中3 // 初始化中4 // 扩容中5 // Warehoouse未配置6 // Warehoouse配置中7 // 重启中-2 // 已删除(集群被销毁时更新为此状态) */
+  Status?: number | null;
+  /** setats warehouse */
+  Warehouse?: Warehouse | null;
+  /** setats master 机器规格 */
+  MasterInfo?: SetatsCvmInfo | null;
+  /** setats worker规格 */
+  WorkerInfo?: SetatsCvmInfo | null;
+  /** 标签 */
+  Tags?: Tag[] | null;
+  /** 自动续费 */
+  AutoRenewFlag?: number | null;
+  /** 过期时间 */
+  ExpireTime?: string | null;
+  /** 过期时间 秒 */
+  SecondsUntilExpiry?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** manager url */
+  ManagerUrl?: string | null;
+  /** 隔离时间 */
+  IsolatedTime?: string | null;
+}
+
+/** setats 机器规格 */
+declare interface SetatsCvmInfo {
+  /** setats机器cpu */
+  Cpu?: number | null;
+  /** setats机器内存 */
+  Mem?: number | null;
+  /** setats worker 并行度 */
+  DefaultParallelism?: number | null;
+  /** setats 机器磁盘 */
+  Disk?: SetatsDisk | null;
+}
+
+/** setats disk */
+declare interface SetatsDisk {
+  /** 磁盘类型CLOUD_BSSDCLOUD_SSDCLOUD_HSSDCLOUD_PREMIUM */
+  DiskType?: string | null;
+  /** 磁盘大小 */
+  DiskSize?: number | null;
 }
 
 /** SlotSharingGroup 描述 */
@@ -1054,6 +1120,28 @@ declare interface TreeResourceItem {
   FolderId: string | null;
   /** 分状态统计关联作业数 */
   RefJobStatusCountSet?: RefJobStatusCountItem[] | null;
+}
+
+/** Setats Warehouse结构 */
+declare interface Warehouse {
+  /** 状态 */
+  Status?: number | null;
+  /** location */
+  Location?: string | null;
+  /** catalogtype */
+  CatalogType?: string | null;
+  /** uri */
+  Uri?: string | null;
+  /** warehouse url */
+  WarehouseUrl?: string | null;
+  /** 认证方式 */
+  Authentication?: string | null;
+  /** 资源 */
+  ResourceRefs?: ResourceRefLatest[] | null;
+  /** hive warehouse uri */
+  HiveUri?: string | null;
+  /** 高级参数 */
+  Properties?: Property[] | null;
 }
 
 /** 空间和集群绑定关系 */
@@ -1629,6 +1717,8 @@ declare interface DescribeJobsRequest {
   WorkSpaceId?: string;
   /** 查询额外的作业信息,例如 JobEventInfo */
   ExtraResult?: string[];
+  /** 查询引用connector */
+  ConnectorOptions?: string;
 }
 
 declare interface DescribeJobsResponse {

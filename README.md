@@ -114,7 +114,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 260+ 款产品，12523+ 服务数</summary>
+<details><summary>共计 260+ 款产品，12525+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -159,7 +159,7 @@ car | [应用云渲染](https://cloud.tencent.com/document/product/1547) | 2022-
 cat | [云拨测](https://cloud.tencent.com/document/product/280) | 2018-04-09(14) |
 cbs | [云硬盘](https://cloud.tencent.com/document/product/362) | 2017-03-12(46) |
 ccc | [云联络中心](https://cloud.tencent.com/document/product/679) | 2020-02-10(72) |
-cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(172) |
+cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(173) |
 cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 2020-12-14(23) |
 cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(81+3) |
 cds | [T-Sec-数据安全审计（DSA）](https://cloud.tencent.com/document/product/856) | 2018-04-20(5) |
@@ -295,7 +295,7 @@ redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 20
 region | [地域管理系统](https://cloud.tencent.com/document/product/1596) | 2022-06-27(3) |
 rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(54) |
 scf | [云函数](https://cloud.tencent.com/document/product/583) | 2018-04-16(52+7) |
-ses | [邮件推送](https://cloud.tencent.com/document/product/1288) | 2020-10-02(31) |
+ses | [邮件推送](https://cloud.tencent.com/document/product/1288) | 2020-10-02(32) |
 smh | [智能媒资托管](https://cloud.tencent.com/document/product/1339) | 2021-07-12(15) |
 smop | [腾讯安心用户运营平台](https://cloud.tencent.com/document/product/1310) | 2020-12-03(1) |
 smpn | [营销号码安全](https://cloud.tencent.com/document/product/1127) | 2019-08-22(2) |

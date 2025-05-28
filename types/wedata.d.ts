@@ -866,7 +866,7 @@ declare interface CommonId {
 
 /** 返回命令id */
 declare interface CommonIdOpsDto {
-  /** 返回补录计划id */
+  /** 返回补录计划名称_ok */
   Id?: string | null;
 }
 
@@ -2006,6 +2006,16 @@ declare interface ExtResourceFlagDto {
   OfflineSyncTask?: string | null;
 }
 
+/** key-value 键值对 */
+declare interface ExtensionInfoVO {
+  /** key */
+  Key?: string | null;
+  /** value */
+  Value?: string | null;
+  /** 描述 */
+  Description?: string | null;
+}
+
 /** 错误处理结果信息 */
 declare interface FailMessage {
   /** 数据唯一标识 */
@@ -2358,6 +2368,10 @@ declare interface InstanceLogByLine {
   WorkerType?: number | null;
   /** 日志sql错误信息，包含行列信息 */
   JobLogErrorTip?: JobLogErrorTip | null;
+  /** 执行实例的扩展属性 */
+  ExecutionExtendedProps?: ExtensionInfoVO[] | null;
+  /** 如果queryFileFlag为1，则ext返回当前页数据的结束行信息，下一页把这个extInfo透传过来 */
+  ExtInfo?: string | null;
 }
 
 /** 实例日志简述信息 */
@@ -7268,6 +7282,12 @@ declare interface CreateOpsMakePlanRequest {
   SameSelfWorkflowDependType?: boolean;
   /** 补录扩展属性 */
   SelfWorkflowDependency?: string;
+  /** 任务 TASK； 项目： PROJECT */
+  MakeType?: string;
+  /** 任务状态 */
+  StatusList?: string;
+  /** 补录是否跳过事件检查 */
+  MakeCheckEventType?: string;
 }
 
 declare interface CreateOpsMakePlanResponse {
@@ -10822,6 +10842,10 @@ declare interface DownloadLogByLineRequest {
   ParseErrorTip?: boolean;
   /** log 0 code 1 result 2 custo 3 */
   FileType?: number;
+  /** 查询文件标志：0: 从执行机获取，1: 从cos获取，获取不到会再从执行机获取 */
+  QueryFileFlag?: number;
+  /** 透传字段，如果queryFileFlag为1，则ext回作为上一页的分页标识offset */
+  ExtInfo?: string;
 }
 
 declare interface DownloadLogByLineResponse {

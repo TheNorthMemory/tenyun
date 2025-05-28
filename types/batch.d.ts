@@ -334,9 +334,9 @@ declare interface InputMapping {
 
 /** 描述实例的信息 */
 declare interface Instance {
-  /** 实例ID */
+  /** 实例ID，可通过调用接口[DescribeInstances](https://cloud.tencent.com/document/product/213/15728)获取。 */
   InstanceId: string;
-  /** 镜像ID */
+  /** 镜像ID，可通过调用接口[DescribeImages](https://cloud.tencent.com/document/product/213/15715)获取。 */
   ImageId?: string;
   /** 实例登录设置。 */
   LoginSettings?: LoginSettings;
@@ -883,7 +883,7 @@ declare interface VirtualPrivateCloud {
 }
 
 declare interface AttachInstancesRequest {
-  /** 计算环境ID，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。 */
+  /** 计算环境ID，环境ID通过调用接口 [DescribeComputeEnvs](https://cloud.tencent.com/document/api/599/15893)获取。 */
   EnvId: string;
   /** 加入计算环境实例列表，每次请求的实例的上限为100。 */
   Instances: Instance[];
@@ -929,7 +929,7 @@ declare interface CreateTaskTemplateResponse {
 }
 
 declare interface DeleteComputeEnvRequest {
-  /** 计算环境ID，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。 */
+  /** 计算环境ID，环境ID通过调用接口 [DescribeComputeEnvs](https://cloud.tencent.com/document/api/599/15893)获取，不能对状态处于删除中或者存在计算实例未销毁的环境发起删除动作。 */
   EnvId: string;
 }
 
@@ -971,13 +971,13 @@ declare interface DescribeAvailableCvmInstanceTypesResponse {
 }
 
 declare interface DescribeComputeEnvActivitiesRequest {
-  /** 计算环境ID，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。 */
+  /** 计算环境ID，环境ID通过调用接口 [DescribeComputeEnvs](https://cloud.tencent.com/document/api/599/15893)获取。 */
   EnvId: string;
   /** 偏移量，默认为0. */
   Offset?: number;
   /** 返回数量，默认值20，最大值100. */
   Limit?: number;
-  /** 过滤条件 compute-node-id - String - 是否必填：否 -（过滤条件）按照计算节点ID过滤。 */
+  /** 过滤条件 compute-node-id - String - 是否必填：否 -（过滤条件）按照计算节点ID过滤，节点ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。 */
   Filters?: Filter;
 }
 
@@ -1023,7 +1023,7 @@ declare interface DescribeComputeEnvCreateInfoResponse {
 }
 
 declare interface DescribeComputeEnvCreateInfosRequest {
-  /** 计算环境ID列表，与Filters参数不能同时指定，最大限制100。环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。 */
+  /** 计算环境ID列表，与Filters参数不能同时指定，最大限制100，环境ID通过调用接口 [DescribeComputeEnvs](https://cloud.tencent.com/document/api/599/15893)获取。 */
   EnvIds?: string[];
   /** 过滤条件 zone - String - 是否必填：否 -（过滤条件）按照可用区过滤，可用区通过调用接口 [DescribeZones](https://cloud.tencent.com/document/api/213/15707)获取。 env-id - String - 是否必填：否 -（过滤条件）按照计算环境ID过滤。 env-name - String - 是否必填：否 -（过滤条件）按照计算环境名称过滤。与EnvIds参数不能同时指定。 */
   Filters?: Filter[];
@@ -1043,7 +1043,7 @@ declare interface DescribeComputeEnvCreateInfosResponse {
 }
 
 declare interface DescribeComputeEnvRequest {
-  /** 计算环境ID */
+  /** 计算环境ID，环境ID通过调用接口 [DescribeComputeEnvs](https://cloud.tencent.com/document/api/599/15893)获取。 */
   EnvId: string;
 }
 
@@ -1077,7 +1077,7 @@ declare interface DescribeComputeEnvResponse {
 }
 
 declare interface DescribeComputeEnvsRequest {
-  /** 计算环境ID列表，与Filters参数不能同时指定。最大数量上限100，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。 */
+  /** 计算环境ID列表，与Filters参数不能同时指定。最大数量上限100。 */
   EnvIds?: string[];
   /** 过滤条件 zone - String - 是否必填：否 -（过滤条件）按照可用区过滤，可用区通过调用接口 [DescribeZones](https://cloud.tencent.com/document/api/213/15707)获取。 env-id - String - 是否必填：否 -（过滤条件）按照计算环境ID过滤。 env-name - String - 是否必填：否 -（过滤条件）按照计算环境名称过滤。 resource-type - String - 是否必填：否 -（过滤条件）按照计算资源类型过滤，取值CVM或者CPM(黑石)。 tag-key - String - 是否必填：否 -（过滤条件）按照标签键进行过滤。tag-value - String - 是否必填：否 -（过滤条件）按照标签值进行过滤。tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。与EnvIds参数不能同时指定。 */
   Filters?: Filter[];
@@ -1277,7 +1277,7 @@ declare interface DescribeTaskTemplatesResponse {
 }
 
 declare interface DetachInstancesRequest {
-  /** 计算环境ID，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。 */
+  /** 计算环境ID，环境ID通过调用接口 [DescribeComputeEnvs](https://cloud.tencent.com/document/api/599/15893)获取。 */
   EnvId: string;
   /** 实例ID列表，实例ID通过调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728)获取。 */
   InstanceIds: string[];
@@ -1296,7 +1296,7 @@ declare interface InstanceMarketOptionsRequest {
 }
 
 declare interface ModifyComputeEnvRequest {
-  /** 计算环境ID，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。 */
+  /** 计算环境ID，环境ID通过调用接口 [DescribeComputeEnvs](https://cloud.tencent.com/document/api/599/15893)获取。 */
   EnvId: string;
   /** 计算节点期望个数，最大上限2000。 */
   DesiredComputeNodeCount?: number;
@@ -1356,7 +1356,7 @@ declare interface SubmitJobResponse {
 }
 
 declare interface TerminateComputeNodeRequest {
-  /** 计算环境ID，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。 */
+  /** 计算环境ID，环境ID通过调用接口 [DescribeComputeEnvs](https://cloud.tencent.com/document/api/599/15893)获取。 */
   EnvId: string;
   /** 计算节点ID，节点ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。 */
   ComputeNodeId: string;

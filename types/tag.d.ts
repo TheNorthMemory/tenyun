@@ -29,23 +29,23 @@ declare interface Project {
 /** 资源标签键值 */
 declare interface ResourceIdTag {
   /** 资源唯一标识 */
-  ResourceId?: string | null;
+  ResourceId?: string;
   /** 标签键值对 */
-  TagKeyValues?: TagInfo[] | null;
+  TagKeyValues?: TagInfo[];
 }
 
 /** 资源标签 */
 declare interface ResourceTag {
   /** 资源所在地域 */
-  ResourceRegion?: string | null;
+  ResourceRegion?: string;
   /** 业务类型 */
-  ServiceType?: string | null;
+  ServiceType?: string;
   /** 资源前缀 */
-  ResourcePrefix?: string | null;
+  ResourcePrefix?: string;
   /** 资源唯一标记 */
-  ResourceId?: string | null;
+  ResourceId?: string;
   /** 资源标签 */
-  Tags?: TagInfo[] | null;
+  Tags?: TagInfo[];
 }
 
 /** 资源及关联的标签(键和值)。 */
@@ -63,7 +63,7 @@ declare interface TagInfo {
   /** 标签值 */
   TagValue: string;
   /** 标签类型。取值： Custom：自定义标签。 System：系统标签。 All：全部标签。 默认值：All。 */
-  Category?: string | null;
+  Category?: string;
 }
 
 /** tag过滤数组多个是与的关系 */
@@ -93,9 +93,9 @@ declare interface TagResource {
   /** 标签值MD5值 */
   TagValueMd5?: string;
   /** 资源类型 */
-  ServiceType?: string | null;
+  ServiceType?: string;
   /** 标签类型。取值： Custom：自定义标签。 System：系统标签。 */
-  Category?: string | null;
+  Category?: string;
 }
 
 /** 表示一个标签键值对以及是否允许删除 */
@@ -107,7 +107,7 @@ declare interface TagWithDelete {
   /** 是否可以删除 */
   CanDelete?: number;
   /** 标签类型。取值： Custom：自定义标签。 System：系统标签。 All：全部标签。 默认值：All。 */
-  Category?: string | null;
+  Category?: string;
 }
 
 declare interface AddProjectRequest {
@@ -351,7 +351,7 @@ declare interface DescribeResourceTagsResponse {
   /** 数据位移偏量 */
   Offset?: number;
   /** 每页大小 */
-  Limit?: number | null;
+  Limit?: number;
   /** 资源标签 */
   Rows?: TagResource[];
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -383,7 +383,7 @@ declare interface DescribeResourcesByTagsResponse {
   /** 数据位移偏量 */
   Offset?: number;
   /** 每页大小 */
-  Limit?: number | null;
+  Limit?: number;
   /** 资源标签 */
   Rows?: ResourceTag[];
   /** 唯一请求 ID，每次请求都会返回。 */

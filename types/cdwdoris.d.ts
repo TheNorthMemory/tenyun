@@ -995,6 +995,8 @@ declare interface CreateInstanceNewRequest {
   SSCCU?: number;
   /** 缓存盘大小 */
   CacheDiskSize?: string;
+  /** 缓存盘大小 */
+  CacheDataDiskSize?: number;
 }
 
 declare interface CreateInstanceNewResponse {

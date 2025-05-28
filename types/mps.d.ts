@@ -7247,6 +7247,8 @@ declare interface DescribeStreamLinkFlowMediaStatisticsRequest {
   StartTime: string;
   /** 统计的结束时间，默认为StartTime后一小时，最多支持查询24小时的数据。UTC时间，如'2020-01-01T12:00:00Z'。 */
   EndTime: string;
+  /** 对端客户端或者服务端的IP地址 */
+  RemoteIp?: string;
 }
 
 declare interface DescribeStreamLinkFlowMediaStatisticsResponse {
@@ -7301,6 +7303,8 @@ declare interface DescribeStreamLinkFlowSRTStatisticsRequest {
   EndTime: string;
   /** 查询间隔，可选[5s|1min|5min|15min]。 */
   Period: string;
+  /** 对端客户端或者服务端的IP地址 */
+  RemoteIp?: string;
 }
 
 declare interface DescribeStreamLinkFlowSRTStatisticsResponse {
@@ -7325,6 +7329,8 @@ declare interface DescribeStreamLinkFlowStatisticsRequest {
   StartTime: string;
   /** 统计的结束时间，默认为StartTime后一小时，最多支持查询24小时的数据。UTC时间，如'2020-01-01T12:00:00Z'。 */
   EndTime: string;
+  /** 对端客户端或者服务端的IP地址 */
+  RemoteIp?: string;
 }
 
 declare interface DescribeStreamLinkFlowStatisticsResponse {

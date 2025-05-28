@@ -3203,7 +3203,7 @@ declare interface AllocateAddressesRequest {
   AddressChargePrepaid?: AddressChargePrepaid;
   /** EIP类型。各种EIP类型详情可参考：[EIP 的 IP 地址类型](https://cloud.tencent.com/document/product/1199/41646)。默认值：EIP。EIP：弹性公网 IP。 AnycastEIP：加速 IP，已开通 [Anycast 公网加速](https://cloud.tencent.com/document/product/644)白名单的用户可选。仅部分地域支持加速IP，详情可见Anycast公网加速[购买指南](https://cloud.tencent.com/document/product/644/12617)。HighQualityEIP：精品 IP。仅新加坡和中国香港支持精品IP。AntiDDoSEIP：高防 IP。仅部分地域支持高防IP，详情可见弹性公网IP[产品概述](https://cloud.tencent.com/document/product/1199/41646)。 */
   AddressType?: string;
-  /** Anycast发布域。已开通Anycast公网加速白名单的用户，可选值：ANYCAST_ZONE_GLOBAL：全球发布域（需要额外开通Anycast全球加速白名单）ANYCAST_ZONE_OVERSEAS：境外发布域[已废弃] ANYCAST_ZONE_A：发布域A（已更新为全球发布域）[已废弃] ANYCAST_ZONE_B：发布域B（已更新为全球发布域）默认值：ANYCAST_ZONE_OVERSEAS。 */
+  /** Anycast发布域。已开通Anycast公网加速白名单的用户，可选值：ANYCAST_ZONE_GLOBAL：全球发布域（需要额外开通Anycast全球加速白名单）ANYCAST_ZONE_OVERSEAS：境外发布域默认值：ANYCAST_ZONE_OVERSEAS。 */
   AnycastZone?: string;
   /** 指定IP地址申请EIP，每个账户每个月只有三次配额 */
   VipCluster?: string[];

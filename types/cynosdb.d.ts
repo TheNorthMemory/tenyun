@@ -348,6 +348,8 @@ declare interface BizTaskInfo {
   InstanceCLSDeliveryInfos?: InstanceCLSDeliveryInfo[];
   /** 任务进度信息 */
   TaskProgressInfo?: TaskProgressInfo;
+  /** 全球数据库网络任务 */
+  GdnTaskInfo?: GdnTaskInfo;
 }
 
 /** 实例参数修改任务详情 */
@@ -686,6 +688,12 @@ declare interface CynosdbClusterDetail {
   GdnId?: string;
   /** 集群在全球数据网络中的角色。主集群- primary从集群 - standby如为空，该字段无效 */
   GdnRole?: string;
+  /** 二级存储使用量，单位：G */
+  UsedArchiveStorage?: number;
+  /** 归档状态，枚举值normal:正常archiving:归档中resuming:恢复中archived :已归档 */
+  ArchiveStatus?: string;
+  /** 归档进度，百分比。 */
+  ArchiveProgress?: number;
 }
 
 /** 实例错误日志返回类型 */
@@ -1074,6 +1082,24 @@ declare interface ExchangeRoGroupInfo {
   SrcRoGroupInfo?: RollbackRoGroupInfo;
   /** 目标RO组信息 */
   DstRoGroupInfo?: RollbackRoGroupInfo;
+}
+
+/** 全球数据库任务信息 */
+declare interface GdnTaskInfo {
+  /** 全球数据库唯一标识 */
+  GdnId?: string;
+  /** 全球数据库唯一别名 */
+  GdnName?: string;
+  /** 主集群ID */
+  PrimaryClusterId?: string;
+  /** 主集群所在地域 */
+  PrimaryClusterRegion?: string;
+  /** 从集群所在地域 */
+  StandbyClusterRegion?: string;
+  /** 从集群ID */
+  StandbyClusterId?: string;
+  /** 从集群别名 */
+  StandbyClusterName?: string;
 }
 
 /** 账号，包含accountName和host */
@@ -1650,17 +1676,17 @@ declare interface PolicyRule {
 
 /** 访问代理配置 */
 declare interface ProxyConfig {
-  /** 数据库代理组节点个数（该参数不再建议使用，建议使用ProxyZones) */
+  /** 数据库代理组节点个数。该参数不再建议使用,建议使用ProxyZones */
   ProxyCount?: number;
   /** cpu核数 */
   Cpu?: number;
   /** 内存 */
   Mem?: number;
-  /** 连接池类型：SessionConnectionPool(会话级别连接池 ) */
+  /** 连接池类型:SessionConnectionPool(会话级别连接池 ) */
   ConnectionPoolType?: string;
   /** 是否开启连接池,yes-开启，no-不开启 */
   OpenConnectionPool?: string;
-  /** 连接池阈值：单位（秒） */
+  /** 连接池阈值:单位（秒） */
   ConnectionPoolTimeOut?: number;
   /** 描述说明 */
   Description?: string;
@@ -3992,6 +4018,8 @@ declare interface DescribeServerlessStrategyResponse {
   AutoScaleUp?: string;
   /** 集群是否允许向下缩容，可选范围yesno */
   AutoScaleDown?: string;
+  /** 是否开启归档，可选范围yesno默认值:yes */
+  AutoArchive?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4797,6 +4825,8 @@ declare interface ModifyServerlessStrategyRequest {
   MinRoCount?: number;
   /** 只读节点最大个数 */
   MaxRoCount?: number;
+  /** 是否开启归档，可选范围yesno默认值:yes */
+  AutoArchive?: string;
 }
 
 declare interface ModifyServerlessStrategyResponse {
@@ -5207,6 +5237,8 @@ declare interface RollbackToNewClusterRequest {
   OriginalROInstanceList?: string[];
   /** 项目id */
   ProjectId?: number;
+  /** 是否开启归档，可选范围yesno默认值:yes */
+  AutoArchive?: string;
 }
 
 declare interface RollbackToNewClusterResponse {

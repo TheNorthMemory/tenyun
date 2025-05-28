@@ -1048,6 +1048,10 @@ declare interface Pod {
   CrossTenantENIInfo?: CrossTenantENIInfo | null;
   /** 实例的状态信息 */
   Status?: string;
+  /** 实例的开始调度时间 */
+  StartScheduleTime?: string;
+  /** 实例状态的补充信息 */
+  Message?: string;
 }
 
 /** 任务建模Pod信息 */
@@ -1308,6 +1312,8 @@ declare interface Service {
   DeployType?: string | null;
   /** 单副本下的实例数，仅在部署类型为DIST时生效，默认1 */
   InstancePerReplicas?: string | null;
+  /** 用于监控查询的Source枚举值，部分情况下与CreateSource不同，通过该字段兼容 */
+  MonitorSource?: string;
 }
 
 /** 服务的调用信息，服务组下唯一 */
@@ -1416,6 +1422,8 @@ declare interface ServiceGroup {
   AuthTokens?: AuthToken[];
   /** 用于监控的创建来源字段 */
   MonitorSource?: string;
+  /** 子用户的 nickname */
+  SubUinName?: string;
 }
 
 /** 推理服务在集群中的信息 */

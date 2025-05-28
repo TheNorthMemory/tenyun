@@ -58,6 +58,26 @@ declare interface AggregationCondition {
   Limit?: number;
 }
 
+/** 分析引擎节点信息 */
+declare interface AnalysisNodeInfo {
+  /** 节点ID */
+  NodeId?: string;
+  /** 节点状态 */
+  Status?: string;
+  /** 数据加载状态 */
+  DataStatus?: string;
+  /** cpu核数，单位：核 */
+  Cpu?: number;
+  /** 内存大小，单位: MB */
+  Memory?: number;
+  /** 磁盘大小，单位：GB */
+  Storage?: number;
+  /** 节点所在可用区 */
+  Zone?: string;
+  /** 数据同步错误信息 */
+  Message?: string;
+}
+
 /** 审计规则过滤条件 */
 declare interface AuditFilter {
   /** 过滤条件参数名称。目前支持：SrcIp – 客户端 IP；User – 数据库账户；DB – 数据库名称； */
@@ -770,6 +790,26 @@ declare interface ErrlogItem {
   Content?: string;
 }
 
+/** 单条扩容历史记录 */
+declare interface HistoryJob {
+  /** 操作类型 */
+  OperationType?: string;
+  /** 扩容类型 */
+  ExpandType?: string;
+  /** 扩容开始时间 */
+  StartTime?: number;
+  /** 扩容结束时间 */
+  EndTime?: number;
+  /** 扩容前核数 */
+  OldCpu?: number;
+  /** 扩容后核数 */
+  NewCpu?: number;
+  /** 增减的cpu数 */
+  ExtendCPUNum?: number;
+  /** extend_failed操作上报 */
+  Error?: string;
+}
+
 /** 导入任务记录 */
 declare interface ImportRecord {
   /** 状态值 */
@@ -976,6 +1016,10 @@ declare interface InstanceInfo {
   ExpandCpu?: number;
   /** 实例集群版节点信息 */
   ClusterInfo?: ClusterInfo[];
+  /** 分析引擎节点列表 */
+  AnalysisNodeInfos?: AnalysisNodeInfo[];
+  /** 设备带宽，单位G。当DeviceClass不为空时此参数才有效。例：25-表示当前设备带宽为25G；10-表示当前设备带宽为10G。 */
+  DeviceBandwidth?: number;
 }
 
 /** 实例预期重启时间 */
@@ -1204,6 +1248,14 @@ declare interface ParameterDetail {
   MinFunc?: string;
   /** 参数是否不支持修改 */
   IsNotSupportEdit?: boolean;
+}
+
+/** 按周期扩容策略中的所选择的周期 */
+declare interface PeriodStrategy {
+  /** 扩容周期 */
+  TimeCycle?: TImeCycle;
+  /** 时间间隔 */
+  TimeInterval?: TimeInterval;
 }
 
 /** 数据库代理地址信息 */
@@ -1720,6 +1772,24 @@ declare interface SqlFileInfo {
   FileId?: string;
 }
 
+/** 扩容的周期 */
+declare interface TImeCycle {
+  /** 周一的扩容时间段 */
+  Monday?: boolean;
+  /** 周二的扩容时间段 */
+  Tuesday?: boolean;
+  /** 周三的扩容时间段 */
+  Wednesday?: boolean;
+  /** 周四的扩容时间段 */
+  Thursday?: boolean;
+  /** 周五的扩容时间段 */
+  Friday?: boolean;
+  /** 周六的扩容时间段 */
+  Saturday?: boolean;
+  /** 周日的扩容时间段 */
+  Sunday?: boolean;
+}
+
 /** 数据库表权限 */
 declare interface TablePrivilege {
   /** 数据库名 */
@@ -1802,6 +1872,22 @@ declare interface TaskDetail {
   AsyncRequestId?: string;
   /** 任务的附加信息。 */
   TaskAttachInfo?: TaskAttachInfo[];
+}
+
+/** 时间段 */
+declare interface TimeInterval {
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+}
+
+/** 按时间段扩容策略 */
+declare interface TimeIntervalStrategy {
+  /** 开始扩容时间 */
+  StartTime?: number;
+  /** 结束扩容时间 */
+  EndTime?: number;
 }
 
 /** 5.7升级8.0指定参数的结构 */
@@ -3270,6 +3356,32 @@ declare interface DescribeClusterInfoResponse {
   ReadonlyLimit?: number;
   /** 实例节点数。 */
   NodeCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCpuExpandHistoryRequest {
+  /** 实例 ID */
+  InstanceId: string;
+  /** 扩容策略，值包括：all，manual，auto */
+  ExpandStrategy?: string;
+  /** 扩容状态，值包括：all，extend，reduce，extend_failed */
+  Status?: string;
+  /** 查询的开始时间。只能查看30天内的扩容历史 */
+  StartTime?: number;
+  /** 查询的结束时间。只能查看30天内的扩容历史 */
+  EndTime?: number;
+  /** 分页入参 */
+  Offset?: number;
+  /** 分页入参 */
+  Limit?: number;
+}
+
+declare interface DescribeCpuExpandHistoryResponse {
+  /** 满足查询要求的扩容历史 */
+  Items?: HistoryJob[];
+  /** 总数出参 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5071,6 +5183,10 @@ declare interface StartCpuExpandRequest {
   ExpandCpu?: number;
   /** 自动扩容策略。Type 为 auto 时必传。 */
   AutoStrategy?: AutoStrategy;
+  /** 按时间段扩容策略 */
+  TimeIntervalStrategy?: TimeIntervalStrategy;
+  /** 按周期扩容策略 */
+  PeriodStrategy?: PeriodStrategy;
 }
 
 declare interface StartCpuExpandResponse {
@@ -5449,6 +5565,8 @@ declare interface Cdb {
   DescribeCloneList(data: DescribeCloneListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloneListResponse>;
   /** 查询云盘版实例信息 {@link DescribeClusterInfoRequest} {@link DescribeClusterInfoResponse} */
   DescribeClusterInfo(data: DescribeClusterInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInfoResponse>;
+  /** 查询扩容历史 {@link DescribeCpuExpandHistoryRequest} {@link DescribeCpuExpandHistoryResponse} */
+  DescribeCpuExpandHistory(data: DescribeCpuExpandHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCpuExpandHistoryResponse>;
   /** 查询实例版本属性 {@link DescribeDBFeaturesRequest} {@link DescribeDBFeaturesResponse} */
   DescribeDBFeatures(data: DescribeDBFeaturesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBFeaturesResponse>;
   /** 查询数据库导入任务记录 {@link DescribeDBImportRecordsRequest} {@link DescribeDBImportRecordsResponse} */
