@@ -310,6 +310,8 @@ declare interface AvailableZoneScatterScheduleRule {
   MaxUnbalanceQuantity?: number;
   /** - */
   IsForceSchedule?: boolean;
+  /** - */
+  Paths?: CommonOption[];
 }
 
 /** 业务日志配置关联部署组信息 */
@@ -7718,7 +7720,7 @@ declare interface UpdateUnitRuleResponse {
   RequestId?: string;
 }
 
-/** {@link Tsf 微服务平台 TSF} */
+/** {@link Tsf 微服务平台} */
 declare interface Tsf {
   (): Versions;
   /** 集群添加云主机 {@link AddClusterInstancesRequest} {@link AddClusterInstancesResponse} */

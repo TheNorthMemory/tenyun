@@ -3290,6 +3290,10 @@ declare interface DescribeCPUExpandStrategyInfoResponse {
   ExpandCpu?: number | null;
   /** 自动扩容策略。Type 为 auto 时有效 */
   AutoStrategy?: AutoStrategy | null;
+  /** 按周期扩容策略。 */
+  PeriodStrategy?: PeriodStrategy;
+  /** 按时间段扩容策略 */
+  TimeIntervalStrategy?: TimeIntervalStrategy;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1014,9 +1014,9 @@ declare type TenYun = CloudInstance & CloudServices & {
   trro: Trro,
   /** {@link Trtc 实时音视频} */
   trtc: Trtc,
-  /** {@link Tse 微服务引擎} */
+  /** {@link Tse TSF-Polaris&Nacos&ZK&网关} */
   tse: Tse,
-  /** {@link Tsf 微服务平台 TSF} */
+  /** {@link Tsf 微服务平台} */
   tsf: Tsf,
   /** {@link Tsi 腾讯同传系统} */
   tsi: Tsi,

@@ -1091,7 +1091,7 @@ declare interface Sms {
   PullSmsSendStatus(data: PullSmsSendStatusRequest, config?: AxiosRequestConfig): AxiosPromise<PullSmsSendStatusResponse>;
   /** 拉取单个号码短信下发状态 {@link PullSmsSendStatusByPhoneNumberRequest} {@link PullSmsSendStatusByPhoneNumberResponse} */
   PullSmsSendStatusByPhoneNumber(data: PullSmsSendStatusByPhoneNumberRequest, config?: AxiosRequestConfig): AxiosPromise<PullSmsSendStatusByPhoneNumberResponse>;
-  /** 上报转换率 {@link ReportConversionRequest} {@link ReportConversionResponse} */
+  /** 上报转化率 {@link ReportConversionRequest} {@link ReportConversionResponse} */
   ReportConversion(data: ReportConversionRequest, config?: AxiosRequestConfig): AxiosPromise<ReportConversionResponse>;
   /** 发送短信 {@link SendSmsRequest} {@link SendSmsResponse} */
   SendSms(data: SendSmsRequest, config?: AxiosRequestConfig): AxiosPromise<SendSmsResponse>;

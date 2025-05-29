@@ -1224,7 +1224,7 @@ declare interface RecordParam {
   StorageMode?: string | null;
   /** 点播应用分类 */
   ClassId?: number | null;
-  /** 存储至 cos 的 bucket 桶名称。 */
+  /** 存储至 cos 的 bucket 桶名称。注：CosBucketName参数值不能包含-[appid] 部分。 */
   CosBucketName?: string | null;
   /** 存储至 cos 的 bucket 区域。 */
   CosBucketRegion?: string | null;

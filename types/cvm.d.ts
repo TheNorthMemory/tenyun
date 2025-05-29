@@ -1181,7 +1181,7 @@ declare interface SystemDisk {
   /** 系统盘大小，单位：GiB。默认值为 50 */
   DiskSize?: number;
   /** 所属的独享集群ID。 */
-  CdcId?: string;
+  CdcId?: string | null;
   /** 磁盘名称，长度不超过128 个字符。 */
   DiskName?: string;
 }

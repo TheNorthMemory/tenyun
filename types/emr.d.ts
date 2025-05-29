@@ -840,6 +840,14 @@ declare interface FairGlobalConfig {
   UserMaxAppsDefault?: number | null;
 }
 
+/** 键值对过滤器，用于条件过滤查询. */
+declare interface Filter {
+  /** 需要过滤的字段。 */
+  Name?: string;
+  /** 字段的过滤值。 */
+  Values?: string[];
+}
+
 /** Emr集群列表实例自定义查询过滤 */
 declare interface Filters {
   /** 字段名称 */
@@ -892,6 +900,22 @@ declare interface GroupInfo {
   Description?: string;
   /** 用户列表 */
   Users?: string[];
+}
+
+/** 用户组信息 */
+declare interface GroupInfos {
+  /** 用户组名称 */
+  GroupName?: string;
+  /** 用户名称列表 */
+  Users?: string[];
+  /** 备注 */
+  Description?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 用户组类型 */
+  GroupType?: number;
+  /** 用户组类型描述 */
+  GroupTypeDesc?: string;
 }
 
 /** 进程健康状态 */
@@ -1552,6 +1576,14 @@ declare interface NotRepeatStrategy {
 declare interface OpScope {
   /** 操作范围，要操作的服务信息 */
   ServiceInfoList?: ServiceBasicRestartInfo[] | null;
+}
+
+/** 描述排序，用于排序. */
+declare interface Order {
+  /** 排序字段。 */
+  Name?: string;
+  /** Desc or Asc。 */
+  Direction?: string;
 }
 
 /** 资源详情 */
@@ -3364,6 +3396,28 @@ declare interface DescribeGlobalConfigResponse {
   RequestId?: string;
 }
 
+declare interface DescribeGroupsSTDRequest {
+  /** 集群名称 */
+  InstanceId: string;
+  /** 描述键值对过滤器，用于条件过滤查询 */
+  Filters?: Filter[];
+  /** 描述排序，用于排序 */
+  OrderFields?: Order;
+  /** 返回数量 */
+  Limit?: number;
+  /** 分页参数 */
+  Offset?: number;
+}
+
+declare interface DescribeGroupsSTDResponse {
+  /** 用户组信息 */
+  Data?: GroupInfos[];
+  /** 符合条件的用户组数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeHBaseTableOverviewRequest {
   /** 实例ID */
   InstanceId: string;
@@ -4847,6 +4901,8 @@ declare interface Emr {
   DescribeEmrOverviewMetrics(data: DescribeEmrOverviewMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmrOverviewMetricsResponse>;
   /** 查询YARN资源调度的全局配置 {@link DescribeGlobalConfigRequest} {@link DescribeGlobalConfigResponse} */
   DescribeGlobalConfig(data: DescribeGlobalConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGlobalConfigResponse>;
+  /** 用户管理-查询用户组 {@link DescribeGroupsSTDRequest} {@link DescribeGroupsSTDResponse} */
+  DescribeGroupsSTD(data: DescribeGroupsSTDRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupsSTDResponse>;
   /** 获取Hbase表级监控数据概览 {@link DescribeHBaseTableOverviewRequest} {@link DescribeHBaseTableOverviewResponse} */
   DescribeHBaseTableOverview(data: DescribeHBaseTableOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHBaseTableOverviewResponse>;
   /** 查询HDFS存储文件数量 {@link DescribeHDFSStorageInfoRequest} {@link DescribeHDFSStorageInfoResponse} */

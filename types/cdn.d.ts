@@ -3157,7 +3157,7 @@ declare interface DescribeDistrictIspDataResponse {
 declare interface DescribeDomainsConfigRequest {
   /** 分页查询偏移量，默认为 0 */
   Offset?: number;
-  /** 分页查询限制数目，默认为 100，最大可设置为 1000 */
+  /** 分页查询限制数目，默认为 100，最大可设置为 100 */
   Limit?: number;
   /** 查询条件过滤器，复杂类型 */
   Filters?: DomainFilter[];

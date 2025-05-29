@@ -3675,7 +3675,7 @@ declare interface SearchLogRequest {
   Query: string;
   /** 检索语法规则，默认值为0，推荐使用1 。- 0：Lucene语法- 1：CQL语法（日志服务专用检索语法，控制台默认也使用该语法规则）。详细说明参见检索条件语法规则 */
   SyntaxRule?: number;
-  /** - 要检索分析的日志主题ID，仅能指定一个日志主题。- 如需同时检索多个日志主题，请使用Topics参数。- TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。 */
+  /** - 要检索分析的日志主题ID，仅能指定一个日志主题。- 如需同时检索多个日志主题，请使用Topics参数。- TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。各日志主题ID如下访问控制-互联网边界 cfw_rule_acl访问控制-NAT边界 cfw_rule_nat_acl访问控制-VPC边界 cfw_rule_vpc_acl访问控制-DNS开关 cfw_rule_dns_acl入侵防御 cfw_rule_threatinfo全流量检测与响应日志-流量分析 cfw_netflow_nta全流量检测与响应日志-流量告警 cfw_rule_ndr_threatinfo零信任运维-数据库登录 cfw_operate_db零信任运维-服务器访问 operate_remote_om零信任运维-Web服务访问 operate_web_access零信任运维-行为审计 remoteom_commands流量日志-互联网边界 cfw_netflow_border流量日志-NAT边界 cfw_netflow_nat流量日志-VPC边界 cfw_netflow_vpc流量日志-DNS开关 cfw_netflow_dns流量日志-内网流量 cfw_netflow_fl操作日志 operate_log_all */
   TopicId?: string;
   /** - 要检索分析的日志主题列表，最大支持50个日志主题。- 检索单个日志主题时请使用TopicId。- TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。 */
   Topics?: MultiTopicSearchInformation[];

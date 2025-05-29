@@ -356,6 +356,8 @@ declare interface CreateAndroidInstanceWebShellResponse {
   Address?: string;
   /** 连接区域 */
   Zone?: string;
+  /** 访问链接，可以直接使用此链接访问 WebShell */
+  ConnectUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

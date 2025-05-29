@@ -3406,6 +3406,14 @@ declare interface AssociateDirectConnectGatewayNatGatewayResponse {
   RequestId?: string;
 }
 
+declare interface AssociateHaVipInstanceRequest {
+}
+
+declare interface AssociateHaVipInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AssociateIPv6AddressRequest {
   /** 弹性公网IPv6唯一ID，EIPv6 唯一 ID 形如：eipv6-11112222。可以使用[DescribeIPv6Addresses](https://cloud.tencent.com/document/api/215/113677)接口获取IPv6AddressId。 */
   IPv6AddressId: string;
@@ -7694,6 +7702,16 @@ declare interface DisassociateDirectConnectGatewayNatGatewayResponse {
   RequestId?: string;
 }
 
+declare interface DisassociateHaVipInstanceRequest {
+  /** HaVip解绑的子机或网卡。最多支持10个实例。 */
+  HaVipAssociationSet: HaVipAssociation[];
+}
+
+declare interface DisassociateHaVipInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DisassociateIPv6AddressRequest {
   /** 弹性公网IPv6唯一ID，EIPv6 唯一 ID 形如：eipv6-11112222。可以使用[DescribeIPv6Addresses](https://cloud.tencent.com/document/api/215/113677)接口获取IPv6AddressId。 */
   IPv6AddressId: string;
@@ -9735,6 +9753,8 @@ declare interface Vpc {
   AssociateDhcpIpWithAddressIp(data: AssociateDhcpIpWithAddressIpRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateDhcpIpWithAddressIpResponse>;
   /** 专线网关绑定NAT网关 {@link AssociateDirectConnectGatewayNatGatewayRequest} {@link AssociateDirectConnectGatewayNatGatewayResponse} */
   AssociateDirectConnectGatewayNatGateway(data: AssociateDirectConnectGatewayNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateDirectConnectGatewayNatGatewayResponse>;
+  /** HAVIP绑定子机或网卡 {@link AssociateHaVipInstanceRequest} {@link AssociateHaVipInstanceResponse} */
+  AssociateHaVipInstance(data?: AssociateHaVipInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateHaVipInstanceResponse>;
   /** 绑定弹性公网IPv6 {@link AssociateIPv6AddressRequest} {@link AssociateIPv6AddressResponse} */
   AssociateIPv6Address(data: AssociateIPv6AddressRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateIPv6AddressResponse>;
   /** 关联云联网实例到指定的云联网路由表 {@link AssociateInstancesToCcnRouteTableRequest} {@link AssociateInstancesToCcnRouteTableResponse} */
@@ -10237,6 +10257,8 @@ declare interface Vpc {
   DisassociateDhcpIpWithAddressIp(data: DisassociateDhcpIpWithAddressIpRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateDhcpIpWithAddressIpResponse>;
   /** 专线网关解绑NAT网关 {@link DisassociateDirectConnectGatewayNatGatewayRequest} {@link DisassociateDirectConnectGatewayNatGatewayResponse} */
   DisassociateDirectConnectGatewayNatGateway(data: DisassociateDirectConnectGatewayNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateDirectConnectGatewayNatGatewayResponse>;
+  /** HAVIP解绑定子机或网卡 {@link DisassociateHaVipInstanceRequest} {@link DisassociateHaVipInstanceResponse} */
+  DisassociateHaVipInstance(data: DisassociateHaVipInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateHaVipInstanceResponse>;
   /** 解绑弹性公网IPv6 {@link DisassociateIPv6AddressRequest} {@link DisassociateIPv6AddressResponse} */
   DisassociateIPv6Address(data: DisassociateIPv6AddressRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateIPv6AddressResponse>;
   /** NAT网关解绑弹性IP {@link DisassociateNatGatewayAddressRequest} {@link DisassociateNatGatewayAddressResponse} */

@@ -47,7 +47,9 @@ declare interface CorpUserListData {
 /** 数据 */
 declare interface Data {
   /** 项目Id */
-  Id: number;
+  Id?: number;
+  /** url */
+  EditUrl?: string | null;
 }
 
 /** 数据ID */
@@ -314,6 +316,14 @@ declare interface Project {
   Owner?: string | null;
   /** 所属人 */
   OwnerName?: string | null;
+  /** 仪表盘页面数 */
+  NormalCount?: number | null;
+  /** 自由画布页面数 */
+  FreeCount?: number | null;
+  /** 即席分析页面数 */
+  AdhocCount?: number | null;
+  /** 简报页面数 */
+  BriefingCount?: number | null;
 }
 
 /** 定制化查询 */
@@ -1021,6 +1031,10 @@ declare interface DescribeUserRoleProjectListRequest {
   AllPage?: boolean;
   /** 角色编码 */
   RoleCode?: string;
+  /** 用户id列表 */
+  UserIdList?: string[];
+  /** 搜索关键词 */
+  Keyword?: string;
 }
 
 declare interface DescribeUserRoleProjectListResponse {
