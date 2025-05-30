@@ -302,6 +302,20 @@ declare interface BatchSendEmailResponse {
   RequestId?: string;
 }
 
+declare interface CreateAddressUnsubscribeConfigRequest {
+  /** 发信地址 */
+  Address: string;
+  /** 退订链接选项 0: 不加入退订链接 1: 简体中文 2: 英文 3: 繁体中文 4: 西班牙语 5: 法语 6: 德语 7: 日语 8: 韩语 9: 阿拉伯语 10: 泰语 */
+  UnsubscribeConfig: string;
+  /** 0:关闭，1:打开 */
+  Status: number;
+}
+
+declare interface CreateAddressUnsubscribeConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCustomBlacklistRequest {
   /** 添加到黑名单的邮件地址 */
   Emails: string[];
@@ -422,6 +436,16 @@ declare interface CreateReceiverRequest {
 declare interface CreateReceiverResponse {
   /** 收件人列表id，后续根据收件人列表id上传收件人地址 */
   ReceiverId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAddressUnsubscribeConfigRequest {
+  /** 需要操作的发信地址 */
+  Address?: string;
+}
+
+declare interface DeleteAddressUnsubscribeConfigResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -768,6 +792,20 @@ declare interface SendEmailResponse {
   RequestId?: string;
 }
 
+declare interface UpdateAddressUnsubscribeConfigRequest {
+  /** 发信地址 */
+  Address: string;
+  /** 退订链接选项 0: 不加入退订链接 1: 简体中文 2: 英文 3: 繁体中文 4: 西班牙语 5: 法语 6: 德语 7: 日语 8: 韩语 9: 阿拉伯语 10: 泰语 */
+  UnsubscribeConfig: string;
+  /** 0:关闭配置，1:打开配置 */
+  Status: number;
+}
+
+declare interface UpdateAddressUnsubscribeConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateCustomBlackListRequest {
   /** 需要更改的黑名单id */
   Id: number;
@@ -829,6 +867,8 @@ declare interface Ses {
   (): Versions;
   /** 批量发送邮件 {@link BatchSendEmailRequest} {@link BatchSendEmailResponse} */
   BatchSendEmail(data: BatchSendEmailRequest, config?: AxiosRequestConfig): AxiosPromise<BatchSendEmailResponse>;
+  /** 创建地址级退订配置 {@link CreateAddressUnsubscribeConfigRequest} {@link CreateAddressUnsubscribeConfigResponse} */
+  CreateAddressUnsubscribeConfig(data: CreateAddressUnsubscribeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAddressUnsubscribeConfigResponse>;
   /** 批量增加自定义黑名单 {@link CreateCustomBlacklistRequest} {@link CreateCustomBlacklistResponse} */
   CreateCustomBlacklist(data: CreateCustomBlacklistRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomBlacklistResponse>;
   /** 新建发信地址 {@link CreateEmailAddressRequest} {@link CreateEmailAddressResponse} */
@@ -843,6 +883,8 @@ declare interface Ses {
   CreateReceiverDetail(data: CreateReceiverDetailRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReceiverDetailResponse>;
   /** 添加收件人地址附带模板参数 {@link CreateReceiverDetailWithDataRequest} {@link CreateReceiverDetailWithDataResponse} */
   CreateReceiverDetailWithData(data: CreateReceiverDetailWithDataRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReceiverDetailWithDataResponse>;
+  /** 删除地址级退订配置 {@link DeleteAddressUnsubscribeConfigRequest} {@link DeleteAddressUnsubscribeConfigResponse} */
+  DeleteAddressUnsubscribeConfig(data?: DeleteAddressUnsubscribeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAddressUnsubscribeConfigResponse>;
   /** 删除收件人黑名单 {@link DeleteBlackListRequest} {@link DeleteBlackListResponse} */
   DeleteBlackList(data: DeleteBlackListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBlackListResponse>;
   /** 删除自定义黑名单 {@link DeleteCustomBlackListRequest} {@link DeleteCustomBlackListResponse} */
@@ -883,6 +925,8 @@ declare interface Ses {
   ListSendTasks(data: ListSendTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListSendTasksResponse>;
   /** 发送邮件 {@link SendEmailRequest} {@link SendEmailResponse} */
   SendEmail(data: SendEmailRequest, config?: AxiosRequestConfig): AxiosPromise<SendEmailResponse>;
+  /** 更新地址级退订配置 {@link UpdateAddressUnsubscribeConfigRequest} {@link UpdateAddressUnsubscribeConfigResponse} */
+  UpdateAddressUnsubscribeConfig(data: UpdateAddressUnsubscribeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAddressUnsubscribeConfigResponse>;
   /** 更新自定义黑名单 {@link UpdateCustomBlackListRequest} {@link UpdateCustomBlackListResponse} */
   UpdateCustomBlackList(data: UpdateCustomBlackListRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCustomBlackListResponse>;
   /** 请求验证 {@link UpdateEmailIdentityRequest} {@link UpdateEmailIdentityResponse} */

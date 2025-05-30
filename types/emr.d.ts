@@ -4979,7 +4979,7 @@ declare interface Emr {
   ModifyResource(data: ModifyResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceResponse>;
   /** 刷新YARN的动态资源池（旧） {@link ModifyResourcePoolsRequest} {@link ModifyResourcePoolsResponse} */
   ModifyResourcePools(data: ModifyResourcePoolsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcePoolsResponse>;
-  /** 修改YARN资源调度的资源配置（旧） {@link ModifyResourceScheduleConfigRequest} {@link ModifyResourceScheduleConfigResponse} */
+  /** @deprecated 修改YARN资源调度的资源配置（旧） {@link ModifyResourceScheduleConfigRequest} {@link ModifyResourceScheduleConfigResponse} */
   ModifyResourceScheduleConfig(data: ModifyResourceScheduleConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceScheduleConfigResponse>;
   /** 修改YARN的资源调度器（旧） {@link ModifyResourceSchedulerRequest} {@link ModifyResourceSchedulerResponse} */
   ModifyResourceScheduler(data: ModifyResourceSchedulerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceSchedulerResponse>;
@@ -4995,7 +4995,7 @@ declare interface Emr {
   ModifyUserManagerPwd(data: ModifyUserManagerPwdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserManagerPwdResponse>;
   /** 用户管理-变更用户组用户信息 {@link ModifyUsersOfGroupSTDRequest} {@link ModifyUsersOfGroupSTDResponse} */
   ModifyUsersOfGroupSTD(data: ModifyUsersOfGroupSTDRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUsersOfGroupSTDResponse>;
-  /** 部署生效（旧） {@link ModifyYarnDeployRequest} {@link ModifyYarnDeployResponse} */
+  /** @deprecated 部署生效（旧） {@link ModifyYarnDeployRequest} {@link ModifyYarnDeployResponse} */
   ModifyYarnDeploy(data: ModifyYarnDeployRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyYarnDeployResponse>;
   /** 修改yarn资源调度的队列信息 {@link ModifyYarnQueueV2Request} {@link ModifyYarnQueueV2Response} */
   ModifyYarnQueueV2(data: ModifyYarnQueueV2Request, config?: AxiosRequestConfig): AxiosPromise<ModifyYarnQueueV2Response>;

@@ -39,9 +39,9 @@ declare interface CmqRegionInfo {
 /** cos地域信息 */
 declare interface CosRegionInfo {
   /** cos地域 */
-  CosRegion?: string | null;
+  CosRegion?: string;
   /** 地域描述 */
-  CosRegionName?: string | null;
+  CosRegionName?: string;
 }
 
 /** 日志详情 */

@@ -166,7 +166,7 @@ declare interface CpuTopology {
 declare interface DataDisk {
   /** 数据盘大小，单位：GiB。最小调整步长为10GiB，不同数据盘类型取值范围不同，具体限制详见：[存储概述](https://cloud.tencent.com/document/product/213/4952)。默认值为0，表示不购买数据盘。更多限制详见产品文档。 */
   DiskSize: number;
-  /** 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：LOCAL_BASIC：本地硬盘 LOCAL_SSD：本地SSD硬盘LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定CLOUD_BASIC：普通云硬盘 CLOUD_PREMIUM：高性能云硬盘CLOUD_SSD：SSD云硬盘 CLOUD_HSSD：增强型SSD云硬盘 CLOUD_TSSD：极速型SSD云硬盘CLOUD_BSSD：通用型SSD云硬盘默认取值：LOCAL_BASIC。该参数对`ResizeInstanceDisk`接口无效。 */
+  /** 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：LOCAL_BASIC：本地硬盘 LOCAL_SSD：本地SSD硬盘LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定CLOUD_BASIC：普通云硬盘 CLOUD_PREMIUM：高性能云硬盘CLOUD_SSD：SSD云硬盘 CLOUD_HSSD：增强型SSD云硬盘 CLOUD_TSSD：极速型SSD云硬盘CLOUD_BSSD：通用型SSD云硬盘默认取值：LOCAL_BASIC该参数对`ResizeInstanceDisk`接口无效。 */
   DiskType?: string;
   /** 数据盘ID。该参数目前仅用于`DescribeInstances`等查询类接口的返回参数，不可用于`RunInstances`等写接口的入参。 */
   DiskId?: string;
@@ -177,11 +177,11 @@ declare interface DataDisk {
   /** 数据盘是否加密。取值范围：true：加密false：不加密默认取值：false该参数目前仅用于 `RunInstances` 接口。 */
   Encrypt?: boolean;
   /** 自定义CMK对应的ID，取值为UUID或者类似kms-abcd1234。用于加密云盘。该参数目前仅用于 `RunInstances` 接口。 */
-  KmsKeyId?: string;
+  KmsKeyId?: string | null;
   /** 云硬盘性能，单位：MiB/s。使用此参数可给云硬盘购买额外的性能。当前仅支持极速型云盘（CLOUD_TSSD）和增强型SSD云硬盘（CLOUD_HSSD） */
-  ThroughputPerformance?: number;
+  ThroughputPerformance?: number | null;
   /** 所属的独享集群ID。 */
-  CdcId?: string;
+  CdcId?: string | null;
   /** 突发性能 注：内测中。 */
   BurstPerformance?: boolean;
   /** 磁盘名称，长度不超过128 个字符。 */
@@ -1485,7 +1485,7 @@ declare interface CreateLaunchTemplateRequest {
   UserData?: string;
   /** 是否只预检此次请求。true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制和云服务器库存。如果检查不通过，则返回对应错误码；如果检查通过，则返回RequestId.false（默认）：发送正常请求，通过检查后直接创建实例。 */
   DryRun?: boolean;
-  /** CAM角色名称。可通过[`DescribeRoleList`](https://cloud.tencent.com/document/product/598/13887)接口返回值中的`roleName`获取。 */
+  /** CAM角色名称。可通过[ DescribeRoleList ](https://cloud.tencent.com/document/product/598/36223)接口返回值中的`RoleName `获取。 */
   CamRoleName?: string;
   /** 高性能计算集群ID。若创建的实例为高性能计算实例，需指定实例放置的集群，否则不可指定。该参数可以通过调用 [DescribeHpcClusters](https://cloud.tencent.com/document/api/213/83220) 的返回值中的 `HpcClusterId` 字段来获取。 */
   HpcClusterId?: string;
@@ -1513,7 +1513,7 @@ declare interface CreateLaunchTemplateResponse {
 declare interface CreateLaunchTemplateVersionRequest {
   /** 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目，所属宿主机（在专用宿主机上创建子机时指定）等属性。 */
   Placement: Placement;
-  /** 启动模板ID，新版本将基于该实例启动模板ID创建。 */
+  /** 启动模板ID，新版本将基于该实例启动模板ID创建。可通过 [DescribeLaunchTemplates](https://cloud.tencent.com/document/api/213/66322) 接口返回值中的`LaunchTemplateId`获取。 */
   LaunchTemplateId: string;
   /** 若给定，新实例启动模板将基于给定的版本号创建。若未指定则使用默认版本,可以通过 [DescribeLaunchTemplateVersions](https://cloud.tencent.com/document/api/213/66323)查询默认版本。 */
   LaunchTemplateVersion?: number;
@@ -1547,7 +1547,7 @@ declare interface CreateLaunchTemplateVersionRequest {
   HostName?: string;
   /** 定时任务。通过该参数可以为实例指定定时任务，目前仅支持定时销毁。 */
   ActionTimer?: ActionTimer;
-  /** 置放群组id，仅支持指定一个。 */
+  /** 置放群组id，仅支持指定一个。可使用[DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/api/213/17810)接口获取。 */
   DisasterRecoverGroupIds?: string[];
   /** 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到云服务器实例。 */
   TagSpecification?: TagSpecification[];
@@ -1559,7 +1559,7 @@ declare interface CreateLaunchTemplateVersionRequest {
   DryRun?: boolean;
   /** CAM角色名称。可通过[ DescribeRoleList ](https://cloud.tencent.com/document/product/598/13887)接口返回值中的`roleName`获取。 */
   CamRoleName?: string;
-  /** 高性能计算集群ID。若创建的实例为高性能计算实例，需指定实例放置的集群，否则不可指定。 */
+  /** 高性能计算集群ID。若创建的实例为高性能计算实例，需指定实例放置的集群，否则不可指定。该参数可以通过调用 [DescribeHpcClusters](https://cloud.tencent.com/document/api/213/83220) 的返回值中的 `HpcClusterId` 字段来获取。 */
   HpcClusterId?: string;
   /** 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费CDHPAID：独享子机（基于专用宿主机创建，宿主机部分的资源不收费）SPOTPAID：竞价付费默认值：POSTPAID_BY_HOUR。 */
   InstanceChargeType?: string;
@@ -1975,7 +1975,7 @@ declare interface DescribeInstancesOperationLimitResponse {
 declare interface DescribeInstancesRequest {
   /** 按照一个或者多个实例ID查询。实例ID例如：`ins-xxxxxxxx`。（此参数的具体格式可参考API[简介](https://cloud.tencent.com/document/api/213/15688)的`ids.N`一节）。每次请求的实例的上限为100。参数不支持同时指定`InstanceIds`和`Filters`。 */
   InstanceIds?: string[];
-  /** zone 按照【可用区】进行过滤。可用区例如：ap-guangzhou-1。类型：String必选：否可选项：可用区列表 project-id 按照【项目ID】进行过滤，可通过调用[DescribeProjects](https://cloud.tencent.com/document/api/651/78725)查询已创建的项目列表或登录[控制台](https://console.cloud.tencent.com/cvm/index)进行查看；也可以调用[AddProject](https://cloud.tencent.com/document/api/651/81952)创建新的项目。项目ID例如：1002189。类型：Integer必选：否 host-id 按照【[CDH](https://cloud.tencent.com/document/product/416) ID】进行过滤。[CDH](https://cloud.tencent.com/document/product/416) ID例如：host-xxxxxxxx。类型：String必选：否 dedicated-cluster-id 按照【[CDC](https://cloud.tencent.com/document/product/1346) ID】进行过滤。[CDC](https://cloud.tencent.com/document/product/1346) ID例如：cluster-xxxxxxx。类型：String必选：否 vpc-id 按照【VPC ID】进行过滤。VPC ID例如：vpc-xxxxxxxx。类型：String必选：否 subnet-id 按照【子网ID】进行过滤。子网ID例如：subnet-xxxxxxxx。类型：String必选：否 instance-id 按照【实例ID】进行过滤。实例ID例如：ins-xxxxxxxx。类型：String必选：否 uuid 按照【实例UUID】进行过滤。实例UUID例如：xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx。类型：String必选：否 security-group-id 按照【安全组ID】进行过滤。安全组ID例如: sg-8jlk3f3r。类型：String必选：否 instance-name 按照【实例名称】进行过滤。类型：String必选：否 instance-charge-type 按照【实例计费模式】进行过滤。(PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费 | CDHPAID：表示[CDH](https://cloud.tencent.com/document/product/416)付费，即只对[CDH](https://cloud.tencent.com/document/product/416)计费，不对[CDH](https://cloud.tencent.com/document/product/416)上的实例计费。)类型：String必选：否 instance-state 按照【实例状态】进行过滤。状态类型详见[实例状态表](https://cloud.tencent.com/document/api/213/15753)类型：String必选：否 private-ip-address 按照【实例主网卡的内网IP】进行过滤。类型：String必选：否 public-ip-address 按照【实例主网卡的公网IP】进行过滤，包含实例创建时自动分配的IP和实例创建后手动绑定的弹性IP。类型：String必选：否 ipv6-address 按照【实例的IPv6地址】进行过滤。类型：String必选：否 tag-key 按照【标签键】进行过滤。类型：String必选：否 tag-value 按照【标签值】进行过滤。类型：String必选：否 tag:tag-key 按照【标签键值对】进行过滤。tag-key使用具体的标签键进行替换。使用请参考示例2。类型：String必选：否creation-start-time 按照【实例创建起始时间】进行过滤。例如：2023-06-01 00:00:00。类型：String必选：否creation-end-time 按照【实例创建截止时间】进行过滤。例如：2023-06-01 00:00:00。类型：String必选：否 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`InstanceIds`和`Filters`。 */
+  /** zone 按照【可用区】进行过滤。可用区例如：ap-guangzhou-1。类型：String必选：否可选项：可用区列表 project-id 按照【项目ID】进行过滤，可通过调用[DescribeProjects](https://cloud.tencent.com/document/api/651/78725)查询已创建的项目列表或登录[控制台](https://console.cloud.tencent.com/cvm/index)进行查看；也可以调用[AddProject](https://cloud.tencent.com/document/api/651/81952)创建新的项目。项目ID例如：1002189。类型：Integer必选：否 host-id 按照【[CDH](https://cloud.tencent.com/document/product/416) ID】进行过滤。[CDH](https://cloud.tencent.com/document/product/416) ID例如：host-xxxxxxxx。类型：String必选：否 dedicated-cluster-id 按照【[CDC](https://cloud.tencent.com/document/product/1346) ID】进行过滤。[CDC](https://cloud.tencent.com/document/product/1346) ID例如：cluster-xxxxxxx。类型：String必选：否 vpc-id 按照【VPC ID】进行过滤。VPC ID例如：vpc-xxxxxxxx。类型：String必选：否 subnet-id 按照【子网ID】进行过滤。子网ID例如：subnet-xxxxxxxx。类型：String必选：否 instance-id 按照【实例ID】进行过滤。实例ID例如：ins-xxxxxxxx。类型：String必选：否 uuid 按照【实例UUID】进行过滤。实例UUID例如：xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx。类型：String必选：否 security-group-id 按照【安全组ID】进行过滤。安全组ID例如: sg-8jlk3f3r。类型：String必选：否 instance-name 按照【实例名称】进行过滤。类型：String必选：否 instance-charge-type 按照【实例计费模式】进行过滤。(PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费 | CDHPAID：表示[CDH](https://cloud.tencent.com/document/product/416)付费，即只对[CDH](https://cloud.tencent.com/document/product/416)计费，不对[CDH](https://cloud.tencent.com/document/product/416)上的实例计费。)类型：String必选：否 instance-state 按照【实例状态】进行过滤。状态类型详见[实例状态表](https://cloud.tencent.com/document/api/213/15753)类型：String必选：否 private-ip-address 按照【实例主网卡的内网IP】进行过滤。类型：String必选：否 public-ip-address 按照【实例主网卡的公网IP】进行过滤，包含实例创建时自动分配的IP和实例创建后手动绑定的弹性IP。类型：String必选：否 ipv6-address 按照【实例的IPv6地址】进行过滤。类型：String必选：否 tag-key 按照【标签键】进行过滤。类型：String必选：否 tag-value 按照【标签值】进行过滤。类型：String必选：否 tag:tag-key 按照【标签键值对】进行过滤。tag-key使用具体的标签键进行替换。使用请参考示例2。类型：String必选：否creation-start-time 按照【创建实例请求的起始时间】进行过滤。例如：2023-06-01 00:00:00。类型：String必选：否creation-end-time 按照【创建实例请求的截止时间】进行过滤。例如：2023-06-01 00:00:00。类型：String必选：否 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`InstanceIds`和`Filters`。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
   Offset?: number;
@@ -2059,9 +2059,9 @@ declare interface DescribeLaunchTemplateVersionsRequest {
 
 declare interface DescribeLaunchTemplateVersionsResponse {
   /** 实例启动模板总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例启动模板版本集合。 */
-  LaunchTemplateVersionSet: LaunchTemplateVersionInfo[];
+  LaunchTemplateVersionSet?: LaunchTemplateVersionInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -458,7 +458,7 @@ declare interface CKafkaTopicInfo {
   TopicName: string;
 }
 
-/** ckafkal路由详情 */
+/** Ckafka路由详情 */
 declare interface CkafkaRouteInfo {
   /** 路由ID */
   RouteID?: number;
@@ -5412,7 +5412,7 @@ declare interface DescribeAccessControlEventsExportRequest {
 }
 
 declare interface DescribeAccessControlEventsExportResponse {
-  /** execle下载地址 */
+  /** excel下载地址 */
   DownloadUrl?: string;
   /** 任务id */
   JobId?: string;
@@ -8286,7 +8286,7 @@ declare interface DescribeReverseShellEventsExportRequest {
 }
 
 declare interface DescribeReverseShellEventsExportResponse {
-  /** execle下载地址 */
+  /** excel下载地址 */
   DownloadUrl?: string;
   /** 任务ID */
   JobId?: string;

@@ -298,6 +298,14 @@ declare interface Coord {
   Y?: number;
 }
 
+/** 海关进/出口货物报关单 */
+declare interface CustomsDeclaration {
+  /** 发票名称 */
+  Title?: string;
+  /** 识别出的字段名称(关键字) */
+  Content?: OtherInvoiceItem[];
+}
+
 /** 海关缴款书 */
 declare interface CustomsPaymentReceipt {
   /** 发票名称 */
@@ -968,6 +976,8 @@ declare interface InvoiceItem {
   SubTypeDescription?: string;
   /** 该发票中所有字段坐标信息。包括字段英文名称、字段值所在位置四点坐标、字段所属行号，具体内容请点击左侧链接。 */
   ItemPolygon?: ItemPolygonInfo[];
+  /** 二维码数据。 */
+  QRCode?: string;
 }
 
 /** 文本行在旋转纠正之后的图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height） */
@@ -1338,6 +1348,14 @@ declare interface OCRResult {
   IDCardResult?: IDCardResult | null;
 }
 
+/** 网约车行程单 */
+declare interface OnlineTaxiItinerary {
+  /** 发票名称 */
+  Title?: string;
+  /** 识别出的字段名称(关键字) */
+  Content?: OtherInvoiceItem[];
+}
+
 /** 网约车行程单识别结果 */
 declare interface OnlineTaxiItineraryInfo {
   /** 识别出的字段名称(关键字)，支持以下字段：发票代码、 机打代码、 发票号码、 发动机号码、 合格证号、 机打号码、 价税合计(小写)、 销货单位名称、 身份证号码/组织机构代码、 购买方名称、 销售方纳税人识别号、 购买方纳税人识别号、主管税务机关、 主管税务机关代码、 开票日期、 不含税价(小写)、 吨位、增值税税率或征收率、 车辆识别代号/车架号码、 增值税税额、 厂牌型号、 省、 市、 发票消费类型、 销售方电话、 销售方账号、 产地、 进口证明书号、 车辆类型、 机器编号、备注、开票人、限乘人数、商检单号、销售方地址、销售方开户银行、价税合计、发票类型。 */
@@ -1374,6 +1392,14 @@ declare interface OtherInvoiceItem {
 declare interface OtherInvoiceList {
   /** 列表 */
   OtherInvoiceItemList?: OtherInvoiceItem[];
+}
+
+/** 海外发票 */
+declare interface OverseasInvoice {
+  /** 发票名称 */
+  Title?: string;
+  /** 识别出的字段名称(关键字) */
+  Content?: OtherInvoiceItem[];
 }
 
 /** 通行费发票信息 */
@@ -1688,6 +1714,14 @@ declare interface ResultList {
   Coord?: Polygon[] | null;
 }
 
+/** 销货清单 */
+declare interface SaleInventory {
+  /** 发票名称 */
+  Title?: string;
+  /** 识别出的字段名称(关键字) */
+  Content?: OtherInvoiceItem[];
+}
+
 /** 印章信息 */
 declare interface SealInfo {
   /** 印章主体内容 */
@@ -1740,6 +1774,14 @@ declare interface ShippingInvoice {
   City?: string;
   /** 币种 */
   CurrencyCode?: string;
+}
+
+/** 购物小票 */
+declare interface ShoppingReceipt {
+  /** 发票名称 */
+  Title?: string;
+  /** 识别出的字段名称(关键字) */
+  Content?: OtherInvoiceItem[];
 }
 
 /** 混贴票据中单张发票的内容 */
@@ -1814,6 +1856,16 @@ declare interface SingleInvoiceItem {
   CustomsPaymentReceipt?: CustomsPaymentReceipt | null;
   /** 银行回单 */
   BankSlip?: BankSlip | null;
+  /** 网约车行程单 */
+  OnlineTaxiItinerary?: OnlineTaxiItinerary | null;
+  /** 海关进/出口货物报关单 */
+  CustomsDeclaration?: CustomsDeclaration | null;
+  /** 海外发票 */
+  OverseasInvoice?: OverseasInvoice | null;
+  /** 购物小票 */
+  ShoppingReceipt?: ShoppingReceipt | null;
+  /** 销货清单 */
+  SaleInventory?: SaleInventory | null;
 }
 
 /** 门头照识别结果 */
@@ -4407,7 +4459,7 @@ declare interface RecognizeGeneralInvoiceRequest {
   ImageBase64?: string;
   /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：单边介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
-  /** 需要识别的票据类型列表，为空或不填表示识别全部类型。当传入单个类型时，图片均采用该票类型进行处理。暂不支持多个参数进行局部控制。0：出租车发票1：定额发票2：火车票3：增值税发票5：机票行程单8：通用机打发票9：汽车票10：轮船票11：增值税发票（卷票 ）12：购车发票13：过路过桥费发票15：非税发票16：全电发票17：医疗发票18：完税凭证19：海关缴款书20：银行回单-1：其他发票 */
+  /** 需要识别的票据类型列表，为空或不填表示识别全部类型。当传入单个类型时，图片均采用该票类型进行处理。暂不支持多个参数进行局部控制。0：出租车发票1：定额发票2：火车票3：增值税发票5：机票行程单8：通用机打发票9：汽车票10：轮船票11：增值税发票（卷票 ）12：购车发票13：过路过桥费发票15：非税发票16：全电发票17：医疗发票18：完税凭证19：海关缴款书20：银行回单21：网约车行程单22：海关进/出口货物报关单23：海外发票24：购物小票25：销货清单-1：其他发票 */
   Types?: number[];
   /** 是否开启其他票识别，默认值为true，开启后可支持其他发票的智能识别。 */
   EnableOther?: boolean;
@@ -4421,6 +4473,8 @@ declare interface RecognizeGeneralInvoiceRequest {
   EnableCutImage?: boolean;
   /** 是否打开字段坐标返回。默认为false。 */
   EnableItemPolygon?: boolean;
+  /** 是否开启二维码识别。 */
+  EnableQRCode?: boolean;
 }
 
 declare interface RecognizeGeneralInvoiceResponse {

@@ -186,7 +186,7 @@ declare interface ComputeNodeMetrics {
 declare interface DataDisk {
   /** 数据盘大小，单位：GiB。最小调整步长为10GiB，不同数据盘类型取值范围不同，具体限制详见：[存储概述](https://cloud.tencent.com/document/product/213/4952)。默认值为0，表示不购买数据盘。更多限制详见产品文档。 */
   DiskSize: number;
-  /** 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：LOCAL_BASIC：本地硬盘 LOCAL_SSD：本地SSD硬盘LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定CLOUD_BASIC：普通云硬盘 CLOUD_PREMIUM：高性能云硬盘CLOUD_SSD：SSD云硬盘 CLOUD_HSSD：增强型SSD云硬盘 CLOUD_TSSD：极速型SSD云硬盘CLOUD_BSSD：通用型SSD云硬盘默认取值：LOCAL_BASIC。该参数对`ResizeInstanceDisk`接口无效。 */
+  /** 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：LOCAL_BASIC：本地硬盘 LOCAL_SSD：本地SSD硬盘LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定CLOUD_BASIC：普通云硬盘 CLOUD_PREMIUM：高性能云硬盘CLOUD_SSD：SSD云硬盘 CLOUD_HSSD：增强型SSD云硬盘 CLOUD_TSSD：极速型SSD云硬盘CLOUD_BSSD：通用型SSD云硬盘默认取值：LOCAL_BASIC该参数对`ResizeInstanceDisk`接口无效。 */
   DiskType?: string;
   /** 数据盘ID。该参数目前仅用于`DescribeInstances`等查询类接口的返回参数，不可用于`RunInstances`等写接口的入参。 */
   DiskId?: string;
@@ -197,11 +197,11 @@ declare interface DataDisk {
   /** 数据盘是否加密。取值范围：true：加密false：不加密默认取值：false该参数目前仅用于 `RunInstances` 接口。 */
   Encrypt?: boolean;
   /** 自定义CMK对应的ID，取值为UUID或者类似kms-abcd1234。用于加密云盘。该参数目前仅用于 `RunInstances` 接口。 */
-  KmsKeyId?: string;
+  KmsKeyId?: string | null;
   /** 云硬盘性能，单位：MiB/s。使用此参数可给云硬盘购买额外的性能。当前仅支持极速型云盘（CLOUD_TSSD）和增强型SSD云硬盘（CLOUD_HSSD） */
-  ThroughputPerformance?: number;
+  ThroughputPerformance?: number | null;
   /** 所属的独享集群ID。 */
-  CdcId?: string;
+  CdcId?: string | null;
   /** 突发性能 注：内测中。 */
   BurstPerformance?: boolean;
   /** 磁盘名称，长度不超过128 个字符。 */
@@ -991,7 +991,7 @@ declare interface DescribeComputeEnvActivitiesResponse {
 }
 
 declare interface DescribeComputeEnvCreateInfoRequest {
-  /** 计算环境ID，环境ID通过调用接口 [DescribeComputeEnv](https://cloud.tencent.com/document/api/599/15892)获取。 */
+  /** 计算环境ID，环境ID通过调用接口 [DescribeComputeEnvs](https://cloud.tencent.com/document/api/599/15893)获取。 */
   EnvId: string;
 }
 

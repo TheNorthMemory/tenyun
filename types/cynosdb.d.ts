@@ -226,6 +226,36 @@ declare interface BackupFileInfo {
   BackupName?: string;
 }
 
+/** 备份下载集群限制参数 */
+declare interface BackupLimitClusterRestriction {
+  /** 集群id */
+  ClusterId?: string;
+  /** 下载限制配置 */
+  BackupLimitRestriction?: BackupLimitRestriction;
+}
+
+/** 备份下载限制参数 */
+declare interface BackupLimitRestriction {
+  /** 限制类型 */
+  LimitType?: string;
+  /** 该参数仅支持 In， 表示 LimitVpc 指定的vpc可以下载。默认为In */
+  VpcComparisonSymbol?: string;
+  /** In: 指定的ip可以下载； NotIn: 指定的ip不可以下载 */
+  IpComparisonSymbol?: string;
+  /** 限制下载的vpc设置 */
+  LimitVpcs?: BackupLimitVpcItem[] | null;
+  /** 限制下载的ip设置 */
+  LimitIps?: string[] | null;
+}
+
+/** 备份文件限制下载来源VPC设置项 */
+declare interface BackupLimitVpcItem {
+  /** 限制下载来源的地域。目前仅支持当前地域 */
+  Region?: string;
+  /** 限制下载的vpc列表 */
+  VpcList?: string[];
+}
+
 /** 计费资源信息 */
 declare interface BillingResourceInfo {
   /** 集群ID */
@@ -448,6 +478,14 @@ declare interface ClusterParamModifyLog {
   InstanceId?: string;
 }
 
+/** 集群只读开关列表 */
+declare interface ClusterReadOnlyValue {
+  /** 集群ID */
+  ClusterId?: string;
+  /** 只读开关值 */
+  ReadOnlyValue?: string;
+}
+
 /** 集群从可用区信息 */
 declare interface ClusterSlaveData {
   /** 旧主可用区 */
@@ -462,6 +500,14 @@ declare interface ClusterSlaveData {
   NewSlaveZoneAttr?: SlaveZoneAttrItem[];
   /** 旧可用区属性 */
   OldSlaveZoneAttr?: SlaveZoneAttrItem[];
+}
+
+/** 集群任务ID */
+declare interface ClusterTaskId {
+  /** 集群ID */
+  ClusterId?: string;
+  /** 任务ID */
+  TaskId?: string;
 }
 
 /** 创建集群任务信息 */
@@ -3142,16 +3188,48 @@ declare interface DescribeBackupConfigResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBackupDownloadRestrictionRequest {
+  /** 集群ID */
+  ClusterIds: string[];
+}
+
+declare interface DescribeBackupDownloadRestrictionResponse {
+  /** 集群备份下载限制 */
+  BackupLimitClusterRestrictions?: BackupLimitClusterRestriction[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBackupDownloadUrlRequest {
   /** 集群ID */
   ClusterId: string;
   /** 备份ID */
   BackupId: number;
+  /** 备份下载来源限制条件 */
+  DownloadRestriction?: BackupLimitRestriction;
 }
 
 declare interface DescribeBackupDownloadUrlResponse {
   /** 备份下载地址 */
   DownloadUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBackupDownloadUserRestrictionRequest {
+  /** 分页大小 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+  /** 是否只查询用户级别下载限制，true-是，false-否 */
+  OnlyUserRestriction?: boolean;
+}
+
+declare interface DescribeBackupDownloadUserRestrictionResponse {
+  /** 集群备份下载限制信息 */
+  BackupLimitClusterRestrictions?: BackupLimitClusterRestriction[] | null;
+  /** 总条数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3217,6 +3295,8 @@ declare interface DescribeBinlogDownloadUrlRequest {
   ClusterId: string;
   /** Binlog文件ID */
   BinlogId: number;
+  /** 备份下载来源限制条件 */
+  DownloadRestriction?: BackupLimitRestriction;
 }
 
 declare interface DescribeBinlogDownloadUrlResponse {
@@ -3448,6 +3528,18 @@ declare interface DescribeClusterPasswordComplexityResponse {
   ValidatePasswordPolicy?: ParamInfo;
   /** 特殊字符个数 */
   ValidatePasswordSpecialCharCount?: ParamInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterReadOnlyRequest {
+  /** 集群ID列表 */
+  ClusterIds: string[];
+}
+
+declare interface DescribeClusterReadOnlyResponse {
+  /** 集群只读开关列表 */
+  ClusterReadOnlyValues?: ClusterReadOnlyValue[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4466,6 +4558,44 @@ declare interface ModifyBackupConfigResponse {
   RequestId?: string;
 }
 
+declare interface ModifyBackupDownloadRestrictionRequest {
+  /** 集群ID */
+  ClusterIds: string[];
+  /** 下载限制类型，NoLimit-不限制,LimitOnlyIntranet-限制内网 ,Customize-自定义 */
+  LimitType: string;
+  /** 该参数仅支持 In， 表示 LimitVpc 指定的vpc可以下载。默认为In */
+  VpcComparisonSymbol?: string;
+  /** In: 指定的ip可以下载； NotIn: 指定的ip不可以下载 */
+  IpComparisonSymbol?: string;
+  /** 限制下载的vpc设置 */
+  LimitVpcs?: BackupLimitVpcItem[];
+  /** 限制下载的ip设置 */
+  LimitIps?: string[];
+}
+
+declare interface ModifyBackupDownloadRestrictionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyBackupDownloadUserRestrictionRequest {
+  /** 下载限制类型，NoLimit-不限制,LimitOnlyIntranet-限制内网 ,Customize-自定义 */
+  LimitType: string;
+  /** 该参数仅支持 In， 表示 LimitVpc 指定的vpc可以下载。默认为In */
+  VpcComparisonSymbol?: string;
+  /** In: 指定的ip可以下载； NotIn: 指定的ip不可以下载 */
+  IpComparisonSymbol?: string;
+  /** 限制下载的vpc设置 */
+  LimitVpcs?: BackupLimitVpcItem[];
+  /** 限制下载的ip设置 */
+  LimitIps?: string[];
+}
+
+declare interface ModifyBackupDownloadUserRestrictionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyBackupNameRequest {
   /** 集群ID */
   ClusterId: string;
@@ -4570,6 +4700,22 @@ declare interface ModifyClusterPasswordComplexityRequest {
 declare interface ModifyClusterPasswordComplexityResponse {
   /** 任务流ID */
   FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyClusterReadOnlyRequest {
+  /** 集群ID列表 */
+  ClusterIds: string[];
+  /** 集群只读开关，可选值：ON，OFF */
+  ReadOnlyOperation: string;
+  /** yes：在运维时间窗内修改，no：立即执行（默认值） */
+  IsInMaintainPeriod?: string;
+}
+
+declare interface ModifyClusterReadOnlyResponse {
+  /** 集群任务ID列表 */
+  ClusterTaskIds?: ClusterTaskId[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5591,8 +5737,12 @@ declare interface Cynosdb {
   DescribeAuditRuleWithInstanceIds(data: DescribeAuditRuleWithInstanceIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditRuleWithInstanceIdsResponse>;
   /** 查询备份配置信息 {@link DescribeBackupConfigRequest} {@link DescribeBackupConfigResponse} */
   DescribeBackupConfig(data: DescribeBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupConfigResponse>;
+  /** 查询备份下载限制 {@link DescribeBackupDownloadRestrictionRequest} {@link DescribeBackupDownloadRestrictionResponse} */
+  DescribeBackupDownloadRestriction(data: DescribeBackupDownloadRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDownloadRestrictionResponse>;
   /** 查询备份下载地址 {@link DescribeBackupDownloadUrlRequest} {@link DescribeBackupDownloadUrlResponse} */
   DescribeBackupDownloadUrl(data: DescribeBackupDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDownloadUrlResponse>;
+  /** 查询用户级别备份下载限制 {@link DescribeBackupDownloadUserRestrictionRequest} {@link DescribeBackupDownloadUserRestrictionResponse} */
+  DescribeBackupDownloadUserRestriction(data?: DescribeBackupDownloadUserRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDownloadUserRestrictionResponse>;
   /** 查询备份文件列表 {@link DescribeBackupListRequest} {@link DescribeBackupListResponse} */
   DescribeBackupList(data: DescribeBackupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupListResponse>;
   /** 查询binlog配置 {@link DescribeBinlogConfigRequest} {@link DescribeBinlogConfigResponse} */
@@ -5623,6 +5773,8 @@ declare interface Cynosdb {
   DescribeClusterParams(data: DescribeClusterParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterParamsResponse>;
   /** 查看集群密码复杂度详情 {@link DescribeClusterPasswordComplexityRequest} {@link DescribeClusterPasswordComplexityResponse} */
   DescribeClusterPasswordComplexity(data: DescribeClusterPasswordComplexityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterPasswordComplexityResponse>;
+  /** 查询集群只读开关 {@link DescribeClusterReadOnlyRequest} {@link DescribeClusterReadOnlyResponse} */
+  DescribeClusterReadOnly(data: DescribeClusterReadOnlyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterReadOnlyResponse>;
   /** 查询集群透明加密信息 {@link DescribeClusterTransparentEncryptInfoRequest} {@link DescribeClusterTransparentEncryptInfoResponse} */
   DescribeClusterTransparentEncryptInfo(data: DescribeClusterTransparentEncryptInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterTransparentEncryptInfoResponse>;
   /** 查询集群列表 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
@@ -5721,6 +5873,10 @@ declare interface Cynosdb {
   ModifyAuditService(data: ModifyAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditServiceResponse>;
   /** 修改备份配置 {@link ModifyBackupConfigRequest} {@link ModifyBackupConfigResponse} */
   ModifyBackupConfig(data: ModifyBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupConfigResponse>;
+  /** 修改集群备份下载限制 {@link ModifyBackupDownloadRestrictionRequest} {@link ModifyBackupDownloadRestrictionResponse} */
+  ModifyBackupDownloadRestriction(data: ModifyBackupDownloadRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupDownloadRestrictionResponse>;
+  /** 修改用户备份下载限制 {@link ModifyBackupDownloadUserRestrictionRequest} {@link ModifyBackupDownloadUserRestrictionResponse} */
+  ModifyBackupDownloadUserRestriction(data: ModifyBackupDownloadUserRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupDownloadUserRestrictionResponse>;
   /** 修改备份文件备注名 {@link ModifyBackupNameRequest} {@link ModifyBackupNameResponse} */
   ModifyBackupName(data: ModifyBackupNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupNameResponse>;
   /** 修改Binlog配置 {@link ModifyBinlogConfigRequest} {@link ModifyBinlogConfigResponse} */
@@ -5735,6 +5891,8 @@ declare interface Cynosdb {
   ModifyClusterParam(data: ModifyClusterParamRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterParamResponse>;
   /** 修改集群密码复杂度 {@link ModifyClusterPasswordComplexityRequest} {@link ModifyClusterPasswordComplexityResponse} */
   ModifyClusterPasswordComplexity(data: ModifyClusterPasswordComplexityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterPasswordComplexityResponse>;
+  /** 修改集群只读开关 {@link ModifyClusterReadOnlyRequest} {@link ModifyClusterReadOnlyResponse} */
+  ModifyClusterReadOnly(data: ModifyClusterReadOnlyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterReadOnlyResponse>;
   /** 变更备可用区 {@link ModifyClusterSlaveZoneRequest} {@link ModifyClusterSlaveZoneResponse} */
   ModifyClusterSlaveZone(data: ModifyClusterSlaveZoneRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterSlaveZoneResponse>;
   /** 调整包年包月存储容量 {@link ModifyClusterStorageRequest} {@link ModifyClusterStorageResponse} */

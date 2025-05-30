@@ -630,7 +630,7 @@ declare interface AssetViewVULRiskData {
   HandleTaskId?: string;
   /** 引擎来源 */
   EngineSource?: string;
-  /** 新的漏洞风险id(同全网漏洞表的riskid) */
+  /** 新的漏洞风险id(同全网漏洞表的RiskId) */
   VulRiskId?: string;
   /** 新版漏洞id */
   TvdID?: string;

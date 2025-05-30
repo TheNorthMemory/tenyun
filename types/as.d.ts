@@ -1305,7 +1305,7 @@ declare interface DescribeLifecycleHooksResponse {
 declare interface DescribeNotificationConfigurationsRequest {
   /** 按照一个或者多个通知ID查询，列表长度上限为100。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 获取通知ID。参数不支持同时指定`AutoScalingNotificationIds`和`Filters`。 */
   AutoScalingNotificationIds?: string[];
-  /** 过滤条件。 auto-scaling-notification-id - String - 是否必填：否 -（过滤条件）按照通知ID过滤。 auto-scaling-group-id - String - 是否必填：否 -（过滤条件）按照伸缩组ID过滤。每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`AutoScalingNotificationIds`和`Filters`。 */
+  /** 过滤条件。 auto-scaling-notification-id - String - 是否必填：否 -（过滤条件）按照通知ID过滤。 auto-scaling-group-id - String - 是否必填：否 -（过滤条件）按照伸缩组ID过滤。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 或调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`AutoScalingNotificationIds`和`Filters`。 */
   Filters?: Filter[];
   /** 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
   Limit?: number;

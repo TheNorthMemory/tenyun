@@ -494,7 +494,7 @@ declare interface FirewallTemplateApplyRecord {
   ApplyTime?: string;
   /** 模板规则列表。 */
   TemplateRuleSet?: FirewallTemplateRule[];
-  /** 应用模板的执行状态。- SUCCESS：成功- FAILED：失败 */
+  /** 应用模板的执行状态。- SUCCESS：成功- RUNNING：运行中- FAILED：失败 */
   ApplyState?: string;
   /** 应用成功的实例数量。 */
   SuccessCount?: number;
