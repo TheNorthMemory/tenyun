@@ -128,7 +128,7 @@ declare interface FileSystemClient {
   ClientIp?: string;
   /** 文件系统所属VPCID */
   VpcId?: string;
-  /** 可用区名称，例如ap-beijing-1，请参考 概览文档中的地域与可用区列表 */
+  /** 可用区名称，例如ap-beijing-1，参考[简介](https://cloud.tencent.com/document/api/582/38144)文档中的地域与可用区列表 */
   Zone?: string;
   /** 可用区中文名称 */
   ZoneName?: string;
@@ -547,7 +547,7 @@ declare interface CreateCfsPGroupResponse {
 }
 
 declare interface CreateCfsRuleRequest {
-  /** 权限组 ID，通过创建权限组接口或者创建权限组规则接口获取 */
+  /** 权限组 ID，可通过[DescribeCfsPGroups接口](https://cloud.tencent.com/document/api/582/38157)获取 */
   PGroupId: string;
   /** 可以填写单个 IP 或者单个网段，例如 10.1.10.11 或者 10.10.1.0/24。默认来访地址为*表示允许所有。同时需要注意，此处需填写 CVM 的内网 IP。 */
   AuthClientIp: string;
@@ -555,7 +555,7 @@ declare interface CreateCfsRuleRequest {
   Priority: number;
   /** 读写权限, 值为 RO、RW；其中 RO 为只读，RW 为读写，不填默认为只读 */
   RWPermission?: string;
-  /** 用户权限，值为 all_squash、no_all_squash、root_squash、no_root_squash。all_squash：所有访问用户（含 root 用户）都会被映射为匿名用户或用户组。no_all_squash：所有访问用户（含 root 用户）均保持原有的 UID/GID 信息。root_squash：将来访的 root 用户映射为匿名用户或用户组，非 root 用户保持原有的 UID/GID 信息。no_root_squash：与 no_all_squash 效果一致，所有访问用户（含 root 用户）均保持原有的 UID/GID 信息 */
+  /** 用户权限，值为 all_squash、no_all_squash、root_squash、no_root_squash。默认值为root_squashall_squash：所有访问用户（含 root 用户）都会被映射为匿名用户或用户组。no_all_squash：所有访问用户（含 root 用户）均保持原有的 UID/GID 信息。root_squash：将来访的 root 用户映射为匿名用户或用户组，非 root 用户保持原有的 UID/GID 信息。no_root_squash：与 no_all_squash 效果一致，所有访问用户（含 root 用户）均保持原有的 UID/GID 信息 */
   UserPermission?: string;
 }
 
@@ -577,9 +577,9 @@ declare interface CreateCfsRuleResponse {
 }
 
 declare interface CreateCfsSnapshotRequest {
-  /** 文件系统 ID，通过查询文件系统接口获取 */
+  /** 文件系统ID，通过查询文件系统列表获取；[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170) */
   FileSystemId: string;
-  /** 快照名称，不超过64字符 */
+  /** 快照名称，支持不超过64字符长度，支持中文、数字、_、- */
   SnapshotName?: string;
   /** 快照标签 */
   ResourceTags?: TagInfo[];
@@ -635,7 +635,7 @@ declare interface CreateMigrationTaskResponse {
 }
 
 declare interface DeleteAutoSnapshotPolicyRequest {
-  /** 快照策略ID，查询快照策略接口获取 */
+  /** 快照策略ID，查询快照策略接口获取,[DescribeAutoSnapshotPolicies](https://cloud.tencent.com/document/api/582/80208) */
   AutoSnapshotPolicyId: string;
 }
 
@@ -647,7 +647,7 @@ declare interface DeleteAutoSnapshotPolicyResponse {
 }
 
 declare interface DeleteCfsFileSystemRequest {
-  /** 文件系统 ID。说明，进行删除文件系统操作前需要先调用 DeleteMountTarget 接口删除该文件系统的挂载点，否则会删除失败。 */
+  /** 文件系统 ID，通过[查询文件系统接口](https://cloud.tencent.com/document/api/582/38170)获取。说明，进行删除文件系统操作前需要先调用 DeleteMountTarget 接口删除该文件系统的挂载点，否则会删除失败。 */
   FileSystemId: string;
 }
 
@@ -657,7 +657,7 @@ declare interface DeleteCfsFileSystemResponse {
 }
 
 declare interface DeleteCfsPGroupRequest {
-  /** 权限组 ID，通过创建权限组接口或者创建权限组规则接口获取 */
+  /** 权限组 ID，可通过[DescribeCfsPGroups接口](https://cloud.tencent.com/document/api/582/38157)获取 */
   PGroupId: string;
 }
 
@@ -671,9 +671,9 @@ declare interface DeleteCfsPGroupResponse {
 }
 
 declare interface DeleteCfsRuleRequest {
-  /** 权限组 ID，通过创建权限组接口或者创建权限组规则接口获取 */
+  /** 权限组 ID，可通过[DescribeCfsPGroups接口](https://cloud.tencent.com/document/api/582/38157)获取 */
   PGroupId: string;
-  /** 规则 ID，通过查询权限组规则接口获取 */
+  /** 规则 ID，可通过[DescribeCfsRules](https://cloud.tencent.com/document/api/582/38156)接口获取 */
   RuleId: string;
 }
 
@@ -687,9 +687,9 @@ declare interface DeleteCfsRuleResponse {
 }
 
 declare interface DeleteCfsSnapshotRequest {
-  /** 文件系统快照id，可通过查询快照列表接口获取 */
+  /** 快照ID，可以通过[DescribeCfsSnapshots](https://cloud.tencent.com/document/api/582/80206) 查询获取 */
   SnapshotId?: string;
-  /** 需要删除的文件系统快照ID 列表，快照ID，跟ID列表至少填一项 */
+  /** 需要删除的文件系统快照ID 列表，快照ID，跟ID列表至少填一项快照ID，可以通过[DescribeCfsSnapshots](https://cloud.tencent.com/document/api/582/80206) 查询获取 */
   SnapshotIds?: string[];
 }
 
@@ -723,7 +723,7 @@ declare interface DeleteMountTargetResponse {
 }
 
 declare interface DeleteUserQuotaRequest {
-  /** 文件系统 ID，通过查询文件系统接口获取 */
+  /** 文件系统ID，通过查询文件系统列表获取；[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170) */
   FileSystemId: string;
   /** 指定配额类型，包括Uid（按用户ID限制）、Gid（按用户组ID限制）、Dir（按目录限制） */
   UserType: string;
@@ -791,7 +791,7 @@ declare interface DescribeBucketListResponse {
 }
 
 declare interface DescribeCfsFileSystemClientsRequest {
-  /** 文件系统 ID，通过查询文件系统接口获取 */
+  /** 文件系统 ID，通过[查询文件系统接口](https://cloud.tencent.com/document/api/582/38170)获取 */
   FileSystemId: string;
   /** Offset 分页码，默认为0 */
   Offset?: number;
@@ -843,7 +843,7 @@ declare interface DescribeCfsPGroupsResponse {
 }
 
 declare interface DescribeCfsRulesRequest {
-  /** 权限组 ID，通过创建权限组接口或者创建权限组规则接口获取 */
+  /** 权限组 ID，可通过[DescribeCfsPGroups接口](https://cloud.tencent.com/document/api/582/38157)获取 */
   PGroupId: string;
 }
 
@@ -885,7 +885,7 @@ declare interface DescribeCfsSnapshotsRequest {
   Limit?: number;
   /** 过滤条件。SnapshotId - Array of String - 是否必填：否 -（过滤条件）按快照ID过滤。SnapshotName - Array of String - 是否必填：否 -（过滤条件）按照快照名称过滤。FileSystemId - Array of String - 是否必填：否 -（过滤条件）按文件系统ID过滤。FsName - Array of String - 是否必填：否 -（过滤条件）按文件系统名过滤。Status - Array of String - 是否必填：否 -（过滤条件）按照快照状态过滤(creating：表示创建中 | available：表示可用。| rollbacking：表示回滚。| rollbacking_new：表示由快照创建新文件系统中| create-failed 创建失败）tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键进行过滤。tag:tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。 */
   Filters?: Filter[];
-  /** 按创建时间排序取值CreationTime */
+  /** 按创建时间排序取值 */
   OrderField?: string;
   /** 排序 升序或者降序 */
   Order?: string;
@@ -912,7 +912,7 @@ declare interface DescribeMigrationTasksRequest {
 }
 
 declare interface DescribeMigrationTasksResponse {
-  /** 迁移任务的数量 */
+  /** 迁移任务的总数量 */
   TotalCount?: number;
   /** 迁移任务详情 */
   MigrationTasks?: MigrationTaskInfo[];
@@ -921,7 +921,7 @@ declare interface DescribeMigrationTasksResponse {
 }
 
 declare interface DescribeMountTargetsRequest {
-  /** 文件系统 ID，查询文件系统列表可以获得id */
+  /** 文件系统 ID，[查询文件系统列表](https://cloud.tencent.com/document/api/582/38170)可以获得id */
   FileSystemId: string;
 }
 
@@ -935,11 +935,11 @@ declare interface DescribeMountTargetsResponse {
 }
 
 declare interface DescribeSnapshotOperationLogsRequest {
-  /** 文件系统快照ID，通过快照创建接口获得 */
+  /** 快照ID，可以通过[DescribeCfsSnapshots](https://cloud.tencent.com/document/api/582/80206) 查询获取 */
   SnapshotId: string;
-  /** 起始时间 */
+  /** 起始时间，格式“YYYY-MM-DD hh:mm:ss” */
   StartTime: string;
-  /** 结束时间 */
+  /** 结束时间，格式“YYYY-MM-DD hh:mm:ss” */
   EndTime: string;
 }
 
@@ -953,7 +953,7 @@ declare interface DescribeSnapshotOperationLogsResponse {
 }
 
 declare interface DescribeUserQuotaRequest {
-  /** 文件系统 ID,通过查询文件系统列表获取 */
+  /** 文件系统 ID,通过[查询文件系统列表](https://cloud.tencent.com/document/api/582/38170)获取 */
   FileSystemId: string;
   /** 过滤条件。UserType - Array of String - 是否必填：否 -（过滤条件）按配额类型过滤。(Uid|Gid|Dir，分别对应用户，用户组，目录 )UserId- Array of String - 是否必填：否 -（过滤条件）按用户id过滤。 */
   Filters?: Filter[];
@@ -973,7 +973,7 @@ declare interface DescribeUserQuotaResponse {
 }
 
 declare interface ModifyFileSystemAutoScaleUpRuleRequest {
-  /** 文件系统id,通过查询文件系统列表获取该参数 */
+  /** 文件系统ID，通过查询文件系统列表获取；[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170) */
   FileSystemId: string;
   /** 扩容阈值，范围[10-90] */
   ScaleUpThreshold: number;
@@ -1013,7 +1013,7 @@ declare interface ScaleUpFileSystemResponse {
 }
 
 declare interface SetUserQuotaRequest {
-  /** 文件系统 ID,通过查询文件系统列表获取 */
+  /** 文件系统 ID,通过[查询文件系统列表](https://cloud.tencent.com/document/api/582/38170)获取 */
   FileSystemId: string;
   /** 指定配额类型，包括Uid、Gid，Dir，分别代表用户配额，用户组配额，目录配额 */
   UserType: string;
@@ -1059,9 +1059,9 @@ declare interface StopMigrationTaskResponse {
 }
 
 declare interface UnbindAutoSnapshotPolicyRequest {
-  /** 需要解绑的文件系统ID列表，用"," 分割，文件系统id 通创建文件系统接口获得 */
+  /** 需要解绑的文件系统ID列表，用"," 分割，文件系统ID，通过查询文件系统列表获取；[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170) */
   FileSystemIds: string;
-  /** 解绑的快照ID，通过创建快照策略接口获得 */
+  /** 解绑的快照策略ID，可以通过[DescribeAutoSnapshotPolicies](https://cloud.tencent.com/document/api/582/80208) 查询获取 */
   AutoSnapshotPolicyId: string;
 }
 
@@ -1073,7 +1073,7 @@ declare interface UnbindAutoSnapshotPolicyResponse {
 }
 
 declare interface UpdateAutoSnapshotPolicyRequest {
-  /** 快照策略ID,查询快照策略列表获取 */
+  /** 解绑的快照策略ID，可以通过[DescribeAutoSnapshotPolicies](https://cloud.tencent.com/document/api/582/80208) 查询获取 */
   AutoSnapshotPolicyId: string;
   /** 快照策略名称，不超过64个字符 */
   PolicyName?: string;
@@ -1099,9 +1099,9 @@ declare interface UpdateAutoSnapshotPolicyResponse {
 }
 
 declare interface UpdateCfsFileSystemNameRequest {
-  /** 文件系统 ID */
+  /** 文件系统 ID,通过[查询文件系统接口](https://cloud.tencent.com/document/api/582/38170)获取 */
   FileSystemId: string;
-  /** 用户自定义文件系统名称 */
+  /** 用户自定义文件系统名称，64字节内的中文字母数字或者 _,-,与CreationToken 至少填一个 */
   FsName?: string;
 }
 
@@ -1117,9 +1117,9 @@ declare interface UpdateCfsFileSystemNameResponse {
 }
 
 declare interface UpdateCfsFileSystemPGroupRequest {
-  /** 权限组 ID，通过创建权限组接口或者创建权限组规则接口获取 */
+  /** 权限组 ID，可通过[DescribeCfsPGroups接口](https://cloud.tencent.com/document/api/582/38157)获取 */
   PGroupId: string;
-  /** 文件系统 ID，通过查询文件系统接口获取 */
+  /** 文件系统 ID，通过[查询文件系统接口](https://cloud.tencent.com/document/api/582/38170)获取 */
   FileSystemId: string;
 }
 
@@ -1145,7 +1145,7 @@ declare interface UpdateCfsFileSystemSizeLimitResponse {
 }
 
 declare interface UpdateCfsPGroupRequest {
-  /** 权限组 ID，通过创建权限组接口或者创建权限组规则接口获取 */
+  /** 权限组 ID，可通过[DescribeCfsPGroups接口](https://cloud.tencent.com/document/api/582/38157)获取 */
   PGroupId: string;
   /** 权限组名称，1-64个字符且只能为中文，字母，数字，下划线或横线 */
   Name?: string;
@@ -1165,9 +1165,9 @@ declare interface UpdateCfsPGroupResponse {
 }
 
 declare interface UpdateCfsRuleRequest {
-  /** 权限组 ID，通过创建权限组接口或者创建权限组规则接口获取 */
+  /** 权限组 ID，可通过[DescribeCfsPGroups接口](https://cloud.tencent.com/document/api/582/38157)获取 */
   PGroupId: string;
-  /** 规则 ID，通过查询权限组规则接口获取 */
+  /** 规则 ID，可通过[DescribeCfsRules](https://cloud.tencent.com/document/api/582/38156)接口获取 */
   RuleId: string;
   /** 可以填写单个 IP 或者单个网段，例如 10.1.10.11 或者 10.10.1.0/24。默认来访地址为*表示允许所有。同时需要注意，此处需填写 CVM 的内网 IP。 */
   AuthClientIp?: string;
@@ -1197,9 +1197,9 @@ declare interface UpdateCfsRuleResponse {
 }
 
 declare interface UpdateCfsSnapshotAttributeRequest {
-  /** 文件系统快照ID,查询文件系统快照列表获取 */
+  /** 快照ID，可以通过[DescribeCfsSnapshots](https://cloud.tencent.com/document/api/582/80206) 查询获取 */
   SnapshotId: string;
-  /** 文件系统快照名称，与AliveDays 必须填一个 */
+  /** 文件系统快照名称，与AliveDays 必须填一个，快照名称，支持不超过64字符长度，支持中文、数字、_、- */
   SnapshotName?: string;
   /** 文件系统快照保留天数，与SnapshotName必须填一个，如果原来是永久保留时间，不允许修改成短期有效期 */
   AliveDays?: number;
@@ -1213,7 +1213,7 @@ declare interface UpdateCfsSnapshotAttributeResponse {
 }
 
 declare interface UpdateFileSystemBandwidthLimitRequest {
-  /** 文件系统 ID,通过查询文件系统列表获取 */
+  /** 文件系统 ID,可通过[DescribeCfsFileSystems](https://cloud.tencent.com/document/api/582/38170)接口获取 */
   FileSystemId: string;
   /** 文件系统带宽，仅吞吐型可填。单位MiB/s，最小为1GiB/s，最大200GiB/s。 */
   BandwidthLimit: number;
