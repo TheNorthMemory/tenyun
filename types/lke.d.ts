@@ -360,14 +360,6 @@ declare interface Coord {
   Y?: number;
 }
 
-/** 创建智能文档解析任务的配置信息 */
-declare interface CreateReconstructDocumentFlowConfig {
-  /** Markdown文件中表格返回的形式0，表格以MD形式返回1，表格以HTML形式返回默认为1 */
-  TableResultType?: string;
-  /** 智能文档解析返回结果的格式0：只返回全文MD；1：只返回每一页的OCR原始Json；2：只返回每一页的MD，3：返回全文MD + 每一页的OCR原始Json；4：返回全文MD + 每一页的MD，默认值为3（返回全文MD + 每一页的OCR原始Json） */
-  ResultType?: string;
-}
-
 /** 临时密钥结构 */
 declare interface Credentials {
   /** token */
@@ -1782,28 +1774,6 @@ declare interface CreateQARequest {
 declare interface CreateQAResponse {
   /** 问答ID */
   QaBizId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateReconstructDocumentFlowRequest {
-  /** 文件类型。支持的文件类型：PDF、DOC、DOCX、PPT、PPTX、MD、TXT、XLS、XLSX、CSV、PNG、JPG、JPEG、BMP、GIF、WEBP、HEIC、EPS、ICNS、IM、PCX、PPM、TIFF、XBM、HEIF、JP2。 */
-  FileType?: string;
-  /** 文件的 Base64 值。支持的文件大小：所下载文件经Base64编码后不超过 8M。文件下载时间不超过 3 秒。支持的图片像素：单边介于20-10000px之间。文件的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。 */
-  FileBase64?: string;
-  /** 文件的Url地址。文件下载时间不超过15秒。支持的图片像素：单边介于20-10000px之间。文件存储于腾讯云的Url可保障更高的下载速度和稳定性，建议文件存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。所下载文件经 Base64 编码后不超过支持的文件大小： 文件类型 支持的文件大小 PDF 200M DOC 200M DOCX 200M PPT 200M PPTX 200M MD 10M TXT 10M XLS 20M XLSX 20M CSV 20M PNG 20M JPG 20M JPEG 20M BMP 20M GIF 20M WEBP 20M HEIC 20M EPS 20M ICNS 20M IM 20M PCX 20M PPM 20M TIFF 20M XBM 20M HEIF 20M JP2 20M */
-  FileUrl?: string;
-  /** 当传入文件类型为PDF、DOC、DOCX、PPT、PPTX，用来指定文件识别的起始页码，识别的页码包含当前值。默认为1，表示从文件的第1页开始识别。 */
-  FileStartPageNumber?: number;
-  /** 当传入文件类型为PDF、DOC、DOCX、PPT、PPTX，用来指定文件识别的结束页码，识别的页码包含当前值。默认为100，表示识别到文件的第100页。单次调用最多支持识别1000页内容，即FileEndPageNumber-FileStartPageNumber需要不大于1000。 */
-  FileEndPageNumber?: number;
-  /** 创建文档解析任务配置信息。 */
-  Config?: CreateReconstructDocumentFlowConfig;
-}
-
-declare interface CreateReconstructDocumentFlowResponse {
-  /** 任务唯一ID。30天内可以通过[GetReconstructDocumentResult](https://cloud.tencent.com/document/product/1759/107505)接口查询TaskId对应的处理结果。 */
-  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3773,8 +3743,6 @@ declare interface Lke {
   CreateQA(data: CreateQARequest, config?: AxiosRequestConfig): AxiosPromise<CreateQAResponse>;
   /** 创建QA分类 {@link CreateQACateRequest} {@link CreateQACateResponse} */
   CreateQACate(data: CreateQACateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQACateResponse>;
-  /** 创建文档解析任务 {@link CreateReconstructDocumentFlowRequest} {@link CreateReconstructDocumentFlowResponse} */
-  CreateReconstructDocumentFlow(data?: CreateReconstructDocumentFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReconstructDocumentFlowResponse>;
   /** 创建拒答问题 {@link CreateRejectedQuestionRequest} {@link CreateRejectedQuestionResponse} */
   CreateRejectedQuestion(data: CreateRejectedQuestionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRejectedQuestionResponse>;
   /** 创建发布 {@link CreateReleaseRequest} {@link CreateReleaseResponse} */

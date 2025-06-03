@@ -901,6 +901,10 @@ declare interface AdjustJobSpeedRequest {
   JobId: string;
   /** 目标 RPS。其取值应大于起始 RPS，并且小于最大 RPS */
   TargetRequestsPerSecond: number;
+  /** 压测项目ID */
+  ProjectId?: string;
+  /** 测试场景ID */
+  ScenarioId?: string;
 }
 
 declare interface AdjustJobSpeedResponse {

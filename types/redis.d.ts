@@ -1293,7 +1293,7 @@ declare interface CreateInstancesRequest {
   TemplateId?: string;
   /** 内部参数，标识创建实例是否需要检查。- false ：默认值。发送正常请求，通过检查后直接创建实例。- true：发送检查请求，不会创建实例。 */
   DryRun?: boolean;
-  /** 指定实例的产品版本。- local：本地盘版。- cloud：云盘版，- cdc：独享集群版。如果不传默认发货为本地盘版本。 */
+  /** 指实例部署模式。- local：传统架构，默认为 local。- cdc：独享集群。- cloud：云原生，当前已暂停售卖。 */
   ProductVersion?: string;
   /** 独享集群 ID。当**ProductVersion**设置为**cdc**时，该参数必须设置。 */
   RedisClusterId?: string;

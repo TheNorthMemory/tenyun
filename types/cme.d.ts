@@ -815,21 +815,21 @@ declare interface SortBy {
 /** 新文件生成事件 */
 declare interface StorageNewFileCreatedEvent {
   /** 云点播文件 Id。 */
-  FileId: string;
+  FileId?: string;
   /** 媒体 Id。 */
-  MaterialId: string;
+  MaterialId?: string;
   /** 操作者 Id。（废弃，请勿使用） */
-  Operator: string;
+  Operator?: string;
   /** 操作类型，可取值有：Upload：本地上传；PullUpload：拉取上传；VideoEdit：视频剪辑；LiveStreamClip：直播流剪辑；LiveStreamRecord：直播流录制。 */
-  OperationType: string;
+  OperationType?: string;
   /** 媒体归属。 */
-  Owner: Entity;
+  Owner?: Entity;
   /** 媒体分类路径。 */
-  ClassPath: string;
+  ClassPath?: string;
   /** 生成文件的任务 Id。当生成新文件是拉取上传、视频剪辑、直播流剪辑时为任务 Id。 */
-  TaskId: string;
+  TaskId?: string;
   /** 来源上下文信息。视频剪辑生成新文件时此字段为项目 Id；直播流剪辑或者直播流录制生成新文件则为原始流地址。 */
-  SourceContext: string;
+  SourceContext?: string;
 }
 
 /** 云转推输入断流信息。 */

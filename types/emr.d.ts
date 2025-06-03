@@ -2838,6 +2838,8 @@ declare interface AddUsersForUserManagerResponse {
   SuccessUserList?: string[] | null;
   /** 添加失败的用户列表 */
   FailedUserList?: string[] | null;
+  /** 流程id。大于0表示启动了流程；等于0表示没有启动流程 */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

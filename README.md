@@ -114,7 +114,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 260+ 款产品，12538+ 服务数</summary>
+<details><summary>共计 260+ 款产品，12539+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -202,7 +202,7 @@ dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/pro
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(6) |
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(22) |
 dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(79) |
-dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(147) |
+dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(148) |
 dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(88) |
 domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(55) |
 drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 2018-11-15(11) |
@@ -217,7 +217,7 @@ ecm | [边缘计算机器](https://cloud.tencent.com/document/product/1108) | 20
 eiam | [数字身份管控平台（员工版）](https://cloud.tencent.com/document/product/1442) | 2021-04-20(42) |
 eis | [数据连接器](https://cloud.tencent.com/document/product/1270) | 2021-06-01(5) | 2020-07-15(3) |
 emr | [弹性 MapReduce](https://cloud.tencent.com/document/product/589) | 2019-01-03(85) |
-es | [Elasticsearch Service](https://cloud.tencent.com/document/product/845) | 2025-01-01(10) | 2018-04-16(61) |
+es | [Elasticsearch Service](https://cloud.tencent.com/document/product/845) | 2025-01-01(9) | 2018-04-16(61) |
 ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323) | 2020-11-11(105) |
 essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(91) | 2020-12-22(53) |
 facefusion | [人脸融合](https://cloud.tencent.com/document/product/670) | 2022-09-27(3) | 2018-12-01(3) |
@@ -228,7 +228,7 @@ gaap | [全球应用加速](https://cloud.tencent.com/document/product/608) | 20
 gme | [游戏多媒体引擎](https://cloud.tencent.com/document/product/607) | 2018-07-11(28) |
 goosefs | [数据加速器 GooseFS](https://cloud.tencent.com/document/product/1424) | 2022-05-19(26) |
 gpm | [游戏玩家匹配](https://cloud.tencent.com/document/product/1294) | 2020-08-20(18) |
-gs | [云游戏](https://cloud.tencent.com/document/product/1162) | 2019-11-18(56) |
+gs | [云游戏](https://cloud.tencent.com/document/product/1162) | 2019-11-18(58) |
 gse | [游戏服务器伸缩](https://cloud.tencent.com/document/product/1165) | 2019-11-12(74) |
 gwlb | [网关负载均衡](https://cloud.tencent.com/document/product/1782) | 2024-09-06(18) |
 habo |  | 2018-12-03(2) |
@@ -260,7 +260,7 @@ kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 201
 lcic | [实时互动-教育版](https://cloud.tencent.com/document/product/1639) | 2022-08-17(70) |
 lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(107) |
 live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(195) |
-lke | [腾讯云智能体开发平台](https://cloud.tencent.com/document/product/1759) | 2023-11-30(98) |
+lke | [腾讯云智能体开发平台](https://cloud.tencent.com/document/product/1759) | 2023-11-30(97) |
 lkeap | [知识引擎原子能力](https://cloud.tencent.com/document/product/1772) | 2024-05-22(27) |
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(10) |
 mall | [商场客留大数据](https://cloud.tencent.com/document/product/1707) | 2023-05-18(1) |
@@ -271,7 +271,7 @@ mgobe | [游戏联机对战引擎](https://cloud.tencent.com/document/product/10
 mmps | [小程序安全](https://cloud.tencent.com/document/product/1223) | 2020-07-10(15) |
 mna | [多网聚合加速](https://cloud.tencent.com/document/product/1385) | 2021-01-19(40) |
 mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) | 2019-07-25(51) | 2018-04-08(13) |
-monitor | [腾讯云可观测平台](https://cloud.tencent.com/document/product/248) | 2023-06-16(1) | 2018-07-24(163) |
+monitor | [腾讯云可观测平台](https://cloud.tencent.com/document/product/248) | 2023-06-16(1) | 2018-07-24(164) |
 mps | [媒体处理](https://cloud.tencent.com/document/product/862) | 2019-06-12(131) |
 mqtt | [消息队列 MQTT 版](https://cloud.tencent.com/document/product/1778) | 2024-05-16(53) |
 mrs | [医疗报告结构化](https://cloud.tencent.com/document/product/1314) | 2020-09-10(11) |
@@ -287,7 +287,7 @@ open | 腾讯云 OAuth | 2018-12-25(2) |
 organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(127) | 2018-12-25(20) |
 partners | [渠道合作伙伴](https://cloud.tencent.com/document/product/563) | 2018-03-21(23) |
 pds | [私域安全](https://cloud.tencent.com/document/product/1473) | 2021-07-01(2) |
-postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) | 2017-03-12(104) |
+postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) | 2017-03-12(103) |
 privatedns | [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) | 2020-10-28(24) |
 pts | [云压测](https://cloud.tencent.com/document/product/1484) | 2021-07-28(48) |
 rce | [全栈式风控引擎](https://cloud.tencent.com/document/product/1343) | 2020-11-03(11) |

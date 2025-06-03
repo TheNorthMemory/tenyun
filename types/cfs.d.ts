@@ -97,9 +97,9 @@ declare interface AvailableZone {
 /** 对象存储桶 */
 declare interface BucketInfo {
   /** 桶名称 */
-  Name: string;
+  Name?: string;
   /** 桶所在地域 */
-  Region: string | null;
+  Region?: string | null;
 }
 
 /** 绑定快照策略的文件系统信息 */
@@ -230,7 +230,7 @@ declare interface MigrationTaskInfo {
   CreateTime?: number;
   /** 完成/终止时间 */
   EndTime?: number;
-  /** 迁移状态。0: 已完成；1: 进行中；2: 已终止 */
+  /** 迁移状态。0: 已完成；1: 创建中；2: 运行中；3: 终止中；4: 已终止；5: 创建失败；6: 运行失败；7: 结束中；8: 删除中；9: 等待中 */
   Status?: number;
   /** 文件数量 */
   FileTotalCount?: number;
@@ -1052,7 +1052,7 @@ declare interface StopMigrationTaskRequest {
 declare interface StopMigrationTaskResponse {
   /** 迁移任务Id */
   TaskId?: string;
-  /** 迁移状态。0: 已完成；1: 进行中；2: 已终止 */
+  /** 迁移状态。0: 已完成；1: 创建中；2: 运行中；3: 终止中；4: 已终止；5: 创建失败；6: 运行失败；7: 结束中；8: 删除中；9: 等待中 */
   Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

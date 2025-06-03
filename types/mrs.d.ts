@@ -3803,7 +3803,7 @@ declare interface DrugInstructionObjectResponse {
 }
 
 declare interface ImageMaskAsyncGetResultRequest {
-  /** 异步任务ID */
+  /** 异步任务ID1.应上传图片TaskID 仅 24 小时内有效，请于提交任务获取TaskID后24小时内调用ImageMaskAsyncGetResult接口获取结果.2.建议在获取到TaskID 后，5-10分钟后再调用 ImageMaskAsyncGetResult 接口获取脱敏结果。 */
   TaskID: string;
 }
 
@@ -3824,7 +3824,7 @@ declare interface ImageMaskAsyncRequest {
 }
 
 declare interface ImageMaskAsyncResponse {
-  /** 加密任务ID */
+  /** 加密任务ID1.因此TaskID 仅 24 小时内有效，请于提交任务获取TaskID后24小时内调用ImageMaskAsyncGetResult接口获取结果.2.建议在获取到TaskID 后，5-10分钟后再调用 ImageMaskAsyncGetResult 接口获取脱敏结果。 */
   TaskID?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

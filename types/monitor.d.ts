@@ -1853,7 +1853,7 @@ declare namespace V20180724 {
   interface PrometheusClusterAgentBasic {
     /** 地域 */
     Region: string;
-    /** 集群类型。可填入tke、eks、tkeedge、tdcc，分别代表标准集群、弹性集群、边缘集群、注册集群 */
+    /** 集群类型。可填入tke、eks、tkeedge、tdcc、external，分别代表标准集群、弹性集群、边缘集群、注册集群 和外部集群 */
     ClusterType: string;
     /** 集群 ID */
     ClusterId: string;
@@ -3843,6 +3843,20 @@ declare namespace V20180724 {
     RequestId?: string;
   }
 
+  interface DescribeExternalClusterRegisterCommandRequest {
+    /** 实例 ID */
+    InstanceId: string;
+    /** 集群 ID */
+    ClusterId: string;
+  }
+
+  interface DescribeExternalClusterRegisterCommandResponse {
+    /** 注册命令 */
+    Command?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeGrafanaChannelsRequest {
     /** Grafana 实例 ID，例如：grafana-12345678 */
     InstanceId: string;
@@ -5729,6 +5743,8 @@ declare interface Monitor {
   DescribeDNSConfig(data: V20180724.DescribeDNSConfigRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeDNSConfigResponse>;
   /** 查询 exporter 集成列表 {@link V20180724.DescribeExporterIntegrationsRequest} {@link V20180724.DescribeExporterIntegrationsResponse} */
   DescribeExporterIntegrations(data: V20180724.DescribeExporterIntegrationsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeExporterIntegrationsResponse>;
+  /** 查看外部集群注册命令 {@link V20180724.DescribeExternalClusterRegisterCommandRequest} {@link V20180724.DescribeExternalClusterRegisterCommandResponse} */
+  DescribeExternalClusterRegisterCommand(data: V20180724.DescribeExternalClusterRegisterCommandRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeExternalClusterRegisterCommandResponse>;
   /** 列出 Grafana 所有告警通道 {@link V20180724.DescribeGrafanaChannelsRequest} {@link V20180724.DescribeGrafanaChannelsResponse} */
   DescribeGrafanaChannels(data: V20180724.DescribeGrafanaChannelsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeGrafanaChannelsResponse>;
   /** 列出 Grafana 的设置 {@link V20180724.DescribeGrafanaConfigRequest} {@link V20180724.DescribeGrafanaConfigResponse} */

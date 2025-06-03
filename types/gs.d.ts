@@ -148,6 +148,16 @@ declare interface AndroidInstanceTaskStatus {
   CompleteTime?: string;
 }
 
+/** 安卓实例上传文件信息 */
+declare interface AndroidInstanceUploadFile {
+  /** 安卓实例 ID */
+  AndroidInstanceId?: string;
+  /** 文件上传 URL */
+  FileURL?: string;
+  /** 上传目标目录，只能上传到 /sdcard/ 目录或其子目录下 */
+  DestinationDirectory?: string;
+}
+
 /** COS协议参数 */
 declare interface COSOptions {
   /** 存储桶 */
@@ -664,6 +674,22 @@ declare interface DestroyAndroidInstancesResponse {
   RequestId?: string;
 }
 
+declare interface DistributeFileToAndroidInstancesRequest {
+  /** 安卓实例 ID 列表 */
+  AndroidInstanceIds: string[];
+  /** 文件下载 URL */
+  FileURL: string;
+  /** 上传目标目录，只能上传到 /sdcard/ 目录或其子目录下 */
+  DestinationDirectory: string;
+}
+
+declare interface DistributeFileToAndroidInstancesResponse {
+  /** 实例任务集合 */
+  TaskSet?: AndroidInstanceTask[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ExecuteCommandOnAndroidInstancesRequest {
   /** 安卓实例 ID 列表 */
   AndroidInstanceIds: string[];
@@ -1110,6 +1136,18 @@ declare interface UploadFileToAndroidInstancesResponse {
   RequestId?: string;
 }
 
+declare interface UploadFilesToAndroidInstancesRequest {
+  /** 上传文件信息列表 */
+  Files?: AndroidInstanceUploadFile[];
+}
+
+declare interface UploadFilesToAndroidInstancesResponse {
+  /** 实例任务集合 */
+  TaskSet?: AndroidInstanceTask[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Gs 云游戏} */
 declare interface Gs {
   (): Versions;
@@ -1163,6 +1201,8 @@ declare interface Gs {
   DescribeInstancesCount(data?: DescribeInstancesCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesCountResponse>;
   /** 销毁安卓实例 {@link DestroyAndroidInstancesRequest} {@link DestroyAndroidInstancesResponse} */
   DestroyAndroidInstances(data: DestroyAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyAndroidInstancesResponse>;
+  /** 分发文件到安卓实例 {@link DistributeFileToAndroidInstancesRequest} {@link DistributeFileToAndroidInstancesResponse} */
+  DistributeFileToAndroidInstances(data: DistributeFileToAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DistributeFileToAndroidInstancesResponse>;
   /** 在安卓实例上异步执行命令 {@link ExecuteCommandOnAndroidInstancesRequest} {@link ExecuteCommandOnAndroidInstancesResponse} */
   ExecuteCommandOnAndroidInstances(data: ExecuteCommandOnAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteCommandOnAndroidInstancesResponse>;
   /** 批量获取安卓实例日志 {@link FetchAndroidInstancesLogsRequest} {@link FetchAndroidInstancesLogsResponse} */
@@ -1225,6 +1265,8 @@ declare interface Gs {
   UninstallAndroidInstancesApp(data: UninstallAndroidInstancesAppRequest, config?: AxiosRequestConfig): AxiosPromise<UninstallAndroidInstancesAppResponse>;
   /** 上传文件到安卓实例 {@link UploadFileToAndroidInstancesRequest} {@link UploadFileToAndroidInstancesResponse} */
   UploadFileToAndroidInstances(data: UploadFileToAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<UploadFileToAndroidInstancesResponse>;
+  /** 批量上传文件到安卓实例 {@link UploadFilesToAndroidInstancesRequest} {@link UploadFilesToAndroidInstancesResponse} */
+  UploadFilesToAndroidInstances(data?: UploadFilesToAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<UploadFilesToAndroidInstancesResponse>;
 }
 
 export declare type Versions = ["2019-11-18"];

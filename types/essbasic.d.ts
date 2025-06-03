@@ -344,7 +344,7 @@ declare interface Component {
   Placeholder?: string;
   /** **web嵌入发起合同场景下**， 是否锁定填写和签署控件值不允许嵌入页面进行编辑false（默认）：不锁定控件值，允许在页面编辑控件值true：锁定控件值，在页面编辑控件值 */
   LockComponentValue?: boolean;
-  /** **web嵌入发起合同场景下**，是否禁止移动和删除填写和签署控件 false（默认） :不禁止移动和删除控件 true : 可以移动和删除控件 */
+  /** **web嵌入发起合同场景下**，是否禁止移动和删除填写和签署控件 false（默认） :可以移动和删除控件 true : 禁止移动和删除控件 */
   ForbidMoveAndDelete?: boolean;
 }
 

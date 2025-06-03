@@ -144,20 +144,6 @@ declare interface WebContent {
   Score?: string;
 }
 
-/** 网页搜索结果 */
-declare interface WebPage {
-  /** 标题 */
-  Title?: string;
-  /** url */
-  Url?: string;
-  /** 网页摘要 */
-  Summary?: string | null;
-  /** 网页收录时间。可能为空。 */
-  Time?: string | null;
-  /** Markdown 格式的网页正文 */
-  Content?: string | null;
-}
-
 declare interface ChatCompletionsRequest {
   /** 会话内容，按对话时间从旧到新在数组中排列，长度受模型窗口大小限制。 */
   Messages: Message[];
@@ -318,40 +304,6 @@ declare interface RunRerankResponse {
   Data?: RerankResult[];
   /** 消耗token数量。 */
   Usage?: Usage;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface WebSearchRequest {
-  /** 查询 */
-  Query: string;
-  /** 搜索的网页数量，默认20 */
-  Count?: number;
-  /** 指定域名，gov.cn 可匹配 *.gov.cn的域名。 */
-  Site?: string;
-  /** 是否获取返回网页全文，默认 false。 */
-  FetchContent?: boolean;
-  /** 域名白名单，在不指定 Site 时，只保存匹配白名单域名的网页。 */
-  WhiteSites?: string[];
-  /** 域名黑名单，在不指定 Site 和白名单时，过滤黑名单中的域名。 */
-  BlackSites?: string[];
-  /** 秒级时间戳，搜索网页的开始时间，默认不限制开始时间。 */
-  StartTime?: number;
-  /** 秒级时间戳，搜索网页的结束时间，默认为现在。 */
-  EndTime?: number;
-  /** 指定搜索引擎，可选混合搜索 mixed，或 bing, baidu, sogou, 默认为 sogou */
-  SearchEngine?: string;
-}
-
-declare interface WebSearchResponse {
-  /** 查询 */
-  Query?: string;
-  /** 响应状态 */
-  Status?: string;
-  /** 执行搜索的引擎 */
-  SearchEngine?: string;
-  /** 搜索结果 */
-  Results?: WebPage[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3177,8 +3129,6 @@ declare interface Es {
   ParseDocumentAsync(data: ParseDocumentAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<ParseDocumentAsyncResponse>;
   /** 重排序 {@link RunRerankRequest} {@link RunRerankResponse} */
   RunRerank(data: RunRerankRequest, config?: AxiosRequestConfig): AxiosPromise<RunRerankResponse>;
-  /** 网页搜索 {@link WebSearchRequest} {@link WebSearchResponse} */
-  WebSearch(data: WebSearchRequest, config?: AxiosRequestConfig): AxiosPromise<WebSearchResponse>;
   /** 检查cos迁移索引元数据 {@link V20180416.CheckMigrateIndexMetaDataRequest} {@link V20180416.CheckMigrateIndexMetaDataResponse} */
   CheckMigrateIndexMetaData(data: V20180416.CheckMigrateIndexMetaDataRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.CheckMigrateIndexMetaDataResponse>;
   /** 创建集群快照 {@link V20180416.CreateClusterSnapshotRequest} {@link V20180416.CreateClusterSnapshotResponse} */

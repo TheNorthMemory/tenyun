@@ -3553,6 +3553,8 @@ declare interface DescribeDatabasesRequest {
   Sort?: string;
   /** 排序类型：false：降序（默认）、true：升序 */
   Asc?: boolean;
+  /** 查询类型：all：全部数据（默认）、permission：有权限的数据注意：此字段需要开启白名单使用，如果需要使用，请提交工单联系我们。 */
+  DescribeType?: string;
 }
 
 declare interface DescribeDatabasesResponse {
@@ -3976,6 +3978,14 @@ declare interface DescribeSubUserAccessPolicyResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTablePartitionsRequest {
+}
+
+declare interface DescribeTablePartitionsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTableRequest {
   /** 查询对象表名称 */
   TableName: string;
@@ -4049,6 +4059,8 @@ declare interface DescribeTablesRequest {
   TableType?: string;
   /** 筛选字段-表格式：不传（默认）为查全部；LAKEFS：托管表；ICEBERG：非托管iceberg表；HIVE：非托管hive表；OTHER：非托管其它； */
   TableFormat?: string;
+  /** 查询类型：all：全部数据（默认）、permission：有权限的数据注意：此字段需要开启白名单使用，如果需要使用，请提交工单联系我们。 */
+  DescribeType?: string;
 }
 
 declare interface DescribeTablesResponse {
@@ -4393,6 +4405,8 @@ declare interface DescribeViewsRequest {
   StartTime?: string;
   /** 按视图更新时间筛选，结束时间，如2021-11-12 00:00:00 */
   EndTime?: string;
+  /** 查询类型：all：全部数据（默认）、permission：有权限的数据注意：此字段需要开启白名单使用，如果需要使用，请提交工单联系我们。 */
+  DescribeType?: string;
 }
 
 declare interface DescribeViewsResponse {
@@ -5279,6 +5293,8 @@ declare interface Dlc {
   DescribeSubUserAccessPolicy(data?: DescribeSubUserAccessPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubUserAccessPolicyResponse>;
   /** 查询表详情 {@link DescribeTableRequest} {@link DescribeTableResponse} */
   DescribeTable(data: DescribeTableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableResponse>;
+  /** 查询表分区信息 {@link DescribeTablePartitionsRequest} {@link DescribeTablePartitionsResponse} */
+  DescribeTablePartitions(data?: DescribeTablePartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablePartitionsResponse>;
   /** 查询数据表列表 {@link DescribeTablesRequest} {@link DescribeTablesResponse} */
   DescribeTables(data: DescribeTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesResponse>;
   /** 查询数据表名称列表 {@link DescribeTablesNameRequest} {@link DescribeTablesNameResponse} */

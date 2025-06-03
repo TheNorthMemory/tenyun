@@ -300,7 +300,7 @@ declare interface Component {
   KeywordIndexes?: number[];
   /** **web嵌入发起合同场景下**， 是否锁定填写和签署控件值不允许嵌入页面进行编辑false（默认）：不锁定控件值，允许在页面编辑控件值true：锁定控件值，在页面编辑控件值 */
   LockComponentValue?: boolean;
-  /** **web嵌入发起合同场景下**，是否禁止移动和删除填写和签署控件 false（默认） :不禁止移动和删除控件 true : 可以移动和删除控件 */
+  /** **web嵌入发起合同场景下**，是否禁止移动和删除填写和签署控件 false（默认） :可以移动和删除控件 true : 禁止移动和删除控件 */
   ForbidMoveAndDelete?: boolean;
   /** 【暂未使用】日期签署控件的字号，默认为 12 */
   ComponentDateFontSize?: number;
@@ -344,9 +344,9 @@ declare interface CreateFlowOption {
   ForbidEditApprover?: boolean;
   /** 禁止设置设置签署流程属性 (顺序、合同签署认证方式等)，若为true则在发起流程的可嵌入页面隐藏签署流程设置面板 */
   ForbidEditFlowProperties?: boolean;
-  /** 在发起流程的可嵌入页面要隐藏的控件列表，和 ShowComponentTypes 参数 只能二选一使用，具体的控件类型如下SIGN_SIGNATURE : 个人签名/印章SIGN_SEAL : 企业印章SIGN_PAGING_SEAL : 骑缝章SIGN_LEGAL_PERSON_SEAL : 法定代表人章SIGN_APPROVE : 签批SIGN_OPINION : 签署意见BUSI-FULL-NAME : 企业全称BUSI-CREDIT-CODE : 统一社会信用代码BUSI-LEGAL-NAME : 法人/经营者姓名PERSONAL-NAME : 签署人姓名PERSONAL-MOBILE : 签署人手机号PERSONAL-IDCARD-TYPE : 签署人证件类型PERSONAL-IDCARD : 签署人证件号TEXT : 单行文本MULTI_LINE_TEXT : 多行文本CHECK_BOX : 勾选框SELECTOR : 选择器DIGIT : 数字DATE : 日期FILL_IMAGE : 图片ATTACHMENT : 附件EMAIL : 邮箱LOCATION : 地址EDUCATION : 学历GENDER : 性别DISTRICT : 省市区 */
+  /** 在发起流程的可嵌入页面要隐藏的控件列表，和 ShowComponentTypes 参数 只能二选一使用（注: 空数组代表未指定），具体的控件类型如下SIGN_SIGNATURE : 个人签名/印章SIGN_SEAL : 企业印章SIGN_PAGING_SEAL : 骑缝章SIGN_LEGAL_PERSON_SEAL : 法定代表人章SIGN_APPROVE : 签批SIGN_OPINION : 签署意见SIGN_PAGING_SIGNATURE : 手写签名骑缝控件BUSI-FULL-NAME : 企业全称BUSI-CREDIT-CODE : 统一社会信用代码BUSI-LEGAL-NAME : 法人/经营者姓名PERSONAL-NAME : 签署人姓名PERSONAL-MOBILE : 签署人手机号PERSONAL-IDCARD-TYPE : 签署人证件类型PERSONAL-IDCARD : 签署人证件号TEXT : 单行文本MULTI_LINE_TEXT : 多行文本CHECK_BOX : 勾选框SELECTOR : 选择器DIGIT : 数字DATE : 日期FILL_IMAGE : 图片ATTACHMENT : 附件EMAIL : 邮箱LOCATION : 地址EDUCATION : 学历GENDER : 性别DISTRICT : 省市区 */
   HideComponentTypes?: string[];
-  /** 在发起流程的可嵌入页面要显示的控件列表，和 HideComponentTypes 参数 只能二选一使用，具体的控件类型如下SIGN_SIGNATURE : 个人签名/印章SIGN_SEAL : 企业印章SIGN_PAGING_SEAL : 骑缝章SIGN_LEGAL_PERSON_SEAL : 法定代表人章SIGN_APPROVE : 签批SIGN_OPINION : 签署意见BUSI-FULL-NAME : 企业全称BUSI-CREDIT-CODE : 统一社会信用代码BUSI-LEGAL-NAME : 法人/经营者姓名PERSONAL-NAME : 签署人姓名PERSONAL-MOBILE : 签署人手机号PERSONAL-IDCARD-TYPE : 签署人证件类型PERSONAL-IDCARD : 签署人证件号TEXT : 单行文本MULTI_LINE_TEXT : 多行文本CHECK_BOX : 勾选框SELECTOR : 选择器DIGIT : 数字DATE : 日期FILL_IMAGE : 图片ATTACHMENT : 附件EMAIL : 邮箱LOCATION : 地址EDUCATION : 学历GENDER : 性别DISTRICT : 省市区 */
+  /** 在发起流程的可嵌入页面要显示的控件列表，和 HideComponentTypes 参数 只能二选一使用（注: 空数组代表未指定），具体的控件类型如下SIGN_SIGNATURE : 个人签名/印章SIGN_SEAL : 企业印章SIGN_PAGING_SEAL : 骑缝章SIGN_LEGAL_PERSON_SEAL : 法定代表人章SIGN_APPROVE : 签批SIGN_OPINION : 签署意见SIGN_PAGING_SIGNATURE : 手写签名骑缝控件BUSI-FULL-NAME : 企业全称BUSI-CREDIT-CODE : 统一社会信用代码BUSI-LEGAL-NAME : 法人/经营者姓名PERSONAL-NAME : 签署人姓名PERSONAL-MOBILE : 签署人手机号PERSONAL-IDCARD-TYPE : 签署人证件类型PERSONAL-IDCARD : 签署人证件号TEXT : 单行文本MULTI_LINE_TEXT : 多行文本CHECK_BOX : 勾选框SELECTOR : 选择器DIGIT : 数字DATE : 日期FILL_IMAGE : 图片ATTACHMENT : 附件EMAIL : 邮箱LOCATION : 地址EDUCATION : 学历GENDER : 性别DISTRICT : 省市区 */
   ShowComponentTypes?: string[];
   /** 发起流程的可嵌入页面结果页配置 */
   ResultPageConfig?: CreateResultPageConfig[];
