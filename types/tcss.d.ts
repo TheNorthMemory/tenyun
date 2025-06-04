@@ -626,6 +626,8 @@ declare interface ClusterInfoItem {
   ClusterAuditStatus?: string;
   /** 集群审计开关失败信息 */
   ClusterAuditFailedInfo?: string;
+  /** 所有者名称 */
+  OwnerName?: string;
 }
 
 /** 集群的节点信息 */
@@ -2774,6 +2776,10 @@ declare interface RiskDnsEventInfo {
   NodeUniqueID?: string;
   /** 集群名称 */
   ClusterName?: string;
+  /** 镜像ID */
+  ImageId?: string;
+  /** 容器ID */
+  ContainerId?: string;
 }
 
 /** 运行时容器高危系统调用事件描述信息 */
@@ -2970,6 +2976,8 @@ declare interface RunTimeEventBaseInfo {
   Namespace?: string;
   /** WorkloadType */
   WorkloadType?: string;
+  /** 容器运行状态 */
+  ContainerStatus?: string;
 }
 
 /** 容器安全描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
@@ -3410,6 +3418,8 @@ declare interface VirusInfo {
   HostID?: string;
   /** 集群名称 */
   ClusterName?: string;
+  /** 节点内网IP，同innerIP */
+  HostIP?: string;
 }
 
 /** 运行时文件查杀任务容器列表信息 */
@@ -5169,6 +5179,10 @@ declare interface DeleteK8sApiAbnormalRuleResponse {
 declare interface DeleteMachineRequest {
   /** 客户端Uuid */
   Uuid: string;
+  /** 超级节点唯一id */
+  NodeUniqueIds?: string[];
+  /** uuid列表 */
+  UUIDs?: string[];
 }
 
 declare interface DeleteMachineResponse {
@@ -5438,6 +5452,10 @@ declare interface DescribeAccessControlEventsResponse {
   TotalCount?: number;
   /** 访问控制事件数组 */
   EventSet?: AccessControlEventInfo[];
+  /** 支持的内核版本 */
+  SupportCoreVersion?: string;
+  /** 拦截失败可能的原因 */
+  InterceptionFailureTip?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6110,7 +6128,7 @@ declare interface DescribeAssetImageRegistryDetailResponse {
 
 declare interface DescribeAssetImageRegistryListExportRequest {
   /** 导出字段 */
-  ExportField: string[];
+  ExportField?: string[];
   /** 需要返回的数量，默认为10，最大值为100 */
   Limit?: number;
   /** 偏移量，默认为0 */
@@ -6128,6 +6146,8 @@ declare interface DescribeAssetImageRegistryListExportRequest {
 declare interface DescribeAssetImageRegistryListExportResponse {
   /** excel文件下载地址 */
   DownloadUrl?: string;
+  /** 导出任务id */
+  JobId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6316,7 +6336,7 @@ declare interface DescribeAssetImageRegistrySummaryResponse {
 
 declare interface DescribeAssetImageRegistryVirusListExportRequest {
   /** 导出字段 */
-  ExportField: string[];
+  ExportField?: string[];
   /** 需要返回的数量，默认为10，最大值为100 */
   Limit?: number;
   /** 偏移量，默认为0。 */
@@ -6332,6 +6352,8 @@ declare interface DescribeAssetImageRegistryVirusListExportRequest {
 declare interface DescribeAssetImageRegistryVirusListExportResponse {
   /** excel文件下载地址 */
   DownloadUrl?: string;
+  /** 导出任务id */
+  JobId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6360,7 +6382,7 @@ declare interface DescribeAssetImageRegistryVirusListResponse {
 
 declare interface DescribeAssetImageRegistryVulListExportRequest {
   /** 导出字段 */
-  ExportField: string[];
+  ExportField?: string[];
   /** 需要返回的数量，默认为10，最大值为100 */
   Limit?: number;
   /** 偏移量，默认为0。 */
@@ -6376,6 +6398,8 @@ declare interface DescribeAssetImageRegistryVulListExportRequest {
 declare interface DescribeAssetImageRegistryVulListExportResponse {
   /** excel文件下载地址 */
   DownloadUrl?: string;
+  /** 导出任务id */
+  JobId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6758,6 +6782,10 @@ declare interface DescribeAssetSyncLastTimeResponse {
   TaskStatus?: string;
   /** 任务进度(百分比) */
   TaskProcess?: number;
+  /** 失败主机数 */
+  FailedHostCount?: number;
+  /** 任务id */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6878,6 +6906,8 @@ declare interface DescribeClusterDetailResponse {
   IngressCount?: number;
   /** 主节点的ip列表 */
   MasterIps?: string;
+  /** 所有者名称 */
+  OwnerName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9294,6 +9324,8 @@ declare interface DescribeVirusDetailResponse {
   Namespace?: string;
   /** 工作负载类型 */
   WorkloadType?: string;
+  /** 容器状态 */
+  ContainerStatus?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11102,7 +11134,7 @@ declare interface Tcss {
   /** 镜像仓库查询镜像仓库列表 {@link DescribeAssetImageRegistryListRequest} {@link DescribeAssetImageRegistryListResponse} */
   DescribeAssetImageRegistryList(data?: DescribeAssetImageRegistryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryListResponse>;
   /** 镜像仓库镜像列表导出 {@link DescribeAssetImageRegistryListExportRequest} {@link DescribeAssetImageRegistryListExportResponse} */
-  DescribeAssetImageRegistryListExport(data: DescribeAssetImageRegistryListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryListExportResponse>;
+  DescribeAssetImageRegistryListExport(data?: DescribeAssetImageRegistryListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryListExportResponse>;
   /** 查看单个镜像仓库详细信息 {@link DescribeAssetImageRegistryRegistryDetailRequest} {@link DescribeAssetImageRegistryRegistryDetailResponse} */
   DescribeAssetImageRegistryRegistryDetail(data: DescribeAssetImageRegistryRegistryDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryRegistryDetailResponse>;
   /** 镜像仓库仓库列表 {@link DescribeAssetImageRegistryRegistryListRequest} {@link DescribeAssetImageRegistryRegistryListResponse} */
@@ -11118,11 +11150,11 @@ declare interface Tcss {
   /** 镜像仓库查询木马病毒列表 {@link DescribeAssetImageRegistryVirusListRequest} {@link DescribeAssetImageRegistryVirusListResponse} */
   DescribeAssetImageRegistryVirusList(data?: DescribeAssetImageRegistryVirusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryVirusListResponse>;
   /** 镜像仓库木马信息列表导出 {@link DescribeAssetImageRegistryVirusListExportRequest} {@link DescribeAssetImageRegistryVirusListExportResponse} */
-  DescribeAssetImageRegistryVirusListExport(data: DescribeAssetImageRegistryVirusListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryVirusListExportResponse>;
+  DescribeAssetImageRegistryVirusListExport(data?: DescribeAssetImageRegistryVirusListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryVirusListExportResponse>;
   /** 镜像仓库查询镜像漏洞列表 {@link DescribeAssetImageRegistryVulListRequest} {@link DescribeAssetImageRegistryVulListResponse} */
   DescribeAssetImageRegistryVulList(data?: DescribeAssetImageRegistryVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryVulListResponse>;
   /** 镜像仓库漏洞列表导出 {@link DescribeAssetImageRegistryVulListExportRequest} {@link DescribeAssetImageRegistryVulListExportResponse} */
-  DescribeAssetImageRegistryVulListExport(data: DescribeAssetImageRegistryVulListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryVulListExportResponse>;
+  DescribeAssetImageRegistryVulListExport(data?: DescribeAssetImageRegistryVulListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryVulListExportResponse>;
   /** 查询镜像风险列表 {@link DescribeAssetImageRiskListRequest} {@link DescribeAssetImageRiskListResponse} */
   DescribeAssetImageRiskList(data: DescribeAssetImageRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRiskListResponse>;
   /** 镜像风险列表导出 {@link DescribeAssetImageRiskListExportRequest} {@link DescribeAssetImageRiskListExportResponse} */

@@ -3953,7 +3953,7 @@ declare interface CreateFlowLogRequest {
   VpcId?: string;
   /** 流日志实例描述。长度不超过512个字符。 */
   FlowLogDescription?: string;
-  /** 流日志存储ID（cls的日志主题ID，可通过[DescribeTopics](https://cloud.tencent.com/document/product/614/56454)接口获取。）。当StorageType为cls时，CloudLogId为必选。 */
+  /** 流日志存储ID（cls的日志主题ID，可通过[DescribeTopics](https://cloud.tencent.com/document/product/614/56454)接口获取）。当StorageType为cls时，CloudLogId为必选。 */
   CloudLogId?: string;
   /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
   Tags?: Tag[];
@@ -6295,7 +6295,7 @@ declare interface DescribeIpGeolocationInfosResponse {
 }
 
 declare interface DescribeLocalGatewayRequest {
-  /** 支持的过滤条件如下:\nvpc-id:按照VPCID过滤。\nlocal-gateway-name:本地网关名称,支持模糊查询。\nlocal-gateway-id:本地网关实例ID。\ncdc-id:cdc实例ID。 */
+  /** 支持的过滤条件如下:vpc-id:按照VPCID过滤。local-gateway-name:本地网关名称,支持模糊查询。local-gateway-id:本地网关实例ID。cdc-id:cdc实例ID。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/11646)中的相关小节。 */
   Offset?: number;

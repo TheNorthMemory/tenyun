@@ -1617,11 +1617,13 @@ declare interface DescribeJobEventsRequest {
 
 declare interface DescribeJobEventsResponse {
   /** 该作业指定范围内的事件列表 */
-  Events: JobEvent[] | null;
+  Events?: JobEvent[] | null;
   /** 该作业指定范围内运行实例 ID 数组，仅当入参没有传入 RunningOrderIds 参数时才会返回。倒序输出 */
-  RunningOrderIds: number[] | null;
+  RunningOrderIds?: number[] | null;
   /** 事件的总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
+  /** 实例对应的版本 */
+  Versions?: number[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

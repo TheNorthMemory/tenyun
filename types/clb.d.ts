@@ -544,6 +544,20 @@ declare interface LBItem {
   Region?: string;
 }
 
+/** 负载均衡的操作保护信息 */
+declare interface LBOperateProtectInfo {
+  /** 负载均衡实例 ID。 */
+  LoadBalancerId: string;
+  /** 保护状态，true：表示开启了操作保护，false：表示未开启操作保护。 */
+  ProtectState: boolean;
+  /** 操作保护的设置uin。 */
+  OperatorUin: string | null;
+  /** 设置操作保护时的描述信息。 */
+  Description: string | null;
+  /** 最后修改时间。 */
+  ModifyTime: string | null;
+}
+
 /** 查询类型 */
 declare interface LbRsItem {
   /** vpc的字符串id，只支持字符串id。可以通过 [DescribeVpcs](https://cloud.tencent.com/document/api/215/15778) 接口查询。 */
@@ -2126,6 +2140,18 @@ declare interface DescribeLBListenersResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLBOperateProtectRequest {
+  /** 负载均衡实例ID。 */
+  LoadBalancerIds: string[];
+}
+
+declare interface DescribeLBOperateProtectResponse {
+  /** 返回的负载均衡操作保护信息数组。 */
+  LoadBalancerSet: LBOperateProtectInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeListenersRequest {
   /** 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/api/214/30685) 接口获取。 */
   LoadBalancerId: string;
@@ -3101,6 +3127,8 @@ declare interface Clb {
   DescribeIdleLoadBalancers(data?: DescribeIdleLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIdleLoadBalancersResponse>;
   /** 查询后端云主机或弹性网卡绑定的负载均衡 {@link DescribeLBListenersRequest} {@link DescribeLBListenersResponse} */
   DescribeLBListeners(data: DescribeLBListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLBListenersResponse>;
+  /** 查询负载均衡操作保护 {@link DescribeLBOperateProtectRequest} {@link DescribeLBOperateProtectResponse} */
+  DescribeLBOperateProtect(data: DescribeLBOperateProtectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLBOperateProtectResponse>;
   /** 查询负载均衡的监听器列表 {@link DescribeListenersRequest} {@link DescribeListenersResponse} */
   DescribeListeners(data: DescribeListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListenersResponse>;
   /** 根据证书ID查询负载均衡 {@link DescribeLoadBalancerListByCertIdRequest} {@link DescribeLoadBalancerListByCertIdResponse} */

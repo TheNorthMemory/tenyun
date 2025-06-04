@@ -1066,6 +1066,8 @@ declare interface InspectionTaskSettings {
   Selected?: string;
   /** 是否开启监控 */
   Enable?: string;
+  /** 事件Json模板 */
+  SettingsJson?: string;
 }
 
 /** 实例预付费参数，只有在付费类型为PREPAID时生效。 */
@@ -1638,6 +1640,8 @@ declare interface OverviewRow {
   StoreFileSize?: number;
   /** regions，点击可跳转 */
   Operation?: string;
+  /** StoreFile数量 */
+  StoreFileNum?: number;
 }
 
 /** 用于创建集群价格清单-节点组成部分价格 */

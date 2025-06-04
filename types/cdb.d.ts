@@ -796,9 +796,9 @@ declare interface HistoryJob {
   OperationType?: string;
   /** 扩容类型 */
   ExpandType?: string;
-  /** 扩容开始时间 */
+  /** 扩容开始时间说明：此项显示的格式是 int 类型的 unix 时间戳 */
   StartTime?: number;
-  /** 扩容结束时间 */
+  /** 扩容结束时间说明：此项显示的格式是 int 类型的 unix 时间戳 */
   EndTime?: number;
   /** 扩容前核数 */
   OldCpu?: number;

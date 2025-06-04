@@ -40,6 +40,8 @@ declare interface AndroidAppVersionInfo {
   Command?: string;
   /** shell 卸载命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效） */
   UninstallCommand?: string;
+  /** 应用资源清理模式（实例安装应用所用资源），取值：CLEANUP_ON_UNINSTALL（默认值），卸载 App 时清理；CLEANUP_AFTER_INSTALL，安装 App 后立即清理。普通应用只有 CLEANUP_AFTER_INSTALL 模式。 */
+  CleanupMode?: string;
 }
 
 /** 安卓实例信息 */
@@ -94,6 +96,14 @@ declare interface AndroidInstanceAppInfo {
   PackageLabel?: string;
 }
 
+/** 安卓实例设备信息 */
+declare interface AndroidInstanceDevice {
+  /** 品牌 */
+  Brand: string;
+  /** 型号 */
+  Model: string;
+}
+
 /** 安卓实例镜像信息 */
 declare interface AndroidInstanceImage {
   /** 镜像 ID */
@@ -120,6 +130,14 @@ declare interface AndroidInstanceLabel {
   Key: string;
   /** 标签值 */
   Value: string;
+}
+
+/** 安卓实例属性 */
+declare interface AndroidInstanceProperty {
+  /** 属性键 */
+  Key: string;
+  /** 属性值 */
+  Value?: string;
 }
 
 /** 安卓实例任务信息 */
@@ -297,11 +315,33 @@ declare interface CreateAndroidAppVersionRequest {
   Command?: string;
   /** 应用 shell 卸载命令（支持多条命令执行，通过 && 组合；只在应用 AppMode 为 ADVANCED 高级模式下 才会生效） */
   UninstallCommand?: string;
+  /** 应用资源清理模式（实例安装应用所用资源），取值：CLEANUP_ON_UNINSTALL（默认值），卸载 App 时清理；CLEANUP_AFTER_INSTALL，安装 App 后立即清理。普通应用只有 CLEANUP_AFTER_INSTALL 模式。 */
+  CleanupMode?: string;
 }
 
 declare interface CreateAndroidAppVersionResponse {
   /** 应用版本 */
   AndroidAppVersion?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAndroidInstanceADBRequest {
+  /** 安卓实例 ID */
+  AndroidInstanceId: string;
+}
+
+declare interface CreateAndroidInstanceADBResponse {
+  /** 连接私钥，需要保存为文件形式，例如 private_key.pem */
+  PrivateKey?: string;
+  /** 用户名称 */
+  UserName?: string;
+  /** 连接地址 */
+  HostName?: string;
+  /** 连接端口 */
+  Port?: number;
+  /** 连接参考命令 */
+  ConnectCommand?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -738,6 +778,20 @@ declare interface InstallAndroidInstancesAppResponse {
   RequestId?: string;
 }
 
+declare interface InstallAndroidInstancesAppWithURLRequest {
+  /** 实例ID */
+  AndroidInstanceIds: string[];
+  /** 安卓应用下载 URL */
+  AndroidAppURL: string;
+}
+
+declare interface InstallAndroidInstancesAppWithURLResponse {
+  /** 任务集合 */
+  TaskSet?: AndroidInstanceTask[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAndroidAppRequest {
   /** 安卓应用 Id */
   AndroidAppId: string;
@@ -822,6 +876,20 @@ declare interface ModifyAndroidInstancesLabelsRequest {
 }
 
 declare interface ModifyAndroidInstancesLabelsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAndroidInstancesPropertiesRequest {
+  /** 安卓实例 ID 列表 */
+  AndroidInstanceIds: string[];
+  /** 安卓实例设备 */
+  AndroidInstanceDevice?: AndroidInstanceDevice;
+  /** 安卓实例其它属性列表 */
+  AndroidInstanceProperties?: AndroidInstanceProperty[];
+}
+
+declare interface ModifyAndroidInstancesPropertiesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1161,6 +1229,8 @@ declare interface Gs {
   CreateAndroidApp(data: CreateAndroidAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidAppResponse>;
   /** 创建安卓应用版本 {@link CreateAndroidAppVersionRequest} {@link CreateAndroidAppVersionResponse} */
   CreateAndroidAppVersion(data: CreateAndroidAppVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidAppVersionResponse>;
+  /** 创建安卓实例 ADB 连接 {@link CreateAndroidInstanceADBRequest} {@link CreateAndroidInstanceADBResponse} */
+  CreateAndroidInstanceADB(data: CreateAndroidInstanceADBRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidInstanceADBResponse>;
   /** 创建安卓实例镜像 {@link CreateAndroidInstanceImageRequest} {@link CreateAndroidInstanceImageResponse} */
   CreateAndroidInstanceImage(data: CreateAndroidInstanceImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidInstanceImageResponse>;
   /** 创建安卓实例标签 {@link CreateAndroidInstanceLabelRequest} {@link CreateAndroidInstanceLabelResponse} */
@@ -1209,6 +1279,8 @@ declare interface Gs {
   FetchAndroidInstancesLogs(data: FetchAndroidInstancesLogsRequest, config?: AxiosRequestConfig): AxiosPromise<FetchAndroidInstancesLogsResponse>;
   /** 安装安卓实例应用 {@link InstallAndroidInstancesAppRequest} {@link InstallAndroidInstancesAppResponse} */
   InstallAndroidInstancesApp(data: InstallAndroidInstancesAppRequest, config?: AxiosRequestConfig): AxiosPromise<InstallAndroidInstancesAppResponse>;
+  /** 通过 URL 安装安卓实例应用 {@link InstallAndroidInstancesAppWithURLRequest} {@link InstallAndroidInstancesAppWithURLResponse} */
+  InstallAndroidInstancesAppWithURL(data: InstallAndroidInstancesAppWithURLRequest, config?: AxiosRequestConfig): AxiosPromise<InstallAndroidInstancesAppWithURLResponse>;
   /** 修改安卓应用 {@link ModifyAndroidAppRequest} {@link ModifyAndroidAppResponse} */
   ModifyAndroidApp(data: ModifyAndroidAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidAppResponse>;
   /** 修改安卓应用版本 {@link ModifyAndroidAppVersionRequest} {@link ModifyAndroidAppVersionResponse} */
@@ -1221,6 +1293,8 @@ declare interface Gs {
   ModifyAndroidInstancesInformation(data: ModifyAndroidInstancesInformationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidInstancesInformationResponse>;
   /** 批量修改安卓实例的标签 {@link ModifyAndroidInstancesLabelsRequest} {@link ModifyAndroidInstancesLabelsResponse} */
   ModifyAndroidInstancesLabels(data: ModifyAndroidInstancesLabelsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidInstancesLabelsResponse>;
+  /** 批量修改安卓实例属性 {@link ModifyAndroidInstancesPropertiesRequest} {@link ModifyAndroidInstancesPropertiesResponse} */
+  ModifyAndroidInstancesProperties(data: ModifyAndroidInstancesPropertiesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidInstancesPropertiesResponse>;
   /** 批量修改安卓实例分辨率 {@link ModifyAndroidInstancesResolutionRequest} {@link ModifyAndroidInstancesResolutionResponse} */
   ModifyAndroidInstancesResolution(data: ModifyAndroidInstancesResolutionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidInstancesResolutionResponse>;
   /** 批量修改安卓实例的用户ID {@link ModifyAndroidInstancesUserIdRequest} {@link ModifyAndroidInstancesUserIdResponse} */

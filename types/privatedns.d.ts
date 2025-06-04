@@ -180,6 +180,34 @@ declare interface PrivateZoneRecord {
   Remark?: string;
 }
 
+/** 私有域信息 */
+declare interface RecordInfo {
+  /** 记录id */
+  RecordId?: string;
+  /** 私有域id: zone-xxxxxxxx */
+  ZoneId?: string;
+  /** 子域名 */
+  SubDomain?: string;
+  /** 记录类型，可选的记录类型为："A", "AAAA", "CNAME", "MX", "TXT", "PTR" */
+  RecordType?: string;
+  /** 记录值 */
+  RecordValue?: string;
+  /** 记录缓存时间，数值越小生效越快，取值1-86400s, 默认 600 */
+  TTL?: number;
+  /** MX优先级：记录类型为MX时必填。取值范围：5,10,15,20,30,40,50 */
+  MX?: number;
+  /** 记录权重，值为1-100 */
+  Weight?: number;
+  /** 记录创建时间 */
+  CreatedOn?: string;
+  /** 记录更新时间 */
+  UpdatedOn?: string;
+  /** 0暂停，1启用 */
+  Enabled?: number;
+  /** 备注 */
+  Remark?: string;
+}
+
 /** 标签 */
 declare interface TagInfo {
   /** 标签键 */
@@ -500,6 +528,20 @@ declare interface DescribeQuotaUsageResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRecordRequest {
+  /** 私有域ID */
+  ZoneId: string;
+  /** 记录ID */
+  RecordId: string;
+}
+
+declare interface DescribeRecordResponse {
+  /** 记录信息 */
+  RecordInfo?: RecordInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRequestDataRequest {
   /** 请求量统计起始时间，格式：2020-11-22 00:00:00 */
   TimeRangeBegin: string;
@@ -665,6 +707,8 @@ declare interface Privatedns {
   DescribePrivateZoneService(data?: DescribePrivateZoneServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateZoneServiceResponse>;
   /** 查询额度使用情况 {@link DescribeQuotaUsageRequest} {@link DescribeQuotaUsageResponse} */
   DescribeQuotaUsage(data?: DescribeQuotaUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuotaUsageResponse>;
+  /** 根据id获取私有域记录 {@link DescribeRecordRequest} {@link DescribeRecordResponse} */
+  DescribeRecord(data: DescribeRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordResponse>;
   /** 获取私有域解析请求量 {@link DescribeRequestDataRequest} {@link DescribeRequestDataResponse} */
   DescribeRequestData(data: DescribeRequestDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRequestDataResponse>;
   /** 修改私有域 {@link ModifyPrivateZoneRequest} {@link ModifyPrivateZoneResponse} */

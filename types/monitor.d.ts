@@ -2791,6 +2791,30 @@ declare namespace V20180724 {
     RequestId?: string;
   }
 
+  interface CreateExternalClusterRequest {
+    /** 实例 ID */
+    InstanceId: string;
+    /** 集群所在地域 */
+    ClusterRegion: string;
+    /** 集群名称 */
+    ClusterName?: string;
+    /** 集群 ID */
+    ClusterId?: string;
+    /** 外部标签 */
+    ExternalLabels?: Label[];
+    /** 是否打开预聚合规则 */
+    OpenDefaultRecord?: boolean;
+    /** 是否开启公网 */
+    EnableExternal?: boolean;
+  }
+
+  interface CreateExternalClusterResponse {
+    /** 集群 ID */
+    ClusterId?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface CreateGrafanaInstanceRequest {
     /** 实例名 */
     InstanceName: string;
@@ -3852,6 +3876,20 @@ declare namespace V20180724 {
 
   interface DescribeExternalClusterRegisterCommandResponse {
     /** 注册命令 */
+    Command?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeExternalClusterUninstallCommandRequest {
+    /** 实例 ID */
+    InstanceId: string;
+    /** 集群 ID */
+    ClusterId: string;
+  }
+
+  interface DescribeExternalClusterUninstallCommandResponse {
+    /** 卸载命令 */
     Command?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
@@ -5633,6 +5671,8 @@ declare interface Monitor {
   CreateConditionsTemplate(data: V20180724.CreateConditionsTemplateRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CreateConditionsTemplateResponse>;
   /** 创建 exporter 集成 {@link V20180724.CreateExporterIntegrationRequest} {@link V20180724.CreateExporterIntegrationResponse} */
   CreateExporterIntegration(data: V20180724.CreateExporterIntegrationRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CreateExporterIntegrationResponse>;
+  /** 注册外部 k8s 集群 {@link V20180724.CreateExternalClusterRequest} {@link V20180724.CreateExternalClusterResponse} */
+  CreateExternalCluster(data: V20180724.CreateExternalClusterRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CreateExternalClusterResponse>;
   /** 创建 Grafana 实例 {@link V20180724.CreateGrafanaInstanceRequest} {@link V20180724.CreateGrafanaInstanceResponse} */
   CreateGrafanaInstance(data: V20180724.CreateGrafanaInstanceRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CreateGrafanaInstanceResponse>;
   /** 创建 Grafana 集成配置 {@link V20180724.CreateGrafanaIntegrationRequest} {@link V20180724.CreateGrafanaIntegrationResponse} */
@@ -5745,6 +5785,8 @@ declare interface Monitor {
   DescribeExporterIntegrations(data: V20180724.DescribeExporterIntegrationsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeExporterIntegrationsResponse>;
   /** 查看外部集群注册命令 {@link V20180724.DescribeExternalClusterRegisterCommandRequest} {@link V20180724.DescribeExternalClusterRegisterCommandResponse} */
   DescribeExternalClusterRegisterCommand(data: V20180724.DescribeExternalClusterRegisterCommandRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeExternalClusterRegisterCommandResponse>;
+  /** 查看外部集群 Agent 卸载命令 {@link V20180724.DescribeExternalClusterUninstallCommandRequest} {@link V20180724.DescribeExternalClusterUninstallCommandResponse} */
+  DescribeExternalClusterUninstallCommand(data: V20180724.DescribeExternalClusterUninstallCommandRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeExternalClusterUninstallCommandResponse>;
   /** 列出 Grafana 所有告警通道 {@link V20180724.DescribeGrafanaChannelsRequest} {@link V20180724.DescribeGrafanaChannelsResponse} */
   DescribeGrafanaChannels(data: V20180724.DescribeGrafanaChannelsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeGrafanaChannelsResponse>;
   /** 列出 Grafana 的设置 {@link V20180724.DescribeGrafanaConfigRequest} {@link V20180724.DescribeGrafanaConfigResponse} */
