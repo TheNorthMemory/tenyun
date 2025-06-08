@@ -1416,6 +1416,22 @@ declare interface DescribeWorkOrderTypesResponse {
   RequestId?: string;
 }
 
+declare interface ExportCustomerWorkOrderDetailRequest {
+  /** 服务工单类型 */
+  WorkOrderType: string[];
+  /** 要导出的工单的起始时间 */
+  BeginDateTime: string;
+  /** 要导出的工单的结束时间 */
+  EndDateTime: string;
+}
+
+declare interface ExportCustomerWorkOrderDetailResponse {
+  /** 返回下载地址 */
+  DownloadUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyWorkOrderTypeCollectFlagRequest {
   /** 工单类型的唯一英文标识 */
   WorkOrderType: string;
@@ -1503,6 +1519,8 @@ declare interface Chc {
   DescribeWorkOrderStatistics(data?: DescribeWorkOrderStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkOrderStatisticsResponse>;
   /** 查询用户可用的工单列表 {@link DescribeWorkOrderTypesRequest} {@link DescribeWorkOrderTypesResponse} */
   DescribeWorkOrderTypes(data?: DescribeWorkOrderTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkOrderTypesResponse>;
+  /** 导出客户工单详情 {@link ExportCustomerWorkOrderDetailRequest} {@link ExportCustomerWorkOrderDetailResponse} */
+  ExportCustomerWorkOrderDetail(data: ExportCustomerWorkOrderDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ExportCustomerWorkOrderDetailResponse>;
   /** 修改工单类型的收藏标识 {@link ModifyWorkOrderTypeCollectFlagRequest} {@link ModifyWorkOrderTypeCollectFlagResponse} */
   ModifyWorkOrderTypeCollectFlag(data: ModifyWorkOrderTypeCollectFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkOrderTypeCollectFlagResponse>;
 }

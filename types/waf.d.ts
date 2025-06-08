@@ -5777,7 +5777,7 @@ declare interface UpdateProtectionModesRequest {
 
 declare interface UpdateProtectionModesResponse {
   /** 操作结果 */
-  CommonRsp?: CommonRspData | null;
+  CommonRsp?: CommonRspData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

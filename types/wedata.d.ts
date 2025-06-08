@@ -1984,6 +1984,156 @@ declare interface EventOpsDto {
   EventCases?: EventCaseOpsDto[] | null;
 }
 
+/** 资源组详情 */
+declare interface ExecutorResourceGroupInfo {
+  /** 执行组id, 仅更新资源时需要传 */
+  ExecutorGroupId?: string | null;
+  /** 执行组名称 */
+  ExecutorGroupName?: string | null;
+  /** 执行组描述 */
+  ExecutorGroupDesc?: string | null;
+  /** SCHEDULER （标准调度资源组），CUSTOM_SCHEDULER （自定义调度资源），INTEGRATION（集成资源组），DATA_SERVICE（数据服务资源组） */
+  ExecutorResourceType?: number | null;
+  /** 区域中文 */
+  Region?: string | null;
+  /** vpcId, 托管服务时需要传递 */
+  VpcId?: string | null;
+  /** subnetId, 托管服务时需要传递 */
+  SubnetId?: string | null;
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 基础资源包，资源组至少包含一个基础资源包 */
+  BasicResourcePackage?: ExecutorResourcePackageInfo | null;
+  /** 增强资源包 */
+  AdvanceResourcePackage?: ExecutorResourcePackageInfo | null;
+  /** 是否自动续费 */
+  AutoRenewFlag?: number | null;
+  /** 区域英文 */
+  RegionEn?: string | null;
+  /** 区域Id */
+  RegionId?: number | null;
+  /** 项目名称 */
+  ProjectName?: string | null;
+  /** 项目展示名称 */
+  ProjectDisplayName?: string | null;
+  /** 资源组关联项目数 */
+  AssociateProjectNums?: number | null;
+  /** 是否锁定，false为未锁定，true为锁定 */
+  IsLocked?: boolean | null;
+  /** 来源类型，0为系统默认，1为自定义 */
+  SourceType?: number | null;
+  /** 队列资源包 */
+  MQPackageVO?: MQPackageVO | null;
+  /** 是否首选 */
+  FirstChoice?: boolean | null;
+  /** 资源组python版本绑定详情 */
+  PythonSubVersions?: string[];
+}
+
+/** 执行资源包额外信息 */
+declare interface ExecutorResourcePackageExtInfo {
+  /** 集成资源组：InLong集群id */
+  InlongGroupId?: string | null;
+  /** 集成资源组：oceanus集群id */
+  OceanusClusterId?: string | null;
+  /** 计费相关：产品资源id列表 */
+  ProductResourceIdList?: string[] | null;
+  /** 当前资源包对应订单是否发货成功 */
+  BillingSuccess?: boolean | null;
+  /** apigw服务id */
+  ApigwServiceId?: string | null;
+  /** apigw服务名称 */
+  ApigwServiceName?: string | null;
+  /** 数据集成相关：dataProxy配置规格 */
+  DataProxySpec?: number | null;
+  /** dataProxy数量 */
+  DataProxyNum?: number | null;
+  /** dataProxy状态，同ExecutorGroupStatus */
+  DataProxyStatus?: number | null;
+  /** inlongManager地址 */
+  InLongManagerUrl?: string | null;
+  /** inlong版本 */
+  InLongVersion?: string | null;
+  /** 私有化资源组相关: 执行及机器ip列表 */
+  ExecutorMachineIpList?: string | null;
+}
+
+/** 执行资源包 */
+declare interface ExecutorResourcePackageInfo {
+  /** 资源包规格相关：资源包个数 */
+  ResourcePackageNum: number | null;
+  /** 资源包规格相关：cpu个数 */
+  CpuNum: number | null;
+  /** 资源包id */
+  ExecutorResourcePackageId?: string | null;
+  /** 资源包规格相关：内存大小，单位:G */
+  MemSize?: number | null;
+  /** 资源包状态， /** * 初始化中  INIT(0), /** * 运行中  RUNNING(1), /** * 运行异常  RUNNING_FAILED(2), /** * 释放中  DELETEING(3), /** * 已释放  DELETED(4), /** * 创建中  CREATING(5), /** * 创建失败  CREATE_FAILED(6), /** * 更新中  UPDATING(7), /** * 更新失败  UPDATE_FAILED(8), /** * 已到期  EXPIRED(9); */
+  Status?: number | null;
+  /** 资源包状态描述：保存创建失败，运行异常和更新失败的原因 */
+  StatusDescription?: string | null;
+  /** 资源包到期时间，时间戳毫秒 */
+  ExpireTime?: number | null;
+  /** 资源包额外属性 */
+  ExtInfo?: ExecutorResourcePackageExtInfo | null;
+  /** 绑定的项目id，可为空 */
+  ProjectId?: string | null;
+  /** 资源组绑定的时间，时间戳毫秒 */
+  ProjectBindTime?: number | null;
+  /** 资源包使用状态: cpu使用，内存使用及趋势 */
+  ResourcePackageUsage?: ExecutorResourcePackageUsageInfo | null;
+  /** 计费相关：产品资源id列表 */
+  ProductResourceIdList?: number[] | null;
+  /** 生命周期 */
+  LifeTime?: number | null;
+  /** 私有网络Id */
+  VpcId?: string | null;
+  /** 私有网络名称 */
+  VpcName?: string | null;
+  /** 子网Id */
+  SubnetId?: string | null;
+  /** 子网名称 */
+  SubnetName?: string | null;
+  /** 执行资源相关：资源规格描述 */
+  ResourceStandard?: string | null;
+  /** 内存总数 */
+  TotalMemory?: number;
+}
+
+/** 执行资源包使用情况 */
+declare interface ExecutorResourcePackageUsageInfo {
+  /** CPU占用百分比 */
+  CpuUsagePercent?: number | null;
+  /** 内存占用百分比 */
+  MemUsagePercent?: number | null;
+  /** 资源包状态, /** * 初始化中  INIT(0), /** * 运行中  RUNNING(1), /** * 运行异常  RUNNING_FAILED(2), /** * 释放中  DELETEING(3), /** * 已释放  DELETED(4), /** * 创建中  CREATING(5), /** * 创建失败  CREATE_FAILED(6), /** * 更新中  UPDATING(7), /** * 更新失败  UPDATE_FAILED(8), /** * 已到期  EXPIRED(9); */
+  Status?: number | null;
+  /** /** * 初始化中  INIT(0), /** * 运行中  RUNNING(1), /** * 运行异常  RUNNING_FAILED(2), /** * 释放中  DELETEING(3), /** * 已释放  DELETED(4), /** * 创建中  CREATING(5), /** * 创建失败  CREATE_FAILED(6), /** * 更新中  UPDATING(7), /** * 更新失败  UPDATE_FAILED(8), /** * 已到期 运行中的任务数 */
+  RunningTaskNum?: number | null;
+  /** 等待中的任务数 */
+  WaitingTaskNum?: number | null;
+  /** 资源使用趋势: 开始时间 */
+  UsageTrendStartTime?: string | null;
+  /** 资源使用趋势: 结束时间 */
+  UsageTrendEndTime?: string | null;
+  /** 资源使用趋势列表 */
+  UsageTrendList?: ExecutorUsageTrendInfo[] | null;
+}
+
+/** 资源组/资源包使用趋势 */
+declare interface ExecutorUsageTrendInfo {
+  /** 时间戳，单位：毫秒 */
+  Timestamp?: number | null;
+  /** CPU占用百分比 */
+  CpuUsagePercent?: number | null;
+  /** 内存占用百分比 */
+  MemUsagePercent?: number | null;
+  /** 当前并发度使用百分比 */
+  ConcurrencyUsage?: number | null;
+  /** oceanus CU使用百分比 */
+  OceanusCuUsage?: number | null;
+}
+
 /** 扩展参数 */
 declare interface ExtParam {
   /** key */
@@ -3068,6 +3218,38 @@ declare interface LogContentInfo {
   Time?: number | null;
   /** 日志所属的容器名 */
   ContainerName?: string | null;
+}
+
+/** MQPackageVO */
+declare interface MQPackageVO {
+  /** ckafka消息队列 */
+  Type?: string | null;
+  /** 实例Id/集群Id */
+  InstanceId?: string | null;
+  /** 实例名称/集群名称 */
+  InstanceName?: string | null;
+  /** 局域网Id */
+  VpcId?: string | null;
+  /** 子网Id */
+  SubnetId?: string | null;
+  /** 资源状态 */
+  Status?: number | null;
+  /** 资源状态描述：保存创建失败，运行异常和更新失败的原因 */
+  StatusDescription?: string | null;
+  /** DataProxy规格 */
+  DataProxySpec?: string | null;
+  /** DataProxy数量 */
+  DataProxyNum?: number | null;
+  /** DataProxy状态 */
+  DataProxyStatus?: number | null;
+  /** DataProxy状态描述：保存创建失败，运行异常和更新失败的原因 */
+  DataProxyStatusDescription?: string | null;
+  /** 计费类型 */
+  BillingType?: string | null;
+  /** 资源到期时间，时间戳毫秒 */
+  ExpireTime?: number | null;
+  /** 资源生命周期 */
+  LifeTime?: number | null;
 }
 
 /** 补录计划实例集合 */
@@ -8589,6 +8771,32 @@ declare interface DescribeExecStrategyResponse {
   RequestId?: string;
 }
 
+declare interface DescribeExecutorGroupMetricRequest {
+  /** 执行资源组id */
+  ExecutorGroupId: string;
+  /** 使用趋势开始时间(毫秒) */
+  TrendStartTime?: number;
+  /** 使用趋势结束时间(毫秒) */
+  TrendEndTime?: number;
+  /** 执行资源组类型 */
+  ExecutorGroupType?: string;
+  /** 执行资源类型 */
+  ExecutorResourceType?: string;
+  /** 执行机ID */
+  LoaderId?: string;
+  /** 指标维度 */
+  MetricType?: string;
+  /** 指标采集粒度 */
+  Granularity?: number;
+}
+
+declare interface DescribeExecutorGroupMetricResponse {
+  /** 执行组指标信息 */
+  Data: ExecutorResourceGroupInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeFieldBasicInfoRequest {
   /** 分页页码 */
   PageNumber?: number;
@@ -13122,6 +13330,8 @@ declare interface Wedata {
   DescribeEventConsumeTasks(data: DescribeEventConsumeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventConsumeTasksResponse>;
   /** 查询规则组执行策略 {@link DescribeExecStrategyRequest} {@link DescribeExecStrategyResponse} */
   DescribeExecStrategy(data?: DescribeExecStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExecStrategyResponse>;
+  /** 根据id查询执行资源组指标-商业化版本 {@link DescribeExecutorGroupMetricRequest} {@link DescribeExecutorGroupMetricResponse} */
+  DescribeExecutorGroupMetric(data: DescribeExecutorGroupMetricRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExecutorGroupMetricResponse>;
   /** 字段基础信息查询 {@link DescribeFieldBasicInfoRequest} {@link DescribeFieldBasicInfoResponse} */
   DescribeFieldBasicInfo(data?: DescribeFieldBasicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFieldBasicInfoResponse>;
   /** 拉取文件夹下的工作流 {@link DescribeFolderWorkflowListRequest} {@link DescribeFolderWorkflowListResponse} */

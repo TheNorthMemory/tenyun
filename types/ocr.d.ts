@@ -964,7 +964,7 @@ declare interface InvoiceItem {
   Angle?: number;
   /** 识别到的内容。 */
   SingleInvoiceInfos?: SingleInvoiceItem;
-  /** 发票处于识别图片或PDF文件中的页教，默认从1开始。 */
+  /** 发票处于识别图片或PDF文件中的页码，默认从1开始。 */
   Page?: number;
   /** 发票详细类型，详见票据识别（高级版）接口文档说明中 SubType 返回值说明 */
   SubType?: string;
@@ -978,6 +978,20 @@ declare interface InvoiceItem {
   ItemPolygon?: ItemPolygonInfo[];
   /** 二维码数据。 */
   QRCode?: string;
+  /** 印章信息 */
+  InvoiceSealInfo?: InvoiceSealInfo;
+}
+
+/** 印章信息 */
+declare interface InvoiceSealInfo {
+  /** 是否有公司印章（0：没有，1：有） */
+  CompanySealMark?: string;
+  /** 是否有监制印章（0：没有，1：有） */
+  SupervisionSealMark?: string;
+  /** 公司印章信息 */
+  CompanySealMarkInfo?: string[];
+  /** 监制印章信息 */
+  SupervisionSealMarkInfo?: string[];
 }
 
 /** 文本行在旋转纠正之后的图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height） */
@@ -3517,9 +3531,9 @@ declare interface FormulaOCRResponse {
 }
 
 declare interface GeneralAccurateOCRRequest {
-  /** 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  /** 图片/PDF的 Base64 值。要求图片经Base64编码后不超过 10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
-  /** 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  /** 图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
   /** 是否返回单字信息，默认关 */
   IsWords?: boolean;
@@ -3987,7 +4001,7 @@ declare interface MainlandPermitOCRRequest {
   ImageUrl?: string;
   /** 是否返回头像。默认不返回。 */
   RetProfile?: boolean;
-  /** 图片正反面FRONT：正面、BACK：反面，默认为FRONT */
+  /** 图片正反面FRONT：正面BACK：反面默认为FRONT */
   CardSide?: string;
 }
 
@@ -4010,7 +4024,7 @@ declare interface MainlandPermitOCRResponse {
   IssueAddress?: string;
   /** 签发次数 */
   IssueNumber?: string;
-  /** 证件类别， 如：台湾居民来往大陆通行证、港澳居民来往内地通行证。 */
+  /** 证件类别， 如：台湾居民来往大陆通行证、港澳居民来往内地通行证、往来港澳通行证。 */
   Type?: string;
   /** RetProfile为True时返回头像字段， Base64编码 */
   Profile?: string;
@@ -4475,6 +4489,8 @@ declare interface RecognizeGeneralInvoiceRequest {
   EnableItemPolygon?: boolean;
   /** 是否开启二维码识别。 */
   EnableQRCode?: boolean;
+  /** 是否开启印章识别，默认为false */
+  EnableSeal?: boolean;
 }
 
 declare interface RecognizeGeneralInvoiceResponse {
@@ -4997,7 +5013,7 @@ declare interface SmartStructuralProRequest {
   ItemNamesShowMode?: boolean;
   /** 是否开启全文字段识别 */
   ReturnFullText?: boolean;
-  /** 配置id支持：General -- 通用场景 InvoiceEng -- 国际invoice模版 WayBillEng --海运订单模板CustomsDeclaration -- 进出口报关单WeightNote -- 磅单MedicalMeter -- 血压仪表识别BillOfLading -- 海运提单EntrustmentBook -- 海运托书WordRecognize -- 手写英文作文模版Statement -- 对账单识别模板BookingConfirmation -- 配舱通知书识别模板AirWayBill -- 航空运单识别模板DispatchWeightNote -- 磅单发货单识别模板ReceiptWeightNote -- 磅单收货单识别模板ArticalRecognize -- 手写作文模版Table -- 表格模版 */
+  /** 配置id支持：General -- 通用场景 InvoiceEng -- 国际invoice模版 WayBillEng --海运订单模板CustomsDeclaration -- 进出口报关单WeightNote -- 磅单MedicalMeter -- 血压仪表识别BillOfLading -- 海运提单EntrustmentBook -- 海运托书WordRecognize -- 手写英文作文模版Statement -- 对账单识别模板BookingConfirmation -- 配舱通知书识别模板AirWayBill -- 航空运单识别模板DispatchWeightNote -- 磅单发货单识别模板ReceiptWeightNote -- 磅单收货单识别模板ArticalRecognize -- 手写作文模版Table -- 表格模版SteelLabel -- 实物标签识别模板CarInsurance -- 车辆保险单识别模板 */
   ConfigId?: string;
   /** 是否开启全文字段坐标值的识别 */
   EnableCoord?: boolean;
@@ -5457,7 +5473,7 @@ declare interface Ocr {
   MLIDCardOCR(data?: MLIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MLIDCardOCRResponse>;
   /** 护照识别（港澳台地区及境外护照） {@link MLIDPassportOCRRequest} {@link MLIDPassportOCRResponse} */
   MLIDPassportOCR(data?: MLIDPassportOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MLIDPassportOCRResponse>;
-  /** 港澳台来往内地通行证识别 {@link MainlandPermitOCRRequest} {@link MainlandPermitOCRResponse} */
+  /** 港澳台通行证及来往内地通行证识别 {@link MainlandPermitOCRRequest} {@link MainlandPermitOCRResponse} */
   MainlandPermitOCR(data?: MainlandPermitOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MainlandPermitOCRResponse>;
   /** 混贴票据分类 {@link MixedInvoiceDetectRequest} {@link MixedInvoiceDetectResponse} */
   MixedInvoiceDetect(data: MixedInvoiceDetectRequest, config?: AxiosRequestConfig): AxiosPromise<MixedInvoiceDetectResponse>;
@@ -5525,7 +5541,7 @@ declare interface Ocr {
   SmartStructuralOCR(data?: SmartStructuralOCRRequest, config?: AxiosRequestConfig): AxiosPromise<SmartStructuralOCRResponse>;
   /** 文档抽取（基础版） {@link SmartStructuralOCRV2Request} {@link SmartStructuralOCRV2Response} */
   SmartStructuralOCRV2(data?: SmartStructuralOCRV2Request, config?: AxiosRequestConfig): AxiosPromise<SmartStructuralOCRV2Response>;
-  /** 文档抽取（多模态版） {@link SmartStructuralProRequest} {@link SmartStructuralProResponse} */
+  /** 文档抽取（多模态） {@link SmartStructuralProRequest} {@link SmartStructuralProResponse} */
   SmartStructuralPro(data?: SmartStructuralProRequest, config?: AxiosRequestConfig): AxiosPromise<SmartStructuralProResponse>;
   /** 表格识别（V1) {@link TableOCRRequest} {@link TableOCRResponse} */
   TableOCR(data?: TableOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TableOCRResponse>;

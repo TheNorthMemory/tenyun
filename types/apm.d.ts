@@ -363,8 +363,10 @@ declare interface DescribeApmAgentResponse {
 declare interface DescribeApmInstancesRequest {
   /** Tag 列表 */
   Tags?: ApmTag[];
-  /** 按业务系统名过滤 */
+  /** 按业务系统名过滤，支持模糊检索 */
   InstanceName?: string;
+  /** 按业务系统 ID 过滤，支持模糊检索 */
+  InstanceId?: string;
   /** 按业务系统 ID 过滤 */
   InstanceIds?: string[];
   /** 是否查询官方 Demo 业务系统（0=非 Demo 业务系统，1=Demo 业务系统，默认为0） */

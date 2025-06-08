@@ -3773,7 +3773,7 @@ declare interface ModifyProjectRequest {
 
 declare interface ModifyProjectResponse {
   /** 项目详情 */
-  Project: ProjectEntry;
+  Project?: ProjectEntry;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

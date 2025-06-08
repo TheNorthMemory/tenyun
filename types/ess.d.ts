@@ -1822,6 +1822,26 @@ declare interface CreateBatchSignUrlResponse {
   RequestId?: string;
 }
 
+declare interface CreateContractDiffTaskWebUrlRequest {
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 是否跳过文件上传确认页。当该参数值为`false`时，`OriginalFileResourceId`和`DiffFileResourceId`参数不需要传值，需要在生成的web页面中上传对比文件；当该参数值为`true`时，`OriginalFileResourceId`和`DiffFileResourceId`参数必填，生成的web页面将跳过上传页面显示对比结果。 */
+  SkipFileUpload: boolean;
+  /** 需要对比的原合同文件资源ID，通过UploadFiles接口获取文件资源ID。 */
+  OriginalFileResourceId?: string;
+  /** 需要对比的新合同文件资源ID，通过UploadFiles接口获取文件资源ID。 */
+  DiffFileResourceId?: string;
+}
+
+declare interface CreateContractDiffTaskWebUrlResponse {
+  /** 接口返回的合同对比任务ID，可以调用接口获取合同对比结果web页面查看对比任务的结果。当`SkipFileUpload`参数为`true`时才会返回值，否则为空。 */
+  TaskId?: string;
+  /** 合同对比嵌入式web页面链接，有效期：5分钟链接仅能使用一次 */
+  WebUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateConvertTaskApiRequest {
   /** 需要进行转换的资源文件类型支持的文件类型如下：docdocxxlsxlsxjpgjpegpnghtmlbmptxt */
   ResourceType: string;
@@ -3280,6 +3300,20 @@ declare interface DescribeCancelFlowsTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeContractDiffTaskWebUrlRequest {
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 合同对比任务ID，该参数通过调用接口创建合同对比web页面获取。 */
+  TaskId: string;
+}
+
+declare interface DescribeContractDiffTaskWebUrlResponse {
+  /** 合同对比嵌入式web页面链接，有效期：5分钟链接仅能使用一次 */
+  WebUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeExtendedServiceAuthDetailRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -4101,6 +4135,8 @@ declare interface Ess {
   CreateBatchQuickSignUrl(data: CreateBatchQuickSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchQuickSignUrlResponse>;
   /** 获取跳转至腾讯电子签小程序的批量签署链接 {@link CreateBatchSignUrlRequest} {@link CreateBatchSignUrlResponse} */
   CreateBatchSignUrl(data: CreateBatchSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchSignUrlResponse>;
+  /** 创建合同对比web页面 {@link CreateContractDiffTaskWebUrlRequest} {@link CreateContractDiffTaskWebUrlResponse} */
+  CreateContractDiffTaskWebUrl(data: CreateContractDiffTaskWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContractDiffTaskWebUrlResponse>;
   /** 创建文件转换任务 {@link CreateConvertTaskApiRequest} {@link CreateConvertTaskApiResponse} */
   CreateConvertTaskApi(data: CreateConvertTaskApiRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConvertTaskApiResponse>;
   /** 模板发起合同-创建电子文档 {@link CreateDocumentRequest} {@link CreateDocumentResponse} */
@@ -4215,6 +4251,8 @@ declare interface Ess {
   DescribeBillUsageDetail(data: DescribeBillUsageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillUsageDetailResponse>;
   /** 查询批量撤销签署流程任务结果 {@link DescribeCancelFlowsTaskRequest} {@link DescribeCancelFlowsTaskResponse} */
   DescribeCancelFlowsTask(data: DescribeCancelFlowsTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCancelFlowsTaskResponse>;
+  /** 获取合同对比结果web页面 {@link DescribeContractDiffTaskWebUrlRequest} {@link DescribeContractDiffTaskWebUrlResponse} */
+  DescribeContractDiffTaskWebUrl(data: DescribeContractDiffTaskWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractDiffTaskWebUrlResponse>;
   /** 查询企业扩展服务授权详情 {@link DescribeExtendedServiceAuthDetailRequest} {@link DescribeExtendedServiceAuthDetailResponse} */
   DescribeExtendedServiceAuthDetail(data: DescribeExtendedServiceAuthDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtendedServiceAuthDetailResponse>;
   /** 查询企业扩展服务授权信息 {@link DescribeExtendedServiceAuthInfosRequest} {@link DescribeExtendedServiceAuthInfosResponse} */

@@ -885,13 +885,13 @@ declare interface CreateDedicatedClusterDBInstanceRequest {
   Storage: number;
   /** 独享集群集群uuid */
   ClusterId: string;
-  /** （废弃）可用区 */
+  /** 可用区 */
   Zone?: string;
   /** 项目ID */
   ProjectId?: number;
-  /** （废弃）Pid，可通过获取独享集群售卖配置接口得到 */
+  /** Pid，可通过获取独享集群售卖配置接口得到 */
   Pid?: number;
-  /** （废弃）机型 */
+  /** 机型 */
   Machine?: string;
   /** 网络Id */
   VpcId?: string;
@@ -899,9 +899,9 @@ declare interface CreateDedicatedClusterDBInstanceRequest {
   SubnetId?: string;
   /** db类型，不传默认8.0 */
   DbVersionId?: string;
-  /** （废弃）是否手动指定一组服务器分配, 运维使用 */
+  /** 是否手动指定一组服务器分配, 运维使用 */
   Manual?: number;
-  /** （废弃）DeviceNo参数 */
+  /** DeviceNo参数 */
   DeviceNo?: string;
   /** 安全组ID */
   SecurityGroupIds?: string[];

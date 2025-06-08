@@ -148,6 +148,16 @@ declare interface Action {
   CodeAction?: CodeAction | null;
 }
 
+/** 自适应频控 */
+declare interface AdaptiveFrequencyControl {
+  /** 自适应频控是否开启。取值有：on：开启；off：关闭。 */
+  Enabled: string;
+  /** 自适应频控的限制等级，当 Enabled 为 on 时，此字段必填。取值有：Loose：宽松；Moderate：适中；Strict：严格。 */
+  Sensitivity?: string;
+  /** 自适应频控的处置方式，当 Enabled 为 on 时，此字段必填。SecurityAction 的 Name 取值支持：Monitor：观察；Deny：拦截；Challenge：挑战，其中ChallengeActionParameters.Name仅支持JSChallenge。 */
+  Action?: SecurityAction;
+}
+
 /** 描述键值对过滤器，用于条件过滤查询，支持模糊查询。例如过滤ID、名称、状态等。若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
 declare interface AdvancedFilter {
   /** 需要过滤的字段。 */
@@ -334,6 +344,14 @@ declare interface AuthenticationParameters {
   TimeParam?: string;
   /** 鉴权时间格式，取值有：dec：十进制；hex：十六进制。注意：当 AuthType 为 TypeD 时，此字段必填。默认为 hex。 */
   TimeFormat?: string;
+}
+
+/** 流量防盗刷（仅适用中国大陆地区）的具体配置。 */
+declare interface BandwidthAbuseDefense {
+  /** 流量防盗刷（仅适用中国大陆地区）是否开启。取值有：on：开启；off：关闭。 */
+  Enabled: string;
+  /** 流量防盗刷（仅适用中国大陆地区）的处置方式，当 Enabled 为 on 时，此字段必填。SecurityAction 的 Name 取值支持：Monitor：观察；Deny：拦截；Challenge：挑战，其中ChallengeActionParameters.Name仅支持JSChallenge。 */
+  Action?: SecurityAction;
 }
 
 /** 计费数据项 */
@@ -628,6 +646,16 @@ declare interface CertificateInfo {
   Status?: string;
 }
 
+/** Web 安全 Challenge 挑战的附加参数 */
+declare interface ChallengeActionParameters {
+  /** 安全执行的具体挑战动作。取值有： InterstitialChallenge：插页式挑战； InlineChallenge：内嵌式挑战； JSChallenge：JavaScript 挑战； ManagedChallenge：托管挑战。 */
+  ChallengeOption: string;
+  /** 重复挑战的时间间隔，当 Name 为 InterstitialChallenge/InlineChallenge 时，该字段必填。默认值为 300s。支持的单位有：s：秒，取值范围1～60；m：分，取值范围1～60；h：小时，取值范围1～24。 */
+  Interval?: string;
+  /** 客户端认证方式 ID 。当 Name 为 InterstitialChallenge/InlineChallenge 时，该字段必填。 */
+  AttesterId?: string;
+}
+
 /** 各个健康检查区域下源站的健康状态。 */
 declare interface CheckRegionHealthStatus {
   /** 健康检查区域，ISO-3166-1 两位字母代码。 */
@@ -636,6 +664,14 @@ declare interface CheckRegionHealthStatus {
   Healthy?: string;
   /** 源站健康状态。 */
   OriginHealthStatus?: OriginHealthStatus[];
+}
+
+/** 智能客户端过滤 */
+declare interface ClientFiltering {
+  /** 智能客户端过滤是否开启。取值有：on：开启；off：关闭。 */
+  Enabled: string;
+  /** 智能客户端过滤的处置方式，当 Enabled 为 on 时，此字段必填。SecurityAction 的 Name 取值支持：Monitor：观察；Deny：拦截；Challenge：挑战，其中ChallengeActionParameters.Name仅支持JSChallenge。 */
+  Action?: SecurityAction;
 }
 
 /** 回源时携带客户端 IP 所属地域信息，值的格式为 ISO-3166-1 两位字母代码。 */
@@ -912,6 +948,22 @@ declare interface DeliveryCondition {
   Conditions?: QueryCondition[];
 }
 
+/** 安全执行动作为封禁的附加参数。 */
+declare interface DenyActionParameters {
+  /** 是否对来源 IP 延长封禁。取值有：on：开启；off：关闭。启用后，对触发规则的客户端 IP 持续拦截。当启用该选项时，必须同时指定 BlockIpDuration 参数。注意：该选项不可与 ReturnCustomPage 或 Stall 选项同时启用。 */
+  BlockIp?: string;
+  /** 当 BlockIP 为 on 时IP 的封禁时长。 */
+  BlockIpDuration?: string;
+  /** 是否使用自定义页面。取值有：on：开启；off：关闭。启用后，使用自定义页面内容拦截（响应）请求，当启用该选项时，必须同时指定 ResponseCode 和 ErrorPageId 参数。注意：该选项不可与 BlockIp 或 Stall 选项同时启用。 */
+  ReturnCustomPage?: string;
+  /** 自定义页面的状态码。 */
+  ResponseCode?: string;
+  /** 自定义页面的PageId。 */
+  ErrorPageId?: string;
+  /** 是否对请求来源挂起不予处理。取值有：on：开启；off：关闭。启用后，不再响应当前连接会话内请求，且不会主动断开连接。用于爬虫对抗时，消耗客户端连接资源。注意：该选项不可与 BlockIp 或 ReturnCustomPage 选项同时启用。 */
+  Stall?: string;
+}
+
 /** 配置组版本发布记录详情。 */
 declare interface DeployRecord {
   /** 发布版本的详细信息。 */
@@ -1180,6 +1232,36 @@ declare interface ExceptUserRuleScope {
   SkipConditions?: SkipCondition[];
 }
 
+/** Web安全的例外规则 */
+declare interface ExceptionRule {
+  /** 例外规则的 ID。通过规则 ID 可支持不同的规则配置操作： 增加新规则：ID 为空或不指定 ID 参数； 修改已有规则：指定需要更新/修改的规则 ID； 删除已有规则：ExceptionRules 参数中，Rules 列表中未包含的已有规则将被删除。 */
+  Id?: string;
+  /** 例外规则的名称。 */
+  Name?: string;
+  /** 例外规则的具体内容，需符合表达式语法，详细规范参见产品文档。 */
+  Condition?: string;
+  /** 例外规则执行选项，取值有：WebSecurityModules: 指定例外规则的安全防护模块。ManagedRules：指定托管规则。 */
+  SkipScope?: string;
+  /** 跳过请求的具体类型，取值有：SkipOnAllRequestFields: 跳过所有请求；SkipOnSpecifiedRequestFields: 跳过指定请求字段。仅当 SkipScope 为 ManagedRules 时有效。 */
+  SkipOption?: string;
+  /** 指定例外规则的安全防护模块，仅当 SkipScope 为 WebSecurityModules 时有效。取值有：websec-mod-managed-rules：托管规则；websec-mod-rate-limiting：速率限制；websec-mod-custom-rules：自定义规则；websec-mod-adaptive-control：自适应频控、智能客户端过滤、慢速攻击防护、流量盗刷防护；websec-mod-bot：Bot管理。 */
+  WebSecurityModulesForException?: string[];
+  /** 指定例外规则的具体托管规则，仅当 SkipScope 为 ManagedRules 时有效，且此时不能指定 ManagedRuleGroupsForException 。 */
+  ManagedRulesForException?: string[];
+  /** 指定例外规则的托管规则组，仅当 SkipScope 为 ManagedRules 时有效，且此时不能指定 ManagedRulesForException 。 */
+  ManagedRuleGroupsForException?: string[];
+  /** 指定例外规则跳过指定请求字段的具体配置，仅当 SkipScope 为 ManagedRules 并且 SkipOption 为 SkipOnSpecifiedRequestFields 时有效。 */
+  RequestFieldsForException?: RequestFieldsForException[];
+  /** 例外规则是否开启。取值有：on：开启off：关闭 */
+  Enabled?: string;
+}
+
+/** Web安全的例外规则 */
+declare interface ExceptionRules {
+  /** 例外规则的定义列表。使用 ModifySecurityPolicy 修改 Web 防护配置时: 若未指定 Rules 参数，或 Rules 参数长度为零：清空所有例外规则配置。若 SecurityPolicy 参数中，未指定 ExceptionRules 参数值：保持已有例外规则配置，不做修改。 */
+  Rules?: ExceptionRule[];
+}
+
 /** 失败原因 */
 declare interface FailReason {
   /** 失败原因。 */
@@ -1422,6 +1504,18 @@ declare interface Hsts {
   IncludeSubDomains?: string;
   /** 是否开启预加载，取值有：on：开启；off：关闭。 */
   Preload?: string;
+}
+
+/** HTTP DDOS防护配置。 */
+declare interface HttpDDoSProtection {
+  /** 自适应频控的具体配置。 */
+  AdaptiveFrequencyControl?: AdaptiveFrequencyControl;
+  /** 智能客户端过滤的具体配置。 */
+  ClientFiltering?: ClientFiltering;
+  /** 流量防盗刷的具体配置。 */
+  BandwidthAbuseDefense?: BandwidthAbuseDefense;
+  /** 慢速攻击防护的具体配置。 */
+  SlowAttackDefense?: SlowAttackDefense;
 }
 
 /** 域名 https 加速配置，默认为关闭状态 */
@@ -1796,6 +1890,16 @@ declare interface MaxAgeParameters {
   FollowOrigin?: string;
   /** 自定义缓存时间数值，单位为秒，取值：0～315360000。注意：当 FollowOrigin 为 off 时，表示不遵循源站，使用 CacheTime 设置缓存时间，否则此字段不生效。 */
   CacheTime?: number;
+}
+
+/** 正文传输最小速率阈值的具体配置。 */
+declare interface MinimalRequestBodyTransferRate {
+  /** 正文传输最小速率阈值，单位仅支持bps。 */
+  MinimalAvgTransferRateThreshold: string;
+  /** 正文传输最小速率统计时间范围，取值有：10s：10秒；30s：30秒；60s：60秒；120s：120秒。 */
+  CountingPeriod: string;
+  /** 正文传输最小速率阈值是否开启。取值有：on：开启；off：关闭。 */
+  Enabled: string;
 }
 
 /** 修改源站配置参数。 */
@@ -2310,6 +2414,36 @@ declare interface RateLimitUserRule {
   RedirectUrl?: string;
 }
 
+/** 速率限制的具体配置。 */
+declare interface RateLimitingRule {
+  /** 精准速率限制的 ID。通过规则 ID 可支持不同的规则配置操作： 增加新规则：ID 为空或不指定 ID 参数；修改已有规则：指定需要更新/修改的规则 ID；删除已有规则：RateLimitingRules 参数中，Rules 列表中未包含的已有规则将被删除。 */
+  Id?: string;
+  /** 精准速率限制的名称。 */
+  Name?: string;
+  /** 精准速率限制的具体内容，需符合表达式语法，详细规范参见产品文档。 */
+  Condition?: string;
+  /** 速率阈值请求特征的匹配方式， 当 Enabled 为 on 时，此字段必填。当条件有多个时，将组合多个条件共同进行统计计算，条件最多不可超过5条。取值有：http.request.ip：客户端 IP；http.request.xff_header_ip：客户端 IP（优先匹配 XFF 头部）；http.request.uri.path：请求的访问路径；http.request.cookies['session']：名称为session的Cookie，其中session可替换为自己指定的参数；http.request.headers['user-agent']：名称为user-agent的HTTP头部，其中user-agent可替换为自己指定的参数；http.request.ja3：请求的JA3指纹；http.request.uri.query['test']：名称为test的URL查询参数，其中test可替换为自己指定的参数。 */
+  CountBy?: string[];
+  /** 精准速率限制在时间范围内的累计拦截次数，取值范围 1 ~ 100000。 */
+  MaxRequestThreshold?: number;
+  /** 统计的时间窗口，取值有：1s：1秒；5s：5秒；10s：10秒；20s：20秒；30s：30秒；40s：40秒；50s：50秒；1m：1分钟；2m：2分钟；5m：5分钟；10m：10分钟；1h：1小时。 */
+  CountingPeriod?: string;
+  /** Action 动作的持续时长，单位仅支持：s：秒，取值 1 ~ 120；m：分钟，取值 1 ~ 120；h：小时，取值 1 ~ 48；d：天，取值 1 ~ 30。 */
+  ActionDuration?: string;
+  /** 精准速率限制的处置方式。取值有：Monitor：观察；Deny：拦截，其中DenyActionParameters.Name支持Deny和ReturnCustomPage；Challenge：挑战，其中ChallengeActionParameters.Name支持JSChallenge和ManagedChallenge；Redirect：重定向至URL； */
+  Action?: SecurityAction;
+  /** 精准速率限制的优先级，范围是 0 ~ 100，默认为 0。 */
+  Priority?: number;
+  /** 精准速率限制规则是否开启。取值有：on：开启；off：关闭。 */
+  Enabled?: string;
+}
+
+/** 精准速率限制的配置 */
+declare interface RateLimitingRules {
+  /** 精准速率限制的定义列表。使用 ModifySecurityPolicy 修改 Web 防护配置时: 若未指定 Rules 参数，或 Rules 参数长度为零：清空所有精准速率限制配置。 若 SecurityPolicy 参数中，未指定 RateLimitingRules 参数值：保持已有自定义规则配置，不做修改。 */
+  Rules?: RateLimitingRule[];
+}
+
 /** 实时日志投递任务。 */
 declare interface RealtimeLogDeliveryTask {
   /** 实时日志投递任务 ID。 */
@@ -2358,6 +2492,24 @@ declare interface RedirectActionParameters {
 declare interface RenewFlag {
   /** 预付费套餐的自动续费标志，取值有： on：开启自动续费； off：不开启自动续费。 */
   Switch: string;
+}
+
+/** 正文传输超时时长的具体配置。 */
+declare interface RequestBodyTransferTimeout {
+  /** 正文传输超时时长，取值 5 ~ 120，单位仅支持秒（s）。 */
+  IdleTimeout: string;
+  /** 正文传输超时时长是否开启。取值有：on：开启；off：关闭。 */
+  Enabled: string;
+}
+
+/** 例外规则中的跳过字段配置 */
+declare interface RequestFieldsForException {
+  /** 跳过的具体字段。取值支持：body.json：JSON 请求内容；此时 Condition 支持 key、value, TargetField 支持 key、value，例如 { "Scope": "body.json", "Condition": "", "TargetField": "key" }，表示 JSON 请求内容所有参数跳过 WAF 扫描；cookie：Cookie；此时 Condition 支持 key、value, TargetField 支持 key、value，例如 { "Scope": "cookie", "Condition": "${key} in ['account-id'] and ${value} like ['prefix-*']", "TargetField": "value" }，表示 Cookie 参数名称等于account-id 并且参数值通配符匹配 prefix-* 跳过 WAF 扫描；header：HTTP 头部参数；此时 Condition 支持 key、value, TargetField 支持 key、value，例如 { "Scope": "header", "Condition": "${key} like ['x-auth-*']", "TargetField": "value" }，表示 header 参数名称通配符匹配 x-auth-* 跳过 WAF 扫描；uri.query：URL 编码内容/查询参数；此时 Condition 支持 key、value, TargetField 支持 key、value，例如 { "Scope": "uri.query", "Condition": "${key} in ['action'] and ${value} in ['upload', 'delete']", "TargetField": "value" }，表示 URL 编码内容/查询参数的参数名称等于 action 并且参数值等于 upload 或 delete 跳过 WAF 扫描；uri：请求路径URI；此时 Condition 必须为空， TargetField 支持 query、path、fullpath，例如 { "Scope": "uri", "Condition": "", "TargetField": "query" }，表示请求路径 URI 仅查询参数跳过 WAF 扫描；body：请求正文内容。此时 Condition 必须为空， TargetField 支持 fullbody、multipart，例如 { "Scope": "body", "Condition": "", "TargetField": "fullbody" }，表示请求正文内容为完整请求正文跳过 WAF 扫描； */
+  Scope: string;
+  /** 跳过的具体字段的表达式，需要符合表达式语法。Condition 支持表达式配置语法： 按规则的匹配条件表达式语法编写，支持引用 key、value。 支持 in、like 操作符，以及 and 逻辑组合。例如：${key} in ['x-trace-id']：参数名称等于x-trace-id。${key} in ['x-trace-id'] and ${value} like ['Bearer *']：参数名称等于x-trace-id并且参数值通配符匹配Bearer *。 */
+  Condition: string;
+  /** Scope 参数使用不同取值时，TargetField 表达式中支持的值如下： body.json：支持 key、value cookie：支持 key、value header：支持 key、value uri.query：支持 key、value uri：支持 path、query、fullpath body：支持 fullbody、multipart */
+  TargetField: string;
 }
 
 /** 计费资源 */
@@ -2702,14 +2854,18 @@ declare interface SecEntryValue {
 
 /** 安全的执行动作 */
 declare interface SecurityAction {
-  /** 安全执行的具体动作。取值有：Deny：拦截；Monitor：观察；ReturnCustomPage：使用指定页面拦截；Redirect：重定向至 URL；BlockIP：IP 封禁；JSChallenge：JavaScript 挑战；ManagedChallenge：托管挑战；Disabled：未启用；Allow：放行。 */
+  /** 安全执行的具体动作。取值有：Deny：拦截，阻止请求访问站点资源；Monitor：观察，仅记录日志；Redirect：重定向至 URL；Disabled：未启用，不启用指定规则；Allow：允许访问，但延迟处理请求；Challenge：挑战，响应挑战内容；BlockIP：待废弃，IP 封禁；ReturnCustomPage：待废弃，使用指定页面拦截；JSChallenge：待废弃，JavaScript 挑战；ManagedChallenge：待废弃，托管挑战。 */
   Name: string;
-  /** 当 Name 为 BlockIP 时的附加参数。 */
-  BlockIPActionParameters?: BlockIPActionParameters;
-  /** 当 Name 为 ReturnCustomPage 时的附加参数。 */
-  ReturnCustomPageActionParameters?: ReturnCustomPageActionParameters;
+  /** 当 Name 为 Deny 时的附加参数。 */
+  DenyActionParameters?: DenyActionParameters;
   /** 当 Name 为 Redirect 时的附加参数。 */
   RedirectActionParameters?: RedirectActionParameters;
+  /** 当 Name 为 Challenge 时的附加参数。 */
+  ChallengeActionParameters?: ChallengeActionParameters;
+  /** 待废弃，当 Name 为 BlockIP 时的附加参数。 */
+  BlockIPActionParameters?: BlockIPActionParameters;
+  /** 待废弃，当 Name 为 ReturnCustomPage 时的附加参数。 */
+  ReturnCustomPageActionParameters?: ReturnCustomPageActionParameters;
 }
 
 /** Web安全配置 */
@@ -2744,6 +2900,12 @@ declare interface SecurityPolicy {
   CustomRules?: CustomRules;
   /** 托管规则配置。 */
   ManagedRules?: ManagedRules;
+  /** HTTP DDOS防护配置。 */
+  HttpDDoSProtection?: HttpDDoSProtection;
+  /** 速率限制规则配置。 */
+  RateLimitingRules?: RateLimitingRules;
+  /** 例外规则配置。 */
+  ExceptionRules?: ExceptionRules;
 }
 
 /** 安全策略模板的绑定关系。 */
@@ -2798,6 +2960,18 @@ declare interface SkipCondition {
   MatchContentType?: string;
   /** 匹配Value的值。 */
   MatchContent?: string[];
+}
+
+/** 慢速攻击防护的具体配置。 */
+declare interface SlowAttackDefense {
+  /** 慢速攻击防护是否开启。取值有：on：开启；off：关闭。 */
+  Enabled: string;
+  /** 慢速攻击防护的处置方式，当 Enabled 为 on 时，此字段必填。SecurityAction 的 Name 取值支持：Monitor：观察；Deny：拦截； */
+  Action?: SecurityAction;
+  /** 正文传输最小速率阈值的具体配置，当 Enabled 为 on 时，此字段必填。 */
+  MinimalRequestBodyTransferRate?: MinimalRequestBodyTransferRate;
+  /** 正文传输超时时长的具体配置，当 Enabled 为 on 时，此字段必填。 */
+  RequestBodyTransferTimeout?: RequestBodyTransferTimeout;
 }
 
 /** 慢速攻击配置。 */
@@ -5799,9 +5973,9 @@ declare interface ModifySecurityIPGroupResponse {
 declare interface ModifySecurityPolicyRequest {
   /** 站点 ID。 */
   ZoneId: string;
-  /** 安全策略配置。当 SecurityPolicy 参数中的 CustomRule 被设置时，SecurityConfig 参数中的 AclConfg、 IpTableConfg 将被忽略；当 SecurityPolicy 参数中的 ManagedRule 被设置时，SecurityConfig 参数中的 WafConfig 将被忽略。对于自定义规则以及托管规则策略配置建议使用 SecurityPolicy 参数进行设置。 */
+  /** 安全策略配置。当 SecurityPolicy 参数中的 ExceptionRules 被设置时，SecurityConfig 参数中的 ExceptConfig 将被忽略；当 SecurityPolicy 参数中的 CustomRules 被设置时，SecurityConfig 参数中的 AclConfig、 IpTableConfig 将被忽略；当 SecurityPolicy 参数中的 HttpDDoSProtection 和 RateLimitingRules 被设置时，SecurityConfig 参数中的 RateLimitConfig 将被忽略；当 SecurityPolicy 参数中的 ManagedRule 被设置时，SecurityConfig 参数中的 WafConfig 将被忽略；对于例外规则、自定义规则、速率限制以及托管规则策略配置建议使用 SecurityPolicy 参数进行设置。 */
   SecurityConfig: SecurityConfig;
-  /** 安全策略配置。对 Web 防护自定义策略和托管规则配置建议使用，支持表达式语法对安全策略进行配置。 */
+  /** 安全策略配置。对 Web 例外规则、防护自定义策略、速率规则和托管规则配置建议使用，支持表达式语法对安全策略进行配置。 */
   SecurityPolicy?: SecurityPolicy;
   /** 安全策略类型，可使用以下参数值： ZoneDefaultPolicy：用于指定站点级策略；Template：用于指定策略模板，需要同时指定 TemplateId 参数；Host：用于指定域名级策略（注意：当使用域名来指定域名服务策略时，仅支持已经应用了域名级策略的域名服务或者策略模板）。 */
   Entity?: string;

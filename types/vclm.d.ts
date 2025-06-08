@@ -2,6 +2,14 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 图片 */
+declare interface Image {
+  /** 图片Base64 */
+  Base64?: string;
+  /** 图片Url */
+  Url?: string;
+}
+
 /** logo参数 */
 declare interface LogoParam {
   /** 水印 Url */
@@ -86,6 +94,24 @@ declare interface DescribePortraitSingJobResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTemplateToVideoJobRequest {
+  /** 任务ID。 */
+  JobId: string;
+}
+
+declare interface DescribeTemplateToVideoJobResponse {
+  /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
+  Status?: string;
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为""。 */
+  ErrorCode?: string;
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。 */
+  ErrorMessage?: string;
+  /** 结果视频 URL。有效期 24 小时。 */
+  ResultVideoUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeVideoStylizationJobRequest {
   /** 任务ID */
   JobId: string;
@@ -156,6 +182,24 @@ declare interface SubmitPortraitSingJobResponse {
   RequestId?: string;
 }
 
+declare interface SubmitTemplateToVideoJobRequest {
+  /** 特效模板名称。枚举值：hug ：拥抱kiss ：亲吻heart ： 比心fuzzy ： 毛茸茸befigure：变手办风longhair：金色长发morphlab：膨胀bloom：万物生花pinch：捏捏balloonfly：飞走了dragme：被拽走了 */
+  Template: string;
+  /** 参考图像，最多输入2张图。- 支持传入图片Base64编码或图片URL（确保可访问）- 图片格式：支持png、jpg、jpeg、webp、bmp、tiff- 图片文件：大小不能超过10MB（base64后），图片分辨率不小于300\*300px，不大于4096\*4096，图片宽高比应在1:4 ~ 4:1之间 */
+  Images: Image[];
+  /** 为生成视频添加标识的开关，默认为1。1：添加标识。0：不添加标识。其他数值：默认按1处理。建议您使用显著标识来提示，该视频是 AI 生成的视频。 */
+  LogoAdd?: number;
+  /** 标识内容设置。默认在生成视频的右下角添加“视频由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。 */
+  LogoParam?: LogoParam;
+}
+
+declare interface SubmitTemplateToVideoJobResponse {
+  /** 任务ID。 */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SubmitVideoStylizationJobRequest {
   /** 风格ID。取值说明：2d_anime：2D动漫；3d_cartoon：3D卡通；3d_china：3D国潮；pixel_art：像素风。 */
   StyleId: string;
@@ -181,12 +225,16 @@ declare interface Vclm {
   DescribeImageAnimateJob(data?: DescribeImageAnimateJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageAnimateJobResponse>;
   /** 查询图片唱演任务 {@link DescribePortraitSingJobRequest} {@link DescribePortraitSingJobResponse} */
   DescribePortraitSingJob(data: DescribePortraitSingJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePortraitSingJobResponse>;
+  /** 查询视频特效任务 {@link DescribeTemplateToVideoJobRequest} {@link DescribeTemplateToVideoJobResponse} */
+  DescribeTemplateToVideoJob(data: DescribeTemplateToVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateToVideoJobResponse>;
   /** 查询视频风格化任务 {@link DescribeVideoStylizationJobRequest} {@link DescribeVideoStylizationJobResponse} */
   DescribeVideoStylizationJob(data: DescribeVideoStylizationJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoStylizationJobResponse>;
   /** 提交图片跳舞任务 {@link SubmitImageAnimateJobRequest} {@link SubmitImageAnimateJobResponse} */
   SubmitImageAnimateJob(data?: SubmitImageAnimateJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitImageAnimateJobResponse>;
   /** 提交图片唱演任务 {@link SubmitPortraitSingJobRequest} {@link SubmitPortraitSingJobResponse} */
   SubmitPortraitSingJob(data: SubmitPortraitSingJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitPortraitSingJobResponse>;
+  /** 提交视频特效任务 {@link SubmitTemplateToVideoJobRequest} {@link SubmitTemplateToVideoJobResponse} */
+  SubmitTemplateToVideoJob(data: SubmitTemplateToVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTemplateToVideoJobResponse>;
   /** 提交视频风格化任务 {@link SubmitVideoStylizationJobRequest} {@link SubmitVideoStylizationJobResponse} */
   SubmitVideoStylizationJob(data: SubmitVideoStylizationJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitVideoStylizationJobResponse>;
 }

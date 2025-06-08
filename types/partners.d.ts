@@ -599,9 +599,9 @@ declare interface DescribeClientBalanceNewRequest {
 
 declare interface DescribeClientBalanceNewResponse {
   /** 账户可用余额，单位分 （可用余额 = 现金余额 + 赠送金余额 - 欠费金额 - 冻结金额） */
-  Balance: number;
+  Balance?: number;
   /** 账户现金余额，单位分 */
-  Cash: number;
+  Cash?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1947,9 +1947,9 @@ declare interface DescribeIndexRecommendAggregationSlowLogsRequest {
   InstanceId: string;
   /** 数据库名称。 */
   Db: string;
-  /** 表明。 */
+  /** 表名。 */
   Collection: string;
-  /** 签名。 */
+  /** 签名。这个值是DescribelndexRecommendInfo接口返回 */
   Signs: string[];
 }
 

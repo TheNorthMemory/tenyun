@@ -50,6 +50,12 @@ declare interface Arg {
   Values?: string[] | null;
 }
 
+/** 自动伸缩组高级设置 */
+declare interface AutoScaleGroupAdvanceAttrs {
+  /** 计算资源高级设置 */
+  ComputeResourceAdvanceParams?: ComputeResourceAdvanceParams;
+}
+
 /** 弹性扩缩容记录 */
 declare interface AutoScaleRecord {
   /** 扩缩容规则名。 */
@@ -96,7 +102,7 @@ declare interface AutoScaleResourceConf {
   ScaleUpperBound?: number;
   /** 扩容规则类型，1为按负载指标扩容规则，2为按时间扩容规则 */
   StrategyType?: number;
-  /** 下次能可扩容时间。 */
+  /** 下次可扩容时间。 */
   NextTimeCanScale?: number;
   /** 优雅缩容开关 */
   GraceDownFlag?: boolean;
@@ -106,7 +112,7 @@ declare interface AutoScaleResourceConf {
   PayMode?: string;
   /** 竞价实例优先的场景下，按量计费资源数量的最低百分比，整数 */
   PostPayPercentMin?: number;
-  /** 预设资源类型为HOST时，支持勾选“资源不足时切换POD”；支持取消勾选；默认不勾选（0），勾选（1) */
+  /** 预设资源类型为HOST时，支持勾选“资源不足时切换POD”；支持取消勾选；0表示默认不勾选（0），1表示勾选 */
   ChangeToPod?: number;
   /** 伸缩组名 */
   GroupName?: string;
@@ -118,6 +124,8 @@ declare interface AutoScaleResourceConf {
   Parallel?: number;
   /** 是否支持MNode */
   EnableMNode?: number;
+  /** 伸缩组更多设置 */
+  ExtraAdvanceAttrs?: AutoScaleGroupAdvanceAttrs;
 }
 
 /** 引导脚本 */
@@ -414,6 +422,18 @@ declare interface ComponentBasicRestartInfo {
   ComponentName?: string;
   /** 操作的IP列表 */
   IpList?: string[] | null;
+}
+
+/** 计算资源高级设置 */
+declare interface ComputeResourceAdvanceParams {
+  /** 节点Label数组 */
+  Labels?: TkeLabel[];
+  /** 节点污点 */
+  Taints?: Taint[];
+  /** base64 编码的用户脚本，在初始化节点之前执行 */
+  PreStartUserScript?: string;
+  /** base64 编码的用户脚本, 此脚本会在 k8s 组件运行后执行, 需要用户保证脚本的可重入及重试逻辑, 脚本及其生成的日志文件可在节点的 /data/ccs_userscript/ 路径查看 */
+  UserScript?: string;
 }
 
 /** 资源调度 - 队列修改信息 */
@@ -2444,6 +2464,16 @@ declare interface Tag {
   TagValue?: string;
 }
 
+/** Kubernetes Taint */
+declare interface Taint {
+  /** Taint Key */
+  Key?: string;
+  /** Taint Value */
+  Value?: string;
+  /** Taint Effect */
+  Effect?: string;
+}
+
 /** 巡检任务参数 */
 declare interface TaskSettings {
   /** 参数名称 */
@@ -2498,6 +2528,16 @@ declare interface TimeAutoScaleStrategy {
   CompensateFlag?: number;
   /** 伸缩组id */
   GroupId?: number;
+  /** 优雅缩容业务pod标签，当node不存在上述pod或超过优雅缩容时间时，缩容节点 */
+  GraceDownLabel?: TkeLabel[];
+}
+
+/** Kubernetes Label */
+declare interface TkeLabel {
+  /** Label Name */
+  Name?: string;
+  /** Label Value */
+  Value?: string;
 }
 
 /** 集群节点拓扑信息 */
@@ -4324,9 +4364,9 @@ declare interface ModifyPodNumRequest {
   /** 服务编号 */
   ServiceGroup: number;
   /** 角色编号 */
-  ServiceType: number;
+  ServiceType?: number;
   /** 期望Pod数量 */
-  PodNum: number;
+  PodNum?: number;
 }
 
 declare interface ModifyPodNumResponse {
@@ -4729,6 +4769,8 @@ declare interface ScaleOutInstanceRequest {
   ResourceBaseType?: string;
   /** 计算资源id */
   ComputeResourceId?: string;
+  /** 计算资源高级设置 */
+  ComputeResourceAdvanceParams?: ComputeResourceAdvanceParams;
 }
 
 declare interface ScaleOutInstanceResponse {

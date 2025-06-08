@@ -2427,6 +2427,8 @@ declare interface SearchSessionRequest {
   AppAssetKindSet?: number[];
   /** 应用资产Url */
   AppAssetUrl?: string;
+  /** 资产类型 */
+  DeviceKind?: string;
 }
 
 declare interface SearchSessionResponse {

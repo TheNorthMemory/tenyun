@@ -138,7 +138,7 @@ declare interface CompareOptions {
   Method?: string;
   /** 抽样比例;范围0,100。默认为100 */
   SampleRate?: number;
-  /** 线程数，取值1-5，默认为1 */
+  /** 线程数，取值1-8，默认为1 */
   ThreadCount?: number;
 }
 
@@ -494,7 +494,7 @@ declare interface DistributeRule {
 declare interface DynamicOptions {
   /** 所要同步的DML和DDL的选项，Insert(插入操作)、Update(更新操作)、Delete(删除操作)、DDL(结构同步)，PartialDDL(自定义,和DdlOptions一起起作用 )；必填、dts会用该值覆盖原有的值 */
   OpTypes: string[];
-  /** DDL同步选项，具体描述要同步那些DDL; 当OpTypes取值PartialDDL时、字段不能为空；必填、dts会用该值覆盖原有的值 */
+  /** DDL同步选项，具体描述要同步哪些DDL; 当OpTypes取值PartialDDL时、字段不能为空；必填、dts会用该值覆盖原有的值 */
   DdlOptions: DdlOption[];
   /** 冲突处理选项，ReportError(报错)、Ignore(忽略)、Cover(覆盖)、ConditionCover(条件覆盖); 目前目标端为kafka的链路不支持修改该配置 */
   ConflictHandleType?: string;
@@ -846,7 +846,7 @@ declare interface Options {
   OpTypes?: string[] | null;
   /** 冲突处理的详细选项，如条件覆盖中的条件行和条件操作 */
   ConflictHandleOption?: ConflictHandleOption;
-  /** DDL同步选项，具体描述要同步那些DDL */
+  /** DDL同步选项，具体描述要同步哪些DDL */
   DdlOptions?: DdlOption[] | null;
   /** kafka同步选项 */
   KafkaOption?: KafkaOption;

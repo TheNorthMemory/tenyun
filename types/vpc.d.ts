@@ -4545,10 +4545,12 @@ declare interface CreateTrafficMirrorResponse {
 }
 
 declare interface CreateTrafficPackagesRequest {
-  /** 流量包规格。可选值:10: 10GB流量，有效期一个月50: 50GB流量，有效期一个月512: 512GB流量，有效期一个月1024: 1TB流量，有效期一个月5120: 5TB流量，有效期一个月51200: 50TB流量，有效期一个月60: 60GB流量，有效期半年300: 300GB流量，有效期半年600: 600GB流量，有效期半年3072: 3TB流量，有效期半年6144: 6TB流量，有效期半年30720: 30TB流量，有效期半年61440: 60TB流量，有效期半年307200: 300TB流量，有效期半年 */
+  /** 流量包规格。可选值:10: 10GB流量，有效期一个月50: 50GB流量，有效期一个月512: 512GB流量，有效期一个月1024: 1TB流量，有效期一个月5120: 5TB流量，有效期一个月51200: 50TB流量，有效期一个月60: 60GB流量，有效期半年300: 300GB流量，有效期半年3072: 3TB流量，有效期半年6144: 6TB流量，有效期半年30720: 30TB流量，有效期半年61440: 60TB流量，有效期半年307200: 300TB流量，有效期半年 */
   TrafficAmount: number;
   /** 流量包数量，可选范围 1~20。 */
   TrafficPackageCount?: number;
+  /** 抵扣类型，默认为 FULL_TIME，可选值: FULL_TIME: 全时流量包IDLE_TIME: 闲时流量包 */
+  DeductType?: string;
 }
 
 declare interface CreateTrafficPackagesResponse {

@@ -1280,7 +1280,7 @@ declare interface SignUrlInfo {
   OpenId?: string;
   /** 合同组签署链接对应的合同组id */
   FlowGroupId?: string;
-  /** 二维码，在生成动态签署人跳转封面页链接时返回注：`此二维码下载链接有效期为5分钟，可下载二维码后本地保存。` */
+  /** 二维码，在生成动态签署人跳转封面页链接时返回注：`此二维码下载链接有效期为5分钟，可下载二维码后本地保存，二维码有效期为90天。` */
   SignQrcodeUrl?: string;
 }
 

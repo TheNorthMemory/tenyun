@@ -883,7 +883,7 @@ declare interface DescribeCfsSnapshotsRequest {
   Offset?: number;
   /** 页面长度，默认为20 */
   Limit?: number;
-  /** 过滤条件。SnapshotId - Array of String - 是否必填：否 -（过滤条件）按快照ID过滤。SnapshotName - Array of String - 是否必填：否 -（过滤条件）按照快照名称过滤。FileSystemId - Array of String - 是否必填：否 -（过滤条件）按文件系统ID过滤。FsName - Array of String - 是否必填：否 -（过滤条件）按文件系统名过滤。Status - Array of String - 是否必填：否 -（过滤条件）按照快照状态过滤(creating：表示创建中 | available：表示可用。rollbacking_new：表示由快照创建新文件系统中| create-failed 创建失败）tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键进行过滤。tag:tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。 */
+  /** 过滤条件。SnapshotId - Array of String - 是否必填：否 -（过滤条件）按快照ID过滤。SnapshotName - Array of String - 是否必填：否 -（过滤条件）按照快照名称过滤。FileSystemId - Array of String - 是否必填：否 -（过滤条件）按文件系统ID过滤。FsName - Array of String - 是否必填：否 -（过滤条件）按文件系统名过滤。Status - Array of String - 是否必填：否 -（过滤条件）按照快照状态过滤(creating：创建中 | available：运行中| deleting: 删除中 | rollbacking_new：由快照创建新文件系统中| create-failed 创建失败）tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键进行过滤。tag:tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。 */
   Filters?: Filter[];
   /** 按创建时间排序取值 */
   OrderField?: string;

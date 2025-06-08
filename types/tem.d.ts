@@ -1952,6 +1952,32 @@ declare interface ModifyEnvironmentResponse {
   RequestId?: string;
 }
 
+declare interface ModifyGatewayIngressRequest {
+  /** 环境 ID */
+  EnvironmentId?: string;
+  /** 网关名称 */
+  GatewayName?: string;
+  /** 网关类型，如 clb */
+  GatewayType?: string;
+  /** 转发配置名称 */
+  Name?: string;
+  /** rules 配置 */
+  Rules?: IngressRule[];
+  /** 是否混合 https，默认 false，可选值 true 代表有 https 协议监听 */
+  Mixed?: boolean;
+  /** tls 配置 */
+  Tls?: IngressTls[];
+  /** 重定向模式，可选值：- AUTO（自动重定向http到https）- NONE（不使用重定向） */
+  RewriteType?: string;
+}
+
+declare interface ModifyGatewayIngressResponse {
+  /** 是否成功 */
+  Result: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyIngressRequest {
   /** Ingress 规则配置 */
   Ingress: IngressInfo;
@@ -2895,6 +2921,8 @@ declare interface Tem {
   ModifyConfigData(data: ModifyConfigDataRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigDataResponse>;
   /** 编辑环境 {@link ModifyEnvironmentRequest} {@link ModifyEnvironmentResponse} */
   ModifyEnvironment(data: ModifyEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvironmentResponse>;
+  /** 修改网关的转发配置 {@link ModifyGatewayIngressRequest} {@link ModifyGatewayIngressResponse} */
+  ModifyGatewayIngress(data?: ModifyGatewayIngressRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGatewayIngressResponse>;
   /** @deprecated 创建或者更新 Ingress 规则 {@link ModifyIngressRequest} {@link ModifyIngressResponse} */
   ModifyIngress(data: ModifyIngressRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIngressResponse>;
   /** 编辑日志收集配置 {@link ModifyLogConfigRequest} {@link ModifyLogConfigResponse} */

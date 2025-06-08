@@ -1325,7 +1325,7 @@ declare interface Cbs {
   DescribeSnapshots(data?: DescribeSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotsResponse>;
   /** 卸载云硬盘 {@link DetachDisksRequest} {@link DetachDisksResponse} */
   DetachDisks(data: DetachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DetachDisksResponse>;
-  /** 获取快照概览信息 {@link GetSnapOverviewRequest} {@link GetSnapOverviewResponse} */
+  /** @deprecated 获取快照概览信息 {@link GetSnapOverviewRequest} {@link GetSnapOverviewResponse} */
   GetSnapOverview(data?: GetSnapOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<GetSnapOverviewResponse>;
   /** 重新初始化云硬盘 {@link InitializeDisksRequest} {@link InitializeDisksResponse} */
   InitializeDisks(data: InitializeDisksRequest, config?: AxiosRequestConfig): AxiosPromise<InitializeDisksResponse>;

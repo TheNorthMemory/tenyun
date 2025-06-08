@@ -80,6 +80,14 @@ declare interface AndroidInstance {
   HostServerSerialNumber?: string;
 }
 
+/** 安卓实例应用黑名单 */
+declare interface AndroidInstanceAppBlacklist {
+  /** 安卓实例 ID */
+  AndroidInstanceId?: string;
+  /** 应用黑名单 */
+  AppBlacklist?: string[] | null;
+}
+
 /** 安卓实例应用信息 */
 declare interface AndroidInstanceAppInfo {
   /** 应用id */
@@ -102,6 +110,14 @@ declare interface AndroidInstanceDevice {
   Brand: string;
   /** 型号 */
   Model: string;
+}
+
+/** 安卓实例错误信息，用于批量安卓实例操作中返回部分操作错误的情况 */
+declare interface AndroidInstanceError {
+  /** 安卓实例 ID */
+  AndroidInstanceId?: string;
+  /** 错误信息 */
+  Error?: Error;
 }
 
 /** 安卓实例镜像信息 */
@@ -184,6 +200,14 @@ declare interface COSOptions {
   Region: string;
 }
 
+/** 错误信息，用于批量接口中返回部分操作错误 */
+declare interface Error {
+  /** 错误码 */
+  Code?: string;
+  /** 错误详细信息 */
+  Message?: string;
+}
+
 /** 过滤 */
 declare interface Filter {
   /** 字段名 */
@@ -252,6 +276,20 @@ declare interface BackUpAndroidInstanceToStorageRequest {
 declare interface BackUpAndroidInstanceToStorageResponse {
   /** 实例任务 ID */
   TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CleanAndroidInstancesAppDataRequest {
+  /** 安卓实例 ID 列表（最大100条数据） */
+  AndroidInstanceIds: string[];
+  /** 应用包名 */
+  PackageName: string;
+}
+
+declare interface CleanAndroidInstancesAppDataResponse {
+  /** 错误列表。如果实例操作都成功，则响应没有这个字段；如果有实例操作失败，该字段包含了实例操作的错误信息 */
+  AndroidInstanceErrors?: AndroidInstanceError[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -656,6 +694,36 @@ declare interface DescribeAndroidInstanceTasksStatusResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAndroidInstancesAppBlacklistRequest {
+  /** 实例 ID 列表，数量上限 100 */
+  AndroidInstanceIds: string[];
+}
+
+declare interface DescribeAndroidInstancesAppBlacklistResponse {
+  /** 黑名单集合 */
+  AppBlacklistSet?: AndroidInstanceAppBlacklist[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAndroidInstancesByAppsRequest {
+  /** 偏移量，默认为 0 */
+  Offset: number;
+  /** 限制量，默认为20，最大值为100 */
+  Limit: number;
+  /** 应用 ID 列表。通过应用 ID 做集合查询 */
+  AndroidAppIds: string[];
+}
+
+declare interface DescribeAndroidInstancesByAppsResponse {
+  /** 实例总数量 */
+  TotalCount?: number;
+  /** 实例列表 */
+  AndroidInstances?: AndroidInstance[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAndroidInstancesRequest {
   /** 偏移量，默认为 0 */
   Offset?: number;
@@ -714,6 +782,20 @@ declare interface DestroyAndroidInstancesResponse {
   RequestId?: string;
 }
 
+declare interface DisableAndroidInstancesAppRequest {
+  /** 安卓实例 ID 列表（最大100条数据） */
+  AndroidInstanceIds: string[];
+  /** 应用包名 */
+  PackageName: string;
+}
+
+declare interface DisableAndroidInstancesAppResponse {
+  /** 错误列表。如果实例操作都成功，则响应没有这个字段；如果有实例操作失败，该字段包含了实例操作的错误信息 */
+  AndroidInstanceErrors?: AndroidInstanceError[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DistributeFileToAndroidInstancesRequest {
   /** 安卓实例 ID 列表 */
   AndroidInstanceIds: string[];
@@ -726,6 +808,20 @@ declare interface DistributeFileToAndroidInstancesRequest {
 declare interface DistributeFileToAndroidInstancesResponse {
   /** 实例任务集合 */
   TaskSet?: AndroidInstanceTask[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EnableAndroidInstancesAppRequest {
+  /** 安卓实例 ID 列表（最大100条数据） */
+  AndroidInstanceIds: string[];
+  /** 应用包名 */
+  PackageName: string;
+}
+
+declare interface EnableAndroidInstancesAppResponse {
+  /** 错误列表。如果实例操作都成功，则响应没有这个字段；如果有实例操作失败，该字段包含了实例操作的错误信息 */
+  AndroidInstanceErrors?: AndroidInstanceError[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -758,6 +854,26 @@ declare interface FetchAndroidInstancesLogsRequest {
 }
 
 declare interface FetchAndroidInstancesLogsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ImportAndroidInstanceImageRequest {
+  /** 镜像名称 */
+  Name: string;
+  /** 镜像文件下载地址，要求是 tgz 压缩文件 */
+  URL: string;
+  /** 镜像文件 MD5 值 */
+  MD5: string;
+  /** 安卓版本。ANDROID10：默认值，安卓10ANDROID12：安卓12ANDROID14：安卓14 */
+  AndroidVersion?: string;
+  /** 镜像可用区 */
+  Zone?: string;
+}
+
+declare interface ImportAndroidInstanceImageResponse {
+  /** 安卓实例镜像 ID */
+  AndroidInstanceImageId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -856,6 +972,22 @@ declare interface ModifyAndroidInstanceResolutionResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAndroidInstancesAppBlacklistRequest {
+  /** 实例ID列表，数量上限100 */
+  AndroidInstanceIds: string[];
+  /** 应用列表 */
+  AppList: string[];
+  /** ADD、REMOVE、CLEAR */
+  Operation: string;
+}
+
+declare interface ModifyAndroidInstancesAppBlacklistResponse {
+  /** 任务集合 */
+  TaskSet?: AndroidInstanceTask[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAndroidInstancesInformationRequest {
   /** 安卓实例信息数据 */
   AndroidInstanceInformations: AndroidInstanceInformation[];
@@ -910,6 +1042,20 @@ declare interface ModifyAndroidInstancesResolutionRequest {
 }
 
 declare interface ModifyAndroidInstancesResolutionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAndroidInstancesResourcesRequest {
+  /** 安卓实例 ID 列表（最大100条数据） */
+  AndroidInstanceIds: string[];
+  /** 内存配额（单位 MB） */
+  MemoryQuota: number;
+}
+
+declare interface ModifyAndroidInstancesResourcesResponse {
+  /** 任务集合 */
+  TaskSet?: AndroidInstanceTask[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1008,6 +1154,38 @@ declare interface SaveGameArchiveRequest {
 }
 
 declare interface SaveGameArchiveResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SetAndroidInstancesBGAppKeepAliveRequest {
+  /** 安卓实例 ID 列表（最大100条数据） */
+  AndroidInstanceIds: string[];
+  /** 操作类型，取值：ADD 添加应用到后台保活列表、REMOVE 从后台保活列表中移除应用、SET 全量设置后台保活列表，替换当前列表。 */
+  Operation: string;
+  /** 应用包名列表 */
+  PackageNames: string[];
+}
+
+declare interface SetAndroidInstancesBGAppKeepAliveResponse {
+  /** 错误列表。如果实例操作都成功，则响应没有这个字段；如果有实例操作失败，该字段包含了实例操作的错误信息 */
+  AndroidInstanceErrors?: AndroidInstanceError[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SetAndroidInstancesFGAppKeepAliveRequest {
+  /** 安卓实例 ID 列表（最大100条数据） */
+  AndroidInstanceIds: string[];
+  /** 操作类型，取值：ENABLE 开启保活、DISABLE 关闭保活。当关闭保活时，PackageName 参数传空即可 */
+  Operation: string;
+  /** 应用包名，开启保活时，必须传入 PackageName */
+  PackageName?: string;
+}
+
+declare interface SetAndroidInstancesFGAppKeepAliveResponse {
+  /** 错误列表。如果实例操作都成功，则响应没有这个字段；如果有实例操作失败，该字段包含了实例操作的错误信息 */
+  AndroidInstanceErrors?: AndroidInstanceError[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1221,6 +1399,8 @@ declare interface Gs {
   (): Versions;
   /** 备份安卓实例到指定存储 {@link BackUpAndroidInstanceToStorageRequest} {@link BackUpAndroidInstanceToStorageResponse} */
   BackUpAndroidInstanceToStorage(data: BackUpAndroidInstanceToStorageRequest, config?: AxiosRequestConfig): AxiosPromise<BackUpAndroidInstanceToStorageResponse>;
+  /** 批量清理安卓实例应用数据 {@link CleanAndroidInstancesAppDataRequest} {@link CleanAndroidInstancesAppDataResponse} */
+  CleanAndroidInstancesAppData(data: CleanAndroidInstancesAppDataRequest, config?: AxiosRequestConfig): AxiosPromise<CleanAndroidInstancesAppDataResponse>;
   /** 连接安卓实例 {@link ConnectAndroidInstanceRequest} {@link ConnectAndroidInstanceResponse} */
   ConnectAndroidInstance(data: ConnectAndroidInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ConnectAndroidInstanceResponse>;
   /** 复制安卓实例 {@link CopyAndroidInstanceRequest} {@link CopyAndroidInstanceResponse} */
@@ -1235,7 +1415,7 @@ declare interface Gs {
   CreateAndroidInstanceImage(data: CreateAndroidInstanceImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidInstanceImageResponse>;
   /** 创建安卓实例标签 {@link CreateAndroidInstanceLabelRequest} {@link CreateAndroidInstanceLabelResponse} */
   CreateAndroidInstanceLabel(data: CreateAndroidInstanceLabelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidInstanceLabelResponse>;
-  /** 创建安卓实例SSH连接 {@link CreateAndroidInstanceSSHRequest} {@link CreateAndroidInstanceSSHResponse} */
+  /** 创建安卓实例 SSH 连接 {@link CreateAndroidInstanceSSHRequest} {@link CreateAndroidInstanceSSHResponse} */
   CreateAndroidInstanceSSH(data: CreateAndroidInstanceSSHRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidInstanceSSHResponse>;
   /** 创建安卓实例 WebShell 连接 {@link CreateAndroidInstanceWebShellRequest} {@link CreateAndroidInstanceWebShellResponse} */
   CreateAndroidInstanceWebShell(data: CreateAndroidInstanceWebShellRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidInstanceWebShellResponse>;
@@ -1267,16 +1447,26 @@ declare interface Gs {
   DescribeAndroidInstanceTasksStatus(data?: DescribeAndroidInstanceTasksStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAndroidInstanceTasksStatusResponse>;
   /** 查询安卓实例 {@link DescribeAndroidInstancesRequest} {@link DescribeAndroidInstancesResponse} */
   DescribeAndroidInstances(data?: DescribeAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAndroidInstancesResponse>;
+  /** 查询安卓实例应用黑名单 {@link DescribeAndroidInstancesAppBlacklistRequest} {@link DescribeAndroidInstancesAppBlacklistResponse} */
+  DescribeAndroidInstancesAppBlacklist(data: DescribeAndroidInstancesAppBlacklistRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAndroidInstancesAppBlacklistResponse>;
+  /** 查询安装指定应用的安卓实例 {@link DescribeAndroidInstancesByAppsRequest} {@link DescribeAndroidInstancesByAppsResponse} */
+  DescribeAndroidInstancesByApps(data: DescribeAndroidInstancesByAppsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAndroidInstancesByAppsResponse>;
   /** 获取并发总数和运行数 {@link DescribeInstancesCountRequest} {@link DescribeInstancesCountResponse} */
   DescribeInstancesCount(data?: DescribeInstancesCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesCountResponse>;
   /** 销毁安卓实例 {@link DestroyAndroidInstancesRequest} {@link DestroyAndroidInstancesResponse} */
   DestroyAndroidInstances(data: DestroyAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyAndroidInstancesResponse>;
+  /** 批量禁用安卓实例应用 {@link DisableAndroidInstancesAppRequest} {@link DisableAndroidInstancesAppResponse} */
+  DisableAndroidInstancesApp(data: DisableAndroidInstancesAppRequest, config?: AxiosRequestConfig): AxiosPromise<DisableAndroidInstancesAppResponse>;
   /** 分发文件到安卓实例 {@link DistributeFileToAndroidInstancesRequest} {@link DistributeFileToAndroidInstancesResponse} */
   DistributeFileToAndroidInstances(data: DistributeFileToAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DistributeFileToAndroidInstancesResponse>;
+  /** 批量启用安桌实例应用 {@link EnableAndroidInstancesAppRequest} {@link EnableAndroidInstancesAppResponse} */
+  EnableAndroidInstancesApp(data: EnableAndroidInstancesAppRequest, config?: AxiosRequestConfig): AxiosPromise<EnableAndroidInstancesAppResponse>;
   /** 在安卓实例上异步执行命令 {@link ExecuteCommandOnAndroidInstancesRequest} {@link ExecuteCommandOnAndroidInstancesResponse} */
   ExecuteCommandOnAndroidInstances(data: ExecuteCommandOnAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteCommandOnAndroidInstancesResponse>;
   /** 批量获取安卓实例日志 {@link FetchAndroidInstancesLogsRequest} {@link FetchAndroidInstancesLogsResponse} */
   FetchAndroidInstancesLogs(data: FetchAndroidInstancesLogsRequest, config?: AxiosRequestConfig): AxiosPromise<FetchAndroidInstancesLogsResponse>;
+  /** 导入安卓实例镜像 {@link ImportAndroidInstanceImageRequest} {@link ImportAndroidInstanceImageResponse} */
+  ImportAndroidInstanceImage(data: ImportAndroidInstanceImageRequest, config?: AxiosRequestConfig): AxiosPromise<ImportAndroidInstanceImageResponse>;
   /** 安装安卓实例应用 {@link InstallAndroidInstancesAppRequest} {@link InstallAndroidInstancesAppResponse} */
   InstallAndroidInstancesApp(data: InstallAndroidInstancesAppRequest, config?: AxiosRequestConfig): AxiosPromise<InstallAndroidInstancesAppResponse>;
   /** 通过 URL 安装安卓实例应用 {@link InstallAndroidInstancesAppWithURLRequest} {@link InstallAndroidInstancesAppWithURLResponse} */
@@ -1289,6 +1479,8 @@ declare interface Gs {
   ModifyAndroidInstanceInformation(data: ModifyAndroidInstanceInformationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidInstanceInformationResponse>;
   /** 修改安卓实例分辨率 {@link ModifyAndroidInstanceResolutionRequest} {@link ModifyAndroidInstanceResolutionResponse} */
   ModifyAndroidInstanceResolution(data: ModifyAndroidInstanceResolutionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidInstanceResolutionResponse>;
+  /** 修改安卓实例应用黑名单 {@link ModifyAndroidInstancesAppBlacklistRequest} {@link ModifyAndroidInstancesAppBlacklistResponse} */
+  ModifyAndroidInstancesAppBlacklist(data: ModifyAndroidInstancesAppBlacklistRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidInstancesAppBlacklistResponse>;
   /** 批量修改安卓实例信息 {@link ModifyAndroidInstancesInformationRequest} {@link ModifyAndroidInstancesInformationResponse} */
   ModifyAndroidInstancesInformation(data: ModifyAndroidInstancesInformationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidInstancesInformationResponse>;
   /** 批量修改安卓实例的标签 {@link ModifyAndroidInstancesLabelsRequest} {@link ModifyAndroidInstancesLabelsResponse} */
@@ -1297,6 +1489,8 @@ declare interface Gs {
   ModifyAndroidInstancesProperties(data: ModifyAndroidInstancesPropertiesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidInstancesPropertiesResponse>;
   /** 批量修改安卓实例分辨率 {@link ModifyAndroidInstancesResolutionRequest} {@link ModifyAndroidInstancesResolutionResponse} */
   ModifyAndroidInstancesResolution(data: ModifyAndroidInstancesResolutionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidInstancesResolutionResponse>;
+  /** 批量修改安卓实例资源限制 {@link ModifyAndroidInstancesResourcesRequest} {@link ModifyAndroidInstancesResourcesResponse} */
+  ModifyAndroidInstancesResources(data: ModifyAndroidInstancesResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidInstancesResourcesResponse>;
   /** 批量修改安卓实例的用户ID {@link ModifyAndroidInstancesUserIdRequest} {@link ModifyAndroidInstancesUserIdResponse} */
   ModifyAndroidInstancesUserId(data: ModifyAndroidInstancesUserIdRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAndroidInstancesUserIdResponse>;
   /** 批量重启安卓实例宿主机 {@link RebootAndroidInstanceHostsRequest} {@link RebootAndroidInstanceHostsResponse} */
@@ -1311,6 +1505,10 @@ declare interface Gs {
   RestoreAndroidInstanceFromStorage(data: RestoreAndroidInstanceFromStorageRequest, config?: AxiosRequestConfig): AxiosPromise<RestoreAndroidInstanceFromStorageResponse>;
   /** 保存游戏存档 {@link SaveGameArchiveRequest} {@link SaveGameArchiveResponse} */
   SaveGameArchive(data: SaveGameArchiveRequest, config?: AxiosRequestConfig): AxiosPromise<SaveGameArchiveResponse>;
+  /** 批量设置安卓实例应用后台保活 {@link SetAndroidInstancesBGAppKeepAliveRequest} {@link SetAndroidInstancesBGAppKeepAliveResponse} */
+  SetAndroidInstancesBGAppKeepAlive(data: SetAndroidInstancesBGAppKeepAliveRequest, config?: AxiosRequestConfig): AxiosPromise<SetAndroidInstancesBGAppKeepAliveResponse>;
+  /** 批量设置安卓实例应用前台保活 {@link SetAndroidInstancesFGAppKeepAliveRequest} {@link SetAndroidInstancesFGAppKeepAliveResponse} */
+  SetAndroidInstancesFGAppKeepAlive(data: SetAndroidInstancesFGAppKeepAliveRequest, config?: AxiosRequestConfig): AxiosPromise<SetAndroidInstancesFGAppKeepAliveResponse>;
   /** 开机安卓实例 {@link StartAndroidInstancesRequest} {@link StartAndroidInstancesResponse} */
   StartAndroidInstances(data: StartAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StartAndroidInstancesResponse>;
   /** 启动安卓实例应用 {@link StartAndroidInstancesAppRequest} {@link StartAndroidInstancesAppResponse} */

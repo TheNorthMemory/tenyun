@@ -2438,6 +2438,8 @@ declare interface FileTamperRule {
   Action: string;
   /** 监控行为read 读取文件write 修改文件read-write 读取修改文件 */
   FileAction?: string;
+  /** 命令行参数 没有填* */
+  Args?: string;
 }
 
 /** 主机关联核心文件规则数量信息 */
@@ -5440,6 +5442,16 @@ declare interface VulEffectHostList {
   CloudTags?: Tags[];
   /** 主机额外信息 */
   MachineExtraInfo?: MachineExtraInfo;
+  /** 主机类型 */
+  MachineType?: string;
+  /** 可用区ID */
+  RegionId?: number;
+  /** 修复任务是否创建了快照： 0-未创建，其他-已创建 */
+  HasSnapshot?: number;
+  /** 最后修复时间 */
+  LatestFixTime?: string;
+  /** 说明 */
+  DescriptionEn?: string;
 }
 
 /** 漏洞影响组件详情 */
@@ -5522,10 +5534,12 @@ declare interface VulFixStatusSnapshotInfo {
   SnapshotId?: string;
   /** 记录唯一id */
   Id?: number;
-  /** 快照状态 0-初始状态1-快照创建成功；2-快照创建失败； */
+  /** 快照状态 0-初始状态1-快照创建成功；2-快照创建失败；10-不支持，11-无需创建 */
   Status?: number;
   /** 快照创建失败原因 */
   FailReason?: string;
+  /** 主机类型 */
+  MachineType?: string;
 }
 
 /** 服务器风险top5实体 */
@@ -5564,6 +5578,8 @@ declare interface VulInfoHostInfo {
   Uuid?: string;
   /** 主机InstanceId */
   InstanceId?: string;
+  /** 主机类型 */
+  MachineType?: string;
 }
 
 /** 主机安全-漏洞管理-漏洞列表 */
@@ -5622,6 +5638,8 @@ declare interface VulInfoList {
   Method?: number;
   /** 漏洞是否支持修复 0不支持，1支持 */
   VulFixSwitch?: number;
+  /** 最近修复时间 */
+  LatestFixTime?: string;
 }
 
 /** 漏洞等级数量实体 */
