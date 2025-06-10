@@ -716,6 +716,22 @@ declare interface CreateNodePoolResponse {
   RequestId?: string;
 }
 
+declare interface DeleteClusterMachinesRequest {
+  /** 集群 ID */
+  ClusterId: string;
+  /** 节点名列表 */
+  MachineNames: string[];
+  /** 删除节点时是否缩容节点池，true为缩容 */
+  EnableScaleDown?: boolean;
+  /** 集群实例删除时的策略：terminate（销毁实例，仅支持按量计费云主机实例）retain（仅移除，保留实例） */
+  InstanceDeleteMode?: string;
+}
+
+declare interface DeleteClusterMachinesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteHealthCheckPolicyRequest {
   /** 集群 ID */
   ClusterId: string;
@@ -7589,6 +7605,8 @@ declare interface Tke {
   CreateHealthCheckPolicy(data: CreateHealthCheckPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHealthCheckPolicyResponse>;
   /** 创建 TKE 节点池 {@link CreateNodePoolRequest} {@link CreateNodePoolResponse} */
   CreateNodePool(data: CreateNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNodePoolResponse>;
+  /** 删除原生节点池节点 {@link DeleteClusterMachinesRequest} {@link DeleteClusterMachinesResponse} */
+  DeleteClusterMachines(data: DeleteClusterMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterMachinesResponse>;
   /** 删除健康检测策略 {@link DeleteHealthCheckPolicyRequest} {@link DeleteHealthCheckPolicyResponse} */
   DeleteHealthCheckPolicy(data: DeleteHealthCheckPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHealthCheckPolicyResponse>;
   /** 删除 TKE 节点池 {@link DeleteNodePoolRequest} {@link DeleteNodePoolResponse} */

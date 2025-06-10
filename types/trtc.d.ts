@@ -48,6 +48,10 @@ declare interface AgentConfig {
   WelcomeMessagePriority?: number;
   /** 用于过滤LLM返回内容，不播放括号中的内容。1：中文括号（）2：英文括号()3：中文方括号【】4：英文方括号[]5：英文花括号{}默认值为空，表示不进行过滤。 */
   FilterBracketsContent?: number;
+  /** 环境音设置 */
+  AmbientSound?: AmbientSound;
+  /** 声纹配置 */
+  VoicePrint?: VoicePrint;
 }
 
 /** 转推服务加入TRTC房间的机器人参数。 */
@@ -58,6 +62,14 @@ declare interface AgentParams {
   UserSig?: string;
   /** 所有参与混流转推的主播持续离开TRTC房间或切换成观众超过MaxIdleTime的时长，自动停止转推，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于 86400秒(24小时)。 */
   MaxIdleTime?: number;
+}
+
+/** 背景音设置，将在通话中添加环境音效，使体验更加逼真。目前支持以下选项：coffee_shop: 咖啡店氛围，背景中有人聊天。busy_office: 客服中心street_traffic: 户外街道evening_mountain: 户外山林 */
+declare interface AmbientSound {
+  /** 环境场景选择 */
+  Scene: string;
+  /** 控制环境音的音量。取值的范围是 [0,2]。值越低，环境音越小；值越高，环境音越响亮。如果未设置，则使用默认值 1。 */
+  Volume?: number;
 }
 
 /** 音频编码参数。 */
@@ -1002,6 +1014,34 @@ declare interface VideoParams {
   Gop: number;
 }
 
+/** 声纹配置参数 */
+declare interface VoicePrint {
+  /** 默认为0，表示不启用声纹。1表示使用固定声纹，且需要填写voiceprint id。2表示使用动态声纹，不需要使用voiceprint id，内部动态选择主讲人声纹 */
+  Mode?: number;
+  /** 只有当VoicePrint Mode为1时需要填写，目前仅支持填写一个声纹id */
+  IdList?: string[];
+}
+
+/** 声纹查询数据 */
+declare interface VoicePrintInfo {
+  /** 声纹ID */
+  VoicePrintId?: string;
+  /** 应用id */
+  AppId?: number;
+  /** 和声纹绑定的MetaInfo */
+  VoicePrintMetaInfo?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 音频格式,当前只有0(代表wav) */
+  AudioFormat?: number;
+  /** 音频名称 */
+  AudioName?: string;
+  /** 请求毫秒时间戳 */
+  ReqTimestamp?: number;
+}
+
 /** 水印布局参数 */
 declare interface WaterMark {
   /** 水印类型，0为图片（默认），1为文字，2为时间戳。 */
@@ -1214,6 +1254,16 @@ declare interface DeletePictureRequest {
 }
 
 declare interface DeletePictureResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteVoicePrintRequest {
+  /** 声纹信息ID */
+  VoicePrintId: string;
+}
+
+declare interface DeleteVoicePrintResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1724,6 +1774,26 @@ declare interface DescribeUserInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeVoicePrintRequest {
+  /** 查询方式，0表示查询特定VoicePrintId，1表示分页查询 */
+  DescribeMode: number;
+  /** 声纹ID */
+  VoicePrintIdList?: string[];
+  /** 当前页码,从1开始,DescribeMode为1时填写 */
+  PageIndex?: number;
+  /** 每页条数 最少20,DescribeMode为1时填写 */
+  PageSize?: number;
+}
+
+declare interface DescribeVoicePrintResponse {
+  /** 总的条数 */
+  TotalCount?: number;
+  /** 声纹信息 */
+  Data?: VoicePrintInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeWebRecordRequest {
   /** 开始页面录制时返回的任务id */
   TaskId?: string;
@@ -1802,6 +1872,26 @@ declare interface ModifyPictureRequest {
 }
 
 declare interface ModifyPictureResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RegisterVoicePrintRequest {
+  /** 整个wav音频文件的base64字符串,其中wav文件限定为16k或8k采样率, 16bit位深, 单声道, 8到18秒有效音频时长,编码数据大小不超过2M */
+  Audio: string;
+  /** 毫秒时间戳 */
+  ReqTimestamp: number;
+  /** 音频格式,目前只支持0,代表wav */
+  AudioFormat: number;
+  /** 音频名称,长度不要超过32 */
+  AudioName: string;
+  /** 和声纹绑定的MetaInfo，长度最大不超过512 */
+  AudioMetaInfo?: string;
+}
+
+declare interface RegisterVoicePrintResponse {
+  /** 声纹信息ID */
+  VoicePrintId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2180,6 +2270,24 @@ declare interface UpdateStreamIngestResponse {
   RequestId?: string;
 }
 
+declare interface UpdateVoicePrintRequest {
+  /** 声纹信息ID */
+  VoicePrintId: string;
+  /** 毫秒时间戳 */
+  ReqTimestamp: number;
+  /** 音频格式,目前只支持0,代表wav */
+  AudioFormat?: number;
+  /** 整个wav音频文件的base64字符串,其中wav文件限定为16k或8k采样率, 16bit位深, 单声道, 8到18秒有效音频时长,编码数据大小不超过2M */
+  Audio?: string;
+  /** 和声纹绑定的MetaInfo，长度最大不超过512 */
+  AudioMetaInfo?: string;
+}
+
+declare interface UpdateVoicePrintResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Trtc 实时音视频} */
 declare interface Trtc {
   (): Versions;
@@ -2197,6 +2305,8 @@ declare interface Trtc {
   DeleteCloudRecording(data: DeleteCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudRecordingResponse>;
   /** 删除图片 {@link DeletePictureRequest} {@link DeletePictureResponse} */
   DeletePicture(data: DeletePictureRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePictureResponse>;
+  /** 删除声纹信息 {@link DeleteVoicePrintRequest} {@link DeleteVoicePrintResponse} */
+  DeleteVoicePrint(data: DeleteVoicePrintRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVoicePrintResponse>;
   /** 查询AI对话状态 {@link DescribeAIConversationRequest} {@link DescribeAIConversationResponse} */
   DescribeAIConversation(data?: DescribeAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIConversationResponse>;
   /** 查询AI转录任务状态 {@link DescribeAITranscriptionRequest} {@link DescribeAITranscriptionResponse} */
@@ -2249,6 +2359,8 @@ declare interface Trtc {
   DescribeUserEvent(data: DescribeUserEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserEventResponse>;
   /** 查询历史用户列表 {@link DescribeUserInfoRequest} {@link DescribeUserInfoResponse} */
   DescribeUserInfo(data: DescribeUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserInfoResponse>;
+  /** 查询声纹信息 {@link DescribeVoicePrintRequest} {@link DescribeVoicePrintResponse} */
+  DescribeVoicePrint(data: DescribeVoicePrintRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVoicePrintResponse>;
   /** 查询页面录制 {@link DescribeWebRecordRequest} {@link DescribeWebRecordResponse} */
   DescribeWebRecord(data?: DescribeWebRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebRecordResponse>;
   /** 解散房间 {@link DismissRoomRequest} {@link DismissRoomResponse} */
@@ -2259,6 +2371,8 @@ declare interface Trtc {
   ModifyCloudRecording(data: ModifyCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudRecordingResponse>;
   /** 修改图片 {@link ModifyPictureRequest} {@link ModifyPictureResponse} */
   ModifyPicture(data: ModifyPictureRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPictureResponse>;
+  /** 注册声纹信息 {@link RegisterVoicePrintRequest} {@link RegisterVoicePrintResponse} */
+  RegisterVoicePrint(data: RegisterVoicePrintRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterVoicePrintResponse>;
   /** 移出用户 {@link RemoveUserRequest} {@link RemoveUserResponse} */
   RemoveUser(data: RemoveUserRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveUserResponse>;
   /** 移出用户（字符串房间号） {@link RemoveUserByStrRoomIdRequest} {@link RemoveUserByStrRoomIdResponse} */
@@ -2297,6 +2411,8 @@ declare interface Trtc {
   UpdatePublishCdnStream(data: UpdatePublishCdnStreamRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePublishCdnStreamResponse>;
   /** 更新输入在线媒体流 {@link UpdateStreamIngestRequest} {@link UpdateStreamIngestResponse} */
   UpdateStreamIngest(data: UpdateStreamIngestRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateStreamIngestResponse>;
+  /** 更新声纹信息 {@link UpdateVoicePrintRequest} {@link UpdateVoicePrintResponse} */
+  UpdateVoicePrint(data: UpdateVoicePrintRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateVoicePrintResponse>;
 }
 
 export declare type Versions = ["2019-07-22"];

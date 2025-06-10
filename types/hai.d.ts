@@ -382,6 +382,22 @@ declare interface InquirePriceRunInstancesResponse {
   RequestId?: string;
 }
 
+declare interface ResetInstancesPasswordRequest {
+  /** 实例ID列表 */
+  InstanceIds: string[];
+  /** 实例密码必须8-30位，推荐使用12位以上密码，不能以“/”开头，至少包含以下字符中的三种不同字符，字符种类：小写字母：[a-z]大写字母：[A-Z]数字：0-9特殊字符： ()\`\~!@#$%^&\*-+=\_|{}[]:;'<>,.?/ */
+  Password: string;
+  /** 默认为False，True代表只验证接口连通性 */
+  DryRun?: boolean;
+}
+
+declare interface ResetInstancesPasswordResponse {
+  /** task任务id */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RunInstancesRequest {
   /** 应用ID通过调用接口[DescribeApplications](https://cloud.tencent.com/document/api/1721/101609)获取。 */
   ApplicationId: string;
@@ -471,6 +487,8 @@ declare interface Hai {
   DescribeServiceLoginSettings(data: DescribeServiceLoginSettingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceLoginSettingsResponse>;
   /** 创建实例询价 {@link InquirePriceRunInstancesRequest} {@link InquirePriceRunInstancesResponse} */
   InquirePriceRunInstances(data: InquirePriceRunInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRunInstancesResponse>;
+  /** 重置实例的用户密码 {@link ResetInstancesPasswordRequest} {@link ResetInstancesPasswordResponse} */
+  ResetInstancesPassword(data: ResetInstancesPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetInstancesPasswordResponse>;
   /** 创建实例 {@link RunInstancesRequest} {@link RunInstancesResponse} */
   RunInstances(data: RunInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RunInstancesResponse>;
   /** 启动实例 {@link StartInstanceRequest} {@link StartInstanceResponse} */

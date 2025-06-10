@@ -44,13 +44,13 @@ declare interface AutoMountConfiguration {
 
 /** 描述了定期快照策略的详细信息 */
 declare interface AutoSnapshotPolicy {
-  /** 已绑定当前定期快照策略的云盘ID列表。 */
+  /** 已绑定当前定期快照策略的云盘ID列表。DescribeDiskAssociatedAutoSnapshotPolicy场景下该字段返回为空。 */
   DiskIdSet?: string[];
   /** 定期快照策略是否激活。 */
   IsActivated?: boolean;
   /** 定期快照策略的状态。取值范围： NORMAL：正常 ISOLATED：已隔离 */
   AutoSnapshotPolicyState?: string;
-  /** 是否是跨账号复制快照快照, 1：是, 0: 不是 */
+  /** 是否是跨账号复制快照, 1：是, 0: 不是 */
   IsCopyToRemote?: number;
   /** 使用该定期快照策略创建出来的快照是否永久保留。 */
   IsPermanent?: boolean;
@@ -312,7 +312,7 @@ declare interface Image {
 declare interface Placement {
   /** 云硬盘所属的[可用区](/document/product/213/15753)。该参数也可以通过调用 [DescribeZones](/document/product/213/15707) 的返回值中的Zone字段来获取。 */
   Zone: string;
-  /** 围笼Id。作为入参时，表示对指定的CageId的资源进行操作，可为空。 作为出参时，表示资源所属围笼ID，可为空。 */
+  /** 围笼Id，可通过 [DescribeDiskStoragePool](https://cloud.tencent.com/document/api/362/62143) 获取。作为入参时，表示对指定的CageId的资源进行操作，可为空。 作为出参时，表示资源所属围笼ID，可为空。 */
   CageId?: string | null;
   /** 实例所属项目ID，可通过[DescribeProject](/document/api/651/78725)获取。不填默认为0，表示默认项目。 */
   ProjectId?: number;
@@ -320,7 +320,7 @@ declare interface Placement {
   ProjectName?: string | null;
   /** 独享集群名字。作为入参时，忽略。作为出参时，表示云硬盘所属的独享集群名，可为空。 */
   CdcName?: string | null;
-  /** 实例所属的独享集群ID。作为入参时，表示对指定的CdcId独享集群的资源进行操作，可为空。 作为出参时，表示资源所属的独享集群的ID，可为空。 */
+  /** 实例所属的独享集群ID。可通过 [DescribeDiskStoragePool](https://cloud.tencent.com/document/api/362/62143) 获取。作为入参时，表示对指定的CdcId独享集群的资源进行操作，可为空。 作为出参时，表示资源所属的独享集群的ID，可为空。 */
   CdcId?: string | null;
   /** 独享集群id。 */
   DedicatedClusterId?: string;
@@ -525,7 +525,7 @@ declare interface ApplySnapshotRequest {
   SnapshotId: string;
   /** 快照原云硬盘ID，可通过[DescribeDisks](/document/product/362/16315)接口查询。 */
   DiskId: string;
-  /** 回滚前是否执行自动关机，仅支持回滚快照至已挂载的云硬盘时传入。 */
+  /** 回滚前是否执行自动关机，仅支持回滚快照至已挂载的云硬盘时传入。此参数为true时，AutoStartInstance才能为true。 */
   AutoStopInstance?: boolean;
   /** 回滚完成后是否自动开机，仅支持回滚快照至已挂载的云硬盘时传入。该参数传入时，需要同时传入AutoStopInstance参数。 */
   AutoStartInstance?: boolean;
@@ -653,7 +653,7 @@ declare interface CreateDisksRequest {
   AutoMountConfiguration?: AutoMountConfiguration;
   /** 指定云硬盘备份点配额。 */
   DiskBackupQuota?: number;
-  /** 创建云盘时是否开启性能突发。当前仅支持极速型云盘（CLOUD_TSSD）和增强型SSD云硬盘（CLOUD_HSSD）。 */
+  /** 创建云盘时是否开启性能突发。当前仅支持极速型云盘（CLOUD_TSSD）和增强型SSD云硬盘（CLOUD_HSSD）且云盘大小不小于460GiB。 */
   BurstPerformance?: boolean;
   /** 指定云硬盘加密类型，取值为ENCRYPT_V1和ENCRYPT_V2，分别表示第一代和第二代加密技术，两种加密技术互不兼容。推荐优先使用第二代加密技术ENCRYPT_V2，第一代加密技术仅支持在部分老旧机型使用。该参数仅当创建加密云硬盘时有效。 */
   EncryptType?: string;
@@ -795,7 +795,7 @@ declare interface DescribeDiskBackupsRequest {
   Offset?: number;
   /** 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](/document/product/362/15633)中的相关小节。 */
   Limit?: number;
-  /** 输出云硬盘备份点列表的排列顺序。取值范围：ASC：升序排列DESC：降序排列。 */
+  /** 输出云硬盘备份点列表的排列顺序，默认排序：ASC。取值范围：ASC：升序排列DESC：降序排列。 */
   Order?: string;
   /** 云硬盘备份点列表排序的依据字段。取值范围：CREATE_TIME：依据云硬盘备份点的创建时间排序默认按创建时间排序。 */
   OrderField?: string;

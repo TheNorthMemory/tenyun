@@ -232,6 +232,14 @@ declare interface CarrierPrivilegeNumberApplicant {
   UpdateTime?: number;
 }
 
+/** 座席登录的终端信息 */
+declare interface Client {
+  /** 登录的端类型，"Web"表示web工作台，"WeChatMiniProgram"表示微信小程序 */
+  ClientType?: string;
+  /** 当前登录的端是否在前台。若登录的端是Web，则该值为true；若登录的端是WeChatMiniProgram，true表示打开着微信小程序，false表示微信小程序退到后台 */
+  IsConnected?: boolean;
+}
+
 /** 企业资质申请信息 */
 declare interface CompanyApplyInfo {
   /** 申请人身份，0-公司法定代表人，1-经办人（受法定代表人委托） */
@@ -758,6 +766,8 @@ declare interface StaffStatusMetrics {
   LastOnlineTimestamp?: number | null;
   /** 最近一次状态时间戳 */
   LastStatusTimestamp?: number | null;
+  /** 客服登录的端信息 */
+  ClientInfo?: Client[];
 }
 
 /** 电话话单信息 */

@@ -408,6 +408,18 @@ declare interface DevicesItem {
   DeviceName: string;
 }
 
+/** Diary Simple Highlight 配置 */
+declare interface DiarySHLConfig {
+  /** 每个视频偏移时长，单位秒 */
+  StartOffset?: number;
+  /** 视频浓缩倍数，支持1,2,4之间 */
+  PlaySpeed?: number;
+  /** 单个视频最小提取时长，单位秒 */
+  MiniExtract?: number;
+  /** 每天最终输出视频时长，单位秒注：免费版固定10s */
+  OutDuration?: number;
+}
+
 /** 设备事件的搜索结果项 */
 declare interface EventHistoryItem {
   /** 事件的时间戳 */
@@ -3629,7 +3641,7 @@ declare interface ModifyCloudStorageAIServiceRequest {
   ProductId: string;
   /** 设备名称 */
   DeviceName: string;
-  /** 云存 AI 服务类型。可选值：- `RealtimeObjectDetect`：目标检测- `Highlight`：视频浓缩 */
+  /** 云存 AI 服务类型。可选值：- `RealtimeObjectDetect`：目标检测- `Highlight`：视频浓缩- `SimpleHighlight`：TrueX SimpleHighlight */
   ServiceType: string;
   /** 视频分析启用状态 */
   Enabled?: boolean;
@@ -3637,6 +3649,8 @@ declare interface ModifyCloudStorageAIServiceRequest {
   ROI?: string;
   /** 视频分析配置参数 */
   Config?: string;
+  /** SimpleHighlight 算法配置参数 */
+  SHLConfig?: DiarySHLConfig;
 }
 
 declare interface ModifyCloudStorageAIServiceResponse {

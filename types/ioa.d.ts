@@ -106,6 +106,50 @@ declare interface DescribeDLPFileDetectResultData {
   DetectResult?: string;
 }
 
+/** 终端硬件信息列表Item数据 */
+declare interface DescribeDeviceHardwareInfoItem {
+  /** 设备ID */
+  Id?: number;
+  /** 设备唯一标识符 */
+  Mid?: string;
+  /** OS平台 0 Windows 1 Linux 2 macOS 4 Android 5 iOS */
+  OsType?: number;
+  /** 终端名 */
+  Name?: string;
+  /** 终端用户名 */
+  UserName?: string;
+  /** 授权状态（ 4未授权 5已授权） */
+  Status?: number;
+  /** 设备所属分组ID */
+  GroupId?: number;
+  /** 设备所属分组名 */
+  GroupName?: string;
+  /** 设备所属分组路径 */
+  GroupNamePath?: string;
+  /** 最近登录账户的姓名 */
+  AccountName?: string;
+  /** 出口IP */
+  Ip?: string;
+  /** MAC地址 */
+  MacAddr?: string;
+  /** CPU品牌型号 */
+  Cpu?: string;
+  /** 内存信息 */
+  Memory?: string;
+  /** 硬盘信息 */
+  HardDiskSize?: string;
+  /** 显示器品牌型号 */
+  Monitor?: string;
+}
+
+/** 终端硬件信息列表响应详情 */
+declare interface DescribeDeviceHardwareInfoListRspData {
+  /** 分页数据 */
+  Page?: Paging;
+  /** 终端硬件信息数据数组 */
+  Items?: DescribeDeviceHardwareInfoItem[];
+}
+
 /** 分页的data数据 */
 declare interface DescribeDevicesPageRsp {
   /** 数据分页信息 */
@@ -488,6 +532,24 @@ declare interface DescribeDLPFileDetectResultResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDeviceHardwareInfoListRequest {
+  /** 【必填】设备分组id（需要和OsType匹配），下面是私有化场景下默认id：id-名称-操作系统1	全网终端	Win2	未分组终端	Win30000000	服务器	Win40000101	全网终端	Linux40000102	未分组终端	Linux40000103	服务器	Linux40000201	全网终端	macOS40000202	未分组终端	macOS40000203	服务器	macOS40000401	全网终端	Android40000402	未分组终端	Android40000501	全网终端	iOS40000502	未分组终端	iOSSaaS需要调用分组接口DescribeDeviceChildGroups获取对应分组id */
+  GroupId: number;
+  /** 【必填】操作系统类型（0: win，1：linux，2: mac，4：android，5：ios 默认值0），需要和GroupId或者GroupIds匹配 */
+  OsType: number;
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
+  /** 过滤条件参数（字段含义请参考接口返回值） - Name, 类型String，支持操作：【eq，like，ilike】，支持排序 - UserName, 类型String，支持操作：【eq，like，ilike】，支持排序 - IoaUserName，类型String，支持操作：【eq，like，ilike】，支持排序 - MacAddr, 类型String，支持操作：【eq，like，ilike】，支持排序 - Ip, 类型String，支持操作：【eq，like，ilike】，支持排序 ，支持排序分页参数- PageNum 从1开始，小于等于0时使用默认参数- PageSize 最大值5000，最好不超过100 */
+  Condition?: Condition;
+}
+
+declare interface DescribeDeviceHardwareInfoListResponse {
+  /** 分页的data数据 */
+  Data?: DescribeDeviceHardwareInfoListRspData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDevicesRequest {
   /** 过滤条件参数（字段含义请参考接口返回值）- Mid, 类型String，支持操作：【eq，like，ilike】，支持排序- Name, 类型String，支持操作：【eq，like，ilike】，支持排序- Itime, 类型String，支持操作：【eq，like，ilike】，支持排序- UserName, 类型String，支持操作：【eq，like，ilike】，支持排序- MacAddr, 类型String，支持操作：【eq，like，ilike】，支持排序- UserId, 类型String，支持操作：【eq，like，ilike】，支持排序- Ip, 类型String，支持操作：【eq，like，ilike】，支持排序- Tags，类型String，支持操作：【eq，like，ilike】，支持排序- LocalIpList，类型String，支持操作：【eq，like，ilike】，支持排序- SerialNum，类型String，支持操作：【eq，like，ilike】，支持排序- Version，类型String，支持操作：【eq，like，ilike】，支持排序- StrVersion，类型String，支持操作：【eq，like，ilike】，支持排序- RtpStatus，类型String，支持操作：【eq，like，ilike】，**不支持排序**- HostName，类型String，支持操作：【eq，like，ilike】，支持排序- IoaUserName，类型String，支持操作：【eq，like，ilike】，支持排序- GroupName，类型String，支持操作：【eq，like，ilike】，支持排序- CriticalVulListCount，**类型Int**，支持操作：【eq】，**不支持排序**- RiskCount，**类型Int**，支持操作：【eq】，**不支持排序**- VulVersion，类型String，支持操作：【eq，like，ilike】，**不支持排序**- Virusver，类型String，支持操作：【eq，like，ilike】，**不支持排序**- SysRepver，类型String，支持操作：【eq，like，ilike】，**不支持排序**- BaseBoardSn，类型String，支持操作：【eq，like，ilike】，支持排序- Os，类型String，支持操作：【eq，like，ilike】，支持排序- ConnActiveTime，类型String，支持操作：【eq，like，ilike】，**不支持排序**- FirewallStatus，**类型Int**，支持操作：【eq】，**不支持排序**- ProfileName，类型String，支持操作：【eq，like，ilike】，支持排序- DomainName，类型String，支持操作：【eq，like，ilike】，支持排序- SysRepVersion，类型String，支持操作：【eq，like，ilike】，支持排序- VirusVer，类型String，支持操作：【eq，like，ilike】，支持排序- Cpu，类型String，支持操作：【eq，like，ilike】，支持排序- Memory，类型String，支持操作：【eq，like，ilike】，支持排序- HardDiskSize，类型String，支持操作：【eq，like，ilike】，支持排序- HardwareChangeCount，**类型Int**，支持操作：【eq】，支持排序- AccountName，类型String，支持操作：【like.ilike】，支持排序- AccountGroupName，类型String，支持操作：【like.ilike】，支持排序- ScreenRecordingPermission，**类型Int**，支持操作：【eq】，支持排序- DiskAccessPermission，**类型Int**，支持操作：【eq】，支持排序分页参数- PageNum 从1开始，小于等于0时使用默认参数- PageSize 最大值5000，最好不超过100 */
   Condition?: Condition;
@@ -573,6 +635,8 @@ declare interface Ioa {
   DescribeAccountGroups(data?: DescribeAccountGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountGroupsResponse>;
   /** 查询文件检测结果 {@link DescribeDLPFileDetectResultRequest} {@link DescribeDLPFileDetectResultResponse} */
   DescribeDLPFileDetectResult(data?: DescribeDLPFileDetectResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDLPFileDetectResultResponse>;
+  /** 查询终端硬件信息列表 {@link DescribeDeviceHardwareInfoListRequest} {@link DescribeDeviceHardwareInfoListResponse} */
+  DescribeDeviceHardwareInfoList(data: DescribeDeviceHardwareInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceHardwareInfoListResponse>;
   /** 查询设备列表详情 {@link DescribeDevicesRequest} {@link DescribeDevicesResponse} */
   DescribeDevices(data?: DescribeDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicesResponse>;
   /** 获取账号列表 {@link DescribeLocalAccountsRequest} {@link DescribeLocalAccountsResponse} */

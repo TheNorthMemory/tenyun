@@ -632,7 +632,7 @@ declare interface DiskSpec {
 declare interface DiskSpecInfo {
   /** 磁盘数量 */
   Count: number;
-  /** 系统盘类型 取值范围：CLOUD_SSD：表示云SSD。CLOUD_PREMIUM：表示高效云盘。CLOUD_BASIC：表示云硬盘。LOCAL_BASIC：表示本地盘。LOCAL_SSD：表示本地SSD。数据盘类型 取值范围：CLOUD_SSD：表示云SSD。CLOUD_PREMIUM：表示高效云盘。CLOUD_BASIC：表示云硬盘。LOCAL_BASIC：表示本地盘。LOCAL_SSD：表示本地SSD。CLOUD_HSSD：表示增强型SSD云硬盘。CLOUD_THROUGHPUT：表示吞吐型云硬盘。CLOUD_TSSD：表示极速型SSD云硬盘。 */
+  /** 系统盘类型 取值范围：CLOUD_SSD：表示云SSD。CLOUD_PREMIUM：表示高效云盘。CLOUD_BASIC：表示云硬盘。LOCAL_BASIC：表示本地盘。LOCAL_SSD：表示本地SSD。数据盘类型 取值范围：CLOUD_SSD：表示云SSD。CLOUD_PREMIUM：表示高效云盘。CLOUD_BASIC：表示云硬盘。LOCAL_BASIC：表示本地盘。LOCAL_SSD：表示本地SSD。CLOUD_HSSD：表示增强型SSD云硬盘。CLOUD_THROUGHPUT：表示吞吐型云硬盘。CLOUD_TSSD：表示极速型SSD云硬盘。CLOUD_BIGDATA：表示大数据型云硬盘。CLOUD_HIGHIO：表示高IO型云硬盘。CLOUD_BSSD：表示通用型SSD云硬盘。REMOTE_SSD：表示远端SSD盘。 */
   DiskType: string;
   /** 数据容量，单位为GB */
   DiskSize: number;

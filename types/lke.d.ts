@@ -258,6 +258,14 @@ declare interface AttributeLabel {
   SimilarLabels?: string[] | null;
 }
 
+/** 标签值引用的工作流详情 */
+declare interface AttributeLabelRefByWorkflow {
+  /** 标签值id */
+  AttributeLabelBizId?: string;
+  /** 标签值引用的工作流列表 */
+  WorkflowList?: WorkflowRef[];
+}
+
 /** 应用基础配置 */
 declare interface BaseConfig {
   /** 应用名称 */
@@ -380,6 +388,8 @@ declare interface DigitalHumanConfig {
   Name?: string;
   /** 图像 */
   Avatar?: string;
+  /** 预览图 */
+  PreviewUrl?: string;
 }
 
 /** 文档列表筛选标识位 */
@@ -596,6 +606,8 @@ declare interface KnowledgeQaConfig {
   ImageTextRetrieval?: boolean | null;
   /** 配置语音通话参数 */
   AiCall?: AICallConfig | null;
+  /** 共享知识库关联配置 */
+  ShareKnowledgeBases?: ShareKnowledgeBase[];
 }
 
 /** 应用管理输出配置 */
@@ -638,7 +650,7 @@ declare interface KnowledgeQaPlugin {
 
 /** 检索配置 */
 declare interface KnowledgeQaSearch {
-  /** 知识来源 doc：文档，qa：问答 taskflow：业务流程，search：搜索增强 */
+  /** 知识来源 doc：文档，qa：问答 taskflow：业务流程，search：搜索增强，database:数据库 */
   Type?: string | null;
   /** 问答-回复灵活度 1：已采纳答案直接回复 2：已采纳润色后回复 */
   ReplyFlexibility?: number | null;
@@ -778,6 +790,8 @@ declare interface ListDocItem {
   CustomerKnowledgeId?: string;
   /** 文档的属性标记，0: 不做用户外部权限校验 */
   AttributeFlags?: number[];
+  /** false:未停用，ture:已停用 */
+  IsDisabled?: boolean;
 }
 
 /** 问答详情数据 */
@@ -826,6 +840,8 @@ declare interface ListQaItem {
   SimilarQuestionNum?: number;
   /** 返回问答关联的相似问,联动搜索,仅展示一条 */
   SimilarQuestionTips?: string;
+  /** 问答是否停用，false:未停用，ture:已停用 */
+  IsDisabled?: boolean;
 }
 
 /** 发布列表详情 */
@@ -896,6 +912,8 @@ declare interface ModelInfo {
   IsExclusive?: boolean;
   /** 模型支持智能通话效果 */
   SupportAiCallStatus?: number;
+  /** 专属并发数 */
+  Concurrency?: number;
 }
 
 /** 模型参数范围 */
@@ -1190,6 +1208,8 @@ declare interface ReferDetail {
   SheetInfos?: string[] | null;
   /** 文档ID */
   DocBizId?: string | null;
+  /** 知识库ID */
+  KnowledgeBizId?: string;
 }
 
 /** 发布拒答 */
@@ -1318,6 +1338,14 @@ declare interface SearchStrategy {
   TableEnhancement?: boolean | null;
 }
 
+/** 共享知识库配置 */
+declare interface ShareKnowledgeBase {
+  /** 共享知识库ID */
+  KnowledgeBizId?: string;
+  /** 检索范围 */
+  SearchRange?: SearchRange;
+}
+
 /** 相似问信息 */
 declare interface SimilarQuestion {
   /** 相似问ID */
@@ -1400,6 +1428,10 @@ declare interface TaskFLowVar {
   VarDesc?: string;
   /** 变量类型 (STRING,INT,FLOAT,BOOL,OBJECT,ARRAY_STRING,ARRAY_INT,ARRAY_FLOAT,ARRAY_BOOL,ARRAY_OBJECT,FILE,DOCUMENT,IMAGE,AUDIO) */
   VarType?: string;
+  /** 自定义变量默认值 */
+  VarDefaultValue?: string;
+  /** 自定义变量文件默认名称 */
+  VarDefaultFileName?: string;
 }
 
 /** 任务流程信息 */
@@ -1560,6 +1592,20 @@ declare interface WorkflowInfo {
   WorkflowReleaseTime?: string | null;
 }
 
+/** WorkflowRef详情 */
+declare interface WorkflowRef {
+  /** 任务流ID */
+  WorkflowId?: string;
+  /** 任务流名称 */
+  WorkflowName?: string;
+  /** 任务流描述 */
+  WorkflowDesc?: string;
+  /** 应用ID */
+  AppBizId?: string;
+  /** 更新时间 */
+  UpdateTime?: number;
+}
+
 /** 工作流运行节点信息 */
 declare interface WorkflowRunNodeInfo {
   /** 节点ID */
@@ -1622,6 +1668,8 @@ declare interface CheckAttributeLabelReferRequest {
 declare interface CheckAttributeLabelReferResponse {
   /** 是否引用 */
   IsRefer?: boolean;
+  /** 引用的工作流详情 */
+  List?: AttributeLabelRefByWorkflow[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1649,6 +1697,8 @@ declare interface CreateAppRequest {
   AppType: string;
   /** 应用基础配置 */
   BaseConfig: BaseConfig;
+  /** 应用模式 standard:标准模式, agent: agent模式，single_workflow：单工作流模式 */
+  Pattern?: string;
 }
 
 declare interface CreateAppResponse {
@@ -1817,6 +1867,10 @@ declare interface CreateVarRequest {
   VarDesc?: string;
   /** 变量类型定义，支持类型如下：(STRING,INT,FLOAT,BOOL,OBJECT,ARRAY_STRING,ARRAY_INT,ARRAY_FLOAT,ARRAY_BOOL,ARRAY_OBJECT,FILE,DOCUMENT,IMAGE,AUDIO);传输过程是json字符串，标签中仅支持"STRING"类型使用 */
   VarType?: string;
+  /** 自定义变量默认值 */
+  VarDefaultValue?: string;
+  /** 自定义变量文件默认名称 */
+  VarDefaultFileName?: string;
 }
 
 declare interface CreateVarResponse {
@@ -2007,6 +2061,8 @@ declare interface DescribeCallStatsGraphRequest {
   AppBizIds?: string[];
   /** 筛选子场景(文档解析场景使用) */
   SubScenes?: string[];
+  /** 应用类型(knowledge_qa应用管理， shared_knowlege 共享知识库) */
+  AppType?: string;
 }
 
 declare interface DescribeCallStatsGraphResponse {
@@ -2146,6 +2202,8 @@ declare interface DescribeDocResponse {
   AttrLabels?: AttrLabel[];
   /** 分类ID */
   CateBizId?: string;
+  /** 文档是否停用，false:未停用，true:已停用 */
+  IsDisabled?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2244,6 +2302,8 @@ declare interface DescribeQAResponse {
   VideoAuditStatus?: number;
   /** 问题描述 */
   QuestionDesc?: string;
+  /** 问答是否停用，false:未停用，true已停用 */
+  IsDisabled?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2405,6 +2465,8 @@ declare interface DescribeTokenUsageGraphRequest {
   EndTime?: string;
   /** 应用id列表 */
   AppBizIds?: string[];
+  /** 应用类型(knowledge_qa应用管理， shared_knowlege 共享知识库) */
+  AppType?: string;
 }
 
 declare interface DescribeTokenUsageGraphResponse {
@@ -2437,6 +2499,8 @@ declare interface DescribeTokenUsageRequest {
   AppBizIds?: string[];
   /** 筛选子场景(文档解析场景使用) */
   SubScenes?: string[];
+  /** 应用类型(knowledge_qa应用管理， shared_knowlege 共享知识库) */
+  AppType?: string;
 }
 
 declare interface DescribeTokenUsageResponse {
@@ -2969,7 +3033,7 @@ declare interface ListDocRequest {
   PageNumber: number;
   /** 每页数量 */
   PageSize: number;
-  /** 查询内容 */
+  /** 查询内容输入特定标识 lke:system:untagged 将查询所有未关联标签的文档 */
   Query?: string;
   /** 文档状态： 1-未生成 2-生成中 3-生成成功 4-生成失败 5-删除中 6-删除成功 7-审核中 8-审核失败 9-审核成功 10-待发布 11-发布中 12-已发布 13-学习中 14-学习失败 15-更新中 16-更新失败 17-解析中 18-解析失败 19-导入失败 20-已过期 21-超量失效 22-超量失效恢复 */
   Status?: number[];
@@ -2981,6 +3045,8 @@ declare interface ListDocRequest {
   FileTypes?: string[];
   /** 文档列表筛选标识位 */
   FilterFlag?: DocFilterFlag[];
+  /** 是否只展示当前分类的数据 0不是，1是 */
+  ShowCurrCate?: number;
 }
 
 declare interface ListDocResponse {
@@ -3031,7 +3097,7 @@ declare interface ListQARequest {
   PageNumber: number;
   /** 每页大小 */
   PageSize: number;
-  /** 查询问题 */
+  /** 查询问题输入特定标识 lke:system:untagged 将查询所有未关联标签的问答 */
   Query?: string;
   /** 校验状态(1未校验2采纳3不采纳) */
   AcceptStatus?: number[];
@@ -3049,6 +3115,8 @@ declare interface ListQARequest {
   QaBizIds?: string[];
   /** 查询类型 filename 名称、 attribute 标签 */
   QueryType?: string;
+  /** 是否只展示当前分类的数据 0不是，1是 */
+  ShowCurrCate?: number;
 }
 
 declare interface ListQAResponse {
@@ -3283,6 +3351,8 @@ declare interface ListUsageCallDetailRequest {
   CallType?: string;
   /** 筛选子场景 */
   SubScenes?: string[];
+  /** 应用类型(knowledge_qa应用管理， shared_knowlege 共享知识库) */
+  AppType?: string;
 }
 
 declare interface ListUsageCallDetailResponse {

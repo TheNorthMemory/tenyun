@@ -44,7 +44,7 @@ declare interface Blueprint {
   ImageUrl?: string;
   /** 镜像所需系统盘大小，单位 GB。 */
   RequiredSystemDiskSize?: number;
-  /** 镜像状态，镜镜像状态，NORMAL（正常）、SYNCING（同步中）、OFFLINE（下线）、ISOLATED（已隔离）、CREATEFAILED（创建失败）、SYNCING_FAILED（目的地域同步失败）、ISOLATING（隔离中）、ISOLATED（已隔离）、DELETING（删除中）、DESTROYING（销毁中）。 */
+  /** 镜像状态。可选值：NORMAL（正常）、SYNCING（同步中）、OFFLINE（下线）、ISOLATED（已隔离）、CREATEFAILED（创建失败）、SYNCING_FAILED（目的地域同步失败）、ISOLATING（隔离中）、ISOLATED（已隔离）、DELETING（删除中）、DESTROYING（销毁中）。 */
   BlueprintState?: string;
   /** 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
   CreatedTime?: string | null;

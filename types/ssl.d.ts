@@ -254,6 +254,8 @@ declare interface Certificates {
   HostingResourceTypes?: string[];
   /** 托管配置信息 */
   HostingConfig?: HostingConfig | null;
+  /** 是否是上传托管续费证书 */
+  IsHostingUploadRenewCert?: boolean;
 }
 
 /** clb实例详情 */
@@ -634,6 +636,16 @@ declare interface ManagerInfo {
   Tags?: Tags[];
 }
 
+/** 管理人预审核的域名列表 */
+declare interface ManagerPreAuditDomain {
+  /** 预审核域名信息 */
+  Domain: string;
+  /** 预审核域名创建时间 */
+  CreateTime: string;
+  /** 预审核域名过期时间 */
+  ExpireTime: string;
+}
+
 /** 管理人的四种审核状态 */
 declare interface ManagerStatusInfo {
   /** 审核类型，枚举值：ov,ev */
@@ -644,6 +656,8 @@ declare interface ManagerStatusInfo {
   CreateTime?: string;
   /** 过期时间 */
   ExpireTime?: string;
+  /** 管理人预审核的域名列表 */
+  ManagerPreAuditDomains?: ManagerPreAuditDomain[];
 }
 
 /** 证书操作日志。 */
@@ -1744,6 +1758,10 @@ declare interface DescribeCertificateDetailResponse {
   DvRevokeAuthDetail?: DvAuths[] | null;
   /** 证书链信息 */
   CertChainInfo?: CertBasicInfo[] | null;
+  /** 证书域名类型， 1（单域名）；2（多域名）；3（泛域名）；4（多泛域名） */
+  DomainType?: number;
+  /** 证书类型，DV（域名型）；OV（企业型）；EV（增强型） */
+  CertType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

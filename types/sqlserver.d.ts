@@ -2159,8 +2159,10 @@ declare interface DescribeBackupFilesRequest {
   Offset?: number;
   /** 按照备份的库名称筛选，不填则不筛选此项 */
   DatabaseName?: string;
-  /** 列表项排序，目前只按照备份大小排序（desc-降序，asc-升序），默认desc */
+  /** 列表项排序，desc-降序、asc-升序，按size排序默认desc，按database排序默认asc */
   OrderBy?: string;
+  /** 排序字段（Size-按备份大小排序，DBs-按数据库名称排序），默认size */
+  OrderByType?: string;
 }
 
 declare interface DescribeBackupFilesResponse {
@@ -2665,6 +2667,8 @@ declare interface DescribeDBsRequest {
   OrderByType?: string;
   /** 是否已开启TDE加密，enable-已加密，disable-未加密 */
   Encryption?: string;
+  /** 排序字段（Name-按名称排序，CreateTime-按创建时间排序），默认CreateTime */
+  OrderBy?: string;
 }
 
 declare interface DescribeDBsResponse {
@@ -2719,6 +2723,8 @@ declare interface DescribeDatabasesRequest {
   OrderByType?: string;
   /** 是否已开启TDE加密，enable-已加密，disable-未加密 */
   Encryption?: string;
+  /** 排序字段（Name-按名称排序，CreateTime-按创建时间排序），默认CreateTime */
+  OrderBy?: string;
 }
 
 declare interface DescribeDatabasesResponse {

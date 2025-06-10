@@ -499,7 +499,7 @@ declare interface ActionAlterCkUserRequest {
 
 declare interface ActionAlterCkUserResponse {
   /** 错误信息 */
-  ErrMsg?: string | null;
+  ErrMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

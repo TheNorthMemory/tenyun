@@ -3449,7 +3449,7 @@ declare interface OperateTemplateRequest {
   Agent: Agent;
   /** 模板ID，为32位字符串。 */
   TemplateId: string;
-  /** 操作类型，可取值如下:DELETE: 删除ENABLE: 启用DISABLE: 停用 */
+  /** 操作类型，可取值如下:DELETE: 删除ENABLE: 启用DISABLE: 停用COPY: 复制新建 */
   OperateType: string;
 }
 

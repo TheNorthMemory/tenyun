@@ -3947,7 +3947,7 @@ declare interface OperateTemplateRequest {
   Operator: UserInfo;
   /** 模板ID，为32位字符串。 */
   TemplateId: string;
-  /** 操作类型，可取值如下:DELETE: 删除ENABLE: 启用DISABLE: 停用 */
+  /** 操作类型，可取值如下:DELETE: 删除ENABLE: 启用DISABLE: 停用COPY: 复制新建 */
   OperateType: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;

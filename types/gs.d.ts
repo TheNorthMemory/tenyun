@@ -812,6 +812,20 @@ declare interface DistributeFileToAndroidInstancesResponse {
   RequestId?: string;
 }
 
+declare interface DistributePhotoToAndroidInstancesRequest {
+  /** 安卓实例 ID 列表 */
+  AndroidInstanceIds: string[];
+  /** 照片下载 URL */
+  PhotoURL: string;
+}
+
+declare interface DistributePhotoToAndroidInstancesResponse {
+  /** 实例任务集合 */
+  TaskSet?: AndroidInstanceTask[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface EnableAndroidInstancesAppRequest {
   /** 安卓实例 ID 列表（最大100条数据） */
   AndroidInstanceIds: string[];
@@ -1459,6 +1473,8 @@ declare interface Gs {
   DisableAndroidInstancesApp(data: DisableAndroidInstancesAppRequest, config?: AxiosRequestConfig): AxiosPromise<DisableAndroidInstancesAppResponse>;
   /** 分发文件到安卓实例 {@link DistributeFileToAndroidInstancesRequest} {@link DistributeFileToAndroidInstancesResponse} */
   DistributeFileToAndroidInstances(data: DistributeFileToAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DistributeFileToAndroidInstancesResponse>;
+  /** 分发照片到安卓实例相册 {@link DistributePhotoToAndroidInstancesRequest} {@link DistributePhotoToAndroidInstancesResponse} */
+  DistributePhotoToAndroidInstances(data: DistributePhotoToAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DistributePhotoToAndroidInstancesResponse>;
   /** 批量启用安桌实例应用 {@link EnableAndroidInstancesAppRequest} {@link EnableAndroidInstancesAppResponse} */
   EnableAndroidInstancesApp(data: EnableAndroidInstancesAppRequest, config?: AxiosRequestConfig): AxiosPromise<EnableAndroidInstancesAppResponse>;
   /** 在安卓实例上异步执行命令 {@link ExecuteCommandOnAndroidInstancesRequest} {@link ExecuteCommandOnAndroidInstancesResponse} */
