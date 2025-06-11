@@ -2954,6 +2954,8 @@ declare interface ImageEraseLogoConfig {
   Switch?: string | null;
   /** 需要擦除的多个框选区域，最多开启16个区域。 */
   ImageAreaBoxes?: ImageAreaBoxInfo[] | null;
+  /** 图片框选区域类型，可选值：logo：图标；text：文字； */
+  DetectTypes?: string[] | null;
 }
 
 /** 图片处理结果信息 */

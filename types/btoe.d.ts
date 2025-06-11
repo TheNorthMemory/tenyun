@@ -541,31 +541,31 @@ declare namespace V20210303 {
 /** {@link Btoe 区块链可信取证} */
 declare interface Btoe {
   (): Versions;
-  /** 音频文件存证 {@link CreateAudioDepositRequest} {@link CreateAudioDepositResponse} */
+  /** @deprecated 音频文件存证 {@link CreateAudioDepositRequest} {@link CreateAudioDepositResponse} */
   CreateAudioDeposit(data: CreateAudioDepositRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAudioDepositResponse>;
-  /** 业务数据明文存证 {@link CreateDataDepositRequest} {@link CreateDataDepositResponse} */
+  /** @deprecated 业务数据明文存证 {@link CreateDataDepositRequest} {@link CreateDataDepositResponse} */
   CreateDataDeposit(data: CreateDataDepositRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataDepositResponse>;
-  /** 文档存证 {@link CreateDocDepositRequest} {@link CreateDocDepositResponse} */
+  /** @deprecated 文档存证 {@link CreateDocDepositRequest} {@link CreateDocDepositResponse} */
   CreateDocDeposit(data: CreateDocDepositRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDocDepositResponse>;
-  /** 哈希上链存证 {@link CreateHashDepositRequest} {@link CreateHashDepositResponse} */
+  /** @deprecated 哈希上链存证 {@link CreateHashDepositRequest} {@link CreateHashDepositResponse} */
   CreateHashDeposit(data: CreateHashDepositRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHashDepositResponse>;
-  /** 哈希上链存证(无证书) {@link CreateHashDepositNoCertRequest} {@link CreateHashDepositNoCertResponse} */
+  /** @deprecated 哈希上链存证(无证书) {@link CreateHashDepositNoCertRequest} {@link CreateHashDepositNoCertResponse} */
   CreateHashDepositNoCert(data: CreateHashDepositNoCertRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHashDepositNoCertResponse>;
-  /** 哈希上链存证(有证书，无签章) {@link CreateHashDepositNoSealRequest} {@link CreateHashDepositNoSealResponse} */
+  /** @deprecated 哈希上链存证(有证书，无签章) {@link CreateHashDepositNoSealRequest} {@link CreateHashDepositNoSealResponse} */
   CreateHashDepositNoSeal(data: CreateHashDepositNoSealRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHashDepositNoSealResponse>;
-  /** 图片文件存证 {@link CreateImageDepositRequest} {@link CreateImageDepositResponse} */
+  /** @deprecated 图片文件存证 {@link CreateImageDepositRequest} {@link CreateImageDepositResponse} */
   CreateImageDeposit(data: CreateImageDepositRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageDepositResponse>;
-  /** 视频文件存证 {@link CreateVideoDepositRequest} {@link CreateVideoDepositResponse} */
+  /** @deprecated 视频文件存证 {@link CreateVideoDepositRequest} {@link CreateVideoDepositResponse} */
   CreateVideoDeposit(data: CreateVideoDepositRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVideoDepositResponse>;
-  /** BTOE存证电子凭证查询 {@link GetDepositCertRequest} {@link GetDepositCertResponse} */
+  /** @deprecated BTOE存证电子凭证查询 {@link GetDepositCertRequest} {@link GetDepositCertResponse} */
   GetDepositCert(data: GetDepositCertRequest, config?: AxiosRequestConfig): AxiosPromise<GetDepositCertResponse>;
-  /** 存证文件查询 {@link GetDepositFileRequest} {@link GetDepositFileResponse} */
+  /** @deprecated 存证文件查询 {@link GetDepositFileRequest} {@link GetDepositFileResponse} */
   GetDepositFile(data: GetDepositFileRequest, config?: AxiosRequestConfig): AxiosPromise<GetDepositFileResponse>;
-  /** 存证基本信息查询 {@link GetDepositInfoRequest} {@link GetDepositInfoResponse} */
+  /** @deprecated 存证基本信息查询 {@link GetDepositInfoRequest} {@link GetDepositInfoResponse} */
   GetDepositInfo(data: GetDepositInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetDepositInfoResponse>;
-  /** 区块链交易hash核验接口 {@link VerifyEvidenceBlockChainTxHashRequest} {@link VerifyEvidenceBlockChainTxHashResponse} */
+  /** @deprecated 区块链交易hash核验接口 {@link VerifyEvidenceBlockChainTxHashRequest} {@link VerifyEvidenceBlockChainTxHashResponse} */
   VerifyEvidenceBlockChainTxHash(data: VerifyEvidenceBlockChainTxHashRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyEvidenceBlockChainTxHashResponse>;
-  /** 核验存证内容hash {@link VerifyEvidenceHashRequest} {@link VerifyEvidenceHashResponse} */
+  /** @deprecated 核验存证内容hash {@link VerifyEvidenceHashRequest} {@link VerifyEvidenceHashResponse} */
   VerifyEvidenceHash(data: VerifyEvidenceHashRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyEvidenceHashResponse>;
   /** @deprecated 音频文件存证 {@link V20210303.CreateAudioDepositRequest} {@link V20210303.CreateAudioDepositResponse} */
   CreateAudioDeposit(data: V20210303.CreateAudioDepositRequest, config: AxiosRequestConfig & V20210303.VersionHeader): AxiosPromise<V20210303.CreateAudioDepositResponse>;

@@ -1325,7 +1325,7 @@ declare interface DescribeNotificationConfigurationsResponse {
 declare interface DescribeRefreshActivitiesRequest {
   /** 刷新活动ID列表。ID形如：`asr-5l2ejpfo`。每次请求的上限为100。参数不支持同时指定`RefreshActivityIds`和`Filters`。 */
   RefreshActivityIds?: string[];
-  /** 过滤条件。 auto-scaling-group-id - String - 是否必填：否 -（过滤条件）按照伸缩组ID过滤。 refresh-activity-status-code - String - 是否必填：否 -（过滤条件）按照刷新活动状态过滤。（INIT：初始化中 | RUNNING：运行中 | SUCCESSFUL：活动成功 | FAILED_PAUSE：失败暂停 | AUTO_PAUSE：自动暂停 | MANUAL_PAUSE：手动暂停 | CANCELLED：活动取消 | FAILED：活动失败） refresh-activity-type - String - 是否必填：否 -（过滤条件）按照刷新活动类型过滤。（NORMAL：正常刷新活动 | ROLLBACK：回滚刷新活动） refresh-activity-id - String - 是否必填：否 -（过滤条件）按照刷新活动ID过滤。 每次请求的Filters的上限为10，Filter.Values的上限为5。参数不支持同时指定RefreshActivityIds和Filters。 */
+  /** 过滤条件。 auto-scaling-group-id - String - 是否必填：否 -（过滤条件）按照伸缩组ID过滤。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 或调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。 refresh-activity-status-code - String - 是否必填：否 -（过滤条件）按照刷新活动状态过滤。（INIT：初始化中 | RUNNING：运行中 | SUCCESSFUL：活动成功 | FAILED_PAUSE：失败暂停 | AUTO_PAUSE：自动暂停 | MANUAL_PAUSE：手动暂停 | CANCELLED：活动取消 | FAILED：活动失败） refresh-activity-type - String - 是否必填：否 -（过滤条件）按照刷新活动类型过滤。（NORMAL：正常刷新活动 | ROLLBACK：回滚刷新活动） refresh-activity-id - String - 是否必填：否 -（过滤条件）按照刷新活动ID过滤。 每次请求的Filters的上限为10，Filter.Values的上限为5。参数不支持同时指定RefreshActivityIds和Filters。 */
   Filters?: Filter[];
   /** 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
   Limit?: number;
@@ -1850,7 +1850,7 @@ declare interface StartInstanceRefreshRequest {
   AutoScalingGroupId: string;
   /** 刷新设置。 */
   RefreshSettings: RefreshSettings;
-  /** 刷新模式。取值范围：ROLLING_UPDATE_RESET：重装系统进行滚动更新ROLLING_UPDATE_REPLACE：新建实例替换进行滚动更新，该模式暂不支持回滚接口 */
+  /** 刷新模式。默认值为 ROLLING_UPDATE_RESET，取值范围：ROLLING_UPDATE_RESET：重装系统进行滚动更新ROLLING_UPDATE_REPLACE：新建实例替换进行滚动更新，该模式暂不支持回滚接口 */
   RefreshMode?: string;
 }
 

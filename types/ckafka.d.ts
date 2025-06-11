@@ -4261,6 +4261,8 @@ declare interface ModifyDatahubTaskRequest {
   TaskId: string;
   /** 任务名称 */
   TaskName?: string;
+  /** 任务描述信息 */
+  Description?: string;
 }
 
 declare interface ModifyDatahubTaskResponse {

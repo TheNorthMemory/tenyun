@@ -116,6 +116,38 @@ declare interface AiopsSimpleTaskDto {
   ExectuorPolicy?: string | null;
 }
 
+/** 告警信息 */
+declare interface AlarmDsVO {
+  /** 告警策略id */
+  AlarmId?: string | null;
+  /** 任务id */
+  TaskId?: string | null;
+  /** 告警是否生效 */
+  Status?: number | null;
+  /** 告警类别，目前支持失败告警，超时告警 */
+  AlarmType?: string | null;
+  /** 告警方式 ，目前支持email提醒，短信提醒 */
+  AlarmWay?: string | null;
+  /** 告警创建人 */
+  Creator?: string | null;
+  /** 告警接收人 */
+  AlarmRecipient?: string | null;
+  /** 告警接收人ID */
+  AlarmRecipientId?: string | null;
+  /** 告警修改时间 */
+  ModifyTime?: string | null;
+  /** 最近失败告警实例数据时间 */
+  LastFailTime?: string | null;
+  /** 最近超时告警实例数据时间 */
+  LastOverTime?: string | null;
+  /** 最新告警时间 */
+  LastAlarmTime?: string | null;
+  /** AlarmExt信息 */
+  AlarmExt?: AlarmExtDsVO[] | null;
+  /** 告警创建时间 */
+  CreateTime?: string | null;
+}
+
 /** 告警事件详情 */
 declare interface AlarmEventInfo {
   /** 告警ID */
@@ -178,6 +210,20 @@ declare interface AlarmEventInfo {
   IndicatorTimeRangeUnit?: string | null;
   /** 同步类型 */
   SyncType?: number | null;
+}
+
+/** AlarmExtVO信息 */
+declare interface AlarmExtDsVO {
+  /** 告警策略ID */
+  AlarmId?: string | null;
+  /** 扩展字段key */
+  PropName?: string | null;
+  /** 扩展字段value */
+  PropValue?: string | null;
+  /** 告警创建时间 */
+  CreateTime?: string | null;
+  /** 修改时间 */
+  ModifyTime?: string | null;
 }
 
 /** 告警指标 */
@@ -576,6 +622,14 @@ declare interface BytesSpeed {
   NodeName: string | null;
   /** 速度值列表 */
   Values: SpeedValue[] | null;
+}
+
+/** CandidateDsDTo */
+declare interface CandidateDsDTo {
+  /** 取值 */
+  Value?: string | null;
+  /** 取值描述 */
+  ValueDesc?: string | null;
 }
 
 /** 模版详情 */
@@ -1294,9 +1348,9 @@ declare interface DatasourceBaseInfo {
 
 /** 依赖配置 */
 declare interface DependencyConfig {
-  /** 仅五种周期运行依赖配置： HOUR,DAY,WEEK,MONTH,YEAR,CRONTAB,MINUTE */
+  /** 周期运行依赖配置： HOUR,DAY,WEEK,MONTH,YEAR,CRONTAB,MINUTE,RANGE_DAY,RANGE_HOUR,RANGE_MINUTE,LIST_DAY,LIST_HOUR,LIST_MINUTE; */
   DependConfType: string;
-  /** 依赖配置从属周期类型，CURRENT_HOUR，PREVIOUS_HOUR，CURRENT_DAY，PREVIOUS_DAY，PREVIOUS_WEEK，PREVIOUS_FRIDAY，PREVIOUS_WEEKEND，CURRENT_MONTH，PREVIOUS_MONTH，PREVIOUS_END_OF_MONTH * PREVIOUS_BEGIN_OF_MONTH，ALL_MONTH_OF_YEAR，ALL_DAY_OF_YEAR，CURRENT_YEAR，CURRENT，CURRENT_MINUTE，PREVIOUS_MINUTE_CYCLE，PREVIOUS_HOUR_CYCLE */
+  /** 依赖配置从属周期类型，CURRENT_HOUR，PREVIOUS_HOUR，CURRENT_DAY，PREVIOUS_DAY，PREVIOUS_WEEK，PREVIOUS_FRIDAY，PREVIOUS_WEEKEND，CURRENT_MONTH，PREVIOUS_MONTH，PREVIOUS_END_OF_MONTH，PREVIOUS_BEGIN_OF_MONTH，ALL_MONTH_OF_YEAR，ALL_DAY_OF_YEAR，CURRENT_YEAR，CURRENT，CURRENT_MINUTE，PREVIOUS_MINUTE_CYCLE，PREVIOUS_HOUR_CYCLE */
   SubordinateCyclicType: string;
   /** WAITING，等待（默认策略）EXECUTING:执行 */
   DependencyStrategy: string;
@@ -1304,6 +1358,30 @@ declare interface DependencyConfig {
   ParentTask?: TaskInnerInfo | null;
   /** 子任务信息 */
   SonTask?: TaskInnerInfo | null;
+  /** 偏移量 */
+  Offset?: string | null;
+}
+
+/** 依赖配置 */
+declare interface DependencyConfigDsDTO {
+  /** ParentTask任务 */
+  ParentTask: TaskDsDTO | null;
+  /** SonTask任务 */
+  SonTask: TaskDsDTO | null;
+  /** the dependency config */
+  MainCyclicConfig: string | null;
+  /** SubordinateCyclicConfig配置 */
+  SubordinateCyclicConfig: string | null;
+  /** DependencyStrategy策略 */
+  DependencyStrategy: DependencyStrategyDs | null;
+  /** 偏移量 */
+  Offset?: string | null;
+}
+
+/** 依赖配置策略 */
+declare interface DependencyStrategyDs {
+  /** 等待（默认策略）或 执行 */
+  PollingNullStrategy?: string | null;
 }
 
 /** 申请列表 */
@@ -1466,6 +1544,18 @@ declare interface DescribePendingSubmitTaskInfo {
   ExecutorGroupId?: string | null;
   /** 资源组名称 */
   ExecutorGroupName?: string | null;
+}
+
+/** 查询任务绑定的事件的响应 */
+declare interface DescribeRelatedTasksByTaskIdResp {
+  /** 页码 */
+  PageNumber?: number | null;
+  /** 单页大小 */
+  PageSize?: number | null;
+  /** 总条数 */
+  TotalCount?: number | null;
+  /** 任务直接关联的上下游任务列表 */
+  RelatedTaskList?: RelatedTask[] | null;
 }
 
 /** 批量操作任务列表分页 */
@@ -3788,6 +3878,74 @@ declare interface ParamMapDsDto {
   Value?: string | null;
 }
 
+/** 任务参数Dto */
+declare interface ParameterTaskDsDto {
+  /** 任务id */
+  TaskId?: string | null;
+  /** 参数名 */
+  ParamKey?: string | null;
+  /** 参数定义 */
+  ParamDefine?: string | null;
+  /** 参数值 */
+  ParamValue?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** 任务参数输入类型, 取值示例- text 文本输入- kv k-v输入 */
+  InputType?: string | null;
+}
+
+/** 查询任务输入参数Dto */
+declare interface ParameterTaskInDsDto {
+  /** 唯一标识 */
+  Id: number | null;
+  /** 任务id */
+  TaskId: string | null;
+  /** 参数名 */
+  ParamKey: string | null;
+  /** 参数描述 */
+  ParamDesc: string | null;
+  /** 父任务id */
+  FromTaskId: string | null;
+  /** 父任务参数key */
+  FromParamKey: string | null;
+  /** 创建时间 */
+  CreateTime: string | null;
+  /** 升级时间 */
+  UpdateTime: string | null;
+  /** 父任务名 */
+  FromTaskName: string | null;
+  /** 父任务项目id */
+  FromProjectId: string | null;
+  /** 父任务项目名 */
+  FromProjectName: string | null;
+}
+
+/** 任务参数输出dto */
+declare interface ParameterTaskOutDsDto {
+  /** 唯一标识 */
+  Id: number | null;
+  /** 任务id */
+  TaskId: string | null;
+  /** 参数名 */
+  ParamKey: string | null;
+  /** 参数描述 */
+  ParamDesc: string | null;
+  /** 参数定义 */
+  ParamDefine: string | null;
+  /** 创建时间 */
+  CreateTime: string | null;
+  /** 更新时间 */
+  UpdateTime: string | null;
+  /** 任务名 */
+  TaskName: string | null;
+  /** 项目id */
+  ProjectId: string | null;
+  /** 项目名 */
+  ProjectName: string | null;
+}
+
 /** 分区参数 */
 declare interface Partition {
   /** 分区转换策略 */
@@ -3992,6 +4150,32 @@ declare interface RecordsSpeed {
   NodeName: string | null;
   /** 速度值列表 */
   Values: SpeedValue[] | null;
+}
+
+/** 任务直接关联的其他任务 */
+declare interface RelatedTask {
+  /** 查询直接依赖方向，如UP、DOWN */
+  DependencyDirection?: string | null;
+  /** 任务id */
+  TaskId?: string | null;
+  /** 任务名称 */
+  TaskName?: string | null;
+  /** 任务调度周期 */
+  CycleType?: string | null;
+  /** 任务状态 */
+  Status?: string | null;
+  /** 责任人名 */
+  OwnerName?: string | null;
+  /** 事件项目ID */
+  ProjectId?: string | null;
+  /** 项目展示名 */
+  ProjectDisplayName?: string | null;
+  /** 所属工作流id */
+  WorkflowId?: string | null;
+  /** 所属工作流名 */
+  WorkflowName?: string | null;
+  /** 任务类型id */
+  TaskTypeId?: number | null;
 }
 
 /** 上报任务详情 */
@@ -5678,6 +5862,288 @@ declare interface TaskCollectionParamDTO {
   Items?: TaskFormParams[] | null;
 }
 
+/** 循环依赖响应体 */
+declare interface TaskCycleLinkDTO {
+  /** 依赖关系唯一标识 */
+  Id: string | null;
+  /** 上游任务ID */
+  TaskFrom: string | null;
+  /** 上游任务项目ID */
+  TaskFromProjectId: string | null;
+  /** 上游任务工作流ID */
+  TaskFromWorkflowId: string | null;
+  /** 下游任务ID */
+  TaskTo: string | null;
+  /** 下游任务项目ID */
+  TaskToProjectId: string | null;
+  /** 下游任务工作流ID */
+  TaskToWorkflowId: string | null;
+  /** 下游任务基本信息 */
+  TaskToInfo: TaskDsDTO | null;
+  /** 依赖类型 */
+  MainCyclicConfig: string | null;
+  /** 依赖偏移类型 */
+  SubordinateCyclicConfig: string | null;
+  /** 依赖策略 */
+  DependencyStrategy: string | null;
+  /** 自定义依赖偏移量 */
+  Offset: string | null;
+  /** 更新人用户ID */
+  UpdateUserId: string | null;
+  /** 创建人用户ID */
+  CreateUserId: string | null;
+  /** 租户ID */
+  AppId: string | null;
+  /** 主账号ID */
+  OwnerUserId: string | null;
+  /** 创建时间 */
+  CreateTime: string | null;
+  /** 更新时间 */
+  UpdateTime: string | null;
+}
+
+/** 任务数据库登记项 */
+declare interface TaskDataRegistryDTO {
+  /** 任务id */
+  TaskId: string | null;
+  /** 任务名称 */
+  TaskName: string | null;
+  /** 项目id */
+  ProjectId: string | null;
+  /** 数据源id */
+  DatasourceId: string | null;
+  /** 数据库名称 */
+  DatabaseName: string | null;
+  /** 表名称 */
+  TableName: string | null;
+  /** 库唯一标识 */
+  DbGuid: string | null;
+  /** 表唯一标识 */
+  TableGuid: string | null;
+  /** 分区名称 */
+  PartitionName: string | null;
+  /** 登记项id */
+  Id: number | null;
+  /** 租户id */
+  AppId: string | null;
+  /** 输入输出表类型 输入流 UPSTREAM, 输出流 DOWNSTREAM; */
+  DataFlowType: string | null;
+  /** 创建时间 */
+  CreateTime: string | null;
+  /** 用户id */
+  UserUin: string | null;
+  /** 主账号id */
+  OwnerUin: string | null;
+  /** 扩展信息 */
+  Ext: string | null;
+  /** 表物理唯一id */
+  TablePhysicalId: string | null;
+}
+
+/** 任务信息 */
+declare interface TaskDsDTO {
+  /** 任务ID */
+  TaskId?: string | null;
+  /** 虚拟任务标记 */
+  VirtualTaskId?: string | null;
+  /** 虚拟任务标记 */
+  VirtualFlag?: boolean | null;
+  /** 任务名 */
+  TaskName?: string | null;
+  /** 工作流id */
+  WorkflowId?: string | null;
+  /** 真实工作流id */
+  RealWorkflowId?: string | null;
+  /** 工作流名称 */
+  WorkflowName?: string | null;
+  /** 文件夹id */
+  FolderId?: string | null;
+  /** 文件夹名字 */
+  FolderName?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  LastUpdate?: string | null;
+  /** 任务状态 */
+  Status?: string | null;
+  /** 责任人 */
+  InCharge?: string | null;
+  /** 责任人用户id */
+  InChargeId?: string | null;
+  /** 生效日期 */
+  StartTime?: string | null;
+  /** 结束日期 */
+  EndTime?: string | null;
+  /** 执行时间左闭区间 */
+  ExecutionStartTime?: string | null;
+  /** 执行时间右闭区间 */
+  ExecutionEndTime?: string | null;
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 项目标识 */
+  ProjectIdent?: string | null;
+  /** 项目名称 */
+  ProjectName?: string | null;
+  /** 周期类型 */
+  CycleType?: string | null;
+  /** 步长 */
+  CycleStep?: number | null;
+  /** 对于crontab类型调度配置其为用户输入 对于周期类型调度配置其为系统计算 */
+  CrontabExpression?: string | null;
+  /** 延时调度 */
+  DelayTime?: number | null;
+  /** 延时执行时间 */
+  StartupTime?: number | null;
+  /** 重试等待时间,单位分钟 */
+  RetryWait?: number | null;
+  /** 是否可重试 */
+  Retriable?: number | null;
+  /** 调度扩展信息 */
+  TaskAction?: string | null;
+  /** 运行次数限制 */
+  TryLimit?: number | null;
+  /** 运行优先级 */
+  RunPriority?: number | null;
+  /** 任务类型 */
+  TaskType?: TaskTypeDsVO | null;
+  /** 指定的运行节点 */
+  BrokerIp?: string | null;
+  /** 集群name */
+  ClusterId?: string | null;
+  /** 最小数据时间 */
+  MinDateTime?: string | null;
+  /** 最大数据时间 */
+  MaxDateTime?: string | null;
+  /** 运行耗时超时时间 */
+  ExecutionTTL?: number | null;
+  /** 是否自身依赖 是1 否2 并行3 */
+  SelfDepend?: string | null;
+  /** LeftCoordinate坐标 */
+  LeftCoordinate?: number | null;
+  /** TopCoordinate坐标 */
+  TopCoordinate?: number | null;
+  /** TaskExt信息 */
+  TaskExt?: TaskExtDsVO | null;
+  /** taskExt 导入导出json使用 private Map properties; */
+  Properties?: string | null;
+  /** 任务备注 */
+  Notes?: string | null;
+  /** 实例生成策略 T+1 表示当前周期生成上一周期数据时间任务实例 默认T+1 T+0 表示当前周期生成当前周期数据时间任务实例 T-1 * 表示当前周期生成下一周期数据时间任务实例 * * service不做默认策略处理, 下沉到数据初始化默认T+1, service涉及到多个更新task的路径 */
+  InstanceInitStrategy?: string | null;
+  /** 资源池队列名称 */
+  YarnQueue?: string | null;
+  /** 任务告警信息 */
+  Alarms?: AlarmDsVO[] | null;
+  /** alarmDTO 导入导出json使用 */
+  Alarm?: string | null;
+  /** 任务脚本是否发生变化 */
+  ScriptChange?: boolean | null;
+  /** 任务版本是否已提交 */
+  Submit?: boolean | null;
+  /** 最新调度计划变更时间 仅生产态 */
+  LastSchedulerCommitTime?: string | null;
+  /** 仅生产态存储于生产态序列化任务信息, 减少base CPU重复密集计算 */
+  NormalizedJobStartTime?: string | null;
+  /** 启动暂停的任务时，选择不补录中间实例，通过此字段来标识从哪个时间开始生成实例 */
+  RecoverFreezeStartTime?: string | null;
+  /** 源数据源 */
+  SourceServer?: string | null;
+  /** 目标数据源 */
+  TargetServer?: string | null;
+  /** 父子节点树 */
+  Tasks?: TaskDsDTO[] | null;
+  /** 创建者 */
+  Creater?: string | null;
+  /** 分支，依赖关系，and/or, 默认and */
+  DependencyRel?: string | null;
+  /** 是否支持工作流依赖 yes / no 默认 no */
+  DependencyWorkflow?: string | null;
+  /** 支持事件监听器配置导入导出 */
+  EventListenerConfig?: string | null;
+  /** 支持事件触发器配置导入导出 */
+  EventPublisherConfig?: string | null;
+  /** 依赖配置 */
+  DependencyConfigList?: DependencyConfigDsDTO[] | null;
+  /** 虚拟任务状态 */
+  VirtualTaskStatus?: string | null;
+  /** 回收站还原提示语 */
+  RecycleTips?: string | null;
+  /** 回收站所属用户 */
+  RecycleUser?: string | null;
+  /** 新增 或 修改 */
+  NewOrUpdate?: string | null;
+  /** 任务上游依赖信息 用于发布管理导入导出 */
+  Params?: ParameterTaskDsDto[] | null;
+  /** 任务上游依赖信息 用于发布管理导入导出 */
+  TaskLinkInfo?: TaskLinkDsDTO[] | null;
+  /** 导入结果 */
+  ImportResult?: boolean | null;
+  /** 导入失败原因 */
+  ImportErrMsg?: string | null;
+  /** 任务内容 全部内容 配置内容 资源内容 */
+  ContentType?: string | null;
+  /** 是否导入提交运行 */
+  TaskAutoSubmit?: boolean | null;
+  /** 上层产品 数据质量 / 数据开发 / ... */
+  ProductName?: string | null;
+  /** 创建者帐号 */
+  OwnId?: string | null;
+  /** 子账号 */
+  UserId?: string | null;
+  /** 租户id */
+  TenantId?: string | null;
+  /** 最后修改的人 */
+  UpdateUser?: string | null;
+  /** 最后修改时间 */
+  UpdateTime?: string | null;
+  /** 最后修改的人的ID */
+  UpdateUserId?: string | null;
+  /** 调度计划 */
+  SchedulerDesc?: string | null;
+  /** 资源组 */
+  ResourceGroup?: string | null;
+  /** 版本提交说明 */
+  VersionDesc?: string | null;
+  /** 编排-删除添加的链接 */
+  LinkId?: string | null;
+  /** 脚本引用关系 */
+  UserFileId?: string | null;
+  /** 来源数据源ID */
+  SourceServiceId?: string | null;
+  /** 来源数据源类型 */
+  SourceServiceType?: string | null;
+  /** 去向数据源ID */
+  TargetServiceId?: string | null;
+  /** 去向数据源类型 */
+  TargetServiceType?: string | null;
+  /** 输入参数 */
+  ParamInList?: ParameterTaskInDsDto[] | null;
+  /** 输出参数 */
+  ParamOutList?: ParameterTaskOutDsDto[] | null;
+  /** 任务文件夹id */
+  TaskFolderId?: string | null;
+  /** 最大尝试次数 */
+  MaxRetryAttempts?: number | null;
+  /** 资源组名称 */
+  ResourceGroupName?: string | null;
+  /** 数据源 */
+  SourceServiceName?: string | null;
+  /** 任务产出登记 */
+  TaskRegisterOutputTable?: TaskDataRegistryDTO[] | null;
+  /** 循环依赖配置 */
+  CycleDependencyConfigList?: TaskCycleLinkDTO[] | null;
+  /** 特殊警告信息 */
+  Warning?: string | null;
+  /** 0 正常调度 1 空跑调度 */
+  ScheduleRunType?: number | null;
+  /** 0 并发度达到上限时，本次排队等待 1 并发度达到上限时，本次不执行，直接kill */
+  ConcurrentStrategy?: number | null;
+  /** UTC+8;UDC-8 */
+  ScheduleTimeZone?: string | null;
+  /** 引用的代码模版id */
+  TemplateId?: string | null;
+}
+
 /** 属性配置 */
 declare interface TaskExtDsVO {
   /** 任务ID */
@@ -5785,17 +6251,25 @@ declare interface TaskInnerInfo {
   /** 任务ID */
   TaskId: string;
   /** 任务名 */
-  TaskName: string;
+  TaskName?: string;
   /** 工作流id */
-  WorkflowId: string;
+  WorkflowId?: string;
   /** 周期类型 0:crontab类型, 1:分钟，2:小时，3:天，4:周，5:月，6:一次性，7:用户驱动，10:弹性周期 周,11:弹性周期 月,12:年,13:即时触发Instant类型，与正常周期调度任务逻辑隔离 */
-  CycleType: number;
+  CycleType?: number;
   /** 虚拟任务id */
   VirtualTaskId?: string | null;
   /** 虚拟任务标记 */
   VirtualFlag?: boolean | null;
   /** 真实任务工作流id */
   RealWorkflowId?: string | null;
+  /** 步长 */
+  CycleStep?: number | null;
+  /** 调度配置-弹性周期配置，小时/周/月/年调度才有，小时任务指定每天的0点3点4点跑，则为 0,3,4。 */
+  TaskAction?: string | null;
+  /** 分支，依赖关系，and/or, 默认and */
+  DependencyRel?: string | null;
+  /** 是否支持工作流依赖 yes / no 默认 no */
+  DependencyWorkflow?: string | null;
 }
 
 /** 任务实例状态统计 */
@@ -5842,6 +6316,44 @@ declare interface TaskLineageInfoPair {
   SourceTable?: TaskLineageInfo | null;
   /** 表血缘-目标表 */
   TargetTable?: TaskLineageInfo | null;
+}
+
+/** Task Link 信息 */
+declare interface TaskLinkDsDTO {
+  /** TaskTo信息 */
+  TaskTo?: string | null;
+  /** TaskFrom信息 */
+  TaskFrom?: string | null;
+  /** LinkType信息 */
+  LinkType?: string | null;
+  /** key */
+  LinkKey?: string | null;
+  /** LinkId信息 */
+  Id?: string | null;
+  /** 责任人 */
+  InCharge?: string | null;
+  /** 父子任务之间的依赖关系 */
+  LinkDependencyType?: string | null;
+  /** 父子任务之间依赖偏移量 */
+  Offset?: number | null;
+  /** 工作流id */
+  WorkflowId?: string | null;
+  /** 实体任务id */
+  RealFromTaskId?: string | null;
+  /** 实体任务名 */
+  RealFromTaskName?: string | null;
+  /** 实体任务所属工作流 */
+  RealFromWorkflowId?: string | null;
+  /** 实体任务所属工作流名称 */
+  RealFromWorkflowName?: string | null;
+  /** 实体任务所属项目id */
+  RealProjectId?: string | null;
+  /** 实体任务所属项目标识 */
+  RealProjectIdent?: string | null;
+  /** 实体任务所属项目名 */
+  RealProjectName?: string | null;
+  /** 曲线类型 */
+  CurveType?: string | null;
 }
 
 /** 任务锁的状态 */
@@ -6162,6 +6674,108 @@ declare interface TaskTypeCnt {
   TypeName?: string | null;
 }
 
+/** 任务类型 */
+declare interface TaskTypeDsVO {
+  /** 任务类型id */
+  TypeId?: number | null;
+  /** TypeDesc描述 */
+  TypeDesc?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 服务器类型 */
+  SourceServerType?: string | null;
+  /** 目标服务器类型 */
+  TargetServerType?: string | null;
+  /** RunJarName名称 */
+  RunJarName?: string | null;
+  /** Killable参数 */
+  KillAble?: number | null;
+  /** TypeSort类型 */
+  TypeSort?: string | null;
+  /** InCharge参数 */
+  InCharge?: string | null;
+  /** 节点对应任务类型运行上限（暂时不考虑） */
+  BrokerParallelism?: number | null;
+  /** 每个任务运行上限（暂时不考虑 */
+  TaskParallelism?: number | null;
+  /** 补录和重跑上限 */
+  DoRedoParallelism?: number | null;
+  /** 0 为不可创建任务; >0 可创建任务 */
+  DowngradePriorityTries?: number | null;
+  /** 重试等待时间 */
+  RetryWait?: number | null;
+  /** 重试次数（在任务属性配置中设置） */
+  RetryLimit?: number | null;
+  /** DefaultAliveWait参数 */
+  DefaultAliveWait?: number | null;
+  /** PollingSeconds秒数 */
+  PollingSeconds?: number | null;
+  /** 参数列表xml */
+  ParamList?: string | null;
+  /** TaskTypeExts参数 */
+  TaskTypeExtension?: TaskTypeExtParamDsVO[] | null;
+  /** 对应文件类型 */
+  FileType?: string | null;
+  /** 是否选择脚本路径 */
+  SelectFilePath?: boolean | null;
+  /** classpath是否要排除掉common-lib，默认是0不排除 */
+  ExcludeCommonLib?: boolean | null;
+  /** runner任务完成后需要触发的hook */
+  PostHooks?: string | null;
+}
+
+/** 属性类型扩展 */
+declare interface TaskTypeExtDsVO {
+  /** 类型ID */
+  TypeId: number | null;
+  /** 属性名 */
+  PropName: string | null;
+  /** 属性标签(ui展示用) */
+  PropLabel: string | null;
+  /** 缺省标志 */
+  DefaultFlag: number | null;
+  /** 可视标志 */
+  VisibleFlag: number | null;
+  /** 属性描述 */
+  PropDesc: string | null;
+  /** 排列id */
+  RankId: number | null;
+  /** 控件类型 */
+  InputType: string | null;
+  /** 值类型(integer，string) */
+  ValueType: string | null;
+  /** 缺省值 */
+  DefaultValue: string | null;
+  /** 候选值列表(，分隔) */
+  CandidateValues: string | null;
+  /** 是否必填 */
+  IsMandatory: number | null;
+  /** 最大值 */
+  MaxValue: number | null;
+  /** 最小值 */
+  MinValue: number | null;
+  /** 配置等级(1-普通，2-高级，3-管理员) */
+  ConfLevel: number | null;
+  /** 候选文本列表(，分隔) */
+  CandidateTexts: string | null;
+  /** 复制时是否需要修改 */
+  CopyKey: number | null;
+  /** 字段正则表达式校验 */
+  Regex: string | null;
+  /** 字段正则表达式校验证提示tip */
+  Tip: string | null;
+  /** 可选值 */
+  Candidates?: CandidateDsDTo[] | null;
+}
+
+/** TaskTypeExts参数 */
+declare interface TaskTypeExtParamDsVO {
+  /** TaskTypeExts的Key */
+  TaskTypeExtKey?: string | null;
+  /** TaskTypeExts的Value */
+  TaskTypeExtValue?: TaskTypeExtDsVO | null;
+}
+
 /** 任务类型map */
 declare interface TaskTypeMap {
   /** key */
@@ -6431,6 +7045,38 @@ declare interface WorkflowCanvasOpsDto {
   /** 责任人UserId */
   OwnerId?: string | null;
   /** 工作流类型，周期cycle，手动manual */
+  WorkflowType?: string | null;
+}
+
+/** 工作流信息 */
+declare interface WorkflowDsDTO {
+  /** 工作流ID */
+  WorkflowId?: string | null;
+  /** 责任人 */
+  Owner?: string | null;
+  /** 责任人ID */
+  OwnerId?: string | null;
+  /** 项目ID */
+  ProjectId?: string | null;
+  /** 项目标识 */
+  ProjectIdent?: string | null;
+  /** 项目名称 */
+  ProjectName?: string | null;
+  /** 工作流描述 */
+  WorkflowDesc?: string | null;
+  /** 工作流名称 */
+  WorkflowName?: string | null;
+  /** 文件夹ID */
+  FolderId?: string | null;
+  /** SparkSQL参数 */
+  SparkParams?: string | null;
+  /** 任务列表 */
+  Tasks?: TaskDsDTO[] | null;
+  /** 任务链接列表 */
+  Links?: TaskLinkDsDTO[] | null;
+  /** 参数列表 */
+  Params?: ParameterTaskDsDto[] | null;
+  /** 工作流类型, 取值示例- cycle 周期工作流- manual 手动工作流 */
   WorkflowType?: string | null;
 }
 
@@ -7622,9 +8268,9 @@ declare interface CreateTaskNewRequest {
   TopCoordinate?: number;
   /** 工作流目录ID */
   TaskFolderId?: string;
-  /** 指定脚本内容，base64编码 */
+  /** （必填参数）指定脚本内容，base64编码 */
   Content?: string;
-  /** 代码模版ID */
+  /** 代码模板ID */
   CodeTemplateId?: string;
 }
 
@@ -7893,6 +8539,28 @@ declare interface DeleteIntegrationTaskResponse {
   DeleteFlag?: number | null;
   /** 删除失败原因 */
   DeleteErrInfo?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteLinkRequest {
+  /** 当前项目Id */
+  ProjectId: string;
+  /** 边的源节点 */
+  TaskFrom: string;
+  /** 边的目标节点 */
+  TaskTo: string;
+  /** 当前工作流Id */
+  WorkflowId: string;
+  /** 边Id */
+  Id: string;
+  /** 请求来源，WEB 前端；CLIENT 客户端 */
+  RequestFromSource?: string;
+}
+
+declare interface DeleteLinkResponse {
+  /** 是否成功 */
+  Data?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9523,6 +10191,20 @@ declare interface DescribeOrganizationalFunctionsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeParentTaskRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 任务Id */
+  TaskId: string;
+}
+
+declare interface DescribeParentTaskResponse {
+  /** 任务详情1 */
+  Data?: DependencyConfigDsDTO[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePendingSubmitTaskListRequest {
   /** 项目编号 */
   ProjectId: string;
@@ -9731,6 +10413,36 @@ declare interface DescribeRealViewSchemaPageResponse {
   TotalCount?: number;
   /** 总页数 */
   TotalPage?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRelatedTasksByTaskIdRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 任务Id */
+  TaskId: string;
+  /** 当前页码，从1开始 */
+  PageNumber: number;
+  /** 单页大小，最大200 */
+  PageSize: number;
+  /** 查询直接依赖方向，如UP表示上游、DOWN表示下游 */
+  DependencyDirection: string;
+  /** 查询开发环境还是生产环境版本，DEV表示开发环境、PROD表示生产环境 */
+  Environment: string;
+  /** 任务名称，模糊搜索 */
+  TaskName?: string;
+  /** 任务调度周期,I：分支；H：小时；D：天；W：周；M：月；Y：年；O：一次性。 */
+  CycleTypeList?: string[];
+  /** 任务状态，N：新建； Y：调度中； O：已暂停；F：已下线；INVALID：已失效 */
+  StatusList?: string[];
+  /** 任务责任人名 */
+  OwnerNameList?: string[];
+}
+
+declare interface DescribeRelatedTasksByTaskIdResponse {
+  /** 查询到的直接上下游任务列表结果 */
+  Data?: DescribeRelatedTasksByTaskIdResp | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10665,6 +11377,22 @@ declare interface DescribeTaskByStatusReportResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTaskDetailDsRequest {
+  /** 任务Id */
+  TaskId: string;
+  /** 项目Id */
+  ProjectId?: string;
+  /** 已废弃，无需填写 */
+  TaskAlarmStatus?: number;
+}
+
+declare interface DescribeTaskDetailDsResponse {
+  /** 任务详情1 */
+  Data?: TaskDsDTO | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTaskLineageRequest {
   /** 请求来源，WEB 前端；CLIENT 客户端 */
   RequestFromSource?: string;
@@ -10889,6 +11617,20 @@ declare interface DescribeTrendStatRequest {
 declare interface DescribeTrendStatResponse {
   /** 结果 */
   Data?: RuleExecDateStat[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWorkflowByFordIdsRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 文件夹Id */
+  FolderIdList: string[];
+}
+
+declare interface DescribeWorkflowByFordIdsResponse {
+  /** 工作流详情 */
+  Data?: WorkflowDsDTO[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12201,6 +12943,30 @@ declare interface ProjectBaseInfoOpsRequest {
   IsAdmin?: boolean;
 }
 
+declare interface RegisterDsEventListenerRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 任务Id */
+  Key: string;
+  /** 事件类型，默认 REST_API */
+  Type: string;
+  /** 事件名称 */
+  EventName: string;
+  /** 请求来源，WEB 前端；CLIENT 客户端 */
+  RequestFromSource?: string;
+  /** 配置信息，比如最长等待时间3天配置：[{"ParamKey":"maxWaitEventTime","ParamValue":"3"},{"ParamKey":"maxWaitEventTimeUnit","ParamValue":"DAYS"}] */
+  Properties?: ParamInfoDs[];
+  /** 事件所属项目id */
+  EventProjectId?: string;
+}
+
+declare interface RegisterDsEventListenerResponse {
+  /** 事件监听者 */
+  Data?: EventListenerDTO | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RegisterDsEventRequest {
   /** 项目ID */
   ProjectId: string;
@@ -13248,13 +14014,15 @@ declare interface Wedata {
   DeleteIntegrationNode(data: DeleteIntegrationNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationNodeResponse>;
   /** 删除实时集成任务 {@link DeleteIntegrationTaskRequest} {@link DeleteIntegrationTaskResponse} */
   DeleteIntegrationTask(data: DeleteIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntegrationTaskResponse>;
+  /** 删除任务连接 {@link DeleteLinkRequest} {@link DeleteLinkResponse} */
+  DeleteLink(data: DeleteLinkRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLinkResponse>;
   /** 删除离线任务 {@link DeleteOfflineTaskRequest} {@link DeleteOfflineTaskResponse} */
   DeleteOfflineTask(data: DeleteOfflineTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOfflineTaskResponse>;
   /** 删除项目参数 {@link DeleteProjectParamDsRequest} {@link DeleteProjectParamDsResponse} */
   DeleteProjectParamDs(data: DeleteProjectParamDsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectParamDsResponse>;
   /** 删除项目用户 {@link DeleteProjectUsersRequest} {@link DeleteProjectUsersResponse} */
   DeleteProjectUsers(data: DeleteProjectUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectUsersResponse>;
-  /** 删除资源 {@link DeleteResourceRequest} {@link DeleteResourceResponse} */
+  /** 删除资源（废弃） {@link DeleteResourceRequest} {@link DeleteResourceResponse} */
   DeleteResource(data: DeleteResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceResponse>;
   /** 【资源管理】删除资源 {@link DeleteResourceFileRequest} {@link DeleteResourceFileResponse} */
   DeleteResourceFile(data: DeleteResourceFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceFileResponse>;
@@ -13392,6 +14160,8 @@ declare interface Wedata {
   DescribeOpsWorkflows(data: DescribeOpsWorkflowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOpsWorkflowsResponse>;
   /** 查询全量函数（层级化）接口 {@link DescribeOrganizationalFunctionsRequest} {@link DescribeOrganizationalFunctionsResponse} */
   DescribeOrganizationalFunctions(data: DescribeOrganizationalFunctionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationalFunctionsResponse>;
+  /** 查询任务父依赖 {@link DescribeParentTaskRequest} {@link DescribeParentTaskResponse} */
+  DescribeParentTask(data: DescribeParentTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParentTaskResponse>;
   /** 获取待提交任务预提交校验信息 {@link DescribePendingSubmitTaskListRequest} {@link DescribePendingSubmitTaskListResponse} */
   DescribePendingSubmitTaskList(data: DescribePendingSubmitTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePendingSubmitTaskListResponse>;
   /** 获取项目信息 {@link DescribeProjectRequest} {@link DescribeProjectResponse} */
@@ -13410,6 +14180,8 @@ declare interface Wedata {
   DescribeRealTimeTaskSpeed(data: DescribeRealTimeTaskSpeedRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRealTimeTaskSpeedResponse>;
   /** 数据集成分页获取数据库Schema {@link DescribeRealViewSchemaPageRequest} {@link DescribeRealViewSchemaPageResponse} */
   DescribeRealViewSchemaPage(data: DescribeRealViewSchemaPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRealViewSchemaPageResponse>;
+  /** 根据任务ID分页查询上下游直接关联任务 {@link DescribeRelatedTasksByTaskIdRequest} {@link DescribeRelatedTasksByTaskIdResponse} */
+  DescribeRelatedTasksByTaskId(data: DescribeRelatedTasksByTaskIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRelatedTasksByTaskIdResponse>;
   /** 获取用量大盘任务详情 {@link DescribeReportTaskDetailRequest} {@link DescribeReportTaskDetailResponse} */
   DescribeReportTaskDetail(data: DescribeReportTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReportTaskDetailResponse>;
   /** 查询用量大盘任务列表 {@link DescribeReportTaskListRequest} {@link DescribeReportTaskListResponse} */
@@ -13494,6 +14266,8 @@ declare interface Wedata {
   DescribeTaskByCycleReport(data: DescribeTaskByCycleReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskByCycleReportResponse>;
   /** 任务状态趋势 {@link DescribeTaskByStatusReportRequest} {@link DescribeTaskByStatusReportResponse} */
   DescribeTaskByStatusReport(data: DescribeTaskByStatusReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskByStatusReportResponse>;
+  /** 查询任务具体详情【新】 {@link DescribeTaskDetailDsRequest} {@link DescribeTaskDetailDsResponse} */
+  DescribeTaskDetailDs(data: DescribeTaskDetailDsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailDsResponse>;
   /** 通过任务查询表的血缘关系 {@link DescribeTaskLineageRequest} {@link DescribeTaskLineageResponse} */
   DescribeTaskLineage(data?: DescribeTaskLineageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLineageResponse>;
   /** 查看任务锁状态信息 {@link DescribeTaskLockStatusRequest} {@link DescribeTaskLockStatusResponse} */
@@ -13518,6 +14292,8 @@ declare interface Wedata {
   DescribeTopTableStat(data: DescribeTopTableStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopTableStatResponse>;
   /** 数据质量概览页面趋势接口 {@link DescribeTrendStatRequest} {@link DescribeTrendStatResponse} */
   DescribeTrendStat(data: DescribeTrendStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrendStatResponse>;
+  /** 根据文件夹查询工作流 {@link DescribeWorkflowByFordIdsRequest} {@link DescribeWorkflowByFordIdsResponse} */
+  DescribeWorkflowByFordIds(data: DescribeWorkflowByFordIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkflowByFordIdsResponse>;
   /** 查询工作流画布 {@link DescribeWorkflowCanvasInfoRequest} {@link DescribeWorkflowCanvasInfoResponse} */
   DescribeWorkflowCanvasInfo(data: DescribeWorkflowCanvasInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkflowCanvasInfoResponse>;
   /** 查询工作流画布运行起止时间 {@link DescribeWorkflowExecuteByIdRequest} {@link DescribeWorkflowExecuteByIdResponse} */
@@ -13596,7 +14372,7 @@ declare interface Wedata {
   ModifyRuleTemplate(data?: ModifyRuleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleTemplateResponse>;
   /** 修改任务告警规则 {@link ModifyTaskAlarmRegularRequest} {@link ModifyTaskAlarmRegularResponse} */
   ModifyTaskAlarmRegular(data: ModifyTaskAlarmRegularRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskAlarmRegularResponse>;
-  /** 更新任务 {@link ModifyTaskInfoRequest} {@link ModifyTaskInfoResponse} */
+  /** 更新任务（废弃） {@link ModifyTaskInfoRequest} {@link ModifyTaskInfoResponse} */
   ModifyTaskInfo(data: ModifyTaskInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskInfoResponse>;
   /** 添加父任务依赖（废弃） {@link ModifyTaskLinksRequest} {@link ModifyTaskLinksResponse} */
   ModifyTaskLinks(data: ModifyTaskLinksRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskLinksResponse>;
@@ -13614,9 +14390,11 @@ declare interface Wedata {
   MoveTasksToFolder(data: MoveTasksToFolderRequest, config?: AxiosRequestConfig): AxiosPromise<MoveTasksToFolderResponse>;
   /** 注册事件 {@link RegisterDsEventRequest} {@link RegisterDsEventResponse} */
   RegisterDsEvent(data: RegisterDsEventRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterDsEventResponse>;
+  /** 注册事件监听者 {@link RegisterDsEventListenerRequest} {@link RegisterDsEventListenerResponse} */
+  RegisterDsEventListener(data: RegisterDsEventListenerRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterDsEventListenerResponse>;
   /** 注册事件（废弃） {@link RegisterEventRequest} {@link RegisterEventResponse} */
   RegisterEvent(data: RegisterEventRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterEventResponse>;
-  /** 注册事件监听器 {@link RegisterEventListenerRequest} {@link RegisterEventListenerResponse} */
+  /** 注册事件监听器（废弃） {@link RegisterEventListenerRequest} {@link RegisterEventListenerResponse} */
   RegisterEventListener(data: RegisterEventListenerRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterEventListenerResponse>;
   /** 删除编排空间工作流 {@link RemoveWorkflowDsRequest} {@link RemoveWorkflowDsResponse} */
   RemoveWorkflowDs(data: RemoveWorkflowDsRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveWorkflowDsResponse>;

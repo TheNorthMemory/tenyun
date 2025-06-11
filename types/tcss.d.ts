@@ -10338,6 +10338,26 @@ declare interface ModifyReverseShellStatusResponse {
   RequestId?: string;
 }
 
+declare interface ModifyRiskDnsEventStatusRequest {
+  /** 恶意请求事件ID数组。加白时必需，否则Filters和EventIDSet二者选其一。 */
+  EventIDSet: number[];
+  /** 标记事件的状态：EVENT_UNDEAL:未处理（取消忽略），EVENT_DEALED:已处理，EVENT_IGNORE:忽略，EVENT_DELETE：已删除EVENT_ADD_WHITE：加白EVENT_ISOLATE_CONTAINER：隔离容器EVENT_RESOTRE_CONTAINER：恢复容器 */
+  EventStatus: string;
+  /** 白名单域名/IP */
+  Address?: string;
+  /** 备注 */
+  Remark?: string;
+  /** 相同的请求域名/IP事件加白处理 */
+  AllSameEventAddWhite?: boolean;
+  /** 加白的事件类型，恶意域名请求：DOMAIN，恶意IP请求：IP */
+  AddWhiteEventType?: string;
+}
+
+declare interface ModifyRiskDnsEventStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyRiskSyscallStatusRequest {
   /** 处理事件ids */
   EventIdSet: string[];
@@ -11537,6 +11557,8 @@ declare interface Tcss {
   ModifyRaspRules(data?: ModifyRaspRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRaspRulesResponse>;
   /** 修改反弹shell事件状态 {@link ModifyReverseShellStatusRequest} {@link ModifyReverseShellStatusResponse} */
   ModifyReverseShellStatus(data: ModifyReverseShellStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReverseShellStatusResponse>;
+  /** 编辑恶意请求事件状态 {@link ModifyRiskDnsEventStatusRequest} {@link ModifyRiskDnsEventStatusResponse} */
+  ModifyRiskDnsEventStatus(data: ModifyRiskDnsEventStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRiskDnsEventStatusResponse>;
   /** 修改高危系统调用事件状态 {@link ModifyRiskSyscallStatusRequest} {@link ModifyRiskSyscallStatusResponse} */
   ModifyRiskSyscallStatus(data: ModifyRiskSyscallStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRiskSyscallStatusResponse>;
   /** 修改安全日志清理设置信息 {@link ModifySecLogCleanSettingInfoRequest} {@link ModifySecLogCleanSettingInfoResponse} */

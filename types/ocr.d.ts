@@ -4464,6 +4464,14 @@ declare interface RecognizeGeneralCardWarnResponse {
   Reflection?: GeneralCardWarnInfo;
   /** 翻拍件信息 */
   Reprint?: GeneralCardWarnInfo;
+  /** 是否截图 */
+  Screenshot?: GeneralCardWarnInfo;
+  /** 是否遮挡 */
+  Cover?: GeneralCardWarnInfo;
+  /** 是否重叠 */
+  Overlap?: GeneralCardWarnInfo;
+  /** 是否水印 */
+  Watermark?: GeneralCardWarnInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

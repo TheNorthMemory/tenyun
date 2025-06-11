@@ -739,7 +739,7 @@ declare interface DescribeAndroidInstancesRequest {
   AndroidInstanceGroupIds?: string[];
   /** 实例标签选择器 */
   LabelSelector?: LabelRequirement[];
-  /** 字段过滤器。Filter 的 Name 有以下值：Name：实例名称UserId：实例用户ID */
+  /** 字段过滤器。Filter 的 Name 有以下值：Name：实例名称UserId：实例用户IDHostSerialNumber：宿主机序列号HostServerSerialNumber：机箱序列号 */
   Filters?: Filter[];
 }
 

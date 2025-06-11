@@ -398,6 +398,18 @@ declare interface ResetInstancesPasswordResponse {
   RequestId?: string;
 }
 
+declare interface ResizeInstanceDiskRequest {
+  /** 需要扩容云盘的HAI实例ID */
+  InstanceId: string;
+  /** 扩容云硬盘大小，单位为GB，必须大于当前云硬盘大小。 */
+  DiskSize: number;
+}
+
+declare interface ResizeInstanceDiskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RunInstancesRequest {
   /** 应用ID通过调用接口[DescribeApplications](https://cloud.tencent.com/document/api/1721/101609)获取。 */
   ApplicationId: string;
@@ -489,6 +501,8 @@ declare interface Hai {
   InquirePriceRunInstances(data: InquirePriceRunInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRunInstancesResponse>;
   /** 重置实例的用户密码 {@link ResetInstancesPasswordRequest} {@link ResetInstancesPasswordResponse} */
   ResetInstancesPassword(data: ResetInstancesPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetInstancesPasswordResponse>;
+  /** 扩容实例云硬盘 {@link ResizeInstanceDiskRequest} {@link ResizeInstanceDiskResponse} */
+  ResizeInstanceDisk(data: ResizeInstanceDiskRequest, config?: AxiosRequestConfig): AxiosPromise<ResizeInstanceDiskResponse>;
   /** 创建实例 {@link RunInstancesRequest} {@link RunInstancesResponse} */
   RunInstances(data: RunInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RunInstancesResponse>;
   /** 启动实例 {@link StartInstanceRequest} {@link StartInstanceResponse} */

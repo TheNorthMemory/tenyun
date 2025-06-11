@@ -1859,7 +1859,7 @@ declare namespace V20180717 {
   interface AudioTemplateInfo {
     /** 音频流的编码格式。当外层参数 Container 为 mp3 时，可选值为：libmp3lame。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：libfdk_aac；libmp3lame；ac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：libfdk_aac：更适合 mp4；libmp3lame：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：libfdk_aac。当外层参数 Format 为 HLS 或 MPEG-DASH 时，可选值为：libfdk_aac。当外层参数 Container 为 wav 时，可选值为：pcm16。 */
     Codec: string;
-    /** 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。当取值为 0，表示音频码率和原始音频保持一致。 */
+    /** 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。当取值为 0，表示由云点播自动设置码率。 */
     Bitrate: number;
     /** 音频流的采样率，可选值：16000，仅当 Codec 为 pcm16 时可选。320004410048000单位：Hz。 */
     SampleRate: number;
@@ -1871,7 +1871,7 @@ declare namespace V20180717 {
   interface AudioTemplateInfoForUpdate {
     /** 音频流的编码格式。当外层参数 Container 为 mp3 时，可选值为：libmp3lame。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：libfdk_aac；libmp3lame；ac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：libfdk_aac：更适合 mp4；libmp3lame：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：libfdk_aac。当外层参数 Format 为 HLS 或 MPEG-DASH 时，可选值为：libfdk_aac。当外层参数 Container 为 wav 时，可选值为：pcm16。 */
     Codec?: string;
-    /** 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。 当取值为 0，表示音频码率和原始音频保持一致。 */
+    /** 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。 当取值为 0，表示由云点播自动设置码率。 */
     Bitrate?: number;
     /** 音频流的采样率，可选值：16000，仅当 Codec 为 pcm16 时可选。320004410048000单位：Hz。 */
     SampleRate?: number;
@@ -2479,7 +2479,7 @@ declare namespace V20180717 {
   interface EditMediaTEHDConfig {
     /** 极速高清类型，可选值：TEHD-100 表示极速高清-100; OFF 表示关闭极速高清。不填表示 OFF。 */
     Type: string;
-    /** 视频码率上限，当 Type 指定了极速高清类型时有效。不填或填0表示不设视频码率上限。 */
+    /** 视频码率上限，当 Type 指定了极速高清类型时有效。不填或填0表示由云点播自动设置码率上限。 */
     MaxVideoBitrate?: number;
   }
 
@@ -2543,7 +2543,7 @@ declare namespace V20180717 {
   interface EditMediaVideoStream {
     /** 视频流的编码格式，可选值：libx264：H.264 编码；libx265：H.265 编码；av1：AOMedia Video 1 编码；H.266：H.266 编码。 */
     Codec?: string;
-    /** 视频流的码率，取值范围：0 和 [128, 100000]，单位：kbps。当取值为 0 或不填时，表示自动选择最佳视频码率。 */
+    /** 视频流的码率，取值范围：0 和 [128, 100000]，单位：kbps。当取值为 0 或不填时，表示由云点播自动设置码率。 */
     Bitrate?: number;
     /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
     ResolutionAdaptive?: string;
@@ -4683,7 +4683,7 @@ declare namespace V20180717 {
   interface RebuildMediaTargetAudioStream {
     /** 音频流的编码格式。当外层参数 Container 为 mp3 时，可选值为：libmp3lame。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：libfdk_aac；libmp3lame；ac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：libfdk_aac：更适合 mp4；libmp3lame：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：libfdk_aac。 */
     Codec?: string;
-    /** 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。当取值为 0，表示音频码率和原始音频保持一致。 */
+    /** 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。当取值为 0，表示由云点播自动设置码率。 */
     Bitrate?: number;
     /** 音频流的采样率，可选值：320004410048000单位：Hz。 */
     SampleRate?: number;
@@ -4717,7 +4717,7 @@ declare namespace V20180717 {
   interface RebuildMediaTargetVideoStream {
     /** 视频流的编码格式，可选值：libx264：H.264 编码；libx265：H.265 编码；av1：AOMedia Video 1 编码。默认视频流的编码格式为 H.264 编码。 */
     Codec?: string;
-    /** 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
+    /** 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。当取值为 0，表示由云点播自动设置码率。 */
     Bitrate?: number;
     /** 视频帧率，取值范围：[0, 100]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。 */
     Fps?: number;
@@ -5581,7 +5581,7 @@ declare namespace V20180717 {
   interface TEHDConfig {
     /** 极速高清类型，可选值：TEHD-100 表示极速高清-100; OFF 表示关闭极速高清。不填表示 OFF。 */
     Type: string;
-    /** 视频码率上限，当 Type 指定了极速高清类型时有效。不填或填0表示不设视频码率上限。 */
+    /** 视频码率上限，当 Type 指定了极速高清类型时有效。不填或填0表示由云点播自动设置码率上限。 */
     MaxVideoBitrate?: number;
   }
 
@@ -5995,7 +5995,7 @@ declare namespace V20180717 {
     Height?: number;
     /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
     ResolutionAdaptive?: string;
-    /** 视频流的码率，取值范围：0 和 [128, 10000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
+    /** 视频流的码率，取值范围：0 和 [128, 10000]，单位：kbps。当取值为 0，表示由云点播自动设置码率。 */
     Bitrate?: number;
   }
 
@@ -6007,7 +6007,7 @@ declare namespace V20180717 {
     Height?: number;
     /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
     ResolutionAdaptive?: string;
-    /** 视频流的码率，取值范围：0 和 [128, 10000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
+    /** 视频流的码率，取值范围：0 和 [128, 10000]，单位：kbps。当取值为 0，表示由云点播自动设置码率。 */
     Bitrate?: number;
   }
 
@@ -6033,7 +6033,7 @@ declare namespace V20180717 {
     Codec: string;
     /** 视频帧率，取值范围：[0, 100]，单位：Hz。当取值为 0，表示帧率和原始视频保持一致。 */
     Fps: number;
-    /** 视频流的码率，取值范围：0 和 [128, 100000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
+    /** 视频流的码率，取值范围：0 和 [128, 100000]，单位：kbps。当取值为 0，表示由云点播自动设置码率。 */
     Bitrate: number;
     /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
     ResolutionAdaptive?: string;
@@ -6059,7 +6059,7 @@ declare namespace V20180717 {
     Codec?: string;
     /** 视频帧率，取值范围：[0, 100]，单位：Hz。当取值为 0，表示帧率和原始视频保持一致。 */
     Fps?: number;
-    /** 视频流的码率，取值范围：0 和 [128, 100000]，单位：kbps。当取值为 0，表示视频码率和原始视频保持一致。 */
+    /** 视频流的码率，取值范围：0 和 [128, 100000]，单位：kbps。当取值为 0，表示由云点播自动设置码率。 */
     Bitrate?: number;
     /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。 */
     ResolutionAdaptive?: string;

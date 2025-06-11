@@ -158,6 +158,8 @@ declare interface DetectInfoText {
 declare interface DetectInfoVideoData {
   /** 活体视频的base64编码。 */
   LivenessVideo?: string | null;
+  /** 当次token中所有用户活体视频的COS存储路径，仅当您开启数据存储服务且“IsReturnAllVideo”入参取值为true 时返回。 */
+  LivenessVideos?: VideoDetailData[] | null;
 }
 
 /** Eid出参，包括商户方用户的标识和加密的用户姓名身份证信息。 */
@@ -304,6 +306,14 @@ declare interface RuleIdConfig {
   MouthOpenRecognition?: boolean;
   /** 意愿核身语音播报速度，配置后问答模式和点头模式的语音播报环节都会生效，默认值为0：0：智能语速（根据播报文案的长度自动调整语音播报速度）1：固定1倍速2：固定1.2倍速3：固定1.5倍速 */
   Speed?: number;
+}
+
+/** 核身过程视频信息。 */
+declare interface VideoDetailData {
+  /** 本次活体一比一请求的唯一标记。 */
+  Seq?: string | null;
+  /** 活体视频的base64编码。 */
+  Video?: string | null;
 }
 
 /** 账单详情 */
@@ -613,6 +623,8 @@ declare interface GetDetectInfoEnhancedRequest {
   Encryption?: Encryption;
   /** 是否对回包整体进行加密。 */
   IsEncryptResponse?: boolean;
+  /** 是否需要返回认证中间过程的刷脸重试视频，默认不开启，多段视频需要存储到COS空间中，因此开启后还需要额外开启数据存储服务才可生效。详见[数据存储指引](https://cloud.tencent.com/document/product/1007/104229)。 */
+  IsReturnAllVideo?: boolean;
 }
 
 declare interface GetDetectInfoEnhancedResponse {

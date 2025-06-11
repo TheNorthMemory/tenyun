@@ -1637,6 +1637,8 @@ declare interface ChannelCreateBatchSignUrlRequest {
   UrlUseEnv?: string;
   /** 是否允许此链接中签署方批量拒签。 false (默认): 不允许批量拒签 true : 允许批量拒签。注：`1. 合同组暂不支持批量拒签功能。2. 如果是链接直接跳转至详情页（JumpToDetail参数为true），也不支持批量拒签功能` */
   CanBatchReject?: boolean;
+  /** 是否允许此链接中签署方批量确认已读文件。 false (默认): 批量确认已读文件。 true : 允许批量确认已读文件。注：`1. 此功能为白名单功能，使用前请联系对应客户经理进行开通。2. 使用此功能时，FlowIds参数必传。3. 对于企业签署方，如果有签名控件，则会使用用户首次选择的签名类型签署所有含有签名控件的合同。` */
+  CanSkipReadFlow?: boolean;
 }
 
 declare interface ChannelCreateBatchSignUrlResponse {
@@ -2021,7 +2023,7 @@ declare interface ChannelCreatePrepareFlowRequest {
   ResourceId?: string;
   /** 合同流程配置信息，用于配置发起合同时定制化如是否允许修改，某些按钮的隐藏等逻辑 */
   FlowOption?: CreateFlowOption;
-  /** 合同签署人信息 */
+  /** 已废弃，请用FlowInfo.Approvers */
   FlowApproverList?: CommonFlowApprover[];
   /** 合同Id：用于通过一个已发起的合同快速生成一个发起流程web链接注: `该参数必须是一个待发起审核的合同id，并且还未审核通过` */
   FlowId?: string;

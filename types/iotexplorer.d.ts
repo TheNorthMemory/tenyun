@@ -4325,7 +4325,7 @@ declare interface Iotexplorer {
   DeleteProject(data: DeleteProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectResponse>;
   /** 删除产品 {@link DeleteStudioProductRequest} {@link DeleteStudioProductResponse} */
   DeleteStudioProduct(data: DeleteStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStudioProductResponse>;
-  /** 删除Topic {@link DeleteTopicPolicyRequest} {@link DeleteTopicPolicyResponse} */
+  /** 删除Topic。 {@link DeleteTopicPolicyRequest} {@link DeleteTopicPolicyResponse} */
   DeleteTopicPolicy(data: DeleteTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicPolicyResponse>;
   /** 删除规则 {@link DeleteTopicRuleRequest} {@link DeleteTopicRuleResponse} */
   DeleteTopicRule(data: DeleteTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicRuleResponse>;
