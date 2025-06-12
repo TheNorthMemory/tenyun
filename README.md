@@ -114,7 +114,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 260+ 款产品，12579+ 服务数</summary>
+<details><summary>共计 260+ 款产品，12594+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -158,7 +158,7 @@ captcha | [验证码](https://cloud.tencent.com/document/product/1110) | 2019-07
 car | [应用云渲染](https://cloud.tencent.com/document/product/1547) | 2022-01-10(6) |
 cat | [云拨测](https://cloud.tencent.com/document/product/280) | 2018-04-09(14) |
 cbs | [云硬盘](https://cloud.tencent.com/document/product/362) | 2017-03-12(46) |
-ccc | [云联络中心](https://cloud.tencent.com/document/product/679) | 2020-02-10(72) |
+ccc | [云联络中心](https://cloud.tencent.com/document/product/679) | 2020-02-10(73) |
 cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(173) |
 cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 2020-12-14(23) |
 cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(81+3) |
@@ -203,7 +203,7 @@ dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/132
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(22) |
 dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(79) |
 dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(148) |
-dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(88) |
+dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(90) |
 domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(55) |
 drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 2018-11-15(11) |
 ds | [文档服务](https://cloud.tencent.com/document/product/869) | 2018-05-23(12) |
@@ -245,7 +245,7 @@ iecp | [物联网边缘计算平台](https://cloud.tencent.com/document/product/
 ig | [智能导诊](https://cloud.tencent.com/document/product/1273) | 2021-05-18(1) |
 iir | [智能识图](https://cloud.tencent.com/document/product/1217) | 2020-04-17(1) |
 ims | [图片内容安全](https://cloud.tencent.com/document/product/1125) | 2020-12-29(2) | 2020-07-13(1) |
-ioa | [iOA 零信任安全管理系统](https://cloud.tencent.com/document/product/1092) | 2022-06-01(10) |
+ioa | [iOA 零信任安全管理系统](https://cloud.tencent.com/document/product/1092) | 2022-06-01(11) |
 iot | [加速物联网套件](https://cloud.tencent.com/document/product/568) | 2018-01-23(45) |
 iotcloud | [物联网通信](https://cloud.tencent.com/document/product/634) | 2021-04-08(73) | 2018-06-14(69) |
 iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(166) |
@@ -260,7 +260,7 @@ kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 201
 lcic | [实时互动-教育版](https://cloud.tencent.com/document/product/1639) | 2022-08-17(70) |
 lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(107) |
 live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(195) |
-lke | [腾讯云智能体开发平台](https://cloud.tencent.com/document/product/1759) | 2023-11-30(97) |
+lke | [腾讯云智能体开发平台](https://cloud.tencent.com/document/product/1759) | 2023-11-30(104) |
 lkeap | [知识引擎原子能力](https://cloud.tencent.com/document/product/1772) | 2024-05-22(27) |
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(10) |
 mall | [商场客留大数据](https://cloud.tencent.com/document/product/1707) | 2023-05-18(1) |
@@ -281,7 +281,7 @@ mvj | 营销价值判断 | 2019-09-26(1) |
 nlp | [NLP 技术](https://cloud.tencent.com/document/product/271) | 2019-04-08(12) |
 npp | 号码保护 | 2019-08-23(8) |
 oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(39) |
-ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(85) |
+ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(89) |
 omics | [腾讯健康组学平台](https://cloud.tencent.com/document/product/1643) | 2022-11-28(20) |
 open | 腾讯云 OAuth | 2018-12-25(2) |
 organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(127) | 2018-12-25(20) |

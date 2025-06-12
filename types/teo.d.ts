@@ -1784,7 +1784,7 @@ declare interface LoadBalancer {
   OriginGroupHealthStatus?: OriginGroupHealthStatus[];
   /** 负载均衡状态，取值有：Pending：部署中；Deleting：删除中；Running：已生效。 */
   Status?: string;
-  /** 该负载均衡实例绑的定四层层代理实例的列表。 */
+  /** 该负载均衡实例绑的四层代理实例的列表。 */
   L4UsedList?: string[];
   /** 该负载均衡实例绑定的七层域名列表。 */
   L7UsedList?: string[];

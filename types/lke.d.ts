@@ -130,6 +130,14 @@ declare interface ApiVarAttrInfo {
   AttrBizId?: string | null;
 }
 
+/** 应用基础信息 */
+declare interface AppBaseInfo {
+  /** 应用ID */
+  AppBizId?: string;
+  /** 应用名称 */
+  AppName?: string | null;
+}
+
 /** 应用配置 */
 declare interface AppConfig {
   /** 知识问答管理应用配置 */
@@ -552,6 +560,22 @@ declare interface InvokeAPI {
   FailMessage?: string | null;
 }
 
+/** 共享知识库基础信息 */
+declare interface KnowledgeBaseInfo {
+  /** 共享知识库业务ID */
+  KnowledgeBizId?: string;
+  /** 共享知识库名称 */
+  KnowledgeName?: string;
+  /** 共享知识库描述 */
+  KnowledgeDescription?: string | null;
+  /** Embedding模型 */
+  EmbeddingModel?: string | null;
+  /** 问答提取模型 */
+  QaExtractModel?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+}
+
 /** 知识库容量饼图详情 */
 declare interface KnowledgeCapacityPieGraphDetail {
   /** 当前应用名称 */
@@ -572,6 +596,16 @@ declare interface KnowledgeDetail {
   Proportion?: number | null;
   /** 超量字符数 */
   ExceedCharSize?: string | null;
+}
+
+/** 知识库详情信息 */
+declare interface KnowledgeDetailInfo {
+  /** 知识库信息 */
+  Knowledge?: KnowledgeBaseInfo | null;
+  /** 应用列表 */
+  AppList?: AppBaseInfo[] | null;
+  /** 用户信息 */
+  User?: UserBaseInfo | null;
 }
 
 /** 知识问答配置 */
@@ -692,6 +726,18 @@ declare interface KnowledgeSummary {
   Type?: number | null;
   /** 知识内容 */
   Content?: string | null;
+}
+
+/** 共享知识库更新信息 */
+declare interface KnowledgeUpdateInfo {
+  /** 共享知识库名称 */
+  KnowledgeName?: string;
+  /** 共享知识库描述 */
+  KnowledgeDescription?: string | null;
+  /** Embedding模型 */
+  EmbeddingModel?: string | null;
+  /** 问答提取模型 */
+  QaExtractModel?: string | null;
 }
 
 /** 问答知识库工作流配置 */
@@ -1520,6 +1566,14 @@ declare interface Usage {
   TotalTokens?: number;
 }
 
+/** 用户基础信息 */
+declare interface UserBaseInfo {
+  /** 用户ID */
+  UserBizId?: string;
+  /** 用户名称 */
+  UserName?: string | null;
+}
+
 /** 任务流程参数信息 */
 declare interface ValueInfo {
   /** 值ID */
@@ -1858,6 +1912,22 @@ declare interface CreateReleaseResponse {
   RequestId?: string;
 }
 
+declare interface CreateSharedKnowledgeRequest {
+  /** 共享知识库名称，字符数量范围：[1, 50] */
+  KnowledgeName: string;
+  /** 共享知识库描述，字符数量上限2000 */
+  KnowledgeDescription?: string;
+  /** Embedding模型，字符数量上限128 */
+  EmbeddingModel?: string;
+}
+
+declare interface CreateSharedKnowledgeResponse {
+  /** 共享知识库业务ID */
+  KnowledgeBizId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateVarRequest {
   /** 应用ID */
   AppBizId: string;
@@ -1964,6 +2034,18 @@ declare interface DeleteRejectedQuestionRequest {
 }
 
 declare interface DeleteRejectedQuestionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSharedKnowledgeRequest {
+  /** 共享知识库业务ID */
+  KnowledgeBizId: string;
+}
+
+declare interface DeleteSharedKnowledgeResponse {
+  /** 共享知识库业务ID */
+  KnowledgeBizId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2412,6 +2494,18 @@ declare interface DescribeSegmentsRequest {
 declare interface DescribeSegmentsResponse {
   /** 片段列表 */
   List?: DocSegment[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSharedKnowledgeRequest {
+  /** 共享知识库业务ID */
+  KnowledgeBizId: string;
+}
+
+declare interface DescribeSharedKnowledgeResponse {
+  /** 知识库列表 */
+  Info?: KnowledgeDetailInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3136,6 +3230,22 @@ declare interface ListQAResponse {
   RequestId?: string;
 }
 
+declare interface ListReferShareKnowledgeRequest {
+  /** 应用业务id */
+  AppBizId: string;
+  /** 登录用户主账号(集成商模式必填) */
+  LoginUin?: string;
+  /** 登录用户子账号(集成商模式必填) */
+  LoginSubAccountUin?: string;
+}
+
+declare interface ListReferShareKnowledgeResponse {
+  /** 共享知识库信息列表 */
+  List?: KnowledgeBaseInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListRejectedQuestionPreviewRequest {
   /** 应用ID */
   BotBizId: string;
@@ -3302,6 +3412,24 @@ declare interface ListSelectDocRequest {
 declare interface ListSelectDocResponse {
   /** 下拉框内容 */
   List?: Option[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListSharedKnowledgeRequest {
+  /** 分页序号，编码从1开始 */
+  PageNumber: number;
+  /** 分页大小，有效范围为[1,200] */
+  PageSize: number;
+  /** 搜索关键字 */
+  Keyword?: string;
+}
+
+declare interface ListSharedKnowledgeResponse {
+  /** 累计数量 */
+  Total?: number;
+  /** 知识库列表 */
+  KnowledgeList?: KnowledgeDetailInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3610,6 +3738,22 @@ declare interface ReconstructDocumentResponse {
   RequestId?: string;
 }
 
+declare interface ReferShareKnowledgeRequest {
+  /** 应用业务id */
+  AppBizId: string;
+  /** 共享知识库业务id列表 */
+  KnowledgeBizId: string[];
+  /** 登录用户主账号(集成商模式必填) */
+  LoginUin?: string;
+  /** 登录用户子账号(集成商模式必填) */
+  LoginSubAccountUin?: string;
+}
+
+declare interface ReferShareKnowledgeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RenameDocRequest {
   /** 登录用户主账号(集成商模式必填) */
   LoginUin?: string;
@@ -3748,6 +3892,20 @@ declare interface StopDocParseResponse {
   RequestId?: string;
 }
 
+declare interface UpdateSharedKnowledgeRequest {
+  /** 共享知识库业务ID */
+  KnowledgeBizId: string;
+  /** 共享知识库更新信息 */
+  Info?: KnowledgeUpdateInfo;
+}
+
+declare interface UpdateSharedKnowledgeResponse {
+  /** 共享知识库业务ID */
+  KnowledgeBizId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UploadAttributeLabelRequest {
   /** 应用ID */
   BotBizId: string;
@@ -3817,6 +3975,8 @@ declare interface Lke {
   CreateRejectedQuestion(data: CreateRejectedQuestionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRejectedQuestionResponse>;
   /** 创建发布 {@link CreateReleaseRequest} {@link CreateReleaseResponse} */
   CreateRelease(data: CreateReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReleaseResponse>;
+  /** 创建共享知识库 {@link CreateSharedKnowledgeRequest} {@link CreateSharedKnowledgeResponse} */
+  CreateSharedKnowledge(data: CreateSharedKnowledgeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSharedKnowledgeResponse>;
   /** 创建变量 {@link CreateVarRequest} {@link CreateVarResponse} */
   CreateVar(data: CreateVarRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVarResponse>;
   /** 删除应用 {@link DeleteAppRequest} {@link DeleteAppResponse} */
@@ -3833,6 +3993,8 @@ declare interface Lke {
   DeleteQACate(data: DeleteQACateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQACateResponse>;
   /** 删除拒答问题 {@link DeleteRejectedQuestionRequest} {@link DeleteRejectedQuestionResponse} */
   DeleteRejectedQuestion(data: DeleteRejectedQuestionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRejectedQuestionResponse>;
+  /** 删除共享知识库 {@link DeleteSharedKnowledgeRequest} {@link DeleteSharedKnowledgeResponse} */
+  DeleteSharedKnowledge(data: DeleteSharedKnowledgeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSharedKnowledgeResponse>;
   /** 获取企业下应用详情 {@link DescribeAppRequest} {@link DescribeAppResponse} */
   DescribeApp(data: DescribeAppRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppResponse>;
   /** 查询标签详情 {@link DescribeAttributeLabelRequest} {@link DescribeAttributeLabelResponse} */
@@ -3865,6 +4027,8 @@ declare interface Lke {
   DescribeSearchStatsGraph(data?: DescribeSearchStatsGraphRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchStatsGraphResponse>;
   /** 获取片段详情 {@link DescribeSegmentsRequest} {@link DescribeSegmentsResponse} */
   DescribeSegments(data: DescribeSegmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSegmentsResponse>;
+  /** 查询共享知识库 {@link DescribeSharedKnowledgeRequest} {@link DescribeSharedKnowledgeResponse} */
+  DescribeSharedKnowledge(data: DescribeSharedKnowledgeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSharedKnowledgeResponse>;
   /** 获取文件上传临时密钥 {@link DescribeStorageCredentialRequest} {@link DescribeStorageCredentialResponse} */
   DescribeStorageCredential(data?: DescribeStorageCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStorageCredentialResponse>;
   /** 接口调用token详情 {@link DescribeTokenUsageRequest} {@link DescribeTokenUsageResponse} */
@@ -3929,6 +4093,8 @@ declare interface Lke {
   ListQA(data: ListQARequest, config?: AxiosRequestConfig): AxiosPromise<ListQAResponse>;
   /** 获取QA分类 {@link ListQACateRequest} {@link ListQACateResponse} */
   ListQACate(data: ListQACateRequest, config?: AxiosRequestConfig): AxiosPromise<ListQACateResponse>;
+  /** 查看应用引用的共享知识库列表 {@link ListReferShareKnowledgeRequest} {@link ListReferShareKnowledgeResponse} */
+  ListReferShareKnowledge(data: ListReferShareKnowledgeRequest, config?: AxiosRequestConfig): AxiosPromise<ListReferShareKnowledgeResponse>;
   /** 获取拒答问题 {@link ListRejectedQuestionRequest} {@link ListRejectedQuestionResponse} */
   ListRejectedQuestion(data: ListRejectedQuestionRequest, config?: AxiosRequestConfig): AxiosPromise<ListRejectedQuestionResponse>;
   /** 发布拒答问题预览 {@link ListRejectedQuestionPreviewRequest} {@link ListRejectedQuestionPreviewResponse} */
@@ -3943,6 +4109,8 @@ declare interface Lke {
   ListReleaseQAPreview(data: ListReleaseQAPreviewRequest, config?: AxiosRequestConfig): AxiosPromise<ListReleaseQAPreviewResponse>;
   /** 获取文档下拉列表 {@link ListSelectDocRequest} {@link ListSelectDocResponse} */
   ListSelectDoc(data: ListSelectDocRequest, config?: AxiosRequestConfig): AxiosPromise<ListSelectDocResponse>;
+  /** 列举共享知识库 {@link ListSharedKnowledgeRequest} {@link ListSharedKnowledgeResponse} */
+  ListSharedKnowledge(data: ListSharedKnowledgeRequest, config?: AxiosRequestConfig): AxiosPromise<ListSharedKnowledgeResponse>;
   /** 查询不满意回复列表 {@link ListUnsatisfiedReplyRequest} {@link ListUnsatisfiedReplyResponse} */
   ListUnsatisfiedReply(data: ListUnsatisfiedReplyRequest, config?: AxiosRequestConfig): AxiosPromise<ListUnsatisfiedReplyResponse>;
   /** 列表查询单次调用明细 {@link ListUsageCallDetailRequest} {@link ListUsageCallDetailResponse} */
@@ -3971,6 +4139,8 @@ declare interface Lke {
   RateMsgRecord(data: RateMsgRecordRequest, config?: AxiosRequestConfig): AxiosPromise<RateMsgRecordResponse>;
   /** 文档解析 {@link ReconstructDocumentRequest} {@link ReconstructDocumentResponse} */
   ReconstructDocument(data?: ReconstructDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<ReconstructDocumentResponse>;
+  /** 引用共享知识库接口 {@link ReferShareKnowledgeRequest} {@link ReferShareKnowledgeResponse} */
+  ReferShareKnowledge(data: ReferShareKnowledgeRequest, config?: AxiosRequestConfig): AxiosPromise<ReferShareKnowledgeResponse>;
   /** 文档重命名 {@link RenameDocRequest} {@link RenameDocResponse} */
   RenameDoc(data?: RenameDocRequest, config?: AxiosRequestConfig): AxiosPromise<RenameDocResponse>;
   /** 文档审核重试 {@link RetryDocAuditRequest} {@link RetryDocAuditResponse} */
@@ -3985,6 +4155,8 @@ declare interface Lke {
   SaveDoc(data: SaveDocRequest, config?: AxiosRequestConfig): AxiosPromise<SaveDocResponse>;
   /** 终止文档解析 {@link StopDocParseRequest} {@link StopDocParseResponse} */
   StopDocParse(data: StopDocParseRequest, config?: AxiosRequestConfig): AxiosPromise<StopDocParseResponse>;
+  /** 更新共享知识库 {@link UpdateSharedKnowledgeRequest} {@link UpdateSharedKnowledgeResponse} */
+  UpdateSharedKnowledge(data: UpdateSharedKnowledgeRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateSharedKnowledgeResponse>;
   /** 上传导入标签 {@link UploadAttributeLabelRequest} {@link UploadAttributeLabelResponse} */
   UploadAttributeLabel(data: UploadAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<UploadAttributeLabelResponse>;
   /** 校验问答 {@link VerifyQARequest} {@link VerifyQAResponse} */

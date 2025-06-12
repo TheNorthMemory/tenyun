@@ -3430,7 +3430,7 @@ declare interface DescribePurgeTasksRequest {
 }
 
 declare interface DescribePurgeTasksResponse {
-  /** 详细刷新记录 */
+  /** 详细刷新纪录 */
   PurgeLogs?: PurgeTask[];
   /** 任务总数，用于分页 */
   TotalCount?: number;

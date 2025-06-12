@@ -210,6 +210,8 @@ declare interface KnowledgeSet {
   UpdateTime?: string;
   /** 知识库的meta信息 */
   Meta?: string;
+  /** 知识库容量,单位字节 */
+  TotalSize?: string;
 }
 
 /** 查询知识库列表返回 */
@@ -320,6 +322,8 @@ declare interface SearchDocInfo {
   DocDesc?: string;
   /** 文档大小 */
   FileSize?: number;
+  /** Cos存储文件ID */
+  FileId?: string;
 }
 
 /** 知识库文档搜索结果 */
@@ -346,6 +350,8 @@ declare interface UploadKnowledgeDocumentSetRsp {
   FileTitle?: string;
   /** 文件元信息，为jsonstring */
   FileMetaData?: string;
+  /** Cos存储文件ID */
+  FileId?: string;
 }
 
 declare interface CreateKnowledgeSetRequest {
@@ -559,6 +565,8 @@ declare interface UploadKnowledgeDocumentSetRequest {
   DocumentSetId?: string;
   /** 使用 regex 分割文档 */
   Delimiter?: string;
+  /** Cos存储文件ID */
+  FileId?: string;
 }
 
 declare interface UploadKnowledgeDocumentSetResponse {

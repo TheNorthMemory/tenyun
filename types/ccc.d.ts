@@ -233,7 +233,7 @@ declare interface CarrierPrivilegeNumberApplicant {
 }
 
 /** 座席登录的终端信息 */
-declare interface Client {
+declare interface ClientInfo {
   /** 登录的端类型，"Web"表示web工作台，"WeChatMiniProgram"表示微信小程序 */
   ClientType?: string;
   /** 当前登录的端是否在前台。若登录的端是Web，则该值为true；若登录的端是WeChatMiniProgram，true表示打开着微信小程序，false表示微信小程序退到后台 */
@@ -426,6 +426,12 @@ declare interface IVRKeyPressedElement {
   OriginalContent?: string;
   /** TTS 提示音内容 */
   TTSPrompt?: string;
+}
+
+/** 回调接口 */
+declare interface Interface {
+  /** 接口地址 */
+  URL: string;
 }
 
 /** 单条消息 */
@@ -767,7 +773,7 @@ declare interface StaffStatusMetrics {
   /** 最近一次状态时间戳 */
   LastStatusTimestamp?: number | null;
   /** 客服登录的端信息 */
-  ClientInfo?: Client[];
+  ClientInfo?: ClientInfo[];
 }
 
 /** 电话话单信息 */
@@ -902,6 +908,20 @@ declare interface AbortPredictiveDialingCampaignRequest {
 }
 
 declare interface AbortPredictiveDialingCampaignResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BindNumberCallInInterfaceRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 待绑定的号码 */
+  Number: string;
+  /** 待绑定的回调地址 */
+  CallInInterface?: Interface;
+}
+
+declare interface BindNumberCallInInterfaceResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2365,6 +2385,8 @@ declare interface Ccc {
   AbortAgentCruiseDialingCampaign(data: AbortAgentCruiseDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<AbortAgentCruiseDialingCampaignResponse>;
   /** 停止预测式外呼任务 {@link AbortPredictiveDialingCampaignRequest} {@link AbortPredictiveDialingCampaignResponse} */
   AbortPredictiveDialingCampaign(data: AbortPredictiveDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<AbortPredictiveDialingCampaignResponse>;
+  /** 绑定号码呼入回调接口 {@link BindNumberCallInInterfaceRequest} {@link BindNumberCallInInterfaceResponse} */
+  BindNumberCallInInterface(data: BindNumberCallInInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<BindNumberCallInInterfaceResponse>;
   /** 绑定号码外呼技能组 {@link BindNumberCallOutSkillGroupRequest} {@link BindNumberCallOutSkillGroupResponse} */
   BindNumberCallOutSkillGroup(data: BindNumberCallOutSkillGroupRequest, config?: AxiosRequestConfig): AxiosPromise<BindNumberCallOutSkillGroupResponse>;
   /** 绑定座席所属技能组 {@link BindStaffSkillGroupListRequest} {@link BindStaffSkillGroupListResponse} */

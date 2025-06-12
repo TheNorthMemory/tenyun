@@ -4165,7 +4165,7 @@ declare interface UnbindProductsRequest {
 
 declare interface UnbindProductsResponse {
   /** 绑定了待解绑的LoRa产品下的设备的网关设备列表 */
-  GatewayDeviceNames: string[];
+  GatewayDeviceNames?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

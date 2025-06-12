@@ -660,6 +660,40 @@ declare interface PackageDetailItem {
   DomainGrade: string;
 }
 
+/** 套餐列表元素 */
+declare interface PackageListItem {
+  /** 域名ID */
+  DomainId: number | null;
+  /** 域名的原始格式 */
+  Domain: string | null;
+  /** 套餐等级代码 */
+  Grade: string;
+  /** 套餐名称 */
+  GradeTitle: string;
+  /** 付费套餐开通时间 */
+  VipStartAt: string;
+  /** 付费套餐到期时间 */
+  VipEndAt: string;
+  /** 域名是否开通VIP自动续费，是：YES，否：NO，默认：DEFAULT */
+  VipAutoRenew: string;
+  /** 套餐剩余换绑/绑定域名次数 */
+  RemainTimes: number;
+  /** 套餐资源ID */
+  ResourceId: string;
+  /** 域名等级代号 */
+  GradeLevel: number;
+  /** 套餐绑定的域名的状态 */
+  Status: string;
+  /** 套餐是否处于宽限期 */
+  IsGracePeriod: string;
+  /** 是否降级 */
+  Downgrade: boolean;
+  /** 关联安全防护信息 */
+  SecurityInfo: SecurityInfo | null;
+  /** 套餐绑定的域名是否为子域名 */
+  IsSubDomain: boolean | null;
+}
+
 /** 域名概览明细 */
 declare interface PreviewDetail {
   /** 域名 */
@@ -776,6 +810,16 @@ declare interface RecordListItem {
   MX?: number;
   /** 是否是默认的ns记录 */
   DefaultNS?: boolean;
+}
+
+/** 套餐中安全防护信息 */
+declare interface SecurityInfo {
+  /** 是否是免费赠送：yes-是；no-不是 */
+  IsDefendFree: string;
+  /** 防护类型 */
+  Key: string;
+  /** 资源 ID */
+  ResourceId: string;
 }
 
 /** 域名解析快照配置 */
@@ -930,6 +974,32 @@ declare interface VASStatisticItem {
   LimitCount?: number;
   /** 增值服务已使用的用量 */
   UseCount?: number;
+}
+
+/** 增值服务信息 */
+declare interface VasListItem {
+  /** 规格总数 */
+  LimitNumber: number;
+  /** 购买时间 */
+  StartedAt: string;
+  /** 到期时间 */
+  EndedAt: string;
+  /** 资源唯一 ID */
+  ResourceId: string;
+  /** 自动续费标识 */
+  AutoRenew: string;
+  /** 已绑定的域名 */
+  Domain: string;
+  /** 绑定类型 */
+  BindType: string;
+  /** 增值服务类型 */
+  Key: string;
+  /** 增值服务名 */
+  Name: string;
+  /** 是否可续费 */
+  CanRenew: boolean;
+  /** 是否只允许付费套餐域名可购买 */
+  VipDomain: boolean;
 }
 
 /** Whois联系信息 */
@@ -1310,7 +1380,7 @@ declare interface CreateSubdomainValidateTXTValueRequest {
 }
 
 declare interface CreateSubdomainValidateTXTValueResponse {
-  /** 需要添加 TXT 记录的域名。 */
+  /** 需要添加 TXT 记录的主域名。 */
   Domain?: string;
   /** 需要添加 TXT 记录的主机记录。 */
   Subdomain?: string;
@@ -1318,6 +1388,8 @@ declare interface CreateSubdomainValidateTXTValueResponse {
   RecordType?: string;
   /** 需要添加 TXT 记录的记录值。 */
   Value?: string;
+  /** 需要添加 TXT 记录的上级域名(可选，主域名和上级域名任选一个添加即可)。 */
+  ParentDomain?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1768,6 +1840,30 @@ declare interface DescribeDomainShareUserListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDomainVipListRequest {
+  /** 偏移量，默认值为0。 */
+  Offset: number;
+  /** 限制数量，默认值为20。 */
+  Limit: number;
+  /** 通过关键字搜索域名关联的套餐，默认值为空，为空时不作为筛选条件。 */
+  Keyword?: string;
+  /** 使用资源ID列表查询 */
+  ResourceIdList?: string[];
+  /** 需要筛选的套餐版本 */
+  GradeList?: string[];
+  /** 是否只获取未绑定域名套餐 */
+  GetUnbindResource?: boolean;
+}
+
+declare interface DescribeDomainVipListResponse {
+  /** 符合筛选条件的套餐总数 */
+  TotalCount?: number;
+  /** 套餐信息列表 */
+  PackageList?: PackageListItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDomainWhoisRequest {
   /** 域名 */
   Domain: string;
@@ -2192,6 +2288,28 @@ declare interface DescribeVASStatisticRequest {
 declare interface DescribeVASStatisticResponse {
   /** 增值服务用量列表 */
   VASList?: VASStatisticItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVasListRequest {
+  /** 偏移量，默认值为0。 */
+  Offset?: number;
+  /** 限制数量，默认值为20。 */
+  Limit?: number;
+  /** 域名ID */
+  DomainId?: number;
+  /** 使用资源 ID 列表查询 */
+  ResourceIdList?: string[];
+  /** 增值服务类型 */
+  LimitType?: string;
+}
+
+declare interface DescribeVasListResponse {
+  /** 符合筛选条件的套餐总数 */
+  TotalCount?: number;
+  /** 增值服务信息列表 */
+  VasList?: VasListItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2735,6 +2853,8 @@ declare interface Dnspod {
   DescribeDomainShareInfo(data: DescribeDomainShareInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainShareInfoResponse>;
   /** 获取指定域名的已共享列表 {@link DescribeDomainShareUserListRequest} {@link DescribeDomainShareUserListResponse} */
   DescribeDomainShareUserList(data: DescribeDomainShareUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainShareUserListResponse>;
+  /** 获取套餐列表 {@link DescribeDomainVipListRequest} {@link DescribeDomainVipListResponse} */
+  DescribeDomainVipList(data: DescribeDomainVipListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainVipListResponse>;
   /** 获取域名Whois信息 {@link DescribeDomainWhoisRequest} {@link DescribeDomainWhoisResponse} */
   DescribeDomainWhois(data: DescribeDomainWhoisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainWhoisResponse>;
   /** 根据任务ID获取生成的文件信息 {@link DescribeFileInfoByJobIdRequest} {@link DescribeFileInfoByJobIdResponse} */
@@ -2777,6 +2897,8 @@ declare interface Dnspod {
   DescribeUserDetail(data?: DescribeUserDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDetailResponse>;
   /** 获取域名增值服务用量 {@link DescribeVASStatisticRequest} {@link DescribeVASStatisticResponse} */
   DescribeVASStatistic(data: DescribeVASStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVASStatisticResponse>;
+  /** 获取增值服务列表 {@link DescribeVasListRequest} {@link DescribeVasListResponse} */
+  DescribeVasList(data?: DescribeVasListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVasListResponse>;
   /** 下载快照 {@link DownloadSnapshotRequest} {@link DownloadSnapshotResponse} */
   DownloadSnapshot(data: DownloadSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadSnapshotResponse>;
   /** 修改域名的自定义线路 {@link ModifyDomainCustomLineRequest} {@link ModifyDomainCustomLineResponse} */

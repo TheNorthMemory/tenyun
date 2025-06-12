@@ -253,6 +253,14 @@ declare interface DescribeSoftCensusListByDevicePageData {
 }
 
 /** 业务响应数据 */
+declare interface DescribeSoftwareInformationPageData {
+  /** 软件详情响应对象集合 */
+  Items?: SoftwareInformationData[];
+  /** 分页公共对象 */
+  Page?: Paging;
+}
+
+/** 业务响应数据 */
 declare interface DeviceDetail {
   /** 设备ID */
   Id?: number;
@@ -438,6 +446,26 @@ declare interface SimpleRule {
   Relation?: string;
 }
 
+/** 软件详情响应对象集合 */
+declare interface SoftwareInformationData {
+  /** 软件名称 */
+  Name?: string;
+  /** 安装时间 */
+  InstallDate?: string;
+  /** 软件列表id(只支持32位) */
+  SoftwareId?: number;
+  /** 唯一标识Mid */
+  Mid?: string;
+  /** 软件版本 */
+  Version?: string;
+  /** 公司名 */
+  CorpName?: string;
+  /** 列表Id(只支持32位) */
+  Id?: number;
+  /** 盗版风险（0:未支持，1:风险，2:未发现，3:未开启） */
+  PiracyRisk?: number;
+}
+
 /** Sort 排序字段 */
 declare interface Sort {
   /** 排序字段 */
@@ -539,7 +567,7 @@ declare interface DescribeDeviceHardwareInfoListRequest {
   OsType: number;
   /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
   DomainInstanceId?: string;
-  /** 过滤条件参数（字段含义请参考接口返回值） - Name, 类型String，支持操作：【eq，like，ilike】，支持排序 - UserName, 类型String，支持操作：【eq，like，ilike】，支持排序 - IoaUserName，类型String，支持操作：【eq，like，ilike】，支持排序 - MacAddr, 类型String，支持操作：【eq，like，ilike】，支持排序 - Ip, 类型String，支持操作：【eq，like，ilike】，支持排序 ，支持排序分页参数- PageNum 从1开始，小于等于0时使用默认参数- PageSize 最大值5000，最好不超过100 */
+  /** 过滤条件参数（字段含义请参考接口返回值） - Name, 类型String，支持操作：【eq，like，ilike】，支持排序 - UserName, 类型String，支持操作：【eq，like，ilike】，支持排序 - IoaUserName，类型String，支持操作：【eq，like，ilike】，支持排序 - MacAddr, 类型String，支持操作：【eq，like，ilike】，支持排序 - Ip, 类型String，支持操作：【eq，like，ilike】，支持排序 - Mid, 类型String，支持操作：【eq，like，ilike】，支持排序 ，支持排序分页参数 - PageNum 从1开始，小于等于0时使用默认参数 - PageSize 最大值5000，最好不超过100 */
   Condition?: Condition;
 }
 
@@ -622,6 +650,20 @@ declare interface DescribeSoftCensusListByDeviceResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSoftwareInformationRequest {
+  /** 终端唯一标识Mid */
+  Mid?: string;
+  /** 过滤条件、分页参数Name - String - 过滤支持：是 - 操作符:eq,like - 排序支持：是 。 */
+  Condition?: Condition;
+}
+
+declare interface DescribeSoftwareInformationResponse {
+  /** 业务响应数据 */
+  Data?: DescribeSoftwareInformationPageData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Ioa iOA 零信任安全管理系统} */
 declare interface Ioa {
   (): Versions;
@@ -645,6 +687,8 @@ declare interface Ioa {
   DescribeRootAccountGroup(data?: DescribeRootAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRootAccountGroupResponse>;
   /** 按终端查看软件统计信息 {@link DescribeSoftCensusListByDeviceRequest} {@link DescribeSoftCensusListByDeviceResponse} */
   DescribeSoftCensusListByDevice(data?: DescribeSoftCensusListByDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSoftCensusListByDeviceResponse>;
+  /** 查看软件详情列表 {@link DescribeSoftwareInformationRequest} {@link DescribeSoftwareInformationResponse} */
+  DescribeSoftwareInformation(data?: DescribeSoftwareInformationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSoftwareInformationResponse>;
 }
 
 export declare type Versions = ["2022-06-01"];
