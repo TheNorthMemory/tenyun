@@ -1774,19 +1774,19 @@ declare interface SqlFileInfo {
 
 /** 扩容的周期 */
 declare interface TImeCycle {
-  /** 周一的扩容时间段 */
+  /** 按周期扩容时，是否选择周一扩容。说明：取值 true，表示选择，取值 false，表示不选择。 */
   Monday?: boolean;
-  /** 周二的扩容时间段 */
+  /** 按周期扩容时，是否选择周二扩容。说明：取值 true，表示选择，取值 false，表示不选择。 */
   Tuesday?: boolean;
-  /** 周三的扩容时间段 */
+  /** 按周期扩容时，是否选择周三扩容。说明：取值 true，表示选择，取值 false，表示不选择。 */
   Wednesday?: boolean;
-  /** 周四的扩容时间段 */
+  /** 按周期扩容时，是否选择周四扩容。说明：取值 true，表示选择，取值 false，表示不选择。 */
   Thursday?: boolean;
-  /** 周五的扩容时间段 */
+  /** 按周期扩容时，是否选择周五扩容。说明：取值 true，表示选择，取值 false，表示不选择。 */
   Friday?: boolean;
-  /** 周六的扩容时间段 */
+  /** 按周期扩容时，是否选择周六扩容。说明：取值 true，表示选择，取值 false，表示不选择。 */
   Saturday?: boolean;
-  /** 周日的扩容时间段 */
+  /** 按周期扩容时，是否选择周日扩容。说明：取值 true，表示选择，取值 false，表示不选择。 */
   Sunday?: boolean;
 }
 
@@ -1876,17 +1876,17 @@ declare interface TaskDetail {
 
 /** 时间段 */
 declare interface TimeInterval {
-  /** 开始时间 */
+  /** 开始时间。 */
   StartTime?: string;
-  /** 结束时间 */
+  /** 结束时间。 */
   EndTime?: string;
 }
 
 /** 按时间段扩容策略 */
 declare interface TimeIntervalStrategy {
-  /** 开始扩容时间 */
+  /** 开始扩容时间。说明：此值的格式为 Integer 的时间戳。 */
   StartTime?: number;
-  /** 结束扩容时间 */
+  /** 结束扩容时间。说明：此值的格式为 Integer 的时间戳。 */
   EndTime?: number;
 }
 
@@ -3283,20 +3283,20 @@ declare interface DescribeBinlogsResponse {
 }
 
 declare interface DescribeCPUExpandStrategyInfoRequest {
-  /** 实例 ID 。 */
+  /** 实例 ID。 */
   InstanceId: string;
 }
 
 declare interface DescribeCPUExpandStrategyInfoResponse {
-  /** 策略类型。可选值 auto、manual。如果返回为NULL说明尚未开通弹性扩容策略 */
+  /** 策略类型。输出值 auto、manual。如果返回为 NULL 说明尚未开通弹性扩容策略。 */
   Type?: string | null;
-  /** 手动扩容的 CPU 。Type为 manual 时有效。 */
+  /** 手动扩容的 CPU 。Type 为 manual 时有效。 */
   ExpandCpu?: number | null;
-  /** 自动扩容策略。Type 为 auto 时有效 */
+  /** 自动扩容策略。Type 为 auto 时有效。 */
   AutoStrategy?: AutoStrategy | null;
   /** 按周期扩容策略。 */
   PeriodStrategy?: PeriodStrategy;
-  /** 按时间段扩容策略 */
+  /** 按时间段扩容策略。 */
   TimeIntervalStrategy?: TimeIntervalStrategy;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -5183,17 +5183,17 @@ declare interface StartBatchRollbackResponse {
 }
 
 declare interface StartCpuExpandRequest {
-  /** 实例 ID 。 */
+  /** 实例 ID。 */
   InstanceId: string;
-  /** 扩容类型。auto 自动 manual 立即生效 timeInterval 按时间段 period 按周期 */
+  /** 扩容类型。auto 自动 manual 立即生效 timeInterval 按时间段 period 按周期。 */
   Type: string;
   /** 手动扩容时，扩容的 CPU 核心数。说明：1. Type 为 manual 时必传。2. 扩容的 CPU 核心数上限为当前实例 CPU 核心数，比如8核16G最大可手动扩容的 CPU 核心数为8，即范围为1 - 8。 */
   ExpandCpu?: number;
   /** 自动扩容策略。Type 为 auto 时必传。 */
   AutoStrategy?: AutoStrategy;
-  /** 按时间段扩容策略 */
+  /** 按时间段扩容策略。 */
   TimeIntervalStrategy?: TimeIntervalStrategy;
-  /** 按周期扩容策略 */
+  /** 按周期扩容策略。 */
   PeriodStrategy?: PeriodStrategy;
 }
 

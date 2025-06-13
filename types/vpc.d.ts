@@ -6339,17 +6339,17 @@ declare interface DescribeNatGatewayDirectConnectGatewayRouteRequest {
   NatGatewayId: string;
   /** vpc的唯一标识 */
   VpcId: string;
-  /** 0到200之间 */
+  /** 查询NAT网关绑定的路由数量，可选值0-200，默认为10 */
   Limit?: number;
-  /** 大于0 */
+  /** 数据偏移量，默认为0 */
   Offset?: number;
 }
 
 declare interface DescribeNatGatewayDirectConnectGatewayRouteResponse {
   /** 路由数据 */
-  NatDirectConnectGatewayRouteSet: NatDirectConnectGatewayRoute[];
+  NatDirectConnectGatewayRouteSet?: NatDirectConnectGatewayRoute[];
   /** 路由总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9167,7 +9167,7 @@ declare interface RefreshDirectConnectGatewayRouteToNatGatewayRequest {
 
 declare interface RefreshDirectConnectGatewayRouteToNatGatewayResponse {
   /** IDC子网信息 */
-  DirectConnectSubnetSet: DirectConnectSubnet[];
+  DirectConnectSubnetSet?: DirectConnectSubnet[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -30,6 +30,8 @@ declare interface AccessPoint {
   AvailablePortInfo?: PortSpecification[];
   /** 接入点地址。 */
   Address?: string;
+  /** 是否MACsec */
+  IsMacSec?: boolean;
 }
 
 /** BFD配置信息 */
@@ -200,6 +202,10 @@ declare interface DirectConnect {
   AccessPointName?: string;
   /** 是否三层架构 */
   IsThreeArch?: boolean;
+  /** 是否MACsec */
+  IsMacSec?: boolean;
+  /** 端口规格(Mbps) */
+  PortSpecification?: number;
 }
 
 /** 专用通道信息列表 */
@@ -525,6 +531,8 @@ declare interface CreateDirectConnectRequest {
   SignLaw?: boolean;
   /** 标签键值对 */
   Tags?: Tag[];
+  /** 是否MACsec需求 */
+  IsMacSec?: boolean;
 }
 
 declare interface CreateDirectConnectResponse {

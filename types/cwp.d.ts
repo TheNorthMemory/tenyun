@@ -14797,7 +14797,7 @@ declare interface Cwp {
   (): Versions;
   /** 批量添加异地登录白名单 {@link AddLoginWhiteListsRequest} {@link AddLoginWhiteListsResponse} */
   AddLoginWhiteLists(data: AddLoginWhiteListsRequest, config?: AxiosRequestConfig): AxiosPromise<AddLoginWhiteListsResponse>;
-  /** 取消漏洞忽略 {@link CancelIgnoreVulRequest} {@link CancelIgnoreVulResponse} */
+  /** @deprecated 取消漏洞忽略 {@link CancelIgnoreVulRequest} {@link CancelIgnoreVulResponse} */
   CancelIgnoreVul(data: CancelIgnoreVulRequest, config?: AxiosRequestConfig): AxiosPromise<CancelIgnoreVulResponse>;
   /** 修改事件忽略状态 {@link ChangeRuleEventsIgnoreStatusRequest} {@link ChangeRuleEventsIgnoreStatusResponse} */
   ChangeRuleEventsIgnoreStatus(data: ChangeRuleEventsIgnoreStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeRuleEventsIgnoreStatusResponse>;
@@ -15647,7 +15647,7 @@ declare interface Cwp {
   FixBaselineDetect(data: FixBaselineDetectRequest, config?: AxiosRequestConfig): AxiosPromise<FixBaselineDetectResponse>;
   /** 获取本地存储数据 {@link GetLocalStorageItemRequest} {@link GetLocalStorageItemResponse} */
   GetLocalStorageItem(data: GetLocalStorageItemRequest, config?: AxiosRequestConfig): AxiosPromise<GetLocalStorageItemResponse>;
-  /** 忽略漏洞 {@link IgnoreImpactedHostsRequest} {@link IgnoreImpactedHostsResponse} */
+  /** @deprecated 忽略漏洞 {@link IgnoreImpactedHostsRequest} {@link IgnoreImpactedHostsResponse} */
   IgnoreImpactedHosts(data: IgnoreImpactedHostsRequest, config?: AxiosRequestConfig): AxiosPromise<IgnoreImpactedHostsResponse>;
   /** 获取本地存储键值列表 {@link KeysLocalStorageRequest} {@link KeysLocalStorageResponse} */
   KeysLocalStorage(data?: KeysLocalStorageRequest, config?: AxiosRequestConfig): AxiosPromise<KeysLocalStorageResponse>;

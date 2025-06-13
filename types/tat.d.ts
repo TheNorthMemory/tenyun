@@ -651,7 +651,7 @@ declare interface DescribeRegisterCodesResponse {
 declare interface DescribeRegisterInstancesRequest {
   /** 托管实例 id。每次请求的上限为 100。参数不支持同时指定 `InstanceIds` 和 `Filters` 。 */
   InstanceIds?: string[];
-  /** 过滤器列表。每次请求的 `Filters` 的上限为 10，`Filter.Values` 的上限为 5。参数不支持同时指定 `InstanceIds` 和 `Filters` 。- instance-name按照【托管实例名称】进行过滤。类型：String必选：否- instance-id按照【托管实例ID】进行过滤。类型：String必选：否- register-code-id按照【托管实例注册码ID】进行过滤。可通过 [DescribeRegisterCodes(查询注册码)](https://cloud.tencent.com/document/api/1340/96925) 接口获取。类型：String必选：否- sys-name按照【操作系统类型】进行过滤，取值：Linux | Windows。类型：String必选：否- tag-key按照【标签键】进行过滤。类型：String必选：否- tag-value按照【标签值】进行过滤。类型：String必选：否- tag:tag-key按照【标签键值对】进行过滤。 tag-key使用具体的标签键进行替换。类型：String必选：否例如 Filter 为 {"Name": "tag:key1", "Values": ["v1", "v2"] } ，即查询所有标签为 key1:v1 或 key1:v2 的资源。 */
+  /** 过滤器列表。每次请求的 `Filters` 的上限为 10，`Filter.Values` 的上限为 5。参数不支持同时指定 `InstanceIds` 和 `Filters` 。- instance-name按照【托管实例名称】进行过滤。类型：String必选：否- instance-id按照【托管实例ID】进行过滤。类型：String必选：否- register-status按照【托管实例状态】进行过滤，取值：Online | Offline。类型：String必选：否- local-ip按照【托管实例网卡IP】进行过滤。类型：String必选：否- register-code-id按照【托管实例注册码ID】进行过滤。可通过 [DescribeRegisterCodes(查询注册码)](https://cloud.tencent.com/document/api/1340/96925) 接口获取。类型：String必选：否- sys-name按照【操作系统类型】进行过滤，取值：Linux | Windows。类型：String必选：否- tag-key按照【标签键】进行过滤。类型：String必选：否- tag-value按照【标签值】进行过滤。类型：String必选：否- tag:tag-key按照【标签键值对】进行过滤。 tag-key使用具体的标签键进行替换。类型：String必选：否例如 Filter 为 {"Name": "tag:key1", "Values": ["v1", "v2"] } ，即查询所有标签为 key1:v1 或 key1:v2 的资源。 */
   Filters?: Filter[];
   /** 偏移量，默认为 0。 */
   Offset?: number;

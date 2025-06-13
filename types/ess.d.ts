@@ -3944,6 +3944,22 @@ declare interface ModifyIntegrationRoleResponse {
   RequestId?: string;
 }
 
+declare interface OperateSealsRequest {
+  /** 执行本接口操作的员工信息。 注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
+  Operator?: UserInfo;
+  /** 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+  /** 操作类型，int，目前支持传入以下类型：1：启用印章2：停用印章 */
+  Act?: number;
+  /** 需要操作的印章ID，数组形式，印章ID可从【web控制台->印章 】获取。 */
+  SealIds?: string[];
+}
+
+declare interface OperateSealsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface OperateTemplateRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -4313,6 +4329,8 @@ declare interface Ess {
   ModifyIntegrationDepartment(data: ModifyIntegrationDepartmentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIntegrationDepartmentResponse>;
   /** 更新企业角色 {@link ModifyIntegrationRoleRequest} {@link ModifyIntegrationRoleResponse} */
   ModifyIntegrationRole(data: ModifyIntegrationRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIntegrationRoleResponse>;
+  /** 更新印章状态 {@link OperateSealsRequest} {@link OperateSealsResponse} */
+  OperateSeals(data?: OperateSealsRequest, config?: AxiosRequestConfig): AxiosPromise<OperateSealsResponse>;
   /** 企业模板管理 {@link OperateTemplateRequest} {@link OperateTemplateResponse} */
   OperateTemplate(data: OperateTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<OperateTemplateResponse>;
   /** 续期医疗自动签许可 {@link RenewAutoSignLicenseRequest} {@link RenewAutoSignLicenseResponse} */

@@ -388,6 +388,14 @@ declare interface Credentials {
   AppId?: number | null;
 }
 
+/** 工作流的API参数 */
+declare interface CustomVariable {
+  /** 参数名称 */
+  Name?: string;
+  /** 参数的值 */
+  Value?: string;
+}
+
 /** 数智人配置 */
 declare interface DigitalHumanConfig {
   /** 数智人资产key */
@@ -1056,6 +1064,76 @@ declare interface MsgRecordReference {
   DocId?: string;
 }
 
+/** 节点运行的基本信息 */
+declare interface NodeRunBase {
+  /** 节点运行的ID */
+  NodeRunId?: string;
+  /** 节点ID */
+  NodeId?: string;
+  /** 工作流运行实例的ID */
+  WorkflowRunId?: string;
+  /** 节点名称 */
+  NodeName?: string;
+  /** 节点类型。1： 开始节点2：参数提取节点3：大模型节点4：知识问答节点5：知识检索节点6：标签提取节点7：代码执行节点8：工具节点9：逻辑判断节点10：回复节点11：选项卡节点12：循环节点13：意图识别节点14：工作流节点15：插件节点16：结束节点17: 变量聚合节点数据18: 批处理节点19: 消息队列节点 */
+  NodeType?: number;
+  /** 运行状态。0: 初始状态；1: 运行中；2: 运行成功； 3: 运行失败； 4: 已取消 */
+  State?: number;
+  /** 错误码 */
+  FailCode?: string;
+  /** 错误信息 */
+  FailMessage?: string;
+  /** 消耗时间（毫秒） */
+  CostMilliseconds?: number;
+  /** 消耗的token总数 */
+  TotalTokens?: number;
+}
+
+/** 工作流节点运行详情 */
+declare interface NodeRunDetail {
+  /** 节点运行的ID */
+  NodeRunId?: string;
+  /** 节点ID */
+  NodeId?: string;
+  /** 工作流运行实例的ID */
+  WorkflowRunId?: string;
+  /** 节点名称 */
+  NodeName?: string;
+  /** 节点类型。1： 开始节点2：参数提取节点3：大模型节点4：知识问答节点5：知识检索节点6：标签提取节点7：代码执行节点8：工具节点9：逻辑判断节点10：回复节点11：选项卡节点12：循环节点13：意图识别节点14：工作流节点15：插件节点16：结束节点17: 变量聚合节点数据18: 批处理节点19: 消息队列节点 */
+  NodeType?: number;
+  /** 运行状态。0: 初始状态；1: 运行中；2: 运行成功； 3: 运行失败； 4: 已取消 */
+  State?: number;
+  /** 错误码 */
+  FailCode?: string;
+  /** 错误信息 */
+  FailMessage?: string;
+  /** 消耗时间（毫秒） */
+  CostMilliseconds?: number;
+  /** 消耗的token总数 */
+  TotalTokens?: number;
+  /** 输入变量信息 */
+  Input?: string;
+  /** 节点的输入的完整内容的链接。（当Input内容超过限制的时候此字段才有值） */
+  InputRef?: string;
+  /** 输出变量信息 */
+  Output?: string;
+  /** 节点的输出的完整内容的链接。（当Output内容超过限制的时候此字段才有值） */
+  OutputRef?: string;
+  /** 原始输出信息。部分节点才有值，如工具节点、代码节点 */
+  TaskOutput?: string;
+  /** 任务的原始输出的完整内容的链接。（当TaskOutput内容超过限制的时候此字段才有值） */
+  TaskOutputRef?: string;
+  /** 节点的日志 */
+  Log?: string;
+  /** 节点的日志的完整内容的链接志（当Log内容超过限制的时候才有值） */
+  LogRef?: string;
+  /** 开始时间戳（毫秒） */
+  StartTime?: string;
+  /** 结束时间戳（毫秒） */
+  EndTime?: string;
+  /** LLM统计信息。 */
+  StatisticInfos?: StatisticInfo[];
+}
+
 /** 下拉框选项 */
 declare interface Option {
   /** 文本 */
@@ -1660,6 +1738,66 @@ declare interface WorkflowRef {
   UpdateTime?: number;
 }
 
+/** 工作流运行实例的基本信息 */
+declare interface WorkflowRunBase {
+  /** 运行环境。0: 测试环境； 1: 正式环境 */
+  RunEnv?: number;
+  /** 应用ID */
+  AppBizId?: string;
+  /** 工作流运行实例的ID */
+  WorkflowRunId?: string;
+  /** 所属工作流ID */
+  WorkflowId?: string;
+  /** 名称 */
+  Name?: string;
+  /** 运行状态。0: 排队中；1: 运行中；2: 运行成功；3: 运行失败； 4: 已取消 */
+  State?: number;
+  /** 错误信息 */
+  FailMessage?: string;
+  /** 消耗的token总数 */
+  TotalTokens?: number;
+  /** 创建时间（毫秒时间戳） */
+  CreateTime?: string;
+  /** 开始时间（毫秒时间戳） */
+  StartTime?: string;
+  /** 结束时间（毫秒时间戳） */
+  EndTime?: string;
+}
+
+/** 工作流运行实例详情 */
+declare interface WorkflowRunDetail {
+  /** 运行环境。0: 测试环境； 1: 正式环境 */
+  RunEnv?: number;
+  /** 应用ID */
+  AppBizId?: string;
+  /** 工作流运行实例的ID */
+  WorkflowRunId?: string;
+  /** 所属工作流ID */
+  WorkflowId?: string;
+  /** 名称 */
+  Name?: string;
+  /** 运行状态。0: 排队中；1: 运行中；2: 运行成功；3: 运行失败； 4: 已取消 */
+  State?: number;
+  /** 错误信息 */
+  FailMessage?: string;
+  /** 消耗的token总数 */
+  TotalTokens?: number;
+  /** 创建时间（毫秒时间戳） */
+  CreateTime?: string;
+  /** 开始时间（毫秒时间戳） */
+  StartTime?: string;
+  /** 结束时间（毫秒时间戳） */
+  EndTime?: string;
+  /** 工作流画布Json */
+  DialogJson?: string;
+  /** 用户的输入 */
+  Query?: string;
+  /** 主模型名称 */
+  MainModelName?: string;
+  /** API参数配置 */
+  CustomVariables?: CustomVariable[];
+}
+
 /** 工作流运行节点信息 */
 declare interface WorkflowRunNodeInfo {
   /** 节点ID */
@@ -1946,6 +2084,34 @@ declare interface CreateVarRequest {
 declare interface CreateVarResponse {
   /** 变量ID */
   VarId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateWorkflowRunRequest {
+  /** 运行环境。0: 测试环境； 1: 正式环境 */
+  RunEnv?: number;
+  /** 应用ID */
+  AppBizId?: string;
+  /** 用户输入的内容 */
+  Query?: string;
+  /** API参数配置 */
+  CustomVariables?: CustomVariable[];
+}
+
+declare interface CreateWorkflowRunResponse {
+  /** 应用ID */
+  AppBizId?: string;
+  /** 工作流运行实例的ID */
+  WorkflowRunId?: string;
+  /** 运行环境。0: 测试环境； 1: 正式环境 */
+  RunEnv?: number;
+  /** 用户输入的内容 */
+  Query?: string;
+  /** API参数配置 */
+  CustomVariables?: CustomVariable[];
+  /** 创建时间（毫秒时间戳） */
+  CreateTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2318,6 +2484,18 @@ declare interface DescribeKnowledgeUsageResponse {
   RequestId?: string;
 }
 
+declare interface DescribeNodeRunRequest {
+  /** 节点运行实例ID */
+  NodeRunId?: string;
+}
+
+declare interface DescribeNodeRunResponse {
+  /** 节点运行实例详情 */
+  NodeRun?: NodeRunDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeQARequest {
   /** QA业务ID */
   QaBizId: string;
@@ -2634,6 +2812,20 @@ declare interface DescribeUnsatisfiedReplyContextRequest {
 declare interface DescribeUnsatisfiedReplyContextResponse {
   /** 不满意回复上下文 */
   List?: Context[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWorkflowRunRequest {
+  /** 工作流运行实例ID */
+  WorkflowRunId?: string;
+}
+
+declare interface DescribeWorkflowRunResponse {
+  /** 总数 */
+  WorkflowRun?: WorkflowRunDetail;
+  /** 节点列表 */
+  NodeRuns?: NodeRunBase[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3492,6 +3684,30 @@ declare interface ListUsageCallDetailResponse {
   RequestId?: string;
 }
 
+declare interface ListWorkflowRunsRequest {
+  /** 运行环境。0: 测试环境； 1: 正式环境 */
+  RunEnv?: number;
+  /** 应用ID */
+  AppBizId?: string;
+  /** 页码 */
+  Page?: number;
+  /** 每页数量 */
+  PageSize?: number;
+  /** 登录用户主账号(集成商模式必填) */
+  LoginUin?: string;
+  /** 登录用户子账号(集成商模式必填) */
+  LoginSubAccountUin?: string;
+}
+
+declare interface ListWorkflowRunsResponse {
+  /** 总数 */
+  Total?: number;
+  /** 工作流运行列表 */
+  WorkflowRuns?: WorkflowRunBase[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAppRequest {
   /** 应用 ID */
   AppBizId: string;
@@ -3892,6 +4108,16 @@ declare interface StopDocParseResponse {
   RequestId?: string;
 }
 
+declare interface StopWorkflowRunRequest {
+  /** 工作流运行实例ID */
+  WorkflowRunId?: string;
+}
+
+declare interface StopWorkflowRunResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateSharedKnowledgeRequest {
   /** 共享知识库业务ID */
   KnowledgeBizId: string;
@@ -3979,6 +4205,8 @@ declare interface Lke {
   CreateSharedKnowledge(data: CreateSharedKnowledgeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSharedKnowledgeResponse>;
   /** 创建变量 {@link CreateVarRequest} {@link CreateVarResponse} */
   CreateVar(data: CreateVarRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVarResponse>;
+  /** 创建工作流的异步运行实例 {@link CreateWorkflowRunRequest} {@link CreateWorkflowRunResponse} */
+  CreateWorkflowRun(data?: CreateWorkflowRunRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkflowRunResponse>;
   /** 删除应用 {@link DeleteAppRequest} {@link DeleteAppResponse} */
   DeleteApp(data: DeleteAppRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAppResponse>;
   /** 删除标签 {@link DeleteAttributeLabelRequest} {@link DeleteAttributeLabelResponse} */
@@ -4013,6 +4241,8 @@ declare interface Lke {
   DescribeKnowledgeUsage(data?: DescribeKnowledgeUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKnowledgeUsageResponse>;
   /** 查询知识库容量饼图 {@link DescribeKnowledgeUsagePieGraphRequest} {@link DescribeKnowledgeUsagePieGraphResponse} */
   DescribeKnowledgeUsagePieGraph(data?: DescribeKnowledgeUsagePieGraphRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKnowledgeUsagePieGraphResponse>;
+  /** 查看工作流异步运行实例的节点的运行详情 {@link DescribeNodeRunRequest} {@link DescribeNodeRunResponse} */
+  DescribeNodeRun(data?: DescribeNodeRunRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodeRunResponse>;
   /** 问答详情 {@link DescribeQARequest} {@link DescribeQAResponse} */
   DescribeQA(data: DescribeQARequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQAResponse>;
   /** 获取来源详情列表 {@link DescribeReferRequest} {@link DescribeReferResponse} */
@@ -4037,6 +4267,8 @@ declare interface Lke {
   DescribeTokenUsageGraph(data?: DescribeTokenUsageGraphRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenUsageGraphResponse>;
   /** 获取不满意回复上下文 {@link DescribeUnsatisfiedReplyContextRequest} {@link DescribeUnsatisfiedReplyContextResponse} */
   DescribeUnsatisfiedReplyContext(data: DescribeUnsatisfiedReplyContextRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnsatisfiedReplyContextResponse>;
+  /** 查询工作流异步运行实例的详情 {@link DescribeWorkflowRunRequest} {@link DescribeWorkflowRunResponse} */
+  DescribeWorkflowRun(data?: DescribeWorkflowRunRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkflowRunResponse>;
   /** 导出标签 {@link ExportAttributeLabelRequest} {@link ExportAttributeLabelResponse} */
   ExportAttributeLabel(data: ExportAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<ExportAttributeLabelResponse>;
   /** 导出QA列表 {@link ExportQAListRequest} {@link ExportQAListResponse} */
@@ -4115,6 +4347,8 @@ declare interface Lke {
   ListUnsatisfiedReply(data: ListUnsatisfiedReplyRequest, config?: AxiosRequestConfig): AxiosPromise<ListUnsatisfiedReplyResponse>;
   /** 列表查询单次调用明细 {@link ListUsageCallDetailRequest} {@link ListUsageCallDetailResponse} */
   ListUsageCallDetail(data: ListUsageCallDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListUsageCallDetailResponse>;
+  /** 查询工作流异步运行实例的列表 {@link ListWorkflowRunsRequest} {@link ListWorkflowRunsResponse} */
+  ListWorkflowRuns(data?: ListWorkflowRunsRequest, config?: AxiosRequestConfig): AxiosPromise<ListWorkflowRunsResponse>;
   /** 修改应用请求结构体 {@link ModifyAppRequest} {@link ModifyAppResponse} */
   ModifyApp(data: ModifyAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppResponse>;
   /** 编辑标签 {@link ModifyAttributeLabelRequest} {@link ModifyAttributeLabelResponse} */
@@ -4155,6 +4389,8 @@ declare interface Lke {
   SaveDoc(data: SaveDocRequest, config?: AxiosRequestConfig): AxiosPromise<SaveDocResponse>;
   /** 终止文档解析 {@link StopDocParseRequest} {@link StopDocParseResponse} */
   StopDocParse(data: StopDocParseRequest, config?: AxiosRequestConfig): AxiosPromise<StopDocParseResponse>;
+  /** 停止工作流异步运行实例 {@link StopWorkflowRunRequest} {@link StopWorkflowRunResponse} */
+  StopWorkflowRun(data?: StopWorkflowRunRequest, config?: AxiosRequestConfig): AxiosPromise<StopWorkflowRunResponse>;
   /** 更新共享知识库 {@link UpdateSharedKnowledgeRequest} {@link UpdateSharedKnowledgeResponse} */
   UpdateSharedKnowledge(data: UpdateSharedKnowledgeRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateSharedKnowledgeResponse>;
   /** 上传导入标签 {@link UploadAttributeLabelRequest} {@link UploadAttributeLabelResponse} */

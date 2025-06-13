@@ -570,6 +570,8 @@ declare interface DatahubTaskInfo {
   DatahubId?: string;
   /** 步骤列表 */
   StepList?: string[];
+  /** 任务描述信息 */
+  Description?: string;
 }
 
 /** Datahub主题 */
