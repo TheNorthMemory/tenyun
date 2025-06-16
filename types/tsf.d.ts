@@ -3868,7 +3868,7 @@ declare interface CreateConfigTemplateRequest {
 
 declare interface CreateConfigTemplateResponse {
   /** true：创建成功；false：创建失败 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4052,7 +4052,7 @@ declare interface CreateGatewayApiRequest {
 
 declare interface CreateGatewayApiResponse {
   /** 是否成功 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5166,7 +5166,7 @@ declare interface DescribeConfigSummaryRequest {
 
 declare interface DescribeConfigSummaryResponse {
   /** 配置项分页对象 */
-  Result: TsfPageConfig;
+  Result?: TsfPageConfig;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5520,7 +5520,7 @@ declare interface DescribeGroupBindedGatewaysRequest {
 
 declare interface DescribeGroupBindedGatewaysResponse {
   /** 翻页结构体 */
-  Result: TsfPageGatewayDeployGroup;
+  Result?: TsfPageGatewayDeployGroup;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -3063,7 +3063,7 @@ declare interface DescribeCdnOriginIpResponse {
 declare interface DescribeCertDomainsRequest {
   /** PEM格式证书Base64编码后的字符串 */
   Cert?: string;
-  /** 托管证书ID，Cert和CertId不能均未空，都填写时以CertId为准。 */
+  /** 托管证书ID，Cert和CertId不能均为空，都填写时以CertId为准。 */
   CertId?: string;
   /** 域名所属产品，cdn或ecdn，默认cdn。 */
   Product?: string;
@@ -3355,7 +3355,7 @@ declare interface DescribeOriginDataRequest {
   Project?: number;
   /** 时间粒度，支持以下几种模式：min：1 分钟粒度，指定查询区间 24 小时内（含 24 小时），可返回 1 分钟粒度明细数据（指定查询服务地域为中国境外时不支持 1 分钟粒度）5min：5 分钟粒度，指定查询区间 31 天内（含 31 天），可返回 5 分钟粒度明细数据hour：1 小时粒度，指定查询区间 31 天内（含 31 天），可返回 1 小时粒度明细数据day：天粒度，指定查询区间大于 31 天，可返回天粒度明细数据 */
   Interval?: string;
-  /** Domains 传入多个时，默认（false)返回多个域名的汇总数据可按需指定为 true，返回每一个 Domain 的明细数据（statusCode、2xx、3xx、4xx、5xx 指标暂不支持） */
+  /** Domains 传入多个时，默认(false)返回多个域名的汇总数据可按需指定为 true，返回每一个 Domain 的明细数据（statusCode、2xx、3xx、4xx、5xx 指标暂不支持） */
   Detail?: boolean;
   /** 指定服务地域查询，不填充表示查询中国境内 CDN 数据mainland：指定查询中国境内 CDN 数据overseas：指定查询中国境外 CDN 数据 */
   Area?: string;

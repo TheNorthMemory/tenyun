@@ -1487,33 +1487,33 @@ declare interface Bmvpc {
   (): Versions;
   /** 接受黑石对等连接 {@link AcceptVpcPeerConnectionRequest} {@link AcceptVpcPeerConnectionResponse} */
   AcceptVpcPeerConnection(data: AcceptVpcPeerConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<AcceptVpcPeerConnectionResponse>;
-  /** 批量注册虚拟IP {@link AsyncRegisterIpsRequest} {@link AsyncRegisterIpsResponse} */
+  /** @deprecated 批量注册虚拟IP {@link AsyncRegisterIpsRequest} {@link AsyncRegisterIpsResponse} */
   AsyncRegisterIps(data: AsyncRegisterIpsRequest, config?: AxiosRequestConfig): AxiosPromise<AsyncRegisterIpsResponse>;
   /** NAT网关绑定EIP {@link BindEipsToNatGatewayRequest} {@link BindEipsToNatGatewayResponse} */
   BindEipsToNatGateway(data: BindEipsToNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<BindEipsToNatGatewayResponse>;
-  /** NAT网关绑定IP {@link BindIpsToNatGatewayRequest} {@link BindIpsToNatGatewayResponse} */
+  /** @deprecated NAT网关绑定IP {@link BindIpsToNatGatewayRequest} {@link BindIpsToNatGatewayResponse} */
   BindIpsToNatGateway(data: BindIpsToNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<BindIpsToNatGatewayResponse>;
-  /** NAT网关绑定子网 {@link BindSubnetsToNatGatewayRequest} {@link BindSubnetsToNatGatewayResponse} */
+  /** @deprecated NAT网关绑定子网 {@link BindSubnetsToNatGatewayRequest} {@link BindSubnetsToNatGatewayResponse} */
   BindSubnetsToNatGateway(data: BindSubnetsToNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<BindSubnetsToNatGatewayResponse>;
-  /** 创建对端网关 {@link CreateCustomerGatewayRequest} {@link CreateCustomerGatewayResponse} */
+  /** @deprecated 创建对端网关 {@link CreateCustomerGatewayRequest} {@link CreateCustomerGatewayResponse} */
   CreateCustomerGateway(data: CreateCustomerGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomerGatewayResponse>;
   /** 创建黑石Docker子网 {@link CreateDockerSubnetWithVlanRequest} {@link CreateDockerSubnetWithVlanResponse} */
   CreateDockerSubnetWithVlan(data: CreateDockerSubnetWithVlanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDockerSubnetWithVlanResponse>;
-  /** 黑石托管机器加入子网 {@link CreateHostedInterfaceRequest} {@link CreateHostedInterfaceResponse} */
+  /** @deprecated 黑石托管机器加入子网 {@link CreateHostedInterfaceRequest} {@link CreateHostedInterfaceResponse} */
   CreateHostedInterface(data: CreateHostedInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostedInterfaceResponse>;
   /** 物理机加入子网 {@link CreateInterfacesRequest} {@link CreateInterfacesResponse} */
   CreateInterfaces(data: CreateInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInterfacesResponse>;
-  /** 创建NAT网关 {@link CreateNatGatewayRequest} {@link CreateNatGatewayResponse} */
+  /** @deprecated 创建NAT网关 {@link CreateNatGatewayRequest} {@link CreateNatGatewayResponse} */
   CreateNatGateway(data: CreateNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNatGatewayResponse>;
-  /** 创建黑石路由表的路由规则 {@link CreateRoutePoliciesRequest} {@link CreateRoutePoliciesResponse} */
+  /** @deprecated 创建黑石路由表的路由规则 {@link CreateRoutePoliciesRequest} {@link CreateRoutePoliciesResponse} */
   CreateRoutePolicies(data: CreateRoutePoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoutePoliciesResponse>;
   /** 创建黑石私有网络的子网 {@link CreateSubnetRequest} {@link CreateSubnetResponse} */
   CreateSubnet(data: CreateSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubnetResponse>;
   /** 创建黑石虚拟子网 {@link CreateVirtualSubnetWithVlanRequest} {@link CreateVirtualSubnetWithVlanResponse} */
   CreateVirtualSubnetWithVlan(data: CreateVirtualSubnetWithVlanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVirtualSubnetWithVlanResponse>;
-  /** 创建黑石私有网络 {@link CreateVpcRequest} {@link CreateVpcResponse} */
+  /** @deprecated 创建黑石私有网络 {@link CreateVpcRequest} {@link CreateVpcResponse} */
   CreateVpc(data: CreateVpcRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVpcResponse>;
-  /** 创建对等连接 {@link CreateVpcPeerConnectionRequest} {@link CreateVpcPeerConnectionResponse} */
+  /** @deprecated 创建对等连接 {@link CreateVpcPeerConnectionRequest} {@link CreateVpcPeerConnectionResponse} */
   CreateVpcPeerConnection(data: CreateVpcPeerConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVpcPeerConnectionResponse>;
   /** 删除对端网关 {@link DeleteCustomerGatewayRequest} {@link DeleteCustomerGatewayResponse} */
   DeleteCustomerGateway(data: DeleteCustomerGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomerGatewayResponse>;
@@ -1523,9 +1523,9 @@ declare interface Bmvpc {
   DeleteHostedInterfaces(data: DeleteHostedInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHostedInterfacesResponse>;
   /** 物理机移除子网(批量接口) {@link DeleteInterfacesRequest} {@link DeleteInterfacesResponse} */
   DeleteInterfaces(data: DeleteInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInterfacesResponse>;
-  /** 删除NAT网关 {@link DeleteNatGatewayRequest} {@link DeleteNatGatewayResponse} */
+  /** @deprecated 删除NAT网关 {@link DeleteNatGatewayRequest} {@link DeleteNatGatewayResponse} */
   DeleteNatGateway(data: DeleteNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNatGatewayResponse>;
-  /** 删除黑石路由表路由规则 {@link DeleteRoutePolicyRequest} {@link DeleteRoutePolicyResponse} */
+  /** @deprecated 删除黑石路由表路由规则 {@link DeleteRoutePolicyRequest} {@link DeleteRoutePolicyResponse} */
   DeleteRoutePolicy(data: DeleteRoutePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoutePolicyResponse>;
   /** 删除子网 {@link DeleteSubnetRequest} {@link DeleteSubnetResponse} */
   DeleteSubnet(data: DeleteSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSubnetResponse>;
@@ -1539,7 +1539,7 @@ declare interface Bmvpc {
   DeleteVpnConnection(data: DeleteVpnConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpnConnectionResponse>;
   /** 删除VPN网关 {@link DeleteVpnGatewayRequest} {@link DeleteVpnGatewayResponse} */
   DeleteVpnGateway(data: DeleteVpnGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpnGatewayResponse>;
-  /** 注销私有网络IP {@link DeregisterIpsRequest} {@link DeregisterIpsResponse} */
+  /** @deprecated 注销私有网络IP {@link DeregisterIpsRequest} {@link DeregisterIpsResponse} */
   DeregisterIps(data: DeregisterIpsRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterIpsResponse>;
   /** 查询对端网关 {@link DescribeCustomerGatewaysRequest} {@link DescribeCustomerGatewaysResponse} */
   DescribeCustomerGateways(data?: DescribeCustomerGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomerGatewaysResponse>;
@@ -1575,13 +1575,13 @@ declare interface Bmvpc {
   DescribeVpnConnections(data?: DescribeVpnConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnConnectionsResponse>;
   /** 查询VPN网关 {@link DescribeVpnGatewaysRequest} {@link DescribeVpnGatewaysResponse} */
   DescribeVpnGateways(data?: DescribeVpnGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpnGatewaysResponse>;
-  /** 下载VPN通道配置 {@link DownloadCustomerGatewayConfigurationRequest} {@link DownloadCustomerGatewayConfigurationResponse} */
+  /** @deprecated 下载VPN通道配置 {@link DownloadCustomerGatewayConfigurationRequest} {@link DownloadCustomerGatewayConfigurationResponse} */
   DownloadCustomerGatewayConfiguration(data: DownloadCustomerGatewayConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadCustomerGatewayConfigurationResponse>;
   /** 修改对端网关 {@link ModifyCustomerGatewayAttributeRequest} {@link ModifyCustomerGatewayAttributeResponse} */
   ModifyCustomerGatewayAttribute(data: ModifyCustomerGatewayAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomerGatewayAttributeResponse>;
-  /** 修改自定义路由 {@link ModifyRoutePolicyRequest} {@link ModifyRoutePolicyResponse} */
+  /** @deprecated 修改自定义路由 {@link ModifyRoutePolicyRequest} {@link ModifyRoutePolicyResponse} */
   ModifyRoutePolicy(data: ModifyRoutePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoutePolicyResponse>;
-  /** 修改路由表 {@link ModifyRouteTableRequest} {@link ModifyRouteTableResponse} */
+  /** @deprecated 修改路由表 {@link ModifyRouteTableRequest} {@link ModifyRouteTableResponse} */
   ModifyRouteTable(data: ModifyRouteTableRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRouteTableResponse>;
   /** 修改子网属性 {@link ModifySubnetAttributeRequest} {@link ModifySubnetAttributeResponse} */
   ModifySubnetAttribute(data: ModifySubnetAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubnetAttributeResponse>;
@@ -1601,11 +1601,11 @@ declare interface Bmvpc {
   ResetVpnConnection(data: ResetVpnConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<ResetVpnConnectionResponse>;
   /** NAT网关解绑EIP {@link UnbindEipsFromNatGatewayRequest} {@link UnbindEipsFromNatGatewayResponse} */
   UnbindEipsFromNatGateway(data: UnbindEipsFromNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindEipsFromNatGatewayResponse>;
-  /** NAT网关解绑IP {@link UnbindIpsFromNatGatewayRequest} {@link UnbindIpsFromNatGatewayResponse} */
+  /** @deprecated NAT网关解绑IP {@link UnbindIpsFromNatGatewayRequest} {@link UnbindIpsFromNatGatewayResponse} */
   UnbindIpsFromNatGateway(data: UnbindIpsFromNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindIpsFromNatGatewayResponse>;
-  /** NAT网关解绑子网 {@link UnbindSubnetsFromNatGatewayRequest} {@link UnbindSubnetsFromNatGatewayResponse} */
+  /** @deprecated NAT网关解绑子网 {@link UnbindSubnetsFromNatGatewayRequest} {@link UnbindSubnetsFromNatGatewayResponse} */
   UnbindSubnetsFromNatGateway(data: UnbindSubnetsFromNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindSubnetsFromNatGatewayResponse>;
-  /** 升级NAT网关 {@link UpgradeNatGatewayRequest} {@link UpgradeNatGatewayResponse} */
+  /** @deprecated 升级NAT网关 {@link UpgradeNatGatewayRequest} {@link UpgradeNatGatewayResponse} */
   UpgradeNatGateway(data: UpgradeNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeNatGatewayResponse>;
 }
 

@@ -310,6 +310,8 @@ declare interface CallDetail {
   PageUsage?: number | null;
   /** 筛选子场景 */
   SubScene?: string | null;
+  /** 账单明细对应的自定义tag */
+  BillingTag?: string;
 }
 
 /** 分类信息 */
@@ -2252,6 +2254,8 @@ declare interface DescribeAppResponse {
   AppStatus?: number;
   /** 状态说明 */
   AppStatusDesc?: string;
+  /** 应用是否在复制中 */
+  IsCopying?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3659,9 +3663,9 @@ declare interface ListUsageCallDetailRequest {
   StartTime: string;
   /** 结束时间 */
   EndTime: string;
-  /** 页码 */
+  /** 页码（从1开始） */
   PageNumber: number;
-  /** 分页数量 */
+  /** 分页数量(最大值1000) */
   PageSize: number;
   /** uin列表 */
   UinAccount?: string[];
@@ -3673,6 +3677,8 @@ declare interface ListUsageCallDetailRequest {
   SubScenes?: string[];
   /** 应用类型(knowledge_qa应用管理， shared_knowlege 共享知识库) */
   AppType?: string;
+  /** 账单明细对应的自定义tag */
+  BillingTag?: string;
 }
 
 declare interface ListUsageCallDetailResponse {

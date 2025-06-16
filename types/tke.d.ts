@@ -5807,6 +5807,22 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface DescribeMasterComponentRequest {
+    /** 集群ID */
+    ClusterId: string;
+    /** master组件名称，支持kube-apiserver、kube-scheduler、kube-controller-manager */
+    Component: string;
+  }
+
+  interface DescribeMasterComponentResponse {
+    /** master组件名称 */
+    Component?: string;
+    /** master组件状态，三种状态：running、updating、shutdown */
+    Status?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeOSImagesRequest {
   }
 
@@ -7023,6 +7039,22 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface ModifyMasterComponentRequest {
+    /** 集群ID */
+    ClusterId: string;
+    /** master组件名称，支持kube-apiserver、kube-scheduler、kube-controller-manager */
+    Component: string;
+    /** 停机或恢复，值只能为：shutdown或restore */
+    Operation: string;
+    /** 为true时，不真正执行停机或恢复操作 */
+    DryRun?: boolean;
+  }
+
+  interface ModifyMasterComponentResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface ModifyNodePoolDesiredCapacityAboutAsgRequest {
     /** 集群id */
     ClusterId: string;
@@ -7887,6 +7919,8 @@ declare interface Tke {
   DescribeLogConfigs(data: V20180525.DescribeLogConfigsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeLogConfigsResponse>;
   /** 查询集群日志开关列表 {@link V20180525.DescribeLogSwitchesRequest} {@link V20180525.DescribeLogSwitchesResponse} */
   DescribeLogSwitches(data: V20180525.DescribeLogSwitchesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeLogSwitchesResponse>;
+  /** 查询托管集群的master组件状态 {@link V20180525.DescribeMasterComponentRequest} {@link V20180525.DescribeMasterComponentResponse} */
+  DescribeMasterComponent(data: V20180525.DescribeMasterComponentRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeMasterComponentResponse>;
   /** 获取OS聚合信息 {@link V20180525.DescribeOSImagesRequest} {@link V20180525.DescribeOSImagesResponse} */
   DescribeOSImages(data: V20180525.DescribeOSImagesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeOSImagesResponse>;
   /** 查询opa策略列表 {@link V20180525.DescribeOpenPolicyListRequest} {@link V20180525.DescribeOpenPolicyListResponse} */
@@ -8027,6 +8061,8 @@ declare interface Tke {
   ModifyClusterTags(data: V20180525.ModifyClusterTagsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterTagsResponse>;
   /** 修改超级节点池 {@link V20180525.ModifyClusterVirtualNodePoolRequest} {@link V20180525.ModifyClusterVirtualNodePoolResponse} */
   ModifyClusterVirtualNodePool(data: V20180525.ModifyClusterVirtualNodePoolRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterVirtualNodePoolResponse>;
+  /** 修改托管集群master组件 {@link V20180525.ModifyMasterComponentRequest} {@link V20180525.ModifyMasterComponentResponse} */
+  ModifyMasterComponent(data: V20180525.ModifyMasterComponentRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyMasterComponentResponse>;
   /** 修改节点池关联伸缩组的期望实例数 {@link V20180525.ModifyNodePoolDesiredCapacityAboutAsgRequest} {@link V20180525.ModifyNodePoolDesiredCapacityAboutAsgResponse} */
   ModifyNodePoolDesiredCapacityAboutAsg(data: V20180525.ModifyNodePoolDesiredCapacityAboutAsgRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyNodePoolDesiredCapacityAboutAsgResponse>;
   /** 修改节点池的机型配置 {@link V20180525.ModifyNodePoolInstanceTypesRequest} {@link V20180525.ModifyNodePoolInstanceTypesResponse} */

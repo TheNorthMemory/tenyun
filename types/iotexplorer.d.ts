@@ -3049,7 +3049,7 @@ declare interface GenSingleDeviceSignatureOfPublicRequest {
 
 declare interface GenSingleDeviceSignatureOfPublicResponse {
   /** 设备签名 */
-  DeviceSignature: DeviceSignatureInfo;
+  DeviceSignature?: DeviceSignatureInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3181,7 +3181,7 @@ declare interface GetDeviceLocationHistoryRequest {
 
 declare interface GetDeviceLocationHistoryResponse {
   /** 历史位置列表 */
-  Positions: PositionItem[];
+  Positions?: PositionItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

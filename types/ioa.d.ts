@@ -150,6 +150,16 @@ declare interface DescribeDeviceHardwareInfoListRspData {
   Items?: DescribeDeviceHardwareInfoItem[];
 }
 
+/** 业务响应数据 */
+declare interface DescribeDeviceInfoRspData {
+  /** 分页的具体数据对象 */
+  ProcessList?: DeviceProcessInfo[] | null;
+  /** 分页的具体数据对象 */
+  NetworkList?: DeviceNetworkInfo[] | null;
+  /** 分页的具体数据对象 */
+  ServiceList?: DeviceServiceInfo[] | null;
+}
+
 /** 分页的data数据 */
 declare interface DescribeDevicesPageRsp {
   /** 数据分页信息 */
@@ -352,6 +362,60 @@ declare interface DeviceDetail {
   RemarkName?: string;
 }
 
+/** 分页的具体数据对象 */
+declare interface DeviceNetworkInfo {
+  /** 本地地址 */
+  LocalAddr?: string | null;
+  /** 本地端口 */
+  LocalPort?: number | null;
+  /** 进程id */
+  ProcessId?: number | null;
+  /** 进程名称 */
+  ProcessName?: string | null;
+  /** 协议 */
+  Protocol?: string | null;
+  /** 远程地址 */
+  RemoteAddr?: string | null;
+  /** 远程端口 */
+  RemotePort?: number | null;
+  /** 状态 */
+  State?: number | null;
+}
+
+/** 分页的具体数据对象 */
+declare interface DeviceProcessInfo {
+  /** 命令行 */
+  CmdLine?: string | null;
+  /** 内存 */
+  Memory?: string | null;
+  /** 名称 */
+  Name?: string | null;
+  /** 路径 */
+  Path?: string | null;
+  /** 进程id */
+  ProcessId?: number | null;
+  /** 启动用户 */
+  User?: string | null;
+}
+
+/** 分页的具体数据对象 */
+declare interface DeviceServiceInfo {
+  /** 命令行 */
+  CmdLine?: string | null;
+  /** 内存 */
+  Description?: string | null;
+  /** 名称 */
+  Name?: string | null;
+  /** 进程id */
+  ProcessId?: number | null;
+  /** 启动类型 */
+  StartType?: number | null;
+  /** 状态 */
+  State?: number | null;
+  /** 启动用户 */
+  User?: string | null;
+}
+
 /** Filters 条件过滤 */
 declare interface Filter {
   /** 过滤字段 */
@@ -494,6 +558,16 @@ declare interface CreateDLPFileDetectionTaskResponse {
   RequestId?: string;
 }
 
+declare interface CreateDeviceTaskRequest {
+  /** 终端id */
+  Mid?: string;
+}
+
+declare interface CreateDeviceTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDeviceVirtualGroupRequest {
   /** 必填，终端自定义分组名 */
   DeviceVirtualGroupName?: string;
@@ -574,6 +648,20 @@ declare interface DescribeDeviceHardwareInfoListRequest {
 declare interface DescribeDeviceHardwareInfoListResponse {
   /** 分页的data数据 */
   Data?: DescribeDeviceHardwareInfoListRspData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDeviceInfoRequest {
+  /** 终端id */
+  Mid?: string;
+  /** 查询类型 process_list network_list service_list */
+  Type?: string;
+}
+
+declare interface DescribeDeviceInfoResponse {
+  /** 业务响应数据 */
+  Data?: DescribeDeviceInfoRspData | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -669,6 +757,8 @@ declare interface Ioa {
   (): Versions;
   /** 提交送检任务 {@link CreateDLPFileDetectionTaskRequest} {@link CreateDLPFileDetectionTaskResponse} */
   CreateDLPFileDetectionTask(data: CreateDLPFileDetectionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDLPFileDetectionTaskResponse>;
+  /** 创建获取终端进程网络服务信息任务 {@link CreateDeviceTaskRequest} {@link CreateDeviceTaskResponse} */
+  CreateDeviceTask(data?: CreateDeviceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceTaskResponse>;
   /** 创建终端自定义分组 {@link CreateDeviceVirtualGroupRequest} {@link CreateDeviceVirtualGroupResponse} */
   CreateDeviceVirtualGroup(data?: CreateDeviceVirtualGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceVirtualGroupResponse>;
   /** 创建特权码、卸载码 {@link CreatePrivilegeCodeRequest} {@link CreatePrivilegeCodeResponse} */
@@ -679,6 +769,8 @@ declare interface Ioa {
   DescribeDLPFileDetectResult(data?: DescribeDLPFileDetectResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDLPFileDetectResultResponse>;
   /** 查询终端硬件信息列表 {@link DescribeDeviceHardwareInfoListRequest} {@link DescribeDeviceHardwareInfoListResponse} */
   DescribeDeviceHardwareInfoList(data: DescribeDeviceHardwareInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceHardwareInfoListResponse>;
+  /** 获取终端进程网络服务信息 {@link DescribeDeviceInfoRequest} {@link DescribeDeviceInfoResponse} */
+  DescribeDeviceInfo(data?: DescribeDeviceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceInfoResponse>;
   /** 查询设备列表详情 {@link DescribeDevicesRequest} {@link DescribeDevicesResponse} */
   DescribeDevices(data?: DescribeDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicesResponse>;
   /** 获取账号列表 {@link DescribeLocalAccountsRequest} {@link DescribeLocalAccountsResponse} */

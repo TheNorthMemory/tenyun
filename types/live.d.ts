@@ -4227,9 +4227,9 @@ declare interface DescribeRecordTaskRequest {
 
 declare interface DescribeRecordTaskResponse {
   /** 翻页标识，当请求未返回所有数据，该字段表示下一条记录的 Token。当该字段为空，说明已无更多数据。 */
-  ScrollToken: string;
+  ScrollToken?: string;
   /** 录制任务列表。当该字段为空，说明已返回所有数据。 */
-  TaskList: RecordTask[];
+  TaskList?: RecordTask[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

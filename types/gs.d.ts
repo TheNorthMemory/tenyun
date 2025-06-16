@@ -130,6 +130,8 @@ declare interface AndroidInstanceImage {
   AndroidInstanceImageState?: string;
   /** 镜像可用区 */
   AndroidInstanceImageZone?: string;
+  /** 安卓10 */
+  AndroidVersion?: string;
 }
 
 /** 安卓实例信息 */
@@ -450,6 +452,24 @@ declare interface CreateAndroidInstanceWebShellResponse {
   RequestId?: string;
 }
 
+declare interface CreateAndroidInstancesAccessTokenRequest {
+  /** 实例 ID 列表。每次请求的实例的上限为 500。 */
+  AndroidInstanceIds: string[];
+  /** 有效期，默认为 12 小时，最大为 24 小时。支持 s（秒）、m（分）、h（小时）等单位，比如 12h 表示 12 小时，1h2m3s 表示一小时两分三秒 */
+  ExpirationDuration?: string;
+}
+
+declare interface CreateAndroidInstancesAccessTokenResponse {
+  /** token */
+  Token?: string;
+  /** 访问信息 */
+  AccessInfo?: string;
+  /** 安卓实例错误列表。列表包含有问题的安卓实例 ID，生成的 Token 对这些有问题的实例无效。 */
+  AndroidInstanceErrors?: AndroidInstanceError[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAndroidInstancesRequest {
   /** 安卓实例可用区。ap-guangzhou-3：广州三区ap-shenzhen-1：深圳一区ap-xian-ec-1：西安一区ap-hangzhou-ec-1：杭州一区 */
   Zone: string;
@@ -578,6 +598,24 @@ declare interface DeleteAndroidAppVersionRequest {
 }
 
 declare interface DeleteAndroidAppVersionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAndroidInstanceBackupFilesRequest {
+  /** 文件对象键列表 */
+  ObjectKeys: string[];
+  /** 存储服务器类型，如 COS、S3。注意：使用 COS 和 S3 都将占用外网带宽。 */
+  StorageType: string;
+  /** COS协议选项 */
+  COSOptions?: COSOptions;
+  /** S3存储协议选项 */
+  S3Options?: S3Options;
+  /** 安卓实例可用区。StorageType 为 S3 时，需要填写该字段；StorageType 为 COS 时，不需要填写该字段 */
+  AndroidInstanceZone?: string;
+}
+
+declare interface DeleteAndroidInstanceBackupFilesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1036,6 +1074,8 @@ declare interface ModifyAndroidInstancesPropertiesRequest {
 }
 
 declare interface ModifyAndroidInstancesPropertiesResponse {
+  /** 安卓实例错误列表 */
+  AndroidInstanceErrors?: AndroidInstanceError[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1056,6 +1096,8 @@ declare interface ModifyAndroidInstancesResolutionRequest {
 }
 
 declare interface ModifyAndroidInstancesResolutionResponse {
+  /** 安卓实例错误列表 */
+  AndroidInstanceErrors?: AndroidInstanceError[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1106,6 +1148,18 @@ declare interface RebootAndroidInstancesRequest {
 declare interface RebootAndroidInstancesResponse {
   /** 任务集合 */
   TaskSet?: AndroidInstanceTask[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RenewAndroidInstancesAccessTokenRequest {
+  /** token */
+  AccessToken: string;
+  /** 有效期，默认为 12 小时，最大为 24 小时。支持 s（秒）、m（分）、h（小时）等单位，比如 12h 表示 12 小时，1h2m3s 表示一小时两分三秒 */
+  ExpirationDuration?: string;
+}
+
+declare interface RenewAndroidInstancesAccessTokenResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1435,6 +1489,8 @@ declare interface Gs {
   CreateAndroidInstanceWebShell(data: CreateAndroidInstanceWebShellRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidInstanceWebShellResponse>;
   /** 创建安卓实例 {@link CreateAndroidInstancesRequest} {@link CreateAndroidInstancesResponse} */
   CreateAndroidInstances(data: CreateAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidInstancesResponse>;
+  /** 创建安卓实例访问Token {@link CreateAndroidInstancesAccessTokenRequest} {@link CreateAndroidInstancesAccessTokenResponse} */
+  CreateAndroidInstancesAccessToken(data: CreateAndroidInstancesAccessTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidInstancesAccessTokenResponse>;
   /** 安卓实例截图 {@link CreateAndroidInstancesScreenshotRequest} {@link CreateAndroidInstancesScreenshotResponse} */
   CreateAndroidInstancesScreenshot(data: CreateAndroidInstancesScreenshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidInstancesScreenshotResponse>;
   /** 创建 Cos 临时密钥 {@link CreateCosCredentialRequest} {@link CreateCosCredentialResponse} */
@@ -1445,6 +1501,8 @@ declare interface Gs {
   DeleteAndroidApp(data: DeleteAndroidAppRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAndroidAppResponse>;
   /** 删除安卓应用版本 {@link DeleteAndroidAppVersionRequest} {@link DeleteAndroidAppVersionResponse} */
   DeleteAndroidAppVersion(data: DeleteAndroidAppVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAndroidAppVersionResponse>;
+  /** 批量删除安卓实例备份文件 {@link DeleteAndroidInstanceBackupFilesRequest} {@link DeleteAndroidInstanceBackupFilesResponse} */
+  DeleteAndroidInstanceBackupFiles(data: DeleteAndroidInstanceBackupFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAndroidInstanceBackupFilesResponse>;
   /** 删除安卓实例镜像 {@link DeleteAndroidInstanceImagesRequest} {@link DeleteAndroidInstanceImagesResponse} */
   DeleteAndroidInstanceImages(data: DeleteAndroidInstanceImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAndroidInstanceImagesResponse>;
   /** 删除安卓实例标签 {@link DeleteAndroidInstanceLabelRequest} {@link DeleteAndroidInstanceLabelResponse} */
@@ -1513,6 +1571,8 @@ declare interface Gs {
   RebootAndroidInstanceHosts(data: RebootAndroidInstanceHostsRequest, config?: AxiosRequestConfig): AxiosPromise<RebootAndroidInstanceHostsResponse>;
   /** 重启安卓实例 {@link RebootAndroidInstancesRequest} {@link RebootAndroidInstancesResponse} */
   RebootAndroidInstances(data: RebootAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RebootAndroidInstancesResponse>;
+  /** 续期安卓实例访问Token {@link RenewAndroidInstancesAccessTokenRequest} {@link RenewAndroidInstancesAccessTokenResponse} */
+  RenewAndroidInstancesAccessToken(data: RenewAndroidInstancesAccessTokenRequest, config?: AxiosRequestConfig): AxiosPromise<RenewAndroidInstancesAccessTokenResponse>;
   /** 重置安卓实例 {@link ResetAndroidInstancesRequest} {@link ResetAndroidInstancesResponse} */
   ResetAndroidInstances(data: ResetAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ResetAndroidInstancesResponse>;
   /** 重启安卓实例应用 {@link RestartAndroidInstancesAppRequest} {@link RestartAndroidInstancesAppResponse} */
