@@ -2772,6 +2772,30 @@ declare interface UploadRevokeLetterResponse {
   RequestId?: string;
 }
 
+declare interface UploadUpdateCertificateInstanceRequest {
+  /** 一键更新的旧证书ID。 通过查询该证书ID绑定的云资源，然后使用新证书对这些云资源进行更新 */
+  OldCertificateId: string;
+  /** 需要部署的资源类型，参数值可选（小写）：clb */
+  ResourceTypes: string[];
+  /** 公钥证书 */
+  CertificatePublicKey: string;
+  /** 私钥证书 */
+  CertificatePrivateKey: string;
+  /** 云资源需要部署的地域列表，支持地域的云资源类型必传，取值：clb */
+  ResourceTypesRegions?: ResourceTypeRegions[];
+}
+
+declare interface UploadUpdateCertificateInstanceResponse {
+  /** 云资源更新任务ID， DeployRecordId为0表示任务进行中， 重复请求这个接口， 当返回DeployRecordId大于0则表示任务创建成功。 未创建成功则会抛出异常 */
+  DeployRecordId?: number;
+  /** 更新任务创建状态；1表示创建成功； 0表示当前存在更新中的任务，未创建新的更新任务；返回值DeployRecordId为更新中的任务ID */
+  DeployStatus?: number;
+  /** 更新异步创建任务进度详情 */
+  UpdateSyncProgress?: UpdateSyncProgress[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface VerifyManagerRequest {
   /** 管理人ID */
   ManagerId: number;
@@ -2911,6 +2935,8 @@ declare interface Ssl {
   UploadConfirmLetter(data: UploadConfirmLetterRequest, config?: AxiosRequestConfig): AxiosPromise<UploadConfirmLetterResponse>;
   /** 上传证书吊销确认函 {@link UploadRevokeLetterRequest} {@link UploadRevokeLetterResponse} */
   UploadRevokeLetter(data: UploadRevokeLetterRequest, config?: AxiosRequestConfig): AxiosPromise<UploadRevokeLetterResponse>;
+  /** 更新证书内容（证书ID不变）并更新关联的云资源 {@link UploadUpdateCertificateInstanceRequest} {@link UploadUpdateCertificateInstanceResponse} */
+  UploadUpdateCertificateInstance(data: UploadUpdateCertificateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UploadUpdateCertificateInstanceResponse>;
   /** 重新核验管理人 {@link VerifyManagerRequest} {@link VerifyManagerResponse} */
   VerifyManager(data: VerifyManagerRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyManagerResponse>;
 }

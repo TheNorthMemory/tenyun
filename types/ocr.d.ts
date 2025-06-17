@@ -5102,72 +5102,6 @@ declare interface SmartStructuralOCRResponse {
   RequestId?: string;
 }
 
-declare interface SmartStructuralOCRV2Request {
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。 */
-  IsPdf?: boolean;
-  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
-  PdfPageNumber?: number;
-  /** 自定义结构化功能需返回的字段名称，例：若客户只想返回姓名、性别两个字段的识别结果，则输入ItemNames=["姓名","性别"] */
-  ItemNames?: string[];
-  /** 是否开启全文字段识别 */
-  ReturnFullText?: boolean;
-  /** 配置id支持：General -- 通用场景OnlineTaxiItinerary -- 网约车行程单RideHailingDriverLicense -- 网约车驾驶证RideHailingTransportLicense -- 网约车运输证WayBill -- 快递运单AccountOpeningPermit -- 银行开户许可证InvoiceEng -- 海外发票模版Coin --钱币识别模板OnboardingDocuments -- 入职材料识别PropertyOwnershipCertificate -- 房产证识别RealEstateCertificate --不动产权证识别HouseEncumbranceCertificate -- 他权证识别CarInsurance -- 车险保单MultiRealEstateCertificate -- 房产证、不动产证、产权证等材料合一模板 */
-  ConfigId?: string;
-  /** 是否打开印章识别 */
-  EnableSealRecognize?: boolean;
-}
-
-declare interface SmartStructuralOCRV2Response {
-  /** 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负 */
-  Angle?: number;
-  /** 配置结构化文本信息 */
-  StructuralList?: GroupInfo[];
-  /** 还原文本信息 */
-  WordList?: WordItem[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface SmartStructuralProRequest {
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，WORD，EXCEL，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，WORD，EXCEL，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为前3页。 */
-  PdfPageNumber?: number;
-  /** 自定义结构化功能需返回的字段名称，例：若客户想新增返回姓名、性别两个字段的识别结果，则输入ItemNames=["姓名","性别"] */
-  ItemNames?: string[];
-  /** true：仅输出自定义字段flase：输出默认字段+自定义字段默认true */
-  ItemNamesShowMode?: boolean;
-  /** 是否开启全文字段识别 */
-  ReturnFullText?: boolean;
-  /** 配置id支持：General -- 通用场景 InvoiceEng -- 国际invoice模版 WayBillEng --海运订单模板CustomsDeclaration -- 进出口报关单WeightNote -- 磅单MedicalMeter -- 血压仪表识别BillOfLading -- 海运提单EntrustmentBook -- 海运托书WordRecognize -- 手写英文作文模版Statement -- 对账单识别模板BookingConfirmation -- 配舱通知书识别模板AirWayBill -- 航空运单识别模板DispatchWeightNote -- 磅单发货单识别模板ReceiptWeightNote -- 磅单收货单识别模板ArticalRecognize -- 手写作文模版Table -- 表格模版SteelLabel -- 实物标签识别模板CarInsurance -- 车辆保险单识别模板 */
-  ConfigId?: string;
-  /** 是否开启全文字段坐标值的识别 */
-  EnableCoord?: boolean;
-  /** 是否开启父子key识别，默认是 */
-  OutputParentKey?: boolean;
-  /** 模版的单个属性配置 */
-  ConfigAdvanced?: ConfigAdvanced;
-}
-
-declare interface SmartStructuralProResponse {
-  /** 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负 */
-  Angle?: number;
-  /** 配置结构化文本信息 */
-  StructuralList?: GroupInfo[];
-  /** 还原文本信息 */
-  WordList?: WordItem[];
-  /** 识别出的token个数 */
-  TokenNum?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface TableOCRRequest {
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -5681,10 +5615,6 @@ declare interface Ocr {
   ShipInvoiceOCR(data?: ShipInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ShipInvoiceOCRResponse>;
   /** 智能结构化识别 {@link SmartStructuralOCRRequest} {@link SmartStructuralOCRResponse} */
   SmartStructuralOCR(data?: SmartStructuralOCRRequest, config?: AxiosRequestConfig): AxiosPromise<SmartStructuralOCRResponse>;
-  /** 文档抽取（基础版）-旧版不再更新维护 {@link SmartStructuralOCRV2Request} {@link SmartStructuralOCRV2Response} */
-  SmartStructuralOCRV2(data?: SmartStructuralOCRV2Request, config?: AxiosRequestConfig): AxiosPromise<SmartStructuralOCRV2Response>;
-  /** 文档抽取（多模态版）-旧版不再更新维护 {@link SmartStructuralProRequest} {@link SmartStructuralProResponse} */
-  SmartStructuralPro(data?: SmartStructuralProRequest, config?: AxiosRequestConfig): AxiosPromise<SmartStructuralProResponse>;
   /** 表格识别（V1) {@link TableOCRRequest} {@link TableOCRResponse} */
   TableOCR(data?: TableOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TableOCRResponse>;
   /** 出租车发票识别 {@link TaxiInvoiceOCRRequest} {@link TaxiInvoiceOCRResponse} */

@@ -990,7 +990,7 @@ declare interface ModifyFileSystemAutoScaleUpRuleResponse {
   Status?: number;
   /** 扩容阈值,范围[10-90] */
   ScaleUpThreshold?: number;
-  /** 扩容后达到阈值,范围[10-90] */
+  /** 扩容后达到阈值,范围[1-90] */
   TargetThreshold?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

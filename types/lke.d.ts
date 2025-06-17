@@ -3923,7 +3923,7 @@ declare interface QueryRewriteResponse {
 declare interface RateMsgRecordRequest {
   /** 应用appKey */
   BotAppKey: string;
-  /** 消息ID */
+  /** 消息ID 【大模型回复答案的RecordID】 */
   RecordId: string;
   /** 1点赞2点踩 */
   Score: number;
@@ -4375,7 +4375,7 @@ declare interface Lke {
   ModifyRejectedQuestion(data: ModifyRejectedQuestionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRejectedQuestionResponse>;
   /** 多轮改写 {@link QueryRewriteRequest} {@link QueryRewriteResponse} */
   QueryRewrite(data: QueryRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<QueryRewriteResponse>;
-  /** 评价消息 {@link RateMsgRecordRequest} {@link RateMsgRecordResponse} */
+  /** 评价消息【点赞点踩】 {@link RateMsgRecordRequest} {@link RateMsgRecordResponse} */
   RateMsgRecord(data: RateMsgRecordRequest, config?: AxiosRequestConfig): AxiosPromise<RateMsgRecordResponse>;
   /** 文档解析 {@link ReconstructDocumentRequest} {@link ReconstructDocumentResponse} */
   ReconstructDocument(data?: ReconstructDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<ReconstructDocumentResponse>;

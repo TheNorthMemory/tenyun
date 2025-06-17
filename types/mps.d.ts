@@ -206,6 +206,14 @@ declare interface AdaptiveStreamTemplate {
   AudioList?: AudioTemplateInfo[] | null;
 }
 
+/** 增加盲水印配置 */
+declare interface AddBlindWatermarkConfig {
+  /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
+  Switch?: string | null;
+  /** 盲水印嵌入数据 */
+  EmbedInfo?: BlindWatermarkEmbedInfo | null;
+}
+
 /** 外挂字幕。 */
 declare interface AddOnSubtitle {
   /** 插入形式，可选值：subtitle-stream：插入字幕轨道close-caption-708：CEA-708字幕编码到SEI帧close-caption-608：CEA-608字幕编码到SEI帧 */
@@ -1626,6 +1634,22 @@ declare interface BatchSubTaskResult {
   SmartSubtitlesTaskResult?: BatchSmartSubtitlesResult | null;
 }
 
+/** 盲水印配置 */
+declare interface BlindWatermarkConfig {
+  /** 增加盲水印 */
+  AddBlindWatermark?: AddBlindWatermarkConfig | null;
+  /** 提取盲水印 */
+  ExtractBlindWatermark?: ExtractBlindWatermarkConfig | null;
+  /** 移除盲水印 */
+  RemoveBlindWatermark?: RemoveBlindWatermarkConfig | null;
+}
+
+/** 嵌入盲水印配置 */
+declare interface BlindWatermarkEmbedInfo {
+  /** 盲水印文字，需要经过 URL 安全的 Base64 编码。 */
+  EmbedText?: string | null;
+}
+
 /** 智能分类任务控制参数 */
 declare interface ClassificationConfigureInfo {
   /** 智能分类任务开关，可选值：ON：开启智能分类任务；OFF：关闭智能分类任务。 */
@@ -2572,6 +2596,12 @@ declare interface ExpressionConfigInfo {
   Switch: string;
 }
 
+/** 提取盲水印配置 */
+declare interface ExtractBlindWatermarkConfig {
+  /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
+  Switch?: string | null;
+}
+
 /** 人脸识别任务控制参数 */
 declare interface FaceConfigureInfo {
   /** 人脸识别任务开关，可选值：ON：开启智能人脸识别任务；OFF：关闭智能人脸识别任务。 */
@@ -3042,6 +3072,8 @@ declare interface ImageTaskInput {
   EnhanceConfig?: ImageEnhanceConfig | null;
   /** 图片擦除配置。 */
   EraseConfig?: ImageEraseConfig | null;
+  /** 盲水印配置。 */
+  BlindWatermarkConfig?: BlindWatermarkConfig | null;
 }
 
 /** 图片水印模板输入参数 */
@@ -4588,6 +4620,12 @@ declare interface RawWatermarkParameter {
 declare interface RegionInfo {
   /** 地区名称。 */
   Name?: string;
+}
+
+/** 移除盲水印配置 */
+declare interface RemoveBlindWatermarkConfig {
+  /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
+  Switch?: string | null;
 }
 
 /** 延播平滑吐流配置。 */

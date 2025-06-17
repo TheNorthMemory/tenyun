@@ -4269,7 +4269,7 @@ declare interface UpdateUpstreamTargetsResponse {
   RequestId?: string;
 }
 
-/** {@link Tse TSF-Polaris&Nacos&ZK&网关} */
+/** {@link Tse TSF-Polaris&ZK&网关} */
 declare interface Tse {
   (): Versions;
   /** 弹性伸缩策略批量绑定网关分组 {@link BindAutoScalerResourceStrategyToGroupsRequest} {@link BindAutoScalerResourceStrategyToGroupsResponse} */
