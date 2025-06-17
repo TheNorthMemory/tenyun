@@ -260,6 +260,20 @@ declare interface BatchDeleteClientNodesResponse {
   RequestId?: string;
 }
 
+declare interface BuildClientNodeMountCommandRequest {
+  /** 文件系统ID */
+  FileSystemId: string;
+  /** 自定义挂载目录的绝对路径, 如果未指定, 则会使用默认值, 格式/goosefsx/${fs_id}-proxy. 比如/goosefsx/x-c60-a2b3d4-proxy */
+  CustomMountDir?: string;
+}
+
+declare interface BuildClientNodeMountCommandResponse {
+  /** 挂载命令 */
+  Command?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDataRepositoryTaskRequest {
   /** 数据流通任务类型, FS_TO_COS(文件系统到COS Bucket),或者COS_TO_FS(COS Bucket到文件系统) */
   TaskType: string;
@@ -605,6 +619,8 @@ declare interface Goosefs {
   BatchAddClientNodes(data: BatchAddClientNodesRequest, config?: AxiosRequestConfig): AxiosPromise<BatchAddClientNodesResponse>;
   /** 批量删除客户端节点 {@link BatchDeleteClientNodesRequest} {@link BatchDeleteClientNodesResponse} */
   BatchDeleteClientNodes(data: BatchDeleteClientNodesRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteClientNodesResponse>;
+  /** 生成客户端节点的挂载命令 {@link BuildClientNodeMountCommandRequest} {@link BuildClientNodeMountCommandResponse} */
+  BuildClientNodeMountCommand(data: BuildClientNodeMountCommandRequest, config?: AxiosRequestConfig): AxiosPromise<BuildClientNodeMountCommandResponse>;
   /** 创建数据流动任务 {@link CreateDataRepositoryTaskRequest} {@link CreateDataRepositoryTaskResponse} */
   CreateDataRepositoryTask(data: CreateDataRepositoryTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataRepositoryTaskResponse>;
   /** 创建文件系统 {@link CreateFileSystemRequest} {@link CreateFileSystemResponse} */

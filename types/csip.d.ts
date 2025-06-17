@@ -1100,6 +1100,66 @@ declare interface Element {
   Value?: string;
 }
 
+/** 暴露资产 */
+declare interface ExposesItem {
+  /** 云厂商 */
+  Provider?: string;
+  /** 云账号名称 */
+  CloudAccountName?: string;
+  /** 云账号 */
+  CloudAccountId?: string;
+  /** 域名 */
+  Domain?: string;
+  /** IP */
+  Ip?: string;
+  /** 端口或者端口范围 */
+  Port?: string;
+  /** 开放 */
+  Status?: string;
+  /** 风险类型 */
+  RiskType?: string;
+  /** acl类型 */
+  AclType?: string;
+  /** acl列表 */
+  AclList?: string;
+  /** 资产ID */
+  AssetId?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 资产类型 */
+  AssetType?: string;
+  /** 端口服务数量 */
+  PortServiceCount?: number;
+  /** 高危端口数量 */
+  HighRiskPortServiceCount?: number;
+  /** web应用数量 */
+  WebAppCount?: number;
+  /** 有风险web应用数量 */
+  RiskWebAppCount?: number;
+  /** 弱口令数量 */
+  WeakPasswordCount?: number;
+  /** 漏洞数量 */
+  VulCount?: number;
+  /** 首次发现时间 */
+  CreateTime?: string;
+  /** 最近更新时间 */
+  UpdateTime?: string;
+  /** 实例类型名称 */
+  AssetTypeName?: string;
+  /** 开放状态 */
+  DisplayStatus?: string;
+  /** 端口状态 */
+  DisplayRiskType?: string;
+  /** 扫描任务状态 */
+  ScanTaskStatus?: string;
+  /** uuid */
+  Uuid?: string;
+  /** 是否进行过安全体检 */
+  HasScan?: string;
+  /** 租户ID */
+  AppId?: number;
+}
+
 /** 列表查询接口采用新filter 接口，直接传给后台供后台查询过滤 */
 declare interface Filter {
   /** 查询数量限制 */
@@ -1124,6 +1184,16 @@ declare interface FilterDataObject {
   Value?: string;
   /** 中文翻译 */
   Text?: string;
+}
+
+/** filter过滤条件 */
+declare interface Filters {
+  /** 无 */
+  Name?: string | null;
+  /** 无 */
+  Values?: string[] | null;
+  /** 模糊匹配 */
+  ExactMatch?: string | null;
 }
 
 /** 网关资产 */
@@ -2787,6 +2857,30 @@ declare interface DescribeDomainAssetsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeExposuresRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤内容 */
+  Filters?: Filters[];
+  /** 分页大小 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+  /** 排序类型 */
+  Order?: string;
+  /** 排序字段 */
+  By?: string;
+}
+
+declare interface DescribeExposuresResponse {
+  /** 互联网暴露资产数量 */
+  TotalCount?: number;
+  /** 互联网暴露资产列表 */
+  ExposeList?: ExposesItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeGatewayAssetsRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -3266,10 +3360,20 @@ declare interface DescribeTaskLogURLResponse {
 }
 
 declare interface DescribeTopAttackInfoRequest {
+  /** 起始时间 */
+  StartTime: string;
+  /** 结束时间 */
+  EndTime: string;
+  /** 1:攻击类型 2:攻击者 */
+  QueryType: number;
   /** 集团账号的成员id */
   MemberId?: string[];
   /** 被调用的集团账号的成员id */
   OperatedMemberId?: string[];
+  /** 资产名称 */
+  AssetName?: string;
+  /** 0: 默认全部 1:资产ID 2:域名 */
+  AssetType?: number;
 }
 
 declare interface DescribeTopAttackInfoResponse {
@@ -3548,6 +3652,8 @@ declare interface Csip {
   DescribeDbAssets(data?: DescribeDbAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDbAssetsResponse>;
   /** 域名列表 {@link DescribeDomainAssetsRequest} {@link DescribeDomainAssetsResponse} */
   DescribeDomainAssets(data?: DescribeDomainAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainAssetsResponse>;
+  /** 查询互联网暴露资产列表 {@link DescribeExposuresRequest} {@link DescribeExposuresResponse} */
+  DescribeExposures(data?: DescribeExposuresRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExposuresResponse>;
   /** 网关列表 {@link DescribeGatewayAssetsRequest} {@link DescribeGatewayAssetsResponse} */
   DescribeGatewayAssets(data?: DescribeGatewayAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayAssetsResponse>;
   /** 查询clb监听器列表 {@link DescribeListenerListRequest} {@link DescribeListenerListResponse} */
@@ -3591,7 +3697,7 @@ declare interface Csip {
   /** 获取报告下载的临时链接 {@link DescribeTaskLogURLRequest} {@link DescribeTaskLogURLResponse} */
   DescribeTaskLogURL(data: DescribeTaskLogURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLogURLResponse>;
   /** 查询TOP攻击信息 {@link DescribeTopAttackInfoRequest} {@link DescribeTopAttackInfoResponse} */
-  DescribeTopAttackInfo(data?: DescribeTopAttackInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopAttackInfoResponse>;
+  DescribeTopAttackInfo(data: DescribeTopAttackInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopAttackInfoResponse>;
   /** 查询用户行为分析策略列表 {@link DescribeUebaRuleRequest} {@link DescribeUebaRuleResponse} */
   DescribeUebaRule(data?: DescribeUebaRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUebaRuleResponse>;
   /** 查询漏洞风险高级配置 {@link DescribeVULRiskAdvanceCFGListRequest} {@link DescribeVULRiskAdvanceCFGListResponse} */

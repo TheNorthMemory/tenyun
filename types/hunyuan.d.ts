@@ -244,6 +244,16 @@ declare interface Multimedia {
   Ext?: SongExt | null;
 }
 
+/** 大模型执行状态 */
+declare interface Processes {
+  /** 输出信息 */
+  Message?: string;
+  /** plan:开始获取资料…recall:找到 n 篇相关资料quote:引用 n 篇资料作为参考 */
+  State?: string;
+  /** 当状态是recall和quote，会给出来相关数量 */
+  Num?: number;
+}
+
 /** 翻译对话参考示例 */
 declare interface Reference {
   /** 翻译文本类型，枚举"sentence"表示句子, "term"表示术语 */
@@ -486,6 +496,8 @@ declare interface WebSearchOptions {
   Knowledge?: Knowledge[];
   /** 用户位置详细信息 */
   UserLocation?: UserLocation;
+  /** 打开开关，会返回搜索状态 */
+  Processes?: boolean;
 }
 
 declare interface ActivateServiceRequest {
@@ -541,6 +553,8 @@ declare interface ChatCompletionsRequest {
   EnableDeepRead?: boolean;
   /** 知识注入相关的参数信息 */
   WebSearchOptions?: WebSearchOptions;
+  /** 用户传入Topic */
+  TopicChoice?: string;
 }
 
 declare interface ChatCompletionsResponse {
@@ -564,6 +578,8 @@ declare interface ChatCompletionsResponse {
   Replaces?: Replace[];
   /** 推荐问答。 */
   RecommendedQuestions?: string[];
+  /** AI搜索返回状态 */
+  Processes?: Processes;
   /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
   RequestId?: string;
 }

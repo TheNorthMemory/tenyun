@@ -42,6 +42,8 @@ declare interface AndroidAppVersionInfo {
   UninstallCommand?: string;
   /** 应用资源清理模式（实例安装应用所用资源），取值：CLEANUP_ON_UNINSTALL（默认值），卸载 App 时清理；CLEANUP_AFTER_INSTALL，安装 App 后立即清理。普通应用只有 CLEANUP_AFTER_INSTALL 模式。 */
   CleanupMode?: string;
+  /** 安卓应用版本名称 */
+  AndroidAppVersionName?: string;
 }
 
 /** 安卓实例信息 */
@@ -649,7 +651,7 @@ declare interface DescribeAndroidAppsRequest {
   Limit?: number;
   /** 应用ID数组 */
   AndroidAppIds?: string[];
-  /** 过滤条件 */
+  /** 过滤条件，支持过滤的字段有：UserId */
   Filters?: Filter[];
 }
 

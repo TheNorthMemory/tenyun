@@ -1795,7 +1795,7 @@ declare interface CreateBatchSignUrlRequest {
   IdCardNumber?: string;
   /** 通知用户方式：**NONE** : 不通知（默认）**SMS** : 短信通知（发送短信通知到Mobile参数所传的手机号） */
   NotifyType?: string;
-  /** 批量签署的合同流程ID数组。注: `在调用此接口时，请确保合同流程均为本企业发起，且合同数量不超过100个。` */
+  /** 批量签署的合同流程ID数组，此参数必传。注: `在调用此接口时，请确保合同流程均为本企业发起，且合同数量不超过100个。` */
   FlowIds?: string[];
   /** 目标签署人的企业名称，签署人如果是企业员工身份，需要传此参数。注：请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。请确保此企业已完成腾讯电子签企业认证。 */
   OrganizationName?: string;
@@ -1803,13 +1803,13 @@ declare interface CreateBatchSignUrlRequest {
   JumpToDetail?: boolean;
   /** 批量签署合同相关信息，指定合同和签署方的信息，用于补充动态签署人。 */
   FlowBatchUrlInfo?: FlowBatchUrlInfo;
-  /** 签署完成后是否自动回跳false：否, 签署完成不会自动跳转回来(默认)true：是, 签署完成会自动跳转回来注: 1. 该参数只针对APP类型（电子签小程序跳转贵方小程序）场景 的签署链接有效2. 手机应用APP 或 微信小程序需要监控界面的返回走后序逻辑, 微信小程序的文档可以参考[这个](https://developers.weixin.qq.com/miniprogram/dev/reference/api/App.html#onShow-Object-object)3. 电子签小程序跳转贵方APP，不支持自动跳转，必需用户手动点击完成按钮（微信的限制） */
+  /** 签署完成后是否自动回跳false：否, 签署完成不会自动跳转回来(默认)true：是, 签署完成会自动跳转回来注: 1. 该参数只针对APP类型（电子签小程序跳转贵方小程序）场景 的签署链接有效2. 手机应用APP 或 微信小程序需要监控界面的返回走后序逻辑, 微信小程序的文档可以参考[这个](https://developers.weixin.qq.com/miniprogram/dev/reference/api/App.html#onShow-Object-object)3. 电子签小程序跳转贵方APP，不支持自动跳转，必须用户手动点击完成按钮（微信的限制） */
   AutoJumpBack?: boolean;
   /** 仅公众号 H5 跳转电子签小程序时，如需签署完成的“返回应用”功能，在获取签署链接接口的 UrlUseEnv 参数需设置为 **WeChatOfficialAccounts**，小程序签署成功的结果页面中才会出现“返回应用”按钮。在用户点击“返回应用”按钮之后，会返回到公众号 H5。 参考 [公众号 H5 跳转电子签小程序](https://qian.tencent.com/developers/company/openwxminiprogram/#23-%E5%85%AC%E4%BC%97%E5%8F%B7-h5-%E4%B8%AD%E8%B7%B3%E8%BD%AC)。 */
   UrlUseEnv?: string;
   /** 是否允许此链接中签署方批量拒签。 false (默认): 不允许批量拒签 true : 允许批量拒签。注：`1. 合同组暂不支持批量拒签功能。2. 如果是链接直接跳转至详情页（JumpToDetail参数为true），也不支持批量拒签功能` */
   CanBatchReject?: boolean;
-  /** 是否允许此链接中签署方批量确认已读文件。 false (默认): 不允许批量确认已读文件。 true : 允许批量确认已读文件。注：`1. 此功能为白名单功能，使用前请联系对应客户经理进行开通。2. 使用此功能时，FlowIds参数必传。3. 对于企业签署方，如果有签名控件，则会使用用户首次选择的签名类型签署所有含有签名控件的合同。` */
+  /** 是否允许此链接中签署方批量确认已读文件。 false (默认): 不允许批量确认已读文件。 true : 允许批量确认已读文件。注：`1. 此功能为白名单功能，使用前请联系对应客户经理进行开通。2. 使用此功能时，FlowIds参数必传。3. 对于企业签署方，如果对印章/签名控件有限制要求，需要保证所有印章/签名签署控件限制要求(印章id或印章/签名类型限制)一致，否则无法使用此功能。` */
   CanSkipReadFlow?: boolean;
 }
 
@@ -3969,9 +3969,15 @@ declare interface OperateTemplateRequest {
   OperateType: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
+  /** 模板名称，长度不超过64字符。模板复制时指定有效，若为空，则复制后模板名称为 **原模板名称_副本**。 */
+  TemplateName?: string;
 }
 
 declare interface OperateTemplateResponse {
+  /** 模板ID，为32位字符串，模板复制新建时返回 */
+  TemplateId?: string;
+  /** 模板名称，模板复制新建时返回 */
+  TemplateName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

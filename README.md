@@ -114,7 +114,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 260+ 款产品，12607+ 服务数</summary>
+<details><summary>共计 260+ 款产品，12609+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -189,7 +189,7 @@ cms | 内容安全 | 2019-03-21(6) |
 config | [配置审计](https://cloud.tencent.com/document/product/1579) | 2022-08-02(7) |
 controlcenter | [控制中心](https://cloud.tencent.com/document/product/1708) | 2023-01-10(5) |
 cpdp | [企业收付平台](https://cloud.tencent.com/document/product/1122) | 2019-08-20(219) |
-csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(48) |
+csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(49) |
 csxg | [5G入云服务](https://cloud.tencent.com/document/product/1687) | 2023-03-03(5) |
 cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-12(102) |
 cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(514) |
@@ -226,7 +226,7 @@ fmu | [人脸试妆](https://cloud.tencent.com/document/product/1172) | 2019-12-
 ft | [人像变换](https://cloud.tencent.com/document/product/1202) | 2020-03-04(6) |
 gaap | [全球应用加速](https://cloud.tencent.com/document/product/608) | 2018-05-29(102) |
 gme | [游戏多媒体引擎](https://cloud.tencent.com/document/product/607) | 2018-07-11(28) |
-goosefs | [数据加速器 GooseFS](https://cloud.tencent.com/document/product/1424) | 2022-05-19(26) |
+goosefs | [数据加速器 GooseFS](https://cloud.tencent.com/document/product/1424) | 2022-05-19(27) |
 gpm | [游戏玩家匹配](https://cloud.tencent.com/document/product/1294) | 2020-08-20(18) |
 gs | [云游戏](https://cloud.tencent.com/document/product/1162) | 2019-11-18(75) |
 gse | [游戏服务器伸缩](https://cloud.tencent.com/document/product/1165) | 2019-11-12(74) |

@@ -1617,7 +1617,7 @@ declare interface ChannelCreateBatchSignUrlRequest {
   IdCardNumber?: string;
   /** 通知用户方式：**NONE** : 不通知（默认）**SMS** : 短信通知（发送短信通知到Mobile参数所传的手机号） */
   NotifyType?: string;
-  /** 批量签署的合同流程ID数组。注: `在调用此接口时，请确保合同流程均为本企业发起，且合同数量不超过100个。` */
+  /** 批量签署的合同流程ID数组。此参数必传。注: `在调用此接口时，请确保合同流程均为本企业发起，且合同数量不超过100个。` */
   FlowIds?: string[];
   /** SaaS平台企业员工签署方的企业名称。目标签署人如果为saas应用企业员工身份，此参数必填。注：请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。请确保此企业已完成腾讯电子签企业认证。**若为子客企业员工，请使用OpenId，OrganizationOpenId参数，此参数留空即可** */
   OrganizationName?: string;
@@ -2769,7 +2769,7 @@ declare interface CreateConsoleLoginUrlRequest {
   Endpoint?: string;
   /** 触发自动跳转事件，仅对EndPoint为App类型有效，可选值包括： **VERIFIED** :企业认证完成/员工认证完成后跳回原App/小程序 */
   AutoJumpBackEvent?: string;
-  /** 可选的此企业允许的授权方式, 可以设置的方式有:1：上传授权书2：转法定代表人授权4：企业实名认证（信任第三方认证源）（此项有排他性, 选择后不能增添其他的方式）注:未选择信任第三方认证源时，如果是法人进行企业激活，仅支持法人扫脸直接授权，该配置不对此法人生效`选择信任第三方认证源时，请先通过同步企业信息接口同步信息。该参数仅在企业未激活时生效 */
+  /** 可选的此企业允许的授权方式, 可以设置的方式有:1：上传授权书2：转法定代表人授权 */
   AuthorizationTypes?: number[];
   /** 暂未开放 */
   Operator?: UserInfo;
@@ -3453,9 +3453,15 @@ declare interface OperateTemplateRequest {
   TemplateId: string;
   /** 操作类型，可取值如下:DELETE: 删除ENABLE: 启用DISABLE: 停用COPY: 复制新建 */
   OperateType: string;
+  /** 模板名称，长度不超过64字符。模板复制时指定有效，若为空，则复制后模板名称为 **原模板名称_副本**。 */
+  TemplateName?: string;
 }
 
 declare interface OperateTemplateResponse {
+  /** 模板ID，为32位字符串，模板复制新建时返回 */
+  TemplateId?: string;
+  /** 模板名称，模板复制新建时返回 */
+  TemplateName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
