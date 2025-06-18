@@ -3547,7 +3547,7 @@ declare interface ExtractDocMultiRequest {
   ItemNamesShowMode?: boolean;
   /** 是否开启全文字段识别 */
   ReturnFullText?: boolean;
-  /** 配置id支持：General -- 通用场景 InvoiceEng -- 国际invoice模版 WayBillEng --海运订单模板CustomsDeclaration -- 进出口报关单WeightNote -- 磅单MedicalMeter -- 血压仪表识别BillOfLading -- 海运提单EntrustmentBook -- 海运托书WordRecognize -- 手写英文作文模版Statement -- 对账单识别模板BookingConfirmation -- 配舱通知书识别模板AirWayBill -- 航空运单识别模板DispatchWeightNote -- 磅单发货单识别模板ReceiptWeightNote -- 磅单收货单识别模板ArticalRecognize -- 手写作文模版Table -- 表格模版SteelLabel -- 实物标签识别模板CarInsurance -- 车辆保险单识别模板 */
+  /** 配置id支持：General -- 通用场景 InvoiceEng -- 国际invoice模版 WayBillEng --海运订单模板CustomsDeclaration -- 进出口报关单WeightNote -- 磅单MedicalMeter -- 血压仪表识别BillOfLading -- 海运提单EntrustmentBook -- 海运托书Statement -- 对账单识别模板BookingConfirmation -- 配舱通知书识别模板AirWayBill -- 航空运单识别模板Table -- 表格模版SteelLabel -- 实物标签识别模板CarInsurance -- 车辆保险单识别模板 */
   ConfigId?: string;
   /** 是否开启全文字段坐标值的识别 */
   EnableCoord?: boolean;

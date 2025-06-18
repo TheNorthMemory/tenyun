@@ -2131,6 +2131,8 @@ declare interface CreateLogsetRequest {
   LogsetName: string;
   /** 标签描述列表。最大支持10个标签键值对，并且不能有重复的键值对 */
   Tags?: Tag[];
+  /** 日志集ID，格式为：用户自定义部分-用户appid，用户自定义部分仅支持小写字母、数字和-，且不能以-开头和结尾，长度为3至40字符，尾部需要使用-拼接用户appid */
+  LogsetId?: string;
 }
 
 declare interface CreateLogsetResponse {

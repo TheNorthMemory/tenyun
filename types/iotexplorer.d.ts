@@ -2,6 +2,16 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** AI视频搜索结果结构体。 */
+declare interface AISearchInfo {
+  /** 基于搜索结果的总结 */
+  Summary?: string;
+  /** 视频结果集 */
+  Targets?: TargetInfo[];
+  /** 视频回放URL */
+  VideoURL?: string;
+}
+
 /** 设备激活详情信息 */
 declare interface ActivateDeviceInfo {
   /** 实例ID */
@@ -1318,6 +1328,26 @@ declare interface ControlDeviceDataResponse {
   RequestId?: string;
 }
 
+declare interface CreateAISearchTaskAsyncRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 自然语言查询 */
+  Query: string;
+  /** 搜索结果总结的语言类型，支持的类型有：en-US、zh-CN、id-ID、th-TH */
+  SummaryLang?: string;
+  /** 通道ID */
+  ChannelId?: number;
+}
+
+declare interface CreateAISearchTaskAsyncResponse {
+  /** 任务ID */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateBatchProductionRequest {
   /** 项目ID */
   ProjectId: string;
@@ -1880,6 +1910,20 @@ declare interface DeleteTopicRuleRequest {
 }
 
 declare interface DeleteTopicRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAISearchTaskAsyncRequest {
+  /** 任务ID */
+  TaskId: string;
+}
+
+declare interface DescribeAISearchTaskAsyncResponse {
+  /** 状态。0-初始状态；1-正在处理；2-处理失败；3-成功 */
+  Status?: number;
+  /** 任务处理结果数据 */
+  Data?: AISearchInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4267,6 +4311,8 @@ declare interface Iotexplorer {
   CheckFirmwareUpdate(data: CheckFirmwareUpdateRequest, config?: AxiosRequestConfig): AxiosPromise<CheckFirmwareUpdateResponse>;
   /** 设备远程控制 {@link ControlDeviceDataRequest} {@link ControlDeviceDataResponse} */
   ControlDeviceData(data: ControlDeviceDataRequest, config?: AxiosRequestConfig): AxiosPromise<ControlDeviceDataResponse>;
+  /** 创建异步视频语义搜索任务 {@link CreateAISearchTaskAsyncRequest} {@link CreateAISearchTaskAsyncResponse} */
+  CreateAISearchTaskAsync(data: CreateAISearchTaskAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAISearchTaskAsyncResponse>;
   /** 创建量产任务 {@link CreateBatchProductionRequest} {@link CreateBatchProductionResponse} */
   CreateBatchProduction(data: CreateBatchProductionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchProductionResponse>;
   /** 开通设备云存AI分析服务 {@link CreateCloudStorageAIServiceRequest} {@link CreateCloudStorageAIServiceResponse} */
@@ -4329,6 +4375,8 @@ declare interface Iotexplorer {
   DeleteTopicPolicy(data: DeleteTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicPolicyResponse>;
   /** 删除规则 {@link DeleteTopicRuleRequest} {@link DeleteTopicRuleResponse} */
   DeleteTopicRule(data: DeleteTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicRuleResponse>;
+  /** 获取异步视频语义搜索任务详情 {@link DescribeAISearchTaskAsyncRequest} {@link DescribeAISearchTaskAsyncResponse} */
+  DescribeAISearchTaskAsync(data: DescribeAISearchTaskAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAISearchTaskAsyncResponse>;
   /** 获取设备激活详情 {@link DescribeActivateDeviceRequest} {@link DescribeActivateDeviceResponse} */
   DescribeActivateDevice(data: DescribeActivateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeActivateDeviceResponse>;
   /** 获取增值服务激活码详情 {@link DescribeActivateLicenseServiceRequest} {@link DescribeActivateLicenseServiceResponse} */

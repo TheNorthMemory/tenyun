@@ -4259,7 +4259,7 @@ declare interface DescribeSupportedPrivilegesResponse {
 declare interface DescribeTableColumnsRequest {
   /** 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。 */
   InstanceId: string;
-  /** 数据库名称，可使用[查询数据库](https://cloud.tencent.com/document/api/253/7167)接口获得。 */
+  /** 数据库名称，可使用[查询数据库](https://cloud.tencent.com/document/api/236/17493)接口获得。 */
   Database: string;
   /** 数据库中的表的名称。 */
   Table: string;
@@ -4267,9 +4267,9 @@ declare interface DescribeTableColumnsRequest {
 
 declare interface DescribeTableColumnsResponse {
   /** 符合查询条件的实例总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 返回的数据库列信息。 */
-  Items: string[];
+  Items?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -973,24 +973,24 @@ declare interface DescribeUserQuotaResponse {
 }
 
 declare interface ModifyFileSystemAutoScaleUpRuleRequest {
-  /** 文件系统ID，通过查询文件系统列表获取；[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170) */
+  /** 文件系统 ID，通过查询文件系统列表获取；[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170) */
   FileSystemId: string;
   /** 扩容阈值，范围[10-90] */
   ScaleUpThreshold: number;
-  /** 扩容后目标阈值,范围[10-90],该值要小于ScaleUpThreshold */
+  /** 扩容后目标阈值，范围[1-90]，该值要小于 ScaleUpThreshold */
   TargetThreshold: number;
-  /** 规则状态0:关闭，1 开启；不传保留原状态 */
+  /** 规则状态 0：关闭，1：开启；不传保留原状态 */
   Status?: number;
 }
 
 declare interface ModifyFileSystemAutoScaleUpRuleResponse {
-  /** 文件系统id */
+  /** 文件系统 ID */
   FileSystemId?: string;
-  /** 规则状态0:关闭，1 开启 */
+  /** 规则状态 0：关闭，1：开启 */
   Status?: number;
-  /** 扩容阈值,范围[10-90] */
+  /** 扩容阈值，范围[10-90] */
   ScaleUpThreshold?: number;
-  /** 扩容后达到阈值,范围[1-90] */
+  /** 扩容后达到阈值，范围[1-90] */
   TargetThreshold?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

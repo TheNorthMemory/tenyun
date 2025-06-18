@@ -606,6 +606,8 @@ declare interface KnowledgeDetail {
   Proportion?: number | null;
   /** 超量字符数 */
   ExceedCharSize?: string | null;
+  /** 是否共享知识库类型 */
+  IsSharedKnowledge?: boolean | null;
 }
 
 /** 知识库详情信息 */
@@ -3799,7 +3801,7 @@ declare interface ModifyDocRequest {
   DocBizId: string;
   /** 是否引用链接 */
   IsRefer: boolean;
-  /** 标签适用范围 1：全部，2：按条件 */
+  /** 标签适用范围，需要传参为1 */
   AttrRange: number;
   /** 登录用户主账号(集成商模式必填) */
   LoginUin?: string;
@@ -3817,6 +3819,8 @@ declare interface ModifyDocRequest {
   ExpireEnd?: string;
   /** 分类ID */
   CateBizId?: string;
+  /** 是否可下载，IsRefer为true并且ReferUrlType为0时，该值才有意义 */
+  IsDownload?: boolean;
 }
 
 declare interface ModifyDocResponse {

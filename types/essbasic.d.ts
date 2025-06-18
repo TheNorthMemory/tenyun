@@ -3487,7 +3487,7 @@ declare interface PrepareFlowsResponse {
 declare interface SyncProxyOrganizationOperatorsRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业必须已经经过实名认证 */
   Agent: Agent;
-  /** 操作类型，对应的操作 **CREATE** :新增员工 **UPDATE** :修改员工 **RESIGN** :离职员工 */
+  /** 操作类型，对应的操作 **CREATE** :新增员工 **UPDATE** :修改员工（仅支持修改未实名员工的信息，如果已经实名并加入企业的员工基础信息修改需要到小程序中进行） **RESIGN** :离职员工 */
   OperatorType: string;
   /** 员工信息列表，最多支持200个 */
   ProxyOrganizationOperators: ProxyOrganizationOperator[];

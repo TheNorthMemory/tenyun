@@ -3159,6 +3159,18 @@ declare namespace V20180724 {
     RequestId?: string;
   }
 
+  interface DeleteAlarmShieldsRequest {
+    /** 模块名，这里填“monitor” */
+    Module: string;
+    /** 屏蔽策略Id列表 */
+    Shields: string[];
+  }
+
+  interface DeleteAlarmShieldsResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DeleteAlertRulesRequest {
     /** 规则 ID 列表 */
     RuleIds: string[];
@@ -5711,6 +5723,8 @@ declare interface Monitor {
   DeleteAlarmNotices(data: V20180724.DeleteAlarmNoticesRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DeleteAlarmNoticesResponse>;
   /** 删除告警策略 {@link V20180724.DeleteAlarmPolicyRequest} {@link V20180724.DeleteAlarmPolicyResponse} */
   DeleteAlarmPolicy(data: V20180724.DeleteAlarmPolicyRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DeleteAlarmPolicyResponse>;
+  /** 删除告警屏蔽规则 {@link V20180724.DeleteAlarmShieldsRequest} {@link V20180724.DeleteAlarmShieldsResponse} */
+  DeleteAlarmShields(data: V20180724.DeleteAlarmShieldsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DeleteAlarmShieldsResponse>;
   /** 删除报警规则 {@link V20180724.DeleteAlertRulesRequest} {@link V20180724.DeleteAlertRulesResponse} */
   DeleteAlertRules(data: V20180724.DeleteAlertRulesRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DeleteAlertRulesResponse>;
   /** 删除 exporter 集成 {@link V20180724.DeleteExporterIntegrationRequest} {@link V20180724.DeleteExporterIntegrationResponse} */

@@ -354,6 +354,24 @@ declare interface ProjectListData {
   TotalPages: number | null;
 }
 
+/** 用户组 */
+declare interface UserGroupDTO {
+  /** id */
+  Id?: number | null;
+  /** 用户组名称 */
+  GroupName?: string | null;
+  /** 父节点id */
+  ParentId?: number | null;
+  /** 是否为默认 */
+  IsDefault?: number | null;
+  /** 管理员用户id */
+  AdminUserId?: string | null;
+  /** 描述 */
+  Description?: string | null;
+  /** 定位 */
+  Location?: number | null;
+}
+
 /** 用户ID和用户名 */
 declare interface UserIdAndUserName {
   /** 用户ID */
@@ -496,6 +514,8 @@ declare interface UserRoleListDataUserRoleInfo {
   AppOpenUserId?: string | null;
   /** 邮箱激活状态 */
   EmailActivationStatus?: number | null;
+  /** 用户组信息 */
+  UserGroupList?: UserGroupDTO[] | null;
 }
 
 /** 页面组件信息 */

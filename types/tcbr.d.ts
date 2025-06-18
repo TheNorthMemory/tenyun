@@ -236,6 +236,10 @@ declare interface ServerBaseConfig {
   OperationMode?: string;
   /** 定时扩缩容配置 */
   TimerScale?: TimerScale[];
+  /** Dockerfile EntryPoint 参数 */
+  EntryPoint?: string[];
+  /** Dockerfile Cmd 参数 */
+  Cmd?: string[];
 }
 
 /** 服务基本信息 */
