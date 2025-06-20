@@ -1729,6 +1729,8 @@ declare interface CreateBatchOrganizationRegistrationTasksRequest {
   Agent?: Agent;
   /** 要生成链接的类型, 可以选择的值如下: (默认)PC: 生成PC端的链接SHORT_URL: H5跳转到电子签小程序链接的短链形式, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序APP：生成小程序跳转链接H5：生成H5跳转长链接SHORT_H5：生成H5跳转短链 */
   Endpoint?: string;
+  /** 认证链接使用单链接还是多链接模式0 - 多链接(默认)，指批量生成链接， 每一个企业会拥有一个认证链接，然后分别认证1 - 单链接 ， 指批量生成链接，然后会将多个链接聚合成一个链接，进行认证p.s.请注意， 如果使用单链接的模式并且认证方式是授权书方式的时候，必须在接口中传递超管授权书。 */
+  BatchAuthMethod?: number;
 }
 
 declare interface CreateBatchOrganizationRegistrationTasksResponse {

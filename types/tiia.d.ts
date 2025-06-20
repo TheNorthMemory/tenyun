@@ -434,32 +434,6 @@ declare interface DetectEnvelopeResponse {
   RequestId?: string;
 }
 
-declare interface DetectLabelBetaRequest {
-  /** 图片URL地址。 图片限制： • 图片格式：PNG、JPG、JPEG。 • 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 建议：• 图片像素：大于50*50像素，否则影响识别效果； • 长宽比：长边：短边<5； 接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。 */
-  ImageUrl?: string;
-  /** 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。**注意：图片需要base64编码，并且要去掉编码头部。** */
-  ImageBase64?: string;
-  /** 本次调用支持的识别场景，可选值如下：WEB，针对网络图片优化;CAMERA，针对手机摄像头拍摄图片优化;ALBUM，针对手机相册、网盘产品优化;NEWS，针对新闻、资讯、广电等行业优化；NONECAM，非实拍图；LOCATION，主体位置识别；如果不传此参数，则默认为WEB。支持多场景（Scenes）一起检测。例如，使用 Scenes=["WEB", "CAMERA"]，即对一张图片使用两个模型同时检测，输出两套识别结果。 */
-  Scenes?: string[];
-}
-
-declare interface DetectLabelBetaResponse {
-  /** Web网络版标签结果数组。如未选择WEB场景，则为空。 */
-  Labels?: DetectLabelItem[] | null;
-  /** Camera摄像头版标签结果数组。如未选择CAMERA场景，则为空。 */
-  CameraLabels?: DetectLabelItem[] | null;
-  /** Album相册版标签结果数组。如未选择ALBUM场景，则为空。 */
-  AlbumLabels?: DetectLabelItem[] | null;
-  /** News新闻版标签结果数组。如未选择NEWS场景，则为空。新闻版目前为测试阶段，暂不提供每个标签的一级、二级分类信息的输出。 */
-  NewsLabels?: DetectLabelItem[] | null;
-  /** 非实拍标签 */
-  NoneCamLabels?: DetectLabelItem[] | null;
-  /** 识别结果 */
-  LocationLabels?: Product[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DetectLabelProRequest {
   /** 图片 URL 地址。 图片限制： • 图片格式：PNG、JPG、JPEG、BMP。 • 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 建议：• 图片像素：大于50*50像素，否则影响识别效果； • 长宽比：长边:短边<5； • 接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。 */
   ImageUrl?: string;
@@ -679,8 +653,6 @@ declare interface Tiia {
   DetectEnvelope(data?: DetectEnvelopeRequest, config?: AxiosRequestConfig): AxiosPromise<DetectEnvelopeResponse>;
   /** 图像标签 {@link DetectLabelRequest} {@link DetectLabelResponse} */
   DetectLabel(data?: DetectLabelRequest, config?: AxiosRequestConfig): AxiosPromise<DetectLabelResponse>;
-  /** 图像标签测试接口 {@link DetectLabelBetaRequest} {@link DetectLabelBetaResponse} */
-  DetectLabelBeta(data?: DetectLabelBetaRequest, config?: AxiosRequestConfig): AxiosPromise<DetectLabelBetaResponse>;
   /** 通用图像标签 {@link DetectLabelProRequest} {@link DetectLabelProResponse} */
   DetectLabelPro(data?: DetectLabelProRequest, config?: AxiosRequestConfig): AxiosPromise<DetectLabelProResponse>;
   /** 不良行为识别 {@link DetectMisbehaviorRequest} {@link DetectMisbehaviorResponse} */

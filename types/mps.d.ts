@@ -1646,7 +1646,7 @@ declare interface BlindWatermarkConfig {
 
 /** 嵌入盲水印配置 */
 declare interface BlindWatermarkEmbedInfo {
-  /** 盲水印文字，需要经过 URL 安全的 Base64 编码。 */
+  /** 盲水印文字，经过URL安全的Base64编码的4Byte数据。Base64解码之后，少于4Byte将会填充0x00到4Byte，超过4Byte将会截断为4Byte。 */
   EmbedText?: string | null;
 }
 
@@ -2078,6 +2078,8 @@ declare interface CreateInputSRTSettings {
   PbKeyLen?: number;
   /** SRT对端地址，当Mode为CALLER时必填，且只能填1组。 */
   SourceAddresses?: SRTSourceAddressReq[];
+  /** SRT FEC 设置 */
+  FEC?: SRTFECSimpleOptions;
 }
 
 /** 创建输出的配置信息。 */
@@ -2178,6 +2180,8 @@ declare interface CreateOutputSRTSettings {
   PbKeyLen?: number;
   /** SRT模式，可选[LISTENER|CALLER]，默认为CALLER。 */
   Mode?: string;
+  /** SRT FEC 设置 */
+  FEC?: SRTFECFullOptions;
 }
 
 /** 创建媒体传输流的输出SRT的目标地址。 */
@@ -2348,6 +2352,8 @@ declare interface DescribeInputSRTSettings {
   PbKeyLen?: number;
   /** SRT对端地址。 */
   SourceAddresses?: SRTSourceAddressResp[] | null;
+  /** FEC 设置 */
+  FEC?: SRTFECSimpleOptions;
 }
 
 /** 查询输出的配置信息。 */
@@ -2488,6 +2494,8 @@ declare interface DescribeOutputSRTSettings {
   Mode?: string | null;
   /** 服务器监听地址，SRT模式为LISTENER时使用。 */
   SourceAddresses?: OutputSRTSourceAddressResp[] | null;
+  /** FEC 配置 */
+  FEC?: SRTFECFullOptions;
 }
 
 /** 查询输入的RTMP配置信息。 */
@@ -4668,6 +4676,26 @@ declare interface SRTAddressDestination {
   Ip?: string;
   /** 目标地址的端口。 */
   Port?: number;
+}
+
+/** SRT FEC 高级配置 */
+declare interface SRTFECFullOptions {
+  /** 是否开启 FEC */
+  Enable?: boolean;
+  /** FEC 数据包 Layout 列数量. 取值范围>0 */
+  Cols?: number;
+  /** FEC 数据包 Layout 行数量. 取值范围 >=2 或者 <=-2 */
+  Rows?: number;
+  /** FEC 开启的情况下，ARQ的策略。取值 "always", "onreq", "never" */
+  ARQ?: string;
+  /** FEC 数据包 Layout 组织形式，取值 "even", "staircase" */
+  Layout?: string;
+}
+
+/** SRT FEC 设置 */
+declare interface SRTFECSimpleOptions {
+  /** 是否开启 FEC */
+  Enable?: boolean;
 }
 
 /** SRT输入源地址。 */

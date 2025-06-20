@@ -1158,6 +1158,8 @@ declare interface ExposesItem {
   HasScan?: string;
   /** 租户ID */
   AppId?: number;
+  /** 租户ID字符串 */
+  AppIdStr?: string;
 }
 
 /** 列表查询接口采用新filter 接口，直接传给后台供后台查询过滤 */

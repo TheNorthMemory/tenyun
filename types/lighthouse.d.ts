@@ -2510,6 +2510,18 @@ declare interface StopInstancesResponse {
   RequestId?: string;
 }
 
+declare interface SyncBlueprintRequest {
+  /** 镜像ID。 */
+  BlueprintId: string;
+  /** 同步镜像的目的地域列表。 */
+  DestinationRegions: string[];
+}
+
+declare interface SyncBlueprintResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface TerminateDisksRequest {
   /** 云硬盘ID列表。可通过[DescribeDisks](https://cloud.tencent.com/document/product/1207/66093)接口返回值中的DiskId获取。每次批量请求云硬盘的上限数量为100。 */
   DiskIds: string[];
@@ -2743,6 +2755,8 @@ declare interface Lighthouse {
   StopDockerContainers(data: StopDockerContainersRequest, config?: AxiosRequestConfig): AxiosPromise<StopDockerContainersResponse>;
   /** 关闭实例 {@link StopInstancesRequest} {@link StopInstancesResponse} */
   StopInstances(data: StopInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StopInstancesResponse>;
+  /** 同步镜像 {@link SyncBlueprintRequest} {@link SyncBlueprintResponse} */
+  SyncBlueprint(data: SyncBlueprintRequest, config?: AxiosRequestConfig): AxiosPromise<SyncBlueprintResponse>;
   /** 销毁云硬盘 {@link TerminateDisksRequest} {@link TerminateDisksResponse} */
   TerminateDisks(data: TerminateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateDisksResponse>;
   /** 销毁实例 {@link TerminateInstancesRequest} {@link TerminateInstancesResponse} */

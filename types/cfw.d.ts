@@ -1729,6 +1729,8 @@ declare interface CreateAlertCenterOmitRequest {
   HandleIdList: string[];
   /** 忽略数据来源：AlertTable 告警中心 InterceptionTable拦截列表 */
   TableType: string;
+  /** 处置对象,事件ID列表 */
+  HandleEventIdList?: string[];
 }
 
 declare interface CreateAlertCenterOmitResponse {

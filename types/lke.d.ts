@@ -2220,6 +2220,18 @@ declare interface DeleteSharedKnowledgeResponse {
   RequestId?: string;
 }
 
+declare interface DeleteVarRequest {
+  /** 应用ID */
+  AppBizId: string;
+  /** 变量ID */
+  VarId: string;
+}
+
+declare interface DeleteVarResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAppRequest {
   /** 应用ID */
   AppBizId: string;
@@ -4142,6 +4154,30 @@ declare interface UpdateSharedKnowledgeResponse {
   RequestId?: string;
 }
 
+declare interface UpdateVarRequest {
+  /** 应用ID */
+  AppBizId: string;
+  /** 变量ID */
+  VarId: string;
+  /** 变量名称，最大支持50个字符 */
+  VarName: string;
+  /** 参数描述 */
+  VarDesc?: string;
+  /** 参数类型 */
+  VarType?: string;
+  /** 自定义变量默认值 */
+  VarDefaultValue?: string;
+  /** 自定义变量文件默认名称 */
+  VarDefaultFileName?: string;
+}
+
+declare interface UpdateVarResponse {
+  /** 变量ID */
+  VarId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UploadAttributeLabelRequest {
   /** 应用ID */
   BotBizId: string;
@@ -4233,6 +4269,8 @@ declare interface Lke {
   DeleteRejectedQuestion(data: DeleteRejectedQuestionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRejectedQuestionResponse>;
   /** 删除共享知识库 {@link DeleteSharedKnowledgeRequest} {@link DeleteSharedKnowledgeResponse} */
   DeleteSharedKnowledge(data: DeleteSharedKnowledgeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSharedKnowledgeResponse>;
+  /** 删除变量 {@link DeleteVarRequest} {@link DeleteVarResponse} */
+  DeleteVar(data: DeleteVarRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVarResponse>;
   /** 获取企业下应用详情 {@link DescribeAppRequest} {@link DescribeAppResponse} */
   DescribeApp(data: DescribeAppRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppResponse>;
   /** 查询标签详情 {@link DescribeAttributeLabelRequest} {@link DescribeAttributeLabelResponse} */
@@ -4403,6 +4441,8 @@ declare interface Lke {
   StopWorkflowRun(data?: StopWorkflowRunRequest, config?: AxiosRequestConfig): AxiosPromise<StopWorkflowRunResponse>;
   /** 更新共享知识库 {@link UpdateSharedKnowledgeRequest} {@link UpdateSharedKnowledgeResponse} */
   UpdateSharedKnowledge(data: UpdateSharedKnowledgeRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateSharedKnowledgeResponse>;
+  /** 修改变量 {@link UpdateVarRequest} {@link UpdateVarResponse} */
+  UpdateVar(data: UpdateVarRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateVarResponse>;
   /** 上传导入标签 {@link UploadAttributeLabelRequest} {@link UploadAttributeLabelResponse} */
   UploadAttributeLabel(data: UploadAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<UploadAttributeLabelResponse>;
   /** 校验问答 {@link VerifyQARequest} {@link VerifyQAResponse} */

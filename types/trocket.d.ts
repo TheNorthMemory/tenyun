@@ -404,7 +404,7 @@ declare interface MessageTrackItem {
 declare interface MigratingTopic {
   /** 主题名称 */
   TopicName?: string;
-  /** 迁移状态 S_RW_D_NA 源集群读写 S_RW_D_R 源集群读写目标集群读 S_RW_D_RW 源集群读写目标集群读写 S_R_D_RW 源集群读目标集群读写 S_NA_D_RW 目标集群读写 */
+  /** 迁移状态 S_RW_D_NA 源集群读写，S_RW_D_R 源集群读写目标集群读，S_RW_D_RW 源集群读写目标集群读写，S_R_D_RW 源集群读目标集群读写，S_NA_D_RW 目标集群读写 */
   MigrationStatus?: string;
   /** 是否完成健康检查 */
   HealthCheckPassed?: boolean;
@@ -420,6 +420,24 @@ declare interface MigratingTopic {
   FullNamespaceV4?: string | null;
   /** 上次健康检查返回的错误列表 */
   HealthCheckErrorList?: string[];
+}
+
+/** 迁移任务信息 */
+declare interface MigrationTaskItem {
+  /** 任务ID */
+  TaskId?: string;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 0 - 未指定（存量）1 - 元数据导入 */
+  Type?: number;
+  /** 主题总数 */
+  TopicNum?: number;
+  /** 消费组总数 */
+  GroupNum?: number;
+  /** 任务状态： 0，迁移中 1，迁移成功 2，迁移完成，只有部分数据完成迁移 */
+  Status?: number;
+  /** 创建时间 */
+  CreateTime?: number;
 }
 
 /** MQTT客户端监控 */
@@ -1622,6 +1640,24 @@ declare interface DescribeMigratingTopicStatsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMigrationTaskListRequest {
+  /** 查询条件列表 */
+  Filters?: Filter[];
+  /** 查询起始位置 */
+  Offset?: number;
+  /** 查询结果限制数量 */
+  Limit?: number;
+}
+
+declare interface DescribeMigrationTaskListResponse {
+  /** 查询总数 */
+  TotalCount?: number;
+  /** 迁移任务列表 */
+  Tasks?: MigrationTaskItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeProductSKUsRequest {
 }
 
@@ -2125,6 +2161,8 @@ declare interface Trocket {
   DescribeMigratingTopicList(data: DescribeMigratingTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigratingTopicListResponse>;
   /** 查询迁移主题的实时数据 {@link DescribeMigratingTopicStatsRequest} {@link DescribeMigratingTopicStatsResponse} */
   DescribeMigratingTopicStats(data: DescribeMigratingTopicStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigratingTopicStatsResponse>;
+  /** 获取数据迁移任务列表 {@link DescribeMigrationTaskListRequest} {@link DescribeMigrationTaskListResponse} */
+  DescribeMigrationTaskList(data?: DescribeMigrationTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrationTaskListResponse>;
   /** 查询产品售卖规格 {@link DescribeProductSKUsRequest} {@link DescribeProductSKUsResponse} */
   DescribeProductSKUs(data?: DescribeProductSKUsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductSKUsResponse>;
   /** 查询角色列表 {@link DescribeRoleListRequest} {@link DescribeRoleListResponse} */

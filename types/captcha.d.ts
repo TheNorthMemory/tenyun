@@ -550,6 +550,8 @@ declare interface DescribeCaptchaResultResponse {
   SubmitCaptchaTime?: number;
   /** 设备风险大类 */
   DeviceRiskCategory?: string | null;
+  /** 验证码评分 */
+  Score?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

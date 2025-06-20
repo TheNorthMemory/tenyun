@@ -58,6 +58,12 @@ declare interface DocumentChunkUsage {
   TotalTokens?: number;
 }
 
+/** 文档解析配置 */
+declare interface DocumentParseConfig {
+  /** 0:图片以链接形式返回1:返回图片中提取的文本内容 */
+  ImageResponseType?: number;
+}
+
 /** 向量内容 */
 declare interface EmbeddingData {
   /** embedding 内容 */
@@ -98,6 +104,12 @@ declare interface ParseDocument {
   FileUrl?: string;
   /** 文件的 base64 值，携带 MineType前缀信息。编码后的后的文件不超过 10M。支持的文件大小：所下载文件经Base64编码后不超过 8M。文件下载时间不超过3秒。支持的图片像素：单边介于20-10000px之间。 */
   FileContent?: string;
+  /** 文档解析配置 */
+  DocumentParseConfig?: DocumentParseConfig;
+  /** 文档的起始页码 */
+  FileStartPageNumber?: number;
+  /** 文档的结束页码 */
+  FileEndPageNumber?: number;
 }
 
 /** 输出结果 */

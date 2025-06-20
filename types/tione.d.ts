@@ -1936,6 +1936,20 @@ declare interface CreateDatasetResponse {
   RequestId?: string;
 }
 
+declare interface CreateModelServiceAuthTokenRequest {
+  /** 服务组 id */
+  ServiceGroupId: string;
+  /** token 名称 */
+  Name?: string;
+  /** Description 描述 */
+  Description?: string;
+}
+
+declare interface CreateModelServiceAuthTokenResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateModelServiceRequest {
   /** 新增版本时需要填写 */
   ServiceGroupId?: string;
@@ -2230,6 +2244,18 @@ declare interface DeleteDatasetRequest {
 declare interface DeleteDatasetResponse {
   /** 删除的datasetId */
   DatasetId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteModelServiceAuthTokenRequest {
+  /** 服务组 id */
+  ServiceGroupId: string;
+  /** token 值 */
+  AuthTokenValue?: string;
+}
+
+declare interface DeleteModelServiceAuthTokenResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2760,6 +2786,32 @@ declare interface DescribeTrainingTasksResponse {
   TrainingTaskSet?: TrainingTaskSetItem[];
   /** 数量 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyModelServiceAuthTokenRequest {
+  /** 服务组 id */
+  ServiceGroupId: string;
+  /** 是否需要重置，如果为 true，重置 token 值 */
+  NeedReset?: boolean;
+  /** AuthToken 数据 */
+  AuthToken?: AuthToken;
+}
+
+declare interface ModifyModelServiceAuthTokenResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyModelServiceAuthorizationRequest {
+  /** 服务组Id */
+  ServiceGroupId: string;
+  /** 是否开启鉴权,true表示开启 */
+  AuthorizationEnable?: boolean;
+}
+
+declare interface ModifyModelServiceAuthorizationResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3637,6 +3689,8 @@ declare interface Tione {
   CreateDataset(data: CreateDatasetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatasetResponse>;
   /** 创建模型服务 {@link CreateModelServiceRequest} {@link CreateModelServiceResponse} */
   CreateModelService(data?: CreateModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelServiceResponse>;
+  /** 在线服务创建 AuthToken {@link CreateModelServiceAuthTokenRequest} {@link CreateModelServiceAuthTokenResponse} */
+  CreateModelServiceAuthToken(data: CreateModelServiceAuthTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelServiceAuthTokenResponse>;
   /** 创建Notebook {@link CreateNotebookRequest} {@link CreateNotebookResponse} */
   CreateNotebook(data: CreateNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNotebookResponse>;
   /** 生成Notebook访问链接 {@link CreatePresignedNotebookUrlRequest} {@link CreatePresignedNotebookUrlResponse} */
@@ -3649,6 +3703,8 @@ declare interface Tione {
   DeleteDataset(data: DeleteDatasetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDatasetResponse>;
   /** 删除模型服务 {@link DeleteModelServiceRequest} {@link DeleteModelServiceResponse} */
   DeleteModelService(data: DeleteModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelServiceResponse>;
+  /** 在线服务删除 AuthToken {@link DeleteModelServiceAuthTokenRequest} {@link DeleteModelServiceAuthTokenResponse} */
+  DeleteModelServiceAuthToken(data: DeleteModelServiceAuthTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelServiceAuthTokenResponse>;
   /** 删除模型服务组 {@link DeleteModelServiceGroupRequest} {@link DeleteModelServiceGroupResponse} */
   DeleteModelServiceGroup(data: DeleteModelServiceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelServiceGroupResponse>;
   /** 删除Notebook {@link DeleteNotebookRequest} {@link DeleteNotebookResponse} */
@@ -3709,6 +3765,10 @@ declare interface Tione {
   DescribeTrainingTasks(data?: DescribeTrainingTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTasksResponse>;
   /** 更新模型服务 {@link ModifyModelServiceRequest} {@link ModifyModelServiceResponse} */
   ModifyModelService(data: ModifyModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelServiceResponse>;
+  /** 在线服务修改 AuthToken {@link ModifyModelServiceAuthTokenRequest} {@link ModifyModelServiceAuthTokenResponse} */
+  ModifyModelServiceAuthToken(data: ModifyModelServiceAuthTokenRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelServiceAuthTokenResponse>;
+  /** 修改服务鉴权配置 {@link ModifyModelServiceAuthorizationRequest} {@link ModifyModelServiceAuthorizationResponse} */
+  ModifyModelServiceAuthorization(data: ModifyModelServiceAuthorizationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelServiceAuthorizationResponse>;
   /** 修改Notebook标签 {@link ModifyNotebookTagsRequest} {@link ModifyNotebookTagsResponse} */
   ModifyNotebookTags(data: ModifyNotebookTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotebookTagsResponse>;
   /** 上报训练自定义指标 {@link PushTrainingMetricsRequest} {@link PushTrainingMetricsResponse} */

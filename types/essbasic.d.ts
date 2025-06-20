@@ -2661,6 +2661,8 @@ declare interface CreateBatchOrganizationRegistrationTasksRequest {
   RegistrationOrganizations: RegistrationOrganizationInfo[];
   /** 生成链接的类型：**PC**：(默认)web控制台链接, 需要在PC浏览器中打开**CHANNEL**：H5跳转到电子签小程序链接, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序**SHORT_URL**：H5跳转到电子签小程序链接的短链形式, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序**APP**：第三方APP或小程序跳转电子签小程序链接, 一般用于贵方小程序或者APP跳转过来, 打开后进入腾讯电子签小程序**H5**：第三方H5跳转到电子签H5长链接, 一般用于贵方H5跳转过来, 打开后进入腾讯电子签H5页面**SHORT_H5**：第三方H5跳转到电子签H5短链接, 一般用于贵方H5跳转过来, 打开后进入腾讯电子签H5页面 */
   Endpoint?: string;
+  /** 认证链接使用单链接还是多链接模式0 - 多链接(默认)，指批量生成链接， 每一个企业会拥有一个认证链接，然后分别认证1 - 单链接 ， 指批量生成链接，然后会将多个链接聚合成一个链接，进行认证p.s.请注意， 如果使用单链接的模式并且认证方式是授权书方式的时候，必须在接口中传递超管授权书。 */
+  BatchAuthMethod?: number;
 }
 
 declare interface CreateBatchOrganizationRegistrationTasksResponse {

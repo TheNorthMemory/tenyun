@@ -88,7 +88,7 @@ declare interface BackupStatus {
   Timeout?: number;
   /** 备份实例id */
   BackupJobId?: number;
-  /** 实例对应snapshoit的id */
+  /** 实例对应Snapshot的id */
   TaskId?: number;
 }
 
@@ -842,7 +842,7 @@ declare interface ZoneInfo {
   Desc?: string;
   /** 可用区唯一标记 */
   ZoneId?: number;
-  /** Encryptid */
+  /** Encrypted */
   Encrypt?: number;
   /** 是否为主力园区 */
   Main?: boolean;

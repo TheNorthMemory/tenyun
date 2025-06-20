@@ -66,7 +66,7 @@ declare interface AgentParams {
   MaxIdleTime?: number;
 }
 
-/** 背景音设置，将在通话中添加环境音效，使体验更加逼真。目前支持以下选项：coffee_shop: 咖啡店氛围，背景中有人聊天。busy_office: 客服中心street_traffic: 户外街道evening_mountain: 户外山林 */
+/** 背景音设置，将在通话中添加环境音效，使体验更加逼真。目前支持以下选项：coffee_shops: 咖啡店氛围，背景中有人聊天。busy_office: 客服中心street_traffic: 户外街道evening_mountain: 户外山林 */
 declare interface AmbientSound {
   /** 环境场景选择 */
   Scene: string;
