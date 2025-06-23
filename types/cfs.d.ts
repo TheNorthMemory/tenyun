@@ -8,7 +8,7 @@ declare interface AutoScaleUpRule {
   Status?: string;
   /** 集群用量占比，到达这个值后开始扩容,范围[10-90] */
   ScaleThreshold?: number;
-  /** 扩容后使用量跟集群总量比例,范围[1-90] */
+  /** 扩容后使用量跟集群总量比例,范围[10-90] */
   TargetThreshold?: number;
 }
 
@@ -977,7 +977,7 @@ declare interface ModifyFileSystemAutoScaleUpRuleRequest {
   FileSystemId: string;
   /** 扩容阈值，范围[10-90] */
   ScaleUpThreshold: number;
-  /** 扩容后目标阈值，范围[1-90]，该值要小于 ScaleUpThreshold */
+  /** 扩容后目标阈值，范围[10-90]，该值要小于 ScaleUpThreshold */
   TargetThreshold: number;
   /** 规则状态 0：关闭，1：开启；不传保留原状态 */
   Status?: number;
@@ -990,7 +990,7 @@ declare interface ModifyFileSystemAutoScaleUpRuleResponse {
   Status?: number;
   /** 扩容阈值，范围[10-90] */
   ScaleUpThreshold?: number;
-  /** 扩容后达到阈值，范围[1-90] */
+  /** 扩容后达到阈值，范围[10-90] */
   TargetThreshold?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

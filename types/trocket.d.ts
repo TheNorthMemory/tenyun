@@ -522,6 +522,26 @@ declare interface RoleItem {
   DetailedRolePerms?: DetailedRolePerm[] | null;
 }
 
+/** 平滑迁移任务 */
+declare interface SmoothMigrationTaskItem {
+  /** 任务ID */
+  TaskId?: string | null;
+  /** 任务名称 */
+  TaskName?: string | null;
+  /** 源集群名称 */
+  SourceClusterName?: string | null;
+  /** 目标集群实例ID */
+  InstanceId?: string | null;
+  /** 网络连接类型， PUBLIC 公网 VPC 私有网络 OTHER 其他 */
+  ConnectionType?: string | null;
+  /** 源集群NameServer地址 */
+  SourceNameServer?: string | null;
+  /** 任务状态 Configuration 迁移配置 SourceConnecting 连接源集群中 MetaDataImport 元数据导入 EndpointSetup 切换接入点 ServiceMigration 切流中 Completed 已完成 Cancelled 已取消 */
+  TaskStatus?: string | null;
+  /** 目标集群实例版本，4 表示4.x版本5 表示5.x版本 */
+  InstanceVersion?: string | null;
+}
+
 /** 消费组配置信息 */
 declare interface SourceClusterGroupConfig {
   /** 消费组名称 */
@@ -1688,6 +1708,24 @@ declare interface DescribeRoleListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSmoothMigrationTaskListRequest {
+  /** 查询起始位置 */
+  Offset: number;
+  /** 查询结果限制数量 */
+  Limit: number;
+  /** 查询条件列表 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeSmoothMigrationTaskListResponse {
+  /** 查询总数 */
+  TotalCount?: number | null;
+  /** 任务列表 */
+  Data?: SmoothMigrationTaskItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSourceClusterGroupListRequest {
   /** 任务ID */
   TaskId: string;
@@ -2167,6 +2205,8 @@ declare interface Trocket {
   DescribeProductSKUs(data?: DescribeProductSKUsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductSKUsResponse>;
   /** 查询角色列表 {@link DescribeRoleListRequest} {@link DescribeRoleListResponse} */
   DescribeRoleList(data: DescribeRoleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoleListResponse>;
+  /** 获取平滑迁移任务列表 {@link DescribeSmoothMigrationTaskListRequest} {@link DescribeSmoothMigrationTaskListResponse} */
+  DescribeSmoothMigrationTaskList(data: DescribeSmoothMigrationTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmoothMigrationTaskListResponse>;
   /** 平滑迁移：获取源集群的group列表 {@link DescribeSourceClusterGroupListRequest} {@link DescribeSourceClusterGroupListResponse} */
   DescribeSourceClusterGroupList(data: DescribeSourceClusterGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSourceClusterGroupListResponse>;
   /** 查询主题详情 {@link DescribeTopicRequest} {@link DescribeTopicResponse} */

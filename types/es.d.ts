@@ -22,6 +22,8 @@ declare interface ChunkConfig {
   MaxChunkSize?: number;
   /** 分隔符列表 */
   Delimiters?: string[];
+  /** 相邻切片重合字符数，需要小于分片长度 */
+  ChunkOverlap?: number;
 }
 
 /** 文档切片异步任务 */
@@ -214,6 +216,8 @@ declare interface ChunkDocumentRequest {
 declare interface ChunkDocumentResponse {
   /** 无 */
   Chunks?: Chunk[];
+  /** token消耗量 */
+  Usage?: Usage;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

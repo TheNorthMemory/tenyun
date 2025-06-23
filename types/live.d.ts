@@ -392,6 +392,24 @@ declare interface ClientIpPlaySumInfo {
   CountryArea?: string;
 }
 
+/** 云端特效信息。 */
+declare interface CloudEffectInfo {
+  /** 云端特效 ID。 */
+  Id?: string;
+  /** 云端特效描述词。 */
+  Prompt?: string;
+  /** 云端特效标签。 */
+  Flag?: string;
+  /** 云端特效预览图片。 */
+  PreviewImageUrl?: string;
+  /** 云端特效类型。PGC : 官方精品特效。AIGC : AI生成的特效。UGC : 用户上传特效。 */
+  Type?: string;
+  /** 云端特效创建时间。 */
+  CreateTime?: string;
+  /** 云端特效更新时间。 */
+  UpdateTime?: string;
+}
+
 /** 通用混流控制参数 */
 declare interface CommonMixControlParams {
   /** 取值范围[0,1]。填1时，当参数中图层分辨率参数与视频实际分辨率不一致时，自动从视频中按图层设置的分辨率比例进行裁剪。 */
@@ -868,6 +886,20 @@ declare interface MonitorStreamPlayInfo {
   Online?: number;
   /** 请求数。 */
   Request?: number;
+}
+
+/** 查询当前垫片流的信息 */
+declare interface PadStreamInfo {
+  /** 流名称。 */
+  StreamName?: string;
+  /** 应用名称。 */
+  AppName?: string;
+  /** 推流域名。 */
+  DomainName?: string;
+  /** 垫片流类型。0-自动垫片；1-手动切入垫片。 */
+  PadStreamType?: string;
+  /** 垫片流开始时间。UTC时间，示例：2025-04-10T00:01:00Z。注意：该时间与北京时间相差八小时。 */
+  PublishTime?: string;
 }
 
 /** 直播垫片模板。 */
@@ -3218,6 +3250,24 @@ declare interface DescribeLiveCertsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLiveCloudEffectListRequest {
+  /** 云端特效ID。 */
+  Id?: string;
+  /** 云端特效描述词。由用户原始输入的描述词。 */
+  Prompt?: string;
+  /** 云端特效标签。对云端特效进行分类标签，可用于分类搜索。 */
+  Flag?: string;
+  /** 云端特效类型, 默认不填，返回全部。PGC: 特效库中的特效；AICG : AI生成的特效；UGC：用户自定义上传的特效； */
+  Type?: string;
+}
+
+declare interface DescribeLiveCloudEffectListResponse {
+  /** 云端特效信息列表。 */
+  InfoList?: CloudEffectInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLiveDelayInfoListRequest {
 }
 
@@ -3436,6 +3486,34 @@ declare interface DescribeLivePadRulesRequest {
 declare interface DescribeLivePadRulesResponse {
   /** 规则信息列表。 */
   Rules?: RuleInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLivePadStreamListRequest {
+  /** 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。 */
+  AppName?: string;
+  /** 您的推流域名。 */
+  DomainName?: string;
+  /** 流名称。 */
+  StreamName?: string;
+  /** 分页页数。 */
+  PageNum?: number;
+  /** 每页个数。 */
+  PageSize?: number;
+}
+
+declare interface DescribeLivePadStreamListResponse {
+  /** 当前正在拉取垫片的流信息列表。 */
+  StreamInfoList?: PadStreamInfo[];
+  /** 传入的分页页数。 */
+  PageNum?: number;
+  /** 传入的分页个数。 */
+  PageSize?: number;
+  /** 查询到的总个数。 */
+  TotalNum?: number;
+  /** 可以分的总页数。 */
+  TotalPage?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5126,6 +5204,46 @@ declare interface ResumeLiveStreamResponse {
   RequestId?: string;
 }
 
+declare interface SendLiveCloudEffectRequest {
+  /** 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。 */
+  AppName: string;
+  /** 您的推流域名。 */
+  PushDomainName: string;
+  /** 流名称。 */
+  StreamName: string;
+  /** 云端特效 ID。 */
+  Id: string;
+  /** 操作人备注信息。 */
+  Operator?: string;
+  /** 缩小比例，默认0 不缩放。可选值：0-9， 值越大，越缩小。 */
+  ZoomFactor?: number;
+  /** 指定云端特效渲染位置百分比。默认居中显示。原点为画面左上角，该参数指定特效渲染离原点的横向比例，可选值 0 - 100。 */
+  XPosition?: string;
+  /** 指定云端特效渲染位置百分比。默认居中显示。原点为画面左上角，该参数指定特效渲染离原点的纵向比例，可选值 0 - 100。 */
+  YPosition?: string;
+}
+
+declare interface SendLiveCloudEffectResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StartLivePadStreamRequest {
+  /** 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。 */
+  AppName: string;
+  /** 您的推流域名。 */
+  PushDomainName: string;
+  /** 流名称。 */
+  StreamName: string;
+  /** 操作人备注信息。 */
+  Operator?: string;
+}
+
+declare interface StartLivePadStreamResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StartLiveStreamMonitorRequest {
   /** 监播ID。 */
   MonitorId: string;
@@ -5172,6 +5290,22 @@ declare interface StopLivePadProcessorRequest {
 declare interface StopLivePadProcessorResponse {
   /** 处理结果信息。 */
   ResultMessage?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopLivePadStreamRequest {
+  /** 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。 */
+  AppName: string;
+  /** 您的推流域名。 */
+  PushDomainName: string;
+  /** 流名称。 */
+  StreamName: string;
+  /** 操作人备注信息。 */
+  Operator?: string;
+}
+
+declare interface StopLivePadStreamResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5453,6 +5587,8 @@ declare interface Live {
   DescribeLiveCert(data: DescribeLiveCertRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCertResponse>;
   /** 获取证书信息列表(该接口已下线，请使用新接口 DescribeLiveDomainCertBindings) {@link DescribeLiveCertsRequest} {@link DescribeLiveCertsResponse} */
   DescribeLiveCerts(data?: DescribeLiveCertsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCertsResponse>;
+  /** 查询直播云端特效列表 {@link DescribeLiveCloudEffectListRequest} {@link DescribeLiveCloudEffectListResponse} */
+  DescribeLiveCloudEffectList(data?: DescribeLiveCloudEffectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCloudEffectListResponse>;
   /** 获取直播延播列表 {@link DescribeLiveDelayInfoListRequest} {@link DescribeLiveDelayInfoListResponse} */
   DescribeLiveDelayInfoList(data?: DescribeLiveDelayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDelayInfoListResponse>;
   /** 查询域名信息 {@link DescribeLiveDomainRequest} {@link DescribeLiveDomainResponse} */
@@ -5477,6 +5613,8 @@ declare interface Live {
   DescribeLivePadProcessorList(data: DescribeLivePadProcessorListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePadProcessorListResponse>;
   /** 获取直播垫片规则列表 {@link DescribeLivePadRulesRequest} {@link DescribeLivePadRulesResponse} */
   DescribeLivePadRules(data?: DescribeLivePadRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePadRulesResponse>;
+  /** 查询直播中的垫片流列表 {@link DescribeLivePadStreamListRequest} {@link DescribeLivePadStreamListResponse} */
+  DescribeLivePadStreamList(data?: DescribeLivePadStreamListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePadStreamListResponse>;
   /** 获取单个直播垫片模板 {@link DescribeLivePadTemplateRequest} {@link DescribeLivePadTemplateResponse} */
   DescribeLivePadTemplate(data: DescribeLivePadTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePadTemplateResponse>;
   /** 获取直播垫片模板 {@link DescribeLivePadTemplatesRequest} {@link DescribeLivePadTemplatesResponse} */
@@ -5643,6 +5781,10 @@ declare interface Live {
   ResumeDelayLiveStream(data: ResumeDelayLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeDelayLiveStreamResponse>;
   /** 恢复直播推流 {@link ResumeLiveStreamRequest} {@link ResumeLiveStreamResponse} */
   ResumeLiveStream(data: ResumeLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeLiveStreamResponse>;
+  /** 发送直播云端特效 {@link SendLiveCloudEffectRequest} {@link SendLiveCloudEffectResponse} */
+  SendLiveCloudEffect(data: SendLiveCloudEffectRequest, config?: AxiosRequestConfig): AxiosPromise<SendLiveCloudEffectResponse>;
+  /** 开始切入垫片 {@link StartLivePadStreamRequest} {@link StartLivePadStreamResponse} */
+  StartLivePadStream(data: StartLivePadStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StartLivePadStreamResponse>;
   /** 启动直播流监播任务 {@link StartLiveStreamMonitorRequest} {@link StartLiveStreamMonitorResponse} */
   StartLiveStreamMonitor(data: StartLiveStreamMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<StartLiveStreamMonitorResponse>;
   /** 停止导播台主监任务 {@link StopCasterPgmRequest} {@link StopCasterPgmResponse} */
@@ -5651,6 +5793,8 @@ declare interface Live {
   StopCasterPvw(data: StopCasterPvwRequest, config?: AxiosRequestConfig): AxiosPromise<StopCasterPvwResponse>;
   /** 停止垫片流 {@link StopLivePadProcessorRequest} {@link StopLivePadProcessorResponse} */
   StopLivePadProcessor(data: StopLivePadProcessorRequest, config?: AxiosRequestConfig): AxiosPromise<StopLivePadProcessorResponse>;
+  /** 停止切入垫片 {@link StopLivePadStreamRequest} {@link StopLivePadStreamResponse} */
+  StopLivePadStream(data: StopLivePadStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StopLivePadStreamResponse>;
   /** 终止录制任务(已废弃,请使用新接口) {@link StopLiveRecordRequest} {@link StopLiveRecordResponse} */
   StopLiveRecord(data: StopLiveRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StopLiveRecordResponse>;
   /** 停止直播流监播任务 {@link StopLiveStreamMonitorRequest} {@link StopLiveStreamMonitorResponse} */

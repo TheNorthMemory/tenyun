@@ -182,6 +182,16 @@ declare interface AutoSignConfig {
   JumpUrl?: string;
 }
 
+/** 批量认证企业任务详情信息，其中包括 TaskId，状态信息等等。 */
+declare interface BatchOrganizationRegistrationTasksDetails {
+  /** 生成注册链接的任务Id */
+  TaskId?: string;
+  /** 批量创建企业任务的状态ProcessingCreateSubmitAuthorizationFailed各个状态所代表的含义如下表格所示：任务状态名称任务状态详情Processing企业认证任务处理中，用户调用了CreateBatchOrganizationRegistrationTasks接口，但是任务还在处理中的状态Create创建企业认证链接任务完成，可以调用生成任务链接接口Submit企业认证任务已提交,到如下界面之后，会变为这个状态![image](https://qcloudimg.tencent-cloud.cn/raw/acbcec8c7a71de14d9c041e3b8ca8b3f.png)Authorization企业认证任务认证成功,点击下图下一步，进入到授权书上传或者法人认证，则会变为这个状态![image](https://qcloudimg.tencent-cloud.cn/raw/c52448354871cffa729da8db4e3a6f18.png)Failed企业认证任务失败 */
+  Status?: string;
+  /** 如果任务失败,会返回错误信息 */
+  ErrorMessage?: string;
+}
+
 /** 用户计费使用情况详情 */
 declare interface BillUsageDetail {
   /** 合同流程ID，为32位字符串。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
@@ -2464,6 +2474,24 @@ declare interface CreateLegalSealQrCodeResponse {
   RequestId?: string;
 }
 
+declare interface CreateModifyAdminAuthorizationUrlRequest {
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+  /** 企业认证流Id，可以通过回调[授权书认证审核结果回调](https://qian.tencent.com/developers/company/callback_types_staffs#%E5%8D%81%E5%85%AD-%E6%8E%88%E6%9D%83%E4%B9%A6%E8%AE%A4%E8%AF%81%E5%AE%A1%E6%A0%B8%E7%BB%93%E6%9E%9C%E5%9B%9E%E8%B0%83)得到 */
+  AuthorizationId?: string;
+  /** 要跳转的链接类型 **HTTP**：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型 ，此时返回长链 (默认类型)**HTTP_SHORT_URL**：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型，此时返回短链**APP**： 第三方APP或小程序跳转电子签小程序的path, APP或者小程序跳转适合此类型**PC**： 跳转电子签web 端控制台的链接。 */
+  Endpoint?: string;
+}
+
+declare interface CreateModifyAdminAuthorizationUrlResponse {
+  /** 变更企业超管授权书链接。没有有效期限制。注意：此链接仅能由当时认证企业的认证人使用。 */
+  Url?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateMultiFlowSignQRCodeRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -3218,6 +3246,22 @@ declare interface DeleteSealPoliciesRequest {
 }
 
 declare interface DeleteSealPoliciesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBatchOrganizationRegistrationTasksRequest {
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+  /** 企业批量认证链接的子任务 SubTaskId，该 SubTaskId 是通过接口[查询企业批量认证链接](https://qian.tencent.com/developers/companyApis/organizations/DescribeBatchOrganizationRegistrationUrls)可以得到。 */
+  TaskIds?: string[];
+}
+
+declare interface DescribeBatchOrganizationRegistrationTasksResponse {
+  /** 企业批量任务状态明细 */
+  Details?: BatchOrganizationRegistrationTasksDetails[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4215,6 +4259,8 @@ declare interface Ess {
   CreateIntegrationUserRoles(data: CreateIntegrationUserRolesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationUserRolesResponse>;
   /** 获取到电子签小程序创建法人章二维码 {@link CreateLegalSealQrCodeRequest} {@link CreateLegalSealQrCodeResponse} */
   CreateLegalSealQrCode(data?: CreateLegalSealQrCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLegalSealQrCodeResponse>;
+  /** 生成变更超管授权书链接 {@link CreateModifyAdminAuthorizationUrlRequest} {@link CreateModifyAdminAuthorizationUrlResponse} */
+  CreateModifyAdminAuthorizationUrl(data: CreateModifyAdminAuthorizationUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModifyAdminAuthorizationUrlResponse>;
   /** 创建一码多签签署码 {@link CreateMultiFlowSignQRCodeRequest} {@link CreateMultiFlowSignQRCodeResponse} */
   CreateMultiFlowSignQRCode(data: CreateMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiFlowSignQRCodeResponse>;
   /** 生成企业授权书 {@link CreateOrganizationAuthFileRequest} {@link CreateOrganizationAuthFileResponse} */
@@ -4269,6 +4315,8 @@ declare interface Ess {
   DeleteOrganizationAuthorizations(data: DeleteOrganizationAuthorizationsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrganizationAuthorizationsResponse>;
   /** 撤销企业员工的印章授权 {@link DeleteSealPoliciesRequest} {@link DeleteSealPoliciesResponse} */
   DeleteSealPolicies(data: DeleteSealPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSealPoliciesResponse>;
+  /** 查询企业批量认证状态 {@link DescribeBatchOrganizationRegistrationTasksRequest} {@link DescribeBatchOrganizationRegistrationTasksResponse} */
+  DescribeBatchOrganizationRegistrationTasks(data: DescribeBatchOrganizationRegistrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchOrganizationRegistrationTasksResponse>;
   /** 查询企业批量认证链接 {@link DescribeBatchOrganizationRegistrationUrlsRequest} {@link DescribeBatchOrganizationRegistrationUrlsResponse} */
   DescribeBatchOrganizationRegistrationUrls(data: DescribeBatchOrganizationRegistrationUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchOrganizationRegistrationUrlsResponse>;
   /** 查询企业套餐使用情况 {@link DescribeBillUsageRequest} {@link DescribeBillUsageResponse} */
