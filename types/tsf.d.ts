@@ -7720,7 +7720,7 @@ declare interface UpdateUnitRuleResponse {
   RequestId?: string;
 }
 
-/** {@link Tsf TSF应用管理&Consul} */
+/** {@link Tsf TSF-应用管理&Consul} */
 declare interface Tsf {
   (): Versions;
   /** 集群添加云主机 {@link AddClusterInstancesRequest} {@link AddClusterInstancesResponse} */

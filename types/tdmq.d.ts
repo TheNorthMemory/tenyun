@@ -846,15 +846,15 @@ declare interface RabbitMQClusterAccessInfo {
   ControlPlaneEndpointInfo?: VpcEndpointInfo;
 }
 
-/** RabbiteMQ集群基本信息 */
+/** RabbitMQ 集群基本信息 */
 declare interface RabbitMQClusterInfo {
-  /** 集群ID */
+  /** 集群 ID */
   ClusterId?: string;
   /** 集群名称 */
   ClusterName?: string;
   /** 地域信息 */
   Region?: string;
-  /** 创建时间，毫秒为单位 */
+  /** 创建时间，毫秒为单位。unix 时间戳 */
   CreateTime?: number;
   /** 集群说明信息 */
   Remark?: string;
@@ -870,7 +870,7 @@ declare interface RabbitMQClusterInfo {
   MessagePublishRate?: number;
   /** 堆积消息数 单位：条 */
   MessageStackNumber?: number;
-  /** 过期时间 */
+  /** 实例到期时间，按量付费的资源该值为 0，毫秒为单位。unix 时间戳 */
   ExpireTime?: number;
   /** Channel数量 */
   ChannelNumber?: number;
@@ -896,7 +896,7 @@ declare interface RabbitMQClusterInfo {
   PayMode?: number;
   /** 实例类型，0 专享版、1 Serverless 版 */
   InstanceType?: number;
-  /** 开始隔离时间 */
+  /** 开始隔离时间。unix 时间戳 */
   IsolatedTime?: number;
   /** 是否为容器实例，默认 true */
   Container?: boolean;
@@ -1088,9 +1088,9 @@ declare interface RabbitMQUser {
   ModifyTs?: number;
 }
 
-/** RabbitMQ专享实例信息 */
+/** RabbitMQ 托管版实例信息 */
 declare interface RabbitMQVipInstance {
-  /** 实例id */
+  /** 实例 ID */
   InstanceId?: string;
   /** 实例名称 */
   InstanceName?: string;
@@ -1108,17 +1108,17 @@ declare interface RabbitMQVipInstance {
   MaxBandWidth?: number;
   /** 存储容量，GB为单位 */
   MaxStorage?: number;
-  /** 实例到期时间，毫秒为单位 */
+  /** 实例到期时间，按量付费的资源该值为 0，毫秒为单位。unix 时间戳 */
   ExpireTime?: number;
   /** 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置) */
   AutoRenewFlag?: number;
-  /** 0-后付费，1-预付费 */
+  /** 1 表示预付费，0 表示后付费 */
   PayMode?: number;
   /** 备注信息 */
   Remark?: string;
-  /** 实例配置ID */
+  /** 集群的节点规格，需要输入对应的规格标识：2C8G：rabbit-vip-basic-2c8g4C16G：rabbit-vip-basic-4c16g8C32G：rabbit-vip-basic-8c32g16C32G：rabbit-vip-basic-416C64G：rabbit-vip-basic-16c64g2C4G：rabbit-vip-basic-54C8G：rabbit-vip-basic-18C16G（已售罄）：rabbit-vip-basic-2不传默认为4C8G：rabbit-vip-basic-1 */
   SpecName?: string;
-  /** 集群异常。 */
+  /** 集群异常信息 */
   ExceptionInformation?: string | null;
   /** 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败为了和计费区分开，额外开启一个状态位，用于显示。 */
   ClusterStatus?: number;
@@ -1126,7 +1126,7 @@ declare interface RabbitMQVipInstance {
   PublicAccessEndpoint?: string | null;
   /** VPC 接入点列表 */
   Vpcs?: VpcEndpointInfo[];
-  /** 创建时间，毫秒为单位 */
+  /** 创建时间，毫秒为单位。unix 时间戳 */
   CreateTime?: number;
   /** 实例类型，0 专享版、1 Serverless 版 */
   InstanceType?: number;
@@ -3289,19 +3289,19 @@ declare interface DescribePulsarProInstancesResponse {
 }
 
 declare interface DescribeRabbitMQBindingsRequest {
-  /** 实例Id */
+  /** 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。 */
   InstanceId: string;
-  /** Vhost名称 */
+  /** VirtualHost 名称，形如 testvhost。有效的 VirtualHost 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，在左侧导航栏点击 Vhost，并在 Vhost 列表中找到Vhost名称。 */
   VirtualHost: string;
-  /** 分页offset */
+  /** 分页 offset，默认 0 */
   Offset?: number;
-  /** 分页limit */
+  /** 分页 limit，默认 20 */
   Limit?: number;
   /** 搜索关键词，根据源exchange名称/目标资源名称/绑定key进行模糊搜索 */
   SearchWord?: string;
   /** 根据源Exchange精准搜索过滤 */
   SourceExchange?: string;
-  /** 根据目标QueueName精准搜索过滤，和DestinationExchange过滤不可同时设置 */
+  /** 根据目标队列名精准搜索过滤，和 DestinationExchange 过滤不可同时设置 */
   QueueName?: string;
   /** 根据目标Exchange精准搜索过滤，和QueueName过滤不可同时设置 */
   DestinationExchange?: string;
@@ -3310,24 +3310,24 @@ declare interface DescribeRabbitMQBindingsRequest {
 declare interface DescribeRabbitMQBindingsResponse {
   /** 路由关系列表 */
   BindingInfoList?: RabbitMQBindingListInfo[];
-  /** 数量 */
+  /** 路由关系数量 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeRabbitMQExchangesRequest {
-  /** 实例 id */
+  /** 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。 */
   InstanceId: string;
-  /** vhost 参数 */
+  /** VirtualHost 名称，形如 testvhost。有效的 VirtualHost 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，在左侧导航栏点击 Vhost，并在 Vhost 列表中找到Vhost名称。 */
   VirtualHost: string;
-  /** 分页 offset */
+  /** 分页 offset，默认 0 */
   Offset?: number;
-  /** 分页 limit */
+  /** 分页 limit，默认 20 */
   Limit?: number;
   /** 搜索关键词, 支持模糊匹配 */
   SearchWord?: string;
-  /** 筛选 exchange 类型, 数组中每个元素为选中的过滤类型 */
+  /** 筛选 exchange 类型, 数组中每个元素为选中的过滤类型，仅支持 direct、fanout、topic、header */
   ExchangeTypeFilters?: string[];
   /** 筛选 exchange 创建来源, "system":"系统创建", "user":"用户创建" */
   ExchangeCreatorFilters?: string[];
@@ -3335,7 +3335,7 @@ declare interface DescribeRabbitMQExchangesRequest {
   ExchangeName?: string;
   /** 排序依据的字段：MessageRateInOut - 生产消费速率之和；MessageRateIn - 生产速率；MessageRateOut - 消费速率； */
   SortElement?: string;
-  /** 排序顺序，ascend 或 descend */
+  /** 排序顺序，ascend 或 descendascend：升序descend：降序 */
   SortOrder?: string;
 }
 
@@ -3375,15 +3375,15 @@ declare interface DescribeRabbitMQNodeListResponse {
 }
 
 declare interface DescribeRabbitMQPermissionRequest {
-  /** 集群实例id */
+  /** 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。 */
   InstanceId: string;
-  /** 用户名，用于查询过滤，不传则查询全部 */
+  /** 用户名，形如 admin。有效的 User 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，点击集群列表中的集群，进入集群详情，并在用户与权限页签中找到用户列表，从而找到用户名称。 */
   User?: string;
-  /** vhost名，用于查询过滤，不传则查询全部 */
+  /** VirtualHost 名称，形如 testvhost。有效的 VirtualHost 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，在左侧导航栏点击 Vhost，并在 Vhost 列表中找到 Vhost 名称。 */
   VirtualHost?: string;
-  /** 分页Offset */
+  /** 分页 Offset，默认 0 */
   Offset?: number;
-  /** 分页Limit */
+  /** 分页 Limit，默认 20 */
   Limit?: number;
 }
 
@@ -3503,17 +3503,17 @@ declare interface DescribeRabbitMQQueuesResponse {
 }
 
 declare interface DescribeRabbitMQUserRequest {
-  /** 集群实例Id */
+  /** 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。 */
   InstanceId: string;
   /** 用户名检索，支持前缀匹配，后缀匹配 */
   SearchUser?: string;
-  /** 分页Offset */
+  /** 分页 Offset，默认 0 */
   Offset?: number;
-  /** 分页Limit */
+  /** 分页 Limit，默认 20 */
   Limit?: number;
   /** 用户名，精确查询 */
   User?: string;
-  /** 用户标签，根据标签过滤列表 */
+  /** 用户标签，用于决定改用户访问 RabbitMQ Management 的权限范围management：普通控制台用户，monitoring：管理型控制台用户，其他值：非控制台用户 */
   Tags?: string[];
 }
 
@@ -3527,7 +3527,7 @@ declare interface DescribeRabbitMQUserResponse {
 }
 
 declare interface DescribeRabbitMQVipInstanceRequest {
-  /** 集群ID */
+  /** 集群 ID */
   ClusterId: string;
 }
 
@@ -3553,9 +3553,9 @@ declare interface DescribeRabbitMQVipInstanceResponse {
 declare interface DescribeRabbitMQVipInstancesRequest {
   /** 查询条件过滤器 */
   Filters?: Filter[];
-  /** 查询数目上限，默认20 */
+  /** 查询数目上限，默认 20 */
   Limit?: number;
-  /** 查询起始位置 */
+  /** 查询起始位置，默认 0 */
   Offset?: number;
 }
 
@@ -4707,6 +4707,8 @@ declare interface ModifyRocketMQInstanceRequest {
   Remark?: string;
   /** 实例消息保留时间，小时为单位 */
   MessageRetention?: number;
+  /** 是否开启删除保护 */
+  EnableDeletionProtection?: boolean;
 }
 
 declare interface ModifyRocketMQInstanceResponse {
@@ -5281,9 +5283,9 @@ declare interface Tdmq {
   DescribeRabbitMQQueues(data: DescribeRabbitMQQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQQueuesResponse>;
   /** 查询RabbitMQ用户列表 {@link DescribeRabbitMQUserRequest} {@link DescribeRabbitMQUserResponse} */
   DescribeRabbitMQUser(data: DescribeRabbitMQUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQUserResponse>;
-  /** 获取单个RabbitMQ专享实例信息 {@link DescribeRabbitMQVipInstanceRequest} {@link DescribeRabbitMQVipInstanceResponse} */
+  /** 获取单个 RabbitMQ 托管版实例信息 {@link DescribeRabbitMQVipInstanceRequest} {@link DescribeRabbitMQVipInstanceResponse} */
   DescribeRabbitMQVipInstance(data: DescribeRabbitMQVipInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQVipInstanceResponse>;
-  /** 查询RabbitMQ专享实例列表 {@link DescribeRabbitMQVipInstancesRequest} {@link DescribeRabbitMQVipInstancesResponse} */
+  /** 查询 RabbitMQ 托管版实例列表 {@link DescribeRabbitMQVipInstancesRequest} {@link DescribeRabbitMQVipInstancesResponse} */
   DescribeRabbitMQVipInstances(data?: DescribeRabbitMQVipInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQVipInstancesResponse>;
   /** 查询RabbitMQ vhost列表 {@link DescribeRabbitMQVirtualHostRequest} {@link DescribeRabbitMQVirtualHostResponse} */
   DescribeRabbitMQVirtualHost(data: DescribeRabbitMQVirtualHostRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQVirtualHostResponse>;

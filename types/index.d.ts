@@ -1016,7 +1016,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   trtc: Trtc,
   /** {@link Tse TSF-Polaris&ZK&网关} */
   tse: Tse,
-  /** {@link Tsf TSF应用管理&Consul} */
+  /** {@link Tsf TSF-应用管理&Consul} */
   tsf: Tsf,
   /** {@link Tsi 腾讯同传系统} */
   tsi: Tsi,

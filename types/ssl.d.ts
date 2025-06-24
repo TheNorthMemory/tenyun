@@ -394,6 +394,26 @@ declare interface DeleteTaskResult {
   Domains?: string[];
 }
 
+/** 托管记录 */
+declare interface DeployRecord {
+  /** 总数 */
+  TotalCount?: number;
+  /** 成功总数 */
+  SuccessTotalCount?: number;
+  /** 失败总数 */
+  FailedTotalCount?: number;
+  /** 部署中总数 */
+  RunningTotalCount?: number;
+  /** 部署记录类型 0 为部署， 1 为回滚 */
+  Type?: number;
+  /** 部署记录详情列表 */
+  RecordDetailList?: DeployRecordList[];
+  /** 托管资源部署状态：0 等待部署， 1 部署成功， 2 部署失败 3 部署中， 4 回滚成功， 5 回滚失败 */
+  Status?: number;
+  /** 托管资源创建时间 */
+  CreateTime?: string;
+}
+
 /** 部署记录详情 */
 declare interface DeployRecordDetail {
   /** 部署记录详情ID */
@@ -458,6 +478,62 @@ declare interface DeployRecordInfo {
   CreateTime?: string;
   /** 最近一次更新时间 */
   UpdateTime?: string;
+}
+
+/** 部署记录详情 */
+declare interface DeployRecordItem {
+  /** 部署记录详情ID */
+  Id?: number;
+  /** 原绑定证书ID */
+  OldCertId?: string;
+  /** 部署实例ID */
+  InstanceId?: string;
+  /** 部署实例名称 */
+  InstanceName?: string;
+  /** 部署监听器ID */
+  ListenerId?: string;
+  /** 部署域名列表 */
+  Domains?: string[];
+  /** 部署监听器协议 */
+  Protocol?: string;
+  /** 部署状态 */
+  Status?: number;
+  /** 部署错误信息 */
+  ErrorMsg?: string;
+  /** 部署记录详情创建时间 */
+  CreateTime?: string;
+  /** 部署记录详情最后一次更新时间 */
+  UpdateTime?: string;
+  /** 部署监听器名称 */
+  ListenerName?: string;
+  /** 是否开启SNI */
+  SniSwitch?: number;
+  /** COS存储桶名称 */
+  Bucket?: string;
+  /** 命名空间名称 */
+  Namespace?: string;
+  /** secret名称 */
+  SecretName?: string;
+  /** 端口 */
+  Port?: number;
+  /** 部署的TCB地域 */
+  Region?: string;
+  /** 负载均衡类型，0 传统型负载均衡； 1 应用型负载均衡 */
+  Forward?: number;
+  /** 证书认证模式：UNIDIRECTIONAL单向认证，MUTUAL双向认证 */
+  SSLMode?: string;
+  /** 部署资源类型 */
+  ResourceType?: string;
+}
+
+/** 托管记录详情信息 */
+declare interface DeployRecordList {
+  /** 部署资源类型 */
+  ResourceType?: string;
+  /** 部署资源详情列表 */
+  List?: DeployRecordItem[] | null;
+  /** 该部署资源总数 */
+  TotalCount?: number;
 }
 
 /** 资源详情 */
@@ -1152,6 +1228,22 @@ declare interface UpdateSyncProgressRegion {
   OffsetCount?: number | null;
   /** 异步更新进度状态：0， 待处理， 1 已处理， 3 处理中 */
   Status?: number | null;
+}
+
+/** 部署记录列表信息 */
+declare interface UploadUpdateRecordInfo {
+  /** 记录ID */
+  Id?: number;
+  /** 原证书ID */
+  OldCertId?: string;
+  /** 部署资源类型列表 */
+  ResourceTypes?: string[];
+  /** 部署状态 */
+  Status?: number;
+  /** 部署时间 */
+  CreateTime?: string;
+  /** 最后一次更新时间 */
+  UpdateTime?: string;
 }
 
 /** vod实例详情 - 异步关联云资源数据结构 */
@@ -2316,6 +2408,40 @@ declare interface DescribeHostUpdateRecordResponse {
   RequestId?: string;
 }
 
+declare interface DescribeHostUploadUpdateRecordDetailRequest {
+  /** 托管记录ID */
+  DeployRecordId: number;
+  /** 每页数量，默认为10，最大为200， 超过200则为200 */
+  Limit?: number;
+  /** 偏移量，默认为0 */
+  Offset?: number;
+}
+
+declare interface DescribeHostUploadUpdateRecordDetailResponse {
+  /** 托管记录详情列表 */
+  DeployRecordDetail?: DeployRecord[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeHostUploadUpdateRecordRequest {
+  /** 分页偏移量，从0开始。 */
+  Offset?: number;
+  /** 每页数量，默认10。 */
+  Limit?: number;
+  /** 原证书ID */
+  OldCertificateId?: string;
+}
+
+declare interface DescribeHostUploadUpdateRecordResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 证书部署记录列表 */
+  DeployRecordList?: UploadUpdateRecordInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeHostVodInstanceListRequest {
   /** 待部署的证书ID,必填选项 */
   CertificateId?: string;
@@ -2796,6 +2922,28 @@ declare interface UploadUpdateCertificateInstanceResponse {
   RequestId?: string;
 }
 
+declare interface UploadUpdateCertificateRecordRetryRequest {
+  /** 待重试部署记录ID,通过UpdateCertificateInstance得到部署记录ID。 本参数不传的话，则DeployRecordDetailId必传 */
+  DeployRecordId?: number;
+  /** 待重试部署记录详情ID,通过DescribeHostUpdateRecordDetail接口获得， 本参数不传的话， 则DeployRecordId必传 */
+  DeployRecordDetailId?: number;
+}
+
+declare interface UploadUpdateCertificateRecordRetryResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UploadUpdateCertificateRecordRollbackRequest {
+  /** 更新证书待回滚的记录ID, 通过UpdateCertificateInstance获得 */
+  DeployRecordId: number;
+}
+
+declare interface UploadUpdateCertificateRecordRollbackResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface VerifyManagerRequest {
   /** 管理人ID */
   ManagerId: number;
@@ -2895,6 +3043,10 @@ declare interface Ssl {
   DescribeHostUpdateRecord(data?: DescribeHostUpdateRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostUpdateRecordResponse>;
   /** 查询证书云资源更新记录详情 {@link DescribeHostUpdateRecordDetailRequest} {@link DescribeHostUpdateRecordDetailResponse} */
   DescribeHostUpdateRecordDetail(data: DescribeHostUpdateRecordDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostUpdateRecordDetailResponse>;
+  /** 查询证书云资源更新（证书ID不变）记录列表 {@link DescribeHostUploadUpdateRecordRequest} {@link DescribeHostUploadUpdateRecordResponse} */
+  DescribeHostUploadUpdateRecord(data?: DescribeHostUploadUpdateRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostUploadUpdateRecordResponse>;
+  /** 查询证书更新记录（证书ID不变）部署记录详情 {@link DescribeHostUploadUpdateRecordDetailRequest} {@link DescribeHostUploadUpdateRecordDetailResponse} */
+  DescribeHostUploadUpdateRecordDetail(data: DescribeHostUploadUpdateRecordDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostUploadUpdateRecordDetailResponse>;
   /** 查询证书Vod云资源部署实例列表 {@link DescribeHostVodInstanceListRequest} {@link DescribeHostVodInstanceListResponse} */
   DescribeHostVodInstanceList(data?: DescribeHostVodInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostVodInstanceListResponse>;
   /** 查询证书waf云资源部署实例列表 {@link DescribeHostWafInstanceListRequest} {@link DescribeHostWafInstanceListResponse} */
@@ -2937,6 +3089,10 @@ declare interface Ssl {
   UploadRevokeLetter(data: UploadRevokeLetterRequest, config?: AxiosRequestConfig): AxiosPromise<UploadRevokeLetterResponse>;
   /** 更新证书内容（证书ID不变）并更新关联的云资源 {@link UploadUpdateCertificateInstanceRequest} {@link UploadUpdateCertificateInstanceResponse} */
   UploadUpdateCertificateInstance(data: UploadUpdateCertificateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UploadUpdateCertificateInstanceResponse>;
+  /** 云资源更新（证书ID不变）失败重试部署记录 {@link UploadUpdateCertificateRecordRetryRequest} {@link UploadUpdateCertificateRecordRetryResponse} */
+  UploadUpdateCertificateRecordRetry(data?: UploadUpdateCertificateRecordRetryRequest, config?: AxiosRequestConfig): AxiosPromise<UploadUpdateCertificateRecordRetryResponse>;
+  /** 云资源更新成功（证书ID不变）记录回滚 {@link UploadUpdateCertificateRecordRollbackRequest} {@link UploadUpdateCertificateRecordRollbackResponse} */
+  UploadUpdateCertificateRecordRollback(data: UploadUpdateCertificateRecordRollbackRequest, config?: AxiosRequestConfig): AxiosPromise<UploadUpdateCertificateRecordRollbackResponse>;
   /** 重新核验管理人 {@link VerifyManagerRequest} {@link VerifyManagerResponse} */
   VerifyManager(data: VerifyManagerRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyManagerResponse>;
 }

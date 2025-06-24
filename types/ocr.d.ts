@@ -1880,6 +1880,10 @@ declare interface SingleInvoiceItem {
   ShoppingReceipt?: ShoppingReceipt | null;
   /** 销货清单 */
   SaleInventory?: SaleInventory | null;
+  /** 机动车销售统一发票（电子） */
+  MotorVehicleSaleInvoiceElectronic?: MotorVehicleSaleInvoice | null;
+  /** 二手车销售统一发票（电子） */
+  UsedCarPurchaseInvoiceElectronic?: UsedCarPurchaseInvoice | null;
 }
 
 /** 门头照识别结果 */

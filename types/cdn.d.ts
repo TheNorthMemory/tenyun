@@ -4053,7 +4053,7 @@ declare interface ListTopDataRequest {
   StartTime: string;
   /** 查询结束时间：yyyy-MM-dd HH:mm:ss仅支持按天粒度的数据查询，取入参中的天信息作为结束日期 返回小于等于结束日期当天 23:59:59 产生的数据，如EndTime为2018-09-05 22:40:00，返回数据的结束时间为2018-09-05 23:59:59EndTime 需要大于等于 StartTime */
   EndTime: string;
-  /** 排序对象，支持以下几种形式：url：访问 URL 排序（无参数的URL），支持的 Filter 为 flux、requestdistrict：省份、国家/地区排序，支持的 Filter 为 flux、requestisp：运营商排序，支持的 Filter 为 flux、requesthost：域名访问数据排序，支持的 Filter 为：flux、request、bandwidth、fluxHitRate、2XX、3XX、4XX、5XX、statusCodeoriginHost：域名回源数据排序，支持的 Filter 为 flux、request、bandwidth、origin_2XX、origin_3XX、origin_4XX、origin_5XX、OriginStatusCode */
+  /** 排序对象，支持以下几种形式：url：访问 URL 排序（无参数的URL），支持的 Filter 为 flux、requestdistrict：省份、国家/地区排序，支持的 Filter 为 flux、requestisp：运营商排序，支持的 Filter 为 flux、requesthost：域名访问数据排序，支持的Filter 为：flux、request、bandwidth、fluxHitRate、2XX、3XX、4XX、5XX、statusCode originHost：域名回源数据排序，支持的 Filter 为 flux、request、bandwidth、origin_2XX、origin_3XX、origin_4XX、origin_5XX、OriginStatusCode */
   Metric: string;
   /** 排序使用的指标名称：flux：Metric 为 host 时指代访问流量，originHost 时指代回源流量bandwidth：Metric 为 host 时指代访问带宽，originHost 时指代回源带宽request：Metric 为 host 时指代访问请求数，originHost 时指代回源请求数fluxHitRate：平均流量命中率2XX：访问 2XX 状态码3XX：访问 3XX 状态码4XX：访问 4XX 状态码5XX：访问 5XX 状态码origin_2XX：回源 2XX 状态码origin_3XX：回源 3XX 状态码origin_4XX：回源 4XX 状态码origin_5XX：回源 5XX 状态码statusCode：指定访问状态码统计，在 Code 参数中填充指定状态码OriginStatusCode：指定回源状态码统计，在 Code 参数中填充指定状态码 */
   Filter: string;

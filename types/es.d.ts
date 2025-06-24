@@ -403,6 +403,14 @@ declare namespace V20180416 {
     IsAutoBackup: boolean;
     /** 自动备份执行时间（精确到小时）, e.g. "22:00" */
     BackupTime: string;
+    /** 0 腾讯云仓库; 1 客户仓库 */
+    EsRepositoryType?: number;
+    /** 客户快照仓库名称 */
+    UserEsRepository?: string;
+    /** 快照存储周期 单位天 */
+    StorageDuration?: number;
+    /** 自动备份频率单位小时 */
+    AutoBackupInterval?: number;
   }
 
   /** 无 */
@@ -1619,6 +1627,8 @@ declare namespace V20180416 {
     SnapshotName?: string | null;
     /** 快照Uuid */
     Uuid?: string | null;
+    /** 仓库名称 */
+    Repository?: string | null;
     /** 该快照所属集群的版本号 */
     Version?: string | null;
     /** 备份的索引列表 */

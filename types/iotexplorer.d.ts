@@ -2044,6 +2044,8 @@ declare interface DescribeCloudStorageAIServiceResponse {
   Config?: string;
   /** 视频分析识别区域 */
   ROI?: string;
+  /** 云存 AI 套餐 ID */
+  PackageId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2557,9 +2559,9 @@ declare interface DescribeDevicePositionListRequest {
 
 declare interface DescribeDevicePositionListResponse {
   /** 产品设备位置信息列表 */
-  Positions: ProductDevicesPositionItem[];
+  Positions?: ProductDevicesPositionItem[];
   /** 产品设备位置信息的数目 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2591,9 +2593,9 @@ declare interface DescribeFenceBindListRequest {
 
 declare interface DescribeFenceBindListResponse {
   /** 围栏绑定的产品设备列表 */
-  List: FenceBindProductItem[];
+  List?: FenceBindProductItem[];
   /** 围栏绑定的设备总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2617,9 +2619,9 @@ declare interface DescribeFenceEventListRequest {
 
 declare interface DescribeFenceEventListResponse {
   /** 围栏告警事件列表 */
-  List: FenceEventItem[];
+  List?: FenceEventItem[];
   /** 围栏告警事件总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2927,9 +2929,9 @@ declare interface DescribeSpaceFenceEventListRequest {
 
 declare interface DescribeSpaceFenceEventListResponse {
   /** 围栏告警事件列表 */
-  List: FenceEventItem[] | null;
+  List?: FenceEventItem[] | null;
   /** 围栏告警事件总数 */
-  Total: number;
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3451,6 +3453,14 @@ declare interface InvokeAISearchServiceRequest {
   SummaryLang?: string;
   /** 通道ID */
   ChannelId?: number;
+  /** 是否需要返回总结，默认为False； 开启后会加大接口响应时长 */
+  EnableSummary?: boolean;
+  /** 开始时间。注：1. 单位为毫秒（ms）2. 如果同时指定了StartTimeMs与EndTimeMs，时间区间不能大于7天；如果只指定其中一个（例如只指定StartTimeMs，则查询自StartTimeMs后7天内的数据， 反之EndTimeMs也一样）3. 只要指定了其中一个参数，接口则会忽略Query参数中关于时间的描述；（例如Query为"过去三天关于猫咪的视频"， 则会将"过去三天忽略"） */
+  StartTimeMs?: number;
+  /** 结束时间。注：1. 单位为毫秒（ms）2. 如果同时指定了StartTimeMs与EndTimeMs，时间区间不能大于7天；如果只指定其中一个（例如只指定StartTimeMs，则查询自StartTimeMs后7天内的数据， 反之EndTimeMs也一样）3. 只要指定了其中一个参数，接口则会忽略Query参数中关于时间的描述；（例如Query为"过去三天关于猫咪的视频"， 则会将"过去三天忽略"） */
+  EndTimeMs?: number;
+  /** 时区。默认值：Asia/Shanghai注：符合iana标准 https://www.iana.org/time-zones，例如Asia/Shanghai、Asia/Bangkok */
+  TimeZone?: string;
 }
 
 declare interface InvokeAISearchServiceResponse {
@@ -3556,6 +3566,26 @@ declare interface InvokeTWeSeeRecognitionTaskResponse {
   Completed?: boolean;
   /** 语义理解任务结果（仅当 Completed 为 true 时包含该出参） */
   Result?: VisionRecognitionResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface InvokeVideosKeywordsAnalyzerRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 开始时间。注：1. 单位为毫秒（ms）2. 时间区间必须控制在某一个自然天内，不支持跨天 */
+  StartTimeMs: number;
+  /** 结束时间。注：1. 单位为毫秒（ms）2. 时间区间必须控制在某一个自然天内，不支持跨天 */
+  EndTimeMs: number;
+  /** 返回的关键字最大数量，默认为5；最大不能超过10 */
+  KeywordsMaxNum?: number;
+}
+
+declare interface InvokeVideosKeywordsAnalyzerResponse {
+  /** 基于搜索结果的总结 */
+  Keywords?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4543,6 +4573,8 @@ declare interface Iotexplorer {
   InvokeExternalSourceAIServiceTask(data: InvokeExternalSourceAIServiceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeExternalSourceAIServiceTaskResponse>;
   /** 同步执行 TWeSee 语义理解任务 {@link InvokeTWeSeeRecognitionTaskRequest} {@link InvokeTWeSeeRecognitionTaskResponse} */
   InvokeTWeSeeRecognitionTask(data: InvokeTWeSeeRecognitionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeTWeSeeRecognitionTaskResponse>;
+  /** 获取某个时间段的视频内容关键字 {@link InvokeVideosKeywordsAnalyzerRequest} {@link InvokeVideosKeywordsAnalyzerResponse} */
+  InvokeVideosKeywordsAnalyzer(data: InvokeVideosKeywordsAnalyzerRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeVideosKeywordsAnalyzerResponse>;
   /** 获取设备的历史事件 {@link ListEventHistoryRequest} {@link ListEventHistoryResponse} */
   ListEventHistory(data: ListEventHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<ListEventHistoryResponse>;
   /** 获取固件列表 {@link ListFirmwaresRequest} {@link ListFirmwaresResponse} */

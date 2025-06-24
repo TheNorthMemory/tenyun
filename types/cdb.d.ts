@@ -302,9 +302,9 @@ declare interface AutoStrategy {
   ExpandPeriod?: number | null;
   /** 自动缩容观测周期，单位是分钟，可选值5、10、15、30。后台会按照配置的周期进行缩容判断。 */
   ShrinkPeriod?: number | null;
-  /** 弹性扩容观测周期（秒级） */
+  /** 弹性扩容观测周期（秒级），可取值为：5，30，45，60，180，300，600，900，1800。 */
   ExpandSecondPeriod?: number;
-  /** 缩容观测周期（秒级） */
+  /** 缩容观测周期（秒级），可取值为：300。 */
   ShrinkSecondPeriod?: number;
 }
 
@@ -1434,13 +1434,13 @@ declare interface RemoteBackupInfo {
 declare interface RoGroup {
   /** 只读组模式，可选值为：alone-系统自动分配只读组；allinone-新建只读组；join-使用现有只读组。 */
   RoGroupMode: string;
-  /** 只读组 ID。 */
+  /** 只读组 ID。说明：若此数据结构在购买实例操作中被使用，则当只读组模式选择 join 时，此项为必填。 */
   RoGroupId?: string;
   /** 只读组名称。 */
   RoGroupName?: string;
   /** 是否启用延迟超限剔除功能，启用该功能后，只读实例与主实例的延迟超过延迟阈值，只读实例将被隔离。可选值：1-启用；0-不启用。 */
   RoOfflineDelay?: number;
-  /** 延迟阈值。 */
+  /** 延迟阈值。单位：秒。值范围：1-10000，整数。 */
   RoMaxDelayTime?: number;
   /** 最少实例保留个数，若购买只读实例数量小于设置数量将不做剔除。 */
   MinRoInGroup?: number;
@@ -1462,7 +1462,7 @@ declare interface RoGroup {
   RoGroupRegion?: string;
   /** 只读组所在的可用区。 */
   RoGroupZone?: string;
-  /** 延迟复制时间。 */
+  /** 延迟复制时间。单位：秒。值范围：1-259200，整数。 */
   DelayReplicationTime?: number;
 }
 
@@ -1884,9 +1884,9 @@ declare interface TimeInterval {
 
 /** 按时间段扩容策略 */
 declare interface TimeIntervalStrategy {
-  /** 开始扩容时间。说明：此值的格式为 Integer 的时间戳。 */
+  /** 开始扩容时间。说明：此值的格式为 Integer 的时间戳（秒级）。 */
   StartTime?: number;
-  /** 结束扩容时间。说明：此值的格式为 Integer 的时间戳。 */
+  /** 结束扩容时间。说明：此值的格式为 Integer 的时间戳（秒级）。 */
   EndTime?: number;
 }
 
@@ -1919,7 +1919,7 @@ declare interface ZoneConf {
 }
 
 declare interface AddTimeWindowRequest {
-  /** 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
+  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
   /** 星期一的可维护时间段，其中每一个时间段的格式形如：10:00-12:00；起始时间按半个小时对齐；最短半个小时，最长三个小时；可设置多个时间段。 一周中应至少设置一天的时间窗。下同。 */
   Monday?: string[];
@@ -1935,7 +1935,7 @@ declare interface AddTimeWindowRequest {
   Saturday?: string[];
   /** 星期日的可维护时间窗口。 一周中应至少设置一天的时间窗。 */
   Sunday?: string[];
-  /** 最大延迟阈值，仅对主实例和灾备实例有效。 */
+  /** 最大延迟阈值（秒），仅对主实例和灾备实例有效。默认值：10，取值范围：1-10的整数。 */
   MaxDelayTime?: number;
 }
 
@@ -2041,7 +2041,7 @@ declare interface AssociateSecurityGroupsResponse {
 }
 
 declare interface BalanceRoGroupLoadRequest {
-  /** RO 组的 ID，格式如：cdbrg-c1nl9rpv。 */
+  /** RO 组的 ID，格式如：cdbrg-c1nl9rpv。可通过 [DescribeRoGroups](https://cloud.tencent.com/document/api/236/40939) 获取。 */
   RoGroupId: string;
 }
 
@@ -2129,9 +2129,9 @@ declare interface CloseSSLResponse {
 }
 
 declare interface CloseWanServiceRequest {
-  /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。 */
+  /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。可传入只读组 ID 关闭只读组外网访问。 */
   InstanceId: string;
-  /** 变更集群版实例只读组时，InstanceId传实例id，需要额外指定该参数表示操作只读组。 如果操作读写节点则不需指定该参数。 */
+  /** 变更云盘版实例只读组时，InstanceId 传实例 ID，需要额外指定该参数表示操作只读组。如果操作读写节点则不需指定该参数。 */
   OpResourceId?: string;
 }
 
@@ -3463,17 +3463,17 @@ declare interface DescribeDBInstanceConfigRequest {
 
 declare interface DescribeDBInstanceConfigResponse {
   /** 主实例数据保护方式，可能的返回值：0 - 异步复制方式，1 - 半同步复制方式，2 - 强同步复制方式。 */
-  ProtectMode: number;
+  ProtectMode?: number;
   /** 主实例部署方式，可能的返回值：0 - 单可用部署，1 - 多可用区部署。 */
-  DeployMode: number;
+  DeployMode?: number;
   /** 实例可用区信息，格式如 "ap-shanghai-1"。 */
-  Zone: string;
+  Zone?: string;
   /** 备库的配置信息。 */
-  SlaveConfig: SlaveConfig | null;
+  SlaveConfig?: SlaveConfig | null;
   /** 强同步实例第二备库的配置信息。 */
-  BackupConfig: BackupConfig | null;
+  BackupConfig?: BackupConfig | null;
   /** 是否切换备库。 */
-  Switched: boolean;
+  Switched?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4787,7 +4787,7 @@ declare interface ModifyDBInstanceNameResponse {
 declare interface ModifyDBInstanceProjectRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。说明：可输入多个实例 ID 进行修改，json 格式如下。[ "cdb-30z11v8s", "cdb-93h11efg" ] */
   InstanceIds: string[];
-  /** 实例所属项目的 ID，可在账号中心下的项目管理页面查询。 */
+  /** 实例所属项目的 ID，可在账号中心下的项目管理页面查询。说明：此项为必填。 */
   NewProjectId?: number;
 }
 
@@ -4827,9 +4827,9 @@ declare interface ModifyDBInstanceSecurityGroupsResponse {
 declare interface ModifyDBInstanceVipVportRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c2nl9rpv 或者 cdbrg-c3nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。 */
   InstanceId: string;
-  /** 目标 IP。该参数和 DstPort 参数，两者必传一个。 */
+  /** 目标 IP。 */
   DstIp?: string;
-  /** 目标端口，支持范围为：[1024-65535]。该参数和 DstIp 参数，两者必传一个。 */
+  /** 目标端口，支持范围为：[1024-65535]。 */
   DstPort?: number;
   /** 私有网络统一 ID。 */
   UniqVpcId?: string;
@@ -4993,13 +4993,13 @@ declare interface ModifyRoGroupInfoResponse {
 }
 
 declare interface ModifyTimeWindowRequest {
-  /** 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
+  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
   /** 修改后的可维护时间段，其中每一个时间段的格式形如：10:00-12:00；起止时间按半个小时对齐；最短半个小时，最长三个小时；最多设置两个时间段；起止时间范围为：[00:00, 24:00]。说明：设置两个时间段的 json 示例如下。[ "01:00-01:30", "02:00-02:30" ] */
   TimeRanges: string[];
   /** 指定修改哪一天的可维护时间段，可能的取值为：monday，tuesday，wednesday，thursday，friday，saturday，sunday。如果不指定该值或者为空，则默认一周七天都修改。说明：指定修改多天的 json 示例如下。[ "monday", "tuesday" ] */
   Weekdays?: string[];
-  /** 数据延迟阈值，仅对主实例和灾备实例有效，不传默认修改为10 */
+  /** 数据延迟阈值（秒），仅对主实例和灾备实例有效。不传默认不修改，保持原来的阈值，取值范围：1-10的整数。 */
   MaxDelayTime?: number;
 }
 
@@ -5205,7 +5205,7 @@ declare interface StartCpuExpandResponse {
 }
 
 declare interface StartReplicationRequest {
-  /** 实例 ID。仅支持只读实例。 */
+  /** 实例 ID。仅支持只读实例。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
 }
 
@@ -5217,12 +5217,12 @@ declare interface StartReplicationResponse {
 }
 
 declare interface StopCpuExpandRequest {
-  /** 实例 ID 。 */
+  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
 }
 
 declare interface StopCpuExpandResponse {
-  /** 异步任务 ID 。可以调用DescribeAsyncRequest 传入该 ID ，进行任务执行进度的查询 */
+  /** 异步任务 ID。在调用 [DescribeAsyncRequestInfo](https://cloud.tencent.com/document/api/236/20410) 进行任务执行进度的查询时，可以传入该 ID。 */
   AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -5239,7 +5239,7 @@ declare interface StopDBImportJobResponse {
 }
 
 declare interface StopReplicationRequest {
-  /** 实例 ID。仅支持只读实例。 */
+  /** 实例 ID。仅支持只读实例。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
 }
 

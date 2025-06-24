@@ -176,6 +176,8 @@ declare interface ApmInstanceDetail {
   LogIndexType?: number;
   /** traceId的索引key: 当CLS索引类型为键值索引时生效 */
   LogTraceIdKey?: string;
+  /** 业务系统鉴权 token */
+  Token?: string;
 }
 
 /** 指标列表单元 */

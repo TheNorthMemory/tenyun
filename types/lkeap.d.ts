@@ -646,28 +646,6 @@ declare interface ReconstructDocumentSSEResponse {
   RequestId?: string;
 }
 
-declare interface RetrieveKnowledgeRealtimeRequest {
-  /** 知识库ID。 */
-  KnowledgeBaseId: string;
-  /** 用于检索的文本。 */
-  Query: string;
-  /** 实时文件ID列表。 */
-  DocIds?: string[];
-  /** 检索方法，默认使用`HYBRID`混合检索。- `SEMANTIC`：语义检索- `FULL_TEXT`：全文检索- `HYBRID`：混合检索 */
-  RetrievalMethod?: string;
-  /** 检索设置。 */
-  RetrievalSetting?: RetrievalSetting;
-}
-
-declare interface RetrieveKnowledgeRealtimeResponse {
-  /** 检索结果 */
-  Records?: RetrievalRecord[];
-  /** 检索结果数量 */
-  TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface RetrieveKnowledgeRequest {
   /** 知识库ID。 */
   KnowledgeBaseId: string;
@@ -783,8 +761,6 @@ declare interface Lkeap {
   ReconstructDocumentSSE(data: ReconstructDocumentSSERequest, config?: AxiosRequestConfig): AxiosPromise<ReconstructDocumentSSEResponse>;
   /** 检索知识库内容 {@link RetrieveKnowledgeRequest} {@link RetrieveKnowledgeResponse} */
   RetrieveKnowledge(data: RetrieveKnowledgeRequest, config?: AxiosRequestConfig): AxiosPromise<RetrieveKnowledgeResponse>;
-  /** 实时检索知识库内容 {@link RetrieveKnowledgeRealtimeRequest} {@link RetrieveKnowledgeRealtimeResponse} */
-  RetrieveKnowledgeRealtime(data: RetrieveKnowledgeRealtimeRequest, config?: AxiosRequestConfig): AxiosPromise<RetrieveKnowledgeRealtimeResponse>;
   /** 重排序 {@link RunRerankRequest} {@link RunRerankResponse} */
   RunRerank(data: RunRerankRequest, config?: AxiosRequestConfig): AxiosPromise<RunRerankResponse>;
   /** 上传文档 {@link UploadDocRequest} {@link UploadDocResponse} */

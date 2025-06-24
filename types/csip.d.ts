@@ -384,6 +384,38 @@ declare interface AssetInstanceTypeMap {
   InstanceTypeList?: FilterDataObject[];
 }
 
+/** 资产视角风险项 */
+declare interface AssetRiskItem {
+  /** 租户ID */
+  AppId?: number;
+  /** 云厂商 */
+  Provider?: string;
+  /** 云厂商名称 */
+  ProviderName?: string;
+  /** 云账号名称 */
+  CloudAccountName?: string;
+  /** 云账号ID */
+  CloudAccountId?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 首次发现时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 风险状态 */
+  RiskStatus?: number;
+  /** 风险名称 */
+  RiskTitle?: string;
+  /** 检查类型 */
+  CheckType?: string;
+  /** 风险等级 */
+  Severity?: string;
+  /** 风险规则ID */
+  RiskRuleId?: string;
+}
+
 /** 安全中心资产标签 */
 declare interface AssetTag {
   /** 标签的key值,可以是字母、数字、下划线 */
@@ -688,6 +720,14 @@ declare interface AssetViewWeakPassRisk {
   Port?: number;
 }
 
+/** 通用的下拉框列表 */
+declare interface AttributeOptionSet {
+  /** cvm实例类型 */
+  Text?: string;
+  /** cvm实例名称 */
+  Value?: string;
+}
+
 /** 漏洞详细信息 */
 declare interface BugInfoDetail {
   /** 漏洞编号 */
@@ -730,6 +770,44 @@ declare interface BugInfoDetail {
   UpdateTime?: string;
   /** 漏洞子类别 */
   SubCategory?: string;
+}
+
+/** 配置视角的配置风险对象 */
+declare interface CFGViewCFGRisk {
+  /** 影响资产 */
+  NoHandleCount?: number;
+  /** 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。 */
+  Level?: string;
+  /** 最近识别时间 */
+  RecentTime?: string;
+  /** 首次识别时间 */
+  FirstTime?: string;
+  /** 状态，0未处理、1已处置、2已忽略 */
+  AffectAssetCount?: number;
+  /** 资产唯一id */
+  Id?: string;
+  /** 资产子类型 */
+  From?: string;
+  /** 前端索引 */
+  Index?: string;
+  /** 用户appid */
+  AppId?: string;
+  /** 用户昵称 */
+  Nick?: string | null;
+  /** 用户uin */
+  Uin?: string | null;
+  /** 配置名 */
+  CFGName?: string | null;
+  /** 检查类型 */
+  CheckType?: string | null;
+  /** - */
+  CFGSTD?: string | null;
+  /** 描述 */
+  CFGDescribe?: string | null;
+  /** 修复建议 */
+  CFGFix?: string | null;
+  /** 帮助文档 */
+  CFGHelpURL?: string | null;
 }
 
 /** 主机资产信息主机防护状态枚举，左边是常量，右边是显示0：未安装1：基础版防护中2：普惠版防护中3：专业版防护中4：旗舰版防护中5：已离线6：已关机 */
@@ -870,6 +948,36 @@ declare interface CVMAssetVO {
   OfflineTime?: string;
 }
 
+/** 检查项视角风险 */
+declare interface CheckViewRiskItem {
+  /** 检查项规则ID */
+  RiskRuleId?: string;
+  /** 风险名称 */
+  RiskTitle?: string;
+  /** 检查类型 */
+  CheckType?: string;
+  /** 风险等级 */
+  Severity?: string;
+  /** 存在1个风险项 */
+  RiskDesc?: string;
+  /** 首次发现时间 */
+  CreateTime?: string;
+  /** 风险更新时间 */
+  UpdateTime?: string;
+  /** 云厂商 */
+  Provider?: string;
+  /** 风险状态 */
+  RiskStatus?: number;
+  /** 受影响资产数量 */
+  AssetCount?: number;
+  /** 风险数量 */
+  RiskCount?: number;
+  /** 资产类型 */
+  AssetType?: string;
+  /** 事件类型 */
+  EventType?: string;
+}
+
 /** clb实例和监听器信息 */
 declare interface ClbListenerListInfo {
   /** 监听器id */
@@ -908,6 +1016,44 @@ declare interface CloudCountDesc {
   CloudCount?: number;
   /** 该云账号类型描述 */
   CloudDesc?: string;
+}
+
+/** 风险中心风险概览统计数据 */
+declare interface CsipRiskCenterStatistics {
+  /** 端口风险总数 */
+  PortTotal?: number;
+  /** 端口风险高危数量 */
+  PortHighLevel?: number;
+  /** 弱口令风险总数 */
+  WeakPasswordTotal?: number;
+  /** 弱口令风险高危数量 */
+  WeakPasswordHighLevel?: number;
+  /** 网站风险数量 */
+  WebsiteTotal?: number;
+  /** 网站高危风险数量 */
+  WebsiteHighLevel?: number;
+  /** 最新的扫描时间 */
+  LastScanTime?: string;
+  /** 漏洞风险数 */
+  VULTotal?: number;
+  /** 高危漏洞风险数 */
+  VULHighLevel?: number;
+  /** 配置项风险数量 */
+  CFGTotal?: number;
+  /** 高危配置项风险数量 */
+  CFGHighLevel?: number;
+  /** 测绘服务风险数量 */
+  ServerTotal?: number | null;
+  /** 测绘服务高危数量 */
+  ServerHighLevel?: number | null;
+  /** 主机基线风险数量 */
+  HostBaseLineRiskTotal?: number;
+  /** 主机基线高危风险数量 */
+  HostBaseLineRiskHighLevel?: number;
+  /** 容器基线风险数量 */
+  PodBaseLineRiskTotal?: number;
+  /** 容器基线高危风险数量 */
+  PodBaseLineRiskHighLevel?: number;
 }
 
 /** db资产输出字段 */
@@ -1098,6 +1244,18 @@ declare interface Element {
   Key?: string;
   /** 统计对象 */
   Value?: string;
+}
+
+/** 暴露资产分类 */
+declare interface ExposeAssetTypeItem {
+  /** 云厂商 */
+  Provider?: string;
+  /** 云厂商名称 */
+  ProviderName?: string;
+  /** 资产类型 */
+  AssetType?: string;
+  /** 资产类型名称 */
+  AssetTypeName?: string;
 }
 
 /** 暴露资产 */
@@ -1620,6 +1778,48 @@ declare interface ReportTaskIdList {
   AppId?: string;
 }
 
+/** 仓库镜像列表 */
+declare interface RepositoryImageVO {
+  /** 用户appid */
+  AppId?: number | null;
+  /** 用户uin */
+  Uin?: string | null;
+  /** 昵称 */
+  NickName?: string | null;
+  /** 镜像id */
+  InstanceId?: string | null;
+  /** 镜像名称 */
+  InstanceName?: string | null;
+  /** 镜像创建时间 */
+  InstanceCreateTime?: string | null;
+  /** 镜像大小带单位 */
+  InstanceSize?: string | null;
+  /** 构建次数 */
+  BuildCount?: number | null;
+  /** 镜像类型 */
+  InstanceType?: string | null;
+  /** 授权状态 */
+  AuthStatus?: number | null;
+  /** 镜像版本 */
+  InstanceVersion?: string | null;
+  /** 地域 */
+  Region?: string | null;
+  /** 仓库地址 */
+  RepositoryUrl?: string | null;
+  /** 仓库名称 */
+  RepositoryName?: string | null;
+  /** 是否核心 */
+  IsCore?: number | null;
+  /** 漏洞风险 */
+  VulRisk?: number | null;
+  /** 检查任务 */
+  CheckCount?: number | null;
+  /** 体检时间 */
+  CheckTime?: string | null;
+  /** 是否新资产 1新 */
+  IsNewAsset?: number | null;
+}
+
 /** 风险中心状态处理Key */
 declare interface RiskCenterStatusKey {
   /** 风险ID */
@@ -1630,6 +1830,56 @@ declare interface RiskCenterStatusKey {
   InstanceId?: string;
   /** APP ID */
   AppId?: string;
+}
+
+/** 风险详情 */
+declare interface RiskDetailItem {
+  /** 首次发现时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 风险状态 */
+  RiskStatus?: number;
+  /** 风险内容 */
+  RiskContent?: string;
+  /** 云厂商 */
+  Provider?: string;
+  /** 云厂商名称 */
+  ProviderName?: string;
+  /** 云账号 */
+  CloudAccountId?: string;
+  /** 云账号名称 */
+  CloudAccountName?: string;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 风险ID */
+  RiskId?: number;
+  /** 风险规则ID */
+  RiskRuleId?: string;
+  /** 风险验证状态 */
+  CheckStatus?: string;
+}
+
+/** 风险规则 */
+declare interface RiskRuleItem {
+  /** 风险检查项ID */
+  ItemId?: string;
+  /** 云厂商名称 */
+  Provider?: string;
+  /** 实例类型 */
+  InstanceType?: string;
+  /** 实例类型名称 */
+  InstanceName?: string;
+  /** 风险名称 */
+  RiskTitle?: string;
+  /** 检查类型 */
+  CheckType?: string;
+  /** 风险等级 */
+  Severity?: string;
+  /** 风险危害 */
+  RiskInfluence?: string;
 }
 
 /** 告警数据攻击者或受害者信息 */
@@ -2158,6 +2408,70 @@ declare interface UebaRule {
   CloudType?: number;
 }
 
+/** 应急漏洞基本数据 */
+declare interface VULBaseInfo {
+  /** 风险等级high 高危/ middle 中危 / low 低危 /info 提示 */
+  Level?: string;
+  /** 组件 */
+  Component?: string;
+  /** 漏洞发布时间 */
+  PublishTime?: string;
+  /** 最近扫描时间 */
+  LastScanTime?: string;
+  /** 影响资产数量 */
+  AffectAssetCount?: number;
+  /** 风险ID */
+  RiskId?: string;
+  /** 漏洞类型 */
+  VULType?: string;
+  /** 漏洞名 */
+  VULName?: string;
+  /** cve */
+  CVE?: string;
+  /** 描述 */
+  Describe?: string;
+  /** 漏洞payload */
+  Payload?: string;
+  /** 漏洞影响组件 */
+  AppName?: string;
+  /** 技术参考 */
+  References?: string;
+  /** 漏洞影响版本 */
+  AppVersion?: string;
+  /** 风险点 */
+  VULURL?: string;
+  /** 用户昵称 */
+  Nick?: string | null;
+  /** 用户appid */
+  AppId?: string;
+  /** 用户uin */
+  Uin?: string | null;
+  /** 修复建议 */
+  Fix?: string | null;
+  /** 应急漏洞类型，1-应急漏洞，0-非应急漏洞 */
+  EMGCVulType?: number | null;
+  /** CVSS评分 */
+  CVSS?: number | null;
+  /** 攻击热度0/1/2/3 */
+  AttackHeat?: number | null;
+  /** 检测状态 0 未扫描 1扫描中 2 扫描完成 */
+  ScanStatus?: number | null;
+  /** 1/0是否必修 */
+  IsSuggest?: number | null;
+  /** 标签 */
+  VulTag?: string[] | null;
+  /** 支持产品 逗号分隔 "cfw_waf_virtual", "cwp_detect", "cwp_defense", "cwp_fix" */
+  SupportProduct?: string | null;
+  /** 漏洞检测任务id */
+  TaskId?: string | null;
+  /** 主键 */
+  Index?: string | null;
+  /** 漏洞id 旧版 */
+  PcmgrID?: string | null;
+  /** 漏洞id 新版 */
+  TvdID?: string | null;
+}
+
 /** 漏洞风险高级配置列表 */
 declare interface VULRiskAdvanceCFGList {
   /** 风险ID */
@@ -2627,6 +2941,30 @@ declare interface DescribeAlertListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAssetRiskListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤内容 */
+  Filters?: Filters[];
+  /** 分页大小 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+  /** 排序类型 */
+  Order?: string;
+  /** 排序字段 */
+  By?: string;
+}
+
+declare interface DescribeAssetRiskListResponse {
+  /** 资产视角下风险数量 */
+  TotalCount?: number;
+  /** 资产视角下风险列表 */
+  AssetRiskList?: AssetRiskItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAssetViewVulRiskListRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -2687,6 +3025,20 @@ declare interface DescribeCFWAssetStatisticsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCSIPRiskStatisticsRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤内容 */
+  Filter?: Filter;
+}
+
+declare interface DescribeCSIPRiskStatisticsResponse {
+  /** 资产概况数据 */
+  Data?: CsipRiskCenterStatistics;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCVMAssetInfoRequest {
   /** 资产id */
   AssetId: string;
@@ -2735,6 +3087,30 @@ declare interface DescribeCVMAssetsResponse {
   PublicPrivateAttr?: FilterDataObject[];
   /** 主机防护状态 */
   ProtectStatusList?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCheckViewRisksRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤内容 */
+  Filters?: Filters[];
+  /** 分页大小 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+  /** 排序类型 */
+  Order?: string;
+  /** 排序字段 */
+  By?: string;
+}
+
+declare interface DescribeCheckViewRisksResponse {
+  /** 检查视角下风险数量 */
+  TotalCount?: number;
+  /** 检查视角下风险列表 */
+  CheckViewRiskList?: CheckViewRiskItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2855,6 +3231,38 @@ declare interface DescribeDomainAssetsResponse {
   SourceTypeList?: FilterDataObject[];
   /** 地域列表 */
   RegionList?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeExposeAssetCategoryRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeExposeAssetCategoryResponse {
+  /** 暴露资产分类列表 */
+  ExposeAssetTypeList?: ExposeAssetTypeItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeExposePathRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 资产ID */
+  AssetId?: string;
+  /** 资产IP */
+  Ip?: string;
+  /** 资产域名 */
+  Domain?: string;
+  /** 端口或端口范围 */
+  Port?: string;
+}
+
+declare interface DescribeExposePathResponse {
+  /** 暴露路径节点内容 */
+  Content?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2983,6 +3391,30 @@ declare interface DescribeOrganizationUserInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeOtherCloudAssetsRequest {
+  /** - */
+  Filter?: Filter;
+  /** 资产类型:MYSQL/MARIADB/REDIS/MONGODB/POSTGRES/CTS/ES/KAFKA/COS/CBS/CFS */
+  AssetTypes?: string[];
+}
+
+declare interface DescribeOtherCloudAssetsResponse {
+  /** 总数 */
+  Total?: number | null;
+  /** 资产总数 */
+  Data?: DBAssetVO[] | null;
+  /** 地域枚举 */
+  RegionList?: FilterDataObject[] | null;
+  /** 资产类型枚举 */
+  AssetTypeList?: FilterDataObject[] | null;
+  /** Vpc枚举 */
+  VpcList?: FilterDataObject[] | null;
+  /** Appid枚举 */
+  AppIdList?: FilterDataObject[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePublicIpAssetsRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -3009,6 +3441,22 @@ declare interface DescribePublicIpAssetsResponse {
   AssetTypeList?: FilterDataObject[];
   /** AppId枚举 */
   AppIdList?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRepositoryImageAssetsRequest {
+  /** filter过滤条件 */
+  Filter?: Filter;
+}
+
+declare interface DescribeRepositoryImageAssetsResponse {
+  /** 仓库镜像列表 */
+  Data?: RepositoryImageVO[] | null;
+  /** 总数 */
+  Total?: number;
+  /** region列表 */
+  RegionList?: FilterDataObject[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3127,6 +3575,32 @@ declare interface DescribeRiskCenterAssetViewWeakPasswordRiskListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRiskCenterCFGViewCFGRiskListRequest {
+  /** 过滤内容 */
+  Filter?: Filter;
+}
+
+declare interface DescribeRiskCenterCFGViewCFGRiskListResponse {
+  /** 总条数 */
+  TotalCount?: number;
+  /** 资产视角的配置风险列表 */
+  Data?: CFGViewCFGRisk[];
+  /** 状态列表 */
+  StatusLists?: FilterDataObject[];
+  /** 危险等级列表 */
+  LevelLists?: FilterDataObject[];
+  /** 配置名列表 */
+  CFGNameLists?: FilterDataObject[];
+  /** 检查类型列表 */
+  CheckTypeLists?: FilterDataObject[];
+  /** 资产类型列表 */
+  InstanceTypeLists?: FilterDataObject[];
+  /** 来源列表 */
+  FromLists?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRiskCenterPortViewPortRiskListRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -3221,6 +3695,80 @@ declare interface DescribeRiskCenterWebsiteRiskListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRiskDetailListRequest {
+  /** 风险规则ID */
+  RiskRuleId: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤内容 */
+  Filters?: Filters[];
+  /** 分页大小 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+  /** 排序类型 */
+  Order?: string;
+  /** 排序字段 */
+  By?: string;
+  /** 实例ID */
+  InstanceId?: string;
+}
+
+declare interface DescribeRiskDetailListResponse {
+  /** 资产视角下风险详情数量 */
+  TotalCount?: number;
+  /** 资产视角下风险详情列表 */
+  AssetRiskDetailList?: RiskDetailItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRiskRuleDetailRequest {
+  /** 风险规则ID */
+  RiskRuleId: string;
+}
+
+declare interface DescribeRiskRuleDetailResponse {
+  /** 风险规则ID */
+  RiskRuleId?: string | null;
+  /** 云厂商 */
+  Provider?: string;
+  /** 风险名称 */
+  RiskName?: string;
+  /** 风险危害 */
+  RiskInfluence?: string;
+  /** 修复指引 */
+  RiskFixAdvice?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRiskRulesRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤内容 */
+  Filters?: Filters[];
+  /** 分页大小 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+  /** 排序类型 */
+  Order?: string;
+  /** 排序字段 */
+  By?: string;
+}
+
+declare interface DescribeRiskRulesResponse {
+  /** 风险规则数量 */
+  TotalCount?: number;
+  /** 风险规则列表 */
+  RiskRuleList?: RiskRuleItem[];
+  /** 实例类型选项 */
+  InstanceTypeList?: AttributeOptionSet[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeScanReportListRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -3235,6 +3783,34 @@ declare interface DescribeScanReportListResponse {
   Data?: ScanTaskInfo[];
   /** 主账户ID列表 */
   UINList?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeScanStatisticRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 体检任务id */
+  TaskLogId?: string;
+}
+
+declare interface DescribeScanStatisticResponse {
+  /** 端口服务数量 */
+  PortServiceCount?: number;
+  /** Web服务数量 */
+  WebAppCount?: number;
+  /** 弱口令风险数量 */
+  WeakPasswordCount?: number;
+  /** 漏洞风险数量 */
+  VulCount?: number;
+  /** 高危端口服务数量 */
+  HighRiskPortServiceCount?: number;
+  /** 风险Web服务数量 */
+  RiskWebAppCount?: number;
+  /** 端口服务近7天新增数量 */
+  PortServiceIncrement?: number;
+  /** Web服务近7天新增数量 */
+  WebAppIncrement?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3399,6 +3975,34 @@ declare interface DescribeUebaRuleResponse {
   Data?: UebaRule[];
   /** 自定义策略对应的告警类别枚举 */
   AlterType?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVULListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 查询条件 */
+  Filter?: Filter;
+}
+
+declare interface DescribeVULListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 漏洞列表 */
+  Data?: VULBaseInfo[];
+  /** 漏洞类型列表 */
+  VULTypeLists?: FilterDataObject[];
+  /** 风险等级列表 */
+  RiskLevels?: FilterDataObject[];
+  /** 标签 */
+  Tags?: FilterDataObject[];
+  /** 产品支持情况 */
+  ProductSupport?: FilterDataObject[];
+  /** 产品支持情况 */
+  CheckStatus?: FilterDataObject[];
+  /** 攻击热度枚举 */
+  AttackHeat?: FilterDataObject[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3636,14 +4240,20 @@ declare interface Csip {
   DeleteRiskScanTask(data: DeleteRiskScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRiskScanTaskResponse>;
   /** 查询全量告警列表 {@link DescribeAlertListRequest} {@link DescribeAlertListResponse} */
   DescribeAlertList(data: DescribeAlertListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlertListResponse>;
+  /** 资产视角下的云资源配置风险列表 {@link DescribeAssetRiskListRequest} {@link DescribeAssetRiskListResponse} */
+  DescribeAssetRiskList(data?: DescribeAssetRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetRiskListResponse>;
   /** 漏洞管理-资产视角的漏洞风险列表 {@link DescribeAssetViewVulRiskListRequest} {@link DescribeAssetViewVulRiskListResponse} */
   DescribeAssetViewVulRiskList(data?: DescribeAssetViewVulRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetViewVulRiskListResponse>;
   /** 云防资产中心统计数据 {@link DescribeCFWAssetStatisticsRequest} {@link DescribeCFWAssetStatisticsResponse} */
   DescribeCFWAssetStatistics(data?: DescribeCFWAssetStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCFWAssetStatisticsResponse>;
+  /** 资产风险概览统计接口 {@link DescribeCSIPRiskStatisticsRequest} {@link DescribeCSIPRiskStatisticsResponse} */
+  DescribeCSIPRiskStatistics(data?: DescribeCSIPRiskStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCSIPRiskStatisticsResponse>;
   /** cvm详情 {@link DescribeCVMAssetInfoRequest} {@link DescribeCVMAssetInfoResponse} */
   DescribeCVMAssetInfo(data: DescribeCVMAssetInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCVMAssetInfoResponse>;
   /** cvm列表 {@link DescribeCVMAssetsRequest} {@link DescribeCVMAssetsResponse} */
   DescribeCVMAssets(data?: DescribeCVMAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCVMAssetsResponse>;
+  /** 检查项视角风险列表 {@link DescribeCheckViewRisksRequest} {@link DescribeCheckViewRisksResponse} */
+  DescribeCheckViewRisks(data?: DescribeCheckViewRisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCheckViewRisksResponse>;
   /** 集群列表 {@link DescribeClusterAssetsRequest} {@link DescribeClusterAssetsResponse} */
   DescribeClusterAssets(data?: DescribeClusterAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterAssetsResponse>;
   /** 集群pod列表 {@link DescribeClusterPodAssetsRequest} {@link DescribeClusterPodAssetsResponse} */
@@ -3654,6 +4264,10 @@ declare interface Csip {
   DescribeDbAssets(data?: DescribeDbAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDbAssetsResponse>;
   /** 域名列表 {@link DescribeDomainAssetsRequest} {@link DescribeDomainAssetsResponse} */
   DescribeDomainAssets(data?: DescribeDomainAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainAssetsResponse>;
+  /** 查询当前账号下暴露资产分类 {@link DescribeExposeAssetCategoryRequest} {@link DescribeExposeAssetCategoryResponse} */
+  DescribeExposeAssetCategory(data?: DescribeExposeAssetCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExposeAssetCategoryResponse>;
+  /** 查询暴露路径节点 {@link DescribeExposePathRequest} {@link DescribeExposePathResponse} */
+  DescribeExposePath(data?: DescribeExposePathRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExposePathResponse>;
   /** 查询互联网暴露资产列表 {@link DescribeExposuresRequest} {@link DescribeExposuresResponse} */
   DescribeExposures(data?: DescribeExposuresRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExposuresResponse>;
   /** 网关列表 {@link DescribeGatewayAssetsRequest} {@link DescribeGatewayAssetsResponse} */
@@ -3666,8 +4280,12 @@ declare interface Csip {
   DescribeOrganizationInfo(data?: DescribeOrganizationInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationInfoResponse>;
   /** 查询集团账号用户列表 {@link DescribeOrganizationUserInfoRequest} {@link DescribeOrganizationUserInfoResponse} */
   DescribeOrganizationUserInfo(data?: DescribeOrganizationUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationUserInfoResponse>;
+  /** 资产列表 {@link DescribeOtherCloudAssetsRequest} {@link DescribeOtherCloudAssetsResponse} */
+  DescribeOtherCloudAssets(data?: DescribeOtherCloudAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOtherCloudAssetsResponse>;
   /** 公网列表 {@link DescribePublicIpAssetsRequest} {@link DescribePublicIpAssetsResponse} */
   DescribePublicIpAssets(data?: DescribePublicIpAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicIpAssetsResponse>;
+  /** 仓库镜像列表 {@link DescribeRepositoryImageAssetsRequest} {@link DescribeRepositoryImageAssetsResponse} */
+  DescribeRepositoryImageAssets(data?: DescribeRepositoryImageAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoryImageAssetsResponse>;
   /** 获取资产视角的配置风险列表 {@link DescribeRiskCenterAssetViewCFGRiskListRequest} {@link DescribeRiskCenterAssetViewCFGRiskListResponse} */
   DescribeRiskCenterAssetViewCFGRiskList(data?: DescribeRiskCenterAssetViewCFGRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterAssetViewCFGRiskListResponse>;
   /** 获取资产视角的端口风险列表 {@link DescribeRiskCenterAssetViewPortRiskListRequest} {@link DescribeRiskCenterAssetViewPortRiskListResponse} */
@@ -3676,6 +4294,8 @@ declare interface Csip {
   DescribeRiskCenterAssetViewVULRiskList(data?: DescribeRiskCenterAssetViewVULRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterAssetViewVULRiskListResponse>;
   /** 获取资产视角的弱口令风险列表 {@link DescribeRiskCenterAssetViewWeakPasswordRiskListRequest} {@link DescribeRiskCenterAssetViewWeakPasswordRiskListResponse} */
   DescribeRiskCenterAssetViewWeakPasswordRiskList(data?: DescribeRiskCenterAssetViewWeakPasswordRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterAssetViewWeakPasswordRiskListResponse>;
+  /** 获取配置视角的配置风险列表 {@link DescribeRiskCenterCFGViewCFGRiskListRequest} {@link DescribeRiskCenterCFGViewCFGRiskListResponse} */
+  DescribeRiskCenterCFGViewCFGRiskList(data?: DescribeRiskCenterCFGViewCFGRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterCFGViewCFGRiskListResponse>;
   /** 获取端口视角的端口风险列表 {@link DescribeRiskCenterPortViewPortRiskListRequest} {@link DescribeRiskCenterPortViewPortRiskListResponse} */
   DescribeRiskCenterPortViewPortRiskList(data?: DescribeRiskCenterPortViewPortRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterPortViewPortRiskListResponse>;
   /** 获取风险服务列表 {@link DescribeRiskCenterServerRiskListRequest} {@link DescribeRiskCenterServerRiskListResponse} */
@@ -3684,8 +4304,16 @@ declare interface Csip {
   DescribeRiskCenterVULViewVULRiskList(data?: DescribeRiskCenterVULViewVULRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterVULViewVULRiskListResponse>;
   /** 获取内容风险列表 {@link DescribeRiskCenterWebsiteRiskListRequest} {@link DescribeRiskCenterWebsiteRiskListResponse} */
   DescribeRiskCenterWebsiteRiskList(data?: DescribeRiskCenterWebsiteRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterWebsiteRiskListResponse>;
+  /** 云配置风险详情列表 {@link DescribeRiskDetailListRequest} {@link DescribeRiskDetailListResponse} */
+  DescribeRiskDetailList(data: DescribeRiskDetailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskDetailListResponse>;
+  /** 云配置风险规则详情 {@link DescribeRiskRuleDetailRequest} {@link DescribeRiskRuleDetailResponse} */
+  DescribeRiskRuleDetail(data: DescribeRiskRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskRuleDetailResponse>;
+  /** 高级配置风险规则列表 {@link DescribeRiskRulesRequest} {@link DescribeRiskRulesResponse} */
+  DescribeRiskRules(data?: DescribeRiskRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskRulesResponse>;
   /** 获取扫描报告列表 {@link DescribeScanReportListRequest} {@link DescribeScanReportListResponse} */
   DescribeScanReportList(data?: DescribeScanReportListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanReportListResponse>;
+  /** 查询暴露面扫描结果统计信息 {@link DescribeScanStatisticRequest} {@link DescribeScanStatisticResponse} */
+  DescribeScanStatistic(data?: DescribeScanStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanStatisticResponse>;
   /** 获取扫描任务列表 {@link DescribeScanTaskListRequest} {@link DescribeScanTaskListResponse} */
   DescribeScanTaskList(data?: DescribeScanTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanTaskListResponse>;
   /** 查询漏洞信息 {@link DescribeSearchBugInfoRequest} {@link DescribeSearchBugInfoResponse} */
@@ -3702,6 +4330,8 @@ declare interface Csip {
   DescribeTopAttackInfo(data: DescribeTopAttackInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopAttackInfoResponse>;
   /** 查询用户行为分析策略列表 {@link DescribeUebaRuleRequest} {@link DescribeUebaRuleResponse} */
   DescribeUebaRule(data?: DescribeUebaRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUebaRuleResponse>;
+  /** 风险中心-漏洞列表 {@link DescribeVULListRequest} {@link DescribeVULListResponse} */
+  DescribeVULList(data?: DescribeVULListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVULListResponse>;
   /** 查询漏洞风险高级配置 {@link DescribeVULRiskAdvanceCFGListRequest} {@link DescribeVULRiskAdvanceCFGListResponse} */
   DescribeVULRiskAdvanceCFGList(data?: DescribeVULRiskAdvanceCFGListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVULRiskAdvanceCFGListResponse>;
   /** 漏洞管理-漏洞详情 {@link DescribeVULRiskDetailRequest} {@link DescribeVULRiskDetailResponse} */

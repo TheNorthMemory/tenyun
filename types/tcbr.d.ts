@@ -240,6 +240,8 @@ declare interface ServerBaseConfig {
   EntryPoint?: string[];
   /** Dockerfile Cmd 参数 */
   Cmd?: string[];
+  /** 会话亲和性开关 */
+  SessionAffinity?: string | null;
 }
 
 /** 服务基本信息 */

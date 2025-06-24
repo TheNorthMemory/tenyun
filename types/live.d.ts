@@ -1095,19 +1095,19 @@ declare interface PullStreamTaskInfo {
   /** 任务备注信息。 */
   Comment?: string;
   /** 备源类型：PullLivePushLive -直播，PullVodPushLive -点播。 */
-  BackupSourceType?: string | null;
+  BackupSourceType?: string;
   /** 备源URL。 */
-  BackupSourceUrl?: string | null;
+  BackupSourceUrl?: string;
   /** 水印信息列表。 */
-  WatermarkList?: PullPushWatermarkInfo[] | null;
+  WatermarkList?: PullPushWatermarkInfo[];
   /** 点播源是否启用本地推流模式，默认0，不启用。0 - 不启用。1 - 启用。 */
-  VodLocalMode?: number | null;
+  VodLocalMode?: number;
   /** 录制模板 ID。 */
-  RecordTemplateId?: string | null;
+  RecordTemplateId?: string;
   /** 新增的推流地址。用于单任务推两路场景。 */
-  BackupToUrl?: string | null;
+  BackupToUrl?: string;
   /** 直播转码模板。 */
-  TranscodeTemplateName?: string | null;
+  TranscodeTemplateName?: string;
 }
 
 /** 推流鉴权key信息。 */
@@ -3466,20 +3466,6 @@ declare interface DescribeLivePackageInfoResponse {
   RequestId?: string;
 }
 
-declare interface DescribeLivePadProcessorListRequest {
-  /** 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。 */
-  AppName: string;
-  /** 您的推流域名。 */
-  PushDomainName: string;
-}
-
-declare interface DescribeLivePadProcessorListResponse {
-  /** 当前正在拉取垫片的流名称列表。 */
-  StreamNameList?: string[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeLivePadRulesRequest {
 }
 
@@ -5276,24 +5262,6 @@ declare interface StopCasterPvwResponse {
   RequestId?: string;
 }
 
-declare interface StopLivePadProcessorRequest {
-  /** 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。 */
-  AppName: string;
-  /** 您的推流域名。 */
-  PushDomainName: string;
-  /** 流名称。 */
-  StreamName: string;
-  /** 操作人备注信息。 */
-  Operator?: string;
-}
-
-declare interface StopLivePadProcessorResponse {
-  /** 处理结果信息。 */
-  ResultMessage?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface StopLivePadStreamRequest {
   /** 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。 */
   AppName: string;
@@ -5609,8 +5577,6 @@ declare interface Live {
   DescribeLiveForbidStreamList(data?: DescribeLiveForbidStreamListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveForbidStreamListResponse>;
   /** 查询直播套餐包信息 {@link DescribeLivePackageInfoRequest} {@link DescribeLivePackageInfoResponse} */
   DescribeLivePackageInfo(data: DescribeLivePackageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePackageInfoResponse>;
-  /** 查询垫片流列表 {@link DescribeLivePadProcessorListRequest} {@link DescribeLivePadProcessorListResponse} */
-  DescribeLivePadProcessorList(data: DescribeLivePadProcessorListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePadProcessorListResponse>;
   /** 获取直播垫片规则列表 {@link DescribeLivePadRulesRequest} {@link DescribeLivePadRulesResponse} */
   DescribeLivePadRules(data?: DescribeLivePadRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePadRulesResponse>;
   /** 查询直播中的垫片流列表 {@link DescribeLivePadStreamListRequest} {@link DescribeLivePadStreamListResponse} */
@@ -5791,8 +5757,6 @@ declare interface Live {
   StopCasterPgm(data: StopCasterPgmRequest, config?: AxiosRequestConfig): AxiosPromise<StopCasterPgmResponse>;
   /** 停止导播台预监任务 {@link StopCasterPvwRequest} {@link StopCasterPvwResponse} */
   StopCasterPvw(data: StopCasterPvwRequest, config?: AxiosRequestConfig): AxiosPromise<StopCasterPvwResponse>;
-  /** 停止垫片流 {@link StopLivePadProcessorRequest} {@link StopLivePadProcessorResponse} */
-  StopLivePadProcessor(data: StopLivePadProcessorRequest, config?: AxiosRequestConfig): AxiosPromise<StopLivePadProcessorResponse>;
   /** 停止切入垫片 {@link StopLivePadStreamRequest} {@link StopLivePadStreamResponse} */
   StopLivePadStream(data: StopLivePadStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StopLivePadStreamResponse>;
   /** 终止录制任务(已废弃,请使用新接口) {@link StopLiveRecordRequest} {@link StopLiveRecordResponse} */

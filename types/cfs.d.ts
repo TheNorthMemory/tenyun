@@ -501,6 +501,8 @@ declare interface CreateCfsFileSystemRequest {
   EnableAutoScaleUp?: boolean;
   /** v1.5：创建普通版的通用文件系统；v3.1：创建增强版的通用文件系统说明：增强版的通用系统需要开通白名单才能使用，如有需要请提交工单与我们联系。 */
   CfsVersion?: string;
+  /** turbo文件系统元数据属性basic：创建标准型的元数据enhanced：创建增强型的元数据 */
+  MetaType?: string;
 }
 
 declare interface CreateCfsFileSystemResponse {

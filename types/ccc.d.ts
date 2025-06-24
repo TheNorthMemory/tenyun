@@ -376,6 +376,28 @@ declare interface Filter {
   Values: string[] | null;
 }
 
+/** 呼转配置 */
+declare interface ForwardingConfig {
+  /** 是否启用 */
+  Enabled?: boolean;
+  /** 1 无条件呼转 2 有条件呼转 */
+  Condition?: number;
+  /** 呼转目标 */
+  Target?: ForwardingTarget;
+}
+
+/** 呼转目标 */
+declare interface ForwardingTarget {
+  /** 呼转目标类型 1 座席 2 技能组 3 分机 */
+  Type?: number;
+  /** 呼转目标为座席的账号 Type 为 1 时填写 */
+  StaffUserId?: string;
+  /** 呼转目标为技能组的 ID，Type 为 2 时填写 */
+  SkillGroupId?: number;
+  /** 呼转目标为分机的账号，Type 为 3 时填写 */
+  Extension?: string;
+}
+
 /** 文本会话服务记录信息 */
 declare interface IMCdrInfo {
   /** 服务记录ID */
@@ -708,7 +730,7 @@ declare interface StaffInfo {
   Nick?: string;
   /** 座席工号 */
   StaffNumber?: string;
-  /** 用户角色id一个用户绑定了多个角色时以RoleIdList为准 */
+  /** 用户角色 ID，一个用户绑定了多个角色时以RoleIdList为准 */
   RoleId?: number;
   /** 用户角色id列表 */
   RoleIdList?: number;
@@ -720,6 +742,8 @@ declare interface StaffInfo {
   LastModifyTimestamp?: number;
   /** 座席分机号（1 到 8 打头，4 - 6 位） */
   ExtensionNumber?: string;
+  /** 呼叫转移配置 */
+  ForwardingConfig?: ForwardingConfig;
 }
 
 /** 座席绑定技能组列表 */

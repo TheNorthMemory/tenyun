@@ -306,6 +306,16 @@ declare interface DeviceDetail {
   GroupNamePath?: string;
   /** 未修复高危漏洞数(只支持32位) */
   CriticalVulListCount?: number;
+  /** 操作系统名称 */
+  Os?: string;
+  /** 操作系统位数 */
+  OsBits?: number;
+  /** 操作系统版本 */
+  OsVersion?: string;
+  /** 操作系统语言 */
+  OsLanguage?: string;
+  /** 操作系统安装时间 */
+  OsInstallDate?: string;
   /** 设备名，和Name相同 */
   ComputerName?: string;
   /** 登录域名 */

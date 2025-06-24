@@ -4150,6 +4150,8 @@ declare interface InstanceAttributesResponse {
   CustomCertId?: string;
   /** 集群topic默认 unclean.leader.election.enable配置: 1 开启 0 关闭 */
   UncleanLeaderElectionEnable?: number;
+  /** 实例删除保护开关: 1 开启 0 关闭 */
+  DeleteProtectionEnable?: number;
 }
 
 declare interface InstanceDeleteResponse {
@@ -4339,6 +4341,8 @@ declare interface ModifyInstanceAttributesRequest {
   MaxMessageByte?: number;
   /** 集群topic默认 unclean.leader.election.enable配置: 1 开启 0 关闭 */
   UncleanLeaderElectionEnable?: number;
+  /** 实例删除保护开关: 1 开启 0 关闭 */
+  DeleteProtectionEnable?: number;
 }
 
 declare interface ModifyInstanceAttributesResponse {
