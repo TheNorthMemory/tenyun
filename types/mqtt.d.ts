@@ -252,6 +252,14 @@ declare interface MQTTInstanceItem {
   MaxCaNum?: number;
   /** 最大订阅数 */
   MaxSubscription?: number;
+  /** 共享订阅组数最大限制 */
+  SharedSubscriptionGroupLimit?: number;
+  /** 单个共享订阅组TopicFilter数限制 */
+  MaxTopicFilterPerSharedSubscriptionGroup?: number;
+  /** 自动订阅规则条数限制 */
+  AutoSubscriptionPolicyLimit?: number;
+  /** 单条自动订阅规则TopicFilter数限制 */
+  MaxTopicFilterPerAutoSubscriptionPolicy?: number;
 }
 
 /** MQTT消息 */
@@ -988,6 +996,14 @@ declare interface DescribeInstanceResponse {
   MaxSubscription?: number;
   /** 授权策略开关 */
   AuthorizationPolicy?: boolean;
+  /** 共享订阅组数最大限制 */
+  SharedSubscriptionGroupLimit?: number;
+  /** 单个共享订阅组TopicFilter数限制 */
+  MaxTopicFilterPerSharedSubscriptionGroup?: number;
+  /** 自动订阅规则条数限制 */
+  AutoSubscriptionPolicyLimit?: number;
+  /** 单条自动订阅规则TopicFilter数限制 */
+  MaxTopicFilterPerAutoSubscriptionPolicy?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

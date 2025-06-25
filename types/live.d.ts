@@ -5199,6 +5199,8 @@ declare interface SendLiveCloudEffectRequest {
   StreamName: string;
   /** 云端特效 ID。 */
   Id: string;
+  /** 默认随系统配置，云端特效循环 少于5次。可自定义指定礼物循环次数，不超过100次。 */
+  LoopTimes?: number;
   /** 操作人备注信息。 */
   Operator?: string;
   /** 缩小比例，默认0 不缩放。可选值：0-9， 值越大，越缩小。 */

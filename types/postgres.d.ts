@@ -1629,7 +1629,7 @@ declare interface DescribeBaseBackupsRequest {
   MinFinishTime?: string;
   /** 备份的最大结束时间，形如2018-01-01 00:00:00。默认为当前时间。 */
   MaxFinishTime?: string;
-  /** 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：db-instance-id：按照实例ID过滤，类型为string。db-instance-name：按照实例名过滤，类型为string。db-instance-ip：按照实例私有网络IP地址过滤，类型为string。base-backup-id：按照备份集ID过滤，类型为string。 */
+  /** 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：db-instance-id：按照实例ID过滤，类型为string。db-instance-name：按照实例名过滤，类型为string。db-instance-ip：按照实例私有网络IP地址过滤，类型为string。base-backup-id：按照备份集ID过滤，类型为string。db-instance-status：按实例状态过滤，类型为string。取值参考DBInstance结构的DBInstanceStatus字段。 */
   Filters?: Filter[];
   /** 每页显示数量，取值范围为1-100，默认为返回10条。 */
   Limit?: number;
@@ -1987,7 +1987,7 @@ declare interface DescribeLogBackupsRequest {
   MinFinishTime?: string;
   /** 备份的最大结束时间，形如2018-01-01 00:00:00。默认为当前时间。 */
   MaxFinishTime?: string;
-  /** 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：db-instance-id：按照实例ID过滤，类型为string。db-instance-name：按照实例名过滤，类型为string。db-instance-ip：按照实例私有网络IP地址过滤，类型为string。 */
+  /** 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：db-instance-id：按照实例ID过滤，类型为string。db-instance-name：按照实例名过滤，类型为string。db-instance-ip：按照实例私有网络IP地址过滤，类型为string。db-instance-status：按实例状态过滤，类型为string。取值参考DBInstance结构的DBInstanceStatus字段。 */
   Filters?: Filter[];
   /** 每页显示数量，取值范围为1-100，默认为返回10条。 */
   Limit?: number;

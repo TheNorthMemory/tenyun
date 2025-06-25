@@ -2278,6 +2278,32 @@ declare interface SoftDependInfo {
   Required: boolean;
 }
 
+/** spark任务列表 */
+declare interface SparkApplicationsList {
+  /** 应用id */
+  ID?: string;
+  /** 应用名称 */
+  Name?: string;
+  /** 用户 */
+  User?: string;
+  /** 起始时间 */
+  StartTime?: number;
+  /** 结束时间 */
+  EndTime?: number;
+  /** 持续时间 */
+  Duration?: number;
+  /** 状态 */
+  State?: string;
+  /** 类型 */
+  ApplicationType?: string;
+  /** 核数*秒 */
+  CoreSeconds?: number;
+  /** 内存MB*秒 */
+  MemorySeconds?: string;
+  /** 洞察结果 */
+  Insight?: string;
+}
+
 /** spark查询详情 */
 declare interface SparkQuery {
   /** 执行语句 */
@@ -3908,6 +3934,28 @@ declare interface DescribeServiceNodeInfosResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSparkApplicationsRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 查询开始时间 */
+  StartTime: number;
+  /** 查询结束时间 */
+  EndTime: number;
+  /** 每一页条数 */
+  PageSize: number;
+  /** 第几页 */
+  Page: number;
+}
+
+declare interface DescribeSparkApplicationsResponse {
+  /** 返回数量 */
+  TotalCount?: number;
+  /** spark应用列表 */
+  ResultList?: SparkApplicationsList[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSparkQueriesRequest {
   /** 集群ID */
   InstanceId: string;
@@ -4987,6 +5035,8 @@ declare interface Emr {
   DescribeSLInstanceList(data: DescribeSLInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSLInstanceListResponse>;
   /** 查询服务进程信息 {@link DescribeServiceNodeInfosRequest} {@link DescribeServiceNodeInfosResponse} */
   DescribeServiceNodeInfos(data: DescribeServiceNodeInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceNodeInfosResponse>;
+  /** 获取Spark任务列表 {@link DescribeSparkApplicationsRequest} {@link DescribeSparkApplicationsResponse} */
+  DescribeSparkApplications(data: DescribeSparkApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkApplicationsResponse>;
   /** 查询Spark查询列表 {@link DescribeSparkQueriesRequest} {@link DescribeSparkQueriesResponse} */
   DescribeSparkQueries(data: DescribeSparkQueriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkQueriesResponse>;
   /** 查询StarRocks查询信息 {@link DescribeStarRocksQueryInfoRequest} {@link DescribeStarRocksQueryInfoResponse} */

@@ -214,6 +214,8 @@ declare interface ChangePwdTaskInfo {
   FirstTime?: string;
   /** 下次执行时间 */
   NextTime?: string;
+  /** 上次执行时间 */
+  LastTime?: string;
 }
 
 /** 负载均衡 */

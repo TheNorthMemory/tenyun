@@ -3262,7 +3262,7 @@ declare interface DescribeExposePathRequest {
 
 declare interface DescribeExposePathResponse {
   /** 暴露路径节点内容 */
-  Content?: string | null;
+  Content?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3392,6 +3392,8 @@ declare interface DescribeOrganizationUserInfoResponse {
 }
 
 declare interface DescribeOtherCloudAssetsRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** - */
   Filter?: Filter;
   /** 资产类型:MYSQL/MARIADB/REDIS/MONGODB/POSTGRES/CTS/ES/KAFKA/COS/CBS/CFS */
@@ -3446,6 +3448,8 @@ declare interface DescribePublicIpAssetsResponse {
 }
 
 declare interface DescribeRepositoryImageAssetsRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** filter过滤条件 */
   Filter?: Filter;
 }
@@ -3576,6 +3580,8 @@ declare interface DescribeRiskCenterAssetViewWeakPasswordRiskListResponse {
 }
 
 declare interface DescribeRiskCenterCFGViewCFGRiskListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 过滤内容 */
   Filter?: Filter;
 }
@@ -3730,7 +3736,7 @@ declare interface DescribeRiskRuleDetailRequest {
 
 declare interface DescribeRiskRuleDetailResponse {
   /** 风险规则ID */
-  RiskRuleId?: string | null;
+  RiskRuleId?: string;
   /** 云厂商 */
   Provider?: string;
   /** 风险名称 */

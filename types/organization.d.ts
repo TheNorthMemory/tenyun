@@ -800,6 +800,8 @@ declare interface UserInfo {
   UpdateTime?: string;
   /** 是否选中 */
   IsSelected?: boolean;
+  /** 用户密码 */
+  Password?: string;
 }
 
 /** 用户同步信息 */

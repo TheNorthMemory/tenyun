@@ -681,6 +681,8 @@ declare interface DescribeAndroidInstanceAppsResponse {
 declare interface DescribeAndroidInstanceImagesRequest {
   /** 镜像 ID 列表 */
   AndroidInstanceImageIds?: string[];
+  /** 镜像可用区列表 */
+  AndroidInstanceImageZones?: string[];
   /** 偏移量，默认为0 */
   Offset?: number;
   /** 限制量，默认为20，最大值为100 */
