@@ -8112,6 +8112,8 @@ declare interface DescribeNewestVulResponse {
   Status?: string;
   /** 漏洞CVEID */
   CVEID?: string;
+  /** 漏洞是否支持防御 0:不支持 1:支持 */
+  SupportDefense?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

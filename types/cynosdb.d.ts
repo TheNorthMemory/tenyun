@@ -2743,6 +2743,10 @@ declare interface CreateClustersRequest {
   GdnId?: string;
   /** 数据库代理配置 */
   ProxyConfig?: ProxyConfig;
+  /** 是否自动归档 */
+  AutoArchive?: string;
+  /** 暂停后的归档处理时间 */
+  AutoArchiveDelayHours?: number;
 }
 
 declare interface CreateClustersResponse {
@@ -3751,6 +3755,8 @@ declare interface DescribeInstancesRequest {
   Status?: string;
   /** 实例id列表 */
   InstanceIds?: string[];
+  /** 集群类型，取值范围 CYNOSDB：事务集群 LIBRADB：分析集群 ALL：全部 ，缺省为 ALL */
+  ClusterType?: string;
 }
 
 declare interface DescribeInstancesResponse {

@@ -5482,6 +5482,10 @@ declare interface VulEmergentMsgInfo {
   Name?: string;
   /** 漏洞名,英文描述 */
   NameEn?: string;
+  /** 是否支持自动修复 0:不支持 >0: 支持 */
+  SupportFix?: number;
+  /** 是否支持自动防御 0:不支持 1:支持 */
+  SupportDefense?: number;
 }
 
 /** 查看漏洞修复详情 每台主机每个漏洞修复状态 */
@@ -9201,6 +9205,10 @@ declare interface DescribeJavaMemShellListRequest {
   Offset?: number;
   /** 需要返回的数量，默认为10，最大值为100 */
   Limit?: number;
+  /** 排序，大小写无关：asc 升序，desc降序 */
+  Order?: string;
+  /** 排序列，严格相等：最近检测时间RecentFoundTime */
+  By?: string;
 }
 
 declare interface DescribeJavaMemShellListResponse {
@@ -9338,6 +9346,10 @@ declare interface DescribeLicenseGeneralResponse {
   DestroyOrderNum?: number;
   /** 自动加购是否自动续费开关,true 开启,false 关闭 */
   RepurchaseRenewSwitch?: boolean;
+  /** 是否自动新增机器绑定rasp防护,false 关闭 true 开启 */
+  AutoBindRaspSwitch?: boolean;
+  /** 是否自动新增机器开启rasp防护,false 关闭 true 开启 */
+  AutoOpenRaspSwitch?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11848,6 +11860,8 @@ declare interface DescribeVulInfoCvssResponse {
   SuccessFixCount?: number;
   /** 修复是否支持：0-windows/linux均不支持修复 ;1-windows/linux 均支持修复 ;2-仅linux支持修复;3-仅windows支持修复 */
   FixSwitch?: number;
+  /** 是否支持防御： 0-不支持 1-支持 */
+  SupportDefence?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12891,6 +12905,10 @@ declare interface ExportJavaMemShellsRequest {
   Filters?: Filter[];
   /** 导出字段 */
   Where?: string[];
+  /** 排序，大小写无关：asc 升序，desc降序 */
+  Order?: string;
+  /** 排序列，严格相等：最近检测时间RecentFoundTime */
+  By?: string;
 }
 
 declare interface ExportJavaMemShellsResponse {
@@ -13381,6 +13399,10 @@ declare interface ModifyAutoOpenProVersionConfigRequest {
   AutoRepurchaseRenewSwitch?: number;
   /** 手动购买的订单是否自动续费,默认0, 0关闭 ,1 开启 */
   RepurchaseRenewSwitch?: number;
+  /** 新增机器自动绑定rasp,0 关闭 1开启 */
+  AutoBindRaspSwitch?: number;
+  /** 新增机器自动开启rasp防护,默认关闭,0 关闭 1开启 */
+  AutoOpenRaspSwitch?: number;
 }
 
 declare interface ModifyAutoOpenProVersionConfigResponse {

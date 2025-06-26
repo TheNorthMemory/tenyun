@@ -312,6 +312,8 @@ declare interface NodeActivity {
 
 /** 节点概览信息。 */
 declare interface NodeOverview {
+  /** 集群ID */
+  ClusterId?: string;
   /** 节点实例ID。 */
   InstanceId?: string | null;
   /** 节点所在可用区信息。 */
@@ -330,6 +332,10 @@ declare interface NodeOverview {
   NodeId?: string | null;
   /** 节点的工作状态 */
   NodeAllocateState?: string;
+  /** 节点的名称 */
+  NodeName?: string;
+  /** 节点的创建时间 */
+  CreateTime?: string;
 }
 
 /** 描述节点执行脚本信息。 */
@@ -759,7 +765,7 @@ declare interface CreateWorkspacesRequest {
   VirtualPrivateCloud?: SpaceVirtualPrivateCloud;
   /** 公网带宽相关信息设置 */
   InternetAccessible?: SpaceInternetAccessible;
-  /** 购买工作空间数量 */
+  /** 购买工作空间实例的数量 */
   SpaceCount?: number;
   /** 工作空间显示名称 */
   SpaceName?: string;
@@ -920,7 +926,7 @@ declare interface DescribeInitNodeScriptsResponse {
 
 declare interface DescribeNodesRequest {
   /** 集群ID。 */
-  ClusterId: string;
+  ClusterId?: string;
   /** queue-name 按照【队列名称】进行过滤。队列名称形如：compute。 类型：String 必选：否 node-role 按照【节点角色】进行过滤。节点角色形如：Manager。（Manager：管控节点。Compute：计算节点。Login：登录节点。ManagerBackup：备用管控节点。） 类型：String 必选：否 node-type 按照【节点类型】进行过滤。节点类型形如：STATIC。(STATIC：静态节点。DYNAMIC：弹性节点。) 类型：String 必选：否 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
@@ -2066,7 +2072,7 @@ declare interface Thpc {
   /** 查询节点初始化脚本列表 {@link DescribeInitNodeScriptsRequest} {@link DescribeInitNodeScriptsResponse} */
   DescribeInitNodeScripts(data: DescribeInitNodeScriptsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInitNodeScriptsResponse>;
   /** 查询指定集群节点列表 {@link DescribeNodesRequest} {@link DescribeNodesResponse} */
-  DescribeNodes(data: DescribeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodesResponse>;
+  DescribeNodes(data?: DescribeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodesResponse>;
   /** 查询队列列表 {@link DescribeQueuesRequest} {@link DescribeQueuesResponse} */
   DescribeQueues(data: DescribeQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQueuesResponse>;
   /** 查询工作空间列表 {@link DescribeWorkspacesRequest} {@link DescribeWorkspacesResponse} */

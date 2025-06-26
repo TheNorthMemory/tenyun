@@ -1218,14 +1218,16 @@ declare interface RecipientComponentInfo {
 
 /** 发起流程快速注册相关信息 */
 declare interface RegisterInfo {
-  /** 法人姓名 */
+  /** 字段不再使用，法人姓名 */
   LegalName: string;
   /** 社会统一信用代码 */
   Uscc?: string | null;
-  /** 社会统一信用代码 */
+  /** 字段不再使用，社会统一信用代码 */
   UnifiedSocialCreditCode?: string;
   /** 指定企业认证的授权方式 支持多选:2: 法人授权方式5: 授权书+对公打款方式 */
   AuthorizationTypes?: number[];
+  /** 指定企业认证的授权方式 支持多选:2: 法人授权方式5: 授权书+对公打款方式 */
+  AuthorizationType?: number;
 }
 
 /** 企业认证信息参数， 需要保证这些参数跟营业执照中的信息一致。 */

@@ -970,6 +970,32 @@ declare interface BindDeviceResourceResponse {
   RequestId?: string;
 }
 
+declare interface CheckLDAPConnectionRequest {
+  /** 是否开启LDAP认证，必须为true */
+  Enable: boolean;
+  /** 服务器地址 */
+  Ip: string;
+  /** 服务端口 */
+  Port: number;
+  /** 是否开启SSL，false-不开启，true-开启 */
+  EnableSSL: boolean;
+  /** Base DN */
+  BaseDN: string;
+  /** 管理员账号 */
+  AdminAccount: string;
+  /** 管理员密码 */
+  AdminPassword: string;
+  /** 备用服务器地址 */
+  IpBackup?: string;
+  /** 网络域id */
+  DomainId?: string;
+}
+
+declare interface CheckLDAPConnectionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAccessWhiteListRuleRequest {
   /** ip 10.10.10.1或者网段10.10.10.0/24，最小长度4字节，最大长度40字节。 */
   Source: string;
@@ -1692,6 +1718,38 @@ declare interface DescribeDomainsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLDAPUnitSetRequest {
+  /** 是否开启LDAP认证，true-开启 */
+  Enable: boolean;
+  /** 服务器地址 */
+  Ip: string;
+  /** 服务端口 */
+  Port: number;
+  /** 是否开启SSL，false-不开启，true-开启 */
+  EnableSSL: boolean;
+  /** Base DN */
+  BaseDN: string;
+  /** 管理员账号 */
+  AdminAccount: string;
+  /** 管理员密码 */
+  AdminPassword: string;
+  /** 用户名映射属性 */
+  AttributeUserName: string;
+  /** 部门过滤 */
+  AttributeUnit: string;
+  /** 备用服务器地址 */
+  IpBackup?: string;
+  /** 网络域Id */
+  DomainId?: string;
+}
+
+declare interface DescribeLDAPUnitSetResponse {
+  /** ou 列表 */
+  UnitSet?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLoginEventRequest {
   /** 用户名，如果不包含其他条件时对user_name or real_name两个字段模糊查询 */
   UserName?: string;
@@ -2060,6 +2118,54 @@ declare interface ModifyDeviceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyLDAPSettingRequest {
+  /** 是否开启LDAP认证，false-不开启，true-开启 */
+  Enable: boolean;
+  /** 服务器地址 */
+  Ip?: string;
+  /** 备用服务器地址 */
+  IpBackup?: string;
+  /** 服务端口 */
+  Port?: number;
+  /** 是否开启SSL，false-不开启，true-开启 */
+  EnableSSL?: boolean;
+  /** Base DN */
+  BaseDN?: string;
+  /** 管理员账号 */
+  AdminAccount?: string;
+  /** 管理员密码 */
+  AdminPassword?: string;
+  /** 用户属性 */
+  AttributeUser?: string;
+  /** 用户名属性 */
+  AttributeUserName?: string;
+  /** 自动同步，false-不开启，true-开启 */
+  AutoSync?: boolean;
+  /** 覆盖用户信息，false-不开启，true-开启 */
+  Overwrite?: boolean;
+  /** 同步周期，30～60000之间的整数 */
+  SyncPeriod?: number;
+  /** 是否同步全部，false-不开启，true-开启 */
+  SyncAll?: boolean;
+  /** 同步OU列表，SyncAll为false时必传 */
+  SyncUnitSet?: string[];
+  /** 组织单元属性 */
+  AttributeUnit?: string;
+  /** 用户姓名属性 */
+  AttributeRealName?: string;
+  /** 手机号属性 */
+  AttributePhone?: string;
+  /** 邮箱属性 */
+  AttributeEmail?: string;
+  /** 网络域Id */
+  DomainId?: string;
+}
+
+declare interface ModifyLDAPSettingResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyOAuthSettingRequest {
   /** 是否开启OAuth认证，false-不开启，true-开启。 */
   Enable: boolean;
@@ -2174,6 +2280,16 @@ declare interface ModifyUserRequest {
 }
 
 declare interface ModifyUserResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ReplaySessionRequest {
+  /** 会话Sid */
+  Sid: string;
+}
+
+declare interface ReplaySessionResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2492,6 +2608,24 @@ declare interface SearchTaskResultResponse {
   RequestId?: string;
 }
 
+declare interface SetLDAPSyncFlagRequest {
+}
+
+declare interface SetLDAPSyncFlagResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UnlockUserRequest {
+  /** 用户id */
+  IdSet: number[];
+}
+
+declare interface UnlockUserResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Bh 运维安全中心（堡垒机）} */
 declare interface Bh {
   (): Versions;
@@ -2507,6 +2641,8 @@ declare interface Bh {
   BindDeviceAccountPrivateKey(data: BindDeviceAccountPrivateKeyRequest, config?: AxiosRequestConfig): AxiosPromise<BindDeviceAccountPrivateKeyResponse>;
   /** 修改资产绑定的堡垒机服务 {@link BindDeviceResourceRequest} {@link BindDeviceResourceResponse} */
   BindDeviceResource(data: BindDeviceResourceRequest, config?: AxiosRequestConfig): AxiosPromise<BindDeviceResourceResponse>;
+  /** 测试LDAP连接 {@link CheckLDAPConnectionRequest} {@link CheckLDAPConnectionResponse} */
+  CheckLDAPConnection(data: CheckLDAPConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<CheckLDAPConnectionResponse>;
   /** 添加访问白名单规则 {@link CreateAccessWhiteListRuleRequest} {@link CreateAccessWhiteListRuleResponse} */
   CreateAccessWhiteListRule(data: CreateAccessWhiteListRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessWhiteListRuleResponse>;
   /** 新建访问权限 {@link CreateAclRequest} {@link CreateAclResponse} */
@@ -2577,6 +2713,8 @@ declare interface Bh {
   DescribeDevices(data?: DescribeDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicesResponse>;
   /** 查询网络域 {@link DescribeDomainsRequest} {@link DescribeDomainsResponse} */
   DescribeDomains(data?: DescribeDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsResponse>;
+  /** 获取LDAP ou 列表 {@link DescribeLDAPUnitSetRequest} {@link DescribeLDAPUnitSetResponse} */
+  DescribeLDAPUnitSet(data: DescribeLDAPUnitSetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLDAPUnitSetResponse>;
   /** 查询登录日志 {@link DescribeLoginEventRequest} {@link DescribeLoginEventResponse} */
   DescribeLoginEvent(data?: DescribeLoginEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginEventResponse>;
   /** 查询操作日志 {@link DescribeOperationEventRequest} {@link DescribeOperationEventResponse} */
@@ -2603,6 +2741,8 @@ declare interface Bh {
   ModifyDevice(data: ModifyDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceResponse>;
   /** 修改资产组 {@link ModifyDeviceGroupRequest} {@link ModifyDeviceGroupResponse} */
   ModifyDeviceGroup(data: ModifyDeviceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceGroupResponse>;
+  /** 修改LDAP配置信息 {@link ModifyLDAPSettingRequest} {@link ModifyLDAPSettingResponse} */
+  ModifyLDAPSetting(data: ModifyLDAPSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLDAPSettingResponse>;
   /** 设置OAuth认证参数 {@link ModifyOAuthSettingRequest} {@link ModifyOAuthSettingResponse} */
   ModifyOAuthSetting(data: ModifyOAuthSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOAuthSettingResponse>;
   /** 修改运维任务 {@link ModifyOperationTaskRequest} {@link ModifyOperationTaskResponse} */
@@ -2613,6 +2753,8 @@ declare interface Bh {
   ModifyUser(data: ModifyUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserResponse>;
   /** 修改用户组 {@link ModifyUserGroupRequest} {@link ModifyUserGroupResponse} */
   ModifyUserGroup(data: ModifyUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserGroupResponse>;
+  /** 会话回放 {@link ReplaySessionRequest} {@link ReplaySessionResponse} */
+  ReplaySession(data: ReplaySessionRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaySessionResponse>;
   /** 清除设备账号绑定密码 {@link ResetDeviceAccountPasswordRequest} {@link ResetDeviceAccountPasswordResponse} */
   ResetDeviceAccountPassword(data: ResetDeviceAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetDeviceAccountPasswordResponse>;
   /** 清除设备账号绑定的密钥 {@link ResetDeviceAccountPrivateKeyRequest} {@link ResetDeviceAccountPrivateKeyResponse} */
@@ -2641,6 +2783,10 @@ declare interface Bh {
   SearchSubtaskResultById(data?: SearchSubtaskResultByIdRequest, config?: AxiosRequestConfig): AxiosPromise<SearchSubtaskResultByIdResponse>;
   /** 搜索运维任务执行结果 {@link SearchTaskResultRequest} {@link SearchTaskResultResponse} */
   SearchTaskResult(data?: SearchTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<SearchTaskResultResponse>;
+  /** 设置LDAP 立即同步标记 {@link SetLDAPSyncFlagRequest} {@link SetLDAPSyncFlagResponse} */
+  SetLDAPSyncFlag(data?: SetLDAPSyncFlagRequest, config?: AxiosRequestConfig): AxiosPromise<SetLDAPSyncFlagResponse>;
+  /** 解锁用户 {@link UnlockUserRequest} {@link UnlockUserResponse} */
+  UnlockUser(data: UnlockUserRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockUserResponse>;
 }
 
 export declare type Versions = ["2023-04-18"];

@@ -16,12 +16,156 @@ declare interface AICallConfig {
   DigitalHuman?: DigitalHumanConfig | null;
 }
 
+/** Agent 的定义 */
+declare interface Agent {
+  /** AgentID */
+  AgentId?: string;
+  /** WorkflowID，非空则当前Agent从workflow转换而来 */
+  WorkflowId?: string;
+  /** Agent名称，同一个应用内，Agent名称不能重复 */
+  Name?: string;
+  /** 插件图标url */
+  IconUrl?: string;
+  /** Agent指令；当该Agent被调用时，将作为“系统提示词”使用，描述Agent应执行的操作和响应方式 */
+  Instructions?: string;
+  /** 当Agent作为转交目标时的描述，用于让其他Agent的LLM理解其功能和转交时机 */
+  HandoffDescription?: string;
+  /** Agent可转交的子AgentId列表 */
+  Handoffs?: string[];
+  /** Agent调用LLM时使用的模型配置 */
+  Model?: AgentModelInfo;
+  /** Agent可使用的工具列表 */
+  Tools?: AgentToolInfo[];
+  /** Agent可使用的插件列表 */
+  Plugins?: AgentPluginInfo[];
+  /** 当前Agent是否是启动Agent */
+  IsStartingAgent?: boolean;
+  /** Agent类型; 0: 未指定类型; 1: 知识库检索Agent */
+  AgentType?: number;
+}
+
 /** Agent调试信息 */
 declare interface AgentDebugInfo {
   /** 工具、大模型的输入信息，json */
   Input?: string | null;
   /** 工具、大模型的输出信息，json */
   Output?: string | null;
+}
+
+/** Agent输入值，支持直接赋值和引用 */
+declare interface AgentInput {
+  /** 输入来源类型：0 用户输入，3 自定义变量（API参数） */
+  InputType?: number;
+  /** 用户手写输入 */
+  UserInputValue?: AgentInputUserInputValue;
+  /** 自定义变量（API参数） */
+  CustomVarId?: string;
+}
+
+/** 用户手写输入 */
+declare interface AgentInputUserInputValue {
+  /** 用户输入的值 */
+  Values?: string[];
+}
+
+/** 标签过滤器 */
+declare interface AgentKnowledgeAttrLabel {
+  /** 属性ID */
+  AttributeBizId?: string;
+  /** 标签值，标签值之间是或的关系，只有匹配的，才会进行知识检索，否则报检索不到 */
+  Inputs?: AgentInput[];
+}
+
+/** 知识检索筛选范围 */
+declare interface AgentKnowledgeFilter {
+  /** 知识检索筛选方式; 0: 全部知识; 1:按文档和问答; 2: 按标签 */
+  FilterType?: number;
+  /** 文档和问答过滤器 */
+  DocAndAnswer?: AgentKnowledgeFilterDocAndAnswer;
+  /** 标签过滤器 */
+  Tag?: AgentKnowledgeFilterTag;
+}
+
+/** 文档和问答过滤器 */
+declare interface AgentKnowledgeFilterDocAndAnswer {
+  /** 文档ID列表 */
+  DocBizIds?: string[];
+  /** 问答 */
+  AllQa?: boolean;
+}
+
+/** 标签过滤器 */
+declare interface AgentKnowledgeFilterTag {
+  /** 标签之间的关系;0:AND, 1:OR */
+  Operator?: number;
+  /** 标签 */
+  Labels?: AgentKnowledgeAttrLabel[];
+}
+
+/** 知识库问答插件 */
+declare interface AgentKnowledgeQAPlugin {
+  /** 知识检索筛选范围 */
+  Filter?: AgentKnowledgeFilter;
+}
+
+/** mcp的服务信息 */
+declare interface AgentMCPServerInfo {
+  /** mcp server URL地址 */
+  McpServerUrl?: string;
+  /** mcp server header信息 */
+  Headers?: AgentPluginHeader[];
+  /** 超时时间，单位秒 */
+  Timeout?: number;
+  /** sse服务超时时间，单位秒 */
+  SseReadTimeout?: number;
+}
+
+/** Agent 配置里面的模型定义 */
+declare interface AgentModelInfo {
+  /** 模型名称 */
+  ModelName?: string;
+  /** 模型别名 */
+  ModelAliasName?: string;
+  /** 模型温度 */
+  Temperature?: number;
+  /** 模型TopP */
+  TopP?: number;
+  /** 模型是否可用 */
+  IsEnabled?: boolean;
+  /** 对话历史条数限制 */
+  HistoryLimit?: number;
+  /** 模型上下文长度字符限制 */
+  ModelContextWordsLimit?: string;
+  /** 指令长度字符限制 */
+  InstructionsWordsLimit?: number;
+}
+
+/** 应用配置MCP插件header信息 */
+declare interface AgentPluginHeader {
+  /** 参数名称 */
+  ParamName?: string;
+  /** 参数值 */
+  ParamValue?: string;
+  /** header参数配置是否隐藏不可见 */
+  GlobalHidden?: boolean;
+  /** 输入的值 */
+  Input?: AgentInput;
+  /** 参数是否可以为空 */
+  IsRequired?: boolean;
+}
+
+/** Agent 的插件信息 */
+declare interface AgentPluginInfo {
+  /** 插件id */
+  PluginId?: string;
+  /** 应用配置的插件header信息 */
+  Headers?: AgentPluginHeader[];
+  /** 插件调用LLM时使用的模型配置，一般用于指定知识库问答插件的生成模型 */
+  Model?: AgentModelInfo;
+  /** 插件信息类型; 0: 未指定类型; 1: 知识库问答插件 */
+  PluginInfoType?: number;
+  /** 知识库问答插件配置 */
+  KnowledgeQa?: AgentKnowledgeQAPlugin;
 }
 
 /** 思考事件过程信息 */
@@ -120,6 +264,84 @@ declare interface AgentThought {
   TraceId?: string | null;
   /** 文件信息 */
   Files?: FileInfo[] | null;
+}
+
+/** Agent的工具信息 */
+declare interface AgentToolInfo {
+  /** 插件id */
+  PluginId?: string;
+  /** 插件名称 */
+  PluginName?: string;
+  /** 插件图标url */
+  IconUrl?: string;
+  /** 0 自定义插件1 官方插件2 第三方插件 目前用于第三方实现的mcp server */
+  PluginType?: number;
+  /** 工具id */
+  ToolId?: string;
+  /** 工具名称 */
+  ToolName?: string;
+  /** 工具描述 */
+  ToolDesc?: string;
+  /** 输入参数 */
+  Inputs?: AgentToolReqParam[];
+  /** 输出参数 */
+  Outputs?: AgentToolRspParam[];
+  /** 创建方式，0:服务创建，1:代码创建，2:MCP创建 */
+  CreateType?: number;
+  /** MCP插件的配置信息 */
+  McpServer?: AgentMCPServerInfo;
+  /** 该工具是否和知识库绑定 */
+  IsBindingKnowledge?: boolean;
+  /** 插件状态，1:可用，2:不可用 */
+  Status?: number;
+  /** header信息 */
+  Headers?: AgentPluginHeader[];
+  /** NON_STREAMING: 非流式 STREAMIN: 流式 */
+  CallingMethod?: string | null;
+}
+
+/** Agent工具的请求参数定义 */
+declare interface AgentToolReqParam {
+  /** 参数名称 */
+  Name?: string;
+  /** 参数描述 */
+  Desc?: string;
+  /** 参数类型，0:string, 1:int, 2:float，3:bool 4:object 5:array_string, 6:array_int, 7:array_float, 8:array_bool, 9:array_object */
+  Type?: number;
+  /** 参数是否必填 */
+  IsRequired?: boolean;
+  /** 参数默认值 */
+  DefaultValue?: string;
+  /** 子参数,ParamType 是OBJECT 或 ARRAY<>类型有用 */
+  SubParams?: AgentToolReqParam[];
+  /** 是否隐藏不可见 */
+  GlobalHidden?: boolean;
+  /** agent模式下模型是否可见 */
+  AgentHidden?: boolean;
+  /** 其中任意 */
+  AnyOf?: AgentToolReqParam[];
+  /** 其中一个 */
+  OneOf?: AgentToolReqParam[];
+  /** 输入 */
+  Input?: AgentInput;
+}
+
+/** Agent工具的响应参数定义 */
+declare interface AgentToolRspParam {
+  /** 参数名称 */
+  Name?: string;
+  /** 参数描述 */
+  Desc?: string;
+  /** 参数类型，0:string, 1:int, 2:float，3:bool 4:object 5:array_string, 6:array_int, 7:array_float, 8:array_bool, 9:array_object */
+  Type?: number;
+  /** 子参数,ParamType 是OBJECT 或 ARRAY<>类型有用 */
+  SubParams?: AgentToolRspParam[];
+  /** agent模式下模型是否可见 */
+  AgentHidden?: boolean;
+  /** 是否隐藏不可见 */
+  GlobalHidden?: boolean;
+  /** COVER: 覆盖解析 INCREMENT:增量解析 */
+  AnalysisMethod?: string;
 }
 
 /** 自定义变量和标签关系数据 */
@@ -440,6 +662,8 @@ declare interface DocSegment {
   DocBizId?: string | null;
   /** 文档链接 */
   DocUrl?: string | null;
+  /** 文档的自定义链接 */
+  WebUrl?: string;
 }
 
 /** 文档元素字段 */
@@ -1066,6 +1290,14 @@ declare interface MsgRecordReference {
   Name?: string;
   /** 来源文档ID */
   DocId?: string;
+  /** 知识库名称 */
+  KnowledgeName?: string;
+  /** 知识库业务id */
+  KnowledgeBizId?: string;
+  /** 文档业务id */
+  DocBizId?: string;
+  /** 问答业务id */
+  QaBizId?: string;
 }
 
 /** 节点运行的基本信息 */
@@ -1888,6 +2120,20 @@ declare interface ConvertDocumentResponse {
   RequestId?: string;
 }
 
+declare interface CreateAgentRequest {
+  /** 应用ID */
+  AppBizId?: string;
+  /** 要增加的Agent的信息 */
+  Agent?: Agent;
+}
+
+declare interface CreateAgentResponse {
+  /** 新建的AgentID */
+  AgentId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAppRequest {
   /** 应用类型；knowledge_qa-知识问答管理 */
   AppType: string;
@@ -2120,6 +2366,20 @@ declare interface CreateWorkflowRunResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAgentRequest {
+  /** Agent的ID */
+  AgentId: string;
+  /** 应用ID */
+  AppBizId?: string;
+}
+
+declare interface DeleteAgentResponse {
+  /** Agent的ID */
+  AgentId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAppRequest {
   /** 应用ID */
   AppBizId: string;
@@ -2228,6 +2488,20 @@ declare interface DeleteVarRequest {
 }
 
 declare interface DeleteVarResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAppAgentListRequest {
+  /** 应用ID */
+  AppBizId?: string;
+}
+
+declare interface DescribeAppAgentListResponse {
+  /** 入口启动AgentID */
+  StaringAgentId?: string;
+  /** 应用Agent信息列表 */
+  Agents?: Agent[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2470,6 +2744,8 @@ declare interface DescribeDocResponse {
   CateBizId?: string;
   /** 文档是否停用，false:未停用，true:已停用 */
   IsDisabled?: boolean;
+  /** 是否支持下载 */
+  IsDownload?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3012,6 +3288,8 @@ declare interface GetDocPreviewResponse {
   NewName?: string;
   /** 文件md结果cos临时地址 */
   ParseResultCosUrl?: string;
+  /** 是否可下载 */
+  IsDownload?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3728,6 +4006,20 @@ declare interface ListWorkflowRunsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAgentRequest {
+  /** 需要修改的应用ID */
+  AppBizId?: string;
+  /** 修改后的Agent的信息 */
+  Agent?: Agent;
+}
+
+declare interface ModifyAgentResponse {
+  /** 修改的AgentId */
+  AgentId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAppRequest {
   /** 应用 ID */
   AppBizId: string;
@@ -4103,6 +4395,8 @@ declare interface SaveDocRequest {
   Opt?: number;
   /** 分类ID */
   CateBizId?: string;
+  /** 是否可下载，IsRefer为true并且ReferUrlType为0时，该值才有意义 */
+  IsDownload?: boolean;
 }
 
 declare interface SaveDocResponse {
@@ -4231,6 +4525,8 @@ declare interface Lke {
   CheckAttributeLabelRefer(data: CheckAttributeLabelReferRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAttributeLabelReferResponse>;
   /** @deprecated 文档转换 {@link ConvertDocumentRequest} {@link ConvertDocumentResponse} */
   ConvertDocument(data?: ConvertDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<ConvertDocumentResponse>;
+  /** 创建Agent {@link CreateAgentRequest} {@link CreateAgentResponse} */
+  CreateAgent(data?: CreateAgentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgentResponse>;
   /** 创建应用 {@link CreateAppRequest} {@link CreateAppResponse} */
   CreateApp(data: CreateAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppResponse>;
   /** 创建标签 {@link CreateAttributeLabelRequest} {@link CreateAttributeLabelResponse} */
@@ -4253,6 +4549,8 @@ declare interface Lke {
   CreateVar(data: CreateVarRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVarResponse>;
   /** 创建工作流的异步运行实例 {@link CreateWorkflowRunRequest} {@link CreateWorkflowRunResponse} */
   CreateWorkflowRun(data?: CreateWorkflowRunRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkflowRunResponse>;
+  /** 删除Agent {@link DeleteAgentRequest} {@link DeleteAgentResponse} */
+  DeleteAgent(data: DeleteAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAgentResponse>;
   /** 删除应用 {@link DeleteAppRequest} {@link DeleteAppResponse} */
   DeleteApp(data: DeleteAppRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAppResponse>;
   /** 删除标签 {@link DeleteAttributeLabelRequest} {@link DeleteAttributeLabelResponse} */
@@ -4273,6 +4571,8 @@ declare interface Lke {
   DeleteVar(data: DeleteVarRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVarResponse>;
   /** 获取企业下应用详情 {@link DescribeAppRequest} {@link DescribeAppResponse} */
   DescribeApp(data: DescribeAppRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppResponse>;
+  /** 拉取应用下Agent列表 {@link DescribeAppAgentListRequest} {@link DescribeAppAgentListResponse} */
+  DescribeAppAgentList(data?: DescribeAppAgentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppAgentListResponse>;
   /** 查询标签详情 {@link DescribeAttributeLabelRequest} {@link DescribeAttributeLabelResponse} */
   DescribeAttributeLabel(data: DescribeAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttributeLabelResponse>;
   /** 接口调用折线图 {@link DescribeCallStatsGraphRequest} {@link DescribeCallStatsGraphResponse} */
@@ -4397,6 +4697,8 @@ declare interface Lke {
   ListUsageCallDetail(data: ListUsageCallDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListUsageCallDetailResponse>;
   /** 查询工作流异步运行实例的列表 {@link ListWorkflowRunsRequest} {@link ListWorkflowRunsResponse} */
   ListWorkflowRuns(data?: ListWorkflowRunsRequest, config?: AxiosRequestConfig): AxiosPromise<ListWorkflowRunsResponse>;
+  /** 修改Agent {@link ModifyAgentRequest} {@link ModifyAgentResponse} */
+  ModifyAgent(data?: ModifyAgentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAgentResponse>;
   /** 修改应用请求结构体 {@link ModifyAppRequest} {@link ModifyAppResponse} */
   ModifyApp(data: ModifyAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppResponse>;
   /** 编辑标签 {@link ModifyAttributeLabelRequest} {@link ModifyAttributeLabelResponse} */

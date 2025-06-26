@@ -193,13 +193,13 @@ declare interface SendTaskData {
   /** 邮件主题 */
   Subject?: string;
   /** 模板和模板数据 */
-  Template?: Template | null;
+  Template?: Template;
   /** 周期任务参数 */
   CycleParam?: CycleEmailParam | null;
   /** 定时任务参数 */
   TimedParam?: TimedEmailParam | null;
   /** 任务异常信息 */
-  ErrMsg?: string | null;
+  ErrMsg?: string;
   /** 收件人列表名称 */
   ReceiversName?: string;
 }
@@ -251,7 +251,7 @@ declare interface TimedEmailParam {
 /** 统计数据的结构体 */
 declare interface Volume {
   /** 日期 */
-  SendDate?: string | null;
+  SendDate?: string;
   /** 邮件请求数量 */
   RequestCount?: number;
   /** 腾讯云通过数量 */
@@ -265,7 +265,7 @@ declare interface Volume {
   /** 退信数量 */
   BounceCount?: number;
   /** 取消订阅的用户数量 */
-  UnsubscribeCount?: number | null;
+  UnsubscribeCount?: number;
 }
 
 declare interface BatchSendEmailRequest {

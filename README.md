@@ -114,7 +114,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 260+ 款产品，12648+ 服务数</summary>
+<details><summary>共计 260+ 款产品，12676+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -139,7 +139,7 @@ as | [弹性伸缩](https://cloud.tencent.com/document/product/377) | 2018-04-19
 ba | [ICP备案](https://cloud.tencent.com/document/product/243) | 2020-07-20(3) |
 batch | [批量计算](https://cloud.tencent.com/document/product/599) | 2017-03-12(29) |
 bda | [人体分析](https://cloud.tencent.com/document/product/1208) | 2020-03-24(18) |
-bh | [运维安全中心（堡垒机）](https://cloud.tencent.com/document/product/1025) | 2023-04-18(73) |
+bh | [运维安全中心（堡垒机）](https://cloud.tencent.com/document/product/1025) | 2023-04-18(79) |
 bi | [商业智能分析 BI](https://cloud.tencent.com/document/product/590) | 2022-01-05(24) |
 billing | [费用中心](https://cloud.tencent.com/document/product/555) | 2018-07-09(56) |
 bizlive | 商业直播 | 2019-03-13(6) |
@@ -256,11 +256,11 @@ irp | [智能推荐平台](https://cloud.tencent.com/document/product/1541) | 20
 iss | [智能视图计算平台](https://cloud.tencent.com/document/product/1344) | 2023-05-17(91) |
 ivld | [媒体智能标签](https://cloud.tencent.com/document/product/1509) | 2021-09-03(28) |
 keewidb | [云数据库 KeeWiDB](https://cloud.tencent.com/document/product/1520) | 2022-03-08(38) |
-kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(53) |
+kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(68) |
 lcic | [实时互动-教育版](https://cloud.tencent.com/document/product/1639) | 2022-08-17(70) |
 lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(108) |
 live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(198) |
-lke | [腾讯云智能体开发平台](https://cloud.tencent.com/document/product/1759) | 2023-11-30(111) |
+lke | [腾讯云智能体开发平台](https://cloud.tencent.com/document/product/1759) | 2023-11-30(115) |
 lkeap | [知识引擎原子能力](https://cloud.tencent.com/document/product/1772) | 2024-05-22(26) |
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(10) |
 mall | [商场客留大数据](https://cloud.tencent.com/document/product/1707) | 2023-05-18(1) |
@@ -349,7 +349,7 @@ tmt | [机器翻译](https://cloud.tencent.com/document/product/551) | 2018-03-2
 tourism | [文旅客情大数据](https://cloud.tencent.com/document/product/1684) | 2023-02-15(1) |
 trabbit | [消息队列 RabbitMQ Serverless 版](https://cloud.tencent.com/document/product/1495) | 2023-04-18(29) |
 trdp | [流量风险决策平台](https://cloud.tencent.com/document/product/1604) | 2022-07-26(1) |
-trocket | [消息队列 RocketMQ 版](https://cloud.tencent.com/document/product/1493) | 2023-03-08(68) |
+trocket | [消息队列 RocketMQ 版](https://cloud.tencent.com/document/product/1493) | 2023-03-08(69) |
 trp | [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) | 2021-05-15(54) |
 trro | [实时互动-工业能源版](https://cloud.tencent.com/document/product/1584) | 2022-03-25(29) |
 trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(61) |
@@ -371,7 +371,7 @@ vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-
 vtc | [视频转译](https://cloud.tencent.com/document/product/1769) | 2024-02-23(3) |
 waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(164) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
-wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(279) |
+wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(281) |
 weilingwith | [微瓴同业开放平台](https://cloud.tencent.com/document/product/1693) | 2023-04-27(64) |
 wss | SSL证书管理服务 | 2018-04-26(3) |
 yinsuda | [音速达直播音乐版权引擎](https://cloud.tencent.com/document/product/1592) | 2022-05-27(20) |

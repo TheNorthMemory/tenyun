@@ -52,8 +52,8 @@ declare interface ConsumerClient {
   Version?: string;
   /** 客户端消费堆积 */
   ConsumerLag?: number | null;
-  /** 消费者客户端类型（grpc；remoting；http） */
-  ChannelProtocol?: string;
+  /** 消费者客户端类型，枚举值如下：- grpc：GRPC协议- remoting：Remoting协议- http：HTTP协议 */
+  ChannelProtocol?: string | null;
 }
 
 /** map结构返回 */
@@ -80,7 +80,7 @@ declare interface DetailedRolePerm {
 
 /** 接入点信息 */
 declare interface Endpoint {
-  /** 接入点类型，枚举值如下VPC: VPC;PUBLIC: 公网;INTERNAL: 支撑网; */
+  /** 接入点类型，枚举值如下：- VPC：VPC 网络- PUBLIC：公网- INTERNAL：支撑网 */
   Type?: string;
   /** 状态，OPEN 开启，CLOSE 关闭，PROCESSING 操作中， */
   Status?: string;
@@ -124,9 +124,9 @@ declare interface FusionInstanceItem {
   TopicNumLimit?: number;
   /** 实例消费组数量上限 */
   GroupNumLimit?: number;
-  /** 计费模式，POSTPAID，按量计费PREPAID，包年包月 */
+  /** 计费模式，枚举值如下：- POSTPAID：按量计费- PREPAID：包年包月 */
   PayMode?: string;
-  /** 到期时间，秒为单位 */
+  /** 到期时间，**Unix时间戳（毫秒）** */
   ExpiryTime?: number | null;
   /** 备注信息 */
   Remark?: string | null;
@@ -141,18 +141,18 @@ declare interface FusionInstanceItem {
   /** TPS限流值 */
   TpsLimit?: number | null;
   /** 弹性TPS限流值 */
-  ScaledTpsLimit?: number | null;
+  ScaledTpsLimit?: number;
   /** 消息保留时间，小时为单位 */
-  MessageRetention?: number | null;
+  MessageRetention?: number;
   /** 延迟消息最大时长，小时为单位 */
-  MaxMessageDelay?: number | null;
-  /** 是否自动续费 */
-  RenewFlag?: number | null;
+  MaxMessageDelay?: number;
+  /** 预付费集群是否自动续费，枚举值如下：- 0: 不自动续费- 1: 自动续费 */
+  RenewFlag?: number;
   /** 4.x独有数据 */
   InstanceItemExtraInfo?: InstanceItemExtraInfo | null;
-  /** 预销毁时间 */
+  /** 预销毁时间，**Unix时间戳（毫秒）** */
   DestroyTime?: number | null;
-  /** 所属可用区列表 */
+  /** 所属可用区列表，参考 [DescribeZones](https://cloud.tencent.com/document/product/1596/77929) 接口。 */
   ZoneIds?: number[] | null;
   /** 是否开启删除保护 */
   EnableDeletionProtection?: boolean;
@@ -174,9 +174,9 @@ declare interface InstanceItem {
   TopicNumLimit?: number;
   /** 实例消费组数量上限 */
   GroupNumLimit?: number;
-  /** 计费模式，POSTPAID，按量计费PREPAID，包年包月 */
+  /** 计费模式，枚举值如下：- POSTPAID：按量计费- PREPAID：包年包月 */
   PayMode?: string;
-  /** 到期时间，秒为单位 */
+  /** 到期时间戳，**Unix时间戳（毫秒）** */
   ExpiryTime?: number | null;
   /** 备注信息 */
   Remark?: string | null;
@@ -189,15 +189,15 @@ declare interface InstanceItem {
   /** 商品规格 */
   SkuCode?: string;
   /** TPS限流值 */
-  TpsLimit?: number | null;
+  TpsLimit?: number;
   /** 弹性TPS限流值 */
-  ScaledTpsLimit?: number | null;
+  ScaledTpsLimit?: number;
   /** 消息保留时间，小时为单位 */
-  MessageRetention?: number | null;
+  MessageRetention?: number;
   /** 延迟消息最大时长，小时为单位 */
-  MaxMessageDelay?: number | null;
-  /** 是否自动续费 */
-  RenewFlag?: number | null;
+  MaxMessageDelay?: number;
+  /** 是否自动续费，仅针对预付费集群（0: 不自动续费；1:自动续费） */
+  RenewFlag?: number;
 }
 
 /** 4.x集群和5.0集群列表统一显示 4.x特殊数据承载接口 */
@@ -228,10 +228,10 @@ declare interface InstanceItemExtraInfo {
 declare interface IpRule {
   /** IP地址 */
   Ip: string;
-  /** 是否允许放行 */
+  /** 是否允许放行，默认为false表示拒绝 */
   Allow: boolean;
   /** 备注信息 */
-  Remark: string | null;
+  Remark: string;
 }
 
 /** MQTT 订阅关系 */
@@ -384,7 +384,7 @@ declare interface MessageItem {
 
 /** 消息轨迹 */
 declare interface MessageTraceItem {
-  /** 步骤 */
+  /** 消息处理阶段，枚举值如下：- produce：消息生产- persist：消息存储- consume：消息消费 */
   Stage?: string | null;
   /** 轨迹详情 */
   Data?: string | null;
@@ -467,27 +467,27 @@ declare interface ProductSKU {
   /** 规格代码 */
   SkuCode?: string;
   /** TPS上限 */
-  TpsLimit?: number | null;
+  TpsLimit?: number;
   /** 弹性TPS上限 */
-  ScaledTpsLimit?: number | null;
+  ScaledTpsLimit?: number;
   /** 主题数量上限默认值 */
-  TopicNumLimit?: number | null;
+  TopicNumLimit?: number;
   /** 消费组数量上限 */
-  GroupNumLimit?: number | null;
+  GroupNumLimit?: number;
   /** 默认消息保留时间，小时为单位 */
-  DefaultRetention?: number | null;
+  DefaultRetention?: number;
   /** 可调整消息保留时间上限，小时为单位 */
-  RetentionUpperLimit?: number | null;
+  RetentionUpperLimit?: number;
   /** 可调整消息保留时间下限，小时为单位 */
-  RetentionLowerLimit?: number | null;
+  RetentionLowerLimit?: number;
   /** 延时消息最大时长，小时为单位 */
-  MaxMessageDelay?: number | null;
+  MaxMessageDelay?: number;
   /** 是否可购买 */
   OnSale?: boolean;
   /** 计费项信息 */
   PriceTags?: PriceTag[];
   /** 主题数量上限默认最大值 */
-  TopicNumUpperLimit?: number | null;
+  TopicNumUpperLimit?: number;
 }
 
 /** 公网访问安全规则 */
@@ -514,9 +514,9 @@ declare interface RoleItem {
   SecretKey?: string;
   /** 备注信息 */
   Remark?: string;
-  /** 创建时间，秒为单位 */
+  /** 角色的创建时间，**Unix时间戳（毫秒）** */
   CreatedTime?: number;
-  /** 修改时间，秒为单位 */
+  /** 角色的更新时间，**Unix时间戳（毫秒）** */
   ModifiedTime?: number;
   /** 权限类型，默认按集群授权（Cluster：集群级别；TopicAndGroup：主题&消费组级别） */
   PermType?: string;
@@ -751,11 +751,11 @@ declare interface CreateConsumerGroupResponse {
 }
 
 declare interface CreateInstanceRequest {
-  /** 实例类型，EXPERIMENT 体验版BASIC 基础版PRO 专业版PLATINUM 铂金版 */
+  /** 实例类型，枚举值如下：- EXPERIMENT：体验版- BASIC：基础版- PRO：专业版- PLATINUM：铂金版 */
   InstanceType: string;
-  /** 集群名称 */
+  /** 集群名称，不能为空， 3-64个字符，只能包含数字、字母、“-”和“_” */
   Name: string;
-  /** 商品规格，可用规格如下：experiment_500, basic_1k, basic_2k, basic_3k, basic_4k, basic_5k, basic_6k, basic_7k, basic_8k, basic_9k, basic_10k, pro_4k, pro_6k, pro_8k, pro_1w, pro_15k, pro_2w, pro_25k, pro_3w, pro_35k, pro_4w, pro_45k, pro_5w, pro_55k, pro_60k, pro_65k, pro_70k, pro_75k, pro_80k, pro_85k, pro_90k, pro_95k, pro_100k, platinum_1w, platinum_2w, platinum_3w, platinum_4w, platinum_5w, platinum_6w, platinum_7w, platinum_8w, platinum_9w, platinum_10w, platinum_12w, platinum_14w, platinum_16w, platinum_18w, platinum_20w, platinum_25w, platinum_30w, platinum_35w, platinum_40w, platinum_45w, platinum_50w, platinum_60w, platinum_70w, platinum_80w, platinum_90w, platinum_100w */
+  /** 商品规格，从 [DescribeProductSKUs](https://cloud.tencent.com/document/api/1493/107676) 接口中的 [ProductSKU](https://cloud.tencent.com/document/api/1493/107676) 出参获得。 */
   SkuCode: string;
   /** 备注信息 */
   Remark?: string;
@@ -769,19 +769,19 @@ declare interface CreateInstanceRequest {
   BillingFlow?: boolean;
   /** 公网带宽（单位：兆），默认值为0。如果开启公网，该字段必须为大于0的正整数 */
   Bandwidth?: number;
-  /** 公网访问白名单 */
+  /** 公网访问白名单，不填表示拒绝所有 IP 访问 */
   IpRules?: IpRule[];
-  /** 消息保留时长（单位：小时） */
+  /** 消息保留时长（单位：小时），取值范围参考 [DescribeProductSKUs](https://cloud.tencent.com/document/api/1493/107676) 接口中的 [ProductSKU](https://cloud.tencent.com/document/api/1493/107676) 出参：- 默认值：DefaultRetention 参数- 最小值：RetentionLowerLimit 参数- 最大值：RetentionUpperLimit 参数 */
   MessageRetention?: number;
   /** 付费模式（0: 后付费；1: 预付费），默认值为0 */
   PayMode?: number;
-  /** 是否自动续费（0: 不自动续费；1: 自动续费），默认值为0 */
+  /** 预付费集群是否自动续费（0: 不自动续费；1: 自动续费），默认值为0 */
   RenewFlag?: number;
-  /** 购买时长（单位：月），默认值为1 */
+  /** 预付费集群的购买时长（单位：月），取值范围为1～60，默认值为1 */
   TimeSpan?: number;
-  /** 最大可创建主题数 */
+  /** 最大可创建主题数，从 [DescribeProductSKUs](https://cloud.tencent.com/document/api/1493/107676) 接口中的 [ProductSKU](https://cloud.tencent.com/document/api/1493/107676) 出参：- 默认值和最小值：TopicNumLimit 参数- 最大值：TopicNumUpperLimit 参数 */
   MaxTopicNum?: number;
-  /** 部署可用区列表 */
+  /** 部署可用区列表，从 [DescribeZones](https://cloud.tencent.com/document/product/1596/77929) 接口获得。 */
   ZoneIds?: number[];
 }
 
@@ -939,7 +939,7 @@ declare interface DeleteConsumerGroupResponse {
 }
 
 declare interface DeleteInstanceRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
 }
 
@@ -1026,6 +1026,28 @@ declare interface DeleteTopicResponse {
   RequestId?: string;
 }
 
+declare interface DescribeConsumerClientListRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 消费组名称 */
+  ConsumerGroup?: string;
+  /** 查询条件列表 */
+  Filters?: Filter[];
+  /** 查询起始位置 */
+  Offset?: number;
+  /** 查询结果限制数量 */
+  Limit?: number;
+}
+
+declare interface DescribeConsumerClientListResponse {
+  /** 查询总数 */
+  TotalCount?: number;
+  /** 消费客户端 */
+  Data?: ConsumerClient[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeConsumerClientRequest {
   /** 集群ID */
   InstanceId: string;
@@ -1051,13 +1073,13 @@ declare interface DescribeConsumerClientResponse {
 }
 
 declare interface DescribeConsumerGroupListRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
-  /** 查询条件列表 */
+  /** 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。 */
   Filters?: Filter[];
-  /** 查询起始位置 */
+  /** 查询起始位置，默认为0。 */
   Offset?: number;
-  /** 查询结果限制数量 */
+  /** 查询结果限制数量，默认20。 */
   Limit?: number;
   /** 查询指定主题下的消费组 */
   FromTopic?: string;
@@ -1123,11 +1145,11 @@ declare interface DescribeConsumerLagResponse {
 }
 
 declare interface DescribeFusionInstanceListRequest {
-  /** 查询起始位置 */
+  /** 查询起始位置，默认为0。 */
   Offset?: number;
-  /** 查询结果限制数量 */
+  /** 查询结果限制数量，默认20。 */
   Limit?: number;
-  /** 查询条件列表 */
+  /** 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。 */
   Filters?: Filter[];
   /** 标签过滤器 */
   TagFilters?: TagFilter[];
@@ -1143,13 +1165,13 @@ declare interface DescribeFusionInstanceListResponse {
 }
 
 declare interface DescribeInstanceListRequest {
-  /** 查询条件列表 */
+  /** 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。 */
   Filters?: Filter[];
   /** 标签过滤器 */
   TagFilters?: TagFilter[];
-  /** 查询起始位置 */
+  /** 查询起始位置，默认为0。 */
   Offset?: number;
-  /** 查询结果限制数量 */
+  /** 查询结果限制数量，默认20。 */
   Limit?: number;
 }
 
@@ -1163,7 +1185,7 @@ declare interface DescribeInstanceListResponse {
 }
 
 declare interface DescribeInstanceRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
 }
 
@@ -1194,7 +1216,7 @@ declare interface DescribeInstanceResponse {
   ScaledTpsLimit?: number;
   /** 延迟消息最长时间，小时为单位 */
   MaxMessageDelay?: number;
-  /** 创建时间，秒为单位 */
+  /** 创建时间，**Unix时间戳（毫秒）** */
   CreatedTime?: number;
   /** 消息发送接收比例 */
   SendReceiveRatio?: number;
@@ -1208,17 +1230,17 @@ declare interface DescribeInstanceResponse {
   TopicQueueNumLowerLimit?: number;
   /** 备注信息 */
   Remark?: string;
-  /** 实例状态 */
+  /** 实例状态，枚举值如下：- RUNNING：运行中- ABNORMAL：异常- OVERDUE：隔离中- DESTROYED：已销毁- CREATING：创建中- MODIFYING：变配中- CREATE_FAILURE：创建失败- MODIFY_FAILURE：变配失败- DELETING：删除中 */
   InstanceStatus?: string;
   /** 实例规格 */
   SkuCode?: string;
-  /** 计费模式 */
+  /** 计费模式，枚举值如下：- POSTPAID：后付费按量计费- PREPAID：预付费包年包月 */
   PayMode?: string;
   /** 是否开启弹性TPS */
   ScaledTpsEnabled?: boolean;
-  /** 是否自动续费 */
+  /** 预付费集群是否自动续费，枚举值如下：- 0: 不自动续费- 1: 自动续费 */
   RenewFlag?: number;
-  /** 到期时间 */
+  /** 到期时间，**Unix时间戳（毫秒）** */
   ExpiryTime?: number;
   /** 角色数量限制 */
   RoleNumLimit?: number;
@@ -1228,7 +1250,7 @@ declare interface DescribeInstanceResponse {
   TopicNumLowerLimit?: number | null;
   /** 最大可设置的topic个数 */
   TopicNumUpperLimit?: number | null;
-  /** 可用区列表 */
+  /** 所属可用区列表，参考 [DescribeZones](https://cloud.tencent.com/document/product/1596/77929) 接口。 */
   ZoneIds?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1499,31 +1521,31 @@ declare interface DescribeMQTTUserListResponse {
 }
 
 declare interface DescribeMessageListRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
-  /** 主题名称 */
+  /** 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口或控制台获得。 */
   Topic: string;
-  /** 开始时间 */
+  /** 要查询消息的开始时间，**Unix时间戳（毫秒）** */
   StartTime: number;
-  /** 结束时间 */
+  /** 要查询消息的结束时间，**Unix时间戳（毫秒）** */
   EndTime: number;
-  /** 一次查询标识 */
+  /** 一次查询标识。第一次查询可传空字符串，当查询结果涉及分页，请求下一页数据时该入参的值取上一次请求响应中的出参TaskRequestId 值即可。 */
   TaskRequestId: string;
-  /** 查询起始位置 */
+  /** 查询起始位置，默认为0。 */
   Offset?: number;
-  /** 查询结果限制数量 */
+  /** 查询结果限制数量，默认20。 */
   Limit?: number;
-  /** 消费组名称 */
+  /** 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口或控制台获得。 */
   ConsumerGroup?: string;
-  /** 消息 ID */
+  /** 消息 ID，从 [DescribeMessageList](https://cloud.tencent.com/document/api/1493/114593) 接口或业务日志中获得。 */
   MsgId?: string;
-  /** 消息 Key */
+  /** 消息 Key，从 [DescribeMessageList](https://cloud.tencent.com/document/api/1493/114593) 接口或业务日志中获得。 */
   MsgKey?: string;
   /** 查询最近N条消息 最大不超过1024，默认-1为其他查询条件 */
   RecentMessageNum?: number;
-  /** 是否查询死信消息 */
+  /** 是否查询死信消息，默认为false */
   QueryDeadLetterMessage?: boolean;
-  /** 消息 Tag */
+  /** 消息 Tag，从 [DescribeMessageList](https://cloud.tencent.com/document/api/1493/114593) 接口或业务日志中获得。 */
   Tag?: string;
 }
 
@@ -1539,19 +1561,19 @@ declare interface DescribeMessageListResponse {
 }
 
 declare interface DescribeMessageRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
-  /** 主题名称 */
+  /** 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口或控制台获得。 */
   Topic: string;
-  /** 消息ID */
+  /** 消息 ID，从 [DescribeMessageList](https://cloud.tencent.com/document/api/1493/114593) 接口或业务日志中获得。 */
   MsgId: string;
-  /** 查询起始位置 */
+  /** 查询起始位置，默认为0。 */
   Offset?: number;
-  /** 查询结果限制数量 */
+  /** 查询结果限制数量，默认20。 */
   Limit?: number;
-  /** 是否是死信消息 */
+  /** 是否是死信消息，默认为false */
   QueryDeadLetterMessage?: boolean;
-  /** 是否是延时消息 */
+  /** 是否是延时消息，默认为false */
   QueryDelayMessage?: boolean;
 }
 
@@ -1568,7 +1590,7 @@ declare interface DescribeMessageResponse {
   ProducerAddr?: string;
   /** 消息消费情况列表 */
   MessageTracks?: MessageTrackItem[] | null;
-  /** Topic */
+  /** 主题名称 */
   ShowTopicName?: string;
   /** 消息消费情况列表总条数 */
   MessageTracksCount?: number | null;
@@ -1577,20 +1599,20 @@ declare interface DescribeMessageResponse {
 }
 
 declare interface DescribeMessageTraceRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
-  /** 主题名称 */
+  /** 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口或控制台获得。 */
   Topic: string;
-  /** 消息ID */
+  /** 消息 ID，从 [DescribeMessageList](https://cloud.tencent.com/document/api/1493/114593) 接口或业务日志中获得。 */
   MsgId: string;
-  /** 是否是死信消息 */
+  /** 是否是死信消息，默认为false */
   QueryDeadLetterMessage?: boolean;
-  /** 是否是延时消息 */
+  /** 是否是延时消息，默认为false */
   QueryDelayMessage?: boolean;
 }
 
 declare interface DescribeMessageTraceResponse {
-  /** 展示Topic名 */
+  /** 主题名称 */
   ShowTopicName?: string;
   /** 轨迹详情 */
   Data?: MessageTraceItem[] | null;
@@ -1691,13 +1713,13 @@ declare interface DescribeProductSKUsResponse {
 }
 
 declare interface DescribeRoleListRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
-  /** 查询起始位置 */
+  /** 查询起始位置，默认为0。 */
   Offset?: number;
-  /** 查询结果限制数量 */
+  /** 查询结果限制数量，默认20。 */
   Limit?: number;
-  /** 查询条件列表 */
+  /** 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。 */
   Filters?: Filter[];
 }
 
@@ -1771,13 +1793,13 @@ declare interface DescribeTopicListByGroupResponse {
 }
 
 declare interface DescribeTopicListRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
-  /** 查询条件列表 */
+  /** 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。 */
   Filters?: Filter[];
-  /** 查询起始位置 */
+  /** 查询起始位置，默认为0。 */
   Offset?: number;
-  /** 查询结果限制数量 */
+  /** 查询结果限制数量，默认20。 */
   Limit?: number;
 }
 
@@ -1893,7 +1915,7 @@ declare interface ModifyConsumerGroupResponse {
 }
 
 declare interface ModifyInstanceEndpointRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
   /** 接入点类型，PUBLIC 公网 */
   Type: string;
@@ -1911,25 +1933,25 @@ declare interface ModifyInstanceEndpointResponse {
 }
 
 declare interface ModifyInstanceRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
-  /** 实例名称 */
+  /** 实例名称，不能为空, 3-64个字符，只能包含数字、字母、“-”和“_” */
   Name?: string;
-  /** 备注信息 */
+  /** 备注信息，最多 128 个字符 */
   Remark?: string;
   /** 消息发送和接收的比例 */
   SendReceiveRatio?: number;
-  /** 调整实例规格的商品代号 */
+  /** 商品规格，从 [DescribeProductSKUs](https://cloud.tencent.com/document/api/1493/107676) 接口中的 [ProductSKU](https://cloud.tencent.com/document/api/1493/107676) 出参获得。 */
   SkuCode?: string;
-  /** 消息保留时长，小时为单位 */
+  /** 消息保留时长（单位：小时），取值范围参考 [DescribeProductSKUs](https://cloud.tencent.com/document/api/1493/107676) 接口中的 [ProductSKU](https://cloud.tencent.com/document/api/1493/107676) 出参：- 默认值：DefaultRetention 参数- 最小值：RetentionLowerLimit 参数- 最大值：RetentionUpperLimit 参数 */
   MessageRetention?: number;
   /** 是否开启弹性TPS */
   ScaledTpsEnabled?: boolean;
   /** 是否开启ACL */
   AclEnabled?: boolean;
-  /** 最大可创建主题数 */
+  /** 最大可创建主题数，取值范围参考 [DescribeProductSKUs](https://cloud.tencent.com/document/api/1493/107676) 接口中的 [ProductSKU](https://cloud.tencent.com/document/api/1493/107676) 出参：- 最小值和默认值：TopicNumLimit 参数- 最大值：TopicNumUpperLimit 参数 */
   MaxTopicNum?: number;
-  /** 免费额度之外的主题个数 */
+  /** 免费额度之外的主题个数，免费额度参考 [DescribeProductSKUs](https://cloud.tencent.com/document/api/1493/107676) 接口中的 [ProductSKU](https://cloud.tencent.com/document/api/1493/107676) 出参中的 TopicNumLimit 参数。 */
   ExtraTopicNum?: string;
   /** 是否开启删除保护 */
   EnableDeletionProtection?: boolean;
@@ -2085,13 +2107,13 @@ declare interface ResendDeadLetterMessageResponse {
 }
 
 declare interface ResetConsumerGroupOffsetRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
-  /** 主题名称 */
+  /** 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口或控制台获得。 */
   Topic: string;
-  /** 重置位点时间（单位：毫秒）-1表示重置到最新位点 */
+  /** 重置位点的时间戳（单位：毫秒），指定为 -1 时表示重置到最新位点 */
   ResetTimestamp: number;
-  /** 消费组名称 */
+  /** 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口或控制台获得。 */
   ConsumerGroup?: string;
 }
 
@@ -2155,6 +2177,8 @@ declare interface Trocket {
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
   /** 查询消费者客户端详情 {@link DescribeConsumerClientRequest} {@link DescribeConsumerClientResponse} */
   DescribeConsumerClient(data: DescribeConsumerClientRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerClientResponse>;
+  /** 查询消费组下的客户端连接列表 {@link DescribeConsumerClientListRequest} {@link DescribeConsumerClientListResponse} */
+  DescribeConsumerClientList(data: DescribeConsumerClientListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerClientListResponse>;
   /** 查询消费组详情 {@link DescribeConsumerGroupRequest} {@link DescribeConsumerGroupResponse} */
   DescribeConsumerGroup(data: DescribeConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerGroupResponse>;
   /** 查询消费组列表 {@link DescribeConsumerGroupListRequest} {@link DescribeConsumerGroupListResponse} */

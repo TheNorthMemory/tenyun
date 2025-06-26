@@ -698,6 +698,10 @@ declare interface DspaCOSDiscoveryTaskResult {
   ResourceRegion?: string;
   /** 是否超额 */
   OverSize?: string;
+  /** 任务实例id */
+  TaskInstanceId?: string;
+  /** 开始时间 */
+  StartTime?: string;
 }
 
 /** 云上资源元数据 */
@@ -968,6 +972,8 @@ declare interface DspaDiscoveryTask {
   TimingStartTime?: string | null;
   /** 关联模板是否更新 */
   ComplianceUpdate?: boolean;
+  /** full:全量扫描 incre:变更扫描 */
+  ScanRange?: string;
 }
 
 /** 描述对象存储类敏感识别扫描人元数据条件。 */
@@ -1028,6 +1034,12 @@ declare interface DspaDiscoveryTaskDbResult {
   SensitiveField?: number;
   /** 总的字段数 */
   TotalField?: number;
+  /** 任务实例id */
+  TaskInstanceId?: string;
+  /** 开始时间 */
+  StartTime?: string;
+  /** 扫描范围（full:全量扫描 incre：变更扫描） */
+  ScanRange?: string;
 }
 
 /** 敏感数据扫描任务相关信息 */
@@ -1052,6 +1064,8 @@ declare interface DspaDiscoveryTaskDetail {
   CustomComplianceInfo?: ScanTaskComplianceInfo[];
   /** 定时开始时间 */
   TimingStartTime?: string;
+  /** full:全量扫描 incre:变更扫描 */
+  ScanRange?: string;
 }
 
 /** 扫描任务结果详情 */
@@ -2269,6 +2283,8 @@ declare interface CreateDSPADiscoveryTaskRequest {
   Rows?: number;
   /** 抽样的排序字段 */
   GlobalOrderField?: string;
+  /** full:全量扫描 incre:变更扫描 */
+  ScanRange?: string;
 }
 
 declare interface CreateDSPADiscoveryTaskResponse {
@@ -3188,7 +3204,9 @@ declare interface DescribeDSPACOSDiscoveryTaskFilesRequest {
   /** 扫描任务ID */
   TaskId: number;
   /** 扫描Bucket任务结果ID */
-  BucketResultId: number;
+  BucketResultId?: number;
+  /** 扫描结果id */
+  ScanResultId?: number;
 }
 
 declare interface DescribeDSPACOSDiscoveryTaskFilesResponse {
@@ -3207,6 +3225,12 @@ declare interface DescribeDSPACOSDiscoveryTaskResultRequest {
   Limit?: number;
   /** Array of Filter	此参数对外不可见。过滤数组。支持的Name：BucketName 对象桶名TaskID 任务ID，TaskName 任务名，DataSourceId：数据源ID，ResourceRegion：资源所在地域每项过滤条件最多支持5个。 */
   Filters?: Filter[];
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 是否查询历史结果 */
+  FetchHistory?: boolean;
 }
 
 declare interface DescribeDSPACOSDiscoveryTaskResultResponse {
@@ -3214,6 +3238,8 @@ declare interface DescribeDSPACOSDiscoveryTaskResultResponse {
   Items?: DspaCOSDiscoveryTaskResult[];
   /** 符合条件的数据结果数目 */
   TotalCount?: number;
+  /** 最大展示扫描结果次数 */
+  MaxCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3247,10 +3273,10 @@ declare interface DescribeDSPACOSTaskResultDetailRequest {
   DspaId: string;
   /** 任务ID */
   TaskId: number;
-  /** 扫描Bucket结果ID */
-  BucketResultId: number;
   /** 合规组ID */
   ComplianceId: number;
+  /** 扫描Bucket结果ID */
+  BucketResultId?: number;
   /** 文件名 */
   FileName?: string;
   /** 敏感数据分类ID */
@@ -3265,6 +3291,8 @@ declare interface DescribeDSPACOSTaskResultDetailRequest {
   BucketName?: string;
   /** 多级分类的分类ID集合 */
   CategoryIdList?: number[];
+  /** 扫描结果id */
+  ScanResultId?: number;
 }
 
 declare interface DescribeDSPACOSTaskResultDetailResponse {
@@ -3505,6 +3533,8 @@ declare interface DescribeDSPADiscoveryTaskResultDetailRequest {
   Limit?: number;
   /** 多级分类的分类ID集合 */
   CategoryIdList?: number[];
+  /** 任务扫描id */
+  ScanResultId?: number;
 }
 
 declare interface DescribeDSPADiscoveryTaskResultDetailResponse {
@@ -3535,6 +3565,12 @@ declare interface DescribeDSPADiscoveryTaskResultRequest {
   Limit?: number;
   /** 资源所在地域 */
   ResourceRegion?: string;
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 是否查询历史结果 */
+  FetchHistory?: boolean;
 }
 
 declare interface DescribeDSPADiscoveryTaskResultResponse {
@@ -3542,6 +3578,8 @@ declare interface DescribeDSPADiscoveryTaskResultResponse {
   Items?: DspaDiscoveryTaskDbResult[];
   /** 符合条件的扫描任务结果记录数 */
   TotalCount?: number;
+  /** 最大展示扫描结果次数 */
+  MaxCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3552,9 +3590,11 @@ declare interface DescribeDSPADiscoveryTaskTablesRequest {
   /** 任务ID */
   TaskId: number;
   /** 数据库扫描结果ID */
-  DbResultId: number;
+  DbResultId?: number;
   /** db名称 */
   DbName?: string;
+  /** 任务扫描id */
+  ScanResultId?: number;
 }
 
 declare interface DescribeDSPADiscoveryTaskTablesResponse {
@@ -4393,6 +4433,8 @@ declare interface ModifyDSPADiscoveryTaskRequest {
   ResourceRegion?: string;
   /** 数据源类型，可取值如下：cdb 表示云数据库 MySQL,dcdb 表示TDSQL MySQL版,mariadb 表示云数据库 MariaDB,postgres 表示云数据库 PostgreSQL,cynosdbpg 表示TDSQL-C PostgreSQL版,cynosdbmysql 表示TDSQL-C MySQL版,selfbuilt-db 表示自建数据库 */
   DataSourceType?: string;
+  /** full:全量扫描 incre:变更扫描 */
+  ScanRange?: string;
 }
 
 declare interface ModifyDSPADiscoveryTaskResponse {

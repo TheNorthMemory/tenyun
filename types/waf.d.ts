@@ -704,6 +704,8 @@ declare interface ClbDomainsInfo {
   Note?: string;
   /** 域名标签 */
   Labels?: string[];
+  /** clbwaf接入状态，0代表“尚无流量接入”，1代表“流量接入”，2代表“CLB监听器已注销”，3代表“配置生效中”，4代表“配置下发失败中” */
+  AccessStatus?: number;
 }
 
 /** Clb类型防护对象 */
@@ -1010,7 +1012,7 @@ declare interface DomainInfo {
   UpstreamDomainList?: string[];
   /** 安全组ID */
   SgID?: string;
-  /** clbwaf接入状态 */
+  /** clbwaf接入状态，0代表“尚无流量接入”，1代表“流量接入”，2代表“CLB监听器已注销”，3代表“配置生效中”，4代表“配置下发失败中” */
   AccessStatus?: number;
   /** 域名标签 */
   Labels?: string[];
@@ -1072,7 +1074,7 @@ declare interface DomainsPartInfo {
   HttpsUpstreamPort?: string;
   /** waf前是否部署有七层代理服务。0：没有部署代理服务1：有部署代理服务，waf将使用XFF获取客户端IP2：有部署代理服务，waf将使用remote_addr获取客户端IP3：有部署代理服务，waf将使用ip_headers中的自定义header获取客户端IP */
   IsCdn?: number;
-  /** 是否开启灰度，已废弃。 */
+  /** 是否开启灰度。 */
   IsGray?: number;
   /** 是否开启HTTP2，需要开启HTTPS协议支持。0：关闭1：开启 */
   IsHttp2?: number;
@@ -1156,6 +1158,8 @@ declare interface DomainsPartInfo {
   UpstreamPolicy?: number;
   /** 分流回源策略 */
   UpstreamRules?: UpstreamRule[];
+  /** 业务场景。0：默认值，表示常规业务场景 1：大模型业务场景 */
+  UseCase?: number;
 }
 
 /** 下载攻击日志记录数据项 */
@@ -2689,7 +2693,7 @@ declare interface AddSpartaProtectionRequest {
   PrivateKey?: string;
   /** CertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id */
   SSLId?: string;
-  /** 待废弃，可不填。Waf的资源ID。 */
+  /** Waf的资源ID。 */
   ResourceId?: string;
   /** IsCdn为3时，需要填此参数，表示自定义header */
   IpHeaders?: string[];
@@ -2697,9 +2701,9 @@ declare interface AddSpartaProtectionRequest {
   UpstreamScheme?: string;
   /** HTTPS回源端口,仅UpstreamScheme为http时需要填当前字段 */
   HttpsUpstreamPort?: string;
-  /** 待废弃，可不填。是否开启灰度，0表示不开启灰度。 */
+  /** 是否开启灰度，0表示不开启灰度。 */
   IsGray?: number;
-  /** 待废弃，可不填。灰度的地区 */
+  /** 灰度的地区 */
   GrayAreas?: string[];
   /** 必填项，是否开启HTTP强制跳转到HTTPS。0：不强制跳转1：开启强制跳转 */
   HttpsRewrite?: number;
@@ -2709,9 +2713,9 @@ declare interface AddSpartaProtectionRequest {
   SrcList?: string[];
   /** 必填项，是否开启HTTP2，需要开启HTTPS协议支持。0：关闭1：开启 */
   IsHttp2?: number;
-  /** 待废弃，可不填。WAF实例类型。sparta-waf：SAAS型WAFclb-waf：负载均衡型WAFcdn-waf：CDN上的Web防护能力 */
+  /** WAF实例类型。sparta-waf：SAAS型WAFclb-waf：负载均衡型WAFcdn-waf：CDN上的Web防护能力 */
   Edition?: string;
-  /** 待废弃，目前填0即可。anycast IP类型开关： 0 普通IP 1 Anycast IP */
+  /** 目前填0即可。anycast IP类型开关： 0 普通IP 1 Anycast IP */
   Anycast?: number;
   /** 回源IP列表各IP的权重，和SrcList一一对应。当且仅当UpstreamType为0，并且SrcList有多个IP，并且LoadBalance为2时需要填写，否则填 [] */
   Weights?: number[];
@@ -2759,6 +2763,8 @@ declare interface AddSpartaProtectionRequest {
   UpstreamPolicy?: number;
   /** 分流回源时生效，分流回源的规则。 */
   UpstreamRules?: UpstreamRule[];
+  /** 业务场景。0：默认值，表示常规业务场景 1：大模型业务场景 */
+  UseCase?: number;
 }
 
 declare interface AddSpartaProtectionResponse {
@@ -5459,7 +5465,7 @@ declare interface ModifySpartaProtectionRequest {
   IsWebsocket?: number;
   /** 回源负载均衡策略。0：轮询1：IP hash2：加权轮询 */
   LoadBalance?: number;
-  /** 待废弃，可不填。是否开启灰度，0表示不开启灰度。 */
+  /** 是否开启灰度，0表示不开启灰度。 */
   IsGray?: number;
   /** 域名所属实例类型 */
   Edition?: string;
@@ -5467,7 +5473,7 @@ declare interface ModifySpartaProtectionRequest {
   Ports?: SpartaProtectionPort[];
   /** 是否开启长连接。0： 短连接1： 长连接 */
   IsKeepAlive?: string;
-  /** 待废弃。目前填0即可。anycast IP类型开关： 0 普通IP 1 Anycast IP */
+  /** 目前填0即可。anycast IP类型开关： 0 普通IP 1 Anycast IP */
   Anycast?: number;
   /** 回源IP列表各IP的权重，和SrcList一一对应。当且仅当UpstreamType为0，并且SrcList有多个IP，并且LoadBalance为2时需要填写，否则填 [] */
   Weights?: number[];
@@ -5517,6 +5523,8 @@ declare interface ModifySpartaProtectionRequest {
   UpstreamPolicy?: number;
   /** 分流回源时生效，分流回源的规则。 */
   UpstreamRules?: UpstreamRule[];
+  /** 业务场景。0：默认值，表示常规业务场景 1：大模型业务场景 */
+  UseCase?: number;
 }
 
 declare interface ModifySpartaProtectionResponse {

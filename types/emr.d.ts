@@ -1500,6 +1500,18 @@ declare interface NodeHardwareInfo {
   TkeClusterId?: string;
   /** 新挂磁盘时可支持配置的服务名称列表 */
   ConfigurableServices?: string[];
+  /** 节点标注信息，目前只提供给tf平台使用 */
+  NodeMark?: string;
+}
+
+/** 节点标记信息 */
+declare interface NodeMark {
+  /** 节点类型：master,core,task,router */
+  NodeType?: string;
+  /** 节点标记信息，目前只提供给tf平台使用，作为入参区分同类型节点信息 */
+  NodeNames?: string[];
+  /** 可用区名称 */
+  Zone?: string;
 }
 
 /** 节点续费询价明细 */
@@ -3025,6 +3037,8 @@ declare interface CreateClusterRequest {
   ZoneResourceConfiguration?: ZoneResourceConfiguration[];
   /** cos桶路径，创建StarRocks存算分离集群时用到 */
   CosBucket?: string;
+  /** 节点标识信息，目前只提供给tf平台使用 */
+  NodeMarks?: NodeMark[];
 }
 
 declare interface CreateClusterResponse {
@@ -3115,6 +3129,8 @@ declare interface CreateInstanceRequest {
   MultiZoneSettings?: MultiZoneSetting[];
   /** cos桶路径，创建StarRocks存算分离集群时用到 */
   CosBucket?: string;
+  /** 节点标识信息，目前只提供给tf平台使用 */
+  NodeMarks?: NodeMark[];
 }
 
 declare interface CreateInstanceResponse {
@@ -4741,6 +4757,8 @@ declare interface ScaleOutClusterRequest {
   SubnetId?: string;
   /** 扩容指定配置组 */
   ScaleOutServiceConfGroupsInfo?: ScaleOutServiceConfGroupsInfo[];
+  /** 节点标记信息，当前只提供给tf平台使用 */
+  NodeMarks?: NodeMark;
 }
 
 declare interface ScaleOutClusterResponse {
@@ -4819,6 +4837,8 @@ declare interface ScaleOutInstanceRequest {
   ComputeResourceId?: string;
   /** 计算资源高级设置 */
   ComputeResourceAdvanceParams?: ComputeResourceAdvanceParams;
+  /** 节点标记信息，目前只提供tf平台使用 */
+  NodeMarks?: NodeMark;
 }
 
 declare interface ScaleOutInstanceResponse {

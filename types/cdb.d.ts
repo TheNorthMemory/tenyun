@@ -4,9 +4,9 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 
 /** 数据库账号信息 */
 declare interface Account {
-  /** 新账户的名称 */
+  /** 账号名，可输入1 - 32个字符。 */
   User: string;
-  /** 新账户的域名 */
+  /** 账号的主机。说明：1. IP 形式，支持填入%。2. 多个主机以分隔符分隔，分隔符支持;,|换行符和空格。 */
   Host: string;
 }
 
@@ -1470,15 +1470,15 @@ declare interface RoGroup {
 declare interface RoGroupAttr {
   /** RO 组名称。 */
   RoGroupName?: string;
-  /** RO 实例最大延迟阈值。单位为秒，最小值为 1。注意，RO 组必须设置了开启实例延迟剔除策略，该值才有效。 */
+  /** RO 实例最大延迟阈值。单位为秒，最小值为 1。范围：[1,10000]，整数。注意：RO 组必须设置了开启实例延迟剔除策略，该值才有效。 */
   RoMaxDelayTime?: number;
   /** 是否开启实例延迟剔除。支持的值包括：1 - 开启；0 - 不开启。注意，若设置开启实例延迟剔除，则必须设置延迟阈值（RoMaxDelayTime）参数。 */
   RoOfflineDelay?: number;
-  /** 最少保留实例数。可设置为小于或等于该 RO 组下 RO 实例个数的任意值。注意，若设置值大于 RO 实例数量将不做剔除；若设置为 0，所有实例延迟超限都会被剔除。 */
+  /** 最少保留实例数。可设置为小于或等于该 RO 组下 RO 实例个数的任意值。默认值为1。注意：若设置值大于 RO 实例数量将不做剔除；若设置为 0，所有实例延迟超限都会被剔除。 */
   MinRoInGroup?: number;
   /** 权重模式。支持值包括："system" - 系统自动分配； "custom" - 用户自定义设置。注意，若设置 "custom" 模式，则必须设置 RO 实例权重配置（RoWeightValues）参数。 */
   WeightMode?: string;
-  /** 延迟复制时间。 */
+  /** 延迟复制时间。单位：秒，范围：1 - 259200秒，不传此参数表示不开启实例延迟复制。 */
   ReplicationDelayTime?: number;
 }
 
@@ -1945,15 +1945,15 @@ declare interface AddTimeWindowResponse {
 }
 
 declare interface AdjustCdbProxyAddressRequest {
-  /** 代理组ID */
+  /** 代理组 ID。可通过 [DescribeCdbProxyInfo](https://cloud.tencent.com/document/api/236/90585) 接口获取。 */
   ProxyGroupId: string;
   /** 权重分配模式，系统自动分配："system"， 自定义："custom" */
   WeightMode: string;
   /** 是否开启延迟剔除，取值："true" | "false" */
   IsKickOut: boolean;
-  /** 最小保留数量，最小取值：0 */
+  /** 最小保留数量，最小取值：0。说明：当 IsKickOut 为 true 时才有效。 */
   MinCount: number;
-  /** 延迟剔除阈值，最小取值：0 */
+  /** 延迟剔除阈值，最小取值：1，取值范围：[1,10000]，整数。 */
   MaxDelay: number;
   /** 是否开启故障转移，取值："true" | "false" */
   FailOver: boolean;
@@ -1961,17 +1961,17 @@ declare interface AdjustCdbProxyAddressRequest {
   AutoAddRo: boolean;
   /** 是否是只读，取值："true" | "false" */
   ReadOnly: boolean;
-  /** 代理组地址ID */
+  /** 代理组地址 ID。可通过 [DescribeCdbProxyInfo](https://cloud.tencent.com/document/api/236/90585) 接口获取。 */
   ProxyAddressId: string;
-  /** 是否开启事务分离，取值："true" | "false" */
+  /** 是否开启事务分离，取值："true" | "false"，默认值 false。 */
   TransSplit?: boolean;
-  /** 是否开启连接池注意：如需使用数据库代理连接池能力，MySQL 8.0 主实例的内核小版本要大于等于 MySQL 8.0 20230630。 */
+  /** 是否开启连接池。默认关闭。注意：如需使用数据库代理连接池能力，MySQL 8.0 主实例的内核小版本要大于等于 MySQL 8.0 20230630。 */
   ConnectionPool?: boolean;
   /** 读写权重分配。如果 WeightMode 传的是 system ，则传入的权重不生效，由系统分配默认权重。 */
   ProxyAllocation?: ProxyAllocation[];
-  /** 是否开启自适应负载均衡 */
+  /** 是否开启自适应负载均衡。默认关闭。 */
   AutoLoadBalance?: boolean;
-  /** 访问模式：就近访问，均衡分配 */
+  /** 访问模式：nearby - 就近访问，balance - 均衡分配，默认就近访问。 */
   AccessMode?: string;
 }
 
@@ -1983,9 +1983,9 @@ declare interface AdjustCdbProxyAddressResponse {
 }
 
 declare interface AdjustCdbProxyRequest {
-  /** 实例ID */
+  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
-  /** 代理组ID */
+  /** 代理组 ID。可通过 [DescribeCdbProxyInfo](https://cloud.tencent.com/document/api/236/90585) 接口获取。 */
   ProxyGroupId: string;
   /** 节点规格配置备注：数据库代理支持的节点规格为：2C4000MB、4C8000MB、8C16000MB。示例中参数说明：NodeCount：节点个数Region：节点地域Zone：节点可用区Cpu：单个代理节点核数（单位：核）Mem：单个代理节点内存数（单位：MB） */
   ProxyNodeCustom: ProxyNodeCustom[];
@@ -2003,7 +2003,7 @@ declare interface AdjustCdbProxyResponse {
 }
 
 declare interface AnalyzeAuditLogsRequest {
-  /** 实例ID。 */
+  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
   /** 要分析的日志开始时间，格式为："2023-02-16 00:00:20"。 */
   StartTime: string;
@@ -2079,7 +2079,7 @@ declare interface CheckMigrateClusterResponse {
 }
 
 declare interface CloseAuditServiceRequest {
-  /** 实例ID。 */
+  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
 }
 
@@ -2089,9 +2089,9 @@ declare interface CloseAuditServiceResponse {
 }
 
 declare interface CloseCDBProxyRequest {
-  /** 实例ID */
+  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
-  /** 代理组ID */
+  /** 代理组 ID。可通过 [DescribeCdbProxyInfo](https://cloud.tencent.com/document/api/236/90585) 接口获取。 */
   ProxyGroupId?: string;
   /** 是否只关闭读写分离，取值："true" | "false"，默认为"false" */
   OnlyCloseRW?: boolean;
@@ -2103,9 +2103,9 @@ declare interface CloseCDBProxyResponse {
 }
 
 declare interface CloseCdbProxyAddressRequest {
-  /** 代理组ID */
+  /** 代理组 ID。可通过 [DescribeCdbProxyInfo](https://cloud.tencent.com/document/api/236/90585) 接口获取。 */
   ProxyGroupId: string;
-  /** 代理组地址ID */
+  /** 代理组地址 ID。可通过 [DescribeCdbProxyInfo](https://cloud.tencent.com/document/api/236/90585) 接口获取。 */
   ProxyAddressId: string;
 }
 
@@ -2115,15 +2115,15 @@ declare interface CloseCdbProxyAddressResponse {
 }
 
 declare interface CloseSSLRequest {
-  /** 实例 ID 。只读组 ID为空时必填。 */
+  /** 实例 ID。只读组 ID 为空时必填。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId?: string;
-  /** 只读组 ID。实例 ID为空时必填。 */
+  /** 只读组 ID。实例 ID 为空时必填。可通过 [DescribeRoGroups](https://cloud.tencent.com/document/api/236/40939) 接口获取。 */
   RoGroupId?: string;
 }
 
 declare interface CloseSSLResponse {
   /** 异步请求 ID。 */
-  AsyncRequestId: string;
+  AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2225,15 +2225,15 @@ declare interface CreateAuditRuleResponse {
 }
 
 declare interface CreateAuditRuleTemplateRequest {
-  /** 审计规则 */
+  /** 审计规则。 */
   RuleFilters: RuleFilters[];
-  /** 规则模板名称 */
+  /** 规则模板名称。最多支持输入30个字符。 */
   RuleTemplateName: string;
-  /** 规则模板描述 */
+  /** 规则模板描述。最多支持输入200个字符。 */
   Description?: string;
-  /** 告警等级。1-低风险，2-中风险，3-高风险 */
+  /** 告警等级。1 - 低风险，2 - 中风险，3 - 高风险。默认值为1。 */
   AlarmLevel?: number;
-  /** 告警策略。0-不告警，1-告警 */
+  /** 告警策略。0 - 不告警，1 - 告警。默认值为0。 */
   AlarmPolicy?: number;
 }
 
@@ -2265,7 +2265,7 @@ declare interface CreateBackupResponse {
 }
 
 declare interface CreateCdbProxyAddressRequest {
-  /** 代理组ID */
+  /** 代理组 ID。可通过 [DescribeCdbProxyInfo](https://cloud.tencent.com/document/api/236/90585) 接口获取。 */
   ProxyGroupId: string;
   /** 权重分配模式，系统自动分配："system"， 自定义："custom" */
   WeightMode: string;
@@ -2273,7 +2273,7 @@ declare interface CreateCdbProxyAddressRequest {
   IsKickOut: boolean;
   /** 最小保留数量，最小取值：0 */
   MinCount: number;
-  /** 延迟剔除阈值，最小取值：0 */
+  /** 延迟剔除阈值，最小取值：1，范围：1 - 10000，整数。 */
   MaxDelay: number;
   /** 是否开启故障转移，取值："true" | "false" */
   FailOver: boolean;
@@ -2285,25 +2285,25 @@ declare interface CreateCdbProxyAddressRequest {
   TransSplit: boolean;
   /** 读写权重分配 */
   ProxyAllocation: ProxyAllocation[];
-  /** 私有网络ID */
+  /** 私有网络 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   UniqVpcId: string;
-  /** 私有子网ID */
+  /** 私有子网 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   UniqSubnetId: string;
-  /** 是否开启连接池注意：如需使用数据库代理连接池能力，MySQL 8.0 主实例的内核小版本要大于等于 MySQL 8.0 20230630。 */
+  /** 是否开启连接池。默认关闭。注意：如需使用数据库代理连接池能力，MySQL 8.0 主实例的内核小版本要大于等于 MySQL 8.0 20230630。 */
   ConnectionPool?: boolean;
   /** 描述 */
   Desc?: string;
-  /** IP地址 */
+  /** IP 地址。不填则默认为所选 VPC 下支持的随机一个 IP。 */
   Vip?: string;
-  /** 端口 */
+  /** 端口。默认值3306。 */
   VPort?: number;
   /** 安全组 */
   SecurityGroup?: string[];
-  /** 连接池类型。可选值 transaction（事务级别连接池），connection（会话级别连接池），ConnectionPool为true时生效。 */
+  /** 连接池类型。可选值 transaction（事务级别连接池），connection（会话级别连接池），ConnectionPool 为 true 时生效。默认值：connection。 */
   ConnectionPoolType?: string;
-  /** 是否自适应负载均衡 */
+  /** 是否开启自适应负载均衡。默认关闭。 */
   AutoLoadBalance?: boolean;
-  /** 接入模式 */
+  /** 接入模式。nearBy - 就近访问，balance - 均衡分配，默认值：nearBy。 */
   AccessMode?: string;
 }
 
@@ -2315,11 +2315,11 @@ declare interface CreateCdbProxyAddressResponse {
 }
 
 declare interface CreateCdbProxyRequest {
-  /** 实例ID */
+  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
-  /** 私有网络ID */
+  /** 私有网络 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   UniqVpcId: string;
-  /** 私有子网ID */
+  /** 私有子网 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   UniqSubnetId: string;
   /** 节点规格配置。示例中参数说明：NodeCount：节点个数。Region：节点地域。Zone：节点可用区。Cpu：单个代理节点核数（单位：核）。Mem：单个代理节点内存数（单位：MB）。备注：1. 数据库代理支持的节点规格为：2C4000MB、4C8000MB、8C16000MB。2. 上述参数项（如节点个数、可用区等）均为必填，在调用接口时如未填写完整，可能会创建失败。 */
   ProxyNodeCustom: ProxyNodeCustom[];
@@ -2719,9 +2719,9 @@ declare interface DeleteAccountsResponse {
 }
 
 declare interface DeleteAuditLogFileRequest {
-  /** 审计日志文件名称。 */
+  /** 审计日志文件名称。可通过 [DescribeAuditLogFiles](https://cloud.tencent.com/document/api/236/45454) 接口获取。 */
   FileName: string;
-  /** 实例 ID。 */
+  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
 }
 
@@ -2837,21 +2837,21 @@ declare interface DeleteTimeWindowResponse {
 declare interface DescribeAccountPrivilegesRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
-  /** 数据库的账号名称。 */
+  /** 数据库的账号名称。可通过 [DescribeAccounts](https://cloud.tencent.com/document/api/236/17499) 接口获取。 */
   User: string;
-  /** 数据库的账号域名。 */
+  /** 数据库的账号域名。可通过 [DescribeAccounts](https://cloud.tencent.com/document/api/236/17499) 接口获取。 */
   Host: string;
 }
 
 declare interface DescribeAccountPrivilegesResponse {
   /** 全局权限数组。 */
-  GlobalPrivileges: string[];
+  GlobalPrivileges?: string[];
   /** 数据库权限数组。 */
-  DatabasePrivileges: DatabasePrivilege[];
+  DatabasePrivileges?: DatabasePrivilege[];
   /** 数据库中的表权限数组。 */
-  TablePrivileges: TablePrivilege[];
+  TablePrivileges?: TablePrivilege[];
   /** 数据库表中的列权限数组。 */
-  ColumnPrivileges: ColumnPrivilege[];
+  ColumnPrivileges?: ColumnPrivilege[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2935,7 +2935,7 @@ declare interface DescribeAuditInstanceListResponse {
 declare interface DescribeAuditLogFilesRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
-  /** 分页大小参数。默认值为 20，最小值为 1，最大值为 100。 */
+  /** 分页大小参数。默认值为20，最小值为1，最大值为300。 */
   Limit?: number;
   /** 分页偏移量。 */
   Offset?: number;
@@ -3035,7 +3035,7 @@ declare interface DescribeAuditRuleTemplatesRequest {
   RuleTemplateIds?: string[];
   /** 规则模板名称。 */
   RuleTemplateNames?: string[];
-  /** 单次请求返回的数量。默认值20。 */
+  /** 单次请求返回的数量。默认值20，最大值为1000。 */
   Limit?: number;
   /** 偏移量，默认值为 0。 */
   Offset?: number;
@@ -3283,20 +3283,20 @@ declare interface DescribeBinlogsResponse {
 }
 
 declare interface DescribeCPUExpandStrategyInfoRequest {
-  /** 实例 ID。 */
+  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
 }
 
 declare interface DescribeCPUExpandStrategyInfoResponse {
-  /** 策略类型。输出值 auto、manual。如果返回为 NULL 说明尚未开通弹性扩容策略。 */
+  /** 策略类型。输出值：auto、manual、timeInterval、period。说明：1. auto 表示自动扩容。2. manual 表示自定义扩容，扩容时间为立即生效。3. timeInterval 表示自定义扩容，扩容时间为按时间段。4. period 表示自定义扩容，扩容时间为按周期。5. 如果返回为 NULL 说明尚未开通弹性扩容策略。 */
   Type?: string | null;
-  /** 手动扩容的 CPU 。Type 为 manual 时有效。 */
+  /** 自定义扩容，且扩容时间为立即生效时的 CPU。Type 为 manual 时有效。 */
   ExpandCpu?: number | null;
   /** 自动扩容策略。Type 为 auto 时有效。 */
   AutoStrategy?: AutoStrategy | null;
-  /** 按周期扩容策略。 */
+  /** 按周期扩容策略。当 Type 为 period 时有效。 */
   PeriodStrategy?: PeriodStrategy;
-  /** 按时间段扩容策略。 */
+  /** 按时间段扩容策略。当 Type 为 timeInterval 时有效。 */
   TimeIntervalStrategy?: TimeIntervalStrategy;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3347,7 +3347,7 @@ declare interface DescribeCloneListResponse {
 }
 
 declare interface DescribeClusterInfoRequest {
-  /** 实例 ID。 */
+  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。说明：仅能输入实例架构为云盘版的实例 ID，对应控制台实例配置显示为“云盘版（云盘）”的实例。 */
   InstanceId: string;
 }
 
@@ -3905,9 +3905,9 @@ declare interface DescribeInstanceParamsResponse {
 }
 
 declare interface DescribeInstanceUpgradeCheckJobRequest {
-  /** 实例ID */
+  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
-  /** 目标数据库版本 */
+  /** 目标数据库版本。说明：可选值5.6、5.7、8.0，不支持跨版本升级，升级后不支持版本降级。 */
   DstMysqlVersion: string;
 }
 
@@ -4019,7 +4019,7 @@ declare interface DescribeParamTemplatesResponse {
 }
 
 declare interface DescribeProjectSecurityGroupsRequest {
-  /** 项目ID。 */
+  /** 项目 ID。可通过 [DescribeProjects](https://cloud.tencent.com/document/api/651/78725) 接口获取。 */
   ProjectId?: number;
 }
 
@@ -4053,7 +4053,7 @@ declare interface DescribeProxyCustomConfResponse {
 }
 
 declare interface DescribeProxySupportParamRequest {
-  /** 实例ID */
+  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
 }
 
@@ -4459,11 +4459,11 @@ declare interface ModifyAccountDescriptionResponse {
 declare interface ModifyAccountHostRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
-  /** 账户的名称 */
+  /** 账户的名称。可通过 [DescribeAccounts](https://cloud.tencent.com/document/api/236/17499) 接口获取。 */
   User: string;
-  /** 账户的旧主机 */
+  /** 账户的旧主机。格式：IP 形式，支持单个 IP 地址或者%。 */
   Host: string;
-  /** 账户的新主机 */
+  /** 账户的新主机。格式：IP 形式，支持单个 IP 地址或者%。 */
   NewHost: string;
 }
 
@@ -4531,11 +4531,11 @@ declare interface ModifyAccountPrivilegesResponse {
 }
 
 declare interface ModifyAuditConfigRequest {
-  /** 实例 ID。 */
+  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
   /** 审计日志保存时长。支持值包括：7 - 一周30 - 一个月；180 - 六个月；365 - 一年；1095 - 三年；1825 - 五年； */
   LogExpireDay?: number;
-  /** 是否关闭审计服务。可选值：true - 关闭审计服务；false - 不关闭审计服务。默认值为 false。当关闭审计服务时，会删除用户的审计日志和文件，并删除该实例的所有审计策略。CloseAudit、LogExpireDay必须至少提供一个，如果两个都提供则按照CloseAudit优先的逻辑处理。 */
+  /** 是否关闭审计服务。可选值：true - 关闭审计服务；false - 不关闭审计服务。默认值为 false。说明：1. 当关闭审计服务时，会删除用户的审计日志和文件，并删除该实例的所有审计策略。2. CloseAudit、LogExpireDay 必须至少提供一个，如果两个都提供则按照 CloseAudit 优先的逻辑处理。3. 可通过设置此参数来关闭审计服务，已关闭后不能通过此接口来开启审计服务。 */
   CloseAudit?: boolean;
   /** 高频审计日志保存时长。支持值包括：7 - 一周30 - 一个月；180 - 六个月；365 - 一年；1095 - 三年；1825 - 五年； */
   HighLogExpireDay?: number;
@@ -4565,7 +4565,7 @@ declare interface ModifyAuditRuleResponse {
 }
 
 declare interface ModifyAuditRuleTemplatesRequest {
-  /** 审计规则模板ID。 */
+  /** 审计规则模板 ID。可通过 [DescribeAuditRuleTemplates](https://cloud.tencent.com/document/api/236/101811) 接口获取。 */
   RuleTemplateIds: string[];
   /** 修改后的审计规则。 */
   RuleFilters?: RuleFilters[];
@@ -4585,17 +4585,17 @@ declare interface ModifyAuditRuleTemplatesResponse {
 }
 
 declare interface ModifyAuditServiceRequest {
-  /** 实例ID。 */
+  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
-  /** 日志保留时长。 */
+  /** 日志保留时长。支持值包括：7 - 一周；30 - 一个月；90 - 三个月；180 - 六个月；365 - 一年；1095 - 三年；1825 - 五年。 */
   LogExpireDay?: number;
-  /** 高频日志保留时长。 */
+  /** 高频日志保留时长。默认值为7，此项取值需小于等于 LogExpireDay，支持值包括：3 - 3天；7 - 一周；30 - 一个月；90 - 三个月；180 - 六个月；365 - 一年；1095 - 三年；1825 - 五年。 */
   HighLogExpireDay?: number;
   /** 修改实例审计规则为全审计。 */
   AuditAll?: boolean;
   /** 废弃。 */
   AuditRuleFilters?: AuditRuleFilters[];
-  /** 规则模板ID。 */
+  /** 规则模板 ID。可通过 [DescribeAuditRuleTemplates](https://cloud.tencent.com/document/api/236/101811) 接口获取。 */
   RuleTemplateIds?: string[];
 }
 
@@ -4695,9 +4695,9 @@ declare interface ModifyBackupEncryptionStatusResponse {
 }
 
 declare interface ModifyCdbProxyAddressDescRequest {
-  /** 代理组ID */
+  /** 代理组 ID。可通过 [DescribeCdbProxyInfo](https://cloud.tencent.com/document/api/236/90585) 接口获取。 */
   ProxyGroupId: string;
-  /** 代理组地址ID */
+  /** 代理组地址 ID。可通过 [DescribeCdbProxyInfo](https://cloud.tencent.com/document/api/236/90585) 接口获取。 */
   ProxyAddressId: string;
   /** 描述 */
   Desc?: string;
@@ -4709,19 +4709,19 @@ declare interface ModifyCdbProxyAddressDescResponse {
 }
 
 declare interface ModifyCdbProxyAddressVipAndVPortRequest {
-  /** 代理组ID */
+  /** 代理组 ID。可通过 [DescribeCdbProxyInfo](https://cloud.tencent.com/document/api/236/90585) 接口获取。 */
   ProxyGroupId: string;
-  /** 代理组地址ID */
+  /** 代理组地址 ID。可通过 [DescribeCdbProxyInfo](https://cloud.tencent.com/document/api/236/90585) 接口获取。 */
   ProxyAddressId: string;
-  /** 私有网络ID */
+  /** 私有网络 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   UniqVpcId: string;
-  /** 私有子网ID */
+  /** 私有子网 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   UniqSubnetId: string;
-  /** IP地址 */
+  /** IP 地址。若不填写则自动分配子网下的可用 IP。 */
   Vip?: string;
-  /** 端口 */
+  /** 端口。默认值3306，取值范围：1024 - 65535。 */
   VPort?: number;
-  /** 旧IP地址回收时间 */
+  /** 旧 IP 地址回收时间。单位：小时，默认值：24，取值范围：0 - 168。 */
   ReleaseDuration?: number;
 }
 
@@ -4731,11 +4731,11 @@ declare interface ModifyCdbProxyAddressVipAndVPortResponse {
 }
 
 declare interface ModifyCdbProxyParamRequest {
-  /** 实例ID */
+  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
-  /** 代理组ID */
+  /** 代理组 ID。可通过 [DescribeCdbProxyInfo](https://cloud.tencent.com/document/api/236/90585) 接口获取。 */
   ProxyGroupId: string;
-  /** 连接池阈值注意：如需使用数据库代理连接池能力，MySQL 8.0 主实例的内核小版本要大于等于 MySQL 8.0 20230630。 */
+  /** 连接池阈值。取值范围：大于0，小于等于300。注意：如需使用数据库代理连接池能力，MySQL 8.0 主实例的内核小版本要大于等于 MySQL 8.0 20230630。 */
   ConnectionPoolLimit: number;
 }
 
@@ -5019,17 +5019,17 @@ declare interface OfflineIsolatedInstancesResponse {
 }
 
 declare interface OpenAuditServiceRequest {
-  /** CDB实例ID */
+  /** CDB 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
-  /** 审计日志保存时长。支持值包括：7 - 一周30 - 一个月；90 - 三个月；180 - 六个月；365 - 一年；1095 - 三年；1825 - 五年； */
+  /** 审计日志保存时长。支持值包括：7 - 一周；30 - 一个月；90 - 三个月；180 - 六个月；365 - 一年；1095 - 三年；1825 - 五年。 */
   LogExpireDay: number;
-  /** 高频审计日志保存时长。支持值包括：7 - 一周30 - 一个月； */
+  /** 高频审计日志保存时长。默认值为7，此项取值需小于等于 LogExpireDay，支持值包括：3 - 3天；7 - 一周；30 - 一个月；90 - 三个月；180 - 六个月；365 - 一年；1095 - 三年；1825 - 五年。 */
   HighLogExpireDay?: number;
   /** 审计规则（该参数已废弃，不再生效）。 */
   AuditRuleFilters?: AuditRuleFilters[];
-  /** 规则模板ID。同AuditRuleFilters都不填是全审计。 */
+  /** 规则模板 ID。 */
   RuleTemplateIds?: string[];
-  /** 审计类型。true-全审计；默认false-规则审计。 */
+  /** 审计类型。true - 全审计；默认 false - 规则审计。 */
   AuditAll?: boolean;
 }
 
@@ -5039,7 +5039,7 @@ declare interface OpenAuditServiceResponse {
 }
 
 declare interface OpenDBInstanceEncryptionRequest {
-  /** 云数据库实例 ID。 */
+  /** 云数据库实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
   /** 用户自定义密钥 ID，CMK 唯一标识符。该值为空时，将使用腾讯云自动生成的密钥 KMS-CDB。 */
   KeyId?: string;
@@ -5065,21 +5065,21 @@ declare interface OpenDBInstanceGTIDResponse {
 }
 
 declare interface OpenSSLRequest {
-  /** 实例 ID 。 */
+  /** 实例 ID。只读组 ID 为空时必填。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId?: string;
-  /** 只读组 ID。 */
+  /** 只读组 ID。实例 ID 为空时必填。可通过 [DescribeRoGroups](https://cloud.tencent.com/document/api/236/40939) 接口获取。 */
   RoGroupId?: string;
 }
 
 declare interface OpenSSLResponse {
   /** 异步请求 ID。 */
-  AsyncRequestId: string;
+  AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface OpenWanServiceRequest {
-  /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。 */
+  /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。可以传入只读组 ID。 */
   InstanceId: string;
   /** 变更集群版实例只读组时，InstanceId传实例id，需要额外指定该参数表示操作只读组。 如果操作读写节点则不需指定该参数。 */
   OpResourceId?: string;
@@ -5183,7 +5183,7 @@ declare interface StartBatchRollbackResponse {
 }
 
 declare interface StartCpuExpandRequest {
-  /** 实例 ID。 */
+  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
   /** 扩容类型，支持自动扩容和自定义扩容。说明：1. auto 表示自动扩容。2. manual 表示自定义扩容，扩容时间为立即生效。3. timeInterval 表示自定义扩容，扩容时间为按时间段。4. period 表示自定义扩容，扩容时间为按周期。 */
   Type: string;
@@ -5191,14 +5191,14 @@ declare interface StartCpuExpandRequest {
   ExpandCpu?: number;
   /** 自动扩容策略。Type 为 auto 时必传。 */
   AutoStrategy?: AutoStrategy;
-  /** 按时间段扩容策略。 */
+  /** 按时间段扩容策略。说明：当 Type 为 timeInterval 时，TimeIntervalStrategy 必填。 */
   TimeIntervalStrategy?: TimeIntervalStrategy;
-  /** 按周期扩容策略。 */
+  /** 按周期扩容策略。说明：当 Type 为 period 时，PeriodStrategy 必填。 */
   PeriodStrategy?: PeriodStrategy;
 }
 
 declare interface StartCpuExpandResponse {
-  /** 异步任务 ID 。可以调用DescribeAsyncRequest 传入该 ID ，进行任务执行进度的查询 */
+  /** 异步任务 ID 。可以调用 DescribeAsyncRequest 传入该 ID，进行任务执行进度的查询。 */
   AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -5263,9 +5263,9 @@ declare interface StopRollbackResponse {
 }
 
 declare interface SubmitInstanceUpgradeCheckJobRequest {
-  /** 实例 ID。 */
+  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
-  /** 目标数据库版本。 */
+  /** 目标数据库版本。说明：可选值5.6、5.7、8.0，不支持跨版本升级，升级后不支持版本降级。 */
   DstMysqlVersion: string;
 }
 
@@ -5277,9 +5277,9 @@ declare interface SubmitInstanceUpgradeCheckJobResponse {
 }
 
 declare interface SwitchCDBProxyRequest {
-  /** 实例ID */
+  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
-  /** 数据库代理ID */
+  /** 数据库代理 ID。可通过 [DescribeCdbProxyInfo](https://cloud.tencent.com/document/api/236/90585) 接口获取。 */
   ProxyGroupId: string;
 }
 
@@ -5331,9 +5331,9 @@ declare interface SwitchForUpgradeResponse {
 }
 
 declare interface UpgradeCDBProxyVersionRequest {
-  /** 实例ID */
+  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
-  /** 数据库代理ID */
+  /** 数据库代理 ID。可通过 [DescribeCdbProxyInfo](https://cloud.tencent.com/document/api/236/90585) 接口获取。 */
   ProxyGroupId: string;
   /** 数据库代理当前版本 */
   SrcProxyVersion: string;
@@ -5387,11 +5387,11 @@ declare interface UpgradeDBInstanceRequest {
   DeployMode?: number;
   /** 备库1的可用区信息，默认和实例的 Zone 参数一致，升级主实例为多可用区部署时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。可通过 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口查询支持的可用区。 */
   SlaveZone?: string;
-  /** 主实例数据库引擎版本，支持值包括：5.5、5.6 和 5.7。 */
+  /** 主实例数据库引擎版本，支持值包括：5.5、5.6、5.7、8.0。说明：升级数据库版本请使用 [UpgradeDBInstanceEngineVersion](https://cloud.tencent.com/document/api/236/15870) 接口。 */
   EngineVersion?: string;
   /** 切换访问新实例的方式，默认为 0。支持值包括：0 - 立刻切换，1 - 时间窗切换；当该值为 1 时，升级过程中，切换访问新实例的流程将会在时间窗内进行，或者用户主动调用接口 [切换访问新实例](https://cloud.tencent.com/document/product/236/15864) 触发该流程。 */
   WaitSwitch?: number;
-  /** 备库 2 的可用区信息，默认为空，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。备注：如您要将三节点降级至双节点，将该参数设置为空值即可实现。 */
+  /** 备库2的可用区信息，默认为空，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。可通过 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口查询支持的可用区。备注：如您要将三节点降级至双节点，将该参数设置为空值即可实现。 */
   BackupZone?: string;
   /** 实例类型，默认为 master，支持值包括：master - 表示主实例，dr - 表示灾备实例，ro - 表示只读实例。 */
   InstanceRole?: string;
@@ -5420,7 +5420,7 @@ declare interface UpgradeDBInstanceRequest {
 declare interface UpgradeDBInstanceResponse {
   /** 订单 ID。 */
   DealIds?: string[];
-  /** 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。 */
+  /** 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/236/20410)。 */
   AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

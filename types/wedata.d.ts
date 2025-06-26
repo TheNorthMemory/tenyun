@@ -2074,6 +2074,20 @@ declare interface EventOpsDto {
   EventCases?: EventCaseOpsDto[] | null;
 }
 
+/** 事件发布者信息 */
+declare interface EventPublisherDTO {
+  /** 关键字，一般为任务id */
+  Key: string | null;
+  /** REST_API、KAFKA */
+  Type: string | null;
+  /** 创建时间 */
+  CreationTs: string | null;
+  /** 配置信息 */
+  PropertiesList: ParamInfoDs[] | null;
+  /** 描述信息 */
+  Description: string | null;
+}
+
 /** 资源组详情 */
 declare interface ExecutorResourceGroupInfo {
   /** 执行组id, 仅更新资源时需要传 */
@@ -6826,6 +6840,52 @@ declare interface TaskTypeOpsDto {
   TypeSort?: string | null;
 }
 
+/** TaskVersionVO */
+declare interface TaskVersionDsDTO {
+  /** 版本ID */
+  VersionId?: string | null;
+  /** 任务id */
+  TaskId?: string | null;
+  /** 版本号 */
+  VersionNum?: string | null;
+  /** 版本备注 */
+  VersionRemark?: string | null;
+  /** 版本创建人 */
+  Creator?: string | null;
+  /** 版本创建时间 */
+  CreateTime?: string | null;
+  /** 版本更新时间 */
+  UpdateTime?: string | null;
+  /** 最新调度计划变更时间 生产态存储 */
+  LastSchedulerCommitTime?: string | null;
+  /** 版本是否正在使用 */
+  UsedVersion?: number | null;
+  /** 任务信息 */
+  TaskInfo?: TaskDsDTO | null;
+  /** 任务参数信息 */
+  TaskParaInfo?: ParameterTaskDsDto[] | null;
+  /** TaskInputParam输入参数 */
+  TaskInputParam?: ParameterTaskInDsDto[] | null;
+  /** TaskOutputParam输出参数 */
+  TaskOutputParam?: ParameterTaskOutDsDto[] | null;
+  /** 任务上游依赖信息 */
+  TaskLinkInfo?: TaskLinkDsDTO[] | null;
+  /** 审批状态 */
+  ApproveStatus?: string | null;
+  /** 审批人名称 */
+  ApproveName?: string | null;
+  /** 任务事件绑定 */
+  TaskEventPublisher?: EventPublisherDTO[] | null;
+  /** 任务产出登记信息 */
+  TaskRegisterOutputTable?: TaskDataRegistryDTO[] | null;
+  /** 循环依赖信息 */
+  TaskCycleLinkInfo?: TaskCycleLinkDTO[] | null;
+  /** 事件监听信息 */
+  TaskEventListener?: EventListenerDTO[] | null;
+  /** 审批时间 */
+  ApproveTime?: string | null;
+}
+
 /** 任务实例基本信息 */
 declare interface TaskVersionInstance {
   /** 实例版本号 */
@@ -9345,6 +9405,38 @@ declare interface DescribeDsParentFolderTreeResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDsTaskVersionInfoRequest {
+  /** 任务ID */
+  TaskId: string;
+  /** 版本 */
+  TaskVersion: string;
+  /** 项目id */
+  ProjectId?: string;
+}
+
+declare interface DescribeDsTaskVersionInfoResponse {
+  /** 任务版本详情信息 */
+  Data?: TaskVersionDsDTO | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDsTaskVersionListRequest {
+  /** 任务ID */
+  TaskId: string;
+  /** 项目ID */
+  ProjectId?: string;
+  /** 是否仅返回当前编辑版本 */
+  IsOnlyCurrentEditingVersion?: boolean;
+}
+
+declare interface DescribeDsTaskVersionListResponse {
+  /** 版本列表 */
+  Data?: TaskVersionDsDTO[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDutyScheduleDetailsRequest {
   /** 值班表id */
   Id: number;
@@ -11511,7 +11603,7 @@ declare interface DescribeTaskScriptRequest {
 }
 
 declare interface DescribeTaskScriptResponse {
-  /** 任务脚本内容 */
+  /** 任务脚本内容，BASE64编码 */
   Data?: TaskScriptContent | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -12971,7 +13063,7 @@ declare interface ModifyTaskScriptRequest {
   ProjectId: string;
   /** 任务ID */
   TaskId: string;
-  /** 脚本内容 base64编码 */
+  /** 必填，脚本内容 base64编码 */
   ScriptContent?: string;
   /** 集成任务脚本配置 */
   IntegrationNodeDetails?: IntegrationNodeDetail[];
@@ -14228,6 +14320,10 @@ declare interface Wedata {
   DescribeDsFolderTree(data: DescribeDsFolderTreeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDsFolderTreeResponse>;
   /** 编排空间-查询父目录树 {@link DescribeDsParentFolderTreeRequest} {@link DescribeDsParentFolderTreeResponse} */
   DescribeDsParentFolderTree(data: DescribeDsParentFolderTreeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDsParentFolderTreeResponse>;
+  /** 查看任务版本详细信息 {@link DescribeDsTaskVersionInfoRequest} {@link DescribeDsTaskVersionInfoResponse} */
+  DescribeDsTaskVersionInfo(data: DescribeDsTaskVersionInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDsTaskVersionInfoResponse>;
+  /** 拉取任务版本列表 {@link DescribeDsTaskVersionListRequest} {@link DescribeDsTaskVersionListResponse} */
+  DescribeDsTaskVersionList(data: DescribeDsTaskVersionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDsTaskVersionListResponse>;
   /** 获取值班日历 {@link DescribeDutyScheduleDetailsRequest} {@link DescribeDutyScheduleDetailsResponse} */
   DescribeDutyScheduleDetails(data: DescribeDutyScheduleDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDutyScheduleDetailsResponse>;
   /** 获取值班表列表 {@link DescribeDutyScheduleListRequest} {@link DescribeDutyScheduleListResponse} */
@@ -14418,7 +14514,7 @@ declare interface Wedata {
   DescribeTaskLockStatus(data: DescribeTaskLockStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLockStatusResponse>;
   /** 分页查询任务运行历史 {@link DescribeTaskRunHistoryRequest} {@link DescribeTaskRunHistoryResponse} */
   DescribeTaskRunHistory(data: DescribeTaskRunHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskRunHistoryResponse>;
-  /** 查询任务脚本 {@link DescribeTaskScriptRequest} {@link DescribeTaskScriptResponse} */
+  /** 查询任务脚本（废弃） {@link DescribeTaskScriptRequest} {@link DescribeTaskScriptResponse} */
   DescribeTaskScript(data: DescribeTaskScriptRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskScriptResponse>;
   /** 查询实时任务表粒度指标概览 {@link DescribeTaskTableMetricOverviewRequest} {@link DescribeTaskTableMetricOverviewResponse} */
   DescribeTaskTableMetricOverview(data: DescribeTaskTableMetricOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskTableMetricOverviewResponse>;
@@ -14518,7 +14614,7 @@ declare interface Wedata {
   ModifyTaskAlarmRegular(data: ModifyTaskAlarmRegularRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskAlarmRegularResponse>;
   /** 更新任务（废弃） {@link ModifyTaskInfoRequest} {@link ModifyTaskInfoResponse} */
   ModifyTaskInfo(data: ModifyTaskInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskInfoResponse>;
-  /** 更新任务信息Ds {@link ModifyTaskInfoDsRequest} {@link ModifyTaskInfoDsResponse} */
+  /** 更新任务信息 {@link ModifyTaskInfoDsRequest} {@link ModifyTaskInfoDsResponse} */
   ModifyTaskInfoDs(data: ModifyTaskInfoDsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskInfoDsResponse>;
   /** 添加父任务依赖（废弃） {@link ModifyTaskLinksRequest} {@link ModifyTaskLinksResponse} */
   ModifyTaskLinks(data: ModifyTaskLinksRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskLinksResponse>;
@@ -14526,7 +14622,7 @@ declare interface Wedata {
   ModifyTaskLinksDs(data: ModifyTaskLinksDsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskLinksDsResponse>;
   /** 重命名任务（任务编辑） {@link ModifyTaskNameRequest} {@link ModifyTaskNameResponse} */
   ModifyTaskName(data: ModifyTaskNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskNameResponse>;
-  /** 修改任务脚本 {@link ModifyTaskScriptRequest} {@link ModifyTaskScriptResponse} */
+  /** 修改任务脚本（废弃） {@link ModifyTaskScriptRequest} {@link ModifyTaskScriptResponse} */
   ModifyTaskScript(data: ModifyTaskScriptRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskScriptResponse>;
   /** 更新工作流信息（废弃） {@link ModifyWorkflowInfoRequest} {@link ModifyWorkflowInfoResponse} */
   ModifyWorkflowInfo(data: ModifyWorkflowInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkflowInfoResponse>;
