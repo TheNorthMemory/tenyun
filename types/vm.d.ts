@@ -40,38 +40,40 @@ declare interface AudioResult {
   SubTagCode?: string;
   /** 该字段用于返回音频文件歌曲识别的详细审核结果 */
   LabelResults?: LabelResult[];
+  /** 审核命中类型 */
+  HitType?: string;
 }
 
 /** 音频小语种检测结果 */
 declare interface AudioResultDetailLanguageResult {
   /** 语种 */
-  Label: string | null;
+  Label?: string;
   /** 得分 */
-  Score: number | null;
+  Score?: number;
   /** 开始时间 */
-  StartTime: number | null;
+  StartTime?: number;
   /** 结束时间 */
-  EndTime: number | null;
+  EndTime?: number;
   /** 子标签码 */
-  SubLabelCode: string | null;
+  SubLabelCode?: string;
 }
 
 /** 音频呻吟审核结果 */
 declare interface AudioResultDetailMoanResult {
   /** 该字段用于返回检测结果需要检测的内容类型，此处固定为**Moan**（呻吟）以调用呻吟检测功能。 */
-  Label: string | null;
+  Label?: string;
   /** 该字段用于返回呻吟检测的置信度，取值范围：0（**置信度最低**）-100（**置信度最高**），越高代表音频越有可能属于呻吟内容。 */
-  Score: number;
+  Score?: number;
   /** 该字段用于返回对应呻吟标签的片段在音频文件内的开始时间，单位为毫秒。 */
-  StartTime: number;
+  StartTime?: number;
   /** 该字段用于返回对应呻吟标签的片段在音频文件内的结束时间，单位为毫秒。 */
-  EndTime: number;
+  EndTime?: number;
   /** *内测中，敬请期待* */
-  SubLabelCode: string;
+  SubLabelCode?: string;
   /** 该字段用于返回当前标签（Lable）下的二级标签。 */
-  SubLabel: string;
+  SubLabel?: string;
   /** 该字段用于返回基于恶意标签的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过 */
-  Suggestion: string;
+  Suggestion?: string;
 }
 
 /** 音频ASR文本审核结果 */
@@ -136,52 +138,56 @@ declare interface ImageResult {
   SubLabel?: string;
   /** 场景结果 */
   RecognitionResults?: RecognitionResult[];
+  /** 审核命中类型 */
+  HitType?: string;
 }
 
 /** 图片输出结果的子结果 */
 declare interface ImageResultResult {
   /** 场景Porn 色情Sexy 性感Polity 政治Illegal 违法Abuse 谩骂Terror 暴恐Ad 广告 */
-  Scene?: string | null;
+  Scene?: string;
   /** 是否命中0 未命中1 命中 */
-  HitFlag?: number | null;
+  HitFlag?: number;
   /** 审核建议，可选值：Pass 通过，Review 建议人审，Block 确认违规 */
-  Suggestion?: string | null;
+  Suggestion?: string;
   /** 标签 */
-  Label?: string | null;
+  Label?: string;
   /** 子标签 */
-  SubLabel?: string | null;
+  SubLabel?: string;
   /** 分数 */
-  Score?: number | null;
+  Score?: number;
   /** 人物名称列表，如未识别，则为null */
-  Names?: string[] | null;
+  Names?: string[];
   /** 图片OCR文本 */
-  Text?: string | null;
+  Text?: string;
   /** 其他详情 */
-  Details?: ImageResultsResultDetail[] | null;
+  Details?: ImageResultsResultDetail[];
+  /** 审核命中类型 */
+  HitType?: string;
 }
 
 /** 具体场景下的图片识别结果 */
 declare interface ImageResultsResultDetail {
   /** 任务名称 */
-  Name?: string | null;
+  Name?: string;
   /** OCR识别文本 */
-  Text?: string | null;
+  Text?: string;
   /** 位置信息 */
-  Location?: ImageResultsResultDetailLocation | null;
+  Location?: ImageResultsResultDetailLocation;
   /** 标签 */
-  Label?: string | null;
+  Label?: string;
   /** 库ID */
-  LibId?: string | null;
+  LibId?: string;
   /** 库名称 */
-  LibName?: string | null;
+  LibName?: string;
   /** 命中的关键词 */
-  Keywords?: string[] | null;
+  Keywords?: string[];
   /** 建议 */
-  Suggestion?: string | null;
+  Suggestion?: string;
   /** 得分 */
-  Score?: number | null;
+  Score?: number;
   /** 子标签码 */
-  SubLabelCode?: string | null;
+  SubLabelCode?: string;
   /** 子标签 */
   SubLabel?: string;
   /** Ocr文本命中信息 */
@@ -191,15 +197,15 @@ declare interface ImageResultsResultDetail {
 /** 图片详情位置信息 */
 declare interface ImageResultsResultDetailLocation {
   /** x坐标 */
-  X: number | null;
+  X?: number;
   /** y坐标 */
-  Y: number | null;
+  Y?: number;
   /** 宽度 */
-  Width: number | null;
+  Width?: number;
   /** 高度 */
-  Height: number | null;
+  Height?: number;
   /** 旋转角度 */
-  Rotate: number | null;
+  Rotate?: number;
 }
 
 /** 图片段信息 */
@@ -217,11 +223,11 @@ declare interface ImageSegments {
 /** 输入信息详情 */
 declare interface InputInfo {
   /** 传入的类型可选：URL，COS */
-  Type: string | null;
+  Type?: string;
   /** Url地址 */
-  Url: string | null;
+  Url?: string;
   /** 桶信息。当输入当时COS时，该字段不为空 */
-  BucketInfo: string | null;
+  BucketInfo?: string | null;
 }
 
 /** 歌曲识别结果 */
@@ -245,15 +251,15 @@ declare interface LabelResult {
 /** 媒体类型 */
 declare interface MediaInfo {
   /** 编码格式 */
-  Codecs: string;
+  Codecs?: string;
   /** 流检测时分片时长注意：此字段可能返回 0，表示取不到有效值。 */
-  Duration: number;
+  Duration?: number;
   /** 宽，单位为像素 */
-  Width: number;
+  Width?: number;
   /** 高，单位为像素 */
-  Height: number;
+  Height?: number;
   /** 封面 */
-  Thumbnail: string;
+  Thumbnail?: string;
 }
 
 /** Ocr命中信息 */
@@ -271,31 +277,31 @@ declare interface OcrHitInfo {
 /** 审核切片asr文本信息 */
 declare interface RcbAsr {
   /** 该字段用于返回音频文件识别出的对应文本内容，最大支持**前1000个字符**。 */
-  Text: string | null;
+  Text?: string;
   /** 该字段用于返回被查询任务创建的时间，格式采用 ISO 8601标准。 */
-  CreatedAt: string | null;
+  CreatedAt?: string;
 }
 
 /** 识别类标签结果信息 */
 declare interface RecognitionResult {
   /** 可能的取值有：Teenager 、Gender */
-  Label: string | null;
+  Label?: string;
   /** 识别标签列表 */
-  Tags: Tag[] | null;
+  Tags?: Tag[];
 }
 
 /** 明细数据相关的cos url */
 declare interface SegmentCosUrlList {
   /** 全量图片片段的cos url */
-  ImageAllUrl?: string | null;
+  ImageAllUrl?: string;
   /** 全量音频片段的cos url */
-  AudioAllUrl?: string | null;
+  AudioAllUrl?: string;
   /** 违规图片片段的cos url */
-  ImageBlockUrl?: string | null;
+  ImageBlockUrl?: string;
   /** 违规音频片段的cos url */
-  AudioBlockUrl?: string | null;
+  AudioBlockUrl?: string;
   /** 全量音频识别文本的cos url */
-  AsrUrl?: string | null;
+  AsrUrl?: string;
 }
 
 /** 说话人结果 */
@@ -323,41 +329,41 @@ declare interface StorageInfo {
 /** 音频切片识别标签 */
 declare interface Tag {
   /** 根据Label字段确定具体名称：当Label 为Teenager 时 Name可能取值有：Teenager 当Label 为Gender 时 Name可能取值有：Male 、Female */
-  Name: string | null;
+  Name?: string;
   /** 置信分：0～100，数值越大表示置信度越高 */
-  Score: number | null;
+  Score?: number;
   /** 识别开始偏移时间，单位：毫秒 */
-  StartTime: number | null;
+  StartTime?: number;
   /** 识别结束偏移时间，单位：毫秒 */
-  EndTime: number | null;
+  EndTime?: number;
 }
 
 /** 任务数据 */
 declare interface TaskData {
   /** 任务ID */
-  TaskId: string | null;
+  TaskId?: string;
   /** 输入的数据ID */
-  DataId: string | null;
+  DataId?: string;
   /** 业务类型 */
-  BizType: string | null;
+  BizType?: string;
   /** 任务名称 */
-  Name: string | null;
+  Name?: string;
   /** 状态，可选：PENDING，RUNNING，ERROR，FINISH，CANCELLED */
-  Status: string | null;
+  Status?: string;
   /** 任务类型 */
-  Type: string | null;
+  Type?: string;
   /** 处理建议 */
-  Suggestion: string | null;
+  Suggestion?: string;
   /** 标签 */
-  Labels: TaskLabel[] | null;
+  Labels?: TaskLabel[];
   /** 媒体信息 */
-  MediaInfo: MediaInfo | null;
+  MediaInfo?: MediaInfo;
   /** 输入信息 */
-  InputInfo: InputInfo | null;
+  InputInfo?: InputInfo;
   /** 创建时间 */
-  CreatedAt: string | null;
+  CreatedAt?: string;
   /** 更新时间 */
-  UpdatedAt: string | null;
+  UpdatedAt?: string;
 }
 
 /** Cos TaskFilter */
@@ -397,13 +403,13 @@ declare interface TaskLabel {
 /** 创建任务时的返回结果 */
 declare interface TaskResult {
   /** 请求时传入的DataId */
-  DataId: string | null;
+  DataId?: string;
   /** TaskId，任务ID */
-  TaskId: string | null;
+  TaskId?: string;
   /** 错误码。如果code为OK，则表示创建成功，其他则参考公共错误码 */
-  Code: string | null;
+  Code?: string;
   /** 如果错误，该字段表示错误详情 */
-  Message: string | null;
+  Message?: string;
 }
 
 /** 文本关键词命中的位置信息 */
@@ -493,7 +499,7 @@ declare interface CreateVideoModerationTaskRequest {
 
 declare interface CreateVideoModerationTaskResponse {
   /** 任务创建结果 */
-  Results?: TaskResult[] | null;
+  Results?: TaskResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -507,47 +513,47 @@ declare interface DescribeTaskDetailRequest {
 
 declare interface DescribeTaskDetailResponse {
   /** 该字段用于返回创建视频审核任务后返回的任务ID（在Results参数中），用于标识需要查询任务详情的审核任务。 */
-  TaskId?: string | null;
+  TaskId?: string;
   /** 该字段用于返回调用视频审核接口时传入的数据ID参数，方便数据的辨别和管理。 */
-  DataId?: string | null;
+  DataId?: string;
   /** 该字段用于返回调用视频审核接口时传入的BizType参数，方便数据的辨别和管理。 */
-  BizType?: string | null;
+  BizType?: string;
   /** 该字段用于返回调用视频审核接口时传入的TaskInput参数中的任务名称，方便任务的识别与管理。 */
-  Name?: string | null;
+  Name?: string;
   /** 该字段用于返回所查询内容的任务状态。取值：**FINISH**（任务已完成）、**PENDING** （任务等待中）、**RUNNING** （任务进行中）、**ERROR** （任务出错）、**CANCELLED** （任务已取消）。 */
-  Status?: string | null;
+  Status?: string;
   /** 该字段用于返回调用视频审核接口时输入的视频审核类型，取值为：**VIDEO**（点播视频）和**LIVE_VIDEO**（直播视频），默认值为VIDEO。 */
-  Type?: string | null;
+  Type?: string;
   /** 该字段用于返回基于恶意标签的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过 */
-  Suggestion?: string | null;
+  Suggestion?: string;
   /** 该字段用于返回检测结果所对应的恶意标签。返回值：**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。 */
-  Labels?: TaskLabel[] | null;
+  Labels?: TaskLabel[];
   /** 该字段用于返回输入媒体文件的详细信息，包括编解码格式、分片时长等信息。详细内容敬请参考MediaInfo数据结构的描述。 */
-  MediaInfo?: MediaInfo | null;
+  MediaInfo?: MediaInfo;
   /** 该字段用于返回审核服务的媒体内容信息，主要包括传入文件类型和访问地址。 */
-  InputInfo?: InputInfo | null;
+  InputInfo?: InputInfo;
   /** 该字段用于返回被查询任务创建的时间，格式采用 ISO 8601标准。 */
-  CreatedAt?: string | null;
+  CreatedAt?: string;
   /** 该字段用于返回被查询任务最后更新时间，格式采用 ISO 8601标准。 */
-  UpdatedAt?: string | null;
+  UpdatedAt?: string;
   /** 在秒后重试 */
-  TryInSeconds?: number | null;
+  TryInSeconds?: number;
   /** 该字段用于返回视频中截帧审核的结果，详细返回内容敬请参考ImageSegments数据结构的描述。 */
-  ImageSegments?: ImageSegments[] | null;
+  ImageSegments?: ImageSegments[];
   /** 该字段用于返回视频中音频审核的结果，详细返回内容敬请参考AudioSegments数据结构的描述。 */
-  AudioSegments?: AudioSegments[] | null;
+  AudioSegments?: AudioSegments[];
   /** 当任务状态为Error时，返回对应错误的类型，取值：**DECODE_ERROR**: 解码失败。（输入资源中可能包含无法解码的视频）**URL_ERROR**：下载地址验证失败。**TIMEOUT_ERROR**：处理超时。**CALLBACK_ERRORR**：回调错误。**MODERATION_ERROR**：审核失败。**URL_NOT_SUPPORTED**：源文件太大或没有图片音频帧任务状态非Error时默认返回为空。 */
-  ErrorType?: string | null;
+  ErrorType?: string;
   /** 当任务状态为Error时，该字段用于返回对应错误的详细描述，任务状态非Error时默认返回为空。 */
-  ErrorDescription?: string | null;
+  ErrorDescription?: string;
   /** 该字段用于返回检测结果所对应的标签。如果未命中恶意，返回Normal，如果命中恶意，则返回Labels中优先级最高的标签 */
-  Label?: string | null;
+  Label?: string;
   /** 该字段用于返回音频文件识别出的对应文本内容，最大支持**前1000个字符**。 */
-  AudioText?: string | null;
+  AudioText?: string;
   /** 该字段用于返回音频文件识别出的对应文本内容。 */
-  Asrs?: RcbAsr[] | null;
+  Asrs?: RcbAsr[];
   /** 该字段用于返回检测结果明细数据相关的cos url */
-  SegmentCosUrlList?: SegmentCosUrlList | null;
+  SegmentCosUrlList?: SegmentCosUrlList;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -567,11 +573,11 @@ declare interface DescribeTasksRequest {
 
 declare interface DescribeTasksResponse {
   /** 该字段用于返回当前查询的任务总量，格式为int字符串。 */
-  Total?: string | null;
+  Total?: string;
   /** 该字段用于返回当前页的任务详细数据，具体输出内容请参见TaskData数据结构的详细描述。 */
-  Data?: TaskData[] | null;
+  Data?: TaskData[];
   /** 该字段用于返回翻页时使用的Token信息，由系统自动生成，并在翻页时向下一个生成的页面传递此参数，以方便快速翻页功能的实现。当到最后一页时，该字段为空。 */
-  PageToken?: string | null;
+  PageToken?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

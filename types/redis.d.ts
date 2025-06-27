@@ -2122,7 +2122,7 @@ declare interface DescribeProxySlowLogRequest {
 declare interface DescribeProxySlowLogResponse {
   /** 慢查询总数。 */
   TotalCount?: number;
-  /** 慢查询详情。 */
+  /** 慢查询详情，注意：TotalCount大于1W，即慢日志超过1万条，不支持返回日志详情，返回数据为空。 建议缩小BeginTime和EndTime的时间间隔，多次查询。 */
   InstanceProxySlowLogDetail?: InstanceProxySlowlogDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2274,7 +2274,7 @@ declare interface DescribeSlowLogResponse {
   TotalCount?: number;
   /** 已废弃，该参数存在命名不规范问题，后续用参数InstanceSlowLogDetail取代。慢查询详情。 */
   InstanceSlowlogDetail?: InstanceSlowlogDetail[];
-  /** 慢查询详情。 */
+  /** 慢查询详情，注意：TotalCount大于1W，即慢日志超过1万条，不支持返回日志详情，返回数据为空。 建议缩小BeginTime和EndTime的时间间隔，多次查询。 */
   InstanceSlowLogDetail?: InstanceSlowlogDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2354,7 +2354,7 @@ declare interface DescribeTendisSlowLogRequest {
 declare interface DescribeTendisSlowLogResponse {
   /** 慢查询总数 */
   TotalCount?: number;
-  /** 慢查询详情 */
+  /** 慢查询详情，注意：TotalCount大于1W，即慢日志超过1万条，不支持返回日志详情，返回数据为空。 建议缩小BeginTime和EndTime的时间间隔，多次查询。 */
   TendisSlowLogDetail?: TendisSlowLogDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

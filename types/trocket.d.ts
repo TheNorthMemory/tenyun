@@ -66,7 +66,7 @@ declare interface CustomMapEntry {
 
 /** Topic&Group维度的权限配置 */
 declare interface DetailedRolePerm {
-  /** 权限对应的资源 */
+  /** 权限对应的资源可以是主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口或控制台获得。可以是消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口或控制台获得。 */
   Resource: string;
   /** 是否开启生产权限 */
   PermWrite: boolean;
@@ -612,13 +612,13 @@ declare interface SubscriptionData {
   ConsumerGroup?: string | null;
   /** 是否在线 */
   IsOnline?: boolean | null;
-  /** 消费类型 */
+  /** 消费类型，枚举值如下：- PULL：PULL 消费类型- PUSH：PUSH 消费类型- POP：POP 消费类型 */
   ConsumeType?: string | null;
   /** 订阅规则 */
   SubString?: string | null;
   /** 过滤类型 */
   ExpressionType?: string | null;
-  /** 订阅一致性 */
+  /** 订阅一致性，枚举如下：- 0: 订阅一致- 1: 订阅不一致 */
   Consistency?: number | null;
   /** 消费堆积 */
   ConsumerLag?: number | null;
@@ -654,15 +654,15 @@ declare interface TagFilter {
 declare interface TopicConsumeStats {
   /** 主题名称 */
   Topic?: string;
-  /** 主题类型 */
+  /** 主题类型，枚举值如下：- NORMAL：普通消息主题- FIFO：顺序消息主题- DELAY：延迟消息主题- TRANSACTION：事务消息主题 */
   TopicType?: string;
   /** 单节点主题队列数量 */
   QueueNum?: number;
   /** 消费堆积 */
   ConsumerLag?: number;
-  /** 订阅规则 */
+  /** 订阅规则，`*`表示订阅全部TAG */
   SubString?: string;
-  /** 最后消费进度更新时间 */
+  /** 最后消费进度更新时间，**Unix时间戳（毫秒）** */
   LastUpdateTime?: number;
 }
 
@@ -676,7 +676,7 @@ declare interface TopicItem {
   TopicType?: string;
   /** 队列数量 */
   QueueNum?: number;
-  /** 描述 */
+  /** 备注信息 */
   Remark?: string;
   /** 4.x的集群id */
   ClusterIdV4?: string | null;
@@ -687,7 +687,7 @@ declare interface TopicItem {
   /** 4.x的完整命名空间 */
   FullNamespaceV4?: string | null;
   /** 消息保留时长 */
-  MsgTTL?: number | null;
+  MsgTTL?: number;
 }
 
 /** 迁移主题修改状态后的结果 */
@@ -725,17 +725,17 @@ declare interface ChangeMigratingTopicToNextStageResponse {
 }
 
 declare interface CreateConsumerGroupRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
-  /** 最大重试次数 */
+  /** 最大重试次数，取值范围0～1000 */
   MaxRetryTimes: number;
   /** 是否开启消费 */
   ConsumeEnable: boolean;
   /** 顺序投递：true并发投递：false */
   ConsumeMessageOrderly: boolean;
-  /** 消费组名称 */
+  /** 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口或控制台获得。 */
   ConsumerGroup?: string;
-  /** 备注 */
+  /** 备注信息，最多 128 个字符 */
   Remark?: string;
   /** 标签列表 */
   TagList?: Tag[];
@@ -877,7 +877,7 @@ declare interface CreateMQTTUserResponse {
 }
 
 declare interface CreateRoleRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
   /** 角色名称 */
   Role: string;
@@ -889,7 +889,7 @@ declare interface CreateRoleRequest {
   Remark: string;
   /** 权限类型，默认按集群授权（Cluster：集群级别；TopicAndGroup：主题&消费组级别） */
   PermType?: string;
-  /** Topic&Group维度权限配置 */
+  /** Topic&Group维度权限配置，权限类型为 TopicAndGroup 时必填 */
   DetailedPerms?: DetailedRolePerm[];
 }
 
@@ -901,17 +901,17 @@ declare interface CreateRoleResponse {
 }
 
 declare interface CreateTopicRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
-  /** 主题名称 */
+  /** 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口或控制台获得。 */
   Topic: string;
   /** 主题类型UNSPECIFIED:未指定,NORMAL:普通消息,FIFO:顺序消息,DELAY:延时消息,TRANSACTION:事务消息 */
   TopicType: string;
-  /** 队列数量 */
+  /** 队列数量，取值范围3～16 */
   QueueNum: number;
-  /** 备注 */
+  /** 备注，最多 128 字符 */
   Remark?: string;
-  /** 消息保留时长 */
+  /** 消息保留时长（单位：小时） */
   MsgTTL?: number;
   /** 标签列表 */
   TagList?: Tag[];
@@ -927,9 +927,9 @@ declare interface CreateTopicResponse {
 }
 
 declare interface DeleteConsumerGroupRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
-  /** 消费组名称 */
+  /** 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口或控制台获得。 */
   ConsumerGroup?: string;
 }
 
@@ -993,9 +993,9 @@ declare interface DeleteMQTTUserResponse {
 }
 
 declare interface DeleteRoleRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
-  /** 角色名称 */
+  /** 角色名称，从 [DescribeRoleList](https://cloud.tencent.com/document/api/1493/98862) 接口或控制台获得。 */
   Role: string;
 }
 
@@ -1015,9 +1015,9 @@ declare interface DeleteSmoothMigrationTaskResponse {
 }
 
 declare interface DeleteTopicRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
-  /** 主题名称 */
+  /** 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口或控制台获得。 */
   Topic: string;
 }
 
@@ -1027,15 +1027,15 @@ declare interface DeleteTopicResponse {
 }
 
 declare interface DescribeConsumerClientListRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
-  /** 消费组名称 */
+  /** 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口或控制台获得。 */
   ConsumerGroup?: string;
-  /** 查询条件列表 */
+  /** 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。 */
   Filters?: Filter[];
-  /** 查询起始位置 */
+  /** 查询起始位置，默认为0。 */
   Offset?: number;
-  /** 查询结果限制数量 */
+  /** 查询结果限制数量，默认20。 */
   Limit?: number;
 }
 
@@ -1049,17 +1049,17 @@ declare interface DescribeConsumerClientListResponse {
 }
 
 declare interface DescribeConsumerClientRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
-  /** 客户端ID */
+  /** 客户端ID，从 [DescribeConsumerClientList](https://cloud.tencent.com/document/api/1493/120140) 接口中的 [ConsumerClient](https://cloud.tencent.com/document/api/1493/96031) 出参中获得。 */
   ClientId: string;
-  /** 查询条件列表 */
+  /** 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。 */
   Filters?: Filter[];
-  /** 查询起始位置 */
+  /** 查询起始位置，默认为0。 */
   Offset?: number;
-  /** 查询结果限制数量 */
+  /** 查询结果限制数量，默认20。 */
   Limit?: number;
-  /** 消费组名称 */
+  /** 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口或控制台获得。 */
   ConsumerGroup?: string;
 }
 
@@ -1095,9 +1095,9 @@ declare interface DescribeConsumerGroupListResponse {
 }
 
 declare interface DescribeConsumerGroupRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
-  /** 消费组名称 */
+  /** 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口或控制台获得。 */
   ConsumerGroup?: string;
 }
 
@@ -1108,9 +1108,9 @@ declare interface DescribeConsumerGroupResponse {
   Tps?: number;
   /** 消息堆积数量 */
   ConsumerLag?: number;
-  /** 消费者类型 */
+  /** 消费类型，枚举值如下：- PULL：PULL 消费类型- PUSH：PUSH 消费类型- POP：POP 消费类型 */
   ConsumeType?: string;
-  /** 创建时间，秒为单位 */
+  /** 创建时间，**Unix时间戳（毫秒）** */
   CreatedTime?: number;
   /** 顺序投递：true并发投递：false */
   ConsumeMessageOrderly?: boolean;
@@ -1127,13 +1127,13 @@ declare interface DescribeConsumerGroupResponse {
 }
 
 declare interface DescribeConsumerLagRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
-  /** 消费组名称 */
+  /** 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口或控制台获得。 */
   ConsumerGroup?: string;
-  /** 命名空间，4.x集群必填 */
+  /** 命名空间，4.x集群必填，从 [DescribeRocketMQNamespaces](https://cloud.tencent.com/document/api/1179/63419) 接口或控制台获得。 */
   Namespace?: string;
-  /** 订阅主题，不为空则查询订阅了该主题的消费组的堆积 */
+  /** 订阅主题，不为空则查询订阅了该主题的消费组的堆积，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口或控制台获得。 */
   SubscribeTopic?: string;
 }
 
@@ -1771,15 +1771,15 @@ declare interface DescribeSourceClusterGroupListResponse {
 }
 
 declare interface DescribeTopicListByGroupRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
-  /** 查询起始位置 */
+  /** 查询起始位置，默认为0。 */
   Offset?: number;
-  /** 查询结果限制数量 */
+  /** 查询结果限制数量，默认20。 */
   Limit?: number;
-  /** 消费组名称 */
+  /** 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口或控制台获得。 */
   ConsumerGroup?: string;
-  /** 查询条件列表 */
+  /** 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。 */
   Filters?: Filter[];
 }
 
@@ -1813,15 +1813,15 @@ declare interface DescribeTopicListResponse {
 }
 
 declare interface DescribeTopicRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
-  /** 主题名称 */
+  /** 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口或控制台获得。 */
   Topic: string;
-  /** 查询条件列表 */
+  /** 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。 */
   Filters?: Filter[];
-  /** 查询起始位置 */
+  /** 查询起始位置，默认为0。 */
   Offset?: number;
-  /** 查询结果限制数量 */
+  /** 查询结果限制数量，默认20。 */
   Limit?: number;
 }
 
@@ -1895,17 +1895,17 @@ declare interface ImportSourceClusterTopicsResponse {
 }
 
 declare interface ModifyConsumerGroupRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
-  /** 消费组名称 */
+  /** 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口或控制台获得。 */
   ConsumerGroup?: string;
   /** 是否开启消费 */
   ConsumeEnable?: boolean;
   /** 顺序投递：true并发投递：false */
   ConsumeMessageOrderly?: boolean;
-  /** 最大重试次数 */
+  /** 最大重试次数，取值范围0～1000 */
   MaxRetryTimes?: number;
-  /** 备注 */
+  /** 备注信息，最多 128 个字符 */
   Remark?: string;
 }
 
@@ -2037,9 +2037,9 @@ declare interface ModifyMQTTUserResponse {
 }
 
 declare interface ModifyRoleRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
-  /** 角色名称 */
+  /** 角色名称，从 [DescribeRoleList](https://cloud.tencent.com/document/api/1493/98862) 接口或控制台获得。 */
   Role: string;
   /** 是否开启消费 */
   PermRead: boolean;
@@ -2049,7 +2049,7 @@ declare interface ModifyRoleRequest {
   PermType?: string;
   /** 备注 */
   Remark?: string;
-  /** Topic&Group维度权限配置 */
+  /** Topic&Group维度权限配置，权限类型为 TopicAndGroup 时必填 */
   DetailedPerms?: DetailedRolePerm[];
 }
 
@@ -2059,15 +2059,15 @@ declare interface ModifyRoleResponse {
 }
 
 declare interface ModifyTopicRequest {
-  /** 集群ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1493/96028) 接口或控制台获得。 */
   InstanceId: string;
-  /** 主题名称 */
+  /** 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口或控制台获得。 */
   Topic: string;
-  /** 队列数量 */
+  /** 队列数量，取值范围3～16 */
   QueueNum?: number;
-  /** 备注信息 */
+  /** 备注信息，最多 128 个字符 */
   Remark?: string;
-  /** 消息保留时长 */
+  /** 消息保留时长（单位：小时） */
   MsgTTL?: number;
 }
 

@@ -382,6 +382,14 @@ declare interface TagFilter {
   TagValues?: string[];
 }
 
+/** map结构返回 */
+declare interface UserProperty {
+  /** key */
+  Key?: string;
+  /** value */
+  Value?: string;
+}
+
 /** VPC信息 */
 declare interface VpcInfo {
   /** VPC ID */
@@ -1026,6 +1034,34 @@ declare interface DescribeMessageByTopicResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMessageDetailsRequest {
+  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  InstanceId: string;
+  /** 消息ID */
+  MessageId: string;
+  /** 订阅表达式 */
+  Subscription?: string;
+}
+
+declare interface DescribeMessageDetailsResponse {
+  /** 消息体 */
+  Body?: string;
+  /** 用户自定义属性 */
+  UserProperties?: UserProperty[];
+  /** 消息存储时间，毫秒级时间戳。 */
+  StoreTimestamp?: number;
+  /** 消息ID */
+  MessageId?: string;
+  /** 生产者地址 */
+  ClientId?: string;
+  /** Topic */
+  Qos?: string;
+  /** 源topic */
+  OriginTopic?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeMessageListRequest {
   /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
   InstanceId: string;
@@ -1497,6 +1533,8 @@ declare interface Mqtt {
   DescribeInstanceList(data?: DescribeInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceListResponse>;
   /** 根据订阅查询消息 {@link DescribeMessageByTopicRequest} {@link DescribeMessageByTopicResponse} */
   DescribeMessageByTopic(data: DescribeMessageByTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageByTopicResponse>;
+  /** 查询MQTT详细信息 {@link DescribeMessageDetailsRequest} {@link DescribeMessageDetailsResponse} */
+  DescribeMessageDetails(data: DescribeMessageDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageDetailsResponse>;
   /** 查询MQTT消息列表 {@link DescribeMessageListRequest} {@link DescribeMessageListResponse} */
   DescribeMessageList(data: DescribeMessageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageListResponse>;
   /** 获取MQTT产品售卖规格 {@link DescribeProductSKUListRequest} {@link DescribeProductSKUListResponse} */

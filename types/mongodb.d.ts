@@ -548,6 +548,8 @@ declare interface ShardInfo {
 declare interface SlowLogPattern {
   /** 慢日志模式 */
   Pattern?: string;
+  /** queryHash */
+  QueryHash?: string;
   /** 最大执行时间 */
   MaxTime?: number;
   /** 平均执行时间 */

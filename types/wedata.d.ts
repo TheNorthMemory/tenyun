@@ -2406,6 +2406,22 @@ declare interface GeneralTaskParam {
   Value: string;
 }
 
+/** 获取任务脚本内容返回体 */
+declare interface GetPaginationTaskScriptResponseInfo {
+  /** 项目编号 */
+  ProjectId?: string | null;
+  /** 任务编号 */
+  TaskId?: string | null;
+  /** 页内尺寸 */
+  PageSize?: number | null;
+  /** 页码 */
+  PageNum?: number | null;
+  /** 总页数 */
+  PageTotal?: number | null;
+  /** 分页内容 */
+  Base64ScriptContent?: string | null;
+}
+
 /** 数据源信息 */
 declare interface GovDatasourceInfo {
   /** 数据源id */
@@ -12241,6 +12257,22 @@ declare interface GetOfflineInstanceListResponse {
   RequestId?: string;
 }
 
+declare interface GetPaginationTaskScriptRequest {
+  /** 项目编号 */
+  ProjectId: string;
+  /** 任务编号 */
+  TaskId: string;
+  /** 页码（从1开始） */
+  PageNum?: number;
+}
+
+declare interface GetPaginationTaskScriptResponse {
+  /** 返回数据 */
+  Data?: GetPaginationTaskScriptResponseInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetTaskInstanceRequest {
   /** **项目ID** */
   ProjectId: string;
@@ -14574,6 +14606,8 @@ declare interface Wedata {
   GetOfflineDIInstanceList(data: GetOfflineDIInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<GetOfflineDIInstanceListResponse>;
   /** 获取离线任务实例 {@link GetOfflineInstanceListRequest} {@link GetOfflineInstanceListResponse} */
   GetOfflineInstanceList(data: GetOfflineInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<GetOfflineInstanceListResponse>;
+  /** 获取带分页的任务脚本 {@link GetPaginationTaskScriptRequest} {@link GetPaginationTaskScriptResponse} */
+  GetPaginationTaskScript(data: GetPaginationTaskScriptRequest, config?: AxiosRequestConfig): AxiosPromise<GetPaginationTaskScriptResponse>;
   /** 获取调度实例详情 {@link GetTaskInstanceRequest} {@link GetTaskInstanceResponse} */
   GetTaskInstance(data: GetTaskInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskInstanceResponse>;
   /** 【资源管理】判断资源文件是否存在 {@link JudgeResourceFileRequest} {@link JudgeResourceFileResponse} */

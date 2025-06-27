@@ -818,6 +818,8 @@ declare interface KnowledgeCapacityPieGraphDetail {
   UsedCharSize?: string | null;
   /** 当前应用对于总用量的占比 */
   Proportion?: number | null;
+  /** 知识库类型:0默认1共享 */
+  KnowledgeType?: number;
 }
 
 /** 应用使用知识库容量详情 */
@@ -830,8 +832,10 @@ declare interface KnowledgeDetail {
   Proportion?: number | null;
   /** 超量字符数 */
   ExceedCharSize?: string | null;
-  /** 是否共享知识库类型 */
+  /** 废弃 */
   IsSharedKnowledge?: boolean | null;
+  /** 知识库类型:0默认1共享 */
+  KnowledgeType?: number;
 }
 
 /** 知识库详情信息 */

@@ -25,11 +25,11 @@ declare interface Device {
 /** 用于返回分类模型命中子标签的详细结果 */
 declare interface LabelDetailItem {
   /** 该字段用于返回识别对象的ID以方便识别和区分。 */
-  Id?: number | null;
-  /** 该字段用于返回识命中的子标签名称。 */
-  Name?: string | null;
+  Id?: number;
+  /** 该字段用于返回时命中的子标签名称。 */
+  Name?: string;
   /** 该字段用于返回对应子标签命中的分值，取值为**0-100**，如：*Porn-SexBehavior 99* 则代表相应识别内容命中色情-性行为标签的分值为99。 */
-  Score?: number | null;
+  Score?: number;
 }
 
 /** 分类模型命中结果 */
@@ -45,7 +45,7 @@ declare interface LabelResult {
   /** 该字段用于返回当前标签（Label）下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表图片越有可能属于当前返回的标签；如：*色情 99*，则表明该图片非常有可能属于色情内容；*色情 0*，则表明该图片不属于色情内容。 */
   Score?: number;
   /** 该字段用于返回分类模型命中子标签的详细信息，如：序号、命中标签名称、分数等信息。 */
-  Details?: LabelDetailItem[] | null;
+  Details?: LabelDetailItem[];
 }
 
 /** 用于返回自定义库/黑白库的明细信息 */
@@ -79,7 +79,7 @@ declare interface LibResult {
   /** 该字段用于返回图片检索模型识别的分值，取值为**0-100**，表示该审核图片**与库中样本的相似分值**，得分越高，代表当前内容越有可能命中相似图库内的样本。 */
   Score?: number;
   /** 该字段用于返回黑白库比对结果的详细信息，如：序号、库名称、恶意标签等信息；详细返回信息敬请参考对应数据结构（[LibDetail](https://cloud.tencent.com/document/product/1125/53274)）的描述文档 */
-  Details?: LibDetail[] | null;
+  Details?: LibDetail[];
 }
 
 /** 坐标 */
@@ -111,7 +111,7 @@ declare interface ObjectDetail {
   /** 该参数用于返回命中的实体二级标签。 */
   SubLabel?: string;
   /** 该参数用于返回命中的人脸id */
-  ObjectId?: string | null;
+  ObjectId?: string;
 }
 
 /** 用于返回实体检测结果详情 */
@@ -127,9 +127,9 @@ declare interface ObjectResult {
   /** 该字段用于返回命中当前恶意标签下子标签的分值，取值为**0-100**，如：*Porn-SexBehavior 99* 则代表相应识别内容命中色情-性行为标签的分值为99。 */
   Score?: number;
   /** 该标签用于返回所识别出的实体名称。 */
-  Names?: string[] | null;
+  Names?: string[];
   /** 该标签用于返回所识别出实体的详细信息，如：序号、命中标签名称、位置坐标等信息，详细返回内容敬请参考相应数据结构（[ObjectDetail](https://cloud.tencent.com/document/api/1125/53274)）。 */
-  Details?: ObjectDetail[] | null;
+  Details?: ObjectDetail[];
 }
 
 /** ocr关键词命中位置信息 */
@@ -157,7 +157,7 @@ declare interface OcrResult {
   /** 该字段用于返回当前标签（Label）下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容；*色情 0*，则表明该文本不属于色情内容。 */
   Score?: number;
   /** 该字段用于返回OCR识别出的结果的详细内容，如：文本内容、对应标签、识别框位置等信息。 */
-  Details?: OcrTextDetail[] | null;
+  Details?: OcrTextDetail[];
   /** 该字段用于返回OCR识别出的文字信息。 */
   Text?: string;
 }
@@ -197,19 +197,19 @@ declare interface Positions {
 /** 识别类型标签结果信息 */
 declare interface RecognitionResult {
   /** 当前可能的取值：Scene（图片场景模型） */
-  Label?: string | null;
+  Label?: string;
   /** Label对应模型下的识别标签信息 */
-  Tags?: RecognitionTag[] | null;
+  Tags?: RecognitionTag[];
 }
 
 /** 识别类型标签信息 */
 declare interface RecognitionTag {
   /** 标签名称 */
-  Name?: string | null;
+  Name?: string;
   /** 置信分：0～100，数值越大表示置信度越高 */
-  Score?: number | null;
+  Score?: number;
   /** 标签位置信息，若模型无位置信息，则可能为零值 */
-  Location?: Location | null;
+  Location?: Location;
 }
 
 /** 用于表示业务用户的账号相关信息 */

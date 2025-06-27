@@ -114,7 +114,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 260+ 款产品，12676+ 服务数</summary>
+<details><summary>共计 261+ 款产品，12703+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -191,6 +191,7 @@ controlcenter | [控制中心](https://cloud.tencent.com/document/product/1708) 
 cpdp | [企业收付平台](https://cloud.tencent.com/document/product/1122) | 2019-08-20(219) |
 csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(62) |
 csxg | [5G入云服务](https://cloud.tencent.com/document/product/1687) | 2023-03-03(5) |
+ctem | [暴露面管理服务](https://cloud.tencent.com/document/product/1755) | 2023-11-28(25) |
 cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-12(102) |
 cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(514) |
 cws | 漏洞扫描服务 | 2018-03-12(19) |
@@ -273,7 +274,7 @@ mna | [多网聚合加速](https://cloud.tencent.com/document/product/1385) | 20
 mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) | 2019-07-25(51) | 2018-04-08(13) |
 monitor | [腾讯云可观测平台](https://cloud.tencent.com/document/product/248) | 2023-06-16(1) | 2018-07-24(167) |
 mps | [媒体处理](https://cloud.tencent.com/document/product/862) | 2019-06-12(131) |
-mqtt | [消息队列 MQTT 版](https://cloud.tencent.com/document/product/1778) | 2024-05-16(53) |
+mqtt | [消息队列 MQTT 版](https://cloud.tencent.com/document/product/1778) | 2024-05-16(54) |
 mrs | [医疗报告结构化](https://cloud.tencent.com/document/product/1314) | 2020-09-10(11) |
 ms | [移动应用安全](https://cloud.tencent.com/document/product/283) | 2018-04-08(23) |
 msp | [迁移服务平台](https://cloud.tencent.com/document/product/659) | 2018-03-19(7) |
@@ -371,7 +372,7 @@ vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-
 vtc | [视频转译](https://cloud.tencent.com/document/product/1769) | 2024-02-23(3) |
 waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(164) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
-wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(281) |
+wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(282) |
 weilingwith | [微瓴同业开放平台](https://cloud.tencent.com/document/product/1693) | 2023-04-27(64) |
 wss | SSL证书管理服务 | 2018-04-26(3) |
 yinsuda | [音速达直播音乐版权引擎](https://cloud.tencent.com/document/product/1592) | 2022-05-27(20) |

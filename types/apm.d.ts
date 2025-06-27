@@ -234,6 +234,8 @@ declare interface Line {
   DataSerial?: number[];
   /** 维度列表 */
   Tags?: ApmTag[];
+  /** 指标数据单位 */
+  MetricUnit?: string;
 }
 
 /** 排序字段 */

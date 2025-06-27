@@ -2161,7 +2161,7 @@ declare interface GenSingleDeviceSignatureOfPublicResponse {
 declare interface GenerateSignedVideoURLRequest {
   /** 视频播放原始URL地址 */
   VideoURL: string;
-  /** 播放链接过期时间 */
+  /** 播放链接过期时间（时间戳，单位秒） */
   ExpireTime: number;
   /** 通道ID 非NVR设备不填 NVR设备必填 默认为无 */
   ChannelId?: number;
@@ -4110,13 +4110,13 @@ declare namespace V20201215 {
   interface GenerateSignedVideoURLRequest {
     /** 视频播放原始URL地址 */
     VideoURL: string;
-    /** 播放链接过期时间 */
+    /** 播放链接过期时间（时间戳，单位秒） */
     ExpireTime: number;
   }
 
   interface GenerateSignedVideoURLResponse {
     /** 视频防盗链播放URL */
-    SignedVideoURL: string;
+    SignedVideoURL?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

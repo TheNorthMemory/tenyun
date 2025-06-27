@@ -5,17 +5,17 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 音频审核输出参数 */
 declare interface AudioResult {
   /** 该字段用于返回审核内容是否命中审核模型；取值：0（**未命中**）、1（**命中**）。 */
-  HitFlag?: number | null;
+  HitFlag?: number;
   /** 该字段用于返回检测结果所对应的恶意标签。返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。 */
-  Label?: string | null;
+  Label?: string;
   /** 该字段用于返回后续操作建议。当您获取到判定结果后，返回值表示具体的后续建议操作。返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过 */
-  Suggestion?: string | null;
+  Suggestion?: string;
   /** 该字段用于返回当前标签下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容。 */
-  Score?: number | null;
+  Score?: number;
   /** 该字段用于返回音频文件经ASR识别后的文本信息。最长可识别**5小时**的音频文件，若超出时长限制，接口将会报错。 */
-  Text?: string | null;
+  Text?: string;
   /** 该字段用于返回审核结果的访问链接（URL）。备注：链接默认有效期为12小时。如果您需要更长时效的链接，请使用[COS预签名](https://cloud.tencent.com/document/product/1265/104001)功能更新签名时效。 */
-  Url?: string | null;
+  Url?: string;
   /** 该字段用于返回音频文件的时长，单位为毫秒。 */
   Duration?: string;
   /** 该字段用于返回额外附加信息，不同客户或Biztype下返回信息不同。 */
@@ -27,9 +27,9 @@ declare interface AudioResult {
   /** 该字段用于返回音频小语种检测的详细审核结果。具体结果内容请参见AudioResultDetailLanguageResult数据结构的细节描述。 */
   LanguageResults?: AudioResultDetailLanguageResult[];
   /** 该字段用于返回当前标签（Lable）下的二级标签。 */
-  SubLabel?: string | null;
+  SubLabel?: string;
   /** 识别类标签结果信息列表 */
-  RecognitionResults?: RecognitionResult[] | null;
+  RecognitionResults?: RecognitionResult[];
   /** 说话人结果 */
   SpeakerResults?: SpeakerResults[];
   /** 歌曲识别结果 */
@@ -40,20 +40,22 @@ declare interface AudioResult {
   SubTag?: string;
   /** 三级标签码 */
   SubTagCode?: string;
+  /** 审核检测类型 */
+  HitType?: string;
 }
 
 /** 音频语言种类检测结果 */
 declare interface AudioResultDetailLanguageResult {
   /** 该字段用于返回对应的语言种类信息。 */
-  Label?: string | null;
+  Label?: string;
   /** 该参数用于返回当前标签下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高**），越高代表音频越有可能属于当前返回的语种标签； */
-  Score?: number | null;
+  Score?: number;
   /** 该参数用于返回对应语种标签的片段在音频文件内的开始时间，单位为秒。 */
-  StartTime?: number | null;
+  StartTime?: number;
   /** 该参数用于返回对应语种标签的片段在音频文件内的结束时间，单位为秒。 */
-  EndTime?: number | null;
+  EndTime?: number;
   /** *内测中，敬请期待* */
-  SubLabelCode?: string | null;
+  SubLabelCode?: string;
 }
 
 /** 音频呻吟审核结果 */
@@ -108,24 +110,24 @@ declare interface AudioResultDetailTextResult {
   HitInfos?: HitInfo[];
 }
 
-/** 表示声音段信息 */
+/** 表示该段声音的信息 */
 declare interface AudioSegments {
   /** 该字段用于返回音频片段的开始时间，单位为秒。对于点播文件，该参数代表对应音频相对于完整音轨的偏移时间，如0（代表不偏移），5（音轨开始后5秒），10（音轨开始后10秒）；对于直播文件，该参数则返回对应音频片段开始时的Unix时间戳，如：1594650717。 */
-  OffsetTime?: string | null;
+  OffsetTime?: string;
   /** 该字段用于返回音频片段的具体审核结果，详细内容敬请参考AudioResult数据结构的描述。 */
-  Result?: AudioResult | null;
+  Result?: AudioResult;
   /** 入库时间 */
-  CreatedAt?: string | null;
+  CreatedAt?: string;
 }
 
 /** 文件桶信息参考腾讯云存储相关说明 https://cloud.tencent.com/document/product/436/44352 */
 declare interface BucketInfo {
   /** 该字段用于标识腾讯云对象存储的存储桶名称,关于文件桶的详细信息敬请参考 [腾讯云存储相关说明](https://cloud.tencent.com/document/product/436/44352)。 */
-  Bucket: string | null;
+  Bucket: string;
   /** 该字段用于标识腾讯云对象存储的托管机房的分布地区，对象存储 COS 的数据存放在这些地域的存储桶中。 */
-  Region: string | null;
+  Region: string;
   /** 该字段用于标识腾讯云对象存储的对象Key,对象作为基本单元被存放在存储桶中；用户可以通过腾讯云控制台、API、SDK 等多种方式管理对象。有关对象的详细描述敬请参阅相应 [产品文档](https://cloud.tencent.com/document/product/436/13324)。 */
-  Object: string | null;
+  Object: string;
 }
 
 /** 关键词命中位置信息 */
@@ -143,9 +145,9 @@ declare interface HitInfo {
 /** 输入信息详情 */
 declare interface InputInfo {
   /** 该字段表示文件访问类型，取值为**URL**（资源链接）和**COS** (腾讯云对象存储)。 */
-  Type?: string | null;
+  Type?: string;
   /** 该字段表示文件访问的链接地址，格式为标准URL格式。 备注：当Type为URL时此字段不为空。 */
-  Url?: string | null;
+  Url?: string;
   /** 该字段表示文件访问的腾讯云存储桶信息。 备注：当Type为COS时此字段不为空。 */
   BucketInfo?: BucketInfo | null;
 }
@@ -153,19 +155,19 @@ declare interface InputInfo {
 /** 歌曲识别结果 */
 declare interface LabelResults {
   /** 场景 */
-  Scene?: string | null;
+  Scene?: string;
   /** 建议 */
-  Suggestion?: number | null;
+  Suggestion?: number;
   /** 标签 */
-  Label?: string | null;
+  Label?: string;
   /** 名称：歌曲名，语种名，说话人名 等 */
-  Name?: string | null;
+  Name?: string;
   /** 得分 */
-  Score?: number | null;
+  Score?: number;
   /** 开始时间 */
-  StartTime?: number | null;
+  StartTime?: number;
   /** 结束时间 */
-  EndTime?: number | null;
+  EndTime?: number;
 }
 
 /** 媒体类型 */
@@ -185,7 +187,7 @@ declare interface MediaInfo {
 /** 呻吟低俗检测结果 */
 declare interface MoanResult {
   /** 固定取值为Moan（呻吟/娇喘），如音频中无复杂类型「MoanResult」的返回则代表该音频中无呻吟/娇喘相关违规内容； */
-  Label?: string | null;
+  Label?: string;
   /** 机器判断当前分类的置信度，取值范围：0~100。分数越高，表示越有可能属于当前分类。（如：Moan 99，则该样本属于呻吟/娇喘的置信度非常高。） */
   Score?: number;
   /** 建议您拿到判断结果后的执行操作。建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过 */
@@ -194,8 +196,8 @@ declare interface MoanResult {
   StartTime?: number;
   /** 违规事件结束时间，单位为秒（s）； */
   EndTime?: number;
-  /** 该字段用于返回当前标签（Lable）下的二级标签。注意：此字段可能返回null，表示取不到有效值。 */
-  SubLabel?: string | null;
+  /** 该字段用于返回当前标签（Lable）下的二级标签。 */
+  SubLabel?: string;
 }
 
 /** 标识命中的违规关键词位置信息 */
@@ -209,21 +211,21 @@ declare interface Position {
 /** 识别类标签结果信息 */
 declare interface RecognitionResult {
   /** 可能的取值有：Teenager 、Gender */
-  Label?: string | null;
+  Label?: string;
   /** 识别标签列表 */
-  Tags?: Tag[] | null;
+  Tags?: Tag[];
 }
 
 /** 说话人结果 */
 declare interface SpeakerResults {
   /** 标签 */
-  Label?: string | null;
+  Label?: string;
   /** 得分 */
-  Score?: number | null;
+  Score?: number;
   /** 开始时间 */
-  StartTime?: number | null;
+  StartTime?: number;
   /** 结束时间 */
-  EndTime?: string | null;
+  EndTime?: string;
 }
 
 /** 用于表示数据存储的相关信息 */
@@ -239,41 +241,41 @@ declare interface StorageInfo {
 /** 音频切片识别标签 */
 declare interface Tag {
   /** 根据Label字段确定具体名称：当Label 为Teenager 时 Name可能取值有：Teenager 当Label 为Gender 时 Name可能取值有：Male 、Female */
-  Name?: string | null;
+  Name?: string;
   /** 置信分：0～100，数值越大表示置信度越高 */
-  Score?: number | null;
+  Score?: number;
   /** 识别开始偏移时间，单位：毫秒 */
-  StartTime?: number | null;
+  StartTime?: number;
   /** 识别结束偏移时间，单位：毫秒 */
-  EndTime?: number | null;
+  EndTime?: number;
 }
 
 /** 任务数据 */
 declare interface TaskData {
   /** 该字段用于返回音频审核任务数据所对应的数据ID，方便后续查询和管理审核任务。 */
-  DataId?: string | null;
+  DataId?: string;
   /** 该字段用于返回音频审核任务所生成的任务ID，用于标识具体审核任务，方便后续查询和管理。 */
   TaskId?: string;
   /** 该字段用于返回所查询内容的任务状态。取值：**FINISH**（任务已完成）、**PENDING** （任务等待中）、**RUNNING** （任务进行中）、**ERROR** （任务出错）、**CANCELLED** （任务已取消）。 */
   Status?: string;
   /** 该字段用于返回音频审核任务所对应的任务名称，方便后续查询和管理审核任务。 */
-  Name?: string | null;
+  Name?: string;
   /** 该字段用于返回调用音频审核接口时传入的BizType参数，方便数据的辨别和管理。 */
-  BizType?: string | null;
+  BizType?: string;
   /** 该字段用于返回调用音频审核接口时输入的音频审核类型，取值为：**AUDIO**（点播音频）和**LIVE_AUDIO**（直播音频），默认值为AUDIO。 */
-  Type?: string | null;
+  Type?: string;
   /** 该字段用于返回基于恶意标签的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过 */
-  Suggestion?: string | null;
+  Suggestion?: string;
   /** 输入信息 */
-  MediaInfo?: MediaInfo | null;
+  MediaInfo?: MediaInfo;
   /** 该字段用于返回检测结果所对应的恶意标签。返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。 */
-  Labels?: TaskLabel[] | null;
+  Labels?: TaskLabel[];
   /** 该字段用于返回被查询任务创建的时间，格式采用 ISO 8601标准。 */
   CreatedAt?: string;
   /** 该字段用于返回被查询任务最后更新时间，格式采用 ISO 8601标准。 */
-  UpdatedAt?: string | null;
+  UpdatedAt?: string;
   /** 任务信息 */
-  InputInfo?: InputInfo | null;
+  InputInfo?: InputInfo;
 }
 
 /** 任务筛选器 */
@@ -301,45 +303,45 @@ declare interface TaskInput {
 /** 用于返回审核任务输出的标签 */
 declare interface TaskLabel {
   /** 该字段用于返回检测结果所对应的恶意标签。返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。 */
-  Label?: string | null;
+  Label?: string;
   /** 该字段用于返回当前标签对应的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过 */
-  Suggestion?: string | null;
+  Suggestion?: string;
   /** 该字段用于返回当前标签（Label）下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容；*色情 0*，则表明该文本不属于色情内容。 */
-  Score?: number | null;
+  Score?: number;
   /** 该字段用于返回当前标签（Lable）下的二级标签。 */
-  SubLabel?: string | null;
+  SubLabel?: string;
 }
 
 /** 创建任务时的返回结果 */
 declare interface TaskResult {
   /** 该字段用于返回创建音频审核任务时在TaskInput结构内传入的DataId，用于标识具体审核任务。 */
-  DataId?: string | null;
+  DataId?: string;
   /** 该字段用于返回音频审核任务所生成的任务ID，用于标识具体审核任务，方便后续查询和管理。 */
-  TaskId?: string | null;
+  TaskId?: string;
   /** 该字段用于返回任务创建的状态，如返回OK则代表任务创建成功，其他返回值可参考公共错误码。 */
-  Code?: string | null;
+  Code?: string;
   /** **仅在Code的返回值为错误码时生效**，用于返回错误的详情内容。 */
-  Message?: string | null;
+  Message?: string;
 }
 
 /** 音频文本内容审核结果 */
 declare interface TextResult {
   /** 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告。以及其他令人反感、不安全或不适宜的内容类型。如音频中无复杂类型「TextResults」的返回则代表该音频中无相关违规内容； */
-  Label?: string | null;
+  Label?: string;
   /** 命中的关键词，为空则代表该违规内容出自于模型的判断； */
-  Keywords?: string[] | null;
+  Keywords?: string[];
   /** 命中关键词库的库标识； */
-  LibId?: string | null;
+  LibId?: string;
   /** 命中关键词库的名字； */
-  LibName?: string | null;
+  LibName?: string;
   /** 机器判断当前分类的置信度，取值范围：0~100。分数越高，表示越有可能属于当前分类。（如：Porn 99，则该样本属于色情的置信度非常高。） */
-  Score?: number | null;
+  Score?: number;
   /** 建议您拿到判断结果后的执行操作。建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过 */
-  Suggestion?: string | null;
+  Suggestion?: string;
   /** 自定义词库的类型，自定义词库相关的信息可登录控制台中查看；1：自定义黑白库；2：公库； */
   LibType?: number;
-  /** 该字段用于返回当前标签（Lable）下的二级标签。注意：此字段可能返回null，表示取不到有效值。 */
-  SubLabel?: string | null;
+  /** 该字段用于返回当前标签（Lable）下的二级标签。 */
+  SubLabel?: string;
   /** 该字段用于返回违规文本命中信息 */
   HitInfos?: HitInfo[];
 }
@@ -347,19 +349,19 @@ declare interface TextResult {
 /** 出行结果 */
 declare interface TravelResults {
   /** 一级标签 */
-  Label?: string | null;
+  Label?: string;
   /** 二级标签 */
-  SubLabel?: string | null;
+  SubLabel?: string;
   /** 风险等级 */
-  RiskLevel?: string | null;
+  RiskLevel?: string;
   /** 出行音频角色 */
-  AudioRole?: string | null;
+  AudioRole?: string;
   /** 出行语音文本 */
-  AudioText?: string | null;
+  AudioText?: string;
   /** 开始时间 */
-  StartTime?: number | null;
+  StartTime?: number;
   /** 结束时间 */
-  EndTime?: number | null;
+  EndTime?: number;
 }
 
 /** User结果 */
@@ -471,7 +473,7 @@ declare interface CreateAudioModerationTaskRequest {
 
 declare interface CreateAudioModerationTaskResponse {
   /** 该字段用于返回任务创建的结果，具体输出内容请参见TaskResult数据结构的详细描述。 */
-  Results?: TaskResult[] | null;
+  Results?: TaskResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -485,39 +487,39 @@ declare interface DescribeTaskDetailRequest {
 
 declare interface DescribeTaskDetailResponse {
   /** 该字段用于返回创建音频审核任务后返回的任务ID（在Results参数中），用于标识需要查询任务详情的审核任务。 */
-  TaskId?: string | null;
+  TaskId?: string;
   /** 该字段用于返回调用音频审核接口时在Tasks参数内传入的数据ID参数，方便数据的辨别和管理。 */
-  DataId?: string | null;
+  DataId?: string;
   /** 该字段用于返回调用音频审核接口时传入的BizType参数，方便数据的辨别和管理。 */
-  BizType?: string | null;
+  BizType?: string;
   /** 该字段用于返回调用音频审核接口时传入的TaskInput参数中的任务名称，方便任务的识别与管理。 */
-  Name?: string | null;
+  Name?: string;
   /** 该字段用于返回所查询内容的任务状态。取值：**FINISH**（任务已完成）、**PENDING** （任务等待中）、**RUNNING** （任务进行中）、**ERROR** （任务出错）、**CANCELLED** （任务已取消）。 */
-  Status?: string | null;
+  Status?: string;
   /** 该字段用于返回调用音频审核接口时输入的音频审核类型，取值为：**AUDIO**（点播音频）和**LIVE_AUDIO**（直播音频），默认值为AUDIO。 */
-  Type?: string | null;
+  Type?: string;
   /** 该字段用于返回基于恶意标签的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过 */
-  Suggestion?: string | null;
+  Suggestion?: string;
   /** 该字段用于返回检测结果所对应的恶意标签。返回值：**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。 */
-  Labels?: TaskLabel[] | null;
+  Labels?: TaskLabel[];
   /** 该字段用于返回审核服务的媒体内容信息，主要包括传入文件类型和访问地址。 */
-  InputInfo?: InputInfo | null;
+  InputInfo?: InputInfo;
   /** 该字段用于返回音频文件识别出的对应文本内容，最大支持**前1000个字符**。 */
-  AudioText?: string | null;
+  AudioText?: string;
   /** 该字段用于返回音频片段的审核结果，主要包括开始时间和音频审核的相应结果。具体输出内容请参见AudioSegments及AudioResult数据结构的详细描述。 */
-  AudioSegments?: AudioSegments[] | null;
+  AudioSegments?: AudioSegments[];
   /** 当任务状态为Error时，该字段用于返回对应错误的类型；任务状态非Error时，默认返回为空。 */
-  ErrorType?: string | null;
+  ErrorType?: string;
   /** 当任务状态为Error时，该字段用于返回对应错误的详细描述，任务状态非Error时默认返回为空。 */
-  ErrorDescription?: string | null;
+  ErrorDescription?: string;
   /** 该字段用于返回被查询任务创建的时间，格式采用 ISO 8601标准。 */
-  CreatedAt?: string | null;
+  CreatedAt?: string;
   /** 该字段用于返回被查询任务最后更新时间，格式采用 ISO 8601标准。 */
-  UpdatedAt?: string | null;
+  UpdatedAt?: string;
   /** 该字段用于返回检测结果所对应的标签。如果未命中恶意，返回Normal，如果命中恶意，则返回Labels中优先级最高的标签 */
-  Label?: string | null;
+  Label?: string;
   /** 媒体信息 */
-  MediaInfo?: MediaInfo | null;
+  MediaInfo?: MediaInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -537,11 +539,11 @@ declare interface DescribeTasksRequest {
 
 declare interface DescribeTasksResponse {
   /** 该字段用于返回当前查询的任务总量，格式为int字符串。 */
-  Total?: string | null;
+  Total?: string;
   /** 该字段用于返回当前页的任务详细数据，具体输出内容请参见TaskData数据结构的详细描述。 */
-  Data?: TaskData[] | null;
+  Data?: TaskData[];
   /** 该字段用于返回翻页时使用的Token信息，由系统自动生成，并在翻页时向下一个生成的页面传递此参数，以方便快速翻页功能的实现。当到最后一页时，该字段为空。 */
-  PageToken?: string | null;
+  PageToken?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
