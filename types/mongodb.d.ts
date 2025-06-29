@@ -544,6 +544,16 @@ declare interface ShardInfo {
   RealReplicaSetId?: string;
 }
 
+/** 慢日志详情 */
+declare interface SlowLogItem {
+  /** 慢日志 */
+  Log?: string;
+  /** 节点名称 */
+  NodeName?: string;
+  /** queryHash */
+  QueryHash?: string;
+}
+
 /** 用于描述MongoDB数据库慢日志统计信息 */
 declare interface SlowLogPattern {
   /** 慢日志模式 */
@@ -1180,6 +1190,42 @@ declare interface DescribeDBInstancesResponse {
   TotalCount?: number;
   /** 实例详细信息列表。 */
   InstanceDetails?: InstanceDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDetailedSlowLogsRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 待查询慢日志的开始时间 */
+  StartTime: string;
+  /** 待慢日志的结束时间 */
+  EndTime: string;
+  /** 过滤执行时间大于此值的慢日志，单位ms，默认值100 */
+  ExecTime?: number;
+  /** 过滤慢日志的命令类型 */
+  Commands?: string[];
+  /** 全文搜索关键字，多个关键字间为或关系 */
+  Texts?: string[];
+  /** 根据节点名过滤 */
+  NodeNames?: string[];
+  /** 根据queryHash过滤 */
+  QueryHash?: string[];
+  /** 分页偏移量 */
+  Offset?: number;
+  /** 返回条数 */
+  Limit?: number;
+  /** 排序条件，只支持StartTime(按慢日志生成时间)和ExecTime(慢日志执行时间) */
+  OrderBy?: string;
+  /** 排序。desc倒排，asc正排 */
+  OrderByType?: string;
+}
+
+declare interface DescribeDetailedSlowLogsResponse {
+  /** 满足条件的慢日志数量 */
+  TotalCount?: number;
+  /** 慢日志详情 */
+  DetailedSlowLogs?: SlowLogItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2173,6 +2219,8 @@ declare interface Mongodb {
   DescribeDBInstanceURL(data: DescribeDBInstanceURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceURLResponse>;
   /** 查询云数据库实例列表 {@link DescribeDBInstancesRequest} {@link DescribeDBInstancesResponse} */
   DescribeDBInstances(data?: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
+  /** 查询实例慢日志详情 {@link DescribeDetailedSlowLogsRequest} {@link DescribeDetailedSlowLogsResponse} */
+  DescribeDetailedSlowLogs(data: DescribeDetailedSlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDetailedSlowLogsResponse>;
   /** 获取当前实例可修改的参数列表 {@link DescribeInstanceParamsRequest} {@link DescribeInstanceParamsResponse} */
   DescribeInstanceParams(data: DescribeInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamsResponse>;
   /** 查询实例绑定的安全组 {@link DescribeSecurityGroupRequest} {@link DescribeSecurityGroupResponse} */

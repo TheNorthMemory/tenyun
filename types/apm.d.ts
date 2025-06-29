@@ -344,6 +344,32 @@ declare interface CreateApmInstanceResponse {
   RequestId?: string;
 }
 
+declare interface CreateProfileTaskRequest {
+  /** 应用名称 */
+  ServiceName: string;
+  /** APM业务系统ID */
+  InstanceId: string;
+  /** 应用实例（在线） */
+  ServiceInstance: string;
+  /** 事件类型（cpu、alloc） */
+  Event: string;
+  /** 任务持续时长(单位：毫秒)，范围限制在5~180秒 */
+  Duration: number;
+  /** 执行次数，范围限制在1~100次 */
+  AllTimes: number;
+  /** 开始时间戳，0代表从当前开始(单位：秒) */
+  StartTime?: number;
+  /** 任务执行间隔(单位：毫秒)，范围限制在10~600秒，不可小于1.5倍的Duration */
+  TaskInterval?: number;
+}
+
+declare interface CreateProfileTaskResponse {
+  /** 任务ID */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeApmAgentRequest {
   /** 业务系统 ID */
   InstanceId: string;
@@ -673,6 +699,8 @@ declare interface Apm {
   (): Versions;
   /** 创建 APM 业务系统 {@link CreateApmInstanceRequest} {@link CreateApmInstanceResponse} */
   CreateApmInstance(data: CreateApmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApmInstanceResponse>;
+  /** 创建性能剖析事件任务 {@link CreateProfileTaskRequest} {@link CreateProfileTaskResponse} */
+  CreateProfileTask(data: CreateProfileTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProfileTaskResponse>;
   /** 获取 APM 接入点 {@link DescribeApmAgentRequest} {@link DescribeApmAgentResponse} */
   DescribeApmAgent(data: DescribeApmAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmAgentResponse>;
   /** 获取 APM 业务系统列表 {@link DescribeApmInstancesRequest} {@link DescribeApmInstancesResponse} */

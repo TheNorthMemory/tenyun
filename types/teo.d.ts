@@ -158,6 +158,14 @@ declare interface AdaptiveFrequencyControl {
   Action?: SecurityAction;
 }
 
+/** IP 网段详情。 */
+declare interface Addresses {
+  /** IPv4 网段列表。 */
+  IPv4?: string[];
+  /** IPv6 网段列表。 */
+  IPv6?: string[];
+}
+
 /** 描述键值对过滤器，用于条件过滤查询，支持模糊查询。例如过滤ID、名称、状态等。若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
 declare interface AdvancedFilter {
   /** 需要过滤的字段。 */
@@ -778,6 +786,18 @@ declare interface ContentIdentifier {
   ModifiedOn?: string;
   /** 删除时间，状态非 deleted 时候为空；时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。 */
   DeletedOn?: string | null;
+}
+
+/** 当前生效的回源 IP 网段。 */
+declare interface CurrentOriginACL {
+  /** 回源 IP 网段详情。 */
+  EntireAddresses?: Addresses | null;
+  /** 版本号。 */
+  Version?: string | null;
+  /** 版本生效时间，时间是北京时间 UTC+8， 遵循 ISO 8601 标准的日期和时间格式。 */
+  ActiveTime?: string | null;
+  /** 本参数用于记录当前版本生效前是否完成「我已更新至最新回源 IP 网段」的确认。取值有：true：版本生效时，已完成更新至最新回源 IP 的确认；false：版本生效时，仍未完成已更新至最新回源 IP 的确认，回源 IP 网段由后台强制更新至最新版本。注意：本参数返回 false 时，请及时确认您的源站防火墙配置是否已更新至最新的回源 IP 网段，以避免出现回源失败。 */
+  IsPlaned?: string | null;
 }
 
 /** 实时日志投递到自定义 HTTP(S) 接口的配置信息。 */
@@ -1940,6 +1960,22 @@ declare interface MutualTLS {
   CertInfos?: CertificateInfo[];
 }
 
+/** 当回源 IP 网段发生更新时，该字段会返回下一个版本将要生效的回源 IP 网段，包含与当前生效的回源 IP 网段的对比。 */
+declare interface NextOriginACL {
+  /** 版本号。 */
+  Version?: string;
+  /** 版本生效时间，时间是北京时间 UTC+8， 遵循 ISO 8601 标准的日期和时间格式。 */
+  PlannedActiveTime?: string;
+  /** 回源 IP 网段详情。 */
+  EntireAddresses?: Addresses;
+  /** 最新回源 IP 网段相较于 CurrentOrginACL 中回源 IP 网段新增的部分。 */
+  AddedAddresses?: Addresses;
+  /** 最新回源 IP 网段相较于 CurrentOrginACL 中回源 IP 网段删减的部分。 */
+  RemovedAddresses?: Addresses;
+  /** 最新回源 IP 网段相较于 CurrentOrginACL 中回源 IP 网段无变化的部分。 */
+  NoChangeAddresses?: Addresses;
+}
+
 /** 不缓存配置 */
 declare interface NoCache {
   /** 不缓存配置开关，取值有：on：开启；off：关闭。 */
@@ -1988,6 +2024,30 @@ declare interface Origin {
   OriginPullProtocol?: string;
   /** 源站为腾讯云 COS 时，是否为私有访问 bucket，取值有：on：私有访问；off：公共访问。 */
   CosPrivateAccess?: string;
+}
+
+/** 需要配置特定回源 IP 网段回源的实例。 */
+declare interface OriginACLEntity {
+  /** 实例类型，取值有：- l7：七层加速域名；- l4：四层代理实例。 */
+  Type: string;
+  /** 实例详情，取值有：- 当 Type = l7 时，请填写七层加速域名；- 当 Type = l4 时，请填写四层代理实例 ID。 */
+  Instances: string[];
+  /** 操作模式，取值有：enable：启用；disable：停用。 */
+  OperationMode: string;
+}
+
+/** 七层加速域名/四层代理实例与回源 IP 网段的绑定关系，以及回源 IP 网段详情。 */
+declare interface OriginACLInfo {
+  /** 启用了特定回源 IP 网段回源的七层加速域名列表。源站防护未开启时为空。 */
+  L7Hosts?: string[];
+  /** 启用了特定回源 IP 网段回源的四层代理实例列表。源站防护未开启时为空。 */
+  L4ProxyIds?: string[];
+  /** 当前生效的回源 IP 网段。源站防护未开启时为空。 */
+  CurrentOriginACL?: CurrentOriginACL | null;
+  /** 当回源 IP 网段发生更新时，该字段会返回下一个版本将要生效的回源 IP 网段，包含与当前回源 IP 网段的对比。无更新或者源站防护未开启时该字段为空。 */
+  NextOriginACL?: NextOriginACL | null;
+  /** 源站防护状态，取值有：online：已生效；offline：已停用；updating: 配置部署中。 */
+  Status?: string;
 }
 
 /** 加速域名源站信息。 */
@@ -3560,6 +3620,16 @@ declare interface CheckCnameStatusResponse {
   RequestId?: string;
 }
 
+declare interface ConfirmOriginACLUpdateRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+}
+
+declare interface ConfirmOriginACLUpdateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAccelerationDomainRequest {
   /** 加速域名所属站点 ID。 */
   ZoneId: string;
@@ -4884,6 +4954,18 @@ declare interface DescribeLoadBalancerListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeOriginACLRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+}
+
+declare interface DescribeOriginACLResponse {
+  /** 七层加速域名/四层代理实例与回源 IP 网段的绑定关系详情。 */
+  OriginACLInfo?: OriginACLInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeOriginGroupHealthStatusRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -5350,6 +5432,16 @@ declare interface DestroyPlanResponse {
   RequestId?: string;
 }
 
+declare interface DisableOriginACLRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+}
+
+declare interface DisableOriginACLResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DownloadL4LogsRequest {
   /** 开始时间。 */
   StartTime: string;
@@ -5394,6 +5486,24 @@ declare interface DownloadL7LogsResponse {
   TotalCount?: number;
   /** 七层离线日志数据列表。 */
   Data?: L7OfflineLog[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EnableOriginACLRequest {
+  /** 站点ID。 */
+  ZoneId: string;
+  /** 七层加速域名开启回源白名单的模式。all：为站点下的所有七层加速域名开启回源白名单。specific：为站点下指定的七层加速域名开启回源白名单。当参数为空时，默认为specific。 */
+  L7EnableMode?: string;
+  /** 开启回源白名单的七层加速域名列表，当请求参数 L7EnableMode 为 all 时必须为空。 */
+  L7Hosts?: string[];
+  /** 四层代理 ID 开启回源白名单的模式。all：为站点下的所有四层代理开启回源白名单。specific：为站点下指定的四层代理 ID 开启回源白名单。当参数为空时，默认为specific。 */
+  L4EnableMode?: string;
+  /** 开启回源白名单的四层代理 ID 列表，当请求参数 L4EnableMode 为 all 时必须为空。单次最多支持 200 个实例。 */
+  L4ProxyIds?: string[];
+}
+
+declare interface EnableOriginACLResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5866,6 +5976,18 @@ declare interface ModifyLoadBalancerRequest {
 }
 
 declare interface ModifyLoadBalancerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyOriginACLRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 需要启用/关闭特定回源 IP 网段回源的实例。 */
+  OriginACLEntities?: OriginACLEntity[];
+}
+
+declare interface ModifyOriginACLResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6369,6 +6491,8 @@ declare interface Teo {
   BindZoneToPlan(data: BindZoneToPlanRequest, config?: AxiosRequestConfig): AxiosPromise<BindZoneToPlanResponse>;
   /** 校验域名 CNAME 状态 {@link CheckCnameStatusRequest} {@link CheckCnameStatusResponse} */
   CheckCnameStatus(data: CheckCnameStatusRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCnameStatusResponse>;
+  /** 确认回源 IP 网段更新 {@link ConfirmOriginACLUpdateRequest} {@link ConfirmOriginACLUpdateResponse} */
+  ConfirmOriginACLUpdate(data: ConfirmOriginACLUpdateRequest, config?: AxiosRequestConfig): AxiosPromise<ConfirmOriginACLUpdateResponse>;
   /** 创建加速域名 {@link CreateAccelerationDomainRequest} {@link CreateAccelerationDomainResponse} */
   CreateAccelerationDomain(data: CreateAccelerationDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccelerationDomainResponse>;
   /** 创建别称域名 {@link CreateAliasDomainRequest} {@link CreateAliasDomainResponse} */
@@ -6515,6 +6639,8 @@ declare interface Teo {
   DescribeL7AccSetting(data: DescribeL7AccSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL7AccSettingResponse>;
   /** 查询负载均衡实例列表 {@link DescribeLoadBalancerListRequest} {@link DescribeLoadBalancerListResponse} */
   DescribeLoadBalancerList(data: DescribeLoadBalancerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancerListResponse>;
+  /** 查询源站防护详情 {@link DescribeOriginACLRequest} {@link DescribeOriginACLResponse} */
+  DescribeOriginACL(data: DescribeOriginACLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginACLResponse>;
   /** 获取源站组列表 {@link DescribeOriginGroupRequest} {@link DescribeOriginGroupResponse} */
   DescribeOriginGroup(data?: DescribeOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginGroupResponse>;
   /** 查询负载均衡实例下源站组健康状态 {@link DescribeOriginGroupHealthStatusRequest} {@link DescribeOriginGroupHealthStatusResponse} */
@@ -6561,10 +6687,14 @@ declare interface Teo {
   DescribeZones(data?: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
   /** 销毁套餐 {@link DestroyPlanRequest} {@link DestroyPlanResponse} */
   DestroyPlan(data: DestroyPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyPlanResponse>;
+  /** 关闭源站防护 {@link DisableOriginACLRequest} {@link DisableOriginACLResponse} */
+  DisableOriginACL(data: DisableOriginACLRequest, config?: AxiosRequestConfig): AxiosPromise<DisableOriginACLResponse>;
   /** 下载四层离线日志 {@link DownloadL4LogsRequest} {@link DownloadL4LogsResponse} */
   DownloadL4Logs(data: DownloadL4LogsRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadL4LogsResponse>;
   /** 下载七层离线日志 {@link DownloadL7LogsRequest} {@link DownloadL7LogsResponse} */
   DownloadL7Logs(data: DownloadL7LogsRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadL7LogsResponse>;
+  /** 开启回源白名单 {@link EnableOriginACLRequest} {@link EnableOriginACLResponse} */
+  EnableOriginACL(data: EnableOriginACLRequest, config?: AxiosRequestConfig): AxiosPromise<EnableOriginACLResponse>;
   /** 导出站点配置 {@link ExportZoneConfigRequest} {@link ExportZoneConfigResponse} */
   ExportZoneConfig(data: ExportZoneConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ExportZoneConfigResponse>;
   /** 操作边缘函数运行环境 {@link HandleFunctionRuntimeEnvironmentRequest} {@link HandleFunctionRuntimeEnvironmentResponse} */
@@ -6623,6 +6753,8 @@ declare interface Teo {
   ModifyL7AccSetting(data: ModifyL7AccSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL7AccSettingResponse>;
   /** 修改负载均衡实例 {@link ModifyLoadBalancerRequest} {@link ModifyLoadBalancerResponse} */
   ModifyLoadBalancer(data: ModifyLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerResponse>;
+  /** 变更源站防护实例 {@link ModifyOriginACLRequest} {@link ModifyOriginACLResponse} */
+  ModifyOriginACL(data: ModifyOriginACLRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOriginACLResponse>;
   /** 修改源站组 {@link ModifyOriginGroupRequest} {@link ModifyOriginGroupResponse} */
   ModifyOriginGroup(data: ModifyOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOriginGroupResponse>;
   /** 修改套餐配置 {@link ModifyPlanRequest} {@link ModifyPlanResponse} */

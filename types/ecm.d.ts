@@ -3937,7 +3937,7 @@ declare interface Ecm {
   AssociateAddress(data: AssociateAddressRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateAddressResponse>;
   /** 绑定安全组 {@link AssociateSecurityGroupsRequest} {@link AssociateSecurityGroupsResponse} */
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
-  /** 挂载云硬盘 {@link AttachDisksRequest} {@link AttachDisksResponse} */
+  /** @deprecated 挂载云硬盘 {@link AttachDisksRequest} {@link AttachDisksResponse} */
   AttachDisks(data: AttachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<AttachDisksResponse>;
   /** 弹性网卡绑定云主机 {@link AttachNetworkInterfaceRequest} {@link AttachNetworkInterfaceResponse} */
   AttachNetworkInterface(data: AttachNetworkInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<AttachNetworkInterfaceResponse>;
@@ -3947,7 +3947,7 @@ declare interface Ecm {
   BatchModifyTargetWeight(data: BatchModifyTargetWeightRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyTargetWeightResponse>;
   /** 批量绑定后端目标 {@link BatchRegisterTargetsRequest} {@link BatchRegisterTargetsResponse} */
   BatchRegisterTargets(data: BatchRegisterTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchRegisterTargetsResponse>;
-  /** 创建云硬盘 {@link CreateDisksRequest} {@link CreateDisksResponse} */
+  /** @deprecated 创建云硬盘 {@link CreateDisksRequest} {@link CreateDisksResponse} */
   CreateDisks(data: CreateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDisksResponse>;
   /** 创建HAVIP {@link CreateHaVipRequest} {@link CreateHaVipResponse} */
   CreateHaVip(data: CreateHaVipRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHaVipResponse>;
@@ -3997,7 +3997,7 @@ declare interface Ecm {
   DeleteSecurityGroup(data: DeleteSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityGroupResponse>;
   /** 删除安全组规则 {@link DeleteSecurityGroupPoliciesRequest} {@link DeleteSecurityGroupPoliciesResponse} */
   DeleteSecurityGroupPolicies(data: DeleteSecurityGroupPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityGroupPoliciesResponse>;
-  /** 删除快照 {@link DeleteSnapshotsRequest} {@link DeleteSnapshotsResponse} */
+  /** @deprecated 删除快照 {@link DeleteSnapshotsRequest} {@link DeleteSnapshotsResponse} */
   DeleteSnapshots(data: DeleteSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotsResponse>;
   /** 删除子网 {@link DeleteSubnetRequest} {@link DeleteSubnetResponse} */
   DeleteSubnet(data: DeleteSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSubnetResponse>;
@@ -4015,7 +4015,7 @@ declare interface Ecm {
   DescribeCustomImageTask(data: DescribeCustomImageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomImageTaskResponse>;
   /** 查询可用区的默认子网 {@link DescribeDefaultSubnetRequest} {@link DescribeDefaultSubnetResponse} */
   DescribeDefaultSubnet(data: DescribeDefaultSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultSubnetResponse>;
-  /** 查询云硬盘列表 {@link DescribeDisksRequest} {@link DescribeDisksResponse} */
+  /** @deprecated 查询云硬盘列表 {@link DescribeDisksRequest} {@link DescribeDisksResponse} */
   DescribeDisks(data?: DescribeDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksResponse>;
   /** 查询HAVIP列表 {@link DescribeHaVipsRequest} {@link DescribeHaVipsResponse} */
   DescribeHaVips(data?: DescribeHaVipsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHaVipsResponse>;
@@ -4069,7 +4069,7 @@ declare interface Ecm {
   DescribeSecurityGroupPolicies(data: DescribeSecurityGroupPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupPoliciesResponse>;
   /** 查看安全组 {@link DescribeSecurityGroupsRequest} {@link DescribeSecurityGroupsResponse} */
   DescribeSecurityGroups(data?: DescribeSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupsResponse>;
-  /** 查询快照列表 {@link DescribeSnapshotsRequest} {@link DescribeSnapshotsResponse} */
+  /** @deprecated 查询快照列表 {@link DescribeSnapshotsRequest} {@link DescribeSnapshotsResponse} */
   DescribeSnapshots(data?: DescribeSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotsResponse>;
   /** 查询子网列表 {@link DescribeSubnetsRequest} {@link DescribeSubnetsResponse} */
   DescribeSubnets(data?: DescribeSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetsResponse>;
@@ -4083,7 +4083,7 @@ declare interface Ecm {
   DescribeTaskStatus(data: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
   /** 查询VPC列表 {@link DescribeVpcsRequest} {@link DescribeVpcsResponse} */
   DescribeVpcs(data?: DescribeVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcsResponse>;
-  /** 卸载云硬盘 {@link DetachDisksRequest} {@link DetachDisksResponse} */
+  /** @deprecated 卸载云硬盘 {@link DetachDisksRequest} {@link DetachDisksResponse} */
   DetachDisks(data: DetachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DetachDisksResponse>;
   /** 弹性网卡解绑云主机 {@link DetachNetworkInterfaceRequest} {@link DetachNetworkInterfaceResponse} */
   DetachNetworkInterface(data: DetachNetworkInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<DetachNetworkInterfaceResponse>;
@@ -4191,7 +4191,7 @@ declare interface Ecm {
   StartInstances(data: StartInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StartInstancesResponse>;
   /** 实例关机 {@link StopInstancesRequest} {@link StopInstancesResponse} */
   StopInstances(data: StopInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StopInstancesResponse>;
-  /** 退还云硬盘 {@link TerminateDisksRequest} {@link TerminateDisksResponse} */
+  /** @deprecated 退还云硬盘 {@link TerminateDisksRequest} {@link TerminateDisksResponse} */
   TerminateDisks(data: TerminateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateDisksResponse>;
   /** 销毁实例 {@link TerminateInstancesRequest} {@link TerminateInstancesResponse} */
   TerminateInstances(data: TerminateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateInstancesResponse>;

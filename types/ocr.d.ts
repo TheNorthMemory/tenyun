@@ -312,6 +312,8 @@ declare interface CustomsPaymentReceipt {
   Title?: string;
   /** 识别出的字段名称(关键字)，支持以下字段： 税号 、纳税人识别号 、纳税人名称 、金额合计大写 、金额合计小写 、填发日期 、税务机关 、填票人。 示例值：纳税人识别号 */
   Content?: OtherInvoiceItem[];
+  /** 海关缴款书常用字段 */
+  CommonContent?: OtherInvoiceItem[];
 }
 
 /** 机票详细信息元组 */

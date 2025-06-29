@@ -352,7 +352,7 @@ declare interface Component {
   KeywordIndexes?: number[];
   /** 填写控件在腾讯电子签小程序填写界面展示的提示信息，例如，在身份证号码填写控件中，提示信息可以设置成“请输入18位身份证号码”。注：`签署控件设置此字段无效` */
   Placeholder?: string;
-  /** **web嵌入发起合同场景下**， 是否锁定填写和签署控件值不允许嵌入页面进行编辑false（默认）：不锁定控件值，允许在页面编辑控件值true：锁定控件值，在页面编辑控件值 */
+  /** **web嵌入发起合同场景下**， 是否锁定填写和签署控件值不允许嵌入页面进行编辑false（默认）：不锁定控件值，允许在页面编辑控件值true：锁定控件值，在页面无法编辑控件值 */
   LockComponentValue?: boolean;
   /** **web嵌入发起合同场景下**，是否禁止移动和删除填写和签署控件 false（默认） :可以移动和删除控件 true : 禁止移动和删除控件 */
   ForbidMoveAndDelete?: boolean;

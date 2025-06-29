@@ -7,23 +7,23 @@ declare interface DetailResults {
   /** 该字段用于返回检测结果所对应的全部恶意标签。返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告；以及其他令人反感、不安全或不适宜的内容类型。 */
   Label?: string;
   /** 该字段用于返回对应当前标签的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过 */
-  Suggestion?: string | null;
+  Suggestion?: string;
   /** 该字段用于返回检测文本命中的关键词信息，用于标注文本违规的具体原因（如：*加我微信*）。该参数可能会有多个返回值，代表命中的多个关键词；如返回值为空且Score不为空，则代表识别结果所对应的恶意标签（Label）是来自于语义模型判断的返回值。 */
-  Keywords?: string[] | null;
+  Keywords?: string[];
   /** 该字段用于返回当前标签（Label）下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容；*色情 0*，则表明该文本不属于色情内容。 */
-  Score?: number | null;
+  Score?: number;
   /** 该字段用于返回自定义关键词对应的词库类型，取值为**1**（黑白库）和**2**（自定义关键词库），若未配置自定义关键词库,则默认值为1（黑白库匹配）。 */
-  LibType?: number | null;
+  LibType?: number;
   /** 该字段用于返回自定义库的ID，以方便自定义库管理和配置。 */
-  LibId?: string | null;
+  LibId?: string;
   /** 该字段用于返回自定义库的名称,以方便自定义库管理和配置。 */
-  LibName?: string | null;
+  LibName?: string;
   /** 该字段用于返回当前标签（Label）下的二级标签。 */
-  SubLabel?: string | null;
+  SubLabel?: string;
   /** 该字段用于返回当前一级标签（Label）下的关键词、子标签及分数。 */
   Tags?: Tag[] | null;
   /** 该字段用于返回违规文本命中信息 */
-  HitInfos?: HitInfo[] | null;
+  HitInfos?: HitInfo[];
 }
 
 /** 用于表示业务用户对应的设备信息 */
@@ -47,21 +47,21 @@ declare interface Device {
 /** 关键词命中位置信息 */
 declare interface HitInfo {
   /** 标识模型命中还是关键词命中 */
-  Type?: string | null;
+  Type?: string;
   /** 命中关键词 */
-  Keyword?: string | null;
+  Keyword?: string;
   /** 自定义词库名称 */
-  LibName?: string | null;
+  LibName?: string;
   /** 位置信息 */
-  Positions?: Positions[] | null;
+  Positions?: Positions[];
 }
 
 /** 标识命中的违规关键词位置信息 */
 declare interface Positions {
   /** 关键词起始位置 */
-  Start: number | null;
+  Start?: number;
   /** 关键词结束位置 */
-  End: number | null;
+  End?: number;
 }
 
 /** 账号风险检测结果 */
@@ -75,33 +75,33 @@ declare interface RiskDetails {
 /** 情感分析结果 */
 declare interface SentimentAnalysis {
   /** 情感标签 */
-  Label?: string | null;
+  Label?: string;
   /** 标签分数，取值范围0到100 */
-  Score?: number | null;
+  Score?: number;
   /** 情感分析明细 */
-  Detail?: SentimentDetail | null;
+  Detail?: SentimentDetail;
   /** 响应码，成功为"OK"，失败为"InternalError" */
   Code?: string;
   /** 异常信息 */
-  Message?: string | null;
+  Message?: string;
 }
 
 /** 情感分析明细 */
 declare interface SentimentDetail {
   /** 正向分数，取值范围0到100 */
-  Positive?: number | null;
+  Positive?: number;
   /** 负向分数，取值范围0到100 */
-  Negative?: number | null;
+  Negative?: number;
 }
 
 /** 该字段用于返回审核结果明细字段的标签及分数 */
 declare interface Tag {
   /** 该字段用于返回命中的关键词 */
-  Keyword?: string | null;
+  Keyword?: string;
   /** 该字段用于返回子标签 */
-  SubLabel?: string | null;
+  SubLabel?: string;
   /** 该字段用于返回子标签对应的分数 */
-  Score?: number | null;
+  Score?: number;
 }
 
 /** 用于表示业务用户的账号相关信息 */
@@ -135,7 +135,7 @@ declare interface User {
 declare interface TextModerationRequest {
   /** 该字段表示待检测对象的文本内容，文本需要按utf-8格式编码，长度不能超过10000个字符（按unicode编码计算），并进行 Base64加密 */
   Content: string;
-  /** 该字段表示使用的策略的具体编号，该字段需要先在[内容安全控制台](#https://console.cloud.tencent.com/cms/clouds/manage)中配置，控制台访问地址：。备注：不同Biztype关联不同的业务场景与识别能力策略，调用前请确认正确的Biztype。 */
+  /** 该字段表示使用的策略的具体编号，该字段需要先在[内容安全控制台](https://console.cloud.tencent.com/cms/clouds/manage)中配置，控制台访问地址：。备注：不同Biztype关联不同的业务场景与识别能力策略，调用前请确认正确的Biztype。 */
   BizType?: string;
   /** 该字段表示您为待检测对象分配的数据ID，传入后可方便您对文件进行标识和管理。取值：由英文字母（大小写均可）、数字及四个特殊符号（_，-，@，#）组成，**长度不超过64个字符** */
   DataId?: string;
@@ -143,9 +143,9 @@ declare interface TextModerationRequest {
   User?: User;
   /** 该字段表示待检测对象对应的设备相关信息，传入后可便于甄别相应违规风险设备 */
   Device?: Device;
-  /** 表示Content的原始语种，枚举值包括 "en" 和 "zh"。其中，"en" 表示英文，"zh" 表示中文。非中文场景的处理耗时较高，具体情况取决于送审文本长度，非中文场景需[反馈工单](#https://console.cloud.tencent.com/workorder/category?level1_id=141&level2_id=1287&source=14&data_title=%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8&step=1)确认。 */
+  /** 表示Content的原始语种，枚举值包括 "en" 和 "zh"。其中，"en" 表示英文，"zh" 表示中文。非中文场景的处理耗时较高，具体情况取决于送审文本长度，非中文场景需[反馈工单](https://console.cloud.tencent.com/workorder/category?level1_id=141&level2_id=1287&source=14&data_title=%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8&step=1)确认。 */
   SourceLanguage?: string;
-  /** 审核的业务类型，枚举值包括 "TEXT" 和 "TEXT_AIGC"。"TEXT" 表示传统文本审核，"TEXT_AIGC" 表示文本AIGC审核。 */
+  /** 审核的业务类型，枚举值包括"TEXT"和"TEXT_AIGC"。其中"TEXT"表示传统文本审核，"TEXT_AIGC”表示AI生成检测（生成检测能力具体能力了解可[参见文档](https://cloud.tencent.com/document/product/1124/118694)）。 */
   Type?: string;
 }
 
@@ -165,13 +165,13 @@ declare interface TextModerationResponse {
   /** 该字段用于返回文本检测中存在违规风险的账号检测结果，主要包括违规风险类别和风险等级信息，具体内容可参阅对应数据结构（RiskDetails）的详细描述 */
   RiskDetails?: RiskDetails[] | null;
   /** 该字段用于返回根据您的需求配置的额外附加信息（Extra），如未配置则默认返回值为空。备注：不同客户或Biztype下返回信息不同，如需配置该字段请提交工单咨询或联系售后专员处理 */
-  Extra?: string | null;
+  Extra?: string;
   /** 该字段用于返回检测对象对应请求参数中的DataId，与输入的DataId字段中的内容对应 */
-  DataId?: string | null;
+  DataId?: string;
   /** 该字段用于返回当前标签（Label）下的二级标签。 */
-  SubLabel?: string | null;
+  SubLabel?: string;
   /** 该字段用于返回上下文关联文本 */
-  ContextText?: string | null;
+  ContextText?: string;
   /** 情感分析结果 */
   SentimentAnalysis?: SentimentAnalysis | null;
   /** 该字段用于标识本次审核决策归因，比如text_nlp_tianji标识是由nlp tianji模型给出的审核决策，text_keyword_public标识命中了业务的关键词库 */
