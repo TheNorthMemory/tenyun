@@ -1014,10 +1014,10 @@ declare interface QueryCrmStatisticsRequest {
 }
 
 declare interface QueryCrmStatisticsResponse {
-  /** 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空 */
-  NextCursor: string | null;
+  /** 分页游标，在下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空 */
+  NextCursor?: string | null;
   /** CRM统计响应数据 */
-  PageData: CrmStatisticsData[] | null;
+  PageData?: CrmStatisticsData[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1034,10 +1034,10 @@ declare interface QueryCustomerEventDetailStatisticsRequest {
 }
 
 declare interface QueryCustomerEventDetailStatisticsResponse {
-  /** 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空 */
-  NextCursor: string | null;
+  /** 分页游标，在下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空 */
+  NextCursor?: string | null;
   /** 外部联系人SaaS使用明细统计响应数据 */
-  PageData: CustomerActionEventDetail[] | null;
+  PageData?: CustomerActionEventDetail[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1197,7 +1197,7 @@ declare interface QueryLicenseInfoRequest {
 
 declare interface QueryLicenseInfoResponse {
   /** license响应信息 */
-  LicenseInfo: LicenseInfo | null;
+  LicenseInfo?: LicenseInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1248,10 +1248,10 @@ declare interface QueryStaffEventDetailStatisticsRequest {
 }
 
 declare interface QueryStaffEventDetailStatisticsResponse {
-  /** 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空 */
-  NextCursor: string | null;
+  /** 分页游标，在下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空 */
+  NextCursor?: string | null;
   /** 企业成员SaaS使用明细统计响应数据 */
-  PageData: SalesActionEventDetail[] | null;
+  PageData?: SalesActionEventDetail[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

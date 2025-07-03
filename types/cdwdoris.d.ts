@@ -364,7 +364,7 @@ declare interface InstanceInfo {
   MasterSummary?: NodesSummary;
   /** zookeeper节点描述信息 */
   CoreSummary?: NodesSummary;
-  /** 高可用，“true" "false" */
+  /** 高可用，"true" "false" */
   HA?: string;
   /** 高可用类型：0：非高可用1：读高可用2：读写高可用。 */
   HaType?: number;
@@ -444,6 +444,10 @@ declare interface InstanceInfo {
   CNSummary?: NodesSummary;
   /** 计算组个数 */
   ComputeGroupCount?: number;
+  /** 存算分离cos存储数据 */
+  CosStorageSize?: number;
+  /** 存算分离的指标 当是true 不支持新建计算组 */
+  IsMasterNonVM?: boolean;
 }
 
 /** 实例节点描述信息 */
@@ -710,7 +714,7 @@ declare interface RestoreStatus {
 declare interface ScheduleInfo {
   /** 生效周期 */
   EffectivePeriod?: string;
-  /** 调度类型，不传该参数时为立即执行：Day-天Week-周Month-月Once-单次 */
+  /** 调度类型，不传该参数时为立即执行：Day-天Week-周Month-月Quarter-季度Year-年Once-单次 */
   ScheduleType?: string;
   /** 执行调度的日期。调度类型为周和月时以英文逗号分隔；调度类型为单次时，该值是个日期 */
   ScheduleData?: string;

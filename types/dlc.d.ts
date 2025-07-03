@@ -212,6 +212,14 @@ declare interface CrontabResumeSuspendStrategy {
   SuspendStrategy?: number;
 }
 
+/** 自定义参数 */
+declare interface CustomConfig {
+  /** 自定义参数名 */
+  ConfigKey?: string;
+  /** 自定义参数值 */
+  ConfigValue?: string;
+}
+
 /** DLC 数据目录访问权限 */
 declare interface DLCCatalogAccess {
   /** VPCID */
@@ -720,6 +728,10 @@ declare interface DatasourceConnectionInfo {
   ConnectivityState?: number;
   /** 连通性测试提示信息 */
   ConnectivityTips?: string;
+  /** 自定义参数 */
+  CustomConfig?: CustomConfig[];
+  /** 是否允许回退 */
+  AllowRollback?: boolean;
 }
 
 /** 数据源连接的网络信息 */
@@ -1034,6 +1046,8 @@ declare interface NetworkConnection {
   DatasourceConnectionCidrBlock?: string | null;
   /** 数据源SubnetCidrBlock */
   DatasourceConnectionSubnetCidrBlock?: string | null;
+  /** 支持 eg */
+  EGSupport?: number;
 }
 
 /** Notebook Session详细信息。 */

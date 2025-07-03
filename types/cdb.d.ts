@@ -612,9 +612,9 @@ declare interface ClusterNodeInfo {
 
 /** 集群版的节点拓扑配置。 */
 declare interface ClusterTopology {
-  /** RW 节点拓扑。 */
+  /** RW 节点拓扑。说明：NodeId 可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 获取。 */
   ReadWriteNode?: ReadWriteNode;
-  /** RO 节点拓扑。 */
+  /** RO 节点拓扑。说明：NodeId 可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 获取。 */
   ReadOnlyNodes?: ReadonlyNode[];
 }
 
@@ -812,11 +812,11 @@ declare interface HistoryJob {
 
 /** 导入任务记录 */
 declare interface ImportRecord {
-  /** 状态值 */
+  /** 状态值。0 - 初始化中，1 - 运行中，2 - 运行成功，3 - 运行失败。 */
   Status?: number;
-  /** 状态值 */
+  /** 状态值，为负数时任务异常。 */
   Code?: number;
-  /** 执行时间 */
+  /** 执行时间，单位：秒。 */
   CostTime?: number;
   /** 实例ID */
   InstanceId?: string;
@@ -824,11 +824,11 @@ declare interface ImportRecord {
   WorkId?: string;
   /** 导入文件名 */
   FileName?: string;
-  /** 执行进度 */
+  /** 执行进度，单位：百分比。 */
   Process?: number;
   /** 任务创建时间 */
   CreateTime?: string;
-  /** 文件大小 */
+  /** 文件大小，单位：byte。 */
   FileSize?: string;
   /** 任务执行信息 */
   Message?: string;
@@ -1024,9 +1024,9 @@ declare interface InstanceInfo {
 
 /** 实例预期重启时间 */
 declare interface InstanceRebootTime {
-  /** 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同 */
+  /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId?: string;
-  /** 预期重启时间 */
+  /** 预期重启时间，单位：秒。 */
   TimeInSeconds?: number;
 }
 
@@ -1360,9 +1360,9 @@ declare interface ProxyNode {
   ProxyId?: string;
   /** CPU核数 */
   Cpu?: number;
-  /** 内存大小 */
+  /** 内存大小，单位为 MB。 */
   Mem?: number;
-  /** 节点状态 */
+  /** 节点状态，0 - 初始化中，1 - 在线中，2 - 下线中，3 - 销毁中，4 - 故障恢复中，5 - 节点故障，6 - 切换中。 */
   Status?: string;
   /** 代理节点可用区 */
   Zone?: string;
@@ -3575,9 +3575,9 @@ declare interface DescribeDBInstancesRequest {
   CdbErrors?: number[];
   /** 返回结果集排序的字段，目前支持："InstanceId"，"InstanceName"，"CreateTime"，"DeadlineTime"。 */
   OrderBy?: string;
-  /** 返回结果集排序方式，目前支持："ASC" 或者 "DESC"。 */
+  /** 返回结果集排序方式。目前支持值："ASC" - 表示升序，"DESC" - 表示降序，默认为 "DESC"。 */
   OrderDirection?: string;
-  /** 是否以安全组 ID 为过滤条件。 */
+  /** 是否以安全组 ID 为过滤条件。说明：0表示否，1表示是。 */
   WithSecurityGroup?: number;
   /** 是否包含独享集群详细信息，可取值：0 - 不包含，1 - 包含。 */
   WithExCluster?: number;
@@ -3611,9 +3611,9 @@ declare interface DescribeDBInstancesRequest {
   ProxyVips?: string[];
   /** 数据库代理 ID 。 */
   ProxyIds?: string[];
-  /** 数据库引擎类型。 */
+  /** 数据库引擎类型。可选值为：InnoDB、RocksDB。 */
   EngineTypes?: string[];
-  /** 是否获取集群版实例节点信息，可填：true或false */
+  /** 是否获取集群版实例节点信息，可填：true 或 false。默认为 false。 */
   QueryClusterInfo?: boolean;
 }
 
@@ -3843,7 +3843,7 @@ declare interface DescribeErrorLogDataResponse {
 }
 
 declare interface DescribeInstanceAlarmEventsRequest {
-  /** 实例 ID。 */
+  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
   /** 事件查询范围开始时间，闭区间。 */
   StartTime: string;
@@ -3855,7 +3855,7 @@ declare interface DescribeInstanceAlarmEventsRequest {
   EventStatus?: string;
   /** 排序方式。按事件发生事件进行排序，"DESC"-倒排；”ASC“-正序，默认倒排。 */
   Order?: string;
-  /** 事件展示数量。 */
+  /** 事件展示数量。默认为100，最大为200。 */
   Limit?: string;
   /** 偏移量。 */
   Offset?: string;
@@ -4297,11 +4297,11 @@ declare interface DescribeTablesResponse {
 }
 
 declare interface DescribeTagsOfInstanceIdsRequest {
-  /** 实例列表。 */
+  /** 实例列表。实例 ID 可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。可传入的数组长度暂无限制。 */
   InstanceIds: string[];
   /** 分页偏移量。 */
   Offset?: number;
-  /** 分页大小。 */
+  /** 分页大小。默认为15。 */
   Limit?: number;
 }
 
@@ -4421,9 +4421,9 @@ declare interface InquiryPriceUpgradeInstancesRequest {
 
 declare interface InquiryPriceUpgradeInstancesResponse {
   /** 实例价格，单位：分（人民币）。 */
-  Price: number;
+  Price?: number;
   /** 实例原价，单位：分（人民币）。 */
-  OriginalPrice: number;
+  OriginalPrice?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4775,7 +4775,7 @@ declare interface ModifyDBInstanceLogToCLSResponse {
 declare interface ModifyDBInstanceNameRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。 */
   InstanceId: string;
-  /** 修改后的实例名称。 */
+  /** 修改后的实例名称，仅支持数字,英文大小写字母、中文以及特殊字符-_./()[]（）+=:：@ 且长度不能超过60。 */
   InstanceName: string;
 }
 
@@ -5353,15 +5353,15 @@ declare interface UpgradeCDBProxyVersionResponse {
 declare interface UpgradeDBInstanceEngineVersionRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。 */
   InstanceId: string;
-  /** 主实例数据库引擎版本，支持值包括：5.6 和 5.7。 */
+  /** 主实例数据库引擎版本，支持值包括：5.6、5.7、8.0。说明：不支持越级升级，升级后不支持降级。 */
   EngineVersion: string;
   /** 切换访问新实例的方式，默认为 0。支持值包括：0 - 立刻切换，1 - 时间窗切换；当该值为 1 时，升级过程中，切换访问新实例的流程将会在时间窗内进行，或者用户主动调用接口 [切换访问新实例](https://cloud.tencent.com/document/product/236/15864) 触发该流程。 */
   WaitSwitch?: number;
-  /** 是否是内核子版本升级，支持的值：1 - 升级内核子版本；0 - 升级数据库引擎版本。 */
+  /** 是否是内核子版本升级，支持的值：1 - 升级内核子版本；0 - 升级数据库引擎版本。无默认值，请指定要升级的版本类型。 */
   UpgradeSubversion?: number;
-  /** 延迟阈值。取值范围1~10 */
+  /** 延迟阈值。取值范围：1 - 10。无默认值，不传此参数时，延迟阈值为0，表示延迟阈值不做设置。 */
   MaxDelayTime?: number;
-  /** 5.7升级8.0是否忽略关键字错误，取值范围[0,1]，1表示忽略，0表示不忽略 */
+  /** 5.7升级8.0是否忽略关键字错误，取值范围[0,1]，1表示忽略，0表示不忽略。无默认值，不传此参数表示不做处理。 */
   IgnoreErrKeyword?: number;
   /** 版本升级支持指定参数 */
   ParamList?: UpgradeEngineVersionParams[];
@@ -5665,7 +5665,7 @@ declare interface Cdb {
   DescribeUploadedFiles(data: DescribeUploadedFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUploadedFilesResponse>;
   /** 安全组批量解绑云资源 {@link DisassociateSecurityGroupsRequest} {@link DisassociateSecurityGroupsResponse} */
   DisassociateSecurityGroups(data: DisassociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateSecurityGroupsResponse>;
-  /** 查询数据库升级价格 {@link InquiryPriceUpgradeInstancesRequest} {@link InquiryPriceUpgradeInstancesResponse} */
+  /** 查询云数据库升级价格 {@link InquiryPriceUpgradeInstancesRequest} {@link InquiryPriceUpgradeInstancesResponse} */
   InquiryPriceUpgradeInstances(data: InquiryPriceUpgradeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceUpgradeInstancesResponse>;
   /** 隔离云数据库实例 {@link IsolateDBInstanceRequest} {@link IsolateDBInstanceResponse} */
   IsolateDBInstance(data: IsolateDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDBInstanceResponse>;

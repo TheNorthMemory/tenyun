@@ -2645,7 +2645,7 @@ declare interface ListVideoDownloadTaskRequest {
   ChannelName?: string;
   /** 任务状态（0：准备中，1：执行中，2：已完成，3：失败） */
   Status?: number;
-  /** 排序规则（仅支持 StartTime，EndTime，倒序为-StartTime，-EndTime） */
+  /** 排序规则（仅支持 StartTime，倒序为-StartTime） */
   SortRule?: string;
   /** 响应是否携带预览地址(0:不携带；1:携带) */
   WithPreviewUrl?: number;
@@ -2657,6 +2657,8 @@ declare interface ListVideoDownloadTaskRequest {
   DownloadTaskId?: string;
   /** 下载地址过期时间，单位秒，最大为 1 天， 86400秒 */
   UrlExpires?: number;
+  /** 任务日期，默认当天 */
+  Date?: string;
 }
 
 declare interface ListVideoDownloadTaskResponse {

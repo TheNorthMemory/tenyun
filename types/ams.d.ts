@@ -61,7 +61,7 @@ declare interface AudioResultDetailLanguageResult {
 /** 音频呻吟审核结果 */
 declare interface AudioResultDetailMoanResult {
   /** 该字段用于返回检测结果需要检测的内容类型，此处固定为**Moan**（呻吟）以调用呻吟检测功能。 */
-  Label?: string | null;
+  Label?: string;
   /** 该字段用于返回呻吟检测的置信度，取值范围：0（**置信度最低**）-100（**置信度最高**），越高代表音频越有可能属于呻吟内容。 */
   Score?: number;
   /** 该字段用于返回对应呻吟标签的片段在音频文件内的开始时间，单位为秒。 */
@@ -71,7 +71,7 @@ declare interface AudioResultDetailMoanResult {
   /** *内测中，敬请期待* */
   SubLabelCode?: string;
   /** 该字段用于返回当前标签（Lable）下的二级标签。 */
-  SubLabel?: string | null;
+  SubLabel?: string;
   /** 该字段用于返回基于恶意标签的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过 */
   Suggestion?: string;
 }
@@ -79,13 +79,13 @@ declare interface AudioResultDetailMoanResult {
 /** 音频说话人声纹识别返回结果 */
 declare interface AudioResultDetailSpeakerResult {
   /** 该字段用于返回检测结果需要检测的内容类型。 */
-  Label?: string | null;
+  Label?: string;
   /** 该字段用于返回呻吟检测的置信度，取值范围：0（置信度最低）-100（置信度最高），越高代表音频越有可能属于说话人声纹。 */
-  Score?: number | null;
+  Score?: number;
   /** 该字段用于返回对应说话人的片段在音频文件内的开始时间，单位为秒。 */
-  StartTime?: number | null;
+  StartTime?: number;
   /** 该字段用于返回对应说话人的片段在音频文件内的结束时间，单位为秒。 */
-  EndTime?: number | null;
+  EndTime?: number;
 }
 
 /** 音频ASR文本审核结果 */
@@ -156,7 +156,7 @@ declare interface InputInfo {
 declare interface LabelResults {
   /** 场景 */
   Scene?: string;
-  /** 建议 */
+  /** 建议值 */
   Suggestion?: number;
   /** 标签 */
   Label?: string;

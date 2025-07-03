@@ -2,6 +2,18 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 镜像属性 */
+declare interface Attribute {
+  /** 为‘List’时属性值取Values 否则取Value */
+  Type?: string | null;
+  /** 属性key */
+  Key?: string | null;
+  /** 属性值 */
+  Value?: string | null;
+  /** 属性值列表 */
+  Values?: string[] | null;
+}
+
 /** 在线服务的 AuthToken 数据 */
 declare interface AuthToken {
   /** AuthToken 基础信息 */
@@ -586,7 +598,7 @@ declare interface Instance {
   UsedResource?: ResourceInfo | null;
   /** 节点总资源 */
   TotalResource?: ResourceInfo | null;
-  /** 节点状态 注意：此字段为枚举值说明: DEPLOYING: 部署中RUNNING: 运行中 DEPLOY_FAILED: 部署失败 RELEASING 释放中 RELEASED：已释放 EXCEPTION：异常 */
+  /** 节点状态 注意：此字段为枚举值说明: DEPLOYING: 部署中RUNNING: 运行中 DEPLOY_FAILED: 部署失败RELEASING 释放中 RELEASED：已释放 EXCEPTION：异常DEBT_OR_EXPIRED: 欠费过期 */
   InstanceStatus?: string | null;
   /** 创建人 */
   SubUin?: string;
@@ -1024,6 +1036,38 @@ declare interface Option {
   Name: string;
   /** 指标值 */
   Value: number;
+}
+
+/** 平台镜像信息详情 */
+declare interface PlatformImageInfo {
+  /** 框架名 */
+  Framework?: string | null;
+  /** 镜像类型: ccr or tcr */
+  ImageType?: string | null;
+  /** 镜像地址 */
+  ImageUrl?: string | null;
+  /** TCR镜像示例所属地域 */
+  RegistryRegion?: string | null;
+  /** TCR镜像所属实例ID */
+  RegistryId?: string | null;
+  /** 镜像名称 */
+  ImageName?: string | null;
+  /** 镜像Id */
+  ImageId?: string | null;
+  /** 框架版本 */
+  FrameworkVersion?: string | null;
+  /** 支持的gpu列表 */
+  SupportGpuList?: string[] | null;
+  /** 描述信息 */
+  Description?: string | null;
+  /** 业务属性 */
+  ExtraAttributes?: Attribute[] | null;
+  /** 镜像适用场景Train/Inference/Notebook */
+  ImageRange?: string[] | null;
+  /** 是否支持分布式部署 */
+  SupportDistributedDeploy?: boolean | null;
+  /** 支持的地域 all(所有地域)/autonomous(自动驾驶地域)/general(通用地域) */
+  RegionScope?: string | null;
 }
 
 /** Pod信息展示 */
@@ -2714,6 +2758,24 @@ declare interface DescribeNotebooksResponse {
   RequestId?: string;
 }
 
+declare interface DescribePlatformImagesRequest {
+  /** 过滤器, Name支持ImageId/ImageName/SupportDataPipeline/AllowSaveAllContent/ImageRange，其中ImageRange支持枚举值Train,Inference,Notebook */
+  Filters?: Filter[];
+  /** 偏移信息 */
+  Offset?: number;
+  /** 返回数量, 默认100 */
+  Limit?: number;
+}
+
+declare interface DescribePlatformImagesResponse {
+  /** 数量 */
+  TotalCount?: number;
+  /** 镜像列表 */
+  PlatformImageInfos?: PlatformImageInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTrainingModelVersionRequest {
   /** 模型版本ID */
   TrainingModelVersionId: string;
@@ -3755,6 +3817,8 @@ declare interface Tione {
   DescribeNotebook(data: DescribeNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookResponse>;
   /** Notebook列表 {@link DescribeNotebooksRequest} {@link DescribeNotebooksResponse} */
   DescribeNotebooks(data?: DescribeNotebooksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebooksResponse>;
+  /** 查询平台镜像信息 {@link DescribePlatformImagesRequest} {@link DescribePlatformImagesResponse} */
+  DescribePlatformImages(data?: DescribePlatformImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlatformImagesResponse>;
   /** 查询模型版本 {@link DescribeTrainingModelVersionRequest} {@link DescribeTrainingModelVersionResponse} */
   DescribeTrainingModelVersion(data: DescribeTrainingModelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingModelVersionResponse>;
   /** 模型版本列表 {@link DescribeTrainingModelVersionsRequest} {@link DescribeTrainingModelVersionsResponse} */

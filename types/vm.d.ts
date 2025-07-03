@@ -391,13 +391,13 @@ declare interface TaskInput {
 /** 任务输出标签 */
 declare interface TaskLabel {
   /** 该字段用于返回检测结果所对应的恶意标签。返回值：Porn：色情，Abuse：谩骂，Ad：广告；以及其他令人反感、不安全或不适宜的内容类型。 */
-  Label?: string | null;
+  Label?: string;
   /** 审核建议，可选值：Pass 通过，Review 建议人审，Block 确认违规 */
-  Suggestion?: string | null;
+  Suggestion?: string;
   /** 得分，分数是 0 ～ 100 */
-  Score?: number | null;
+  Score?: number;
   /** 命中的二级标签 */
-  SubLabel?: string | null;
+  SubLabel?: string;
 }
 
 /** 创建任务时的返回结果 */

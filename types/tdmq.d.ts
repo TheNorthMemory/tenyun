@@ -60,6 +60,24 @@ declare interface BindCluster {
   ClusterName?: string;
 }
 
+/** Pulsar集群TLS证书信息 */
+declare interface CertificateInfo {
+  /** SSL证书管理中的id */
+  CertificateId: string;
+  /** 证书到期时间 */
+  ExpireTime: string;
+  /** 证书绑定的域名 */
+  DomainName: string;
+  /** 证书状态：0 已签发1 即将过期2 未启用3 已过期4 不可用 */
+  Status: string;
+  /** 证书类型：0：根证书，1：服务端证书 */
+  Type: string;
+  /** TencentCloud：SSL证书；Default：TDMQ官方默认证书 */
+  Origin: string;
+  /** 证书添加/更新时间 */
+  ModifyTime: string;
+}
+
 /** 客户端订阅详情，可用于辅助判断哪些客户端订阅关系不一致 */
 declare interface ClientSubscriptionInfo {
   /** 客户端ID */
@@ -682,6 +700,10 @@ declare interface PulsarNetworkAccessPointInfo {
   StandardAccessPoint?: boolean | null;
   /** 可用区信息 */
   ZoneName?: string | null;
+  /** 是否开启TLS加密 */
+  Tls?: boolean;
+  /** 接入点自定义域名 */
+  CustomUrl?: string;
 }
 
 /** Pulsar专业版集群信息 */
@@ -778,6 +800,8 @@ declare interface PulsarProInstance {
   BillingLabelVersion?: string | null;
   /** 自定义租户 */
   Tenant?: string;
+  /** 集群的证书列表 */
+  CertificateList?: CertificateInfo[];
 }
 
 /** queue使用配额信息 */
@@ -844,6 +868,8 @@ declare interface RabbitMQClusterAccessInfo {
   WebConsoleDomainEndpoint?: string;
   /** 控制面所使用的VPC信息 */
   ControlPlaneEndpointInfo?: VpcEndpointInfo;
+  /** TLS加密的数据流公网接入点 */
+  PublicTlsAccessEndpoint?: string;
 }
 
 /** RabbitMQ 集群基本信息 */
@@ -900,6 +926,10 @@ declare interface RabbitMQClusterInfo {
   IsolatedTime?: number;
   /** 是否为容器实例，默认 true */
   Container?: boolean;
+  /** 标签列表 */
+  Tags?: Tag[];
+  /** 是否已开启删除保护 */
+  EnableDeletionProtection?: boolean;
 }
 
 /** RabbitMQ集群规格信息 */
@@ -1088,6 +1118,14 @@ declare interface RabbitMQUser {
   ModifyTs?: number;
 }
 
+/** RabbitMQ 实例用户配额信息 */
+declare interface RabbitMQUserQuota {
+  /** 最大可创建用户数 */
+  MaxUser?: number;
+  /** 已使用用户数 */
+  UsedUser?: number;
+}
+
 /** RabbitMQ 托管版实例信息 */
 declare interface RabbitMQVipInstance {
   /** 实例 ID */
@@ -1128,10 +1166,14 @@ declare interface RabbitMQVipInstance {
   Vpcs?: VpcEndpointInfo[];
   /** 创建时间，毫秒为单位。unix 时间戳 */
   CreateTime?: number;
-  /** 实例类型，0 专享版、1 Serverless 版 */
+  /** 实例类型，0 托管版、1 Serverless 版 */
   InstanceType?: number;
-  /** 隔离时间，毫秒为单位 */
+  /** 隔离时间，毫秒为单位。unix 时间戳 */
   IsolatedTime?: number;
+  /** 是否已开启删除保护 */
+  EnableDeletionProtection?: boolean;
+  /** 标签列表 */
+  Tags?: Tag[];
 }
 
 /** RabbitMQ的vhost详情 */
@@ -1868,6 +1910,12 @@ declare interface VirtualHostQuota {
   MaxVirtualHost?: number;
   /** 已创建vhost数 */
   UsedVirtualHost?: number;
+  /** 单个 vhost 下允许的最大连接数 */
+  MaxConnectionPerVhost?: number;
+  /** 单个 vhost 下允许的最大交换机数 */
+  MaxExchangePerVhost?: number;
+  /** 单个 vhost 下允许的最大队列机数 */
+  MaxQueuePerVhost?: number;
 }
 
 /** vcp绑定记录 */
@@ -1904,6 +1952,8 @@ declare interface VpcEndpointInfo {
   VpcEndpoint: string;
   /** vpc接入点状态 OFF/ON/CREATING/DELETING */
   VpcDataStreamEndpointStatus?: string;
+  /** TLS加密的数据流接入点 */
+  VpcTlsEndpoint?: string;
 }
 
 /** vpc信息（由UniqVpcId和UniqSubnetId组成） */
@@ -2225,6 +2275,8 @@ declare interface CreateRabbitMQVipInstanceRequest {
   Bandwidth?: number;
   /** 是否打开公网接入，不传默认为false */
   EnablePublicAccess?: boolean;
+  /** 是否打开集群删除保护，不传默认为 false */
+  EnableDeletionProtection?: boolean;
 }
 
 declare interface CreateRabbitMQVipInstanceResponse {
@@ -3527,7 +3579,7 @@ declare interface DescribeRabbitMQUserResponse {
 }
 
 declare interface DescribeRabbitMQVipInstanceRequest {
-  /** 集群 ID */
+  /** 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。 */
   ClusterId: string;
 }
 
@@ -3546,6 +3598,8 @@ declare interface DescribeRabbitMQVipInstanceResponse {
   ExchangeQuota?: ExchangeQuota;
   /** queue配额信息 */
   QueueQuota?: QueueQuota;
+  /** 用户配额信息 */
+  UserQuota?: RabbitMQUserQuota;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4613,10 +4667,12 @@ declare interface ModifyRabbitMQUserResponse {
 declare interface ModifyRabbitMQVipInstanceRequest {
   /** 实例Id */
   InstanceId: string;
-  /** 集群名称 */
+  /** 集群名称，不填则不修改。非空字符串时必须 3-64 个字符，只能包含数字、字母、“-”和“_” */
   ClusterName?: string;
-  /** 备注 */
+  /** 备注，不填则不修改 */
   Remark?: string;
+  /** 是否开启删除保护，不填则不修改 */
+  EnableDeletionProtection?: boolean;
 }
 
 declare interface ModifyRabbitMQVipInstanceResponse {

@@ -785,6 +785,8 @@ declare interface CreateUserRoleRequest {
   UserList?: UserIdAndUserName[];
   /** 用户列表（新） */
   UserInfoList?: UserInfo[];
+  /** 用户组id列表 */
+  UserGroups?: number[];
 }
 
 declare interface CreateUserRoleResponse {

@@ -236,6 +236,48 @@ declare interface CmdTemplate {
   Type?: number;
 }
 
+/** 命令集合 */
+declare interface Command {
+  /** 命令 */
+  Cmd?: string;
+  /** 命令输入的时间 */
+  Time?: string;
+  /** 命令执行时间相对于所属会话开始时间的偏移量，单位ms */
+  TimeOffset?: number;
+  /** 命令执行情况，1--允许，2--拒绝，3--确认 */
+  Action?: number;
+  /** 会话id */
+  Sid?: string;
+  /** 用户名 */
+  UserName?: string;
+  /** 设备account */
+  Account?: string;
+  /** 设备ip */
+  InstanceId?: string;
+  /** source ip */
+  FromIp?: string;
+  /** 该命令所属会话的会话开始时间 */
+  SessTime?: string;
+  /** 该命令所属会话的会话开始时间 */
+  SessionTime?: string;
+  /** 复核时间 */
+  ConfirmTime?: string;
+  /** 用户部门id */
+  UserDepartmentId?: string;
+  /** 用户部门name */
+  UserDepartmentName?: string;
+  /** 设备部门id */
+  DeviceDepartmentId?: string;
+  /** 设备部门name */
+  DeviceDepartmentName?: string;
+  /** 会话大小 */
+  Size?: number;
+  /** 签名值 */
+  SignValue?: string;
+  /** 资产类型 */
+  DeviceKind?: string;
+}
+
 /** 部门信息 */
 declare interface Department {
   /** 部门ID */
@@ -466,6 +508,18 @@ declare interface OperationTask {
   NextTime?: string;
   /** 下一次执行时间 */
   FirstTime?: string;
+}
+
+/** 回放所需字段信息 */
+declare interface ReplayInformation {
+  /** 令牌 */
+  Token?: string;
+  /** 会话开始时间 */
+  StartTime?: string;
+  /** 回放链接 */
+  Address?: string;
+  /** 回放类型 ，默认0， 1-rfb 2-mp4 3-ssh */
+  ReplayType?: number;
 }
 
 /** 堡垒机服务信息 */
@@ -2290,6 +2344,8 @@ declare interface ReplaySessionRequest {
 }
 
 declare interface ReplaySessionResponse {
+  /** 回放所需信息 */
+  ReplayInfo?: ReplayInformation;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2384,6 +2440,8 @@ declare interface SearchCommandBySidRequest {
 declare interface SearchCommandBySidResponse {
   /** 总记录数 */
   TotalCount?: number;
+  /** 命令列表 */
+  CommandSet?: Command[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

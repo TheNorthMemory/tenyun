@@ -956,6 +956,14 @@ declare interface ContainerGroupDetail {
   Alias?: string | null;
 }
 
+/** 可观测配置 */
+declare interface ContainerGroupObservabilityConfig {
+  /** 日志配置项ID列表 */
+  BusinessLogConfigIdList?: string[] | null;
+  /** 投递配置项ID列表 */
+  BusinessLogDeliveryConfigIdList?: string[] | null;
+}
+
 /** 部署组列表-其它字段 */
 declare interface ContainerGroupOther {
   /** 实例总数 */
@@ -982,6 +990,76 @@ declare interface ContainerGroupOther {
   HealthCheckSettings?: HealthCheckSettings | null;
   /** 服务配置信息是否匹配 */
   IsNotEqualServiceConfig?: boolean;
+}
+
+/** 服务治理相关配置项 */
+declare interface ContainerGroupServiceGovernanceConfig {
+  /** 是否开启服务治理 */
+  EnableGovernance?: boolean | null;
+  /** 控制台场景使用 mesh服务配置信息列表 */
+  ServiceConfigList?: ServiceConfig[] | null;
+  /** 注册服务治理实例 */
+  ExclusiveInstances?: ExclusiveInstance[] | null;
+  /** 服务治理类型 */
+  GovernanceType?: string | null;
+}
+
+/** 容器详细信息 */
+declare interface ContainerInfo {
+  /** 容器名 */
+  Name?: string | null;
+  /** 容器ID */
+  ContainerId?: string | null;
+  /** 容器状态 */
+  Status?: string | null;
+  /** 容器的Reason */
+  Reason?: string | null;
+  /** 镜像地址 */
+  Image?: string | null;
+  /** 是否为业务主容器 */
+  IsBusinessMainContainer?: boolean | null;
+  /** 镜像Server */
+  Server?: string | null;
+  /** 镜像名 */
+  RepoName?: string | null;
+  /** 仓库类型 */
+  RepoType?: string | null;
+  /** TCR 仓库信息 */
+  TcrRepoInfo?: TcrRepoInfo | null;
+  /** 容器访问凭证名称 */
+  SecretName?: string | null;
+  /** 镜像版本号 */
+  TagName?: string | null;
+  /** 健康检查 */
+  HealthCheckSettings?: HealthCheckSettings | null;
+  /** 容器Cpu request */
+  CpuRequest?: string | null;
+  /** 容器Cpu limit */
+  CpuLimit?: string | null;
+  /** 容器Mem request */
+  MemRequest?: string | null;
+  /** 容器Mem Limit */
+  MemLimit?: string | null;
+  /** 环境变量参数 */
+  Envs?: Env[] | null;
+  /** 环境变量参数 */
+  UserEnvs?: Env[] | null;
+  /** JVM参数 */
+  JvmOpts?: string | null;
+  /** 挂载信息 */
+  VolumeMountInfoList?: VolumeMountInfo[] | null;
+  /** 是否为初始化容器 */
+  InitContainerEnable?: boolean | null;
+  /** 生命周期钩子 */
+  LifeCycleHookList?: LifeCycleHook[] | null;
+  /** 是否为特权容器 */
+  PrivilegeContainerEnable?: boolean | null;
+  /** 运行命令 */
+  RunCommand?: string | null;
+  /** 运行参数 */
+  RunArg?: string | null;
+  /** 容器名称 */
+  ContainerName?: string | null;
 }
 
 /** cos临时账号信息 */
@@ -1120,6 +1198,14 @@ declare interface DeliveryKafkaInfo {
   LineRule?: string;
   /** 自定义的分行值 */
   CustomRule?: string;
+}
+
+/** 部署后返回的结构体 */
+declare interface DeployContainerApplicationResp {
+  /** 部署组ID */
+  GroupId?: string | null;
+  /** 任务ID */
+  TaskId?: string | null;
 }
 
 /** 空目录选项 */
@@ -1572,6 +1658,18 @@ declare interface HealthCheckSettings {
   ReadinessProbe?: HealthCheckSetting | null;
 }
 
+/** HttpGet 执行内容 */
+declare interface HttpGetOption {
+  /** 主机地址 */
+  Host?: string | null;
+  /** 路径 */
+  Path?: string | null;
+  /** 端口 */
+  Port?: string | null;
+  /** 协议：HTTP｜HTTPS */
+  Scheme?: string | null;
+}
+
 /** 镜像仓库 */
 declare interface ImageRepository {
   /** 仓库名,含命名空间,如tsf/nginx */
@@ -2012,6 +2110,18 @@ declare interface LaneRules {
   TotalCount?: number;
   /** 泳道规则列表 */
   Content?: LaneRule[];
+}
+
+/** LifeCycleHook */
+declare interface LifeCycleHook {
+  /** 生命周期函数类型：PostStart|PreStop */
+  HookType?: string | null;
+  /** 函数执行方式：execCommand|httpGet|none */
+  ExecMode?: string | null;
+  /** execCommand函数执行内容 */
+  ExecCommandContent?: string | null;
+  /** HttpGet执行内容 */
+  HttpGetOption?: HttpGetOption | null;
 }
 
 /** Jvm监控内存数据封装 */
@@ -4693,6 +4803,130 @@ declare interface DeleteUnitRuleRequest {
 declare interface DeleteUnitRuleResponse {
   /** 是否成功 */
   Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeployContainerApplicationRequest {
+  /** 应用ID */
+  ApplicationId: string;
+  /** 可观测配置 */
+  ObservabilityConfig?: ContainerGroupObservabilityConfig;
+  /** 集群ID */
+  ClusterId?: string;
+  /** 部署组ID，分组唯一标识 */
+  GroupId?: string;
+  /** 业务容器的环境变量参数 */
+  Envs?: Env[];
+  /** 业务容器的挂载信息 */
+  VolumeMountInfoList?: VolumeMountInfo[];
+  /** 业务主容器生命周期钩子列表 */
+  LifeCycleHookList?: LifeCycleHook[];
+  /** 附属容器列表 */
+  AdditionalContainerList?: ContainerInfo[];
+  /** 容器卷信息 */
+  VolumeInfoList?: VolumeInfo[];
+  /** Service访问配置列表 */
+  ServiceSettingList?: ServiceSetting[];
+  /** 备注 */
+  Alias?: string;
+  /** 部署组名称 */
+  GroupName?: string;
+  /** 标签列表 */
+  Tags?: Tag[];
+  /** 容器类型 */
+  ContainerKind?: string;
+  /** 业务容器的 镜像Server ccr.ccs.tencentyun.com */
+  Server?: string;
+  /** 业务容器的镜像名 */
+  RepoName?: string;
+  /** 仓库类型 */
+  RepoType?: string;
+  /** TCR仓库信息 */
+  TcrRepoInfo?: TcrRepoInfo;
+  /** 容器访问凭证名称 */
+  SecretName?: string;
+  /** 业务容器的镜像版本号 */
+  TagName?: string;
+  /** 健康检查 */
+  HealthCheckSettings?: HealthCheckSettings;
+  /** 业务容器的 cpu request */
+  CpuRequest?: string;
+  /** 业务容器的 cpu limit */
+  CpuLimit?: string;
+  /** 业务容器的 mem request */
+  MemRequest?: string;
+  /** 业务容器的 mem limit */
+  MemLimit?: string;
+  /** 业务容器的 jvm 参数 */
+  JvmOpts?: string;
+  /** 是否为初始化容器 业务主容器不能为初始化容 */
+  InitContainerEnable?: boolean;
+  /** 业务主容器是否为特权容器 */
+  PrivilegeContainerEnable?: boolean;
+  /** 业务主容器运行命令(转base64) */
+  RunCommand?: string;
+  /** 业务主容器运行参数(转base64) */
+  RunArg?: string;
+  /** 实例数量 */
+  InstanceNum?: number;
+  /** 调度策略 */
+  SchedulingStrategy?: SchedulingStrategy;
+  /** 重启策略 */
+  RestartPolicy?: string;
+  /** 服务治理配置 */
+  ServiceSpecEncode?: string;
+  /** istio容器的 mem Request */
+  IstioMemRequest?: string;
+  /** istio容器的 cpu Request */
+  IstioCpuRequest?: string;
+  /** istio容器的 mem Limit */
+  IstioMemLimit?: string;
+  /** istio容器的 cpu Limit */
+  IstioCpuLimit?: string;
+  /** 服务治理配置 */
+  ServiceGovernanceConfig?: ContainerGroupServiceGovernanceConfig;
+  /** agent容器的 mem Request */
+  AgentMemRequest?: string;
+  /** agent容器的 cpu Request */
+  AgentCpuRequest?: string;
+  /** agent容器的 mem Limit */
+  AgentMemLimit?: string;
+  /** agent容器的 cpu Limit */
+  AgentCpuLimit?: string;
+  /** 发布策略(0表示快速更新，1表示滚动更新。默认值为0) */
+  UpdateType?: number;
+  /** 更新间隔,单位秒 */
+  UpdateIvl?: number;
+  /** 对应更新策略和策略配置参数 */
+  MaxSurge?: string;
+  /** 对应更新策略和策略配置参数 */
+  MaxUnavailable?: string;
+  /** 预热参数配置 */
+  WarmupSetting?: WarmupSetting;
+  /** 配置模版ID */
+  ConfigTemplateId?: string;
+  /** 配置模版Version */
+  ConfigTemplateVersion?: number;
+  /** 是否清除数据卷信息 */
+  VolumeClean?: boolean;
+  /** 命名空间Id */
+  NamespaceId?: string;
+  /** 是否部署agent容器 */
+  DeployAgent?: boolean;
+  /** javaagent信息: SERVICE_AGENT/OT_AGENT */
+  AgentProfileList?: AgentProfile[];
+  /** 是否清除Service信息 */
+  ServiceClean?: boolean;
+  /** 是否清除Env信息 */
+  EnvClean?: boolean;
+  /** 本次部署的描述信息 */
+  DeployDesc?: string;
+}
+
+declare interface DeployContainerApplicationResponse {
+  /** 部署容器应用是否成功。true：成功。false：失败。 */
+  Result?: DeployContainerApplicationResp | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7847,6 +8081,8 @@ declare interface Tsf {
   DeleteUnitNamespaces(data: DeleteUnitNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUnitNamespacesResponse>;
   /** 删除单元化规则 {@link DeleteUnitRuleRequest} {@link DeleteUnitRuleResponse} */
   DeleteUnitRule(data: DeleteUnitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUnitRuleResponse>;
+  /** 部署容器应用（新） {@link DeployContainerApplicationRequest} {@link DeployContainerApplicationResponse} */
+  DeployContainerApplication(data: DeployContainerApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<DeployContainerApplicationResponse>;
   /** 部署容器应用 {@link DeployContainerGroupRequest} {@link DeployContainerGroupResponse} */
   DeployContainerGroup(data: DeployContainerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeployContainerGroupResponse>;
   /** 部署虚拟机部署组应用 {@link DeployGroupRequest} {@link DeployGroupResponse} */

@@ -384,6 +384,32 @@ declare interface AssetInstanceTypeMap {
   InstanceTypeList?: FilterDataObject[];
 }
 
+/** 主机进程内容 */
+declare interface AssetProcessItem {
+  /** 云账号ID */
+  CloudAccountID?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 租户ID */
+  AppID?: number;
+  /** 云账号名称 */
+  CloudAccountName?: string;
+  /** 实例ID */
+  InstanceID?: string;
+  /** 公网IP */
+  PublicIp?: string;
+  /** 内网IP */
+  PrivateIp?: string;
+  /** 进程ID */
+  ProcessID?: string;
+  /** 进程名称 */
+  ProcessName?: string;
+  /** 命令行 */
+  CmdLine?: string;
+  /** 监听端口列表 */
+  Port?: string;
+}
+
 /** 资产视角风险项 */
 declare interface AssetRiskItem {
   /** 租户ID */
@@ -1348,9 +1374,9 @@ declare interface FilterDataObject {
 
 /** filter过滤条件 */
 declare interface Filters {
-  /** 无 */
+  /** 实例ID */
   Name?: string | null;
-  /** 无 */
+  /** 实例ID内容 */
   Values?: string[] | null;
   /** 模糊匹配 */
   ExactMatch?: string | null;
@@ -1416,6 +1442,42 @@ declare interface GateWayAsset {
   Status?: string;
   /** TSE的网关真实地域 */
   EngineRegion?: string;
+}
+
+/** 高危基线风险内容 */
+declare interface HighBaseLineRiskItem {
+  /** 云账号ID */
+  CloudAccountID?: string;
+  /** 实例ID */
+  AssetID?: string;
+  /** 实例状态 */
+  InstanceStatus?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 风险名称 */
+  RiskName?: string;
+  /** 风险分类 */
+  RiskCategory?: string;
+  /** 风险等级 */
+  RiskLevel?: string;
+  /** 风险描述 */
+  RiskDesc?: string;
+  /** 风险结果 */
+  RiskResult?: string;
+  /** 修复建议 */
+  FixAdvice?: string;
+  /** Linux漏洞 */
+  RiskCategoryName?: string;
+  /** 风险等级名称 */
+  RiskLevelName?: string;
+  /** 实例状态 */
+  InstanceStatusName?: string;
+  /** 首次发现时间 */
+  CreateTime?: string;
+  /** 最近发现时间 */
+  UpdateTime?: string;
+  /** 租户ID */
+  AppID?: number;
 }
 
 /** ip列表 */
@@ -1781,43 +1843,43 @@ declare interface ReportTaskIdList {
 /** 仓库镜像列表 */
 declare interface RepositoryImageVO {
   /** 用户appid */
-  AppId?: number | null;
+  AppId?: number;
   /** 用户uin */
-  Uin?: string | null;
+  Uin?: string;
   /** 昵称 */
-  NickName?: string | null;
+  NickName?: string;
   /** 镜像id */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 镜像名称 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** 镜像创建时间 */
-  InstanceCreateTime?: string | null;
+  InstanceCreateTime?: string;
   /** 镜像大小带单位 */
-  InstanceSize?: string | null;
+  InstanceSize?: string;
   /** 构建次数 */
-  BuildCount?: number | null;
+  BuildCount?: number;
   /** 镜像类型 */
-  InstanceType?: string | null;
+  InstanceType?: string;
   /** 授权状态 */
-  AuthStatus?: number | null;
+  AuthStatus?: number;
   /** 镜像版本 */
-  InstanceVersion?: string | null;
+  InstanceVersion?: string;
   /** 地域 */
-  Region?: string | null;
+  Region?: string;
   /** 仓库地址 */
-  RepositoryUrl?: string | null;
+  RepositoryUrl?: string;
   /** 仓库名称 */
-  RepositoryName?: string | null;
+  RepositoryName?: string;
   /** 是否核心 */
-  IsCore?: number | null;
+  IsCore?: number;
   /** 漏洞风险 */
-  VulRisk?: number | null;
+  VulRisk?: number;
   /** 检查任务 */
-  CheckCount?: number | null;
+  CheckCount?: number;
   /** 体检时间 */
-  CheckTime?: string | null;
+  CheckTime?: string;
   /** 是否新资产 1新 */
-  IsNewAsset?: number | null;
+  IsNewAsset?: number;
 }
 
 /** 风险中心状态处理Key */
@@ -2690,6 +2752,44 @@ declare interface VulImpactComponentInfo {
   Version?: string;
 }
 
+/** 主机漏洞风险内容 */
+declare interface VulRiskItem {
+  /** 云账号ID */
+  CloudAccountID?: string;
+  /** 实例ID */
+  AssetID?: string;
+  /** 实例状态 */
+  InstanceStatus?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 漏洞名称 */
+  VulName?: string;
+  /** 漏洞类型 */
+  VulCategory?: string;
+  /** 漏洞等级 */
+  VulLevel?: string;
+  /** CVE编号 */
+  CveID?: string;
+  /** 漏洞描述 */
+  Description?: string;
+  /** 容器ID */
+  ContainerID?: string;
+  /** 漏洞风险修复建议 */
+  Fix?: string;
+  /** Linux漏洞 */
+  VulCategoryName?: string;
+  /** 漏洞等级名称 */
+  VulLevelName?: string;
+  /** 实例状态中文信息 */
+  InstanceStatusName?: string;
+  /** 租户ID */
+  AppID?: number;
+}
+
 /** 漏洞趋势-攻击趋势、影响用户、影响资产 */
 declare interface VulTrend {
   /** 影响的资产数 */
@@ -2937,6 +3037,32 @@ declare interface DescribeAlertListResponse {
   ReturnCode?: number;
   /** 返回状态信息 */
   ReturnMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAssetProcessListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤内容 */
+  Filters?: Filters[];
+  /** 分页大小 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+  /** 排序类型 */
+  Order?: string;
+  /** 排序字段 */
+  By?: string;
+  /** 云厂商 */
+  Provider?: string;
+}
+
+declare interface DescribeAssetProcessListResponse {
+  /** 进程数量 */
+  TotalCount?: number;
+  /** 进程列表 */
+  AssetProcessList?: AssetProcessItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3241,7 +3367,7 @@ declare interface DescribeExposeAssetCategoryRequest {
 }
 
 declare interface DescribeExposeAssetCategoryResponse {
-  /** 暴露资产分类列表 */
+  /** 云边界分析资产分类列表 */
   ExposeAssetTypeList?: ExposeAssetTypeItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3261,7 +3387,7 @@ declare interface DescribeExposePathRequest {
 }
 
 declare interface DescribeExposePathResponse {
-  /** 暴露路径节点内容 */
+  /** 云边界分析路径节点内容 */
   Content?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3283,9 +3409,9 @@ declare interface DescribeExposuresRequest {
 }
 
 declare interface DescribeExposuresResponse {
-  /** 互联网暴露资产数量 */
+  /** 云边界分析资产数量 */
   TotalCount?: number;
-  /** 互联网暴露资产列表 */
+  /** 云边界分析资产列表 */
   ExposeList?: ExposesItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3311,6 +3437,34 @@ declare interface DescribeGatewayAssetsResponse {
   VpcList?: FilterDataObject[];
   /** appid列表 */
   AppIdList?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeHighBaseLineRiskListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤内容 */
+  Filters?: Filters[];
+  /** 分页大小 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+  /** 排序类型 */
+  Order?: string;
+  /** 排序字段 */
+  By?: string;
+  /** 云账号ID */
+  CloudAccountID?: string;
+  /** 云厂商 */
+  Provider?: string;
+}
+
+declare interface DescribeHighBaseLineRiskListResponse {
+  /** 高危基线风险数量 */
+  TotalCount?: number;
+  /** 高危基线风险列表 */
+  HighBaseLineRiskList?: HighBaseLineRiskItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3402,17 +3556,17 @@ declare interface DescribeOtherCloudAssetsRequest {
 
 declare interface DescribeOtherCloudAssetsResponse {
   /** 总数 */
-  Total?: number | null;
+  Total?: number;
   /** 资产总数 */
-  Data?: DBAssetVO[] | null;
+  Data?: DBAssetVO[];
   /** 地域枚举 */
-  RegionList?: FilterDataObject[] | null;
+  RegionList?: FilterDataObject[];
   /** 资产类型枚举 */
-  AssetTypeList?: FilterDataObject[] | null;
+  AssetTypeList?: FilterDataObject[];
   /** Vpc枚举 */
-  VpcList?: FilterDataObject[] | null;
+  VpcList?: FilterDataObject[];
   /** Appid枚举 */
-  AppIdList?: FilterDataObject[] | null;
+  AppIdList?: FilterDataObject[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3456,7 +3610,7 @@ declare interface DescribeRepositoryImageAssetsRequest {
 
 declare interface DescribeRepositoryImageAssetsResponse {
   /** 仓库镜像列表 */
-  Data?: RepositoryImageVO[] | null;
+  Data?: RepositoryImageVO[];
   /** 总数 */
   Total?: number;
   /** region列表 */
@@ -4085,6 +4239,34 @@ declare interface DescribeVpcAssetsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeVulRiskListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤内容 */
+  Filters?: Filters[];
+  /** 分页大小 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+  /** 排序类型 */
+  Order?: string;
+  /** 排序字段 */
+  By?: string;
+  /** 云账号ID */
+  CloudAccountID?: string;
+  /** 云厂商 */
+  Provider?: string;
+}
+
+declare interface DescribeVulRiskListResponse {
+  /** 漏洞数量 */
+  TotalCount?: number;
+  /** 漏洞列表 */
+  VulRiskList?: VulRiskItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeVulViewVulRiskListRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -4246,6 +4428,8 @@ declare interface Csip {
   DeleteRiskScanTask(data: DeleteRiskScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRiskScanTaskResponse>;
   /** 查询全量告警列表 {@link DescribeAlertListRequest} {@link DescribeAlertListResponse} */
   DescribeAlertList(data: DescribeAlertListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlertListResponse>;
+  /** 查询云边界分析-暴露路径下主机节点的进程列表 {@link DescribeAssetProcessListRequest} {@link DescribeAssetProcessListResponse} */
+  DescribeAssetProcessList(data?: DescribeAssetProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetProcessListResponse>;
   /** 资产视角下的云资源配置风险列表 {@link DescribeAssetRiskListRequest} {@link DescribeAssetRiskListResponse} */
   DescribeAssetRiskList(data?: DescribeAssetRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetRiskListResponse>;
   /** 漏洞管理-资产视角的漏洞风险列表 {@link DescribeAssetViewVulRiskListRequest} {@link DescribeAssetViewVulRiskListResponse} */
@@ -4270,14 +4454,16 @@ declare interface Csip {
   DescribeDbAssets(data?: DescribeDbAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDbAssetsResponse>;
   /** 域名列表 {@link DescribeDomainAssetsRequest} {@link DescribeDomainAssetsResponse} */
   DescribeDomainAssets(data?: DescribeDomainAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainAssetsResponse>;
-  /** 查询当前账号下暴露资产分类 {@link DescribeExposeAssetCategoryRequest} {@link DescribeExposeAssetCategoryResponse} */
+  /** 查询云边界分析资产分类 {@link DescribeExposeAssetCategoryRequest} {@link DescribeExposeAssetCategoryResponse} */
   DescribeExposeAssetCategory(data?: DescribeExposeAssetCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExposeAssetCategoryResponse>;
-  /** 查询暴露路径节点 {@link DescribeExposePathRequest} {@link DescribeExposePathResponse} */
+  /** 查询云边界分析路径节点 {@link DescribeExposePathRequest} {@link DescribeExposePathResponse} */
   DescribeExposePath(data?: DescribeExposePathRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExposePathResponse>;
-  /** 查询互联网暴露资产列表 {@link DescribeExposuresRequest} {@link DescribeExposuresResponse} */
+  /** 查询云边界分析列表 {@link DescribeExposuresRequest} {@link DescribeExposuresResponse} */
   DescribeExposures(data?: DescribeExposuresRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExposuresResponse>;
   /** 网关列表 {@link DescribeGatewayAssetsRequest} {@link DescribeGatewayAssetsResponse} */
   DescribeGatewayAssets(data?: DescribeGatewayAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayAssetsResponse>;
+  /** 查询云边界分析-暴露路径下主机节点的高危基线风险列表 {@link DescribeHighBaseLineRiskListRequest} {@link DescribeHighBaseLineRiskListResponse} */
+  DescribeHighBaseLineRiskList(data?: DescribeHighBaseLineRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHighBaseLineRiskListResponse>;
   /** 查询clb监听器列表 {@link DescribeListenerListRequest} {@link DescribeListenerListResponse} */
   DescribeListenerList(data?: DescribeListenerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListenerListResponse>;
   /** 网卡列表 {@link DescribeNICAssetsRequest} {@link DescribeNICAssetsResponse} */
@@ -4318,7 +4504,7 @@ declare interface Csip {
   DescribeRiskRules(data?: DescribeRiskRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskRulesResponse>;
   /** 获取扫描报告列表 {@link DescribeScanReportListRequest} {@link DescribeScanReportListResponse} */
   DescribeScanReportList(data?: DescribeScanReportListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanReportListResponse>;
-  /** 查询暴露面扫描结果统计信息 {@link DescribeScanStatisticRequest} {@link DescribeScanStatisticResponse} */
+  /** 查询云边界分析扫描结果统计信息 {@link DescribeScanStatisticRequest} {@link DescribeScanStatisticResponse} */
   DescribeScanStatistic(data?: DescribeScanStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanStatisticResponse>;
   /** 获取扫描任务列表 {@link DescribeScanTaskListRequest} {@link DescribeScanTaskListResponse} */
   DescribeScanTaskList(data?: DescribeScanTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanTaskListResponse>;
@@ -4344,6 +4530,8 @@ declare interface Csip {
   DescribeVULRiskDetail(data?: DescribeVULRiskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVULRiskDetailResponse>;
   /** vpc列表 {@link DescribeVpcAssetsRequest} {@link DescribeVpcAssetsResponse} */
   DescribeVpcAssets(data?: DescribeVpcAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcAssetsResponse>;
+  /** 查询云边界分析-暴露路径下主机节点的漏洞列表 {@link DescribeVulRiskListRequest} {@link DescribeVulRiskListResponse} */
+  DescribeVulRiskList(data?: DescribeVulRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulRiskListResponse>;
   /** 漏洞管理-漏洞视角的漏洞风险列表 {@link DescribeVulViewVulRiskListRequest} {@link DescribeVulViewVulRiskListResponse} */
   DescribeVulViewVulRiskList(data?: DescribeVulViewVulRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulViewVulRiskListResponse>;
   /** 修改集团账号状态 {@link ModifyOrganizationAccountStatusRequest} {@link ModifyOrganizationAccountStatusResponse} */

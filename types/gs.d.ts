@@ -20,6 +20,8 @@ declare interface AndroidApp {
   AppMode?: string;
   /** 应用更新状态，取值：UPLOADING 上传中、CREATING 创建中、CREATE_FAIL 创建失败、CREATE_SUCCESS 创建成功、NORMAL 默认状态 */
   UpdateState?: string;
+  /** 安卓应用包名 */
+  PackageName?: string;
 }
 
 /** 安卓应用Cos数据 */
@@ -44,8 +46,12 @@ declare interface AndroidAppVersionInfo {
   UninstallCommand?: string;
   /** 应用资源清理模式（实例安装应用所用资源），取值：CLEANUP_ON_UNINSTALL（默认值），卸载 App 时清理；CLEANUP_AFTER_INSTALL，安装 App 后立即清理。普通应用只有 CLEANUP_AFTER_INSTALL 模式。 */
   CleanupMode?: string;
-  /** 安卓应用版本名称 */
+  /** 安卓应用版本名称（版本描述、备注） */
   AndroidAppVersionName?: string;
+  /** 安卓应用启动页 */
+  Activity?: string;
+  /** 应用版本号（Version Name） */
+  VersionName?: string;
 }
 
 /** 安卓实例信息 */
@@ -757,6 +763,8 @@ declare interface DescribeAndroidInstancesByAppsRequest {
   Limit: number;
   /** 应用 ID 列表。通过应用 ID 做集合查询 */
   AndroidAppIds: string[];
+  /** 字段过滤器。Filter 的 Name 有以下值： AndroidInstanceId：实例 ID */
+  Filters?: Filter[];
 }
 
 declare interface DescribeAndroidInstancesByAppsResponse {

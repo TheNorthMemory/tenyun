@@ -3394,6 +3394,8 @@ declare interface LiveStreamAsrFullTextRecognitionResult {
   EndTime?: string | null;
   /** 稳态标记。 */
   SteadyState?: boolean | null;
+  /** websocket与trtc识别结果的UserId */
+  UserId?: string | null;
 }
 
 /** 直播 AI Asr 单词识别结果 */
@@ -3548,6 +3550,8 @@ declare interface LiveStreamTransTextRecognitionResult {
   EndTime?: string | null;
   /** 稳态标记。 */
   SteadyState?: boolean | null;
+  /** websocket与trtc实时翻译的UserId */
+  UserId?: string | null;
 }
 
 /** 低光照增强配置 */
@@ -6237,6 +6241,8 @@ declare interface CreateQualityControlTemplateRequest {
   QualityControlItemSet: QualityControlItemConfig[];
   /** 媒体质检模板描述信息，长度限制：256 个字符。 */
   Comment?: string;
+  /** 录制文件格式。可选值：PNG: PNG图片 */
+  RecordFormat?: string;
 }
 
 declare interface CreateQualityControlTemplateResponse {
@@ -7983,6 +7989,8 @@ declare interface ModifyQualityControlTemplateRequest {
   Comment?: string;
   /** 媒体质检配置参数。 */
   QualityControlItemSet?: QualityControlItemConfig[];
+  /** 录制文件格式。可选值：PNG: PNG图片 */
+  RecordFormat?: string;
 }
 
 declare interface ModifyQualityControlTemplateResponse {
@@ -8309,7 +8317,7 @@ declare interface ProcessImageResponse {
 }
 
 declare interface ProcessLiveStreamRequest {
-  /** 直播流 URL（必须是直播文件地址，支持 rtmp，hls 和 flv 等）。 */
+  /** 直播流 URL（必须是直播文件地址，支持 rtmp，hls 和 flv, trtc 等）。trtc地址如下： trtc: //trtc.rtc.qq.com/mps/``?sdkappid=``&userid=``&usersig=<`usersig>``` 为trtc的房间号id, 为数字`` 为trtc的sdk app id`` 为服务进入房间的用户id,可以区分谁是机器人<`usersig>` 为trtc 用户的签名 */
   Url: string;
   /** 任务的事件通知信息，用于指定直播流处理的结果。 */
   TaskNotifyConfig: LiveStreamTaskNotifyConfig;

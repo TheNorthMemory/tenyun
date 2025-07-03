@@ -1213,7 +1213,7 @@ declare namespace V20180525 {
     OsCustomizeType?: string;
     /** 是否开启节点的默认安全组(默认: 否，Alpha特性) */
     NeedWorkSecurityGroup?: boolean;
-    /** 当选择Cilium Overlay网络插件时，TKE会从该子网获取2个IP用来创建内网负载均衡 */
+    /** 控制面子网信息，仅在以下场景使用时要求必填。- 容器网络插件为CiliumOverlay时，TKE会从该子网获取2个IP用来创建内网负载均衡。- 创建支持CDC的托管集群，且网络插件为VPC-CNI时，要求预留至少12个IP。 */
     SubnetId?: string;
     /** 集群等级，针对托管集群生效 */
     ClusterLevel?: string;
@@ -3577,7 +3577,7 @@ declare namespace V20180525 {
     SubnetIds?: string[] | null;
     /** 节点池名称 */
     Name?: string;
-    /** 节点池生命周期 */
+    /** 节点池生命周期- creating：创建中- normal：正常- updating：更新中 */
     LifeState?: string;
     /** 虚拟节点label */
     Labels?: Label[] | null;
@@ -3587,7 +3587,7 @@ declare namespace V20180525 {
 
   /** 超级节点 */
   interface VirtualNodeSpec {
-    /** 节点展示名称 */
+    /** 节点展示名称，建议不超过20个字符 */
     DisplayName: string;
     /** 子网ID */
     SubnetId: string;
@@ -3950,6 +3950,8 @@ declare namespace V20180525 {
     ExtensionAddons?: ExtensionAddon[];
     /** 本地专用集群Id */
     CdcId?: string;
+    /** 屏蔽安装指定Addon组件，填写相应的AddonName */
+    DisableAddons?: string[];
   }
 
   interface CreateClusterResponse {
@@ -3990,13 +3992,13 @@ declare namespace V20180525 {
   }
 
   interface CreateClusterVirtualNodePoolRequest {
-    /** 集群Id */
+    /** 集群ID，通过DescribeClusters接口获取 */
     ClusterId: string;
     /** 节点池名称 */
     Name: string;
     /** 子网ID列表 */
     SubnetIds?: string[];
-    /** 安全组ID列表 */
+    /** 安全组ID列表，必选参数 */
     SecurityGroupIds?: string[];
     /** 虚拟节点label */
     Labels?: Label[];
@@ -4004,7 +4006,7 @@ declare namespace V20180525 {
     Taints?: Taint[];
     /** 节点列表 */
     VirtualNodes?: VirtualNodeSpec[];
-    /** 删除保护开关 */
+    /** 删除保护开关，默认关闭 */
     DeletionProtection?: boolean;
     /** 节点池操作系统：- linux（默认）- windows */
     OS?: string;
@@ -4018,15 +4020,15 @@ declare namespace V20180525 {
   }
 
   interface CreateClusterVirtualNodeRequest {
-    /** 集群ID */
+    /** 集群ID，通过DescribeClusters接口获取 */
     ClusterId: string;
-    /** 虚拟节点所属节点池 */
+    /** 虚拟节点所属节点池，通过DescribeNodePools接口获取 */
     NodePoolId: string;
-    /** 虚拟节点所属子网 */
+    /** 虚拟节点所属子网，SubnetId、SubnetIds、VirtualNodes必选一个。 */
     SubnetId?: string;
-    /** 虚拟节点子网ID列表，和参数SubnetId互斥 */
+    /** 虚拟节点子网ID列表，SubnetId、SubnetIds、VirtualNodes必选一个。 */
     SubnetIds?: string[];
-    /** 虚拟节点列表 */
+    /** 虚拟节点列表，SubnetId、SubnetIds、VirtualNodes必选一个。 */
     VirtualNodes?: VirtualNodeSpec[];
   }
 
@@ -4564,9 +4566,9 @@ declare namespace V20180525 {
   }
 
   interface DeleteClusterVirtualNodePoolRequest {
-    /** 集群ID */
+    /** 集群ID，通过DescribeClusters接口获取 */
     ClusterId: string;
-    /** 超级节点池ID列表 */
+    /** 节点池ID，通过DescribeNodePools接口获取 */
     NodePoolIds: string[];
     /** 是否强制删除，在超级节点上有pod的情况下，如果选择非强制删除，则删除会失败 */
     Force?: boolean;
@@ -4578,9 +4580,9 @@ declare namespace V20180525 {
   }
 
   interface DeleteClusterVirtualNodeRequest {
-    /** 集群ID */
+    /** 集群ID，通过DescribeClusters接口获取 */
     ClusterId: string;
-    /** 虚拟节点列表 */
+    /** 虚拟节点ID列表 */
     NodeNames: string[];
     /** 是否强制删除：如果虚拟节点上有运行中Pod，则非强制删除状态下不会进行删除 */
     Force?: boolean;
@@ -5336,7 +5338,7 @@ declare namespace V20180525 {
   }
 
   interface DescribeClusterVirtualNodePoolsRequest {
-    /** 集群ID */
+    /** 集群ID，通过DescribeClusters接口获取 */
     ClusterId: string;
   }
 
@@ -5350,11 +5352,11 @@ declare namespace V20180525 {
   }
 
   interface DescribeClusterVirtualNodeRequest {
-    /** 集群ID */
+    /** 集群ID，通过DescribeClusters接口获取 */
     ClusterId: string;
-    /** 节点池ID */
+    /** 节点池ID，通过DescribeNodePools接口获取 */
     NodePoolId?: string;
-    /** 节点名称 */
+    /** 节点名称，可搜索DescribeClusterVirtualNode接口节点 */
     NodeNames?: string[];
   }
 
@@ -6584,9 +6586,9 @@ declare namespace V20180525 {
   }
 
   interface DrainClusterVirtualNodeRequest {
-    /** 集群ID */
+    /** 集群ID，通过DescribeClusters接口获取 */
     ClusterId: string;
-    /** 节点名 */
+    /** 节点ID */
     NodeName: string;
   }
 
@@ -7020,19 +7022,19 @@ declare namespace V20180525 {
   }
 
   interface ModifyClusterVirtualNodePoolRequest {
-    /** 集群ID */
+    /** 集群ID，通过DescribeClusters接口获取 */
     ClusterId: string;
-    /** 节点池ID */
+    /** 节点池ID，通过DescribeNodePools接口获取 */
     NodePoolId: string;
-    /** 节点池名称 */
+    /** 节点池名称，必须修改至少一个参数 */
     Name?: string;
-    /** 安全组ID列表 */
+    /** 安全组ID列表，必须修改至少一个参数 */
     SecurityGroupIds?: string[];
-    /** 虚拟节点label */
+    /** 虚拟节点label，必须修改至少一个参数 */
     Labels?: Label[];
-    /** 虚拟节点taint */
+    /** 虚拟节点taint，必须修改至少一个参数 */
     Taints?: Taint[];
-    /** 删除保护开关 */
+    /** 删除保护开关，必须修改至少一个参数 */
     DeletionProtection?: boolean;
   }
 

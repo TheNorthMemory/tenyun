@@ -270,6 +270,14 @@ declare interface DescribeSoftwareInformationPageData {
   Page?: Paging;
 }
 
+/** 返回的具体Data数据 */
+declare interface DescribeVirtualDevicesPageRsp {
+  /** 数据分页信息 */
+  Paging?: Paging;
+  /** 设备列表 */
+  Items?: DeviceDetail[];
+}
+
 /** 业务响应数据 */
 declare interface DeviceDetail {
   /** 设备ID */
@@ -480,6 +488,14 @@ declare interface GetAccountGroupData {
   MiniIamId?: string;
 }
 
+/** 操作的设备列表 */
+declare interface ModifyVirtualDeviceGroupsReqItem {
+  /** 设备mid */
+  DeviceMid?: string;
+  /** 操作标识 0:删除设备 1:添加设备 */
+  Operation?: number;
+}
+
 /** 页码 */
 declare interface Paging {
   /** 每页条数 */
@@ -579,6 +595,8 @@ declare interface CreateDeviceTaskResponse {
 }
 
 declare interface CreateDeviceVirtualGroupRequest {
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
   /** 必填，终端自定义分组名 */
   DeviceVirtualGroupName?: string;
   /** 详情 */
@@ -762,6 +780,44 @@ declare interface DescribeSoftwareInformationResponse {
   RequestId?: string;
 }
 
+declare interface DescribeVirtualDevicesRequest {
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
+  /** 过滤条件参数（字段含义请参考接口返回值）- Mid, 类型String，支持操作：【eq，like，ilike】，支持排序- Name, 类型String，支持操作：【eq，like，ilike】，支持排序- Itime, 类型String，支持操作：【eq，like，ilike】，支持排序- UserName, 类型String，支持操作：【eq，like，ilike】，支持排序- MacAddr, 类型String，支持操作：【eq，like，ilike】，支持排序- UserId, 类型String，支持操作：【eq，like，ilike】，支持排序- Ip, 类型String，支持操作：【eq，like，ilike】，支持排序- Tags，类型String，支持操作：【eq，like，ilike】，支持排序- LocalIpList，类型String，支持操作：【eq，like，ilike】，支持排序- SerialNum，类型String，支持操作：【eq，like，ilike】，支持排序- Version，类型String，支持操作：【eq，like，ilike】，支持排序- StrVersion，类型String，支持操作：【eq，like，ilike】，支持排序- RtpStatus，类型String，支持操作：【eq，like，ilike】，**不支持排序**- HostName，类型String，支持操作：【eq，like，ilike】，支持排序- IoaUserName，类型String，支持操作：【eq，like，ilike】，支持排序- GroupName，类型String，支持操作：【eq，like，ilike】，支持排序- CriticalVulListCount，**类型Int**，支持操作：【eq】，**不支持排序**- RiskCount，**类型Int**，支持操作：【eq】，**不支持排序**- VulVersion，类型String，支持操作：【eq，like，ilike】，**不支持排序**- Virusver，类型String，支持操作：【eq，like，ilike】，**不支持排序**- SysRepver，类型String，支持操作：【eq，like，ilike】，**不支持排序**- BaseBoardSn，类型String，支持操作：【eq，like，ilike】，支持排序- Os，类型String，支持操作：【eq，like，ilike】，支持排序- ConnActiveTime，类型String，支持操作：【eq，like，ilike】，**不支持排序**- FirewallStatus，**类型Int**，支持操作：【eq】，**不支持排序**- ProfileName，类型String，支持操作：【eq，like，ilike】，支持排序- DomainName，类型String，支持操作：【eq，like，ilike】，支持排序- SysRepVersion，类型String，支持操作：【eq，like，ilike】，支持排序- VirusVer，类型String，支持操作：【eq，like，ilike】，支持排序- Cpu，类型String，支持操作：【eq，like，ilike】，支持排序- Memory，类型String，支持操作：【eq，like，ilike】，支持排序- HardDiskSize，类型String，支持操作：【eq，like，ilike】，支持排序- HardwareChangeCount，**类型Int**，支持操作：【eq】，支持排序- AccountName，类型String，支持操作：【like.ilike】，支持排序- AccountGroupName，类型String，支持操作：【like.ilike】，支持排序- ScreenRecordingPermission，**类型Int**，支持操作：【eq】，支持排序- DiskAccessPermission，**类型Int**，支持操作：【eq】，支持排序分页参数- PageNum 从1开始，小于等于0时使用默认参数- PageSize 最大值5000，最好不超过100 */
+  Condition?: Condition;
+  /** 必填，终端自定义分组id */
+  DeviceVirtualGroupId?: number;
+  /** 必填，系统类型（0: win，1：linux，2: mac，3: win_srv，4：android，5：ios 默认值0） */
+  OsType?: number;
+  /** 选填，在线状态 （2表示在线，0或者1表示离线） */
+  OnlineStatus?: number;
+}
+
+declare interface DescribeVirtualDevicesResponse {
+  /** 返回的具体Data数据 */
+  Data?: DescribeVirtualDevicesPageRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyVirtualDeviceGroupsRequest {
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
+  /** 添加到的终端自定义分组id。和DeviceVirtualGroupIds互斥，必填其一，优先使用本参数 */
+  DeviceVirtualGroupId?: number;
+  /** 必填，操作的设备列表数据 */
+  DeviceList?: ModifyVirtualDeviceGroupsReqItem[];
+  /** 要添加的终端自定义分组id列表 */
+  DeviceVirtualGroupIds?: number[];
+  /** 必填，系统类型（0: win，1：linux，2: mac，3: win_srv，4：android，5：ios 默认值0） */
+  OsType?: number;
+}
+
+declare interface ModifyVirtualDeviceGroupsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Ioa iOA 零信任安全管理系统} */
 declare interface Ioa {
   (): Versions;
@@ -791,6 +847,10 @@ declare interface Ioa {
   DescribeSoftCensusListByDevice(data?: DescribeSoftCensusListByDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSoftCensusListByDeviceResponse>;
   /** 查看软件详情列表 {@link DescribeSoftwareInformationRequest} {@link DescribeSoftwareInformationResponse} */
   DescribeSoftwareInformation(data?: DescribeSoftwareInformationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSoftwareInformationResponse>;
+  /** 展示自定义分组终端列表 {@link DescribeVirtualDevicesRequest} {@link DescribeVirtualDevicesResponse} */
+  DescribeVirtualDevices(data?: DescribeVirtualDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirtualDevicesResponse>;
+  /** 终端手动自定义分组增减终端 {@link ModifyVirtualDeviceGroupsRequest} {@link ModifyVirtualDeviceGroupsResponse} */
+  ModifyVirtualDeviceGroups(data?: ModifyVirtualDeviceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVirtualDeviceGroupsResponse>;
 }
 
 export declare type Versions = ["2022-06-01"];

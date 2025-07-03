@@ -208,6 +208,14 @@ declare interface DataDisk {
   DiskName?: string;
 }
 
+/** 监控采集的数据。 */
+declare interface DataPointView {
+  /** 监控数据采集的时间 */
+  Timestamps?: number[];
+  /** 监控指标数据; 如果涉及到多个实例的监控数据的间隙时间，取值会为null */
+  Values?: number[];
+}
+
 /** 依赖关系 */
 declare interface Dependence {
   /** 依赖关系的起点任务名称 */
@@ -1118,6 +1126,30 @@ declare interface DescribeInstanceCategoriesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeJobMonitorDataRequest {
+  /** 作业ID；JobId详见[作业列表](https://cloud.tencent.com/document/product/599/15909) */
+  JobId: string;
+  /** 作业的Task名称，详见[作业详情](https://cloud.tencent.com/document/product/599/15904)。 */
+  TaskName: string;
+  /** 作业任务实例的序号，详见[任务详情](https://cloud.tencent.com/document/product/599/15905) */
+  TaskInstanceIndex: number;
+  /** 支持查询的指标；当前支持查询的任务指标；- CpuUsage：cpu利用率，单位：%- MemUsage：内存利用率，单位：%- LanOuttraffic：内网出带宽，单位：Bytes/s- LanIntraffic：内网入带宽，单位：Bytes/s */
+  MetricName: string;
+  /** 查询任务实例的起始时间；如果未传入查询起始时间或传入的时间小于任务实例的创建时间（任务实例创建时间详见[任务详情](https://cloud.tencent.com/document/product/599/15905)），会自动将查询时间调整到任务实例的创建时间。传入时间格式只支持零时区格式。 */
+  StartTime?: string;
+  /** 查询任务实例的终止时间；如果未传入查询终止时间或传入的时间大于任务实例的终止时间（任务实例终止时间详见[任务详情](https://cloud.tencent.com/document/product/599/15905)），并且任务实例已经结束，会自动将查询终止时间调整到任务实例的终止时间；如果任务实例未结束，会自动将查询终止时间调整到当前时间。传入时间格式只支持零时区格式。 */
+  EndTime?: string;
+}
+
+declare interface DescribeJobMonitorDataResponse {
+  /** 监控数据粒度，单位:秒；时间粒度随着查询的时间范围变化，查询时间范围越小，时间粒度越小。 */
+  Period?: number;
+  /** 监控采集的数据。时间戳和对应的值一一对应；如果查询的任务重试，采集时间段涉及多个实例的话，某些时间段内的值为null, 表示对应时间点没有实例存在，也不存在对应的监控数据；相邻监控时间段之间的空值数量最多为10。 */
+  DataPoints?: DataPointView;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeJobRequest {
   /** 作业ID；JobId详见[作业列表](https://cloud.tencent.com/document/product/599/15909) */
   JobId: string;
@@ -1436,6 +1468,8 @@ declare interface Batch {
   DescribeInstanceCategories(data?: DescribeInstanceCategoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceCategoriesResponse>;
   /** 查看作业详情 {@link DescribeJobRequest} {@link DescribeJobResponse} */
   DescribeJob(data: DescribeJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobResponse>;
+  /** 查询作业任务实例的资源监控信息 {@link DescribeJobMonitorDataRequest} {@link DescribeJobMonitorDataResponse} */
+  DescribeJobMonitorData(data: DescribeJobMonitorDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobMonitorDataResponse>;
   /** 获取作业的提交信息 {@link DescribeJobSubmitInfoRequest} {@link DescribeJobSubmitInfoResponse} */
   DescribeJobSubmitInfo(data: DescribeJobSubmitInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobSubmitInfoResponse>;
   /** 查看作业列表 {@link DescribeJobsRequest} {@link DescribeJobsResponse} */

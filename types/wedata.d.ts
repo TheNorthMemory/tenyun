@@ -5050,6 +5050,8 @@ declare interface ScreenTaskInfo {
   HourNum?: number | null;
   /** 分钟任务 */
   MinuteNum?: number | null;
+  /** 工作流总数 */
+  WorkflowNum?: number;
 }
 
 /** 开发空间-上传脚本请求 */

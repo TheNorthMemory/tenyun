@@ -242,6 +242,8 @@ declare interface ServerBaseConfig {
   Cmd?: string[];
   /** 会话亲和性开关 */
   SessionAffinity?: string | null;
+  /** Vpc 配置参数 */
+  VpcConf?: VpcConf;
 }
 
 /** 服务基本信息 */
@@ -380,6 +382,18 @@ declare interface VersionFlowInfo {
   UrlParam?: ObjectKV;
   /** 权重 */
   Priority?: number;
+}
+
+/** 云托管服务 Vpc 配置 */
+declare interface VpcConf {
+  /** vpc id */
+  VpcId?: string;
+  /** vpc 网段 */
+  VpcCIDR?: string;
+  /** subnet id */
+  SubnetId?: string;
+  /** subnet 网段 */
+  SubnetCIDR?: string;
 }
 
 declare interface CreateCloudRunEnvRequest {
@@ -571,6 +585,8 @@ declare interface UpdateCloudRunServerRequest {
   DeployInfo: DeployParam;
   /** 服务配置信息 */
   ServerConfig: ServerBaseConfig;
+  /** 业务类型，默认tcr */
+  Business?: string;
 }
 
 declare interface UpdateCloudRunServerResponse {

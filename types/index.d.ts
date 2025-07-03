@@ -129,6 +129,7 @@ import Icr, { Versions as IcrVersions } from "./icr";
 import Ie, { Versions as IeVersions } from "./ie";
 import Iecp, { Versions as IecpVersions } from "./iecp";
 import Ig, { Versions as IgVersions } from "./ig";
+import Igtm, { Versions as IgtmVersions } from "./igtm";
 import Iir, { Versions as IirVersions } from "./iir";
 import Ims, { Versions as ImsVersions } from "./ims";
 import Ioa, { Versions as IoaVersions } from "./ioa";
@@ -181,6 +182,7 @@ import Redis, { Versions as RedisVersions } from "./redis";
 import Region, { Versions as RegionVersions } from "./region";
 import Rum, { Versions as RumVersions } from "./rum";
 import Scf, { Versions as ScfVersions } from "./scf";
+import Securitylake, { Versions as SecuritylakeVersions } from "./securitylake";
 import Ses, { Versions as SesVersions } from "./ses";
 import Smh, { Versions as SmhVersions } from "./smh";
 import Smop, { Versions as SmopVersions } from "./smop";
@@ -394,6 +396,7 @@ export declare type SERVICE_VERSIONS = {
   ie: IeVersions,
   iecp: IecpVersions,
   ig: IgVersions,
+  igtm: IgtmVersions,
   iir: IirVersions,
   ims: ImsVersions,
   ioa: IoaVersions,
@@ -446,6 +449,7 @@ export declare type SERVICE_VERSIONS = {
   region: RegionVersions,
   rum: RumVersions,
   scf: ScfVersions,
+  securitylake: SecuritylakeVersions,
   ses: SesVersions,
   smh: SmhVersions,
   smop: SmopVersions,
@@ -799,6 +803,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   iecp: Iecp,
   /** {@link Ig 智能导诊} */
   ig: Ig,
+  /** {@link Igtm 智能全局流量管理} */
+  igtm: Igtm,
   /** {@link Iir 智能识图} */
   iir: Iir,
   /** {@link Ims 图片内容安全} */
@@ -903,6 +909,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   rum: Rum,
   /** {@link Scf 云函数} */
   scf: Scf,
+  /** {@link Securitylake 安全湖} */
+  securitylake: Securitylake,
   /** {@link Ses 邮件推送} */
   ses: Ses,
   /** {@link Smh 智能媒资托管} */

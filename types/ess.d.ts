@@ -174,7 +174,7 @@ declare interface AutoSignConfig {
   SealImgCallback?: boolean;
   /** 执行结果的回调URL，该URL仅支持HTTP或HTTPS协议，建议采用HTTPS协议以保证数据传输的安全性。腾讯电子签服务器将通过POST方式，application/json格式通知执行结果，请确保外网可以正常访问该URL。回调的相关说明可参考开发者中心的回调通知模块。 */
   CallbackUrl?: string;
-  /** 开通时候的身份验证方式, 取值为：**WEIXINAPP** : 微信人脸识别**INSIGHT** : 慧眼人脸识别**TELECOM** : 运营商三要素验证注：如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。为空默认 WEIXINAPP如果是 H5 开通链接，支持传 INSIGHT / TELECOM。为空默认 INSIGHT */
+  /** 开通时候的身份验证方式, 取值为：**WEIXINAPP** : 微信人脸识别**INSIGHT** : 慧眼人脸识别**TELECOM** : 运营商三要素验证注：如果是小程序开通链接，仅支持 WEIXINAPP 。为空默认 WEIXINAPP如果是 H5 开通链接，支持传 INSIGHT / TELECOM。为空默认 INSIGHT */
   VerifyChannels?: string[];
   /** 设置用户自动签合同的扣费方式。1: (默认)使用合同份额进行扣减注：`该字段已经失效，请勿设置此参数。` */
   LicenseType?: number;
@@ -530,24 +530,26 @@ declare interface FileUrl {
 
 /** 补充签署人信息- RecipientId 必须指定- 通过企业微信自定义账号ID补充签署人时，ApproverSource 和 CustomUserId 必填，ApproverSource取值：WEWORKAPP- 通过二要素（姓名/手机号）补充签署人时，ApproverName 和 ApproverMobile 必填，ApproverSource设置为空- 补充个人签署方时，若该用户已在电子签完成实名则可通过指定姓名和证件类型、证件号码完成补充 */
 declare interface FillApproverInfo {
-  /** 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。模板发起合同时，该参数为必填项。文件发起合同是，该参数无需传值。如果开发者后序用合同模板发起合同，建议保存此值，在用合同模板发起合同中需此值绑定对应的签署经办人 。 */
+  /** 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。模板发起合同时，该参数为必填项。文件发起合同时，该参数无需传值。如果开发者后序用合同模板发起合同，建议保存此值，在用合同模板发起合同中需此值绑定对应的签署经办人 。 */
   RecipientId: string;
   /** 签署人来源WEWORKAPP: 企业微信仅【企微或签】时指定WEWORKAPP */
   ApproverSource?: string;
   /** 企业微信UserId当ApproverSource为WEWORKAPP的企微或签场景下，必须指企业自有应用获取企业微信的UserId */
   CustomUserId?: string;
-  /** 补充企业签署人员工姓名 */
+  /** 补充企业签署人员工姓名ApproverSource!=WEWORKAPP时，必传 */
   ApproverName?: string;
-  /** 补充企业签署人员工手机号 */
+  /** 补充企业签署人员工手机号ApproverSource!=WEWORKAPP时，必传 */
   ApproverMobile?: string;
   /** 补充企业动态签署人时，需要指定对应企业名称 */
   OrganizationName?: string;
   /** 签署方经办人的证件类型，支持以下类型ID_CARD 中国大陆居民身份证HONGKONG_AND_MACAO 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 中国港澳台居民居住证(格式同中国大陆居民身份证)OTHER_CARD_TYPE 其他证件注: `1.其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。``2.补充个人签署方时，若该用户已在电子签完成实名则可通过指定姓名和证件类型、证件号码完成补充。` */
   ApproverIdCardType?: string;
-  /** 签署方经办人的证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。。中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。注：`补充个人签署方时，若该用户已在电子签完成实名则可通过指定姓名和证件类型、证件号码完成补充。` */
+  /** 签署方经办人的证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串注：`补充个人签署方时，若该用户已在电子签完成实名则可通过指定姓名和证件类型、证件号码完成补充。` */
   ApproverIdCardNumber?: string;
   /** 合同流程ID- 补充合同组子合同动态签署人时必传。- 补充普通合同时，请阅读：补充签署人接口的接口使用说明 */
   FlowId?: string;
+  /** 通知类型：当FillApproverType =0，或签场景补充签署人时，指定是否发送或签领取短信SMS：开启或签领取短信通知NONE：关闭或签领取短信通知当NotifyType=NONE时，可调用获取跳转至腾讯电子签小程序的签署链接接口生成签署链接来完成或签领取 */
+  NotifyType?: string;
 }
 
 /** 批量补充签署人时，补充失败的报错说明 */
@@ -1226,7 +1228,7 @@ declare interface RegisterInfo {
   UnifiedSocialCreditCode?: string;
   /** 指定企业认证的授权方式 支持多选:2: 法人授权方式5: 授权书+对公打款方式 */
   AuthorizationTypes?: number[];
-  /** 指定企业认证的授权方式 支持多选:2: 法人授权方式5: 授权书+对公打款方式 */
+  /** 指定企业认证的授权方式:2: 法人授权方式5: 授权书+对公打款方式 */
   AuthorizationType?: number;
 }
 

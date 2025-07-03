@@ -104,7 +104,7 @@ declare interface AutoSignConfig {
   SealImgCallback?: boolean;
   /** 该字段已废弃，请使用【应用号配置】中的回调地址统一接口消息 */
   CallbackUrl?: string;
-  /** 开通时候的身份验证方式, 取值为：**WEIXINAPP** : 微信人脸识别**INSIGHT** : 慧眼人脸识别**TELECOM** : 运营商三要素验证注：如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。为空默认 WEIXINAPP如果是 H5 开通链接，支持传 INSIGHT / TELECOM。为空默认 INSIGHT */
+  /** 开通时候的身份验证方式, 取值为：**WEIXINAPP** : 微信人脸识别**INSIGHT** : 慧眼人脸识别**TELECOM** : 运营商三要素验证注：如果是小程序开通链接，仅支持传 WEIXINAPP。为空默认 WEIXINAPP如果是 H5 开通链接，支持传 INSIGHT / TELECOM。为空默认 INSIGHT */
   VerifyChannels?: string[];
   /** 设置用户开通自动签时是否绑定个人自动签账号许可。1: (默认)不绑定自动签账号许可开通，开通后一直有效, 后续使用合同份额进行合同发起注：`该字段已经失效，请勿设置此参数。` */
   LicenseType?: number;

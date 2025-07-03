@@ -54,6 +54,50 @@ declare interface BackupTableContent {
   Rip?: string;
 }
 
+/** 资源信息 */
+declare interface CNResource {
+  /** 无 */
+  ID: number;
+  /** 无 */
+  InstanceID: string;
+  /** 无 */
+  AppID: number;
+  /** 无 */
+  Uin: string;
+  /** 无 */
+  Component: string;
+  /** 无 */
+  DeployMode: number;
+  /** 无 */
+  SpecName: string;
+  /** 无 */
+  ResourceID: string;
+  /** 无 */
+  Status: number;
+  /** 无 */
+  IP: string;
+  /** 无 */
+  CPU: number;
+  /** 无 */
+  Memory: number;
+  /** 无 */
+  Storage: number;
+  /** 无 */
+  UUID: string;
+  /** 无 */
+  Region: string;
+  /** 无 */
+  Zone: string;
+  /** 无 */
+  Details: string;
+  /** 无 */
+  CreateTime: string;
+  /** 无 */
+  ModifyTime: string;
+  /** 无 */
+  ExpireTime: string;
+}
+
 /** 集群计费相关信息 */
 declare interface Charge {
   /** 计费类型，“PREPAID” 预付费，“POSTPAID_BY_HOUR” 后付费 */
@@ -98,6 +142,26 @@ declare interface ClusterInfo {
   ClusterName?: string;
   /** 当前cluster的IP列表 */
   NodeIps?: string[];
+}
+
+/** 云原生实例详情 */
+declare interface CnInstanceInfo {
+  /** ID值 */
+  ID?: number | null;
+  /** cdwch-cn或者其他 */
+  InstanceType?: string | null;
+  /** cdwch-cn或者其他 */
+  InstanceName?: string | null;
+  /** Running */
+  Status?: string | null;
+  /** 运行中 */
+  StatusDesc?: string | null;
+  /** 无 */
+  InstanceStateInfo?: InstanceStateInfo | null;
+  /** - */
+  InstanceID?: string | null;
+  /** 无 */
+  Resources?: CNResource[] | null;
 }
 
 /** 配置文件修改信息 */
@@ -664,6 +728,34 @@ declare interface DescribeBackUpTablesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCNInstancesRequest {
+  /** 搜索的集群id名称 */
+  SearchInstanceID?: string;
+  /** 搜索的集群name */
+  SearchInstanceName?: string;
+  /** 分页参数，第一页为0，第二页为10 */
+  Offset?: number;
+  /** 分页参数，分页步长，默认为10 */
+  Limit?: number;
+  /** 搜索标签列表 */
+  SearchTags?: SearchTags[];
+  /** 集群类型，弹性版或自研数仓版 */
+  InstanceType?: string;
+  /** 组件名称列表 */
+  Components?: string[];
+}
+
+declare interface DescribeCNInstancesResponse {
+  /** 实例总数 */
+  TotalCount?: number | null;
+  /** 实例数组 */
+  InstancesList?: CnInstanceInfo[] | null;
+  /** - */
+  ErrorMsg?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCkSqlApisRequest {
   /** 实例id */
   InstanceId: string;
@@ -1069,6 +1161,8 @@ declare interface Cdwch {
   DescribeBackUpSchedule(data: DescribeBackUpScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackUpScheduleResponse>;
   /** 获取可备份表信息 {@link DescribeBackUpTablesRequest} {@link DescribeBackUpTablesResponse} */
   DescribeBackUpTables(data: DescribeBackUpTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackUpTablesResponse>;
+  /** 获取云原生实例列表 {@link DescribeCNInstancesRequest} {@link DescribeCNInstancesResponse} */
+  DescribeCNInstances(data?: DescribeCNInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCNInstancesResponse>;
   /** 查询集群用户相关信息 {@link DescribeCkSqlApisRequest} {@link DescribeCkSqlApisResponse} */
   DescribeCkSqlApis(data: DescribeCkSqlApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCkSqlApisResponse>;
   /** 获取集群配置文件内容 {@link DescribeClusterConfigsRequest} {@link DescribeClusterConfigsResponse} */

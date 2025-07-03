@@ -370,7 +370,7 @@ declare interface Image {
   ImageSize?: number;
   /** 镜像架构。镜像架构返回值包括：* `x86_64`* `arm`* `i386` */
   Architecture?: string;
-  /** 镜像状态:CREATING-创建中NORMAL-正常CREATEFAILED-创建失败USING-使用中SYNCING-同步中IMPORTING-导入中IMPORTFAILED-导入失败 */
+  /** 镜像状态:CREATING-创建中NORMAL-正常CREATEFAILED-创建失败SYNCING-复制中IMPORTING-导入中IMPORTFAILED-导入失败 */
   ImageState?: string;
   /** 镜像来源平台，包括如TencentOS、 CentOS、 Windows、 Ubuntu、 Debian、Fedora等。 */
   Platform?: string;
@@ -3056,6 +3056,8 @@ declare interface RunInstancesRequest {
   ChcIds?: string[];
   /** 实例销毁保护标志，表示是否允许通过api接口删除实例。取值范围：true：表示开启实例保护，不允许通过api接口删除实例false：表示关闭实例保护，允许通过api接口删除实例默认取值：false。 */
   DisableApiTermination?: boolean;
+  /** 实例是否开启巨型帧，取值范围： true：表示实例开启巨型帧，只有支持巨型帧的机型可设置为true。false：表示实例关闭巨型帧，只有支持巨型帧的机型可设置为false。 支持巨型帧的实例规格： [实例规格](https://cloud.tencent.com/document/product/213/11518) */
+  EnableJumboFrame?: boolean;
 }
 
 declare interface RunInstancesResponse {

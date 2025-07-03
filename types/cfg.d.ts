@@ -278,6 +278,10 @@ declare interface Task {
   TaskRegionName?: string;
   /** 架构ID */
   TaskArchId?: string;
+  /** 演练场景 */
+  TaskScenario?: TaskTarget[];
+  /** 演练目的 */
+  TaskPurpose?: TaskTarget[];
 }
 
 /** 从经验模板创建演练时需要配置的任务参数 */
@@ -526,6 +530,18 @@ declare interface TaskReportInfo {
   ArchiveTime?: string;
   /** 归档ID */
   ArchiveUuid?: string;
+}
+
+/** 演练目标 */
+declare interface TaskTarget {
+  /** 目标标签ID */
+  TargetId?: number;
+  /** 目标描述 */
+  TargetDesc?: string;
+  /** 1:演练场景2:演练目标 */
+  Type?: number;
+  /** 1:平台 2:用户个人 */
+  Source?: number;
 }
 
 /** 经验库 */

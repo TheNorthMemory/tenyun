@@ -172,6 +172,8 @@ declare interface CBSInstance {
   Shareable?: boolean;
   /** emr节点ID */
   EmrResourceId?: string;
+  /** 包销到期时间 */
+  UnderwriteExpiredTime?: string;
 }
 
 /** 容器集群Pod服务CLB设置 */
@@ -374,6 +376,8 @@ declare interface ClusterInstancesInfo {
   BindFileSystemNum?: number;
   /** rss集群的绑定列表 */
   ClusterRelationInfoList?: ClusterRelationMeta[] | null;
+  /** Redis信息 */
+  RedisId?: string;
 }
 
 /** 集群间绑定使用信息 */
@@ -472,6 +476,16 @@ declare interface Configuration {
   Properties: string;
 }
 
+/** 配置项（配置管理页） */
+declare interface ConfigurationItem {
+  /** 配置项名称 */
+  Name: string;
+  /** 配置项值 */
+  Value: string;
+  /** 所在的配置文件名 */
+  InFile?: string;
+}
+
 /** 用户Hive-MetaDB信息 */
 declare interface CustomMetaDBInfo {
   /** 自定义MetaDB的JDBC连接，示例: jdbc:mysql://10.10.10.10:3306/dbname */
@@ -542,6 +556,18 @@ declare interface DependService {
   ServiceName: string;
   /** 共用组件集群 */
   InstanceId: string;
+}
+
+/** 节点规格 */
+declare interface DescribeNodeSpec {
+  /** 节点类型 */
+  NodeType: string;
+  /** 节点类型名称 */
+  NodeName: string;
+  /** Types数组 */
+  Types?: NodeSpecType[] | null;
+  /** 云托管节点机型规格列表 */
+  CmnTypes?: NodeSpecType[] | null;
 }
 
 /** DescribeResourceConfig接口出参 */
@@ -1258,6 +1284,8 @@ declare interface LoadMetricsCondition {
 declare interface LoadMetricsConditions {
   /** 触发规则条件 */
   LoadMetrics?: LoadMetricsCondition[] | null;
+  /** 0:所有条件满足1：满足任意一个 */
+  Match?: number;
 }
 
 /** 登录设置 */
@@ -1502,6 +1530,10 @@ declare interface NodeHardwareInfo {
   ConfigurableServices?: string[];
   /** 节点标注信息，目前只提供给tf平台使用 */
   NodeMark?: string;
+  /** 包销资源是否支持设置自动续费 */
+  UnderwriteSetAutoRenew?: boolean;
+  /** Gpu信息 */
+  GpuDesc?: string;
 }
 
 /** 节点标记信息 */
@@ -1589,6 +1621,18 @@ declare interface NodeSelectorTerm {
 }
 
 /** 节点磁盘类型 */
+declare interface NodeSpecDisk {
+  /** 数量 */
+  Count?: number;
+  /** 名字 */
+  Name?: string;
+  /** 磁盘类型 */
+  DiskType?: string;
+  /** 指定磁盘大小 */
+  DefaultDiskSize?: number;
+}
+
+/** 节点磁盘类型 */
 declare interface NodeSpecDiskV2 {
   /** 数量 */
   Count?: number;
@@ -1598,6 +1642,76 @@ declare interface NodeSpecDiskV2 {
   DiskType?: string;
   /** 指定磁盘大小 */
   DefaultDiskSize?: number;
+}
+
+/** 节点机型列族 */
+declare interface NodeSpecFamily {
+  /** 机型 */
+  InstanceFamily: string;
+  /** 机型名称 */
+  FamilyName: string;
+  /** 排序 */
+  Order?: number;
+  /** InstanceType的列表 */
+  InstanceTypes?: NodeSpecInstanceType[] | null;
+}
+
+/** 节点规格类型 */
+declare interface NodeSpecInstanceType {
+  /** 规格 */
+  InstanceType: string;
+  /** 4 */
+  Cpu: number;
+  /** 8，单位G */
+  Memory: number;
+  /** 排序，越小排的越前 */
+  Order?: number;
+  /** 数量 */
+  Num?: number;
+  /** 售罄原因 */
+  SellOutReason?: string;
+  /** 系统盘 */
+  SystemDisk?: NodeSpecDisk[] | null;
+  /** 数据盘 */
+  DataDisk?: NodeSpecDisk[] | null;
+  /** 本地数据盘 */
+  LocalDataDisk?: NodeSpecDisk[] | null;
+  /** 售罄原因 */
+  SoldOutReason?: string;
+  /** 机型类别 */
+  InstanceFamily?: string;
+  /** 节点名称 */
+  NodeName?: string;
+  /** 节点类型 */
+  NodeType?: string;
+  /** 类别 */
+  Type?: string;
+  /** 类别名称 */
+  TypeName?: string;
+  /** 类别分类 */
+  FamilyName?: string;
+  /** cpu类型 */
+  CpuType?: string;
+  /** 售罄 RunOut、库存少 Less、充足 Enough */
+  Remark?: string;
+  /** 原价 */
+  OriginPrice?: number;
+  /** 包销计费机型支持的购买时长 */
+  PrepaidUnderwritePeriods?: number[] | null;
+  /** GPU信息 */
+  GpuDesc?: string;
+}
+
+/** 节点机型类型 */
+declare interface NodeSpecType {
+  /** 机型序列 */
+  Type: string;
+  /** 机型序列名字 */
+  TypeName: string;
+  /** 排序 */
+  Order?: number;
+  /** InstanceFamily数组 */
+  InstanceFamilies?: NodeSpecFamily[] | null;
 }
 
 /** 弹性扩缩容执行一次规则上下文 */
@@ -2943,11 +3057,27 @@ declare interface AttachDisksRequest {
   DeleteWithInstance?: boolean;
   /** 新挂磁盘时可支持配置的服务名称列表 */
   SelectiveConfServices?: string[];
+  /** 磁盘计费类型（1包月、3包销） */
+  ChargeType?: number;
+  /** 磁盘包销购买时长（仅支持12、24、36、48、60） */
+  UnderWriteDuration?: number;
 }
 
 declare interface AttachDisksResponse {
   /** 流程id */
   FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ConvertPreToPostClusterRequest {
+  /** 集群实例ID。 */
+  InstanceId: string;
+  /** 5min内不可重入标识，订单标识 */
+  ClientToken?: string;
+}
+
+declare interface ConvertPreToPostClusterResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3131,6 +3261,8 @@ declare interface CreateInstanceRequest {
   CosBucket?: string;
   /** 节点标识信息，目前只提供给tf平台使用 */
   NodeMarks?: NodeMark[];
+  /** CLB id */
+  LoadBalancerId?: string;
 }
 
 declare interface CreateInstanceResponse {
@@ -3810,6 +3942,32 @@ declare interface DescribeNodeResourceConfigFastResponse {
   RequestId?: string;
 }
 
+declare interface DescribeNodeSpecRequest {
+  /** 可用区Id，可以通过https://document.capi.woa.com/document/api/1605/76892查询相关信息 */
+  ZoneId: number;
+  /** 0,按量，1包年包月，99按量+包年包月，错填将不会展示费用信息 */
+  CvmPayMode: number;
+  /** 节点类型,Master,Core,Task,Router,All */
+  NodeType: string;
+  /** 0:旧计费页面,1:新计费页面。 错填，默认为旧计费 */
+  TradeType: number;
+  /** 产品Id，不填为0，则表示所有productId，前台使用必填44	EMR	V3.5.043	EMR	V3.4.0.tlinux42	EMR	V2.7.0.tlinux41	DRUID	V1.1.067	STARROCKS	V2.2.045	DRUID	V1.1.0.tlinux40	EMRCLOUD	v3.2.047	EMR	V4.0.048	STARROCKS	V1.2.049	STARROCKS	V1.3.050	KAFKA	V2.0.051	STARROCKS	V1.4.052	EMR-TKE	V1.0.053	EMR	V3.6.054	STARROCKS	V2.0.055	EMR-TKE	V1.0.156	EMR-TKE	DLCV1.0.057	EMR	V2.8.058	EMR	V3.6.159	SERVERLESS	V1.0.060	EMR-TKE	V1.1.062	STARROCKS	V2.1.163	STARROCKS	V2.1.1.tlinux64	EMR-TKE	TCCV1.0.065	EMR-TKE-AI	V1.0.066	RSS	V1.0.024	EMR	TianQiong-V1.0.03	EMR	V2.0.1.tlinux4	EMR	V2.1.07	EMR	V3.0.08	EMR	V3.0.0.tlinux9	EMR	V2.2.011	CLICKHOUSE	V1.0.012	CLICKHOUSE	V1.0.0.tlinux16	EMR	V2.3.017	CLICKHOUSE	V1.1.018	CLICKHOUSE	V1.1.0.tlinux19	EMR	V2.4.020	EMR	V2.5.021	USERCUSTOM	V1.0.022	CLICKHOUSE	V1.2.039	STARROCKS	V1.1.025	EMR	V3.1.026	DORIS	V1.0.027	KAFKA	V1.0.028	EMR	V3.2.029	EMR	V2.5.130	EMR	V2.6.032	DORIS	V1.1.033	EMR	V3.2.134	EMR	V3.3.035	DORIS	V1.2.036	STARROCKS	V1.0.037	EMR	V3.4.038	EMR	V2.7.0 */
+  ProductId: number;
+  /** 场景名 */
+  SceneName: string;
+  /** 类型为ComputeResource和EMR以及默认，默认为EMR */
+  ResourceBaseType?: string;
+  /** 计算资源id */
+  ComputeResourceId?: string;
+}
+
+declare interface DescribeNodeSpecResponse {
+  /** 节点规格类型 */
+  NodeSpecs?: DescribeNodeSpec[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeResourceScheduleDiffDetailRequest {
   /** emr集群的英文id */
   InstanceId: string;
@@ -3906,6 +4064,28 @@ declare interface DescribeSLInstanceResponse {
   AutoRenewFlag?: number;
   /** 实例节点总数。 */
   NodeNum?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeServiceConfGroupInfosRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 组件名 */
+  ServiceName: string;
+  /** 配置组名称 */
+  ConfGroupName: string;
+  /** 页码，从1开始 */
+  PageNo: number;
+  /** 页大小 */
+  PageSize: number;
+}
+
+declare interface DescribeServiceConfGroupInfosResponse {
+  /** 列表大小 */
+  TotalCount?: number;
+  /** 配置项key value列表 */
+  ConfItemKVList?: ConfigurationItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4977,6 +5157,8 @@ declare interface Emr {
   AddUsersForUserManager(data: AddUsersForUserManagerRequest, config?: AxiosRequestConfig): AxiosPromise<AddUsersForUserManagerResponse>;
   /** 云盘挂载 {@link AttachDisksRequest} {@link AttachDisksResponse} */
   AttachDisks(data: AttachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<AttachDisksResponse>;
+  /** 包月转按量集群 {@link ConvertPreToPostClusterRequest} {@link ConvertPreToPostClusterResponse} */
+  ConvertPreToPostCluster(data: ConvertPreToPostClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ConvertPreToPostClusterResponse>;
   /** 创建EMR容器集群实例 {@link CreateCloudInstanceRequest} {@link CreateCloudInstanceResponse} */
   CreateCloudInstance(data: CreateCloudInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudInstanceResponse>;
   /** 创建EMR集群实例(新) {@link CreateClusterRequest} {@link CreateClusterResponse} */
@@ -5045,6 +5227,8 @@ declare interface Emr {
   DescribeNodeDataDisks(data: DescribeNodeDataDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodeDataDisksResponse>;
   /** 快速获取节点规格配置 {@link DescribeNodeResourceConfigFastRequest} {@link DescribeNodeResourceConfigFastResponse} */
   DescribeNodeResourceConfigFast(data: DescribeNodeResourceConfigFastRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodeResourceConfigFastResponse>;
+  /** 查询节点规格 {@link DescribeNodeSpecRequest} {@link DescribeNodeSpecResponse} */
+  DescribeNodeSpec(data: DescribeNodeSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodeSpecResponse>;
   /** 查询YARN资源调度数据信息（旧） {@link DescribeResourceScheduleRequest} {@link DescribeResourceScheduleResponse} */
   DescribeResourceSchedule(data: DescribeResourceScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceScheduleResponse>;
   /** YARN资源调度-变更详情 {@link DescribeResourceScheduleDiffDetailRequest} {@link DescribeResourceScheduleDiffDetailResponse} */
@@ -5053,6 +5237,8 @@ declare interface Emr {
   DescribeSLInstance(data: DescribeSLInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSLInstanceResponse>;
   /** Serverless HBase查询实例列表 {@link DescribeSLInstanceListRequest} {@link DescribeSLInstanceListResponse} */
   DescribeSLInstanceList(data: DescribeSLInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSLInstanceListResponse>;
+  /** 描述服务配置组信息 {@link DescribeServiceConfGroupInfosRequest} {@link DescribeServiceConfGroupInfosResponse} */
+  DescribeServiceConfGroupInfos(data: DescribeServiceConfGroupInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceConfGroupInfosResponse>;
   /** 查询服务进程信息 {@link DescribeServiceNodeInfosRequest} {@link DescribeServiceNodeInfosResponse} */
   DescribeServiceNodeInfos(data: DescribeServiceNodeInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceNodeInfosResponse>;
   /** 获取Spark任务列表 {@link DescribeSparkApplicationsRequest} {@link DescribeSparkApplicationsResponse} */

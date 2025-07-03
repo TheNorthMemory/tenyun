@@ -764,6 +764,10 @@ declare interface DescribeDatahubTaskRes {
   ErrorMessage?: string;
   /** 任务标签列表 */
   Tags?: Tag[];
+  /** 任务描述信息 */
+  Description?: string;
+  /** 1:正常 2:隔离中 */
+  IsolateStatus?: number;
 }
 
 /** 查询Datahub任务列表 */
@@ -3075,7 +3079,7 @@ declare interface CreateTopicIpWhiteListResponse {
 declare interface CreateTopicRequest {
   /** 实例Id */
   InstanceId: string;
-  /** 主题名称，是一个不超过 128 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-) */
+  /** 只能包含字母、数字、下划线、“-”、“.” */
   TopicName: string;
   /** Partition个数，大于0 */
   PartitionNum: number;

@@ -2191,21 +2191,21 @@ declare interface OriginPrivateParameters {
 /** 源站防护信息 */
 declare interface OriginProtectionInfo {
   /** 站点ID。 */
-  ZoneId: string;
+  ZoneId?: string;
   /** 域名列表。 */
-  Hosts: string[];
+  Hosts?: string[];
   /** 代理ID列表。 */
-  ProxyIds: string[];
+  ProxyIds?: string[];
   /** 当前版本的IP白名单。 */
-  CurrentIPWhitelist: IPWhitelist | null;
+  CurrentIPWhitelist?: IPWhitelist | null;
   /** 该站点是否需要更新源站白名单，取值有：true ：需要更新IP白名单 ；false ：无需更新IP白名单。 */
-  NeedUpdate: boolean;
+  NeedUpdate?: boolean;
   /** 源站防护状态，取值有：online ：源站防护启用中 ；offline ：源站防护已停用 ；nonactivate ：源站防护未激活，仅在从未使用过源站防护功能的站点调用中返回。 */
-  Status: string;
+  Status?: string;
   /** 站点套餐是否支持源站防护，取值有：true ：支持 ；false ：不支持。 */
-  PlanSupport: boolean;
+  PlanSupport?: boolean;
   /** 最新IP白名单与当前IP白名单的对比。 */
-  DiffIPWhitelist: DiffIPWhitelist | null;
+  DiffIPWhitelist?: DiffIPWhitelist | null;
 }
 
 /** 源站组记录 */
@@ -2248,8 +2248,10 @@ declare interface Plan {
   PlanType?: string;
   /** 套餐 ID。形如 edgeone-2y041pblwaxe。 */
   PlanId?: string;
-  /** 服务区域，取值有：mainland: 中国大陆；overseas: 全球（不包括中国大陆)；global: 全球（包括中国大陆)。 */
+  /** 服务区域，取值有：mainland: 中国大陆；overseas: 全球（不包括中国大陆）；global: 全球（包括中国大陆）。 */
   Area?: string;
+  /** 自动续费开关。取值有：true: 已开启自动续费；false: 未开启自动续费。 */
+  AutoRenewal?: boolean;
   /** 套餐状态，取值有：normal：正常状态；expiring-soon：即将到期状态；expired：到期状态；isolated：隔离状态；overdue-isolated：欠费隔离状态。 */
   Status?: string;
   /** 付费类型，取值有：0: 后付费；1: 预付费。 */
@@ -4595,11 +4597,11 @@ declare interface DescribeCustomErrorPagesResponse {
 declare interface DescribeDDoSAttackDataRequest {
   /** 开始时间。 */
   StartTime: string;
-  /** 结束时间。 */
+  /** 结束时间。查询时间范围（`EndTime` - `StartTime`）需小于等于 31 天。 */
   EndTime: string;
   /** 统计指标列表，取值有：ddos_attackMaxBandwidth：攻击带宽峰值；ddos_attackMaxPackageRate：攻击包速率峰值 ；ddos_attackBandwidth：攻击带宽曲线；ddos_attackPackageRate：攻击包速率曲线。 */
   MetricNames: string[];
-  /** 站点集合，此参数必填。 */
+  /** 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
   ZoneIds?: string[];
   /** DDoS策略组ID列表，不填默认选择全部策略ID。 */
   PolicyIds?: number[];
@@ -4621,11 +4623,11 @@ declare interface DescribeDDoSAttackDataResponse {
 declare interface DescribeDDoSAttackEventRequest {
   /** 开始时间，时间范围为 30 天。 */
   StartTime: string;
-  /** 结束时间，时间范围为 30 天。 */
+  /** 结束时间。查询时间范围（`EndTime` - `StartTime`）需小于等于 31 天。 */
   EndTime: string;
   /** ddos策略组集合，不填默认选择全部策略。 */
   PolicyIds?: number[];
-  /** 站点集合，此参数必填。 */
+  /** 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
   ZoneIds?: string[];
   /** 分页查询的限制数目，默认值为20，最大查询条目为1000。 */
   Limit?: number;
@@ -4653,11 +4655,11 @@ declare interface DescribeDDoSAttackEventResponse {
 declare interface DescribeDDoSAttackTopDataRequest {
   /** 开始时间。 */
   StartTime: string;
-  /** 结束时间。 */
+  /** 结束时间。查询时间范围（`EndTime` - `StartTime`）需小于等于 31 天。 */
   EndTime: string;
   /** 查询的统计指标，取值有：ddos_attackFlux_protocol：按各协议的攻击流量排行；ddos_attackPackageNum_protocol：按各协议的攻击包量排行；ddos_attackNum_attackType：按各攻击类型的攻击数量排行；ddos_attackNum_sregion：按攻击源地区的攻击数量排行；ddos_attackFlux_sip：按攻击源IP的攻击数量排行；ddos_attackFlux_sregion：按攻击源地区的攻击数量排行。 */
   MetricName: string;
-  /** 站点ID集合，此参数必填。 */
+  /** 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
   ZoneIds?: string[];
   /** DDoS策略组ID集合，不填默认选择全部策略ID。 */
   PolicyIds?: number[];
@@ -5233,11 +5235,11 @@ declare interface DescribeSecurityTemplateBindingsResponse {
 declare interface DescribeTimingL4DataRequest {
   /** 开始时间。 */
   StartTime: string;
-  /** 结束时间。 */
+  /** 结束时间。查询时间范围（`EndTime` - `StartTime`）需小于等于 31 天。 */
   EndTime: string;
   /** 查询指标，取值有：l4Flow_connections: 访问并发连接数；l4Flow_flux: 访问总流量；l4Flow_inFlux: 访问入流量；l4Flow_outFlux: 访问出流量；l4Flow_inBandwidth: 访问入向带宽峰值；l4Flow_outBandwidth: 访问出向带宽峰值。 */
   MetricNames: string[];
-  /** 站点 ID 集合，此参数必填。 */
+  /** 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
   ZoneIds?: string[];
   /** 四层实例列表, 不填表示选择全部实例。 */
   ProxyIds?: string[];
@@ -5261,11 +5263,11 @@ declare interface DescribeTimingL4DataResponse {
 declare interface DescribeTimingL7AnalysisDataRequest {
   /** 开始时间。 */
   StartTime: string;
-  /** 结束时间。 */
+  /** 结束时间。查询时间范围（`EndTime` - `StartTime`）需小于等于 31 天。 */
   EndTime: string;
   /** 指标列表，取值有:l7Flow_outFlux: L7 EdgeOne 响应流量，单位：Byte；l7Flow_inFlux: L7 客户端请求流量，单位：Byte；l7Flow_flux: L7 访问总流量（EdgeOne 响应+客户端请求），单位：Byte；l7Flow_outBandwidth: L7 EdgeOne 响应带宽，单位：bps；l7Flow_inBandwidth：L7 客户端请求带宽，单位：bps；l7Flow_bandwidth：L7 访问总带宽（EdgeOne 响应+客户端请求），单位：bps；l7Flow_request: L7 访问请求数，单位：次； l7Flow_avgResponseTime: L7 访问平均响应耗时，单位：ms； l7Flow_avgFirstByteResponseTime: L7 访问平均首字节响应耗时，单位：ms。 */
   MetricNames: string[];
-  /** 站点 ID 集合，此参数必填。 */
+  /** 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
   ZoneIds?: string[];
   /** 查询时间粒度，取值有：min: 1分钟；5min: 5分钟；hour: 1小时；day: 1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：2 小时范围内以 min 粒度查询，2 天范围内以 5min 粒度查询，7 天范围内以 hour 粒度查询，超过 7 天以 day 粒度查询。 */
   Interval?: string;
@@ -5313,11 +5315,11 @@ declare interface DescribeTimingL7CacheDataResponse {
 declare interface DescribeTopL7AnalysisDataRequest {
   /** 开始时间。 */
   StartTime: string;
-  /** 结束时间。 */
+  /** 结束时间。查询时间范围（`EndTime` - `StartTime`）需小于等于 31 天。 */
   EndTime: string;
   /** 查询的指标，取值有： l7Flow_outFlux_country：按国家/地区维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_province：按中国大陆境内省份维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_statusCode：按状态码维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_domain：按域名维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_url：按 URL Path 维度统计 L7 EdgeOne 响应流量指标; l7Flow_outFlux_resourceType：按资源类型维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_sip：按客户端 IP 维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_referers：按 Referer 维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_ua_device：按设备类型维度统计 L7 EdgeOne 响应流量指标; l7Flow_outFlux_ua_browser：按浏览器类型维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_ua_os：按操作系统类型维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_ua：按 User-Agent 维度统计 L7 EdgeOne 响应流量指标； l7Flow_request_country：按国家/地区维度统计 L7 访问请求数指标； l7Flow_request_province：按中国大陆境内省份维度统计 L7 访问请求数指标； l7Flow_request_statusCode：按状态码维度统计 L7 访问请求数指标； l7Flow_request_domain：按域名维度统计 L7 访问请求数指标； l7Flow_request_url：按 URL Path 维度统计 L7 访问请求数指标; l7Flow_request_resourceType：按资源类型维度统计 L7 访问请求数指标； l7Flow_request_sip：按客户端 IP 维度统计 L7 访问请求数指标； l7Flow_request_referer：按 Referer 维度统计 L7 访问请求数指标； l7Flow_request_ua_device：按设备类型维度统计 L7 访问请求数指标; l7Flow_request_ua_browser：按浏览器类型维度统计 L7 访问请求数指标； l7Flow_request_ua_os：按操作系统类型维度统计 L7 访问请求数指标； l7Flow_request_ua：按 User-Agent 维度统计 L7 访问请求数指标。 */
   MetricName: string;
-  /** 站点 ID 集合，此参数必填。 */
+  /** 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
   ZoneIds?: string[];
   /** 查询前多少个 top 数据，最大值为1000。不填默认为10，表示查询 top10 的数据。 */
   Limit?: number;
@@ -5491,15 +5493,15 @@ declare interface DownloadL7LogsResponse {
 }
 
 declare interface EnableOriginACLRequest {
-  /** 站点ID。 */
+  /** 站点 ID。 */
   ZoneId: string;
-  /** 七层加速域名开启回源白名单的模式。all：为站点下的所有七层加速域名开启回源白名单。specific：为站点下指定的七层加速域名开启回源白名单。当参数为空时，默认为specific。 */
+  /** 七层加速域名开启源站防护的模式。all：针对站点下的所有七层加速域名开启。specific：针对站点下指定的七层加速域名开启。当参数为空时，默认为 specific。 */
   L7EnableMode?: string;
-  /** 开启回源白名单的七层加速域名列表，当请求参数 L7EnableMode 为 all 时必须为空。 */
+  /** 开启源站防护的七层加速域名列表，仅当参数 L7EnableMode 为 specific 时生效。L7EnableMode 为 all 时，请保留此参数为空。单次最大仅支持填写 200 个七层加速域名。 */
   L7Hosts?: string[];
-  /** 四层代理 ID 开启回源白名单的模式。all：为站点下的所有四层代理开启回源白名单。specific：为站点下指定的四层代理 ID 开启回源白名单。当参数为空时，默认为specific。 */
+  /** 四层代理实例开启源站防护的模式。all：针对站点下的所有四层代理实例开启。specific：针对站点下指定的四层代理实例开启。当参数为空时，默认为 specific。 */
   L4EnableMode?: string;
-  /** 开启回源白名单的四层代理 ID 列表，当请求参数 L4EnableMode 为 all 时必须为空。单次最多支持 200 个实例。 */
+  /** 开启源站防护的四层代理实例列表，仅当参数 L4EnableMode 为 specific 时生效。L4EnableMode 为 all 时，请保留此参数为空。单次最大仅支持填写 100 个四层代理实例。 */
   L4ProxyIds?: string[];
 }
 
@@ -6645,7 +6647,7 @@ declare interface Teo {
   DescribeOriginGroup(data?: DescribeOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginGroupResponse>;
   /** 查询负载均衡实例下源站组健康状态 {@link DescribeOriginGroupHealthStatusRequest} {@link DescribeOriginGroupHealthStatusResponse} */
   DescribeOriginGroupHealthStatus(data: DescribeOriginGroupHealthStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginGroupHealthStatusResponse>;
-  /** 查询源站防护信息 {@link DescribeOriginProtectionRequest} {@link DescribeOriginProtectionResponse} */
+  /** 查询源站防护信息（旧） {@link DescribeOriginProtectionRequest} {@link DescribeOriginProtectionResponse} */
   DescribeOriginProtection(data?: DescribeOriginProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginProtectionResponse>;
   /** 查询监控流量时序数据（待废弃） {@link DescribeOverviewL7DataRequest} {@link DescribeOverviewL7DataResponse} */
   DescribeOverviewL7Data(data: DescribeOverviewL7DataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewL7DataResponse>;
@@ -6693,7 +6695,7 @@ declare interface Teo {
   DownloadL4Logs(data: DownloadL4LogsRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadL4LogsResponse>;
   /** 下载七层离线日志 {@link DownloadL7LogsRequest} {@link DownloadL7LogsResponse} */
   DownloadL7Logs(data: DownloadL7LogsRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadL7LogsResponse>;
-  /** 开启回源白名单 {@link EnableOriginACLRequest} {@link EnableOriginACLResponse} */
+  /** 开启源站防护 {@link EnableOriginACLRequest} {@link EnableOriginACLResponse} */
   EnableOriginACL(data: EnableOriginACLRequest, config?: AxiosRequestConfig): AxiosPromise<EnableOriginACLResponse>;
   /** 导出站点配置 {@link ExportZoneConfigRequest} {@link ExportZoneConfigResponse} */
   ExportZoneConfig(data: ExportZoneConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ExportZoneConfigResponse>;
