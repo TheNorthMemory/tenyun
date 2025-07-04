@@ -2565,6 +2565,8 @@ declare interface ModifyAutoBackupConfigRequest {
   TimePeriod: string;
   /** 自动备份类型。目前仅能配置为：1 ，指定时备份。 */
   AutoBackupType?: number;
+  /** 全量备份文件保存天数。单位：天。 */
+  BackupStorageDays?: number;
 }
 
 declare interface ModifyAutoBackupConfigResponse {

@@ -2,6 +2,64 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** AK简要信息 */
+declare interface AKInfo {
+  /** ak对应id */
+  ID?: number;
+  /** ak具体值临时密钥时返回临时密钥 */
+  Name?: string;
+  /** 所属账号 */
+  User?: string;
+  /** 备注 */
+  Remark?: string;
+}
+
+/** 访问密钥资产告警信息 */
+declare interface AccessKeyAlarmInfo {
+  /** 告警类型/风险类型告警类型：0异常调用1泄漏检测2自定义风险类型：0：配置风险1: 自定义风险 */
+  Type?: number;
+  /** 告警数量/风险数量 */
+  Count?: number;
+}
+
+/** 访问密钥资产信息 */
+declare interface AccessKeyAsset {
+  /** AK 的id */
+  ID?: number;
+  /** AK名称 */
+  Name?: string;
+  /** 备注 */
+  Remark?: string;
+  /** 账号所属APPID */
+  AppID?: number;
+  /** 所属主账号Uin */
+  Uin?: string;
+  /** 主账号昵称 */
+  Nickname?: string;
+  /** 所属子账号Uin */
+  SubUin?: string;
+  /** 所属子账号昵称 */
+  SubNickname?: string;
+  /** 0 主账号AK1 子账号AK2 临时密钥 */
+  Type?: number;
+  /** 安全建议 枚举0 正常1 立即处理2 建议加固 */
+  Advice?: number;
+  /** 告警信息列表 */
+  AccessKeyAlarmList?: AccessKeyAlarmInfo[];
+  /** 风险信息列表 */
+  AccessKeyRiskList?: AccessKeyAlarmInfo[];
+  /** 源IP数量 */
+  IPCount?: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 最近访问时间 */
+  LastAccessTime?: string;
+  /** AK状态 0:禁用1:已启用 */
+  Status?: number;
+  /** 0 表示已检测1 表示检测中 */
+  CheckStatus?: number;
+}
+
 /** 告警下拉字段 */
 declare interface AlertExtraInfo {
   /** 相关攻击事件 */
@@ -972,6 +1030,58 @@ declare interface CVMAssetVO {
   ProtectStatus?: number;
   /** 最后离线时间 */
   OfflineTime?: string;
+}
+
+/** 调用记录详情 */
+declare interface CallRecord {
+  /** 调用记录ID */
+  CallID?: string;
+  /** 访问密钥 */
+  AccessKey?: string;
+  /** 访问密钥备注 */
+  AccessKeyRemark?: string;
+  /** 访问密钥ID */
+  AccessKeyID?: number;
+  /** 调用源IP */
+  SourceIP?: string;
+  /** 调用源IP备注 */
+  SourceIPRemark?: string;
+  /** 调用源IP地域 */
+  Region?: string;
+  /** IP类型 0:账号内（未备注） 1:账号外（未备注） 2:账号内 (已备注) 3:账号外 (已备注) */
+  IPType?: number;
+  /** 调用接口名称 */
+  EventName?: string;
+  /** 调用产品名称 */
+  ProductName?: string;
+  /** 调用类型0:控制台调用1:API */
+  EventType?: number;
+  /** 用户类型CAMUser/root/AssumedRole */
+  UserType?: string;
+  /** 用户/角色名称 */
+  UserName?: string;
+  /** 策略列表 */
+  PolicySet?: string[];
+  /** 调用次数 */
+  CallCount?: number;
+  /** 调用错误码0表示成功 */
+  Code?: number;
+  /** 首次调用时间 */
+  FirstCallTime?: string;
+  /** 最后调用时间 */
+  LastCallTime?: string;
+  /** IP关联资产ID，如果为空字符串，表示没有关联 */
+  InstanceID?: string;
+  /** IP关联资产名称 */
+  InstanceName?: string;
+  /** 聚合日期 */
+  Date?: string;
+  /** appid */
+  AppID?: number;
+  /** 展示状态 */
+  ShowStatus?: boolean;
+  /** 运营商 */
+  ISP?: string;
 }
 
 /** 检查项视角风险 */
@@ -2184,6 +2294,44 @@ declare interface ServiceSupport {
   IsSupport?: boolean;
 }
 
+/** 访问密钥资产信息（源IP角度） */
+declare interface SourceIPAsset {
+  /** 源IP id */
+  ID?: number;
+  /** 源IP */
+  SourceIP?: string;
+  /** 备注 */
+  Remark?: string;
+  /** 账号所属APPID */
+  AppID?: number;
+  /** IP地域 */
+  Region?: string;
+  /** 调用方式0:控制台调用1:API */
+  EventType?: number;
+  /** IP类型0:账号内（未备注）1:账号外（未备注）2:账号内 (已备注)3:账号外 (已备注) */
+  IPType?: number;
+  /** 告警信息列表 */
+  AccessKeyAlarmList?: AccessKeyAlarmInfo[];
+  /** ak信息列表 */
+  AKInfo?: AKInfo[];
+  /** 调用接口数量 */
+  ActionCount?: number;
+  /** 最近访问时间 */
+  LastAccessTime?: string;
+  /** IP关联实例ID，如果为空字符串，代表非账号内资产 */
+  InstanceID?: string;
+  /** IP关联实例名称 */
+  InstanceName?: string;
+  /** 账号所属Uin */
+  Uin?: string;
+  /** 昵称 */
+  Nickname?: string;
+  /** 展示状态 */
+  ShowStatus?: boolean;
+  /** 运营商字段 */
+  ISP?: string;
+}
+
 /** 用户行为分析 统计条件 */
 declare interface StatisticalFilter {
   /** 0:不基于统计检测1:发生次数高于固定值2:发生次数高于周期平均值的百分之3:发生次数高于用户平均值的百分之 */
@@ -3015,6 +3163,22 @@ declare interface DeleteRiskScanTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAccessKeyAssetRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeAccessKeyAssetResponse {
+  /** 访问密钥资产列表 */
+  Data?: AccessKeyAsset[];
+  /** 全部数量 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAlertListRequest {
   /** 标签搜索筛选 */
   Filter: Filter;
@@ -3213,6 +3377,26 @@ declare interface DescribeCVMAssetsResponse {
   PublicPrivateAttr?: FilterDataObject[];
   /** 主机防护状态 */
   ProtectStatusList?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCallRecordRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 访问密钥的ID */
+  AccessKeyID?: number;
+  /** 调用源IP的ID */
+  SourceIPID?: number;
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeCallRecordResponse {
+  /** 调用记录列表 */
+  Data?: CallRecord[];
+  /** 调用记录总数 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4015,6 +4199,22 @@ declare interface DescribeSearchBugInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSourceIPAssetRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeSourceIPAssetResponse {
+  /** 访问密钥资产列表 */
+  Data?: SourceIPAsset[];
+  /** 全部数量 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSubUserInfoRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -4426,6 +4626,8 @@ declare interface Csip {
   DeleteDomainAndIp(data?: DeleteDomainAndIpRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainAndIpResponse>;
   /** 删除风险中心扫描任务 {@link DeleteRiskScanTaskRequest} {@link DeleteRiskScanTaskResponse} */
   DeleteRiskScanTask(data: DeleteRiskScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRiskScanTaskResponse>;
+  /** 获取访问密钥资产 {@link DescribeAccessKeyAssetRequest} {@link DescribeAccessKeyAssetResponse} */
+  DescribeAccessKeyAsset(data?: DescribeAccessKeyAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessKeyAssetResponse>;
   /** 查询全量告警列表 {@link DescribeAlertListRequest} {@link DescribeAlertListResponse} */
   DescribeAlertList(data: DescribeAlertListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlertListResponse>;
   /** 查询云边界分析-暴露路径下主机节点的进程列表 {@link DescribeAssetProcessListRequest} {@link DescribeAssetProcessListResponse} */
@@ -4442,6 +4644,8 @@ declare interface Csip {
   DescribeCVMAssetInfo(data: DescribeCVMAssetInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCVMAssetInfoResponse>;
   /** cvm列表 {@link DescribeCVMAssetsRequest} {@link DescribeCVMAssetsResponse} */
   DescribeCVMAssets(data?: DescribeCVMAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCVMAssetsResponse>;
+  /** 获取调用记录 {@link DescribeCallRecordRequest} {@link DescribeCallRecordResponse} */
+  DescribeCallRecord(data?: DescribeCallRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallRecordResponse>;
   /** 检查项视角风险列表 {@link DescribeCheckViewRisksRequest} {@link DescribeCheckViewRisksResponse} */
   DescribeCheckViewRisks(data?: DescribeCheckViewRisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCheckViewRisksResponse>;
   /** 集群列表 {@link DescribeClusterAssetsRequest} {@link DescribeClusterAssetsResponse} */
@@ -4510,6 +4714,8 @@ declare interface Csip {
   DescribeScanTaskList(data?: DescribeScanTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanTaskListResponse>;
   /** 查询漏洞信息 {@link DescribeSearchBugInfoRequest} {@link DescribeSearchBugInfoResponse} */
   DescribeSearchBugInfo(data: DescribeSearchBugInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchBugInfoResponse>;
+  /** 获取访问密钥资产（源IP视角） {@link DescribeSourceIPAssetRequest} {@link DescribeSourceIPAssetResponse} */
+  DescribeSourceIPAsset(data?: DescribeSourceIPAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSourceIPAssetResponse>;
   /** 查询集团的子账号列表 {@link DescribeSubUserInfoRequest} {@link DescribeSubUserInfoResponse} */
   DescribeSubUserInfo(data?: DescribeSubUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubUserInfoResponse>;
   /** 子网列表 {@link DescribeSubnetAssetsRequest} {@link DescribeSubnetAssetsResponse} */

@@ -2044,6 +2044,8 @@ declare interface PriceResource {
   DiskNum?: number;
   /** 本地盘的数量 */
   LocalDiskNum?: number;
+  /** GPU信息 */
+  GpuDesc?: string;
 }
 
 /** 询价结果 */
@@ -2152,6 +2154,8 @@ declare interface Resource {
   LocalDiskNum?: number;
   /** 本地盘数量，如2 */
   DiskNum?: number;
+  /** GPU信息 */
+  GpuDesc?: string;
 }
 
 /** 资源详情 */
@@ -5149,7 +5153,7 @@ declare interface TerminateTasksResponse {
 /** {@link Emr 弹性 MapReduce} */
 declare interface Emr {
   (): Versions;
-  /** 添加扩缩容负载规则 {@link AddMetricScaleStrategyRequest} {@link AddMetricScaleStrategyResponse} */
+  /** 新增自动扩缩容规则 {@link AddMetricScaleStrategyRequest} {@link AddMetricScaleStrategyResponse} */
   AddMetricScaleStrategy(data: AddMetricScaleStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<AddMetricScaleStrategyResponse>;
   /** 增加节点规格配置 {@link AddNodeResourceConfigRequest} {@link AddNodeResourceConfigResponse} */
   AddNodeResourceConfig(data: AddNodeResourceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<AddNodeResourceConfigResponse>;

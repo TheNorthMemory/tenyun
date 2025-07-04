@@ -1941,7 +1941,7 @@ declare interface ModifyInstanceRequest {
   Remark?: string;
   /** 消息发送和接收的比例 */
   SendReceiveRatio?: number;
-  /** 商品规格，从 [DescribeProductSKUs](https://cloud.tencent.com/document/api/1493/107676) 接口中的 [ProductSKU](https://cloud.tencent.com/document/api/1493/107676) 出参获得。 */
+  /** 商品规格，从 [DescribeProductSKUs](https://cloud.tencent.com/document/api/1493/107676) 接口中的 [ProductSKU](https://cloud.tencent.com/document/api/1493/96031) 出参获得。 */
   SkuCode?: string;
   /** 消息保留时长（单位：小时），取值范围参考 [DescribeProductSKUs](https://cloud.tencent.com/document/api/1493/107676) 接口中的 [ProductSKU](https://cloud.tencent.com/document/api/1493/96031) 出参：- 默认值：DefaultRetention 参数- 最小值：RetentionLowerLimit 参数- 最大值：RetentionUpperLimit 参数 */
   MessageRetention?: number;

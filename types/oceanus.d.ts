@@ -128,6 +128,8 @@ declare interface Cluster {
   RunningMem?: number;
   /** setats集群 */
   Setats?: Setats | null;
+  /** [] */
+  Yarns?: HadoopYarnItem[] | null;
 }
 
 /** 工作空间集群组信息 */
@@ -338,6 +340,26 @@ declare interface GatewayRefItem {
   Type: number | null;
 }
 
+/** hadoopYarn资源信息 */
+declare interface HadoopYarnItem {
+  /** ClusterGroupSerialId */
+  ClusterGroupSerialId: string;
+  /** 状态 */
+  Status: number | null;
+  /** cpu */
+  Cpu: number | null;
+  /** mem */
+  Mem?: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 配置文件内容 */
+  Config?: string;
+  /** CreatorUin */
+  CreatorUin?: string;
+}
+
 /** 作业配置详情 */
 declare interface JobConfig {
   /** 作业Id */
@@ -416,6 +438,8 @@ declare interface JobConfig {
   TaskManagerMem?: number | null;
   /** 运行中配置 */
   JobConfigItem?: JobConfig | null;
+  /** checkpoint 超时时间 */
+  CheckpointTimeoutSecond?: number;
 }
 
 /** 描述作业发生的一个事件 */
@@ -566,6 +590,8 @@ declare interface JobV1 {
   OpenJobDefaultAlarm?: number | null;
   /** 操作中描述 */
   ProgressDesc?: string | null;
+  /** 停止持续告警 */
+  ContinueAlarm?: number;
 }
 
 /** 日志查询的每行日志信息 */
@@ -1325,6 +1351,12 @@ declare interface CreateJobConfigRequest {
   TaskManagerCpu?: number;
   /** TaskManager 内存 */
   TaskManagerMem?: number;
+  /** 0=默认使用老的 1=使用新的 */
+  UseOldSystemConnector?: number;
+  /** 压缩参数 */
+  ProgramArgsAfterGzip?: string;
+  /** checkpoint 超时时间 */
+  CheckpointTimeoutSecond?: number;
 }
 
 declare interface CreateJobConfigResponse {
@@ -1991,6 +2023,8 @@ declare interface ModifyJobRequest {
   WorkSpaceId?: string;
   /** 作业描述 */
   Description?: string;
+  /** 停止持续告警 */
+  ContinueAlarm?: number;
 }
 
 declare interface ModifyJobResponse {

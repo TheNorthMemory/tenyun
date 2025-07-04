@@ -658,7 +658,7 @@ declare interface FlowBrief {
   FlowName?: string;
   /** 合同流程描述信息。 */
   FlowDescription?: string;
-  /** 合同流程的类别分类（如销售合同/入职合同等）。 */
+  /** 合同流程的类别分类（如销售合同/入职合同等）。该字段将被废弃，不建议使用。	请使用 UserFlowType。 */
   FlowType?: string;
   /** 合同流程当前的签署状态, 会存在下列的状态值 **0** : 未开启流程(合同中不存在填写环节) **1** : 待签署 **2** : 部分签署 **3** : 已拒签 **4** : 已签署 **5** : 已过期 **6** : 已撤销 **7** : 未开启流程(合同中存在填写环节) **8** : 等待填写 **9** : 部分填写 **10** : 已拒填 **21** : 已解除 */
   FlowStatus?: number;
@@ -670,6 +670,10 @@ declare interface FlowBrief {
   Creator?: string;
   /** 合同流程的签署截止时间，格式为Unix标准时间戳（秒）。 */
   Deadline?: number;
+  /** 用户合同的自定义分类。自定义合同类型的位置，在下图所示地方:![image](https://qcloudimg.tencent-cloud.cn/raw/00d72934c31bd49115a566e4e1a4530d.png) */
+  UserFlowType?: UserFlowType;
+  /** 发起模板时,使用的模板Id */
+  TemplateId?: string;
 }
 
 /** 创建流程的签署方信息 */
@@ -740,7 +744,7 @@ declare interface FlowDetailInfo {
   FlowId?: string;
   /** 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。 */
   FlowName?: string;
-  /** 合同流程的类别分类（如销售合同/入职合同等）。 */
+  /** 合同流程的类别分类（如销售合同/入职合同等）。该字段将被废弃，不建议使用。 */
   FlowType?: string;
   /** 合同流程当前的签署状态, 会存在下列的状态值 **0** : 未开启流程(合同中不存在填写环节) **1** : 待签署 **2** : 部分签署 **3** : 已拒签 **4** : 已签署 **5** : 已过期 **6** : 已撤销 **7** : 未开启流程(合同中存在填写环节) **8** : 等待填写 **9** : 部分填写 **10** : 已拒填 **16** : 已失效（可能因为参与方修改姓名等原因） **21** : 已解除 */
   FlowStatus?: number;
@@ -756,6 +760,10 @@ declare interface FlowDetailInfo {
   CcInfos?: FlowApproverDetail[];
   /** 合同流程发起方的员工编号, 即员工在腾讯电子签平台的唯一身份标识。 */
   Creator?: string;
+  /** 用户合同的自定义分类。自定义合同类型的位置，在下图所示地方:![image](https://qcloudimg.tencent-cloud.cn/raw/00d72934c31bd49115a566e4e1a4530d.png) */
+  UserFlowType?: UserFlowType;
+  /** 发起模板时,使用的模板Id */
+  TemplateId?: string;
 }
 
 /** 合同转交相关信息 */

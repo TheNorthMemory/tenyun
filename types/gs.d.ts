@@ -157,7 +157,7 @@ declare interface AndroidInstanceLabel {
   /** 标签键 */
   Key: string;
   /** 标签值 */
-  Value: string;
+  Value?: string;
 }
 
 /** 安卓实例属性 */

@@ -680,7 +680,7 @@ declare interface FlowDetailInfo {
   FlowId?: string;
   /** 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。 */
   FlowName?: string;
-  /** 合同流程的类别分类（如销售合同/入职合同等）。 */
+  /** 合同流程的类别分类（如销售合同/入职合同等）。该字段将被废弃，不建议使用。	请使用 UserFlowType */
   FlowType?: string;
   /** 合同流程当前的签署状态, 会存在下列的状态值 **INIT** :合同创建 **PART** :合同签署中(至少有一个签署方已经签署) **REJECT** :合同拒签 **ALL** :合同签署完成 **DEADLINE** :合同流签(合同过期) **CANCEL** :合同撤回 **RELIEVED** :解除协议（已解除） */
   FlowStatus?: string;
@@ -698,6 +698,10 @@ declare interface FlowDetailInfo {
   CcInfos?: FlowApproverDetail[];
   /** 是否需要发起前审批当NeedCreateReview为true，表明当前流程是需要发起前审核的合同，可能无法进行查看，签署操作，需要等审核完成后，才可以继续后续流程当NeedCreateReview为false，不需要发起前审核的合同 */
   NeedCreateReview?: boolean;
+  /** 用户合同的自定义分类。自定义合同类型的位置，在下图所示地方:![image](https://qcloudimg.tencent-cloud.cn/raw/37138cc5f3c38e6f788f4b82f695cebf.png) */
+  UserFlowType?: UserFlowType;
+  /** 发起模板时,使用的模板Id */
+  TemplateId?: string;
 }
 
 /** 合同组中每个子合同的发起信息 */

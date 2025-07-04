@@ -3648,7 +3648,7 @@ declare interface MediaAnimatedGraphicsItem {
   Storage?: TaskOutputStorage;
   /** 转动图的文件路径。 */
   Path?: string;
-  /** 转动图模板 ID，参见[转动图参数模板](https://cloud.tencent.com/document/product/862/37042)。 */
+  /** 转动图模板 ID，参见[转动图参数模板](https://cloud.tencent.com/document/product/862/77168))。 */
   Definition?: number;
   /** 动图格式，如 gif。 */
   Container?: string;
@@ -4620,7 +4620,7 @@ declare interface RawTranscodeParameter {
 declare interface RawWatermarkParameter {
   /** 水印类型，可选值：image：图片水印。 */
   Type: string;
-  /** 原点位置，目前仅支持：TopLeft：表示坐标原点位于视频图像左上角，水印原点为图片或文字的左上角。默认值：TopLeft。 */
+  /** 原点位置，可选值：TopLeft：表示坐标原点位于视频图像左上角，水印原点为图片或文字的左上角。TopRight：表示坐标原点位于视频图像的右上角，水印原点为图片或文字的右上角；BottomLeft：表示坐标原点位于视频图像的左下角，水印原点为图片或文字的左下角；BottomRight：表示坐标原点位于视频图像的右下角，水印原点为图片或文字的右下角。默认值：TopLeft。 */
   CoordinateOrigin?: string;
   /** 水印原点距离视频图像坐标原点的水平位置。支持 %、px 两种格式：当字符串以 % 结尾，表示水印 XPos 为视频宽度指定百分比，如 10% 表示 XPos 为视频宽度的 10%；当字符串以 px 结尾，表示水印 XPos 为指定像素，如 100px 表示 XPos 为 100 像素。默认值：0px。 */
   XPos?: string;

@@ -1638,6 +1638,8 @@ declare interface InstanceInfo {
   MajorEventsProPkg?: MajorEventsProPkg;
   /** 1是基础2025版本；0不是 */
   BasicFlag?: number;
+  /** 实例的网络配置 */
+  NetworkConfig?: NetworkConfig;
 }
 
 /** 数据封装 */
@@ -1882,6 +1884,16 @@ declare interface MiniPkg {
   RenewFlag?: number;
   /** 计费项 */
   BillingItem?: string;
+}
+
+/** 实例的网络配置 */
+declare interface NetworkConfig {
+  /** 高防EIP地址 */
+  AntiDDosEip?: string;
+  /** 高防EIP绑定状态。0：解绑1：绑定 */
+  AntiDDosEipStatus?: number;
+  /** WAF原生VIP绑定状态。0：解绑1：绑定 */
+  VipStatus?: number;
 }
 
 /** bot-自定义规则请求参数比对结构体 */

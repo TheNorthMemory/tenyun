@@ -742,6 +742,8 @@ declare interface STTConfig {
   VadSilenceTime?: number;
   /** 热词表：该参数用于提升识别准确率。 单个热词限制："热词|权重"，单个热词不超过30个字符（最多10个汉字），权重[1-11]或者100，如：“腾讯云|5” 或 “ASR|11”； 热词表限制：多个热词用英文逗号分割，最多支持128个热词，如：“腾讯云|10,语音识别|5,ASR|11”； */
   HotWordList?: string;
+  /** vad的远场人声抑制能力（不会对asr识别效果造成影响），范围为[0, 3]，默认为0。推荐设置为2，有较好的远场人声抑制能力。 */
+  VadLevel?: number;
 }
 
 /** 历史规模信息 */
@@ -810,6 +812,8 @@ declare interface ServerPushText {
   DropMode?: number;
   /** ServerPushText消息的优先级，0表示可被打断，1表示不会被打断。**目前仅支持传入0，如果需要传入1，请提工单联系我们添加权限。**注意：在接收到Priority=1的消息后，后续其他任何消息都会被忽略（包括Priority=1的消息），直到Priority=1的消息处理结束。该字段可与Interrupt、DropMode字段配合使用。例子：- Priority=1、Interrupt=true，会打断现有交互，立刻播报，播报过程中不会被打断- Priority=1、Interrupt=false、DropMode=1，会等待当前交互结束，再进行播报，播报过程中不会被打断 */
   Priority?: number;
+  /** 是否将文本加入到llm历史上下文中 */
+  AddHistory?: boolean;
 }
 
 /** 单流旁路转推的用户上行信息。 */
@@ -934,6 +938,8 @@ declare interface TranscriptionParams {
   TargetUserId?: string;
   /** 机器人订阅的用户列表仅 TranscriptionMode 为 1或者 TranscriptionMode 为无限上麦模式支持传入多个用户列表 */
   TargetUserIdList?: string[];
+  /** 声纹配置 */
+  VoicePrint?: VoicePrint;
 }
 
 /** 实时音视频用量在某一时间段的统计信息。 */
