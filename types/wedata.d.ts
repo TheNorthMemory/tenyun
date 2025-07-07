@@ -612,6 +612,8 @@ declare interface BizCatalogsInfo {
   ParentId: number | null;
   /** 类目顺序 */
   Position: number | null;
+  /** 类目名称英文 */
+  NameEn?: string | null;
 }
 
 /** 实时任务同步速度 字节/s */

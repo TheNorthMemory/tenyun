@@ -1860,6 +1860,8 @@ declare interface BashEventsInfoNew {
   MachineType?: number;
   /** 检测来源 0:bash日志 1:实时监控 */
   DetectBy?: number;
+  /** 执行命令(解码后) */
+  BashCmdDecoded?: string;
 }
 
 /** 高危命令策略 */
@@ -3338,6 +3340,10 @@ declare interface MalWareList {
   MD5?: string;
   /** 附加信息 */
   MachineExtraInfo?: MachineExtraInfo;
+  /** 是否可以清理 */
+  DoClean?: boolean;
+  /** 首次检出方式 0扫描；1实时监控 */
+  FirstDetectionMethod?: number;
 }
 
 /** 恶意请求白名单列表信息 */
@@ -3422,6 +3428,8 @@ declare interface MalwareInfo {
   FileExists?: boolean;
   /** 木马进程是否存在 */
   ProcessExists?: boolean;
+  /** 首次检出方式0扫描;1实时监控 */
+  FirstDetectionMethod?: number;
 }
 
 /** 恶意文件风险提示列表信息 */
@@ -4638,6 +4646,8 @@ declare interface RiskProcessEvent {
   MachineExtraInfo?: MachineExtraInfo;
   /** 主机uuid */
   Uuid?: string;
+  /** 首次检出方式 0扫描;1实时监控 */
+  FirstDetectionMethod?: number;
 }
 
 /** 索引规则 */
@@ -5730,7 +5740,7 @@ declare interface WarningInfoObj {
 
 /** 告警更新或插入的参数 */
 declare interface WarningObject {
-  /** 事件告警类型；1：离线，2：木马，3：异常登录，4：爆破，5：漏洞（已拆分为9-12四种类型）6：高位命令，7：反弹sell，8：本地提权，9：系统组件漏洞，10：web应用漏洞，11：应急漏洞，12：安全基线，14：恶意请求，15: 网络攻击，16：Windows系统漏洞，17：Linux软件漏洞 */
+  /** 事件告警类型；1：离线，2：木马，3：异常登录，4：爆破，5：漏洞（已拆分为9-12四种类型）6：高危命令，7：反弹sell，8：本地提权，9：系统组件漏洞，10：web应用漏洞，11：应急漏洞，12：安全基线，14：恶意请求，15: 网络攻击，16：Windows系统漏洞，17：Linux软件漏洞 */
   Type?: number;
   /** 1: 关闭告警 0: 开启告警 */
   DisablePhoneWarning?: number;
@@ -5742,6 +5752,8 @@ declare interface WarningObject {
   ControlBits?: string;
   /** 告警主机范围类型，0:全部主机，1:按所属项目选，2:按腾讯云标签选，3:按主机安全标签选，4:自选主机 */
   HostRange?: number;
+  /** 单位 */
+  Unit?: string;
 }
 
 /** 自定义透传字段结构 */
@@ -10066,6 +10078,12 @@ declare interface DescribeMalwareTimingScanSettingResponse {
   ProtectMode?: number;
   /** 查杀范围 0 脚本类之外的恶意文件，1全部恶意文件 */
   ProtectFileScope?: number;
+  /** 执行清理开关 0未开启 1开启 */
+  DoClean?: number;
+  /** 自选的隔离主机集合 */
+  QuaraUuids?: string[];
+  /** 用户选择的隔离范围，0：默认全隔离 1：用户自选 */
+  QuaraScope?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -13921,6 +13939,10 @@ declare interface ModifyMalwareTimingScanSettingsRequest {
   ProtectMode?: number;
   /** 查杀范围 0 脚本类之外的恶意文件，1全部恶意文件 */
   ProtectFileScope?: number;
+  /** 自选的隔离主机集合 */
+  QuaraUuids?: string[];
+  /** 用户选择的隔离范围，0：默认全隔离 1：用户自选 */
+  QuaraScope?: number;
 }
 
 declare interface ModifyMalwareTimingScanSettingsResponse {
@@ -14512,6 +14534,10 @@ declare interface ScanVulRequest {
 declare interface ScanVulResponse {
   /** 任务id */
   TaskId?: number;
+  /** 自选主机里面包含基础版个数 */
+  BasicVersionCount?: number;
+  /** 创建扫描任务机器个数 */
+  SuccessCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

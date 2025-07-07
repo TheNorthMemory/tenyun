@@ -2414,6 +2414,18 @@ declare interface CancelTaskResponse {
   RequestId?: string;
 }
 
+declare interface CancelTasksRequest {
+  /** 任务Id数组，全局唯一 */
+  TaskId: string[];
+  /** 配置信息，key-value数组，对外不可见。key1：AuthorityRole（鉴权角色，默认传SubUin，base64加密，仅在jdbc提交任务时使用） */
+  Config?: KVPair[];
+}
+
+declare interface CancelTasksResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CheckDataEngineConfigPairsValidityRequest {
   /** 引擎小版本ID */
   ChildImageVersionId?: string;
@@ -5157,6 +5169,8 @@ declare interface Dlc {
   CancelSparkSessionBatchSQL(data: CancelSparkSessionBatchSQLRequest, config?: AxiosRequestConfig): AxiosPromise<CancelSparkSessionBatchSQLResponse>;
   /** 取消任务 {@link CancelTaskRequest} {@link CancelTaskResponse} */
   CancelTask(data: CancelTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelTaskResponse>;
+  /** 批量取消任务 {@link CancelTasksRequest} {@link CancelTasksResponse} */
+  CancelTasks(data: CancelTasksRequest, config?: AxiosRequestConfig): AxiosPromise<CancelTasksResponse>;
   /** 检查引擎用户自定义参数的有效性 {@link CheckDataEngineConfigPairsValidityRequest} {@link CheckDataEngineConfigPairsValidityResponse} */
   CheckDataEngineConfigPairsValidity(data?: CheckDataEngineConfigPairsValidityRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDataEngineConfigPairsValidityResponse>;
   /** 查看集群是否能回滚 {@link CheckDataEngineImageCanBeRollbackRequest} {@link CheckDataEngineImageCanBeRollbackResponse} */

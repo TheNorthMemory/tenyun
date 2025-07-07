@@ -160,6 +160,14 @@ declare interface DescribeDeviceInfoRspData {
   ServiceList?: DeviceServiceInfo[] | null;
 }
 
+/** 查询返回终端自定义分组的Data数据 */
+declare interface DescribeDeviceVirtualGroupsPageRsp {
+  /** 分页公共对象 */
+  Page?: Paging;
+  /** 终端自定义分组列表数据 */
+  Items?: DeviceVirtualDeviceGroupsDetail[];
+}
+
 /** 分页的data数据 */
 declare interface DescribeDevicesPageRsp {
   /** 数据分页信息 */
@@ -434,6 +442,22 @@ declare interface DeviceServiceInfo {
   User?: string | null;
 }
 
+/** 终端自定义分组列表数据 */
+declare interface DeviceVirtualDeviceGroupsDetail {
+  /** 终端自定义分组id */
+  Id?: number;
+  /** 自定义分组名称 */
+  DeviceVirtualGroupName?: string;
+  /** 设备数 */
+  DeviceCount?: number;
+  /** 系统类型（0: win，1：linux，2: mac，4：android，5：ios ） */
+  OsType?: number;
+  /** 创建时间 */
+  Itime?: string;
+  /** 更新时间 */
+  Utime?: string;
+}
+
 /** Filters 条件过滤 */
 declare interface Filter {
   /** 过滤字段 */
@@ -694,6 +718,24 @@ declare interface DescribeDeviceInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDeviceVirtualGroupsRequest {
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
+  /** 滤条件、分页参数 Name - String - 是否必填：否 - 操作符: like - 排序支持：否- 按终端自定义分组过滤。 DeviceVirtualGroupName - String - 是否必填：否 - 操作符: like - 排序支持：否- 按终端自定义分组过滤。 */
+  Condition?: Condition;
+  /** 必填，系统类型（0: win，1：linux，2: mac，4：android，5：ios 默认值0） */
+  OsType?: number;
+  /** 非必填，自定义分组ids */
+  VirtualGroupIds?: number[];
+}
+
+declare interface DescribeDeviceVirtualGroupsResponse {
+  /** 查询终端自定义分组的Data数据 */
+  Data?: DescribeDeviceVirtualGroupsPageRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDevicesRequest {
   /** 过滤条件参数（字段含义请参考接口返回值）- Mid, 类型String，支持操作：【eq，like，ilike】，支持排序- Name, 类型String，支持操作：【eq，like，ilike】，支持排序- Itime, 类型String，支持操作：【eq，like，ilike】，支持排序- UserName, 类型String，支持操作：【eq，like，ilike】，支持排序- MacAddr, 类型String，支持操作：【eq，like，ilike】，支持排序- UserId, 类型String，支持操作：【eq，like，ilike】，支持排序- Ip, 类型String，支持操作：【eq，like，ilike】，支持排序- Tags，类型String，支持操作：【eq，like，ilike】，支持排序- LocalIpList，类型String，支持操作：【eq，like，ilike】，支持排序- SerialNum，类型String，支持操作：【eq，like，ilike】，支持排序- Version，类型String，支持操作：【eq，like，ilike】，支持排序- StrVersion，类型String，支持操作：【eq，like，ilike】，支持排序- RtpStatus，类型String，支持操作：【eq，like，ilike】，**不支持排序**- HostName，类型String，支持操作：【eq，like，ilike】，支持排序- IoaUserName，类型String，支持操作：【eq，like，ilike】，支持排序- GroupName，类型String，支持操作：【eq，like，ilike】，支持排序- CriticalVulListCount，**类型Int**，支持操作：【eq】，**不支持排序**- RiskCount，**类型Int**，支持操作：【eq】，**不支持排序**- VulVersion，类型String，支持操作：【eq，like，ilike】，**不支持排序**- Virusver，类型String，支持操作：【eq，like，ilike】，**不支持排序**- SysRepver，类型String，支持操作：【eq，like，ilike】，**不支持排序**- BaseBoardSn，类型String，支持操作：【eq，like，ilike】，支持排序- Os，类型String，支持操作：【eq，like，ilike】，支持排序- ConnActiveTime，类型String，支持操作：【eq，like，ilike】，**不支持排序**- FirewallStatus，**类型Int**，支持操作：【eq】，**不支持排序**- ProfileName，类型String，支持操作：【eq，like，ilike】，支持排序- DomainName，类型String，支持操作：【eq，like，ilike】，支持排序- SysRepVersion，类型String，支持操作：【eq，like，ilike】，支持排序- VirusVer，类型String，支持操作：【eq，like，ilike】，支持排序- Cpu，类型String，支持操作：【eq，like，ilike】，支持排序- Memory，类型String，支持操作：【eq，like，ilike】，支持排序- HardDiskSize，类型String，支持操作：【eq，like，ilike】，支持排序- HardwareChangeCount，**类型Int**，支持操作：【eq】，支持排序- AccountName，类型String，支持操作：【like.ilike】，支持排序- AccountGroupName，类型String，支持操作：【like.ilike】，支持排序- ScreenRecordingPermission，**类型Int**，支持操作：【eq】，支持排序- DiskAccessPermission，**类型Int**，支持操作：【eq】，支持排序分页参数- PageNum 从1开始，小于等于0时使用默认参数- PageSize 最大值5000，最好不超过100 */
   Condition?: Condition;
@@ -837,6 +879,8 @@ declare interface Ioa {
   DescribeDeviceHardwareInfoList(data: DescribeDeviceHardwareInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceHardwareInfoListResponse>;
   /** 获取终端进程网络服务信息 {@link DescribeDeviceInfoRequest} {@link DescribeDeviceInfoResponse} */
   DescribeDeviceInfo(data?: DescribeDeviceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceInfoResponse>;
+  /** 查询终端自定义分组列表 {@link DescribeDeviceVirtualGroupsRequest} {@link DescribeDeviceVirtualGroupsResponse} */
+  DescribeDeviceVirtualGroups(data?: DescribeDeviceVirtualGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceVirtualGroupsResponse>;
   /** 查询设备列表详情 {@link DescribeDevicesRequest} {@link DescribeDevicesResponse} */
   DescribeDevices(data?: DescribeDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicesResponse>;
   /** 获取账号列表 {@link DescribeLocalAccountsRequest} {@link DescribeLocalAccountsResponse} */

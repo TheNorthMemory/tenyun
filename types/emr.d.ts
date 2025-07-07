@@ -3173,6 +3173,8 @@ declare interface CreateClusterRequest {
   CosBucket?: string;
   /** 节点标识信息，目前只提供给tf平台使用 */
   NodeMarks?: NodeMark[];
+  /** clb id */
+  LoadBalancerId?: string;
 }
 
 declare interface CreateClusterResponse {
@@ -3804,6 +3806,8 @@ declare interface DescribeInstanceRenewNodesResponse {
   NodeList?: RenewInstancesInfo[] | null;
   /** 用户所有的标签键列表 */
   MetaInfo?: string[] | null;
+  /** 集群依赖的Redis实例Id */
+  RedisInfo?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

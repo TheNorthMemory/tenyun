@@ -112,6 +112,8 @@ declare interface AndroidInstanceAppInfo {
   PackageVersion?: string;
   /** 应用包标签 */
   PackageLabel?: string;
+  /** 应用包版本号 */
+  VersionName?: string;
 }
 
 /** 安卓实例设备信息 */
@@ -158,6 +160,16 @@ declare interface AndroidInstanceLabel {
   Key: string;
   /** 标签值 */
   Value?: string;
+}
+
+/** 安卓实例标签详情 */
+declare interface AndroidInstanceLabelDetail {
+  /** 标签 */
+  Label?: AndroidInstanceLabel;
+  /** 标签描述 */
+  Description?: string;
+  /** 标签创建时间 */
+  CreateTime?: string;
 }
 
 /** 安卓实例属性 */
@@ -413,8 +425,10 @@ declare interface CreateAndroidInstanceImageResponse {
 declare interface CreateAndroidInstanceLabelRequest {
   /** 标签键 */
   Key: string;
-  /** 标签值 */
+  /** 标签值。普通场景下，该值不需要填写；高级场景下，需要两个层级进行分组时才填写。 */
   Value?: string;
+  /** 标签描述 */
+  Description?: string;
 }
 
 declare interface CreateAndroidInstanceLabelResponse {
@@ -491,6 +505,8 @@ declare interface CreateAndroidInstancesRequest {
   HostSerialNumbers?: string[];
   /** 镜像 ID。如果不填，将使用默认的系统镜像 */
   ImageId?: string;
+  /** 安卓实例标签列表 */
+  Labels?: AndroidInstanceLabel[];
 }
 
 declare interface CreateAndroidInstancesResponse {
@@ -720,6 +736,8 @@ declare interface DescribeAndroidInstanceLabelsResponse {
   Total?: number;
   /** 安卓实例标签列表 */
   Labels?: AndroidInstanceLabel[];
+  /** 安卓实例标签详情列表 */
+  AndroidInstanceLabels?: AndroidInstanceLabelDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -759,11 +777,11 @@ declare interface DescribeAndroidInstancesAppBlacklistResponse {
 declare interface DescribeAndroidInstancesByAppsRequest {
   /** 偏移量，默认为 0 */
   Offset: number;
-  /** 限制量，默认为20，最大值为100 */
+  /** 限制量，默认为 20，最大值为 500 */
   Limit: number;
-  /** 应用 ID 列表。通过应用 ID 做集合查询 */
+  /** 应用 ID 列表。当 AndroidIds 为多条数据时（例如 app1, app2），返回的实例列表为：安装了 app1 应用的实例和安装了 app2 应用的实例集合（并集）。 */
   AndroidAppIds: string[];
-  /** 字段过滤器。Filter 的 Name 有以下值： AndroidInstanceId：实例 ID */
+  /** 字段过滤器，Filter 的 Name 有以下值： AndroidInstanceId：实例 Id */
   Filters?: Filter[];
 }
 
@@ -1067,10 +1085,10 @@ declare interface ModifyAndroidInstancesInformationResponse {
 declare interface ModifyAndroidInstancesLabelsRequest {
   /** 安卓实例 ID 列表 */
   AndroidInstanceIds: string[];
-  /** 安卓实例标签列表 */
-  AndroidInstanceLabels: AndroidInstanceLabel[];
   /** 操作类型。ADD：标签键不存在的添加新标签，标签键存在的将覆盖原有标签REMOVE：根据标签键删除标签REPLACE：使用请求标签列表替换原来所有标签CLEAR：清除所有标签 */
   Operation: string;
+  /** 安卓实例标签列表 */
+  AndroidInstanceLabels?: AndroidInstanceLabel[];
 }
 
 declare interface ModifyAndroidInstancesLabelsResponse {
@@ -1535,7 +1553,7 @@ declare interface Gs {
   DescribeAndroidInstances(data?: DescribeAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAndroidInstancesResponse>;
   /** 查询安卓实例应用黑名单 {@link DescribeAndroidInstancesAppBlacklistRequest} {@link DescribeAndroidInstancesAppBlacklistResponse} */
   DescribeAndroidInstancesAppBlacklist(data: DescribeAndroidInstancesAppBlacklistRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAndroidInstancesAppBlacklistResponse>;
-  /** 查询安装指定应用的安卓实例 {@link DescribeAndroidInstancesByAppsRequest} {@link DescribeAndroidInstancesByAppsResponse} */
+  /** 批量查询安装指定应用的安卓实例 {@link DescribeAndroidInstancesByAppsRequest} {@link DescribeAndroidInstancesByAppsResponse} */
   DescribeAndroidInstancesByApps(data: DescribeAndroidInstancesByAppsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAndroidInstancesByAppsResponse>;
   /** 获取并发总数和运行数 {@link DescribeInstancesCountRequest} {@link DescribeInstancesCountResponse} */
   DescribeInstancesCount(data?: DescribeInstancesCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesCountResponse>;
