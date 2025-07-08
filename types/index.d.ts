@@ -9,6 +9,7 @@ import Acp, { Versions as AcpVersions } from "./acp";
 import Advisor, { Versions as AdvisorVersions } from "./advisor";
 import Af, { Versions as AfVersions } from "./af";
 import Afc, { Versions as AfcVersions } from "./afc";
+import Ai3d, { Versions as Ai3dVersions } from "./ai3d";
 import Aiart, { Versions as AiartVersions } from "./aiart";
 import Ame, { Versions as AmeVersions } from "./ame";
 import Ams, { Versions as AmsVersions } from "./ams";
@@ -276,6 +277,7 @@ export declare type SERVICE_VERSIONS = {
   advisor: AdvisorVersions,
   af: AfVersions,
   afc: AfcVersions,
+  ai3d: Ai3dVersions,
   aiart: AiartVersions,
   ame: AmeVersions,
   ams: AmsVersions,
@@ -566,6 +568,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   af: Af,
   /** {@link Afc 定制建模} */
   afc: Afc,
+  /** {@link Ai3d 腾讯混元生3D} */
+  ai3d: Ai3d,
   /** {@link Aiart 大模型图像创作引擎} */
   aiart: Aiart,
   /** {@link Ame 正版曲库直通车} */

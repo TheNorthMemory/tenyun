@@ -502,6 +502,8 @@ declare interface Instance {
   DefaultLoginPort?: number;
   /** 实例的最新操作错误信息。 */
   LatestOperationErrorMsg?: string | null;
+  /** 实例绑定的公网IPv6地址。 */
+  PublicIPv6Addresses?: string[];
 }
 
 /** 实例属性 */
@@ -636,6 +638,14 @@ declare interface InternetAccessible {
   PublicIpAssigned?: boolean;
   /** 带宽包ID。可通过[ DescribeBandwidthPackages ](https://cloud.tencent.com/document/api/215/19209)接口返回值中的`BandwidthPackageId`获取。该参数仅在RunInstances接口中作为入参使用。 */
   BandwidthPackageId?: string;
+  /** 线路类型。各种线路类型详情可参考：[EIP 的 IP 地址类型](https://cloud.tencent.com/document/product/1199/41646)。默认值：BGP。- BGP：常规 BGP 线路已开通静态单线IP白名单的用户，可选值： - CMCC：中国移动 - CTCC：中国电信 - CUCC：中国联通注意：仅部分地域支持静态单线IP。示例值：BGP */
+  InternetServiceProvider?: string;
+  /** 公网 IP 类型。- WanIP：普通公网IP。- HighQualityEIP：精品 IP。仅新加坡和中国香港支持精品IP。- AntiDDoSEIP：高防 IP。仅部分地域支持高防IP，详情可见[弹性公网IP产品概述](https://cloud.tencent.com/document/product/1199/41646)。如需为资源分配公网IPv4地址，请指定公网IPv4地址类型。示例值：WanIP此功能仅部分地区灰度开发，如需使用[请提交工单咨询](https://console.cloud.tencent.com/workorder/category) */
+  IPv4AddressType?: string;
+  /** 弹性公网 IPv6 类型。- EIPv6：弹性公网 IPv6。- HighQualityEIPv6：精品 IPv6。仅中国香港支持精品IPv6。如需为资源分配IPv6地址，请指定弹性公网IPv6类型。示例值：EIPv6此功能仅部分地区灰度开发，如需使用[请提交工单咨询](https://console.cloud.tencent.com/workorder/category) */
+  IPv6AddressType?: string;
+  /** 高防包唯一ID，申请高防IP时，该字段必传。示例值：bgp-12345678 */
+  AntiDDoSPackageId?: string;
 }
 
 /** 描述了按带宽计费的相关信息 */
@@ -3120,6 +3130,8 @@ declare interface SyncImagesResponse {
 declare interface TerminateInstancesRequest {
   /** 一个或多个待操作的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。 */
   InstanceIds: string[];
+  /** 释放弹性IP。EIP2.0下，仅提供主网卡下首个EIP，EIP类型限定在HighQualityEIP、AntiDDoSEIP、EIPv6、HighQualityEIPv6这几种类型。默认行为不释放。示例值：true默认值：false */
+  ReleaseAddress?: boolean;
   /** 释放实例挂载的包年包月数据盘。true表示销毁实例同时释放包年包月数据盘，false表示只销毁实例。默认值：false */
   ReleasePrepaidDataDisks?: boolean;
 }

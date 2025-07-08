@@ -114,7 +114,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 263+ 款产品，12754+ 服务数</summary>
+<details><summary>共计 264+ 款产品，12756+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -124,6 +124,7 @@ acp | [应用合规平台](https://cloud.tencent.com/document/product/1553) | 20
 advisor | [云顾问](https://cloud.tencent.com/document/product/1264) | 2020-07-21(2) |
 af | [借贷反欺诈](https://cloud.tencent.com/document/product/668) | 2020-02-26(3) |
 afc | [定制建模](https://cloud.tencent.com/document/product/1029) | 2020-02-26(3) |
+ai3d | [腾讯混元生3D](https://cloud.tencent.com/document/product/1804) | 2025-05-13(2) |
 aiart | [大模型图像创作引擎](https://cloud.tencent.com/document/product/1668) | 2022-12-29(22) |
 ame | [正版曲库直通车](https://cloud.tencent.com/document/product/1155) | 2019-09-16(31) |
 ams | [音频内容安全](https://cloud.tencent.com/document/product/1219) | 2020-12-29(5) | 2020-06-08(7) |

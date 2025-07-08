@@ -248,6 +248,10 @@ declare interface CardWarnInfo {
   ReshootCheck?: number;
   /** 证件是否有PS0：正常1：有PS */
   PSCheck?: number;
+  /** 是否模糊：0:正常1:模糊 */
+  BlurCheck?: number;
+  /** 模糊分数， 范围：0.0-1.0，分数越高越模糊，建议阈值为0.5 */
+  BlurScore?: number;
 }
 
 /** 单元格识别结果 */
@@ -3553,7 +3557,7 @@ declare interface ExtractDocMultiRequest {
   ItemNamesShowMode?: boolean;
   /** 是否开启全文字段识别 */
   ReturnFullText?: boolean;
-  /** 配置id支持：General -- 通用场景 InvoiceEng -- 国际invoice模版 WayBillEng --海运订单模板CustomsDeclaration -- 进出口报关单WeightNote -- 磅单MedicalMeter -- 血压仪表识别BillOfLading -- 海运提单EntrustmentBook -- 海运托书Statement -- 对账单识别模板BookingConfirmation -- 配舱通知书识别模板AirWayBill -- 航空运单识别模板Table -- 表格模版SteelLabel -- 实物标签识别模板CarInsurance -- 车辆保险单识别模板 */
+  /** 配置id支持：General -- 通用场景 InvoiceEng -- 国际invoice模版 WayBillEng --海运订单模板CustomsDeclaration -- 进出口报关单WeightNote -- 磅单MedicalMeter -- 血压仪表识别BillOfLading -- 海运提单EntrustmentBook -- 海运托书Statement -- 对账单识别模板BookingConfirmation -- 配舱通知书识别模板AirWayBill -- 航空运单识别模板Table -- 表格模版SteelLabel -- 实物标签识别模板CarInsurance -- 车辆保险单识别模板MultiRealEstateCertificate -- 房产材料识别模板MultiRealEstateMaterial -- 房产证明识别模板HongKongUtilityBill -- 香港水电煤单识别模板 */
   ConfigId?: string;
   /** 是否开启全文字段坐标值的识别 */
   EnableCoord?: boolean;
@@ -4909,6 +4913,8 @@ declare interface RecognizeValidIDCardOCRRequest {
   EnablePSCheck?: boolean;
   /** 默认值为false，打开返回字段级反光和字段级完整性告警。类型为：临时、港澳台居住证、外国人居住证失效 */
   EnableWordCheck?: boolean;
+  /** 默认值为false，打开返回证件是否模糊。 */
+  EnableQualityCheck?: boolean;
 }
 
 declare interface RecognizeValidIDCardOCRResponse {
