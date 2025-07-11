@@ -84,6 +84,8 @@ declare interface EmailIdentity {
   DailyQuota?: number;
   /** 域名配置的独立ip */
   SendIp?: string[];
+  /** tag 标签 */
+  TagList?: TagList[];
 }
 
 /** 用于描述发件人相关信息 */
@@ -166,6 +168,8 @@ declare interface SendEmailStatus {
   UserUnsubscribed?: boolean;
   /** 用户是否举报该发送者 */
   UserComplainted?: boolean;
+  /** 用户是否举报该发送者 */
+  UserComplained?: boolean;
 }
 
 /** 发送任务数据 */
@@ -210,6 +214,14 @@ declare interface Simple {
   Html?: string;
   /** base64之后的纯文本信息，如果没有Html，邮件中会直接显示纯文本；如果有Html，它代表邮件的纯文本样式 */
   Text?: string;
+}
+
+/** 标签 */
+declare interface TagList {
+  /** 产品 */
+  TagKey: string;
+  /** ses */
+  TagValue: string;
 }
 
 /** 模板发送相关信息，包含模板ID，模板变量参数等信息 */
@@ -355,6 +367,8 @@ declare interface CreateEmailIdentityRequest {
   EmailIdentity: string;
   /** 生成的dkim密钥长度。0:1024，1:2048 */
   DKIMOption?: number;
+  /** tag 标签 */
+  TagList?: TagList[];
 }
 
 declare interface CreateEmailIdentityResponse {
@@ -653,15 +667,23 @@ declare interface ListEmailAddressResponse {
 }
 
 declare interface ListEmailIdentitiesRequest {
+  /** tag 标签 */
+  TagList?: TagList[];
+  /** 分页 limit */
+  Limit?: number;
+  /** 分页 offset */
+  Offset?: number;
 }
 
 declare interface ListEmailIdentitiesResponse {
   /** 发信域名列表 */
-  EmailIdentities: EmailIdentity[];
+  EmailIdentities?: EmailIdentity[];
   /** 最大信誉等级 */
-  MaxReputationLevel: number;
+  MaxReputationLevel?: number;
   /** 单域名最高日发送量 */
-  MaxDailyQuota: number;
+  MaxDailyQuota?: number;
+  /** 总数 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

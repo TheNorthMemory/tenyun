@@ -260,6 +260,14 @@ declare interface AliasDomain {
   ModifiedOn?: string;
 }
 
+/** Web 安全 Allow 的附加参数 */
+declare interface AllowActionParameters {
+  /** 最小延迟响应时间，当配置为 0s 时，表示不延迟直接响应。支持的单位有：s：秒，取值范围 0～5。 */
+  MinDelayTime?: string;
+  /** 最大延迟响应时间，支持的单位有：s：秒，取值范围 5～10。 */
+  MaxDelayTime?: string;
+}
+
 /** 应用代理实例 */
 declare interface ApplicationProxy {
   /** 站点ID。 */
@@ -378,6 +386,16 @@ declare interface BillingDataFilter {
   Value: string;
 }
 
+/** 策略模板绑定的域名信息 */
+declare interface BindDomainInfo {
+  /** 域名。 */
+  Domain?: string;
+  /** 域名所属的站点 ID。 */
+  ZoneId?: string;
+  /** 绑定状态，取值有: process：绑定中；online：绑定成功；fail：绑定失败。 */
+  Status?: string;
+}
+
 /** 共享 CNAME 和接入域名的绑定关系 */
 declare interface BindSharedCNAMEMap {
   /** 需要绑定或解绑的共享 CNAME。 */
@@ -434,6 +452,12 @@ declare interface BotManagedRule {
   MonManagedIds?: number[];
   /** 拦截的规则ID。默认所有规则不配置拦截。 */
   DropManagedIds?: number[];
+}
+
+/** Web 安全的 BOT 规则结构。 */
+declare interface BotManagement {
+  /** 客户端认证规则的定义列表。该功能内测中，如需使用，请提工单或联系智能客服。 */
+  ClientAttestationRules?: ClientAttestationRules;
 }
 
 /** bot 用户画像规则 */
@@ -672,6 +696,32 @@ declare interface CheckRegionHealthStatus {
   Healthy?: string;
   /** 源站健康状态。 */
   OriginHealthStatus?: OriginHealthStatus[];
+}
+
+/** 客户端认证规则 */
+declare interface ClientAttestationRule {
+  /** 客户端认证规则的 ID。通过规则 ID 可支持不同的规则配置操作： 增加新规则：ID 为空或不指定 ID 参数； 修改已有规则：指定需要更新/修改的规则 ID； 删除已有规则：BotManagement 参数中，ClientAttestationRule 列表中未包含的已有规则将被删除。 */
+  Id?: string;
+  /** 客户端认证规则的名称。 */
+  Name?: string;
+  /** 规则是否开启。取值有：on：开启；off：关闭。 */
+  Enabled?: string;
+  /** 规则的优先级，数值越小越优先执行，范围是 0 ~ 100，默认为 0。 */
+  Priority?: number;
+  /** 规则的具体内容，需符合表达式语法，详细规范参见产品文档。 */
+  Condition?: string;
+  /** 客户端认证选项 ID。 */
+  AttesterId?: string;
+  /** 客户端设备配置。若 ClientAttestationRules 参数中，未指定 DeviceProfiles 参数值：保持已有客户端设备配置，不做修改。 */
+  DeviceProfiles?: DeviceProfile[];
+  /** 客户端认证未通过的处置方式。SecurityAction 的 Name 取值支持：Deny：拦截；Monitor：观察；Redirect：重定向；Challenge：挑战。默认值为 Monitor。 */
+  InvalidAttestationAction?: SecurityAction;
+}
+
+/** 客户端认证的配置。 */
+declare interface ClientAttestationRules {
+  /** 客户端认证的列表。使用 ModifySecurityPolicy 修改 Web 防护配置时： 若未指定 SecurityPolicy.BotManagement.ClientAttestationRules 中的 Rules 参数，或 Rules 参数长度为零：清空所有客户端认证规则配置。 若 SecurityPolicy.BotManagement 参数中，未指定 ClientAttestationRules 参数值：保持已有客户端认证规则配置，不做修改。 */
+  Rules?: ClientAttestationRule[];
 }
 
 /** 智能客户端过滤 */
@@ -1076,6 +1126,20 @@ declare interface DetectLengthLimitRule {
   Conditions: DetectLengthLimitCondition[];
   /** 处置方式，取值有：skip：当请求正文数据超过 Conditions 出参中 body_depth 设置的检测深度时，跳过所有请求正文内容的检测；scan：仅检测 Conditions 出参中 body_depth 设置的检测深度，对超出部分的请求正文内容直接截断处理，超出部分的请求正文不会经过安全检测。仅出参使用。 */
   Action: string;
+}
+
+/** 客户端设备配置 */
+declare interface DeviceProfile {
+  /** 客户端设备类型。取值有：iOS；Android；WebView。 */
+  ClientType: string;
+  /** 判定请求为高风险的最低值，取值范围为 1～99。数值越大请求风险越高越接近 Bot 客户端发起的请求。默认值为 50，对应含义 51～100 为高风险。 */
+  HighRiskMinScore?: number;
+  /** 高风险请求的处置方式。SecurityAction 的 Name 取值支持：Deny：拦截；Monitor：观察；Redirect：重定向；Challenge：挑战。默认值为 Monitor。 */
+  HighRiskRequestAction?: SecurityAction;
+  /** 判定请求为中风险的最低值，取值范围为 1～99。数值越大请求风险越高越接近 Bot 客户端发起的请求。默认值为 15，对应含义 16～50 为中风险。 */
+  MediumRiskMinScore?: number;
+  /** 中风险请求的处置方式。SecurityAction 的 Name 取值支持：Deny：拦截；Monitor：观察；Redirect：重定向；Challenge：挑战。默认值为 Monitor。 */
+  MediumRiskRequestAction?: SecurityAction;
 }
 
 /** 最新IP白名单列表相比于当前IP白名单列表的区别 */
@@ -1572,7 +1636,9 @@ declare interface IPGroup {
   Name: string;
   /** IP 组内容，仅支持 IP 及 IP 网段。 */
   Content: string[];
-  /** IP 定时过期信息。作为入参：用于为指定的 IP 地址或网段配置定时过期时间。作为出参，包含以下两类信息：当前未到期的定时过期信息：尚未触发的过期配置。一周内已到期的定时过期信息：已触发的过期配置。 */
+  /** IP 组中正在生效的 IP 或网段个数。作为出参时有效，作为入参时无需填写该字段。 */
+  IPTotalCount?: number;
+  /** IP 定时过期信息。作为入参，用于为指定的 IP 地址或网段配置定时过期时间。作为出参，包含以下两类信息：当前未到期的定时过期信息：尚未触发的过期配置。一周内已到期的定时过期信息：已触发的过期配置。 */
   IPExpireInfo?: IPExpireInfo[];
 }
 
@@ -2236,7 +2302,7 @@ declare interface OwnershipVerification {
 
 /** 例外规则的详细模块配置。 */
 declare interface PartialModule {
-  /** 模块名称，取值为：waf：托管规则。 */
+  /** 模块名称，取值为：managed-rule：托管规则 Id；managed-group：托管规则组；waf：待废弃，托管规则。 */
   Module?: string;
   /** 模块下的需要例外的具体规则ID列表。 */
   Include?: number[];
@@ -2922,6 +2988,8 @@ declare interface SecurityAction {
   DenyActionParameters?: DenyActionParameters;
   /** 当 Name 为 Redirect 时的附加参数。 */
   RedirectActionParameters?: RedirectActionParameters;
+  /** 当 Name 为 Allow 时的附加参数。 */
+  AllowActionParameters?: AllowActionParameters;
   /** 当 Name 为 Challenge 时的附加参数。 */
   ChallengeActionParameters?: ChallengeActionParameters;
   /** 待废弃，当 Name 为 BlockIP 时的附加参数。 */
@@ -2962,12 +3030,26 @@ declare interface SecurityPolicy {
   CustomRules?: CustomRules;
   /** 托管规则配置。 */
   ManagedRules?: ManagedRules;
-  /** HTTP DDOS防护配置。 */
+  /** HTTP DDOS 防护配置。 */
   HttpDDoSProtection?: HttpDDoSProtection;
   /** 速率限制规则配置。 */
   RateLimitingRules?: RateLimitingRules;
   /** 例外规则配置。 */
   ExceptionRules?: ExceptionRules;
+  /** Bot 管理配置。 */
+  BotManagement?: BotManagement;
+}
+
+/** 策略模板信息 */
+declare interface SecurityPolicyTemplateInfo {
+  /** 策略模板所属的站点 ID。 */
+  ZoneId?: string;
+  /** 策略模板 ID。 */
+  TemplateId?: string;
+  /** 策略模板名称。 */
+  TemplateName?: string;
+  /** 策略模板绑定的域名信息。 */
+  BindDomains?: BindDomainInfo[];
 }
 
 /** 安全策略模板的绑定关系。 */
@@ -4130,6 +4212,22 @@ declare interface CreateSharedCNAMEResponse {
   RequestId?: string;
 }
 
+declare interface CreateWebSecurityTemplateRequest {
+  /** 站点 ID。该参数明确策略模板在访问权限上归属的站点。 */
+  ZoneId: string;
+  /** 策略模板名称。由中文、英文、数字和下划线组成，不能以下划线开头，且长度不能超过 32 个字符。 */
+  TemplateName: string;
+  /** 安全策略模板配置内容，字段为空时生成默认配置。目前支持 Web 防护模块中的例外规则、自定义规则、速率限制规则和托管规则配置，通过表达式语法对安全策略进行配置。 Bot 管理规则配置暂不支持，正在开发中。 */
+  SecurityPolicy?: SecurityPolicy;
+}
+
+declare interface CreateWebSecurityTemplateResponse {
+  /** 策略模板 ID。 */
+  TemplateId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateZoneRequest {
   /** 站点接入类型。该参数取值如下，不填写时默认为 partial：partial：CNAME 接入；full：NS 接入；noDomainAccess：无域名接入；dnsPodAccess：DNSPod 托管接入，该接入模式要求您的域名已托管在 DNSPod 内。 */
   Type?: string;
@@ -4137,7 +4235,7 @@ declare interface CreateZoneRequest {
   ZoneName?: string;
   /** Type 取值为 partial/full 时，七层域名的加速区域。以下为该参数取值，不填写时该值默认为 overseas。Type 取值为 noDomainAccess 时该值请保留为空： global: 全球可用区； mainland: 中国大陆可用区； overseas: 全球可用区（不含中国大陆）。 */
   Area?: string;
-  /** 待绑定的目标套餐 ID。当您账号下已存在套餐时，可以填写此参数，直接将站点绑定至该套餐。若您当前没有可绑定的套餐时，请前往控制台购买套餐完成站点创建。 */
+  /** 待绑定的目标套餐 ID。当您账号下已存在套餐时，可以填写此参数，直接将站点绑定至该套餐。若您当前没有可绑定的套餐时，可通过 [CreatePlan](https://cloud.tencent.com/document/product/1552/105771) 购买套餐。注意：如果不填写此参数，将创建一个处于“init”状态的站点，该站点为未激活状态，并不会显示在控制台上。您可以通过访问 [BindZoneToPlan](https://cloud.tencent.com/document/product/1552/83042) 来绑定套餐并激活站点，激活后站点可以正常提供服务。 */
   PlanId?: string;
   /** 同名站点标识。限制输入数字、英文、"." 、"-" 和 "_"，长度 200 个字符以内。详情参考 [同名站点标识](https://cloud.tencent.com/document/product/1552/70202)，无此使用场景时，该字段保留为空即可。 */
   AliasZoneName?: string;
@@ -4374,6 +4472,18 @@ declare interface DeleteSharedCNAMERequest {
 }
 
 declare interface DeleteSharedCNAMEResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteWebSecurityTemplateRequest {
+  /** 站点 ID。需要传入目标策略模板在访问权限上归属的站点，可使用 DescribeWebSecurityTemplates 接口查询策略模板归属的站点。 */
+  ZoneId: string;
+  /** 策略模板 ID。 */
+  TemplateId: string;
+}
+
+declare interface DeleteWebSecurityTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5194,7 +5304,7 @@ declare interface DescribeSecurityIPGroupRequest {
 }
 
 declare interface DescribeSecurityIPGroupResponse {
-  /** 安全 IP 组的详细配置信息。包含每个安全 IP 组的 ID 、名称、 IP / 网段列表信息和过期时间信息。 */
+  /** 安全 IP 组的详细配置信息。包含每个安全 IP 组的 ID 、名称、IP / 网段总数量、 IP / 网段列表信息和过期时间信息。 */
   IPGroups?: IPGroup[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -5364,6 +5474,34 @@ declare interface DescribeTopL7CacheDataResponse {
   TotalCount?: number;
   /** 七层缓存TopN流量数据列表。 */
   Data?: TopDataRecord[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWebSecurityTemplateRequest {
+  /** 站点 ID。需要传入目标策略模板在访问权限上归属的站点，可使用 DescribeWebSecurityTemplates 接口查询策略模板归属的站点。 */
+  ZoneId: string;
+  /** 策略模板 ID。 */
+  TemplateId: string;
+}
+
+declare interface DescribeWebSecurityTemplateResponse {
+  /** 安全策略模板配置内容，Bot 配置暂不支持，正在开发中。 */
+  SecurityPolicy?: SecurityPolicy;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWebSecurityTemplatesRequest {
+  /** 站点 ID 列表。单次查询最多传入 100 个站点。 */
+  ZoneIds: string[];
+}
+
+declare interface DescribeWebSecurityTemplatesResponse {
+  /** 策略模板总数。 */
+  TotalCount?: number;
+  /** 策略模板列表。 */
+  SecurityPolicyTemplates?: SecurityPolicyTemplateInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6114,6 +6252,22 @@ declare interface ModifySecurityPolicyResponse {
   RequestId?: string;
 }
 
+declare interface ModifyWebSecurityTemplateRequest {
+  /** 站点 ID。需要传入目标策略模板在访问权限上归属的站点，可使用 DescribeWebSecurityTemplates 接口查询策略模板归属的站点。 */
+  ZoneId: string;
+  /** 策略模板 ID。 */
+  TemplateId: string;
+  /** 修改后的策略模板名称。由中文、英文、数字和下划线组成，不能以下划线开头，且长度不能超过32个字符。字段为空时则不修改。 */
+  TemplateName?: string;
+  /** 安全策略模板配置内容。值为空时不修改；没有传入的子模块结构不会被修改。目前支持 Web 防护模块中的例外规则、自定义规则、速率限制规则和托管规则配置，通过表达式语法对安全策略进行配置。 Bot 管理规则配置暂不支持，正在开发中。特别说明：当入参某个子模块结构时，请确保携带所有需要保留的规则内容，未传入规则内容视为删除。 */
+  SecurityPolicy?: SecurityPolicy;
+}
+
+declare interface ModifyWebSecurityTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyZoneRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -6543,6 +6697,8 @@ declare interface Teo {
   CreateSecurityIPGroup(data: CreateSecurityIPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityIPGroupResponse>;
   /** 创建共享 CNAME {@link CreateSharedCNAMERequest} {@link CreateSharedCNAMEResponse} */
   CreateSharedCNAME(data: CreateSharedCNAMERequest, config?: AxiosRequestConfig): AxiosPromise<CreateSharedCNAMEResponse>;
+  /** 创建安全策略配置模板 {@link CreateWebSecurityTemplateRequest} {@link CreateWebSecurityTemplateResponse} */
+  CreateWebSecurityTemplate(data: CreateWebSecurityTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWebSecurityTemplateResponse>;
   /** 创建站点 {@link CreateZoneRequest} {@link CreateZoneResponse} */
   CreateZone(data?: CreateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<CreateZoneResponse>;
   /** 批量删除加速域名 {@link DeleteAccelerationDomainsRequest} {@link DeleteAccelerationDomainsResponse} */
@@ -6581,6 +6737,8 @@ declare interface Teo {
   DeleteSecurityIPGroup(data: DeleteSecurityIPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityIPGroupResponse>;
   /** 删除共享 CNAME {@link DeleteSharedCNAMERequest} {@link DeleteSharedCNAMEResponse} */
   DeleteSharedCNAME(data: DeleteSharedCNAMERequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSharedCNAMEResponse>;
+  /** 删除安全策略配置模板 {@link DeleteWebSecurityTemplateRequest} {@link DeleteWebSecurityTemplateResponse} */
+  DeleteWebSecurityTemplate(data: DeleteWebSecurityTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWebSecurityTemplateResponse>;
   /** 删除站点 {@link DeleteZoneRequest} {@link DeleteZoneResponse} */
   DeleteZone(data: DeleteZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteZoneResponse>;
   /** 发布配置组版本 {@link DeployConfigGroupVersionRequest} {@link DeployConfigGroupVersionResponse} */
@@ -6681,6 +6839,10 @@ declare interface Teo {
   DescribeTopL7AnalysisData(data: DescribeTopL7AnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopL7AnalysisDataResponse>;
   /** 查询缓存分析Top数据（待废弃） {@link DescribeTopL7CacheDataRequest} {@link DescribeTopL7CacheDataResponse} */
   DescribeTopL7CacheData(data: DescribeTopL7CacheDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopL7CacheDataResponse>;
+  /** 查询安全策略配置模板详情 {@link DescribeWebSecurityTemplateRequest} {@link DescribeWebSecurityTemplateResponse} */
+  DescribeWebSecurityTemplate(data: DescribeWebSecurityTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebSecurityTemplateResponse>;
+  /** 查询安全策略配置模板列表 {@link DescribeWebSecurityTemplatesRequest} {@link DescribeWebSecurityTemplatesResponse} */
+  DescribeWebSecurityTemplates(data: DescribeWebSecurityTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebSecurityTemplatesResponse>;
   /** 查询站点配置导入结果 {@link DescribeZoneConfigImportResultRequest} {@link DescribeZoneConfigImportResultResponse} */
   DescribeZoneConfigImportResult(data: DescribeZoneConfigImportResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneConfigImportResultResponse>;
   /** 查询站点配置（旧） {@link DescribeZoneSettingRequest} {@link DescribeZoneSettingResponse} */
@@ -6769,6 +6931,8 @@ declare interface Teo {
   ModifySecurityIPGroup(data: ModifySecurityIPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityIPGroupResponse>;
   /** 修改Web&Bot安全配置 {@link ModifySecurityPolicyRequest} {@link ModifySecurityPolicyResponse} */
   ModifySecurityPolicy(data: ModifySecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityPolicyResponse>;
+  /** 修改安全策略配置模板 {@link ModifyWebSecurityTemplateRequest} {@link ModifyWebSecurityTemplateResponse} */
+  ModifyWebSecurityTemplate(data: ModifyWebSecurityTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWebSecurityTemplateResponse>;
   /** 修改站点 {@link ModifyZoneRequest} {@link ModifyZoneResponse} */
   ModifyZone(data: ModifyZoneRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneResponse>;
   /** 修改站点配置（旧） {@link ModifyZoneSettingRequest} {@link ModifyZoneSettingResponse} */

@@ -61,7 +61,6 @@ import Chdfs, { Versions as ChdfsVersions } from "./chdfs";
 import Ciam, { Versions as CiamVersions } from "./ciam";
 import Cii, { Versions as CiiVersions } from "./cii";
 import Cim, { Versions as CimVersions } from "./cim";
-import Cis, { Versions as CisVersions } from "./cis";
 import Ckafka, { Versions as CkafkaVersions } from "./ckafka";
 import Clb, { Versions as ClbVersions } from "./clb";
 import Cloudapp, { Versions as CloudappVersions } from "./cloudapp";
@@ -83,7 +82,6 @@ import Cwp, { Versions as CwpVersions } from "./cwp";
 import Cws, { Versions as CwsVersions } from "./cws";
 import Cynosdb, { Versions as CynosdbVersions } from "./cynosdb";
 import Dasb, { Versions as DasbVersions } from "./dasb";
-import Dataintegration, { Versions as DataintegrationVersions } from "./dataintegration";
 import Dayu, { Versions as DayuVersions } from "./dayu";
 import Dbbrain, { Versions as DbbrainVersions } from "./dbbrain";
 import Dbdc, { Versions as DbdcVersions } from "./dbdc";
@@ -95,7 +93,6 @@ import Domain, { Versions as DomainVersions } from "./domain";
 import Drm, { Versions as DrmVersions } from "./drm";
 import Ds, { Versions as DsVersions } from "./ds";
 import Dsgc, { Versions as DsgcVersions } from "./dsgc";
-import Dtf, { Versions as DtfVersions } from "./dtf";
 import Dts, { Versions as DtsVersions } from "./dts";
 import Eb, { Versions as EbVersions } from "./eb";
 import Ecc, { Versions as EccVersions } from "./ecc";
@@ -114,9 +111,7 @@ import Ft, { Versions as FtVersions } from "./ft";
 import Gaap, { Versions as GaapVersions } from "./gaap";
 import Gme, { Versions as GmeVersions } from "./gme";
 import Goosefs, { Versions as GoosefsVersions } from "./goosefs";
-import Gpm, { Versions as GpmVersions } from "./gpm";
 import Gs, { Versions as GsVersions } from "./gs";
-import Gse, { Versions as GseVersions } from "./gse";
 import Gwlb, { Versions as GwlbVersions } from "./gwlb";
 import Habo, { Versions as HaboVersions } from "./habo";
 import Hai, { Versions as HaiVersions } from "./hai";
@@ -128,16 +123,13 @@ import Iap, { Versions as IapVersions } from "./iap";
 import Ic, { Versions as IcVersions } from "./ic";
 import Icr, { Versions as IcrVersions } from "./icr";
 import Ie, { Versions as IeVersions } from "./ie";
-import Iecp, { Versions as IecpVersions } from "./iecp";
 import Ig, { Versions as IgVersions } from "./ig";
 import Igtm, { Versions as IgtmVersions } from "./igtm";
-import Iir, { Versions as IirVersions } from "./iir";
 import Ims, { Versions as ImsVersions } from "./ims";
 import Ioa, { Versions as IoaVersions } from "./ioa";
 import Iot, { Versions as IotVersions } from "./iot";
 import Iotcloud, { Versions as IotcloudVersions } from "./iotcloud";
 import Iotexplorer, { Versions as IotexplorerVersions } from "./iotexplorer";
-import Iottid, { Versions as IottidVersions } from "./iottid";
 import Iotvideo, { Versions as IotvideoVersions } from "./iotvideo";
 import Iotvideoindustry, { Versions as IotvideoindustryVersions } from "./iotvideoindustry";
 import Irp, { Versions as IrpVersions } from "./irp";
@@ -155,7 +147,6 @@ import Mall, { Versions as MallVersions } from "./mall";
 import Mariadb, { Versions as MariadbVersions } from "./mariadb";
 import Market, { Versions as MarketVersions } from "./market";
 import Memcached, { Versions as MemcachedVersions } from "./memcached";
-import Mgobe, { Versions as MgobeVersions } from "./mgobe";
 import Mmps, { Versions as MmpsVersions } from "./mmps";
 import Mna, { Versions as MnaVersions } from "./mna";
 import Mongodb, { Versions as MongodbVersions } from "./mongodb";
@@ -165,7 +156,6 @@ import Mqtt, { Versions as MqttVersions } from "./mqtt";
 import Mrs, { Versions as MrsVersions } from "./mrs";
 import Ms, { Versions as MsVersions } from "./ms";
 import Msp, { Versions as MspVersions } from "./msp";
-import Mvj, { Versions as MvjVersions } from "./mvj";
 import Nlp, { Versions as NlpVersions } from "./nlp";
 import Npp, { Versions as NppVersions } from "./npp";
 import Oceanus, { Versions as OceanusVersions } from "./oceanus";
@@ -174,7 +164,6 @@ import Omics, { Versions as OmicsVersions } from "./omics";
 import Open, { Versions as OpenVersions } from "./open";
 import Organization, { Versions as OrganizationVersions } from "./organization";
 import Partners, { Versions as PartnersVersions } from "./partners";
-import Pds, { Versions as PdsVersions } from "./pds";
 import Postgres, { Versions as PostgresVersions } from "./postgres";
 import Privatedns, { Versions as PrivatednsVersions } from "./privatedns";
 import Pts, { Versions as PtsVersions } from "./pts";
@@ -187,10 +176,8 @@ import Securitylake, { Versions as SecuritylakeVersions } from "./securitylake";
 import Ses, { Versions as SesVersions } from "./ses";
 import Smh, { Versions as SmhVersions } from "./smh";
 import Smop, { Versions as SmopVersions } from "./smop";
-import Smpn, { Versions as SmpnVersions } from "./smpn";
 import Sms, { Versions as SmsVersions } from "./sms";
 import Soe, { Versions as SoeVersions } from "./soe";
-import Solar, { Versions as SolarVersions } from "./solar";
 import Sqlserver, { Versions as SqlserverVersions } from "./sqlserver";
 import Ssa, { Versions as SsaVersions } from "./ssa";
 import Ssl, { Versions as SslVersions } from "./ssl";
@@ -200,19 +187,14 @@ import Sts, { Versions as StsVersions } from "./sts";
 import Svp, { Versions as SvpVersions } from "./svp";
 import Taf, { Versions as TafVersions } from "./taf";
 import Tag, { Versions as TagVersions } from "./tag";
-import Tan, { Versions as TanVersions } from "./tan";
 import Tat, { Versions as TatVersions } from "./tat";
-import Tav, { Versions as TavVersions } from "./tav";
 import Tbaas, { Versions as TbaasVersions } from "./tbaas";
-import Tbm, { Versions as TbmVersions } from "./tbm";
 import Tbp, { Versions as TbpVersions } from "./tbp";
 import Tcaplusdb, { Versions as TcaplusdbVersions } from "./tcaplusdb";
 import Tcb, { Versions as TcbVersions } from "./tcb";
 import Tcbr, { Versions as TcbrVersions } from "./tcbr";
 import Tccatalog, { Versions as TccatalogVersions } from "./tccatalog";
-import Tcex, { Versions as TcexVersions } from "./tcex";
 import Tchd, { Versions as TchdVersions } from "./tchd";
-import Tci, { Versions as TciVersions } from "./tci";
 import Tcm, { Versions as TcmVersions } from "./tcm";
 import Tcr, { Versions as TcrVersions } from "./tcr";
 import Tcss, { Versions as TcssVersions } from "./tcss";
@@ -224,10 +206,6 @@ import Tem, { Versions as TemVersions } from "./tem";
 import Teo, { Versions as TeoVersions } from "./teo";
 import Thpc, { Versions as ThpcVersions } from "./thpc";
 import Tia, { Versions as TiaVersions } from "./tia";
-import Tic, { Versions as TicVersions } from "./tic";
-import Ticm, { Versions as TicmVersions } from "./ticm";
-import Tics, { Versions as TicsVersions } from "./tics";
-import Tiems, { Versions as TiemsVersions } from "./tiems";
 import Tiia, { Versions as TiiaVersions } from "./tiia";
 import Tione, { Versions as TioneVersions } from "./tione";
 import Tiw, { Versions as TiwVersions } from "./tiw";
@@ -237,7 +215,6 @@ import Tms, { Versions as TmsVersions } from "./tms";
 import Tmt, { Versions as TmtVersions } from "./tmt";
 import Tourism, { Versions as TourismVersions } from "./tourism";
 import Trabbit, { Versions as TrabbitVersions } from "./trabbit";
-import Trdp, { Versions as TrdpVersions } from "./trdp";
 import Trocket, { Versions as TrocketVersions } from "./trocket";
 import Trp, { Versions as TrpVersions } from "./trp";
 import Trro, { Versions as TrroVersions } from "./trro";
@@ -247,7 +224,6 @@ import Tsf, { Versions as TsfVersions } from "./tsf";
 import Tsi, { Versions as TsiVersions } from "./tsi";
 import Tsw, { Versions as TswVersions } from "./tsw";
 import Tts, { Versions as TtsVersions } from "./tts";
-import Ump, { Versions as UmpVersions } from "./ump";
 import Vcg, { Versions as VcgVersions } from "./vcg";
 import Vclm, { Versions as VclmVersions } from "./vclm";
 import Vcube, { Versions as VcubeVersions } from "./vcube";
@@ -264,7 +240,6 @@ import Wedata, { Versions as WedataVersions } from "./wedata";
 import Weilingwith, { Versions as WeilingwithVersions } from "./weilingwith";
 import Wss, { Versions as WssVersions } from "./wss";
 import Yinsuda, { Versions as YinsudaVersions } from "./yinsuda";
-import Youmall, { Versions as YoumallVersions } from "./youmall";
 import Yunjing, { Versions as YunjingVersions } from "./yunjing";
 import Yunsou, { Versions as YunsouVersions } from "./yunsou";
 
@@ -329,7 +304,6 @@ export declare type SERVICE_VERSIONS = {
   ciam: CiamVersions,
   cii: CiiVersions,
   cim: CimVersions,
-  cis: CisVersions,
   ckafka: CkafkaVersions,
   clb: ClbVersions,
   cloudapp: CloudappVersions,
@@ -351,7 +325,6 @@ export declare type SERVICE_VERSIONS = {
   cws: CwsVersions,
   cynosdb: CynosdbVersions,
   dasb: DasbVersions,
-  dataintegration: DataintegrationVersions,
   dayu: DayuVersions,
   dbbrain: DbbrainVersions,
   dbdc: DbdcVersions,
@@ -363,7 +336,6 @@ export declare type SERVICE_VERSIONS = {
   drm: DrmVersions,
   ds: DsVersions,
   dsgc: DsgcVersions,
-  dtf: DtfVersions,
   dts: DtsVersions,
   eb: EbVersions,
   ecc: EccVersions,
@@ -382,9 +354,7 @@ export declare type SERVICE_VERSIONS = {
   gaap: GaapVersions,
   gme: GmeVersions,
   goosefs: GoosefsVersions,
-  gpm: GpmVersions,
   gs: GsVersions,
-  gse: GseVersions,
   gwlb: GwlbVersions,
   habo: HaboVersions,
   hai: HaiVersions,
@@ -396,16 +366,13 @@ export declare type SERVICE_VERSIONS = {
   ic: IcVersions,
   icr: IcrVersions,
   ie: IeVersions,
-  iecp: IecpVersions,
   ig: IgVersions,
   igtm: IgtmVersions,
-  iir: IirVersions,
   ims: ImsVersions,
   ioa: IoaVersions,
   iot: IotVersions,
   iotcloud: IotcloudVersions,
   iotexplorer: IotexplorerVersions,
-  iottid: IottidVersions,
   iotvideo: IotvideoVersions,
   iotvideoindustry: IotvideoindustryVersions,
   irp: IrpVersions,
@@ -423,7 +390,6 @@ export declare type SERVICE_VERSIONS = {
   mariadb: MariadbVersions,
   market: MarketVersions,
   memcached: MemcachedVersions,
-  mgobe: MgobeVersions,
   mmps: MmpsVersions,
   mna: MnaVersions,
   mongodb: MongodbVersions,
@@ -433,7 +399,6 @@ export declare type SERVICE_VERSIONS = {
   mrs: MrsVersions,
   ms: MsVersions,
   msp: MspVersions,
-  mvj: MvjVersions,
   nlp: NlpVersions,
   npp: NppVersions,
   oceanus: OceanusVersions,
@@ -442,7 +407,6 @@ export declare type SERVICE_VERSIONS = {
   open: OpenVersions,
   organization: OrganizationVersions,
   partners: PartnersVersions,
-  pds: PdsVersions,
   postgres: PostgresVersions,
   privatedns: PrivatednsVersions,
   pts: PtsVersions,
@@ -455,10 +419,8 @@ export declare type SERVICE_VERSIONS = {
   ses: SesVersions,
   smh: SmhVersions,
   smop: SmopVersions,
-  smpn: SmpnVersions,
   sms: SmsVersions,
   soe: SoeVersions,
-  solar: SolarVersions,
   sqlserver: SqlserverVersions,
   ssa: SsaVersions,
   ssl: SslVersions,
@@ -468,19 +430,14 @@ export declare type SERVICE_VERSIONS = {
   svp: SvpVersions,
   taf: TafVersions,
   tag: TagVersions,
-  tan: TanVersions,
   tat: TatVersions,
-  tav: TavVersions,
   tbaas: TbaasVersions,
-  tbm: TbmVersions,
   tbp: TbpVersions,
   tcaplusdb: TcaplusdbVersions,
   tcb: TcbVersions,
   tcbr: TcbrVersions,
   tccatalog: TccatalogVersions,
-  tcex: TcexVersions,
   tchd: TchdVersions,
-  tci: TciVersions,
   tcm: TcmVersions,
   tcr: TcrVersions,
   tcss: TcssVersions,
@@ -492,10 +449,6 @@ export declare type SERVICE_VERSIONS = {
   teo: TeoVersions,
   thpc: ThpcVersions,
   tia: TiaVersions,
-  tic: TicVersions,
-  ticm: TicmVersions,
-  tics: TicsVersions,
-  tiems: TiemsVersions,
   tiia: TiiaVersions,
   tione: TioneVersions,
   tiw: TiwVersions,
@@ -505,7 +458,6 @@ export declare type SERVICE_VERSIONS = {
   tmt: TmtVersions,
   tourism: TourismVersions,
   trabbit: TrabbitVersions,
-  trdp: TrdpVersions,
   trocket: TrocketVersions,
   trp: TrpVersions,
   trro: TrroVersions,
@@ -515,7 +467,6 @@ export declare type SERVICE_VERSIONS = {
   tsi: TsiVersions,
   tsw: TswVersions,
   tts: TtsVersions,
-  ump: UmpVersions,
   vcg: VcgVersions,
   vclm: VclmVersions,
   vcube: VcubeVersions,
@@ -532,7 +483,6 @@ export declare type SERVICE_VERSIONS = {
   weilingwith: WeilingwithVersions,
   wss: WssVersions,
   yinsuda: YinsudaVersions,
-  youmall: YoumallVersions,
   yunjing: YunjingVersions,
   yunsou: YunsouVersions,
 };
@@ -570,7 +520,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   afc: Afc,
   /** {@link Ai3d 腾讯混元生3D} */
   ai3d: Ai3d,
-  /** {@link Aiart 大模型图像创作引擎} */
+  /** {@link Aiart 腾讯混元生图} */
   aiart: Aiart,
   /** {@link Ame 正版曲库直通车} */
   ame: Ame,
@@ -671,7 +621,6 @@ declare type TenYun = CloudInstance & CloudServices & {
   /** {@link Cii 智能保险助手} */
   cii: Cii,
   cim: Cim,
-  cis: Cis,
   /** {@link Ckafka 消息队列 CKafka 版} */
   ckafka: Ckafka,
   /** {@link Clb 负载均衡} */
@@ -714,8 +663,6 @@ declare type TenYun = CloudInstance & CloudServices & {
   cynosdb: Cynosdb,
   /** {@link Dasb 运维安全中心（堡垒机）} */
   dasb: Dasb,
-  /** {@link Dataintegration 数据接入平台} */
-  dataintegration: Dataintegration,
   /** {@link Dayu DDoS 高防包} */
   dayu: Dayu,
   /** {@link Dbbrain 数据库智能管家 DBbrain} */
@@ -738,8 +685,6 @@ declare type TenYun = CloudInstance & CloudServices & {
   ds: Ds,
   /** {@link Dsgc 数据安全治理中心} */
   dsgc: Dsgc,
-  /** {@link Dtf 分布式事务} */
-  dtf: Dtf,
   /** {@link Dts 数据传输服务} */
   dts: Dts,
   /** {@link Eb 事件总线} */
@@ -776,12 +721,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   gme: Gme,
   /** {@link Goosefs 数据加速器 GooseFS} */
   goosefs: Goosefs,
-  /** {@link Gpm 游戏玩家匹配} */
-  gpm: Gpm,
   /** {@link Gs 云游戏} */
   gs: Gs,
-  /** {@link Gse 游戏服务器伸缩} */
-  gse: Gse,
   /** {@link Gwlb 网关负载均衡} */
   gwlb: Gwlb,
   habo: Habo,
@@ -803,14 +744,10 @@ declare type TenYun = CloudInstance & CloudServices & {
   icr: Icr,
   /** {@link Ie 智能编辑} */
   ie: Ie,
-  /** {@link Iecp 物联网边缘计算平台} */
-  iecp: Iecp,
   /** {@link Ig 智能导诊} */
   ig: Ig,
   /** {@link Igtm 智能全局流量管理} */
   igtm: Igtm,
-  /** {@link Iir 智能识图} */
-  iir: Iir,
   /** {@link Ims 图片内容安全} */
   ims: Ims,
   /** {@link Ioa iOA 零信任安全管理系统} */
@@ -821,8 +758,6 @@ declare type TenYun = CloudInstance & CloudServices & {
   iotcloud: Iotcloud,
   /** {@link Iotexplorer 物联网开发平台} */
   iotexplorer: Iotexplorer,
-  /** {@link Iottid 物联网设备身份认证} */
-  iottid: Iottid,
   /** {@link Iotvideo 物联网智能视频服务} */
   iotvideo: Iotvideo,
   /** {@link Iotvideoindustry 物联网智能视频服务（行业版）} */
@@ -857,8 +792,6 @@ declare type TenYun = CloudInstance & CloudServices & {
   market: Market,
   /** {@link Memcached 云数据库Memcached} */
   memcached: Memcached,
-  /** {@link Mgobe 游戏联机对战引擎} */
-  mgobe: Mgobe,
   /** {@link Mmps 小程序安全} */
   mmps: Mmps,
   /** {@link Mna 多网聚合加速} */
@@ -877,8 +810,6 @@ declare type TenYun = CloudInstance & CloudServices & {
   ms: Ms,
   /** {@link Msp 迁移服务平台} */
   msp: Msp,
-  /** {@link Mvj 营销价值判断} */
-  mvj: Mvj,
   /** {@link Nlp NLP 技术} */
   nlp: Nlp,
   /** {@link Npp 号码保护} */
@@ -895,8 +826,6 @@ declare type TenYun = CloudInstance & CloudServices & {
   organization: Organization,
   /** {@link Partners 渠道合作伙伴} */
   partners: Partners,
-  /** {@link Pds 私域安全} */
-  pds: Pds,
   /** {@link Postgres 云数据库 PostgreSQL} */
   postgres: Postgres,
   /** {@link Privatedns 私有域解析 Private DNS} */
@@ -921,14 +850,10 @@ declare type TenYun = CloudInstance & CloudServices & {
   smh: Smh,
   /** {@link Smop 腾讯安心用户运营平台} */
   smop: Smop,
-  /** {@link Smpn 营销号码安全} */
-  smpn: Smpn,
   /** {@link Sms 短信} */
   sms: Sms,
   /** {@link Soe 智聆口语评测} */
   soe: Soe,
-  /** {@link Solar 智汇零售} */
-  solar: Solar,
   /** {@link Sqlserver 云数据库 SQL Server} */
   sqlserver: Sqlserver,
   /** {@link Ssa 安全运营中心} */
@@ -947,15 +872,10 @@ declare type TenYun = CloudInstance & CloudServices & {
   taf: Taf,
   /** {@link Tag 标签} */
   tag: Tag,
-  /** {@link Tan 碳引擎} */
-  tan: Tan,
   /** {@link Tat 自动化助手} */
   tat: Tat,
-  /** {@link Tav 文件检测} */
-  tav: Tav,
   /** {@link Tbaas 腾讯云区块链服务平台 TBaaS} */
   tbaas: Tbaas,
-  tbm: Tbm,
   /** {@link Tbp 腾讯智能对话平台} */
   tbp: Tbp,
   /** {@link Tcaplusdb 游戏数据库 TcaplusDB} */
@@ -966,12 +886,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   tcbr: Tcbr,
   /** {@link Tccatalog 统一Catalog服务} */
   tccatalog: Tccatalog,
-  /** {@link Tcex 腾讯云释义} */
-  tcex: Tcex,
   /** {@link Tchd 腾讯云健康看板} */
   tchd: Tchd,
-  /** {@link Tci 腾讯智学课堂分析} */
-  tci: Tci,
   /** {@link Tcm 服务网格} */
   tcm: Tcm,
   /** {@link Tcr 容器镜像服务} */
@@ -994,14 +910,6 @@ declare type TenYun = CloudInstance & CloudServices & {
   thpc: Thpc,
   /** {@link Tia 智能钛机器学习} */
   tia: Tia,
-  /** {@link Tic 资源编排 TIC} */
-  tic: Tic,
-  /** {@link Ticm 智能鉴黄} */
-  ticm: Ticm,
-  /** {@link Tics 威胁情报云查服务} */
-  tics: Tics,
-  /** {@link Tiems 腾讯云 TI 平台 TI-EMS} */
-  tiems: Tiems,
   /** {@link Tiia 图像分析} */
   tiia: Tiia,
   /** {@link Tione TI-ONE 训练平台} */
@@ -1020,8 +928,6 @@ declare type TenYun = CloudInstance & CloudServices & {
   tourism: Tourism,
   /** {@link Trabbit 消息队列 RabbitMQ Serverless 版} */
   trabbit: Trabbit,
-  /** {@link Trdp 流量风险决策平台} */
-  trdp: Trdp,
   /** {@link Trocket 消息队列 RocketMQ 版} */
   trocket: Trocket,
   /** {@link Trp T-Sec-安心平台(RP)} */
@@ -1040,11 +946,9 @@ declare type TenYun = CloudInstance & CloudServices & {
   tsw: Tsw,
   /** {@link Tts 语音合成} */
   tts: Tts,
-  /** {@link Ump 客流数字化平台} */
-  ump: Ump,
   /** {@link Vcg 视频生成} */
   vcg: Vcg,
-  /** {@link Vclm 大模型视频创作引擎} */
+  /** {@link Vclm 腾讯混元生视频} */
   vclm: Vclm,
   /** {@link Vcube 音视频终端引擎} */
   vcube: Vcube,
@@ -1074,7 +978,6 @@ declare type TenYun = CloudInstance & CloudServices & {
   wss: Wss,
   /** {@link Yinsuda 音速达直播音乐版权引擎} */
   yinsuda: Yinsuda,
-  youmall: Youmall,
   /** {@link Yunjing 主机安全} */
   yunjing: Yunjing,
   /** {@link Yunsou 腾讯云搜TCS} */

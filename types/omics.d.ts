@@ -58,6 +58,10 @@ declare interface ClusterOption {
   ResourceQuota?: ResourceQuota;
   /** 限制范围。 */
   LimitRange?: LimitRange;
+  /** 系统节点池实例规格。 */
+  SystemNodeInstanceType?: string;
+  /** 系统节点池实例数量。 */
+  SystemNodeCount?: number;
 }
 
 /** COS 文件信息 */
@@ -196,6 +200,10 @@ declare interface ResourceIds {
   CVMId?: string;
   /** 弹性容器集群ID。 */
   EKSId?: string;
+  /** TKE容器集群ID。 */
+  TKEId?: string;
+  /** TKE系统节点池ID。 */
+  TKESystemNodePoolId?: string;
 }
 
 /** 资源配额。 */

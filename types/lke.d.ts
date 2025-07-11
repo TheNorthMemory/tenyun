@@ -68,6 +68,22 @@ declare interface AgentInputUserInputValue {
   Values?: string[];
 }
 
+/** Agent 知识库检索插件支持多知识库搜索 */
+declare interface AgentKnowledge {
+  /** 知识库id */
+  KnowledgeBizId?: string;
+  /** 0-应用内知识库1-共享知识库 */
+  KnowledgeType?: number;
+  /** 0-全部知识1-按文档和问答2-按标签 */
+  Filter?: number;
+  /** 文档id */
+  DocBizIds?: string[];
+  /** true:包含所有问答false:不包含问答 */
+  AllQa?: boolean;
+  /** 文档标签过滤器 */
+  Tag?: AgentKnowledgeFilterTag;
+}
+
 /** 标签过滤器 */
 declare interface AgentKnowledgeAttrLabel {
   /** 属性ID */
@@ -84,6 +100,10 @@ declare interface AgentKnowledgeFilter {
   DocAndAnswer?: AgentKnowledgeFilterDocAndAnswer;
   /** 标签过滤器 */
   Tag?: AgentKnowledgeFilterTag;
+  /** 知识库列表 */
+  KnowledgeList?: AgentKnowledge[];
+  /** 是否检索全部知识 */
+  AllKnowledge?: boolean;
 }
 
 /** 文档和问答过滤器 */
@@ -138,6 +158,8 @@ declare interface AgentModelInfo {
   ModelContextWordsLimit?: string;
   /** 指令长度字符限制 */
   InstructionsWordsLimit?: number;
+  /** 单次会话最大推理轮数 */
+  MaxReasoningRound?: number;
 }
 
 /** 应用配置MCP插件header信息 */
@@ -496,6 +518,20 @@ declare interface AttributeLabelRefByWorkflow {
   WorkflowList?: WorkflowRef[];
 }
 
+/** 背景图相关配置 */
+declare interface BackgroundImageConfig {
+  /** 横图(pc) */
+  LandscapeImageUrl?: string;
+  /** 原始图 */
+  OriginalImageUrl?: string;
+  /** 长图(手机) */
+  PortraitImageUrl?: string;
+  /** 主题色 */
+  ThemeColor?: string;
+  /** 亮度值 */
+  Brightness?: number;
+}
+
 /** 应用基础配置 */
 declare interface BaseConfig {
   /** 应用名称 */
@@ -664,6 +700,8 @@ declare interface DocSegment {
   DocUrl?: string | null;
   /** 文档的自定义链接 */
   WebUrl?: string;
+  /** 页码信息 */
+  PageInfos?: number[];
 }
 
 /** 文档元素字段 */
@@ -882,6 +920,10 @@ declare interface KnowledgeQaConfig {
   AiCall?: AICallConfig | null;
   /** 共享知识库关联配置 */
   ShareKnowledgeBases?: ShareKnowledgeBase[];
+  /** 背景图相关信息 */
+  BackgroundImage?: BackgroundImageConfig | null;
+  /** 开场问题 */
+  OpeningQuestions?: string[] | null;
 }
 
 /** 应用管理输出配置 */
@@ -1078,6 +1120,8 @@ declare interface ListDocItem {
   AttributeFlags?: number[];
   /** false:未停用，ture:已停用 */
   IsDisabled?: boolean;
+  /** 员工名称 */
+  StaffName?: string;
 }
 
 /** 问答详情数据 */
@@ -1128,6 +1172,8 @@ declare interface ListQaItem {
   SimilarQuestionTips?: string;
   /** 问答是否停用，false:未停用，ture:已停用 */
   IsDisabled?: boolean;
+  /** 员工名称 */
+  StaffName?: string;
 }
 
 /** 发布列表详情 */
@@ -2295,6 +2341,8 @@ declare interface CreateReleaseRequest {
   BotBizId: string;
   /** 发布描述 */
   Desc?: string;
+  /** 渠道业务ID */
+  ChannelBizIds?: string[];
 }
 
 declare interface CreateReleaseResponse {
@@ -2548,6 +2596,8 @@ declare interface DescribeAppResponse {
   AppStatusDesc?: string;
   /** 应用是否在复制中 */
   IsCopying?: boolean;
+  /** 智能体类型 dialogue 对话式智能体，wechat 公众号智能体 */
+  AgentType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3429,6 +3479,8 @@ declare interface GetVarListRequest {
   Limit?: number;
   /** 按变量类型过滤，默认查询所有类型(STRING,INT,FLOAT,BOOL,OBJECT,ARRAY_STRING,ARRAY_INT,ARRAY_FLOAT,ARRAY_BOOL,ARRAY_OBJECT,FILE,DOCUMENT,IMAGE,AUDIO) */
   VarType?: string;
+  /** 是否需要内部变量(默认false) */
+  NeedInternalVar?: boolean;
 }
 
 declare interface GetVarListResponse {
@@ -4027,7 +4079,7 @@ declare interface ModifyAgentResponse {
 declare interface ModifyAppRequest {
   /** 应用 ID */
   AppBizId: string;
-  /** 应用类型；knowledge_qa-知识问答管理；summary-知识摘要；classifys-知识标签提取 */
+  /** 应用类型；knowledge_qa-知识问答管理；summary-知识摘要；classify-知识标签提取 */
   AppType: string;
   /** 应用基础配置 */
   BaseConfig: BaseConfig;

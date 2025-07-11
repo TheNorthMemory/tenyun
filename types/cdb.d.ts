@@ -2753,7 +2753,7 @@ declare interface DeleteAuditRuleResponse {
 }
 
 declare interface DeleteAuditRuleTemplatesRequest {
-  /** 审计规则模板ID,可通过[DescribeAuditRuleTemplates](https://cloud.tencent.com/document/api/236/101811)接口获取，单次允许最多删除5个规则模板。 */
+  /** 审计规则模板 ID，可通过 [DescribeAuditRuleTemplates](https://cloud.tencent.com/document/api/236/101811) 接口获取，单次允许最多删除5个规则模板。 */
   RuleTemplateIds: string[];
 }
 
@@ -4811,7 +4811,7 @@ declare interface ModifyDBInstanceReadOnlyStatusResponse {
 declare interface ModifyDBInstanceSecurityGroupsRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
-  /** 要修改的安全组 ID 列表，一个或者多个安全组 ID 组成的数组。可通过 [DescribeDBSecurityGroups](hhttps://cloud.tencent.com/document/api/236/15854) 接口获取。输入的安全组 ID 数组无长度限制。注意：该入参会全量替换存量已有集合，非增量更新。修改需传入预期的全量集合。 */
+  /** 要修改的安全组 ID 列表，一个或者多个安全组 ID 组成的数组。可通过 [DescribeDBSecurityGroups](https://cloud.tencent.com/document/product/236/15854) 接口获取。输入的安全组 ID 数组无长度限制。注意：该入参会全量替换存量已有集合，非增量更新。修改需传入预期的全量集合。 */
   SecurityGroupIds: string[];
   /** 当传入只读实例 ID 时，默认操作的是对应只读组的安全组。如果需要操作只读实例 ID 的安全组， 需要将该入参置为 True。默认为 False。 */
   ForReadonlyInstance?: boolean;
@@ -4885,11 +4885,11 @@ declare interface ModifyInstancePasswordComplexityResponse {
 }
 
 declare interface ModifyInstanceTagRequest {
-  /** 实例 ID。 */
+  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
-  /** 要增加或修改的标签。 */
+  /** 要增加或修改的标签。ReplaceTags 和 DeleteTags 必填一个。 */
   ReplaceTags?: TagInfo[];
-  /** 要删除的标签。 */
+  /** 要删除的标签。ReplaceTags 和 DeleteTags 必填一个。 */
   DeleteTags?: TagInfo[];
 }
 

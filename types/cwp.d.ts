@@ -11841,6 +11841,8 @@ declare interface DescribeVulHostTopResponse {
 declare interface DescribeVulInfoCvssRequest {
   /** 漏洞id */
   VulId: number;
+  /** 兼容应用防护漏洞防御容器视角告警里漏洞详情，默认是主机视角，可选字段，Source=tcss则为容器视角漏洞详情，后端会把VulId转为主机vul_vuls里的VulId */
+  Source?: string;
 }
 
 declare interface DescribeVulInfoCvssResponse {

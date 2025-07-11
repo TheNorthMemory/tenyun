@@ -60,14 +60,6 @@ declare interface CorrectionItem {
   DescriptionEn?: string | null;
 }
 
-/** 文本润色结果 */
-declare interface Embellish {
-  /** 润色后的文本。 */
-  Text?: string | null;
-  /** 润色类型。类型如下：expansion：扩写rewriting：改写translation_m2a：从现代文改写为古文translation_a2m：从古文改写为现代文 */
-  EmbellishType?: string | null;
-}
-
 /** 实体识别结果。 */
 declare interface Entity {
   /** 基础词。 */
@@ -82,26 +74,12 @@ declare interface Entity {
   Name?: string;
 }
 
-/** 通过关键词生成的句子信息 */
-declare interface KeywordSentence {
-  /** 通过关键词生成的句子。 */
-  TargetText?: string;
-}
-
 /** 待分析的句子对 */
 declare interface SentencePair {
   /** 需要与目标句子计算相似度的源句子。（仅支持UTF-8格式，不超过500字符） */
   SourceText: string | null;
   /** 目标句子。（仅支持UTF-8格式，不超过500字符） */
   TargetText: string | null;
-}
-
-/** 文本续写结果 */
-declare interface Writing {
-  /** 续写的文本。 */
-  TargetText?: string;
-  /** 续写的前缀。 */
-  PrefixText?: string;
 }
 
 declare interface AnalyzeSentimentRequest {
@@ -158,24 +136,6 @@ declare interface ComposeCoupletResponse {
   RequestId?: string;
 }
 
-declare interface ComposePoetryRequest {
-  /** 生成诗词的关键词。 */
-  Text: string;
-  /** 生成诗词的类型。0：藏头或藏身；1：藏头；2：藏身。默认为0。 */
-  PoetryType?: number;
-  /** 诗的体裁。0：五言律诗或七言律诗；5：五言律诗；7：七言律诗。默认为0。 */
-  Genre?: number;
-}
-
-declare interface ComposePoetryResponse {
-  /** 诗题，即输入的生成诗词的关键词。 */
-  Title?: string;
-  /** 诗的内容。 */
-  Content?: string[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface EvaluateSentenceSimilarityRequest {
   /** 待分析的句子对数组。句子对应不超过1对，仅支持中文文本，原句子与目标句子均应不超过500字符。 */
   SentencePairList: SentencePair[];
@@ -184,36 +144,6 @@ declare interface EvaluateSentenceSimilarityRequest {
 declare interface EvaluateSentenceSimilarityResponse {
   /** 每个句子对的相似度分值。 */
   ScoreList?: number[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface EvaluateWordSimilarityRequest {
-  /** 计算相似度的源词。（仅支持UTF-8格式，不超过10字符） */
-  SourceWord: string;
-  /** 计算相似度的目标词。（仅支持UTF-8格式，不超过10字符） */
-  TargetWord: string;
-}
-
-declare interface EvaluateWordSimilarityResponse {
-  /** 词相似度分值。 */
-  Similarity?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface GenerateKeywordSentenceRequest {
-  /** 生成句子的关键词，关键词个数需不超过4个，中文关键词长度应不超过10字符，英文关键词长度不超过3个单词。关键词中不可包含标点符号。 */
-  WordList: string[];
-  /** 返回生成句子的个数。数量需>=1且<=5。（注意实际结果可能小于指定个数） */
-  Number: number;
-  /** 指定生成句子的领域，支持领域如下：general：通用领域，支持中英文academic：学术领域，仅支持英文默认为general（通用领域）。 */
-  Domain?: string;
-}
-
-declare interface GenerateKeywordSentenceResponse {
-  /** 生成的句子列表。 */
-  KeywordSentenceList?: KeywordSentence[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -236,20 +166,6 @@ declare interface ParseWordsResponse {
   RequestId?: string;
 }
 
-declare interface RetrieveSimilarWordsRequest {
-  /** 输入的词语。（仅支持UTF-8格式，不超过10字符） */
-  Text: string;
-  /** 召回的相似词个数，取值范围为1-20。 */
-  Number: number;
-}
-
-declare interface RetrieveSimilarWordsResponse {
-  /** 召回的相似词数组。 */
-  WordList?: string[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface SentenceCorrectionRequest {
   /** 待纠错的句子列表。可以以数组方式在一次请求中填写多个待纠错的句子。文本统一使用utf-8格式编码，每个中文句子的长度不超过150字符，每个英文句子的长度不超过100个单词，且数组长度需小于30，即句子总数需少于30句。 */
   TextList: string[];
@@ -258,44 +174,6 @@ declare interface SentenceCorrectionRequest {
 declare interface SentenceCorrectionResponse {
   /** 纠错结果列表。（注意仅展示错误句子的纠错结果，若句子无错则不展示，若全部待纠错句子都被认为无错，则可能返回数组为空） */
   CorrectionList?: CorrectionItem[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface TextEmbellishRequest {
-  /** 待润色的文本。中文文本长度需<=50字符；英文文本长度需<=30个单词。 */
-  Text: string;
-  /** 待润色文本的语言类型，支持语言如下：zh：中文en：英文 */
-  SourceLang: string;
-  /** 返回润色结果的个数。数量需>=1且<=5。（注意实际结果可能小于指定个数） */
-  Number: number;
-  /** 控制润色类型，类型如下：both：同时返回改写和扩写expansion：扩写rewriting：改写m2a：从现代文改写为古文a2m：从古文改写为现代文默认为both。 */
-  Style?: string;
-}
-
-declare interface TextEmbellishResponse {
-  /** 润色结果列表。 */
-  EmbellishList?: Embellish[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface TextWritingRequest {
-  /** 待续写的句子，文本统一使用utf-8格式编码，长度不超过200字符。 */
-  Text: string;
-  /** 待续写文本的语言类型，支持语言如下：zh：中文en：英文 */
-  SourceLang: string;
-  /** 返回续写结果的个数。数量需>=1且<=5。（注意实际结果可能小于指定个数） */
-  Number: number;
-  /** 指定续写领域，支持领域如下：general：通用领域，支持中英文补全academic：学术领域，仅支持英文补全默认为general（通用领域）。 */
-  Domain?: string;
-  /** 指定续写风格，支持风格如下：science_fiction：科幻military_history：军事xuanhuan_wuxia：武侠urban_officialdom：职场默认为xuanhuan_wuxia（武侠）。 */
-  Style?: string;
-}
-
-declare interface TextWritingResponse {
-  /** 续写结果列表。 */
-  WritingList?: Writing[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -309,24 +187,12 @@ declare interface Nlp {
   ClassifyContent(data: ClassifyContentRequest, config?: AxiosRequestConfig): AxiosPromise<ClassifyContentResponse>;
   /** 对联生成 {@link ComposeCoupletRequest} {@link ComposeCoupletResponse} */
   ComposeCouplet(data: ComposeCoupletRequest, config?: AxiosRequestConfig): AxiosPromise<ComposeCoupletResponse>;
-  /** 诗词生成 {@link ComposePoetryRequest} {@link ComposePoetryResponse} */
-  ComposePoetry(data: ComposePoetryRequest, config?: AxiosRequestConfig): AxiosPromise<ComposePoetryResponse>;
   /** 句子相似度V2 {@link EvaluateSentenceSimilarityRequest} {@link EvaluateSentenceSimilarityResponse} */
   EvaluateSentenceSimilarity(data: EvaluateSentenceSimilarityRequest, config?: AxiosRequestConfig): AxiosPromise<EvaluateSentenceSimilarityResponse>;
-  /** 词相似度V2 {@link EvaluateWordSimilarityRequest} {@link EvaluateWordSimilarityResponse} */
-  EvaluateWordSimilarity(data: EvaluateWordSimilarityRequest, config?: AxiosRequestConfig): AxiosPromise<EvaluateWordSimilarityResponse>;
-  /** 句子生成 {@link GenerateKeywordSentenceRequest} {@link GenerateKeywordSentenceResponse} */
-  GenerateKeywordSentence(data: GenerateKeywordSentenceRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateKeywordSentenceResponse>;
   /** 词法分析V2 {@link ParseWordsRequest} {@link ParseWordsResponse} */
   ParseWords(data: ParseWordsRequest, config?: AxiosRequestConfig): AxiosPromise<ParseWordsResponse>;
-  /** 相似词召回 {@link RetrieveSimilarWordsRequest} {@link RetrieveSimilarWordsResponse} */
-  RetrieveSimilarWords(data: RetrieveSimilarWordsRequest, config?: AxiosRequestConfig): AxiosPromise<RetrieveSimilarWordsResponse>;
   /** 句子纠错 {@link SentenceCorrectionRequest} {@link SentenceCorrectionResponse} */
   SentenceCorrection(data: SentenceCorrectionRequest, config?: AxiosRequestConfig): AxiosPromise<SentenceCorrectionResponse>;
-  /** 文本润色 {@link TextEmbellishRequest} {@link TextEmbellishResponse} */
-  TextEmbellish(data: TextEmbellishRequest, config?: AxiosRequestConfig): AxiosPromise<TextEmbellishResponse>;
-  /** 文本补全 {@link TextWritingRequest} {@link TextWritingResponse} */
-  TextWriting(data: TextWritingRequest, config?: AxiosRequestConfig): AxiosPromise<TextWritingResponse>;
 }
 
 export declare type Versions = ["2019-04-08"];

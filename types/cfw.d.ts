@@ -738,6 +738,12 @@ declare interface InstanceInfo {
   VpcId?: string;
 }
 
+/** 用于构造二维数组 */
+declare interface IntArray {
+  /** 数组 */
+  List?: number[] | null;
+}
+
 /** 入侵防御封禁列表、放通列表添加规则入参 */
 declare interface IntrusionDefenseRule {
   /** 规则方向，0出站，1入站，3内网间 */
@@ -1242,6 +1248,30 @@ declare interface StaticInfo {
   Num?: number;
   /** 端口 */
   Port?: string;
+}
+
+/** 日志存储统计柱形图 */
+declare interface StorageHistogram {
+  /** 访问控制日志存储量，单位B */
+  AclSize?: number | null;
+  /** 入侵防御日志存储量，单位B */
+  IdsSize?: number | null;
+  /** 流量日志存储量，单位B */
+  NetFlowSize?: number | null;
+  /** 操作日志存储量，单位B */
+  OperateSize?: number | null;
+  /** 统计时间 */
+  Time?: string | null;
+}
+
+/** 前端图表使用日志存储统计柱形图数据 */
+declare interface StorageHistogramShow {
+  /** 存储类型 */
+  StorageType?: string[] | null;
+  /** 日期 */
+  Dates?: string[] | null;
+  /** 数据 */
+  Data?: IntArray[] | null;
 }
 
 /** 防火墙开关列表对象 */
@@ -2602,6 +2632,42 @@ declare interface DescribeIdsWhiteRuleResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLogStorageStatisticRequest {
+}
+
+declare interface DescribeLogStorageStatisticResponse {
+  /** 返回状态码 0 成功 非0不成功 */
+  ReturnCode?: number;
+  /** 返回信息 success 成功 其他 不成功 */
+  ReturnMsg?: string;
+  /** 已使用存储量，单位B */
+  UsedSize?: number;
+  /** 配额存储总量，单位B */
+  TotalSize?: number;
+  /** 存储天数 */
+  StorageDay?: number;
+  /** 访问控制日志存储量，单位B */
+  AclSize?: number;
+  /** 入侵防御日志存储量，单位B */
+  IdsSize?: number;
+  /** 流量日志存储量，单位B */
+  NetFlowSize?: number;
+  /** 操作日志存储量，单位B */
+  OperateSize?: number;
+  /** 剩余存储量，单位B */
+  LeftSize?: number;
+  /** 计费模式，0后付费，1预付费 */
+  PayMode?: number;
+  /** 每日增加日志存储量柱状图 */
+  TimeHistogram?: StorageHistogram[];
+  /** 柱形图格式数据 */
+  TimeHistogramShow?: StorageHistogramShow;
+  /** 后付费模式存储状态，0正常，1欠费停止写入 */
+  ArrearsStopWriting?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLogsRequest {
   /** 日志类型标识流量日志：互联网边界防火墙netflow_border，NAT边界防火墙netflow_nat，VPC间防火墙vpcnetflow，内网流量日志netflow_fl，流量分析日志netflow_nta入侵防御日志rule_threatinfo访问控制日志：互联网边界规则rule_acl，NAT边界规则rule_acl，内网间规则rule_vpcacl，企业安全组rule_sg操作日志：防火墙开关-开关操作operate_switch，防火墙开关-实例配置operate_instance，资产中心操作operate_assetgroup，访问控制操作operate_acl，零信任防护操作operate_identity，入侵防御操作-入侵防御operate_ids，入侵防御操作-安全基线operate_baseline，常用工具操作operate_tool，网络蜜罐操作operate_honeypot，日志投递操作operate_logdelivery，通用设置操作operate_logstorage，登录日志operate_login */
   Index: string;
@@ -3879,6 +3945,8 @@ declare interface Cfw {
   DescribeIPStatusList(data: DescribeIPStatusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPStatusListResponse>;
   /** @deprecated 查询入侵防御规则白名单接口 {@link DescribeIdsWhiteRuleRequest} {@link DescribeIdsWhiteRuleResponse} */
   DescribeIdsWhiteRule(data: DescribeIdsWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIdsWhiteRuleResponse>;
+  /** 租户日志存储统计 {@link DescribeLogStorageStatisticRequest} {@link DescribeLogStorageStatisticResponse} */
+  DescribeLogStorageStatistic(data?: DescribeLogStorageStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogStorageStatisticResponse>;
   /** 日志审计日志查询 {@link DescribeLogsRequest} {@link DescribeLogsResponse} */
   DescribeLogs(data: DescribeLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogsResponse>;
   /** 查询NAT访问控制列表 {@link DescribeNatAcRuleRequest} {@link DescribeNatAcRuleResponse} */

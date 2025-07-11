@@ -4,7 +4,7 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 
 /** 3D文件 */
 declare interface File3D {
-  /** 3D文件的格式。取值范围：OBJ */
+  /** 文件格式 */
   Type?: string;
   /** 文件的Url（有效期24小时） */
   Url?: string;

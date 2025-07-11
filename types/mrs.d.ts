@@ -1652,6 +1652,8 @@ declare interface IndicatorItem {
   InferNormal?: string;
   /** 标本 */
   Sample?: string;
+  /** 检测方法 */
+  Method?: string;
 }
 
 /** 检验指标项结构v2 */

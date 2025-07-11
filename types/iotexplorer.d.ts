@@ -4333,7 +4333,7 @@ declare interface Iotexplorer {
   CallDeviceActionAsync(data: CallDeviceActionAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<CallDeviceActionAsyncResponse>;
   /** 同步调用设备行为 {@link CallDeviceActionSyncRequest} {@link CallDeviceActionSyncResponse} */
   CallDeviceActionSync(data: CallDeviceActionSyncRequest, config?: AxiosRequestConfig): AxiosPromise<CallDeviceActionSyncResponse>;
-  /** 取消分配TWeCall {@link CancelAssignTWeCallLicenseRequest} {@link CancelAssignTWeCallLicenseResponse} */
+  /** @deprecated 取消分配TWeCall {@link CancelAssignTWeCallLicenseRequest} {@link CancelAssignTWeCallLicenseResponse} */
   CancelAssignTWeCallLicense(data: CancelAssignTWeCallLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<CancelAssignTWeCallLicenseResponse>;
   /** p2p线路切换 {@link ChangeP2PRouteRequest} {@link ChangeP2PRouteResponse} */
   ChangeP2PRoute(data: ChangeP2PRouteRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeP2PRouteResponse>;

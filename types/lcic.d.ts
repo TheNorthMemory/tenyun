@@ -1469,6 +1469,20 @@ declare interface DescribeSupervisorsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUserDetailRequest {
+  /** 用户id。支持通过 user_id 或 OriginId 查询用户信息，优先使用 user_id 进行查询。 */
+  UserId?: string;
+  /** 用户在客户系统的Id。支持通过 user_id 或 OriginId 查询用户信息，优先使用 user_id 进行查询（UserId不为空时，OriginId不生效）。 */
+  OriginId?: string;
+}
+
+declare interface DescribeUserDetailResponse {
+  /** 当前获取用户信息数组列表 */
+  Users?: UserInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUserRequest {
   /** 用户id。支持通过 user_id 或 OriginId 查询用户信息，优先使用 user_id 进行查询。 */
   UserId?: string;
@@ -2074,6 +2088,8 @@ declare interface Lcic {
   DescribeSupervisors(data: DescribeSupervisorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupervisorsResponse>;
   /** 获取用户信息 {@link DescribeUserRequest} {@link DescribeUserResponse} */
   DescribeUser(data?: DescribeUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResponse>;
+  /** 获取用户信息（新） {@link DescribeUserDetailRequest} {@link DescribeUserDetailResponse} */
+  DescribeUserDetail(data?: DescribeUserDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDetailResponse>;
   /** 获取板书截图 {@link DescribeWhiteBoardSnapshotRequest} {@link DescribeWhiteBoardSnapshotResponse} */
   DescribeWhiteBoardSnapshot(data?: DescribeWhiteBoardSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWhiteBoardSnapshotResponse>;
   /** 结束课堂 {@link EndRoomRequest} {@link EndRoomResponse} */

@@ -820,6 +820,8 @@ declare interface ModelInfo {
   IsPrivateModel?: boolean | null;
   /** 模型的类别 多模态MultiModal, 文本大模型 LLM */
   ModelCategory?: string;
+  /** 数据源的配置 */
+  PublicDataSource?: PublicDataSourceFS;
 }
 
 /** 模型输入信息 */
@@ -1160,6 +1162,10 @@ declare interface ProbeAction {
   TCPSocket?: TCPSocketAction;
   /** 探针类型，默认 HTTPGet，可选值：HTTPGet、Exec、TCPSocket */
   ActionType?: string;
+}
+
+/** 公有云数据源结构 */
+declare interface PublicDataSourceFS {
 }
 
 /** RDMA配置 */

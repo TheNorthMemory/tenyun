@@ -904,6 +904,20 @@ declare interface RebootMachinesResponse {
   RequestId?: string;
 }
 
+declare interface SetMachineLoginRequest {
+  /** 集群 ID */
+  ClusterId: string;
+  /** 节点名称 */
+  MachineName: string;
+  /** 密钥 ID 列表 */
+  KeyIds?: string[];
+}
+
+declare interface SetMachineLoginResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StartMachinesRequest {
   /** 集群 ID */
   ClusterId: string;
@@ -2067,7 +2081,7 @@ declare namespace V20180525 {
 
   /** 包年包月配置 */
   interface InstanceChargePrepaid {
-    /** 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60。 */
+    /** 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。 */
     Period: number;
     /** 自动续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。 */
     RenewFlag?: string;
@@ -2525,9 +2539,9 @@ declare namespace V20180525 {
   interface PodDeductionRate {
     /** Pod的 CPU */
     Cpu?: number;
-    /** Pod 的内存 */
+    /** Pod 的内存，单位：GiB */
     Memory?: number;
-    /** Pod 的类型 */
+    /** Pod 的类型， intel，amd，windows-common，windows-amd，sa4，sa5，s7，s8，t4，v100，l20，l40，a10\*gnv4，a10\*gnv4v，a10\*pnv4 */
     Type?: string;
     /** Pod 的 GPU 卡数，Pod 类型为 GPU 时有效。 */
     GpuNum?: string;
@@ -2565,7 +2579,7 @@ declare namespace V20180525 {
   interface PodNodeInfo {
     /** 集群 ID */
     ClusterId?: string;
-    /** 节点名称 */
+    /** 节点 ID */
     NodeName?: string;
     /** 可用区 */
     Zone?: string;
@@ -3049,7 +3063,7 @@ declare namespace V20180525 {
     Name?: string;
     /** Pod的命名空间 */
     Namespace?: string;
-    /** 工作负载类型 */
+    /** 工作负载类型，如 deployment、statefulset和pod等。 */
     Kind?: string;
     /** 工作负载名称 */
     KindName?: string;
@@ -3201,7 +3215,7 @@ declare namespace V20180525 {
     ClusterId?: string;
     /** 节点名称 */
     NodeName?: string;
-    /** 上个周期预留券的抵扣状态，Deduct、NotDeduct */
+    /** 上个周期预留券的抵扣状态，Deduct：已抵扣、NotDeduct：未抵扣 */
     DeductStatus?: string;
   }
 
@@ -3213,7 +3227,7 @@ declare namespace V20180525 {
     Zone?: string;
     /** 集群 ID */
     ClusterId?: string;
-    /** 节点名称 */
+    /** 节点 ID */
     NodeName?: string;
   }
 
@@ -3223,7 +3237,7 @@ declare namespace V20180525 {
     Type: string;
     /** 核数 */
     Cpu: number;
-    /** 内存 */
+    /** 内存，单位：GiB */
     Memory: number;
     /** GPU卡数，当Type为GPU类型时设置。 */
     Gpu?: number;
@@ -3237,9 +3251,9 @@ declare namespace V20180525 {
     Num?: number;
     /** 核数 */
     CPU?: number;
-    /** 内存 */
+    /** 内存，单位：GiB */
     Memory?: number;
-    /** 预留券类型 */
+    /** 预留券类型, common：CPU通用，amd：AMD专用，windows-common: Windows容器 CPU通用，windows-amd：Windows容器 AMD专用，sa4，sa5，s7，s8，t4，v100，l20，l40，a10\*gnv4，a10\*gnv4v，a10\*pnv4 */
     Type?: string;
     /** GPU 卡数 */
     GpuNum?: string;
@@ -3247,7 +3261,7 @@ declare namespace V20180525 {
     Zone?: string;
     /** 集群 ID */
     ClusterId?: string;
-    /** 节点名称 */
+    /** 节点 ID */
     NodeName?: string;
     /** Pod 数量 */
     PodNum?: number;
@@ -4380,7 +4394,7 @@ declare namespace V20180525 {
     InstanceCount: number;
     /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。 */
     InstanceChargePrepaid: InstanceChargePrepaid;
-    /** 预留券名称。 */
+    /** 预留券名称，名称不得超过60个字符。 */
     InstanceName?: string;
     /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
     ClientToken?: string;
@@ -4796,7 +4810,7 @@ declare namespace V20180525 {
   }
 
   interface DeleteReservedInstancesRequest {
-    /** 预留券实例ID。 */
+    /** 预留券实例ID。可通过 [DescribeReservedInstances](https://cloud.tencent.com/document/product/457/99162) 接口返回值中的ReservedInstanceId获取。 */
     ReservedInstanceIds: string[];
   }
 
@@ -5856,13 +5870,13 @@ declare namespace V20180525 {
   }
 
   interface DescribePodChargeInfoRequest {
-    /** 集群ID */
+    /** 集群 ID。TKE 集群可通过 [DescribeClusters](https://cloud.tencent.com/document/api/457/31862) 接口返回值中的ClusterId获取。 */
     ClusterId: string;
     /** 命名空间 */
     Namespace?: string;
     /** Pod名称 */
     Name?: string;
-    /** Pod的Uid */
+    /** Pod的Uid，可以通过Uids 来批量查询，也可以通过 Namespace 和 Name 来查询某个 Pod 的计费信息。Uids 不传时，Namespace 和 Name 必须同时传。 */
     Uids?: string[];
   }
 
@@ -5878,7 +5892,7 @@ declare namespace V20180525 {
     Zone?: string;
     /** 集群 ID */
     ClusterId?: string;
-    /** 节点名称 */
+    /** 节点 ID */
     NodeName?: string;
   }
 
@@ -5892,15 +5906,15 @@ declare namespace V20180525 {
   interface DescribePodsBySpecRequest {
     /** 核数 */
     Cpu: number;
-    /** 内存 */
+    /** 内存，单位：GiB */
     Memory: number;
-    /** 卡数，有0.25、0.5、1、2、4等 */
+    /** 卡数，有0.25、0.5、1、2、4和8 */
     GpuNum?: string;
     /** 可用区 */
     Zone?: string;
     /** 集群 ID */
     ClusterId?: string;
-    /** 节点名称 */
+    /** 节点 ID */
     NodeName?: string;
     /** 偏移量，默认0。 */
     Offset?: number;
@@ -6316,7 +6330,7 @@ declare namespace V20180525 {
     Zone?: string;
     /** 集群 ID */
     ClusterId?: string;
-    /** 节点名称 */
+    /** 节点 ID */
     NodeName?: string;
   }
 
@@ -6336,7 +6350,7 @@ declare namespace V20180525 {
     Offset?: number;
     /** 返回数量，默认为20，最大值为100。 */
     Limit?: number;
-    /** status按照**【状态**】进行过滤。状态：Creating、Active、Expired、Refunded。类型：String必选：否resource-type按照**【资源类型**】进行过滤。资源类型：common、amd、v100、t4、a10\*gnv4、a10\*gnv4v等，common表示通用类型。类型：String必选：否cpu按照**【核数**】进行过滤。类型：String必选：否memory按照**【内存**】进行过滤。类型：String必选：否gpu按照**【GPU卡数**】进行过滤，取值有0.25、0.5、1、2、4等。类型：String必选：否cluster-id按照**【集群ID**】进行过滤。类型：String必选：否node-name按照**【节点名称**】进行过滤。类型：String必选：否scope按照**【可用区**】进行过滤。比如：ap-guangzhou-2，为空字符串表示地域抵扣范围。如果只过滤可用区抵扣范围，需要同时将cluster-id、node-name设置为空字符串。类型：String必选：否reserved-instance-id按照**【预留实例ID**】进行过滤。预留实例ID形如：eksri-xxxxxxxx。类型：String必选：否reserved-instance-name按照**【预留实例名称**】进行过滤。类型：String必选：否reserved-instance-deduct按照**【上个周期抵扣的预留券**】进行过滤。Values可不设置。必选：否reserved-instance-not-deduct按照**【上个周期未抵扣的预留券**】进行过滤。Values可不设置。必选：否 */
+    /** status按照**【状态**】进行过滤。状态：Creating：创建中、Active：生效中、Expired：已过期、Refunded：已退还。类型：String必选：否resource-type按照**【资源类型**】进行过滤。资源类型：common、amd、v100、t4、a10\*gnv4、a10\*gnv4v等，common表示通用类型。类型：String必选：否cpu按照**【核数**】进行过滤。类型：String必选：否memory按照**【内存**】进行过滤。类型：String必选：否gpu按照**【GPU卡数**】进行过滤，取值有0.25、0.5、1、2、4等。类型：String必选：否cluster-id按照**【集群ID**】进行过滤。类型：String必选：否node-name按照**【节点名称**】进行过滤。类型：String必选：否scope按照**【可用区**】进行过滤。比如：ap-guangzhou-2，为空字符串表示地域抵扣范围。如果只过滤可用区抵扣范围，需要同时将cluster-id、node-name设置为空字符串。类型：String必选：否reserved-instance-id按照**【预留实例ID**】进行过滤。预留实例ID形如：eksri-xxxxxxxx。类型：String必选：否reserved-instance-name按照**【预留实例名称**】进行过滤。类型：String必选：否reserved-instance-deduct按照**【上个周期抵扣的预留券**】进行过滤。Values可不设置。必选：否reserved-instance-not-deduct按照**【上个周期未抵扣的预留券**】进行过滤。Values可不设置。必选：否 */
     Filters?: Filter[];
     /** 排序字段。支持CreatedAt、ActiveAt、ExpireAt。默认值CreatedAt。 */
     OrderField?: string;
@@ -7212,7 +7226,7 @@ declare namespace V20180525 {
   }
 
   interface ModifyReservedInstanceScopeRequest {
-    /** 预留券唯一 ID */
+    /** 预留券实例ID。可通过 [DescribeReservedInstances](https://cloud.tencent.com/document/product/457/99162) 接口返回值中的ReservedInstanceId获取。 */
     ReservedInstanceIds: string[];
     /** 预留券抵扣范围信息 */
     ReservedInstanceScope: ReservedInstanceScope;
@@ -7238,7 +7252,7 @@ declare namespace V20180525 {
   }
 
   interface RenewReservedInstancesRequest {
-    /** 预留券实例ID，每次请求实例的上限为100。 */
+    /** 预留券实例ID。可通过 [DescribeReservedInstances](https://cloud.tencent.com/document/product/457/99162) 接口返回值中的ReservedInstanceId获取，每次请求实例的上限为100。 */
     ReservedInstanceIds: string[];
     /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。 */
     InstanceChargePrepaid: InstanceChargePrepaid;
@@ -7673,6 +7687,8 @@ declare interface Tke {
   ModifyNodePool(data: ModifyNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNodePoolResponse>;
   /** 重启原生节点实例 {@link RebootMachinesRequest} {@link RebootMachinesResponse} */
   RebootMachines(data: RebootMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<RebootMachinesResponse>;
+  /** 设置是否开启节点登录 {@link SetMachineLoginRequest} {@link SetMachineLoginResponse} */
+  SetMachineLogin(data: SetMachineLoginRequest, config?: AxiosRequestConfig): AxiosPromise<SetMachineLoginResponse>;
   /** 启动原生节点实例 {@link StartMachinesRequest} {@link StartMachinesResponse} */
   StartMachines(data: StartMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<StartMachinesResponse>;
   /** 关闭原生节点实例 {@link StopMachinesRequest} {@link StopMachinesResponse} */

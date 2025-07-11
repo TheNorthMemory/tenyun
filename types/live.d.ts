@@ -376,6 +376,42 @@ declare interface CertInfo {
   DomainList?: string[];
 }
 
+/** 自适应码率转码模板，子模板，出入参数。 */
+declare interface ChildTemplateInfo {
+  /** 自适应码率转码模板，子模板Id。入参时候，填写此字段，表示更新子模板，否则是新增子模板。 */
+  TemplateId?: number | null;
+  /** 子模板名称。 */
+  TemplateName?: string | null;
+  /** 视频编码：h264/h265/origin，默认origin。origin: 保持原始编码格式。 */
+  Vcodec?: string | null;
+  /** 视频码率。范围：0kbps - 8000kbps。0为保持原始码率。注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。 */
+  VideoBitrate?: number | null;
+  /** 宽，默认0。范围[0-3000]。数值必须是2的倍数，0是原始宽度。 */
+  Width?: number | null;
+  /** 高，默认0。范围[0-3000]数值必须是2的倍数，0是原始高度。 */
+  Height?: number | null;
+  /** 帧率，默认0。范围0-60fps。 */
+  Fps?: number | null;
+  /** 关键帧间隔，单位：秒。默认原始的间隔。范围2-6。同一个父模板下面的所有子模板，gop必须相等且存在。 */
+  Gop?: number | null;
+  /** 是否保留视频，0：否，1：是。默认1。 */
+  NeedVideo?: number | null;
+  /** 是否保留音频，0：否，1：是。默认1。 */
+  NeedAudio?: number | null;
+  /** 当设置的码率>原始码率时，是否以原始码率为准。0：否， 1：是默认 0。 */
+  BitrateToOrig?: number | null;
+  /** 当设置的高度>原始高度时，是否以原始高度为准。0：否， 1：是默认 0。 */
+  HeightToOrig?: number | null;
+  /** 当设置的帧率>原始帧率时，是否以原始帧率为准。0：否， 1：是默认 0。 */
+  FpsToOrig?: number | null;
+  /** 是否以短边作为高度，0：否，1：是。默认0。 */
+  ShortEdgeAsHeight?: number | null;
+  /** HLS 分片类型。可选值：ts、fmp4。注：编码方式为 H.265 时生效。 */
+  HlsContainerFormat?: string | null;
+  /** 编码标签。可选值：hvc1、hev1。注：HLS 分片类型选择 fmp4 时生效。 */
+  HlsMp4VideoCodecTag?: string | null;
+}
+
 /** 客户端ip播放汇总信息。 */
 declare interface ClientIpPlaySumInfo {
   /** 客户端 IP，点分型。 */
@@ -1526,6 +1562,10 @@ declare interface TemplateInfo {
   DRMType?: string | null;
   /** DRM 加密项，多个用|分割，可选值：AUDIO、SD、HD、UHD1、UHD2，后四个为一组，同组中的内容只能选一个。 */
   DRMTracks?: string | null;
+  /** 是否创建自适应码率，默认值 0。0：否。1：是。 */
+  IsAdaptiveBitRate?: number | null;
+  /** 自适应码率，子转码模板信息，当 IsAdaptiveBitRate 为 1 时有效。 */
+  AdaptiveChildren?: ChildTemplateInfo[] | null;
 }
 
 /** 时移计费明细数据。 */
@@ -2145,7 +2185,7 @@ declare interface CreateLivePullStreamTaskRequest {
   ExtraCmd?: string;
   /** 自定义任务 ID。注：1. 该自定义 ID 为可选参数，如果传入，请确保该账号下传入的 ID 唯一。2. 该自定义 ID 用于防止重复发起请求时产生重复任务。后面也可以用 SpecifyTaskId 来修改或删除任务。 */
   SpecifyTaskId?: string;
-  /** 任务描述，限制 512 字节。 */
+  /** 任务描述，限制 512 字节。不可以使用特殊字符，如Unicode的特殊字符集。 */
   Comment?: string;
   /** 完整目标 URL 地址。用法注意：如果使用该参数来传完整目标地址，则 DomainName, AppName, StreamName 需要传入空字符串，任务将会使用该 ToUrl 参数指定的目标地址。使用该方式传入目标地址支持的协议有：rtmp、rtmps、rtsp、rtp、srt。注意：签名时间需要超过任务结束时间，避免因签名过期造成任务失败。 */
   ToUrl?: string;

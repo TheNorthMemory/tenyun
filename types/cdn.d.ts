@@ -1310,7 +1310,7 @@ declare interface IpFilter {
   FilterType?: string | null;
   /** IP 黑白名单列表支持 X.X.X.X 格式IPV4地址 或X:X:X:X:X:X:X:X 格式IPV6地址， 或网段格式/X（IPV4:1≤X≤32；IPV6:1≤X≤128）最多可填充 200 个白名单或 200 个黑名单； */
   Filters?: string[] | null;
-  /** IP 黑白名单分路径配置，白名单功能 */
+  /** IP 黑白名单分路径配置，白名单功能。黑白名单 IP 总数不能超过 1000 个。 */
   FilterRules?: IpFilterPathRule[] | null;
   /** IP 黑白名单验证失败时返回的 code 已下线，参数失效，不支持自定义状态码，固定返回514 */
   ReturnCode?: number | null;
@@ -1320,7 +1320,7 @@ declare interface IpFilter {
 declare interface IpFilterPathRule {
   /** IP 黑白名单类型whitelist：白名单blacklist：黑名单 */
   FilterType: string | null;
-  /** IP 黑白名单列表支持 X.X.X.X 格式IPV4地址 或X:X:X:X:X:X:X:X 格式IPV6地址， 或网段格式/X（IPV4:1≤X≤32；IPV6:1≤X≤128）最多可填充 200 个白名单或 500 个黑名单； */
+  /** IP 黑白名单列表支持 X.X.X.X 格式IPV4地址 或X:X:X:X:X:X:X:X 格式IPV6地址， 或网段格式/X（IPV4:1≤X≤32；IPV6:1≤X≤128）最多可填充 500 个白名单或 200 个黑名单； */
   Filters: string[] | null;
   /** 规则类型：all：所有文件生效file：指定文件后缀生效directory：指定路径生效path：指定绝对路径生效 */
   RuleType: string | null;
@@ -2560,7 +2560,7 @@ declare interface UrlRedirectRule {
 declare interface UserAgentFilter {
   /** UserAgent黑白名单配置开关，取值有：on：开启off：关闭 */
   Switch: string | null;
-  /** UA黑白名单生效规则列表 */
+  /** UA黑白名单生效规则列表，不能超过10条规则 */
   FilterRules?: UserAgentFilterRule[] | null;
 }
 
@@ -2570,7 +2570,7 @@ declare interface UserAgentFilterRule {
   RuleType: string | null;
   /** 访问路径生效内容 */
   RulePaths: string[] | null;
-  /** UserAgent列表 */
+  /** UserAgent列表，UserAgent 个数不能超过 10个 */
   UserAgents: string[] | null;
   /** 黑名单或白名单，blacklist或whitelist */
   FilterType: string | null;

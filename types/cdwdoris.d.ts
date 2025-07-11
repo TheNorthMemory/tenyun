@@ -44,6 +44,8 @@ declare interface BackUpJobDisplay {
   IsUserDefineBucket?: boolean;
   /** 错误原因 */
   ErrorReason?: string;
+  /** 快照保留策略 */
+  SnapshotRemainPolicy?: SnapshotRemainPolicy;
 }
 
 /** 备份实例中关于cos的信息 */
@@ -54,6 +56,8 @@ declare interface BackupCosInfo {
   CosPath?: string;
   /** 备份文件名称 */
   SnapShotPath?: string;
+  /** cos桶所在地域 */
+  Region?: string;
 }
 
 /** 备份任务的进度详情 */
@@ -476,6 +480,8 @@ declare interface InstanceNode {
   UUID?: string;
   /** 可用区 */
   Zone?: string;
+  /** 虚拟可用区 */
+  VirtualZone?: string;
   /** 创建时间 */
   CreateTime?: string;
   /** 计算组ID */
@@ -544,6 +550,8 @@ declare interface NodeInfo {
   ComputeGroupId?: string;
   /** 创建时间 */
   CreateTime?: string;
+  /** 虚拟可用区 */
+  VirtualZone?: string;
 }
 
 /** 节点信息列表 */
@@ -570,6 +578,8 @@ declare interface NodeInfos {
   ComputeGroupId?: string;
   /** rip */
   RIp?: string;
+  /** 虚拟可用区 */
+  VirtualZone?: string;
 }
 
 /** 节点角色描述信息 */
@@ -708,6 +718,8 @@ declare interface RestoreStatus {
   BackupJobId?: number;
   /** 实例对应snapshot的id */
   TaskId?: number;
+  /** 恢复任务id */
+  ID?: number;
 }
 
 /** 调度信息 */
@@ -778,6 +790,16 @@ declare interface SlowQueryRecord {
   CpuTimeMs?: number;
   /** 计算组 */
   ComputeGroup?: string;
+}
+
+/** 备份快照保留策略 */
+declare interface SnapshotRemainPolicy {
+  /** 0-不主动删除；1-超过指定时间周期自动删除；2-保留指定数据快照 */
+  Type?: number;
+  /** 保留快照的时间 */
+  RemainDays?: number;
+  /** 保留最新快照的数量 */
+  RemainLatestNum?: number;
 }
 
 /** 标签描述 */
@@ -917,7 +939,7 @@ declare interface CreateBackUpScheduleRequest {
   BackupType?: number;
   /** 远端doris集群的连接信息 */
   DorisSourceInfo?: DorisSourceInfo;
-  /** 0为默认。1时是一次性备份。2时是远端备份 */
+  /** 0为周期备份。1时是立即备份。3时是定时备份。 */
   BackupTimeType?: number;
   /** 0为默认。1时是备份完成后立即恢复 */
   RestoreType?: number;
@@ -933,6 +955,10 @@ declare interface CreateBackUpScheduleRequest {
   UpdateStatus?: number;
   /** 当前任务的cos桶信息 */
   CosBucket?: string;
+  /** 快照保留策略 */
+  SnapshotRemainPolicy?: SnapshotRemainPolicy;
+  /** 备份数据所在地域，当前地域应该为空 */
+  DataRemoteRegion?: string;
 }
 
 declare interface CreateBackUpScheduleResponse {
@@ -1687,6 +1713,8 @@ declare interface DescribeSqlApisRequest {
   DatabaseName?: string;
   /** 表名 */
   TableName?: string;
+  /** 用户名列表 */
+  UserNames?: string[];
 }
 
 declare interface DescribeSqlApisResponse {
@@ -1907,10 +1935,12 @@ declare interface ModifyUserPrivilegesV3Request {
   UserPrivileges: UpdateUserPrivileges;
   /** 用户链接来自的 IP */
   WhiteHost?: string;
-  /** 更新类型，默认0，1为更新绑定计算组 */
+  /** 更新类型，默认0，1为更新绑定计算组，2为更新默认计算组 */
   UpdateType?: number;
   /** 需绑定计算组列表 */
   UpdateComputeGroups?: string[];
+  /** 默认计算组 */
+  DefaultComputeGroup?: string;
 }
 
 declare interface ModifyUserPrivilegesV3Response {

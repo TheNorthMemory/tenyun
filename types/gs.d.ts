@@ -142,8 +142,12 @@ declare interface AndroidInstanceImage {
   AndroidInstanceImageState?: string;
   /** 镜像可用区 */
   AndroidInstanceImageZone?: string;
+  /** 镜像描述 */
+  AndroidInstanceImageDescription?: string;
   /** 安卓10 */
   AndroidVersion?: string;
+  /** 创建时间 */
+  CreateTime?: string;
 }
 
 /** 安卓实例信息 */
@@ -413,6 +417,8 @@ declare interface CreateAndroidInstanceImageRequest {
   AndroidInstanceImageName: string;
   /** 安卓实例 ID */
   AndroidInstanceId: string;
+  /** 安卓实例镜像描述 */
+  AndroidInstanceImageDescription?: string;
 }
 
 declare interface CreateAndroidInstanceImageResponse {
@@ -709,6 +715,8 @@ declare interface DescribeAndroidInstanceImagesRequest {
   Offset?: number;
   /** 限制量，默认为20，最大值为100 */
   Limit?: number;
+  /** 字段过滤器。Filter 的 Name 有以下值：ImageName：镜像名称ImageState：镜像状态AndroidVersion：安卓版本 */
+  Filters?: Filter[];
 }
 
 declare interface DescribeAndroidInstanceImagesResponse {

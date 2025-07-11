@@ -78,6 +78,40 @@ declare interface AddressPoolDetail {
   UpdatedOn?: string | null;
 }
 
+/** 计费项 */
+declare interface CostItem {
+  /** 计费项名称 */
+  CostName?: string;
+  /** 计费项值 */
+  CostValue?: number;
+}
+
+/** 探测任务套餐 */
+declare interface DetectTaskPackage {
+  /** 资源id */
+  ResourceId?: string;
+  /** 资源类型TASK 探测任务 */
+  ResourceType?: string;
+  /** 额度 */
+  Quota?: number;
+  /** 套餐过期时间 */
+  CurrentDeadline?: string;
+  /** 套餐创建时间 */
+  CreateTime?: string;
+  /** 是否过期0否1是 */
+  IsExpire?: number;
+  /** 状态ENABLED: 正常ISOLATED: 隔离DESTROYED：销毁REFUNDED：已退款 */
+  Status?: string;
+  /** 是否自动续费0不1是 */
+  AutoRenewFlag?: number;
+  /** 备注 */
+  Remark?: string;
+  /** 计费项 */
+  CostItemList?: CostItem[];
+  /** 探测任务类型：100系统设定；200计费；300管理系统；110D监控迁移的免费任务；120容灾切换任务 */
+  Group?: number | null;
+}
+
 /** 探测组 */
 declare interface DetectorGroup {
   /** 线路组id GroupLineId */
@@ -222,6 +256,40 @@ declare interface InstanceInfo {
   InstanceId?: string | null;
   /** 实例名称 */
   InstanceName?: string | null;
+}
+
+/** 实例套餐 */
+declare interface InstancePackage {
+  /** 实例套餐资源id */
+  ResourceId?: string | null;
+  /** 实例id */
+  InstanceId?: string;
+  /** 实例名 */
+  InstanceName?: string;
+  /** 套餐类型FREE: 免费版STANDARD：标准版ULTIMATE：旗舰版 */
+  PackageType?: string;
+  /** 套餐过期时间 */
+  CurrentDeadline?: string;
+  /** 套餐创建时间 */
+  CreateTime?: string;
+  /** 是否过期0否1是 */
+  IsExpire?: number;
+  /** 实例状态ENABLED: 正常DISABLED: 禁用 */
+  Status?: string;
+  /** 是否自动续费0不1是 */
+  AutoRenewFlag?: number;
+  /** 备注 */
+  Remark?: string;
+  /** 计费项 */
+  CostItemList?: CostItem[];
+  /** 最小检查间隔时间s */
+  MinCheckInterval?: number;
+  /** 最小TTL s */
+  MinGlobalTtl?: number;
+  /** 流量策略类型：ALL返回全部，WEIGHT权重 */
+  TrafficStrategy?: string[];
+  /** 策略类型：LOCATION按地理位置调度，DELAY按延迟调度 */
+  ScheduleStrategy?: string[];
 }
 
 /** 主力地址池 */
@@ -590,6 +658,54 @@ declare interface DescribeAddressPoolListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDetectPackageDetailRequest {
+  /** 资源id */
+  ResourceId: string;
+}
+
+declare interface DescribeDetectPackageDetailResponse {
+  /** 资源id */
+  ResourceId?: string;
+  /** 资源类型 TASK 探测任务 */
+  ResourceType?: string;
+  /** 额度 */
+  Quota?: number;
+  /** 过期时间 */
+  CurrentDeadline?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 是否过期 */
+  IsExpire?: number;
+  /** 状态 ENABLED: 正常 ISOLATED: 隔离 DESTROYED：销毁 REFUNDED：已退款 */
+  Status?: string;
+  /** 是否自动续费0不1是 */
+  AutoRenewFlag?: number;
+  /** 备注 */
+  Remark?: string;
+  /** 计费项 */
+  CostItemList?: CostItem[];
+  /** 使用数量 */
+  UsedNum?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDetectTaskPackageListRequest {
+  /** 每页条数 */
+  Limit?: number;
+  /** 探测任务过滤条件：ResourceId 探测任务的资源id，PeriodStart 最小过期时间,PeriodEnd 最大过期时间 */
+  Filters?: ResourceFilter[];
+}
+
+declare interface DescribeDetectTaskPackageListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 探测任务套餐列表 */
+  TaskPackageSet?: DetectTaskPackage[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDetectorsRequest {
 }
 
@@ -638,6 +754,24 @@ declare interface DescribeInstanceListResponse {
   TotalCount?: number | null;
   /** 是否支持系统域名接入：true支持；false不支持 */
   SystemAccessEnabled?: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstancePackageListRequest {
+  /** 每页条数 */
+  Limit?: number;
+  /** InstanceId实例Id，InstanceName实例名称，ResourceId套餐Id，PackageType套餐类型 */
+  Filters?: ResourceFilter[];
+  /** 是否使用：0未使用1已使用 */
+  IsUsed?: number;
+}
+
+declare interface DescribeInstancePackageListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 实例套餐列表 */
+  InstanceSet?: InstancePackage[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -847,6 +981,10 @@ declare interface Igtm {
   DescribeAddressPoolDetail(data: DescribeAddressPoolDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressPoolDetailResponse>;
   /** 地址池列表 {@link DescribeAddressPoolListRequest} {@link DescribeAddressPoolListResponse} */
   DescribeAddressPoolList(data?: DescribeAddressPoolListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressPoolListResponse>;
+  /** 探测任务套餐详情 {@link DescribeDetectPackageDetailRequest} {@link DescribeDetectPackageDetailResponse} */
+  DescribeDetectPackageDetail(data: DescribeDetectPackageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDetectPackageDetailResponse>;
+  /** 获取探测任务套餐列表 {@link DescribeDetectTaskPackageListRequest} {@link DescribeDetectTaskPackageListResponse} */
+  DescribeDetectTaskPackageList(data?: DescribeDetectTaskPackageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDetectTaskPackageListResponse>;
   /** 获取探测节点列表 {@link DescribeDetectorsRequest} {@link DescribeDetectorsResponse} */
   DescribeDetectors(data?: DescribeDetectorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDetectorsResponse>;
   /** 查询分组线路列表 {@link DescribeDnsLineListRequest} {@link DescribeDnsLineListResponse} */
@@ -855,6 +993,8 @@ declare interface Igtm {
   DescribeInstanceDetail(data?: DescribeInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDetailResponse>;
   /** 获取实例列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */
   DescribeInstanceList(data?: DescribeInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceListResponse>;
+  /** 获取实例套餐列表 {@link DescribeInstancePackageListRequest} {@link DescribeInstancePackageListResponse} */
+  DescribeInstancePackageList(data?: DescribeInstancePackageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancePackageListResponse>;
   /** 查询监控器详情 {@link DescribeMonitorDetailRequest} {@link DescribeMonitorDetailResponse} */
   DescribeMonitorDetail(data: DescribeMonitorDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonitorDetailResponse>;
   /** 获取所有监控器 {@link DescribeMonitorsRequest} {@link DescribeMonitorsResponse} */

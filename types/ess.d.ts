@@ -100,7 +100,7 @@ declare interface ApproverOption {
   NoTransfer?: boolean;
   /** 允许编辑签署人信息（嵌入式使用） 默认true-可以编辑 false-不可以编辑 */
   CanEditApprover?: boolean;
-  /** 签署人信息补充类型，默认无需补充。 **1** : 动态签署人（可发起合同后再补充签署人信息）注：`企业自动签不支持动态补充`注：`使用动态签署人能力前，需登陆腾讯电子签控制台打开服务开关` */
+  /** 签署人信息补充类型，默认无需补充。 **1** : 动态签署人（可发起合同后再补充签署人信息）注：`企业自动签不支持动态补充`注：1. `使用动态签署人能力前，需登陆腾讯电子签控制台打开服务开关`2. 此参数在嵌入式场景下无效。 */
   FillType?: number;
   /** 签署人阅读合同限制参数 取值： LimitReadTimeAndBottom，阅读合同必须限制阅读时长并且必须阅读到底 LimitReadTime，阅读合同仅限制阅读时长 LimitBottom，阅读合同仅限制必须阅读到底 NoReadTimeAndBottom，阅读合同不限制阅读时长且不限制阅读到底（白名单功能，请联系客户经理开白使用） */
   FlowReadLimit?: string;
@@ -2607,6 +2607,8 @@ declare interface CreateOrganizationAuthUrlRequest {
   Initialization?: number[];
   /** 授权书(PNG或JPG或PDF) base64格式, 大小不超过8M 。 授权书可以通过接口[生成企业授权书](https://qian.tencent.com/developers/companyApis/organizations/CreateOrganizationAuthFile) 来获得。p.s. 如果上传授权书 ，需遵循以下条件 1. 超管的信息（超管姓名，超管手机号）必须为必填参数。2. 认证方式AuthorizationTypes必须只能是上传授权书方式 */
   PowerOfAttorneys?: string[];
+  /** 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 4096长度。在. 企业引导企业实名认证后回调中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的回调通知模块。 */
+  UserData?: string;
 }
 
 declare interface CreateOrganizationAuthUrlResponse {

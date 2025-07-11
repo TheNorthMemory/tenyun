@@ -2204,6 +2204,46 @@ declare interface ResultItem {
   Reason?: string;
 }
 
+/** Serverless Instance */
+declare interface SLInstance {
+  /** EMR Instance Id */
+  InstanceId?: string;
+  /** EMR Numeric Instance Id */
+  ClusterId?: number;
+  /** Instance Name */
+  InstanceName?: string;
+  /** Region id */
+  RegionId?: number;
+  /** Zone Name */
+  Zone?: string;
+  /** Pay Mode */
+  PayMode?: number;
+  /** Disk Type */
+  DiskType?: string;
+  /** Disk Size */
+  DiskSize?: number;
+  /** Node Type */
+  NodeType?: string;
+  /** Node Number */
+  NodeNum?: number;
+  /** Expire Time */
+  ExpireTime?: string;
+  /** Isolate Time */
+  IsolateTime?: string;
+  /** Create Time */
+  CreateTime?: string;
+  /** Auto Renew Flag */
+  AutoRenewFlag?: number;
+  /** EMR Numeric Instance Status */
+  Status?: number;
+  /** Zone Setting */
+  ZoneSettings?: ZoneSetting[];
+  /** Bound Tags */
+  Tags?: Tag[];
+  /** Deploy Role */
+  DeployRole?: string;
+}
+
 /** Serverless HBase实例信息 */
 declare interface SLInstanceInfo {
   /** 集群实例字符串ID */
@@ -2244,6 +2284,8 @@ declare interface SLInstanceInfo {
   IsolateTime?: string;
   /** 过期时间，后付费返回0000-00-00 00:00:00 */
   ExpireTime?: string;
+  /** 主备部署角色 */
+  DeployRole?: string;
 }
 
 /** 扩容节点类型以及数量 */
@@ -3281,9 +3323,9 @@ declare interface CreateInstanceResponse {
 declare interface CreateSLInstanceRequest {
   /** 实例名称。 */
   InstanceName: string;
-  /** 实例计费模式，0表示后付费，即按量计费。 */
+  /** 实例计费模式，0表示后付费，即按量计费，1表示预付费，即包年包月。 */
   PayMode: number;
-  /** 实例存储类型，填写CLOUD_HSSD，表示性能云存储。 */
+  /** 实例存储类型，CLOUD_HSSD表示性能云存储， CLOUD_BSSD表示标准云存储。 */
   DiskType: string;
   /** 实例单节点磁盘容量，单位GB，单节点磁盘容量需大于等于100，小于等于250*CPU核心数，容量调整步长为100。 */
   DiskSize: number;
@@ -3297,6 +3339,8 @@ declare interface CreateSLInstanceRequest {
   PrePaySetting?: PrePaySetting;
   /** 唯一随机标识，时效性为5分钟，需要调用者指定 防止客户端重复创建资源，例如 a9a90aa6-****-****-****-fae360632808 */
   ClientToken?: string;
+  /** 部署模式 */
+  DeploymentMode?: string;
 }
 
 declare interface CreateSLInstanceResponse {
@@ -4072,6 +4116,8 @@ declare interface DescribeSLInstanceResponse {
   AutoRenewFlag?: number;
   /** 实例节点总数。 */
   NodeNum?: number;
+  /** Serverless Instance infomation */
+  SLInstance?: SLInstance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

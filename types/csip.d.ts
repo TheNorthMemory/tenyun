@@ -14,6 +14,58 @@ declare interface AKInfo {
   Remark?: string;
 }
 
+/** 访问密钥告警记录 */
+declare interface AccessKeyAlarm {
+  /** 告警名称 */
+  Name?: string;
+  /** 告警等级0-无效 1-提示 2-低危 3-中危 4-高危 5-严重 */
+  Level?: number;
+  /** 告警记录ID */
+  ID?: number;
+  /** 告警规则ID */
+  AlarmRuleID?: number;
+  /** 告警类型0 异常调用1 泄漏监测 */
+  AlarmType?: number;
+  /** 访问密钥 */
+  AccessKey?: string;
+  /** 访问密钥ID */
+  AccessKeyID?: number;
+  /** 访问密钥备注 */
+  AccessKeyRemark?: string;
+  /** 最后告警时间 */
+  LastAlarmTime?: string;
+  /** 告警状态0-未处理 1-已处理 2-已忽略 */
+  Status?: number;
+  /** 聚合日期 */
+  Date?: string;
+  /** 告警标签 */
+  Tag?: string[];
+  /** 所属主账号Uin */
+  Uin?: string;
+  /** 所属主账号昵称 */
+  Nickname?: string;
+  /** 所属子账号Uin */
+  SubUin?: string;
+  /** 所属子账号昵称 */
+  SubNickname?: string;
+  /** 账号类型0 主账号AK 1 子账号AK 2 临时密钥 */
+  Type?: number;
+  /** 所属appid */
+  AppID?: number;
+  /** 泄漏证据 */
+  LeakEvidence?: string[];
+}
+
+/** 访问密钥告警数量 */
+declare interface AccessKeyAlarmCount {
+  /** 访问密钥的ID */
+  ID?: number;
+  /** 访问密钥 */
+  AccessKey?: string;
+  /** 告警数量 */
+  AlarmCount?: number;
+}
+
 /** 访问密钥资产告警信息 */
 declare interface AccessKeyAlarmInfo {
   /** 告警类型/风险类型告警类型：0异常调用1泄漏检测2自定义风险类型：0：配置风险1: 自定义风险 */
@@ -57,6 +109,92 @@ declare interface AccessKeyAsset {
   /** AK状态 0:禁用1:已启用 */
   Status?: number;
   /** 0 表示已检测1 表示检测中 */
+  CheckStatus?: number;
+}
+
+/** 访问密钥风险记录 */
+declare interface AccessKeyRisk {
+  /** 风险名称 */
+  Name?: string;
+  /** 风险等级0-无效 1-提示 2-低危 3-中危 4-高危 5-严重 */
+  Level?: number;
+  /** 风险记录ID */
+  ID?: number;
+  /** 风险规则ID */
+  RiskRuleID?: number;
+  /** 风险类型0-配置风险 */
+  RiskType?: number;
+  /** 访问密钥 */
+  AccessKey?: string;
+  /** 访问密钥ID */
+  AccessKeyID?: number;
+  /** 访问密钥备注 */
+  AccessKeyRemark?: string;
+  /** 风险检出时间 */
+  RiskTime?: string;
+  /** 风险状态0-未处理 2-已忽略 3-已收敛 */
+  Status?: number;
+  /** 风险标签 */
+  Tag?: string[];
+  /** 风险证据 */
+  Evidence?: string;
+  /** 风险描述 */
+  Description?: string;
+  /** 所属主账号Uin */
+  Uin?: string;
+  /** 所属主账号昵称 */
+  Nickname?: string;
+  /** 所属子账号Uin */
+  SubUin?: string;
+  /** 所属子账号昵称 */
+  SubNickname?: string;
+  /** 账号类型0 主账号AK 1子账号AK2 临时密钥 */
+  Type?: number;
+  /** 检测状态0表示 已检测1表示 检测中 */
+  CheckStatus?: number;
+  /** 所属appid */
+  AppID?: number;
+}
+
+/** 访问密钥账号信息 */
+declare interface AccessKeyUser {
+  /** 账号ID */
+  ID?: number;
+  /** 账号名称 */
+  Name?: string;
+  /** 0 主账号 1子账号 */
+  Type?: number;
+  /** 访问方式0 API1 控制台与API */
+  AccessType?: number;
+  /** 安全建议 枚举 0 正常 1 立即处理 2 建议加固 */
+  Advice?: number;
+  /** 告警信息列表 */
+  AccessKeyAlarmList?: AccessKeyAlarmInfo[];
+  /** 风险信息列表 */
+  AccessKeyRiskList?: AccessKeyAlarmInfo[];
+  /** 账号所属APPID */
+  AppID?: number;
+  /** 主账号昵称 */
+  Nickname?: string;
+  /** 子账号昵称 */
+  SubNickname?: string;
+  /** 账号所属主账号Uin */
+  Uin?: string;
+  /** 账号自身uin，主账号时与主账号uin一致 */
+  SubUin?: string;
+  /** 登录IP */
+  LoginIP?: string;
+  /** 登录地址 */
+  LoginLocation?: string;
+  /** 登录时间 */
+  LoginTime?: string;
+  /** 运营商名称 */
+  ISP?: string;
+  /** 操作保护是否开启0 未开启1 已开启 */
+  ActionFlag?: number;
+  /** 登录保护是否开启0 未开启1 已开启 */
+  LoginFlag?: number;
+  /** 0 表示已检测 1 表示检测中 */
   CheckStatus?: number;
 }
 
@@ -1992,6 +2130,22 @@ declare interface RepositoryImageVO {
   IsNewAsset?: number;
 }
 
+/** 风险调用记录详情 */
+declare interface RiskCallRecord {
+  /** 接口名称 */
+  EventName?: string;
+  /** 接口中文描述 */
+  EventDescCN?: string;
+  /** 接口英文描述 */
+  EventDescEN?: string;
+  /** 产品名称 */
+  ProductName?: string;
+  /** 产品中文名称 */
+  ProductNameCN?: string;
+  /** 调用次数 */
+  CallCount?: number;
+}
+
 /** 风险中心状态处理Key */
 declare interface RiskCenterStatusKey {
   /** 风险ID */
@@ -2618,6 +2772,34 @@ declare interface UebaRule {
   CloudType?: number;
 }
 
+/** 调用记录详情 */
+declare interface UserCallRecord {
+  /** 调用源IP */
+  SourceIP?: string;
+  /** 调用类型0:控制台调用1:API */
+  EventType?: number;
+  /** 调用次数 */
+  CallCount?: number;
+  /** 调用错误码0表示成功 */
+  Code?: number;
+  /** 首次调用时间 */
+  FirstCallTime?: string;
+  /** 最后调用时间 */
+  LastCallTime?: string;
+  /** 调用源IP备注 */
+  SourceIPRemark?: string;
+  /** 调用源IP地域 */
+  Region?: string;
+  /** 用户/角色名称 */
+  UserName?: string;
+  /** 聚合日期 */
+  Date?: string;
+  /** appid */
+  AppID?: number;
+  /** 运营商 */
+  ISP?: string;
+}
+
 /** 应急漏洞基本数据 */
 declare interface VULBaseInfo {
   /** 风险等级high 高危/ middle 中危 / low 低危 /info 提示 */
@@ -3073,6 +3255,42 @@ declare interface AssetBaseInfoResponse {
   ProtectedDay?: number;
 }
 
+declare interface CreateAccessKeyCheckTaskRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 风险列表 */
+  RiskIDList?: number[];
+  /** 访问密钥列表 */
+  AccessKeyList?: string[];
+  /** 账号uin列表 */
+  SubUinList?: string[];
+}
+
+declare interface CreateAccessKeyCheckTaskResponse {
+  /** 0表示成功 1表示失败 */
+  Code?: number;
+  /** 错误信息 */
+  Msg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAccessKeySyncTaskRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface CreateAccessKeySyncTaskResponse {
+  /** 发起同步任务 */
+  TaskID?: number;
+  /** 0成功 1失败 */
+  Code?: number;
+  /** 错误信息 */
+  Msg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDomainAndIpRequest {
   /** 公网IP/域名 */
   Content: string[];
@@ -3163,6 +3381,70 @@ declare interface DeleteRiskScanTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAbnormalCallRecordRequest {
+  /** 告警规则ID */
+  AlarmRuleID: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 访问密钥 */
+  AccessKey?: string;
+  /** 调用源IP */
+  SourceIP?: string;
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeAbnormalCallRecordResponse {
+  /** 调用记录列表 */
+  Data?: CallRecord[];
+  /** 调用记录总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAccessKeyAlarmDetailRequest {
+  /** 告警记录ID */
+  ID: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeAccessKeyAlarmDetailResponse {
+  /** 告警信息 */
+  AlarmInfo?: AccessKeyAlarm;
+  /** 所属账号CAM策略数量 */
+  CamCount?: number;
+  /** AK风险数量 */
+  RiskCount?: number;
+  /** 告警策略描述 */
+  AlarmDesc?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAccessKeyAlarmRequest {
+  /** 过滤器 */
+  Filter?: Filter;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 访问密钥的ID */
+  AccessKeyID?: number;
+  /** 源IP的ID */
+  SourceIPID?: number;
+  /** 账号uin */
+  SubUin?: string;
+}
+
+declare interface DescribeAccessKeyAlarmResponse {
+  /** 告警列表 */
+  Data?: AccessKeyAlarm[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAccessKeyAssetRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -3174,6 +3456,82 @@ declare interface DescribeAccessKeyAssetResponse {
   /** 访问密钥资产列表 */
   Data?: AccessKeyAsset[];
   /** 全部数量 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAccessKeyRiskDetailRequest {
+  /** 风险记录ID */
+  ID: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeAccessKeyRiskDetailResponse {
+  /** 风险列表 */
+  RiskInfo?: AccessKeyRisk;
+  /** CAM策略总数 */
+  CamCount?: number;
+  /** 账号关联告警数量 */
+  AlarmCount?: number;
+  /** 访问方式 0 API 1 控制台与API */
+  AccessType?: number;
+  /** 访问密钥告警数量列表 */
+  AccessKeyAlarmCount?: AccessKeyAlarmCount[];
+  /** 操作保护是否开启 0 未开启 1 已开启 */
+  ActionFlag?: number;
+  /** 登录保护是否开启 0 未开启 1 已开启 */
+  LoginFlag?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAccessKeyRiskRequest {
+  /** 过滤器 */
+  Filter?: Filter;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 访问密钥的ID */
+  AccessKeyID?: number;
+  /** 账号uin */
+  SubUin?: string;
+}
+
+declare interface DescribeAccessKeyRiskResponse {
+  /** 风险列表 */
+  Data?: AccessKeyRisk[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAccessKeyUserDetailRequest {
+  /** 账号自身uin */
+  SubUin: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeAccessKeyUserDetailResponse {
+  /** 账号详情信息 */
+  User?: AccessKeyUser;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAccessKeyUserListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeAccessKeyUserListResponse {
+  /** 账号列表 */
+  Data?: AccessKeyUser[];
+  /** 总数 */
   Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3803,6 +4161,24 @@ declare interface DescribeRepositoryImageAssetsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRiskCallRecordRequest {
+  /** 风险记录ID */
+  RiskID: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeRiskCallRecordResponse {
+  /** 风险调用记录列表 */
+  Data?: RiskCallRecord[];
+  /** 调用记录总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRiskCenterAssetViewCFGRiskListRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -4339,6 +4715,24 @@ declare interface DescribeUebaRuleResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUserCallRecordRequest {
+  /** 账号uin */
+  SubUin: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeUserCallRecordResponse {
+  /** 账号调用记录列表 */
+  Data?: UserCallRecord[];
+  /** 调用记录总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeVULListRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -4593,6 +4987,50 @@ declare interface StopRiskCenterTaskResponse {
   RequestId?: string;
 }
 
+declare interface UpdateAccessKeyAlarmStatusRequest {
+  /** 状态 0:未处理 1:已处理 2:已忽略 */
+  Status: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 告警ID列表 */
+  AlarmIDList?: number[];
+  /** 风险ID列表 */
+  RiskIDList?: number[];
+}
+
+declare interface UpdateAccessKeyAlarmStatusResponse {
+  /** 0成功，1失败 */
+  Code?: number;
+  /** 错误信息 */
+  Msg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateAccessKeyRemarkRequest {
+  /** 备注 */
+  Remark: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 源IP 名称 */
+  SourceIPList?: string[];
+  /** ak名称 */
+  AccessKeyList?: string[];
+  /** 源IP的ID */
+  SourceIPIDList?: number[];
+  /** AK的ID */
+  AccessKeyIDList?: number[];
+}
+
+declare interface UpdateAccessKeyRemarkResponse {
+  /** 0:成功 1:失败 */
+  Code?: number;
+  /** 错误信息 */
+  Msg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateAlertStatusListRequest {
   /** 告警ID列表 */
   ID: NewAlertKey[];
@@ -4618,6 +5056,10 @@ declare interface Csip {
   (): Versions;
   /** csip角色授权绑定接口 {@link AddNewBindRoleUserRequest} {@link AddNewBindRoleUserResponse} */
   AddNewBindRoleUser(data?: AddNewBindRoleUserRequest, config?: AxiosRequestConfig): AxiosPromise<AddNewBindRoleUserResponse>;
+  /** 发起访问密钥的检测任务 {@link CreateAccessKeyCheckTaskRequest} {@link CreateAccessKeyCheckTaskResponse} */
+  CreateAccessKeyCheckTask(data?: CreateAccessKeyCheckTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessKeyCheckTaskResponse>;
+  /** 创建访问密钥的资产同步任务 {@link CreateAccessKeySyncTaskRequest} {@link CreateAccessKeySyncTaskResponse} */
+  CreateAccessKeySyncTask(data?: CreateAccessKeySyncTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessKeySyncTaskResponse>;
   /** 创建域名、ip相关信息 {@link CreateDomainAndIpRequest} {@link CreateDomainAndIpResponse} */
   CreateDomainAndIp(data: CreateDomainAndIpRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainAndIpResponse>;
   /** 创建风险中心扫描任务 {@link CreateRiskCenterScanTaskRequest} {@link CreateRiskCenterScanTaskResponse} */
@@ -4626,8 +5068,22 @@ declare interface Csip {
   DeleteDomainAndIp(data?: DeleteDomainAndIpRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainAndIpResponse>;
   /** 删除风险中心扫描任务 {@link DeleteRiskScanTaskRequest} {@link DeleteRiskScanTaskResponse} */
   DeleteRiskScanTask(data: DeleteRiskScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRiskScanTaskResponse>;
+  /** 获取异常调用记录 {@link DescribeAbnormalCallRecordRequest} {@link DescribeAbnormalCallRecordResponse} */
+  DescribeAbnormalCallRecord(data: DescribeAbnormalCallRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalCallRecordResponse>;
+  /** 获取访问密钥告警记录 {@link DescribeAccessKeyAlarmRequest} {@link DescribeAccessKeyAlarmResponse} */
+  DescribeAccessKeyAlarm(data?: DescribeAccessKeyAlarmRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessKeyAlarmResponse>;
+  /** 获取访问密钥告警详情 {@link DescribeAccessKeyAlarmDetailRequest} {@link DescribeAccessKeyAlarmDetailResponse} */
+  DescribeAccessKeyAlarmDetail(data: DescribeAccessKeyAlarmDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessKeyAlarmDetailResponse>;
   /** 获取访问密钥资产 {@link DescribeAccessKeyAssetRequest} {@link DescribeAccessKeyAssetResponse} */
   DescribeAccessKeyAsset(data?: DescribeAccessKeyAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessKeyAssetResponse>;
+  /** 获取访问密钥风险记录 {@link DescribeAccessKeyRiskRequest} {@link DescribeAccessKeyRiskResponse} */
+  DescribeAccessKeyRisk(data?: DescribeAccessKeyRiskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessKeyRiskResponse>;
+  /** 获取访问密钥风险详情 {@link DescribeAccessKeyRiskDetailRequest} {@link DescribeAccessKeyRiskDetailResponse} */
+  DescribeAccessKeyRiskDetail(data: DescribeAccessKeyRiskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessKeyRiskDetailResponse>;
+  /** 获取访问密钥的账号详情信息 {@link DescribeAccessKeyUserDetailRequest} {@link DescribeAccessKeyUserDetailResponse} */
+  DescribeAccessKeyUserDetail(data: DescribeAccessKeyUserDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessKeyUserDetailResponse>;
+  /** 获取访问密钥的账号列表 {@link DescribeAccessKeyUserListRequest} {@link DescribeAccessKeyUserListResponse} */
+  DescribeAccessKeyUserList(data?: DescribeAccessKeyUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessKeyUserListResponse>;
   /** 查询全量告警列表 {@link DescribeAlertListRequest} {@link DescribeAlertListResponse} */
   DescribeAlertList(data: DescribeAlertListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlertListResponse>;
   /** 查询云边界分析-暴露路径下主机节点的进程列表 {@link DescribeAssetProcessListRequest} {@link DescribeAssetProcessListResponse} */
@@ -4682,6 +5138,8 @@ declare interface Csip {
   DescribePublicIpAssets(data?: DescribePublicIpAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicIpAssetsResponse>;
   /** 仓库镜像列表 {@link DescribeRepositoryImageAssetsRequest} {@link DescribeRepositoryImageAssetsResponse} */
   DescribeRepositoryImageAssets(data?: DescribeRepositoryImageAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoryImageAssetsResponse>;
+  /** 获取风险对应的调用记录 {@link DescribeRiskCallRecordRequest} {@link DescribeRiskCallRecordResponse} */
+  DescribeRiskCallRecord(data: DescribeRiskCallRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCallRecordResponse>;
   /** 获取资产视角的配置风险列表 {@link DescribeRiskCenterAssetViewCFGRiskListRequest} {@link DescribeRiskCenterAssetViewCFGRiskListResponse} */
   DescribeRiskCenterAssetViewCFGRiskList(data?: DescribeRiskCenterAssetViewCFGRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterAssetViewCFGRiskListResponse>;
   /** 获取资产视角的端口风险列表 {@link DescribeRiskCenterAssetViewPortRiskListRequest} {@link DescribeRiskCenterAssetViewPortRiskListResponse} */
@@ -4728,6 +5186,8 @@ declare interface Csip {
   DescribeTopAttackInfo(data: DescribeTopAttackInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopAttackInfoResponse>;
   /** 查询用户行为分析策略列表 {@link DescribeUebaRuleRequest} {@link DescribeUebaRuleResponse} */
   DescribeUebaRule(data?: DescribeUebaRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUebaRuleResponse>;
+  /** 获取账号的调用记录 {@link DescribeUserCallRecordRequest} {@link DescribeUserCallRecordResponse} */
+  DescribeUserCallRecord(data: DescribeUserCallRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserCallRecordResponse>;
   /** 风险中心-漏洞列表 {@link DescribeVULListRequest} {@link DescribeVULListResponse} */
   DescribeVULList(data?: DescribeVULListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVULListResponse>;
   /** 查询漏洞风险高级配置 {@link DescribeVULRiskAdvanceCFGListRequest} {@link DescribeVULRiskAdvanceCFGListResponse} */
@@ -4750,6 +5210,10 @@ declare interface Csip {
   ModifyUebaRuleSwitch(data: ModifyUebaRuleSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUebaRuleSwitchResponse>;
   /** 停止扫风险中心扫描任务 {@link StopRiskCenterTaskRequest} {@link StopRiskCenterTaskResponse} */
   StopRiskCenterTask(data: StopRiskCenterTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopRiskCenterTaskResponse>;
+  /** 修改告警或者风险状态 {@link UpdateAccessKeyAlarmStatusRequest} {@link UpdateAccessKeyAlarmStatusResponse} */
+  UpdateAccessKeyAlarmStatus(data: UpdateAccessKeyAlarmStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAccessKeyAlarmStatusResponse>;
+  /** 编辑访问密钥备注 {@link UpdateAccessKeyRemarkRequest} {@link UpdateAccessKeyRemarkResponse} */
+  UpdateAccessKeyRemark(data: UpdateAccessKeyRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAccessKeyRemarkResponse>;
   /** 批量告警状态处理 {@link UpdateAlertStatusListRequest} {@link UpdateAlertStatusListResponse} */
   UpdateAlertStatusList(data: UpdateAlertStatusListRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAlertStatusListResponse>;
 }

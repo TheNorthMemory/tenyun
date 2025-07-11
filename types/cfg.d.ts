@@ -584,6 +584,10 @@ declare interface Template {
   AlarmPolicy?: string[];
   /** 护栏处理方式，1--顺序回滚，2--演练暂停 */
   PolicyDealType?: number;
+  /** 演练场景 */
+  TemplateScenario?: TaskTarget[];
+  /** 演练目的 */
+  TemplatePurpose?: TaskTarget[];
 }
 
 /** 任务分组 */

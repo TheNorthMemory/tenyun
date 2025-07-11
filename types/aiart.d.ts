@@ -576,7 +576,7 @@ declare interface UploadTrainPortraitImagesResponse {
   RequestId?: string;
 }
 
-/** {@link Aiart 大模型图像创作引擎} */
+/** {@link Aiart 腾讯混元生图} */
 declare interface Aiart {
   (): Versions;
   /** 模特换装 {@link ChangeClothesRequest} {@link ChangeClothesResponse} */
@@ -617,9 +617,9 @@ declare interface Aiart {
   SubmitTrainPortraitModelJob(data: SubmitTrainPortraitModelJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTrainPortraitModelJobResponse>;
   /** 智能文生图（即将下线） {@link TextToImageRequest} {@link TextToImageResponse} */
   TextToImage(data: TextToImageRequest, config?: AxiosRequestConfig): AxiosPromise<TextToImageResponse>;
-  /** 文生图轻量版 {@link TextToImageLiteRequest} {@link TextToImageLiteResponse} */
+  /** 混元生图（极速版） {@link TextToImageLiteRequest} {@link TextToImageLiteResponse} */
   TextToImageLite(data: TextToImageLiteRequest, config?: AxiosRequestConfig): AxiosPromise<TextToImageLiteResponse>;
-  /** 文生图极速版 {@link TextToImageRapidRequest} {@link TextToImageRapidResponse} */
+  /** 混元生图 2.0 {@link TextToImageRapidRequest} {@link TextToImageRapidResponse} */
   TextToImageRapid(data: TextToImageRapidRequest, config?: AxiosRequestConfig): AxiosPromise<TextToImageRapidResponse>;
   /** 上传写真训练图片 {@link UploadTrainPortraitImagesRequest} {@link UploadTrainPortraitImagesResponse} */
   UploadTrainPortraitImages(data: UploadTrainPortraitImagesRequest, config?: AxiosRequestConfig): AxiosPromise<UploadTrainPortraitImagesResponse>;

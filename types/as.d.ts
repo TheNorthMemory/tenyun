@@ -598,6 +598,8 @@ declare interface RefreshSettings {
   RollingUpdateSettings: RollingUpdateSettings;
   /** 实例后端服务健康状态检查，默认为 FALSE。仅针对绑定应用型负载均衡器的伸缩组生效，开启该检查后，如刷新后实例未通过检查，负载均衡器端口权重始终为 0，且标记为刷新失败。取值范围如下：TRUE：开启检查FALSE：不开启检查 */
   CheckInstanceTargetHealth?: boolean;
+  /** 实例后端服务健康状态检查的超时时间，单位为秒，取值范围[60,7200]，默认时间1800秒。仅在CheckInstanceTargetHealth参数开启后生效，若实例健康检查超时，则标记为刷新失败。 */
+  CheckInstanceTargetHealthTimeout?: number;
 }
 
 /** 与本次伸缩活动相关的实例信息。 */

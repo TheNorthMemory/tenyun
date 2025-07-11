@@ -183,7 +183,7 @@ declare interface SubmitPortraitSingJobResponse {
 }
 
 declare interface SubmitTemplateToVideoJobRequest {
-  /** 特效模板名称。枚举值：hug ：拥抱kiss ：亲吻heart ： 比心fuzzy ： 毛茸茸befigure：变手办风longhair：金色长发morphlab：膨胀bloom：万物生花pinch：捏捏balloonfly：飞走了dragme：被拽走了 */
+  /** 特效模板名称。请在 [视频特效模版列表](https://cloud.tencent.com/document/product/1616/119194) 中选择想要生成的特效对应的 template 名称。 */
   Template: string;
   /** 参考图像，最多输入2张图。- 支持传入图片Base64编码或图片URL（确保可访问）- 图片格式：支持png、jpg、jpeg、webp、bmp、tiff- 图片文件：大小不能超过10MB（base64后），图片分辨率不小于300\*300px，不大于4096\*4096，图片宽高比应在1:4 ~ 4:1之间 */
   Images: Image[];
@@ -216,7 +216,7 @@ declare interface SubmitVideoStylizationJobResponse {
   RequestId?: string;
 }
 
-/** {@link Vclm 大模型视频创作引擎} */
+/** {@link Vclm 腾讯混元生视频} */
 declare interface Vclm {
   (): Versions;
   /** 校验图片跳舞输入图 {@link CheckAnimateImageJobRequest} {@link CheckAnimateImageJobResponse} */

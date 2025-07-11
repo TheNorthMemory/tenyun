@@ -252,7 +252,7 @@ declare interface ChannelRole {
   PermissionGroups?: PermissionGroup[];
 }
 
-/** 签署人配置信息 */
+/** 签署人配置信息。此参数对子客和自动签无效，不允许进行修改。 */
 declare interface CommonApproverOption {
   /** 是否允许修改签署人信息 */
   CanEditApprover?: boolean;
@@ -378,7 +378,7 @@ declare interface CreateFlowOption {
   HideShowDeadline?: boolean;
   /** 是否允许发起合同步骤跳过指定签署方步骤**true**：允许**false**：（默认）不允许 */
   CanSkipAddApprover?: boolean;
-  /** 是否可以编辑签署人包括新增，修改，删除 （默认） false -可以编辑签署人 true - 禁止编辑签署人注意：如果设置参数为 true， 则 参数签署人 [FlowApproverList](https://qian.tencent.com/developers/partnerApis/embedPages/ChannelCreatePrepareFlow) 不能为空 */
+  /** 是否可以编辑签署人包括新增，修改，删除 （默认） false -可以编辑签署人 true - 禁止编辑签署人注意：* 如果设置参数为 true， 则 参数签署人 [FlowApproverList](https://qian.tencent.com/developers/partnerApis/embedPages/ChannelCreatePrepareFlow) 不能为空* 此参数对子客和自动签无效，不允许进行修改。 */
   ForbidEditApprover?: boolean;
   /** 定制化发起合同弹窗的描述信息，长度不能超过500，只能由中文、字母、数字和标点组成。 */
   CustomCreateFlowDescription?: string;
@@ -604,7 +604,7 @@ declare interface FlowApproverInfo {
   Deadline?: number;
   /** 签署完回调url，最大长度1000个字符 */
   CallbackUrl?: string;
-  /** 使用PDF文件直接发起合同时，签署人指定的签署控件；使用模板发起合同时，指定本企业印章签署控件的印章ID: 通过ComponentId或ComponenetName指定签署控件，ComponentValue为印章ID。![image](https://qcloudimg.tencent-cloud.cn/raw/91757a7f9188ccf3057a4a8979cf3f93.png) */
+  /** 使用PDF文件直接发起合同时，签署人指定的签署控件；使用模板发起合同时，指定本企业印章签署控件的印章ID:注意：(如果模板里面指定了印章，默认使用模板里面配置的印章，不能进行变更) 通过ComponentId或ComponenetName指定签署控件，ComponentValue为印章ID。![image](https://qcloudimg.tencent-cloud.cn/raw/91757a7f9188ccf3057a4a8979cf3f93.png) */
   SignComponents?: Component[];
   /** 当签署方控件类型为 SIGN_SIGNATURE 时，可以指定签署方签名方式。如果不指定，签署人可以使用所有的签名类型，可指定的签名类型包括： HANDWRITE :需要实时手写的手写签名。 HANDWRITTEN_ESIGN :长效手写签名， 是使用保存到个人中心的印章列表的手写签名。(并且包含HANDWRITE) OCR_ESIGN :AI智能识别手写签名。 ESIGN :个人印章类型。 IMG_ESIGN : 图片印章。该类型支持用户在签署将上传的PNG格式的图片作为签名。 SYSTEM_ESIGN :系统签名。该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署。各种签名的样式可以参考下图：![image](https://qcloudimg.tencent-cloud.cn/raw/ee0498856c060c065628a0c5ba780d6b.jpg) */
   ComponentLimitType?: string[];
