@@ -278,7 +278,7 @@ declare interface InstanceInfo {
   MasterSummary?: NodesSummary;
   /** zookeeper节点描述信息 */
   CommonSummary?: NodesSummary;
-  /** 高可用，“true" "false" */
+  /** 高可用,"true" "false" */
   HA?: string;
   /** 访问地址，例如 "10.0.0.1:9000" */
   AccessInfo?: string;
@@ -358,6 +358,8 @@ declare interface InstanceInfo {
   BindSGs?: string[];
   /** 是否开启公网clb */
   HasPublicCloudClb?: boolean;
+  /** 可升级的zk版本 */
+  UpgradeZkVersions?: string;
 }
 
 /** 实例节点描述信息 */

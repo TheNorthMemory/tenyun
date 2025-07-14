@@ -576,7 +576,7 @@ declare interface UploadTrainPortraitImagesResponse {
   RequestId?: string;
 }
 
-/** {@link Aiart 腾讯混元生图} */
+/** {@link Aiart 大模型图像创作引擎} */
 declare interface Aiart {
   (): Versions;
   /** 模特换装 {@link ChangeClothesRequest} {@link ChangeClothesResponse} */

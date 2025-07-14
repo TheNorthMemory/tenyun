@@ -292,7 +292,7 @@ declare interface RunGroup {
   InputType?: string;
   /** 输入COS地址。 */
   InputCosUri?: string;
-  /** 输入模版ID。 */
+  /** 输入模板ID。 */
   InputTemplateId?: string;
   /** WDL运行选项。 */
   Option?: RunOption;

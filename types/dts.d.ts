@@ -452,6 +452,8 @@ declare interface DifferenceDetail {
 declare interface DifferenceItem {
   /** 数据库名 */
   Db?: string;
+  /** schema */
+  Schema?: string;
   /** 表名 */
   Table?: string;
   /** 分块号 */
@@ -964,6 +966,8 @@ declare interface SkippedDetail {
 declare interface SkippedItem {
   /** 数据库名 */
   Db?: string;
+  /** schema名 */
+  Schema?: string;
   /** 表名 */
   Table?: string;
   /** 未发起检查的原因 */
@@ -1158,7 +1162,7 @@ declare interface SyncDetailInfo {
   Message?: string;
   /** 详细步骤信息 */
   StepInfos?: StepInfo[] | null;
-  /** 不能发起一致性校验的原因 */
+  /** 不能发起内置校验的原因 */
   CauseOfCompareDisable?: string;
   /** 任务的错误和解决方案信息 */
   ErrInfo?: ErrInfo;

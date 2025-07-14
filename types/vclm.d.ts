@@ -216,7 +216,7 @@ declare interface SubmitVideoStylizationJobResponse {
   RequestId?: string;
 }
 
-/** {@link Vclm 腾讯混元生视频} */
+/** {@link Vclm 大模型视频创作引擎} */
 declare interface Vclm {
   (): Versions;
   /** 校验图片跳舞输入图 {@link CheckAnimateImageJobRequest} {@link CheckAnimateImageJobResponse} */

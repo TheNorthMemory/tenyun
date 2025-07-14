@@ -520,7 +520,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   afc: Afc,
   /** {@link Ai3d 腾讯混元生3D} */
   ai3d: Ai3d,
-  /** {@link Aiart 腾讯混元生图} */
+  /** {@link Aiart 大模型图像创作引擎} */
   aiart: Aiart,
   /** {@link Ame 正版曲库直通车} */
   ame: Ame,
@@ -948,7 +948,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   tts: Tts,
   /** {@link Vcg 视频生成} */
   vcg: Vcg,
-  /** {@link Vclm 腾讯混元生视频} */
+  /** {@link Vclm 大模型视频创作引擎} */
   vclm: Vclm,
   /** {@link Vcube 音视频终端引擎} */
   vcube: Vcube,

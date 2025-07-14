@@ -1944,6 +1944,14 @@ declare interface CopyCasterResponse {
   RequestId?: string;
 }
 
+declare interface CreateAuditKeywordsRequest {
+}
+
+declare interface CreateAuditKeywordsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCasterInputPushUrlRequest {
   /** 导播台ID */
   CasterId: number;
@@ -2584,6 +2592,14 @@ declare interface CreateScreenshotTaskResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAuditKeywordsRequest {
+}
+
+declare interface DeleteAuditKeywordsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCasterInputInfoRequest {
   /** 导播台ID */
   CasterId: number;
@@ -2930,6 +2946,14 @@ declare interface DescribeAreaBillBandwidthAndFluxListRequest {
 declare interface DescribeAreaBillBandwidthAndFluxListResponse {
   /** 明细数据信息。 */
   DataInfoList: BillAreaInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAuditKeywordsRequest {
+}
+
+declare interface DescribeAuditKeywordsResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5441,6 +5465,8 @@ declare interface Live {
   CancelCommonMixStream(data: CancelCommonMixStreamRequest, config?: AxiosRequestConfig): AxiosPromise<CancelCommonMixStreamResponse>;
   /** 复制导播台 {@link CopyCasterRequest} {@link CopyCasterResponse} */
   CopyCaster(data: CopyCasterRequest, config?: AxiosRequestConfig): AxiosPromise<CopyCasterResponse>;
+  /** 直播审核创建关键词 {@link CreateAuditKeywordsRequest} {@link CreateAuditKeywordsResponse} */
+  CreateAuditKeywords(data?: CreateAuditKeywordsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditKeywordsResponse>;
   /** 创建导播台 {@link CreateCasterRequest} {@link CreateCasterResponse} */
   CreateCaster(data?: CreateCasterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCasterResponse>;
   /** 生成导播台推流URL {@link CreateCasterInputPushUrlRequest} {@link CreateCasterInputPushUrlResponse} */
@@ -5491,6 +5517,8 @@ declare interface Live {
   CreateRecordTask(data: CreateRecordTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordTaskResponse>;
   /** 创建截图任务 {@link CreateScreenshotTaskRequest} {@link CreateScreenshotTaskResponse} */
   CreateScreenshotTask(data: CreateScreenshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScreenshotTaskResponse>;
+  /** 直播审核删除关键词 {@link DeleteAuditKeywordsRequest} {@link DeleteAuditKeywordsResponse} */
+  DeleteAuditKeywords(data?: DeleteAuditKeywordsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditKeywordsResponse>;
   /** 删除导播台 {@link DeleteCasterRequest} {@link DeleteCasterResponse} */
   DeleteCaster(data: DeleteCasterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCasterResponse>;
   /** 删除导播台输入源 {@link DeleteCasterInputInfoRequest} {@link DeleteCasterInputInfoResponse} */
@@ -5549,6 +5577,8 @@ declare interface Live {
   DescribeAllStreamPlayInfoList(data: DescribeAllStreamPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllStreamPlayInfoListResponse>;
   /** 海外分区直播播放带宽和流量数据查询 {@link DescribeAreaBillBandwidthAndFluxListRequest} {@link DescribeAreaBillBandwidthAndFluxListResponse} */
   DescribeAreaBillBandwidthAndFluxList(data: DescribeAreaBillBandwidthAndFluxListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAreaBillBandwidthAndFluxListResponse>;
+  /** 直播审核获取关键词 {@link DescribeAuditKeywordsRequest} {@link DescribeAuditKeywordsResponse} */
+  DescribeAuditKeywords(data?: DescribeAuditKeywordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditKeywordsResponse>;
   /** 查询直播中的主备流 {@link DescribeBackupStreamListRequest} {@link DescribeBackupStreamListResponse} */
   DescribeBackupStreamList(data?: DescribeBackupStreamListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupStreamListResponse>;
   /** 直播播放带宽和流量数据查询 {@link DescribeBillBandwidthAndFluxListRequest} {@link DescribeBillBandwidthAndFluxListResponse} */
