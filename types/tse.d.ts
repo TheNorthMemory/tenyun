@@ -946,6 +946,14 @@ declare interface GatewayInstanceSchemeAndPorts {
   PortList?: number[];
 }
 
+/** 轻量查询网关服务列表出参 */
+declare interface GatewayServices {
+  /** 服务列表 */
+  ServiceList?: KongServiceLightPreview[];
+  /** 结果总数 */
+  TotalCount?: number;
+}
+
 /** 服务别名结构信息 */
 declare interface GovernanceAlias {
   /** 服务别名 */
@@ -1440,6 +1448,28 @@ declare interface KongServiceDetail {
   Editable?: boolean;
   /** 创建时间 */
   CreatedTime?: string;
+}
+
+/** 云原生网关服务简洁预览信息 */
+declare interface KongServiceLightPreview {
+  /** 服务ID */
+  ID?: string;
+  /** 服务名字 */
+  Name?: string;
+  /** 后端配置 */
+  UpstreamInfo?: KongUpstreamInfo;
+  /** 后端类型 */
+  UpstreamType?: string;
+  /** 创建时间 */
+  CreatedTime?: string;
+  /** 请求路径 */
+  Path?: string | null;
+  /** 后端协议 */
+  Protocol?: string;
+  /** 重试次数 */
+  Retries?: number;
+  /** 后端延时，单位ms */
+  Timeout?: number;
 }
 
 /** 云原生网关服务预览信息 */
@@ -3036,6 +3066,24 @@ declare interface DescribeCloudNativeAPIGatewayServiceRateLimitResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCloudNativeAPIGatewayServicesLightRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 列表数量 */
+  Limit?: number;
+  /** 列表 offset */
+  Offset?: number;
+  /** 过滤条件，多个过滤条件之间是与的关系，支持 id、name、upstreamType */
+  Filters?: ListFilter[];
+}
+
+declare interface DescribeCloudNativeAPIGatewayServicesLightResponse {
+  /** 无 */
+  Result?: GatewayServices;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCloudNativeAPIGatewayServicesRequest {
   /** 网关ID */
   GatewayId: string;
@@ -4392,6 +4440,8 @@ declare interface Tse {
   DescribeCloudNativeAPIGatewayServiceRateLimit(data: DescribeCloudNativeAPIGatewayServiceRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayServiceRateLimitResponse>;
   /** 查询云原生网关服务列表 {@link DescribeCloudNativeAPIGatewayServicesRequest} {@link DescribeCloudNativeAPIGatewayServicesResponse} */
   DescribeCloudNativeAPIGatewayServices(data: DescribeCloudNativeAPIGatewayServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayServicesResponse>;
+  /** 轻量查询云原生网关服务列表 {@link DescribeCloudNativeAPIGatewayServicesLightRequest} {@link DescribeCloudNativeAPIGatewayServicesLightResponse} */
+  DescribeCloudNativeAPIGatewayServicesLight(data: DescribeCloudNativeAPIGatewayServicesLightRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayServicesLightResponse>;
   /** 获取云原生网关服务详情下的Upstream列表 {@link DescribeCloudNativeAPIGatewayUpstreamRequest} {@link DescribeCloudNativeAPIGatewayUpstreamResponse} */
   DescribeCloudNativeAPIGatewayUpstream(data: DescribeCloudNativeAPIGatewayUpstreamRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayUpstreamResponse>;
   /** 获取云原生网关实例列表 {@link DescribeCloudNativeAPIGatewaysRequest} {@link DescribeCloudNativeAPIGatewaysResponse} */

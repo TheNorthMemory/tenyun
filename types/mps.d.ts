@@ -3353,15 +3353,15 @@ declare interface LiveStreamAiReviewResultInfo {
 /** 直播流 AI 审核结果 */
 declare interface LiveStreamAiReviewResultItem {
   /** 审核结果的类型，可以取的值有：ImagePorn：图片鉴黄ImageTerrorism：图片涉敏ImagePolitical：图片涉敏VoicePorn：声音违规 */
-  Type: string;
+  Type?: string;
   /** 图片鉴黄的结果，当 Type 为 ImagePorn 时有效。 */
-  ImagePornResultSet: LiveStreamAiReviewImagePornResult[];
+  ImagePornResultSet?: LiveStreamAiReviewImagePornResult[];
   /** 图片涉敏的结果，当 Type 为 ImageTerrorism 时有效。 */
-  ImageTerrorismResultSet: LiveStreamAiReviewImageTerrorismResult[];
+  ImageTerrorismResultSet?: LiveStreamAiReviewImageTerrorismResult[];
   /** 图片涉敏的结果，当 Type 为 ImagePolitical 时有效。 */
-  ImagePoliticalResultSet: LiveStreamAiReviewImagePoliticalResult[];
+  ImagePoliticalResultSet?: LiveStreamAiReviewImagePoliticalResult[];
   /** 声音违规的结果，当 Type 为 VoicePorn 时有效。 */
-  VoicePornResultSet: LiveStreamAiReviewVoicePornResult[];
+  VoicePornResultSet?: LiveStreamAiReviewVoicePornResult[];
 }
 
 /** 直播 AI 内容审核声音鉴黄结果 */

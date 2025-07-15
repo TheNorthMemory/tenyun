@@ -755,7 +755,7 @@ declare interface Apm {
   DescribeApmInstances(data?: DescribeApmInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmInstancesResponse>;
   /** 查询应用配置信息 {@link DescribeGeneralApmApplicationConfigRequest} {@link DescribeGeneralApmApplicationConfigResponse} */
   DescribeGeneralApmApplicationConfig(data: DescribeGeneralApmApplicationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralApmApplicationConfigResponse>;
-  /** 获取指标数据通用接口 {@link DescribeGeneralMetricDataRequest} {@link DescribeGeneralMetricDataResponse} */
+  /** 获取指标数据通用接口（推荐） {@link DescribeGeneralMetricDataRequest} {@link DescribeGeneralMetricDataResponse} */
   DescribeGeneralMetricData(data: DescribeGeneralMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralMetricDataResponse>;
   /** 通用查询 OpenTelemetry 调用链列表 {@link DescribeGeneralOTSpanListRequest} {@link DescribeGeneralOTSpanListResponse} */
   DescribeGeneralOTSpanList(data: DescribeGeneralOTSpanListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralOTSpanListResponse>;

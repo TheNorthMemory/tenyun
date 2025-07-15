@@ -752,7 +752,7 @@ declare interface DescribeCNInstancesResponse {
   TotalCount?: number | null;
   /** 实例数组 */
   InstancesList?: CnInstanceInfo[] | null;
-  /** - */
+  /** 错误信息 */
   ErrorMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

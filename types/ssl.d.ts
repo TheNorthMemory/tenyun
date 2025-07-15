@@ -412,6 +412,8 @@ declare interface DeployRecord {
   Status?: number;
   /** 托管资源创建时间 */
   CreateTime?: string;
+  /** 待部署总数 */
+  PendingTotalCount?: number;
 }
 
 /** 部署记录详情 */
@@ -2240,6 +2242,8 @@ declare interface DescribeHostDeployRecordDetailResponse {
   FailedTotalCount?: number;
   /** 部署中总数 */
   RunningTotalCount?: number;
+  /** 带部署总数 */
+  PendingTotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2384,6 +2388,8 @@ declare interface DescribeHostUpdateRecordDetailResponse {
   FailedTotalCount?: number;
   /** 部署中总数,如果取不到返回0 */
   RunningTotalCount?: number;
+  /** 待部署总数 */
+  PendingTotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2860,7 +2866,7 @@ declare interface UploadCertificateRequest {
 declare interface UploadCertificateResponse {
   /** 证书 ID。 */
   CertificateId?: string;
-  /** 重复证书的ID */
+  /** 当入参Repeatable为false的时候 返回的重复证书的ID，注意当用户上传相同的证书超过5000张的时候，当前接口会无视入参Repeatable，直接返回重复证书的ID。 */
   RepeatCertId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

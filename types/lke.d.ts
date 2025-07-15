@@ -628,14 +628,6 @@ declare interface Context {
   ReplyMethod?: number | null;
 }
 
-/** 坐标 */
-declare interface Coord {
-  /** 横坐标 */
-  X?: number;
-  /** 纵坐标 */
-  Y?: number;
-}
-
 /** 临时密钥结构 */
 declare interface Credentials {
   /** token */
@@ -702,50 +694,6 @@ declare interface DocSegment {
   WebUrl?: string;
   /** 页码信息 */
   PageInfos?: number[];
-}
-
-/** 文档元素字段 */
-declare interface DocumentElement {
-  /** 文档元素索引 */
-  Index?: number | null;
-  /** 元素类型，包括paragraph、table、formula、figure、title、header、footer、figure_text */
-  Type?: string | null;
-  /** 元素内容，当type为figure或formula(公式识别关闭)时该字段内容为图片的位置 */
-  Text?: string | null;
-  /** 元素坐标，左上角(x1, y1)，右上角(x2, y2)，右下角(x3, y3)，左下角(x4, y4) */
-  Polygon?: Polygon | null;
-  /** 元素层级 */
-  Level?: number | null;
-  /** 入参开启EnableInsetImage后返回，表示在InsetImagePackage中的内嵌图片名称 */
-  InsetImageName?: string | null;
-  /** 嵌套的文档元素信息，一般包含的是文档内嵌入图片的文字识别结果 */
-  Elements?: DocumentElement[] | null;
-}
-
-/** 单页文档识别的内容 */
-declare interface DocumentRecognizeInfo {
-  /** 输入PDF文件的页码，从1开始。输入图片的话值始终为1 */
-  PageNumber?: number | null;
-  /** 旋转角度 */
-  Angle?: number | null;
-  /** AI算法识别处理后的图片高度 */
-  Height?: number | null;
-  /** AI算法识别处理后的图片宽度 */
-  Width?: number | null;
-  /** 图片的原始高度，输入PDF文件则表示单页PDF转图片之后的图片高度 */
-  OriginHeight?: number | null;
-  /** 图片的原始宽度，输入PDF文件则表示单页PDF转图片之后的图片宽度 */
-  OriginWidth?: number | null;
-  /** 文档元素信息 */
-  Elements?: DocumentElement[] | null;
-  /** 旋转角度 */
-  RotatedAngle?: number | null;
-}
-
-/** 向量 */
-declare interface EmbeddingObject {
-  /** 向量 */
-  Embedding?: number[];
 }
 
 /** 扩展信息 */
@@ -1198,14 +1146,6 @@ declare interface ListReleaseItem {
   FailCount?: number;
 }
 
-/** 一条message代表一条对话记录role表示角色 user或者assistantcontent表示对话内容 */
-declare interface Message {
-  /** role表示角色 user标识用户提问，assistant标识返回的答案 */
-  Role: string | null;
-  /** 对话内容 */
-  Content: string | null;
-}
-
 /** 模型信息 */
 declare interface ModelInfo {
   /** 模型名称 */
@@ -1454,18 +1394,6 @@ declare interface PluginToolReqParam {
   AnyOf?: PluginToolReqParam[];
 }
 
-/** 文本的坐标，以四个顶点坐标表示注意：此字段可能返回 null，表示取不到有效值 */
-declare interface Polygon {
-  /** 左上顶点坐标 */
-  LeftTop?: Coord;
-  /** 右上顶点坐标 */
-  RightTop?: Coord;
-  /** 右下顶点坐标 */
-  RightBottom?: Coord;
-  /** 左下顶点坐标 */
-  LeftBottom?: Coord;
-}
-
 /** 执行过程信息记录 */
 declare interface Procedure {
   /** 执行过程英语名 */
@@ -1568,26 +1496,6 @@ declare interface QuoteInfo {
   Position?: number | null;
   /** 参考来源索引顺序 */
   Index?: string | null;
-}
-
-/** 重排数据, 计算2段内容的关联性 */
-declare interface ReRankDataObject {
-  /** 第一段内容 */
-  PromptA: string;
-  /** 第二段内容 */
-  PromptB: string;
-}
-
-/** ReconstructDocument配置选项 */
-declare interface ReconstructDocumentConfig {
-  /** 生成的Markdown中是否嵌入图片 */
-  EnableInsetImage?: boolean;
-}
-
-/** 文档解析失败记录 */
-declare interface ReconstructDocumentFailedPage {
-  /** 失败页码 */
-  PageNumber?: number | null;
 }
 
 /** 引用来源详情 */
@@ -1918,18 +1826,6 @@ declare interface UnsatisfiedReply {
   Reasons?: string[] | null;
 }
 
-/** 消耗量 */
-declare interface Usage {
-  /** 文档页数 */
-  TotalPages?: number;
-  /** 输入token数 */
-  InputTokens?: number;
-  /** 输出token数 */
-  OutputTokens?: number;
-  /** 总token数 */
-  TotalTokens?: number;
-}
-
 /** 用户基础信息 */
 declare interface UserBaseInfo {
   /** 用户ID */
@@ -1966,14 +1862,6 @@ declare interface VoiceConfig {
   TimbreKey?: string | null;
   /** 音色名称 */
   VoiceName?: string | null;
-}
-
-/** 解析为 word 文档的结果 */
-declare interface WordRecognizeInfo {
-  /** 输入文件的页码数 */
-  PageNumber?: number | null;
-  /** word的base64 */
-  WordBase64?: string | null;
 }
 
 /** 工作流程调试信息 */
@@ -2152,24 +2040,6 @@ declare interface CheckAttributeLabelReferResponse {
   RequestId?: string;
 }
 
-declare interface ConvertDocumentRequest {
-  /** 图片的 Url 地址。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经 Base64 编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  FileUrl?: string;
-  /** 图片的 Base64 值。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经Base64编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  FileBase64?: string;
-  /** 当传入文件是PDF类型（FileType=PDF）时，用来指定pdf识别的起始页码，识别的页码包含当前值。 */
-  FileStartPageNumber?: number;
-  /** 当传入文件是PDF类型（FileType=PDF）时，用来指定pdf识别的结束页码，识别的页码包含当前值。建议一次请求的页面不超过3页。 */
-  FileEndPageNumber?: number;
-}
-
-declare interface ConvertDocumentResponse {
-  /** 识别生成的word文件base64编码的字符串 */
-  WordRecognizeInfo?: WordRecognizeInfo[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateAgentRequest {
   /** 应用ID */
   AppBizId?: string;
@@ -2220,24 +2090,6 @@ declare interface CreateAttributeLabelRequest {
 declare interface CreateAttributeLabelResponse {
   /** 标签ID */
   AttrBizId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateCorpRequest {
-  /** 企业全称 */
-  FullName: string;
-  /** 联系人名称 */
-  ContactName: string;
-  /** 联系人邮箱 */
-  Email?: string;
-  /** 联系人手机号 */
-  Telephone?: string;
-}
-
-declare interface CreateCorpResponse {
-  /** 企业ID */
-  CorpBizId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2714,28 +2566,6 @@ declare interface DescribeConcurrencyUsageResponse {
   ConcurrencyPeak?: number;
   /** 超出可用并发数上限的次数 */
   ExceedUsageTime?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeCorpRequest {
-}
-
-declare interface DescribeCorpResponse {
-  /** 企业ID */
-  CorpBizId?: string;
-  /** 应用配额 */
-  RobotQuota?: number;
-  /** 企业全称 */
-  FullName?: string;
-  /** 是否试用 */
-  IsTrial?: boolean;
-  /** 是否试用过期 */
-  IsTrialExpired?: boolean;
-  /** 可用应用数量 */
-  AvailableAppQuota?: number;
-  /** 是否支持自定义模型配置 */
-  IsSupportCustomModel?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3348,24 +3178,6 @@ declare interface GetDocPreviewResponse {
   RequestId?: string;
 }
 
-declare interface GetEmbeddingRequest {
-  /** 模型名称 */
-  Model: string;
-  /** 需要 embedding 的文本, 单条文本最大长度500个字符, 总条数最大7条 */
-  Inputs: string[];
-  /** 是否在线, 后台异步任务使用离线, 实时任务使用在线, 默认值: false */
-  Online?: boolean;
-}
-
-declare interface GetEmbeddingResponse {
-  /** 特征 */
-  Data?: EmbeddingObject[];
-  /** 消耗量，返回TotalToken */
-  Usage?: Usage;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface GetLikeDataCountRequest {
   /** 开始日期 */
   StartTime: number;
@@ -3422,22 +3234,6 @@ declare interface GetMsgRecordResponse {
   Records?: MsgRecord[];
   /** session 清除关联上下文时间, 单位 ms */
   SessionDisassociatedTimestamp?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface GetReconstructDocumentResultRequest {
-  /** 任务唯一Id。[CreateReconstructDocumentFlow](https://cloud.tencent.com/document/product/1759/107506) 返回的TaskId。 */
-  TaskId: string;
-}
-
-declare interface GetReconstructDocumentResultResponse {
-  /** 任务状态: Success->执行完成；Processing->执行中；Failed->执行失败；WaitExecute->等待执行。 */
-  Status?: string;
-  /** 本次文档解析的结果文件，存储在腾讯云COS的下载URL，下载URL的有效期为10分钟。 */
-  DocumentRecognizeResultUrl?: string;
-  /** 本次文档解析失败的页码信息。 */
-  FailedPages?: ReconstructDocumentFailedPage[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4266,24 +4062,6 @@ declare interface ModifyRejectedQuestionResponse {
   RequestId?: string;
 }
 
-declare interface QueryRewriteRequest {
-  /** 需要改写的问题 */
-  Question: string;
-  /** 需要改写的多轮历史会话，每轮历史对话需要包含user（问）和assistant（答）成对输入，由于模型字符限制，最多提供4轮对话。 */
-  Messages: Message[];
-  /** 模型名称 */
-  Model?: string;
-}
-
-declare interface QueryRewriteResponse {
-  /** 改写结果 */
-  Content?: string;
-  /** 消耗量，返回输入token数，输出token数以及总token数 */
-  Usage?: Usage;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface RateMsgRecordRequest {
   /** 应用appKey */
   BotAppKey: string;
@@ -4296,30 +4074,6 @@ declare interface RateMsgRecordRequest {
 }
 
 declare interface RateMsgRecordResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ReconstructDocumentRequest {
-  /** 文件的 Base64 值。 支持的文件格式：PNG、JPG、JPEG、PDF。 支持的文件大小：所下载文件经Base64编码后不超过 8M。文件下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 文件的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。 */
-  FileBase64?: string;
-  /** 文件的 Url 地址。 支持的文件格式：PNG、JPG、JPEG、PDF。 支持的文件大小：所下载文件经 Base64 编码后不超过 8M。文件下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 文件存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  FileUrl?: string;
-  /** 当传入文件是PDF类型时，用来指定pdf识别的起始页码，识别的页码包含当前值。默认为1，表示从pdf文件的第1页开始识别。 */
-  FileStartPageNumber?: number;
-  /** 当传入文件是PDF类型时，用来指定pdf识别的结束页码，识别的页码包含当前值。默认为10，表示识别到pdf文件的第10页。单次调用最多支持识别10页内容，即FileEndPageNumber-FileStartPageNumber需要不大于10。 */
-  FileEndPageNumber?: number;
-  /** 配置选项，支持配置是否在生成的Markdown中是否嵌入图片 */
-  Config?: ReconstructDocumentConfig;
-}
-
-declare interface ReconstructDocumentResponse {
-  /** 识别生成的Markdown文件base64编码的字符串 */
-  MarkdownBase64?: string | null;
-  /** 输入文件中嵌入的图片放在一个文件夹中打包为.zip压缩文件，识别生成的Markdown文件通过路径关联插入本文件夹中的图片。 */
-  InsetImagePackage?: string | null;
-  /** 输入文件中嵌入的图片中文字内容的识别结果 */
-  DocumentRecognizeInfo?: DocumentRecognizeInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4390,28 +4144,6 @@ declare interface RetryReleaseRequest {
 }
 
 declare interface RetryReleaseResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface RunReRankRequest {
-  /** 查询内容，必填 */
-  Query?: string;
-  /** 文档列表，必填，最多20个 */
-  Docs?: string[];
-  /** 模型名称, 非必填，默认: lke-reranker-base */
-  Model?: string;
-  /** 需要计算关联性的2段内容 */
-  DataList?: ReRankDataObject[];
-  /** 是否在线, 后台异步任务使用离线, 实时任务使用在线, 默认值: false */
-  Online?: boolean;
-}
-
-declare interface RunReRankResponse {
-  /** 相关性, 数值越大越相关 */
-  ScoreList?: number[];
-  /** 消耗量，仅返回TotalToken */
-  Usage?: Usage;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4579,16 +4311,12 @@ declare interface Lke {
   CheckAttributeLabelExist(data: CheckAttributeLabelExistRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAttributeLabelExistResponse>;
   /** 检查标签引用 {@link CheckAttributeLabelReferRequest} {@link CheckAttributeLabelReferResponse} */
   CheckAttributeLabelRefer(data: CheckAttributeLabelReferRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAttributeLabelReferResponse>;
-  /** @deprecated 文档转换 {@link ConvertDocumentRequest} {@link ConvertDocumentResponse} */
-  ConvertDocument(data?: ConvertDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<ConvertDocumentResponse>;
   /** 创建Agent {@link CreateAgentRequest} {@link CreateAgentResponse} */
   CreateAgent(data?: CreateAgentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgentResponse>;
   /** 创建应用 {@link CreateAppRequest} {@link CreateAppResponse} */
   CreateApp(data: CreateAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppResponse>;
   /** 创建标签 {@link CreateAttributeLabelRequest} {@link CreateAttributeLabelResponse} */
   CreateAttributeLabel(data: CreateAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAttributeLabelResponse>;
-  /** 创建企业 {@link CreateCorpRequest} {@link CreateCorpResponse} */
-  CreateCorp(data: CreateCorpRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCorpResponse>;
   /** 创建Doc分类 {@link CreateDocCateRequest} {@link CreateDocCateResponse} */
   CreateDocCate(data: CreateDocCateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDocCateResponse>;
   /** 录入问答 {@link CreateQARequest} {@link CreateQAResponse} */
@@ -4637,8 +4365,6 @@ declare interface Lke {
   DescribeConcurrencyUsage(data: DescribeConcurrencyUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConcurrencyUsageResponse>;
   /** 并发调用折线图 {@link DescribeConcurrencyUsageGraphRequest} {@link DescribeConcurrencyUsageGraphResponse} */
   DescribeConcurrencyUsageGraph(data: DescribeConcurrencyUsageGraphRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConcurrencyUsageGraphResponse>;
-  /** 企业详情 {@link DescribeCorpRequest} {@link DescribeCorpResponse} */
-  DescribeCorp(data?: DescribeCorpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCorpResponse>;
   /** 文档详情 {@link DescribeDocRequest} {@link DescribeDocResponse} */
   DescribeDoc(data: DescribeDocRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDocResponse>;
   /** 查询知识库用量 {@link DescribeKnowledgeUsageRequest} {@link DescribeKnowledgeUsageResponse} */
@@ -4689,14 +4415,10 @@ declare interface Lke {
   GetAppSecret(data: GetAppSecretRequest, config?: AxiosRequestConfig): AxiosPromise<GetAppSecretResponse>;
   /** 获取文档预览信息 {@link GetDocPreviewRequest} {@link GetDocPreviewResponse} */
   GetDocPreview(data: GetDocPreviewRequest, config?: AxiosRequestConfig): AxiosPromise<GetDocPreviewResponse>;
-  /** 获取特征向量 {@link GetEmbeddingRequest} {@link GetEmbeddingResponse} */
-  GetEmbedding(data: GetEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<GetEmbeddingResponse>;
   /** 点踩点赞数据统计 {@link GetLikeDataCountRequest} {@link GetLikeDataCountResponse} */
   GetLikeDataCount(data: GetLikeDataCountRequest, config?: AxiosRequestConfig): AxiosPromise<GetLikeDataCountResponse>;
   /** 获取聊天历史 {@link GetMsgRecordRequest} {@link GetMsgRecordResponse} */
   GetMsgRecord(data: GetMsgRecordRequest, config?: AxiosRequestConfig): AxiosPromise<GetMsgRecordResponse>;
-  /** 查询文档解析任务结果 {@link GetReconstructDocumentResultRequest} {@link GetReconstructDocumentResultResponse} */
-  GetReconstructDocumentResult(data: GetReconstructDocumentResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetReconstructDocumentResultResponse>;
   /** 查询任务状态 {@link GetTaskStatusRequest} {@link GetTaskStatusResponse} */
   GetTaskStatus(data: GetTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskStatusResponse>;
   /** 获取变量列表 {@link GetVarListRequest} {@link GetVarListResponse} */
@@ -4773,12 +4495,8 @@ declare interface Lke {
   ModifyQACate(data: ModifyQACateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyQACateResponse>;
   /** 修改拒答问题 {@link ModifyRejectedQuestionRequest} {@link ModifyRejectedQuestionResponse} */
   ModifyRejectedQuestion(data: ModifyRejectedQuestionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRejectedQuestionResponse>;
-  /** 多轮改写 {@link QueryRewriteRequest} {@link QueryRewriteResponse} */
-  QueryRewrite(data: QueryRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<QueryRewriteResponse>;
   /** 评价消息【点赞点踩】 {@link RateMsgRecordRequest} {@link RateMsgRecordResponse} */
   RateMsgRecord(data: RateMsgRecordRequest, config?: AxiosRequestConfig): AxiosPromise<RateMsgRecordResponse>;
-  /** 文档解析 {@link ReconstructDocumentRequest} {@link ReconstructDocumentResponse} */
-  ReconstructDocument(data?: ReconstructDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<ReconstructDocumentResponse>;
   /** 引用共享知识库接口 {@link ReferShareKnowledgeRequest} {@link ReferShareKnowledgeResponse} */
   ReferShareKnowledge(data: ReferShareKnowledgeRequest, config?: AxiosRequestConfig): AxiosPromise<ReferShareKnowledgeResponse>;
   /** 文档重命名 {@link RenameDocRequest} {@link RenameDocResponse} */
@@ -4789,8 +4507,6 @@ declare interface Lke {
   RetryDocParse(data: RetryDocParseRequest, config?: AxiosRequestConfig): AxiosPromise<RetryDocParseResponse>;
   /** 发布暂停后重试 {@link RetryReleaseRequest} {@link RetryReleaseResponse} */
   RetryRelease(data: RetryReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<RetryReleaseResponse>;
-  /** 重排序（已下线） {@link RunReRankRequest} {@link RunReRankResponse} */
-  RunReRank(data?: RunReRankRequest, config?: AxiosRequestConfig): AxiosPromise<RunReRankResponse>;
   /** 知识库文档录入 {@link SaveDocRequest} {@link SaveDocResponse} */
   SaveDoc(data: SaveDocRequest, config?: AxiosRequestConfig): AxiosPromise<SaveDocResponse>;
   /** 终止文档解析 {@link StopDocParseRequest} {@link StopDocParseResponse} */

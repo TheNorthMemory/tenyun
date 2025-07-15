@@ -286,6 +286,30 @@ declare interface DisplayJobRecordDetail {
   Data?: IdndValue[] | null;
 }
 
+/** 代码泄露详情 */
+declare interface DisplayLeakageCode {
+  /** 主键ID */
+  Id?: number;
+  /** 链接 */
+  Url?: string;
+}
+
+/** 数据泄露详情 */
+declare interface DisplayLeakageData {
+  /** 主键ID */
+  Id?: number;
+  /** 链接 */
+  Url?: string;
+}
+
+/** 邮箱泄露详情 */
+declare interface DisplayLeakageEmail {
+  /** 主键ID */
+  Id?: number;
+  /** 邮箱 */
+  Email?: string;
+}
+
 /** 后台详情 */
 declare interface DisplayManage {
   /** 主键ID */
@@ -1002,6 +1026,120 @@ declare interface DescribeJobRecordsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLeakageCodesRequest {
+  /** 是否聚合数据 */
+  IsAggregation?: boolean;
+  /** 是否新增数据 */
+  IsNew?: boolean;
+  /** 企业ID */
+  CustomerId?: number;
+  /** 分页大小 */
+  Limit?: number;
+  /** 分页偏移 */
+  Offset?: number;
+  /** 子公司ID列表 */
+  EnterpriseUidList?: string[];
+  /** 数据输出格式：json、file，默认不填为json */
+  Format?: string;
+  /** 创建时间-开始 */
+  CreateAtStart?: string;
+  /** 创建时间-结束 */
+  CreateAtEnd?: string;
+  /** 更新时间-开始 */
+  UpdateAtStart?: string;
+  /** 更新时间-结束 */
+  UpdateAtEnd?: string;
+  /** 查询数组 */
+  Filters?: Filter[];
+  /** 是否显示被忽略的数据 */
+  Ignored?: boolean;
+}
+
+declare interface DescribeLeakageCodesResponse {
+  /** 总数 */
+  Total?: number;
+  /** 数组 */
+  List?: DisplayLeakageCode[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLeakageDatasRequest {
+  /** 是否聚合数据 */
+  IsAggregation?: boolean;
+  /** 是否新增数据 */
+  IsNew?: boolean;
+  /** 企业ID */
+  CustomerId?: number;
+  /** 分页大小 */
+  Limit?: number;
+  /** 分页偏移 */
+  Offset?: number;
+  /** 子公司ID列表 */
+  EnterpriseUidList?: string[];
+  /** 数据输出格式：json、file，默认不填为json */
+  Format?: string;
+  /** 创建时间-开始 */
+  CreateAtStart?: string;
+  /** 创建时间-结束 */
+  CreateAtEnd?: string;
+  /** 更新时间-开始 */
+  UpdateAtStart?: string;
+  /** 更新时间-结束 */
+  UpdateAtEnd?: string;
+  /** 查询数组 */
+  Filters?: Filter[];
+  /** 是否显示被忽略的数据 */
+  Ignored?: boolean;
+}
+
+declare interface DescribeLeakageDatasResponse {
+  /** 总数 */
+  Total?: number;
+  /** 数组 */
+  List?: DisplayLeakageData[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLeakageEmailsRequest {
+  /** 是否聚合数据 */
+  IsAggregation?: boolean;
+  /** 是否新增数据 */
+  IsNew?: boolean;
+  /** 企业ID */
+  CustomerId?: number;
+  /** 分页大小 */
+  Limit?: number;
+  /** 分页偏移 */
+  Offset?: number;
+  /** 子公司ID列表 */
+  EnterpriseUidList?: string[];
+  /** 数据输出格式：json、file，默认不填为json */
+  Format?: string;
+  /** 创建时间-开始 */
+  CreateAtStart?: string;
+  /** 创建时间-结束 */
+  CreateAtEnd?: string;
+  /** 更新时间-开始 */
+  UpdateAtStart?: string;
+  /** 更新时间-结束 */
+  UpdateAtEnd?: string;
+  /** 查询数组 */
+  Filters?: Filter[];
+  /** 是否显示被忽略的数据 */
+  Ignored?: boolean;
+}
+
+declare interface DescribeLeakageEmailsResponse {
+  /** 总数 */
+  Total?: number;
+  /** 数组 */
+  List?: DisplayLeakageEmail[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeManagesRequest {
   /** 是否聚合数据 */
   IsAggregation?: boolean;
@@ -1457,6 +1595,12 @@ declare interface Ctem {
   DescribeJobRecordDetails(data: DescribeJobRecordDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobRecordDetailsResponse>;
   /** 查看任务运行记录列表 {@link DescribeJobRecordsRequest} {@link DescribeJobRecordsResponse} */
   DescribeJobRecords(data?: DescribeJobRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobRecordsResponse>;
+  /** 获取代码泄露数据 {@link DescribeLeakageCodesRequest} {@link DescribeLeakageCodesResponse} */
+  DescribeLeakageCodes(data?: DescribeLeakageCodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLeakageCodesResponse>;
+  /** 获取数据泄露事件 {@link DescribeLeakageDatasRequest} {@link DescribeLeakageDatasResponse} */
+  DescribeLeakageDatas(data?: DescribeLeakageDatasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLeakageDatasResponse>;
+  /** 获取邮箱泄露数据 {@link DescribeLeakageEmailsRequest} {@link DescribeLeakageEmailsResponse} */
+  DescribeLeakageEmails(data?: DescribeLeakageEmailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLeakageEmailsResponse>;
   /** 查看后台数据 {@link DescribeManagesRequest} {@link DescribeManagesResponse} */
   DescribeManages(data?: DescribeManagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeManagesResponse>;
   /** 查看网盘泄露数据 {@link DescribeNetDisksRequest} {@link DescribeNetDisksResponse} */

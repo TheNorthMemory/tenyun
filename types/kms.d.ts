@@ -44,6 +44,28 @@ declare interface DataKeyMetadata {
   HsmClusterId?: string;
   /** 资源ID，格式：creatorUin/$creatorUin/$dataKeyId */
   ResourceId?: string;
+  /** 密钥是否是主副本。0:主本，1:同步副本。 */
+  IsSyncReplica?: number;
+  /** 同步的原始地域 */
+  SourceRegion?: string;
+  /** 密钥同步的状态，0:未同步，1:同步成功，2:同步失败，3:同步中。 */
+  SyncStatus?: number;
+  /** 同步的结果描述 */
+  SyncMessages?: string;
+  /** 同步的开始时间 */
+  SyncStartTime?: number;
+  /** 同步的结束时间 */
+  SyncEndTime?: number;
+  /** 同步的原始集群，如果为空，是公有云公共集群 */
+  SourceHsmClusterId?: string;
+}
+
+/** 同步任务的目标地域列表，包括地域和集群信息。如果集群为空，表示公有云共享集群，如果集群不为空，表示独享集群。 */
+declare interface DestinationSyncConfig {
+  /** 同步任务的目标地域 */
+  DestinationRegion?: string;
+  /** HsmClusterId为空表示公有云共享版，如果不为空表示地域下独享版集群。 */
+  HsmClusterId?: string;
 }
 
 /** 设备指纹 */
@@ -106,6 +128,20 @@ declare interface KeyMetadata {
   RotateDays?: number;
   /** 上次乱转时间（Unix timestamp） */
   LastRotateTime?: number;
+  /** 密钥是否是主副本。0:主本，1:同步副本。 */
+  IsSyncReplica?: number;
+  /** 同步的原始地域 */
+  SourceRegion?: string;
+  /** 密钥同步的状态，0:未同步,1:同步成功,2:同步失败,3:同步中。 */
+  SyncStatus?: number;
+  /** 同步的结果描述 */
+  SyncMessages?: string;
+  /** 同步的开始时间 */
+  SyncStartTime?: number;
+  /** 同步的结束时间 */
+  SyncEndTime?: number;
+  /** 同步的原始集群，如果为空，是公有云公共集群 */
+  SourceHsmClusterId?: string;
 }
 
 /** 标签键和标签值 */
@@ -812,6 +848,10 @@ declare interface GetServiceStatusResponse {
   FreeDataKeyLimit?: number;
   /** IsAllowedDataKeyHosted为1时有效，已使用的数据密钥数量。 */
   DataKeyUsedCount?: number;
+  /** 同步任务的目标地域信息 */
+  SyncTaskList?: DestinationSyncConfig[];
+  /** 是否支持同步任务。true:支持，false:不支持。 */
+  IsAllowedSync?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
