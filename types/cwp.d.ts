@@ -3156,6 +3156,8 @@ declare interface Machine {
   InstanceId?: string;
   /** 备注信息 */
   Remark?: string;
+  /** 主机安全agent版本 */
+  AgentVersion?: string;
 }
 
 /** 机器清理记录对象 */

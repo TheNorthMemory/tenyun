@@ -1397,7 +1397,7 @@ declare interface FlushInstanceRouterConfigResponse {
 declare interface InquirePriceCreateDBInstancesRequest {
   /** 实例所属区域及可用区信息。格式：ap-guangzhou-2。 */
   Zone: string;
-  /** - 创建副本集实例，指每个副本集内主从节点数量。每个副本集所支持的的最大节点数与最小节点数，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。- 创建分片集群实例，指每个分片的主从节点数量。每个分片所支持的最大节点数与最小节点数，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。 */
+  /** - 创建副本集实例，指每个副本集内主从节点数量。每个副本集所支持的最大节点数与最小节点数，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。- 创建分片集群实例，指每个分片的主从节点数量。每个分片所支持的最大节点数与最小节点数，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。 */
   NodeNum: number;
   /** 实例内存大小。- 单位：GB。- 取值范围：请通过接口[DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567)查询，其返回的数据结构SpecItems中的参数CPU与Memory分别对应CPU核数与内存规格。 */
   Memory: number;
@@ -1535,7 +1535,7 @@ declare interface ModifyDBInstanceParamTplResponse {
 declare interface ModifyDBInstanceSecurityGroupRequest {
   /** 实例 ID。例如：cmgo-7pje****。 */
   InstanceId: string;
-  /** 目标安全组 ID。请通过接口[DescribeSecurityGroup](https://cloud.tencent.com/document/product/240/55675)查看具体的安全组 ID。 */
+  /** 目标安全组 ID。请通过接口[DescribeSecurityGroup](https://cloud.tencent.com/document/product/240/55675)查看具体的安全组 ID。**注意**：该入参会全量替换存量已有集合，非增量更新。修改需传入预期的全量集合。 */
   SecurityGroupIds: string[];
 }
 

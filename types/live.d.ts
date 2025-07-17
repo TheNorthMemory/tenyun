@@ -2,6 +2,38 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 直播审核关键词信息 */
+declare interface AuditKeyword {
+  /** 关键词内容。 */
+  Content: string;
+  /** 关键词标签。可取值：Normal: 正常 ，Polity: 政治，Porn: 色情，Sexy：性感，Ad: 广告，Illegal: 违法，Abuse: 谩骂，Terror: 暴恐，Spam: 灌水，Moan:呻吟。 */
+  Label: string;
+}
+
+/** 直播审核删除关键词结果详情。 */
+declare interface AuditKeywordDeleteDetail {
+  /** 关键词 Id。 */
+  KeywordId?: string;
+  /** 关键词内容。 */
+  Content?: string;
+  /** 是否删除成功。 */
+  Deleted?: boolean;
+  /** 如果删除失败，错误信息。 */
+  Error?: string;
+}
+
+/** 直播审核关键词查询信息。 */
+declare interface AuditKeywordInfo {
+  /** 关键词 Id。 */
+  KeywordId?: string;
+  /** 关键词内容。 */
+  Content?: string;
+  /** 关键词标签。可取值：Normal: 正常 ，Polity: 政治，Porn: 色情，Sexy：性感，Ad: 广告，Illegal: 违法，Abuse: 谩骂，Terror: 暴恐，Spam: 灌水，Moan:呻吟。 */
+  Label?: string;
+  /** 创建时间。UTC 格式，例如：2018-11-29T19:00:00Z。注意：1. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示。 */
+  CreateTime?: string;
+}
+
 /** 主备流详细信息。 */
 declare interface BackupStreamDetailData {
   /** 推流域名。 */
@@ -1945,9 +1977,17 @@ declare interface CopyCasterResponse {
 }
 
 declare interface CreateAuditKeywordsRequest {
+  /** 关键词列表。 */
+  Keywords: AuditKeyword[];
+  /** 直播审核词库Id。 */
+  LibId: string;
 }
 
 declare interface CreateAuditKeywordsResponse {
+  /** 添加成功的关键词 Id 列表。 */
+  KeywordIds?: string[];
+  /** 重复关键词列表。 */
+  DupInfos?: AuditKeywordInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2493,6 +2533,10 @@ declare interface CreateLiveTranscodeTemplateRequest {
   DRMType?: string;
   /** DRM 加密项，可选值：AUDIO、SD、HD、UHD1、UHD2，后四个为一组，同组中的内容只能选一个。不传递或者为空字符串，清空之前的DRM配置。 */
   DRMTracks?: string;
+  /** 是否创建自适应码率，默认值 0。0：否。1：是。 */
+  IsAdaptiveBitRate?: number;
+  /** 自适应码率，子转码模板信息，当 IsAdaptiveBitRate 为 1 时有效。 */
+  AdaptiveChildren?: ChildTemplateInfo[];
 }
 
 declare interface CreateLiveTranscodeTemplateResponse {
@@ -2593,9 +2637,17 @@ declare interface CreateScreenshotTaskResponse {
 }
 
 declare interface DeleteAuditKeywordsRequest {
+  /** 要删除的关键词 Id 列表。 */
+  KeywordIds: string[];
+  /** 关键词库 Id。 */
+  LibId: string;
 }
 
 declare interface DeleteAuditKeywordsResponse {
+  /** 成功删除关键词的数量。 */
+  SuccessCount?: number;
+  /** 关键词详情列表。 */
+  Infos?: AuditKeywordDeleteDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2951,9 +3003,23 @@ declare interface DescribeAreaBillBandwidthAndFluxListResponse {
 }
 
 declare interface DescribeAuditKeywordsRequest {
+  /** 获取偏移量。 */
+  Offset: number;
+  /** 单页条数，最大为100条，超过则按100条返回。 */
+  Limit: number;
+  /** 关键词库 Id。 */
+  LibId: string;
+  /** 关键词搜索字段。为空字符串时忽略。 */
+  Content: string;
+  /** 标签类别搜索。 */
+  Labels?: number[];
 }
 
 declare interface DescribeAuditKeywordsResponse {
+  /** 关键词总条数。 */
+  Total?: number;
+  /** 关键词详情列表。 */
+  Infos?: AuditKeywordInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5163,6 +5229,10 @@ declare interface ModifyLiveTranscodeTemplateRequest {
   DRMType?: string;
   /** DRM 加密项，可选值：AUDIO、SD、HD、UHD1、UHD2，后四个为一组，同组中的内容只能选一个。不传递或者为空字符串，清空之前的DRM配置。 */
   DRMTracks?: string;
+  /** 是否创建自适应码率，默认值 0。0：否。1：是。 */
+  IsAdaptiveBitRate?: number;
+  /** 自适应码率，子转码模板信息，当 IsAdaptiveBitRate 为 1 时有效。 */
+  AdaptiveChildren?: ChildTemplateInfo[];
 }
 
 declare interface ModifyLiveTranscodeTemplateResponse {
@@ -5466,7 +5536,7 @@ declare interface Live {
   /** 复制导播台 {@link CopyCasterRequest} {@link CopyCasterResponse} */
   CopyCaster(data: CopyCasterRequest, config?: AxiosRequestConfig): AxiosPromise<CopyCasterResponse>;
   /** 直播审核创建关键词 {@link CreateAuditKeywordsRequest} {@link CreateAuditKeywordsResponse} */
-  CreateAuditKeywords(data?: CreateAuditKeywordsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditKeywordsResponse>;
+  CreateAuditKeywords(data: CreateAuditKeywordsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditKeywordsResponse>;
   /** 创建导播台 {@link CreateCasterRequest} {@link CreateCasterResponse} */
   CreateCaster(data?: CreateCasterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCasterResponse>;
   /** 生成导播台推流URL {@link CreateCasterInputPushUrlRequest} {@link CreateCasterInputPushUrlResponse} */
@@ -5518,7 +5588,7 @@ declare interface Live {
   /** 创建截图任务 {@link CreateScreenshotTaskRequest} {@link CreateScreenshotTaskResponse} */
   CreateScreenshotTask(data: CreateScreenshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScreenshotTaskResponse>;
   /** 直播审核删除关键词 {@link DeleteAuditKeywordsRequest} {@link DeleteAuditKeywordsResponse} */
-  DeleteAuditKeywords(data?: DeleteAuditKeywordsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditKeywordsResponse>;
+  DeleteAuditKeywords(data: DeleteAuditKeywordsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditKeywordsResponse>;
   /** 删除导播台 {@link DeleteCasterRequest} {@link DeleteCasterResponse} */
   DeleteCaster(data: DeleteCasterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCasterResponse>;
   /** 删除导播台输入源 {@link DeleteCasterInputInfoRequest} {@link DeleteCasterInputInfoResponse} */
@@ -5578,7 +5648,7 @@ declare interface Live {
   /** 海外分区直播播放带宽和流量数据查询 {@link DescribeAreaBillBandwidthAndFluxListRequest} {@link DescribeAreaBillBandwidthAndFluxListResponse} */
   DescribeAreaBillBandwidthAndFluxList(data: DescribeAreaBillBandwidthAndFluxListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAreaBillBandwidthAndFluxListResponse>;
   /** 直播审核获取关键词 {@link DescribeAuditKeywordsRequest} {@link DescribeAuditKeywordsResponse} */
-  DescribeAuditKeywords(data?: DescribeAuditKeywordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditKeywordsResponse>;
+  DescribeAuditKeywords(data: DescribeAuditKeywordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditKeywordsResponse>;
   /** 查询直播中的主备流 {@link DescribeBackupStreamListRequest} {@link DescribeBackupStreamListResponse} */
   DescribeBackupStreamList(data?: DescribeBackupStreamListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupStreamListResponse>;
   /** 直播播放带宽和流量数据查询 {@link DescribeBillBandwidthAndFluxListRequest} {@link DescribeBillBandwidthAndFluxListResponse} */

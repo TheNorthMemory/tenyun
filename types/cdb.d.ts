@@ -302,9 +302,9 @@ declare interface AutoStrategy {
   ExpandPeriod?: number | null;
   /** 自动缩容观测周期，单位是分钟，可选值5、10、15、30。后台会按照配置的周期进行缩容判断。 */
   ShrinkPeriod?: number | null;
-  /** 弹性扩容观测周期（秒级），可取值为：5，30，45，60，180，300，600，900，1800。 */
+  /** 弹性扩容观测周期（秒级），可取值为：15，30，45，60，180，300，600，900，1800。 */
   ExpandSecondPeriod?: number;
-  /** 缩容观测周期（秒级），可取值为：300。 */
+  /** 缩容观测周期（秒级），可取值为：300、600、900、1800。 */
   ShrinkSecondPeriod?: number;
 }
 

@@ -464,6 +464,18 @@ declare interface ExtendScene {
   GenerateTypeLogo?: string;
 }
 
+/** 合同智能提取字段信息 */
+declare interface ExtractionField {
+  /** 用于合同智能提取的字段名称。注意: `长度不能超过30个字符` */
+  Name: string;
+  /** 指定合同智能提取的字段类型，目前仅支持`TEXT`、`DATE`、`NUMBER`、`OPTION`类型。类型支持如下：1、TEXT（文本）2、DATE（日期）3、NUMBER（数字）4、OPTION（选项值） */
+  Type: string;
+  /** 用于描述字段信息。注意：1、`如果Type值为OPTION时，需要在字段描述中填写选项值，用,分隔`2、描述字段不能超过100个字符 */
+  Description?: string;
+  /** 提取出合同中的字段信息。 */
+  Values?: string[];
+}
+
 /** 绑定角色失败信息 */
 declare interface FailedCreateRoleData {
   /** 用户userId */
@@ -1684,6 +1696,26 @@ declare interface CreateBatchCancelFlowUrlResponse {
   UrlExpireOn?: string;
   /** 批量撤销任务编号，为32位字符串，可用于[查询批量撤销签署流程任务结果](https://qian.tencent.com/developers/companyApis/operateFlows/CreateBatchCancelFlowUrl) 或关联[批量撤销任务结果回调](https://qian.tencent.com/developers/company/callback_types_contracts_sign#%E4%B9%9D-%E6%89%B9%E9%87%8F%E6%92%A4%E9%94%80%E7%BB%93%E6%9E%9C%E5%9B%9E%E8%B0%83) */
   TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateBatchInformationExtractionTaskRequest {
+  /** 执行合同智能提取的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 合同智能提取的PDF文件资源编号列表，通过[UploadFiles](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)接口获取PDF文件资源编号。 注: `目前，此接口仅支持5个文件发起。每个文件限制在10M以下` */
+  ResourceIds: string[];
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+  /** 用户配置的合同智能提取字段模板ID，会基于此模板批量创建合同智能提取任务，为32位字符串。[点击查看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/99008608577532423ea437c7fdbedca1.png)注: `此配置优先级最高，设置了模板ID后Fields配置就会无效` */
+  FieldTemplateId?: string;
+  /** 用于合同智能提取的字段信息。注意：`字段模板优先级最高，如果设置了FieldTemplateId值，此配置就无效` */
+  Fields?: ExtractionField[];
+}
+
+declare interface CreateBatchInformationExtractionTaskResponse {
+  /** 合同智能提取的任务ID列表，每个任务ID为32位字符串。建议开发者保存此任务ID，后续查询合同智能提取详情需要此任务ID。注意：`返回的索引和ResourceIds数组一致` */
+  TaskIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3576,6 +3608,26 @@ declare interface DescribeFlowTemplatesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInformationExtractionTaskRequest {
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+  /** 批量创建合同智能提取任务接口返回的合同智能提取任务ID。 */
+  TaskId?: string;
+}
+
+declare interface DescribeInformationExtractionTaskResponse {
+  /** 信息提取任务结果 */
+  Fields?: ExtractionField[];
+  /** 合同智能提取任务状态。状态如下： **0** - 任务创建成功（还未执行） **1** - 排队中（等待执行） **2** - 提取中（正在执行） **3** - 提取成功 **4** - 提取失败 */
+  Status?: number;
+  /** 合同智能提取结果下载，文件格式为`xlsx`。注意：`链接有效期为5分钟，过期后可重新获取` */
+  Url?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeIntegrationDepartmentsRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得组织架构管理权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -4235,6 +4287,8 @@ declare interface Ess {
   CancelUserAutoSignEnableUrl(data: CancelUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CancelUserAutoSignEnableUrlResponse>;
   /** 获取批量撤销签署流程腾讯电子签小程序链接 {@link CreateBatchCancelFlowUrlRequest} {@link CreateBatchCancelFlowUrlResponse} */
   CreateBatchCancelFlowUrl(data: CreateBatchCancelFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchCancelFlowUrlResponse>;
+  /** 批量创建合同智能提取任务 {@link CreateBatchInformationExtractionTaskRequest} {@link CreateBatchInformationExtractionTaskResponse} */
+  CreateBatchInformationExtractionTask(data: CreateBatchInformationExtractionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchInformationExtractionTaskResponse>;
   /** 批量操作企业初始化 {@link CreateBatchInitOrganizationUrlRequest} {@link CreateBatchInitOrganizationUrlResponse} */
   CreateBatchInitOrganizationUrl(data: CreateBatchInitOrganizationUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchInitOrganizationUrlResponse>;
   /** 创建企业批量认证链接-单链接 {@link CreateBatchOrganizationAuthorizationUrlRequest} {@link CreateBatchOrganizationAuthorizationUrlResponse} */
@@ -4385,6 +4439,8 @@ declare interface Ess {
   DescribeFlowInfo(data?: DescribeFlowInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowInfoResponse>;
   /** 查询模板信息 {@link DescribeFlowTemplatesRequest} {@link DescribeFlowTemplatesResponse} */
   DescribeFlowTemplates(data: DescribeFlowTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowTemplatesResponse>;
+  /** 获取合同智能提取任务详情 {@link DescribeInformationExtractionTaskRequest} {@link DescribeInformationExtractionTaskResponse} */
+  DescribeInformationExtractionTask(data: DescribeInformationExtractionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInformationExtractionTaskResponse>;
   /** 获取企业部门信息列表 {@link DescribeIntegrationDepartmentsRequest} {@link DescribeIntegrationDepartmentsResponse} */
   DescribeIntegrationDepartments(data: DescribeIntegrationDepartmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationDepartmentsResponse>;
   /** 查询企业员工信息列表 {@link DescribeIntegrationEmployeesRequest} {@link DescribeIntegrationEmployeesResponse} */

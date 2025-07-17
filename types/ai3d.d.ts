@@ -39,7 +39,7 @@ declare interface QueryHunyuanTo3DJobResponse {
 }
 
 declare interface SubmitHunyuanTo3DJobRequest {
-  /** 文生3D，3D内容的描述，中文正向提示词。最多支持200个 utf-8 字符。文生3D, image、image_url和 prompt必填其一，且prompt和image/image_url不能同时存在。 */
+  /** 文生3D，3D内容的描述，中文正向提示词。最多支持1024个 utf-8 字符。文生3D, image、image_url和 prompt必填其一，且prompt和image/image_url不能同时存在。 */
   Prompt?: string;
   /** 输入图 Base64 数据。大小：单边分辨率要求不小于128，不大于5000。大小不超过8m（base64编码后会大30%左右，建议实际输入图片不超过6m）格式：jpg，png，jpeg，webp。ImageBase64、ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。 */
   ImageBase64?: string;

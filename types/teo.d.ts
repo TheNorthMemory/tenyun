@@ -1470,6 +1470,16 @@ declare interface FunctionRuleCondition {
   RuleConditions: RuleCondition[];
 }
 
+/** 多通道安全网关可用地域 */
+declare interface GatewayRegion {
+  /** 地域 ID 。 */
+  RegionId?: string;
+  /** 中文地域名称。 */
+  CNName?: string;
+  /** 英文地域名称。 */
+  ENName?: string;
+}
+
 /** Grpc配置项 */
 declare interface Grpc {
   /** 是否开启 Grpc 配置，取值有：on：开启；off：关闭。 */
@@ -2016,6 +2026,40 @@ declare interface ModifyRequestHeaderParameters {
 declare interface ModifyResponseHeaderParameters {
   /** HTTP 回源头部规则列表。 */
   HeaderActions?: HeaderAction[] | null;
+}
+
+/** 多通道安全网关详情 */
+declare interface MultiPathGateway {
+  /** 网关 ID。 */
+  GatewayId?: string;
+  /** 网关名。 */
+  GatewayName?: string;
+  /** 网关类型，取值有： cloud：云上网关，腾讯云创建和管理的网关。 private：自有网关，用户部署的私有网关。 */
+  GatewayType?: string;
+  /** 网关端口，范围 1～65535（除去 8888 ）。 */
+  GatewayPort?: number;
+  /** 网关状态，取值有： creating : 创建中； online : 在线； offline : 离线； disable : 已停用。 */
+  Status?: string;
+  /** 网关 IP， 格式为 IPv4。 */
+  GatewayIP?: string;
+  /** 网关地域 Id，可以从接口 DescribeMultiPathGatewayRegions 获取 RegionId 列表。 */
+  RegionId?: string;
+  /** 线路信息，当查询网关信息详情 DescribeMultiPathGateway 的时候会返回，当查询网关列表 DescribeMultiPathGateways 的时候不会返回。 */
+  Lines?: MultiPathGatewayLine[];
+}
+
+/** 多通道安全网关线路信息 */
+declare interface MultiPathGatewayLine {
+  /** 线路 ID ， 其中 line-0 和 line-1 为系统内置线路 ID，取值有: line-0：直连线路，不支持添加、编辑和删除； line-1： EdgeOne 四层代理线路，支持修改实例和规则，不支持删除； line-2 及以上：EdgeOne 四层代理线路或者自定义线路，支持修改、删除实例和规则。 */
+  LineId?: string;
+  /** 线路类型，取值有：direct ：直连线路，不支持编辑、不支持删除；proxy ：EdgeOne 四层代理线路，支持编辑修改实例和规则，不支持删除；custom ：自定义线路，支持编辑、支持删除。 */
+  LineType?: string;
+  /** 线路地址，格式为 host:port 。 */
+  LineAddress?: string;
+  /** 四层代理实例 ID ，当线路类型 LineType 取值为 proxy（EdgeOne 四层代理）返回。 */
+  ProxyId?: string;
+  /** 转发规则 ID ，当线路类型 LineType 取值为 proxy（EdgeOne 四层代理）返回。 */
+  RuleId?: string;
 }
 
 /** HTTPS 双向认证。 */
@@ -4024,6 +4068,62 @@ declare interface CreateLoadBalancerResponse {
   RequestId?: string;
 }
 
+declare interface CreateMultiPathGatewayLineRequest {
+  /** 站点 ID 。 */
+  ZoneId: string;
+  /** 多通道安全网关 ID 。 */
+  GatewayId: string;
+  /** 线路类型，取值有： direct ：直连线路，不支持修改和删除。 proxy ：EdgeOne 四层代理线路，支持修改实例 ID 和规则 ID，不支持删除。 custom ：自定义线路，支持修改、删除实例 ID 和规则 ID。 */
+  LineType: string;
+  /** 线路地址，格式为 ip:port。 */
+  LineAddress: string;
+  /** 四层代理实例 ID，当线路类型 LineType 取值为 proxy（EdgeOne 四层代理）必传，可由接口 [DescribeL4Proxy](https://cloud.tencent.com/document/api/1552/103413) 获取。 */
+  ProxyId?: string;
+  /** 转发规则 ID ，当线路类型 LineType 取值为 proxy（EdgeOne 四层代理）必传，可以从接口 [DescribeL4ProxyRules](https://cloud.tencent.com/document/api/1552/103412) 获取。 */
+  RuleId?: string;
+}
+
+declare interface CreateMultiPathGatewayLineResponse {
+  /** 线路 ID ， 取值有: line-1： EdgeOne 四层代理线路，支持修改实例和规则，不支持删除； line-2 及以上：EdgeOne 四层代理线路或者自定义线路，支持修改、删除实例和规则。 */
+  LineId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateMultiPathGatewayRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 网关类型，取值有： cloud：云上网关，腾讯云创建和管理的网关； private：自有网关，用户部署的私有网关。 */
+  GatewayType: string;
+  /** 网关名称，16 个字符以内，可用字符（a-z,A-Z,0-9,-,_）。 */
+  GatewayName: string;
+  /** 网关端口，范围 1～65535（除去 8888 ）。 */
+  GatewayPort: number;
+  /** 网关地域，GatewayType 取值为 cloud（云上网关）必填。可以从接口 DescribeMultiPathGatewayRegions 获取 RegionId 列表。 */
+  RegionId?: string;
+  /** 网关地址，GatewayType 取值为 private（自有网关）必填，使用该地址时，请确保该地址已录入腾讯云多通道安全加速网关系统。如未录入，需要在本接口调用前通过工单或者联系架构师把网关 IP 地址提前录入腾讯云多通道安全加速网关系统。 */
+  GatewayIP?: string;
+}
+
+declare interface CreateMultiPathGatewayResponse {
+  /** 网关 ID。 */
+  GatewayId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateMultiPathGatewaySecretKeyRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 多通道安全加速网关接入密钥，base64字符串，编码前字符串长度为 32-48 个字符，非必填，不填系统自动生成，可通过接口 DescribeMultiPathGatewaySecretKey 查询。 */
+  SecretKey?: string;
+}
+
+declare interface CreateMultiPathGatewaySecretKeyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateOriginGroupRequest {
   /** 站点 ID */
   ZoneId: string;
@@ -4412,6 +4512,32 @@ declare interface DeleteLoadBalancerRequest {
 }
 
 declare interface DeleteLoadBalancerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteMultiPathGatewayLineRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 网关 ID。 */
+  GatewayId: string;
+  /** 线路 ID。 */
+  LineId: string;
+}
+
+declare interface DeleteMultiPathGatewayLineResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteMultiPathGatewayRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 网关 ID。 */
+  GatewayId: string;
+}
+
+declare interface DeleteMultiPathGatewayResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5062,6 +5188,80 @@ declare interface DescribeLoadBalancerListResponse {
   TotalCount?: number;
   /** 负载均衡实例列表。 */
   LoadBalancerList?: LoadBalancer[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMultiPathGatewayLineRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 网关 ID。 */
+  GatewayId: string;
+  /** 线路 ID。 */
+  LineId: string;
+}
+
+declare interface DescribeMultiPathGatewayLineResponse {
+  /** 线路信息。 */
+  Line?: MultiPathGatewayLine;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMultiPathGatewayRegionsRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+}
+
+declare interface DescribeMultiPathGatewayRegionsResponse {
+  /** 网关可用地域列表。 */
+  GatewayRegions?: GatewayRegion[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMultiPathGatewayRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 网关 ID。 */
+  GatewayId: string;
+}
+
+declare interface DescribeMultiPathGatewayResponse {
+  /** 网关详情。 */
+  GatewayDetail?: MultiPathGateway;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMultiPathGatewaySecretKeyRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+}
+
+declare interface DescribeMultiPathGatewaySecretKeyResponse {
+  /** 接入密钥。 */
+  SecretKey?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMultiPathGatewaysRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 分页查询偏移量。默认值：0。 */
+  Offset?: number;
+  /** 分页查询限制数目。默认值：20，最大值：1000。 */
+  Limit?: number;
+  /** 网关列表的过滤字段，该参数不填写时，返回当前 appid 下所有网关信息，详细的过滤条件如下： gateway-type：按照网关类型进行过滤，支持取值 cloud 和 private，分别代表过滤云上网关和自由网关； keyword：按照网关名的关键字进行过滤。 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeMultiPathGatewaysResponse {
+  /** 网关详情。 */
+  Gateways?: MultiPathGateway[];
+  /** 总条数。 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6120,6 +6320,58 @@ declare interface ModifyLoadBalancerResponse {
   RequestId?: string;
 }
 
+declare interface ModifyMultiPathGatewayLineRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 多通道安全加速网关 ID 。 */
+  GatewayId: string;
+  /** 线路 ID ， 取值有: line-1： EdgeOne 四层代理线路，支持修改实例和规则，不支持删除； line-2 及以上：EdgeOne 四层代理线路或者自定义线路，支持修改、删除实例和规则。 */
+  LineId: string;
+  /** 线路类型，取值有： proxy ：EdgeOne 四层代理线路，支持修改实例和规则，不支持删除； custom ：自定义线路，支持编辑、删除实例和规则。 */
+  LineType?: string;
+  /** 线路地址，格式为 host:port，直连线路（ LineType 取值为 direct ）不允许修改，其余类型支持修改。 */
+  LineAddress?: string;
+  /** 四层代理实例 ID ，当线路类型 LineType 取值为 proxy（EdgeOne 四层代理）可传入，进行修改。 */
+  ProxyId?: string;
+  /** 转发规则 ID ，当线路类型 LineType 取值为 proxy（EdgeOne 四层代理）可传入，进行修改。 */
+  RuleId?: string;
+}
+
+declare interface ModifyMultiPathGatewayLineResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyMultiPathGatewayRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 网关 ID。 */
+  GatewayId: string;
+  /** 网关名称，16 个字符以内，可用字符（a-z,A-Z,0-9,-,_）。 */
+  GatewayName?: string;
+  /** 网关地址，GatewayType 取值为 private（自有网关）可填入进行修改，使用该地址时，请确保该地址已录入腾讯云多通道安全加速网关系统。如未录入，需要在本接口调用前通过工单或者联系架构师把网关 IP 地址提前录入腾讯云多通道安全加速网关系统。 */
+  GatewayIP?: string;
+  /** 网关端口，范围 1～65535（除去 8888 ），只支持修改 GatewayType 取值为 private 的自有网关。 */
+  GatewayPort?: number;
+}
+
+declare interface ModifyMultiPathGatewayResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyMultiPathGatewaySecretKeyRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 多通道安全加速网关接入密钥，base64 字符串，编码前字符串长度为 32-48 个字符。 */
+  SecretKey: string;
+}
+
+declare interface ModifyMultiPathGatewaySecretKeyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyOriginACLRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -6348,6 +6600,18 @@ declare interface ModifyZoneStatusRequest {
 }
 
 declare interface ModifyZoneStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RefreshMultiPathGatewaySecretKeyRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+}
+
+declare interface RefreshMultiPathGatewaySecretKeyResponse {
+  /** 多通道安全加速网关接入密钥。 */
+  SecretKey?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6679,6 +6943,12 @@ declare interface Teo {
   CreateL7AccRules(data: CreateL7AccRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL7AccRulesResponse>;
   /** 创建负载均衡实例 {@link CreateLoadBalancerRequest} {@link CreateLoadBalancerResponse} */
   CreateLoadBalancer(data: CreateLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoadBalancerResponse>;
+  /** 创建多通道安全加速网关 {@link CreateMultiPathGatewayRequest} {@link CreateMultiPathGatewayResponse} */
+  CreateMultiPathGateway(data: CreateMultiPathGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiPathGatewayResponse>;
+  /** 创建多通道安全加速网关线路 {@link CreateMultiPathGatewayLineRequest} {@link CreateMultiPathGatewayLineResponse} */
+  CreateMultiPathGatewayLine(data: CreateMultiPathGatewayLineRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiPathGatewayLineResponse>;
+  /** 创建多通道安全加速网关密钥 {@link CreateMultiPathGatewaySecretKeyRequest} {@link CreateMultiPathGatewaySecretKeyResponse} */
+  CreateMultiPathGatewaySecretKey(data: CreateMultiPathGatewaySecretKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiPathGatewaySecretKeyResponse>;
   /** 创建源站组 {@link CreateOriginGroupRequest} {@link CreateOriginGroupResponse} */
   CreateOriginGroup(data: CreateOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOriginGroupResponse>;
   /** 创建套餐 {@link CreatePlanRequest} {@link CreatePlanResponse} */
@@ -6727,6 +6997,10 @@ declare interface Teo {
   DeleteL7AccRules(data: DeleteL7AccRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteL7AccRulesResponse>;
   /** 删除负载均衡实例 {@link DeleteLoadBalancerRequest} {@link DeleteLoadBalancerResponse} */
   DeleteLoadBalancer(data: DeleteLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoadBalancerResponse>;
+  /** 删除多通道安全加速网关 {@link DeleteMultiPathGatewayRequest} {@link DeleteMultiPathGatewayResponse} */
+  DeleteMultiPathGateway(data: DeleteMultiPathGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMultiPathGatewayResponse>;
+  /** 删除多通道安全加速网关线路 {@link DeleteMultiPathGatewayLineRequest} {@link DeleteMultiPathGatewayLineResponse} */
+  DeleteMultiPathGatewayLine(data: DeleteMultiPathGatewayLineRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMultiPathGatewayLineResponse>;
   /** 删除源站组 {@link DeleteOriginGroupRequest} {@link DeleteOriginGroupResponse} */
   DeleteOriginGroup(data: DeleteOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOriginGroupResponse>;
   /** 删除实时日志投递任务 {@link DeleteRealtimeLogDeliveryTaskRequest} {@link DeleteRealtimeLogDeliveryTaskResponse} */
@@ -6799,6 +7073,16 @@ declare interface Teo {
   DescribeL7AccSetting(data: DescribeL7AccSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL7AccSettingResponse>;
   /** 查询负载均衡实例列表 {@link DescribeLoadBalancerListRequest} {@link DescribeLoadBalancerListResponse} */
   DescribeLoadBalancerList(data: DescribeLoadBalancerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancerListResponse>;
+  /** 查询多通道安全加速网关详情 {@link DescribeMultiPathGatewayRequest} {@link DescribeMultiPathGatewayResponse} */
+  DescribeMultiPathGateway(data: DescribeMultiPathGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMultiPathGatewayResponse>;
+  /** 查询多通道安全加速网关线路详情 {@link DescribeMultiPathGatewayLineRequest} {@link DescribeMultiPathGatewayLineResponse} */
+  DescribeMultiPathGatewayLine(data: DescribeMultiPathGatewayLineRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMultiPathGatewayLineResponse>;
+  /** 查询多通道安全加速网关可用地域列表 {@link DescribeMultiPathGatewayRegionsRequest} {@link DescribeMultiPathGatewayRegionsResponse} */
+  DescribeMultiPathGatewayRegions(data: DescribeMultiPathGatewayRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMultiPathGatewayRegionsResponse>;
+  /** 查询多通道安全加速网关接入密钥 {@link DescribeMultiPathGatewaySecretKeyRequest} {@link DescribeMultiPathGatewaySecretKeyResponse} */
+  DescribeMultiPathGatewaySecretKey(data: DescribeMultiPathGatewaySecretKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMultiPathGatewaySecretKeyResponse>;
+  /** 查询多通道安全加速网关列表 {@link DescribeMultiPathGatewaysRequest} {@link DescribeMultiPathGatewaysResponse} */
+  DescribeMultiPathGateways(data: DescribeMultiPathGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMultiPathGatewaysResponse>;
   /** 查询源站防护详情 {@link DescribeOriginACLRequest} {@link DescribeOriginACLResponse} */
   DescribeOriginACL(data: DescribeOriginACLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginACLResponse>;
   /** 获取源站组列表 {@link DescribeOriginGroupRequest} {@link DescribeOriginGroupResponse} */
@@ -6917,6 +7201,12 @@ declare interface Teo {
   ModifyL7AccSetting(data: ModifyL7AccSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL7AccSettingResponse>;
   /** 修改负载均衡实例 {@link ModifyLoadBalancerRequest} {@link ModifyLoadBalancerResponse} */
   ModifyLoadBalancer(data: ModifyLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerResponse>;
+  /** 修改多通道安全加速网关信息 {@link ModifyMultiPathGatewayRequest} {@link ModifyMultiPathGatewayResponse} */
+  ModifyMultiPathGateway(data: ModifyMultiPathGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMultiPathGatewayResponse>;
+  /** 修改多通道安全加速网关线路信息 {@link ModifyMultiPathGatewayLineRequest} {@link ModifyMultiPathGatewayLineResponse} */
+  ModifyMultiPathGatewayLine(data: ModifyMultiPathGatewayLineRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMultiPathGatewayLineResponse>;
+  /** 修改多通道安全加速网关接入密钥 {@link ModifyMultiPathGatewaySecretKeyRequest} {@link ModifyMultiPathGatewaySecretKeyResponse} */
+  ModifyMultiPathGatewaySecretKey(data: ModifyMultiPathGatewaySecretKeyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMultiPathGatewaySecretKeyResponse>;
   /** 变更源站防护实例 {@link ModifyOriginACLRequest} {@link ModifyOriginACLResponse} */
   ModifyOriginACL(data: ModifyOriginACLRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOriginACLResponse>;
   /** 修改源站组 {@link ModifyOriginGroupRequest} {@link ModifyOriginGroupResponse} */
@@ -6939,6 +7229,8 @@ declare interface Teo {
   ModifyZoneSetting(data: ModifyZoneSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneSettingResponse>;
   /** 切换站点状态 {@link ModifyZoneStatusRequest} {@link ModifyZoneStatusResponse} */
   ModifyZoneStatus(data: ModifyZoneStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneStatusResponse>;
+  /** 刷新多通道安全加速网关密钥 {@link RefreshMultiPathGatewaySecretKeyRequest} {@link RefreshMultiPathGatewaySecretKeyResponse} */
+  RefreshMultiPathGatewaySecretKey(data: RefreshMultiPathGatewaySecretKeyRequest, config?: AxiosRequestConfig): AxiosPromise<RefreshMultiPathGatewaySecretKeyResponse>;
   /** 续费套餐 {@link RenewPlanRequest} {@link RenewPlanResponse} */
   RenewPlan(data: RenewPlanRequest, config?: AxiosRequestConfig): AxiosPromise<RenewPlanResponse>;
   /** 升级套餐 {@link UpgradePlanRequest} {@link UpgradePlanResponse} */

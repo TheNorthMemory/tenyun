@@ -1517,7 +1517,7 @@ declare interface AddAITaskRequest {
   Templates: AITemplates[];
   /** AI 任务描述。仅支持中文、英文、数字、_、-，长度不超过128个字符 */
   Desc?: string;
-  /** AI 结果回调地址。类似 "http://ip:port/***或者https://domain/*** */
+  /** AI 结果回调地址 */
   CallbackUrl?: string;
   /** 是否立即开启 AI 任务。"true"代表立即开启 AI 任务，"false"代表暂不开启 AI 任务，默认为 false。 */
   IsStartTheTask?: boolean;
@@ -1525,7 +1525,7 @@ declare interface AddAITaskRequest {
 
 declare interface AddAITaskResponse {
   /** AI任务信息 */
-  Data?: AITaskInfo | null;
+  Data?: AITaskInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2737,7 +2737,7 @@ declare interface UpdateAITaskRequest {
   Desc?: string;
   /** 通道 ID 列表。不能添加存在于其他 AI 任务的通道，限制1000个通道。 */
   ChannelList?: string[];
-  /** AI 结果回调地址。类似 "http://ip:port/***或者https://domain/*** */
+  /** AI 结果回调地址 */
   CallbackUrl?: string;
   /** 是否立即开启 AI 任务。"true"代表立即开启 AI 任务，"false"代表暂不开启 AI 任务，默认为 false。 */
   IsStartTheTask?: boolean;
@@ -2747,7 +2747,7 @@ declare interface UpdateAITaskRequest {
 
 declare interface UpdateAITaskResponse {
   /** AI任务信息 */
-  Data?: AITaskInfo | null;
+  Data?: AITaskInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

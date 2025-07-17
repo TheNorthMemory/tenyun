@@ -1464,13 +1464,17 @@ declare namespace V20180724 {
   /** ModifyConditionsTemplateRequestEventCondition */
   interface ModifyConditionsTemplateRequestEventCondition {
     /** 告警通知周期 */
-    AlarmNotifyPeriod: string;
+    AlarmNotifyPeriod?: string;
     /** 告警通知方式 */
-    AlarmNotifyType: string;
+    AlarmNotifyType?: string;
     /** 事件ID */
-    EventID: string;
+    EventID?: string;
     /** 规则ID */
     RuleID?: number;
+    /** 重构后的eventType */
+    MetricName?: string;
+    /** 事件描述信息 */
+    Description?: string;
   }
 
   /** 修改告警策略组传入的指标阈值条件 */
@@ -1749,7 +1753,7 @@ declare namespace V20180724 {
     GroupId?: string | null;
     /** 告警分组名称 */
     GroupName?: string | null;
-    /** 云监控告警模板ID ，返回告警模板转换后的notice ID。 */
+    /** 腾讯云可观测平台告警模板ID ，返回告警模板转换后的notice ID。 */
     AMPReceivers?: string[] | null;
     /** 自定义告警模板 */
     CustomReceiver?: PrometheusAlertCustomReceiver | null;
@@ -2896,7 +2900,7 @@ declare namespace V20180724 {
     GroupName?: string;
     /** 告警分组状态：2 -- 启用3 -- 禁用不为空时会覆盖 `Rules`字段下所有告警规则状态 */
     GroupState?: number;
-    /** 云监控告警通知模板ID列表，形如Consumer-xxxx或notice-xxxx */
+    /** 腾讯云可观测平台告警通知模板ID列表，形如Consumer-xxxx或notice-xxxx */
     AMPReceivers?: string[];
     /** 自定义告警通知模板 */
     CustomReceiver?: PrometheusAlertCustomReceiver;
@@ -5494,7 +5498,7 @@ declare namespace V20180724 {
     GroupName?: string;
     /** 告警分组状态：2 -- 启用3 -- 禁用不为空时会覆盖 `Rules`字段下所有告警规则状态 */
     GroupState?: number;
-    /** 云监控告警通知模板ID列表，形如Consumer-xxxx或notice-xxxx */
+    /** 腾讯云可观测平台告警通知模板ID列表，形如Consumer-xxxx或notice-xxxx */
     AMPReceivers?: string[];
     /** 自定义告警通知模板 */
     CustomReceiver?: PrometheusAlertCustomReceiver;
@@ -5627,7 +5631,7 @@ declare interface Monitor {
   (): Versions;
   /** 查询告警通知历史 {@link DescribeAlarmNotifyHistoriesRequest} {@link DescribeAlarmNotifyHistoriesResponse} */
   DescribeAlarmNotifyHistories(data: DescribeAlarmNotifyHistoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmNotifyHistoriesResponse>;
-  /** 绑定 Grafana 可视化实例 {@link V20180724.BindPrometheusManagedGrafanaRequest} {@link V20180724.BindPrometheusManagedGrafanaResponse} */
+  /** 绑定 Grafana 服务实例 {@link V20180724.BindPrometheusManagedGrafanaRequest} {@link V20180724.BindPrometheusManagedGrafanaResponse} */
   BindPrometheusManagedGrafana(data: V20180724.BindPrometheusManagedGrafanaRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.BindPrometheusManagedGrafanaResponse>;
   /** 绑定策略对象 {@link V20180724.BindingPolicyObjectRequest} {@link V20180724.BindingPolicyObjectResponse} */
   BindingPolicyObject(data: V20180724.BindingPolicyObjectRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.BindingPolicyObjectResponse>;
@@ -5919,7 +5923,7 @@ declare interface Monitor {
   UnBindingAllPolicyObject(data: V20180724.UnBindingAllPolicyObjectRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.UnBindingAllPolicyObjectResponse>;
   /** 删除策略的关联对象 {@link V20180724.UnBindingPolicyObjectRequest} {@link V20180724.UnBindingPolicyObjectResponse} */
   UnBindingPolicyObject(data: V20180724.UnBindingPolicyObjectRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.UnBindingPolicyObjectResponse>;
-  /** 解除实例绑定的 Grafana 可视化实例 {@link V20180724.UnbindPrometheusManagedGrafanaRequest} {@link V20180724.UnbindPrometheusManagedGrafanaResponse} */
+  /** 解除实例绑定的 Grafana 服务实例 {@link V20180724.UnbindPrometheusManagedGrafanaRequest} {@link V20180724.UnbindPrometheusManagedGrafanaResponse} */
   UnbindPrometheusManagedGrafana(data: V20180724.UnbindPrometheusManagedGrafanaRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.UnbindPrometheusManagedGrafanaResponse>;
   /** 删除 Grafana Dashboard {@link V20180724.UninstallGrafanaDashboardRequest} {@link V20180724.UninstallGrafanaDashboardResponse} */
   UninstallGrafanaDashboard(data: V20180724.UninstallGrafanaDashboardRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.UninstallGrafanaDashboardResponse>;

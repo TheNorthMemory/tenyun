@@ -194,6 +194,90 @@ declare interface DisplayEnterprise {
   VulCount?: number;
 }
 
+/** 仿冒应用详情 */
+declare interface DisplayFakeApp {
+  /** 主键ID */
+  Id?: number;
+  /** 公共字段 */
+  DisplayToolCommon?: DisplayToolCommon;
+  /** 仿冒应用名称 */
+  AppName?: string;
+  /** 仿冒应用包名称 */
+  PackageName?: string;
+  /** 下载链接 */
+  DownloadUrl?: string;
+  /** 处置状态：0-待处理 1-处理中 2-已处理 */
+  HandlingStatus?: number;
+  /** 关停状态：0-(默认状态) 1-关停审核中 2-已拦截 3-已拒绝 4-下线流程中 5-已下线 6-下线失败 */
+  ShutdownStatus?: number;
+  /** 关停时间 */
+  ShutdownTime?: string;
+}
+
+/** 仿冒小程序详情 */
+declare interface DisplayFakeMiniProgram {
+  /** 主键ID */
+  Id?: number;
+  /** 公共字段 */
+  DisplayToolCommon?: DisplayToolCommon;
+  /** 仿冒小程序名称 */
+  ProgramName?: string;
+  /** 小程序ID */
+  ProgramId?: string;
+  /** 类别 */
+  Category?: string;
+  /** 二维码 */
+  QrCode?: string;
+  /** 处置状态：0-待处理 1-处理中 2-已处理 */
+  HandlingStatus?: number;
+  /** 关停状态：0-(默认状态) 1-关停审核中 2-已拦截 3-已拒绝 4-下线流程中 5-已下线 6-下线失败 */
+  ShutdownStatus?: number;
+  /** 关停时间 */
+  ShutdownTime?: string;
+}
+
+/** 仿冒网站详情 */
+declare interface DisplayFakeWebsite {
+  /** 主键ID */
+  Id?: number;
+  /** 公共字段 */
+  DisplayToolCommon?: DisplayToolCommon;
+  /** 仿冒网站 */
+  Website?: string;
+  /** ip位置 */
+  IPLocation?: string;
+  /** 截图 */
+  Screenshot?: string;
+  /** 处置状态：0-待处理 1-处理中 2-已处理 */
+  HandlingStatus?: number;
+  /** 关停状态：0-(默认状态) 1-关停审核中 2-已拦截 3-已拒绝 4-下线流程中 5-已下线 6-下线失败 */
+  ShutdownStatus?: number;
+  /** 关停时间 */
+  ShutdownTime?: string;
+}
+
+/** 仿冒公众号详情 */
+declare interface DisplayFakeWechatOfficial {
+  /** 主键ID */
+  Id?: number;
+  /** 公共字段 */
+  DisplayToolCommon?: DisplayToolCommon;
+  /** 仿冒公众号名称 */
+  AccountName?: string;
+  /** 公众号ID */
+  WechatId?: string;
+  /** 头像 */
+  Avatar?: string;
+  /** 二维码 */
+  QrCode?: string;
+  /** 处置状态：0-待处理 1-处理中 2-已处理 */
+  HandlingStatus?: number;
+  /** 关停状态：0-(默认状态) 1-关停审核中 2-已拦截 3-已拒绝 4-下线流程中 5-已下线 6-下线失败 */
+  ShutdownStatus?: number;
+  /** 关停时间 */
+  ShutdownTime?: string;
+}
+
 /** Github泄露详情 */
 declare interface DisplayGithub {
   /** 主键ID */
@@ -912,6 +996,150 @@ declare interface DescribeEnterprisesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeFakeAppsRequest {
+  /** 是否新增数据 */
+  IsNew?: boolean;
+  /** 企业ID */
+  CustomerId?: number;
+  /** 分页大小 */
+  Limit?: number;
+  /** 分页偏移 */
+  Offset?: number;
+  /** 子公司ID列表 */
+  EnterpriseUidList?: string[];
+  /** 数据输出格式：json、file，默认不填为json */
+  Format?: string;
+  /** 创建时间-开始 */
+  CreateAtStart?: string;
+  /** 创建时间-结束 */
+  CreateAtEnd?: string;
+  /** 更新时间-开始 */
+  UpdateAtStart?: string;
+  /** 更新时间-结束 */
+  UpdateAtEnd?: string;
+  /** 查询数组 */
+  Filters?: Filter[];
+  /** 是否显示被忽略的数据 */
+  Ignored?: boolean;
+}
+
+declare interface DescribeFakeAppsResponse {
+  /** 总数 */
+  Total?: number;
+  /** 仿冒应用 */
+  List?: DisplayFakeApp[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFakeMiniProgramsRequest {
+  /** 是否新增数据 */
+  IsNew?: boolean;
+  /** 企业ID */
+  CustomerId?: number;
+  /** 分页大小 */
+  Limit?: number;
+  /** 分页偏移 */
+  Offset?: number;
+  /** 子公司ID列表 */
+  EnterpriseUidList?: string[];
+  /** 数据输出格式：json、file，默认不填为json */
+  Format?: string;
+  /** 创建时间-开始 */
+  CreateAtStart?: string;
+  /** 创建时间-结束 */
+  CreateAtEnd?: string;
+  /** 更新时间-开始 */
+  UpdateAtStart?: string;
+  /** 更新时间-结束 */
+  UpdateAtEnd?: string;
+  /** 查询数组 */
+  Filters?: Filter[];
+  /** 是否显示被忽略的数据 */
+  Ignored?: boolean;
+}
+
+declare interface DescribeFakeMiniProgramsResponse {
+  /** 总数 */
+  Total?: number;
+  /** 仿冒小程序 */
+  List?: DisplayFakeMiniProgram[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFakeWebsitesRequest {
+  /** 是否新增数据 */
+  IsNew?: boolean;
+  /** 企业ID */
+  CustomerId?: number;
+  /** 分页大小 */
+  Limit?: number;
+  /** 分页偏移 */
+  Offset?: number;
+  /** 子公司ID列表 */
+  EnterpriseUidList?: string[];
+  /** 数据输出格式：json、file，默认不填为json */
+  Format?: string;
+  /** 创建时间-开始 */
+  CreateAtStart?: string;
+  /** 创建时间-结束 */
+  CreateAtEnd?: string;
+  /** 更新时间-开始 */
+  UpdateAtStart?: string;
+  /** 更新时间-结束 */
+  UpdateAtEnd?: string;
+  /** 查询数组 */
+  Filters?: Filter[];
+  /** 是否显示被忽略的数据 */
+  Ignored?: boolean;
+}
+
+declare interface DescribeFakeWebsitesResponse {
+  /** 总数 */
+  Total?: number;
+  /** 仿冒网站 */
+  List?: DisplayFakeWebsite[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFakeWechatOfficialsRequest {
+  /** 是否新增数据 */
+  IsNew?: boolean;
+  /** 企业ID */
+  CustomerId?: number;
+  /** 分页大小 */
+  Limit?: number;
+  /** 分页偏移 */
+  Offset?: number;
+  /** 子公司ID列表 */
+  EnterpriseUidList?: string[];
+  /** 数据输出格式：json、file，默认不填为json */
+  Format?: string;
+  /** 创建时间-开始 */
+  CreateAtStart?: string;
+  /** 创建时间-结束 */
+  CreateAtEnd?: string;
+  /** 更新时间-开始 */
+  UpdateAtStart?: string;
+  /** 更新时间-结束 */
+  UpdateAtEnd?: string;
+  /** 查询数组 */
+  Filters?: Filter[];
+  /** 是否显示被忽略的数据 */
+  Ignored?: boolean;
+}
+
+declare interface DescribeFakeWechatOfficialsResponse {
+  /** 总数 */
+  Total?: number;
+  /** 仿冒公众号 */
+  List?: DisplayFakeWechatOfficial[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeGithubsRequest {
   /** 是否新增数据 */
   IsNew?: boolean;
@@ -1587,6 +1815,14 @@ declare interface Ctem {
   DescribeDomains(data?: DescribeDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsResponse>;
   /** 查看企业架构数据 {@link DescribeEnterprisesRequest} {@link DescribeEnterprisesResponse} */
   DescribeEnterprises(data?: DescribeEnterprisesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnterprisesResponse>;
+  /** 查询仿冒APP {@link DescribeFakeAppsRequest} {@link DescribeFakeAppsResponse} */
+  DescribeFakeApps(data?: DescribeFakeAppsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFakeAppsResponse>;
+  /** 查询仿冒小程序 {@link DescribeFakeMiniProgramsRequest} {@link DescribeFakeMiniProgramsResponse} */
+  DescribeFakeMiniPrograms(data?: DescribeFakeMiniProgramsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFakeMiniProgramsResponse>;
+  /** 查询仿冒网站 {@link DescribeFakeWebsitesRequest} {@link DescribeFakeWebsitesResponse} */
+  DescribeFakeWebsites(data?: DescribeFakeWebsitesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFakeWebsitesResponse>;
+  /** 查询仿冒公众号 {@link DescribeFakeWechatOfficialsRequest} {@link DescribeFakeWechatOfficialsResponse} */
+  DescribeFakeWechatOfficials(data?: DescribeFakeWechatOfficialsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFakeWechatOfficialsResponse>;
   /** 查看Github泄露数据 {@link DescribeGithubsRequest} {@link DescribeGithubsResponse} */
   DescribeGithubs(data?: DescribeGithubsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGithubsResponse>;
   /** 查看http数据 {@link DescribeHttpsRequest} {@link DescribeHttpsResponse} */

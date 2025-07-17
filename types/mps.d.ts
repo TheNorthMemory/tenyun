@@ -63,9 +63,9 @@ declare interface ActionConfigInfo {
 /** 编排原子任务 */
 declare interface Activity {
   /** 原子任务类型：input: 起始节点output：终止节点action-trans：转码action-samplesnapshot：采样截图action-AIAnalysis: 分析action-AIRecognition：识别action-aiReview：审核action-animated-graphics：转动图action-image-sprite：雪碧图action-snapshotByTimeOffset: 时间点截图action-adaptive-substream：自适应码流action-AIQualityControl：媒体质检action-SmartSubtitles：智能字幕 */
-  ActivityType: string | null;
+  ActivityType: string;
   /** 后驱节点索引数组 */
-  ReardriveIndex?: number[] | null;
+  ReardriveIndex?: number[];
   /** 原子任务参数 */
   ActivityPara?: ActivityPara | null;
 }
@@ -159,9 +159,9 @@ declare interface AdaptiveDynamicStreamingTaskInput {
   /** 要插入的字幕文件。 */
   AddOnSubtitles?: AddOnSubtitle[] | null;
   /** Drm信息。 */
-  DrmInfo?: DrmInfo | null;
+  DrmInfo?: DrmInfo;
   /** 自适应转码模板类型：Common：音视频类型PureAudio：纯音频类型 */
-  DefinitionType?: string | null;
+  DefinitionType?: string;
 }
 
 /** 转自适应码流模板详情 */
@@ -321,9 +321,9 @@ declare interface AiAnalysisTaskDelLogoOutput {
   /** 擦除后文件的存储位置。 */
   OutputStorage?: TaskOutputStorage;
   /** 基于画面提取的字幕文件路径。 */
-  OriginSubtitlePath?: string | null;
+  OriginSubtitlePath?: string;
   /** 基于画面提取的字幕翻译文件路径。 */
-  TranslateSubtitlePath?: string | null;
+  TranslateSubtitlePath?: string;
 }
 
 /** 智能擦除结果类型 */
@@ -749,23 +749,23 @@ declare interface AiRecognitionTaskFaceResultItem {
   /** 人物出现的片段结果集。 */
   SegmentSet?: AiRecognitionTaskFaceSegmentItem[];
   /** 人物性别：Male：男性；Female：女性。 */
-  Gender?: string | null;
+  Gender?: string;
   /** 人物出生日期。 */
-  Birthday?: string | null;
+  Birthday?: string;
   /** 人物职业或者职务。 */
-  Profession?: string | null;
+  Profession?: string;
   /** 人物毕业院校。 */
-  SchoolOfGraduation?: string | null;
+  SchoolOfGraduation?: string;
   /** 人物简介。 */
-  Abstract?: string | null;
+  Abstract?: string;
   /** 人物出生地或者籍贯。 */
-  PlaceOfBirth?: string | null;
+  PlaceOfBirth?: string;
   /** 人物类型：Politician：官员；Artist：艺人。 */
-  PersonType?: string | null;
+  PersonType?: string;
   /** 敏感度标注：Normal：正常；Sensitive：敏感。 */
-  Remark?: string | null;
+  Remark?: string;
   /** 截图链接 */
-  Url?: string | null;
+  Url?: string;
 }
 
 /** 智能人脸识别输出。 */
@@ -1806,7 +1806,7 @@ declare interface ComposeStyles {
 declare interface ComposeSubtitleItem {
   /** 字幕样式，Styles 列表中对应的 Subtitle样式的 ID。 */
   StyleId: string;
-  /** 字幕文本。 */
+  /** 字幕文本。注：长文本可能超出画面范围，建议使用 \n 进行换行。 */
   Text: string;
   /** 元素在轨道时间轴上的时间信息，不填则紧跟上一个元素。 */
   TrackTime?: ComposeTrackTime;
@@ -2530,11 +2530,11 @@ declare interface DiagnoseResult {
 
 /** Drm 加密信息。 */
 declare interface DrmInfo {
-  /** 加密类型： simpleaes: aes-128 加密 widevine fairplay：Dash不支持fairplay加密 playready */
-  Type: string | null;
+  /** 加密类型：- simpleaes只能用于HLS，切片格式支持ts和mp4只能使用切片模式，不能使用singlefile模式- fairplay：只能用于HLS，切片格式只能是mp4可以使用切片模式或singlefile模式- widevine：可以用于HLS和DASH，切片格式只能是mp4输出HLS：可以使用切片模式或singlefile模式输出DASH：只能singlefile模式- playready：可以用于HLS和DASH，切片格式只能是mp4输出HLS：可以使用切片模式或singlefile模式输出DASH：只能singlefile模式 */
+  Type: string;
   /** SimpleAes 加密信息。 */
   SimpleAesDrm?: SimpleAesDrm | null;
-  /** FairPlay, WideVine， PlayReady 加密信息。 */
+  /** FairPlay，WideVine，PlayReady 加密信息。 */
   SpekeDrm?: SpekeDrm;
 }
 
@@ -2596,6 +2596,50 @@ declare interface EnhanceConfig {
   VideoEnhance?: VideoEnhanceConfig | null;
   /** 音频增强配置。 */
   AudioEnhance?: AudioEnhanceConfig | null;
+}
+
+/** 视频评测任务的视频来源信息 */
+declare interface EvaluationMediaInputInfo {
+  /** 对比视频的来源 ID，当评测任务的类型为 BD_RATE 且对比视频来自用户输入时有效；当对比视频来自转码模版时为空 */
+  SourceId?: string | null;
+  /** 对比视频的输入信息 */
+  InputInfo?: MediaInputInfo | null;
+}
+
+/** 评测任务输入参数类型 */
+declare interface EvaluationTaskInput {
+  /** 评测任务类型，可选 NORMAL、BD_RATE */
+  TaskType: string;
+  /** 评测类型，可选 PSNR、SSIM、VMAF、VMAF_NEG */
+  EvaluationTypeSet: string[];
+  /** 评测范围类型，可选 ALL（全部时长）、TIME（指定时长范围）、FRAME（指定帧数范围） */
+  EvaluationRangeType?: string;
+  /** 对比视频信息。 */
+  ContrastInfoSet?: MediaInputInfo[] | null;
+  /** 对比视频信息。 */
+  ContrastMediaSet?: EvaluationMediaInputInfo[];
+  /** 对比转码模板信息。 */
+  ContrastTemplateSet?: EvaluationTemplateInputInfo[];
+  /** 开始评测时间，单位秒，当 EvaluationRangeType 为 TIME 时有效。 */
+  StartTime?: number;
+  /** 结束评测时间，单位秒，当 EvaluationRangeType 为 TIME 时有效。 */
+  EndTime?: number;
+  /** 评测开始帧，默认从0开始，当 EvaluationRangeType 为FRAME 时有效。 */
+  StartFrameIndex?: number;
+  /** 评测结束帧，默认为视频中可以参与评测的最后一帧，当 EvaluationRangeType 为 FRAME 时有效。 */
+  EndFrameIndex?: number;
+  /** 分辨率对齐模式，默认对齐到低分辨率的视频，可选 ALIGN_HIGH_RESOLUTION、ALIGN_LOW_RESOLUTION */
+  ResolutionAlignmentMode?: string;
+  /** 指定码率评测，当评测任务类型为 BD_RATE 有效。 */
+  BitrateSet?: number[];
+  /** 指定 vcrf 评测，当评测任务类型为 BD_RATE 有效。 */
+  VCRFSet?: number[];
+}
+
+/** 在评测中使用的转码模版的信息 */
+declare interface EvaluationTemplateInputInfo {
+  /** 转码模版的 ID。 */
+  Definition: number | null;
 }
 
 /** 表情识别参数配置 */
@@ -3867,11 +3911,11 @@ declare interface MediaProcessTaskImageSpriteResult {
   /** 对视频截雪碧图任务的输入。 */
   Input?: ImageSpriteTaskInput;
   /** 对视频截雪碧图任务的输出。 */
-  Output?: MediaImageSpriteItem | null;
+  Output?: MediaImageSpriteItem;
   /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  BeginProcessTime?: string | null;
+  BeginProcessTime?: string;
   /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  FinishTime?: string | null;
+  FinishTime?: string;
 }
 
 /** 媒体处理任务类型 */
@@ -3921,11 +3965,11 @@ declare interface MediaProcessTaskSampleSnapshotResult {
   /** 对视频做采样截图任务输入。 */
   Input?: SampleSnapshotTaskInput;
   /** 对视频做采样截图任务输出。 */
-  Output?: MediaSampleSnapshotItem | null;
+  Output?: MediaSampleSnapshotItem;
   /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  BeginProcessTime?: string | null;
+  BeginProcessTime?: string;
   /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  FinishTime?: string | null;
+  FinishTime?: string;
 }
 
 /** 对视频按指定时间点截图任务结果类型 */
@@ -3941,29 +3985,29 @@ declare interface MediaProcessTaskSnapshotByTimeOffsetResult {
   /** 对视频按指定时间点截图任务输入。 */
   Input?: SnapshotByTimeOffsetTaskInput;
   /** 对视频按指定时间点截图任务输出。 */
-  Output?: MediaSnapshotByTimeOffsetItem | null;
+  Output?: MediaSnapshotByTimeOffsetItem;
   /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  BeginProcessTime?: string | null;
+  BeginProcessTime?: string;
   /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  FinishTime?: string | null;
+  FinishTime?: string;
 }
 
 /** 转码任务结果类型 */
 declare interface MediaProcessTaskTranscodeResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
-  Status: string;
+  Status?: string;
   /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369) 列表。 */
-  ErrCodeExt: string;
+  ErrCodeExt?: string;
   /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 错误信息。 */
-  Message: string;
+  Message?: string;
   /** 转码任务的输入。 */
-  Input: TranscodeTaskInput;
+  Input?: TranscodeTaskInput;
   /** 转码任务的输出。 */
-  Output: MediaTranscodeItem | null;
+  Output?: MediaTranscodeItem | null;
   /** 转码进度，取值范围 [0-100] */
-  Progress: number | null;
+  Progress?: number;
 }
 
 /** 采样截图信息 */
@@ -4225,13 +4269,13 @@ declare interface OverrideTranscodeParameter {
   /** 极速高清转码参数。 */
   TEHDConfig?: TEHDConfigForUpdate | null;
   /** 字幕流配置参数。 */
-  SubtitleTemplate?: SubtitleTemplate | null;
+  SubtitleTemplate?: SubtitleTemplate;
   /** 外挂音轨参数。 */
-  AddonAudioStream?: MediaInputInfo[] | null;
+  AddonAudioStream?: MediaInputInfo[];
   /** 转码扩展字段。 */
-  StdExtInfo?: string | null;
+  StdExtInfo?: string;
   /** 要插入的字幕文件。 */
-  AddOnSubtitles?: AddOnSubtitle[] | null;
+  AddOnSubtitles?: AddOnSubtitle[];
 }
 
 /** 对于含有多个音/视频轨的流，可以指定需要使用的轨道 */
@@ -4611,7 +4655,7 @@ declare interface RawTranscodeParameter {
   /** 极速高清转码参数。 */
   TEHDConfig?: TEHDConfig;
   /** 扩展参数，序列化的 json 字符串。 */
-  StdExtInfo?: string | null;
+  StdExtInfo?: string;
   /** 音视频增强配置 */
   EnhanceConfig?: EnhanceConfig | null;
 }
@@ -4813,11 +4857,11 @@ declare interface ScheduleRecognitionTaskResult {
   /** 识别任务的输入。 */
   Input?: AiRecognitionTaskInput;
   /** 识别任务的输出。 */
-  Output?: AiRecognitionResult[] | null;
+  Output?: AiRecognitionResult[];
   /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  BeginProcessTime?: string | null;
+  BeginProcessTime?: string;
   /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  FinishTime?: string | null;
+  FinishTime?: string;
 }
 
 /** 编排视频审核任务结果类型 */
@@ -4851,13 +4895,13 @@ declare interface ScheduleSmartSubtitleTaskResult {
   /** 错误信息。 */
   Message?: string;
   /** 识别任务的输入。 */
-  Input?: SmartSubtitlesTaskInput | null;
+  Input?: SmartSubtitlesTaskInput;
   /** 识别任务的输出。 */
-  Output?: SmartSubtitlesResult[] | null;
+  Output?: SmartSubtitlesResult[];
   /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  BeginProcessTime?: string | null;
+  BeginProcessTime?: string;
   /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  FinishTime?: string | null;
+  FinishTime?: string;
 }
 
 /** 编排任务信息 */
@@ -4955,19 +4999,19 @@ declare interface SegmentRecognitionItem {
   /** 片段结束时间偏移。 */
   EndTimeOffset?: number;
   /** 拆条片段URL。 */
-  SegmentUrl?: string | null;
+  SegmentUrl?: string;
   /** 拆条片段封面。 */
-  CovImgUrl?: string | null;
+  CovImgUrl?: string;
   /** 分段标题。 */
-  Title?: string | null;
+  Title?: string;
   /** 分段概要。 */
-  Summary?: string | null;
+  Summary?: string;
   /** 分段关键词。 */
   Keywords?: string[];
   /** 直播切片对应直播起始时间点，采用 ISO 日期格式。 */
-  BeginTime?: string | null;
+  BeginTime?: string;
   /** 直播切片对应直播结束时间点，采用 ISO 日期格式。 */
-  EndTime?: string | null;
+  EndTime?: string;
   /** 直播拆条用，音频url。 */
   AudioUrl?: string;
   /** 直播拆条用，音频对应起始时间戳； */
@@ -5244,9 +5288,9 @@ declare interface StreamUrlDetail {
 declare interface SubtitleTemplate {
   /** 要压制到视频中的字幕文件地址。 */
   Path?: string | null;
-  /** 指定要压制到视频中的字幕轨道，Path 和 StreamIndex 至少指定一个；如果指定了Path，则优先使用Path。Streamindex的取值须与源文件中的字幕轨索引一致。例如，源文件中的字幕轨为stream#0:3，则StreamIndex应为3，否则可能导致任务处理失败。 */
+  /** 指定要压制到视频中的字幕轨道，Streamindex的取值从0开始，0表示使用源视频中的第一条字幕轨。如果指定了Path，则优先使用Path。Path 和 StreamIndex 至少指定一个。- 注意：StreamIndex必须与源文件中的字幕轨索引一致。例如，源文件中的字幕轨为stream#0:3，则StreamIndex应为3，否则可能导致任务处理失败。 */
   StreamIndex?: number | null;
-  /** 字体类型，支持：hei.ttf：黑体song.ttf：宋体kai.ttf（推荐）或 simkai.ttf：楷体msyh.ttf：微软雅黑msyhbd.ttf：微软雅黑加粗hkjgt.ttf：华康金刚体dhttx.ttf：典黑体特细xqgdzt.ttf：喜鹊古字典体qpcyt.ttf：巧拼超圆体arial.ttf：仅支持英文dinalternate.ttf：DIN Alternate Boldhelveticalt.ttf：Helveticahelveticains.ttf：Helvetica Inserattrajanpro.ttf：TrajanPro-Boldkorean.ttf：韩语japanese.ttf：日语thai.ttf：泰语默认：hei.ttf 黑体。 */
+  /** 字体类型，支持：hei.ttf：黑体song.ttf：宋体kai.ttf（推荐）或 simkai.ttf：楷体msyh.ttf：微软雅黑msyhbd.ttf：微软雅黑加粗hkjgt.ttf：华康金刚体dhttx.ttf：典黑体特细xqgdzt.ttf：喜鹊古字典体qpcyt.ttf：巧拼超圆体arial.ttf：仅支持英文dinalternate.ttf：DIN Alternate Boldhelveticalt.ttf：Helveticahelveticains.ttf：Helvetica Inserattrajanpro.ttf：TrajanPro-Boldkorean.ttf：韩语japanese.ttf：日语thai.ttf：泰语默认：hei.ttf 黑体。注意：楷体推荐使用kai.ttf */
   FontType?: string | null;
   /** 字体大小，格式：Npx，N 为数值，不指定则以字幕文件中为准。默认源视频高度的5%。 */
   FontSize?: string | null;
@@ -5324,7 +5368,7 @@ declare interface TagConfigureInfoForUpdate {
 
 /** 任务的事件通知配置。 */
 declare interface TaskNotifyConfig {
-  /** 通知类型，可选值：CMQ：已下线，建议切换到TDMQ-CMQTDMQ-CMQ：消息队列URL：指定URL时HTTP回调推送到 NotifyUrl 指定的地址，回调协议http+json，包体内容同解析事件通知接口的输出参数 SCF：不推荐使用，需要在控制台额外配置SCFAWS-SQS：AWS 队列，只适用于 AWS 任务，且要求同区域 注：不填或为空时默认 CMQ，如需采用其他类型需填写对应类型值。 */
+  /** 通知类型，可选值：CMQ：已下线，建议切换到TDMQ-CMQTDMQ-CMQ：消息队列URL：指定URL时HTTP回调推送到 NotifyUrl 指定的地址，回调协议http+json，包体内容同解析事件通知接口的输出参数 SCF：不推荐使用，需要在控制台额外配置SCFAWS-SQS：AWS 队列，只适用于 AWS 任务，且要求同区域 注：不填或为空时默认 TDMQ-CMQ，如需采用其他类型需填写对应类型值；如果使用TDMQ-CMQ消息队列，任务回包过大可能会写入队列失败 */
   NotifyType?: string;
   /** 工作流通知的模式，可取值有 Finish 和 Change，不填代表 Finish。 */
   NotifyMode?: string;
@@ -5341,7 +5385,7 @@ declare interface TaskNotifyConfig {
   /** AWS SQS 回调，NotifyType为 AWS-SQS 时必填。 */
   AwsSQS?: AwsSQS | null;
   /** 用于生成回调签名的key。 */
-  NotifyKey?: string | null;
+  NotifyKey?: string;
 }
 
 /** 媒体处理输出对象信息。 */
@@ -5471,11 +5515,11 @@ declare interface TranscodeTaskInput {
   /** 视频转码模板 ID。 */
   Definition: number;
   /** 视频转码自定义参数，当 Definition 填 0 时有效。该参数用于高度定制场景，建议您优先使用 Definition 指定转码参数。 */
-  RawParameter?: RawTranscodeParameter | null;
+  RawParameter?: RawTranscodeParameter;
   /** 视频转码自定义参数，当 Definition 不填 0 时有效。当填写了该结构中的部分转码参数时，将使用填写的参数覆盖转码模板中的参数。该参数用于高度定制场景，建议您仅使用 Definition 指定转码参数。 */
   OverrideParameter?: OverrideTranscodeParameter | null;
   /** 水印列表，支持多张图片或文字水印，最大可支持 10 张。 */
-  WatermarkSet?: WatermarkInput[] | null;
+  WatermarkSet?: WatermarkInput[];
   /** 马赛克列表，最大可支持 10 张。 */
   MosaicSet?: MosaicInput[];
   /** 转码后的视频的起始时间偏移，单位：秒。不填或填0，表示转码后的视频从原始视频的起始位置开始；当数值大于0时（假设为 n），表示转码后的视频从原始视频的第 n 秒位置开始；当数值小于0时（假设为 -n），表示转码后的视频从原始视频结束 n 秒前的位置开始。 */
@@ -6212,6 +6256,32 @@ declare interface CreateLiveRecordTemplateResponse {
   RequestId?: string;
 }
 
+declare interface CreateMediaEvaluationRequest {
+  /** 评测的原文件输入信息。目前输入对象的类型有 COS 和 URL。 */
+  InputInfo: MediaInputInfo;
+  /** 评测任务参数。 */
+  EvaluationTask: EvaluationTaskInput;
+  /** 评测的输出文件的目标存储。不填则继承 InputInfo 中的存储位置。目前输出对象存储位置的类型有COS。 */
+  OutputStorage?: TaskOutputStorage;
+  /** 评测生成文件的输出目录，必选以 / 开头和结尾，如/movie/201907/。 如果不填，表示与 InputInfo 中文件所在的目录一致。 */
+  OutputDir?: string;
+  /** 任务的事件通知信息，不填代表不获取事件通知。 */
+  TaskNotifyConfig?: TaskNotifyConfig;
+  /** 任务优先级，数值越大优先级越高，取值范围是-10到 10，不填代表0。 */
+  TasksPriority?: number;
+  /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+  SessionId?: string;
+  /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+  SessionContext?: string;
+}
+
+declare interface CreateMediaEvaluationResponse {
+  /** 任务 ID。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreatePersonSampleRequest {
   /** 素材名称，长度限制：20 个字符。 */
   Name: string;
@@ -6921,27 +6991,27 @@ declare interface DescribeAsrHotwordsResponse {
   /** 需要查询的热词库 id */
   HotwordsId?: string;
   /** 当前热词库 id 状态，为 0 表示查询的时刻，没有模板绑定这个热词库，可以删除 */
-  Status?: number | null;
+  Status?: number;
   /** 热词库的名称 */
-  Name?: string | null;
+  Name?: string;
   /** 临时热词库为 0，返回创建时候的字符串文件热词库为 1，返回创建是上传的文件内容 */
-  Type?: number | null;
+  Type?: number;
   /** 热词文件上传时的文件名 */
-  FileName?: string | null;
+  FileName?: string;
   /** 查询返回的热词库列表 */
   HotWords?: AsrHotwordsSetItem[];
   /** 热词库文本，根据 Type 区分如果 Type 为 0，是热词库字符串如果 Type 是 1，是热词库文本文件的文件内容 base64 编码 */
-  Content?: string | null;
+  Content?: string;
   /** 当前热词库包含的词语数量 */
-  WordCount?: number | null;
+  WordCount?: number;
   /** 分页偏移量，默认值：0。 */
-  Offset?: number | null;
+  Offset?: number;
   /** 返回记录条数，默认值：10，最大值：100。 */
-  Limit?: number | null;
+  Limit?: number;
   /** 热词库创建时间 ISOUTC 格式 "2006-01-02T15:04:05Z" */
-  CreateTime?: string | null;
+  CreateTime?: string;
   /** 热词库修改时间 ISOUTC 格式 "2006-01-02T15:04:05Z" */
-  UpdateTime?: string | null;
+  UpdateTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6965,7 +7035,7 @@ declare interface DescribeBatchTaskDetailResponse {
   /** 媒体处理任务 ID。 */
   TaskId?: string;
   /** 视频处理任务信息，仅当 TaskType 为 BatchTask，该字段有值。 */
-  BatchTaskResult?: BatchSubTaskResult | null;
+  BatchTaskResult?: BatchSubTaskResult;
   /** 任务的事件通知信息。 */
   TaskNotifyConfig?: TaskNotifyConfig | null;
   /** 任务流的优先级，取值范围为 [-10, 10]。 */
@@ -7631,7 +7701,7 @@ declare interface DescribeWordSamplesRequest {
 
 declare interface DescribeWordSamplesResponse {
   /** 符合条件的记录总数。 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 关键词信息。 */
   WordSet?: AiSampleWord[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -7975,7 +8045,7 @@ declare interface ModifyPersonSampleResponse {
   /** 素材信息。 */
   Person?: AiSamplePerson;
   /** 处理失败的五官信息。 */
-  FailFaceInfoSet?: AiSampleFailFaceInfo[] | null;
+  FailFaceInfoSet?: AiSampleFailFaceInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8265,9 +8335,9 @@ declare interface ParseLiveStreamProcessNotificationResponse {
   /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长1000个字符。 */
   SessionContext?: string;
   /** - 过期时间，事件通知签名过期 UNIX 时间戳。 - 来自媒体处理的消息通知默认过期时间是10分钟，如果一条消息通知中的 Timestamp 值所指定的时间已经过期，则可以判定这条通知无效，进而可以防止网络重放攻击。 - Timestamp 的格式为十进制 UNIX 时间戳，即从1970年01月01日（UTC/GMT 的午夜）开始所经过的秒数。 */
-  Timestamp?: number | null;
+  Timestamp?: number;
   /** 事件通知安全签名 Sign = MD5（Timestamp + NotifyKey）。说明：媒体处理把Timestamp 和 TaskNotifyConfig 里面的NotifyKey 进行字符串拼接后通过 MD5 计算得出 Sign 值，并将其放在通知消息里，您的后台服务器在收到通知消息后可以根据同样的算法确认 Sign 是否正确，进而确认消息是否确实来自媒体处理后台。 */
-  Sign?: string | null;
+  Sign?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8501,6 +8571,8 @@ declare interface Mps {
   CreateImageSpriteTemplate(data: CreateImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageSpriteTemplateResponse>;
   /** 创建直播录制模板 {@link CreateLiveRecordTemplateRequest} {@link CreateLiveRecordTemplateResponse} */
   CreateLiveRecordTemplate(data?: CreateLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveRecordTemplateResponse>;
+  /** 创建媒体评测 {@link CreateMediaEvaluationRequest} {@link CreateMediaEvaluationResponse} */
+  CreateMediaEvaluation(data: CreateMediaEvaluationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMediaEvaluationResponse>;
   /** 创建素材样本 {@link CreatePersonSampleRequest} {@link CreatePersonSampleResponse} */
   CreatePersonSample(data: CreatePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonSampleResponse>;
   /** 创建媒体质检模板 {@link CreateQualityControlTemplateRequest} {@link CreateQualityControlTemplateResponse} */
