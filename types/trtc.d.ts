@@ -131,6 +131,38 @@ declare interface CloudAuditStorage {
 }
 
 /** 腾讯云对象存储COS以及第三方云存储的账号信息 */
+declare interface CloudModerationStorage {
+  /** 腾讯云对象存储COS以及第三方云存储账号信息0：腾讯云对象存储 COS1：AWS S32: 阿里云 OSS示例值：0 */
+  Vendor: number;
+  /** 腾讯云对象存储的[地域信息]（https://cloud.tencent.com/document/product/436/6224 */
+  Region: string;
+  /** 云存储桶名称。 */
+  Bucket: string;
+  /** 云存储的access_key账号信息。若存储至腾讯云对象存储COS，请前往https://console.cloud.tencent.com/cam/capi 查看或创建，对应链接中密钥字段的SecretId值。示例值：test-accesskey */
+  AccessKey: string;
+  /** 云存储的secret_key账号信息。若存储至腾讯云对象存储COS，请前往https://console.cloud.tencent.com/cam/capi 查看或创建，对应链接中密钥字段的SecretKey值。示例值：test-secretkey */
+  SecretKey: string;
+  /** 云存储bucket 的指定位置，由字符串数组组成。合法的字符串范围az,AZ,0~9,'_'和'-'，举个例子，切片文件xxx.mp3在 ["prefix1", "prefix2"]作用下，音频切片文件会变成prefix1/prefix2/{taskId}/{userId}/audios/{sdkappid}_{roomId}_{userid}_{UTC时间}.ogg，视频截帧会变成prefix1/prefix2/{taskId}/{userId}/images/{sdkappid}_{roomId}_{userid}_{UTC时间}.png */
+  FileNamePrefix?: string[];
+}
+
+/** 腾讯云对象存储COS以及第三方云存储的账号信息 */
+declare interface CloudSliceStorage {
+  /** 腾讯云对象存储COS以及第三方云存储账号信息0：腾讯云对象存储 COS1：AWS S32: 阿里云 OSS示例值：0 */
+  Vendor: number;
+  /** 腾讯云对象存储的[地域信息]（https://cloud.tencent.com/document/product/436/6224 */
+  Region: string;
+  /** 云存储桶名称。 */
+  Bucket: string;
+  /** 云存储的access_key账号信息。若存储至腾讯云对象存储COS，请前往https://console.cloud.tencent.com/cam/capi 查看或创建，对应链接中密钥字段的SecretId值。示例值：test-accesskey */
+  AccessKey: string;
+  /** 云存储的secret_key账号信息。若存储至腾讯云对象存储COS，请前往https://console.cloud.tencent.com/cam/capi 查看或创建，对应链接中密钥字段的SecretKey值。示例值：test-secretkey */
+  SecretKey: string;
+  /** 云存储bucket 的指定位置，由字符串数组组成。合法的字符串范围az,AZ,0~9,'_'和'-'，举个例子，切片文件xxx.mp3在 ["prefix1", "prefix2"]作用下，音频切片文件会变成prefix1/prefix2/{taskId}/{userId}/audios/{sdkappid}_{roomId}_{userid}_{UTC时间}.ogg，视频截帧会变成prefix1/prefix2/{taskId}/{userId}/images/{sdkappid}_{roomId}_{userid}_{UTC时间}.png */
+  FileNamePrefix?: string[];
+}
+
+/** 腾讯云对象存储COS以及第三方云存储的账号信息 */
 declare interface CloudStorage {
   /** 腾讯云对象存储COS以及第三方云存储账号信息0：腾讯云对象存储 COS1：AWS【注意】目前第三方云存储仅支持AWS，更多第三方云存储陆续支持中 */
   Vendor: number;
@@ -574,6 +606,48 @@ declare interface MixUserInfo {
   RoomIdType?: number;
 }
 
+/** 云端审核的控制参数。 */
+declare interface ModerationParams {
+  /** 审核任务类型， 1:音频切片审核，2:视频截帧审核，3:音视切片审核+视频截帧审核4:音频流式审核 5:音频流式+视频截帧审核 默认值1 （流式审核需要供应商支持才生效） */
+  ModerationType?: number;
+  /** 房间内持续没有用户（主播）上行推流的状态超过MaxIdleTime的时长，自动停止切片，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于1800秒(0.5小时)。示例值：30 */
+  MaxIdleTime?: number;
+  /** 音频切片时长，默认15s 示例值：15 */
+  SliceAudio?: number;
+  /** 视频截帧间隔时长，默认5s */
+  SliceVideo?: number;
+  /** 供应商枚举，tianyu : 天御内容安全 （支持 1:音频切片审核，2:视频截帧审核，3:音视切片审核+视频截帧审核）ace : ACE内容安全 （支持 1:音频切片审核，2:视频截帧审核，3:音视切片审核+视频截帧审核）shumei : 数美审核（支持 1:音频切片审核，2:视频截帧审核，3:音视切片审核+视频截帧审核）yidun : 网易易盾审核 （支持 1:音频切片审核，2:视频截帧审核，3:音视切片审核+视频截帧审核） */
+  ModerationSupplier?: string;
+  /** 第三方审核商送审需要配置信息 */
+  ModerationSupplierParam?: ModerationSupplierParam;
+  /** 是否保存命中文件 0 默认不保存 1 保存命中文件 */
+  SaveModerationFile?: number;
+  /** 是否回调所有审核结果:0 默认回调所有结果 1 仅回调命中结果 */
+  CallbackAllResults?: number;
+  /** 指定订阅流白名单或者黑名单。 */
+  SubscribeStreamUserIds?: SubscribeModerationUserIds;
+}
+
+/** 审核存储参数 */
+declare interface ModerationStorageParams {
+  /** 腾讯云对象存储COS以及第三方云存储的账号信息 */
+  CloudModerationStorage?: CloudModerationStorage;
+}
+
+/** 送审到第三方审核供应商需要参数 */
+declare interface ModerationSupplierParam {
+  /** 供应审核商账号id，数美天御不为空，易盾为空 */
+  AppID?: string;
+  /** 供应审核商秘钥id */
+  SecretId?: string;
+  /** 供应审核商秘钥key */
+  SecretKey?: string;
+  /** 音频场景，策略id或者businessId */
+  AudioBizType?: string;
+  /** 图片场景，策略id或者businessId */
+  ImageBizType?: string;
+}
+
 /** 旁路转码时长的查询结果 */
 declare interface OneSdkAppIdTranscodeTimeUsagesInfo {
   /** 旁路转码时长查询结果数组 */
@@ -822,6 +896,28 @@ declare interface SingleSubscribeParams {
   UserMediaStream: UserMediaStream;
 }
 
+/** 云端切片的控制参数。 */
+declare interface SliceParams {
+  /** 切片任务类型:1:音频切片；2:视频截帧；3:音视切片+视频截帧示例值：1 */
+  SliceType?: number;
+  /** 房间内持续没有主播的状态超过MaxIdleTime的时长，自动停止录制，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于 86400秒(24小时)。示例值：30 */
+  MaxIdleTime?: number;
+  /** 音频切片时长，默认15s 示例值：15 */
+  SliceAudio?: number;
+  /** 视频截帧间隔时长，默认5s， 示例值：5 */
+  SliceVideo?: number;
+  /** 指定订阅流白名单或者黑名单。 */
+  SubscribeStreamUserIds?: SubscribeStreamUserIds;
+  /** 已废弃，从控制台配置回调url */
+  SliceCallbackUrl?: string;
+}
+
+/** 切片存储参数 */
+declare interface SliceStorageParams {
+  /** 腾讯云对象存储COS以及第三方云存储的账号信息 */
+  CloudSliceStorage?: CloudSliceStorage;
+}
+
 /** 画中画模板中有效，代表小画面的布局参数 */
 declare interface SmallVideoLayoutParams {
   /** 代表小画面对应的用户ID。 */
@@ -856,6 +952,18 @@ declare interface StorageParams {
   CloudStorage?: CloudStorage;
   /** 腾讯云云点播Vod的存储信息 */
   CloudVod?: CloudVod;
+}
+
+/** 指定订阅流白名单或者黑名单，音频的白名单和音频黑名单不能同时设置，视频亦然。同时实际并发订阅的媒体流路数最大支持25路流，混流场景下视频的多画面最大支持24画面。支持通过设置".*$"通配符，来前缀匹配黑白名单的UserId，注意房间里不能有和通配符规则相同的用户，否则将视为订阅具体用户，前缀规则会失效。 */
+declare interface SubscribeModerationUserIds {
+  /** 订阅音频流白名单，指定订阅哪几个UserId的音频流，例如["1", "2", "3"], 代表订阅UserId 1，2，3的音频流；["1.*$"], 代表订阅UserId前缀为1的音频流。默认不填订阅房间内所有的音频流，订阅列表用户数不超过32。 */
+  SubscribeAudioUserIds?: string[] | null;
+  /** 订阅音频流黑名单，指定不订阅哪几个UserId的音频流，例如["1", "2", "3"], 代表不订阅UserId 1，2，3的音频流；["1.*$"], 代表不订阅UserId前缀为1的音频流。默认不填订阅房间内所有音频流，订阅列表用户数不超过32。 */
+  UnSubscribeAudioUserIds?: string[] | null;
+  /** 订阅视频流白名单，指定订阅哪几个UserId的视频流，例如["1", "2", "3"], 代表订阅UserId 1，2，3的视频流；["1.*$"], 代表订阅UserId前缀为1的视频流。默认不填订阅房间内所有视频流，订阅列表用户数不超过32。 */
+  SubscribeVideoUserIds?: string[] | null;
+  /** 订阅视频流黑名单，指定不订阅哪几个UserId的视频流，例如["1", "2", "3"], 代表不订阅UserId 1，2，3的视频流；["1.*$"], 代表不订阅UserId前缀为1的视频流。默认不填订阅房间内所有视频流，订阅列表用户数不超过32。 */
+  UnSubscribeVideoUserIds?: string[] | null;
 }
 
 /** 指定订阅流白名单或者黑名单，音频的白名单和音频黑名单不能同时设置，视频亦然。同时实际并发订阅的媒体流路数最大支持25路流，混流场景下视频的多画面最大支持24画面。支持通过设置".*$"通配符，来前缀匹配黑白名单的UserId，注意房间里不能有和通配符规则相同的用户，否则将视为订阅具体用户，前缀规则会失效。 */
@@ -1176,6 +1284,32 @@ declare interface CreateBasicModerationResponse {
   RequestId?: string;
 }
 
+declare interface CreateCloudModerationRequest {
+  /** TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351)，和TRTC的房间所对应的SdkAppId相同。 */
+  SdkAppId: number;
+  /** TRTC的[RoomId](https://cloud.tencent.com/document/product/647/46351)，为TRTC房间所对应的RoomId。 */
+  RoomId: string;
+  /** 机器人的UserId，用于进房发起审核任务。【*注意】这个UserId不能与当前房间内的主播观众UserId重复。如果一个房间发起多个切片任务时，机器人的userid也不能相互重复，否则会中断前一个切片任务。建议可以把房间ID作为UserId的标识的一部分，即机器人UserId在房间内唯一。 */
+  UserId: string;
+  /** 机器人UserId对应的校验签名，即UserId和UserSig相当于机器人进房的登录密码，具体计算方法请参考TRTC计算UserSig的方案。 */
+  UserSig: string;
+  /** 云端审核控制参数。 */
+  ModerationParams: ModerationParams;
+  /** 云端审核文件上传到云存储的参数 */
+  ModerationStorageParams: ModerationStorageParams;
+  /** TRTC房间号的类型。 【*注意】必须和录制的房间所对应的RoomId类型相同: 0: 字符串类型的RoomId 1: 32位整型的RoomId（默认） 示例值：1 */
+  RoomIdType?: number;
+  /** 任务ID可以调用的时效性，从成功开启任务并获得TaskID后开始计算，超时后无法调用查询、更新和停止等接口，但是切片任务不会停止。 参数的单位是小时，默认24小时（1天），最大可设置72小时（3天），最小设置6小时。举例说明：如果不设置该参数，那么开始切片成功后，查询、更新和停止切片的调用时效为24个小时。 */
+  ResourceExpiredHour?: number;
+}
+
+declare interface CreateCloudModerationResponse {
+  /** 云端审核服务分配的任务ID。任务ID是对一次切片任务生命周期过程的唯一标识，结束任务时会失去意义。任务ID需要业务保存下来，作为下次针对这个任务操作的参数 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCloudRecordingRequest {
   /** TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351)，和录制的房间所对应的SdkAppId相同。 */
   SdkAppId: number;
@@ -1203,6 +1337,34 @@ declare interface CreateCloudRecordingRequest {
 
 declare interface CreateCloudRecordingResponse {
   /** 云录制服务分配的任务 ID。任务 ID 是对一次录制生命周期过程的唯一标识，结束录制时会失去意义。任务 ID需要业务保存下来，作为下次针对这个录制任务操作的参数。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCloudSliceTaskRequest {
+  /** TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351)，和TRTC的房间所对应的SdkAppId相同。 */
+  SdkAppId: number;
+  /** TRTC的[RoomId](https://cloud.tencent.com/document/product/647/46351)，为TRTC房间所对应的RoomId。 */
+  RoomId: string;
+  /** 机器人的UserId，用于进房发起切片任务。【*注意】这个UserId不能与当前房间内的主播观众UserId重复。如果一个房间发起多个切片任务时，机器人的userid也不能相互重复，否则会中断前一个切片任务。建议可以把房间ID作为UserId的标识的一部分，即机器人UserId在房间内唯一。 */
+  UserId: string;
+  /** 机器人UserId对应的校验签名，即UserId和UserSig相当于机器人进房的登录密码，具体计算方法请参考TRTC计算UserSig的方案。 */
+  UserSig: string;
+  /** 云端切片控制参数。 */
+  SliceParams: SliceParams;
+  /** 云端切片文件上传到云存储的参数 */
+  SliceStorageParams: SliceStorageParams;
+  /** TRTC房间号的类型。 【*注意】必须和录制的房间所对应的RoomId类型相同: 0: 字符串类型的RoomId 1: 32位整型的RoomId（默认） 示例值：1 */
+  RoomIdType?: number;
+  /** 接口可以调用的时效性，从成功开启录制并获得任务ID后开始计算，超时后无法调用查询、更新和停止等接口，但是录制任务不会停止。 参数的单位是小时，默认72小时（3天），最大可设置720小时（30天），最小设置6小时。举例说明：如果不设置该参数，那么开始录制成功后，查询、更新和停止录制的调用时效为72个小时。 示例值：24 */
+  ResourceExpiredHour?: number;
+  /** TRTC房间权限加密串，只有在TRTC控制台启用了高级权限控制的时候需要携带，在TRTC控制台如果开启高级权限控制后，TRTC 的后台服务系统会校验一个叫做 [PrivateMapKey] 的“权限票据”，权限票据中包含了一个加密后的 RoomId 和一个加密后的“权限位列表”。由于 PrivateMapKey 中包含 RoomId，所以只提供了 UserSig 没有提供 PrivateMapKey 时，并不能进入指定的房间。 示例值：eJw1jcEKgkAURX9FZlvY****fL9rfNX4_ */
+  PrivateMapKey?: string;
+}
+
+declare interface CreateCloudSliceTaskResponse {
+  /** 云端切片服务分配的任务ID。任务ID是对一次切片任务生命周期过程的唯一标识，结束任务时会失去意义。任务ID需要业务保存下来，作为下次针对这个任务操作的参数 */
   TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1246,6 +1408,20 @@ declare interface DeleteBasicModerationResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCloudModerationRequest {
+  /** TRTC的SDKAppId，和TRTC的房间所对应的SDKAppId相同。 */
+  SdkAppId: number;
+  /** 审核任务的唯一Id，在启动切片任务成功后会返回。 */
+  TaskId: string;
+}
+
+declare interface DeleteCloudModerationResponse {
+  /** 审核任务的唯一Id，在启动切片任务成功后会返回。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCloudRecordingRequest {
   /** TRTC的SDKAppId，和录制的房间所对应的SDKAppId相同。 */
   SdkAppId: number;
@@ -1255,6 +1431,20 @@ declare interface DeleteCloudRecordingRequest {
 
 declare interface DeleteCloudRecordingResponse {
   /** 云录制服务分配的任务 ID。任务 ID 是对一次录制生命周期过程的唯一标识，结束录制时会失去意义。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCloudSliceTaskRequest {
+  /** TRTC的SDKAppId，和TRTC的房间所对应的SDKAppId相同。 */
+  SdkAppId: number;
+  /** 切片任务的唯一Id，在启动切片任务成功后会返回。 */
+  TaskId: string;
+}
+
+declare interface DeleteCloudSliceTaskResponse {
+  /** 切片任务的唯一Id，在启动切片任务成功后会返回。 */
   TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1356,6 +1546,24 @@ declare interface DescribeCallDetailInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCloudModerationRequest {
+  /** TRTC的SDKAppId，和录制的房间所对应的SDKAppId相同。 */
+  SdkAppId: number;
+  /** 云端审核任务的唯一Id，在启动切片任务成功后会返回。 */
+  TaskId: string;
+}
+
+declare interface DescribeCloudModerationResponse {
+  /** 切片任务的唯一Id，在启动切片任务成功后会返回。 */
+  TaskId?: string;
+  /** 云端切片任务的状态信息。Idle:表示当前任务空闲中,InProgress:表示当前任务正在进行中,Exited:表示当前任务正在退出的过程中。 */
+  Status?: string;
+  /** 订阅黑白名单 */
+  SubscribeStreamUserIds?: SubscribeModerationUserIds;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCloudRecordingRequest {
   /** TRTC的SDKAppId，和录制的房间所对应的SDKAppId相同。 */
   SdkAppId: number;
@@ -1374,6 +1582,22 @@ declare interface DescribeCloudRecordingResponse {
   StorageFileList?: StorageFile[];
   /** 转推录制任务发起时所填，标识一次录制 */
   RecorderKey?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudSliceTaskRequest {
+  /** TRTC的SDKAppId，和录制的房间所对应的SDKAppId相同。 */
+  SdkAppId: number;
+  /** 切片任务的唯一Id，在启动切片任务成功后会返回。 */
+  TaskId: string;
+}
+
+declare interface DescribeCloudSliceTaskResponse {
+  /** 切片任务的唯一Id，在启动切片任务成功后会返回。 */
+  TaskId?: string;
+  /** 云端切片任务的状态信息。Idle:表示当前任务空闲中,InProgress:表示当前任务正在进行中,Exited:表示当前任务正在退出的过程中。 */
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1852,6 +2076,22 @@ declare interface DismissRoomResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCloudModerationRequest {
+  /** TRTC的SDKAppId，和TRTC的房间所对应的SDKAppId相同。 */
+  SdkAppId: number;
+  /** 审核任务的唯一Id，在启动切片任务成功后会返回。 */
+  TaskId: string;
+  /** 指定订阅流白名单或者黑名单。 */
+  SubscribeStreamUserIds?: SubscribeStreamUserIds;
+}
+
+declare interface ModifyCloudModerationResponse {
+  /** 审核任务的唯一Id，在启动切片任务成功后会返回。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCloudRecordingRequest {
   /** TRTC的SDKAppId，和录制的房间所对应的SDKAppId相同。 */
   SdkAppId: number;
@@ -1865,6 +2105,22 @@ declare interface ModifyCloudRecordingRequest {
 
 declare interface ModifyCloudRecordingResponse {
   /** 云录制服务分配的任务 ID。任务 ID 是对一次录制生命周期过程的唯一标识，结束录制时会失去意义。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCloudSliceTaskRequest {
+  /** TRTC的SDKAppId，和TRTC的房间所对应的SDKAppId相同。 */
+  SdkAppId: number;
+  /** 切片任务的唯一Id，在启动切片任务成功后会返回。 */
+  TaskId: string;
+  /** 指定订阅流白名单或者黑名单。 */
+  SubscribeStreamUserIds?: SubscribeStreamUserIds;
+}
+
+declare interface ModifyCloudSliceTaskResponse {
+  /** 切片任务的唯一Id，在启动切片任务成功后会返回。 */
   TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2309,14 +2565,22 @@ declare interface Trtc {
   ControlAIConversation(data: ControlAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<ControlAIConversationResponse>;
   /** 创建基础审核任务 {@link CreateBasicModerationRequest} {@link CreateBasicModerationResponse} */
   CreateBasicModeration(data: CreateBasicModerationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBasicModerationResponse>;
+  /** 创建云端审核 {@link CreateCloudModerationRequest} {@link CreateCloudModerationResponse} */
+  CreateCloudModeration(data: CreateCloudModerationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudModerationResponse>;
   /** 开始云端录制 {@link CreateCloudRecordingRequest} {@link CreateCloudRecordingResponse} */
   CreateCloudRecording(data: CreateCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudRecordingResponse>;
+  /** 创建云端切片任务 {@link CreateCloudSliceTaskRequest} {@link CreateCloudSliceTaskResponse} */
+  CreateCloudSliceTask(data: CreateCloudSliceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudSliceTaskResponse>;
   /** 上传图片 {@link CreatePictureRequest} {@link CreatePictureResponse} */
   CreatePicture(data: CreatePictureRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePictureResponse>;
   /** 停止基础审核任务 {@link DeleteBasicModerationRequest} {@link DeleteBasicModerationResponse} */
   DeleteBasicModeration(data: DeleteBasicModerationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBasicModerationResponse>;
+  /** 停止云端审核 {@link DeleteCloudModerationRequest} {@link DeleteCloudModerationResponse} */
+  DeleteCloudModeration(data: DeleteCloudModerationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudModerationResponse>;
   /** 停止云端录制任务 {@link DeleteCloudRecordingRequest} {@link DeleteCloudRecordingResponse} */
   DeleteCloudRecording(data: DeleteCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudRecordingResponse>;
+  /** 停止云端切片任务 {@link DeleteCloudSliceTaskRequest} {@link DeleteCloudSliceTaskResponse} */
+  DeleteCloudSliceTask(data: DeleteCloudSliceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudSliceTaskResponse>;
   /** 删除图片 {@link DeletePictureRequest} {@link DeletePictureResponse} */
   DeletePicture(data: DeletePictureRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePictureResponse>;
   /** 删除声纹信息 {@link DeleteVoicePrintRequest} {@link DeleteVoicePrintResponse} */
@@ -2327,8 +2591,12 @@ declare interface Trtc {
   DescribeAITranscription(data: DescribeAITranscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAITranscriptionResponse>;
   /** 查询历史用户列表与通话指标 {@link DescribeCallDetailInfoRequest} {@link DescribeCallDetailInfoResponse} */
   DescribeCallDetailInfo(data: DescribeCallDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallDetailInfoResponse>;
+  /** 查询云端审核信息 {@link DescribeCloudModerationRequest} {@link DescribeCloudModerationResponse} */
+  DescribeCloudModeration(data: DescribeCloudModerationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudModerationResponse>;
   /** 查询云端录制状态 {@link DescribeCloudRecordingRequest} {@link DescribeCloudRecordingResponse} */
   DescribeCloudRecording(data: DescribeCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudRecordingResponse>;
+  /** 查询云端切片任务信息 {@link DescribeCloudSliceTaskRequest} {@link DescribeCloudSliceTaskResponse} */
+  DescribeCloudSliceTask(data: DescribeCloudSliceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudSliceTaskResponse>;
   /** 查询TRTC混流转码用量 {@link DescribeMixTranscodingUsageRequest} {@link DescribeMixTranscodingUsageResponse} */
   DescribeMixTranscodingUsage(data: DescribeMixTranscodingUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMixTranscodingUsageResponse>;
   /** 查询图片 {@link DescribePictureRequest} {@link DescribePictureResponse} */
@@ -2381,8 +2649,12 @@ declare interface Trtc {
   DismissRoom(data: DismissRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DismissRoomResponse>;
   /** 解散房间（字符串房间号） {@link DismissRoomByStrRoomIdRequest} {@link DismissRoomByStrRoomIdResponse} */
   DismissRoomByStrRoomId(data: DismissRoomByStrRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<DismissRoomByStrRoomIdResponse>;
+  /** 修改云端审核 {@link ModifyCloudModerationRequest} {@link ModifyCloudModerationResponse} */
+  ModifyCloudModeration(data: ModifyCloudModerationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudModerationResponse>;
   /** 更新云端录制任务 {@link ModifyCloudRecordingRequest} {@link ModifyCloudRecordingResponse} */
   ModifyCloudRecording(data: ModifyCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudRecordingResponse>;
+  /** 修改云端切片任务 {@link ModifyCloudSliceTaskRequest} {@link ModifyCloudSliceTaskResponse} */
+  ModifyCloudSliceTask(data: ModifyCloudSliceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudSliceTaskResponse>;
   /** 修改图片 {@link ModifyPictureRequest} {@link ModifyPictureResponse} */
   ModifyPicture(data: ModifyPictureRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPictureResponse>;
   /** 注册声纹信息 {@link RegisterVoicePrintRequest} {@link RegisterVoicePrintResponse} */

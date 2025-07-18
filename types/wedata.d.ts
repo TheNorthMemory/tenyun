@@ -4308,6 +4308,20 @@ declare interface ResourcePathTree {
   ExtraInfo?: string | null;
 }
 
+/** 资源池信息 */
+declare interface ResourcePoolInfo {
+  /** 资源池id */
+  ResourcePools?: string[];
+  /** 存储空间大小，单位 MB */
+  StorageSize?: number;
+  /** 存储文件数大小 */
+  StorageFileNum?: number;
+  /** 集群id */
+  ClusterId?: string;
+  /** 存储类型，0 代表HDFS，1 代表OZONE */
+  StorageType?: string;
+}
+
 /** 抢锁状态：是否可以抢锁和当前持锁人 */
 declare interface RobLockState {
   /** 是否可以抢锁 */
@@ -7712,6 +7726,24 @@ declare interface BatchUpdateIntegrationTasksResponse {
   RequestId?: string;
 }
 
+declare interface BindProjectExecutorResourceRequest {
+  /** 执行资源组id */
+  ExecutorGroupId: string;
+  /** 项目id */
+  ProjectId?: string;
+  /** 需要绑定项目的资源包id集合，为空则绑定整个资源组 */
+  ExecutorResourcePackageIds?: string[];
+  /** 可选: 需要绑定的多个项目id, 若申明将带上ProjectId一起绑定 */
+  ProjectIdList?: string[];
+}
+
+declare interface BindProjectExecutorResourceResponse {
+  /** 绑定成功为true，其他为异常信息 */
+  Data?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CheckAlarmRegularNameExistRequest {
   /** 项目名称 */
   ProjectId: string;
@@ -7873,6 +7905,14 @@ declare interface CountOpsInstanceStateResponse {
   RequestId?: string;
 }
 
+declare interface CreateBaseProjectRequest {
+}
+
+declare interface CreateBaseProjectResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCodeTemplateRequest {
   /** 项目Id */
   ProjectId: string;
@@ -7884,8 +7924,10 @@ declare interface CreateCodeTemplateRequest {
   CodeTemplateDesc?: string;
   /** 文件夹ID */
   FolderId?: string;
-  /** 指定脚本内容 */
+  /** Base64转化的脚本内容 */
   Content?: string;
+  /** 代码模板类型 */
+  ProductName?: string;
 }
 
 declare interface CreateCodeTemplateResponse {
@@ -8833,6 +8875,20 @@ declare interface DeleteTaskDsRequest {
 declare interface DeleteTaskDsResponse {
   /** 是否删除成功 */
   Data?: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteTaskLineageRequest {
+  /** 任务信息 */
+  Task: LineageTask;
+  /** wedata内部任务默认SQL */
+  ChannelType: string;
+}
+
+declare interface DeleteTaskLineageResponse {
+  /** 操作结果 */
+  Data?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11939,6 +11995,20 @@ declare interface DiagnoseProResponse {
   RequestId?: string;
 }
 
+declare interface DisableProjectRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 模块名称 */
+  ModuleKey?: string;
+}
+
+declare interface DisableProjectResponse {
+  /** 无 */
+  Data?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DownloadLogByLineRequest {
   /** 开始行 */
   StartLine: number;
@@ -11999,6 +12069,20 @@ declare interface DryRunDIOfflineTaskResponse {
   TaskId?: string;
   /** 任务实例唯一key */
   TaskInstanceKey?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EnableProjectRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 模块名称 */
+  ModuleKey?: string;
+}
+
+declare interface EnableProjectResponse {
+  /** 无 */
+  Data?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12730,6 +12814,30 @@ declare interface ModifyMonitorStatusRequest {
 declare interface ModifyMonitorStatusResponse {
   /** 监控状态修改成功 */
   Data?: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyProjectRequest {
+  /** 目标修改的项目ID */
+  ProjectId: string;
+  /** true/false则修改，不带该参数不修改。 */
+  TaskSubmitApproval?: boolean;
+  /** 资源池信息 */
+  ResourcePoolInfo?: ResourcePoolInfo;
+  /** 项目管理员 */
+  ProjectManagers?: string[];
+  /** 调度任务严格模式 */
+  TaskStrictMode?: boolean;
+  /** 以后新增选项可以直接通过前端的json格式写入去实现 */
+  ExtraOptions?: string;
+  /** 项目类型，SIMPLE：简单模式 STANDARD：标准模式 */
+  Model?: string;
+  /** 项目负责人 */
+  ProjectOwner?: string[];
+}
+
+declare interface ModifyProjectResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -13846,6 +13954,8 @@ declare interface SubmitTaskTestRunRequest {
   ScriptContent?: string;
   /** 版本号 */
   VersionId?: string;
+  /** 提交任务测试运行类型 */
+  SubmitTaskTestRunType?: string;
 }
 
 declare interface SubmitTaskTestRunResponse {
@@ -13991,6 +14101,24 @@ declare interface TriggerManualTasksResponse {
   RequestId?: string;
 }
 
+declare interface UnboundProjectExecutorResourceRequest {
+  /** 执行资源组id */
+  ExecutorGroupId: string;
+  /** 项目id */
+  ProjectId?: string;
+  /** 可选: 需要绑定的多个项目id, 若申明将带上ProjectId一起绑定 */
+  ProjectIdList?: string[];
+  /** 需要绑定项目的资源包id集合，为空则绑定整个资源组 */
+  ExecutorResourcePackageIds?: string[];
+}
+
+declare interface UnboundProjectExecutorResourceResponse {
+  /** 是否绑定成功，失败返回异常 */
+  Data?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UnlockIntegrationTaskRequest {
   /** 任务id */
   TaskId: string;
@@ -14025,7 +14153,7 @@ declare interface UpdateCodeTemplateRequest {
   /** 模版描述 */
   CodeTemplateDesc?: string;
   /** 请求来源，WEB 前端；CLIENT 客户端 */
-  RequestFromSource?: string;
+  RequestFromSource?: string | null;
   /** 脚本是否发生变化 */
   ScriptChange?: boolean;
   /** 转Base64的代码内容 */
@@ -14210,6 +14338,8 @@ declare interface Wedata {
   BatchSuspendIntegrationTasks(data: BatchSuspendIntegrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<BatchSuspendIntegrationTasksResponse>;
   /** 批量更新集成任务 {@link BatchUpdateIntegrationTasksRequest} {@link BatchUpdateIntegrationTasksResponse} */
   BatchUpdateIntegrationTasks(data: BatchUpdateIntegrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<BatchUpdateIntegrationTasksResponse>;
+  /** 执行资源组-资源包绑定项目 {@link BindProjectExecutorResourceRequest} {@link BindProjectExecutorResourceResponse} */
+  BindProjectExecutorResource(data: BindProjectExecutorResourceRequest, config?: AxiosRequestConfig): AxiosPromise<BindProjectExecutorResourceResponse>;
   /** 判断告警规则重名 {@link CheckAlarmRegularNameExistRequest} {@link CheckAlarmRegularNameExistResponse} */
   CheckAlarmRegularNameExist(data: CheckAlarmRegularNameExistRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAlarmRegularNameExistResponse>;
   /** 判断集成节点名称是否存在 {@link CheckIntegrationNodeNameExistsRequest} {@link CheckIntegrationNodeNameExistsResponse} */
@@ -14224,6 +14354,8 @@ declare interface Wedata {
   CommitRuleGroupTask(data?: CommitRuleGroupTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CommitRuleGroupTaskResponse>;
   /** 智能运维-统计任务实例状态 {@link CountOpsInstanceStateRequest} {@link CountOpsInstanceStateResponse} */
   CountOpsInstanceState(data: CountOpsInstanceStateRequest, config?: AxiosRequestConfig): AxiosPromise<CountOpsInstanceStateResponse>;
+  /** 创建项目本身 {@link CreateBaseProjectRequest} {@link CreateBaseProjectResponse} */
+  CreateBaseProject(data?: CreateBaseProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBaseProjectResponse>;
   /** 创建代码模版 {@link CreateCodeTemplateRequest} {@link CreateCodeTemplateResponse} */
   CreateCodeTemplate(data: CreateCodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodeTemplateResponse>;
   /** 提交模版版本 {@link CreateCodeTemplateVersionRequest} {@link CreateCodeTemplateVersionResponse} */
@@ -14306,6 +14438,8 @@ declare interface Wedata {
   DeleteTaskAlarmRegular(data: DeleteTaskAlarmRegularRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskAlarmRegularResponse>;
   /** 删除编排空间任务 {@link DeleteTaskDsRequest} {@link DeleteTaskDsResponse} */
   DeleteTaskDs(data: DeleteTaskDsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskDsResponse>;
+  /** 删除任务血缘关系 {@link DeleteTaskLineageRequest} {@link DeleteTaskLineageResponse} */
+  DeleteTaskLineage(data: DeleteTaskLineageRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskLineageResponse>;
   /** 通过工作流Id删除工作流 {@link DeleteWorkflowByIdRequest} {@link DeleteWorkflowByIdResponse} */
   DeleteWorkflowById(data: DeleteWorkflowByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkflowByIdResponse>;
   /** 告警事件列表 {@link DescribeAlarmEventsRequest} {@link DescribeAlarmEventsResponse} */
@@ -14584,10 +14718,14 @@ declare interface Wedata {
   DescribeWorkflowTaskCount(data: DescribeWorkflowTaskCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkflowTaskCountResponse>;
   /** 实例诊断信息-新 {@link DiagnoseProRequest} {@link DiagnoseProResponse} */
   DiagnosePro(data: DiagnoseProRequest, config?: AxiosRequestConfig): AxiosPromise<DiagnoseProResponse>;
+  /** 禁用项目 {@link DisableProjectRequest} {@link DisableProjectResponse} */
+  DisableProject(data: DisableProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DisableProjectResponse>;
   /** 按行下载日志信息 {@link DownloadLogByLineRequest} {@link DownloadLogByLineResponse} */
   DownloadLogByLine(data: DownloadLogByLineRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadLogByLineResponse>;
   /** 调试运行集成任务 {@link DryRunDIOfflineTaskRequest} {@link DryRunDIOfflineTaskResponse} */
   DryRunDIOfflineTask(data: DryRunDIOfflineTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DryRunDIOfflineTaskResponse>;
+  /** 启用项目 {@link EnableProjectRequest} {@link EnableProjectResponse} */
+  EnableProject(data: EnableProjectRequest, config?: AxiosRequestConfig): AxiosPromise<EnableProjectResponse>;
   /** 编排空间批量操作页面查找全部的文件夹 {@link FindAllFolderRequest} {@link FindAllFolderResponse} */
   FindAllFolder(data: FindAllFolderRequest, config?: AxiosRequestConfig): AxiosPromise<FindAllFolderResponse>;
   /** 任务运维-批量暂停任务 {@link FreezeOpsTasksRequest} {@link FreezeOpsTasksResponse} */
@@ -14642,6 +14780,8 @@ declare interface Wedata {
   ModifyIntegrationTask(data: ModifyIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIntegrationTaskResponse>;
   /** 更新监控状态 {@link ModifyMonitorStatusRequest} {@link ModifyMonitorStatusResponse} */
   ModifyMonitorStatus(data?: ModifyMonitorStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMonitorStatusResponse>;
+  /** 修改项目基础信息 {@link ModifyProjectRequest} {@link ModifyProjectResponse} */
+  ModifyProject(data: ModifyProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectResponse>;
   /** 更新质量规则接口 {@link ModifyRuleRequest} {@link ModifyRuleResponse} */
   ModifyRule(data?: ModifyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleResponse>;
   /** 更新规则组订阅信息 {@link ModifyRuleGroupSubscriptionRequest} {@link ModifyRuleGroupSubscriptionResponse} */
@@ -14722,6 +14862,8 @@ declare interface Wedata {
   TriggerEvent(data: TriggerEventRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerEventResponse>;
   /** 手动任务触发运行 {@link TriggerManualTasksRequest} {@link TriggerManualTasksResponse} */
   TriggerManualTasks(data: TriggerManualTasksRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerManualTasksResponse>;
+  /** 执行资源组-资源包解除绑定项目 {@link UnboundProjectExecutorResourceRequest} {@link UnboundProjectExecutorResourceResponse} */
+  UnboundProjectExecutorResource(data: UnboundProjectExecutorResourceRequest, config?: AxiosRequestConfig): AxiosPromise<UnboundProjectExecutorResourceResponse>;
   /** 解锁实时集成任务 {@link UnlockIntegrationTaskRequest} {@link UnlockIntegrationTaskResponse} */
   UnlockIntegrationTask(data: UnlockIntegrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockIntegrationTaskResponse>;
   /** 更新代码模版 {@link UpdateCodeTemplateRequest} {@link UpdateCodeTemplateResponse} */

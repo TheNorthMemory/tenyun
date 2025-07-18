@@ -102,6 +102,14 @@ declare interface BucketInfo {
   Region?: string | null;
 }
 
+/** 购买完额外性能之后的值 */
+declare interface ExstraPerformanceInfo {
+  /** fixed: 最终值固定 */
+  Type?: string;
+  /** 额外购买的CFS性能值，单位MB/s。 */
+  Performance?: number;
+}
+
 /** 绑定快照策略的文件系统信息 */
 declare interface FileSystemByPolicy {
   /** 文件系统名称 */
@@ -190,6 +198,10 @@ declare interface FileSystemInfo {
   AutoScaleUpRule?: AutoScaleUpRule;
   /** 文件系统版本 */
   Version?: string;
+  /** 额外性能信息 */
+  ExstraPerformanceInfo?: ExstraPerformanceInfo[] | null;
+  /** basic：标准版元数据类型enhanced：增项版元数据类型 */
+  MetaType?: string;
 }
 
 /** 条件过滤 */

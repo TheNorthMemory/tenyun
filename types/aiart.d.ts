@@ -397,7 +397,7 @@ declare interface SubmitDrawPortraitJobResponse {
 declare interface SubmitGlamPicJobRequest {
   /** 美照模板图 URL。图片限制：模板图中最多出现5张人脸，单边分辨率大于300，转成 Base64 字符串后小于 10MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。 */
   TemplateUrl: string;
-  /** 用户图 URL 列表，以及模板图中需要替换成用户的人脸框信息。一张美照中可包含1 ~ 5个用户形象。每个用户需上传1 ~ 6张照片，如果图中存在多个人脸将取最大人脸。模板图中的人脸数量需要大于等于用户个数。如果不传每个用户在模板图中的人脸框位置，默认按照模板图人脸框从大到小的顺序进行替换。如需自定义顺序，需要依次上传每个用户在模板图中的人脸框位置。图片限制：每张图片转成 Base64 字符串后小于 10MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。建议使用单人、正脸、脸部区域占比较大、脸部清晰无遮挡、无大角度偏转、无夸张表情的用户图。 */
+  /** 用户图 URL 列表，以及模板图中需要替换成用户的人脸框信息。一张美照中可包含1 ~ 5个用户形象。每个用户需上传1 ~ 6张照片，仅支持单人照。模板图中的人脸数量需要大于等于用户个数。如果不传每个用户在模板图中的人脸框位置，默认按照模板图人脸框从大到小的顺序进行替换。如需自定义顺序，需要依次上传每个用户在模板图中的人脸框位置。图片限制：每张图片转成 Base64 字符串后小于 10MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。建议使用单人、正脸、脸部区域占比较大、脸部清晰无遮挡、无大角度偏转、无夸张表情的用户图。 */
   FaceInfos?: FaceInfo[];
   /** 美照生成数量。支持1 ~ 4张，默认生成4张。 */
   Num?: number;
@@ -619,7 +619,7 @@ declare interface Aiart {
   TextToImage(data: TextToImageRequest, config?: AxiosRequestConfig): AxiosPromise<TextToImageResponse>;
   /** 混元生图（极速版） {@link TextToImageLiteRequest} {@link TextToImageLiteResponse} */
   TextToImageLite(data: TextToImageLiteRequest, config?: AxiosRequestConfig): AxiosPromise<TextToImageLiteResponse>;
-  /** 混元生图 2.0 {@link TextToImageRapidRequest} {@link TextToImageRapidResponse} */
+  /** 混元生图（2.0） {@link TextToImageRapidRequest} {@link TextToImageRapidResponse} */
   TextToImageRapid(data: TextToImageRapidRequest, config?: AxiosRequestConfig): AxiosPromise<TextToImageRapidResponse>;
   /** 上传写真训练图片 {@link UploadTrainPortraitImagesRequest} {@link UploadTrainPortraitImagesResponse} */
   UploadTrainPortraitImages(data: UploadTrainPortraitImagesRequest, config?: AxiosRequestConfig): AxiosPromise<UploadTrainPortraitImagesResponse>;

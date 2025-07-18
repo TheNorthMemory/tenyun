@@ -3401,9 +3401,9 @@ declare interface DescribePurgeQuotaRequest {
 
 declare interface DescribePurgeQuotaResponse {
   /** URL刷新用量及配额。 */
-  UrlPurge: Quota[];
+  UrlPurge?: Quota[];
   /** 目录刷新用量及配额。 */
-  PathPurge: Quota[];
+  PathPurge?: Quota[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3443,7 +3443,7 @@ declare interface DescribePushQuotaRequest {
 
 declare interface DescribePushQuotaResponse {
   /** Url预热用量及配额。 */
-  UrlPush: Quota[];
+  UrlPush?: Quota[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

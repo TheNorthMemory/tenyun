@@ -4067,9 +4067,9 @@ declare interface RateMsgRecordRequest {
   BotAppKey: string;
   /** 消息ID 【大模型回复答案的RecordID】 */
   RecordId: string;
-  /** 1点赞2点踩 */
+  /** 1: 点赞, 2: 点踩 */
   Score: number;
-  /** 原因 */
+  /** 原因，只有Score参数为2即点踩的时候才需要输入 */
   Reasons?: string[];
 }
 

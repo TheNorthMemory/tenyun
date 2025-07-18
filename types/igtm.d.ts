@@ -5,29 +5,29 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 添加地址池地址 */
 declare interface Address {
   /** 地址值：只支持ipv4、ipv6和域名格式；不支持回环地址、保留地址、内网地址与腾讯保留网段 */
-  Addr: string | null;
+  Addr: string;
   /** 是否启用:DISABLED不启用；ENABLED启用 */
-  IsEnable: string | null;
+  IsEnable: string;
   /** 地址id */
-  AddressId?: number | null;
+  AddressId?: number;
   /** 地址名称 */
-  Location?: string | null;
+  Location?: string;
   /** OK正常，DOWN故障，WARN风险，UNKNOWN探测中，UNMONITORED未知 */
-  Status?: string | null;
+  Status?: string;
   /** 权重，流量策略为WEIGHT时，必填；范围1-100 */
   Weight?: number | null;
   /** 创建时间 */
-  CreatedOn?: string | null;
+  CreatedOn?: string;
   /** 修改时间 */
-  UpdatedOn?: string | null;
+  UpdatedOn?: string;
 }
 
 /** 地址所属地域 */
 declare interface AddressLocation {
   /** ip地址 */
-  Addr?: string | null;
+  Addr?: string;
   /** 所属地域 */
-  Location?: string | null;
+  Location?: string;
 }
 
 /** 地址池 */
@@ -63,19 +63,19 @@ declare interface AddressPool {
 /** 地址池详情 */
 declare interface AddressPoolDetail {
   /** 地址池 id */
-  PoolId?: number | null;
+  PoolId?: number;
   /** 地址池名 */
-  PoolName?: string | null;
+  PoolName?: string;
   /** 地址池地址类型：IPV4、IPV6、DOMAIN */
-  AddrType?: string | null;
+  AddrType?: string;
   /** 流量策略: WEIGHT负载均衡，ALL解析全部 */
-  TrafficStrategy?: string | null;
+  TrafficStrategy?: string;
   /** 监控器id */
   MonitorId?: number | null;
   /** 创建时间 */
-  CreatedOn?: string | null;
+  CreatedOn?: string;
   /** 更新时间 */
-  UpdatedOn?: string | null;
+  UpdatedOn?: string;
 }
 
 /** 计费项 */
@@ -129,21 +129,21 @@ declare interface DetectorGroup {
 /** 线路列表 */
 declare interface GroupLine {
   /** 分组线路id */
-  DnsLineId: number | null;
+  DnsLineId: number;
   /** 父节点 0为根节点 */
-  Parent: number | null;
+  Parent: number;
   /** 线路名 */
-  LineName: string | null;
+  LineName: string;
   /** 10=9 DNSPod 线路 id */
-  LineId: string | null;
+  LineId: string;
   /** 是否已使用过 */
-  Useful: boolean | null;
+  Useful: boolean;
   /** 0为未使用 */
-  SubGroup: number | null;
+  SubGroup: number;
   /** 权限标识 */
-  LinePackage?: number | null;
+  LinePackage?: number;
   /** 1 */
-  Weight?: number | null;
+  Weight?: number;
 }
 
 /** 返回实例 */
@@ -153,7 +153,7 @@ declare interface Instance {
   /** 实例名 */
   InstanceName?: string;
   /** 资源 id */
-  ResourceId?: string | null;
+  ResourceId?: string;
   /** 业务域名 */
   Domain?: string;
   /** Cname域名接入方式CUSTOM: 自定义接入域名SYSTEM: 系统接入域名 */
@@ -165,25 +165,25 @@ declare interface Instance {
   /** 全局记录过期时间 */
   GlobalTtl?: number;
   /** 套餐类型FREE: 免费版STANDARD：标准版ULTIMATE：旗舰版 */
-  PackageType?: string | null;
+  PackageType?: string;
   /** 实例运行状态NORMAL: 健康FAULTY: 有风险DOWN: 宕机UNKNOWN: 未知 */
-  WorkingStatus?: string | null;
-  /** 实例状态ENABLED: 正常DISABLED: 禁用 */
+  WorkingStatus?: string;
+  /** 实例状态，ENABLED: 正常，DISABLED: 禁用 */
   Status?: string;
   /** 是否cname接入：true已接入；false未接入 */
-  IsCnameConfigured?: boolean | null;
+  IsCnameConfigured?: boolean;
   /** 备注 */
-  Remark?: string | null;
+  Remark?: string;
   /** 策略数量 */
-  StrategyNum?: number | null;
+  StrategyNum?: number;
   /** 绑定地址池个数 */
-  AddressPoolNum?: number | null;
+  AddressPoolNum?: number;
   /** 绑定监控器数量 */
-  MonitorNum?: number | null;
+  MonitorNum?: number;
   /** 地址池id */
-  PoolId?: number | null;
+  PoolId?: number;
   /** 地址池名称 */
-  PoolName?: string | null;
+  PoolName?: string;
   /** 实例创建时间 */
   CreatedOn?: string;
   /** 实例更新时间 */
@@ -196,15 +196,15 @@ declare interface InstanceConfig {
   InstanceName: string;
   /** 业务域名 */
   Domain: string;
-  /** CUSTOM: 自定义接入域名SYSTEM: 系统接入域名 */
+  /** CUSTOM: 自定义接入域名，SYSTEM: 系统接入域名 */
   AccessType: string;
   /** 备注 */
   Remark: string;
   /** 全局记录过期时间 */
   GlobalTtl: number;
-  /** 接入主域名，自定义接入域名时必填 */
+  /** 接入主域名 */
   AccessDomain?: string;
-  /** 接入子域名，自定义接入域名时必填 */
+  /** 接入子域名 */
   AccessSubDomain?: string;
 }
 
@@ -225,15 +225,15 @@ declare interface InstanceDetail {
   /** 解析生效时间 */
   GlobalTtl?: number;
   /** 套餐类型FREE: 免费版STANDARD：标准版ULTIMATE：旗舰版 */
-  PackageType?: string | null;
+  PackageType?: string;
   /** 实例运行状态NORMAL: 健康FAULTY: 有风险DOWN: 宕机UNKNOWN: 未知 */
   WorkingStatus?: string;
-  /** 实例状态ENABLED: 正常DISABLED: 禁用 */
+  /** 实例状态，ENABLED: 正常；DISABLED: 禁用 */
   Status?: string;
   /** cname是否接入：true已接入；false未接入 */
-  IsCnameConfigured?: boolean | null;
+  IsCnameConfigured?: boolean;
   /** 备注 */
-  Remark?: string | null;
+  Remark?: string;
   /** 策略数量 */
   StrategyNum?: number;
   /** 绑定地址池个数 */
@@ -241,7 +241,7 @@ declare interface InstanceDetail {
   /** 绑定监控器数量 */
   MonitorNum?: number;
   /** 实例绑定套餐资源id */
-  ResourceId?: string | null;
+  ResourceId?: string;
   /** 订阅事件列表 */
   NotifyEventSet?: string[];
   /** 实例创建时间 */
@@ -253,9 +253,9 @@ declare interface InstanceDetail {
 /** 实例相关信息 */
 declare interface InstanceInfo {
   /** 实例id */
-  InstanceId?: string | null;
+  InstanceId?: string;
   /** 实例名称 */
-  InstanceName?: string | null;
+  InstanceName?: string;
 }
 
 /** 实例套餐 */
@@ -307,7 +307,7 @@ declare interface MainAddressPool {
 /** 主力地址池id与权重 */
 declare interface MainPoolWeight {
   /** 地址池id */
-  PoolId: number | null;
+  PoolId: number;
   /** 权重 */
   Weight?: number | null;
 }
@@ -317,47 +317,47 @@ declare interface MonitorDetail {
   /** 探测规则id */
   MonitorId?: number;
   /** 监控器名称 */
-  MonitorName?: string | null;
+  MonitorName?: string;
   /** 所属用户 */
-  Uin?: string | null;
+  Uin?: string;
   /** 监控节点id组 */
-  DetectorGroupIds?: number[] | null;
+  DetectorGroupIds?: number[];
   /** 探测协议 PING TCP HTTP HTTPS */
-  CheckProtocol?: string | null;
+  CheckProtocol?: string;
   /** 探测周期 */
-  CheckInterval?: number | null;
+  CheckInterval?: number;
   /** 发包数量 */
-  PingNum?: number | null;
+  PingNum?: number;
   /** tcp端口 */
-  TcpPort?: number | null;
+  TcpPort?: number;
   /** 探测 host */
-  Host?: string | null;
+  Host?: string;
   /** 探测路径 */
-  Path?: string | null;
+  Path?: string;
   /** 返回值阈值 */
-  ReturnCodeThreshold?: number | null;
+  ReturnCodeThreshold?: number;
   /** 是否开启3xx重定向跟随 ENABLED DISABLED */
-  EnableRedirect?: string | null;
+  EnableRedirect?: string;
   /** 是否启用 sniENABLED DISABLED */
-  EnableSni?: string | null;
+  EnableSni?: string;
   /** 丢包率上限 */
-  PacketLossRate?: number | null;
+  PacketLossRate?: number;
   /** 探测超时 */
-  Timeout?: number | null;
+  Timeout?: number;
   /** 失败次数 */
-  FailTimes?: number | null;
+  FailTimes?: number;
   /** 失败率上限100 */
-  FailRate?: number | null;
+  FailRate?: number;
   /** 创建时间 */
-  CreatedOn?: string | null;
+  CreatedOn?: string;
   /** 更新时间 */
-  UpdatedOn?: string | null;
+  UpdatedOn?: string;
   /** 监控节点类型AUTO INTERNAL OVERSEAS IPV6 ALL */
-  DetectorStyle?: string | null;
+  DetectorStyle?: string;
   /** 探测次数 */
-  DetectNum?: number | null;
+  DetectNum?: number;
   /** 持续周期数 */
-  ContinuePeriod?: number | null;
+  ContinuePeriod?: number;
 }
 
 /** 配额 */

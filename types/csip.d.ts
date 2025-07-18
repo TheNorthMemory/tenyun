@@ -2658,6 +2658,8 @@ declare interface TaskCenterWeakPwdRiskInputParam {
 declare interface TaskIdListKey {
   /** 任务ID */
   TaskId: string;
+  /** APP ID */
+  TargetAppId?: string;
 }
 
 /** 任务报告信息 */
@@ -3264,6 +3266,8 @@ declare interface CreateAccessKeyCheckTaskRequest {
   AccessKeyList?: string[];
   /** 账号uin列表 */
   SubUinList?: string[];
+  /** 风险规则id列表 */
+  RiskRuleIDList?: number[];
 }
 
 declare interface CreateAccessKeyCheckTaskResponse {
@@ -3370,7 +3374,7 @@ declare interface DeleteDomainAndIpResponse {
 }
 
 declare interface DeleteRiskScanTaskRequest {
-  /** 任务id 列表 */
+  /** 任务id 和目标AppID列表 */
   TaskIdList: TaskIdListKey[];
   /** 集团账号的成员id */
   MemberId?: string[];

@@ -1987,6 +1987,12 @@ declare namespace V20180525 {
     SnapshotId?: string;
     /** 镜像缓存状态，可能取值：Pending：创建中Ready：创建完成Failed：创建失败Updating：更新中UpdateFailed：更新失败只有状态为Ready时，才能正常使用镜像缓存 */
     Status?: string;
+    /** 镜像缓存保留时间天数，过期将会自动清理，默认为0，永不过期。 */
+    RetentionDays?: number;
+    /** 镜像拉取凭证 */
+    ImageRegistryCredentials?: ImageRegistryCredential[];
+    /** 腾讯云标签 */
+    Tags?: Tag[];
   }
 
   /** 镜像缓存的事件 */
@@ -4252,6 +4258,8 @@ declare namespace V20180525 {
     RegistryHttpEndPointList?: string[];
     /** 自定义制作镜像缓存过程中容器实例的宿主机上的 DNS。如："nameserver 4.4.4.4\nnameserver 8.8.8.8" */
     ResolveConfig?: string;
+    /** 腾讯云标签 */
+    Tags?: Tag[];
   }
 
   interface CreateImageCacheResponse {
@@ -7558,6 +7566,8 @@ declare namespace V20180525 {
     RetentionDays?: number;
     /** 安全组Id */
     SecurityGroupIds?: string[];
+    /** 腾讯云标签 */
+    Tags?: Tag[];
   }
 
   interface UpdateImageCacheResponse {

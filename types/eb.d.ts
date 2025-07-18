@@ -453,11 +453,11 @@ declare interface CreateRuleRequest {
   EventPattern: string;
   /** 事件集ID */
   EventBusId: string;
-  /** 事件集名称，只能包含字母、中文、数字、下划线、连字符，以字母/中文开头，以数字、字母或中文结尾，2~60个字符 */
+  /** 事件规则名称，只能包含字母、中文、数字、下划线、连字符，以字母/中文开头，以数字、字母或中文结尾，2~60个字符 */
   RuleName: string;
   /** 使能开关。 */
   Enable?: boolean;
-  /** 事件集描述，只能包含数字、中英文及常用标点符号，不超过200个字符 */
+  /** 事件规则描述，只能包含数字、中英文及常用标点符号，不超过200个字符 */
   Description?: string;
 }
 
@@ -705,7 +705,7 @@ declare interface ListConnectionsResponse {
 }
 
 declare interface ListEventBusesRequest {
-  /** 根据哪个字段进行返回结果排序,支持以下字段：AddTime（创建时间）, ModTime（修改时间） */
+  /** 根据哪个字段进行返回结果排序,支持以下字段：created_at（创建时间）, updated_at（修改时间） */
   OrderBy?: string;
   /** 返回数量，默认为20，最大值为100。 */
   Limit?: number;
@@ -907,7 +907,7 @@ declare interface UpdateRuleRequest {
   EventBusId: string;
   /** 使能开关。 */
   Enable?: boolean;
-  /** 规则描述，只能包含数字、中英文及常用标点符号，不超过200个字符 */
+  /** 事件规则描述，只能包含数字、中英文及常用标点符号，不超过200个字符 */
   Description?: string;
   /** 参考：[事件模式](https://cloud.tencent.com/document/product/1359/56084) */
   EventPattern?: string;

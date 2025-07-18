@@ -266,6 +266,8 @@ declare interface ServerBaseInfo {
   ServerType?: string;
   /** 流量类型，目前只有 FLOW */
   TrafficType?: string;
+  /** 创建时间 */
+  CreateTime?: string;
 }
 
 /** 服务管理任务信息 */

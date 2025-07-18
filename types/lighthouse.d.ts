@@ -122,6 +122,8 @@ declare interface Bundle {
   BundleTypeDescription?: string;
   /** 套餐展示标签.取值范围:"ACTIVITY": 活动套餐,"NORMAL": 普通套餐"CAREFREE": 无忧套餐 */
   BundleDisplayLabel?: string;
+  /** 流量是否无上限。 */
+  TrafficUnlimited?: boolean;
 }
 
 /** 云联网关联的实例列表。 */

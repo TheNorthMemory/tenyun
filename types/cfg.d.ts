@@ -542,6 +542,8 @@ declare interface TaskTarget {
   Type?: number;
   /** 1:平台 2:用户个人 */
   Source?: number;
+  /** 目标标签是否已被删除 */
+  TargetStatus?: number;
 }
 
 /** 经验库 */
