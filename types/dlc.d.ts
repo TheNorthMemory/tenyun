@@ -4354,6 +4354,18 @@ declare interface DescribeUserInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUserRegisterTimeRequest {
+}
+
+declare interface DescribeUserRegisterTimeResponse {
+  /** 用户注册时间 */
+  RegisterTime?: number;
+  /** 是否时老用户 */
+  IsOldUser?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUserRolesRequest {
   /** 列举的数量限制 */
   Limit: number;
@@ -5351,6 +5363,8 @@ declare interface Dlc {
   DescribeUserDataEngineConfig(data?: DescribeUserDataEngineConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDataEngineConfigResponse>;
   /** 获取用户详细信息 {@link DescribeUserInfoRequest} {@link DescribeUserInfoResponse} */
   DescribeUserInfo(data?: DescribeUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserInfoResponse>;
+  /** 查询用户注册时间及是否是老用户 {@link DescribeUserRegisterTimeRequest} {@link DescribeUserRegisterTimeResponse} */
+  DescribeUserRegisterTime(data?: DescribeUserRegisterTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserRegisterTimeResponse>;
   /** 列举用户角色信息 {@link DescribeUserRolesRequest} {@link DescribeUserRolesResponse} */
   DescribeUserRoles(data: DescribeUserRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserRolesResponse>;
   /** 获取用户类型 {@link DescribeUserTypeRequest} {@link DescribeUserTypeResponse} */

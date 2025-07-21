@@ -266,6 +266,14 @@ declare interface DiagHistoryEventItem {
   Metric?: string;
   /** 地域。 */
   Region?: string;
+  /** 集群ID。 */
+  ClusterId?: string;
+  /** 集群名称。 */
+  ClusterName?: string;
+  /** vip地址。 */
+  Vip?: string;
+  /** vip端口。 */
+  Vport?: number;
 }
 
 /** 异常事件信息。 */

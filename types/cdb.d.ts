@@ -550,6 +550,10 @@ declare interface CdbZoneSellConf {
   IsSupportIpv6?: boolean;
   /** 可支持的售卖数据库引擎类型 */
   EngineType?: string[];
+  /** 集群版实例在当前可用区的售卖状态。可能的返回值为：1-上线；3-停售；4-不展示 */
+  CloudNativeClusterStatus?: number;
+  /** 集群版或者单节点基础型支持的磁盘类型。 */
+  DiskTypeConf?: DiskTypeConfigItem[];
 }
 
 /** 迁移集群版校验结果 */
@@ -762,6 +766,14 @@ declare interface DeviceNetInfo {
   FlowIn?: number[];
   /** 出流量，单位：kbps */
   FlowOut?: number[];
+}
+
+/** 磁盘售卖类型 */
+declare interface DiskTypeConfigItem {
+  /** 磁盘对应的实例类型。仅支持单节点基础型和集群版。 */
+  DeviceType?: string;
+  /** 可以选择的磁盘类型列表。 */
+  DiskType?: string[];
 }
 
 /** 灾备实例信息 */
@@ -1042,20 +1054,20 @@ declare interface InstanceRollbackRangeTime {
   Times?: RollbackTimeRange[];
 }
 
-/** 本地binlog保留配置 */
+/** 本地 binlog 保留配置 */
 declare interface LocalBinlogConfig {
-  /** 本地binlog保留时长，可取值范围：[72,168]。 */
-  SaveHours: number;
-  /** 本地binlog空间使用率，可取值范围：[30,50]。 */
-  MaxUsage: number;
+  /** 本地 binlog 保留时长，可取值范围：[6,168]。 */
+  SaveHours?: number;
+  /** 本地 binlog 空间使用率，可取值范围：[30,50]。 */
+  MaxUsage?: number;
 }
 
-/** 本地binlog保留策略默认配置。 */
+/** 本地 binlog 保留策略默认配置 */
 declare interface LocalBinlogConfigDefault {
-  /** 本地binlog保留时长，可取值范围：[72,168]。 */
-  SaveHours: number;
-  /** 本地binlog空间使用率，可取值范围：[30,50]。 */
-  MaxUsage: number;
+  /** 本地 binlog 保留时长，可取值范围：[6,168]。 */
+  SaveHours?: number;
+  /** 本地 binlog 空间使用率，可取值范围：[30,50]。 */
+  MaxUsage?: number;
 }
 
 /** 审计日志命中规则模板的基本信息 */
@@ -1720,7 +1732,7 @@ declare interface SlowLogInfo {
   Name?: string;
   /** 备份文件大小，单位：Byte */
   Size?: number;
-  /** 备份快照时间，时间格式：2016-03-17 02:10:37 */
+  /** 备份快照时间，时间格式：2016-03-17 */
   Date?: string;
   /** 内网下载地址 */
   IntranetUrl?: string;

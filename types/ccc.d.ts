@@ -710,6 +710,8 @@ declare interface SkillGroupInfoItem {
   SkillGroupType?: number;
   /** 技能组内线号码 */
   Alias?: string;
+  /** 是否同振 */
+  RingAll?: boolean;
 }
 
 /** 技能组信息 */

@@ -33,31 +33,31 @@ declare interface AddressLocation {
 /** 地址池 */
 declare interface AddressPool {
   /** 地址池 id */
-  PoolId?: number | null;
+  PoolId?: number;
   /** 地址池名 */
-  PoolName?: string | null;
+  PoolName?: string;
   /** 地址池地址类型：IPV4、IPV6、DOMAIN */
-  AddrType?: string | null;
+  AddrType?: string;
   /** 流量策略: WEIGHT负载均衡，ALL解析全部 */
-  TrafficStrategy?: string | null;
+  TrafficStrategy?: string;
   /** 监控器id */
   MonitorId?: number | null;
   /** OK正常，DOWN故障，WARN风险，UNKNOWN未知 */
-  Status?: string | null;
+  Status?: string;
   /** 地址数 */
-  AddressNum?: number | null;
+  AddressNum?: number;
   /** 探点数 */
-  MonitorGroupNum?: number | null;
+  MonitorGroupNum?: number;
   /** 探测任务数 */
-  MonitorTaskNum?: number | null;
+  MonitorTaskNum?: number;
   /** 实例相关信息 */
   InstanceInfo?: InstanceInfo[] | null;
   /** 地址池地址信息 */
   AddressSet?: Address[] | null;
   /** 创建时间 */
-  CreatedOn?: string | null;
+  CreatedOn?: string;
   /** 更新时间 */
-  UpdatedOn?: string | null;
+  UpdatedOn?: string;
 }
 
 /** 地址池详情 */
@@ -297,11 +297,11 @@ declare interface MainAddressPool {
   /** 集合中的地址池id与权重，数组 */
   AddressPools: MainPoolWeight[] | null;
   /** 地址池集合id */
-  MainAddressPoolId?: number | null;
+  MainAddressPoolId?: number;
   /** 切换阀值，不能大于主力集合内地址总数 */
-  MinSurviveNum?: number | null;
+  MinSurviveNum?: number;
   /** 切换策略:ALL解析所有地址；WEIGHT：负载均衡。当为ALL时，解析地址的权重值为1；当为WEIGHT时；权重为地址池权重*地址权重 */
-  TrafficStrategy?: string | null;
+  TrafficStrategy?: string;
 }
 
 /** 主力地址池id与权重 */
@@ -363,27 +363,27 @@ declare interface MonitorDetail {
 /** 配额 */
 declare interface Quota {
   /** 探测任务配额 */
-  TaskQuota?: number | null;
+  TaskQuota?: number;
   /** 地址池配额 */
-  PoolQuota?: number | null;
+  PoolQuota?: number;
   /** 地址配额 */
-  AddressQuota?: number | null;
+  AddressQuota?: number;
   /** 探点资源数 */
-  MonitorQuota?: number | null;
+  MonitorQuota?: number;
   /** 消息资源数 */
-  MessageQuota?: number | null;
+  MessageQuota?: number;
   /** 已使用探测任务数 */
-  UsedTaskQuota?: number | null;
+  UsedTaskQuota?: number;
   /** 已使用体验实例数 */
-  UsedFreeInstanceNum?: number | null;
+  UsedFreeInstanceNum?: number;
   /** 已使用付费实例 */
-  UsedBillInstanceNum?: number | null;
+  UsedBillInstanceNum?: number;
   /** 体验套餐总数 */
-  FreePackageNum?: number | null;
+  FreePackageNum?: number;
   /** 已使用付费套餐数 */
-  UsedBillPackageNum?: number | null;
+  UsedBillPackageNum?: number;
   /** 付费套餐总数 */
-  BillPackageNum?: number | null;
+  BillPackageNum?: number;
 }
 
 /** 查询时过滤条件。 */
@@ -401,51 +401,51 @@ declare interface Source {
   /** 解析请求来源线路id */
   DnsLineId: number;
   /** 解析请求来源线路名 */
-  Name?: string | null;
+  Name?: string;
 }
 
 /** 地址池 */
 declare interface Strategy {
   /** 实例id */
-  InstanceId: string | null;
+  InstanceId: string;
   /** 策略名 */
-  Name: string | null;
+  Name: string;
   /** 地址来源 */
   Source: Source[] | null;
   /** 策略id */
-  StrategyId?: number | null;
+  StrategyId?: number;
   /** 健康状态：ok健康、warn风险、down故障 */
-  Status?: string | null;
+  Status?: string;
   /** 生效的主力池id，null则为未知 */
   ActivateMainPoolId?: number | null;
   /** 当前生效地址池所在级数，为0则代表兜底生效，null则为未知 */
   ActivateLevel?: number | null;
   /** 当前生效地址池集合类型：main主力；fallback兜底 */
-  ActivePoolType?: string | null;
+  ActivePoolType?: string;
   /** 当前生效地址池流量策略：all解析所有；weight负载均衡 */
-  ActiveTrafficStrategy?: string | null;
+  ActiveTrafficStrategy?: string;
   /** 监控器数量 */
-  MonitorNum?: number | null;
+  MonitorNum?: number;
   /** 是否开启：ENABLED开启；DISABLED关闭 */
-  IsEnabled?: string | null;
+  IsEnabled?: string;
   /** 是否保留线路：enabled保留，disabled不保留，只保留默认线路 */
-  KeepDomainRecords?: string | null;
+  KeepDomainRecords?: string;
   /** 调度模式：AUTO默认；PAUSE仅暂停不切换 */
-  SwitchPoolType?: string | null;
+  SwitchPoolType?: string;
   /** 创建时间 */
-  CreatedOn?: string | null;
+  CreatedOn?: string;
   /** 更新时间 */
-  UpdatedOn?: string | null;
+  UpdatedOn?: string;
 }
 
 /** 策略详情 */
 declare interface StrategyDetail {
   /** 实例id */
-  InstanceId: string | null;
+  InstanceId: string;
   /** 策略id */
-  StrategyId: number | null;
+  StrategyId: number;
   /** 策略名 */
-  Name: string | null;
+  Name: string;
   /** 线路 */
   Source: Source[] | null;
   /** 主力地址池集合 */
@@ -453,15 +453,15 @@ declare interface StrategyDetail {
   /** 兜底地址池id */
   FallbackAddressPoolSet: MainAddressPool[] | null;
   /** 是否保留线路：enabled保留，disabled不保留，只保留默认线路 */
-  KeepDomainRecords?: string | null;
+  KeepDomainRecords?: string;
   /** 生效主力地址池id */
   ActivateMainPoolId?: number | null;
   /** 创建时间 */
-  CreatedOn?: string | null;
+  CreatedOn?: string;
   /** 更新时间 */
-  UpdatedOn?: string | null;
+  UpdatedOn?: string;
   /** 调度模式：AUTO默认；PAUSE仅暂停不切换 */
-  SwitchPoolType?: string | null;
+  SwitchPoolType?: string;
 }
 
 declare interface CreateAddressPoolRequest {
@@ -678,7 +678,7 @@ declare interface DescribeDetectPackageDetailResponse {
   IsExpire?: number;
   /** 状态 ENABLED: 正常 ISOLATED: 隔离 DESTROYED：销毁 REFUNDED：已退款 */
   Status?: string;
-  /** 是否自动续费0不1是 */
+  /** 是否自动续费：0否1是 */
   AutoRenewFlag?: number;
   /** 备注 */
   Remark?: string;
@@ -783,7 +783,7 @@ declare interface DescribeMonitorDetailRequest {
 
 declare interface DescribeMonitorDetailResponse {
   /** 探测规则 */
-  MonitorDetail?: MonitorDetail | null;
+  MonitorDetail?: MonitorDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -813,7 +813,7 @@ declare interface DescribeQuotasRequest {
 
 declare interface DescribeQuotasResponse {
   /** 配额id */
-  Quotas?: Quota | null;
+  Quotas?: Quota;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
