@@ -547,7 +547,7 @@ declare interface CreateMonitorRequest {
 
 declare interface CreateMonitorResponse {
   /** 监控器id */
-  MonitorId?: number | null;
+  MonitorId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -571,7 +571,7 @@ declare interface CreateStrategyRequest {
 
 declare interface CreateStrategyResponse {
   /** 新增策略id */
-  StrategyId?: number | null;
+  StrategyId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -583,7 +583,7 @@ declare interface DeleteAddressPoolRequest {
 
 declare interface DeleteAddressPoolResponse {
   /** 是否成功 */
-  Msg?: string | null;
+  Msg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -595,7 +595,7 @@ declare interface DeleteMonitorRequest {
 
 declare interface DeleteMonitorResponse {
   /** 成功返回 */
-  Msg?: string | null;
+  Msg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -609,7 +609,7 @@ declare interface DeleteStrategyRequest {
 
 declare interface DeleteStrategyResponse {
   /** 是否成功 */
-  Msg?: string | null;
+  Msg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -621,7 +621,7 @@ declare interface DescribeAddressLocationRequest {
 
 declare interface DescribeAddressLocationResponse {
   /** 所属地域 */
-  AddressLocation?: AddressLocation[] | null;
+  AddressLocation?: AddressLocation[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -633,9 +633,9 @@ declare interface DescribeAddressPoolDetailRequest {
 
 declare interface DescribeAddressPoolDetailResponse {
   /** 资源组详情描述 */
-  AddressPool?: AddressPoolDetail | null;
+  AddressPool?: AddressPoolDetail;
   /** 资源组中的资源列表 */
-  AddressSet?: Address[] | null;
+  AddressSet?: Address[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -651,9 +651,9 @@ declare interface DescribeAddressPoolListRequest {
 
 declare interface DescribeAddressPoolListResponse {
   /** 资源组列表 */
-  AddressPoolSet?: AddressPool[] | null;
+  AddressPoolSet?: AddressPool[];
   /** 总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -749,11 +749,11 @@ declare interface DescribeInstanceListRequest {
 
 declare interface DescribeInstanceListResponse {
   /** 实例列表 */
-  InstanceSet?: Instance[] | null;
+  InstanceSet?: Instance[];
   /** 列表总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 是否支持系统域名接入：true支持；false不支持 */
-  SystemAccessEnabled?: boolean | null;
+  SystemAccessEnabled?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -799,7 +799,7 @@ declare interface DescribeMonitorsRequest {
 
 declare interface DescribeMonitorsResponse {
   /** 监控器列表 */
-  MonitorDataSet?: MonitorDetail[] | null;
+  MonitorDataSet?: MonitorDetail[];
   /** 数量 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -845,9 +845,9 @@ declare interface DescribeStrategyListRequest {
 
 declare interface DescribeStrategyListResponse {
   /** 策略列表 */
-  StrategySet?: Strategy[] | null;
+  StrategySet?: Strategy[];
   /** 总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -857,7 +857,7 @@ declare interface ModifyAddressPoolRequest {
   PoolId: number;
   /** 地址池名称，不允许重复 */
   PoolName?: string;
-  /** 流量策略: WEIGHT负载均衡，ALl解析全部 */
+  /** 流量策略: WEIGHT负载均衡，ALL解析全部 */
   TrafficStrategy?: string;
   /** 监控器id */
   MonitorId?: number;
@@ -867,7 +867,7 @@ declare interface ModifyAddressPoolRequest {
 
 declare interface ModifyAddressPoolResponse {
   /** 是否修改成功 */
-  Msg?: string | null;
+  Msg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -925,7 +925,7 @@ declare interface ModifyMonitorRequest {
 
 declare interface ModifyMonitorResponse {
   /** success 为修改成功 */
-  Msg?: string | null;
+  Msg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -953,7 +953,7 @@ declare interface ModifyStrategyRequest {
 
 declare interface ModifyStrategyResponse {
   /** 是否成功 */
-  Msg?: string | null;
+  Msg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

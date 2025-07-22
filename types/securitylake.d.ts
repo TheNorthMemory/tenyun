@@ -89,7 +89,7 @@ declare interface SecurityAlarmTable {
   /** 实例id */
   SdlId?: string;
   /** 自定义富化字段信息 */
-  RichCustomInfos?: string[] | null;
+  RichCustomInfos?: string[];
   /** 攻击者ip */
   AttackerIp?: string;
   /** 攻击者资产ID */

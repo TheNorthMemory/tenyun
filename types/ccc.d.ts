@@ -908,6 +908,14 @@ declare interface TimeRange {
   EndTime?: string;
 }
 
+/** 承接语气词信息 */
+declare interface ToneWordInfo {
+  /** 首句超时时间，单位秒 */
+  FirstSentenceTimeout?: number;
+  /** 承接语气词 */
+  ZHToneWords?: ZHToneWordsInfo;
+}
+
 /** 上传音频文件信息 */
 declare interface UploadAudioInfo {
   /** 文件别名（可重复） */
@@ -930,6 +938,16 @@ declare interface Variable {
   Key: string;
   /** 变量值 */
   Value: string;
+}
+
+/** 承接语气词 */
+declare interface ZHToneWordsInfo {
+  /** 中性词列表 */
+  Neutral?: string[];
+  /** 正面词列表 */
+  Positive?: string[];
+  /** 负面词列表 */
+  Negative?: string[];
 }
 
 declare interface AbortAgentCruiseDialingCampaignRequest {
@@ -1097,6 +1115,12 @@ declare interface CreateAICallRequest {
   Temperature?: number;
   /** 通用变量： 提示词变量 欢迎语变量 欢迎语延迟播放(秒级)：welcome-message-delay dify变量 1. dify-inputs-xxx 为dify的inputs变量2. dify-inputs-user 为dify的user值3. dify-inputs-conversation_id 为dify的conversation_id值 */
   Variables?: Variable[];
+  /** 模型topP */
+  TopP?: number;
+  /** vad的远场人声抑制能力（不会对asr识别效果造成影响），范围为[0, 3]，默认为0。推荐设置为2，有较好的远场人声抑制能力。 */
+  VadLevel?: number;
+  /** 衔接语 */
+  ToneWord?: ToneWordInfo;
 }
 
 declare interface CreateAICallResponse {

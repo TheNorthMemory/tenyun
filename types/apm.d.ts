@@ -202,6 +202,10 @@ declare interface ApmInstanceDetail {
   IsDeserializationAnalysis?: number;
   /** 业务系统鉴权 token */
   Token?: string;
+  /** URL长分段收敛阈值 */
+  UrlLongSegmentThreshold?: number;
+  /** URL数字分段收敛阈值 */
+  UrlNumberSegmentThreshold?: number;
 }
 
 /** 指标列表单元 */
@@ -709,6 +713,10 @@ declare interface ModifyApmInstanceRequest {
   IsWebshellBackdoorAnalysis?: number;
   /** 是否开启反序列化检测（0-关闭，1-开启） */
   IsDeserializationAnalysis?: number;
+  /** URL长分段收敛阈值 */
+  UrlLongSegmentThreshold?: number;
+  /** URL数字分段收敛阈值 */
+  UrlNumberSegmentThreshold?: number;
 }
 
 declare interface ModifyApmInstanceResponse {

@@ -462,6 +462,10 @@ declare interface DeployRecordDetail {
   Region?: string;
   /** 部署CLB监听器的Url */
   Url?: string[];
+  /** 当前部署证书加密算法 */
+  Algorithm?: string;
+  /** 原证书加密算法 */
+  OldAlgorithm?: string;
 }
 
 /** 部署记录信息 */
@@ -1062,6 +1066,8 @@ declare interface TeoInstanceDetail {
   ZoneId?: string | null;
   /** 域名状态deployed：已部署；processing：部署中；applying：申请中；failed：申请失败；issued：绑定失败。 */
   Status?: string;
+  /** 证书加密算法 */
+  Algorithm?: string;
 }
 
 /** edgeone实例详情 - 异步关联云资源数据结构 */
@@ -1178,6 +1184,10 @@ declare interface UpdateRecordDetail {
   TCBType?: string;
   /** 监听器Url(clb专属) */
   Url?: string;
+  /** 新证书加密算法 */
+  Algorithm?: string;
+  /** 旧证书加密算法 */
+  OldAlgorithm?: string;
 }
 
 /** 更新记录详情 */

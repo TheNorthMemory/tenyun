@@ -232,8 +232,18 @@ declare interface Multimedia {
   Type?: string;
   /** 多媒体地址。说明：1. type 为 image 时，地址为图片的预览地址；其他类型时，地址为封面图地址。 */
   Url?: string;
+  /** 如果Url为图片地址，标识图片宽度。 */
+  Width?: number;
+  /** 如果Url为图片地址，标识图片高度。 */
+  Height?: number;
   /** 多媒体详情地址。说明：1. 仅 type 为 image 时，该字段有值。 */
   JumpUrl?: string | null;
+  /** 缩略图地址。 */
+  ThumbURL?: string;
+  /** 缩略图宽度 */
+  ThumbWidth?: number;
+  /** 缩略图高度 */
+  ThumbHeight?: number;
   /** 名称。说明：1. type 为 image 时，该字段为空。 */
   Title?: string | null;
   /** 描述。 */
@@ -242,6 +252,12 @@ declare interface Multimedia {
   Singer?: string | null;
   /** 歌曲详情。说明：1. 仅 type 为 music 时，该字段有值。 */
   Ext?: SongExt | null;
+  /** 发布时间。 */
+  PublishTime?: string;
+  /** 站点名称 */
+  SiteName?: string;
+  /** 站点图标 */
+  SiteIcon?: string;
 }
 
 /** 大模型执行状态 */

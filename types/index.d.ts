@@ -77,6 +77,7 @@ import Cpdp, { Versions as CpdpVersions } from "./cpdp";
 import Csip, { Versions as CsipVersions } from "./csip";
 import Csxg, { Versions as CsxgVersions } from "./csxg";
 import Ctem, { Versions as CtemVersions } from "./ctem";
+import Ctsdb, { Versions as CtsdbVersions } from "./ctsdb";
 import Cvm, { Versions as CvmVersions } from "./cvm";
 import Cwp, { Versions as CwpVersions } from "./cwp";
 import Cws, { Versions as CwsVersions } from "./cws";
@@ -320,6 +321,7 @@ export declare type SERVICE_VERSIONS = {
   csip: CsipVersions,
   csxg: CsxgVersions,
   ctem: CtemVersions,
+  ctsdb: CtsdbVersions,
   cvm: CvmVersions,
   cwp: CwpVersions,
   cws: CwsVersions,
@@ -520,7 +522,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   afc: Afc,
   /** {@link Ai3d 腾讯混元生3D} */
   ai3d: Ai3d,
-  /** {@link Aiart 大模型图像创作引擎} */
+  /** {@link Aiart 腾讯混元生图} */
   aiart: Aiart,
   /** {@link Ame 正版曲库直通车} */
   ame: Ame,
@@ -653,6 +655,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   csxg: Csxg,
   /** {@link Ctem 暴露面管理服务} */
   ctem: Ctem,
+  /** {@link Ctsdb 时序数据库 CTSDB} */
+  ctsdb: Ctsdb,
   /** {@link Cvm 云服务器} */
   cvm: Cvm,
   /** {@link Cwp 主机安全} */
@@ -948,7 +952,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   tts: Tts,
   /** {@link Vcg 视频生成} */
   vcg: Vcg,
-  /** {@link Vclm 大模型视频创作引擎} */
+  /** {@link Vclm 腾讯混元生视频} */
   vclm: Vclm,
   /** {@link Vcube 音视频终端引擎} */
   vcube: Vcube,

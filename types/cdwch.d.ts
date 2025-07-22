@@ -56,46 +56,46 @@ declare interface BackupTableContent {
 
 /** 资源信息 */
 declare interface CNResource {
-  /** 无 */
-  ID: number;
-  /** 无 */
-  InstanceID: string;
-  /** 无 */
-  AppID: number;
-  /** 无 */
-  Uin: string;
-  /** 无 */
-  Component: string;
-  /** 无 */
-  DeployMode: number;
-  /** 无 */
-  SpecName: string;
-  /** 无 */
-  ResourceID: string;
-  /** 无 */
-  Status: number;
-  /** 无 */
-  IP: string;
-  /** 无 */
-  CPU: number;
-  /** 无 */
-  Memory: number;
-  /** 无 */
-  Storage: number;
-  /** 无 */
-  UUID: string;
-  /** 无 */
-  Region: string;
-  /** 无 */
-  Zone: string;
-  /** 无 */
-  Details: string;
-  /** 无 */
-  CreateTime: string;
-  /** 无 */
-  ModifyTime: string;
-  /** 无 */
-  ExpireTime: string;
+  /** 资源id */
+  ID?: number;
+  /** 集群的id */
+  InstanceID?: string;
+  /** 用户appid */
+  AppID?: number;
+  /** 用户uin */
+  Uin?: string;
+  /** 组件 */
+  Component?: string;
+  /** 部署模式 */
+  DeployMode?: number;
+  /** 规格名称 */
+  SpecName?: string;
+  /** 资源id */
+  ResourceID?: string;
+  /** 资源的状态 */
+  Status?: number;
+  /** 私有网络ip */
+  IP?: string;
+  /** 核数 */
+  CPU?: number;
+  /** 内存 */
+  Memory?: number;
+  /** 存储大小 */
+  Storage?: number;
+  /** 服务器ID */
+  UUID?: string;
+  /** 地域 */
+  Region?: string;
+  /** 地区 */
+  Zone?: string;
+  /** 详细信息 */
+  Details?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 修改时间 */
+  ModifyTime?: string;
+  /** 过期时间 */
+  ExpireTime?: string;
 }
 
 /** 集群计费相关信息 */
@@ -147,21 +147,21 @@ declare interface ClusterInfo {
 /** 云原生实例详情 */
 declare interface CnInstanceInfo {
   /** ID值 */
-  ID?: number | null;
+  ID?: number;
   /** cdwch-cn或者其他 */
-  InstanceType?: string | null;
+  InstanceType?: string;
   /** cdwch-cn或者其他 */
-  InstanceName?: string | null;
+  InstanceName?: string;
   /** Running */
-  Status?: string | null;
+  Status?: string;
   /** 运行中 */
-  StatusDesc?: string | null;
+  StatusDesc?: string;
   /** 无 */
-  InstanceStateInfo?: InstanceStateInfo | null;
+  InstanceStateInfo?: InstanceStateInfo;
   /** - */
-  InstanceID?: string | null;
+  InstanceID?: string;
   /** 无 */
-  Resources?: CNResource[] | null;
+  Resources?: CNResource[];
 }
 
 /** 配置文件修改信息 */
@@ -749,11 +749,11 @@ declare interface DescribeCNInstancesRequest {
 
 declare interface DescribeCNInstancesResponse {
   /** 实例总数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 实例数组 */
-  InstancesList?: CnInstanceInfo[] | null;
+  InstancesList?: CnInstanceInfo[];
   /** 错误信息 */
-  ErrorMsg?: string | null;
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

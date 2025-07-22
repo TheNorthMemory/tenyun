@@ -370,12 +370,20 @@ declare interface BandwidthAbuseDefense {
   Action?: SecurityAction;
 }
 
-/** 计费数据项 */
+/** 计费数据项。 */
 declare interface BillingData {
-  /** 时间。 */
+  /** 数据时间戳。 */
   Time?: string;
   /** 数值。 */
   Value?: number;
+  /** 数据点所属站点 ID。若使用内容标识符功能，则该项值为内容标识符。 */
+  ZoneId?: string;
+  /** 数据点所属域名。 */
+  Host?: string;
+  /** 数据点所属四层代理实例 ID。 */
+  ProxyId?: string;
+  /** 数据点所属计费大区 ID。计费大区以实际服务用户客户端的 EdgeOne 节点所在区域为准。取值有：CH：中国大陆境内AF：非洲AS1：亚太一区AS2：亚太二区AS3：亚太三区EU：欧洲MidEast：中东NA：北美 SA：南美 */
+  RegionId?: string;
 }
 
 /** 计费数据过滤条件。 */
@@ -4721,16 +4729,18 @@ declare interface DescribeAvailablePlansResponse {
 declare interface DescribeBillingDataRequest {
   /** 起始时间。 */
   StartTime: string;
-  /** 结束时间。 */
+  /** 结束时间。查询时间范围（`EndTime` - `StartTime`）需小于等于 31 天。 */
   EndTime: string;
-  /** 站点 ID 集合，此参数必填。 */
+  /** 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
   ZoneIds: string[];
-  /** 指标列表，取值有：acc_flux: 内容加速流量，单位为 Byte；smt_flux: 智能加速流量，单位为 Byte；l4_flux: 四层加速流量，单位为 Byte；sec_flux: 独立防护流量，单位为 Byte；zxctg_flux: 中国大陆网络优化流量，单位为 Byte；acc_bandwidth: 内容加速带宽，单位为 bps；smt_bandwidth: 智能加速带宽，单位为 bps；l4_bandwidth: 四层加速带宽，单位为 bps；sec_bandwidth: 独立防护带宽，单位为 bps；zxctg_bandwidth: 中国大陆网络优化带宽，单位为 bps；sec_request_clean: HTTP/HTTPS 请求，单位为次；smt_request_clean: 智能加速请求，单位为次；quic_request: QUIC 请求，单位为次；bot_request_clean: Bot 请求，单位为次；cls_count: 实时日志推送条数，单位为条；ddos_bandwidth: 弹性 DDoS 防护带宽，单位为 bps；total_transcode：所有规格音频，视频即时转码，转封装时长，单位为秒；remux：转封装时长，单位为秒；transcode_audio：音频转码时长，单位为秒；transcode_H264_SD：H.264 编码方式的标清视频（短边 <= 480 px）时长，单位为秒；transcode_H264_HD：H.264 编码方式的高清视频（短边 <= 720 px）时长，单位为秒；transcode_H264_FHD：H.264 编码方式的全高清视频（短边 <= 1080 px）时长，单位为秒；transcode_H264_2K：H.264 编码方式的 2K 视频（短边 <= 1440 px）时长，单位为秒。 */
+  /** 指标列表，取值如下：四/七层加速流量：acc_flux: 内容加速流量，单位为 Byte；smt_flux: 智能加速流量，单位为 Byte；l4_flux: 四层加速流量，单位为 Byte；sec_flux: 独立防护流量，单位为 Byte；zxctg_flux: 中国大陆网络优化流量，单位为 Byte。四/七层加速带宽:acc_bandwidth: 内容加速带宽，单位为 bps；smt_bandwidth: 智能加速带宽，单位为 bps；l4_bandwidth: 四层加速带宽，单位为 bps；sec_bandwidth: 独立防护带宽，单位为 bps；zxctg_bandwidth: 中国大陆网络优化带宽，单位为 bps。HTTP/HTTPS 安全请求数：sec_request_clean: HTTP/HTTPS 请求，单位为次。增值服务用量：smt_request_clean: 智能加速请求，单位为次；quic_request: QUIC 请求，单位为次；bot_request_clean: Bot 请求，单位为次；cls_count: 实时日志推送条数，单位为条；ddos_bandwidth: 弹性 DDoS 防护带宽，单位为 bps。边缘计算用量：edgefunction_request：边缘函数请求数，单位为次；edgefunction_cpu_time：边缘函数CPU处理时间，单位为毫秒。媒体处理用量：total_transcode：所有规格音频，视频即时转码，转封装时长，单位为秒；remux：转封装时长，单位为秒；transcode_audio：音频转码时长，单位为秒；transcode_H264_SD：H.264 编码方式的标清视频（短边 <= 480 px）时长，单位为秒；transcode_H264_HD：H.264 编码方式的高清视频（短边 <= 720 px）时长，单位为秒；transcode_H264_FHD：H.264 编码方式的全高清视频（短边 <= 1080 px）时长，单位为秒；transcode_H264_2K：H.264 编码方式的 2K 视频（短边 <= 1440 px）时长，单位为秒。 */
   MetricName: string;
   /** 查询时间粒度，取值有：5min：5 分钟粒度；hour：1 小时粒度；day：1 天粒度。 */
   Interval: string;
-  /** 过滤条件，详细的过滤条件取值如下：host：按照域名进行过滤。示例值：test.example.com。proxy-id：按照四层代理实例 ID 进行过滤。示例值：sid-2rugn89bkla9。region-id：按照计费大区进行过滤。可选项如下： CH：中国大陆境内 AF：非洲 AS1：亚太一区 AS2：亚太二区 AS3：亚太三区 EU：欧洲 MidEast：中东 NA：北美 SA：南美 */
+  /** 过滤条件，详细的过滤条件取值如下：host：按照域名进行过滤。示例值：test.example.com。proxy-id：按照四层代理实例 ID 进行过滤。示例值：sid-2rugn89bkla9。region-id：按照计费大区进行过滤。可选项如下： CH：中国大陆境内 AF：非洲 AS1：亚太一区 AS2：亚太二区 AS3：亚太三区 EU：欧洲 MidEast：中东 NA：北美 SA：南美说明：相同 `Type` 的 `BillingDataFilter` 之间为“或”关系，不同 `Type` 的 `BillingDataFilter` 之间为“且”关系。 */
   Filters?: BillingDataFilter[];
+  /** 分组聚合维度。最多允许同时按照两种维度进行分组。取值如下： zone-id：按照站点 ID 进行分组，若使用了内容标识符功能，则优先按照内容标识符分组；host：按照域名进行分组； proxy-id：按照四层代理实例 ID 进行分组； region-id：按照计费大区进行分组。 */
+  GroupBy?: string[];
 }
 
 declare interface DescribeBillingDataResponse {

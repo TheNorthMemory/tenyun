@@ -1801,7 +1801,7 @@ declare interface Tcaplusdb {
   ModifyTables(data: ModifyTablesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTablesResponse>;
   /** 恢复回收站中的表 {@link RecoverRecycleTablesRequest} {@link RecoverRecycleTablesResponse} */
   RecoverRecycleTables(data: RecoverRecycleTablesRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverRecycleTablesResponse>;
-  /** 表格数据回档 {@link RollbackTablesRequest} {@link RollbackTablesResponse} */
+  /** @deprecated 表格数据回档 {@link RollbackTablesRequest} {@link RollbackTablesResponse} */
   RollbackTables(data: RollbackTablesRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackTablesResponse>;
   /** 新增、删除、修改备份过期策略 {@link SetBackupExpireRuleRequest} {@link SetBackupExpireRuleResponse} */
   SetBackupExpireRule(data: SetBackupExpireRuleRequest, config?: AxiosRequestConfig): AxiosPromise<SetBackupExpireRuleResponse>;
