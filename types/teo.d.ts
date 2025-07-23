@@ -986,6 +986,16 @@ declare interface DDoSBlockData {
   BlockArea: string;
 }
 
+/** 独立 DDoS 防护配置。 */
+declare interface DDoSProtection {
+  /** 指定独立 DDoS 的防护范围。取值为： protect_all_domains：独立 DDoS 防护对站点内全部域名生效，新接入域名自动开启独立 DDoS 防护，入参为 protect_all_domains 时，入参 DomainDDoSProtections 不作处理； protect_specified_domains：仅对指定域名生效，具体范围可通过 DomainDDoSProtection 参数指定。 */
+  ProtectionOption: string;
+  /** 域名的独立 DDoS 防护配置。在入参场景中： 当 ProtectionOption 保持为 protect_specified_domains 时：未填写的域名维持原有独立 DDoS 防护配置不变，显式指定的域名​按传入参数更新； 当 ProtectionOption 由 protect_all_domains 切换为 protect_specified_domains 时：若 DomainDDoSProtections 传空，停用站点下全部域名的独立 DDoS 防护；若 DomainDDoSProtections 不为空，参数中指定的域名停用或保持独立 DDoS 防护，其余未列出的域名统一停用独立 DDoS 防护。 */
+  DomainDDoSProtections?: DomainDDoSProtection[];
+  /** 共享 CNAME 的独立 DDoS 防护配置。仅作为出参使用。 */
+  SharedCNAMEDDoSProtections?: DomainDDoSProtection[];
+}
+
 /** 适用于四层代理或 Web 站点服务的独立 DDoS 防护规格配置。 */
 declare interface DDosProtectionConfig {
   /** 中国大陆地区独立 DDoS 防护的规格。详情请参考 [独立 DDoS 防护相关费用](https://cloud.tencent.com/document/product/1552/94162)PLATFORM：平台默认防护，即不开启独立 DDoS 防护；BASE30_MAX300：开启独立 DDoS 防护，提供 30 Gbps 保底防护带宽以及 300 Gbps 弹性防护带宽；BASE60_MAX600：开启独立 DDoS 防护，提供 60 Gbps 保底防护带宽以及 600 Gbps 弹性防护带宽。不填写参数时，取默认值 PLATFORM。 */
@@ -1198,6 +1208,14 @@ declare interface DnsVerification {
   RecordType?: string;
   /** 记录值。 */
   RecordValue?: string;
+}
+
+/** 域名的独立 DDoS 防护信息。 */
+declare interface DomainDDoSProtection {
+  /** 域名。 */
+  Domain: string;
+  /** 域名的独立 DDoS 开关，取值为： on：已开启； off：已关闭。 */
+  Switch: string;
 }
 
 /** 拦截页面的总体配置，用于配置各个模块的拦截后行为。 */
@@ -4930,6 +4948,18 @@ declare interface DescribeDDoSAttackTopDataResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDDoSProtectionRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+}
+
+declare interface DescribeDDoSProtectionResponse {
+  /** 独立 DDoS 防护配置。用于控制独立 DDoS 防护的生效范围。 */
+  DDoSProtection?: DDoSProtection;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDefaultCertificatesRequest {
   /** 站点 ID。 */
   ZoneId?: string;
@@ -6120,6 +6150,18 @@ declare interface ModifyCustomErrorPageResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDDoSProtectionRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 独立 DDoS 防护配置。 */
+  DDoSProtection: DDoSProtection;
+}
+
+declare interface ModifyDDoSProtectionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDnsRecordsRequest {
   /** 站点 ID 。 */
   ZoneId: string;
@@ -7053,6 +7095,8 @@ declare interface Teo {
   DescribeDDoSAttackEvent(data: DescribeDDoSAttackEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackEventResponse>;
   /** 查询DDoS攻击Top数据 {@link DescribeDDoSAttackTopDataRequest} {@link DescribeDDoSAttackTopDataResponse} */
   DescribeDDoSAttackTopData(data: DescribeDDoSAttackTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackTopDataResponse>;
+  /** 查询站点的独立 DDoS 防护信息 {@link DescribeDDoSProtectionRequest} {@link DescribeDDoSProtectionResponse} */
+  DescribeDDoSProtection(data: DescribeDDoSProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSProtectionResponse>;
   /** 查询默认证书列表 {@link DescribeDefaultCertificatesRequest} {@link DescribeDefaultCertificatesResponse} */
   DescribeDefaultCertificates(data?: DescribeDefaultCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultCertificatesResponse>;
   /** 查询版本发布历史 {@link DescribeDeployHistoryRequest} {@link DescribeDeployHistoryResponse} */
@@ -7183,6 +7227,8 @@ declare interface Teo {
   ModifyContentIdentifier(data: ModifyContentIdentifierRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContentIdentifierResponse>;
   /** 修改自定义响应页面 {@link ModifyCustomErrorPageRequest} {@link ModifyCustomErrorPageResponse} */
   ModifyCustomErrorPage(data: ModifyCustomErrorPageRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomErrorPageResponse>;
+  /** 修改站点的独立 DDoS 防护 {@link ModifyDDoSProtectionRequest} {@link ModifyDDoSProtectionResponse} */
+  ModifyDDoSProtection(data: ModifyDDoSProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSProtectionResponse>;
   /** 批量修改 DNS 记录 {@link ModifyDnsRecordsRequest} {@link ModifyDnsRecordsResponse} */
   ModifyDnsRecords(data: ModifyDnsRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDnsRecordsResponse>;
   /** 批量修改 DNS 记录状态 {@link ModifyDnsRecordsStatusRequest} {@link ModifyDnsRecordsStatusResponse} */

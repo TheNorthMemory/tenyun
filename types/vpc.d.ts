@@ -1200,11 +1200,11 @@ declare interface HighPriorityRouteTable {
 
 /** IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议 */
 declare interface IKEOptionsSpecification {
-  /** 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBS-192', 'AES-CBC-256', 'DES-CBC'，'SM4', 默认为3DES-CBC */
+  /** 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBC-192', 'AES-CBC-256', 'DES-CBC'，'SM4', 默认为3DES-CBC */
   PropoEncryAlgorithm?: string;
-  /** 认证算法：可选值：'MD5', 'SHA1'，'SHA-256' 默认为MD5 */
+  /** 认证算法：可选值：'MD5'，'SHA'，'SHA-256'，'SHA-512'， 默认为SHA。 */
   PropoAuthenAlgorithm?: string;
-  /** 协商模式：可选值：'AGGRESSIVE', 'MAIN'，默认为MAIN */
+  /** 协商模式：可选值：'AGGRESSIVE'， 'MAIN'，默认为MAIN。 */
   ExchangeMode?: string;
   /** 本端标识类型：可选值：'ADDRESS', 'FQDN'，默认为ADDRESS */
   LocalIdentity?: string;
@@ -1218,7 +1218,7 @@ declare interface IKEOptionsSpecification {
   LocalFqdnName?: string;
   /** 对端标识，当remoteIdentity选为FQDN时，RemoteFqdnName必填 */
   RemoteFqdnName?: string;
-  /** DH group，指定IKE交换密钥时使用的DH组，可选值：'GROUP1', 'GROUP2', 'GROUP5', 'GROUP14', 'GROUP24'， */
+  /** DH group，指定IKE交换密钥时使用的DH组，可选值：'GROUP1', 'GROUP2', 'GROUP5', 'GROUP14', 'GROUP24'，默认是GROUP1。 */
   DhGroupName?: string;
   /** IKE SA Lifetime，单位：秒，设置IKE SA的生存周期，取值范围：60-604800 */
   IKESaLifetimeSeconds?: number;

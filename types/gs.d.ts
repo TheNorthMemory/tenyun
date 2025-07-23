@@ -765,6 +765,8 @@ declare interface DescribeAndroidInstanceTasksStatusRequest {
   Offset?: number;
   /** 限制量，默认为20，最大值为100 */
   Limit?: number;
+  /** 时间范围限制，以天数为单位 */
+  RecentDays?: number;
 }
 
 declare interface DescribeAndroidInstanceTasksStatusResponse {

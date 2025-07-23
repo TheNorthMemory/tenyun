@@ -3579,6 +3579,8 @@ declare interface ExtractDocMultiRequest {
   OutputParentKey?: boolean;
   /** 模版的单个属性配置 */
   ConfigAdvanced?: ConfigAdvanced;
+  /** cn时，添加的key为中文 en时，添加的key为英语 */
+  OutputLanguage?: string;
 }
 
 declare interface ExtractDocMultiResponse {

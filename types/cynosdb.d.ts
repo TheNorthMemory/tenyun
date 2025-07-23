@@ -5258,6 +5258,32 @@ declare interface RenewClustersResponse {
   RequestId?: string;
 }
 
+declare interface ReplayInstanceAuditLogRequest {
+  /** 源集群id */
+  SourceClusterId: string;
+  /** 源实例id */
+  SourceInstanceId: string;
+  /** 目标集群id目标集群必须为原始集群三天内克隆出的集群。 */
+  TargetClusterId: string;
+  /** 目标实例id */
+  TargetInstanceId: string;
+  /** 用户名.需要host为%的用户名 */
+  TargetUserName: string;
+  /** 密码 */
+  TargetPassword: string;
+  /** 开始时间。时间格式为：yyyy-DD-mm hh:mm:ss */
+  StartTime: string;
+  /** 结束时间。时间格式为：yyyy-DD-mm hh:mm:ss */
+  EndTime: string;
+}
+
+declare interface ReplayInstanceAuditLogResponse {
+  /** 任务id */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ResetAccountPasswordRequest {
   /** 数据库账号名 */
   AccountName: string;
@@ -5963,6 +5989,8 @@ declare interface Cynosdb {
   RemoveClusterSlaveZone(data: RemoveClusterSlaveZoneRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveClusterSlaveZoneResponse>;
   /** 续费集群 {@link RenewClustersRequest} {@link RenewClustersResponse} */
   RenewClusters(data: RenewClustersRequest, config?: AxiosRequestConfig): AxiosPromise<RenewClustersResponse>;
+  /** 回放实例审计日志 {@link ReplayInstanceAuditLogRequest} {@link ReplayInstanceAuditLogResponse} */
+  ReplayInstanceAuditLog(data: ReplayInstanceAuditLogRequest, config?: AxiosRequestConfig): AxiosPromise<ReplayInstanceAuditLogResponse>;
   /** 修改数据库账号密码 {@link ResetAccountPasswordRequest} {@link ResetAccountPasswordResponse} */
   ResetAccountPassword(data: ResetAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetAccountPasswordResponse>;
   /** 重启实例 {@link RestartInstanceRequest} {@link RestartInstanceResponse} */

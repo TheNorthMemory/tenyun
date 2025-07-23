@@ -319,13 +319,13 @@ declare interface VideoDetailData {
 /** 账单详情 */
 declare interface WeChatBillDetail {
   /** token */
-  BizToken: string;
+  BizToken?: string;
   /** 本token收费次数 */
-  ChargeCount: number;
+  ChargeCount?: number;
   /** 本token计费详情 */
-  ChargeDetails: ChargeDetail[];
+  ChargeDetails?: ChargeDetail[];
   /** 业务RuleId */
-  RuleId: string;
+  RuleId?: string;
 }
 
 declare interface BankCard2EVerificationRequest {

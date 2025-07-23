@@ -4861,11 +4861,11 @@ declare interface ModifyDBInstanceVipVportResponse {
 }
 
 declare interface ModifyInstanceParamRequest {
-  /** 实例短 ID 列表。 */
+  /** 实例 ID 列表。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceIds: string[];
   /** 要修改的参数列表。每一个元素是 Name 和 CurrentValue 的组合。Name 是参数名，CurrentValue 是要修改成的值。 */
   ParamList?: Parameter[];
-  /** 模板id，ParamList和TemplateId必须至少传其中之一 */
+  /** 模板 ID，ParamList 和 TemplateId 必须至少传其中之一。可通过 [DescribeParamTemplateInfo](https://cloud.tencent.com/document/product/236/32660) 接口获取。 */
   TemplateId?: number;
   /** 执行参数调整任务的方式，默认为 0。支持值包括：0 - 立刻执行，1 - 时间窗执行；当该值为 1 时，每次只能传一个实例（InstanceIds数量为1） */
   WaitSwitch?: number;
@@ -4883,9 +4883,9 @@ declare interface ModifyInstanceParamResponse {
 }
 
 declare interface ModifyInstancePasswordComplexityRequest {
-  /** 要修改密码复杂度的实例 ID。说明：支持输入多个实例 ID 进行修改。 */
+  /** 要修改密码复杂度的实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。说明：支持输入多个实例 ID 进行修改。 */
   InstanceIds: string[];
-  /** 要修改的密码复杂度的选项。每一个选项是以组合形式写入的，一个组合包括 Name 和 CurrentValue，其中 Name 表示对应选项的参数名，CurrentValue 表示参数值。例如：[{"Name": "validate_password.length", "CurrentValue": "10"}]，表示将密码的最小字符数修改为10。说明：不同数据库版本的实例，支持修改的密码复杂度的选项如下。1. MySQL 8.0：选项 validate_password.policy，表示密码复杂度的开关，值为 LOW 时表示关闭；值为 MEDIUM 时表示开启。温馨提示：如需修改具体的密码策略，此选项的值需为 MEDIUM。选项 validate_password.length，表示密码总长度的最小字符数。选项 validate_password.mixed_case_count，表示小写和大写字母的最小字符数。选项 validate_password.number_count，表示数字的最小字符数。选项 validate_password.special_char_count，表示特殊字符的最小字符数。2. MySQL 5.6、MySQL 5.7：选项 validate_password_policy，表示密码复杂度的开关，值为 LOW 时表示关闭；值为 MEDIUM 时表示开启。温馨提示：如需修改具体的密码策略，此选项的值需为 MEDIUM。选项 validate_password_length，表示密码总长度的最小字符数。选项 validate_password_mixed_case_count，表示小写和大写字母的最小字符数。选项 validate_password_number_count，表示数字的最小字符数。选项 validate_password_special_char_count，表示特殊字符的最小字符数。 */
+  /** 要修改的密码复杂度的选项。每一个选项是以组合形式写入的，一个组合包括 Name 和 CurrentValue，其中 Name 表示对应选项的参数名，CurrentValue 表示参数值。例如：[{"Name": "validate_password.length", "CurrentValue": "10"}]，表示将密码的最小字符数修改为10。说明：不同数据库版本的实例，支持修改的密码复杂度的选项如下。1. MySQL 8.0：选项 validate_password.policy，表示密码复杂度的开关，值为 LOW 时表示关闭；值为 MEDIUM 时表示开启。选项 validate_password.length，表示密码总长度的最小字符数。选项 validate_password.mixed_case_count，表示小写和大写字母的最小字符数。选项 validate_password.number_count，表示数字的最小字符数。选项 validate_password.special_char_count，表示特殊字符的最小字符数。2. MySQL 5.6、MySQL 5.7：选项 validate_password_policy，表示密码复杂度的开关，值为 LOW 时表示关闭；值为 MEDIUM 时表示开启。选项 validate_password_length，表示密码总长度的最小字符数。选项 validate_password_mixed_case_count，表示小写和大写字母的最小字符数。选项 validate_password_number_count，表示数字的最小字符数。选项 validate_password_special_char_count，表示特殊字符的最小字符数。 */
   ParamList?: Parameter[];
 }
 
@@ -5000,6 +5000,20 @@ declare interface ModifyRoGroupInfoRequest {
 declare interface ModifyRoGroupInfoResponse {
   /** 异步任务 ID。 */
   AsyncRequestId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyRoGroupVipVportRequest {
+  /** RO组的ID。 */
+  UGroupId: string;
+  /** 目标IP。 */
+  DstIp?: string;
+  /** 目标Port。 */
+  DstPort?: number;
+}
+
+declare interface ModifyRoGroupVipVportResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5743,6 +5757,8 @@ declare interface Cdb {
   ModifyRemoteBackupConfig(data: ModifyRemoteBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRemoteBackupConfigResponse>;
   /** 更新实例Ro组的信息 {@link ModifyRoGroupInfoRequest} {@link ModifyRoGroupInfoResponse} */
   ModifyRoGroupInfo(data: ModifyRoGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoGroupInfoResponse>;
+  /** 修改Ro组的vip和vport {@link ModifyRoGroupVipVportRequest} {@link ModifyRoGroupVipVportResponse} */
+  ModifyRoGroupVipVport(data: ModifyRoGroupVipVportRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoGroupVipVportResponse>;
   /** 更新维护时间窗口 {@link ModifyTimeWindowRequest} {@link ModifyTimeWindowResponse} */
   ModifyTimeWindow(data: ModifyTimeWindowRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTimeWindowResponse>;
   /** 下线隔离状态的云数据库实例 {@link OfflineIsolatedInstancesRequest} {@link OfflineIsolatedInstancesResponse} */

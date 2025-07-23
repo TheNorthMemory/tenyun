@@ -763,7 +763,7 @@ declare interface DescribeCkSqlApisRequest {
   InstanceId: string;
   /** api接口名称,GetClusters:获取集群cluster列表GetSystemUsers:获取系统用户列表CheckNodeCluster: 检查节点是否隶属一个clusterGetClusterDatabases: 获取一个cluster下的数据库列表GetClusterTables: 获取一个cluster下的数据库表列表GetPrivilegeUsers: 获取授权的用户列表GET_USER_CLUSTER_PRIVILEGES:获取用户cluster下的权限 GetUserClusterNewPrivileges:获取用户cluster下的权限 (新版）RevokeClusterUser:解绑cluster用户DeleteSystemUser:删除系统用户 —— 必须所有cluster先解绑GetUserOptionMessages:获取用户配置备注信息GET_USER_CONFIGS:获取用户配置列表 QUOTA、PROFILE、POLICY */
   ApiType: string;
-  /** 集群名称，GET_SYSTEM_USERS，GET_PRIVILEGE_USERS，GET_CLUSTER_DATABASES，GET_CLUSTER_TABLES 必填 */
+  /** 集群名称，当ApiType取值为GET_SYSTEM_USERS，GET_PRIVILEGE_USERS，GET_CLUSTER_DATABASES，GET_CLUSTER_TABLES 时，此参数必填 */
   Cluster?: string;
   /** 用户名称，api与user相关的必填 */
   UserName?: string;

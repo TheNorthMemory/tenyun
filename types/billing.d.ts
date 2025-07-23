@@ -3235,7 +3235,7 @@ declare interface DescribeCostDetailRequest {
   NeedRecordNum?: number;
   /** 月份，格式为yyyy-mm，Month和BeginTime&EndTime必传一个，如果有传BeginTime&EndTime则Month字段无效。不能早于开通成本分析的月份，最多可拉取24个月内的数据。 */
   Month?: string;
-  /** 查询指定产品信息（暂时未开放获取） */
+  /** 查询指定产品信息 */
   ProductCode?: string;
   /** 付费模式 prePay/postPay */
   PayMode?: string;

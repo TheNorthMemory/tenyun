@@ -162,6 +162,8 @@ declare interface AdaptiveDynamicStreamingTaskInput {
   DrmInfo?: DrmInfo;
   /** 自适应转码模板类型：Common：音视频类型PureAudio：纯音频类型 */
   DefinitionType?: string;
+  /** 字幕参数 */
+  SubtitleTemplate?: SubtitleTemplate | null;
 }
 
 /** 转自适应码流模板详情 */
