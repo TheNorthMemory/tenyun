@@ -914,6 +914,8 @@ declare interface DiseaseMedicalHistory {
   OperationHistory?: string;
   /** 输血史 */
   TransfusionHistory?: string;
+  /** 现病史 */
+  DiseasePresent?: string;
 }
 
 /** 现病史 */

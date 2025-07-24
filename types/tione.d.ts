@@ -472,6 +472,10 @@ declare interface HorizontalPodAutoscaler {
   MaxReplicas: number | null;
   /** 支持："gpu-util": GPU利用率。范围{10, 100} "cpu-util": CPU利用率。范围{10, 100} "memory-util": 内存利用率。范围{10, 100} "service-qps": 单个实例QPS值。范围{1, 5000}"concurrency-util":单个实例请求数量值。范围{1,100000} */
   HpaMetrics: Option[] | null;
+  /** 扩容观察期，单位秒 */
+  ScaleUpStabilizationWindowSeconds?: number;
+  /** 缩容观察期，单位秒 */
+  ScaleDownStabilizationWindowSeconds?: number;
 }
 
 /** 主机路径挂载配置 */

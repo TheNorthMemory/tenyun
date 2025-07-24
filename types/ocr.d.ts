@@ -4063,13 +4063,13 @@ declare interface LicensePlateOCRResponse {
 }
 
 declare interface MLIDCardOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。 */
+  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。 */
   ImageBase64?: string;
-  /** 卡证背面图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  /** 卡证背面图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   BackImageBase64?: string;
-  /** 图片的 Url 地址。( 中国地区之外不支持这个字段 )支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  /** 图片的 Url 地址。( 中国地区之外不支持这个字段 )支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
-  /** 卡证背面图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  /** 卡证背面图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   BackImageUrl?: string;
   /** 是否返回图片，默认false */
   RetImage?: boolean;
@@ -4084,11 +4084,11 @@ declare interface MLIDCardOCRResponse {
   Address?: string;
   /** 性别 */
   Sex?: string;
-  /** 告警码-9103	证照翻拍告警-9102	证照复印件告警-9106 证件遮挡告警-9107 模糊图片告警 */
+  /** 该字段已废弃， 将固定返回空数组，不建议使用。 */
   Warn?: number[];
   /** 证件图片 */
   Image?: string;
-  /** 此字段为扩展字段。返回字段识别结果的置信度，格式如下{ 字段名:{ Confidence:0.9999 }} */
+  /** 该字段已废弃， 将固定返回"1"，不建议使用。 */
   AdvancedInfo?: string;
   /** 证件类型MyKad 身份证MyPR 永居证MyTentera 军官证MyKAS 临时身份证POLIS 警察证IKAD 劳工证MyKid 儿童卡 */
   Type?: string;
@@ -4103,11 +4103,11 @@ declare interface MLIDCardOCRResponse {
 }
 
 declare interface MLIDPassportOCRRequest {
-  /** 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。建议卡片部分占据图片2/3以上。 */
+  /** 图片的 Base64 值。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。建议卡片部分占据图片2/3以上。 */
   ImageBase64?: string;
   /** 是否返回图片，默认false */
   RetImage?: boolean;
-  /** 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。 */
+  /** 图片的 Url 地址。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。 */
   ImageUrl?: string;
 }
 
@@ -4126,11 +4126,11 @@ declare interface MLIDPassportOCRResponse {
   IssuingCountry?: string;
   /** 国家地区代码（机读码区的解析结果） */
   Nationality?: string;
-  /** 告警码：-9103	证照翻拍告警-9102	证照复印件告警（包括黑白复印件、彩色复印件）-9106 证件遮挡告警 */
+  /** 该字段已废弃， 将固定返回空数组，不建议使用。 */
   Warn?: number[];
   /** 证件中的人像图片base64 */
   Image?: string;
-  /** 扩展字段:{ ID:{ Confidence:0.9999 }, Name:{ Confidence:0.9996 }} */
+  /** 该字段已废弃， 将固定返回"1"，不建议使用。 */
   AdvancedInfo?: string;
   /** 最下方第一行 MRZ Code 序列 */
   CodeSet?: string;
@@ -4882,7 +4882,7 @@ declare interface RecognizeThaiIDCardOCRResponse {
   PortraitImage?: string;
   /** 告警码-9101 证件边框不完整告警-9102 证件复印件告警-9103 证件翻拍告警-9107 证件反光告警-9108 证件模糊告警-9109 告警能力未开通 */
   WarnCardInfos?: number[];
-  /** 字段置信度：{ "ID": { "Confidence": 0.9999 }, "ThaiName": { "Confidence": 0.9996 }} */
+  /** 该字段已废弃， 将固定返回"1"，不建议使用。 */
   AdvancedInfo?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

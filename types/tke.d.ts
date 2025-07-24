@@ -3449,10 +3449,10 @@ declare namespace V20180525 {
 
   /** 集群日志开关集合 */
   interface Switch {
-    /** 集群ID */
-    ClusterId?: string;
     /** 审计开关的详细信息 */
     Audit?: SwitchInfo;
+    /** 集群ID */
+    ClusterId?: string;
     /** 事件开关的详细信息 */
     Event?: SwitchInfo;
     /** 普通日志的详细信息 */
@@ -3465,16 +3465,20 @@ declare namespace V20180525 {
   interface SwitchInfo {
     /** 开启标识符 true代表开启 */
     Enable?: boolean;
+    /** 获取日志状态失败时，返回错误信息 */
+    ErrorMsg?: string;
     /** CLS日志集ID */
     LogsetId?: string;
+    /** 日志主题状态，opened表示已开启，opening开启中，closed表示已关闭，closing 表示关闭中 */
+    Status?: string;
     /** CLS日志主题ID */
     TopicId?: string;
-    /** 当前log-agent版本 */
-    Version?: string;
-    /** 是否可升级 */
-    UpgradeAble?: boolean;
     /** CLS日志主题所属region */
     TopicRegion?: string;
+    /** 是否可升级 */
+    UpgradeAble?: boolean;
+    /** 当前log-agent版本 */
+    Version?: string;
   }
 
   /** 标签绑定的资源类型，当前支持类型："cluster" */
