@@ -1559,7 +1559,7 @@ declare interface CreateListenerRequest {
   KeepaliveEnable?: number;
   /** 创建端口段监听器时必须传入此参数，用以标识结束端口。同时，入参Ports只允许传入一个成员，用以标识开始端口。【如果您需要体验端口段功能，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)】。 */
   EndPort?: number;
-  /** 解绑后端目标时，是否发RST给客户端，此参数仅适用于TCP监听器。 */
+  /** 解绑后端目标时，是否发RST给两端（客户端和服务器），此参数仅适用于TCP监听器。 */
   DeregisterTargetRst?: boolean;
   /** 证书信息，支持同时传入不同算法类型的多本服务端证书，参数限制如下：此参数仅适用于TCP_SSL监听器和未开启SNI特性的HTTPS监听器。创建TCP_SSL监听器和未开启SNI特性的HTTPS监听器时，此参数和参数Certificate至少需要传一个， 但不能同时传入。 */
   MultiCertInfo?: MultiCertInfo;

@@ -191,6 +191,8 @@ declare interface SubmitTemplateToVideoJobRequest {
   LogoAdd?: number;
   /** 标识内容设置。默认在生成视频的右下角添加“视频由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。 */
   LogoParam?: LogoParam;
+  /** 视频输出分辨率，默认值：360p - 枚举值： 720p 360p。 */
+  Resolution?: string;
 }
 
 declare interface SubmitTemplateToVideoJobResponse {

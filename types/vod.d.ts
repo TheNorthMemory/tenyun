@@ -4338,6 +4338,8 @@ declare namespace V20180717 {
     /** AI 智能内容分析类型任务参数。 */
     AiAnalysisTask?: AiAnalysisTaskInput | null;
     /** AI 内容识别类型任务参数。 */
+    AiRecognitionTaskSet?: AiRecognitionTaskInput[];
+    /** 该参数已不推荐使用，建议使用 AiRecognitionTaskSet。 */
     AiRecognitionTask?: AiRecognitionTaskInput | null;
     /** 微信小程序发布任务参数。 */
     MiniProgramPublishTask?: WechatMiniProgramPublishTaskInput | null;
@@ -6781,6 +6783,8 @@ declare namespace V20180717 {
     /** AI 内容分析类型任务参数。 */
     AiAnalysisTask?: AiAnalysisTaskInput;
     /** AI 内容识别类型任务参数。 */
+    AiRecognitionTaskSet?: AiRecognitionTaskInput[];
+    /** 该参数已不推荐使用，建议使用 AiRecognitionTaskSet。 */
     AiRecognitionTask?: AiRecognitionTaskInput;
     /** 音视频审核类型任务参数。 */
     ReviewAudioVideoTask?: ProcedureReviewAudioVideoTaskInput;
@@ -9907,6 +9911,8 @@ declare namespace V20180717 {
     /** AI 智能内容分析类型任务参数。 */
     AiAnalysisTask?: AiAnalysisTaskInput;
     /** AI 内容识别类型任务参数。 */
+    AiRecognitionTaskSet?: AiRecognitionTaskInput[];
+    /** 该参数已不推荐使用，建议使用 AiRecognitionTaskSet。 */
     AiRecognitionTask?: AiRecognitionTaskInput;
     /** 音视频审核类型任务参数。 */
     ReviewAudioVideoTask?: ProcedureReviewAudioVideoTaskInput;

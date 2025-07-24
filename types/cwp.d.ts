@@ -9414,6 +9414,8 @@ declare interface DescribeLicenseWhiteConfigResponse {
   Professional?: VersionWhiteConfig;
   /** 轻量版 配置信息 */
   PrattWhitney?: VersionWhiteConfig;
+  /** 重保授权包 配置信息 */
+  RASP?: VersionWhiteConfig;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1782,6 +1782,24 @@ declare interface ModifyCustomerResponse {
   RequestId?: string;
 }
 
+declare interface ModifyLabelRequest {
+  /** 资产或风险主键ID */
+  Id: number;
+  /** 企业ID，在企业管理页面查看 */
+  CustomerId: number;
+  /** 模块，包括：enterprise：企业架构，domain：主域名，sub_domain：子域名，asset：IP资产，port：端口服务，http：HTTP资产，vul：漏洞信息，app：APP，wechat_applet：微信小程序，wechat_official_account：微信公众号，github：Github信息泄露，manage：管理后台暴露，config：目录爆破，dark_web：暗网泄露，net_disk：文库网盘泄露，supply_chain：供应链，weak_password：弱口令，sensitive_info：敏感信息泄露 */
+  Module: string;
+  /** 是否聚合数据 */
+  IsAggregation?: boolean;
+  /** 标签详情 */
+  Labels?: string;
+}
+
+declare interface ModifyLabelResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopJobRecordRequest {
   /** 企业ID */
   CustomerId?: number;
@@ -1859,6 +1877,8 @@ declare interface Ctem {
   DescribeWechatOfficialAccounts(data?: DescribeWechatOfficialAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWechatOfficialAccountsResponse>;
   /** 编辑企业 {@link ModifyCustomerRequest} {@link ModifyCustomerResponse} */
   ModifyCustomer(data: ModifyCustomerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomerResponse>;
+  /** 修改标签 {@link ModifyLabelRequest} {@link ModifyLabelResponse} */
+  ModifyLabel(data: ModifyLabelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLabelResponse>;
   /** 停止扫描 {@link StopJobRecordRequest} {@link StopJobRecordResponse} */
   StopJobRecord(data?: StopJobRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StopJobRecordResponse>;
 }

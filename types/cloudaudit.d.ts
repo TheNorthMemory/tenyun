@@ -173,6 +173,8 @@ declare interface CreateAuditTrackRequest {
   EventNames: string[];
   /** 是否开启将集团成员操作日志投递到集团管理账号或者可信服务管理账号(0：未开启，1：开启，只能集团管理账号或者可信服务管理账号开启此项功能) */
   TrackForAllMembers?: number;
+  /** 任务ID */
+  ExportId?: string;
 }
 
 declare interface CreateAuditTrackResponse {

@@ -112,6 +112,8 @@ declare interface Invocation {
   InvocationId?: string;
   /** 命令ID。 */
   CommandId?: string;
+  /** 执行的命令的名称 */
+  CommandName?: string;
   /** 执行任务状态。取值范围：- PENDING：等待下发- RUNNING：命令运行中- CANCELLING：取消中- SUCCESS：命令成功- TIMEOUT：命令超时- FAILED：命令失败- CANCELLED：命令全部取消- PARTIAL_FAILED：命令部分失败- PARTIAL_CANCELLED：命令部分取消 */
   InvocationStatus?: string;
   /** 执行任务信息列表。 */

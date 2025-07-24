@@ -2542,6 +2542,8 @@ declare interface StageInfoDetail {
   FailedReason?: string;
   /** 步骤耗时 */
   TimeConsuming?: string;
+  /** id，前端用 */
+  Id?: number;
 }
 
 /** StarRocks 查询信息 */

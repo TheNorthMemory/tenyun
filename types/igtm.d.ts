@@ -499,7 +499,7 @@ declare interface CreateInstanceRequest {
   AccessSubDomain?: string;
   /** 备注 */
   Remark?: string;
-  /** 套餐资源id，必填 */
+  /** 套餐资源id */
   ResourceId?: string;
 }
 

@@ -1000,6 +1000,40 @@ declare interface IntentionQuestionResult {
   AsrResult?: string[];
 }
 
+/** 创建流程的签署方信息 */
+declare interface MiniAppCreateApproverInfo {
+  /** 在指定签署方时，可以选择企业B端或个人C端等不同的参与者类型，可选类型如下： 0 :企业B端。 1 :个人C端。 3 :企业B端静默（自动）签署，无需签署人参与，自动签署可以参考自动签署使用说明文档。 7 :个人C端自动签署，适用于个人自动签场景。注: 个人自动签场景为白名单功能，使用前请联系对接的客户经理沟通。 */
+  ApproverType: number;
+  /** 组织机构名称。请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。注: `当approverType=0(企业签署方) 或 approverType=3(企业静默签署)时，必须指定` */
+  OrganizationName?: string;
+  /** 签署方经办人的姓名。经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。在未指定签署人电子签UserId情况下，为必填参数 */
+  ApproverName?: string;
+  /** 签署方经办人手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。 此手机号用于通知和用户的实名认证等环境，请确认手机号所有方为此合同签署方。注：`在未指定签署人电子签UserId情况下，为必填参数` */
+  ApproverMobile?: string;
+  /** 证件类型，支持以下类型ID_CARD: 居民身份证 (默认值)HONGKONG_AND_MACAO : 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证) */
+  ApproverIdCardType?: string;
+  /** 证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
+  ApproverIdCardNumber?: string;
+  /** 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。模板发起合同时，该参数为必填项，可以通过[查询模板信息接口](https://qian.tencent.com/developers/companyApis/templatesAndFiles/DescribeFlowTemplates)获得。文件发起合同时，该参数无需传值。如果开发者后续用合同模板发起合同，建议保存此值，在用合同模板发起合同中需此值绑定对应的签署经办人 。 */
+  RecipientId?: string;
+}
+
+/** 小程序发起合同可选项 */
+declare interface MiniAppCreateFlowOption {
+  /** 到期提醒日（linux时间戳） 精确到天 */
+  RemindedOn?: number;
+  /** 是否需要发起前进行审批 */
+  NeedCreateReview?: boolean;
+  /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议 3 :文书效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
+  FlowDisplayType?: number;
+}
+
+/** 小程序发起页面个性化配置参数 */
+declare interface MiniAppCreateFlowPageOption {
+  /** 发起后隐藏签署码 */
+  HideSignCodeAfterStart?: boolean;
+}
+
 /** 需要进行签署审核的签署人信息 */
 declare interface NeedReviewApproverInfo {
   /** 签署方经办人的类型，支持以下类型 ORGANIZATION 企业（含企业自动签）PERSON 个人（含个人自动签） */
@@ -2516,6 +2550,54 @@ declare interface CreateLegalSealQrCodeRequest {
 declare interface CreateLegalSealQrCodeResponse {
   /** 二维码图片base64值，二维码有效期7天（604800秒）二维码图片的样式如下图：![image](https://qcloudimg.tencent-cloud.cn/raw/7ec2478761158a35a9c623882839a5df.png) */
   QrcodeBase64?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateMiniAppPrepareFlowRequest {
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。支持填入集团子公司经办人 userId 代发合同。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 资源类型，取值有： **1**：模板 **2**：文件 */
+  ResourceType: number;
+  /** 资源id，与ResourceType相对应，取值范围：文件Id（通过UploadFiles获取文件资源Id）模板Id（通过控制台创建模板后获取模板Id）注意：需要同时设置 ResourceType 参数指定资源类型 */
+  ResourceId: string;
+  /** 自定义的合同流程的名称，长度不能超过200个字符，只能由中文汉字、中文标点、英文字母、阿拉伯数字、空格、小括号、中括号、中划线、下划线以及（,）、（;）、（.）、(&)、（+）组成。该名称还将用于合同签署完成后文件下载的默认文件名称。 */
+  FlowName: string;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+  /** 合同流程的参与方列表，最多可支持50个参与方，可在列表中指定企业B端签署方和个人C端签署方的联系和认证方式等信息。 */
+  Approvers?: MiniAppCreateApproverInfo[];
+  /** 合同流程的抄送人列表，最多可支持50个抄送人，抄送人可查看合同内容及签署进度，但无需参与合同签署。**注：暂不支持通过NotifyType参数控制抄送人通知方式** */
+  CcInfos?: CcInfo[];
+  /** 合同流程的签署顺序类型： **false**：(默认)有序签署, 本合同多个参与人需要依次签署 **true**：无序签署, 本合同多个参与人没有先后签署限制**注：仅在文件发起模式下设置有效，模板发起以模板配置为准** */
+  Unordered?: boolean;
+  /** 合同发起后经过多少天截止（1-30天可选），默认7天 */
+  DeadlineAfterStartDays?: number;
+  /** 用户自定义合同类型Id 该id为电子签企业内的合同类型id， 可以在控制台-合同-自定义合同类型处获取 */
+  UserFlowTypeId?: string;
+  /** 发起合同个性化参数用于满足小程序合同创建的个性化要求具体定制化内容详见数据接口说明 */
+  FlowOption?: MiniAppCreateFlowOption;
+  /** 发起合同小程序页面个性化参数 用于满足小程序合同创建页面的个性化要求 具体定制化内容详见数据接口说明 */
+  PageOption?: MiniAppCreateFlowPageOption;
+  /** 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 1000 长度。在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的回调通知模块。 */
+  UserData?: string;
+}
+
+declare interface CreateMiniAppPrepareFlowResponse {
+  /** H5跳转到电子签小程序链接, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序 */
+  LongUrl?: string;
+  /** H5跳转到电子签小程序链接的短链形式, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序 */
+  ShortUrl?: string;
+  /** APP或小程序跳转电子签小程序链接, 一般用于客户小程序或者APP跳转过来, 打开后进入腾讯电子签小程序 */
+  MiniAppPath?: string;
+  /** 创建的合同id（还未实际发起，也未扣费），每次调用会生成新的id，用户可以记录此字段对应后续在小程序发起的合同，若在小程序上未成功发起，则此字段无效。 */
+  FlowId?: string;
+  /** 跳转至电子签小程序的二维码链接 */
+  QrcodeUrl?: string;
+  /** 直接跳转至电子签小程序的二维码链接，无需通过中转页。需要自行将其转换为二维码，使用微信扫码后可直接进入。 */
+  WeixinQrcodeUrl?: string;
+  /** 链接过期时间，精确到秒，若在此过期时间前未使用，则链接失效。 */
+  ExpiredOn?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4353,6 +4435,8 @@ declare interface Ess {
   CreateIntegrationUserRoles(data: CreateIntegrationUserRolesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationUserRolesResponse>;
   /** 获取到电子签小程序创建法人章二维码 {@link CreateLegalSealQrCodeRequest} {@link CreateLegalSealQrCodeResponse} */
   CreateLegalSealQrCode(data?: CreateLegalSealQrCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLegalSealQrCodeResponse>;
+  /** 创建小程序发起合同链接 {@link CreateMiniAppPrepareFlowRequest} {@link CreateMiniAppPrepareFlowResponse} */
+  CreateMiniAppPrepareFlow(data: CreateMiniAppPrepareFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMiniAppPrepareFlowResponse>;
   /** 生成变更超管授权书链接 {@link CreateModifyAdminAuthorizationUrlRequest} {@link CreateModifyAdminAuthorizationUrlResponse} */
   CreateModifyAdminAuthorizationUrl(data: CreateModifyAdminAuthorizationUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModifyAdminAuthorizationUrlResponse>;
   /** 创建一码多签签署码 {@link CreateMultiFlowSignQRCodeRequest} {@link CreateMultiFlowSignQRCodeResponse} */

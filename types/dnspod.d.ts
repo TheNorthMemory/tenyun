@@ -812,6 +812,38 @@ declare interface RecordListItem {
   DefaultNS?: boolean;
 }
 
+/** 域名别名解析量统计信息 */
+declare interface ResolveCountAliasItem {
+  /** 域名解析量统计信息 */
+  Info?: ResolveCountInfo;
+  /** 解析量明细 */
+  Data?: ResolveCountDataItem[];
+}
+
+/** 解析量小计 */
+declare interface ResolveCountDataItem {
+  /** 解析量 */
+  Num?: number;
+  /** 统计的时间点 */
+  DateKey?: string;
+}
+
+/** 域名解析量统计信息 */
+declare interface ResolveCountInfo {
+  /** 当前统计周期解析量总计 */
+  DnsTotal?: number;
+  /** 当前查询的域名 */
+  Domain?: string;
+  /** 当前统计周期开始时间 */
+  StartDate?: string;
+  /** 当前统计周期结束时间 */
+  EndDate?: string;
+  /** 当前统计的子域名 */
+  SubDomain?: string;
+  /** 数据统计格式，取值为minute、hour、day，分别表示按十分钟、小时、天统计数据 */
+  DnsFormat?: string;
+}
+
 /** 套餐中安全防护信息 */
 declare interface SecurityInfo {
   /** 是否是免费赠送：yes-是；no-不是 */
@@ -2144,6 +2176,30 @@ declare interface DescribeRecordTypeResponse {
   RequestId?: string;
 }
 
+declare interface DescribeResolveCountRequest {
+  /** 要查询解析量的域名 */
+  Domain: string;
+  /** 查询的开始时间，格式：YYYY-MM-DD，最多允许查询最近32天的数据。 */
+  StartDate: string;
+  /** 查询的结束时间，格式：YYYY-MM-DD，最多允许查询最近32天的数据。 */
+  EndDate: string;
+  /** 数据统计格式，取值为minute、hour、day，分别表示按十分钟、小时、天统计数据 */
+  DnsFormat: string;
+  /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId */
+  DomainId?: number;
+}
+
+declare interface DescribeResolveCountResponse {
+  /** 解析量明细 */
+  Data?: ResolveCountDataItem[];
+  /** 解析量统计信息 */
+  Info?: ResolveCountInfo;
+  /** 别名解析量明细 */
+  AliasData?: ResolveCountAliasItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSnapshotConfigRequest {
   /** 域名 */
   Domain: string;
@@ -2881,6 +2937,8 @@ declare interface Dnspod {
   DescribeRecordSnapshotRollbackResult(data: DescribeRecordSnapshotRollbackResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordSnapshotRollbackResultResponse>;
   /** 获取等级允许的记录类型 {@link DescribeRecordTypeRequest} {@link DescribeRecordTypeResponse} */
   DescribeRecordType(data: DescribeRecordTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordTypeResponse>;
+  /** 查询域名解析量 {@link DescribeResolveCountRequest} {@link DescribeResolveCountResponse} */
+  DescribeResolveCount(data: DescribeResolveCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResolveCountResponse>;
   /** 查询解析快照配置 {@link DescribeSnapshotConfigRequest} {@link DescribeSnapshotConfigResponse} */
   DescribeSnapshotConfig(data: DescribeSnapshotConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotConfigResponse>;
   /** 查询快照列表 {@link DescribeSnapshotListRequest} {@link DescribeSnapshotListResponse} */
