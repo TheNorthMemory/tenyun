@@ -274,6 +274,7 @@ const SERVICE_VERSIONS = {
   wav: ['2021-01-29'],
   wedata: ['2021-08-20'],
   weilingwith: ['2023-04-27'],
+  wsa: ['2025-05-08'],
   wss: ['2018-04-26'],
   yinsuda: ['2022-05-27'],
   yunjing: ['2018-02-28'],

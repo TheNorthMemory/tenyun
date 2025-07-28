@@ -239,6 +239,7 @@ import Waf, { Versions as WafVersions } from "./waf";
 import Wav, { Versions as WavVersions } from "./wav";
 import Wedata, { Versions as WedataVersions } from "./wedata";
 import Weilingwith, { Versions as WeilingwithVersions } from "./weilingwith";
+import Wsa, { Versions as WsaVersions } from "./wsa";
 import Wss, { Versions as WssVersions } from "./wss";
 import Yinsuda, { Versions as YinsudaVersions } from "./yinsuda";
 import Yunjing, { Versions as YunjingVersions } from "./yunjing";
@@ -483,6 +484,7 @@ export declare type SERVICE_VERSIONS = {
   wav: WavVersions,
   wedata: WedataVersions,
   weilingwith: WeilingwithVersions,
+  wsa: WsaVersions,
   wss: WssVersions,
   yinsuda: YinsudaVersions,
   yunjing: YunjingVersions,
@@ -978,6 +980,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   wedata: Wedata,
   /** {@link Weilingwith 微瓴同业开放平台} */
   weilingwith: Weilingwith,
+  /** {@link Wsa 联网搜索API} */
+  wsa: Wsa,
   /** {@link Wss SSL证书管理服务} */
   wss: Wss,
   /** {@link Yinsuda 音速达直播音乐版权引擎} */
