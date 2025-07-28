@@ -4810,6 +4810,26 @@ declare interface RecognizeTableAccurateOCRResponse {
   RequestId?: string;
 }
 
+declare interface RecognizeTableMultiOCRRequest {
+  /** 图片/PDF的 Base64 值。 要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。 图片支持的像素范围：需介于20-10000px之间。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  ImageBase64?: string;
+  /** 图片/PDF的 Url 地址。 要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。 图片支持的像素范围：需介于20-10000px之间。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  ImageUrl?: string;
+  /** 文档的起始页码。 当传入文件是PDF型时，用来指定识别的起始页码，识别的页码包含当前值。 */
+  PdfStartPageNumber?: number;
+  /** 文档的结束页码。 当传入文件是PDF类型时，用来指定识别的结束页码，识别的页码包含当前值。单次调用最多支持识别3页内容，即PdfEndPageNumber-PdfStartPageNumber需要不大于3。 */
+  PdfEndPageNumber?: number;
+  /** 配置选项，支持配置输出数据格式。* **Mdbase64** 返回 base64 编码的 markdown 格式文本。* **Excelbase64** 返回 base64 编码的 excel 文件。 */
+  DataFormat?: string;
+}
+
+declare interface RecognizeTableMultiOCRResponse {
+  /** Base64 编码后的 Excel 数据或 Markdown 数据。 注意：此字段可能返回空，表示取不到有效值。 */
+  DataBase64?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RecognizeTableOCRRequest {
   /** 图片/PDF的 Base64 值。要求图片/PDF经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -5629,6 +5649,8 @@ declare interface Ocr {
   RecognizeStoreName(data?: RecognizeStoreNameRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeStoreNameResponse>;
   /** 表格识别（V3） {@link RecognizeTableAccurateOCRRequest} {@link RecognizeTableAccurateOCRResponse} */
   RecognizeTableAccurateOCR(data?: RecognizeTableAccurateOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTableAccurateOCRResponse>;
+  /** 表格识别（多模态版） {@link RecognizeTableMultiOCRRequest} {@link RecognizeTableMultiOCRResponse} */
+  RecognizeTableMultiOCR(data?: RecognizeTableMultiOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTableMultiOCRResponse>;
   /** 表格识别（V2) {@link RecognizeTableOCRRequest} {@link RecognizeTableOCRResponse} */
   RecognizeTableOCR(data?: RecognizeTableOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTableOCRResponse>;
   /** 泰国身份证识别 {@link RecognizeThaiIDCardOCRRequest} {@link RecognizeThaiIDCardOCRResponse} */

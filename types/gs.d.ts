@@ -242,6 +242,12 @@ declare interface Error {
   Message?: string;
 }
 
+/** 应用文件 Cos 信息 */
+declare interface FileCosInfo {
+  /** 文件 Id */
+  FileId: string;
+}
+
 /** 过滤 */
 declare interface Filter {
   /** 字段名 */
@@ -541,10 +547,12 @@ declare interface CreateAndroidInstancesScreenshotResponse {
 }
 
 declare interface CreateCosCredentialRequest {
-  /** Cos 密钥类型， Mobile 移动端, PC 桌面, AndroidApp 安卓应用 */
+  /** Cos 密钥类型，取值： Mobile 云手游、PC 云端游、AndroidApp 云手机应用管理、AndroidAppFile 云手机文件管理、AndroidAppBackup 云手机备份还原 */
   CosType: string;
-  /** 云手机 Cos 数据 */
+  /** 云手机应用管理 Cos 数据 */
   AndroidAppCosInfo?: AndroidAppCosInfo;
+  /** 云手机文件管理 Cos 数据 */
+  AndroidAppFileCosInfo?: FileCosInfo;
 }
 
 declare interface CreateCosCredentialResponse {

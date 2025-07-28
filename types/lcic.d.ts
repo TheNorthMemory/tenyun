@@ -948,7 +948,7 @@ declare interface DeleteUserResponse {
 }
 
 declare interface DeleteWhiteBoardSnapshotRequest {
-  /** 房间ID */
+  /** 课堂ID */
   RoomId?: number;
 }
 
@@ -1524,7 +1524,7 @@ declare interface DescribeWhiteBoardSnapshotResponse {
 }
 
 declare interface EndRoomRequest {
-  /** 房间ID。 */
+  /** 课堂ID */
   RoomId: number;
 }
 
@@ -1536,7 +1536,7 @@ declare interface EndRoomResponse {
 declare interface ForbidSendMsgRequest {
   /** 低代码互动课堂的SdkAppId。 */
   SdkAppId: number;
-  /** 房间ID。 */
+  /** 课堂ID */
   RoomId: number;
   /** 需要禁言的用户账号，最多支持500个账号 */
   MembersAccount: string[];
@@ -1946,7 +1946,7 @@ declare interface StartRecordResponse {
 }
 
 declare interface StartRoomRequest {
-  /** 房间ID。 */
+  /** 课堂ID */
   RoomId: number;
 }
 
@@ -1958,7 +1958,7 @@ declare interface StartRoomResponse {
 declare interface StopRecordRequest {
   /** 学校ID */
   SdkAppId: number;
-  /** 房间ID */
+  /** 课堂ID */
   RoomId: number;
   /** 任务ID */
   TaskId: string;
@@ -2086,7 +2086,7 @@ declare interface Lcic {
   DescribeSdkAppIdUsers(data: DescribeSdkAppIdUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSdkAppIdUsersResponse>;
   /** 获取巡课列表 {@link DescribeSupervisorsRequest} {@link DescribeSupervisorsResponse} */
   DescribeSupervisors(data: DescribeSupervisorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupervisorsResponse>;
-  /** 获取用户信息 {@link DescribeUserRequest} {@link DescribeUserResponse} */
+  /** 获取用户信息【已废弃】 {@link DescribeUserRequest} {@link DescribeUserResponse} */
   DescribeUser(data?: DescribeUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResponse>;
   /** 获取用户信息（新） {@link DescribeUserDetailRequest} {@link DescribeUserDetailResponse} */
   DescribeUserDetail(data?: DescribeUserDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDetailResponse>;

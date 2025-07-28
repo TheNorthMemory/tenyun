@@ -3289,7 +3289,7 @@ declare interface GetVarListResponse {
 }
 
 declare interface GetWsTokenRequest {
-  /** 接入类型， 5-API 访客 */
+  /** 接入类型， 5-API 访客，目前仅支持传5 */
   Type: number;
   /** 应用AppKey 获取方式: 1、应用发布后在应用页面[发布管理]-[调用信息]-[API管理]处获取 2、参考 https://cloud.tencent.com/document/product/1759/109469 第二项 */
   BotAppKey?: string;

@@ -1443,6 +1443,8 @@ declare interface CertificateInfoSubmitRequest {
   Type?: number;
   /** 只针对Dnspod系列证书有效，ca机构类型可为sectigo和digicert */
   CaType?: string;
+  /** 签名算法 */
+  SignAlgo?: string;
 }
 
 declare interface CertificateInfoSubmitResponse {
@@ -2681,7 +2683,7 @@ declare interface ReplaceCertificateRequest {
   CertificateId: string;
   /** 验证类型：DNS_AUTO = 自动DNS验证（仅支持在腾讯云解析且解析状态正常的域名使用该验证类型），DNS = 手动DNS验证，FILE = 文件验证。 */
   ValidType: string;
-  /** 类型，默认 Original。可选项：Original = 原证书 CSR，Upload = 手动上传，Online = 在线生成。 */
+  /** 类型，默认 original。可选项：original = 原证书 CSR，upload = 手动上传，online = 在线生成。 */
   CsrType?: string;
   /** CSR 内容，手动上传的时候需要。 */
   CsrContent?: string;
@@ -2693,6 +2695,8 @@ declare interface ReplaceCertificateRequest {
   CertCSREncryptAlgo?: string;
   /** CSR加密参数，CsrEncryptAlgo为RSA时， 可选2048、4096等默认为2048；CsrEncryptAlgo为ECC时，可选prime256v1，secp384r1等，默认为prime256v1; */
   CertCSRKeyParameter?: string;
+  /** 签名算法 */
+  SignAlgo?: string;
 }
 
 declare interface ReplaceCertificateResponse {

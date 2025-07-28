@@ -292,6 +292,10 @@ declare interface DescribeTreeJobsRsp {
   Children?: DescribeTreeJobsRsp[] | null;
   /** 请求ID */
   RequestId?: string | null;
+  /** attach-000 */
+  PageAttach?: string | null;
+  /** bool */
+  HasMore?: boolean | null;
 }
 
 /** 树状结构资源列表对象 */
@@ -1865,7 +1869,7 @@ declare interface DescribeSystemResourcesResponse {
 }
 
 declare interface DescribeTreeJobsRequest {
-  /** 筛选条件字段 */
+  /** 筛选条件字段，使用了筛选字段后不支持分页，最多返回2000条记录 */
   Filters?: Filter[];
   /** 工作空间 Serialid */
   WorkSpaceId?: string;

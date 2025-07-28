@@ -468,6 +468,10 @@ declare interface CloudEffectInfo {
   Prompt?: string;
   /** 云端特效标签。 */
   Flag?: string;
+  /** 云端特效生成状态。生成中 - GENERATING。处理中 - PROCESSING。生成失败 - FAILED。已完成 - FINISH。 */
+  Status?: string;
+  /** 特效信息，生成失败时，此处返回失败原因。 */
+  Message?: string;
   /** 云端特效预览图片。 */
   PreviewImageUrl?: string;
   /** 云端特效类型。PGC : 官方精品特效。AIGC : AI生成的特效。UGC : 用户上传特效。 */
@@ -3394,6 +3398,10 @@ declare interface DescribeLiveCloudEffectListRequest {
 declare interface DescribeLiveCloudEffectListResponse {
   /** 云端特效信息列表。 */
   InfoList?: CloudEffectInfo[];
+  /** 允许创建的云端特效个数。 */
+  EnableCreateNum?: number;
+  /** 当前已有的特效总个数。 */
+  TotalNum?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
