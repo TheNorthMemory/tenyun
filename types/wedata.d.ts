@@ -1382,8 +1382,12 @@ declare interface DependencyConfigDsDTO {
 
 /** 依赖配置策略 */
 declare interface DependencyStrategyDs {
-  /** 等待（默认策略）或 执行 */
+  /** 等待上游任务实例策略：EXECUTING（执行）；WAITING（等待） */
   PollingNullStrategy?: string | null;
+  /** 仅当PollingNullStrategy为EXECUTING时才需要填本字段，List类型：NOT_EXIST（默认，在分钟依赖分钟/小时依赖小时的情况下，父实例不在下游实例调度时间范围内）；PARENT_EXPIRED（父实例失败）；PARENT_TIMEOUT（父实例超时）。以上场景满足任一条件即可通过该父任务实例依赖判断，除以上场景外均需等待父实例。 */
+  TaskDependencyExecutingStrategies?: string[] | null;
+  /** 仅当TaskDependencyExecutingStrategies中包含PARENT_TIMEOUT时才需要填本字段，下游任务依赖父实例执行超时时间，单位：分钟。 */
+  TaskDependencyExecutingTimeoutValue?: number | null;
 }
 
 /** 申请列表 */
@@ -2552,6 +2556,8 @@ declare interface InstanceLifeCycleOpsDto {
   TotalLifeRound?: number;
   /** 任务类型 */
   TaskType?: TaskTypeOpsDto | null;
+  /** 资源组id */
+  ResourceGroup?: string | null;
 }
 
 /** 调度实例详情 */
@@ -2904,6 +2910,8 @@ declare interface InstanceOpsDto {
   ConcurrentStrategy?: number | null;
   /** 调度运行方式, 0: 周期调度, 1: 空跑调度 */
   ScheduleRunType?: number | null;
+  /** 允许重跑类型，ALL 表示无论实例运行成功还是失败都允许重跑，NONE表示无论成功或者失败都不允许重跑，FAILURE 表示只有运行失败才能重跑 */
+  AllowRedoType?: string;
 }
 
 /** 任务运行历史分页记录 */
@@ -3012,10 +3020,14 @@ declare interface InstanceVO {
   CostTime?: string | null;
   /** 计划调度时间 */
   SchedulerTime?: string | null;
+  /** 实例最近更新时间, 时间格式为 yyyy-MM-dd HH:mm:ss */
+  LastUpdateTime?: string | null;
   /** 执行资源组ID */
   ExecutorGroupId?: string | null;
   /** 资源组名称 */
   ExecutorGroupName?: string | null;
+  /** 简要的任务失败信息 */
+  JobErrorMsg?: string | null;
 }
 
 /** 实例日志信息 */
@@ -3140,6 +3152,14 @@ declare interface IntegrationStatisticsTrendResult {
   StatisticType?: string | null;
 }
 
+/** 集成标签 */
+declare interface IntegrationTag {
+  /** key值 */
+  Key?: string | null;
+  /** 标签值 */
+  Value?: string | null;
+}
+
 /** 集成任务 */
 declare interface IntegrationTaskInfo {
   /** 任务名称 */
@@ -3246,6 +3266,10 @@ declare interface IntegrationTaskInfo {
   BusinessLatency?: number | null;
   /** 当前同步位点 */
   CurrentSyncPosition?: number | null;
+  /** 标签列表 */
+  TagList?: IntegrationTag[] | null;
+  /** 错误信息 */
+  ErrorMessage?: string | null;
 }
 
 /** 调度任务日志错误提示信息 */
@@ -4240,6 +4264,22 @@ declare interface RelatedTask {
   TaskTypeId?: number | null;
 }
 
+/** 上报表元数据的字段结构 */
+declare interface ReportColumnInfo {
+  /** 字段名称,字符长度128内 */
+  Name: string;
+  /** 字段类型,字符长度128内 */
+  Type: string;
+  /** 字段位置,1开始 */
+  Position: number;
+  /** 字段描述,字符长度256内 */
+  Description?: string;
+  /** 创建时间戳,毫秒,为空默认当前时间 */
+  CreateTime?: string;
+  /** 修改时间戳,毫秒,为空默认当前时间 */
+  ModifiedTime?: string;
+}
+
 /** 上报任务详情 */
 declare interface ReportTaskDetail {
   /** 引擎任务id */
@@ -4820,6 +4860,8 @@ declare interface RuleGroupExecStrategy {
   DatasourceId?: string;
   /** 任务描述 */
   Description?: string;
+  /** 时区 */
+  ScheduleTimeZone?: string | null;
 }
 
 /** 规则组分页 */
@@ -6222,6 +6264,8 @@ declare interface TaskDsDTO {
   ScheduleTimeZone?: string | null;
   /** 引用的代码模版id */
   TemplateId?: string | null;
+  /** 允许重跑类 ALL 无论实例成功或者失败，都允许重跑 FAILURE 只有失败的实例允许重跑，成功的实例不允许重跑 NONE 无论成功或者失败，都不允许重跑 */
+  AllowRedoType?: string | null;
 }
 
 /** 属性配置 */
@@ -6630,6 +6674,8 @@ declare interface TaskOpsDto {
   NewParentTaskInfos?: AiopsSimpleTaskDto[] | null;
   /** 任务自依赖类型：yes： 任务需满足自依赖no：任务无需满足自依赖 */
   SelfWorkFlowDependType?: string | null;
+  /** 允许重跑类型，ALL 表示无论实例运行成功还是失败都允许重跑，NONE表示无论成功或者失败都不允许重跑，FAILURE 表示只有运行失败才能重跑 */
+  AllowRedoType?: string;
 }
 
 /** 任务执行脚本 */
@@ -7204,6 +7250,10 @@ declare interface WorkflowDsDTO {
   Params?: ParameterTaskDsDto[] | null;
   /** 工作流类型, 取值示例- cycle 周期工作流- manual 手动工作流 */
   WorkflowType?: string | null;
+  /** 最近更新人名称 */
+  UpdateUser?: string | null;
+  /** 最近更新人id */
+  UpdateUserId?: string | null;
 }
 
 /** 工作流 */
@@ -7236,6 +7286,8 @@ declare interface WorkflowExtOpsDto {
   CreateTime?: string | null;
   /** 最近更新时间 */
   ModifyTime?: string | null;
+  /** 最近更新人 */
+  ModifyUser?: string | null;
   /** 工作流类型，周期cycle，手动manual */
   WorkflowType?: string | null;
 }
@@ -10384,6 +10436,8 @@ declare interface DescribeOpsWorkflowsRequest {
   WorkflowTypeList?: string[];
   /** 工作流过滤keyword，支持工作流 id/name 模糊匹配， 多个用|分割 */
   KeyWord?: string;
+  /** **时区** timeZone, 默认UTC+8 */
+  ScheduleTimeZone?: string;
 }
 
 declare interface DescribeOpsWorkflowsResponse {
@@ -11653,6 +11707,20 @@ declare interface DescribeTaskLockStatusResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTaskParamDsRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 任务id */
+  TaskId?: string;
+}
+
+declare interface DescribeTaskParamDsResponse {
+  /** 结果集 */
+  Data?: ParameterTaskDsDto[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTaskRunHistoryRequest {
   /** 项目id */
   ProjectId: string;
@@ -12305,6 +12373,26 @@ declare interface GetIntegrationNodeColumnSchemaResponse {
   RequestId?: string;
 }
 
+declare interface GetJobStatusRequest {
+  /** 异步任务id */
+  JobId: string;
+}
+
+declare interface GetJobStatusResponse {
+  /** 异步任务id */
+  JobId?: string;
+  /** 是否已完成 */
+  Completed?: boolean;
+  /** 任务状态,Success:成功,Fail:失败,Cancel:取消,Running:运行中 */
+  Status?: string;
+  /** 创建时间时间戳,单位毫秒 */
+  CreateTime?: string;
+  /** 错误信息 */
+  ErrorMessage?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetOfflineDIInstanceListRequest {
   /** 第几页 */
   PageIndex: number;
@@ -12597,6 +12685,10 @@ declare interface ListInstancesRequest {
   StartTimeTo?: string;
   /** **时区**timeZone, 默认UTC+8 */
   ScheduleTimeZone?: string;
+  /** **实例最近更新时间过滤条件**过滤截止时间，时间格式为 yyyy-MM-dd HH:mm:ss */
+  LastUpdateTimeFrom?: string;
+  /** **实例最近更新时间过滤条件**过滤截止时间，时间格式为 yyyy-MM-dd HH:mm:ss */
+  LastUpdateTimeTo?: string;
 }
 
 declare interface ListInstancesResponse {
@@ -13425,6 +13517,54 @@ declare interface RegisterEventResponse {
   RequestId?: string;
 }
 
+declare interface RemoveDatabaseRequest {
+  /** 数据源id */
+  DatasourceId: number;
+  /** database名称 */
+  DatabaseName: string;
+}
+
+declare interface RemoveDatabaseResponse {
+  /** 异步删除的任务id,用于查询执行状态 */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RemoveSchemaRequest {
+  /** 数据源id */
+  DatasourceId: number;
+  /** database名称 */
+  DatabaseName: string;
+  /** schema名称 */
+  SchemaName: string;
+}
+
+declare interface RemoveSchemaResponse {
+  /** 异步删除的任务id,用于查询执行状态 */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RemoveTableRequest {
+  /** 数据源id */
+  DatasourceId: number;
+  /** database名称 */
+  DatabaseName: string;
+  /** schema名称 */
+  SchemaName: string;
+  /** 表名称 */
+  TableName: string;
+}
+
+declare interface RemoveTableResponse {
+  /** 结果 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RemoveWorkflowDsRequest {
   /** 项目ID */
   ProjectId: string;
@@ -13511,6 +13651,76 @@ declare interface RenewWorkflowSchedulerInfoDsRequest {
 declare interface RenewWorkflowSchedulerInfoDsResponse {
   /** 数据 */
   Data?: BatchResultDs | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ReportDatabaseRequest {
+  /** 数据源id */
+  DatasourceId: number;
+  /** database名称,字符长度128内 */
+  DatabaseName: string;
+  /** 描述,字符长度3000内 */
+  Description?: string;
+  /** 创建时间戳,毫秒,为空默认当前时间 */
+  CreateTime?: number;
+  /** 修改时间戳,毫秒,为空默认当前时间 */
+  ModifiedTime?: number;
+}
+
+declare interface ReportDatabaseResponse {
+  /** 元数据唯一id */
+  Guid?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ReportSchemaRequest {
+  /** 数据源id */
+  DatasourceId: number;
+  /** database名称,字符长度128内 */
+  DatabaseName: string;
+  /** schema名称,字符长度128内 */
+  SchemaName: string;
+  /** 描述,字符长度3000内 */
+  Description?: string;
+  /** 创建时间戳,毫秒,为空默认当前时间 */
+  CreateTime?: number;
+  /** 修改时间戳,毫秒,为空默认当前时间 */
+  ModifiedTime?: number;
+}
+
+declare interface ReportSchemaResponse {
+  /** 元数据唯一id */
+  Guid?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ReportTableRequest {
+  /** 数据源id */
+  DatasourceId: number;
+  /** database名称,字符长度128内 */
+  DatabaseName: string;
+  /** table名称,字符长度128内 */
+  TableName: string;
+  /** 表类型,VIEW/TABLE */
+  Type: string;
+  /** schema名称,字符长度128内 */
+  SchemaName?: string;
+  /** 描述,字符长度1000内 */
+  Description?: string;
+  /** 创建时间戳,毫秒,为空默认当前时间 */
+  CreateTime?: number;
+  /** 修改时间戳,毫秒,为空默认当前时间 */
+  ModifiedTime?: number;
+  /** 字段信息 */
+  Columns?: ReportColumnInfo[];
+}
+
+declare interface ReportTableResponse {
+  /** 元数据唯一id */
+  Guid?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -14682,6 +14892,8 @@ declare interface Wedata {
   DescribeTaskLineage(data?: DescribeTaskLineageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLineageResponse>;
   /** 查看任务锁状态信息 {@link DescribeTaskLockStatusRequest} {@link DescribeTaskLockStatusResponse} */
   DescribeTaskLockStatus(data: DescribeTaskLockStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLockStatusResponse>;
+  /** 查询任务引用参数 {@link DescribeTaskParamDsRequest} {@link DescribeTaskParamDsResponse} */
+  DescribeTaskParamDs(data: DescribeTaskParamDsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskParamDsResponse>;
   /** 分页查询任务运行历史 {@link DescribeTaskRunHistoryRequest} {@link DescribeTaskRunHistoryResponse} */
   DescribeTaskRunHistory(data: DescribeTaskRunHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskRunHistoryResponse>;
   /** 查询任务脚本（废弃） {@link DescribeTaskScriptRequest} {@link DescribeTaskScriptResponse} */
@@ -14744,6 +14956,8 @@ declare interface Wedata {
   GetInstanceLog(data: GetInstanceLogRequest, config?: AxiosRequestConfig): AxiosPromise<GetInstanceLogResponse>;
   /** 提取数据集成节点字段Schema {@link GetIntegrationNodeColumnSchemaRequest} {@link GetIntegrationNodeColumnSchemaResponse} */
   GetIntegrationNodeColumnSchema(data?: GetIntegrationNodeColumnSchemaRequest, config?: AxiosRequestConfig): AxiosPromise<GetIntegrationNodeColumnSchemaResponse>;
+  /** 获取异步任务状态 {@link GetJobStatusRequest} {@link GetJobStatusResponse} */
+  GetJobStatus(data: GetJobStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetJobStatusResponse>;
   /** 获取离线任务实例列表(新) {@link GetOfflineDIInstanceListRequest} {@link GetOfflineDIInstanceListResponse} */
   GetOfflineDIInstanceList(data: GetOfflineDIInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<GetOfflineDIInstanceListResponse>;
   /** 获取离线任务实例 {@link GetOfflineInstanceListRequest} {@link GetOfflineInstanceListResponse} */
@@ -14816,12 +15030,24 @@ declare interface Wedata {
   RegisterEvent(data: RegisterEventRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterEventResponse>;
   /** 注册事件监听器（废弃） {@link RegisterEventListenerRequest} {@link RegisterEventListenerResponse} */
   RegisterEventListener(data: RegisterEventListenerRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterEventListenerResponse>;
+  /** 移除database元数据 {@link RemoveDatabaseRequest} {@link RemoveDatabaseResponse} */
+  RemoveDatabase(data: RemoveDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveDatabaseResponse>;
+  /** 移除schema元数据 {@link RemoveSchemaRequest} {@link RemoveSchemaResponse} */
+  RemoveSchema(data: RemoveSchemaRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveSchemaResponse>;
+  /** 移除table元数据 {@link RemoveTableRequest} {@link RemoveTableResponse} */
+  RemoveTable(data: RemoveTableRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveTableResponse>;
   /** 删除编排空间工作流 {@link RemoveWorkflowDsRequest} {@link RemoveWorkflowDsResponse} */
   RemoveWorkflowDs(data: RemoveWorkflowDsRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveWorkflowDsResponse>;
   /** 批量更新工作流下任务责任人 {@link RenewWorkflowOwnerDsRequest} {@link RenewWorkflowOwnerDsResponse} */
   RenewWorkflowOwnerDs(data: RenewWorkflowOwnerDsRequest, config?: AxiosRequestConfig): AxiosPromise<RenewWorkflowOwnerDsResponse>;
   /** 更新工作流下任务调度信息 {@link RenewWorkflowSchedulerInfoDsRequest} {@link RenewWorkflowSchedulerInfoDsResponse} */
   RenewWorkflowSchedulerInfoDs(data: RenewWorkflowSchedulerInfoDsRequest, config?: AxiosRequestConfig): AxiosPromise<RenewWorkflowSchedulerInfoDsResponse>;
+  /** 上报database元数据 {@link ReportDatabaseRequest} {@link ReportDatabaseResponse} */
+  ReportDatabase(data: ReportDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<ReportDatabaseResponse>;
+  /** 上报schema元数据 {@link ReportSchemaRequest} {@link ReportSchemaResponse} */
+  ReportSchema(data: ReportSchemaRequest, config?: AxiosRequestConfig): AxiosPromise<ReportSchemaResponse>;
+  /** 上报table元数据 {@link ReportTableRequest} {@link ReportTableResponse} */
+  ReportTable(data: ReportTableRequest, config?: AxiosRequestConfig): AxiosPromise<ReportTableResponse>;
   /** 任务血缘上报接口 {@link ReportTaskLineageRequest} {@link ReportTaskLineageResponse} */
   ReportTaskLineage(data: ReportTaskLineageRequest, config?: AxiosRequestConfig): AxiosPromise<ReportTaskLineageResponse>;
   /** 继续实时集成任务 {@link ResumeIntegrationTaskRequest} {@link ResumeIntegrationTaskResponse} */

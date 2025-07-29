@@ -960,7 +960,7 @@ declare interface OrganizationAuthUrl {
   ErrorMessage?: string;
 }
 
-/** 企业认证可选项，其中包括 社会信用代码是否一致，企业名称是否一致，法人是否一致等信息。代表生成链接的时候指定的这些信息不能被用户修改。p.s. 注意这些选项一旦传递，相关的信息也不会被上传的营业执照里面包含的信息所覆盖。 */
+/** 企业认证可选项，其中包括 社会信用代码是否一致，企业名称是否一致，法人是否一致， 对公打款账号是否一致等信息。代表生成链接的时候指定的这些信息不能被用户修改。p.s. 注意这些选项一旦传递，相关的信息也不会被上传的营业执照里面包含的信息所覆盖。 */
 declare interface OrganizationAuthorizationOptions {
   /** 对方打开链接认证时，对方填写的营业执照的社会信用代码是否与接口上传上来的要保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。 */
   UniformSocialCreditCodeSame?: boolean;
@@ -968,6 +968,8 @@ declare interface OrganizationAuthorizationOptions {
   OrganizationNameSame?: boolean;
   /** 对方打开链接认证时，法人姓名是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。p.s. 仅在法人姓名不为空时有效 */
   LegalNameSame?: boolean;
+  /** 对方打开链接认证时，对公打款账号是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。p.s. 仅在对公打款账号不为空时有效 */
+  BankAccountNumberSame?: boolean;
 }
 
 /** 企业认证信息参数， 需要保证这些参数跟营业执照中的信息一致。 */
@@ -2797,8 +2799,6 @@ declare interface CreateConsoleLoginUrlRequest {
   AutoJumpBackEvent?: string;
   /** 可选的此企业允许的授权方式, 可以设置的方式有:2：转法定代表人授权5：授权书+对公打款 */
   AuthorizationTypes?: number[];
-  /** 暂未开放 */
-  Operator?: UserInfo;
   /** 子客经办人身份证注意：`如果已同步，这里非空会更新同步的经办人身份证号，暂时只支持中国大陆居民身份证类型`。 */
   ProxyOperatorIdCardNumber?: string;
   /** 认证完成跳转链接。注意：`此功能仅在Endpoint参数设置成 H5 或 PC时才有效`。 */
@@ -2817,6 +2817,10 @@ declare interface CreateConsoleLoginUrlRequest {
   PowerOfAttorneys?: string[];
   /** 企业认证时个性化能力信息 */
   OrganizationAuthorizationOptions?: OrganizationAuthorizationOptions;
+  /** 组织机构对公打款 账号，账户名跟企业名称一致。p.s.只有认证方式是授权书+对公打款时才生效。 */
+  BankAccountNumber?: string;
+  /** 无 */
+  Operator?: UserInfo;
 }
 
 declare interface CreateConsoleLoginUrlResponse {

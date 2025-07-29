@@ -62,7 +62,7 @@ declare interface ActionConfigInfo {
 
 /** 编排原子任务 */
 declare interface Activity {
-  /** 原子任务类型：input: 起始节点output：终止节点action-trans：转码action-samplesnapshot：采样截图action-AIAnalysis: 分析action-AIRecognition：识别action-aiReview：审核action-animated-graphics：转动图action-image-sprite：雪碧图action-snapshotByTimeOffset: 时间点截图action-adaptive-substream：自适应码流action-AIQualityControl：媒体质检action-SmartSubtitles：智能字幕 */
+  /** 原子任务类型：input: 起始节点output：终止节点action-trans：转码action-samplesnapshot：采样截图action-AIAnalysis: 分析action-AIRecognition：识别action-aiReview：审核action-animated-graphics：转动图action-image-sprite：雪碧图action-snapshotByTimeOffset: 时间点截图action-adaptive-substream：自适应码流action-AIQualityControl：媒体质检action-SmartSubtitles：智能字幕action-exec-rules：判断规则 */
   ActivityType: string;
   /** 后驱节点索引数组 */
   ReardriveIndex?: number[];
@@ -92,6 +92,8 @@ declare interface ActivityPara {
   AiRecognitionTask?: AiRecognitionTaskInput | null;
   /** 媒体质检任务 */
   QualityControlTask?: AiQualityControlTaskInput | null;
+  /** 任务条件判断 */
+  ExecRulesTask?: ExecRulesTask | null;
   /** 智能字幕任务 */
   SmartSubtitlesTask?: SmartSubtitlesTaskInput | null;
 }
@@ -118,6 +120,8 @@ declare interface ActivityResItem {
   AnalysisTask?: ScheduleAnalysisTaskResult | null;
   /** 媒体质检任务输出 */
   QualityControlTask?: ScheduleQualityControlTaskResult | null;
+  /** 条件判断任务输出 */
+  ExecRuleTask?: ScheduleExecRuleTaskResult | null;
   /** 智能字幕任务输出 */
   SmartSubtitlesTask?: ScheduleSmartSubtitleTaskResult | null;
 }
@@ -164,6 +168,8 @@ declare interface AdaptiveDynamicStreamingTaskInput {
   DefinitionType?: string;
   /** 字幕参数 */
   SubtitleTemplate?: SubtitleTemplate | null;
+  /** 转码参数扩展字段 */
+  StdExtInfo?: string;
 }
 
 /** 转自适应码流模板详情 */
@@ -326,6 +332,8 @@ declare interface AiAnalysisTaskDelLogoOutput {
   OriginSubtitlePath?: string;
   /** 基于画面提取的字幕翻译文件路径。 */
   TranslateSubtitlePath?: string;
+  /** 擦除的字幕位置。**注意**：仅对字幕提取且开启返回字幕位置时有效。 */
+  SubtitlePos?: SubtitlePosition | null;
 }
 
 /** 智能擦除结果类型 */
@@ -909,7 +917,7 @@ declare interface AiRecognitionTaskOcrWordsResult {
 /** 文本关键词识别输入。 */
 declare interface AiRecognitionTaskOcrWordsResultInput {
   /** 文本关键词识别模板 ID。 */
-  Definition: number;
+  Definition?: number;
 }
 
 /** 文本关键词识别结果。 */
@@ -2644,6 +2652,18 @@ declare interface EvaluationTemplateInputInfo {
   Definition: number | null;
 }
 
+/** 条件判断输出 */
+declare interface ExecRuleTaskData {
+  /** 质检条件判断需要执行的节点索引。 */
+  RearDriveIndex?: number[];
+}
+
+/** 任务判断条件 */
+declare interface ExecRulesTask {
+  /** 条件判断信息 */
+  Rules?: Rules[] | null;
+}
+
 /** 表情识别参数配置 */
 declare interface ExpressionConfigInfo {
   /** 表情识别任务开关，可选值：ON：开启；OFF：关闭。 */
@@ -2977,9 +2997,9 @@ declare interface HighlightSegmentItem {
   /** 片段标签 */
   SegmentTags?: string[] | null;
   /** 直播切片对应直播起始时间点，采用 ISO 日期格式。 */
-  BeginTime?: string | null;
+  BeginTime?: string;
   /** 直播切片对应直播结束时间点，采用 ISO 日期格式。 */
-  EndTime?: string | null;
+  EndTime?: string;
 }
 
 /** 图片框选区域信息 */
@@ -3185,7 +3205,7 @@ declare interface LiveActivityResItem {
 /** 直播编排任务输出 */
 declare interface LiveActivityResult {
   /** 原子任务类型。LiveRecord：直播录制。AiQualityControl：媒体质检。 */
-  ActivityType?: string | null;
+  ActivityType?: string;
   /** 原子任务输出。 */
   LiveActivityResItem?: LiveActivityResItem | null;
 }
@@ -3265,15 +3285,15 @@ declare interface LiveScheduleLiveRecordTaskResult {
 /** 直播编排任务信息 */
 declare interface LiveScheduleTask {
   /** 直播编排任务 ID。 */
-  TaskId?: string | null;
+  TaskId?: string;
   /** 任务流状态，取值：PROCESSING：处理中；FINISH：已完成。 */
-  Status?: string | null;
+  Status?: string;
   /** 源异常时返回非0错误码，返回0 时请使用各个具体任务的 ErrCode。 */
-  ErrCode?: number | null;
+  ErrCode?: number;
   /** 源异常时返回对应异常Message，否则请使用各个具体任务的 Message。 */
-  Message?: string | null;
+  Message?: string;
   /** 直播流 URL。 */
-  Url?: string | null;
+  Url?: string;
   /** 直播编排任务输出。 */
   LiveActivityResultSet?: LiveActivityResult[] | null;
 }
@@ -3686,6 +3706,8 @@ declare interface MediaAiAnalysisTagItem {
   Tag?: string;
   /** 标签的可信度，取值范围是 0 到 100。 */
   Confidence?: number;
+  /** 根据不同类型决定 */
+  SpecialInfo?: string;
 }
 
 /** 视频转动图结果信息 */
@@ -3913,7 +3935,7 @@ declare interface MediaProcessTaskImageSpriteResult {
   /** 对视频截雪碧图任务的输入。 */
   Input?: ImageSpriteTaskInput;
   /** 对视频截雪碧图任务的输出。 */
-  Output?: MediaImageSpriteItem;
+  Output?: MediaImageSpriteItem | null;
   /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
   BeginProcessTime?: string;
   /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
@@ -3939,19 +3961,19 @@ declare interface MediaProcessTaskInput {
 /** 任务查询结果类型 */
 declare interface MediaProcessTaskResult {
   /** 任务的类型，可以取的值有：Transcode：转码AnimatedGraphics：转动图SnapshotByTimeOffset：时间点截图SampleSnapshot：采样截图ImageSprites：雪碧图CoverBySnapshot：截图做封面AdaptiveDynamicStreaming：自适应码流 */
-  Type: string;
+  Type?: string;
   /** 视频转码任务的查询结果，当任务类型为 Transcode 时有效。 */
-  TranscodeTask: MediaProcessTaskTranscodeResult | null;
+  TranscodeTask?: MediaProcessTaskTranscodeResult | null;
   /** 视频转动图任务的查询结果，当任务类型为 AnimatedGraphics 时有效。 */
-  AnimatedGraphicTask: MediaProcessTaskAnimatedGraphicResult | null;
+  AnimatedGraphicTask?: MediaProcessTaskAnimatedGraphicResult | null;
   /** 对视频按时间点截图任务的查询结果，当任务类型为 SnapshotByTimeOffset 时有效。 */
-  SnapshotByTimeOffsetTask: MediaProcessTaskSnapshotByTimeOffsetResult | null;
+  SnapshotByTimeOffsetTask?: MediaProcessTaskSnapshotByTimeOffsetResult | null;
   /** 对视频采样截图任务的查询结果，当任务类型为 SampleSnapshot 时有效。 */
-  SampleSnapshotTask: MediaProcessTaskSampleSnapshotResult | null;
+  SampleSnapshotTask?: MediaProcessTaskSampleSnapshotResult | null;
   /** 对视频截雪碧图任务的查询结果，当任务类型为 ImageSprite 时有效。 */
-  ImageSpriteTask: MediaProcessTaskImageSpriteResult | null;
+  ImageSpriteTask?: MediaProcessTaskImageSpriteResult | null;
   /** 转自适应码流任务查询结果，当任务类型为 AdaptiveDynamicStreaming 时有效。 */
-  AdaptiveDynamicStreamingTask: MediaProcessTaskAdaptiveDynamicStreamingResult | null;
+  AdaptiveDynamicStreamingTask?: MediaProcessTaskAdaptiveDynamicStreamingResult | null;
 }
 
 /** 对视频做采样截图任务结果类型 */
@@ -3967,7 +3989,7 @@ declare interface MediaProcessTaskSampleSnapshotResult {
   /** 对视频做采样截图任务输入。 */
   Input?: SampleSnapshotTaskInput;
   /** 对视频做采样截图任务输出。 */
-  Output?: MediaSampleSnapshotItem;
+  Output?: MediaSampleSnapshotItem | null;
   /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
   BeginProcessTime?: string;
   /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
@@ -3987,7 +4009,7 @@ declare interface MediaProcessTaskSnapshotByTimeOffsetResult {
   /** 对视频按指定时间点截图任务输入。 */
   Input?: SnapshotByTimeOffsetTaskInput;
   /** 对视频按指定时间点截图任务输出。 */
-  Output?: MediaSnapshotByTimeOffsetItem;
+  Output?: MediaSnapshotByTimeOffsetItem | null;
   /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
   BeginProcessTime?: string;
   /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
@@ -4031,11 +4053,11 @@ declare interface MediaSampleSnapshotItem {
 /** 点播文件指定时间点截图信息 */
 declare interface MediaSnapshotByTimeOffsetItem {
   /** 指定时间点截图规格，参见[指定时间点截图参数模板](https://cloud.tencent.com/document/product/266/33480)。 */
-  Definition: number;
+  Definition?: number;
   /** 同一规格的截图信息集合，每个元素代表一张截图。 */
-  PicInfoSet: MediaSnapshotByTimePicInfoItem[];
+  PicInfoSet?: MediaSnapshotByTimePicInfoItem[];
   /** 指定时间点截图文件的存储位置。 */
-  Storage: TaskOutputStorage;
+  Storage?: TaskOutputStorage;
 }
 
 /** 指定时间点截图信息 */
@@ -4515,17 +4537,17 @@ declare interface ProhibitedOcrReviewTemplateInfoForUpdate {
 /** 媒体质检结果输出。 */
 declare interface QualityControlData {
   /** 为true时表示视频无音频轨。 */
-  NoAudio?: boolean | null;
+  NoAudio?: boolean;
   /** 为true时表示视频无视频轨。 */
-  NoVideo?: boolean | null;
+  NoVideo?: boolean;
   /** 视频无参考质量评分，百分制。 */
-  QualityEvaluationScore?: number | null;
+  QualityEvaluationScore?: number;
   /** 视频无参考质量评分，MOS分数。 */
-  QualityEvaluationMeanOpinionScore?: number | null;
+  QualityEvaluationMeanOpinionScore?: number;
   /** 内容质检检出异常项。 */
-  QualityControlResultSet?: QualityControlResult[] | null;
-  /** 格式诊断检出异常项 */
-  ContainerDiagnoseResultSet?: ContainerDiagnoseResultItem[] | null;
+  QualityControlResultSet?: QualityControlResult[];
+  /** 格式诊断检出异常项。 */
+  ContainerDiagnoseResultSet?: ContainerDiagnoseResultItem[];
 }
 
 /** 质检结果项 */
@@ -4559,9 +4581,17 @@ declare interface QualityControlItemConfig {
 /** 质检异常项。 */
 declare interface QualityControlResult {
   /** 异常类型，取值范围：Jitter：抖动，Blur：模糊，LowLighting：低光照，HighLighting：过曝，CrashScreen：花屏，BlackWhiteEdge：黑白边，SolidColorScreen：纯色屏，Noise：噪点，Mosaic：马赛克，QRCode：二维码，AppletCode：小程序码，BarCode：条形码，LowVoice：低音，HighVoice：爆音，NoVoice：静音，LowEvaluation：无参考打分低于阈值。 */
-  Type: string;
+  Type?: string;
   /** 质检结果项。 */
-  QualityControlItems: QualityControlItem[];
+  QualityControlItems?: QualityControlItem[];
+}
+
+/** 媒体质检检测策略。 */
+declare interface QualityControlStrategy {
+  /** 策略类型。取值：- TimeSpotCheck */
+  StrategyType?: string;
+  /** 根据时间的抽检策略。 */
+  TimeSpotCheck?: TimeSpotCheck;
 }
 
 /** 媒体质检模板详情 */
@@ -4580,6 +4610,8 @@ declare interface QualityControlTemplate {
   CreateTime?: string | null;
   /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
   UpdateTime?: string | null;
+  /** 媒体质检的抽检策略。 */
+  Strategy?: QualityControlStrategy;
 }
 
 /** RTMP转推的目标地址信息。 */
@@ -4694,6 +4726,26 @@ declare interface ResilientStreamConf {
   Enable?: boolean | null;
   /** 延播时间，单位秒，目前支持的范围为10~300秒。 */
   BufferTime?: number | null;
+}
+
+/** 规则条件配置。 */
+declare interface RuleConditionItem {
+  /** 质检项条件对应的Key。 */
+  Key?: string;
+  /** 条件对应的Value。 */
+  Value?: string;
+}
+
+/** 任务判断条件 */
+declare interface Rules {
+  /** 判断条件id */
+  Id?: string | null;
+  /** 判断条件配置 */
+  Conditions?: RuleConditionItem[] | null;
+  /** 条件列表的链接符号，取值如下：- &&：逻辑与- ||：逻辑或 */
+  Linker?: string;
+  /** 满足判断条件执行节点索引； */
+  RearDriveIndexs?: number[] | null;
 }
 
 /** AWS S3存储输入 */
@@ -4813,21 +4865,35 @@ declare interface SampleSnapshotTemplate {
 /** 编排视频分析任务结果类型 */
 declare interface ScheduleAnalysisTaskResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
-  Status: string;
+  Status?: string;
   /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369) 列表。 */
-  ErrCodeExt: string;
+  ErrCodeExt?: string;
   /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
-  ErrCode: number;
+  ErrCode?: number;
   /** 错误信息。 */
-  Message: string;
+  Message?: string;
   /** 分析任务的输入。 */
-  Input: AiAnalysisTaskInput;
+  Input?: AiAnalysisTaskInput;
   /** 分析任务的输出。 */
-  Output: AiAnalysisResult[] | null;
+  Output?: AiAnalysisResult[];
   /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  BeginProcessTime?: string | null;
+  BeginProcessTime?: string;
   /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  FinishTime?: string | null;
+  FinishTime?: string;
+}
+
+/** 媒体质检任务结果类型 */
+declare interface ScheduleExecRuleTaskResult {
+  /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
+  Status?: string;
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369) 列表。 */
+  ErrCodeExt?: string;
+  /** 错误信息。 */
+  Message?: string;
+  /** 条件判断任务的输入。 */
+  Input?: ExecRulesTask;
+  /** 条件判断任务的输出。 */
+  Output?: ExecRuleTaskData | null;
 }
 
 /** 媒体质检任务结果类型 */
@@ -4909,19 +4975,19 @@ declare interface ScheduleSmartSubtitleTaskResult {
 /** 编排任务信息 */
 declare interface ScheduleTask {
   /** 编排任务 ID。 */
-  TaskId: string;
+  TaskId?: string;
   /** 任务流状态，取值：PROCESSING：处理中；FINISH：已完成。 */
-  Status: string;
+  Status?: string;
   /** 源异常时返回非0错误码，返回0 时请使用各个具体任务的 ErrCode。 */
   ErrCode?: number;
   /** 源异常时返回对应异常Message，否则请使用各个具体任务的 Message。 */
   Message?: string;
   /** 媒体处理的目标文件信息。 */
-  InputInfo: MediaInputInfo | null;
+  InputInfo?: MediaInputInfo | null;
   /** 原始视频的元信息。 */
-  MetaData: MediaMetaData | null;
+  MetaData?: MediaMetaData | null;
   /** 编排任务输出。 */
-  ActivityResultSet: ActivityResult[] | null;
+  ActivityResultSet?: ActivityResult[] | null;
 }
 
 /** 编排详情。 */
@@ -5194,7 +5260,7 @@ declare interface SmartSubtitleTemplateItem {
 
 /** 智能字幕结果。 */
 declare interface SmartSubtitlesResult {
-  /** 任务的类型，取值范围：AsrFullTextRecognition：语音全文识别，TransTextRecognition：语音翻译。 */
+  /** 任务的类型，取值范围： AsrFullTextRecognition：语音全文识别， TransTextRecognition：语音翻译。 */
   Type?: string;
   /** 语音全文识别结果，当 Type 为 AsrFullTextRecognition 时有效。 */
   AsrFullTextTask?: SmartSubtitleTaskAsrFullTextResult | null;
@@ -5210,6 +5276,10 @@ declare interface SmartSubtitlesTaskInput {
   UserExtPara?: string;
   /** 智能字幕自定义参数，当 Definition 填 0 时有效。 该参数用于高度定制场景，建议您优先使用 Definition 指定智能字幕参数。 */
   RawParameter?: RawSmartSubtitleParameter | null;
+  /** 媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。 **注意**：当InputInfo.Type为URL时，该参数是必填项。 */
+  OutputStorage?: TaskOutputStorage | null;
+  /** 生成字幕文件的输出路径，可以为相对路径或者绝对路径。若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。相对路径示例:- 文件名_{变量名}.{format}- 文件名.{format}绝对路径示例：- /自定义路径/文件名_{变量名}.{format}如果不填，则默认为相对路径: `{inputName}_smartsubtitle_{definition}.{format}`。 */
+  OutputObjectPath?: string;
 }
 
 /** 对视频按指定时间点截图任务输入参数类型 */
@@ -5284,6 +5354,12 @@ declare interface StreamUrlDetail {
   Url?: string;
   /** Playback: 拉流播放地址； RelayDestination：转推目的地址；SourceCaptureUrl：回源拉流地址；IngestEndpoint：推流地址 */
   Type?: string;
+}
+
+/** 字幕位置信息 */
+declare interface SubtitlePosition {
+  /** 居中位置时Y的坐标值 */
+  CenterY?: number;
 }
 
 /** 字幕流配置参数。 */
@@ -5502,6 +5578,18 @@ declare interface TextWatermarkTemplateInputForUpdate {
   FontAlpha?: number;
   /** 文字内容，长度不超过100个字符。 */
   TextContent?: string;
+}
+
+/** 媒体质检的检测策略。 */
+declare interface TimeSpotCheck {
+  /** 抽检策略的每次循环检测的时长。取值范围（单位s）：- 最小值：10- 最大值：86400 */
+  CheckDuration?: number;
+  /** 抽检测略的检测间隔，表示在一次检测结束后，等待多长时间后，再次检测。 */
+  CheckInterval?: number;
+  /** 片头跳过时长。 */
+  SkipDuration?: number;
+  /** 循环次数，该字段为空或 0 时，默认循环直至视频结束。 */
+  CirclesNumber?: number;
 }
 
 /** 音轨信息 */
@@ -7589,6 +7677,10 @@ declare interface DescribeTasksRequest {
   Limit?: number;
   /** 翻页标识，分批拉取时使用：当单次请求无法拉取所有数据，接口将会返回 ScrollToken，下一次请求携带该 Token，将会从下一条记录开始获取。 */
   ScrollToken?: string;
+  /** 查询任务开始时间 */
+  StartTime?: string;
+  /** 查询任务结束时间。 */
+  EndTime?: string;
 }
 
 declare interface DescribeTasksResponse {
@@ -8439,6 +8531,8 @@ declare interface ProcessMediaRequest {
   AiRecognitionTask?: AiRecognitionTaskInput;
   /** 媒体质检类型任务参数。 */
   AiQualityControlTask?: AiQualityControlTaskInput;
+  /** 智能字幕 */
+  SmartSubtitlesTask?: SmartSubtitlesTaskInput;
   /** 任务的事件通知信息，不填代表不获取事件通知。 */
   TaskNotifyConfig?: TaskNotifyConfig;
   /** 任务流的优先级，数值越大优先级越高，取值范围是-10到 10，不填代表0。 */
@@ -8451,8 +8545,6 @@ declare interface ProcessMediaRequest {
   TaskType?: string;
   /** 资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。 */
   ResourceId?: string;
-  /** 智能字幕 */
-  SmartSubtitlesTask?: SmartSubtitlesTaskInput;
   /** 是否跳过元信息获取，可选值： 0：表示不跳过 1：表示跳过 默认值：0 */
   SkipMateData?: number;
 }

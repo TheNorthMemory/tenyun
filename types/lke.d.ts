@@ -2972,6 +2972,10 @@ declare interface DescribeTokenUsageResponse {
   RagSearchUsage?: number;
   /** 联网搜索次数 */
   InternetSearchUsage?: number;
+  /** dosage配额限制 */
+  DosageTypeLimit?: number;
+  /** dosage当前用量 */
+  DosageTypeCurr?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

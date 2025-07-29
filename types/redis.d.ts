@@ -3299,7 +3299,7 @@ declare interface Redis {
   ModifyInstanceAccount(data: ModifyInstanceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceAccountResponse>;
   /** 修改实例可用区 {@link ModifyInstanceAvailabilityZonesRequest} {@link ModifyInstanceAvailabilityZonesResponse} */
   ModifyInstanceAvailabilityZones(data: ModifyInstanceAvailabilityZonesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceAvailabilityZonesResponse>;
-  /** 修改实例备份模式 {@link ModifyInstanceBackupModeRequest} {@link ModifyInstanceBackupModeResponse} */
+  /** 开启或关闭数据闪回功能 {@link ModifyInstanceBackupModeRequest} {@link ModifyInstanceBackupModeResponse} */
   ModifyInstanceBackupMode(data: ModifyInstanceBackupModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceBackupModeResponse>;
   /** 修改实例事件 {@link ModifyInstanceEventRequest} {@link ModifyInstanceEventResponse} */
   ModifyInstanceEvent(data: ModifyInstanceEventRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceEventResponse>;

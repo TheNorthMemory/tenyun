@@ -3135,6 +3135,42 @@ declare namespace V20180717 {
     Type?: string;
   }
 
+  /** 用于描述 MPS 视频处理任务中的返回文件结果。 */
+  interface MPSOutputFile {
+    /** 文件类型。用于标识 MPS 视频处理任务执行结果中的特定返回文件。取值：AiAnalysis.DeLogo.Video: 智能擦除任务中产生的擦除后视频文件；AiAnalysis.DeLogo.OriginSubtitle: 智能擦除任务中基于画面提取的字幕文件；AiAnalysis.DeLogo.TranslateSubtitle: 智能擦除任务中基于画面提取的字幕翻译文件。 */
+    FileType?: string;
+    /** 存储形式。用于表示该结果文件的存储形式，取值有： Permanent：永久存储； Temporary：临时存储。 */
+    StorageMode?: string;
+    /** 媒体文件 ID。当 Type 为 Permanent 时有效，表示该结果文件以视频媒资形式存储在点播平台中，字段值为视频媒资的 FileId。 */
+    FileId?: string;
+    /** 结果文件的可下载 Url。 */
+    Url?: string;
+    /** 过期时间。当 StorageMode 为 Temporary 时有效，表示 Url 的过期时间，单位为秒。 */
+    ExpiredTime?: number;
+  }
+
+  /** MPS 具体子任务查询结果类型。 */
+  interface MPSSubTaskResult {
+    /** 任务类型。MPS 的 WorkflowTask 结构中的具体子任务类型。取值：AiAnalysis.DeLogo：智能擦除任务。 */
+    TaskType?: string;
+    /** 任务状态。有 PROCESSING，SUCCESS 和 FAIL 三种。 */
+    Status?: string;
+    /** 错误码。返回0时成功，其他值为失败。 */
+    ErrCode?: string;
+    /** 错误信息。 */
+    Message?: string;
+    /** MPS 视频处理任务输入。该字段对应 MPS 任务返回中的 Input 结果，以 JSON 格式返回。 */
+    Input?: string;
+    /** MPS 视频处理任务输出。 */
+    Output?: MPSTaskOutput;
+  }
+
+  /** MPS 子任务输出返回结果。 */
+  interface MPSTaskOutput {
+    /** 任务返回结果中的文件类型结果。如智能擦除中，擦除后的视频文件将被存入媒资，并在此字段中给出 FileId；基于画面提取的字幕文件 Url 将在此字段中给出。 */
+    OutputFiles?: MPSOutputFile[];
+  }
+
   /** 转自适应码流信息 */
   interface MediaAdaptiveDynamicStreamingInfo {
     /** 转自适应码流信息数组。 */
@@ -4349,6 +4385,20 @@ declare namespace V20180717 {
     CreateTime?: string;
     /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
     UpdateTime?: string;
+  }
+
+  /** MPS 媒体处理任务信息。 */
+  interface ProcessMediaByMPS {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 任务状态，取值：PROCESSING：处理中；FINISH：已完成。 */
+    Status?: string;
+    /** 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。 */
+    ErrCode?: number;
+    /** 错误信息。源异常时返回对应异常 Message，否则请使用各个具体任务的 Message。 */
+    Message?: string;
+    /** MPS 视频处理任务。 */
+    SubTaskSet?: MPSSubTaskResult[];
   }
 
   /** 预付费商品实例 */
@@ -8387,7 +8437,7 @@ declare namespace V20180717 {
   }
 
   interface DescribeTaskDetailResponse {
-    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务；ComplexAdaptiveDynamicStreaming：复杂自适应码流任务。 */
+    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务；ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；ProcessMediaByMPS：MPS 视频处理任务。 */
     TaskType?: string;
     /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成；ABORTED：已终止。 */
     Status?: string;
@@ -8441,6 +8491,8 @@ declare namespace V20180717 {
     QualityEnhanceTask?: QualityEnhanceTask | null;
     /** 复杂自适应码流任务信息，仅当 TaskType 为 ComplexAdaptiveDynamicStreaming，该字段有值。 */
     ComplexAdaptiveDynamicStreamingTask?: ComplexAdaptiveDynamicStreamingTask | null;
+    /** MPS 视频处理任务信息，仅当 TaskType 为 ProcessMediaByMPS，该字段有值。 */
+    ProcessMediaByMPSTask?: ProcessMediaByMPS;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

@@ -4321,7 +4321,7 @@ declare interface DescribeProvinceIspPlayInfoListRequest {
   EndTime: string;
   /** 支持如下粒度：1：1分钟粒度（跨度不支持超过1天） */
   Granularity: number;
-  /** 统计指标类型：“Bandwidth”：带宽“FluxPerSecond”：平均流量“Flux”：流量“Request”：请求数“Online”：并发连接数 */
+  /** 统计指标类型：“Bandwidth”：带宽“FluxPerSecond”：平均流量“Flux”：流量“Request”：请求数 */
   StatType: string;
   /** 播放域名列表。 */
   PlayDomains?: string[];

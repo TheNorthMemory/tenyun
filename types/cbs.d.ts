@@ -693,6 +693,8 @@ declare interface CreateSnapshotRequest {
   DiskBackupId?: string;
   /** 快照绑定的标签。 */
   Tags?: Tag[];
+  /** 快照关联云硬盘类型, SYSTEM_DISK: 系统盘, DATA_DISK: 数据盘,非必填参数，不填时快照类型与云盘类型保持一致， 该参数基于某些场景用户需要将系统盘创建出数据盘快照共享使用。 */
+  DiskUsage?: string;
 }
 
 declare interface CreateSnapshotResponse {
