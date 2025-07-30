@@ -282,22 +282,6 @@ declare interface Origin {
   AdvanceHttps?: AdvanceHttps | null;
 }
 
-/** 刷新任务日志详情 */
-declare interface PurgeTask {
-  /** 刷新任务ID。 */
-  TaskId: string;
-  /** 刷新Url。 */
-  Url: string;
-  /** 刷新任务状态，fail表示失败，done表示成功，process表示刷新中。 */
-  Status: string;
-  /** 刷新类型，url表示url刷新，path表示目录刷新。 */
-  PurgeType: string;
-  /** 刷新资源方式，flush代表刷新更新资源，delete代表刷新全部资源。 */
-  FlushType: string;
-  /** 刷新任务提交时间 */
-  CreateTime: string;
-}
-
 /** 查询对象及其对应的访问明细数据 */
 declare interface ResourceData {
   /** 资源名称，根据查询条件不同分为以下几类：具体域名：表示该域名明细数据multiDomains：表示多域名汇总明细数据项目 ID：指定项目查询时，显示为项目 IDall：账号维度明细数据 */
@@ -492,46 +476,6 @@ declare interface DescribeIpStatusResponse {
   RequestId?: string;
 }
 
-declare interface DescribePurgeTasksRequest {
-  /** 查询刷新类型。url：查询 url 刷新记录；path：查询目录刷新记录。 */
-  PurgeType?: string;
-  /** 开始时间，如2018-08-08 00:00:00。 */
-  StartTime?: string;
-  /** 结束时间，如2018-08-08 23:59:59。 */
-  EndTime?: string;
-  /** 提交时返回的任务 Id，查询时 TaskId 和起始时间必须指定一项。 */
-  TaskId?: string;
-  /** 分页查询偏移量，默认为0（从第0条开始）。 */
-  Offset?: number;
-  /** 分页查询限制数目，默认为20。 */
-  Limit?: number;
-  /** 查询关键字，请输入域名或 http(s):// 开头完整 URL。 */
-  Keyword?: string;
-  /** 查询指定任务状态，fail表示失败，done表示成功，process表示刷新中。 */
-  Status?: string;
-}
-
-declare interface DescribePurgeTasksResponse {
-  /** 刷新历史记录。 */
-  PurgeLogs: PurgeTask[];
-  /** 任务总数，用于分页。 */
-  TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface PurgeUrlsCacheRequest {
-  /** 要刷新的Url列表，必须包含协议头部。 */
-  Urls: string[];
-}
-
-declare interface PurgeUrlsCacheResponse {
-  /** 刷新任务Id。 */
-  TaskId: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 /** {@link Ecdn 全站加速网络} */
 declare interface Ecdn {
   (): Versions;
@@ -547,10 +491,6 @@ declare interface Ecdn {
   DescribeEcdnStatistics(data: DescribeEcdnStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEcdnStatisticsResponse>;
   /** @deprecated 查询平台服务节点IP {@link DescribeIpStatusRequest} {@link DescribeIpStatusResponse} */
   DescribeIpStatus(data: DescribeIpStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpStatusResponse>;
-  /** @deprecated 刷新历史查询 {@link DescribePurgeTasksRequest} {@link DescribePurgeTasksResponse} */
-  DescribePurgeTasks(data?: DescribePurgeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePurgeTasksResponse>;
-  /** @deprecated 刷新 URL {@link PurgeUrlsCacheRequest} {@link PurgeUrlsCacheResponse} */
-  PurgeUrlsCache(data: PurgeUrlsCacheRequest, config?: AxiosRequestConfig): AxiosPromise<PurgeUrlsCacheResponse>;
 }
 
 export declare type Versions = ["2019-10-12"];

@@ -24,6 +24,8 @@ declare interface AssociationItem {
   ListenerName?: string;
   /** 关联目标组的权重， 该参数只有v2新版目标组生效。 */
   Weight?: number;
+  /** 高级路由规则ID */
+  RuleId?: string;
 }
 
 /** 监听器绑定的后端服务的详细信息 */
@@ -1034,6 +1036,8 @@ declare interface RuleHealth {
   Domain?: string | null;
   /** 转发规则的Url */
   Url?: string | null;
+  /** 高级路由规则ID */
+  RuleId?: string;
   /** 本规则上绑定的后端服务的健康检查状态 */
   Targets?: TargetHealth[];
 }
@@ -1651,6 +1655,8 @@ declare interface CreateLoadBalancerRequest {
   LBChargeType?: string;
   /** 七层访问日志主题ID */
   AccessLogTopicId?: string;
+  /** 是否开启七层高级路由 */
+  AdvancedRoute?: boolean;
 }
 
 declare interface CreateLoadBalancerResponse {

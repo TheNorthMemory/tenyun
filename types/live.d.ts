@@ -2455,7 +2455,7 @@ declare interface CreateLiveTimeShiftRuleResponse {
 declare interface CreateLiveTimeShiftTemplateRequest {
   /** 模板名称。长度上限：255字节。仅支持中文、英文、数字、_、-。 */
   TemplateName: string;
-  /** 时移时长。单位：s。 */
+  /** 时移时长。单位：s。取值范围：86400 259200 604800 1296000 2592000。 */
   Duration: number;
   /** 描述信息。仅支持中文、英文、数字、_、-。 */
   Description?: string;

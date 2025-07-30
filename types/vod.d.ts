@@ -9679,6 +9679,22 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface ProcessMediaByMPSRequest {
+    /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。 */
+    FileId: string;
+    /** 点播[应用](/document/product/266/14574) ID。 */
+    SubAppId: number;
+    /** 该参数用于透传至媒体处理服务（MPS），以便从云点播侧发起 MPS 视频处理任务。视频处理参数详情请参考：[MPS 发起媒体处理](https://cloud.tencent.com/document/api/862/37578)。填写说明：1. 目前仅需要配置 MPS “发起媒体处理”接口中的 AiAnalysisTask 参数，其他参数无需填写，若包含其它参数，系统将自动忽略；2. 当前仅支持通过此方式发起智能擦除任务。若配置了其他任务类型的相关参数，系统将自动忽略这些参数。 */
+    MPSProcessMediaParams: string;
+  }
+
+  interface ProcessMediaByMPSResponse {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface ProcessMediaByProcedureRequest {
     /** 媒体文件 ID。 */
     FileId: string;
@@ -10585,6 +10601,8 @@ declare interface Vod {
   ProcessImage(data: V20180717.ProcessImageRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ProcessImageResponse>;
   /** 媒体处理 {@link V20180717.ProcessMediaRequest} {@link V20180717.ProcessMediaResponse} */
   ProcessMedia(data: V20180717.ProcessMediaRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ProcessMediaResponse>;
+  /** 使用 MPS 进行视频处理 {@link V20180717.ProcessMediaByMPSRequest} {@link V20180717.ProcessMediaByMPSResponse} */
+  ProcessMediaByMPS(data: V20180717.ProcessMediaByMPSRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ProcessMediaByMPSResponse>;
   /** 使用任务流模板进行视频处理 {@link V20180717.ProcessMediaByProcedureRequest} {@link V20180717.ProcessMediaByProcedureResponse} */
   ProcessMediaByProcedure(data: V20180717.ProcessMediaByProcedureRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ProcessMediaByProcedureResponse>;
   /** 对指定 URL 的视频发起视频处理 {@link V20180717.ProcessMediaByUrlRequest} {@link V20180717.ProcessMediaByUrlResponse} */

@@ -4177,9 +4177,9 @@ declare interface SaveDocRequest {
   AttrLabels?: AttrLabelRefer[];
   /** 外部引用链接类型 0：系统链接 1：自定义链接值为1时，WebUrl 字段不能为空，否则不生效。 */
   ReferUrlType?: number;
-  /** 有效开始时间，unix时间戳 */
+  /** 有效开始时间，unix秒级时间戳 */
   ExpireStart?: string;
-  /** 有效结束时间，unix时间戳，0代表永久有效 */
+  /** 有效结束时间，unix秒级时间戳，0代表永久有效 */
   ExpireEnd?: string;
   /** 是否引用链接 */
   IsRefer?: boolean;

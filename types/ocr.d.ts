@@ -2004,6 +2004,8 @@ declare interface TaxPayment {
   Title?: string;
   /** 识别出的字段名称(关键字)，支持以下字段：税号 、纳税人识别号 、纳税人名称 、金额合计大写 、金额合计小写 、填发日期 、税务机关 、填票人。示例值：纳税人识别号 */
   Content?: OtherInvoiceItem[];
+  /** 表格。 */
+  TableItems?: OtherInvoiceList[];
 }
 
 /** 出租车发票 */
@@ -4146,6 +4148,8 @@ declare interface MLIDPassportOCRResponse {
   PassportRecognizeInfos?: PassportRecognizeInfos;
   /** 告警码-9101 证件边框不完整告警-9102 证件复印件告警-9103 证件翻拍告警-9104 证件PS告警-9107 证件反光告警-9108 证件模糊告警-9109 告警能力未开通 */
   WarnCardInfos?: number[];
+  /** 输入图片中的卡证数量（仅请求曼谷地域[ap-bangkok]返回） */
+  CardCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4904,6 +4908,8 @@ declare interface RecognizeThaiIDCardOCRResponse {
   WarnCardInfos?: number[];
   /** 该字段已废弃， 将固定返回"1"，不建议使用。 */
   AdvancedInfo?: string;
+  /** 卡证正面图片中，证件主体的数量（仅请求曼谷地域[ap-bangkok]返回） */
+  CardCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

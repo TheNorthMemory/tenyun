@@ -2030,6 +2030,8 @@ declare interface CreateInput {
   RISTSettings?: CreateInputRISTSettings;
   /** 输入节点的地区 */
   InputRegion?: string;
+  /** 冷热备相关 */
+  FailOverOption?: FailOverOption;
 }
 
 /** 创建的输入HLS拉流的配置信息。 */
@@ -2710,6 +2712,12 @@ declare interface FaceEnhanceConfig {
   Switch?: string;
   /** 强度，取值范围：0.0~1.0。默认：0.0。 */
   Intensity?: number | null;
+}
+
+/** type FailOverOption struct { FailOverType string json:"FailOverType" // 新增 冷/热备 COLDSTANDBY、HOTSTANDBY } */
+declare interface FailOverOption {
+  /** 热备 */
+  FailOverType?: string;
 }
 
 /** 流的音频数据。 */
@@ -4162,6 +4170,8 @@ declare interface ModifyInput {
   RISTSettings?: CreateInputRISTSettings;
   /** 输入节点的地区 */
   InputRegion?: string;
+  /** 冷热备相关 */
+  FailOverOption?: FailOverOption;
 }
 
 /** 修改Output配置。 */
@@ -6403,6 +6413,8 @@ declare interface CreateQualityControlTemplateRequest {
   Comment?: string;
   /** 录制文件格式。可选值：PNG: PNG图片 */
   RecordFormat?: string;
+  /** 媒体质检抽检策略。 */
+  Strategy?: QualityControlStrategy;
 }
 
 declare interface CreateQualityControlTemplateResponse {
@@ -7291,7 +7303,7 @@ declare interface DescribeQualityControlTemplatesResponse {
   /** 符合过滤条件的记录总数。 */
   TotalCount?: number;
   /** 媒体质检模板详情列表。 */
-  QualityControlTemplateSet?: QualityControlTemplate[] | null;
+  QualityControlTemplateSet?: QualityControlTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8155,6 +8167,8 @@ declare interface ModifyQualityControlTemplateRequest {
   QualityControlItemSet?: QualityControlItemConfig[];
   /** 录制文件格式。可选值：PNG: PNG图片 */
   RecordFormat?: string;
+  /** 媒体质检抽检策略。 */
+  Strategy?: QualityControlStrategy;
 }
 
 declare interface ModifyQualityControlTemplateResponse {

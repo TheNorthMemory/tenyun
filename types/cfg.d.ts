@@ -1020,7 +1020,7 @@ declare interface TriggerPolicyResponse {
   RequestId?: string;
 }
 
-/** {@link Cfg 混沌演练平台} */
+/** {@link Cfg 云顾问-混沌演练} */
 declare interface Cfg {
   (): Versions;
   /** 从动作创建演练 {@link CreateTaskFromActionRequest} {@link CreateTaskFromActionResponse} */

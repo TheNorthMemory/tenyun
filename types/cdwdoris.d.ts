@@ -836,6 +836,8 @@ declare interface UserInfo {
   CamUin?: string;
   /** ranger group id列表 */
   CamRangerGroupIds?: number[];
+  /** 0: 灵活场景 1: 固定场景 */
+  ComputeGroupType?: number;
 }
 
 /** 用户绑定资源组信息 */

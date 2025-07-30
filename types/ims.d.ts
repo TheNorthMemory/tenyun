@@ -263,7 +263,7 @@ declare interface CreateImageModerationAsyncTaskResponse {
 }
 
 declare interface ImageModerationRequest {
-  /** 该字段表示使用的策略的具体编号，该字段需要先在[内容安全控制台](#https://console.cloud.tencent.com/cms/clouds/manage)中配置。备注：不同Biztype关联不同的业务场景与识别能力策略，调用前请确认正确的Biztype。 */
+  /** 该字段表示使用的策略的具体编号，该字段需要先在[内容安全控制台](https://console.cloud.tencent.com/cms/clouds/manage)中配置。备注：不同Biztype关联不同的业务场景与识别能力策略，调用前请确认正确的Biztype。 */
   BizType?: string;
   /** 该字段表示您为待检测对象分配的数据ID，传入后可方便您对文件进行标识和管理。取值：由英文字母（大小写均可）、数字及四个特殊符号（_，-，@，#）组成，**长度不超过64个字符**。 */
   DataId?: string;
@@ -286,20 +286,20 @@ declare interface ImageModerationRequest {
 declare interface ImageModerationResponse {
   /** 该字段用于返回Label标签下的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过 */
   Suggestion?: string;
-  /** 该字段用于返回检测结果（LabelResults）中所对应的**优先级最高的恶意标签**，表示模型推荐的审核结果，建议您按照业务所需，对不同违规类型与建议值进行处理。返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告；以及其他令人反感、不安全或不适宜的内容类型。 */
+  /** 该字段用于返回检测结果（LabelResults）中所对应的**优先级最高的恶意标签**，表示模型推荐的审核结果，建议您按照业务所需，对不同违规类型与建议值进行处理。返回值标签示例：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告；（说明：文档仅示例了部分风险类型，更多返回类型请以实际值为准或[提交工单](https://console.cloud.tencent.com/workorder/category)进行咨询）。 */
   Label?: string;
   /** 该字段用于返回检测结果所命中优先级最高的恶意标签下的子标签名称，如：*色情--性行为*；若未命中任何子标签则返回空字符串。 */
   SubLabel?: string;
   /** 该字段用于返回当前标签（Label）下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表图片越有可能属于当前返回的标签；如：*色情 99*，则表明该图片非常有可能属于色情内容；*色情 0*，则表明该图片不属于色情内容。 */
   Score?: number;
-  /** 该字段用于返回检测结果(LabelResults)中所对应的优先级最高的恶意标签，表示模型推荐的审核结果，建议您按照业务所需，对不同违规类型与建议值进行处理。返回值标签示例：Normal:正常，Porn:色情，Abuse:谩骂，Ad:广告（说明：文档仅示例了部分风险类型，更多返回类型请以实际值为准或咨询客服） */
-  LabelResults?: LabelResult[] | null;
+  /** 该字段用于返回分类检测模型的详细检测结果；表示模型推荐的审核结果，建议您按照业务所需，对不同违规类型与建议值进行处理。详细返回值信息可参阅对应的数据结构（LabelResults）描述。返回值标签示例：Normal:正常，Porn:色情，Abuse:谩骂，Ad:广告（说明：文档仅示例了部分风险类型，更多返回类型请以实际值为准或[提交工单](https://console.cloud.tencent.com/workorder/category)进行咨询） */
+  LabelResults?: LabelResult[];
   /** 该字段用于返回物体检测模型的详细检测结果；包括：实体、广告台标、二维码等内容命中的标签名称、标签分数、坐标信息、场景识别结果、建议操作等内容审核信息；详细返回值信息可参阅对应的数据结构（ObjectResults）描述。 */
-  ObjectResults?: ObjectResult[] | null;
+  ObjectResults?: ObjectResult[];
   /** 该字段用于返回OCR文本识别的详细检测结果；包括：文本坐标信息、文本识别结果、建议操作等内容审核信息；详细返回值信息可参阅对应的数据结构（OcrResults）描述。 */
-  OcrResults?: OcrResult[] | null;
+  OcrResults?: OcrResult[];
   /** 该字段用于返回基于图片风险库（风险黑库与正常白库）识别的结果,详细返回值信息可参阅对应的数据结构（LibResults）描述。备注：图片风险库目前**暂不支持自定义库**。 */
-  LibResults?: LibResult[] | null;
+  LibResults?: LibResult[];
   /** 该字段用于返回检测对象对应请求参数中的DataId。 */
   DataId?: string;
   /** 该字段用于返回检测对象对应请求参数中的BizType。 */
@@ -309,7 +309,7 @@ declare interface ImageModerationResponse {
   /** 该字段用于返回检测对象对应的MD5校验值，以方便校验文件完整性。 */
   FileMD5?: string;
   /** 该字段用于返回仅识别图片元素的模型结果；包括：场景模型命中的标签、置信度和位置信息 */
-  RecognitionResults?: RecognitionResult[] | null;
+  RecognitionResults?: RecognitionResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
