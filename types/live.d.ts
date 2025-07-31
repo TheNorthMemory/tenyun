@@ -2515,7 +2515,7 @@ declare interface CreateLiveTranscodeTemplateRequest {
   Height?: number;
   /** 帧率，默认0。范围0-60fps */
   Fps?: number;
-  /** 关键帧间隔，单位：秒。默认原始的间隔范围2-6 */
+  /** 关键帧间隔，单位：秒。默认原始的间隔范围1-6 */
   Gop?: number;
   /** 旋转角度，默认0。可取值：0，90，180，270 */
   Rotate?: number;

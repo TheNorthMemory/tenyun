@@ -168,13 +168,13 @@ declare interface Certificates {
   StatusMsg?: string;
   /** 验证类型：DNS_AUTO = 自动DNS验证，DNS = 手动DNS验证，FILE = 文件验证，DNS_PROXY = DNS代理验证。FILE_PROXY = 文件代理验证 */
   VerifyType?: string;
-  /** 证书生效时间。 */
+  /** 证书生效时间。时区为GMT+8:00 */
   CertBeginTime?: string;
-  /** 证书过期时间。 */
+  /** 证书过期时间。时区为GMT+8:00 */
   CertEndTime?: string;
   /** 证书有效期，单位（月）。 */
   ValidityPeriod?: string;
-  /** 创建时间。 */
+  /** 创建时间。时区为GMT+8:00 */
   InsertTime?: string;
   /** 证书 ID。 */
   CertificateId?: string;
@@ -230,9 +230,9 @@ declare interface Certificates {
   ReplaceOriCertIsDelete?: boolean;
   /** 是否即将过期， 证书即将到期的30天内为即将过期 */
   IsExpiring?: boolean;
-  /** DV证书添加验证截止时间 */
+  /** DV证书添加验证截止时间，时区为GMT+8:00 */
   DVAuthDeadline?: string;
-  /** 域名验证通过时间 */
+  /** 域名验证通过时间，时区为GMT+8:00 */
   ValidationPassedTime?: string;
   /** 证书关联的多域名 */
   CertSANs?: string[];
@@ -248,7 +248,7 @@ declare interface Certificates {
   KeyPasswordCustomFlag?: boolean;
   /** 支持下载的WEB服务器类型： nginx、apache、iis、tomcat、jks、root、other */
   SupportDownloadType?: SupportDownloadType;
-  /** 证书吊销完成时间 */
+  /** 证书吊销完成时间，时区为GMT+8:00 */
   CertRevokedTime?: string;
   /** 托管资源类型列表 */
   HostingResourceTypes?: string[];
@@ -466,6 +466,8 @@ declare interface DeployRecordDetail {
   Algorithm?: string;
   /** 原证书加密算法 */
   OldAlgorithm?: string;
+  /** 实例状态，不同云产品状态不一样 */
+  InstanceStatus?: string;
 }
 
 /** 部署记录信息 */
@@ -1924,13 +1926,13 @@ declare interface DescribeCertificateResponse {
   VerifyType?: string | null;
   /** 漏洞扫描状态。 */
   VulnerabilityStatus?: string | null;
-  /** 证书生效时间。 */
+  /** 证书生效时间。时区为GMT+8:00 */
   CertBeginTime?: string | null;
-  /** 证书失效时间。 */
+  /** 证书失效时间。时区为GMT+8:00 */
   CertEndTime?: string | null;
   /** 证书有效期：单位(月)。 */
   ValidityPeriod?: string | null;
-  /** 申请时间。 */
+  /** 申请时间。时区为GMT+8:00 */
   InsertTime?: string | null;
   /** 订单 ID。 */
   OrderId?: string | null;
@@ -1968,7 +1970,7 @@ declare interface DescribeCertificateResponse {
   CAEncryptAlgorithms?: string[] | null;
   /** CA证书的所有通用名称。仅证书类型CertificateType为CA有效 */
   CACommonNames?: string[] | null;
-  /** CA证书所有的到期时间。仅证书类型CertificateType为CA有效 */
+  /** CA证书所有的到期时间。仅证书类型CertificateType为CA有效，时区为GMT+8:00 */
   CAEndTimes?: string[] | null;
   /** DV证书吊销验证值 */
   DvRevokeAuthDetail?: DvAuths[] | null;
@@ -2055,7 +2057,7 @@ declare interface DescribeDeleteCertificatesTaskResultResponse {
 declare interface DescribeDeployedResourcesRequest {
   /** 证书ID */
   CertificateIds: string[];
-  /** 资源类型:clb,cdn,live,waf,antiddos,teo */
+  /** 资源类型:clb,cdn,live,vod,waf,antiddos,teo */
   ResourceType: string;
 }
 
@@ -2254,7 +2256,7 @@ declare interface DescribeHostDeployRecordDetailResponse {
   FailedTotalCount?: number;
   /** 部署中总数 */
   RunningTotalCount?: number;
-  /** 带部署总数 */
+  /** 待部署总数 */
   PendingTotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

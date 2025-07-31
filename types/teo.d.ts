@@ -3320,12 +3320,16 @@ declare interface Task {
   Type?: string;
   /** 节点缓存清除方法，取值有：invalidate：标记过期，用户请求时触发回源校验，即发送带有 If-None-Match 和 If-Modified-Since 头部的 HTTP 条件请求。若源站响应 200，则节点会回源拉取新的资源并更新缓存；若源站响应 304，则节点不会更新缓存；delete：直接删除节点缓存，用户请求时触发回源拉取资源。 */
   Method?: string;
-  /** 状态。取值有：processing：处理中；success：成功； failed：失败；timeout：超时；canceled：已取消。 */
+  /** 状态。取值有：processing：处理中；success：成功；failed：失败；timeout：超时；canceled：已取消。 */
   Status?: string;
   /** 任务创建时间。 */
   CreateTime?: string;
   /** 任务完成时间。 */
   UpdateTime?: string;
+  /** 刷新、预热失败类型。取值有：taskFailed：任务失败；quotaExceeded：配额超限；downloadManifestFailed：下载描述文件失败；accessDenied：访问被拒绝。originPullFailed：回源失败。 */
+  FailType?: string;
+  /** 刷新、预热失败描述。 */
+  FailMessage?: string;
 }
 
 /** 安全模板配置 */

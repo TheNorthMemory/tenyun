@@ -138,6 +138,10 @@ declare interface DatasourceInfo {
   Owner?: string | null;
   /** 所属人名称 */
   OwnerName?: string | null;
+  /** 数据库schema */
+  Schema?: string | null;
+  /** 数据库版本 */
+  DbVersion?: string | null;
 }
 
 /** 数据源详情列表 */
@@ -607,6 +611,10 @@ declare interface CreateDatasourceCloudRequest {
   DataOriginDatasourceId?: string;
   /** 集群id */
   ClusterId?: string;
+  /** 数据库schema */
+  Schema?: string;
+  /** 数据库版本 */
+  DbVersion?: string;
 }
 
 declare interface CreateDatasourceCloudResponse {
@@ -667,6 +675,10 @@ declare interface CreateDatasourceRequest {
   UseVPC?: boolean;
   /** 地域 */
   RegionId?: string;
+  /** 数据库schema */
+  Schema?: string;
+  /** 数据库版本 */
+  DbVersion?: string;
 }
 
 declare interface CreateDatasourceResponse {
@@ -1145,12 +1157,16 @@ declare interface ModifyDatasourceCloudRequest {
   DataOriginDatasourceId?: string;
   /** 集群id */
   ClusterId?: string;
+  /** 数据库schema */
+  Schema?: string;
+  /** 数据库版本 */
+  DbVersion?: string;
 }
 
 declare interface ModifyDatasourceCloudResponse {
   /** 自定义错误信息对象 */
   ErrorInfo?: ErrorInfo | null;
-  /** 成功无 */
+  /** 无 */
   Data?: string | null;
   /** 额外信息 */
   Extra?: string | null;
@@ -1205,6 +1221,10 @@ declare interface ModifyDatasourceRequest {
   UseVPC?: boolean;
   /** 地域 */
   RegionId?: string;
+  /** 数据库schema */
+  Schema?: string;
+  /** 数据库版本 */
+  DbVersion?: string;
 }
 
 declare interface ModifyDatasourceResponse {

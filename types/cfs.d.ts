@@ -102,6 +102,42 @@ declare interface BucketInfo {
   Region?: string | null;
 }
 
+/** 有规则冲突时返回的已有冲突规则信息列表 */
+declare interface CheckResult {
+  /** 生命周期管理策略ID */
+  LifecyclePolicyID: string;
+  /** 文件系统ID */
+  FileSystemId: string;
+  /** 目录绝对路径 */
+  Path: string;
+  /** 生命周期管理策略关联的管理规则列表 */
+  LifecycleRules: LifecycleRule[];
+  /** 目标路径 */
+  TargetPath: string;
+}
+
+/** 数据流动信息 */
+declare interface DataFlowInfo {
+  /** 数据流动管理 ID */
+  DataFlowId?: string;
+  /** 数据流动名称 */
+  DataFlowName?: string;
+  /** 源端数据类型 */
+  SourceStorageType?: string;
+  /** 源端存储地址 */
+  SourceStorageAddress?: string;
+  /** 源端路径 */
+  SourcePath?: string;
+  /** 目录路径 */
+  TargetPath?: string;
+  /** available：已生效pending：配置中unavailable：失效deleting：删除中 */
+  Status?: string;
+  /** 创建时间 */
+  CreationTime?: string;
+  /** 文件系统 ID */
+  FileSystemId?: string;
+}
+
 /** 购买完额外性能之后的值 */
 declare interface ExstraPerformanceInfo {
   /** fixed: 最终值固定 */
@@ -210,6 +246,76 @@ declare interface Filter {
   Values: string[];
   /** 名称 */
   Name: string;
+}
+
+/** 生命周期任务 */
+declare interface LifecycleDataTaskInfo {
+  /** 任务id */
+  TaskId?: string;
+  /** 任务状态.init：未执行running：执行中，finished：已完成,failed：失败,stopping：停止中,stopped：已停止 */
+  TaskStatus?: string;
+  /** 任务创建时间 */
+  CreationTime?: string;
+  /** 任务结束时间 */
+  FinishTime?: string;
+  /** 文件总数 */
+  FileTotalCount?: number;
+  /** 处理成功文件数量 */
+  FileSuccessedCount?: number;
+  /** 当前已经失败的文件数 */
+  FileFailedCount?: number;
+  /** 文件容量，单位Byte */
+  FileTotalSize?: number;
+  /** 已处理完成的文件容量，单位Byte */
+  FileSuccessedSize?: number;
+  /** 已处理失败文件容量，单位Byte */
+  FileFailedSize?: number;
+  /** 总文件列表 */
+  FileTotalList?: string;
+  /** 成功的文件列表 */
+  FileSuccessedList?: string;
+  /** 失败文件的列表 */
+  FileFailedList?: string;
+  /** FileSystemId */
+  FileSystemId?: string;
+  /** 任务名称 */
+  TaskName?: string;
+  /** 任务路径 */
+  TaskPath?: string;
+  /** 任务类型,archive:表示沉降任务，restore：表示拉取任务 */
+  Type?: string;
+  /** 数据流动Id */
+  DataFlowId?: string;
+}
+
+/** 生命周期管理策略信息 */
+declare interface LifecyclePolicy {
+  /** 生命周期管理策略创建的时间 */
+  CreateTime: string;
+  /** 生命周期管理策略ID */
+  LifecyclePolicyID: string;
+  /** 生命周期管理策略名称 */
+  LifecyclePolicyName: string | null;
+  /** 生命周期管理策略关联的管理规则列表 */
+  LifecycleRules: LifecycleRule[] | null;
+  /** 生命周期管理策略关联目录的绝对路径列表 */
+  Paths: PathInfo[] | null;
+}
+
+/** 生命周期管理策略关联的管理规则 */
+declare interface LifecycleRule {
+  /** 数据转储后的存储类型 */
+  StorageType: string;
+  /** 数据转储文件类型 */
+  FileType: string;
+  /** 数据转储行为 */
+  Action: string;
+  /** 数据转储触发时间 */
+  Interval?: string | null;
+  /** 数据转储文件最大规格 */
+  FileMaxSize?: string | null;
+  /** 数据转储文件最小规格 */
+  FileMinSize?: string | null;
 }
 
 /** CFS数据迁移任务信息 */
@@ -332,6 +438,14 @@ declare interface PGroupRuleInfo {
   Priority?: number;
 }
 
+/** 生命周期管理策略关联目录的绝对路径 */
+declare interface PathInfo {
+  /** 文件系统ID */
+  FileSystemId: string;
+  /** 目录绝对路径 */
+  Path: string;
+}
+
 /** 快照信息 */
 declare interface SnapshotInfo {
   /** 创建快照时间 */
@@ -426,6 +540,20 @@ declare interface UserQuota {
   DirectoryPath?: string | null;
   /** 配置规则状态，inavailable---配置中，available --已生效，deleting--删除中，deleted 已删除，failed--配置失败 */
   Status?: string;
+}
+
+declare interface ApplyPathLifecyclePolicyRequest {
+  /** 生命周期管理策略ID */
+  LifecyclePolicyID: string;
+  /** 生命周期管理策略关联目录的绝对路径列表 */
+  Paths?: PathInfo[];
+}
+
+declare interface ApplyPathLifecyclePolicyResponse {
+  /** 有规则冲突时返回的已有冲突规则信息 */
+  CheckResults?: CheckResult[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface BindAutoSnapshotPolicyRequest {
@@ -606,6 +734,80 @@ declare interface CreateCfsSnapshotResponse {
   RequestId?: string;
 }
 
+declare interface CreateDataFlowRequest {
+  /** 文件系统 ID ，通过查询文件系统 [DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170) 获取 */
+  FileSystemId: string;
+  /** 源端数据类型；包含S3_COS，S3_L5 */
+  SourceStorageType: string;
+  /** 源端存储地址 */
+  SourceStorageAddress: string;
+  /** 源端路径 */
+  SourcePath: string;
+  /** 文件系统内目标路径 */
+  TargetPath: string;
+  /** 密钥 ID */
+  SecretId: string;
+  /** 密钥 key */
+  SecretKey: string;
+  /** 数据流动名称；支持不超过64字符长度，支持中文、数字、_、- */
+  DataFlowName?: string;
+}
+
+declare interface CreateDataFlowResponse {
+  /** 数据流动管理 ID */
+  DataFlowId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateLifecycleDataTaskRequest {
+  /** 文件系统唯一 ID */
+  FileSystemId: string;
+  /** 生命周期任务类型；archive：沉降；restore：预热；release：数据释放；metaload：元数据加载 */
+  Type: string;
+  /** 需要沉降的路径或文件，仅支持传入1个路径，不允许为空。 */
+  TaskPath: string;
+  /** 任务名称 */
+  TaskName: string;
+  /** 数据流动 ID ，该接口可以通过 DescribeDataFlow 查询 */
+  DataFlowId?: string;
+}
+
+declare interface CreateLifecycleDataTaskResponse {
+  /** 任务 ID */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateLifecyclePolicyDownloadTaskRequest {
+  /** 任务Id */
+  TaskId?: string;
+  /** 下载文件的类型，包含 FileSuccessList，FileTotalList，FileFailedList */
+  Type?: string;
+}
+
+declare interface CreateLifecyclePolicyDownloadTaskResponse {
+  /** 下载路径 */
+  DownloadAddress?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateLifecyclePolicyRequest {
+  /** 生命周期管理策略名称，中文/英文/数字/下划线/中划线的组合，不超过64个字符 */
+  LifecyclePolicyName: string;
+  /** 生命周期管理策略关联的管理规则列表 */
+  LifecycleRules: LifecycleRule[];
+}
+
+declare interface CreateLifecyclePolicyResponse {
+  /** 生命周期管理策略ID */
+  LifecyclePolicyID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateMigrationTaskRequest {
   /** 迁移任务名称 */
   TaskName: string;
@@ -710,6 +912,28 @@ declare interface DeleteCfsSnapshotRequest {
 declare interface DeleteCfsSnapshotResponse {
   /** 文件系统ID */
   SnapshotId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDataFlowRequest {
+  /** 数据流动管理 ID */
+  DataFlowId: string;
+  /** 文件系统 ID ，通过查询文件系统 [DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170) 获取 */
+  FileSystemId?: string;
+}
+
+declare interface DeleteDataFlowResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteLifecyclePolicyRequest {
+  /** 生命周期管理策略ID */
+  LifecyclePolicyID: string;
+}
+
+declare interface DeleteLifecyclePolicyResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -916,6 +1140,78 @@ declare interface DescribeCfsSnapshotsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDataFlowRequest {
+  /** 文件系统 ID ，通过查询文件系统 [DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170) 获取 */
+  FileSystemId?: string;
+  /** 数据流动 ID ，由创建数据流动返回 */
+  DataFlowId?: string;
+  /** 每次查询返回值个数，默认20；最大100 */
+  Limit?: number;
+  /** 偏移量，默认为0 */
+  Offset?: number;
+  /** 文件系统版本；版本号：v1.5，v3.0，v3.1，v4.0 */
+  CfsVersion?: string;
+}
+
+declare interface DescribeDataFlowResponse {
+  /** 查询总数量 */
+  TotalCount?: number;
+  /** 无 */
+  DataFlows?: DataFlowInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLifecycleDataTaskRequest {
+  /** 开始时间 */
+  StartTime: string;
+  /** 结束时间 */
+  EndTime: string;
+  /** 任务ID */
+  TaskId?: string;
+  /** Offset 分页码 */
+  Offset?: number;
+  /** Limit 页面大小 */
+  Limit?: number;
+  /** 过滤条件，TaskName，FileSystemId，Type */
+  Filters?: Filter[];
+}
+
+declare interface DescribeLifecycleDataTaskResponse {
+  /** 任务数组 */
+  LifecycleDataTask?: LifecycleDataTaskInfo[];
+  /** 查询结果总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLifecyclePoliciesRequest {
+  /** 生命周期管理策略名称 */
+  LifecyclePolicyName?: string;
+  /** 每个分页包含的生命周期管理策略个数 */
+  PageSize?: number;
+  /** 列表的分页页码 */
+  PageNumber?: number;
+  /** 文件系统ID */
+  FileSystemId?: string;
+  /** 生命周期管理策略ID */
+  LifecyclePolicyID?: string;
+}
+
+declare interface DescribeLifecyclePoliciesResponse {
+  /** 列表的分页页码 */
+  PageNumber?: number;
+  /** 每个分页包含的生命周期管理策略个数 */
+  PageSize?: number;
+  /** 生命周期管理策略总数 */
+  TotalCount?: number;
+  /** 生命周期管理策略列表 */
+  LifecyclePolicies?: LifecyclePolicy[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeMigrationTasksRequest {
   /** 分页的偏移量，默认值为0。 */
   Offset?: number;
@@ -986,6 +1282,26 @@ declare interface DescribeUserQuotaResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDataFlowRequest {
+  /** 数据流动管理 ID ，通过查询数据流动接口获取 */
+  DataFlowId: string;
+  /** 文件系统 ID ，通过查询文件系统 [DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170) 获取 */
+  FileSystemId: string;
+  /** 数据流动名称；支持不超过64字符长度，支持中文、数字、_、- */
+  DataFlowName?: string;
+  /** 密钥 ID */
+  SecretId?: string;
+  /** 密钥 key */
+  SecretKey?: string;
+}
+
+declare interface ModifyDataFlowResponse {
+  /** 数据流动管理 ID */
+  DataFlowId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyFileSystemAutoScaleUpRuleRequest {
   /** 文件系统 ID，通过查询文件系统列表获取；[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170) */
   FileSystemId: string;
@@ -1006,6 +1322,22 @@ declare interface ModifyFileSystemAutoScaleUpRuleResponse {
   ScaleUpThreshold?: number;
   /** 扩容后达到阈值，范围[10-90] */
   TargetThreshold?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyLifecyclePolicyRequest {
+  /** 生命周期管理策略名称，中文/英文/数字/下划线/中划线的组合，不超过64个字符 */
+  LifecyclePolicyName: string;
+  /** 生命周期管理策略关联的管理规则列表 */
+  LifecycleRules: LifecycleRule[];
+  /** 生命周期管理策略ID */
+  LifecyclePolicyID: string;
+}
+
+declare interface ModifyLifecyclePolicyResponse {
+  /** 生命周期管理策略ID */
+  LifecyclePolicyID?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1054,6 +1386,16 @@ declare interface SignUpCfsServiceRequest {
 declare interface SignUpCfsServiceResponse {
   /** 该用户当前 CFS 服务的状态，creating 是开通中，created 是已开通 */
   CfsServiceStatus: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopLifecycleDataTaskRequest {
+  /** 任务ID */
+  TaskId: string;
+}
+
+declare interface StopLifecycleDataTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1241,6 +1583,8 @@ declare interface UpdateFileSystemBandwidthLimitResponse {
 /** {@link Cfs 文件存储} */
 declare interface Cfs {
   (): Versions;
+  /** 配置生命周期策略关联目录 {@link ApplyPathLifecyclePolicyRequest} {@link ApplyPathLifecyclePolicyResponse} */
+  ApplyPathLifecyclePolicy(data: ApplyPathLifecyclePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyPathLifecyclePolicyResponse>;
   /** 文件系统绑定快照策略 {@link BindAutoSnapshotPolicyRequest} {@link BindAutoSnapshotPolicyResponse} */
   BindAutoSnapshotPolicy(data: BindAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<BindAutoSnapshotPolicyResponse>;
   /** 创建访问凭证 {@link CreateAccessCertRequest} {@link CreateAccessCertResponse} */
@@ -1255,6 +1599,14 @@ declare interface Cfs {
   CreateCfsRule(data: CreateCfsRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCfsRuleResponse>;
   /** 创建文件系统快照 {@link CreateCfsSnapshotRequest} {@link CreateCfsSnapshotResponse} */
   CreateCfsSnapshot(data: CreateCfsSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCfsSnapshotResponse>;
+  /** 创建数据流动 {@link CreateDataFlowRequest} {@link CreateDataFlowResponse} */
+  CreateDataFlow(data: CreateDataFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataFlowResponse>;
+  /** 创建数据管理任务 {@link CreateLifecycleDataTaskRequest} {@link CreateLifecycleDataTaskResponse} */
+  CreateLifecycleDataTask(data: CreateLifecycleDataTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLifecycleDataTaskResponse>;
+  /** 创建生命周期策略 {@link CreateLifecyclePolicyRequest} {@link CreateLifecyclePolicyResponse} */
+  CreateLifecyclePolicy(data: CreateLifecyclePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLifecyclePolicyResponse>;
+  /** 创建下载生命周期文件列表任务 {@link CreateLifecyclePolicyDownloadTaskRequest} {@link CreateLifecyclePolicyDownloadTaskResponse} */
+  CreateLifecyclePolicyDownloadTask(data?: CreateLifecyclePolicyDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLifecyclePolicyDownloadTaskResponse>;
   /** 创建迁移任务 {@link CreateMigrationTaskRequest} {@link CreateMigrationTaskResponse} */
   CreateMigrationTask(data: CreateMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMigrationTaskResponse>;
   /** 删除快照策略 {@link DeleteAutoSnapshotPolicyRequest} {@link DeleteAutoSnapshotPolicyResponse} */
@@ -1267,6 +1619,10 @@ declare interface Cfs {
   DeleteCfsRule(data: DeleteCfsRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCfsRuleResponse>;
   /** 删除文件系统快照 {@link DeleteCfsSnapshotRequest} {@link DeleteCfsSnapshotResponse} */
   DeleteCfsSnapshot(data?: DeleteCfsSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCfsSnapshotResponse>;
+  /** 删除数据流动 {@link DeleteDataFlowRequest} {@link DeleteDataFlowResponse} */
+  DeleteDataFlow(data: DeleteDataFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataFlowResponse>;
+  /** 删除生命周期管理策略 {@link DeleteLifecyclePolicyRequest} {@link DeleteLifecyclePolicyResponse} */
+  DeleteLifecyclePolicy(data: DeleteLifecyclePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLifecyclePolicyResponse>;
   /** 删除迁移任务 {@link DeleteMigrationTaskRequest} {@link DeleteMigrationTaskResponse} */
   DeleteMigrationTask(data: DeleteMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMigrationTaskResponse>;
   /** 删除挂载点 {@link DeleteMountTargetRequest} {@link DeleteMountTargetResponse} */
@@ -1293,6 +1649,12 @@ declare interface Cfs {
   DescribeCfsSnapshotOverview(data?: DescribeCfsSnapshotOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsSnapshotOverviewResponse>;
   /** 查询快照列表 {@link DescribeCfsSnapshotsRequest} {@link DescribeCfsSnapshotsResponse} */
   DescribeCfsSnapshots(data?: DescribeCfsSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsSnapshotsResponse>;
+  /** 查询数据流动信息 {@link DescribeDataFlowRequest} {@link DescribeDataFlowResponse} */
+  DescribeDataFlow(data?: DescribeDataFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataFlowResponse>;
+  /** 查询生命周期任务的接口 {@link DescribeLifecycleDataTaskRequest} {@link DescribeLifecycleDataTaskResponse} */
+  DescribeLifecycleDataTask(data: DescribeLifecycleDataTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLifecycleDataTaskResponse>;
+  /** 查询生命周期管理策略 {@link DescribeLifecyclePoliciesRequest} {@link DescribeLifecyclePoliciesResponse} */
+  DescribeLifecyclePolicies(data?: DescribeLifecyclePoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLifecyclePoliciesResponse>;
   /** 获取迁移任务列表 {@link DescribeMigrationTasksRequest} {@link DescribeMigrationTasksResponse} */
   DescribeMigrationTasks(data?: DescribeMigrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrationTasksResponse>;
   /** 查询文件系统挂载点 {@link DescribeMountTargetsRequest} {@link DescribeMountTargetsResponse} */
@@ -1301,14 +1663,20 @@ declare interface Cfs {
   DescribeSnapshotOperationLogs(data: DescribeSnapshotOperationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotOperationLogsResponse>;
   /** 查询文件系统配额 {@link DescribeUserQuotaRequest} {@link DescribeUserQuotaResponse} */
   DescribeUserQuota(data: DescribeUserQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserQuotaResponse>;
+  /** 修改数据流动相关参数 {@link ModifyDataFlowRequest} {@link ModifyDataFlowResponse} */
+  ModifyDataFlow(data: ModifyDataFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataFlowResponse>;
   /** 更新文件系统自动扩容策略 {@link ModifyFileSystemAutoScaleUpRuleRequest} {@link ModifyFileSystemAutoScaleUpRuleResponse} */
   ModifyFileSystemAutoScaleUpRule(data: ModifyFileSystemAutoScaleUpRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFileSystemAutoScaleUpRuleResponse>;
+  /** 更新生命周期策略 {@link ModifyLifecyclePolicyRequest} {@link ModifyLifecyclePolicyResponse} */
+  ModifyLifecyclePolicy(data: ModifyLifecyclePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLifecyclePolicyResponse>;
   /** 文件系统存储量扩容 {@link ScaleUpFileSystemRequest} {@link ScaleUpFileSystemResponse} */
   ScaleUpFileSystem(data: ScaleUpFileSystemRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleUpFileSystemResponse>;
   /** 设置文件系统配额 {@link SetUserQuotaRequest} {@link SetUserQuotaResponse} */
   SetUserQuota(data: SetUserQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<SetUserQuotaResponse>;
   /** 开通CFS服务 {@link SignUpCfsServiceRequest} {@link SignUpCfsServiceResponse} */
   SignUpCfsService(data?: SignUpCfsServiceRequest, config?: AxiosRequestConfig): AxiosPromise<SignUpCfsServiceResponse>;
+  /** 终止生命周期任务的接口 {@link StopLifecycleDataTaskRequest} {@link StopLifecycleDataTaskResponse} */
+  StopLifecycleDataTask(data: StopLifecycleDataTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopLifecycleDataTaskResponse>;
   /** 终止迁移任务 {@link StopMigrationTaskRequest} {@link StopMigrationTaskResponse} */
   StopMigrationTask(data: StopMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopMigrationTaskResponse>;
   /** 解绑快照策略 {@link UnbindAutoSnapshotPolicyRequest} {@link UnbindAutoSnapshotPolicyResponse} */

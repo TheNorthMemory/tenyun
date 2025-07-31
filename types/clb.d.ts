@@ -1258,9 +1258,9 @@ declare interface TargetGroupInfo {
   UpdatedTime?: string;
   /** 关联到的规则数组。在DescribeTargetGroupList接口调用时无法获取到该参数。 */
   AssociatedRule?: AssociationItem[] | null;
-  /** 后端转发协议类型，支持类型TCP， UDP。仅V2新版目标组支持返回该参数。 */
+  /** 目标组后端转发协议, 仅v2新版目标组返回有效值。 */
   Protocol?: string | null;
-  /** 目标组类型，当前支持v1(旧版目标组), v2(新版目标组), gwlb(全局负载均衡目标组)。 */
+  /** 目标组类型，当前支持v1(旧版目标组), v2(新版目标组)。默认为v1旧版目标组。 */
   TargetGroupType?: string;
   /** 目标组已关联的规则数。 */
   AssociatedRuleCount?: number;
@@ -1269,9 +1269,13 @@ declare interface TargetGroupInfo {
   /** 标签。 */
   Tag?: TagInfo[];
   /** 默认权重。只有v2类型目标组返回该字段。当返回为NULL时， 表示未设置默认权重。 */
-  Weight?: number;
-  /** 是否全监听目标组 */
+  Weight?: number | null;
+  /** 是否全监听目标组。 */
   FullListenSwitch?: boolean;
+  /** 是否开启长连接, 仅后端转发协议为HTTP/HTTPS/GRPC目标组返回有效值。 */
+  KeepaliveEnable?: boolean;
+  /** 会话保持时间，仅后端转发协议为HTTP/HTTPS/GRPC目标组返回有效值。 */
+  SessionExpireTime?: number;
 }
 
 /** 目标组实例 */
@@ -1709,17 +1713,17 @@ declare interface CreateTargetGroupRequest {
   TargetGroupInstances?: TargetGroupInstance[];
   /** 目标组类型，当前支持v1(旧版目标组), v2(新版目标组), 默认为v1(旧版目标组)。 */
   Type?: string;
-  /** 目标组后端转发协议。v2新版目标组该项必填。目前支持tcp、udp。 */
+  /** 目标组后端转发协议。v2新版目标组该项必填。目前支持TCP、UDP、HTTP、HTTPS、GRPC。 */
   Protocol?: string;
   /** 标签。 */
   Tags?: TagInfo[];
   /** 后端服务默认权重。 取值范围[0, 100] 设置该值后，添加后端服务到目标组时， 若后端服务不单独设置权重， 则使用这里的默认权重。 v1 目标组类型不支持设置 Weight 参数。 */
   Weight?: number;
-  /** 全监听目标组标识，为true表示是全监听目标组，false表示不是全监听目标组。 */
+  /** 全监听目标组标识，true表示是全监听目标组，false表示不是全监听目标组。仅V2新版类型目标组支持该参数。 */
   FullListenSwitch?: boolean;
   /** 是否开启长连接，此参数仅适用于HTTP/HTTPS目标组，0:关闭；1:开启， 默认关闭。 */
   KeepaliveEnable?: boolean;
-  /** 会话保持时间，单位：秒。可选值：30~3600，默认 0，表示不开启。TCP/UDP目标组不支持该参数。 */
+  /** 会话保持时间，单位：秒。可选值：30~3600，默认 0，表示不开启。仅V2新版且后端转发协议为HTTP/HTTPS/GRPC目标组支持该参数。 */
   SessionExpireTime?: number;
 }
 

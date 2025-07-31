@@ -753,6 +753,8 @@ declare interface CreateJobRecordResponse {
 }
 
 declare interface DescribeAppsRequest {
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
   /** 子公司ID列表 */
   EnterpriseUidList?: string[];
   /** 是否新增数据 */
@@ -789,6 +791,8 @@ declare interface DescribeAppsResponse {
 }
 
 declare interface DescribeAssetsRequest {
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
   /** 是否新增数据 */
   IsNew?: boolean;
   /** 企业ID */
@@ -825,6 +829,8 @@ declare interface DescribeAssetsResponse {
 }
 
 declare interface DescribeConfigsRequest {
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
   /** 是否聚合数据 */
   IsAggregation?: boolean;
   /** 是否新增数据 */
@@ -887,6 +893,8 @@ declare interface DescribeCustomersResponse {
 }
 
 declare interface DescribeDarkWebsRequest {
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
   /** 是否新增数据 */
   IsNew?: boolean;
   /** 企业ID */
@@ -923,6 +931,8 @@ declare interface DescribeDarkWebsResponse {
 }
 
 declare interface DescribeDomainsRequest {
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
   /** 是否新增数据 */
   IsNew?: boolean;
   /** 企业ID */
@@ -959,6 +969,8 @@ declare interface DescribeDomainsResponse {
 }
 
 declare interface DescribeEnterprisesRequest {
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
   /** 是否新增数据 */
   IsNew?: boolean;
   /** 企业ID */
@@ -997,6 +1009,8 @@ declare interface DescribeEnterprisesResponse {
 }
 
 declare interface DescribeFakeAppsRequest {
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
   /** 是否新增数据 */
   IsNew?: boolean;
   /** 企业ID */
@@ -1033,6 +1047,8 @@ declare interface DescribeFakeAppsResponse {
 }
 
 declare interface DescribeFakeMiniProgramsRequest {
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
   /** 是否新增数据 */
   IsNew?: boolean;
   /** 企业ID */
@@ -1069,6 +1085,8 @@ declare interface DescribeFakeMiniProgramsResponse {
 }
 
 declare interface DescribeFakeWebsitesRequest {
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
   /** 是否新增数据 */
   IsNew?: boolean;
   /** 企业ID */
@@ -1105,6 +1123,8 @@ declare interface DescribeFakeWebsitesResponse {
 }
 
 declare interface DescribeFakeWechatOfficialsRequest {
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
   /** 是否新增数据 */
   IsNew?: boolean;
   /** 企业ID */
@@ -1177,6 +1197,8 @@ declare interface DescribeGithubsResponse {
 }
 
 declare interface DescribeHttpsRequest {
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
   /** 是否聚合数据 */
   IsAggregation?: boolean;
   /** 是否新增数据 */
@@ -1255,6 +1277,8 @@ declare interface DescribeJobRecordsResponse {
 }
 
 declare interface DescribeLeakageCodesRequest {
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
   /** 是否聚合数据 */
   IsAggregation?: boolean;
   /** 是否新增数据 */
@@ -1293,6 +1317,8 @@ declare interface DescribeLeakageCodesResponse {
 }
 
 declare interface DescribeLeakageDatasRequest {
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
   /** 是否聚合数据 */
   IsAggregation?: boolean;
   /** 是否新增数据 */
@@ -1331,6 +1357,8 @@ declare interface DescribeLeakageDatasResponse {
 }
 
 declare interface DescribeLeakageEmailsRequest {
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
   /** 是否聚合数据 */
   IsAggregation?: boolean;
   /** 是否新增数据 */
@@ -1369,6 +1397,8 @@ declare interface DescribeLeakageEmailsResponse {
 }
 
 declare interface DescribeManagesRequest {
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
   /** 是否聚合数据 */
   IsAggregation?: boolean;
   /** 是否新增数据 */
@@ -1407,6 +1437,8 @@ declare interface DescribeManagesResponse {
 }
 
 declare interface DescribeNetDisksRequest {
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
   /** 是否新增数据 */
   IsNew?: boolean;
   /** 企业ID */
@@ -1443,6 +1475,8 @@ declare interface DescribeNetDisksResponse {
 }
 
 declare interface DescribePortsRequest {
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
   /** 是否聚合数据 */
   IsAggregation?: boolean;
   /** 是否新增数据 */
@@ -1481,6 +1515,8 @@ declare interface DescribePortsResponse {
 }
 
 declare interface DescribeSensitiveInfosRequest {
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
   /** 是否聚合数据 */
   IsAggregation?: boolean;
   /** 是否新增数据 */
@@ -1519,6 +1555,8 @@ declare interface DescribeSensitiveInfosResponse {
 }
 
 declare interface DescribeSubDomainsRequest {
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
   /** 是否新增数据 */
   IsNew?: boolean;
   /** 企业ID */
@@ -1557,6 +1595,8 @@ declare interface DescribeSubDomainsResponse {
 }
 
 declare interface DescribeSuspiciousAssetsRequest {
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
   /** 是否聚合数据 */
   IsAggregation?: boolean;
   /** 是否新增数据 */
@@ -1595,6 +1635,8 @@ declare interface DescribeSuspiciousAssetsResponse {
 }
 
 declare interface DescribeVulsRequest {
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
   /** 是否新增数据 */
   IsNew?: boolean;
   /** 企业ID */
@@ -1631,6 +1673,8 @@ declare interface DescribeVulsResponse {
 }
 
 declare interface DescribeWeakPasswordsRequest {
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
   /** 是否新增数据 */
   IsNew?: boolean;
   /** 企业ID */
@@ -1667,6 +1711,8 @@ declare interface DescribeWeakPasswordsResponse {
 }
 
 declare interface DescribeWechatAppletsRequest {
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
   /** 企业ID */
   CustomerId?: number;
   /** 是否新增数据 */
@@ -1703,6 +1749,8 @@ declare interface DescribeWechatAppletsResponse {
 }
 
 declare interface DescribeWechatOfficialAccountsRequest {
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
   /** 是否新增数据 */
   IsNew?: boolean;
   /** 企业ID */
@@ -1783,16 +1831,20 @@ declare interface ModifyCustomerResponse {
 }
 
 declare interface ModifyLabelRequest {
-  /** 资产或风险主键ID */
-  Id: number;
-  /** 企业ID，在企业管理页面查看 */
-  CustomerId: number;
   /** 模块，包括：enterprise：企业架构，domain：主域名，sub_domain：子域名，asset：IP资产，port：端口服务，http：HTTP资产，vul：漏洞信息，app：APP，wechat_applet：微信小程序，wechat_official_account：微信公众号，github：Github信息泄露，manage：管理后台暴露，config：目录爆破，dark_web：暗网泄露，net_disk：文库网盘泄露，supply_chain：供应链，weak_password：弱口令，sensitive_info：敏感信息泄露 */
   Module: string;
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
+  /** 资产或风险主键ID */
+  Id?: number;
+  /** 企业ID，在企业管理页面查看 */
+  CustomerId?: number;
   /** 是否聚合数据 */
   IsAggregation?: boolean;
   /** 标签详情 */
   Labels?: string;
+  /** 资产或风险主键ID列表 */
+  Ids?: number[];
 }
 
 declare interface ModifyLabelResponse {

@@ -530,7 +530,7 @@ declare interface CosRechargeInfo {
   Name?: string;
   /** COS存储桶 */
   Bucket?: string;
-  /** COS存储桶所在地域 */
+  /** COS存储桶所在地域。- 通过[地域和访问域名](https://cloud.tencent.com/document/product/436/6224)获取地域信息。 */
   BucketRegion?: string;
   /** COS文件所在文件夹的前缀 */
   Prefix?: string;
@@ -540,13 +540,13 @@ declare interface CosRechargeInfo {
   Status?: number;
   /** 是否启用: 0： 未启用 ， 1：启用 */
   Enable?: number;
-  /** 创建时间 */
+  /** 创建时间。时间格式：YYYY-MM-DD HH:mm:ss */
   CreateTime?: string;
-  /** 更新时间 */
+  /** 更新时间。时间格式：YYYY-MM-DD HH:mm:ss */
   UpdateTime?: string;
   /** 进度条百分值 */
   Progress?: number;
-  /** supported: "", "gzip", "lzop", "snappy”; 默认空 */
+  /** 压缩方式supported: "", "gzip", "lzop", "snappy”; 默认空不压缩 */
   Compress?: string;
   /** 见： ExtractRuleInfo 结构描述 */
   ExtractRuleInfo?: ExtractRuleInfo;
@@ -578,7 +578,7 @@ declare interface DashboardInfo {
   DashboardName?: string;
   /** 仪表盘数据 */
   Data?: string;
-  /** 创建仪表盘的时间 */
+  /** 创建仪表盘的时间。格式：YYYY-MM-DD HH:MM:SS */
   CreateTime?: string;
   /** AssumerUin非空则表示创建该日志主题的服务方Uin */
   AssumerUin?: number;
@@ -590,7 +590,7 @@ declare interface DashboardInfo {
   Tags?: Tag[];
   /** 仪表盘所在地域： 为了兼容老的地域。 */
   DashboardRegion?: string;
-  /** 修改仪表盘的时间 */
+  /** 修改仪表盘的时间。格式：YYYY-MM-DD HH:MM:SS */
   UpdateTime?: string;
   /** 仪表盘对应的topic相关信息 */
   DashboardTopicInfos?: DashboardTopicInfo[];
@@ -638,7 +638,7 @@ declare interface DashboardTemplateVariable {
 declare interface DashboardTopicInfo {
   /** 主题id */
   TopicId: string;
-  /** topic所在的地域 */
+  /** topic所在的地域。- 1:广州- 4:上海- 5:中国香港- 7:上海金融- 8:北京- 9:新加坡- 11:深圳金融- 15:硅谷- 16:成都- 17:法兰克福- 18:首尔- 19:重庆- 22:弗吉尼亚- 23:曼谷- 25:东京- 33:南京- 36:天津- 39:台北- 46:北京金融- 72:雅加达- 74:圣保罗- 78:上海自动驾驶云 */
   Region: string;
 }
 
@@ -1134,7 +1134,7 @@ declare interface MachineInfo {
   InstanceID?: string;
   /** 机器状态，0:异常，1:正常 */
   Status?: number;
-  /** 机器离线时间，空为正常，异常返回具体时间 */
+  /** 机器离线时间，空为正常，异常返回具体时间。时间格式：YYYY-MM-DD HH:mm:ss */
   OfflineTime?: string;
   /** 机器是否开启自动升级。0:关闭，1:开启 */
   AutoUpdate?: number;
@@ -1462,7 +1462,7 @@ declare interface ShipperInfo {
   Compress?: CompressInfo;
   /** 投递日志的内容格式配置 */
   Content?: ContentInfo;
-  /** 投递日志的创建时间 */
+  /** 投递日志的创建时间。格式：YYYY-MM-DD HH:MM:SS */
   CreateTime?: string;
   /** 投递文件命名配置，0：随机数命名，1：投递时间命名，默认0（随机数命名） */
   FilenameMode?: number;
@@ -1476,7 +1476,7 @@ declare interface ShipperInfo {
   RemainTime?: number;
   /** 历史任务状态：0：实时任务1：任务准备中2：任务运行中3：任务运行异常4：任务运行结束 */
   HistoryStatus?: number;
-  /** cos桶类型 */
+  /** 对象存储类型，默认值为 STANDARD。枚举值请参见[ 存储类型概述](https://cloud.tencent.com/document/product/436/33417) 文档。参考值有：STANDARD：标准存储STANDARD_IA：低频存储ARCHIVE：归档存储DEEP_ARCHIVE：深度归档存储MAZ_STANDARD：标准存储（多 AZ）MAZ_STANDARD_IA：低频存储（多 AZ）INTELLIGENT_TIERING：智能分层存储MAZ_INTELLIGENT_TIERING：智能分层存储（多 AZ） */
   StorageType?: string;
 }
 
@@ -1953,13 +1953,13 @@ declare interface CreateConsumerResponse {
 }
 
 declare interface CreateCosRechargeRequest {
-  /** 日志主题 ID */
+  /** 日志主题Id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
-  /** 日志集ID */
+  /** 日志集Id。- 通过[获取日志集列表](https://cloud.tencent.com/document/product/614/58624)获取日志集Id。 */
   LogsetId: string;
-  /** 投递任务名称 */
+  /** COS导入任务名称,最大支持128个字节。 */
   Name: string;
-  /** COS存储桶，详见产品支持的[存储桶命名规范](https://cloud.tencent.com/document/product/436/13312)。 */
+  /** COS存储桶，详见产品支持的[存储桶命名规范](https://cloud.tencent.com/document/product/436/13312)。	- 通过[GET Service（List Buckets）](https://cloud.tencent.com/document/product/436/8291)获取COS存储桶。 */
   Bucket: string;
   /** COS存储桶所在地域，详见产品支持的[地域列表](https://cloud.tencent.com/document/product/436/6224)。 */
   BucketRegion: string;
@@ -1967,7 +1967,7 @@ declare interface CreateCosRechargeRequest {
   LogType: string;
   /** COS文件所在文件夹的前缀。默认为空，投递存储桶下所有的文件。 */
   Prefix?: string;
-  /** supported: "", "gzip", "lzop", "snappy"; 默认空 */
+  /** supported: "", "gzip", "lzop", "snappy"。默认空，不压缩。 */
   Compress?: string;
   /** 提取规则，如果设置了ExtractRule，则必须设置LogType */
   ExtractRuleInfo?: ExtractRuleInfo;
@@ -2225,13 +2225,13 @@ declare interface CreateScheduledSqlResponse {
 }
 
 declare interface CreateShipperRequest {
-  /** 创建的投递规则所属的日志主题ID */
+  /** 创建的投递规则所属的日志主题Id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
-  /** COS存储桶，详见产品支持的[存储桶命名规范](https://cloud.tencent.com/document/product/436/13312)。 */
+  /** COS存储桶，详见产品支持的[存储桶命名规范](https://cloud.tencent.com/document/product/436/13312)。	- 通过[GET Service（List Buckets）](https://cloud.tencent.com/document/product/436/8291)获取COS存储桶。 */
   Bucket: string;
   /** 投递规则投递的新的目录前缀。- 仅支持0-9A-Za-z-_/- 最大支持256个字符 */
   Prefix: string;
-  /** 投递规则的名字 */
+  /** 投递规则的名字。最大支持255个字符 */
   ShipperName: string;
   /** 投递的时间间隔，单位 秒，默认300，范围 300-900 */
   Interval?: number;
@@ -2251,7 +2251,7 @@ declare interface CreateShipperRequest {
   StartTime?: number;
   /** 投递数据范围的结束时间点（秒级时间戳），不能填写未来时间。如果用户不填写，默认为持续投递，即无限。 */
   EndTime?: number;
-  /** cos桶存储类型。支持：STANDARD_IA、ARCHIVE、DEEP_ARCHIVE、STANDARD、MAZ_STANDARD、MAZ_STANDARD_IA、INTELLIGENT_TIERING。1. STANDARD_IA：低频存储；2. ARCHIVE：归档存储；3. DEEP_ARCHIVE：深度归档存储；4. STANDARD：标准存储；5. MAZ_STANDARD：标准存储（多 AZ）；6. MAZ_STANDARD_IA：低频存储（多 AZ）；7. INTELLIGENT_TIERING：智能分层存储。 */
+  /** 对象存储类型，默认值为 STANDARD。枚举值请参见[ 存储类型概述](https://cloud.tencent.com/document/product/436/33417) 文档。参考值有：- STANDARD：标准存储- STANDARD_IA：低频存储- ARCHIVE：归档存储- DEEP_ARCHIVE：深度归档存储- MAZ_STANDARD：标准存储（多 AZ）- MAZ_STANDARD_IA：低频存储（多 AZ）- INTELLIGENT_TIERING：智能分层存储- MAZ_INTELLIGENT_TIERING：智能分层存储（多 AZ） */
   StorageType?: string;
 }
 
@@ -2421,9 +2421,9 @@ declare interface DeleteConsumerResponse {
 }
 
 declare interface DeleteCosRechargeRequest {
-  /** COS导入配置Id */
+  /** COS导入配置Id。- 通过[获取投递任务列表](https://cloud.tencent.com/document/api/614/58745)获取COS导入配置Id。 */
   Id: string;
-  /** 日志主题Id */
+  /** 日志主题Id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/api/614/56454)获取日志主题Id。 */
   TopicId: string;
 }
 
@@ -2539,7 +2539,7 @@ declare interface DeleteScheduledSqlResponse {
 }
 
 declare interface DeleteShipperRequest {
-  /** 投递规则ID */
+  /** 投递规则Id。- 通过 [获取投递任务列表](https://cloud.tencent.com/document/product/614/58745)获取ShipperId。 */
   ShipperId: string;
 }
 
@@ -2743,7 +2743,7 @@ declare interface DescribeConsumerResponse {
 }
 
 declare interface DescribeCosRechargesRequest {
-  /** 日志主题 ID */
+  /** 日志主题Id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/api/614/56454)获取日志主题Id。 */
   TopicId: string;
   /** 状态 status 0: 已创建, 1: 运行中, 2: 已停止, 3: 已完成, 4: 运行失败。 */
   Status?: number;
@@ -2777,9 +2777,9 @@ declare interface DescribeDashboardsRequest {
   Offset?: number;
   /** 分页单页限制数目，默认值为20，最大值100。 */
   Limit?: number;
-  /** - dashboardId 按照【仪表盘id】进行过滤，类型：String， 必选：否。- dashboardName 按照【仪表盘名字】进行模糊搜索过滤，类型：String，必选：否。- dashboardRegion 按照【仪表盘地域】进行过滤，为了兼容老的仪表盘，通过云API创建的仪表盘没有地域属性，类型：String，必选：否。- tagKey 按照【标签键】进行过滤，类型：String，必选：否。- tag:tagKey 按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换，类型：String，必选：否，使用请参考[示例2](https://cloud.tencent.com/document/api/614/95636)。每次请求的Filters的上限为10，Filter.Values的上限为100。 */
+  /** - dashboardId 按照【仪表盘id】进行过滤，类型：String， 必选：否。- dashboardName 按照【仪表盘名字】进行模糊搜索过滤，类型：String，必选：否。- dashboardRegion 按照【仪表盘地域】进行过滤，为了兼容老的仪表盘，通过云API创建的仪表盘没有地域属性，类型：String，必选：否。 [地域和访问域名](https://cloud.tencent.com/document/product/614/18940)，例如：ap-guangzhou- tagKey 按照【标签键】进行过滤，类型：String，必选：否。- tag:tagKey 按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换，类型：String，必选：否，使用请参考[示例2](https://cloud.tencent.com/document/api/614/95636)。每次请求的Filters的上限为10，Filter.Values的上限为100。 */
   Filters?: Filter[];
-  /** 按照topicId和regionId过滤。 */
+  /** 按照topicId和regionId过滤。- topicId:日志主题Id。 - 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。- regionId - 1:广州 - 4:上海 - 5:中国香港 - 7:上海金融 - 8:北京 - 9:新加坡 - 11:深圳金融 - 15:硅谷 - 16:成都 - 17:法兰克福 - 18:首尔 - 19:重庆 - 22:弗吉尼亚 - 23:曼谷 - 25:东京 - 33:南京 - 36:天津 - 39:台北 - 46:北京金融 - 72:雅加达 - 74:圣保罗 - 78:上海自动驾驶云 */
   TopicIdRegionFilter?: TopicIdAndRegion[];
 }
 
@@ -2997,9 +2997,9 @@ declare interface DescribeMachineGroupsResponse {
 }
 
 declare interface DescribeMachinesRequest {
-  /** 查询的机器组ID */
+  /** 查询的机器组ID。- 通过[获取机器组列表](https://cloud.tencent.com/document/api/614/56438)获取机器组ID。 */
   GroupId: string;
-  /** ip- 按照【ip】进行过滤。- 类型：String- 必选：否instance- 按照【instance】进行过滤。- 类型：String- 必选：否version- 按照【LogListener版本】进行过滤。- 类型：String- 必选：否status- 按照【状态】进行过滤。- 类型：String- 必选：否- 可选值：0：离线，1：正常offlineTime- 按照【机器离线时间】进行过滤。- 类型：String- 必选：否- - 可选值：0：无离线时间，12：12小时内，24：一天内，48：两天内，99：两天前每次请求的Filters的上限为10，Filter.Values的上限为100。 */
+  /** ip- 按照ip进行过滤。- 类型：String- 必选：否instance- 按照实例id进行过滤。- 类型：String- 必选：否version- 按照LogListener版本进行过滤。- 类型：String- 必选：否status- 按照机器状态进行过滤。- 类型：String- 必选：否- 可选值：0：离线，1：正常offlineTime- 按照机器离线时间进行过滤。- 类型：String- 必选：否- -可选值：0：无离线时间，12：12小时内，24：一天内，48：两天内，99：两天前每次请求的Filters的上限为10，Filter.Values的上限为100。 */
   Filters?: Filter[];
   /** 分页的偏移量。 */
   Offset?: number;
@@ -3079,7 +3079,7 @@ declare interface DescribeScheduledSqlInfoResponse {
 }
 
 declare interface DescribeShipperTasksRequest {
-  /** 投递规则ID */
+  /** 投递规则Id。- 通过 [获取投递任务列表](https://cloud.tencent.com/document/product/614/58745)获取ShipperId。 */
   ShipperId: string;
   /** 查询的开始时间戳，支持最近3天的查询， 毫秒。StartTime必须小于EndTime */
   StartTime: number;
@@ -3095,7 +3095,7 @@ declare interface DescribeShipperTasksResponse {
 }
 
 declare interface DescribeShippersRequest {
-  /** - shipperName：按照【投递规则名称】进行过滤。 类型：String。 必选：否- shipperId：按照【投递规则ID】进行过滤。 类型：String。 必选：否- topicId：按照【日志主题】进行过滤。 类型：String。 必选：否- taskStatus按照【任务运行状态】进行过滤。 支持`0`：停止，`1`：运行中，`2`：异常类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为10。 */
+  /** - shipperName：按照【投递规则名称】进行过滤。 类型：String。 必选：否- shipperId：按照【投递规则ID】进行过滤。 类型：String。 必选：否- topicId：按照【日志主题】进行过滤。 类型：String。 必选：否- taskStatus：按照【任务运行状态】进行过滤。 支持`0`：停止，`1`：运行中，`2`：异常 类型：String 必选：否每次请求的Filters的上限为10，Filter.Values的上限为10。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0 */
   Offset?: number;
@@ -3429,15 +3429,15 @@ declare interface ModifyConsumerResponse {
 }
 
 declare interface ModifyCosRechargeRequest {
-  /** COS导入配置Id */
+  /** COS导入配置Id。- 通过[获取cos导入配置](https://cloud.tencent.com/document/product/614/88099)接口获取COS导入配置Id。 */
   Id: string;
-  /** 日志主题Id */
+  /** 日志主题Id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
-  /** COS导入任务名称 */
+  /** COS导入任务名称,最大支持128个字节。 */
   Name?: string;
   /** 任务状态 0： 停用 ， 1：启用 */
   Enable?: number;
-  /** COS存储桶，详见产品支持的[存储桶命名规范](https://cloud.tencent.com/document/product/436/13312)。 */
+  /** COS存储桶，详见产品支持的[存储桶命名规范](https://cloud.tencent.com/document/product/436/13312)。	- 通过[GET Service（List Buckets）](https://cloud.tencent.com/document/product/436/8291)获取COS存储桶。 */
   Bucket?: string;
   /** COS存储桶所在地域，详见产品支持的[地域列表](https://cloud.tencent.com/document/product/436/6224)。 */
   BucketRegion?: string;
@@ -3445,7 +3445,7 @@ declare interface ModifyCosRechargeRequest {
   Prefix?: string;
   /** 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表单行全文； 默认为minimalist_log */
   LogType?: string;
-  /** 解析格式。supported: "", "gzip", "lzop", "snappy"; 默认空 */
+  /** 解析格式。supported: "", "gzip", "lzop", "snappy"。空串表示不压缩。 */
   Compress?: string;
   /** 提取规则，如果设置了ExtractRule，则必须设置LogType */
   ExtractRuleInfo?: ExtractRuleInfo;
@@ -3651,9 +3651,9 @@ declare interface ModifyScheduledSqlResponse {
 }
 
 declare interface ModifyShipperRequest {
-  /** 投递规则ID */
+  /** 投递规则Id。- 通过 [获取投递任务列表](https://cloud.tencent.com/document/product/614/58745)获取ShipperId。 */
   ShipperId: string;
-  /** COS存储桶，详见产品支持的[存储桶命名规范](https://cloud.tencent.com/document/product/436/13312)。 */
+  /** COS存储桶，详见产品支持的[存储桶命名规范](https://cloud.tencent.com/document/product/436/13312)。	- 通过[GET Service（List Buckets）](https://cloud.tencent.com/document/product/436/8291)获取COS存储桶。 */
   Bucket?: string;
   /** 投递规则投递的新的目录前缀。- 仅支持0-9A-Za-z-_/- 最大支持256个字符 */
   Prefix?: string;
@@ -3675,7 +3675,7 @@ declare interface ModifyShipperRequest {
   Content?: ContentInfo;
   /** 投递文件命名配置，0：随机数命名，1：投递时间命名。 */
   FilenameMode?: number;
-  /** cos桶存储类型。支持：STANDARD_IA、ARCHIVE、DEEP_ARCHIVE、STANDARD、MAZ_STANDARD、MAZ_STANDARD_IA、INTELLIGENT_TIERING。1. STANDARD_IA：低频存储；2. ARCHIVE：归档存储；3. DEEP_ARCHIVE：深度归档存储；4. STANDARD：标准存储；5. MAZ_STANDARD：标准存储（多 AZ）；6. MAZ_STANDARD_IA：低频存储（多 AZ）；7. INTELLIGENT_TIERING：智能分层存储。 */
+  /** 对象存储类型，默认值为 STANDARD。枚举值请参见[ 存储类型概述](https://cloud.tencent.com/document/product/436/33417) 文档。参考值有：- STANDARD：标准存储- STANDARD_IA：低频存储- ARCHIVE：归档存储- DEEP_ARCHIVE：深度归档存储- MAZ_STANDARD：标准存储（多 AZ）- MAZ_STANDARD_IA：低频存储（多 AZ）- INTELLIGENT_TIERING：智能分层存储- MAZ_INTELLIGENT_TIERING：智能分层存储（多 AZ） */
   StorageType?: string;
 }
 
@@ -3827,9 +3827,9 @@ declare interface QueryRangeMetricResponse {
 }
 
 declare interface RetryShipperTaskRequest {
-  /** 投递规则ID */
+  /** 投递规则Id。- 通过 [获取投递任务列表](https://cloud.tencent.com/document/product/614/58745)获取ShipperId。 */
   ShipperId: string;
-  /** 投递任务ID */
+  /** 投递任务Id。- 通过 [获取投递任务列表](https://cloud.tencent.com/document/product/614/58745) 获取TaskId。 */
   TaskId: string;
 }
 
@@ -3839,19 +3839,19 @@ declare interface RetryShipperTaskResponse {
 }
 
 declare interface SearchCosRechargeInfoRequest {
-  /** 日志主题 ID */
+  /** 日志主题Id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
-  /** 日志集ID */
+  /** 日志集Id。- 通过[获取日志集列表](https://cloud.tencent.com/document/product/614/58624)获取日志集Id。 */
   LogsetId: string;
-  /** 投递任务名称 */
+  /** COS导入任务名称,最大支持128个字节。 */
   Name: string;
-  /** COS存储桶，详见产品支持的[存储桶命名规范](https://cloud.tencent.com/document/product/436/13312)。 */
+  /** COS存储桶，详见产品支持的[存储桶命名规范](https://cloud.tencent.com/document/product/436/13312)。	- 通过[GET Service（List Buckets）](https://cloud.tencent.com/document/product/436/8291)获取COS存储桶。 */
   Bucket: string;
   /** COS存储桶所在地域，详见产品支持的[地域列表](https://cloud.tencent.com/document/product/436/6224)。 */
   BucketRegion: string;
   /** COS文件所在文件夹的前缀。默认为空，投递存储桶下所有的文件。 */
   Prefix?: string;
-  /** 压缩模式: "", "gzip", "lzop", "snappy"; 默认"" */
+  /** 压缩模式: "", "gzip", "lzop", "snappy"。 默认："" 不压缩 */
   Compress?: string;
 }
 
@@ -3864,7 +3864,7 @@ declare interface SearchCosRechargeInfoResponse {
   Path?: string;
   /** 预览获取数据失败原因 */
   Msg?: string;
-  /** 状态 */
+  /** 状态。- 0：成功- 10000：参数错误，请确认参数- 10001：授权失败，请确认授权- 10002：获取文件列表失败，请稍后再试。若无法解决，请联系智能客服或提交工单- 10003：桶内无相应前缀文件，请使用正确的桶、文件前缀和压缩方式- 10004：文件下载失败，请稍后再试。若无法解决，请联系智能客服或提交工单- 10005：文件解压缩失败，请选择正确的压缩方式然后再试- 10006：读取文件内容失败，请确认文件可读- 10007：文件预览失败，请稍后再试。若无法解决，请联系智能客服或提交工单 */
   Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

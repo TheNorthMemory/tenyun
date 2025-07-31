@@ -354,6 +354,22 @@ declare interface UploadKnowledgeDocumentSetRsp {
   FileId?: string;
 }
 
+declare interface CheckDeployAppRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 应用id */
+  Id: string;
+  /** 构建 Id */
+  BuildId: string;
+}
+
+declare interface CheckDeployAppResponse {
+  /** 状态：success、building、reviewFail、releaseSuccess、underReview */
+  Status?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateKnowledgeSetRequest {
   /** 环境ID */
   EnvId: string;
@@ -368,6 +384,16 @@ declare interface CreateKnowledgeSetRequest {
 }
 
 declare interface CreateKnowledgeSetResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAppBindWxAppRequest {
+  /** 应用id */
+  WeappId: string;
+}
+
+declare interface DeleteAppBindWxAppResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -396,6 +422,30 @@ declare interface DeleteKnowledgeSetRequest {
 }
 
 declare interface DeleteKnowledgeSetResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeployAppRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 应用id */
+  Id: string;
+  /** 发布体验preview/正式upload */
+  Mode?: string;
+  /** 构建类型：mp、pc、web、adminPortal */
+  BuildType?: string;
+  /** 子包数组 */
+  SubAppIds?: string[];
+}
+
+declare interface DeployAppResponse {
+  /** 构建id */
+  BuildId?: string;
+  /** 发布错误code */
+  DeployErrCode?: number;
+  /** 发布错误信息 */
+  DeployErrMsg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -502,6 +552,18 @@ declare interface DescribeKnowledgeSetListResponse {
   RequestId?: string;
 }
 
+declare interface PutWxAppIdToWeAppRequest {
+  /** 应用ID */
+  WeAppId: string;
+  /** 微信AppId */
+  WxAppId: string;
+}
+
+declare interface PutWxAppIdToWeAppResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SearchDocListRequest {
   /** 环境ID */
   EnvId: string;
@@ -579,12 +641,18 @@ declare interface UploadKnowledgeDocumentSetResponse {
 /** {@link Lowcode 云开发低码} */
 declare interface Lowcode {
   (): Versions;
+  /** 检查应用发布状态 {@link CheckDeployAppRequest} {@link CheckDeployAppResponse} */
+  CheckDeployApp(data: CheckDeployAppRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDeployAppResponse>;
   /** 创建知识库 {@link CreateKnowledgeSetRequest} {@link CreateKnowledgeSetResponse} */
   CreateKnowledgeSet(data: CreateKnowledgeSetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKnowledgeSetResponse>;
+  /** 删除应用绑定小程序 {@link DeleteAppBindWxAppRequest} {@link DeleteAppBindWxAppResponse} */
+  DeleteAppBindWxApp(data: DeleteAppBindWxAppRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAppBindWxAppResponse>;
   /** 删除知识库下文档 {@link DeleteKnowledgeDocumentSetRequest} {@link DeleteKnowledgeDocumentSetResponse} */
   DeleteKnowledgeDocumentSet(data: DeleteKnowledgeDocumentSetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteKnowledgeDocumentSetResponse>;
   /** 删除知识库 {@link DeleteKnowledgeSetRequest} {@link DeleteKnowledgeSetResponse} */
   DeleteKnowledgeSet(data: DeleteKnowledgeSetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteKnowledgeSetResponse>;
+  /** 发布应用 {@link DeployAppRequest} {@link DeployAppResponse} */
+  DeployApp(data: DeployAppRequest, config?: AxiosRequestConfig): AxiosPromise<DeployAppResponse>;
   /** 获取数据源详情列表 {@link DescribeDataSourceListRequest} {@link DescribeDataSourceListResponse} */
   DescribeDataSourceList(data: DescribeDataSourceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataSourceListResponse>;
   /** 获取知识库下文档详情 {@link DescribeKnowledgeDocumentSetDetailRequest} {@link DescribeKnowledgeDocumentSetDetailResponse} */
@@ -593,6 +661,8 @@ declare interface Lowcode {
   DescribeKnowledgeDocumentSetList(data: DescribeKnowledgeDocumentSetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKnowledgeDocumentSetListResponse>;
   /** 查询环境下的知识库列表 {@link DescribeKnowledgeSetListRequest} {@link DescribeKnowledgeSetListResponse} */
   DescribeKnowledgeSetList(data: DescribeKnowledgeSetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKnowledgeSetListResponse>;
+  /** 应用绑定微信ID {@link PutWxAppIdToWeAppRequest} {@link PutWxAppIdToWeAppResponse} */
+  PutWxAppIdToWeApp(data: PutWxAppIdToWeAppRequest, config?: AxiosRequestConfig): AxiosPromise<PutWxAppIdToWeAppResponse>;
   /** 知识库搜索文档接口 {@link SearchDocListRequest} {@link SearchDocListResponse} */
   SearchDocList(data: SearchDocListRequest, config?: AxiosRequestConfig): AxiosPromise<SearchDocListResponse>;
   /** 更新知识库 {@link UpdateKnowledgeSetRequest} {@link UpdateKnowledgeSetResponse} */

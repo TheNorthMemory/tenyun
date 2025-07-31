@@ -184,6 +184,14 @@ declare interface GroupMemberInfo {
   Remark?: string | null;
 }
 
+/** IP限制策略 */
+declare interface IpPolicy {
+  /** IP段 */
+  IP: string;
+  /** 策略效力，Allow或Deny */
+  Effect: string;
+}
+
 /** ListGrantServiceAccessAction节点 */
 declare interface ListGrantServiceAccessActionNode {
   /** 接口名 */
@@ -750,6 +758,24 @@ declare interface CreateServiceLinkedRoleRequest {
 declare interface CreateServiceLinkedRoleResponse {
   /** 角色ID */
   RoleId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSubAccountLoginIpPolicyRequest {
+  /** IP策略集合 */
+  IpPolicies?: IpPolicy[];
+  /** 审批人类型，目前支持的类型有：SubAccountLoginLimitApproval（子账号登录限制审批） */
+  ApproverType?: string;
+  /** 被添加为协助审批人的账号ID数组 */
+  ApproverUin?: number[];
+  /** 是否禁用策略：0：不禁用，1：禁用 */
+  DisablePolicy?: number;
+  /** 策略类型：1：更新IP策略，2：设置异地登录校验校验规则 */
+  PolicyType?: number;
+}
+
+declare interface CreateSubAccountLoginIpPolicyResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1983,6 +2009,8 @@ declare interface Cam {
   CreateSAMLProvider(data: CreateSAMLProviderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSAMLProviderResponse>;
   /** 创建服务相关角色 {@link CreateServiceLinkedRoleRequest} {@link CreateServiceLinkedRoleResponse} */
   CreateServiceLinkedRole(data: CreateServiceLinkedRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServiceLinkedRoleResponse>;
+  /** 增加子账号登录IP策略 {@link CreateSubAccountLoginIpPolicyRequest} {@link CreateSubAccountLoginIpPolicyResponse} */
+  CreateSubAccountLoginIpPolicy(data?: CreateSubAccountLoginIpPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubAccountLoginIpPolicyResponse>;
   /** 创建用户OIDC配置 {@link CreateUserOIDCConfigRequest} {@link CreateUserOIDCConfigResponse} */
   CreateUserOIDCConfig(data: CreateUserOIDCConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserOIDCConfigResponse>;
   /** 创建用户SAML配置 {@link CreateUserSAMLConfigRequest} {@link CreateUserSAMLConfigResponse} */

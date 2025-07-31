@@ -5324,6 +5324,36 @@ declare interface SubscribeWebHook {
   HookAddress?: string | null;
 }
 
+/** 下游任务列表 */
+declare interface SuccessorTaskInfo {
+  /** 任务id */
+  TaskId?: string;
+  /** 所属工作流id */
+  WorkflowId?: string;
+  /** 任务名 */
+  TaskName?: string;
+  /** 层级，0表示当前任务 */
+  Layer?: number;
+  /** 任务状态 */
+  Status?: string;
+  /** 任务类型，-1表示跨流任务 */
+  TaskTypeId?: number;
+  /** 责任人 */
+  InCharge?: string;
+  /** 项目id */
+  ProjectId?: string;
+  /** 项目名称 */
+  ProjectName?: string;
+  /** 所属工作流名称 */
+  WorkflowName?: string;
+  /** 周期单位 */
+  CycleUnit?: string | null;
+  /** 调度计划 */
+  ScheduleDesc?: string | null;
+  /** 任务类型描述 */
+  TaskTypeDesc?: string | null;
+}
+
 /** 角色对象 */
 declare interface SystemRole {
   /** 角色id */
@@ -10528,6 +10558,8 @@ declare interface DescribeProjectResponse {
 }
 
 declare interface DescribeProjectUsersRequest {
+  /** 项目id */
+  ProjectId: string;
   /** 分页号 */
   PageNumber: number;
   /** 分页大小 */
@@ -10748,8 +10780,6 @@ declare interface DescribeReportTaskListRequest {
   PageNum?: number;
   /** 每页条数 */
   PageSize?: number;
-  /** 租户id */
-  TenantId?: string;
   /** 项目id */
   ProjectId?: string;
   /** 任务id */
@@ -11331,6 +11361,20 @@ declare interface DescribeSuccessorOpsTaskInfosRequest {
 declare interface DescribeSuccessorOpsTaskInfosResponse {
   /** 下游任务列表 */
   Data?: TaskOpsDto[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSuccessorTaskInfoListRequest {
+  /** 任务id集合 */
+  TaskIds?: string[];
+  /** 项目id */
+  ProjectId?: string;
+}
+
+declare interface DescribeSuccessorTaskInfoListResponse {
+  /** 出参 */
+  Data?: SuccessorTaskInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -14858,6 +14902,8 @@ declare interface Wedata {
   DescribeStreamTaskLogList(data: DescribeStreamTaskLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamTaskLogListResponse>;
   /** 获取任务全部下游（开发态） {@link DescribeSuccessorOpsTaskInfosRequest} {@link DescribeSuccessorOpsTaskInfosResponse} */
   DescribeSuccessorOpsTaskInfos(data: DescribeSuccessorOpsTaskInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSuccessorOpsTaskInfosResponse>;
+  /** 获取下游任务信息批量 {@link DescribeSuccessorTaskInfoListRequest} {@link DescribeSuccessorTaskInfoListResponse} */
+  DescribeSuccessorTaskInfoList(data?: DescribeSuccessorTaskInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSuccessorTaskInfoListResponse>;
   /** 表基础信息查询 {@link DescribeTableBasicInfoRequest} {@link DescribeTableBasicInfoResponse} */
   DescribeTableBasicInfo(data?: DescribeTableBasicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableBasicInfoResponse>;
   /** 获取数据表信息 {@link DescribeTableInfoListRequest} {@link DescribeTableInfoListResponse} */
