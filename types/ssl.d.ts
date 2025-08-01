@@ -1806,13 +1806,13 @@ declare interface DescribeCertificateDetailResponse {
   VerifyType?: string | null;
   /** 漏洞扫描状态。 */
   VulnerabilityStatus?: string;
-  /** 证书生效时间。 */
+  /** 证书生效时间。时区为GMT+8:00 */
   CertBeginTime?: string | null;
-  /** 证书失效时间。 */
+  /** 证书失效时间。时区为GMT+8:00 */
   CertEndTime?: string | null;
   /** 证书有效期：单位（月）。 */
   ValidityPeriod?: string;
-  /** 证书申请时间。 */
+  /** 证书申请时间。时区为GMT+8:00 */
   InsertTime?: string;
   /** CA订单 ID。 */
   OrderId?: string | null;

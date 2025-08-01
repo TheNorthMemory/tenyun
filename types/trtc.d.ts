@@ -244,6 +244,14 @@ declare interface EventMessage {
   ParamTwo?: number;
 }
 
+/** 调用服务端主动发起请求到LLM */
+declare interface InvokeLLM {
+  /** 请求LLM的内容 */
+  Content?: string;
+  /** 是否允许该文本打断机器人说话 */
+  Interrupt?: boolean;
+}
+
 /** MCU混流布局参数 */
 declare interface LayoutParams {
   /** 混流布局模板ID，0为悬浮模板(默认);1为九宫格模板;2为屏幕分享模板;3为画中画模板;4为自定义模板。 */
@@ -1255,10 +1263,12 @@ declare interface WebRecordVideoParams {
 declare interface ControlAIConversationRequest {
   /** 任务唯一标识 */
   TaskId: string;
-  /** 控制命令，目前支持命令如下：- ServerPushText，服务端发送文本给AI机器人，AI机器人会播报该文本 */
+  /** 控制命令，目前支持命令如下：- ServerPushText，服务端发送文本给AI机器人，AI机器人会播报该文本. - InvokeLLM，服务端发送文本给大模型，触发对话 */
   Command: string;
   /** 服务端发送播报文本命令，当Command为ServerPushText时必填 */
   ServerPushText?: ServerPushText;
+  /** 服务端发送命令主动请求大模型,当Command为InvokeLLM时会把content请求到大模型,头部增加X-Invoke-LLM="1" */
+  InvokeLLM?: InvokeLLM;
 }
 
 declare interface ControlAIConversationResponse {

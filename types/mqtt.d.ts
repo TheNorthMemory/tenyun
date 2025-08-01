@@ -190,6 +190,8 @@ declare interface MQTTClientSubscription {
   Lag?: number;
   /** 投递未确认数量 */
   Inflight?: number;
+  /** 用户属性 */
+  UserProperties?: SubscriptionUserProperty[];
 }
 
 /** MQTTEndpoint */
@@ -364,6 +366,14 @@ declare interface PublicAccessRule {
   Allow?: boolean;
   /** 备注信息，最多64个字符。 */
   Remark?: string;
+}
+
+/** 订阅的UserProperty结构 */
+declare interface SubscriptionUserProperty {
+  /** 订阅的UserProperty键 */
+  Key?: string;
+  /** 订阅的UserProperty值 */
+  Value?: string;
 }
 
 /** 标签数据 */
@@ -1012,6 +1022,12 @@ declare interface DescribeInstanceResponse {
   AutoSubscriptionPolicyLimit?: number;
   /** 单条自动订阅规则TopicFilter数限制 */
   MaxTopicFilterPerAutoSubscriptionPolicy?: number;
+  /** 是否使用默认的服务端证书 */
+  UseDefaultServerCert?: boolean;
+  /** 服务端CA最大数量 */
+  TrustedCaLimit?: number;
+  /** 服务端证书最大数量 */
+  ServerCertLimit?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1289,6 +1305,10 @@ declare interface ModifyInstanceRequest {
   AutomaticActivation?: boolean;
   /** 授权策略开关 */
   AuthorizationPolicy?: boolean;
+  /** 是否使用默认的服务端证书 */
+  UseDefaultServerCert?: boolean;
+  /** TLS：单向认证mTLS；双向认证BYOC：一机一证 */
+  X509Mode?: string;
 }
 
 declare interface ModifyInstanceResponse {

@@ -408,6 +408,40 @@ declare interface DataEngineConfigPair {
   ConfigValue: string;
 }
 
+/** 集群Session配置信息. */
+declare interface DataEngineImageSessionParameter {
+  /** 配置id */
+  ParameterId: string;
+  /** 小版本镜像ID */
+  ChildImageVersionId: string;
+  /** 集群类型：SparkSQL/PrestoSQL/SparkBatch */
+  EngineType: string;
+  /** 参数key */
+  KeyName: string;
+  /** Key描述信息 */
+  KeyDescription: string | null;
+  /** value类型 */
+  ValueType: string;
+  /** value长度限制 */
+  ValueLengthLimit: string | null;
+  /** value正则限制 */
+  ValueRegexpLimit: string | null;
+  /** value默认值 */
+  ValueDefault: string | null;
+  /** 是否为公共版本：1：公共；2：私有 */
+  IsPublic: number;
+  /** 配置类型：1：session配置（默认）；2：common配置；3：cluster配置 */
+  ParameterType: number;
+  /** 提交方式：User(用户)、BackGround（后台） */
+  SubmitMethod: string;
+  /** 操作者 */
+  Operator: string | null;
+  /** 插入时间 */
+  InsertTime: string;
+  /** 更新时间 */
+  UpdateTime: string;
+}
+
 /** 集群大版本镜像信息。 */
 declare interface DataEngineImageVersion {
   /** 镜像大版本ID */
@@ -784,6 +818,48 @@ declare interface ElasticsearchInfo {
   ServiceInfo?: IpPortPair[] | null;
 }
 
+/** 引擎网络信息 */
+declare interface EngineNetworkInfo {
+  /** 引擎网络名字 */
+  EngineNetworkName?: string | null;
+  /** 引擎网络状态，0--初始化，2--可用，-1--已删除 */
+  EngineNetworkState?: number | null;
+  /** 引擎网络cidr */
+  EngineNetworkCidr?: string | null;
+  /** 引擎网络ID */
+  EngineNetworkId?: string | null;
+  /** 创建时间 */
+  CreateTime?: number | null;
+  /** 更新时间 */
+  UpdateTime?: number | null;
+  /** 私有连接个数 */
+  PrivateLinkNumber?: number | null;
+  /** 计算引擎个数 */
+  EngineNumber?: number | null;
+  /** 网关信息 */
+  GateWayInfo?: GatewayInfo[] | null;
+}
+
+/** 引擎资源组参数 配置项 */
+declare interface EngineResourceGroupConfigPair {
+  /** 配置项 */
+  ConfigItem: string | null;
+  /** 配置项的值 */
+  ConfigValue: string | null;
+}
+
+/** TensorFlow、Pytorch、SK-learn镜像信息列表 */
+declare interface EngineSessionImage {
+  /** Spark镜像唯一id */
+  SparkImageId?: string | null;
+  /** Spark镜像版本名称 */
+  SparkImageVersion?: string | null;
+  /** 小版本镜像类型.1:TensorFlow、2:Pytorch、3:SK-learn */
+  SparkImageType?: number | null;
+  /** 镜像地址 */
+  SparkImageTag?: string | null;
+}
+
 /** SQL语句对象 */
 declare interface Execution {
   /** 自动生成SQL语句。 */
@@ -808,6 +884,22 @@ declare interface Filter {
   Name: string;
   /** 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
   Values: string[];
+}
+
+/** 网关基础信息，包括id，名称，规格和状态 */
+declare interface GatewayInfo {
+  /** 网关ID， */
+  GatewayId?: string | null;
+  /** 网关名称，全局唯一 */
+  GatewayName?: string | null;
+  /** 网关的规格 */
+  Size?: number | null;
+  /** -2已删除 -1失败 0初始化中 1挂起 2运行中 3准备删除 4删除中 5挂起中 6启动中 7隔离中 8隔离 9续费中 10变配中 11冲正中 */
+  State?: number | null;
+  /** 计费模式 */
+  PayMode?: number | null;
+  /** 模式 */
+  Mode?: number | null;
 }
 
 /** 数据脱敏用户组信息 */
@@ -1186,6 +1278,14 @@ declare interface OpendThirdAccessUserInfo {
   CreateTime?: string;
 }
 
+/** 操作资源组，返回的操作失败信息 */
+declare interface OperateEngineResourceGroupFailMessage {
+  /** 引擎资源组名称 */
+  EngineResourceGroupName?: string;
+  /** 操作失败的提示信息 */
+  FailMessage?: string;
+}
+
 /** 数据优化引擎信息 */
 declare interface OptimizerEngineInfo {
   /** 引擎资源名称 */
@@ -1218,6 +1318,16 @@ declare interface OtherCHDFSBinding {
 declare interface OtherDatasourceConnection {
   /** 网络参数 */
   Location: DatasourceConnectionLocation;
+}
+
+/** 对指定参数的更新、增加、删除 */
+declare interface Param {
+  /** 参数key，例如： */
+  ConfigItem?: string;
+  /** 参数值 */
+  ConfigValue?: string;
+  /** 下发操作，支持：ADD、DELETE、MODIFY */
+  Operate?: string;
 }
 
 /** 数据表分块信息。 */
@@ -1560,6 +1670,136 @@ declare interface SparkSessionBatchLogOperate {
   Operate?: string;
   /** 补充信息：如：taskid、sessionid、sparkui等 */
   Supplement?: KVPair[] | null;
+}
+
+/** spark session详细信息 */
+declare interface SparkSessionInfo {
+  /** spark session id */
+  SparkSessionId?: string;
+  /** spark session名称 */
+  SparkSessionName?: string;
+  /** 资源组id */
+  ResourceGroupId?: string;
+  /** engine session id */
+  EngineSessionId?: string;
+  /** engine session name */
+  EngineSessionName?: string;
+  /** 自动销毁时间 */
+  IdleTimeoutMin?: number;
+  /** driver规格 */
+  DriverSpec?: string;
+  /** executor规格 */
+  ExecutorSpec?: string;
+  /** executor最小数量 */
+  ExecutorNumMin?: number;
+  /** executor最大数量 */
+  ExecutorNumMax?: number;
+  /** 总规格最小 */
+  TotalSpecMin?: number;
+  /** 总规格最大 */
+  TotalSpecMax?: number;
+}
+
+/** 节点规格信息 */
+declare interface SpecInfo {
+  /** 规格名称 */
+  Name?: string | null;
+  /** 当前规格的cu数 */
+  Cu?: number | null;
+  /** 当前规格的cpu数 */
+  Cpu?: number | null;
+  /** 当前规格的内存数，单位G */
+  Memory?: number | null;
+}
+
+/** 标准引擎资源组，配置相关信息 */
+declare interface StandardEngineResourceGroupConfigInfo {
+  /** 引擎资源组 ID */
+  ResourceGroupId?: string;
+  /** 引擎ID */
+  DataEngineId?: string;
+  /** 资源组静态参数，需要重启资源组生效 */
+  StaticConfigPairs?: EngineResourceGroupConfigPair[];
+  /** 资源组动态参数，下一个任务生效。 */
+  DynamicConfigPairs?: EngineResourceGroupConfigPair[];
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+}
+
+/** 用户标准引擎资源组信息 */
+declare interface StandardEngineResourceGroupInfo {
+  /** 标准引擎资源组ID */
+  EngineResourceGroupId?: string;
+  /** 标准引擎资源组名称，支持1-50个英文、汉字、数字、连接线-或下划线_ */
+  EngineResourceGroupName?: string;
+  /** 创建者 */
+  Creator?: string;
+  /** 资源组 状态，-1--删除、0--启动中、2--运行、3--暂停、4--暂停中、7--切换引擎中、8--配置修改中。9--资源组重启中，10--因为变配导致资源组启动、11--因为隔离导致资源组挂起、12- 资源配置下发中、 13-接入点隔离导致资源组挂起中 */
+  ResourceGroupState?: number;
+  /** 自动启动，（任务提交自动拉起资源组）0-自动启动，1-不自动启动 */
+  AutoLaunch?: number;
+  /** 自动挂起资源组。0-自动挂起，1-不自动挂起 */
+  AutoPause?: number;
+  /** 自动挂起时间，单位分钟，取值范围在1-999（在无任务AutoPauseTime后，资源组自动挂起） */
+  AutoPauseTime?: number;
+  /** driver的cu规格：当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu），内存型cu为cpu：men=1:8，m.small（1cu内存型）、m.medium（2cu内存型）、m.large（4cu内存型）、m.xlarge（8cu内存型） */
+  DriverCuSpec?: string;
+  /** executor的cu规格：当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu），内存型cu为cpu：men=1:8，m.small（1cu内存型）、m.medium（2cu内存型）、m.large（4cu内存型）、m.xlarge（8cu内存型） */
+  ExecutorCuSpec?: string;
+  /** 任务并发数 */
+  MaxConcurrency?: number;
+  /** executor最小数量， */
+  MinExecutorNums?: number;
+  /** executor最大数量， */
+  MaxExecutorNums?: number;
+  /** 创建时间戳 */
+  CreateTime?: number;
+  /** 更新时间戳 */
+  UpdateTime?: number;
+  /** 是否待重启，作为有资源参数，静态参数修改未重启生效的标识；0-- 不需要重启、1--因为资源参数待重启、2--因静态参数重启、3--因资源和静态参数而待重启、4--因网络配置而待重启、5--因网络配置和资源配置而待重启、6--因网络配置和静态参数而待重启、7--因网络配置，资源参数和静态参数而待重启、 */
+  NeedRestart?: number;
+  /** 绑定的引擎名称 */
+  DataEngineName?: string;
+  /** 绑定的引擎ID */
+  DataEngineId?: string;
+  /** 绑定的引擎状态 */
+  DataEngineState?: number | null;
+  /** 接入点ID */
+  AccessPointId?: string | null;
+  /** 接入点名称 */
+  AccessPointName?: string | null;
+  /** 接入点状态 */
+  AccessPointState?: number | null;
+  /** 资源组类型，console/ default */
+  ResourceGroupType?: string | null;
+  /** 引擎网络ID */
+  EngineNetworkId?: string | null;
+  /** 网络配置名称 */
+  NetworkConfigNames?: string[] | null;
+  /** AI类型资源组的框架类型 */
+  FrameType?: string | null;
+  /** AI类型资源组的镜像类型，内置：bulit-in，自定义：custom */
+  ImageType?: string | null;
+  /** 镜像名称 */
+  ImageName?: string | null;
+  /** 镜像id */
+  ImageVersion?: string | null;
+  /** AI资源组的可用资源上限 */
+  Size?: number | null;
+  /** 是否是默认资源组 */
+  IsDefault?: boolean | null;
+  /** 资源组场景 */
+  ResourceGroupScene?: string | null;
+  /** python类型资源组python单机节点资源上限，该值要小于资源组的资源上限.small:1cu medium:2cu large:4cu xlarge:8cu 4xlarge:16cu 8xlarge:32cu 16xlarge:64cu，如果是高内存型资源，在类型前面加上m. */
+  PythonCuSpec?: string | null;
+  /** Spark类型资源组资源配置模式，fast：快速模式，custom：自定义模式 */
+  SparkSpecMode?: string | null;
+  /** Spark类型资源组资源上限 */
+  SparkSize?: number | null;
+  /** Spark类型资源组资源最小值 */
+  SparkMinSize?: number | null;
 }
 
 /** statement信息 */
@@ -1968,6 +2208,14 @@ declare interface TextFile {
   Regex?: string;
 }
 
+/** 配置下发参数 */
+declare interface UpdateConfContext {
+  /** 参数类型，可选：StaticConfigType，DynamicConfigType */
+  ConfigType: string;
+  /** 参数的配置数组 */
+  Params: Param[];
+}
+
 /** 用户详细信息 */
 declare interface UserDetailInfo {
   /** 用户Id */
@@ -2064,6 +2312,20 @@ declare interface UserRole {
   PermissionJson?: string;
   /** 是否设置为常驻：1非常驻（默认）、2常驻（仅能设置一个常驻） */
   IsDefault?: number;
+}
+
+/** 用户vpc网络连接信息 */
+declare interface UserVpcConnectionInfo {
+  /** 引擎网络ID */
+  EngineNetworkId?: string | null;
+  /** 用户vpcid */
+  UserVpcId?: string | null;
+  /** 用户终端节点ID */
+  UserVpcEndpointId?: string | null;
+  /** 用户终端节点名称 */
+  UserVpcEndpointName?: string | null;
+  /** 接入点信息 */
+  AccessConnectionInfos?: string[] | null;
 }
 
 /** 用户信息集合 */
@@ -2330,6 +2592,26 @@ declare interface AssignMangedTablePropertiesRequest {
 declare interface AssignMangedTablePropertiesResponse {
   /** 分配的原生表表属性 */
   Properties?: Property[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AssociateDatasourceHouseRequest {
+  /** 网络配置名称 */
+  DatasourceConnectionName: string;
+  /** 数据源类型 */
+  DatasourceConnectionType: string;
+  /** 数据源网络配置 */
+  DatasourceConnectionConfig: DatasourceConnectionConfig;
+  /** 引擎名称，只允许绑定一个引擎 */
+  DataEngineNames: string[];
+  /** 网络类型，2-跨源型，4-增强型 */
+  NetworkConnectionType: number;
+  /** 网络配置描述 */
+  NetworkConnectionDesc?: string;
+}
+
+declare interface AssociateDatasourceHouseResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2996,6 +3278,66 @@ declare interface CreateSparkSubmitTaskResponse {
   RequestId?: string;
 }
 
+declare interface CreateStandardEngineResourceGroupRequest {
+  /** 标准引擎资源组名称 */
+  EngineResourceGroupName: string;
+  /** 标准引擎名称 */
+  DataEngineName: string;
+  /** 自动启动，（任务提交自动拉起资源组）0-自动启动，1-不自动启动 */
+  AutoLaunch?: number;
+  /** 自动挂起资源组。0-自动挂起，1-不自动挂起 */
+  AutoPause?: number;
+  /** driver的cu规格：当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu），内存型cu为cpu：men=1:8，m.small（1cu内存型）、m.medium（2cu内存型）、m.large（4cu内存型）、m.xlarge（8cu内存型） */
+  DriverCuSpec?: string;
+  /** executor的cu规格：当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu），内存型cu为cpu：men=1:8，m.small（1cu内存型）、m.medium（2cu内存型）、m.large（4cu内存型）、m.xlarge（8cu内存型） */
+  ExecutorCuSpec?: string;
+  /** executor最小数量， */
+  MinExecutorNums?: number;
+  /** executor最大数量 */
+  MaxExecutorNums?: number;
+  /** 创建资源组后是否直接拉起，0-拉起，1-不拉起 */
+  IsLaunchNow?: number;
+  /** 自动挂起时间，单位分钟，取值范围在1-999（在无任务AutoPauseTime后，资源组自动挂起） */
+  AutoPauseTime?: number;
+  /** 资源组静态参数，需要重启资源组生效 */
+  StaticConfigPairs?: EngineResourceGroupConfigPair[];
+  /** 资源组动态参数，下一个任务生效。 */
+  DynamicConfigPairs?: EngineResourceGroupConfigPair[];
+  /** 任务并发数，默人是5个 */
+  MaxConcurrency?: number;
+  /** 网络配置名称 */
+  NetworkConfigNames?: string[];
+  /** 自定义镜像域名 */
+  PublicDomain?: string;
+  /** 自定义镜像实例id */
+  RegistryId?: string;
+  /** AI类型资源组的框架类型，machine-learning，python，spark-ml，不填默认为machine-learning */
+  FrameType?: string;
+  /** 镜像类型，bulit-in：内置，custom：自定义，不填默认为bulit-in */
+  ImageType?: string;
+  /** 镜像名称 */
+  ImageName?: string;
+  /** 镜像id */
+  ImageVersion?: string;
+  /** AI资源组有效，资源组可用资源上限，该值需要小于引擎资源上限 */
+  Size?: number;
+  /** 资源组场景 */
+  ResourceGroupScene?: string;
+  /** 自定义镜像所在地域 */
+  RegionName?: string;
+  /** python类型资源组python单机节点资源上限，该值要小于资源组的资源上限.small:1cu medium:2cu large:4cu xlarge:8cu 4xlarge:16cu 8xlarge:32cu 16xlarge:64cu，如果是高内存型资源，在类型前面加上m. */
+  PythonCuSpec?: string;
+  /** 仅SQL资源组资源配置模式，fast：快速模式，custom：自定义模式 */
+  SparkSpecMode?: string;
+  /** 仅SQL资源组资源上限，仅用于快速模块 */
+  SparkSize?: number;
+}
+
+declare interface CreateStandardEngineResourceGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateStoreLocationRequest {
   /** 计算结果存储cos路径，如：cosn://bucketname/ */
   StoreLocation: string;
@@ -3104,6 +3446,24 @@ declare interface CreateUserResponse {
   RequestId?: string;
 }
 
+declare interface CreateUserVpcConnectionRequest {
+  /** 用户vpcid */
+  UserVpcId: string;
+  /** 用户子网 */
+  UserSubnetId: string;
+  /** 用户终端节点名称 */
+  UserVpcEndpointName: string;
+  /** 引擎网络ID */
+  EngineNetworkId: string;
+  /** 手动指定vip，不填自动分配子网下的一个ip */
+  UserVpcEndpointVip?: string;
+}
+
+declare interface CreateUserVpcConnectionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateWorkGroupRequest {
   /** 工作组名称 */
   WorkGroupName: string;
@@ -3150,6 +3510,20 @@ declare interface DeleteDataEngineResponse {
   RequestId?: string;
 }
 
+declare interface DeleteNativeSparkSessionRequest {
+  /** 引擎id */
+  DataEngineId?: string;
+  /** 资源组id */
+  ResourceGroupId?: string;
+  /** spark session名称 */
+  EngineSessionName?: string;
+}
+
+declare interface DeleteNativeSparkSessionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteNotebookSessionRequest {
   /** Session唯一标识 */
   SessionId: string;
@@ -3182,6 +3556,16 @@ declare interface DeleteSparkAppResponse {
   RequestId?: string;
 }
 
+declare interface DeleteStandardEngineResourceGroupRequest {
+  /** 标准引擎资源组名称 */
+  EngineResourceGroupName: string;
+}
+
+declare interface DeleteStandardEngineResourceGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteTableRequest {
   /** 表基本信息 */
   TableBaseInfo: TableBaseInfo;
@@ -3206,6 +3590,18 @@ declare interface DeleteUserRequest {
 }
 
 declare interface DeleteUserResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteUserVpcConnectionRequest {
+  /** 引擎网络ID */
+  EngineNetworkId: string;
+  /** 终端节点ID */
+  UserVpcEndpointId: string;
+}
+
+declare interface DeleteUserVpcConnectionResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3514,6 +3910,20 @@ declare interface DescribeDataEngineResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDataEngineSessionParametersRequest {
+  /** 引擎id */
+  DataEngineId: string;
+  /** 引擎名称，当指定引擎名称后优先使用名称获取配置 */
+  DataEngineName?: string;
+}
+
+declare interface DescribeDataEngineSessionParametersResponse {
+  /** 集群Session配置列表 */
+  DataEngineParameters?: DataEngineImageSessionParameter[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDataEnginesRequest {
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -3628,6 +4038,42 @@ declare interface DescribeDatasourceConnectionResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEngineNetworksRequest {
+  /** 排序字段 */
+  SortBy?: string;
+  /** 升序，降序 */
+  Sorting?: string;
+  /** 过滤条件可选，engine-network-id--引擎网络ID，engine-network-state--引擎网络状态 */
+  Filters?: Filter[];
+  /** 数据条数 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+}
+
+declare interface DescribeEngineNetworksResponse {
+  /** 引擎网络信息 */
+  EngineNetworkInfos?: EngineNetworkInfo[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeEngineNodeSpecRequest {
+  /** 引擎名称 */
+  DataEngineName?: string;
+}
+
+declare interface DescribeEngineNodeSpecResponse {
+  /** driver可用的规格 */
+  DriverSpec?: SpecInfo[] | null;
+  /** executor可用的规格 */
+  ExecutorSpec?: SpecInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeEngineUsageInfoRequest {
   /** 数据引擎ID */
   DataEngineId: string;
@@ -3678,6 +4124,44 @@ declare interface DescribeLakeFsTaskResultRequest {
 declare interface DescribeLakeFsTaskResultResponse {
   /** 路径的访问实例 */
   AccessToken?: LakeFileSystemToken;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNativeSparkSessionsRequest {
+  /** 引擎ID */
+  DataEngineId?: string;
+  /** 资源组ID */
+  ResourceGroupId?: string;
+}
+
+declare interface DescribeNativeSparkSessionsResponse {
+  /** spark session列表 */
+  SparkSessionsList?: SparkSessionInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNetworkConnectionsRequest {
+  /** 网络配置类型 */
+  NetworkConnectionType?: number;
+  /** 计算引擎名称 */
+  DataEngineName?: string;
+  /** 数据源vpcid */
+  DatasourceConnectionVpcId?: string;
+  /** 返回数量，默认为10，最大值为100。 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 网络配置名称 */
+  NetworkConnectionName?: string;
+}
+
+declare interface DescribeNetworkConnectionsResponse {
+  /** 总条数 */
+  TotalCount: number;
+  /** 网络配置列表 */
+  NetworkConnectionSet: NetworkConnection[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3870,6 +4354,20 @@ declare interface DescribeScriptsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSessionImageVersionRequest {
+  /** 引擎Id */
+  DataEngineId: string;
+  /** 框架类型：machine-learning、python、spark-ml */
+  FrameworkType: string;
+}
+
+declare interface DescribeSessionImageVersionResponse {
+  /** 扩展镜像列表 */
+  EngineSessionImages?: EngineSessionImage[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSparkAppJobRequest {
   /** spark作业Id，与JobName同时存在时，JobName无效，JobId与JobName至少存在一个 */
   JobId?: string;
@@ -3982,6 +4480,50 @@ declare interface DescribeSparkSessionBatchSqlLogResponse {
   State?: number;
   /** 日志信息列表 */
   LogSet?: SparkSessionBatchLog[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStandardEngineResourceGroupConfigInfoRequest {
+  /** 排序字段 */
+  SortBy?: string;
+  /** 升序，降序 */
+  Sorting?: string;
+  /** 过滤条件可选，engine-resource-group-id--引擎资源组ID，engine-id---引擎ID */
+  Filters?: Filter[];
+  /** 数据条数，默认10 */
+  Limit?: number;
+  /** 偏移量，默认0 */
+  Offset?: number;
+}
+
+declare interface DescribeStandardEngineResourceGroupConfigInfoResponse {
+  /** 总数 */
+  Total?: number;
+  /** 标准引擎资源组，配置相关信息 */
+  StandardEngineResourceGroupConfigInfos?: StandardEngineResourceGroupConfigInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStandardEngineResourceGroupsRequest {
+  /** 排序字段 */
+  SortBy?: string;
+  /** 升序，降序 */
+  Sorting?: string;
+  /** 过滤条件可选，app-id--用户appID，engine-resource-group-id--引擎资源组ID，data-engine-name--引擎名称，engine-resource-group-name---引擎资源组名称（模糊查询），engine-resource-group-state---引擎资源组状态engine-resource-group-name-unique --引擎资源组名称（完全匹配） */
+  Filters?: Filter[];
+  /** 数据条数，默认10 */
+  Limit?: number;
+  /** 偏移量，默认0 */
+  Offset?: number;
+}
+
+declare interface DescribeStandardEngineResourceGroupsResponse {
+  /** 标准引擎资源组信息 */
+  UserEngineResourceGroupInfos?: StandardEngineResourceGroupInfo[];
+  /** 资源组总数 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4402,6 +4944,20 @@ declare interface DescribeUserTypeResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUserVpcConnectionRequest {
+  /** 引擎网络ID */
+  EngineNetworkId: string;
+  /** 引擎ID集合 */
+  DataEngineIds?: string[];
+}
+
+declare interface DescribeUserVpcConnectionResponse {
+  /** 用户vpc连接信息 */
+  UserVpcConnectionInfos?: UserVpcConnectionInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUsersRequest {
   /** 指定查询的子用户uin，用户需要通过CreateUser接口创建。 */
   UserId?: string;
@@ -4638,6 +5194,18 @@ declare interface GrantDLCCatalogAccessResponse {
   RequestId?: string;
 }
 
+declare interface LaunchStandardEngineResourceGroupsRequest {
+  /** 标准引擎资源组名称 */
+  EngineResourceGroupNames: string[];
+}
+
+declare interface LaunchStandardEngineResourceGroupsResponse {
+  /** 批量操作资源组时，操作失败的资源组相关信息 */
+  OperateEngineResourceGroupFailMessages?: OperateEngineResourceGroupFailMessage[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListTaskJobLogDetailRequest {
   /** 列表返回的Id */
   TaskId: string;
@@ -4866,6 +5434,18 @@ declare interface ModifyWorkGroupResponse {
   RequestId?: string;
 }
 
+declare interface PauseStandardEngineResourceGroupsRequest {
+  /** 标准引擎资源组名称 */
+  EngineResourceGroupNames: string[];
+}
+
+declare interface PauseStandardEngineResourceGroupsResponse {
+  /** 批量操作资源组时，操作失败的资源组相关信息 */
+  OperateEngineResourceGroupFailMessages?: OperateEngineResourceGroupFailMessage[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface QueryInternalTableWarehouseRequest {
   /** 库名 */
   DatabaseName: string;
@@ -5048,6 +5628,16 @@ declare interface UnbindWorkGroupsFromUserResponse {
   RequestId?: string;
 }
 
+declare interface UnboundDatasourceHouseRequest {
+  /** 网络配置名称 */
+  NetworkConnectionName?: string;
+}
+
+declare interface UnboundDatasourceHouseResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UnlockMetaDataRequest {
   /** 锁ID */
   LockId: number;
@@ -5114,6 +5704,32 @@ declare interface UpdateDataEngineResponse {
   RequestId?: string;
 }
 
+declare interface UpdateEngineResourceGroupNetworkConfigInfoRequest {
+  /** 引擎资源组ID */
+  EngineResourceGroupId: string;
+  /** 是否立即重启资源组生效，0--立即生效，1--只保持不重启生效 */
+  IsEffectiveNow: number;
+  /** 资源组绑定的网络配置名称集合 */
+  NetworkConfigNames?: string[];
+}
+
+declare interface UpdateEngineResourceGroupNetworkConfigInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateNetworkConnectionRequest {
+  /** 网络配置描述 */
+  NetworkConnectionDesc?: string;
+  /** 网络配置名称 */
+  NetworkConnectionName?: string;
+}
+
+declare interface UpdateNetworkConnectionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateRowFilterRequest {
   /** 行过滤策略的id，此值可以通过DescribeUserInfo或者DescribeWorkGroupInfo接口获取 */
   PolicyId: number;
@@ -5122,6 +5738,80 @@ declare interface UpdateRowFilterRequest {
 }
 
 declare interface UpdateRowFilterResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateStandardEngineResourceGroupBaseInfoRequest {
+  /** 引擎资源组名称 */
+  EngineResourceGroupName: string;
+  /** 自动启动，（任务提交自动拉起资源组）0-自动启动，1-不自动启动 */
+  AutoLaunch: number;
+  /** 自动挂起资源组。0-自动挂起，1-不自动挂起 */
+  AutoPause: number;
+  /** 自动挂起时间，单位分钟，取值范围在1-999（在无任务AutoPauseTime后，资源组自动挂起） */
+  AutoPauseTime?: number;
+  /** 任务并发数 */
+  MaxConcurrency?: number;
+}
+
+declare interface UpdateStandardEngineResourceGroupBaseInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateStandardEngineResourceGroupConfigInfoRequest {
+  /** 引擎资源组名称 */
+  EngineResourceGroupName: string;
+  /** 需要更新的配置 */
+  UpdateConfContext: UpdateConfContext[];
+  /** 是否立即重启资源组生效，0--立即生效，1--只保持不重启生效 */
+  IsEffectiveNow: number;
+}
+
+declare interface UpdateStandardEngineResourceGroupConfigInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateStandardEngineResourceGroupResourceInfoRequest {
+  /** 引擎资源组名称 */
+  EngineResourceGroupName: string;
+  /** driver的cu规格：当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu），内存型cu为cpu：men=1:8，m.small（1cu内存型）、m.medium（2cu内存型）、m.large（4cu内存型）、m.xlarge（8cu内存型） */
+  DriverCuSpec?: string;
+  /** executor的cu规格：当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu），内存型cu为cpu：men=1:8，m.small（1cu内存型）、m.medium（2cu内存型）、m.large（4cu内存型）、m.xlarge（8cu内存型） */
+  ExecutorCuSpec?: string;
+  /** executor最小数量， */
+  MinExecutorNums?: number;
+  /** executor最大数量 */
+  MaxExecutorNums?: number;
+  /** 是否立即重启资源组生效，0--立即生效，1--只保持不重启生效 */
+  IsEffectiveNow?: number;
+  /** AI资源组资源上限 */
+  Size?: number;
+  /** 镜像类型，内置镜像：built-in，自定义镜像：custom */
+  ImageType?: string;
+  /** 镜像名称 */
+  ImageName?: string;
+  /** 镜像版本，镜像id */
+  ImageVersion?: string;
+  /** 框架类型 */
+  FrameType?: string;
+  /** 自定义镜像域名 */
+  PublicDomain?: string;
+  /** 自定义镜像实例id */
+  RegistryId?: string;
+  /** 自定义镜像所属地域 */
+  RegionName?: string;
+  /** python类型资源组python单机节点资源上限，该值要小于资源组的资源上限.small:1cu medium:2cu large:4cu xlarge:8cu 4xlarge:16cu 8xlarge:32cu 16xlarge:64cu，如果是高内存型资源，在类型前面加上m. */
+  PythonCuSpec?: string;
+  /** 仅SQL资源组资源配置模式，fast：快速模式，custom：自定义模式 */
+  SparkSpecMode?: string;
+  /** 仅SQL资源组资源上限，仅用于快速模式 */
+  SparkSize?: number;
+}
+
+declare interface UpdateStandardEngineResourceGroupResourceInfoResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5167,6 +5857,8 @@ declare interface Dlc {
   AlterDMSTable(data: AlterDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<AlterDMSTableResponse>;
   /** 分配原生表表属性 {@link AssignMangedTablePropertiesRequest} {@link AssignMangedTablePropertiesResponse} */
   AssignMangedTableProperties(data: AssignMangedTablePropertiesRequest, config?: AxiosRequestConfig): AxiosPromise<AssignMangedTablePropertiesResponse>;
+  /** 绑定数据源与队列 {@link AssociateDatasourceHouseRequest} {@link AssociateDatasourceHouseResponse} */
+  AssociateDatasourceHouse(data: AssociateDatasourceHouseRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateDatasourceHouseResponse>;
   /** 绑定鉴权策略到用户 {@link AttachUserPolicyRequest} {@link AttachUserPolicyResponse} */
   AttachUserPolicy(data: AttachUserPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachUserPolicyResponse>;
   /** 绑定鉴权策略到工作组 {@link AttachWorkGroupPolicyRequest} {@link AttachWorkGroupPolicyResponse} */
@@ -5223,8 +5915,10 @@ declare interface Dlc {
   CreateSparkAppTask(data: CreateSparkAppTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSparkAppTaskResponse>;
   /** 创建并执行Spark SQL批任务 {@link CreateSparkSessionBatchSQLRequest} {@link CreateSparkSessionBatchSQLResponse} */
   CreateSparkSessionBatchSQL(data: CreateSparkSessionBatchSQLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSparkSessionBatchSQLResponse>;
-  /** 提交SparkSbumit批流任务 {@link CreateSparkSubmitTaskRequest} {@link CreateSparkSubmitTaskResponse} */
+  /** 提交Spark批流任务 {@link CreateSparkSubmitTaskRequest} {@link CreateSparkSubmitTaskResponse} */
   CreateSparkSubmitTask(data: CreateSparkSubmitTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSparkSubmitTaskResponse>;
+  /** 创建标准引擎资源组 {@link CreateStandardEngineResourceGroupRequest} {@link CreateStandardEngineResourceGroupResponse} */
+  CreateStandardEngineResourceGroup(data: CreateStandardEngineResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStandardEngineResourceGroupResponse>;
   /** 修改结果存储位置 {@link CreateStoreLocationRequest} {@link CreateStoreLocationResponse} */
   CreateStoreLocation(data: CreateStoreLocationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStoreLocationResponse>;
   /** 生成建表SQL {@link CreateTableRequest} {@link CreateTableResponse} */
@@ -5237,24 +5931,32 @@ declare interface Dlc {
   CreateTasksInOrder(data: CreateTasksInOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTasksInOrderResponse>;
   /** 创建用户 {@link CreateUserRequest} {@link CreateUserResponse} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
+  /** 创建用户vpc连接 {@link CreateUserVpcConnectionRequest} {@link CreateUserVpcConnectionResponse} */
+  CreateUserVpcConnection(data: CreateUserVpcConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserVpcConnectionResponse>;
   /** 创建工作组 {@link CreateWorkGroupRequest} {@link CreateWorkGroupResponse} */
   CreateWorkGroup(data: CreateWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkGroupResponse>;
   /** 删除元数据加速桶和产品绑定关系 {@link DeleteCHDFSBindingProductRequest} {@link DeleteCHDFSBindingProductResponse} */
   DeleteCHDFSBindingProduct(data: DeleteCHDFSBindingProductRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCHDFSBindingProductResponse>;
   /** 删除数据引擎 {@link DeleteDataEngineRequest} {@link DeleteDataEngineResponse} */
   DeleteDataEngine(data: DeleteDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataEngineResponse>;
+  /** 销毁EG SparkSession {@link DeleteNativeSparkSessionRequest} {@link DeleteNativeSparkSessionResponse} */
+  DeleteNativeSparkSession(data?: DeleteNativeSparkSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNativeSparkSessionResponse>;
   /** 删除交互式session（notebook） {@link DeleteNotebookSessionRequest} {@link DeleteNotebookSessionResponse} */
   DeleteNotebookSession(data: DeleteNotebookSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNotebookSessionResponse>;
   /** 删除sql脚本 {@link DeleteScriptRequest} {@link DeleteScriptResponse} */
   DeleteScript(data: DeleteScriptRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScriptResponse>;
   /** 删除spark作业 {@link DeleteSparkAppRequest} {@link DeleteSparkAppResponse} */
   DeleteSparkApp(data: DeleteSparkAppRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSparkAppResponse>;
+  /** 删除标准引擎资源组 {@link DeleteStandardEngineResourceGroupRequest} {@link DeleteStandardEngineResourceGroupResponse} */
+  DeleteStandardEngineResourceGroup(data: DeleteStandardEngineResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStandardEngineResourceGroupResponse>;
   /** 删除表 {@link DeleteTableRequest} {@link DeleteTableResponse} */
   DeleteTable(data: DeleteTableRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTableResponse>;
   /** 移除第三方平台访问用户 {@link DeleteThirdPartyAccessUserRequest} {@link DeleteThirdPartyAccessUserResponse} */
   DeleteThirdPartyAccessUser(data?: DeleteThirdPartyAccessUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteThirdPartyAccessUserResponse>;
   /** 删除用户 {@link DeleteUserRequest} {@link DeleteUserResponse} */
   DeleteUser(data: DeleteUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserResponse>;
+  /** 删除用户vpc连接 {@link DeleteUserVpcConnectionRequest} {@link DeleteUserVpcConnectionResponse} */
+  DeleteUserVpcConnection(data: DeleteUserVpcConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserVpcConnectionResponse>;
   /** 从工作组中删除用户 {@link DeleteUsersFromWorkGroupRequest} {@link DeleteUsersFromWorkGroupResponse} */
   DeleteUsersFromWorkGroup(data: DeleteUsersFromWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsersFromWorkGroupResponse>;
   /** 删除工作组 {@link DeleteWorkGroupRequest} {@link DeleteWorkGroupResponse} */
@@ -5281,6 +5983,8 @@ declare interface Dlc {
   DescribeDataEngineImageVersions(data: DescribeDataEngineImageVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataEngineImageVersionsResponse>;
   /** 获取PYSPARK镜像列表 {@link DescribeDataEnginePythonSparkImagesRequest} {@link DescribeDataEnginePythonSparkImagesResponse} */
   DescribeDataEnginePythonSparkImages(data: DescribeDataEnginePythonSparkImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataEnginePythonSparkImagesResponse>;
+  /** 获取指定小版本下的Session配置 {@link DescribeDataEngineSessionParametersRequest} {@link DescribeDataEngineSessionParametersResponse} */
+  DescribeDataEngineSessionParameters(data: DescribeDataEngineSessionParametersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataEngineSessionParametersResponse>;
   /** 查询DataEngines列表 {@link DescribeDataEnginesRequest} {@link DescribeDataEnginesResponse} */
   DescribeDataEngines(data?: DescribeDataEnginesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataEnginesResponse>;
   /** 查看引擎的规格明细 {@link DescribeDataEnginesScaleDetailRequest} {@link DescribeDataEnginesScaleDetailResponse} */
@@ -5289,6 +5993,10 @@ declare interface Dlc {
   DescribeDatabases(data?: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
   /** 查询数据源信息 {@link DescribeDatasourceConnectionRequest} {@link DescribeDatasourceConnectionResponse} */
   DescribeDatasourceConnection(data?: DescribeDatasourceConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasourceConnectionResponse>;
+  /** 查询引擎网络信息 {@link DescribeEngineNetworksRequest} {@link DescribeEngineNetworksResponse} */
+  DescribeEngineNetworks(data?: DescribeEngineNetworksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEngineNetworksResponse>;
+  /** 获取引擎节点规格 {@link DescribeEngineNodeSpecRequest} {@link DescribeEngineNodeSpecResponse} */
+  DescribeEngineNodeSpec(data?: DescribeEngineNodeSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEngineNodeSpecResponse>;
   /** 查询数据引擎资源使用情况 {@link DescribeEngineUsageInfoRequest} {@link DescribeEngineUsageInfoResponse} */
   DescribeEngineUsageInfo(data: DescribeEngineUsageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEngineUsageInfoResponse>;
   /** 查询被禁用的表属性列表（新） {@link DescribeForbiddenTableProRequest} {@link DescribeForbiddenTableProResponse} */
@@ -5299,6 +6007,10 @@ declare interface Dlc {
   DescribeLakeFsInfo(data?: DescribeLakeFsInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLakeFsInfoResponse>;
   /** 获取LakeFs上task执行结果访问信息 {@link DescribeLakeFsTaskResultRequest} {@link DescribeLakeFsTaskResultResponse} */
   DescribeLakeFsTaskResult(data: DescribeLakeFsTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLakeFsTaskResultResponse>;
+  /** 查询标准引擎spark session列表 {@link DescribeNativeSparkSessionsRequest} {@link DescribeNativeSparkSessionsResponse} */
+  DescribeNativeSparkSessions(data?: DescribeNativeSparkSessionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNativeSparkSessionsResponse>;
+  /** 查询网络配置列表 {@link DescribeNetworkConnectionsRequest} {@link DescribeNetworkConnectionsResponse} */
+  DescribeNetworkConnections(data?: DescribeNetworkConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkConnectionsResponse>;
   /** 查询交互式 session详情信息 {@link DescribeNotebookSessionRequest} {@link DescribeNotebookSessionResponse} */
   DescribeNotebookSession(data: DescribeNotebookSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookSessionResponse>;
   /** 查询交互式 session日志 {@link DescribeNotebookSessionLogRequest} {@link DescribeNotebookSessionLogResponse} */
@@ -5317,6 +6029,8 @@ declare interface Dlc {
   DescribeResultDownload(data: DescribeResultDownloadRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResultDownloadResponse>;
   /** 查询SQL脚本列表 {@link DescribeScriptsRequest} {@link DescribeScriptsResponse} */
   DescribeScripts(data?: DescribeScriptsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScriptsResponse>;
+  /** 获取内置镜像信息 {@link DescribeSessionImageVersionRequest} {@link DescribeSessionImageVersionResponse} */
+  DescribeSessionImageVersion(data: DescribeSessionImageVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSessionImageVersionResponse>;
   /** 查询spark作业信息 {@link DescribeSparkAppJobRequest} {@link DescribeSparkAppJobResponse} */
   DescribeSparkAppJob(data?: DescribeSparkAppJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkAppJobResponse>;
   /** 查询spark作业列表 {@link DescribeSparkAppJobsRequest} {@link DescribeSparkAppJobsResponse} */
@@ -5329,6 +6043,10 @@ declare interface Dlc {
   DescribeSparkSessionBatchSQLCost(data?: DescribeSparkSessionBatchSQLCostRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkSessionBatchSQLCostResponse>;
   /** 查询Spark SQL批任务日志 {@link DescribeSparkSessionBatchSqlLogRequest} {@link DescribeSparkSessionBatchSqlLogResponse} */
   DescribeSparkSessionBatchSqlLog(data: DescribeSparkSessionBatchSqlLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSparkSessionBatchSqlLogResponse>;
+  /** 查询标准引擎资源组的配置信息 {@link DescribeStandardEngineResourceGroupConfigInfoRequest} {@link DescribeStandardEngineResourceGroupConfigInfoResponse} */
+  DescribeStandardEngineResourceGroupConfigInfo(data?: DescribeStandardEngineResourceGroupConfigInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStandardEngineResourceGroupConfigInfoResponse>;
+  /** 查询标准引擎资源组信息 {@link DescribeStandardEngineResourceGroupsRequest} {@link DescribeStandardEngineResourceGroupsResponse} */
+  DescribeStandardEngineResourceGroups(data?: DescribeStandardEngineResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStandardEngineResourceGroupsResponse>;
   /** 查询结果存储位置 {@link DescribeStoreLocationRequest} {@link DescribeStoreLocationResponse} */
   DescribeStoreLocation(data?: DescribeStoreLocationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStoreLocationResponse>;
   /** 查询子用户访问策略 {@link DescribeSubUserAccessPolicyRequest} {@link DescribeSubUserAccessPolicyResponse} */
@@ -5369,6 +6087,8 @@ declare interface Dlc {
   DescribeUserRoles(data: DescribeUserRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserRolesResponse>;
   /** 获取用户类型 {@link DescribeUserTypeRequest} {@link DescribeUserTypeResponse} */
   DescribeUserType(data?: DescribeUserTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserTypeResponse>;
+  /** 查询用户vpc连接信息 {@link DescribeUserVpcConnectionRequest} {@link DescribeUserVpcConnectionResponse} */
+  DescribeUserVpcConnection(data: DescribeUserVpcConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserVpcConnectionResponse>;
   /** 获取用户列表信息 {@link DescribeUsersRequest} {@link DescribeUsersResponse} */
   DescribeUsers(data?: DescribeUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsersResponse>;
   /** 查询视图列表 {@link DescribeViewsRequest} {@link DescribeViewsResponse} */
@@ -5393,6 +6113,8 @@ declare interface Dlc {
   GetOptimizerPolicy(data: GetOptimizerPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<GetOptimizerPolicyResponse>;
   /** 授权DLCCatalog访问权限 {@link GrantDLCCatalogAccessRequest} {@link GrantDLCCatalogAccessResponse} */
   GrantDLCCatalogAccess(data: GrantDLCCatalogAccessRequest, config?: AxiosRequestConfig): AxiosPromise<GrantDLCCatalogAccessResponse>;
+  /** 批量启动标准引擎资源组 {@link LaunchStandardEngineResourceGroupsRequest} {@link LaunchStandardEngineResourceGroupsResponse} */
+  LaunchStandardEngineResourceGroups(data: LaunchStandardEngineResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<LaunchStandardEngineResourceGroupsResponse>;
   /** 查询日志详情 {@link ListTaskJobLogDetailRequest} {@link ListTaskJobLogDetailResponse} */
   ListTaskJobLogDetail(data: ListTaskJobLogDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListTaskJobLogDetailResponse>;
   /** 日志名称列表 {@link ListTaskJobLogNameRequest} {@link ListTaskJobLogNameResponse} */
@@ -5415,6 +6137,8 @@ declare interface Dlc {
   ModifyUserType(data: ModifyUserTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserTypeResponse>;
   /** 修改工作组信息 {@link ModifyWorkGroupRequest} {@link ModifyWorkGroupResponse} */
   ModifyWorkGroup(data: ModifyWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkGroupResponse>;
+  /** 批量暂停标准引擎资源组 {@link PauseStandardEngineResourceGroupsRequest} {@link PauseStandardEngineResourceGroupsResponse} */
+  PauseStandardEngineResourceGroups(data: PauseStandardEngineResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<PauseStandardEngineResourceGroupsResponse>;
   /** 获取原生表warehouse路径 {@link QueryInternalTableWarehouseRequest} {@link QueryInternalTableWarehouseResponse} */
   QueryInternalTableWarehouse(data: QueryInternalTableWarehouseRequest, config?: AxiosRequestConfig): AxiosPromise<QueryInternalTableWarehouseResponse>;
   /** 获取任务结果查询 {@link QueryResultRequest} {@link QueryResultResponse} */
@@ -5441,14 +6165,26 @@ declare interface Dlc {
   SwitchDataEngineImage(data: SwitchDataEngineImageRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDataEngineImageResponse>;
   /** 解绑用户上的用户组 {@link UnbindWorkGroupsFromUserRequest} {@link UnbindWorkGroupsFromUserResponse} */
   UnbindWorkGroupsFromUser(data: UnbindWorkGroupsFromUserRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindWorkGroupsFromUserResponse>;
+  /** 解绑数据源与队列 {@link UnboundDatasourceHouseRequest} {@link UnboundDatasourceHouseResponse} */
+  UnboundDatasourceHouse(data?: UnboundDatasourceHouseRequest, config?: AxiosRequestConfig): AxiosPromise<UnboundDatasourceHouseResponse>;
   /** 元数据解锁 {@link UnlockMetaDataRequest} {@link UnlockMetaDataResponse} */
   UnlockMetaData(data: UnlockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockMetaDataResponse>;
   /** 更新数据引擎配置 {@link UpdateDataEngineRequest} {@link UpdateDataEngineResponse} */
   UpdateDataEngine(data: UpdateDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDataEngineResponse>;
   /** 修改引擎配置 {@link UpdateDataEngineConfigRequest} {@link UpdateDataEngineConfigResponse} */
   UpdateDataEngineConfig(data: UpdateDataEngineConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDataEngineConfigResponse>;
+  /** 更新标准引擎资源组网络配置信息 {@link UpdateEngineResourceGroupNetworkConfigInfoRequest} {@link UpdateEngineResourceGroupNetworkConfigInfoResponse} */
+  UpdateEngineResourceGroupNetworkConfigInfo(data: UpdateEngineResourceGroupNetworkConfigInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEngineResourceGroupNetworkConfigInfoResponse>;
+  /** 更新网络配置 {@link UpdateNetworkConnectionRequest} {@link UpdateNetworkConnectionResponse} */
+  UpdateNetworkConnection(data?: UpdateNetworkConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateNetworkConnectionResponse>;
   /** 更新行过滤规则 {@link UpdateRowFilterRequest} {@link UpdateRowFilterResponse} */
   UpdateRowFilter(data: UpdateRowFilterRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRowFilterResponse>;
+  /** 更新标准引擎资源组基础信息 {@link UpdateStandardEngineResourceGroupBaseInfoRequest} {@link UpdateStandardEngineResourceGroupBaseInfoResponse} */
+  UpdateStandardEngineResourceGroupBaseInfo(data: UpdateStandardEngineResourceGroupBaseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateStandardEngineResourceGroupBaseInfoResponse>;
+  /** 更新标准引擎资源组参数配置信息 {@link UpdateStandardEngineResourceGroupConfigInfoRequest} {@link UpdateStandardEngineResourceGroupConfigInfoResponse} */
+  UpdateStandardEngineResourceGroupConfigInfo(data: UpdateStandardEngineResourceGroupConfigInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateStandardEngineResourceGroupConfigInfoResponse>;
+  /** 更新标准引擎资源组资源信息 {@link UpdateStandardEngineResourceGroupResourceInfoRequest} {@link UpdateStandardEngineResourceGroupResourceInfoResponse} */
+  UpdateStandardEngineResourceGroupResourceInfo(data: UpdateStandardEngineResourceGroupResourceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateStandardEngineResourceGroupResourceInfoResponse>;
   /** 修改用户引擎自定义配置 {@link UpdateUserDataEngineConfigRequest} {@link UpdateUserDataEngineConfigResponse} */
   UpdateUserDataEngineConfig(data: UpdateUserDataEngineConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUserDataEngineConfigResponse>;
   /** 升级引擎镜像 {@link UpgradeDataEngineImageRequest} {@link UpgradeDataEngineImageResponse} */

@@ -102,6 +102,12 @@ declare interface OutputMessage {
   ReasoningContent?: string;
 }
 
+/** 消耗页数 */
+declare interface PageUsage {
+  /** 消耗总页数 */
+  TotalPages?: number;
+}
+
 /** 文档信息 */
 declare interface ParseDocument {
   /** 文件类型。支持的文件类型：PDF、DOC、DOCX、PPT、PPTX、MD、TXT、XLS、XLSX、CSV、PNG、JPG、JPEG、BMP、GIF、WEBP、HEIC、EPS、ICNS、IM、PCX、PPM、TIFF、XBM、HEIF、JP2支持的文件大小：- PDF、DOC、DOCX、PPT、PPTX 支持100M- MD、TXT、XLS、XLSX、CSV 支持10M- 其他支持20M */
@@ -254,6 +260,8 @@ declare interface GetDocumentParseResultResponse {
   DocumentParseResultUrl?: string;
   /** 失败的页码。 */
   FailedPages?: number[] | null;
+  /** 消耗页数 */
+  Usage?: PageUsage;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -302,6 +310,8 @@ declare interface ParseDocumentResponse {
   DocumentParseResultUrl?: string;
   /** 失败页码。 */
   FailedPages?: number[];
+  /** 消耗页数 */
+  Usage?: PageUsage;
   /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
   RequestId?: string;
 }

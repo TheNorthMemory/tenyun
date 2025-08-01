@@ -180,28 +180,6 @@ declare interface AdvancedAuthenticationTypeF {
   BackupSecretKey?: string | null;
 }
 
-/** scdn 的自定义 cc 规则 */
-declare interface AdvancedCCRules {
-  /** 规则名称 */
-  RuleName?: string;
-  /** 探测时长 */
-  DetectionTime?: number | null;
-  /** 限频阈值 */
-  FrequencyLimit?: number | null;
-  /** IP 惩罚配置开关，取值有：on：开启off：关闭 */
-  PunishmentSwitch?: string | null;
-  /** IP 惩罚时长 */
-  PunishmentTime?: number | null;
-  /** 执行动作，intercept|redirect */
-  Action?: string | null;
-  /** 动作为 redirect 时，重定向的url */
-  RedirectUrl?: string | null;
-  /** 七层限频具体配置 */
-  Configure?: ScdnSevenLayerRules[] | null;
-  /** 自定义cc规则配置开关，取值有：on：开启off：关闭 */
-  Switch?: string | null;
-}
-
 /** 缓存过期配置高级版，注意：此字段已经弃用，请使用RuleCache */
 declare interface AdvancedCache {
   /** 缓存过期规则 */
@@ -210,34 +188,6 @@ declare interface AdvancedCache {
   IgnoreCacheControl: string | null;
   /** 当源站返回Set-Cookie头部时，节点是否缓存该头部及bodyon：开启，不缓存该头部及bodyoff：关闭，遵循用户自定义的节点缓存规则默认为关闭状态 */
   IgnoreSetCookie: string | null;
-}
-
-/** SCDN精准访问控制配置 */
-declare interface AdvancedScdnAclGroup {
-  /** 规则名称 */
-  RuleName: string;
-  /** 具体配置 */
-  Configure: AdvancedScdnAclRule[];
-  /** 执行动作，intercept|redirect */
-  Result: string;
-  /** 规则是否生效，active|inactive */
-  Status?: string;
-  /** 错误页面配置 */
-  ErrorPage?: ScdnErrorPage;
-}
-
-/** 精准访问控制匹配规则 */
-declare interface AdvancedScdnAclRule {
-  /** 匹配关键字，可取值有：protocol：HTTP协议httpVersion：HTTP版本method：请求方法ip：请求源IPipAsn：请求源IP自治域号ipCountry：请求源IP所在国家ipArea：请求源IP所在大区xForwardFor：请求头X-Forwarded-Fordirectory：路径index：首页path：文件全路径file：文件扩展名param：请求参数referer：请求头Referercookie：请求头CookieuserAgent：请求头User-Agenthead：自定义请求头 */
-  MatchKey: string;
-  /** 逻辑操作符，取值如下：不包含：exclude包含：include不等于：notequal等于：equal前缀匹配：matching内容为空或不存在：null */
-  LogicOperator: string;
-  /** 匹配值。当MatchKey为protocol时取值：HTTP、HTTPS当MatchKey为httpVersion时取值：HTTP/1.0、HTTP/1.1、HTTP/1.2、HTTP/2、HTTP/3当MatchKey为method时取值：HEAD、GET、POST、PUT、OPTIONS、TRACE、DELETE、PATCH、CONNECT当MatchKey为ipCountry时，取值为：其他：OTHER委内瑞拉：VE乌拉圭：UY苏里南：SR巴拉圭：PY秘鲁：PE圭亚那：GY厄瓜多尔：EC哥伦比亚：CO智利：CL巴西：BR玻利维亚：BO阿根廷：AR新西兰：NZ萨摩亚：WS瓦努阿图：VU图瓦卢：TV汤加：TO托克劳：TK帕劳：PW纽埃：NU瑙鲁：NR基里巴斯：KI关岛：GU密克罗尼西亚：FM澳大利亚：AU美国：US波多黎各：PR多米尼加共和国：DO哥斯达黎加：CR东萨摩亚：AS安提瓜和巴布达：AG巴拿马：PA尼加拉瓜：NI墨西哥：MX牙买加：JM海地：HT洪都拉斯：HN危地马拉：GT瓜德罗普岛：GP格陵兰：GL格林纳达：GD古巴：CU加拿大：CA伯利兹：BZ巴哈马：BS百慕大：BM巴巴多斯：BB阿鲁巴：AW安圭拉：AI梵蒂冈：VA斯洛伐克：SK英国：GB捷克共和国：CZ乌克兰：UA土耳其：TR斯洛文尼亚：SI瑞典：SE塞尔维亚：RS罗马尼亚：RO葡萄牙：PT波兰：PL挪威：NO荷兰：NL马耳他：MT马其顿：MK黑山：ME摩尔多瓦：MD摩纳哥：MC拉脱维亚：LV卢森堡：LU立陶宛：LT列支敦士登：LI哈萨克斯坦：KZ意大利：IT冰岛：IS爱尔兰：IE匈牙利：HU克罗地亚：HR希腊：GR直布罗陀：GI根西岛：GG格鲁吉亚：GE法国：FR芬兰：FI西班牙：ES爱沙尼亚：EE丹麦：DK德国：DE塞浦路斯：CY瑞士：CH白俄罗斯：BY保加利亚：BG比利时：BE阿塞拜疆：AZ奥地利：AT亚美尼亚：AM阿尔巴尼亚：AL安道尔：AD东帝汶：TL叙利亚：SY沙特阿拉伯：SA巴勒斯坦：PS斯里兰卡：LK斯里兰卡：LK朝鲜：KP吉尔吉斯斯坦：KG中国香港：HK文莱：BN孟加拉：BD阿联酋：AE也门：YE越南：VN乌兹别克斯坦：UZ中国台湾：TW土库曼斯坦：TM塔吉克斯坦：TJ泰国：TH新加坡：SG卡塔尔：QA巴基斯坦：PK菲律宾：PH阿曼：OM尼泊尔：NP马来西亚：MY马尔代夫：MV中国澳门：MO蒙古：MN缅甸：MM黎巴嫩：LB科威特：KW韩国：KR柬埔寨：KH日本：JP约旦：JO伊朗：IR伊拉克：IQ印度：IN以色列：IL印度尼西亚：ID中国：CN不丹：BT巴林：BH阿富汗：AF利比亚：LY刚果金：CG留尼汪岛：RE斯威士兰：SZ津巴布韦：ZW赞比亚：ZM马约特：YT乌干达：UG坦桑尼亚：TZ突尼斯：TN多哥：TG乍得：TD索马里：SO塞内加尔：SN苏丹：SD塞舌尔：SC卢旺达：RW尼日利亚：NG尼日尔：NE纳米比亚：NA莫桑比克：MZ马拉维：MW毛里求斯：MU毛里塔尼亚：MR马里：ML马达加斯加：MG摩洛哥：MA莱索托：LS利比里亚：LR科摩罗：KM肯尼亚：KE几内亚：GN冈比亚：GM加纳：GH加蓬：GA埃塞俄比亚：ET厄立特里亚：ER埃及：EG阿尔及利亚：DZ吉布提：DJ喀麦隆：CM刚果：CG博茨瓦纳：BW贝宁：BJ布隆迪：BI安哥拉：AO当MatchKey为ipArea时，取值为：其他：OTHER亚洲：AS欧洲：EU南极洲：AN非洲：AF大洋洲：OC北美洲：NA南美洲：SA当MatchKey为index时取值为：/;/index.html */
-  MatchValue: string[];
-  /** 是否区分大小写 true：区分 false：不区分 */
-  CaseSensitive?: boolean;
-  /** 当MatchKey为param时必填：表示请求参数Key 当MatchKey为cookie时必填：表示请求头Cookie中参数的 */
-  MatchKeyParam?: string;
 }
 
 /** 时间戳防盗链配置 */
@@ -364,104 +314,6 @@ declare interface BandwidthAlert {
   Metric?: string | null;
   /** 累计用量配置 */
   StatisticItems?: StatisticItem[] | null;
-}
-
-/** Bot cookie策略 */
-declare interface BotCookie {
-  /** Bot cookie策略配置开关，取值有：on：开启off：关闭 */
-  Switch: string;
-  /** 规则类型，当前只有all */
-  RuleType: string;
-  /** 规则值，['*'] */
-  RuleValue: string[];
-  /** 执行动作，monitor|intercept|redirect|captcha */
-  Action: string;
-  /** 重定向时设置的重定向页面 */
-  RedirectUrl?: string | null;
-  /** 更新时间 */
-  UpdateTime?: string | null;
-}
-
-/** Bot js策略 */
-declare interface BotJavaScript {
-  /** Bot js策略配置开关，取值有：on：开启off：关闭 */
-  Switch: string;
-  /** 规则类型，当前只有file */
-  RuleType: string;
-  /** 规则值，['html', 'htm'] */
-  RuleValue: string[];
-  /** 执行动作，monitor|intercept|redirect|captcha */
-  Action: string;
-  /** 重定向时设置的重定向页面 */
-  RedirectUrl?: string | null;
-  /** 更新时间 */
-  UpdateTime?: string | null;
-}
-
-/** BOT记录详细内容 */
-declare interface BotRecord {
-  /** 动作，取值为以为3个类型中的一个："intercept","permit","monitor"，分别表示： 拦截， 放行，监控 */
-  Action?: string;
-  /** 会话总次数 */
-  Nums?: number;
-  /** BotType=UB时，表示预测标签，取值如下： "crawler_unregular", "crawler_regular", "request_repeat", "credential_miss_user", "credential_without_user", "credential_only_action", "credential_user_password", "credential_cracking", "credential_stuffing", "brush_sms", "brush_captcha", "reg_malicious"BotType=TCB时，表示Bot分类，取值如下： "Uncategorised", "Search engine bot", "Site monitor", "Screenshot creator", "Link checker", "Web scraper", "Vulnerability scanner", "Virus scanner", "Speed tester", "Feed Fetcher", "Tool", "Marketing"BotType=UCB时，为二期接口，暂时未定义内容 */
-  RuleName?: string;
-  /** 会话持续时间 */
-  SessionDuration?: number;
-  /** 访问源IP */
-  SrcIp?: string;
-  /** 异常特征 */
-  BotFeature?: string[];
-  /** 最新检测时间 */
-  Time?: string;
-  /** BOT得分 */
-  Score?: number;
-  /** 平均速率 */
-  AvgSpeed?: number;
-  /** BotType=TCB，表示TCB名称 */
-  TcbDetail?: string | null;
-  /** BOT记录唯一ID，用于查询访问详情 */
-  Id?: string;
-  /** 域名 */
-  Domain?: string | null;
-}
-
-/** Bot记录的排序选项 */
-declare interface BotSortBy {
-  /** 排序参数名称， 取值为：timestamp， nums， session_duration，score.total，stat.avg_speed分别表示按照：最新检测时间，会话总次数，会话持续时间，BOT得分，平均速率排序 */
-  Key: string;
-  /** asc/desc */
-  Sequence: string;
-}
-
-/** session/ip维度的bot统计复杂对象 */
-declare interface BotStatisticsCount {
-  /** BOT次数 */
-  Count: number;
-  /** Top指标值,如果是ip维度就是ip如果是session维度就是域名 */
-  Value: string;
-  /** ip所在国家 */
-  Country: string;
-  /** ip所在省份 */
-  Province: string;
-  /** ip归属的idc */
-  Isp: string;
-}
-
-/** BOT统计结果数据 */
-declare interface BotStats {
-  /** 指标名称 */
-  Metric: string;
-  /** 指标详细数据 */
-  DetailData: BotStatsDetailData[];
-}
-
-/** BOT统计结果数据详细数据 */
-declare interface BotStatsDetailData {
-  /** 时间 */
-  Time: string;
-  /** 数据值 */
-  Value: number;
 }
 
 /** 域名基础配置信息，含 CNAME、状态、业务类型、加速区域、创建时间、更新时间、源站配置等。 */
@@ -594,20 +446,6 @@ declare interface CappingRule {
   RulePaths: string[];
   /** 下行速度值设置，单位为 KB/s */
   KBpsThreshold: number;
-}
-
-/** CC攻击Top数据 */
-declare interface CcTopData {
-  /** 客户端Ip */
-  Ip: string | null;
-  /** 访问URL */
-  Url: string | null;
-  /** 客户端UserAgent */
-  UserAgent: string | null;
-  /** 请求数 */
-  Value: number | null;
-  /** 域名 */
-  Domain: string | null;
 }
 
 /** 访问明细数据类型 */
@@ -744,46 +582,6 @@ declare interface CookieKey {
   Switch: string | null;
   /** 使用的cookie，';' 分割 */
   Value?: string | null;
-}
-
-/** ddos攻击带宽峰值数据 */
-declare interface DDoSAttackBandwidthData {
-  /** ddos攻击类型，当值为all的时候表示所有的攻击类型的总带宽峰值 */
-  AttackType: string;
-  /** ddos攻击带宽大小 */
-  Value: number;
-  /** 攻击时间点 */
-  Time: string;
-}
-
-/** 攻击ip数据详细数据 */
-declare interface DDoSAttackIPTopData {
-  /** 攻击ip */
-  AttackIP: string;
-  /** 攻击ip所在省份 */
-  Province: string;
-  /** 攻击ip所在国家 */
-  Country: string;
-  /** 红果电信 */
-  Isp: string;
-  /** 攻击次数 */
-  AttackCount: number;
-}
-
-/** DDoS统计数据 */
-declare interface DDoSStatsData {
-  /** 时间 */
-  Time: string;
-  /** 带宽数值，单位bps */
-  Value: number;
-}
-
-/** DDoS攻击Top数据 */
-declare interface DDoSTopData {
-  /** 攻击类型 */
-  AttackType: string;
-  /** 攻击带宽，单位：bps */
-  Value: number;
 }
 
 /** 加速域名全量配置信息 */
@@ -1012,22 +810,6 @@ declare interface DomainAreaConfig {
   Area: string[];
 }
 
-/** 域名及其他指标Bot次数 */
-declare interface DomainBotCount {
-  /** 域名 */
-  Domain: string;
-  /** BOT次数 */
-  Count: number;
-  /** Top指标值 */
-  Value: string | null;
-  /** 国家/地区 */
-  Country: string | null;
-  /** 省份 */
-  Province: string | null;
-  /** 运营商 */
-  Isp: string | null;
-}
-
 /** 域名查询时过滤条件。 */
 declare interface DomainFilter {
   /** 过滤字段名，支持的列表如下：- origin：主源站。- domain：域名。- resourceId：域名id。- status：域名状态，online，offline或processing，deleted。- serviceType：业务类型，web，download，media，hybrid或dynamic。- projectId：项目ID。- domainType：主源站类型，cname表示自有源，cos表示cos接入，third_party表示第三方对象存储，igtm表示IGTM多活源。- fullUrlCache：全路径缓存，on或off。- https：是否配置https，on，off或processing。- originPullProtocol：回源协议类型，支持http，follow或https。- tagKey：标签键。 */
@@ -1104,14 +886,6 @@ declare interface ErrorPageRule {
   RedirectCode: number;
   /** 重定向 URL需要为完整跳转路径，如 https://www.test.com/error.html */
   RedirectUrl: string;
-}
-
-/** 事件日志统计数据结果 */
-declare interface EventLogStatsData {
-  /** 时间 */
-  Datetime: string;
-  /** 请求数 */
-  Request: number;
 }
 
 /** 除上海外其他区域日志集和日志主题信息 */
@@ -2002,276 +1776,6 @@ declare interface RuleQueryString {
   Value: string | null;
 }
 
-/** SCDN访问控制 */
-declare interface ScdnAclConfig {
-  /** SCDN访问控制配置开关，取值有：on：开启off：关闭 */
-  Switch: string;
-  /** 新版本请使用AdvancedScriptData */
-  ScriptData?: ScdnAclGroup[] | null;
-  /** 错误页面配置 */
-  ErrorPage?: ScdnErrorPage | null;
-  /** Acl规则组，switch为on时必填 */
-  AdvancedScriptData?: AdvancedScdnAclGroup[] | null;
-}
-
-/** SCDN精准访问控制配置 */
-declare interface ScdnAclGroup {
-  /** 规则名称 */
-  RuleName: string;
-  /** 具体配置 */
-  Configure: ScdnAclRule[];
-  /** 执行动作，intercept|redirect */
-  Result: string;
-  /** 规则是否生效，active|inactive */
-  Status?: string;
-  /** 错误页面配置 */
-  ErrorPage?: ScdnErrorPage | null;
-}
-
-/** 精准访问控制匹配规则 */
-declare interface ScdnAclRule {
-  /** 匹配关键字 */
-  MatchKey: string;
-  /** 逻辑操作符，取值如下 */
-  LogiOperator: string;
-  /** 匹配值。 */
-  MatchValue: string;
-}
-
-/** bot配置类型 */
-declare interface ScdnBotConfig {
-  /** Scdn bot配置开关，取值有：on：开启off：关闭 */
-  Switch: string;
-  /** Bot cookie策略 */
-  BotCookie?: BotCookie[] | null;
-  /** Bot Js策略 */
-  BotJavaScript?: BotJavaScript[] | null;
-}
-
-/** scdn 的自定义 cc 规则 */
-declare interface ScdnCCRules {
-  /** 规则类型：all：所有文件生效file：指定文件后缀生效directory：指定路径生效path：指定绝对路径生效index：首页 */
-  RuleType: string;
-  /** 规则值 */
-  RuleValue: string[];
-  /** 规则限频 */
-  Qps?: number;
-  /** 探测时长 */
-  DetectionTime?: number | null;
-  /** 限频阈值 */
-  FrequencyLimit?: number | null;
-  /** IP 惩罚配置开关，取值有：on：开启off：关闭 */
-  PunishmentSwitch?: string | null;
-  /** IP 惩罚时长 */
-  PunishmentTime?: number | null;
-  /** 执行动作，intercept|redirect */
-  Action?: string | null;
-  /** 动作为 redirect 时，重定向的url */
-  RedirectUrl?: string | null;
-}
-
-/** cc的配置类型 */
-declare interface ScdnConfig {
-  /** scdn cc配置开关，取值有：on：开启off：关闭 */
-  Switch: string;
-  /** 自定义 cc 防护规则 */
-  Rules?: ScdnCCRules[] | null;
-  /** 增强自定义 cc 防护规则 */
-  AdvancedRules?: AdvancedCCRules[] | null;
-  /** 增强自定义 cc 防护规则， 全局 */
-  GlobalAdvancedRules?: AdvancedCCRules[] | null;
-}
-
-/** ddos配置类型 */
-declare interface ScdnDdosConfig {
-  /** Scdn ddos配置开关，取值有：on：开启off：关闭 */
-  Switch: string;
-}
-
-/** 聚合了SCDN域名的基本信息 */
-declare interface ScdnDomain {
-  /** 域名 */
-  Domain: string;
-  /** 当前状态，取值online | offline | process */
-  Status: string;
-  /** Waf 状态默认为‘/’，取值 close | intercept | observe */
-  Waf: string;
-  /** Acl 状态默认为‘/’，取值 close | open */
-  Acl: string;
-  /** CC 状态默认为‘/’，取值 close | open */
-  CC: string;
-  /** Ddos 状态默认为‘/’，取值 close | open */
-  Ddos: string;
-  /** 项目ID */
-  ProjectId: string;
-  /** Acl 规则数 */
-  AclRuleNumbers: number;
-  /** Bot 状态默认为‘/’，取值 close | open */
-  Bot: string;
-  /** 域名加速区域，取值global | mainland | overseas */
-  Area: string | null;
-  /** waf规则等级，可取100|200|300 */
-  WafLevel: number | null;
-}
-
-/** acl的错误页面 */
-declare interface ScdnErrorPage {
-  /** 状态码执行动作为：intercept 默认传值 403执行动作为：redirect 默认传值 301 */
-  RedirectCode: number;
-  /** 重定向url */
-  RedirectUrl: string;
-}
-
-/** SCDN 事件日志查询条件 */
-declare interface ScdnEventLogConditions {
-  /** 匹配关键字，ip, attack_location */
-  Key: string;
-  /** 逻辑操作符，取值 exclude, include */
-  Operator: string;
-  /** 匹配值，允许使用通配符(*)查询，匹配零个、单个、多个字符，例如 1.2.* */
-  Value: string;
-}
-
-/** scdn的IP白名单策略 */
-declare interface ScdnIpStrategy {
-  /** 域名|global表示全部域名 */
-  Domain: string;
-  /** 策略ID */
-  StrategyId: string;
-  /** IP白名单列表 */
-  IpList: string[];
-  /** 更新时间 */
-  UpdateTime: string;
-  /** 备注 */
-  Remark: string;
-  /** 规则类型 */
-  RuleType: string | null;
-  /** 规则值 */
-  RuleValue: string[] | null;
-}
-
-/** IP策略查询过滤参数 */
-declare interface ScdnIpStrategyFilter {
-  /** 过滤字段名，支持domain, ip */
-  Name: string;
-  /** 过滤字段值 */
-  Value: string[];
-  /** 是否启用模糊查询，仅支持过滤字段名为domain。模糊查询时，Value长度最大为1 */
-  Fuzzy?: boolean;
-}
-
-/** SCDN日志事件详细信息 */
-declare interface ScdnLogTaskDetail {
-  /** scdn域名 */
-  Domain: string;
-  /** 防护类型 */
-  Mode: string;
-  /** 查询任务开始时间 */
-  StartTime: string;
-  /** 查询任务结束时间 */
-  EndTime: string;
-  /** 任务创建时间 */
-  CreateTime: string;
-  /** 日志包下载链接成功返回下载链接，其他情况返回'-' */
-  DownloadUrl: string | null;
-  /** 任务状态created->任务已经创建processing->任务正在执行done->任务执行成功failed->任务执行失败no-log->没有日志产生 */
-  Status: string;
-  /** 日志任务唯一id */
-  TaskID: string;
-  /** 攻击类型, 可以为"all"AttackType映射如下: other = '未知类型' malicious_scan = "恶意扫描" sql_inject = "SQL注入攻击" xss = "XSS攻击" cmd_inject = "命令注入攻击" ldap_inject = "LDAP注入攻击" ssi_inject = "SSI注入攻击" xml_inject = "XML注入攻击" web_service = "WEB服务漏洞攻击" web_app = "WEB应用漏洞攻击" path_traversal = "路径跨越攻击" illegal_access_core_file = "核心文件非法访问" file_upload = "文件上传攻击" trojan_horse = "木马后门攻击" csrf = "CSRF攻击" custom_policy = "自定义策略" ai_engine= 'AI引擎检出' malicious_file_upload= '恶意文件上传' */
-  AttackType: string;
-  /** 防御模式,可以为"all"DefenceMode映射如下： observe = '观察模式' intercept = '防御模式' */
-  DefenceMode: string;
-  /** 查询条件 */
-  Conditions: ScdnEventLogConditions[] | null;
-  /** mainland或overseas */
-  Area: string | null;
-}
-
-/** Scdn的七层限频配置 */
-declare interface ScdnSevenLayerRules {
-  /** 区分大小写 */
-  CaseSensitive: boolean;
-  /** 规则类型：protocol：协议，填写 HTTP/HTTPSmethod：请求方法，支持 HEAD、GET、POST、PUT、OPTIONS、TRACE、DELETE、PATCH、CONNECTall：域名 匹配内容固定为"*",不可编辑修改ip：IP 填写 CIDR 表达式directory：路径，以/开头，支持目录和具体路径，128字符以内index：首页 默认固定值：/;/index.html,不可编辑修改path：文件全路径，资源地址，如/acb/test.png，支持通配符，如/abc/*.jpgfile：文件扩展名，填写具体扩展名，如 jpg;png;cssparam：请求参数，填写具体 value 值，512字符以内referer：Referer，填写具体 value 值，512字符以内cookie：Cookie，填写具体 value 值，512字符以内user-agent：User-Agent，填写具体 value 值，512字符以内head：自定义请求头，填写具体value值，512字符以内；内容为空或者不存在时，无匹配内容输入框，填写匹配参数即可 */
-  RuleType: string;
-  /** 逻辑操作符，取值 ：不包含：exclude, 包含：include, 不等于：notequal, 等于：equal, 前缀匹配：matching内容为空或不存在：null */
-  LogicOperator: string;
-  /** 规则值 */
-  RuleValue?: string[] | null;
-  /** 匹配参数，只有请求参数、Cookie、自定义请求头 有值 */
-  RuleParam?: string | null;
-}
-
-/** SCDN攻击数据Top展示 */
-declare interface ScdnTopData {
-  /** 时间 */
-  Time: string;
-  /** 数值 */
-  Value: number;
-  /** 运营商 */
-  Isp: string;
-  /** IP地址 */
-  Ip: string;
-  /** 区域 */
-  District: string;
-}
-
-/** SCDN攻击数据Top展示 */
-declare interface ScdnTopDomainData {
-  /** 域名 */
-  Domain: string;
-  /** 请求量 */
-  Value: number;
-  /** 百分比 */
-  Percent: number;
-}
-
-/** SCDN攻击数据Top URL展示 */
-declare interface ScdnTopUrlData {
-  /** Top数据的URL */
-  Url: string;
-  /** 数值 */
-  Value: number;
-  /** 时间 */
-  Time: string;
-  /** 域名 */
-  Domain: string | null;
-}
-
-/** Scdn饼图数据，waf仅有 */
-declare interface ScdnTypeData {
-  /** 攻击类型 */
-  AttackType: string;
-  /** 攻击值 */
-  Value: number;
-}
-
-/** waf配置类型 */
-declare interface ScdnWafConfig {
-  /** Scdn waf配置开关，取值有：on：开启off：关闭 */
-  Switch: string;
-  /** intercept|observe，默认intercept */
-  Mode?: string | null;
-  /** 重定向的错误页面 */
-  ErrorPage?: ScdnErrorPage | null;
-  /** webshell拦截配置开关，取值有：on：开启off：关闭 */
-  WebShellSwitch?: string | null;
-  /** 类型拦截规则 */
-  Rules?: ScdnWafRule[] | null;
-  /** waf规则等级，可取100|200|300 */
-  Level?: number | null;
-  /** waf子规则配置开关，取值有：on：开启off：关闭 */
-  SubRuleSwitch?: WafSubRuleStatus[] | null;
-}
-
-/** Waf 规则信息 */
-declare interface ScdnWafRule {
-  /** 攻击类型 */
-  AttackType: string;
-  /** 防护措施，observe */
-  Operate: string;
-}
-
 /** 作为CacheKey的一部分 */
 declare interface SchemeKey {
   /** scheme作为cache key配置开关，取值有：on：开启off：关闭 */
@@ -2598,14 +2102,6 @@ declare interface ViolationUrl {
   UpdateTime?: string;
 }
 
-/** Waf子规则开关状态 */
-declare interface WafSubRuleStatus {
-  /** Waf子规则开关状态配置开关，取值有：on：开启off：关闭 */
-  Switch: string;
-  /** 规则id列表 */
-  SubIds: number[];
-}
-
 /** WebSocket配置WebSocket 为ECDN产品功能，如需使用请通过ECDN域名配置. */
 declare interface WebSocket {
   /** WebSocket 超时配置开关，取值有：on：开启，可以调整超时时间off：关闭，平台仍支持WebSocket连接，此时超时时间默认为15秒 */
@@ -2772,76 +2268,6 @@ declare interface CreateEdgePackTaskResponse {
   RequestId?: string;
 }
 
-declare interface CreateScdnDomainRequest {
-  /** 域名 */
-  Domain: string;
-  /** Web 攻击防护（WAF）配置 */
-  Waf?: ScdnWafConfig;
-  /** 自定义防护策略配置 */
-  Acl?: ScdnAclConfig;
-  /** CC 防护配置，目前 CC 防护默认开启 */
-  CC?: ScdnConfig;
-  /** DDOS 防护配置，目前 DDoS 防护默认开启 */
-  Ddos?: ScdnDdosConfig;
-  /** BOT 防护配置 */
-  Bot?: ScdnBotConfig;
-}
-
-declare interface CreateScdnDomainResponse {
-  /** 创建结果，Success表示成功 */
-  Result: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateScdnFailedLogTaskRequest {
-  /** 重试失败任务的taskID */
-  TaskId: string;
-  /** 地域：mainland或overseas */
-  Area?: string;
-}
-
-declare interface CreateScdnFailedLogTaskResponse {
-  /** 创建结果, "0" -> 创建成功 */
-  Result: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateScdnLogTaskRequest {
-  /** 防护类型Mode 映射如下： waf = "Web攻击" cc = "CC攻击" bot = "Bot攻击" */
-  Mode: string;
-  /** 查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间 */
-  StartTime: string;
-  /** 查询结束时间，如：2018-09-04 10:40:00，返回结果小于等于指定时间 */
-  EndTime: string;
-  /** 指定域名查询, 不填默认查询全部域名 */
-  Domain?: string;
-  /** 指定攻击类型, 不填默认查询全部攻击类型AttackType 映射如下: other = '未知类型' malicious_scan = "恶意扫描" sql_inject = "SQL注入攻击" xss = "XSS攻击" cmd_inject = "命令注入攻击" ldap_inject = "LDAP注入攻击" ssi_inject = "SSI注入攻击" xml_inject = "XML注入攻击" web_service = "WEB服务漏洞攻击" web_app = "WEB应用漏洞攻击" path_traversal = "路径跨越攻击" illegal_access_core_file = "核心文件非法访问" trojan_horse = "木马后门攻击" csrf = "CSRF攻击" malicious_file_upload= '恶意文件上传' js = "JS主动探测" cookie = "Cookie指纹" */
-  AttackType?: string;
-  /** 指定执行动作, 不填默认查询全部执行动作DefenceMode 映射如下： observe = '观察模式' intercept = '拦截模式' captcha = "验证码" redirect = "重定向" */
-  DefenceMode?: string;
-  /** 不填为全部ip */
-  Ip?: string;
-  /** 指定域名查询, 与 Domain 参数同时有值时使用 Domains 参数，不填默认查询全部域名，指定域名查询时最多支持同时选择 5 个域名查询 */
-  Domains?: string[];
-  /** 指定攻击类型查询, 与 AttackType 参数同时有值时使用 AttackTypes 参数，不填默认查询全部攻击类型 */
-  AttackTypes?: string[];
-  /** 查询条件 */
-  Conditions?: ScdnEventLogConditions[];
-  /** 来源产品 cdn ecdn */
-  Source?: string;
-  /** 地域：mainland 或 overseas */
-  Area?: string;
-}
-
-declare interface CreateScdnLogTaskResponse {
-  /** 创建结果, "0" -> 创建成功 */
-  Result: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateVerifyRecordRequest {
   /** 要取回的域名 */
   Domain: string;
@@ -2888,18 +2314,6 @@ declare interface DeleteClsLogTopicResponse {
   RequestId?: string;
 }
 
-declare interface DeleteScdnDomainRequest {
-  /** 域名 */
-  Domain: string;
-}
-
-declare interface DeleteScdnDomainResponse {
-  /** 创建结果，Success表示成功 */
-  Result: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeBillingDataRequest {
   /** 查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间根据指定时间粒度参数不同，会进行向前取整，如指定起始时间为 2018-09-04 10:40:00 按小时粒度查询，返回的第一个数据对应时间点为 2018-09-04 10:00:00起始时间与结束时间间隔小于等于 90 天 */
   StartTime: string;
@@ -2928,40 +2342,6 @@ declare interface DescribeBillingDataResponse {
   Interval: string;
   /** 数据明细 */
   Data: ResourceBillingData[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeCcDataRequest {
-  /** 查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间 */
-  StartTime: string;
-  /** 查询结束时间，如：2018-09-04 10:40:00，返回结果小于等于指定时间 */
-  EndTime: string;
-  /** 时间粒度，支持以下几种模式：min：1 分钟粒度，指定查询区间 24 小时内（含 24 小时），可返回 1 分钟粒度明细数据5min：5 分钟粒度，指定查询区间 31 天内（含 31 天），可返回 5 分钟粒度明细数据hour：1 小时粒度，指定查询区间 31 天内（含 31 天），可返回 1 小时粒度明细数据day：天粒度，指定查询区间大于 31 天，可返回天粒度明细数据 */
-  Interval?: string;
-  /** 指定域名查询，为空时，表示查询账号级别数据 */
-  Domain?: string;
-  /** 执行动作，取值为：intercept/redirect/observe分别表示：拦截/重定向/观察为空时，表示所有执行动作 */
-  ActionName?: string;
-  /** 指定域名列表查询，为空时，表示查询账号级别数据 */
-  Domains?: string[];
-  /** cdn表示CDN数据，默认值ecdn表示ECDN数据 */
-  Source?: string;
-  /** 地域：mainland或overseas，表示国内或海外，不填写默认表示国内 */
-  Area?: string;
-}
-
-declare interface DescribeCcDataResponse {
-  /** 指定执行动作的请求数数据，如果指定类型为空，表示所有类型的请求总数 */
-  Data: TimestampData[];
-  /** 粒度 */
-  Interval: string;
-  /** 执行动作为拦截类型QPS统计数据 */
-  InterceptQpsData: TimestampData[] | null;
-  /** 执行动作为重定向类型QPS统计数据 */
-  RedirectQpsData: TimestampData[] | null;
-  /** 执行动作为观察类型QPS统计数据 */
-  ObserveQpsData: TimestampData[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3078,26 +2458,6 @@ declare interface DescribeCertDomainsResponse {
   RequestId?: string;
 }
 
-declare interface DescribeDDoSDataRequest {
-  /** 查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间 */
-  StartTime: string;
-  /** 查询结束时间，如：2018-09-04 10:40:00，返回结果小于等于指定时间 */
-  EndTime: string;
-  /** 时间粒度，支持以下几种模式：min：1 分钟粒度，指定查询区间 24 小时内（含 24 小时），可返回 1 分钟粒度明细数据5min：5 分钟粒度，指定查询区间 31 天内（含 31 天），可返回 5 分钟粒度明细数据hour：1 小时粒度，指定查询区间 31 天内（含 31 天），可返回 1 小时粒度明细数据day：天粒度，指定查询区间大于 31 天，可返回天粒度明细数据 */
-  Interval: string;
-}
-
-declare interface DescribeDDoSDataResponse {
-  /** DDoS统计数据数组 */
-  Data: DDoSStatsData[];
-  /** 时间粒度：min：1 分钟粒度5min：5 分钟粒度hour：1 小时粒度day：天粒度 */
-  Interval: string;
-  /** DDoS统计攻击带宽峰值数组 */
-  AttackBandwidthData: DDoSAttackBandwidthData[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeDiagnoseReportRequest {
   /** 报告ID */
   ReportId: string;
@@ -3210,32 +2570,6 @@ declare interface DescribeEdgePackTaskStatusResponse {
   EdgePackTaskStatusSet?: EdgePackTaskStatus[];
   /** 总数，用于分页查询 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeEventLogDataRequest {
-  /** 防护类型，映射如下： waf = "Web攻击" cc = "CC攻击" */
-  Mode: string;
-  /** 开始时间 */
-  StartTime: string;
-  /** 结束时间，最长跨度为30分钟 */
-  EndTime: string;
-  /** 域名 */
-  Domain: string;
-  /** 执行动作，取值为：intercept/redirect/observe分别表示：拦截/重定向/观察参数放空，表示查询全部动作数据 */
-  ActionName: string;
-  /** 请求URL，支持URL开头和结尾使用\*表示通配如：/files/* 表示所有以/files/开头的请求*.jpg 表示所有以.jpg结尾的请求 */
-  Url: string;
-  /** 地域 mainland 或者 overseas，为空时默认 mainland */
-  Area?: string;
-  /** 来源产品，cdn 或者 ecdn，为空时默认 cdn */
-  Source?: string;
-}
-
-declare interface DescribeEventLogDataResponse {
-  /** 统计曲线结果 */
-  Results: EventLogStatsData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3502,140 +2836,6 @@ declare interface DescribeReportDataResponse {
   RequestId?: string;
 }
 
-declare interface DescribeScdnBotDataRequest {
-  /** 开始时间 */
-  StartTime: string;
-  /** 结束时间 */
-  EndTime: string;
-  /** mainland 大陆地区 overseas境外地区 */
-  Area: string;
-  /** 取值："2min"或者"hour"，表示查询2分钟或者1小时粒度的数据，如果查询时间范围>1天，则强制返回1小时粒度数据 */
-  Interval?: string;
-  /** 域名数组，多选域名时，使用此参数,不填写表示查询所有域名的数据（AppID维度数据） */
-  Domains?: string[];
-}
-
-declare interface DescribeScdnBotDataResponse {
-  /** 统计信息详细数据 */
-  Data: BotStats[];
-  /** 当前返回数据的粒度，取值："2min"或者"hour"，分别表示2分钟或者1小时粒度 */
-  Interval: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeScdnBotRecordsRequest {
-  /** BOT类型，取值为"UB","UCB","TCB"，分别表示：未知类型，自定义类型，公开类型 */
-  BotType: string;
-  /** 域名 */
-  Domain: string;
-  /** 开始时间 */
-  StartTime: string;
-  /** 结束时间 */
-  EndTime: string;
-  /** 分页参数 */
-  Offset: number;
-  /** 分页参数 */
-  Limit: number;
-  /** mainland 大陆地区 overseas境外地区 */
-  Area: string;
-  /** 排序参数 */
-  SortBy?: BotSortBy[];
-  /** BotType=UB时，表示需要过滤的预测标签，取值如下： "crawler_unregular", "crawler_regular", "request_repeat", "credential_miss_user", "credential_without_user", "credential_only_action", "credential_user_password", "credential_cracking", "credential_stuffing", "brush_sms", "brush_captcha", "reg_malicious"BotType=TCB时，表示需要过滤的Bot分类，取值如下： "Uncategorised", "Search engine bot", "Site monitor", "Screenshot creator", "Link checker", "Web scraper", "Vulnerability scanner", "Virus scanner", "Speed tester", "Feed Fetcher", "Tool", "Marketing"BotType=UCB时，取值如下：User-Agent为空或不存在User-Agent类型为BOTUser-Agent类型为HTTP LibraryUser-Agent类型为FrameworkUser-Agent类型为ToolsUser-Agent类型为Unkonwn BOTUser-Agent类型为ScannerReferer空或不存在Referer滥用(多个UA使用相同Referer)Cookie滥用(多个UA使用相同Cookie)Cookie空或不存在Connection空或不存在Accept空或不存在Accept-Language空或不存在Accept-Enconding空或不存在使用HTTP HEAD方法HTTP协议为1.0或者更低IDC-IP 腾讯云IDC-IP 阿里云IDC-IP 华为云IDC-IP 金山云IDC-IP UCloudIDC-IP 百度云IDC-IP 京东云IDC-IP 青云IDC-IP AwsIDC-IP AzureIDC-IP Google以上所有类型，FilterName为空时，表示不过滤，获取所有内容 */
-  FilterName?: string;
-  /** 目前支持的Action"intercept" 拦截"monitor"，监控"permit" 放行"redirect" 重定向尚未支持的Action"captcha" 验证码 */
-  FilterAction?: string;
-  /** 过滤的IP */
-  FilterIp?: string;
-  /** 域名列表，为空表示查询AppID维度数据 */
-  Domains?: string[];
-}
-
-declare interface DescribeScdnBotRecordsResponse {
-  /** BOT拦截结果数组 */
-  Data: BotRecord[];
-  /** 记录数量 */
-  TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeScdnConfigRequest {
-  /** 域名 */
-  Domain: string;
-}
-
-declare interface DescribeScdnConfigResponse {
-  /** 自定义防护策略配置 */
-  Acl?: ScdnAclConfig;
-  /** Web 攻击防护（WAF）配置 */
-  Waf?: ScdnWafConfig;
-  /** CC 防护配置 */
-  CC?: ScdnConfig;
-  /** DDOS 防护配置 */
-  Ddos?: ScdnDdosConfig;
-  /** BOT 防护配置 */
-  Bot?: ScdnBotConfig;
-  /** 当前状态，取值online | offline */
-  Status?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeScdnIpStrategyRequest {
-  /** 分页起始地址 */
-  Offset?: number;
-  /** 列表分页记录条数，最大1000 */
-  Limit?: number;
-  /** 查询条件过滤器 */
-  Filters?: ScdnIpStrategyFilter[];
-  /** 指定查询返回结果的排序字段，支持domain，update_time */
-  Order?: string;
-  /** 排序方式，支持asc，desc */
-  Sequence?: string;
-}
-
-declare interface DescribeScdnIpStrategyResponse {
-  /** IP策略列表 */
-  IpStrategyList?: ScdnIpStrategy[] | null;
-  /** 配置的策略条数 */
-  TotalCount?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeScdnTopDataRequest {
-  /** 查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间 */
-  StartTime: string;
-  /** 查询结束时间，如：2018-09-04 10:40:00，返回结果小于等于指定时间 */
-  EndTime: string;
-  /** 查询的SCDN TOP攻击数据类型：waf：Web 攻击防护TOP数据 */
-  Mode: string;
-  /** 排序对象，支持以下几种形式：url：攻击目标 url 排序ip：攻击源 IP 排序attackType：攻击类型排序 */
-  Metric: string;
-  /** 排序使用的指标名称：request：请求次数 */
-  Filter: string;
-  /** 指定域名查询 */
-  Domain?: string;
-  /** 指定攻击类型, 仅 Mode=waf 时有效不填则查询所有攻击类型的数据总和AttackType 映射如下: other = '未知类型' malicious_scan = "恶意扫描" sql_inject = "SQL注入攻击" xss = "XSS攻击" cmd_inject = "命令注入攻击" ldap_inject = "LDAP注入攻击" ssi_inject = "SSI注入攻击" xml_inject = "XML注入攻击" web_service = "WEB服务漏洞攻击" web_app = "WEB应用漏洞攻击" path_traversal = "路径跨越攻击" illegal_access_core_file = "核心文件非法访问" trojan_horse = "木马后门攻击" csrf = "CSRF攻击" malicious_file_upload= '恶意文件上传' */
-  AttackType?: string;
-  /** 指定防御模式,仅 Mode=waf 时有效不填则查询所有防御模式的数据总和DefenceMode 映射如下： observe = '观察模式' intercept = '拦截模式' */
-  DefenceMode?: string;
-}
-
-declare interface DescribeScdnTopDataResponse {
-  /** WAF 攻击类型统计 */
-  TopTypeData?: ScdnTypeData[] | null;
-  /** TOP 攻击源 IP 统计 */
-  TopIpData?: ScdnTopData[] | null;
-  /** 查询的SCDN类型，当前仅支持 waf */
-  Mode?: string;
-  /** TOP URL 统计 */
-  TopUrlData?: ScdnTopUrlData[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeTopDataRequest {
   /** 查询起始日期：yyyy-MM-dd HH:mm:ss仅支持按天粒度的数据查询，取入参中的天信息作为起始日期返回大于等于起始日期当天 00:00:00 点产生的数据，如 StartTime为2018-09-04 10:40:00，返回数据的起始时间为2018-09-04 00:00:00仅支持 90 天内数据查询 */
   StartTime: string;
@@ -3702,36 +2902,6 @@ declare interface DescribeUrlViolationsResponse {
   UrlRecordList?: ViolationUrl[] | null;
   /** 记录总数，用于分页 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeWafDataRequest {
-  /** 查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间 */
-  StartTime: string;
-  /** 查询结束时间，如：2018-09-04 10:40:00，返回结果小于等于指定时间 */
-  EndTime: string;
-  /** 时间粒度，支持以下几种模式：min：1 分钟粒度，指定查询区间 24 小时内（含 24 小时），可返回 1 分钟粒度明细数据5min：5 分钟粒度，指定查询区间 31 天内（含 31 天），可返回 5 分钟粒度明细数据hour：1 小时粒度，指定查询区间 31 天内（含 31 天），可返回 1 小时粒度明细数据day：天粒度，指定查询区间大于 31 天，可返回天粒度明细数据仅支持30天内数据查询，且查询时间范围在 7 到 30 天最小粒度是 hour。 */
-  Interval: string;
-  /** 指定域名查询 */
-  Domain?: string;
-  /** 指定攻击类型不填则查询所有攻击类型的数据分布AttackType 映射如下:"webshell" : Webshell检测防护"oa" : 常见OA漏洞防护"xss" : XSS跨站脚本攻击防护"xxe" : XXE攻击防护"webscan" : 扫描器攻击漏洞防护"cms" : 常见CMS漏洞防护"upload" : 恶意文件上传攻击防护"sql" : SQL注入攻击防护"cmd_inject": 命令/代码注入攻击防护"osc" : 开源组件漏洞防护"file_read" : 任意文件读取"ldap" : LDAP注入攻击防护"other" : 其它漏洞防护 */
-  AttackType?: string;
-  /** 指定防御模式不填则查询所有防御模式的数据总和DefenceMode映射如下： observe = '观察模式' intercept = '拦截模式' */
-  DefenceMode?: string;
-  /** 地域：mainland 或 overseas */
-  Area?: string;
-  /** 指定多个攻击类型，取值参考AttackType */
-  AttackTypes?: string[];
-  /** 指定域名列表查询 */
-  Domains?: string[];
-}
-
-declare interface DescribeWafDataResponse {
-  /** 粒度数据 */
-  Data: TimestampData[];
-  /** 粒度 */
-  Interval: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3892,110 +3062,6 @@ declare interface ListDiagnoseReportResponse {
   RequestId?: string;
 }
 
-declare interface ListScdnDomainsRequest {
-  /** 分页起始地址 */
-  Offset?: number;
-  /** 列表分页记录条数，最大1000 */
-  Limit?: number;
-  /** 域名信息 */
-  Domain?: string;
-}
-
-declare interface ListScdnDomainsResponse {
-  /** 域名列表信息 */
-  DomainList?: ScdnDomain[] | null;
-  /** 域名的总条数。 */
-  TotalCount?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ListScdnLogTasksRequest {
-  /** 产品来源 cdn/ecdn */
-  Source?: string;
-  /** 地域：mainland 或 overseas 为空表示查询所有地域 */
-  Area?: string;
-}
-
-declare interface ListScdnLogTasksResponse {
-  /** 日志下载任务详情 */
-  TaskList: ScdnLogTaskDetail[];
-  /** 查询到的下载任务的总数 */
-  TotalCount: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ListScdnTopBotDataRequest {
-  /** 获取Top量，取值范围[1-10] */
-  TopCount: number;
-  /** 开始时间 */
-  StartTime: string;
-  /** 结束时间 */
-  EndTime: string;
-  /** mainland 大陆地区 overseas境外地区 */
-  Area: string;
-  /** session表示查询BOT会话的Top信息ip表示查询BOT客户端IP的Top信息不填代表获取会话信息 */
-  Metric?: string;
-  /** 域名，仅当Metric=ip，并且Domain为空时有效，不填写表示获取AppID信息 */
-  Domains?: string[];
-}
-
-declare interface ListScdnTopBotDataResponse {
-  /** 域名BOT次数列表 */
-  Data?: BotStatisticsCount[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ListTopBotDataRequest {
-  /** 获取Top量，取值范围[1-10] */
-  TopCount: number;
-  /** 开始时间 */
-  StartTime: string;
-  /** 结束时间 */
-  EndTime: string;
-  /** session表示查询BOT会话的Top信息ip表示查询BOT客户端IP的Top信息不填代表获取会话信息 */
-  Metric?: string;
-  /** 域名，仅当Metric=ip时有效，不填写表示使用Domains参数 */
-  Domain?: string;
-  /** 域名，仅当Metric=ip，并且Domain为空时有效，不填写表示获取AppID信息 */
-  Domains?: string[];
-}
-
-declare interface ListTopBotDataResponse {
-  /** 域名BOT次数列表 */
-  Data: DomainBotCount[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ListTopCcDataRequest {
-  /** 查询Top数据的开始时间，格式为：2020-01-01 00:00:00 */
-  StartTime: string;
-  /** 查询Top数据的结束时间，格式为：2020-01-01 23:59:59支持 90 天内数据查询，不传此参数，表示查当天数据时间跨度要小于等于7天 */
-  EndTime: string;
-  /** 域名，不传此参数，表示查询账号级别数据 */
-  Domain?: string;
-  /** 统计指标：ip_url : Top IP+URL 默认值ua : Top UA */
-  Metric?: string;
-  /** cdn表示CDN数据，默认值ecdn表示ECDN数据 */
-  Source?: string;
-  /** 域名列表，不传此参数，表示查询账号级别数据 */
-  Domains?: string[];
-  /** 执行动作，取值为：intercept/redirect/observe分别表示：拦截/重定向/观察为空表示查询所有执行动作数据 */
-  ActionName?: string;
-  /** 地域：mainland或overseas，表示国内或海外，不填写默认表示国内 */
-  Area?: string;
-}
-
-declare interface ListTopCcDataResponse {
-  /** Top数据 */
-  Data: CcTopData[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ListTopClsLogDataRequest {
   /** 需要查询的日志集ID */
   LogsetId: string;
@@ -4024,26 +3090,6 @@ declare interface ListTopClsLogDataResponse {
   TotalCount?: number;
   /** 获取到的不重复IP条数 */
   IpCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ListTopDDoSDataRequest {
-  /** 查询Top数据的开始时间，格式为：2020-01-01 00:00:00 */
-  StartTime: string;
-  /** 查询Top数据的结束时间，格式为：2020-01-01 23:59:59支持 90 天内数据查询，时间跨度要小于等于7天 */
-  EndTime: string;
-  /** 查询Top的数量，不填默认值为10 */
-  TopCount?: number;
-  /** AttackIP表示查询攻击ip的top排行，AttackType表示攻击类型的top排行，为空默认为AttackType */
-  Metric?: string;
-}
-
-declare interface ListTopDDoSDataResponse {
-  /** DDoS 攻击类型的top数据，当Metric=AttackType的时候返回攻击类型的统计数据，IPData为空 */
-  Data: DDoSTopData[];
-  /** ddos攻击ip的top数据，Metric=AttackIP的时候返回IPData，Data为空 */
-  IPData: DDoSAttackIPTopData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4078,40 +3124,6 @@ declare interface ListTopDataRequest {
 declare interface ListTopDataResponse {
   /** 各个资源的Top 访问数据详情。 */
   Data?: TopData[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ListTopWafDataRequest {
-  /** 查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间 */
-  StartTime: string;
-  /** 查询结束时间，如：2018-09-04 10:40:00，返回结果小于等于指定时间 */
-  EndTime: string;
-  /** 指定域名查询，不填写查询整个AppID下数据 */
-  Domain?: string;
-  /** 指定攻击类型不填则查询所有攻击类型的数据总和AttackType 映射如下:"webshell" : Webshell检测防护"oa" : 常见OA漏洞防护"xss" : XSS跨站脚本攻击防护"xxe" : XXE攻击防护"webscan" : 扫描器攻击漏洞防护"cms" : 常见CMS漏洞防护"upload" : 恶意文件上传攻击防护"sql" : SQL注入攻击防护"cmd_inject": 命令/代码注入攻击防护"osc" : 开源组件漏洞防护"file_read" : 任意文件读取"ldap" : LDAP注入攻击防护"other" : 其它漏洞防护 */
-  AttackType?: string;
-  /** 指定防御模式不填则查询所有防御模式的数据总和DefenceMode 映射如下： observe = '观察模式' intercept = '拦截模式' */
-  DefenceMode?: string;
-  /** 排序对象，支持以下几种形式：url：攻击目标 url 排序ip：攻击源 IP 排序attackType：攻击类型排序domain：当查询整个AppID下数据时，按照域名请求量排序 */
-  Metric?: string;
-  /** 地域：mainland 或 overseas */
-  Area?: string;
-  /** 指定攻击类型列表，取值参考AttackType */
-  AttackTypes?: string[];
-  /** 指定域名列表查询，不填写查询整个AppID下数据 */
-  Domains?: string[];
-}
-
-declare interface ListTopWafDataResponse {
-  /** 攻击类型统计 */
-  TopTypeData: ScdnTypeData[];
-  /** IP统计 */
-  TopIpData: ScdnTopData[];
-  /** URL统计 */
-  TopUrlData: ScdnTopUrlData[];
-  /** 域名统计 */
-  TopDomainData: ScdnTopDomainData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4260,36 +3272,12 @@ declare interface StartCdnDomainResponse {
   RequestId?: string;
 }
 
-declare interface StartScdnDomainRequest {
-  /** 域名 */
-  Domain: string;
-}
-
-declare interface StartScdnDomainResponse {
-  /** 开启结果，Success表示成功 */
-  Result: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface StopCdnDomainRequest {
   /** 域名域名需要为【已启动】状态 */
   Domain: string;
 }
 
 declare interface StopCdnDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface StopScdnDomainRequest {
-  /** 域名 */
-  Domain: string;
-}
-
-declare interface StopScdnDomainResponse {
-  /** 关闭结果，Success表示成功 */
-  Result: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4432,28 +3420,6 @@ declare interface UpdatePayTypeResponse {
   RequestId?: string;
 }
 
-declare interface UpdateScdnDomainRequest {
-  /** 域名 */
-  Domain: string;
-  /** Web 攻击防护（WAF）配置 */
-  Waf?: ScdnWafConfig;
-  /** 自定义防护策略配置 */
-  Acl?: ScdnAclConfig;
-  /** CC 防护配置，目前 CC 防护默认开启 */
-  CC?: ScdnConfig;
-  /** DDOS 防护配置，目前 DDoS 防护默认开启 */
-  Ddos?: ScdnDdosConfig;
-  /** BOT 防护配置 */
-  Bot?: ScdnBotConfig;
-}
-
-declare interface UpdateScdnDomainResponse {
-  /** 提交结果，Success表示成功 */
-  Result?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface VerifyDomainRecordRequest {
   /** 域名 */
   Domain: string;
@@ -4481,24 +3447,14 @@ declare interface Cdn {
   CreateDiagnoseUrl(data: CreateDiagnoseUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDiagnoseUrlResponse>;
   /** 动态打包任务提交 {@link CreateEdgePackTaskRequest} {@link CreateEdgePackTaskResponse} */
   CreateEdgePackTask(data: CreateEdgePackTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgePackTaskResponse>;
-  /** @deprecated 创建SCDN域名 {@link CreateScdnDomainRequest} {@link CreateScdnDomainResponse} */
-  CreateScdnDomain(data: CreateScdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScdnDomainResponse>;
-  /** @deprecated 重试创建事件日志任务 {@link CreateScdnFailedLogTaskRequest} {@link CreateScdnFailedLogTaskResponse} */
-  CreateScdnFailedLogTask(data: CreateScdnFailedLogTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScdnFailedLogTaskResponse>;
-  /** @deprecated 创建事件日志任务 {@link CreateScdnLogTaskRequest} {@link CreateScdnLogTaskResponse} */
-  CreateScdnLogTask(data: CreateScdnLogTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScdnLogTaskResponse>;
   /** 生成解析记录 {@link CreateVerifyRecordRequest} {@link CreateVerifyRecordResponse} */
   CreateVerifyRecord(data: CreateVerifyRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVerifyRecordResponse>;
   /** 删除加速域名 {@link DeleteCdnDomainRequest} {@link DeleteCdnDomainResponse} */
   DeleteCdnDomain(data: DeleteCdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCdnDomainResponse>;
   /** 删除日志主题 {@link DeleteClsLogTopicRequest} {@link DeleteClsLogTopicResponse} */
   DeleteClsLogTopic(data: DeleteClsLogTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClsLogTopicResponse>;
-  /** @deprecated 删除SCDN域名 {@link DeleteScdnDomainRequest} {@link DeleteScdnDomainResponse} */
-  DeleteScdnDomain(data: DeleteScdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScdnDomainResponse>;
   /** 计费数据查询 {@link DescribeBillingDataRequest} {@link DescribeBillingDataResponse} */
   DescribeBillingData(data: DescribeBillingDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingDataResponse>;
-  /** @deprecated CC统计数据查询 {@link DescribeCcDataRequest} {@link DescribeCcDataResponse} */
-  DescribeCcData(data: DescribeCcDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcDataResponse>;
   /** 访问数据查询 {@link DescribeCdnDataRequest} {@link DescribeCdnDataResponse} */
   DescribeCdnData(data: DescribeCdnDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdnDataResponse>;
   /** 日志下载链接查询 {@link DescribeCdnDomainLogsRequest} {@link DescribeCdnDomainLogsResponse} */
@@ -4509,8 +3465,6 @@ declare interface Cdn {
   DescribeCdnOriginIp(data?: DescribeCdnOriginIpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdnOriginIpResponse>;
   /** 获取SSL证书中的可用域名 {@link DescribeCertDomainsRequest} {@link DescribeCertDomainsResponse} */
   DescribeCertDomains(data?: DescribeCertDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertDomainsResponse>;
-  /** @deprecated DDoS统计数据查询 {@link DescribeDDoSDataRequest} {@link DescribeDDoSDataResponse} */
-  DescribeDDoSData(data: DescribeDDoSDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSDataResponse>;
   /** @deprecated 获取诊断报告(已废弃) {@link DescribeDiagnoseReportRequest} {@link DescribeDiagnoseReportResponse} */
   DescribeDiagnoseReport(data: DescribeDiagnoseReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiagnoseReportResponse>;
   /** 地区运营商明细查询 {@link DescribeDistrictIspDataRequest} {@link DescribeDistrictIspDataResponse} */
@@ -4521,8 +3475,6 @@ declare interface Cdn {
   DescribeDomainsConfig(data?: DescribeDomainsConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsConfigResponse>;
   /** 查询动态打包任务状态列表 {@link DescribeEdgePackTaskStatusRequest} {@link DescribeEdgePackTaskStatusResponse} */
   DescribeEdgePackTaskStatus(data: DescribeEdgePackTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgePackTaskStatusResponse>;
-  /** @deprecated 查询事件日志统计曲线 {@link DescribeEventLogDataRequest} {@link DescribeEventLogDataResponse} */
-  DescribeEventLogData(data: DescribeEventLogDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventLogDataResponse>;
   /** HTTPS请求包查询 {@link DescribeHttpsPackagesRequest} {@link DescribeHttpsPackagesResponse} */
   DescribeHttpsPackages(data?: DescribeHttpsPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHttpsPackagesResponse>;
   /** 获取图片优化的配置 {@link DescribeImageConfigRequest} {@link DescribeImageConfigResponse} */
@@ -4547,24 +3499,12 @@ declare interface Cdn {
   DescribePushTasks(data?: DescribePushTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePushTasksResponse>;
   /** 查询报表数据 {@link DescribeReportDataRequest} {@link DescribeReportDataResponse} */
   DescribeReportData(data: DescribeReportDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReportDataResponse>;
-  /** @deprecated 获取BOT统计数据列表 {@link DescribeScdnBotDataRequest} {@link DescribeScdnBotDataResponse} */
-  DescribeScdnBotData(data: DescribeScdnBotDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnBotDataResponse>;
-  /** @deprecated 查询BOT会话记录列表 {@link DescribeScdnBotRecordsRequest} {@link DescribeScdnBotRecordsResponse} */
-  DescribeScdnBotRecords(data: DescribeScdnBotRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnBotRecordsResponse>;
-  /** @deprecated SCDN域名配置 {@link DescribeScdnConfigRequest} {@link DescribeScdnConfigResponse} */
-  DescribeScdnConfig(data: DescribeScdnConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnConfigResponse>;
-  /** @deprecated 查询SCDN安全防护IP白名单 {@link DescribeScdnIpStrategyRequest} {@link DescribeScdnIpStrategyResponse} */
-  DescribeScdnIpStrategy(data?: DescribeScdnIpStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnIpStrategyResponse>;
-  /** @deprecated 获取SCDN的Top数据 {@link DescribeScdnTopDataRequest} {@link DescribeScdnTopDataResponse} */
-  DescribeScdnTopData(data: DescribeScdnTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScdnTopDataResponse>;
   /** TOP 新版数据查询 {@link DescribeTopDataRequest} {@link DescribeTopDataResponse} */
   DescribeTopData(data: DescribeTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopDataResponse>;
   /** 流量包查询 {@link DescribeTrafficPackagesRequest} {@link DescribeTrafficPackagesResponse} */
   DescribeTrafficPackages(data?: DescribeTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficPackagesResponse>;
   /** 违规历史查询 {@link DescribeUrlViolationsRequest} {@link DescribeUrlViolationsResponse} */
   DescribeUrlViolations(data?: DescribeUrlViolationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUrlViolationsResponse>;
-  /** @deprecated Waf统计数据查询 {@link DescribeWafDataRequest} {@link DescribeWafDataResponse} */
-  DescribeWafData(data: DescribeWafDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWafDataResponse>;
   /** 禁用 URL(已废弃) {@link DisableCachesRequest} {@link DisableCachesResponse} */
   DisableCaches(data: DisableCachesRequest, config?: AxiosRequestConfig): AxiosPromise<DisableCachesResponse>;
   /** 停止日志主题投递 {@link DisableClsLogTopicRequest} {@link DisableClsLogTopicResponse} */
@@ -4583,24 +3523,10 @@ declare interface Cdn {
   ListClsTopicDomains(data: ListClsTopicDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<ListClsTopicDomainsResponse>;
   /** @deprecated 获取诊断任务列表(已废弃) {@link ListDiagnoseReportRequest} {@link ListDiagnoseReportResponse} */
   ListDiagnoseReport(data?: ListDiagnoseReportRequest, config?: AxiosRequestConfig): AxiosPromise<ListDiagnoseReportResponse>;
-  /** @deprecated 查询SCDN域名列表 {@link ListScdnDomainsRequest} {@link ListScdnDomainsResponse} */
-  ListScdnDomains(data?: ListScdnDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<ListScdnDomainsResponse>;
-  /** @deprecated 查询SCDN日志下载任务列表 {@link ListScdnLogTasksRequest} {@link ListScdnLogTasksResponse} */
-  ListScdnLogTasks(data?: ListScdnLogTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListScdnLogTasksResponse>;
-  /** @deprecated 获取Bot攻击的Top数据列表 {@link ListScdnTopBotDataRequest} {@link ListScdnTopBotDataResponse} */
-  ListScdnTopBotData(data: ListScdnTopBotDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListScdnTopBotDataResponse>;
-  /** @deprecated 获取Bot攻击的Top信息 {@link ListTopBotDataRequest} {@link ListTopBotDataResponse} */
-  ListTopBotData(data: ListTopBotDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopBotDataResponse>;
-  /** @deprecated 获取CC攻击Top数据 {@link ListTopCcDataRequest} {@link ListTopCcDataResponse} */
-  ListTopCcData(data: ListTopCcDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopCcDataResponse>;
   /** 通过CLS日志计算Top信息 {@link ListTopClsLogDataRequest} {@link ListTopClsLogDataResponse} */
   ListTopClsLogData(data: ListTopClsLogDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopClsLogDataResponse>;
-  /** @deprecated 获取DDoS攻击Top数据 {@link ListTopDDoSDataRequest} {@link ListTopDDoSDataResponse} */
-  ListTopDDoSData(data: ListTopDDoSDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopDDoSDataResponse>;
   /** TOP 数据查询 {@link ListTopDataRequest} {@link ListTopDataResponse} */
   ListTopData(data: ListTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopDataResponse>;
-  /** @deprecated 获取Waf攻击Top数据 {@link ListTopWafDataRequest} {@link ListTopWafDataResponse} */
-  ListTopWafData(data: ListTopWafDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopWafDataResponse>;
   /** 管理日志主题下绑定的域名 {@link ManageClsTopicDomainsRequest} {@link ManageClsTopicDomainsResponse} */
   ManageClsTopicDomains(data: ManageClsTopicDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<ManageClsTopicDomainsResponse>;
   /** 变更加速域名配置 {@link ModifyDomainConfigRequest} {@link ModifyDomainConfigResponse} */
@@ -4617,20 +3543,14 @@ declare interface Cdn {
   SearchClsLog(data: SearchClsLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClsLogResponse>;
   /** 启用加速域名 {@link StartCdnDomainRequest} {@link StartCdnDomainResponse} */
   StartCdnDomain(data: StartCdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<StartCdnDomainResponse>;
-  /** @deprecated 启动SCDN域名安全防护 {@link StartScdnDomainRequest} {@link StartScdnDomainResponse} */
-  StartScdnDomain(data: StartScdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<StartScdnDomainResponse>;
   /** 停用加速域名 {@link StopCdnDomainRequest} {@link StopCdnDomainResponse} */
   StopCdnDomain(data: StopCdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<StopCdnDomainResponse>;
-  /** @deprecated 停止SCDN域名安全防护 {@link StopScdnDomainRequest} {@link StopScdnDomainResponse} */
-  StopScdnDomain(data: StopScdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<StopScdnDomainResponse>;
   /** 更新加速域名配置 {@link UpdateDomainConfigRequest} {@link UpdateDomainConfigResponse} */
   UpdateDomainConfig(data: UpdateDomainConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDomainConfigResponse>;
   /** 更新图片优化配置 {@link UpdateImageConfigRequest} {@link UpdateImageConfigResponse} */
   UpdateImageConfig(data: UpdateImageConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateImageConfigResponse>;
   /** 修改计费类型 {@link UpdatePayTypeRequest} {@link UpdatePayTypeResponse} */
   UpdatePayType(data: UpdatePayTypeRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePayTypeResponse>;
-  /** @deprecated 更新SCDN域名配置 {@link UpdateScdnDomainRequest} {@link UpdateScdnDomainResponse} */
-  UpdateScdnDomain(data: UpdateScdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateScdnDomainResponse>;
   /** 验证域名解析 {@link VerifyDomainRecordRequest} {@link VerifyDomainRecordResponse} */
   VerifyDomainRecord(data: VerifyDomainRecordRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyDomainRecordResponse>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */

@@ -2,6 +2,32 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** API 资源。 */
+declare interface APIResource {
+  /** 资源 ID。 */
+  Id?: string;
+  /** 资源名称。 */
+  Name?: string;
+  /** API 资源关联的 API 服务 ID 列表。 */
+  APIServiceIds?: string[];
+  /** 资源路径。 */
+  Path?: string;
+  /** 请求方法列表。支持以下取值：GET, POST, PUT, HEAD, PATCH, OPTIONS, DELETE。 */
+  Methods?: string[];
+  /** 请求内容匹配规则的具体内容，需符合表达式语法，详细规范参见产品文档。 */
+  RequestConstraint?: string;
+}
+
+/** API 服务配置。 */
+declare interface APIService {
+  /** API 服务 ID。 */
+  Id?: string;
+  /** API 服务名称。 */
+  Name?: string;
+  /** 基础路径。 */
+  BasePath?: string;
+}
+
 /** 中国大陆加速优化配置。 */
 declare interface AccelerateMainland {
   /** 是否开启中国大陆加速优化配置，取值有：on：开启；off：关闭。 */
@@ -342,6 +368,14 @@ declare interface AscriptionInfo {
   RecordType?: string;
   /** 记录值。 */
   RecordValue?: string;
+}
+
+/** 音频流配置参数。 */
+declare interface AudioTemplateInfo {
+  /** 音频流的编码格式。可选值为：libfdk_aac。 */
+  Codec: string;
+  /** 音频通道数，可选值：2：双通道。默认值：2。 */
+  AudioChannel?: number;
 }
 
 /** Token 鉴权 配置参数。 */
@@ -730,6 +764,24 @@ declare interface ClientAttestationRule {
 declare interface ClientAttestationRules {
   /** 客户端认证的列表。使用 ModifySecurityPolicy 修改 Web 防护配置时： 若未指定 SecurityPolicy.BotManagement.ClientAttestationRules 中的 Rules 参数，或 Rules 参数长度为零：清空所有客户端认证规则配置。 若 SecurityPolicy.BotManagement 参数中，未指定 ClientAttestationRules 参数值：保持已有客户端认证规则配置，不做修改。 */
   Rules?: ClientAttestationRule[];
+}
+
+/** 认证选项配置。 */
+declare interface ClientAttester {
+  /** 认证选项 ID。 */
+  Id?: string;
+  /** 认证选项名称。 */
+  Name?: string;
+  /** 认证规则类型。仅出参返回，取值有：PRESET: 系统预置规则，仅允许修改 AttesterDuration；CUSTOM: 用户自定义规则。 */
+  Type?: string;
+  /** 认证方法。取值有：TC-RCE: 使用全栈式风控引擎进行认证；TC-CAPTCHA: 使用天御验证码进行认证。 */
+  AttesterSource?: string;
+  /** 认证有效时间。默认为 60s，支持的单位有：s：秒，取值范围 60～43200；m：分，取值范围 1～720；h：小时，取值范围 1～12。 */
+  AttesterDuration?: string;
+  /** TC-RCE 认证的配置信息。当 AttesterSource 参数值为 TC-RCE 时，此字段必填。 */
+  TCRCEOption?: TCRCEOption;
+  /** TC-CAPTCHA 认证的配置信息。当 AttesterSource 参数值为 TC-CAPTCHA 时，此字段必填。 */
+  TCCaptchaOption?: TCCaptchaOption;
 }
 
 /** 智能客户端过滤 */
@@ -1776,6 +1828,44 @@ declare interface Ipv6 {
 declare interface JITVideoProcess {
   /** 视频即时处理配置开关，取值有：on：开启；off：关闭。 */
   Switch: string;
+}
+
+/** JavaScript 注入规则。 */
+declare interface JSInjectionRule {
+  /** 规则 ID。 */
+  RuleId?: string;
+  /** 规则名称。 */
+  Name?: string;
+  /** 规则优先级，数值越小越优先执行，范围是 0 ~ 100，默认为 0。 */
+  Priority?: number;
+  /** 匹配条件内容。需符合表达式语法，详细规范参见产品文档。 */
+  Condition?: string;
+  /** JavaScript 注入选项。默认值为 run-attestations，取值有： no-injection: 不注入 JavaScript; inject-sdk-only: 注入当前支持的所有认证方式的 SDK，当前支持：TC-RCE 和 TC-CAPTCHA。注意：若需执行认证检测，请配置挑战规则。 */
+  InjectJS?: string;
+}
+
+/** 即时转码模板详情。 */
+declare interface JustInTimeTranscodeTemplate {
+  /** 即时转码模板唯一标识。 */
+  TemplateId?: string;
+  /** 转码模板名称。 */
+  TemplateName?: string;
+  /** 模板描述信息。 */
+  Comment?: string;
+  /** 模板类型，取值：preset：系统预置模板；custom：用户自定义模板。 */
+  Type?: string;
+  /** 启用视频流开关，取值：on：开启；off：关闭。 */
+  VideoStreamSwitch?: string;
+  /** 启用音频流开关，取值：on：开启；off：关闭。 */
+  AudioStreamSwitch?: string;
+  /** 视频流配置参数，仅当 VideoStreamSwitch 为 on，该字段有效。 */
+  VideoTemplate?: VideoTemplateInfo;
+  /** 音频流配置参数，仅当 AudioStreamSwitch 为 on，该字段有效。 */
+  AudioTemplate?: AudioTemplateInfo;
+  /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  CreateTime?: string;
+  /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  UpdateTime?: string;
 }
 
 /** 离线日志详细信息 */
@@ -3294,6 +3384,20 @@ declare interface SwitchConfig {
   WebSwitch: string;
 }
 
+/** 验证码认证实例信息。 */
+declare interface TCCaptchaOption {
+  /** CaptchaAppId 信息。 */
+  CaptchaAppId: string;
+  /** AppSecretKey 信息。 */
+  AppSecretKey: string;
+}
+
+/** RCE 认证选项实例信息。 */
+declare interface TCRCEOption {
+  /** Channel 信息。 */
+  Channel: string;
+}
+
 /** SSL/TLS 安全配置参数。 */
 declare interface TLSConfigParameters {
   /** TLS 版本。至少填写一个，如果是多个时，需要为连续版本号，例如：开启 TLS1、1.1、1.2 和 1.3，不可仅开启 1 和 1.2 而关闭 1.1。取值有：TLSv1：TLSv1 版本；TLSv1.1：TLSv1.1 版本；TLSv1.2：TLSv1.2 版本；TLSv1.3：TLSv1.3 版本。 */
@@ -3506,6 +3610,24 @@ declare interface VanityNameServersIps {
 declare interface VaryParameters {
   /** Vary 特性配置开关，取值有：on：开启；off：关闭。 */
   Switch: string;
+}
+
+/** 视频流配置参数。 */
+declare interface VideoTemplateInfo {
+  /** 视频流的编码格式，可选值：H.264: 使用 H.264 编码；H.265: 使用 H.265 编码。 */
+  Codec: string;
+  /** 视频帧率，取值范围：[0, 30]，单位：Hz。取值为 0，表示帧率和原始视频保持一致，但最大不超过 30。默认值：0。 */
+  Fps?: number;
+  /** 视频流的码率，取值范围：0 和 [128, 10000]，单位：kbps。取值为 0，表示自动根据视频画面和质量选择视频码率。默认值：0。 */
+  Bitrate?: number;
+  /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
+  ResolutionAdaptive?: string;
+  /** 视频流宽度（或长边）的最大值，取值范围：0 和 [128, 1920]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
+  Width?: number;
+  /** 视频流高度（或短边）的最大值，取值范围：0 和 [128, 1080]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
+  Height?: number;
+  /** 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式： stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁”或者“拉长”。black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊填充。默认值：black 。 */
+  FillType?: string;
 }
 
 /** 无 */
@@ -4020,6 +4142,30 @@ declare interface CreateFunctionRuleResponse {
   RequestId?: string;
 }
 
+declare interface CreateJustInTimeTranscodeTemplateRequest {
+  /** 站点ID。 */
+  ZoneId: string;
+  /** 即时转码模板名称，长度限制：64 个字符。 */
+  TemplateName: string;
+  /** 模板描述信息，长度限制：256 个字符。默认为空。 */
+  Comment?: string;
+  /** 启用视频流开关，取值：on：开启；off：关闭。默认值：on。 */
+  VideoStreamSwitch?: string;
+  /** 启用音频流开关，取值：on：开启；off：关闭。默认值：on。 */
+  AudioStreamSwitch?: string;
+  /** 视频流配置参数，当 VideoStreamSwitch 为 on，该字段必填。 */
+  VideoTemplate?: VideoTemplateInfo;
+  /** 音频流配置参数，当 AudioStreamSwitch 为 on，该字段必填。 */
+  AudioTemplate?: AudioTemplateInfo;
+}
+
+declare interface CreateJustInTimeTranscodeTemplateResponse {
+  /** 即时转码模板唯一标识，用于即时转码 URL 拼接。 */
+  TemplateId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateL4ProxyRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -4312,6 +4458,48 @@ declare interface CreateRuleResponse {
   RequestId?: string;
 }
 
+declare interface CreateSecurityAPIResourceRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** API 资源列表。 */
+  APIResources?: APIResource[];
+}
+
+declare interface CreateSecurityAPIResourceResponse {
+  /** API 资源 ID 列表。 */
+  APIResourceIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSecurityAPIServiceRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** API 服务列表。 */
+  APIServices?: APIService[];
+}
+
+declare interface CreateSecurityAPIServiceResponse {
+  /** API 服务 ID 列表。 */
+  APIServiceIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSecurityClientAttesterRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 认证选项列表。 */
+  ClientAttesters?: ClientAttester[];
+}
+
+declare interface CreateSecurityClientAttesterResponse {
+  /** 认证选项 ID 列表。 */
+  ClientAttesterIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSecurityIPGroupRequest {
   /** 站点 Id。 */
   ZoneId: string;
@@ -4322,6 +4510,20 @@ declare interface CreateSecurityIPGroupRequest {
 declare interface CreateSecurityIPGroupResponse {
   /** IP 组 Id。 */
   GroupId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSecurityJSInjectionRuleRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** JavaScript 注入规则列表。 */
+  JSInjectionRules?: JSInjectionRule[];
+}
+
+declare interface CreateSecurityJSInjectionRuleResponse {
+  /** JavaScript 注入规则 ID 列表。 */
+  JSInjectionRuleIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4496,6 +4698,18 @@ declare interface DeleteFunctionRulesResponse {
   RequestId?: string;
 }
 
+declare interface DeleteJustInTimeTranscodeTemplatesRequest {
+  /** 站点ID。 */
+  ZoneId: string;
+  /** 需删除的即时转码模板唯一标识数组，长度限制：100。 */
+  TemplateIds: string[];
+}
+
+declare interface DeleteJustInTimeTranscodeTemplatesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteL4ProxyRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -4608,6 +4822,42 @@ declare interface DeleteRulesResponse {
   RequestId?: string;
 }
 
+declare interface DeleteSecurityAPIResourceRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 需要删除的 API 资源 ID 列表。 */
+  APIResourceIds?: string[];
+}
+
+declare interface DeleteSecurityAPIResourceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSecurityAPIServiceRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** API 服务 ID 列表。 */
+  APIServiceIds?: string[];
+}
+
+declare interface DeleteSecurityAPIServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSecurityClientAttesterRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 客户端认证选项 ID。 */
+  ClientAttesterIds?: string[];
+}
+
+declare interface DeleteSecurityClientAttesterResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteSecurityIPGroupRequest {
   /** 站点 Id。 */
   ZoneId: string;
@@ -4616,6 +4866,18 @@ declare interface DeleteSecurityIPGroupRequest {
 }
 
 declare interface DeleteSecurityIPGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSecurityJSInjectionRuleRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** JavaScript 注入规则 ID 列表。 */
+  JSInjectionRuleIds: string[];
+}
+
+declare interface DeleteSecurityJSInjectionRuleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5142,6 +5404,30 @@ declare interface DescribeIdentificationsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeJustInTimeTranscodeTemplatesRequest {
+  /** 站点ID。 */
+  ZoneId: string;
+  /** 过滤条件，Filters 的上限为 20，Filters.Values 的上限为 20。该参数不填写时，默认返回当前 ZoneId 下有权限的即时转码模板。详细的过滤条件如下：template-name：按照模版名批量进行过滤。例如：mytemplate；template-type：按照模板类型批量进行过滤。例如：preset 或 custom。template-id：按照模板 ID 批量进行过滤。例如：C1LZ7982VgTpYhJ7M。默认为空。 */
+  Filters?: Filter[];
+  /** 排序字段，取值有：createTime：模板创建时间。默认值为：createTime。 */
+  SortBy?: string;
+  /** 排序方式，取值有：asc：升序方式；desc：降序方式。默认值为：desc。 */
+  SortOrder?: string;
+  /** 分页偏移量，默认值：0。 */
+  Offset?: number;
+  /** 返回记录条数，默认值：20，最大值：1000。 */
+  Limit?: number;
+}
+
+declare interface DescribeJustInTimeTranscodeTemplatesResponse {
+  /** 符合过滤条件的记录总数。 */
+  TotalCount?: number;
+  /** 模板详情列表。 */
+  TemplateSet?: JustInTimeTranscodeTemplate[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeL4ProxyRequest {
   /** 四层代理实例所属站点的 ID。 */
   ZoneId: string;
@@ -5522,6 +5808,80 @@ declare interface DescribeRulesSettingResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSecurityAPIResourceRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 分页查询限制数目。默认值：20，最大值：100。 */
+  Limit?: number;
+  /** 分页查询偏移量。默认值：0。 */
+  Offset?: number;
+}
+
+declare interface DescribeSecurityAPIResourceResponse {
+  /** API 资源总数量。 */
+  TotalCount?: number;
+  /** API 资源列表。 */
+  APIResources?: APIResource[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSecurityAPIServiceRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 分页查询限制数目。默认值：20，最大值：100。 */
+  Limit?: number;
+  /** 分页查询偏移量。默认值：0。 */
+  Offset?: number;
+}
+
+declare interface DescribeSecurityAPIServiceResponse {
+  /** API 服务总数量。 */
+  TotalCount?: number;
+  /** API 服务列表。 */
+  APIServices?: APIService[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSecurityClientAttesterRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 分页查询限制数目。默认值：20，最大值：100。 */
+  Limit?: number;
+  /** 分页查询偏移量。默认值：0。 */
+  Offset?: number;
+}
+
+declare interface DescribeSecurityClientAttesterResponse {
+  /** 认证选项总数量。 */
+  TotalCount?: number;
+  /** 认证选项列表。 */
+  ClientAttesters?: ClientAttester[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSecurityIPGroupContentRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** IP 组 ID。 */
+  GroupId: number;
+  /** 分页查询限制数目。默认值：2000，最大值：100000。 */
+  Limit?: number;
+  /** 分页查询偏移量。默认值：0。 */
+  Offset?: number;
+}
+
+declare interface DescribeSecurityIPGroupContentResponse {
+  /** IP 组中正在生效的 IP 或网段个数。 */
+  IPTotalCount?: number;
+  /** 满足查询条件的 IP 或网段列表。受 Limit 和 Offset 参数限制。 */
+  IPList?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSecurityIPGroupInfoRequest {
   /** 站点的 ID ，用于指定查询的站点范围。 */
   ZoneId: string;
@@ -5550,6 +5910,24 @@ declare interface DescribeSecurityIPGroupRequest {
 declare interface DescribeSecurityIPGroupResponse {
   /** 安全 IP 组的详细配置信息。包含每个安全 IP 组的 ID 、名称、IP / 网段总数量、 IP / 网段列表信息和过期时间信息。 */
   IPGroups?: IPGroup[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSecurityJSInjectionRuleRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 分页查询限制数目。默认值：20，最大值：100。 */
+  Limit?: number;
+  /** 分页查询偏移量。默认值：0。 */
+  Offset?: number;
+}
+
+declare interface DescribeSecurityJSInjectionRuleResponse {
+  /** JavaScript 注入规则总数量。 */
+  TotalCount?: number;
+  /** JavaScript 注入规则列表。 */
+  JSInjectionRules?: JSInjectionRule[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6526,6 +6904,42 @@ declare interface ModifyRuleResponse {
   RequestId?: string;
 }
 
+declare interface ModifySecurityAPIResourceRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** API 资源列表。 */
+  APIResources?: APIResource[];
+}
+
+declare interface ModifySecurityAPIResourceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySecurityAPIServiceRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** API 服务列表。 */
+  APIServices?: APIService[];
+}
+
+declare interface ModifySecurityAPIServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySecurityClientAttesterRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 认证选项列表。 */
+  ClientAttesters?: ClientAttester[];
+}
+
+declare interface ModifySecurityClientAttesterResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifySecurityIPGroupRequest {
   /** 站点 Id。 */
   ZoneId: string;
@@ -6536,6 +6950,18 @@ declare interface ModifySecurityIPGroupRequest {
 }
 
 declare interface ModifySecurityIPGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySecurityJSInjectionRuleRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** JavaScript 注入规则列表。 */
+  JSInjectionRules?: JSInjectionRule[];
+}
+
+declare interface ModifySecurityJSInjectionRuleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6991,6 +7417,8 @@ declare interface Teo {
   CreateFunction(data: CreateFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFunctionResponse>;
   /** 创建边缘函数触发规则 {@link CreateFunctionRuleRequest} {@link CreateFunctionRuleResponse} */
   CreateFunctionRule(data: CreateFunctionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFunctionRuleResponse>;
+  /** 创建即时转码模板 {@link CreateJustInTimeTranscodeTemplateRequest} {@link CreateJustInTimeTranscodeTemplateResponse} */
+  CreateJustInTimeTranscodeTemplate(data: CreateJustInTimeTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJustInTimeTranscodeTemplateResponse>;
   /** 创建四层代理实例 {@link CreateL4ProxyRequest} {@link CreateL4ProxyResponse} */
   CreateL4Proxy(data: CreateL4ProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL4ProxyResponse>;
   /** 创建四层代理转发规则 {@link CreateL4ProxyRulesRequest} {@link CreateL4ProxyRulesResponse} */
@@ -7019,8 +7447,16 @@ declare interface Teo {
   CreateRealtimeLogDeliveryTask(data: CreateRealtimeLogDeliveryTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRealtimeLogDeliveryTaskResponse>;
   /** 创建规则引擎规则（旧） {@link CreateRuleRequest} {@link CreateRuleResponse} */
   CreateRule(data: CreateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleResponse>;
+  /** 创建 API 资源 {@link CreateSecurityAPIResourceRequest} {@link CreateSecurityAPIResourceResponse} */
+  CreateSecurityAPIResource(data: CreateSecurityAPIResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityAPIResourceResponse>;
+  /** 创建 API 服务 {@link CreateSecurityAPIServiceRequest} {@link CreateSecurityAPIServiceResponse} */
+  CreateSecurityAPIService(data: CreateSecurityAPIServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityAPIServiceResponse>;
+  /** 创建客户端认证选项 {@link CreateSecurityClientAttesterRequest} {@link CreateSecurityClientAttesterResponse} */
+  CreateSecurityClientAttester(data: CreateSecurityClientAttesterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityClientAttesterResponse>;
   /** 创建安全 IP 组 {@link CreateSecurityIPGroupRequest} {@link CreateSecurityIPGroupResponse} */
   CreateSecurityIPGroup(data: CreateSecurityIPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityIPGroupResponse>;
+  /** 创建 JavaScript 注入规则 {@link CreateSecurityJSInjectionRuleRequest} {@link CreateSecurityJSInjectionRuleResponse} */
+  CreateSecurityJSInjectionRule(data: CreateSecurityJSInjectionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityJSInjectionRuleResponse>;
   /** 创建共享 CNAME {@link CreateSharedCNAMERequest} {@link CreateSharedCNAMEResponse} */
   CreateSharedCNAME(data: CreateSharedCNAMERequest, config?: AxiosRequestConfig): AxiosPromise<CreateSharedCNAMEResponse>;
   /** 创建安全策略配置模板 {@link CreateWebSecurityTemplateRequest} {@link CreateWebSecurityTemplateResponse} */
@@ -7045,6 +7481,8 @@ declare interface Teo {
   DeleteFunction(data: DeleteFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFunctionResponse>;
   /** 删除边缘函数触发规则 {@link DeleteFunctionRulesRequest} {@link DeleteFunctionRulesResponse} */
   DeleteFunctionRules(data: DeleteFunctionRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFunctionRulesResponse>;
+  /** 删除即时转码模版 {@link DeleteJustInTimeTranscodeTemplatesRequest} {@link DeleteJustInTimeTranscodeTemplatesResponse} */
+  DeleteJustInTimeTranscodeTemplates(data: DeleteJustInTimeTranscodeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteJustInTimeTranscodeTemplatesResponse>;
   /** 删除四层代理实例 {@link DeleteL4ProxyRequest} {@link DeleteL4ProxyResponse} */
   DeleteL4Proxy(data: DeleteL4ProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteL4ProxyResponse>;
   /** 删除四层代理转发规则 {@link DeleteL4ProxyRulesRequest} {@link DeleteL4ProxyRulesResponse} */
@@ -7063,8 +7501,16 @@ declare interface Teo {
   DeleteRealtimeLogDeliveryTask(data: DeleteRealtimeLogDeliveryTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRealtimeLogDeliveryTaskResponse>;
   /** 批量删除规则引擎规则（旧） {@link DeleteRulesRequest} {@link DeleteRulesResponse} */
   DeleteRules(data: DeleteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRulesResponse>;
+  /** 删除 API 资源 {@link DeleteSecurityAPIResourceRequest} {@link DeleteSecurityAPIResourceResponse} */
+  DeleteSecurityAPIResource(data: DeleteSecurityAPIResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityAPIResourceResponse>;
+  /** 删除 API 服务 {@link DeleteSecurityAPIServiceRequest} {@link DeleteSecurityAPIServiceResponse} */
+  DeleteSecurityAPIService(data: DeleteSecurityAPIServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityAPIServiceResponse>;
+  /** 删除客户端认证选项 {@link DeleteSecurityClientAttesterRequest} {@link DeleteSecurityClientAttesterResponse} */
+  DeleteSecurityClientAttester(data: DeleteSecurityClientAttesterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityClientAttesterResponse>;
   /** 删除安全 IP 组 {@link DeleteSecurityIPGroupRequest} {@link DeleteSecurityIPGroupResponse} */
   DeleteSecurityIPGroup(data: DeleteSecurityIPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityIPGroupResponse>;
+  /** 删除 JavaScript 注入规则 {@link DeleteSecurityJSInjectionRuleRequest} {@link DeleteSecurityJSInjectionRuleResponse} */
+  DeleteSecurityJSInjectionRule(data: DeleteSecurityJSInjectionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityJSInjectionRuleResponse>;
   /** 删除共享 CNAME {@link DeleteSharedCNAMERequest} {@link DeleteSharedCNAMEResponse} */
   DeleteSharedCNAME(data: DeleteSharedCNAMERequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSharedCNAMEResponse>;
   /** 删除安全策略配置模板 {@link DeleteWebSecurityTemplateRequest} {@link DeleteWebSecurityTemplateResponse} */
@@ -7121,6 +7567,8 @@ declare interface Teo {
   DescribeIPRegion(data: DescribeIPRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPRegionResponse>;
   /** 查询站点的验证信息 {@link DescribeIdentificationsRequest} {@link DescribeIdentificationsResponse} */
   DescribeIdentifications(data: DescribeIdentificationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIdentificationsResponse>;
+  /** 获取即时转码模版列表 {@link DescribeJustInTimeTranscodeTemplatesRequest} {@link DescribeJustInTimeTranscodeTemplatesResponse} */
+  DescribeJustInTimeTranscodeTemplates(data: DescribeJustInTimeTranscodeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJustInTimeTranscodeTemplatesResponse>;
   /** 查询四层代理实例列表 {@link DescribeL4ProxyRequest} {@link DescribeL4ProxyResponse} */
   DescribeL4Proxy(data: DescribeL4ProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL4ProxyResponse>;
   /** 查询四层代理转发规则列表 {@link DescribeL4ProxyRulesRequest} {@link DescribeL4ProxyRulesResponse} */
@@ -7163,10 +7611,20 @@ declare interface Teo {
   DescribeRules(data: DescribeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesResponse>;
   /** 查询规则引擎的设置参数（旧） {@link DescribeRulesSettingRequest} {@link DescribeRulesSettingResponse} */
   DescribeRulesSetting(data?: DescribeRulesSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRulesSettingResponse>;
+  /** 查询 API 资源 {@link DescribeSecurityAPIResourceRequest} {@link DescribeSecurityAPIResourceResponse} */
+  DescribeSecurityAPIResource(data: DescribeSecurityAPIResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityAPIResourceResponse>;
+  /** 查询 API 服务 {@link DescribeSecurityAPIServiceRequest} {@link DescribeSecurityAPIServiceResponse} */
+  DescribeSecurityAPIService(data: DescribeSecurityAPIServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityAPIServiceResponse>;
+  /** 查询客户端认证选项 {@link DescribeSecurityClientAttesterRequest} {@link DescribeSecurityClientAttesterResponse} */
+  DescribeSecurityClientAttester(data: DescribeSecurityClientAttesterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityClientAttesterResponse>;
   /** 查询安全 IP 组 {@link DescribeSecurityIPGroupRequest} {@link DescribeSecurityIPGroupResponse} */
   DescribeSecurityIPGroup(data: DescribeSecurityIPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityIPGroupResponse>;
+  /** 分页查询 IP 组中的 IP 列表 {@link DescribeSecurityIPGroupContentRequest} {@link DescribeSecurityIPGroupContentResponse} */
+  DescribeSecurityIPGroupContent(data: DescribeSecurityIPGroupContentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityIPGroupContentResponse>;
   /** 查询安全 IP 组（已废弃） {@link DescribeSecurityIPGroupInfoRequest} {@link DescribeSecurityIPGroupInfoResponse} */
   DescribeSecurityIPGroupInfo(data: DescribeSecurityIPGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityIPGroupInfoResponse>;
+  /** 查询 JavaScript 注入规则 {@link DescribeSecurityJSInjectionRuleRequest} {@link DescribeSecurityJSInjectionRuleResponse} */
+  DescribeSecurityJSInjectionRule(data: DescribeSecurityJSInjectionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityJSInjectionRuleResponse>;
   /** 查询安全防护配置详情 {@link DescribeSecurityPolicyRequest} {@link DescribeSecurityPolicyResponse} */
   DescribeSecurityPolicy(data: DescribeSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPolicyResponse>;
   /** 查询指定策略模板的绑定关系列表 {@link DescribeSecurityTemplateBindingsRequest} {@link DescribeSecurityTemplateBindingsResponse} */
@@ -7277,8 +7735,16 @@ declare interface Teo {
   ModifyRealtimeLogDeliveryTask(data: ModifyRealtimeLogDeliveryTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRealtimeLogDeliveryTaskResponse>;
   /** 修改规则引擎规则（旧） {@link ModifyRuleRequest} {@link ModifyRuleResponse} */
   ModifyRule(data: ModifyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleResponse>;
+  /** 修改 API 资源 {@link ModifySecurityAPIResourceRequest} {@link ModifySecurityAPIResourceResponse} */
+  ModifySecurityAPIResource(data: ModifySecurityAPIResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityAPIResourceResponse>;
+  /** 修改 API 服务 {@link ModifySecurityAPIServiceRequest} {@link ModifySecurityAPIServiceResponse} */
+  ModifySecurityAPIService(data: ModifySecurityAPIServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityAPIServiceResponse>;
+  /** 修改客户端认证选项 {@link ModifySecurityClientAttesterRequest} {@link ModifySecurityClientAttesterResponse} */
+  ModifySecurityClientAttester(data: ModifySecurityClientAttesterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityClientAttesterResponse>;
   /** 修改安全 IP 组 {@link ModifySecurityIPGroupRequest} {@link ModifySecurityIPGroupResponse} */
   ModifySecurityIPGroup(data: ModifySecurityIPGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityIPGroupResponse>;
+  /** 修改 JavaScript 注入规则 {@link ModifySecurityJSInjectionRuleRequest} {@link ModifySecurityJSInjectionRuleResponse} */
+  ModifySecurityJSInjectionRule(data: ModifySecurityJSInjectionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityJSInjectionRuleResponse>;
   /** 修改Web&Bot安全配置 {@link ModifySecurityPolicyRequest} {@link ModifySecurityPolicyResponse} */
   ModifySecurityPolicy(data: ModifySecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityPolicyResponse>;
   /** 修改安全策略配置模板 {@link ModifyWebSecurityTemplateRequest} {@link ModifyWebSecurityTemplateResponse} */

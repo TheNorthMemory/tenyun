@@ -1896,6 +1896,34 @@ declare interface NetworkConfig {
   VipStatus?: number;
 }
 
+/** 规则引擎白名单 */
+declare interface OwaspWhiteRule {
+  /** 白名单的规则ID */
+  RuleId?: number;
+  /** 规则名 */
+  Name?: string;
+  /** 加白的规则ID列表 */
+  Ids?: number[];
+  /** 白名单规则的状态，0：关闭、1：开启 */
+  Status?: number;
+  /** 加白的类型，0:按照特定规则ID加白、1:按照规则类型加白 */
+  Type?: number;
+  /** 规则匹配策略列表 */
+  Strategies?: Strategy[];
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 修改时间 */
+  UpdateTime?: string;
+  /** 定时任务类型 */
+  JobType?: string;
+  /** 定时任务配置 */
+  JobDateTime?: JobDateTime;
+  /** 周期任务粒度 */
+  CronType?: string;
+  /** 当前是否有效 */
+  ValidStatus?: boolean;
+}
+
 /** bot-自定义规则请求参数比对结构体 */
 declare interface ParamCompareList {
   /** 请求参数比对的匹配参数 */
@@ -2908,6 +2936,34 @@ declare interface CreateIpAccessControlResponse {
   RequestId?: string;
 }
 
+declare interface CreateOwaspWhiteRuleRequest {
+  /** 规则名称 */
+  Name: string;
+  /** 域名 */
+  Domain: string;
+  /** 规则匹配策略列表 */
+  Strategies: Strategy[];
+  /** 加白的规则ID列表 */
+  Ids: number[];
+  /** 加白的类型，0:按照特定规则ID加白, 1:按照规则类型加白 */
+  Type: number;
+  /** 规则执行的方式，TimedJob为定时执行，CronJob为周期执行 */
+  JobType: string;
+  /** 定时任务配置 */
+  JobDateTime: JobDateTime;
+  /** 如果没有设置JobDateTime字段则用此字段，0表示永久生效，其它表示定时生效的截止时间（单位为秒） */
+  ExpireTime: number;
+  /** 规则状态，0：关闭、1：开启，默认为开启 */
+  Status?: number;
+}
+
+declare interface CreateOwaspWhiteRuleResponse {
+  /** 规则ID */
+  RuleId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreatePostCKafkaFlowRequest {
   /** 投递的CKafka所在区域 */
   CKafkaRegion: string;
@@ -3150,6 +3206,18 @@ declare interface DeleteIpAccessControlV2Request {
 declare interface DeleteIpAccessControlV2Response {
   /** 在批量删除的时候表示删除失败的条数 */
   FailedCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteOwaspWhiteRuleRequest {
+  /** 规则白名单ID列表 */
+  Ids: number[];
+  /** 域名 */
+  Domain: string;
+}
+
+declare interface DeleteOwaspWhiteRuleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4174,6 +4242,30 @@ declare interface DescribeObjectsRequest {
 declare interface DescribeObjectsResponse {
   /** 对象列表 */
   ClbObjects?: ClbObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeOwaspWhiteRulesRequest {
+  /** 需要查询的域名 */
+  Domain: string;
+  /** 分页分页，默认为0 */
+  Offset?: number;
+  /** 每页容量，默认为10 */
+  Limit?: number;
+  /** 排序的字段，支持CreateTime：新建时间、UpdateTime：修改时间 */
+  By?: string;
+  /** 排序方式，支持asc、desc */
+  Order?: string;
+  /** 筛选条件，支持RuleId：加白规则ID、 Name：规则名称、RuleType：加白的规则类型、Status：规则开关状态、ValidStatus：规则生效状态、TimerType：生效方式、ID：具体的加白id，根据RuleType来判断是规则id还是类型id */
+  Filters?: FiltersItemNew[];
+}
+
+declare interface DescribeOwaspWhiteRulesResponse {
+  /** 规则总数 */
+  Total?: number;
+  /** 规则白名单列表 */
+  List?: OwaspWhiteRule[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5410,6 +5502,34 @@ declare interface ModifyObjectResponse {
   RequestId?: string;
 }
 
+declare interface ModifyOwaspWhiteRuleRequest {
+  /** 规则ID */
+  RuleId: number;
+  /** 规则名称 */
+  Name: string;
+  /** 域名 */
+  Domain: string;
+  /** 规则匹配策略列表 */
+  Strategies: Strategy[];
+  /** 加白的规则ID列表 */
+  Ids: number[];
+  /** 加白的类型，0:按照特定规则ID加白, 1:按照规则类型加白 */
+  Type: number;
+  /** 规则执行的方式，TimedJob为定时执行，CronJob为周期执行 */
+  JobType: string;
+  /** 定时任务配置 */
+  JobDateTime: JobDateTime;
+  /** 如果没有设置JobDateTime字段则用此字段，0表示永久生效，其它表示定时生效的截止时间（单位为秒） */
+  ExpireTime: number;
+  /** 规则状态，0：关闭、1：开启，默认为开启 */
+  Status?: number;
+}
+
+declare interface ModifyOwaspWhiteRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyProtectionStatusRequest {
   /** 域名 */
   Domain: string;
@@ -5961,6 +6081,8 @@ declare interface Waf {
   CreateHost(data: CreateHostRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostResponse>;
   /** IP黑白名单新增接口 {@link CreateIpAccessControlRequest} {@link CreateIpAccessControlResponse} */
   CreateIpAccessControl(data: CreateIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIpAccessControlResponse>;
+  /** 添加规则引擎白名单 {@link CreateOwaspWhiteRuleRequest} {@link CreateOwaspWhiteRuleResponse} */
+  CreateOwaspWhiteRule(data: CreateOwaspWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOwaspWhiteRuleResponse>;
   /** 创建CKafka投递流任务 {@link CreatePostCKafkaFlowRequest} {@link CreatePostCKafkaFlowResponse} */
   CreatePostCKafkaFlow(data: CreatePostCKafkaFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePostCKafkaFlowResponse>;
   /** 创建CLS投递流任务 {@link CreatePostCLSFlowRequest} {@link CreatePostCLSFlowResponse} */
@@ -5991,6 +6113,8 @@ declare interface Waf {
   DeleteIpAccessControl(data: DeleteIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIpAccessControlResponse>;
   /** IP黑白名单删除接口 {@link DeleteIpAccessControlV2Request} {@link DeleteIpAccessControlV2Response} */
   DeleteIpAccessControlV2(data: DeleteIpAccessControlV2Request, config?: AxiosRequestConfig): AxiosPromise<DeleteIpAccessControlV2Response>;
+  /** 删除用户规则引擎白名单 {@link DeleteOwaspWhiteRuleRequest} {@link DeleteOwaspWhiteRuleResponse} */
+  DeleteOwaspWhiteRule(data: DeleteOwaspWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOwaspWhiteRuleResponse>;
   /** 删除CC攻击的session设置 {@link DeleteSessionRequest} {@link DeleteSessionResponse} */
   DeleteSession(data: DeleteSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSessionResponse>;
   /** 删除SaaS型WAF防护域名 {@link DeleteSpartaProtectionRequest} {@link DeleteSpartaProtectionResponse} */
@@ -6083,6 +6207,8 @@ declare interface Waf {
   DescribeModuleStatus(data: DescribeModuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModuleStatusResponse>;
   /** 查看防护对象列表 {@link DescribeObjectsRequest} {@link DescribeObjectsResponse} */
   DescribeObjects(data?: DescribeObjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeObjectsResponse>;
+  /** 获取用户规则引擎白名单 {@link DescribeOwaspWhiteRulesRequest} {@link DescribeOwaspWhiteRulesResponse} */
+  DescribeOwaspWhiteRules(data: DescribeOwaspWhiteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOwaspWhiteRulesResponse>;
   /** 查询业务和攻击概要趋势 {@link DescribePeakPointsRequest} {@link DescribePeakPointsResponse} */
   DescribePeakPoints(data: DescribePeakPointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePeakPointsResponse>;
   /** 获取业务和攻击概览峰值 {@link DescribePeakValueRequest} {@link DescribePeakValueResponse} */
@@ -6219,6 +6345,8 @@ declare interface Waf {
   ModifyModuleStatus(data: ModifyModuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModuleStatusResponse>;
   /** 修改防护对象 {@link ModifyObjectRequest} {@link ModifyObjectResponse} */
   ModifyObject(data: ModifyObjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyObjectResponse>;
+  /** 编辑规则引擎白名单 {@link ModifyOwaspWhiteRuleRequest} {@link ModifyOwaspWhiteRuleResponse} */
+  ModifyOwaspWhiteRule(data: ModifyOwaspWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOwaspWhiteRuleResponse>;
   /** 开启、关闭WAF开关 {@link ModifyProtectionStatusRequest} {@link ModifyProtectionStatusResponse} */
   ModifyProtectionStatus(data: ModifyProtectionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProtectionStatusResponse>;
   /** 编辑SaaS型WAF域名 {@link ModifySpartaProtectionRequest} {@link ModifySpartaProtectionResponse} */

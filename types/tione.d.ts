@@ -1370,6 +1370,8 @@ declare interface Service {
   InstancePerReplicas?: string | null;
   /** 用于监控查询的Source枚举值，部分情况下与CreateSource不同，通过该字段兼容 */
   MonitorSource?: string;
+  /** 服务创建者的子账号名称 */
+  SubUinName?: string;
 }
 
 /** 服务的调用信息，服务组下唯一 */

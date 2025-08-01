@@ -1144,6 +1144,26 @@ declare interface OrganizationInfo {
   ProxyIp?: string;
 }
 
+/** 合同审查任务识别出的风险结果信息 */
+declare interface OutputRisk {
+  /** 合同审查风险结果ID */
+  RiskId?: string;
+  /** 风险名称 */
+  RiskName?: string;
+  /** 风险描述 */
+  RiskDescription?: string;
+  /** 风险等级。等级描述如下： **HIGH** - 高风险 **NORMAL** - 风险 */
+  RiskLevel?: string;
+  /** 风险建议 */
+  RiskAdvice?: string;
+  /** 风险评估 */
+  RiskPresentation?: string[];
+  /** PDF风险原文内容 */
+  Content?: string;
+  /** 审查依据 */
+  RiskBasis?: string;
+}
+
 /** 合同文件验签单个结果结构体 */
 declare interface PdfVerifyResult {
   /** 验签结果。0-签名域未签名；1-验签成功； 3-验签失败；4-未找到签名域：文件内没有签名域；5-签名值格式不正确。 */
@@ -1362,6 +1382,14 @@ declare interface ReviewerInfo {
   Name?: string;
   /** 手机号 */
   Mobile?: string;
+}
+
+/** 用于定义合同风险识别角色信息。 */
+declare interface RiskIdentificationRoleInfo {
+  /** 风险识别角色的名称。用于唯一标识和区分不同的风险识别角色。注意：`最大长度应不超过200个字符` */
+  Name: string;
+  /** 风险识别角色的详细说明。注意： `最大长度应不超过500个字符` */
+  Description?: string;
 }
 
 /** 模板中指定的印章信息 */
@@ -1730,6 +1758,28 @@ declare interface CreateBatchCancelFlowUrlResponse {
   UrlExpireOn?: string;
   /** 批量撤销任务编号，为32位字符串，可用于[查询批量撤销签署流程任务结果](https://qian.tencent.com/developers/companyApis/operateFlows/CreateBatchCancelFlowUrl) 或关联[批量撤销任务结果回调](https://qian.tencent.com/developers/company/callback_types_contracts_sign#%E4%B9%9D-%E6%89%B9%E9%87%8F%E6%92%A4%E9%94%80%E7%BB%93%E6%9E%9C%E5%9B%9E%E8%B0%83) */
   TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateBatchContractReviewTaskRequest {
+  /** 执行合同审查任务的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 合同审查的PDF文件资源编号列表，通过[UploadFiles](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)接口获取PDF文件资源编号。 注: `目前，此接口仅支持5个文件发起。每个文件限制在10M以下，文件必须是PDF格式` */
+  ResourceIds: string[];
+  /** 合同审查的审查立场方。审查立场方如下： **0** - 【严格】以保护己方利益为核心，对合同条款进行严格把控，尽可能争取对己方有利的条款，同时对对方提出的不合理条款可进行坚决修改或删除。 **1** - 【中立】以公平合理为原则，平衡双方的权利义务，既不过分强调己方利益，也不过度让步，力求达成双方均可接受的条款。 **2** - 【宽松】以促成交易为核心，对合同条款的修改要求较为宽松，倾向于接受对方提出的条款，以尽快达成合作。 */
+  PolicyType: number;
+  /** 合同审查中的角色信息，通过明确入参角色的名称和描述，可以提高合同审查的效率和准确性。 */
+  Role: RiskIdentificationRoleInfo;
+  /** 用户配置的审查清单ID，基于此清单ID批量创建合同审查任务，为32位字符串。[点击查看审查清单ID在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/2c6588549e28ca49bd8bb7f4a072b19e.png) */
+  ChecklistId: string;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+}
+
+declare interface CreateBatchContractReviewTaskResponse {
+  /** 合同审查的任务ID列表，每个任务ID为32位字符串。建议开发者保存此任务ID，后续[查询合同审查任务取详情](https://qian.tencent.com/developers/companyApis/%E5%90%88%E5%90%8C%E6%99%BA%E8%83%BD%E7%9B%B8%E5%85%B3%E6%8E%A5%E5%8F%A3/DescribeContractReviewTask/)需要此任务ID。注意：`返回的索引和ResourceIds数组一致` */
+  TaskIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3496,6 +3546,38 @@ declare interface DescribeContractDiffTaskWebUrlResponse {
   RequestId?: string;
 }
 
+declare interface DescribeContractReviewTaskRequest {
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 合同审查任务ID，该参数通过调用接口[批量创建合同审查任务](https://qian.tencent.com/developers/companyApis/%E5%90%88%E5%90%8C%E6%99%BA%E8%83%BD%E7%9B%B8%E5%85%B3%E6%8E%A5%E5%8F%A3/CreateBatchContractReviewTask)获取。 */
+  TaskId: string;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+}
+
+declare interface DescribeContractReviewTaskResponse {
+  /** 用于审查任务的审查清单ID。 */
+  ChecklistId?: string;
+  /** 合同审查任务创建时间。 */
+  CreatedOn?: number;
+  /** 合同审查任务完成时间。 */
+  FinishedOn?: number;
+  /** 合同审查的审查立场方。审查立场方如下： **0** - 【严格】以保护己方利益为核心，对合同条款进行严格把控，尽可能争取对己方有利的条款，同时对对方提出的不合理条款可进行坚决修改或删除。 **1** - 【中立】以公平合理为原则，平衡双方的权利义务，既不过分强调己方利益，也不过度让步，力求达成双方均可接受的条款。 **2** - 【宽松】以促成交易为核心，对合同条款的修改要求较为宽松，倾向于接受对方提出的条款，以尽快达成合作。 */
+  PolicyType?: number;
+  /** 合同审查的PDF文件资源ID。 */
+  ResourceId?: string;
+  /** 合同审查识别出的PDF文件风险信息，如果是空数组表示无风险。注意：`审查结果由AI生成，仅供参考。请结合相关法律法规和公司制度要求综合判断。` */
+  Risks?: OutputRisk[];
+  /** 合同审查中的角色信息。 */
+  Role?: RiskIdentificationRoleInfo;
+  /** 合同审查任务状态。状态如下： **1** - 合同审查任务创建成功 **2** - 合同审查任务排队中 **3** - 合同审查任务执行中 **4** - 合同审查任务执行成功 **4** - 合同审查任务执行失败 */
+  Status?: number;
+  /** 合同审查任务ID */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeExtendedServiceAuthDetailRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -4373,6 +4455,8 @@ declare interface Ess {
   CancelUserAutoSignEnableUrl(data: CancelUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CancelUserAutoSignEnableUrlResponse>;
   /** 获取批量撤销签署流程腾讯电子签小程序链接 {@link CreateBatchCancelFlowUrlRequest} {@link CreateBatchCancelFlowUrlResponse} */
   CreateBatchCancelFlowUrl(data: CreateBatchCancelFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchCancelFlowUrlResponse>;
+  /** 批量创建合同审查任务 {@link CreateBatchContractReviewTaskRequest} {@link CreateBatchContractReviewTaskResponse} */
+  CreateBatchContractReviewTask(data: CreateBatchContractReviewTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchContractReviewTaskResponse>;
   /** 批量创建合同智能提取任务 {@link CreateBatchInformationExtractionTaskRequest} {@link CreateBatchInformationExtractionTaskResponse} */
   CreateBatchInformationExtractionTask(data: CreateBatchInformationExtractionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchInformationExtractionTaskResponse>;
   /** 批量操作企业初始化 {@link CreateBatchInitOrganizationUrlRequest} {@link CreateBatchInitOrganizationUrlResponse} */
@@ -4509,6 +4593,8 @@ declare interface Ess {
   DescribeCancelFlowsTask(data: DescribeCancelFlowsTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCancelFlowsTaskResponse>;
   /** 获取合同对比结果web页面 {@link DescribeContractDiffTaskWebUrlRequest} {@link DescribeContractDiffTaskWebUrlResponse} */
   DescribeContractDiffTaskWebUrl(data: DescribeContractDiffTaskWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractDiffTaskWebUrlResponse>;
+  /** 获取合同审查任务详情 {@link DescribeContractReviewTaskRequest} {@link DescribeContractReviewTaskResponse} */
+  DescribeContractReviewTask(data: DescribeContractReviewTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractReviewTaskResponse>;
   /** 查询企业扩展服务授权详情 {@link DescribeExtendedServiceAuthDetailRequest} {@link DescribeExtendedServiceAuthDetailResponse} */
   DescribeExtendedServiceAuthDetail(data: DescribeExtendedServiceAuthDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtendedServiceAuthDetailResponse>;
   /** 查询企业扩展服务授权信息 {@link DescribeExtendedServiceAuthInfosRequest} {@link DescribeExtendedServiceAuthInfosResponse} */
