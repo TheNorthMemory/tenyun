@@ -2277,7 +2277,7 @@ declare interface Mongodb {
   SetBackupRules(data: SetBackupRulesRequest, config?: AxiosRequestConfig): AxiosPromise<SetBackupRulesResponse>;
   /** 实例维护时间设置 {@link SetInstanceMaintenanceRequest} {@link SetInstanceMaintenanceResponse} */
   SetInstanceMaintenance(data: SetInstanceMaintenanceRequest, config?: AxiosRequestConfig): AxiosPromise<SetInstanceMaintenanceResponse>;
-  /** 包年包月隔离接口 {@link TerminateDBInstancesRequest} {@link TerminateDBInstancesResponse} */
+  /** 包年包月退货退费 {@link TerminateDBInstancesRequest} {@link TerminateDBInstancesResponse} */
   TerminateDBInstances(data: TerminateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateDBInstancesResponse>;
   /** 指定云数据库实例的所属项目 {@link V20180408.AssignProjectRequest} {@link V20180408.AssignProjectResponse} */
   AssignProject(data: V20180408.AssignProjectRequest, config: AxiosRequestConfig & V20180408.VersionHeader): AxiosPromise<V20180408.AssignProjectResponse>;

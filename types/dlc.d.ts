@@ -584,6 +584,8 @@ declare interface DataEngineInfo {
   IsAIGateway?: boolean | null;
   /** 1:AI引擎，0:非AI引擎 */
   IsAIEngine?: number | null;
+  /** 引擎资源弹性伸缩策略 */
+  ScheduleElasticityConf?: ScheduleElasticityConf;
 }
 
 /** 引擎规格详情 */
@@ -798,6 +800,20 @@ declare interface DependencyPackage {
   PackageType?: string | null;
   /** 文件包的路径 */
   PackagePath?: string | null;
+}
+
+/** 引擎资源弹性伸缩计划 */
+declare interface ElasticPlan {
+  /** 最小集群数 */
+  MinElasticClusters?: number;
+  /** 最大集群数 */
+  MaxElasticClusters?: number;
+  /** 最大排队时间 */
+  TolerableQueueTime?: number;
+  /** 开始时间，Once格式：yyyy-MM-dd HH:mm:ss; 非Once格式： HH:mm:ss */
+  StartTime?: string;
+  /** 结束时间，Once格式：yyyy-MM-dd HH:mm:ss; 非Once格式： HH:mm:ss */
+  EndTime?: string;
 }
 
 /** Elasticsearch数据源的详细信息 */
@@ -1450,6 +1466,20 @@ declare interface SQLTask {
   SQL: string;
   /** 任务的配置信息 */
   Config?: KVPair[];
+}
+
+/** 引擎资源弹性伸缩策略 */
+declare interface ScheduleElasticityConf {
+  /** 是否开启弹性伸缩：true/false */
+  ScheduledElasticityEnabled?: boolean;
+  /** 调度类型：ONCE（一次性调度），DAILY（每日调度），WEEKLY（每周调度），MONTHLY（每月调度） */
+  ScheduleType?: string;
+  /** 调度日期：WEEKLY传：1~7； MONTHLY传:1~31；其它类型不传 */
+  ScheduleDays?: number[];
+  /** 调度时区 */
+  TimeZone?: string;
+  /** 弹性伸缩计划 */
+  ElasticPlans?: ElasticPlan[];
 }
 
 /** script实例。 */
@@ -3951,6 +3981,8 @@ declare interface DescribeDataEnginesRequest {
   EngineGeneration?: string;
   /** 引擎类型，支持：SparkSQL、SparkBatch、PrestoSQL、Kyuubi */
   EngineTypeDetail?: string;
+  /** 默认 false, 为 true 时仅列出具有洞察 listener 的引擎 */
+  ListHasListener?: boolean;
 }
 
 declare interface DescribeDataEnginesResponse {
@@ -5697,6 +5729,8 @@ declare interface UpdateDataEngineRequest {
   ElasticLimit?: number;
   /** Spark批作业集群Session资源配置模板 */
   SessionResourceTemplate?: SessionResourceTemplate;
+  /** 引擎资源弹性伸缩策略 */
+  ScheduleElasticityConf?: ScheduleElasticityConf;
 }
 
 declare interface UpdateDataEngineResponse {

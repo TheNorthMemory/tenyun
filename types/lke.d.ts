@@ -696,6 +696,14 @@ declare interface DocSegment {
   PageInfos?: number[];
 }
 
+/** 重复文档处理方式 */
+declare interface DuplicateFileHandle {
+  /** 重复文档判断方式，1：按文档内容，即cos_hash字段判断是否重复 */
+  CheckType?: number;
+  /** 重复文档处理方式，1：返回报错，2：跳过，返回重复的文档业务ID */
+  HandleType?: number;
+}
+
 /** 扩展信息 */
 declare interface ExtraInfo {
   /** ECharts信息 */
@@ -4189,6 +4197,8 @@ declare interface SaveDocRequest {
   CateBizId?: string;
   /** 是否可下载，IsRefer为true并且ReferUrlType为0时，该值才有意义 */
   IsDownload?: boolean;
+  /** 重复文档处理方式，按顺序匹配第一个满足条件的方式处理 */
+  DuplicateFileHandles?: DuplicateFileHandle[];
 }
 
 declare interface SaveDocResponse {
@@ -4200,6 +4210,8 @@ declare interface SaveDocResponse {
   ErrorLink?: string;
   /** 错误链接文本 */
   ErrorLinkText?: string;
+  /** 重复类型，0：未重复，其他取值请参考入参DuplicateFileHandle结构体的CheckType字段 */
+  DuplicateFileCheckType?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

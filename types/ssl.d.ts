@@ -2324,7 +2324,7 @@ declare interface DescribeHostLiveInstanceListResponse {
 
 declare interface DescribeHostTeoInstanceListRequest {
   /** 待部署的证书ID */
-  CertificateId: string;
+  CertificateId?: string;
   /** 部署资源类型 */
   ResourceType?: string;
   /** 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时 */
@@ -3060,7 +3060,7 @@ declare interface Ssl {
   /** 查询证书live云资源部署实例列表 {@link DescribeHostLiveInstanceListRequest} {@link DescribeHostLiveInstanceListResponse} */
   DescribeHostLiveInstanceList(data?: DescribeHostLiveInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostLiveInstanceListResponse>;
   /** 查询证书EdgeOne云资源部署实例列表 {@link DescribeHostTeoInstanceListRequest} {@link DescribeHostTeoInstanceListResponse} */
-  DescribeHostTeoInstanceList(data: DescribeHostTeoInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostTeoInstanceListResponse>;
+  DescribeHostTeoInstanceList(data?: DescribeHostTeoInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostTeoInstanceListResponse>;
   /** 查询证书tke云资源部署实例列表 {@link DescribeHostTkeInstanceListRequest} {@link DescribeHostTkeInstanceListResponse} */
   DescribeHostTkeInstanceList(data?: DescribeHostTkeInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostTkeInstanceListResponse>;
   /** 查询证书云资源更新记录列表 {@link DescribeHostUpdateRecordRequest} {@link DescribeHostUpdateRecordResponse} */

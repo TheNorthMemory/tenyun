@@ -1105,7 +1105,7 @@ declare interface CreateReplicationInstanceResponse {
 }
 
 declare interface CreateRepositoryPersonalRequest {
-  /** 仓库名称 */
+  /** 仓库名称，格式为 {Namespace}/{lmageName}。 */
   RepoName: string;
   /** 是否公共,1:公共,0:私有 */
   Public?: number;

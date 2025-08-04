@@ -2561,7 +2561,7 @@ declare interface DescribeDBInstancesRequest {
   InstanceNameSet?: string[];
   /** 实例版本代号列表，格式如：2008R2，2012SP3等 */
   VersionSet?: string[];
-  /** 实例可用区，格式如：ap-guangzhou-2 */
+  /** 实例可用区 */
   Zone?: string;
   /** 实例标签列表 */
   TagKeys?: string[];

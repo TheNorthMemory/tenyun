@@ -1031,9 +1031,9 @@ declare interface CloneDBInstanceResponse {
 }
 
 declare interface CloseDBExtranetAccessRequest {
-  /** 实例ID，形如postgres-6r233v55 */
+  /** 实例ID，可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取。形如postgres-6r233v55 */
   DBInstanceId: string;
-  /** 是否关闭Ipv6外网，1：是，0：否 */
+  /** 是否关闭Ipv6外网，1：是，0：否。默认值：0。 */
   IsIpv6?: number;
 }
 
@@ -1405,7 +1405,7 @@ declare interface DeleteBaseBackupResponse {
 }
 
 declare interface DeleteDBInstanceNetworkAccessRequest {
-  /** 实例ID，形如：postgres-6bwgamo3。 */
+  /** 实例ID，形如：postgres-6bwgamo3。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取 */
   DBInstanceId: string;
   /** 私有网络统一 ID，若是基础网络则传"0"。 */
   VpcId: string;
@@ -1445,7 +1445,7 @@ declare interface DeleteParameterTemplateResponse {
 }
 
 declare interface DeleteReadOnlyGroupNetworkAccessRequest {
-  /** RO组ID，形如：pgro-4t9c6g7k。 */
+  /** RO组ID，形如：pgrogrp-4t9c6g7k。可通过[DescribeReadOnlyGroups](https://cloud.tencent.com/document/api/409/52599)接口获取 */
   ReadOnlyGroupId: string;
   /** 私有网络统一 ID，若是基础网络则传"0"。 */
   VpcId: string;
@@ -1921,13 +1921,13 @@ declare interface DescribeDatabaseObjectsResponse {
 }
 
 declare interface DescribeDatabasesRequest {
-  /** 实例ID */
+  /** 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/product/409/16773)接口获取 */
   DBInstanceId: string;
   /** 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：database-name：按照数据库名称过滤，类型为string。此处使用模糊匹配搜索符合条件的数据库。 */
   Filters?: Filter[];
   /** 数据偏移量，从0开始。 */
   Offset?: number;
-  /** 单次显示数量 */
+  /** 单次显示数量。建议最大取值100。默认值：20 */
   Limit?: number;
 }
 
@@ -2325,19 +2325,19 @@ declare interface InquiryPriceCreateDBInstancesResponse {
 }
 
 declare interface InquiryPriceRenewDBInstanceRequest {
-  /** 实例ID */
+  /** 实例ID，可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)获取。（此接口仅支持预付费实例的查询） */
   DBInstanceId: string;
-  /** 续费周期，按月计算，最大不超过48 */
+  /** 续费周期，按月计算 */
   Period: number;
 }
 
 declare interface InquiryPriceRenewDBInstanceResponse {
   /** 刊例价，单位为分。如24650表示246.5元 */
-  OriginalPrice: number;
+  OriginalPrice?: number;
   /** 折后实际付款金额，单位为分。如24650表示246.5元 */
-  Price: number;
+  Price?: number;
   /** 币种。例如，CNY：人民币。 */
-  Currency: string;
+  Currency?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2389,9 +2389,9 @@ declare interface LockAccountResponse {
 }
 
 declare interface ModifyAccountPrivilegesRequest {
-  /** 实例ID。 */
+  /** 实例ID。	可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取 */
   DBInstanceId: string;
-  /** 修改此账号对某数据库对象的权限。 */
+  /** 修改此账号对某数据库对象的权限。可通过[DescribeAccounts](https://cloud.tencent.com/document/api/409/18109)接口获取 */
   UserName: string;
   /** 修改的权限信息，支持批量修改，一次最高修改50条。 */
   ModifyPrivilegeSet: ModifyPrivilege[];
@@ -2589,9 +2589,9 @@ declare interface ModifyDBInstanceSSLConfigResponse {
 declare interface ModifyDBInstanceSecurityGroupsRequest {
   /** 实例或只读组要绑定的安全组列表。安全组信息可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来查询。**注意：**该入参会全量替换存量已有集合，非增量更新。修改需传入预期的全量集合。 */
   SecurityGroupIdSet: string[];
-  /** 实例ID，DBInstanceId和ReadOnlyGroupId至少传一个；如果都传，忽略ReadOnlyGroupId */
+  /** 实例ID，可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取。DBInstanceId和ReadOnlyGroupId至少传一个；如果都传，忽略ReadOnlyGroupId。 */
   DBInstanceId?: string;
-  /** 只读组ID，DBInstanceId和ReadOnlyGroupId至少传一个；如果要修改只读组关联的安全组，只传ReadOnlyGroupId */
+  /** 只读组ID，可通过[DescribeReadOnlyGroups](https://cloud.tencent.com/document/api/409/52599)接口获取。DBInstanceId和ReadOnlyGroupId至少传一个；如果要修改只读组关联的安全组，只传ReadOnlyGroupId */
   ReadOnlyGroupId?: string;
 }
 

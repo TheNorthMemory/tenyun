@@ -3570,7 +3570,7 @@ declare interface DescribeContractReviewTaskResponse {
   Risks?: OutputRisk[];
   /** 合同审查中的角色信息。 */
   Role?: RiskIdentificationRoleInfo;
-  /** 合同审查任务状态。状态如下： **1** - 合同审查任务创建成功 **2** - 合同审查任务排队中 **3** - 合同审查任务执行中 **4** - 合同审查任务执行成功 **4** - 合同审查任务执行失败 */
+  /** 合同审查任务状态。状态如下： **1** - 合同审查任务创建成功 **2** - 合同审查任务排队中 **3** - 合同审查任务执行中 **4** - 合同审查任务执行成功 **5** - 合同审查任务执行失败 */
   Status?: number;
   /** 合同审查任务ID */
   TaskId?: string;

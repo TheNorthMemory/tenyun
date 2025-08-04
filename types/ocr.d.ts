@@ -1696,6 +1696,16 @@ declare interface ReflectDetailInfo {
   Position?: string;
 }
 
+/** 请求 id 信息 */
+declare interface RequestIdInfo {
+  /** 请求 api 的 requestid */
+  ApiRequestId?: string;
+  /** 请求 api 的错误码 */
+  ApiErrorCode?: string;
+  /** 告警码 */
+  WarnCodes?: number[];
+}
+
 /** 港澳台居住证信息返回 */
 declare interface ResidencePermitInfo {
   /** 姓名（人像面） */
@@ -3796,6 +3806,8 @@ declare interface GetOCRResultResponse {
   Type?: string;
   /** ocr结果 */
   OCRResult?: OCRResult;
+  /** requestid 信息 */
+  RequestIdInfos?: RequestIdInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

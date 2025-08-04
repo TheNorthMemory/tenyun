@@ -4405,15 +4405,15 @@ declare interface CreateRealtimeLogDeliveryTaskRequest {
   ZoneId: string;
   /** 实时日志投递任务的名称，格式为数字、英文、-和_组合，最多 200 个字符。 */
   TaskName: string;
-  /** 实时日志投递任务类型，取值有：cls: 推送到腾讯云 CLS；custom_endpoint：推送到自定义 HTTP(S) 地址；s3：推送到 AWS S3 兼容存储桶地址。 */
+  /** 实时日志投递任务类型，取值有：cls: 推送到腾讯云 CLS；custom_endpoint：推送到自定义 HTTP(S) 地址；s3：推送到 AWS S3 兼容存储桶地址； */
   TaskType: string;
-  /** 实时日志投递任务对应的实体（七层域名或者四层代理实例）列表。取值示例如下：七层域名：domain.example.com；四层代理实例：sid-2s69eb5wcms7。 */
+  /** 实时日志投递任务对应的实体列表。取值示例如下：七层域名：domain.example.com四层代理实例：sid-2s69eb5wcms7边缘函数实例：test-zone-2mxigizoh9l9-1257626257 */
   EntityList: string[];
-  /** 数据投递类型，取值有：domain：站点加速日志；application：四层代理日志；web-rateLiming：速率限制和 CC 攻击防护日志；web-attack：托管规则日志；web-rule：自定义规则日志；web-bot：Bot管理日志。 */
+  /** 数据投递类型，取值有：domain：站点加速日志；application：四层代理日志；function：边缘函数运行日志；web-rateLiming：速率限制和 CC 攻击防护日志；web-attack：托管规则日志；web-rule：自定义规则日志；web-bot：Bot管理日志。 */
   LogType: string;
   /** 数据投递区域，取值有：mainland：中国大陆境内；overseas：全球（不含中国大陆）。 */
   Area: string;
-  /** 投递的预设字段列表。 */
+  /** 投递的预设字段列表。取值参考：[站点加速日志（七层访问日志）](https://cloud.tencent.com/document/product/1552/105791)[四层代理日志](https://cloud.tencent.com/document/product/1552/105792)[边缘函数运行日志](https://cloud.tencent.com/document/product/1552/115585) */
   Fields: string[];
   /** 投递的自定义字段列表，支持在 HTTP 请求头、响应头、Cookie、请求正文中提取指定内容。自定义字段名称不能重复，且最多不能超过 200 个字段。单个实时日志推送任务最多添加 5 个请求正文类型的自定义字段。目前仅站点加速日志（LogType=domain）支持添加自定义字段。 */
   CustomFields?: CustomField[];

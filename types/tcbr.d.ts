@@ -58,6 +58,28 @@ declare interface DeployParam {
   ReleaseType?: string;
 }
 
+/** 服务配置入参 */
+declare interface DiffConfigItem {
+  /** 配置项 KeyMinNum 最小副本数MaxNum 最大副本数PolicyDetails 扩缩容策略AccessTypes 访问类型TimerScale 定时扩缩容InternalAccess 内网访问OperationMode 运行模式 noScale | condScale | alwaysScale | custom ｜ manualScaleSessionAffinity 会话亲和性 open | closeCpuSpecs cpu 规格MemSpecs mem规格EnvParam 环境变量LogPath 日志采集路径Port 端口Dockerfile dockerfile 文件名BuildDir 目标目录Tag 服务标签LogType 日志类型 none | default | custom LogSetId 日志集IdLogTopicId 日志主题IDLogParseType 日志解析类型 json ｜ lineEntryPoint entrypoint 命令Cmd cmd命令VpcConf 网络信息 */
+  Key: string;
+  /** 字符串类型配置项值InternalAccess、OperationMode、SessionAffinity、EnvParam、LogPath、Dockerfile、BuildDir、Tag、LogType、LogSetId、LogTopicId、LogParseType */
+  Value?: string;
+  /** int 类型配置项值MinNum、MaxNum、Port */
+  IntValue?: number;
+  /** bool 类型配置项值 */
+  BoolValue?: boolean;
+  /** 浮点型配置项值CpuSpecs、MemSpecs */
+  FloatValue?: number;
+  /** 字符串数组配置项值AccessTypes，EntryPoint，Cmd */
+  ArrayValue?: string[];
+  /** 扩缩容策略配置项值 */
+  PolicyDetails?: HpaPolicy[];
+  /** 定时扩缩容配置项值 */
+  TimerScale?: TimerScale[];
+  /** 配置内网访问时网络信息 */
+  VpcConf?: VpcConf;
+}
+
 /** 环境基础信息 */
 declare interface EnvBaseInfo {
   /** 环境Id */
@@ -437,8 +459,10 @@ declare interface CreateCloudRunServerRequest {
   ServerName: string;
   /** 部署信息 */
   DeployInfo: DeployParam;
+  /** 服务配置信息(已废弃) */
+  ServerConfig?: ServerBaseConfig;
   /** 服务配置信息 */
-  ServerConfig: ServerBaseConfig;
+  Items?: DiffConfigItem[];
 }
 
 declare interface CreateCloudRunServerResponse {
@@ -585,10 +609,12 @@ declare interface UpdateCloudRunServerRequest {
   ServerName: string;
   /** 部署信息 */
   DeployInfo: DeployParam;
-  /** 服务配置信息 */
-  ServerConfig: ServerBaseConfig;
+  /** 服务配置信息(已废弃) */
+  ServerConfig?: ServerBaseConfig;
   /** 业务类型，默认tcr */
   Business?: string;
+  /** 服务配置信息 */
+  Items?: DiffConfigItem[];
 }
 
 declare interface UpdateCloudRunServerResponse {
