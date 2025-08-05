@@ -5,13 +5,13 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 广告文字识别结果 */
 declare interface AdvertiseTextDetection {
   /** 识别出的文本行内容 */
-  DetectedText: string;
+  DetectedText?: string;
   /** 置信度 0 ~100 */
-  Confidence: number;
+  Confidence?: number;
   /** 文本行坐标，以四个顶点坐标表示 */
-  Polygon: Coord[];
+  Polygon?: Coord[];
   /** 此字段为扩展字段。GeneralBasicOcr接口返回段落信息Parag，包含ParagNo。 */
-  AdvancedInfo: string;
+  AdvancedInfo?: string;
 }
 
 /** 航空运输电子客票行程单信息 */
@@ -211,11 +211,11 @@ declare interface BusInvoiceInfo {
 /** 名片识别结果 */
 declare interface BusinessCardInfo {
   /** 识别出的字段名称（关键字，可能重复，比如多个手机），能识别的字段名为：姓名、英文姓名、英文地址、公司、英文公司、职位、英文职位、部门、英文部门、手机、电话、传真、社交帐号、QQ、MSN、微信、微博、邮箱、邮编、网址、公司账号、其他。 */
-  Name: string;
+  Name?: string;
   /** 识别出的字段名称对应的值，也就是字段name对应的字符串结果。 */
-  Value: string;
+  Value?: string;
   /** 文本行在旋转纠正之后的图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height） */
-  ItemCoord: ItemCoord;
+  ItemCoord?: ItemCoord;
 }
 
 /** 非营业执照的营业类证件识别结果，将以结构化形式呈现。 */
@@ -267,19 +267,19 @@ declare interface CardWarnInfo {
 /** 单元格识别结果 */
 declare interface CellContent {
   /** 段落编号 */
-  ParagNo: number | null;
+  ParagNo?: number | null;
   /** 字体大小 */
-  WordSize: number | null;
+  WordSize?: number | null;
 }
 
 /** 卡证智能分类结果 */
 declare interface ClassifyDetectInfo {
   /** 分类名称，包括：身份证、护照、名片、银行卡、行驶证、驾驶证、港澳台通行证、户口本、港澳台来往内地通行证、港澳台居住证、不动产证、营业执照 */
-  Name: string;
+  Name?: string;
   /** 分类类型 */
-  Type: string | null;
+  Type?: string | null;
   /** 位置坐标 */
-  Rect: Rect;
+  Rect?: Rect;
 }
 
 /** 支持模版的单个属性配置 */
@@ -941,9 +941,9 @@ declare interface ImageSize {
 /** 保险单据信息 */
 declare interface InsuranceBillInfo {
   /** 识别出的字段名称(关键字)，支持以下字段：【病案首页】姓名、性别、出生日期、出院诊断、疾病编码、入院病情等。【费用清单】医疗参保人员类别、身份证号、入院方式、结账日期、项目、金额等。【结算单】名称、单价、数量、金额、医保内、医保外等。【医疗发票】姓名、性别、住院时间、收费项目、金额、合计等。 */
-  Name: string;
+  Name?: string;
   /** 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。 */
-  Value: string;
+  Value?: string;
 }
 
 /** 票据检测结果 */
@@ -1531,9 +1531,9 @@ declare interface PortraitImageInfo {
 /** 图片大小 */
 declare interface QrcodeImgSize {
   /** 宽 */
-  Wide: number;
+  Wide?: number;
   /** 高 */
-  High: number;
+  High?: number;
 }
 
 /** 二维码/条形码坐标信息 */
@@ -1939,25 +1939,25 @@ declare interface StructuralItem {
 /** 单元格数据 */
 declare interface TableCell {
   /** 单元格左上角的列索引 */
-  ColTl: number;
+  ColTl?: number;
   /** 单元格左上角的行索引 */
-  RowTl: number;
+  RowTl?: number;
   /** 单元格右下角的列索引 */
-  ColBr: number;
+  ColBr?: number;
   /** 单元格右下角的行索引 */
-  RowBr: number;
+  RowBr?: number;
   /** 单元格内识别出的字符串文本，若文本存在多行，以换行符"\n"隔开 */
-  Text: string;
+  Text?: string;
   /** 单元格类型 */
-  Type: string;
+  Type?: string;
   /** 单元格置信度 */
-  Confidence: number;
+  Confidence?: number;
   /** 单元格在图像中的四点坐标 */
-  Polygon: Coord[];
+  Polygon?: Coord[];
   /** 此字段为扩展字段 */
-  AdvancedInfo: string | null;
+  AdvancedInfo?: string | null;
   /** 单元格文本属性 */
-  Contents: CellContent[];
+  Contents?: CellContent[];
 }
 
 /** 单元格数据 */
@@ -1983,13 +1983,13 @@ declare interface TableCellInfo {
 /** 表格内容检测 */
 declare interface TableDetectInfo {
   /** 单元格内容 */
-  Cells: TableCell[] | null;
+  Cells?: TableCell[] | null;
   /** 表格标题 */
-  Titles: TableTitle[] | null;
+  Titles?: TableTitle[] | null;
   /** 图像中的文本块类型，0 为非表格文本，1 为有线表格，2 为无线表格（接口暂不支持日文无线表格识别，若传入日文无线表格，返回0） */
-  Type: number | null;
+  Type?: number | null;
   /** 表格主体四个顶点坐标（依次为左上角，右上角，右下角，左下角） */
-  TableCoordPoint: Coord[] | null;
+  TableCoordPoint?: Coord[] | null;
 }
 
 /** 表格内容检测 */
@@ -2005,7 +2005,7 @@ declare interface TableInfo {
 /** 表格标题 */
 declare interface TableTitle {
   /** 表格名称 */
-  Text: string | null;
+  Text?: string | null;
 }
 
 /** 完税凭证 */
@@ -2125,35 +2125,35 @@ declare interface TextDetection {
 /** 英文识别结果 */
 declare interface TextDetectionEn {
   /** 识别出的文本行内容。 */
-  DetectedText: string;
+  DetectedText?: string;
   /** 置信度 0 ~100。 */
-  Confidence: number;
+  Confidence?: number;
   /** 文本行在原图中的四点坐标。 */
-  Polygon: Coord[] | null;
+  Polygon?: Coord[] | null;
   /** 此字段为扩展字段。目前EnglishOCR接口返回内容为空。 */
-  AdvancedInfo: string;
+  AdvancedInfo?: string;
   /** 英文单词在原图中的四点坐标。 */
-  WordCoordPoint: WordCoordPoint[];
+  WordCoordPoint?: WordCoordPoint[];
   /** 候选字符集(包含候选字Character以及置信度Confidence)。 */
-  CandWord: CandWord[];
+  CandWord?: CandWord[];
   /** 识别出来的单词信息（包括单词Character和单词置信度confidence） */
-  Words: Words[];
+  Words?: Words[];
 }
 
 /** 数学试题识别结果 */
 declare interface TextEduPaper {
   /** 识别出的字段名称（关键字） */
-  Item: string;
+  Item?: string;
   /** 识别出的字段名称对应的值，也就是字段Item对应的字符串结果 */
-  DetectedText: string;
+  DetectedText?: string;
   /** 文本行在旋转纠正之后的图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height） */
-  Itemcoord: ItemCoord;
+  Itemcoord?: ItemCoord;
 }
 
 /** 数学公式识别结果 */
 declare interface TextFormula {
   /** 识别出的文本行内容 */
-  DetectedText: string;
+  DetectedText?: string;
 }
 
 /** 公式识别结果 */
@@ -2167,37 +2167,37 @@ declare interface TextFormulaInfo {
 /** 文字识别结果 */
 declare interface TextGeneralHandwriting {
   /** 识别出的文本行内容 */
-  DetectedText: string;
+  DetectedText?: string;
   /** 置信度 0 - 100 */
-  Confidence: number;
+  Confidence?: number;
   /** 文本行坐标，以四个顶点坐标表示 */
-  Polygon: Coord[];
+  Polygon?: Coord[];
   /** 此字段为扩展字段。能返回文本行的段落信息，例如：{\"Parag\":{\"ParagNo\":2}}，其中ParagNo为段落行，从1开始。 */
-  AdvancedInfo: string;
+  AdvancedInfo?: string;
   /** 字的坐标数组，以四个顶点坐标表示 */
-  WordPolygon: Polygon[] | null;
+  WordPolygon?: Polygon[] | null;
 }
 
 /** 表格识别结果 */
 declare interface TextTable {
   /** 单元格左上角的列索引 */
-  ColTl: number;
+  ColTl?: number;
   /** 单元格左上角的行索引 */
-  RowTl: number;
+  RowTl?: number;
   /** 单元格右下角的列索引 */
-  ColBr: number;
+  ColBr?: number;
   /** 单元格右下角的行索引 */
-  RowBr: number;
+  RowBr?: number;
   /** 单元格文字 */
-  Text: string;
+  Text?: string;
   /** 单元格类型，包含body（表格主体）、header（表头）、footer（表尾）三种 */
-  Type: string;
+  Type?: string;
   /** 置信度 0 ~100 */
-  Confidence: number;
+  Confidence?: number;
   /** 文本行坐标，以四个顶点坐标表示 */
-  Polygon: Coord[];
+  Polygon?: Coord[];
   /** 此字段为扩展字段 */
-  AdvancedInfo: string;
+  AdvancedInfo?: string;
 }
 
 /** 拖拉机行驶证副页正面的识别结果 */
@@ -3027,15 +3027,15 @@ declare interface VehicleInvoiceInfo {
 /** 机动车登记证书识别结果 */
 declare interface VehicleRegCertInfo {
   /** 识别出的字段名称(关键字)，支持以下字段：【注册登记页】车辆型号、车辆识别代号/车架号、发动机号、制造厂名称、轴距、轮胎数、总质量、外廓尺寸、轴数、车辆出厂日期、发证日期、使用性质、车辆获得方式、车辆类型、国产/进口、燃料种类、车身颜色、发动机型号、车辆品牌、编号、转向形式、机动车所有人1、身份证明名称1、号码1、登记机关1、登记日期1机动车所有人2、身份证明名称2、号码2、登记机关2、登记日期2机动车所有人3、身份证明名称3、号码3、登记机关3、登记日期3机动车所有人4、身份证明名称4、号码4、登记机关4、登记日期4机动车所有人5、身份证明名称5、号码5、登记机关5、登记日期5机动车所有人6、身份证明名称6、号码6、登记机关6、登记日期6机动车所有人7、身份证明名称7、号码7、登记机关7、登记日期7【抵押登记页】机动车登记证书编号、身份证明名称/号码、抵押权人姓名/名称、抵押登记日期。 */
-  Name: string;
+  Name?: string;
   /** 识别出的字段名称对应的值，也就是字段name对应的字符串结果。 */
-  Value: string;
+  Value?: string;
 }
 
 /** 运单识别对象 */
 declare interface WaybillObj {
   /** 识别出的文本行内容 */
-  Text: string;
+  Text?: string;
 }
 
 /** 英文OCR识别出的单词在原图中的四点坐标数组 */
@@ -3067,9 +3067,9 @@ declare interface WordPolygon {
 /** 识别出来的单词信息包括单词（包括单词Character和单词置信度confidence） */
 declare interface Words {
   /** 置信度 0 ~100 */
-  Confidence: number;
+  Confidence?: number;
   /** 候选字Character */
-  Character: string;
+  Character?: string;
 }
 
 declare interface AdvertiseOCRRequest {
@@ -3864,7 +3864,7 @@ declare interface HKIDCardOCRResponse {
   HeadImage?: string | null;
   /** Base64编码的证件右侧人像小图 */
   SmallHeadImage?: string | null;
-  /** 该字段已废弃， 将固定返回空数组，不建议使用。This field is deprecated and will always return an empty array. Usage is not recommended. */
+  /** 该字段已废弃， 将固定返回空数组，不建议使用。 */
   WarningCode?: number[];
   /** 告警码-9101 证件边框不完整告警-9102 证件复印件告警-9103 证件翻拍告警-9104 证件PS告警-9107 证件反光告警-9108 证件模糊告警-9109 告警能力未开通 */
   WarnCardInfos?: number[];

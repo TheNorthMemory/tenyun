@@ -6814,9 +6814,9 @@ declare interface DescribeAccountStatisticsRequest {
 }
 
 declare interface DescribeAccountStatisticsResponse {
-  /** 帐号统计列表记录总数。 */
+  /** 账号统计列表记录总数。 */
   TotalCount?: number;
-  /** 帐号统计列表。 */
+  /** 账号统计列表。 */
   AccountStatistics?: AccountStatistics[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -9050,9 +9050,9 @@ declare interface DescribeHistoryAccountsRequest {
 }
 
 declare interface DescribeHistoryAccountsResponse {
-  /** 帐号变更历史列表记录总数。 */
+  /** 账号变更历史列表记录总数。 */
   TotalCount?: number;
-  /** 帐号变更历史数据数组。 */
+  /** 账号变更历史数据数组。 */
   HistoryAccounts?: HistoryAccount[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -14987,7 +14987,7 @@ declare interface Cwp {
   DescribeABTestConfig(data?: DescribeABTestConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeABTestConfigResponse>;
   /** 获取配置的aeskey和aesiv {@link DescribeAESKeyRequest} {@link DescribeAESKeyResponse} */
   DescribeAESKey(data?: DescribeAESKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAESKeyResponse>;
-  /** 获取帐号统计列表数据 {@link DescribeAccountStatisticsRequest} {@link DescribeAccountStatisticsResponse} */
+  /** 获取账号统计列表数据 {@link DescribeAccountStatisticsRequest} {@link DescribeAccountStatisticsResponse} */
   DescribeAccountStatistics(data?: DescribeAccountStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountStatisticsResponse>;
   /** 获取agent安装命令 {@link DescribeAgentInstallCommandRequest} {@link DescribeAgentInstallCommandResponse} */
   DescribeAgentInstallCommand(data: DescribeAgentInstallCommandRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentInstallCommandResponse>;
@@ -15223,7 +15223,7 @@ declare interface Cwp {
   DescribeFileTamperRules(data?: DescribeFileTamperRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileTamperRulesResponse>;
   /** 获取主机相关统计 {@link DescribeGeneralStatRequest} {@link DescribeGeneralStatResponse} */
   DescribeGeneralStat(data?: DescribeGeneralStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralStatResponse>;
-  /** 获取帐号变更历史列表 {@link DescribeHistoryAccountsRequest} {@link DescribeHistoryAccountsResponse} */
+  /** 获取账号变更历史列表 {@link DescribeHistoryAccountsRequest} {@link DescribeHistoryAccountsResponse} */
   DescribeHistoryAccounts(data: DescribeHistoryAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHistoryAccountsResponse>;
   /** 查询日志检索服务信息 {@link DescribeHistoryServiceRequest} {@link DescribeHistoryServiceResponse} */
   DescribeHistoryService(data?: DescribeHistoryServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHistoryServiceResponse>;

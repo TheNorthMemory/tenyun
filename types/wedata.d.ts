@@ -436,6 +436,28 @@ declare interface BaseClusterInfo {
   CdwUserName?: string | null;
 }
 
+/** 项目信息 */
+declare interface BaseProject {
+  /** 项目标识，英文名 */
+  ProjectName: string | null;
+  /** 项目显示名称，可以为中文名 */
+  DisplayName: string | null;
+  /** 地域 */
+  Region: string | null;
+  /** 项目的所在租户ID */
+  TenantId?: string | null;
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 备注 */
+  Description?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 项目状态：0：禁用，1：启用，-3:禁用中，2：启用中 */
+  Status?: number | null;
+  /** 项目类型，SIMPLE：简单模式 STANDARD：标准模式 */
+  Model?: string | null;
+}
+
 /** 基础角色对象 */
 declare interface BaseRole {
   /** 角色id */
@@ -1212,6 +1234,8 @@ declare interface DataSourceInfo {
   Model?: string | null;
   /** 数据源环境信息 */
   DataSourceEnvInfos?: DataSourceEnvInfo[] | null;
+  /** 禁止数据探查 */
+  ForbidProbe?: boolean;
 }
 
 /** 查询数据源分页列表 */
@@ -7988,6 +8012,8 @@ declare interface CountOpsInstanceStateResponse {
 }
 
 declare interface CreateBaseProjectRequest {
+  /** 项目信息 */
+  Project: BaseProject;
 }
 
 declare interface CreateBaseProjectResponse {
@@ -9326,7 +9352,7 @@ declare interface DescribeDataSourceInfoListRequest {
   Filters?: Filter;
   /** 排序配置 */
   OrderFields?: OrderField;
-  /** 数据源类型，必选（如MYSQL、DLC等） */
+  /** 数据源类型，MYSQL,TENCENT_MYSQL,TDSQL_MYSQL,HIVE,KAFKA,POSTGRE,CDW,ORACLE,SQLSERVER,FTP,HDFS,ICEBERG,HBASE,TDSQL,TDSQLC,SPARK,VIRTUAL,TBASE,DB2,DM,TDENGINE,GAUSSDB,GBASE,IMPALA,ES,TENCENT_ES,S3_DATAINSIGHT,GREENPLUM,PHOENIX,SAP_HANA,SFTP,OCEANBASE,CLICKHOUSE,TCHOUSE_C,KUDU,VERTICA,REDIS,COS,S3,DLC,DORIS,CKAFKA,TDMQ_PULSAR,MONGODB,TENCENT_MONGODB,FTP_FILE,HDFS_FILE,DTS_KAFKA,REST_API,FILE,TIDB,SYBASE,TCHOUSE_X,TDSQL_POSTGRE,TCHOUSE_P,TCHOUSE_D,STARROCKS,EMR_STARROCKS,TBDS_STARROCKS,TRINO,KYUUBI,GDB,INFLUXDB,BIG_QUERY,BLOB,FILESYSTEM,SHAREPOINT,KINGBASEES,HUDI等 */
   Type?: string;
   /** 数据源名称过滤 */
   DatasourceName?: string;
@@ -12957,6 +12983,10 @@ declare interface ModifyMonitorStatusResponse {
 declare interface ModifyProjectRequest {
   /** 目标修改的项目ID */
   ProjectId: string;
+  /** 项目显示名称，可以为中文名,需要租户范围内唯一 */
+  DisplayName?: string;
+  /** 备注 */
+  Description?: string;
   /** true/false则修改，不带该参数不修改。 */
   TaskSubmitApproval?: boolean;
   /** 资源池信息 */
@@ -12971,6 +13001,8 @@ declare interface ModifyProjectRequest {
   Model?: string;
   /** 项目负责人 */
   ProjectOwner?: string[];
+  /** 更新类型 */
+  ModifyType?: string;
 }
 
 declare interface ModifyProjectResponse {
@@ -13343,7 +13375,7 @@ declare interface ModifyTaskScriptRequest {
   ProjectId: string;
   /** 任务ID */
   TaskId: string;
-  /** 必填，脚本内容 base64编码 */
+  /** 存在脚本的任务必填（shell任务、Hive任务、python任务等），脚本内容 base64编码 */
   ScriptContent?: string;
   /** 集成任务脚本配置 */
   IntegrationNodeDetails?: IntegrationNodeDetail[];
@@ -14609,7 +14641,7 @@ declare interface Wedata {
   /** 智能运维-统计任务实例状态 {@link CountOpsInstanceStateRequest} {@link CountOpsInstanceStateResponse} */
   CountOpsInstanceState(data: CountOpsInstanceStateRequest, config?: AxiosRequestConfig): AxiosPromise<CountOpsInstanceStateResponse>;
   /** 创建项目本身 {@link CreateBaseProjectRequest} {@link CreateBaseProjectResponse} */
-  CreateBaseProject(data?: CreateBaseProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBaseProjectResponse>;
+  CreateBaseProject(data: CreateBaseProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBaseProjectResponse>;
   /** 创建代码模版 {@link CreateCodeTemplateRequest} {@link CreateCodeTemplateResponse} */
   CreateCodeTemplate(data: CreateCodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodeTemplateResponse>;
   /** 提交模版版本 {@link CreateCodeTemplateVersionRequest} {@link CreateCodeTemplateVersionResponse} */

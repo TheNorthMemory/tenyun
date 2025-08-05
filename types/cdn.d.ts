@@ -406,7 +406,7 @@ declare interface CacheConfigNoCache {
 declare interface CacheKey {
   /** 是否开启全路径缓存on：开启全路径缓存（即关闭参数忽略）off：关闭全路径缓存（即开启参数忽略） */
   FullUrlCache?: string;
-  /** 是否忽略大小写缓存 */
+  /** 是否忽略大小写缓存on：开启off：关闭 */
   IgnoreCase?: string | null;
   /** CacheKey中包含请求参数 */
   QueryString?: QueryStringKey | null;
@@ -1148,7 +1148,7 @@ declare interface KeyRule {
   RuleType: string | null;
   /** 是否开启全路径缓存on：开启全路径缓存（即关闭参数忽略）off：关闭全路径缓存（即开启参数忽略） */
   FullUrlCache: string | null;
-  /** 是否忽略大小写缓存 */
+  /** 是否忽略大小写缓存on：开启off：关闭 */
   IgnoreCase: string | null;
   /** CacheKey中包含请求参数 */
   QueryString: RuleQueryString | null;

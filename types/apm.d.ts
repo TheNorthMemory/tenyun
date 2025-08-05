@@ -90,6 +90,8 @@ declare interface ApmField {
   LastPeriodValue?: APMKV[] | null;
   /** 同比指标值，已弃用，不建议使用 */
   CompareVal?: string;
+  /** 指标中文名 */
+  NameCN?: string;
 }
 
 /** APM 业务系统信息 */

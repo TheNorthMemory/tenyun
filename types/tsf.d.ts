@@ -762,6 +762,22 @@ declare interface ContainGroupResult {
   TotalCount?: number;
 }
 
+/** 应用使用容器部署时需要的额外资源 */
+declare interface ContainerAdditionalResourceRequirement {
+  /** CPU 核数 */
+  Cpu: string | null;
+  /** 内存 MiB 数 */
+  Mem: string | null;
+}
+
+/** 不同类型的应用的容器部署组，部署时的额外资源要求 */
+declare interface ContainerAdditionalResourceRequirementMap {
+  /** Mesh 应用部署时需要的额外资源 */
+  M: ContainerAdditionalResourceRequirement | null;
+  /** 普通应用部署时需要的额外资源 */
+  N: ContainerAdditionalResourceRequirement | null;
+}
+
 /** 返回容器的事件，比如 k8s deployment 或者 pod 的 events */
 declare interface ContainerEvent {
   /** 第一次出现的时间，以 ms 为单位的时间戳 */
@@ -992,6 +1008,12 @@ declare interface ContainerGroupOther {
   IsNotEqualServiceConfig?: boolean;
 }
 
+/** 容器部署组相关的参数配置 */
+declare interface ContainerGroupResourceConfig {
+  /** 不同类型的应用的容器部署组，部署时的额外资源要求 */
+  AdditionalResourceRequirement: ContainerAdditionalResourceRequirementMap | null;
+}
+
 /** 服务治理相关配置项 */
 declare interface ContainerGroupServiceGovernanceConfig {
   /** 是否开启服务治理 */
@@ -1060,6 +1082,16 @@ declare interface ContainerInfo {
   RunArg?: string | null;
   /** 容器名称 */
   ContainerName?: string | null;
+}
+
+/** 容器实例相关的参数配置 */
+declare interface ContainerInstanceResourceConfig {
+  /** 实例导入方式，可多个，公有云为 ["R"]，独立版的取值有 "M" 脚本模式、"S" SSH 模式 */
+  ImportMode: string[] | null;
+  /** SSH 模式时，前端应该限制用户填这个数量的 master 主机信息 */
+  MasterNumLimit: number | null;
+  /** SSH 模式时，前端应该限制用户填的最高数量的 node 主机信息 */
+  NodeNumLimitPerSetup: number | null;
 }
 
 /** cos临时账号信息 */
@@ -1206,6 +1238,70 @@ declare interface DeployContainerApplicationResp {
   GroupId?: string | null;
   /** 任务ID */
   TaskId?: string | null;
+}
+
+/** 返回给前端的控制信息 */
+declare interface DescribeResourceConfigCluster {
+  /** 返回给前端的控制信息 */
+  Container: DescribeResourceConfigClusterContainer | null;
+}
+
+/** 返回给前端的控制信息 */
+declare interface DescribeResourceConfigClusterContainer {
+  /** 是否需要子网 */
+  NeedSubnetWhenCreatingCluster: boolean | null;
+}
+
+/** DescribeResourceConfig */
+declare interface DescribeResourceConfigLicense {
+  /** 功能 */
+  Function: DescribeResourceConfigLicenseFunction[] | null;
+  /** 资源 */
+  Resource: DescribeResourceConfigLicenseResource[] | null;
+  /** utc时间 单位秒 */
+  ExpireTime: number | null;
+  /** utc时间 单位秒 */
+  Countdown: number | null;
+  /** 规格 */
+  Spec: string | null;
+}
+
+/** DescribeResourceConfig */
+declare interface DescribeResourceConfigLicenseFunction {
+  /** name */
+  Name: string | null;
+  /** enable */
+  Enable: boolean | null;
+}
+
+/** DescribeResourceConfig */
+declare interface DescribeResourceConfigLicenseResource {
+  /** Name */
+  Name: string | null;
+  /** Quota */
+  Quota: number | null;
+}
+
+/** DescribeResourceConfig */
+declare interface DescribeResourceConfigResultV2 {
+  /** STS参数配置 */
+  Sts: DescribeResourceConfigSts | null;
+  /** 许可信息 */
+  License: DescribeResourceConfigLicense | null;
+  /** 部署组相关的参数配置 */
+  Group: GroupResourceConfig | null;
+  /** 实例相关的参数配置 */
+  Instance: InstanceResourceConfig | null;
+  /** Cluster相关配置信息 */
+  Cluster: DescribeResourceConfigCluster | null;
+  /** 程序包相关配置信息 */
+  Package: PackageConfig | null;
+}
+
+/** DescribeResourceConfig */
+declare interface DescribeResourceConfigSts {
+  /** uin */
+  Uin: string | null;
 }
 
 /** 空目录选项 */
@@ -1576,6 +1672,12 @@ declare interface GroupRelease {
   FileConfigReleaseList?: FileConfigRelease[] | null;
 }
 
+/** 部署组相关的参数配置 */
+declare interface GroupResourceConfig {
+  /** 容器部署组相关的参数配置 */
+  Container: ContainerGroupResourceConfig | null;
+}
+
 /** 单元化API使用详情统计对象列表 */
 declare interface GroupUnitApiDailyUseStatistics {
   /** 命名空间ID */
@@ -1914,6 +2016,14 @@ declare interface InstanceEnrichedInfoPage {
   Content?: InstanceEnrichedInfo[];
 }
 
+/** 实例相关的参数配置 */
+declare interface InstanceResourceConfig {
+  /** 容器实例相关的参数配置 */
+  Container: ContainerInstanceResourceConfig | null;
+  /** 虚拟机实例相关的参数配置 */
+  Vm: VmInstanceResourceConfig | null;
+}
+
 /** 服务调用监控指标 */
 declare interface InvocationIndicator {
   /** 总请求数 */
@@ -2110,6 +2220,14 @@ declare interface LaneRules {
   TotalCount?: number;
   /** 泳道规则列表 */
   Content?: LaneRule[];
+}
+
+/** 许可标签 */
+declare interface LicenseTag {
+  /** 许可ID */
+  LicenseId: string | null;
+  /** 标签列表 */
+  Tags: Tag[] | null;
 }
 
 /** LifeCycleHook */
@@ -2386,6 +2504,12 @@ declare interface OverviewBasicResourceUsage {
   PackageSpaceUsed?: number;
   /** 已注册实例数 */
   ConsulInstanceCount?: number;
+}
+
+/** 程序包相关配置信息 */
+declare interface PackageConfig {
+  /** 程序包存储空间大小，单位字节 */
+  SpaceSize: number | null;
 }
 
 /** tsf-privilege模块，分页数据集列表 */
@@ -3234,6 +3358,14 @@ declare interface TsfPageInstance {
   Content?: Instance[];
 }
 
+/** LicenseTag 翻页对象 */
+declare interface TsfPageLicenseTag {
+  /** 记录总数 */
+  TotalCount: number | null;
+  /** 记录实体列表 */
+  Content: LicenseTag[] | null;
+}
+
 /** 微服务列表信息 */
 declare interface TsfPageMicroservice {
   /** 微服务总数目 */
@@ -3568,6 +3700,12 @@ declare interface VmGroupSimple {
   DeployDesc?: string;
   /** 部署组备注 */
   Alias?: string;
+}
+
+/** 虚拟机实例相关的参数配置 */
+declare interface VmInstanceResourceConfig {
+  /** 实例导入方式，可多个，公有云为 ["R", "M"]，独立版的取值仅有 "M" 脚本模式 */
+  ImportMode: string[] | null;
 }
 
 /** 容器卷挂载信息 */
@@ -6163,6 +6301,32 @@ declare interface DescribeLanesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLicensesRequest {
+  /** 偏移量 */
+  Offset?: number;
+  /** 每页条数 */
+  Limit?: number;
+}
+
+declare interface DescribeLicensesResponse {
+  /** 许可标签列表分页信息 */
+  Result?: TsfPageLicenseTag | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLogCapacityRequest {
+}
+
+declare interface DescribeLogCapacityResponse {
+  /** 使用日志容量大小 */
+  UsedSpace?: number;
+  /** 日志总容量大小 */
+  Capacity?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeMicroserviceRequest {
   /** 微服务ID */
   MicroserviceId: string;
@@ -6515,6 +6679,16 @@ declare interface DescribeRepositoryRequest {
 declare interface DescribeRepositoryResponse {
   /** 查询的仓库信息 */
   Result?: RepositoryInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeResourceConfigRequest {
+}
+
+declare interface DescribeResourceConfigResponse {
+  /** 配置详情 */
+  Result?: DescribeResourceConfigResultV2;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8203,6 +8377,10 @@ declare interface Tsf {
   DescribeLaneRules(data?: DescribeLaneRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLaneRulesResponse>;
   /** 查询泳道列表 {@link DescribeLanesRequest} {@link DescribeLanesResponse} */
   DescribeLanes(data?: DescribeLanesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLanesResponse>;
+  /** 查询许可列表 {@link DescribeLicensesRequest} {@link DescribeLicensesResponse} */
+  DescribeLicenses(data?: DescribeLicensesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicensesResponse>;
+  /** 获取用户日志使用量 {@link DescribeLogCapacityRequest} {@link DescribeLogCapacityResponse} */
+  DescribeLogCapacity(data?: DescribeLogCapacityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogCapacityResponse>;
   /** 查询微服务详情 {@link DescribeMicroserviceRequest} {@link DescribeMicroserviceResponse} */
   DescribeMicroservice(data: DescribeMicroserviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMicroserviceResponse>;
   /** 获取微服务列表 {@link DescribeMicroservicesRequest} {@link DescribeMicroservicesResponse} */
@@ -8241,6 +8419,8 @@ declare interface Tsf {
   DescribeRepositories(data?: DescribeRepositoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoriesResponse>;
   /** 查询仓库信息 {@link DescribeRepositoryRequest} {@link DescribeRepositoryResponse} */
   DescribeRepository(data: DescribeRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoryResponse>;
+  /** 获取资源配置信息 {@link DescribeResourceConfigRequest} {@link DescribeResourceConfigResponse} */
+  DescribeResourceConfig(data?: DescribeResourceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceConfigResponse>;
   /** 资源任务的执行状态描述 {@link DescribeResourceTaskStatusRequest} {@link DescribeResourceTaskStatusResponse} */
   DescribeResourceTaskStatus(data: DescribeResourceTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceTaskStatusResponse>;
   /** 查询简单应用列表 {@link DescribeSimpleApplicationsRequest} {@link DescribeSimpleApplicationsResponse} */

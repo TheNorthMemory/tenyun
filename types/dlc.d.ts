@@ -1830,6 +1830,14 @@ declare interface StandardEngineResourceGroupInfo {
   SparkSize?: number | null;
   /** Spark类型资源组资源最小值 */
   SparkMinSize?: number | null;
+  /** 自定义镜像容器镜像服务domain 名称 */
+  PublicDomain?: string;
+  /** 自定义镜像容器镜像服务tcr实例id */
+  RegistryId?: string;
+  /** 容器镜像服务tcr所在地域 */
+  RegionName?: string;
+  /** 资源组启动耗时 */
+  LaunchTime?: string;
 }
 
 /** statement信息 */
@@ -4118,6 +4126,8 @@ declare interface DescribeEngineUsageInfoResponse {
   Used?: number;
   /** 剩余集群规格 */
   Available?: number;
+  /** 剩余集群规格百分比 */
+  AvailPercent?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5239,8 +5249,6 @@ declare interface LaunchStandardEngineResourceGroupsResponse {
 }
 
 declare interface ListTaskJobLogDetailRequest {
-  /** 列表返回的Id */
-  TaskId: string;
   /** 开始运行时间，unix时间戳（毫秒） */
   StartTime: number;
   /** 结束运行时间，unix时间戳（毫秒） */
@@ -5249,12 +5257,18 @@ declare interface ListTaskJobLogDetailRequest {
   Limit: number;
   /** 下一次分页参数，第一次传空 */
   Context: string;
+  /** 列表返回的Id */
+  TaskId?: string;
   /** 最近1000条日志是否升序排列，true:升序排序，false:倒序，默认false，倒序排列 */
   Asc?: boolean;
   /** 预览日志的通用过滤条件 */
   Filters?: Filter[];
   /** SparkSQL任务唯一ID */
   BatchId?: string;
+  /** 引擎id */
+  DataEngineId?: string;
+  /** 资源组id */
+  ResourceGroupId?: string;
 }
 
 declare interface ListTaskJobLogDetailResponse {
