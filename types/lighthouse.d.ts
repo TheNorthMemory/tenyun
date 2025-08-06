@@ -1415,7 +1415,7 @@ declare interface DescribeDiskConfigsRequest {
 
 declare interface DescribeDiskConfigsResponse {
   /** 云硬盘配置列表。 */
-  DiskConfigSet: DiskConfig[];
+  DiskConfigSet?: DiskConfig[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

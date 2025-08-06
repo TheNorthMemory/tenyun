@@ -5689,7 +5689,7 @@ declare namespace V20180717 {
 
   /** 视频处理任务统计数据。 */
   interface TaskStatData {
-    /** 任务类型。 Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生 QualityInspect: 音画质检测Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）VoiceTranslation: 语音翻译JITTranscoding: 即时转码VideoSnapshot: 视频截图 */
+    /** 任务类型。 Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生 QualityInspect: 音画质检测Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）VoiceTranslation: 语音翻译JITTranscoding: 即时转码VideoSnapshot: 视频截图JITEncryption: 即时加密 */
     TaskType?: string;
     /** 任务数统计数据概览，用量单位为秒。 */
     Summary?: TaskStatDataItem[];
@@ -8042,7 +8042,7 @@ declare namespace V20180717 {
     StartTime: string;
     /** 结束日期，需大于等于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
     EndTime: string;
-    /** License 类型，默认为 DRM 。目前支持的 License 类型包括： DRM: DRM 加密播放 License */
+    /** License 类型，默认为 CommercialDRMLicense 。目前支持的 License 类型包括： CommercialDRMLicense: 商业级 DRM License JITEncryptionDRMLicense: 即时加密 DRM License */
     LicenseType?: string;
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
@@ -8100,7 +8100,7 @@ declare namespace V20180717 {
     EndTime: string;
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
-    /** 查询视频处理任务类型，目前支持的任务类型包括： Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去除水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生 QualityInspect: 音画质检测 VideoHighlight: 视频智能集锦 VideoTag: 视频智能标签 VideoClassification: 视频智能分类 VideoCover: 视频智能封面 VideoSegment: 视频智能拆条 VideoProduce: 视频制作 MediaCast: 媒体转推Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）VoiceTranslation: 语音翻译JITTranscoding: 即时转码VideoSnapshot: 视频截图 */
+    /** 查询视频处理任务类型，目前支持的任务类型包括： Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去除水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生 QualityInspect: 音画质检测 VideoHighlight: 视频智能集锦 VideoTag: 视频智能标签 VideoClassification: 视频智能分类 VideoCover: 视频智能封面 VideoSegment: 视频智能拆条 VideoProduce: 视频制作 MediaCast: 媒体转推Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）VoiceTranslation: 语音翻译JITTranscoding: 即时转码VideoSnapshot: 视频截图JITEncryption: 即时加密 */
     Type?: string;
   }
 

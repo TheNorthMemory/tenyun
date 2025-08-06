@@ -1328,6 +1328,16 @@ declare interface RocketMQClusterInfo {
   ZoneIds?: number[] | null;
   /** 是否已冻结 */
   IsFrozen?: boolean;
+  /** 是否开启自动创建主题 */
+  AutoCreateTopicEnabled?: boolean;
+  /** 是否开启集群Admin能力 */
+  AdminFeatureEnabled?: boolean;
+  /** Admin AK */
+  AdminAccessKey?: string | null;
+  /** Admin SK */
+  AdminSecretKey?: string | null;
+  /** 是否开启删除保护 */
+  EnableDeletionProtection?: boolean;
 }
 
 /** RocketMQ近期使用量 */
@@ -1416,6 +1426,8 @@ declare interface RocketMQGroup {
   InstanceId?: string | null;
   /** 命名空间 */
   Namespace?: string | null;
+  /** 订阅的主题个数 */
+  SubscribeTopicNum?: number;
 }
 
 /** RocketMQ消费组配置信息 */

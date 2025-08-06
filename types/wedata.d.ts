@@ -8518,6 +8518,8 @@ declare interface CreateTaskNewRequest {
   TaskName: string;
   /** 26离线同步，30Python，31PySpark，32DLC，33Impala，34Hive SQL，35Shell，36Spark SQL，39Spark，40CDW PG，92MapReduce */
   TaskType: number;
+  /** （必填参数）指定脚本内容，base64编码 */
+  Content: string;
   /** 扩展属性 */
   TaskExt?: TaskExtInfo[];
   /** 产品名称 */
@@ -8530,8 +8532,6 @@ declare interface CreateTaskNewRequest {
   TopCoordinate?: number;
   /** 工作流目录ID */
   TaskFolderId?: string;
-  /** （必填参数）指定脚本内容，base64编码 */
-  Content?: string;
   /** 代码模板ID */
   CodeTemplateId?: string;
 }

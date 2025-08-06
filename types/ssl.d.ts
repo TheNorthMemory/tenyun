@@ -2552,6 +2552,14 @@ declare interface DescribeManagerDetailResponse {
   ManagerId?: number;
   /** 审核状态详细信息 */
   StatusInfo?: ManagerStatusInfo[];
+  /** 管理员证件类型，SFZ代表身份证，HZ代表护照 */
+  ManagerIdType?: string;
+  /** 管理员证件号码 */
+  ManagerIdNumber?: string;
+  /** 联系人证件类型，SFZ代表身份证，HZ代表护照 */
+  ContactIdType?: string;
+  /** 联系人证件号码 */
+  ContactIdNumber?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

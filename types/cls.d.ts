@@ -1078,7 +1078,7 @@ declare interface LogsetInfo {
   LogsetId?: string;
   /** 日志集名称 */
   LogsetName?: string;
-  /** 创建时间 */
+  /** 创建时间。格式 `YYYY-MM-DD HH:MM:SS` */
   CreateTime?: string;
   /** 云产品标识，日志集由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE */
   AssumerName?: string;
@@ -2077,7 +2077,7 @@ declare interface CreateExportResponse {
 }
 
 declare interface CreateIndexRequest {
-  /** 日志主题ID */
+  /** 日志主题Id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
   /** 索引规则 */
   Rule: RuleInfo;
@@ -2127,7 +2127,7 @@ declare interface CreateKafkaRechargeResponse {
 }
 
 declare interface CreateLogsetRequest {
-  /** 日志集名字，不能重名 */
+  /** 日志集名字。- 最大支持255个字符。不支持`|`字符。 */
   LogsetName: string;
   /** 标签描述列表。最大支持10个标签键值对，并且不能有重复的键值对 */
   Tags?: Tag[];
@@ -2463,7 +2463,7 @@ declare interface DeleteExportResponse {
 }
 
 declare interface DeleteIndexRequest {
-  /** 日志主题ID */
+  /** 日志主题Id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
 }
 
@@ -2485,7 +2485,7 @@ declare interface DeleteKafkaRechargeResponse {
 }
 
 declare interface DeleteLogsetRequest {
-  /** 日志集ID */
+  /** 日志集Id。通过 [获取日志集列表](https://cloud.tencent.com/document/product/614/58624)获取日志集Id。 */
   LogsetId: string;
 }
 
@@ -2833,18 +2833,18 @@ declare interface DescribeExportsResponse {
 }
 
 declare interface DescribeIndexRequest {
-  /** 日志主题ID */
+  /** 日志主题Id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
 }
 
 declare interface DescribeIndexResponse {
-  /** 日志主题ID */
+  /** 日志主题Id */
   TopicId?: string;
-  /** 是否生效 */
+  /** 索引状态。true：开启状态，false：关闭状态开启后可对日志进行检索分析，将产生索引流量、索引存储及相应费用。[费用详情](https://cloud.tencent.com/document/product/614/45802) */
   Status?: boolean;
   /** 索引配置信息 */
   Rule?: RuleInfo | null;
-  /** 索引修改时间，初始值为索引创建时间。 */
+  /** 索引修改时间，初始值为索引创建时间。格式 `YYYY-MM-DD HH:MM:SS` */
   ModifyTime?: string;
   /** 内置保留字段（`__FILENAME__`，`__HOSTNAME__`及`__SOURCE__`）是否包含至全文索引* false:不包含* true:包含 */
   IncludeInternalFields?: boolean;
@@ -2949,7 +2949,7 @@ declare interface DescribeLogHistogramResponse {
 }
 
 declare interface DescribeLogsetsRequest {
-  /** logsetName- 按照【日志集名称】进行过滤。- 类型：String- 必选：否logsetId- 按照【日志集ID】进行过滤。- 类型：String- 必选：否tagKey- 按照【标签键】进行过滤。- 类型：String- 必选：否tag:tagKey- 按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。- 类型：String- 必选：否每次请求的Filters的上限为10，Filter.Values的上限为5。 */
+  /** logsetName- 按照【日志集名称】进行过滤。- 类型：String- 必选：否- 通过 [获取日志集列表](https://cloud.tencent.com/document/product/614/58624)获取日志集名称。logsetId- 按照【日志集ID】进行过滤。- 类型：String- 必选：否- 通过 [获取日志集列表](https://cloud.tencent.com/document/product/614/58624)获取日志集Id。tagKey- 按照【标签键】进行过滤。- 类型：String- 必选：否tag:tagKey- 按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。- 类型：String- 必选：否每次请求的Filters的上限为10，Filter.Values的上限为5。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0 */
   Offset?: number;
@@ -3563,9 +3563,9 @@ declare interface ModifyKafkaRechargeResponse {
 }
 
 declare interface ModifyLogsetRequest {
-  /** 日志集ID */
+  /** 日志集Id。通过 [获取日志集列表](https://cloud.tencent.com/document/product/614/58624)获取日志集Id。 */
   LogsetId: string;
-  /** 日志集名称 */
+  /** 日志集名字。- 最大支持255个字符。不支持`|`字符。 */
   LogsetName?: string;
   /** 日志集的绑定的标签键值对。最大支持10个标签键值对，同一个资源只能同时绑定一个标签键。 */
   Tags?: Tag[];

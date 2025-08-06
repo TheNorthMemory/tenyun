@@ -341,6 +341,24 @@ declare interface RunRerankResponse {
 declare namespace V20180416 {
   type VersionHeader = { headers: { 'X-TC-Version': '2018-04-16' } }
 
+  /** cvm 自动扩盘参数 */
+  interface AutoScaleDiskInfo {
+    /** 节点类型 hotData,warmData */
+    NodeType?: string | null;
+    /** 0:百分比扩容;1:绝对值扩容 */
+    ScaleType?: number | null;
+    /** 触发阈值,单位%,例如80% */
+    Threshold?: number | null;
+    /** 触发持续时间,单位分钟,例如60 */
+    Duration?: number | null;
+    /** 每次扩容比例,单位%,例如20% */
+    PercentSize?: number | null;
+    /** 绝对值扩容,单位GB,例如100GB */
+    FixSize?: number | null;
+    /** 扩容上限,单位GB,例如500GB */
+    MaxSize?: number | null;
+  }
+
   /** 后备索引元数据字段 */
   interface BackingIndexMetaField {
     /** 后备索引名 */
@@ -1397,6 +1415,8 @@ declare namespace V20180416 {
     RollbackTag?: number;
     /** 操作者Uin */
     SubAccountUin?: string | null;
+    /** 自动扩容标识：0-非自动，1-自动 */
+    AutoScaleTag?: number;
   }
 
   /** 操作详情 */
@@ -1914,6 +1934,10 @@ declare namespace V20180416 {
     EnableScheduleRecoverGroup?: boolean;
     /** 置放群组开启异步任务的可维护时间段 */
     EnableScheduleOperationDuration?: EnableScheduleOperationDuration;
+    /** 自动扩盘参数列表 */
+    AutoScaleDiskInfoList?: AutoScaleDiskInfo[];
+    /** 是否开启kibana公网访问，不传默认开启 */
+    EnableKibanaPublicAccess?: string;
   }
 
   interface CreateInstanceResponse {
@@ -2956,6 +2980,10 @@ declare namespace V20180416 {
     EnableScheduleOperationDuration?: EnableScheduleOperationDuration;
     /** 开启集群保护：OPEN-开启，CLOSE-关闭 */
     EnableDestroyProtection?: string;
+    /** 自动扩盘参数 */
+    AutoScaleDiskInfoList?: AutoScaleDiskInfo[];
+    /** 自动扩盘删除参数 */
+    AutoScaleDiskDeleteNodeTypeList?: string[];
   }
 
   interface UpdateInstanceResponse {

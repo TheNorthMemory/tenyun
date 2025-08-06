@@ -2,6 +2,22 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 任务的应用环境配置信息。 */
+declare interface Application {
+  /** 待执行脚本命令。 */
+  Commands: CommandItem[];
+  /** 存储目录挂载配置。 */
+  StorageMounts?: StorageMount[];
+  /** 用户自定义环境变量。 */
+  EnvVars?: EnvVar[];
+  /** 容器配置信息。 */
+  Docker?: Docker;
+  /** 无 */
+  OutputRedirect?: OutputRedirect;
+  /** 表示所选训练框架，支持可选参数 - PyTorch：表示提交PyTorch训练作业- Custom：表示用户自定义作业默认参数为：Custom */
+  JobType?: string;
+}
+
 /** 描述CFS文件系统版本和挂载信息 */
 declare interface CFSOption {
   /** 文件系统本地挂载路径。 */
@@ -92,6 +108,12 @@ declare interface ClusterOverview {
   ClusterType?: string;
 }
 
+/** 任务执行命令脚本。 */
+declare interface CommandItem {
+  /** 脚本命令 */
+  Command: string;
+}
+
 /** 计算节点信息。 */
 declare interface ComputeNode {
   /** 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费SPOTPAID：竞价付费默认值：POSTPAID_BY_HOUR。 */
@@ -128,6 +150,14 @@ declare interface DataDisk {
   DiskType?: string | null;
 }
 
+/** 容器配置信息。 */
+declare interface Docker {
+  /** 容器镜像地址 */
+  Image: string;
+  /** 容器运行参数 */
+  RunArgs?: string[];
+}
+
 /** 描述了实例的增强服务启用情况与其设置，如云安全，腾讯云可观测平台等实例 Agent */
 declare interface EnhancedService {
   /** 开启云安全服务。若不指定该参数，则默认开启云安全服务。 */
@@ -136,6 +166,14 @@ declare interface EnhancedService {
   MonitorService?: RunMonitorServiceEnabled;
   /** 开启云自动化助手服务（TencentCloud Automation Tools，TAT）。若不指定该参数，默认开启云自动化助手服务。 */
   AutomationService?: RunAutomationServiceEnabled;
+}
+
+/** 用户自定义环境变量。 */
+declare interface EnvVar {
+  /** ENV */
+  Name: string;
+  /** test */
+  Value: string;
 }
 
 /** 弹性扩容节点配置信息。 */
@@ -234,6 +272,44 @@ declare interface InternetAccessible {
   InternetChargeType?: string | null;
   /** 公网出带宽上限，单位：Mbps。默认值：0Mbps。不同机型带宽上限范围不一致，具体限制详见购买网络带宽。 */
   InternetMaxBandwidthOut?: number | null;
+}
+
+/** 提交Job作业信息 */
+declare interface Job {
+  /** 任务配置信息。 */
+  Tasks: Task[];
+  /** 作业名称。 */
+  JobName?: string;
+  /** 作业描述。 */
+  JobDescription?: string;
+  /** 作业优先级，数值越大，优先级越高，数值范围1～100。 */
+  Priority?: number;
+  /** 描述任务的依赖关系，DAG有向无环图。 */
+  TaskDependencies?: TaskDependence[];
+}
+
+/** 作业概览信息 */
+declare interface JobView {
+  /** 作业ID */
+  JobId?: string;
+  /** 作业名称 */
+  JobName?: string;
+  /** 作业描述 */
+  JobDescription?: string;
+  /** 作业优先级 */
+  Priority?: number;
+  /** 作业状态，包括CREATED, QUEING, STARTNG, RUNING, TERMINATING, TERMINATED, SUCCESS, FAILED */
+  JobState?: string;
+  /** 作业所属集群ID */
+  ClusterId?: string;
+  /** 作业所属队列名称 */
+  QueueName?: string;
+  /** 完成作业任务所需资源 */
+  OccupyResources?: string;
+  /** 作业任务创建时间 */
+  CreateTime?: string;
+  /** 作业任务结束时间 */
+  EndTime?: string;
 }
 
 /** 登录节点信息。 */
@@ -344,6 +420,14 @@ declare interface NodeScript {
   ScriptPath: string;
   /** 脚本执行超时时间（包含拉取脚本的时间）。单位秒，默认值：30。取值范围：10～1200。 */
   Timeout?: number;
+}
+
+/** 输出重定向配置 */
+declare interface OutputRedirect {
+  /** 输出driver类型 */
+  Driver?: string;
+  /** 重定向配置参数 */
+  Options?: string[];
 }
 
 /** 描述了实例的抽象位置 */
@@ -546,6 +630,16 @@ declare interface SpaceVirtualPrivateCloud {
   Ipv6AddressCount?: number;
 }
 
+/** 存储目录挂载配置。 */
+declare interface StorageMount {
+  /** 挂载源 */
+  Source: string;
+  /** 目标挂载位置 */
+  Target: string;
+  /** 挂载的存储类型，目前仅支持：local */
+  StorageType?: string;
+}
+
 /** 描述集群文件系统选项 */
 declare interface StorageOption {
   /** 集群挂载CFS文件系统选项。 */
@@ -588,6 +682,26 @@ declare interface TagSpecification {
   ResourceType: string;
   /** 标签对列表 */
   Tags: Tag[];
+}
+
+/** 作业任务配置信息。 */
+declare interface Task {
+  /** 作业任务的应用环境配置信息。 */
+  Application: Application;
+  /** 作业任务名称。 */
+  TaskName?: string;
+  /** 作业任务所需的节点数/副本数。 */
+  TaskInstanceNum?: number;
+  /** 任务超时时间(单位：秒)。 */
+  Timeout?: number;
+}
+
+/** 任务的依赖关系。 */
+declare interface TaskDependence {
+  /** 依赖关系的起点任务名称。 */
+  StartTask: string;
+  /** 依赖关系的终点任务名称。 */
+  EndTask: string;
 }
 
 /** 描述了VPC相关信息 */
@@ -820,6 +934,16 @@ declare interface DeleteClusterStorageOptionResponse {
   RequestId?: string;
 }
 
+declare interface DeleteJobRequest {
+  /** 作业任务ID */
+  JobId: string;
+}
+
+declare interface DeleteJobResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteNodesRequest {
   /** 集群ID。 */
   ClusterId: string;
@@ -920,6 +1044,50 @@ declare interface DescribeInitNodeScriptsRequest {
 declare interface DescribeInitNodeScriptsResponse {
   /** 节点初始化脚本列表。 */
   InitNodeScriptSet?: NodeScript[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeJobSubmitInfoRequest {
+  /** 作业ID */
+  JobId: string;
+}
+
+declare interface DescribeJobSubmitInfoResponse {
+  /** 集群ID */
+  ClusterId?: string;
+  /** 队列名称 */
+  QueueName?: string;
+  /** 作业信息 */
+  Job?: Job;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeJobsOverviewRequest {
+}
+
+declare interface DescribeJobsOverviewResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeJobsRequest {
+  /** 作业任务ID列表 */
+  JobIds?: string[];
+  /** 过滤列表 */
+  Filters?: Filter[];
+  /** 偏移量，默认为0。 关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+  Limit?: number;
+}
+
+declare interface DescribeJobsResponse {
+  /** 作业任务概览列表 */
+  JobSet?: JobView[];
+  /** 符合条件的作业任务数量。 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1044,6 +1212,24 @@ declare interface SetAutoScalingConfigurationRequest {
 }
 
 declare interface SetAutoScalingConfigurationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SubmitJobRequest {
+}
+
+declare interface SubmitJobResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface TerminateJobRequest {
+  /** 作业任务ID */
+  JobId: string;
+}
+
+declare interface TerminateJobResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2057,6 +2243,8 @@ declare interface Thpc {
   DeleteCluster(data: DeleteClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterResponse>;
   /** 删除集群存储选项 {@link DeleteClusterStorageOptionRequest} {@link DeleteClusterStorageOptionResponse} */
   DeleteClusterStorageOption(data: DeleteClusterStorageOptionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterStorageOptionResponse>;
+  /** 删除作业任务 {@link DeleteJobRequest} {@link DeleteJobResponse} */
+  DeleteJob(data: DeleteJobRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteJobResponse>;
   /** 删除节点 {@link DeleteNodesRequest} {@link DeleteNodesResponse} */
   DeleteNodes(data: DeleteNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNodesResponse>;
   /** 删除队列 {@link DeleteQueueRequest} {@link DeleteQueueResponse} */
@@ -2071,6 +2259,12 @@ declare interface Thpc {
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
   /** 查询节点初始化脚本列表 {@link DescribeInitNodeScriptsRequest} {@link DescribeInitNodeScriptsResponse} */
   DescribeInitNodeScripts(data: DescribeInitNodeScriptsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInitNodeScriptsResponse>;
+  /** 查询作业提交信息 {@link DescribeJobSubmitInfoRequest} {@link DescribeJobSubmitInfoResponse} */
+  DescribeJobSubmitInfo(data: DescribeJobSubmitInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobSubmitInfoResponse>;
+  /** 查询作业任务 {@link DescribeJobsRequest} {@link DescribeJobsResponse} */
+  DescribeJobs(data?: DescribeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobsResponse>;
+  /** 查询集群下作业任务的概览信息 {@link DescribeJobsOverviewRequest} {@link DescribeJobsOverviewResponse} */
+  DescribeJobsOverview(data?: DescribeJobsOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobsOverviewResponse>;
   /** 查询指定集群节点列表 {@link DescribeNodesRequest} {@link DescribeNodesResponse} */
   DescribeNodes(data?: DescribeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodesResponse>;
   /** 查询队列列表 {@link DescribeQueuesRequest} {@link DescribeQueuesResponse} */
@@ -2087,6 +2281,10 @@ declare interface Thpc {
   ModifyWorkspacesRenewFlag(data: ModifyWorkspacesRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkspacesRenewFlagResponse>;
   /** 设置弹性伸缩配置信息 {@link SetAutoScalingConfigurationRequest} {@link SetAutoScalingConfigurationResponse} */
   SetAutoScalingConfiguration(data: SetAutoScalingConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<SetAutoScalingConfigurationResponse>;
+  /** 提交作业任务 {@link SubmitJobRequest} {@link SubmitJobResponse} */
+  SubmitJob(data?: SubmitJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitJobResponse>;
+  /** 终止作业任务 {@link TerminateJobRequest} {@link TerminateJobResponse} */
+  TerminateJob(data: TerminateJobRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateJobResponse>;
   /** 销毁工作空间 {@link TerminateWorkspacesRequest} {@link TerminateWorkspacesResponse} */
   TerminateWorkspaces(data: TerminateWorkspacesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateWorkspacesResponse>;
   /** 添加集群存储选项 {@link V20220401.AddClusterStorageOptionRequest} {@link V20220401.AddClusterStorageOptionResponse} */

@@ -38,6 +38,10 @@ declare interface ConsumeGroupItem {
   ConsumerGroupV4?: string | null;
   /** 4.x的完整命名空间 */
   FullNamespaceV4?: string | null;
+  /** 订阅的主题个数 */
+  SubscribeTopicNum?: number;
+  /** 1753153590 */
+  CreateTime?: number | null;
 }
 
 /** 消费者客户端 */
@@ -1083,6 +1087,10 @@ declare interface DescribeConsumerGroupListRequest {
   Limit?: number;
   /** 查询指定主题下的消费组 */
   FromTopic?: string;
+  /** 按照指定字段排序，枚举值如下：- subscribeNum：订阅 Topic 个数 */
+  SortedBy?: string;
+  /** 按升序或降序排列，枚举值如下：- asc：升序- desc：降序 */
+  SortOrder?: string;
 }
 
 declare interface DescribeConsumerGroupListResponse {
