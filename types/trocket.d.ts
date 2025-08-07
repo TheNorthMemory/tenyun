@@ -761,12 +761,12 @@ declare interface CreateInstanceRequest {
   Name: string;
   /** 商品规格，从 [DescribeProductSKUs](https://cloud.tencent.com/document/api/1493/107676) 接口中的 [ProductSKU](https://cloud.tencent.com/document/api/1493/96031) 出参获得。 */
   SkuCode: string;
+  /** 集群绑定的VPC信息 */
+  VpcList: VpcInfo[];
   /** 备注信息 */
   Remark?: string;
   /** 标签列表 */
   TagList?: Tag[];
-  /** 集群绑定的VPC信息，必填 */
-  VpcList?: VpcInfo[];
   /** 是否开启公网，默认值为false表示不开启 */
   EnablePublic?: boolean;
   /** 公网是否按流量计费，默认值为false表示不按流量计费 */

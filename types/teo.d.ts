@@ -1492,6 +1492,22 @@ declare interface ForceRedirectHTTPSParameters {
   RedirectStatusCode?: number;
 }
 
+/** 高频扫描防护配置选项，当某一访客的请求频繁命中「配置为拦截」的托管规则时，在一段时间内封禁该访客所有请求。 */
+declare interface FrequentScanningProtection {
+  /** 高频扫描防护规则是否开启。取值有：on：开启，高频扫描防护规则生效；off：关闭，高频扫描防护规则不生效。 */
+  Enabled?: string;
+  /** 高频扫描防护的处置动作。 当 Enabled 为 on 时，此字段必填。SecurityAction 的 Name 取值支持：Deny：拦截，响应拦截页面；Monitor：观察，不处理请求记录安全事件到日志中；JSChallenge：JavaScript 挑战，响应 JavaScript 挑战页面。 */
+  Action?: SecurityAction;
+  /** 请求统计的匹配方式，当 Enabled 为 on 时，此字段必填。取值有：http.request.xff_header_ip：客户端 IP（优先匹配 XFF 头部）；http.request.ip：客户端 IP。 */
+  CountBy?: string;
+  /** 此参数指定高频扫描防护的阈值，即在 CountingPeriod 所设置时间范围内命中「配置为拦截」的托管规则时的累计拦截次数，取值范围 1 ~ 4294967294，例如 100，当超过此统计值时，后续请求将触发 Action 所设置的处置动作。当 Enabled 为 on 时，此字段必填。 */
+  BlockThreshold?: number;
+  /** 此参数指定高频扫描防护所统计的时间窗口，即命中「配置为拦截」的托管规则的请求的统计时间窗口，取值 5 ~ 1800，单位仅支持秒（s），例如 5s。 当 Enabled 为 on 时，此字段必填。 */
+  CountingPeriod?: string;
+  /** 此参数指定高频扫描防护 Action 参数所设置处置动作的持续时长，取值范围 60 ~ 86400，单位仅支持秒（s），例如 60s。当 Enabled 为 on 时，此字段必填。 */
+  ActionDuration?: string;
+}
+
 /** 边缘函数详情 */
 declare interface Function {
   /** 函数 ID。 */
@@ -2086,6 +2102,8 @@ declare interface ManagedRules {
   AutoUpdate?: ManagedRuleAutoUpdate;
   /** 托管规则组的配置。如果此结构传空数组或 GroupId 未包含在列表内将按照默认方式处理。 */
   ManagedRuleGroups?: ManagedRuleGroup[];
+  /** 高频扫描防护配置选项，当某一访客的请求频繁命中「配置为拦截」的托管规则时，在一段时间内封禁该访客所有请求。 */
+  FrequentScanningProtection?: FrequentScanningProtection;
 }
 
 /** 浏览器缓存规则配置，用于设置 MaxAge 默认值，默认为关闭状态 */

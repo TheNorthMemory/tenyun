@@ -2534,6 +2534,10 @@ declare interface DescribeDBInstancesAttributeResponse {
   MultiDrReadableInfo?: DrReadableInfo[];
   /** 是否开启磁盘加密，1-开启，0-未开启 */
   IsDiskEncryptFlag?: number;
+  /** 是否安全限制部分功能，0-没有限制，1-有限制。限制的功能有：修改可用区、迁移变配、DTS数据迁移等 */
+  IsSafetyLimited?: number;
+  /** 是否支持创建SA权限账号，0-不支持，1-支持 */
+  IsSupportSA?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -711,6 +711,8 @@ declare interface CreateTaskFromActionRequest {
   TaskActionCustomConfiguration?: string;
   /** 演练自动暂停时间，单位分钟, 不填则默认为60 */
   TaskPauseDuration?: number;
+  /** 标签列表 */
+  TaskTags?: TagWithCreate[];
 }
 
 declare interface CreateTaskFromActionResponse {

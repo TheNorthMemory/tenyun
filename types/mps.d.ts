@@ -3314,10 +3314,12 @@ declare interface LiveStreamAiAnalysisResultInfo {
 
 /** 直播流 AI 分析结果 */
 declare interface LiveStreamAiAnalysisResultItem {
-  /** 结果的类型，取值范围：SegmentRecognition：拆条。 */
-  Type: string;
+  /** 结果的类型，取值范围：SegmentRecognition：拆条。Highlight ：集锦。 */
+  Type?: string;
   /** 拆条结果，当 Type 为SegmentRecognition 时有效。 */
-  SegmentResultSet: SegmentRecognitionItem[] | null;
+  SegmentResultSet?: SegmentRecognitionItem[] | null;
+  /** 集锦结果，当Type 为 Highlight 时有效。 */
+  HighlightResultSet?: MediaAiAnalysisHighlightItem[] | null;
 }
 
 /** 直播流媒体质检结果 */

@@ -403,11 +403,15 @@ declare interface SecurityGroupOption {
 /** 文件存储配置。 */
 declare interface StorageOption {
   /** 文件存储类型，取值范围：- SD：通用标准型- HP：通用性能型- TB：turbo标准型- TP：turbo性能型 */
-  StorageType: string | null;
+  StorageType: string;
   /** 文件存储可用区。 */
-  Zone: string | null;
+  Zone: string;
   /** 文件系统容量，turbo系列必填，单位为GiB。 - turbo标准型起售40TiB，即40960GiB；扩容步长20TiB，即20480 GiB。- turbo性能型起售20TiB，即20480 GiB；扩容步长10TiB，即10240 GiB。 */
-  Capacity?: number | null;
+  Capacity?: number;
+  /** 是否开启默认扩容，仅turbo类型文件存储支持 */
+  EnableAutoScaleUp?: boolean;
+  /** turbo文件系统元数据属性，basic：标准型元数据；enhanced：增强型元数据 */
+  MetaType?: string;
 }
 
 /** 表格。 */
@@ -486,6 +490,22 @@ declare interface Volume {
   IsDefault?: boolean;
   /** 状态。 */
   Status?: string;
+  /** turbo自动扩容策略 */
+  AutoScaleUpRule?: VolumeAutoScaleUpRule;
+  /** turbo元数据属性 */
+  MetaType?: string;
+  /** 可用区 */
+  Zone?: string;
+}
+
+/** 缓存卷自动扩容策略 */
+declare interface VolumeAutoScaleUpRule {
+  /** 自动扩容策略开启，关闭示例值：open,close */
+  Status?: string;
+  /** 集群用量占比，到达这个值后开始扩容,范围[10-90] */
+  ScaleThreshold?: number;
+  /** 扩容后使用量跟集群总量比例,范围[10-90] */
+  TargetThreshold?: number;
 }
 
 /** 缓存卷信息。 */
@@ -531,6 +551,10 @@ declare interface CreateVolumeRequest {
   Description?: string;
   /** 缓存卷大小（GB），Turbo系列需要指定。 */
   Capacity?: number;
+  /** 是否开启默认扩容，仅turbo类型文件存储支持 */
+  EnableAutoScaleUp?: boolean;
+  /** turbo文件系统元数据属性，basic：标准型元数据；enhanced：增强型元数据 */
+  MetaType?: string;
 }
 
 declare interface CreateVolumeResponse {

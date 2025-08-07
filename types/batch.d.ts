@@ -224,6 +224,14 @@ declare interface Dependence {
   EndTask: string;
 }
 
+/** Job资源监控查询维度 */
+declare interface Dimension {
+  /** 查询指标的维度名称 */
+  Name: string;
+  /** 查询指标的维度值 */
+  Value: string;
+}
+
 /** Docker容器信息 */
 declare interface Docker {
   /** Docker Hub填写“[user/repo]:[tag]”，Tencent Registry填写“ccr.ccs.tencentyun.com/[namespace/repo]:[tag]” */
@@ -1141,12 +1149,14 @@ declare interface DescribeJobMonitorDataRequest {
   TaskName: string;
   /** 作业任务实例的序号，详见[任务详情](https://cloud.tencent.com/document/product/599/15905) */
   TaskInstanceIndex: number;
-  /** 支持查询的指标；当前支持查询的任务指标；- CpuUsage：cpu利用率，单位：%- MemUsage：内存利用率，单位：%- LanOuttraffic：内网出带宽，单位：Bytes/s- LanIntraffic：内网入带宽，单位：Bytes/s */
+  /** 支持查询的指标；当前支持查询的任务指标；- CpuUsage：cpu利用率，单位：%- MemUsage：内存利用率，单位：%- LanOuttraffic：内网出带宽，单位：Bytes/s- LanIntraffic：内网入带宽，单位：Bytes/s- MaxDiskUsage：所有磁盘中的使用率最高的磁盘使用率，单位：%- TargetDiskUsage：指定磁盘的使用率，单位：%；配合Dimensions参数使用 */
   MetricName: string;
   /** 查询任务实例的起始时间；如果未传入查询起始时间或传入的时间小于任务实例的创建时间（任务实例创建时间详见[任务详情](https://cloud.tencent.com/document/product/599/15905)），会自动将查询时间调整到任务实例的创建时间。传入时间格式只支持零时区格式。 */
   StartTime?: string;
   /** 查询任务实例的终止时间；如果未传入查询终止时间或传入的时间大于任务实例的终止时间（任务实例终止时间详见[任务详情](https://cloud.tencent.com/document/product/599/15905)），并且任务实例已经结束，会自动将查询终止时间调整到任务实例的终止时间；如果任务实例未结束，会自动将查询终止时间调整到当前时间。传入时间格式只支持零时区格式。 */
   EndTime?: string;
+  /** 查询指标的扩展参数；当前只支持TargetDiskUsage;- TargetDiskUsage -支持的查询维度diskname, 维度值为磁盘挂载名，例如vdb；如果不传此参数，默认查询vdb磁盘的使用率。 样例：[{"Name":"diskname", "Value":"vdb"}] */
+  Dimensions?: Dimension[];
 }
 
 declare interface DescribeJobMonitorDataResponse {

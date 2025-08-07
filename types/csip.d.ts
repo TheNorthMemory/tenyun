@@ -1220,6 +1220,8 @@ declare interface CallRecord {
   ShowStatus?: boolean;
   /** 运营商 */
   ISP?: string;
+  /** 账号外vpc信息列表 */
+  VpcInfo?: SourceIPVpcInfo[];
 }
 
 /** 检查项视角风险 */
@@ -1592,6 +1594,12 @@ declare interface ExposesItem {
   AppId?: number;
   /** 租户ID字符串 */
   AppIdStr?: string;
+  /** 记录ID */
+  ExposureID?: number;
+  /** 端口开放数量 */
+  PortDetectCount?: number;
+  /** 端口开放结果 */
+  PortDetectResult?: string;
 }
 
 /** 列表查询接口采用新filter 接口，直接传给后台供后台查询过滤 */
@@ -2189,6 +2197,28 @@ declare interface RiskDetailItem {
 }
 
 /** 风险规则 */
+declare interface RiskRuleInfo {
+  /** 风险检查项ID */
+  RuleID?: string;
+  /** 云厂商名称 */
+  Provider?: string;
+  /** 实例类型 */
+  InstanceType?: string;
+  /** 风险名称 */
+  RiskTitle?: string;
+  /** 检查类型 */
+  CheckType?: string;
+  /** 风险等级 */
+  RiskLevel?: string;
+  /** 风险危害 */
+  RiskInfluence?: string;
+  /** 风险修复指引报告链接 */
+  RiskFixAdvance?: string;
+  /** 边界管控 */
+  DispositionType?: string;
+}
+
+/** 风险规则 */
 declare interface RiskRuleItem {
   /** 风险检查项ID */
   ItemId?: string;
@@ -2484,6 +2514,18 @@ declare interface SourceIPAsset {
   ShowStatus?: boolean;
   /** 运营商字段 */
   ISP?: string;
+}
+
+/** 调用源IP 外部账号信息 */
+declare interface SourceIPVpcInfo {
+  /** 账号名称 */
+  Name?: string;
+  /** vpc所属appid */
+  AppID?: number;
+  /** vpc id */
+  VpcID?: string;
+  /** vpc 名称 */
+  VpcName?: string;
 }
 
 /** 用户行为分析 统计条件 */
@@ -3750,6 +3792,8 @@ declare interface DescribeCallRecordRequest {
   AccessKeyID?: number;
   /** 调用源IP的ID */
   SourceIPID?: number;
+  /** 访问账号uin */
+  AccUin?: string;
   /** 过滤器 */
   Filter?: Filter;
 }
@@ -3837,6 +3881,38 @@ declare interface DescribeClusterPodAssetsResponse {
   RegionList?: FilterDataObject[];
   /** 租户枚举 */
   AppIdList?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConfigCheckRulesRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤内容 */
+  Filters?: Filters[];
+  /** 分页大小 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+  /** 排序类型 */
+  Order?: string;
+  /** 排序字段 */
+  By?: string;
+}
+
+declare interface DescribeConfigCheckRulesResponse {
+  /** 风险规则数量 */
+  TotalCount?: number;
+  /** 风险规则列表 */
+  RuleList?: RiskRuleInfo[];
+  /** 云厂商类型选项 */
+  ProviderList?: AttributeOptionSet[];
+  /** 风险等级类型选项 */
+  RiskLevelList?: AttributeOptionSet[];
+  /** 处置分类选项 */
+  DispositionTypeList?: AttributeOptionSet[];
+  /** 检查类型选项 */
+  CheckTypeList?: AttributeOptionSet[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5112,6 +5188,8 @@ declare interface Csip {
   DescribeClusterAssets(data?: DescribeClusterAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterAssetsResponse>;
   /** 集群pod列表 {@link DescribeClusterPodAssetsRequest} {@link DescribeClusterPodAssetsResponse} */
   DescribeClusterPodAssets(data?: DescribeClusterPodAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterPodAssetsResponse>;
+  /** 云资源配置风险规则列表 {@link DescribeConfigCheckRulesRequest} {@link DescribeConfigCheckRulesResponse} */
+  DescribeConfigCheckRules(data?: DescribeConfigCheckRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigCheckRulesResponse>;
   /** db资产详情 {@link DescribeDbAssetInfoRequest} {@link DescribeDbAssetInfoResponse} */
   DescribeDbAssetInfo(data: DescribeDbAssetInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDbAssetInfoResponse>;
   /** 数据库资产列表 {@link DescribeDbAssetsRequest} {@link DescribeDbAssetsResponse} */

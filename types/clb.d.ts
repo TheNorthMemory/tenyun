@@ -1555,7 +1555,7 @@ declare interface CreateListenerRequest {
   Certificate?: CertificateInput;
   /** 会话保持时间，单位：秒。可选值：30~3600，默认为0，默认不开启。此参数仅适用于TCP/UDP监听器。 */
   SessionExpireTime?: number;
-  /** 监听器转发的方式。可选值：WRR（按权重轮询）、LEAST_CONN（按最小连接数）、IP_HASH（按 IP 地址哈希）默认为 WRR。此参数仅适用于TCP/UDP/TCP_SSL/QUIC监听器。 */
+  /** 监听器转发的方式。可选值：WRR（按权重轮询）、LEAST_CONN（按最小连接数）默认为 WRR。此参数仅适用于TCP/UDP/TCP_SSL/QUIC监听器。 */
   Scheduler?: string;
   /** 是否开启SNI特性，此参数仅适用于HTTPS监听器。0表示未开启，1表示开启。 */
   SniSwitch?: number;
