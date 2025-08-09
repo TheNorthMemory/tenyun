@@ -686,6 +686,24 @@ declare interface ShareResource {
   ProductResourceId?: string;
 }
 
+/** 与我共享的资源 */
+declare interface ShareResourceToMember {
+  /** 资源ID */
+  ResourceId: string;
+  /** 资源类型 */
+  Type: string;
+  /** 共享单元ID */
+  UnitId: string;
+  /** 共享单元名 */
+  UnitName: string;
+  /** 创建时间 */
+  CreateTime: string;
+  /** 业务资源ID */
+  ProductResourceId: string;
+  /** 共享管理员uin */
+  ShareManagerUin: number | null;
+}
+
 /** 共享单元成员 */
 declare interface ShareUnitMember {
   /** 共享成员Uin。 */
@@ -1962,6 +1980,30 @@ declare interface DescribePolicyResponse {
   UpdateTime?: string;
   /** 策略创建时间。 */
   AddTime?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeResourceToShareMemberRequest {
+  /** 地域 */
+  Area: string;
+  /** 偏移量 */
+  Offset: number;
+  /** 每页条数 */
+  Limit: number;
+  /** 搜索关键字，支持业务资源ID搜索 */
+  SearchKey?: string;
+  /** 资源类型 */
+  Type?: string;
+  /** 业务资源ID。最大50个 */
+  ProductResourceIds?: string[];
+}
+
+declare interface DescribeResourceToShareMemberResponse {
+  /** 总数 */
+  Total?: number | null;
+  /** 详情 */
+  Items?: ShareResourceToMember[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3623,6 +3665,8 @@ declare interface Organization {
   DescribePolicy(data: DescribePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyResponse>;
   /** 查看企业组织策略配置 {@link DescribePolicyConfigRequest} {@link DescribePolicyConfigResponse} */
   DescribePolicyConfig(data: DescribePolicyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyConfigResponse>;
+  /** 获取与我共享的资源列表 {@link DescribeResourceToShareMemberRequest} {@link DescribeResourceToShareMemberResponse} */
+  DescribeResourceToShareMember(data: DescribeResourceToShareMemberRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceToShareMemberResponse>;
   /** 获取可共享地域列表 {@link DescribeShareAreasRequest} {@link DescribeShareAreasResponse} */
   DescribeShareAreas(data?: DescribeShareAreasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShareAreasResponse>;
   /** 获取共享单元成员列表 {@link DescribeShareUnitMembersRequest} {@link DescribeShareUnitMembersResponse} */

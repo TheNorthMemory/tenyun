@@ -1809,6 +1809,8 @@ declare interface DescribeTopicListRequest {
   Offset?: number;
   /** 查询结果限制数量，默认20。 */
   Limit?: number;
+  /** 按照消费组查询订阅的主题 */
+  FromGroup?: string;
 }
 
 declare interface DescribeTopicListResponse {

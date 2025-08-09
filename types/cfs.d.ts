@@ -1282,6 +1282,24 @@ declare interface DescribeUserQuotaResponse {
   RequestId?: string;
 }
 
+declare interface DoDirectoryOperationRequest {
+  /** 文件系统Id */
+  FileSystemId: string;
+  /** create：创建目录 check：确认目录是否存在 */
+  OpetationType: string;
+  /** 目录的绝对路径 默认递归创建（即如果目录中有子目录不存在，则先创建出对应子目录） */
+  DirectoryPath: string;
+  /** 创建目录的权限，若不传，默认为0755 若Operation Type为check，此值无实际意义 */
+  Mode?: string;
+}
+
+declare interface DoDirectoryOperationResponse {
+  /** 1:成功 0:失败 创建目录的操作，1表示创建成功，0表示创建失败。 确认目录是否存在的操作，1表示目录存在，0表示目录不存在。 说明：创建目录操作若目录已存在，也会返回创建成功。 */
+  Result?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDataFlowRequest {
   /** 数据流动管理 ID ，通过查询数据流动接口获取 */
   DataFlowId: string;
@@ -1663,6 +1681,8 @@ declare interface Cfs {
   DescribeSnapshotOperationLogs(data: DescribeSnapshotOperationLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotOperationLogsResponse>;
   /** 查询文件系统配额 {@link DescribeUserQuotaRequest} {@link DescribeUserQuotaResponse} */
   DescribeUserQuota(data: DescribeUserQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserQuotaResponse>;
+  /** 目录操作接口 {@link DoDirectoryOperationRequest} {@link DoDirectoryOperationResponse} */
+  DoDirectoryOperation(data: DoDirectoryOperationRequest, config?: AxiosRequestConfig): AxiosPromise<DoDirectoryOperationResponse>;
   /** 修改数据流动相关参数 {@link ModifyDataFlowRequest} {@link ModifyDataFlowResponse} */
   ModifyDataFlow(data: ModifyDataFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataFlowResponse>;
   /** 更新文件系统自动扩容策略 {@link ModifyFileSystemAutoScaleUpRuleRequest} {@link ModifyFileSystemAutoScaleUpRuleResponse} */

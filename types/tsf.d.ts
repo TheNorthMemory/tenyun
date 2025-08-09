@@ -7294,8 +7294,8 @@ declare interface ModifyClusterResponse {
 }
 
 declare interface ModifyContainerGroupRequest {
-  /** 部署组ID 必填项 */
-  GroupId?: string;
+  /** 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的项目列表或登录控制台进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的项目。 */
+  GroupId: string;
   /** 0:公网 1:集群内访问 2：NodePort */
   AccessType?: number;
   /** ProtocolPorts数组 */
@@ -7304,7 +7304,7 @@ declare interface ModifyContainerGroupRequest {
   UpdateType?: number;
   /** 更新间隔,单位秒 */
   UpdateIvl?: number;
-  /** 子网ID */
+  /** 子网ID，可通过调用[DescribeSubnets](https://cloud.tencent.com/document/product/215/15784)查询已创建的项目列表或登录控制台进行查看；也可以调用[CreateSubnet](https://cloud.tencent.com/document/product/1108/43594)创建新的项目。 */
   SubnetId?: string;
   /** 部署组备注 */
   Alias?: string;
@@ -8490,7 +8490,7 @@ declare interface Tsf {
   /** 修改集群信息 {@link ModifyClusterRequest} {@link ModifyClusterResponse} */
   ModifyCluster(data: ModifyClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterResponse>;
   /** 修改容器部署组 {@link ModifyContainerGroupRequest} {@link ModifyContainerGroupResponse} */
-  ModifyContainerGroup(data?: ModifyContainerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContainerGroupResponse>;
+  ModifyContainerGroup(data: ModifyContainerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContainerGroupResponse>;
   /** 修改容器部署组实例数 {@link ModifyContainerReplicasRequest} {@link ModifyContainerReplicasResponse} */
   ModifyContainerReplicas(data: ModifyContainerReplicasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContainerReplicasResponse>;
   /** 更新分组信息 {@link ModifyGroupRequest} {@link ModifyGroupResponse} */

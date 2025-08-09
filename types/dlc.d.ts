@@ -2148,6 +2148,8 @@ declare interface TaskResponseInfo {
   EngineTypeDetail?: string;
   /** spark引擎资源组名称 */
   ResourceGroupName?: string;
+  /** 任务执行耗时 */
+  JobTimeSum?: number;
 }
 
 /** 任务结果信息。 */

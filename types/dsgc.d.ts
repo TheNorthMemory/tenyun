@@ -840,9 +840,9 @@ declare interface DspaDiscoveryComplianceGroupInfo {
   Disabled?: boolean;
   /** 是否别名 */
   IsAlias?: boolean;
-  /** 1代表模版开启，0代表模版关闭 */
+  /** 1代表模板开启，0代表模板关闭 */
   Status?: number;
-  /** 模版最后修改时间 */
+  /** 模板最后修改时间 */
   ModifyTime?: string;
 }
 
@@ -1622,7 +1622,7 @@ declare interface ReportInfo {
   ComplianceName?: string;
   /** 进度百分比 */
   ProgressPercent?: number;
-  /** 报告模版名称 */
+  /** 报告模板名称 */
   ReportTemplateName?: string;
 }
 
@@ -2153,7 +2153,7 @@ declare interface CreateDSPAComplianceGroupRequest {
   ComplianceGroupRules?: ComplianceGroupRuleIdInfo[];
   /** 分级组ID，默认值为1，新增参数，可选 */
   LevelGroupId?: number;
-  /** 1代表模版开启，0代表模版关闭 */
+  /** 1代表模板开启，0代表模板关闭 */
   Status?: number;
   /** 该complianceId的开启状态将被关闭 */
   CloseComplianceId?: number;
@@ -3413,7 +3413,7 @@ declare interface DescribeDSPAComplianceGroupsRequest {
   Limit?: number;
   /** 合规组类型可选值：0 默认合规组, 1 系统合规组, 2 自定义合规组 */
   ComplianceGroupTypeList?: number[];
-  /** 是否仅显示已开启模版 */
+  /** 是否仅显示已开启模板 */
   IsFilterCloseComplianceGroup?: boolean;
 }
 

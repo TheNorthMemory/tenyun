@@ -208,6 +208,8 @@ declare interface DCDBInstanceInfo {
   ResourceTags?: ResourceTag[];
   /** 数据库引擎版本 */
   DbVersionId?: string;
+  /** 实例删除保护标签，1: 已开启删除保护，0: 未开启删除保护 */
+  ProtectedProperty?: number;
 }
 
 /** 描述分布式数据库分片信息。 */
@@ -1638,6 +1640,8 @@ declare interface DescribeDCDBInstanceDetailResponse {
   IsDcnSwitchSupported?: number;
   /** cpu类型，英特尔：Intel/AMD，海光：Hygon，默认Intel/AMD */
   CpuType?: string;
+  /** 实例删除保护标签，1: 已开启删除保护，0: 未开启删除保护 */
+  ProtectedProperty?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2175,6 +2179,8 @@ declare interface KillSessionRequest {
   ShardId?: string;
   /** 分片序列ID，与ShardId设置一个 */
   ShardSerialId?: string;
+  /** 节点ID，可指定主节点或者备节点进行kill。可选参数，不传默认为主节点。 */
+  NodeId?: string;
 }
 
 declare interface KillSessionResponse {
@@ -2293,7 +2299,7 @@ declare interface ModifyDBInstanceSecurityGroupsRequest {
   Product: string;
   /** 实例ID。 */
   InstanceId: string;
-  /** 要修改的安全组 ID 列表，一个或者多个安全组 ID 组成的数组。 */
+  /** 要修改的安全组 ID 列表，一个或者多个安全组 ID 组成的数组。注意：该入参会全量替换存量已有安全组集合，并非增量更新。修改需传入全量的预期集合。 */
   SecurityGroupIds: string[];
 }
 

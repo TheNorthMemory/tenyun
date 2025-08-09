@@ -316,7 +316,7 @@ declare interface CreatePrivateZoneRequest {
 }
 
 declare interface CreatePrivateZoneResponse {
-  /** 私有域ID, zone-12345678 */
+  /** 私有域ID, zone-12sa5ce78 */
   ZoneId?: string;
   /** 私有域名 */
   Domain?: string;
@@ -477,7 +477,7 @@ declare interface DescribePrivateZoneListResponse {
 }
 
 declare interface DescribePrivateZoneRecordListRequest {
-  /** 私有域ID: zone-xxxxxx */
+  /** 私有域ID: zone-12c5a6e8 */
   ZoneId: string;
   /** 过滤参数（支持使用Value、RecordType过滤） */
   Filters?: Filter[];
@@ -616,7 +616,7 @@ declare interface ModifyPrivateZoneVpcRequest {
 }
 
 declare interface ModifyPrivateZoneVpcResponse {
-  /** 私有域ID, zone-12345ds6 */
+  /** 私有域ID, zone-12e45ds6 */
   ZoneId?: string;
   /** 解析域关联的VPC列表 */
   VpcSet?: VpcInfo[];

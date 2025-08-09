@@ -184,6 +184,8 @@ declare interface DBInstance {
   ResourceTags?: ResourceTag[];
   /** 数据库版本 */
   DbVersionId?: string;
+  /** 实例删除保护标签，1: 已开启删除保护，0: 未开启删除保护 */
+  ProtectedProperty?: number;
 }
 
 /** 云数据库参数信息。 */
@@ -1292,6 +1294,8 @@ declare interface DescribeDBInstanceDetailResponse {
   ProxyVersion?: string;
   /** Cpu类型，如：英特尔：Intel/AMD，海光：Hygon */
   CpuType?: string;
+  /** 删除保护标记，1: 已开启删除保护，0: 未开启删除保护 */
+  ProtectedProperty?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1857,6 +1861,8 @@ declare interface KillSessionRequest {
   InstanceId: string;
   /** 会话ID列表 */
   SessionId: number[];
+  /** 节点ID，可指定主节点或者备节点进行kill。可选参数，不传默认为主节点。 */
+  NodeId?: string;
 }
 
 declare interface KillSessionResponse {
@@ -1979,7 +1985,7 @@ declare interface ModifyDBInstanceSecurityGroupsRequest {
   Product: string;
   /** 实例ID。 */
   InstanceId: string;
-  /** 要修改的安全组 ID 列表，一个或者多个安全组 ID 组成的数组 */
+  /** 要修改的安全组 ID 列表，一个或者多个安全组 ID 组成的数组。注意：改入参会全量替换存量已有安全组集合，并非增量更新。修改需传入全量的预期集合。 */
   SecurityGroupIds: string[];
 }
 
