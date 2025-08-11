@@ -872,6 +872,8 @@ declare interface Intention {
   IntentionQuestions?: IntentionQuestion[];
   /** 意愿核身（点头确认模式）使用的文案，若未使用意愿核身（点头确认模式），则该字段无需传入。支持传入1～10轮点头确认文本，最多支持10轮。注：`选择点头模式时，此字段可不传，不传则使用默认语音文本：请问，您是否同意签署本协议？可点头同意。` */
   IntentionActions?: IntentionAction[];
+  /** 视频核身相关配置 */
+  RuleIdConfig?: RuleIdConfig;
 }
 
 /** 意愿核身（点头确认模式）使用的文案，若未使用意愿核身（点头确认模式），则该字段无需传入。当前仅支持一个提示文本。 */
@@ -1248,6 +1250,12 @@ declare interface ResourceUrlInfo {
   Name?: string;
   /** 资源类型 */
   Type?: string;
+}
+
+/** 视频核身相关配置 */
+declare interface RuleIdConfig {
+  /** 意愿核身语音播报速度，配置后问答模式和点头模式的语音播报环节都会生效，默认值为0：0-智能语速（根据播报文案的长度自动调整语音播报速度）1-固定1倍速2-固定1.2倍速3-固定1.5倍速 */
+  Speed?: number;
 }
 
 /** 签署控件的配置信息，用在嵌入式发起的页面配置，包括 - 签署控件 是否默认展示日期. */

@@ -628,7 +628,7 @@ declare interface GetDetectInfoEnhancedRequest {
 }
 
 declare interface GetDetectInfoEnhancedResponse {
-  /** 文本类信息。 */
+  /** 人脸核身识别结果及文本类信息。 */
   Text?: DetectInfoText | null;
   /** 身份证照片信息。 */
   IdCardData?: DetectInfoIdCardData | null;
@@ -646,6 +646,10 @@ declare interface GetDetectInfoEnhancedResponse {
   IntentionActionResult?: IntentionActionResult | null;
   /** 加密后的数据。 */
   EncryptedBody?: string | null;
+  /** 本次请求是否配置开启意愿校验。 false：未开启意愿校验 true：已开启意愿校验 说明：若请求开启了意愿校验，可结合IntentionVerifyType中具体使用的校验模式从对应的出参Result中获取最终的核验结果；若请求没有开启意愿校验，则可在出参Text中获取最终的核验结果。 */
+  IsVerifyIntention?: boolean;
+  /** 本次请求意愿校验使用的具体模式。0：问答模式1：点头确认模式2：朗读模式若未使用意愿核身功能，该字段返回值可以不处理。注意：此字段可能返回 null，表示取不到有效值 */
+  IntentionVerifyType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -680,7 +684,7 @@ declare interface GetEidResultRequest {
 }
 
 declare interface GetEidResultResponse {
-  /** 文本类信息。- 基于对敏感信息的保护，验证使用的姓名和身份证号统一通过加密后从EidInfo参数中返回。- 如需获取请在控制台申请返回身份信息，详见[E证通获取实名信息指引](https://cloud.tencent.com/document/product/1007/63370)。 */
+  /** 人脸核身识别结果及文本类信息。- 基于对敏感信息的保护，验证使用的姓名和身份证号统一通过加密后从EidInfo参数中返回。- 如需获取请在控制台申请返回身份信息，详见[E证通获取实名信息指引](https://cloud.tencent.com/document/product/1007/63370)。 */
   Text?: DetectInfoText | null;
   /** 身份证照片信息。 */
   IdCardData?: DetectInfoIdCardData | null;
@@ -694,6 +698,10 @@ declare interface GetEidResultResponse {
   IntentionQuestionResult?: IntentionQuestionResult | null;
   /** 意愿核身点头确认模式的结果信息。- 若未使用该意愿核身功能，该字段返回值可以不处理。 */
   IntentionActionResult?: IntentionActionResult | null;
+  /** 本次请求是否配置开启意愿校验。 false：未开启意愿校验 true：已开启意愿校验 说明：若请求开启了意愿校验，可结合IntentionVerifyType中具体使用的校验模式从对应的出参Result中获取最终的核验结果；若请求没有开启意愿校验，则可在出参Text中获取最终的核验结果。 */
+  IsVerifyIntention?: boolean;
+  /** 本次请求意愿校验使用的具体模式。 0：问答模式 1：点头确认模式 2：朗读模式 若未使用意愿核身功能，该字段返回值可以不处理。 注意：此字段可能返回 null，表示取不到有效值 */
+  IntentionVerifyType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

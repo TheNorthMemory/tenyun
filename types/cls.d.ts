@@ -496,7 +496,7 @@ declare interface ContainerStdoutInfo {
 
 /** 自建k8s-工作负载信息 */
 declare interface ContainerWorkLoadInfo {
-  /** 工作负载的类型 */
+  /** 工作负载的类型，支持- deployment- statefulset- daemonset- job- cronjob */
   Kind: string;
   /** 工作负载的名称 */
   Name: string;
@@ -720,11 +720,11 @@ declare interface EscalateNoticeInfo {
 
 /** Windows事件日志采集配置 */
 declare interface EventLog {
-  /** 事件通道，支持Application，Security，Setup，System，ALL */
+  /** 事件通道，支持- Application 应用日志- Security 安全日志- Setup 启动日志- System 系统日志- ALL 所有日志 */
   EventChannel: string;
   /** 时间类型，1:用户自定义，2:当前时间 */
   TimeType: number;
-  /** 时间，用户选择自定义时间类型时，需要指定时间 */
+  /** 时间，用户选择自定义时间类型时，需要指定时间，单位秒 */
   Timestamp?: number;
   /** 事件ID过滤列表	选填，为空表示不做过滤支持正向过滤单个值（例：20）或范围（例：0-20），也支持反向过滤单个值(例：-20)多个过滤项之间可由逗号隔开，例：1-200,-100表示采集1-200范围内除了100以外的事件日志 */
   EventIDs?: string[];
@@ -948,9 +948,9 @@ declare interface KafkaRechargeInfo {
   Status?: number;
   /** 导入数据位置，-2:最早（默认），-1：最晚 */
   Offset?: number;
-  /** 创建时间 */
+  /** 创建时间。格式`YYYY-MM-DD HH:MM:SS` */
   CreateTime?: string;
-  /** 更新时间 */
+  /** 更新时间。格式`YYYY-MM-DD HH:MM:SS` */
   UpdateTime?: string;
   /** 日志导入规则 */
   LogRechargeRule?: LogRechargeRuleInfo;
@@ -1681,7 +1681,7 @@ declare interface CheckFunctionResponse {
 declare interface CheckRechargeKafkaServerRequest {
   /** 导入Kafka类型，0: 腾讯云CKafka；1: 用户自建Kafka。 */
   KafkaType: number;
-  /** 腾讯云CKafka实例ID。KafkaType为0时，KafkaInstance必填 */
+  /** 腾讯云CKafka实例ID。KafkaType为0时，KafkaInstance必填- 通过 [获取实例列表信息](https://cloud.tencent.com/document/product/597/40835) 获取实例id。 */
   KafkaInstance?: string;
   /** 服务地址。KafkaType为1时，ServerAddr必填 */
   ServerAddr?: string;
@@ -1692,7 +1692,7 @@ declare interface CheckRechargeKafkaServerRequest {
 }
 
 declare interface CheckRechargeKafkaServerResponse {
-  /** Kafka集群可访问状态，0：可正常访问 ... */
+  /** Kafka集群可访问状态。- 0：可正常访问 - -1：broker 连接失败- -2：sasl 鉴权失败- -3：ckafka 角色未授权- -4：topic 列表不存在- -5：topic 内暂无数据- -6：用户没有 ckafka 权限- -7：消费组已经存在- -8：kafka 实例不存在或已销毁- -9：Broker 列表为空- -10：Broker 地址格式不正确- -11：Broker 端口非整型 */
   Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2473,9 +2473,9 @@ declare interface DeleteIndexResponse {
 }
 
 declare interface DeleteKafkaRechargeRequest {
-  /** Kafka导入配置ID */
+  /** Kafka导入配置Id。- 通过 [创建Kafka数据订阅任务](https://cloud.tencent.com/document/product/614/94448)获取Kafka导入配置Id。- 通过 [获取Kafka数据订阅任务列表](https://cloud.tencent.com/document/product/614/94446)获取Kafka导入配置Id。 */
   Id: string;
-  /** 导入CLS目标topic ID */
+  /** 导入CLS目标日志主题Id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
 }
 
@@ -3327,17 +3327,17 @@ declare interface ModifyCloudProductLogCollectionResponse {
 }
 
 declare interface ModifyConfigExtraRequest {
-  /** 采集配置扩展信息id */
+  /** 采集配置扩展信息id- 通过[获取特殊采集配置](https://cloud.tencent.com/document/api/614/71164)获取采集配置扩展信息id。 */
   ConfigExtraId: string;
   /** 采集配置规程名称，最长63个字符，只能包含小写字符、数字及分隔符（“-”），且必须以小写字符开头，数字或小写字符结尾 */
   Name?: string;
-  /** 日志主题id */
+  /** 日志主题id- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId?: string;
-  /** 节点文件配置信息 */
+  /** 自建k8s-节点文件配置信息,包括文件路径、名称及元数据相关信息，详细参考https://cloud.tencent.com/document/api/614/56471 */
   HostFile?: HostFileInfo;
   /** 采集配置标记。- 目前只支持label_k8s，用于标记自建k8s集群使用的采集配置 */
   ContainerFile?: ContainerFileInfo;
-  /** 容器标准输出信息 */
+  /** 自建k8s-容器标准输出信息，包括容器、命名空间等，详细参考https://cloud.tencent.com/document/api/614/56471 */
   ContainerStdout?: ContainerStdoutInfo;
   /** 采集的日志类型，默认为minimalist_log。支持以下类型：- json_log代表：JSON-文件日志（详见[使用 JSON 提取模式采集日志](https://cloud.tencent.com/document/product/614/17419)）；- delimiter_log代表：分隔符-文件日志（详见[使用分隔符提取模式采集日志](https://cloud.tencent.com/document/product/614/17420)）；- minimalist_log代表：单行全文-文件日志（详见[使用单行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17421)）；- fullregex_log代表：单行完全正则-文件日志（详见[使用单行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52365)）；- multiline_log代表：多行全文-文件日志（详见[使用多行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17422)）；- multiline_fullregex_log代表：多行完全正则-文件日志（详见[使用多行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52366)）；- user_define_log代表：组合解析（适用于多格式嵌套的日志，详见[使用组合解析提取模式采集日志](https://cloud.tencent.com/document/product/614/61310)）。 */
   LogType?: string;
@@ -3349,17 +3349,17 @@ declare interface ModifyConfigExtraRequest {
   ExcludePaths?: ExcludePathInfo[];
   /** 组合解析采集规则，用于复杂场景下的日志采集。- 取值参考：[使用组合解析提取模式采集日志](https://cloud.tencent.com/document/product/614/61310) */
   UserDefineRule?: string;
-  /** 类型：container_stdout、container_file、host_file */
+  /** 容器场景，日志采集输入类型，支持以下三种类型- container_stdout 标准输出- container_file 容器文件- host_file 主机节点文件 */
   Type?: string;
-  /** 机器组ID */
+  /** 机器组ID- 通过[获取机器组列表](https://cloud.tencent.com/document/api/614/56438)获取机器组Id。 */
   GroupId?: string;
   /** 自建采集配置标 */
   ConfigFlag?: string;
-  /** 日志集ID */
+  /** 日志集ID- 通过[获取日志集列表](https://cloud.tencent.com/document/api/614/58624)获取日志集Id。 */
   LogsetId?: string;
-  /** 日志集name */
+  /** 日志集名称- 通过[获取日志集列表](https://cloud.tencent.com/document/api/614/58624)获取日志集名称。 */
   LogsetName?: string;
-  /** 日志主题name */
+  /** 日志主题名称- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题名称。 */
   TopicName?: string;
   /** 高级采集配置。 Json字符串， Key/Value定义为如下：- ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时- ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数- ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false- ClsAgentDefault(自定义默认值，无特殊含义，用于清空其他选项)，建议取值0 */
   AdvancedConfig?: string;
@@ -3763,7 +3763,7 @@ declare interface PreviewKafkaRechargeRequest {
   UserKafkaTopics: string;
   /** 导入数据位置，-2：最早；-1：最晚。 */
   Offset: number;
-  /** 腾讯云CKafka实例ID，当KafkaType为0时参数KafkaInstance有效且必填。 */
+  /** 腾讯云CKafka实例ID，当KafkaType为0时参数KafkaInstance有效且必填。- 通过 [获取实例列表信息](https://cloud.tencent.com/document/product/597/40835) 获取实例id。 */
   KafkaInstance?: string;
   /** 服务地址。KafkaType为1时ServerAddr必填。 */
   ServerAddr?: string;
@@ -3771,7 +3771,7 @@ declare interface PreviewKafkaRechargeRequest {
   IsEncryptionAddr?: boolean;
   /** 加密访问协议。KafkaType为1并且IsEncryptionAddr为true时Protocol必填。 */
   Protocol?: KafkaProtocolInfo;
-  /** 用户Kafka消费组 */
+  /** 用户Kafka消费组。- 消费组是 Kafka 提供的可扩展且具有容错性的消费者机制，一个消费组中存在多个消费者，组内的所有消费者共同消费订阅 Topic 中的消息。一个消费者可同时消费多个 Partition，但一个 Partition 只能被消费组内的一个消费者消费。 */
   ConsumerGroupName?: string;
   /** 日志导入规则 */
   LogRechargeRule?: LogRechargeRuleInfo;
@@ -3959,11 +3959,11 @@ declare interface SplitPartitionResponse {
 }
 
 declare interface UploadLogRequest {
-  /** 主题id */
+  /** 日志主题id- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
   /** 该参数已废弃，请勿使用 */
   HashKey?: string;
-  /** 压缩方法 */
+  /** 压缩方法，目前支持- lz4- zstd */
   CompressType?: string;
 }
 

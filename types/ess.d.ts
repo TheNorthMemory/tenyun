@@ -816,7 +816,7 @@ declare interface FlowGroupInfo {
   FlowName: string;
   /** 签署流程参与者信息，最大限制50方注意 approver中的顺序需要和模板中的顺序保持一致， 否则会导致模板中配置的信息无效。 */
   Approvers: ApproverInfo[];
-  /** 文件资源ID，通过多文件上传[UploadFiles](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)接口获得，为32位字符串。建议开发者保存此资源ID，后续创建合同或创建合同流程需此资源ID。 */
+  /** 文件资源ID，通过多文件上传[UploadFiles](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)接口获得，为32位字符串。注：此字段定义为数组，但仅支持单个文件 */
   FileIds?: string[];
   /** 合同模板ID，为32位字符串。建议开发者保存此模板ID，后续用此模板发起合同流程需要此参数。可登录腾讯电子签控制台，在 "模板"->"模板中心"->"列表展示设置"选中模板 ID 中查看某个模板的TemplateId(在页面中展示为模板ID)。 */
   TemplateId?: string;
@@ -962,6 +962,8 @@ declare interface Intention {
   IntentionQuestions?: IntentionQuestion[];
   /** 意愿核身（点头确认模式）使用的文案，若未使用意愿核身（点头确认模式），则该字段无需传入。支持传入1～10轮点头确认文本，最多支持10轮。注：`选择点头模式时，此字段可不传，不传则使用默认语音文本：请问，您是否同意签署本协议？可点头同意。` */
   IntentionActions?: IntentionAction[];
+  /** 视频核身相关配置 */
+  RuleIdConfig?: RuleIdConfig;
 }
 
 /** 意愿核身（点头确认模式）使用的文案，若未使用意愿核身（点头确认模式），则该字段无需传入。当前仅支持一个提示文本。 */
@@ -1390,6 +1392,12 @@ declare interface RiskIdentificationRoleInfo {
   Name: string;
   /** 风险识别角色的详细说明。注意： `最大长度应不超过500个字符` */
   Description?: string;
+}
+
+/** 视频核身相关配置 */
+declare interface RuleIdConfig {
+  /** 意愿核身语音播报速度，配置后问答模式和点头模式的语音播报环节都会生效，默认值为0：0-智能语速（根据播报文案的长度自动调整语音播报速度）1-固定1倍速2-固定1.2倍速3-固定1.5倍速 */
+  Speed?: number;
 }
 
 /** 模板中指定的印章信息 */
