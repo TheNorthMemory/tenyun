@@ -100,6 +100,12 @@ declare interface AudioEncodeParams {
   Volume?: number;
 }
 
+/** TTS音频输出的格式 */
+declare interface AudioFormat {
+  /** 生成的音频格式，默认pcm，目前支持的格式列表：[pcm]。 */
+  Format?: string;
+}
+
 /** 录制音频转码参数。 */
 declare interface AudioParams {
   /** 音频采样率枚举值:(注意1 代表48000HZ, 2 代表44100HZ, 3 代表16000HZ)1：48000Hz（默认）;2：44100Hz3：16000Hz。 */
@@ -1144,6 +1150,12 @@ declare interface VideoParams {
   BitRate: number;
   /** 视频关键帧时间间隔，单位秒，默认值10秒。 */
   Gop: number;
+}
+
+/** TTS的声音参数 */
+declare interface Voice {
+  /** TTS的声音的ID */
+  VoiceId: string;
 }
 
 /** 声纹配置参数 */
@@ -2482,6 +2494,44 @@ declare interface StopWebRecordResponse {
   RequestId?: string;
 }
 
+declare interface TextToSpeechRequest {
+  /** 需要转语音的文字内容，长度范围：[1, 255] */
+  Text: string;
+  /** 文本转语音的声音配置 */
+  Voice: Voice;
+  /** TRTC的SdkAppId */
+  SdkAppId: number;
+  /** 文本转语音的输出音频的格式 */
+  AudioFormat?: AudioFormat;
+  /** TTS的API密钥 */
+  APIKey?: string;
+}
+
+declare interface TextToSpeechResponse {
+  /** Base64编码的音频数据 */
+  Audio?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface TextToSpeechSSERequest {
+  /** 需要转语音的文字内容，长度范围：[1, 255] */
+  Text: string;
+  /** 文本转语音的声音配置 */
+  Voice: Voice;
+  /** TRTC的SdkAppId */
+  SdkAppId: number;
+  /** 文本转语音的输出音频的格式 */
+  AudioFormat?: AudioFormat;
+  /** TTS的API密钥 */
+  APIKey?: string;
+}
+
+declare interface TextToSpeechSSEResponse {
+  /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
+  RequestId?: string;
+}
+
 declare interface UpdateAIConversationRequest {
   /** 唯一标识一个任务 */
   TaskId: string;
@@ -2566,6 +2616,26 @@ declare interface UpdateVoicePrintRequest {
 }
 
 declare interface UpdateVoicePrintResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface VoiceCloneRequest {
+  /** TRTC的SdkAppId */
+  SdkAppId: number;
+  /** TTS的API密钥 */
+  APIKey: string;
+  /** 声音克隆的名字 */
+  VoiceName: string;
+  /** 声音克隆的参考音频，必须为16k单声道的wav的base64字符串， 长度在5秒～12秒之间 */
+  PromptAudio: string;
+  /** 声音克隆的参考文本，为参考音频对应的文字。 */
+  PromptText?: string;
+}
+
+declare interface VoiceCloneResponse {
+  /** 克隆出的音色ID，可以用此id进行语音合成 */
+  VoiceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2703,6 +2773,10 @@ declare interface Trtc {
   StopStreamIngest(data: StopStreamIngestRequest, config?: AxiosRequestConfig): AxiosPromise<StopStreamIngestResponse>;
   /** 停止页面录制 {@link StopWebRecordRequest} {@link StopWebRecordResponse} */
   StopWebRecord(data: StopWebRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StopWebRecordResponse>;
+  /** 文本转语音 {@link TextToSpeechRequest} {@link TextToSpeechResponse} */
+  TextToSpeech(data: TextToSpeechRequest, config?: AxiosRequestConfig): AxiosPromise<TextToSpeechResponse>;
+  /** SSE流式文本转语音 {@link TextToSpeechSSERequest} {@link TextToSpeechSSEResponse} */
+  TextToSpeechSSE(data: TextToSpeechSSERequest, config?: AxiosRequestConfig): AxiosPromise<TextToSpeechSSEResponse>;
   /** 更新AI对话 {@link UpdateAIConversationRequest} {@link UpdateAIConversationResponse} */
   UpdateAIConversation(data: UpdateAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAIConversationResponse>;
   /** 更新转推任务 {@link UpdatePublishCdnStreamRequest} {@link UpdatePublishCdnStreamResponse} */
@@ -2711,6 +2785,8 @@ declare interface Trtc {
   UpdateStreamIngest(data: UpdateStreamIngestRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateStreamIngestResponse>;
   /** 更新声纹信息 {@link UpdateVoicePrintRequest} {@link UpdateVoicePrintResponse} */
   UpdateVoicePrint(data: UpdateVoicePrintRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateVoicePrintResponse>;
+  /** 声音克隆 {@link VoiceCloneRequest} {@link VoiceCloneResponse} */
+  VoiceClone(data: VoiceCloneRequest, config?: AxiosRequestConfig): AxiosPromise<VoiceCloneResponse>;
 }
 
 export declare type Versions = ["2019-07-22"];

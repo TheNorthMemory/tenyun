@@ -450,13 +450,13 @@ declare interface InternetAccessible {
   PublicIpAssigned?: boolean;
   /** 带宽包ID。可通过[ DescribeBandwidthPackages ](https://cloud.tencent.com/document/api/215/19209)接口返回值中的`BandwidthPackageId`获取。该参数仅在RunInstances接口中作为入参使用。 */
   BandwidthPackageId?: string;
-  /** 线路类型。各种线路类型详情可参考：[EIP 的 IP 地址类型](https://cloud.tencent.com/document/product/1199/41646)。默认值：BGP。- BGP：常规 BGP 线路已开通静态单线IP白名单的用户，可选值： - CMCC：中国移动 - CTCC：中国电信 - CUCC：中国联通注意：仅部分地域支持静态单线IP。示例值：BGP */
+  /** 线路类型。各种线路类型及支持地区详情可参考：[EIP 的 IP 地址类型](https://cloud.tencent.com/document/product/1199/41646)。默认值：BGP。BGP：常规 BGP 线路已开通静态单线IP白名单的用户，可选值：CMCC：中国移动CTCC：中国电信CUCC：中国联通注意：仅部分地域支持静态单线IP。 */
   InternetServiceProvider?: string;
-  /** 公网 IP 类型。- WanIP：普通公网IP。- HighQualityEIP：精品 IP。仅新加坡和中国香港支持精品IP。- AntiDDoSEIP：高防 IP。仅部分地域支持高防IP，详情可见[弹性公网IP产品概述](https://cloud.tencent.com/document/product/1199/41646)。如需为资源分配公网IPv4地址，请指定公网IPv4地址类型。示例值：WanIP此功能仅部分地区灰度开放，如需使用[请提交工单咨询](https://console.cloud.tencent.com/workorder/category) */
+  /** 公网 IP 类型。 WanIP：普通公网IP。 HighQualityEIP：精品 IP。仅新加坡和中国香港支持精品IP。 AntiDDoSEIP：高防 IP。仅部分地域支持高防IP，详情可见[弹性公网IP产品概述](https://cloud.tencent.com/document/product/1199/41646)。如需为资源分配公网IPv4地址，请指定公网IPv4地址类型。此功能仅部分地区灰度开放，如需使用[请提交工单咨询](https://console.cloud.tencent.com/workorder/category) */
   IPv4AddressType?: string;
-  /** 弹性公网 IPv6 类型。- EIPv6：弹性公网 IPv6。- HighQualityEIPv6：精品 IPv6。仅中国香港支持精品IPv6。如需为资源分配IPv6地址，请指定弹性公网IPv6类型。示例值：EIPv6此功能仅部分地区灰度开放，如需使用[请提交工单咨询](https://console.cloud.tencent.com/workorder/category) */
+  /** 弹性公网 IPv6 类型。 EIPv6：弹性公网 IPv6。 HighQualityEIPv6：精品 IPv6。仅中国香港支持精品IPv6。如需为资源分配IPv6地址，请指定弹性公网IPv6类型。此功能仅部分地区灰度开放，如需使用[请提交工单咨询](https://console.cloud.tencent.com/workorder/category) */
   IPv6AddressType?: string;
-  /** 高防包唯一ID，申请高防IP时，该字段必传。示例值：bgp-12345678 */
+  /** 高防包唯一ID，申请高防IP时，该字段必传。 */
   AntiDDoSPackageId?: string;
 }
 
@@ -1207,25 +1207,25 @@ declare interface DescribeJobResponse {
 }
 
 declare interface DescribeJobSubmitInfoRequest {
-  /** 作业ID */
+  /** 作业ID；JobId详见[作业列表](https://cloud.tencent.com/document/product/599/15909) */
   JobId: string;
 }
 
 declare interface DescribeJobSubmitInfoResponse {
   /** 作业ID */
-  JobId: string;
+  JobId?: string;
   /** 作业名称 */
-  JobName: string;
+  JobName?: string;
   /** 作业描述 */
-  JobDescription: string;
+  JobDescription?: string;
   /** 作业优先级，任务（Task）和任务实例（TaskInstance）会继承作业优先级 */
-  Priority: number;
+  Priority?: number;
   /** 任务信息 */
-  Tasks: Task[];
+  Tasks?: Task[];
   /** 依赖信息 */
-  Dependences: Dependence[];
+  Dependences?: Dependence[];
   /** 作业绑定的标签列表。 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1307,21 +1307,21 @@ declare interface DescribeTaskResponse {
 }
 
 declare interface DescribeTaskTemplatesRequest {
-  /** 任务模板ID列表，与Filters参数不能同时指定。 */
+  /** 任务模板ID列表，与Filters参数不能同时指定。模版ID最大限制100. */
   TaskTemplateIds?: string[];
   /** 过滤条件 task-template-name - String - 是否必填：否 -（过滤条件）按照任务模板名称过滤。 tag-key - String - 是否必填：否 -（过滤条件）按照标签键进行过滤。 tag-value - String - 是否必填：否 -（过滤条件）按照标签值进行过滤。 tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。与TaskTemplateIds参数不能同时指定。 */
   Filters?: Filter[];
   /** 偏移量 */
   Offset?: number;
-  /** 返回数量 */
+  /** 返回数量; 可选范围[1-100]；默认值为20。 */
   Limit?: number;
 }
 
 declare interface DescribeTaskTemplatesResponse {
   /** 任务模板列表 */
-  TaskTemplateSet: TaskTemplateView[];
+  TaskTemplateSet?: TaskTemplateView[];
   /** 任务模板数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1098,6 +1098,8 @@ declare interface WhoisInfo {
   UpdatedDate?: string | null;
   /** dnssec */
   Dnssec?: string | null;
+  /** 腾讯注册商资质 */
+  RegistrarType?: string;
 }
 
 declare interface CheckRecordSnapshotRollbackRequest {
@@ -2423,7 +2425,7 @@ declare interface ModifyDomainLockResponse {
 declare interface ModifyDomainOwnerRequest {
   /** 域名 */
   Domain: string;
-  /** 域名需要转入的账号，支持Uin或者邮箱格式 */
+  /** 域名需要转入的账号Uin */
   Account: string;
   /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId */
   DomainId?: number;

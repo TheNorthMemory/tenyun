@@ -994,16 +994,6 @@ declare interface Label {
   LabelName?: string | null;
 }
 
-/** 应用类型详情 */
-declare interface ListAppCategoryRspOption {
-  /** 类型名称 */
-  Text?: string | null;
-  /** 类型值 */
-  Value?: string | null;
-  /** 类型log */
-  Logo?: string | null;
-}
-
 /** 文档列表详情描述 */
 declare interface ListDocItem {
   /** 文档ID */
@@ -2098,6 +2088,8 @@ declare interface CreateAttributeLabelRequest {
 declare interface CreateAttributeLabelResponse {
   /** 标签ID */
   AttrBizId?: string;
+  /** 标签值ID与名称 */
+  Labels?: AttributeLabel[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3384,16 +3376,6 @@ declare interface IsTransferIntentResponse {
   RequestId?: string;
 }
 
-declare interface ListAppCategoryRequest {
-}
-
-declare interface ListAppCategoryResponse {
-  /** 应用类型列表 */
-  List?: ListAppCategoryRspOption[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ListAppKnowledgeDetailRequest {
   /** 页码 */
   PageNumber: number;
@@ -3928,6 +3910,8 @@ declare interface ModifyAttributeLabelRequest {
 declare interface ModifyAttributeLabelResponse {
   /** 任务ID */
   TaskId?: string;
+  /** 标签ID与名称 */
+  Labels?: AttributeLabel[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4451,8 +4435,6 @@ declare interface Lke {
   IsTransferIntent(data: IsTransferIntentRequest, config?: AxiosRequestConfig): AxiosPromise<IsTransferIntentResponse>;
   /** 获取企业下应用列表 {@link ListAppRequest} {@link ListAppResponse} */
   ListApp(data?: ListAppRequest, config?: AxiosRequestConfig): AxiosPromise<ListAppResponse>;
-  /** 应用类型列表 {@link ListAppCategoryRequest} {@link ListAppCategoryResponse} */
-  ListAppCategory(data?: ListAppCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<ListAppCategoryResponse>;
   /** 列表查询知识库容量详情 {@link ListAppKnowledgeDetailRequest} {@link ListAppKnowledgeDetailResponse} */
   ListAppKnowledgeDetail(data: ListAppKnowledgeDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListAppKnowledgeDetailResponse>;
   /** 查询标签列表 {@link ListAttributeLabelRequest} {@link ListAttributeLabelResponse} */

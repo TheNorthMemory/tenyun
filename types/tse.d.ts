@@ -2411,6 +2411,10 @@ declare interface CreateEngineRequest {
   StorageOption?: StorageOption[];
   /** ZK引擎实例，可用区分布约束，STRICT:强约束，PERMISSIVE: 弱约束 */
   AffinityConstraint?: string;
+  /** 指定zone id列表 */
+  ZoneIds?: number[];
+  /** 地域特殊标签，用于区分相同地域，不通的业务属性 */
+  EngineRegionTag?: string;
 }
 
 declare interface CreateEngineResponse {

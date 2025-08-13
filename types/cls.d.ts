@@ -132,9 +132,9 @@ declare interface AlarmShieldInfo {
   Operator?: string;
   /** 规则状态。0：暂未生效，1：生效中，2：已失效 */
   Status?: number;
-  /** 规则创建时间。 */
+  /** 规则创建时间。秒级时间戳(s) */
   CreateTime?: number;
-  /** 规则更新时间。 */
+  /** 规则更新时间。秒级时间戳(s) */
   UpdateTime?: number;
 }
 
@@ -254,17 +254,17 @@ declare interface CallBackInfo {
 
 /** CKafka的描述-需要投递到的kafka信息 */
 declare interface Ckafka {
-  /** Ckafka 的 InstanceId */
+  /** Ckafka 的 InstanceId。- 通过 [获取实例列表信息](https://cloud.tencent.com/document/product/597/40835) 获取实例id。- 通过 [创建实例](https://cloud.tencent.com/document/product/597/53207) 获取实例id。 */
   InstanceId: string;
-  /** Ckafka 的 TopicName */
+  /** Ckafka 的 TopicName。- 通过 [创建 Topic](https://cloud.tencent.com/document/product/597/73566) 获得TopicName。- 通过 [获取主题列表](https://cloud.tencent.com/document/product/597/40847) 获得TopicName。 */
   TopicName: string;
-  /** Ckafka 的 Vip */
+  /** Ckafka 的 Vip。- 通过 [获取实例属性 ](https://cloud.tencent.com/document/product/597/40836) 获取vip信息。- 如果是通过 角色ARN 方式创建投递任务，则Vip字段可为空。 */
   Vip?: string;
-  /** Ckafka 的 Vport */
+  /** Ckafka 的 Vport。- 通过 [获取实例属性 ](https://cloud.tencent.com/document/product/597/40836) 获取vip port信息。- 如果是通过 角色ARN 方式创建投递任务，则Vport字段可为空。 */
   Vport?: string;
-  /** Ckafka 的 InstanceName */
+  /** Ckafka 的 InstanceName。- 通过 [获取实例列表信息](https://cloud.tencent.com/document/product/597/40835) 获取InstanceName。- 通过 [创建实例](https://cloud.tencent.com/document/product/597/53207) 获取InstanceName。- 如果是通过 角色ARN 方式创建投递任务，则InstanceName字段可为空。 */
   InstanceName?: string;
-  /** Ckafka 的 TopicId */
+  /** Ckafka 的 TopicId。- 通过 [创建 Topic](https://cloud.tencent.com/document/product/597/73566) 获得TopicId。- 通过 [获取主题列表](https://cloud.tencent.com/document/product/597/40847) 获得TopicId。- 如果是通过 角色ARN 方式创建投递任务，则TopicId字段可为空。 */
   TopicId?: string;
 }
 
@@ -332,7 +332,7 @@ declare interface ConfigExtraInfo {
   Name?: string;
   /** 日志主题ID */
   TopicId?: string;
-  /** 类型：container_stdout、container_file、host_file */
+  /** 自建k8s集群日志采集类型，支持- container_stdout 标准输出- container_file 标准文件- host_file 节点文件 */
   Type?: string;
   /** 节点文件配置信息 */
   HostFile?: HostFileInfo;
@@ -348,17 +348,17 @@ declare interface ConfigExtraInfo {
   ExtractRule?: ExtractRuleInfo;
   /** 采集黑名单路径列表 */
   ExcludePaths?: ExcludePathInfo[] | null;
-  /** 更新时间 */
+  /** 更新时间- 时间格式：yyyy-MM-dd HH:mm:ss */
   UpdateTime?: string;
-  /** 创建时间 */
+  /** 创建时间- 时间格式：yyyy-MM-dd HH:mm:ss */
   CreateTime?: string;
   /** 用户自定义解析字符串 */
   UserDefineRule?: string;
-  /** 机器组ID */
+  /** 机器组ID- 通过[获取机器组列表](https://cloud.tencent.com/document/api/614/56438)获取机器组Id。 */
   GroupId?: string;
   /** 自建采集配置标 */
   ConfigFlag?: string;
-  /** 日志集ID */
+  /** 日志集ID- 通过[获取日志集列表](https://cloud.tencent.com/document/api/614/58624)获取日志集Id。 */
   LogsetId?: string;
   /** 日志集name */
   LogsetName?: string;
@@ -388,9 +388,9 @@ declare interface ConfigInfo {
   ExcludePaths?: ExcludePathInfo[] | null;
   /** 采集配置所属日志主题ID即TopicId */
   Output?: string;
-  /** 更新时间 */
+  /** 更新时间- 时间格式：yyyy-MM-dd HH:mm:ss */
   UpdateTime?: string;
-  /** 创建时间 */
+  /** 创建时间- 时间格式：yyyy-MM-dd HH:mm:ss */
   CreateTime?: string;
   /** 用户自定义解析字符串，详见[使用组合解析提取模式采集日志](https://cloud.tencent.com/document/product/614/61310)。 */
   UserDefineRule?: string;
@@ -426,6 +426,26 @@ declare interface ConsoleSharingConfig {
   IsLockQuery?: boolean;
   /** 检索页分享是否允许访问者下载日志，默认不允许（false） */
   IsSupportLogExport?: boolean | null;
+}
+
+/** 控制台分享信息 */
+declare interface ConsoleSharingInfo {
+  /** 分享ID */
+  SharingId: string;
+  /** 分享链接 */
+  SharingUrl?: string | null;
+  /** 匿名分享配置信息 */
+  SharingConfig?: ConsoleSharingConfig | null;
+  /** 过期时间 */
+  ExpiredTime?: number | null;
+  /** 创建时间 */
+  CreateTime?: number | null;
+  /** 修改时间 */
+  UpdateTime?: number | null;
+  /** 分享链接状态1: 正常 -1: 因内容安全审查异常导致被封禁(存在于使用公网域名分享时) */
+  Status?: number | null;
+  /** 10001-广告 20001-政治 20002-色情 20004-社会事件 20011-暴力 20012-低俗 20006-违法犯罪 20007-谩骂 20008-欺诈 20013-版权 20104-谣言 21000-其他, 10086-聚合, 24001-暴恐（天御独有恶意类型），20472-违法，24005-社会 */
+  ContentSafetyCode?: number | null;
 }
 
 /** 控制台分享链接params参数 */
@@ -598,7 +618,7 @@ declare interface DashboardInfo {
 
 /** 仪表盘订阅通知方式 */
 declare interface DashboardNoticeMode {
-  /** 仪表盘通知方式。Uin：腾讯云用户Group：腾讯云用户组Email：自定义EmailWeCom: 企业微信回调 */
+  /** 仪表盘通知方式。Uin：腾讯云用户Group：腾讯云用户组Email：自定义EmailWeCom: 企业微信回调DingTalk：钉钉Lark：飞书 */
   ReceiverType: string;
   /** 知方式对应的值。 当ReceiverType不是 WeCom 时，Values必填。 */
   Values?: string[];
@@ -722,9 +742,9 @@ declare interface EscalateNoticeInfo {
 declare interface EventLog {
   /** 事件通道，支持- Application 应用日志- Security 安全日志- Setup 启动日志- System 系统日志- ALL 所有日志 */
   EventChannel: string;
-  /** 时间类型，1:用户自定义，2:当前时间 */
+  /** 时间字段（Timestamp）支持的类型- 1（用户自定义时间）- 2（当前时间） */
   TimeType: number;
-  /** 时间，用户选择自定义时间类型时，需要指定时间，单位秒 */
+  /** 时间，用户选择自定义时间类型时，需要指定时间，单位秒格式：时间戳，1754897446 */
   Timestamp?: number;
   /** 事件ID过滤列表	选填，为空表示不做过滤支持正向过滤单个值（例：20）或范围（例：0-20），也支持反向过滤单个值(例：-20)多个过滤项之间可由逗号隔开，例：1-200,-100表示采集1-200范围内除了100以外的事件日志 */
   EventIDs?: string[];
@@ -758,13 +778,13 @@ declare interface ExportInfo {
   Count?: number;
   /** 日志下载状态。Processing:导出正在进行中，Completed:导出完成，Failed:导出失败，Expired:日志导出已过期(三天有效期), Queuing 排队中 */
   Status?: string;
-  /** 日志导出起始时间 */
+  /** 日志导出起始时间，毫秒时间戳 */
   From?: number;
-  /** 日志导出结束时间 */
+  /** 日志导出结束时间，毫秒时间戳 */
   To?: number;
   /** 日志导出路径,有效期一个小时，请尽快使用该路径下载。 */
   CosPath?: string;
-  /** 日志导出创建时间 */
+  /** 日志导出创建时间时间格式：yyyy-MM-dd HH:mm:ss */
   CreateTime?: string;
   /** 语法规则。 默认值为0。0：Lucene语法，1：CQL语法。 */
   SyntaxRule?: number;
@@ -774,9 +794,9 @@ declare interface ExportInfo {
 
 /** 日志提取规则 */
 declare interface ExtractRuleInfo {
-  /** 时间字段的key名字，TikeKey和TimeFormat必须成对出现 */
+  /** 时间字段的key名字，TimeKey和TimeFormat必须成对出现 */
   TimeKey?: string;
-  /** 时间字段的格式，参考c语言的strftime函数对于时间的格式说明输出参数 */
+  /** 时间字段的格式，参考c语言的strftime函数对于时间的格式说明输出参数- 参考 [配置时间格式](https://cloud.tencent.com/document/product/614/38614) 文档 */
   TimeFormat?: string;
   /** 分隔符类型日志的分隔符，只有LogType为delimiter_log时有效 */
   Delimiter?: string;
@@ -871,9 +891,9 @@ declare interface HighLightItem {
 /** 直方图详细信息 */
 declare interface HistogramInfo {
   /** 统计周期内的日志条数 */
-  Count: number;
+  Count?: number;
   /** 按 period 取整后的 unix timestamp： 单位毫秒 */
-  BTime: number;
+  BTime?: number;
 }
 
 /** 自建k8s-节点文件配置信息 */
@@ -912,9 +932,9 @@ declare interface KafkaConsumerContent {
 
 /** Kafka访问协议 */
 declare interface KafkaProtocolInfo {
-  /** 协议类型，支持的协议类型包括 plaintext、sasl_plaintext 或 sasl_ssl。建议使用 sasl_ssl，此协议会进行连接加密同时需要用户认证。入参必填 */
+  /** 协议类型，支持的协议类型包括 plaintext、sasl_plaintext 或 sasl_ssl。建议使用 sasl_ssl，此协议会进行连接加密同时需要用户认证。- 当IsEncryptionAddr为true时，Protocol必填。- 支持的协议类型如下： - plaintext：纯文本无加密协议 - sasl_ssl：SASL 认证 + SSL 加密 - ssl：纯 SSL/TLS 加密协议 - sasl_plaintext：SASL 认证 + 非加密通道 */
   Protocol?: string;
-  /** 加密类型，支持 PLAIN、SCRAM-SHA-256 或 SCRAM-SHA-512。当Protocol为sasl_plaintext或sasl_ssl时必填 */
+  /** 加密类型，支持 PLAIN、SCRAM-SHA-256 或 SCRAM-SHA-512。- 当Protocol为 `sasl_plaintext` 或 `sasl_ssl` 时 Mechanism 必填。- 支持加密类型如下 - PLAIN：明文认证 - SCRAM-SHA-256：基于挑战-响应机制，使用PBKDF2-HMAC-SHA256算法 - SCRAM-SHA-512：增强版SCRAM，使用PBKDF2-HMAC-SHA512算法 */
   Mechanism?: string;
   /** 用户名。当Protocol为sasl_plaintext或sasl_ssl时必填 */
   UserName?: string;
@@ -1044,7 +1064,7 @@ declare interface LogRechargeRuleInfo {
   RechargeType: string;
   /** 解析编码格式，0: UTF-8（默认值），1: GBK */
   EncodingFormat: number;
-  /** 使用默认时间，true：开启（默认值）， flase：关闭 */
+  /** 使用默认时间状态。true：开启后将使用系统当前时间或 Kafka 消息时间戳作为日志时间戳；false：关闭将使用日志中的时间字段作为日志时间戳。 默认：true */
   DefaultTimeSwitch: boolean;
   /** 整条日志匹配规则，只有RechargeType为fullregex_log时有效 */
   LogRegex?: string;
@@ -1056,13 +1076,13 @@ declare interface LogRechargeRuleInfo {
   UnMatchLogTimeSrc?: number;
   /** 默认时间来源，0: 系统当前时间，1: Kafka消息时间戳 */
   DefaultTimeSrc?: number;
-  /** 时间字段 */
+  /** 时间字段，日志中代表时间的字段名。- 当DefaultTimeSwitch为false，且RechargeType数据提取模式为 `json_log` JSON-文件日志 或 `fullregex_log` 单行完全正则-文件日志时， TimeKey不能为空。 */
   TimeKey?: string;
-  /** 时间提取正则表达式 */
+  /** 时间提取正则表达式。- 当DefaultTimeSwitch为false，且RechargeType数据提取模式为 `minimalist_log` 单行全文-文件日志时， TimeRegex不能为空。- 仅需输入日志中代表时间的字段的正则表达式即可；若匹配到多个字段，将使用第一个。 例：日志原文为：message with time 2022-08-08 14:20:20，则您可以设置提取时间正则为\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d */
   TimeRegex?: string;
-  /** 时间字段格式 */
+  /** 时间字段格式。- 当DefaultTimeSwitch为false时， TimeFormat不能为空。 */
   TimeFormat?: string;
-  /** 时间字段时区 */
+  /** 时间字段时区。- 当DefaultTimeSwitch为false时， TimeZone不能为空。- 时区格式规则​前缀​：使用 GMT 或 UTC 作为时区基准​偏移量​： - `-` 表示西时区（比基准时间晚） - `+` 表示东时区（比基准时间早） - 格式为 ±HH:MM（小时:分钟）- 当前支持：```"GMT-12:00" "GMT-11:00" "GMT-10:00" "GMT-09:30" "GMT-09:00" "GMT-08:00" "GMT-07:00" "GMT-06:00" "GMT-05:00" "GMT-04:00" "GMT-03:30" "GMT-03:00" "GMT-02:00" "GMT-01:00" "GMT+00:00""GMT+01:00""GMT+02:00""GMT+03:30""GMT+04:00""GMT+04:30""GMT+05:00""GMT+05:30""GMT+05:45""GMT+06:00""GMT+06:30""GMT+07:00""GMT+08:00""GMT+09:00""GMT+09:30""GMT+10:00""GMT+10:30""GMT+11:00""GMT+11:30""GMT+12:00""GMT+12:45""GMT+13:00""GMT+14:00""UTC-11:00""UTC-10:00""UTC-09:00""UTC-08:00""UTC-12:00""UTC-07:00""UTC-06:00""UTC-05:00""UTC-04:30""UTC-04:00""UTC-03:30""UTC-03:00""UTC-02:00""UTC-01:00""UTC+00:00""UTC+01:00""UTC+02:00""UTC+03:00""UTC+03:30""UTC+04:00""UTC+04:30""UTC+05:00""UTC+05:45""UTC+06:00""UTC+06:30""UTC+07:00""UTC+08:00""UTC+09:00""UTC+09:30""UTC+10:00""UTC+11:00""UTC+12:00""UTC+13:00"``` */
   TimeZone?: string;
   /** 元数据信息，Kafka导入支持kafka_topic,kafka_partition,kafka_offset,kafka_timestamp */
   Metadata?: string[];
@@ -1098,19 +1118,19 @@ declare interface MachineGroupInfo {
   GroupName?: string;
   /** 机器组类型 */
   MachineGroupType?: MachineGroupTypeInfo;
-  /** 创建时间 */
+  /** 创建时间时间格式：yyyy-MM-dd HH:mm:ss */
   CreateTime?: string;
   /** 机器组绑定的标签列表 */
   Tags?: Tag[];
   /** 是否开启机器组自动更新 */
   AutoUpdate?: string;
-  /** 升级开始时间，建议业务低峰期升级LogListener */
+  /** 升级开始时间，建议业务低峰期升级LogListener时间格式：HH:mm:ss */
   UpdateStartTime?: string;
-  /** 升级结束时间，建议业务低峰期升级LogListener */
+  /** 升级结束时间，建议业务低峰期升级LogListener时间格式：HH:mm:ss */
   UpdateEndTime?: string;
   /** 是否开启服务日志，用于记录因Loglistener 服务自身产生的log，开启后，会创建内部日志集cls_service_logging和日志主题loglistener_status,loglistener_alarm,loglistener_business，不产生计费 */
   ServiceLogging?: boolean;
-  /** 机器组中机器离线定期清理时间 */
+  /** 机器组中机器离线定期清理时间，单位天，默认设置30天。 */
   DelayCleanupTime?: number;
   /** 机器组元数据信息列表 */
   MetaTags?: MetaTagInfo[];
@@ -1202,7 +1222,7 @@ declare interface NoticeContent {
 
 /** 通知模板内容 */
 declare interface NoticeContentInfo {
-  /** 通知内容模板标题信息。部分通知渠道类型不支持“标题”，请参照腾讯云控制台页面。 */
+  /** 通知内容模板标题信息。部分通知渠道类型不支持“标题”，请参照[腾讯云控制台页面](https://console.cloud.tencent.com/cls/alarm/notice-template)。 */
   Title?: string;
   /** 通知内容模板正文信息。 */
   Content?: string;
@@ -1294,9 +1314,9 @@ declare interface PartitionInfo {
   InclusiveBeginKey?: string;
   /** 分区哈希键结束key */
   ExclusiveEndKey?: string;
-  /** 分区创建时间 */
+  /** 分区创建时间时间格式：yyyy-MM-dd HH:mm:ss */
   CreateTime?: string;
-  /** 只读分区数据停止写入时间 */
+  /** 只读分区数据停止写入时间时间格式：yyyy-MM-dd HH:mm:ss */
   LastWriteTime?: string | null;
 }
 
@@ -1346,9 +1366,9 @@ declare interface RuleTagInfo {
 
 /** ScheduledSql的资源信息 */
 declare interface ScheduledSqlResouceInfo {
-  /** 目标主题id */
+  /** 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。 */
   TopicId: string;
-  /** 主题的地域信息 */
+  /** 主题的地域信息，当前不支持跨地域，支持地域参考 [地域列表](https://cloud.tencent.com/document/api/614/56474) 文档。 */
   Region?: string;
   /** 主题类型：0为日志主题，1为指标主题 */
   BizType?: number;
@@ -1376,9 +1396,9 @@ declare interface ScheduledSqlTaskInfo {
   SrcTopicName?: string;
   /** 定时SQL分析目标主题 */
   DstResource?: ScheduledSqlResouceInfo;
-  /** 任务创建时间 */
+  /** 任务创建时间。格式：yyyy-MM-dd HH:mm:ss */
   CreateTime?: string;
-  /** 任务更新时间 */
+  /** 任务更新时间，格式：yyyy-MM-dd HH:mm:ss */
   UpdateTime?: string;
   /** 任务状态，1:运行 2:停止 3:异常-找不到源日志主题 4:异常-找不到目标主题5: 访问权限问题 6:内部故障 7:其他故障 */
   Status?: number;
@@ -1386,19 +1406,19 @@ declare interface ScheduledSqlTaskInfo {
   EnableFlag?: number;
   /** 查询语句 */
   ScheduledSqlContent?: string;
-  /** 调度开始时间 */
+  /** 调度开始时间，格式：yyyy-MM-dd HH:mm:ss */
   ProcessStartTime?: string;
   /** 调度类型，1:持续运行 2:指定时间范围 */
   ProcessType?: number;
-  /** 调度结束时间，当process_type=2时为必传字段 */
+  /** 调度结束时间，格式：yyyy-MM-dd HH:mm:ss，当process_type=2时为必传字段 */
   ProcessEndTime?: string;
-  /** 调度周期(分钟) */
+  /** 调度周期(分钟)，1~1440分钟 */
   ProcessPeriod?: number;
   /** 查询的时间窗口. @m-15m, @m，意为近15分钟 */
   ProcessTimeWindow?: string;
-  /** 执行延迟(秒) */
+  /** 执行延迟(秒)，0~120秒，默认60秒 */
   ProcessDelay?: number;
-  /** 源topicId的地域信息 */
+  /** 源topicId的地域信息，支持地域见 [地域列表](https://cloud.tencent.com/document/api/614/56474) 文档。 */
   SrcTopicRegion?: string;
   /** 语法规则，0：Lucene语法，1：CQL语法 */
   SyntaxRule?: number;
@@ -1538,7 +1558,7 @@ declare interface TopicInfo {
   Index?: boolean;
   /** 云产品标识，主题由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE */
   AssumerName?: string;
-  /** 创建时间 */
+  /** 创建时间时间格式：yyyy-MM-dd HH:mm:ss */
   CreateTime?: string;
   /** 主题是否开启采集，true：开启采集；false：关闭采集。创建日志主题时默认开启，可通过SDK调用ModifyTopic修改此字段。控制台目前不支持修改此参数。 */
   Status?: boolean;
@@ -1566,9 +1586,9 @@ declare interface TopicInfo {
   Extends?: TopicExtendInfo;
   /** 异步迁移任务ID */
   TopicAsyncTaskID?: string;
-  /** 异步迁移状态 */
+  /** 异步迁移状态- 1：进行中- 2：已完成- 3：失败- 4：已取消 */
   MigrationStatus?: number;
-  /** 异步迁移完成后，预计生效日期 */
+  /** 异步迁移完成后，预计生效日期时间格式：yyyy-MM-dd HH:mm:ss */
   EffectiveDate?: string;
 }
 
@@ -1649,9 +1669,9 @@ declare interface AddMachineGroupInfoResponse {
 }
 
 declare interface ApplyConfigToMachineGroupRequest {
-  /** 采集配置ID */
+  /** 采集配置ID - 通过[获取采集规则配置](https://cloud.tencent.com/document/product/614/58616)获取采集配置Id。 */
   ConfigId: string;
-  /** 机器组ID */
+  /** 机器组ID- 通过[获取机器组列表](https://cloud.tencent.com/document/api/614/56438)获取机器组Id。 */
   GroupId: string;
 }
 
@@ -1661,9 +1681,9 @@ declare interface ApplyConfigToMachineGroupResponse {
 }
 
 declare interface CheckFunctionRequest {
-  /** 用户输入的加工语句 */
+  /** 加工语句。 当FuncType为2时，EtlContent必须使用[log_auto_output](https://cloud.tencent.com/document/product/614/70733) 其他参考文档：- [创建加工任务](https://cloud.tencent.com/document/product/614/63940) - [函数总览](https://cloud.tencent.com/document/product/614/70395) */
   EtlContent: string;
-  /** 加工任务目的topic_id以及别名 */
+  /** 加工任务目标topic_id以及别名，当 FuncType 为 1 时，必填。目标日志主题ID通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   DstResources?: DataTransformResouceInfo[];
   /** 数据加工目标主题的类型. 1 固定主题 2动态创建 */
   FuncType?: number;
@@ -1699,7 +1719,7 @@ declare interface CheckRechargeKafkaServerResponse {
 }
 
 declare interface CloseKafkaConsumerRequest {
-  /** 日志主题ID */
+  /** 日志主题Id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
   FromTopicId: string;
 }
 
@@ -1809,25 +1829,25 @@ declare interface CreateAlarmShieldResponse {
 }
 
 declare interface CreateCloudProductLogCollectionRequest {
-  /** 实例ID */
+  /** 实例ID- 通过各个接入云产品官方文档获取 */
   InstanceId: string;
   /** 云产品标识，支持枚举：CDS、CWP、CDB、TDSQL-C、MongoDB、TDStore、DCDB、MariaDB、PostgreSQL、BH、APIS */
   AssumerName: string;
   /** 日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS */
   LogType: string;
-  /** 云产品地域。 不同日志类型(LogType)地域入參格式存在差异， 请参考如下示例：- CDS所有日志类型：ap-guangzhou- CDB-AUDIT: gz- TDSQL-C-AUDIT: gz- MongoDB-AUDIT: gz- MongoDB-SlowLog：ap-guangzhou- MongoDB-ErrorLog：ap-guangzhou- TDMYSQL-SLOW：gz- DCDB所有日志类型：gz- MariaDB所有日志类型：gz- PostgreSQL所有日志类型：gz- BH所有日志类型：overseas-polaris(国内站海外)/fsi-polaris(国内站金融)/general-polaris(国内站普通)/intl-sg-prod(国际站)- APIS所有日志类型：gz */
+  /** 云产品地域。 不同日志类型(LogType)地域入参格式存在差异， 请参考如下示例：- CDS所有日志类型：ap-guangzhou- CDB-AUDIT: gz- TDSQL-C-AUDIT: gz- MongoDB-AUDIT: gz- MongoDB-SlowLog：ap-guangzhou- MongoDB-ErrorLog：ap-guangzhou- TDMYSQL-SLOW：gz- DCDB所有日志类型：gz- MariaDB所有日志类型：gz- PostgreSQL所有日志类型：gz- BH所有日志类型：overseas-polaris(国内站海外)/fsi-polaris(国内站金融)/general-polaris(国内站普通)/intl-sg-prod(国际站)- APIS所有日志类型：gz */
   CloudProductRegion: string;
-  /** CLS目标地域 */
+  /** CLS目标地域- 支持地域参考 [地域列表](https://cloud.tencent.com/document/api/614/56474) 文档 */
   ClsRegion: string;
   /** 日志集名称，未填LogsetId时必填。若日志集不存在, 将自动创建 */
   LogsetName?: string;
   /** 日志主题名称，在未填TopicId时必填。 若日志主题不存在，将自动创建 */
   TopicName?: string;
-  /** 日志配置拓展信息， 一般用于存储额外的日志投递配置 */
+  /** 日志配置扩展信息， 一般用于存储额外的日志投递配置 */
   Extend?: string;
-  /** 日志集id */
+  /** 日志集id- 通过[获取日志集列表](https://cloud.tencent.com/document/api/614/58624)获取日志集Id。 */
   LogsetId?: string;
-  /** 日志主题id */
+  /** 日志主题id- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId?: string;
 }
 
@@ -1895,9 +1915,9 @@ declare interface CreateConfigExtraResponse {
 }
 
 declare interface CreateConfigRequest {
-  /** 采集配置名称 */
+  /** 采集配置名称- 名称种不得包含特殊字符｜- 名称最长255字符，超过截断 */
   Name: string;
-  /** 采集配置所属日志主题ID即TopicId */
+  /** 采集配置所属日志主题ID即TopicId- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   Output: string;
   /** 日志采集路径，包含文件名，支持多个路径，多个路径之间英文逗号分隔，文件采集情况下必填 */
   Path?: string;
@@ -1935,7 +1955,7 @@ declare interface CreateConsoleSharingResponse {
 }
 
 declare interface CreateConsumerRequest {
-  /** 投递任务绑定的日志主题 ID */
+  /** 投递任务绑定的日志主题Id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
   TopicId: string;
   /** 是否投递日志的元数据信息，默认为 true。当NeedContent为true时：字段Content有效。当NeedContent为false时：字段Content无效。 */
   NeedContent?: boolean;
@@ -1985,11 +2005,11 @@ declare interface CreateCosRechargeResponse {
 }
 
 declare interface CreateDashboardSubscribeRequest {
-  /** 仪表盘订阅名称。 */
+  /** 仪表盘订阅名称。输入限制：- 不能为空- 长度不能超过128字节- 不能包含字符'|' */
   Name: string;
-  /** 仪表盘id。 */
+  /** 仪表盘Id。- 通过[获取仪表盘](https://cloud.tencent.com/document/product/614/95636)获取仪表盘Id。 */
   DashboardId: string;
-  /** 订阅时间cron表达式，格式为：{秒数} {分钟} {小时} {日期} {月份} {星期}；（有效数据为：{分钟} {小时} {日期} {月份} {星期}）。{秒数} 取值范围： 0 ~ 59 {分钟} 取值范围： 0 ~ 59 {小时} 取值范围： 0 ~ 23 {日期} 取值范围： 1 ~ 31 AND (dayOfMonth最后一天： L) {月份} 取值范围： 1 ~ 12 {星期} 取值范围： 0 ~ 6 【0:星期日， 6星期六】 */
+  /** 订阅时间cron表达式，格式为：{秒数} {分钟} {小时} {日期} {月份} {星期}；（有效数据为：{分钟} {小时} {日期} {月份} {星期}）。- {秒数} 取值范围： 0 ~ 59 - {分钟} 取值范围： 0 ~ 59 - {小时} 取值范围： 0 ~ 23 - {日期} 取值范围： 1 ~ 31 AND (dayOfMonth最后一天： L) - {月份} 取值范围： 1 ~ 12 - {星期} 取值范围： 0 ~ 6 【0:星期日， 6星期六】 */
   Cron: string;
   /** 仪表盘订阅数据。 */
   SubscribeData: DashboardSubscribeData;
@@ -2029,17 +2049,17 @@ declare interface CreateDataTransformResponse {
 }
 
 declare interface CreateDeliverCloudFunctionRequest {
-  /** 投递规则属于的 topic id */
+  /** 投递规则属于的TopicId。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
   TopicId: string;
-  /** 投递的云函数名字。仅支持[事件函数](https://cloud.tencent.com/document/product/583/9694) （[函数类型选型](https://cloud.tencent.com/document/product/583/73483)） */
+  /** 投递的云函数名字。仅支持[事件函数](https://cloud.tencent.com/document/product/583/9694) （[函数类型选型](https://cloud.tencent.com/document/product/583/73483)）通过 [获取函数列表](https://cloud.tencent.com/document/product/583/18582) 获取函数信息。 */
   FunctionName: string;
-  /** 命名空间 */
+  /** 命名空间。参考 [命名空间管理](https://cloud.tencent.com/document/product/583/35913)- 通过 [列出命名空间列表](https://cloud.tencent.com/document/product/583/37158) 获取Name。 */
   Namespace: string;
-  /** 函数版本 */
+  /** 函数版本。- 通过 [查询函数版本 ](https://cloud.tencent.com/document/product/583/37162) 获取函数版本。 */
   Qualifier: string;
-  /** 投递最长等待时间，单位：秒 */
+  /** 投递最长等待时间，单位：秒。 默认：60 */
   Timeout?: number;
-  /** 投递最大消息数 */
+  /** 投递最大消息数。默认为100。支持范围[1,10000] */
   MaxMsgNum?: number;
 }
 
@@ -2049,7 +2069,7 @@ declare interface CreateDeliverCloudFunctionResponse {
 }
 
 declare interface CreateExportRequest {
-  /** 日志主题ID */
+  /** 日志主题Id- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
   /** 日志导出数量, 最大值5000万 */
   Count: number;
@@ -2095,7 +2115,7 @@ declare interface CreateIndexResponse {
 }
 
 declare interface CreateKafkaRechargeRequest {
-  /** 导入CLS目标topic ID */
+  /** 导入CLS目标TopicId。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
   TopicId: string;
   /** Kafka导入配置名称 */
   Name: string;
@@ -2107,7 +2127,7 @@ declare interface CreateKafkaRechargeRequest {
   Offset: number;
   /** 日志导入规则。 */
   LogRechargeRule: LogRechargeRuleInfo;
-  /** 腾讯云CKafka实例ID，KafkaType为0时必填。 */
+  /** 腾讯云CKafka实例ID，KafkaType为0时必填。- 通过 [获取实例列表信息](https://cloud.tencent.com/document/product/597/40835) 获取实例id。 */
   KafkaInstance?: string;
   /** 服务地址，KafkaType为1时必填。 */
   ServerAddr?: string;
@@ -2115,7 +2135,7 @@ declare interface CreateKafkaRechargeRequest {
   IsEncryptionAddr?: boolean;
   /** 加密访问协议。KafkaType为1并且IsEncryptionAddr为true时Protocol必填。 */
   Protocol?: KafkaProtocolInfo;
-  /** 用户Kafka消费组名称 */
+  /** 用户Kafka消费组名称。- 消费组是 Kafka 提供的可扩展且具有容错性的消费者机制，一个消费组中存在多个消费者，组内的所有消费者共同消费订阅 Topic 中的消息。一个消费者可同时消费多个 Partition，但一个 Partition 只能被消费组内的一个消费者消费。 */
   ConsumerGroupName?: string;
 }
 
@@ -2189,9 +2209,9 @@ declare interface CreateNoticeContentResponse {
 }
 
 declare interface CreateScheduledSqlRequest {
-  /** 源日志主题 */
+  /** 源日志主题ID- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   SrcTopicId: string;
-  /** 任务名称 */
+  /** 任务名称，0~255字符 */
   Name: string;
   /** 任务启动状态. 1开启, 2关闭 */
   EnableFlag: number;
@@ -2203,13 +2223,13 @@ declare interface CreateScheduledSqlRequest {
   ProcessStartTime: number;
   /** 调度类型，1:持续运行 2:指定时间范围 */
   ProcessType: number;
-  /** 调度周期(分钟) */
+  /** 调度周期(分钟)，1~1440分钟 */
   ProcessPeriod: number;
   /** 单次查询的时间窗口,如果您的目标主题为指标主题，建议该参数的大小不超过30分钟，否则可能转指标失败。 */
   ProcessTimeWindow: string;
-  /** 执行延迟(秒) */
+  /** 执行延迟(秒)，0~120秒，默认60秒 */
   ProcessDelay: number;
-  /** 源topicId的地域信息 */
+  /** 源topicId的地域信息,支持地域见 [地域列表](https://cloud.tencent.com/document/api/614/56474) 文档 */
   SrcTopicRegion: string;
   /** 调度结束时间，当ProcessType=2时为必传字段, Unix时间戳，单位ms */
   ProcessEndTime?: number;
@@ -2263,9 +2283,9 @@ declare interface CreateShipperResponse {
 }
 
 declare interface CreateTopicRequest {
-  /** 日志集ID */
+  /** 日志集ID- 通过[获取日志集列表](https://cloud.tencent.com/document/product/614/58624)获取日志集Id。 */
   LogsetId: string;
-  /** 日志主题名称 */
+  /** 日志主题名称名称限制- 不能为空字符串- 不能包含字符'|'- 不能使用以下名称["cls_service_log","loglistener_status","loglistener_alarm","loglistener_business","cls_service_metric"] */
   TopicName: string;
   /** 日志主题分区个数。默认创建1个，最大支持创建10个分区。 */
   PartitionCount?: number;
@@ -2339,9 +2359,9 @@ declare interface DeleteAlarmResponse {
 }
 
 declare interface DeleteAlarmShieldRequest {
-  /** 屏蔽规则id。 */
+  /** 屏蔽规则id。通过[获取告警屏蔽配置规则](https://cloud.tencent.com/document/api/614/103650)获取屏蔽规则ID */
   TaskId: string;
-  /** 通知渠道组id。 */
+  /** 通知渠道组id。通过[获取告警屏蔽配置规则](https://cloud.tencent.com/document/api/614/103650)获取通知渠道组id */
   AlarmNoticeId: string;
 }
 
@@ -2357,7 +2377,7 @@ declare interface DeleteCloudProductLogCollectionRequest {
   AssumerName: string;
   /** 日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS */
   LogType: string;
-  /** 云产品地域。 不同日志类型(LogType)地域入參格式存在差异， 请参考如下示例：- CDS所有日志类型：ap-guangzhou- CDB-AUDIT: gz- TDSQL-C-AUDIT: gz- MongoDB-AUDIT: gz- MongoDB-SlowLog：ap-guangzhou- MongoDB-ErrorLog：ap-guangzhou- TDMYSQL-SLOW：gz- DCDB所有日志类型：gz- MariaDB所有日志类型：gz- PostgreSQL所有日志类型：gz- BH所有日志类型：overseas-polaris(国内站海外)/fsi-polaris(国内站金融)/general-polaris(国内站普通)/intl-sg-prod(国际站)- APIS所有日志类型：gz */
+  /** 云产品地域。 不同日志类型(LogType)地域入参格式存在差异， 请参考如下示例：- CDS所有日志类型：ap-guangzhou- CDB-AUDIT: gz- TDSQL-C-AUDIT: gz- MongoDB-AUDIT: gz- MongoDB-SlowLog：ap-guangzhou- MongoDB-ErrorLog：ap-guangzhou- TDMYSQL-SLOW：gz- DCDB所有日志类型：gz- MariaDB所有日志类型：gz- PostgreSQL所有日志类型：gz- BH所有日志类型：overseas-polaris(国内站海外)/fsi-polaris(国内站金融)/general-polaris(国内站普通)/intl-sg-prod(国际站)- APIS所有日志类型：gz */
   CloudProductRegion: string;
 }
 
@@ -2369,7 +2389,7 @@ declare interface DeleteCloudProductLogCollectionResponse {
 }
 
 declare interface DeleteConfigExtraRequest {
-  /** 特殊采集规则扩展配置ID */
+  /** 特殊采集规则扩展配置ID- 通过[获取特殊采集配置](https://cloud.tencent.com/document/api/614/71164)特殊采集规则扩展配置ID。 */
   ConfigExtraId: string;
 }
 
@@ -2379,9 +2399,9 @@ declare interface DeleteConfigExtraResponse {
 }
 
 declare interface DeleteConfigFromMachineGroupRequest {
-  /** 机器组ID */
+  /** 机器组ID- 通过[获取机器组列表](https://cloud.tencent.com/document/api/614/56438)获取机器组Id。 */
   GroupId: string;
-  /** 采集配置ID */
+  /** 采集配置ID - 通过[获取采集规则配置](https://cloud.tencent.com/document/product/614/58616)获取采集配置Id。 */
   ConfigId: string;
 }
 
@@ -2391,7 +2411,7 @@ declare interface DeleteConfigFromMachineGroupResponse {
 }
 
 declare interface DeleteConfigRequest {
-  /** 采集规则配置ID */
+  /** 采集配置ID - 通过[获取采集规则配置](https://cloud.tencent.com/document/product/614/58616)获取采集配置Id。 */
   ConfigId: string;
 }
 
@@ -2401,7 +2421,7 @@ declare interface DeleteConfigResponse {
 }
 
 declare interface DeleteConsoleSharingRequest {
-  /** 免密分享Id */
+  /** 免密分享Id。- 通过 [获取免密分享列表](https://cloud.tencent.com/document/product/614/109798) 获取免密分享Id。 - 通过 [创建免密分享](https://cloud.tencent.com/document/product/614/109800) 获取免密分享Id。 */
   SharingId: string;
 }
 
@@ -2411,7 +2431,7 @@ declare interface DeleteConsoleSharingResponse {
 }
 
 declare interface DeleteConsumerRequest {
-  /** 投递任务绑定的日志主题 ID */
+  /** 投递任务绑定的日志主题Id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
   TopicId: string;
 }
 
@@ -2443,7 +2463,7 @@ declare interface DeleteDashboardSubscribeResponse {
 }
 
 declare interface DeleteDataTransformRequest {
-  /** 数据加工任务id */
+  /** 数据加工任务ID- 通过[获取数据加工任务列表基本信息](https://cloud.tencent.com/document/product/614/72182)获取数据加工任务Id。 */
   TaskId: string;
 }
 
@@ -2453,7 +2473,7 @@ declare interface DeleteDataTransformResponse {
 }
 
 declare interface DeleteExportRequest {
-  /** 日志导出ID */
+  /** 日志导出任务Id- 通过[获取日志下载任务列表](https://cloud.tencent.com/document/product/614/56449)获取日志导出任务Id。 */
   ExportId: string;
 }
 
@@ -2495,7 +2515,7 @@ declare interface DeleteLogsetResponse {
 }
 
 declare interface DeleteMachineGroupInfoRequest {
-  /** 机器组ID */
+  /** 机器组Id- 通过[获取机器组列表](https://cloud.tencent.com/document/product/614/56438)获取机器组Id。 */
   GroupId: string;
   /** 机器组类型目前type支持 ip 和 label */
   MachineGroupType: MachineGroupTypeInfo;
@@ -2507,7 +2527,7 @@ declare interface DeleteMachineGroupInfoResponse {
 }
 
 declare interface DeleteMachineGroupRequest {
-  /** 机器组ID */
+  /** 机器组Id- 通过[获取机器组列表](https://cloud.tencent.com/document/product/614/56438)获取机器组Id。 */
   GroupId: string;
 }
 
@@ -2527,9 +2547,9 @@ declare interface DeleteNoticeContentResponse {
 }
 
 declare interface DeleteScheduledSqlRequest {
-  /** 任务ID */
+  /** 任务ID，通过[获取定时SQL分析任务列表](https://cloud.tencent.com/document/product/614/95519)获取 */
   TaskId: string;
-  /** 源日志主题ID */
+  /** 源日志主题ID，通过[获取定时SQL分析任务列表](https://cloud.tencent.com/document/product/614/95519)获取 */
   SrcTopicId: string;
 }
 
@@ -2549,7 +2569,7 @@ declare interface DeleteShipperResponse {
 }
 
 declare interface DeleteTopicRequest {
-  /** 日志主题ID */
+  /** 日志主题ID- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
 }
 
@@ -2665,7 +2685,7 @@ declare interface DescribeCloudProductLogTasksResponse {
 }
 
 declare interface DescribeConfigExtrasRequest {
-  /** 过滤器，支持如下选项：name- 按照【特殊采集配置名称】进行模糊匹配过滤。- 类型：StringconfigExtraId- 按照【特殊采集配置ID】进行过滤。- 类型：StringtopicId- 按照【日志主题】进行过滤。- 类型：StringmachineGroupId- 按照【机器组ID】进行过滤。- 类型：String每次请求的Filters的上限为10，Filter.Values的上限为5。 */
+  /** 过滤器，支持如下选项：name- 按照【特殊采集配置名称】进行模糊匹配过滤。- 类型：String- 示例：test-configconfigExtraId- 按照【特殊采集配置ID】进行过滤。- 类型：String- 示例：3b83f9d6-3a4d-47f9-9b7f-285c868b2f9atopicId- 按照【日志主题】进行过滤。- 类型：String- 示例：3581a3be-aa41-423b-995a-54ec84da6264machineGroupId- 按照【机器组ID】进行过滤。- 类型：String- 示例：f948972f-a063-408c-a59f-8c3230bddaf6每次请求的Filters的上限为10，Filter.Values的上限为5。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0 */
   Offset?: number;
@@ -2683,7 +2703,7 @@ declare interface DescribeConfigExtrasResponse {
 }
 
 declare interface DescribeConfigMachineGroupsRequest {
-  /** 采集配置ID */
+  /** 采集配置ID- 通过[获取采集规则配置](https://cloud.tencent.com/document/product/614/58616)获取采集配置Id。 */
   ConfigId: string;
 }
 
@@ -2695,7 +2715,7 @@ declare interface DescribeConfigMachineGroupsResponse {
 }
 
 declare interface DescribeConfigsRequest {
-  /** configName- 按照【采集配置名称】进行模糊匹配过滤。- 类型：String- 必选：否configId- 按照【采集配置ID】进行过滤。- 类型：String- 必选：否topicId- 按照【日志主题】进行过滤。- 类型：String- 必选：否每次请求的Filters的上限为10，Filter.Values的上限为5。 */
+  /** configName- 按照【采集配置名称】进行模糊匹配过滤。- 类型：String- 必选：否- 示例：test-configconfigId- 按照【采集配置ID】进行过滤。- 类型：String- 必选：否- 示例：3581a3be-aa41-423b-995a-54ec84da6264topicId- 按照【日志主题】进行过滤。- 类型：String- 必选：否- 示例：3b83f9d6-3a4d-47f9-9b7f-285c868b2f9a- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。每次请求的Filters的上限为10，Filter.Values的上限为5。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0 */
   Offset?: number;
@@ -2718,12 +2738,14 @@ declare interface DescribeConsoleSharingListRequest {
 declare interface DescribeConsoleSharingListResponse {
   /** 分页的总数目 */
   TotalCount?: number;
+  /** 控制台免密分享列表 */
+  ConsoleSharingInfos?: ConsoleSharingInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeConsumerRequest {
-  /** 投递任务绑定的日志主题 ID */
+  /** 投递任务绑定的日志主题Id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
   TopicId: string;
 }
 
@@ -2815,7 +2837,7 @@ declare interface DescribeDataTransformInfoResponse {
 }
 
 declare interface DescribeExportsRequest {
-  /** 日志主题ID */
+  /** 日志主题Id- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
   /** 分页的偏移量，默认值为0 */
   Offset?: number;
@@ -2825,9 +2847,9 @@ declare interface DescribeExportsRequest {
 
 declare interface DescribeExportsResponse {
   /** 日志导出列表 */
-  Exports: ExportInfo[];
+  Exports?: ExportInfo[];
   /** 总数目 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2855,7 +2877,7 @@ declare interface DescribeIndexResponse {
 }
 
 declare interface DescribeKafkaConsumerRequest {
-  /** 日志主题ID */
+  /** 日志主题Id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
   FromTopicId: string;
 }
 
@@ -2873,11 +2895,11 @@ declare interface DescribeKafkaConsumerResponse {
 }
 
 declare interface DescribeKafkaRechargesRequest {
-  /** 日志主题 ID */
+  /** 日志主题Id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
-  /** 导入配置ID */
+  /** 导入配置Id。- 通过 [创建Kafka数据订阅任务](https://cloud.tencent.com/document/product/614/94448)获取Kafka导入配置Id。- 通过 [获取Kafka数据订阅任务列表](https://cloud.tencent.com/document/product/614/94446)获取Kafka导入配置Id。 */
   Id?: string;
-  /** 状态 status 1: 运行中, 2: 暂停... */
+  /** 状态。1: 运行中，2: 暂停，3：错误 */
   Status?: number;
 }
 
@@ -2927,9 +2949,9 @@ declare interface DescribeLogHistogramRequest {
   From: number;
   /** 要查询的日志的结束时间，Unix时间戳，单位ms */
   To: number;
-  /** 查询语句 */
+  /** 检索分析语句。语句由 [检索条件] | [SQL语句]构成，无需对日志进行统计分析时，可省略其中的管道符 | 及SQL语句。使用*或空字符串可查询所有日志。 */
   Query: string;
-  /** 要查询的日志主题ID */
+  /** 要查询的日志主题ID- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId?: string;
   /** 时间间隔: 单位ms 限制性条件：(To-From) / interval <= 200 */
   Interval?: number;
@@ -2967,7 +2989,7 @@ declare interface DescribeLogsetsResponse {
 }
 
 declare interface DescribeMachineGroupConfigsRequest {
-  /** 机器组ID */
+  /** 机器组ID- 通过[获取机器组列表](https://cloud.tencent.com/document/api/614/56438)获取机器组Id。 */
   GroupId: string;
 }
 
@@ -2979,7 +3001,7 @@ declare interface DescribeMachineGroupConfigsResponse {
 }
 
 declare interface DescribeMachineGroupsRequest {
-  /** machineGroupName- 按照【机器组名称】进行过滤。- 类型：String- 必选：否machineGroupId- 按照【机器组ID】进行过滤。- 类型：String- 必选：否osType- 按照【操作系统类型】进行过滤。- 类型：Int- 必选：否tagKey- 按照【标签键】进行过滤。- 类型：String- 必选：否tag:tagKey- 按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。- 类型：String- 必选：否每次请求的Filters的上限为10，Filter.Values的上限为5。 */
+  /** 过滤条件machineGroupName- 按照【机器组名称】进行过滤。- 类型：String- 必选：否machineGroupId- 按照【机器组ID】进行过滤。- 类型：String- 必选：否osType- 按照【操作系统类型】进行过滤。0： Linux；1： Windows- 类型：Int- 必选：否tagKey- 按照【标签键】进行过滤。- 类型：String- 必选：否tag:tagKey- 按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。- 类型：String- 必选：否每次请求的Filters的上限为10，Filter.Values的上限为5。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0 */
   Offset?: number;
@@ -3045,7 +3067,7 @@ declare interface DescribeNoticeContentsResponse {
 }
 
 declare interface DescribePartitionsRequest {
-  /** 日志主题ID */
+  /** 日志主题Id- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
 }
 
@@ -3065,7 +3087,7 @@ declare interface DescribeScheduledSqlInfoRequest {
   Name?: string;
   /** 任务id。 */
   TaskId?: string;
-  /** srcTopicName按照【源日志主题名称】进行过滤，模糊匹配。类型：String。必选：否dstTopicName按照【目标日志主题名称】进行过滤，模糊匹配。类型：String。必选：否srcTopicId按照【源日志主题ID】进行过滤。类型：String。必选：否dstTopicId按照【目标日志主题ID】进行过滤。类型：String。必选：否bizType按照【主题类型】进行过滤，0：日志主题；1：指标主题。类型：String。必选：否status按照【任务状态】进行过滤，1：运行；2：停止。类型：String。必选：否taskName按照【任务名称】进行过滤，模糊匹配。类型：String。必选：否taskId按照【任务ID】进行过滤，模糊匹配。类型：String。必选：否 */
+  /** - srcTopicName按照【源日志主题名称】进行过滤，模糊匹配。类型：String。必选：否。示例：业务日志主题1 ，通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题名称。- dstTopicName按照【目标日志主题名称】进行过滤，模糊匹配。类型：String。必选：否。示例：业务日志主题 2，通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题名称。- srcTopicId按照【源日志主题ID】进行过滤。类型：String。必选：否。示例：a4478687-2382-4486-9692-de7986350f6b ，通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题id。- dstTopicId按照【目标日志主题ID】进行过滤。类型：String。必选：否。示例：bd4d3375-d72a-4cd2-988d-d8eda2bd62b0，通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题id。- bizType按照【主题类型】进行过滤，0：日志主题；1：指标主题。类型：String。必选：否- status按照【任务状态】进行过滤，1：运行；2：停止；3：异常。类型：String。必选：否- taskName按照【任务名称】进行过滤，模糊匹配。类型：String。必选：否。示例：metricTask ，通过 [获取定时SQL分析任务列表](https://cloud.tencent.com/document/product/614/95519) 获取任务名称。- taskId按照【任务ID】进行过滤，模糊匹配。类型：String。必选：否。示例：9c64f9c1-a14e-4b59-b074-5b73cac3dd66 ，通过 [获取定时SQL分析任务列表](https://cloud.tencent.com/document/product/614/95519) 获取任务id。 */
   Filters?: Filter[];
 }
 
@@ -3115,7 +3137,7 @@ declare interface DescribeShippersResponse {
 }
 
 declare interface DescribeTopicsRequest {
-  /** topicName 按照【日志主题名称】进行过滤，默认为模糊匹配，可使用 PreciseSearch 参数设置为精确匹配。类型：String。必选：否logsetName 按照【日志集名称】进行过滤，默认为模糊匹配，可使用 PreciseSearch 参数设置为精确匹配。类型：String。必选：否topicId 按照【日志主题ID】进行过滤。类型：String。必选：否logsetId 按照【日志集ID】进行过滤，可通过调用 DescribeLogsets 查询已创建的日志集列表或登录控制台进行查看；也可以调用 CreateLogset 创建新的日志集。类型：String。必选：否tagKey 按照【标签键】进行过滤。类型：String。必选：否tag:tagKey 按照【标签键值对】进行过滤。tagKey 使用具体的标签键进行替换，例如 tag:exampleKey。类型：String。必选：否storageType 按照【日志主题的存储类型】进行过滤。可选值 hot（标准存储），cold（低频存储）类型：String。必选：否注意：每次请求的 Filters 的上限为10，Filter.Values 的上限为100。 */
+  /** topicName 按照【日志主题名称】进行过滤，默认为模糊匹配，可使用 PreciseSearch 参数设置为精确匹配。类型：String。必选：否logsetName 按照【日志集名称】进行过滤，默认为模糊匹配，可使用 PreciseSearch 参数设置为精确匹配。类型：String。必选：否topicId 按照【日志主题ID】进行过滤。类型：String。必选：否logsetId 按照【日志集ID】进行过滤，可通过调用 DescribeLogsets 查询已创建的日志集列表或登录控制台进行查看；也可以调用CreateLogset 创建新的日志集。类型：String。必选：否tagKey 按照【标签键】进行过滤。类型：String。必选：否tag:tagKey 按照【标签键值对】进行过滤。tagKey 使用具体的标签键进行替换，例如 tag:exampleKey。类型：String。必选：否storageType 按照【日志主题的存储类型】进行过滤。可选值 hot（标准存储），cold（低频存储）类型：String。必选：否注意：每次请求的 Filters 的上限为10，Filter.Values 的上限为100。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0。 */
   Offset?: number;
@@ -3159,7 +3181,7 @@ declare interface GetAlarmLogRequest {
   From: number;
   /** 要查询的执行详情的结束时间，Unix时间戳，单位ms。 */
   To: number;
-  /** 查询过滤条件，例如：- 按告警策略ID查询：`alert_id:"alarm-0745ec00-e605-xxxx-b50b-54afe61fc971"`- 按监控对象ID查询：`monitored_object:"823d8bfa-76a7-xxxx-8399-8cda74d4009b" `- 按告警策略ID及监控对象ID查询：`alert_id:"alarm-0745ec00-e605-xxxx-b50b-54afe61fc971" AND monitored_object:"823d8bfa-76a7-xxxx-8399-8cda74d4009b"`- 按告警策略ID及监控对象ID查询支持SQL语句：`(alert_id:"alarm-5ce45495-09e8-4d58-xxxx-768134bf330c") AND (monitored_object:"3c514e84-6f1f-46ec-xxxx-05de6163f7fe") AND NOT condition_evaluate_result: "Skip" AND condition_evaluate_result:[* TO *] | SELECT count(*) as top50StatisticsTotalCount, count_if(condition_evaluate_result='ProcessError') as top50StatisticsFailureCount, count_if(notification_send_result!='NotSend') as top50NoticeTotalCount, count_if(notification_send_result='SendPartFail' or notification_send_result='SendFail') as top50NoticeFailureCount, alert_id, alert_name, monitored_object, topic_type, happen_threshold, alert_threshold, notify_template group by alert_id, alert_name, monitored_object,topic_type, happen_threshold, alert_threshold, notify_template order by top50StatisticsTotalCount desc limit 1` */
+  /** 查询过滤条件，例如：- 按告警策略ID查询：`alert_id:"alarm-0745ec00-e605-xxxx-b50b-54afe61fc971"` - 通过[获取告警策略列表](https://cloud.tencent.com/document/api/614/56461)获取告警策略ID- 按监控对象ID查询：`monitored_object:"823d8bfa-76a7-xxxx-8399-8cda74d4009b" ` - 通过[获取告警策略列表](https://cloud.tencent.com/document/api/614/56461)获取监控对象ID- 按告警策略ID及监控对象ID查询：`alert_id:"alarm-0745ec00-e605-xxxx-b50b-54afe61fc971" AND monitored_object:"823d8bfa-76a7-xxxx-8399-8cda74d4009b"`- 按告警策略ID及监控对象ID查询支持SQL语句：`(alert_id:"alarm-5ce45495-09e8-4d58-xxxx-768134bf330c") AND (monitored_object:"3c514e84-6f1f-46ec-xxxx-05de6163f7fe") AND NOT condition_evaluate_result: "Skip" AND condition_evaluate_result:[* TO *] | SELECT count(*) as top50StatisticsTotalCount, count_if(condition_evaluate_result='ProcessError') as top50StatisticsFailureCount, count_if(notification_send_result!='NotSend') as top50NoticeTotalCount, count_if(notification_send_result='SendPartFail' or notification_send_result='SendFail') as top50NoticeFailureCount, alert_id, alert_name, monitored_object, topic_type, happen_threshold, alert_threshold, notify_template group by alert_id, alert_name, monitored_object,topic_type, happen_threshold, alert_threshold, notify_template order by top50StatisticsTotalCount desc limit 1` */
   Query: string;
   /** 单次查询返回的执行详情条数，最大值为1000 */
   Limit?: number;
@@ -3193,9 +3215,9 @@ declare interface GetAlarmLogResponse {
 }
 
 declare interface MergePartitionRequest {
-  /** 日志主题ID */
+  /** 日志主题Id- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
-  /** 合并的PartitionId（找到下一个分区InclusiveBeginKey与入参PartitionId对应的ExclusiveEndKey相等，且找到的分区必须是读写分区（Staus:readwrite），入参PartitionId与找到的PartitionId设置为只读分区（Status:readonly）,再新建一个新的读写分区） 。[获取分区列表](https://cloud.tencent.com/document/product/614/56469)1. 入参PartitionId只能是读写分区（Status的值有readonly，readwrite），且能找到入参PartitionId的下一个可读写分区（找到下一个分区InclusiveBeginKey与入参PartitionId对应的ExclusiveEndKey相等）；2. 入参PartitionId不能是最后一个分区（PartitionId的ExclusiveEndKey不能是ffffffffffffffffffffffffffffffff）；3. topic的分区数量是有限制的（默认50个），合并之后不能超过最大分区，否则不能合并。 */
+  /** 合并的PartitionId（找到下一个分区InclusiveBeginKey与入参PartitionId对应的ExclusiveEndKey相等，且找到的分区必须是读写分区（Status:readwrite），入参PartitionId与找到的PartitionId设置为只读分区（Status:readonly）,再新建一个新的读写分区） 。[获取分区列表](https://cloud.tencent.com/document/product/614/56470)1. 入参PartitionId只能是读写分区（Status的值有readonly，readwrite），且能找到入参PartitionId的下一个可读写分区（找到下一个分区InclusiveBeginKey与入参PartitionId对应的ExclusiveEndKey相等）；2. 入参PartitionId不能是最后一个分区（PartitionId的ExclusiveEndKey不能是ffffffffffffffffffffffffffffffff）；3. topic的分区数量是有限制的（默认50个），合并之后不能超过最大分区，否则不能合并。 */
   PartitionId: number;
 }
 
@@ -3373,7 +3395,7 @@ declare interface ModifyConfigExtraResponse {
 declare interface ModifyConfigRequest {
   /** 采集规则配置ID，通过[获取采集规则配置](https://cloud.tencent.com/document/product/614/58616)返回信息获取。 */
   ConfigId: string;
-  /** 采集规则配置名称 */
+  /** 采集规则配置名称- 不能包含特殊字符｜- 长度不能超过255字符，超过会被截断 */
   Name?: string;
   /** 日志采集路径，包含文件名 */
   Path?: string;
@@ -3383,7 +3405,7 @@ declare interface ModifyConfigRequest {
   ExtractRule?: ExtractRuleInfo;
   /** 采集黑名单路径列表 */
   ExcludePaths?: ExcludePathInfo[];
-  /** 采集配置关联的日志主题（TopicId） */
+  /** 采集配置关联的日志主题（TopicId）- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   Output?: string;
   /** 用户自定义解析字符串，Json格式序列化的字符串。 */
   UserDefineRule?: string;
@@ -3397,7 +3419,7 @@ declare interface ModifyConfigResponse {
 }
 
 declare interface ModifyConsoleSharingRequest {
-  /** 免密分享链接Id */
+  /** 免密分享Id。- 通过 [获取免密分享列表](https://cloud.tencent.com/document/product/614/109798) 获取免密分享Id。 - 通过 [创建免密分享](https://cloud.tencent.com/document/product/614/109800) 获取免密分享Id。 */
   SharingId: string;
   /** 指定分享链接有效期，单位：毫秒，最长可设定有效期为30天 */
   DurationMilliseconds: number;
@@ -3409,7 +3431,7 @@ declare interface ModifyConsoleSharingResponse {
 }
 
 declare interface ModifyConsumerRequest {
-  /** 投递任务绑定的日志主题 ID */
+  /** 投递任务绑定的日志主题Id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
   TopicId: string;
   /** 投递任务是否生效，默认不生效 */
   Effective?: boolean;
@@ -3517,9 +3539,9 @@ declare interface ModifyIndexResponse {
 }
 
 declare interface ModifyKafkaConsumerRequest {
-  /** 日志主题ID */
+  /** 日志主题Id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
   FromTopicId: string;
-  /** 压缩方式[0:NONE；2:SNAPPY；3:LZ4] */
+  /** 压缩方式。0：不压缩；2：使用Snappy压缩；3：使用LZ4压缩 */
   Compression?: number;
   /** kafka协议消费数据格式 */
   ConsumerContent?: KafkaConsumerContent;
@@ -3531,15 +3553,15 @@ declare interface ModifyKafkaConsumerResponse {
 }
 
 declare interface ModifyKafkaRechargeRequest {
-  /** Kafka导入配置ID */
+  /** 导入配置Id。- 通过 [创建Kafka数据订阅任务](https://cloud.tencent.com/document/product/614/94448)获取Kafka导入配置Id。- 通过 [获取Kafka数据订阅任务列表](https://cloud.tencent.com/document/product/614/94446)获取Kafka导入配置Id。 */
   Id: string;
-  /** 导入CLS目标topic ID */
+  /** 导入CLS目标TopicId。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456)获取日志主题Id。 */
   TopicId: string;
   /** Kafka导入配置名称 */
   Name?: string;
   /** 导入Kafka类型，0：腾讯云CKafka：1：用户自建Kafka。 */
   KafkaType?: number;
-  /** 腾讯云CKafka实例ID，KafkaType为0时必填。 */
+  /** 腾讯云CKafka实例ID，KafkaType为0时必填。- 通过 [获取实例列表信息](https://cloud.tencent.com/document/product/597/40835) 获取实例id。 */
   KafkaInstance?: string;
   /** 服务地址，KafkaType为1时必填。 */
   ServerAddr?: string;
@@ -3547,13 +3569,13 @@ declare interface ModifyKafkaRechargeRequest {
   IsEncryptionAddr?: boolean;
   /** 加密访问协议，KafkaType参数为1并且IsEncryptionAddr参数为true时必填。 */
   Protocol?: KafkaProtocolInfo;
-  /** 用户需要导入的Kafka相关topic列表，多个topic之间使用半角逗号隔开 */
+  /** 用户需要导入的Kafka相关topic列表，多个topic之间使用半角逗号隔开。- Kafka类型为腾讯云CKafka时：通过 [获取主题列表](https://cloud.tencent.com/document/product/597/40847) 获取TopicName。 */
   UserKafkaTopics?: string;
   /** 用户Kafka消费组名称 */
   ConsumerGroupName?: string;
   /** 日志导入规则 */
   LogRechargeRule?: LogRechargeRuleInfo;
-  /** 导入控制，1：暂停；2：继续。 */
+  /** 导入控制，1：暂停；2：启动。 */
   StatusControl?: number;
 }
 
@@ -3577,9 +3599,9 @@ declare interface ModifyLogsetResponse {
 }
 
 declare interface ModifyMachineGroupRequest {
-  /** 机器组ID */
+  /** 机器组Id- 通过[获取机器组列表](https://cloud.tencent.com/document/product/614/56438)获取机器组Id。 */
   GroupId: string;
-  /** 机器组名称 */
+  /** 机器组名称输入限制：- 不能为空字符串- 不能包含字符'|' */
   GroupName?: string;
   /** 机器组类型。 Type：ip，Values中为ip字符串列表机器组；Type：label，Values中为标签字符串列表机器组。 */
   MachineGroupType?: MachineGroupTypeInfo;
@@ -3587,9 +3609,9 @@ declare interface ModifyMachineGroupRequest {
   Tags?: Tag[];
   /** 是否开启机器组自动更新 */
   AutoUpdate?: boolean;
-  /** 升级开始时间，建议业务低峰期升级LogListener */
+  /** 升级开始时间，建议业务低峰期升级LogListener时间格式：HH:mm:ss */
   UpdateStartTime?: string;
-  /** 升级结束时间，建议业务低峰期升级LogListener */
+  /** 升级结束时间，建议业务低峰期升级LogListener时间格式：HH:mm:ss */
   UpdateEndTime?: string;
   /** 是否开启服务日志，用于记录因Loglistener 服务自身产生的log，开启后，会创建内部日志集cls_service_logging和日志主题loglistener_status,loglistener_alarm,loglistener_business，不产生计费 */
   ServiceLogging?: boolean;
@@ -3621,9 +3643,9 @@ declare interface ModifyNoticeContentResponse {
 }
 
 declare interface ModifyScheduledSqlRequest {
-  /** 任务ID */
+  /** 任务ID，通过[获取定时SQL分析任务列表](https://cloud.tencent.com/document/product/614/95519)获取 */
   TaskId: string;
-  /** 源日志主题 */
+  /** 源日志主题，通过[获取定时SQL分析任务列表](https://cloud.tencent.com/document/product/614/95519)获取 */
   SrcTopicId?: string;
   /** 任务启动状态. 1开启, 2关闭 */
   EnableFlag?: number;
@@ -3631,15 +3653,15 @@ declare interface ModifyScheduledSqlRequest {
   DstResource?: ScheduledSqlResouceInfo;
   /** 查询语句 */
   ScheduledSqlContent?: string;
-  /** 调度周期(分钟) */
+  /** 调度周期(分钟)，1~1440分钟 */
   ProcessPeriod?: number;
   /** 单次查询的时间窗口. 例子中为近15分钟 */
   ProcessTimeWindow?: string;
-  /** 执行延迟(秒) */
+  /** 执行延迟(秒)，0~120秒，默认60秒 */
   ProcessDelay?: number;
-  /** 源topicId的地域信息 */
+  /** 源topicId的地域信息,支持地域见(https://cloud.tencent.com/document/api/614/56474) */
   SrcTopicRegion?: string;
-  /** 任务名称 */
+  /** 任务名称，0~255字符 */
   Name?: string;
   /** 语法规则。 默认值为0。 0：Lucene语法，1：CQL语法 */
   SyntaxRule?: number;
@@ -3685,9 +3707,9 @@ declare interface ModifyShipperResponse {
 }
 
 declare interface ModifyTopicRequest {
-  /** 日志主题ID */
+  /** 日志主题ID- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
-  /** 日志主题名称 */
+  /** 日志主题名称输入限制：- 不能为空字符串- 不能包含字符'|'- 不能使用以下名称["cls_service_log","loglistener_status","loglistener_alarm","loglistener_business","cls_service_metric"] */
   TopicName?: string;
   /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的日志主题。最大支持10个标签键值对，并且不能有重复的键值对。 */
   Tags?: Tag[];
@@ -3695,7 +3717,7 @@ declare interface ModifyTopicRequest {
   Status?: boolean;
   /** 是否开启自动分裂 */
   AutoSplit?: boolean;
-  /** 若开启最大分裂，该主题能够能够允许的最大分区数 */
+  /** 若开启最大分裂，该主题能够能够允许的最大分区数；默认为50；必须为正数 */
   MaxSplitPartitions?: number;
   /** 生命周期，单位天，标准存储取值范围1\~3600，低频存储取值范围7\~3600。取值为3640时代表永久保存 */
   Period?: number;
@@ -3707,9 +3729,9 @@ declare interface ModifyTopicRequest {
   IsWebTracking?: boolean;
   /** 日志主题扩展信息 */
   Extends?: TopicExtendInfo;
-  /** 日志主题分区数量 */
+  /** 日志主题分区数量。默认为1；取值范围及约束：- 当输入值<=0，系统自动调整为1。- 如果未传MaxSplitPartitions，需要PartitionCount<=50；- 如果传递了MaxSplitPartitions，需要PartitionCount<=MaxSplitPartitions； */
   PartitionCount?: number;
-  /** 取消切换存储任务的id */
+  /** 取消切换存储任务的id- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取取消切换存储任务的id。 */
   CancelTopicAsyncTaskID?: string;
 }
 
@@ -3739,7 +3761,7 @@ declare interface ModifyWebCallbackResponse {
 }
 
 declare interface OpenKafkaConsumerRequest {
-  /** 日志主题ID */
+  /** 日志主题Id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
   FromTopicId: string;
   /** 压缩方式[0:NONE；2:SNAPPY；3:LZ4]，默认：0 */
   Compression?: number;
@@ -3787,16 +3809,16 @@ declare interface PreviewKafkaRechargeResponse {
 }
 
 declare interface QueryMetricRequest {
-  /** 查询语句，使用PromQL语法 */
+  /** 查询语句，使用PromQL语法	- 参考 [语法规则](https://cloud.tencent.com/document/product/614/90334) 文档 */
   Query: string;
-  /** 指标主题ID */
+  /** 指标主题ID- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
   /** 查询时间，秒级Unix时间戳。为空时代表当前时间戳。 */
   Time?: number;
 }
 
 declare interface QueryMetricResponse {
-  /** 指标查询结果类型 */
+  /** 指标查询结果类型，支持- scalar 标量值- string 字符串值- vector 瞬时向量- matrix 区间向量 */
   ResultType?: string;
   /** 指标查询结果 */
   Result?: string;
@@ -3805,9 +3827,9 @@ declare interface QueryMetricResponse {
 }
 
 declare interface QueryRangeMetricRequest {
-  /** 指标主题ID */
+  /** 指标主题ID- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
-  /** 查询语句，使用PromQL语法 */
+  /** 查询语句，使用PromQL语法- 参考 [语法规则](https://cloud.tencent.com/document/product/614/90334) 文档 */
   Query: string;
   /** 查询起始时间，秒级Unix时间戳 */
   Start: number;
@@ -3818,7 +3840,7 @@ declare interface QueryRangeMetricRequest {
 }
 
 declare interface QueryRangeMetricResponse {
-  /** 指标查询结果类型 */
+  /** 指标查询结果类型，支持- scalar 标量值- string 字符串值- vector 瞬时向量- matrix 区间向量 */
   ResultType?: string;
   /** 指标查询结果 */
   Result?: string;
@@ -4045,7 +4067,7 @@ declare interface Cls {
   DeleteConfigFromMachineGroup(data: DeleteConfigFromMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigFromMachineGroupResponse>;
   /** 删除免密分享 {@link DeleteConsoleSharingRequest} {@link DeleteConsoleSharingResponse} */
   DeleteConsoleSharing(data: DeleteConsoleSharingRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsoleSharingResponse>;
-  /** 删除投递配置 {@link DeleteConsumerRequest} {@link DeleteConsumerResponse} */
+  /** 删除投递Ckafka任务 {@link DeleteConsumerRequest} {@link DeleteConsumerResponse} */
   DeleteConsumer(data: DeleteConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsumerResponse>;
   /** 删除cos导入任务 {@link DeleteCosRechargeRequest} {@link DeleteCosRechargeResponse} */
   DeleteCosRecharge(data: DeleteCosRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCosRechargeResponse>;

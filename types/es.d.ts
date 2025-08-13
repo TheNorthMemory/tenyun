@@ -1023,6 +1023,8 @@ declare namespace V20180416 {
     EnableScheduleOperationDuration?: EnableScheduleOperationDuration | null;
     /** 开启集群保护：OPEN-开启，CLOSE-关闭 */
     EnableDestroyProtection?: string | null;
+    /** kibana内网访问地址 */
+    ShowKibanaIpPort?: string;
   }
 
   /** ES集群日志详细信息 */
@@ -2760,6 +2762,8 @@ declare namespace V20180416 {
     EnableScheduleRecoverGroup?: boolean;
     /** 置放群组异步任务时间段 */
     EnableScheduleOperationDuration?: EnableScheduleOperationDuration;
+    /** 事件id列表 */
+    EventTypeIds?: string[];
   }
 
   interface RestartNodesResponse {

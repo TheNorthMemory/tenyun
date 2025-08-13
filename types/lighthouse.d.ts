@@ -544,6 +544,38 @@ declare interface GeneralResourceQuota {
   ResourceQuotaTotal?: number;
 }
 
+/** CVM镜像信息。 */
+declare interface Image {
+  /** CVM镜像 ID ，是Image的唯一标识。 */
+  ImageId: string;
+  /** 镜像名称。 */
+  ImageName: string;
+  /** 镜像描述。 */
+  ImageDescription: string;
+  /** 镜像大小。单位GB。 */
+  ImageSize: number;
+  /** 镜像来源。CREATE_IMAGE：自定义镜像EXTERNAL_IMPORT：外部导入镜像 */
+  ImageSource: string;
+  /** 镜像分类SystemImage：系统盘镜像InstanceImage：整机镜像 */
+  ImageClass: string;
+  /** 镜像状态CREATING:创建中NORMAL:正常CREATEFAILED:创建失败USING:使用中SYNCING:同步中IMPORTING:导入中IMPORTFAILED:导入失败 */
+  ImageState: string;
+  /** 镜像是否支持Cloudinit。 */
+  IsSupportCloudinit: boolean;
+  /** 镜像架构。 */
+  Architecture: string;
+  /** 镜像操作系统。 */
+  OsName: string;
+  /** 镜像来源平台。 */
+  Platform: string;
+  /** 镜像创建时间。 */
+  CreatedTime: string;
+  /** 镜像是否可共享到轻量应用服务器。 */
+  IsShareable: boolean;
+  /** 不可共享的原因。 */
+  UnshareableReason: string;
+}
+
 /** 描述了实例信息。 */
 declare interface Instance {
   /** 实例 ID。 */
@@ -1690,6 +1722,26 @@ declare interface DescribeGeneralResourceQuotasResponse {
   RequestId?: string;
 }
 
+declare interface DescribeImagesToShareRequest {
+  /** CVM镜像 ID 列表。可通过[DescribeImages](https://cloud.tencent.com/document/api/213/15715)接口返回值中的ImageId获取。 */
+  ImageIds?: string[];
+  /** 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。 */
+  Offset?: number;
+  /** 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。 */
+  Limit?: number;
+  /** 过滤器列表。image-id按照【CVM镜像ID】进行过滤。类型：String必选：否image-name按照【CVM镜像名称】进行过滤。类型：String必选：否image-type按照【CVM镜像类型】进行过滤。类型：String必选：否取值范围：PRIVATE_IMAGE: 私有镜像 (本账户创建的镜像)PUBLIC_IMAGE: 公共镜像 (腾讯云官方镜像)SHARED_IMAGE: 共享镜像(其他账户共享给本账户的镜像) 。每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不可以同时指定ImageIds和Filters。 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeImagesToShareResponse {
+  /** 符合条件的镜像数量。 */
+  TotalCount: number;
+  /** CVM镜像详细信息列表。 */
+  ImageSet: Image[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceVncUrlRequest {
   /** 实例 ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。 */
   InstanceId: string;
@@ -2208,6 +2260,20 @@ declare interface ModifyFirewallTemplateResponse {
   RequestId?: string;
 }
 
+declare interface ModifyImageSharePermissionRequest {
+  /** 镜像 ID。可通过[DescribeImages](https://cloud.tencent.com/document/api/213/15715)接口返回值中的ImageId获取。 */
+  ImageId: string;
+  /** 共享属性，包括 SHARE，CANCEL。其中SHARE代表共享，CANCEL代表取消共享。 */
+  Permission: string;
+}
+
+declare interface ModifyImageSharePermissionResponse {
+  /** CVM自定义镜像共享到轻量应用服务器后的镜像ID。 */
+  BlueprintId: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyInstancesAttributeRequest {
   /** 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。 */
   InstanceIds: string[];
@@ -2643,6 +2709,8 @@ declare interface Lighthouse {
   DescribeFirewallTemplates(data?: DescribeFirewallTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirewallTemplatesResponse>;
   /** 查询通用资源配额信息 {@link DescribeGeneralResourceQuotasRequest} {@link DescribeGeneralResourceQuotasResponse} */
   DescribeGeneralResourceQuotas(data: DescribeGeneralResourceQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralResourceQuotasResponse>;
+  /** 查询CVM镜像列表 {@link DescribeImagesToShareRequest} {@link DescribeImagesToShareResponse} */
+  DescribeImagesToShare(data?: DescribeImagesToShareRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImagesToShareResponse>;
   /** 查询实例管理终端地址 {@link DescribeInstanceVncUrlRequest} {@link DescribeInstanceVncUrlResponse} */
   DescribeInstanceVncUrl(data: DescribeInstanceVncUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceVncUrlResponse>;
   /** 查看实例列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
@@ -2711,6 +2779,8 @@ declare interface Lighthouse {
   ModifyFirewallRules(data: ModifyFirewallRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFirewallRulesResponse>;
   /** 修改防火墙模板 {@link ModifyFirewallTemplateRequest} {@link ModifyFirewallTemplateResponse} */
   ModifyFirewallTemplate(data: ModifyFirewallTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFirewallTemplateResponse>;
+  /** 修改CVM镜像共享信息 {@link ModifyImageSharePermissionRequest} {@link ModifyImageSharePermissionResponse} */
+  ModifyImageSharePermission(data: ModifyImageSharePermissionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageSharePermissionResponse>;
   /** 修改实例的属性 {@link ModifyInstancesAttributeRequest} {@link ModifyInstancesAttributeResponse} */
   ModifyInstancesAttribute(data: ModifyInstancesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesAttributeResponse>;
   /** 变更实例套餐 {@link ModifyInstancesBundleRequest} {@link ModifyInstancesBundleResponse} */

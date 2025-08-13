@@ -3407,6 +3407,8 @@ declare interface AssociateDirectConnectGatewayNatGatewayResponse {
 }
 
 declare interface AssociateHaVipInstanceRequest {
+  /** HaVip绑定的子机或网卡。最多支持10个实例。 */
+  HaVipAssociationSet: HaVipAssociation[];
 }
 
 declare interface AssociateHaVipInstanceResponse {
@@ -9758,7 +9760,7 @@ declare interface Vpc {
   /** 专线网关绑定NAT网关 {@link AssociateDirectConnectGatewayNatGatewayRequest} {@link AssociateDirectConnectGatewayNatGatewayResponse} */
   AssociateDirectConnectGatewayNatGateway(data: AssociateDirectConnectGatewayNatGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateDirectConnectGatewayNatGatewayResponse>;
   /** HAVIP绑定子机或网卡 {@link AssociateHaVipInstanceRequest} {@link AssociateHaVipInstanceResponse} */
-  AssociateHaVipInstance(data?: AssociateHaVipInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateHaVipInstanceResponse>;
+  AssociateHaVipInstance(data: AssociateHaVipInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateHaVipInstanceResponse>;
   /** 绑定弹性公网IPv6 {@link AssociateIPv6AddressRequest} {@link AssociateIPv6AddressResponse} */
   AssociateIPv6Address(data: AssociateIPv6AddressRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateIPv6AddressResponse>;
   /** 关联云联网实例到指定的云联网路由表 {@link AssociateInstancesToCcnRouteTableRequest} {@link AssociateInstancesToCcnRouteTableResponse} */

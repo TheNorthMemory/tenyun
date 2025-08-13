@@ -2039,6 +2039,8 @@ declare namespace V20180717 {
     Language: string;
     /** 是否设置为自适应码流的默认音频。取值：YES：设置为默认音频；NO：不设置为默认音频（默认值）。 */
     Default?: string;
+    /** 音轨序号，表示选择音频源中的第几个音轨，从0开始计数。默认值为0，表示选择最靠前的音轨。 */
+    AudioTrackIdx?: number;
   }
 
   /** 自适应码流任务的输入参数。 */

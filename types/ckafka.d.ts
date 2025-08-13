@@ -2841,10 +2841,10 @@ declare interface CreateInstancePreRequest {
   Period: string;
   /** 国际站标准版实例规格。目前只有国际站标准版使用当前字段区分规格，国内站标准版使用峰值带宽区分规格。除了国际站标准版外的所有实例填写 1 即可。国际站标准版实例：入门型(general)]填写1；[标准型(standard)]填写2；[进阶型(advanced)]填写3；[容量型(capacity)]填写4；[高阶型1(specialized-1)]填写5；[高阶型2(specialized-2)]填写6；[高阶型3(specialized-3)]填写7；[高阶型4(specialized-4)]填写8。 */
   InstanceType: number;
-  /** 私有网络Id，必填 */
-  VpcId?: string;
-  /** 子网id，必填 */
-  SubnetId?: string;
+  /** 私有网络Id */
+  VpcId: string;
+  /** 子网id */
+  SubnetId: string;
   /** 可选。实例日志的最长保留时间，单位分钟，默认为10080（7天），最大30天，不填默认0，代表不开启日志保留时间回收策略 */
   MsgRetentionTime?: number;
   /** 创建实例时可以选择集群Id, 该入参表示集群Id */
@@ -2903,10 +2903,10 @@ declare interface CreatePartitionResponse {
 }
 
 declare interface CreatePostPaidInstanceRequest {
+  /** 私有网络Id 创建的实例默认接入点所在的 vpc 对应 vpcId */
+  VpcId: string;
   /** ckafka集群实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-) */
   InstanceName?: string;
-  /** 私有网络Id 创建的实例默认接入点所在的 vpc 对应 vpcId。目前不支持创建基础网络实例，因此该参数必填 */
-  VpcId?: string;
   /** 子网id。创建实例默认接入点所在的子网对应的子网 id */
   SubnetId?: string;
   /** 国际站标准版实例规格。目前只有国际站标准版使用当前字段区分规格，国内站标准版使用峰值带宽区分规格。除了国际站标准版外的所有实例填写 1 即可。国际站标准版实例：入门型(general)]填写1；[标准型(standard)]填写2；[进阶型(advanced)]填写3；[容量型(capacity)]填写4；[高阶型1(specialized-1)]填写5；[高阶型2(specialized-2)]填写6；[高阶型3(specialized-3)]填写7；[高阶型4(specialized-4)]填写8。 */
@@ -3867,8 +3867,8 @@ declare interface FetchDatahubMessageByOffsetRequest {
   Name: string;
   /** 分区id */
   Partition: number;
-  /** 位点信息，必填 */
-  Offset?: number;
+  /** 位点信息 */
+  Offset: number;
 }
 
 declare interface FetchDatahubMessageByOffsetResponse {
@@ -3903,8 +3903,8 @@ declare interface FetchMessageByOffsetRequest {
   Topic: string;
   /** 分区id */
   Partition: number;
-  /** 位点信息，必填 */
-  Offset?: number;
+  /** 位点信息 */
+  Offset: number;
 }
 
 declare interface FetchMessageByOffsetResponse {
@@ -4572,7 +4572,7 @@ declare interface Ckafka {
   /** 增加主题分区 {@link CreatePartitionRequest} {@link CreatePartitionResponse} */
   CreatePartition(data: CreatePartitionRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePartitionResponse>;
   /** 创建按量计费实例（新） {@link CreatePostPaidInstanceRequest} {@link CreatePostPaidInstanceResponse} */
-  CreatePostPaidInstance(data?: CreatePostPaidInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePostPaidInstanceResponse>;
+  CreatePostPaidInstance(data: CreatePostPaidInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePostPaidInstanceResponse>;
   /** 添加普罗米修斯监控 {@link CreatePrometheusRequest} {@link CreatePrometheusResponse} */
   CreatePrometheus(data: CreatePrometheusRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusResponse>;
   /** 添加实例路由 {@link CreateRouteRequest} {@link CreateRouteResponse} */

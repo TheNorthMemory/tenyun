@@ -414,7 +414,7 @@ declare namespace V20200713 {
 /** {@link Tms 文本内容安全} */
 declare interface Tms {
   (): Versions;
-  /** 文本内容安全 {@link TextModerationRequest} {@link TextModerationResponse} */
+  /** 文本内容安全服务 {@link TextModerationRequest} {@link TextModerationResponse} */
   TextModeration(data: TextModerationRequest, config?: AxiosRequestConfig): AxiosPromise<TextModerationResponse>;
   /** 账号举报接口 {@link V20200713.AccountTipoffAccessRequest} {@link V20200713.AccountTipoffAccessResponse} */
   AccountTipoffAccess(data: V20200713.AccountTipoffAccessRequest, config: AxiosRequestConfig & V20200713.VersionHeader): AxiosPromise<V20200713.AccountTipoffAccessResponse>;

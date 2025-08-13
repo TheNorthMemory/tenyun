@@ -688,20 +688,20 @@ declare interface ShareResource {
 
 /** 与我共享的资源 */
 declare interface ShareResourceToMember {
-  /** 资源ID */
-  ResourceId: string;
-  /** 资源类型 */
-  Type: string;
-  /** 共享单元ID */
-  UnitId: string;
-  /** 共享单元名 */
-  UnitName: string;
-  /** 创建时间 */
-  CreateTime: string;
-  /** 业务资源ID */
-  ProductResourceId: string;
-  /** 共享管理员uin */
-  ShareManagerUin: number | null;
+  /** 共享单元资源ID。 */
+  ResourceId?: string;
+  /** 资源类型。 */
+  Type?: string;
+  /** 共享单元ID。 */
+  UnitId?: string;
+  /** 共享单元名称。 */
+  UnitName?: string;
+  /** 创建时间。 */
+  CreateTime?: string;
+  /** 业务资源ID。 */
+  ProductResourceId?: string;
+  /** 共享账号Uin。 */
+  ShareManagerUin?: number;
 }
 
 /** 共享单元成员 */
@@ -1985,15 +1985,15 @@ declare interface DescribePolicyResponse {
 }
 
 declare interface DescribeResourceToShareMemberRequest {
-  /** 地域 */
+  /** 共享地域。可通过接口[DescribeShareAreas](https://cloud.tencent.com/document/product/850/103050)获取支持共享的地域。 */
   Area: string;
-  /** 偏移量 */
+  /** 偏移量。取值是limit的整数倍。默认值 : 0。 */
   Offset: number;
-  /** 每页条数 */
+  /** 限制数目。取值范围：1~50。 */
   Limit: number;
-  /** 搜索关键字，支持业务资源ID搜索 */
+  /** 搜索关键字，支持业务资源ID搜索。 */
   SearchKey?: string;
-  /** 资源类型 */
+  /** 共享资源类型。支持共享的资源类型,请参见[资源共享概述](https://cloud.tencent.com/document/product/850/59489) */
   Type?: string;
   /** 业务资源ID。最大50个 */
   ProductResourceIds?: string[];

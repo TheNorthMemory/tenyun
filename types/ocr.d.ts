@@ -262,6 +262,8 @@ declare interface CardWarnInfo {
   BlurCheck?: number;
   /** 模糊分数， 范围：0.0-1.0，分数越高越模糊，建议阈值为0.5 */
   BlurScore?: number;
+  /** 是否电子身份证0：否1：是电子身份证 */
+  ElectronCheck?: number;
 }
 
 /** 单元格识别结果 */
@@ -4973,6 +4975,8 @@ declare interface RecognizeValidIDCardOCRRequest {
   EnableWordCheck?: boolean;
   /** 默认值为false，打开返回证件是否模糊。 */
   EnableQualityCheck?: boolean;
+  /** 默认值为false，打开返回是否存在电子身份证判断。 */
+  EnableElectronCheck?: boolean;
 }
 
 declare interface RecognizeValidIDCardOCRResponse {
