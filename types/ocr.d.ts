@@ -3519,7 +3519,7 @@ declare interface ExtractDocBasicRequest {
   ItemNames?: string[];
   /** 是否开启全文字段识别 */
   ReturnFullText?: boolean;
-  /** 配置id支持：General -- 通用场景OnlineTaxiItinerary -- 网约车行程单RideHailingDriverLicense -- 网约车驾驶证RideHailingTransportLicense -- 网约车运输证WayBill -- 快递运单AccountOpeningPermit -- 银行开户许可证InvoiceEng -- 海外发票模版Coin --钱币识别模板OnboardingDocuments -- 入职材料识别PropertyOwnershipCertificate -- 房产证识别RealEstateCertificate --不动产权证识别HouseEncumbranceCertificate -- 他权证识别CarInsurance -- 车险保单MultiRealEstateCertificate -- 房产证、不动产证、产权证等材料合一模板 */
+  /** 配置id支持：General -- 通用场景OnlineTaxiItinerary -- 网约车行程单RideHailingDriverLicense -- 网约车驾驶证RideHailingTransportLicense -- 网约车运输证WayBill -- 快递运单AccountOpeningPermit -- 银行开户许可证InvoiceEng -- 国际发票模板Coin --钱币识别模板OnboardingDocuments -- 入职材料识别PropertyOwnershipCertificate -- 房产证识别RealEstateCertificate --不动产权证识别HouseEncumbranceCertificate -- 他权证识别CarInsurance -- 车险保单MultiRealEstateCertificate -- 房产证、不动产证、产权证等材料合一模板 */
   ConfigId?: string;
   /** 是否打开印章识别 */
   EnableSealRecognize?: boolean;
@@ -3555,7 +3555,7 @@ declare interface ExtractDocMultiProRequest {
   EnableCoord?: boolean;
   /** 是否开启父子key识别，默认是 */
   OutputParentKey?: boolean;
-  /** 模版的单个属性配置 */
+  /** 模板的单个属性配置 */
   ConfigAdvanced?: ConfigAdvanced;
 }
 
@@ -3585,13 +3585,13 @@ declare interface ExtractDocMultiRequest {
   ItemNamesShowMode?: boolean;
   /** 是否开启全文字段识别 */
   ReturnFullText?: boolean;
-  /** 配置id支持：General -- 通用场景 InvoiceEng -- 国际invoice模版 WayBillEng --海运订单模板CustomsDeclaration -- 进出口报关单WeightNote -- 磅单MedicalMeter -- 血压仪表识别BillOfLading -- 海运提单EntrustmentBook -- 海运托书Statement -- 对账单识别模板BookingConfirmation -- 配舱通知书识别模板AirWayBill -- 航空运单识别模板Table -- 表格模版SteelLabel -- 实物标签识别模板CarInsurance -- 车辆保险单识别模板MultiRealEstateCertificate -- 房产材料识别模板MultiRealEstateMaterial -- 房产证明识别模板HongKongUtilityBill -- 香港水电煤单识别模板 */
+  /** 配置id支持：General -- 通用场景 InvoiceEng -- 国际invoice模板 WayBillEng --海运订单模板CustomsDeclaration -- 进出口报关单WeightNote -- 磅单MedicalMeter -- 血压仪表识别BillOfLading -- 海运提单EntrustmentBook -- 海运托书Statement -- 对账单识别模板BookingConfirmation -- 配舱通知书识别模板AirWayBill -- 航空运单识别模板Table -- 表格模板SteelLabel -- 实物标签识别模板CarInsurance -- 车辆保险单识别模板MultiRealEstateCertificate -- 房产材料识别模板MultiRealEstateMaterial -- 房产证明识别模板HongKongUtilityBill -- 中国香港水电煤单识别模板 */
   ConfigId?: string;
   /** 是否开启全文字段坐标值的识别 */
   EnableCoord?: boolean;
   /** 是否开启父子key识别，默认是 */
   OutputParentKey?: boolean;
-  /** 模版的单个属性配置 */
+  /** 模板的单个属性配置 */
   ConfigAdvanced?: ConfigAdvanced;
   /** cn时，添加的key为中文 en时，添加的key为英语 */
   OutputLanguage?: string;
@@ -3687,6 +3687,8 @@ declare interface GeneralAccurateOCRRequest {
   PdfPageNumber?: number;
   /** 文本检测开关，默认为true。设置为false可直接进行单行识别，适用于仅包含正向单行文本的图片场景。 */
   EnableDetectText?: boolean;
+  /** 配置ID支持： OCR -- 通用场景 MulOCR--多语种场景 */
+  ConfigID?: string;
 }
 
 declare interface GeneralAccurateOCRResponse {
@@ -3883,9 +3885,9 @@ declare interface HandwritingEssayOCRRequest {
   ImageBase64?: string;
   /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为前3页。 */
   PdfPageNumber?: number;
-  /** 配置id支持：ArticleRecognize -- 手写作文模版默认：ArticleRecognize */
+  /** 配置id支持：ArticleRecognize -- 手写作文模板默认：ArticleRecognize */
   ConfigId?: string;
-  /** 模版的单个属性配置 */
+  /** 模板的单个属性配置 */
   Scene?: string;
 }
 

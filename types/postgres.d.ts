@@ -500,40 +500,6 @@ declare interface NetworkAccess {
   VpcStatus?: number;
 }
 
-/** 单条SlowQuery信息 */
-declare interface NormalQueryItem {
-  /** 用户名 */
-  UserName?: string;
-  /** 调用次数 */
-  Calls?: number;
-  /** 粒度点 */
-  CallsGrids?: number[];
-  /** 花费总时间 */
-  CostTime?: number;
-  /** 影响的行数 */
-  Rows?: number;
-  /** 花费最小时间 */
-  MinCostTime?: number;
-  /** 花费最大时间 */
-  MaxCostTime?: number;
-  /** 最早一条慢SQL时间 */
-  FirstTime?: string;
-  /** 最晚一条慢SQL时间 */
-  LastTime?: string;
-  /** 读共享内存块数 */
-  SharedReadBlks?: number;
-  /** 写共享内存块数 */
-  SharedWriteBlks?: number;
-  /** 读io总耗时 */
-  ReadCostTime?: number;
-  /** 写io总耗时 */
-  WriteCostTime?: number;
-  /** 数据库名字 */
-  DatabaseName?: string;
-  /** 脱敏后的慢SQL */
-  NormalQuery?: string;
-}
-
 /** 批量修改参数 */
 declare interface ParamEntry {
   /** 参数名 */
@@ -754,78 +720,6 @@ declare interface SecurityGroup {
   SecurityGroupDescription?: string;
 }
 
-/** serverless账号描述 */
-declare interface ServerlessDBAccount {
-  /** 用户名 */
-  DBUser?: string;
-  /** 密码 */
-  DBPassword?: string;
-  /** 连接数限制 */
-  DBConnLimit?: number;
-}
-
-/** serverless实例描述 */
-declare interface ServerlessDBInstance {
-  /** 实例id，唯一标识符 */
-  DBInstanceId?: string;
-  /** 实例名称 */
-  DBInstanceName?: string;
-  /** 实例状态 */
-  DBInstanceStatus?: string;
-  /** 地域 */
-  Region?: string;
-  /** 可用区 */
-  Zone?: string;
-  /** 项目id */
-  ProjectId?: number;
-  /** 私有网络Id */
-  VpcId?: string;
-  /** 子网id */
-  SubnetId?: string;
-  /** 字符集 */
-  DBCharset?: string;
-  /** 数据库版本 */
-  DBVersion?: string;
-  /** 创建时间 */
-  CreateTime?: string;
-  /** 实例网络信息 */
-  DBInstanceNetInfo?: ServerlessDBInstanceNetInfo[];
-  /** 实例账户信息 */
-  DBAccountSet?: ServerlessDBAccount[];
-  /** 实例下的db信息 */
-  DBDatabaseList?: string[];
-  /** 实例绑定的标签数组 */
-  TagList?: Tag[];
-  /** 数据库内核版本 */
-  DBKernelVersion?: string;
-  /** 数据库主要版本 */
-  DBMajorVersion?: string;
-}
-
-/** serverless实例网络信息描述 */
-declare interface ServerlessDBInstanceNetInfo {
-  /** 地址 */
-  Address?: string;
-  /** ip地址 */
-  Ip?: string;
-  /** 端口号 */
-  Port?: number;
-  /** 状态 */
-  Status?: string;
-  /** 网络类型 */
-  NetType?: string;
-}
-
-/** 慢查询详情 */
-declare interface SlowlogDetail {
-  /** 花费总时间 */
-  TotalTime?: number;
-  /** 调用总次数 */
-  TotalCalls?: number;
-  /** 脱敏后的慢SQL列表 */
-  NormalQueries?: NormalQueryItem[];
-}
-
 /** 描述某个地域下某个可用区的可售卖规格详细信息。 */
 declare interface SpecInfo {
   /** 地域英文编码，对应RegionSet的Region字段 */
@@ -951,17 +845,17 @@ declare interface Xlog {
 /** 描述可用区的编码和状态信息 */
 declare interface ZoneInfo {
   /** 该可用区的英文名称 */
-  Zone: string;
+  Zone?: string;
   /** 该可用区的中文名称 */
-  ZoneName: string;
+  ZoneName?: string;
   /** 该可用区对应的数字编号 */
-  ZoneId: number;
+  ZoneId?: number;
   /** 可用状态包含，UNAVAILABLE：不可用。AVAILABLE：可用。SELLOUT：售罄。SUPPORTMODIFYONLY：支持变配。 */
-  ZoneState: string;
+  ZoneState?: string;
   /** 该可用区是否支持Ipv6 */
-  ZoneSupportIpv6: number;
+  ZoneSupportIpv6?: number;
   /** 该可用区对应的备可用区集合 */
-  StandbyZoneSet: string[] | null;
+  StandbyZoneSet?: string[] | null;
 }
 
 declare interface AddDBInstanceToReadOnlyGroupRequest {
@@ -1342,32 +1236,6 @@ declare interface CreateReadOnlyGroupResponse {
   RequestId?: string;
 }
 
-declare interface CreateServerlessDBInstanceRequest {
-  /** 可用区ID。公测阶段仅支持ap-shanghai-2、ap-beijing-1,ap-guangzhou-2. */
-  Zone: string;
-  /** DB实例名称，同一个账号下该值必须唯一。 */
-  DBInstanceName: string;
-  /** PostgreSQL内核版本，目前只支持：10.4。 */
-  DBVersion: string;
-  /** PostgreSQL数据库字符集，目前支持UTF8。 */
-  DBCharset: string;
-  /** 项目ID。 */
-  ProjectId?: number;
-  /** 私有网络ID。 */
-  VpcId?: string;
-  /** 私有网络子网ID。 */
-  SubnetId?: string;
-  /** 实例需要绑定的标签数组信息 */
-  TagList?: Tag[];
-}
-
-declare interface CreateServerlessDBInstanceResponse {
-  /** 实例ID，该ID全局唯一，如：postgres-xxxxx */
-  DBInstanceId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DeleteAccountRequest {
   /** 实例ID。	可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取 */
   DBInstanceId: string;
@@ -1607,11 +1475,11 @@ declare interface DescribeBackupSummariesRequest {
   Limit?: number;
   /** 数据偏移量，从0开始。 */
   Offset?: number;
-  /** 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：db-instance-id：按照实例ID过滤，类型为string。db-instance-name：按照实例名过滤，类型为string。db-instance-ip：按照实例私有网络IP地址过滤，类型为string。 */
+  /** 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：db-instance-id：按照实例ID过滤，类型为string。db-instance-name：按照实例名过滤，支持模糊匹配，类型为string。db-instance-ip：按照实例私有网络IP地址过滤，类型为string。 */
   Filters?: Filter[];
-  /** 排序字段，支持TotalBackupSize,LogBackupSize,ManualBaseBackupSize,AutoBaseBackupSize。 */
+  /** 排序字段，支持TotalBackupSize - 备份总大小、LogBackupSize - 备份日志的大小、ManualBaseBackupSize - 手动备份数据大小、AutoBaseBackupSize - 自动备份数据大小。当不传入该参数时，默认不进行排序。 */
   OrderBy?: string;
-  /** 排序方式，包括升序：asc，降序：desc。 */
+  /** 排序方式，包括升序：asc，降序：desc。默认值：asc。 */
   OrderByType?: string;
 }
 
@@ -1830,34 +1698,6 @@ declare interface DescribeDBInstancesResponse {
   TotalCount?: number;
   /** 实例详细信息集合。 */
   DBInstanceSet?: DBInstance[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeDBSlowlogsRequest {
-  /** 实例ID，形如postgres-lnp6j617 */
-  DBInstanceId: string;
-  /** 查询起始时间，形如2018-06-10 17:06:38，起始时间不得小于7天以前 */
-  StartTime: string;
-  /** 查询结束时间，形如2018-06-10 17:06:38 */
-  EndTime: string;
-  /** 数据库名字 */
-  DatabaseName?: string;
-  /** 按照何种指标排序，取值为sum_calls或者sum_cost_time。sum_calls-总调用次数；sum_cost_time-总的花费时间 */
-  OrderBy?: string;
-  /** 排序规则。desc-降序；asc-升序 */
-  OrderByType?: string;
-  /** 分页返回结果，每页最大返回数量，取值为1-100，默认20 */
-  Limit?: number;
-  /** 分页返回结果，返回结果的第几页，从0开始计数 */
-  Offset?: number;
-}
-
-declare interface DescribeDBSlowlogsResponse {
-  /** 本次返回多少条数据 */
-  TotalCount?: number;
-  /** 慢查询日志详情 */
-  Detail?: SlowlogDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2142,28 +1982,6 @@ declare interface DescribeRegionsResponse {
   TotalCount?: number;
   /** 地域信息集合。 */
   RegionSet?: RegionInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeServerlessDBInstancesRequest {
-  /** 查询条件。按照一个或者多个过滤条件进行查询，目前支持的过滤条件类型（name字段指定）有： - db-instance-id：按照实例ID过滤，类型为string- db-instance-name：按照实例名过滤，类型为string- db-tag-key：按照实例的tag过滤，类型为stringvalue字段指定该类型过滤条件下具体要过滤的实例ID/实例名/实例tag-key。 */
-  Filter?: Filter[];
-  /** 查询个数 */
-  Limit?: number;
-  /** 偏移量 */
-  Offset?: number;
-  /** 排序指标，目前支持实例创建时间CreateTime */
-  OrderBy?: string;
-  /** 排序方式，包括升序、降序 */
-  OrderByType?: string;
-}
-
-declare interface DescribeServerlessDBInstancesResponse {
-  /** 查询结果数 */
-  TotalCount?: number;
-  /** 查询结果 */
-  DBInstanceSet?: ServerlessDBInstance[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2961,8 +2779,6 @@ declare interface Postgres {
   CreateReadOnlyGroup(data: CreateReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReadOnlyGroupResponse>;
   /** 创建RO组网络 {@link CreateReadOnlyGroupNetworkAccessRequest} {@link CreateReadOnlyGroupNetworkAccessResponse} */
   CreateReadOnlyGroupNetworkAccess(data: CreateReadOnlyGroupNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReadOnlyGroupNetworkAccessResponse>;
-  /** @deprecated 【废弃】创建ServerlessDB实例 {@link CreateServerlessDBInstanceRequest} {@link CreateServerlessDBInstanceResponse} */
-  CreateServerlessDBInstance(data: CreateServerlessDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServerlessDBInstanceResponse>;
   /** 删除数据库账号 {@link DeleteAccountRequest} {@link DeleteAccountResponse} */
   DeleteAccount(data: DeleteAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountResponse>;
   /** 删除备份计划 {@link DeleteBackupPlanRequest} {@link DeleteBackupPlanResponse} */
@@ -3017,8 +2833,6 @@ declare interface Postgres {
   DescribeDBInstanceSecurityGroups(data?: DescribeDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceSecurityGroupsResponse>;
   /** 查询实例列表 {@link DescribeDBInstancesRequest} {@link DescribeDBInstancesResponse} */
   DescribeDBInstances(data?: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
-  /** @deprecated 获取慢查询日志 （废弃） {@link DescribeDBSlowlogsRequest} {@link DescribeDBSlowlogsResponse} */
-  DescribeDBSlowlogs(data: DescribeDBSlowlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSlowlogsResponse>;
   /** 查询支持的数据库版本 {@link DescribeDBVersionsRequest} {@link DescribeDBVersionsResponse} */
   DescribeDBVersions(data?: DescribeDBVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBVersionsResponse>;
   /** 获取实例Xlog列表 {@link DescribeDBXlogsRequest} {@link DescribeDBXlogsResponse} */
@@ -3051,8 +2865,6 @@ declare interface Postgres {
   DescribeReadOnlyGroups(data?: DescribeReadOnlyGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReadOnlyGroupsResponse>;
   /** 查询售卖地域 {@link DescribeRegionsRequest} {@link DescribeRegionsResponse} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
-  /** @deprecated 【废弃】查询ServerlessDB实例列表 {@link DescribeServerlessDBInstancesRequest} {@link DescribeServerlessDBInstancesResponse} */
-  DescribeServerlessDBInstances(data?: DescribeServerlessDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessDBInstancesResponse>;
   /** 获取慢查询统计分析列表 {@link DescribeSlowQueryAnalysisRequest} {@link DescribeSlowQueryAnalysisResponse} */
   DescribeSlowQueryAnalysis(data: DescribeSlowQueryAnalysisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowQueryAnalysisResponse>;
   /** 获取慢查询列表 {@link DescribeSlowQueryListRequest} {@link DescribeSlowQueryListResponse} */

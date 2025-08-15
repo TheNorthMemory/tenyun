@@ -651,12 +651,12 @@ declare interface UserInfo {
 declare interface AssignProjectRequest {
   /** 实例 ID 列表，请登录[MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceIds: string[];
-  /** 项目ID，用户已创建项目的唯一ID,非自定义 */
+  /** 项目ID，用户已创建项目的唯一ID。请在控制台账号中心的项目管理中复制项目 ID。 */
   ProjectId: number;
 }
 
 declare interface AssignProjectResponse {
-  /** 返回的异步任务ID列表 */
+  /** 返回的异步任务ID列表。 */
   FlowIds?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

@@ -958,6 +958,8 @@ declare interface CompareResult {
   PassRows: number | null;
   /** 检测不通过行数 */
   TriggerRows: number | null;
+  /** 比较关系 */
+  ComputeExpression?: string | null;
 }
 
 /** 对比结果项 */
@@ -4622,6 +4624,28 @@ declare interface RuleExecResult {
   AlarmLevel?: number | null;
   /** 触发条件 */
   TriggerCondition?: string | null;
+  /** 任务名称 */
+  RuleGroupName?: string | null;
+  /** 数据源ID */
+  DatasourceId?: string | null;
+  /** 数据源名称 */
+  DatasourceName?: string | null;
+  /** 数据库名称 */
+  DatabaseName?: string | null;
+  /** 模式名称 */
+  SchemaName?: string | null;
+  /** 表名称 */
+  TableName?: string | null;
+  /** 判断是否屏蔽监控 0.屏蔽 1.不屏蔽 */
+  RuleGroupExist?: number | null;
+  /** 数据源类型 */
+  DatasourceType?: number | null;
+  /** 数据表id */
+  RuleGroupTableId?: number | null;
+  /** 监控方式 1.未配置, 2.关联生产调度, 3.离线周期检测 */
+  MonitorType?: number | null;
+  /** 执行结束时间 */
+  FinishTime?: string | null;
 }
 
 /** 规则执行结果详情 */

@@ -2577,7 +2577,7 @@ declare namespace V20180717 {
   interface EventContent {
     /** 事件句柄，调用方必须调用 ConfirmEvents 来确认消息已经收到，确认有效时间 30 秒。失效后，事件可重新被获取。 */
     EventHandle?: string;
-    /** 支持事件类型：NewFileUpload：视频上传完成；ProcedureStateChanged：任务流状态变更；FileDeleted：视频删除完成；RestoreMediaComplete：视频取回完成；PullComplete：视频转拉完成；EditMediaComplete：视频编辑完成；SplitMediaComplete：视频拆分完成；ComposeMediaComplete：制作媒体文件完成；WechatMiniProgramPublishComplete：微信小程序发布完成。RemoveWatermark：智能去除水印完成。RebuildMediaComplete：音画质重生完成事件（不推荐使用）。ReviewAudioVideoComplete：音视频审核完成；ExtractTraceWatermarkComplete：提取溯源水印完成；ExtractCopyRightWatermarkComplete：提取版权水印完成；DescribeFileAttributesComplete：获取文件属性完成；QualityInspectComplete：音画质检测完成；QualityEnhanceComplete：音画质重生任务完成；PersistenceComplete：剪辑固化完成；ComplexAdaptiveDynamicStreamingComplete：复杂自适应码流任务完成。兼容 2017 版的事件类型：TranscodeComplete：视频转码完成；ConcatComplete：视频拼接完成；ClipComplete：视频剪辑完成；CreateImageSpriteComplete：视频截取雪碧图完成；CreateSnapshotByTimeOffsetComplete：视频按时间点截图完成。 */
+    /** 支持事件类型：NewFileUpload：视频上传完成；ProcedureStateChanged：任务流状态变更；FileDeleted：视频删除完成；RestoreMediaComplete：视频取回完成；PullComplete：视频转拉完成；EditMediaComplete：视频编辑完成；SplitMediaComplete：视频拆分完成；ComposeMediaComplete：制作媒体文件完成；WechatMiniProgramPublishComplete：微信小程序发布完成。RemoveWatermark：智能去除水印完成。RebuildMediaComplete：音画质重生完成事件（不推荐使用）。ReviewAudioVideoComplete：音视频审核完成；ExtractTraceWatermarkComplete：提取溯源水印完成；ExtractCopyRightWatermarkComplete：提取版权水印完成；DescribeFileAttributesComplete：获取文件属性完成；QualityInspectComplete：音画质检测完成；QualityEnhanceComplete：音画质重生任务完成；PersistenceComplete：剪辑固化完成；ComplexAdaptiveDynamicStreamingComplete：复杂自适应码流任务完成。ProcessMediaByMPSComplete：MPS视频处理完成。兼容 2017 版的事件类型：TranscodeComplete：视频转码完成；ConcatComplete：视频拼接完成；ClipComplete：视频剪辑完成；CreateImageSpriteComplete：视频截取雪碧图完成；CreateSnapshotByTimeOffsetComplete：视频按时间点截图完成。 */
     EventType?: string;
     /** 视频上传完成事件，当事件类型为 NewFileUpload 时有效。 */
     FileUploadEvent?: FileUploadTask | null;
@@ -2633,6 +2633,8 @@ declare namespace V20180717 {
     PersistenceCompleteEvent?: PersistenceCompleteTask | null;
     /** 自适应码流任务信息，仅当 EventType 为ComplexAdaptiveDynamicStreamingComplete 时有效。 */
     ComplexAdaptiveDynamicStreamingCompleteEvent?: ComplexAdaptiveDynamicStreamingTask | null;
+    /** MPS 视频处理任务信息，仅当 EventType 为 ProcessMediaByMPSComplete 时有效。 */
+    ProcessMediaByMPSCompleteEvent?: ProcessMediaByMPS;
   }
 
   /** 提取版权水印任务。 */
@@ -3139,7 +3141,7 @@ declare namespace V20180717 {
 
   /** 用于描述 MPS 视频处理任务中的返回文件结果。 */
   interface MPSOutputFile {
-    /** 文件类型。用于标识 MPS 视频处理任务执行结果中的特定返回文件。取值：AiAnalysis.DeLogo.Video: 智能擦除任务中产生的擦除后视频文件；AiAnalysis.DeLogo.OriginSubtitle: 智能擦除任务中基于画面提取的字幕文件；AiAnalysis.DeLogo.TranslateSubtitle: 智能擦除任务中基于画面提取的字幕翻译文件。 */
+    /** 文件类型。用于标识 MPS 视频处理任务执行结果中的特定返回文件。取值：AiAnalysis.DeLogo.Video: 智能擦除任务中产生的擦除后视频文件，默认以原文件类型存储；AiAnalysis.DeLogo.OriginSubtitle: 智能擦除任务中基于画面提取的字幕文件；AiAnalysis.DeLogo.TranslateSubtitle: 智能擦除任务中基于画面提取的字幕翻译文件。MediaProcess.Transcode.Video: 音视频增强任务中增强后的音视频文件，默认以转码文件类型存储。 */
     FileType?: string;
     /** 存储形式。用于表示该结果文件的存储形式，取值有： Permanent：永久存储； Temporary：临时存储。 */
     StorageMode?: string;
@@ -3147,13 +3149,15 @@ declare namespace V20180717 {
     FileId?: string;
     /** 结果文件的可下载 Url。 */
     Url?: string;
+    /** 转码规格 ID。当 FileType 等于 MediaProcess.Transcode.Video时有效，取值为0表示原始文件。 */
+    Definition?: string;
     /** 过期时间。当 StorageMode 为 Temporary 时有效，表示 Url 的过期时间，单位为秒。 */
     ExpiredTime?: number;
   }
 
   /** MPS 具体子任务查询结果类型。 */
   interface MPSSubTaskResult {
-    /** 任务类型。MPS 的 WorkflowTask 结构中的具体子任务类型。取值：AiAnalysis.DeLogo：智能擦除任务。 */
+    /** 任务类型。MPS 的 WorkflowTask 结构中的具体子任务类型。取值：AiAnalysis.DeLogo：智能擦除任务。MediaProcess.Transcode：音视频增强任务。 */
     TaskType?: string;
     /** 任务状态。有 PROCESSING，SUCCESS 和 FAIL 三种。 */
     Status?: string;
@@ -3161,7 +3165,7 @@ declare namespace V20180717 {
     ErrCode?: string;
     /** 错误信息。 */
     Message?: string;
-    /** MPS 视频处理任务输入。该字段对应 MPS 任务返回中的 Input 结果，以 JSON 格式返回。 */
+    /** MPS 视频处理任务输入。该字段对应 MPS 任务返回中的 Input 结果，以 JSON 格式返回。示例：{"Definition": 24} */
     Input?: string;
     /** MPS 视频处理任务输出。 */
     Output?: MPSTaskOutput;
@@ -9686,8 +9690,10 @@ declare namespace V20180717 {
     FileId: string;
     /** 点播[应用](/document/product/266/14574) ID。 */
     SubAppId: number;
-    /** 该参数用于透传至媒体处理服务（MPS），以便从云点播侧发起 MPS 视频处理任务。视频处理参数详情请参考：[MPS 发起媒体处理](https://cloud.tencent.com/document/api/862/37578)。填写说明：1. 目前仅需要配置 MPS “发起媒体处理”接口中的 AiAnalysisTask 参数，其他参数无需填写，若包含其它参数，系统将自动忽略；2. 当前仅支持通过此方式发起智能擦除任务。若配置了其他任务类型的相关参数，系统将自动忽略这些参数。 */
+    /** 该参数用于透传至媒体处理服务（MPS），以便从云点播侧发起 MPS 视频处理任务。视频处理参数详情请参考：[MPS 发起媒体处理](https://cloud.tencent.com/document/api/862/37578)。填写说明：1. 目前仅需要配置 MPS “发起媒体处理”接口中任务配置相关的参数，如 AiAnalysisTask 与 MediaProcessTask，其他参数无需填写。若包含其它参数，系统将自动忽略；2. 当前仅支持通过此方式发起智能擦除及音视频增强任务。若配置了其他任务类型的相关参数，系统将自动忽略这些参数；3. 音视频增强任务目前不支持使用预置模板发起，可通过 [CreateMPSTemplate](document/product/266/57382) 接口创建自定义模板。示例：{"AiAnalysisTask":{"Definition":25}} */
     MPSProcessMediaParams: string;
+    /** 保留字段，特殊用途时使用。 */
+    ExtInfo?: string;
   }
 
   interface ProcessMediaByMPSResponse {

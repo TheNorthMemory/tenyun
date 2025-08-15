@@ -3008,6 +3008,10 @@ declare interface HighlightSegmentItem {
   BeginTime?: string;
   /** 直播切片对应直播结束时间点，采用 ISO 日期格式。 */
   EndTime?: string;
+  /** 集锦标题。 */
+  Title?: string;
+  /** 集锦概要。 */
+  Summary?: string;
 }
 
 /** 图片框选区域信息 */
@@ -3708,6 +3712,10 @@ declare interface MediaAiAnalysisHighlightItem {
   Duration?: number;
   /** 智能精彩集锦子片段列表。 */
   SegmentSet?: HighlightSegmentItem[];
+  /** 智能精彩集锦地址。 */
+  HighlightUrl?: string | null;
+  /** 智能精彩集锦封面地址。 */
+  CovImgUrl?: string | null;
 }
 
 /** 智能标签结果信息 */

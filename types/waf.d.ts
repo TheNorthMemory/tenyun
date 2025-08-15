@@ -1896,6 +1896,54 @@ declare interface NetworkConfig {
   VipStatus?: number;
 }
 
+/** Owasp规则 */
+declare interface OwaspRule {
+  /** 规则ID */
+  RuleId?: number;
+  /** 规则描述 */
+  Description?: string;
+  /** 规则开关，0：关闭、1：开启、2：只观察 */
+  Status?: number;
+  /** 规则的防护等级，100：宽松、200：正常、300：严格、400：超严格 */
+  Level?: number;
+  /** 威胁等级，0：未知，100：低危，200：中危，300：高危，400：危急 */
+  VulLevel?: number;
+  /** CVE ID */
+  CveID?: string;
+  /** 规则所属的类型ID */
+  TypeId?: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  ModifyTime?: string;
+  /** 是否被锁定 */
+  Locked?: number;
+  /** 修改原因0：无(兼容记录为空)1：业务自身特性误报避免2：规则误报上报3：核心业务规则灰度4：其它 */
+  Reason?: number;
+}
+
+/** Owasp规则类型 */
+declare interface OwaspRuleType {
+  /** 类型ID */
+  TypeId: number;
+  /** 类型名称 */
+  TypeName: string;
+  /** 类型描述 */
+  Description?: string;
+  /** 类型分类 */
+  Classification?: string;
+  /** 规则类型的防护模式，0：观察、1：拦截 */
+  Action?: number;
+  /** 规则类型的防护等级，100：宽松、200：正常、300：严格、400：超严格 */
+  Level?: number;
+  /** 规则类型的开关状态，0：关闭、1：开启 */
+  Status?: number;
+  /** 规则类型下的所有规则总是 */
+  TotalRule?: number;
+  /** 规则类型下的启用的规则总数 */
+  ActiveRule?: number;
+}
+
 /** 规则引擎白名单 */
 declare interface OwaspWhiteRule {
   /** 白名单的规则ID */
@@ -3210,6 +3258,18 @@ declare interface DeleteIpAccessControlV2Response {
   RequestId?: string;
 }
 
+declare interface DeleteOwaspRuleStatusRequest {
+  /** 域名 */
+  Domain: string;
+  /** 规则ID列表 */
+  RuleIDs: string[];
+}
+
+declare interface DeleteOwaspRuleStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteOwaspWhiteRuleRequest {
   /** 规则白名单ID列表 */
   Ids: number[];
@@ -4242,6 +4302,50 @@ declare interface DescribeObjectsRequest {
 declare interface DescribeObjectsResponse {
   /** 对象列表 */
   ClbObjects?: ClbObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeOwaspRuleTypesRequest {
+  /** 查询域名 */
+  Domain: string;
+  /** 分页页数，默认为0 */
+  Offset?: number;
+  /** 每页容量，默认为10 */
+  Limit?: number;
+  /** 筛选条件，支持 RuleId：规则ID、CveID：CVE编号、Desc：描述 */
+  Filters?: FiltersItemNew[];
+}
+
+declare interface DescribeOwaspRuleTypesResponse {
+  /** 规则类型数量 */
+  Total?: number;
+  /** 规则类型列表及信息 */
+  List?: OwaspRuleType[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeOwaspRulesRequest {
+  /** 需要查询的域名 */
+  Domain: string;
+  /** 分页页数，默认为0 */
+  Offset?: number;
+  /** 每页容量，默认为10 */
+  Limit?: number;
+  /** 排序字段，支持 RuleId, UpdateTime */
+  By?: string;
+  /** 排序方式，支持asc、desc */
+  Order?: string;
+  /** 筛选条件，支持 RuleId：规则ID、TypeId：规则类型、Desc：规则描述 、CveID：CVE编号、Status：规则状态、VulLevel：威胁等级 */
+  Filters?: FiltersItemNew[];
+}
+
+declare interface DescribeOwaspRulesResponse {
+  /** 规则总数 */
+  Total?: number;
+  /** 规则列表 */
+  List?: OwaspRule[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5502,6 +5606,68 @@ declare interface ModifyObjectResponse {
   RequestId?: string;
 }
 
+declare interface ModifyOwaspRuleStatusRequest {
+  /** 域名 */
+  Domain: string;
+  /** 规则开关，0：关闭、1：开启、2：只观察 */
+  RuleStatus: number;
+  /** 是否全选 */
+  SelectAll: boolean;
+  /** 规则ID列表 */
+  RuleIDs?: string[];
+  /** 如果反转需要传入类型 */
+  TypeId?: number;
+  /** 修改原因 0：无(兼容记录为空) 1：业务自身特性误报避免 2：规则误报上报 3：核心业务规则灰度 4：其它 */
+  Reason?: number;
+}
+
+declare interface ModifyOwaspRuleStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyOwaspRuleTypeActionRequest {
+  /** 域名 */
+  Domain: string;
+  /** 规则类型ID列表 */
+  TypeIDs: string[];
+  /** 规则类型的防护模式，0：观察、1：拦截 */
+  RuleTypeAction: number;
+}
+
+declare interface ModifyOwaspRuleTypeActionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyOwaspRuleTypeLevelRequest {
+  /** 域名 */
+  Domain: string;
+  /** 规则类型ID列表 */
+  TypeIDs: string[];
+  /** 规则的防护等级，100：宽松、200：正常、300：严格、400：超严格 */
+  RuleTypeLevel: number;
+}
+
+declare interface ModifyOwaspRuleTypeLevelResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyOwaspRuleTypeStatusRequest {
+  /** 域名 */
+  Domain: string;
+  /** 规则类型ID列表 */
+  TypeIDs: string[];
+  /** 规则类型的开关状态，0：关闭、1：开启 */
+  RuleTypeStatus: number;
+}
+
+declare interface ModifyOwaspRuleTypeStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyOwaspWhiteRuleRequest {
   /** 规则ID */
   RuleId: number;
@@ -6113,6 +6279,8 @@ declare interface Waf {
   DeleteIpAccessControl(data: DeleteIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIpAccessControlResponse>;
   /** IP黑白名单删除接口 {@link DeleteIpAccessControlV2Request} {@link DeleteIpAccessControlV2Response} */
   DeleteIpAccessControlV2(data: DeleteIpAccessControlV2Request, config?: AxiosRequestConfig): AxiosPromise<DeleteIpAccessControlV2Response>;
+  /** 删除用户自定义规则状态 {@link DeleteOwaspRuleStatusRequest} {@link DeleteOwaspRuleStatusResponse} */
+  DeleteOwaspRuleStatus(data: DeleteOwaspRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOwaspRuleStatusResponse>;
   /** 删除用户规则引擎白名单 {@link DeleteOwaspWhiteRuleRequest} {@link DeleteOwaspWhiteRuleResponse} */
   DeleteOwaspWhiteRule(data: DeleteOwaspWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOwaspWhiteRuleResponse>;
   /** 删除CC攻击的session设置 {@link DeleteSessionRequest} {@link DeleteSessionResponse} */
@@ -6207,6 +6375,10 @@ declare interface Waf {
   DescribeModuleStatus(data: DescribeModuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModuleStatusResponse>;
   /** 查看防护对象列表 {@link DescribeObjectsRequest} {@link DescribeObjectsResponse} */
   DescribeObjects(data?: DescribeObjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeObjectsResponse>;
+  /** 查询规则引擎规则类型列表 {@link DescribeOwaspRuleTypesRequest} {@link DescribeOwaspRuleTypesResponse} */
+  DescribeOwaspRuleTypes(data: DescribeOwaspRuleTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOwaspRuleTypesResponse>;
+  /** 查询规则引擎的规则列表 {@link DescribeOwaspRulesRequest} {@link DescribeOwaspRulesResponse} */
+  DescribeOwaspRules(data: DescribeOwaspRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOwaspRulesResponse>;
   /** 获取用户规则引擎白名单 {@link DescribeOwaspWhiteRulesRequest} {@link DescribeOwaspWhiteRulesResponse} */
   DescribeOwaspWhiteRules(data: DescribeOwaspWhiteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOwaspWhiteRulesResponse>;
   /** 查询业务和攻击概要趋势 {@link DescribePeakPointsRequest} {@link DescribePeakPointsResponse} */
@@ -6345,6 +6517,14 @@ declare interface Waf {
   ModifyModuleStatus(data: ModifyModuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModuleStatusResponse>;
   /** 修改防护对象 {@link ModifyObjectRequest} {@link ModifyObjectResponse} */
   ModifyObject(data: ModifyObjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyObjectResponse>;
+  /** 更新规则的开关 {@link ModifyOwaspRuleStatusRequest} {@link ModifyOwaspRuleStatusResponse} */
+  ModifyOwaspRuleStatus(data: ModifyOwaspRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOwaspRuleStatusResponse>;
+  /** 更新规则类型的防护模式 {@link ModifyOwaspRuleTypeActionRequest} {@link ModifyOwaspRuleTypeActionResponse} */
+  ModifyOwaspRuleTypeAction(data: ModifyOwaspRuleTypeActionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOwaspRuleTypeActionResponse>;
+  /** 更新规则类型的防护等级 {@link ModifyOwaspRuleTypeLevelRequest} {@link ModifyOwaspRuleTypeLevelResponse} */
+  ModifyOwaspRuleTypeLevel(data: ModifyOwaspRuleTypeLevelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOwaspRuleTypeLevelResponse>;
+  /** 更新规则类型的开关 {@link ModifyOwaspRuleTypeStatusRequest} {@link ModifyOwaspRuleTypeStatusResponse} */
+  ModifyOwaspRuleTypeStatus(data: ModifyOwaspRuleTypeStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOwaspRuleTypeStatusResponse>;
   /** 编辑规则引擎白名单 {@link ModifyOwaspWhiteRuleRequest} {@link ModifyOwaspWhiteRuleResponse} */
   ModifyOwaspWhiteRule(data: ModifyOwaspWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOwaspWhiteRuleResponse>;
   /** 开启、关闭WAF开关 {@link ModifyProtectionStatusRequest} {@link ModifyProtectionStatusResponse} */

@@ -36,7 +36,7 @@ declare interface AlarmInfo {
   AlarmTargets?: AlarmTargetInfo[];
   /** 监控任务运行时间点。 */
   MonitorTime?: MonitorTime;
-  /** 单触发条件。与MultiConditions参数互斥。 */
+  /** 是否触发告警的单触发条件。与MultiConditions参数互斥。 */
   Condition?: string;
   /** 持续周期。持续满足触发条件TriggerCount个周期后，再进行告警；最小值为1，最大值为10。 */
   TriggerCount?: number;
@@ -48,9 +48,9 @@ declare interface AlarmInfo {
   Status?: boolean;
   /** 告警策略ID。 */
   AlarmId?: string;
-  /** 创建时间。 */
+  /** 创建时间。格式： YYYY-MM-DD HH:MM:SS */
   CreateTime?: string;
-  /** 最近更新时间。 */
+  /** 最近更新时间。格式： YYYY-MM-DD HH:MM:SS */
   UpdateTime?: string;
   /** 自定义通知模板 */
   MessageTemplate?: string | null;
@@ -96,9 +96,9 @@ declare interface AlarmNotice {
   JumpDomain?: string;
   /** 投递相关信息。 */
   AlarmNoticeDeliverConfig?: AlarmNoticeDeliverConfig | null;
-  /** 创建时间。 */
+  /** 创建时间。格式： YYYY-MM-DD HH:MM:SS */
   CreateTime?: string;
-  /** 最近更新时间。 */
+  /** 最近更新时间。格式： YYYY-MM-DD HH:MM:SS */
   UpdateTime?: string;
 }
 
@@ -140,7 +140,7 @@ declare interface AlarmShieldInfo {
 
 /** 告警对象 */
 declare interface AlarmTarget {
-  /** 日志主题ID。 */
+  /** 日志主题ID。-通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题ID */
   TopicId: string;
   /** 查询语句。 */
   Query: string;
@@ -150,7 +150,7 @@ declare interface AlarmTarget {
   StartTimeOffset: number;
   /** 查询范围终止时间相对于告警执行时间的偏移，单位为分钟，取值为非正，须大于StartTimeOffset，最大值为0，最小值为-1440。 */
   EndTimeOffset: number;
-  /** 日志集ID。 */
+  /** 日志集ID。通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志集ID */
   LogsetId: string;
   /** 检索语法规则，默认值为0。0：Lucene语法，1：CQL语法。详细说明参见检索条件语法规则 */
   SyntaxRule?: number;
@@ -206,15 +206,15 @@ declare interface AlertHistoryRecord {
   Trigger: string;
   /** 持续周期，持续满足触发条件TriggerCount个周期后，再进行告警 */
   TriggerCount: number;
-  /** 告警通知发送频率，单位为分钟 */
+  /** 告警通知发送频率，单位为分钟(min) */
   AlarmPeriod: number;
   /** 通知渠道组 */
   Notices: AlertHistoryNotice[];
-  /** 告警持续时间，单位为分钟 */
+  /** 告警持续时间，单位为分钟(min) */
   Duration: number;
   /** 告警状态，0代表未恢复，1代表已恢复，2代表已失效 */
   Status: number;
-  /** 告警发生时间，毫秒级Unix时间戳 */
+  /** 告警发生时间，毫秒级Unix时间戳(ms) */
   CreateTime: number;
   /** 告警分组触发时对应的分组信息 */
   GroupTriggerCondition?: GroupTriggerConditionInfo[];
@@ -228,7 +228,7 @@ declare interface AlertHistoryRecord {
 declare interface AnalysisDimensional {
   /** 分析名称 */
   Name: string;
-  /** 分析类型：query，field ，original */
+  /** 分析类型：query(自定义检索分析)，field(字段TOP5及占比统计) ，original(相关原始日志) */
   Type: string;
   /** 分析内容 */
   Content: string;
@@ -710,7 +710,7 @@ declare interface DataTransformTaskInfo {
 declare interface DeliverConfig {
   /** 地域信息。示例： ap-guangzhou 广州地域；ap-nanjing 南京地域。详细信息请查看官网：https://cloud.tencent.com/document/product/614/18940 */
   Region: string;
-  /** 日志主题ID。 */
+  /** 日志主题ID。-通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题ID */
   TopicId: string;
   /** 投递数据范围。0: 全部日志, 包括告警策略日常周期执行的所有日志，也包括告警策略变更产生的日志，默认值1:仅告警触发及恢复日志 */
   Scope: number;
@@ -1190,7 +1190,7 @@ declare interface MonitorTime {
   Type: string;
   /** 执行的周期，或者定制执行的时间节点。单位为分钟，取值范围为1~1440。当type为`Period`,`Fixed`时，time字段生效。 */
   Time?: number;
-  /** 执行的周期cron表达式。示例：`"1 * * * *"` 从左到右每个field的含义 Minutes field, Hours field,Day of month field,Month field,Day of week field， 不支持秒级别。当type为`Cron`时，CronExpression字段生效。 */
+  /** 执行的周期cron表达式。示例：`"1 * * * *"` 从左到右每个field的含义 Minutes field(分钟), Hours field(小时),Day of month field(日期),Month field(月份),Day of week field(星期)， 不支持秒级别。当type为`Cron`时，CronExpression字段生效。 */
   CronExpression?: string;
 }
 
@@ -1246,9 +1246,9 @@ declare interface NoticeContentTemplate {
   Uin?: number;
   /** 创建/修改者子账号。 */
   SubUin?: number;
-  /** 创建时间 秒级时间戳。 */
+  /** 创建时间 秒级(s)时间戳。 */
   CreateTime?: number;
-  /** 更新时间 秒级时间戳。 */
+  /** 更新时间 秒级(s)时间戳。 */
   UpdateTime?: number;
 }
 
@@ -1260,7 +1260,7 @@ declare interface NoticeReceiver {
   ReceiverIds: number[];
   /** 通知接收渠道。- Email - 邮件- Sms - 短信- WeChat - 微信- Phone - 电话 */
   ReceiverChannels: string[];
-  /** 通知内容模板ID，使用Default-zh引用默认模板（中文），使用Default-en引用DefaultTemplate(English)。 */
+  /** 通知内容模板ID，使用Default-zh引用默认模板（中文），使用Default-en引用DefaultTemplate(English)。-通过[获取通知内容模板](https://cloud.tencent.com/document/product/614/111714)获取通知内容模板ID */
   NoticeContentId?: string;
   /** 允许接收信息的开始时间。格式：`15:04:05`。必填 */
   StartTime?: string;
@@ -1608,11 +1608,11 @@ declare interface ValueInfo {
 
 /** 回调地址 */
 declare interface WebCallback {
-  /** 回调的类型。可选值：- Http- WeCom- DingTalk- Lark */
+  /** 回调的类型。可选值：- Http(自定义接口回调)- WeCom(企业微信)- DingTalk(钉钉)- Lark(飞书) */
   CallbackType: string;
   /** 回调地址，最大支持1024个字节。也可使用WebCallbackId引用集成配置中的URL，此时该字段请填写为空字符串。 */
   Url: string;
-  /** 集成配置ID。 */
+  /** 集成配置ID。-通过[获取告警渠道回调配置列表](https://cloud.tencent.com/document/product/614/115229)获取集成配置ID */
   WebCallbackId?: string;
   /** 回调方法。可选值：- POST（默认值）- PUT注意：- 参数CallbackType为Http时为必选，其它回调方式无需填写。 */
   Method?: string;
@@ -1650,14 +1650,14 @@ declare interface WebCallbackInfo {
   Uin?: number;
   /** 子账号。 */
   SubUin?: number;
-  /** 创建时间。秒级时间戳 */
+  /** 创建时间。秒(s)级时间戳 */
   CreateTime?: number;
-  /** 更新时间。秒级时间戳 */
+  /** 更新时间。秒(s)级时间戳 */
   UpdateTime?: number;
 }
 
 declare interface AddMachineGroupInfoRequest {
-  /** 机器组ID */
+  /** 机器组Id- 通过[获取机器组列表](https://cloud.tencent.com/document/product/614/56438)获取机器组Id。 */
   GroupId: string;
   /** 机器组类型目前type支持 ip 和 label */
   MachineGroupType: MachineGroupTypeInfo;
@@ -1729,7 +1729,7 @@ declare interface CloseKafkaConsumerResponse {
 }
 
 declare interface CreateAlarmNoticeRequest {
-  /** 通知渠道组名称。 */
+  /** 通知渠道组名称。最大支持255个字节。 不支持 '|'。 */
   Name: string;
   /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的通知渠道组。最大支持50个标签键值对，并且不能有重复的键值对。 */
   Tags?: Tag[];
@@ -1759,7 +1759,7 @@ declare interface CreateAlarmNoticeResponse {
 }
 
 declare interface CreateAlarmRequest {
-  /** 告警策略名称 */
+  /** 告警策略名称。最大支持255个字节。 不支持 '|'。 */
   Name: string;
   /** 监控对象列表。 */
   AlarmTargets: AlarmTarget[];
@@ -1769,9 +1769,9 @@ declare interface CreateAlarmRequest {
   TriggerCount: number;
   /** 告警重复的周期，单位是分钟。取值范围是0~1440。 */
   AlarmPeriod: number;
-  /** 关联的告警通知模板列表。 */
+  /** 关联的告警通知渠道组列表。-通过[获取通知渠道组列表](https://cloud.tencent.com/document/product/614/56462)获取关联的告警通知渠道组列表 */
   AlarmNoticeIds: string[];
-  /** 触发条件 注意: - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
+  /** 告警发送通知的触发条件 注意: - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
   Condition?: string;
   /** 告警级别0:警告(Warn); 1:提醒(Info); 2:紧急 (Critical)。注意: - 不填则默认为0。- Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
   AlarmLevel?: number;
@@ -1807,11 +1807,11 @@ declare interface CreateAlarmResponse {
 }
 
 declare interface CreateAlarmShieldRequest {
-  /** 通知渠道组id。 */
+  /** 通知渠道组id。-通过[获取通知渠道组列表](https://cloud.tencent.com/document/product/614/56462)获取通知渠道组id */
   AlarmNoticeId: string;
-  /** 屏蔽开始时间（秒级时间戳）。 */
+  /** 屏蔽规则开始时间，秒级(s)时间戳。 */
   StartTime: number;
-  /** 屏蔽结束时间（秒级时间戳）。 */
+  /** 屏蔽规则结束时间，秒级(s)时间戳。结束时间需要大于当前时间 */
   EndTime: number;
   /** 屏蔽类型。1：屏蔽所有通知，2：按照Rule参数屏蔽匹配规则的通知。 */
   Type: number;
@@ -2163,7 +2163,7 @@ declare interface CreateLogsetResponse {
 }
 
 declare interface CreateMachineGroupRequest {
-  /** 机器组名字，不能重复 */
+  /** 机器组名字。输入限制：- 最大支持255个字符，不能为空字符串- 不能包含字符'|' */
   GroupName: string;
   /** 创建机器组类型。取值如下：- Type：ip，Values中为ip字符串列表创建机器组- Type：label，Values中为标签字符串列表创建机器组 */
   MachineGroupType: MachineGroupTypeInfo;
@@ -2171,13 +2171,13 @@ declare interface CreateMachineGroupRequest {
   Tags?: Tag[];
   /** 是否开启机器组自动更新。默认false */
   AutoUpdate?: boolean;
-  /** 升级开始时间，建议业务低峰期升级LogListener */
+  /** 升级开始时间，建议业务低峰期升级LogListener时间格式：HH:mm:ss */
   UpdateStartTime?: string;
-  /** 升级结束时间，建议业务低峰期升级LogListener */
+  /** 升级结束时间，建议业务低峰期升级LogListener时间格式：HH:mm:ss */
   UpdateEndTime?: string;
   /** 是否开启服务日志，用于记录因Loglistener 服务自身产生的log，开启后，会创建内部日志集cls_service_logging和日志主题loglistener_status,loglistener_alarm,loglistener_business，不产生计费。默认false */
   ServiceLogging?: boolean;
-  /** 机器组中机器离线清理时间。单位：天 */
+  /** 机器组中机器离线清理时间。单位：天- 大于0时生效。 */
   DelayCleanupTime?: number;
   /** 机器组元数据信息列表 */
   MetaTags?: MetaTagInfo[];
@@ -2193,7 +2193,7 @@ declare interface CreateMachineGroupResponse {
 }
 
 declare interface CreateNoticeContentRequest {
-  /** 模板名称。 */
+  /** 模板名称。最大支持255个字节 */
   Name: string;
   /** 模板内容语言。0：中文1：英文 */
   Type?: number;
@@ -2319,7 +2319,7 @@ declare interface CreateTopicResponse {
 }
 
 declare interface CreateWebCallbackRequest {
-  /** 通知内容名称。 */
+  /** 通知内容名称。最大支持255个字节 */
   Name: string;
   /** 渠道类型。WeCom:企业微信;DingTalk:钉钉;Lark:飞书;Http:自定义回调。 */
   Type: string;
@@ -2327,7 +2327,7 @@ declare interface CreateWebCallbackRequest {
   Webhook: string;
   /** 请求方式。 支持POST、PUT。当Type为Http时，必填。 */
   Method?: string;
-  /** 秘钥。 */
+  /** 秘钥。最大支持1024个字节 */
   Key?: string;
 }
 
@@ -2339,7 +2339,7 @@ declare interface CreateWebCallbackResponse {
 }
 
 declare interface DeleteAlarmNoticeRequest {
-  /** 通知渠道组ID */
+  /** 通知渠道组ID。-通过[获取通知渠道组列表](https://cloud.tencent.com/document/api/614/56462)获取通知渠道组ID */
   AlarmNoticeId: string;
 }
 
@@ -2537,7 +2537,7 @@ declare interface DeleteMachineGroupResponse {
 }
 
 declare interface DeleteNoticeContentRequest {
-  /** 通知内容模板ID */
+  /** 通知内容模板ID。-通过[获取通知内容模板](https://cloud.tencent.com/document/api/614/111714)获取通知内容模版ID */
   NoticeContentId: string;
 }
 
@@ -2579,7 +2579,7 @@ declare interface DeleteTopicResponse {
 }
 
 declare interface DeleteWebCallbackRequest {
-  /** 告警渠道回调配置ID。 */
+  /** 告警渠道回调配置ID。-通过[获取告警渠道回调配置列表](https://cloud.tencent.com/document/api/614/115229)获取告警渠道回调配置ID */
   WebCallbackId: string;
 }
 
@@ -2589,7 +2589,7 @@ declare interface DeleteWebCallbackResponse {
 }
 
 declare interface DescribeAlarmNoticesRequest {
-  /** name按照【通知渠道组名称】进行过滤。类型：String必选：否 alarmNoticeId按照【通知渠道组ID】进行过滤。类型：String必选：否 uid按照【接收用户ID】进行过滤。类型：String必选：否 groupId按照【接收用户组ID】进行过滤。类型：String必选：否 deliverFlag按照【投递状态】进行过滤。类型：String必选：否可选值： "1":未启用, "2": 已启用, "3":投递异常每次请求的Filters的上限为10，Filter.Values的上限为5。 */
+  /** name按照【通知渠道组名称】进行过滤。类型：String示例："Filters":[{"Key":"name","Values":["test-notice"]}]必选：否 alarmNoticeId按照【通知渠道组ID】进行过滤。类型：String示例："Filters": [{Key: "alarmNoticeId", Values: ["notice-5281f1d2-6275-4e56-9ec3-a1eb19d8bc2f"]}]必选：否 uid按照【接收用户ID】进行过滤。类型：String示例："Filters": [{Key: "uid", Values: ["1137546"]}]必选：否 groupId按照【接收用户组ID】进行过滤。类型：String示例："Filters": [{Key: "groupId", Values: ["344098"]}]必选：否 deliverFlag按照【投递状态】进行过滤。类型：String必选：否可选值： "1":未启用, "2": 已启用, "3":投递异常示例："Filters":[{"Key":"deliverFlag","Values":["2"]}]每次请求的Filters的上限为10，Filter.Values的上限为5。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0。 */
   Offset?: number;
@@ -2627,7 +2627,7 @@ declare interface DescribeAlarmShieldsResponse {
 }
 
 declare interface DescribeAlarmsRequest {
-  /** name- 按照【告警策略名称】进行过滤。- 类型：String- 必选：否alarmId- 按照【告警策略ID】进行过滤。- 类型：String- 必选：否topicId- 按照【监控对象的日志主题ID】进行过滤。- 类型：String- 必选：否enable- 按照【启用状态】进行过滤。- 类型：String- 备注：enable参数值范围: 1, t, T, TRUE, true, True, 0, f, F, FALSE, false, False。 其它值将返回参数错误信息.- 必选：否每次请求的Filters的上限为10，Filter.Values的上限为5。 */
+  /** name- 按照【告警策略名称】进行过滤。- 类型：String- 必选：否- 示例：test-alarmalarmId- 按照【告警策略ID】进行过滤。- 类型：String- 必选：否- 示例：alarm-b60cf034-c3d6-4b01-xxxx-4e877ebb4751topicId- 按照【监控对象的日志主题ID】进行过滤。- 类型：String- 必选：否- 示例：6766f83d-659e-xxxx-a8f7-9104a1012743enable- 按照【启用状态】进行过滤。- 类型：String- 备注：enable参数值范围: 1, t, T, TRUE, true, True, 0, f, F, FALSE, false, False。 其它值将返回参数错误信息.- 必选：否- 示例：true每次请求的Filters的上限为10，Filter.Values的上限为5。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0。 */
   Offset?: number;
@@ -2645,9 +2645,9 @@ declare interface DescribeAlarmsResponse {
 }
 
 declare interface DescribeAlertRecordHistoryRequest {
-  /** 查询时间范围启始时间，毫秒级unix时间戳 */
+  /** 查询时间范围启始时间，毫秒级unix时间戳(ms) */
   From: number;
-  /** 查询时间范围结束时间，毫秒级unix时间戳 */
+  /** 查询时间范围结束时间，毫秒级unix时间戳(ms) */
   To: number;
   /** 分页的偏移量，默认值为0。 */
   Offset: number;
@@ -3159,7 +3159,7 @@ declare interface DescribeTopicsResponse {
 }
 
 declare interface DescribeWebCallbacksRequest {
-  /** - name按照【告警渠道回调配置名称】进行过滤。类型：String必选：否- webCallbackId按照【告警渠道回调配置ID】进行过滤。类型：String必选：否- type按照【告警渠道回调配置渠道类型】进行过滤。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为100。 */
+  /** - name按照【告警渠道回调配置名称】进行过滤。类型：String必选：否- webCallbackId按照【告警渠道回调配置ID】进行过滤。类型：String必选：否- type按照【告警渠道回调配置渠道类型】进行过滤。类型：String必选：否枚举值：WeCom，DingTalk，Lark，Http每次请求的Filters的上限为10，Filter.Values的上限为100。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0。 */
   Offset?: number;
@@ -3229,7 +3229,7 @@ declare interface MergePartitionResponse {
 }
 
 declare interface ModifyAlarmNoticeRequest {
-  /** 通知渠道组ID。 */
+  /** 通知渠道组ID。-通过[获取通知内容模板](https://cloud.tencent.com/document/api/614/111714)获取通知渠道组ID */
   AlarmNoticeId: string;
   /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的通知渠道组。最大支持10个标签键值对，并且不能有重复的键值对。 */
   Tags?: Tag[];
@@ -3259,13 +3259,13 @@ declare interface ModifyAlarmNoticeResponse {
 }
 
 declare interface ModifyAlarmRequest {
-  /** 告警策略ID。 */
+  /** 告警策略ID。-通过[获取告警策略列表](https://cloud.tencent.com/document/product/614/56461)获取告警策略ID */
   AlarmId: string;
-  /** 告警策略名称 */
+  /** 告警策略名称。最大支持255个字节，不支持 '|'。 */
   Name?: string;
   /** 监控任务运行时间点。 */
   MonitorTime?: MonitorTime;
-  /** 触发条件。注意: - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
+  /** 告警信息发送的触发条件。注意: - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
   Condition?: string;
   /** 告警级别。0:警告(Warn);1:提醒(Info);2:紧急 (Critical)注意: - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
   AlarmLevel?: number;
@@ -3275,7 +3275,7 @@ declare interface ModifyAlarmRequest {
   TriggerCount?: number;
   /** 告警重复的周期。单位是分钟。取值范围是0~1440。 */
   AlarmPeriod?: number;
-  /** 关联的告警通知模板列表。 */
+  /** 关联的告警通知渠道列表。-通过[获取通知渠道组列表](https://cloud.tencent.com/document/product/614/56462)获取告警通知渠道列表 */
   AlarmNoticeIds?: string[];
   /** 监控对象列表。 */
   AlarmTargets?: AlarmTarget[];
@@ -3307,13 +3307,13 @@ declare interface ModifyAlarmResponse {
 }
 
 declare interface ModifyAlarmShieldRequest {
-  /** 屏蔽规则ID。 */
+  /** 屏蔽规则ID。-通过[获取告警屏蔽配置规则](https://cloud.tencent.com/document/api/614/103650)获取屏蔽规则ID */
   TaskId: string;
-  /** 通知渠道组id。 */
+  /** 通知渠道组id。-通过[获取告警屏蔽配置规则](https://cloud.tencent.com/document/api/614/103650)获取通知渠道组id */
   AlarmNoticeId: string;
-  /** 屏蔽开始时间（秒级时间戳）。 */
+  /** 屏蔽开始时间，秒级(s)时间戳。 */
   StartTime?: number;
-  /** 屏蔽结束时间（秒级时间戳）。 */
+  /** 屏蔽结束时间，秒级(s)时间戳。 */
   EndTime?: number;
   /** 屏蔽类型。1：屏蔽所有通知，2：按照Rule参数屏蔽匹配规则的通知。 */
   Type?: number;
@@ -3321,7 +3321,7 @@ declare interface ModifyAlarmShieldRequest {
   Rule?: string;
   /** 屏蔽原因。 */
   Reason?: string;
-  /** 规则状态。只有规则状态为生效中（status:1）时，才能将其修改为已失效（status:2）。 */
+  /** 规则状态。只有规则状态为生效中（status:1）时，才能将其修改为已失效（status:2）。枚举：0（未生效），1（生效中），2（已失效） */
   Status?: number;
 }
 
@@ -3627,7 +3627,7 @@ declare interface ModifyMachineGroupResponse {
 }
 
 declare interface ModifyNoticeContentRequest {
-  /** 通知内容模板ID。 */
+  /** 通知内容模板ID。-通过[获取通知内容模板](https://cloud.tencent.com/document/api/614/111714)获取通知内容模版ID */
   NoticeContentId: string;
   /** 通知内容模板名称。 */
   Name?: string;
@@ -3659,7 +3659,7 @@ declare interface ModifyScheduledSqlRequest {
   ProcessTimeWindow?: string;
   /** 执行延迟(秒)，0~120秒，默认60秒 */
   ProcessDelay?: number;
-  /** 源topicId的地域信息,支持地域见(https://cloud.tencent.com/document/api/614/56474) */
+  /** 源topicId的地域信息,支持地域见 [地域列表](https://cloud.tencent.com/document/api/614/56474) 文档 */
   SrcTopicRegion?: string;
   /** 任务名称，0~255字符 */
   Name?: string;
@@ -3741,9 +3741,9 @@ declare interface ModifyTopicResponse {
 }
 
 declare interface ModifyWebCallbackRequest {
-  /** 告警渠道回调配置ID。 */
+  /** 告警渠道回调配置ID。-通过[获取告警渠道回调配置列表](https://cloud.tencent.com/document/api/614/115229)获取告警渠道回调配置ID */
   WebCallbackId: string;
-  /** 告警渠道回调配置名称。 */
+  /** 告警渠道回调配置名称。最大支持255个字节 */
   Name?: string;
   /** 渠道类型WeCom:企业微信;DingTalk:钉钉;Lark:飞书;Http:自定义回调; */
   Type?: string;
@@ -3751,7 +3751,7 @@ declare interface ModifyWebCallbackRequest {
   Webhook?: string;
   /** 请求方式。支持POST、PUT。注意：当Type为Http时，必填。 */
   Method?: string;
-  /** 秘钥信息。 */
+  /** 秘钥信息。最大支持1024个字节 */
   Key?: string;
 }
 

@@ -1125,6 +1125,8 @@ declare namespace V20180525 {
     CiliumMode?: string;
     /** 集群使用的runtime类型，包括"docker"和"containerd"两种类型，默认为"docker" */
     ContainerRuntime?: string;
+    /** 是否启用 DataPlaneV2（cilium替代kube-proxy） */
+    DataPlaneV2?: boolean;
     /** 是否启用集群删除保护 */
     DeletionProtection?: boolean;
     /** 是否开节点podCIDR大小的自定义模式 */
@@ -1141,7 +1143,7 @@ declare namespace V20180525 {
     IsNonStaticIpMode?: boolean;
     /** 集群的网络代理模型，目前tke集群支持的网络代理模式有三种：iptables,ipvs,ipvs-bpf，此参数仅在使用ipvs-bpf模式时使用，三种网络模式的参数设置关系如下：iptables模式：IPVS和KubeProxyMode都不设置ipvs模式: 设置IPVS为true, KubeProxyMode不设置ipvs-bpf模式: 设置KubeProxyMode为kube-proxy-bpf使用ipvs-bpf的网络模式需要满足以下条件：1. 集群版本必须为1.14及以上；2. 系统镜像必须是: Tencent Linux 2.4； */
     KubeProxyMode?: string;
-    /** 集群网络类型（包括GR(全局路由)和VPC-CNI两种模式，默认为GR。 */
+    /** 集群网络类型。包括GR（全局路由）和VPC-CNI两种模式，默认为GR。 */
     NetworkType?: string;
     /** 集群中节点NodeName类型（包括 hostname,lan-ip两种形式，默认为lan-ip。如果开启了hostname模式，创建节点时需要设置HostName参数，并且InstanceName需要和HostName一致） */
     NodeNameType?: string;

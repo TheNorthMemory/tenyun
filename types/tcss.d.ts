@@ -610,6 +610,8 @@ declare interface ClusterInfoItem {
   AccessedStatus?: string;
   /** 接入失败原因 */
   AccessedSubStatus?: string;
+  /** 接入/卸载失败原因 */
+  AccessedErrorReason?: string;
   /** 节点总数 */
   NodeCount?: number;
   /** 离线节点数 */
@@ -5880,6 +5882,8 @@ declare interface DescribeAssetHostDetailResponse {
   ClusterName?: string;
   /** 集群接入状态 */
   ClusterAccessedStatus?: string;
+  /** 资产同步时间 */
+  AssetSyncTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6910,6 +6914,8 @@ declare interface DescribeClusterDetailResponse {
   MasterIps?: string;
   /** 所有者名称 */
   OwnerName?: string;
+  /** 检查失败原因 */
+  CheckFailReason?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

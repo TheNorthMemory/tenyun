@@ -1386,9 +1386,9 @@ declare namespace V20180724 {
   /** DescribeMetricData接口出参 */
   interface MetricData {
     /** 指标名 */
-    MetricName: string;
+    MetricName?: string;
     /** 监控数据点 */
-    Points: MetricDataPoint[];
+    Points?: MetricDataPoint[];
   }
 
   /** DescribeMetricData出参 */

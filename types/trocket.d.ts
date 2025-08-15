@@ -464,6 +464,22 @@ declare interface PriceTag {
   Step?: number | null;
 }
 
+/** 生产者信息 */
+declare interface ProducerInfo {
+  /** 客户端ID */
+  ClientId?: string | null;
+  /** 客户端IP */
+  ClientIp?: string | null;
+  /** 客户端语言 - JAVA((byte) 0)- CPP((byte) 1) - DOTNET((byte) 2) - PYTHON((byte) 3)- DELPHI((byte) 4)- ERLANG((byte) 5)- RUBY((byte) 6)- OTHER((byte) 7)- HTTP((byte) 8)- GO((byte) 9)- PHP((byte) 10)- OMS((byte) 11) */
+  Language?: string | null;
+  /** 客户端版本 */
+  Version?: string | null;
+  /** 最后生产时间，**Unix时间戳（秒）** */
+  LastUpdateTimestamp?: number | null;
+  /** 生产者客户端协议类型，枚举如下：- grpc：GRpc协议- remoting：Remoting协议- http：HTTP协议 */
+  ChannelProtocol?: string | null;
+}
+
 /** 商品售卖信息 */
 declare interface ProductSKU {
   /** 产品类型，EXPERIMENT，体验版BASIC，基础版PRO，专业版PLATINUM，铂金版 */
@@ -1710,6 +1726,28 @@ declare interface DescribeMigrationTaskListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeProducerListRequest {
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。 */
+  InstanceId: string;
+  /** 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031) 或控制台获得。 */
+  Topic: string;
+  /** 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。 */
+  Filters?: Filter[];
+  /** 查询结果限制数量，默认20。 */
+  Limit?: number;
+  /** 查询起始位置，默认为0。 */
+  Offset?: number;
+}
+
+declare interface DescribeProducerListResponse {
+  /** 查询总数 */
+  TotalCount?: number;
+  /** 生产者信息列表 */
+  ProducerList?: ProducerInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeProductSKUsRequest {
 }
 
@@ -2239,6 +2277,8 @@ declare interface Trocket {
   DescribeMigratingTopicStats(data: DescribeMigratingTopicStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigratingTopicStatsResponse>;
   /** 获取数据迁移任务列表 {@link DescribeMigrationTaskListRequest} {@link DescribeMigrationTaskListResponse} */
   DescribeMigrationTaskList(data?: DescribeMigrationTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrationTaskListResponse>;
+  /** 查询生产者信息列表 {@link DescribeProducerListRequest} {@link DescribeProducerListResponse} */
+  DescribeProducerList(data: DescribeProducerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProducerListResponse>;
   /** 查询产品售卖规格 {@link DescribeProductSKUsRequest} {@link DescribeProductSKUsResponse} */
   DescribeProductSKUs(data?: DescribeProductSKUsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductSKUsResponse>;
   /** 查询角色列表 {@link DescribeRoleListRequest} {@link DescribeRoleListResponse} */

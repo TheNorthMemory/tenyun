@@ -539,7 +539,7 @@ declare interface ChangeInstanceMasterRequest {
 
 declare interface ChangeInstanceMasterResponse {
   /** 异步任务 ID。 */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -651,13 +651,13 @@ declare interface DescribeAutoBackupConfigRequest {
 
 declare interface DescribeAutoBackupConfigResponse {
   /** 自动备份的周期。包括：Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday。 */
-  WeekDays: string[];
+  WeekDays?: string[];
   /** 自动备份时间段。 */
-  TimePeriod: string;
+  TimePeriod?: string;
   /** 全量备份文件保存天数。 */
-  BackupStorageDays: number;
+  BackupStorageDays?: number;
   /** 增量备份文件保存天数。 */
-  BinlogStorageDays: number;
+  BinlogStorageDays?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -741,9 +741,9 @@ declare interface DescribeInstanceBinlogsRequest {
 
 declare interface DescribeInstanceBinlogsResponse {
   /** 备份总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例的备份信息数组 */
-  BackupSet: BinlogInfo[];
+  BackupSet?: BinlogInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -801,9 +801,9 @@ declare interface DescribeInstanceParamRecordsRequest {
 
 declare interface DescribeInstanceParamRecordsResponse {
   /** 修改历史记录总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 修改历史记录信息。 */
-  InstanceParamHistory: InstanceParamHistory[];
+  InstanceParamHistory?: InstanceParamHistory[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -835,9 +835,9 @@ declare interface DescribeInstanceReplicasRequest {
 
 declare interface DescribeInstanceReplicasResponse {
   /** 实例所有节点数量，包括主节点、副本节点。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例节点信息。 */
-  ReplicaGroups: ReplicaGroup[];
+  ReplicaGroups?: ReplicaGroup[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -961,9 +961,9 @@ declare interface DescribeProxySlowLogRequest {
 
 declare interface DescribeProxySlowLogResponse {
   /** 慢查询总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 慢查询详情。 */
-  InstanceProxySlowLogDetail: InstanceProxySlowlogDetail[];
+  InstanceProxySlowLogDetail?: InstanceProxySlowlogDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1035,9 +1035,9 @@ declare interface DescribeTendisSlowLogRequest {
 
 declare interface DescribeTendisSlowLogResponse {
   /** 慢查询详情。 */
-  TendisSlowLogDetail: TendisSlowLogDetail[];
+  TendisSlowLogDetail?: TendisSlowLogDetail[];
   /** 慢查询总数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1091,13 +1091,13 @@ declare interface ModifyAutoBackupConfigRequest {
 
 declare interface ModifyAutoBackupConfigResponse {
   /** 增量备份文件保存天数。 */
-  BackupStorageDays: number;
+  BackupStorageDays?: number;
   /** 全量备份文件保存天数。 */
-  BinlogStorageDays: number;
+  BinlogStorageDays?: number;
   /** 备份时间段。 */
-  TimePeriod: string;
+  TimePeriod?: string;
   /** 备份周期。Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday。 */
-  WeekDays: string[];
+  WeekDays?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1113,7 +1113,7 @@ declare interface ModifyConnectionConfigRequest {
 
 declare interface ModifyConnectionConfigResponse {
   /** 任务 ID。 */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1177,7 +1177,7 @@ declare interface ModifyMaintenanceWindowRequest {
 
 declare interface ModifyMaintenanceWindowResponse {
   /** 执行结果。success：修改成功。 failed：修改失败。 */
-  Status: string;
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1237,7 +1237,7 @@ declare interface ResetPasswordRequest {
 
 declare interface ResetPasswordResponse {
   /** 任务 ID。说明：修改密码时的任务ID，如果切换免密访问或者非免密码实例，则无需关注此返回值。 */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

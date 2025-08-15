@@ -1242,6 +1242,44 @@ declare interface TargetGroupBackend {
   ZoneId?: number;
 }
 
+/** 目标组健康检查详情 */
+declare interface TargetGroupHealthCheck {
+  /** 是否开启健康检查。 */
+  HealthSwitch: boolean;
+  /** 健康检查方式， 其中仅V2新版目标组类型支持该参数， 支持取值 TCP | HTTP | HTTPS | PING | CUSTOM，其中:当目标组后端转发协议为TCP时， 健康检查方式支持 TCP/HTTP/CUSTOM， 默认为TCP。当目标组后端转发协议为UDP时， 健康检查方式支持 PING/CUSTOM，默认为PING。当目标组后端转发协议为HTTP时， 健康检查方式支持 HTTP/TCP， 默认为HTTP。当目标组后端转发协议为HTTPS时， 健康检查方式支持 HTTPS/TCP， 默认为HTTPS。当目标组后端转发协议为GRPC时， 健康检查方式支持GRPC/TCP， 默认为GRPC。 */
+  Protocol?: string;
+  /** 自定义探测相关参数。健康检查端口，默认为后端服务的端口，除非您希望指定特定端口，否则建议留空。（仅适用于TCP/UDP目标组）。 */
+  Port?: number;
+  /** 健康检查超时时间。 默认为2秒。 可配置范围：2 - 30秒。 */
+  Timeout?: number;
+  /** 检测间隔时间。 默认为5秒。 可配置范围：2 - 300秒。 */
+  GapTime?: number;
+  /** 检测健康阈值。 默认为3秒。 可配置范围：2 - 10次。 */
+  GoodLimit?: number;
+  /** 检测不健康阈值。 默认为3秒。 可配置范围：2 - 10次。 */
+  BadLimit?: number;
+  /** 目标组下的所有rs的探测包是否开启巨帧。默认开启。仅GWLB类型目标组支持该参数。 */
+  JumboFrame?: boolean;
+  /** 健康检查状态码（仅适用于HTTP/HTTPS目标组、TCP目标组的HTTP健康检查方式）。可选值：1~31，默认 31，其中： 1 表示探测后返回值 1xx 代表健康。2 表示返回 2xx 代表健康。4 表示返回 3xx 代表健康。8 表示返回 4xx 代表健康。16 表示返回 5xx 代表健康。若希望多种返回码都可代表健康，则将相应的值相加。 */
+  HttpCode?: number | null;
+  /** 健康检查域名， 其中：仅适用于HTTP/HTTPS目标组和TCP目标组的HTTP健康检查方式。针对HTTP/HTTPS目标组，当使用HTTP健康检查方式时，该参数为必填项。 */
+  HttpCheckDomain?: string | null;
+  /** 健康检查路径（仅适用于HTTP/HTTPS转发规则、TCP监听器的HTTP健康检查方式）。 */
+  HttpCheckPath?: string | null;
+  /** 健康检查方法（仅适用于HTTP/HTTPS转发规则、TCP监听器的HTTP健康检查方式），默认值：HEAD，可选值HEAD或GET。 */
+  HttpCheckMethod?: string | null;
+  /** 健康检查的输入格式，健康检查方式取CUSTOM时，必填此字段，可取值：HEX或TEXT，其中：TEXT：文本格式。HEX：十六进制格式， SendContext和RecvContext的字符只能在0123456789ABCDEF中选取且长度必须是偶数位。仅适用于TCP/UDP目标组。 */
+  ContextType?: string | null;
+  /** 自定义探测相关参数。健康检查协议CheckType的值取CUSTOM时，必填此字段，代表健康检查发送的请求内容，只允许ASCII可见字符，最大长度限制500。（仅适用于TCP/UDP目标组）。 */
+  SendContext?: string | null;
+  /** 自定义探测相关参数。健康检查协议CheckType的值取CUSTOM时，必填此字段，代表健康检查返回的结果，只允许ASCII可见字符，最大长度限制500。（仅适用于TCP/UDP目标组）。 */
+  RecvContext?: string | null;
+  /** HTTP版本, 其中：健康检查协议CheckType的值取HTTP时，必传此字段。支持配置选项：HTTP/1.0, HTTP/1.1。仅适用于TCP目标组。 */
+  HttpVersion?: string | null;
+  /** GRPC健康检查状态码（仅适用于后端转发协议为GRPC的目标组）。默认值为 12，可输入值为数值、多个数值、或者范围，例如 20 或 20,25 或 0-99。 */
+  ExtendedCode?: string | null;
+}
+
 /** 目标组信息 */
 declare interface TargetGroupInfo {
   /** 目标组ID */
@@ -1260,6 +1298,10 @@ declare interface TargetGroupInfo {
   AssociatedRule?: AssociationItem[] | null;
   /** 目标组后端转发协议, 仅v2新版目标组返回有效值。 */
   Protocol?: string | null;
+  /** 调度算法，仅后端转发协议为(HTTP、HTTPS、GRPC)的目标组返回有效值， 可选值：WRR:按权重轮询。LEAST_CONN:最小连接数。IP_HASH:按IP哈希。 */
+  ScheduleAlgorithm?: string | null;
+  /** 健康检查详情。 */
+  HealthCheck?: TargetGroupHealthCheck | null;
   /** 目标组类型，当前支持v1(旧版目标组), v2(新版目标组)。默认为v1旧版目标组。 */
   TargetGroupType?: string;
   /** 目标组已关联的规则数。 */
@@ -1705,7 +1747,7 @@ declare interface CreateRuleResponse {
 declare interface CreateTargetGroupRequest {
   /** 目标组名称，限定50个字符 */
   TargetGroupName?: string;
-  /** 目标组的vpcid属性，不填则使用默认vpc */
+  /** 目标组的vpcId属性，不填则使用默认vpc。 */
   VpcId?: string;
   /** 目标组的默认端口， 后续添加服务器时可使用该默认端口。全监听目标组不支持此参数，非全监听目标组Port和TargetGroupInstances.N中的port二者必填其一。 */
   Port?: number;
@@ -1715,9 +1757,13 @@ declare interface CreateTargetGroupRequest {
   Type?: string;
   /** 目标组后端转发协议。v2新版目标组该项必填。目前支持TCP、UDP、HTTP、HTTPS、GRPC。 */
   Protocol?: string;
+  /** 健康检查。 */
+  HealthCheck?: TargetGroupHealthCheck;
+  /** 调度算法，仅V2新版目标组，且后端转发协议为(HTTP|HTTPS|GRPC)时该参数有效。可选值：WRR:按权重轮询。LEAST_CONN:最小连接数。IP_HASH:按IP哈希。默认为 WRR。 */
+  ScheduleAlgorithm?: string;
   /** 标签。 */
   Tags?: TagInfo[];
-  /** 后端服务默认权重。 取值范围[0, 100] 设置该值后，添加后端服务到目标组时， 若后端服务不单独设置权重， 则使用这里的默认权重。 v1 目标组类型不支持设置 Weight 参数。 */
+  /** 后端服务默认权重, 其中：取值范围[0, 100]设置该值后，添加后端服务到目标组时， 若后端服务不单独设置权重， 则使用这里的默认权重。 v1 目标组类型不支持设置 Weight 参数。 */
   Weight?: number;
   /** 全监听目标组标识，true表示是全监听目标组，false表示不是全监听目标组。仅V2新版类型目标组支持该参数。 */
   FullListenSwitch?: boolean;
@@ -2821,7 +2867,11 @@ declare interface ModifyTargetGroupAttributeRequest {
   TargetGroupName?: string;
   /** 目标组的新默认端口。全监听目标组不支持此参数。 */
   Port?: number;
-  /** 后端服务默认权重。 取值范围[0, 100] 设置该值后，添加后端服务到目标组时， 若后端服务不单独设置权重， 则使用这里的默认权重。 v1目标组类型不支持设置Weight参数。 */
+  /** 调度算法，仅V2新版目标组，且后端转发协议为(HTTP|HTTPS|GRPC)时该参数有效。可选值：WRR:按权重轮询。LEAST_CONN:最小连接数。IP_HASH:按IP哈希。默认为 WRR。 */
+  ScheduleAlgorithm?: string;
+  /** 健康检查详情。 */
+  HealthCheck?: TargetGroupHealthCheck;
+  /** 后端服务默认权重, 其中：取值范围[0, 100]设置该值后，添加后端服务到目标组时， 若后端服务不单独设置权重， 则使用这里的默认权重。 v1目标组类型不支持设置Weight参数。 */
   Weight?: number;
   /** 是否开启长连接，此参数仅适用于HTTP/HTTPS目标组，true:关闭；false:开启， 默认关闭。 */
   KeepaliveEnable?: boolean;

@@ -390,7 +390,7 @@ declare interface RoomInfo {
   VideoOrientation?: number;
   /** 开启课后评分。 0：不开启(默认) 1：开启 */
   IsGradingRequiredPostClass?: number;
-  /** 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展)注：大班课的布局(layout)只有三分屏 */
+  /** 课堂类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (预留参数，暂未开放); 3 圆桌会议 注：大班课的布局(layout)只有三分屏 */
   RoomType?: number;
   /** 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟 */
   EndDelayTime?: number;
@@ -402,7 +402,7 @@ declare interface RoomInfo {
   EnableAutoStart?: number;
   /** 录制文件背景图片，支持png、jpg、jpeg、bmp格式，暂不支持透明通道 */
   RecordBackground?: string;
-  /** 录制自定义场景，仅recordlayout=9的时候此参数有效,数据内容为用户自定义场景参数，数据格式为json键值对方式，其中键值对的value为string类型。 */
+  /** 录制自定义场景。注意：仅recordlayout=9的时候此参数有效。需注意各类参数配置正确能够生效。不然会造成录制失败，失败后无法补救。数据内容为用户自定义场景参数，数据格式为json键值对方式，其中键值对的value为string类型。自定义场景参数的含义。如下： scene：自定义js/css对应的场景值。如scene=recordScene，会加载 recordScene 场景对应的 js/css，这样就可以自定义录制页面的元素。 lng：录制页面对应的语种。如lng=en，则录制界面为en。（枚举值：en,zh，zh-TW，jp，ar，kr，vi） customToken：录制页面中涉及客户自己的服务需要鉴权时进行配置。一般情况下，无需配置。 */
   RecordScene?: string;
   /** 录制自定义语言，仅recordlayout=9的时候此参数有效 */
   RecordLang?: string;
@@ -412,6 +412,8 @@ declare interface RoomInfo {
   WhiteBoardSnapshotMode?: number;
   /** 字幕转写功能开关：0关闭，1开启，默认关闭 */
   SubtitlesTranscription?: number;
+  /** 嘉宾Id列表。当圆桌会议模式（RoomType==3）时生效 */
+  Guests?: string[];
 }
 
 /** 房间列表 */
@@ -812,8 +814,10 @@ declare interface CreateRoomRequest {
   VideoOrientation?: number;
   /** 开启课后评分。 0：不开启(默认) 1：开启 */
   IsGradingRequiredPostClass?: number;
-  /** 课堂类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (预留参数，暂未开放)注：大班课的布局(layout)只有三分屏 */
+  /** 课堂类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (预留参数，暂未开放); 3 圆桌会议 注：大班课的布局(layout)只有三分屏 */
   RoomType?: number;
+  /** 嘉宾Id列表。当圆桌会议模式（RoomType==3）时生效 */
+  Guests?: string[];
   /** 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟 */
   EndDelayTime?: number;
   /** 直播类型：0 常规（默认）1 伪直播 2 RTMP推流直播 */
@@ -824,7 +828,7 @@ declare interface CreateRoomRequest {
   EnableAutoStart?: number;
   /** 录制文件背景图片，支持png、jpg、jpeg、bmp格式，暂不支持透明通道 */
   RecordBackground?: string;
-  /** 录制自定义场景。注意：仅recordlayout=9的时候此参数有效。需注意各类参数配置正确能够生效。不然会造成录制失败，失败后无法补救。数据内容为用户自定义场景参数，数据格式为json键值对方式，其中键值对的value为string类型。 */
+  /** 录制自定义场景。注意：仅recordlayout=9的时候此参数有效。需注意各类参数配置正确能够生效。不然会造成录制失败，失败后无法补救。数据内容为用户自定义场景参数，数据格式为json键值对方式，其中键值对的value为string类型。自定义场景参数的含义。如下： scene：自定义js/css对应的场景值。如scene=recordScene，会加载 recordScene 场景对应的 js/css，这样就可以自定义录制页面的元素。 lng：录制页面对应的语种。如lng=en，则录制界面为en。（枚举值：en,zh，zh-TW，jp，ar，kr，vi） customToken：录制页面中涉及客户自己的服务需要鉴权时进行配置。一般情况下，无需配置。 */
   RecordScene?: string;
   /** 录制自定义语言，仅recordlayout=9的时候此参数有效 */
   RecordLang?: string;
@@ -1349,7 +1353,7 @@ declare interface DescribeRoomResponse {
   VideoOrientation?: number;
   /** 该课堂是否开启了课后评分功能。0：未开启 1：开启 */
   IsGradingRequiredPostClass?: number;
-  /** 课堂类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展)注：大班课的布局(layout)只有三分屏 */
+  /** 课堂类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (预留参数，暂未开放); 3 圆桌会议 注：大班课的布局(layout)只有三分屏 */
   RoomType?: number;
   /** 录制时长 */
   VideoDuration?: number;
@@ -1365,7 +1369,7 @@ declare interface DescribeRoomResponse {
   RecordBackground?: string;
   /** RTMP推流链接 */
   RTMPStreamingURL?: string;
-  /** 录制自定义场景，仅recordlayout=9的时候此参数有效 */
+  /** 录制自定义场景。注意：仅recordlayout=9的时候此参数有效。需注意各类参数配置正确能够生效。不然会造成录制失败，失败后无法补救。数据内容为用户自定义场景参数，数据格式为json键值对方式，其中键值对的value为string类型。自定义场景参数的含义。如下： scene：自定义js/css对应的场景值。如scene=recordScene，会加载 recordScene 场景对应的 js/css，这样就可以自定义录制页面的元素。 lng：录制页面对应的语种。如lng=en，则录制界面为en。（枚举值：en,zh，zh-TW，jp，ar，kr，vi） customToken：录制页面中涉及客户自己的服务需要鉴权时进行配置。一般情况下，无需配置。 */
   RecordScene?: string;
   /** 录制自定义语言，仅recordlayout=9的时候此参数有效 */
   RecordLang?: string;
@@ -1377,6 +1381,8 @@ declare interface DescribeRoomResponse {
   WhiteBoardSnapshotMode?: number;
   /** 字幕转写功能开关：0关闭，1开启，默认关闭 */
   SubtitlesTranscription?: number;
+  /** 嘉宾Id列表。当圆桌会议模式（RoomType==3）时生效 */
+  Guests?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

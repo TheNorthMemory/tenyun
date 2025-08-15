@@ -1551,7 +1551,7 @@ declare interface DescribeCallDetailInfoRequest {
   SdkAppId: number;
   /** 需查询的用户数组，默认不填返回6个用户。 */
   UserIds?: string[];
-  /** 需查询的指标，不填则只返回用户列表，填all则返回所有指标。appCpu：APP CPU使用率；sysCpu：系统 CPU使用率；aBit：上/下行音频码率；单位：bpsaBlock：音频卡顿时长；单位：msbigvBit：上/下行视频码率；单位：bpsbigvCapFps：视频采集帧率；bigvEncFps：视频发送帧率；bigvDecFps：渲染帧率；bigvBlock：视频卡顿时长；单位：msaLoss：上/下行音频丢包率；bigvLoss：上/下行视频丢包率；bigvWidth：上/下行分辨率宽；bigvHeight：上/下行分辨率高；aCapEnergy：音频采集能量；aPlayEnergy：音频播放能量；rtt：SDK到云端的往返延时；单位: ms */
+  /** 需查询的指标，不填则只返回用户列表，填all则返回所有指标。appCpu：APP CPU使用率；sysCpu：系统 CPU使用率；aBit：上/下行音频码率；单位：bpsaBlock：音频卡顿时长；单位：msbigvBit：上/下行视频码率；单位：bpsbigvCapFps：视频采集帧率；bigvEncFps：视频发送帧率；bigvDecFps：渲染帧率；bigvBlock：视频卡顿时长；单位：msaLoss：上/下行音频丢包率；bigvLoss：上/下行视频丢包率；bigvWidth：上/下行分辨率宽；bigvHeight：上/下行分辨率高；aCapEnergy：音频采集能量；aPlayEnergy：音频播放能量；rtt：SDK到云端的往返延时；单位: msbigvRecFps: 云端送达帧率； */
   DataType?: string[];
   /** 当前页数，默认为0，注意：PageNumber和PageSize 其中一个不填均默认返回6条数据。 */
   PageNumber?: number;
@@ -2231,7 +2231,7 @@ declare interface StartAIConversationRequest {
   RoomIdType?: number;
   /** 语音识别配置。 */
   STTConfig?: STTConfig;
-  /** LLM配置。需符合openai规范，为JSON字符串，示例如下： { &emsp; "LLMType": "大模型类型", // String 必填，如："openai" &emsp; "Model": "您的模型名称", // String 必填，指定使用的模型 "APIKey": "您的LLM API密钥", // String 必填 &emsp; "APIUrl": "https://api.xxx.com/chat/completions", // String 必填，LLM API访问的URL &emsp; "Streaming": true // Boolean 非必填，指定是否使用流式传输 &emsp;} */
+  /** LLM配置。需符合openai规范，为JSON字符串，示例如下： { &emsp; "LLMType": "大模型类型", // String 必填，如："openai" &emsp; "Model": "您的模型名称", // String 必填，指定使用的模型 "APIKey": "您的LLM API密钥", // String 必填 &emsp; "APIUrl": "https://api.xxx.com/chat/completions", // String 必填，LLM API访问的URL &emsp; "History": 10, // Integer 选填，设置 LLM 的上下文轮次，默认值为0，最大值50 &emsp; "HistoryMode": 1, // Integer 选填，1表示LLM上下文中的内容会和播放音频做同步，没有播放的音频对应的文本不会出现在上下文中。0表示不会做同步，默认值为0 &emsp; "Streaming": true // Boolean 非必填，指定是否使用流式传输 &emsp;} */
   LLMConfig?: string;
   /** TTS配置，为JSON字符串，腾讯云TTS示例如下： { &emsp; "AppId": 您的应用ID, // Integer 必填 &emsp; "TTSType": "TTS类型", // String TTS类型, 固定为"tencent" &emsp; "SecretId": "您的密钥ID", // String 必填 &emsp; "SecretKey": "您的密钥Key", // String 必填 &emsp; "VoiceType": 101001, // Integer 必填，音色 ID，包括标准音色与精品音色，精品音色拟真度更高，价格不同于标准音色，请参见语音合成计费概述。完整的音色 ID 列表请参见语音合成音色列表。 &emsp; "Speed": 1.25, // Integer 非必填，语速，范围：[-2，6]，分别对应不同语速： -2: 代表0.6倍 -1: 代表0.8倍 0: 代表1.0倍（默认） 1: 代表1.2倍 2: 代表1.5倍 6: 代表2.5倍 如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。 参数值与实际语速转换，可参考 语速转换 &emsp; "Volume": 5, // Integer 非必填，音量大小，范围：[0，10]，分别对应11个等级的音量，默认值为0，代表正常音量。 &emsp; "EmotionCategory": "angry", // String 非必填 控制合成音频的情感，仅支持多情感音色使用。取值: neutral(中性)、sad(悲伤)、happy(高兴)、angry(生气)、fear(恐惧)、news(新闻)、story(故事)、radio(广播)、poetry(诗歌)、call(客服)、sajiao(撒娇)、disgusted(厌恶)、amaze(震惊)、peaceful(平静)、exciting(兴奋)、aojiao(傲娇)、jieshuo(解说)。 &emsp; "EmotionIntensity": 150 // Integer 非必填 控制合成音频情感程度，取值范围为 [50,200]，默认为 100；只有 EmotionCategory 不为空时生效。 &emsp; } */
   TTSConfig?: string;
@@ -2625,7 +2625,7 @@ declare interface VoiceCloneRequest {
   SdkAppId: number;
   /** TTS的API密钥 */
   APIKey: string;
-  /** 声音克隆的名字 */
+  /** 声音克隆的名称, 只允许使用数字、字母、下划线，不能超过36位 */
   VoiceName: string;
   /** 声音克隆的参考音频，必须为16k单声道的wav的base64字符串， 长度在5秒～12秒之间 */
   PromptAudio: string;
