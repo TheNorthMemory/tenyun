@@ -3177,6 +3177,14 @@ declare namespace V20180717 {
     OutputFiles?: MPSOutputFile[];
   }
 
+  /** MPS 任务模板详情。 */
+  interface MPSTemplate {
+    /** MPS 模板的类型。取值：Transcode: 转码模板。 */
+    TaskType?: string;
+    /** MPS 任务模板详情内容。示例：{"Definition":24214,"Name":"test","Comment":"","Type":"Preset","EnhanceConfig":{"VideoEnhance":{"FrameRate":{"Switch":"ON","Fps":50},"SuperResolution":{"Switch":"ON","Type":"lq"}}}} */
+    MPSTemplateInfo?: string;
+  }
+
   /** 转自适应码流信息 */
   interface MediaAdaptiveDynamicStreamingInfo {
     /** 转自适应码流信息数组。 */
@@ -6801,6 +6809,22 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface CreateMPSTemplateRequest {
+    /** 点播[应用](/document/product/266/14574) ID。 */
+    SubAppId: number;
+    /** 需要创建的 MPS 模板的类型。取值：Transcode: 创建转码模板，目前仅支持创建增强模板。 */
+    TemplateType: string;
+    /** MPS 创建模板参数。该参数用于透传至媒体处理服务（MPS），从云点播侧创建用户自定义的 MPS 任务模板。目前仅支持通过此方式创建以下任务类型的模板：1. 音视频增强：仅支持填写“[创建转码模板](https://cloud.tencent.com/document/product/862/37605)”接口中的 Container 、Name、Comment、RemoveVideo、RemoveAudio、VideoTemplate、AudioTemplate 和 EnhanceConfig 几个参数。其中 EnhanceConfig 此处必填。目前模板中仅支持配置以上参数，其他参数无需填写。若包含其它参数，系统将自动忽略。以上透传参数以JSON形式表示。 */
+    MPSCreateTemplateParams: string;
+  }
+
+  interface CreateMPSTemplateResponse {
+    /** MPS 任务模板唯一标识。该模板独立于直接在 MPS 服务中创建的模板。 */
+    Definition?: number;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface CreatePersonSampleRequest {
     /** 素材名称，长度限制：20 个字符。 */
     Name: string;
@@ -7313,6 +7337,20 @@ declare namespace V20180717 {
   }
 
   interface DeleteJustInTimeTranscodeTemplateResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DeleteMPSTemplateRequest {
+    /** 点播[应用](/document/product/266/14574) ID。 */
+    SubAppId: number;
+    /** 需要删除的 MPS 模板的类型。取值：Transcode: 删除转码模板。 */
+    TemplateType: string;
+    /** MPS 任务模板唯一标识。 */
+    Definition: number;
+  }
+
+  interface DeleteMPSTemplateResponse {
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -8057,6 +8095,24 @@ declare namespace V20180717 {
   interface DescribeLicenseUsageDataResponse {
     /** License 查询次数统计数据，展示所查询 License 次数的明细数据。 */
     LicenseUsageDataSet?: LicenseUsageDataItem[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeMPSTemplatesRequest {
+    /** 点播[应用](/document/product/266/14574) ID。 */
+    SubAppId: number;
+    /** MPS 模板类型。根据需要查询的 MPS 模板的类型对结果进行过滤。取值：Transcode: 查询转码模板列表。 */
+    TemplateType: string;
+    /** MPS 查询模板参数。该参数用于透传至媒体处理服务（MPS），从云点播侧查询 MPS 任务模板列表。目前仅支持通过此方式查询以下任务类型的模板：1. 音视频增强：仅支持填写“[获取转码模板列表](https://cloud.tencent.com/document/product/862/37593)”接口中的 Definitions、Offset 和 Limit 几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。 */
+    MPSDescribeTemplateParams?: string;
+  }
+
+  interface DescribeMPSTemplatesResponse {
+    /** 符合过滤条件的记录总数。 */
+    TotalCount?: number;
+    /** MPS 任务模板详情列表。 */
+    MPSTemplateSet?: MPSTemplate[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -9229,6 +9285,20 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface ModifyMPSTemplateRequest {
+    /** 点播[应用](/document/product/266/14574) ID。 */
+    SubAppId: number;
+    /** 需要修改的 MPS 模板的类型。取值：Transcode: 创建转码模板，目前仅支持修改增强参数。 */
+    TemplateType: string;
+    /** MPS 修改模板参数。该参数用于透传至媒体处理服务（MPS），从云点播侧修改用户自定义的 MPS 任务模板。 目前仅支持通过此方式修改以下任务类型的模板：1. 音视频增强：仅支持填写“[修改转码模板](https://cloud.tencent.com/document/api/862/37578)”接口中的 Name、Comment、RemoveVideo、RemoveAudio、VideoTemplate、AudioTemplate 和 EnhanceConfig 几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。示例：{"Definition":24214,"Container":"mp4","Name":"test","RemoveAudio":1,"VideoTemplate":{"Codec":"h264","Fps":0,"Bitrate":0},"EnhanceConfig":{"VideoEnhance":{"FrameRate":{"Switch":"ON","Fps":50}}}} */
+    MPSModifyTemplateParams: string;
+  }
+
+  interface ModifyMPSTemplateResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface ModifyMediaInfoRequest {
     /** 媒体文件唯一标识。 */
     FileId: string;
@@ -10329,6 +10399,8 @@ declare interface Vod {
   CreateImageSpriteTemplate(data: V20180717.CreateImageSpriteTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateImageSpriteTemplateResponse>;
   /** 创建即时转码模板 {@link V20180717.CreateJustInTimeTranscodeTemplateRequest} {@link V20180717.CreateJustInTimeTranscodeTemplateResponse} */
   CreateJustInTimeTranscodeTemplate(data: V20180717.CreateJustInTimeTranscodeTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateJustInTimeTranscodeTemplateResponse>;
+  /** 创建 MPS 任务模板 {@link V20180717.CreateMPSTemplateRequest} {@link V20180717.CreateMPSTemplateResponse} */
+  CreateMPSTemplate(data: V20180717.CreateMPSTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateMPSTemplateResponse>;
   /** 创建素材样本 {@link V20180717.CreatePersonSampleRequest} {@link V20180717.CreatePersonSampleResponse} */
   CreatePersonSample(data: V20180717.CreatePersonSampleRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreatePersonSampleResponse>;
   /** 创建任务流模板 {@link V20180717.CreateProcedureTemplateRequest} {@link V20180717.CreateProcedureTemplateResponse} */
@@ -10383,6 +10455,8 @@ declare interface Vod {
   DeleteImageSpriteTemplate(data: V20180717.DeleteImageSpriteTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteImageSpriteTemplateResponse>;
   /** 删除即时转码模板 {@link V20180717.DeleteJustInTimeTranscodeTemplateRequest} {@link V20180717.DeleteJustInTimeTranscodeTemplateResponse} */
   DeleteJustInTimeTranscodeTemplate(data: V20180717.DeleteJustInTimeTranscodeTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteJustInTimeTranscodeTemplateResponse>;
+  /** 删除 MPS 任务模板 {@link V20180717.DeleteMPSTemplateRequest} {@link V20180717.DeleteMPSTemplateResponse} */
+  DeleteMPSTemplate(data: V20180717.DeleteMPSTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteMPSTemplateResponse>;
   /** 删除媒体 {@link V20180717.DeleteMediaRequest} {@link V20180717.DeleteMediaResponse} */
   DeleteMedia(data: V20180717.DeleteMediaRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteMediaResponse>;
   /** 删除素材样本 {@link V20180717.DeletePersonSampleRequest} {@link V20180717.DeletePersonSampleResponse} */
@@ -10471,6 +10545,8 @@ declare interface Vod {
   DescribeJustInTimeTranscodeTemplates(data: V20180717.DescribeJustInTimeTranscodeTemplatesRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeJustInTimeTranscodeTemplatesResponse>;
   /** 查询 License 请求数统计数据 {@link V20180717.DescribeLicenseUsageDataRequest} {@link V20180717.DescribeLicenseUsageDataResponse} */
   DescribeLicenseUsageData(data: V20180717.DescribeLicenseUsageDataRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeLicenseUsageDataResponse>;
+  /** 获取 MPS 任务模板列表 {@link V20180717.DescribeMPSTemplatesRequest} {@link V20180717.DescribeMPSTemplatesResponse} */
+  DescribeMPSTemplates(data: V20180717.DescribeMPSTemplatesRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeMPSTemplatesResponse>;
   /** 获取媒体详细信息 {@link V20180717.DescribeMediaInfosRequest} {@link V20180717.DescribeMediaInfosResponse} */
   DescribeMediaInfos(data: V20180717.DescribeMediaInfosRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeMediaInfosResponse>;
   /** 查询媒体文件按指定时间粒度统计的播放数据 {@link V20180717.DescribeMediaPlayStatDetailsRequest} {@link V20180717.DescribeMediaPlayStatDetailsResponse} */
@@ -10569,6 +10645,8 @@ declare interface Vod {
   ModifyImageSpriteTemplate(data: V20180717.ModifyImageSpriteTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ModifyImageSpriteTemplateResponse>;
   /** 修改即时转码模板 {@link V20180717.ModifyJustInTimeTranscodeTemplateRequest} {@link V20180717.ModifyJustInTimeTranscodeTemplateResponse} */
   ModifyJustInTimeTranscodeTemplate(data: V20180717.ModifyJustInTimeTranscodeTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ModifyJustInTimeTranscodeTemplateResponse>;
+  /** 修改 MPS 任务模板 {@link V20180717.ModifyMPSTemplateRequest} {@link V20180717.ModifyMPSTemplateResponse} */
+  ModifyMPSTemplate(data: V20180717.ModifyMPSTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ModifyMPSTemplateResponse>;
   /** 修改媒体文件属性 {@link V20180717.ModifyMediaInfoRequest} {@link V20180717.ModifyMediaInfoResponse} */
   ModifyMediaInfo(data: V20180717.ModifyMediaInfoRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ModifyMediaInfoResponse>;
   /** 修改媒体文件存储类型 {@link V20180717.ModifyMediaStorageClassRequest} {@link V20180717.ModifyMediaStorageClassResponse} */

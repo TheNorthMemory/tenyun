@@ -1078,6 +1078,16 @@ declare interface OccupiedSeal {
   AuthorizedUsers?: AuthorizedUser[];
   /** 印章扩展数据信息 */
   ExtendScene?: ExtendScene;
+  /** 印章的真实宽度，单位毫米 */
+  RealWidth?: number;
+  /** 印章的真实高度，单位毫米 */
+  RealHeight?: number;
+  /** 自定义子类型印章 */
+  SubSealType?: string;
+  /** 自定义子类型印章名称 */
+  SubSealName?: string;
+  /** 印章描述 */
+  SealDescription?: string;
 }
 
 /** 企业套餐余额情况 */
@@ -1100,6 +1110,8 @@ declare interface OrganizationAuthUrl {
   ErrorMessage?: string;
   /** 企业批量注册的唯一 Id， 此 Id 可以用在[创建企业批量认证链接-单链接](https://qian.tencent.com/developers/companyApis/organizations/CreateBatchOrganizationAuthorizationUrl)。 */
   SubTaskId?: string;
+  /** 企业批量注册 传递过来的企业名称，方便客户定位企业 */
+  OrganizationName?: string;
 }
 
 /** 企业授权书信息参数， 需要保证这些参数跟营业执照中的信息一致。 */
@@ -3163,6 +3175,8 @@ declare interface CreateSealRequest {
   SealSize?: string;
   /** 企业税号注:1.印章类型SealType是INVOICE类型时，此参数才会生效2.印章类型SealType是INVOICE类型，且该字段没有传入值或传入空时，会取该企业对应的统一社会信用代码作为默认的企业税号（如果是通过授权书授权方式认证的企业，此参数必传不能为空） */
   TaxIdentifyCode?: string;
+  /** 印章描述内容 */
+  SealDescription?: string;
 }
 
 declare interface CreateSealResponse {

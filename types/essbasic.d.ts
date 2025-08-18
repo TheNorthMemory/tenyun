@@ -952,6 +952,12 @@ declare interface OccupiedSeal {
   IsAllTime?: boolean;
   /** 授权人列表 */
   AuthorizedUsers?: AuthorizedUser[];
+  /** 印章的真实宽度，单位毫米 */
+  RealWidth?: number;
+  /** 印章的真实高度，单位毫米 */
+  RealHeight?: number;
+  /** 印章描述 */
+  SealDescription?: string;
 }
 
 /** 企业批量注册链接信息 */
@@ -3083,6 +3089,8 @@ declare interface CreateSealByImageRequest {
   SealSize?: string;
   /** 企业税号注:1.印章类型SealType是INVOICE类型时，此参数才会生效2.印章类型SealType是INVOICE类型，且该字段没有传入值或传入空时，会取该企业对应的统一社会信用代码作为默认的企业税号（如果是通过授权书授权方式认证的企业，此参数必传不能为空） */
   TaxIdentifyCode?: string;
+  /** 印章描述内容 */
+  SealDescription?: string;
 }
 
 declare interface CreateSealByImageResponse {

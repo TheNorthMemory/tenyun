@@ -42,6 +42,8 @@ declare interface Agent {
   IsStartingAgent?: boolean;
   /** Agent类型; 0: 未指定类型; 1: 知识库检索Agent */
   AgentType?: number;
+  /** 0 自由转交，1 计划与执行 */
+  AgentMode?: number;
 }
 
 /** Agent调试信息 */
@@ -50,6 +52,8 @@ declare interface AgentDebugInfo {
   Input?: string | null;
   /** 工具、大模型的输出信息，json */
   Output?: string | null;
+  /** 模型名 */
+  ModelName?: string;
 }
 
 /** Agent输入值，支持直接赋值和引用 */
@@ -138,6 +142,8 @@ declare interface AgentMCPServerInfo {
   Timeout?: number;
   /** sse服务超时时间，单位秒 */
   SseReadTimeout?: number;
+  /** mcp server query信息 */
+  Query?: AgentPluginQuery[];
 }
 
 /** Agent 配置里面的模型定义 */
@@ -160,6 +166,8 @@ declare interface AgentModelInfo {
   InstructionsWordsLimit?: number;
   /** 单次会话最大推理轮数 */
   MaxReasoningRound?: number;
+  /** 模型参数 */
+  ModelParams?: ModelParams;
 }
 
 /** 应用配置MCP插件header信息 */
@@ -188,6 +196,26 @@ declare interface AgentPluginInfo {
   PluginInfoType?: number;
   /** 知识库问答插件配置 */
   KnowledgeQa?: AgentKnowledgeQAPlugin;
+  /** 是否使用一键授权 */
+  EnableRoleAuth?: boolean;
+  /** 应用配置的插件query信息 */
+  Query?: AgentPluginQuery[];
+  /** MCP类型 */
+  McpType?: number;
+}
+
+/** 应用配置MCP插件query信息 */
+declare interface AgentPluginQuery {
+  /** 参数名称 */
+  ParamName?: string;
+  /** 参数值 */
+  ParamValue?: string;
+  /** query参数配置是否隐藏不可见，true-隐藏不可见，false-可见 */
+  GlobalHidden?: boolean;
+  /** 参数是否可以为空 */
+  IsRequired?: boolean;
+  /** 输入的值 */
+  Input?: AgentInput;
 }
 
 /** 思考事件过程信息 */
@@ -228,7 +256,7 @@ declare interface AgentProcedureDebugging {
   Content?: string | null;
   /** 展示的具体文本内容 */
   DisplayContent?: string | null;
-  /** 展示类型 */
+  /** 1：搜索引擎参考来源；2：知识库参考来源 */
   DisplayType?: number | null;
   /** 搜索引擎展示的索引 */
   QuoteInfos?: QuoteInfo[] | null;
@@ -264,6 +292,10 @@ declare interface AgentReference {
   Index?: number | null;
   /** 标题 */
   Title?: string | null;
+  /** 知识库名称 */
+  KnowledgeName?: string | null;
+  /** 知识库标识 */
+  KnowledgeBizId?: string | null;
 }
 
 /** Agent的思考过程 */
@@ -320,6 +352,10 @@ declare interface AgentToolInfo {
   Headers?: AgentPluginHeader[];
   /** NON_STREAMING: 非流式 STREAMIN: 流式 */
   CallingMethod?: string | null;
+  /** query信息 */
+  Query?: AgentPluginQuery[];
+  /** 工具计费状态 0-不计费 1-可用 2-不可用（欠费、无资源等） */
+  FinanceStatus?: number;
 }
 
 /** Agent工具的请求参数定义 */
@@ -422,6 +458,8 @@ declare interface AppInfo {
   Pattern?: string | null;
   /** 思考模型别名 */
   ThoughtModelAliasName?: string | null;
+  /** 权限位信息 */
+  PermissionIds?: string[];
 }
 
 /** 应用模型配置 */
@@ -448,6 +486,8 @@ declare interface AppModel {
   TopP?: string | null;
   /** 模型资源状态 1：资源可用；2：资源已用尽 */
   ResourceStatus?: number | null;
+  /** 模型参数 */
+  ModelParams?: ModelParams | null;
 }
 
 /** 标签详情信息 */
@@ -788,6 +828,14 @@ declare interface InvokeAPI {
   FailMessage?: string | null;
 }
 
+/** 知识库高级设置 */
+declare interface KnowledgeAdvancedConfig {
+  /** 重排序模型 */
+  RerankModel?: string | null;
+  /** 召回数量 */
+  RerankRecallNum?: number | null;
+}
+
 /** 共享知识库基础信息 */
 declare interface KnowledgeBaseInfo {
   /** 共享知识库业务ID */
@@ -802,6 +850,14 @@ declare interface KnowledgeBaseInfo {
   QaExtractModel?: string | null;
   /** 更新时间 */
   UpdateTime?: string | null;
+  /** 共享知识库类型，0普通，1公众号 */
+  KnowledgeType?: number;
+  /** 拥有者id */
+  OwnerStaffId?: string;
+  /** 知识库文档数量,当前仅支持公众号知识库 */
+  DocTotal?: number | null;
+  /** 知识库处理中状态标记，1：向量embedding变更中 */
+  ProcessingFlags?: number[] | null;
 }
 
 /** 知识库容量饼图详情 */
@@ -840,6 +896,26 @@ declare interface KnowledgeDetailInfo {
   AppList?: AppBaseInfo[] | null;
   /** 用户信息 */
   User?: UserBaseInfo | null;
+  /** 权限位信息 */
+  PermissionIds?: string[];
+}
+
+/** 知识库模型设置 */
+declare interface KnowledgeModelConfig {
+  /** 向量模型，该字段只有共享知识库有，应用知识库没有 */
+  EmbeddingModel?: string | null;
+  /** 问答对生成模型 */
+  QaExtractModel?: string | null;
+  /** schema生成模型 */
+  SchemaModel?: string | null;
+}
+
+/** 应用配置关联的agent信息 */
+declare interface KnowledgeQaAgent {
+  /** 协同方式，1：自由转交，2：工作流编排，3：Plan-and-Execute */
+  AgentCollaboration?: number | null;
+  /** 应用配置agent关联的工作流 */
+  Workflow?: KnowledgeQaWorkflowInfo | null;
 }
 
 /** 知识问答配置 */
@@ -875,11 +951,21 @@ declare interface KnowledgeQaConfig {
   /** 配置语音通话参数 */
   AiCall?: AICallConfig | null;
   /** 共享知识库关联配置 */
-  ShareKnowledgeBases?: ShareKnowledgeBase[];
+  ShareKnowledgeBases?: ShareKnowledgeBase[] | null;
   /** 背景图相关信息 */
   BackgroundImage?: BackgroundImageConfig | null;
   /** 开场问题 */
   OpeningQuestions?: string[] | null;
+  /** 长期记忆开关 */
+  LongMemoryOpen?: boolean;
+  /** 长期记忆时效 */
+  LongMemoryDay?: number;
+  /** agent配置信息 */
+  Agent?: KnowledgeQaAgent | null;
+  /** 知识库模型 */
+  KnowledgeModelConfig?: KnowledgeModelConfig | null;
+  /** 知识库高级设置 */
+  KnowledgeAdvancedConfig?: KnowledgeAdvancedConfig | null;
 }
 
 /** 应用管理输出配置 */
@@ -958,6 +1044,20 @@ declare interface KnowledgeQaSingleWorkflow {
   AsyncWorkflow?: boolean;
 }
 
+/** 应用配置关联的工作流信息 */
+declare interface KnowledgeQaWorkflowInfo {
+  /** 工作流ID */
+  WorkflowId?: string;
+  /** 工作流名称 */
+  WorkflowName?: string;
+  /** 工作流描述 */
+  WorkflowDesc?: string;
+  /** 工作流状态，发布状态(UNPUBLISHED: 待发布 PUBLISHING: 发布中 PUBLISHED: 已发布 FAIL:发布失败) */
+  Status?: string;
+  /** 工作流是否启用 */
+  IsEnable?: boolean;
+}
+
 /** 检索知识 */
 declare interface KnowledgeSummary {
   /** 1是问答 2是文档片段 */
@@ -976,6 +1076,8 @@ declare interface KnowledgeUpdateInfo {
   EmbeddingModel?: string | null;
   /** 问答提取模型 */
   QaExtractModel?: string | null;
+  /** 拥有者id */
+  OwnerStaffId?: string;
 }
 
 /** 问答知识库工作流配置 */
@@ -1184,6 +1286,16 @@ declare interface ModelInfo {
   SupportAiCallStatus?: number;
   /** 专属并发数 */
   Concurrency?: number;
+  /** 模型标签 */
+  ModelTags?: string[] | null;
+  /** 模型超参定义 */
+  ModelParams?: ModelParameter[] | null;
+  /** 提供商名称 */
+  ProviderName?: string;
+  /** 提供商别名 */
+  ProviderAliasName?: string;
+  /** 提供商类型 Self:提供商，Custom：自定义模型提供商，Third：第三方模型提供商 */
+  ProviderType?: string;
 }
 
 /** 模型参数范围 */
@@ -1194,6 +1306,30 @@ declare interface ModelParameter {
   Min?: number | null;
   /** 最大值 */
   Max?: number | null;
+  /** 超参名称 */
+  Name?: string | null;
+}
+
+/** 模型参数 */
+declare interface ModelParams {
+  /** 温度 */
+  Temperature?: number;
+  /** Top_P */
+  TopP?: number;
+  /** 随机种子 */
+  Seed?: number;
+  /** 存在惩罚 */
+  PresencePenalty?: number;
+  /** 频率惩罚 */
+  FrequencyPenalty?: number;
+  /** 重复惩罚 */
+  RepetitionPenalty?: number;
+  /** 最大输出长度 */
+  MaxTokens?: number;
+  /** 停止序列 */
+  StopSequences?: string[];
+  /** 输出格式 */
+  ReplyFormat?: string;
 }
 
 /** 文档信息 */
@@ -1286,6 +1422,8 @@ declare interface MsgRecordReference {
   DocBizId?: string;
   /** 问答业务id */
   QaBizId?: string;
+  /** 文档索引id */
+  Index?: number;
 }
 
 /** 节点运行的基本信息 */
@@ -1370,6 +1508,14 @@ declare interface Option {
   FileType?: string | null;
 }
 
+/** 选项卡索引 */
+declare interface OptionCardIndex {
+  /** 唯一标识 */
+  RecordId?: string;
+  /** 选项卡索引 */
+  Index?: number;
+}
+
 /** 插件参数请求结构 */
 declare interface PluginToolReqParam {
   /** 参数名称 */
@@ -1406,6 +1552,10 @@ declare interface Procedure {
   Debugging?: ProcedureDebugging | null;
   /** 计费资源状态，1：可用，2：不可用 */
   ResourceStatus?: number | null;
+  /** 输入消耗 token 数 */
+  InputCount?: number;
+  /** 输出消耗 token 数 */
+  OutputCount?: number;
 }
 
 /** 调试信息 */
@@ -1425,7 +1575,7 @@ declare interface ProcedureDebugging {
   /** Agent调试信息 */
   Agent?: AgentDebugInfo | null;
   /** 自定义参数 */
-  CustomVariables?: string[];
+  CustomVariables?: string[] | null;
 }
 
 /** 获取QA分类分组 */
@@ -1650,16 +1800,32 @@ declare interface SearchRange {
 declare interface SearchStrategy {
   /** 检索策略类型 0:混合检索，1：语义检索 */
   StrategyType?: number | null;
-  /** Excel检索增强开关 */
+  /** Excel检索增强开关, false关闭，true打开 */
   TableEnhancement?: boolean | null;
+  /** 向量模型 */
+  EmbeddingModel?: string | null;
+  /** 结果重排序开关， on打开，off关闭 */
+  RerankModelSwitch?: string | null;
+  /** 结果重排序模型 */
+  RerankModel?: string | null;
 }
 
 /** 共享知识库配置 */
 declare interface ShareKnowledgeBase {
   /** 共享知识库ID */
-  KnowledgeBizId?: string;
+  KnowledgeBizId?: string | null;
   /** 检索范围 */
-  SearchRange?: SearchRange;
+  SearchRange?: SearchRange | null;
+  /** 知识库模型设置 */
+  KnowledgeModelConfig?: KnowledgeModelConfig | null;
+  /** 检索策略配置 */
+  SearchStrategy?: SearchStrategy | null;
+  /** 检索配置 */
+  Search?: KnowledgeQaSearch[] | null;
+  /** // 问答-回复灵活度 1：已采纳答案直接回复 2：已采纳润色后回复 */
+  ReplyFlexibility?: number | null;
+  /** 共享知识库名称 */
+  KnowledgeName?: string | null;
 }
 
 /** 相似问信息 */
@@ -1748,6 +1914,8 @@ declare interface TaskFLowVar {
   VarDefaultValue?: string;
   /** 自定义变量文件默认名称 */
   VarDefaultFileName?: string;
+  /** 变量类型 */
+  VarModuleType?: number;
 }
 
 /** 任务流程信息 */
@@ -1824,6 +1992,12 @@ declare interface UnsatisfiedReply {
   Reasons?: string[] | null;
 }
 
+/** 更新时间策略 */
+declare interface UpdatePeriodInfo {
+  /** 文档更新频率类型：0不更新 -H 小时粒度,当前仅支持24(1天)，72(3天)，168(7天) 仅source=2 腾讯文档类型有效 */
+  UpdatePeriodH?: number | null;
+}
+
 /** 用户基础信息 */
 declare interface UserBaseInfo {
   /** 用户ID */
@@ -1878,6 +2052,10 @@ declare interface WorkFlowSummary {
   Outputs?: string[] | null;
   /** 工作流发布时间，unix时间戳 */
   WorkflowReleaseTime?: string | null;
+  /** 中间消息 */
+  PendingMessages?: string[];
+  /** 选项卡索引 */
+  OptionCardIndex?: OptionCardIndex;
 }
 
 /** 工作流信息 */
@@ -1948,6 +2126,8 @@ declare interface WorkflowRunDetail {
   WorkflowId?: string;
   /** 名称 */
   Name?: string;
+  /** 工作流输出 */
+  Output?: string;
   /** 运行状态。0: 排队中；1: 运行中；2: 运行成功；3: 运行失败； 4: 已取消 */
   State?: number;
   /** 错误信息 */
@@ -2059,6 +2239,8 @@ declare interface CreateAppRequest {
   BaseConfig: BaseConfig;
   /** 应用模式 standard:标准模式, agent: agent模式，single_workflow：单工作流模式 */
   Pattern?: string;
+  /** 智能体类型 dialogue 对话式智能体，wechat 公众号智能体 */
+  AgentType?: string;
 }
 
 declare interface CreateAppResponse {
@@ -2211,6 +2393,8 @@ declare interface CreateSharedKnowledgeRequest {
   KnowledgeDescription?: string;
   /** Embedding模型，字符数量上限128 */
   EmbeddingModel?: string;
+  /** 共享知识库类型，0普通，1公众号 */
+  KnowledgeType?: number;
 }
 
 declare interface CreateSharedKnowledgeResponse {
@@ -2233,6 +2417,8 @@ declare interface CreateVarRequest {
   VarDefaultValue?: string;
   /** 自定义变量文件默认名称 */
   VarDefaultFileName?: string;
+  /** 参数类型 */
+  VarModuleType?: number;
 }
 
 declare interface CreateVarResponse {
@@ -2389,6 +2575,8 @@ declare interface DeleteVarRequest {
   AppBizId: string;
   /** 变量ID */
   VarId: string;
+  /** 参数类型 */
+  VarModuleType?: number;
 }
 
 declare interface DeleteVarResponse {
@@ -2509,6 +2697,8 @@ declare interface DescribeCallStatsGraphRequest {
   SubScenes?: string[];
   /** 应用类型(knowledge_qa应用管理， shared_knowlege 共享知识库) */
   AppType?: string;
+  /** 空间id */
+  SpaceId?: string;
 }
 
 declare interface DescribeCallStatsGraphResponse {
@@ -2535,6 +2725,8 @@ declare interface DescribeConcurrencyUsageGraphRequest {
   SubBizType?: string;
   /** 应用id列表 */
   AppBizIds?: string[];
+  /** 空间id */
+  SpaceId?: string;
 }
 
 declare interface DescribeConcurrencyUsageGraphResponse {
@@ -2557,6 +2749,8 @@ declare interface DescribeConcurrencyUsageRequest {
   EndTime: string;
   /** 应用id列表 */
   AppBizIds?: string[];
+  /** 空间id */
+  SpaceId?: string;
 }
 
 declare interface DescribeConcurrencyUsageResponse {
@@ -2630,6 +2824,10 @@ declare interface DescribeDocResponse {
   IsDisabled?: boolean;
   /** 是否支持下载 */
   IsDownload?: boolean | null;
+  /** 自定义切分规则 */
+  SplitRule?: string | null;
+  /** 文档更新频率 */
+  UpdatePeriodInfo?: UpdatePeriodInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2637,6 +2835,8 @@ declare interface DescribeDocResponse {
 declare interface DescribeKnowledgeUsagePieGraphRequest {
   /** 应用ID数组 */
   AppBizIds?: string[];
+  /** 空间列表 */
+  SpaceId?: string;
 }
 
 declare interface DescribeKnowledgeUsagePieGraphResponse {
@@ -2831,6 +3031,8 @@ declare interface DescribeSearchStatsGraphRequest {
   EndTime?: string;
   /** 应用id列表 */
   AppBizIds?: string[];
+  /** 空间id */
+  SpaceId?: string;
 }
 
 declare interface DescribeSearchStatsGraphResponse {
@@ -2860,7 +3062,7 @@ declare interface DescribeSharedKnowledgeRequest {
 }
 
 declare interface DescribeSharedKnowledgeResponse {
-  /** 知识库列表 */
+  /** 知识库详情列表 */
   Info?: KnowledgeDetailInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2917,6 +3119,8 @@ declare interface DescribeTokenUsageGraphRequest {
   AppBizIds?: string[];
   /** 应用类型(knowledge_qa应用管理， shared_knowlege 共享知识库) */
   AppType?: string;
+  /** 筛选子场景 */
+  SubScenes?: string[];
 }
 
 declare interface DescribeTokenUsageGraphResponse {
@@ -2951,6 +3155,8 @@ declare interface DescribeTokenUsageRequest {
   SubScenes?: string[];
   /** 应用类型(knowledge_qa应用管理， shared_knowlege 共享知识库) */
   AppType?: string;
+  /** 空间id */
+  SpaceId?: string;
 }
 
 declare interface DescribeTokenUsageResponse {
@@ -3281,6 +3487,8 @@ declare interface GetVarListRequest {
   VarType?: string;
   /** 是否需要内部变量(默认false) */
   NeedInternalVar?: boolean;
+  /** 变量类型 */
+  VarModuleType?: number;
 }
 
 declare interface GetVarListResponse {
@@ -3383,6 +3591,8 @@ declare interface ListAppKnowledgeDetailRequest {
   PageSize: number;
   /** 应用ID列表 */
   AppBizIds?: string[];
+  /** 空间列表 */
+  SpaceId?: string;
 }
 
 declare interface ListAppKnowledgeDetailResponse {
@@ -3405,12 +3615,16 @@ declare interface ListAppRequest {
   Keyword?: string;
   /** 登录用户子账号(集成商模式必填) */
   LoginSubAccountUin?: string;
+  /** 智能体类型 dialogue：对话智能体，wechat：公众号智能体 */
+  AgentType?: string;
+  /** 应用状态 1:未上线 2：运行中 */
+  AppStatus?: string;
 }
 
 declare interface ListAppResponse {
   /** 数量 */
   Total?: string;
-  /** 标签列表 */
+  /** 应用列表 */
   List?: AppInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3491,7 +3705,7 @@ declare interface ListModelRequest {
   AppType: string;
   /** 应用模式 standard:标准模式, agent: agent模式，single_workflow：单工作流模式 */
   Pattern?: string;
-  /** 模型类别 generate：生成模型，thought：思考模型 */
+  /** 模型类别 generate：生成模型，thought：思考模型,embedding模型，rerank：rerank模型 */
   ModelCategory?: string;
   /** 登录用户主账号(集成商模式必填) */
   LoginUin?: string;
@@ -3737,9 +3951,9 @@ declare interface ListReleaseResponse {
 declare interface ListSelectDocRequest {
   /** 应用ID */
   BotBizId: string;
-  /** 文档名称 */
+  /** 文档名称。可通过文档名称检索支持生成问答的文档，不支持xlsx、xls、csv格式 */
   FileName?: string;
-  /** 文档状态： 7 审核中、8 审核失败、10 待发布、11 发布中、12 已发布、13 学习中、14 学习失败 20 已过期 */
+  /** 文档状态筛选。文档状态对应码为7 审核中、8 审核失败、10 待发布、11 发布中、12 已发布、13 学习中、14 学习失败 20 已过期。其中仅状态为10 待发布、12 已发布的文档支持生成问答 */
   Status?: number[];
 }
 
@@ -3757,6 +3971,8 @@ declare interface ListSharedKnowledgeRequest {
   PageSize: number;
   /** 搜索关键字 */
   Keyword?: string;
+  /** 共享知识库类型，0普通，1公众号 */
+  KnowledgeTypes?: number[];
 }
 
 declare interface ListSharedKnowledgeResponse {
@@ -3817,6 +4033,8 @@ declare interface ListUsageCallDetailRequest {
   AppType?: string;
   /** 账单明细对应的自定义tag */
   BillingTag?: string;
+  /** 空间id */
+  SpaceId?: string;
 }
 
 declare interface ListUsageCallDetailResponse {
@@ -3973,6 +4191,12 @@ declare interface ModifyDocRequest {
   CateBizId?: string;
   /** 是否可下载，IsRefer为true并且ReferUrlType为0时，该值才有意义 */
   IsDownload?: boolean;
+  /** 需要修改的内容类型 0 无效 1 更新文档cos信息 2 更新文档引用信息 3 更新文档刷新频率 4 腾讯文档刷新 */
+  ModifyTypes?: number[];
+  /** 文档更新频率 */
+  UpdatePeriodInfo?: UpdatePeriodInfo;
+  /** 自定义切分规则 */
+  SplitRule?: string;
 }
 
 declare interface ModifyDocResponse {
@@ -4183,6 +4407,10 @@ declare interface SaveDocRequest {
   IsDownload?: boolean;
   /** 重复文档处理方式，按顺序匹配第一个满足条件的方式处理 */
   DuplicateFileHandles?: DuplicateFileHandle[];
+  /** 自定义切分规则请求参数为一个 **JSON Object**，具体格式可参见接口示例值。包含以下主要字段：| 字段名 | 类型 | 说明 ||--------------------|--------|----------------------------------------|| `xlsx_splitter` | Object | **Excel（xlsx）文件切分策略配置**，仅当处理 Excel 文件时有效 || `common_splitter` | Object | **通用文件（如 txt、pdf 等）切分策略配置**，按页或按标签切分 || `table_style` | String | 表格内容的输出格式，如 HTML 或 Markdown |---## `xlsx_splitter`（Excel 切分策略）用于配置 **表格文件的切分方式**。**类型：Object**```json"xlsx_splitter": { "header_interval": [1, 2], "content_start": 10, "split_row": 2}```### 字段说明：| 字段名 | 类型 | 说明 ||-------------------|--------|----------------------------------------------------------------------|| `header_interval` | Array\ | 表头所在的行区间，格式为 `[起始行, 结束行]`，**行号从 1 开始计数**。例如 `[1, 2]` 表示第 1~2 行为表头。 || `content_start` | Number | **表格内容的起始行号（从 1 开始）**。 || `split_row` | Number | **切分行数**。 |---## `common_splitter`（通用文件切分策略）用于配置 **非 Excel 文件（如 TXT、PDF、DOCX 等）的切分方式**，支持两种策略：**按页切分（page）** 或 **按标识符切分（tag）**。**类型：Object**```json"common_splitter": { "splitter": "page", "page_splitter": { "chunk_length": 1000, "chunk_overlap_length": 100 }}```### 字段说明：| 字段名 | 类型 | 说明 ||-------------------|--------|---------------------------------------------------|| `splitter` | String | 切分策略类型，可选值为：`"page"`（按页切分） 或 `"tag"`（按标识符切分）。 || `page_splitter` | Object | **按页切分的配置**。 || `page_splitter.chunk_length` | 1000 | **切片最大长度**。 || `page_splitter.chunk_overlap_length` | 100 | **切片重叠长度**。 || `tag_splitter` | Object | **自定义切分配置**。 || `tag_splitter.tag` | Array\ | **切分标识符**。 || `tag_splitter.chunk_length`| Number | **切片最大长度**。 || `tag_splitter.chunk_overlap_length` | Number | **切块重叠长度**。 |🔹 **补充说明：**- `splitter` 字段的值可以是： - `"page"`：只使用按页切分逻辑，此时只需要关心 `page_splitter` 相关字段。 - `"tag"`：只使用按标识符（如分号、换行等）切分逻辑，此时关注 `tag_splitter`。---## `table_style`（表格输出样式）用于指定 **表格类内容（比如从 Excel 或 CSV 中提取的表格）最终以何种格式返回**，方便前端展示或后续处理。**类型：String**```json"table_style": "md"```### 字段说明：| 字段名 | 类型 | 说明 ||--------------|--------|----------------------------------------------------------------------|| `table_style` | String | 指定表格内容的输出格式。可用值：• `"html"`：以 HTML 表格形式返回，适合网页展示。• `"md"`：以 Markdown 表格语法返回，适合文档或 Markdown 渲染环境。| */
+  SplitRule?: string;
+  /** 文档更新频率 */
+  UpdatePeriodInfo?: UpdatePeriodInfo;
 }
 
 declare interface SaveDocResponse {
@@ -4251,6 +4479,8 @@ declare interface UpdateVarRequest {
   VarDefaultValue?: string;
   /** 自定义变量文件默认名称 */
   VarDefaultFileName?: string;
+  /** 变量类型 */
+  VarModuleType?: number;
 }
 
 declare interface UpdateVarResponse {
@@ -4463,7 +4693,7 @@ declare interface Lke {
   ListReleaseDocPreview(data: ListReleaseDocPreviewRequest, config?: AxiosRequestConfig): AxiosPromise<ListReleaseDocPreviewResponse>;
   /** 发布问答预览 {@link ListReleaseQAPreviewRequest} {@link ListReleaseQAPreviewResponse} */
   ListReleaseQAPreview(data: ListReleaseQAPreviewRequest, config?: AxiosRequestConfig): AxiosPromise<ListReleaseQAPreviewResponse>;
-  /** 获取文档下拉列表 {@link ListSelectDocRequest} {@link ListSelectDocResponse} */
+  /** 获取文档生成问答可选文档列表 {@link ListSelectDocRequest} {@link ListSelectDocResponse} */
   ListSelectDoc(data: ListSelectDocRequest, config?: AxiosRequestConfig): AxiosPromise<ListSelectDocResponse>;
   /** 列举共享知识库 {@link ListSharedKnowledgeRequest} {@link ListSharedKnowledgeResponse} */
   ListSharedKnowledge(data: ListSharedKnowledgeRequest, config?: AxiosRequestConfig): AxiosPromise<ListSharedKnowledgeResponse>;

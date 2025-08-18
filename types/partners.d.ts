@@ -377,9 +377,9 @@ declare interface DescribeAgentAuditedClientsRequest {
   HasOverdueBill?: number;
   /** 客户备注 */
   ClientRemark?: string;
-  /** 偏移量 */
+  /** 偏移量 请保持必传 */
   Offset?: number;
-  /** 限制数目 */
+  /** 限制数目 请保持必传，最大2000 */
   Limit?: number;
   /** 可以为new(自拓)/assign(指派)/old(官网)/direct(直销)/direct_newopp(直销(新商机))/空 */
   ClientType?: string;

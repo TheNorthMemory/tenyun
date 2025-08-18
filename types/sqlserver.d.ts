@@ -1481,7 +1481,7 @@ declare interface CreateBackupRequest {
   Strategy?: number;
   /** 需要备份库名的列表(多库备份才填写) */
   DBNames?: string[];
-  /** 实例ID（必填），形如mssql-i1z41iwd */
+  /** 实例ID，形如mssql-i1z41iwd */
   InstanceId?: string;
   /** 备份名称，若不填则自动生成“实例ID_备份开始时间戳” */
   BackupName?: string;
@@ -2249,9 +2249,9 @@ declare interface DescribeBackupStatisticalRequest {
 
 declare interface DescribeBackupStatisticalResponse {
   /** 符合条件的实例总数。分页返回的话，这个值指的是所有符合条件的实例的个数，而非当前根据Limit和Offset值返回的实例个数。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 实例列表。 */
-  Items: SummaryDetailRes[];
+  Items?: SummaryDetailRes[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2423,7 +2423,7 @@ declare interface DescribeCrossBackupStatisticalRequest {
   CrossBackupStatus?: string;
   /** 跨地域备份目标地域 */
   CrossRegion?: string;
-  /** 排序字段，默认default-按照备份空间降序排序，data-按照数据备份排序，log-按照日志备份培训 */
+  /** 排序字段，默认default-按照备份空间降序排序，data-按照数据备份排序，log-按照日志备份 */
   OrderBy?: string;
   /** 排序规则（desc-降序，asc-升序），默认desc */
   OrderByType?: string;
@@ -2431,9 +2431,9 @@ declare interface DescribeCrossBackupStatisticalRequest {
 
 declare interface DescribeCrossBackupStatisticalResponse {
   /** 跨地域备份概览实时统计总条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 跨地域备份概览实时统计列表 */
-  Items: CrossSummaryDetailRes[];
+  Items?: CrossSummaryDetailRes[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3297,9 +3297,9 @@ declare interface DescribeRegularBackupPlanRequest {
 
 declare interface DescribeRegularBackupPlanResponse {
   /** 常规备份计划 */
-  SaveModePeriod: string[];
+  SaveModePeriod?: string[];
   /** 定期备份计划 */
-  SaveModeRegular: string[];
+  SaveModeRegular?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3705,7 +3705,7 @@ declare interface ModifyBackupStrategyRequest {
   BackupTime?: number;
   /** BackupType取值为daily时，表示备份间隔天数。当前取值只能为1 */
   BackupDay?: number;
-  /** 备份模式（必填），master_pkg-主节点上打包备份文件；master_no_pkg-主节点单库备份文件；slave_pkg-从节点上打包备份文件；slave_no_pkg-从节点上单库备份文件，从节点上备份只有在always on容灾模式下支持。 */
+  /** 备份模式，master_pkg-主节点上打包备份文件；master_no_pkg-主节点单库备份文件；slave_pkg-从节点上打包备份文件；slave_no_pkg-从节点上单库备份文件，从节点上备份只有在always on容灾模式下支持。 */
   BackupModel?: string;
   /** BackupType取值为weekly时，表示每周的星期N做备份。（如果数据备份保留时间=7天，则备份周期取值至少是一周的任意2天） */
   BackupCycle?: number[];

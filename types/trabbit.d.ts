@@ -1061,6 +1061,8 @@ declare interface ModifyRabbitMQServerlessInstanceRequest {
   Remark?: string;
   /** 是否开启trace */
   TraceFlag?: boolean;
+  /** 限流生产消费比例 */
+  SendReceiveRatio?: number;
 }
 
 declare interface ModifyRabbitMQServerlessInstanceResponse {
