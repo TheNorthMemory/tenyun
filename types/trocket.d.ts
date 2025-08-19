@@ -1901,7 +1901,7 @@ declare interface DoHealthCheckOnMigratingTopicRequest {
   TaskId: string;
   /** 主题名称，可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031)数据结构中获得。 */
   TopicName: string;
-  /** 必填，是否忽略当前检查 */
+  /** 是否忽略当前检查 */
   IgnoreCheck?: boolean;
   /** 命名空间，仅迁移至4.x集群有效，可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031)数据结构中获得。 */
   Namespace?: string;

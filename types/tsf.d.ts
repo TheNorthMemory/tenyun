@@ -773,9 +773,9 @@ declare interface ContainGroupResult {
 /** 应用使用容器部署时需要的额外资源 */
 declare interface ContainerAdditionalResourceRequirement {
   /** CPU 核数 */
-  Cpu: string | null;
+  Cpu?: string | null;
   /** 内存 MiB 数 */
-  Mem: string | null;
+  Mem?: string | null;
 }
 
 /** 不同类型的应用的容器部署组，部署时的额外资源要求 */
@@ -1095,11 +1095,11 @@ declare interface ContainerInfo {
 /** 容器实例相关的参数配置 */
 declare interface ContainerInstanceResourceConfig {
   /** 实例导入方式，可多个，公有云为 ["R"]，独立版的取值有 "M" 脚本模式、"S" SSH 模式 */
-  ImportMode: string[] | null;
+  ImportMode?: string[] | null;
   /** SSH 模式时，前端应该限制用户填这个数量的 master 主机信息 */
-  MasterNumLimit: number | null;
+  MasterNumLimit?: number | null;
   /** SSH 模式时，前端应该限制用户填的最高数量的 node 主机信息 */
-  NodeNumLimitPerSetup: number | null;
+  NodeNumLimitPerSetup?: number | null;
 }
 
 /** cos临时账号信息 */
@@ -1257,37 +1257,37 @@ declare interface DescribeResourceConfigCluster {
 /** 返回给前端的控制信息 */
 declare interface DescribeResourceConfigClusterContainer {
   /** 是否需要子网 */
-  NeedSubnetWhenCreatingCluster: boolean | null;
+  NeedSubnetWhenCreatingCluster?: boolean | null;
 }
 
 /** DescribeResourceConfig */
 declare interface DescribeResourceConfigLicense {
   /** 功能 */
-  Function: DescribeResourceConfigLicenseFunction[] | null;
+  Function?: DescribeResourceConfigLicenseFunction[] | null;
   /** 资源 */
-  Resource: DescribeResourceConfigLicenseResource[] | null;
+  Resource?: DescribeResourceConfigLicenseResource[] | null;
   /** utc时间 单位秒 */
-  ExpireTime: number | null;
+  ExpireTime?: number | null;
   /** utc时间 单位秒 */
-  Countdown: number | null;
+  Countdown?: number | null;
   /** 规格 */
-  Spec: string | null;
+  Spec?: string | null;
 }
 
 /** DescribeResourceConfig */
 declare interface DescribeResourceConfigLicenseFunction {
-  /** name */
-  Name: string | null;
-  /** enable */
-  Enable: boolean | null;
+  /** 功能名 */
+  Name?: string | null;
+  /** 是否启用 */
+  Enable?: boolean | null;
 }
 
 /** DescribeResourceConfig */
 declare interface DescribeResourceConfigLicenseResource {
   /** Name */
-  Name: string | null;
+  Name?: string | null;
   /** Quota */
-  Quota: number | null;
+  Quota?: number | null;
 }
 
 /** DescribeResourceConfig */
@@ -1309,7 +1309,7 @@ declare interface DescribeResourceConfigResultV2 {
 /** DescribeResourceConfig */
 declare interface DescribeResourceConfigSts {
   /** uin */
-  Uin: string | null;
+  Uin?: string | null;
 }
 
 /** 空目录选项 */
@@ -2241,9 +2241,9 @@ declare interface LaneRules {
 /** 许可标签 */
 declare interface LicenseTag {
   /** 许可ID */
-  LicenseId: string | null;
+  LicenseId?: string | null;
   /** 标签列表 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
 }
 
 /** LifeCycleHook */
@@ -2525,7 +2525,7 @@ declare interface OverviewBasicResourceUsage {
 /** 程序包相关配置信息 */
 declare interface PackageConfig {
   /** 程序包存储空间大小，单位字节 */
-  SpaceSize: number | null;
+  SpaceSize?: number | null;
 }
 
 /** tsf-privilege模块，分页数据集列表 */
@@ -3379,9 +3379,9 @@ declare interface TsfPageInstance {
 /** LicenseTag 翻页对象 */
 declare interface TsfPageLicenseTag {
   /** 记录总数 */
-  TotalCount: number | null;
+  TotalCount?: number | null;
   /** 记录实体列表 */
-  Content: LicenseTag[] | null;
+  Content?: LicenseTag[] | null;
 }
 
 /** 微服务列表信息 */
@@ -3723,7 +3723,7 @@ declare interface VmGroupSimple {
 /** 虚拟机实例相关的参数配置 */
 declare interface VmInstanceResourceConfig {
   /** 实例导入方式，可多个，公有云为 ["R", "M"]，独立版的取值仅有 "M" 脚本模式 */
-  ImportMode: string[] | null;
+  ImportMode?: string[] | null;
 }
 
 /** VolumeClaim模板项 */
@@ -4764,7 +4764,7 @@ declare interface DeleteConfigTemplateResponse {
 }
 
 declare interface DeleteContainerGroupRequest {
-  /** 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的部署组。 */
+  /** 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的部署组列表或[登录控制台](https://console.cloud.tencent.com/tsf/app-group-docker-detail?rid=1&id=group-aedpen6v)进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的部署组。 */
   GroupId: string;
 }
 
@@ -6736,7 +6736,7 @@ declare interface DescribeResourceConfigResponse {
 }
 
 declare interface DescribeResourceTaskStatusRequest {
-  /** 容器实例任务ID，可通过调用 ListContainerTask 查询已创建的变更记录总数或登录控制台进行查看。 */
+  /** 容器实例任务ID，可通过调用 [DeployContainerGroup](https://cloud.tencent.com/document/product/649/120669) 部署容器应用，查询其返回内容中的任务ID。 */
   TaskId: string;
 }
 

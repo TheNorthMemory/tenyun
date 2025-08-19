@@ -1083,10 +1083,12 @@ declare interface InquiryPriceRenewDisksResponse {
 declare interface InquiryPriceResizeDiskRequest {
   /** 云硬盘扩容后的大小，单位为GiB，不得小于当前云硬盘大小。云盘大小取值范围参见云硬盘[产品分类](/document/product/362/2353)的说明。 */
   DiskSize: number;
-  /** 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。 */
-  DiskId: string;
+  /** 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。与参数DiskIds互斥。 */
+  DiskId?: string;
   /** 云硬盘所属项目ID。该参数可以通过调用[DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。 如传入则仅用于鉴权。 */
   ProjectId?: number;
+  /** 云硬盘ID列表， 通过[DescribeDisks](/document/product/362/16315)接口查询。与参数DiskId互斥。 */
+  DiskIds?: string[];
 }
 
 declare interface InquiryPriceResizeDiskResponse {

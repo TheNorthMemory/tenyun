@@ -487,9 +487,9 @@ declare interface InvokeChainMakerDemoContractRequest {
   ChainId: string;
   /** 合约名称，可在合约管理中获取 */
   ContractName: string;
-  /** 合约方法名 */
+  /** 合约方法名，由合约代码定义，可以参考合约详情中的合约调用定义 */
   FuncName: string;
-  /** 合约方法入参，json格式字符串，key/value都是string类型的map */
+  /** 合约方法入参，json格式字符串，key/value都是string类型的map，由合约代码定义，可以参考合约详情中的合约调用定义 */
   FuncParam?: string;
   /** 是否异步执行，1为是，否则为0；如果异步执行，可使用返回值中的交易TxID查询执行结果 */
   AsyncFlag?: number;
@@ -591,9 +591,9 @@ declare interface QueryChainMakerContractRequest {
   ChainId: string;
   /** 合约名称，可在合约管理中获取 */
   ContractName: string;
-  /** 合约方法名 */
+  /** 合约方法名，由合约代码定义 */
   FuncName: string;
-  /** 合约方法入参，json格式字符串，key/value都是string类型的map */
+  /** 合约方法入参，json格式字符串，key/value都是string类型的map，由合约代码定义 */
   FuncParam?: string;
 }
 
@@ -633,9 +633,9 @@ declare interface QueryChainMakerDemoContractRequest {
   ChainId: string;
   /** 合约名称，可在合约管理中获取 */
   ContractName: string;
-  /** 合约方法名 */
+  /** 合约方法名，由合约代码定义，可以参考合约详情中的合约调用定义 */
   FuncName: string;
-  /** 合约方法入参，json格式字符串，key/value都是string类型的map */
+  /** 合约方法入参，json格式字符串，key/value都是string类型的map，由合约代码定义，可以参考合约详情中的合约调用定义 */
   FuncParam?: string;
 }
 

@@ -3272,6 +3272,8 @@ declare interface LiveRecordTemplate {
   CreateTime?: string;
   /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
   UpdateTime?: string;
+  /** 录制类型，取值为video（音视频录制）、audio（纯音频录制）、auto（自动探测）。 */
+  RecordType?: string;
 }
 
 /** 直播编排直播录制任务结果类型 */
@@ -3596,17 +3598,17 @@ declare interface LiveStreamTagRecognitionResult {
 
 /** 任务处理的事件通知配置。 */
 declare interface LiveStreamTaskNotifyConfig {
-  /** 通知类型："CMQ"：回调消息写入cmq队列； "URL"： 指定URL时HTTP回调推送到 NotifyUrl 指定的地址，回调协议http+json，包体内容同[解析直播事件通知接口](https://cloud.tencent.com/document/product/862/39229) 的输出参数 注：不填或为空时默认 CMQ，如需采用其他类型需填写对应类型值。 */
+  /** 通知类型：TDMQ-CMQ：消息队列"URL"： 指定URL时HTTP回调推送到 NotifyUrl 指定的地址，回调协议http+json，包体内容同[解析直播事件通知接口](https://cloud.tencent.com/document/product/862/39229) 的输出参数 注：不填或为空时默认 CMQ，如需采用其他类型需填写对应类型值。 */
   NotifyType?: string;
   /** HTTP回调地址，NotifyType为URL时必填。 */
   NotifyUrl?: string;
-  /** CMQ 的模型，有 Queue 和 Topic 两种，目前仅支持 Queue。 */
+  /** 有 Queue 和 Topic 两种模型。 */
   CmqModel?: string;
-  /** CMQ 的园区，如 sh，bj 等。 */
+  /** TDMQ-CMQ 的园区，如 sh，bj 等。 */
   CmqRegion?: string;
-  /** 当模型为 Queue 时有效，表示接收事件通知的 CMQ 的队列名。 */
+  /** 当模型为 Queue 时有效，表示接收事件通知的 TDMQ-CMQ 的队列名。 */
   QueueName?: string;
-  /** 当模型为 Topic 时有效，表示接收事件通知的 CMQ 的主题名。 */
+  /** 当模型为 Topic 时有效，表示接收事件通知的 TDMQ-CMQ 的主题名。 */
   TopicName?: string;
   /** 用于生成回调签名的 Key。 */
   NotifyKey?: string | null;
@@ -6357,6 +6359,8 @@ declare interface CreateLiveRecordTemplateRequest {
   Name?: string;
   /** 模板描述信息，长度限制：256 个字符。 */
   Comment?: string;
+  /** 录制类型，取值为video（音视频录制）、audio（纯音频录制）、auto（自动探测）。不填时默认值为video。 */
+  RecordType?: string;
 }
 
 declare interface CreateLiveRecordTemplateResponse {
@@ -8135,6 +8139,8 @@ declare interface ModifyLiveRecordTemplateRequest {
   Name?: string;
   /** 模板描述信息，长度限制：256 个字符。 */
   Comment?: string;
+  /** 录制类型，取值为video（音视频录制）、audio（纯音频录制）、auto（自动探测）。 */
+  RecordType?: string;
 }
 
 declare interface ModifyLiveRecordTemplateResponse {

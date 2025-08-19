@@ -683,7 +683,7 @@ declare interface Rce {
   DescribeUserUsageCnt(data?: DescribeUserUsageCntRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserUsageCntResponse>;
   /** 添加黑白名单数据 {@link ImportNameListDataRequest} {@link ImportNameListDataResponse} */
   ImportNameListData(data: ImportNameListDataRequest, config?: AxiosRequestConfig): AxiosPromise<ImportNameListDataResponse>;
-  /** 全栈式风控引擎 {@link ManageMarketingRiskRequest} {@link ManageMarketingRiskResponse} */
+  /** 通用业务欺诈保护 {@link ManageMarketingRiskRequest} {@link ManageMarketingRiskResponse} */
   ManageMarketingRisk(data?: ManageMarketingRiskRequest, config?: AxiosRequestConfig): AxiosPromise<ManageMarketingRiskResponse>;
   /** 修改黑白名单 {@link ModifyNameListRequest} {@link ModifyNameListResponse} */
   ModifyNameList(data: ModifyNameListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNameListResponse>;

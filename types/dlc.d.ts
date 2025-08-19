@@ -633,6 +633,34 @@ declare interface DataGovernPolicy {
 }
 
 /** 数据脱敏策略信息 */
+declare interface DataMaskStrategy {
+  /** 策略ID */
+  StrategyId?: string | null;
+  /** 用户AppId */
+  UserAppId?: string | null;
+  /** 用户Uin */
+  Uin?: string | null;
+  /** 操作用户子账号uin */
+  SubAccountUin?: string | null;
+  /** 策略名称 */
+  StrategyName?: string | null;
+  /** MASK_SHOW_FIRST_4; MASK_SHOW_LAST_4;MASK_HASH; MASK_DATE_SHOW_YEAR; MASK_NULL; MASK_DEFAULT 等 */
+  StrategyType?: string | null;
+  /** 策略描述 */
+  StrategyDesc?: string | null;
+  /** 用户组策略列表 */
+  Groups?: GroupInfo[] | null;
+  /** 用户子账号uin列表，按;拼接 */
+  Users?: string | null;
+  /** 1: 生效中； 0：已删除 */
+  State?: number | null;
+  /** 策略创建时间，毫秒时间戳 */
+  CreateTime?: number | null;
+  /** 策略更新时间，毫秒时间戳 */
+  UpdateTime?: number | null;
+}
+
+/** 数据脱敏策略信息 */
 declare interface DataMaskStrategyInfo {
   /** 策略名称 */
   StrategyName?: string;
@@ -646,6 +674,16 @@ declare interface DataMaskStrategyInfo {
   Users?: string;
   /** 策略Id */
   StrategyId?: string;
+}
+
+/** 数据脱敏策略权限对象 */
+declare interface DataMaskStrategyPolicy {
+  /** 数据脱敏权限对象 */
+  PolicyInfo?: Policy | null;
+  /** 数据脱敏策略ID */
+  DataMaskStrategyId?: string | null;
+  /** 绑定字段类型 */
+  ColumnType?: string | null;
 }
 
 /** 数据源详细信息 */
@@ -2248,6 +2286,16 @@ declare interface TextFile {
   Regex?: string;
 }
 
+/** UDF权限信息 */
+declare interface UDFPolicyInfo {
+  /** 权限类型示例：select，alter，drop */
+  Accesses?: string[];
+  /** 拥有权限的用户信息 */
+  Users?: string[];
+  /** 拥有权限的工作组的信息 */
+  Groups?: string[];
+}
+
 /** 配置下发参数 */
 declare interface UpdateConfContext {
   /** 参数类型，可选：StaticConfigType，DynamicConfigType */
@@ -2656,6 +2704,16 @@ declare interface AssociateDatasourceHouseResponse {
   RequestId?: string;
 }
 
+declare interface AttachDataMaskPolicyRequest {
+  /** 要绑定的数据脱敏策略权限对象集合 */
+  DataMaskStrategyPolicySet?: DataMaskStrategyPolicy[];
+}
+
+declare interface AttachDataMaskPolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AttachUserPolicyRequest {
   /** 用户Id，和子用户uin相同，需要先使用CreateUser接口创建用户。可以使用DescribeUsers接口查看。 */
   UserId: string;
@@ -2968,6 +3026,16 @@ declare interface CreateDataEngineRequest {
 declare interface CreateDataEngineResponse {
   /** 虚拟引擎id */
   DataEngineId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDataMaskStrategyRequest {
+  /** 数据脱敏策略详情 */
+  Strategy?: DataMaskStrategyInfo;
+}
+
+declare interface CreateDataMaskStrategyResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3550,6 +3618,16 @@ declare interface DeleteDataEngineResponse {
   RequestId?: string;
 }
 
+declare interface DeleteDataMaskStrategyRequest {
+  /** 数据脱敏策略Id */
+  StrategyId?: string;
+}
+
+declare interface DeleteDataMaskStrategyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteNativeSparkSessionRequest {
   /** 引擎id */
   DataEngineId?: string;
@@ -4016,6 +4094,24 @@ declare interface DescribeDataEnginesScaleDetailRequest {
 declare interface DescribeDataEnginesScaleDetailResponse {
   /** 引擎规格统计详细信息 */
   Scales?: DataEngineScaleInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDataMaskStrategiesRequest {
+  /** 分页参数，单页返回数据量，默认10 */
+  Limit?: number;
+  /** 分页参数，数据便偏移量，默认0 */
+  Offset?: number;
+  /** 过滤字段，strategy-name: 按策略名称搜索 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeDataMaskStrategiesResponse {
+  /** 总数据脱敏策略数 */
+  TotalCount?: number;
+  /** 数据脱敏策略列表 */
+  Strategies?: DataMaskStrategy[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4872,6 +4968,22 @@ declare interface DescribeThirdPartyAccessUserRequest {
 declare interface DescribeThirdPartyAccessUserResponse {
   /** 用户信息 */
   UserInfo?: OpendThirdAccessUserInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUDFPolicyRequest {
+  /** udf名称 */
+  Name: string;
+  /** 数据库名(全局UDF：global-function) */
+  DatabaseName: string;
+  /** 数据目录名 */
+  CatalogName: string;
+}
+
+declare interface DescribeUDFPolicyResponse {
+  /** UDF权限信息 */
+  UDFPolicyInfos?: UDFPolicyInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5754,6 +5866,16 @@ declare interface UpdateDataEngineResponse {
   RequestId?: string;
 }
 
+declare interface UpdateDataMaskStrategyRequest {
+  /** 数据脱敏策略详情 */
+  Strategy?: DataMaskStrategyInfo;
+}
+
+declare interface UpdateDataMaskStrategyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateEngineResourceGroupNetworkConfigInfoRequest {
   /** 引擎资源组ID */
   EngineResourceGroupId: string;
@@ -5866,6 +5988,24 @@ declare interface UpdateStandardEngineResourceGroupResourceInfoResponse {
   RequestId?: string;
 }
 
+declare interface UpdateUDFPolicyRequest {
+  /** UDF名称 */
+  Name: string;
+  /** 数据库名 */
+  DatabaseName: string;
+  /** 数据目录名 */
+  CatalogName: string;
+  /** UDF权限信息 */
+  UDFPolicyInfos: UDFPolicyInfo[];
+}
+
+declare interface UpdateUDFPolicyResponse {
+  /** UDF权限信息 */
+  UDFPolicyInfos?: UDFPolicyInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateUserDataEngineConfigRequest {
   /** 引擎ID */
   DataEngineId: string;
@@ -5909,6 +6049,8 @@ declare interface Dlc {
   AssignMangedTableProperties(data: AssignMangedTablePropertiesRequest, config?: AxiosRequestConfig): AxiosPromise<AssignMangedTablePropertiesResponse>;
   /** 绑定数据源与队列 {@link AssociateDatasourceHouseRequest} {@link AssociateDatasourceHouseResponse} */
   AssociateDatasourceHouse(data: AssociateDatasourceHouseRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateDatasourceHouseResponse>;
+  /** 绑定数据脱敏策略 {@link AttachDataMaskPolicyRequest} {@link AttachDataMaskPolicyResponse} */
+  AttachDataMaskPolicy(data?: AttachDataMaskPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachDataMaskPolicyResponse>;
   /** 绑定鉴权策略到用户 {@link AttachUserPolicyRequest} {@link AttachUserPolicyResponse} */
   AttachUserPolicy(data: AttachUserPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachUserPolicyResponse>;
   /** 绑定鉴权策略到工作组 {@link AttachWorkGroupPolicyRequest} {@link AttachWorkGroupPolicyResponse} */
@@ -5941,6 +6083,8 @@ declare interface Dlc {
   CreateDMSTable(data?: CreateDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDMSTableResponse>;
   /** 创建数据引擎. {@link CreateDataEngineRequest} {@link CreateDataEngineResponse} */
   CreateDataEngine(data: CreateDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataEngineResponse>;
+  /** 创建数据脱敏策略 {@link CreateDataMaskStrategyRequest} {@link CreateDataMaskStrategyResponse} */
+  CreateDataMaskStrategy(data?: CreateDataMaskStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataMaskStrategyResponse>;
   /** 生成建库SQL语句 {@link CreateDatabaseRequest} {@link CreateDatabaseResponse} */
   CreateDatabase(data: CreateDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatabaseResponse>;
   /** 创建导出任务 {@link CreateExportTaskRequest} {@link CreateExportTaskResponse} */
@@ -5989,6 +6133,8 @@ declare interface Dlc {
   DeleteCHDFSBindingProduct(data: DeleteCHDFSBindingProductRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCHDFSBindingProductResponse>;
   /** 删除数据引擎 {@link DeleteDataEngineRequest} {@link DeleteDataEngineResponse} */
   DeleteDataEngine(data: DeleteDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataEngineResponse>;
+  /** 删除数据脱敏策略 {@link DeleteDataMaskStrategyRequest} {@link DeleteDataMaskStrategyResponse} */
+  DeleteDataMaskStrategy(data?: DeleteDataMaskStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataMaskStrategyResponse>;
   /** 销毁EG SparkSession {@link DeleteNativeSparkSessionRequest} {@link DeleteNativeSparkSessionResponse} */
   DeleteNativeSparkSession(data?: DeleteNativeSparkSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNativeSparkSessionResponse>;
   /** 删除交互式session（notebook） {@link DeleteNotebookSessionRequest} {@link DeleteNotebookSessionResponse} */
@@ -6039,6 +6185,8 @@ declare interface Dlc {
   DescribeDataEngines(data?: DescribeDataEnginesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataEnginesResponse>;
   /** 查看引擎的规格明细 {@link DescribeDataEnginesScaleDetailRequest} {@link DescribeDataEnginesScaleDetailResponse} */
   DescribeDataEnginesScaleDetail(data?: DescribeDataEnginesScaleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataEnginesScaleDetailResponse>;
+  /** 查询数据脱敏策略列表 {@link DescribeDataMaskStrategiesRequest} {@link DescribeDataMaskStrategiesResponse} */
+  DescribeDataMaskStrategies(data?: DescribeDataMaskStrategiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataMaskStrategiesResponse>;
   /** 查询数据库列表 {@link DescribeDatabasesRequest} {@link DescribeDatabasesResponse} */
   DescribeDatabases(data?: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
   /** 查询数据源信息 {@link DescribeDatasourceConnectionRequest} {@link DescribeDatasourceConnectionResponse} */
@@ -6125,6 +6273,8 @@ declare interface Dlc {
   DescribeTasksOverview(data?: DescribeTasksOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksOverviewResponse>;
   /** 查询开通的第三方平台访问用户信息 {@link DescribeThirdPartyAccessUserRequest} {@link DescribeThirdPartyAccessUserResponse} */
   DescribeThirdPartyAccessUser(data?: DescribeThirdPartyAccessUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeThirdPartyAccessUserResponse>;
+  /** 获取UDF权限信息 {@link DescribeUDFPolicyRequest} {@link DescribeUDFPolicyResponse} */
+  DescribeUDFPolicy(data: DescribeUDFPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUDFPolicyResponse>;
   /** 查询可更新配置的引擎列表 {@link DescribeUpdatableDataEnginesRequest} {@link DescribeUpdatableDataEnginesResponse} */
   DescribeUpdatableDataEngines(data: DescribeUpdatableDataEnginesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUpdatableDataEnginesResponse>;
   /** 查询用户自定义引擎参数 {@link DescribeUserDataEngineConfigRequest} {@link DescribeUserDataEngineConfigResponse} */
@@ -6223,6 +6373,8 @@ declare interface Dlc {
   UpdateDataEngine(data: UpdateDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDataEngineResponse>;
   /** 修改引擎配置 {@link UpdateDataEngineConfigRequest} {@link UpdateDataEngineConfigResponse} */
   UpdateDataEngineConfig(data: UpdateDataEngineConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDataEngineConfigResponse>;
+  /** 更新数据脱敏策略 {@link UpdateDataMaskStrategyRequest} {@link UpdateDataMaskStrategyResponse} */
+  UpdateDataMaskStrategy(data?: UpdateDataMaskStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDataMaskStrategyResponse>;
   /** 更新标准引擎资源组网络配置信息 {@link UpdateEngineResourceGroupNetworkConfigInfoRequest} {@link UpdateEngineResourceGroupNetworkConfigInfoResponse} */
   UpdateEngineResourceGroupNetworkConfigInfo(data: UpdateEngineResourceGroupNetworkConfigInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEngineResourceGroupNetworkConfigInfoResponse>;
   /** 更新网络配置 {@link UpdateNetworkConnectionRequest} {@link UpdateNetworkConnectionResponse} */
@@ -6235,6 +6387,8 @@ declare interface Dlc {
   UpdateStandardEngineResourceGroupConfigInfo(data: UpdateStandardEngineResourceGroupConfigInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateStandardEngineResourceGroupConfigInfoResponse>;
   /** 更新标准引擎资源组资源信息 {@link UpdateStandardEngineResourceGroupResourceInfoRequest} {@link UpdateStandardEngineResourceGroupResourceInfoResponse} */
   UpdateStandardEngineResourceGroupResourceInfo(data: UpdateStandardEngineResourceGroupResourceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateStandardEngineResourceGroupResourceInfoResponse>;
+  /** 修改UDF权限 {@link UpdateUDFPolicyRequest} {@link UpdateUDFPolicyResponse} */
+  UpdateUDFPolicy(data: UpdateUDFPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUDFPolicyResponse>;
   /** 修改用户引擎自定义配置 {@link UpdateUserDataEngineConfigRequest} {@link UpdateUserDataEngineConfigResponse} */
   UpdateUserDataEngineConfig(data: UpdateUserDataEngineConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUserDataEngineConfigResponse>;
   /** 升级引擎镜像 {@link UpgradeDataEngineImageRequest} {@link UpgradeDataEngineImageResponse} */

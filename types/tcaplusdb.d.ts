@@ -5,53 +5,53 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 审批申请单 */
 declare interface Application {
   /** 审批单号 */
-  ApplicationId: string;
+  ApplicationId?: string;
   /** 申请类型 */
-  ApplicationType: number;
+  ApplicationType?: number;
   /** 集群Id */
-  ClusterId: string;
+  ClusterId?: string;
   /** 集群名称 */
-  ClusterName: string;
+  ClusterName?: string;
   /** 表格组名称 */
-  TableGroupName: string | null;
+  TableGroupName?: string;
   /** 表格名称 */
-  TableName: string;
+  TableName?: string;
   /** 申请人 */
-  Applicant: string;
+  Applicant?: string;
   /** 建单时间 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 处理状态 -1 撤回 0-待审核 1-已经审核并提交任务 2-已驳回 */
-  ApplicationStatus: number;
+  ApplicationStatus?: number;
   /** 表格组Id */
-  TableGroupId: string;
+  TableGroupId?: string;
   /** 已提交的任务Id，未提交申请为0 */
-  TaskId: string;
+  TaskId?: string;
   /** 腾讯云上table的唯一键 */
-  TableInstanceId: string | null;
+  TableInstanceId?: string;
   /** 更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string;
   /** 审批人 */
-  ExecuteUser: string | null;
+  ExecuteUser?: string;
   /** 执行状态 */
-  ExecuteStatus: string | null;
+  ExecuteStatus?: string;
   /** 该申请单是否可以被当前用户审批 */
-  CanCensor: boolean | null;
+  CanCensor?: boolean;
   /** 该申请单是否可以被当前用户撤回 */
-  CanWithdrawal: boolean | null;
+  CanWithdrawal?: boolean;
 }
 
 /** 更新申请单结果 */
 declare interface ApplyResult {
   /** 申请单id */
-  ApplicationId: string;
+  ApplicationId?: string;
   /** 申请类型 */
-  ApplicationType: number;
+  ApplicationType?: number;
   /** 处理状态 0-待审核 1-已经审核并提交任务 2-已驳回 */
-  ApplicationStatus: number | null;
+  ApplicationStatus?: number;
   /** 已提交的任务Id */
-  TaskId: string | null;
+  TaskId?: string;
   /** 错误信息 */
-  Error: ErrorInfo | null;
+  Error?: ErrorInfo;
 }
 
 /** 申请单id及其状态 */
@@ -107,93 +107,93 @@ declare interface BackupRecords {
 /** 集群详细信息 */
 declare interface ClusterInfo {
   /** 集群名称 */
-  ClusterName: string;
+  ClusterName?: string;
   /** 集群ID */
-  ClusterId: string;
+  ClusterId?: string;
   /** 集群所在地域 */
-  Region: string;
+  Region?: string;
   /** 集群数据描述语言类型，如：`PROTO`,`TDR` */
-  IdlType: string;
+  IdlType?: string;
   /** 网络类型 */
-  NetworkType: string;
+  NetworkType?: string;
   /** 集群关联的用户私有网络实例ID */
-  VpcId: string;
+  VpcId?: string;
   /** 集群关联的用户子网实例ID */
-  SubnetId: string;
+  SubnetId?: string;
   /** 创建时间 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 集群密码 */
-  Password: string;
+  Password?: string;
   /** 密码状态 */
-  PasswordStatus: string;
+  PasswordStatus?: string;
   /** TcaplusDB SDK连接参数，接入ID */
-  ApiAccessId: string;
+  ApiAccessId?: string;
   /** TcaplusDB SDK连接参数，接入地址 */
-  ApiAccessIp: string;
+  ApiAccessIp?: string;
   /** TcaplusDB SDK连接参数，接入端口 */
-  ApiAccessPort: number;
+  ApiAccessPort?: number;
   /** 如果PasswordStatus是unmodifiable说明有旧密码还未过期，此字段将显示旧密码过期的时间，否则为空 */
-  OldPasswordExpireTime: string | null;
+  OldPasswordExpireTime?: string;
   /** TcaplusDB SDK连接参数，接入ipv6地址 */
-  ApiAccessIpv6: string | null;
+  ApiAccessIpv6?: string;
   /** 集群类型，0,1:共享集群; 2:独立集群 */
-  ClusterType: number | null;
+  ClusterType?: number;
   /** 集群状态, 0：表示正常运行中，1：表示冻结隔离一般欠费进入此状态，2：表示待回收，一般用户主动触发删除进入这个状态，3：待释放，进入这个状态，表示可以释放此表占用的资源了，4：变更中 */
-  ClusterStatus: number | null;
+  ClusterStatus?: number;
   /** 读CU */
-  ReadCapacityUnit: number | null;
+  ReadCapacityUnit?: number;
   /** 写CU */
-  WriteCapacityUnit: number | null;
+  WriteCapacityUnit?: number;
   /** 磁盘容量 */
-  DiskVolume: number | null;
+  DiskVolume?: number;
   /** 独占server机器信息 */
-  ServerList: ServerDetailInfo[] | null;
+  ServerList?: ServerDetailInfo[];
   /** 独占proxy机器信息 */
-  ProxyList: ProxyDetailInfo[] | null;
+  ProxyList?: ProxyDetailInfo[];
   /** 是否开启审核 0-不开启 1-开启 */
-  Censorship: number;
+  Censorship?: number;
   /** 审批人uin列表 */
-  DbaUins: string[] | null;
+  DbaUins?: string[];
   /** 是否开启了数据订阅 */
-  DataFlowStatus: number | null;
+  DataFlowStatus?: number;
   /** 数据订阅的kafka信息 */
-  KafkaInfo: KafkaInfo | null;
+  KafkaInfo?: KafkaInfo;
   /** 集群Txh备份文件多少天后过期删除 */
-  TxhBackupExpireDay: number | null;
+  TxhBackupExpireDay?: number;
   /** 集群Ulog备份文件多少天后过期删除 */
-  UlogBackupExpireDay: number | null;
+  UlogBackupExpireDay?: number;
   /** 集群Ulog备份文件过期策略是否为只读， 0： UlogBackupExpire是只读，不可修改， 1： UlogBackupExpire可以修改（当前业务存在Svrid第二段等于clusterid的机器） */
-  IsReadOnlyUlogBackupExpireDay: number | null;
+  IsReadOnlyUlogBackupExpireDay?: number;
   /** restproxy状态 */
-  RestProxyStatus: number | null;
+  RestProxyStatus?: number;
 }
 
 /** 比较表格的Meta信息 */
 declare interface CompareTablesInfo {
   /** 源表格的集群id */
-  SrcTableClusterId: string | null;
+  SrcTableClusterId?: string;
   /** 源表格的表格组id */
-  SrcTableGroupId: string | null;
+  SrcTableGroupId?: string;
   /** 源表格的表名 */
-  SrcTableName: string | null;
+  SrcTableName?: string;
   /** 目标表格的集群id */
-  DstTableClusterId: string | null;
+  DstTableClusterId?: string;
   /** 目标表格的表格组id */
-  DstTableGroupId: string | null;
+  DstTableGroupId?: string;
   /** 目标表格的表名 */
-  DstTableName: string | null;
+  DstTableName?: string;
   /** 源表格的实例id */
-  SrcTableInstanceId: string | null;
+  SrcTableInstanceId?: string;
   /** 目标表格的实例id */
-  DstTableInstanceId: string | null;
+  DstTableInstanceId?: string;
 }
 
 /** 描述每个实例（应用，大区或表）处理过程中可能出现的错误详情。 */
 declare interface ErrorInfo {
   /** 错误码 */
-  Code: string;
+  Code?: string;
   /** 错误信息 */
-  Message: string;
+  Message?: string;
 }
 
 /** 表格字段信息列表 */
@@ -229,41 +229,41 @@ declare interface IdlFileInfo {
   /** 文件大小（Bytes） */
   FileSize: number;
   /** 文件ID，对于已上传的文件有意义 */
-  FileId?: number | null;
+  FileId?: number;
   /** 文件内容，对于本次新上传的文件有意义 */
-  FileContent?: string | null;
+  FileContent?: string;
 }
 
 /** 表定义描述文件详情，不包含文件内容 */
 declare interface IdlFileInfoWithoutContent {
   /** 文件名称，不包含扩展名 */
-  FileName: string | null;
+  FileName?: string;
   /** 数据描述语言（IDL）类型 */
-  FileType: string | null;
+  FileType?: string;
   /** 文件扩展名 */
-  FileExtType: string | null;
+  FileExtType?: string;
   /** 文件大小（Bytes） */
-  FileSize: number | null;
+  FileSize?: number;
   /** 文件ID */
-  FileId: number | null;
+  FileId?: number;
   /** 错误信息 */
-  Error: ErrorInfo | null;
+  Error?: ErrorInfo;
 }
 
 /** ckafka地址信息 */
 declare interface KafkaInfo {
   /** Kafka address */
-  Address: string | null;
+  Address?: string;
   /** Kafka topic */
-  Topic: string | null;
+  Topic?: string;
   /** kafka username */
-  User: string | null;
+  User?: string;
   /** kafka password */
-  Password: string | null;
+  Password?: string;
   /** ckafka实例 */
-  Instance: string | null;
+  Instance?: string;
   /** 是否走VPC */
-  IsVpc: number | null;
+  IsVpc?: number;
 }
 
 /** 部分key导入快照数据时所需要的key文件 */
@@ -289,13 +289,13 @@ declare interface MachineInfo {
 /** 合服结果 */
 declare interface MergeTableResult {
   /** 任务Id */
-  TaskId: string | null;
+  TaskId?: string;
   /** 成功时此字段返回 null，表示取不到有效值。 */
-  Error: ErrorInfo | null;
+  Error?: ErrorInfo;
   /** 对比的表格信息 */
-  Table: CompareTablesInfo;
+  Table?: CompareTablesInfo;
   /** 申请单Id */
-  ApplicationId: string | null;
+  ApplicationId?: string;
 }
 
 /** 合服请求入参 */
@@ -309,71 +309,71 @@ declare interface MergeTablesInfo {
 /** 从IDL表描述文件中解析出来的表信息 */
 declare interface ParsedTableInfoNew {
   /** 表格描述语言类型：`PROTO`或`TDR` */
-  TableIdlType: string | null;
+  TableIdlType?: string;
   /** 表格实例ID */
-  TableInstanceId: string | null;
+  TableInstanceId?: string;
   /** 表格名称 */
-  TableName: string | null;
+  TableName?: string;
   /** 表格数据结构类型：`GENERIC`或`LIST` */
-  TableType: string | null;
+  TableType?: string;
   /** 主键字段信息 */
-  KeyFields: string | null;
+  KeyFields?: string;
   /** 原主键字段信息，改表校验时有效 */
-  OldKeyFields: string | null;
+  OldKeyFields?: string;
   /** 非主键字段信息 */
-  ValueFields: string | null;
+  ValueFields?: string;
   /** 原非主键字段信息，改表校验时有效 */
-  OldValueFields: string | null;
+  OldValueFields?: string;
   /** 所属表格组ID */
-  TableGroupId: string | null;
+  TableGroupId?: string;
   /** 主键字段总大小 */
-  SumKeyFieldSize: number | null;
+  SumKeyFieldSize?: number;
   /** 非主键字段总大小 */
-  SumValueFieldSize: number | null;
+  SumValueFieldSize?: number;
   /** 索引键集合 */
-  IndexKeySet: string | null;
+  IndexKeySet?: string;
   /** 分表因子集合 */
-  ShardingKeySet: string | null;
+  ShardingKeySet?: string;
   /** TDR版本号 */
-  TdrVersion: number | null;
+  TdrVersion?: number;
   /** 错误信息 */
-  Error: ErrorInfo | null;
+  Error?: ErrorInfo;
   /** LIST类型表格元素个数 */
-  ListElementNum: number | null;
+  ListElementNum?: number;
   /** SORTLIST类型表格排序字段个数 */
-  SortFieldNum: number | null;
+  SortFieldNum?: number;
   /** SORTLIST类型表格排序顺序 */
-  SortRule: number | null;
+  SortRule?: number;
 }
 
 /** center资源池中的机器信息 */
 declare interface PoolInfo {
   /** 唯一id */
-  PoolUid: number;
+  PoolUid?: number;
   /** 是否支持ipv6 */
-  Ipv6Enable: number;
+  Ipv6Enable?: number;
   /** 剩余可用app */
-  AvailableAppCount: number;
+  AvailableAppCount?: number;
   /** svr机器列表 */
-  ServerList: ServerMachineInfo[];
+  ServerList?: ServerMachineInfo[];
   /** proxy机器列表 */
-  ProxyList: ProxyMachineInfo[];
+  ProxyList?: ProxyMachineInfo[];
 }
 
 /** 独占的proxy详细信息 */
 declare interface ProxyDetailInfo {
   /** proxy的唯一id */
-  ProxyUid: string;
+  ProxyUid?: string;
   /** 机器类型 */
-  MachineType: string;
+  MachineType?: string;
   /** 请求包速度 */
-  ProcessSpeed: number;
+  ProcessSpeed?: number;
   /** 请求包时延 */
-  AverageProcessDelay: number;
+  AverageProcessDelay?: number;
   /** 慢处理包速度 */
-  SlowProcessSpeed: number;
+  SlowProcessSpeed?: number;
   /** 版本 */
-  Version: string | null;
+  Version?: string;
 }
 
 /** proxy机器信息 */
@@ -389,13 +389,13 @@ declare interface ProxyMachineInfo {
 /** TcaplusDB服务地域信息详情 */
 declare interface RegionInfo {
   /** 地域Ap-Code */
-  RegionName: string;
+  RegionName?: string;
   /** 地域缩写 */
-  RegionAbbr: string;
+  RegionAbbr?: string;
   /** 地域ID */
-  RegionId: number;
+  RegionId?: number;
   /** 是否支持ipv6，0:不支持，1:支持 */
-  Ipv6Enable: number;
+  Ipv6Enable?: number;
 }
 
 /** 被选中的表信息 */
@@ -453,27 +453,27 @@ declare interface SelectedTableWithField {
 /** server独占机器的详细信息 */
 declare interface ServerDetailInfo {
   /** svr唯一id */
-  ServerUid: string;
+  ServerUid?: string;
   /** 机器类型 */
-  MachineType: string;
+  MachineType?: string;
   /** 内存占用量 */
-  MemoryRate: number;
+  MemoryRate?: number;
   /** 磁盘占用量 */
-  DiskRate: number;
+  DiskRate?: number;
   /** 读次数 */
-  ReadNum: number;
+  ReadNum?: number;
   /** 写次数 */
-  WriteNum: number;
+  WriteNum?: number;
   /** 版本 */
-  Version: string | null;
+  Version?: string;
 }
 
 /** svr的机器列表ServerList */
 declare interface ServerMachineInfo {
   /** 机器唯一id */
-  ServerUid: string;
+  ServerUid?: string;
   /** 机器类型 */
-  MachineType: string;
+  MachineType?: string;
 }
 
 /** 快照列表 */
@@ -505,27 +505,27 @@ declare interface SnapshotInfoNew {
 /** 创建快照结果 */
 declare interface SnapshotResult {
   /** 表格所属表格组ID */
-  TableGroupId: string | null;
+  TableGroupId?: string;
   /** 表格名称 */
-  TableName: string | null;
+  TableName?: string;
   /** 任务ID，对于创建单任务的接口有效 */
-  TaskId: string | null;
+  TaskId?: string;
   /** 错误信息 */
-  Error: ErrorInfo | null;
+  Error?: ErrorInfo;
   /** 快照名称 */
-  SnapshotName: string | null;
+  SnapshotName?: string;
   /** 快照的时间点 */
-  SnapshotTime: string | null;
+  SnapshotTime?: string;
   /** 快照的过期时间点 */
-  SnapshotDeadTime: string | null;
+  SnapshotDeadTime?: string;
   /** 快照创建时间点 */
-  SnapshotCreateTime: string | null;
+  SnapshotCreateTime?: string;
   /** 快照大小 */
-  SnapshotSize: number | null;
+  SnapshotSize?: number;
   /** 快照状态，0 生成中 1 正常 2 删除中 3 已失效 4 回档使用中 */
-  SnapshotStatus: number | null;
+  SnapshotStatus?: number;
   /** 申请单ID */
-  ApplicationId?: string | null;
+  ApplicationId?: string;
 }
 
 /** 缓写表字段名称的映射 */
@@ -539,159 +539,159 @@ declare interface SyncTableField {
 /** TcaplusDB的缓写表信息 */
 declare interface SyncTableInfo {
   /** 目标缓写表的分表数目 */
-  TargetTableSplitNum: number;
+  TargetTableSplitNum?: number;
   /** 目标缓写表名前缀 */
-  TargetTableNamePrefix: string[];
+  TargetTableNamePrefix?: string[];
   /** 缓写数据库实例ID */
-  TargetSyncDBInstanceId: string;
+  TargetSyncDBInstanceId?: string;
   /** 缓写表所在数据库名称 */
-  TargetDatabaseName: string;
+  TargetDatabaseName?: string;
   /** 缓写状态，0：创建中，1：进行中，2：关闭，-1：被删除 */
-  Status: number;
+  Status?: number;
   /** 表格所在集群ID */
-  ClusterId: string;
+  ClusterId?: string;
   /** 表格所在表格组ID */
-  TableGroupId: number;
+  TableGroupId?: number;
   /** 表格名称 */
-  TableName: string;
+  TableName?: string;
   /** 表格ID */
-  TableId: string;
+  TableId?: string;
   /** TcaplusDB表主键字段到目标缓写表字段的映射 */
-  KeyFieldMapping: SyncTableField[];
+  KeyFieldMapping?: SyncTableField[];
   /** TcaplusDB表字段到目标缓写表字段的映射 */
-  ValueFieldMapping: SyncTableField[];
+  ValueFieldMapping?: SyncTableField[];
 }
 
 /** 表格组详细信息 */
 declare interface TableGroupInfo {
   /** 表格组ID */
-  TableGroupId: string;
+  TableGroupId?: string;
   /** 表格组名称 */
-  TableGroupName: string;
+  TableGroupName?: string;
   /** 表格组创建时间 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 表格组包含的表格数量 */
-  TableCount: number;
+  TableCount?: number;
   /** 表格组包含的表格存储总量（MB） */
-  TotalSize: number;
+  TotalSize?: number;
   /** 表格Txh备份文件多少天后过期删除 */
-  TxhBackupExpireDay: number | null;
+  TxhBackupExpireDay?: number;
   /** 是否开启mysql负载均衡,0未开启 1开启中 2已开启 */
-  EnableMysql: number;
+  EnableMysql?: number;
   /** mysql负载均衡vip */
-  MysqlConnIp: string | null;
+  MysqlConnIp?: string;
   /** mysql负载均衡vport */
-  MysqlConnPort: number | null;
+  MysqlConnPort?: number;
 }
 
 /** 表格详情信息 */
 declare interface TableInfoNew {
   /** 表格名称 */
-  TableName: string | null;
+  TableName?: string;
   /** 表格实例ID */
-  TableInstanceId: string | null;
+  TableInstanceId?: string;
   /** 表格数据结构类型，如：`GENERIC`或`LIST` */
-  TableType: string | null;
+  TableType?: string;
   /** 表格数据描述语言（IDL）类型，如：`PROTO`或`TDR` */
-  TableIdlType: string | null;
+  TableIdlType?: string;
   /** 表格所属集群ID */
-  ClusterId: string | null;
+  ClusterId?: string;
   /** 表格所属集群名称 */
-  ClusterName: string | null;
+  ClusterName?: string;
   /** 表格所属表格组ID */
-  TableGroupId: string | null;
+  TableGroupId?: string;
   /** 表格所属表格组名称 */
-  TableGroupName: string | null;
+  TableGroupName?: string;
   /** 表格主键字段结构json字符串 */
-  KeyStruct: string | null;
+  KeyStruct?: string;
   /** 表格非主键字段结构json字符串 */
-  ValueStruct: string | null;
+  ValueStruct?: string;
   /** 表格分表因子集合，对PROTO类型表格有效 */
-  ShardingKeySet: string | null;
+  ShardingKeySet?: string;
   /** 表格索引键字段集合，对PROTO类型表格有效 */
-  IndexStruct: string | null;
+  IndexStruct?: string;
   /** LIST类型表格元素个数 */
-  ListElementNum: number | null;
+  ListElementNum?: number;
   /** 表格所关联IDL文件信息列表 */
-  IdlFiles: IdlFileInfo[] | null;
+  IdlFiles?: IdlFileInfo[];
   /** 表格预留容量（GB） */
-  ReservedVolume: number | null;
+  ReservedVolume?: number;
   /** 表格预留读CU */
-  ReservedReadQps: number | null;
+  ReservedReadQps?: number;
   /** 表格预留写CU */
-  ReservedWriteQps: number | null;
+  ReservedWriteQps?: number;
   /** 表格实际数据量大小（MB） */
-  TableSize: number | null;
+  TableSize?: number;
   /** 表格状态 */
-  Status: string | null;
+  Status?: string;
   /** 表格创建时间 */
-  CreatedTime: string | null;
+  CreatedTime?: string;
   /** 表格最后一次修改时间 */
-  UpdatedTime: string | null;
+  UpdatedTime?: string;
   /** 表格备注信息 */
-  Memo: string | null;
+  Memo?: string;
   /** 错误信息 */
-  Error: ErrorInfo | null;
+  Error?: ErrorInfo;
   /** TcaplusDB SDK数据访问接入ID */
-  ApiAccessId: string | null;
+  ApiAccessId?: string;
   /** SORTLIST类型表格排序字段个数 */
-  SortFieldNum: number | null;
+  SortFieldNum?: number;
   /** SORTLIST类型表格排序顺序 */
-  SortRule: number | null;
+  SortRule?: number;
   /** 表格分布式索引/缓写、kafka数据订阅信息 */
-  DbClusterInfoStruct: string | null;
+  DbClusterInfoStruct?: string;
   /** 表格Txh备份文件多少天后过期删除 */
-  TxhBackupExpireDay: number | null;
+  TxhBackupExpireDay?: number;
   /** 表格的缓写信息 */
-  SyncTableInfo: SyncTableInfo | null;
+  SyncTableInfo?: SyncTableInfo;
 }
 
 /** 表处理结果信息 */
 declare interface TableResultNew {
   /** 表格实例ID，形如：tcaplus-3be64cbb */
-  TableInstanceId: string | null;
+  TableInstanceId?: string;
   /** 任务ID，对于创建单任务的接口有效 */
-  TaskId: string | null;
+  TaskId?: string;
   /** 表格名称 */
-  TableName: string | null;
+  TableName?: string;
   /** 表格数据结构类型，如：`GENERIC`或`LIST` */
-  TableType: string | null;
+  TableType?: string;
   /** 表数据描述语言（IDL）类型，如：`PROTO`或`TDR` */
-  TableIdlType: string | null;
+  TableIdlType?: string;
   /** 表格所属表格组ID */
-  TableGroupId: string | null;
+  TableGroupId?: string;
   /** 错误信息 */
-  Error: ErrorInfo | null;
+  Error?: ErrorInfo;
   /** 任务ID列表，对于创建多任务的接口有效 */
-  TaskIds: string[] | null;
+  TaskIds?: string[];
   /** 腾讯云申请审核单Id */
-  ApplicationId: string | null;
+  ApplicationId?: string;
 }
 
 /** 表格回档结果信息 */
 declare interface TableRollbackResultNew {
   /** 表格实例ID，形如：tcaplus-3be64cbb */
-  TableInstanceId: string | null;
+  TableInstanceId?: string;
   /** 任务ID，对于创建单任务的接口有效 */
-  TaskId: string | null;
+  TaskId?: string;
   /** 表格名称 */
-  TableName: string | null;
+  TableName?: string;
   /** 表格数据结构类型，如：`GENERIC`或`LIST` */
-  TableType: string | null;
+  TableType?: string;
   /** 表格数据描述语言（IDL）类型，如：`PROTO`或`TDR` */
-  TableIdlType: string | null;
+  TableIdlType?: string;
   /** 表格所属表格组ID */
-  TableGroupId: string | null;
+  TableGroupId?: string;
   /** 错误信息 */
-  Error: ErrorInfo | null;
+  Error?: ErrorInfo;
   /** 任务ID列表，对于创建多任务的接口有效 */
-  TaskIds: string[] | null;
+  TaskIds?: string[];
   /** 上传的key文件ID */
-  FileId: string | null;
+  FileId?: string;
   /** 校验成功Key数量 */
-  SuccKeyNum: number | null;
+  SuccKeyNum?: number;
   /** Key文件中包含总的Key数量 */
-  TotalKeyNum: number | null;
+  TotalKeyNum?: number;
 }
 
 /** 标签信息单元 */
@@ -699,73 +699,73 @@ declare interface TagInfoUnit {
   /** 标签键 */
   TagKey: string;
   /** 标签值 */
-  TagValue?: string | null;
+  TagValue?: string;
 }
 
 /** 集群的标签信息 */
 declare interface TagsInfoOfCluster {
   /** 集群ID */
-  ClusterId: string | null;
+  ClusterId?: string;
   /** 标签信息 */
-  Tags: TagInfoUnit[] | null;
+  Tags?: TagInfoUnit[];
   /** 错误信息 */
-  Error: ErrorInfo | null;
+  Error?: ErrorInfo;
 }
 
 /** 表格标签信息 */
 declare interface TagsInfoOfTable {
   /** 表格实例ID */
-  TableInstanceId: string | null;
+  TableInstanceId?: string;
   /** 表格名称 */
-  TableName: string | null;
+  TableName?: string;
   /** 表格组ID */
-  TableGroupId: string | null;
+  TableGroupId?: string;
   /** 标签信息 */
-  Tags: TagInfoUnit[] | null;
+  Tags?: TagInfoUnit[];
   /** 错误信息 */
-  Error: ErrorInfo | null;
+  Error?: ErrorInfo;
 }
 
 /** 表格组标签信息 */
 declare interface TagsInfoOfTableGroup {
   /** 集群ID */
-  ClusterId: string | null;
+  ClusterId?: string;
   /** 表格组ID */
-  TableGroupId: string | null;
+  TableGroupId?: string;
   /** 标签信息 */
-  Tags: TagInfoUnit[] | null;
+  Tags?: TagInfoUnit[];
   /** 错误信息 */
-  Error: ErrorInfo | null;
+  Error?: ErrorInfo;
 }
 
 /** 任务信息详情 */
 declare interface TaskInfoNew {
   /** 任务ID */
-  TaskId: string;
+  TaskId?: string;
   /** 任务类型 */
-  TaskType: string;
+  TaskType?: string;
   /** 任务所关联的TcaplusDB内部事务ID */
-  TransId: string;
+  TransId?: string;
   /** 任务所属集群ID */
-  ClusterId: string;
+  ClusterId?: string;
   /** 任务所属集群名称 */
-  ClusterName: string;
+  ClusterName?: string;
   /** 任务进度 */
-  Progress: number;
+  Progress?: number;
   /** 任务创建时间 */
-  StartTime: string;
+  StartTime?: string;
   /** 任务最后更新时间 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 操作者 */
-  Operator: string;
+  Operator?: string;
   /** 任务详情 */
-  Content: string;
+  Content?: string;
   /** 表格组ID */
-  TableGroupId?: string | null;
+  TableGroupId?: string;
   /** 表格组名称 */
-  TableGroupName?: string | null;
+  TableGroupName?: string;
   /** 表名称 */
-  TableName?: string | null;
+  TableName?: string;
 }
 
 declare interface ClearTablesRequest {
@@ -817,9 +817,9 @@ declare interface CreateBackupRequest {
 
 declare interface CreateBackupResponse {
   /** 创建的备份任务ID列表 */
-  TaskIds: string[] | null;
+  TaskIds?: string[];
   /** 创建的备份申请ID列表 */
-  ApplicationIds: string[] | null;
+  ApplicationIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -865,9 +865,9 @@ declare interface CreateSnapshotsRequest {
 
 declare interface CreateSnapshotsResponse {
   /** 批量创建的快照数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 批量创建的快照结果列表 */
-  TableResults: SnapshotResult[];
+  TableResults?: SnapshotResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -919,7 +919,7 @@ declare interface DeleteBackupRecordsRequest {
 
 declare interface DeleteBackupRecordsResponse {
   /** TaskId由 AppInstanceId-taskId 组成，以区分不同集群的任务 */
-  TaskId: string | null;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -961,9 +961,9 @@ declare interface DeleteSnapshotsRequest {
 
 declare interface DeleteSnapshotsResponse {
   /** 批量删除的快照数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 批量删除的快照结果 */
-  TableResults: SnapshotResult[];
+  TableResults?: SnapshotResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1051,9 +1051,9 @@ declare interface DescribeApplicationsRequest {
 
 declare interface DescribeApplicationsResponse {
   /** 申请单列表 */
-  Applications: Application[];
+  Applications?: Application[];
   /** 申请单个数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1073,9 +1073,9 @@ declare interface DescribeBackupRecordsRequest {
 
 declare interface DescribeBackupRecordsResponse {
   /** 备份记录详情 */
-  BackupRecords: BackupRecords[];
+  BackupRecords?: BackupRecords[];
   /** 返回记录条数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1087,9 +1087,9 @@ declare interface DescribeClusterTagsRequest {
 
 declare interface DescribeClusterTagsResponse {
   /** 集群标签信息列表 */
-  Rows?: TagsInfoOfCluster[] | null;
+  Rows?: TagsInfoOfCluster[];
   /** 返回结果个数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1177,9 +1177,9 @@ declare interface DescribeSnapshotsRequest {
 
 declare interface DescribeSnapshotsResponse {
   /** 快照数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 快照结果列表 */
-  TableResults: SnapshotResult[];
+  TableResults?: SnapshotResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1193,9 +1193,9 @@ declare interface DescribeTableGroupTagsRequest {
 
 declare interface DescribeTableGroupTagsResponse {
   /** 表格组标签信息列表 */
-  Rows?: TagsInfoOfTableGroup[] | null;
+  Rows?: TagsInfoOfTableGroup[];
   /** 返回结果个数 */
-  TotalCount?: number | null;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1363,9 +1363,9 @@ declare interface ImportSnapshotsRequest {
 
 declare interface ImportSnapshotsResponse {
   /** TaskId由 AppInstanceId-taskId 组成，以区分不同集群的任务 */
-  TaskId?: string | null;
+  TaskId?: string;
   /** ApplicationId由 AppInstanceId-applicationId 组成，以区分不同集群的申请 */
-  ApplicationId?: string | null;
+  ApplicationId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1395,11 +1395,11 @@ declare interface ModifyCensorshipRequest {
 
 declare interface ModifyCensorshipResponse {
   /** 集群id */
-  ClusterId: string;
+  ClusterId?: string;
   /** 已加入审批人的uin */
-  Uins: string[] | null;
+  Uins?: string[];
   /** 集群是否开启审核 0-关闭 1-开启 */
-  Censorship: number;
+  Censorship?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1463,7 +1463,7 @@ declare interface ModifyClusterTagsRequest {
 
 declare interface ModifyClusterTagsResponse {
   /** 任务ID */
-  TaskId?: string | null;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1477,9 +1477,9 @@ declare interface ModifySnapshotsRequest {
 
 declare interface ModifySnapshotsResponse {
   /** 批量修改的快照数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 批量修改的快照结果列表 */
-  TableResults: SnapshotResult[];
+  TableResults?: SnapshotResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1511,7 +1511,7 @@ declare interface ModifyTableGroupTagsRequest {
 
 declare interface ModifyTableGroupTagsResponse {
   /** 任务ID */
-  TaskId?: string | null;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1631,7 +1631,7 @@ declare interface SetBackupExpireRuleRequest {
 
 declare interface SetBackupExpireRuleResponse {
   /** TaskId由 AppInstanceId-taskId 组成，以区分不同集群的任务 */
-  TaskId: string | null;
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1675,7 +1675,7 @@ declare interface UpdateApplyRequest {
 
 declare interface UpdateApplyResponse {
   /** 已更新的申请单列表 */
-  ApplyResults?: ApplyResult[] | null;
+  ApplyResults?: ApplyResult[];
   /** 更新数量 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */

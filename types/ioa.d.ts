@@ -140,6 +140,8 @@ declare interface DescribeDeviceHardwareInfoItem {
   HardDiskSize?: string;
   /** 显示器品牌型号 */
   Monitor?: string;
+  /** 终端备注名 */
+  RemarkName?: string;
 }
 
 /** 终端硬件信息列表响应详情 */
@@ -619,15 +621,15 @@ declare interface CreateDeviceTaskResponse {
 }
 
 declare interface CreateDeviceVirtualGroupRequest {
+  /** 必填，终端自定义分组名 */
+  DeviceVirtualGroupName: string;
   /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
   DomainInstanceId?: string;
-  /** 必填，终端自定义分组名 */
-  DeviceVirtualGroupName?: string;
   /** 详情 */
   Description?: string;
-  /** 必填，系统类型（0: win，1：linux，2: mac，3: win_srv，4：android，5：ios ）(只支持32位) */
+  /** 系统类型（0: win，1：linux，2: mac，4：android，5：ios ； 默认值0）(只支持32位) */
   OsType?: number;
-  /** 必填，分组类型（0:手动分组；非0为自动划分分组；具体枚举值为：1:自动每小时划分分组、2:自动每天划分分组、3:自定义时间划分分组）(只支持32位) */
+  /** 分组类型（0:手动分组；非0为自动划分分组；具体枚举值为：1:自动每小时划分分组、2:自动每天划分分组、3:自定义时间划分分组； 默认值0）(只支持32位) */
   TimeType?: number;
   /** 选填，TimeType=3时的自动划分时间，其他情况为0（单位min）(只支持32位) */
   AutoMinute?: number;
@@ -643,15 +645,17 @@ declare interface CreateDeviceVirtualGroupResponse {
 }
 
 declare interface CreatePrivilegeCodeRequest {
+  /** 必填；设备唯一标识符; */
+  Mid: string;
   /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
   DomainInstanceId?: string;
-  /** 必填；设备唯一标识符; */
-  Mid?: string;
+  /** 系统类型（0: win，1：linux，2: mac，4：android，5：ios ）；默认值0 */
+  OsType?: number;
 }
 
 declare interface CreatePrivilegeCodeResponse {
   /** 业务响应数据 */
-  Data?: CreatePrivilegeCodeRspData | null;
+  Data?: CreatePrivilegeCodeRspData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -843,15 +847,15 @@ declare interface DescribeVirtualDevicesResponse {
 }
 
 declare interface ModifyVirtualDeviceGroupsRequest {
+  /** 必填，操作的设备列表数据 */
+  DeviceList: ModifyVirtualDeviceGroupsReqItem[];
   /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
   DomainInstanceId?: string;
   /** 添加到的终端自定义分组id。和DeviceVirtualGroupIds互斥，必填其一，优先使用本参数 */
   DeviceVirtualGroupId?: number;
-  /** 必填，操作的设备列表数据 */
-  DeviceList?: ModifyVirtualDeviceGroupsReqItem[];
   /** 要添加的终端自定义分组id列表 */
   DeviceVirtualGroupIds?: number[];
-  /** 必填，系统类型（0: win，1：linux，2: mac，3: win_srv，4：android，5：ios 默认值0） */
+  /** 系统类型（0: win，1：linux，2: mac，4：android，5：ios 默认值0） */
   OsType?: number;
 }
 
@@ -868,9 +872,9 @@ declare interface Ioa {
   /** 创建获取终端进程网络服务信息任务 {@link CreateDeviceTaskRequest} {@link CreateDeviceTaskResponse} */
   CreateDeviceTask(data?: CreateDeviceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceTaskResponse>;
   /** 创建终端自定义分组 {@link CreateDeviceVirtualGroupRequest} {@link CreateDeviceVirtualGroupResponse} */
-  CreateDeviceVirtualGroup(data?: CreateDeviceVirtualGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceVirtualGroupResponse>;
+  CreateDeviceVirtualGroup(data: CreateDeviceVirtualGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceVirtualGroupResponse>;
   /** 创建特权码、卸载码 {@link CreatePrivilegeCodeRequest} {@link CreatePrivilegeCodeResponse} */
-  CreatePrivilegeCode(data?: CreatePrivilegeCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivilegeCodeResponse>;
+  CreatePrivilegeCode(data: CreatePrivilegeCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivilegeCodeResponse>;
   /** 查询账号分组列表 {@link DescribeAccountGroupsRequest} {@link DescribeAccountGroupsResponse} */
   DescribeAccountGroups(data?: DescribeAccountGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountGroupsResponse>;
   /** 查询文件检测结果 {@link DescribeDLPFileDetectResultRequest} {@link DescribeDLPFileDetectResultResponse} */
@@ -894,7 +898,7 @@ declare interface Ioa {
   /** 展示自定义分组终端列表 {@link DescribeVirtualDevicesRequest} {@link DescribeVirtualDevicesResponse} */
   DescribeVirtualDevices(data?: DescribeVirtualDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirtualDevicesResponse>;
   /** 终端手动自定义分组增减终端 {@link ModifyVirtualDeviceGroupsRequest} {@link ModifyVirtualDeviceGroupsResponse} */
-  ModifyVirtualDeviceGroups(data?: ModifyVirtualDeviceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVirtualDeviceGroupsResponse>;
+  ModifyVirtualDeviceGroups(data: ModifyVirtualDeviceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVirtualDeviceGroupsResponse>;
 }
 
 export declare type Versions = ["2022-06-01"];

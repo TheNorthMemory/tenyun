@@ -436,6 +436,10 @@ declare interface EmbedUrlOption {
   SkipUploadFile?: boolean;
   /** 是否禁止编辑（展示）水印控件属性（默认） false -否 true - 禁止编辑 */
   ForbidEditWatermark?: boolean;
+  /** 印章描述 */
+  SealDescription?: string;
+  /** 是否禁止编辑印章描述内容（默认） false -否 true - 禁止编辑 */
+  ForbidEditSealDescription?: string;
 }
 
 /** 扩展服务开通和授权的详细信息 */

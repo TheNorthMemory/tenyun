@@ -751,6 +751,14 @@ declare namespace V20180416 {
     Status?: string | null;
   }
 
+  /** 节点Gpu信息 */
+  interface GpuInfo {
+    /** Gpu块数 */
+    GpuCount?: number;
+    /** Gpu类型 */
+    GpuType?: string;
+  }
+
   /** 索引元数据字段 */
   interface IndexMetaField {
     /** 索引类型 */
@@ -1025,6 +1033,8 @@ declare namespace V20180416 {
     EnableDestroyProtection?: string | null;
     /** kibana内网访问地址 */
     ShowKibanaIpPort?: string;
+    /** 是否为CDZLite可用区 */
+    IsCdzLite?: boolean;
   }
 
   /** ES集群日志详细信息 */
@@ -1349,6 +1359,8 @@ declare namespace V20180416 {
     MemSize?: number | null;
     /** / */
     DiskEnhance?: number | null;
+    /** 节点Gpu信息 */
+    GpuInfo?: GpuInfo | null;
   }
 
   /** 节点维度视图数据 */

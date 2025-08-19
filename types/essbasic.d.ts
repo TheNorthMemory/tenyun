@@ -476,6 +476,10 @@ declare interface EmbedUrlOption {
   SkipUploadFile?: string;
   /** 是否禁止编辑（展示）水印控件属性（默认） false -否 true - 禁止编辑 */
   ForbidEditWatermark?: boolean;
+  /** 印章描述 */
+  SealDescription?: string;
+  /** 是否禁止编辑印章描述内容（默认） false -否 true - 禁止编辑 */
+  ForbidEditSealDescription?: string;
 }
 
 /** 扩展服务开通和授权的详细信息 */
@@ -966,6 +970,10 @@ declare interface OrganizationAuthUrl {
   AuthUrl?: string;
   /** 企业批量注册的错误信息，例如：企业三要素不通过 */
   ErrorMessage?: string;
+  /** 企业批量注册 传递过来的企业名称，方便客户定位企业 */
+  OrganizationName?: string;
+  /** 企业批量注册的唯一 Id， 此 Id 可以用在[创建企业批量认证链接-单链接](https://qian.tencent.com/developers/partnerApis/accounts/CreateBatchOrganizationRegistrationTasks)。 */
+  SubTaskId?: string;
 }
 
 /** 企业认证可选项，其中包括 社会信用代码是否一致，企业名称是否一致，法人是否一致， 对公打款账号是否一致等信息。代表生成链接的时候指定的这些信息不能被用户修改。p.s. 注意这些选项一旦传递，相关的信息也不会被上传的营业执照里面包含的信息所覆盖。 */

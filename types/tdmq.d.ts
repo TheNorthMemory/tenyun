@@ -3101,14 +3101,14 @@ declare interface DescribeEnvironmentAttributesResponse {
 }
 
 declare interface DescribeEnvironmentRolesRequest {
-  /** 必填字段，环境（命名空间）名称。 */
+  /** Pulsar 集群的ID */
+  ClusterId: string;
+  /** 环境（命名空间）名称。 */
   EnvironmentId?: string;
   /** 起始下标，不填默认为0。 */
   Offset?: number;
   /** 返回数量，不填则默认为10，最大值为20。 */
   Limit?: number;
-  /** 必填字段，Pulsar 集群的ID */
-  ClusterId?: string;
   /** 角色名称 */
   RoleName?: string;
   /** * RoleName按照角色名进行过滤，精确查询。类型：String必选：否 */
@@ -4398,6 +4398,14 @@ declare interface DescribeTopicsResponse {
   RequestId?: string;
 }
 
+declare interface ExecuteDisasterRecoveryRequest {
+}
+
+declare interface ExecuteDisasterRecoveryResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ExportRocketMQMessageDetailRequest {
   /** 集群id */
   ClusterId: string;
@@ -5322,7 +5330,7 @@ declare interface Tdmq {
   /** 获取命名空间属性 {@link DescribeEnvironmentAttributesRequest} {@link DescribeEnvironmentAttributesResponse} */
   DescribeEnvironmentAttributes(data: DescribeEnvironmentAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentAttributesResponse>;
   /** 获取命名空间角色列表 {@link DescribeEnvironmentRolesRequest} {@link DescribeEnvironmentRolesResponse} */
-  DescribeEnvironmentRoles(data?: DescribeEnvironmentRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentRolesResponse>;
+  DescribeEnvironmentRoles(data: DescribeEnvironmentRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentRolesResponse>;
   /** 获取命名空间列表 {@link DescribeEnvironmentsRequest} {@link DescribeEnvironmentsResponse} */
   DescribeEnvironments(data: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
   /** 查询消息轨迹 {@link DescribeMqMsgTraceRequest} {@link DescribeMqMsgTraceResponse} */
@@ -5423,6 +5431,8 @@ declare interface Tdmq {
   DescribeTopicMsgs(data: DescribeTopicMsgsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicMsgsResponse>;
   /** 查询主题列表 {@link DescribeTopicsRequest} {@link DescribeTopicsResponse} */
   DescribeTopics(data: DescribeTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicsResponse>;
+  /** 执行异地访问切换 {@link ExecuteDisasterRecoveryRequest} {@link ExecuteDisasterRecoveryResponse} */
+  ExecuteDisasterRecovery(data?: ExecuteDisasterRecoveryRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteDisasterRecoveryResponse>;
   /** 导出RocketMQ消息详情 {@link ExportRocketMQMessageDetailRequest} {@link ExportRocketMQMessageDetailResponse} */
   ExportRocketMQMessageDetail(data: ExportRocketMQMessageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ExportRocketMQMessageDetailResponse>;
   /** 查询命名空间下的主题列表 {@link GetTopicListRequest} {@link GetTopicListResponse} */
