@@ -262,6 +262,8 @@ declare interface DescribeSoftCensusListByDeviceData {
   SoftNum?: number | null;
   /** 盗版风险（1=风险;2=未知） */
   PiracyRisk?: number | null;
+  /** 终端备注名 */
+  RemarkName?: string;
 }
 
 /** 业务响应数据 */
@@ -611,6 +613,8 @@ declare interface CreateDLPFileDetectionTaskResponse {
 }
 
 declare interface CreateDeviceTaskRequest {
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
   /** 终端id */
   Mid?: string;
 }
@@ -709,6 +713,8 @@ declare interface DescribeDeviceHardwareInfoListResponse {
 }
 
 declare interface DescribeDeviceInfoRequest {
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
   /** 终端id */
   Mid?: string;
   /** 查询类型 process_list network_list service_list */
@@ -797,17 +803,19 @@ declare interface DescribeRootAccountGroupResponse {
 }
 
 declare interface DescribeSoftCensusListByDeviceRequest {
-  /** 必填，系统类型（0: win，1：linux，2: mac，4：android，5：ios ） */
-  OsType?: number;
   /** 必填，终端分组ID */
-  GroupId?: number;
+  GroupId: number;
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
+  /** 系统类型（0: win，1：linux，2: mac，4：android，5：ios ）；默认值0 */
+  OsType?: number;
   /** 过滤条件、分页参数 Name - String - 是否必填：否 - 操作符: eq,like,ilike - 排序支持：否 - 备注：字段含义，终端名。 UserName - String - 是否必填：否 - 操作符: eq,like,ilike - 排序支持：否 - 备注：字段含义，终端用户名。 IoaUserName - String - 是否必填：否 - 操作符: eq,like,ilike - 排序支持：否 - 备注：字段含义，最近登录账号。 Ip - String - 是否必填：否 - 操作符: eq,like,ilike - 排序支持：否 - 备注：字段含义，IP地址。 MacAddr - String - 是否必填：否 - 操作符: eq,like,ilike - 排序支持：否 - 备注：字段含义，MAC地址。 */
   Condition?: Condition;
 }
 
 declare interface DescribeSoftCensusListByDeviceResponse {
   /** 业务响应数据 */
-  Data?: DescribeSoftCensusListByDevicePageData | null;
+  Data?: DescribeSoftCensusListByDevicePageData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -892,7 +900,7 @@ declare interface Ioa {
   /** 查询账号根分组 {@link DescribeRootAccountGroupRequest} {@link DescribeRootAccountGroupResponse} */
   DescribeRootAccountGroup(data?: DescribeRootAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRootAccountGroupResponse>;
   /** 按终端查看软件统计信息 {@link DescribeSoftCensusListByDeviceRequest} {@link DescribeSoftCensusListByDeviceResponse} */
-  DescribeSoftCensusListByDevice(data?: DescribeSoftCensusListByDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSoftCensusListByDeviceResponse>;
+  DescribeSoftCensusListByDevice(data: DescribeSoftCensusListByDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSoftCensusListByDeviceResponse>;
   /** 查看软件详情列表 {@link DescribeSoftwareInformationRequest} {@link DescribeSoftwareInformationResponse} */
   DescribeSoftwareInformation(data?: DescribeSoftwareInformationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSoftwareInformationResponse>;
   /** 展示自定义分组终端列表 {@link DescribeVirtualDevicesRequest} {@link DescribeVirtualDevicesResponse} */

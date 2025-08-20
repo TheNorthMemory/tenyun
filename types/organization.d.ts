@@ -366,6 +366,34 @@ declare interface OrgMemberPolicy {
   UpdateTime?: string;
 }
 
+/** 组织成员访问授权策略 */
+declare interface OrgMembersAuthPolicy {
+  /** 身份Id。 */
+  IdentityId?: number | null;
+  /** 身份的角色名。 */
+  IdentityRoleName?: string | null;
+  /** 身份的角色别名。 */
+  IdentityRoleAliasName?: string | null;
+  /** 创建时间。 */
+  CreateTime?: string | null;
+  /** 成员访问策略Id。 */
+  PolicyId?: number | null;
+  /** 成员访问策略名称。 */
+  PolicyName?: string | null;
+  /** 成员uin。 */
+  MemberUin?: number | null;
+  /** 成员名称。 */
+  MemberName?: string | null;
+  /** 子账号uin或者用户组Id。 */
+  OrgSubAccountUin?: number | null;
+  /** 子账号名称或者用户组名称。 */
+  OrgSubAccountName?: string | null;
+  /** 绑定类型。1-子账号、2-用户组 */
+  BindType?: number | null;
+  /** 成员信息。 */
+  Members?: MemberMainInfo[] | null;
+}
+
 /** 企业组织单元 */
 declare interface OrgNode {
   /** 组织节点ID */
@@ -1846,6 +1874,28 @@ declare interface DescribeOrganizationMemberPoliciesResponse {
   Items?: OrgMemberPolicy[];
   /** 总数目。 */
   Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeOrganizationMembersAuthPolicyRequest {
+  /** 偏移量。取值是limit的整数倍。默认值 : 0。 */
+  Offset: number;
+  /** 限制数目。取值范围：1~50。默认值：10。 */
+  Limit: number;
+  /** 成员uin。 */
+  MemberUin?: number;
+  /** 集团管理员子账号uin。 */
+  OrgSubAccountUin?: number;
+  /** 成员访问策略Id。 */
+  PolicyId?: number;
+}
+
+declare interface DescribeOrganizationMembersAuthPolicyResponse {
+  /** 访问授权策略列表。 */
+  Items?: OrgMembersAuthPolicy[] | null;
+  /** 总数目。 */
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3659,6 +3709,8 @@ declare interface Organization {
   DescribeOrganizationMemberPolicies(data: DescribeOrganizationMemberPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMemberPoliciesResponse>;
   /** 获取企业组织成员列表 {@link DescribeOrganizationMembersRequest} {@link DescribeOrganizationMembersResponse} */
   DescribeOrganizationMembers(data: DescribeOrganizationMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMembersResponse>;
+  /** 查询组织成员访问策略列表 {@link DescribeOrganizationMembersAuthPolicyRequest} {@link DescribeOrganizationMembersAuthPolicyResponse} */
+  DescribeOrganizationMembersAuthPolicy(data: DescribeOrganizationMembersAuthPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationMembersAuthPolicyResponse>;
   /** 获取组织节点列表 {@link DescribeOrganizationNodesRequest} {@link DescribeOrganizationNodesResponse} */
   DescribeOrganizationNodes(data: DescribeOrganizationNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationNodesResponse>;
   /** 查看策略详情 {@link DescribePolicyRequest} {@link DescribePolicyResponse} */

@@ -416,6 +416,12 @@ declare interface DescribeDeviceData {
   SilentFrameSwitch?: number;
 }
 
+/** 批量查询设备接口返回数据 */
+declare interface DescribeDeviceListData {
+  /** 设备详情列表 */
+  List?: DescribeDeviceData[];
+}
+
 /** 查询设备预置位返回数据 */
 declare interface DescribeDevicePresetData {
   /** 预置位索引 只支持1-10的索引 */
@@ -2298,6 +2304,18 @@ declare interface DescribeTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUserDeviceListRequest {
+  /** 设备Id列表 */
+  DeviceIds: string[];
+}
+
+declare interface DescribeUserDeviceListResponse {
+  /** 返回结果 */
+  Data?: DescribeDeviceListData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUserDeviceRequest {
   /** 设备ID（从获取设备列表接口ListDevices中获取） */
   DeviceId: string;
@@ -3031,6 +3049,8 @@ declare interface Iss {
   DescribeTask(data: DescribeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResponse>;
   /** 查询设备详情 {@link DescribeUserDeviceRequest} {@link DescribeUserDeviceResponse} */
   DescribeUserDevice(data: DescribeUserDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDeviceResponse>;
+  /** 批量查询设备详情 {@link DescribeUserDeviceListRequest} {@link DescribeUserDeviceListResponse} */
+  DescribeUserDeviceList(data: DescribeUserDeviceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDeviceListResponse>;
   /** 视频通道码率查询 {@link DescribeVideoBitRateRequest} {@link DescribeVideoBitRateResponse} */
   DescribeVideoBitRate(data: DescribeVideoBitRateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoBitRateResponse>;
   /** 获取云端录像下载URL地址 {@link DescribeVideoDownloadUrlRequest} {@link DescribeVideoDownloadUrlResponse} */

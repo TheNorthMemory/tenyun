@@ -46,6 +46,8 @@ declare interface BackUpJobDisplay {
   ErrorReason?: string;
   /** 快照保留策略 */
   SnapshotRemainPolicy?: SnapshotRemainPolicy;
+  /** 隔离次数 */
+  IsolationCount?: number;
 }
 
 /** 备份实例中关于cos的信息 */
@@ -1063,9 +1065,13 @@ declare interface DeleteBackUpDataRequest {
   BackUpJobId?: number;
   /** 是否删除所有实例 */
   IsDeleteAll?: boolean;
+  /** true代表恢复删除隔离中的job 默认false就是删除 */
+  IsRecover?: boolean;
 }
 
 declare interface DeleteBackUpDataResponse {
+  /** 错误信息 */
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

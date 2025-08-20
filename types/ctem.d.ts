@@ -136,6 +136,8 @@ declare interface DisplayDarkWeb {
   Url?: string;
   /** 公共字段 */
   DisplayToolCommon?: DisplayToolCommon;
+  /** 状态：unrepaired:未修复，repaired:已修复，ignore:已忽略 */
+  Status?: string;
 }
 
 /** 主域名详情 */
@@ -857,6 +859,8 @@ declare interface DescribeConfigsRequest {
   Filters?: Filter[];
   /** 是否显示被忽略的数据 */
   Ignored?: boolean;
+  /** 支持按照响应长度排序，例如：+ContentLength或-ContentLength，+是递增，-是递减 */
+  OrderBy?: string;
 }
 
 declare interface DescribeConfigsResponse {
