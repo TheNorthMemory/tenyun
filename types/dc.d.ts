@@ -527,6 +527,8 @@ declare interface CreateDirectConnectRequest {
   FaultReportContactPerson?: string;
   /** 报障联系电话。 */
   FaultReportContactNumber?: string;
+  /** 报障联系邮箱。 */
+  FaultReportContactEmail?: string;
   /** 物理专线申请者是否签署了用户使用协议。默认已签署。 */
   SignLaw?: boolean;
   /** 标签键值对 */
@@ -799,6 +801,8 @@ declare interface ModifyDirectConnectAttributeRequest {
   FaultReportContactPerson?: string;
   /** 报障联系电话。 */
   FaultReportContactNumber?: string;
+  /** 报障联系邮箱。 */
+  FaultReportContactEmail?: string;
   /** 物理专线申请者补签用户使用协议。 */
   SignLaw?: boolean;
   /** 物理专线带宽。 */

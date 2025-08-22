@@ -2452,6 +2452,16 @@ declare interface ResetSubscribeResponse {
   RequestId?: string;
 }
 
+declare interface ResetSyncJobRequest {
+  /** 需要重置的同步任务ID。 */
+  JobId: string;
+}
+
+declare interface ResetSyncJobResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ResizeSyncJobRequest {
   /** 同步任务id */
   JobId: string;
@@ -3401,6 +3411,8 @@ declare interface Dts {
   ResetConsumerGroupOffset(data: ResetConsumerGroupOffsetRequest, config?: AxiosRequestConfig): AxiosPromise<ResetConsumerGroupOffsetResponse>;
   /** 重置订阅任务 {@link ResetSubscribeRequest} {@link ResetSubscribeResponse} */
   ResetSubscribe(data: ResetSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<ResetSubscribeResponse>;
+  /** 重置任务 {@link ResetSyncJobRequest} {@link ResetSyncJobResponse} */
+  ResetSyncJob(data: ResetSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<ResetSyncJobResponse>;
   /** 调整同步任务规格 {@link ResizeSyncJobRequest} {@link ResizeSyncJobResponse} */
   ResizeSyncJob(data: ResizeSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<ResizeSyncJobResponse>;
   /** 重试迁移任务 {@link ResumeMigrateJobRequest} {@link ResumeMigrateJobResponse} */

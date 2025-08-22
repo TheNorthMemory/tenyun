@@ -116,6 +116,8 @@ declare interface DocumentUsage {
   SuccessPageNum?: number;
   /** 解析失败页数 */
   FailPageNum?: number;
+  /** 文件大小，单位KB */
+  FileSize?: number;
 }
 
 /** 向量 */

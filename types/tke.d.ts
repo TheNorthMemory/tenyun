@@ -72,10 +72,14 @@ declare interface CreateNativeNodePoolParam {
   InternetAccessible?: InternetAccessible;
   /** 原生节点池数据盘列表 */
   DataDisks?: DataDisk[];
+  /** qgpu开关 */
+  QGPUEnable?: boolean;
   /** 节点池ssh公钥id数组 */
   KeyIds?: string[];
   /** 节点池类型 */
   MachineType?: string;
+  /** 原生节点池安装节点自动化助手开关 */
+  AutomationService?: boolean;
 }
 
 /** 描述了k8s节点数据盘相关配置与信息。 */
@@ -703,7 +707,7 @@ declare interface CreateNodePoolRequest {
   DeletionProtection?: boolean;
   /** 节点是否默认不可调度 */
   Unschedulable?: boolean;
-  /** 原生节点池创建参数 */
+  /** 原生节点池创建参数（Type字段设置为Native时需填写） */
   Native?: CreateNativeNodePoolParam;
   /** 节点 Annotation 列表 */
   Annotations?: Annotation[];
@@ -1379,6 +1383,8 @@ declare namespace V20180525 {
     CiliumMode?: string;
     /** 控制面子网信息，仅在以下场景返回。- 容器网络插件为CiliumOverlay。- 支持CDC的托管集群，且网络插件为VPC-CNI。 */
     SubnetId?: string;
+    /** 是否启用了 DataPlaneV2（cilium替代kube-proxy） */
+    DataPlaneV2?: boolean;
   }
 
   /** 集群属性 */

@@ -146,7 +146,7 @@ declare interface BaseFlowInfo {
   Approvers?: CommonFlowApprover[];
 }
 
-/** 批量认证企业任务详情信息，其中包括 TaskId，状态信息等等 */
+/** 批量认证企业任务详情信息，其中包括 TaskId，状态信息等 */
 declare interface BatchOrganizationRegistrationTasksDetails {
   /** 生成注册链接的任务Id */
   TaskId?: string;
@@ -479,7 +479,7 @@ declare interface EmbedUrlOption {
   /** 印章描述 */
   SealDescription?: string;
   /** 是否禁止编辑印章描述内容（默认） false -否 true - 禁止编辑 */
-  ForbidEditSealDescription?: string;
+  ForbidEditSealDescription?: boolean;
 }
 
 /** 扩展服务开通和授权的详细信息 */
@@ -1418,17 +1418,17 @@ declare interface TemplateInfo {
   TemplateVersion?: string;
   /** 模板可用状态的取值通常为以下两种：1：启用（默认），表示模板处于启用状态，可以被用户正常使用。2：停用，表示模板处于停用状态，禁止用户使用该模板。 */
   Available?: number;
-  /** 模版的用户合同类型 */
+  /** 模板的用户合同类型 */
   UserFlowType?: UserFlowType;
 }
 
-/** 模版对应的合同类型 */
+/** 模板对应的合同类型 */
 declare interface TemplateUserFlowType {
   /** 合同类型id */
   UserFlowTypeId?: string;
   /** 用户合同类型名称 */
   Name?: string;
-  /** 每个合同类型绑定的模版数量 */
+  /** 每个合同类型绑定的模板数量 */
   TemplateNum?: number;
   /** 合同类型的具体描述 */
   Description?: string;

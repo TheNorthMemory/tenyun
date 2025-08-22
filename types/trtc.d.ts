@@ -2697,15 +2697,15 @@ declare interface Trtc {
   DescribeStreamIngest(data: DescribeStreamIngestRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamIngestResponse>;
   /** 查询TRTC数据大盘质量相关数据 {@link DescribeTRTCMarketQualityDataRequest} {@link DescribeTRTCMarketQualityDataResponse} */
   DescribeTRTCMarketQualityData(data: DescribeTRTCMarketQualityDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCMarketQualityDataResponse>;
-  /** 查询TRTC数据大盘质量指标 {@link DescribeTRTCMarketQualityMetricDataRequest} {@link DescribeTRTCMarketQualityMetricDataResponse} */
+  /** @deprecated 查询TRTC数据大盘质量指标 {@link DescribeTRTCMarketQualityMetricDataRequest} {@link DescribeTRTCMarketQualityMetricDataResponse} */
   DescribeTRTCMarketQualityMetricData(data: DescribeTRTCMarketQualityMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCMarketQualityMetricDataResponse>;
   /** 查询TRTC数据大盘规模数据 {@link DescribeTRTCMarketScaleDataRequest} {@link DescribeTRTCMarketScaleDataResponse} */
   DescribeTRTCMarketScaleData(data: DescribeTRTCMarketScaleDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCMarketScaleDataResponse>;
-  /** 查询TRTC数据大盘规模指标 {@link DescribeTRTCMarketScaleMetricDataRequest} {@link DescribeTRTCMarketScaleMetricDataResponse} */
+  /** @deprecated 查询TRTC数据大盘规模指标 {@link DescribeTRTCMarketScaleMetricDataRequest} {@link DescribeTRTCMarketScaleMetricDataResponse} */
   DescribeTRTCMarketScaleMetricData(data: DescribeTRTCMarketScaleMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCMarketScaleMetricDataResponse>;
   /** 查询TRTC实时监控质量数据 {@link DescribeTRTCRealTimeQualityDataRequest} {@link DescribeTRTCRealTimeQualityDataResponse} */
   DescribeTRTCRealTimeQualityData(data: DescribeTRTCRealTimeQualityDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCRealTimeQualityDataResponse>;
-  /** 查询TRTC实时监控质量指标 {@link DescribeTRTCRealTimeQualityMetricDataRequest} {@link DescribeTRTCRealTimeQualityMetricDataResponse} */
+  /** @deprecated 查询TRTC实时监控质量指标 {@link DescribeTRTCRealTimeQualityMetricDataRequest} {@link DescribeTRTCRealTimeQualityMetricDataResponse} */
   DescribeTRTCRealTimeQualityMetricData(data: DescribeTRTCRealTimeQualityMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCRealTimeQualityMetricDataResponse>;
   /** 查询TRTC实时监控规模数据 {@link DescribeTRTCRealTimeScaleDataRequest} {@link DescribeTRTCRealTimeScaleDataResponse} */
   DescribeTRTCRealTimeScaleData(data: DescribeTRTCRealTimeScaleDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCRealTimeScaleDataResponse>;

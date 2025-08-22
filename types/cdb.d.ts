@@ -4060,6 +4060,8 @@ declare interface DescribeProxyCustomConfResponse {
   CustomConf?: CustomConfig;
   /** 权重限制 */
   WeightRule?: Rule;
+  /** 代理配置 */
+  CustomConfInfo?: CustomConfig[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5277,13 +5279,13 @@ declare interface StopReplicationResponse {
 }
 
 declare interface StopRollbackRequest {
-  /** 撤销回档任务对应的实例Id。 */
+  /** 撤销回档任务对应的实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/api/236/15872) 接口获取。 */
   InstanceId: string;
 }
 
 declare interface StopRollbackResponse {
-  /** 执行请求的异步任务ID */
-  AsyncRequestId: string;
+  /** 执行请求的异步任务 ID。 */
+  AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

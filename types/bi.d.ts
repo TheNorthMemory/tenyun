@@ -570,6 +570,30 @@ declare interface ApplyEmbedIntervalResponse {
   RequestId?: string;
 }
 
+declare interface ClearEmbedTokenRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 主账号id */
+  UserCorpId: string;
+  /** panel , page */
+  Scope: string;
+  /** page id */
+  PageId?: string;
+}
+
+declare interface ClearEmbedTokenResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 额外消息 */
+  Extra?: string | null;
+  /** 提示消息 */
+  Msg?: string | null;
+  /** 结果 */
+  Data?: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDatasourceCloudRequest {
   /** 后端提供字典：域类型，1、腾讯云，2、本地 */
   ServiceType: string;
@@ -1347,6 +1371,8 @@ declare interface Bi {
   (): Versions;
   /** 申请延长Token可用时间接口 {@link ApplyEmbedIntervalRequest} {@link ApplyEmbedIntervalResponse} */
   ApplyEmbedInterval(data?: ApplyEmbedIntervalRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyEmbedIntervalResponse>;
+  /** 清理强鉴权token {@link ClearEmbedTokenRequest} {@link ClearEmbedTokenResponse} */
+  ClearEmbedToken(data: ClearEmbedTokenRequest, config?: AxiosRequestConfig): AxiosPromise<ClearEmbedTokenResponse>;
   /** 创建数据源 {@link CreateDatasourceRequest} {@link CreateDatasourceResponse} */
   CreateDatasource(data: CreateDatasourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatasourceResponse>;
   /** 创建云数据库 {@link CreateDatasourceCloudRequest} {@link CreateDatasourceCloudResponse} */

@@ -1104,6 +1104,14 @@ declare interface Pod {
   Message?: string;
   /** 当前实例所在的节点 IP */
   NodeIP?: string;
+  /** 当前实例所在节点id */
+  NodeId?: string;
+  /** 当时实例所属资源组 id */
+  ResourceGroupId?: string;
+  /** 资源组名称 */
+  ResourceGroupName?: string;
+  /** 实例的资源占用信息 */
+  ResourceInfo?: ResourceInfo;
 }
 
 /** 任务建模Pod信息 */
@@ -1170,6 +1178,10 @@ declare interface ProbeAction {
 
 /** 公有云数据源结构 */
 declare interface PublicDataSourceFS {
+  /** 数据源id */
+  DataSourceId?: string;
+  /** 相对数据源子路径 */
+  SubPath?: string;
 }
 
 /** RDMA配置 */
@@ -1224,7 +1236,7 @@ declare interface ResourceGroup {
   FreeInstance?: number;
   /** 总节点个数(所有节点) */
   TotalInstance?: number;
-  /** 资资源组已用的资源 */
+  /** 资源组已用的资源 */
   UsedResource?: GroupResource | null;
   /** 资源组总资源 */
   TotalResource?: GroupResource | null;
@@ -1232,6 +1244,14 @@ declare interface ResourceGroup {
   InstanceSet?: Instance[] | null;
   /** 标签列表 */
   TagSet?: Tag[] | null;
+}
+
+/** 在线服务中服务的资源组简略信息结构 */
+declare interface ResourceGroupInfo {
+  /** 资源组 id */
+  ResourceGroupId?: string;
+  /** 资源组名称 */
+  ResourceGroupName?: string;
 }
 
 /** 描述资源信息 */
@@ -1290,6 +1310,12 @@ declare interface ScheduledAction {
   ScheduleStop?: boolean;
   /** 要执行定时停止的时间，格式：“2022-01-26T19:46:22+08:00” */
   ScheduleStopTime?: string;
+}
+
+/** 服务的调度策略配置 */
+declare interface SchedulingPolicy {
+  /** 是否启用了跨资源组调度开关 */
+  CrossResourceGroupScheduling?: boolean;
 }
 
 /** 表格数据集表头信息 */
@@ -1372,6 +1398,10 @@ declare interface Service {
   MonitorSource?: string;
   /** 服务创建者的子账号名称 */
   SubUinName?: string;
+  /** 服务的调度策略 */
+  SchedulingPolicy?: SchedulingPolicy;
+  /** 外部的资源组信息，表示借调了哪些资源组的资源 */
+  ExternalResourceGroups?: ResourceGroupInfo[];
 }
 
 /** 服务的调用信息，服务组下唯一 */
@@ -1560,6 +1590,10 @@ declare interface ServiceInfo {
   HealthProbe?: HealthProbe;
   /** 滚动更新配置 */
   RollingUpdate?: RollingUpdate;
+  /** 单副本下的实例数，仅在部署类型为DIST、ROLE时生效，默认1 */
+  InstancePerReplicas?: number;
+  /** 批量数据盘挂载配置 */
+  VolumeMounts?: VolumeMount[];
 }
 
 /** 服务的限流限速等配置 */
@@ -1906,6 +1940,8 @@ declare interface VolumeMount {
   CFSConfig: CFSConfig;
   /** 挂载源类型，CFS、COS，默认为CFS */
   VolumeSourceType?: string;
+  /** 自定义容器内挂载路径 */
+  MountPath?: string | null;
 }
 
 /** 工作负载的状态 */
@@ -2079,9 +2115,9 @@ declare interface CreateModelServiceRequest {
   DeployType?: string;
   /** 单副本下的实例数，仅在部署类型为DIST时生效，默认1 */
   InstancePerReplicas?: number;
-  /** 30 */
+  /** 服务的优雅退出时限。单位为秒，默认值为30，最小为1 */
   TerminationGracePeriodSeconds?: number;
-  /** ["sleep","60"] */
+  /** 服务实例停止前执行的命令，执行完毕或执行时间超过优雅退出时限后实例结束 */
   PreStopCommand?: string[];
   /** 是否启用 grpc 端口 */
   GrpcEnable?: boolean;
@@ -2091,6 +2127,8 @@ declare interface CreateModelServiceRequest {
   RollingUpdate?: RollingUpdate;
   /** sidecar配置 */
   Sidecar?: SidecarSpec;
+  /** 数据盘批量挂载配置，当前仅支持CFS，仅针对“模型来源-资源组缓存”。 */
+  VolumeMounts?: VolumeMount[];
 }
 
 declare interface CreateModelServiceResponse {
@@ -2945,9 +2983,9 @@ declare interface ModifyModelServiceRequest {
   ServicePort?: number;
   /** 单副本下的实例数，仅在部署类型为DIST时生效，默认1 */
   InstancePerReplicas?: number;
-  /** 30 */
+  /** 服务的优雅退出时限。单位为秒，默认值为30，最小为1 */
   TerminationGracePeriodSeconds?: number;
-  /** ["sleep","60"] */
+  /** 服务实例停止前执行的命令，执行完毕或执行时间超过优雅退出时限后实例结束 */
   PreStopCommand?: string[];
   /** 是否启动grpc端口 */
   GrpcEnable?: boolean;
@@ -2959,6 +2997,8 @@ declare interface ModifyModelServiceRequest {
   Sidecar?: SidecarSpec;
   /** 资源组 id */
   ResourceGroupId?: string;
+  /** 数据盘批量挂载配置，当前仅支持CFS，仅针对“模型来源-资源组缓存”。 */
+  VolumeMounts?: VolumeMount[];
 }
 
 declare interface ModifyModelServiceResponse {

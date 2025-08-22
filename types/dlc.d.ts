@@ -3568,6 +3568,8 @@ declare interface CreateUserVpcConnectionRequest {
 }
 
 declare interface CreateUserVpcConnectionResponse {
+  /** 终端节点IP */
+  UserVpcEndpointId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5105,6 +5107,8 @@ declare interface DescribeUserVpcConnectionRequest {
   EngineNetworkId: string;
   /** 引擎ID集合 */
   DataEngineIds?: string[];
+  /** 终端节点ID集合 */
+  UserVpcEndpointIds?: string[];
 }
 
 declare interface DescribeUserVpcConnectionResponse {

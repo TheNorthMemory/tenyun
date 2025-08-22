@@ -2,6 +2,34 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 按版本聚合后的软件列表 */
+declare interface AggrCategorySoftDetailRow {
+  /** ID */
+  ID?: number | null;
+  /** 软件名称 */
+  Name?: string | null;
+  /** 盗版风险 */
+  PiracyRisk?: number | null;
+  /** 系统平台 */
+  OsType?: number | null;
+  /** 企业名 */
+  CorpName?: string | null;
+  /** 安装设备数量(只支持32位) */
+  InstalledDeviceNum?: number | null;
+  /** 盗版安装设备数 */
+  PiracyInstalledDeviceNum?: number | null;
+  /** 已安装用户数 */
+  InstalledUserNum?: number | null;
+  /** 盗版软件用户数 */
+  PiracyInstalledUserNum?: number | null;
+  /** 授权总数 */
+  AuthNum?: number | null;
+  /** 正版率 */
+  GenuineRate?: number | null;
+  /** 有新版本可升级的设备数量 */
+  UpgradableDeviceNum?: number;
+}
+
 /** 自动划分规则数据 */
 declare interface ComplexRule {
   /** 简单规则表达式 */
@@ -94,6 +122,16 @@ declare interface DescribeAccountGroupsPageResp {
   Page?: Paging;
 }
 
+/** 业务响应数据 */
+declare interface DescribeAggrSoftCategorySoftListData {
+  /** 分页公共对象 */
+  Page?: Paging | null;
+  /** 总数(只支持32位) */
+  Total?: number | null;
+  /** 行数据 */
+  AggrSoftCategorySoftList?: AggrCategorySoftDetailRow[] | null;
+}
+
 /** 查询文件检测结果响应数据 */
 declare interface DescribeDLPFileDetectResultData {
   /** 提交任务时的文件md5 */
@@ -104,6 +142,12 @@ declare interface DescribeDLPFileDetectResultData {
   Status?: string;
   /** 文件检测结果，json字符串。 */
   DetectResult?: string;
+}
+
+/** 查询设备组子分组详情响应结构 */
+declare interface DescribeDeviceChildGroupsRspData {
+  /** 返回的数组列表 */
+  Items?: DeviceGroupDetail[];
 }
 
 /** 终端硬件信息列表Item数据 */
@@ -390,6 +434,46 @@ declare interface DeviceDetail {
   AccountGroupId?: number;
   /** 终端备注名 */
   RemarkName?: string;
+}
+
+/** 返回的数组列表 */
+declare interface DeviceGroupDetail {
+  /** 设备组id */
+  Id?: number;
+  /** 设备组名称 */
+  Name?: string;
+  /** 设备组描述 */
+  Description?: string;
+  /** 父节点id */
+  ParentId?: number;
+  /** 基于id的节点路径 */
+  IdPath?: string;
+  /** 基于名称的节点路径 */
+  NamePath?: string;
+  /** 分组锁定状态 */
+  Locked?: number;
+  /** 系统类型（0: win，1：linux，2: mac，4：android，5：ios ） */
+  OsType?: number;
+  /** 排序 */
+  Sort?: number;
+  /** 是否自动调整 */
+  FromAuto?: number;
+  /** 子节点数量 */
+  Count?: number;
+  /** 图标 */
+  Icon?: string;
+  /** 是否有ip */
+  WithIp?: number;
+  /** 是否有组ip */
+  HasIp?: boolean;
+  /** 是否是叶子节点 */
+  IsLeaf?: boolean;
+  /** 是否只读 */
+  ReadOnly?: boolean;
+  /** 对应绑定的账号id */
+  BindAccount?: number;
+  /** 绑定账号的用户名 */
+  BindAccountName?: string;
 }
 
 /** 分页的具体数据对象 */
@@ -680,6 +764,18 @@ declare interface DescribeAccountGroupsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAggrSoftCategorySoftListRequest {
+  /** os类别(只支持32位) */
+  OsType?: number;
+}
+
+declare interface DescribeAggrSoftCategorySoftListResponse {
+  /** 数据 */
+  Data?: DescribeAggrSoftCategorySoftListData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDLPFileDetectResultRequest {
   /** 管理域实例ID，用于CAM管理域权限分配 */
   DomainInstanceId?: string;
@@ -690,6 +786,24 @@ declare interface DescribeDLPFileDetectResultRequest {
 declare interface DescribeDLPFileDetectResultResponse {
   /** 查询任务结果 */
   Data?: DescribeDLPFileDetectResultData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDeviceChildGroupsRequest {
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
+  /** 过滤条件参数（字段含义请参考接口返回值）- Name, 类型String，支持操作：【like，ilike】，支持排序分页参数- PageNum 从1开始，小于等于0时使用默认参数- PageSize 最大值5000，最好不超过100 */
+  Condition?: Condition;
+  /** 父分组id，默认0：表示获取全网终端分组 */
+  ParentId?: number;
+  /** 操作系统类型（0：win，1：linux，2：mac，4：android，5：ios；默认0：系统win） */
+  OsType?: number;
+}
+
+declare interface DescribeDeviceChildGroupsResponse {
+  /** 查询设备组子分组详情响应结构 */
+  Data?: DescribeDeviceChildGroupsRspData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -885,8 +999,12 @@ declare interface Ioa {
   CreatePrivilegeCode(data: CreatePrivilegeCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivilegeCodeResponse>;
   /** 查询账号分组列表 {@link DescribeAccountGroupsRequest} {@link DescribeAccountGroupsResponse} */
   DescribeAccountGroups(data?: DescribeAccountGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountGroupsResponse>;
+  /** 软件分类的聚合软件列表查询 {@link DescribeAggrSoftCategorySoftListRequest} {@link DescribeAggrSoftCategorySoftListResponse} */
+  DescribeAggrSoftCategorySoftList(data?: DescribeAggrSoftCategorySoftListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAggrSoftCategorySoftListResponse>;
   /** 查询文件检测结果 {@link DescribeDLPFileDetectResultRequest} {@link DescribeDLPFileDetectResultResponse} */
   DescribeDLPFileDetectResult(data?: DescribeDLPFileDetectResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDLPFileDetectResultResponse>;
+  /** 查询设备组子分组 {@link DescribeDeviceChildGroupsRequest} {@link DescribeDeviceChildGroupsResponse} */
+  DescribeDeviceChildGroups(data?: DescribeDeviceChildGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceChildGroupsResponse>;
   /** 查询终端硬件信息列表 {@link DescribeDeviceHardwareInfoListRequest} {@link DescribeDeviceHardwareInfoListResponse} */
   DescribeDeviceHardwareInfoList(data: DescribeDeviceHardwareInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceHardwareInfoListResponse>;
   /** 获取终端进程网络服务信息 {@link DescribeDeviceInfoRequest} {@link DescribeDeviceInfoResponse} */

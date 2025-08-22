@@ -704,7 +704,7 @@ declare interface DataTransformTaskInfo {
   TaskId?: string;
   /** 任务启用状态，默认为1，正常开启, 2关闭 */
   EnableFlag?: number;
-  /** 加工任务类型，1： DSL， 2：SQL */
+  /** 加工任务类型，1： DSL(使用自定义加工语言的加工任务)， 2：SQL(使用sql的加工任务) */
   Type?: number;
   /** 源日志主题 */
   SrcTopicId?: string;
@@ -712,9 +712,9 @@ declare interface DataTransformTaskInfo {
   Status?: number;
   /** 加工任务创建时间 */
   CreateTime?: string;
-  /** 最近修改时间 */
+  /** 最近修改时间示例值：2025-06-18 16:55:54 */
   UpdateTime?: string;
-  /** 最后启用时间，如果需要重建集群，修改该时间 */
+  /** 最后启用时间，如果需要重建集群，修改该时间示例值：2025-06-18 19:55:54 */
   LastEnableTime?: string;
   /** 日志主题名称 */
   SrcTopicName?: string;
@@ -2049,19 +2049,19 @@ declare interface CreateDashboardSubscribeResponse {
 declare interface CreateDataTransformRequest {
   /** 任务类型. 1: 指定主题；2:动态创建。详情请参考[创建加工任务文档](https://cloud.tencent.com/document/product/614/63940)。 */
   FuncType: number;
-  /** 源日志主题 */
+  /** 日志主题ID- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   SrcTopicId: string;
-  /** 加工任务名称 */
+  /** 加工任务名称名称限制- 不能为空字符串- 不能包含字符'|'- 最长 255 个字符 */
   Name: string;
   /** 加工语句。 当FuncType为2时，EtlContent必须使用[log_auto_output](https://cloud.tencent.com/document/product/614/70733) 其他参考文档：- [创建加工任务](https://cloud.tencent.com/document/product/614/63940) - [函数总览](https://cloud.tencent.com/document/product/614/70395) */
   EtlContent: string;
   /** 加工类型。1：使用源日志主题中的随机数据，进行加工预览；2：使用用户自定义测试数据，进行加工预览；3：创建真实加工任务。 */
   TaskType: number;
-  /** 加工任务目的topic_id以及别名,当FuncType=1时，该参数必填，当FuncType=2时，无需填写。 */
+  /** 加工任务目标topic_id以及别名,当FuncType=1时，该参数必填，当FuncType=2时，无需填写。目标topic_id，通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。别名限制 1.不能为空字符串，2. 不能包含字符'|'。 */
   DstResources?: DataTransformResouceInfo[];
   /** 任务启动状态. 默认为1:开启, 2:关闭 */
   EnableFlag?: number;
-  /** 用于预览加工结果的测试数据 */
+  /** 用于预览加工结果的测试数据目标日志主题ID通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   PreviewLogStatistics?: PreviewLogStatistic[];
   /** 数据加工类型。0：标准加工任务； 1：前置加工任务。前置加工任务将采集的日志处理完成后，再写入日志主题。 */
   DataTransformType?: number;
@@ -2845,7 +2845,7 @@ declare interface DescribeDashboardsResponse {
 }
 
 declare interface DescribeDataTransformInfoRequest {
-  /** - taskName按照【加工任务名称】进行过滤。类型：String必选：否- taskId按照【加工任务id】进行过滤。类型：String必选：否- topicId按照【源topicId】进行过滤。类型：String必选：否- status按照【 任务运行状态】进行过滤。 1：准备中，2：运行中，3：停止中，4：已停止类型：String必选：否- hasServiceLog按照【是否开启服务日志】进行过滤。 1：未开启，2：已开启类型：String必选：否- dstTopicType按照【目标topic类型】进行过滤。 1：固定，2：动态类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为100。 */
+  /** - taskName按照【加工任务名称】进行过滤。类型：String必选：否示例：test-task- taskId按照【加工任务id】进行过滤。类型：String必选：否示例：a3622556-6402-4942-b4ff-5ae32ec29810数据加工任务ID- 通过[获取数据加工任务列表基本信息](https://cloud.tencent.com/document/product/614/72182)获取数据加工任务Id。- topicId按照【源topicId】进行过滤。类型：String必选：否示例：756cec3e-a0a5-44c3-85a8-090870582000日志主题ID- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。- status按照【 任务运行状态】进行过滤。 1：准备中，2：运行中，3：停止中，4：已停止类型：String必选：否示例：1- hasServiceLog按照【是否开启服务日志】进行过滤。 1：未开启，2：已开启类型：String必选：否示例：1- dstTopicType按照【目标topic类型】进行过滤。 1：固定，2：动态类型：String必选：否示例：1每次请求的Filters的上限为10，Filter.Values的上限为100。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0。 */
   Offset?: number;
@@ -2853,7 +2853,7 @@ declare interface DescribeDataTransformInfoRequest {
   Limit?: number;
   /** 默认值为2. 1: 获取单个任务的详细信息 2：获取任务列表 */
   Type?: number;
-  /** Type为1， 此参数必填 */
+  /** Type为1， 此参数必填数据加工任务ID- 通过[获取数据加工任务列表基本信息](https://cloud.tencent.com/document/product/614/72182)获取数据加工任务Id。 */
   TaskId?: string;
 }
 
@@ -3531,9 +3531,9 @@ declare interface ModifyDashboardSubscribeResponse {
 }
 
 declare interface ModifyDataTransformRequest {
-  /** 加工任务id */
+  /** 数据加工任务ID- 通过[获取数据加工任务列表基本信息](https://cloud.tencent.com/document/product/614/72182)获取数据加工任务Id。 */
   TaskId: string;
-  /** 加工任务名称 */
+  /** 加工任务名称- 通过[获取数据加工任务列表基本信息](https://cloud.tencent.com/document/product/614/72182)获取数据加工任务名称。名称限制- 不能为空字符串- 不能包含字符'|'- 最长 255 个字符 */
   Name?: string;
   /** 加工语句。 当FuncType为2时，EtlContent必须使用[log_auto_output](https://cloud.tencent.com/document/product/614/70733) 其他参考文档：- [创建加工任务](https://cloud.tencent.com/document/product/614/63940) - [函数总览](https://cloud.tencent.com/document/product/614/70395) */
   EtlContent?: string;

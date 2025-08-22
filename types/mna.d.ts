@@ -927,7 +927,7 @@ declare interface OrderPerLicenseRequest {
   DeviceId: string;
   /** 设备类型，0: SDK，1: CPE，作为用户创建或激活设备时传0，作为厂商创建待激活设备时传1 */
   Type: number;
-  /** 购买失败后是否回滚（删除）设备，默认true，如果设备绑定了生效中的流量包则不能回滚。 */
+  /** 购买失败后是否回滚（删除）设备，默认false，如果设备绑定了生效中的流量包则不能回滚。 */
   RollBack?: boolean;
   /** 是否自动选择代金券，默认false。有多张券时的选择策略：按照可支付订单全部金额的券，先到期的券，可抵扣金额最大的券，余额最小的券，现金券 这个优先级进行扣券，且最多只抵扣一张券。 */
   AutoVoucher?: boolean;

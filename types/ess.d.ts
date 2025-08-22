@@ -439,7 +439,7 @@ declare interface EmbedUrlOption {
   /** 印章描述 */
   SealDescription?: string;
   /** 是否禁止编辑印章描述内容（默认） false -否 true - 禁止编辑 */
-  ForbidEditSealDescription?: string;
+  ForbidEditSealDescription?: boolean;
 }
 
 /** 扩展服务开通和授权的详细信息 */
@@ -2005,6 +2005,24 @@ declare interface CreateContractDiffTaskWebUrlResponse {
   /** 接口返回的合同对比任务ID，可以调用接口获取合同对比结果web页面查看对比任务的结果。当`SkipFileUpload`参数为`true`时才会返回值，否则为空。 */
   TaskId?: string;
   /** 合同对比嵌入式web页面链接，有效期：5分钟链接仅能使用一次 */
+  WebUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateContractReviewWebUrlRequest {
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 需要审查的合同文件资源ID,可通过UploadFiles接口获取文件资源ID。注: `目前，每个文件限制在10M以下，文件仅支持pdf、doc、docx格式` */
+  ResourceId?: string;
+  /** 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 1024长度。在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的[回调通知](https://qian.tencent.com/developers/company/callback_types_v2)模块。 */
+  UserData?: string;
+}
+
+declare interface CreateContractReviewWebUrlResponse {
+  /** 接口返回的合同审查任务ID，可以调用接口获取合同审查结果web页面查看审查任务的结果。注意： `当ResourceId参数不为空时才会返回此值。` */
+  TaskId?: string;
+  /** 合同审查嵌入式web页面链接。注意：`链接有效期为5分钟，且链接仅能使用一次。如果上传的合同文件为word时不能进行iframe方式嵌入到贵方系统的网页中，需要单独页面打开此链接显示` */
   WebUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3604,6 +3622,22 @@ declare interface DescribeContractReviewTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeContractReviewWebUrlRequest {
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 合同审查任务ID，该参数通过调用接口创建合同审查web页面获取。 */
+  TaskId: string;
+}
+
+declare interface DescribeContractReviewWebUrlResponse {
+  /** 合同审查嵌入式web页面链接。注意：`链接有效期为5分钟，且链接仅能使用一次。如果上传的合同文件为word时不能进行iframe方式嵌入到贵方系统的网页中，需要单独页面打开此链接显示` */
+  WebUrl?: string;
+  /** 合同审查任务状态。任务状态为`5`时没有WebUrl链接。状态如下： **1** - 合同审查任务创建成功 **2** - 合同审查任务排队中 **3** - 合同审查任务执行中 **4** - 合同审查任务执行成功 **5** - 合同审查任务执行失败 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeExtendedServiceAuthDetailRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -4497,6 +4531,8 @@ declare interface Ess {
   CreateBatchSignUrl(data: CreateBatchSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchSignUrlResponse>;
   /** 创建合同对比web页面 {@link CreateContractDiffTaskWebUrlRequest} {@link CreateContractDiffTaskWebUrlResponse} */
   CreateContractDiffTaskWebUrl(data: CreateContractDiffTaskWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContractDiffTaskWebUrlResponse>;
+  /** 创建合同审查web页面 {@link CreateContractReviewWebUrlRequest} {@link CreateContractReviewWebUrlResponse} */
+  CreateContractReviewWebUrl(data: CreateContractReviewWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContractReviewWebUrlResponse>;
   /** 创建文件转换任务 {@link CreateConvertTaskApiRequest} {@link CreateConvertTaskApiResponse} */
   CreateConvertTaskApi(data: CreateConvertTaskApiRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConvertTaskApiResponse>;
   /** 模板发起合同-创建电子文档 {@link CreateDocumentRequest} {@link CreateDocumentResponse} */
@@ -4621,6 +4657,8 @@ declare interface Ess {
   DescribeContractDiffTaskWebUrl(data: DescribeContractDiffTaskWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractDiffTaskWebUrlResponse>;
   /** 获取合同审查任务详情 {@link DescribeContractReviewTaskRequest} {@link DescribeContractReviewTaskResponse} */
   DescribeContractReviewTask(data: DescribeContractReviewTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractReviewTaskResponse>;
+  /** 获取合同审查结果web页面 {@link DescribeContractReviewWebUrlRequest} {@link DescribeContractReviewWebUrlResponse} */
+  DescribeContractReviewWebUrl(data: DescribeContractReviewWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractReviewWebUrlResponse>;
   /** 查询企业扩展服务授权详情 {@link DescribeExtendedServiceAuthDetailRequest} {@link DescribeExtendedServiceAuthDetailResponse} */
   DescribeExtendedServiceAuthDetail(data: DescribeExtendedServiceAuthDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtendedServiceAuthDetailResponse>;
   /** 查询企业扩展服务授权信息 {@link DescribeExtendedServiceAuthInfosRequest} {@link DescribeExtendedServiceAuthInfosResponse} */

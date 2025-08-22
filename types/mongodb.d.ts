@@ -13,9 +13,9 @@ declare interface AddNodeList {
 /** 用户权限 */
 declare interface Auth {
   /** 当前账号具有的权限信息。0：无权限。1：只读。2：只写。3：读写。 */
-  Mask: number;
+  Mask: number | null;
   /** 指具有当前账号权限的数据库名。* ：表示所有数据库。db.name：表示特定name的数据库。 */
-  NameSpace: string;
+  NameSpace: string | null;
 }
 
 /** 备份下载任务 */
@@ -637,15 +637,17 @@ declare interface TagInfo {
 /** 账户基本信息 */
 declare interface UserInfo {
   /** 账号名。 */
-  UserName: string;
+  UserName?: string;
   /** 账号权限详情。 */
-  AuthRole: Auth[];
+  AuthRole?: Auth[];
   /** 账号创建时间。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 账号更新时间。 */
-  UpdateTime: string;
+  UpdateTime?: string;
   /** 备注信息。 */
-  UserDesc: string;
+  UserDesc?: string;
+  /** 控制台密码更新时间 */
+  ConsolePassUpdateTime?: string;
 }
 
 declare interface AssignProjectRequest {

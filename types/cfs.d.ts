@@ -1285,7 +1285,7 @@ declare interface DescribeUserQuotaResponse {
 declare interface DoDirectoryOperationRequest {
   /** 文件系统Id */
   FileSystemId: string;
-  /** create：创建目录 check：确认目录是否存在 move: 对目录做mv 操作 */
+  /** create：创建目录，等同于mkdir。check：确认目录是否存在，等同于stat。move：对文件/目录进行重命名，等同于mv。 */
   OpetationType: string;
   /** 目录的绝对路径 默认递归创建（即如果目录中有子目录不存在，则先创建出对应子目录） */
   DirectoryPath: string;

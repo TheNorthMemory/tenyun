@@ -4714,6 +4714,8 @@ declare interface RawTranscodeParameter {
   StdExtInfo?: string;
   /** 音视频增强配置 */
   EnhanceConfig?: EnhanceConfig | null;
+  /** 字幕参数 */
+  SubtitleTemplate?: SubtitleTemplate | null;
 }
 
 /** 自定义水印规格参数。 */
@@ -5390,6 +5392,8 @@ declare interface SubtitleTemplate {
   Path?: string | null;
   /** 指定要压制到视频中的字幕轨道，Streamindex的取值从0开始，0表示使用源视频中的第一条字幕轨。如果指定了Path，则优先使用Path。Path 和 StreamIndex 至少指定一个。- 注意：StreamIndex必须与源文件中的字幕轨索引一致。例如，源文件中的字幕轨为stream#0:3，则StreamIndex应为3，否则可能导致任务处理失败。 */
   StreamIndex?: number | null;
+  /** 要压制到视频中的字幕文件的输入信息，目前仅支持存储在COS的字幕文件 */
+  SubtitleFileInput?: MediaInputInfo | null;
   /** 字体类型，支持：hei.ttf：黑体song.ttf：宋体kai.ttf（推荐）或 simkai.ttf：楷体msyh.ttf：微软雅黑msyhbd.ttf：微软雅黑加粗hkjgt.ttf：华康金刚体dhttx.ttf：典黑体特细xqgdzt.ttf：喜鹊古字典体qpcyt.ttf：巧拼超圆体arial.ttf：仅支持英文dinalternate.ttf：DIN Alternate Boldhelveticalt.ttf：Helveticahelveticains.ttf：Helvetica Inserattrajanpro.ttf：TrajanPro-Boldkorean.ttf：韩语japanese.ttf：日语thai.ttf：泰语默认：hei.ttf 黑体。注意：楷体推荐使用kai.ttf */
   FontType?: string | null;
   /** 字体大小，格式：Npx，N 为数值，不指定则以字幕文件中为准。默认源视频高度的5%。 */
@@ -5410,6 +5414,22 @@ declare interface SubtitleTemplate {
   BoardColor?: string | null;
   /** 字幕背景板透明度，取值范围：[0, 1]0：完全透明1：完全不透明默认值：0.8。 */
   BoardAlpha?: number | null;
+  /** 描边宽度 */
+  OutlineWidth?: number | null;
+  /** 描边颜色。6位16进制RGB */
+  OutlineColor?: string | null;
+  /** 描边透明度。(0，1] 正浮点数 */
+  OutlineAlpha?: number | null;
+  /** 阴影宽度。浮点数 [0, 1000] */
+  ShadowWidth?: number | null;
+  /** 阴影颜色。6位16进制RGB */
+  ShadowColor?: string | null;
+  /** 阴影透明度。(0，1] 正浮点数 */
+  ShadowAlpha?: number | null;
+  /** 行间距。正整数 [0, 1000] */
+  LineSpacing?: number | null;
+  /** 对齐方式，，取值：top: 顶部对齐，字幕顶部按位置固定，底部随行数变化。bottom: 底部对齐，字幕底部按位置固定，顶部随行数变化。 */
+  Alignment?: string | null;
 }
 
 /** 超分配置 */

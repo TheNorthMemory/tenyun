@@ -6,7 +6,7 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 declare interface AKInfo {
   /** ak对应id */
   ID?: number;
-  /** ak具体值临时密钥时返回临时密钥 */
+  /** ak具体值\n临时密钥时返回临时密钥 */
   Name?: string;
   /** 所属账号 */
   User?: string;
@@ -2568,7 +2568,7 @@ declare interface SubUserInfo {
   ConfigRiskCount?: number;
   /** 危险行为告警 */
   ActionRiskCount?: number;
-  /** 是否接入云审计日志 */
+  /** 是否接入操作审计日志 */
   IsAccessCloudAudit?: boolean;
   /** 是否配置风险的安全体检 */
   IsAccessCheck?: boolean;

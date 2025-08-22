@@ -1122,6 +1122,12 @@ declare interface VideoLicenseEntity {
   ExpiresSoonCount?: number;
 }
 
+/** 目标检测配置 */
+declare interface VisionObjectDetectConfig {
+  /** 检测类别，可选值：- `adult`：成年人- `child`：儿童 */
+  DetectTypes?: string[];
+}
+
 /** TWeSee 语义理解结果 */
 declare interface VisionRecognitionResult {
   /** 任务状态（1：分析失败；2：下载/读取视频/图片失败；3：成功；4：执行中） */
@@ -1743,6 +1749,10 @@ declare interface CreateTWeSeeRecognitionTaskRequest {
   SummaryQOS?: string;
   /** 摘要输出配置 */
   SummaryConfig?: VisionSummaryConfig;
+  /** 算法类型，可能取值：- `Summary`：视频/图片摘要- `ObjectDetect`：目标检测 */
+  ServiceType?: string;
+  /** 目标检测配置 */
+  ObjectDetectConfig?: VisionObjectDetectConfig;
 }
 
 declare interface CreateTWeSeeRecognitionTaskResponse {
@@ -3573,6 +3583,10 @@ declare interface InvokeTWeSeeRecognitionTaskRequest {
   SummaryQOS?: string;
   /** 摘要输出配置 */
   SummaryConfig?: VisionSummaryConfig;
+  /** 算法类型，可能取值：- `Summary`：视频/图片摘要- `ObjectDetect`：目标检测 */
+  ServiceType?: string;
+  /** 目标检测配置 */
+  ObjectDetectConfig?: VisionObjectDetectConfig;
 }
 
 declare interface InvokeTWeSeeRecognitionTaskResponse {

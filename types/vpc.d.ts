@@ -8287,6 +8287,8 @@ declare interface ModifyCcnAttributeRequest {
   RouteECMPFlag?: boolean;
   /** 是否开启路由重叠功能。`False` 不开启，`True` 开启。 */
   RouteOverlapFlag?: boolean;
+  /** 是否开启qos功能。`False` 不开启，`True` 开启。 */
+  TrafficMarkingPolicyFlag?: boolean;
 }
 
 declare interface ModifyCcnAttributeResponse {

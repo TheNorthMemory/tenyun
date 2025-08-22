@@ -118,6 +118,24 @@ declare interface DeviceCertificateItem {
   NotBeforeTime?: number;
 }
 
+/** 设备标识列表 */
+declare interface DeviceIdentityItem {
+  /** 集群id */
+  InstanceId?: string;
+  /** 设备id */
+  DeviceId?: string;
+  /** 1:ENABLED-可用2:DISABLE-不可用 */
+  Status?: number;
+  /** 主要签名key，不传则由系统自动生成 */
+  PrimaryKey?: string;
+  /** 次要签名key，不传则由系统自动生成 */
+  SecondaryKey?: string;
+  /** 创建时间 */
+  CreatedTime?: number;
+  /** 传播属性列表 */
+  PropagatingProperties?: PropagatingProperty[];
+}
+
 /** 查询过滤器 */
 declare interface Filter {
   /** 过滤条件名 */
@@ -358,6 +376,14 @@ declare interface ProductSkuItem {
   PriceTags?: PriceTag[];
 }
 
+/** 传播属性结构 */
+declare interface PropagatingProperty {
+  /** 传播属性key */
+  Key: string;
+  /** 传播属性value */
+  Value: string;
+}
+
 /** 公网访问安全规则 */
 declare interface PublicAccessRule {
   /** ip网段信息 */
@@ -480,6 +506,26 @@ declare interface CreateAuthorizationPolicyResponse {
   InstanceId?: string;
   /** 策略id */
   Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDeviceIdentityRequest {
+  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  InstanceId: string;
+  /** 设备id */
+  DeviceId: string;
+  /** 1:ENABLED-可用（默认）2:DISABLE-不可用 */
+  Status?: string;
+  /** 主要签名key，不传则由系统自动生成，需要base64编码。 */
+  PrimaryKey?: string;
+  /** 次要签名key，不传则油系统自动生成，需要base64编码。 */
+  SecondaryKey?: string;
+  /** 该设备id的传播属性设置 */
+  PropagatingProperties?: PropagatingProperty[];
+}
+
+declare interface CreateDeviceIdentityResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -710,6 +756,18 @@ declare interface DeleteDeviceCertificateResponse {
   RequestId?: string;
 }
 
+declare interface DeleteDeviceIdentityRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 设备id */
+  DeviceId: string;
+}
+
+declare interface DeleteDeviceIdentityResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteInsPublicEndpointRequest {
   /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
   InstanceId: string;
@@ -904,6 +962,48 @@ declare interface DescribeDeviceCertificatesResponse {
   TotalCount?: number;
   /** 设备证书列表 */
   Data?: DeviceCertificateItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDeviceIdentitiesRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 查询起始位置 */
+  Offset?: number;
+  /** 查询结果限制数量 */
+  Limit?: number;
+}
+
+declare interface DescribeDeviceIdentitiesResponse {
+  /** 返回的设备标识列表 */
+  Data?: DeviceIdentityItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDeviceIdentityRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 设备id */
+  DeviceId: string;
+}
+
+declare interface DescribeDeviceIdentityResponse {
+  /** 集群id */
+  InstanceId?: string;
+  /** 设备id */
+  DeviceId?: string;
+  /** 1:ENABLED-可用 2:DISABLE-不可用 */
+  Status?: number;
+  /** 主要签名key */
+  PrimaryKey?: string;
+  /** 次要签名key */
+  SecondaryKey?: string;
+  /** 创建时间 */
+  CreatedTime?: number;
+  /** 该设备id的传播属性 */
+  PropagatingProperties?: PropagatingProperty[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1228,6 +1328,26 @@ declare interface ModifyAuthorizationPolicyResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDeviceIdentityRequest {
+  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  InstanceId: string;
+  /** 设备id */
+  DeviceId: string;
+  /** 1:ENABLED-可用2:DISABLE-不可用 */
+  Status?: string;
+  /** 主要签名key，需要Base64编码。 */
+  PrimaryKey?: string;
+  /** 次要签名key，需要Base64编码。 */
+  SecondaryKey?: string;
+  /** 该设备id的传播属性设置 */
+  PropagatingProperties?: PropagatingProperty[];
+}
+
+declare interface ModifyDeviceIdentityResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyHttpAuthenticatorRequest {
   /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
   InstanceId: string;
@@ -1495,6 +1615,8 @@ declare interface Mqtt {
   ApplyRegistrationCode(data: ApplyRegistrationCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyRegistrationCodeResponse>;
   /** 创建授权策略 {@link CreateAuthorizationPolicyRequest} {@link CreateAuthorizationPolicyResponse} */
   CreateAuthorizationPolicy(data: CreateAuthorizationPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuthorizationPolicyResponse>;
+  /** 创建设备标识 {@link CreateDeviceIdentityRequest} {@link CreateDeviceIdentityResponse} */
+  CreateDeviceIdentity(data: CreateDeviceIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceIdentityResponse>;
   /** 创建一个MQTTHTTP认证器 {@link CreateHttpAuthenticatorRequest} {@link CreateHttpAuthenticatorResponse} */
   CreateHttpAuthenticator(data: CreateHttpAuthenticatorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHttpAuthenticatorResponse>;
   /** 为MQTT实例创建公网接入点 {@link CreateInsPublicEndpointRequest} {@link CreateInsPublicEndpointResponse} */
@@ -1521,6 +1643,8 @@ declare interface Mqtt {
   DeleteCaCertificate(data: DeleteCaCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCaCertificateResponse>;
   /** 删除设备证书 {@link DeleteDeviceCertificateRequest} {@link DeleteDeviceCertificateResponse} */
   DeleteDeviceCertificate(data: DeleteDeviceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceCertificateResponse>;
+  /** 删除设备标识 {@link DeleteDeviceIdentityRequest} {@link DeleteDeviceIdentityResponse} */
+  DeleteDeviceIdentity(data: DeleteDeviceIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceIdentityResponse>;
   /** 删除MQTT实例的公网接入点 {@link DeleteInsPublicEndpointRequest} {@link DeleteInsPublicEndpointResponse} */
   DeleteInsPublicEndpoint(data: DeleteInsPublicEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInsPublicEndpointResponse>;
   /** 删除MQTT实例 {@link DeleteInstanceRequest} {@link DeleteInstanceResponse} */
@@ -1543,6 +1667,10 @@ declare interface Mqtt {
   DescribeDeviceCertificate(data: DescribeDeviceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceCertificateResponse>;
   /** 查询设备证书 {@link DescribeDeviceCertificatesRequest} {@link DescribeDeviceCertificatesResponse} */
   DescribeDeviceCertificates(data: DescribeDeviceCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceCertificatesResponse>;
+  /** 查询设备标识列表 {@link DescribeDeviceIdentitiesRequest} {@link DescribeDeviceIdentitiesResponse} */
+  DescribeDeviceIdentities(data: DescribeDeviceIdentitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceIdentitiesResponse>;
+  /** 查询设备标识 {@link DescribeDeviceIdentityRequest} {@link DescribeDeviceIdentityResponse} */
+  DescribeDeviceIdentity(data: DescribeDeviceIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceIdentityResponse>;
   /** 查询MQTT实例公网接入点 {@link DescribeInsPublicEndpointsRequest} {@link DescribeInsPublicEndpointsResponse} */
   DescribeInsPublicEndpoints(data: DescribeInsPublicEndpointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInsPublicEndpointsResponse>;
   /** 查询MQTT实例VPC接入点 {@link DescribeInsVPCEndpointsRequest} {@link DescribeInsVPCEndpointsResponse} */
@@ -1569,6 +1697,8 @@ declare interface Mqtt {
   DescribeUserList(data: DescribeUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserListResponse>;
   /** 修改授权策略 {@link ModifyAuthorizationPolicyRequest} {@link ModifyAuthorizationPolicyResponse} */
   ModifyAuthorizationPolicy(data: ModifyAuthorizationPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuthorizationPolicyResponse>;
+  /** 修改设备标识 {@link ModifyDeviceIdentityRequest} {@link ModifyDeviceIdentityResponse} */
+  ModifyDeviceIdentity(data: ModifyDeviceIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceIdentityResponse>;
   /** 修改MQTTHTTP认证器 {@link ModifyHttpAuthenticatorRequest} {@link ModifyHttpAuthenticatorResponse} */
   ModifyHttpAuthenticator(data: ModifyHttpAuthenticatorRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHttpAuthenticatorResponse>;
   /** 更新MQTT实例公网接入点 {@link ModifyInsPublicEndpointRequest} {@link ModifyInsPublicEndpointResponse} */

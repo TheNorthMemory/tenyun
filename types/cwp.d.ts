@@ -2624,7 +2624,7 @@ declare interface HostLoginList {
   Location?: string;
   /** 主机quuid */
   Quuid?: string;
-  /** 高危信息说明：ABROAD - 海外IP；XTI - 威胁情报 */
+  /** 高危信息说明：ABROAD - 境外IP；XTI - 威胁情报 */
   Desc?: string;
   /** 附加信息 */
   MachineExtraInfo?: MachineExtraInfo;
@@ -3056,7 +3056,7 @@ declare interface LoginWhiteCombinedInfo {
   ModifyTime?: string;
   /** 服务器Uuid */
   Uuid?: string;
-  /** 登陆地 */
+  /** 登录地 */
   Locations?: string;
 }
 
@@ -3690,7 +3690,7 @@ declare interface Place {
   CityId: number;
   /** 省份 ID。 */
   ProvinceId: number;
-  /** 国家ID，暂只支持国内：1。 */
+  /** 国家ID，暂只支持境内：1。 */
   CountryId: number;
   /** 位置名称 */
   Location?: string;
@@ -7926,12 +7926,18 @@ declare interface DescribeBanStatusRequest {
 }
 
 declare interface DescribeBanStatusResponse {
-  /** 阻断开关状态: 0 -- 关闭 1 -- 高级阻断 2 -- 基础阻断(只阻断情报库黑ip) */
+  /** (已废弃) 阻断开关状态: 0 -- 关闭 1 -- 高级阻断 2 -- 基础阻断(只阻断情报库黑ip) */
   Status?: number;
   /** 是否弹窗提示信息 false: 关闭，true: 开启 */
   ShowTips?: boolean;
   /** 是否开启智能过白模式 */
   OpenSmartMode?: boolean;
+  /** 是否开启情报IP阻断 */
+  BanBlackIp?: boolean;
+  /** 是否开启漏洞IP阻断 */
+  BanVulIp?: boolean;
+  /** 是否开启规则阻断 */
+  BanByRule?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
