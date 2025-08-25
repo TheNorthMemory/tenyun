@@ -1344,9 +1344,9 @@ declare interface LogicBackupConfigInfo {
   LogicBackupTimeBeg?: number;
   /** 自动逻辑备份结束时间 */
   LogicBackupTimeEnd?: number;
-  /** 自动逻辑备份保留时间 */
+  /** 自动逻辑备份保留时间单位：秒 */
   LogicReserveDuration?: number;
-  /** 是否开启跨地域逻辑备份 */
+  /** 是否开启跨地域逻辑备份可选值：ON/OFF */
   LogicCrossRegionsEnable?: string;
   /** 逻辑备份所跨地域 */
   LogicCrossRegions?: string[] | null;

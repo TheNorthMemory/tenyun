@@ -616,6 +616,20 @@ declare interface PartitionsTopic {
   TopicType?: number | null;
 }
 
+/** 生产者客户端详情 */
+declare interface ProducerInfo {
+  /** 客户端ID */
+  ClientId?: string | null;
+  /** 客户端IP */
+  ClientIp?: string | null;
+  /** 客户端语言JAVA((byte) 0), CPP((byte) 1), DOTNET((byte) 2), PYTHON((byte) 3), DELPHI((byte) 4), ERLANG((byte) 5), RUBY((byte) 6), OTHER((byte) 7), HTTP((byte) 8), GO((byte) 9), PHP((byte) 10), OMS((byte) 11); */
+  Language?: string | null;
+  /** 客户端版本 */
+  Version?: string | null;
+  /** 最后生产时间 */
+  LastUpdateTimestamp?: number | null;
+}
+
 /** 消息生产信息 */
 declare interface ProducerLog {
   /** 消息ID。 */
@@ -3942,6 +3956,30 @@ declare interface DescribeRocketMQNamespacesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRocketMQProducersRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 命名空间 */
+  NamespaceId: string;
+  /** 主题名 */
+  Topic: string;
+  /** 分页offset */
+  Offset: number;
+  /** 分页limit */
+  Limit: number;
+  /** 过滤查询条件列表，支持以下过滤参数：- ClientId：生产者客户端ID- ClientIp：生产者客户端IP */
+  Filters?: Filter[];
+}
+
+declare interface DescribeRocketMQProducersResponse {
+  /** 生产者客户端列表 */
+  Producers?: ProducerInfo[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRocketMQPublicAccessMonitorDataRequest {
   /** 专享集群ID */
   InstanceId: string;
@@ -5393,6 +5431,8 @@ declare interface Tdmq {
   DescribeRocketMQMsgTrace(data: DescribeRocketMQMsgTraceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQMsgTraceResponse>;
   /** 获取RocketMQ命名空间列表 {@link DescribeRocketMQNamespacesRequest} {@link DescribeRocketMQNamespacesResponse} */
   DescribeRocketMQNamespaces(data: DescribeRocketMQNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQNamespacesResponse>;
+  /** 查询生产者客户端列表 {@link DescribeRocketMQProducersRequest} {@link DescribeRocketMQProducersResponse} */
+  DescribeRocketMQProducers(data: DescribeRocketMQProducersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQProducersResponse>;
   /** 拉取公网指标监控数据 {@link DescribeRocketMQPublicAccessMonitorDataRequest} {@link DescribeRocketMQPublicAccessMonitorDataResponse} */
   DescribeRocketMQPublicAccessMonitorData(data: DescribeRocketMQPublicAccessMonitorDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQPublicAccessMonitorDataResponse>;
   /** 查询RocketMQ实例公网接入点信息 {@link DescribeRocketMQPublicAccessPointRequest} {@link DescribeRocketMQPublicAccessPointResponse} */

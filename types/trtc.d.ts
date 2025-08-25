@@ -56,6 +56,8 @@ declare interface AgentConfig {
   TurnDetection?: TurnDetection;
   /** 机器人字幕显示模式。- 0表示尽快显示，不会和音频播放进行同步。此时字幕全量下发，后面的字幕会包含前面的字幕。- 1表示句子级别的实时显示，会和音频播放进行同步，只有当前句子对应的音频播放完后，下一条字幕才会下发。此时字幕增量下发，端上需要把前后的字幕进行拼接才是完整字幕。 */
   SubtitleMode?: number;
+  /** 打断词列表，在AI说话期间，只有说出列表中的打断词才会打断AI说话。注意：打断词不会触发AI回复。 */
+  InterruptWordList?: string[];
 }
 
 /** 转推服务加入TRTC房间的机器人参数。 */

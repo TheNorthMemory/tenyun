@@ -1142,6 +1142,40 @@ declare interface VisionRecognitionResult {
   ErrorCode?: string;
 }
 
+/** TWeSee 语义理解任务信息 */
+declare interface VisionRecognitionTask {
+  /** 云存 AI 服务任务 ID */
+  TaskId?: string;
+  /** 产品 ID */
+  ProductId?: string;
+  /** 设备名称 */
+  DeviceName?: string;
+  /** 通道 ID */
+  ChannelId?: number;
+  /** 对应云存视频的起始时间（秒级 UNIX 时间戳） */
+  StartTime?: number;
+  /** 对应云存视频的起始时间（毫秒级 UNIX 时间戳） */
+  StartTimeMs?: number;
+  /** 对应云存视频的结束时间（秒级 UNIX 时间戳） */
+  EndTime?: number;
+  /** 对应云存视频的结束时间（毫秒级 UNIX 时间戳） */
+  EndTimeMs?: number;
+  /** 任务状态（1：分析失败；2：下载/读取视频/图片失败；3：成功；4：执行中） */
+  Status?: number;
+  /** 任务结果 */
+  Result?: VisionRecognitionResult;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 最后更新时间 */
+  UpdateTime?: number;
+  /** 自定义任务 ID */
+  CustomId?: string;
+  /** 任务输出文件列表 */
+  Files?: string[];
+  /** 任务输出文件信息列表 */
+  FilesInfo?: CloudStorageAIServiceTaskFileInfo[];
+}
+
 /** 视频摘要配置 */
 declare interface VisionSummaryConfig {
   /** 主输出语言支持列表如下：zh 中文en 英语ja 日语ko 韩文pt-BR 葡萄牙语（巴西）th 泰语 */
@@ -2994,6 +3028,20 @@ declare interface DescribeTWeSeeConfigResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTWeSeeRecognitionTaskRequest {
+  /** 任务 ID */
+  TaskId: string;
+  /** 下载 URL 的过期时间。若传入该参数，则响应中将包含所有文件的下载 URL */
+  FileURLExpireTime?: number;
+}
+
+declare interface DescribeTWeSeeRecognitionTaskResponse {
+  /** 任务信息 */
+  TaskInfo?: VisionRecognitionTask;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTopicPolicyRequest {
   /** 产品ID */
   ProductId: string;
@@ -4543,6 +4591,8 @@ declare interface Iotexplorer {
   DescribeStudioProduct(data: DescribeStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStudioProductResponse>;
   /** 查询 TWeSee 配置 {@link DescribeTWeSeeConfigRequest} {@link DescribeTWeSeeConfigResponse} */
   DescribeTWeSeeConfig(data: DescribeTWeSeeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeSeeConfigResponse>;
+  /** 查询 TWeSee 语义理解任务 {@link DescribeTWeSeeRecognitionTaskRequest} {@link DescribeTWeSeeRecognitionTaskResponse} */
+  DescribeTWeSeeRecognitionTask(data: DescribeTWeSeeRecognitionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeSeeRecognitionTaskResponse>;
   /** 查看Topic详情 {@link DescribeTopicPolicyRequest} {@link DescribeTopicPolicyResponse} */
   DescribeTopicPolicy(data: DescribeTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicPolicyResponse>;
   /** 获取规则信息 {@link DescribeTopicRuleRequest} {@link DescribeTopicRuleResponse} */

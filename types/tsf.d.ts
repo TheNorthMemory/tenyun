@@ -2732,17 +2732,17 @@ declare interface RepositoryList {
 
 /** tsf-privilege 模块，资源 */
 declare interface Resource {
-  /** 资源ID，调用[DescribeResource](https://console.cloud.tencent.com/tsf/privilege-program-create?rid=1)查询接口获取 */
+  /** 资源ID，调用[DescribeResources](https://console.cloud.tencent.com/tsf/privilege-program-create?rid=1)接口，查看接口返回的ResourceId */
   ResourceId?: string;
-  /** 资源编码，枚举值描述【cluster、namespace、config】 */
+  /** 资源编码，枚举值描述【cluster（集群）、namespace（命名空间）、config（应用配置）】 */
   ResourceCode?: string;
   /** 资源名称 */
   ResourceName?: string;
   /** 资源所属产品编码，枚举值描述【tsf】 */
   ServiceCode?: string;
-  /** 选取资源使用的Action，枚举值描述【DescribeSimpleCluster、DescribeLanes、DescribeTaskRecords】 */
+  /** 选取资源使用的Action，枚举值描述【DescribeSimpleCluster（查询简单集群列表）、DescribeTaskRecords（查询任务列表）】 */
   ResourceAction?: string;
-  /** 资源数据查询的ID字段名，调用[DescribeResource](https://console.cloud.tencent.com/tsf/privilege-program-create?rid=1)查询接口获取 */
+  /** 资源数据查询的ID字段名，调用[DescribeResources](https://console.cloud.tencent.com/tsf/privilege-program-create?rid=1)接口，查看接口返回的IdField */
   IdField?: string;
   /** 资源数据查询的名称字段名 */
   NameField?: string;
