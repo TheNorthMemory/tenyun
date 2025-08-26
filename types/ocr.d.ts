@@ -5627,7 +5627,7 @@ declare interface Ocr {
   LicensePlateOCR(data?: LicensePlateOCRRequest, config?: AxiosRequestConfig): AxiosPromise<LicensePlateOCRResponse>;
   /** 马来西亚身份证识别 {@link MLIDCardOCRRequest} {@link MLIDCardOCRResponse} */
   MLIDCardOCR(data?: MLIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MLIDCardOCRResponse>;
-  /** 护照识别（港澳台地区及境外护照） {@link MLIDPassportOCRRequest} {@link MLIDPassportOCRResponse} */
+  /** 护照识别（多国多地区护照） {@link MLIDPassportOCRRequest} {@link MLIDPassportOCRResponse} */
   MLIDPassportOCR(data?: MLIDPassportOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MLIDPassportOCRResponse>;
   /** 港澳台通行证及来往内地通行证识别 {@link MainlandPermitOCRRequest} {@link MainlandPermitOCRResponse} */
   MainlandPermitOCR(data?: MainlandPermitOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MainlandPermitOCRResponse>;

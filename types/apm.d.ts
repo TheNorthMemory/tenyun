@@ -74,6 +74,10 @@ declare interface ApmApplicationConfigView {
   InstrumentList?: Instrument[];
   /** 链路压缩开关（已废弃） */
   TraceSquash?: boolean;
+  /** 探针熔断内存阈值 */
+  DisableMemoryUsed?: number;
+  /** 探针熔断CPU阈值 */
+  DisableCpuUsed?: number;
 }
 
 /** 指标维度信息 */

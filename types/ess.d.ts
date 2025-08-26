@@ -3634,7 +3634,7 @@ declare interface DescribeContractReviewTaskResponse {
   ResourceId?: string;
   /** 合同审查识别出的PDF文件风险信息，如果是空数组表示无风险。注意：`审查结果由AI生成，仅供参考。请结合相关法律法规和公司制度要求综合判断。` */
   Risks?: OutputRisk[];
-  /** 合同审查中的角色信息。注意：注意：如果用户没有配置审查角色时此值可能为null，需要等大模型根据合同内容推荐出审查角色信息。 */
+  /** 合同审查中的角色信息。注意： `如果用户没有配置审查角色时此值可能为null，需要等大模型根据合同内容推荐出审查角色信息。` */
   Role?: RiskIdentificationRoleInfo | null;
   /** 合同审查任务状态。状态如下： **1** - 合同审查任务创建成功 **2** - 合同审查任务排队中 **3** - 合同审查任务执行中 **4** - 合同审查任务执行成功 **5** - 合同审查任务执行失败 */
   Status?: number;
@@ -3644,6 +3644,10 @@ declare interface DescribeContractReviewTaskResponse {
   Comment?: string;
   /** 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 1024长度。在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的[回调通知](https://qian.tencent.com/developers/company/callback_types_v2)模块。 */
   UserData?: string;
+  /** 合同审查出的高风险项数量 */
+  HighRiskCount?: number;
+  /** 合同审查出的风险总数 */
+  TotalRiskCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

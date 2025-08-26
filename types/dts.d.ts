@@ -1104,12 +1104,14 @@ declare interface SubscribeInfo {
   AccessType?: string;
   /** 数据库节点信息 */
   Endpoints?: EndpointItem[];
-  /** 数据订阅版本, 当前只支持 kafka 版本。 */
+  /** 数据订阅版本, 当前支持kafka和kafkaPro（专业版） */
   SubscribeVersion?: string;
   /** 标签 */
   Tags?: TagItem[] | null;
   /** 任务报错信息，如果有的话。 */
   Errors?: SubsErr[] | null;
+  /** 订阅实例规格 */
+  InstanceClass?: string;
 }
 
 /** 订阅的kafka分区数和分区规则。mariadb，percona，tdsqlmysql，tdpg不支持自定义分区，所以DistributeRules和DefaultRuleType可以不填，但是NumberOfPartitions是必填。 */
@@ -1381,6 +1383,10 @@ declare interface ConfigureSubscribeJobRequest {
   PipelineInfo?: PipelineInfo[];
   /** 为业务添加的额外信息。参数名作key，参数值作value。mysql选填参数：ProcessXA-是否处理XA事务，填true处理，不填或填其他值不处理。mongo选填参数：SubscribeType-订阅类型，目前只支持changeStream，不填也是默认changeStream。其他业务暂没有可选参数。 */
   ExtraAttr?: KeyValuePairOption[];
+  /** vpc id */
+  ConsumerVpcId?: string;
+  /** subnet id */
+  ConsumerSubnetId?: string;
 }
 
 declare interface ConfigureSubscribeJobResponse {
@@ -1569,6 +1575,8 @@ declare interface CreateSubscribeRequest {
   Tags?: TagItem[];
   /** 任务名，自定义 */
   Name?: string;
+  /** 订阅实例规格，当前仅支持small、medium、large */
+  InstanceClass?: string;
 }
 
 declare interface CreateSubscribeResponse {
@@ -2000,6 +2008,14 @@ declare interface DescribeSubscribeDetailResponse {
   Errors?: SubsErr[] | null;
   /** 为业务添加的额外信息。参数名作key，参数值作value。mysql选填参数：ProcessXA-是否处理XA事务，为true处理，其他不处理。mongo选填参数：SubscribeType-订阅类型，目前只支持changeStream。 */
   ExtraAttr?: KeyValuePairOption[];
+  /** 数据订阅版本, 当前支持kafka和kafkaPro（专业版） */
+  SubscribeVersion?: string;
+  /** 消费端地址所在vpc */
+  ConsumerVpcId?: string;
+  /** 消费端地址所在子网 */
+  ConsumerSubnetId?: string;
+  /** 订阅实例规格 */
+  InstanceClass?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
