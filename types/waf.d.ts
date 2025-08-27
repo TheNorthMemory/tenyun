@@ -5696,6 +5696,18 @@ declare interface ModifyOwaspWhiteRuleResponse {
   RequestId?: string;
 }
 
+declare interface ModifyProtectionLevelRequest {
+  /** 客户域名 */
+  Domain?: string;
+  /** 防护等级,100,200,300 */
+  Level?: number;
+}
+
+declare interface ModifyProtectionLevelResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyProtectionStatusRequest {
   /** 域名 */
   Domain: string;
@@ -6527,6 +6539,8 @@ declare interface Waf {
   ModifyOwaspRuleTypeStatus(data: ModifyOwaspRuleTypeStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOwaspRuleTypeStatusResponse>;
   /** 编辑规则引擎白名单 {@link ModifyOwaspWhiteRuleRequest} {@link ModifyOwaspWhiteRuleResponse} */
   ModifyOwaspWhiteRule(data: ModifyOwaspWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOwaspWhiteRuleResponse>;
+  /** 更改防护等级 {@link ModifyProtectionLevelRequest} {@link ModifyProtectionLevelResponse} */
+  ModifyProtectionLevel(data?: ModifyProtectionLevelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProtectionLevelResponse>;
   /** 开启、关闭WAF开关 {@link ModifyProtectionStatusRequest} {@link ModifyProtectionStatusResponse} */
   ModifyProtectionStatus(data: ModifyProtectionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProtectionStatusResponse>;
   /** 编辑SaaS型WAF域名 {@link ModifySpartaProtectionRequest} {@link ModifySpartaProtectionResponse} */

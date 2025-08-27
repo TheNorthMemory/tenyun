@@ -314,7 +314,7 @@ declare interface Placement {
   Zone: string;
   /** 围笼Id，可通过 [DescribeDiskStoragePool](https://cloud.tencent.com/document/api/362/62143) 获取。作为入参时，表示对指定的CageId的资源进行操作，可为空。 作为出参时，表示资源所属围笼ID，可为空。 */
   CageId?: string | null;
-  /** 实例所属项目ID，可通过[DescribeProject](/document/api/651/78725)获取。不填默认为0，表示默认项目。 */
+  /** 实例所属项目ID，可通过DescribeProject获取。不填默认为0，表示默认项目。 */
   ProjectId?: number;
   /** 实例所属项目名称，可通过[DescribeProject](/document/api/651/78725)获取。 */
   ProjectName?: string | null;

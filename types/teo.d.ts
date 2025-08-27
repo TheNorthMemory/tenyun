@@ -3450,7 +3450,7 @@ declare interface Task {
   UpdateTime?: string;
   /** 刷新、预热失败类型。取值有：taskFailed：任务失败；quotaExceeded：配额超限；downloadManifestFailed：下载描述文件失败；accessDenied：访问被拒绝。originPullFailed：回源失败。 */
   FailType?: string;
-  /** 刷新、预热失败描述。 */
+  /** 清除缓存、预热缓存的失败原因描述。 */
   FailMessage?: string;
 }
 

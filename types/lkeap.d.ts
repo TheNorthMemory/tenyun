@@ -613,9 +613,9 @@ declare interface ModifyQAResponse {
 }
 
 declare interface QueryRewriteRequest {
-  /** 需要改写的多轮历史会话，每轮历史对话需要包含user（问）和assistant（答）成对输入，由于模型字符限制，最多提供4轮对话。针对最后一轮对话进行改写 */
+  /** 说明：需要改写的多轮历史会话，每轮历史对话需要包含user（问）和assistant（答）成对输入备注：由于模型字符限制，最多提供4轮对话。针对最后一轮对话进行改写。四轮对话最多包含3600个字符。 */
   Messages: Message[];
-  /** 模型名称 */
+  /** 说明：模型名称备注：仅一个模型可选默认值：lke-query-rewrite-base */
   Model?: string;
 }
 
@@ -687,11 +687,11 @@ declare interface RetrieveKnowledgeResponse {
 }
 
 declare interface RunRerankRequest {
-  /** 查询内容 */
+  /** 说明：查询内容备注：用于匹配的query */
   Query: string;
-  /** 文档列表，最多20个 */
+  /** 说明：文档列表备注：最多60个，Query字段和Docs字段的总长度上限为2000字符 */
   Docs: string[];
-  /** 模型名称, 默认: lke-reranker-base */
+  /** 说明：模型名称备注：仅一个模型可选默认值：lke-reranker-base */
   Model?: string;
 }
 

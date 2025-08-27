@@ -1034,6 +1034,24 @@ declare interface TWeCallLicenseInfo {
   UsedNum?: number;
 }
 
+/** Talk配置信息描述。 */
+declare interface TalkProductConfigInfo {
+  /** 产品ID */
+  ProductId?: string;
+  /** 支持的语言，zh-中文；en-英文；默认zh */
+  TargetLanguage?: string;
+  /** 系统提示词 */
+  SystemPrompt?: string;
+  /** 欢迎语 */
+  GreetingMessage?: string;
+  /** 音色，支持的音色列表：100510000-阅读男声智逍遥；101001-情感女声智瑜；101002-通用女声智聆；101003-客服女声智美；101004-通用男声智云；101005-通用女声智莉；101006-助手女声智言；101008-客服女声智琪；101009-知性女声智芸；101010-通用男声智华；101011-新闻女声智燕；101012-新闻女声智丹；101013-新闻男声智辉；101014 -新闻男声智宁；101015-男童声智萌；101016-女童声智甜；101017-情感女声智蓉；101018-情感男声智靖；101019-粤语女声智彤。 */
+  VoiceType?: number;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+}
+
 /** 视频语义搜索结果 */
 declare interface TargetInfo {
   /** 视频唯一ID */
@@ -1792,6 +1810,24 @@ declare interface CreateTWeSeeRecognitionTaskRequest {
 declare interface CreateTWeSeeRecognitionTaskResponse {
   /** 任务 ID */
   TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateTWeTalkProductConfigRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 系统提示词 */
+  SystemPrompt: string;
+  /** 欢迎语 */
+  GreetingMessage: string;
+  /** 音色，支持的音色列表：100510000-阅读男声智逍遥；101001-情感女声智瑜；101002-通用女声智聆；101003-客服女声智美；101004-通用男声智云；101005-通用女声智莉；101006-助手女声智言；101008-客服女声智琪；101009-知性女声智芸；101010-通用男声智华；101011-新闻女声智燕；101012-新闻女声智丹；101013-新闻男声智辉；101014 -新闻男声智宁；101015-男童声智萌；101016-女童声智甜；101017-情感女声智蓉；101018-情感男声智靖；101019-粤语女声智彤。 */
+  VoiceType?: number;
+  /** 支持的语言，zh-中文；en-英文；默认zh */
+  TargetLanguage?: string;
+}
+
+declare interface CreateTWeTalkProductConfigResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3042,6 +3078,20 @@ declare interface DescribeTWeSeeRecognitionTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTWeTalkProductConfigRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 支持的语言，zh-中文；en-英文；默认zh */
+  TargetLanguage?: string;
+}
+
+declare interface DescribeTWeTalkProductConfigResponse {
+  /** 配置信息 */
+  Data?: TalkProductConfigInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTopicPolicyRequest {
   /** 产品ID */
   ProductId: string;
@@ -3458,6 +3508,26 @@ declare interface GetTWeCallActiveStatusRequest {
 declare interface GetTWeCallActiveStatusResponse {
   /** 激活状态 */
   TWeCallActiveInfos?: TWeCallActiveInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetTWeTalkProductConfigListRequest {
+  /** 产品ID */
+  ProductId?: string;
+  /** 支持的语言，zh-中文；en-英文；默认zh */
+  TargetLanguage?: string;
+  /** 页码 */
+  Offset?: number;
+  /** 偏移量，10-100 */
+  Limit?: number;
+}
+
+declare interface GetTWeTalkProductConfigListResponse {
+  /** 配置信息列表 */
+  Data?: TalkProductConfigInfo[];
+  /** 总数 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4004,6 +4074,24 @@ declare interface ModifyTWeSeeConfigResponse {
   RequestId?: string;
 }
 
+declare interface ModifyTWeTalkProductConfigRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 系统提示词 */
+  SystemPrompt?: string;
+  /** 欢迎语 */
+  GreetingMessage?: string;
+  /** 音色，支持的音色列表：100510000-阅读男声智逍遥；101001-情感女声智瑜；101002-通用女声智聆；101003-客服女声智美；101004-通用男声智云；101005-通用女声智莉；101006-助手女声智言；101008-客服女声智琪；101009-知性女声智芸；101010-通用男声智华；101011-新闻女声智燕；101012-新闻女声智丹；101013-新闻男声智辉；101014 -新闻男声智宁；101015-男童声智萌；101016-女童声智甜；101017-情感女声智蓉；101018-情感男声智靖；101019-粤语女声智彤。 */
+  VoiceType?: number;
+  /** 支持的语言，zh-中文；en-英文；默认zh */
+  TargetLanguage?: string;
+}
+
+declare interface ModifyTWeTalkProductConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyTopicPolicyRequest {
   /** 产品ID */
   ProductId: string;
@@ -4457,6 +4545,8 @@ declare interface Iotexplorer {
   CreateTRTCSignaturesWithRoomId(data: CreateTRTCSignaturesWithRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTRTCSignaturesWithRoomIdResponse>;
   /** 创建 TWeSee 语义理解任务 {@link CreateTWeSeeRecognitionTaskRequest} {@link CreateTWeSeeRecognitionTaskResponse} */
   CreateTWeSeeRecognitionTask(data: CreateTWeSeeRecognitionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeSeeRecognitionTaskResponse>;
+  /** 新增TWeTalk连接配置信息 {@link CreateTWeTalkProductConfigRequest} {@link CreateTWeTalkProductConfigResponse} */
+  CreateTWeTalkProductConfig(data: CreateTWeTalkProductConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeTalkProductConfigResponse>;
   /** 创建Topic {@link CreateTopicPolicyRequest} {@link CreateTopicPolicyResponse} */
   CreateTopicPolicy(data: CreateTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicPolicyResponse>;
   /** 创建规则 {@link CreateTopicRuleRequest} {@link CreateTopicRuleResponse} */
@@ -4593,6 +4683,8 @@ declare interface Iotexplorer {
   DescribeTWeSeeConfig(data: DescribeTWeSeeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeSeeConfigResponse>;
   /** 查询 TWeSee 语义理解任务 {@link DescribeTWeSeeRecognitionTaskRequest} {@link DescribeTWeSeeRecognitionTaskResponse} */
   DescribeTWeSeeRecognitionTask(data: DescribeTWeSeeRecognitionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeSeeRecognitionTaskResponse>;
+  /** 获取TWeTalk连接配置信息详情 {@link DescribeTWeTalkProductConfigRequest} {@link DescribeTWeTalkProductConfigResponse} */
+  DescribeTWeTalkProductConfig(data: DescribeTWeTalkProductConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeTalkProductConfigResponse>;
   /** 查看Topic详情 {@link DescribeTopicPolicyRequest} {@link DescribeTopicPolicyResponse} */
   DescribeTopicPolicy(data: DescribeTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicPolicyResponse>;
   /** 获取规则信息 {@link DescribeTopicRuleRequest} {@link DescribeTopicRuleResponse} */
@@ -4641,6 +4733,8 @@ declare interface Iotexplorer {
   GetStudioProductList(data?: GetStudioProductListRequest, config?: AxiosRequestConfig): AxiosPromise<GetStudioProductListResponse>;
   /** 查询TWeCall激活状态 {@link GetTWeCallActiveStatusRequest} {@link GetTWeCallActiveStatusResponse} */
   GetTWeCallActiveStatus(data?: GetTWeCallActiveStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeCallActiveStatusResponse>;
+  /** 获取TWeTalk连接配置信息列表 {@link GetTWeTalkProductConfigListRequest} {@link GetTWeTalkProductConfigListResponse} */
+  GetTWeTalkProductConfigList(data?: GetTWeTalkProductConfigListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeTalkProductConfigListResponse>;
   /** 获取规则列表 {@link GetTopicRuleListRequest} {@link GetTopicRuleListResponse} */
   GetTopicRuleList(data: GetTopicRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTopicRuleListResponse>;
   /** 查询微信授权票据 {@link GetWechatDeviceTicketRequest} {@link GetWechatDeviceTicketResponse} */
@@ -4691,6 +4785,8 @@ declare interface Iotexplorer {
   ModifyStudioProduct(data: ModifyStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStudioProductResponse>;
   /** 修改 TWeSee 配置 {@link ModifyTWeSeeConfigRequest} {@link ModifyTWeSeeConfigResponse} */
   ModifyTWeSeeConfig(data: ModifyTWeSeeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTWeSeeConfigResponse>;
+  /** 修改TWeTalk连接配置信息 {@link ModifyTWeTalkProductConfigRequest} {@link ModifyTWeTalkProductConfigResponse} */
+  ModifyTWeTalkProductConfig(data: ModifyTWeTalkProductConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTWeTalkProductConfigResponse>;
   /** 更新Topic {@link ModifyTopicPolicyRequest} {@link ModifyTopicPolicyResponse} */
   ModifyTopicPolicy(data: ModifyTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicPolicyResponse>;
   /** 修改规则 {@link ModifyTopicRuleRequest} {@link ModifyTopicRuleResponse} */

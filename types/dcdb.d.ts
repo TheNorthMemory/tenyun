@@ -414,6 +414,14 @@ declare interface ExpandShardConfig {
   ShardNodeCount?: number;
 }
 
+/** 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
+declare interface Filter {
+  /** 需要过滤的字段。 */
+  Name: string;
+  /** 字段的过滤值。 */
+  Values: string[];
+}
+
 /** 实例备份文件信息 */
 declare interface InstanceBackupFileItem {
   /** 实例ID */
@@ -516,6 +524,28 @@ declare interface ParamModifyResult {
   Param?: string;
   /** 参数修改结果。0表示修改成功；-1表示修改失败；-2表示该参数值非法 */
   Code?: number;
+}
+
+/** 用于显示当前正在运行的线程（连接/查询）信息，数据源来自系统表：information_schema.processlist。 */
+declare interface Process {
+  /** 线程ID​​：唯一标识当前连接/线程的整数。 */
+  Id?: number;
+  /** 用户名​​：发起连接的 MySQL 用户。 */
+  User?: string;
+  /** 客户端地址​​：发起连接的客户端主机名及端口（格式：host:port）。 */
+  Host?: string;
+  /** 当前数据库​​：线程正在使用的数据库名（未选择数据库时为 空串）。 */
+  Db?: string;
+  /** 命令类型​​：线程正在执行的命令类型。常见值：- Sleep：空闲等待状态（等待新查询）。- Query：正在执行查询或 SQL 语句。- Binlog Dump：主服务器线程向从服务器发送二进制日志。- Connect：客户端正在连接。- Killed：线程被终止但未完全退出。 */
+  Command?: string;
+  /** 执行时间（秒）​​：线程在当前状态持续的秒数。 */
+  Time?: number;
+  /** 执行开始时间（秒）​​：线程在当前状态开始执行的时间。 */
+  ProcessStartTime?: string;
+  /** ​​状态描述​​：线程当前的详细操作状态。常见值：- Sending data：正在处理/发送数据。- Locked：等待表锁释放（例如 MyISAM 表级锁）。- Sorting result：排序查询结果。- Updating：更新表中数据。- 当为NULL返回空串：无明确状态（如 Sleep 时）。 */
+  State?: string;
+  /** 执行语句​​：正在执行的 SQL 语句（前 1024 字符）。 */
+  Info?: string;
 }
 
 /** 项目信息描述 */
@@ -1926,6 +1956,18 @@ declare interface DescribeFlowResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceSSLAttributesRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeInstanceSSLAttributesResponse {
+  /** 实例SSL认证功能当前状态。1-开启中；2-已开启；3-已关闭；4-关闭中 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLogFileRetentionPeriodRequest {
   /** 实例 ID，形如：tdsql-ow728lmc。 */
   InstanceId: string;
@@ -1970,6 +2012,30 @@ declare interface DescribeOrdersResponse {
   TotalCount: number;
   /** 订单信息列表。 */
   Deals: Deal[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeProcessListRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 节点ID。 */
+  NodeId: string;
+  /** 分片ID，与ShardSerialId设置一个。 */
+  ShardId?: string;
+  /** 分片序列ID，与ShardId设置一个。 */
+  ShardSerialId?: string;
+  /** id 按照【会话ID】进行过滤。会话ID例如：125700。 类型：String 必选：否 匹配类型：精确匹配user 按照【用户名】进行过滤。用户名例如：root。 类型：String 必选：否 匹配类型：精确匹配host 按照【客户端Host】进行过滤。客户端Host例如：127.0.0.1:46295。 类型：String 必选：否 匹配类型：前缀匹配，例如可以查询客户端IP不加端口：127.0.0.1。state 按照【线程状态】进行过滤。线程状态例如：Updating。 类型：String 必选：否 匹配类型：精确匹配db 按照【数据库名称】进行过滤。数据库名称例如：mysql。 类型：String 必选：否 匹配类型：精确匹配command 按照【命令类型】进行过滤。命令类型例如：Query。 类型：String 必选：否 匹配类型：精确匹配info 按照【执行语句】进行过滤。执行语句例如：select id, name from demo.table1 where id > 10。 类型：String 必选：否 匹配类型：前缀匹配，例如SQL较长，可以输入SQL前缀：select id, name from demo.table1。time 按照【执行时间大于多少（秒）】进行过滤。例如：10，表示查询执行时间超过10秒的会话。 类型：Integer 必选：否 匹配类型：范围匹配，Values值只支持输入1个。每次请求的`Filters`的上限为10，`Filter.Values`的上限为50。 */
+  Filters?: Filter[];
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+}
+
+declare interface DescribeProcessListResponse {
+  /** 当前正在运行的线程（连接/查询）信息列表。 */
+  ProcessList?: Process[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2372,6 +2438,30 @@ declare interface ModifyInstanceNetworkResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInstanceProtectedPropertyRequest {
+  /** 实例Id */
+  InstanceId: string;
+  /** 0-允许删除，无销毁保护，1-禁止删除，有销毁保护 */
+  ProtectedProperty: number;
+}
+
+declare interface ModifyInstanceProtectedPropertyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyInstanceSSLAttributesRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 是否开启实例的SSL认证。0-关闭；1-开启 */
+  SSLEnabled: number;
+}
+
+declare interface ModifyInstanceSSLAttributesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyInstanceVipRequest {
   /** 实例ID */
   InstanceId: string;
@@ -2661,12 +2751,16 @@ declare interface Dcdb {
   DescribeFileDownloadUrl(data: DescribeFileDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileDownloadUrlResponse>;
   /** 查询流程状态 {@link DescribeFlowRequest} {@link DescribeFlowResponse} */
   DescribeFlow(data: DescribeFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowResponse>;
+  /** 拉取实例SSL认证功能属性 {@link DescribeInstanceSSLAttributesRequest} {@link DescribeInstanceSSLAttributesResponse} */
+  DescribeInstanceSSLAttributes(data: DescribeInstanceSSLAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSSLAttributesResponse>;
   /** 查看备份日志备份天数 {@link DescribeLogFileRetentionPeriodRequest} {@link DescribeLogFileRetentionPeriodResponse} */
   DescribeLogFileRetentionPeriod(data: DescribeLogFileRetentionPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogFileRetentionPeriodResponse>;
   /** 查询在线DDL任务 {@link DescribeOnlineDDLJobRequest} {@link DescribeOnlineDDLJobResponse} */
   DescribeOnlineDDLJob(data: DescribeOnlineDDLJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOnlineDDLJobResponse>;
   /** 查询订单信息 {@link DescribeOrdersRequest} {@link DescribeOrdersResponse} */
   DescribeOrders(data: DescribeOrdersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrdersResponse>;
+  /** 查询数据库会话列表 {@link DescribeProcessListRequest} {@link DescribeProcessListResponse} */
+  DescribeProcessList(data: DescribeProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcessListResponse>;
   /** 查询项目安全组信息 {@link DescribeProjectSecurityGroupsRequest} {@link DescribeProjectSecurityGroupsResponse} */
   DescribeProjectSecurityGroups(data: DescribeProjectSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectSecurityGroupsResponse>;
   /** 查询项目列表 {@link DescribeProjectsRequest} {@link DescribeProjectsResponse} */
@@ -2717,6 +2811,10 @@ declare interface Dcdb {
   ModifyDBSyncMode(data: ModifyDBSyncModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBSyncModeResponse>;
   /** 修改实例所属网络 {@link ModifyInstanceNetworkRequest} {@link ModifyInstanceNetworkResponse} */
   ModifyInstanceNetwork(data: ModifyInstanceNetworkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceNetworkResponse>;
+  /** 修改实例的保护属性 {@link ModifyInstanceProtectedPropertyRequest} {@link ModifyInstanceProtectedPropertyResponse} */
+  ModifyInstanceProtectedProperty(data: ModifyInstanceProtectedPropertyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceProtectedPropertyResponse>;
+  /** 修改实例SSL认证功能属性 {@link ModifyInstanceSSLAttributesRequest} {@link ModifyInstanceSSLAttributesResponse} */
+  ModifyInstanceSSLAttributes(data: ModifyInstanceSSLAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceSSLAttributesResponse>;
   /** 修改实例Vip {@link ModifyInstanceVipRequest} {@link ModifyInstanceVipResponse} */
   ModifyInstanceVip(data: ModifyInstanceVipRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceVipResponse>;
   /** 修改实例VPORT {@link ModifyInstanceVportRequest} {@link ModifyInstanceVportResponse} */
