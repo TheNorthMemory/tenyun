@@ -112,6 +112,14 @@ declare interface AccessValueInfo {
   ContainZH?: boolean;
 }
 
+/** 免鉴权信息 */
+declare interface AnonymousInfo {
+  /** 操作列表，支持trackLog(JS/HTTP上传日志 )和realtimeProducer(kafka协议上传日志) */
+  Operations?: string[];
+  /** 条件列表 */
+  Conditions?: ConditionInfo[];
+}
+
 /** api列表 */
 declare interface ApiAsset {
   /** 域名 */
@@ -774,12 +782,30 @@ declare interface ClbWafRegionItem {
   Code?: string;
 }
 
+/** 日志分析的列属性 */
+declare interface Column {
+  /** 列的名字 */
+  Name?: string;
+  /** 列的属性 */
+  Type?: string;
+}
+
 /** 通用返回 */
 declare interface CommonRspData {
   /** 操作结果 */
   Code?: number;
   /** 输出信息 */
   Msg?: string;
+}
+
+/** 免鉴权条件信息 */
+declare interface ConditionInfo {
+  /** 条件属性，目前只支持VpcID */
+  Attributes?: string;
+  /** 条件规则，1:等于，2:不等于 */
+  Rule?: number;
+  /** 对应条件属性的值 */
+  ConditionValue?: string;
 }
 
 /** 计费下单接口出入参Goods */
@@ -1216,6 +1242,40 @@ declare interface ExportAccessInfo {
   CreateTime?: string;
 }
 
+/** 日志导出信息 */
+declare interface ExportInfo {
+  /** 日志主题ID */
+  TopicId?: string;
+  /** 日志导出任务ID */
+  ExportId?: string;
+  /** 日志导出查询语句 */
+  Query?: string;
+  /** 日志导出文件名 */
+  FileName?: string;
+  /** 日志文件大小 */
+  FileSize?: number;
+  /** 日志导出时间排序 */
+  Order?: string;
+  /** 日志导出格式 */
+  Format?: string;
+  /** 日志导出数量 */
+  Count?: number;
+  /** 日志下载状态。Processing:导出正在进行中，Completed:导出完成，Failed:导出失败，Expired:日志导出已过期(三天有效期), Queuing 排队中 */
+  Status?: string;
+  /** 日志导出起始时间 */
+  From?: number;
+  /** 日志导出结束时间 */
+  To?: number;
+  /** 日志导出路径,有效期一个小时，请尽快使用该路径下载。 */
+  CosPath?: string;
+  /** 日志导出创建时间 */
+  CreateTime?: string;
+  /** 语法规则。 默认值为0。0：Lucene语法，1：CQL语法。 */
+  SyntaxRule?: number;
+  /** 导出字段 */
+  DerivedFields?: string[] | null;
+}
+
 /** 设置哪些字段是否存储或转发 */
 declare interface FieldWriteConfig {
   /** 1:开启 0:不开启 */
@@ -1224,6 +1284,14 @@ declare interface FieldWriteConfig {
   EnableBody?: number;
   /** 1:开启 0:不开启 */
   EnableBot?: number;
+}
+
+/** 过滤器 */
+declare interface FilterCls {
+  /** 需要过滤的字段。 */
+  Key: string;
+  /** 需要过滤的值。 */
+  Values: string[];
 }
 
 /** 过滤数组 */
@@ -1382,6 +1450,14 @@ declare interface GoodsDetailNew {
   ResourceId?: string;
   /** 模式clb-waf或者saas-waf */
   MicroVersion?: string;
+}
+
+/** 直方图详细信息 */
+declare interface HistogramInfo {
+  /** 统计周期内的日志条数 */
+  Count?: number;
+  /** 按 period 取整后的 unix timestamp： 单位毫秒 */
+  BTime?: number;
 }
 
 /** CLB-WAF删除域名参数 */
@@ -1798,6 +1874,46 @@ declare interface LogHistogramInfo {
   Count?: number;
   /** 时间戳 */
   TimeStamp?: number;
+}
+
+/** 日志结果信息 */
+declare interface LogInfo {
+  /** 日志时间，单位ms */
+  Time?: number;
+  /** 日志主题ID */
+  TopicId?: string;
+  /** 日志主题名称 */
+  TopicName?: string;
+  /** 日志来源IP */
+  Source?: string;
+  /** 日志文件名称 */
+  FileName?: string;
+  /** 日志上报请求包的ID */
+  PkgId?: string;
+  /** 请求包内日志的ID */
+  PkgLogId?: string;
+  /** 日志内容的Json序列化字符串 */
+  LogJson?: string | null;
+  /** 日志来源主机名称 */
+  HostName?: string | null;
+  /** 原始日志(仅在日志创建索引异常时有值) */
+  RawLog?: string | null;
+  /** 日志创建索引异常原因(仅在日志创建索引异常时有值) */
+  IndexStatus?: string | null;
+}
+
+/** 日志中的KV对 */
+declare interface LogItem {
+  /** 日志Key */
+  Key?: string;
+  /** 日志Value */
+  Value?: string;
+}
+
+/** LogItem的数组 */
+declare interface LogItems {
+  /** 分析结果返回的KV数据对 */
+  Data?: LogItem[];
 }
 
 /** 重保防护资源信息 */
@@ -2302,9 +2418,9 @@ declare interface SpartaProtectionPort {
 
 /** 规则的匹配条件结构体 */
 declare interface Strategy {
-  /** 匹配字段 匹配字段不同，相应的匹配参数、逻辑符号、匹配内容有所不同具体如下所示：匹配字段匹配参数逻辑符号匹配内容IP（来源IP）不支持参数ipmatch（匹配）ipnmatch（不匹配）多个IP以英文逗号隔开,最多20个IPV6（来源IPv6）不支持参数ipmatch（匹配）ipnmatch（不匹配）支持单个IPV6地址Referer（Referer）不支持参数empty（内容为空）null（不存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请输入内容,512个字符以内URL（请求路径）不支持参数eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请以/开头,512个字符以内UserAgent（UserAgent）不支持参数同匹配字段Referer逻辑符号请输入内容,512个字符以内HTTP_METHOD（HTTP请求方法）不支持参数eq（等于）neq（不等于）请输入方法名称,建议大写QUERY_STRING（请求字符串）不支持参数同匹配字段请求路径逻辑符号请输入内容,512个字符以内GET（GET参数值）支持参数录入contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）请输入内容,512个字符以内GET_PARAMS_NAMES（GET参数名）不支持参数exsit（存在参数）nexsit（不存在参数）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）请输入内容,512个字符以内POST（POST参数值）支持参数录入同匹配字段GET参数值逻辑符号请输入内容,512个字符以内GET_POST_NAMES（POST参数名）不支持参数同匹配字段GET参数名逻辑符号请输入内容,512个字符以内POST_BODY（完整BODY）不支持参数同匹配字段请求路径逻辑符号请输入BODY内容,512个字符以内COOKIE（Cookie）不支持参数empty（内容为空）null（不存在）rematch（正则匹配）暂不支持GET_COOKIES_NAMES（Cookie参数名）不支持参数同匹配字段GET参数名逻辑符号请输入内容,512个字符以内ARGS_COOKIE（Cookie参数值）支持参数录入同匹配字段GET参数值逻辑符号请输入内容,512个字符以内GET_HEADERS_NAMES（Header参数名）不支持参数exsit（存在参数）nexsit（不存在参数）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请输入内容,建议小写,512个字符以内ARGS_HEADER（Header参数值）支持参数录入contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请输入内容,512个字符以内CONTENT_LENGTH（Content-length）支持参数录入numgt（数值大于）numlt（数值小于）numeq（数值等于）请输入0-9999999999999之间的整数IP_GEO（来源IP归属地）支持参数录入geo_in（属于）geo_not_in（不属于）请输入内容,10240字符以内，格式为序列化的JSON，格式为：[{"Country":"中国","Region":"广东","City":"深圳"}] */
+  /** 匹配字段 匹配字段不同，相应的匹配参数、逻辑符号、匹配内容有所不同具体如下所示：匹配字段匹配参数逻辑符号匹配内容IP（来源IP）不支持参数ipmatch（匹配）ipnmatch（不匹配）多个IP以英文逗号隔开,最多20个IPV6（来源IPv6）不支持参数ipmatch（匹配）ipnmatch（不匹配）支持单个IPV6地址Referer（Referer）不支持参数empty（内容为空）null（不存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请输入内容,512个字符以内URL（请求路径）不支持参数eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请以/开头,512个字符以内UserAgent（UserAgent）不支持参数同匹配字段Referer逻辑符号请输入内容,512个字符以内HTTP_METHOD（HTTP请求方法）不支持参数eq（等于）neq（不等于）请输入方法名称,建议大写QUERY_STRING（请求字符串）不支持参数同匹配字段请求路径逻辑符号请输入内容,512个字符以内GET（GET参数值）支持参数录入contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）请输入内容,512个字符以内GET_PARAMS_NAMES（GET参数名）不支持参数exsit（存在参数）nexsit（不存在参数）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）请输入内容,512个字符以内POST（POST参数值）支持参数录入同匹配字段GET参数值逻辑符号请输入内容,512个字符以内GET_POST_NAMES（POST参数名）不支持参数同匹配字段GET参数名逻辑符号请输入内容,512个字符以内POST_BODY（完整BODY）不支持参数同匹配字段请求路径逻辑符号请输入BODY内容,512个字符以内COOKIE（Cookie）不支持参数empty（内容为空）null（不存在）rematch（正则匹配）暂不支持GET_COOKIES_NAMES（Cookie参数名）不支持参数同匹配字段GET参数名逻辑符号请输入内容,512个字符以内ARGS_COOKIE（Cookie参数值）支持参数录入同匹配字段GET参数值逻辑符号请输入内容,512个字符以内GET_HEADERS_NAMES（Header参数名）不支持参数exsit（存在参数）nexsit（不存在参数）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请输入内容,建议小写,512个字符以内ARGS_HEADER（Header参数值）支持参数录入contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请输入内容,512个字符以内CONTENT_LENGTH（Content-length）支持参数录入numgt（数值大于）numlt（数值小于）numeq（数值等于）请输入0-9999999999999之间的整数IP_GEO（来源IP归属地）支持参数录入geo_in（属于）geo_not_in（不属于）请输入内容,10240字符以内，格式为序列化的JSON，格式为：[{"Country":"中国","Region":"广东","City":"深圳"}]CAPTCHA_RISK（验证码风险）不支持参数eq（等于）neq（不等于）belong（属于）not_belong（不属于）null（不存在）exist（存在）请输入风险等级值,支持数值范围0-255CAPTCHA_DEVICE_RISK（验证码设备风险）不支持参数eq（等于）neq（不等于）belong（属于）not_belong（不属于）null（不存在）exist（存在）请输入设备风险代码,支持取值：101、201、301、401、501、601、701CAPTCHAR_SCORE（验证码风险评估分）不支持参数numeq（数值等于）numgt（数值大于）numlt（数值小于）numle（数值小于等于）numge（数值大于等于）null（不存在）exist（存在）请输入评估分数,支持数值范围0-100 */
   Field: string;
-  /** 逻辑符号 逻辑符号一共分为以下几种类型： empty （ 内容为空） null （不存在） eq （ 等于） neq （ 不等于） contains （ 包含） ncontains （ 不包含） strprefix （ 前缀匹配） strsuffix （ 后缀匹配） len_eq （ 长度等于） len_gt （ 长度大于） len_lt （ 长度小于） ipmatch （ 属于） ipnmatch （ 不属于） numgt （ 数值大于） numlt （ 数值小于） numeq （ 数值等于） geo_in （ IP地理属于） geo_not_in （ IP地理不属于） 各匹配字段对应的逻辑符号不同，详见上述匹配字段表格 */
+  /** 逻辑符号 逻辑符号一共分为以下几种类型： empty （ 内容为空） null （不存在） eq （ 等于） neq （ 不等于） contains （ 包含） ncontains （ 不包含） strprefix （ 前缀匹配） strsuffix （ 后缀匹配） len_eq （ 长度等于） len_gt （ 长度大于） len_lt （ 长度小于） ipmatch （ 属于） ipnmatch （ 不属于） numgt （ 数值大于） numlt （ 数值小于） numeq （ 数值等于） numneq （ 数值不等于） numle （ 数值小于等于） numge （ 数值大于等于） geo_in （ IP地理属于） geo_not_in （ IP地理不属于） 各匹配字段对应的逻辑符号不同，详见上述匹配字段表格 */
   CompareFunc: string;
   /** 匹配内容 目前 当匹配字段为COOKIE（Cookie）时，不需要输入 匹配内容其他都需要 */
   Content: string;
@@ -2342,6 +2458,10 @@ declare interface TLSVersion {
   VersionName?: string;
 }
 
+/** 创建资源实例时同时绑定的标签对说明 */
+declare interface Tag {
+}
+
 /** 需要开启/关闭API安全的 实例+域名 组合实体 */
 declare interface TargetEntity {
   /** 实例ID */
@@ -2364,6 +2484,60 @@ declare interface TimedJob {
   StartDateTime?: number;
   /** 结束时间戳，单位为秒 */
   EndDateTime?: number;
+}
+
+/** 日志主题扩展信息 */
+declare interface TopicExtendInfo {
+  /** 日志主题免鉴权配置信息 */
+  AnonymousAccess?: AnonymousInfo | null;
+}
+
+/** 主题基本信息 */
+declare interface TopicInfo {
+  /** 日志集ID */
+  LogsetId?: string;
+  /** 主题ID */
+  TopicId?: string;
+  /** 主题名称 */
+  TopicName?: string;
+  /** 主题分区个数 */
+  PartitionCount?: number;
+  /** 主题是否开启索引（主题类型需为日志主题） */
+  Index?: boolean;
+  /** 云产品标识，主题由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE */
+  AssumerName?: string | null;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 主题是否开启采集，true：开启采集；false：关闭采集。创建日志主题时默认开启，可通过SDK调用ModifyTopic修改此字段。控制台目前不支持修改此参数。 */
+  Status?: boolean;
+  /** 主题绑定的标签信息 */
+  Tags?: Tag[] | null;
+  /** 该主题是否开启自动分裂 */
+  AutoSplit?: boolean | null;
+  /** 若开启自动分裂的话，该主题能够允许的最大分区数 */
+  MaxSplitPartitions?: number | null;
+  /** 主题的存储类型 */
+  StorageType?: string | null;
+  /** 生命周期，单位天，可取值范围1~3600。取值为3640时代表永久保存 */
+  Period?: number | null;
+  /** 云产品二级标识，日志主题由其它云产品创建时，该字段会显示云产品名称及其日志类型的二级分类，例如TKE-Audit、TKE-Event。部分云产品仅有云产品标识(AssumerName)，无该字段。 */
+  SubAssumerName?: string | null;
+  /** 主题描述 */
+  Describes?: string | null;
+  /** 开启日志沉降，标准存储的生命周期， hotPeriod < Period。标准存储为 hotPeriod, 低频存储则为 Period-hotPeriod。（主题类型需为日志主题）HotPeriod=0为没有开启日志沉降。 */
+  HotPeriod?: number | null;
+  /** 主题类型。- 0: 日志主题 - 1: 指标主题 */
+  BizType?: number | null;
+  /** 免鉴权开关。 false：关闭； true：开启。开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。 */
+  IsWebTracking?: boolean | null;
+  /** 日志主题扩展信息 */
+  Extends?: TopicExtendInfo | null;
+  /** 异步迁移任务ID */
+  TopicAsyncTaskID?: string | null;
+  /** 异步迁移状态 */
+  MigrationStatus?: number | null;
+  /** 异步迁移完成后，预计生效日期 */
+  EffectiveDate?: string | null;
 }
 
 /** bot自定义规则动作灰度 */
@@ -2940,6 +3114,34 @@ declare interface CreateDealsResponse {
   RequestId?: string;
 }
 
+declare interface CreateExportRequest {
+  /** 日志主题ID，可以通过DescribeTopics接口获取,访问日志主题ID和攻击日志主题ID方式不同，注意DescribeTopics接口使用方法 */
+  TopicId: string;
+  /** 日志导出数量, 最大值5000万 */
+  Count: number;
+  /** 日志导出检索语句，不支持[SQL语句] */
+  Query: string;
+  /** 日志导出起始时间，毫秒时间戳 */
+  From: number;
+  /** 日志导出结束时间，毫秒时间戳 */
+  To: number;
+  /** 日志导出时间排序。desc，asc，默认为desc */
+  Order?: string;
+  /** 日志导出数据格式。json，csv，默认为json */
+  Format?: string;
+  /** 语法规则, 默认值为0。0：Lucene语法，1：CQL语法。 */
+  SyntaxRule?: number;
+  /** 导出字段 */
+  DerivedFields?: string[];
+}
+
+declare interface CreateExportResponse {
+  /** 日志导出ID。 */
+  ExportId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateHostRequest {
   /** 防护域名配置信息。内网负载均衡器必须携带对应的NumericalVpcId。 */
   Host: HostRecord;
@@ -3198,6 +3400,16 @@ declare interface DeleteDomainWhiteRulesRequest {
 declare interface DeleteDomainWhiteRulesResponse {
   /** 出参 */
   Data?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteExportRequest {
+  /** 日志导出ID */
+  ExportId: string;
+}
+
+declare interface DeleteExportResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4042,6 +4254,24 @@ declare interface DescribeDomainsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeExportsRequest {
+  /** 日志主题ID，可以通过DescribeTopics接口获取,访问日志主题ID和攻击日志主题ID方式不同，注意DescribeTopics接口使用方法 */
+  TopicId: string;
+  /** 分页的偏移量，默认值为0 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100 */
+  Limit?: number;
+}
+
+declare interface DescribeExportsResponse {
+  /** 日志导出列表 */
+  Exports?: ExportInfo[];
+  /** 总数目 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeFindDomainListRequest {
   /** 分页 */
   Offset: number;
@@ -4262,6 +4492,32 @@ declare interface DescribeIpHitItemsRequest {
 declare interface DescribeIpHitItemsResponse {
   /** 结果 */
   Data?: IpHitItemsData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLogHistogramRequest {
+  /** 要查询的日志的起始时间，Unix时间戳，单位ms */
+  From: number;
+  /** 要查询的日志的结束时间，Unix时间戳，单位ms */
+  To: number;
+  /** 查询语句 */
+  Query: string;
+  /** 日志主题ID，可以通过DescribeTopics接口获取,访问日志主题ID和攻击日志主题ID方式不同，注意DescribeTopics接口使用方法 */
+  TopicId?: string;
+  /** 时间间隔: 单位ms 限制性条件：(To-From) / interval <= 200 */
+  Interval?: number;
+  /** 检索语法规则，默认值为0。0：Lucene语法，1：CQL语法。详细说明参见检索条件语法规则 */
+  SyntaxRule?: number;
+}
+
+declare interface DescribeLogHistogramResponse {
+  /** 统计周期： 单位ms */
+  Interval?: number;
+  /** 命中关键字的日志总条数 */
+  TotalCount?: number;
+  /** 周期内统计结果详情 */
+  HistogramInfos?: HistogramInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4650,6 +4906,28 @@ declare interface DescribeTopAttackDomainResponse {
   CC?: KVInt[];
   /** Web攻击域名列表 */
   Web?: KVInt[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTopicsRequest {
+  /** topicName 按照【日志主题名称】进行过滤，默认为模糊匹配，Filter.Values 当要查询访问日志时为access，查询攻击日志时为attack注意：每次请求的 Filters 的上限为10，Filter.Values 的上限为100。 */
+  Filters?: FilterCls[];
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
+  /** 控制Filters相关字段是否为精确匹配。0: 默认值，topicName 和 logsetName 模糊匹配1: topicName 精确匹配2: logsetName精确匹配3: topicName 和logsetName 都精确匹配 */
+  PreciseSearch?: number;
+  /** 主题类型0:日志主题，默认值1:指标主题 */
+  BizType?: number;
+}
+
+declare interface DescribeTopicsResponse {
+  /** 日志主题列表 */
+  Topics?: TopicInfo[];
+  /** 总数目 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6052,6 +6330,54 @@ declare interface SearchAttackLogResponse {
   RequestId?: string;
 }
 
+declare interface SearchLogRequest {
+  /** 要检索分析的日志的起始时间，Unix时间戳（毫秒） */
+  From: number;
+  /** 要检索分析的日志的结束时间，Unix时间戳（毫秒） */
+  To: number;
+  /** 检索分析语句，最大长度为12KB语句由 [检索条件] | [SQL语句]构成，无需对日志进行统计分析时，可省略其中的管道符 | 及SQL语句使用*或空字符串可查询所有日志 */
+  Query: string;
+  /** 检索语法规则，默认值为0，推荐使用1 (CQL语法)。0：Lucene语法，1：CQL语法。详细说明参见检索条件语法规则 */
+  SyntaxRule?: number;
+  /** 日志主题ID，可以通过DescribeTopics接口获取,访问日志主题ID和攻击日志主题ID方式不同，注意DescribeTopics接口使用方法 */
+  TopicId?: string;
+  /** 原始日志是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc注意：* 仅当检索分析语句(Query)不包含SQL时有效* SQL结果排序方式参考SQL ORDER BY语法 */
+  Sort?: string;
+  /** 表示单次查询返回的原始日志条数，默认为100，最大值为1000。注意：* 仅当检索分析语句(Query)不包含SQL时有效* SQL结果条数指定方式参考SQL LIMIT语法可通过两种方式获取后续更多日志：* Context:透传上次接口返回的Context值，获取后续更多日志，总计最多可获取1万条原始日志* Offset:偏移量，表示从第几行开始返回原始日志，无日志条数限制 */
+  Limit?: number;
+  /** 查询原始日志的偏移量，表示从第几行开始返回原始日志，默认为0。 注意：* 仅当检索分析语句(Query)不包含SQL时有效* 不能与Context参数同时使用* 仅适用于单日志主题检索 */
+  Offset?: number;
+  /** 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时。注意：* 透传该参数时，请勿修改除该参数外的其它参数* 仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context* 仅当检索分析语句(Query)不包含SQL时有效，SQL获取后续结果参考SQL LIMIT语法 */
+  Context?: string;
+  /** 执行统计分析（Query中包含SQL）时，是否对原始日志先进行采样，再进行统计分析。0：自动采样;0～1：按指定采样率采样，例如0.02;1：不采样，即精确分析默认值为1 */
+  SamplingRate?: number;
+  /** 为true代表使用新的检索结果返回方式，输出参数AnalysisRecords和Columns有效为false时代表使用老的检索结果返回方式, 输出AnalysisResults和ColNames有效两种返回方式在编码格式上有少量区别，建议使用true */
+  UseNewAnalysis?: boolean;
+}
+
+declare interface SearchLogResponse {
+  /** 透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时。注意：* 仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context */
+  Context?: string;
+  /** 符合检索条件的日志是否已全部返回，如未全部返回可使用Context参数获取后续更多日志注意：仅当检索分析语句(Query)不包含SQL时有效 */
+  ListOver?: boolean;
+  /** 返回的是否为统计分析（即SQL）结果 */
+  Analysis?: boolean;
+  /** 匹配检索条件的原始日志 */
+  Results?: LogInfo[] | null;
+  /** 日志统计分析结果的列名当UseNewAnalysis为false时生效 */
+  ColNames?: string[] | null;
+  /** 日志统计分析结果当UseNewAnalysis为false时生效 */
+  AnalysisResults?: LogItems[] | null;
+  /** 日志统计分析结果当UseNewAnalysis为true时生效 */
+  AnalysisRecords?: string[] | null;
+  /** 日志统计分析结果的列属性当UseNewAnalysis为true时生效 */
+  Columns?: Column[] | null;
+  /** 本次统计分析使用的采样率 */
+  SamplingRate?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SwitchDomainRulesRequest {
   /** 域名 */
   Domain?: string;
@@ -6139,7 +6465,7 @@ declare interface UpsertCCRuleRequest {
   Url?: string;
   /** 匹配方法，0表示等于，1表示前缀匹配，2表示包含，3表示不等于，6表示后缀匹配，7表示不包含 */
   MatchFunc?: number;
-  /** CC的匹配条件JSON序列化的字符串，示例：[{\"key\":\"Method\",\"args\":[\"=R0VU\"],\"match\":\"0\",\"encodeflag\":true}] Key可选值为 Method、Post、Referer、Cookie、User-Agent、CustomHeader match可选值为，当Key为Method的时候可选值为0（等于）、3（不等于）。 Key为Post的时候可选值为0（等于）、3（不等于），Key为Cookie的时候可选值为0（等于）、2（包含），3（不等于）、7（不包含）、 当Key为Referer的时候可选值为0（等于）、3（不等于）、1（前缀匹配）、6（后缀匹配）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）， 当Key为Cookie的时候可选值为0（等于）、3（不等于）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）， 当Key为User-Agent的时候可选值为0（等于）、3（不等于）、1（前缀匹配）、6（后缀匹配）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）， 当Key为CustomHeader的时候可选值为0（等于）、3（不等于）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）。 Key为IPLocation时，可选值为13（属于）、14（不属于）。args用来表示匹配内容，需要设置encodeflag为true，当Key为Post、Cookie、CustomHeader时，用等号=来分别串接Key和Value，并分别用Base64编码，类似YWJj=YWJj。当Key为Referer、User-Agent时，用等号=来串接Value，类似=YWJj。 */
+  /** CC的匹配条件JSON序列化的字符串，示例：[{\"key\":\"Method\",\"args\":[\"=R0VU\"],\"match\":\"0\",\"encodeflag\":true}] Key可选值为 Method、Post、Referer、Cookie、User-Agent、CustomHeader、CaptchaRisk、CaptchaDeviceRisk、CaptchaScore match可选值为，当Key为Method的时候可选值为0（等于）、3（不等于）。 Key为Post的时候可选值为0（等于）、3（不等于），Key为Cookie的时候可选值为0（等于）、2（包含），3（不等于）、7（不包含）、 当Key为Referer的时候可选值为0（等于）、3（不等于）、1（前缀匹配）、6（后缀匹配）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）， 当Key为Cookie的时候可选值为0（等于）、3（不等于）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）， 当Key为User-Agent的时候可选值为0（等于）、3（不等于）、1（前缀匹配）、6（后缀匹配）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）， 当Key为CustomHeader的时候可选值为0（等于）、3（不等于）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）。 Key为IPLocation时，可选值为13（属于）、14（不属于）。 Key为CaptchaRisk时，可选值为0（等于）、3（不等于）、13（属于）、14（不属于）、12（存在）、5（不存在）。 Key为CaptchaDeviceRisk时，可选值为0（等于）、3（不等于）、13（属于）、14（不属于）、12（存在）、5（不存在）。 Key为CaptchaScore时，可选值为15（数值等于）、16（数值不等于）、17（数值大于）、18（数值小于）、19（数值大于等于）、20（数值小于等于）、12（存在）、5（不存在）。args用来表示匹配内容，需要设置encodeflag为true，当Key为Post、Cookie、CustomHeader时，用等号=来分别串接Key和Value，并分别用Base64编码，类似YWJj=YWJj。当Key为Referer、User-Agent时，用等号=来串接Value，类似=YWJj。 */
   OptionsArr?: string;
   /** waf版本，sparta-waf或者clb-waf */
   Edition?: string;
@@ -6255,6 +6581,8 @@ declare interface Waf {
   CreateAreaBanRule(data: CreateAreaBanRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAreaBanRuleResponse>;
   /** 计费实例创建订单 {@link CreateDealsRequest} {@link CreateDealsResponse} */
   CreateDeals(data: CreateDealsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDealsResponse>;
+  /** 创建日志下载任务 {@link CreateExportRequest} {@link CreateExportResponse} */
+  CreateExport(data: CreateExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExportResponse>;
   /** 添加负载均衡型WAF防护域名 {@link CreateHostRequest} {@link CreateHostResponse} */
   CreateHost(data: CreateHostRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostResponse>;
   /** IP黑白名单新增接口 {@link CreateIpAccessControlRequest} {@link CreateIpAccessControlResponse} */
@@ -6285,6 +6613,8 @@ declare interface Waf {
   DeleteCustomWhiteRule(data: DeleteCustomWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomWhiteRuleResponse>;
   /** 删除域名规则白名单 {@link DeleteDomainWhiteRulesRequest} {@link DeleteDomainWhiteRulesResponse} */
   DeleteDomainWhiteRules(data?: DeleteDomainWhiteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainWhiteRulesResponse>;
+  /** 删除日志下载任务 {@link DeleteExportRequest} {@link DeleteExportResponse} */
+  DeleteExport(data: DeleteExportRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteExportResponse>;
   /** 删除负载均衡型WAF域名 {@link DeleteHostRequest} {@link DeleteHostResponse} */
   DeleteHost(data: DeleteHostRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHostResponse>;
   /** Waf IP黑白名单Delete接口 {@link DeleteIpAccessControlRequest} {@link DeleteIpAccessControlResponse} */
@@ -6365,6 +6695,8 @@ declare interface Waf {
   DescribeDomainWhiteRules(data: DescribeDomainWhiteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainWhiteRulesResponse>;
   /** 获取域名列表 {@link DescribeDomainsRequest} {@link DescribeDomainsResponse} */
   DescribeDomains(data: DescribeDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainsResponse>;
+  /** 获取日志下载任务列表 {@link DescribeExportsRequest} {@link DescribeExportsResponse} */
+  DescribeExports(data: DescribeExportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportsResponse>;
   /** 获取发现域名列表接口 {@link DescribeFindDomainListRequest} {@link DescribeFindDomainListResponse} */
   DescribeFindDomainList(data: DescribeFindDomainListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFindDomainListResponse>;
   /** 获取waf流量访问趋势 {@link DescribeFlowTrendRequest} {@link DescribeFlowTrendResponse} */
@@ -6383,6 +6715,8 @@ declare interface Waf {
   DescribeIpAccessControl(data: DescribeIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpAccessControlResponse>;
   /** Waf IP封堵状态查询 {@link DescribeIpHitItemsRequest} {@link DescribeIpHitItemsResponse} */
   DescribeIpHitItems(data: DescribeIpHitItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpHitItemsResponse>;
+  /** 获取日志数量直方图 {@link DescribeLogHistogramRequest} {@link DescribeLogHistogramResponse} */
+  DescribeLogHistogram(data: DescribeLogHistogramRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogHistogramResponse>;
   /** 查询waf各个模块接口的开关状态 {@link DescribeModuleStatusRequest} {@link DescribeModuleStatusResponse} */
   DescribeModuleStatus(data: DescribeModuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModuleStatusResponse>;
   /** 查看防护对象列表 {@link DescribeObjectsRequest} {@link DescribeObjectsResponse} */
@@ -6419,6 +6753,8 @@ declare interface Waf {
   DescribeTlsVersion(data?: DescribeTlsVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTlsVersionResponse>;
   /** 查询Top5的攻击域名 {@link DescribeTopAttackDomainRequest} {@link DescribeTopAttackDomainResponse} */
   DescribeTopAttackDomain(data: DescribeTopAttackDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopAttackDomainResponse>;
+  /** 获取日志主题列表 {@link DescribeTopicsRequest} {@link DescribeTopicsResponse} */
+  DescribeTopics(data?: DescribeTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicsResponse>;
   /** 获取CDC场景下对客户已经开放的负载均衡型WAF(cdc-clb-waf)的地域 {@link DescribeUserCdcClbWafRegionsRequest} {@link DescribeUserCdcClbWafRegionsResponse} */
   DescribeUserCdcClbWafRegions(data?: DescribeUserCdcClbWafRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserCdcClbWafRegionsResponse>;
   /** 获取对客户已经开放的负载均衡型WAF(clb-waf)的地域 {@link DescribeUserClbWafRegionsRequest} {@link DescribeUserClbWafRegionsResponse} */
@@ -6569,6 +6905,8 @@ declare interface Waf {
   SearchAccessLog(data: SearchAccessLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchAccessLogResponse>;
   /** 搜索CLS新版本攻击日志 {@link SearchAttackLogRequest} {@link SearchAttackLogResponse} */
   SearchAttackLog(data: SearchAttackLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchAttackLogResponse>;
+  /** 检索分析日志 {@link SearchLogRequest} {@link SearchLogResponse} */
+  SearchLog(data: SearchLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchLogResponse>;
   /** 切换域名的规则开关 {@link SwitchDomainRulesRequest} {@link SwitchDomainRulesResponse} */
   SwitchDomainRules(data?: SwitchDomainRulesRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchDomainRulesResponse>;
   /** 切换弹性QPS的开关 {@link SwitchElasticModeRequest} {@link SwitchElasticModeResponse} */

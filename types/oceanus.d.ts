@@ -130,6 +130,12 @@ declare interface Cluster {
   Setats?: Setats | null;
   /** [] */
   Yarns?: HadoopYarnItem[] | null;
+  /** 0 单可用区 1多可用区 */
+  DeploymentMode?: number | null;
+  /** 备可用区 */
+  SlaveZones?: SlaveZone[] | null;
+  /** 集群的日志cos存储 */
+  LogCOSBucket?: string;
 }
 
 /** 工作空间集群组信息 */
@@ -444,6 +450,8 @@ declare interface JobConfig {
   JobConfigItem?: JobConfig | null;
   /** checkpoint 超时时间 */
   CheckpointTimeoutSecond?: number;
+  /** checkpoint 间隔时间 */
+  CheckpointIntervalSecond?: number;
 }
 
 /** 描述作业发生的一个事件 */
@@ -980,6 +988,16 @@ declare interface SetatsDisk {
   DiskSize?: number | null;
 }
 
+/** 多可用区支持备区域 */
+declare interface SlaveZone {
+  /** vpc */
+  VpcId?: string | null;
+  /** 子网 */
+  SubnetId?: string | null;
+  /** 区 */
+  Zone?: string | null;
+}
+
 /** SlotSharingGroup 描述 */
 declare interface SlotSharingGroup {
   /** SlotSharingGroup的名字 */
@@ -1361,6 +1379,8 @@ declare interface CreateJobConfigRequest {
   ProgramArgsAfterGzip?: string;
   /** checkpoint 超时时间 */
   CheckpointTimeoutSecond?: number;
+  /** checkpoint 间隔时间 */
+  CheckpointIntervalSecond?: number;
 }
 
 declare interface CreateJobConfigResponse {

@@ -904,6 +904,8 @@ declare interface LogResObject {
   ListOver?: boolean;
   /** 日志内容信息 */
   Results?: LogObject[];
+  /** 日志聚合结果 */
+  AnalysisRecords?: string[];
 }
 
 /** 云日志服务相关信息 */

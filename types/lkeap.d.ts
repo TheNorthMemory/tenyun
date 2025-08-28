@@ -116,7 +116,7 @@ declare interface DocumentUsage {
   SuccessPageNum?: number;
   /** 解析失败页数 */
   FailPageNum?: number;
-  /** 文件大小，单位KB */
+  /** 文件大小，单位：字节 */
   FileSize?: number;
 }
 
@@ -124,6 +124,14 @@ declare interface DocumentUsage {
 declare interface EmbeddingObject {
   /** 向量 */
   Embedding?: number[];
+}
+
+/** 错误信息 */
+declare interface ErrorInfo {
+  /** 错误码 */
+  Code?: string;
+  /** 错误信息 */
+  Message?: string;
 }
 
 /** 属性标签 */
@@ -484,6 +492,8 @@ declare interface GetReconstructDocumentResultResponse {
   FailedPages?: ReconstructDocumentFailedPage[];
   /** 文档拆分任务的用量 */
   Usage?: DocumentUsage;
+  /** 文档解析任务失败错误信息，当文档解析任务失败会返回具体的错误信息 */
+  Error?: ErrorInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -502,6 +512,8 @@ declare interface GetSplitDocumentResultResponse {
   FailedPages?: SplitDocumentFailedPage[];
   /** 文档拆分任务的用量 */
   Usage?: DocumentUsage;
+  /** 文档拆分失败的错误信息，当拆分任务失败时返回该错误信息 */
+  Error?: ErrorInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

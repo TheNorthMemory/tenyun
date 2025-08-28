@@ -64,6 +64,20 @@ declare interface AgentInput {
   UserInputValue?: AgentInputUserInputValue;
   /** 自定义变量（API参数） */
   CustomVarId?: string;
+  /** 环境变量参数 */
+  EnvVarId?: string;
+  /** 应用变量参数 */
+  AppVarId?: string;
+  /** 系统参数 */
+  SystemVariable?: AgentInputSystemVariable;
+}
+
+/** 系统参数 */
+declare interface AgentInputSystemVariable {
+  /** 系统参数名 */
+  Name?: string;
+  /** 对话历史轮数的配置；如果Input是系统变量中的“对话历史”时才使用； */
+  DialogHistoryLimit?: number;
 }
 
 /** 用户手写输入 */
@@ -460,6 +474,8 @@ declare interface AppInfo {
   ThoughtModelAliasName?: string | null;
   /** 权限位信息 */
   PermissionIds?: string[];
+  /** 创建人昵称 */
+  Creator?: string | null;
 }
 
 /** 应用模型配置 */
@@ -984,6 +1000,8 @@ declare interface KnowledgeQaOutput {
   QuestionClarifyKeywords?: string[] | null;
   /** 是否打开推荐问题开关 */
   UseRecommended?: boolean | null;
+  /** 推荐问模式，0.结合知识库&对话历史推荐问题Prompt(默认) 1.仅结合知识库输出推荐问的prompt */
+  RecommendedPromptMode?: number | null;
 }
 
 /** 应用关联插件信息 */

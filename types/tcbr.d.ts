@@ -102,6 +102,8 @@ declare interface EnvBaseInfo {
   EnvType?: string;
   /** 子网id */
   SubnetIds?: string;
+  /** 回收标志，为空则表示正常，recycle表示已回收 */
+  Recycle?: string;
 }
 
 /** 环境信息 */

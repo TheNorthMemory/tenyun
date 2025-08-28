@@ -266,6 +266,22 @@ declare interface NetDetails {
   Time?: string;
 }
 
+/** 返回上报的订单信息 */
+declare interface OrderInfo {
+  /** 父帐号uin */
+  Uin?: string;
+  /** 项目id */
+  ProjectId?: string;
+  /** 用量类型 */
+  PackageType?: string;
+  /** 订单编号唯一标识符 */
+  OrderId?: string;
+  /** 上报月份，默认当前月 */
+  ReportMonth?: string;
+  /** 数据更新时间 */
+  Updated?: string;
+}
+
 /** 网卡流量指标数据 */
 declare interface SlotNetInfo {
   /** 网卡名 */
@@ -942,6 +958,24 @@ declare interface OrderPerLicenseResponse {
   RequestId?: string;
 }
 
+declare interface ReportOrderRequest {
+  /** 订单编号唯一标识符 */
+  OrderId: string;
+  /** 项目id */
+  ProjectId?: string;
+  /** 用量类型 */
+  PackageType?: string;
+  /** 上报月份，默认当前月 */
+  ReportMonth?: string;
+}
+
+declare interface ReportOrderResponse {
+  /** 订单信息 */
+  OrderInfo?: OrderInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SetNotifyUrlRequest {
   /** 告警通知回调url */
   NotifyUrl: string;
@@ -1111,6 +1145,8 @@ declare interface Mna {
   OrderFlowPackage(data: OrderFlowPackageRequest, config?: AxiosRequestConfig): AxiosPromise<OrderFlowPackageResponse>;
   /** 订购一次性授权License {@link OrderPerLicenseRequest} {@link OrderPerLicenseResponse} */
   OrderPerLicense(data: OrderPerLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<OrderPerLicenseResponse>;
+  /** 订单信息上报 {@link ReportOrderRequest} {@link ReportOrderResponse} */
+  ReportOrder(data: ReportOrderRequest, config?: AxiosRequestConfig): AxiosPromise<ReportOrderResponse>;
   /** 设置用户流量告警信息 {@link SetNotifyUrlRequest} {@link SetNotifyUrlResponse} */
   SetNotifyUrl(data: SetNotifyUrlRequest, config?: AxiosRequestConfig): AxiosPromise<SetNotifyUrlResponse>;
   /** 更新设备 {@link UpdateDeviceRequest} {@link UpdateDeviceResponse} */
