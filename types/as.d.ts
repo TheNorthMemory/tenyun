@@ -244,11 +244,11 @@ declare interface ForwardLoadBalancerIdentification {
 
 /** 云服务器主机名（HostName）的相关设置 */
 declare interface HostNameSettings {
-  /** 云服务器的主机名。 点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。 不支持 Windows 实例。 其他类型（Linux 等）实例：字符长度为[2, 40]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。不允许为纯数字。 */
+  /** 云服务器的主机名。 点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。 不支持 Windows 实例。 其他类型（Linux 等）实例：字符长度为[2, 42]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。不允许为纯数字。 */
   HostName: string | null;
   /** 云服务器主机名的风格，取值范围包括 ORIGINAL 和 UNIQUE，默认为 ORIGINAL。 ORIGINAL，AS 直接将入参中所填的 HostName 传递给 CVM，CVM 可能会对 HostName 追加序列号，伸缩组中实例的 HostName 会出现冲突的情况。 UNIQUE，入参所填的 HostName 相当于主机名前缀，AS 和 CVM 会对其进行拓展，伸缩组中实例的 HostName 可以保证唯一。 */
   HostNameStyle?: string | null;
-  /** 云服务器的主机名后缀。 点号（.）和短横线（-）不能作为 HostNameSuffix 的首尾字符，不能连续使用。 不支持 Windows 实例。 其他类型（Linux 等）实例：字符长度为[1, 37]，且与 HostName 的长度和不能超过 39，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。 假设后缀名称为 suffix，原主机名为 test.0，最终主机名为 test.0.suffix。 */
+  /** 云服务器的主机名后缀。HostNameSettings的该入参非必选，未选时不设置主机名后缀。 点号（.）和短横线（-）不能作为 HostNameSuffix 的首尾字符，不能连续使用。 不支持 Windows 实例。 其他类型（Linux 等）实例：字符长度为[1, 39]，且与 HostName 的长度和不能超过 41，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。 假设后缀名称为 suffix，原主机名为 test.0，最终主机名为 test.0.suffix。 */
   HostNameSuffix?: string | null;
 }
 
@@ -306,9 +306,9 @@ declare interface InstanceChargePrepaid {
 
 /** 实例名称序号相关设置。 */
 declare interface InstanceNameIndexSettings {
-  /** 是否开启实例创建序号，默认不开启。取值范围：TRUE：表示开启实例创建序号FALSE：表示不开启实例创建序号 */
+  /** 是否开启实例创建序号，默认不开启。取值范围：**TRUE**：表示开启实例创建序号; **FALSE**：表示不开启实例创建序号 */
   Enabled?: boolean | null;
-  /** 初始序号，取值范围为 [0, 99999999]。当序号递增后超出取值范围时，扩容活动会失败。首次开启实例名称序号：默认值为 0。非首次开启实例名称序号：若不指定该参数，沿用历史序号。下调初始序号可能会造成伸缩组内实例名称序号重复。 */
+  /** 初始序号。序号固定位数 IndexLength 为默认值0时，取值范围为 [0, 99999999]。序号固定位数 IndexLength 为 [1, 8] 时，取值范围为为 [0, 固定位数的最大数字]。当序号递增后超出取值范围时，扩容活动会失败。首次开启实例名称序号：默认值为 0。非首次开启实例名称序号：若不指定该参数，沿用历史序号。下调初始序号可能会造成伸缩组内实例名称序号重复。 */
   BeginIndex?: number | null;
 }
 

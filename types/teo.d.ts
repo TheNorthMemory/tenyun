@@ -774,7 +774,7 @@ declare interface ClientAttester {
   Name?: string;
   /** 认证规则类型。仅出参返回，取值有：PRESET: 系统预置规则，仅允许修改 AttesterDuration；CUSTOM: 用户自定义规则。 */
   Type?: string;
-  /** 认证方法。取值有：TC-RCE: 使用全栈式风控引擎进行认证；TC-CAPTCHA: 使用天御验证码进行认证。 */
+  /** 认证方法。取值有：TC-RCE: 使用风险识别 RCE 进行认证；TC-CAPTCHA: 使用天御验证码进行认证。 */
   AttesterSource?: string;
   /** 认证有效时间。默认为 60s，支持的单位有：s：秒，取值范围 60～43200；m：分，取值范围 1～720；h：小时，取值范围 1～12。 */
   AttesterDuration?: string;
@@ -2838,7 +2838,7 @@ declare interface Resource {
   AutoRenewFlag?: number;
   /** 套餐关联资源 ID。 */
   PlanId?: string;
-  /** 地域，取值有：mainland：国内；overseas：海外。global：全球。 */
+  /** 地域，取值有：mainland：中国大陆境内；overseas：中国大陆境外。global：全球。 */
   Area?: string;
   /** 资源类型，取值有：plan：套餐类型；pay-as-you-go：后付费类型。value-added：增值服务类型。 */
   Group?: string | null;

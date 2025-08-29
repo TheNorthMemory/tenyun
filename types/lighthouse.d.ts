@@ -766,6 +766,42 @@ declare interface LoginSettings {
   KeyIds?: string[];
 }
 
+/** MCP Server信息 */
+declare interface McpServer {
+  /** MCP Server ID。 */
+  McpServerId?: string;
+  /** MCP Server名称。最大长度：64 */
+  Name?: string;
+  /** MCP Server类型。枚举值：PUBLIC_PACKAGE，公共包安装；AGENT_GENERATED，AI生成。 */
+  McpServerType?: string;
+  /** MCP Server图标地址 */
+  IconUrl?: string;
+  /** Base64编码后的MCP Server启动命令。最大长度：2048 */
+  Command?: string;
+  /** MCP Server状态。枚举值如下：PENDING：表示创建中LAUNCH_FAILED：表示创建失败RUNNING：表示运行中STOPPED：表示关闭STARTING：表示开启中STOPPING：表示关闭中RESTARTING：表示重启中REMOVING：表示删除中UNKNOWN：表示未知ENV_ERROR：表示环境错误 */
+  State?: string;
+  /** MCP Server访问地址。 */
+  ServerUrl?: string;
+  /** MCP Server配置 */
+  Config?: string;
+  /** MCP Server备注 */
+  Description?: string;
+  /** MCP Server创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
+  CreatedTime?: string;
+  /** MCP Server修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
+  UpdatedTime?: string;
+  /** MCP Server环境变量 */
+  EnvSet?: McpServerEnv[];
+}
+
+/** MCP Server环境变量 */
+declare interface McpServerEnv {
+  /** MCP Server的环境变量键。最大长度：128 */
+  Key: string;
+  /** MCP Server的环境变量值。最大长度：1024。该字段可能存储密钥，出参时将固定返回“**********”，避免明文泄露。 */
+  Value?: string;
+}
+
 /** 描述了实例可变更的套餐。 */
 declare interface ModifyBundle {
   /** 更改实例套餐后需要补的差价。 */
@@ -1230,6 +1266,26 @@ declare interface CreateKeyPairRequest {
 declare interface CreateKeyPairResponse {
   /** 密钥对信息。 */
   KeyPair?: KeyPair;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateMcpServerRequest {
+  /** 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。 */
+  InstanceId: string;
+  /** MCP Server名称。最大长度：64 */
+  Name: string;
+  /** Base64编码后的MCP Server启动命令。最大长度：2048 */
+  Command: string;
+  /** MCP Server备注。最大长度：2048 */
+  Description?: string;
+  /** MCP Server环境变量。最大长度：10 */
+  Envs?: McpServerEnv[];
+}
+
+declare interface CreateMcpServerResponse {
+  /** MCP Server ID。 */
+  McpServerId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1860,6 +1916,30 @@ declare interface DescribeKeyPairsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMcpServersRequest {
+  /** 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。 */
+  InstanceId: string;
+  /** MCP Server ID列表。列表为空时此条件不生效。最大长度：10 */
+  McpServerIds?: string[];
+  /** 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。 */
+  Limit?: number;
+  /** 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。 */
+  Offset?: number;
+}
+
+declare interface DescribeMcpServersResponse {
+  /** MCP Server列表。 */
+  McpServerSet?: McpServer[];
+  /** 符合条件的MCP Server数量。 */
+  TotalCount?: number;
+  /** 实例 ID。 */
+  InstanceId?: string;
+  /** 实例名称。 */
+  InstanceName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeModifyInstanceBundlesRequest {
   /** 实例 ID。可通过 DescribeInstances 接口返回值中的 InstanceId 获取。 */
   InstanceId: string;
@@ -2312,6 +2392,26 @@ declare interface ModifyInstancesRenewFlagResponse {
   RequestId?: string;
 }
 
+declare interface ModifyMcpServerRequest {
+  /** 实例ID。可以通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。 */
+  InstanceId: string;
+  /** MCP Server ID。可以通过DescribeMcpServers接口返回值中的McpServerId获取。 */
+  McpServerId: string;
+  /** MCP Server名称。最大长度：64 */
+  Name?: string;
+  /** Base64编码后的MCP Server启动命令。最大长度：2048 */
+  Command?: string;
+  /** MCP Server备注。最大长度：2048 */
+  Description?: string;
+  /** MCP Server环境变量。最大长度：10。用于完整替换MCP Server的环境变量。当该字段为空时，系统将清除当前所有环境变量。若无需修改环境变量，请勿传递该字段。 */
+  Envs?: McpServerEnv[];
+}
+
+declare interface ModifyMcpServerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifySnapshotAttributeRequest {
   /** 快照 ID, 可通过 DescribeSnapshots 查询。 */
   SnapshotId: string;
@@ -2344,6 +2444,18 @@ declare interface RemoveDockerContainersRequest {
 declare interface RemoveDockerContainersResponse {
   /** Docker活动ID。 */
   DockerActivityId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RemoveMcpServersRequest {
+  /** 实例ID。可以通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。 */
+  InstanceId: string;
+  /** MCP Server ID列表。可通过DescribeMcpServers接口返回值中的McpServerId获取。最大长度：10 */
+  McpServerIds: string[];
+}
+
+declare interface RemoveMcpServersResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2504,6 +2616,18 @@ declare interface RestartDockerContainersResponse {
   RequestId?: string;
 }
 
+declare interface RestartMcpServersRequest {
+  /** 实例 ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。 */
+  InstanceId: string;
+  /** MCP Server ID列表。可通过DescribeMcpServers接口返回值中的McpServerId获取。最大长度：10 */
+  McpServerIds: string[];
+}
+
+declare interface RestartMcpServersResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RunDockerContainersRequest {
   /** 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。 */
   InstanceId: string;
@@ -2554,6 +2678,18 @@ declare interface StartInstancesResponse {
   RequestId?: string;
 }
 
+declare interface StartMcpServersRequest {
+  /** 实例 ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。 */
+  InstanceId: string;
+  /** MCP Server ID列表。可通过DescribeMcpServers接口返回值中的McpServerId获取。最大长度：10 */
+  McpServerIds: string[];
+}
+
+declare interface StartMcpServersResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopDockerContainersRequest {
   /** 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。 */
   InstanceId: string;
@@ -2574,6 +2710,18 @@ declare interface StopInstancesRequest {
 }
 
 declare interface StopInstancesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopMcpServersRequest {
+  /** 实例 ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。 */
+  InstanceId: string;
+  /** MCP Server ID列表。可通过DescribeMcpServers接口返回值中的McpServerId获取。最大长度：10 */
+  McpServerIds: string[];
+}
+
+declare interface StopMcpServersResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2645,6 +2793,8 @@ declare interface Lighthouse {
   CreateInstances(data: CreateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstancesResponse>;
   /** 创建密钥对 {@link CreateKeyPairRequest} {@link CreateKeyPairResponse} */
   CreateKeyPair(data: CreateKeyPairRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKeyPairResponse>;
+  /** 创建MCP Server {@link CreateMcpServerRequest} {@link CreateMcpServerResponse} */
+  CreateMcpServer(data: CreateMcpServerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMcpServerResponse>;
   /** 删除镜像 {@link DeleteBlueprintsRequest} {@link DeleteBlueprintsResponse} */
   DeleteBlueprints(data: DeleteBlueprintsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBlueprintsResponse>;
   /** 删除云硬盘备份点 {@link DeleteDiskBackupsRequest} {@link DeleteDiskBackupsResponse} */
@@ -2725,6 +2875,8 @@ declare interface Lighthouse {
   DescribeInstancesTrafficPackages(data?: DescribeInstancesTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesTrafficPackagesResponse>;
   /** 查询用户密钥对列表 {@link DescribeKeyPairsRequest} {@link DescribeKeyPairsResponse} */
   DescribeKeyPairs(data?: DescribeKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKeyPairsResponse>;
+  /** 查询MCP Server列表 {@link DescribeMcpServersRequest} {@link DescribeMcpServersResponse} */
+  DescribeMcpServers(data: DescribeMcpServersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMcpServersResponse>;
   /** 查询实例可变更套餐列表 {@link DescribeModifyInstanceBundlesRequest} {@link DescribeModifyInstanceBundlesResponse} */
   DescribeModifyInstanceBundles(data: DescribeModifyInstanceBundlesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModifyInstanceBundlesResponse>;
   /** 查询地域列表 {@link DescribeRegionsRequest} {@link DescribeRegionsResponse} */
@@ -2787,12 +2939,16 @@ declare interface Lighthouse {
   ModifyInstancesBundle(data: ModifyInstancesBundleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesBundleResponse>;
   /** 修改实例续费标识 {@link ModifyInstancesRenewFlagRequest} {@link ModifyInstancesRenewFlagResponse} */
   ModifyInstancesRenewFlag(data: ModifyInstancesRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesRenewFlagResponse>;
+  /** 修改MCP Server {@link ModifyMcpServerRequest} {@link ModifyMcpServerResponse} */
+  ModifyMcpServer(data: ModifyMcpServerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMcpServerResponse>;
   /** 修改快照信息 {@link ModifySnapshotAttributeRequest} {@link ModifySnapshotAttributeResponse} */
   ModifySnapshotAttribute(data: ModifySnapshotAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotAttributeResponse>;
   /** 重启实例 {@link RebootInstancesRequest} {@link RebootInstancesResponse} */
   RebootInstances(data: RebootInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RebootInstancesResponse>;
   /** 删除Docker容器 {@link RemoveDockerContainersRequest} {@link RemoveDockerContainersResponse} */
   RemoveDockerContainers(data: RemoveDockerContainersRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveDockerContainersResponse>;
+  /** 删除MCP Server {@link RemoveMcpServersRequest} {@link RemoveMcpServersResponse} */
+  RemoveMcpServers(data: RemoveMcpServersRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveMcpServersResponse>;
   /** 重命名Docker容器 {@link RenameDockerContainerRequest} {@link RenameDockerContainerResponse} */
   RenameDockerContainer(data: RenameDockerContainerRequest, config?: AxiosRequestConfig): AxiosPromise<RenameDockerContainerResponse>;
   /** 续费云硬盘 {@link RenewDisksRequest} {@link RenewDisksResponse} */
@@ -2815,6 +2971,8 @@ declare interface Lighthouse {
   ResizeDisks(data: ResizeDisksRequest, config?: AxiosRequestConfig): AxiosPromise<ResizeDisksResponse>;
   /** 重启Docker容器 {@link RestartDockerContainersRequest} {@link RestartDockerContainersResponse} */
   RestartDockerContainers(data: RestartDockerContainersRequest, config?: AxiosRequestConfig): AxiosPromise<RestartDockerContainersResponse>;
+  /** 重启MCP Server {@link RestartMcpServersRequest} {@link RestartMcpServersResponse} */
+  RestartMcpServers(data: RestartMcpServersRequest, config?: AxiosRequestConfig): AxiosPromise<RestartMcpServersResponse>;
   /** 创建并运行Docker容器 {@link RunDockerContainersRequest} {@link RunDockerContainersResponse} */
   RunDockerContainers(data: RunDockerContainersRequest, config?: AxiosRequestConfig): AxiosPromise<RunDockerContainersResponse>;
   /** 跨账号共享镜像 {@link ShareBlueprintAcrossAccountsRequest} {@link ShareBlueprintAcrossAccountsResponse} */
@@ -2823,10 +2981,14 @@ declare interface Lighthouse {
   StartDockerContainers(data: StartDockerContainersRequest, config?: AxiosRequestConfig): AxiosPromise<StartDockerContainersResponse>;
   /** 启动实例 {@link StartInstancesRequest} {@link StartInstancesResponse} */
   StartInstances(data: StartInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StartInstancesResponse>;
+  /** 开启MCP Server {@link StartMcpServersRequest} {@link StartMcpServersResponse} */
+  StartMcpServers(data: StartMcpServersRequest, config?: AxiosRequestConfig): AxiosPromise<StartMcpServersResponse>;
   /** 停止Docker容器 {@link StopDockerContainersRequest} {@link StopDockerContainersResponse} */
   StopDockerContainers(data: StopDockerContainersRequest, config?: AxiosRequestConfig): AxiosPromise<StopDockerContainersResponse>;
   /** 关闭实例 {@link StopInstancesRequest} {@link StopInstancesResponse} */
   StopInstances(data: StopInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StopInstancesResponse>;
+  /** 关闭MCP Server {@link StopMcpServersRequest} {@link StopMcpServersResponse} */
+  StopMcpServers(data: StopMcpServersRequest, config?: AxiosRequestConfig): AxiosPromise<StopMcpServersResponse>;
   /** 同步镜像 {@link SyncBlueprintRequest} {@link SyncBlueprintResponse} */
   SyncBlueprint(data: SyncBlueprintRequest, config?: AxiosRequestConfig): AxiosPromise<SyncBlueprintResponse>;
   /** 销毁云硬盘 {@link TerminateDisksRequest} {@link TerminateDisksResponse} */

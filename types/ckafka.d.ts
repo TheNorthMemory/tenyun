@@ -52,11 +52,11 @@ declare interface AclRule {
 declare interface AclRuleInfo {
   /** Acl操作方式，枚举值(所有操作: All, 读：Read，写：Write) */
   Operation: string;
-  /** 权限类型，(Deny，Allow) */
+  /** 权限类型，Deny：拒绝，Allow：允许。 */
   PermissionType: string;
-  /** 默认为\*，表示任何host都可以访问，当前ckafka不支持host为\* 和 ip网段 */
+  /** 表示任何host都可以访问 */
   Host: string;
-  /** 用户列表，默认为User:*，表示任何user都可以访问，当前用户只能是用户列表中包含的用户。传入格式需要带【User:】前缀。例如用户A，传入为User:A。 */
+  /** 用户，User:*表示任何user都可以访问，当前用户只能是用户列表中包含的用户。传入格式需要带【User:】前缀。例如用户A，传入为User:A。 */
   Principal: string;
 }
 
@@ -148,7 +148,7 @@ declare interface BrokerTopicData {
   TopicName?: string;
   /** 主题Id */
   TopicId?: string;
-  /** 主题占用Broker 容量大小 */
+  /** 主题占用Broker 容量大小，单位为Bytes。 */
   DataSize?: number;
 }
 
@@ -492,7 +492,7 @@ declare interface CtsdbParam {
 declare interface CvmAndIpInfo {
   /** ckafka集群实例Id */
   CkafkaInstanceId?: string;
-  /** CVM实例ID */
+  /** CVM实例ID(ins-test )或POD IP(10.0.0.30) */
   InstanceId?: string;
   /** IP地址 */
   Ip?: string;
@@ -500,7 +500,7 @@ declare interface CvmAndIpInfo {
 
 /** Datahub资源配置 */
 declare interface DatahubResource {
-  /** 资源类型 */
+  /** 资源类型 type类型如下: KAFKA,EB_ES,EB_COS,EB_CLS,EB_,MONGODB,HTTP,TDW,ES,CLICKHOUSE,DTS,CLS,COS,TOPIC,MYSQL,MQTT,MYSQL_DATA,DORIS,POSTGRESQL,TDSQL_C_POSTGRESQL,TDSQL_POSTGRESQL,WAREHOUSE_POSTGRESQL,TDSQL_C_MYSQL,MARIADB,SQLSERVER,CTSDB,SCF */
   Type: string;
   /** ckafka配置，Type为KAFKA时必填 */
   KafkaParam?: KafkaParam | null;
@@ -688,7 +688,7 @@ declare interface DescribeConnectResourceResp {
   Description?: string;
   /** 连接源类型 */
   Type?: string;
-  /** 连接源的状态 */
+  /** 连接源的状态 枚举值: -1 (创建失败) 、0 (创建中) 、 1 (运行中)、 2 (删除中) 、 4 (删除失败) 、 5 (配置更改中) 、 6 (配置更改失败) 、 7 (异常) */
   Status?: number;
   /** 连接源的创建时间 */
   CreateTime?: string;
@@ -1536,9 +1536,9 @@ declare interface MariaDBParam {
 declare interface ModifyInstanceAttributesConfig {
   /** 自动创建 true 表示开启，false 表示不开启 */
   AutoCreateTopicEnable?: boolean;
-  /** 可选，如果auto.create.topic.enable设置为true没有设置该值时，默认设置为3 */
+  /** 新创建主题的默认分区数,如果AutoCreateTopicEnable设置为true没有设置该值时，默认设置为3 */
   DefaultNumPartitions?: number;
-  /** 如果auto.create.topic.enable设置为true没有指定该值时默认设置为2 */
+  /** 新创建主题的默认副本数,如果AutoCreateTopicEnable设置为true没有指定该值时默认设置为2 */
   DefaultReplicationFactor?: number;
 }
 
@@ -2322,9 +2322,9 @@ declare interface TopicMessageHeapRanking {
   PartitionNum?: number;
   /** 副本数 */
   ReplicaNum?: number;
-  /** Topic 流量 */
+  /** Topic 流量，单位为MB。 */
   TopicTraffic?: string;
-  /** topic消息堆积/占用磁盘 */
+  /** topic消息堆积/占用磁盘，单位为Bytes。 */
   MessageHeap?: number;
 }
 
@@ -2350,7 +2350,7 @@ declare interface TopicParam {
 declare interface TopicPartitionDO {
   /** Partition 分区ID */
   Partition?: number;
-  /** Leader 运行状态 */
+  /** Leader 运行状态，0表示正常运行 */
   LeaderStatus?: number;
   /** ISR 个数 */
   IsrNum?: number;
@@ -2502,7 +2502,7 @@ declare interface ZoneInfo {
   Flag?: boolean;
   /** 可用区名称 */
   ZoneName?: string;
-  /** 可用区状态 */
+  /** 可用区状态 枚举示例: 3: 开启，4: 关闭; 可用区状态以SoldOut为准 */
   ZoneStatus?: number;
   /** 额外标识 */
   Exflag?: string;
@@ -2529,7 +2529,7 @@ declare interface AppIdResponse {
 }
 
 declare interface AuthorizeTokenRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id, 可通过DescribeInstances接口获取 */
   InstanceId: string;
   /** 用户 */
   User: string;
@@ -2545,13 +2545,13 @@ declare interface AuthorizeTokenResponse {
 }
 
 declare interface BatchCreateAclRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取。 */
   InstanceId: string;
   /** Acl资源类型，(2:TOPIC） */
   ResourceType: number;
-  /** 资源列表数组 */
+  /** 资源列表数组，可通过DescribeTopic接口获取。 */
   ResourceNames: string[];
-  /** 设置的ACL规则列表 */
+  /** 设置的ACL规则列表，可通过DescribeAclRule接口获取。 */
   RuleList: AclRuleInfo[];
 }
 
@@ -2595,7 +2595,7 @@ declare interface BatchModifyTopicAttributesResponse {
 }
 
 declare interface CancelAuthorizationTokenRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id,可通过DescribeInstances接口获取 */
   InstanceId: string;
   /** 用户 */
   User: string;
@@ -2647,7 +2647,7 @@ declare interface ConsumerGroupResponse {
 }
 
 declare interface CreateAclRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取。 */
   InstanceId: string;
   /** Acl资源类型，(2:TOPIC，3:GROUP，4:CLUSTER) */
   ResourceType: number;
@@ -2673,7 +2673,7 @@ declare interface CreateAclResponse {
 }
 
 declare interface CreateAclRuleRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取。 */
   InstanceId: string;
   /** Acl资源类型,目前只支持Topic,枚举值列表：Topic */
   ResourceType: string;
@@ -2683,9 +2683,9 @@ declare interface CreateAclRuleRequest {
   RuleName: string;
   /** 设置的ACL规则列表 */
   RuleList: AclRuleInfo[];
-  /** 表示前缀匹配的前缀的值 */
+  /** 表示前缀匹配的前缀的值 (当PatternType取值为PREFIXED时，此参数必填) */
   Pattern?: string;
-  /** 预设ACL规则是否应用到新增的topic中 */
+  /** 预设ACL规则是否应用到新增的topic中。默认为0，表示否。取值为1时表示是。 */
   IsApplied?: number;
   /** ACL规则的备注 */
   Comment?: string;
@@ -2763,7 +2763,7 @@ declare interface CreateConnectResourceResponse {
 }
 
 declare interface CreateConsumerRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取。 */
   InstanceId: string;
   /** 消费分组名称 */
   GroupName: string;
@@ -2781,7 +2781,7 @@ declare interface CreateConsumerResponse {
 }
 
 declare interface CreateDatahubTaskRequest {
-  /** 任务名称 */
+  /** 任务名称,只能以字母起始,允许包含字母、数字、- 、. 、 下划线且长度不超过64 (、为分割符号规则不包含) */
   TaskName: string;
   /** 任务类型，SOURCE数据接入，SINK数据流出 */
   TaskType: string;
@@ -2833,7 +2833,7 @@ declare interface CreateDatahubTopicResponse {
 }
 
 declare interface CreateInstancePreRequest {
-  /** ckafka集群实例Name，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-) */
+  /** ckafka集群实例Name，是一个不超过 128 个字符的任意字符串。 */
   InstanceName: string;
   /** 可用区。当购买多可用区实例时，当前参数为主可用区。 [查看可用区](https://cloud.tencent.com/document/product/597/55246) */
   ZoneId: number;
@@ -2845,21 +2845,21 @@ declare interface CreateInstancePreRequest {
   VpcId: string;
   /** 子网id */
   SubnetId: string;
-  /** 可选。实例日志的最长保留时间，单位分钟，默认为10080（7天），最大30天，不填默认0，代表不开启日志保留时间回收策略 */
+  /** 可选。实例日志的最长保留时间，单位分钟，不填默认为1440（1天），可设置范围为1分钟到90天。 */
   MsgRetentionTime?: number;
   /** 创建实例时可以选择集群Id, 该入参表示集群Id */
   ClusterId?: number;
   /** 预付费自动续费标记，0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置) */
   RenewFlag?: number;
-  /** CKafka版本号[0.10.2、1.1.1、2.4.1、2.4.2、2.8.1、3.2.3], 默认是1.1.1。2.4.1 与 2.4.2 属于同一个版本，传任意一个均可。 */
+  /** CKafka版本号[2.4.1, 2.4.2, 2.8.1, 3.2.3], 默认取值是2.4.1。2.4.1 与 2.4.2 属于同一个版本，传任意一个均可。 */
   KafkaVersion?: string;
   /** 实例类型: [标准版实例]填写 "standard" (默认), [专业版实例]填写 "profession",[高级版实例]填写"premium" */
   SpecificationsType?: string;
-  /** 磁盘大小，如果跟控制台规格配比不相符，则无法创建成功 */
+  /** 磁盘大小，如果跟控制台规格配比不相符，则无法创建成功。默认取值为500，步长设置为100。可以通过以下链接查看计费规格：https://cloud.tencent.com/document/product/597/122562 */
   DiskSize?: number;
-  /** 实例带宽,单位MB/s; 最小值:20MB/s, 高级版最大值:360MB/s,专业版最大值:100000MB/s 标准版固定带宽规格: 40MB/s, 100MB/s, 150MB/s */
+  /** 实例带宽,默认值为40，单位MB/s; 最小值:20MB/s, 高级版最大值:360MB/s,专业版最大值:100000MB/s 标准版固定带宽规格: 40MB/s, 100MB/s, 150MB/s。可以通过以下链接查看计费规格：https://cloud.tencent.com/document/product/597/11745 */
   BandWidth?: number;
-  /** 分区大小，如果跟控制台规格配比不相符，则无法创建成功 */
+  /** 分区大小，如果跟控制台规格配比不相符，则无法创建成功。默认值为800，步长为100。可以通过以下链接查看计费规格：https://cloud.tencent.com/document/product/597/122563 */
   Partition?: number;
   /** 标签 */
   Tags?: Tag[];
@@ -2887,11 +2887,11 @@ declare interface CreateInstancePreResponse {
 }
 
 declare interface CreatePartitionRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取。 */
   InstanceId: string;
-  /** 主题名称 */
+  /** 主题名称，可通过DescribeTopic接口获取。 */
   TopicName: string;
-  /** 主题分区个数 */
+  /** 主题分区个数，传入参数为修改后的分区数，而不是增加的分区数，因此传入参数需要大于当前主题分区个数。 */
   PartitionNum: number;
 }
 
@@ -2953,7 +2953,7 @@ declare interface CreatePostPaidInstanceResponse {
 }
 
 declare interface CreatePrometheusRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id,可通过DescribeInstances接口获取 */
   InstanceId: string;
   /** 私有网络Id */
   VpcId: string;
@@ -2969,21 +2969,21 @@ declare interface CreatePrometheusResponse {
 }
 
 declare interface CreateRouteRequest {
-  /** 实例唯一id */
+  /** ckafka集群实例id,可通过DescribeInstances接口获取 */
   InstanceId: string;
-  /** 路由网络类型(3:vpc路由;7:内部支撑路由) */
+  /** 路由网络类型(3:vpc路由;7:内部支撑路由;1:公网路由) */
   VipType: number;
-  /** vpc网络Id */
+  /** vpc网络Id,当vipType为3时必填 */
   VpcId?: string;
-  /** vpc子网id */
+  /** vpc子网id,当vipType为3时必填 */
   SubnetId?: string;
-  /** 访问类型：0-plaintext；1-sasl_plaintext；2-ssl；3-sasl_ssl */
+  /** 访问类型：0-plaintext；1-sasl_plaintext；2-ssl；3-sasl_ssl,默认为0 */
   AccessType?: number;
-  /** 是否需要权限管理 */
+  /** 是否需要权限管理,该字段已废弃 */
   AuthFlag?: number;
   /** 调用方appId */
   CallerAppid?: number;
-  /** 公网带宽 */
+  /** 公网带宽,公网路由必传,且必选时3的倍数,无默认值 */
   PublicNetwork?: number;
   /** vip地址 */
   Ip?: string;
@@ -2997,7 +2997,7 @@ declare interface CreateRouteResponse {
 }
 
 declare interface CreateTokenRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id,可通过DescribeInstances接口获取 */
   InstanceId: string;
   /** 用户名 */
   User: string;
@@ -3011,11 +3011,11 @@ declare interface CreateTokenResponse {
 }
 
 declare interface CreateTopicIpWhiteListRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取。 */
   InstanceId: string;
-  /** 主题名称 */
+  /** 主题名称，可通过DescribeTopic接口获取 */
   TopicName: string;
-  /** ip白名单列表 */
+  /** ip白名单列表，最大值为512，即最大允许传入512个ip。 */
   IpWhiteList: string[];
 }
 
@@ -3071,7 +3071,7 @@ declare interface CreateTopicResponse {
 }
 
 declare interface CreateUserRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取。 */
   InstanceId: string;
   /** 用户名称 */
   Name: string;
@@ -3087,7 +3087,7 @@ declare interface CreateUserResponse {
 }
 
 declare interface DeleteAclRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取。 */
   InstanceId: string;
   /** Acl资源类型，(2:TOPIC，3:GROUP，4:CLUSTER) */
   ResourceType: number;
@@ -3099,7 +3099,7 @@ declare interface DeleteAclRequest {
   PermissionType: number;
   /** 默认为\*，表示任何host都可以访问，当前ckafka不支持host为\*，但是后面开源kafka的产品化会直接支持 */
   Host?: string;
-  /** 用户列表，默认为*，表示任何user都可以访问，当前用户只能是用户列表中包含的用户 */
+  /** 用户列表，默认为User:*，表示任何user都可以访问，当前用户只能是用户列表中包含的用户 */
   Principal?: string;
 }
 
@@ -3111,9 +3111,9 @@ declare interface DeleteAclResponse {
 }
 
 declare interface DeleteAclRuleRequest {
-  /** 实例id信息 */
+  /** 实例id信息，可通过DescribeInstances接口获取。 */
   InstanceId: string;
-  /** acl规则名称 */
+  /** acl规则名称，可通过DescribeAclRule接口获取。 */
   RuleName: string;
 }
 
@@ -3161,9 +3161,9 @@ declare interface DeleteDatahubTopicResponse {
 }
 
 declare interface DeleteGroupRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取。 */
   InstanceId: string;
-  /** 消费分组 */
+  /** 消费组名称，可通过DescribeConsumerGroup接口获取。 */
   Group: string;
 }
 
@@ -3175,7 +3175,7 @@ declare interface DeleteGroupResponse {
 }
 
 declare interface DeleteInstancePostRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取。 */
   InstanceId: string;
 }
 
@@ -3187,7 +3187,7 @@ declare interface DeleteInstancePostResponse {
 }
 
 declare interface DeleteInstancePreRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取。 */
   InstanceId: string;
 }
 
@@ -3199,13 +3199,13 @@ declare interface DeleteInstancePreResponse {
 }
 
 declare interface DeleteRouteRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id,可通过DescribeInstances接口获取 */
   InstanceId: string;
-  /** 路由id */
+  /** 路由id,可通过DescribeRoute接口获取 */
   RouteId: number;
   /** 调用方appId */
   CallerAppid?: number;
-  /** 设置定时删除路由时间,若DeleteRouteTime < now ,设置时间小于当前接口提交时间则立即执行;DeleteRouteTime > now,设置时间大于当前接口提交时间,则按照设置的时间,定时执行删除; 该参数设置提交后,无法撤销!!! */
+  /** 设置定时删除路由时间,仅类型为公网路由支持定时删除,可选择未来的24小时的任意时间 */
   DeleteRouteTime?: string;
 }
 
@@ -3217,7 +3217,7 @@ declare interface DeleteRouteResponse {
 }
 
 declare interface DeleteRouteTriggerTimeRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id,可通过DescribeInstances接口获取 */
   InstanceId: string;
   /** 修改删除路由的定时时间 */
   DelayTime: string;
@@ -3229,9 +3229,9 @@ declare interface DeleteRouteTriggerTimeResponse {
 }
 
 declare interface DeleteTopicIpWhiteListRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取。 */
   InstanceId: string;
-  /** 主题名 */
+  /** 主题名，可通过DescribeTopic接口获取。 */
   TopicName: string;
   /** ip白名单列表 */
   IpWhiteList: string[];
@@ -3259,9 +3259,9 @@ declare interface DeleteTopicResponse {
 }
 
 declare interface DeleteUserRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取。 */
   InstanceId: string;
-  /** 用户名称 */
+  /** 用户名称，可通过DescribeUser接口获取。 */
   Name: string;
 }
 
@@ -3273,7 +3273,7 @@ declare interface DeleteUserResponse {
 }
 
 declare interface DescribeACLRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取。 */
   InstanceId: string;
   /** Acl资源类型，(2:TOPIC，3:GROUP，4:CLUSTER) */
   ResourceType: number;
@@ -3281,7 +3281,7 @@ declare interface DescribeACLRequest {
   ResourceName: string;
   /** 偏移位置 */
   Offset?: number;
-  /** 个数限制 */
+  /** 个数限制，默认值为50，最大值为50。 */
   Limit?: number;
   /** 关键字匹配 */
   SearchWord?: string;
@@ -3295,13 +3295,13 @@ declare interface DescribeACLResponse {
 }
 
 declare interface DescribeAclRuleRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取。 */
   InstanceId: string;
   /** ACL规则名 */
   RuleName?: string;
-  /** ACL规则匹配类型 */
+  /** ACL规则匹配类型 （PREFIXED：前缀匹配，PRESET：预设策略） */
   PatternType?: string;
-  /** 是否读取简略的ACL规则 */
+  /** 是否读取简略的ACL规则，默认值为false，表示不读取简略的ACL规则。 */
   IsSimplified?: boolean;
 }
 
@@ -3391,7 +3391,7 @@ declare interface DescribeConsumerGroupResponse {
 }
 
 declare interface DescribeCvmInfoRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id,可通过DescribeInstances接口获取 */
   InstanceId: string;
 }
 
@@ -3615,7 +3615,7 @@ declare interface DescribeInstancesResponse {
 }
 
 declare interface DescribePrometheusRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id,可通过DescribeInstances接口获取 */
   InstanceId: string;
 }
 
@@ -3863,7 +3863,7 @@ declare interface DescribeUserResponse {
 }
 
 declare interface FetchDatahubMessageByOffsetRequest {
-  /** 弹性topic名称 */
+  /** 弹性topic名称，可通过DescribeDatahubTopics接口获取。 */
   Name: string;
   /** 分区id */
   Partition: number;
@@ -3897,9 +3897,9 @@ declare interface FetchLatestDatahubMessageListResponse {
 }
 
 declare interface FetchMessageByOffsetRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取。 */
   InstanceId: string;
-  /** 主题名 */
+  /** 主题名，可通过DescribeTopic接口获取。 */
   Topic: string;
   /** 分区id */
   Partition: number;
@@ -4000,7 +4000,7 @@ declare interface InquireCkafkaPriceRequest {
   MessageRetention?: number;
   /** 购买实例topic数, 单位个 (购买时必填) */
   Topic?: number;
-  /** 购买实例分区数, 单位个 (购买时必填，专业版/高级版询价时带宽信息必填) */
+  /** 购买实例分区数, 单位个 (购买时必填，专业版/高级版询价时带宽信息必填)分区上限 最大值: 40000,步长: 100可以通过以下链接查看规格限制: https://cloud.tencent.com/document/product/597/122563 */
   Partition?: number;
   /** 购买地域, 可通过查看DescribeCkafkaZone这个接口获取ZoneId */
   ZoneIds?: number[];
@@ -4008,7 +4008,7 @@ declare interface InquireCkafkaPriceRequest {
   CategoryAction?: string;
   /** 国内站购买的版本, sv_ckafka_instance_s2_1(入门型), sv_ckafka_instance_s2_2(标准版), sv_ckafka_instance_s2_3(进阶型), 如果instanceType为standards2, 但该参数为空, 则默认值为sv_ckafka_instance_s2_1 */
   BillType?: string;
-  /** 公网带宽计费模式, 目前只有专业版支持公网带宽 (购买公网带宽时必填) */
+  /** 公网带宽计费模式, 目前只有专业版支持公网带宽 (购买公网带宽时必填),取值为3的倍数 */
   PublicNetworkParam?: InquiryPublicNetworkParam;
   /** 续费时的实例id, 续费时填写 */
   InstanceId?: string;
@@ -4128,15 +4128,15 @@ declare interface InstanceResponse {
 }
 
 declare interface InstanceScalingDownRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id,可通过DescribeInstances接口获取 */
   InstanceId: string;
   /** 缩容模式 1:稳定变配 2.高速变配 */
   UpgradeStrategy: number;
-  /** 磁盘大小 单位 GB */
+  /** 磁盘大小 单位 GB 最大值为500000,步长100可以通过以下链接查看规格限制：https://cloud.tencent.com/document/product/597/122562 */
   DiskSize?: number;
-  /** 峰值带宽 单位 MB/s */
+  /** 峰值带宽 单位 MB/s可以通过以下链接查看规格限制及对应步长: https://cloud.tencent.com/document/product/597/11745 */
   BandWidth?: number;
-  /** 分区上限 */
+  /** 分区上限 最大值: 40000, 步长: 100可以通过以下链接查看规格限制: https://cloud.tencent.com/document/product/597/122563 */
   Partition?: number;
 }
 
@@ -4275,9 +4275,9 @@ declare interface ModifyGroupOffsetsResponse {
 }
 
 declare interface ModifyInstanceAttributesRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id,可通过DescribeInstances接口获取 */
   InstanceId: string;
-  /** 实例日志的最长保留时间，单位分钟，最大90天，0代表不开启日志保留时间回收策略 */
+  /** 实例日志的最长保留时间，单位分钟，最大90天，最小为1min */
   MsgRetentionTime?: number;
   /** ckafka集群实例Name */
   InstanceName?: string;
@@ -4293,7 +4293,7 @@ declare interface ModifyInstanceAttributesRequest {
   DynamicDiskConfig?: DynamicDiskConfig;
   /** 实例级别单条消息大小（单位byte) 最大 12582912(不包含) 最小1024(不包含) */
   MaxMessageByte?: number;
-  /** 集群topic默认 unclean.leader.election.enable配置: 1 开启 0 关闭 */
+  /** 是否允许未同步的副本选为 leader: 1 开启 0 关闭 */
   UncleanLeaderElectionEnable?: number;
   /** 实例删除保护开关: 1 开启 0 关闭 */
   DeleteProtectionEnable?: number;
@@ -4307,13 +4307,13 @@ declare interface ModifyInstanceAttributesResponse {
 }
 
 declare interface ModifyInstancePreRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id,可通过DescribeInstances接口获取 */
   InstanceId: string;
-  /** 预计磁盘，根据磁盘步长，规格向上调整。 */
+  /** 磁盘大小 单位 GB 最大值为500000,步长100可以通过以下链接查看规格限制：https://cloud.tencent.com/document/product/597/122562 */
   DiskSize?: number;
-  /** 预计带宽，根据带宽步长，规格向上调整。 */
+  /** 峰值带宽 单位 MB/s可以通过以下链接查看规格限制及对应步长: https://cloud.tencent.com/document/product/597/11745 */
   BandWidth?: number;
-  /** 预计分区，根据带宽步长，规格向上调整。 */
+  /** 分区上限 最大值: 40000, 步长: 100可以通过以下链接查看规格限制: https://cloud.tencent.com/document/product/597/122563 */
   Partition?: number;
 }
 
@@ -4325,9 +4325,9 @@ declare interface ModifyInstancePreResponse {
 }
 
 declare interface ModifyPasswordRequest {
-  /** 实例Id */
+  /** 实例Id，可通过DescribeInstances接口获取。 */
   InstanceId: string;
-  /** 用户名称 */
+  /** 用户名称，可通过DescribeUser接口获取。 */
   Name: string;
   /** 用户当前密码 */
   Password: string;
@@ -4343,9 +4343,9 @@ declare interface ModifyPasswordResponse {
 }
 
 declare interface ModifyRoutineMaintenanceTaskRequest {
-  /** 实例id */
+  /** ckafka集群实例id,可通过DescribeInstances接口获取 */
   InstanceId: string;
-  /** 自动化运维类别 */
+  /** 自动化运维类别, 类别如下: QUOTA、ANALYSIS、RE_BALANCE、ELASTIC_BANDWIDTH */
   MaintenanceType: string;
   /** INSTANCE_STORAGE_CAPACITY(磁盘自动扩容)/MESSAGE_RETENTION_PERIOD(磁盘动态消息保留策略) */
   MaintenanceSubtype: string;
@@ -4361,7 +4361,7 @@ declare interface ModifyRoutineMaintenanceTaskRequest {
   PlannedTime?: number;
   /** 任务额外信息 */
   ExtraConfig?: string;
-  /** 任务状态 */
+  /** 任务状态,0 开启,1 关闭 */
   Status?: number;
   /** 执行week day */
   Week?: string;
@@ -4421,7 +4421,7 @@ declare interface ModifyTopicAttributesResponse {
 }
 
 declare interface RenewCkafkaInstanceRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id,可通过DescribeInstances接口获取 */
   InstanceId: string;
   /** 续费时长, 默认为1, 单位是月 */
   TimeSpan?: number;

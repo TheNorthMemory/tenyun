@@ -224,6 +224,8 @@ declare interface AndroidInstanceUploadFile {
   FileURL?: string;
   /** 上传目标目录，只能上传到 /sdcard/ 目录或其子目录下 */
   DestinationDirectory?: string;
+  /** 目标文件名 */
+  DestinationFileName?: string;
 }
 
 /** COS协议参数 */
@@ -897,6 +899,8 @@ declare interface DistributeFileToAndroidInstancesRequest {
   FileURL: string;
   /** 上传目标目录，只能上传到 /sdcard/ 目录或其子目录下 */
   DestinationDirectory: string;
+  /** 目标文件名 */
+  DestinationFileName?: string;
 }
 
 declare interface DistributeFileToAndroidInstancesResponse {
@@ -1497,6 +1501,8 @@ declare interface UploadFileToAndroidInstancesRequest {
   FileURL: string;
   /** 上传目标目录，只能上传到 /sdcard/ 目录或其子目录下 */
   DestinationDirectory?: string;
+  /** 目标文件名 */
+  DestinationFileName?: string;
 }
 
 declare interface UploadFileToAndroidInstancesResponse {

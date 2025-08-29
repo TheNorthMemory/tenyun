@@ -568,7 +568,7 @@ declare interface ClusterV2 {
   KuberneteApiServer?: string | null;
   /** K 表示通过kubeconfig 导入, S 表示通过service account导入 */
   KuberneteNativeType?: string | null;
-  /** native secret */
+  /** Kubernetes 密钥 */
   KuberneteNativeSecret?: string | null;
   /** 是否开启cls日志功能 */
   EnableLogCollection?: boolean;
@@ -794,7 +794,7 @@ declare interface ContainerEvent {
   LastTimestamp?: number;
   /** 级别 */
   Type?: string;
-  /** 资源类型 */
+  /** Kubernetes 资源类型，典型取值有 Deployment、Pod、Service 等 */
   Kind?: string;
   /** 资源名称 */
   Name?: string;
@@ -1338,15 +1338,15 @@ declare interface Env {
 declare interface ExclusiveInstance {
   /** 配置中心类型[注册中心Registration、配置中心Configuration] */
   CenterType?: string;
-  /** 实例id，通过北极星控制台获取 */
+  /** 实例id，通过[北极星控制台](https://console.cloud.tencent.com/tse/governance)获取 */
   InstanceId?: string;
   /** 实例类型，例如北极星Polaris */
   InstanceType?: string;
   /** 实例名称 */
   InstanceName?: string;
-  /** 实例地域id，通过北极星控制台获取 */
+  /** 实例地域id，通过[北极星控制台](https://console.cloud.tencent.com/tse/governance)获取 */
   RegionId?: string;
-  /** 实例命名空间ID，通过北极星控制台获取 */
+  /** 实例命名空间ID，通过[北极星控制台](https://console.cloud.tencent.com/tse/governance)获取 */
   InstanceNamespaceId?: string;
 }
 
@@ -1642,11 +1642,11 @@ declare interface GroupPod {
   ReadyCount?: number;
   /** 运行时长，单位秒 */
   Runtime?: string;
-  /** 实例启动时的时间戳 */
+  /** 实例启动时的时间戳，单位秒 */
   CreatedAt?: string;
-  /** 服务实例状态，枚举值为Starting/Running/Stopping/Stopped/StopFailed/Abnormal/Unknown */
+  /** 服务实例状态，枚举值为：- `Starting`：启动中- `Running`：运行中- `Stopping`：停止中- `Stopped`: 已停止- `StopFailed`: 停止失败- `Abnormal`: 异常- `Unknown`: 未知 */
   ServiceInstanceStatus?: string;
-  /** 机器实例可使用状态，枚举值为Starting/Running/Stopping/Stopped/StopFailed/Abnormal/Unknown */
+  /** 机器实例可使用状态，枚举值为：- `Starting`：启动中- `Running`：运行中- `Stopping`：停止中- `Stopped`: 已停止- `StopFailed`: 停止失败- `Abnormal`: 异常- `Unknown`: 未知 */
   InstanceAvailableStatus?: string;
   /** 机器实例状态 */
   InstanceStatus?: string;
@@ -1994,7 +1994,7 @@ declare interface InstanceEnrichedInfo {
   WanIp?: string;
   /** 机器所在VPC */
   VpcId?: string;
-  /** 机器运行状态 Pending Running Stopped Rebooting Starting Stopping Abnormal Unknown */
+  /** 机器运行状态，枚举值为：- `Pending`: 准备中- `Running`: 运行中- `Stopped`: 已停止- `Rebooting`: 重启中- `Starting`: 启动中- `Stopping`: 停止中- `Abnormal`: 异常- `Unknown`: 未知- `Offline`: 离线 */
   InstanceStatus?: string;
   /** 机器可用状态（表示机器上的Agent在线） */
   InstanceAvailableStatus?: string;
@@ -4726,7 +4726,7 @@ declare interface DeleteApplicationResponse {
 }
 
 declare interface DeleteClusterRequest {
-  /** 集群ID，按照【集群ID】进行过滤，可通过调用DescribeClusters查询已创建的项目列表或登录控制台进行查看；也可以调用CreateCluster创建新的项目。集群ID例如：cls-6a79x94v。仅在集群下无部署组、命名空间、云主机时可以删除。 */
+  /** 集群ID，按照【集群ID】进行过滤，可通过调用[DescribeClusters](https://cloud.tencent.com/document/product/649/85857)查询已创建的集群列表或登录控制台进行查看；也可以调用[CreateCluster](https://cloud.tencent.com/document/product/649/36049)创建新的集群。仅在集群下无部署组、命名空间、云主机时可以删除。 */
   ClusterId: string;
   /** 是否只解绑，不删除容器集群，默认不传则删除容器集群。 */
   Unbind?: boolean;
@@ -5476,7 +5476,7 @@ declare interface DescribeClusterInstancesResponse {
 declare interface DescribeClustersRequest {
   /** 搜索词，可以搜索ID/名称/备注/标签 */
   SearchWord?: string;
-  /** 排序字段，例如创建时间 */
+  /** 排序字段，目前仅支持使用“创建时间” */
   OrderBy?: string;
   /** 排序方式，0表示升序，1表示倒序 */
   OrderType?: number;
@@ -5630,7 +5630,7 @@ declare interface DescribeContainerEventsRequest {
   Offset?: number;
   /** 分页个数，默认为20， 取值应为1~50 */
   Limit?: number;
-  /** 部署组ID，按照【部署组ID】进行过滤，可通过调用DescribeGroups查询已创建的项目列表或登录控制台进行查看；也可以调用CreateGroup创建新的项目。部署组ID例如：group-9yn2q8yd。 */
+  /** 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的部署组。 */
   GroupId?: string;
   /** event的资源种类 */
   Kind?: string;
@@ -5650,7 +5650,7 @@ declare interface DescribeContainerEventsResponse {
 }
 
 declare interface DescribeContainerGroupAttributeRequest {
-  /** 部署组ID，按照【部署组ID】进行过滤，可通过调用DescribeGroups查询已创建的项目列表或登录控制台进行查看；也可以调用CreateGroup创建新的项目。部署组ID例如：group-ab958z6y */
+  /** 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的部署组。 */
   GroupId: string;
 }
 
@@ -5662,7 +5662,7 @@ declare interface DescribeContainerGroupAttributeResponse {
 }
 
 declare interface DescribeContainerGroupDeployInfoRequest {
-  /** 部署组ID，按照【部署组ID】进行过滤，可通过调用DescribeGroups查询已创建的项目列表或登录控制台进行查看；也可以调用CreateGroup创建新的项目。部署组ID例如：group-ab958z6y */
+  /** 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的部署组。 */
   GroupId: string;
 }
 
@@ -5910,7 +5910,7 @@ declare interface DescribeGatewayMonitorOverviewResponse {
 }
 
 declare interface DescribeGroupAttributeRequest {
-  /** 部署组ID，按照【部署组ID】进行过滤，可通过调用DescribeGroups查询已创建的项目列表或登录控制台进行查看；也可以调用CreateGroup创建新的项目。部署组ID例如：group-ab958z6y */
+  /** 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的部署组。 */
   GroupId: string;
 }
 
@@ -6550,7 +6550,7 @@ declare interface DescribePluginInstancesResponse {
 }
 
 declare interface DescribePodInstancesRequest {
-  /** 实例所属部署组ID，按照【部署组ID】进行过滤，可通过调用DescribeGroups查询已创建的项目列表或登录控制台进行查看；也可以调用CreateGroup创建新的项目。部署组ID例如：group-9yn2q8yd。部署组所在集群必须是活跃状态的。 */
+  /** 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的部署组。 */
   GroupId: string;
   /** 偏移量，取值从0开始 */
   Offset?: number;
@@ -7288,7 +7288,7 @@ declare interface ExpandGroupResponse {
 }
 
 declare interface ModifyApplicationRequest {
-  /** 应用ID */
+  /** 应用ID，可通过调用[DescribeApplications](https://cloud.tencent.com/document/api/649/36090)查询已创建的应用列表或登录控制台进行查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/api/649/36094)创建新的应用。 */
   ApplicationId: string;
   /** 应用名称 */
   ApplicationName?: string;
@@ -7314,7 +7314,7 @@ declare interface ModifyApplicationResponse {
 }
 
 declare interface ModifyClusterRequest {
-  /** 集群ID，按照【集群ID】进行过滤，可通过调用DescribeClusters查询已创建的项目列表或登录控制台进行查看；也可以调用CreateCluster创建新的项目。集群ID例如：cls-6a79x94v。 */
+  /** 集群ID，按照【集群ID】进行过滤，可通过调用[DescribeClusters](https://cloud.tencent.com/document/product/649/85857)查询已创建的集群列表或登录控制台进行查看；也可以调用[CreateCluster](https://cloud.tencent.com/document/product/649/36049)创建新的集群。仅在集群下无部署组、命名空间、云主机时可以删除。 */
   ClusterId: string;
   /** 集群名称 */
   ClusterName?: string;
@@ -7374,7 +7374,7 @@ declare interface ModifyContainerReplicasResponse {
 }
 
 declare interface ModifyGroupRequest {
-  /** 部署组ID，按照【部署组ID】进行过滤，可通过调用DescribeGroups查询已创建的项目列表或登录控制台进行查看；也可以调用CreateGroup创建新的项目。部署组ID例如：group-9yn2q8yd。 */
+  /** 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的部署组。 */
   GroupId: string;
   /** 部署组名称 */
   GroupName?: string;
@@ -7446,7 +7446,7 @@ declare interface ModifyMicroserviceResponse {
 }
 
 declare interface ModifyNamespaceRequest {
-  /** 命名空间ID，按照【命名空间ID】进行过滤，可通过调用DescribeNamespaces查询已创建的项目列表或登录控制台进行查看；也可以调用CreateNamespace创建新的项目。命名空间ID例如：namespace-6a79x94v。 */
+  /** 命名空间ID，按照【命名空间ID】进行过滤，可通过调用[DescribeNamespaces](https://cloud.tencent.com/document/product/649/36096)查询已创建的命名空间列表或登录控制台进行查看；也可以调用[CreateNamespace](https://cloud.tencent.com/document/product/649/36098)创建新命名空间。 */
   NamespaceId: string;
   /** 命名空间名称 */
   NamespaceName?: string;
