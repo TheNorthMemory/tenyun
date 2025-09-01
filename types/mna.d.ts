@@ -268,7 +268,7 @@ declare interface NetDetails {
 
 /** 返回上报的订单信息 */
 declare interface OrderInfo {
-  /** 父帐号uin */
+  /** 父账号uin */
   Uin?: string;
   /** 项目id */
   ProjectId?: string;

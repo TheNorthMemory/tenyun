@@ -3244,6 +3244,8 @@ declare interface BizLicenseOCRResponse {
   Electronic?: boolean;
   /** 非营业执照的营业类证件识别结果，将以结构化形式呈现。 */
   BusinessCertificate?: BusinessCertificateInfo[];
+  /** 重要提示字段 */
+  Important?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4433,6 +4435,8 @@ declare interface QuestionSplitOCRRequest {
   EnableImageCrop?: boolean;
   /** 是否只返回检测框，默认false */
   EnableOnlyDetectBorder?: boolean;
+  /** false: 使用当前默认模型 true: 使用新的多模态推理模型，速度更快推理效果更强，仅 `EnableOnlyDetectBorder` 为 `true` 时生效，公测中 */
+  UseNewModel?: boolean;
 }
 
 declare interface QuestionSplitOCRResponse {
