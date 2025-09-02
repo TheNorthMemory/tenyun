@@ -1322,6 +1322,10 @@ declare interface InstanceSpec {
   ZoneStockInfos?: ZoneStockInfo[];
   /** 库存数量 */
   StockCount?: number;
+  /** 最大cpu */
+  MaxCpu?: number;
+  /** 最小cpu */
+  MinCpu?: number;
 }
 
 /** 审计日志命中规则模板的基本信息 */

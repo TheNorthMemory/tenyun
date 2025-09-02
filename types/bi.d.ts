@@ -358,6 +358,88 @@ declare interface ProjectListData {
   TotalPages: number | null;
 }
 
+/** 行列权限内容 */
+declare interface RankInfo {
+  /** 1 */
+  Type: string | null;
+  /** 1 */
+  Mode: string | null;
+  /** ` */
+  RulerInfo: string | null;
+  /** 1 */
+  RoleId: number | null;
+  /** 1 */
+  RoleType: string | null;
+  /** 1 */
+  TableId?: number | null;
+  /** 行列权限配置 */
+  RowColumnConfigList?: RowColumnConfig[] | null;
+}
+
+/** 角色 */
+declare interface Role {
+  /** 角色ID */
+  Id?: number;
+  /** 角色名称 */
+  RoleName?: string;
+  /** 企业ID */
+  CorpId?: string;
+  /** 角色类型 */
+  RoleType?: string;
+  /** 范围 */
+  Scope?: string;
+  /** 描述 */
+  Description?: string;
+  /** 创建时间 */
+  CreatedAt?: string | null;
+  /** 创建人 */
+  CreatedUser?: string | null;
+  /** 更新时间 */
+  UpdatedAt?: string | null;
+  /** 更新人 */
+  UpdatedUser?: string | null;
+  /** 是否为全局角色（0 不是， 1 是） */
+  ScopeType?: number | null;
+  /** 是否可被选 */
+  CanChoose?: boolean | null;
+  /** 角色key */
+  ModuleCollection?: string | null;
+}
+
+/** 行列权限配置 */
+declare interface RowColumnConfig {
+  /** 行列权限规则 */
+  RulerInfo?: string | null;
+  /** 标签值列表 */
+  TagValueList?: RowColumnTagValue[] | null;
+}
+
+/** 行列权限初始状态 */
+declare interface RowColumnStatus {
+  /** 1 */
+  TableId: number | null;
+  /** 1 */
+  Type: string | null;
+  /** 1 */
+  Mode: string | null;
+  /** 1 */
+  OpenStatus: string | null;
+  /** 1 */
+  RoleType: string | null;
+  /** 1 */
+  RoleId: number | null;
+}
+
+/** 行列权限标签出入参 */
+declare interface RowColumnTagValue {
+  /** 标签id */
+  Id?: number | null;
+  /** 标签名称 */
+  Name?: string | null;
+  /** 标签值列表 */
+  Values?: string[] | null;
+}
+
 /** 用户组 */
 declare interface UserGroupDTO {
   /** id */
@@ -760,6 +842,40 @@ declare interface CreateEmbedTokenResponse {
   RequestId?: string;
 }
 
+declare interface CreatePermissionRanksRequest {
+  /** 页数 */
+  TableId?: number;
+  /** 条数 */
+  Mode?: string;
+  /** 角色类型 */
+  RoleType?: string;
+  /** 所有页码 */
+  RoleId?: number;
+  /** 规则信息 */
+  RulerInfo?: string;
+  /** 类型 */
+  Type?: string;
+  /** 状态 */
+  OpenStatus?: string;
+  /** 项目id */
+  ProjectId?: number;
+  /** 行列权限配置 */
+  RowColumnConfigList?: RowColumnConfig[];
+}
+
+declare interface CreatePermissionRanksResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 消息 */
+  Msg?: string | null;
+  /** 112 */
+  Extra?: string | null;
+  /** 1 */
+  Data?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateProjectRequest {
   /** 项目名称 */
   Name: string;
@@ -964,6 +1080,80 @@ declare interface DescribePageWidgetListResponse {
   Data?: WidgetListVO | null;
   /** 返回消息 */
   Msg?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePermissionRanksInfoRequest {
+  /** 页数 */
+  TableId?: number;
+  /** 条数 */
+  Mode?: string;
+  /** 角色类型 */
+  RoleType?: string;
+  /** 所有页码 */
+  RoleId?: number;
+  /** 类型 */
+  Type?: string;
+  /** 项目id */
+  ProjectId?: number;
+}
+
+declare interface DescribePermissionRanksInfoResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 消息 */
+  Msg?: string | null;
+  /** 112 */
+  Extra?: string | null;
+  /** 1 */
+  Data?: RankInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePermissionRoleInfoRequest {
+  /** 项目ID */
+  ProjectId: number;
+  /** 页数 */
+  PageNo?: number;
+  /** 条数 */
+  PageSize?: number;
+  /** 所有页码 */
+  AllPage?: boolean;
+}
+
+declare interface DescribePermissionRoleInfoResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 数据 */
+  Data?: Role[] | null;
+  /** 消息 */
+  Msg?: string | null;
+  /** 112 */
+  Extra?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePermissionStatusInfoRequest {
+  /** 页数 */
+  TableId?: number;
+  /** 类型 */
+  Type?: string;
+  /** 1 */
+  ProjectId?: string;
+}
+
+declare interface DescribePermissionStatusInfoResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 消息 */
+  Msg?: string | null;
+  /** 112 */
+  Extra?: string | null;
+  /** 1 */
+  Data?: RowColumnStatus | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1379,6 +1569,8 @@ declare interface Bi {
   CreateDatasourceCloud(data: CreateDatasourceCloudRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatasourceCloudResponse>;
   /** 创建嵌出报表Token {@link CreateEmbedTokenRequest} {@link CreateEmbedTokenResponse} */
   CreateEmbedToken(data?: CreateEmbedTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmbedTokenResponse>;
+  /** 创建行列权限 {@link CreatePermissionRanksRequest} {@link CreatePermissionRanksResponse} */
+  CreatePermissionRanks(data?: CreatePermissionRanksRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePermissionRanksResponse>;
   /** 创建项目 {@link CreateProjectRequest} {@link CreateProjectResponse} */
   CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
   /** 创建用户角色 {@link CreateUserRoleRequest} {@link CreateUserRoleResponse} */
@@ -1397,6 +1589,12 @@ declare interface Bi {
   DescribeDatasourceList(data: DescribeDatasourceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasourceListResponse>;
   /** 查询页面组件信息 {@link DescribePageWidgetListRequest} {@link DescribePageWidgetListResponse} */
   DescribePageWidgetList(data: DescribePageWidgetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePageWidgetListResponse>;
+  /** 根据角色或标签查询行列权限配置 {@link DescribePermissionRanksInfoRequest} {@link DescribePermissionRanksInfoResponse} */
+  DescribePermissionRanksInfo(data?: DescribePermissionRanksInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePermissionRanksInfoResponse>;
+  /** 行列权限项目内角色列表1 {@link DescribePermissionRoleInfoRequest} {@link DescribePermissionRoleInfoResponse} */
+  DescribePermissionRoleInfo(data: DescribePermissionRoleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePermissionRoleInfoResponse>;
+  /** 查询行列权限初始状态1 {@link DescribePermissionStatusInfoRequest} {@link DescribePermissionStatusInfoResponse} */
+  DescribePermissionStatusInfo(data?: DescribePermissionStatusInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePermissionStatusInfoResponse>;
   /** 项目详情 {@link DescribeProjectInfoRequest} {@link DescribeProjectInfoResponse} */
   DescribeProjectInfo(data: DescribeProjectInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectInfoResponse>;
   /** 项目列表数据接口 {@link DescribeProjectListRequest} {@link DescribeProjectListResponse} */

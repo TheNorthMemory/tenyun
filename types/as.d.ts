@@ -308,7 +308,7 @@ declare interface InstanceChargePrepaid {
 declare interface InstanceNameIndexSettings {
   /** 是否开启实例创建序号，默认不开启。取值范围：**TRUE**：表示开启实例创建序号; **FALSE**：表示不开启实例创建序号 */
   Enabled?: boolean | null;
-  /** 初始序号。序号固定位数 IndexLength 为默认值0时，取值范围为 [0, 99999999]。序号固定位数 IndexLength 为 [1, 8] 时，取值范围为为 [0, 固定位数的最大数字]。当序号递增后超出取值范围时，扩容活动会失败。首次开启实例名称序号：默认值为 0。非首次开启实例名称序号：若不指定该参数，沿用历史序号。下调初始序号可能会造成伸缩组内实例名称序号重复。 */
+  /** 初始序号。取值范围为 [0, 99999999]。当序号递增后超出取值范围时，扩容活动会失败。首次开启实例名称序号：默认值为 0。非首次开启实例名称序号：若不指定该参数，沿用历史序号。下调初始序号可能会造成伸缩组内实例名称序号重复。 */
   BeginIndex?: number | null;
 }
 
@@ -967,9 +967,9 @@ declare interface CreateLaunchConfigurationRequest {
   InstanceTags?: InstanceTag[];
   /** 标签描述列表。通过指定该参数可以支持绑定标签到启动配置。每个启动配置最多支持30个标签。 */
   Tags?: Tag[];
-  /** 云服务器主机名（HostName）的相关设置。 */
+  /** 云服务器主机名（HostName）的相关设置。不支持windows实例设置主机名。 新增该属性时，必须传递云服务器的主机名，其它未传递字段会设置为默认值。会校验主机名(如果存在后缀则加上后缀)是否超过最大位数46。 */
   HostNameSettings?: HostNameSettings;
-  /** 云服务器实例名（InstanceName）的相关设置。如果用户在启动配置中设置此字段，则伸缩组创建出的实例 InstanceName 参照此字段进行设置，并传递给 CVM；如果用户未在启动配置中设置此字段，则伸缩组创建出的实例 InstanceName 按照“as-{{ 伸缩组AutoScalingGroupName }}”进行设置，并传递给 CVM。 */
+  /** 云服务器实例名（InstanceName）的相关设置。如果用户在启动配置中设置此字段，则伸缩组创建出的实例 InstanceName 参照此字段进行设置，并传递给 CVM；如果用户未在启动配置中设置此字段，则伸缩组创建出的实例 InstanceName 按照“as-{{ 伸缩组AutoScalingGroupName }}”进行设置，并传递给 CVM。新增该属性时，必须传递云服务器的实例名称，其它未传递字段会设置为默认值。会校验实例名称(如果存在后缀则加上后缀)是否超过最大位数108。 */
   InstanceNameSettings?: InstanceNameSettings;
   /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。 */
   InstanceChargePrepaid?: InstanceChargePrepaid;
@@ -1592,9 +1592,9 @@ declare interface ModifyLaunchConfigurationAttributesRequest {
   SystemDisk?: SystemDisk;
   /** 实例数据盘配置信息。最多支持指定11块数据盘。采取整体修改，因此请提供修改后的全部值。数据盘类型默认与系统盘类型保持一致。 */
   DataDisks?: DataDisk[];
-  /** 云服务器主机名（HostName）的相关设置。不支持windows实例设置主机名。新增该属性时，必须传递云服务器的主机名，其它未传递字段会设置为默认值。 */
+  /** 云服务器主机名（HostName）的相关设置。不支持windows实例设置主机名。新增该属性时，必须传递云服务器的主机名，其它未传递字段会设置为默认值。会校验主机名(如果存在后缀则加上后缀)是否超过最大位数46。 */
   HostNameSettings?: HostNameSettings;
-  /** 云服务器（InstanceName）实例名的相关设置。 如果用户在启动配置中设置此字段，则伸缩组创建出的实例 InstanceName 参照此字段进行设置，并传递给 CVM；如果用户未在启动配置中设置此字段，则伸缩组创建出的实例 InstanceName 按照“as-{{ 伸缩组AutoScalingGroupName }}”进行设置，并传递给 CVM。新增该属性时，必须传递云服务器的实例名称，其它未传递字段会设置为默认值。 */
+  /** 云服务器（InstanceName）实例名的相关设置。 如果用户在启动配置中设置此字段，则伸缩组创建出的实例 InstanceName 参照此字段进行设置，并传递给 CVM；如果用户未在启动配置中设置此字段，则伸缩组创建出的实例 InstanceName 按照“as-{{ 伸缩组AutoScalingGroupName }}”进行设置，并传递给 CVM。新增该属性时，必须传递云服务器的实例名称，其它未传递字段会设置为默认值。会校验实例名(如果存在后缀则加上后缀)是否超过最大位数108。 */
   InstanceNameSettings?: InstanceNameSettings;
   /** 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。 */
   EnhancedService?: EnhancedService;
