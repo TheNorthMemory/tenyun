@@ -3163,6 +3163,8 @@ declare interface CreateSignUrlsResponse {
 declare interface DeleteOrganizationAuthorizationsRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId */
   Agent: Agent;
+  /** 认证流Ids数组 认证流 Id 是指在企业认证过程中，当前操作人的认证流程的唯一标识。每个企业在认证过程中只能有一条认证流认证成功。这意味着在同一认证过程内，一个企业只能有一个认证流程处于成功状态，以确保认证的唯一性和有效性。 */
+  AuthorizationIds?: string[];
   /** 认证人姓名，组织机构超管姓名。 在注册流程中，必须是超管本人进行操作。 */
   AdminName?: string;
   /** 认证人手机号，组织机构超管手机号。 在注册流程中，必须是超管本人进行操作。 */
