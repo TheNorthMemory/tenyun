@@ -692,8 +692,8 @@ declare interface DashboardTopicInfo {
 declare interface DataTransformResouceInfo {
   /** 日志主题ID- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
-  /** 别名 */
-  Alias: string;
+  /** 别名限制：不能包含字符 |。 */
+  Alias?: string;
 }
 
 /** 数据加工任务基本详情 */

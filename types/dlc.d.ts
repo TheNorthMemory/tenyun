@@ -3534,6 +3534,30 @@ declare interface CreateTasksResponse {
   RequestId?: string;
 }
 
+declare interface CreateTcIcebergTableRequest {
+  /** 表基本信息 */
+  TableBaseInfo: TableBaseInfo;
+  /** 表字段信息 */
+  Columns: TColumn[];
+  /** 为true时只获取sql而不执行 */
+  DryRun: boolean;
+  /** 表分区信息 */
+  Partitions?: TPartition[];
+  /** 表属性信息 */
+  Properties?: Property[];
+}
+
+declare interface CreateTcIcebergTableResponse {
+  /** amoro的SessionId */
+  SessionId?: string;
+  /** 执行的sql */
+  SQL?: string;
+  /** 为true时只返回sql而不实际执行 */
+  DryRun?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateUserRequest {
   /** 需要授权的子用户uin，可以通过腾讯云控制台右上角 → “账号信息” → “账号ID进行查看”。 */
   UserId: string;
@@ -6127,6 +6151,8 @@ declare interface Dlc {
   CreateTasks(data: CreateTasksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTasksResponse>;
   /** @deprecated 按顺序创建任务 {@link CreateTasksInOrderRequest} {@link CreateTasksInOrderResponse} */
   CreateTasksInOrder(data: CreateTasksInOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTasksInOrderResponse>;
+  /** 创建TC-Iceberg表 {@link CreateTcIcebergTableRequest} {@link CreateTcIcebergTableResponse} */
+  CreateTcIcebergTable(data: CreateTcIcebergTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTcIcebergTableResponse>;
   /** 创建用户 {@link CreateUserRequest} {@link CreateUserResponse} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
   /** 创建用户vpc连接 {@link CreateUserVpcConnectionRequest} {@link CreateUserVpcConnectionResponse} */

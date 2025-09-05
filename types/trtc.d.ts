@@ -920,9 +920,9 @@ declare interface SliceParams {
   SliceType?: number;
   /** 房间内持续没有主播的状态超过MaxIdleTime的时长，自动停止录制，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于 86400秒(24小时)。示例值：30 */
   MaxIdleTime?: number;
-  /** 音频切片时长，默认15s 示例值：15 */
+  /** 音频切片时长，默认15s 示例值：15取值范围15-60s */
   SliceAudio?: number;
-  /** 视频截帧间隔时长，默认5s， 示例值：5 */
+  /** 视频截帧间隔时长，默认5s， 示例值：5 取值范围5-60s */
   SliceVideo?: number;
   /** 指定订阅流白名单或者黑名单。 */
   SubscribeStreamUserIds?: SubscribeStreamUserIds;
