@@ -2427,6 +2427,8 @@ declare interface ModifySnapshotAttributeResponse {
 declare interface RebootInstancesRequest {
   /** 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。 */
   InstanceIds: string[];
+  /** 关机类型。取值范围：- SOFT：表示软关机 - HARD：表示硬关机 - SOFT_FIRST：表示优先软关机，失败再执行硬关机 默认取值：SOFT_FIRST。 */
+  StopType?: string;
 }
 
 declare interface RebootInstancesResponse {
@@ -2707,6 +2709,8 @@ declare interface StopDockerContainersResponse {
 declare interface StopInstancesRequest {
   /** 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。 */
   InstanceIds: string[];
+  /** 关机类型。取值范围： - SOFT：表示软关机- HARD：表示硬关机 - SOFT_FIRST：表示优先软关机，失败再执行硬关机 默认取值：SOFT_FIRST */
+  StopType?: string;
 }
 
 declare interface StopInstancesResponse {

@@ -42,7 +42,7 @@ declare interface AlarmInfo {
   TriggerCount?: number;
   /** 告警重复的周期。单位是min。取值范围是0~1440。 */
   AlarmPeriod?: number;
-  /** 关联的告警通知模板列表。 */
+  /** 关联的告警通知渠道组列表。-通过[获取通知渠道组列表](https://cloud.tencent.com/document/product/614/56462)获取关联的告警通知渠道组列表，和MonitorNotice互斥 */
   AlarmNoticeIds?: string[];
   /** 开启状态。 */
   Status?: boolean;
@@ -72,6 +72,8 @@ declare interface AlarmInfo {
   Classifications?: AlarmClassification[];
   /** 多触发条件。与Condition互斥。 */
   MultiConditions?: MultiCondition[];
+  /** 云监控通知渠道相关信息，和AlarmNoticeIds互斥 */
+  MonitorNotice?: MonitorNotice;
 }
 
 /** 告警通知渠道组详细配置 */
@@ -222,6 +224,8 @@ declare interface AlertHistoryRecord {
   AlarmLevel?: number;
   /** 监控对象类型。0:执行语句共用监控对象; 1:每个执行语句单独选择监控对象。 */
   MonitorObjectType?: number;
+  /** 通知渠道类型，0默认代表cls内部通知渠道，1代表云监控通知渠道 */
+  SendType?: number;
 }
 
 /** 多维分析的分析维度 */
@@ -1210,6 +1214,22 @@ declare interface MetricLabel {
   Value: string;
 }
 
+/** 提供多个Notice信息 */
+declare interface MonitorNotice {
+  /** 以数组的形式提供MonitorNoticeRule */
+  Notices?: MonitorNoticeRule[];
+}
+
+/** 云监控通知渠道组信息 */
+declare interface MonitorNoticeRule {
+  /** 云监控通知模版ID */
+  NoticeId?: string;
+  /** 云监控内容模版ID，不传默认内容模版 */
+  ContentTmplId?: string | null;
+  /** 告警级别,0:警告(Warn); 1:提醒(Info); 2:紧急 (Critical) */
+  AlarmLevels?: number[];
+}
+
 /** 告警策略中监控任务的执行时间点 */
 declare interface MonitorTime {
   /** 执行周期， 可选值：`Period`、`Fixed`、`Cron`。- Period：固定频率- Fixed：固定时间- Cron：Cron表达式 */
@@ -1795,8 +1815,8 @@ declare interface CreateAlarmRequest {
   TriggerCount: number;
   /** 告警重复的周期，单位是分钟。取值范围是0~1440。 */
   AlarmPeriod: number;
-  /** 关联的告警通知渠道组列表。-通过[获取通知渠道组列表](https://cloud.tencent.com/document/product/614/56462)获取关联的告警通知渠道组列表 */
-  AlarmNoticeIds: string[];
+  /** 关联的告警通知渠道组列表。-通过[获取通知渠道组列表](https://cloud.tencent.com/document/product/614/56462)获取关联的告警通知渠道组列表，和MonitorNotice互斥 */
+  AlarmNoticeIds?: string[];
   /** 告警发送通知的触发条件 注意: - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
   Condition?: string;
   /** 告警级别0:警告(Warn); 1:提醒(Info); 2:紧急 (Critical)。注意: - 不填则默认为0。- Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
@@ -3305,7 +3325,7 @@ declare interface ModifyAlarmRequest {
   TriggerCount?: number;
   /** 告警重复的周期。单位是分钟。取值范围是0~1440。 */
   AlarmPeriod?: number;
-  /** 关联的告警通知渠道列表。-通过[获取通知渠道组列表](https://cloud.tencent.com/document/product/614/56462)获取告警通知渠道列表 */
+  /** 关联的告警通知渠道组列表。-通过[获取通知渠道组列表](https://cloud.tencent.com/document/product/614/56462)获取关联的告警通知渠道组列表，和MonitorNotice互斥 */
   AlarmNoticeIds?: string[];
   /** 监控对象列表。 */
   AlarmTargets?: AlarmTarget[];

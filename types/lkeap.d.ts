@@ -467,6 +467,10 @@ declare interface GetEmbeddingRequest {
   Model: string;
   /** 说明：需要 embedding 的文本备注：单条query最多2000个字符，总条数最多7条 */
   Inputs: string[];
+  /** 说明：文本向量化的类型，为使得检索任务有更好的检索效果，建议区分查询文本（query）和文档文本（document）类型, 聚类、分类等对称任务可以不用特殊指定，采用系统默认值document即可。 */
+  TextType?: string;
+  /** 说明：自定义任务指令词，当且仅当TextType=query时，生效 */
+  Instruction?: string;
 }
 
 declare interface GetEmbeddingResponse {

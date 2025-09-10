@@ -398,6 +398,32 @@ declare interface DeviceSignatureInfo {
   DeviceSignature?: string;
 }
 
+/** 设备固件更新状态 */
+declare interface DeviceUpdateStatus {
+  /** 设备名 */
+  DeviceName?: string;
+  /** 最后处理时间 */
+  LastProcessTime?: number;
+  /** 状态 */
+  Status?: number;
+  /** 错误消息 */
+  ErrMsg?: string;
+  /** 返回码 */
+  Retcode?: number;
+  /** 目标更新版本 */
+  DstVersion?: string;
+  /** 下载中状态时的下载进度 */
+  Percent?: number | null;
+  /** 原版本号 */
+  OriVersion?: string | null;
+  /** 任务ID */
+  TaskId?: number | null;
+  /** 固件类型 */
+  FwType?: string;
+  /** 重试次数 */
+  RetryNum?: number;
+}
+
 /** 设备的用户 */
 declare interface DeviceUser {
   /** 用户ID */
@@ -546,6 +572,26 @@ declare interface FirmwareInfo {
   CreatorNickName?: string;
   /** 固件用户自定义配置信息 */
   UserDefined?: string;
+}
+
+/** 固件升级任务信息 */
+declare interface FirmwareTaskInfo {
+  /** 任务ID */
+  TaskId?: number | null;
+  /** 任务状态 */
+  Status?: number | null;
+  /** 任务类型 */
+  Type?: number | null;
+  /** 任务创建时间 */
+  CreateTime?: number | null;
+  /** 创建者 */
+  CreatorNickName?: string | null;
+  /** 创建者ID */
+  CreateUserId?: number | null;
+  /** 任务启动时间 */
+  CronTime?: number | null;
+  /** 固件类型 */
+  FwType?: string;
 }
 
 /** 实例信息公共实例过期时间 0001-01-01T00:00:00Z，公共实例是永久有效 */
@@ -732,6 +778,24 @@ declare interface LoRaGatewayLocation {
   Accuracy?: number;
   /** 海拔 */
   Altitude?: number;
+}
+
+/** 升级包类型详细信息 */
+declare interface OtaModuleInfo {
+  /** 模块创建时间 */
+  CreateTime?: number;
+  /** 产品名称 */
+  ProductName?: string;
+  /** 模块名称 */
+  Name?: string;
+  /** 产品ID */
+  ProductID?: string;
+  /** 模块类型 */
+  FwType?: string;
+  /** 是否系统内置升级包类型 */
+  IsBuildIn?: boolean;
+  /** 模块描述 */
+  Remark?: string;
 }
 
 /** 云存套餐包消耗统计 */
@@ -1250,6 +1314,48 @@ declare interface ActivateTWeCallLicenseResponse {
   RequestId?: string;
 }
 
+declare interface BatchUpdateFirmwareRequest {
+  /** 产品ID */
+  ProductID: string;
+  /** 固件新版本号 */
+  FirmwareVersion: string;
+  /** 固件原版本号 */
+  FirmwareOriVersion?: string;
+  /** 升级方式，0 静默升级 1 用户确认升级。 不填默认为静默升级方式 */
+  UpgradeMethod?: number;
+  /** 设备列表文件名称，根据文件列表升级固件需要填写此参数 */
+  FileName?: string;
+  /** 设备列表的文件md5值 */
+  FileMd5?: string;
+  /** 设备列表的文件大小值 */
+  FileSize?: number;
+  /** 需要升级的设备名称列表 */
+  DeviceNames?: string[];
+  /** 固件升级任务，默认超时时间。 最小取值120秒，最大为900秒 */
+  TimeoutInterval?: number;
+  /** 固件升级任务类型，默认静态升级值为空或1，动态升级值为7 */
+  Type?: number;
+  /** 任务延迟时间 */
+  DelayTime?: number;
+  /** 是否覆盖，0不覆盖，1覆盖 */
+  OverrideMode?: number;
+  /** 失败重试次数 */
+  MaxRetryNum?: number;
+  /** 重试间隔min */
+  RetryInterval?: number;
+  /** 固件模块 */
+  FwType?: string;
+  /** 用户自定义信息 */
+  TaskUserDefine?: string;
+}
+
+declare interface BatchUpdateFirmwareResponse {
+  /** 任务Id */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BindCloudStorageUserRequest {
   /** 产品ID */
   ProductId: string;
@@ -1678,6 +1784,22 @@ declare interface CreateLoRaGatewayResponse {
   RequestId?: string;
 }
 
+declare interface CreateOtaModuleRequest {
+  /** 产品ID */
+  ProductID: string;
+  /** 模块类型 */
+  FwType: string;
+  /** 模块类型名称 */
+  Name?: string;
+  /** 类型描述 */
+  Remark?: string;
+}
+
+declare interface CreateOtaModuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreatePositionFenceRequest {
   /** 位置空间Id */
   SpaceId: string;
@@ -1940,6 +2062,18 @@ declare interface DeleteLoRaGatewayRequest {
 }
 
 declare interface DeleteLoRaGatewayResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteOtaModuleRequest {
+  /** 产品ID */
+  ProductID: string;
+  /** 模块类型 */
+  FwType: string;
+}
+
+declare interface DeleteOtaModuleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2752,6 +2886,30 @@ declare interface DescribeFirmwareResponse {
   RequestId?: string;
 }
 
+declare interface DescribeFirmwareTaskDevicesRequest {
+  /** 产品ID */
+  ProductID: string;
+  /** 固件版本 */
+  FirmwareVersion: string;
+  /** 筛选条件 */
+  Filters?: SearchKeyword[];
+  /** 查询偏移量 */
+  Offset?: number;
+  /** 查询的数量 */
+  Limit?: number;
+  /** 固件类型 */
+  FwType?: string;
+}
+
+declare interface DescribeFirmwareTaskDevicesResponse {
+  /** 固件升级任务的设备总数 */
+  Total?: number | null;
+  /** 固件升级任务的设备列表 */
+  Devices?: DeviceUpdateStatus[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeFirmwareTaskRequest {
   /** 产品ID */
   ProductID: string;
@@ -2798,6 +2956,30 @@ declare interface DescribeFirmwareTaskResponse {
   OverrideMode?: number;
   /** 用户自定义消息 */
   TaskUserDefine?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFirmwareTasksRequest {
+  /** 产品ID */
+  ProductID: string;
+  /** 固件版本号 */
+  FirmwareVersion: string;
+  /** 查询偏移量 */
+  Offset: number;
+  /** 返回查询结果条数 */
+  Limit: number;
+  /** 搜索过滤条件 */
+  Filters?: SearchKeyword[];
+  /** 固件类型 */
+  FwType?: string;
+}
+
+declare interface DescribeFirmwareTasksResponse {
+  /** 固件升级任务列表 */
+  TaskInfos?: FirmwareTaskInfo[] | null;
+  /** 固件升级任务总数 */
+  Total?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3820,6 +4002,36 @@ declare interface ListFirmwaresResponse {
   RequestId?: string;
 }
 
+declare interface ListOtaModulesRequest {
+  /** 获取的页数 */
+  PageNum: number;
+  /** 分页的大小 */
+  PageSize: number;
+  /** 搜索过滤条件 */
+  Filters?: SearchKeyword[];
+}
+
+declare interface ListOtaModulesResponse {
+  /** 固件总数 */
+  TotalCount?: number;
+  /** 固件列表 */
+  Modules?: OtaModuleInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListProductOtaModulesRequest {
+  /** 产品ID */
+  ProductID: string;
+}
+
+declare interface ListProductOtaModulesResponse {
+  /** 固件列表 */
+  Modules?: OtaModuleInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListTopicPolicyRequest {
   /** 产品ID */
   ProductId: string;
@@ -4494,6 +4706,22 @@ declare interface UpdateFirmwareResponse {
   RequestId?: string;
 }
 
+declare interface UpdateOtaModuleRequest {
+  /** 产品ID */
+  ProductID: string;
+  /** 模块类型 */
+  FwType: string;
+  /** 模块类型名称 */
+  Name?: string;
+  /** 模块类型描述 */
+  Remark?: string;
+}
+
+declare interface UpdateOtaModuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UploadFirmwareRequest {
   /** 产品ID */
   ProductID: string;
@@ -4523,6 +4751,8 @@ declare interface Iotexplorer {
   (): Versions;
   /** 激活TWeCall {@link ActivateTWeCallLicenseRequest} {@link ActivateTWeCallLicenseResponse} */
   ActivateTWeCallLicense(data: ActivateTWeCallLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateTWeCallLicenseResponse>;
+  /** 批量升级固件 {@link BatchUpdateFirmwareRequest} {@link BatchUpdateFirmwareResponse} */
+  BatchUpdateFirmware(data: BatchUpdateFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<BatchUpdateFirmwareResponse>;
   /** 绑定云存用户 {@link BindCloudStorageUserRequest} {@link BindCloudStorageUserResponse} */
   BindCloudStorageUser(data: BindCloudStorageUserRequest, config?: AxiosRequestConfig): AxiosPromise<BindCloudStorageUserResponse>;
   /** 批量绑定子设备 {@link BindDevicesRequest} {@link BindDevicesResponse} */
@@ -4565,6 +4795,8 @@ declare interface Iotexplorer {
   CreateLoRaFrequency(data?: CreateLoRaFrequencyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoRaFrequencyResponse>;
   /** 新建 LoRa 网关设备 {@link CreateLoRaGatewayRequest} {@link CreateLoRaGatewayResponse} */
   CreateLoRaGateway(data: CreateLoRaGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoRaGatewayResponse>;
+  /** 新建OTA模块 {@link CreateOtaModuleRequest} {@link CreateOtaModuleResponse} */
+  CreateOtaModule(data: CreateOtaModuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOtaModuleResponse>;
   /** 创建围栏 {@link CreatePositionFenceRequest} {@link CreatePositionFenceResponse} */
   CreatePositionFence(data: CreatePositionFenceRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePositionFenceResponse>;
   /** 创建位置空间 {@link CreatePositionSpaceRequest} {@link CreatePositionSpaceResponse} */
@@ -4595,6 +4827,8 @@ declare interface Iotexplorer {
   DeleteLoRaFrequency(data?: DeleteLoRaFrequencyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoRaFrequencyResponse>;
   /** 删除 LoRa 网关 {@link DeleteLoRaGatewayRequest} {@link DeleteLoRaGatewayResponse} */
   DeleteLoRaGateway(data: DeleteLoRaGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoRaGatewayResponse>;
+  /** 删除OTA模块 {@link DeleteOtaModuleRequest} {@link DeleteOtaModuleResponse} */
+  DeleteOtaModule(data: DeleteOtaModuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOtaModuleResponse>;
   /** 删除围栏 {@link DeletePositionFenceRequest} {@link DeletePositionFenceResponse} */
   DeletePositionFence(data: DeletePositionFenceRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePositionFenceResponse>;
   /** 删除位置空间 {@link DeletePositionSpaceRequest} {@link DeletePositionSpaceResponse} */
@@ -4679,6 +4913,10 @@ declare interface Iotexplorer {
   DescribeFirmware(data: DescribeFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareResponse>;
   /** 查询固件升级任务列表 {@link DescribeFirmwareTaskRequest} {@link DescribeFirmwareTaskResponse} */
   DescribeFirmwareTask(data: DescribeFirmwareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareTaskResponse>;
+  /** 查询固件升级任务的设备列表 {@link DescribeFirmwareTaskDevicesRequest} {@link DescribeFirmwareTaskDevicesResponse} */
+  DescribeFirmwareTaskDevices(data: DescribeFirmwareTaskDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareTaskDevicesResponse>;
+  /** 搜索固件升级任务列表 {@link DescribeFirmwareTasksRequest} {@link DescribeFirmwareTasksResponse} */
+  DescribeFirmwareTasks(data: DescribeFirmwareTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareTasksResponse>;
   /** 查询设备固件升级状态 {@link DescribeFirmwareUpdateStatusRequest} {@link DescribeFirmwareUpdateStatusResponse} */
   DescribeFirmwareUpdateStatus(data: DescribeFirmwareUpdateStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFirmwareUpdateStatusResponse>;
   /** 查询云存卡套餐信息 {@link DescribeFreeCloudStorageNumRequest} {@link DescribeFreeCloudStorageNumResponse} */
@@ -4787,6 +5025,10 @@ declare interface Iotexplorer {
   ListEventHistory(data: ListEventHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<ListEventHistoryResponse>;
   /** 获取固件列表 {@link ListFirmwaresRequest} {@link ListFirmwaresResponse} */
   ListFirmwares(data: ListFirmwaresRequest, config?: AxiosRequestConfig): AxiosPromise<ListFirmwaresResponse>;
+  /** 获取OTA模块列表 {@link ListOtaModulesRequest} {@link ListOtaModulesResponse} */
+  ListOtaModules(data: ListOtaModulesRequest, config?: AxiosRequestConfig): AxiosPromise<ListOtaModulesResponse>;
+  /** 获取产品OTA模块列表 {@link ListProductOtaModulesRequest} {@link ListProductOtaModulesResponse} */
+  ListProductOtaModules(data: ListProductOtaModulesRequest, config?: AxiosRequestConfig): AxiosPromise<ListProductOtaModulesResponse>;
   /** 获取Topic列表 {@link ListTopicPolicyRequest} {@link ListTopicPolicyResponse} */
   ListTopicPolicy(data: ListTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopicPolicyResponse>;
   /** 更新应用 {@link ModifyApplicationRequest} {@link ModifyApplicationResponse} */
@@ -4867,6 +5109,8 @@ declare interface Iotexplorer {
   UpdateDevicesEnableState(data: UpdateDevicesEnableStateRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDevicesEnableStateResponse>;
   /** 更新设备固件 {@link UpdateFirmwareRequest} {@link UpdateFirmwareResponse} */
   UpdateFirmware(data: UpdateFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFirmwareResponse>;
+  /** 修改OTA模块 {@link UpdateOtaModuleRequest} {@link UpdateOtaModuleResponse} */
+  UpdateOtaModule(data: UpdateOtaModuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOtaModuleResponse>;
   /** 创建固件版本信息 {@link UploadFirmwareRequest} {@link UploadFirmwareResponse} */
   UploadFirmware(data: UploadFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<UploadFirmwareResponse>;
 }

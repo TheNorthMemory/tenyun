@@ -962,7 +962,7 @@ declare interface HttpHeaderPathRule {
   HeaderMode: string | null;
   /** http 头部名称，最多可设置 100 个字符 */
   HeaderName: string | null;
-  /** http 头部值，最多可设置 2000 个字符Mode 为 del 时非必填Mode 为 add/set 时必填 */
+  /** http 头部值，自定义请求头中最多可设置 1000 个字符，自定义响应头中最多可以设置 2000 个字符Mode 为 del 时非必填Mode 为 add/set 时必填 */
   HeaderValue: string | null;
   /** 规则类型：all：所有文件生效file：指定文件后缀生效directory：指定路径生效path：指定绝对路径生效 */
   RuleType: string | null;

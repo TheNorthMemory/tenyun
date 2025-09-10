@@ -625,7 +625,7 @@ declare interface WidgetVO {
 }
 
 declare interface ApplyEmbedIntervalRequest {
-  /** 分享项目id，必选 */
+  /** 分享项目id */
   ProjectId?: number;
   /** 分享页面id，嵌出看板时此为空值0，ChatBI嵌出时不传 */
   PageId?: number;
@@ -1106,7 +1106,7 @@ declare interface DescribePermissionRanksInfoResponse {
   Msg?: string | null;
   /** 112 */
   Extra?: string | null;
-  /** 1 */
+  /** 无 */
   Data?: RankInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

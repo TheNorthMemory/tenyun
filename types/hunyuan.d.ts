@@ -500,6 +500,10 @@ declare interface WebSearchOptions {
   UserLocation?: UserLocation;
   /** 打开开关，会返回搜索状态 */
   Processes?: boolean;
+  /** 是否开启图文混排 */
+  EnableImage?: boolean;
+  /** 是否开启音乐 */
+  EnableMusic?: boolean;
 }
 
 declare interface ActivateServiceRequest {

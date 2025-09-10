@@ -1128,6 +1128,10 @@ declare interface DescribeInstanceResponse {
   TrustedCaLimit?: number;
   /** 服务端证书最大数量 */
   ServerCertLimit?: number;
+  /** topic前缀最大层级 */
+  TopicPrefixSlashLimit?: number;
+  /** 单客户端发送消息限速，单位 条/秒 */
+  MessageRate?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1174,6 +1178,18 @@ declare interface DescribeMessageDetailsResponse {
   Qos?: string;
   /** 源topic */
   OriginTopic?: string;
+  /** 内容类型（MQTT5）含义：指示消息载荷的内容类型，使用标准的 MIME 类型格式。这帮助接收方正确解析和处理消息内容。示例：application/json：表示载荷是 JSON 格式的数据。text/plain：表示载荷是纯文本。application/octet-stream：表示载荷是二进制数据。 */
+  ContentType?: string;
+  /** 载荷格式指示符（MQTT5）含义：指示载荷的格式，是一个布尔值。0表示未指定格式（二进制），1表示 UTF-8 编码的字符串。示例：值为0：当载荷是二进制数据，如图片、音频等。值为1：当载荷是 UTF-8 编码的文本，如 JSON 字符串、XML 等。 */
+  PayloadFormatIndicator?: number;
+  /** 消息过期间隔（MQTT5）含义：指定消息在被丢弃前的有效时间（秒）。如果消息在过期前未能送达，则会被 MQTT 服务器丢弃。示例：值为60：表示消息在发布后的 60 秒内有效，过期后未送达则被丢弃。值为0：表示消息不过期，永久有效（直到被接收或会话结束）。 */
+  MessageExpiryInterval?: number;
+  /** 响应主题（MQTT5）含义：指定一个主题，用于请求 - 响应模式中的响应消息。发送方可以指定接收方应该将响应发送到哪个主题。示例：发送方发布请求到主题devices/device1/commands，并设置ResponseTopic为devices/device1/responses。接收方处理请求后，将响应发布到devices/device1/responses主题。 */
+  ResponseTopic?: string;
+  /** 关联数据（MQTT5）含义：用于关联请求和响应的标识符，通常是一个字节数组。在请求 - 响应模式中，发送方设置此值，接收方在响应中包含相同的值，以便发送方识别响应对应的请求。示例：发送方生成一个唯一 ID（如 UUID 的字节数组）作为CorrelationData，附加到请求消息中。接收方在响应消息中包含相同的CorrelationData，发送方通过比较此值来匹配响应和请求。 */
+  CorrelationData?: string;
+  /** 订阅标识符（MQTT5）含义：为订阅分配的唯一标识符，用于标识客户端的特定订阅。当服务器向客户端发送消息时，可以包含此标识符，帮助客户端识别消息对应的订阅。示例：客户端订阅主题devices/+/temperature，并设置SubscriptionIdentifier为123。当服务器向客户端发送此主题的消息时，会在消息中包含SubscriptionIdentifier: 123，客户端可以根据此值知道消息是通过哪个订阅接收的。 */
+  SubscriptionIdentifier?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1429,6 +1445,8 @@ declare interface ModifyInstanceRequest {
   UseDefaultServerCert?: boolean;
   /** TLS：单向认证mTLS；双向认证BYOC：一机一证 */
   X509Mode?: string;
+  /** 单客户端消息收发限速单位 条/秒 */
+  MessageRate?: number;
 }
 
 declare interface ModifyInstanceResponse {

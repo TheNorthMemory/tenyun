@@ -1032,6 +1032,16 @@ declare interface ItemInfo {
   Value?: Value | null;
 }
 
+/** 自定义抽取需要的字段名称、字段类型、字段提示词。 */
+declare interface ItemNames {
+  /** 自定义抽取功能需返回的字段名称。 */
+  KeyName?: string;
+  /** 默认 0；0表示kv对 1表示 表格字段。 */
+  KeyType?: number;
+  /** 抽取字段的描述内容。 */
+  KeyPrompt?: string;
+}
+
 /** 发票字段坐标信息。包括字段英文名称、字段值所在位置的四点坐标、字段所属行号，具体内容请点击左侧链接。 */
 declare interface ItemPolygonInfo {
   /** 发票的英文字段名称（如Title） */
@@ -3340,6 +3350,28 @@ declare interface ClassifyStoreNameResponse {
   RequestId?: string;
 }
 
+declare interface DescribeExtractDocAgentJobRequest {
+  /** 任务唯一ID。由服务端生成。 */
+  JobId?: string;
+}
+
+declare interface DescribeExtractDocAgentJobResponse {
+  /** 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负。 */
+  Angle?: number;
+  /** 配置结构化文本信息。 */
+  StructuralList?: GroupInfo[];
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为""。 */
+  ErrorCode?: string;
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。 */
+  ErrorMessage?: string;
+  /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
+  JobStatus?: string;
+  /** 思考过程 */
+  ThoughtContent?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DriverLicenseOCRRequest {
   /** 图片的 Base64 值。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -5188,6 +5220,30 @@ declare interface SmartStructuralOCRResponse {
   RequestId?: string;
 }
 
+declare interface SubmitExtractDocAgentJobRequest {
+  /** 图片/PDF的 Base64 值。 要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF、WORD、EXCEL格式。 图片支持的像素范围：需介于20-10000px之间。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  ImageBase64?: string;
+  /** 图片/PDF的 Url 地址。 要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF、WORD、EXCEL格式。 图片支持的像素范围：需介于20-10000px之间。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  ImageUrl?: string;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为前5页。 */
+  PdfPageNumber?: number;
+  /** 自定义抽取需要的字段名称、字段类型、字段提示词。 */
+  ItemNames?: ItemNames[];
+  /** 是否需要返回坐标，默认false。 */
+  EnableCoord?: boolean;
+  /** 起始页 */
+  FileStartPageNumber?: number;
+  /** 结束页 */
+  FileEndPageNumber?: number;
+}
+
+declare interface SubmitExtractDocAgentJobResponse {
+  /** 任务唯一ID。由服务端生成。 */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface TableOCRRequest {
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -5573,6 +5629,8 @@ declare interface Ocr {
   ClassifyDetectOCR(data?: ClassifyDetectOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ClassifyDetectOCRResponse>;
   /** 商户照片分类 {@link ClassifyStoreNameRequest} {@link ClassifyStoreNameResponse} */
   ClassifyStoreName(data?: ClassifyStoreNameRequest, config?: AxiosRequestConfig): AxiosPromise<ClassifyStoreNameResponse>;
+  /** 查询文档处理任务 {@link DescribeExtractDocAgentJobRequest} {@link DescribeExtractDocAgentJobResponse} */
+  DescribeExtractDocAgentJob(data?: DescribeExtractDocAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtractDocAgentJobResponse>;
   /** 驾驶证识别 {@link DriverLicenseOCRRequest} {@link DriverLicenseOCRResponse} */
   DriverLicenseOCR(data?: DriverLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<DriverLicenseOCRResponse>;
   /** 完税证明识别 {@link DutyPaidProofOCRRequest} {@link DutyPaidProofOCRResponse} */
@@ -5703,6 +5761,8 @@ declare interface Ocr {
   ShipInvoiceOCR(data?: ShipInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ShipInvoiceOCRResponse>;
   /** 智能结构化识别 {@link SmartStructuralOCRRequest} {@link SmartStructuralOCRResponse} */
   SmartStructuralOCR(data?: SmartStructuralOCRRequest, config?: AxiosRequestConfig): AxiosPromise<SmartStructuralOCRResponse>;
+  /** 提交文档处理任务 {@link SubmitExtractDocAgentJobRequest} {@link SubmitExtractDocAgentJobResponse} */
+  SubmitExtractDocAgentJob(data?: SubmitExtractDocAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitExtractDocAgentJobResponse>;
   /** 表格识别（V1) {@link TableOCRRequest} {@link TableOCRResponse} */
   TableOCR(data?: TableOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TableOCRResponse>;
   /** 出租车发票识别 {@link TaxiInvoiceOCRRequest} {@link TaxiInvoiceOCRResponse} */

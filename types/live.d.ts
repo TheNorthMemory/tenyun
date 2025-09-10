@@ -4843,7 +4843,7 @@ declare interface ModifyCasterRequest {
   CasterId: number;
   /** 导播台名称 */
   CasterName?: string;
-  /** 导播台的描述最大允许长度256 */
+  /** 导播台的描述，最大允许长度256 */
   Description?: string;
   /** 录制模板id。默认为0。当使用直播录制功能时，可将使用的录制模版填入。该接口仅保存字段，不涉及任何录制功能。 */
   RecordTemplateId?: number;

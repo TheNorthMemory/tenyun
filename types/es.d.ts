@@ -42,7 +42,7 @@ declare interface ChunkDocument {
 
 /** 文档信息 */
 declare interface Document {
-  /** 文件类型。支持的文件类型：PDF、DOC、DOCX、PPT、PPTX、MD、TXT、XLS、XLSX、CSV、PNG、JPG、JPEG、BMP、GIF、WEBP、HEIC、EPS、ICNS、IM、PCX、PPM、TIFF、XBM、HEIF、JP2支持的文件大小：- PDF、DOC、DOCX、PPT、PPTX 支持100M- MD、TXT、XLS、XLSX、CSV 支持10M- 其他支持20M */
+  /** 支持的文件类型：PDF、DOC、DOCX、PPT、PPTX、MD、TXT、XLS、XLSX、CSV、PNG、JPG、JPEG、BMP、GIF、WEBP、HEIC、EPS、ICNS、IM、PCX、PPM、TIFF、XBM、HEIF、JP2文档解析支持的文件大小：-PDF、DOC、DOCX、PPT、PPTX支持100M-MD、TXT、XLS、XLSX、CSV支特10M-其他支持20M文本切片支持的文件大小：-PDF最大300M-D0CX、D0C、PPT、PPTX最大200M-TXT、MD最大10M-其他最大20M */
   FileType: string;
   /** 文件存储于腾讯云的 URL 可保障更高的下载速度和稳定性，使用腾讯云COS 文件地址。 */
   FileUrl?: string;
@@ -80,10 +80,14 @@ declare interface EmbeddingData {
 
 /** 会话内容，按对话时间从旧到新在数组中排列，长度受模型窗口大小限制。 */
 declare interface Message {
-  /** 角色, ‘system', ‘user'，'assistant'或者'tool', 在message中, 除了system，其他必须是user与assistant交替(一问一答) */
+  /** 角色，可选值包括 system、user、assistant、 tool。 */
   Role?: string;
   /** 具体文本内容 */
   Content?: string;
+  /** 当role为tool时传入，标识具体的函数调用 */
+  ToolCallId?: string;
+  /** 模型生成的工具调用 */
+  ToolCalls?: ToolCall[];
 }
 
 /** 联网搜索选项。 */
@@ -100,6 +104,8 @@ declare interface OutputMessage {
   Content?: string;
   /** 推理内容 */
   ReasoningContent?: string;
+  /** 模型生成的工具调用 */
+  ToolCalls?: ToolCall[];
 }
 
 /** 消耗页数 */
@@ -110,11 +116,11 @@ declare interface PageUsage {
 
 /** 文档信息 */
 declare interface ParseDocument {
-  /** 文件类型。支持的文件类型：PDF、DOC、DOCX、PPT、PPTX、MD、TXT、XLS、XLSX、CSV、PNG、JPG、JPEG、BMP、GIF、WEBP、HEIC、EPS、ICNS、IM、PCX、PPM、TIFF、XBM、HEIF、JP2支持的文件大小：- PDF、DOC、DOCX、PPT、PPTX 支持100M- MD、TXT、XLS、XLSX、CSV 支持10M- 其他支持20M */
+  /** 支持的文件类型：PDF、DOC、DOCX、PPT、PPTX、MD、TXT、XLS、XLSX、CSV、PNG、JPG、JPEG、BMP、GIF、WEBP、HEIC、EPS、ICNS、IM、PCX、PPM、TIFF、XBM、HEIF、JP2文档解析支持的文件大小：-PDF、DOC、DOCX、PPT、PPTX支持100M-MD、TXT、XLS、XLSX、CSV支特10M-其他支持20M文本切片支持的文件大小：-PDF最大300M-D0CX、D0C、PPT、PPTX最大200M-TXT、MD最大10M-其他最大20M */
   FileType: string;
   /** 文件存储于腾讯云的 URL 可保障更高的下载速度和稳定性，使用腾讯云COS 文件地址。 */
   FileUrl?: string;
-  /** 文件的 base64 值，携带 MineType前缀信息。编码后的后的文件不超过 10M。支持的文件大小：所下载文件经Base64编码后不超过 8M。文件下载时间不超过3秒。支持的图片像素：单边介于20-10000px之间。 */
+  /** 文件的 base64 值，携带 MineType前缀信息。编码后的后的文件不超过 10M。支持的文件大小：所下载文件经Base64编码后不超过 8M。文件下载时间不超过3秒。支持的图片像素：单边介于20-10000px之间。文件的 FileUrl、FileContent必须提供一个，如果都提供只使用 FileUrl。 */
   FileContent?: string;
   /** 文档解析配置 */
   DocumentParseConfig?: DocumentParseConfig;
@@ -142,6 +148,26 @@ declare interface TokenUsage {
   CompletionTokens?: number;
   /** 表示prompt_tokens和completion_tokens之和 */
   TotalTokens?: number;
+}
+
+/** 模型生成的工具调用 */
+declare interface ToolCall {
+  /** 工具调用id */
+  Id?: string;
+  /** 工具调用类型，当前只支持function */
+  Type?: string;
+  /** 具体的function调用 */
+  Function?: ToolCallFunction;
+  /** 索引值 */
+  Index?: number;
+}
+
+/** 具体的function调用 */
+declare interface ToolCallFunction {
+  /** function名称 */
+  Name?: string;
+  /** function参数，一般为json字符串 */
+  Arguments?: string;
 }
 
 /** token消耗总数 */

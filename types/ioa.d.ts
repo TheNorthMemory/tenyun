@@ -909,7 +909,9 @@ declare interface DescribeAccountGroupsResponse {
 }
 
 declare interface DescribeAggrSoftCategorySoftListRequest {
-  /** os类别(只支持32位) */
+  /** 过滤条件、分页参数Name - String - 过滤支持：是 - 操作符:eq,neq,like,ilike,nlike - 排序支持：是 - 按类别名称过滤或排序。CorpName - String - 过滤支持：是 - 操作符:eq,neq,like,ilike,nlike - 排序支持：是 - 按CorpName过滤或排序。Version - String - 过滤支持：否 - 操作符:eq,like - 排序支持：是 - 按版本排序。InstalledDeviceCount - int - 过滤支持：否 - 操作符:eq,like - 排序支持：是 - 按安装设备数量排序。GenuineRate - float - 过滤支持：否 - 操作符:eq,like - 排序支持：是 - 按正版率排序。AuthNum - int - 过滤支持：否 - 操作符:eq,like - 排序支持：是 - 按授权数量排序。CategoryNamePath - String - 过滤支持：否 - 操作符:eq,like - 排序支持：是 - 按类别路径名排序。 */
+  Condition?: Condition;
+  /** 操作系统类型（0: win，1：linux，2: mac，4：android，5：ios 默认值0） */
   OsType?: number;
 }
 
@@ -935,9 +937,11 @@ declare interface DescribeAggrSoftDetailResponse {
 }
 
 declare interface DescribeAggrSoftDeviceListRequest {
+  /** 过滤条件 */
+  Condition?: Condition;
   /** 软件名 */
   Name?: string;
-  /** 操作系统 */
+  /** 0:win 2:mac */
   OsType?: number;
 }
 
@@ -1129,6 +1133,8 @@ declare interface DescribeSoftwareInformationRequest {
   Mid?: string;
   /** 过滤条件、分页参数Name - String - 过滤支持：是 - 操作符:eq,like - 排序支持：是 。 */
   Condition?: Condition;
+  /** 0:win 2:mac */
+  OsType?: number;
 }
 
 declare interface DescribeSoftwareInformationResponse {
@@ -1163,6 +1169,8 @@ declare interface ExportSoftwareInformationListRequest {
   Mid?: string;
   /** 过滤条件、分页参数Name - String - 过滤支持：是 - 操作符:eq,like - 排序支持：是 。 */
   Condition?: Condition;
+  /** 系统类型0:win 2:mac */
+  OsType?: number;
 }
 
 declare interface ExportSoftwareInformationListResponse {

@@ -114,7 +114,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 241+ 款产品，12579+ 服务数</summary>
+<details><summary>共计 241+ 款产品，12598+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -225,7 +225,7 @@ faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-
 fmu | [人脸试妆](https://cloud.tencent.com/document/product/1172) | 2019-12-13(7) |
 ft | [人像变换](https://cloud.tencent.com/document/product/1202) | 2020-03-04(6) |
 gaap | [全球应用加速](https://cloud.tencent.com/document/product/608) | 2018-05-29(102) |
-gme | [游戏多媒体引擎](https://cloud.tencent.com/document/product/607) | 2018-07-11(28) |
+gme | [游戏多媒体引擎](https://cloud.tencent.com/document/product/607) | 2018-07-11(37) |
 goosefs | [数据加速器 GooseFS](https://cloud.tencent.com/document/product/1424) | 2022-05-19(27) |
 gs | [云游戏](https://cloud.tencent.com/document/product/1162) | 2019-11-18(76) |
 gwlb | [网关负载均衡](https://cloud.tencent.com/document/product/1782) | 2024-09-06(18) |
@@ -245,7 +245,7 @@ ims | [图片内容安全](https://cloud.tencent.com/document/product/1125) | 20
 ioa | [iOA 零信任安全管理系统](https://cloud.tencent.com/document/product/1092) | 2022-06-01(22) |
 iot | [加速物联网套件](https://cloud.tencent.com/document/product/568) | 2018-01-23(45) |
 iotcloud | [物联网通信](https://cloud.tencent.com/document/product/634) | 2021-04-08(73) | 2018-06-14(69) |
-iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(174) |
+iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(182) |
 iotvideo | [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) | 2021-11-25(108) | 2020-12-15(79)<br/>2019-11-26(68) |
 iotvideoindustry | [物联网智能视频服务（行业版）](https://cloud.tencent.com/document/product/1361) | 2020-12-01(104) |
 irp | [智能推荐平台](https://cloud.tencent.com/document/product/1541) | 2022-08-05(7) | 2022-03-24(4) |
@@ -275,7 +275,7 @@ msp | [迁移服务平台](https://cloud.tencent.com/document/product/659) | 201
 nlp | [NLP 技术](https://cloud.tencent.com/document/product/271) | 2019-04-08(6) |
 npp | 号码保护 | 2019-08-23(8) |
 oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(39) |
-ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(88) |
+ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(90) |
 omics | [腾讯健康组学平台](https://cloud.tencent.com/document/product/1643) | 2022-11-28(20) |
 open | 腾讯云 OAuth | 2018-12-25(2) |
 organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(129) | 2018-12-25(20) |

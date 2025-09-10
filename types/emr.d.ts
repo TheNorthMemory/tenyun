@@ -174,6 +174,10 @@ declare interface CBSInstance {
   EmrResourceId?: string;
   /** 包销到期时间 */
   UnderwriteExpiredTime?: string;
+  /** 标签 */
+  Tags?: TagInfo[];
+  /** 云硬盘额外性能值，单位：MB/s */
+  ThroughputPerformance?: number;
 }
 
 /** 容器集群Pod服务CLB设置 */
@@ -1244,6 +1248,8 @@ declare interface LoadAutoScaleStrategy {
   GraceDownFlag?: boolean;
   /** 优雅缩容等待时间 */
   GraceDownTime?: number;
+  /** 是否开启任务保护 */
+  GraceDownProtectFlag?: boolean;
   /** 绑定标签列表 */
   Tags?: Tag[] | null;
   /** 预设配置组 */
@@ -2664,6 +2670,14 @@ declare interface Tag {
   TagValue?: string;
 }
 
+/** 标签信息 */
+declare interface TagInfo {
+  /** 标签键 */
+  Key?: string;
+  /** 标签值 */
+  Value?: string;
+}
+
 /** Kubernetes Taint */
 declare interface Taint {
   /** Taint Key */
@@ -2710,6 +2724,8 @@ declare interface TimeAutoScaleStrategy {
   GraceDownFlag?: boolean;
   /** 优雅缩容等待时间 */
   GraceDownTime?: number;
+  /** 是否开启任务保护 */
+  GraceDownProtectFlag?: boolean;
   /** 绑定标签列表 */
   Tags?: Tag[] | null;
   /** 预设配置组 */
@@ -3145,7 +3161,7 @@ declare interface CreateCloudInstanceRequest {
   EksClusterId?: string;
   /** 产品Id，不同产品ID表示不同的EMR产品版本。取值范围：60:表示EMR-TKE-V1.1.055:表示EMR-TKE-V1.0.152:表示EMR-TKE-V1.0.0 */
   ProductId?: number;
-  /** 客户端token，唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，小于等于64个字符，例如 a9a90aa6----fae36063280示例值：a9a90aa6----fae36063280 */
+  /** 客户端token，唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，小于等于64个字符，例如 a9a90aa6fae36063280示例值：a9a90aa6fae36063280 */
   ClientToken?: string;
   /** 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。 */
   VPCSettings?: VPCSettings;
@@ -3157,12 +3173,16 @@ declare interface CreateCloudInstanceRequest {
   MetaDBInfo?: CustomMetaDBInfo;
   /** 标签信息 */
   Tags?: Tag[];
-  /** 登陆密码，LoginSettings中的Password字段 */
+  /** 登录密码，LoginSettings中的Password字段 */
   LoginSettings?: LoginSettings;
   /** 共享服务信息 */
   ExternalService?: ExternalService[];
   /** 可用区id */
   ZoneId?: number;
+  /** 数据库版本 */
+  DefaultMetaVersion?: string;
+  /** 是否开通审计 */
+  NeedCdbAudit?: number;
 }
 
 declare interface CreateCloudInstanceResponse {
@@ -3219,6 +3239,10 @@ declare interface CreateClusterRequest {
   NodeMarks?: NodeMark[];
   /** clb id */
   LoadBalancerId?: string;
+  /** 数据库版本：mysql8/tdsql8/mysql5 */
+  DefaultMetaVersion?: string;
+  /** 是否开通数据库审计 */
+  NeedCdbAudit?: number;
 }
 
 declare interface CreateClusterResponse {
@@ -3313,6 +3337,10 @@ declare interface CreateInstanceRequest {
   NodeMarks?: NodeMark[];
   /** CLB id */
   LoadBalancerId?: string;
+  /** 数据库类型：mysql8/tdsql8 */
+  DefaultMetaVersion?: string;
+  /** 是否开通审计：0:不开通,1:开通 */
+  NeedCdbAudit?: number;
 }
 
 declare interface CreateInstanceResponse {
@@ -3961,6 +3989,8 @@ declare interface DescribeNodeDataDisksRequest {
   Limit?: number;
   /** 数据偏移值 */
   Offset?: number;
+  /** 场景值：ModifyDiskExtraPerformance ：调整数据盘额外性能 */
+  Scene?: string;
 }
 
 declare interface DescribeNodeDataDisksResponse {
@@ -3970,6 +4000,8 @@ declare interface DescribeNodeDataDisksResponse {
   CBSList?: CBSInstance[] | null;
   /** 云盘最大容量 */
   MaxSize?: number;
+  /** 云硬盘最大额外性能值 */
+  MaxThroughputPerformance?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4433,6 +4465,10 @@ declare interface InquiryPriceCreateInstanceRequest {
   VersionID?: number;
   /** 可用区的规格信息 */
   MultiZoneSettings?: MultiZoneSetting[];
+  /** 数据库版本 */
+  DefaultMetaVersion?: string;
+  /** 0:不开通审计；1:开通审计 */
+  NeedCdbAudit?: number;
 }
 
 declare interface InquiryPriceCreateInstanceResponse {

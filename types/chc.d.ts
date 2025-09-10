@@ -478,6 +478,16 @@ declare interface PersonnelVisitBaseInfo {
   IdcUnitNameList?: string[];
 }
 
+/** 人员到访时的车辆信息 */
+declare interface PersonnelVisitCar {
+  /** 车牌号 */
+  CarNumber: string;
+  /** 驾驶人姓名 */
+  DriverName: string;
+  /** 驾驶人身份证号 */
+  DriverNumber: string;
+}
+
 /** 机位信息 */
 declare interface Position {
   /** 机位ID */
@@ -694,6 +704,8 @@ declare interface WorkOrderData {
   CreateTime?: string;
   /** 工单完成时间 */
   FinishTime?: string;
+  /** 工单关联的dcops单号 */
+  TicketId?: string;
 }
 
 /** 带有分类的工单类型列表 */
@@ -831,6 +843,8 @@ declare interface CreatePersonnelVisitWorkOrderRequest {
   VisitReason: string[];
   /** 到访说明 */
   VisitRemark: string;
+  /** 到访人员车辆信息 */
+  CarSet?: PersonnelVisitCar[];
 }
 
 declare interface CreatePersonnelVisitWorkOrderResponse {
@@ -1262,6 +1276,8 @@ declare interface DescribePersonnelVisitWorkOrderDetailResponse {
   OrderStatus?: string;
   /** 拒绝原因 */
   RejectReason?: string;
+  /** 到访人员车辆信息 */
+  CarSet?: PersonnelVisitCar[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
