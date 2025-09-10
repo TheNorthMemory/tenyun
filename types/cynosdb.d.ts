@@ -1037,7 +1037,7 @@ declare interface CynosdbInstanceGrp {
   /** 任务列表 */
   Tasks?: ObjectTask[];
   /** biz_net_service表id */
-  NetServiceId: number;
+  NetServiceId?: number;
 }
 
 /** 数据库权限列表 */

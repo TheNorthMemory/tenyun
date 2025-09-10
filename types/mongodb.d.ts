@@ -713,7 +713,7 @@ declare interface CreateBackupDownloadTaskRequest {
 
 declare interface CreateBackupDownloadTaskResponse {
   /** 下载任务状态 */
-  Tasks: BackupDownloadTaskStatus[];
+  Tasks?: BackupDownloadTaskStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1481,7 +1481,7 @@ declare interface IsolateDBInstanceRequest {
 
 declare interface IsolateDBInstanceResponse {
   /** 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。 */
-  AsyncRequestId: string;
+  AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1690,6 +1690,18 @@ declare interface SetBackupRulesRequest {
 }
 
 declare interface SetBackupRulesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SetDBInstanceDeletionProtectionRequest {
+  /** 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同 */
+  InstanceIds: string[];
+  /** 实例销毁保护选项，取值范围：0-关闭销毁保护，1-开启销毁保护 */
+  EnableDeletionProtection: number;
+}
+
+declare interface SetDBInstanceDeletionProtectionResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2277,6 +2289,8 @@ declare interface Mongodb {
   SetAccountUserPrivilege(data: SetAccountUserPrivilegeRequest, config?: AxiosRequestConfig): AxiosPromise<SetAccountUserPrivilegeResponse>;
   /** 设置云数据库实例的自动备份规则 {@link SetBackupRulesRequest} {@link SetBackupRulesResponse} */
   SetBackupRules(data: SetBackupRulesRequest, config?: AxiosRequestConfig): AxiosPromise<SetBackupRulesResponse>;
+  /** 设置实例销毁保护 {@link SetDBInstanceDeletionProtectionRequest} {@link SetDBInstanceDeletionProtectionResponse} */
+  SetDBInstanceDeletionProtection(data: SetDBInstanceDeletionProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<SetDBInstanceDeletionProtectionResponse>;
   /** 实例维护时间设置 {@link SetInstanceMaintenanceRequest} {@link SetInstanceMaintenanceResponse} */
   SetInstanceMaintenance(data: SetInstanceMaintenanceRequest, config?: AxiosRequestConfig): AxiosPromise<SetInstanceMaintenanceResponse>;
   /** 包年包月退货退费 {@link TerminateDBInstancesRequest} {@link TerminateDBInstancesResponse} */

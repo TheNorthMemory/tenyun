@@ -762,6 +762,8 @@ declare interface RecognizeConfig {
   HotWordList?: string;
   /** 语音识别vad的时间，范围为240-2000，默认为1000，单位为ms。更小的值会让语音识别分句更快。 */
   VadSilenceTime?: number;
+  /** vad的远场人声抑制能力（不会对asr识别效果造成影响），范围为[0, 3]，默认为0。推荐设置为2，有较好的远场人声抑制能力。 */
+  VadLevel?: number;
 }
 
 /** 云端录制控制参数。 */
@@ -1016,6 +1018,12 @@ declare interface TRTCDataResult {
   Total?: number | null;
 }
 
+/** TTS相关配置 */
+declare interface TTSConfig {
+  /** 音色ID */
+  VoiceId: string;
+}
+
 /** 腾讯云点播相关参数。 */
 declare interface TencentVod {
   /** 媒体后续任务处理操作，即完成媒体上传后，可自动发起任务流操作。参数值为任务流模板名，云点播支持 创建任务流模板 并为模板命名。 */
@@ -1066,6 +1074,18 @@ declare interface TranscriptionParams {
   TargetUserIdList?: string[];
   /** 声纹配置 */
   VoicePrint?: VoicePrint;
+  /** 语义断句检测 */
+  TurnDetection?: TurnDetection;
+}
+
+/** 翻译相关配置 */
+declare interface TranslationConfig {
+  /** 翻译的目标语言，目标语种列表（ISO 639-1） */
+  TargetLanguages: string[];
+  /** 1： 仅文字翻译， 2： 语音同传 */
+  Mode?: number;
+  /** 语音同传配置，开启同传时，需要传递 */
+  TTSConfig?: TTSConfig;
 }
 
 /** 实时音视频用量在某一时间段的统计信息。 */
@@ -2263,6 +2283,8 @@ declare interface StartAITranscriptionRequest {
   RoomIdType?: number;
   /** 语音识别配置。 */
   RecognizeConfig?: RecognizeConfig;
+  /** 翻译相关配置 */
+  TranslationConfig?: TranslationConfig;
 }
 
 declare interface StartAITranscriptionResponse {

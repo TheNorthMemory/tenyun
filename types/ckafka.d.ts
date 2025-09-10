@@ -290,23 +290,23 @@ declare interface ClusterInfo {
 
 /** 高级配置对象 */
 declare interface Config {
-  /** 消息保留时间 */
+  /** 消息保留时间，单位ms。 */
   Retention?: number;
   /** 最小同步复制数 */
   MinInsyncReplicas?: number | null;
   /** 日志清理模式，默认 delete。delete：日志按保存时间删除；compact：日志按 key 压缩；compact, delete：日志按 key 压缩且会保存时间删除。 */
   CleanUpPolicy?: string | null;
-  /** Segment 分片滚动的时长 */
+  /** Segment 分片滚动的时长，单位ms。 */
   SegmentMs?: number | null;
   /** 0表示 false。 1表示 true。 */
   UncleanLeaderElectionEnable?: number | null;
-  /** Segment 分片滚动的字节数 */
+  /** Segment 分片滚动的字节数，单位bytes */
   SegmentBytes?: number | null;
-  /** 最大消息字节数 */
+  /** 最大消息字节数，单位bytes */
   MaxMessageBytes?: number | null;
-  /** 消息保留文件大小 */
+  /** 消息保留文件大小，单位Bytes */
   RetentionBytes?: number | null;
-  /** 消息保存的时间类型 */
+  /** 消息保存的时间类型，CreateTime表示生产者创建这条消息的时间;LogAppendTime表示broker接收到消息的时间。 */
   LogMsgTimestampType?: string | null;
 }
 
@@ -2837,7 +2837,7 @@ declare interface CreateInstancePreRequest {
   InstanceName: string;
   /** 可用区。当购买多可用区实例时，当前参数为主可用区。 [查看可用区](https://cloud.tencent.com/document/product/597/55246) */
   ZoneId: number;
-  /** 预付费购买时长，例如 "1m",就是一个月 */
+  /** 预付费购买时长，例如 "1m",就是一个月,取值范围 1m~36m */
   Period: string;
   /** 国际站标准版实例规格。目前只有国际站标准版使用当前字段区分规格，国内站标准版使用峰值带宽区分规格。除了国际站标准版外的所有实例填写 1 即可。国际站标准版实例：入门型(general)]填写1；[标准型(standard)]填写2；[进阶型(advanced)]填写3；[容量型(capacity)]填写4；[高阶型1(specialized-1)]填写5；[高阶型2(specialized-2)]填写6；[高阶型3(specialized-3)]填写7；[高阶型4(specialized-4)]填写8。 */
   InstanceType: number;
@@ -2977,7 +2977,7 @@ declare interface CreateRouteRequest {
   VpcId?: string;
   /** vpc子网id,当vipType为3时必填 */
   SubnetId?: string;
-  /** 访问类型：0-plaintext；1-sasl_plaintext；2-ssl；3-sasl_ssl,默认为0 */
+  /** 访问类型：0-plaintext；1-sasl_plaintext；3-sasl_ssl; 4-sasl_scram_sha_256; 5-sasl_scram_sha_512 默认为0vipType=3,支持 0,1,3,4,5vipType=7,支持0,1,3vipType=1,支持1,3 */
   AccessType?: number;
   /** 是否需要权限管理,该字段已废弃 */
   AuthFlag?: number;
@@ -3027,7 +3027,7 @@ declare interface CreateTopicIpWhiteListResponse {
 }
 
 declare interface CreateTopicRequest {
-  /** 实例Id */
+  /** 实例Id，可通过DescribeInstances接口获取。 */
   InstanceId: string;
   /** 只能包含字母、数字、下划线、“-”、“.” */
   TopicName: string;
@@ -3041,23 +3041,23 @@ declare interface CreateTopicRequest {
   IpWhiteList?: string[];
   /** 清理日志策略，日志清理模式，默认为"delete"。"delete"：日志按保存时间删除，"compact"：日志按 key 压缩，"compact, delete"：日志按 key 压缩且会按保存时间删除。 */
   CleanUpPolicy?: string;
-  /** 主题备注，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-) */
+  /** 主题备注，是一个不超过 64 个字符的字符串，可以用字母和数字为首字符，剩余部分可以包含字母、数字和横划线(-) */
   Note?: string;
-  /** 默认为1 */
+  /** 最小同步副本数，默认为1 */
   MinInsyncReplicas?: number;
-  /** 是否允许未同步的副本选为leader，false:不允许，true:允许，默认不允许 */
+  /** 是否允许未同步的副本选为leader，0:不允许，1:允许，默认不允许 */
   UncleanLeaderElectionEnable?: number;
-  /** 可选参数。消息保留时间，单位ms，当前最小值为60000ms */
+  /** 可选参数。消息保留时间，单位ms，当前最小值为60000。默认值为7200000ms（2小时），最大值为7776000000 ms（90天）。 */
   RetentionMs?: number;
-  /** Segment分片滚动的时长，单位ms，当前最小为3600000ms */
+  /** Segment分片滚动的时长，单位ms，最小值为86400000ms（1天）。 */
   SegmentMs?: number;
-  /** 主题消息最大值，单位为 Byte，最小值1024Byte(即1KB)，最大值为12582912Byte（即12MB） */
+  /** 主题消息最大值，单位为 Byte，最小值1024Bytes(即1KB)，最大值为12582912Bytes（即12MB） */
   MaxMessageBytes?: number;
   /** 预设ACL规则, 1:打开 0:关闭，默认不打开 */
   EnableAclRule?: number;
   /** 预设ACL规则的名称 */
   AclRuleName?: string;
-  /** 可选, 保留文件大小. 默认为-1,单位bytes, 当前最小值为1048576B */
+  /** 可选, 保留文件大小. 默认为-1,单位Byte, 当前最小值为1073741824。 */
   RetentionBytes?: number;
   /** 标签列表 */
   Tags?: Tag[];
@@ -3344,7 +3344,7 @@ declare interface DescribeConnectResourceRequest {
 }
 
 declare interface DescribeConnectResourceResponse {
-  /** 连接源的Id */
+  /** 连接源数据信息 */
   Result?: DescribeConnectResourceResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3353,11 +3353,11 @@ declare interface DescribeConnectResourceResponse {
 declare interface DescribeConnectResourcesRequest {
   /** 连接源类型 */
   Type?: string;
-  /** 连接源名称的关键字查询 */
+  /** 连接源名称的关键字查询,支持模糊匹配 */
   SearchWord?: string;
   /** 分页偏移量，默认为0 */
   Offset?: number;
-  /** 返回数量，默认为20，最大值为100 */
+  /** 返回数量，默认为20，最大值为1000 (超过1000,则限制为1000) */
   Limit?: number;
   /** 连接源的关键字查询, 根据地域查询本地域内连接管理列表中的连接(仅支持包含region输入的连接源) */
   ResourceRegion?: string;
@@ -3371,15 +3371,15 @@ declare interface DescribeConnectResourcesResponse {
 }
 
 declare interface DescribeConsumerGroupRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id,通过DescribeInstances接口获取 */
   InstanceId: string;
-  /** 可选，用户需要查询的group名称。 */
+  /** 用户需要查询的group名称。 */
   GroupName?: string;
-  /** 可选，用户需要查询的group中的对应的topic名称，如果指定了该参数，而group又未指定则忽略该参数。 */
+  /** 用户需要查询的group中的对应的topic名称，如果指定了该参数，而group又未指定则忽略该参数。 */
   TopicName?: string;
-  /** 本次返回个数限制，最大支持50 */
+  /** 返回消费组的限制数量，最大支持50 */
   Limit?: number;
-  /** 偏移位置 */
+  /** 消费组列表的起始偏移量 */
   Offset?: number;
 }
 
@@ -3435,7 +3435,7 @@ declare interface DescribeDatahubTaskResponse {
 }
 
 declare interface DescribeDatahubTasksRequest {
-  /** 返回数量，默认为20，最大值为100 */
+  /** 返回数量，默认为20，最大值为100 (超过100限制为100) */
   Limit?: number;
   /** 分页偏移量，默认为0 */
   Offset?: number;
@@ -3493,9 +3493,9 @@ declare interface DescribeDatahubTopicsResponse {
 }
 
 declare interface DescribeGroupInfoRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id,可通过DescribeInstances接口获取 */
   InstanceId: string;
-  /** Kafka 消费分组列表 */
+  /** Kafka 消费分组列表,可通过DescribeConsumerGroup接口获取 */
   GroupList: string[];
 }
 
@@ -3549,7 +3549,7 @@ declare interface DescribeGroupResponse {
 }
 
 declare interface DescribeInstanceAttributesRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id,可通过DescribeInstances接口获取 */
   InstanceId: string;
 }
 
@@ -3691,9 +3691,9 @@ declare interface DescribeTaskStatusResponse {
 }
 
 declare interface DescribeTopicAttributesRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取。 */
   InstanceId: string;
-  /** 主题名称 */
+  /** 主题名称，可通过DescribeTopic接口获取。 */
   TopicName: string;
 }
 
@@ -3705,19 +3705,19 @@ declare interface DescribeTopicAttributesResponse {
 }
 
 declare interface DescribeTopicDetailRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取。 */
   InstanceId: string;
   /** （过滤条件）按照topicName过滤，支持模糊查询 */
   SearchWord?: string;
   /** 偏移量，不填默认为0 */
   Offset?: number;
-  /** 返回数量，不填则默认 10，最大值20，取值要大于0 */
+  /** 返回数量，不填则默认 20，取值要大于0 */
   Limit?: number;
   /** Acl预设策略名称 */
   AclRuleName?: string;
-  /** 根据特定的属性排序(目前支持PartitionNum/CreateTime) */
+  /** 根据特定的属性排序(目前支持PartitionNum/CreateTime)，默认值为CreateTime。 */
   OrderBy?: string;
-  /** 0-顺序、1-倒序 */
+  /** 0-顺序、1-倒序，默认值为0。 */
   OrderType?: number;
   /** 目前支持 ReplicaNum （副本数）筛选 */
   Filters?: Filter[];
@@ -3731,7 +3731,7 @@ declare interface DescribeTopicDetailResponse {
 }
 
 declare interface DescribeTopicFlowRankingRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取。 */
   InstanceId: string;
   /** 排行类别，PRO：Topic生产流量；CON：Topic消费流量 */
   RankingType: string;
@@ -3751,9 +3751,9 @@ declare interface DescribeTopicFlowRankingResponse {
 }
 
 declare interface DescribeTopicProduceConnectionRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取。 */
   InstanceId: string;
-  /** 主题名 */
+  /** 主题名，可通过DescribeTopic接口获取。 */
   TopicName: string;
 }
 
@@ -3809,7 +3809,7 @@ declare interface DescribeTopicSyncReplicaRequest {
   TopicName: string;
   /** 偏移量，不填默认为0 */
   Offset?: number;
-  /** 返回数量，不填则默认10，最大值20。 */
+  /** 返回数量，默认值为20，必须大于0。 */
   Limit?: number;
   /** 仅筛选未同步副本 */
   OutOfSyncReplicaOnly?: boolean;
@@ -4249,17 +4249,17 @@ declare interface ModifyDatahubTopicResponse {
 }
 
 declare interface ModifyGroupOffsetsRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id,可通过DescribeInstances接口获取 */
   InstanceId: string;
-  /** 消费分组名称 */
+  /** 消费分组名称,可通过DescribeConsumerGroup接口获取 */
   Group: string;
-  /** 重置offset的策略，入参含义 0. 对齐shift-by参数，代表把offset向前或向后移动shift条 1. 对齐参考(by-duration,to-datetime,to-earliest,to-latest),代表把offset移动到指定timestamp的位置 2. 对齐参考(to-offset)，代表把offset移动到指定的offset位置 */
+  /** 重置offset的策略,入参含义 0. 对齐shift-by参数,代表把offset向前或向后移动shift条 1. 对齐参考(by-duration,to-datetime,to-earliest,to-latest),代表把offset移动到指定timestamp的位置 2. 对齐参考(to-offset),代表把offset移动到指定的offset位置 */
   Strategy: number;
-  /** 需要重置的主题名列表， 不填表示全部 */
+  /** 需要重置的主题名列表 */
   Topics?: string[];
   /** 当strategy为0时，必须包含该字段，可以大于零代表会把offset向后移动shift条，小于零则将offset向前回溯shift条数。正确重置后新的offset应该是(old_offset + shift)，需要注意的是如果新的offset小于partition的earliest则会设置为earliest，如果大于partition 的latest则会设置为latest */
   Shift?: number;
-  /** 单位ms。当strategy为1时，必须包含该字段，其中-2表示重置offset到最开始的位置，-1表示重置到最新的位置(相当于清空)，其它值则代表指定的时间，会获取topic中指定时间的offset然后进行重置，需要注意的时，如果指定的时间不存在消息，则获取最末尾的offset。 */
+  /** 单位ms。当strategy为1时，必须包含该字段，其中-2表示重置offset到最开始的位置，-1表示重置到最新的位置(相当于清空)，其它值则代表指定的时间，会获取topic中指定时间的offset然后进行重置，需要注意的是，如果指定的时间不存在消息，则获取最末尾的offset。 */
   ShiftTimestamp?: number;
   /** 需要重新设置的offset位置。当strategy为2，必须包含该字段。 */
   Offset?: number;
@@ -4391,7 +4391,7 @@ declare interface ModifyTopicAttributesRequest {
   RetentionMs?: number;
   /** 主题消息最大值，单位为 Byte，最大值为12582912Byte（即12MB）。 */
   MaxMessageBytes?: number;
-  /** Segment 分片滚动的时长，单位：ms，当前最小为300000ms。 */
+  /** Segment 分片滚动的时长，单位：ms，当前最小值86400000ms。 */
   SegmentMs?: number;
   /** 消息删除策略，可以选择delete 或者compact */
   CleanUpPolicy?: string;
@@ -4463,7 +4463,7 @@ declare interface TaskStatusResponse {
 declare interface TopicAttributesResponse {
   /** 主题 ID */
   TopicId?: string;
-  /** 创建时间 */
+  /** 创建时间的秒级时间戳 */
   CreateTime?: number;
   /** 主题备注 */
   Note?: string;

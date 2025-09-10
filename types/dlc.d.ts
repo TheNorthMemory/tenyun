@@ -994,6 +994,22 @@ declare interface HiveInfo {
   KerberosEnable?: boolean | null;
 }
 
+/** Hive表分区信息 */
+declare interface HiveTablePartition {
+  /** 分区信息名称 */
+  Partition?: string;
+  /** 分区记录数 */
+  Records?: number;
+  /** 分区数据文件存储量 */
+  DataFileStorage?: number;
+  /** 分区创建时间 */
+  CreateTime?: string;
+  /** 分区schema更新时间 */
+  ModifiedTime?: string;
+  /** 最后一次分区更新的访问时间 */
+  LastAccessTime?: string;
+}
+
 /** 集群事件日志 */
 declare interface HouseEventsInfo {
   /** 事件时间 */
@@ -1002,6 +1018,26 @@ declare interface HouseEventsInfo {
   EventsAction?: string[] | null;
   /** 集群信息 */
   ClusterInfo?: string[] | null;
+}
+
+/** Iceberg表分区信息 */
+declare interface IcebergTablePartition {
+  /** 分区信息名称 */
+  Partition?: string;
+  /** 分区记录数 */
+  Records?: number;
+  /** 分区数据文件数量 */
+  DataFileSize?: number;
+  /** 分区数据文件存储量 */
+  DataFileStorage?: number;
+  /** 分区创建时间 */
+  CreateTime?: string;
+  /** 分区更新时间 */
+  UpdateTime?: string;
+  /** 最后一次分区更新的快照ID */
+  LastUpdateSnapshotId?: string;
+  /** 分区的location */
+  Location?: LocationInfo;
 }
 
 /** ip端口对信息 */
@@ -1086,6 +1122,14 @@ declare interface LakeFsInfo {
   Status?: string;
 }
 
+/** Location信息结构 */
+declare interface LocationInfo {
+  /** 桶名称 */
+  Bucket?: string;
+  /** location路径 */
+  DataLocation?: string;
+}
+
 /** 元数据加锁内容 */
 declare interface LockComponentInfo {
   /** 数据库名称 */
@@ -1104,6 +1148,20 @@ declare interface LockComponentInfo {
   IsAcid?: boolean;
   /** 是否动态分区写 */
   IsDynamicPartitionWrite?: boolean;
+}
+
+/** DLC分区信息查询返回数据结构 */
+declare interface MixedTablePartitions {
+  /** 数据表格式 */
+  TableFormat?: string;
+  /** 分区总数 */
+  TotalSize?: number;
+  /** 分页查询的游标信息，在获取下一页信息时需要回传到服务端 */
+  NextCursor?: string;
+  /** iceberg表分区信息 */
+  IcebergPartitions?: IcebergTablePartition[];
+  /** hive表分区信息 */
+  HivePartitions?: HiveTablePartition[];
 }
 
 /** 绑定融合桶信息 */
@@ -1620,6 +1678,14 @@ declare interface SmartPolicyBaseInfo {
   Table?: string;
   /** 用户appid */
   AppId?: string;
+}
+
+/** 排序结构 */
+declare interface Sort {
+  /** 排序字段 */
+  Field: string;
+  /** 是否按照ASC排序，否则DESC排序 */
+  Asc: boolean;
 }
 
 /** spark作业详情。 */
@@ -4715,9 +4781,27 @@ declare interface DescribeSubUserAccessPolicyResponse {
 }
 
 declare interface DescribeTablePartitionsRequest {
+  /** 数据目录名称 */
+  Catalog: string;
+  /** 数据库名称 */
+  Database: string;
+  /** 数据表名称 */
+  Table: string;
+  /** 查询偏移位置 */
+  Offset: number;
+  /** 当次查询的数量限制 */
+  Limit: number;
+  /** 模糊查询的分区名称 */
+  FuzzyPartition?: string;
+  /** 排序信息 */
+  Sorts?: Sort[];
+  /** 分页查询的游标信息 */
+  Cursor?: string;
 }
 
 declare interface DescribeTablePartitionsResponse {
+  /** 分区信息值 */
+  MixedPartitions?: MixedTablePartitions;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6282,7 +6366,7 @@ declare interface Dlc {
   /** 查询表详情 {@link DescribeTableRequest} {@link DescribeTableResponse} */
   DescribeTable(data: DescribeTableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableResponse>;
   /** 查询表分区信息 {@link DescribeTablePartitionsRequest} {@link DescribeTablePartitionsResponse} */
-  DescribeTablePartitions(data?: DescribeTablePartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablePartitionsResponse>;
+  DescribeTablePartitions(data: DescribeTablePartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablePartitionsResponse>;
   /** 查询数据表列表 {@link DescribeTablesRequest} {@link DescribeTablesResponse} */
   DescribeTables(data: DescribeTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesResponse>;
   /** 查询数据表名称列表 {@link DescribeTablesNameRequest} {@link DescribeTablesNameResponse} */

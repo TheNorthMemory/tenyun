@@ -342,6 +342,20 @@ declare interface ErrStaffItem {
   Message?: string;
 }
 
+/** 座席事件相关详情 */
+declare interface EventStaffDetail {
+  /** 座席数据 */
+  Staffs?: EventStaffElement[];
+}
+
+/** 座席信息 */
+declare interface EventStaffElement {
+  /** 座席邮箱账号 */
+  Mail?: string;
+  /** 座席工号 */
+  StaffNumber?: string;
+}
+
 /** 话机信息 */
 declare interface ExtensionInfo {
   /** 实例ID */
@@ -690,6 +704,16 @@ declare interface ServerPushText {
   AddHistory?: boolean;
 }
 
+/** 通话事件 */
+declare interface SessionEvent {
+  /** 事件时间戳，Unix 秒级时间戳 */
+  Timestamp?: number;
+  /** 事件类型，目前支持 StaffHold StaffUnhold StaffMute StaffUnmute */
+  EventType?: string;
+  /** 座席相关事件详情 */
+  StaffEventDetail?: EventStaffDetail;
+}
+
 /** 技能组信息 */
 declare interface SkillGroupInfoItem {
   /** 技能组ID */
@@ -772,6 +796,18 @@ declare interface StaffSkillGroupList {
   SkillGroupId: number;
   /** 座席在技能组中的优先级（1为最高，5最低，默认3） */
   Priority?: number;
+}
+
+/** 座席状态 */
+declare interface StaffStatus {
+  /** 查询使用的游标，分页场景使用 */
+  Cursor?: string;
+  /** 状态时间戳，Unix 秒级时间戳 */
+  Timestamp?: number;
+  /** 座席状态 free 示闲 | busy 忙碌 | rest 小休 | notReady 示忙 | afterCallWork 话后调整 | offline 离线 */
+  Status?: string;
+  /** 状态关联的会话 Id */
+  SessionId?: string;
 }
 
 /** 座席状态补充信息 */
@@ -2002,6 +2038,68 @@ declare interface DescribeProtectedTelCdrResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSessionDetailRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 通话的 session id */
+  SessionId: string;
+  /** 起始时间戳，Unix 秒级时间戳，最大支持近180天。 */
+  StartTimestamp: number;
+  /** 结束时间戳，Unix 秒级时间戳，结束时间与开始时间的区间范围小于90天。 */
+  EndTimestamp: number;
+}
+
+declare interface DescribeSessionDetailResponse {
+  /** 主叫号码 */
+  Caller?: string;
+  /** 被叫号码 */
+  Callee?: string;
+  /** 通话类型 1 呼出 2 呼入 3 音频呼入 5 预测式外呼 6 内线呼叫 */
+  CallType?: number;
+  /** 开始时间戳，Unix 秒级时间戳 */
+  StartTimeStamp?: number;
+  /** 振铃时间戳，UNIX 秒级时间戳 */
+  RingTimestamp?: number;
+  /** 接听时间戳，UNIX 秒级时间戳 */
+  AcceptTimestamp?: number;
+  /** 结束时间戳，UNIX 秒级时间戳 */
+  EndedTimestamp?: number;
+  /** 进入排队时间，Unix 秒级时间戳 */
+  QueuedTimestamp?: number;
+  /** 座席账号 */
+  StaffUserId?: string;
+  /** 参考 DescribeTelCdr 接口 EndStatus 字段 */
+  EndStatus?: number;
+  /** 排队技能组 ID */
+  QueuedSkillGroupId?: number;
+  /** 排队技能组名称 */
+  QueuedSkillGroupName?: string;
+  /** 录音链接，带鉴权和有效期，获取之后请在短时间内拉取，不要持久化此链接 */
+  RecordURL?: string;
+  /** 录音转存第三方 COS 链接 */
+  CustomRecordURL?: string;
+  /** 录音文本信息链接，带鉴权和有效期，获取之后请在短时间内拉取，不要持久化此链接 */
+  AsrURL?: string;
+  /** 语音留言录音链接 */
+  VoicemailRecordURL?: string[];
+  /** 语音留言录音文本信息链接，需在控制台购买离线语音识别套餐包并开启离线语音识别开关 */
+  VoicemailAsrURL?: string[];
+  /** IVR 按键信息 */
+  IVRKeyPressed?: IVRKeyPressedElement[];
+  /** 满意度按键信息 */
+  PostIVRKeyPressed?: IVRKeyPressedElement[];
+  /** 挂机方 seat 座席 user 用户 system 系统 */
+  HungUpSide?: string;
+  /** 客户自定义数据（User-to-User Interface） */
+  UUI?: string;
+  /** 通话中的事件列表 */
+  Events?: SessionEvent[];
+  /** 服务参与者列表 */
+  ServeParticipants?: ServeParticipant[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSkillGroupInfoListRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -2046,6 +2144,28 @@ declare interface DescribeStaffInfoListResponse {
   TotalCount?: number;
   /** 坐席用户信息列表 */
   StaffList?: StaffInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStaffStatusHistoryRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 座席账号 */
+  StaffUserId: string;
+  /** 起始时间戳，Unix 秒级时间戳，最大支持近180天。 */
+  StartTimestamp: number;
+  /** 结束时间戳，Unix 秒级时间戳，结束时间与开始时间的区间范围小于 7 天。 */
+  EndTimestamp: number;
+  /** 分页检索时使用的游标 */
+  Cursor?: string;
+  /** 分页尺寸 */
+  PageSize?: number;
+}
+
+declare interface DescribeStaffStatusHistoryResponse {
+  /** 座席状态数据 */
+  Data?: StaffStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2565,10 +2685,14 @@ declare interface Ccc {
   DescribePredictiveDialingSessions(data: DescribePredictiveDialingSessionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePredictiveDialingSessionsResponse>;
   /** 获取主被叫受保护的电话服务记录与录音 {@link DescribeProtectedTelCdrRequest} {@link DescribeProtectedTelCdrResponse} */
   DescribeProtectedTelCdr(data: DescribeProtectedTelCdrRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectedTelCdrResponse>;
+  /** 查询通话详情 {@link DescribeSessionDetailRequest} {@link DescribeSessionDetailResponse} */
+  DescribeSessionDetail(data: DescribeSessionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSessionDetailResponse>;
   /** 获取技能组信息列表 {@link DescribeSkillGroupInfoListRequest} {@link DescribeSkillGroupInfoListResponse} */
   DescribeSkillGroupInfoList(data: DescribeSkillGroupInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillGroupInfoListResponse>;
   /** 获取坐席信息列表 {@link DescribeStaffInfoListRequest} {@link DescribeStaffInfoListResponse} */
   DescribeStaffInfoList(data: DescribeStaffInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStaffInfoListResponse>;
+  /** 查询座席状态历史 {@link DescribeStaffStatusHistoryRequest} {@link DescribeStaffStatusHistoryResponse} */
+  DescribeStaffStatusHistory(data: DescribeStaffStatusHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStaffStatusHistoryResponse>;
   /** 获取坐席实时状态统计指标 {@link DescribeStaffStatusMetricsRequest} {@link DescribeStaffStatusMetricsResponse} */
   DescribeStaffStatusMetrics(data: DescribeStaffStatusMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStaffStatusMetricsResponse>;
   /** 按实例获取电话消耗统计 {@link DescribeTelCallInfoRequest} {@link DescribeTelCallInfoResponse} */

@@ -370,7 +370,7 @@ declare interface InstanceSet {
   InstanceName?: string;
   /** 实例 ID。 */
   InstanceId?: string;
-  /** 用户APPID。APPID是与账号ID有唯一对应关系的应用 ID，部分腾讯云产品会使用此 APPID。 */
+  /** 用户AppId。AppId是与账号ID有唯一对应关系的应用 ID，部分腾讯云产品会使用此 AppId。 */
   Appid?: number;
   /** 项目 ID。 */
   ProjectId?: number;
@@ -486,6 +486,8 @@ declare interface InstanceSet {
   UpgradeRedisVersion?: string;
   /** 备份模式：- SecondLevelBackup 秒级备份- NormalLevelBackup 普通备份 */
   BackupMode?: string;
+  /** 删除保护开关，0关闭，1开启 */
+  DeleteProtectionSwitch?: number;
 }
 
 /** 慢查询详情 */
@@ -1151,6 +1153,8 @@ declare interface ClearInstanceRequest {
   InstanceId: string;
   /** 实例访问密码。- 免密访问：无需配置。- 密码认证：必须配置。字符个数为[8,64]，至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&*-+=_|{}[]:;<>,.?/ 中的2种，不能以"/"开头。 */
   Password?: string;
+  /** 是否加密密码 */
+  EncryptPassword?: boolean;
 }
 
 declare interface ClearInstanceResponse {
@@ -1201,6 +1205,8 @@ declare interface CloneInstancesRequest {
   AlarmPolicyList?: string[];
   /** 克隆指定恢复数据的时间。仅支持已开通秒级备份的实例 */
   CloneTime?: string;
+  /** 是否加密密码 */
+  EncryptPassword?: boolean;
 }
 
 declare interface CloneInstancesResponse {
@@ -1233,14 +1239,16 @@ declare interface CreateInstanceAccountRequest {
   AccountPassword: string;
   /** 指定账号的读请求路由分发至主节点或副本节点。未开启副本只读，不支持选择副本节点。- master：主节点- replication：副本节点 */
   ReadonlyPolicy: string[];
-  /** 账户读写权限，支持选择只读与读写权限。- r：只读- rw: 读写权限 */
+  /** 账户读写权限，支持选择只读与读写权限。- r：只读。- rw: 读写。 */
   Privilege: string;
-  /** 子账号描述信息，长度[0,64] 字节，支持中文。 */
+  /** 账号备注描述信息，长度为[0,64] 字节，支持中文。 */
   Remark?: string;
+  /** 是否加密密码 */
+  EncryptPassword?: boolean;
 }
 
 declare interface CreateInstanceAccountResponse {
-  /** 任务ID */
+  /** 任务ID。 */
   TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1299,6 +1307,8 @@ declare interface CreateInstancesRequest {
   RedisClusterId?: string;
   /** 告警策略 ID 数组。- 请登录[腾讯云可观测平台-告警管理-策略管理](https://console.cloud.tencent.com/monitor/alarm/policy)获取告警策略 ID。- 若不配置该参数，则绑定默认告警策略。默认告警策略具体信息，请登录[腾讯云可观测平台-告警管理-策略管理](https://console.cloud.tencent.com/monitor/alarm/policy)查看。 */
   AlarmPolicyList?: string[];
+  /** 是否加密密码 */
+  EncryptPassword?: boolean;
 }
 
 declare interface CreateInstancesResponse {
@@ -1311,11 +1321,11 @@ declare interface CreateInstancesResponse {
 }
 
 declare interface CreateParamTemplateRequest {
-  /** 参数模板名称。 */
+  /** 参数模板名称。字符长度要求为[2,64]。 */
   Name: string;
   /** 参数模板描述。 */
   Description?: string;
-  /** 产品类型。- 2：Redis 2.8 内存版（标准架构）。- 6：Redis 4.0 内存版（标准架构）。- 7：Redis 4.0 内存版（集群架构）。- 8：Redis 5.0 内存版（标准架构）。- 9：Redis 5.0 内存版（集群架构）。- 15：Redis 6.2 内存版（标准架构）。- 16：Redis 6.2 内存版（集群架构）。- 17：Redis 7.0 内存版（标准架构）。- 18：Redis 7.0 内存版（集群架构）。 */
+  /** 产品类型。- 6：Redis 4.0 内存版（标准架构）。- 7：Redis 4.0 内存版（集群架构）。- 8：Redis 5.0 内存版（标准架构）。- 9：Redis 5.0 内存版（集群架构）。- 15：Redis 6.2 内存版（标准架构）。- 16：Redis 6.2 内存版（集群架构）。- 17：Redis 7.0 内存版（标准架构）。- 18：Redis 7.0 内存版（集群架构）。 */
   ProductType?: number;
   /** 源参数模板 ID。 */
   TemplateId?: string;
@@ -1685,7 +1695,7 @@ declare interface DescribeInstanceEventsResponse {
 }
 
 declare interface DescribeInstanceLogDeliveryRequest {
-  /** 实例ID。 */
+  /** 实例ID。请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance)在实例列表复制实例 ID。 */
   InstanceId: string;
 }
 
@@ -1837,11 +1847,11 @@ declare interface DescribeInstanceNodeInfoResponse {
 }
 
 declare interface DescribeInstanceParamRecordsRequest {
-  /** 实例Id */
+  /** 实例 ID 。请登录 [Redis 控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 分页大小 */
+  /** 分页大小。默认为100，最大值为 200。 */
   Limit?: number;
-  /** 偏移量，取Limit整数倍 */
+  /** 偏移量，取Limit整数倍，默认值为0。计算公式：offset=limit*(页码-1)。 */
   Offset?: number;
 }
 
@@ -1875,7 +1885,7 @@ declare interface DescribeInstanceParamsResponse {
 }
 
 declare interface DescribeInstanceSecurityGroupRequest {
-  /** 实例 ID 列表，数组长度限制[0,100]。例如：["crs-f2ho5rsz\n"] */
+  /** 实例 ID 列表，数组长度限制[0,100]。请登录 [Redis 控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceIds: string[];
 }
 
@@ -2547,6 +2557,8 @@ declare interface ModfiyInstancePasswordRequest {
   OldPassword: string;
   /** 实例新密码。密码复杂度要求如下：- 长度8 - 64位, 推荐使用12位以上的密码。- 不能以"/"开头。- 至少包含小写字母a - z、大写字母A - Z、数字0 - 9、特殊字符 ()~!@#$%^&*-+=_|{}[]:;<>,.?/中的两项。 */
   Password: string;
+  /** 是否加密密码 */
+  EncryptPassword?: boolean;
 }
 
 declare interface ModfiyInstancePasswordResponse {
@@ -2603,9 +2615,9 @@ declare interface ModifyBackupDownloadRestrictionResponse {
 declare interface ModifyConnectionConfigRequest {
   /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 附加带宽，大于0，单位MB。 */
+  /** 附加带宽，大于0，单位MB。**说明**：Bandwidth 和 ClientLimit 参数不能同时为空，您必须至少选择其中一个进行配置。 */
   Bandwidth?: number;
-  /** 单分片的总连接数。- 未开启副本只读时，下限为10000，上限为40000。- 开启副本只读时，下限为10000，上限为10000×(只读副本数+3)。 */
+  /** 单分片的总连接数。- 未开启副本只读时，下限为10000，上限为40000。- 开启副本只读时，下限为10000，上限为10000×(只读副本数+3)。**说明**：Bandwidth 和 ClientLimit 参数不能同时为空，您必须至少选择其中一个进行配置。 */
   ClientLimit?: number;
 }
 
@@ -2633,22 +2645,24 @@ declare interface ModifyDBInstanceSecurityGroupsResponse {
 declare interface ModifyInstanceAccountRequest {
   /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 子账号名称，如果要修改主账号，填 root。 */
+  /** 指定需修改的账号。- root：指在创建 Redis 数据库实例时自动生成的账号。用户无法修改其读写权限，仅可修改其请求路由策略。- 自定义的账号：用户在实例创建成功后手动创建的账号。用户可以随时修改其读写权限与请求路由策略。 */
   AccountName: string;
-  /** 子账号密码。 */
+  /** 指定所修改账号访问的密码。 */
   AccountPassword?: string;
-  /** 子账号描述信息 */
+  /** 账号描述信息 */
   Remark?: string;
-  /** 账号读写路由策略。- master：表示主节点。- replication：表示从节点。 */
+  /** 指定所修改账号读写请求路由的策略。- master：表示读写请求路由至主节点。- replication：表示读写请求路由至从节点。 */
   ReadonlyPolicy?: string[];
-  /** 子账号读写策略。- r：只读。- w：只写。- rw：读写。 */
+  /** 指定所修改账号的读写权限。- r：只读。- w：只写。- rw：读写。 */
   Privilege?: string;
-  /** 指定是否将主账号切换为免密账号。这里只适用于主账号，子账号不可免密。- true：将主账号切换为免密账号。- false：不切换。 */
+  /** 指定是否将默认账号（root）设置为免密账号。自定义账号不支持免密访问。- true：默认账号（root）设置为免密账号。- false：默认账号（root）不设置为免密账号。 */
   NoAuth?: boolean;
+  /** 指定所修改的账号是否加密密码 */
+  EncryptPassword?: boolean;
 }
 
 declare interface ModifyInstanceAccountResponse {
-  /** 任务ID */
+  /** 任务ID。 */
   TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2781,7 +2795,7 @@ declare interface ModifyInstanceReadOnlyResponse {
 }
 
 declare interface ModifyInstanceRequest {
-  /** 修改实例操作。如填写：- rename：表示实例重命名。- modifyProject：修改实例所属项目。- modifyAutoRenew：修改实例续费标记。 */
+  /** 修改实例操作。如填写：- rename：表示实例重命名。- modifyProject：修改实例所属项目。- modifyAutoRenew：修改实例续费标记。- modifyDeleteProtectionSwitch：修改实例删除保护。 */
   Operation: string;
   /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。每次请求的实例数量的上限为10。 */
   InstanceIds?: string[];
@@ -2791,6 +2805,8 @@ declare interface ModifyInstanceRequest {
   ProjectId?: number;
   /** 自动续费标识。- 0：默认状态，指手动续费。- 1：自动续费。- 2：明确不自动续费。 */
   AutoRenews?: number[];
+  /** 删除保护开关。- 0：默认状态，指关闭。- 1：开关打开。 */
+  DeleteProtectionSwitches?: number[];
   /** 目前在废弃中，存量用户还可以使用，建议新用户使用 InstanceIds。 */
   InstanceId?: string;
   /** 已经废弃 */
@@ -2957,6 +2973,8 @@ declare interface ResetPasswordRequest {
   Password?: string;
   /** 是否切换免密实例。- false：切换为非免密码实例。- true：切换为免密码实例。默认 false。 */
   NoAuth?: boolean;
+  /** 是否加密密码 */
+  EncryptPassword?: boolean;
 }
 
 declare interface ResetPasswordResponse {
@@ -2967,9 +2985,9 @@ declare interface ResetPasswordResponse {
 }
 
 declare interface RestoreInstanceRequest {
-  /** 待操作的实例ID，可通过 DescribeInstances 接口返回值中的 InstanceId 获取。 */
+  /** 待操作的实例ID，可通过 [DescribeInstances](https://cloud.tencent.com/document/product/239/20018) 接口返回值中的 InstanceId 获取。 */
   InstanceId: string;
-  /** 备份ID，可通过 GetRedisBackupList 接口返回值中的 backupId 获取 */
+  /** 备份ID，可通过 [DescribeInstanceBackups](https://cloud.tencent.com/document/product/239/20011) 接口返回的参数 RedisBackupSet 获取。 */
   BackupId: string;
   /** 实例密码，恢复实例时，需要校验实例密码（免密实例不需要传密码） */
   Password?: string;
@@ -3153,7 +3171,7 @@ declare interface Redis {
   CloneInstances(data: CloneInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CloneInstancesResponse>;
   /** 关闭SSL {@link CloseSSLRequest} {@link CloseSSLResponse} */
   CloseSSL(data: CloseSSLRequest, config?: AxiosRequestConfig): AxiosPromise<CloseSSLResponse>;
-  /** 创建实例子账号 {@link CreateInstanceAccountRequest} {@link CreateInstanceAccountResponse} */
+  /** 自定义实例账号 {@link CreateInstanceAccountRequest} {@link CreateInstanceAccountResponse} */
   CreateInstanceAccount(data: CreateInstanceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceAccountResponse>;
   /** 创建Redis实例 {@link CreateInstancesRequest} {@link CreateInstancesResponse} */
   CreateInstances(data: CreateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstancesResponse>;
@@ -3295,7 +3313,7 @@ declare interface Redis {
   ModifyDBInstanceSecurityGroups(data: ModifyDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSecurityGroupsResponse>;
   /** 修改实例相关信息 {@link ModifyInstanceRequest} {@link ModifyInstanceResponse} */
   ModifyInstance(data: ModifyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceResponse>;
-  /** 修改实例子账号 {@link ModifyInstanceAccountRequest} {@link ModifyInstanceAccountResponse} */
+  /** 修改实例账号 {@link ModifyInstanceAccountRequest} {@link ModifyInstanceAccountResponse} */
   ModifyInstanceAccount(data: ModifyInstanceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceAccountResponse>;
   /** 修改实例可用区 {@link ModifyInstanceAvailabilityZonesRequest} {@link ModifyInstanceAvailabilityZonesResponse} */
   ModifyInstanceAvailabilityZones(data: ModifyInstanceAvailabilityZonesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceAvailabilityZonesResponse>;

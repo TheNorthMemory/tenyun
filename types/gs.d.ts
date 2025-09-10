@@ -892,6 +892,16 @@ declare interface DisableAndroidInstancesAppResponse {
   RequestId?: string;
 }
 
+declare interface DisconnectAndroidInstanceRequest {
+  /** 实例ID */
+  AndroidInstanceId: string;
+}
+
+declare interface DisconnectAndroidInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DistributeFileToAndroidInstancesRequest {
   /** 安卓实例 ID 列表 */
   AndroidInstanceIds: string[];
@@ -1591,6 +1601,8 @@ declare interface Gs {
   DestroyAndroidInstances(data: DestroyAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyAndroidInstancesResponse>;
   /** 批量禁用安卓实例应用 {@link DisableAndroidInstancesAppRequest} {@link DisableAndroidInstancesAppResponse} */
   DisableAndroidInstancesApp(data: DisableAndroidInstancesAppRequest, config?: AxiosRequestConfig): AxiosPromise<DisableAndroidInstancesAppResponse>;
+  /** 断开安卓实例 {@link DisconnectAndroidInstanceRequest} {@link DisconnectAndroidInstanceResponse} */
+  DisconnectAndroidInstance(data: DisconnectAndroidInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DisconnectAndroidInstanceResponse>;
   /** 分发文件到安卓实例 {@link DistributeFileToAndroidInstancesRequest} {@link DistributeFileToAndroidInstancesResponse} */
   DistributeFileToAndroidInstances(data: DistributeFileToAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DistributeFileToAndroidInstancesResponse>;
   /** 分发照片到安卓实例相册 {@link DistributePhotoToAndroidInstancesRequest} {@link DistributePhotoToAndroidInstancesResponse} */

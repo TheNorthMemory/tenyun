@@ -1132,6 +1132,16 @@ declare interface PodInfo {
   SubUin?: string | null;
 }
 
+/** SSH pod访问信息 */
+declare interface PodSSHInfo {
+  /** pod访问ip */
+  Host?: string;
+  /** pod ssh访问端口 */
+  Port?: number;
+  /** ssh访问命令 */
+  LoginCommand?: string;
+}
+
 /** 私有连接信息 */
 declare interface PrivateLinkInfo {
   /** 私有连接所在的VPCID */
@@ -1302,6 +1312,8 @@ declare interface SSHConfig {
   LoginCommand?: string | null;
   /** 登录地址是否改变 */
   IsAddressChanged?: boolean | null;
+  /** POD访问信息 */
+  PodSSHInfo?: PodSSHInfo | null;
 }
 
 /** 定时的事务和行为 */

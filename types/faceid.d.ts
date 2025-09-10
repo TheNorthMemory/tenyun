@@ -284,6 +284,8 @@ declare interface IntentionVerifyData {
   IntentionVerifyBestFrame?: string | null;
   /** 本次流程用户语音与传入文本比对的相似度分值，取值范围 [0.00, 100.00]。只有配置了相似度阈值后才进行语音校验并返回相似度分值。 */
   AsrResultSimilarity?: string | null;
+  /** 意愿确认环节中录制的音频（base64）。- 若不存在则为空字符串。 */
+  IntentionVerifyAudio?: string | null;
 }
 
 /** 模版检索详细信息 */

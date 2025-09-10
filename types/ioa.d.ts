@@ -30,6 +30,46 @@ declare interface AggrCategorySoftDetailRow {
   UpgradableDeviceNum?: number;
 }
 
+/** 聚合软件的已安装终端列表中的一行数据 */
+declare interface AggrSoftDeviceRow {
+  /** 终端名 */
+  DeviceName?: string | null;
+  /** 最近登录账号 */
+  LastLoginAccount?: string | null;
+  /** 终端用户名 */
+  DeviceUserName?: string | null;
+  /** 软件版本 */
+  Version?: string | null;
+  /** 是否盗版 */
+  PiracyRisk?: number | null;
+  /** 盗版原因 */
+  PiracyReason?: string | null;
+  /** 安装时间 */
+  InstallTime?: string | null;
+  /** 用户目录 */
+  UserPath?: string | null;
+  /** 所在分组 */
+  UserGroup?: string | null;
+  /** IP */
+  IP?: string | null;
+  /** MAC */
+  MAC?: string | null;
+  /** 使用时长 */
+  UseTime?: number | null;
+  /** 设备ID */
+  DeviceId?: number | null;
+  /** 软件全名 */
+  FullSoftName?: string | null;
+  /** 数据ID（唯一） */
+  Id?: number | null;
+  /** 该终端此款软件可升级到的目标版本号 */
+  NewVersion?: string;
+  /** 该软件对应运营配置的可升级id */
+  UpgradeSoftId?: number;
+  /** 终端备注名 */
+  RemarkName?: string;
+}
+
 /** 自动划分规则数据 */
 declare interface ComplexRule {
   /** 简单规则表达式 */
@@ -132,6 +172,48 @@ declare interface DescribeAggrSoftCategorySoftListData {
   AggrSoftCategorySoftList?: AggrCategorySoftDetailRow[] | null;
 }
 
+/** 聚合软件详情数据 */
+declare interface DescribeAggrSoftDetailData {
+  /** 软件名称 */
+  Name?: string | null;
+  /** 平台 */
+  OsType?: number | null;
+  /** 盗版风险 */
+  PiracyRisk?: number | null;
+  /** 厂商 */
+  Corp?: string | null;
+  /** 已安装版本分布 */
+  SoftVersionDist?: SoftVersionAndNum[] | null;
+  /** 盗版版本安装 */
+  PiracyVersionDist?: SoftVersionAndNum[] | null;
+  /** 安装设备数 */
+  InstalledDeviceNum?: number | null;
+  /** 盗版安装设备数 */
+  PiracyInstalledDeviceNum?: number | null;
+  /** 安装用户数 */
+  InstalledUserNum?: number | null;
+  /** 盗版安装用户数 */
+  PiracyInstalledUserNum?: number | null;
+  /** 授权数 */
+  AuthNum?: number | null;
+  /** 正版率 */
+  GenuineRate?: number | null;
+  /** 有新版本可升级的设备数量 */
+  UpgradableDeviceNum?: number;
+  /** 当前可升级的最新版本信息, 每一项均为json字符串 */
+  UpgradableVersions?: string[];
+}
+
+/** 聚合软件-已安装终端列表 */
+declare interface DescribeAggrSoftDeviceListData {
+  /** 分页公共对象 */
+  Page?: Paging | null;
+  /** 总数 */
+  Total?: number | null;
+  /** 详情 */
+  AggrSoftDeviceList?: AggrSoftDeviceRow[] | null;
+}
+
 /** 查询文件检测结果响应数据 */
 declare interface DescribeDLPFileDetectResultData {
   /** 提交任务时的文件md5 */
@@ -140,7 +222,7 @@ declare interface DescribeDLPFileDetectResultData {
   FileName?: string;
   /** 状态：等待检测->正在检测->检测失败/检测成功。或任务不存在 */
   Status?: string;
-  /** 文件检测结果，json字符串。 */
+  /** 文件检测结果，json字符串。包含文件基本信息如type，path，md5以及命中的信息。其中State为检测状态，0为待解析文件，1为检测中，2为检测完成；FileAbstract为命中的上下文摘要信息，HitRuleid是命中的规则唯一ID，HitRuleCategoryId是规则分类唯一id，HitLevel是文件的等级，HitRuleDesc是规则的名称，HitContent是具体命中的规则以及词库信息，以及命中的内容。EngineConfigVersion是当前词库版本号 */
   DetectResult?: string;
 }
 
@@ -148,6 +230,52 @@ declare interface DescribeDLPFileDetectResultData {
 declare interface DescribeDeviceChildGroupsRspData {
   /** 返回的数组列表 */
   Items?: DeviceGroupDetail[];
+}
+
+/** 终端详情响应对象集合 */
+declare interface DescribeDeviceDetailListData {
+  /** 账号名 */
+  UserName?: string | null;
+  /** 计算机名 */
+  ComputerName?: string | null;
+  /** 名称 */
+  Name?: string | null;
+  /** 用户组IdPath */
+  AccountGroupIdPath?: string | null;
+  /** 用户组id(只支持32位) */
+  AccountGroupId?: number | null;
+  /** 终端组名path */
+  GroupNamePath?: string | null;
+  /** Ip地址 */
+  Ip?: string | null;
+  /** 用户组名 */
+  AccountGroupName?: string | null;
+  /** 终端组IdPath */
+  GroupIdPath?: string | null;
+  /** 唯一标识Mid */
+  Mid?: string | null;
+  /** IOA账号名 */
+  IoaUserName?: string | null;
+  /** 所在分组Id(只支持32位) */
+  GroupId?: number | null;
+  /** 所在分组Name */
+  GroupName?: string | null;
+  /** Mac地址 */
+  Mac?: string | null;
+  /** 软件版本 */
+  Version?: string | null;
+  /** 用户组名Path */
+  AccountGroupNamePath?: string | null;
+  /** 列表Id(只支持32位) */
+  Id?: number | null;
+}
+
+/** 业务响应数据 */
+declare interface DescribeDeviceDetailListPageData {
+  /** 终端详情响应对象集合 */
+  Items?: DescribeDeviceDetailListData[] | null;
+  /** 分页公共对象 */
+  Page?: Paging | null;
 }
 
 /** 终端硬件信息列表Item数据 */
@@ -546,6 +674,14 @@ declare interface DeviceVirtualDeviceGroupsDetail {
   Utime?: string;
 }
 
+/** 业务响应数据 */
+declare interface ExportSoftwareDownloadUrlRspData {
+  /** 下载的url */
+  DownloadURL?: string | null;
+  /** 超过一定时间走异步任务 */
+  TaskId?: number;
+}
+
 /** Filters 条件过滤 */
 declare interface Filter {
   /** 过滤字段 */
@@ -646,6 +782,14 @@ declare interface SimpleRule {
   Expressions?: RuleExpression[];
   /** 表达式间逻辑关系 */
   Relation?: string;
+}
+
+/** 软件版本与安装数量 */
+declare interface SoftVersionAndNum {
+  /** 软件版本 */
+  Version?: string | null;
+  /** 安装数 */
+  Num?: number | null;
 }
 
 /** 软件详情响应对象集合 */
@@ -776,15 +920,43 @@ declare interface DescribeAggrSoftCategorySoftListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAggrSoftDetailRequest {
+  /** 软件名称 */
+  Name?: string;
+  /** 操作系统 */
+  OsType?: number;
+}
+
+declare interface DescribeAggrSoftDetailResponse {
+  /** 数据 */
+  Data?: DescribeAggrSoftDetailData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAggrSoftDeviceListRequest {
+  /** 软件名 */
+  Name?: string;
+  /** 操作系统 */
+  OsType?: number;
+}
+
+declare interface DescribeAggrSoftDeviceListResponse {
+  /** 已安装终端列表 */
+  Data?: DescribeAggrSoftDeviceListData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDLPFileDetectResultRequest {
-  /** 管理域实例ID，用于CAM管理域权限分配 */
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
   DomainInstanceId?: string;
   /** 查询ID，即提交送检任务接口（CreateDLPFileDetectionTask）返回的任务ID（DLPFileDetectionTaskID） */
   QueryID?: string;
 }
 
 declare interface DescribeDLPFileDetectResultResponse {
-  /** 查询任务结果 */
+  /** 文件鉴定任务结果数据。详情查看具体数据结构 */
   Data?: DescribeDLPFileDetectResultData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -804,6 +976,22 @@ declare interface DescribeDeviceChildGroupsRequest {
 declare interface DescribeDeviceChildGroupsResponse {
   /** 查询设备组子分组详情响应结构 */
   Data?: DescribeDeviceChildGroupsRspData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDeviceDetailListRequest {
+  /** 系统类型(只支持32位) */
+  OsType?: number;
+  /** 终端分组id(只支持32位) */
+  GroupId?: number;
+  /** 过滤条件、分页参数Name - String - 过滤支持：是 - 操作符:eq,like - 排序支持：是 。 */
+  Condition?: Condition;
+}
+
+declare interface DescribeDeviceDetailListResponse {
+  /** 业务响应数据 */
+  Data?: DescribeDeviceDetailListPageData | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -970,6 +1158,20 @@ declare interface DescribeVirtualDevicesResponse {
   RequestId?: string;
 }
 
+declare interface ExportSoftwareInformationListRequest {
+  /** 终端唯一标识Mid */
+  Mid?: string;
+  /** 过滤条件、分页参数Name - String - 过滤支持：是 - 操作符:eq,like - 排序支持：是 。 */
+  Condition?: Condition;
+}
+
+declare interface ExportSoftwareInformationListResponse {
+  /** 业务响应数据 */
+  Data?: ExportSoftwareDownloadUrlRspData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyVirtualDeviceGroupsRequest {
   /** 必填，操作的设备列表数据 */
   DeviceList: ModifyVirtualDeviceGroupsReqItem[];
@@ -1003,10 +1205,16 @@ declare interface Ioa {
   DescribeAccountGroups(data?: DescribeAccountGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountGroupsResponse>;
   /** 软件分类的聚合软件列表查询 {@link DescribeAggrSoftCategorySoftListRequest} {@link DescribeAggrSoftCategorySoftListResponse} */
   DescribeAggrSoftCategorySoftList(data?: DescribeAggrSoftCategorySoftListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAggrSoftCategorySoftListResponse>;
+  /** 获取聚合的软件详情 {@link DescribeAggrSoftDetailRequest} {@link DescribeAggrSoftDetailResponse} */
+  DescribeAggrSoftDetail(data?: DescribeAggrSoftDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAggrSoftDetailResponse>;
+  /** 获取聚合软件的设备列表 {@link DescribeAggrSoftDeviceListRequest} {@link DescribeAggrSoftDeviceListResponse} */
+  DescribeAggrSoftDeviceList(data?: DescribeAggrSoftDeviceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAggrSoftDeviceListResponse>;
   /** 查询文件检测结果 {@link DescribeDLPFileDetectResultRequest} {@link DescribeDLPFileDetectResultResponse} */
   DescribeDLPFileDetectResult(data?: DescribeDLPFileDetectResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDLPFileDetectResultResponse>;
   /** 查询设备组子分组 {@link DescribeDeviceChildGroupsRequest} {@link DescribeDeviceChildGroupsResponse} */
   DescribeDeviceChildGroups(data?: DescribeDeviceChildGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceChildGroupsResponse>;
+  /** 基于软件查看终端详情列表 {@link DescribeDeviceDetailListRequest} {@link DescribeDeviceDetailListResponse} */
+  DescribeDeviceDetailList(data?: DescribeDeviceDetailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceDetailListResponse>;
   /** 查询终端硬件信息列表 {@link DescribeDeviceHardwareInfoListRequest} {@link DescribeDeviceHardwareInfoListResponse} */
   DescribeDeviceHardwareInfoList(data: DescribeDeviceHardwareInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceHardwareInfoListResponse>;
   /** 获取终端进程网络服务信息 {@link DescribeDeviceInfoRequest} {@link DescribeDeviceInfoResponse} */
@@ -1025,6 +1233,8 @@ declare interface Ioa {
   DescribeSoftwareInformation(data?: DescribeSoftwareInformationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSoftwareInformationResponse>;
   /** 展示自定义分组终端列表 {@link DescribeVirtualDevicesRequest} {@link DescribeVirtualDevicesResponse} */
   DescribeVirtualDevices(data?: DescribeVirtualDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirtualDevicesResponse>;
+  /** 导出软件信息列表 {@link ExportSoftwareInformationListRequest} {@link ExportSoftwareInformationListResponse} */
+  ExportSoftwareInformationList(data?: ExportSoftwareInformationListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportSoftwareInformationListResponse>;
   /** 终端手动自定义分组增减终端 {@link ModifyVirtualDeviceGroupsRequest} {@link ModifyVirtualDeviceGroupsResponse} */
   ModifyVirtualDeviceGroups(data: ModifyVirtualDeviceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVirtualDeviceGroupsResponse>;
 }

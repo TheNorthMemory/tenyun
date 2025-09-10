@@ -211,7 +211,7 @@ declare interface AgentPluginInfo {
   /** 知识库问答插件配置 */
   KnowledgeQa?: AgentKnowledgeQAPlugin;
   /** 是否使用一键授权 */
-  EnableRoleAuth?: boolean;
+  EnableRoleAuth?: boolean | null;
   /** 应用配置的插件query信息 */
   Query?: AgentPluginQuery[];
   /** MCP类型 */
@@ -874,6 +874,8 @@ declare interface KnowledgeBaseInfo {
   DocTotal?: number | null;
   /** 知识库处理中状态标记，1：向量embedding变更中 */
   ProcessingFlags?: number[] | null;
+  /** 知识库拥有者的名字 */
+  OwnerStaffName?: string;
 }
 
 /** 知识库容量饼图详情 */
@@ -1252,7 +1254,7 @@ declare interface ListReleaseItem {
   Desc?: string;
   /** 更新时间 */
   UpdateTime?: string;
-  /** 发布状态 */
+  /** 发布状态，1：待发布，2：发布中，3：发布成功，5：发布失败 */
   Status?: number;
   /** 发布状态描述 */
   StatusDesc?: string;
@@ -2881,6 +2883,8 @@ declare interface DescribeKnowledgeUsageResponse {
 }
 
 declare interface DescribeNodeRunRequest {
+  /** 应用ID */
+  AppBizId?: string;
   /** 节点运行实例ID */
   NodeRunId?: string;
 }
@@ -3223,6 +3227,8 @@ declare interface DescribeUnsatisfiedReplyContextResponse {
 }
 
 declare interface DescribeWorkflowRunRequest {
+  /** 应用ID */
+  AppBizId?: string;
   /** 工作流运行实例ID */
   WorkflowRunId?: string;
 }
@@ -3949,7 +3955,7 @@ declare interface ListReleaseQAPreviewResponse {
 }
 
 declare interface ListReleaseRequest {
-  /** 机器人ID */
+  /** 应用ID */
   BotBizId: string;
   /** 页码 */
   PageNumber: number;
@@ -4459,6 +4465,8 @@ declare interface StopDocParseResponse {
 }
 
 declare interface StopWorkflowRunRequest {
+  /** 应用ID */
+  AppBizId?: string;
   /** 工作流运行实例ID */
   WorkflowRunId?: string;
 }

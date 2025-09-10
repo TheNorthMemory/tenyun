@@ -6,7 +6,7 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 declare interface AKInfo {
   /** ak对应id */
   ID?: number;
-  /** ak具体值\n临时密钥时返回临时密钥 */
+  /** ak具体值 临时密钥时返回临时密钥 */
   Name?: string;
   /** 所属账号 */
   User?: string;
@@ -54,6 +54,12 @@ declare interface AccessKeyAlarm {
   AppID?: number;
   /** 泄漏证据 */
   LeakEvidence?: string[];
+  /** 是否支持编辑信任账号 */
+  IsSupportEditWhiteAccount?: boolean;
+  /** 告警证据 */
+  Evidence?: string;
+  /** 告警规则标识 */
+  RuleKey?: string;
 }
 
 /** 访问密钥告警数量 */
@@ -106,7 +112,7 @@ declare interface AccessKeyAsset {
   CreateTime?: string;
   /** 最近访问时间 */
   LastAccessTime?: string;
-  /** AK状态 0:禁用1:已启用 */
+  /** AK状态 0:禁用1:已启用2:已删除(已在cam侧删除，安全中心仍然存留之前的记录) */
   Status?: number;
   /** 0 表示已检测1 表示检测中 */
   CheckStatus?: number;
@@ -154,6 +160,8 @@ declare interface AccessKeyRisk {
   CheckStatus?: number;
   /** 所属appid */
   AppID?: number;
+  /** 对应风险的查询参数 */
+  QueryParam?: string;
 }
 
 /** 访问密钥账号信息 */
@@ -1222,6 +1230,8 @@ declare interface CallRecord {
   ISP?: string;
   /** 账号外vpc信息列表 */
   VpcInfo?: SourceIPVpcInfo[];
+  /** 调用请求客户端列表 */
+  ReqClient?: string[];
 }
 
 /** 检查项视角风险 */

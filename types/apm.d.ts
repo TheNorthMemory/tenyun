@@ -96,6 +96,8 @@ declare interface ApmField {
   CompareVal?: string;
   /** 指标中文名 */
   NameCN?: string;
+  /** 指标英文名 */
+  NameEN?: string;
 }
 
 /** APM 业务系统信息 */

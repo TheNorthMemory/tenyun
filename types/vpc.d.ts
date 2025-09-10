@@ -1580,6 +1580,8 @@ declare interface NatGateway {
   SmartScheduleMode?: boolean;
   /** NAT实例归属的专属集群id */
   DedicatedClusterId?: string;
+  /** NAT实例是否开启删除保护 */
+  DeletionProtectionEnabled?: boolean;
 }
 
 /** NAT网关绑定的弹性IP */
@@ -1976,6 +1978,8 @@ declare interface PrivateNatGateway {
   VpcType?: boolean;
   /** 跨域私网NAT关联的云联网ID */
   CcnId?: string;
+  /** 私网NAT是否开启删除保护 */
+  DeletionProtectionEnabled?: boolean;
 }
 
 /** 可创建的私网网关配额数量 */
@@ -8591,6 +8595,8 @@ declare interface ModifyNatGatewayAttributeRequest {
   ModifySecurityGroup?: boolean;
   /** NAT网关绑定的安全组列表，最终状态，空列表表示删除所有安全组，形如: `['sg-1n232323', 'sg-o4242424']` */
   SecurityGroupIds?: string[];
+  /** NAT实例是否开启删除保护 */
+  DeletionProtectionEnabled?: boolean;
 }
 
 declare interface ModifyNatGatewayAttributeResponse {

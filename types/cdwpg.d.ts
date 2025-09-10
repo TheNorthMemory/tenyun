@@ -773,6 +773,10 @@ declare interface DescribeSlowLogRequest {
   OrderByType?: string;
   /** 过滤时间 */
   Duration?: number;
+  /** 执行用户 */
+  UserName?: string;
+  /** query 语句 */
+  QueryString?: string;
 }
 
 declare interface DescribeSlowLogResponse {

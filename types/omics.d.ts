@@ -184,6 +184,16 @@ declare interface NFOption {
   LaunchDir?: string;
 }
 
+/** 通知类型 */
+declare interface NotificationType {
+  /** 腾讯健康组学平台站点信息。 */
+  StationMessage?: boolean;
+  /** 邮箱列表。 */
+  Email?: string[];
+  /** 当前用户邮箱。 */
+  CurrentUserEmail?: boolean;
+}
+
 /** 云资源ID。 */
 declare interface ResourceIds {
   /** 私有网络ID。 */
@@ -310,8 +320,8 @@ declare interface RunGroup {
   ExecutionTime?: ExecutionTime;
   /** 错误信息。 */
   ErrorMessage?: string;
-  /** 运行结果通知方式。 */
-  ResultNotify?: string;
+  /** 任务批次通知。 */
+  Notification?: RunGroupNotification;
   /** 创建时间。 */
   CreateTime?: string;
   /** 更新时间。 */
@@ -320,6 +330,30 @@ declare interface RunGroup {
   Creator?: string;
   /** 创建者ID。 */
   CreatorId?: string;
+  /** 运行结果通知方式。 */
+  ResultNotify?: string;
+}
+
+/** 任务批次通知。 */
+declare interface RunGroupNotification {
+  /** 结果通知。 */
+  ResultNotification?: RunGroupResultNotification;
+  /** 超时通知。 */
+  TimeoutNotification?: RunGroupTimeoutNotification;
+}
+
+/** 任务批次结果通知 */
+declare interface RunGroupResultNotification {
+  /** 通知类型。 */
+  NotificationType?: NotificationType;
+}
+
+/** 任务批次超时通知。 */
+declare interface RunGroupTimeoutNotification {
+  /** 任务批次超时时间，单位分钟。 */
+  TimeoutMinutes?: number;
+  /** 通知类型。 */
+  NotificationType?: NotificationType;
 }
 
 /** 任务作业详情。 */
@@ -855,6 +889,14 @@ declare interface RunApplicationRequest {
   AccessMode?: string;
   /** 缓存卷ID，不填使用默认缓存卷，暂时仅支持Nextflow。 */
   VolumeIds?: string[];
+  /** 是否开启结果通知。 */
+  ResultNotification?: boolean;
+  /** 是否开启超时通知。 */
+  TimeoutNotification?: boolean;
+  /** 任务超时通知时间（单位：分钟），支持5到2880分钟。 */
+  TimeoutNotificationMinutes?: number;
+  /** 接受通知邮件地址列表。 */
+  EmailForNotification?: string[];
 }
 
 declare interface RunApplicationResponse {

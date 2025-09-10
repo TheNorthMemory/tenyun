@@ -2725,6 +2725,8 @@ declare interface DescribeFirmwareRequest {
   ProductID: string;
   /** 固件版本号 */
   FirmwareVersion: string;
+  /** 固件模块 */
+  FwType?: string;
 }
 
 declare interface DescribeFirmwareResponse {
@@ -2780,6 +2782,22 @@ declare interface DescribeFirmwareTaskResponse {
   CreateUserId?: number;
   /** 创建账号ID昵称 */
   CreatorNickName?: string;
+  /** 延迟时间 */
+  DelayTime?: number;
+  /** 超时时间 */
+  TimeoutInterval?: number;
+  /** 静默升级or用户确认升级 */
+  UpgradeMethod?: number;
+  /** 最大重试次数 */
+  MaxRetryNum?: number;
+  /** 固件类型 */
+  FwType?: string;
+  /** 重试间隔时间单位min */
+  RetryInterval?: number;
+  /** 是否覆盖任务 */
+  OverrideMode?: number;
+  /** 用户自定义消息 */
+  TaskUserDefine?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3299,6 +3317,8 @@ declare interface GetCOSURLRequest {
   FirmwareVersion: string;
   /** 文件大小 */
   FileSize?: number;
+  /** 模块类型or固件类型 */
+  FwType?: string;
 }
 
 declare interface GetCOSURLResponse {
@@ -3317,6 +3337,8 @@ declare interface GetDeviceListRequest {
   Limit?: number;
   /** 设备固件版本号，若不带此参数会返回所有固件版本的设备。传"None-FirmwareVersion"查询无版本号的设备 */
   FirmwareVersion?: string;
+  /** 固件类型 */
+  FwType?: string;
   /** 需要过滤的设备名称 */
   DeviceName?: string;
   /** 项目ID。产品 ID 为 -1 时，该参数必填 */
@@ -3603,6 +3625,14 @@ declare interface InvokeAISearchServiceRequest {
   EndTimeMs?: number;
   /** 时区。默认值：Asia/Shanghai注：符合iana标准 https://www.iana.org/time-zones，例如Asia/Shanghai、Asia/Bangkok */
   TimeZone?: string;
+  /** 取值为1表示高级搜索，取值为2表示简单搜索，默认为1 */
+  SearchMode?: number;
+  /** 最终输出的条数；仅当SearchMode为2时支持自定义设置，默认为50 */
+  Limit?: number;
+  /** 向量搜索的相似度搜索半径，取值范围[-1, 1]；仅当SearchMode为2时支持自定义设置，默认为0.5 */
+  VectorSearchRadius?: number;
+  /** 指定向量搜索最相似的 Top K；仅当SearchMode为2时支持自定义设置，默认为100 */
+  VectorSearchTopK?: number;
 }
 
 declare interface InvokeAISearchServiceResponse {
@@ -4153,6 +4183,8 @@ declare interface PublishFirmwareUpdateMessageRequest {
   ProductID: string;
   /** 设备名称。 */
   DeviceName?: string;
+  /** 固件类型 */
+  FwType?: string;
 }
 
 declare interface PublishFirmwareUpdateMessageResponse {

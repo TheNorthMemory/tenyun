@@ -1043,6 +1043,8 @@ declare interface CheckLDAPConnectionRequest {
   IpBackup?: string;
   /** 网络域id */
   DomainId?: string;
+  /** 用户名称映射属性 */
+  AttributeUserName?: string;
 }
 
 declare interface CheckLDAPConnectionResponse {
