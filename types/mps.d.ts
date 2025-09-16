@@ -62,7 +62,7 @@ declare interface ActionConfigInfo {
 
 /** 编排原子任务 */
 declare interface Activity {
-  /** 原子任务类型：input: 起始节点output：终止节点action-trans：转码action-samplesnapshot：采样截图action-AIAnalysis: 分析action-AIRecognition：识别action-aiReview：审核action-animated-graphics：转动图action-image-sprite：雪碧图action-snapshotByTimeOffset: 时间点截图action-adaptive-substream：自适应码流action-AIQualityControl：媒体质检action-SmartSubtitles：智能字幕action-exec-rules：判断规则 */
+  /** 原子任务类型：input: 起始节点output：终止节点action-trans：转码action-samplesnapshot：采样截图action-AIAnalysis: 分析action-AIRecognition：识别action-aiReview：审核action-animated-graphics：转动图action-image-sprite：雪碧图action-snapshotByTimeOffset: 时间点截图action-adaptive-substream：自适应码流action-AIQualityControl：媒体质检action-SmartSubtitles：智能字幕action-exec-rules：判断规则action-SmartErase：智能擦除 */
   ActivityType: string;
   /** 后驱节点索引数组 */
   ReardriveIndex?: number[];
@@ -96,6 +96,8 @@ declare interface ActivityPara {
   ExecRulesTask?: ExecRulesTask | null;
   /** 智能字幕任务 */
   SmartSubtitlesTask?: SmartSubtitlesTaskInput | null;
+  /** 智能擦除任务 */
+  SmartEraseTask?: SmartEraseTaskInput | null;
 }
 
 /** 编排子任务输出 */
@@ -124,11 +126,13 @@ declare interface ActivityResItem {
   ExecRuleTask?: ScheduleExecRuleTaskResult | null;
   /** 智能字幕任务输出 */
   SmartSubtitlesTask?: ScheduleSmartSubtitleTaskResult | null;
+  /** 智能擦除任务输出 */
+  SmartEraseTask?: SmartEraseTaskResult | null;
 }
 
 /** 编排任务输出 */
 declare interface ActivityResult {
-  /** 原子任务类型。Transcode：转码。SampleSnapshot：采样截图。AnimatedGraphics：转动图。SnapshotByTimeOffset：时间点截图。ImageSprites：雪碧图。AdaptiveDynamicStreaming：自适应码流。AiContentReview：内容审核。AIRecognition：智能识别。AIAnalysis：智能分析。AiQualityControl：媒体质检。SmartSubtitles：智能字幕。 */
+  /** 原子任务类型。Transcode：转码。SampleSnapshot：采样截图。AnimatedGraphics：转动图。SnapshotByTimeOffset：时间点截图。ImageSprites：雪碧图。AdaptiveDynamicStreaming：自适应码流。AiContentReview：内容审核。AIRecognition：智能识别。AIAnalysis：智能分析。AiQualityControl：媒体质检。SmartSubtitles：智能字幕。SmartErase：智能擦除。 */
   ActivityType?: string;
   /** 原子任务输出。 */
   ActivityResItem?: ActivityResItem;
@@ -160,13 +164,13 @@ declare interface AdaptiveDynamicStreamingTaskInput {
   SubStreamObjectName?: string;
   /** 转自适应码流（仅 HLS）后，分片文件的输出路径，只能为相对路径。如果不填，则默认为相对路径：`{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}`。 */
   SegmentObjectName?: string;
-  /** 要插入的字幕文件。 */
+  /** 外挂字幕功能，指定要插入的字幕文件。 */
   AddOnSubtitles?: AddOnSubtitle[] | null;
   /** Drm信息。 */
-  DrmInfo?: DrmInfo;
+  DrmInfo?: DrmInfo | null;
   /** 自适应转码模板类型：Common：音视频类型PureAudio：纯音频类型 */
   DefinitionType?: string;
-  /** 字幕参数 */
+  /** 硬字幕（压制字幕）功能，指定字幕来源、字体大小、位置等字幕参数。 */
   SubtitleTemplate?: SubtitleTemplate | null;
   /** 转码参数扩展字段 */
   StdExtInfo?: string;
@@ -1644,6 +1648,34 @@ declare interface BatchSubTaskResult {
   SmartSubtitlesTaskResult?: BatchSmartSubtitlesResult | null;
 }
 
+/** 美颜配置 */
+declare interface BeautyConfig {
+  /** 美颜效果 */
+  BeautyEffectItems?: BeautyEffectItemConfig[];
+  /** 美颜滤镜 */
+  BeautyFilterItems?: BeautyFilterItemConfig[];
+}
+
+/** 美颜效果配置项 */
+declare interface BeautyEffectItemConfig {
+  /** 类型名称。取值如下：Whiten：美白Smooth：磨皮BeautyThinFace：瘦脸NatureFace：自然脸型VFace：V脸EnlargeEye：大眼EyeLighten：亮眼RemoveEyeBags：祛眼袋ThinNose：瘦鼻RemoveLawLine：祛法令纹ToothWhiten：牙齿美白 */
+  Type: string;
+  /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
+  Switch?: string;
+  /** 效果强度，值范围：[0, 100]。 */
+  Value?: number;
+}
+
+/** 美颜滤镜配置项 */
+declare interface BeautyFilterItemConfig {
+  /** 类型名称。取值如下：Dongjing：东京QingJiaopian：轻胶片Meiwei：美味 */
+  Type: string;
+  /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
+  Switch?: string;
+  /** 效果强度，值范围：[0, 100]。 */
+  Value?: number;
+}
+
 /** 盲水印配置 */
 declare interface BlindWatermarkConfig {
   /** 增加盲水印 */
@@ -2610,9 +2642,33 @@ declare interface EnhanceConfig {
   AudioEnhance?: AudioEnhanceConfig | null;
 }
 
+/** 智能擦除，擦除区域坐标配置。区域由左上角与右下角点的坐标确定。坐标原点为画面左上角，坐标点可使用像素值或百分比单位指定。对自动擦除区域：当单位为%时，坐标范围为[0,1]；当单位为px时，X值范围为 [0，视频画面宽度]，Y值范围为 [0，视频画面高度]对指定擦除区域：当单位为%时，坐标范围为[0,1)；当单位为px时，X值范围为 [0，视频画面宽度]，Y值范围为 [0，视频画面高度] */
+declare interface EraseArea {
+  /** 区域左上角X坐标。如当Unit取1即使用百分比单位时，0.05表示区域左上角离整个画面左上角的横向距离为画面宽度的5%。 */
+  LeftTopX: number;
+  /** 区域左上角Y坐标。如当Unit取1即使用百分比单位时，0.1表示区域左上角离整个画面左上角的纵向距离为画面高度的10%。 */
+  LeftTopY: number;
+  /** 区域右下角X坐标。如当Unit取1即使用百分比单位时，0.75表示区域右下角离整个画面左上角的横向距离为画面宽度的75%。 */
+  RightBottomX: number;
+  /** 区域右下角Y坐标。如当Unit取1即使用百分比单位时，0.9表示区域右下角离整个画面左上角的纵向距离为画面高度的90%。 */
+  RightBottomY: number;
+  /** 坐标单位- 1 百分比- 2 像素值 */
+  Unit: number;
+}
+
+/** 智能擦除，指定擦除区域配置。对指定时间段内的指定区域直接进行擦除。当BeginMs和EndMs均取0时对整个视频内的指定区域直接进行擦除。 */
+declare interface EraseTimeArea {
+  /** 开始时间，单位:毫秒 */
+  BeginMs: number;
+  /** 结束时间，单位:毫秒 */
+  EndMs: number;
+  /** 时间段内擦除区域列表 */
+  Areas: EraseArea[];
+}
+
 /** 视频评测任务的视频来源信息 */
 declare interface EvaluationMediaInputInfo {
-  /** 对比视频的来源 ID，当评测任务的类型为 BD_RATE 且对比视频来自用户输入时有效；当对比视频来自转码模版时为空 */
+  /** 对比视频的来源 ID，当评测任务的类型为 BD_RATE 且对比视频来自用户输入时有效；当对比视频来自转码模板时为空 */
   SourceId?: string | null;
   /** 对比视频的输入信息 */
   InputInfo?: MediaInputInfo | null;
@@ -2648,9 +2704,9 @@ declare interface EvaluationTaskInput {
   VCRFSet?: number[];
 }
 
-/** 在评测中使用的转码模版的信息 */
+/** 在评测中使用的转码模板的信息 */
 declare interface EvaluationTemplateInputInfo {
-  /** 转码模版的 ID。 */
+  /** 转码模板的 ID。 */
   Definition: number | null;
 }
 
@@ -3160,6 +3216,8 @@ declare interface ImageTaskInput {
   EraseConfig?: ImageEraseConfig | null;
   /** 盲水印配置。 */
   BlindWatermarkConfig?: BlindWatermarkConfig | null;
+  /** 美颜配置。 */
+  BeautyConfig?: BeautyConfig;
 }
 
 /** 图片水印模板输入参数 */
@@ -3866,7 +3924,7 @@ declare interface MediaImageSpriteItem {
 
 /** 媒体处理的输入对象信息。 */
 declare interface MediaInputInfo {
-  /** 输入来源对象的类型，支持： COS：COS源 URL：URL源 AWS-S3：AWS 源，目前只支持转码任务 */
+  /** 输入来源对象的类型，支持： COS：COS源 URL：URL源 AWS-S3：AWS 源，目前只支持转码任务 VOD：点播专业版 */
   Type: string;
   /** 当 Type 为 COS 时有效，则该项为必填，表示媒体处理 COS 对象信息。 */
   CosInputInfo?: CosInputInfo;
@@ -3874,6 +3932,8 @@ declare interface MediaInputInfo {
   UrlInputInfo?: UrlInputInfo | null;
   /** 当 Type 为 AWS-S3 时有效，则该项为必填，表示媒体处理 AWS S3 对象信息。 */
   S3InputInfo?: S3InputInfo | null;
+  /** 当 Type 为 VOD 时有效，则该项为必填，表示媒体处理 点播专业版 对象信息。 */
+  VODInputInfo?: VODInputInfo | null;
 }
 
 /** 点播媒体文件元信息 */
@@ -4586,7 +4646,7 @@ declare interface QualityControlItem {
 
 /** 质检项配置 */
 declare interface QualityControlItemConfig {
-  /** 质检项名称。质检项取值如下：LowEvaluation：无参考打分Mosaic：马赛克检测CrashScreen：花屏检测Blur：模糊检测BlackWhiteEdge：黑白边检测SolidColorScreen：纯色屏检测LowLighting：低光照HighLighting：过曝NoVoice：静音检测LowVoice：低音检测HighVoice：爆音检测Jitter：抖动检测Noise：噪点检测QRCode：二维码检测BarCode：条形码检测AppletCode：小程序码检测VideoResolutionChanged：视频分辨率变化AudioSampleRateChanged：音频采样率变化AudioChannelsChanged：音频通道数变化ParameterSetsChanged：流参数集信息发生变化DarOrSarInvalid：视频的宽高比异常TimestampFallback：DTS时间戳回退DtsJitter：DTS抖动过大PtsJitter：PTS抖动过大AACDurationDeviation：AAC帧时间戳间隔不合理AudioDroppingFrames：音频丢帧VideoDroppingFrames：视频丢帧AVTimestampInterleave：音视频交织不合理PtsLessThanDts：媒体流的 pts 小于 dtsReceiveFpsJitter：网络接收帧率抖动过大ReceiveFpsTooSmall：网络接收视频帧率过小FpsJitter：通过PTS计算得到的流帧率抖动过大StreamOpenFailed：流打开失败StreamEnd：流结束StreamParseFailed：流解析失败VideoFirstFrameNotIdr：首帧不是IDR帧StreamNALUError：NALU起始码错误TsStreamNoAud：mpegts的H26x流缺失 AUD NALUAudioStreamLack：无音频流VideoStreamLack：无视频流LackAudioRecover：缺失音频流恢复LackVideoRecover：缺失视频流恢复VideoBitrateOutofRange：视频流码率(kbps)超出范围AudioBitrateOutofRange：音频流码率(kbps)超出范围VideoDecodeFailed：视频解码错误AudioDecodeFailed：音频解码错误AudioOutOfPhase：双通道音频相位相反VideoDuplicatedFrame：视频流中存在重复帧AudioDuplicatedFrame：音频流中存在重复帧VideoRotation：视频画面旋转TsMultiPrograms：MPEG2-TS流有多个programMp4InvalidCodecFourcc：MP4中codec fourcc不符合Apple HLS要求HLSBadM3u8Format：无效的m3u8文件HLSInvalidMasterM3u8：无效的main m3u8文件HLSInvalidMediaM3u8：无效的media m3u8文件HLSMasterM3u8Recommended：main m3u8缺少标准推荐的参数HLSMediaM3u8Recommended：media m3u8缺少标准推荐的参数HLSMediaM3u8DiscontinuityExist：media m3u8存在EXT-X-DISCONTINUITYHLSMediaSegmentsStreamNumChange：切片的流数目发生变化HLSMediaSegmentsPTSJitterDeviation：切片间PTS跳变且没有EXT-X-DISCONTINUITYHLSMediaSegmentsDTSJitterDeviation：切片间DTS跳变且没有EXT-X-DISCONTINUITYTimecodeTrackExist：MP4存在tmcd轨道 */
+  /** 质检项名称。质检项取值如下：LowEvaluation：视频无参考评分（MOS）AudioEvaluation：音频无参考评分（MOS）Mosaic：马赛克检测CrashScreen：花屏检测Blur：模糊检测Jitter：抖动检测Noise：噪点检测QRCode：二维码检测BarCode：条形码检测AppletCode：小程序码检测BlackWhiteEdge：黑白边检测SolidColorScreen：纯色屏检测LowLighting：低光照HighLighting：过曝NoVoice：静音检测LowVoice：低音检测HighVoice：爆音检测AudioNoise：音频噪声检测VideoResolutionChanged：视频分辨率变化AudioSampleRateChanged：音频采样率变化AudioChannelsChanged：音频通道数变化ParameterSetsChanged：流参数集信息发生变化DarOrSarInvalid：视频的宽高比异常TimestampFallback：DTS时间戳回退DtsJitter：DTS抖动过大PtsJitter：PTS抖动过大AACDurationDeviation：AAC帧时间戳间隔不合理AudioDroppingFrames：音频丢帧VideoDroppingFrames：视频丢帧AVTimestampInterleave：音视频交织不合理PtsLessThanDts：媒体流的 pts 小于 dtsReceiveFpsJitter：网络接收帧率抖动过大ReceiveFpsTooSmall：网络接收视频帧率过小FpsJitter：通过PTS计算得到的流帧率抖动过大StreamOpenFailed：流打开失败StreamEnd：流结束StreamParseFailed：流解析失败VideoFirstFrameNotIdr：首帧不是IDR帧StreamNALUError：NALU起始码错误TsStreamNoAud：mpegts的H26x流缺失 AUD NALUAudioStreamLack：无音频流VideoStreamLack：无视频流LackAudioRecover：缺失音频流恢复LackVideoRecover：缺失视频流恢复VideoBitrateOutofRange：视频流码率(kbps)超出范围AudioBitrateOutofRange：音频流码率(kbps)超出范围VideoDecodeFailed：视频解码错误AudioDecodeFailed：音频解码错误AudioOutOfPhase：双通道音频相位相反VideoDuplicatedFrame：视频流中存在重复帧AudioDuplicatedFrame：音频流中存在重复帧VideoRotation：视频画面旋转TsMultiPrograms：MPEG2-TS流有多个programMp4InvalidCodecFourcc：MP4中codec fourcc不符合Apple HLS要求HLSBadM3u8Format：无效的m3u8文件HLSInvalidMasterM3u8：无效的main m3u8文件HLSInvalidMediaM3u8：无效的media m3u8文件HLSMasterM3u8Recommended：main m3u8缺少标准推荐的参数HLSMediaM3u8Recommended：media m3u8缺少标准推荐的参数HLSMediaM3u8DiscontinuityExist：media m3u8存在EXT-X-DISCONTINUITYHLSMediaSegmentsStreamNumChange：切片的流数目发生变化HLSMediaSegmentsPTSJitterDeviation：切片间PTS跳变且没有EXT-X-DISCONTINUITYHLSMediaSegmentsDTSJitterDeviation：切片间DTS跳变且没有EXT-X-DISCONTINUITYTimecodeTrackExist：MP4存在tmcd轨道 */
   Type: string;
   /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
   Switch?: string | null;
@@ -4678,13 +4738,25 @@ declare interface RawImageWatermarkInput {
   RepeatType?: string;
 }
 
+/** 智能擦除自定义参数 */
+declare interface RawSmartEraseParameter {
+  /** 擦除类型- subtitle 去字幕- watermark 去水印- privacy 隐私保护 */
+  EraseType: string;
+  /** 字幕擦除配置；当EraseType值为：subtitle，此字段为必填参数 */
+  EraseSubtitleConfig?: SmartEraseSubtitleConfig | null;
+  /** 水印擦除配置；当EraseType值为：watermark，此字段为必填参数 */
+  EraseWatermarkConfig?: SmartEraseWatermarkConfig | null;
+  /** 隐私保护配置；当EraseType值为：privacy，此字段为必填参数 */
+  ErasePrivacyConfig?: SmartErasePrivacyConfig | null;
+}
+
 /** 自定义智能字幕参数 */
 declare interface RawSmartSubtitleParameter {
   /** 智能字幕字幕语言类型0: 源语言1: 翻译语言2: 源语言+翻译语言当TranslateSwitch为OFF时仅支持取0当TranslateSwitch为ON时仅支持取1或2 */
   SubtitleType: number;
-  /** 智能字幕视频源语言当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语zh-PY：中英粤zh-medical：中文医疗yue：中文粤语vi：越南语ms：马来语id：印度尼西亚语fil：菲律宾语th：泰语pt：葡萄牙语tr：土耳其语ar：阿拉伯语es：西班牙语hi：印地语fr：法语de：德语zh_dialect：中文方言 */
+  /** 智能字幕视频源语言当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语zh-PY：中英粤zh-medical：中文医疗yue：中文粤语vi：越南语ms：马来语id：印度尼西亚语fil：菲律宾语th：泰语pt：葡萄牙语tr：土耳其语ar：阿拉伯语es：西班牙语hi：印地语fr：法语de：德语zh_dialect：中文方言zh_en: 中英prime_zh: 中英方言 */
   VideoSrcLanguage: string;
-  /** 智能字幕文件格式 vtt: WebVTT 格式不填或填空：不生成字幕文件 */
+  /** 智能字幕文件格式 vtt: WebVTT 格式srt: SRT格式不填或填空：不生成字幕文件 */
   SubtitleFormat?: string | null;
   /** 字幕翻译开关ON: 开启翻译OFF: 关闭翻译 */
   TranslateSwitch?: string | null;
@@ -5144,6 +5216,80 @@ declare interface SimpleAesDrm {
   Vector?: string | null;
 }
 
+/** 智能擦除模板隐私保护配置 */
+declare interface SmartErasePrivacyConfig {
+  /** 隐私保护擦除方式。- blur 模糊- mosaic 马赛克 */
+  PrivacyModel: string;
+  /** 隐私保护目标，（在API Explorer上使用时无需传入数组，添加相应项并填入对应值即可）。- face 人脸- plate 车牌 */
+  PrivacyTargets: string[];
+}
+
+/** 智能擦除模板去字幕配置 */
+declare interface SmartEraseSubtitleConfig {
+  /** 字幕擦除方式。**自动擦除：**通过AI模型自动识别视频中的字幕文本内容，进行无痕化擦除，生成新的视频。但画面干扰、特殊字幕样式可能会带来一定漏擦误擦问题，可以通过指定区域擦除处理。当使用自动擦除时，若您不指定AutoAreas，将对默认区域（画面中下部）进行自动擦除；若指定AutoAreas，将改为对您指定的区域进行自动擦除。**指定区域擦除：**若您的字幕位置较固定，建议您直接指定擦除区域，最大程度减少漏擦的情况。当您选择指定区域擦除时，请在CustomAreas中至少传入一个指定区域。- auto 自动擦除- custom 指定区域擦除 */
+  SubtitleEraseMethod: string;
+  /** 字幕擦除模型。**标准版（推荐）：**若您的字幕样式标准，通常建议选择该版本，细节无痕化效果更好。**区域版：**若您的字幕存在花体、阴影、动效等特殊样式，建议选择区域版，擦除面积更大，但细节效果不如标准版。- standard 标准模型- area 区域模型 */
+  SubtitleModel: string;
+  /** 是否开启OCR字幕提取，默认取OFF。当且仅当SubtitleEraseMethod取auto时支持开启OCR字幕提取，开启后将识别自动擦除区域内出现时间最长且最稳定的文字区域为字幕区域，对字幕区域中的文字进行提取和擦除。- ON 开启- OFF 关闭 */
+  OcrSwitch?: string;
+  /** 字幕语言，用于指导OCR识别，默认取zh_en；仅当OcrSwitch取"ON"时生效。- zh_en 中英文- multi 其他其他具体支持识别如下语言：中文、英文、日文、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语、印地语、阿拉伯语、印度-孟加拉语、印度-古吉拉特语、印度-卡纳达语 、印度-马拉亚拉姆语 、印度-泰米尔语、印度-泰卢固语、斯洛文尼亚语、波兰语、加泰罗尼亚语、波斯尼亚语、捷克语、爱沙尼亚语、克罗地亚语、旁遮普语、马拉地语、阿塞拜疆语、印尼语、卢森堡语 、立陶宛语、拉脱维亚语、马耳他语、斯洛伐克语、土耳其语、哈萨克语、希腊语、爱尔兰语、白俄罗斯语、高棉语、他加禄语、普什图语、波斯语、塔吉克斯坦语 */
+  SubtitleLang?: string;
+  /** 字幕文件格式，默认取vtt；仅当OcrSwitch取"ON"时生效。- srt srt格式- vtt WebVTT格式 */
+  SubtitleFormat?: string;
+  /** 是否开启字幕翻译，默认取OFF；仅当OcrSwitch取"ON"时生效。- ON 开启- OFF 关闭 */
+  TransSwitch?: string;
+  /** 字幕翻译目标语言，默认取en；仅当TransSwitch取"ON"时生效。当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语fr：法语es：西班牙语it：意大利语de：德语tr：土耳其语ru：俄语pt：葡萄牙语vi：越南语id：印度尼西亚语ms：马来语th：泰语ar：阿拉伯语hi：印地语 */
+  TransDstLang?: string;
+  /** 自动擦除自定义区域。对选定区域，利用AI模型自动检测其中存在的擦除目标并擦除。注意：当擦除方式选择custom时，此参数将不会生效；修改模板时，清除区域请传入[]，不传时将保持模板区域信息不变。 */
+  AutoAreas?: EraseArea[];
+  /** 指定擦除自定义区域。对选定区域，在选定时间段内不进行检测识别直接进行擦除。注意：修改模板时，清除区域请传入[]，不传时将保持模板区域信息不变。 */
+  CustomAreas?: EraseTimeArea[];
+}
+
+/** 智能擦除任务 */
+declare interface SmartEraseTaskInput {
+  /** 智能擦除模板id。 */
+  Definition?: number;
+  /** 智能擦除自定义参数，当 Definition 填 0 时有效。 该参数用于高度定制场景，建议您优先使用 Definition 指定智能擦除参数。 */
+  RawParameter?: RawSmartEraseParameter | null;
+  /** 文件的目标存储，不填则继承上层的 OutputStorage 值。 */
+  OutputStorage?: TaskOutputStorage | null;
+  /** 文件的输出路径，可以为相对路径或者绝对路径。若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。相对路径示例：文件名_{变量名}.{format}文件名.{format}绝对路径示例：/自定义路径/文件名_{变量名}.{format}**注意**：目前不支持`BatchProcessMedia`接口。 */
+  OutputObjectPath?: string;
+}
+
+/** 智能擦除任务结果 */
+declare interface SmartEraseTaskResult {
+  /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
+  Status?: string;
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369) 列表。 */
+  ErrCodeExt?: string;
+  /** 错误信息。 */
+  Message?: string;
+  /** 智能擦除输入。 */
+  Input?: SmartEraseTaskInput | null;
+  /** 智能擦除任务输出。 */
+  Output?: AiAnalysisTaskDelLogoOutput | null;
+  /** 任务进度。 */
+  Progress?: number;
+  /** 任务开始执行的时间，采用 ISO 日期格式。 */
+  BeginProcessTime?: string;
+  /** 任务执行完毕的时间，采用 ISO 日期格式。 */
+  FinishTime?: string;
+}
+
+/** 智能擦除模板去水印配置 */
+declare interface SmartEraseWatermarkConfig {
+  /** 水印擦除方式。**自动擦除：**通过A模型自动识别视频中的水印，擦除后生成新的视频。适用于动态水印。当使用自动擦除时，若您不指定AutoAreas，将对视频全屏进行自动擦除；若指定AutoAreas，将改为对您指定的区域进行自动擦除。**指定区域擦除：**针对位置较固定的静态水印，建议您直接指定擦除区域。当您选择指定区域擦除时，请至少传入一个指定区域。- auto 自动擦除- custom 指定区域擦除 */
+  WatermarkEraseMethod: string;
+  /** 水印擦除模型。基础版：效果一般，性价比高，适合动画或背景较干净的视频。高级版：效果更好，适合短剧等现实风格视频。- basic 基础版- advanced 高级版 */
+  WatermarkModel: string;
+  /** 自动擦除自定义区域。对选定区域，利用AI模型自动检测其中存在的擦除目标并擦除。注意，当擦除方式为custom时，此参数将不会生效。 */
+  AutoAreas?: EraseArea[];
+  /** 指定擦除自定义区域。对选定区域，在选定时间段内不进行检测识别直接进行擦除。 */
+  CustomAreas?: EraseTimeArea[];
+}
+
 /** 语音全文识别结果。 */
 declare interface SmartSubtitleTaskAsrFullTextResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
@@ -5168,6 +5314,8 @@ declare interface SmartSubtitleTaskAsrFullTextResultOutput {
   SegmentSet?: SmartSubtitleTaskAsrFullTextSegmentItem[] | null;
   /** 字幕文件地址。 */
   SubtitlePath?: string;
+  /** 字幕文件存储位置。 */
+  OutputStorage?: TaskOutputStorage;
 }
 
 /** 语音全文识别片段。 */
@@ -5232,6 +5380,8 @@ declare interface SmartSubtitleTaskTransTextResultOutput {
   SegmentSet?: SmartSubtitleTaskTransTextSegmentItem[] | null;
   /** 字幕文件地址。 */
   SubtitlePath?: string;
+  /** 字幕文件存储位置。 */
+  OutputStorage?: TaskOutputStorage;
 }
 
 /** 翻译片段。 */
@@ -5510,12 +5660,14 @@ declare interface TaskNotifyConfig {
 
 /** 媒体处理输出对象信息。 */
 declare interface TaskOutputStorage {
-  /** 媒体处理输出对象存储位置的类型，支持：COS：COS存储AWS-S3：AWS 存储，只适用于AWS任务，且要求同区域 */
+  /** 媒体处理输出对象存储位置的类型，支持：COS：COS存储AWS-S3：AWS 存储，只适用于AWS任务，且要求同区域 VOD：点播专业版 */
   Type: string;
   /** 当 Type 为 COS 时有效，则该项为必填，表示媒体处理 COS 输出位置。 */
   CosOutputStorage?: CosOutputStorage | null;
   /** 当 Type 为 AWS-S3 时有效，则该项为必填，表示媒体处理 AWS S3 输出位置。 */
   S3OutputStorage?: S3OutputStorage | null;
+  /** 当 Type 为 VOD 时有效，则该项为必填，表示媒体处理 点播专业版 输出位置。 */
+  VODOutputStorage?: VODOutputStorage | null;
 }
 
 /** 任务概要信息 */
@@ -5838,6 +5990,28 @@ declare interface UserDefineOcrTextReviewTemplateInfoForUpdate {
   ReviewConfidence?: number;
 }
 
+/** 媒体处理 VOD （点播专业版）对象信息。 */
+declare interface VODInputInfo {
+  /** 媒体处理对象文件所在的 *Bucket ID* */
+  Bucket?: string;
+  /** 媒体处理对象文件所在的 Bucket 所属园区 */
+  Region?: string;
+  /** 媒体处理对象文件的输入路径 */
+  Object?: string;
+  /** 点播专业版应用Id */
+  SubAppId?: number;
+}
+
+/** 媒体处理 VOD（点播专业版） 输出对象信息。 */
+declare interface VODOutputStorage {
+  /** 媒体处理生成的文件输出的目标 *Bucket ID* */
+  Bucket?: string;
+  /** 媒体处理生成的文件输出的目标 Bucket 的园区 */
+  Region?: string;
+  /** 点播专业版应用Id */
+  SubAppId?: number;
+}
+
 /** 视频检索入库任务的结果 */
 declare interface VideoDBEntryTaskResult {
   /** 入库的视频ID */
@@ -6118,6 +6292,8 @@ declare interface WorkflowTask {
   AiQualityControlTaskResult?: ScheduleQualityControlTaskResult | null;
   /** 智能字幕任务的执行结果 */
   SmartSubtitlesTaskResult?: SmartSubtitlesResult[] | null;
+  /** 智能擦除任务的执行结果 */
+  SmartEraseTaskResult?: SmartEraseTaskResult | null;
 }
 
 /** 输入规则，当上传视频命中该规则时，即触发工作流。 */
@@ -6513,13 +6689,13 @@ declare interface CreateScheduleResponse {
 declare interface CreateSmartSubtitleTemplateRequest {
   /** 智能字幕模板名称长度限制：64 个字符。 */
   Name: string;
-  /** 智能字幕视频源语言当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语zh-PY：中英粤zh-medical：中文医疗yue：中文粤语vi：越南语ms：马来语id：印度尼西亚语fil：菲律宾语th：泰语pt：葡萄牙语tr：土耳其语ar：阿拉伯语es：西班牙语hi：印地语fr：法语de：德语zh_dialect：中文方言 */
+  /** 智能字幕视频源语言当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语zh-PY：中英粤zh-medical：中文医疗yue：中文粤语vi：越南语ms：马来语id：印度尼西亚语fil：菲律宾语th：泰语pt：葡萄牙语tr：土耳其语ar：阿拉伯语es：西班牙语hi：印地语fr：法语de：德语zh_dialect：中文方言zh_en: 中英prime_zh: 中英方言 */
   VideoSrcLanguage: string;
   /** 智能字幕字幕语言类型0: 源语言1: 翻译语言2: 源语言+翻译语言当TranslateSwitch为OFF时仅支持取0当TranslateSwitch为ON时仅支持取1或2 */
   SubtitleType: number;
   /** 智能字幕模板描述信息长度限制：256 个字符。 */
   Comment?: string;
-  /** 智能字幕文件格式 vtt: WebVTT 格式不填或填空：不生成字幕文件 */
+  /** 智能字幕文件格式 vtt: WebVTT 格式 srt: SRT 格式不填或填空：不生成字幕文件 */
   SubtitleFormat?: string;
   /** ASR热词库参数 */
   AsrHotWordsConfigure?: AsrHotWordsConfigure;
@@ -8273,9 +8449,9 @@ declare interface ModifySmartSubtitleTemplateRequest {
   Name?: string;
   /** 智能字幕模板描述信息长度限制：256 个字符。 */
   Comment?: string;
-  /** 智能字幕视频源语言当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语zh-PY：中英粤zh-medical：中文医疗yue：中文粤语vi：越南语ms：马来语id：印度尼西亚语fil：菲律宾语th：泰语pt：葡萄牙语tr：土耳其语ar：阿拉伯语es：西班牙语hi：印地语fr：法语de：德语zh_dialect：中文方言 */
+  /** 智能字幕视频源语言当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语zh-PY：中英粤zh-medical：中文医疗yue：中文粤语vi：越南语ms：马来语id：印度尼西亚语fil：菲律宾语th：泰语pt：葡萄牙语tr：土耳其语ar：阿拉伯语es：西班牙语hi：印地语fr：法语de：德语zh_dialect：中文方言zh_en: 中英prime_zh: 中英方言 */
   VideoSrcLanguage?: string;
-  /** 智能字幕文件格式 vtt: WebVTT 格式不填或填空：不生成字幕文件 */
+  /** 智能字幕文件格式 vtt: WebVTT 格式srt: SRT格式不填或填空：不生成字幕文件 */
   SubtitleFormat?: string;
   /** 智能字幕字幕语言类型0: 源语言1: 翻译语言2: 源语言+翻译语言当TranslateSwitch为OFF时仅支持取0当TranslateSwitch为ON时仅支持取1或2 */
   SubtitleType?: number;
@@ -8583,6 +8759,8 @@ declare interface ProcessMediaRequest {
   AiQualityControlTask?: AiQualityControlTaskInput;
   /** 智能字幕 */
   SmartSubtitlesTask?: SmartSubtitlesTaskInput;
+  /** 智能擦除类型任务参数 */
+  SmartEraseTask?: SmartEraseTaskInput;
   /** 任务的事件通知信息，不填代表不获取事件通知。 */
   TaskNotifyConfig?: TaskNotifyConfig;
   /** 任务流的优先级，数值越大优先级越高，取值范围是-10到 10，不填代表0。 */

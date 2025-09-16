@@ -23,9 +23,9 @@ declare interface AudioTranslateResult {
 /** 音频翻译结果。 */
 declare interface TranslateResult {
   /** 翻译源文字。 */
-  SourceText?: string | null;
+  SourceText: string | null;
   /** 翻译后文字。 */
-  TargetText?: string | null;
+  TargetText: string | null;
 }
 
 declare interface ConfirmVideoTranslateJobRequest {

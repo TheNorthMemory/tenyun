@@ -2,6 +2,14 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 描述键值对过滤器，用于条件过滤查询。例如过滤 ID、名称、状态等- 若存在多个 Filter 时，Filter间的关系为逻辑与（AND）关系。- 若同一个 Filter 存在多个 Values，同一 Filter 下 Values 间的关系为逻辑或（OR）关系。 */
+declare interface Filter {
+  /** 需要过滤的字段 */
+  Name: string;
+  /** 字段的过滤值 */
+  Values: string[];
+}
+
 /** 表示应用实例的软件授权，包含颁发信息、激活信息等内容。 */
 declare interface License {
   /** License ID */
@@ -56,6 +64,18 @@ declare interface SaleParam {
   ParamType?: string | null;
 }
 
+declare interface DescribeLicenseRequest {
+  /** 可选过滤器 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeLicenseResponse {
+  /** 针对上面raw的签名 */
+  Token?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface VerifyLicenseRequest {
 }
 
@@ -73,6 +93,8 @@ declare interface VerifyLicenseResponse {
 /** {@link Cloudapp 云应用} */
 declare interface Cloudapp {
   (): Versions;
+  /** 获取license信息 {@link DescribeLicenseRequest} {@link DescribeLicenseResponse} */
+  DescribeLicense(data?: DescribeLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseResponse>;
   /** 从应用软件进程验证授权信息 {@link VerifyLicenseRequest} {@link VerifyLicenseResponse} */
   VerifyLicense(data?: VerifyLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyLicenseResponse>;
 }

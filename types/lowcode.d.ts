@@ -2,6 +2,22 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 安装应用，任务详情 */
+declare interface AppJobInfo {
+  /** 状态 */
+  Status: number | null;
+  /** 当前步骤 */
+  Step: number | null;
+  /** 任务id */
+  Id: number | null;
+  /** 任务总共步骤数 */
+  TotalStep: number | null;
+  /** 当前步骤详情 */
+  StepDesc: string;
+  /** 错误信息 */
+  ErrMsg: string;
+}
+
 /** 数据源详情列表 */
 declare interface DataSourceDetail {
   /** 数据源 ID */
@@ -230,6 +246,20 @@ declare interface KnowledgeSplitterPreprocess {
   AppendKeywordsToChunk?: boolean;
 }
 
+/** 组织架构返回参数 */
+declare interface OrgResp {
+  /** 部门id */
+  OrgId: string;
+  /** 部门名称 */
+  OrgName: string;
+  /** 部门标识 */
+  OrgIdentity: string;
+  /** 部门层级 */
+  Level: string;
+  /** 主键字段 */
+  PrimaryColumn: string;
+}
+
 /** 查询条件 */
 declare interface PageQuery {
   /** 文件id数组，表示要查询的文件的所有 ID，支持批量查询，数组元素范围[1,20]。 */
@@ -304,6 +334,32 @@ declare interface RelationField {
   RelateDataSourceName?: string;
 }
 
+/** 权限组 */
+declare interface RoleGroup {
+  /** 权限组id */
+  Id: number | null;
+  /** 权限组名称 */
+  Name: string;
+  /** 权限组标识 */
+  GroupIdentity: string;
+  /** 权限组描述 */
+  GroupDesc: string | null;
+  /** 创建时间 */
+  CreateTime: string | null;
+  /** 更新时间 */
+  UpdateTime: string | null;
+  /** 角色数组 */
+  RoleList: WedaRole[] | null;
+}
+
+/** 角色分页 */
+declare interface RoleListPage {
+  /** 角色列表 */
+  RoleList: WedaRole[];
+  /** 总数 */
+  Total: number;
+}
+
 /** 知识库搜索文档信息 */
 declare interface SearchDocInfo {
   /** 知识库名称 */
@@ -352,6 +408,164 @@ declare interface UploadKnowledgeDocumentSetRsp {
   FileMetaData?: string;
   /** Cos存储文件ID */
   FileId?: string;
+}
+
+/** 低码应用详情 */
+declare interface Weapp {
+  /** 应用id */
+  Id?: string;
+  /** 应用所属者 */
+  Owner?: string | null;
+  /** 标识 */
+  Name?: string;
+  /** 描述 */
+  Description?: string | null;
+  /** 应用名称 */
+  Title?: string;
+  /** 环境信息 */
+  Env?: string | null;
+  /** 状态.0:已经安装3:安装中4:安装失败 */
+  Status?: number;
+  /** 环境信息 */
+  EnvId?: string;
+  /** 环境地域 */
+  EnvRegion?: string;
+  /** 资源包 */
+  PkgId?: string;
+  /** 应用信息是否安装到cms */
+  CmsProject?: number | null;
+  /** 渠道 */
+  Channel?: string | null;
+  /** 模板id */
+  TemplateId?: string | null;
+  /** 过期时间 */
+  ExpireTime?: string | null;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 来源 */
+  Source?: string | null;
+  /** 是否计费应用 */
+  IsFree?: boolean;
+  /** 应用内容类型 */
+  ContentType?: string | null;
+  /** 应用类型，是否为B端应用 */
+  AppType?: number | null;
+  /** 关联B端一样id */
+  AttachAppId?: string | null;
+  /** 应用类型，是否为企业应用 */
+  EType?: number | null;
+  /** 企业应用数据 */
+  EData?: string | null;
+  /** 最新一次小程序构建id */
+  LastMpCiId?: string | null;
+  /** 最新一次小程序状态 */
+  LastMpCiStatus?: string | null;
+  /** 最新一次web构建id */
+  LastWebCiId?: string | null;
+  /** 最新一次web状态 */
+  LastWebCiStatus?: string | null;
+  /** 最新部署时间 */
+  LastDeployTime?: string | null;
+  /** 安装任务id */
+  FlowId?: number | null;
+  /** 任务详情 */
+  JobInfo?: AppJobInfo | null;
+  /** 应用端 */
+  Platform?: string | null;
+  /** 最新一次web构建模式 */
+  LastWebCiMode?: number | null;
+  /** 最新一次小程序构建模式 */
+  LastMpCiMode?: number | null;
+  /** 应用场景化入口类型 */
+  SceneType?: string | null;
+  /** client_Id */
+  ClientId?: string | null;
+  /** 图标地址 */
+  IconUrl?: string | null;
+  /** 页面图标地址 */
+  FaviconUrl?: string | null;
+  /** 图标背景色 */
+  BackgroundColor?: string | null;
+  /** 应用是否收藏 */
+  Favorite?: boolean;
+  /** 发布平台：web、mp、pc、adminPortal、xPagePC、cloudAdmin */
+  PublishPlatform?: string;
+}
+
+/** weda角色 */
+declare interface WedaRole {
+  /** 角色名称 */
+  Name: string;
+  /** 角色标识 */
+  RoleIdentity: string;
+  /** 角色id */
+  Id: number;
+  /** 父角色id */
+  ParentRoleId: number;
+  /** 子角色id */
+  ChildRoleId: number;
+  /** 环境标识 */
+  EnvIdentity: string;
+  /** 是否已发布 */
+  IsReleased: boolean | null;
+}
+
+/** weda用户 */
+declare interface WedaUser {
+  /** 腾讯云主账号uin */
+  Uin?: number;
+  /** 名字 */
+  Name?: string;
+  /** 环境 */
+  Env?: number;
+  /** 类型 */
+  Type?: number;
+  /** 昵称 */
+  NickName?: string;
+  /** 邮箱 */
+  Email?: string;
+  /** 手机号 */
+  Phone?: string;
+  /** 项目id */
+  ProjectId?: number;
+  /** 用户uuid */
+  Uuid?: string;
+  /** 渠道，1:自建；2:企业微信导入 */
+  Source?: number;
+  /** 微信openid */
+  OpenId?: string | null;
+  /** 关联角色 */
+  RelatedRoles?: WedaRole[] | null;
+  /** 企业微信userid */
+  WechatUserId?: string | null;
+  /** 内部用户类型 */
+  InternalUserType?: number | null;
+  /** 微搭用户id */
+  UserId?: number;
+  /** 所属部门名称 */
+  OrgName?: string;
+  /** 用户schema */
+  UserSchema?: string | null;
+  /** 用户扩展信息 */
+  UserExtend?: string | null;
+  /** 用户是否授权License */
+  IsLicensed?: boolean | null;
+  /** 权限组数组 */
+  RelatedRoleGroups?: RoleGroup[] | null;
+  /** 兼岗部门 */
+  Orgs?: OrgResp[] | null;
+  /** 主岗部门 */
+  MainOrg?: OrgResp[] | null;
+  /** 直属上级 */
+  ParentUserId?: number | null;
+  /** 主列字段 */
+  PrimaryColumn?: string | null;
+  /** 用户头像 */
+  AvatarUrl?: string | null;
+  /** 最后登录时间 */
+  LastLoginTime?: string;
 }
 
 declare interface CheckDeployAppRequest {
@@ -446,6 +660,34 @@ declare interface DeployAppResponse {
   DeployErrCode?: number;
   /** 发布错误信息 */
   DeployErrMsg?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAppsRequest {
+  /** 分页每页个数 */
+  Limit: number;
+  /** 分页Offset */
+  Offset: number;
+  /** 环境id */
+  EnvId?: string;
+  /** 搜索关键词 */
+  Keyword?: string;
+  /** 应用id */
+  AppIds?: string[];
+  /** 来源类型 */
+  Channel?: string;
+  /** 1-自定义应用；2-模型应用 */
+  Type?: number;
+  /** 应用是否收藏 */
+  Favorite?: boolean;
+}
+
+declare interface DescribeAppsResponse {
+  /** 应用列表 */
+  Weapps?: Weapp[] | null;
+  /** 应用个数 */
+  Count?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -552,6 +794,52 @@ declare interface DescribeKnowledgeSetListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRelatedUsersRequest {
+  /** 角色id */
+  RoleId: number;
+  /** 环境id */
+  EnvId: string;
+  /** 页码 */
+  PageNo: number;
+  /** 页面含量 */
+  PageSize: number;
+  /** 环境类型 */
+  EnvType?: string;
+}
+
+declare interface DescribeRelatedUsersResponse {
+  /** 关联的用户列表 */
+  Data?: WedaUser[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeResourceRoleListRequest {
+  /** 资源id */
+  ResourceId: string;
+  /** 资源类型 */
+  ResourceType: string;
+  /** 预览：pre；非预览：prod */
+  EnvType: string;
+  /** 环境id */
+  EnvId: string;
+  /** 子资源类型 */
+  SubType?: string;
+  /** 页码 */
+  PageNo?: number;
+  /** 分页大小 */
+  PageSize?: number;
+}
+
+declare interface DescribeResourceRoleListResponse {
+  /** 角色列表 */
+  Data?: RoleListPage;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface PutWxAppIdToWeAppRequest {
   /** 应用ID */
   WeAppId: string;
@@ -653,6 +941,8 @@ declare interface Lowcode {
   DeleteKnowledgeSet(data: DeleteKnowledgeSetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteKnowledgeSetResponse>;
   /** 发布应用 {@link DeployAppRequest} {@link DeployAppResponse} */
   DeployApp(data: DeployAppRequest, config?: AxiosRequestConfig): AxiosPromise<DeployAppResponse>;
+  /** 获取应用列表 {@link DescribeAppsRequest} {@link DescribeAppsResponse} */
+  DescribeApps(data: DescribeAppsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppsResponse>;
   /** 获取数据源详情列表 {@link DescribeDataSourceListRequest} {@link DescribeDataSourceListResponse} */
   DescribeDataSourceList(data: DescribeDataSourceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataSourceListResponse>;
   /** 获取知识库下文档详情 {@link DescribeKnowledgeDocumentSetDetailRequest} {@link DescribeKnowledgeDocumentSetDetailResponse} */
@@ -661,6 +951,10 @@ declare interface Lowcode {
   DescribeKnowledgeDocumentSetList(data: DescribeKnowledgeDocumentSetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKnowledgeDocumentSetListResponse>;
   /** 查询环境下的知识库列表 {@link DescribeKnowledgeSetListRequest} {@link DescribeKnowledgeSetListResponse} */
   DescribeKnowledgeSetList(data: DescribeKnowledgeSetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKnowledgeSetListResponse>;
+  /** 角色关联的用户列表 {@link DescribeRelatedUsersRequest} {@link DescribeRelatedUsersResponse} */
+  DescribeRelatedUsers(data: DescribeRelatedUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRelatedUsersResponse>;
+  /** 查询资源关联的角色列表 {@link DescribeResourceRoleListRequest} {@link DescribeResourceRoleListResponse} */
+  DescribeResourceRoleList(data: DescribeResourceRoleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceRoleListResponse>;
   /** 应用绑定微信ID {@link PutWxAppIdToWeAppRequest} {@link PutWxAppIdToWeAppResponse} */
   PutWxAppIdToWeApp(data: PutWxAppIdToWeAppRequest, config?: AxiosRequestConfig): AxiosPromise<PutWxAppIdToWeAppResponse>;
   /** 知识库搜索文档接口 {@link SearchDocListRequest} {@link SearchDocListResponse} */

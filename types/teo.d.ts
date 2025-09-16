@@ -6062,6 +6062,30 @@ declare interface DescribeTimingL7CacheDataResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTimingL7OriginPullDataRequest {
+  /** 开始时间。 */
+  StartTime: string;
+  /** 结束时间。查询时间范围（`EndTime` - `StartTime`）需小于等于 31 天。 */
+  EndTime: string;
+  /** 指标列表，取值有:l7Flow_outFlux_hy: EdgeOne 节点至源站方向的请求流量，单位：Byte；l7Flow_outBandwidth_hy: EdgeOne 节点至源站方向的请求带宽，单位：bps；l7Flow_request_hy: EdgeOne 节点至源站方向的请求数，单位：次。l7Flow_inFlux_hy: 源站至 EdgeOne 节点方向的响应流量，单位：Byte；l7Flow_inBandwidth_hy: 源站至 EdgeOne 节点方向的响应带宽，单位：bps； */
+  MetricNames: string[];
+  /** 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
+  ZoneIds: string[];
+  /** 查询时间粒度，取值有：min: 1分钟；5min: 5分钟；hour: 1小时；day: 1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：2 小时范围内以 min 粒度查询，2 天范围内以 5min 粒度查询，7 天范围内以 hour 粒度查询，超过 7 天以 day 粒度查询。 */
+  Interval?: string;
+  /** 过滤条件，详细的过滤条件如下：domain：客户端请求的域名。若按泛域名接入 EdgeOne，则数据中记录为泛域名，而不是具体域名。 */
+  Filters?: QueryCondition[];
+}
+
+declare interface DescribeTimingL7OriginPullDataResponse {
+  /** 查询结果的总条数。 */
+  TotalCount?: number;
+  /** 回源时序数据列表。 */
+  TimingDataRecords?: TimingDataRecord[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTopL7AnalysisDataRequest {
   /** 开始时间。 */
   StartTime: string;
@@ -6647,6 +6671,8 @@ declare interface ModifyHostsCertificateRequest {
   ApplyType?: string;
   /** 在边缘双向认证场景下，该字段为客户端的 CA 证书，部署在 EO 节点内，用于客户端对 EO 节点进行认证。默认关闭，不填写表示保持原有配置。 */
   ClientCertInfo?: MutualTLS;
+  /** 用于配置 EO 节点回源时携带的证书，用于回源双向认证握手，默认关闭，不填写表示保持原有配置。该配置当前为白名单内测中，如需使用，请[联系我们](https://cloud.tencent.com/online-service)。 */
+  UpstreamCertInfo?: UpstreamCertInfo;
 }
 
 declare interface ModifyHostsCertificateResponse {
@@ -7653,6 +7679,8 @@ declare interface Teo {
   DescribeTimingL7AnalysisData(data: DescribeTimingL7AnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL7AnalysisDataResponse>;
   /** 查询缓存分析时序数据（待废弃） {@link DescribeTimingL7CacheDataRequest} {@link DescribeTimingL7CacheDataResponse} */
   DescribeTimingL7CacheData(data: DescribeTimingL7CacheDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL7CacheDataResponse>;
+  /** 查询回源时序数据 {@link DescribeTimingL7OriginPullDataRequest} {@link DescribeTimingL7OriginPullDataResponse} */
+  DescribeTimingL7OriginPullData(data: DescribeTimingL7OriginPullDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL7OriginPullDataResponse>;
   /** 查询流量分析Top数据 {@link DescribeTopL7AnalysisDataRequest} {@link DescribeTopL7AnalysisDataResponse} */
   DescribeTopL7AnalysisData(data: DescribeTopL7AnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopL7AnalysisDataResponse>;
   /** 查询缓存分析Top数据（待废弃） {@link DescribeTopL7CacheDataRequest} {@link DescribeTopL7CacheDataResponse} */

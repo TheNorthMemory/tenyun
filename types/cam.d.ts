@@ -334,6 +334,8 @@ declare interface Receiver {
   WechatFlag?: number;
   /** 账号uin */
   Uin?: number;
+  /** 国家代码 */
+  CountryCode?: string;
 }
 
 /** 角色详细信息 */

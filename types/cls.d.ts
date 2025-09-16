@@ -474,6 +474,16 @@ declare interface ConsumerContent {
   JsonType?: number;
 }
 
+/** kafka协议消费组信息 */
+declare interface ConsumerGroup {
+  /** 消费组名称 */
+  Group?: string;
+  /** 状态。- Empty：组内没有成员，但存在已提交的偏移量。所有消费者都离开但保留了偏移量- Dead：组内没有成员，且没有已提交的偏移量。组被删除或长时间无活动- Stable：组内成员正常消费，分区分配平衡。正常运行状态- PreparingRebalance：组正在准备重新平衡。有新成员加入或现有成员离开- CompletingRebalance：组正在准备重新平衡。有新成员加入或现有成员离开 */
+  State?: string;
+  /** 分区分配策略均衡算法名称。- 常见均衡算法如下： - range:按分区范围分配 - roundrobin:轮询式分配 - sticky:粘性分配（避免不必要的重平衡） */
+  ProtocolName?: string;
+}
+
 /** 自建k8s-容器文件路径信息 */
 declare interface ContainerFileInfo {
   /** namespace可以多个，用分隔号分割,例如A,B */
@@ -900,6 +910,16 @@ declare interface FullTextInfo {
   Tokenizer: string;
   /** 是否包含中文 */
   ContainZH?: boolean;
+}
+
+/** kafka协议消费组区分信息 */
+declare interface GroupPartitionInfo {
+  /** 分区id */
+  PartitionId?: number;
+  /** 分区最新数据时间戳，单位：s */
+  CommitTimestamp?: number;
+  /** 消费者 */
+  Consumer?: string;
 }
 
 /** 分组触发条件 */
@@ -2197,7 +2217,7 @@ declare interface CreateLogsetRequest {
   LogsetName: string;
   /** 标签描述列表。最大支持10个标签键值对，并且不能有重复的键值对 */
   Tags?: Tag[];
-  /** 日志集ID，格式为：用户自定义部分-用户appid，用户自定义部分仅支持小写字母、数字和-，且不能以-开头和结尾，长度为3至40字符，尾部需要使用-拼接用户appid */
+  /** 日志集ID，格式为：用户自定义部分-用户APPID。未填写该参数时将自动生成ID。- 用户自定义部分仅支持小写字母、数字和-，且不能以-开头和结尾，长度为3至40字符。- 尾部需要使用-拼接用户APPID，APPID可在https://console.cloud.tencent.com/developer页面查询。- 如果指定该字段，需保证全地域唯一 */
   LogsetId?: string;
 }
 
@@ -2349,7 +2369,7 @@ declare interface CreateTopicRequest {
   Describes?: string;
   /** 0：关闭日志沉降。非0：开启日志沉降后标准存储的天数，HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效。 */
   HotPeriod?: number;
-  /** 主题自定义ID，格式为：用户自定义部分-APPID。未填写该参数时将自动生成ID。- 用户自定义部分仅支持小写字母、数字和-，且不能以-开头和结尾，长度为3至40字符- APPID可在https://console.cloud.tencent.com/developer页面查询 */
+  /** 主题自定义ID，格式为：用户自定义部分-用户APPID。未填写该参数时将自动生成ID。- 用户自定义部分仅支持小写字母、数字和-，且不能以-开头和结尾，长度为3至40字符- 尾部需要使用-拼接用户APPID，APPID可在https://console.cloud.tencent.com/developer页面查询。- 如果指定该字段，需保证全地域唯一 */
   TopicId?: string;
   /** 免鉴权开关。 false：关闭； true：开启。默认为false。开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。 */
   IsWebTracking?: boolean;
@@ -2922,6 +2942,50 @@ declare interface DescribeIndexResponse {
   IncludeInternalFields?: boolean;
   /** 元数据字段（前缀为`__TAG__`的字段）是否包含至全文索引* 0:仅包含开启键值索引的元数据字段* 1:包含所有元数据字段* 2:不包含任何元数据字段 */
   MetadataFlag?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeKafkaConsumerGroupDetailRequest {
+  /** 日志主题id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  TopicId: string;
+  /** 消费组名称 */
+  Group: string;
+}
+
+declare interface DescribeKafkaConsumerGroupDetailResponse {
+  /** 日志集id */
+  LogsetId?: string;
+  /** 消费组名称 */
+  Group?: string;
+  /** 消费组信息列表 */
+  PartitionInfos?: GroupPartitionInfo[];
+  /** Empty：组内没有成员，但存在已提交的偏移量。所有消费者都离开但保留了偏移量Dead：组内没有成员，且没有已提交的偏移量。组被删除或长时间无活动Stable：组内成员正常消费，分区分配平衡。正常运行状态PreparingRebalance：组正在准备重新平衡。有新成员加入或现有成员离开CompletingRebalance：组正在准备重新平衡。有新成员加入或现有成员离开 */
+  State?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeKafkaConsumerGroupListRequest {
+  /** 日志主题id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  TopicId: string;
+  /** - group按照【消费组名称】进行过滤。类型：String必选：否示例：消费组1每次请求的Filters的上限为10，Filter.Values的上限为10。 */
+  Filters?: Filter[];
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
+}
+
+declare interface DescribeKafkaConsumerGroupListResponse {
+  /** 日志主题名称 */
+  TopicName?: string;
+  /** 日志集id */
+  LogsetId?: string;
+  /** 总个数 */
+  Total?: number;
+  /** 消费组信息列表 */
+  Groups?: ConsumerGroup[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3588,6 +3652,16 @@ declare interface ModifyIndexResponse {
   RequestId?: string;
 }
 
+declare interface ModifyKafkaConsumerGroupOffsetRequest {
+}
+
+declare interface ModifyKafkaConsumerGroupOffsetResponse {
+  /** 状态码。0：成功，-1：失败 */
+  Code?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyKafkaConsumerRequest {
   /** 日志主题Id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
   FromTopicId: string;
@@ -4181,6 +4255,10 @@ declare interface Cls {
   DescribeIndex(data: DescribeIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexResponse>;
   /** 获取Kafka协议消费信息 {@link DescribeKafkaConsumerRequest} {@link DescribeKafkaConsumerResponse} */
   DescribeKafkaConsumer(data: DescribeKafkaConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKafkaConsumerResponse>;
+  /** 获取Kafka协议消费组详情 {@link DescribeKafkaConsumerGroupDetailRequest} {@link DescribeKafkaConsumerGroupDetailResponse} */
+  DescribeKafkaConsumerGroupDetail(data: DescribeKafkaConsumerGroupDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKafkaConsumerGroupDetailResponse>;
+  /** 获取Kafka协议消费组列表 {@link DescribeKafkaConsumerGroupListRequest} {@link DescribeKafkaConsumerGroupListResponse} */
+  DescribeKafkaConsumerGroupList(data: DescribeKafkaConsumerGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKafkaConsumerGroupListResponse>;
   /** 获取Kafka数据订阅任务列表 {@link DescribeKafkaRechargesRequest} {@link DescribeKafkaRechargesResponse} */
   DescribeKafkaRecharges(data: DescribeKafkaRechargesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKafkaRechargesResponse>;
   /** 上下文检索 {@link DescribeLogContextRequest} {@link DescribeLogContextResponse} */
@@ -4239,6 +4317,8 @@ declare interface Cls {
   ModifyIndex(data: ModifyIndexRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIndexResponse>;
   /** 修改Kafka协议消费信息 {@link ModifyKafkaConsumerRequest} {@link ModifyKafkaConsumerResponse} */
   ModifyKafkaConsumer(data: ModifyKafkaConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyKafkaConsumerResponse>;
+  /** 修改Kafka协议消费组点位 {@link ModifyKafkaConsumerGroupOffsetRequest} {@link ModifyKafkaConsumerGroupOffsetResponse} */
+  ModifyKafkaConsumerGroupOffset(data?: ModifyKafkaConsumerGroupOffsetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyKafkaConsumerGroupOffsetResponse>;
   /** 修改Kafka数据订阅任务 {@link ModifyKafkaRechargeRequest} {@link ModifyKafkaRechargeResponse} */
   ModifyKafkaRecharge(data: ModifyKafkaRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyKafkaRechargeResponse>;
   /** 修改日志集 {@link ModifyLogsetRequest} {@link ModifyLogsetResponse} */

@@ -80,6 +80,8 @@ declare interface ApproverInfo {
   Components?: Component[];
   /** 进入签署流程的限制，目前支持以下选项： 空值（默认） :无限制，可在任何场景进入签署流程。 link :选择此选项后，将无法通过控制台或电子签小程序列表进入填写或签署操作，仅可预览合同。填写或签署流程只能通过短信或发起方提供的专用链接进行。 */
   SignEndpoints?: string[];
+  /** 快速注册相关信息 */
+  RegisterInfo?: RegisterInfo;
 }
 
 /** 签署方信息，发起合同后可获取到对应的签署方信息，如角色ID，角色名称 */
@@ -478,6 +480,32 @@ declare interface ExtractionField {
   Description?: string;
   /** 提取出合同中的字段信息。 */
   Values?: string[];
+}
+
+/** 合同信息提取字段值信息。 */
+declare interface ExtractionFieldResult {
+  /** 字段ID */
+  Id?: string;
+  /** 用于合同智能提取的字段名称。 */
+  Name?: string;
+  /** 合同智能提取的字段类型，目前仅支持TEXT、DATE、NUMBER、OPTION类型。类型支持如下： 1、TEXT（文本） 2、DATE（日期） 3、NUMBER（数字） 4、OPTION（选项值） */
+  Type?: string;
+  /** 提取出合同中的字段信息。 */
+  Values?: string[];
+  /** 是否需要语义提取，默认为false */
+  RequiresSemanticExtraction?: boolean;
+  /** 提取出值在合同中的坐标位置信息 */
+  Positions?: PositionInfo[];
+}
+
+/** 合同信息提取结果 */
+declare interface ExtractionTaskResult {
+  /** 用于合同信息提取的资源ID。 */
+  ResourceId?: string;
+  /** 用于合同信息提取的资源名称。 */
+  ResourceName?: string;
+  /** 根据当前合同提取出的字段信息 */
+  ExtractionFieldResults?: ExtractionFieldResult[];
 }
 
 /** 绑定角色失败信息 */
@@ -1338,6 +1366,8 @@ declare interface RegisterInfo {
   Uscc?: string | null;
   /** 字段不再使用，社会统一信用代码 */
   UnifiedSocialCreditCode?: string;
+  /** 组织机构企业注册地址。 请确认该企业注册地址与企业营业执照中注册的地址一致。 */
+  OrganizationAddress?: string;
   /** 指定企业认证的授权方式 支持多选:2: 法人授权方式5: 授权书+对公打款方式 */
   AuthorizationTypes?: number[];
   /** 指定企业认证的授权方式:2: 法人授权方式5: 授权书+对公打款方式 */
@@ -2085,7 +2115,7 @@ declare interface CreateDocumentRequest {
   FileNames?: string[];
   /** 电子文档的填写控件的填充内容。具体方式可以参考[FormField](https://qian.tencent.com/developers/companyApis/dataTypes/#formfield)结构体的定义。支持自动签传递印章，可通过指定自动签控件id，指定印章id来完成附件控件支持传入图片、文件资源id，并将内容合成到合同文件中。支持的文件类型有doc、docx、xls、xlsx、html、jpg、jpeg、png、bmp、txt、pdf。需要注意如果传入的资源类型都是图片类型，图片资源会放置在合同文件的末尾，如果传入的资源有非图片类型资源，会将资源放置在附件控件所在页面的下一页。注：只有在控制台编辑模板时，归属给发起方的填写控件（如下图）才能在创建文档的时候进行内容填充。![image](https://qcloudimg.tencent-cloud.cn/raw/a54a76a58c454593d06d8e9883ecc9b3.png) */
   FormFields?: FormField[];
-  /** 是否为预览模式，取值如下： **false**：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。 **true**：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。 注意： 以预览模式创建的合同仅供查看，因此参与方无法进行签署操作 注: `当使用的模板中存在动态表格控件时，预览结果中没有动态表格的填写内容，动态表格合成完后会触发文档合成完成的回调通知` */
+  /** 是否为预览模式，取值如下： **false**：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。 **true**：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。 注意： 1.以预览模式创建的合同仅供查看，因此参与方无法进行签署操作;；2.以预览模式调用该接口返回的FlowId为临时Flowld，无法用于发起和拉取信息。 注: `当使用的模板中存在动态表格控件时，预览结果中没有动态表格的填写内容，动态表格合成完后会触发文档合成完成的回调通知` */
   NeedPreview?: boolean;
   /** 预览模式下产生的预览链接类型 **0** :(默认) 文件流 ,点开后下载预览的合同PDF文件 **1** :H5链接 ,点开后在浏览器中展示合同的样子。注: `1.此参数在NeedPreview 为true时有效``2.动态表格控件不支持H5链接方式预览` */
   PreviewType?: number;
@@ -3882,12 +3912,14 @@ declare interface DescribeInformationExtractionTaskRequest {
 }
 
 declare interface DescribeInformationExtractionTaskResponse {
-  /** 信息提取任务结果 */
+  /** 合同信息提取字段信息 */
   Fields?: ExtractionField[];
   /** 合同智能提取任务状态。状态如下： **0** - 任务创建成功（还未执行） **1** - 排队中（等待执行） **2** - 提取中（正在执行） **3** - 提取成功 **4** - 提取失败 */
   Status?: number;
   /** 合同智能提取结果下载，文件格式为`xlsx`。注意：`链接有效期为5分钟，过期后可重新获取` */
   Url?: string;
+  /** 合同信息提取结果信息 */
+  Results?: ExtractionTaskResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

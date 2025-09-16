@@ -3119,7 +3119,7 @@ declare interface CreateExportRequest {
   TopicId: string;
   /** 日志导出数量, 最大值5000万 */
   Count: number;
-  /** 日志导出检索语句，不支持[SQL语句] */
+  /** 日志导出检索语句，需要进行base64编码,不支持[SQL语句] */
   Query: string;
   /** 日志导出起始时间，毫秒时间戳 */
   From: number;
@@ -4501,7 +4501,7 @@ declare interface DescribeLogHistogramRequest {
   From: number;
   /** 要查询的日志的结束时间，Unix时间戳，单位ms */
   To: number;
-  /** 查询语句 */
+  /** 查询语句，进行base64编码 */
   Query: string;
   /** 日志主题ID，可以通过DescribeTopics接口获取,访问日志主题ID和攻击日志主题ID方式不同，注意DescribeTopics接口使用方法 */
   TopicId?: string;
@@ -6335,7 +6335,7 @@ declare interface SearchLogRequest {
   From: number;
   /** 要检索分析的日志的结束时间，Unix时间戳（毫秒） */
   To: number;
-  /** 检索分析语句，最大长度为12KB语句由 [检索条件] | [SQL语句]构成，无需对日志进行统计分析时，可省略其中的管道符 | 及SQL语句使用*或空字符串可查询所有日志 */
+  /** 检索分析语句，需要进行base64编码，最大长度为12KB语句由 [检索条件] | [SQL语句]构成，无需对日志进行统计分析时，可省略其中的管道符 | 及SQL语句使用*或空字符串可查询所有日志 */
   Query: string;
   /** 检索语法规则，默认值为0，推荐使用1 (CQL语法)。0：Lucene语法，1：CQL语法。详细说明参见检索条件语法规则 */
   SyntaxRule?: number;

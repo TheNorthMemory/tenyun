@@ -4105,7 +4105,7 @@ declare interface CreateNatGatewayRequest {
   VpcId: string;
   /** NAT网关最大外网出带宽(单位：Mbps)，支持的参数值：20, 50, 100, 200, 500, 1000, 2000, 5000，默认: 100Mbps。 当以下NatProductVersion参数值为2即标准型时，此参数无需填写，默认为5000Mbps。 */
   InternetMaxBandwidthOut?: number;
-  /** NAT网关并发连接数上限，支持参数值：1000000、3000000、10000000，默认值为100000。 当以下NatProductVersion参数值为2即标准型时，此参数无需填写，默认为2000000。 */
+  /** NAT网关并发连接数上限，支持参数值：1000000、3000000、10000000，默认值为1000000。 当NatProductVersion参数值为2即标准型时，此参数无需填写，默认为2000000。 */
   MaxConcurrentConnection?: number;
   /** 新建弹性公网IP个数，系统会按您的要求创建对应数量的弹性公网IP，其中AddressCount和PublicAddresses两个参数至少填写一个。 */
   AddressCount?: number;
@@ -4125,6 +4125,8 @@ declare interface CreateNatGatewayRequest {
   PublicIpFromSameZone?: boolean;
   /** NAT网关类型，1表示传统型NAT网关，2表示标准型NAT网关，默认值是1。 */
   NatProductVersion?: number;
+  /** NAT实例是否开启删除保护 */
+  DeletionProtectionEnabled?: boolean;
 }
 
 declare interface CreateNatGatewayResponse {
@@ -4275,6 +4277,8 @@ declare interface CreatePrivateNatGatewayRequest {
   VpcType?: boolean;
   /** 云联网类型私网NAT网关需要绑定的云联网实例ID。 */
   CcnId?: string;
+  /** 私网NAT实例是否开启删除保护 */
+  DeletionProtectionEnabled?: boolean;
 }
 
 declare interface CreatePrivateNatGatewayResponse {
@@ -6409,7 +6413,7 @@ declare interface DescribeNatGatewaySourceIpTranslationNatRulesResponse {
 declare interface DescribeNatGatewaysRequest {
   /** NAT网关统一 ID，形如：`nat-123xx454`。每次请求的实例上限为100。参数不支持同时指定NatGatewayIds和Filters。 */
   NatGatewayIds?: string[];
-  /** 过滤条件，参数不支持同时指定NatGatewayIds和Filters。每次请求的Filters的上限为10，Filter.Values的上限为5。nat-gateway-id - String - （过滤条件）协议端口模板实例ID，形如：`nat-123xx454`。vpc-id - String - （过滤条件）私有网络 唯一ID，形如：`vpc-123xx454`。nat-gateway-name - String - （过滤条件）协议端口模板实例ID，形如：`test_nat`。tag-key - String - （过滤条件）标签键，形如：`test-key`。 */
+  /** 过滤条件，参数不支持同时指定NatGatewayIds和Filters。每次请求的Filters的上限为10，Filter.Values的上限为5。nat-gateway-id - String - （过滤条件）NAT实例ID，形如：`nat-123xx454`。vpc-id - String - （过滤条件）私有网络 唯一ID，形如：`vpc-123xx454`。nat-gateway-name - String - （过滤条件）协议端口模板实例名称，形如：`test_nat`。tag-key - String - （过滤条件）标签键，形如：`test-key`。nat-status - String - （过滤条件）NAT实例当前状态，形如：`AVAILABLE`。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -6422,6 +6426,8 @@ declare interface DescribeNatGatewaysResponse {
   NatGatewaySet?: NatGateway[];
   /** 符合条件的NAT网关对象个数。 */
   TotalCount?: number;
+  /** 输出信息详细程度，DETAIL代表输出实例所有信息；COMPACT代表不输出NAT规则和自定义路由，输出实例基本信息、特性开关和EIP信息；SIMPLE代表仅输出实例基本信息和特性开关 */
+  VerboseLevel?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6663,7 +6669,7 @@ declare interface DescribePrivateNatGatewayTranslationNatRulesResponse {
 declare interface DescribePrivateNatGatewaysRequest {
   /** 私网网关唯一`ID`，形如：`intranat-0g3blj80`。 */
   NatGatewayIds?: string[];
-  /** 过滤条件。NatGatewayId - String - 私网网关唯一`ID`，形如：`intranat-0g3blj80`。NatGatewayName - String - 专线网关名称，默认模糊查询。VpcId - String - 私网网关所在`VpcId`。TagKey - Tag数组 - 私网网关标签键值对数组 */
+  /** 过滤条件。NatGatewayId - String - 私网网关唯一`ID`，形如：`intranat-0g3blj80`。NatGatewayName - String - 专线网关名称，默认模糊查询。VpcId - String - 私网网关所在`VpcId`。TagKey - Tag数组 - 私网网关标签键值对数组intranat-status - String - （过滤条件）NAT实例当前状态，形如：`AVAILABLE`。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;

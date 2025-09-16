@@ -633,7 +633,7 @@ declare interface CreateScanUserRequest {
   BizId: number;
   /** 需要新增送检的用户号。示例：1234(若UserId不填，则UserIdString必填；两者选其一；两者都填以UserIdString为准) */
   UserId?: number;
-  /** 需要新增送检的用户号。示例："1234"(若UserIdString不填，则UserId必填；两者选其一；两者都填以UserIdString为准) */
+  /** 需要新增送检的用户号，长度不超过1024字符。示例："1234"(若UserIdString不填，则UserId必填；两者选其一；两者都填以UserIdString为准) */
   UserIdString?: string;
   /** 当前用户送检过期时间，单位：秒。若参数不为0，则在过期时间之后，用户不会被送检。若参数为0，则送检配置不会自动失效。 */
   ExpirationTime?: number;
@@ -685,7 +685,7 @@ declare interface DeleteScanUserRequest {
   BizId: number;
   /** 需要删除送检的用户号。示例：1234(若UserId不填，则UserIdString必填；两者选其一；两者都填以UserIdString为准) */
   UserId?: number;
-  /** 需要删除送检的用户号。示例："1234"(若UserIdString不填，则UserId必填；两者选其一；两者都填以UserIdString为准) */
+  /** 需要删除送检的用户号，长度不超过1024字符。示例："1234"(若UserIdString不填，则UserId必填；两者选其一；两者都填以UserIdString为准) */
   UserIdString?: string;
 }
 
@@ -1163,9 +1163,9 @@ declare interface UpdateAIConversationResponse {
 declare interface UpdateScanRoomsRequest {
   /** 应用ID */
   BizId: number;
-  /** 需要送检的所有房间号。多个房间号之间用","分隔。示例："0001,0002,0003" */
+  /** 需要送检的所有房间号。多个房间号之间用","分隔，长度不超过1024字符。示例："0001,0002,0003" */
   RoomIdString?: string;
-  /** 符合此正则表达式规则的房间号将被送检。示例：^6.*（表示所有以6开头的房间号将被送检） */
+  /** 符合此正则表达式规则的房间号将被送检，最大不能超过10个。示例：^6.*（表示所有以6开头的房间号将被送检） */
   RoomIdRegex?: string[];
 }
 
@@ -1179,9 +1179,9 @@ declare interface UpdateScanRoomsResponse {
 declare interface UpdateScanUsersRequest {
   /** 应用ID */
   BizId: number;
-  /** 需要送检的所有用户号。多个用户号之间用","分隔。示例："0001,0002,0003" */
+  /** 需要送检的所有用户号。多个用户号之间用","分隔，长度不超过1024字符。示例："0001,0002,0003" */
   UserIdString?: string;
-  /** 符合此正则表达式规则的用户号将被送检。示例：["^6.*"] 表示所有以6开头的用户号将被送检 */
+  /** 符合此正则表达式规则的用户号将被送检，最大不能超过10个。示例：["^6.*"] 表示所有以6开头的用户号将被送检 */
   UserIdRegex?: string[];
 }
 

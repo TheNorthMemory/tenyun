@@ -188,16 +188,16 @@ declare interface DeniedAction {
 
 /** 计费项目明细。 */
 declare interface DetailPrice {
-  /** 描述计费项目名称，目前取值"DiskSpace"代表云硬盘空间收费项。"DiskBackupQuota"代表云硬盘备份点配额收费项。 */
-  PriceName: string;
-  /** 云硬盘计费项维度单价。 */
-  OriginUnitPrice: number;
-  /** 云硬盘计费项维度总价。 */
-  OriginalPrice: number;
-  /** 云硬盘在计费项维度折扣。 */
-  Discount: number;
-  /** 云硬盘在计费项维度折后总价。 */
-  DiscountPrice: number;
+  /** 描述计费项目名称，目前取值"DiskSpace"代表云硬盘空间收费项。"DiskBackupQuota"代表数据盘备份点配额收费项。"Instance"代表实例收费项。"SystemDiskBackupQuota"代表系统盘备份点配额收费项。 */
+  PriceName?: string;
+  /** 计费项维度单价。 */
+  OriginUnitPrice?: number;
+  /** 计费项维度总价。 */
+  OriginalPrice?: number;
+  /** 计费项维度折扣。 */
+  Discount?: number;
+  /** 计费项维度折后总价。 */
+  DiscountPrice?: number;
 }
 
 /** 套餐折扣详情（仅用于控制台调用询价相关接口返回）。 */
@@ -216,37 +216,37 @@ declare interface DiscountDetail {
   PolicyDetail?: PolicyDetail;
 }
 
-/** 磁盘信息 */
+/** 云硬盘信息。 */
 declare interface Disk {
-  /** 磁盘ID */
+  /** 云硬盘ID。 */
   DiskId?: string;
-  /** 实例ID */
+  /** 实例ID。 */
   InstanceId?: string;
-  /** 可用区 */
+  /** 可用区。 */
   Zone?: string;
-  /** 磁盘名称 */
+  /** 云硬盘名称。 */
   DiskName?: string;
-  /** 磁盘类型枚举值： SYSTEM_DISK: 系统盘 DATA_DISK: 数据盘 */
+  /** 云硬盘类型。枚举值： SYSTEM_DISK: 系统盘 DATA_DISK: 数据盘 */
   DiskUsage?: string;
-  /** 磁盘介质类型枚举值: CLOUD_BASIC: 普通云硬盘 CLOUD_PREMIUM: 高性能云硬盘 CLOUD_SSD: SSD云硬盘 */
+  /** 云硬盘介质类型。枚举值: CLOUD_BASIC: 普通云硬盘 CLOUD_PREMIUM: 高性能云硬盘 CLOUD_SSD: SSD云硬盘 */
   DiskType?: string;
-  /** 磁盘付费类型 PREPAID: 预付费 POSTPAID_BY_HOUR: 按小时后付费 */
+  /** 云硬盘付费类型。 PREPAID: 预付费 POSTPAID_BY_HOUR: 按小时后付费 */
   DiskChargeType?: string;
-  /** 磁盘大小, 单位GB */
+  /** 云硬盘大小, 单位GB。 */
   DiskSize?: number;
-  /** 续费标识 */
+  /** 续费标识。 */
   RenewFlag?: string;
-  /** 磁盘状态，取值范围：PENDING：创建中。 UNATTACHED：待挂载。ATTACHING：挂载中。ATTACHED：已挂载。DETACHING：卸载中。 SHUTDOWN：已隔离。 CREATED_FAILED：创建失败。TERMINATING：销毁中。 DELETING：删除中。 FREEZING：冻结中。 */
+  /** 云硬盘状态，取值范围：PENDING：创建中。 UNATTACHED：待挂载。ATTACHING：挂载中。ATTACHED：已挂载。DETACHING：卸载中。 SHUTDOWN：已隔离。 CREATED_FAILED：创建失败。TERMINATING：销毁中。 DELETING：删除中。 FREEZING：冻结中。 */
   DiskState?: string;
-  /** 磁盘挂载状态 */
+  /** 云硬盘挂载状态。 */
   Attached?: boolean;
-  /** 是否随实例释放 */
+  /** 是否随实例释放。 */
   DeleteWithInstance?: boolean;
-  /** 上一次操作 */
+  /** 上一次操作。 */
   LatestOperation?: string;
-  /** 上一次操作状态 */
+  /** 上一次操作状态。 */
   LatestOperationState?: string;
-  /** 上一次请求ID */
+  /** 上一次请求ID。 */
   LatestOperationRequestId?: string;
   /** 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
   CreatedTime?: string | null;
@@ -668,7 +668,7 @@ declare interface InstanceIdentifier {
   Region: string;
 }
 
-/** 关于Lighthouse Instance实例的价格信息 */
+/** 关于Lighthouse Instance实例的价格信息。 */
 declare interface InstancePrice {
   /** 套餐单价原价。 */
   OriginalBundlePrice?: number;
@@ -680,6 +680,8 @@ declare interface InstancePrice {
   DiscountPrice?: number;
   /** 价格货币单位。取值范围CNY:人民币。USD:美元。 */
   Currency?: string;
+  /** 计费项目明细。 */
+  DetailPrices?: DetailPrice[];
 }
 
 /** 实例价格详细信息 */
@@ -799,6 +801,32 @@ declare interface McpServerEnv {
   /** MCP Server的环境变量键。最大长度：128 */
   Key: string;
   /** MCP Server的环境变量值。最大长度：1024。该字段可能存储密钥，出参时将固定返回“**********”，避免明文泄露。 */
+  Value?: string;
+}
+
+/** MCP Server模板 */
+declare interface McpServerTemplate {
+  /** MCP Server名称 */
+  Name?: string;
+  /** Base64编码之后的MCP Server启动命令。 */
+  Command?: string;
+  /** 描述 */
+  Description?: string;
+  /** MCP Server图标地址 */
+  IconUrl?: string;
+  /** MCP Server社区地址 */
+  CommunityUrl?: string;
+  /** MCP Server关联的开发平台地址或开放平台地址 */
+  PlatformUrl?: string;
+  /** MCP Server环境变量 */
+  EnvSet?: McpServerTemplateEnv[];
+}
+
+/** MCP Server模板环境变量 */
+declare interface McpServerTemplateEnv {
+  /** MCP Server模板的环境变量键 */
+  Key?: string;
+  /** MCP Server模板的环境变量值 */
   Value?: string;
 }
 
@@ -1916,6 +1944,24 @@ declare interface DescribeKeyPairsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMcpServerTemplatesRequest {
+  /** 过滤器列表。name-description按照MCP Server模板名称或描述进行过滤（支持模糊匹配）。类型：String必选：否每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。 */
+  Filters?: Filter[];
+  /** 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。 */
+  Limit?: number;
+  /** 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。 */
+  Offset?: number;
+}
+
+declare interface DescribeMcpServerTemplatesResponse {
+  /** MCP Server模板列表。 */
+  McpServerTemplateSet?: McpServerTemplate[];
+  /** 符合条件的MCP Server模板数量。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeMcpServersRequest {
   /** 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。 */
   InstanceId: string;
@@ -2255,7 +2301,7 @@ declare interface ModifyDisksAttributeResponse {
 declare interface ModifyDisksBackupQuotaRequest {
   /** 云硬盘ID列表，可通过[DescribeDisks](https://cloud.tencent.com/document/api/1207/66093)接口查询。列表最大长度为15。 */
   DiskIds: string[];
-  /** 云硬盘备份点配额。取值范围: [0, 500]。调整后的配额必须不小于已存在的备份点数量。 */
+  /** 云硬盘备份点配额。取值范围: [0, 500]。调整后的配额必须大于等于已存在的备份点数量。 */
   DiskBackupQuota: number;
 }
 
@@ -2879,6 +2925,8 @@ declare interface Lighthouse {
   DescribeInstancesTrafficPackages(data?: DescribeInstancesTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesTrafficPackagesResponse>;
   /** 查询用户密钥对列表 {@link DescribeKeyPairsRequest} {@link DescribeKeyPairsResponse} */
   DescribeKeyPairs(data?: DescribeKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKeyPairsResponse>;
+  /** 查询MCP Server模板列表 {@link DescribeMcpServerTemplatesRequest} {@link DescribeMcpServerTemplatesResponse} */
+  DescribeMcpServerTemplates(data?: DescribeMcpServerTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMcpServerTemplatesResponse>;
   /** 查询MCP Server列表 {@link DescribeMcpServersRequest} {@link DescribeMcpServersResponse} */
   DescribeMcpServers(data: DescribeMcpServersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMcpServersResponse>;
   /** 查询实例可变更套餐列表 {@link DescribeModifyInstanceBundlesRequest} {@link DescribeModifyInstanceBundlesResponse} */

@@ -28,6 +28,16 @@ declare interface ClsInfo {
   CreateTime: string;
 }
 
+/** 创建 vpc 信息 */
+declare interface CreateVpcInfo {
+  /** vpc id */
+  VpcId: string;
+  /** 1 新建 2 指定 */
+  CreateType: number;
+  /** 子网ID列表 */
+  SubnetIds?: string[];
+}
+
 /** 数据库资源信息 */
 declare interface DatabasesInfo {
   /** 数据库唯一标识 */
@@ -485,6 +495,8 @@ declare interface CreateCloudRunServerRequest {
   ServerConfig?: ServerBaseConfig;
   /** 服务配置信息 */
   Items?: DiffConfigItem[];
+  /** vpc 信息 */
+  VpcInfo?: CreateVpcInfo;
 }
 
 declare interface CreateCloudRunServerResponse {
@@ -539,6 +551,8 @@ declare interface DescribeCloudRunServersRequest {
   ServerName?: string;
   /** 服务类型：function | container */
   ServerType?: string;
+  /** vpcId */
+  VpcId?: string;
 }
 
 declare interface DescribeCloudRunServersResponse {
