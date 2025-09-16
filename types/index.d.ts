@@ -199,6 +199,7 @@ import Tchd, { Versions as TchdVersions } from "./tchd";
 import Tcm, { Versions as TcmVersions } from "./tcm";
 import Tcr, { Versions as TcrVersions } from "./tcr";
 import Tcss, { Versions as TcssVersions } from "./tcss";
+import Tdai, { Versions as TdaiVersions } from "./tdai";
 import Tdcpg, { Versions as TdcpgVersions } from "./tdcpg";
 import Tdid, { Versions as TdidVersions } from "./tdid";
 import Tdmq, { Versions as TdmqVersions } from "./tdmq";
@@ -444,6 +445,7 @@ export declare type SERVICE_VERSIONS = {
   tcm: TcmVersions,
   tcr: TcrVersions,
   tcss: TcssVersions,
+  tdai: TdaiVersions,
   tdcpg: TdcpgVersions,
   tdid: TdidVersions,
   tdmq: TdmqVersions,
@@ -900,6 +902,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   tcr: Tcr,
   /** {@link Tcss 容器安全服务} */
   tcss: Tcss,
+  /** {@link Tdai 腾讯云数据库 AI 服务} */
+  tdai: Tdai,
   /** {@link Tdcpg TDSQL-C PostgreSQL 版} */
   tdcpg: Tdcpg,
   /** {@link Tdid 分布式身份} */
