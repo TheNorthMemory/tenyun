@@ -138,6 +138,14 @@ declare interface AndroidInstanceError {
   Error?: Error;
 }
 
+/** 安卓实例宿主机任务信息 */
+declare interface AndroidInstanceHostTask {
+  /** 任务 ID */
+  TaskId?: string;
+  /** 宿主机序列号 */
+  HostSerialNumber?: string;
+}
+
 /** 安卓实例镜像信息 */
 declare interface AndroidInstanceImage {
   /** 镜像 ID */
@@ -902,6 +910,20 @@ declare interface DisconnectAndroidInstanceResponse {
   RequestId?: string;
 }
 
+declare interface DistributeAndroidInstanceImageToHostsRequest {
+  /** 宿主机序列号数组 */
+  HostSerialNumbers: string[];
+  /** 实例镜像 ID */
+  ImageId: string;
+}
+
+declare interface DistributeAndroidInstanceImageToHostsResponse {
+  /** 任务集合 */
+  TaskSet?: AndroidInstanceHostTask[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DistributeFileToAndroidInstancesRequest {
   /** 安卓实例 ID 列表 */
   AndroidInstanceIds: string[];
@@ -1603,6 +1625,8 @@ declare interface Gs {
   DisableAndroidInstancesApp(data: DisableAndroidInstancesAppRequest, config?: AxiosRequestConfig): AxiosPromise<DisableAndroidInstancesAppResponse>;
   /** 断开安卓实例 {@link DisconnectAndroidInstanceRequest} {@link DisconnectAndroidInstanceResponse} */
   DisconnectAndroidInstance(data: DisconnectAndroidInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DisconnectAndroidInstanceResponse>;
+  /** 分发安卓实例镜像到宿主机 {@link DistributeAndroidInstanceImageToHostsRequest} {@link DistributeAndroidInstanceImageToHostsResponse} */
+  DistributeAndroidInstanceImageToHosts(data: DistributeAndroidInstanceImageToHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DistributeAndroidInstanceImageToHostsResponse>;
   /** 分发文件到安卓实例 {@link DistributeFileToAndroidInstancesRequest} {@link DistributeFileToAndroidInstancesResponse} */
   DistributeFileToAndroidInstances(data: DistributeFileToAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DistributeFileToAndroidInstancesResponse>;
   /** 分发照片到安卓实例相册 {@link DistributePhotoToAndroidInstancesRequest} {@link DistributePhotoToAndroidInstancesResponse} */

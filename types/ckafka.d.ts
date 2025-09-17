@@ -4679,7 +4679,7 @@ declare interface Ckafka {
   DescribeTopicSyncReplica(data: DescribeTopicSyncReplicaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicSyncReplicaResponse>;
   /** 获取实例列表 {@link DescribeTypeInstancesRequest} {@link DescribeTypeInstancesResponse} */
   DescribeTypeInstances(data?: DescribeTypeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTypeInstancesResponse>;
-  /** 查询用户信息 {@link DescribeUserRequest} {@link DescribeUserResponse} */
+  /** 根据实例id查询用户信息 {@link DescribeUserRequest} {@link DescribeUserResponse} */
   DescribeUser(data: DescribeUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResponse>;
   /** 查询Datahub Topic消息 {@link FetchDatahubMessageByOffsetRequest} {@link FetchDatahubMessageByOffsetResponse} */
   FetchDatahubMessageByOffset(data: FetchDatahubMessageByOffsetRequest, config?: AxiosRequestConfig): AxiosPromise<FetchDatahubMessageByOffsetResponse>;

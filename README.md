@@ -114,7 +114,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 242+ 款产品，12627+ 服务数</summary>
+<details><summary>共计 242+ 款产品，12633+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -124,7 +124,7 @@ acp | [应用合规平台](https://cloud.tencent.com/document/product/1553) | 20
 advisor | [云顾问](https://cloud.tencent.com/document/product/1264) | 2020-07-21(2) |
 af | [借贷反欺诈](https://cloud.tencent.com/document/product/668) | 2020-02-26(3) |
 afc | [定制建模](https://cloud.tencent.com/document/product/1029) | 2020-02-26(3) |
-ai3d | [腾讯混元生3D](https://cloud.tencent.com/document/product/1804) | 2025-05-13(4) |
+ai3d | [腾讯混元生3D](https://cloud.tencent.com/document/product/1804) | 2025-05-13(6) |
 aiart | [腾讯混元生图](https://cloud.tencent.com/document/product/1668) | 2022-12-29(21) |
 ame | [正版曲库直通车](https://cloud.tencent.com/document/product/1155) | 2019-09-16(31) |
 ams | [音频内容安全](https://cloud.tencent.com/document/product/1219) | 2020-12-29(5) | 2020-06-08(7) |
@@ -227,7 +227,7 @@ ft | [人像变换](https://cloud.tencent.com/document/product/1202) | 2020-03-0
 gaap | [全球应用加速](https://cloud.tencent.com/document/product/608) | 2018-05-29(102) |
 gme | [游戏多媒体引擎](https://cloud.tencent.com/document/product/607) | 2018-07-11(37) |
 goosefs | [数据加速器 GooseFS](https://cloud.tencent.com/document/product/1424) | 2022-05-19(27) |
-gs | [云游戏](https://cloud.tencent.com/document/product/1162) | 2019-11-18(76) |
+gs | [云游戏](https://cloud.tencent.com/document/product/1162) | 2019-11-18(77) |
 gwlb | [网关负载均衡](https://cloud.tencent.com/document/product/1782) | 2024-09-06(18) |
 habo |  | 2018-12-03(2) |
 hai | [高性能应用服务](https://cloud.tencent.com/document/product/1721) | 2023-08-12(16) |
@@ -351,7 +351,7 @@ vod | [云点播](https://cloud.tencent.com/document/product/266) | 2024-07-18(7
 vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(413) |
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(8) |
 vtc | [视频转译](https://cloud.tencent.com/document/product/1769) | 2024-02-23(3) |
-waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(182) |
+waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(185) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
 wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(297) |
 weilingwith | [微瓴同业开放平台](https://cloud.tencent.com/document/product/1693) | 2023-04-27(64) |

@@ -3619,7 +3619,7 @@ declare interface ExtractDocMultiRequest {
   PdfPageNumber?: number;
   /** 自定义结构化功能需返回的字段名称，例：若客户想新增返回姓名、性别两个字段的识别结果，则输入ItemNames=["姓名","性别"] */
   ItemNames?: string[];
-  /** true：仅输出自定义字段flase：输出默认字段+自定义字段默认true */
+  /** true：仅输出自定义字段false：输出默认字段+自定义字段默认true */
   ItemNamesShowMode?: boolean;
   /** 是否开启全文字段识别 */
   ReturnFullText?: boolean;

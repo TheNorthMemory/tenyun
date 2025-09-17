@@ -288,6 +288,14 @@ declare interface AutoDenyDetail {
   LastUpdateTime?: string;
 }
 
+/** 批量防护失败的域名以及对应的原因。 */
+declare interface BatchDomainResult {
+  /** 批量操作中失败的域名 */
+  Domain?: string;
+  /** 操作失败的原因 */
+  Message?: string;
+}
+
 /** 多域名黑白名单describe返回 */
 declare interface BatchIpAccessControlData {
   /** 总数 */
@@ -3098,6 +3106,32 @@ declare interface CreateAreaBanRuleResponse {
   RequestId?: string;
 }
 
+declare interface CreateBatchIpAccessControlRequest {
+  /** IP参数列表 */
+  IpList: string[];
+  /** 规则执行的方式，TimedJob为定时执行，CronJob为周期执行 */
+  JobType: string;
+  /** 定时任务配置 */
+  JobDateTime: JobDateTime;
+  /** 42为黑名单，40为白名单 */
+  ActionType: number;
+  /** 防护对象组ID列表，如果绑定的是防护对象组，和Domains参数二选一 */
+  GroupIds?: number[];
+  /** 域名列表，如果绑定的是批量域名，和GroupIds参数二选一 */
+  Domains?: string[];
+  /** 备注 */
+  Note?: string;
+}
+
+declare interface CreateBatchIpAccessControlResponse {
+  /** 添加失败的域名列表，如果非空则表示有域名添加失败，整个批量规则添加失败，否则则表示批量规则添加成功。 */
+  Failed?: BatchDomainResult[];
+  /** 添加成功的批量规则ID */
+  RuleId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDealsRequest {
   /** 计费下单入参 */
   Goods: CreateDealsGoods[];
@@ -3318,6 +3352,16 @@ declare interface DeleteAttackWhiteRuleRequest {
 declare interface DeleteAttackWhiteRuleResponse {
   /** 删除失败的规则序号组 */
   FailIds?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteBatchIpAccessControlRequest {
+  /** 规则ID列表，支持批量删除 */
+  Ids?: number[];
+}
+
+declare interface DeleteBatchIpAccessControlResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5428,6 +5472,32 @@ declare interface ModifyAttackWhiteRuleResponse {
   RequestId?: string;
 }
 
+declare interface ModifyBatchIpAccessControlRequest {
+  /** 编辑的批量规则ID */
+  RuleId: number;
+  /** IP参数列表 */
+  IpList: string[];
+  /** 规则执行的方式，TimedJob为定时执行，CronJob为周期执行 */
+  JobType: string;
+  /** 定时任务配置 */
+  JobDateTime: JobDateTime;
+  /** 42为黑名单，40为白名单 */
+  ActionType: number;
+  /** 防护对象组ID列表，如果绑定的是防护对象组，和Domains参数二选一 */
+  GroupIds?: number[];
+  /** 域名列表，如果绑定的是批量域名，和GroupIds参数二选一 */
+  Domains?: string[];
+  /** 备注 */
+  Note?: string;
+}
+
+declare interface ModifyBatchIpAccessControlResponse {
+  /** 编辑失败的域名列表，如果非空则表示有域名编辑失败，整个批量规则编辑失败，否则则表示批量规则编辑成功。 */
+  Failed?: BatchDomainResult[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyBotSceneStatusRequest {
   /** 域名 */
   Domain: string;
@@ -6579,6 +6649,8 @@ declare interface Waf {
   CreateAccessExport(data: CreateAccessExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessExportResponse>;
   /** 添加地域封禁规则 {@link CreateAreaBanRuleRequest} {@link CreateAreaBanRuleResponse} */
   CreateAreaBanRule(data: CreateAreaBanRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAreaBanRuleResponse>;
+  /** 批量IP黑白名单新增接口 {@link CreateBatchIpAccessControlRequest} {@link CreateBatchIpAccessControlResponse} */
+  CreateBatchIpAccessControl(data: CreateBatchIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchIpAccessControlResponse>;
   /** 计费实例创建订单 {@link CreateDealsRequest} {@link CreateDealsResponse} */
   CreateDeals(data: CreateDealsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDealsResponse>;
   /** 创建日志下载任务 {@link CreateExportRequest} {@link CreateExportResponse} */
@@ -6603,6 +6675,8 @@ declare interface Waf {
   DeleteAttackDownloadRecord(data: DeleteAttackDownloadRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttackDownloadRecordResponse>;
   /** 删除规则引擎白名单 {@link DeleteAttackWhiteRuleRequest} {@link DeleteAttackWhiteRuleResponse} */
   DeleteAttackWhiteRule(data: DeleteAttackWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttackWhiteRuleResponse>;
+  /** 批量IP黑白名单删除接口 {@link DeleteBatchIpAccessControlRequest} {@link DeleteBatchIpAccessControlResponse} */
+  DeleteBatchIpAccessControl(data?: DeleteBatchIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBatchIpAccessControlResponse>;
   /** 场景化后删除Bot的UCB自定义规则 {@link DeleteBotSceneUCBRuleRequest} {@link DeleteBotSceneUCBRuleResponse} */
   DeleteBotSceneUCBRule(data: DeleteBotSceneUCBRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBotSceneUCBRuleResponse>;
   /** Waf CC V2 Delete接口 {@link DeleteCCRuleRequest} {@link DeleteCCRuleResponse} */
@@ -6817,6 +6891,8 @@ declare interface Waf {
   ModifyAreaBanStatus(data: ModifyAreaBanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAreaBanStatusResponse>;
   /** 修改规则引擎白名单 {@link ModifyAttackWhiteRuleRequest} {@link ModifyAttackWhiteRuleResponse} */
   ModifyAttackWhiteRule(data: ModifyAttackWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAttackWhiteRuleResponse>;
+  /** 批量IP黑白名单编辑接口 {@link ModifyBatchIpAccessControlRequest} {@link ModifyBatchIpAccessControlResponse} */
+  ModifyBatchIpAccessControl(data: ModifyBatchIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBatchIpAccessControlResponse>;
   /** bot子场景开关 {@link ModifyBotSceneStatusRequest} {@link ModifyBotSceneStatusResponse} */
   ModifyBotSceneStatus(data: ModifyBotSceneStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBotSceneStatusResponse>;
   /** 场景化后更新Bot的UCB自定义规则 {@link ModifyBotSceneUCBRuleRequest} {@link ModifyBotSceneUCBRuleResponse} */

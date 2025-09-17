@@ -250,6 +250,12 @@ declare interface SplitDocumentFailedPage {
   PageNumber?: number | null;
 }
 
+/** 思维链开关类型 */
+declare interface Thinking {
+  /** 控制开启思维链，默认disabledenabled：开启思维链disabled：关闭思维链 */
+  Type?: string;
+}
+
 /** 消耗量 */
 declare interface Usage {
   /** 文档页数 */
@@ -275,6 +281,8 @@ declare interface ChatCompletionsRequest {
   MaxTokens?: number;
   /** 是否启用联网搜索 */
   EnableSearch?: boolean;
+  /** 思维链开关，本参数仅在deepseek v3.1时生效 */
+  Thinking?: Thinking;
 }
 
 declare interface ChatCompletionsResponse {
