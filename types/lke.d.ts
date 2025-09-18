@@ -1704,16 +1704,18 @@ declare interface RejectedQuestion {
   RejectedBizId?: string | null;
   /** 被拒答的问题 */
   Question?: string | null;
-  /** 状态 */
+  /** 发布状态(1 待发布 2 发布中 3 已发布 4 发布失败) */
   Status?: number | null;
   /** 状态描述 */
   StatusDesc?: string | null;
-  /** 更新时间 */
+  /** 更新时间, 秒级时间戳 */
   UpdateTime?: string | null;
   /** 是否允许编辑 */
   IsAllowEdit?: boolean | null;
   /** 是否允许删除 */
   IsAllowDelete?: boolean | null;
+  /** 操作人 */
+  Operator?: string | null;
 }
 
 /** 发布配置项 */
@@ -2006,10 +2008,18 @@ declare interface UnsatisfiedReply {
   RecordBizId?: string | null;
   /** 用户问题 */
   Question?: string | null;
-  /** 应用回复 */
+  /** 问题回复 */
   Answer?: string | null;
   /** 错误类型 */
   Reasons?: string[] | null;
+  /** 处理状态，0：待处理，1：已拒答，2：已忽略，3：已纠错 */
+  Status?: number | null;
+  /** 创建时间，秒级时间戳 */
+  CreateTime?: string;
+  /** 更新时间,秒级时间戳 */
+  UpdateTime?: string;
+  /** 操作人 */
+  Operator?: string;
 }
 
 /** 更新时间策略 */
@@ -4023,6 +4033,8 @@ declare interface ListUnsatisfiedReplyRequest {
   Query?: string;
   /** 错误类型检索 */
   Reasons?: string[];
+  /** 操作状态 0-全部 1-待处理 2-已处理【包括答案纠错，拒答，忽略】 */
+  Status?: number;
 }
 
 declare interface ListUnsatisfiedReplyResponse {
@@ -4311,7 +4323,7 @@ declare interface RateMsgRecordRequest {
   BotAppKey: string;
   /** 消息ID 【大模型回复答案的RecordID】 */
   RecordId: string;
-  /** 1: 点赞; 2: 点踩; 注：1) 评测端不支持点赞、点踩2) 消息回复类型为欢迎语、并发超限、实时文档，不支持点赞、点踩 */
+  /** 1: 点赞; 2: 点踩; 注：(1) 评测端不支持点赞、点踩(2) 消息回复类型为欢迎语、并发超限、实时文档，不支持点赞、点踩 */
   Score: number;
   /** 原因，只有Score参数为2即点踩的时候才需要输入 */
   Reasons?: string[];

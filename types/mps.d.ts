@@ -238,7 +238,7 @@ declare interface AddOnSubtitle {
 
 /** 智能分析结果 */
 declare interface AiAnalysisResult {
-  /** 任务的类型，可以取的值有：Classification：智能分类Cover：智能封面Tag：智能标签FrameTag：智能按帧标签Highlight：智能精彩集锦DeLogo：智能擦除Description：大模型摘要 */
+  /** 任务的类型，可以取的值有：Classification：智能分类Cover：智能封面Tag：智能标签FrameTag：智能按帧标签Highlight：智能精彩集锦DeLogo：智能擦除Description：大模型摘要Dubbing：智能译制 */
   Type?: string;
   /** 视频内容分析智能分类任务的查询结果，当任务类型为 Classification 时有效。 */
   ClassificationTask?: AiAnalysisTaskClassificationResult | null;
@@ -260,6 +260,8 @@ declare interface AiAnalysisResult {
   DescriptionTask?: AiAnalysisTaskDescriptionResult | null;
   /** 视频内容分析横转竖任务的查询结果，当任务类型为 HorizontalToVertical 时有效。 */
   HorizontalToVerticalTask?: AiAnalysisTaskHorizontalToVerticalResult | null;
+  /** 视频内容分析译制任务的查询结果，当任务类型为 Dubbing 时有效。 */
+  DubbingTask?: AiAnalysisTaskDubbingResult | null;
 }
 
 /** 智能分类任务输入类型 */
@@ -338,6 +340,10 @@ declare interface AiAnalysisTaskDelLogoOutput {
   TranslateSubtitlePath?: string;
   /** 擦除的字幕位置。**注意**：仅对字幕提取且开启返回字幕位置时有效。 */
   SubtitlePos?: SubtitlePosition | null;
+  /** 音色克隆后的视频文件地址 */
+  VoiceClonedVideo?: string | null;
+  /** 音色克隆的标注文件地址 */
+  VoiceClonedMarkFile?: string | null;
 }
 
 /** 智能擦除结果类型 */
@@ -378,6 +384,36 @@ declare interface AiAnalysisTaskDescriptionResult {
   Input?: AiAnalysisTaskDescriptionInput;
   /** 智能描述任务输出。 */
   Output?: AiAnalysisTaskDescriptionOutput | null;
+}
+
+/** 智能译制任务输入类型 */
+declare interface AiAnalysisTaskDubbingInput {
+  /** 视频译制模板 ID。 */
+  Definition?: number;
+}
+
+/** 智能译制结果信息 */
+declare interface AiAnalysisTaskDubbingOutput {
+  /** 译制视频路径。 */
+  VideoPath?: string;
+  /** 标记文件路径 */
+  SpeakerPath?: string;
+  /** 译制视频存储位置。 */
+  OutputStorage?: TaskOutputStorage;
+}
+
+/** 智能译制结果类型 */
+declare interface AiAnalysisTaskDubbingResult {
+  /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
+  Status?: string;
+  /** 错误码，0：成功，其他值：失败。 */
+  ErrCode?: number;
+  /** 错误信息。 */
+  Message?: string;
+  /** 智能译制任务输入。 */
+  Input?: AiAnalysisTaskDubbingInput;
+  /** 智能译制任务输出。 */
+  Output?: AiAnalysisTaskDubbingOutput | null;
 }
 
 /** 智能按帧标签任务输入类型 */
@@ -1668,11 +1704,11 @@ declare interface BeautyEffectItemConfig {
 
 /** 美颜滤镜配置项 */
 declare interface BeautyFilterItemConfig {
-  /** 类型名称。取值如下：Dongjing：东京QingJiaopian：轻胶片Meiwei：美味 */
+  /** 类型名称。取值如下：Dongjing：东京Qingjiaopian：轻胶片Meiwei：美味 */
   Type: string;
   /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
   Switch?: string;
-  /** 效果强度，值范围：[0, 100]。 */
+  /** 效果强度，值范围：[-100, 100]。 */
   Value?: number;
 }
 
@@ -2732,6 +2768,34 @@ declare interface ExpressionConfigInfo {
 declare interface ExtractBlindWatermarkConfig {
   /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
   Switch?: string | null;
+}
+
+/** 提取视频数字水印任务信息 */
+declare interface ExtractBlindWatermarkTask {
+  /** 媒体处理任务 ID。 */
+  TaskId?: string;
+  /** 任务流状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成。 */
+  Status?: string;
+  /** 错误码，0 表示成功，其他值表示失败。 */
+  ErrCode?: number;
+  /** 错误信息。 */
+  Message?: string;
+  /** 媒体处理的目标文件信息。 */
+  InputInfo?: MediaInputInfo;
+  /** 数字水印类型，可选值：blind-basic：基础版权数字水印； blind-ab：ab版权数字水印； */
+  Type?: string;
+  /** 标记是否检测到水印，如果该参数为true， Result字段将返回水印提取结果，如果该参数为false，Result字段不会返回。 */
+  IsDetected?: boolean;
+  /** 提取出的数字水印内容，当没有检测到水印时该字段不会返回。 */
+  Result?: string;
+  /** 提取数字水印配置。 */
+  ExtractBlindWatermarkConfig?: ExtractBlindWatermarkTaskConfig;
+}
+
+/** 提取视频转码数字水印任务配置 */
+declare interface ExtractBlindWatermarkTaskConfig {
+  /** 当提取数字水印类型为blind-abseq时有效，用于指定输入视频的切片时长，单位：毫秒。如果不填默认切片时长为5秒。 */
+  SegmentDuration: number | null;
 }
 
 /** 人脸识别任务控制参数 */
@@ -7874,6 +7938,8 @@ declare interface DescribeTaskDetailResponse {
   WorkflowTask?: WorkflowTask | null;
   /** 直播流处理任务信息，仅当 TaskType 为 LiveStreamProcessTask，该字段有值。 */
   LiveStreamProcessTask?: LiveStreamProcessTask | null;
+  /** 提取数字水印任务信息，仅当 TaskType 为 ExtractBlindWatermark，该字段有值。 */
+  ExtractBlindWatermarkTask?: ExtractBlindWatermarkTask;
   /** 任务的事件通知信息。 */
   TaskNotifyConfig?: TaskNotifyConfig | null;
   /** 任务流的优先级，取值范围为 [-10, 10]。 */

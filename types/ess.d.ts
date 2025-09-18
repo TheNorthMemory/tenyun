@@ -1360,11 +1360,11 @@ declare interface RecipientComponentInfo {
 
 /** 发起流程快速注册相关信息 */
 declare interface RegisterInfo {
-  /** 字段不再使用，法人姓名 */
+  /** 法人姓名 */
   LegalName: string;
   /** 社会统一信用代码 */
   Uscc?: string | null;
-  /** 字段不再使用，社会统一信用代码 */
+  /** 社会统一信用代码 */
   UnifiedSocialCreditCode?: string;
   /** 组织机构企业注册地址。 请确认该企业注册地址与企业营业执照中注册的地址一致。 */
   OrganizationAddress?: string;
