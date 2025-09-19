@@ -1144,6 +1144,8 @@ declare interface DspaInstance {
   InsAuthCount?: number;
   /** 已购买的实例数量 */
   InsTotalQuota?: number;
+  /** 标签 */
+  Tags?: Tag[];
 }
 
 /** RDB关系型数据库敏感数据资产统计 */
@@ -1870,6 +1872,16 @@ declare interface SuggestRiskLevelMatrixItem {
   RiskName?: string;
   /** 分数 */
   RiskScore?: number;
+}
+
+/** 标签键/值和所属类别 */
+declare interface Tag {
+  /** 标签键 */
+  TagKey: string;
+  /** 标签值 */
+  TagValue: string;
+  /** 标签所属类别 */
+  Category?: string;
 }
 
 /** 评估模板的详情数据 */
@@ -4123,6 +4135,8 @@ declare interface ListDSPAClustersRequest {
   Offset?: number;
   /** 过滤项。支持的过滤项包括：DspaId、Status、Version、DspaName、Channel。DspaId和DspaName支持模糊搜索。Status支持的可选值：enabled、disabled。Version支持的可选值：trial、official。Channel支持的可选值：sp_cds_dsgc_pre（代表dsgc实例）、sp_cds_dsgc_wedata_dc（代表wedata实例） */
   Filters?: DspaDataSourceMngFilter[];
+  /** Tag键值过滤 */
+  TagFilter?: Tag[];
   /** 展示模式。目前只有两个值的处理逻辑：空值：需要查询每个实例的配额信息，因为是串行查询，所以速度很慢，limit最大为100"simple"：不需要查询每个实例的配额信息，速度快，limit最大为1000 */
   ListMode?: string;
 }

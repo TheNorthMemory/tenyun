@@ -114,7 +114,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 242+ 款产品，12633+ 服务数</summary>
+<details><summary>共计 242+ 款产品，12641+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -199,7 +199,7 @@ cws | 漏洞扫描服务 | 2018-03-12(19) |
 cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(166) |
 dasb | [运维安全中心（堡垒机）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(63) |
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112) |
-dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(80) | 2019-10-16(28) |
+dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(82) | 2019-10-16(28) |
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(6) |
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(22) |
 dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(83) |
@@ -217,7 +217,7 @@ ecm | [边缘计算机器](https://cloud.tencent.com/document/product/1108) | 20
 eiam | [数字身份管控平台（员工版）](https://cloud.tencent.com/document/product/1442) | 2021-04-20(42) |
 eis | [数据连接器](https://cloud.tencent.com/document/product/1270) | 2021-06-01(5) | 2020-07-15(3) |
 emr | [弹性 MapReduce](https://cloud.tencent.com/document/product/589) | 2019-01-03(89) |
-es | [Elasticsearch Service](https://cloud.tencent.com/document/product/845) | 2025-01-01(9) | 2018-04-16(61) |
+es | [Elasticsearch Service](https://cloud.tencent.com/document/product/845) | 2025-01-01(9) | 2018-04-16(62) |
 ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323) | 2020-11-11(118) |
 essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(94) | 2020-12-22(53) |
 facefusion | [人脸融合](https://cloud.tencent.com/document/product/670) | 2022-09-27(3) | 2018-12-01(3) |
@@ -256,7 +256,7 @@ kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 201
 lcic | [实时互动-教育版](https://cloud.tencent.com/document/product/1639) | 2022-08-17(71) |
 lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(118) |
 live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(201) |
-lke | [腾讯云智能体开发平台](https://cloud.tencent.com/document/product/1759) | 2023-11-30(106) |
+lke | [腾讯云智能体开发平台](https://cloud.tencent.com/document/product/1759) | 2023-11-30(107) |
 lkeap | [知识引擎原子能力](https://cloud.tencent.com/document/product/1772) | 2024-05-22(26) |
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(17) |
 mall | [商场客留大数据](https://cloud.tencent.com/document/product/1707) | 2023-05-18(1) |
@@ -274,7 +274,7 @@ ms | [移动应用安全](https://cloud.tencent.com/document/product/283) | 2018
 msp | [迁移服务平台](https://cloud.tencent.com/document/product/659) | 2018-03-19(7) |
 nlp | [NLP 技术](https://cloud.tencent.com/document/product/271) | 2019-04-08(6) |
 npp | 号码保护 | 2019-08-23(8) |
-oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(39) |
+oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(43) |
 ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(90) |
 omics | [腾讯健康组学平台](https://cloud.tencent.com/document/product/1643) | 2022-11-28(20) |
 open | 腾讯云 OAuth | 2018-12-25(2) |

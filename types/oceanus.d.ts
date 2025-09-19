@@ -246,6 +246,16 @@ declare interface ClusterVersion {
   SupportedFlink: string[] | null;
 }
 
+/** 解析Connector */
+declare interface Connectors {
+  /** 连接方式 */
+  ConnectionMethod?: string;
+  /** 连接器名称 */
+  Connector?: string;
+  /** 是否已经被使用 */
+  Existed?: boolean;
+}
+
 /** 复制作业单条明细 */
 declare interface CopyJobItem {
   /** 需要复制的作业serial id */
@@ -1246,6 +1256,18 @@ declare interface WorkSpaceSetItem {
   JobsCount: number | null;
 }
 
+declare interface CheckConnectorNameRequest {
+  /** 资源名 */
+  Name: string;
+}
+
+declare interface CheckConnectorNameResponse {
+  /** 是否存在 */
+  Exists?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CheckSavepointRequest {
   /** 作业 id */
   JobId: string;
@@ -1284,6 +1306,24 @@ declare interface CopyJobsResponse {
   FailCount?: number | null;
   /** 结果列表 */
   CopyJobsResults?: CopyJobResult[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateConnectorRequest {
+  /** 资源id */
+  ResourceId: string;
+  /** 空间 */
+  WorkSpaceId: string;
+  /** 资源版本 */
+  VersionId: number;
+  /** 连接器名称 */
+  Connector: string;
+  /** 连接方式 */
+  ConnectionMethod: string;
+}
+
+declare interface CreateConnectorResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2014,6 +2054,26 @@ declare interface GetMetaTableResponse {
   RequestId?: string;
 }
 
+declare interface ModifyConnectorRequest {
+  /** 空间 */
+  WorkSpaceId: string;
+  /** connector ID */
+  ConnectorResourceId: string;
+  /** 资源id */
+  ResourceId?: string;
+  /** 资源版本 */
+  VersionId?: number;
+  /** 连接器名称 */
+  Connector?: string;
+  /** 连接方式 */
+  ConnectionMethod?: string;
+}
+
+declare interface ModifyConnectorResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyFolderRequest {
   /** 文件夹ID（必填） */
   SourceFolderId?: string;
@@ -2066,6 +2126,22 @@ declare interface ModifyWorkSpaceRequest {
 }
 
 declare interface ModifyWorkSpaceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ParseConnectorRequest {
+  /** 资源id */
+  ResourceId: string;
+  /** 资源版本 */
+  VersionId: number;
+  /** 空间 */
+  WorkSpaceId?: string;
+}
+
+declare interface ParseConnectorResponse {
+  /** 连接器 */
+  Connectors?: Connectors[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2139,10 +2215,14 @@ declare interface TriggerJobSavepointResponse {
 /** {@link Oceanus 流计算 Oceanus} */
 declare interface Oceanus {
   (): Versions;
+  /** 查询Connector名是否重复 {@link CheckConnectorNameRequest} {@link CheckConnectorNameResponse} */
+  CheckConnectorName(data: CheckConnectorNameRequest, config?: AxiosRequestConfig): AxiosPromise<CheckConnectorNameResponse>;
   /** 检查快照是否可用 {@link CheckSavepointRequest} {@link CheckSavepointResponse} */
   CheckSavepoint(data: CheckSavepointRequest, config?: AxiosRequestConfig): AxiosPromise<CheckSavepointResponse>;
   /** 复制作业 {@link CopyJobsRequest} {@link CopyJobsResponse} */
   CopyJobs(data: CopyJobsRequest, config?: AxiosRequestConfig): AxiosPromise<CopyJobsResponse>;
+  /** 创建Connector {@link CreateConnectorRequest} {@link CreateConnectorResponse} */
+  CreateConnector(data: CreateConnectorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConnectorResponse>;
   /** 创建文件夹 {@link CreateFolderRequest} {@link CreateFolderResponse} */
   CreateFolder(data: CreateFolderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFolderResponse>;
   /** 新建作业 {@link CreateJobRequest} {@link CreateJobResponse} */
@@ -2203,12 +2283,16 @@ declare interface Oceanus {
   FetchSqlGatewayStatementResult(data: FetchSqlGatewayStatementResultRequest, config?: AxiosRequestConfig): AxiosPromise<FetchSqlGatewayStatementResultResponse>;
   /** 查询元数据表 {@link GetMetaTableRequest} {@link GetMetaTableResponse} */
   GetMetaTable(data: GetMetaTableRequest, config?: AxiosRequestConfig): AxiosPromise<GetMetaTableResponse>;
+  /** 修改Connector {@link ModifyConnectorRequest} {@link ModifyConnectorResponse} */
+  ModifyConnector(data: ModifyConnectorRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConnectorResponse>;
   /** 拖拽文件夹 {@link ModifyFolderRequest} {@link ModifyFolderResponse} */
   ModifyFolder(data?: ModifyFolderRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFolderResponse>;
   /** 更新作业 {@link ModifyJobRequest} {@link ModifyJobResponse} */
   ModifyJob(data: ModifyJobRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyJobResponse>;
   /** 修改工作空间 {@link ModifyWorkSpaceRequest} {@link ModifyWorkSpaceResponse} */
   ModifyWorkSpace(data: ModifyWorkSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkSpaceResponse>;
+  /** 解析用户自定义Connector {@link ParseConnectorRequest} {@link ParseConnectorResponse} */
+  ParseConnector(data: ParseConnectorRequest, config?: AxiosRequestConfig): AxiosPromise<ParseConnectorResponse>;
   /** 运行作业 {@link RunJobsRequest} {@link RunJobsResponse} */
   RunJobs(data: RunJobsRequest, config?: AxiosRequestConfig): AxiosPromise<RunJobsResponse>;
   /** 执行Statement {@link RunSqlGatewayStatementRequest} {@link RunSqlGatewayStatementResponse} */

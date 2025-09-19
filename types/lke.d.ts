@@ -24,7 +24,7 @@ declare interface Agent {
   WorkflowId?: string;
   /** Agent名称，同一个应用内，Agent名称不能重复 */
   Name?: string;
-  /** 插件图标url */
+  /** Agent图标url */
   IconUrl?: string;
   /** Agent指令；当该Agent被调用时，将作为“系统提示词”使用，描述Agent应执行的操作和响应方式 */
   Instructions?: string;
@@ -44,6 +44,24 @@ declare interface Agent {
   AgentType?: number;
   /** 0 自由转交，1 计划与执行 */
   AgentMode?: number;
+  /** 高级设置 */
+  AdvancedConfig?: AgentAdvancedConfig;
+}
+
+/** Agent高级设置 */
+declare interface AgentAdvancedConfig {
+  /** 是否开启澄清询问 */
+  EnableClarification?: boolean;
+  /** 思考模式，0为效果优先，1为速度优先 */
+  ThinkingMode?: number;
+  /** 最大推理轮数 */
+  MaxReasoningRound?: number;
+  /** 上下文轮数 */
+  HistoryLimit?: number;
+  /** 是否开启结构化输出 */
+  EnableStructuredOutput?: boolean;
+  /** 结构化输出配置 */
+  StructuredOutputConfig?: StructuredOutputConfig;
 }
 
 /** Agent调试信息 */
@@ -644,6 +662,28 @@ declare interface CateInfo {
   CanDelete?: boolean | null;
   /** 子分类 */
   Children?: CateInfo[] | null;
+}
+
+/** 渠道详情信息 */
+declare interface ChannelListInfo {
+  /** 渠道类型 10000 微信订阅号 10001 微信服务号 10002 企微应用 */
+  ChannelType?: number;
+  /** 渠道状态 1未发布 2运行中 3已下线 */
+  ChannelStatus?: number;
+  /** 渠道名称 */
+  ChannelName?: string;
+  /** 渠道id 数据库主键 */
+  ChannelId?: string;
+  /** 备注 */
+  Comment?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 最后更新人 */
+  UpdatedUser?: string;
+  /** 智能体应用可见范围，public-所有人可见 private-仅自己可见 share-通过分享可见 */
+  YuanQiInfo?: YuanQi | null;
 }
 
 /** 标签提取配置 */
@@ -1536,6 +1576,24 @@ declare interface OptionCardIndex {
   Index?: number;
 }
 
+/** 参数配置列表 */
+declare interface ParameterConfig {
+  /** 字段名称 */
+  Name?: string;
+  /** 字段描述 */
+  Description?: string;
+  /** 字段类型 */
+  Type?: number;
+  /** 是否必填 */
+  IsRequired?: boolean;
+  /** 子参数 */
+  SubParams?: ParameterConfig[];
+  /** OneOf类型的参数 */
+  OneOf?: ParameterConfig[];
+  /** AnyOf类型的参数 */
+  AnyOf?: ParameterConfig[];
+}
+
 /** 插件参数请求结构 */
 declare interface PluginToolReqParam {
   /** 参数名称 */
@@ -1902,6 +1960,12 @@ declare interface StrValue {
   Value?: string | null;
 }
 
+/** 结构化输出的配置项 */
+declare interface StructuredOutputConfig {
+  /** 参数列表 */
+  StructuredOutputParams?: ParameterConfig[];
+}
+
 /** 知识摘要应用配置 */
 declare interface SummaryConfig {
   /** 模型配置 */
@@ -2204,6 +2268,12 @@ declare interface WorkflowRunNodeInfo {
   StatisticInfos?: StatisticInfo[] | null;
 }
 
+/** //智能体应用可见范围，public-所有人可见 private-仅自己可见 share-通过分享可见 */
+declare interface YuanQi {
+  /** public-所有人可见 */
+  VisibleRange?: string;
+}
+
 declare interface CheckAttributeLabelExistRequest {
   /** 应用ID */
   BotBizId: string;
@@ -2405,7 +2475,7 @@ declare interface CreateReleaseRequest {
   BotBizId: string;
   /** 发布描述 */
   Desc?: string;
-  /** 渠道业务ID */
+  /** 渠道业务ID，从ListChannel接口的响应字段ChannelId获取 */
   ChannelBizIds?: string[];
 }
 
@@ -3690,6 +3760,30 @@ declare interface ListAttributeLabelResponse {
   RequestId?: string;
 }
 
+declare interface ListChannelRequest {
+  /** 应用ID */
+  AppBizId: string;
+  /** 应用ID */
+  BotBizId?: string;
+  /** 页码 */
+  PageNumber?: number;
+  /** 分页数量 */
+  PageSize?: number;
+  /** 渠道类型, 10000: 微信订阅号，10001: 微信服务号，10002：企微应用，10004：微信客服，10005：小程序，10009：企微智能机器人 */
+  ChannelType?: number[];
+  /** 渠道状态 1未发布 2运行中 3已下线 */
+  ChannelStatus?: number[];
+}
+
+declare interface ListChannelResponse {
+  /** 返回总数 */
+  Total?: number;
+  /** 渠道信息列表 */
+  ListChannel?: ChannelListInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListDocCateRequest {
   /** 应用ID */
   BotBizId: string;
@@ -4707,6 +4801,8 @@ declare interface Lke {
   ListAppKnowledgeDetail(data: ListAppKnowledgeDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListAppKnowledgeDetailResponse>;
   /** 查询标签列表 {@link ListAttributeLabelRequest} {@link ListAttributeLabelResponse} */
   ListAttributeLabel(data: ListAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<ListAttributeLabelResponse>;
+  /** 获取发布渠道列表 {@link ListChannelRequest} {@link ListChannelResponse} */
+  ListChannel(data: ListChannelRequest, config?: AxiosRequestConfig): AxiosPromise<ListChannelResponse>;
   /** 文档列表 {@link ListDocRequest} {@link ListDocResponse} */
   ListDoc(data: ListDocRequest, config?: AxiosRequestConfig): AxiosPromise<ListDocResponse>;
   /** 获取文档分类 {@link ListDocCateRequest} {@link ListDocCateResponse} */

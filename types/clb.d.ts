@@ -1419,6 +1419,8 @@ declare interface AddCustomizedConfigRequest {
   ConfigType: string;
   /** 配置内容 */
   ConfigContent: string;
+  /** 标签 */
+  Tags?: TagInfo[];
 }
 
 declare interface AddCustomizedConfigResponse {

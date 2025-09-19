@@ -414,6 +414,8 @@ declare interface RoomInfo {
   SubtitlesTranscription?: number;
   /** 嘉宾Id列表。当圆桌会议模式（RoomType==3）时生效 */
   Guests?: string[];
+  /** 录制文件合并开关。0 关闭 1 开启 注：只有在一节课多次启用手动录制时，此功能才有效 */
+  RecordMerge?: number;
 }
 
 /** 房间列表 */
@@ -838,6 +840,8 @@ declare interface CreateRoomRequest {
   WhiteBoardSnapshotMode?: number;
   /** 字幕转写功能开关：0关闭，1开启，默认关闭 */
   SubtitlesTranscription?: number;
+  /** 录制文件合并开关。0 关闭 1 开启 注：只有在一节课多次启用手动录制时，此功能才有效 */
+  RecordMerge?: number;
 }
 
 declare interface CreateRoomResponse {
@@ -1383,6 +1387,8 @@ declare interface DescribeRoomResponse {
   SubtitlesTranscription?: number;
   /** 嘉宾Id列表。当圆桌会议模式（RoomType==3）时生效 */
   Guests?: string[];
+  /** 录制文件合并开关。0 关闭 1 开启 注：只有在一节课多次启用手动录制时，此功能才有效 */
+  RecordMerge?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1778,6 +1784,10 @@ declare interface ModifyRoomRequest {
   WhiteBoardSnapshotMode?: number;
   /** 字幕转写功能开关：0关闭，1开启，默认关闭 */
   SubtitlesTranscription?: number;
+  /** 嘉宾Id列表。当圆桌会议模式（RoomType==3）时生效 */
+  Guests?: string[];
+  /** 录制文件合并开关。0 关闭 1 开启 注：只有在一节课多次启用手动录制时，此功能才有效 */
+  RecordMerge?: number;
 }
 
 declare interface ModifyRoomResponse {

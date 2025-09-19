@@ -1084,7 +1084,7 @@ declare interface IpFilter {
   FilterType?: string | null;
   /** IP 黑白名单列表支持 X.X.X.X 格式IPV4地址 或X:X:X:X:X:X:X:X 格式IPV6地址， 或网段格式/X（IPV4:1≤X≤32；IPV6:1≤X≤128）最多可填充 200 个白名单或 200 个黑名单； */
   Filters?: string[] | null;
-  /** IP 黑白名单分路径配置，白名单功能。黑白名单 IP 总数不能超过 1000 个。 */
+  /** IP 黑白名单分路径配置。黑白名单 IP 总数不能超过 1000 个。 */
   FilterRules?: IpFilterPathRule[] | null;
   /** IP 黑白名单验证失败时返回的 code 已下线，参数失效，不支持自定义状态码，固定返回514 */
   ReturnCode?: number | null;
@@ -1298,7 +1298,7 @@ declare interface Origin {
   OriginPullProtocol?: string | null;
   /** 备源站列表修改备源站时，需要同时填充对应的 BackupOriginType */
   BackupOrigins?: string[] | null;
-  /** 备源站类型备源站列表BackupOrigins 不为空时必填支持以下类型：domain：域名类型ip：IP 列表作为源站以下备源源站类型尚未全量支持，需要申请试用：ipv6_domain: 源站列表为多个 IPv6 地址以及域名ip_ipv6：源站列表为多个 IPv4 地址和IPv6 地址ipv6_domain: 源站列表为多个 IPv6 地址以及域名ip_ipv6_domain：源站列表为多个 IPv4 地址IPv6 地址以及域名 */
+  /** 备源站类型备源站列表BackupOrigins 不为空时必填支持以下类型：domain：域名类型ip：IP 列表作为源站以下备源源站类型尚未全量支持，需要申请试用：ipv6_domain: 源站列表为多个 IPv6 地址以及域名ip_ipv6：源站列表为多个 IPv4 地址和IPv6 地址ip_ipv6_domain：源站列表为多个 IPv4 地址IPv6 地址以及域名 */
   BackupOriginType?: string | null;
   /** 回备源站时 Host 头部，不填充则默认为主源站的 ServerName */
   BackupServerName?: string | null;
@@ -2125,6 +2125,8 @@ declare interface AddCLSTopicDomainsRequest {
   DomainAreaConfigs: DomainAreaConfig[];
   /** 接入渠道，cdn或者ecdn，默认值为cdn */
   Channel?: string;
+  /** 是否继承域名标签, 默认保留上一次更改的值 */
+  InheritDomainTags?: boolean;
 }
 
 declare interface AddCLSTopicDomainsResponse {
@@ -2229,6 +2231,8 @@ declare interface CreateClsLogTopicRequest {
   Channel?: string;
   /** 域名区域信息 */
   DomainAreaConfigs?: DomainAreaConfig[];
+  /** 是否继承域名标签，默认为false */
+  InheritDomainTags?: boolean;
 }
 
 declare interface CreateClsLogTopicResponse {
@@ -2619,7 +2623,7 @@ declare interface DescribeIpStatusRequest {
   Domain: string;
   /** 节点类型：edge：表示边缘节点last：表示回源层节点不填充情况下，默认返回边缘节点信息 */
   Layer?: string;
-  /** 查询区域：mainland: 国内节点overseas: 海外节点global: 全球节点 */
+  /** 查询区域：mainland: 中国境内节点overseas: 海外节点global: 全球节点 */
   Area?: string;
   /** 是否以IP段的格式返回。 */
   Segment?: boolean;
@@ -3042,6 +3046,8 @@ declare interface ListClsTopicDomainsResponse {
   TopicName?: string;
   /** 日志主题最近更新时间 */
   UpdateTime?: string;
+  /** 是否继承域名标签 */
+  InheritDomainTags?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3137,6 +3143,8 @@ declare interface ManageClsTopicDomainsRequest {
   Channel?: string;
   /** 域名区域配置，注意：如果此字段为空，则表示解绑对应主题下的所有域名 */
   DomainAreaConfigs?: DomainAreaConfig[];
+  /** 是否继承域名标签 */
+  InheritDomainTags?: boolean;
 }
 
 declare interface ManageClsTopicDomainsResponse {

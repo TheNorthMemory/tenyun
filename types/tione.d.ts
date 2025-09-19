@@ -2189,7 +2189,7 @@ declare interface CreateNotebookRequest {
   AutomaticStopTime?: number;
   /** 标签配置 */
   Tags?: Tag[];
-  /** 数据配置，只支持WEDATA_HDFS存储类型 */
+  /** 数据存储挂载配置 */
   DataConfigs?: DataConfig[];
   /** 镜像信息 */
   ImageInfo?: ImageInfo;

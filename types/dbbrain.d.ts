@@ -340,6 +340,22 @@ declare interface HealthScoreInfo {
   HealthLevel: string;
 }
 
+/** 健康得分趋势 */
+declare interface HealthScoreTimeSeriesData {
+  /** 平均得分 */
+  Avg?: number;
+  /** 健康状态1-health2-warning3-critical */
+  HealthStatus?: number;
+  /** 指标名称 */
+  Metric?: string;
+  /** 得分序列 */
+  Series?: number[];
+  /** 时间序列，单位：毫秒数 */
+  Timestamp?: number[];
+  /** 单位 */
+  Unit?: string;
+}
+
 /** 实例健康详情。 */
 declare interface HealthStatus {
   /** 健康分数，满分100。 */
@@ -708,6 +724,14 @@ declare interface RedisCmdInfo {
   Cmd?: string;
   /** 命令次数 */
   Count?: number;
+}
+
+/** redis命令cost详情 */
+declare interface RedisCostCmd {
+  /** 命令 */
+  Cmd?: string;
+  /** 最大cost */
+  MaxCost?: number;
 }
 
 /** Redis实例内存配置参数 */
@@ -1948,6 +1972,24 @@ declare interface DescribeHealthScoreResponse {
   RequestId?: string;
 }
 
+declare interface DescribeHealthScoreTimeSeriesRequest {
+  /** 开始时间，如“2021-05-27 00:00:00”，支持的最早查询时间为当前时间的前30天。 */
+  StartTime: string;
+  /** 结束时间，如“2021-05-27 01:00:00”，支持的最早查询时间为当前时间的前30天。 */
+  EndTime: string;
+  /** 实例ID列表。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。 */
+  InstanceId: string;
+  /** 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"redis" - 云数据库 Redis，"mariadb"-数据库mariadb 默认为"mysql"。 */
+  Product: string;
+}
+
+declare interface DescribeHealthScoreTimeSeriesResponse {
+  /** 健康得分趋势数据 */
+  Data?: HealthScoreTimeSeriesData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeIndexRecommendAggregationSlowLogsRequest {
   /** 服务产品类型，支持值包括："mongodb" - 云数据库 。 */
   Product: string;
@@ -2274,6 +2316,26 @@ declare interface DescribeRedisTopBigKeysResponse {
   TopKeys?: RedisKeySpaceData[];
   /** 采集时间戳（秒）。 */
   Timestamp?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRedisTopCostCommandsRequest {
+  /** 开始时间，如“2021-05-27 00:00:00”，支持的最早查询时间为当前时间的前30天。 */
+  StartTime: string;
+  /** 结束时间，如“2021-05-27 01:00:00”，支持的最早查询时间为当前时间的前30天。 */
+  EndTime: string;
+  /** 实例ID列表。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。 */
+  InstanceId: string;
+  /** 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"redis" - 云数据库 Redis，"mariadb"-数据库mariadb 默认为"mysql"。 */
+  Product: string;
+  /** 默认前20条 */
+  Limit?: number;
+}
+
+declare interface DescribeRedisTopCostCommandsResponse {
+  /** 命令列表 */
+  TopCostCmdList?: RedisCostCmd[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4117,6 +4179,8 @@ declare interface Dbbrain {
   DescribeDiagDBInstances(data: DescribeDiagDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiagDBInstancesResponse>;
   /** 获取健康得分 {@link DescribeHealthScoreRequest} {@link DescribeHealthScoreResponse} */
   DescribeHealthScore(data: DescribeHealthScoreRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHealthScoreResponse>;
+  /** 获取实例健康得分趋势 {@link DescribeHealthScoreTimeSeriesRequest} {@link DescribeHealthScoreTimeSeriesResponse} */
+  DescribeHealthScoreTimeSeries(data: DescribeHealthScoreTimeSeriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHealthScoreTimeSeriesResponse>;
   /** 慢查模板概览 {@link DescribeIndexRecommendAggregationSlowLogsRequest} {@link DescribeIndexRecommendAggregationSlowLogsResponse} */
   DescribeIndexRecommendAggregationSlowLogs(data: DescribeIndexRecommendAggregationSlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexRecommendAggregationSlowLogsResponse>;
   /** 查询实例的索引推荐信息 {@link DescribeIndexRecommendInfoRequest} {@link DescribeIndexRecommendInfoResponse} */
@@ -4145,6 +4209,8 @@ declare interface Dbbrain {
   DescribeRedisSlowLogTopSqls(data: DescribeRedisSlowLogTopSqlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisSlowLogTopSqlsResponse>;
   /** 查询redis实例大key列表 {@link DescribeRedisTopBigKeysRequest} {@link DescribeRedisTopBigKeysResponse} */
   DescribeRedisTopBigKeys(data: DescribeRedisTopBigKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisTopBigKeysResponse>;
+  /** 查询访问命令Cost TopN {@link DescribeRedisTopCostCommandsRequest} {@link DescribeRedisTopCostCommandsResponse} */
+  DescribeRedisTopCostCommands(data: DescribeRedisTopCostCommandsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisTopCostCommandsResponse>;
   /** 获取redis top热key {@link DescribeRedisTopHotKeysRequest} {@link DescribeRedisTopHotKeysResponse} */
   DescribeRedisTopHotKeys(data: DescribeRedisTopHotKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisTopHotKeysResponse>;
   /** 查询redis实例top key前缀列表 {@link DescribeRedisTopKeyPrefixListRequest} {@link DescribeRedisTopKeyPrefixListResponse} */

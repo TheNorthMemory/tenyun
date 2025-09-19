@@ -3200,6 +3200,8 @@ declare interface ImageProcessTaskOutput {
   Path?: string | null;
   /** 输出文件的存储位置。 */
   OutputStorage?: TaskOutputStorage | null;
+  /** 输出文件的URL。 */
+  SignedUrl?: string;
 }
 
 /** 图片处理任务结果类型 */
@@ -8761,6 +8763,8 @@ declare interface ProcessImageRequest {
   OutputStorage?: TaskOutputStorage;
   /** 图片处理生成的文件输出的路径。如果不填表示与 InputInfo 中文件所在的目录一致。如果是目录，如`/image/201907/`，表示继承原文件名输出到该目录。 */
   OutputDir?: string;
+  /** 输出路径，可以为相对路径或者绝对路径。若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。相对路径示例：文件名_{变量名}.{format}文件名.{format}绝对路径示例：/自定义路径/文件名_{变量名}.{format}如果不填，则默认为相对路径：{inputName}.{format}。 */
+  OutputPath?: string;
   /** 图片处理参数。 */
   ImageTask?: ImageTaskInput;
 }

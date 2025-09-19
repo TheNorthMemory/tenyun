@@ -1101,6 +1101,16 @@ declare namespace V20180416 {
     NodeID?: string;
   }
 
+  /** 节点IP、访问IP、访问时间 */
+  interface IpTimePair {
+    /** IP地址 */
+    Ip?: string;
+    /** 时间戳，毫秒 */
+    Timestamp?: number;
+    /** 集群节点IP */
+    NodeIp?: string;
+  }
+
   /** 智能运维诊断参数 */
   interface JobParam {
     /** 诊断项列表 */
@@ -2683,6 +2693,40 @@ declare namespace V20180416 {
     RequestId?: string;
   }
 
+  interface ExportIpTraceLogRequest {
+    /** ES集群ID */
+    InstanceId: string;
+    /** 开始时间 */
+    StartTime?: string;
+    /** 结束时间 */
+    EndTime?: string;
+    /** 起始偏移量 */
+    Offset?: number;
+    /** 数据条数 */
+    Limit?: number;
+    /** 访问IP */
+    RemoteIp?: string[];
+    /** Request/Response 请求/返回, 非必填 */
+    TraceType?: string[];
+    /** Public/Private 公网访问/内网访问, 非必填 */
+    NetType?: string[];
+    /** POST/GET/PUT/DELETE/HEAD/OPTIONS/PATCH/CONNECT/TRACE/CONNECT等, 非必填 */
+    ReqTypeOrRspStatus?: string[];
+    /** 关键字模糊查询，支持Lucene Query String */
+    SearchKey?: string;
+    /** uri搜索 */
+    Uri?: string;
+    /** 集群节点IP */
+    NodeIp?: string[];
+  }
+
+  interface ExportIpTraceLogResponse {
+    /** IP时间列表 */
+    IpTraceList?: IpTimePair[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface GetDiagnoseSettingsRequest {
     /** ES实例ID */
     InstanceId: string;
@@ -3333,6 +3377,8 @@ declare interface Es {
   DescribeViews(data: V20180416.DescribeViewsRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeViewsResponse>;
   /** 智能运维诊断集群 {@link V20180416.DiagnoseInstanceRequest} {@link V20180416.DiagnoseInstanceResponse} */
   DiagnoseInstance(data: V20180416.DiagnoseInstanceRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DiagnoseInstanceResponse>;
+  /** 导出IP溯源日志 {@link V20180416.ExportIpTraceLogRequest} {@link V20180416.ExportIpTraceLogResponse} */
+  ExportIpTraceLog(data: V20180416.ExportIpTraceLogRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.ExportIpTraceLogResponse>;
   /** 查看智能运维配置 {@link V20180416.GetDiagnoseSettingsRequest} {@link V20180416.GetDiagnoseSettingsResponse} */
   GetDiagnoseSettings(data: V20180416.GetDiagnoseSettingsRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.GetDiagnoseSettingsResponse>;
   /** 获取接收客户端请求的节点类型 {@link V20180416.GetRequestTargetNodeTypesRequest} {@link V20180416.GetRequestTargetNodeTypesResponse} */

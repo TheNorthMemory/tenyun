@@ -180,6 +180,8 @@ declare interface InvocationTask {
   ErrorInfo?: string;
   /** 调用来源。- USER：来源于用户调用。- INVOKER：来源于定时执行。 */
   InvocationSource?: string;
+  /** 执行的命令的名称。 */
+  CommandName?: string;
 }
 
 /** 执行活动任务简介。 */
