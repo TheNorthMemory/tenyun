@@ -114,7 +114,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 242+ 款产品，12641+ 服务数</summary>
+<details><summary>共计 242+ 款产品，12725+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -133,7 +133,7 @@ antiddos | [T-Sec-DDoS防护(Anti-DDoS)](https://cloud.tencent.com/document/prod
 ape | [正版图库直通车](https://cloud.tencent.com/document/product/1181) | 2020-05-13(8) |
 api | [云 API](https://cloud.tencent.com/document/product/1278) | 2020-11-06(3) |
 apigateway | [API 网关](https://cloud.tencent.com/document/product/628) | 2018-08-08(99) |
-apm | [应用性能监控](https://cloud.tencent.com/document/product/1463) | 2021-06-22(14) |
+apm | [应用性能监控](https://cloud.tencent.com/document/product/1463) | 2021-06-22(15) |
 asr | [语音识别](https://cloud.tencent.com/document/product/1093) | 2019-06-14(32) |
 asw | [应用与服务编排工作流](https://cloud.tencent.com/document/product/1272) | 2020-07-22(9) |
 as | [弹性伸缩](https://cloud.tencent.com/document/product/377) | 2018-04-19(58) |
@@ -142,7 +142,7 @@ batch | [批量计算](https://cloud.tencent.com/document/product/599) | 2017-03
 bda | [人体分析](https://cloud.tencent.com/document/product/1208) | 2020-03-24(18) |
 bh | [运维安全中心（堡垒机）](https://cloud.tencent.com/document/product/1025) | 2023-04-18(79) |
 bi | [商业智能分析 BI](https://cloud.tencent.com/document/product/590) | 2022-01-05(29) |
-billing | [费用中心](https://cloud.tencent.com/document/product/555) | 2018-07-09(56) |
+billing | [费用中心](https://cloud.tencent.com/document/product/555) | 2018-07-09(62) |
 bizlive | 商业直播 | 2019-03-13(6) |
 bm | [黑石物理服务器CPM](https://cloud.tencent.com/document/product/386) | 2018-04-23(53) |
 bma | [品牌经营管家](https://cloud.tencent.com/document/product/1296) | 2022-11-15(11) | 2021-06-24(28) |
@@ -193,7 +193,7 @@ csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664
 csxg | [5G入云服务](https://cloud.tencent.com/document/product/1687) | 2023-03-03(5) |
 ctem | [暴露面管理服务](https://cloud.tencent.com/document/product/1755) | 2023-11-28(33) |
 ctsdb | [时序数据库 CTSDB](https://cloud.tencent.com/document/product/652) | 2023-02-02(2) |
-cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-12(102) |
+cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-12(98) |
 cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(514) |
 cws | 漏洞扫描服务 | 2018-03-12(19) |
 cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(166) |
@@ -227,7 +227,7 @@ ft | [人像变换](https://cloud.tencent.com/document/product/1202) | 2020-03-0
 gaap | [全球应用加速](https://cloud.tencent.com/document/product/608) | 2018-05-29(102) |
 gme | [游戏多媒体引擎](https://cloud.tencent.com/document/product/607) | 2018-07-11(37) |
 goosefs | [数据加速器 GooseFS](https://cloud.tencent.com/document/product/1424) | 2022-05-19(27) |
-gs | [云游戏](https://cloud.tencent.com/document/product/1162) | 2019-11-18(77) |
+gs | [云游戏](https://cloud.tencent.com/document/product/1162) | 2019-11-18(81) |
 gwlb | [网关负载均衡](https://cloud.tencent.com/document/product/1782) | 2024-09-06(18) |
 habo |  | 2018-12-03(2) |
 hai | [高性能应用服务](https://cloud.tencent.com/document/product/1721) | 2023-08-12(16) |
@@ -353,7 +353,7 @@ vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-
 vtc | [视频转译](https://cloud.tencent.com/document/product/1769) | 2024-02-23(3) |
 waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(185) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
-wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2021-08-20(297) |
+wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2025-08-06(77) | 2021-08-20(297) |
 weilingwith | [微瓴同业开放平台](https://cloud.tencent.com/document/product/1693) | 2023-04-27(64) |
 wsa | [联网搜索API](https://cloud.tencent.com/document/product/1806) | 2025-05-08(1) |
 wss | SSL证书管理服务 | 2018-04-26(3) |
