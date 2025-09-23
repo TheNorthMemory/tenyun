@@ -1356,6 +1356,218 @@ declare interface BillZoneId {
   ZoneName: string;
 }
 
+/** 预算管理自定义费用范围参数 */
+declare interface BudgetConditionsForm {
+  /** 产品 */
+  Business?: string[] | null;
+  /** 计费模式 */
+  PayMode?: string[] | null;
+  /** 子产品 */
+  ProductCodes?: string[] | null;
+  /** 组件编码 */
+  ComponentCodes?: string[] | null;
+  /** 地域 */
+  ZoneIds?: string[] | null;
+  /** 可用区 */
+  RegionIds?: string[] | null;
+  /** 项目 */
+  ProjectIds?: string[] | null;
+  /** 交易类型 */
+  ActionTypes?: string[] | null;
+  /** 消耗类型 */
+  ConsumptionTypes?: string[] | null;
+  /** 标签 */
+  Tags?: TagsForm[] | null;
+  /** 末级分账单元 */
+  PayerUins?: string[] | null;
+  /** 主用户Uin */
+  OwnerUins?: string[] | null;
+  /** 末级分账单元唯一键 */
+  TreeNodeUniqKeys?: string[] | null;
+}
+
+/** 查询返回预算完整信息 */
+declare interface BudgetExtend {
+  /** 预算名称 */
+  BudgetName: string;
+  /** 预算额度 */
+  BudgetQuota: string;
+  /** DAY 天，MONTH 月度，QUARTER 季度 ，YEAR 年度 */
+  CycleType: string;
+  /** BILL 系统账单，CONSUMPTION 消耗账单 */
+  BillType: string;
+  /** COST 原价，REAL_COST 实际费用，CASH 现金，INCENTIVE 赠送金，VOUCHER 代金券，TRANSFER 分成金，TAX 税，AMOUNT_BEFORE_TAX 现金支付(税前) */
+  FeeType: string;
+  /** 有效期起始时间 2025-01-01 */
+  PeriodBegin: string;
+  /** 有效期结束时间 2025-12-01 */
+  PeriodEnd: string;
+  /** COST，USAGE，RI，SP */
+  Dimensions: string;
+  /** FIX 固定值，CYCLE 不同值 */
+  PlanType: string;
+  /** 阈值提醒 */
+  WarnJson: BudgetWarn[];
+  /** 用户Uin */
+  PayerUin?: number;
+  /** 波动提醒 */
+  WaveThresholdJson?: WaveThresholdForm[];
+  /** 预算备注 */
+  BudgetNote?: string;
+  /** 自定义发送对象信息 */
+  SendDetail?: string;
+  /** 0:默认uin发送 */
+  DefaultMode?: number;
+  /** CUS 自定义预算，ZERO_COST 零支出预算模板，BY_MONTH 按月费用预算模板 */
+  TemplateType?: string | null;
+  /** (1, "未超支"),(2, "超支") */
+  MoneyStatus?: number;
+  /** 提醒次数 */
+  RemindTimes?: number;
+  /** 创建预算时间 */
+  CreateTime?: string;
+  /** 更新预算时间 */
+  UpdateTime?: string;
+  /** 预算关联Id */
+  BudgetId?: string;
+  /** NO_FORECAST(没有设置预测), FORECAST_NO_DATA(设置了预测,但是没有数据),FORECAST_HAS_DATA(设置了预测,且有预测数据) */
+  HasForecast?: string | null;
+  /** 预测费用 */
+  ForecastCost?: string | null;
+  /** 预测进度 */
+  ForecastProgress?: string | null;
+  /** 实际费用 */
+  RealCost?: string;
+  /** 自定义发送 */
+  BudgetSendInfoForm?: BudgetSendInfoDto[];
+  /** 当前周期 */
+  CurDateDesc?: string;
+  /** EXPIRED 已过期ACTIVE 生效中UNACTIVATED 已失效ACTIVATED 待生效 */
+  BudgetStatus?: string;
+  /** 预算维度范围条件 */
+  DimensionsRange?: BudgetConditionsForm | null;
+  /** 预算进度 */
+  BudgetProgress?: string | null;
+  /** 预算类型设置为计划预算时返回预算额度 */
+  BudgetQuotaJson?: BudgetPlan[] | null;
+}
+
+/** 记录预算项目相关字段的变更信息 */
+declare interface BudgetInfoDiffEntity {
+  /** 变更属性 */
+  Property?: string;
+  /** 变更前内容 */
+  Before?: string | null;
+  /** 变更后内容 */
+  After?: string | null;
+}
+
+/** 预算修改记录信息 */
+declare interface BudgetOperationLogEntity {
+  /** Uin */
+  PayerUin?: number;
+  /** 主用户Uin */
+  OwnerUin?: number;
+  /** 操作用户Uin */
+  OperateUin?: number;
+  /** 日期 */
+  BillDay?: number;
+  /** 月份 */
+  BillMonth?: string;
+  /** 修改类型：ADD(新增)、UPDATE(更新) */
+  Action?: string;
+  /** 变更信息 */
+  DiffValue?: BudgetInfoDiffEntity[];
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 修改时间 */
+  UpdateTime?: string;
+  /** 修改渠道：官网修改/API修改 */
+  OperationChannel?: string;
+  /** 预算项目id */
+  BudgetId?: string;
+}
+
+/** 预算计算复杂数据类型 */
+declare interface BudgetPlan {
+  /** 前端页面日期显示 */
+  DateDesc?: string | null;
+  /** 预算额度 */
+  Quota?: string | null;
+}
+
+/** 预算管理的分页数据 */
+declare interface BudgetRemindRecordList {
+  /** 自动优化 COUNT SQL 如果遇到 jSqlParser 无法解析情况，设置该参数为 false */
+  OptimizeCountSql?: boolean | null;
+  /** 分页 */
+  Pages?: number | null;
+  /** 排序字段信息，允许前端传入的时候，注意 SQL 注入问题，可以使用 SqlInjectionUtils.check(...) 检查文本 */
+  Orders?: OrderDto[] | null;
+  /** xml 自定义 count 查询的 statementId 也可以不用指定在分页 statementId 后面加上 _mpCount 例如分页 selectPageById 指定 count 的查询 statementId 设置为 selectPageById_mpCount 即可默认找到该 SQL 执行 */
+  CountId?: string | null;
+  /** 分页大小 */
+  Size?: number | null;
+  /** 总量 */
+  Total?: number | null;
+  /** 单页分页条数限制 */
+  MaxLimit?: string | null;
+  /** 查询数据列表 */
+  Records?: BudgetRemindRecords[] | null;
+  /** 当前页 */
+  Current?: number | null;
+  /** 是否进行 count 查询，如果只想查询到列表不要查询总记录数，设置该参数为 false */
+  SearchCount?: boolean | null;
+}
+
+/** 预算历史详情 */
+declare interface BudgetRemindRecords {
+  /** 预算周期 */
+  DateDesc?: string;
+  /** 实际费用 */
+  RealCost?: string;
+  /** 预算值额度 */
+  BudgetQuota?: string;
+  /** 提醒类型。枚举值:BUDGET 预算提醒,WAVE 波动提醒. */
+  AlarmType?: string | null;
+  /** 消息内容 */
+  MessageContent?: string | null;
+  /** 发送时间 */
+  SendTime?: number | null;
+  /** 创建时间 */
+  CreateTime?: number | null;
+}
+
+/** 预算提醒 */
+declare interface BudgetSendInfoDto {
+  /** 通知周期,逗号隔开。枚举值:周一:1,周二:2,周天:7 */
+  WeekDays?: number[] | null;
+  /** 接收类型。枚举值:UIN 默认模式,USER 用户,GROUP 用户组。 */
+  ReceiverType?: string | null;
+  /** 发送接收窗口HH:mm:ss */
+  EndTime?: string | null;
+  /** 预算配置id（预算名称） */
+  BudgetId?: number | null;
+  /** 接收渠道,逗号隔开;枚举值:TITLE 标题，SITE 站内信,EMAIL 邮件,SMS 短信,WECHAT 微信,VOICE 语音,QYWX 企业微信; */
+  NoticeWays?: string[] | null;
+  /** 发送开始窗口HH:mm:ss */
+  StartTime?: string | null;
+  /** id */
+  Id?: string | null;
+  /** 用户id,用户组id */
+  ReceiverIds?: number[] | null;
+}
+
+/** 预算阈值提醒信息 */
+declare interface BudgetWarn {
+  /** ACTUAL 实际金额，FORECAST 预测金额 */
+  WarnType: string;
+  /** PERCENTAGE 预算金额的百分比，ABS 固定值 */
+  CalType: string;
+  /** 阈值（大于等于0） */
+  ThresholdValue: string;
+}
+
 /** 产品汇总信息 */
 declare interface BusinessSummaryInfo {
   /** 产品编码 */
@@ -1748,6 +1960,34 @@ declare interface CostDetail {
   ProductCode?: string;
 }
 
+/** 获取预算管理的基础信息分页数据 */
+declare interface DataForBudgetInfoPage {
+  /** 分页 */
+  Pages?: number;
+  /** 分页大小 */
+  Size?: number;
+  /** 总量 */
+  Total?: number;
+  /** 查询数据列表 */
+  Records?: BudgetExtend[] | null;
+  /** 当前页 */
+  Current?: number;
+}
+
+/** 预算修改记录信息分页数据 */
+declare interface DataForBudgetOperationLogPage {
+  /** 分页 */
+  Pages?: number;
+  /** 分页大小 */
+  Size?: number;
+  /** 总量 */
+  Total?: number;
+  /** 查询数据列表 */
+  Records?: BudgetOperationLogEntity[] | null;
+  /** 当前页 */
+  Current?: number;
+}
+
 /** 订单数据对象 */
 declare interface Deal {
   /** 订单号 */
@@ -2030,6 +2270,14 @@ declare interface JsonObject {
   Value?: string;
 }
 
+/** 字段排序 */
+declare interface OrderDto {
+  /** 字段 */
+  Column: string | null;
+  /** 是否升序 */
+  Asc: boolean | null;
+}
+
 /** 按计费模式汇总消费详情 */
 declare interface PayModeSummaryOverviewItem {
   /** 计费模式编码 */
@@ -2170,6 +2418,14 @@ declare interface TagSummaryOverviewItem {
   TotalCost?: string;
 }
 
+/** 预算管理自定义费用范围，tag 参数 */
+declare interface TagsForm {
+  /** key */
+  TagKey?: string | null;
+  /** value */
+  TagValue?: string[] | null;
+}
+
 /** 购买商品信息 */
 declare interface UsageDetails {
   /** 商品名 */
@@ -2242,6 +2498,25 @@ declare interface VoucherInfos {
   CreateTime?: string;
 }
 
+/** 阈值波动预警信息 */
+declare interface WaveThresholdForm {
+  /** ACTUAL 实际金额，FORECAST 预测金额 */
+  WarnType?: string | null;
+  /** 波动阈值（大于等于0） */
+  Threshold?: string | null;
+  /** 告警类型：chain 环比，yoy 同比，fix 固定值（支持类型：日环比 chain day，日同比周维度 chain weekday，日同比月维度 yoy day，日固定值 fix day，月环比 chain month，月固定值 fix month） */
+  MetaType?: string | null;
+  /** 告警维度：day 日，month 月，weekday 周（支持类型：日环比 chain day，日同比周维度 chain weekday，日同比月维度 yoy day，日固定值 fix day，月环比 chain month，月固定值 fix month） */
+  PeriodType?: string | null;
+}
+
+declare interface BudgetInfoApiResponse {
+  /** 预算项目id */
+  BudgetId?: string;
+  /** 更新预算时间 */
+  UpdateTime?: string;
+}
+
 declare interface CreateAllocationRuleRequest {
   /** 公摊规则列表 */
   RuleList: AllocationRulesSummary;
@@ -2280,6 +2555,44 @@ declare interface CreateAllocationUnitResponse {
   Id?: number;
   /** 分账单元唯一标识 */
   TreeNodeUniqKey?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateBudgetRequest {
+  /** 预算名称 */
+  BudgetName: string;
+  /** DAY 天，MONTH 月度，QUARTER 季度 ，YEAR 年度 */
+  CycleType: string;
+  /** 有效期起始时间 2025-01-01(周期: 天) / 2025-01（周期: 月） */
+  PeriodBegin: string;
+  /** 有效期结束时间 2025-12-01(周期：天) / 2025-12（周期：月） */
+  PeriodEnd: string;
+  /** FIX 固定预算，CYCLE 计划预算 */
+  PlanType: string;
+  /** 预算值额度预算计划类型为FIX(固定预算)时传定值；预算计划类型为CYCLE(计划预算)时传[{"dateDesc":"2025-07","quota":"1000"},{"dateDesc":"2025-08","quota":"2000"}]； */
+  BudgetQuota: string;
+  /** BILL 系统账单，CONSUMPTION 消耗账单 */
+  BillType: string;
+  /** COST 原价，REAL_COST 实际费用，CASH 现金，INCENTIVE 赠送金，VOUCHER 代金券，TRANSFER 分成金，TAX 税，AMOUNT_BEFORE_TAX 现金支付(税前) */
+  FeeType: string;
+  /** 阈值提醒 */
+  WarnJson: BudgetWarn[];
+  /** 预算备注 */
+  BudgetNote?: string;
+  /** 预算维度范围条件 */
+  DimensionsRange?: BudgetConditionsForm;
+  /** 波动提醒 */
+  WaveThresholdJson?: WaveThresholdForm[];
+}
+
+declare interface CreateBudgetResponse {
+  /** 创建预算返回信息 */
+  Data?: BudgetInfoApiResponse;
+  /** create success */
+  Message?: string;
+  /** 返回码 */
+  Code?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2330,6 +2643,22 @@ declare interface DeleteAllocationUnitRequest {
 }
 
 declare interface DeleteAllocationUnitResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteBudgetRequest {
+  /** 预算项目id */
+  BudgetIds: string[];
+}
+
+declare interface DeleteBudgetResponse {
+  /** 返回删除预算项目id */
+  Data?: string[];
+  /** 信息提示 */
+  Message?: string;
+  /** 返回码 */
+  Code?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3222,6 +3551,72 @@ declare interface DescribeBillSummaryResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBudgetOperationLogRequest {
+  /** 页码 */
+  PageNo: number;
+  /** 每页数目 */
+  PageSize: number;
+  /** 预算项目id */
+  BudgetId: string;
+}
+
+declare interface DescribeBudgetOperationLogResponse {
+  /** 预算修改记录详情 */
+  Data?: DataForBudgetOperationLogPage;
+  /** 信息提示 */
+  Message?: string;
+  /** 返回码 */
+  Code?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBudgetRemindRecordListRequest {
+  /** 页码，整型 */
+  PageNo: number;
+  /** 每页数目，整型 */
+  PageSize: number;
+  /** 预算基础信息关联id */
+  BudgetId: string;
+}
+
+declare interface DescribeBudgetRemindRecordListResponse {
+  /** 预算配置属性 */
+  Data?: BudgetRemindRecordList;
+  /** 错误信息提示 */
+  Message?: string | null;
+  /** 错误响应码 */
+  Code?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBudgetRequest {
+  /** 页码，整型 */
+  PageNo: number;
+  /** 每页数目，整型 */
+  PageSize: number;
+  /** 预算项目id */
+  BudgetId?: string;
+  /** 预算名称 */
+  BudgetName?: string;
+  /** EXPIRED失效，ACTIVE生效中， ACTIVATED待生效 */
+  BudgetStatus?: string;
+  /** DAY天 MONTH月度 QUARTER季度 YEAR年度 */
+  CycleTypes?: string[];
+}
+
+declare interface DescribeBudgetResponse {
+  /** 预算项目详情 */
+  Data?: DataForBudgetInfoPage;
+  /** 信息提示 */
+  Message?: string | null;
+  /** 返回码 */
+  Code?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCostDetailRequest {
   /** 数量，最大值为100 */
   Limit: number;
@@ -3738,6 +4133,46 @@ declare interface ModifyAllocationUnitResponse {
   RequestId?: string;
 }
 
+declare interface ModifyBudgetRequest {
+  /** 预算项目id */
+  BudgetId: string;
+  /** 预算名称 */
+  BudgetName: string;
+  /** DAY 天，MONTH 月度，QUARTER 季度 ，YEAR 年度 */
+  CycleType: string;
+  /** 有效期起始时间 2025-01-01 */
+  PeriodBegin: string;
+  /** 有效期结束时间 2025-12-01 */
+  PeriodEnd: string;
+  /** FIX 固定值，CYCLE 不同值 */
+  PlanType: string;
+  /** 预算值额度 预算计划类型固定预算时设为定值；预算计划类型为CYCLE(计划预算)时传[{"dateDesc":"2025-07","quota":"1000"},{"dateDesc":"2025-08","quota":"2000"}]； */
+  BudgetQuota: string;
+  /** BILL 系统账单，CONSUMPTION 消耗账单 */
+  BillType: string;
+  /** COST 原价，REAL_COST 实际费用，CASH 现金，INCENTIVE 赠送金，VOUCHER 代金券，TRANSFER 分成金，TAX 税，AMOUNT_BEFORE_TAX 现金支付(税前) */
+  FeeType: string;
+  /** 阈值提醒 */
+  WarnJson: BudgetWarn[];
+  /** 预算备注 */
+  BudgetNote?: string;
+  /** 预算维度范围条件 */
+  DimensionsRange?: BudgetConditionsForm;
+  /** 波动提醒 */
+  WaveThresholdJson?: WaveThresholdForm[];
+}
+
+declare interface ModifyBudgetResponse {
+  /** 更新预算返回信息 */
+  Data?: BudgetInfoApiResponse;
+  /** update success */
+  Message?: string | null;
+  /** 返回码 */
+  Code?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyGatherRuleRequest {
   /** 所编辑归集规则ID */
   Id: number;
@@ -3787,6 +4222,8 @@ declare interface Billing {
   CreateAllocationTag(data: CreateAllocationTagRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAllocationTagResponse>;
   /** 创建分账单元 {@link CreateAllocationUnitRequest} {@link CreateAllocationUnitResponse} */
   CreateAllocationUnit(data: CreateAllocationUnitRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAllocationUnitResponse>;
+  /** 创建预算项目 {@link CreateBudgetRequest} {@link CreateBudgetResponse} */
+  CreateBudget(data: CreateBudgetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBudgetResponse>;
   /** 创建归集规则 {@link CreateGatherRuleRequest} {@link CreateGatherRuleResponse} */
   CreateGatherRule(data: CreateGatherRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGatherRuleResponse>;
   /** 公摊规则删除接口 {@link DeleteAllocationRuleRequest} {@link DeleteAllocationRuleResponse} */
@@ -3795,6 +4232,8 @@ declare interface Billing {
   DeleteAllocationTag(data: DeleteAllocationTagRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAllocationTagResponse>;
   /** 删除分账单元 {@link DeleteAllocationUnitRequest} {@link DeleteAllocationUnitResponse} */
   DeleteAllocationUnit(data: DeleteAllocationUnitRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAllocationUnitResponse>;
+  /** 删除预算项目 {@link DeleteBudgetRequest} {@link DeleteBudgetResponse} */
+  DeleteBudget(data: DeleteBudgetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBudgetResponse>;
   /** 删除归集规则 {@link DeleteGatherRuleRequest} {@link DeleteGatherRuleResponse} */
   DeleteGatherRule(data: DeleteGatherRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGatherRuleResponse>;
   /** 获取账户余额 {@link DescribeAccountBalanceRequest} {@link DescribeAccountBalanceResponse} */
@@ -3853,6 +4292,12 @@ declare interface Billing {
   DescribeBillSummaryByTag(data: DescribeBillSummaryByTagRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillSummaryByTagResponse>;
   /** 成员账号获取管理账号代付账单（按多维度汇总） {@link DescribeBillSummaryForOrganizationRequest} {@link DescribeBillSummaryForOrganizationResponse} */
   DescribeBillSummaryForOrganization(data: DescribeBillSummaryForOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillSummaryForOrganizationResponse>;
+  /** 获取预算详细信息 {@link DescribeBudgetRequest} {@link DescribeBudgetResponse} */
+  DescribeBudget(data: DescribeBudgetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBudgetResponse>;
+  /** 获取预算修改记录 {@link DescribeBudgetOperationLogRequest} {@link DescribeBudgetOperationLogResponse} */
+  DescribeBudgetOperationLog(data: DescribeBudgetOperationLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBudgetOperationLogResponse>;
+  /** 获取预算提醒记录 {@link DescribeBudgetRemindRecordListRequest} {@link DescribeBudgetRemindRecordListResponse} */
+  DescribeBudgetRemindRecordList(data: DescribeBudgetRemindRecordListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBudgetRemindRecordListResponse>;
   /** 查询消耗明细 {@link DescribeCostDetailRequest} {@link DescribeCostDetailResponse} */
   DescribeCostDetail(data: DescribeCostDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCostDetailResponse>;
   /** 查看成本分析明细 {@link DescribeCostExplorerSummaryRequest} {@link DescribeCostExplorerSummaryResponse} */
@@ -3889,6 +4334,8 @@ declare interface Billing {
   ModifyAllocationRule(data: ModifyAllocationRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAllocationRuleResponse>;
   /** 修改分账单元 {@link ModifyAllocationUnitRequest} {@link ModifyAllocationUnitResponse} */
   ModifyAllocationUnit(data: ModifyAllocationUnitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAllocationUnitResponse>;
+  /** 更新预算信息 {@link ModifyBudgetRequest} {@link ModifyBudgetResponse} */
+  ModifyBudget(data: ModifyBudgetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBudgetResponse>;
   /** 编辑归集规则 {@link ModifyGatherRuleRequest} {@link ModifyGatherRuleResponse} */
   ModifyGatherRule(data: ModifyGatherRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGatherRuleResponse>;
   /** 支付订单 {@link PayDealsRequest} {@link PayDealsResponse} */

@@ -2538,6 +2538,8 @@ declare interface DescribeDBInstancesAttributeResponse {
   IsSafetyLimited?: number;
   /** 是否支持创建SA权限账号，0-不支持，1-支持 */
   IsSupportSA?: number;
+  /** 慢SQL阈值，单位毫秒 */
+  SlowLogThreshold?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

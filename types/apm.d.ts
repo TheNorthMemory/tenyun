@@ -224,6 +224,16 @@ declare interface ApmMetricRecord {
   Tags?: ApmTag[];
 }
 
+/** apm应用指标信息 */
+declare interface ApmServiceMetric {
+  /** filed数组 */
+  Fields?: ApmField[] | null;
+  /** tag数组 */
+  Tags?: ApmTag[] | null;
+  /** 应用信息 */
+  ServiceDetail?: ServiceDetail | null;
+}
+
 /** 维度（标签）对象 */
 declare interface ApmTag {
   /** 维度Key(列名，标签Key) */
@@ -290,6 +300,28 @@ declare interface QueryMetricItem {
   Compares?: string[];
   /** 同比，已弃用，不建议使用 */
   Compare?: string;
+}
+
+/** 应用详细信息 */
+declare interface ServiceDetail {
+  /** 应用ID */
+  ServiceID?: string | null;
+  /** 业务系统ID */
+  InstanceKey?: string | null;
+  /** 用户appid */
+  AppID?: number | null;
+  /** 主账号uin */
+  CreateUIN?: string | null;
+  /** 应用名 */
+  ServiceName?: string | null;
+  /** 应用描述 */
+  ServiceDescription?: string | null;
+  /** 地域 */
+  Region?: string | null;
+  /** 标签 */
+  Tags?: ApmTag[] | null;
+  /** 业务系统名称 */
+  InstanceName?: string;
 }
 
 /** Span 对象 */
@@ -444,6 +476,54 @@ declare interface DescribeApmInstancesRequest {
 declare interface DescribeApmInstancesResponse {
   /** APM 业务系统列表 */
   Instances?: ApmInstanceDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeApmServiceMetricRequest {
+  /** 业务系统ID */
+  InstanceId: string;
+  /** 应用名 */
+  ServiceName?: string;
+  /** 应用ID */
+  ServiceID?: string;
+  /** 开始时间 */
+  StartTime?: number;
+  /** 结束时间 */
+  EndTime?: number;
+  /** 排序 */
+  OrderBy?: OrderBy;
+  /** 是否demo模式 */
+  Demo?: boolean;
+  /** 应用状态筛选，可枚举的值为：health、warning、error。如果选中多个状态用逗号隔开，比如："warning,error" */
+  ServiceStatus?: string;
+  /** 标签列表 */
+  Tags?: ApmTag[];
+  /** 页码 */
+  Page?: number;
+  /** 页大小 */
+  PageSize?: number;
+  /** 过滤条件 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeApmServiceMetricResponse {
+  /** 应用指标列表 */
+  ServiceMetricList?: ApmServiceMetric[];
+  /** 符合筛选条件的应用数 */
+  TotalCount?: number;
+  /** 警示异常应用数 */
+  WarningErrorCount?: number;
+  /** 应用总数 */
+  ApplicationCount?: number;
+  /** 页码 */
+  Page?: number;
+  /** 页大小 */
+  PageSize?: number;
+  /** 异常应用数 */
+  ErrorCount?: number;
+  /** 警示应用数 */
+  WarningCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -769,6 +849,8 @@ declare interface Apm {
   DescribeApmAgent(data: DescribeApmAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmAgentResponse>;
   /** 获取 APM 业务系统列表 {@link DescribeApmInstancesRequest} {@link DescribeApmInstancesResponse} */
   DescribeApmInstances(data?: DescribeApmInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmInstancesResponse>;
+  /** 获取 APM 应用指标 {@link DescribeApmServiceMetricRequest} {@link DescribeApmServiceMetricResponse} */
+  DescribeApmServiceMetric(data: DescribeApmServiceMetricRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmServiceMetricResponse>;
   /** 查询应用配置信息 {@link DescribeGeneralApmApplicationConfigRequest} {@link DescribeGeneralApmApplicationConfigResponse} */
   DescribeGeneralApmApplicationConfig(data: DescribeGeneralApmApplicationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralApmApplicationConfigResponse>;
   /** 获取指标数据通用接口（推荐） {@link DescribeGeneralMetricDataRequest} {@link DescribeGeneralMetricDataResponse} */

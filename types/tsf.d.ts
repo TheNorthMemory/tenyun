@@ -1833,7 +1833,7 @@ declare interface ImageRepositoryResult {
   /** 总记录数 */
   TotalCount?: number;
   /** 镜像服务器地址 */
-  Server?: string | null;
+  Server?: string;
   /** 列表信息 */
   Content?: ImageRepository[];
 }

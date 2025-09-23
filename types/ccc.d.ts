@@ -470,6 +470,14 @@ declare interface Interface {
   URL: string;
 }
 
+/** 调用服务端主动发起请求到LLM */
+declare interface InvokeLLM {
+  /** 请求LLM的内容 */
+  Content?: string;
+  /** 是否允许该文本打断机器人说话 */
+  Interrupt?: boolean;
+}
+
 /** 单条消息 */
 declare interface Message {
   /** 消息类型 */
@@ -510,6 +518,8 @@ declare interface OwnNumberApplyDetailItem {
   MaxCallPSec: number;
   /** 呼出被叫格式，使用 {+E.164} 或 {E.164}, */
   OutboundCalleeFormat?: string;
+  /** 运营商号码 */
+  CarrierPhoneNumber?: string;
 }
 
 /** PSTN 会话类型。 */
@@ -1059,10 +1069,12 @@ declare interface ControlAIConversationRequest {
   SessionId: string;
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
-  /** 控制命令，目前支持命令如下：- ServerPushText，服务端发送文本给AI机器人，AI机器人会播报该文本 */
+  /** 控制命令，目前支持命令如下：- ServerPushText，服务端发送文本给AI机器人，AI机器人会播报该文本- InvokeLLM，服务端发送文本给大模型，触发对话 */
   Command?: string;
   /** 服务端发送播报文本命令，当Command为ServerPushText时必填 */
   ServerPushText?: ServerPushText;
+  /** 服务端发送命令主动请求大模型,当Command为InvokeLLM时会把content请求到大模型,头部增加X-Invoke-LLM="1" */
+  InvokeLLM?: InvokeLLM;
 }
 
 declare interface ControlAIConversationResponse {
@@ -1231,9 +1243,9 @@ declare interface CreateAutoCalloutTaskRequest {
   NotAfter?: number;
   /** 最大尝试次数，1-3 次 */
   Tries?: number;
-  /** 自定义变量（仅高级版支持） */
+  /** 自定义变量（仅高级版支持），CalleeAttributes 字段中使用相同变量会覆盖此处 */
   Variables?: Variable[];
-  /** UUI */
+  /** 用户自定义数据，CalleeAttributes 字段中使用 UUI 会覆盖此处 */
   UUI?: string;
   /** 被叫属性 */
   CalleeAttributes?: CalleeAttribute[];
@@ -1375,6 +1387,10 @@ declare interface CreateOwnNumberApplyRequest {
   DetailList: OwnNumberApplyDetailItem[];
   /** 送号前缀 */
   Prefix?: string;
+  /** 国内长途手机前缀码 */
+  MobileNddPrefix?: string;
+  /** 同市固话去掉区号 */
+  LocalNumberTrimAC?: boolean;
 }
 
 declare interface CreateOwnNumberApplyResponse {
@@ -2355,6 +2371,10 @@ declare interface ModifyOwnNumberApplyRequest {
   ApplyId?: number;
   /** 送号前缀 */
   Prefix?: string;
+  /** 国内长途手机前缀码 */
+  MobileNddPrefix?: string;
+  /** 同市固话去掉区号 */
+  LocalNumberTrimAC?: boolean;
 }
 
 declare interface ModifyOwnNumberApplyResponse {

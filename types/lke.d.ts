@@ -1356,6 +1356,10 @@ declare interface ModelInfo {
   ProviderAliasName?: string;
   /** 提供商类型 Self:提供商，Custom：自定义模型提供商，Third：第三方模型提供商 */
   ProviderType?: string;
+  /** 是否关闭模型超参 */
+  IsCloseModelParams?: boolean;
+  /** 是否支持深度思考 */
+  IsDeepThinking?: boolean;
 }
 
 /** 模型参数范围 */
@@ -2266,6 +2270,8 @@ declare interface WorkflowRunNodeInfo {
   CostMilliSeconds?: number | null;
   /** 大模型输出信息 */
   StatisticInfos?: StatisticInfo[] | null;
+  /** 错误代码 */
+  FailCode?: string | null;
 }
 
 /** //智能体应用可见范围，public-所有人可见 private-仅自己可见 share-通过分享可见 */

@@ -306,6 +306,22 @@ declare interface SyncExecuteCommandResult {
   Status?: string;
 }
 
+declare interface BackUpAndroidInstanceRequest {
+  /** 安卓实例ID */
+  AndroidInstanceId: string;
+  /** 包含的路径，支持仅含一个通配符*，通配符不能出现在路径开始 */
+  Includes?: string[];
+  /** 需要排除路径，支持仅含一个通配符*，通配符不能出现在路径开始 */
+  Excludes?: string[];
+}
+
+declare interface BackUpAndroidInstanceResponse {
+  /** 备份 ID */
+  BackupId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BackUpAndroidInstanceToStorageRequest {
   /** 安卓实例ID */
   AndroidInstanceId: string;
@@ -676,6 +692,16 @@ declare interface DeleteAndroidInstanceBackupFilesResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAndroidInstanceBackupsRequest {
+  /** 备份ID列表 */
+  BackupIds: string[];
+}
+
+declare interface DeleteAndroidInstanceBackupsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAndroidInstanceImagesRequest {
   /** 镜像 ID 列表 */
   AndroidInstanceImageIds: string[];
@@ -726,6 +752,20 @@ declare interface DescribeAndroidInstanceAppsRequest {
 declare interface DescribeAndroidInstanceAppsResponse {
   /** 安卓应用列表 */
   Apps?: AndroidInstanceAppInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAndroidInstanceBackupsRequest {
+  /** 备份ID列表 */
+  BackupIds?: string[];
+  /** 分页偏移 */
+  Offset?: number;
+  /** 每页数量 */
+  Limit?: number;
+}
+
+declare interface DescribeAndroidInstanceBackupsResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1306,6 +1346,20 @@ declare interface RestoreAndroidInstanceFromStorageResponse {
   RequestId?: string;
 }
 
+declare interface RestoreAndroidInstanceRequest {
+  /** 安卓实例 ID */
+  AndroidInstanceId: string;
+  /** 备份 ID */
+  BackupId: string;
+}
+
+declare interface RestoreAndroidInstanceResponse {
+  /** 实例任务 ID */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SaveGameArchiveRequest {
   /** 游戏用户ID */
   UserId: string;
@@ -1559,6 +1613,8 @@ declare interface UploadFilesToAndroidInstancesResponse {
 /** {@link Gs 云游戏} */
 declare interface Gs {
   (): Versions;
+  /** 备份安卓实例 {@link BackUpAndroidInstanceRequest} {@link BackUpAndroidInstanceResponse} */
+  BackUpAndroidInstance(data: BackUpAndroidInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<BackUpAndroidInstanceResponse>;
   /** 备份安卓实例到指定存储 {@link BackUpAndroidInstanceToStorageRequest} {@link BackUpAndroidInstanceToStorageResponse} */
   BackUpAndroidInstanceToStorage(data: BackUpAndroidInstanceToStorageRequest, config?: AxiosRequestConfig): AxiosPromise<BackUpAndroidInstanceToStorageResponse>;
   /** 批量清理安卓实例应用数据 {@link CleanAndroidInstancesAppDataRequest} {@link CleanAndroidInstancesAppDataResponse} */
@@ -1597,6 +1653,8 @@ declare interface Gs {
   DeleteAndroidAppVersion(data: DeleteAndroidAppVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAndroidAppVersionResponse>;
   /** 批量删除安卓实例备份文件 {@link DeleteAndroidInstanceBackupFilesRequest} {@link DeleteAndroidInstanceBackupFilesResponse} */
   DeleteAndroidInstanceBackupFiles(data: DeleteAndroidInstanceBackupFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAndroidInstanceBackupFilesResponse>;
+  /** 批量删除安卓实例备份 {@link DeleteAndroidInstanceBackupsRequest} {@link DeleteAndroidInstanceBackupsResponse} */
+  DeleteAndroidInstanceBackups(data: DeleteAndroidInstanceBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAndroidInstanceBackupsResponse>;
   /** 删除安卓实例镜像 {@link DeleteAndroidInstanceImagesRequest} {@link DeleteAndroidInstanceImagesResponse} */
   DeleteAndroidInstanceImages(data: DeleteAndroidInstanceImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAndroidInstanceImagesResponse>;
   /** 删除安卓实例标签 {@link DeleteAndroidInstanceLabelRequest} {@link DeleteAndroidInstanceLabelResponse} */
@@ -1605,6 +1663,8 @@ declare interface Gs {
   DescribeAndroidApps(data?: DescribeAndroidAppsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAndroidAppsResponse>;
   /** 查询安卓实例应用 {@link DescribeAndroidInstanceAppsRequest} {@link DescribeAndroidInstanceAppsResponse} */
   DescribeAndroidInstanceApps(data: DescribeAndroidInstanceAppsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAndroidInstanceAppsResponse>;
+  /** 查询安卓实例备份列表 {@link DescribeAndroidInstanceBackupsRequest} {@link DescribeAndroidInstanceBackupsResponse} */
+  DescribeAndroidInstanceBackups(data?: DescribeAndroidInstanceBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAndroidInstanceBackupsResponse>;
   /** 查询安卓实例镜像列表 {@link DescribeAndroidInstanceImagesRequest} {@link DescribeAndroidInstanceImagesResponse} */
   DescribeAndroidInstanceImages(data?: DescribeAndroidInstanceImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAndroidInstanceImagesResponse>;
   /** 查询安卓实例标签 {@link DescribeAndroidInstanceLabelsRequest} {@link DescribeAndroidInstanceLabelsResponse} */
@@ -1675,6 +1735,8 @@ declare interface Gs {
   ResetAndroidInstances(data: ResetAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ResetAndroidInstancesResponse>;
   /** 重启安卓实例应用 {@link RestartAndroidInstancesAppRequest} {@link RestartAndroidInstancesAppResponse} */
   RestartAndroidInstancesApp(data: RestartAndroidInstancesAppRequest, config?: AxiosRequestConfig): AxiosPromise<RestartAndroidInstancesAppResponse>;
+  /** 还原安卓实例 {@link RestoreAndroidInstanceRequest} {@link RestoreAndroidInstanceResponse} */
+  RestoreAndroidInstance(data: RestoreAndroidInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestoreAndroidInstanceResponse>;
   /** 指定存储还原安卓实例 {@link RestoreAndroidInstanceFromStorageRequest} {@link RestoreAndroidInstanceFromStorageResponse} */
   RestoreAndroidInstanceFromStorage(data: RestoreAndroidInstanceFromStorageRequest, config?: AxiosRequestConfig): AxiosPromise<RestoreAndroidInstanceFromStorageResponse>;
   /** 保存游戏存档 {@link SaveGameArchiveRequest} {@link SaveGameArchiveResponse} */
