@@ -66,6 +66,8 @@ declare interface Blueprint {
   DockerVersion?: string | null;
   /** 镜像是否已共享。 */
   BlueprintShared?: boolean;
+  /** 镜像绑定的标签列表。 */
+  Tags?: Tag[];
 }
 
 /** 描述镜像实例信息。 */
@@ -258,6 +260,8 @@ declare interface Disk {
   DiskBackupCount?: number;
   /** 云硬盘的备份点配额数量。 */
   DiskBackupQuota?: number;
+  /** 云硬盘绑定的标签列表。 */
+  Tags?: Tag[];
 }
 
 /** 描述了云硬盘备份点相关信息。 */
@@ -284,6 +288,8 @@ declare interface DiskBackup {
   LatestOperationRequestId?: string;
   /** 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
   CreatedTime?: string;
+  /** 云硬盘备份点绑定的标签列表。 */
+  Tags?: Tag[];
 }
 
 /** 云硬盘备份点操作限制列表。 */
@@ -750,6 +756,8 @@ declare interface KeyPair {
   CreatedTime?: string | null;
   /** 密钥对私钥。 */
   PrivateKey?: string | null;
+  /** 密钥对绑定的标签列表。 */
+  Tags?: Tag[];
 }
 
 /** 实例密码登录配置信息。 */
@@ -940,6 +948,8 @@ declare interface Snapshot {
   LatestOperationRequestId?: string;
   /** 快照的创建时间。 */
   CreatedTime?: string;
+  /** 快照绑定的标签列表。 */
+  Tags?: Tag[];
 }
 
 /** 快照操作限制列表。 */
@@ -1137,6 +1147,8 @@ declare interface CreateBlueprintRequest {
   InstanceId?: string;
   /** 是否执行强制关机以制作镜像。取值范围：True：表示关机之后制作镜像False：表示开机状态制作镜像默认取值：True开机状态制作镜像，可能导致部分数据未备份，影响数据安全。 */
   ForcePowerOff?: boolean;
+  /** 标签键和标签值。 如果指定多个标签，则会为指定资源同时创建并绑定该多个标签。 同一个资源上的同一个标签键只能对应一个标签值。如果您尝试添加已有标签键，则对应的标签值会更新为新值。 如果标签不存在会为您自动创建标签。 数组最多支持10个元素。 */
+  Tags?: Tag[];
 }
 
 declare interface CreateBlueprintResponse {
@@ -1151,6 +1163,8 @@ declare interface CreateDiskBackupRequest {
   DiskId: string;
   /** 云硬盘备份点名称，最大长度为 90 。 */
   DiskBackupName?: string;
+  /** 标签键和标签值。 如果指定多个标签，则会为指定资源同时创建并绑定该多个标签。 同一个资源上的同一个标签键只能对应一个标签值。如果您尝试添加已有标签键，则对应的标签值会更新为新值。 如果标签不存在会为您自动创建标签。 数组最多支持10个元素。 */
+  Tags?: Tag[];
 }
 
 declare interface CreateDiskBackupResponse {
@@ -1179,6 +1193,8 @@ declare interface CreateDisksRequest {
   AutoVoucher?: boolean;
   /** 自动挂载并初始化数据盘。 */
   AutoMountConfiguration?: AutoMountConfiguration;
+  /** 标签键和标签值。 如果指定多个标签，则会为指定资源同时创建并绑定该多个标签。 同一个资源上的同一个标签键只能对应一个标签值。如果您尝试添加已有标签键，则对应的标签值会更新为新值。 如果标签不存在会为您自动创建标签。 数组最多支持10个元素。 */
+  Tags?: Tag[];
 }
 
 declare interface CreateDisksResponse {
@@ -1235,6 +1251,8 @@ declare interface CreateInstanceSnapshotRequest {
   InstanceId: string;
   /** 快照名称，最长为 60 个字符。 */
   SnapshotName?: string;
+  /** 标签键和标签值。 如果指定多个标签，则会为指定资源同时创建并绑定该多个标签。 同一个资源上的同一个标签键只能对应一个标签值。如果您尝试添加已有标签键，则对应的标签值会更新为新值。 如果标签不存在会为您自动创建标签。 数组最多支持10个元素。 */
+  Tags?: Tag[];
 }
 
 declare interface CreateInstanceSnapshotResponse {
@@ -1289,6 +1307,8 @@ declare interface CreateInstancesResponse {
 declare interface CreateKeyPairRequest {
   /** 密钥对名称，可由数字，字母和下划线组成，长度不超过 25 个字符。 */
   KeyName: string;
+  /** 标签键和标签值。 如果指定多个标签，则会为指定资源同时创建并绑定该多个标签。 同一个资源上的同一个标签键只能对应一个标签值。如果您尝试添加已有标签键，则对应的标签值会更新为新值。 如果标签不存在会为您自动创建标签。 数组最多支持10个元素。 */
+  Tags?: Tag[];
 }
 
 declare interface CreateKeyPairResponse {
@@ -1433,7 +1453,7 @@ declare interface DescribeBlueprintsRequest {
   Offset?: number;
   /** 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。 */
   Limit?: number;
-  /** 过滤器列表。blueprint-id按照【镜像 ID】进行过滤。类型：String必选：否镜像 ID ，可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值字段BlueprintSet获取。blueprint-type按照【镜像类型】进行过滤。取值：APP_OS（应用镜像 ）；PURE_OS（系统镜像）；DOCKER（Docker容器镜像）；PRIVATE（自定义镜像）；SHARED（共享镜像）。类型：String必选：否platform-type按照【镜像平台类型】进行过滤。取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）。类型：String必选：否blueprint-name按照【镜像名称】进行过滤。类型：String必选：否blueprint-state按照【镜像状态】进行过滤。类型：String必选：否镜像状态，可通过[数据结构Blueprint](https://cloud.tencent.com/document/api/1207/47576)中的BlueprintState来获取。scene-id按照【使用场景Id】进行过滤。类型：String必选：否场景Id，可通过[查看使用场景列表](https://cloud.tencent.com/document/product/1207/83512)接口获取。每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 BlueprintIds (可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值字段BlueprintSet获取BlueprintId)和 Filters 。 */
+  /** 过滤器列表。blueprint-id按照【镜像 ID】进行过滤。类型：String必选：否镜像 ID ，可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值字段BlueprintSet获取。blueprint-type按照【镜像类型】进行过滤。取值：APP_OS（应用镜像 ）；PURE_OS（系统镜像）；DOCKER（Docker容器镜像）；PRIVATE（自定义镜像）；SHARED（共享镜像）。类型：String必选：否platform-type按照【镜像平台类型】进行过滤。取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）。类型：String必选：否blueprint-name按照【镜像名称】进行过滤。类型：String必选：否blueprint-state按照【镜像状态】进行过滤。类型：String必选：否镜像状态，可通过[数据结构Blueprint](https://cloud.tencent.com/document/api/1207/47576)中的BlueprintState来获取。scene-id按照【使用场景Id】进行过滤。类型：String必选：否场景Id，可通过[查看使用场景列表](https://cloud.tencent.com/document/product/1207/83512)接口获取。tag-key按照【标签键】进行过滤。 类型：String 必选：否tag-value按照【标签值】进行过滤。 类型：String 必选：否tag:tag-key按照【标签键值对】进行过滤。 tag-key使用具体的标签键进行替换。每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 BlueprintIds (可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值字段BlueprintSet获取BlueprintId)和 Filters 。 */
   Filters?: Filter[];
 }
 
@@ -1507,7 +1527,7 @@ declare interface DescribeDiskBackupsDeniedActionsResponse {
 declare interface DescribeDiskBackupsRequest {
   /** 查询的云硬盘备份点ID列表。可通过[DescribeDiskBackups](https://cloud.tencent.com/document/product/1207/84379)接口返回值字段DiskBackupSet获取。列表长度最大值为100。参数不支持同时指定 DiskBackupIds 和 Filters。 */
   DiskBackupIds?: string[];
-  /** 过滤器列表。disk-backup-id按照【云硬盘备份点 ID】进行过滤。类型：String必选：否disk-id按照【云硬盘 ID】进行过滤。类型：String必选：否disk-backup-state按照【云硬盘备份点状态】进行过滤。类型：String必选：否取值：参考数据结构 [DiskBackup](https://cloud.tencent.com/document/product/1207/47576) 下的DiskBackupState取值。disk-usage按照【云硬盘类型】进行过滤。类型：String必选：否取值：- SYSTEM_DISK - 系统盘- DATA_DISK - 数据盘每次请求的 Filters 的上限为 10，Filter.Values 的上限为5。参数不支持同时指定DiskBackupIds 和 Filters。 */
+  /** 过滤器列表。disk-backup-id按照【云硬盘备份点 ID】进行过滤。类型：String必选：否disk-id按照【云硬盘 ID】进行过滤。类型：String必选：否disk-backup-state按照【云硬盘备份点状态】进行过滤。类型：String必选：否取值：参考数据结构 [DiskBackup](https://cloud.tencent.com/document/product/1207/47576) 下的DiskBackupState取值。disk-usage按照【云硬盘类型】进行过滤。类型：String必选：否取值：- SYSTEM_DISK - 系统盘- DATA_DISK - 数据盘tag-key按照【标签键】进行过滤。 类型：String 必选：否tag-value按照【标签值】进行过滤。 类型：String 必选：否tag:tag-key按照【标签键值对】进行过滤。 tag-key使用具体的标签键进行替换。每次请求的 Filters 的上限为 10，Filter.Values 的上限为5。参数不支持同时指定DiskBackupIds 和 Filters。 */
   Filters?: Filter[];
   /** 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。 */
   Offset?: number;
@@ -1569,7 +1589,7 @@ declare interface DescribeDisksDeniedActionsResponse {
 declare interface DescribeDisksRequest {
   /** 云硬盘ID列表。可通过[DescribeDisks](https://cloud.tencent.com/document/product/1207/66093)接口返回值字段KeyPairSet获取。列表长度最大值为100。 */
   DiskIds?: string[];
-  /** 过滤器列表。disk-id按照【云硬盘 ID】进行过滤。类型：String必选：否instance-id按照【实例ID】进行过滤。类型：String必选：否disk-name按照【云硬盘名称】进行过滤。类型：String必选：否zone按照【可用区】进行过滤。类型：String必选：否disk-usage按照【云硬盘类型】进行过滤。类型：String必选：否取值：SYSTEM_DISK（系统盘）或 DATA_DISK（数据盘）disk-state按照【云硬盘状态】进行过滤。类型：String必选：否取值：参考数据结构[Disk](https://cloud.tencent.com/document/api/1207/47576)中DiskState取值。每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 DiskIds 和 Filters。 */
+  /** 过滤器列表。disk-id按照【云硬盘 ID】进行过滤。类型：String必选：否instance-id按照【实例ID】进行过滤。类型：String必选：否disk-name按照【云硬盘名称】进行过滤。类型：String必选：否zone按照【可用区】进行过滤。类型：String必选：否disk-usage按照【云硬盘类型】进行过滤。类型：String必选：否取值：SYSTEM_DISK（系统盘）或 DATA_DISK（数据盘）disk-state按照【云硬盘状态】进行过滤。类型：String必选：否取值：参考数据结构[Disk](https://cloud.tencent.com/document/api/1207/47576)中DiskState取值。tag-key按照【标签键】进行过滤。 类型：String 必选：否tag-value按照【标签值】进行过滤。 类型：String 必选：否tag:tag-key按照【标签键值对】进行过滤。 tag-key使用具体的标签键进行替换。每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 DiskIds 和 Filters。 */
   Filters?: Filter[];
   /** 返回数量，默认为20，最大值为100。 */
   Limit?: number;
@@ -1931,7 +1951,7 @@ declare interface DescribeKeyPairsRequest {
   Offset?: number;
   /** 返回数量，默认为 20，最大值为 100。 */
   Limit?: number;
-  /** 过滤器列表。key-id按照【密钥对ID】进行过滤。类型：String必选：否key-name按照【密钥对名称】进行过滤（支持模糊匹配）。类型：String必选：否每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 KeyIds 和 Filters。 */
+  /** 过滤器列表。key-id按照【密钥对ID】进行过滤。类型：String必选：否key-name按照【密钥对名称】进行过滤（支持模糊匹配）。类型：String必选：否tag-key按照【标签键】进行过滤。 类型：String 必选：否tag-value按照【标签值】进行过滤。 类型：String 必选：否tag:tag-key按照【标签键值对】进行过滤。 tag-key使用具体的标签键进行替换。每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 KeyIds 和 Filters。 */
   Filters?: Filter[];
 }
 
@@ -2071,7 +2091,7 @@ declare interface DescribeSnapshotsDeniedActionsResponse {
 declare interface DescribeSnapshotsRequest {
   /** 要查询快照的 ID 列表。每次请求批量快照的上限为 100。 可通过 [DescribeSnapshots](https://cloud.tencent.com/document/product/1207/54388) 接口返回值中的 SnapshotId 获取。参数不支持同时指定 SnapshotIds 和 Filters。 */
   SnapshotIds?: string[];
-  /** 过滤器列表。snapshot-id按照【快照 ID】进行过滤。类型：String必选：否可通过 DescribeSnapshots 接口返回值中的 SnapshotId 获取。disk-id按照【磁盘 ID】进行过滤。类型：String必选：否可通过 DescribeDisks 接口返回值中的 DiskId 获取。snapshot-name按照【快照名称】进行过滤。类型：String必选：否可通过 DescribeSnapshots 接口返回值中的 SnapshotName 获取。instance-id按照【实例 ID 】进行过滤。类型：String必选：否可通过 DescribeInstances 接口返回值中的 InstanceId 获取。每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 SnapshotIds 和 Filters。 */
+  /** 过滤器列表。snapshot-id按照【快照 ID】进行过滤。类型：String必选：否可通过 DescribeSnapshots 接口返回值中的 SnapshotId 获取。disk-id按照【磁盘 ID】进行过滤。类型：String必选：否可通过 DescribeDisks 接口返回值中的 DiskId 获取。snapshot-name按照【快照名称】进行过滤。类型：String必选：否可通过 DescribeSnapshots 接口返回值中的 SnapshotName 获取。instance-id按照【实例 ID 】进行过滤。类型：String必选：否可通过 DescribeInstances 接口返回值中的 InstanceId 获取。tag-key按照【标签键】进行过滤。 类型：String 必选：否tag-value按照【标签值】进行过滤。 类型：String 必选：否tag:tag-key按照【标签键值对】进行过滤。 tag-key使用具体的标签键进行替换。每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 SnapshotIds 和 Filters。 */
   Filters?: Filter[];
   /** 偏移量，默认为 0。 */
   Offset?: number;
@@ -2141,11 +2161,13 @@ declare interface ImportKeyPairRequest {
   KeyName: string;
   /** 密钥对的公钥内容， OpenSSH RSA 格式。 */
   PublicKey: string;
+  /** 标签键和标签值。 如果指定多个标签，则会为指定资源同时创建并绑定该多个标签。 同一个资源上的同一个标签键只能对应一个标签值。如果您尝试添加已有标签键，则对应的标签值会更新为新值。 如果标签不存在会为您自动创建标签。 数组最多支持10个元素。 */
+  Tags?: Tag[];
 }
 
 declare interface ImportKeyPairResponse {
   /** 密钥对 ID。 */
-  KeyId: string;
+  KeyId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

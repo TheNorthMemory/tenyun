@@ -18003,7 +18003,7 @@ declare interface Wedata {
   CreateSQLScript(data: CreateSQLScriptRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSQLScriptResponse>;
   /** 创建任务 {@link CreateTaskRequest} {@link CreateTaskResponse} */
   CreateTask(data: CreateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskResponse>;
-  /** 创建工作流openapi {@link CreateWorkflowRequest} {@link CreateWorkflowResponse} */
+  /** 创建工作流 {@link CreateWorkflowRequest} {@link CreateWorkflowResponse} */
   CreateWorkflow(data: CreateWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkflowResponse>;
   /** 创建工作流文件夹 {@link CreateWorkflowFolderRequest} {@link CreateWorkflowFolderResponse} */
   CreateWorkflowFolder(data: CreateWorkflowFolderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkflowFolderResponse>;
@@ -18023,7 +18023,7 @@ declare interface Wedata {
   DeleteSQLScript(data: DeleteSQLScriptRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSQLScriptResponse>;
   /** 删除任务 {@link DeleteTaskRequest} {@link DeleteTaskResponse} */
   DeleteTask(data: DeleteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskResponse>;
-  /** 删除工作流openapi {@link DeleteWorkflowRequest} {@link DeleteWorkflowResponse} */
+  /** 删除工作流 {@link DeleteWorkflowRequest} {@link DeleteWorkflowResponse} */
   DeleteWorkflow(data: DeleteWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkflowResponse>;
   /** 删除工作流文件夹 {@link DeleteWorkflowFolderRequest} {@link DeleteWorkflowFolderResponse} */
   DeleteWorkflowFolder(data: DeleteWorkflowFolderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkflowFolderResponse>;
@@ -18055,7 +18055,7 @@ declare interface Wedata {
   GetTaskInstanceLog(data: GetTaskInstanceLogRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskInstanceLogResponse>;
   /** 查看任务版本详情 {@link GetTaskVersionRequest} {@link GetTaskVersionResponse} */
   GetTaskVersion(data: GetTaskVersionRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskVersionResponse>;
-  /** 获取工作流调度信息openapi {@link GetWorkflowRequest} {@link GetWorkflowResponse} */
+  /** 获取工作流调度信息 {@link GetWorkflowRequest} {@link GetWorkflowResponse} */
   GetWorkflow(data: GetWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<GetWorkflowResponse>;
   /** 实例批量终止操作(异步) {@link KillTaskInstancesAsyncRequest} {@link KillTaskInstancesAsyncResponse} */
   KillTaskInstancesAsync(data: KillTaskInstancesAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<KillTaskInstancesAsyncResponse>;
@@ -18101,7 +18101,7 @@ declare interface Wedata {
   ListUpstreamTasks(data: ListUpstreamTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListUpstreamTasksResponse>;
   /** 查看工作流文件夹列表 {@link ListWorkflowFoldersRequest} {@link ListWorkflowFoldersResponse} */
   ListWorkflowFolders(data: ListWorkflowFoldersRequest, config?: AxiosRequestConfig): AxiosPromise<ListWorkflowFoldersResponse>;
-  /** 查询工作流列表 openapi {@link ListWorkflowsRequest} {@link ListWorkflowsResponse} */
+  /** 查询工作流列表 {@link ListWorkflowsRequest} {@link ListWorkflowsResponse} */
   ListWorkflows(data: ListWorkflowsRequest, config?: AxiosRequestConfig): AxiosPromise<ListWorkflowsResponse>;
   /** 异步批量暂停任务 {@link PauseOpsTasksAsyncRequest} {@link PauseOpsTasksAsyncResponse} */
   PauseOpsTasksAsync(data: PauseOpsTasksAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<PauseOpsTasksAsyncResponse>;
@@ -18135,7 +18135,7 @@ declare interface Wedata {
   UpdateSQLScript(data: UpdateSQLScriptRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateSQLScriptResponse>;
   /** 更新任务 {@link UpdateTaskRequest} {@link UpdateTaskResponse} */
   UpdateTask(data: UpdateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTaskResponse>;
-  /** 更新工作流信息openapi {@link UpdateWorkflowRequest} {@link UpdateWorkflowResponse} */
+  /** 更新工作流信息 {@link UpdateWorkflowRequest} {@link UpdateWorkflowResponse} */
   UpdateWorkflow(data: UpdateWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateWorkflowResponse>;
   /** 更新工作流文件夹 {@link UpdateWorkflowFolderRequest} {@link UpdateWorkflowFolderResponse} */
   UpdateWorkflowFolder(data: UpdateWorkflowFolderRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateWorkflowFolderResponse>;

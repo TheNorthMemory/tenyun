@@ -53,7 +53,7 @@ declare interface Arg {
 /** 自动伸缩组高级设置 */
 declare interface AutoScaleGroupAdvanceAttrs {
   /** 计算资源高级设置 */
-  ComputeResourceAdvanceParams?: ComputeResourceAdvanceParams;
+  ComputeResourceAdvanceParams?: ComputeResourceAdvanceParams | null;
 }
 
 /** 弹性扩缩容记录 */
@@ -118,6 +118,8 @@ declare interface AutoScaleResourceConf {
   GroupName?: string;
   /** 标签 */
   YarnNodeLabel?: string;
+  /** 对应的计算组 */
+  WarehouseName?: string;
   /** 伸缩组状态 */
   GroupStatus?: number;
   /** 并行伸缩 0关闭；1开启 */
@@ -125,7 +127,7 @@ declare interface AutoScaleResourceConf {
   /** 是否支持MNode */
   EnableMNode?: number;
   /** 伸缩组更多设置 */
-  ExtraAdvanceAttrs?: AutoScaleGroupAdvanceAttrs;
+  ExtraAdvanceAttrs?: AutoScaleGroupAdvanceAttrs | null;
 }
 
 /** 引导脚本 */
@@ -5033,6 +5035,8 @@ declare interface ScaleOutClusterRequest {
   ScaleOutServiceConfGroupsInfo?: ScaleOutServiceConfGroupsInfo[];
   /** 节点标记信息，当前只提供给tf平台使用 */
   NodeMarks?: NodeMark;
+  /** 扩容指定计算组名称 */
+  WarehouseName?: string;
 }
 
 declare interface ScaleOutClusterResponse {
@@ -5113,6 +5117,8 @@ declare interface ScaleOutInstanceRequest {
   ComputeResourceAdvanceParams?: ComputeResourceAdvanceParams;
   /** 节点标记信息，目前只提供tf平台使用 */
   NodeMarks?: NodeMark;
+  /** 扩容指定计算组 */
+  WarehouseName?: string;
 }
 
 declare interface ScaleOutInstanceResponse {

@@ -4100,6 +4100,10 @@ declare interface InstanceAttributesResponse {
   DynamicDiskConfig?: DynamicDiskConfig;
   /** 实例计费类型 POSTPAID_BY_HOUR 按小时付费; PREPAID 包年包月 */
   InstanceChargeType?: string;
+  /** 是否开启弹性带宽白名单 1:已开启弹性带宽白名单;0:未开启弹性带宽白名单; */
+  ElasticBandwidthSwitch?: number;
+  /** 弹性带宽开通状态1:未开启弹性带宽;16: 开启弹性带宽中;32:开启弹性带宽成功;33:关闭弹性带宽中;34:关闭弹性带宽成功;64:开启弹性带宽失败;65:关闭弹性带宽失败; */
+  ElasticBandwidthOpenStatus?: number;
   /** 集群类型 CLOUD_IDC IDC集群CLOUD_CVM_SHARE CVM共享集群CLOUD_CVM_YUNTI 云梯CVM集群CLOUD_CVM CVM集群CLOUD_CDC CDC集群CLOUD_EKS_TSE EKS集群 */
   ClusterType?: string;
   /** 免费分区数量 */

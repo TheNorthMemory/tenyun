@@ -412,6 +412,10 @@ declare interface DescAcItem {
   CountryKey?: string;
   /** 省份、城市简称 */
   CityKey?: string;
+  /** 规则创建时间 */
+  CreateTime?: string;
+  /** 规则最近更新时间 */
+  UpdateTime?: string;
 }
 
 /** NAT防火墙Dnat规则列表 */
@@ -582,6 +586,10 @@ declare interface EnterpriseSecurityGroupRuleRuleInfo {
   Id?: number;
   /** 域名解析的IP统计 */
   DnsParseCount?: SgDnsParseCount;
+  /** 规则创建时间 */
+  CreateTime?: string;
+  /** 规则最近更新时间 */
+  UpdateTime?: string;
 }
 
 /** 防火墙网段信息 */
@@ -1246,6 +1254,10 @@ declare interface StorageHistogram {
   OperateSize?: number | null;
   /** 统计时间 */
   Time?: string | null;
+  /** NDR流量日志存储量，单位B */
+  NDRNetflowSize?: number;
+  /** NDR风险日志存储量，单位B */
+  NDRRiskSize?: number;
 }
 
 /** 前端图表使用日志存储统计柱形图数据 */
@@ -1586,6 +1598,10 @@ declare interface VpcRuleItem {
   IpVersion?: number;
   /** 是否是无效规则，0 表示有效规则，1 表示无效规则，出参场景返回使用 */
   Invalid?: number;
+  /** 规则创建时间 */
+  CreateTime?: string;
+  /** 规则最近更新时间 */
+  UpdateTime?: string;
 }
 
 /** vpc区域数据详情 */
@@ -1811,7 +1827,7 @@ declare interface CreateBlockIgnoreRuleNewRequest {
   Rules: BanAndAllowRule[];
   /** RuleType: 1黑名单 2外部IP 3域名 4情报 5资产 6自定义规则 7入侵防御规则 */
   RuleType: number;
-  /** 是否覆盖重复数据，1覆盖，非1不覆盖，跳过重复数据 */
+  /** 删除白名单冲突地址并继续添加/删除封禁列表冲突地址并继续添加；表示是否覆盖重复数据，1为覆盖，非1不覆盖，跳过重复数据 */
   CoverDuplicate?: number;
 }
 
@@ -2582,6 +2598,12 @@ declare interface DescribeLogStorageStatisticResponse {
   TimeHistogramShow?: StorageHistogramShow;
   /** 后付费模式存储状态，0正常，1欠费停止写入 */
   ArrearsStopWriting?: number;
+  /** NDR流量日志存储量，单位B */
+  NDRNetFlowSize?: number;
+  /** NDR风险日志存储量，单位B */
+  NDRRiskSize?: number;
+  /** NDR日志存储天数 */
+  NDRStorageDay?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

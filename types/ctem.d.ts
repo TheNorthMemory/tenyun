@@ -384,24 +384,82 @@ declare interface DisplayJobRecordDetail {
 declare interface DisplayLeakageCode {
   /** 主键ID */
   Id?: number;
+  /** 公共字段 */
+  DisplayToolCommon?: DisplayToolCommon;
+  /** 事件名称 */
+  Name?: string;
+  /** 事件描述 */
+  Description?: string;
+  /** 数据源 */
+  Source?: string;
+  /** 风险等级：1-低危 2-中危 3-高危 4-严重 5-误报 */
+  RiskLevel?: number;
+  /** 仓库名称 */
+  HubName?: string;
   /** 链接 */
   Url?: string;
+  /** 截图 */
+  Screenshot?: string;
+  /** 建议 */
+  Suggestion?: string;
+  /** 关键词 */
+  Keyword?: string;
+  /** 处置状态：0-待处理 1-处理中 2-已处理 */
+  HandlingStatus?: number;
+  /** 备注 */
+  Remark?: string;
 }
 
 /** 数据泄露详情 */
 declare interface DisplayLeakageData {
   /** 主键ID */
   Id?: number;
+  /** 公共字段 */
+  DisplayToolCommon?: DisplayToolCommon;
+  /** 事件名称 */
+  Name?: string;
+  /** 事件描述 */
+  Description?: string;
+  /** 数据源 */
+  Source?: string;
+  /** 风险等级：1-低危 2-中危 3-高危 4-严重 5-误报 */
+  RiskLevel?: number;
   /** 链接 */
   Url?: string;
+  /** 截图 */
+  Screenshot?: string;
+  /** 建议 */
+  Suggestion?: string;
+  /** 关键词 */
+  Keyword?: string;
+  /** 处置状态：0-待处理 1-处理中 2-已处理 */
+  HandlingStatus?: number;
+  /** 备注 */
+  Remark?: string;
 }
 
 /** 邮箱泄露详情 */
 declare interface DisplayLeakageEmail {
   /** 主键ID */
   Id?: number;
+  /** 公共字段 */
+  DisplayToolCommon?: DisplayToolCommon;
   /** 邮箱 */
   Email?: string;
+  /** 用户名 */
+  Username?: string;
+  /** 数据源 */
+  Source?: string;
+  /** 风险等级：1-低危 2-中危 3-高危 4-严重 5-误报 */
+  RiskLevel?: number;
+  /** 建议 */
+  Suggestion?: string;
+  /** 关键词 */
+  Keyword?: string;
+  /** 处置状态：0-待处理 1-处理中 2-已处理 */
+  HandlingStatus?: number;
+  /** 备注 */
+  Remark?: string;
 }
 
 /** 后台详情 */

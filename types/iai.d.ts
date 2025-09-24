@@ -1486,7 +1486,7 @@ declare namespace V20180301 {
   /** 需要修改的人员描述字段内容，key-value */
   interface PersonExDescriptionInfo {
     /** 人员描述字段Index，从0开始 */
-    PersonExDescriptionIndex: number | null;
+    PersonExDescriptionIndex: number;
     /** 需要更新的人员描述字段内容 */
     PersonExDescription: string;
   }
@@ -1502,17 +1502,17 @@ declare namespace V20180301 {
   /** 返回的人员信息 */
   interface PersonInfo {
     /** 人员名称 */
-    PersonName: string;
+    PersonName?: string;
     /** 人员Id */
-    PersonId: string;
+    PersonId?: string;
     /** 人员性别 */
-    Gender: number;
+    Gender?: number;
     /** 人员描述字段内容 */
-    PersonExDescriptions: string[];
+    PersonExDescriptions?: string[];
     /** 包含的人脸照片列表 */
-    FaceIds: string[];
+    FaceIds?: string[];
     /** 人员的创建时间和日期 CreationTimestamp。CreationTimestamp 的值是自 Unix 纪元时间到Group创建时间的毫秒数。 Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 00:00:00。有关更多信息，请参阅 Unix 时间。 */
-    CreationTimestamp: number;
+    CreationTimestamp?: number;
   }
 
   /** 坐标 */
@@ -1536,11 +1536,11 @@ declare namespace V20180301 {
   /** 识别结果。 */
   interface ResultsReturnsByGroup {
     /** 检测出的人脸框位置。 */
-    FaceRect: FaceRect;
+    FaceRect?: FaceRect;
     /** 识别结果。 */
-    GroupCandidates: GroupCandidate[];
+    GroupCandidates?: GroupCandidate[];
     /** 检测出的人脸图片状态返回码。0 表示正常。 -1601代表不符合图片质量控制要求，此时Candidate内容为空。 */
-    RetCode: number;
+    RetCode?: number;
   }
 
   /** 人员库升级任务信息 */
@@ -2365,7 +2365,7 @@ declare interface Iai {
   CreatePerson(data: V20180301.CreatePersonRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.CreatePersonResponse>;
   /** 删除人脸 {@link V20180301.DeleteFaceRequest} {@link V20180301.DeleteFaceResponse} */
   DeleteFace(data: V20180301.DeleteFaceRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.DeleteFaceResponse>;
-  /** 删除人员库 {@link V20180301.DeleteGroupRequest} {@link V20180301.DeleteGroupResponse} */
+  /** 人员库删除 {@link V20180301.DeleteGroupRequest} {@link V20180301.DeleteGroupResponse} */
   DeleteGroup(data: V20180301.DeleteGroupRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.DeleteGroupResponse>;
   /** 删除人员 {@link V20180301.DeletePersonRequest} {@link V20180301.DeletePersonResponse} */
   DeletePerson(data: V20180301.DeletePersonRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.DeletePersonResponse>;
@@ -2385,7 +2385,7 @@ declare interface Iai {
   GetPersonBaseInfo(data: V20180301.GetPersonBaseInfoRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetPersonBaseInfoResponse>;
   /** 获取人员归属信息 {@link V20180301.GetPersonGroupInfoRequest} {@link V20180301.GetPersonGroupInfoResponse} */
   GetPersonGroupInfo(data: V20180301.GetPersonGroupInfoRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetPersonGroupInfoResponse>;
-  /** 获取人员列表 {@link V20180301.GetPersonListRequest} {@link V20180301.GetPersonListResponse} */
+  /** 人员列表 {@link V20180301.GetPersonListRequest} {@link V20180301.GetPersonListResponse} */
   GetPersonList(data: V20180301.GetPersonListRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetPersonListResponse>;
   /** 获取人员列表长度 {@link V20180301.GetPersonListNumRequest} {@link V20180301.GetPersonListNumResponse} */
   GetPersonListNum(data: V20180301.GetPersonListNumRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetPersonListNumResponse>;

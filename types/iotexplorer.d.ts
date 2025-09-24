@@ -1052,6 +1052,12 @@ declare interface SearchKeyword {
   Value?: string;
 }
 
+/** 已订阅Topic信息 */
+declare interface SubscribedTopicItem {
+  /** Topic名称 */
+  TopicName?: string;
+}
+
 /** TRTC 的参数 可以用来加入房间 */
 declare interface TRTCParams {
   /** TRTC入参: TRTC的实例ID */
@@ -3246,6 +3252,20 @@ declare interface DescribeStudioProductResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSubscribedTopicPolicyRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+}
+
+declare interface DescribeSubscribedTopicPolicyResponse {
+  /** 已订阅Topic信息 */
+  Topics?: SubscribedTopicItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTWeSeeConfigRequest {
   /** 产品ID */
   ProductId: string;
@@ -4953,6 +4973,8 @@ declare interface Iotexplorer {
   DescribeSpaceFenceEventList(data: DescribeSpaceFenceEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpaceFenceEventListResponse>;
   /** 获取产品详情 {@link DescribeStudioProductRequest} {@link DescribeStudioProductResponse} */
   DescribeStudioProduct(data: DescribeStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStudioProductResponse>;
+  /** 获取设备已订阅Topic列表 {@link DescribeSubscribedTopicPolicyRequest} {@link DescribeSubscribedTopicPolicyResponse} */
+  DescribeSubscribedTopicPolicy(data: DescribeSubscribedTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscribedTopicPolicyResponse>;
   /** 查询 TWeSee 配置 {@link DescribeTWeSeeConfigRequest} {@link DescribeTWeSeeConfigResponse} */
   DescribeTWeSeeConfig(data: DescribeTWeSeeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeSeeConfigResponse>;
   /** 查询 TWeSee 语义理解任务 {@link DescribeTWeSeeRecognitionTaskRequest} {@link DescribeTWeSeeRecognitionTaskResponse} */

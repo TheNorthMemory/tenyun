@@ -1593,7 +1593,7 @@ declare interface DescribeGlobalReplicationAreaResponse {
 declare interface DescribeInstanceAccountRequest {
   /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 分页大小。 */
+  /** 分页大小。默认值为20，最小值为1，最大值为100。 */
   Limit: number;
   /** 分页偏移量。取Limit整数倍。计算公式：offset=limit*(页码-1)。 */
   Offset: number;
@@ -2691,14 +2691,14 @@ declare interface ModifyInstanceAvailabilityZonesResponse {
 }
 
 declare interface ModifyInstanceBackupModeRequest {
-  /** 实例的ID，长度在12-36之间。 */
+  /** 实例的ID。请登录 [Redis 控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 备份模式：- SecondLevelBackup 秒级备份- NormalLevelBackup 普通备份 */
+  /** 备份模式：- SecondLevelBackup 秒级备份。- NormalLevelBackup 普通备份。 */
   BackupMode?: string;
 }
 
 declare interface ModifyInstanceBackupModeResponse {
-  /** 任务ID */
+  /** 任务 ID。 */
   TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2707,7 +2707,7 @@ declare interface ModifyInstanceBackupModeResponse {
 declare interface ModifyInstanceEventRequest {
   /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis#/)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 事件 ID。请通过 DescribeInstanceEvents 获取需修改的事件 ID。 */
+  /** 事件 ID。请通过 [DescribeInstanceEvents](https://cloud.tencent.com/document/product/239/104779) 获取需修改的事件 ID。 */
   EventId: number;
   /** 修改事件执行的计划开始时间。 */
   StartTime?: string;
@@ -3207,7 +3207,7 @@ declare interface Redis {
   DescribeDBSecurityGroups(data: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
   /** 查询全球复制支持地域信息 {@link DescribeGlobalReplicationAreaRequest} {@link DescribeGlobalReplicationAreaResponse} */
   DescribeGlobalReplicationArea(data?: DescribeGlobalReplicationAreaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGlobalReplicationAreaResponse>;
-  /** 查看实例子账号信息 {@link DescribeInstanceAccountRequest} {@link DescribeInstanceAccountResponse} */
+  /** 查看实例账号信息 {@link DescribeInstanceAccountRequest} {@link DescribeInstanceAccountResponse} */
   DescribeInstanceAccount(data: DescribeInstanceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceAccountResponse>;
   /** 查询Redis实例备份列表 {@link DescribeInstanceBackupsRequest} {@link DescribeInstanceBackupsResponse} */
   DescribeInstanceBackups(data?: DescribeInstanceBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceBackupsResponse>;

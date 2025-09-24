@@ -1652,7 +1652,7 @@ declare interface TemplateInfo {
   Seals?: SealInfo[] | null;
 }
 
-/** 模版对应的合同类型 */
+/** 模板对应的合同类型 */
 declare interface TemplateUserFlowType {
   /** 合同类型id */
   UserFlowTypeId?: string;
@@ -1660,7 +1660,7 @@ declare interface TemplateUserFlowType {
   Name?: string;
   /** 合同类型的具体描述 */
   Description?: string;
-  /** 每个合同类型绑定的模版数量 */
+  /** 每个合同类型绑定的模板数量 */
   TemplateNum?: number;
 }
 
@@ -4183,9 +4183,9 @@ declare interface DescribeUserFlowTypeRequest {
   Operator: UserInfo;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 搜索过滤的条件，本字段允许您通过指定模板 ID 或模板名称来进行查询。模板 ID：Key设置为 template-id ，Values为您想要查询的 模板 ID 列表。 主企业模板 ID：Key设置为 share-template-id ，Values为您想要查询的 主企业模板 ID 列表。用来查询主企业分享模板到子企业场景下，子企业的模板信息，在此情境下，参数 Agent.ProxyOrganizationId（子企业的组织ID）为必填项。 模板名称：Key设置为 template-name ，Values为您想要查询的模板名称列表。模板的用户合同类型：Key设置为 user-flow-type-id ，Values为您想要查询的用户模版类型id列表。 */
+  /** 搜索过滤的条件，本字段允许您通过指定模板 ID 或模板名称来进行查询。模板 ID：Key设置为 template-id ，Values为您想要查询的 模板 ID 列表。 主企业模板 ID：Key设置为 share-template-id ，Values为您想要查询的 主企业模板 ID 列表。用来查询主企业分享模板到子企业场景下，子企业的模板信息，在此情境下，参数 Agent.ProxyOrganizationId（子企业的组织ID）为必填项。 模板名称：Key设置为 template-name ，Values为您想要查询的模板名称列表。模板的用户合同类型：Key设置为 user-flow-type-id ，Values为您想要查询的用户模板类型id列表。 */
   Filters?: Filter[];
-  /** 查询绑定了模版的用户合同类型 false（默认值），查询用户合同类型 true，查询绑定了模版的用户合同类型 */
+  /** 查询绑定了模板的用户合同类型 false（默认值），查询用户合同类型 true，查询绑定了模板的用户合同类型 */
   QueryBindTemplate?: boolean;
 }
 
@@ -4769,7 +4769,7 @@ declare interface Ess {
   DescribeThirdPartyAuthCode(data: DescribeThirdPartyAuthCodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeThirdPartyAuthCodeResponse>;
   /** 获取个人用户自动签的开通状态 {@link DescribeUserAutoSignStatusRequest} {@link DescribeUserAutoSignStatusResponse} */
   DescribeUserAutoSignStatus(data: DescribeUserAutoSignStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserAutoSignStatusResponse>;
-  /** 查询用户模版类型 {@link DescribeUserFlowTypeRequest} {@link DescribeUserFlowTypeResponse} */
+  /** 查询用户模板类型 {@link DescribeUserFlowTypeRequest} {@link DescribeUserFlowTypeResponse} */
   DescribeUserFlowType(data: DescribeUserFlowTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserFlowTypeResponse>;
   /** 查询用户实名状态 {@link DescribeUserVerifyStatusRequest} {@link DescribeUserVerifyStatusResponse} */
   DescribeUserVerifyStatus(data: DescribeUserVerifyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserVerifyStatusResponse>;
