@@ -3898,6 +3898,10 @@ declare interface VulInfo {
   DefenceHostCount?: number;
   /** 已防御攻击次数 */
   DefendedCount?: number;
+  /** 漏洞对应机器的应用防护开启数量 */
+  RaspOpenNodeCount?: number;
+  /** 漏洞对应机器的应用防护关闭数量 */
+  RaspClosedNodeCount?: number;
 }
 
 /** 漏洞扫描的镜像信息 */

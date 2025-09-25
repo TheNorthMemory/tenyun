@@ -2324,20 +2324,6 @@ declare interface CheckAttributeLabelReferResponse {
   RequestId?: string;
 }
 
-declare interface CreateAgentRequest {
-  /** 应用ID */
-  AppBizId?: string;
-  /** 要增加的Agent的信息 */
-  Agent?: Agent;
-}
-
-declare interface CreateAgentResponse {
-  /** 新建的AgentID */
-  AgentId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateAppRequest {
   /** 应用类型；knowledge_qa-知识问答管理 */
   AppType: string;
@@ -4206,20 +4192,6 @@ declare interface ListWorkflowRunsResponse {
   RequestId?: string;
 }
 
-declare interface ModifyAgentRequest {
-  /** 需要修改的应用ID */
-  AppBizId?: string;
-  /** 修改后的Agent的信息 */
-  Agent?: Agent;
-}
-
-declare interface ModifyAgentResponse {
-  /** 修改的AgentId */
-  AgentId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ModifyAppRequest {
   /** 应用 ID */
   AppBizId: string;
@@ -4679,8 +4651,6 @@ declare interface Lke {
   CheckAttributeLabelExist(data: CheckAttributeLabelExistRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAttributeLabelExistResponse>;
   /** 检查标签引用 {@link CheckAttributeLabelReferRequest} {@link CheckAttributeLabelReferResponse} */
   CheckAttributeLabelRefer(data: CheckAttributeLabelReferRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAttributeLabelReferResponse>;
-  /** 创建Agent {@link CreateAgentRequest} {@link CreateAgentResponse} */
-  CreateAgent(data?: CreateAgentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgentResponse>;
   /** 创建应用 {@link CreateAppRequest} {@link CreateAppResponse} */
   CreateApp(data: CreateAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppResponse>;
   /** 创建标签 {@link CreateAttributeLabelRequest} {@link CreateAttributeLabelResponse} */
@@ -4843,8 +4813,6 @@ declare interface Lke {
   ListUsageCallDetail(data: ListUsageCallDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListUsageCallDetailResponse>;
   /** 查询工作流异步运行实例的列表 {@link ListWorkflowRunsRequest} {@link ListWorkflowRunsResponse} */
   ListWorkflowRuns(data?: ListWorkflowRunsRequest, config?: AxiosRequestConfig): AxiosPromise<ListWorkflowRunsResponse>;
-  /** 修改Agent {@link ModifyAgentRequest} {@link ModifyAgentResponse} */
-  ModifyAgent(data?: ModifyAgentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAgentResponse>;
   /** 修改应用请求结构体 {@link ModifyAppRequest} {@link ModifyAppResponse} */
   ModifyApp(data: ModifyAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppResponse>;
   /** 编辑标签 {@link ModifyAttributeLabelRequest} {@link ModifyAttributeLabelResponse} */

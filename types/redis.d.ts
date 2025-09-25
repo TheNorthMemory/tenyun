@@ -434,7 +434,7 @@ declare interface InstanceSet {
   PriceId?: number;
   /** 实例隔离开始的时间。 */
   CloseTime?: string;
-  /** 从节点读取权重。 */
+  /** 从节点读取权重。- 0：表示关闭副本只读。- 100：表示开启副本只读。 */
   SlaveReadWeight?: number;
   /** 实例关联的标签信息。 */
   InstanceTags?: InstanceTagInfo[];

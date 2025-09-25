@@ -350,7 +350,7 @@ declare interface QuestionInfo {
 
 /** 批量创建房间的房间信息 */
 declare interface RoomInfo {
-  /** 房间名称。 */
+  /** 房间名称。字符数不超过256 */
   Name: string;
   /** 预定的房间开始时间，unix时间戳。 */
   StartTime: number;
@@ -410,7 +410,7 @@ declare interface RoomInfo {
   RecordStream?: number;
   /** 板书截图生成类型。0 不生成板书（默认）；1 全量模式；2 单页去重模式 */
   WhiteBoardSnapshotMode?: number;
-  /** 字幕转写功能开关：0关闭，1开启，默认关闭 */
+  /** 字幕转写功能开关。可以有以下取值：0 不开启字幕转写功能（默认值）1 自动转写模式：上课自动开启，下课自动停止 */
   SubtitlesTranscription?: number;
   /** 嘉宾Id列表。当圆桌会议模式（RoomType==3）时生效 */
   Guests?: string[];
@@ -774,7 +774,7 @@ declare interface CreateGroupWithSubGroupResponse {
 }
 
 declare interface CreateRoomRequest {
-  /** 课堂名称。 */
+  /** 课堂名称。字符数不超过256 */
   Name: string;
   /** 预定的课堂开始时间，unix时间戳（秒）。 */
   StartTime: number;
@@ -838,7 +838,7 @@ declare interface CreateRoomRequest {
   RecordStream?: number;
   /** 板书截图生成类型。0 不生成板书（默认）；1 全量模式；2 单页去重模式 */
   WhiteBoardSnapshotMode?: number;
-  /** 字幕转写功能开关：0关闭，1开启，默认关闭 */
+  /** 字幕转写功能开关。可以有以下取值：0 不开启字幕转写功能（默认值）1 自动转写模式：上课自动开启，下课自动停止 */
   SubtitlesTranscription?: number;
   /** 录制文件合并开关。0 关闭 1 开启 注：只有在一节课多次启用手动录制时，此功能才有效 */
   RecordMerge?: number;
@@ -1728,7 +1728,7 @@ declare interface ModifyGroupResponse {
 }
 
 declare interface ModifyRoomRequest {
-  /** 房间ID。 */
+  /** 房间ID。字符数不超过256 */
   RoomId: number;
   /** 低代码互动课堂的SdkAppId */
   SdkAppId: number;
@@ -1782,7 +1782,7 @@ declare interface ModifyRoomRequest {
   RecordLang?: string;
   /** 板书截图生成类型。0 不生成板书；1 全量模式；2 单页去重模式 */
   WhiteBoardSnapshotMode?: number;
-  /** 字幕转写功能开关：0关闭，1开启，默认关闭 */
+  /** 字幕转写功能开关。可以有以下取值：0 不开启字幕转写功能（默认值）1 自动转写模式：上课自动开启，下课自动停止 */
   SubtitlesTranscription?: number;
   /** 嘉宾Id列表。当圆桌会议模式（RoomType==3）时生效 */
   Guests?: string[];

@@ -12,9 +12,9 @@ declare interface AddNodeList {
 
 /** 用户权限 */
 declare interface Auth {
-  /** 当前账号具有的权限信息。0：无权限。1：只读。2：只写。3：读写。 */
+  /** 当前账号具有的权限信息。- 0：无权限。- 1：只读。- 3：读写。 */
   Mask: number | null;
-  /** 指具有当前账号权限的数据库名。* ：表示所有数据库。db.name：表示特定name的数据库。 */
+  /** 指具有当前账号权限的数据库名。- \* ：表示所有数据库。- db.name：表示特定 name 的数据库。 */
   NameSpace: string | null;
 }
 
@@ -84,12 +84,12 @@ declare interface BackupInfo {
 
 /** 客户端连接信息，包括客户端IP和连接数 */
 declare interface ClientConnection {
-  /** 连接的客户端IP */
-  IP: string;
-  /** 对应客户端IP的连接数 */
-  Count: number;
-  /** 是否为内部ip */
-  InternalService: boolean;
+  /** 连接的客户端 IP。 */
+  IP?: string;
+  /** 对应客户端 IP 的连接数。 */
+  Count?: number;
+  /** 是否为内部 IP。 */
+  InternalService?: boolean;
 }
 
 /** 云数据库实例当前操作 */
@@ -126,11 +126,11 @@ declare interface DBInstanceInfo {
 
 /** 数据库实例价格 */
 declare interface DBInstancePrice {
-  /** 单价 */
+  /** 实例单价。单位：元。 */
   UnitPrice: number;
-  /** 原价 */
+  /** 实例原价。单位：元。 */
   OriginalPrice: number;
-  /** 折扣价 */
+  /** 实例折扣价。单位：元。 */
   DiscountPrice: number;
 }
 
@@ -653,7 +653,7 @@ declare interface UserInfo {
 declare interface AssignProjectRequest {
   /** 实例 ID 列表，请登录[MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceIds: string[];
-  /** 项目ID，用户已创建项目的唯一ID。请在控制台账号中心的项目管理中复制项目 ID。 */
+  /** 项目ID，用户已创建项目的唯一ID。请在控制台账号中心的[项目管理](https://console.cloud.tencent.com/project)中复制项目 ID。 */
   ProjectId: number;
 }
 
@@ -667,12 +667,12 @@ declare interface AssignProjectResponse {
 declare interface CreateAccountUserRequest {
   /** 实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 新账号名称。其格式要求如下：字符范围[1,32]。可输入[A,Z]、[a,z]、[1,9]范围的字符以及下划线“_”与短划线“-”。 */
+  /** 新账号名称。其格式要求如下：- 字符范围[1,64]。- 可输入[A,Z]、[a,z]、[1,9]范围的字符以及下划线“\_”与短划线“-”。 */
   UserName: string;
-  /** 新账号密码。密码复杂度要求如下：字符长度范围[8,32]。至少包含字母、数字和特殊字符（叹号“!”、at"@"、井号“#”、百分号“%”、插入符“^”、星号“*”、小括号“()”、下划线“_”）中的两种。 */
+  /** 新账号密码。密码复杂度要求如下：- 字符长度范围[8,32]。- 至少包含字母、数字和特殊字符（叹号“!”、at"@"、井号“#”、百分号“%”、插入符“^”、星号“\*”、小括号“()”、下划线“\_”）中的两种。 */
   Password: string;
   /** mongouser 账号对应的密码。mongouser 为系统默认账号，即为创建实例时，设置的密码。 */
-  MongoUserPassword: string;
+  MongoUserPassword?: string;
   /** 账号备注信息。 */
   UserDesc?: string;
   /** 账号的读写权限信息。 */
@@ -1397,7 +1397,7 @@ declare interface FlushInstanceRouterConfigResponse {
 }
 
 declare interface InquirePriceCreateDBInstancesRequest {
-  /** 实例所属区域及可用区信息。格式：ap-guangzhou-2。 */
+  /** 实例所属区域及可用区信息。具体信息，请参见[地域和可用区](https://cloud.tencent.com/document/product/240/3637)。 */
   Zone: string;
   /** - 创建副本集实例，指每个副本集内主从节点数量。每个副本集所支持的最大节点数与最小节点数，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。- 创建分片集群实例，指每个分片的主从节点数量。每个分片所支持的最大节点数与最小节点数，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。 */
   NodeNum: number;
@@ -1405,7 +1405,7 @@ declare interface InquirePriceCreateDBInstancesRequest {
   Memory: number;
   /** 实例硬盘大小。- 单位：GB。- 取值范围：请通过接口[DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567)查询，其返回的数据结构SpecItems中的参数MinStorage与MaxStorage分别对应其最小磁盘规格与最大磁盘规格。 */
   Volume: number;
-  /** 实例版本信息。具体支持的版本，请通过接口[DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567)查询，其返回的数据结构SpecItems中的参数MongoVersionCode为实例所支持的版本信息。版本信息与版本号对应关系如下：- MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本。- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。 */
+  /** 实例版本信息。具体支持的版本，请通过接口[DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567)查询，其返回的数据结构SpecItems中的参数MongoVersionCode为实例所支持的版本信息。版本信息与版本号对应关系如下：- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。- MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。 */
   MongoVersion: string;
   /** 产品规格类型。- HIO10G：通用高HIO万兆型。- HCD：云盘版。 */
   MachineCode: string;
@@ -1441,15 +1441,15 @@ declare interface InquirePriceCreateDBInstancesResponse {
 }
 
 declare interface InquirePriceModifyDBInstanceSpecRequest {
-  /** 实例 ID，格式如：cmgo-p8vn****。与云数据库控制台页面中显示的实例ID相同。 */
+  /** 实例 ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 变更配置后实例内存大小，单位：GB。 */
+  /** 变更配置后实例内存大小，单位：GB。具体售卖的内存规格，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。 */
   Memory: number;
-  /** 变更配置后实例磁盘大小，单位：GB。 */
+  /** 变更配置后实例磁盘大小，单位：GB。每一个 CPU 规格对应的最大磁盘与最小磁盘范围，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。 */
   Volume: number;
-  /** 实例节点数。默认为不变更节点数，暂不支持变更。 */
+  /** 实例节点数量。请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。- 副本集实例，指变更配置后实例的主从节点数量。- 分片集群实例，指变更配置后实例每一个分片的主从节点数。**说明**：切勿同时发起调整节点数、调整分片数、调整节点规格的任务。 */
   NodeNum?: number;
-  /** 实例分片数。默认为不变更分片数，暂不支持变更。 */
+  /** 分片集群实例，指变更配置后实例的分片数量。取值范围：[2,36] 。**说明**：变更后的分片数量不能小于当前现有的数量。切勿同时发起调整节点数、调整分片数与调整节点规格的任务。 */
   ReplicateSetNum?: number;
 }
 
@@ -1631,17 +1631,17 @@ declare interface RenewDBInstancesResponse {
 }
 
 declare interface ResetDBInstancePasswordRequest {
-  /** 实例Id */
+  /** 指定实例 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 实例账号名 */
+  /** 指定需修改密码的账号名称。可通过接口 [DescribeAccountUsers](https://cloud.tencent.com/document/product/240/80800) 获取账号列表，复制需修改密码的账号。 */
   UserName: string;
-  /** 新密码，新密码长度不能少于8位 */
+  /** 指定账户的新密码。密码复杂度要求：- 8-32个字符长度。- 至少包含字母、数字和字符（!@#%^\*()\_）中的两种。 */
   Password: string;
 }
 
 declare interface ResetDBInstancePasswordResponse {
-  /** 异步请求Id，用户查询该流程的运行状态 */
-  AsyncRequestId: string;
+  /** 任务请求 ID。 */
+  AsyncRequestId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1663,7 +1663,7 @@ declare interface RestartNodesResponse {
 declare interface SetAccountUserPrivilegeRequest {
   /** 指定待设置账号的实例ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 设置账号名称。 */
+  /** 设置访问实例的账号名称。设置要求为：字母开头的1-64个字符，只可输入[A,Z]、[a,z]、[1,9]范围的字符以及下划线“_”与短划线“-”。 */
   UserName: string;
   /** 设置权限信息。 */
   AuthRole: Auth[];
@@ -1721,7 +1721,7 @@ declare interface SetInstanceMaintenanceResponse {
 }
 
 declare interface TerminateDBInstancesRequest {
-  /** 指定预隔离实例ID。格式如：cmgo-p8vnipr5。 */
+  /** 指定预隔离实例 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制预隔离实例 ID。 */
   InstanceId: string;
 }
 

@@ -109,7 +109,7 @@ declare interface SubmitHunyuanTo3DProJobRequest {
   EnablePBR?: boolean;
   /** 生成3D模型的面数，默认值为500000。可支持生成面数范围，参考值：40000-500000。 */
   FaceCount?: number;
-  /** 生成任务类型，默认Normal，参考值：Normal：可生成带纹理的几何模型。LowPoly：可生成智能减面后的模型。Geometry：可生成不带纹理的几何模型（白模），选择此任务时，EnablePBR参数不生效。Sketch：可输入草图或线稿图生成模型。 */
+  /** 生成任务类型，默认Normal，参考值：Normal：可生成带纹理的几何模型。LowPoly：可生成智能减面后的模型。Geometry：可生成不带纹理的几何模型（白模），选择此任务时，EnablePBR参数不生效。Sketch：可输入草图或线稿图生成模型，此模式下prompt和ImageUrl/ImageBase64可一起输入。 */
   GenerateType?: string;
 }
 

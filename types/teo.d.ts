@@ -2180,6 +2180,8 @@ declare interface MultiPathGateway {
   RegionId?: string;
   /** 线路信息，当查询网关信息详情 DescribeMultiPathGateway 的时候会返回，当查询网关列表 DescribeMultiPathGateways 的时候不会返回。 */
   Lines?: MultiPathGatewayLine[];
+  /** 网关回源 IP 列表发生了变化是否需要重新确认，取值有：true：回源 IP 列表发生了变化，需要确认；false：回源 IP 列表未发生变化，无需确认。 */
+  NeedConfirm?: string;
 }
 
 /** 多通道安全网关线路信息 */

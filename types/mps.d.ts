@@ -5276,9 +5276,9 @@ declare interface SharpEnhanceConfig {
 declare interface SimpleAesDrm {
   /** 请求解密秘钥uri地址。 */
   Uri: string | null;
-  /** 加密key(32字节字符串)。 */
+  /** 加密key(十六进制32字节字符串)。 */
   Key: string | null;
-  /** 加密初始化向量(32字节字符串)。 */
+  /** 加密初始化向量(十六进制32字节字符串)。 */
   Vector?: string | null;
 }
 
@@ -5342,6 +5342,32 @@ declare interface SmartEraseTaskResult {
   BeginProcessTime?: string;
   /** 任务执行完毕的时间，采用 ISO 日期格式。 */
   FinishTime?: string;
+}
+
+/** 智能擦除模板详情 */
+declare interface SmartEraseTemplateItem {
+  /** 智能擦除模板唯一标识 */
+  Definition?: number;
+  /** 智能擦除模板名称 */
+  Name?: string;
+  /** 智能擦除模板描述信息 */
+  Comment?: string;
+  /** 模板类型，取值范围：* Preset：系统预置模板；* Custom：用户自定义模板。 */
+  Type?: string;
+  /** 擦除类型- subtitle 去字幕- watermark 去水印- privacy 隐私保护 */
+  EraseType?: string;
+  /** 字幕擦除配置 */
+  EraseSubtitleConfig?: SmartEraseSubtitleConfig | null;
+  /** 水印擦除配置 */
+  EraseWatermarkConfig?: SmartEraseWatermarkConfig | null;
+  /** 隐私保护配置 */
+  ErasePrivacyConfig?: SmartErasePrivacyConfig | null;
+  /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  CreateTime?: string;
+  /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  UpdateTime?: string;
+  /** 智能擦除预设模板别名 */
+  AliasName?: string;
 }
 
 /** 智能擦除模板去水印配置 */
@@ -5572,7 +5598,7 @@ declare interface SpekeDrm {
   ResourceId: string;
   /** DRM厂商访问地址，该字段内容从DRM厂商获取。注: 不同DRM厂商对子流的数量限制不一样，如 PallyCon 限制不能超过5条子流，DRMtoday厂商最多仅支持9条子流加密 */
   KeyServerUrl: string;
-  /** 加密初始化向量(32字节字符串)，该字段内容为用户自定义。 */
+  /** 加密初始化向量(十六进制32字节字符串)，该字段内容为用户自定义。 */
   Vector: string;
   /** 加密方式，FairPlay 默认cbcs，PlayReady，Widevine 默认cenccbcs：PlayReady，Widevine，FairPlay 支持；cenc：PlayReady，Widevine支持； */
   EncryptionMethod?: string;
@@ -6752,6 +6778,28 @@ declare interface CreateScheduleResponse {
   RequestId?: string;
 }
 
+declare interface CreateSmartEraseTemplateRequest {
+  /** 智能擦除模板名称长度限制：64 个字符。 */
+  Name: string;
+  /** 擦除类型- subtitle 去字幕- watermark 去水印- privacy 隐私保护 */
+  EraseType: string;
+  /** 智能擦除模板描述信息长度限制：256 个字符。 */
+  Comment?: string;
+  /** 字幕擦除配置，EraseType取subtitle时必填且仅此时生效。 */
+  EraseSubtitleConfig?: SmartEraseSubtitleConfig;
+  /** 水印擦除配置，EraseType取watermark时必填且仅此时生效。 */
+  EraseWatermarkConfig?: SmartEraseWatermarkConfig;
+  /** 隐私保护配置，EraseType取privacy时必填且仅此时生效。 */
+  ErasePrivacyConfig?: SmartErasePrivacyConfig;
+}
+
+declare interface CreateSmartEraseTemplateResponse {
+  /** 智能擦除模板唯一标识 */
+  Definition?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSmartSubtitleTemplateRequest {
   /** 智能字幕模板名称长度限制：64 个字符。 */
   Name: string;
@@ -7124,6 +7172,16 @@ declare interface DeleteScheduleRequest {
 }
 
 declare interface DeleteScheduleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSmartEraseTemplateRequest {
+  /** 智能擦除模板唯一标识。 */
+  Definition: number;
+}
+
+declare interface DeleteSmartEraseTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7624,6 +7682,28 @@ declare interface DescribeSchedulesResponse {
   TotalCount?: number;
   /** 编排信息数组。 */
   ScheduleInfoSet?: SchedulesInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSmartEraseTemplatesRequest {
+  /** 智能擦除模板唯一标识过滤条件，数组长度限制：100。 */
+  Definitions?: number[];
+  /** 分页偏移量，默认值：0。 */
+  Offset?: number;
+  /** 返回记录条数，默认值：10，最大值：100。 */
+  Limit?: number;
+  /** 模板类型过滤条件，不填则返回所有，可选值：* Preset：系统预置模板；* Custom：用户自定义模板。 */
+  Type?: string;
+  /** 智能擦除模板名过滤条件，长度限制：64 个字符。 */
+  Name?: string;
+}
+
+declare interface DescribeSmartEraseTemplatesResponse {
+  /** 符合过滤条件的记录总数。 */
+  TotalCount?: number;
+  /** 智能擦除模板详情列表。 */
+  SmartEraseTemplateSet?: SmartEraseTemplateItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8508,6 +8588,28 @@ declare interface ModifyScheduleResponse {
   RequestId?: string;
 }
 
+declare interface ModifySmartEraseTemplateRequest {
+  /** 智能擦除模板唯一标识 */
+  Definition: number;
+  /** 智能擦除模板名称长度限制：64 个字符。 */
+  Name?: string;
+  /** 智能擦除模板描述信息长度限制：256 个字符。 */
+  Comment?: string;
+  /** 擦除类型- subtitle 去字幕- watermark 去水印- privacy 隐私保护 */
+  EraseType?: string;
+  /** 字幕擦除配置，EraseType取subtitle或者EraseType不填，对应模板原EraseType为subtitle时生效。 */
+  EraseSubtitleConfig?: SmartEraseSubtitleConfig;
+  /** 水印擦除配置，EraseType取watermark或者EraseType不填，对应模板原EraseType为watermark时生效。 */
+  EraseWatermarkConfig?: SmartEraseWatermarkConfig;
+  /** 隐私保护配置，EraseType取privacy或者EraseType不填，对应模板原EraseType为privacy时生效。 */
+  ErasePrivacyConfig?: SmartErasePrivacyConfig;
+}
+
+declare interface ModifySmartEraseTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifySmartSubtitleTemplateRequest {
   /** 智能字幕模板唯一标识 */
   Definition: number;
@@ -8973,6 +9075,8 @@ declare interface Mps {
   CreateSampleSnapshotTemplate(data: CreateSampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSampleSnapshotTemplateResponse>;
   /** 创建编排 {@link CreateScheduleRequest} {@link CreateScheduleResponse} */
   CreateSchedule(data: CreateScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScheduleResponse>;
+  /** 创建智能擦除模板 {@link CreateSmartEraseTemplateRequest} {@link CreateSmartEraseTemplateResponse} */
+  CreateSmartEraseTemplate(data: CreateSmartEraseTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSmartEraseTemplateResponse>;
   /** 创建智能字幕模板 {@link CreateSmartSubtitleTemplateRequest} {@link CreateSmartSubtitleTemplateResponse} */
   CreateSmartSubtitleTemplate(data: CreateSmartSubtitleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSmartSubtitleTemplateResponse>;
   /** 创建指定时间点截图模板 {@link CreateSnapshotByTimeOffsetTemplateRequest} {@link CreateSnapshotByTimeOffsetTemplateResponse} */
@@ -9023,6 +9127,8 @@ declare interface Mps {
   DeleteSampleSnapshotTemplate(data: DeleteSampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSampleSnapshotTemplateResponse>;
   /** 删除编排 {@link DeleteScheduleRequest} {@link DeleteScheduleResponse} */
   DeleteSchedule(data: DeleteScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScheduleResponse>;
+  /** 删除智能擦除模板 {@link DeleteSmartEraseTemplateRequest} {@link DeleteSmartEraseTemplateResponse} */
+  DeleteSmartEraseTemplate(data: DeleteSmartEraseTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSmartEraseTemplateResponse>;
   /** 删除智能字幕模板 {@link DeleteSmartSubtitleTemplateRequest} {@link DeleteSmartSubtitleTemplateResponse} */
   DeleteSmartSubtitleTemplate(data: DeleteSmartSubtitleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSmartSubtitleTemplateResponse>;
   /** 删除指定时间点截图模板 {@link DeleteSnapshotByTimeOffsetTemplateRequest} {@link DeleteSnapshotByTimeOffsetTemplateResponse} */
@@ -9077,6 +9183,8 @@ declare interface Mps {
   DescribeSampleSnapshotTemplates(data?: DescribeSampleSnapshotTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleSnapshotTemplatesResponse>;
   /** 查询编排 {@link DescribeSchedulesRequest} {@link DescribeSchedulesResponse} */
   DescribeSchedules(data?: DescribeSchedulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSchedulesResponse>;
+  /** 获取智能擦除模板列表 {@link DescribeSmartEraseTemplatesRequest} {@link DescribeSmartEraseTemplatesResponse} */
+  DescribeSmartEraseTemplates(data?: DescribeSmartEraseTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmartEraseTemplatesResponse>;
   /** 获取智能字幕模板列表 {@link DescribeSmartSubtitleTemplatesRequest} {@link DescribeSmartSubtitleTemplatesResponse} */
   DescribeSmartSubtitleTemplates(data?: DescribeSmartSubtitleTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmartSubtitleTemplatesResponse>;
   /** 获取指定时间点截图模板列表 {@link DescribeSnapshotByTimeOffsetTemplatesRequest} {@link DescribeSnapshotByTimeOffsetTemplatesResponse} */
@@ -9163,6 +9271,8 @@ declare interface Mps {
   ModifySampleSnapshotTemplate(data: ModifySampleSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySampleSnapshotTemplateResponse>;
   /** 修改编排 {@link ModifyScheduleRequest} {@link ModifyScheduleResponse} */
   ModifySchedule(data: ModifyScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyScheduleResponse>;
+  /** 修改智能擦除模板 {@link ModifySmartEraseTemplateRequest} {@link ModifySmartEraseTemplateResponse} */
+  ModifySmartEraseTemplate(data: ModifySmartEraseTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySmartEraseTemplateResponse>;
   /** 修改智能字幕模板 {@link ModifySmartSubtitleTemplateRequest} {@link ModifySmartSubtitleTemplateResponse} */
   ModifySmartSubtitleTemplate(data: ModifySmartSubtitleTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySmartSubtitleTemplateResponse>;
   /** 修改指定时间点截图模板 {@link ModifySnapshotByTimeOffsetTemplateRequest} {@link ModifySnapshotByTimeOffsetTemplateResponse} */

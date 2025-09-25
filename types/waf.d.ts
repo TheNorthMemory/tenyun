@@ -164,6 +164,8 @@ declare interface ApiDataFilter {
   Operator: string;
   /** 日期，手机号，邮箱等 */
   Value: string;
+  /** 风险等级 */
+  ValueList?: string[];
 }
 
 /** api历史样例返回结构体 */
@@ -554,6 +556,8 @@ declare interface BotToken {
   Scene?: string[];
   /** 优先级 */
   Priority?: number;
+  /** token有效性配置信息 */
+  TokenValidation?: TokenValidation;
 }
 
 /** 数据封装 */
@@ -626,7 +630,7 @@ declare interface CCRuleItems {
   ValidTime?: number;
   /** 版本 */
   TsVersion?: number;
-  /** 规则详情 */
+  /** key为匹配字段；args为base64编码后的参数，等于号前为匹配参数，等于号后为匹配内容；match为逻辑符号；encodeflag为参数内容是否编码 */
   Options?: string;
   /** 规则ID */
   RuleId?: number;
@@ -642,6 +646,10 @@ declare interface CCRuleItems {
   CelRule?: string;
   /** 逻辑操作符 */
   LogicalOp?: string;
+  /** 页面ID */
+  PageId?: string;
+  /** 动作灰度比例，默认值100 */
+  ActionRatio?: number;
 }
 
 /** CC规则总览 */
@@ -974,6 +982,8 @@ declare interface DescribeCustomRulesRspRuleListItem {
   Domain?: string;
   /** 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系 */
   LogicalOp?: string;
+  /** 规则灰度的比例，默认是100，不灰度 */
+  ActionRatio?: number;
 }
 
 /** domain列表 */
@@ -1148,6 +1158,8 @@ declare interface DomainsPartInfo {
   Ciphers?: number[];
   /** 加密套件模板。0：不支持选择，使用默认模板 1：通用型模板 2：安全型模板3：自定义模板 */
   CipherTemplate?: number;
+  /** WAF与源站的连接超时，默认10s。 */
+  ProxyConnectTimeout?: number;
   /** WAF与源站的读超时时间，默认300s。 */
   ProxyReadTimeout?: number;
   /** WAF与源站的写超时时间，默认300s。 */
@@ -1194,6 +1206,8 @@ declare interface DomainsPartInfo {
   UpstreamRules?: UpstreamRule[];
   /** 业务场景。0：默认值，表示常规业务场景 1：大模型业务场景 */
   UseCase?: number;
+  /** gzip开关。0：关闭 1：默认值，打开。 */
+  Gzip?: number;
 }
 
 /** 下载攻击日志记录数据项 */
@@ -1724,6 +1738,14 @@ declare interface InstanceInfo {
   BasicFlag?: number;
   /** 实例的网络配置 */
   NetworkConfig?: NetworkConfig;
+  /** RCE设备安全信息包 */
+  RCEPkg?: RCEPkg;
+  /** 超量策略。0：超量沙箱1：超量限流 */
+  ExceedPolicy?: number;
+  /** 大模型安全信息包 */
+  LLMPkg?: LLMPkg;
+  /** 弹性资源Id */
+  ElasticResourceId?: string;
 }
 
 /** 数据封装 */
@@ -1802,6 +1824,14 @@ declare interface IpHitItemsData {
   TotalCount?: number;
 }
 
+/** 当用户选择JWS/JWE会话管理方式的时候，上传的配置信息以及校验规则 */
+declare interface JWTConfig {
+  /** 密钥信息 */
+  SecretInfo?: SecretInfo;
+  /** Payload校验规则集合 */
+  PayloadRule?: TokenRuleEntry[];
+}
+
 /** 规则执行的时间结构体 */
 declare interface JobDateTime {
   /** 定时执行的时间参数 */
@@ -1818,6 +1848,22 @@ declare interface KVInt {
   Key?: string;
   /** Value */
   Value?: number;
+}
+
+/** 有效大模型安全包信息 */
+declare interface LLMPkg {
+  /** 资源id */
+  ResourceIds?: string;
+  /** 状态 */
+  Status?: number;
+  /** 地域 */
+  Region?: number;
+  /** 开始时间 */
+  BeginTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 计费项 */
+  InquireKey?: string;
 }
 
 /** 负载均衡的监听器 */
@@ -1860,7 +1906,7 @@ declare interface LoadBalancerPackageNew {
   LoadBalancerName: string;
   /** 协议 */
   Protocol: string;
-  /** 地区"多伦多": "ca", "广州": "gz", "成都": "cd", "福州": "fzec", "深圳": "szx", "印度": "in", "济南": "jnec", "重庆": "cq", "天津": "tsn", "欧洲东北": "ru", "南京": "nj", "美国硅谷": "usw", "泰国": "th", "广州Open": "gzopen", "深圳金融": "szjr", "法兰克福": "de", "日本": "jp", "弗吉尼亚": "use", "北京": "bj", "中国香港": "hk", "杭州": "hzec", "北京金融": "bjjr", "上海金融": "shjr", "台北": "tpe", "首尔": "kr", "上海": "sh", "新加坡": "sg", "清远": "qy" */
+  /** 地区 "多伦多": "ca", "广州": "gz", "成都": "cd", "福州": "fzec", "深圳": "szx", "印度": "in", "济南": "jnec", "重庆": "cq", "天津": "tsn", "欧洲东北": "ru", "南京": "nj", "美国硅谷": "usw", "泰国": "th", "广州Open": "gzopen", "深圳金融": "szjr", "法兰克福": "de", "日本": "jp", "弗吉尼亚": "use", "北京": "bj", "中国香港": "hk", "杭州": "hzec", "北京金融": "bjjr", "上海金融": "shjr", "台北": "tpe", "首尔": "kr", "上海": "sh", "新加坡": "sg", "清远": "qy", "雅加达": "jkt" */
   Region: string;
   /** 接入IP */
   Vip: string;
@@ -2280,6 +2326,28 @@ declare interface QpsData {
   QPSExtendIntlMax?: number;
 }
 
+/** 有效REC设备安全包信息 */
+declare interface RCEPkg {
+  /** 资源id */
+  ResourceIds?: string;
+  /** 状态 */
+  Status?: number;
+  /** 地域 */
+  Region?: number;
+  /** 开始时间 */
+  BeginTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 申请数量 */
+  InquireNum?: number;
+  /** 使用数量 */
+  UsedNum?: number;
+  /** 续费标志 */
+  RenewFlag?: number;
+  /** 计费项 */
+  BillingItem?: string;
+}
+
 /** 用户规则更新输出规则子项 */
 declare interface ReqUserRule {
   /** 特征序号 */
@@ -2378,6 +2446,16 @@ declare interface SearchItem {
   FlowMode?: string;
 }
 
+/** 用于JWT验签的密钥信息 */
+declare interface SecretInfo {
+  /** 密钥上传方式，可选值：manual、upload */
+  SecretSource?: string;
+  /** 密钥内容（用户手动输入/前端从密钥文件提取出的密钥内容） */
+  SecretKey?: string;
+  /** 上传的密钥文件文件名 */
+  FileName?: string;
+}
+
 /** 参数包装 */
 declare interface SessionData {
   /** session定义 */
@@ -2408,6 +2486,8 @@ declare interface SessionItem {
   SessionInUsed?: boolean;
   /** Session关联的CC规则ID */
   RelatedRuleID?: number[];
+  /** 精准匹配时，配置的key */
+  Key?: string;
 }
 
 /** waf斯巴达-编辑防护域名中的端口结构 */
@@ -2492,6 +2572,56 @@ declare interface TimedJob {
   StartDateTime?: number;
   /** 结束时间戳，单位为秒 */
   EndDateTime?: number;
+}
+
+/** JWT显示设置（只有当校验方式为JWS/JWE的时候才会有该配置信息） */
+declare interface TokenDisplaySetting {
+  /** 是否使用payload字段作为显示token */
+  DisplayWithPayloadEnable?: boolean;
+  /** 用于显示的payload字段名 */
+  FieldName?: string;
+}
+
+/** Token有效性校验规则 */
+declare interface TokenRuleEntry {
+  /** 校验方式，可选值：验签校验、字段校验 */
+  Type?: string;
+  /** 键 */
+  Key?: string;
+  /** 操作符 */
+  Op?: string;
+  /** 值 */
+  Value?: TokenRuleEntryValue;
+}
+
+/** 通过复杂类型识别传入的不同类型参数值 */
+declare interface TokenRuleEntryValue {
+  /** 布尔类型值 */
+  LogicValue?: boolean;
+  /** 数组类型值可以存储字符串/数值如果只有一个元素，则为长度为1的数组 */
+  MultiValue?: string[];
+  /** 指示有效的字段 */
+  ValidKey?: string;
+}
+
+/** token有效性配置信息 */
+declare interface TokenValidation {
+  /** 是否开启token有效性校验 */
+  Enable?: boolean;
+  /** token有效性的校验方式，可选值为：jws、jwe、contains、len、regex */
+  VerifyType?: string;
+  /** 有效性校验配置和规则 */
+  VerifyRule?: TokenVerifyRule;
+  /** Token显示设置（只有当校验方式为jws/jwe的时候才会有该配置信息） */
+  DisplaySetting?: TokenDisplaySetting;
+}
+
+/** Token有效性校验规则 */
+declare interface TokenVerifyRule {
+  /** JWS、JWE专用校验规则 */
+  JWTRule?: JWTConfig;
+  /** 其他会话有效性校验方式(contains、length、regex)的校验规则 */
+  GeneralRule?: TokenRuleEntry;
 }
 
 /** 日志主题扩展信息 */
@@ -2877,6 +3007,8 @@ declare interface AddCustomRuleRequest {
   PageId?: string;
   /** 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系 */
   LogicalOp?: string;
+  /** 按照动作灰度的比例，默认是100 */
+  ActionRatio?: number;
 }
 
 declare interface AddCustomRuleResponse {
@@ -2957,6 +3089,14 @@ declare interface AddSpartaProtectionRequest {
   IsKeepAlive: string;
   /** 必填项，域名所属实例id */
   InstanceID: string;
+  /** 必填项，是否开启HTTP强制跳转到HTTPS。0：不强制跳转1：开启强制跳转 */
+  HttpsRewrite: number;
+  /** 必填项，是否开启HTTP2，需要开启HTTPS协议支持。0：关闭1：开启 */
+  IsHttp2: number;
+  /** 必填项，是否开启主动健康检测。0：不开启1：开启 */
+  ActiveCheck: number;
+  /** 必填项，加密套件模板。0：不支持选择，使用默认模板 1：通用型模板 2：安全型模板3：自定义模板 */
+  CipherTemplate: number;
   /** CertType为1时，需要填充此参数，表示自有证书的证书链 */
   Cert?: string;
   /** CertType为1时，需要填充此参数，表示自有证书的私钥 */
@@ -2975,28 +3115,22 @@ declare interface AddSpartaProtectionRequest {
   IsGray?: number;
   /** 灰度的地区 */
   GrayAreas?: string[];
-  /** 必填项，是否开启HTTP强制跳转到HTTPS。0：不强制跳转1：开启强制跳转 */
-  HttpsRewrite?: number;
   /** 域名回源时的回源域名。UpstreamType为1时，需要填充此字段 */
   UpstreamDomain?: string;
   /** IP回源时的回源IP列表。UpstreamType为0时，需要填充此字段 */
   SrcList?: string[];
-  /** 必填项，是否开启HTTP2，需要开启HTTPS协议支持。0：关闭1：开启 */
-  IsHttp2?: number;
   /** WAF实例类型。sparta-waf：SAAS型WAFclb-waf：负载均衡型WAFcdn-waf：CDN上的Web防护能力 */
   Edition?: string;
   /** 目前填0即可。anycast IP类型开关： 0 普通IP 1 Anycast IP */
   Anycast?: number;
   /** 回源IP列表各IP的权重，和SrcList一一对应。当且仅当UpstreamType为0，并且SrcList有多个IP，并且LoadBalance为2时需要填写，否则填 [] */
   Weights?: number[];
-  /** 必填项，是否开启主动健康检测。0：不开启1：开启 */
-  ActiveCheck?: number;
   /** TLS版本信息 */
   TLSVersion?: number;
-  /** 必填项，加密套件模板。0：不支持选择，使用默认模板 1：通用型模板 2：安全型模板3：自定义模板 */
-  CipherTemplate?: number;
   /** 自定义的加密套件列表。CipherTemplate为3时需要填此字段，表示自定义的加密套件，值通过DescribeCiphersDetail接口获取。 */
   Ciphers?: number[];
+  /** WAF与源站的连接超时，默认10s。 */
+  ProxyConnectTimeout?: number;
   /** WAF与源站的读超时时间，默认300s。 */
   ProxyReadTimeout?: number;
   /** WAF与源站的写超时时间，默认300s。 */
@@ -3035,6 +3169,8 @@ declare interface AddSpartaProtectionRequest {
   UpstreamRules?: UpstreamRule[];
   /** 业务场景。0：默认值，表示常规业务场景 1：大模型业务场景 */
   UseCase?: number;
+  /** gzip开关。0：关闭 1：默认值，打开。 */
+  Gzip?: number;
 }
 
 declare interface AddSpartaProtectionResponse {
@@ -3557,10 +3693,10 @@ declare interface DeleteSessionResponse {
 declare interface DeleteSpartaProtectionRequest {
   /** 域名列表 */
   Domains: string[];
+  /** 必填项。域名所属实例ID */
+  InstanceID: string;
   /** 实例类型 */
   Edition?: string;
-  /** 必填项。域名所属实例ID */
-  InstanceID?: string;
 }
 
 declare interface DeleteSpartaProtectionResponse {
@@ -3988,6 +4124,8 @@ declare interface DescribeBotSceneOverviewResponse {
   CurrentGlobalScene?: GlobalSceneInfo;
   /** 自定义规则总数，不包括BOT白名单 */
   CustomRuleNums?: number;
+  /** 图灵盾开关状态 */
+  TldStatus?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5595,6 +5733,8 @@ declare interface ModifyCustomRuleRequest {
   PageId?: string;
   /** 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系 */
   LogicalOp?: string;
+  /** 规则生效比例 */
+  ActionRatio?: number;
 }
 
 declare interface ModifyCustomRuleResponse {
@@ -6143,6 +6283,8 @@ declare interface ModifySpartaProtectionRequest {
   Ciphers?: number[];
   /** 加密套件模板。0：不支持选择，使用默认模板 1：通用型模板 2：安全型模板3：自定义模板 */
   CipherTemplate?: number;
+  /** WAF与源站的连接超时时间，默认10s。 */
+  ProxyConnectTimeout?: number;
   /** WAF与源站的读超时时间，默认300s。 */
   ProxyReadTimeout?: number;
   /** WAF与源站的写超时时间，默认300s。 */
@@ -6183,6 +6325,8 @@ declare interface ModifySpartaProtectionRequest {
   UpstreamRules?: UpstreamRule[];
   /** 业务场景。0：默认值，表示常规业务场景 1：大模型业务场景 */
   UseCase?: number;
+  /** gzip开关。0：关闭 1：默认值，打开 */
+  Gzip?: number;
 }
 
 declare interface ModifySpartaProtectionResponse {
@@ -6557,6 +6701,10 @@ declare interface UpsertCCRuleRequest {
   CelRule?: string;
   /** 配置方式的逻辑操作符，and或者or */
   LogicalOp?: string;
+  /** 页面ID */
+  PageId?: string;
+  /** 动作灰度比例，默认值100 */
+  ActionRatio?: number;
 }
 
 declare interface UpsertCCRuleResponse {
@@ -6613,6 +6761,8 @@ declare interface UpsertSessionRequest {
   SessionName?: string;
   /** Session对应ID */
   SessionID?: number;
+  /** 精准匹配时配置的key */
+  Key?: string;
 }
 
 declare interface UpsertSessionResponse {
@@ -6911,7 +7061,7 @@ declare interface Waf {
   ModifyDomainIpv6Status(data: ModifyDomainIpv6StatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainIpv6StatusResponse>;
   /** 修改域名投递状态 {@link ModifyDomainPostActionRequest} {@link ModifyDomainPostActionResponse} */
   ModifyDomainPostAction(data: ModifyDomainPostActionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainPostActionResponse>;
-  /** 更改某一条规则 {@link ModifyDomainWhiteRuleRequest} {@link ModifyDomainWhiteRuleResponse} */
+  /** 修改域名规则白名单 {@link ModifyDomainWhiteRuleRequest} {@link ModifyDomainWhiteRuleResponse} */
   ModifyDomainWhiteRule(data?: ModifyDomainWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainWhiteRuleResponse>;
   /** 修改域名列表的访问日志开关 {@link ModifyDomainsCLSStatusRequest} {@link ModifyDomainsCLSStatusResponse} */
   ModifyDomainsCLSStatus(data: ModifyDomainsCLSStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainsCLSStatusResponse>;

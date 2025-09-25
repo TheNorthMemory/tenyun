@@ -1198,41 +1198,41 @@ declare namespace V20180301 {
   /** 稠密关键点详细信息 */
   interface DenseFaceShape {
     /** 人脸框左上角横坐标。 */
-    X: number;
+    X?: number;
     /** 人脸框左上角纵坐标。 */
-    Y: number;
+    Y?: number;
     /** 人脸框宽度。 */
-    Width: number;
+    Width?: number;
     /** 人脸框高度。 */
-    Height: number;
+    Height?: number;
     /** 描述左侧眼睛轮廓的 XX 点。 */
-    LeftEye: Point[];
+    LeftEye?: Point[];
     /** 描述右侧眼睛轮廓的 XX 点。 */
-    RightEye: Point[];
+    RightEye?: Point[];
     /** 描述左侧眉毛轮廓的 XX 点。 */
-    LeftEyeBrow: Point[];
+    LeftEyeBrow?: Point[];
     /** 描述右侧眉毛轮廓的 XX 点。 */
-    RightEyeBrow: Point[];
+    RightEyeBrow?: Point[];
     /** 描述外嘴巴轮廓的 XX 点， 从左侧开始逆时针返回。 */
-    MouthOutside: Point[];
+    MouthOutside?: Point[];
     /** 描述内嘴巴轮廓的 XX 点，从左侧开始逆时针返回。 */
-    MouthInside: Point[];
+    MouthInside?: Point[];
     /** 描述鼻子轮廓的 XX 点。 */
-    Nose: Point[];
+    Nose?: Point[];
     /** 左瞳孔轮廓的 XX 个点。 */
-    LeftPupil: Point[];
+    LeftPupil?: Point[];
     /** 右瞳孔轮廓的 XX 个点。 */
-    RightPupil: Point[];
+    RightPupil?: Point[];
     /** 中轴线轮廓的 XX 个点。 */
-    CentralAxis: Point[];
+    CentralAxis?: Point[];
     /** 下巴轮廓的 XX 个点。 */
-    Chin: Point[];
+    Chin?: Point[];
     /** 左眼袋的 XX 个点。 */
-    LeftEyeBags: Point[];
+    LeftEyeBags?: Point[];
     /** 右眼袋的 XX 个点。 */
-    RightEyeBags: Point[];
+    RightEyeBags?: Point[];
     /** 额头的 XX 个点。 */
-    Forehead: Point[];
+    Forehead?: Point[];
   }
 
   /** 眼睛信息 */
@@ -1332,11 +1332,11 @@ declare namespace V20180301 {
   /** 人脸属性中的发型信息。 */
   interface FaceHairAttributesInfo {
     /** 0：光头，1：短发，2：中发，3：长发，4：绑发 */
-    Length: number | null;
+    Length?: number | null;
     /** 0：有刘海，1：无刘海 */
-    Bang: number | null;
+    Bang?: number | null;
     /** 0：黑色，1：金色，2：棕色，3：灰白色 */
-    Color: number | null;
+    Color?: number | null;
   }
 
   /** 人脸信息列表。 */

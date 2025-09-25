@@ -422,14 +422,6 @@ declare interface CacheKey {
   KeyRules?: KeyRule[] | null;
 }
 
-/** 违规资源封禁/解封返回类型 */
-declare interface CacheOptResult {
-  /** 成功的url列表 */
-  SuccessUrls?: string[] | null;
-  /** 失败的url列表 */
-  FailUrls?: string[] | null;
-}
-
 /** 组成CacheKey的一部分 */
 declare interface CacheTagKey {
   /** 使用CacheTag作为CacheKey的一部分配置开关，取值有on：开启，使用CacheTag作为CacheKey的一部分off：关闭，不使用CacheTag作为CacheKey的一部分 */
@@ -2026,18 +2018,6 @@ declare interface TrafficPackage {
   TrueExpireTime?: string | null;
 }
 
-/** 封禁url的详细信息 */
-declare interface UrlRecord {
-  /** 状态(disable表示封禁，enable表示解封) */
-  Status?: string | null;
-  /** 对应的url */
-  RealUrl?: string | null;
-  /** 创建时间 */
-  CreateTime?: string | null;
-  /** 更新时间 */
-  UpdateTime?: string | null;
-}
-
 /** 访问URL重写配置 */
 declare interface UrlRedirect {
   /** 访问URL重写配置开关，取值有：on：开启off：关闭 */
@@ -2910,20 +2890,6 @@ declare interface DescribeUrlViolationsResponse {
   RequestId?: string;
 }
 
-declare interface DisableCachesRequest {
-  /** 禁用的 URL 列表（分协议生效，必须包含http://或https://）每次最多可提交 100 条，每日最多可提交 3000 条 */
-  Urls: string[];
-}
-
-declare interface DisableCachesResponse {
-  /** 提交结果 */
-  CacheOptResult?: CacheOptResult;
-  /** 任务ID */
-  TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DisableClsLogTopicRequest {
   /** 日志集ID */
   LogsetId: string;
@@ -2950,22 +2916,6 @@ declare interface DuplicateDomainConfigResponse {
   RequestId?: string;
 }
 
-declare interface EnableCachesRequest {
-  /** 解封 URL 列表 */
-  Urls: string[];
-  /** URL封禁日期 */
-  Date?: string;
-}
-
-declare interface EnableCachesResponse {
-  /** 结果列表 */
-  CacheOptResult?: CacheOptResult;
-  /** 任务ID */
-  TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface EnableClsLogTopicRequest {
   /** 日志集ID */
   LogsetId: string;
@@ -2976,32 +2926,6 @@ declare interface EnableClsLogTopicRequest {
 }
 
 declare interface EnableClsLogTopicResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface GetDisableRecordsRequest {
-  /** 指定 URL 查询 */
-  Url?: string;
-  /** 开始时间，如：2018-12-12 10:24:00。 */
-  StartTime?: string;
-  /** 结束时间，如：2018-12-14 10:24:00。 */
-  EndTime?: string;
-  /** URL 当前状态disable：当前仍为禁用状态，访问返回 403enable：当前为可用状态，已解禁，可正常访问 */
-  Status?: string;
-  /** 分页查询偏移量，默认为 0 */
-  Offset?: number;
-  /** 分页查询限制数目，默认为20。 */
-  Limit?: number;
-  /** 任务ID，任务ID和起始时间需要至少填写一项。 */
-  TaskId?: string;
-}
-
-declare interface GetDisableRecordsResponse {
-  /** 封禁历史记录 */
-  UrlRecordList?: UrlRecord[];
-  /** 任务总数，用于分页 */
-  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3513,18 +3437,12 @@ declare interface Cdn {
   DescribeTrafficPackages(data?: DescribeTrafficPackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrafficPackagesResponse>;
   /** 违规历史查询 {@link DescribeUrlViolationsRequest} {@link DescribeUrlViolationsResponse} */
   DescribeUrlViolations(data?: DescribeUrlViolationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUrlViolationsResponse>;
-  /** 禁用 URL(已废弃) {@link DisableCachesRequest} {@link DisableCachesResponse} */
-  DisableCaches(data: DisableCachesRequest, config?: AxiosRequestConfig): AxiosPromise<DisableCachesResponse>;
   /** 停止日志主题投递 {@link DisableClsLogTopicRequest} {@link DisableClsLogTopicResponse} */
   DisableClsLogTopic(data: DisableClsLogTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DisableClsLogTopicResponse>;
   /** 拷贝域名 {@link DuplicateDomainConfigRequest} {@link DuplicateDomainConfigResponse} */
   DuplicateDomainConfig(data: DuplicateDomainConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DuplicateDomainConfigResponse>;
-  /** 解禁 URL(已废弃) {@link EnableCachesRequest} {@link EnableCachesResponse} */
-  EnableCaches(data: EnableCachesRequest, config?: AxiosRequestConfig): AxiosPromise<EnableCachesResponse>;
   /** 启动日志主题投递 {@link EnableClsLogTopicRequest} {@link EnableClsLogTopicResponse} */
   EnableClsLogTopic(data: EnableClsLogTopicRequest, config?: AxiosRequestConfig): AxiosPromise<EnableClsLogTopicResponse>;
-  /** @deprecated 禁用历史查询(已废弃) {@link GetDisableRecordsRequest} {@link GetDisableRecordsResponse} */
-  GetDisableRecords(data?: GetDisableRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<GetDisableRecordsResponse>;
   /** 显示日志主题列表 {@link ListClsLogTopicsRequest} {@link ListClsLogTopicsResponse} */
   ListClsLogTopics(data?: ListClsLogTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<ListClsLogTopicsResponse>;
   /** 获取日志主题下绑定的域名 {@link ListClsTopicDomainsRequest} {@link ListClsTopicDomainsResponse} */
