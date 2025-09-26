@@ -56,7 +56,7 @@ declare interface Choice {
 declare interface CreateReconstructDocumentFlowConfig {
   /** Markdown文件中表格返回的形式0，表格以MD形式返回1，表格以HTML形式返回默认为0 */
   TableResultType?: string;
-  /** 智能文档解析返回结果的格式0：只返回全文MD；1：只返回每一页的OCR原始Json；2：只返回每一页的MD，3：返回全文MD + 每一页的OCR原始Json；4：返回全文MD + 每一页的MD，默认值为0 */
+  /** 智能文档解析返回结果的格式0：只返回全文MD；1：只返回每一页的OCR原始Json；2：只返回每一页的MD，3：返回全文MD + 每一页的OCR原始Json；4：返回全文MD + 每一页的MD5: 返回全文md，每一页ocr原始json，每一页md默认值为0 */
   ResultType?: string;
   /** 是否忽略失败页，返回已成功的页数据。默认为true。 */
   IgnoreFailedPage?: boolean;
@@ -66,7 +66,7 @@ declare interface CreateReconstructDocumentFlowConfig {
 declare interface CreateSplitDocumentFlowConfig {
   /** Markdown文件中表格返回的形式0，表格以MD形式返回1，表格以HTML形式返回默认为 */
   TableResultType?: string;
-  /** 智能文档解析返回结果的格式0：只返回全文MD；1：只返回每一页的OCR原始Json；2：只返回每一页的MD，3：返回全文MD + 每一页的OCR原始Json；4：返回全文MD + 每一页的MD，默认值为3（返回全文MD + 每一页的OCR原始Json） */
+  /** 智能文档解析返回结果的格式0：只返回全文MD；1：只返回每一页的OCR原始Json；2：只返回每一页的MD；3：返回全文MD + 每一页的OCR原始Json；4：返回全文MD + 每一页的MD；5：返回全文md，每一页ocr原始json，每一页md。 */
   ResultType?: string;
   /** 是否开启mllm */
   EnableMllm?: boolean;
@@ -74,6 +74,10 @@ declare interface CreateSplitDocumentFlowConfig {
   MaxChunkSize?: number;
   /** 是否忽略返回失败页码 */
   IgnoreFailedPage?: boolean;
+  /** 智能文档解析返回结果的格式0：只返回全文MD；1：只返回每一页的OCR原始Json；2：只返回每一页的MD；3：返回全文MD + 每一页的OCR原始Json；4：返回全文MD + 每一页的MD；5：返回全文md，每一页ocr原始json，每一页md。 */
+  SplitResultType?: string;
+  /** Markdown文件中表格返回的形式0，表格以MD形式返回1，表格以HTML形式返回默认为 */
+  SplitTableResultType?: string;
 }
 
 /** 返回的内容 */
@@ -277,7 +281,7 @@ declare interface ChatCompletionsRequest {
   Stream?: boolean;
   /** 控制生成的随机性，较高的值会产生更多样化的输出。 */
   Temperature?: number;
-  /** 最大生成的token数量，默认为4096，最大可设置为16384 */
+  /** 模型最大输出长度（单位 token），不包含思维链内容。默认为4096，取值范围：各个模型不同，参考各个模型最大输出长度（示例：4k，即4096）。输出 token 的总长度受模型的上下文长度限制。 */
   MaxTokens?: number;
   /** 是否启用联网搜索 */
   EnableSearch?: boolean;
@@ -471,7 +475,7 @@ declare interface GetCharacterUsageResponse {
 }
 
 declare interface GetEmbeddingRequest {
-  /** 说明：选择生成向量的模型备注：仅一个模型可选 */
+  /** 说明：选择生成向量的模型备注：可选[lke-text-embedding-v1,lke-text-embedding-v2] */
   Model: string;
   /** 说明：需要 embedding 的文本备注：单条query最多2000个字符，总条数最多7条 */
   Inputs: string[];
@@ -601,16 +605,18 @@ declare interface ListQAsResponse {
 }
 
 declare interface ModifyAttributeLabelRequest {
-  /** 知识库ID */
+  /** 说明：知识库ID备注：通过创建知识库接口（DeleteKnowledgeBase）得到知识库ID（KnowledgeBaseId） */
   KnowledgeBaseId: string;
-  /** 属性ID */
+  /** 说明：属性ID备注：通过CreateAttributeLabel接口创建属性时会生成AttributeId，通过ListAttributeLabels接口可查询得到AttributeId、AttributeKey、AttributeName以及LabelId、LabelName的对应关系 */
   AttributeId: string;
-  /** 属性标识，最大40个英文字符，如style */
+  /** 说明：属性标识，备注：仅支持英文字符，不支持数字，支持下划线。最大支持40个英文字符，如style */
   AttributeKey: string;
-  /** 属性名称，最大80个英文字符，如风格 */
+  /** 说明：属性名称备注：支持中英文字符。最大支持80个中英文字符，如风格 */
   AttributeName: string;
-  /** 属性标签 */
+  /** 说明：标签ID（LabelId）以及标签名（LabelName）备注：- 不填写LabelId，默认在当前AttributeId下新增标签值（LabelName）；- 若填写该AttributeId下的LabelId以及LabelName，则为修改该LabelId对应的标签值 */
   Labels?: AttributeLabelItem[];
+  /** 说明：删除的标签id */
+  DeleteLabelIds?: string[];
 }
 
 declare interface ModifyAttributeLabelResponse {

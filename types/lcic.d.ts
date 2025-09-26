@@ -1728,7 +1728,7 @@ declare interface ModifyGroupResponse {
 }
 
 declare interface ModifyRoomRequest {
-  /** 房间ID。字符数不超过256 */
+  /** 房间ID。 */
   RoomId: number;
   /** 低代码互动课堂的SdkAppId */
   SdkAppId: number;
@@ -1738,7 +1738,7 @@ declare interface ModifyRoomRequest {
   EndTime?: number;
   /** 老师ID。直播开始后不允许修改。 */
   TeacherId?: string;
-  /** 房间名称。 */
+  /** 房间名称。字符数不超过256 */
   Name?: string;
   /** 分辨率。可以有如下取值：1 标清2 高清3 全高清直播开始后不允许修改。 */
   Resolution?: number;

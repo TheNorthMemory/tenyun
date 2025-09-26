@@ -6056,7 +6056,7 @@ declare interface DescribeGroupsRequest {
   GroupResourceTypeList?: string[];
   /** 部署组状态过滤字段 */
   Status?: string;
-  /** 无 */
+  /** 部署组ID列表 */
   GroupIdList?: string[];
 }
 

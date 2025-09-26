@@ -1342,45 +1342,45 @@ declare namespace V20180301 {
   /** 人脸信息列表。 */
   interface FaceInfo {
     /** 人脸框左上角横坐标。人脸框包含人脸五官位置并在此基础上进行一定的扩展，若人脸框超出图片范围，会导致坐标负值。 若需截取完整人脸，可以在完整分completess满足需求的情况下，将负值坐标取0。 */
-    X: number;
+    X?: number;
     /** 人脸框左上角纵坐标。 人脸框包含人脸五官位置并在此基础上进行一定的扩展，若人脸框超出图片范围，会导致坐标负值。 若需截取完整人脸，可以在完整分completess满足需求的情况下，将负值坐标取0。 */
-    Y: number;
+    Y?: number;
     /** 人脸框宽度。 */
-    Width: number;
+    Width?: number;
     /** 人脸框高度。 */
-    Height: number;
+    Height?: number;
     /** 人脸属性信息，包含性别( gender )、年龄( age )、表情( expression )、 魅力( beauty )、眼镜( glass )、口罩（mask）、头发（hair）和姿态 (pitch，roll，yaw )。只有当 NeedFaceAttributes 设为 1 时才返回有效信息。 */
-    FaceAttributesInfo: FaceAttributesInfo;
+    FaceAttributesInfo?: FaceAttributesInfo;
     /** 人脸质量信息，包含质量分（score）、模糊分（sharpness）、光照分（brightness）、遮挡分（completeness）。只有当NeedFaceDetection设为1时才返回有效信息。 */
-    FaceQualityInfo: FaceQualityInfo | null;
+    FaceQualityInfo?: FaceQualityInfo | null;
   }
 
   /** 五官遮挡分，评价眉毛（Eyebrow）、眼睛（Eye）、鼻子（Nose）、脸颊（Cheek）、嘴巴（Mouth）、下巴（Chin）的被遮挡程度。 */
   interface FaceQualityCompleteness {
     /** 眉毛的遮挡分数[0,100]，分数越高遮挡越少。 参考范围：[0,80]表示发生遮挡。 */
-    Eyebrow: number | null;
+    Eyebrow?: number | null;
     /** 眼睛的遮挡分数[0,100],分数越高遮挡越少。 参考范围：[0,80]表示发生遮挡。 */
-    Eye: number | null;
+    Eye?: number | null;
     /** 鼻子的遮挡分数[0,100],分数越高遮挡越少。 参考范围：[0,60]表示发生遮挡。 */
-    Nose: number | null;
+    Nose?: number | null;
     /** 脸颊的遮挡分数[0,100],分数越高遮挡越少。 参考范围：[0,70]表示发生遮挡。 */
-    Cheek: number | null;
+    Cheek?: number | null;
     /** 嘴巴的遮挡分数[0,100],分数越高遮挡越少。 参考范围：[0,50]表示发生遮挡。 */
-    Mouth: number | null;
+    Mouth?: number | null;
     /** 下巴的遮挡分数[0,100],分数越高遮挡越少。 参考范围：[0,70]表示发生遮挡。 */
-    Chin: number | null;
+    Chin?: number | null;
   }
 
   /** 人脸质量信息，包含质量分（score）、模糊分（sharpness）、光照分（brightness）、遮挡分（completeness）。只有当NeedFaceDetection设为1时才返回有效信息。 */
   interface FaceQualityInfo {
     /** 质量分: [0,100]，综合评价图像质量是否适合人脸识别，分数越高质量越好。 正常情况，只需要使用Score作为质量分总体的判断标准即可。Sharpness、Brightness、Completeness等细项分仅供参考。参考范围：[0,40]较差，[40,60] 一般，[60,80]较好，[80,100]很好。 建议：人脸入库选取70以上的图片。 */
-    Score: number | null;
+    Score?: number | null;
     /** 清晰分：[0,100]，评价图片清晰程度，分数越高越清晰。 参考范围：[0,40]特别模糊，[40,60]模糊，[60,80]一般，[80,100]清晰。 建议：人脸入库选取80以上的图片。 */
-    Sharpness: number | null;
+    Sharpness?: number | null;
     /** 光照分：[0,100]，评价图片光照程度，分数越高越亮。 参考范围： [0,30]偏暗，[30,70]光照正常，[70,100]偏亮。 建议：人脸入库选取[30,70]的图片。 */
-    Brightness: number | null;
+    Brightness?: number | null;
     /** 五官遮挡分，评价眉毛（Eyebrow）、眼睛（Eye）、鼻子（Nose）、脸颊（Cheek）、嘴巴（Mouth）、下巴（Chin）的被遮挡程度。 */
-    Completeness: FaceQualityCompleteness | null;
+    Completeness?: FaceQualityCompleteness | null;
   }
 
   /** 检测出的人脸框的位置 */
@@ -1420,15 +1420,15 @@ declare namespace V20180301 {
   /** 分组识别结果Item */
   interface GroupCandidate {
     /** 人员库ID 。 */
-    GroupId: string;
+    GroupId?: string;
     /** 识别出的最相似候选人。 */
-    Candidates: Candidate[];
+    Candidates?: Candidate[];
   }
 
   /** 需要修改的人员库自定义描述字段key-value */
   interface GroupExDescriptionInfo {
     /** 人员库自定义描述字段Index，从0开始 */
-    GroupExDescriptionIndex: number | null;
+    GroupExDescriptionIndex: number;
     /** 需要更新的人员库自定义描述字段内容 */
     GroupExDescription: string;
   }
@@ -1436,17 +1436,17 @@ declare namespace V20180301 {
   /** 返回的人员库信息 */
   interface GroupInfo {
     /** 人员库名称 */
-    GroupName: string;
+    GroupName?: string;
     /** 人员库ID */
-    GroupId: string;
+    GroupId?: string;
     /** 人员库自定义描述字段 */
-    GroupExDescriptions: string[] | null;
+    GroupExDescriptions?: string[] | null;
     /** 人员库信息备注 */
-    Tag: string | null;
+    Tag?: string | null;
     /** 人脸识别所用的算法模型版本。 */
-    FaceModelVersion: string | null;
+    FaceModelVersion?: string | null;
     /** Group的创建时间和日期 CreationTimestamp。CreationTimestamp 的值是自 Unix 纪元时间到Group创建时间的毫秒数。 Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 00:00:00。有关更多信息，请参阅 Unix 时间。 */
-    CreationTimestamp: number | null;
+    CreationTimestamp?: number | null;
   }
 
   /** 头发信息 */

@@ -11011,7 +11011,7 @@ declare interface Tcss {
   CreateAssetImageRegistryScanTaskOneKey(data?: CreateAssetImageRegistryScanTaskOneKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetImageRegistryScanTaskOneKeyResponse>;
   /** 添加容器安全镜像扫描设置 {@link CreateAssetImageScanSettingRequest} {@link CreateAssetImageScanSettingResponse} */
   CreateAssetImageScanSetting(data: CreateAssetImageScanSettingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetImageScanSettingResponse>;
-  /** 创建镜像扫描任务 {@link CreateAssetImageScanTaskRequest} {@link CreateAssetImageScanTaskResponse} */
+  /** 创建本地镜像扫描任务 {@link CreateAssetImageScanTaskRequest} {@link CreateAssetImageScanTaskResponse} */
   CreateAssetImageScanTask(data?: CreateAssetImageScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetImageScanTaskResponse>;
   /** 创建本地镜像木马列表导出任务 {@link CreateAssetImageVirusExportJobRequest} {@link CreateAssetImageVirusExportJobResponse} */
   CreateAssetImageVirusExportJob(data: CreateAssetImageVirusExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetImageVirusExportJobResponse>;

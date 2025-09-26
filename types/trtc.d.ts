@@ -1046,6 +1046,14 @@ declare interface TencentVod {
   UserDefineRecordId?: string;
 }
 
+/** 翻译术语 */
+declare interface Terminology {
+  /** 源术语 */
+  Source: string;
+  /** 目标术语翻译结果 */
+  Target: string;
+}
+
 /** 返回的质量数据，时间:值 */
 declare interface TimeValue {
   /** 时间，unix时间戳（1590065877s) */
@@ -1086,6 +1094,8 @@ declare interface TranslationConfig {
   Mode?: number;
   /** 语音同传配置，开启同传时，需要传递 */
   TTSConfig?: TTSConfig;
+  /** 翻译术语集合 */
+  Terminology?: Terminology[];
 }
 
 /** 实时音视频用量在某一时间段的统计信息。 */
