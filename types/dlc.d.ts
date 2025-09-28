@@ -194,6 +194,14 @@ declare interface CommonMetrics {
   ProcessedRows?: number | null;
 }
 
+/** 任务 core 用量信息 */
+declare interface CoreInfo {
+  /** 时间戳(毫秒)数组 */
+  Timestamp?: number[];
+  /** core 用量 */
+  CoreUsage?: number[];
+}
+
 /** cos权限描述 */
 declare interface CosPermission {
   /** cos路径 */
@@ -2298,6 +2306,8 @@ declare interface TaskResultInfo {
   TotalTime?: number;
   /** 获取结果消耗的时间 */
   QueryResultTime?: number;
+  /** base64 编码结果集 */
+  ResultSetEncode?: string;
 }
 
 /** 批量顺序执行任务集合 */
@@ -3102,6 +3112,8 @@ declare interface CreateDataMaskStrategyRequest {
 }
 
 declare interface CreateDataMaskStrategyResponse {
+  /** 策略id */
+  StrategyId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3505,6 +3517,16 @@ declare interface CreateStandardEngineResourceGroupRequest {
   SparkSpecMode?: string;
   /** 仅SQL资源组资源上限，仅用于快速模块 */
   SparkSize?: number;
+  /** GPUDriver规格 */
+  DriverGPUSpec?: number;
+  /** GPUExecutor规格 */
+  ExecutorGPUSpec?: number;
+  /** GPU上限 */
+  GPULimitSize?: number;
+  /** GPU规格 */
+  GPUSize?: number;
+  /** Pod GPU规格上限 */
+  PythonGPUSpec?: number;
 }
 
 declare interface CreateStandardEngineResourceGroupResponse {
@@ -4948,6 +4970,18 @@ declare interface DescribeTaskMonitorInfosResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTaskResourceUsageRequest {
+  /** 任务 id */
+  TaskInstanceId: string;
+}
+
+declare interface DescribeTaskResourceUsageResponse {
+  /** core 用量信息 */
+  CoreInfo?: CoreInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTaskResultRequest {
   /** 任务唯一ID，仅支持30天内的任务 */
   TaskId: string;
@@ -6093,6 +6127,16 @@ declare interface UpdateStandardEngineResourceGroupResourceInfoRequest {
   SparkSpecMode?: string;
   /** 仅SQL资源组资源上限，仅用于快速模式 */
   SparkSize?: number;
+  /** gpuDriver规格 */
+  DriverGPUSpec?: number;
+  /** gpuExcutor 规格 */
+  ExecutorGPUSpec?: number;
+  /** gpu 上限 */
+  GPULimitSize?: number;
+  /** gpu 规格 */
+  GPUSize?: number;
+  /** gpupod 规格 */
+  PythonGPUSpec?: number;
 }
 
 declare interface UpdateStandardEngineResourceGroupResourceInfoResponse {
@@ -6375,6 +6419,8 @@ declare interface Dlc {
   DescribeTaskLog(data: DescribeTaskLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLogResponse>;
   /** 查询任务监控信息 {@link DescribeTaskMonitorInfosRequest} {@link DescribeTaskMonitorInfosResponse} */
   DescribeTaskMonitorInfos(data?: DescribeTaskMonitorInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskMonitorInfosResponse>;
+  /** 任务资源用量信息 {@link DescribeTaskResourceUsageRequest} {@link DescribeTaskResourceUsageResponse} */
+  DescribeTaskResourceUsage(data: DescribeTaskResourceUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResourceUsageResponse>;
   /** 查询任务结果(用于: SparkSQL、PrestoSQL) {@link DescribeTaskResultRequest} {@link DescribeTaskResultResponse} */
   DescribeTaskResult(data: DescribeTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResultResponse>;
   /** 查询任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
