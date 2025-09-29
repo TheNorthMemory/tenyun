@@ -1901,7 +1901,7 @@ declare interface CreateCloudProductLogCollectionRequest {
   AssumerName: string;
   /** 日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS */
   LogType: string;
-  /** 云产品地域。 不同日志类型(LogType)地域入参格式存在差异， 请参考如下示例：- CDS所有日志类型：ap-guangzhou- CDB-AUDIT: gz- TDSQL-C-AUDIT: gz- MongoDB-AUDIT: gz- MongoDB-SlowLog：ap-guangzhou- MongoDB-ErrorLog：ap-guangzhou- TDMYSQL-SLOW：gz- DCDB所有日志类型：gz- MariaDB所有日志类型：gz- PostgreSQL所有日志类型：gz- BH所有日志类型：overseas-polaris(国内站海外)/fsi-polaris(国内站金融)/general-polaris(国内站普通)/intl-sg-prod(国际站)- APIS所有日志类型：gz */
+  /** 云产品地域。 不同日志类型(LogType)地域入参格式存在差异， 请参考如下示例：- CDS所有日志类型：ap-guangzhou- CDB-AUDIT: gz- TDSQL-C-AUDIT: gz- MongoDB-AUDIT: gz- MongoDB-SlowLog：ap-guangzhou- MongoDB-ErrorLog：ap-guangzhou- TDMYSQL-SLOW：gz- DCDB所有日志类型：gz- MariaDB所有日志类型：gz- PostgreSQL所有日志类型：gz- BH所有日志类型：overseas-polaris(中国香港地区和其他)/fsi-polaris(金融区)/general-polaris(普通区)/intl-sg-prod(国际站)- APIS所有日志类型：gz */
   CloudProductRegion: string;
   /** CLS目标地域- 支持地域参考 [地域列表](https://cloud.tencent.com/document/api/614/56474) 文档 */
   ClsRegion: string;
@@ -2443,7 +2443,7 @@ declare interface DeleteCloudProductLogCollectionRequest {
   AssumerName: string;
   /** 日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS */
   LogType: string;
-  /** 云产品地域。 不同日志类型(LogType)地域入参格式存在差异， 请参考如下示例：- CDS所有日志类型：ap-guangzhou- CDB-AUDIT: gz- TDSQL-C-AUDIT: gz- MongoDB-AUDIT: gz- MongoDB-SlowLog：ap-guangzhou- MongoDB-ErrorLog：ap-guangzhou- TDMYSQL-SLOW：gz- DCDB所有日志类型：gz- MariaDB所有日志类型：gz- PostgreSQL所有日志类型：gz- BH所有日志类型：overseas-polaris(国内站海外)/fsi-polaris(国内站金融)/general-polaris(国内站普通)/intl-sg-prod(国际站)- APIS所有日志类型：gz */
+  /** 云产品地域。 不同日志类型(LogType)地域入参格式存在差异， 请参考如下示例：- CDS所有日志类型：ap-guangzhou- CDB-AUDIT: gz- TDSQL-C-AUDIT: gz- MongoDB-AUDIT: gz- MongoDB-SlowLog：ap-guangzhou- MongoDB-ErrorLog：ap-guangzhou- TDMYSQL-SLOW：gz- DCDB所有日志类型：gz- MariaDB所有日志类型：gz- PostgreSQL所有日志类型：gz- BH所有日志类型：overseas-polaris(中国香港地区和其他)/fsi-polaris(金融区)/general-polaris(普通区)/intl-sg-prod(国际站)- APIS所有日志类型：gz */
   CloudProductRegion: string;
 }
 
@@ -3451,7 +3451,7 @@ declare interface ModifyCloudProductLogCollectionRequest {
   AssumerName: string;
   /** 日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS */
   LogType: string;
-  /** 云产品地域。 不同日志类型(LogType)地域入參格式存在差异， 请参考如下示例：- CDS所有日志类型：ap-guangzhou- CDB-AUDIT: gz- TDSQL-C-AUDIT: gz- MongoDB-AUDIT: gz- MongoDB-SlowLog：ap-guangzhou- MongoDB-ErrorLog：ap-guangzhou- TDMYSQL-SLOW：gz- DCDB所有日志类型：gz- MariaDB所有日志类型：gz- PostgreSQL所有日志类型：gz- BH所有日志类型：overseas-polaris(国内站海外)/fsi-polaris(国内站金融)/general-polaris(国内站普通)/intl-sg-prod(国际站)- APIS所有日志类型：gz */
+  /** 云产品地域。 不同日志类型(LogType)地域入參格式存在差异， 请参考如下示例：- CDS所有日志类型：ap-guangzhou- CDB-AUDIT: gz- TDSQL-C-AUDIT: gz- MongoDB-AUDIT: gz- MongoDB-SlowLog：ap-guangzhou- MongoDB-ErrorLog：ap-guangzhou- TDMYSQL-SLOW：gz- DCDB所有日志类型：gz- MariaDB所有日志类型：gz- PostgreSQL所有日志类型：gz- BH所有日志类型：overseas-polaris(中国香港地区和其他)/fsi-polaris(金融区)/general-polaris(普通区)/intl-sg-prod(国际站)- APIS所有日志类型：gz */
   CloudProductRegion: string;
   /** 日志配置拓展信息， 一般用于存储额外的日志投递配置 */
   Extend?: string;

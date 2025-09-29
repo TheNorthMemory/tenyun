@@ -964,6 +964,14 @@ declare interface OccupiedSeal {
   SealDescription?: string;
 }
 
+/** 业务逻辑个性化配置字段，默认不传注: `配置前请联系对接的客户经理沟通确认。` */
+declare interface Option {
+  /** 个性化配置参数Key字段，对应传入字段的字段名 */
+  Key: string;
+  /** 个性化配置参数Value字段，对应传入字段的字段值 */
+  Value: string;
+}
+
 /** 企业批量注册链接信息 */
 declare interface OrganizationAuthUrl {
   /** 跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表 子客企业状态 子客企业员工状态 Endpoint 链接有效期限 企业未激活 员工未认证 PC 5分钟 企业未激活 员工未认证 CHANNEL/SHORT_URL/APP 一年 企业已激活 员工未认证 PC 5分钟 企业已激活 员工未认证 CHANNEL/SHORT_URL/APP 一年 企业已激活 员工已认证 PC 5分钟 企业已激活 员工已认证 CHANNEL/SHORT_URL/APP 一年 注： `1.链接仅单次有效，每次登录需要需要重新创建新的链接``2.创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义` */
@@ -2191,11 +2199,17 @@ declare interface ChannelCreateSealPolicyRequest {
   Operator?: UserInfo;
   /** 企业机构信息，不用传 */
   Organization?: OrganizationInfo;
+  /** 个性化配置字段，默认不传。 */
+  Options?: Option[];
 }
 
 declare interface ChannelCreateSealPolicyResponse {
   /** 最终授权成功的电子签系统用户ID数组。其他的跳过的是已经授权了的。请求参数填写OpenId时，返回授权成功的 Openid。 */
   UserIds?: string[];
+  /** 人脸验证操作人链接，用法可以参考"[跳转电子签小程序配置](https://qian.tencent.com/developers/company/openwxminiprogram/)"，默认为空。 */
+  SealOperatorVerifyPath?: string;
+  /** 人脸验证操作人二维码链接，扫码后会跳转到腾讯电子签小程序进行人脸验证，默认为空。 */
+  SealOperatorVerifyQrcodeUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2623,9 +2637,15 @@ declare interface ChannelUpdateSealStatusRequest {
   Reason?: string;
   /** 操作者的信息 */
   Operator?: UserInfo;
+  /** 个性化配置字段，默认不传。 */
+  Options?: Option[];
 }
 
 declare interface ChannelUpdateSealStatusResponse {
+  /** 人脸验证操作人链接，用法可以参考"[跳转电子签小程序配置](https://qian.tencent.com/developers/company/openwxminiprogram/)"，默认为空。 */
+  SealOperatorVerifyPath?: string;
+  /** 人脸验证操作人二维码链接，扫码后会跳转到腾讯电子签小程序进行人脸验证，默认为空。 */
+  SealOperatorVerifyQrcodeUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3103,6 +3123,8 @@ declare interface CreateSealByImageRequest {
   TaxIdentifyCode?: string;
   /** 印章描述内容 */
   SealDescription?: string;
+  /** 个性化配置字段，默认不传。 */
+  Options?: Option[];
 }
 
 declare interface CreateSealByImageResponse {
@@ -3110,6 +3132,10 @@ declare interface CreateSealByImageResponse {
   SealId?: string;
   /** 电子印章预览链接地址，地址默认失效时间为24小时。注:`图片上传生成的电子印章无预览链接地址` */
   ImageUrl?: string;
+  /** 人脸验证操作人链接，用法可以参考"[跳转电子签小程序配置](https://qian.tencent.com/developers/company/openwxminiprogram/)"，默认为空。 */
+  SealOperatorVerifyPath?: string;
+  /** 人脸验证操作人二维码链接，扫码后会跳转到腾讯电子签小程序进行人脸验证，默认为空。 */
+  SealOperatorVerifyQrcodeUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

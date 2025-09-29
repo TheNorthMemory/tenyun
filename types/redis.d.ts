@@ -1377,7 +1377,7 @@ declare interface DeleteInstanceAccountResponse {
 }
 
 declare interface DeleteParamTemplateRequest {
-  /** 参数模板 ID。 */
+  /** 参数模板 ID。请登录 [Redis 控制台的参数模版](https://console.cloud.tencent.com/redis/templates)页面获取模版 ID。 */
   TemplateId: string;
 }
 
@@ -1905,7 +1905,7 @@ declare interface DescribeInstanceSecurityGroupResponse {
 declare interface DescribeInstanceShardsRequest {
   /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 是否过滤掉从节信息。- true；过滤从节点。- false：不过滤。 */
+  /** 指定是否过滤掉从节信息。- true；过滤从节点。- false：不过滤。默认为 false。 */
   FilterSlave?: boolean;
 }
 
@@ -2319,11 +2319,11 @@ declare interface DescribeTaskInfoResponse {
 declare interface DescribeTaskListRequest {
   /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId?: string;
-  /** 实例名称。 */
+  /** 实例名称。请登录 [Redis 控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例名称。 */
   InstanceName?: string;
   /** 每页输出的任务列表大小。默认为 20，最多输出100条。 */
   Limit?: number;
-  /** 分页偏移量，取Limit整数倍。计算公式：offset=limit*(页码-1)。 */
+  /** 分页偏移量。取值需为 Limit 的整数倍：offset=limit*(页码-1)，默认值为0。 */
   Offset?: number;
   /** 该字段已废弃, 请忽略, 项目 ID */
   ProjectIds?: number[];
@@ -2453,15 +2453,15 @@ declare interface InquiryPriceCreateInstanceRequest {
   Period: number;
   /** 付费方式。- 0：按量计费。- 1：包年包月。 */
   BillingMode: number;
-  /** 实例所属的可用区ID，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106) 。 */
+  /** 实例所属的可用区 ID，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106) 。**说明**：请在 **ZoneId** 与 **ZoneName** 中至少指定一个参数。 */
   ZoneId?: number;
-  /** 实例分片数量。2.8 标准架构无需配置分片，其余版本标准架构需要配置分片数量为1。集群架构需指定需购买的分片数量。 */
+  /** 实例分片数量。- 标准架构需要配置分片数量为1。- 集群架构分片数量支持设置为1、3、5、8、12、16、24、32、40、48、64、80、96、128。 */
   RedisShardNum?: number;
-  /** 实例副本数量。2.8 标准架构无需配置副本数量。 */
+  /** 实例副本数量。取值范围为：1、2、3、4、5。 */
   RedisReplicasNum?: number;
   /** 是否支持副本只读。Redis2.8标准架构、CKV标准架构无需填写。- true：无需支持副本只读。- false：需支持。 */
   ReplicasReadonly?: boolean;
-  /** 实例所属的可用区名称，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106) 。 */
+  /** 实例所属的可用区名称，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106) 。**说明**：请在 **ZoneId** 与 **ZoneName** 中至少指定一个参数。 */
   ZoneName?: string;
   /** 部署方式。- local：本地盘版，默认为 local。- cloud：云盘版。- cdc：独享集群版。 */
   ProductVersion?: string;

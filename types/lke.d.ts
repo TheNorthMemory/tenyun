@@ -2779,9 +2779,9 @@ declare interface DescribeCallStatsGraphRequest {
   SubBizType?: string;
   /** 模型标识 */
   ModelName?: string;
-  /** 开始时间戳, 单位为秒 */
+  /** 开始时间戳, 单位为秒(废弃) */
   StartTime?: string;
-  /** 结束时间戳, 单位为秒 */
+  /** 结束时间戳, 单位为秒(废弃) */
   EndTime?: string;
   /** 应用id列表 */
   AppBizIds?: string[];
@@ -2791,6 +2791,10 @@ declare interface DescribeCallStatsGraphRequest {
   AppType?: string;
   /** 空间id */
   SpaceId?: string;
+  /** 开始时间戳, 单位为秒 */
+  StatStartTime?: number;
+  /** 结束时间戳, 单位为秒 */
+  StatEndTime?: number;
 }
 
 declare interface DescribeCallStatsGraphResponse {
@@ -2803,10 +2807,10 @@ declare interface DescribeCallStatsGraphResponse {
 declare interface DescribeConcurrencyUsageGraphRequest {
   /** 模型标识 */
   ModelName: string;
-  /** 开始时间戳, 单位为秒 */
-  StartTime: string;
-  /** 结束时间戳, 单位为秒 */
-  EndTime: string;
+  /** 开始时间戳, 单位为秒(废弃) */
+  StartTime?: string;
+  /** 结束时间戳, 单位为秒(废弃) */
+  EndTime?: string;
   /** uin */
   UinAccount?: string[];
   /** 登录用户主账号(集成商模式必填) */
@@ -2819,6 +2823,10 @@ declare interface DescribeConcurrencyUsageGraphRequest {
   AppBizIds?: string[];
   /** 空间id */
   SpaceId?: string;
+  /** 开始时间戳, 单位为秒 */
+  StatStartTime?: number;
+  /** 结束时间戳, 单位为秒 */
+  StatEndTime?: number;
 }
 
 declare interface DescribeConcurrencyUsageGraphResponse {
@@ -2835,14 +2843,18 @@ declare interface DescribeConcurrencyUsageGraphResponse {
 declare interface DescribeConcurrencyUsageRequest {
   /** 模型标识 */
   ModelName: string;
-  /** 开始时间戳, 单位为秒 */
-  StartTime: string;
-  /** 结束时间戳, 单位为秒 */
-  EndTime: string;
+  /** 开始时间戳, 单位为秒(废弃) */
+  StartTime?: string;
+  /** 结束时间戳, 单位为秒(废弃) */
+  EndTime?: string;
   /** 应用id列表 */
   AppBizIds?: string[];
   /** 空间id */
   SpaceId?: string;
+  /** 开始时间戳, 单位为秒 */
+  StatStartTime?: number;
+  /** 结束时间戳, 单位为秒 */
+  StatEndTime?: number;
 }
 
 declare interface DescribeConcurrencyUsageResponse {
@@ -3119,14 +3131,18 @@ declare interface DescribeSearchStatsGraphRequest {
   SubBizType?: string;
   /** 模型标识 */
   ModelName?: string;
-  /** 开始时间戳, 单位为秒 */
+  /** 开始时间戳, 单位为秒(废弃) */
   StartTime?: string;
-  /** 结束时间戳, 单位为秒 */
+  /** 结束时间戳, 单位为秒(废弃) */
   EndTime?: string;
   /** 应用id列表 */
   AppBizIds?: string[];
   /** 空间id */
   SpaceId?: string;
+  /** 开始时间戳, 单位为秒 */
+  StatStartTime?: number;
+  /** 结束时间戳, 单位为秒 */
+  StatEndTime?: number;
 }
 
 declare interface DescribeSearchStatsGraphResponse {
@@ -3205,9 +3221,9 @@ declare interface DescribeTokenUsageGraphRequest {
   SubBizType?: string;
   /** 模型标识 */
   ModelName?: string;
-  /** 开始时间戳, 单位为秒 */
+  /** 开始时间戳, 单位为秒(废弃) */
   StartTime?: string;
-  /** 结束时间戳, 单位为秒 */
+  /** 结束时间戳, 单位为秒(废弃) */
   EndTime?: string;
   /** 应用id列表 */
   AppBizIds?: string[];
@@ -3215,6 +3231,10 @@ declare interface DescribeTokenUsageGraphRequest {
   AppType?: string;
   /** 筛选子场景 */
   SubScenes?: string[];
+  /** 开始时间戳, 单位为秒 */
+  StatStartTime?: number;
+  /** 结束时间戳, 单位为秒 */
+  StatEndTime?: number;
 }
 
 declare interface DescribeTokenUsageGraphResponse {
@@ -3239,9 +3259,9 @@ declare interface DescribeTokenUsageRequest {
   SubBizType?: string;
   /** 模型标识 */
   ModelName?: string;
-  /** 开始时间戳, 单位为秒(默认值0) */
+  /** 开始时间戳, 单位为秒(默认值0)(废弃) */
   StartTime?: string;
-  /** 结束时间戳, 单位为秒(默认值0， 必须大于开始时间戳) */
+  /** 结束时间戳, 单位为秒(默认值0， 必须大于开始时间戳)(废弃) */
   EndTime?: string;
   /** 应用id列表 */
   AppBizIds?: string[];
@@ -3251,6 +3271,10 @@ declare interface DescribeTokenUsageRequest {
   AppType?: string;
   /** 空间id */
   SpaceId?: string;
+  /** 开始时间戳, 单位为秒 */
+  StatStartTime?: number;
+  /** 结束时间戳, 单位为秒 */
+  StatEndTime?: number;
 }
 
 declare interface DescribeTokenUsageResponse {
@@ -4135,14 +4159,14 @@ declare interface ListUnsatisfiedReplyResponse {
 declare interface ListUsageCallDetailRequest {
   /** 模型标识 */
   ModelName: string;
-  /** 开始时间 */
-  StartTime: string;
-  /** 结束时间 */
-  EndTime: string;
   /** 页码（从1开始） */
   PageNumber: number;
   /** 分页数量(最大值1000) */
   PageSize: number;
+  /** 开始时间(废弃) */
+  StartTime?: string;
+  /** 结束时间(废弃) */
+  EndTime?: string;
   /** uin列表 */
   UinAccount?: string[];
   /** 应用ID列表 */
@@ -4157,6 +4181,10 @@ declare interface ListUsageCallDetailRequest {
   BillingTag?: string;
   /** 空间id */
   SpaceId?: string;
+  /** 开始时间戳, 单位为秒 */
+  StatStartTime?: number;
+  /** 开始时间戳, 单位为秒 */
+  StatEndTime?: number;
 }
 
 declare interface ListUsageCallDetailResponse {

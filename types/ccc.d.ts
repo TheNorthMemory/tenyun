@@ -826,6 +826,12 @@ declare interface StaffStatus {
   Status?: string;
   /** 状态关联的会话 Id */
   SessionId?: string;
+  /** 小休原因 */
+  Reason?: string;
+  /** 座席邮箱 */
+  StaffEmail?: string;
+  /** 座席工号 */
+  StaffNo?: string;
 }
 
 /** 座席状态补充信息 */

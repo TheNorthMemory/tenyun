@@ -1395,11 +1395,11 @@ declare interface ConfigureSubscribeJobResponse {
 }
 
 declare interface ConfigureSyncJobRequest {
-  /** 同步实例id（即标识一个同步作业），形如sync-werwfs23 */
+  /** 同步实例id（即标识一个同步作业），形如sync-werwfs23，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。 */
   JobId: string;
-  /** 源端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云),注意具体可选值依赖当前链路 */
+  /** 源端接入类型，cdb(云数据库)、cvm(云服务器自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云),注意具体可选值依赖当前链路 */
   SrcAccessType: string;
-  /** 目标端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)、ckafka(CKafka实例),注意具体可选值依赖当前链路 */
+  /** 目标端接入类型，cdb(云数据库)、cvm(云服务器自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)、ckafka(CKafka实例),注意具体可选值依赖当前链路 */
   DstAccessType: string;
   /** 同步库表对象信息 */
   Objects: Objects;
@@ -1437,7 +1437,7 @@ declare interface ConfigureSyncJobResponse {
 }
 
 declare interface ContinueMigrateJobRequest {
-  /** 数据迁移任务ID */
+  /** 数据迁移任务ID，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。 */
   JobId: string;
 }
 
@@ -1447,7 +1447,7 @@ declare interface ContinueMigrateJobResponse {
 }
 
 declare interface ContinueSyncJobRequest {
-  /** 同步任务id */
+  /** 同步任务id，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。 */
   JobId: string;
 }
 
@@ -1457,7 +1457,7 @@ declare interface ContinueSyncJobResponse {
 }
 
 declare interface CreateCheckSyncJobRequest {
-  /** 同步任务id */
+  /** 同步任务id，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。 */
   JobId: string;
 }
 
@@ -1487,7 +1487,7 @@ declare interface CreateCompareTaskResponse {
 }
 
 declare interface CreateConsumerGroupRequest {
-  /** 订阅实例id */
+  /** 订阅实例id，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。 */
   SubscribeId: string;
   /** 消费组名称，以数字、字母(大小写)或者_ - .开头，以数字、字母(大小写)结尾。实际生成的消费组全称形如：consumer-grp-#{SubscribeId}-#{ConsumerGroupName} */
   ConsumerGroupName: string;
@@ -1505,7 +1505,7 @@ declare interface CreateConsumerGroupResponse {
 }
 
 declare interface CreateMigrateCheckJobRequest {
-  /** 数据迁移任务ID */
+  /** 数据迁移任务ID，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。 */
   JobId: string;
 }
 
@@ -1541,7 +1541,7 @@ declare interface CreateMigrationServiceResponse {
 }
 
 declare interface CreateModifyCheckSyncJobRequest {
-  /** 同步任务id */
+  /** 同步任务id，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。 */
   JobId: string;
 }
 
@@ -1551,7 +1551,7 @@ declare interface CreateModifyCheckSyncJobResponse {
 }
 
 declare interface CreateSubscribeCheckJobRequest {
-  /** 数据订阅实例的 ID */
+  /** 数据订阅实例的 ID，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。 */
   SubscribeId: string;
 }
 
@@ -1635,11 +1635,11 @@ declare interface DeleteCompareTaskResponse {
 }
 
 declare interface DeleteConsumerGroupRequest {
-  /** 数据订阅实例的 ID */
+  /** 数据订阅实例的 ID，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。 */
   SubscribeId: string;
-  /** 消费组名称。实际的消费组全称形如：consumer-grp-#{SubscribeId}-#{ConsumerGroupName}。请务必保证消费组名称正确。 */
+  /** 消费组名称。实际的消费组全称形如：consumer-grp-#{SubscribeId}-#{ConsumerGroupName}。请务必保证消费组名称正确。可通过[DescribeConsumerGroups](https://cloud.tencent.com/document/product/571/102947)接口获取。 */
   ConsumerGroupName: string;
-  /** 账号名称。实际的账户全称形如：account-#{SubscribeId}-#{AccountName}。请务必保证账户名称正确。 */
+  /** 账号名称。实际的账户全称形如：account-#{SubscribeId}-#{AccountName}。请务必保证账户名称正确。可通过[DescribeConsumerGroups](https://cloud.tencent.com/document/product/571/102947)接口获取。 */
   AccountName: string;
 }
 
@@ -1649,7 +1649,7 @@ declare interface DeleteConsumerGroupResponse {
 }
 
 declare interface DescribeCheckSyncJobResultRequest {
-  /** 同步实例id（即标识一个同步作业），形如sync-werwfs23，此值必填 */
+  /** 同步实例id（即标识一个同步作业），形如sync-werwfs23，此值必填，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。 */
   JobId?: string;
 }
 
@@ -1669,9 +1669,9 @@ declare interface DescribeCheckSyncJobResultResponse {
 }
 
 declare interface DescribeCompareReportRequest {
-  /** 迁移任务 Id */
+  /** 迁移任务 Id，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。 */
   JobId: string;
-  /** 校验任务 Id */
+  /** 校验任务 Id，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。 */
   CompareTaskId: string;
   /** 校验不一致结果的 limit */
   DifferenceLimit?: number;
@@ -1723,7 +1723,7 @@ declare interface DescribeCompareTasksResponse {
 }
 
 declare interface DescribeConsumerGroupsRequest {
-  /** 订阅实例id */
+  /** 订阅实例id，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。 */
   SubscribeId: string;
   /** 返回记录的起始偏移量。默认0 */
   Offset?: number;
@@ -1773,7 +1773,7 @@ declare interface DescribeMigrateDBInstancesResponse {
 }
 
 declare interface DescribeMigrationCheckJobRequest {
-  /** 任务id */
+  /** 任务id，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。 */
   JobId: string;
 }
 
@@ -1889,7 +1889,7 @@ declare interface DescribeMigrationJobsResponse {
 }
 
 declare interface DescribeModifyCheckSyncJobResultRequest {
-  /** 同步任务id */
+  /** 同步任务id，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。 */
   JobId: string;
 }
 
@@ -1909,7 +1909,7 @@ declare interface DescribeModifyCheckSyncJobResultResponse {
 }
 
 declare interface DescribeOffsetByTimeRequest {
-  /** 数据订阅实例的 ID */
+  /** 数据订阅实例的 ID，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。 */
   SubscribeId: string;
   /** 时间点，格式为：Y-m-d h:m:s。如果输入时间比当前时间晚的多，相当于查询最新offset；如果输入时间比当前时间早的多，相当于查询最老offset；如果输入空，默认0时间，等价于查询最老offset。 */
   Time: string;
@@ -1947,7 +1947,7 @@ declare interface DescribeSubscribeCheckJobResponse {
 }
 
 declare interface DescribeSubscribeDetailRequest {
-  /** 订阅实例ID */
+  /** 订阅实例ID，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。 */
   SubscribeId: string;
 }
 
@@ -2059,7 +2059,7 @@ declare interface DescribeSubscribeJobsResponse {
 }
 
 declare interface DescribeSubscribeReturnableRequest {
-  /** 数据订阅实例的ID */
+  /** 数据订阅实例的ID，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。 */
   SubscribeId: string;
 }
 
@@ -2113,7 +2113,7 @@ declare interface DescribeSyncJobsResponse {
 }
 
 declare interface DestroyIsolatedSubscribeRequest {
-  /** 数据订阅实例的ID */
+  /** 数据订阅实例的ID，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。 */
   SubscribeId: string;
 }
 
@@ -2123,7 +2123,7 @@ declare interface DestroyIsolatedSubscribeResponse {
 }
 
 declare interface DestroyMigrateJobRequest {
-  /** 任务id */
+  /** 任务id，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。 */
   JobId?: string;
 }
 
@@ -2133,7 +2133,7 @@ declare interface DestroyMigrateJobResponse {
 }
 
 declare interface DestroySyncJobRequest {
-  /** 同步任务id */
+  /** 同步任务id，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。 */
   JobId: string;
 }
 
@@ -2153,7 +2153,7 @@ declare interface IsolateMigrateJobResponse {
 }
 
 declare interface IsolateSubscribeRequest {
-  /** 订阅实例ID */
+  /** 订阅实例ID，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。 */
   SubscribeId: string;
 }
 
@@ -2163,7 +2163,7 @@ declare interface IsolateSubscribeResponse {
 }
 
 declare interface IsolateSyncJobRequest {
-  /** 同步任务id */
+  /** 同步任务id，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。 */
   JobId: string;
 }
 
@@ -2207,11 +2207,11 @@ declare interface ModifyCompareTaskResponse {
 }
 
 declare interface ModifyConsumerGroupDescriptionRequest {
-  /** 数据订阅实例的 ID */
+  /** 数据订阅实例的 ID，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。 */
   SubscribeId: string;
-  /** 消费组名称。实际的消费组全称形如：consumer-grp-#{SubscribeId}-#{ConsumerGroupName}。请务必保证消费组名称正确。 */
+  /** 消费组名称。实际的消费组全称形如：consumer-grp-#{SubscribeId}-#{ConsumerGroupName}。请务必保证消费组名称正确。可通过[DescribeConsumerGroups](https://cloud.tencent.com/document/product/571/102947)接口获取。 */
   ConsumerGroupName: string;
-  /** 账户名称。实际的账户全称形如：account-#{SubscribeId}-#{AccountName}。请务必保证账户名称正确。 */
+  /** 账户名称。实际的账户全称形如：account-#{SubscribeId}-#{AccountName}。请务必保证账户名称正确。可通过[DescribeConsumerGroups](https://cloud.tencent.com/document/product/571/102947)接口获取。 */
   AccountName: string;
   /** 修改之后的消费组描述 */
   Description: string;
@@ -2223,11 +2223,11 @@ declare interface ModifyConsumerGroupDescriptionResponse {
 }
 
 declare interface ModifyConsumerGroupPasswordRequest {
-  /** 数据订阅实例的 ID */
+  /** 数据订阅实例的 ID，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。 */
   SubscribeId: string;
-  /** 账号名称。实际的账户全称形如：account-#{SubscribeId}-#{AccountName} */
+  /** 账号名称。实际的账户全称形如：account-#{SubscribeId}-#{AccountName}。可通过[DescribeConsumerGroups](https://cloud.tencent.com/document/product/571/102947)接口获取。 */
   AccountName: string;
-  /** 消费组名称。实际的消费组全称形如：consumer-grp-#{SubscribeId}-#{ConsumerGroupName} */
+  /** 消费组名称。实际的消费组全称形如：consumer-grp-#{SubscribeId}-#{ConsumerGroupName}。可通过[DescribeConsumerGroups](https://cloud.tencent.com/document/product/571/102947)接口获取。 */
   ConsumerGroupName: string;
   /** 新密码。字符长度不小于3，不大于32 */
   NewPassword: string;
@@ -2321,7 +2321,7 @@ declare interface ModifyMigrationJobResponse {
 }
 
 declare interface ModifySubscribeAutoRenewFlagRequest {
-  /** 订阅实例ID */
+  /** 订阅实例ID，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。 */
   SubscribeId: string;
   /** 自动续费标识。1-自动续费，0-不自动续费 */
   AutoRenewFlag: number;
@@ -2333,7 +2333,7 @@ declare interface ModifySubscribeAutoRenewFlagResponse {
 }
 
 declare interface ModifySubscribeNameRequest {
-  /** 数据订阅实例的ID */
+  /** 数据订阅实例的ID，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。 */
   SubscribeId: string;
   /** 修改后的数据订阅实例的名称，长度限制为[1,60] */
   SubscribeName: string;
@@ -2345,11 +2345,11 @@ declare interface ModifySubscribeNameResponse {
 }
 
 declare interface ModifySubscribeObjectsRequest {
-  /** 数据订阅实例的ID */
+  /** 数据订阅实例的ID，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。 */
   SubscribeId: string;
   /** 数据订阅的类型，非mongo任务的枚举值：0-全实例更新；1-数据更新；2-结构更新；3-数据更新+结构更新。mongo任务的枚举值：0-全实例更新；4-订阅单库；5-订阅单集合 */
   SubscribeObjectType: number;
-  /** 修改后的订阅数据库表信息。会覆盖原来的订阅对象，所以除非 SubscribeObjectType = 0或2，否则改字段必填。 */
+  /** 修改后的订阅数据库表信息。会覆盖原来的订阅对象，所以除非 SubscribeObjectType = 0或2，否则该字段必填。 */
   Objects?: ModifiedSubscribeObject[];
   /** kafka分区策略。如果不填，默认不修改。如果填了，会覆盖原来的策略。 */
   DistributeRules?: DistributeRule[];
@@ -2399,7 +2399,7 @@ declare interface ModifySyncRateLimitResponse {
 }
 
 declare interface PauseMigrateJobRequest {
-  /** 数据迁移任务ID */
+  /** 数据迁移任务ID，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。 */
   JobId: string;
 }
 
@@ -2409,7 +2409,7 @@ declare interface PauseMigrateJobResponse {
 }
 
 declare interface PauseSyncJobRequest {
-  /** 同步任务id */
+  /** 同步任务id，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。 */
   JobId: string;
 }
 
@@ -2419,7 +2419,7 @@ declare interface PauseSyncJobResponse {
 }
 
 declare interface RecoverMigrateJobRequest {
-  /** 任务id */
+  /** 任务id，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。 */
   JobId: string;
 }
 
@@ -2429,7 +2429,7 @@ declare interface RecoverMigrateJobResponse {
 }
 
 declare interface RecoverSyncJobRequest {
-  /** 同步实例id（即标识一个同步作业），形如sync-werwfs23 */
+  /** 同步实例id（即标识一个同步作业），形如sync-werwfs23，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。 */
   JobId: string;
 }
 
@@ -2459,7 +2459,7 @@ declare interface ResetConsumerGroupOffsetResponse {
 }
 
 declare interface ResetSubscribeRequest {
-  /** 数据订阅实例的ID */
+  /** 数据订阅实例的ID，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。 */
   SubscribeId: string;
 }
 
@@ -2503,7 +2503,7 @@ declare interface ResumeMigrateJobResponse {
 }
 
 declare interface ResumeSubscribeRequest {
-  /** 数据订阅实例的 ID */
+  /** 数据订阅实例的 ID，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。 */
   SubscribeId: string;
 }
 
@@ -2513,7 +2513,7 @@ declare interface ResumeSubscribeResponse {
 }
 
 declare interface ResumeSyncJobRequest {
-  /** 同步任务id */
+  /** 同步任务id，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。 */
   JobId: string;
 }
 
@@ -2573,7 +2573,7 @@ declare interface StartMigrateJobResponse {
 }
 
 declare interface StartModifySyncJobRequest {
-  /** 同步任务id */
+  /** 同步任务id，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。 */
   JobId: string;
 }
 
@@ -2583,7 +2583,7 @@ declare interface StartModifySyncJobResponse {
 }
 
 declare interface StartSubscribeRequest {
-  /** 数据订阅实例的 ID */
+  /** 数据订阅实例的 ID，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。 */
   SubscribeId: string;
 }
 
@@ -2627,7 +2627,7 @@ declare interface StopMigrateJobResponse {
 }
 
 declare interface StopSyncJobRequest {
-  /** 同步任务id */
+  /** 同步任务id，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。 */
   JobId: string;
 }
 
@@ -2910,7 +2910,7 @@ declare namespace V20180330 {
   }
 
   interface CompleteMigrateJobRequest {
-    /** 数据迁移任务ID */
+    /** 数据迁移任务ID，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。 */
     JobId: string;
     /** 完成任务的方式,仅支持旧版MySQL迁移任务。waitForSync-等待主从差距为0才停止,immediately-立即完成，不会等待主从差距一致。默认为waitForSync */
     CompleteMode?: string;
@@ -3290,7 +3290,7 @@ declare namespace V20180330 {
   }
 
   interface StartMigrateJobRequest {
-    /** 数据迁移任务ID */
+    /** 数据迁移任务ID，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。 */
     JobId: string;
   }
 
@@ -3329,7 +3329,7 @@ declare interface Dts {
   CreateCompareTask(data: CreateCompareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCompareTaskResponse>;
   /** 创建消费组 {@link CreateConsumerGroupRequest} {@link CreateConsumerGroupResponse} */
   CreateConsumerGroup(data: CreateConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerGroupResponse>;
-  /** 校验迁移任务 {@link CreateMigrateCheckJobRequest} {@link CreateMigrateCheckJobResponse} */
+  /** 创建校验迁移任务 {@link CreateMigrateCheckJobRequest} {@link CreateMigrateCheckJobResponse} */
   CreateMigrateCheckJob(data: CreateMigrateCheckJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMigrateCheckJobResponse>;
   /** 购买迁移任务 {@link CreateMigrationServiceRequest} {@link CreateMigrationServiceResponse} */
   CreateMigrationService(data: CreateMigrationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMigrationServiceResponse>;

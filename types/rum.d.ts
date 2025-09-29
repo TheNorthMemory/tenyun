@@ -1437,7 +1437,7 @@ declare interface DescribeReleaseFileSignRequest {
   Timeout?: number;
   /** bucket类型，不填默认1:web，2:app */
   FileType?: number;
-  /** 获取临时签名的bucket是国内站还是国际站（1表示国际站，其它表示国内站） */
+  /** 获取临时签名的bucket是境内还是境外（1表示境外，其它表示境内） */
   Site?: number;
   /** ProjectID */
   ID?: number;

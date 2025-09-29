@@ -152,6 +152,8 @@ declare interface DescribeAccountGroupsData {
   LatestSyncResult?: string;
   /** 最新一次同步任务的结束时间 */
   LatestSyncTime?: string;
+  /** 分组名称数组 */
+  NamePathArr?: string[];
 }
 
 /** 账户分组详情响应数据 */

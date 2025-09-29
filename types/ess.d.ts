@@ -1060,7 +1060,7 @@ declare interface MiniAppCreateFlowOption {
   NeedCreateReview?: boolean;
   /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议 3 :文书效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
   FlowDisplayType?: number;
-  /** 小程序集成发起，是否禁止发起时修改合同内容false：默认值，不禁止发起时修改合同内容true：禁止发起时修改合同内容 */
+  /** 小程序集成发起，是否禁止发起时修改合同内容false：默认值，不禁止发起时修改合同内容true：禁止发起时修改合同内容（将直接跳过添加/编辑签署人步骤，直接到核对合同信息页面指定为true，效果如下：效果如下:![ForbidEditFlow](https://qcloudimg.tencent-cloud.cn/raw/2440eca624f2f6730fecbf69daad0533.jpg) */
   ForbidEditFlow?: boolean;
 }
 
@@ -1122,6 +1122,14 @@ declare interface OccupiedSeal {
   SubSealName?: string;
   /** 印章描述 */
   SealDescription?: string;
+}
+
+/** 业务逻辑个性化配置字段，默认不传注: `配置前请联系对接的客户经理沟通确认。` */
+declare interface Option {
+  /** 个性化配置参数Key字段，对应传入字段的字段名 */
+  Key: string;
+  /** 个性化配置参数Value字段，对应传入字段的字段值 */
+  Value: string;
 }
 
 /** 企业套餐余额情况 */
@@ -3211,11 +3219,17 @@ declare interface CreateSealPolicyRequest {
   Policy?: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
+  /** 个性化配置字段，默认不传。 */
+  Options?: Option[];
 }
 
 declare interface CreateSealPolicyResponse {
   /** 最终授权成功的用户ID，在腾讯电子签平台的唯一身份标识，为32位字符串。可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查看某位员工的UserId(在页面中展示为用户ID)。 */
   UserIds?: string[];
+  /** 人脸验证操作人链接，用法可以参考"[跳转电子签小程序配置](https://qian.tencent.com/developers/company/openwxminiprogram/)"，默认为空。 */
+  SealOperatorVerifyPath?: string;
+  /** 人脸验证操作人二维码链接，扫码后会跳转到腾讯电子签小程序进行人脸验证，默认为空。 */
+  SealOperatorVerifyQrcodeUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3257,11 +3271,17 @@ declare interface CreateSealRequest {
   TaxIdentifyCode?: string;
   /** 印章描述内容 */
   SealDescription?: string;
+  /** 个性化配置字段，默认不传。 */
+  Options?: Option[];
 }
 
 declare interface CreateSealResponse {
   /** 电子印章ID，为32位字符串。建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。可登录腾讯电子签控制台，在 "印章"->"印章中心"选择查看的印章，在"印章详情" 中查看某个印章的SealId(在页面中展示为印章ID)。 */
   SealId?: string;
+  /** 人脸验证操作人链接，用法可以参考"[跳转电子签小程序配置](https://qian.tencent.com/developers/company/openwxminiprogram/)"，默认为空。 */
+  SealOperatorVerifyPath?: string;
+  /** 人脸验证操作人二维码链接，扫码后会跳转到腾讯电子签小程序进行人脸验证，默认为空。 */
+  SealOperatorVerifyQrcodeUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4387,9 +4407,15 @@ declare interface OperateSealsRequest {
   Act?: number;
   /** 需要操作的印章ID，数组形式，印章ID可从【web控制台->印章 】获取。 */
   SealIds?: string[];
+  /** 个性化配置字段，默认不传。 */
+  Options?: Option[];
 }
 
 declare interface OperateSealsResponse {
+  /** 人脸验证操作人链接，用法可以参考"[跳转电子签小程序配置](https://qian.tencent.com/developers/company/openwxminiprogram/)"，默认为空。 */
+  SealOperatorVerifyPath?: string;
+  /** 人脸验证操作人二维码链接，扫码后会跳转到腾讯电子签小程序进行人脸验证，默认为空。 */
+  SealOperatorVerifyQrcodeUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

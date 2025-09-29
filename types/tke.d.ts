@@ -1023,7 +1023,7 @@ declare namespace V20180525 {
     Bucket?: string;
     /** 对象存储桶路径 */
     Path?: string;
-    /** 存储仓库状态 */
+    /** 存储仓库状态- Available: 可用- Unavailable: 不可用 */
     State?: string;
     /** 详细状态信息 */
     Message?: string;
@@ -1147,7 +1147,7 @@ declare namespace V20180525 {
     IsNonStaticIpMode?: boolean;
     /** 集群的网络代理模型，目前tke集群支持的网络代理模式有三种：iptables,ipvs,ipvs-bpf，此参数仅在使用ipvs-bpf模式时使用，三种网络模式的参数设置关系如下：iptables模式：IPVS和KubeProxyMode都不设置ipvs模式: 设置IPVS为true, KubeProxyMode不设置ipvs-bpf模式: 设置KubeProxyMode为kube-proxy-bpf使用ipvs-bpf的网络模式需要满足以下条件：1. 集群版本必须为1.14及以上；2. 系统镜像必须是: Tencent Linux 2.4； */
     KubeProxyMode?: string;
-    /** 集群网络类型。包括GR（全局路由）和VPC-CNI两种模式，默认为GR。 */
+    /** 集群网络类型，默认为GR。- GR: 全局路由- VPC-CNI: VPC-CNI模式- CiliumOverlay: CiliumOverlay模式 */
     NetworkType?: string;
     /** 集群中节点NodeName类型（包括 hostname,lan-ip两种形式，默认为lan-ip。如果开启了hostname模式，创建节点时需要设置HostName参数，并且InstanceName需要和HostName一致） */
     NodeNameType?: string;
@@ -2169,7 +2169,7 @@ declare namespace V20180525 {
 
   /** kms加密参数 */
   interface KMSConfiguration {
-    /** kms id */
+    /** kms id，可以在密钥管理控制台获取 */
     KeyId?: string;
     /** kms 地域 */
     KmsRegion?: string;
@@ -3097,7 +3097,7 @@ declare namespace V20180525 {
     RegionName?: string;
     /** 地域ID */
     RegionId?: number;
-    /** 地域状态 */
+    /** 地域状态\n- alluser: 所有用户可见 */
     Status?: string;
     /** 地域特性开关(按照JSON的形式返回所有属性) */
     FeatureGates?: string;
@@ -3585,7 +3585,7 @@ declare namespace V20180525 {
     Name?: string;
     /** 版本信息 */
     Version?: string;
-    /** Remark */
+    /** 备注 */
     Remark?: string;
   }
 
@@ -5673,7 +5673,7 @@ declare namespace V20180525 {
   }
 
   interface DescribeEncryptionStatusResponse {
-    /** 加密状态 */
+    /** 加密状态- Opening: 开启中- Opened: 已开启- Closing: 关闭中- Closed: 已关闭 */
     Status?: string;
     /** 加密错误信息 */
     ErrorMsg?: string;

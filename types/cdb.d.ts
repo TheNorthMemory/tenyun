@@ -614,7 +614,7 @@ declare interface ClusterNodeInfo {
   Status?: string;
 }
 
-/** 集群版的节点拓扑配置。 */
+/** 云盘版的节点拓扑配置。 */
 declare interface ClusterTopology {
   /** RW 节点拓扑。说明：NodeId 可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 获取。 */
   ReadWriteNode?: ReadWriteNode;
@@ -1402,21 +1402,21 @@ declare interface ProxyNodeCustom {
   Zone: string;
 }
 
-/** 集群版 RW 节点的配置。 */
+/** 云盘版 RW 节点的配置。 */
 declare interface ReadWriteNode {
   /** RW 节点所在可用区。 */
   Zone: string;
-  /** 升级集群版实例时，如果要调整只读节点可用区，需要指定节点id。 */
+  /** 升级云盘版实例时，如果要调整只读节点可用区，需要指定节点 ID。 */
   NodeId?: string;
 }
 
-/** 集群版的 RO 节点配置。 */
+/** 云盘版的 RO 节点配置。 */
 declare interface ReadonlyNode {
   /** 是否分布在随机可用区。传入YES表示随机可用区。否则使用Zone指定的可用区。 */
   IsRandomZone?: string;
   /** 指定该节点分布在哪个可用区。 */
   Zone?: string;
-  /** 升级集群版实例时，如果要调整只读节点可用区，需要指定节点id。 */
+  /** 升级云盘版实例时，如果要调整只读节点可用区，需要指定节点 ID。 */
   NodeId?: string;
 }
 
@@ -3189,7 +3189,7 @@ declare interface DescribeBackupEncryptionStatusResponse {
 }
 
 declare interface DescribeBackupOverviewRequest {
-  /** 需要查询备份概览的云数据库产品类型。可取值为：mysql 指双节点/三节点的高可用实例，mysql-basic 指单节点云盘版实例，mysql-cluster 指云盘版（原集群版）实例。 */
+  /** 需要查询备份概览的云数据库产品类型。可取值为：mysql 指双节点/三节点的高可用实例，mysql-basic 指单节点（云盘）实例，mysql-cluster 指云盘版实例。 */
   Product: string;
 }
 
@@ -3213,7 +3213,7 @@ declare interface DescribeBackupOverviewResponse {
 }
 
 declare interface DescribeBackupSummariesRequest {
-  /** 需要查询备份实时统计的云数据库产品类型。可取值为：mysql 指双节点/三节点的高可用实例，mysql-basic 指单节点云盘版实例，mysql-cluster 指云盘版（原集群版）实例。 */
+  /** 需要查询备份实时统计的云数据库产品类型。可取值为：mysql 指双节点/三节点的高可用实例，mysql-basic 指单节点（云盘）实例，mysql-cluster 指云盘版实例。 */
   Product: string;
   /** 分页查询数据的偏移量，默认为0。 */
   Offset?: number;
@@ -3253,7 +3253,7 @@ declare interface DescribeBackupsResponse {
 }
 
 declare interface DescribeBinlogBackupOverviewRequest {
-  /** 需要查询日志备份概览的云数据库产品类型。可取值为：mysql 指双节点/三节点的高可用实例，mysql-basic 指单节点云盘版实例，mysql-cluster 指云盘版（原集群版）实例。 */
+  /** 需要查询日志备份概览的云数据库产品类型。可取值为：mysql 指双节点/三节点的高可用实例，mysql-basic 指单节点（云盘）实例，mysql-cluster 指云盘版实例。 */
   Product: string;
 }
 
@@ -3723,7 +3723,7 @@ declare interface DescribeDBSwitchRecordsResponse {
 }
 
 declare interface DescribeDataBackupOverviewRequest {
-  /** 需要查询数据备份概览的云数据库产品类型。可取值为：mysql 指双节点/三节点的高可用实例，mysql-basic 指单节点云盘版实例，mysql-cluster 指云盘版（原集群版）实例。 */
+  /** 需要查询数据备份概览的云数据库产品类型。可取值为：mysql 指双节点/三节点的高可用实例，mysql-basic 指单节点（云盘）实例，mysql-cluster 指云盘版实例。 */
   Product: string;
 }
 
@@ -4794,6 +4794,22 @@ declare interface ModifyDBInstanceLogToCLSResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDBInstanceModesRequest {
+  /** 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。 */
+  InstanceId: string;
+  /** 云数据库的模式，目前仅支持传入 "protectMode" 表示修改主从同步方式。 */
+  Mode: string;
+  /** 数据同步方式，可选值：0-异步复制，1-半同步复制，2-强同步复制。 */
+  ProtectMode?: number;
+}
+
+declare interface ModifyDBInstanceModesResponse {
+  /** 异步任务的请求ID，可使用此ID查询异步任务的执行结果。 */
+  AsyncRequestId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDBInstanceNameRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。 */
   InstanceId: string;
@@ -4837,7 +4853,7 @@ declare interface ModifyDBInstanceSecurityGroupsRequest {
   SecurityGroupIds: string[];
   /** 当传入只读实例 ID 时，默认操作的是对应只读组的安全组。如果需要操作只读实例 ID 的安全组， 需要将该入参置为 True。默认为 False。 */
   ForReadonlyInstance?: boolean;
-  /** 变更集群版实例只读组时，InstanceId 传实例 ID，需要额外指定该参数表示操作只读组。 如果操作读写节点则不需指定该参数。 */
+  /** 变更云盘版实例只读组时，InstanceId 传实例 ID，需要额外指定该参数表示操作只读组。 如果操作读写节点则不需指定该参数。 */
   OpResourceId?: string;
 }
 
@@ -5445,7 +5461,7 @@ declare interface UpgradeDBInstanceRequest {
   ZoneId?: string;
   /** 针对跨集群搬迁场景，选择同可用区RO的处理逻辑。together-同可用区RO跟随主实例迁移至目标可用区（默认选项），severally-同可用区RO保持原部署模式、不迁移至目标可用区。 */
   RoTransType?: string;
-  /** 集群版节点拓扑配置。 */
+  /** 云盘版节点拓扑配置。 */
   ClusterTopology?: ClusterTopology;
   /** 检查原地升级是否需要重启，1 检查， 0 不检查。如果值为1，检查为原地升级需要重启，则会停止升级并进行返回提示，如果为原地升级不重启，则正常执行升级流程。 */
   CheckFastUpgradeReboot?: number;
@@ -5739,6 +5755,8 @@ declare interface Cdb {
   ModifyCdbProxyParam(data: ModifyCdbProxyParamRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCdbProxyParamResponse>;
   /** 开启或关闭CDB日志投递CLS {@link ModifyDBInstanceLogToCLSRequest} {@link ModifyDBInstanceLogToCLSResponse} */
   ModifyDBInstanceLogToCLS(data: ModifyDBInstanceLogToCLSRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceLogToCLSResponse>;
+  /** 更改云数据库的模式 {@link ModifyDBInstanceModesRequest} {@link ModifyDBInstanceModesResponse} */
+  ModifyDBInstanceModes(data: ModifyDBInstanceModesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceModesResponse>;
   /** 修改云数据库实例名 {@link ModifyDBInstanceNameRequest} {@link ModifyDBInstanceNameResponse} */
   ModifyDBInstanceName(data: ModifyDBInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceNameResponse>;
   /** 修改云数据库实例的所属项目 {@link ModifyDBInstanceProjectRequest} {@link ModifyDBInstanceProjectResponse} */

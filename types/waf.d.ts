@@ -4724,6 +4724,8 @@ declare interface DescribeModuleStatusResponse {
   ApiProtection?: number;
   /** 限流模块开关 */
   RateLimit?: number;
+  /** gzip 开关 */
+  GzipAnalysis?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6067,6 +6069,8 @@ declare interface ModifyModuleStatusRequest {
   AntiLeakage?: number;
   /** 限流模块开关，0或1 */
   RateLimit?: number;
+  /** gzip 开关 */
+  GzipAnalysis?: number;
 }
 
 declare interface ModifyModuleStatusResponse {

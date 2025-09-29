@@ -876,6 +876,12 @@ declare interface ConfigGroupVersionInfo {
   CreateTime?: string;
 }
 
+/** 内容压缩配置。 */
+declare interface ContentCompressionParameters {
+  /** 内容压缩配置开关，取值有：on：开启；off：关闭。当 Switch 为 on 时，将同时支持 brotli 和 gzip 压缩算法。 */
+  Switch: string;
+}
+
 /** 内容标识符。该功能仅白名单开放。 */
 declare interface ContentIdentifier {
   /** 内容标识符 ID。 */
@@ -2184,6 +2190,16 @@ declare interface MultiPathGateway {
   NeedConfirm?: string;
 }
 
+/** 当前生效的回源 IP 网段。 */
+declare interface MultiPathGatewayCurrentOriginACL {
+  /** 回源 IP 网段详情。 */
+  EntireAddresses?: Addresses;
+  /** 版本号。 */
+  Version?: number;
+  /** 本参数用于记录当前版本生效前是否完成「我已更新至最新回源 IP 网段」的确认。取值有：true：已完成更新至最新回源 IP 的确认；false：未完成更新至最新回源 IP 的确认；注意：本参数返回 false 时，请及时确认您的源站防火墙配置是否已更新至最新的回源 IP 网段，以避免出现回源失败。 */
+  IsPlaned?: string;
+}
+
 /** 多通道安全网关线路信息 */
 declare interface MultiPathGatewayLine {
   /** 线路 ID ， 其中 line-0 和 line-1 为系统内置线路 ID，取值有: line-0：直连线路，不支持添加、编辑和删除； line-1： EdgeOne 四层代理线路，支持修改实例和规则，不支持删除； line-2 及以上：EdgeOne 四层代理线路或者自定义线路，支持修改、删除实例和规则。 */
@@ -2196,6 +2212,28 @@ declare interface MultiPathGatewayLine {
   ProxyId?: string;
   /** 转发规则 ID ，当线路类型 LineType 取值为 proxy（EdgeOne 四层代理）返回。 */
   RuleId?: string;
+}
+
+/** 当回源 IP 网段发生更新时，该字段会返回下一个版本将要生效的回源 IP 网段，包含与当前生效的回源 IP 网段的对比。 */
+declare interface MultiPathGatewayNextOriginACL {
+  /** 版本号。 */
+  Version?: number;
+  /** 回源 IP 网段详情。 */
+  EntireAddresses?: Addresses;
+  /** 最新回源 IP 网段相较于 MultiPathGatewayCurrentOrginACL 中回源 IP 网段新增的部分。 */
+  AddedAddresses?: Addresses;
+  /** 最新回源 IP 网段相较于 MultiPathGatewayCurrentOrginACL 中回源 IP 网段删减的部分。 */
+  RemovedAddresses?: Addresses;
+  /** 最新回源 IP 网段相较于 MultiPathGatewayCurrentOrginACL 中回源 IP 网段无变化的部分。 */
+  NoChangeAddresses?: Addresses;
+}
+
+/** 多通道网关示例实例与回源 IP 网段的绑定关系，以及回源 IP 网段详情。 */
+declare interface MultiPathGatewayOriginACLInfo {
+  /** 当前生效的回源 IP 网段。 */
+  MultiPathGatewayCurrentOriginACL?: MultiPathGatewayCurrentOriginACL;
+  /** 当回源 IP 网段发生更新时，该字段会返回下一个版本将要生效的回源 IP 网段，包含与当前回源 IP 网段的对比。无更新时该字段为空。 */
+  MultiPathGatewayNextOriginACL?: MultiPathGatewayNextOriginACL;
 }
 
 /** HTTPS 双向认证。 */
@@ -2452,6 +2490,12 @@ declare interface OriginProtectionInfo {
   PlanSupport?: boolean;
   /** 最新IP白名单与当前IP白名单的对比。 */
   DiffIPWhitelist?: DiffIPWhitelist | null;
+}
+
+/** 回源 HTTPS 配置参数。 */
+declare interface OriginPullProtocolParameters {
+  /** 回源协议配置，取值有：http：使用 HTTP 协议回源；https：使用 HTTPS 协议回源；follow：协议跟随。 */
+  Protocol?: string;
 }
 
 /** 源站组记录 */
@@ -2984,6 +3028,8 @@ declare interface RuleEngineAction {
   HostHeaderParameters?: HostHeaderParameters | null;
   /** 访问协议强制 HTTPS 跳转配置，当 Name 取值为 ForceRedirectHTTPS 时，该参数必填。 */
   ForceRedirectHTTPSParameters?: ForceRedirectHTTPSParameters | null;
+  /** 回源 HTTPS 配置参数，当 Name 取值为 OriginPullProtocol 时，该参数必填。 */
+  OriginPullProtocolParameters?: OriginPullProtocolParameters | null;
   /** 智能压缩配置，当 Name 取值为 Compression 时，该参数必填。 */
   CompressionParameters?: CompressionParameters | null;
   /** HSTS 配置参数，当 Name 取值为 HSTS 时，该参数必填。 */
@@ -3022,6 +3068,8 @@ declare interface RuleEngineAction {
   SetContentIdentifierParameters?: SetContentIdentifierParameters | null;
   /** Vary 特性配置参数，当 Name 取值为 Vary 时，该参数必填。 */
   VaryParameters?: VaryParameters;
+  /** 内容压缩配置参数，当 Name 取值为 ContentCompression 时，该参数必填。该参数为白名单功能，如有需要，请联系腾讯云工程师处理。 */
+  ContentCompressionParameters?: ContentCompressionParameters;
 }
 
 /** 规则引擎规则详情。 */
@@ -3916,6 +3964,20 @@ declare interface CheckCnameStatusRequest {
 declare interface CheckCnameStatusResponse {
   /** 加速域名 CNAME 状态信息列表。 */
   CnameStatus?: CnameStatus[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ConfirmMultiPathGatewayOriginACLRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 网关 ID。 */
+  GatewayId: string;
+  /** 回源 IP 版本号。 */
+  OriginACLVersion: number;
+}
+
+declare interface ConfirmMultiPathGatewayOriginACLResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5558,6 +5620,20 @@ declare interface DescribeMultiPathGatewayLineResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMultiPathGatewayOriginACLRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 网关 ID。 */
+  GatewayId: string;
+}
+
+declare interface DescribeMultiPathGatewayOriginACLResponse {
+  /** 多通道网关实例与回源 IP 网段的绑定关系详情。 */
+  MultiPathGatewayOriginACLInfo?: MultiPathGatewayOriginACLInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeMultiPathGatewayRegionsRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -6852,6 +6928,20 @@ declare interface ModifyMultiPathGatewaySecretKeyResponse {
   RequestId?: string;
 }
 
+declare interface ModifyMultiPathGatewayStatusRequest {
+  /** 网关 ID。 */
+  GatewayId: string;
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 修改网关的启用停用状态，取值有： offline：停用； online：启用。 */
+  GatewayStatus?: string;
+}
+
+declare interface ModifyMultiPathGatewayStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyOriginACLRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -7439,6 +7529,8 @@ declare interface Teo {
   BindZoneToPlan(data: BindZoneToPlanRequest, config?: AxiosRequestConfig): AxiosPromise<BindZoneToPlanResponse>;
   /** 校验域名 CNAME 状态 {@link CheckCnameStatusRequest} {@link CheckCnameStatusResponse} */
   CheckCnameStatus(data: CheckCnameStatusRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCnameStatusResponse>;
+  /** 确认多通道安全加速网关回源 IP 网段更新 {@link ConfirmMultiPathGatewayOriginACLRequest} {@link ConfirmMultiPathGatewayOriginACLResponse} */
+  ConfirmMultiPathGatewayOriginACL(data: ConfirmMultiPathGatewayOriginACLRequest, config?: AxiosRequestConfig): AxiosPromise<ConfirmMultiPathGatewayOriginACLResponse>;
   /** 确认回源 IP 网段更新 {@link ConfirmOriginACLUpdateRequest} {@link ConfirmOriginACLUpdateResponse} */
   ConfirmOriginACLUpdate(data: ConfirmOriginACLUpdateRequest, config?: AxiosRequestConfig): AxiosPromise<ConfirmOriginACLUpdateResponse>;
   /** 创建加速域名 {@link CreateAccelerationDomainRequest} {@link CreateAccelerationDomainResponse} */
@@ -7629,6 +7721,8 @@ declare interface Teo {
   DescribeMultiPathGateway(data: DescribeMultiPathGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMultiPathGatewayResponse>;
   /** 查询多通道安全加速网关线路详情 {@link DescribeMultiPathGatewayLineRequest} {@link DescribeMultiPathGatewayLineResponse} */
   DescribeMultiPathGatewayLine(data: DescribeMultiPathGatewayLineRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMultiPathGatewayLineResponse>;
+  /** 查询多通道安全加速网关源站防护详情 {@link DescribeMultiPathGatewayOriginACLRequest} {@link DescribeMultiPathGatewayOriginACLResponse} */
+  DescribeMultiPathGatewayOriginACL(data: DescribeMultiPathGatewayOriginACLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMultiPathGatewayOriginACLResponse>;
   /** 查询多通道安全加速网关可用地域列表 {@link DescribeMultiPathGatewayRegionsRequest} {@link DescribeMultiPathGatewayRegionsResponse} */
   DescribeMultiPathGatewayRegions(data: DescribeMultiPathGatewayRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMultiPathGatewayRegionsResponse>;
   /** 查询多通道安全加速网关接入密钥 {@link DescribeMultiPathGatewaySecretKeyRequest} {@link DescribeMultiPathGatewaySecretKeyResponse} */
@@ -7773,6 +7867,8 @@ declare interface Teo {
   ModifyMultiPathGatewayLine(data: ModifyMultiPathGatewayLineRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMultiPathGatewayLineResponse>;
   /** 修改多通道安全加速网关接入密钥 {@link ModifyMultiPathGatewaySecretKeyRequest} {@link ModifyMultiPathGatewaySecretKeyResponse} */
   ModifyMultiPathGatewaySecretKey(data: ModifyMultiPathGatewaySecretKeyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMultiPathGatewaySecretKeyResponse>;
+  /** 修改多通道安全加速网关状态 {@link ModifyMultiPathGatewayStatusRequest} {@link ModifyMultiPathGatewayStatusResponse} */
+  ModifyMultiPathGatewayStatus(data: ModifyMultiPathGatewayStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMultiPathGatewayStatusResponse>;
   /** 变更源站防护实例 {@link ModifyOriginACLRequest} {@link ModifyOriginACLResponse} */
   ModifyOriginACL(data: ModifyOriginACLRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOriginACLResponse>;
   /** 修改源站组 {@link ModifyOriginGroupRequest} {@link ModifyOriginGroupResponse} */
