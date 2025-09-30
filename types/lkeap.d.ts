@@ -475,7 +475,7 @@ declare interface GetCharacterUsageResponse {
 }
 
 declare interface GetEmbeddingRequest {
-  /** 说明：选择生成向量的模型备注：可选[lke-text-embedding-v1,lke-text-embedding-v2] */
+  /** 说明：选择生成向量的模型备注：可选[lke-text-embedding-v1,lke-text-embedding-v2,youtu-embedding-llm-v1] */
   Model: string;
   /** 说明：需要 embedding 的文本备注：单条query最多2000个字符，总条数最多7条 */
   Inputs: string[];

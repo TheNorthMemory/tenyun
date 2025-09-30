@@ -234,6 +234,10 @@ declare interface AddOnSubtitle {
   Subtitle?: MediaInputInfo | null;
   /** 字幕名称	。注意：仅支持中文、英文、数字、空格、下划线(_)、短横线(-)、句点(.)和中英文括号，长度不能超过64个字符。 */
   SubtitleName?: string | null;
+  /** 字幕输出格式。取值{"WebVTT","TTML"}。默认值："WebVTT" */
+  OutputFormat?: string;
+  /** 默认字幕轨道。为true时指定当前字幕为默认字幕轨道，最多可指定1条默认字幕轨道。默认值：false */
+  DefaultTrack?: boolean;
 }
 
 /** 智能分析结果 */
@@ -4728,7 +4732,7 @@ declare interface QualityControlItemConfig {
 
 /** 质检异常项。 */
 declare interface QualityControlResult {
-  /** 异常类型，取值范围：Jitter：抖动，Blur：模糊，LowLighting：低光照，HighLighting：过曝，CrashScreen：花屏，BlackWhiteEdge：黑白边，SolidColorScreen：纯色屏，Noise：噪点，Mosaic：马赛克，QRCode：二维码，AppletCode：小程序码，BarCode：条形码，LowVoice：低音，HighVoice：爆音，NoVoice：静音，LowEvaluation：无参考打分低于阈值。 */
+  /** 异常类型，取值范围：Jitter：抖动，Blur：模糊，LowLighting：低光照，HighLighting：过曝，CrashScreen：花屏，BlackWhiteEdge：黑白边，SolidColorScreen：纯色屏，Noise：噪点，Mosaic：马赛克，QRCode：二维码，AppletCode：小程序码，BarCode：条形码，LowVoice：低音，HighVoice：爆音，NoVoice：静音，LowEvaluation：视频无参考评分（MOS）低于阈值，AudioEvaluation：音频无参考评分（MOS）低于阈值，AudioNoise：音频噪声。 */
   Type?: string;
   /** 质检结果项。 */
   QualityControlItems?: QualityControlItem[];
@@ -8041,8 +8045,10 @@ declare interface DescribeTaskDetailResponse {
 }
 
 declare interface DescribeTasksRequest {
-  /** 过滤条件：任务状态，可选值：WAITING（等待中）、PROCESSING（处理中）、FINISH（已完成）。 */
+  /** 任务状态过滤条件，可选值：- WAITING（等待中）- PROCESSING（处理中）- FINISH（已完成）。 */
   Status: string;
+  /** 任务结束时子任务是否有失败。 */
+  SubTaskHasFailed?: boolean;
   /** 返回记录条数，默认值：10，最大值：100。 */
   Limit?: number;
   /** 翻页标识，分批拉取时使用：当单次请求无法拉取所有数据，接口将会返回 ScrollToken，下一次请求携带该 Token，将会从下一条记录开始获取。 */

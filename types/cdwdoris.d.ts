@@ -344,11 +344,11 @@ declare interface InstanceDetail {
 
 /** 实例描述信息 */
 declare interface InstanceInfo {
-  /** 集群实例ID, "cdw-xxxx" 字符串类型 */
+  /** 集群实例ID, "cdwdoris-xxxx" 字符串类型 */
   InstanceId?: string;
   /** 集群实例名称 */
   InstanceName?: string;
-  /** 状态,Init 创建中; Serving 运行中； Deleted已销毁；Deleting 销毁中；Modify 集群变更中； */
+  /** 状态,Init 创建中Serving 运行中Isolated 已隔离Changing 变更中 */
   Status?: string;
   /** 版本 */
   Version?: string;
@@ -380,7 +380,7 @@ declare interface InstanceInfo {
   Id?: number;
   /** regionId, 表示地域 */
   RegionId?: number;
-  /** 可用区说明，例如 "广州二区" */
+  /** 可用区说明，例如 "广州三区" */
   ZoneDesc?: string;
   /** 错误流程说明信息 */
   FlowMsg?: string;
@@ -454,6 +454,10 @@ declare interface InstanceInfo {
   CosStorageSize?: number;
   /** 存算分离的指标 当是true 不支持新建计算组 */
   IsMasterNonVM?: boolean;
+  /** Cos容量包大小 */
+  CosPkgCapacity?: number;
+  /** 集群是否使用托管桶 */
+  UseManagedBucket?: boolean;
 }
 
 /** 实例节点描述信息 */
@@ -1496,7 +1500,7 @@ declare interface DescribeInstanceStateRequest {
 }
 
 declare interface DescribeInstanceStateResponse {
-  /** 集群状态，例如：Serving */
+  /** 集群状态 Init 创建中 Serving 运行中 Isolated 已隔离 Changing 变更中 */
   InstanceState?: string;
   /** 集群操作创建时间 */
   FlowCreateTime?: string;

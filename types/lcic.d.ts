@@ -605,7 +605,7 @@ declare interface BatchCreateGroupWithMembersResponse {
 declare interface BatchCreateRoomRequest {
   /** 低代码平台的SdkAppId。 */
   SdkAppId: number;
-  /** 创建课堂ID列表 */
+  /** 批量创建课堂的配置信息 */
   RoomInfos: RoomInfo[];
 }
 
