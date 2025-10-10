@@ -242,7 +242,7 @@ declare interface AddOnSubtitle {
 
 /** 智能分析结果 */
 declare interface AiAnalysisResult {
-  /** 任务的类型，可以取的值有：Classification：智能分类Cover：智能封面Tag：智能标签FrameTag：智能按帧标签Highlight：智能精彩集锦DeLogo：智能擦除Description：大模型摘要Dubbing：智能译制 */
+  /** 任务的类型，可以取的值有：Classification：智能分类Cover：智能封面Tag：智能标签FrameTag：智能按帧标签Highlight：智能精彩集锦DeLogo：智能擦除Description：大模型摘要Dubbing：智能译制VideoRemake: 视频去重 */
   Type?: string;
   /** 视频内容分析智能分类任务的查询结果，当任务类型为 Classification 时有效。 */
   ClassificationTask?: AiAnalysisTaskClassificationResult | null;
@@ -266,6 +266,8 @@ declare interface AiAnalysisResult {
   HorizontalToVerticalTask?: AiAnalysisTaskHorizontalToVerticalResult | null;
   /** 视频内容分析译制任务的查询结果，当任务类型为 Dubbing 时有效。 */
   DubbingTask?: AiAnalysisTaskDubbingResult | null;
+  /** 视频内容分析去重任务的查询结果，当任务类型为 VideoRemake 时有效。 */
+  VideoRemakeTask?: AiAnalysisTaskVideoRemakeResult | null;
 }
 
 /** 智能分类任务输入类型 */
@@ -596,6 +598,34 @@ declare interface AiAnalysisTaskTagResult {
   Input?: AiAnalysisTaskTagInput;
   /** 智能标签任务输出。 */
   Output?: AiAnalysisTaskTagOutput | null;
+}
+
+/** 视频去重任务输入类型 */
+declare interface AiAnalysisTaskVideoRemakeInput {
+  /** 视频智能去重模板 ID */
+  Definition?: number;
+}
+
+/** 视频去重结果信息 */
+declare interface AiAnalysisTaskVideoRemakeOutput {
+  /** 视频智能去重文件路径 */
+  Path?: string;
+  /** 智能视频去重的存储位置 */
+  OutputStorage?: TaskOutputStorage;
+}
+
+/** 视频去重结果数据结构 */
+declare interface AiAnalysisTaskVideoRemakeResult {
+  /** 任务状态，有 `PROCESSING`，`SUCCESS` 和 `FAIL` 三种 */
+  Status?: string;
+  /** 错误码，0：成功，其他值：失败 */
+  ErrCode?: number;
+  /** 错误信息 */
+  Message?: string;
+  /** 去重任务输入 */
+  Input?: AiAnalysisTaskVideoRemakeInput;
+  /** 去重任务输出 */
+  Output?: AiAnalysisTaskVideoRemakeOutput | null;
 }
 
 /** 内容审核结果 */
@@ -5380,9 +5410,9 @@ declare interface SmartEraseWatermarkConfig {
   WatermarkEraseMethod: string;
   /** 水印擦除模型。基础版：效果一般，性价比高，适合动画或背景较干净的视频。高级版：效果更好，适合短剧等现实风格视频。- basic 基础版- advanced 高级版 */
   WatermarkModel: string;
-  /** 自动擦除自定义区域。对选定区域，利用AI模型自动检测其中存在的擦除目标并擦除。注意，当擦除方式为custom时，此参数将不会生效。 */
+  /** 自动擦除自定义区域。对选定区域，利用AI模型自动检测其中存在的擦除目标并擦除。注意，当擦除方式为custom时，此参数将不会生效。修改模板时，清除区域请传入[]，不传时将保持模板区域信息不变。 */
   AutoAreas?: EraseArea[];
-  /** 指定擦除自定义区域。对选定区域，在选定时间段内不进行检测识别直接进行擦除。 */
+  /** 指定擦除自定义区域。对选定区域，在选定时间段内不进行检测识别直接进行擦除。注意：修改模板时，清除区域请传入[]，不传时将保持模板区域信息不变。 */
   CustomAreas?: EraseTimeArea[];
 }
 
@@ -8860,6 +8890,8 @@ declare interface ParseNotificationResponse {
   Timestamp?: number;
   /** 事件通知安全签名 Sign = MD5（Timestamp + NotifyKey）。说明：媒体处理把Timestamp 和 TaskNotifyConfig 里面的NotifyKey 进行字符串拼接后通过 MD5 计算得出 Sign 值，并将其放在通知消息里，您的后台服务器在收到通知消息后可以根据同样的算法确认 Sign 是否正确，进而确认消息是否确实来自媒体处理后台。 */
   Sign?: string;
+  /** 批量处理任务信息，仅当 EventType 为 BatchTask，该字段有值。 */
+  BatchTaskEvent?: BatchSubTaskResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -80,7 +80,7 @@ declare interface VoiceTypeInfo {
   VoiceName?: string;
   /** 音色性别: 1-male 2-female */
   VoiceGender?: number;
-  /** 复刻类型: 0-轻量版复刻 1-基础版复刻 */
+  /** 复刻类型: 1-基础版复刻 */
   TaskType?: number;
   /** 复刻任务 ID */
   TaskID?: string;
@@ -139,11 +139,11 @@ declare interface CreateVRSTaskRequest {
   SampleRate?: number;
   /** 音频格式，音频类型(wav,mp3,aac,m4a) */
   Codec?: string;
-  /** 回调 URL，用户自行搭建的用于接收结果的服务URL。如果用户使用轮询方式获取识别结果，则无需提交该参数。（注意：回调方式目前仅支持轻量版声音复刻）回调采用POST请求方式，Content-Type为application/json，回调数据格式如下:{"TaskId":"xxxxxxxxxxxxxx","Status":2,"StatusStr":"success","VoiceType":xxxxx,"ErrorMsg":""} */
+  /** 回调 URL，用户自行搭建的用于接收结果的服务URL。如果用户使用轮询方式获取识别结果，则无需提交该参数。（注意：回调方式暂不支持一句话版声音复刻）回调采用POST请求方式，Content-Type为application/json，回调数据格式如下:{"TaskId":"xxxxxxxxxxxxxx","Status":2,"StatusStr":"success","VoiceType":xxxxx,"ErrorMsg":""} */
   CallbackUrl?: string;
   /** 模型类型 1:在线 2:离线 默认为1 */
   ModelType?: number;
-  /** 复刻类型。0 - 轻量版声音复刻（默认）；5 - 一句话声音复刻。 */
+  /** 复刻类型。5 - 一句话声音复刻。 */
   TaskType?: number;
   /** 校验音频ID。（仅基础版声音复刻使用） */
   VPRAudioId?: string;
@@ -181,7 +181,7 @@ declare interface DetectEnvAndSoundQualityRequest {
   Codec?: string;
   /** 音频采样率。16000：16k（默认）；24000：24k（仅一句话声音复刻支持）；48000：48k（仅一句话声音复刻支持）。 */
   SampleRate?: number;
-  /** 复刻类型。0 - 轻量版声音复刻（默认）;5 - 一句话声音复刻。 */
+  /** 复刻类型。5 - 一句话声音复刻。 */
   TaskType?: number;
 }
 
@@ -205,7 +205,7 @@ declare interface DownloadVRSModelResponse {
 }
 
 declare interface GetTrainingTextRequest {
-  /** 复刻类型。0 - 轻量版声音复刻（默认）;5 - 一句话声音复刻。 */
+  /** 复刻类型。5 - 一句话声音复刻。 */
   TaskType?: number;
   /** 音色场景。（仅支持一句话声音复刻，其余复刻类型不生效） 0 - 通用场景（默认）； 1 - 聊天场景； 2 - 阅读场景； 3 - 资讯播报场景。 */
   Domain?: number;

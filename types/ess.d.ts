@@ -1512,6 +1512,26 @@ declare interface SignUrl {
   HttpSignUrl?: string;
 }
 
+/** 单点登录企业员工信息。 */
+declare interface SingleSignOnEmployees {
+  /** 用户在idp分配的唯一值，需要保持跟在电子签应用集成->单点登录配置->端点配置中配置的。如下图配置![image](https://qcloudimg.tencent-cloud.cn/raw/6ff22248c930b2a7684322cac9401a9c.png)。 */
+  OpenId: string;
+  /** 企业员工姓名。 员工的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。 */
+  Name: string;
+  /** 用户手机号码， 支持中国大陆手机号11位数字(无需加+86前缀或其他字符)。 */
+  Mobile: string;
+  /** 员工在腾讯电子签平台的唯一身份标识，为32位字符串。注：`创建和更新场景无需填写。` */
+  UserId?: string;
+  /** 用户邮箱。 */
+  Email?: string;
+  /** 员工角色信息。此处roleId为电子签配置的 RoleId，可通过接口[查询企业角色列表](https://qian.tencent.com/developers/companyApis/roles/DescribeIntegrationRoles) 获取 */
+  RoleIds?: string[];
+  /** 员工是否实名。 */
+  IsVerified?: boolean;
+  /** 员工创建时间戳，单位秒。 */
+  CreatedOn?: number;
+}
+
 /** 企业员工信息。 */
 declare interface Staff {
   /** 员工在腾讯电子签平台的唯一身份标识，为32位字符串。注：`创建和更新场景无需填写。` */
@@ -3286,6 +3306,26 @@ declare interface CreateSealResponse {
   RequestId?: string;
 }
 
+declare interface CreateSingleSignOnEmployeesRequest {
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 待创建员工的信息最多不超过200个。注意：1. 传递的 openId 不能重复， 且字符不能超过64位。2. 传递的手机号不能重复。3. 绑定的角色必须存在且不能超过 10 个。 */
+  Employees: SingleSignOnEmployees[];
+  /** 单点登录应用号的id,获取位置如下图![image](https://qcloudimg.tencent-cloud.cn/raw/9e61aaf390a5f90ea7606fe29b9a65fd.png) */
+  SsoApplicationId: string;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+}
+
+declare interface CreateSingleSignOnEmployeesResponse {
+  /** 导入员工返回的错误信息，信息数组的顺序跟导入的保持一致 */
+  ErrorMessages?: string[];
+  /** 导入员工返回的状态码0-全部成功1-部分成功2-全部失败 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateUserAutoSignEnableUrlRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -3552,6 +3592,22 @@ declare interface DeleteSealPoliciesRequest {
 }
 
 declare interface DeleteSealPoliciesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSingleSignOnEmployeesRequest {
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 单点登录应用号的id,获取位置如下图![image](https://qcloudimg.tencent-cloud.cn/raw/9e61aaf390a5f90ea7606fe29b9a65fd.png) */
+  SsoApplicationId: string;
+  /** 需要删除的单点登录员工的唯一Id 值 */
+  OpenId: string;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+}
+
+declare interface DeleteSingleSignOnEmployeesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4156,6 +4212,28 @@ declare interface DescribeSignFaceVideoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSingleSignOnEmployeesRequest {
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 单点登录应用号的id,获取位置如下图![image](https://qcloudimg.tencent-cloud.cn/raw/9e61aaf390a5f90ea7606fe29b9a65fd.png) */
+  SsoApplicationId: string;
+  /** 需要删除的单点登录员工的唯一Id 值.不能超过 200 个。如果传递了 openIds，limit 和 offset 参数无效， */
+  OpenIds?: string[];
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+  /** 指定分页每页返回的数据条数，单页最大支持 200。如果不传， 则默认是 20. */
+  Limit?: number;
+  /** OFFSET 用于指定查询结果的偏移量，如果不传默认偏移为0,最大20000。 分页参数, 需要limit, offset 配合使用 例如: 您希望得到第三页的数据, 且每页限制最多10条 您可以使用 LIMIT 10 OFFSET 20 */
+  Offset?: number;
+}
+
+declare interface DescribeSingleSignOnEmployeesResponse {
+  /** 单点登录企业员工信息 */
+  Employees?: SingleSignOnEmployees[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeThirdPartyAuthCodeRequest {
   /** 腾讯电子签小程序跳转客户企业小程序时携带的授权查看码，AuthCode由腾讯电子签小程序生成。 */
   AuthCode: string;
@@ -4394,6 +4472,22 @@ declare interface ModifyPartnerAutoSignAuthUrlResponse {
   MiniAppPath?: string;
   /** 链接过期时间以 Unix 时间戳格式表示，从生成链接时间起，往后7天有效期。过期后短链将失效，无法打开。 */
   ExpireTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySingleSignOnEmployeesRequest {
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 单点登录应用号的id,获取位置如下图![image](https://qcloudimg.tencent-cloud.cn/raw/9e61aaf390a5f90ea7606fe29b9a65fd.png) */
+  SsoApplicationId: string;
+  /** 待修改员工的信息。 */
+  Employee: SingleSignOnEmployees;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+}
+
+declare interface ModifySingleSignOnEmployeesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4713,6 +4807,8 @@ declare interface Ess {
   CreateSeal(data: CreateSealRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealResponse>;
   /** 创建企业员工印章授权 {@link CreateSealPolicyRequest} {@link CreateSealPolicyResponse} */
   CreateSealPolicy(data: CreateSealPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealPolicyResponse>;
+  /** 创建单点登录企业员工信息 {@link CreateSingleSignOnEmployeesRequest} {@link CreateSingleSignOnEmployeesResponse} */
+  CreateSingleSignOnEmployees(data: CreateSingleSignOnEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSingleSignOnEmployeesResponse>;
   /** 获取个人用户自动签的开通链接 {@link CreateUserAutoSignEnableUrlRequest} {@link CreateUserAutoSignEnableUrlResponse} */
   CreateUserAutoSignEnableUrl(data: CreateUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserAutoSignEnableUrlResponse>;
   /** 获取设置自动签印章小程序链接 {@link CreateUserAutoSignSealUrlRequest} {@link CreateUserAutoSignSealUrlResponse} */
@@ -4737,6 +4833,8 @@ declare interface Ess {
   DeleteOrganizationAuthorizations(data: DeleteOrganizationAuthorizationsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrganizationAuthorizationsResponse>;
   /** 撤销企业员工的印章授权 {@link DeleteSealPoliciesRequest} {@link DeleteSealPoliciesResponse} */
   DeleteSealPolicies(data: DeleteSealPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSealPoliciesResponse>;
+  /** 删除单点登录企业员工信息 {@link DeleteSingleSignOnEmployeesRequest} {@link DeleteSingleSignOnEmployeesResponse} */
+  DeleteSingleSignOnEmployees(data: DeleteSingleSignOnEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSingleSignOnEmployeesResponse>;
   /** 查询企业批量认证状态 {@link DescribeBatchOrganizationRegistrationTasksRequest} {@link DescribeBatchOrganizationRegistrationTasksResponse} */
   DescribeBatchOrganizationRegistrationTasks(data: DescribeBatchOrganizationRegistrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchOrganizationRegistrationTasksResponse>;
   /** 查询企业批量认证链接 {@link DescribeBatchOrganizationRegistrationUrlsRequest} {@link DescribeBatchOrganizationRegistrationUrlsResponse} */
@@ -4791,6 +4889,8 @@ declare interface Ess {
   DescribePersonCertificate(data: DescribePersonCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonCertificateResponse>;
   /** 查询H5签署认证人脸视频 {@link DescribeSignFaceVideoRequest} {@link DescribeSignFaceVideoResponse} */
   DescribeSignFaceVideo(data: DescribeSignFaceVideoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSignFaceVideoResponse>;
+  /** 查询单点登录企业员工信息 {@link DescribeSingleSignOnEmployeesRequest} {@link DescribeSingleSignOnEmployeesResponse} */
+  DescribeSingleSignOnEmployees(data: DescribeSingleSignOnEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSingleSignOnEmployeesResponse>;
   /** 通过AuthCode查询个人用户是否实名 {@link DescribeThirdPartyAuthCodeRequest} {@link DescribeThirdPartyAuthCodeResponse} */
   DescribeThirdPartyAuthCode(data: DescribeThirdPartyAuthCodeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeThirdPartyAuthCodeResponse>;
   /** 获取个人用户自动签的开通状态 {@link DescribeUserAutoSignStatusRequest} {@link DescribeUserAutoSignStatusResponse} */
@@ -4815,6 +4915,8 @@ declare interface Ess {
   ModifyIntegrationRole(data: ModifyIntegrationRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIntegrationRoleResponse>;
   /** 更新他方自动签授权链接 {@link ModifyPartnerAutoSignAuthUrlRequest} {@link ModifyPartnerAutoSignAuthUrlResponse} */
   ModifyPartnerAutoSignAuthUrl(data?: ModifyPartnerAutoSignAuthUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPartnerAutoSignAuthUrlResponse>;
+  /** 修改单点登录企业员工信息 {@link ModifySingleSignOnEmployeesRequest} {@link ModifySingleSignOnEmployeesResponse} */
+  ModifySingleSignOnEmployees(data: ModifySingleSignOnEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySingleSignOnEmployeesResponse>;
   /** 更新印章状态 {@link OperateSealsRequest} {@link OperateSealsResponse} */
   OperateSeals(data?: OperateSealsRequest, config?: AxiosRequestConfig): AxiosPromise<OperateSealsResponse>;
   /** 企业模板管理 {@link OperateTemplateRequest} {@link OperateTemplateResponse} */

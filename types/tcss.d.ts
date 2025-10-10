@@ -4492,6 +4492,16 @@ declare interface CreateCheckComponentResponse {
   RequestId?: string;
 }
 
+declare interface CreateClusterAccessRequest {
+  /** 集群ID */
+  ClusterIDs: string[];
+}
+
+declare interface CreateClusterAccessResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateClusterCheckTaskRequest {
   /** 指定要扫描的集群信息 */
   ClusterCheckTaskList: ClusterCheckTaskItem[];
@@ -10212,6 +10222,22 @@ declare interface ModifyContainerNetStatusResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDefendStatusRequest {
+  /** 开关是否开启 */
+  SwitchOn: boolean;
+  /** 实例类型 Cluster: 集群 Node: 节点 */
+  InstanceType: string;
+  /** 是否是全部实例 */
+  IsAll: boolean;
+  /** 实例id列表 */
+  InstanceIDs?: string[];
+}
+
+declare interface ModifyDefendStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyEscapeEventStatusRequest {
   /** 处理事件ids */
   EventIdSet: string[];
@@ -11017,6 +11043,8 @@ declare interface Tcss {
   CreateAssetImageVirusExportJob(data: CreateAssetImageVirusExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetImageVirusExportJobResponse>;
   /** 安装检查组件 {@link CreateCheckComponentRequest} {@link CreateCheckComponentResponse} */
   CreateCheckComponent(data: CreateCheckComponentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCheckComponentResponse>;
+  /** 创建集群接入 {@link CreateClusterAccessRequest} {@link CreateClusterAccessResponse} */
+  CreateClusterAccess(data: CreateClusterAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterAccessResponse>;
   /** 创建集群检查任务 {@link CreateClusterCheckTaskRequest} {@link CreateClusterCheckTaskResponse} */
   CreateClusterCheckTask(data: CreateClusterCheckTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterCheckTaskResponse>;
   /** 安全合规创建合规检查任务 {@link CreateComplianceTaskRequest} {@link CreateComplianceTaskResponse} */
@@ -11551,6 +11579,8 @@ declare interface Tcss {
   ModifyCompliancePeriodTask(data: ModifyCompliancePeriodTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCompliancePeriodTaskResponse>;
   /** 隔离容器网络状态 {@link ModifyContainerNetStatusRequest} {@link ModifyContainerNetStatusResponse} */
   ModifyContainerNetStatus(data: ModifyContainerNetStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContainerNetStatusResponse>;
+  /** 修改防护状态 {@link ModifyDefendStatusRequest} {@link ModifyDefendStatusResponse} */
+  ModifyDefendStatus(data: ModifyDefendStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDefendStatusResponse>;
   /** 修改容器逃逸扫描事件状态 {@link ModifyEscapeEventStatusRequest} {@link ModifyEscapeEventStatusResponse} */
   ModifyEscapeEventStatus(data: ModifyEscapeEventStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEscapeEventStatusResponse>;
   /** 修改容器逃逸扫描规则信息 {@link ModifyEscapeRuleRequest} {@link ModifyEscapeRuleResponse} */
