@@ -1617,7 +1617,7 @@ declare interface DescribeDBInstanceAttributeResponse {
 }
 
 declare interface DescribeDBInstanceHAConfigRequest {
-  /** 实例ID */
+  /** 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取 */
   DBInstanceId: string;
 }
 

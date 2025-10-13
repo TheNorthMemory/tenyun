@@ -1624,12 +1624,16 @@ declare interface MongoDBParam {
 
 /** MQTT连接源参数 */
 declare interface MqttConnectParam {
+  /** MQTT的连接port */
+  Port: number;
   /** MQTT连接源的用户名 */
   UserName: string;
   /** MQTT连接源的密码 */
   Password: string;
   /** MQTT连接源的实例资源 */
   Resource: string;
+  /** MQTT的连接ip */
+  ServiceVip: string;
   /** MQTT Instance vpc-id */
   UniqVpcId: string;
   /** 是否为自建集群 */
@@ -1638,6 +1642,8 @@ declare interface MqttConnectParam {
   IsUpdate?: boolean;
   /** MQTT连接源的实例资源地域, 跨地域时必填 */
   Region?: string;
+  /** IP */
+  Ip?: string;
 }
 
 /** 创建MQTT 为Source的Data Hub Task参数 */

@@ -3710,6 +3710,42 @@ declare interface DescribeCancelFlowsTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeContractComparisonTaskRequest {
+  /** 执行合同审查任务的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 合同对比任务ID，该参数通过调用接口CreateContractComparisonTask获取。 */
+  TaskId: string;
+}
+
+declare interface DescribeContractComparisonTaskResponse {
+  /** 合同对比任务ID。 */
+  TaskId?: string;
+  /** 合同对比任务状态。状态如下： **0**：待创建（未执行） **1**：对比中 **2**：对比成功 **3**：对比失败 */
+  Status?: number;
+  /** 对比失败的具体原因描述，仅当状态为失败时返回此字段。 */
+  Message?: string;
+  /** 原版文件ID，对比基准的旧版本文件唯一标识。 */
+  OriginalFileResourceId?: string;
+  /** 新版文件ID，与旧版进行对比的新版本文件唯一标识。 */
+  DiffFileResourceId?: string;
+  /** 对比任务备注，长度不能超过50个字符。 */
+  Comment?: string;
+  /** 合同对比差异点总数。 */
+  TotalDiffCount?: number;
+  /** 合同对比新增点数量。 */
+  AddDiffCount?: number;
+  /** 合同对比修改点数量。 */
+  ChangeDiffCount?: number;
+  /** 合同对比删除点数量。 */
+  DeleteDiffCount?: number;
+  /** 提交人，提交此任务或请求的用户唯一标识。 */
+  Operator?: string;
+  /** 合同对比任务创建时间，时间戳。 */
+  CreateTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeContractDiffTaskWebUrlRequest {
   /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -4845,6 +4881,8 @@ declare interface Ess {
   DescribeBillUsageDetail(data: DescribeBillUsageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillUsageDetailResponse>;
   /** 查询批量撤销签署流程任务结果 {@link DescribeCancelFlowsTaskRequest} {@link DescribeCancelFlowsTaskResponse} */
   DescribeCancelFlowsTask(data: DescribeCancelFlowsTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCancelFlowsTaskResponse>;
+  /** 查询合同对比任务结果 {@link DescribeContractComparisonTaskRequest} {@link DescribeContractComparisonTaskResponse} */
+  DescribeContractComparisonTask(data: DescribeContractComparisonTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractComparisonTaskResponse>;
   /** 获取合同对比结果web页面 {@link DescribeContractDiffTaskWebUrlRequest} {@link DescribeContractDiffTaskWebUrlResponse} */
   DescribeContractDiffTaskWebUrl(data: DescribeContractDiffTaskWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractDiffTaskWebUrlResponse>;
   /** 获取合同审查任务详情 {@link DescribeContractReviewTaskRequest} {@link DescribeContractReviewTaskResponse} */

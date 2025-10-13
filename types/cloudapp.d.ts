@@ -56,12 +56,22 @@ declare interface SaleParam {
   ParamKey: string;
   /** 售卖参数的展示名称 */
   ParamKeyName: string | null;
+  /** 参数 Id */
+  ParamId?: string;
+  /** 参数值 Id */
+  ParamValueId?: string;
   /** 售卖参数值，当ParamType=Quant时，该值有可能为Null */
   ParamValue?: string | null;
   /** 售卖参数值的展示名称 */
   ParamValueName?: string | null;
   /** 售卖参数的类型，目前支持枚举类Enum/数量类Quant */
   ParamType?: string | null;
+  /** 模块ID */
+  ModuleId?: string;
+  /** 模块key */
+  ModuleKey?: string;
+  /** 模块名称 */
+  ModuleName?: string;
 }
 
 declare interface DescribeLicenseRequest {

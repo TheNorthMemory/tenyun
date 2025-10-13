@@ -32,10 +32,16 @@ declare interface AccessPoint {
   Address?: string;
   /** 是否MACsec */
   IsMacSec?: boolean;
+  /** 版本号 */
+  Version?: string;
+  /** 接入点业务类型，枚举值：NORMAL-标准接入点，CDZ：EZ/CDZ接入点，COOPERATIVE-合作POP */
+  AccessPointServiceType?: string;
 }
 
 /** BFD配置信息 */
 declare interface BFDInfo {
+  /** 使能BFD多跳，0:未开启，2-255:BFD跳数 */
+  EnableBfdMultiHop?: number;
   /** 健康检查次数 */
   ProbeFailedTimes?: number;
   /** 健康检查间隔 */
@@ -102,6 +108,12 @@ declare interface CloudAttachInfo {
   BUpdateBandwidth?: boolean;
   /** 接入地域 */
   ArRegion?: string;
+  /** 运营商代码 */
+  IapCode?: string;
+  /** IDC侧类型。枚举值：CLOUD-云，ISP-运营商，OTHER-第三方 */
+  IdcPointType?: string;
+  /** 运营商链路是否有保护 */
+  BIapLinkProtected?: boolean;
 }
 
 /** 坐标，经维度描述 */
@@ -128,6 +140,10 @@ declare interface CreateCasInput {
   Remarks: string;
   /** 接入地域 */
   ArRegion?: string;
+  /** IDC侧类型，默认为OTHER。枚举值：CLOUD-云，ISP-运营商，OTHER-第三方 */
+  IdcPointType?: string;
+  /** 运营商链路是否有保护 */
+  BIapLinkProtected?: boolean;
 }
 
 /** 物理专线信息列表 */
@@ -176,6 +192,8 @@ declare interface DirectConnect {
   FaultReportContactPerson?: string;
   /** 报障联系电话。 */
   FaultReportContactNumber?: string;
+  /** 报障联系邮箱。 */
+  FaultReportContactEmail?: string;
   /** 标签键值对 */
   TagSet?: Tag[];
   /** 物理专线的接入点类型。 */
@@ -881,6 +899,8 @@ declare interface ModifyDirectConnectTunnelExtraRequest {
   TencentBackupIPv6Address?: string;
   /** 用户侧互联IPv6。 */
   CustomerIPv6Address?: string;
+  /** 互联IP重分布状态 */
+  ImportDirectRoute?: boolean;
 }
 
 declare interface ModifyDirectConnectTunnelExtraResponse {

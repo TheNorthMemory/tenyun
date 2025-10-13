@@ -5472,6 +5472,20 @@ declare interface DescribeAddressQuotaResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAddressTemplateGroupInstancesRequest {
+  /** IP地址组实例ID。例如：ipmg-12345678。 */
+  AddressTemplateGroupId: string;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+}
+
+declare interface DescribeAddressTemplateGroupInstancesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAddressTemplateGroupsRequest {
   /** 过滤条件。address-template-group-name - String - （过滤条件）IP地址模板集合名称。address-template-group-id - String - （过滤条件）IP地址模板实集合例ID，例如：ipmg-mdunqeb6。 */
   Filters?: Filter[];
@@ -5496,6 +5510,20 @@ declare interface DescribeAddressTemplateGroupsResponse {
   TotalCount?: number;
   /** IP地址模板。 */
   AddressTemplateGroupSet?: AddressTemplateGroup[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAddressTemplateInstancesRequest {
+  /** IP地址实例ID。例如：ipm-12345678。 */
+  AddressTemplateId: string;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+}
+
+declare interface DescribeAddressTemplateInstancesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6904,6 +6932,20 @@ declare interface DescribeSecurityGroupsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeServiceTemplateGroupInstancesRequest {
+  /** 协议端口实例ID。例如：ppmg-12345678。 */
+  ServiceTemplateGroupId: string;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+}
+
+declare interface DescribeServiceTemplateGroupInstancesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeServiceTemplateGroupsRequest {
   /** 过滤条件。service-template-group-name - String - （过滤条件）协议端口模板集合名称。service-template-group-id - String - （过滤条件）协议端口模板集合实例ID，例如：ppmg-e6dy460g。 */
   Filters?: Filter[];
@@ -6928,6 +6970,20 @@ declare interface DescribeServiceTemplateGroupsResponse {
   TotalCount?: number;
   /** 协议端口模板集合。 */
   ServiceTemplateGroupSet?: ServiceTemplateGroup[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeServiceTemplateInstancesRequest {
+  /** 协议端口实例ID。例如：ppm-12345678。 */
+  ServiceTemplateId: string;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+}
+
+declare interface DescribeServiceTemplateInstancesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7379,7 +7435,7 @@ declare interface DescribeVpcPeeringConnectionsResponse {
 declare interface DescribeVpcPrivateIpAddressesRequest {
   /** `VPC`实例`ID`，形如：`vpc-f49l6u0z`。 */
   VpcId: string;
-  /** 内网`IP`地址列表，批量查询单次请求最多支持`10`个。 */
+  /** 内网`IP`地址列表，批量查询单次请求最多支持`100`个。 */
   PrivateIpAddresses: string[];
 }
 
@@ -8744,7 +8800,9 @@ declare interface ModifyPrivateNatGatewayAttributeRequest {
   /** 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。 */
   NatGatewayId: string;
   /** 私网网关名称，可任意命名，但不得超过60个字符。 */
-  NatGatewayName: string;
+  NatGatewayName?: string;
+  /** 私网NAT实例是否开启删除保护 */
+  DeletionProtectionEnabled?: boolean;
 }
 
 declare interface ModifyPrivateNatGatewayAttributeResponse {
@@ -10035,8 +10093,12 @@ declare interface Vpc {
   DescribeAddressBandwidthRange(data?: DescribeAddressBandwidthRangeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressBandwidthRangeResponse>;
   /** 查询弹性公网IP配额 {@link DescribeAddressQuotaRequest} {@link DescribeAddressQuotaResponse} */
   DescribeAddressQuota(data?: DescribeAddressQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressQuotaResponse>;
+  /** 查询参数模板IP地址组关联的实例列表 {@link DescribeAddressTemplateGroupInstancesRequest} {@link DescribeAddressTemplateGroupInstancesResponse} */
+  DescribeAddressTemplateGroupInstances(data: DescribeAddressTemplateGroupInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressTemplateGroupInstancesResponse>;
   /** 查询IP地址模板集合 {@link DescribeAddressTemplateGroupsRequest} {@link DescribeAddressTemplateGroupsResponse} */
   DescribeAddressTemplateGroups(data?: DescribeAddressTemplateGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressTemplateGroupsResponse>;
+  /** 查询参数模板IP地址关联的实例列表 {@link DescribeAddressTemplateInstancesRequest} {@link DescribeAddressTemplateInstancesResponse} */
+  DescribeAddressTemplateInstances(data: DescribeAddressTemplateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressTemplateInstancesResponse>;
   /** 查询IP地址模板 {@link DescribeAddressTemplatesRequest} {@link DescribeAddressTemplatesResponse} */
   DescribeAddressTemplates(data?: DescribeAddressTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAddressTemplatesResponse>;
   /** 查询弹性公网IP列表 {@link DescribeAddressesRequest} {@link DescribeAddressesResponse} */
@@ -10185,8 +10247,12 @@ declare interface Vpc {
   DescribeSecurityGroupReferences(data: DescribeSecurityGroupReferencesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupReferencesResponse>;
   /** 查看安全组 {@link DescribeSecurityGroupsRequest} {@link DescribeSecurityGroupsResponse} */
   DescribeSecurityGroups(data?: DescribeSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupsResponse>;
+  /** 查询参数模板协议端口组关联的实例列表 {@link DescribeServiceTemplateGroupInstancesRequest} {@link DescribeServiceTemplateGroupInstancesResponse} */
+  DescribeServiceTemplateGroupInstances(data: DescribeServiceTemplateGroupInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceTemplateGroupInstancesResponse>;
   /** 查询协议端口模板集合 {@link DescribeServiceTemplateGroupsRequest} {@link DescribeServiceTemplateGroupsResponse} */
   DescribeServiceTemplateGroups(data?: DescribeServiceTemplateGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceTemplateGroupsResponse>;
+  /** 查询参数模板协议端口关联的实例列表 {@link DescribeServiceTemplateInstancesRequest} {@link DescribeServiceTemplateInstancesResponse} */
+  DescribeServiceTemplateInstances(data: DescribeServiceTemplateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceTemplateInstancesResponse>;
   /** 查询协议端口模板 {@link DescribeServiceTemplatesRequest} {@link DescribeServiceTemplatesResponse} */
   DescribeServiceTemplates(data?: DescribeServiceTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceTemplatesResponse>;
   /** 查询安全组快照文件内容 {@link DescribeSgSnapshotFileContentRequest} {@link DescribeSgSnapshotFileContentResponse} */

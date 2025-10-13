@@ -3291,6 +3291,8 @@ declare namespace V20191016 {
     Time?: string;
     /** 线程的操作语句。 */
     Info?: string;
+    /** sql类型 */
+    SqlType?: string | null;
   }
 
   /** 用户配置的信息 */
@@ -3882,7 +3884,7 @@ declare namespace V20191016 {
     Info?: string;
     /** 返回数量，默认20。 */
     Limit?: number;
-    /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。 */
+    /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL；"mariadb"-mariadb;"cynosdb"-TDSQL-C for MySQL ;"dcdb"-TDSQL MySQL 默认为"mysql"。 */
     Product?: string;
   }
 

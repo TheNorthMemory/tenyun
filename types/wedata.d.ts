@@ -140,6 +140,40 @@ declare interface BackfillInstanceCollection {
   Items?: BackfillInstance[];
 }
 
+/** 关联绑定的project */
+declare interface BindProject {
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 项目名称 */
+  ProjectName?: string | null;
+  /** 项目展示名称 */
+  ProjectDisplayName?: string | null;
+}
+
+/** 展示任务id和任务名称信息 */
+declare interface BriefTask {
+  /** 任务id */
+  TaskId?: string | null;
+  /** 任务名称 */
+  TaskName?: string | null;
+  /** 任务创建时间 */
+  CreateTime?: string | null;
+  /** 任务责任人id，一个任务可能有多个责任人 */
+  OwnerUinList?: string[] | null;
+}
+
+/** BusinessMetadata */
+declare interface BusinessMetadata {
+  /** 标签名称 */
+  TagNames?: string[] | null;
+}
+
+/** 目录信息 */
+declare interface CatalogInfo {
+  /** 目录名称 */
+  Name?: string;
+}
+
 /** 任务下游依赖详情分页 */
 declare interface ChildDependencyConfigPage {
   /** 结果总数 */
@@ -236,6 +270,22 @@ declare interface CodeStudioFolderResult {
   FolderId?: string | null;
 }
 
+/** ColumnInfo */
+declare interface ColumnInfo {
+  /** 字段类型 */
+  Type?: string | null;
+  /** 字段名称 */
+  Name?: string;
+  /** 字段长度 */
+  Length?: number | null;
+  /** 字段描述 */
+  Description?: string | null;
+  /** 字段的顺序 */
+  Position?: number | null;
+  /** 是否为分区字段 */
+  IsPartition?: boolean | null;
+}
+
 /** 创建告警规则响应结果 */
 declare interface CreateAlarmRuleData {
   /** 告警规则唯一id */
@@ -252,6 +302,12 @@ declare interface CreateDataReplenishmentPlan {
 declare interface CreateFolderResult {
   /** 创建成功的文件夹ID。如果创建失败则报错。 */
   FolderId?: string;
+}
+
+/** 创建项目的结果信息 */
+declare interface CreateProjectResult {
+  /** 项目id */
+  ProjectId?: string | null;
 }
 
 /** 创建资源文件结果 */
@@ -362,6 +418,22 @@ declare interface CreateWorkflowResult {
   WorkflowId?: string;
 }
 
+/** dlc集群信息 */
+declare interface DLCClusterInfo {
+  /** dlc资源名称（需要添加角色Uin到dlc中，否则可能获取不到资源） */
+  ComputeResources: string[] | null;
+  /** dlc地域 */
+  Region: string | null;
+  /** 指定DLC集群的默认数据库 */
+  DefaultDatabase: string | null;
+  /** 集群配置标记（ 仅对标准模式的项目生效并且标准模式必填），枚举值：- Prod (生产环境)- Dev (开发环境) */
+  StandardModeEnvTag?: string;
+  /** 访问账号（ 仅对标准模式的项目生效并且标准模式必填），用于提交dlc任务的账号建议使用指定子账号，给子账号设置对应库表的权限；任务负责人模式在负责人离职后容易造成任务失败；主账号模式在多个项目权限不同的情况下不易做权限控制。枚举值：- TASK_RUNNER （任务负责人）- OWNER （主账号模式）- SUB （子账号模式） */
+  AccessAccount?: string;
+  /** 子账号id（ 仅对标准模式的项目生效），AccessAccount为子账号模式时，需要指定子账号的id信息，其他模式不需要指定 */
+  SubAccountUin?: string;
+}
+
 /** 补录计划日期范围 */
 declare interface DataBackfillRange {
   /** 开始日期，格式yyyy-MM-dd 表示从指定日期的00:00:00开始 */
@@ -372,6 +444,116 @@ declare interface DataBackfillRange {
   ExecutionStartTime?: string | null;
   /** 在[StartDate, EndDate]之间每天的结束时间点，格式HH:mm,只针对小时及周期小于小时的任务生效 */
   ExecutionEndTime?: string | null;
+}
+
+/** 数据源对象 */
+declare interface DataSource {
+  /** 归属项目ID */
+  ProjectId?: string | null;
+  /** 数据源ID */
+  Id?: number | null;
+  /** 数据源类型:枚举值 */
+  Type?: string | null;
+  /** 数据源名称 */
+  Name?: string | null;
+  /** 数据源展示名，为了可视化查看 */
+  DisplayName?: string | null;
+  /** 数据源描述信息 */
+  Description?: string | null;
+  /** 归属项目Name */
+  ProjectName?: string | null;
+  /** 数据源创建人 */
+  CreateUser?: string | null;
+  /** 时间 */
+  CreateTime?: string | null;
+  /** 更新人 */
+  ModifyUser?: string | null;
+  /** 更新时间 */
+  ModifyTime?: string | null;
+  /** 数据源的配置信息，以JSON KV存储，根据每个数据源类型不同，而KV存储信息不同 */
+  ProdConProperties?: string | null;
+  /** 同params 内容为开发数据源的数据 */
+  DevConProperties?: string | null;
+  /** 数据源类别：- DB ---自定义源- CLUSTER --- 系统源 */
+  Category?: string | null;
+}
+
+/** 数据源文件上传 */
+declare interface DataSourceFileUpload {
+  /** Truststore认证文件，默认文件名truststore.jks */
+  TrustStore?: string;
+  /** Keystore认证文件，默认文件名keystore.jks */
+  KeyStore?: string;
+  /** core-site.xml文件 */
+  CoreSite?: string;
+  /** hdfs-site.xml文件 */
+  HdfsSite?: string;
+  /** hive-site.xml文件 */
+  HiveSite?: string;
+  /** hbase-site文件 */
+  HBASESite?: string;
+  /** keytab文件，默认文件名[数据源名].keytab */
+  KeyTab?: string;
+  /** krb5.conf文件 */
+  KRB5Conf?: string;
+  /** 私钥,默认文件名private_key.pem */
+  PrivateKey?: string;
+  /** 公钥,默认文件名public_key.pem */
+  PublicKey?: string;
+}
+
+/** 查询数据源分页列表 */
+declare interface DataSourceInfo {
+  /** 分页页码 */
+  PageNumber?: number | null;
+  /** 分页大小 */
+  PageSize?: number | null;
+  /** 数据源列表 */
+  Items?: DataSource[] | null;
+  /** 总数 */
+  TotalCount?: number | null;
+  /** 总分页页码 */
+  TotalPageNumber?: number | null;
+}
+
+/** 数据源操作结果 */
+declare interface DataSourceResult {
+  /** 操作是否成功 */
+  Status?: boolean | null;
+  /** 数据源id */
+  DataSourceId?: number | null;
+}
+
+/** 数据源操作结果 */
+declare interface DataSourceStatus {
+  /** 数据源操作状态 */
+  Status?: boolean | null;
+}
+
+/** 数据库信息 */
+declare interface DatabaseInfo {
+  /** 数据库GUID */
+  Guid?: string | null;
+  /** 数据库名称 */
+  Name?: string | null;
+  /** 数据库目录 */
+  CatalogName?: string | null;
+  /** 数据库描述 */
+  Description?: string | null;
+  /** 数据库位置 */
+  Location?: string | null;
+  /** 数据库存储大小 */
+  StorageSize?: number | null;
+}
+
+/** 数据源关联任务信息 */
+declare interface DatasourceRelationTaskInfo {
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 项目名称 */
+  ProjectName?: string | null;
+  /** 数据源关联任务信息，本期仅支持数据开发任务接口返回数据 */
+  TaskInfo?: RelateTask[] | null;
 }
 
 /** 删除告警规则响应结果 */
@@ -454,6 +636,42 @@ declare interface EventListener {
   PropertiesList?: ParamInfo[] | null;
 }
 
+/** ExecutorResourceGroup分页对象 */
+declare interface ExecutorResourceGroupData {
+  /** 结果list */
+  Items?: ExecutorResourceGroupInfo[] | null;
+  /** 总条数 */
+  TotalCount?: number | null;
+  /** 页数 */
+  PageNumber?: number | null;
+  /** 页大小 */
+  PageSize?: number | null;
+  /** 总分页页码 */
+  TotalPageNumber?: number | null;
+}
+
+/** 资源组详情 */
+declare interface ExecutorResourceGroupInfo {
+  /** 资源组唯一标识 */
+  Id?: string;
+  /** 资源组名称 */
+  Name?: string | null;
+  /** 资源组描述 */
+  Description?: string | null;
+  /** 执行资源组类型，不能为空- Schedule --- 调度资源组- Integration --- 集成资源组- DataService -- 数据服务资源组 */
+  ResourceGroupType?: string | null;
+  /** 项目集合 */
+  AssociateProjects?: BindProject[] | null;
+  /** 区域 */
+  Region?: string | null;
+  /** vpcId */
+  VpcId?: string | null;
+  /** 子网id */
+  SubNet?: string | null;
+  /** 是否自动续费 */
+  AutoRenewEnabled?: boolean | null;
+}
+
 /** 参数传递-引用参数 */
 declare interface InTaskParameter {
   /** 参数名 */
@@ -506,6 +724,14 @@ declare interface InstanceLog {
   LogInfo?: string | null;
   /** **分页查询日志时使用，无具体业务含义**第一次查询时值为null 第二次及以后查询时使用上一次查询返回信息中的NextCursor字段值即可 */
   NextCursor?: string | null;
+}
+
+/** 集成资源组 */
+declare interface IntegrationResource {
+  /** 实时集成资源组- i32c(实时数据同步-16C64G) */
+  RealTimeDataSync?: ResourceGroupSpecification;
+  /** 离线集成资源组- integrated(离线数据同步-8C16G)- i16(离线数据同步-8C32G) */
+  OfflineDataSync?: ResourceGroupSpecification;
 }
 
 /** 数据探索任务JOB */
@@ -598,6 +824,104 @@ declare interface KVPair {
   V?: string | null;
 }
 
+/** LineageNodeInfo 血缘关系实体 */
+declare interface LineageNodeInfo {
+  /** 当前资源 */
+  Resource?: LineageResource | null;
+  /** 关系 */
+  Relation?: LineageRelation | null;
+}
+
+/** 血缘Pair对象 */
+declare interface LineagePair {
+  /** 来源 */
+  Source: LineageResouce;
+  /** 目标 */
+  Target: LineageResouce;
+  /** 血缘加工过程 */
+  Processes: LineageProcess[];
+}
+
+/** LineageProcess 血缘产出过程 */
+declare interface LineageProcess {
+  /** 原始唯一ID */
+  ProcessId: string | null;
+  /** 任务类型 //调度任务 SCHEDULE_TASK, //集成任务 INTEGRATION_TASK, //第三方上报 THIRD_REPORT, //数据建模 TABLE_MODEL, //模型创建指标 MODEL_METRIC, //原子指标创建衍生指标 METRIC_METRIC, //数据服务 DATA_SERVICE */
+  ProcessType: string | null;
+  /** WEDATA, THIRD; */
+  Platform: string | null;
+  /** 任务子类型 SQL_TASK, //集成实时任务血缘 INTEGRATED_STREAM, //集成离线任务血缘 INTEGRATED_OFFLINE; */
+  ProcessSubType?: string | null;
+  /** 额外扩展参数 */
+  ProcessProperties?: LineageProperty[] | null;
+  /** 血缘任务唯一节点ID */
+  LineageNodeId?: string;
+}
+
+/** LineageProperty额外扩展参数 */
+declare interface LineageProperty {
+  /** 属性名称 */
+  Name?: string | null;
+  /** 属性值 */
+  Value?: string | null;
+}
+
+/** LineageRelation 血缘关系 */
+declare interface LineageRelation {
+  /** 关联ID */
+  RelationId?: string | null;
+  /** 源端唯一血缘ID */
+  SourceUniqueId?: string | null;
+  /** 目标端唯一血缘ID */
+  TargetUniqueId?: string | null;
+  /** 血缘加工过程 */
+  Processes?: LineageProcess[] | null;
+}
+
+/** 血缘资源实体 */
+declare interface LineageResouce {
+  /** 实体原始唯一ID\n备注：当血缘为表的列时候 唯一ID传表ResourceUniqueId::字段名称 */
+  ResourceUniqueId: string | null;
+  /** 实体类型TABLE|METRIC|MODEL|SERVICE|COLUMN */
+  ResourceType: string | null;
+  /** 来源：WEDATA|THIRD默认wedata */
+  Platform: string | null;
+  /** 业务名称：库名.表名｜指标名称｜模型名称|字段名称 */
+  ResourceName?: string | null;
+  /** 描述：表类型｜指标描述｜模型描述|字段描述 */
+  Description?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** resource 额外扩展参数 */
+  ResourceProperties?: LineageProperty[] | null;
+  /** 血缘节点唯一标识符号 */
+  LineageNodeId?: string;
+}
+
+/** 血缘资源实体 */
+declare interface LineageResource {
+  /** 实体原始唯一ID */
+  ResourceUniqueId?: string | null;
+  /** 业务名称：库名.表名｜指标名称｜模型名称|字段名称 */
+  ResourceName?: string | null;
+  /** 实体类型TABLE|METRIC|MODEL|SERVICE|COLUMN */
+  ResourceType?: string | null;
+  /** 血缘节点唯一标识符号 */
+  LineageNodeId?: string | null;
+  /** 描述：表类型｜指标描述｜模型描述|字段描述 */
+  Description?: string | null;
+  /** 来源：WEDATA|THIRD默认wedata */
+  Platform?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** resource 额外扩展参数 */
+  ResourceProperties?: LineageProperty[] | null;
+}
+
 /** 告警信息列表 */
 declare interface ListAlarmMessages {
   /** 页码 */
@@ -626,6 +950,48 @@ declare interface ListAlarmRulesResult {
   Items?: AlarmRuleData[];
 }
 
+/** ListCatalogPage */
+declare interface ListCatalogPage {
+  /** 目录记录列表 */
+  Items?: CatalogInfo[];
+  /** 分页总页数 */
+  PageCount?: number;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 分页页码 */
+  PageNumber?: number;
+  /** 记录总数 */
+  TotalCount?: number;
+}
+
+/** ListDatabasePage */
+declare interface ListDatabasePage {
+  /** 数据库记录列表 */
+  Items?: DatabaseInfo[];
+  /** 分页总页数 */
+  PageCount?: number;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 分页页码 */
+  PageNumber?: number;
+  /** 记录总数 */
+  TotalCount?: number;
+}
+
+/** ListLineagePage */
+declare interface ListLineagePage {
+  /** 血缘记录列表 */
+  Items?: LineageNodeInfo[];
+  /** 分页总页数 */
+  PageCount?: number;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 分页页码 */
+  PageNumber?: number;
+  /** 记录总数 */
+  TotalCount?: number;
+}
+
 /** 任务列表分页 */
 declare interface ListOpsTasksPage {
   /** 结果总数 */
@@ -638,6 +1004,48 @@ declare interface ListOpsTasksPage {
   PageNumber?: number | null;
   /** 分页大小 */
   PageSize?: number | null;
+}
+
+/** ListLineagePage */
+declare interface ListProcessLineagePage {
+  /** 血缘pair列表 */
+  Items?: LineagePair[];
+  /** 分页总页数 */
+  PageCount?: number;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 分页页码 */
+  PageNumber?: number;
+  /** 记录总数 */
+  TotalCount?: number;
+}
+
+/** ListSchemaPage */
+declare interface ListSchemaPage {
+  /** Schema记录列表 */
+  Items?: SchemaInfo[];
+  /** 分页总页数 */
+  PageCount?: number;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 分页页码 */
+  PageNumber?: number;
+  /** 记录总数 */
+  TotalCount?: number;
+}
+
+/** ListTablePage */
+declare interface ListTablePage {
+  /** Schema记录列表 */
+  Items?: TableInfo[];
+  /** 分页总页数 */
+  PageCount?: number;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 分页页码 */
+  PageNumber?: number;
+  /** 记录总数 */
+  TotalCount?: number;
 }
 
 /** 查询任务信息分页 */
@@ -684,6 +1092,16 @@ declare interface ListWorkflowInfo {
   TotalCount?: number | null;
 }
 
+/** 监控指标 */
+declare interface MetricData {
+  /** 指标名称- ConcurrencyUsage --- 并发使用率- CpuCoreUsage --- cpu使用率- CpuLoad --- cpu负载- DevelopQueueTask --- 正在队列中的开发任务数量- DevelopRunningTask --- 正在运行的开发任务数量- DevelopSchedulingTask --- 正在调度的开发任务数量- DiskUsage --- 磁盘使用情况- DiskUsed --- 磁盘已用量- MaximumConcurrency --- 最大并发- MemoryLoad --- 内存负载- MemoryUsage --- 内存使用量 */
+  MetricName?: string | null;
+  /** 当前值 */
+  SnapshotValue?: number | null;
+  /** 指标趋势 */
+  TrendList?: TrendData[] | null;
+}
+
 /** 更新告警规则响应 */
 declare interface ModifyAlarmRuleResult {
   /** 是否更新成功 */
@@ -706,6 +1124,12 @@ declare interface NotificationFatigue {
   NotifyInterval?: number;
   /** 免打扰时间，例如示例值[{DaysOfWeek: [1, 2], StartTime: "00:00:00", EndTime: "09:00:00"}]	每周一、周二的00:00到09:00免打扰 */
   QuietIntervals?: AlarmQuietInterval[] | null;
+}
+
+/** OperateResult */
+declare interface OperateResult {
+  /** 操作结果1 成功 其他失败 */
+  Status?: number;
 }
 
 /** 异步操作详情 */
@@ -868,6 +1292,20 @@ declare interface OutTaskParameter {
   ParamValue: string | null;
 }
 
+/** 角色列表分页信息 */
+declare interface PageRoles {
+  /** 角色信息 */
+  Items?: SystemRole[] | null;
+  /** 页码 */
+  PageNumber?: number | null;
+  /** 分页大小 */
+  PageSize?: number | null;
+  /** 总个数 */
+  TotalCount?: number | null;
+  /** 总页码 */
+  TotalPageNumber?: number | null;
+}
+
 /** 参数 */
 declare interface ParamInfo {
   /** 参数名 */
@@ -890,6 +1328,42 @@ declare interface ParentDependencyConfigPage {
   Items?: OpsTaskDepend[] | null;
 }
 
+/** 项目信息 */
+declare interface Project {
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 项目标识，英文名 */
+  ProjectName?: string | null;
+  /** 项目显示名称，可以为中文名 */
+  DisplayName?: string | null;
+  /** 备注 */
+  Description?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 项目创建人id */
+  CreatorUin?: string | null;
+  /** 项目责任人id */
+  ProjectOwnerUin?: string | null;
+  /** 项目状态：0：禁用，1：启用，-3:禁用中，2：启用中 */
+  Status?: number;
+  /** 项目模式，SIMPLE：简单模式 STANDARD：标准模式 */
+  ProjectModel?: string | null;
+}
+
+/** 查询数据源分页列表 */
+declare interface ProjectBrief {
+  /** 分页页码 */
+  PageNumber?: number | null;
+  /** 分页大小 */
+  PageSize?: number | null;
+  /** 数据源列表 */
+  Items?: Project[] | null;
+  /** 总数 */
+  TotalCount?: number | null;
+  /** 总页码 */
+  TotalPageNumber?: number | null;
+}
+
 /** 告警规则项目波动率告警配置信息 */
 declare interface ProjectInstanceStatisticsAlarmInfo {
   /** 告警类型 projectFailureInstanceUpwardFluctuationAlarm: 失败实例向上波动告警projectSuccessInstanceDownwardFluctuationAlarm： 成功实例向下波动告警 */
@@ -908,6 +1382,52 @@ declare interface ProjectInstanceStatisticsAlarmInfo {
   InstanceCount?: number;
 }
 
+/** 项目返回结果 */
+declare interface ProjectResult {
+  /** 返回的结果 true/false */
+  Status?: boolean;
+}
+
+/** 项目的用户对象 */
+declare interface ProjectUserRole {
+  /** 租户id */
+  AppId?: string | null;
+  /** 主账号id */
+  RootAccountId?: string | null;
+  /** 用户id */
+  UserUin?: string | null;
+  /** 用户名 */
+  UserName?: string | null;
+  /** 显示名称 */
+  DisplayName?: string | null;
+  /** 用户角色对象 */
+  Roles?: SystemRole[] | null;
+  /** 是否创建者 */
+  IsCreator?: boolean | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 是否项目负责人 */
+  IsProjectOwner?: boolean | null;
+  /** 手机号 */
+  PhoneNum?: string | null;
+  /** 邮箱 */
+  Email?: string | null;
+}
+
+/** 项目下的用户集合 */
+declare interface ProjectUsersBrief {
+  /** 用户集合 */
+  Items?: ProjectUserRole[] | null;
+  /** 分页大小 */
+  PageSize?: number | null;
+  /** 分页页码 */
+  PageNumber?: number | null;
+  /** 总数量 */
+  TotalCount?: number | null;
+  /** 总页码 */
+  TotalPageNumber?: number | null;
+}
+
 /** 离线集成对账告警规则 */
 declare interface ReconciliationStrategyInfo {
   /** 离线告警规则类型reconciliationFailure： 离线对账失败告警reconciliationOvertime： 离线对账任务运行超时告警(需配置超时时间)reconciliationMismatch： 离线对账不一致条数告警(需配置不一致条数阀值) */
@@ -918,6 +1438,16 @@ declare interface ReconciliationStrategyInfo {
   Hour?: number | null;
   /** 对账任务运行超时阀值： 分钟， 默认为1 */
   Min?: number | null;
+}
+
+/** 数据源相关任务 */
+declare interface RelateTask {
+  /** 任务类型- OfflineIntegration --- 离线集成任务- RealtimeIntegration --- 实时集成任务- DataDevelopment --- 数据开发任务- DataQuality --- 数据质量任务- DataService --- 数据服务任务- MetadataCollection --- 元数据采集任务 */
+  TaskType?: string;
+  /** 任务数量 */
+  TaskNum?: number;
+  /** 任务详情 */
+  TaskList?: BriefTask[] | null;
 }
 
 /** 资源文件详情 */
@@ -996,7 +1526,7 @@ declare interface ResourceFolder {
   FolderName?: string;
 }
 
-/** 资源文件分页 */
+/** 资源文件夹分页 */
 declare interface ResourceFolderPage {
   /** 资源文件夹集合信息 */
   Items?: ResourceFolder[];
@@ -1008,6 +1538,66 @@ declare interface ResourceFolderPage {
   PageNumber?: number | null;
   /** 每页显示数 */
   PageSize?: number | null;
+}
+
+/** 资源组监控指标 */
+declare interface ResourceGroupMetrics {
+  /** 资源组规格相关：cpu个数 */
+  CpuNum?: number | null;
+  /** 资源组规格相关：磁盘规格 */
+  DiskVolume?: number | null;
+  /** 资源组规格相关：内存大小，单位:G */
+  MemSize?: number | null;
+  /** 资源组生命周期, 单位：天 */
+  LifeCycle?: number | null;
+  /** 资源组规格相关：最高并发 */
+  MaximumConcurrency?: number | null;
+  /** 资源组状态- 0 --- 初始化中- 1 --- 运行中- 2 --- 运行异常- 3 --- 释放中- 4 --- 已释放- 5 --- 创建中- 6 --- 创建失败- 7 --- 更新中- 8 --- 更新失败- 9 --- 已到期- 10 --- 释放失败- 11 --- 使用中- 12 --- 未使用 */
+  Status?: number | null;
+  /** 指标详情 */
+  MetricSnapshots?: MetricData[];
+}
+
+/** 资源组规格 */
+declare interface ResourceGroupSpecification {
+  /** 资源组规格 */
+  Specification: string;
+  /** 数量 */
+  Number: number;
+}
+
+/** 操作资源包数量 */
+declare interface ResourceNumber {
+  /** 增加/减少枚举- ADD -- 增加- DELETE -- 减少 */
+  Type?: string;
+  /** 增加/减少资源包的数量 */
+  Quantity?: number;
+}
+
+/** 资源组操作结果 */
+declare interface ResourceResult {
+  /** 是否成功 */
+  Status?: boolean | null;
+  /** 资源组id */
+  ResourceGroupId?: string | null;
+}
+
+/** 资源组操作状态 */
+declare interface ResourceStatus {
+  /** 资源组操作状态 */
+  Status?: boolean | null;
+}
+
+/** 开通的资源组信息 */
+declare interface ResourceType {
+  /** 资源组类型- Schedule --- 调度资源组- Integration --- 集成资源组- DataService -- 数据服务资源组 */
+  ResourceGroupType: string;
+  /** 集成资源组，细分实时资源组和离线资源组(集成、调度、数据服务资源组不可以同时购买) */
+  Integration?: IntegrationResource;
+  /** 调度资源组(集成、调度、数据服务资源组不可以同时购买)- s_test(测试规格)- s_small(基础规格)- s_medium(普及规格)- s_large(专业规格) */
+  Schedule?: ResourceGroupSpecification;
+  /** 数据服务资源组(集成、调度、数据服务资源组不可以同时购买)- ds_t(测试规格)- ds_s(基础规格)- ds_m(普及规格)- ds_l(专业规格) */
+  DataService?: ResourceGroupSpecification;
 }
 
 /** SQL探索文件/文件夹操作结果 */
@@ -1096,6 +1686,16 @@ declare interface SQLStopResult {
   Status?: boolean | null;
 }
 
+/** Schema信息 */
+declare interface SchemaInfo {
+  /** Schema GUID */
+  Guid?: string | null;
+  /** Schema名称 */
+  Name?: string | null;
+  /** 数据库名称 */
+  DatabaseName?: string | null;
+}
+
 /** 创建数据探索脚本文件夹返回类 */
 declare interface SqlCreateResult {
   /** 文件夹id */
@@ -1108,6 +1708,42 @@ declare interface SubmitTaskResult {
   VersionId?: string | null;
   /** 提交状态 */
   Status?: boolean | null;
+}
+
+/** 角色对象 */
+declare interface SystemRole {
+  /** 角色id */
+  RoleId?: string;
+  /** 角色名称 */
+  RoleName?: string | null;
+  /** 角色展示名 */
+  RoleDisplayName?: string | null;
+  /** 描述 */
+  Description?: string | null;
+}
+
+/** 数据库信息 */
+declare interface TableInfo {
+  /** 数据表GUID */
+  Guid?: string | null;
+  /** 数据表名称 */
+  Name?: string | null;
+  /** 数据表描述 */
+  Description?: string | null;
+  /** 数据库名称 */
+  DatabaseName?: string | null;
+  /** 数据库Schema名称 */
+  SchemaName?: string | null;
+  /** 表类型 */
+  TableType?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** 表的技术元数据 */
+  TechnicalMetadata?: TechnicalMetadata | null;
+  /** 表的业务元数据 */
+  BusinessMetadata?: BusinessMetadata | null;
 }
 
 /** 任务对象 */
@@ -1568,6 +2204,16 @@ declare interface TaskVersionDetail {
   ApproveUserUin?: string | null;
 }
 
+/** TechnicalMetadata */
+declare interface TechnicalMetadata {
+  /** 责任人 */
+  Owner?: string | null;
+  /** 数据表位置 */
+  Location?: string | null;
+  /** 存储大小 */
+  StorageSize?: number | null;
+}
+
 /** 告警超时配置规则信息 */
 declare interface TimeOutStrategyInfo {
   /** 超时告警超时配置：1.预计运行耗时超时，2.预计完成时间超时，3.预计等待调度耗时超时，4.预计周期内完成但实际未完成 */
@@ -1580,6 +2226,14 @@ declare interface TimeOutStrategyInfo {
   Min?: number | null;
   /** 超时时间对应的时区配置， 如 UTC+7, 默认为UTC+8 */
   ScheduleTimeZone?: string | null;
+}
+
+/** 资源组指标趋势 */
+declare interface TrendData {
+  /** 时间戳 */
+  Timestamp?: number;
+  /** 指标值 */
+  Value?: number;
 }
 
 /** 更新文件夹结果 */
@@ -1766,6 +2420,32 @@ declare interface WorkflowSchedulerConfigurationInfo {
   CalendarId?: string;
 }
 
+declare interface AddCalcEnginesToProjectRequest {
+  /** 修改的项目ID */
+  ProjectId: string;
+  /** DLC集群信息 */
+  DLCInfo: DLCClusterInfo[];
+}
+
+declare interface AddCalcEnginesToProjectResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AssociateResourceGroupToProjectRequest {
+  /** 资源组id */
+  ResourceGroupId: string;
+  /** 项目id */
+  ProjectId: string;
+}
+
+declare interface AssociateResourceGroupToProjectResponse {
+  /** 输出 */
+  Data?: ResourceStatus | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCodeFileRequest {
   /** 项目ID */
   ProjectId: string;
@@ -1840,6 +2520,34 @@ declare interface CreateDataBackfillPlanResponse {
   RequestId?: string;
 }
 
+declare interface CreateDataSourceRequest {
+  /** 数据源项目ID */
+  ProjectId: string;
+  /** 数据源名称 */
+  Name: string;
+  /** 数据源类型:枚举值- MYSQL- TENCENT_MYSQL- POSTGRE- ORACLE- SQLSERVER- FTP- HIVE- HUDI- HDFS- ICEBERG- KAFKA- DTS_KAFKA- HBASE- SPARK- TBASE- DB2- DM- GAUSSDB- GBASE- IMPALA- ES- TENCENT_ES- GREENPLUM- SAP_HANA- SFTP- OCEANBASE- CLICKHOUSE- KUDU- VERTICA- REDIS- COS- DLC- DORIS- CKAFKA- S3_DATAINSIGHT- TDSQL- TDSQL_MYSQL- MONGODB- TENCENT_MONGODB- REST_API- TiDB- StarRocks- Trino- Kyuubi- TCHOUSE_X- TCHOUSE_P- TCHOUSE_C- TCHOUSE_D- INFLUXDB- BIG_QUERY- SSH- BLOB- TDSQL_POSTGRE- GDB- TDENGINE- TDSQLC */
+  Type: string;
+  /** 数据源的配置信息，以JSON KV存储，根据每个数据源类型不同，而KV存储信息不同> deployType: CONNSTR_PUBLICDB(公网实例) CONNSTR_CVMDB(自建实例)INSTANCE(云实例)```mysql: 自建实例{ "deployType": "CONNSTR_CVMDB", "url": "jdbc:mysql://1.1.1.1:1111/database", "username": "root", "password": "root", "region": "ap-shanghai", "vpcId": "vpc-kprq42yo", "type": "MYSQL"}mysql: 云实例{ "instanceid": "cdb-12uxdo5e", "db": "db", "region": "ap-shanghai", "username": "msyql", "password": "mysql", "deployType": "INSTANCE", "type": "TENCENT_MYSQL"}sql_server: { "deployType": "CONNSTR_PUBLICDB", "url": "jdbc:sqlserver://1.1.1.1:223;DatabaseName=database", "username": "user_1", "password": "pass_2", "type": "SQLSERVER"}redis: redisType: -NO_ACCOUT(免账号) -SELF_ACCOUNT(自定义账号){ "deployType": "CONNSTR_PUBLICDB", "username":"" "password": "pass", "ip": "1.1.1.1", "port": "6379", "redisType": "NO_ACCOUT", "type": "REDIS"}oracle: { "deployType": "CONNSTR_CVMDB", "url": "jdbc:oracle:thin:@1.1.1.1:1521:prod", "username": "oracle", "password": "pass", "region": "ap-shanghai", "vpcId": "vpc-kprq42yo", "type": "ORACLE"}mongodb: advanceParams(自定义参数，会拼接至url后){ "advanceParams": [ { "key": "authSource", "value": "auth" } ], "db": "admin", "deployType": "CONNSTR_PUBLICDB", "username": "user", "password": "pass", "type": "MONGODB", "host": "1.1.1.1:9200"}postgresql:{ "deployType": "CONNSTR_PUBLICDB", "url": "jdbc:postgresql://1.1.1.1:1921/database", "username": "user", "password": "pass", "type": "POSTGRE"}kafka: authType: - sasl - jaas - sasl_plaintext - sasl_ssl - GSSAPI ssl: -PLAIN -GSSAPI{ "deployType": "CONNSTR_PUBLICDB", "host": "1.1.1.1:9092", "ssl": "GSSAPI", "authType": "sasl", "type": "KAFKA", "principal": "aaaa", "serviceName": "kafka"}cos:{ "region": "ap-shanghai", "deployType": "INSTANCE", "secretId": "aaaaa", "secretKey": "sssssss", "bucket": "aaa", "type": "COS"}``` */
+  ProdConProperties: string;
+  /** 开发环境数据源配置信息，若项目为标准模式，则此字段必填 */
+  DevConProperties?: string;
+  /** 生产环境数据源文件上传 */
+  ProdFileUpload?: DataSourceFileUpload;
+  /** 开发环境数据源文件上传 */
+  DevFileUpload?: DataSourceFileUpload;
+  /** 数据源展示名，为了可视化查看 */
+  DisplayName?: string;
+  /** 数据源描述信息 */
+  Description?: string;
+}
+
+declare interface CreateDataSourceResponse {
+  /** 主键ID */
+  Data?: DataSourceResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateOpsAlarmRuleRequest {
   /** 项目id */
   ProjectId: string;
@@ -1864,6 +2572,38 @@ declare interface CreateOpsAlarmRuleRequest {
 declare interface CreateOpsAlarmRuleResponse {
   /** 告警规则唯一id */
   Data?: CreateAlarmRuleData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateProjectMemberRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 用户id */
+  UseUins: string[];
+  /** 角色id */
+  RoleIds: string[];
+}
+
+declare interface CreateProjectMemberResponse {
+  /** 返回数据 */
+  Data?: ProjectResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateProjectRequest {
+  /** 项目基本信息 */
+  Project: ProjectRequest;
+  /** DLC绑定集群信息 */
+  DLCInfo?: DLCClusterInfo;
+  /** 绑定资源组的id列表 */
+  ResourceIds?: string[];
+}
+
+declare interface CreateProjectResponse {
+  /** 创建项目结果 */
+  Data?: CreateProjectResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1906,6 +2646,34 @@ declare interface CreateResourceFolderRequest {
 declare interface CreateResourceFolderResponse {
   /** 创建文件夹结果，如果创建失败则报错。 */
   Data?: CreateFolderResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateResourceGroupRequest {
+  /** 资源组名称。创建通用资源组的名称，必须以字母开头，可包含字母、数字、下划线（_），最多 64 个字符。 */
+  Name: string;
+  /** 开通的资源组信息 */
+  Type: ResourceType;
+  /** 是否自动续费 */
+  AutoRenewEnabled: boolean;
+  /** 购买时长，单位月 */
+  PurchasePeriod: number;
+  /** vpcId */
+  VpcId: string;
+  /** 子网 */
+  SubNet: string;
+  /** 资源购买地域 */
+  ResourceRegion: string;
+  /** 关联项目空间项目id */
+  AssociatedProjectId?: string;
+  /** 资源组描述 */
+  Description?: string;
+}
+
+declare interface CreateResourceGroupResponse {
+  /** 是否开启成功 */
+  Data?: ResourceResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2042,6 +2810,32 @@ declare interface DeleteCodeFolderResponse {
   RequestId?: string;
 }
 
+declare interface DeleteDataSourceRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 数据源id */
+  Id: number;
+}
+
+declare interface DeleteDataSourceResponse {
+  /** 是否删除成功 */
+  Data?: DataSourceStatus;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteLineageRequest {
+  /** 需要删除的血缘关系列表 */
+  Relations: LineagePair[];
+}
+
+declare interface DeleteLineageResponse {
+  /** 删除结果 */
+  Data?: OperateResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteOpsAlarmRuleRequest {
   /** 项目id */
   ProjectId: string;
@@ -2052,6 +2846,18 @@ declare interface DeleteOpsAlarmRuleRequest {
 declare interface DeleteOpsAlarmRuleResponse {
   /** 是否删除成功 */
   Data?: DeleteAlarmRuleResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteProjectMemberRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 用户ID列表 */
+  UserUins: string[];
+}
+
+declare interface DeleteProjectMemberResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2080,6 +2886,18 @@ declare interface DeleteResourceFolderRequest {
 declare interface DeleteResourceFolderResponse {
   /** true代表删除成功，false代表删除失败 */
   Data?: DeleteFolderResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteResourceGroupRequest {
+  /** 资源组id */
+  Id: string;
+}
+
+declare interface DeleteResourceGroupResponse {
+  /** 是否销毁成功 */
+  Data?: ResourceStatus;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2152,8 +2970,46 @@ declare interface DeleteWorkflowRequest {
 }
 
 declare interface DeleteWorkflowResponse {
-  /** 返回删除成功的工作流任务个数、失败个数、任务总数 */
+  /** 是否删除成功 */
   Data?: DeleteWorkflowResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DisableProjectRequest {
+  /** 项目id */
+  ProjectId: string;
+}
+
+declare interface DisableProjectResponse {
+  /** 无 */
+  Data?: ProjectResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DissociateResourceGroupFromProjectRequest {
+  /** 资源组id */
+  ResourceGroupId: string;
+  /** 项目id */
+  ProjectId: string;
+}
+
+declare interface DissociateResourceGroupFromProjectResponse {
+  /** 是否绑定成功，失败返回异常 */
+  Data?: ResourceStatus;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EnableProjectRequest {
+  /** 项目id */
+  ProjectId: string;
+}
+
+declare interface EnableProjectResponse {
+  /** 无 */
+  Data?: ProjectResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2186,6 +3042,32 @@ declare interface GetCodeFileRequest {
 declare interface GetCodeFileResponse {
   /** 代码文件详情 */
   Data?: CodeFile;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetDataSourceRelatedTasksRequest {
+  /** 数据源id */
+  Id: number;
+}
+
+declare interface GetDataSourceRelatedTasksResponse {
+  /** 无 */
+  Data?: DatasourceRelationTaskInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetDataSourceRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 数据源id */
+  Id: number;
+}
+
+declare interface GetDataSourceResponse {
+  /** 数据源列表 */
+  Data?: DataSource | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2260,6 +3142,18 @@ declare interface GetOpsWorkflowResponse {
   RequestId?: string;
 }
 
+declare interface GetProjectRequest {
+  /** 项目id。一般使用项目Id来查询，与projectName必须存在一个。 */
+  ProjectId: string;
+}
+
+declare interface GetProjectResponse {
+  /** 项目信息 */
+  Data?: Project | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetResourceFileRequest {
   /** 项目ID */
   ProjectId: string;
@@ -2274,6 +3168,26 @@ declare interface GetResourceFileResponse {
   RequestId?: string;
 }
 
+declare interface GetResourceGroupMetricsRequest {
+  /** 执行资源组id */
+  ResourceGroupId: string;
+  /** 使用趋势开始时间(毫秒)，默认最近一小时 */
+  StartTime?: number;
+  /** 使用趋势结束时间(毫秒)，默认当前 */
+  EndTime?: number;
+  /** 指标维度- all --- 全部- task --- 任务指标- system --- 系统指标 */
+  MetricType?: string;
+  /** 指标采集粒度，单位分钟，默认 1分钟 */
+  Granularity?: number;
+}
+
+declare interface GetResourceGroupMetricsResponse {
+  /** 执行组指标信息 */
+  Data?: ResourceGroupMetrics | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetSQLScriptRequest {
   /** 探索脚本Id */
   ScriptId: string;
@@ -2284,6 +3198,30 @@ declare interface GetSQLScriptRequest {
 declare interface GetSQLScriptResponse {
   /** 脚本详情 */
   Data?: SQLScript | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetTableColumnsRequest {
+  /** 数据表GUID */
+  TableGuid: string;
+}
+
+declare interface GetTableColumnsResponse {
+  /** 表字段列表 */
+  Data?: ColumnInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetTableRequest {
+  /** 表GUID */
+  TableGuid: string;
+}
+
+declare interface GetTableResponse {
+  /** 数据表详情 */
+  Data?: TableInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2382,6 +3320,20 @@ declare interface GetWorkflowResponse {
   RequestId?: string;
 }
 
+declare interface GrantMemberProjectRoleRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 用户id */
+  UserUin: string;
+  /** 角色id */
+  RoleId: string;
+}
+
+declare interface GrantMemberProjectRoleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface KillTaskInstancesAsyncRequest {
   /** 项目Id */
   ProjectId: string;
@@ -2422,6 +3374,22 @@ declare interface ListAlarmMessagesResponse {
   RequestId?: string;
 }
 
+declare interface ListCatalogRequest {
+  /** 页码，从1开始 */
+  PageNumber: number;
+  /** 分页大小，最大500 */
+  PageSize: number;
+  /** 父目录ID */
+  ParentCatalogId?: string;
+}
+
+declare interface ListCatalogResponse {
+  /** 分页数据 */
+  Data?: ListCatalogPage;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListCodeFolderContentsRequest {
   /** 项目ID */
   ProjectId: string;
@@ -2442,6 +3410,28 @@ declare interface ListCodeFolderContentsResponse {
   RequestId?: string;
 }
 
+declare interface ListColumnLineageRequest {
+  /** 表唯一ID */
+  TableUniqueId: string;
+  /** 血缘方向 INPUT｜OUTPUT */
+  Direction: string;
+  /** 页码 */
+  PageNumber: number;
+  /** 分页大小 */
+  PageSize: number;
+  /** 列名称 */
+  ColumnName: string;
+  /** 来源：WEDATA|THIRD 默认WEDATA */
+  Platform: string;
+}
+
+declare interface ListColumnLineageResponse {
+  /** 分页数据 */
+  Data?: ListLineagePage;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListDataBackfillInstancesRequest {
   /** 所属项目Id */
   ProjectId: string;
@@ -2458,6 +3448,50 @@ declare interface ListDataBackfillInstancesRequest {
 declare interface ListDataBackfillInstancesResponse {
   /** 单个补录计划下的所有补录实例 */
   Data?: BackfillInstanceCollection;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListDataSourcesRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 返回数量，默认10 */
+  PageSize?: number;
+  /** 页码，默认1 */
+  PageNumber?: number;
+  /** 数据源名称 */
+  Name?: string;
+  /** 数据源展示名 */
+  DisplayName?: string;
+  /** 数据源类型:枚举值- MYSQL- TENCENT_MYSQL- POSTGRE- ORACLE- SQLSERVER- FTP- HIVE- HUDI- HDFS- ICEBERG- KAFKA- HBASE- SPARK- VIRTUAL- TBASE- DB2- DM- GAUSSDB- GBASE- IMPALA- ES- TENCENT_ES- GREENPLUM- PHOENIX- SAP_HANA- SFTP- OCEANBASE- CLICKHOUSE- KUDU- VERTICA- REDIS- COS- DLC- DORIS- CKAFKA- S3- TDSQL- TDSQL_MYSQL- MONGODB- TENCENT_MONGODB- REST_API- SuperSQL- PRESTO- TiDB- StarRocks- Trino- Kyuubi- TCHOUSE_X- TCHOUSE_P- TCHOUSE_C- TCHOUSE_D- INFLUXDB- BIG_QUERY- SSH- BLOB */
+  Type?: string[];
+  /** 创建人 */
+  Creator?: string;
+}
+
+declare interface ListDataSourcesResponse {
+  /** 数据源列表 */
+  Data?: DataSourceInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListDatabaseRequest {
+  /** 页码，从1开始 */
+  PageNumber: number;
+  /** 分页大小，最大500 */
+  PageSize: number;
+  /** 目录名称 */
+  CatalogName?: string;
+  /** 数据源ID */
+  DatasourceId?: number;
+  /** 数据库名称搜索关键字 */
+  Keyword?: string;
+}
+
+declare interface ListDatabaseResponse {
+  /** 分页数据 */
+  Data?: ListDatabasePage;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2514,6 +3548,28 @@ declare interface ListDownstreamTasksRequest {
 declare interface ListDownstreamTasksResponse {
   /** 下游依赖详情 */
   Data?: DependencyConfigPage;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListLineageRequest {
+  /** 实体唯一ID */
+  ResourceUniqueId: string;
+  /** 实体类型 TABLE|METRIC|MODEL|SERVICE|COLUMN */
+  ResourceType: string;
+  /** 血缘方向 INPUT｜OUTPUT */
+  Direction: string;
+  /** 页码 */
+  PageNumber: number;
+  /** 分页大小 */
+  PageSize: number;
+  /** 来源：WEDATA|THIRD 默认WEDATA */
+  Platform: string;
+}
+
+declare interface ListLineageResponse {
+  /** 分页数据 */
+  Data?: ListLineagePage;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2630,6 +3686,86 @@ declare interface ListOpsWorkflowsResponse {
   RequestId?: string;
 }
 
+declare interface ListProcessLineageRequest {
+  /** 任务唯一ID */
+  ProcessId: string;
+  /** 任务类型 //调度任务 SCHEDULE_TASK, //集成任务 INTEGRATION_TASK, //第三方上报 THIRD_REPORT, //数据建模 TABLE_MODEL, //模型创建指标 MODEL_METRIC, //原子指标创建衍生指标 METRIC_METRIC, //数据服务 DATA_SERVICE */
+  ProcessType: string;
+  /** 页码 */
+  PageNumber: number;
+  /** 分页大小 */
+  PageSize: number;
+  /** 来源：WEDATA|THIRD 默认WEDATA */
+  Platform: string;
+}
+
+declare interface ListProcessLineageResponse {
+  /** 分页数据 */
+  Data?: ListProcessLineagePage;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListProjectMembersRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 使用成员名过滤，支持模糊查询 */
+  UserName?: string;
+  /** 使用成员id过滤，支持模糊查询 */
+  UserUin?: string;
+  /** 分页大小，默认第一页 */
+  PageSize?: number;
+  /** 分页条数，默认10条 */
+  PageNumber?: number;
+}
+
+declare interface ListProjectMembersResponse {
+  /** 项目列表 */
+  Data?: ProjectUsersBrief;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListProjectRolesRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 角色中文展示名模糊查询，只能传一个值 */
+  RoleDisplayName?: string;
+  /** 页码 */
+  PageNumber?: number;
+  /** 分页信息 */
+  PageSize?: number;
+}
+
+declare interface ListProjectRolesResponse {
+  /** 角色列表 */
+  Data?: PageRoles;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListProjectsRequest {
+  /** 项目id列表 */
+  ProjectIds?: string[];
+  /** 项目名或项目唯一标识名，支持模糊搜索 */
+  ProjectName?: string;
+  /** 项目状态，可选值：0（禁用）、1（正常） */
+  Status?: number;
+  /** 项目模式，可选值：SIMPLE、STANDARD */
+  ProjectModel?: string;
+  /** 请求的数据页数，用于翻页 */
+  PageNumber?: number;
+  /** 每页显示的条数，默认为 10 条 */
+  PageSize?: number;
+}
+
+declare interface ListProjectsResponse {
+  /** 项目列表 */
+  Data?: ProjectBrief;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListResourceFilesRequest {
   /** 项目ID */
   ProjectId: string;
@@ -2678,6 +3814,28 @@ declare interface ListResourceFoldersResponse {
   RequestId?: string;
 }
 
+declare interface ListResourceGroupsRequest {
+  /** 执行资源组类型，不能为空- Schedule --- 调度资源组- Integration --- 集成资源组- DataService -- 数据服务资源组 */
+  Type: string;
+  /** 资源组id */
+  Id?: string;
+  /** 搜索的执行资源组名称 */
+  Name?: string;
+  /** 项目空间id查询列表 */
+  ProjectIds?: string[];
+  /** 页数 */
+  PageNumber?: number;
+  /** 页大小 */
+  PageSize?: number;
+}
+
+declare interface ListResourceGroupsResponse {
+  /** 分页结果 */
+  Data?: ExecutorResourceGroupData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListSQLFolderContentsRequest {
   /** 项目Id */
   ProjectId: string;
@@ -2720,6 +3878,52 @@ declare interface ListSQLScriptRunsRequest {
 declare interface ListSQLScriptRunsResponse {
   /** 数据探索任务 */
   Data?: JobDto[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListSchemaRequest {
+  /** 页码，从1开始 */
+  PageNumber: number;
+  /** 分页大小，最大500 */
+  PageSize: number;
+  /** 目录名称 */
+  CatalogName?: string;
+  /** 数据源ID */
+  DatasourceId?: number;
+  /** 数据库名称 */
+  DatabaseName?: string;
+  /** 数据库模式搜索关键字 */
+  Keyword?: string;
+}
+
+declare interface ListSchemaResponse {
+  /** 分页数据 */
+  Data?: ListSchemaPage;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListTableRequest {
+  /** 页码，从1开始 */
+  PageNumber: number;
+  /** 分页大小，最大500 */
+  PageSize: number;
+  /** 目录名称 */
+  CatalogName?: string;
+  /** 数据源ID */
+  DatasourceId?: number;
+  /** 数据库名称 */
+  DatabaseName?: string;
+  /** 数据库Schema名称 */
+  SchemaName?: string;
+  /** 表搜索关键字 */
+  Keyword?: string;
+}
+
+declare interface ListTableResponse {
+  /** 分页数据 */
+  Data?: ListTablePage;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2852,6 +4056,18 @@ declare interface ListTasksResponse {
   RequestId?: string;
 }
 
+declare interface ListTenantRolesRequest {
+  /** 角色中文展示名模糊查询，只能传一个值 */
+  RoleDisplayName?: string;
+}
+
+declare interface ListTenantRolesResponse {
+  /** 主账号角色列表 */
+  Data?: SystemRole[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListUpstreamOpsTasksRequest {
   /** 项目Id */
   ProjectId: string;
@@ -2975,6 +4191,41 @@ declare interface PauseOpsTasksAsyncRequest {
 declare interface PauseOpsTasksAsyncResponse {
   /** 异步操作结果 */
   Data?: OpsAsyncResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ProjectRequest {
+  /** 项目标识，英文名，以字母开头，可包含字母、数字和下划线，不能超过32个字符 */
+  ProjectName: string;
+  /** 项目显示名称，可以为中文名，以字母开头，可包含字母、数字和下划线，不能超过32个字符 */
+  DisplayName: string;
+  /** 项目模式，SIMPLE（默认）：简单模式 STANDARD：标准模式 */
+  ProjectModel?: string;
+}
+
+declare interface RegisterLineageRequest {
+  /** 需要注册的血缘关系列表 */
+  Relations: LineagePair[];
+}
+
+declare interface RegisterLineageResponse {
+  /** 注册结果 */
+  Data?: OperateResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RemoveMemberProjectRoleRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 用户id */
+  UserUin: string;
+  /** 角色id */
+  RoleId: string;
+}
+
+declare interface RemoveMemberProjectRoleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3119,6 +4370,32 @@ declare interface UpdateCodeFolderResponse {
   RequestId?: string;
 }
 
+declare interface UpdateDataSourceRequest {
+  /** 数据源id */
+  Id: number;
+  /** 项目id */
+  ProjectId: string;
+  /** 数据源的配置信息，以JSON KV存储，根据每个数据源类型不同，而KV存储信息不同> deployType: CONNSTR_PUBLICDB(公网实例) CONNSTR_CVMDB(自建实例)INSTANCE(云实例)```mysql: 自建实例{ "deployType": "CONNSTR_CVMDB", "url": "jdbc:mysql://1.1.1.1:1111/database", "username": "root", "password": "root", "region": "ap-shanghai", "vpcId": "vpc-kprq42yo", "type": "MYSQL"}mysql: 云实例{ "instanceid": "cdb-12uxdo5e", "db": "db", "region": "ap-shanghai", "username": "msyql", "password": "mysql", "deployType": "INSTANCE", "type": "TENCENT_MYSQL"}sql_server: { "deployType": "CONNSTR_PUBLICDB", "url": "jdbc:sqlserver://1.1.1.1:223;DatabaseName=database", "username": "user_1", "password": "pass_2", "type": "SQLSERVER"}redis: redisType: -NO_ACCOUT(免账号) -SELF_ACCOUNT(自定义账号){ "deployType": "CONNSTR_PUBLICDB", "username":"" "password": "pass", "ip": "1.1.1.1", "port": "6379", "redisType": "NO_ACCOUT", "type": "REDIS"}oracle: { "deployType": "CONNSTR_CVMDB", "url": "jdbc:oracle:thin:@1.1.1.1:1521:prod", "username": "oracle", "password": "pass", "region": "ap-shanghai", "vpcId": "vpc-kprq42yo", "type": "ORACLE"}mongodb: advanceParams(自定义参数，会拼接至url后){ "advanceParams": [ { "key": "authSource", "value": "auth" } ], "db": "admin", "deployType": "CONNSTR_PUBLICDB", "username": "user", "password": "pass", "type": "MONGODB", "host": "1.1.1.1:9200"}postgresql:{ "deployType": "CONNSTR_PUBLICDB", "url": "jdbc:postgresql://1.1.1.1:1921/database", "username": "user", "password": "pass", "type": "POSTGRE"}kafka: authType: - sasl - jaas - sasl_plaintext - sasl_ssl - GSSAPI ssl: -PLAIN -GSSAPI{ "deployType": "CONNSTR_PUBLICDB", "host": "1.1.1.1:9092", "ssl": "GSSAPI", "authType": "sasl", "type": "KAFKA", "principal": "aaaa", "serviceName": "kafka"}cos:{ "region": "ap-shanghai", "deployType": "INSTANCE", "secretId": "aaaaa", "secretKey": "sssssss", "bucket": "aaa", "type": "COS"}``` */
+  ProdConProperties?: string;
+  /** 若项目为标准模式，则此字段必填 */
+  DevConProperties?: string;
+  /** 生产环境数据源文件上传 */
+  ProdFileUpload?: DataSourceFileUpload;
+  /** 开发环境数据源文件上传 */
+  DevFileUpload?: DataSourceFileUpload;
+  /** 数据源展示名，为了可视化查看 */
+  DisplayName?: string;
+  /** 数据源描述信息 */
+  Description?: string;
+}
+
+declare interface UpdateDataSourceResponse {
+  /** 操作是否成功 */
+  Data?: DataSourceStatus;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateOpsAlarmRuleRequest {
   /** 项目id */
   ProjectId: string;
@@ -3167,6 +4444,22 @@ declare interface UpdateOpsTasksOwnerResponse {
   RequestId?: string;
 }
 
+declare interface UpdateProjectRequest {
+  /** 目标修改的项目ID */
+  ProjectId: string;
+  /** 项目显示名称，可以为中文名,需要租户范围内唯一 */
+  DisplayName?: string;
+  /** 备注 */
+  Description?: string;
+  /** 项目负责人id */
+  ProjectOwnerUin?: string;
+}
+
+declare interface UpdateProjectResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateResourceFileRequest {
   /** 项目ID */
   ProjectId: string;
@@ -3201,6 +4494,26 @@ declare interface UpdateResourceFolderRequest {
 declare interface UpdateResourceFolderResponse {
   /** 更新文件夹结果，如果更新失败则报错。 */
   Data?: UpdateFolderResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateResourceGroupRequest {
+  /** 资源组id */
+  Id: string;
+  /** **变更配置(变配、续费、修改资源包数量 不能同时操作), 变配无法修改资源组类型**实时集成资源组 - i32c(实时数据同步-16C64G)离线集成资源组- integrated(离线数据同步-8C16G)- i16(离线数据同步-8C32G)调度资源组- s_test(测试规格)- s_small(基础规格)- s_medium(普及规格)- s_large(专业规格)数据服务资源组- ds_t(测试规格)- ds_s(基础规格)- ds_m(普及规格)- ds_l(专业规格) */
+  Type?: string;
+  /** 续费时长，单位月(变配、续费、修改资源包数量 不能同时操作) */
+  PurchasePeriod?: number;
+  /** 增加/减少资源包的数量(变配、续费、修改资源包数量 不能同时操作) */
+  Number?: ResourceNumber;
+  /** 是否自动续费，续费参数PurchasePeriod不为空时可以生效 */
+  AutoRenewEnabled?: boolean;
+}
+
+declare interface UpdateResourceGroupResponse {
+  /** 是否修改成功 */
+  Data?: ResourceStatus;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -17985,18 +19298,30 @@ declare namespace V20210820 {
 /** {@link Wedata 数据开发治理平台 WeData} */
 declare interface Wedata {
   (): Versions;
+  /** 关联引擎到某个项目 {@link AddCalcEnginesToProjectRequest} {@link AddCalcEnginesToProjectResponse} */
+  AddCalcEnginesToProject(data: AddCalcEnginesToProjectRequest, config?: AxiosRequestConfig): AxiosPromise<AddCalcEnginesToProjectResponse>;
+  /** 关联资源组到某个项目 {@link AssociateResourceGroupToProjectRequest} {@link AssociateResourceGroupToProjectResponse} */
+  AssociateResourceGroupToProject(data: AssociateResourceGroupToProjectRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateResourceGroupToProjectResponse>;
   /** 新建代码文件 {@link CreateCodeFileRequest} {@link CreateCodeFileResponse} */
   CreateCodeFile(data: CreateCodeFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodeFileResponse>;
   /** 新建代码文件夹 {@link CreateCodeFolderRequest} {@link CreateCodeFolderResponse} */
   CreateCodeFolder(data: CreateCodeFolderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodeFolderResponse>;
   /** 创建数据补录计划 {@link CreateDataBackfillPlanRequest} {@link CreateDataBackfillPlanResponse} */
   CreateDataBackfillPlan(data: CreateDataBackfillPlanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataBackfillPlanResponse>;
+  /** 创建数据源 {@link CreateDataSourceRequest} {@link CreateDataSourceResponse} */
+  CreateDataSource(data: CreateDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataSourceResponse>;
   /** 设置告警规则 {@link CreateOpsAlarmRuleRequest} {@link CreateOpsAlarmRuleResponse} */
   CreateOpsAlarmRule(data: CreateOpsAlarmRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOpsAlarmRuleResponse>;
+  /** 新建项目 {@link CreateProjectRequest} {@link CreateProjectResponse} */
+  CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
+  /** 创建项目成员 {@link CreateProjectMemberRequest} {@link CreateProjectMemberResponse} */
+  CreateProjectMember(data: CreateProjectMemberRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectMemberResponse>;
   /** 创建资源文件 {@link CreateResourceFileRequest} {@link CreateResourceFileResponse} */
   CreateResourceFile(data: CreateResourceFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceFileResponse>;
   /** 创建资源文件夹 {@link CreateResourceFolderRequest} {@link CreateResourceFolderResponse} */
   CreateResourceFolder(data: CreateResourceFolderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceFolderResponse>;
+  /** 创建资源组 {@link CreateResourceGroupRequest} {@link CreateResourceGroupResponse} */
+  CreateResourceGroup(data: CreateResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceGroupResponse>;
   /** 新建SQL文件夹 {@link CreateSQLFolderRequest} {@link CreateSQLFolderResponse} */
   CreateSQLFolder(data: CreateSQLFolderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSQLFolderResponse>;
   /** 新增SQL脚本 {@link CreateSQLScriptRequest} {@link CreateSQLScriptResponse} */
@@ -18011,12 +19336,20 @@ declare interface Wedata {
   DeleteCodeFile(data: DeleteCodeFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCodeFileResponse>;
   /** 删除代码文件夹 {@link DeleteCodeFolderRequest} {@link DeleteCodeFolderResponse} */
   DeleteCodeFolder(data: DeleteCodeFolderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCodeFolderResponse>;
+  /** 删除数据源 {@link DeleteDataSourceRequest} {@link DeleteDataSourceResponse} */
+  DeleteDataSource(data: DeleteDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataSourceResponse>;
+  /** 血缘删除 {@link DeleteLineageRequest} {@link DeleteLineageResponse} */
+  DeleteLineage(data: DeleteLineageRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLineageResponse>;
   /** 删除告警规则 {@link DeleteOpsAlarmRuleRequest} {@link DeleteOpsAlarmRuleResponse} */
   DeleteOpsAlarmRule(data: DeleteOpsAlarmRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOpsAlarmRuleResponse>;
+  /** 移除项目成员 {@link DeleteProjectMemberRequest} {@link DeleteProjectMemberResponse} */
+  DeleteProjectMember(data: DeleteProjectMemberRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectMemberResponse>;
   /** 删除资源文件 {@link DeleteResourceFileRequest} {@link DeleteResourceFileResponse} */
   DeleteResourceFile(data: DeleteResourceFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceFileResponse>;
   /** 删除资源文件夹 {@link DeleteResourceFolderRequest} {@link DeleteResourceFolderResponse} */
   DeleteResourceFolder(data: DeleteResourceFolderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceFolderResponse>;
+  /** 销毁资源组 {@link DeleteResourceGroupRequest} {@link DeleteResourceGroupResponse} */
+  DeleteResourceGroup(data: DeleteResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceGroupResponse>;
   /** 删除SQL文件夹 {@link DeleteSQLFolderRequest} {@link DeleteSQLFolderResponse} */
   DeleteSQLFolder(data: DeleteSQLFolderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSQLFolderResponse>;
   /** 删除SQL脚本 {@link DeleteSQLScriptRequest} {@link DeleteSQLScriptResponse} */
@@ -18027,10 +19360,20 @@ declare interface Wedata {
   DeleteWorkflow(data: DeleteWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkflowResponse>;
   /** 删除工作流文件夹 {@link DeleteWorkflowFolderRequest} {@link DeleteWorkflowFolderResponse} */
   DeleteWorkflowFolder(data: DeleteWorkflowFolderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkflowFolderResponse>;
+  /** 禁用项目 {@link DisableProjectRequest} {@link DisableProjectResponse} */
+  DisableProject(data: DisableProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DisableProjectResponse>;
+  /** 解绑项目关联的资源组 {@link DissociateResourceGroupFromProjectRequest} {@link DissociateResourceGroupFromProjectResponse} */
+  DissociateResourceGroupFromProject(data: DissociateResourceGroupFromProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DissociateResourceGroupFromProjectResponse>;
+  /** 激活项目 {@link EnableProjectRequest} {@link EnableProjectResponse} */
+  EnableProject(data: EnableProjectRequest, config?: AxiosRequestConfig): AxiosPromise<EnableProjectResponse>;
   /** 查询告警信息详情 {@link GetAlarmMessageRequest} {@link GetAlarmMessageResponse} */
   GetAlarmMessage(data: GetAlarmMessageRequest, config?: AxiosRequestConfig): AxiosPromise<GetAlarmMessageResponse>;
   /** 查看代码文件详情 {@link GetCodeFileRequest} {@link GetCodeFileResponse} */
   GetCodeFile(data: GetCodeFileRequest, config?: AxiosRequestConfig): AxiosPromise<GetCodeFileResponse>;
+  /** 查看数据源详情 {@link GetDataSourceRequest} {@link GetDataSourceResponse} */
+  GetDataSource(data: GetDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<GetDataSourceResponse>;
+  /** 查看数据源关联任务列表 {@link GetDataSourceRelatedTasksRequest} {@link GetDataSourceRelatedTasksResponse} */
+  GetDataSourceRelatedTasks(data: GetDataSourceRelatedTasksRequest, config?: AxiosRequestConfig): AxiosPromise<GetDataSourceRelatedTasksResponse>;
   /** 获取告警规则详细信息 {@link GetOpsAlarmRuleRequest} {@link GetOpsAlarmRuleResponse} */
   GetOpsAlarmRule(data: GetOpsAlarmRuleRequest, config?: AxiosRequestConfig): AxiosPromise<GetOpsAlarmRuleResponse>;
   /** 查询运维中心异步操作详情 {@link GetOpsAsyncJobRequest} {@link GetOpsAsyncJobResponse} */
@@ -18041,10 +19384,18 @@ declare interface Wedata {
   GetOpsTaskCode(data: GetOpsTaskCodeRequest, config?: AxiosRequestConfig): AxiosPromise<GetOpsTaskCodeResponse>;
   /** 获取工作流详情 {@link GetOpsWorkflowRequest} {@link GetOpsWorkflowResponse} */
   GetOpsWorkflow(data: GetOpsWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<GetOpsWorkflowResponse>;
+  /** 查看项目详情 {@link GetProjectRequest} {@link GetProjectResponse} */
+  GetProject(data: GetProjectRequest, config?: AxiosRequestConfig): AxiosPromise<GetProjectResponse>;
   /** 查看资源文件详情 {@link GetResourceFileRequest} {@link GetResourceFileResponse} */
   GetResourceFile(data: GetResourceFileRequest, config?: AxiosRequestConfig): AxiosPromise<GetResourceFileResponse>;
+  /** 查看某个资源组的监控指标 {@link GetResourceGroupMetricsRequest} {@link GetResourceGroupMetricsResponse} */
+  GetResourceGroupMetrics(data: GetResourceGroupMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<GetResourceGroupMetricsResponse>;
   /** 查看SQL脚本详情 {@link GetSQLScriptRequest} {@link GetSQLScriptResponse} */
   GetSQLScript(data: GetSQLScriptRequest, config?: AxiosRequestConfig): AxiosPromise<GetSQLScriptResponse>;
+  /** 获取表详情 {@link GetTableRequest} {@link GetTableResponse} */
+  GetTable(data: GetTableRequest, config?: AxiosRequestConfig): AxiosPromise<GetTableResponse>;
+  /** 获取表字段列表 {@link GetTableColumnsRequest} {@link GetTableColumnsResponse} */
+  GetTableColumns(data: GetTableColumnsRequest, config?: AxiosRequestConfig): AxiosPromise<GetTableColumnsResponse>;
   /** 获取任务详情信息 {@link GetTaskRequest} {@link GetTaskResponse} */
   GetTask(data: GetTaskRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskResponse>;
   /** 查看任务代码 {@link GetTaskCodeRequest} {@link GetTaskCodeResponse} */
@@ -18055,36 +19406,62 @@ declare interface Wedata {
   GetTaskInstanceLog(data: GetTaskInstanceLogRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskInstanceLogResponse>;
   /** 查看任务版本详情 {@link GetTaskVersionRequest} {@link GetTaskVersionResponse} */
   GetTaskVersion(data: GetTaskVersionRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskVersionResponse>;
-  /** 获取工作流调度信息 {@link GetWorkflowRequest} {@link GetWorkflowResponse} */
+  /** 获取工作流信息 {@link GetWorkflowRequest} {@link GetWorkflowResponse} */
   GetWorkflow(data: GetWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<GetWorkflowResponse>;
+  /** 授予项目成员项目角色 {@link GrantMemberProjectRoleRequest} {@link GrantMemberProjectRoleResponse} */
+  GrantMemberProjectRole(data: GrantMemberProjectRoleRequest, config?: AxiosRequestConfig): AxiosPromise<GrantMemberProjectRoleResponse>;
   /** 实例批量终止操作(异步) {@link KillTaskInstancesAsyncRequest} {@link KillTaskInstancesAsyncResponse} */
   KillTaskInstancesAsync(data: KillTaskInstancesAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<KillTaskInstancesAsyncResponse>;
   /** 获取告警信息列表 {@link ListAlarmMessagesRequest} {@link ListAlarmMessagesResponse} */
   ListAlarmMessages(data: ListAlarmMessagesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAlarmMessagesResponse>;
+  /** 查询类目树列表 {@link ListCatalogRequest} {@link ListCatalogResponse} */
+  ListCatalog(data: ListCatalogRequest, config?: AxiosRequestConfig): AxiosPromise<ListCatalogResponse>;
   /** 获取文件夹内容 {@link ListCodeFolderContentsRequest} {@link ListCodeFolderContentsResponse} */
   ListCodeFolderContents(data: ListCodeFolderContentsRequest, config?: AxiosRequestConfig): AxiosPromise<ListCodeFolderContentsResponse>;
+  /** 查询表列血缘列表 {@link ListColumnLineageRequest} {@link ListColumnLineageResponse} */
+  ListColumnLineage(data: ListColumnLineageRequest, config?: AxiosRequestConfig): AxiosPromise<ListColumnLineageResponse>;
   /** 获取单次补录的所有实例详情 {@link ListDataBackfillInstancesRequest} {@link ListDataBackfillInstancesResponse} */
   ListDataBackfillInstances(data: ListDataBackfillInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ListDataBackfillInstancesResponse>;
+  /** 查看数据源列表 {@link ListDataSourcesRequest} {@link ListDataSourcesResponse} */
+  ListDataSources(data: ListDataSourcesRequest, config?: AxiosRequestConfig): AxiosPromise<ListDataSourcesResponse>;
+  /** 通过参数查询数据库列表 {@link ListDatabaseRequest} {@link ListDatabaseResponse} */
+  ListDatabase(data: ListDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<ListDatabaseResponse>;
   /** 获取任务下游 {@link ListDownstreamOpsTasksRequest} {@link ListDownstreamOpsTasksResponse} */
   ListDownstreamOpsTasks(data: ListDownstreamOpsTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListDownstreamOpsTasksResponse>;
   /** 获取实例直接下游 {@link ListDownstreamTaskInstancesRequest} {@link ListDownstreamTaskInstancesResponse} */
   ListDownstreamTaskInstances(data: ListDownstreamTaskInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ListDownstreamTaskInstancesResponse>;
   /** 查看下游任务列表 {@link ListDownstreamTasksRequest} {@link ListDownstreamTasksResponse} */
   ListDownstreamTasks(data: ListDownstreamTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListDownstreamTasksResponse>;
+  /** 查询血缘列表 {@link ListLineageRequest} {@link ListLineageResponse} */
+  ListLineage(data: ListLineageRequest, config?: AxiosRequestConfig): AxiosPromise<ListLineageResponse>;
   /** 获取告警规则列表 {@link ListOpsAlarmRulesRequest} {@link ListOpsAlarmRulesResponse} */
   ListOpsAlarmRules(data: ListOpsAlarmRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ListOpsAlarmRulesResponse>;
   /** 获取任务列表 {@link ListOpsTasksRequest} {@link ListOpsTasksResponse} */
   ListOpsTasks(data: ListOpsTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListOpsTasksResponse>;
   /** 获取工作流列表 {@link ListOpsWorkflowsRequest} {@link ListOpsWorkflowsResponse} */
   ListOpsWorkflows(data: ListOpsWorkflowsRequest, config?: AxiosRequestConfig): AxiosPromise<ListOpsWorkflowsResponse>;
+  /** 查询任务血缘列表 {@link ListProcessLineageRequest} {@link ListProcessLineageResponse} */
+  ListProcessLineage(data: ListProcessLineageRequest, config?: AxiosRequestConfig): AxiosPromise<ListProcessLineageResponse>;
+  /** 查看项目成员列表 {@link ListProjectMembersRequest} {@link ListProjectMembersResponse} */
+  ListProjectMembers(data: ListProjectMembersRequest, config?: AxiosRequestConfig): AxiosPromise<ListProjectMembersResponse>;
+  /** 查看项目级角色详情列表 {@link ListProjectRolesRequest} {@link ListProjectRolesResponse} */
+  ListProjectRoles(data: ListProjectRolesRequest, config?: AxiosRequestConfig): AxiosPromise<ListProjectRolesResponse>;
+  /** 查看项目详情列表 {@link ListProjectsRequest} {@link ListProjectsResponse} */
+  ListProjects(data?: ListProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<ListProjectsResponse>;
   /** 查看资源文件列表 {@link ListResourceFilesRequest} {@link ListResourceFilesResponse} */
   ListResourceFiles(data: ListResourceFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ListResourceFilesResponse>;
   /** 查看资源文件夹列表 {@link ListResourceFoldersRequest} {@link ListResourceFoldersResponse} */
   ListResourceFolders(data: ListResourceFoldersRequest, config?: AxiosRequestConfig): AxiosPromise<ListResourceFoldersResponse>;
+  /** 查看资源组列表 {@link ListResourceGroupsRequest} {@link ListResourceGroupsResponse} */
+  ListResourceGroups(data: ListResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ListResourceGroupsResponse>;
   /** 获取sql文件夹内容列表 {@link ListSQLFolderContentsRequest} {@link ListSQLFolderContentsResponse} */
   ListSQLFolderContents(data: ListSQLFolderContentsRequest, config?: AxiosRequestConfig): AxiosPromise<ListSQLFolderContentsResponse>;
   /** 查询SQL运行记录 {@link ListSQLScriptRunsRequest} {@link ListSQLScriptRunsResponse} */
   ListSQLScriptRuns(data: ListSQLScriptRunsRequest, config?: AxiosRequestConfig): AxiosPromise<ListSQLScriptRunsResponse>;
+  /** 通过参数查询数据库模式列表 {@link ListSchemaRequest} {@link ListSchemaResponse} */
+  ListSchema(data: ListSchemaRequest, config?: AxiosRequestConfig): AxiosPromise<ListSchemaResponse>;
+  /** 通过参数查询数据表列表 {@link ListTableRequest} {@link ListTableResponse} */
+  ListTable(data: ListTableRequest, config?: AxiosRequestConfig): AxiosPromise<ListTableResponse>;
   /** 获取实例执行列表 {@link ListTaskInstanceExecutionsRequest} {@link ListTaskInstanceExecutionsResponse} */
   ListTaskInstanceExecutions(data: ListTaskInstanceExecutionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListTaskInstanceExecutionsResponse>;
   /** 获取调度实例列表 {@link ListTaskInstancesRequest} {@link ListTaskInstancesResponse} */
@@ -18093,6 +19470,8 @@ declare interface Wedata {
   ListTaskVersions(data: ListTaskVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListTaskVersionsResponse>;
   /** 查询任务列表 {@link ListTasksRequest} {@link ListTasksResponse} */
   ListTasks(data: ListTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListTasksResponse>;
+  /** 查看全局级角色详情列表 {@link ListTenantRolesRequest} {@link ListTenantRolesResponse} */
+  ListTenantRoles(data?: ListTenantRolesRequest, config?: AxiosRequestConfig): AxiosPromise<ListTenantRolesResponse>;
   /** 获取任务上游 {@link ListUpstreamOpsTasksRequest} {@link ListUpstreamOpsTasksResponse} */
   ListUpstreamOpsTasks(data: ListUpstreamOpsTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListUpstreamOpsTasksResponse>;
   /** 获取实例直接上游 {@link ListUpstreamTaskInstancesRequest} {@link ListUpstreamTaskInstancesResponse} */
@@ -18105,6 +19484,10 @@ declare interface Wedata {
   ListWorkflows(data: ListWorkflowsRequest, config?: AxiosRequestConfig): AxiosPromise<ListWorkflowsResponse>;
   /** 异步批量暂停任务 {@link PauseOpsTasksAsyncRequest} {@link PauseOpsTasksAsyncResponse} */
   PauseOpsTasksAsync(data: PauseOpsTasksAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<PauseOpsTasksAsyncResponse>;
+  /** 血缘注册 {@link RegisterLineageRequest} {@link RegisterLineageResponse} */
+  RegisterLineage(data: RegisterLineageRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterLineageResponse>;
+  /** 撤销项目成员项目角色 {@link RemoveMemberProjectRoleRequest} {@link RemoveMemberProjectRoleResponse} */
+  RemoveMemberProjectRole(data: RemoveMemberProjectRoleRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveMemberProjectRoleResponse>;
   /** 实例批量重跑(异步) {@link RerunTaskInstancesAsyncRequest} {@link RerunTaskInstancesAsyncResponse} */
   RerunTaskInstancesAsync(data: RerunTaskInstancesAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<RerunTaskInstancesAsyncResponse>;
   /** 运行SQL脚本 {@link RunSQLScriptRequest} {@link RunSQLScriptResponse} */
@@ -18121,14 +19504,20 @@ declare interface Wedata {
   UpdateCodeFile(data: UpdateCodeFileRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCodeFileResponse>;
   /** 更新代码文件夹 {@link UpdateCodeFolderRequest} {@link UpdateCodeFolderResponse} */
   UpdateCodeFolder(data: UpdateCodeFolderRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCodeFolderResponse>;
+  /** 更新数据源 {@link UpdateDataSourceRequest} {@link UpdateDataSourceResponse} */
+  UpdateDataSource(data: UpdateDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDataSourceResponse>;
   /** 修改告警规则 {@link UpdateOpsAlarmRuleRequest} {@link UpdateOpsAlarmRuleResponse} */
   UpdateOpsAlarmRule(data: UpdateOpsAlarmRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOpsAlarmRuleResponse>;
   /** 修改任务负责人 {@link UpdateOpsTasksOwnerRequest} {@link UpdateOpsTasksOwnerResponse} */
   UpdateOpsTasksOwner(data: UpdateOpsTasksOwnerRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOpsTasksOwnerResponse>;
+  /** 更新项目 {@link UpdateProjectRequest} {@link UpdateProjectResponse} */
+  UpdateProject(data: UpdateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProjectResponse>;
   /** 更新资源文件 {@link UpdateResourceFileRequest} {@link UpdateResourceFileResponse} */
   UpdateResourceFile(data: UpdateResourceFileRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateResourceFileResponse>;
   /** 更新资源文件夹 {@link UpdateResourceFolderRequest} {@link UpdateResourceFolderResponse} */
   UpdateResourceFolder(data: UpdateResourceFolderRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateResourceFolderResponse>;
+  /** 更新资源组 {@link UpdateResourceGroupRequest} {@link UpdateResourceGroupResponse} */
+  UpdateResourceGroup(data: UpdateResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateResourceGroupResponse>;
   /** 重命名SQL文件夹 {@link UpdateSQLFolderRequest} {@link UpdateSQLFolderResponse} */
   UpdateSQLFolder(data: UpdateSQLFolderRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateSQLFolderResponse>;
   /** 更新SQL脚本和配置 {@link UpdateSQLScriptRequest} {@link UpdateSQLScriptResponse} */

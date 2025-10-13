@@ -1953,6 +1953,8 @@ declare interface ModifyUserPrivilegesV3Request {
   UpdateComputeGroups?: string[];
   /** 默认计算组 */
   DefaultComputeGroup?: string;
+  /** 0: 灵活场景 1: 固定场景 */
+  ComputeGroupType?: number;
 }
 
 declare interface ModifyUserPrivilegesV3Response {
