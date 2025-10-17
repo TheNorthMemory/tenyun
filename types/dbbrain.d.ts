@@ -628,14 +628,16 @@ declare interface MySqlProcess {
   Host?: string;
   /** 线程的操作数据库。 */
   DB?: string;
-  /** 线程的操作状态。 */
+  /** 线程的操作状态。包含以下枚举值：Sending data​-线程正在处理查询结果， ​Sorting result​-线程正在对查询结果进行排序​，Creating tmp table​-线程正在创建临时表，Altering table​-线程正在执行表结构变更，Updating-线程执行更新中。 */
   State?: string;
-  /** 线程的执行类型。 */
+  /** 线程的执行类型。包含以下枚举值：Sleep-线程处于空闲状态，Query-线程正在执行一个查询，Connect-从服务器连接到主服务器，Execute-线程正在执行预处理语句。 */
   Command?: string;
   /** 线程的操作时长，单位秒。 */
   Time?: string;
   /** 线程的操作语句。 */
   Info?: string;
+  /** sql类型 */
+  SqlType?: string | null;
 }
 
 /** 实时会话详情。 */
@@ -2105,9 +2107,9 @@ declare interface DescribeMySqlProcessListRequest {
   Host?: string;
   /** 线程的操作数据库，用于筛选线程列表。 */
   DB?: string;
-  /** 线程的操作状态，用于筛选线程列表。包含以下值：Sending data，Updating, Opening tables 等 */
+  /** 线程的操作状态。包含以下枚举值：Sending data​-线程正在处理查询结果， ​Sorting result​-线程正在对查询结果进行排序​，Creating tmp table​-线程正在创建临时表，Altering table​-线程正在执行表结构变更，Updating-线程执行更新中。 */
   State?: string;
-  /** 线程的操作状态，用于筛选线程列表。包含以下值：Sending data，Updating, Opening tables 等 */
+  /** 线程的执行类型。包含以下枚举值：Sleep-线程处于空闲状态，Query-线程正在执行一个查询，Connect-从服务器连接到主服务器，Execute-线程正在执行预处理语句。 */
   Command?: string;
   /** 线程的操作时长最小值，单位秒，用于筛选操作时长大于该值的线程列表。 */
   Time?: number;
@@ -2115,7 +2117,7 @@ declare interface DescribeMySqlProcessListRequest {
   Info?: string;
   /** 返回数量，默认20。 */
   Limit?: number;
-  /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。 */
+  /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"mariadb"-mariadb;"cynosdb"-TDSQL-C for MySQL ;"dcdb"-TDSQL MySQL 默认为"mysql"。 */
   Product?: string;
   /** 会话统计的维度信息,可以多个维度。 */
   StatDimensions?: StatDimension[];
@@ -2124,7 +2126,7 @@ declare interface DescribeMySqlProcessListRequest {
 declare interface DescribeMySqlProcessListResponse {
   /** 实时线程列表。 */
   ProcessList?: MySqlProcess[];
-  /** sql会话统计信息。 */
+  /** sql会话统计信息。如果请求参数中包含StatDimensions，该参数则可能返回，否则不返回。 */
   Statistics?: StatisticInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

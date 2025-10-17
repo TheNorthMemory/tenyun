@@ -1851,6 +1851,18 @@ declare namespace V20180724 {
     Tolerations?: Toleration[];
   }
 
+  /** 集群指标抓取统计 */
+  interface PrometheusClusterScrapeStatistics {
+    /** 集群ID */
+    ClusterID?: string;
+    /** 被采集的点数 */
+    ScrapedRate?: number | null;
+    /** Job列表 */
+    Jobs?: PrometheusJobScrapeStatistics[] | null;
+    /** 过滤前的指标采集速率 */
+    SamplesRate?: number | null;
+  }
+
   /** prometheus配置 */
   interface PrometheusConfigItem {
     /** 名称 */
@@ -1877,6 +1889,20 @@ declare namespace V20180724 {
     HasTkeManage: number;
     /** 是否显示API等信息(1=有, 2=无) */
     HasApiOperation: number;
+  }
+
+  /** 实例抓取指标统计 */
+  interface PrometheusInstanceScrapeStatistics {
+    /** 实例ID */
+    InstanceId?: string;
+    /** 被采集的点数 */
+    ScrapedRate?: number;
+    /** 集群指标列表 */
+    Clusters?: PrometheusClusterScrapeStatistics[];
+    /** 非容器指标列表 */
+    Global?: PrometheusClusterScrapeStatistics[] | null;
+    /** 过滤前的指标采集速率 */
+    SamplesRate?: number;
   }
 
   /** Prometheus用量信息 */
@@ -1995,6 +2021,18 @@ declare namespace V20180724 {
     ResourcePackageSpecName?: string | null;
   }
 
+  /** Job抓取统计 */
+  interface PrometheusJobScrapeStatistics {
+    /** Job 名 */
+    JobName?: string;
+    /** 被采集的点数 */
+    ScrapedRate?: number;
+    /** 指标列表 */
+    Metrics?: PrometheusMetricScrapeStatistics[] | null;
+    /** Job 类型 */
+    JobType?: string;
+  }
+
   /** prometheus一个job的targets */
   interface PrometheusJobTargets {
     /** 该Job的targets列表 */
@@ -2005,6 +2043,18 @@ declare namespace V20180724 {
     Total?: number;
     /** 健康的target总数 */
     Up?: number;
+  }
+
+  /** 指标抓取统计 */
+  interface PrometheusMetricScrapeStatistics {
+    /** 指标名 */
+    MetricName?: string | null;
+    /** 原始数据中的点数 */
+    SamplesRate?: number | null;
+    /** 被采集的点数 */
+    ScrapedRate?: number | null;
+    /** 是否推荐采集 */
+    IsRecommended?: boolean | null;
   }
 
   /** 告警通知渠道配置 */
@@ -4597,6 +4647,20 @@ declare namespace V20180724 {
     RequestId?: string;
   }
 
+  interface DescribePrometheusScrapeStatisticsRequest {
+    /** job 类型 */
+    JobType?: string;
+  }
+
+  interface DescribePrometheusScrapeStatisticsResponse {
+    /** 总个数 */
+    Total?: number | null;
+    /** 实例指标抓取速率详情 */
+    InstanceResults?: PrometheusInstanceScrapeStatistics[] | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribePrometheusTargetsTMPRequest {
     /** 实例id */
     InstanceId: string;
@@ -5839,6 +5903,8 @@ declare interface Monitor {
   DescribePrometheusRegions(data: V20180724.DescribePrometheusRegionsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribePrometheusRegionsResponse>;
   /** 列出 Prometheus 抓取任务 {@link V20180724.DescribePrometheusScrapeJobsRequest} {@link V20180724.DescribePrometheusScrapeJobsResponse} */
   DescribePrometheusScrapeJobs(data: V20180724.DescribePrometheusScrapeJobsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribePrometheusScrapeJobsResponse>;
+  /** 获取实例采集速率信息 {@link V20180724.DescribePrometheusScrapeStatisticsRequest} {@link V20180724.DescribePrometheusScrapeStatisticsResponse} */
+  DescribePrometheusScrapeStatistics(data: V20180724.DescribePrometheusScrapeStatisticsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribePrometheusScrapeStatisticsResponse>;
   /** 获取targets信息 {@link V20180724.DescribePrometheusTargetsTMPRequest} {@link V20180724.DescribePrometheusTargetsTMPResponse} */
   DescribePrometheusTargetsTMP(data: V20180724.DescribePrometheusTargetsTMPRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribePrometheusTargetsTMPResponse>;
   /** 拉取模板列表 {@link V20180724.DescribePrometheusTempRequest} {@link V20180724.DescribePrometheusTempResponse} */

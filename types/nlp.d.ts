@@ -183,11 +183,11 @@ declare interface Nlp {
   (): Versions;
   /** 情感分析V2 {@link AnalyzeSentimentRequest} {@link AnalyzeSentimentResponse} */
   AnalyzeSentiment(data: AnalyzeSentimentRequest, config?: AxiosRequestConfig): AxiosPromise<AnalyzeSentimentResponse>;
-  /** 文本分类V2 {@link ClassifyContentRequest} {@link ClassifyContentResponse} */
+  /** @deprecated 文本分类V2 {@link ClassifyContentRequest} {@link ClassifyContentResponse} */
   ClassifyContent(data: ClassifyContentRequest, config?: AxiosRequestConfig): AxiosPromise<ClassifyContentResponse>;
-  /** 对联生成 {@link ComposeCoupletRequest} {@link ComposeCoupletResponse} */
+  /** @deprecated 对联生成 {@link ComposeCoupletRequest} {@link ComposeCoupletResponse} */
   ComposeCouplet(data: ComposeCoupletRequest, config?: AxiosRequestConfig): AxiosPromise<ComposeCoupletResponse>;
-  /** 句子相似度V2 {@link EvaluateSentenceSimilarityRequest} {@link EvaluateSentenceSimilarityResponse} */
+  /** @deprecated 句子相似度V2 {@link EvaluateSentenceSimilarityRequest} {@link EvaluateSentenceSimilarityResponse} */
   EvaluateSentenceSimilarity(data: EvaluateSentenceSimilarityRequest, config?: AxiosRequestConfig): AxiosPromise<EvaluateSentenceSimilarityResponse>;
   /** 词法分析V2 {@link ParseWordsRequest} {@link ParseWordsResponse} */
   ParseWords(data: ParseWordsRequest, config?: AxiosRequestConfig): AxiosPromise<ParseWordsResponse>;

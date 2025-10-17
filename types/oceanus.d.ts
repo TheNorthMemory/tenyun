@@ -568,8 +568,10 @@ declare interface JobV1 {
   LastOpResult?: string | null;
   /** 集群名字 */
   ClusterName?: string | null;
-  /** 最新配置版本号 */
+  /** 最新配置版本号，包括已经删除的版本 */
   LatestJobConfigVersion?: number | null;
+  /** 最新的版本号，不包括已经删除的版本号 */
+  LatestValidJobConfigVersion?: number;
   /** 已发布的配置版本 */
   PublishedJobConfigVersion?: number | null;
   /** 运行的CU数量 */
@@ -614,6 +616,8 @@ declare interface JobV1 {
   ProgressDesc?: string | null;
   /** 停止持续告警 */
   ContinueAlarm?: number;
+  /** 作业重启次数 */
+  RestartCount?: number;
 }
 
 /** 日志查询的每行日志信息 */
@@ -1160,6 +1164,8 @@ declare interface TreeJobSets {
   RunningMem?: number | null;
   /** sql */
   DecodeSqlCode?: string | null;
+  /** 发布版本配置id */
+  PublishedJobConfigId?: number;
 }
 
 /** 树状结构资源对象 */
@@ -1506,6 +1512,26 @@ declare interface CreateResourceResponse {
   ResourceId?: string;
   /** 资源版本 */
   Version?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateVariableRequest {
+  /** 变量名 */
+  Name: string;
+  /** 变量值 */
+  Value: string;
+  /** 变量类型 1：显式 2：隐藏 */
+  Type: number;
+  /** 描述信息 */
+  Remark?: string;
+  /** 工作空间 SerialId */
+  WorkSpaceId?: string;
+}
+
+declare interface CreateVariableResponse {
+  /** 变量Id */
+  VariableId: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1978,6 +2004,16 @@ declare interface DescribeTreeResourcesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeVariablesRequest {
+  /** 工作空间 SerialId */
+  WorkSpaceId?: string;
+}
+
+declare interface DescribeVariablesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeWorkSpacesRequest {
   /** 偏移量，默认 0 */
   Offset?: number;
@@ -2233,6 +2269,8 @@ declare interface Oceanus {
   CreateResource(data: CreateResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceResponse>;
   /** 创建资源配置接口 {@link CreateResourceConfigRequest} {@link CreateResourceConfigResponse} */
   CreateResourceConfig(data: CreateResourceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceConfigResponse>;
+  /** 创建变量 {@link CreateVariableRequest} {@link CreateVariableResponse} */
+  CreateVariable(data: CreateVariableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVariableResponse>;
   /** 创建工作空间 {@link CreateWorkSpaceRequest} {@link CreateWorkSpaceResponse} */
   CreateWorkSpace(data: CreateWorkSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkSpaceResponse>;
   /** 删除文件夹 {@link DeleteFoldersRequest} {@link DeleteFoldersResponse} */
@@ -2277,6 +2315,8 @@ declare interface Oceanus {
   DescribeTreeJobs(data?: DescribeTreeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTreeJobsResponse>;
   /** 查询树状结构资源列表 {@link DescribeTreeResourcesRequest} {@link DescribeTreeResourcesResponse} */
   DescribeTreeResources(data?: DescribeTreeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTreeResourcesResponse>;
+  /** 变量描述 {@link DescribeVariablesRequest} {@link DescribeVariablesResponse} */
+  DescribeVariables(data?: DescribeVariablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVariablesResponse>;
   /** 授权工作空间列表 {@link DescribeWorkSpacesRequest} {@link DescribeWorkSpacesResponse} */
   DescribeWorkSpaces(data?: DescribeWorkSpacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkSpacesResponse>;
   /** 查询Statement执行结果 {@link FetchSqlGatewayStatementResultRequest} {@link FetchSqlGatewayStatementResultResponse} */

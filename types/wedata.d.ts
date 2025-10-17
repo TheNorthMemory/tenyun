@@ -212,6 +212,8 @@ declare interface CodeFile {
   AccessScope?: string | null;
   /** 节点全路径，/aaa/bbb/ccc.ipynb，由各个节点的名称组成 */
   Path?: string | null;
+  /** 父文件夹路径 */
+  ParentFolderPath?: string | null;
 }
 
 /** 数据探索脚本配置 */
@@ -246,6 +248,8 @@ declare interface CodeFolderNode {
   NodePermission?: string | null;
   /** 子节点列表 */
   Children?: CodeFolderNode[] | null;
+  /** 父文件夹路径 */
+  ParentFolderPath?: string | null;
 }
 
 /** CodeStudio文件对象操作结果 */
@@ -432,6 +436,48 @@ declare interface DLCClusterInfo {
   AccessAccount?: string;
   /** 子账号id（ 仅对标准模式的项目生效），AccessAccount为子账号模式时，需要指定子账号的id信息，其他模式不需要指定 */
   SubAccountUin?: string;
+}
+
+/** 补录计划详情 */
+declare interface DataBackfill {
+  /** 项目Id */
+  ProjectId?: string;
+  /** 数据补录计划id */
+  DataBackfillPlanId?: string;
+  /** 数据补录计划名称 */
+  DataBackfillPlanName?: string;
+  /** 补录任务集合 */
+  TaskIds?: string[];
+  /** 补录任务的数据配置列表 */
+  DataBackfillRangeList?: DataBackfillRange[];
+  /** 检查父任务类型，取值范围：- NONE-全部不检查- ALL-检查全部上游父任务- MAKE_SCOPE-只在（当前补录计划）选中任务中检查 */
+  CheckParentType?: string | null;
+  /** 补录是否忽略事件依赖 */
+  SkipEventListening?: boolean | null;
+  /** 自定义实例运行并发度, 返回为null或者不返回，则表示任务原有自依赖 */
+  RedefineParallelNum?: number | null;
+  /** 自定义的工作流自依赖，yes或者no；如果不配置，则使用工作流原有自依赖 */
+  RedefineSelfWorkflowDependency?: string | null;
+  /** 调度资源组id */
+  SchedulerResourceGroupId?: string | null;
+  /** 集成资源组id */
+  IntegrationResourceGroupId?: string | null;
+  /** 补录自定义的生成周期 */
+  RedefineCycleType?: string | null;
+  /** 自定义参数 */
+  RedefineParamList?: KVPair[] | null;
+  /** 补录任务的执行开始时间 */
+  StartTime?: string | null;
+  /** 补录任务的执行结束时间 */
+  EndTime?: string | null;
+  /** 创建用户id */
+  CreateUserUin?: string;
+  /** 补录计划实例完成百分数 */
+  CompletePercent?: number;
+  /** 补录计划实例成功百分数 */
+  SuccessPercent?: number;
+  /** 补录是实例数据时间顺序，生效必须满足2个条件:1. 必须同周期任务2. 优先按依赖关系执行，无依赖关系影响的情况下按配置执行顺序执行 可选值- NORMAL: 不设置- ORDER: 顺序- REVERSE: 逆序不设置默认为NORMAL */
+  DataTimeOrder?: string | null;
 }
 
 /** 补录计划日期范围 */
@@ -1702,6 +1748,12 @@ declare interface SqlCreateResult {
   FolderId?: string | null;
 }
 
+/** 批量启动任务返回参数 */
+declare interface StartTasks {
+  /** 任务启动是否成功 */
+  Status?: boolean;
+}
+
 /** 提交数据开发任务结果 */
 declare interface SubmitTaskResult {
   /** 生成的任务版本ID */
@@ -2525,7 +2577,7 @@ declare interface CreateDataSourceRequest {
   ProjectId: string;
   /** 数据源名称 */
   Name: string;
-  /** 数据源类型:枚举值- MYSQL- TENCENT_MYSQL- POSTGRE- ORACLE- SQLSERVER- FTP- HIVE- HUDI- HDFS- ICEBERG- KAFKA- DTS_KAFKA- HBASE- SPARK- TBASE- DB2- DM- GAUSSDB- GBASE- IMPALA- ES- TENCENT_ES- GREENPLUM- SAP_HANA- SFTP- OCEANBASE- CLICKHOUSE- KUDU- VERTICA- REDIS- COS- DLC- DORIS- CKAFKA- S3_DATAINSIGHT- TDSQL- TDSQL_MYSQL- MONGODB- TENCENT_MONGODB- REST_API- TiDB- StarRocks- Trino- Kyuubi- TCHOUSE_X- TCHOUSE_P- TCHOUSE_C- TCHOUSE_D- INFLUXDB- BIG_QUERY- SSH- BLOB- TDSQL_POSTGRE- GDB- TDENGINE- TDSQLC */
+  /** 数据源类型:枚举值- MYSQL- TENCENT_MYSQL- POSTGRE- ORACLE- SQLSERVER- FTP- HIVE- HUDI- HDFS- ICEBERG- KAFKA- DTS_KAFKA- HBASE- SPARK- TBASE- DB2- DM- GAUSSDB- GBASE- IMPALA- ES- TENCENT_ES- GREENPLUM- SAP_HANA- SFTP- OCEANBASE- CLICKHOUSE- KUDU- VERTICA- REDIS- COS- DLC- DORIS- CKAFKA- S3_DATAINSIGHT- TDSQL- TDSQL_MYSQL- MONGODB- TENCENT_MONGODB- REST_API- TiDB- StarRocks- Trino- Kyuubi- TCHOUSE_X- TCHOUSE_P- TCHOUSE_C- TCHOUSE_D- INFLUXDB- BIG_QUERY- SSH- BLOB- TDSQL_POSTGRE- GDB- TDENGINE- TDSQLC- FileSystem */
   Type: string;
   /** 数据源的配置信息，以JSON KV存储，根据每个数据源类型不同，而KV存储信息不同> deployType: CONNSTR_PUBLICDB(公网实例) CONNSTR_CVMDB(自建实例)INSTANCE(云实例)```mysql: 自建实例{ "deployType": "CONNSTR_CVMDB", "url": "jdbc:mysql://1.1.1.1:1111/database", "username": "root", "password": "root", "region": "ap-shanghai", "vpcId": "vpc-kprq42yo", "type": "MYSQL"}mysql: 云实例{ "instanceid": "cdb-12uxdo5e", "db": "db", "region": "ap-shanghai", "username": "msyql", "password": "mysql", "deployType": "INSTANCE", "type": "TENCENT_MYSQL"}sql_server: { "deployType": "CONNSTR_PUBLICDB", "url": "jdbc:sqlserver://1.1.1.1:223;DatabaseName=database", "username": "user_1", "password": "pass_2", "type": "SQLSERVER"}redis: redisType: -NO_ACCOUT(免账号) -SELF_ACCOUNT(自定义账号){ "deployType": "CONNSTR_PUBLICDB", "username":"" "password": "pass", "ip": "1.1.1.1", "port": "6379", "redisType": "NO_ACCOUT", "type": "REDIS"}oracle: { "deployType": "CONNSTR_CVMDB", "url": "jdbc:oracle:thin:@1.1.1.1:1521:prod", "username": "oracle", "password": "pass", "region": "ap-shanghai", "vpcId": "vpc-kprq42yo", "type": "ORACLE"}mongodb: advanceParams(自定义参数，会拼接至url后){ "advanceParams": [ { "key": "authSource", "value": "auth" } ], "db": "admin", "deployType": "CONNSTR_PUBLICDB", "username": "user", "password": "pass", "type": "MONGODB", "host": "1.1.1.1:9200"}postgresql:{ "deployType": "CONNSTR_PUBLICDB", "url": "jdbc:postgresql://1.1.1.1:1921/database", "username": "user", "password": "pass", "type": "POSTGRE"}kafka: authType: - sasl - jaas - sasl_plaintext - sasl_ssl - GSSAPI ssl: -PLAIN -GSSAPI{ "deployType": "CONNSTR_PUBLICDB", "host": "1.1.1.1:9092", "ssl": "GSSAPI", "authType": "sasl", "type": "KAFKA", "principal": "aaaa", "serviceName": "kafka"}cos:{ "region": "ap-shanghai", "deployType": "INSTANCE", "secretId": "aaaaa", "secretKey": "sssssss", "bucket": "aaa", "type": "COS"}``` */
   ProdConProperties: string;
@@ -2580,7 +2632,7 @@ declare interface CreateProjectMemberRequest {
   /** 项目id */
   ProjectId: string;
   /** 用户id */
-  UseUins: string[];
+  UserUins: string[];
   /** 角色id */
   RoleIds: string[];
 }
@@ -3046,6 +3098,36 @@ declare interface GetCodeFileResponse {
   RequestId?: string;
 }
 
+declare interface GetCodeFolderRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 文件夹id */
+  FolderId: string;
+}
+
+declare interface GetCodeFolderResponse {
+  /** codestudio文件夹 */
+  Data?: CodeFolderNode;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetDataBackfillPlanRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 补录计划id */
+  DataBackfillPlanId: string;
+  /** 展示时区，默认UTC+8 */
+  TimeZone?: string;
+}
+
+declare interface GetDataBackfillPlanResponse {
+  /** 补录详情 */
+  Data?: DataBackfill;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetDataSourceRelatedTasksRequest {
   /** 数据源id */
   Id: number;
@@ -3188,6 +3270,20 @@ declare interface GetResourceGroupMetricsResponse {
   RequestId?: string;
 }
 
+declare interface GetSQLFolderRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 文件夹id */
+  FolderId: string;
+}
+
+declare interface GetSQLFolderResponse {
+  /** sql文件夹 */
+  Data?: SQLFolderNode;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetSQLScriptRequest {
   /** 探索脚本Id */
   ScriptId: string;
@@ -3325,8 +3421,8 @@ declare interface GrantMemberProjectRoleRequest {
   ProjectId: string;
   /** 用户id */
   UserUin: string;
-  /** 角色id */
-  RoleId: string;
+  /** 角色id列表，目前支持的项目角色有- 308335260274237440 (项目管理员)- 308335260676890624 (数据工程师)- 308335260844662784 (运维工程师)- 308335260945326080 (普通成员) */
+  RoleIds: string[];
 }
 
 declare interface GrantMemberProjectRoleResponse {
@@ -3815,8 +3911,8 @@ declare interface ListResourceFoldersResponse {
 }
 
 declare interface ListResourceGroupsRequest {
-  /** 执行资源组类型，不能为空- Schedule --- 调度资源组- Integration --- 集成资源组- DataService -- 数据服务资源组 */
-  Type: string;
+  /** 执行资源组类型- Schedule --- 调度资源组- Integration --- 集成资源组- DataService -- 数据服务资源组 */
+  Type?: string;
   /** 资源组id */
   Id?: string;
   /** 搜索的执行资源组名称 */
@@ -4221,8 +4317,8 @@ declare interface RemoveMemberProjectRoleRequest {
   ProjectId: string;
   /** 用户id */
   UserUin: string;
-  /** 角色id */
-  RoleId: string;
+  /** 角色id列表，目前支持的项目角色有- 308335260274237440 (项目管理员)- 308335260676890624 (数据工程师)- 308335260844662784 (运维工程师)- 308335260945326080 (普通成员) */
+  RoleIds: string[];
 }
 
 declare interface RemoveMemberProjectRoleResponse {
@@ -4286,6 +4382,22 @@ declare interface SetSuccessTaskInstancesAsyncRequest {
 declare interface SetSuccessTaskInstancesAsyncResponse {
   /** 批量置成功操作的返回的异步id, 可以在接口GetAsyncJob获取具体执行详情 */
   Data?: OpsAsyncResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StartOpsTasksRequest {
+  /** 所属项目Id */
+  ProjectId: string;
+  /** 任务Id列表 */
+  TaskIds: string[];
+  /** 启动时是否补录上次暂停到当前的中间实例，默认false即不补录 */
+  EnableDataBackfill?: boolean;
+}
+
+declare interface StartOpsTasksResponse {
+  /** 异步操作结果 */
+  Data?: StartTasks;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5559,6 +5671,18 @@ declare namespace V20210820 {
     LevelRank?: number | null;
     /** influxdb字段类别 */
     InfluxCategory?: string | null;
+    /** 字段使用说明 */
+    Specification?: string | null;
+  }
+
+  /** 字段值变量 */
+  interface ColumnValueConfig {
+    /** 字段值key */
+    FieldKey?: string | null;
+    /** 字段值 */
+    FieldValue?: string | null;
+    /** 字段值类型 */
+    FieldDataType?: string | null;
   }
 
   /** 提交任务数据结构 */
@@ -5977,6 +6101,12 @@ declare namespace V20210820 {
     LastAccessTimeByTables?: number | null;
     /** 库guid */
     DatabaseGuid?: string | null;
+    /** 环境，取值 prod或者 dev */
+    Environment?: string | null;
+    /** Owner的账户信息：账号信息 */
+    OwnerAccount?: number | null;
+    /** 操作权限 */
+    OperateOption?: OperateOption | null;
   }
 
   /** 数据库Schema信息 */
@@ -6424,12 +6554,12 @@ declare namespace V20210820 {
     /** 引擎执行时间 */
     EngineExeTime?: string | null;
     /** 引擎执行总时间 */
-    EngineExeTimes?: number | null;
+    EngineExeTimeCost?: number | null;
     /** cu消耗 */
     CuConsume?: number | null;
-    /** 资源消耗 */
+    /** 该值表示任务预设资源，sql任务不需要预设资源，该值为-1 */
     ResourceUsage?: number | null;
-    /** 引擎名 */
+    /** 引擎名。在wedata侧若获取不到引擎名，则是wedata侧生成dlc标识，与dlc侧的引擎名存在不一致的情况 */
     EngineName?: string | null;
     /** 引擎执行状态 */
     EngineExeStatus?: string | null;
@@ -6627,6 +6757,14 @@ declare namespace V20210820 {
     ProjectId?: string | null;
     /** 项目名称 */
     ProjectName?: string | null;
+    /** 事件消费有效次数 */
+    ValidConsumeCount?: number | null;
+    /** 事件id */
+    EventId?: string | null;
+    /** bundleId */
+    BundleId?: string | null;
+    /** bundle信息 */
+    BundleInfo?: string | null;
   }
 
   /** 事件监听者信息 */
@@ -6923,6 +7061,8 @@ declare namespace V20210820 {
     FieldValue?: string | null;
     /** 字段值类型 */
     FieldDataType?: string | null;
+    /** 字段值变量信息 */
+    ValueConfig?: ColumnValueConfig | null;
   }
 
   /** 通用过滤器 */
@@ -7543,6 +7683,10 @@ declare namespace V20210820 {
     ScheduleRunType?: number | null;
     /** 允许重跑类型，ALL 表示无论实例运行成功还是失败都允许重跑，NONE表示无论成功或者失败都不允许重跑，FAILURE 表示只有运行失败才能重跑 */
     AllowRedoType?: string;
+    /** 实例生命周期 */
+    InstanceCycleType?: string;
+    /** 实例执行计划描述 */
+    InstanceSchedulerDesc?: string;
   }
 
   /** 任务运行历史分页记录 */
@@ -7917,7 +8061,7 @@ declare namespace V20210820 {
   interface KVPair {
     /** 键名 */
     K: string | null;
-    /** 值 */
+    /** 值，请勿传SQL(请求会被视为攻击接口)，如果有需要，请将SQL进行Base64转码并解码。 */
     V: string | null;
   }
 
@@ -8291,6 +8435,12 @@ declare namespace V20210820 {
     TaskAutoSubmit?: boolean | null;
     /** 实例生成方式，T_PLUS_0 当天任务当天调度 / T_PLUS_1 当天任务后一天调度 */
     InstanceInitStrategy?: string | null;
+  }
+
+  /** 数据资产操作标记 */
+  interface OperateOption {
+    /** 是否有修改归属项目权限 */
+    HasProjectPermission?: boolean | null;
   }
 
   /** 操作返回结果 */
@@ -8688,7 +8838,9 @@ declare namespace V20210820 {
     /** 生产调度任务任务类型 */
     CycleType?: number | null;
     /** 生产任务类型 */
-    TaskType?: string;
+    TaskType?: string | null;
+    /** 时区 */
+    ScheduleTimeZone?: string | null;
   }
 
   /** 项目信息 */
@@ -8834,9 +8986,13 @@ declare namespace V20210820 {
   /** 实时任务同步速度趋势 */
   interface RealTimeTaskSpeed {
     /** 同步速度条/s列表 */
-    RecordsSpeedList: RecordsSpeed[];
+    RecordsSpeedList?: RecordsSpeed[];
     /** 同步速度字节/s列表 */
-    BytesSpeedList: BytesSpeed[];
+    BytesSpeedList?: BytesSpeed[];
+    /** 日志条数速度 */
+    RecordsLogSpeed?: RecordsSpeed[];
+    /** 日志大小速度 */
+    BytesLogSpeed?: BytesSpeed[];
   }
 
   /** 通用记录字段，与服务端约定传入合法的键值对 */
@@ -9125,6 +9281,12 @@ declare namespace V20210820 {
     ProjectName?: string | null;
     /** 更新时间 */
     UpdateTime?: string | null;
+    /** 数据源名称 */
+    DatasourceName?: string | null;
+    /** 数据库名称 */
+    DatabaseName?: string | null;
+    /** 失败原因 */
+    FailMsg?: string | null;
   }
 
   /** 规则配置 */
@@ -9165,6 +9327,8 @@ declare namespace V20210820 {
     EngineType?: string | null;
     /** DLC执行引擎资源组 */
     DlcGroupName?: string | null;
+    /** 引擎参数 */
+    EngineParam?: string | null;
   }
 
   /** 概览趋势结果 */
@@ -9394,7 +9558,47 @@ declare namespace V20210820 {
     /** 任务描述 */
     Description?: string | null;
     /** 监控创建人 */
-    CreateUserName?: string;
+    CreateUserName?: string | null;
+  }
+
+  /** 任务配置 */
+  interface RuleGroupConfig {
+    /** 模型检测类型 */
+    ModelMonitorType?: string | null;
+    /** 预测列 */
+    PredictColumn?: string | null;
+    /** 预测列类型 */
+    PredictColumnType?: string | null;
+    /** 标签列 */
+    LabelColumn?: string | null;
+    /** 标签列类型 */
+    LabelColumnType?: string | null;
+    /** 模型id列 */
+    ModelIdColumn?: string | null;
+    /** 模型id列类型 */
+    ModelIdColumnType?: string | null;
+    /** 时间戳列 */
+    TimestampColumn?: string | null;
+    /** 时间戳列类型 */
+    TimestampColumnType?: string | null;
+    /** 指标粒度 */
+    Granularity?: number | null;
+    /** 指标粒度单位 */
+    GranularityType?: string | null;
+    /** 基准表 */
+    BaseTable?: string | null;
+    /** 基准库 */
+    BaseDb?: string | null;
+    /** 对比列 */
+    ComparisonColumn?: string | null;
+    /** 对比列类型 */
+    ComparisonColumnType?: string | null;
+    /** 保护组 */
+    ProtectionValue?: string | null;
+    /** 正类值 */
+    PositiveValue?: string | null;
+    /** 特征列 */
+    FeatureColumn?: string | null;
   }
 
   /** 规则组执行结果 */
@@ -9504,19 +9708,23 @@ declare namespace V20210820 {
     /** DLC资源组 */
     DlcGroupName?: string | null;
     /** 任务名称 */
-    RuleGroupName?: string;
+    RuleGroupName?: string | null;
     /** 数据库名称 */
-    DatabaseName?: string;
+    DatabaseName?: string | null;
     /** schema名称 */
-    SchemaName?: string;
+    SchemaName?: string | null;
     /** 表名称 */
-    TableName?: string;
+    TableName?: string | null;
     /** 数据源id */
-    DatasourceId?: string;
+    DatasourceId?: string | null;
     /** 任务描述 */
-    Description?: string;
+    Description?: string | null;
     /** 时区 */
     ScheduleTimeZone?: string | null;
+    /** 任务监控参数 */
+    GroupConfig?: RuleGroupConfig | null;
+    /** 引擎参数 */
+    EngineParam?: string | null;
   }
 
   /** 规则组分页 */
@@ -9815,6 +10023,8 @@ declare namespace V20210820 {
     CreateTime?: string | null;
     /** 更新时间 */
     ModifiedTime?: string | null;
+    /** 字段使用说明 */
+    Specification?: string | null;
   }
 
   /** 查询实例条件 */
@@ -9919,6 +10129,8 @@ declare namespace V20210820 {
     TableExpressions?: SqlExpressionTable[] | null;
     /** sql表达式字段名 */
     ParamExpressions?: string[] | null;
+    /** 新增模型检测类系统模板sql中占位符集合 */
+    SystemTemplateExpressions?: string[] | null;
   }
 
   /** 数据质量自定义规则时的sql表达式解析表对象 */
@@ -10548,13 +10760,15 @@ declare namespace V20210820 {
   /** 基于表的标签统计信息 */
   interface TagVoteSum {
     /** 标签id */
-    TagId: number;
+    TagId?: number;
     /** 该表该标签投票次数 */
-    VoteSum: number;
+    VoteSum?: number;
     /** 当前用户对这张表是否加了该标签 true 已添加 false 未添加 */
-    Status: boolean;
+    Status?: boolean;
     /** 标签名 */
-    TagName: string;
+    TagName?: string;
+    /** 标签描述 */
+    TagDesc?: string | null;
   }
 
   /** 任务告警信息 */
@@ -10957,8 +11171,8 @@ declare namespace V20210820 {
     AllowRedoType?: string | null;
     /** BundleIdCI/CD工程生成的bundle唯一标识 */
     BundleId?: string | null;
-    /** Bundle名称 */
-    BundleName?: string | null;
+    /** bundle信息 */
+    BundleInfo?: string | null;
   }
 
   /** 属性配置 */
@@ -11045,11 +11259,11 @@ declare namespace V20210820 {
     JobId?: string | null;
     /** 引擎类型，DLC、EMR */
     EngineType?: string | null;
-    /** 引擎名称 */
+    /** 引擎名称。在wedata侧若获取不到引擎名，则是wedata侧自动生成的标识，与集群侧的引擎名有可能不一致 */
     EngineName?: string | null;
     /** 引擎子类型 */
     EngineSubType?: string | null;
-    /** 引擎taskId */
+    /** 引擎taskId，集成任务部分会使用资源组的资源运行任务，没有提交到引擎侧，所以没有引擎侧id */
     EngineTaskId?: string | null;
     /** 引擎执行状态，枚举 */
     EngineExeStatus?: string | null;
@@ -11061,6 +11275,8 @@ declare namespace V20210820 {
     EngineExeEndTime?: string | null;
     /** 数据来源,DATA_INTEGRATION、DATA_EXPLORATION、DATA_QUALITY、OM_CENTER等 */
     ProductSource?: string | null;
+    /** 集成任务的任务类型，表明是读端还是写端，可选择READ、WRITE */
+    IntegrationType?: string | null;
   }
 
   /** 任务属性 */
@@ -11369,6 +11585,8 @@ declare namespace V20210820 {
     SelfWorkFlowDependType?: string | null;
     /** 允许重跑类型，ALL 表示无论实例运行成功还是失败都允许重跑，NONE表示无论成功或者失败都不允许重跑，FAILURE 表示只有运行失败才能重跑 */
     AllowRedoType?: string;
+    /** 负责人Id */
+    OwnerId?: string | null;
   }
 
   /** 任务执行脚本 */
@@ -11707,6 +11925,8 @@ declare namespace V20210820 {
     Region?: string | null;
     /** 结果或日志桶名 */
     BucketName?: string | null;
+    /** 错误信息 */
+    ErrorMessage?: string | null;
   }
 
   /** 试运行子记录 */
@@ -12023,6 +12243,10 @@ declare namespace V20210820 {
     UpdateUser?: string | null;
     /** 最近更新人id */
     UpdateUserId?: string | null;
+    /** BundleId CI/CD工程生成的bundle唯一标识 */
+    BundleId?: string | null;
+    /** BundleId信息 */
+    BundleInfo?: string | null;
   }
 
   /** 工作流 */
@@ -12236,6 +12460,8 @@ declare namespace V20210820 {
     AlarmRecipientTypes?: string;
     /** 是否需要校验父任务已经提交到调度 */
     NeedCheckParentSubmitted?: boolean;
+    /** 是否需要补录中间实例 */
+    EnableMakeUp?: boolean;
   }
 
   interface BatchCreateTaskVersionAsyncResponse {
@@ -12959,6 +13185,8 @@ declare namespace V20210820 {
     Privilege: number;
     /** 项目Id */
     ProjectId: string;
+    /** 数据库类型 */
+    Type?: string;
     /** 责任人 */
     Incharge?: string;
     /** 数据优化引擎 */
@@ -13307,6 +13535,8 @@ declare namespace V20210820 {
     AlarmRecipientTypes?: string;
     /** 是否需要校验循环依赖，默认为 true，如果使用了 CheckTaskCycleLink 和 CheckTaskCycleConfiguration 两个接口校验成功可以传 false，后台服务器不再做校验 */
     EnableCheckTaskCycleLink?: boolean;
+    /** 是否需要补录中间实例 */
+    EnableMakeUp?: boolean;
   }
 
   interface CreateTaskVersionDsResponse {
@@ -13895,7 +14125,7 @@ declare namespace V20210820 {
 
   interface DescribeBaseBizCatalogsResponse {
     /** 类目列表 */
-    Data: BizCatalogsInfo[] | null;
+    Data?: BizCatalogsInfo[] | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -14341,7 +14571,7 @@ declare namespace V20210820 {
 
   interface DescribeDutyScheduleListResponse {
     /** 无 */
-    Data: DutySchedule;
+    Data?: DutySchedule;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -14385,6 +14615,8 @@ declare namespace V20210820 {
     SortItem?: string;
     /** 排序顺序 */
     SortType?: string;
+    /** 有效次数 */
+    ConsumeCount?: string;
   }
 
   interface DescribeEventCasesResponse {
@@ -14461,7 +14693,7 @@ declare namespace V20210820 {
 
   interface DescribeExecutorGroupMetricResponse {
     /** 执行组指标信息 */
-    Data: ExecutorResourceGroupInfo | null;
+    Data?: ExecutorResourceGroupInfo | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -15055,6 +15287,8 @@ declare namespace V20210820 {
     BlackTaskIdList?: string[];
     /** 时区 */
     ScheduleTimeZone?: string;
+    /** 根据任务优先级筛选 */
+    RunPriorityList?: number[];
   }
 
   interface DescribeOperateOpsTasksResponse {
@@ -15483,8 +15717,6 @@ declare namespace V20210820 {
   }
 
   interface DescribeReportTaskDetailRequest {
-    /** 租户id */
-    TenantId: string;
     /** 引擎任务id */
     EngineTaskId: string;
   }
@@ -15850,44 +16082,44 @@ declare namespace V20210820 {
 
   interface DescribeScheduleInstancesRequest {
     /** 请求来源，WEB 前端；CLIENT 客户端 */
-    RequestFromSource?: string;
-    /** 实例列表 */
+    RequestFromSource?: string | null;
+    /** 【已废弃参数，新用户接入无需关注】实例列表过滤条件 */
     Instances?: InstanceOpsDto[];
-    /** 检查父任务类型, true: 检查父任务; false: 不检查父任务 */
+    /** 【已废弃参数，新用户接入无需关注】检查父任务类型, true: 检查父任务类型; false: 不检查父任务类型 */
     CheckFather?: boolean;
-    /** 重跑类型, 1: 自身; 3: 孩子; 2: 自身以及孩子 */
+    /** 【已废弃参数，新用户接入无需关注】重跑类型, 1: 仅重跑当前实例; 2: 重跑当前实例及其子实例; 3: 仅重跑子实例 */
     RerunType?: string;
-    /** 实例依赖方式, 1: 自依赖; 2: 任务依赖; 3: 自依赖及父子依赖 */
+    /** 【已废弃参数，新用户接入无需关注】实例依赖方式, 1: 任务自依赖; 2: 任务上游依赖; 3: 自依赖及其上游依赖 */
     DependentWay?: string;
-    /** 重跑忽略事件监听与否 */
+    /** 【已废弃参数，新用户接入无需关注】重跑时是否忽略事件监听 */
     SkipEventListening?: boolean;
-    /** 下游实例范围 1: 所在工作流 2: 所在项目 3: 所有跨工作流依赖的项目 */
+    /** 【已废弃参数，新用户接入无需关注】下游实例范围 1: 所在工作流 2: 所在项目 3: 所有跨工作流依赖的项目 */
     SonInstanceType?: string;
     /** 查询条件 */
     SearchCondition?: InstanceApiOpsRequest;
-    /** 访问类型 */
+    /** 【已废弃参数，新用户接入无需关注】访问类型 */
     OptType?: string;
-    /** 操作者名称 */
+    /** 【已废弃参数，新用户接入无需关注】操作者名称 */
     OperatorName?: string;
-    /** 操作者id */
+    /** 【已废弃参数，新用户接入无需关注】操作者id */
     OperatorId?: string;
-    /** 项目id */
+    /** 项目ID */
     ProjectId?: string;
-    /** 项目标志 */
+    /** 【必要参数】项目ID */
     ProjectIdent?: string;
-    /** 项目名称 */
+    /** 【已废弃参数，新用户接入无需关注】项目名称 */
     ProjectName?: string;
-    /** 索引页码 */
+    /** 【必要参数】分页查询开始页页码，默认值为 1 */
     PageIndex?: number;
-    /** 页面大小 */
+    /** 【必要参数】分页查询每页返回的结果行数，默认值为 10 */
     PageSize?: number;
-    /** 数据总数 */
+    /** 【已废弃参数，新用户接入无需关注】数据总数 */
     Count?: number;
-    /** 基础请求信息 */
+    /** 【已废弃参数，新用户接入无需关注】基础请求信息 */
     RequestBaseInfo?: ProjectBaseInfoOpsRequest;
-    /** 是否计算总数 */
+    /** 【已废弃参数，新用户接入无需关注】是否计算总数 */
     IsCount?: boolean;
-    /** 项目ID列表，用于多项目实例列表筛选，请注意，该字段传入时 ProjectId 字段也必须传，且传入的 ProjectIds 中的项目ID必须是当前用户有权限的项目ID，否则会由于权限校验失败报错 */
+    /** 【已废弃参数，新用户接入无需关注】项目ID列表，用于多项目实例列表筛选，请注意，该字段传入时 ProjectId 字段也必须传，且传入的 ProjectIds 中的项目ID必须是当前用户有权限的项目ID，否则会由于权限校验失败报错 */
     ProjectIds?: string[];
   }
 
@@ -16241,9 +16473,9 @@ declare namespace V20210820 {
 
   interface DescribeTablePartitionsResponse {
     /** 分区详情列表 */
-    TablePartitionSet: TablePartition[] | null;
+    TablePartitionSet?: TablePartition[] | null;
     /** 总记录数 */
-    TotalCount: number;
+    TotalCount?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -16633,11 +16865,19 @@ declare namespace V20210820 {
     EndTime?: string;
     /** 试运行记录id */
     RecordIdList?: number[];
+    /** 分页大小 */
+    PageSize?: number;
+    /** 分页索引 */
+    PageIndex?: number;
   }
 
   interface DescribeTestRunningRecordResponse {
     /** 编排空间试运行任务 */
     Data?: TestRunningRecord[] | null;
+    /** 总页数 */
+    TotalPages?: number | null;
+    /** 总条数 */
+    TotalItems?: number | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -16707,6 +16947,8 @@ declare namespace V20210820 {
     WorkflowId: string;
     /** 项目id */
     ProjectId: string;
+    /** 请求来源，WEB 前端；CLIENT 客户端 */
+    RequestFromSource?: string;
   }
 
   interface DescribeWorkflowCanvasInfoResponse {
@@ -17307,6 +17549,10 @@ declare namespace V20210820 {
     ScheduleTimeFrom?: string;
     /** 计划调度时间 */
     ScheduleTimeTo?: string;
+    /** 任务优先级过滤实例列表 */
+    RunPriorityList?: number[];
+    /** 实例调度周期筛选 */
+    InstanceCycleType?: string[];
   }
 
   interface JudgeResourceFileRequest {
@@ -18235,6 +18481,8 @@ declare namespace V20210820 {
     EventBroadcastType?: string;
     /** 时间格式 */
     DimensionFormat?: string;
+    /** 事件消费有效次数 */
+    ValidConsumeCount?: number;
   }
 
   interface RegisterDsEventResponse {
@@ -19370,6 +19618,10 @@ declare interface Wedata {
   GetAlarmMessage(data: GetAlarmMessageRequest, config?: AxiosRequestConfig): AxiosPromise<GetAlarmMessageResponse>;
   /** 查看代码文件详情 {@link GetCodeFileRequest} {@link GetCodeFileResponse} */
   GetCodeFile(data: GetCodeFileRequest, config?: AxiosRequestConfig): AxiosPromise<GetCodeFileResponse>;
+  /** 获取codestudio文件夹详情 {@link GetCodeFolderRequest} {@link GetCodeFolderResponse} */
+  GetCodeFolder(data: GetCodeFolderRequest, config?: AxiosRequestConfig): AxiosPromise<GetCodeFolderResponse>;
+  /** 查看补录计划配置详情 {@link GetDataBackfillPlanRequest} {@link GetDataBackfillPlanResponse} */
+  GetDataBackfillPlan(data: GetDataBackfillPlanRequest, config?: AxiosRequestConfig): AxiosPromise<GetDataBackfillPlanResponse>;
   /** 查看数据源详情 {@link GetDataSourceRequest} {@link GetDataSourceResponse} */
   GetDataSource(data: GetDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<GetDataSourceResponse>;
   /** 查看数据源关联任务列表 {@link GetDataSourceRelatedTasksRequest} {@link GetDataSourceRelatedTasksResponse} */
@@ -19390,6 +19642,8 @@ declare interface Wedata {
   GetResourceFile(data: GetResourceFileRequest, config?: AxiosRequestConfig): AxiosPromise<GetResourceFileResponse>;
   /** 查看某个资源组的监控指标 {@link GetResourceGroupMetricsRequest} {@link GetResourceGroupMetricsResponse} */
   GetResourceGroupMetrics(data: GetResourceGroupMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<GetResourceGroupMetricsResponse>;
+  /** 获取SQL文件夹详情 {@link GetSQLFolderRequest} {@link GetSQLFolderResponse} */
+  GetSQLFolder(data: GetSQLFolderRequest, config?: AxiosRequestConfig): AxiosPromise<GetSQLFolderResponse>;
   /** 查看SQL脚本详情 {@link GetSQLScriptRequest} {@link GetSQLScriptResponse} */
   GetSQLScript(data: GetSQLScriptRequest, config?: AxiosRequestConfig): AxiosPromise<GetSQLScriptResponse>;
   /** 获取表详情 {@link GetTableRequest} {@link GetTableResponse} */
@@ -19453,7 +19707,7 @@ declare interface Wedata {
   /** 查看资源文件夹列表 {@link ListResourceFoldersRequest} {@link ListResourceFoldersResponse} */
   ListResourceFolders(data: ListResourceFoldersRequest, config?: AxiosRequestConfig): AxiosPromise<ListResourceFoldersResponse>;
   /** 查看资源组列表 {@link ListResourceGroupsRequest} {@link ListResourceGroupsResponse} */
-  ListResourceGroups(data: ListResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ListResourceGroupsResponse>;
+  ListResourceGroups(data?: ListResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ListResourceGroupsResponse>;
   /** 获取sql文件夹内容列表 {@link ListSQLFolderContentsRequest} {@link ListSQLFolderContentsResponse} */
   ListSQLFolderContents(data: ListSQLFolderContentsRequest, config?: AxiosRequestConfig): AxiosPromise<ListSQLFolderContentsResponse>;
   /** 查询SQL运行记录 {@link ListSQLScriptRunsRequest} {@link ListSQLScriptRunsResponse} */
@@ -19494,6 +19748,8 @@ declare interface Wedata {
   RunSQLScript(data: RunSQLScriptRequest, config?: AxiosRequestConfig): AxiosPromise<RunSQLScriptResponse>;
   /** 实例批量置成功(异步) {@link SetSuccessTaskInstancesAsyncRequest} {@link SetSuccessTaskInstancesAsyncResponse} */
   SetSuccessTaskInstancesAsync(data: SetSuccessTaskInstancesAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<SetSuccessTaskInstancesAsyncResponse>;
+  /** 异步批量启动任务 {@link StartOpsTasksRequest} {@link StartOpsTasksResponse} */
+  StartOpsTasks(data: StartOpsTasksRequest, config?: AxiosRequestConfig): AxiosPromise<StartOpsTasksResponse>;
   /** 异步批量下线任务 {@link StopOpsTasksAsyncRequest} {@link StopOpsTasksAsyncResponse} */
   StopOpsTasksAsync(data: StopOpsTasksAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<StopOpsTasksAsyncResponse>;
   /** 停止运行SQL脚本 {@link StopSQLScriptRunRequest} {@link StopSQLScriptRunResponse} */
@@ -19856,7 +20112,7 @@ declare interface Wedata {
   DescribeRules(data: V20210820.DescribeRulesRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeRulesResponse>;
   /** 分页查询质量规则 {@link V20210820.DescribeRulesByPageRequest} {@link V20210820.DescribeRulesByPageResponse} */
   DescribeRulesByPage(data: V20210820.DescribeRulesByPageRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeRulesByPageResponse>;
-  /** aiops-获取实例列表 {@link V20210820.DescribeScheduleInstancesRequest} {@link V20210820.DescribeScheduleInstancesResponse} */
+  /** 运维中心-获取实例列表 {@link V20210820.DescribeScheduleInstancesRequest} {@link V20210820.DescribeScheduleInstancesResponse} */
   DescribeScheduleInstances(data: V20210820.DescribeScheduleInstancesRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeScheduleInstancesResponse>;
   /** 运维大屏-实例状态分布 {@link V20210820.DescribeSchedulerInstanceStatusRequest} {@link V20210820.DescribeSchedulerInstanceStatusResponse} */
   DescribeSchedulerInstanceStatus(data: V20210820.DescribeSchedulerInstanceStatusRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeSchedulerInstanceStatusResponse>;

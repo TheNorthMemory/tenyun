@@ -92,6 +92,12 @@ declare interface Condition {
   PageNum?: number;
 }
 
+/** 文件鉴定任务分页数据 */
+declare interface CreateDLPFileDetectTaskData {
+  /** 任务请求唯一Id */
+  TaskRequestId?: string[];
+}
+
 /** 提交送检任务相应数据 */
 declare interface CreateDLPFileDetectionTaskData {
   /** 提交任务生成的id，也即requestID。用于后续查询 */
@@ -216,6 +222,62 @@ declare interface DescribeAggrSoftDeviceListData {
   AggrSoftDeviceList?: AggrSoftDeviceRow[] | null;
 }
 
+/** 业务响应数据 */
+declare interface DescribeDLPEdgeNodeGroupsRspData {
+  /** 分组信息 */
+  Items?: DescribeDLPEdgeNodeGroupsRspItem[];
+  /** 分页信息 */
+  Page?: Paging;
+}
+
+/** 节点分组信息 */
+declare interface DescribeDLPEdgeNodeGroupsRspItem {
+  /** 自增id，数据库中唯一 */
+  Id?: number;
+  /** 节点分组名称 */
+  GroupName?: string;
+  /** 节点分组id */
+  GroupId?: string;
+  /** 包含边缘节点数量 */
+  EdgeCount?: number;
+}
+
+/** 业务响应数据 */
+declare interface DescribeDLPEdgeNodesPageData {
+  /** 分页信息 */
+  Page?: Paging;
+  /** 节点列表 */
+  Items?: DescribeDLPEdgeNodesRspItem[];
+}
+
+/** 边缘节点信息 */
+declare interface DescribeDLPEdgeNodesRspItem {
+  /** 自增id，数据库中唯一 */
+  Id?: number;
+  /** 节点分组唯一id */
+  GroupId?: string;
+  /** 节点id */
+  EdgeNodeId?: string;
+  /** 节点名称 */
+  EdgeNodeName?: string;
+  /** 是否活跃/连通 */
+  IsActive?: boolean;
+  /** 节点分组名称 */
+  GroupName?: string;
+  /** 节点IP */
+  Ip?: string;
+  /** 节点版本 */
+  Version?: string;
+  /** 是否支持升级连接器 */
+  IsUpgradeEnable?: boolean;
+  /** 升级状态: 0(升级中) , 1(升级失败) 或 2(升级成功) */
+  UpgradeStatus?: number;
+  /** 升级状态描述 */
+  UpgradeDescription?: string;
+  /** 规则版本 */
+  RuleVersion?: string;
+}
+
 /** 查询文件检测结果响应数据 */
 declare interface DescribeDLPFileDetectResultData {
   /** 提交任务时的文件md5 */
@@ -226,6 +288,20 @@ declare interface DescribeDLPFileDetectResultData {
   Status?: string;
   /** 文件检测结果，json字符串。包含文件基本信息如type，path，md5以及命中的信息。其中State为检测状态，0为待解析文件，1为检测中，2为检测完成；FileAbstract为命中的上下文摘要信息，HitRuleid是命中的规则唯一ID，HitRuleCategoryId是规则分类唯一id，HitLevel是文件的等级，HitRuleDesc是规则的名称，HitContent是具体命中的规则以及词库信息，以及命中的内容。EngineConfigVersion是当前词库版本号 */
   DetectResult?: string;
+}
+
+/** 查询文件检测结果响应数据 */
+declare interface DescribeDLPFileDetectTaskResult {
+  /** 提交任务时的文件md5 */
+  FileMd5?: string;
+  /** 提交任务时的文件名 */
+  FileName?: string;
+  /** 检测执行状态：0未执行 1等待执行 2执行中 3执行失败 4执行完成 */
+  Status?: number;
+  /** FileAbstract:文件摘要 FileAttr:文件属性 FileCategory:命中分级分类 array FileContent:命中信息json(array) RuleId:规则Id RuleName:规则名称 RuleLevel:规则等级 Hits：命中词库内容 LibraryId：词库Id LibraryType:词库类型 LibraryName:词库名称 Attribute: 命中属性 doc.Content文件内容|doc.FileSize文件大小|doc.Name文件名|doc.Type文件类型 String 待匹配内容 Content 命中内容 HitsTotal 规则命中次数 FileMd5 文件ND5 FileName 文件名 FileSize 文件大小 FileType 文件后缀 FileTypeName 文件类型名称 FinalDataLevel 命中最高等级 NodeId 节点唯一Id NodeIp 节点IP NodeName 节点名称 OperateTime 文件操作时间 Url 文件下载Url */
+  DetectResult?: string;
+  /** 检测执行状态描述 */
+  Message?: string;
 }
 
 /** 查询设备组子分组详情响应结构 */
@@ -822,6 +898,30 @@ declare interface Sort {
   Order?: string;
 }
 
+declare interface CreateDLPFileDetectTaskRequest {
+  /** 文件下载Url */
+  DownloadUrl: string;
+  /** 文件名 */
+  FileName: string;
+  /** 文件Md5 */
+  FileMd5: string;
+  /** 负载类型 1 从GroupId中选一节点 鉴定 2使用所有SelectNodeIds节点鉴定 */
+  BalanceType: number;
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
+  /** 选中节点唯一Id列表,BalanceType=2时必填 */
+  SelectNodeIds?: string[];
+  /** 节点组唯一Id,BalanceType=1时必填 */
+  GroupId?: string;
+}
+
+declare interface CreateDLPFileDetectTaskResponse {
+  /** 创建文件鉴定任务数据 */
+  Data?: CreateDLPFileDetectTaskData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDLPFileDetectionTaskRequest {
   /** 文件下载链接，要求公网可访问，GET方式访问后为文件 */
   Url: string;
@@ -954,6 +1054,34 @@ declare interface DescribeAggrSoftDeviceListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDLPEdgeNodeGroupsRequest {
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
+  /** 过滤条件 */
+  Condition?: Condition;
+}
+
+declare interface DescribeDLPEdgeNodeGroupsResponse {
+  /** 业务响应数据 */
+  Data?: DescribeDLPEdgeNodeGroupsRspData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDLPEdgeNodesRequest {
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
+  /** 过滤条件、分页参数EdgeNodeName - string - 是否必填：否 - 操作符: ilike - 排序支持：否- 按节点名称过滤。 */
+  Condition?: Condition;
+}
+
+declare interface DescribeDLPEdgeNodesResponse {
+  /** 业务响应数据 */
+  Data?: DescribeDLPEdgeNodesPageData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDLPFileDetectResultRequest {
   /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
   DomainInstanceId?: string;
@@ -964,6 +1092,20 @@ declare interface DescribeDLPFileDetectResultRequest {
 declare interface DescribeDLPFileDetectResultResponse {
   /** 文件鉴定任务结果数据。详情查看具体数据结构 */
   Data?: DescribeDLPFileDetectResultData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDLPFileDetectTaskResultRequest {
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
+  /** 任务请求Id */
+  TaskRequestId?: string;
+}
+
+declare interface DescribeDLPFileDetectTaskResultResponse {
+  /** 文件鉴定任务结果数据。详情查看具体数据结构 */
+  Data?: DescribeDLPFileDetectTaskResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1203,6 +1345,8 @@ declare interface ModifyVirtualDeviceGroupsResponse {
 /** {@link Ioa iOA 零信任安全管理系统} */
 declare interface Ioa {
   (): Versions;
+  /** 创建文件鉴定任务 {@link CreateDLPFileDetectTaskRequest} {@link CreateDLPFileDetectTaskResponse} */
+  CreateDLPFileDetectTask(data: CreateDLPFileDetectTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDLPFileDetectTaskResponse>;
   /** 提交送检任务 {@link CreateDLPFileDetectionTaskRequest} {@link CreateDLPFileDetectionTaskResponse} */
   CreateDLPFileDetectionTask(data: CreateDLPFileDetectionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDLPFileDetectionTaskResponse>;
   /** 创建获取终端进程网络服务信息任务 {@link CreateDeviceTaskRequest} {@link CreateDeviceTaskResponse} */
@@ -1219,8 +1363,14 @@ declare interface Ioa {
   DescribeAggrSoftDetail(data?: DescribeAggrSoftDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAggrSoftDetailResponse>;
   /** 获取聚合软件的设备列表 {@link DescribeAggrSoftDeviceListRequest} {@link DescribeAggrSoftDeviceListResponse} */
   DescribeAggrSoftDeviceList(data?: DescribeAggrSoftDeviceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAggrSoftDeviceListResponse>;
+  /** 查询DLP边缘节点分组 {@link DescribeDLPEdgeNodeGroupsRequest} {@link DescribeDLPEdgeNodeGroupsResponse} */
+  DescribeDLPEdgeNodeGroups(data?: DescribeDLPEdgeNodeGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDLPEdgeNodeGroupsResponse>;
+  /** 查询边缘节点列表 {@link DescribeDLPEdgeNodesRequest} {@link DescribeDLPEdgeNodesResponse} */
+  DescribeDLPEdgeNodes(data?: DescribeDLPEdgeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDLPEdgeNodesResponse>;
   /** 查询文件检测结果 {@link DescribeDLPFileDetectResultRequest} {@link DescribeDLPFileDetectResultResponse} */
   DescribeDLPFileDetectResult(data?: DescribeDLPFileDetectResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDLPFileDetectResultResponse>;
+  /** 查询文件鉴定任务结果 {@link DescribeDLPFileDetectTaskResultRequest} {@link DescribeDLPFileDetectTaskResultResponse} */
+  DescribeDLPFileDetectTaskResult(data?: DescribeDLPFileDetectTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDLPFileDetectTaskResultResponse>;
   /** 查询设备组子分组 {@link DescribeDeviceChildGroupsRequest} {@link DescribeDeviceChildGroupsResponse} */
   DescribeDeviceChildGroups(data?: DescribeDeviceChildGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceChildGroupsResponse>;
   /** 基于软件查看终端详情列表 {@link DescribeDeviceDetailListRequest} {@link DescribeDeviceDetailListResponse} */

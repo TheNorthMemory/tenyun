@@ -706,6 +706,10 @@ declare interface DisplayWechatApplet {
   QrCode?: string;
   /** 描述 */
   Description?: string;
+  /** 认证主体 */
+  RecordSubject?: string;
+  /** 账号Appid */
+  AccountAppid?: string;
 }
 
 /** 微信公众号详情 */
@@ -724,6 +728,8 @@ declare interface DisplayWechatOfficialAccount {
   QrCode?: string;
   /** 描述 */
   Description?: string;
+  /** 认证主体 */
+  RecordSubject?: string;
 }
 
 /** 支持按照各字段过滤 */

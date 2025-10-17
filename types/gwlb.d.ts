@@ -198,6 +198,12 @@ declare interface TargetGroupInstanceStatus {
   Status?: string;
 }
 
+/** 可用区资源列表 */
+declare interface ZoneResource {
+  /** 主可用区 */
+  MasterZone?: string;
+}
+
 declare interface AssociateTargetGroupsRequest {
   /** 绑定的关系数组。一次请求最多支持20个。 */
   Associations: TargetGroupAssociation[];
@@ -317,6 +323,22 @@ declare interface DescribeGatewayLoadBalancersRequest {
   Filters?: Filter[];
   /** 搜索字段，模糊匹配名称、VIP。 */
   SearchKey?: string;
+}
+
+declare interface DescribeGatewayLoadBalancersResourcesRequest {
+  /** 返回可用区资源列表数目，默认20，最大值100。 */
+  Limit?: number;
+  /** 返回可用区资源列表起始偏移量，默认0。 */
+  Offset?: number;
+}
+
+declare interface DescribeGatewayLoadBalancersResourcesResponse {
+  /** 可用区支持的资源列表。 */
+  ZoneResourceSet?: ZoneResource[];
+  /** 可用区资源列表数目。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface DescribeGatewayLoadBalancersResponse {
@@ -523,6 +545,8 @@ declare interface Gwlb {
   DeregisterTargetGroupInstances(data: DeregisterTargetGroupInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterTargetGroupInstancesResponse>;
   /** 查询网关负载均衡实例列表 {@link DescribeGatewayLoadBalancersRequest} {@link DescribeGatewayLoadBalancersResponse} */
   DescribeGatewayLoadBalancers(data?: DescribeGatewayLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayLoadBalancersResponse>;
+  /** 查询用户在当前地域支持可用区列表 {@link DescribeGatewayLoadBalancersResourcesRequest} {@link DescribeGatewayLoadBalancersResourcesResponse} */
+  DescribeGatewayLoadBalancersResources(data?: DescribeGatewayLoadBalancersResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayLoadBalancersResourcesResponse>;
   /** 查询目标组后端服务状态 {@link DescribeTargetGroupInstanceStatusRequest} {@link DescribeTargetGroupInstanceStatusResponse} */
   DescribeTargetGroupInstanceStatus(data: DescribeTargetGroupInstanceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetGroupInstanceStatusResponse>;
   /** 获取目标组绑定的实例列表 {@link DescribeTargetGroupInstancesRequest} {@link DescribeTargetGroupInstancesResponse} */

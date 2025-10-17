@@ -1132,6 +1132,8 @@ declare interface DescribeInstanceResponse {
   TopicPrefixSlashLimit?: number;
   /** 单客户端发送消息限速，单位 条/秒 */
   MessageRate?: number;
+  /** 服务端tls支持的协议，使用“,”分割。例如：TLSv1.3,TLSv1.2,TLSv1.1,TLSv1 */
+  TransportLayerSecurity?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

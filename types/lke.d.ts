@@ -3338,7 +3338,7 @@ declare interface DescribeWorkflowRunRequest {
 }
 
 declare interface DescribeWorkflowRunResponse {
-  /** 总数 */
+  /** 工作流的详情 */
   WorkflowRun?: WorkflowRunDetail;
   /** 节点列表 */
   NodeRuns?: NodeRunBase[];

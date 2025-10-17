@@ -266,6 +266,18 @@ declare interface CcInfo {
   NotifyType?: string;
 }
 
+/** 合同对比差异结果详情。 */
+declare interface ComparisonDetail {
+  /** 对比前后差异类型，具体如下： **add**：新增 **change**：变更 **delete**：删除 */
+  ComparisonType?: string;
+  /** 对比内容类型，具体如下： **text**：文本 **table**：表格 **picture**：图片 */
+  ContentType?: string;
+  /** 原文文本。 */
+  OriginText?: string;
+  /** 对比文本。 */
+  DiffText?: string;
+}
+
 /** 此结构体 (Component) 用于描述控件属性。在通过文件发起合同时，对应的component有三种定位方式1. 绝对定位方式 （可以通过 [PDF坐标计算助手](https://qian.tencent.com/developers/tools/template-editor)计算控件的坐标）2. 表单域(FIELD)定位方式3. 关键字(KEYWORD)定位方式，使用关键字定位时，请确保PDF原始文件内是关键字以文字形式保存在PDF文件中，不支持对图片内文字进行关键字查找 */
 declare interface Component {
   /** **如果是Component填写控件类型，则可选的字段为**： TEXT : 普通文本控件，输入文本字符串； MULTI_LINE_TEXT : 多行文本控件，输入文本字符串； CHECK_BOX : 勾选框控件，若选中填写ComponentValue 填写 true或者 false 字符串； FILL_IMAGE : 图片控件，ComponentValue 填写图片的资源 ID； DYNAMIC_TABLE : 动态表格控件； ATTACHMENT : 附件控件,ComponentValue 填写附件图片的资源 ID列表，以逗号分隔； SELECTOR : 选择器控件，ComponentValue填写选择的字符串内容； DATE : 日期控件；默认是格式化为xxxx年xx月xx日字符串； WATERMARK : 水印控件；只能分配给发起方，必须设置ComponentExtra； DISTRICT : 省市区行政区控件，ComponentValue填写省市区行政区字符串内容；**如果是SignComponent签署控件类型，需要根据签署人的类型可选的字段为*** 企业方 SIGN_SEAL : 签署印章控件； SIGN_DATE : 签署日期控件； SIGN_SIGNATURE : 用户签名控件； SIGN_PAGING_SIGNATURE : 用户签名骑缝章控件；；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeight SIGN_PAGING_SEAL : 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeight SIGN_OPINION : 签署意见控件，用户需要根据配置的签署意见内容，完成对意见内容的确认； SIGN_VIRTUAL_COMBINATION : 签批控件。内部最多组合4个特定控件（SIGN_SIGNATURE，SIGN_DATA,SIGN_MULTI_LINE_TEXT,SIGN_SELECTOR），本身不填充任何文字内容 SIGN_MULTI_LINE_TEXT : 多行文本，仅可用在签批控件内部作为组合控件，单独无法使用，常用作批注附言 SIGN_SELECTOR : 选择器，仅可用在签批控件内部作为组合控件，单独无法使用，常用作审批意见的选择 SIGN_LEGAL_PERSON_SEAL : 企业法定代表人控件。* 个人方 SIGN_DATE : 签署日期控件； SIGN_SIGNATURE : 用户签名控件； SIGN_PAGING_SIGNATURE : 用户签名骑缝章控件； SIGN_VIRTUAL_COMBINATION : 签批控件。内部最多组合4个特定控件（SIGN_SIGNATURE，SIGN_DATA,SIGN_MULTI_LINE_TEXT,SIGN_SELECTOR），本身不填充任何文字内容 SIGN_MULTI_LINE_TEXT : 多行文本，仅可用在签批控件内部作为组合控件，单独无法使用，常用作批注附言 SIGN_SELECTOR : 选择器，仅可用在签批控件内部作为组合控件，单独无法使用，常用作审批意见的选择 SIGN_OPINION : 签署意见控件，用户需要根据配置的签署意见内容，完成对意见内容的确认； 注：` 表单域的控件不能作为印章和签名控件` */
@@ -476,10 +488,12 @@ declare interface ExtractionField {
   Name: string;
   /** 指定合同智能提取的字段类型，目前仅支持`TEXT`、`DATE`、`NUMBER`、`OPTION`类型。类型支持如下：1、TEXT（文本）2、DATE（日期）3、NUMBER（数字）4、OPTION（选项值） */
   Type: string;
-  /** 用于描述字段信息。注意：1、`如果Type值为OPTION时，需要在字段描述中填写选项值，用,分隔`2、描述字段不能超过100个字符 */
+  /** 用于描述字段信息。注意：1、描述字段不能超过100个字符 */
   Description?: string;
   /** 提取出合同中的字段信息。 */
   Values?: string[];
+  /** 当字段类型`Type`为OPTION时为必输项，输入选项值 */
+  ChoiceList?: string[];
 }
 
 /** 合同信息提取字段值信息。 */
@@ -1626,6 +1640,14 @@ declare interface SuccessUpdateStaffData {
   Url?: string;
 }
 
+/** 标签 */
+declare interface Tag {
+  /** 标签键，最大长度不超过50字符。 */
+  TagKey?: string;
+  /** 标签值，最大长度不超过50字符。 */
+  TagValue?: string;
+}
+
 /** 此结构体 (TemplateInfo) 用于描述模板的信息。> **模板组成** >> 一个模板通常会包含以下结构信息>- 模板基本信息>- 发起方参与信息Promoter、签署参与方 Recipients，后者会在模板发起合同时用于指定参与方>- 填写控件 Components>- 签署控件 SignComponents>- 生成模板的文件基础信息 FileInfos */
 declare interface TemplateInfo {
   /** 模板ID，模板的唯一标识 */
@@ -2013,7 +2035,7 @@ declare interface CreateBatchQuickSignUrlRequest {
   Intention?: Intention;
   /** 缓存签署人信息。在H5签署链接动态领取场景，首次填写后，选择缓存签署人信息，在下次签署人点击领取链接时，会自动将个人信息（姓名、身份证号、手机号）填入，否则需要每次手动填写。注: `若参与方为企业员工时，暂不支持对参与方信息进行缓存` */
   CacheApproverInfo?: boolean;
-  /** 是否允许此链接中签署方批量拒签。 false (默认): 不允许批量拒签 true : 允许批量拒签。注：`合同组暂不支持批量拒签功能。` */
+  /** 是否允许此链接中签署方批量拒签。 false (默认): 不允许批量拒签 true : 允许批量拒签。注：`当前合同组不支持批量拒签功能。请对合同组中的每个子合同逐一执行拒签操作，以达到拒签整个合同组的效果。` */
   CanBatchReject?: boolean;
   /** 预设的动态签署方的补充信息，仅匹配对应信息的签署方才能领取合同。暂时仅对个人参与方生效。 */
   PresetApproverInfo?: PresetApproverInfo;
@@ -2055,7 +2077,7 @@ declare interface CreateBatchSignUrlRequest {
   AutoJumpBack?: boolean;
   /** 仅公众号 H5 跳转电子签小程序时，如需签署完成的“返回应用”功能，在获取签署链接接口的 UrlUseEnv 参数需设置为 **WeChatOfficialAccounts**，小程序签署成功的结果页面中才会出现“返回应用”按钮。在用户点击“返回应用”按钮之后，会返回到公众号 H5。 参考 [公众号 H5 跳转电子签小程序](https://qian.tencent.com/developers/company/openwxminiprogram/#23-%E5%85%AC%E4%BC%97%E5%8F%B7-h5-%E4%B8%AD%E8%B7%B3%E8%BD%AC)。 */
   UrlUseEnv?: string;
-  /** 是否允许此链接中签署方批量拒签。 false (默认): 不允许批量拒签 true : 允许批量拒签。注：`1. 合同组暂不支持批量拒签功能。2. 如果是链接直接跳转至详情页（JumpToDetail参数为true），也不支持批量拒签功能` */
+  /** 是否允许此链接中签署方批量拒签。 false (默认): 不允许批量拒签 true : 允许批量拒签。注：`1. 当前合同组不支持批量拒签功能。请对合同组中的每个子合同逐一执行拒签操作，以达到拒签整个合同组的效果。2. 如果是链接直接跳转至详情页（JumpToDetail参数为true），也不支持批量拒签功能` */
   CanBatchReject?: boolean;
   /** 是否允许此链接中签署方批量确认已读文件。 false (默认): 不允许批量确认已读文件。 true : 允许批量确认已读文件。注：`1. 此功能为白名单功能，使用前请联系对应客户经理进行开通。2. 使用此功能时，FlowIds参数必传。3. 对于企业签署方，如果对印章/签名控件有限制要求，需要保证所有印章/签名签署控件限制要求(印章id或印章/签名类型限制)一致，否则无法使用此功能。` */
   CanSkipReadFlow?: boolean;
@@ -2072,6 +2094,30 @@ declare interface CreateBatchSignUrlResponse {
   RequestId?: string;
 }
 
+declare interface CreateContractComparisonTaskRequest {
+  /** 执行合同审查任务的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 原版文件ID，对比基准的旧版本文件唯一标识，通过UploadFiles接口获取文件资源ID。 */
+  OriginFileResourceId: string;
+  /** 新版文件ID，与旧版进行对比的新版本文件唯一标识，通过UploadFiles接口获取文件资源ID。 */
+  DiffFileResourceId: string;
+  /** 对比任务备注，长度不能超过50个字符。 */
+  Comment?: string;
+  /** 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 1024长度。在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的[回调通知](https://qian.tencent.com/developers/company/callback_types_v2)模块。 */
+  UserData?: string;
+  /** 标签列表，用户自定义的键值对（Key-Value），可绑定到资源上，用于资源的分类、管理和访问控制。 */
+  Tags?: Tag[];
+}
+
+declare interface CreateContractComparisonTaskResponse {
+  /** 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 1024长度。 */
+  UserData?: string;
+  /** 合同对比任务ID，可以调用接口查询合同对比任务结果查看对比任务的结果。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateContractDiffTaskWebUrlRequest {
   /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -2081,6 +2127,10 @@ declare interface CreateContractDiffTaskWebUrlRequest {
   OriginalFileResourceId?: string;
   /** 需要对比的新合同文件资源ID，通过UploadFiles接口获取文件资源ID。 */
   DiffFileResourceId?: string;
+  /** 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 1024长度。在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的[回调通知](https://qian.tencent.com/developers/company/callback_types_v2)模块。 */
+  UserData?: string;
+  /** 标签列表，用户自定义的键值对（Key-Value），可绑定到资源上，用于资源的分类、管理和访问控制。 */
+  Tags?: Tag[];
 }
 
 declare interface CreateContractDiffTaskWebUrlResponse {
@@ -2088,6 +2138,8 @@ declare interface CreateContractDiffTaskWebUrlResponse {
   TaskId?: string;
   /** 合同对比嵌入式web页面链接，有效期：5分钟链接仅能使用一次 */
   WebUrl?: string;
+  /** 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 1024长度。 */
+  UserData?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2933,6 +2985,8 @@ declare interface CreateOrganizationBatchSignUrlRequest {
   RecipientIds?: string[];
   /** 合同组Id，传入此参数则可以不传FlowIds */
   FlowGroupId?: string;
+  /** 是否允许此链接中签署方批量拒签。 false (默认): 不允许批量拒签 true : 允许批量拒签。注：`当前合同组不支持批量拒签功能。请对合同组中的每个子合同逐一执行拒签操作，以达到拒签整个合同组的效果。` */
+  CanBatchReject?: boolean;
 }
 
 declare interface CreateOrganizationBatchSignUrlResponse {
@@ -3715,6 +3769,8 @@ declare interface DescribeContractComparisonTaskRequest {
   Operator: UserInfo;
   /** 合同对比任务ID，该参数通过调用接口CreateContractComparisonTask获取。 */
   TaskId: string;
+  /** 是否返回详细的对比结果。为 true时，响应中将包含详细的对比信息，如相似度、文本差异具体内容等；为 false时，仅返回任务基本状态信息。注：`详细结果数据量可能较大，请按需开启。` */
+  ShowDetail?: boolean;
 }
 
 declare interface DescribeContractComparisonTaskResponse {
@@ -3742,6 +3798,8 @@ declare interface DescribeContractComparisonTaskResponse {
   Operator?: string;
   /** 合同对比任务创建时间，时间戳。 */
   CreateTime?: number;
+  /** 对比差异详情，请求参数ShowDetail为true时返回。 */
+  ComparisonDetail?: ComparisonDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4177,7 +4235,7 @@ declare interface DescribeOrganizationSealsRequest {
   InfoType?: number;
   /** 印章id，是否查询特定的印章（没有输入返回所有） */
   SealId?: string;
-  /** 印章种类列表（均为组织机构印章）。 若无特定需求，将展示所有类型的印章。 目前支持以下几种： OFFICIAL：企业公章； CONTRACT：合同专用章； ORGANIZATION_SEAL：企业印章（通过图片上传创建）； LEGAL_PERSON_SEAL：法定代表人章。 EMPLOYEE_QUALIFICATION_SEAL：员工执业章。 */
+  /** 印章种类列表（均为组织机构印章）。 若无特定需求，将展示所有类型的印章。 目前支持以下几种： OFFICIAL：企业公章； CONTRACT：合同专用章； FINANCE：财务专用章； PERSONNEL：人事专用章；INVOICE：发票专用章；LEGAL_PERSON_SEAL：法定代表人章。 EMPLOYEE_QUALIFICATION_SEAL：员工执业章。 */
   SealTypes?: string[];
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
@@ -4360,6 +4418,26 @@ declare interface DisableUserAutoSignRequest {
 }
 
 declare interface DisableUserAutoSignResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ExportContractComparisonTaskRequest {
+  /** 执行合同审查任务的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 合同对比任务ID，该参数通过调用接口CreateContractComparisonTask获取。 */
+  TaskId: string;
+  /** 导出对比结果文件类型。类型如下： **0**：【PDF】以新合同文件为基础，导出带有可视化对比点标注的PDF文件。 **1**：【EXCEL】导出结构化的对比点明细表格，以列表形式罗列每一个差异点，包含改动位置、类型、标签及修改前后的完整内容。 */
+  ExportType?: number;
+  /** 是否忽略，适用于PDF。 **true**：导出文件标注去掉忽略项。 **false**：导出文件包含所有对比点。 */
+  Ignore?: boolean;
+}
+
+declare interface ExportContractComparisonTaskResponse {
+  /** 对比任务详情下载链接。 */
+  ResourceUrl?: string;
+  /** 下载链接有效截止时间。 */
+  ExpireTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4753,6 +4831,8 @@ declare interface Ess {
   CreateBatchQuickSignUrl(data: CreateBatchQuickSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchQuickSignUrlResponse>;
   /** 获取跳转至腾讯电子签小程序的批量签署链接 {@link CreateBatchSignUrlRequest} {@link CreateBatchSignUrlResponse} */
   CreateBatchSignUrl(data: CreateBatchSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchSignUrlResponse>;
+  /** 创建合同对比任务 {@link CreateContractComparisonTaskRequest} {@link CreateContractComparisonTaskResponse} */
+  CreateContractComparisonTask(data: CreateContractComparisonTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContractComparisonTaskResponse>;
   /** 创建合同对比web页面 {@link CreateContractDiffTaskWebUrlRequest} {@link CreateContractDiffTaskWebUrlResponse} */
   CreateContractDiffTaskWebUrl(data: CreateContractDiffTaskWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContractDiffTaskWebUrlResponse>;
   /** 创建合同审查web页面 {@link CreateContractReviewWebUrlRequest} {@link CreateContractReviewWebUrlResponse} */
@@ -4939,6 +5019,8 @@ declare interface Ess {
   DescribeUserVerifyStatus(data: DescribeUserVerifyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserVerifyStatusResponse>;
   /** 关闭个人用户自动签功能 {@link DisableUserAutoSignRequest} {@link DisableUserAutoSignResponse} */
   DisableUserAutoSign(data: DisableUserAutoSignRequest, config?: AxiosRequestConfig): AxiosPromise<DisableUserAutoSignResponse>;
+  /** 导出合同对比任务详情 {@link ExportContractComparisonTaskRequest} {@link ExportContractComparisonTaskResponse} */
+  ExportContractComparisonTask(data: ExportContractComparisonTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ExportContractComparisonTaskResponse>;
   /** 查询转换任务状态 {@link GetTaskResultApiRequest} {@link GetTaskResultApiResponse} */
   GetTaskResultApi(data: GetTaskResultApiRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskResultApiResponse>;
   /** 修改企业回调配置 {@link ModifyApplicationCallbackInfoRequest} {@link ModifyApplicationCallbackInfoResponse} */

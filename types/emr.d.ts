@@ -3903,6 +3903,8 @@ declare interface DescribeInstancesListRequest {
   Asc?: number;
   /** 自定义查询过滤器。示例：根据ClusterId过滤实例：[{"Name":"ClusterId","Values":["emr-xxxxxxxx"]}]根据clusterName过滤实例：[{"Name": "ClusterName","Values": ["cluster_name"]}]根据ClusterStatus过滤实例：[{"Name": "ClusterStatus","Values": ["2"]}] */
   Filters?: Filters[];
+  /** 默认0为普通集群，2为tke集群 */
+  ClusterType?: number;
 }
 
 declare interface DescribeInstancesListResponse {

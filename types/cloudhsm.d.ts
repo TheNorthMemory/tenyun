@@ -417,12 +417,12 @@ declare interface InquiryPriceBuyVsmRequest {
   TimeSpan: string;
   /** 商品的时间单位，m表示月，y表示年 */
   TimeUnit: string;
+  /** 默认为CREATE，可选RENEW */
+  Type: string;
+  /** Hsm服务类型，可选值virtualization、physical、GHSM、EHSM、SHSM */
+  HsmType: string;
   /** 货币类型，默认为CNY */
   Currency?: string;
-  /** 默认为CREATE，可选RENEW */
-  Type?: string;
-  /** Hsm服务类型，可选值virtualization、physical、GHSM、EHSM、SHSM */
-  HsmType?: string;
 }
 
 declare interface InquiryPriceBuyVsmResponse {

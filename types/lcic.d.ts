@@ -282,7 +282,7 @@ declare interface MemberRecord {
   GroupId?: string;
   /** 子上课班号 */
   SubGroupId?: string[] | null;
-  /** 用户的上台状态 */
+  /** 本堂课用户是否上过台。0 否；1 是 */
   Stage?: number;
   /** 用户状态。0为未到，1为在线，2为离线，3为被踢，4为永久被踢，5为暂时掉线 */
   CurrentState?: number;

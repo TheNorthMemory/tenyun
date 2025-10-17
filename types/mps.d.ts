@@ -242,7 +242,7 @@ declare interface AddOnSubtitle {
 
 /** 智能分析结果 */
 declare interface AiAnalysisResult {
-  /** 任务的类型，可以取的值有：Classification：智能分类Cover：智能封面Tag：智能标签FrameTag：智能按帧标签Highlight：智能精彩集锦DeLogo：智能擦除Description：大模型摘要Dubbing：智能译制VideoRemake: 视频去重 */
+  /** 任务的类型，可以取的值有：Classification：智能分类Cover：智能封面Tag：智能标签FrameTag：智能按帧标签Highlight：智能精彩集锦DeLogo：智能擦除Description：大模型摘要Dubbing：智能译制VideoRemake: 视频去重VideoComprehension: 视频（音频）理解 */
   Type?: string;
   /** 视频内容分析智能分类任务的查询结果，当任务类型为 Classification 时有效。 */
   ClassificationTask?: AiAnalysisTaskClassificationResult | null;
@@ -268,6 +268,8 @@ declare interface AiAnalysisResult {
   DubbingTask?: AiAnalysisTaskDubbingResult | null;
   /** 视频内容分析去重任务的查询结果，当任务类型为 VideoRemake 时有效。 */
   VideoRemakeTask?: AiAnalysisTaskVideoRemakeResult | null;
+  /** 视频（音频）理解任务的查询结果，当任务类型为 VideoComprehension 时有效。 */
+  VideoComprehensionTask?: AiAnalysisTaskVideoComprehensionResult | null;
 }
 
 /** 智能分类任务输入类型 */
@@ -598,6 +600,40 @@ declare interface AiAnalysisTaskTagResult {
   Input?: AiAnalysisTaskTagInput;
   /** 智能标签任务输出。 */
   Output?: AiAnalysisTaskTagOutput | null;
+}
+
+/** 视频（音频）理解任务输入 */
+declare interface AiAnalysisTaskVideoComprehensionInput {
+  /** 视频（音频）理解模板ID */
+  Definition?: number;
+}
+
+/** 视频（音频）理解输出内容结果信息 */
+declare interface AiAnalysisTaskVideoComprehensionOutput {
+  /** 视频（音频）理解内容详情 */
+  VideoComprehensionAnalysisResult?: string;
+}
+
+/** 视频（音频）理解结果 */
+declare interface AiAnalysisTaskVideoComprehensionResult {
+  /** 任务状态，有 `PROCESSING`，`SUCCESS` 和 `FAIL` 三种。 */
+  Status?: string;
+  /** 错误码，0：成功，其他值：失败 */
+  ErrCode?: number;
+  /** 错误信息 */
+  Message?: string;
+  /** 视频（音频）理解输入 */
+  Input?: AiAnalysisTaskVideoComprehensionInput;
+  /** 视频（音频）理解输出 */
+  Output?: AiAnalysisTaskVideoComprehensionOutput | null;
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 媒体处理类错误码 列表 */
+  ErrCodeExt?: string;
+  /** 任务进度 */
+  Progress?: number;
+  /** 任务开始执行的时间，采用 ISO 日期格式。 */
+  BeginProcessTime?: string;
+  /** 任务执行完毕时间，采用 ISO 日期格式。 */
+  FinishTime?: string;
 }
 
 /** 视频去重任务输入类型 */
@@ -8077,7 +8113,7 @@ declare interface DescribeTaskDetailResponse {
 declare interface DescribeTasksRequest {
   /** 任务状态过滤条件，可选值：- WAITING（等待中）- PROCESSING（处理中）- FINISH（已完成）。 */
   Status: string;
-  /** 任务结束时子任务是否有失败。 */
+  /** 任务结束时子任务是否有失败。如果不传则忽略。false: 过滤子任务没有失败的任务；true: 过滤子任务有失败的任务。 */
   SubTaskHasFailed?: boolean;
   /** 返回记录条数，默认值：10，最大值：100。 */
   Limit?: number;

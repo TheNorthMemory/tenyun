@@ -52,30 +52,30 @@ declare interface AccelerationDomain {
   ZoneId?: string;
   /** 加速域名名称。 */
   DomainName?: string;
-  /** 加速域名状态，取值有：online：已生效；process：部署中；offline：已停用；forbidden：已封禁；init：未生效，待激活站点； */
+  /** 加速域名状态，取值有：online：已生效；process：部署中；offline：已停用；forbidden：已封禁；init：未生效，待激活站点。 */
   DomainStatus?: string;
-  /** 源站信息。 */
-  OriginDetail?: OriginDetail | null;
-  /** 回源协议，取值有：FOLLOW: 协议跟随；HTTP: HTTP协议回源；HTTPS: HTTPS协议回源。 */
-  OriginProtocol?: string | null;
-  /** 域名证书信息 */
-  Certificate?: AccelerationDomainCertificate | null;
-  /** HTTP回源端口。 */
-  HttpOriginPort?: number | null;
-  /** HTTPS回源端口。 */
-  HttpsOriginPort?: number | null;
-  /** IPv6状态，取值有：follow：遵循站点IPv6配置；on：开启状态；off：关闭状态。 */
-  IPv6Status?: string | null;
   /** CNAME 地址。 */
   Cname?: string;
-  /** 加速域名归属权验证状态，取值有： pending：待验证； finished：已完成验证。 */
+  /** IPv6 状态，取值有：follow：遵循站点IPv6配置；on：开启状态；off：关闭状态。 */
+  IPv6Status?: string | null;
+  /** 加速域名归属权验证状态，取值有： pending：待验证；finished：已完成验证。 */
   IdentificationStatus?: string | null;
+  /** 加速域名需进行归属权验证才能继续提供服务时，该对象会携带对应验证方式所需要的信息。 */
+  OwnershipVerification?: OwnershipVerification | null;
+  /** 源站信息。 */
+  OriginDetail?: OriginDetail | null;
+  /** 回源协议，取值有：FOLLOW：协议跟随；HTTP：HTTP协议回源；HTTPS：HTTPS协议回源。 */
+  OriginProtocol?: string | null;
+  /** HTTP 回源端口。 */
+  HttpOriginPort?: number | null;
+  /** HTTPS 回源端口。 */
+  HttpsOriginPort?: number | null;
+  /** 加速域名证书信息。 */
+  Certificate?: AccelerationDomainCertificate | null;
   /** 创建时间。 */
   CreatedOn?: string;
   /** 修改时间。 */
   ModifiedOn?: string;
-  /** 当域名需要进行归属权验证才能继续提供服务时，该对象会携带对应验证方式所需要的信息。 */
-  OwnershipVerification?: OwnershipVerification | null;
 }
 
 /** 加速域名所对应的证书信息。 */

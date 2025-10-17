@@ -1194,6 +1194,10 @@ declare interface GovernanceService {
   Revision?: string;
   /** 是否开启同步到全局注册中心 */
   SyncToGlobalRegistry?: boolean;
+  /** 隔离实例数 */
+  IsolateInstanceCount?: number;
+  /** 服务健康状态 */
+  ServiceStatus?: number;
 }
 
 /** 服务契约定义 */
@@ -3499,6 +3503,8 @@ declare interface DescribeGovernanceServicesRequest {
   OnlyExistHealthyInstance?: boolean;
   /** 是否开启同步到全局注册中心 */
   SyncToGlobalRegistry?: string;
+  /** 过滤筛选条件 */
+  StatusFilter?: Filter[];
 }
 
 declare interface DescribeGovernanceServicesResponse {

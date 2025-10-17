@@ -90,6 +90,22 @@ declare interface Message {
   ToolCalls?: ToolCall[];
 }
 
+/** 多模态特征向量 */
+declare interface MultiModalEmbeddingData {
+  /** 文本特征向量 */
+  TextEmbeddings?: EmbeddingData[] | null;
+  /** 图片特征向量 */
+  ImageEmbeddings?: EmbeddingData[] | null;
+}
+
+/** 多模态向量化消耗tokens和images数量 */
+declare interface MultiModalUsage {
+  /** 消耗tokens */
+  TotalTokens?: number;
+  /** 输入图片数量 */
+  TotalImages?: number;
+}
+
 /** 联网搜索选项。 */
 declare interface OnlineSearchOptions {
   /** 搜索引擎。支持 bing 和 sogou。 */
@@ -312,6 +328,26 @@ declare interface GetDocumentParseResultResponse {
   FailedPages?: number[] | null;
   /** 消耗页数 */
   Usage?: PageUsage;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetMultiModalEmbeddingRequest {
+  /** 模型名称，支持WeCLIPv2-Base和WeCLIPv2-Large */
+  ModelName?: string;
+  /** 需进行向量化的文本集，一次输入限10条，单条文本长度限72 */
+  Texts?: string[];
+  /** 输入图片，base64编码格式，一次输入限制8个，单张图片限制1M */
+  ImageData?: string[];
+  /** 输入图片url，一次输入限8个，推荐cos地址，速度更快 */
+  ImageUrl?: string[];
+}
+
+declare interface GetMultiModalEmbeddingResponse {
+  /** 多模态特征向量输出 */
+  Data?: MultiModalEmbeddingData;
+  /** 消耗的tokens和输入图片数量 */
+  Usage?: MultiModalUsage;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3299,6 +3335,8 @@ declare interface Es {
   GetDocumentChunkResult(data: GetDocumentChunkResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetDocumentChunkResultResponse>;
   /** 获取文档解析结果 {@link GetDocumentParseResultRequest} {@link GetDocumentParseResultResponse} */
   GetDocumentParseResult(data: GetDocumentParseResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetDocumentParseResultResponse>;
+  /** 获取多模态特征向量 {@link GetMultiModalEmbeddingRequest} {@link GetMultiModalEmbeddingResponse} */
+  GetMultiModalEmbedding(data?: GetMultiModalEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<GetMultiModalEmbeddingResponse>;
   /** 获取特征向量 {@link GetTextEmbeddingRequest} {@link GetTextEmbeddingResponse} */
   GetTextEmbedding(data: GetTextEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<GetTextEmbeddingResponse>;
   /** 实时文档解析 {@link ParseDocumentRequest} {@link ParseDocumentResponse} */

@@ -66,6 +66,22 @@ declare interface DatePoint {
   Value?: number;
 }
 
+/** 终端节点信息 */
+declare interface EndPointServiceInfo {
+  /** ip */
+  EndPointVip?: string;
+  /** 子网id */
+  UniqSubnetId?: string;
+  /** 网络侧状态，0 可用，1 待接受，3 拒绝 */
+  EndPointState?: number;
+  /** 状态，1表示可用，0表示删除 */
+  EndPointStatus?: number;
+  /** 备注信息 */
+  EndPointRemark?: string;
+  /** 网络侧隔离状态，1：已隔离，0：未隔离 */
+  EndPointIsolateFlag?: number;
+}
+
 /** 筛选参数 */
 declare interface Filter {
   /** 参数名 */
@@ -82,6 +98,50 @@ declare interface FlowUsage {
   TotalQuantity?: number;
   /** 流量包可用额度 */
   AvailableQuantity?: number;
+}
+
+/** 转发规则详情 */
+declare interface ForwardRule {
+  /** 私有域名 */
+  Domain?: string;
+  /** 转发规则名称 */
+  RuleName?: string;
+  /** 规则id */
+  RuleId?: string;
+  /** 转发规则类型：云上到云下DOWN、云下到云上DOWN */
+  RuleType?: string;
+  /** 创建时间 */
+  CreatedAt?: string;
+  /** 更新时间 */
+  UpdatedAt?: string;
+  /** 终端节点名称 */
+  EndPointName?: string;
+  /** 终端节点ID */
+  EndPointId?: string;
+  /** 转发地址 */
+  ForwardAddress?: string[];
+  /** 私有域绑定的vpc列表 */
+  VpcSet?: VpcInfo[];
+  /** 绑定的私有域ID */
+  ZoneId?: string;
+  /** 标签 */
+  Tags?: TagInfo[];
+}
+
+/** 终端节点信息列表 */
+declare interface InboundEndpointSet {
+  /** 终端节点ID */
+  EndPointId?: string;
+  /** 名称 */
+  EndPointName?: string;
+  /** vpcid */
+  UniqVpcId?: string;
+  /** 创建时间 */
+  CreatedAt?: string;
+  /** 更新时间 */
+  UpdatedAt?: string;
+  /** 终端节点信息 */
+  EndPointService?: EndPointServiceInfo[];
 }
 
 /** 统计数据表 */
@@ -208,6 +268,14 @@ declare interface RecordInfo {
   Remark?: string;
 }
 
+/** 终端节点信息 */
+declare interface SubnetIpInfo {
+  /** 子网ID */
+  SubnetId: string;
+  /** ip */
+  SubnetVip?: string;
+}
+
 /** 标签 */
 declare interface TagInfo {
   /** 标签键 */
@@ -256,6 +324,64 @@ declare interface AddSpecifyPrivateZoneVpcResponse {
   AccountVpcSet?: AccountVpcInfo[];
   /** 唯一id */
   UniqId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateExtendEndpointRequest {
+}
+
+declare interface CreateExtendEndpointResponse {
+  /** 终端节点id */
+  EndpointId?: string;
+  /** 终端节点名称 */
+  EndpointName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateForwardRuleRequest {
+  /** 转发规则名称 */
+  RuleName: string;
+  /** 转发规则类型：云上到云下DOWN，云下到云上UP */
+  RuleType: string;
+  /** 私有域ID，可在私有域列表页面查看 */
+  ZoneId: string;
+  /** 终端节点ID */
+  EndPointId: string;
+}
+
+declare interface CreateForwardRuleResponse {
+  /** 转发规则ID */
+  RuleId: string;
+  /** 转发规则名称 */
+  RuleName: string;
+  /** 转发规则类型 */
+  RuleType: string;
+  /** 私有域ID */
+  ZoneId: string;
+  /** 终端节点ID */
+  EndPointId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateInboundEndpointRequest {
+  /** 名称 */
+  EndpointName: string;
+  /** 地域 */
+  EndpointRegion: string;
+  /** vpcid */
+  EndpointVpc: string;
+  /** 子网信息 */
+  SubnetIp: SubnetIpInfo[];
+}
+
+declare interface CreateInboundEndpointResponse {
+  /** 终端节点ID */
+  EndpointId?: string;
+  /** 名称 */
+  EndpointName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -320,6 +446,36 @@ declare interface CreatePrivateZoneResponse {
   ZoneId?: string;
   /** 私有域名 */
   Domain?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteEndPointRequest {
+  /** 终端节点ID */
+  EndPointId?: string;
+}
+
+declare interface DeleteEndPointResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteForwardRuleRequest {
+  /** 转发规则ID数组 */
+  RuleIdSet?: string[];
+}
+
+declare interface DeleteForwardRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteInboundEndpointRequest {
+  /** 终端节点ID */
+  EndpointId: string;
+}
+
+declare interface DeleteInboundEndpointResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -436,6 +592,56 @@ declare interface DescribeDashboardResponse {
   RequestTotalCount?: number;
   /** 流量包用量 */
   FlowUsage?: FlowUsage[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeExtendEndpointListRequest {
+  /** 分页偏移量，从0开始 */
+  Offset?: number;
+  /** 分页限制数目， 最大100，默认20 */
+  Limit?: number;
+  /** 过滤参数，支持EndpointName,EndpointId */
+  Filters?: Filter[];
+}
+
+declare interface DescribeExtendEndpointListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeForwardRuleListRequest {
+  /** 分页偏移量，从0开始 */
+  Offset?: number;
+  /** 分页限制数目， 最大100，默认20 */
+  Limit?: number;
+  /** 过滤参数 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeForwardRuleListResponse {
+  /** 私有域数量 */
+  TotalCount?: number;
+  /** 私有域列表 */
+  ForwardRuleSet?: ForwardRule[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInboundEndpointListRequest {
+  /** 分页偏移量，从0开始 */
+  Offset?: number;
+  /** 分页限制数目， 最大100，默认20 */
+  Limit?: number;
+  /** 过滤参数，支持EndPointName，EndpointName，EndpointId */
+  Filters?: Filter[];
+}
+
+declare interface DescribeInboundEndpointListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 终端节点信息 */
+  InboundEndpointSet?: InboundEndpointSet[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -564,6 +770,32 @@ declare interface DescribeRequestDataResponse {
   RequestId?: string;
 }
 
+declare interface ModifyForwardRuleRequest {
+  /** 转发规则ID */
+  RuleId: string;
+  /** 转发规则名称 */
+  RuleName?: string;
+  /** 终端节点ID */
+  EndPointId?: string;
+}
+
+declare interface ModifyForwardRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyInboundEndpointRequest {
+  /** 终端节点ID */
+  EndpointId: string;
+  /** 终端节点名称 */
+  EndpointName: string;
+}
+
+declare interface ModifyInboundEndpointResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyPrivateZoneRecordRequest {
   /** 私有域ID */
   ZoneId: string;
@@ -675,12 +907,24 @@ declare interface Privatedns {
   (): Versions;
   /** 追加与私有域关联的VPC {@link AddSpecifyPrivateZoneVpcRequest} {@link AddSpecifyPrivateZoneVpcResponse} */
   AddSpecifyPrivateZoneVpc(data: AddSpecifyPrivateZoneVpcRequest, config?: AxiosRequestConfig): AxiosPromise<AddSpecifyPrivateZoneVpcResponse>;
+  /** 创建增强型终端节点 {@link CreateExtendEndpointRequest} {@link CreateExtendEndpointResponse} */
+  CreateExtendEndpoint(data?: CreateExtendEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExtendEndpointResponse>;
+  /** 创建自定义转发规则 {@link CreateForwardRuleRequest} {@link CreateForwardRuleResponse} */
+  CreateForwardRule(data: CreateForwardRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateForwardRuleResponse>;
+  /** 创建入站终端节点 {@link CreateInboundEndpointRequest} {@link CreateInboundEndpointResponse} */
+  CreateInboundEndpoint(data: CreateInboundEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInboundEndpointResponse>;
   /** 添加绑定账号 {@link CreatePrivateDNSAccountRequest} {@link CreatePrivateDNSAccountResponse} */
   CreatePrivateDNSAccount(data: CreatePrivateDNSAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateDNSAccountResponse>;
   /** 创建私有域 {@link CreatePrivateZoneRequest} {@link CreatePrivateZoneResponse} */
   CreatePrivateZone(data: CreatePrivateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateZoneResponse>;
   /** 添加私有域解析记录 {@link CreatePrivateZoneRecordRequest} {@link CreatePrivateZoneRecordResponse} */
   CreatePrivateZoneRecord(data: CreatePrivateZoneRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateZoneRecordResponse>;
+  /** 删除终端节点 {@link DeleteEndPointRequest} {@link DeleteEndPointResponse} */
+  DeleteEndPoint(data?: DeleteEndPointRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEndPointResponse>;
+  /** 删除转发规则 {@link DeleteForwardRuleRequest} {@link DeleteForwardRuleResponse} */
+  DeleteForwardRule(data?: DeleteForwardRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteForwardRuleResponse>;
+  /** 删除入站终端节点 {@link DeleteInboundEndpointRequest} {@link DeleteInboundEndpointResponse} */
+  DeleteInboundEndpoint(data: DeleteInboundEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInboundEndpointResponse>;
   /** 删除私有域解析账号 {@link DeletePrivateDNSAccountRequest} {@link DeletePrivateDNSAccountResponse} */
   DeletePrivateDNSAccount(data: DeletePrivateDNSAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateDNSAccountResponse>;
   /** 删除私有域 {@link DeletePrivateZoneRequest} {@link DeletePrivateZoneResponse} */
@@ -695,6 +939,12 @@ declare interface Privatedns {
   DescribeAuditLog(data: DescribeAuditLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogResponse>;
   /** 获取私有域解析概览 {@link DescribeDashboardRequest} {@link DescribeDashboardResponse} */
   DescribeDashboard(data?: DescribeDashboardRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDashboardResponse>;
+  /** 获取增强型终端节点列表 {@link DescribeExtendEndpointListRequest} {@link DescribeExtendEndpointListResponse} */
+  DescribeExtendEndpointList(data?: DescribeExtendEndpointListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtendEndpointListResponse>;
+  /** 查询转发规则列表 {@link DescribeForwardRuleListRequest} {@link DescribeForwardRuleListResponse} */
+  DescribeForwardRuleList(data?: DescribeForwardRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeForwardRuleListResponse>;
+  /** 获取入站终端节点列表 {@link DescribeInboundEndpointListRequest} {@link DescribeInboundEndpointListResponse} */
+  DescribeInboundEndpointList(data?: DescribeInboundEndpointListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInboundEndpointListResponse>;
   /** 获取私有域解析账号列表 {@link DescribePrivateDNSAccountListRequest} {@link DescribePrivateDNSAccountListResponse} */
   DescribePrivateDNSAccountList(data?: DescribePrivateDNSAccountListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateDNSAccountListResponse>;
   /** 获取私有域信息 {@link DescribePrivateZoneRequest} {@link DescribePrivateZoneResponse} */
@@ -711,6 +961,10 @@ declare interface Privatedns {
   DescribeRecord(data: DescribeRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordResponse>;
   /** 获取私有域解析请求量 {@link DescribeRequestDataRequest} {@link DescribeRequestDataResponse} */
   DescribeRequestData(data: DescribeRequestDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRequestDataResponse>;
+  /** 修改转发规则 {@link ModifyForwardRuleRequest} {@link ModifyForwardRuleResponse} */
+  ModifyForwardRule(data: ModifyForwardRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyForwardRuleResponse>;
+  /** 修改入站终端节点 {@link ModifyInboundEndpointRequest} {@link ModifyInboundEndpointResponse} */
+  ModifyInboundEndpoint(data: ModifyInboundEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInboundEndpointResponse>;
   /** 修改私有域 {@link ModifyPrivateZoneRequest} {@link ModifyPrivateZoneResponse} */
   ModifyPrivateZone(data: ModifyPrivateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrivateZoneResponse>;
   /** 修改私有域解析记录 {@link ModifyPrivateZoneRecordRequest} {@link ModifyPrivateZoneRecordResponse} */

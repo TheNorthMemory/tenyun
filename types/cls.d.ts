@@ -2351,34 +2351,36 @@ declare interface CreateShipperResponse {
 declare interface CreateTopicRequest {
   /** 日志集ID- 通过[获取日志集列表](https://cloud.tencent.com/document/product/614/58624)获取日志集Id。 */
   LogsetId: string;
-  /** 日志主题名称名称限制- 不能为空字符串- 不能包含字符'|'- 不能使用以下名称["cls_service_log","loglistener_status","loglistener_alarm","loglistener_business","cls_service_metric"] */
+  /** 主题名称名称限制- 不能为空字符串- 不能包含字符'|'- 不能使用以下名称["cls_service_log","loglistener_status","loglistener_alarm","loglistener_business","cls_service_metric"] */
   TopicName: string;
-  /** 日志主题分区个数。默认创建1个，最大支持创建10个分区。 */
+  /** 主题分区个数。默认创建1个，最大支持创建10个分区。 */
   PartitionCount?: number;
-  /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的日志主题。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。 */
+  /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的主题。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。 */
   Tags?: Tag[];
   /** 是否开启自动分裂，默认值为true */
   AutoSplit?: boolean;
   /** 开启自动分裂后，每个主题能够允许的最大分区数，默认值为50 */
   MaxSplitPartitions?: number;
-  /** 日志主题的存储类型，可选值 hot（标准存储），cold（低频存储）；默认为hot。 */
+  /** 日志主题的存储类型，可选值 hot（标准存储），cold（低频存储）；默认为hot。指标主题不支持该配置。 */
   StorageType?: string;
-  /** 存储时间，单位天。- 日志接入标准存储时，支持1至3600天，值为3640时代表永久保存。- 日志接入低频存储时，支持7至3600天，值为3640时代表永久保存。 */
+  /** 存储时间，单位天。- 日志主题：日志接入标准存储时，支持1至3600天，值为3640时代表永久保存。- 日志主题：日志接入低频存储时，支持7至3600天，值为3640时代表永久保存。- 指标主题：支持1至3600天，值为3640时代表永久保存。 */
   Period?: number;
-  /** 日志主题描述 */
+  /** 主题描述 */
   Describes?: string;
-  /** 0：关闭日志沉降。非0：开启日志沉降后标准存储的天数，HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效。 */
+  /** 0：日志主题关闭日志沉降。非0：日志主题开启日志沉降后标准存储的天数，HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效，指标主题不支持该配置。 */
   HotPeriod?: number;
+  /** 主题类型- 0:日志主题，默认值- 1:指标主题 */
+  BizType?: number;
   /** 主题自定义ID，格式为：用户自定义部分-用户APPID。未填写该参数时将自动生成ID。- 用户自定义部分仅支持小写字母、数字和-，且不能以-开头和结尾，长度为3至40字符- 尾部需要使用-拼接用户APPID，APPID可在https://console.cloud.tencent.com/developer页面查询。- 如果指定该字段，需保证全地域唯一 */
   TopicId?: string;
-  /** 免鉴权开关。 false：关闭； true：开启。默认为false。开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。 */
+  /** 免鉴权开关。 false：关闭； true：开启。默认为false。开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。指标主题不支持该配置。 */
   IsWebTracking?: boolean;
-  /** 日志主题扩展信息 */
+  /** 主题扩展信息 */
   Extends?: TopicExtendInfo;
 }
 
 declare interface CreateTopicResponse {
-  /** 日志主题ID */
+  /** 主题ID */
   TopicId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2635,7 +2637,7 @@ declare interface DeleteShipperResponse {
 }
 
 declare interface DeleteTopicRequest {
-  /** 日志主题ID- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  /** 主题ID- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
 }
 
@@ -3251,7 +3253,7 @@ declare interface DescribeShippersResponse {
 }
 
 declare interface DescribeTopicsRequest {
-  /** topicName 按照【日志主题名称】进行过滤，默认为模糊匹配，可使用 PreciseSearch 参数设置为精确匹配。类型：String。必选：否logsetName 按照【日志集名称】进行过滤，默认为模糊匹配，可使用 PreciseSearch 参数设置为精确匹配。类型：String。必选：否topicId 按照【日志主题ID】进行过滤。类型：String。必选：否logsetId 按照【日志集ID】进行过滤，可通过调用 DescribeLogsets 查询已创建的日志集列表或登录控制台进行查看；也可以调用CreateLogset 创建新的日志集。类型：String。必选：否tagKey 按照【标签键】进行过滤。类型：String。必选：否tag:tagKey 按照【标签键值对】进行过滤。tagKey 使用具体的标签键进行替换，例如 tag:exampleKey。类型：String。必选：否storageType 按照【日志主题的存储类型】进行过滤。可选值 hot（标准存储），cold（低频存储）类型：String。必选：否注意：每次请求的 Filters 的上限为10，Filter.Values 的上限为100。 */
+  /** topicName 按照【主题名称】进行过滤，默认为模糊匹配，可使用 PreciseSearch 参数设置为精确匹配。类型：String。必选：否logsetName 按照【日志集名称】进行过滤，默认为模糊匹配，可使用 PreciseSearch 参数设置为精确匹配。类型：String。必选：否topicId 按照【主题ID】进行过滤。类型：String。必选：否logsetId 按照【日志集ID】进行过滤，可通过调用 DescribeLogsets 查询已创建的日志集列表或登录控制台进行查看；也可以调用CreateLogset 创建新的日志集。类型：String。必选：否tagKey 按照【标签键】进行过滤。类型：String。必选：否tag:tagKey 按照【标签键值对】进行过滤。tagKey 使用具体的标签键进行替换，例如 tag:exampleKey。类型：String。必选：否storageType 按照【主题的存储类型】进行过滤。可选值 hot（标准存储），cold（低频存储）类型：String。必选：否注意：每次请求的 Filters 的上限为10，Filter.Values 的上限为100。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0。 */
   Offset?: number;
@@ -3264,7 +3266,7 @@ declare interface DescribeTopicsRequest {
 }
 
 declare interface DescribeTopicsResponse {
-  /** 日志主题列表 */
+  /** 主题列表 */
   Topics?: TopicInfo[];
   /** 总数目 */
   TotalCount?: number;
@@ -3831,29 +3833,29 @@ declare interface ModifyShipperResponse {
 }
 
 declare interface ModifyTopicRequest {
-  /** 日志主题ID- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  /** 主题ID- 通过[获取主题列表](https://cloud.tencent.com/document/product/614/56454)获取主题Id。 */
   TopicId: string;
-  /** 日志主题名称输入限制：- 不能为空字符串- 不能包含字符'|'- 不能使用以下名称["cls_service_log","loglistener_status","loglistener_alarm","loglistener_business","cls_service_metric"] */
+  /** 主题名称输入限制：- 不能为空字符串- 不能包含字符'|'- 不能使用以下名称["cls_service_log","loglistener_status","loglistener_alarm","loglistener_business","cls_service_metric"] */
   TopicName?: string;
-  /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的日志主题。最大支持10个标签键值对，并且不能有重复的键值对。 */
+  /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的主题。最大支持10个标签键值对，并且不能有重复的键值对。 */
   Tags?: Tag[];
   /** 主题是否开启采集，true：开启采集；false：关闭采集。控制台目前不支持修改此参数。 */
   Status?: boolean;
   /** 是否开启自动分裂 */
   AutoSplit?: boolean;
-  /** 若开启最大分裂，该主题能够能够允许的最大分区数；默认为50；必须为正数 */
+  /** 若开启最大分裂，该主题能够允许的最大分区数；默认为50；必须为正数 */
   MaxSplitPartitions?: number;
   /** 生命周期，单位天，标准存储取值范围1\~3600，低频存储取值范围7\~3600。取值为3640时代表永久保存 */
   Period?: number;
-  /** 日志主题描述 */
+  /** 主题描述 */
   Describes?: string;
-  /** 0：关闭日志沉降。非0：开启日志沉降后标准存储的天数。HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效 */
+  /** 0：日志主题关闭日志沉降。非0：日志主题开启日志沉降后标准存储的天数。HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效，指标主题不支持该配置。 */
   HotPeriod?: number;
   /** 免鉴权开关。 false：关闭； true：开启。开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。 */
   IsWebTracking?: boolean;
-  /** 日志主题扩展信息 */
+  /** 主题扩展信息 */
   Extends?: TopicExtendInfo;
-  /** 日志主题分区数量。默认为1；取值范围及约束：- 当输入值<=0，系统自动调整为1。- 如果未传MaxSplitPartitions，需要PartitionCount<=50；- 如果传递了MaxSplitPartitions，需要PartitionCount<=MaxSplitPartitions； */
+  /** 主题分区数量。默认为1；取值范围及约束：- 当输入值<=0，系统自动调整为1。- 如果未传MaxSplitPartitions，需要PartitionCount<=50；- 如果传递了MaxSplitPartitions，需要PartitionCount<=MaxSplitPartitions； */
   PartitionCount?: number;
   /** 取消切换存储任务的id- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取取消切换存储任务的id【Topics中的TopicAsyncTaskID字段】。 */
   CancelTopicAsyncTaskID?: string;
@@ -4171,7 +4173,7 @@ declare interface Cls {
   CreateScheduledSql(data: CreateScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScheduledSqlResponse>;
   /** 新建投递到COS的任务 {@link CreateShipperRequest} {@link CreateShipperResponse} */
   CreateShipper(data: CreateShipperRequest, config?: AxiosRequestConfig): AxiosPromise<CreateShipperResponse>;
-  /** 创建日志主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
+  /** 创建主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
   /** 创建告警渠道回调配置 {@link CreateWebCallbackRequest} {@link CreateWebCallbackResponse} */
   CreateWebCallback(data: CreateWebCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWebCallbackResponse>;
@@ -4217,7 +4219,7 @@ declare interface Cls {
   DeleteScheduledSql(data: DeleteScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScheduledSqlResponse>;
   /** 删除投递COS任务 {@link DeleteShipperRequest} {@link DeleteShipperResponse} */
   DeleteShipper(data: DeleteShipperRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShipperResponse>;
-  /** 删除日志主题 {@link DeleteTopicRequest} {@link DeleteTopicResponse} */
+  /** 删除主题 {@link DeleteTopicRequest} {@link DeleteTopicResponse} */
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
   /** 删除告警渠道回调配置 {@link DeleteWebCallbackRequest} {@link DeleteWebCallbackResponse} */
   DeleteWebCallback(data: DeleteWebCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWebCallbackResponse>;
@@ -4283,7 +4285,7 @@ declare interface Cls {
   DescribeShipperTasks(data: DescribeShipperTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShipperTasksResponse>;
   /** 获取投递到COS的任务配置信息 {@link DescribeShippersRequest} {@link DescribeShippersResponse} */
   DescribeShippers(data?: DescribeShippersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShippersResponse>;
-  /** 获取日志主题列表 {@link DescribeTopicsRequest} {@link DescribeTopicsResponse} */
+  /** 获取主题列表 {@link DescribeTopicsRequest} {@link DescribeTopicsResponse} */
   DescribeTopics(data?: DescribeTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicsResponse>;
   /** 获取告警渠道回调配置列表 {@link DescribeWebCallbacksRequest} {@link DescribeWebCallbacksResponse} */
   DescribeWebCallbacks(data?: DescribeWebCallbacksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebCallbacksResponse>;
@@ -4331,7 +4333,7 @@ declare interface Cls {
   ModifyScheduledSql(data: ModifyScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyScheduledSqlResponse>;
   /** 修改投递COS任务 {@link ModifyShipperRequest} {@link ModifyShipperResponse} */
   ModifyShipper(data: ModifyShipperRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyShipperResponse>;
-  /** 修改日志主题 {@link ModifyTopicRequest} {@link ModifyTopicResponse} */
+  /** 修改主题 {@link ModifyTopicRequest} {@link ModifyTopicResponse} */
   ModifyTopic(data: ModifyTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicResponse>;
   /** 修改告警渠道回调配置 {@link ModifyWebCallbackRequest} {@link ModifyWebCallbackResponse} */
   ModifyWebCallback(data: ModifyWebCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWebCallbackResponse>;

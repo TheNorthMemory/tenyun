@@ -959,7 +959,7 @@ declare namespace V20180525 {
     AddonVersion?: string;
     /** addon的参数，是一个json格式的base64转码后的字符串 */
     RawValues?: string;
-    /** addon的状态 */
+    /** addon的状态：- Installing：安装中- Upgrading：升级中- Terminating：删除中- Succeeded：安装/升级成功- InstallFailed：安装失败- UpgradFailed：升级失败 */
     Phase?: string;
     /** addon失败的原因 */
     Reason?: string;
@@ -4418,6 +4418,8 @@ declare namespace V20180525 {
     InstanceName?: string;
     /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
     ClientToken?: string;
+    /** 是否只预检此次请求。true：只预检，不会创建实例。默认值为：false。 */
+    DryRun?: boolean;
   }
 
   interface CreateReservedInstancesResponse {
@@ -4468,9 +4470,9 @@ declare namespace V20180525 {
   }
 
   interface DeleteAddonRequest {
-    /** 集群ID */
+    /** 集群ID，请从容器服务控制台集群列表中获取（https://console.cloud.tencent.com/tke2/cluster）。 */
     ClusterId: string;
-    /** addon名称 */
+    /** addon名称，请从容器服务控制台进入集群详情页后，在组件管理页面中获取。 */
     AddonName: string;
   }
 
@@ -4850,7 +4852,7 @@ declare namespace V20180525 {
   }
 
   interface DescribeAddonRequest {
-    /** 集群ID */
+    /** 集群ID，请从容器服务控制台集群列表中获取（https://console.cloud.tencent.com/tke2/cluster）。 */
     ClusterId: string;
     /** addon名称（不传时会返回集群下全部的addon） */
     AddonName?: string;
@@ -4864,9 +4866,9 @@ declare namespace V20180525 {
   }
 
   interface DescribeAddonValuesRequest {
-    /** 集群ID */
+    /** 集群ID，请从容器服务控制台集群列表中获取（https://console.cloud.tencent.com/tke2/cluster）。 */
     ClusterId: string;
-    /** addon名称 */
+    /** addon名称，请从容器服务控制台进入集群详情页后，在组件管理页面中获取。 */
     AddonName: string;
   }
 
@@ -6800,15 +6802,15 @@ declare namespace V20180525 {
   }
 
   interface InstallAddonRequest {
-    /** 集群ID（仅支持标准tke集群） */
+    /** 集群ID（仅支持标准tke集群），请从容器服务控制台集群列表中获取（https://console.cloud.tencent.com/tke2/cluster）。 */
     ClusterId: string;
-    /** addon名称 */
+    /** addon名称，请从容器服务控制台进入集群详情页后，在组件管理页面中获取。 */
     AddonName: string;
     /** addon版本（不传默认安装最新版本） */
     AddonVersion?: string;
     /** addon的参数，是一个json格式的base64转码后的字符串（addon参数由DescribeAddonValues获取） */
     RawValues?: string;
-    /** 是否仅做安装检查，设置为true时仅做检查，不会安装组件 */
+    /** 是否仅做安装检查，设置为true时仅做检查，不会安装组件。默认值为 false。 */
     DryRun?: boolean;
   }
 
@@ -7440,17 +7442,17 @@ declare namespace V20180525 {
   }
 
   interface UpdateAddonRequest {
-    /** 集群ID */
+    /** 集群ID，请从容器服务控制台集群列表中获取（https://console.cloud.tencent.com/tke2/cluster）。 */
     ClusterId: string;
-    /** addon名称 */
+    /** addon名称，请从容器服务控制台进入集群详情页后，在组件管理页面中获取。 */
     AddonName: string;
     /** addon版本（不传默认不更新，不传AddonVersion时RawValues必传） */
     AddonVersion?: string;
-    /** addon的参数，是一个json格式的base64转码后的字符串（addon参数由DescribeAddonValues获取，不传RawValues时AddonVersion必传）） */
+    /** addon的参数，是一个json格式的base64转码后的字符串（addon参数由DescribeAddonValues获取，不传RawValues时AddonVersion必传）。 */
     RawValues?: string;
     /** addon参数的更新策略，支持replace和merge两种策略，默认值为merge，兼容旧版本API。replace：使用新RawValues全量替换addon原RawValues，merge：根据新RawValues新增或更新addon原RawValues中对应参数。 */
     UpdateStrategy?: string;
-    /** 是否仅做更新检查，设置为true时仅做检查，不会更新组件 */
+    /** 是否仅做更新检查，设置为true时仅做检查，不会更新组件。默认值为 false。 */
     DryRun?: boolean;
   }
 

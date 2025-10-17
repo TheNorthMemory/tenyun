@@ -342,7 +342,7 @@ declare interface InternetAccessible {
   BandwidthPackageId?: string | null;
   /** 线路类型。各种线路类型及支持地区详情可参考：[EIP 的 IP 地址类型](https://cloud.tencent.com/document/product/1199/41646)。默认值：BGP。BGP：常规 BGP 线路已开通静态单线IP白名单的用户，可选值：CMCC：中国移动CTCC：中国电信CUCC：中国联通注意：仅部分地域支持静态单线IP。 */
   InternetServiceProvider?: string;
-  /** 公网 IP 类型。 WanIP：普通公网IP。 HighQualityEIP：精品 IP。仅新加坡和中国香港支持精品IP。 AntiDDoSEIP：高防 IP。仅部分地域支持高防IP，详情可见[弹性公网IP产品概述](https://cloud.tencent.com/document/product/1199/41646) 。 如需为资源分配公网IPv4地址，请指定公网IPv4地址类型。精品IP 高防IP功能仅部分地区灰度开放，如需使用[请提交工单咨询](https://console.cloud.tencent.com/workorder/category) */
+  /** 公网 IP 类型。 WanIP：普通公网IP。 HighQualityEIP：精品 IP。仅新加坡和中国香港支持精品IP。 AntiDDoSEIP：高防 IP。仅部分地域支持高防IP，详情可见[弹性公网IP产品概述](https://cloud.tencent.com/document/product/1199/41646) 。 如需为资源分配弹性公网IPv4地址，请指定弹性公网IPv4地址类型。如只使用WanIP，不需要设置此字段。精品IP 高防IP功能仅部分地区灰度开放，如需使用[请提交工单咨询](https://console.cloud.tencent.com/workorder/category) */
   IPv4AddressType?: string;
   /** 高防包唯一ID，申请高防IP时，该字段必传。 */
   AntiDDoSPackageId?: string;
