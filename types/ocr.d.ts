@@ -3570,6 +3570,8 @@ declare interface ExtractDocBasicResponse {
   StructuralList?: GroupInfo[];
   /** 还原文本信息 */
   WordList?: WordItem[];
+  /** 全部印章信息 */
+  SealInfos?: SealInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

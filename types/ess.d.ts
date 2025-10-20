@@ -1782,6 +1782,16 @@ declare interface WebThemeConfig {
   WebEmbedThemeColor?: string;
 }
 
+/** 提取web嵌入页面个性化设置 */
+declare interface WebUrlOption {
+  /** 禁用链接预览 */
+  DisableLinkPreview?: boolean;
+  /** 禁用任务编辑 */
+  DisableTaskEditing?: boolean;
+  /** 禁用任务结果编辑 */
+  DisableTaskResultEditing?: boolean;
+}
+
 declare interface ArchiveDynamicFlowRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -2658,6 +2668,24 @@ declare interface CreateFlowSignUrlRequest {
 declare interface CreateFlowSignUrlResponse {
   /** 签署人签署链接信息 */
   FlowApproverUrlInfos?: FlowApproverUrlInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateInformationExtractionWebUrlRequest {
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 需要提取的合同文件资源ID,可通过UploadFiles接口获取文件资源ID。注: - `word、pdf文件每个文件限制在10M以下`- `png、jpg、jpeg文件每个限制在5M以下` */
+  ResourceIds?: string[];
+  /** 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 1024长度。在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的[回调通知](https://qian.tencent.com/developers/company/callback_types_v2)模块。 */
+  UserData?: string;
+  /** 个性化参数，用于控制页面展示内容 */
+  Option?: WebUrlOption;
+}
+
+declare interface CreateInformationExtractionWebUrlResponse {
+  /** 合同信息提取嵌入式web页面链接。注意：`链接有效期为5分钟，且链接仅能使用一次。` */
+  Url?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4094,6 +4122,20 @@ declare interface DescribeInformationExtractionTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInformationExtractionWebUrlRequest {
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 合同信息提取任务ID，该参数可通过回调事件[回调通知](https://qian.tencent.com/developers/company/callback_types_v2)获取或者从控制台信息提取任务列表获取。注意：`不填写任务ID时返回信息提取任务列表URL，填写任务ID时返回信息提取任务详情URL` */
+  TaskId?: string;
+}
+
+declare interface DescribeInformationExtractionWebUrlResponse {
+  /** 合同信息提取嵌入式web页面链接。注意：`链接有效期为5分钟，且链接仅能使用一次。` */
+  Url?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeIntegrationDepartmentsRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得组织架构管理权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -4877,6 +4919,8 @@ declare interface Ess {
   CreateFlowSignReview(data: CreateFlowSignReviewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowSignReviewResponse>;
   /** 获取H5签署链接 {@link CreateFlowSignUrlRequest} {@link CreateFlowSignUrlResponse} */
   CreateFlowSignUrl(data: CreateFlowSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowSignUrlResponse>;
+  /** 创建合同智能提取web页面 {@link CreateInformationExtractionWebUrlRequest} {@link CreateInformationExtractionWebUrlResponse} */
+  CreateInformationExtractionWebUrl(data: CreateInformationExtractionWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInformationExtractionWebUrlResponse>;
   /** 创建企业部门 {@link CreateIntegrationDepartmentRequest} {@link CreateIntegrationDepartmentResponse} */
   CreateIntegrationDepartment(data: CreateIntegrationDepartmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationDepartmentResponse>;
   /** 创建企业员工 {@link CreateIntegrationEmployeesRequest} {@link CreateIntegrationEmployeesResponse} */
@@ -4989,6 +5033,8 @@ declare interface Ess {
   DescribeFlowTemplates(data: DescribeFlowTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowTemplatesResponse>;
   /** 获取合同智能提取任务详情 {@link DescribeInformationExtractionTaskRequest} {@link DescribeInformationExtractionTaskResponse} */
   DescribeInformationExtractionTask(data: DescribeInformationExtractionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInformationExtractionTaskResponse>;
+  /** 获取合同智能提取结果web页面 {@link DescribeInformationExtractionWebUrlRequest} {@link DescribeInformationExtractionWebUrlResponse} */
+  DescribeInformationExtractionWebUrl(data: DescribeInformationExtractionWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInformationExtractionWebUrlResponse>;
   /** 获取企业部门信息列表 {@link DescribeIntegrationDepartmentsRequest} {@link DescribeIntegrationDepartmentsResponse} */
   DescribeIntegrationDepartments(data: DescribeIntegrationDepartmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationDepartmentsResponse>;
   /** 查询企业员工信息列表 {@link DescribeIntegrationEmployeesRequest} {@link DescribeIntegrationEmployeesResponse} */
