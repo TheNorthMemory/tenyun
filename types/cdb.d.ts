@@ -3938,6 +3938,20 @@ declare interface DescribeInstanceParamsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstancePasswordComplexityRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeInstancePasswordComplexityResponse {
+  /** 实例的参数总数 */
+  TotalCount?: number;
+  /** 参数详情 */
+  Items?: ParameterDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceUpgradeCheckJobRequest {
   /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
@@ -5683,6 +5697,8 @@ declare interface Cdb {
   DescribeInstanceParamRecords(data: DescribeInstanceParamRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamRecordsResponse>;
   /** 查询实例的可设置参数列表 {@link DescribeInstanceParamsRequest} {@link DescribeInstanceParamsResponse} */
   DescribeInstanceParams(data: DescribeInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamsResponse>;
+  /** 查询实例的密码复杂度 {@link DescribeInstancePasswordComplexityRequest} {@link DescribeInstancePasswordComplexityResponse} */
+  DescribeInstancePasswordComplexity(data: DescribeInstancePasswordComplexityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancePasswordComplexityResponse>;
   /** 查询实例版本升级校验任务 {@link DescribeInstanceUpgradeCheckJobRequest} {@link DescribeInstanceUpgradeCheckJobResponse} */
   DescribeInstanceUpgradeCheckJob(data: DescribeInstanceUpgradeCheckJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceUpgradeCheckJobResponse>;
   /** 查询数据库实例升级类型 {@link DescribeInstanceUpgradeTypeRequest} {@link DescribeInstanceUpgradeTypeResponse} */

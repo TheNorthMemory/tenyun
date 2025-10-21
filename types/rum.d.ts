@@ -319,6 +319,10 @@ declare interface CreateTawInstanceRequest {
   ResourcePackageNum?: number;
   /** 实例类型 1:原web相关类型 2:app端类型 */
   InstanceType?: number;
+  /** 自动续费类型 */
+  AutoRenewalType?: number;
+  /** 自动续费阈值 */
+  AutoRenewalThreshold?: number;
 }
 
 declare interface CreateTawInstanceResponse {

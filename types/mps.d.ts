@@ -1674,7 +1674,7 @@ declare interface AudioTemplateInfo {
   Codec: string;
   /** 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。当取值为 0，表示音频码率和原始音频保持一致。注意：如果使用自适应转码音轨合并TrackChannelInfo参数，取值范围：1）、不能填0；2）、Codec为：aac时，取值范围：[26, 256];3）、Codec为：ac3时，取值范围：[26, 640];4)、Codec为：eac3时，取值范围：[26, 6144]，备注：当SampleRate为44100HZ，最大值为：5644，当SampleRate为48000HZ，最大值为：6144， */
   Bitrate: number;
-  /** 音频流的采样率，不同编码标准支持的采样率选项不同。详细参考[音频采样率支持范围文档](https://cloud.tencent.com/document/product/862/77166)单位：Hz注意：请确保源音频流的采样率在上述选项范围内，否则可能导致转码失败！ */
+  /** 音频流的采样率，不同编码标准支持的采样率选项不同。填0代表使用源音频的采样率数值。详细参考[音频采样率支持范围文档](https://cloud.tencent.com/document/product/862/77166)单位：Hz注意：请确保源音频流的采样率在上述选项范围内，否则可能导致转码失败！ */
   SampleRate: number;
   /** 音频通道方式，可选值：1：单通道2：双通道6：5.1声道当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为5.1声道。默认值：2。 */
   AudioChannel?: number;
@@ -1688,7 +1688,7 @@ declare interface AudioTemplateInfoForUpdate {
   Codec?: string | null;
   /** 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。 当取值为 0，表示音频码率和原始音频保持一致。 */
   Bitrate?: number | null;
-  /** 音频流的采样率，不同编码标准支持的采样率选项不同。详细参考[音频采样率支持范围文档](https://cloud.tencent.com/document/product/862/77166)单位：Hz注意：请确保源音频流的采样率在上述选项范围内，否则可能导致转码失败！ */
+  /** 音频流的采样率，不同编码标准支持的采样率选项不同。填0代表使用源音频的采样率数值。详细参考[音频采样率支持范围文档](https://cloud.tencent.com/document/product/862/77166)单位：Hz注意：请确保源音频流的采样率在上述选项范围内，否则可能导致转码失败！ */
   SampleRate?: number | null;
   /** 音频通道方式，可选值：1：单通道2：双通道6：5.1声道当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为5.1声道。 */
   AudioChannel?: number | null;
@@ -1764,12 +1764,16 @@ declare interface BeautyConfig {
 
 /** 美颜效果配置项 */
 declare interface BeautyEffectItemConfig {
-  /** 类型名称。取值如下：Whiten：美白Smooth：磨皮BeautyThinFace：瘦脸NatureFace：自然脸型VFace：V脸EnlargeEye：大眼EyeLighten：亮眼RemoveEyeBags：祛眼袋ThinNose：瘦鼻RemoveLawLine：祛法令纹ToothWhiten：牙齿美白 */
+  /** 类型名称。取值如下：Whiten：美白BlackAlpha1：美黑BlackAlpha2：较强美黑FoundationAlpha2：美白-粉白Clear：清晰度Sharpen：锐化Smooth：磨皮BeautyThinFace：瘦脸NatureFace：自然脸型VFace：V脸EnlargeEye：大眼EyeLighten：亮眼RemoveEyeBags：祛眼袋ThinNose：瘦鼻RemoveLawLine：祛法令纹CheekboneThin：瘦颧骨FaceFeatureLipsLut：口红ToothWhiten：牙齿美白FaceFeatureSoftlight：柔光Makeup：美妆 */
   Type: string;
   /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
   Switch?: string;
   /** 效果强度，值范围：[0, 100]。 */
   Value?: number;
+  /** 附加资源路径。 */
+  ResourcePath?: string;
+  /** 自定义参数。 */
+  ExtInfo?: string;
 }
 
 /** 美颜滤镜配置项 */

@@ -2220,6 +2220,58 @@ declare interface RouteECMPAlgorithm {
   SubnetRouteAlgorithm?: string;
 }
 
+/** 路由接收策略。当云联网或其他业务添加路由到VPC自定义路由表时，可以丢弃或启用，禁用相应的路由条目。 */
+declare interface RoutePolicy {
+  /** 路由策略唯一ID。 */
+  RoutePolicyId?: string | null;
+  /** 路由策略名。 */
+  RoutePolicyName?: string | null;
+  /** 路由策略描述。 */
+  RoutePolicyDescription?: string | null;
+  /** 路由策略规则列表。 */
+  RoutePolicyEntrySet?: RoutePolicyEntry[] | null;
+  /** 路由策略绑定。 */
+  RoutePolicyAssociationSet?: RoutePolicyAssociation[] | null;
+  /** 创建时间。 */
+  CreatedTime?: string | null;
+  /** 标签键值对。 */
+  TagSet?: Tag[];
+}
+
+/** 路由接收策略绑定。用来绑定路由表和路由接收策略以及绑定的优先级。 */
+declare interface RoutePolicyAssociation {
+  /** 路由表唯一ID。 */
+  RouteTableId?: string;
+  /** 路由接收策略唯一ID。 */
+  RoutePolicyId?: string;
+  /** 优先级。 */
+  Priority?: number;
+}
+
+/** 路由接收策略条目。 */
+declare interface RoutePolicyEntry {
+  /** 路由策略条目IPv4唯一ID。 */
+  RoutePolicyEntryId?: string | null;
+  /** 目标网段。 */
+  CidrBlock?: string | null;
+  /** 路由策略规则描述。 */
+  Description?: string | null;
+  /** 路由类型。USER：用户自定义类型。NETD：网络探测下发的路由。CCN：云联网路由。 */
+  RouteType?: string | null;
+  /** 下一跳类型。目前我们支持的类型有：CVM：公网网关类型的云服务器；VPN：VPN网关；DIRECTCONNECT：专线网关；PEERCONNECTION：对等连接；HAVIP：高可用虚拟IP；NAT：NAT网关; EIP：云服务器的公网IP；LOCAL_GATEWAY：本地网关;PVGW：PVGW网关。 */
+  GatewayType?: string | null;
+  /** 网关唯一ID。 */
+  GatewayId?: string | null;
+  /** 优先级。数值越小，优先级越高。 */
+  Priority?: number | null;
+  /** 动作。DROP：丢弃。DISABLE：接收且禁用。ACCEPT：接收且启用。 */
+  Action?: string | null;
+  /** 创建时间。 */
+  CreatedTime?: string | null;
+  /** 地域。 */
+  Region?: string | null;
+}
+
 /** 路由表选择策略信息 */
 declare interface RouteSelectionPolicy {
   /** 云联网ID。 */
@@ -4352,6 +4404,44 @@ declare interface CreateReserveIpAddressesResponse {
   RequestId?: string;
 }
 
+declare interface CreateRoutePolicyAssociationsRequest {
+  /** 路由接收策略绑定对象列表。 */
+  RoutePolicyAssociationSet: RoutePolicyAssociation[];
+}
+
+declare interface CreateRoutePolicyAssociationsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateRoutePolicyEntriesRequest {
+  /** 路由接收策略实例ID。 */
+  RoutePolicyId: string;
+  /** 路由接收策略条目列表。 */
+  RoutePolicyEntrySet: RoutePolicyEntry[];
+}
+
+declare interface CreateRoutePolicyEntriesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateRoutePolicyRequest {
+  /** 路由策略描述。 */
+  RoutePolicyDescription: string;
+  /** 路由策略名。 */
+  RoutePolicyName: string;
+  /** 路由策略条目列表。 */
+  RoutePolicyEntrySet?: RoutePolicyEntry[];
+}
+
+declare interface CreateRoutePolicyResponse {
+  /** 路由策略ID及规则。 */
+  RoutePolicy?: RoutePolicy;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateRouteTableRequest {
   /** 待操作的VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。 */
   VpcId: string;
@@ -5202,6 +5292,38 @@ declare interface DeleteReserveIpAddressesRequest {
 }
 
 declare interface DeleteReserveIpAddressesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRoutePolicyAssociationsRequest {
+  /** 路由策略绑定对象列表，删除路由策略绑定时，仅需使用RoutePolicyAssociation的RouteTableId字段和RoutePolicyId字段（不需要填写Priority字段）。 */
+  RoutePolicyAssociationSet: RoutePolicyAssociation[];
+}
+
+declare interface DeleteRoutePolicyAssociationsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRoutePolicyEntriesRequest {
+  /** 路由接收策略实例ID。 */
+  RoutePolicyId: string;
+  /** 路由接收策略条目列表，删除路由策略规则时，仅需使用RoutePolicyEntry的RoutePolicyEntryIdId字段。 */
+  RoutePolicyEntrySet?: RoutePolicyEntry[];
+}
+
+declare interface DeleteRoutePolicyEntriesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRoutePolicyRequest {
+  /** 路由接收策略唯一ID。 */
+  RoutePolicyId: string;
+}
+
+declare interface DeleteRoutePolicyResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6778,6 +6900,30 @@ declare interface DescribeRouteListRequest {
 declare interface DescribeRouteListResponse {
   /** 路由对象。 */
   RouteSet?: Route[];
+  /** 符合条件的实例数量。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRoutePolicyEntriesRequest {
+  /** 过滤条件，参数不支持同时指定RoutePolicyEntryIds和Filters。route-policy-id - String - （过滤条件）路由接收策略实例ID，形如：rrp-f49l6u0z。cidr-block - String - （过滤条件）CIDR(只取掩码前的子网部分)，形如：10.0.0.0/8。priority - Integer - （过滤条件）优先级，形如：20。gateway-type - String - （过滤条件）下一跳类型，形如：CVM。gateway-id - String - （过滤条件）下一跳实例唯一ID，形如：ccn-f49l6u0z。route-type - String - （过滤条件）路由类型，取值：USER（用户路由），NETD（网络探测下发的路由），CCN（云联网路由）。action - String - （过滤条件）动作，取值：DROP（丢弃），DISABLE（接收且禁用），ACCEPT（接收且启用）。description - String - （过滤条件）描述，形如：TEST。route-policy-item-id - String - （过滤条件）路由接收策略条目唯一ID，形如：rrpi-dq782kw7。 */
+  Filters?: Filter[];
+  /** 偏移量。 */
+  Offset?: number;
+  /** 请求对象个数。 */
+  Limit?: number;
+  /** 排序字段。当前只支持优先级Prioriry字段。 */
+  OrderField?: string;
+  /** 排序方向。ASC：升序。DESC：降序。 */
+  OrderDirection?: string;
+  /** 路由策略条目ID。 */
+  RoutePolicyEntryIds?: string[];
+}
+
+declare interface DescribeRoutePolicyEntriesResponse {
+  /** 路由接收策略条目列表。 */
+  RoutePolicyEntrySet?: RoutePolicyEntry[];
   /** 符合条件的实例数量。 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -8874,6 +9020,20 @@ declare interface ModifyReserveIpAddressResponse {
   RequestId?: string;
 }
 
+declare interface ModifyRoutePolicyAttributeRequest {
+  /** 路由接收策略实例ID，例如：rrp-dz0219jq。 */
+  RoutePolicyId: string;
+  /** 路由接收策略名称。 */
+  RoutePolicyName: string;
+  /** 路由接收策略描述。 */
+  RoutePolicyDescription: string;
+}
+
+declare interface ModifyRoutePolicyAttributeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyRouteTableAttributeRequest {
   /** 路由表实例ID，例如：rtb-azd4dt1c。 */
   RouteTableId: string;
@@ -9428,6 +9588,28 @@ declare interface ReplaceHighPriorityRoutesResponse {
   RequestId?: string;
 }
 
+declare interface ReplaceRoutePolicyAssociationsRequest {
+  /** 路由接收策略绑定对象列表。需要指定路由接收策略实例ID（RoutePolicyId）和路由表实例ID（RouteTableId）。 */
+  RoutePolicyAssociationSet: RoutePolicyAssociation[];
+}
+
+declare interface ReplaceRoutePolicyAssociationsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ReplaceRoutePolicyEntriesRequest {
+  /** 路由策略实例ID，例如：rrp-azd4dt1c。 */
+  RoutePolicyId: string;
+  /** 路由策略规则列表。需要指定路由策略规则ID（RoutePolicyEntryId）。 */
+  RoutePolicyEntrySet: RoutePolicyEntry[];
+}
+
+declare interface ReplaceRoutePolicyEntriesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ReplaceRouteTableAssociationRequest {
   /** 子网实例ID，例如：subnet-3x5lf5q0。可通过DescribeSubnets接口查询。 */
   SubnetId: string;
@@ -9520,6 +9702,34 @@ declare interface ResetNatGatewayConnectionRequest {
 }
 
 declare interface ResetNatGatewayConnectionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ResetRoutePolicyAssociationsRequest {
+  /** 路由表实例ID，例如：rtb-azd4dt1c。 */
+  RouteTableId: string;
+  /** 路由策略绑定对象（RoutePolicyAssociation）列表。注意：路由策略绑定中的路由表实例ID（RouteTableId）需要和该接口的RouteTableId参数保持一致（也就是该接口只支持修改同一个路由表实例下的路有策略绑定关系及优先级）。 */
+  RoutePolicyAssociationSet: RoutePolicyAssociation[];
+}
+
+declare interface ResetRoutePolicyAssociationsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ResetRoutePolicyEntriesRequest {
+  /** 路由接收策略实例ID，例如：rrp-azd4dt1c。 */
+  RoutePolicyId: string;
+  /** 路由接收策略条目列表。需要指定路由策略条目ID（RoutePolicyEntryId）。 */
+  RoutePolicyEntrySet?: RoutePolicyEntry[];
+  /** 路由接收策略描述。 */
+  RoutePolicyDescription?: string;
+  /** 路由接收策略名字。 */
+  RoutePolicyName?: string;
+}
+
+declare interface ResetRoutePolicyEntriesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9939,6 +10149,12 @@ declare interface Vpc {
   CreatePrivateNatGatewayTranslationNatRule(data: CreatePrivateNatGatewayTranslationNatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateNatGatewayTranslationNatRuleResponse>;
   /** 创建保留内网IP {@link CreateReserveIpAddressesRequest} {@link CreateReserveIpAddressesResponse} */
   CreateReserveIpAddresses(data: CreateReserveIpAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReserveIpAddressesResponse>;
+  /** 创建路由策略及策略条目。 {@link CreateRoutePolicyRequest} {@link CreateRoutePolicyResponse} */
+  CreateRoutePolicy(data: CreateRoutePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoutePolicyResponse>;
+  /** 创建路由接收策略绑定 {@link CreateRoutePolicyAssociationsRequest} {@link CreateRoutePolicyAssociationsResponse} */
+  CreateRoutePolicyAssociations(data: CreateRoutePolicyAssociationsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoutePolicyAssociationsResponse>;
+  /** 创建路由接收策略条目 {@link CreateRoutePolicyEntriesRequest} {@link CreateRoutePolicyEntriesResponse} */
+  CreateRoutePolicyEntries(data: CreateRoutePolicyEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoutePolicyEntriesResponse>;
   /** 创建路由表 {@link CreateRouteTableRequest} {@link CreateRouteTableResponse} */
   CreateRouteTable(data: CreateRouteTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRouteTableResponse>;
   /** 创建路由策略 {@link CreateRoutesRequest} {@link CreateRoutesResponse} */
@@ -10047,6 +10263,12 @@ declare interface Vpc {
   DeletePrivateNatGatewayTranslationNatRule(data: DeletePrivateNatGatewayTranslationNatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateNatGatewayTranslationNatRuleResponse>;
   /** 删除内网保留IP {@link DeleteReserveIpAddressesRequest} {@link DeleteReserveIpAddressesResponse} */
   DeleteReserveIpAddresses(data: DeleteReserveIpAddressesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReserveIpAddressesResponse>;
+  /** 删除路由接收策略和条目。 {@link DeleteRoutePolicyRequest} {@link DeleteRoutePolicyResponse} */
+  DeleteRoutePolicy(data: DeleteRoutePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoutePolicyResponse>;
+  /** 删除路由接收策略绑定 {@link DeleteRoutePolicyAssociationsRequest} {@link DeleteRoutePolicyAssociationsResponse} */
+  DeleteRoutePolicyAssociations(data: DeleteRoutePolicyAssociationsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoutePolicyAssociationsResponse>;
+  /** 删除路由接收策略条目 {@link DeleteRoutePolicyEntriesRequest} {@link DeleteRoutePolicyEntriesResponse} */
+  DeleteRoutePolicyEntries(data: DeleteRoutePolicyEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoutePolicyEntriesResponse>;
   /** 删除路由表 {@link DeleteRouteTableRequest} {@link DeleteRouteTableResponse} */
   DeleteRouteTable(data: DeleteRouteTableRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRouteTableResponse>;
   /** 删除路由策略 {@link DeleteRoutesRequest} {@link DeleteRoutesResponse} */
@@ -10231,6 +10453,8 @@ declare interface Vpc {
   DescribeRouteConflicts(data: DescribeRouteConflictsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteConflictsResponse>;
   /** 查询路由条目列表 {@link DescribeRouteListRequest} {@link DescribeRouteListResponse} */
   DescribeRouteList(data?: DescribeRouteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteListResponse>;
+  /** 查看路由接收策略条目 {@link DescribeRoutePolicyEntriesRequest} {@link DescribeRoutePolicyEntriesResponse} */
+  DescribeRoutePolicyEntries(data?: DescribeRoutePolicyEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoutePolicyEntriesResponse>;
   /** 查询实例绑定路由表信息 {@link DescribeRouteTableAssociatedInstancesRequest} {@link DescribeRouteTableAssociatedInstancesResponse} */
   DescribeRouteTableAssociatedInstances(data?: DescribeRouteTableAssociatedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteTableAssociatedInstancesResponse>;
   /** 查询云联网路由表选择策略信息 {@link DescribeRouteTableSelectionPoliciesRequest} {@link DescribeRouteTableSelectionPoliciesResponse} */
@@ -10503,6 +10727,8 @@ declare interface Vpc {
   ModifyPrivateNatGatewayTranslationNatRule(data: ModifyPrivateNatGatewayTranslationNatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrivateNatGatewayTranslationNatRuleResponse>;
   /** 修改内网保留IP {@link ModifyReserveIpAddressRequest} {@link ModifyReserveIpAddressResponse} */
   ModifyReserveIpAddress(data: ModifyReserveIpAddressRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReserveIpAddressResponse>;
+  /** 修改路由策略属性 {@link ModifyRoutePolicyAttributeRequest} {@link ModifyRoutePolicyAttributeResponse} */
+  ModifyRoutePolicyAttribute(data: ModifyRoutePolicyAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoutePolicyAttributeResponse>;
   /** 修改路由表属性 {@link ModifyRouteTableAttributeRequest} {@link ModifyRouteTableAttributeResponse} */
   ModifyRouteTableAttribute(data: ModifyRouteTableAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRouteTableAttributeResponse>;
   /** 编辑云联网路由表选择策略 {@link ModifyRouteTableSelectionPoliciesRequest} {@link ModifyRouteTableSelectionPoliciesResponse} */
@@ -10577,6 +10803,10 @@ declare interface Vpc {
   ReplaceHighPriorityRouteTableAssociation(data: ReplaceHighPriorityRouteTableAssociationRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceHighPriorityRouteTableAssociationResponse>;
   /** 替换高优路由表条目信息。 {@link ReplaceHighPriorityRoutesRequest} {@link ReplaceHighPriorityRoutesResponse} */
   ReplaceHighPriorityRoutes(data: ReplaceHighPriorityRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceHighPriorityRoutesResponse>;
+  /** 替换路由接收策略绑定 {@link ReplaceRoutePolicyAssociationsRequest} {@link ReplaceRoutePolicyAssociationsResponse} */
+  ReplaceRoutePolicyAssociations(data: ReplaceRoutePolicyAssociationsRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceRoutePolicyAssociationsResponse>;
+  /** 替换路由表接收策略条目 {@link ReplaceRoutePolicyEntriesRequest} {@link ReplaceRoutePolicyEntriesResponse} */
+  ReplaceRoutePolicyEntries(data: ReplaceRoutePolicyEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceRoutePolicyEntriesResponse>;
   /** 替换路由表绑定关系 {@link ReplaceRouteTableAssociationRequest} {@link ReplaceRouteTableAssociationResponse} */
   ReplaceRouteTableAssociation(data: ReplaceRouteTableAssociationRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceRouteTableAssociationResponse>;
   /** 替换路由策略 {@link ReplaceRoutesRequest} {@link ReplaceRoutesResponse} */
@@ -10591,6 +10821,10 @@ declare interface Vpc {
   ResetHighPriorityRoutes(data: ResetHighPriorityRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<ResetHighPriorityRoutesResponse>;
   /** 调整NAT网关并发连接上限 {@link ResetNatGatewayConnectionRequest} {@link ResetNatGatewayConnectionResponse} */
   ResetNatGatewayConnection(data: ResetNatGatewayConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<ResetNatGatewayConnectionResponse>;
+  /** 重置路由策略绑定 {@link ResetRoutePolicyAssociationsRequest} {@link ResetRoutePolicyAssociationsResponse} */
+  ResetRoutePolicyAssociations(data: ResetRoutePolicyAssociationsRequest, config?: AxiosRequestConfig): AxiosPromise<ResetRoutePolicyAssociationsResponse>;
+  /** 重置路由接收策略条目 {@link ResetRoutePolicyEntriesRequest} {@link ResetRoutePolicyEntriesResponse} */
+  ResetRoutePolicyEntries(data: ResetRoutePolicyEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<ResetRoutePolicyEntriesResponse>;
   /** 重置路由表名称和路由策略 {@link ResetRoutesRequest} {@link ResetRoutesResponse} */
   ResetRoutes(data: ResetRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<ResetRoutesResponse>;
   /** 更新流量镜像过滤规则 {@link ResetTrafficMirrorFilterRequest} {@link ResetTrafficMirrorFilterResponse} */

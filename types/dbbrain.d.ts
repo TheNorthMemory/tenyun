@@ -922,21 +922,21 @@ declare interface SessionItem {
 
 /** redis top慢日志聚合详情。 */
 declare interface SlowLogAgg {
-  /** 命令模版。 */
+  /** 命令模板。 */
   Cmd?: string;
   /** 命令详情。 */
   Detail?: string;
   /** 执行次数。 */
   ExecTimes?: number;
-  /** 总耗时。 */
+  /** 总耗时。单位：s */
   QueryTime?: number;
-  /** 平均执行时间。 */
+  /** 平均执行时间。单位：s */
   QueryTimeAvg?: number;
-  /** 最大执行时间。 */
+  /** 最大执行时间。单位：s */
   QueryTimeMax?: number;
-  /** 最小执行时间。 */
+  /** 最小执行时间。单位：s */
   QueryTimeMin?: number;
-  /** 总耗时占比 */
+  /** 总耗时占比。单位：% */
   QueryTimeRatio?: number;
 }
 

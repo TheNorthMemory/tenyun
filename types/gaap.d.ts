@@ -712,7 +712,7 @@ declare interface RuleInfo {
   CheckParams?: RuleCheckParams;
   /** 已绑定的源站相关信息 */
   RealServerSet?: BindRealServer[];
-  /** 源站的服务状态，0表示异常，1表示正常。未开启健康检查时，该状态始终未正常。只要有一个源站健康状态为异常时，该状态为异常，具体源站的状态请查看RealServerSet。 */
+  /** 源站的服务状态，0表示异常，1表示正常。未开启健康检查时，该状态始终为正常。只要有一个源站健康状态为异常时，该状态为异常，具体源站的状态请查看RealServerSet。 */
   BindStatus?: number;
   /** 通道转发到源站的请求所携带的host，其中default表示直接转发接收到的host。 */
   ForwardHost?: string;
@@ -722,6 +722,8 @@ declare interface RuleInfo {
   ServerNameIndication?: string;
   /** 强转HTTPS指示，当传递值为https:时表示强转为https */
   ForcedRedirect?: string | null;
+  /** 七层转发规则的回源协议类型 */
+  ForwardProtocol?: string;
 }
 
 /** 安全策略规则（入参） */

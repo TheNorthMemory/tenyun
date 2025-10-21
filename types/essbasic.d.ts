@@ -3467,9 +3467,9 @@ declare interface DescribeUsageResponse {
 declare interface DescribeUserFlowTypeRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 此接口下面信息必填。 渠道应用标识: Agent.AppId 第三方平台子客企业标识: Agent.ProxyOrganizationOpenId 第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId 第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 搜索过滤的条件，本字段允许您通过指定模板 ID 或模板名称来进行查询。 模板的用户合同类型：Key设置为 user-flow-type-id ，Values为您想要查询的用户模版类型id列表。 */
+  /** 搜索过滤的条件，本字段允许您通过指定模板 ID 或模板名称来进行查询。 模板的用户合同类型：Key设置为 user-flow-type-id ，Values为您想要查询的用户模板类型id列表。 */
   Filters?: Filter[];
-  /** 查询绑定了模版的用户合同类型false（默认值），查询用户合同类型true，查询绑定了模版的用户合同类型 */
+  /** 查询绑定了模板的用户合同类型false（默认值），查询用户合同类型true，查询绑定了模板的用户合同类型 */
   QueryBindTemplate?: boolean;
 }
 

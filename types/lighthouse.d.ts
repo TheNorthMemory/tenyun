@@ -188,6 +188,14 @@ declare interface DeniedAction {
   Message?: string;
 }
 
+/** 目标地域镜像信息。 */
+declare interface DestinationRegionBlueprint {
+  /** 目标地域。 */
+  Region?: string;
+  /** 目标地域镜像ID。 */
+  BlueprintId?: string;
+}
+
 /** 计费项目明细。 */
 declare interface DetailPrice {
   /** 描述计费项目名称，目前取值"DiskSpace"代表云硬盘空间收费项。"DiskBackupQuota"代表数据盘备份点配额收费项。"Instance"代表实例收费项。"SystemDiskBackupQuota"代表系统盘备份点配额收费项。 */
@@ -2806,6 +2814,8 @@ declare interface SyncBlueprintRequest {
 }
 
 declare interface SyncBlueprintResponse {
+  /** 目标地域镜像信息。 */
+  DestinationRegionBlueprintSet?: DestinationRegionBlueprint[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

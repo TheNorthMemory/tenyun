@@ -14,6 +14,14 @@ declare interface BoundingBox {
   Height?: number;
 }
 
+/** 坐标详细信息 */
+declare interface Coord {
+  /** X坐标 */
+  X?: number;
+  /** Y坐标 */
+  Y?: number;
+}
+
 /** 文件翻译任务结果 */
 declare interface GetFileTranslateData {
   /** 任务ID */
@@ -52,6 +60,16 @@ declare interface ItemValue {
   H: number;
 }
 
+/** 段落文本旋转信息 */
+declare interface RotateParagraphRect {
+  /** 段落文本坐标 */
+  Coord?: Coord[];
+  /** 旋转角度 */
+  TiltAngle?: number;
+  /** 段落文本信息是否有效 */
+  Valid?: boolean;
+}
+
 /** 文件翻译请求的返回数据 */
 declare interface Task {
   /** 任务ID，可通过此ID在轮询接口获取识别状态与结果。注意：TaskId数据类型为字符串类型 */
@@ -72,6 +90,8 @@ declare interface TransDetail {
   LineHeight?: number;
   /** 正常段落spam_code字段为0；如果存在spam_code字段且值大于0（1: 命中垃圾检查；2: 命中安全策略；3: 其他。），则命中安全检查被过滤。 */
   SpamCode?: number;
+  /** 段落文本旋转信息，只在valid为true时表示坐标有效 */
+  RotateParagraphRect?: RotateParagraphRect;
 }
 
 declare interface FileTranslateRequest {

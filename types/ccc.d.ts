@@ -1041,6 +1041,8 @@ declare interface BindNumberCallInInterfaceRequest {
   Number: string;
   /** 待绑定的回调地址 */
   CallInInterface?: Interface;
+  /** 绑定号码类型: inner: 内线号码 | number: 正常线路号码 */
+  NumberType?: string;
 }
 
 declare interface BindNumberCallInInterfaceResponse {

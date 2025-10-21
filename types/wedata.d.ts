@@ -98,6 +98,8 @@ declare interface AlarmRuleDetail {
   ProjectInstanceStatisticsAlarmInfoList?: ProjectInstanceStatisticsAlarmInfo[] | null;
   /** 离线集成对账告警配置信息 */
   ReconciliationExtInfo?: ReconciliationStrategyInfo[] | null;
+  /** 监控对象的白名单配置 */
+  MonitorWhiteTasks?: MonitorWhiteTask[];
 }
 
 /** 告警渠道 企业微信群/钉钉群/飞书群 等webhook地址配置 */
@@ -1152,6 +1154,14 @@ declare interface MetricData {
 declare interface ModifyAlarmRuleResult {
   /** 是否更新成功 */
   Status?: boolean;
+}
+
+/** 告警规则监控白名单配置 */
+declare interface MonitorWhiteTask {
+  /** 配置白名单的对应的工作流/项目的id */
+  MonitorObjectId?: string;
+  /** 白名单任务列表 */
+  TaskIds?: string[];
 }
 
 /** notebook kernel session信息 */

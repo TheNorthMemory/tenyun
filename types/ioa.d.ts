@@ -642,6 +642,14 @@ declare interface DeviceDetail {
   RemarkName?: string;
 }
 
+/** 业务响应数据 */
+declare interface DeviceDownloadTask {
+  /** 同步数据下载的url */
+  DownloadURL?: string;
+  /** 异步任务id，需要根据id去任务中心下载 */
+  TaskId?: number;
+}
+
 /** 返回的数组列表 */
 declare interface DeviceGroupDetail {
   /** 设备组id */
@@ -1308,6 +1316,30 @@ declare interface DescribeVirtualDevicesResponse {
   RequestId?: string;
 }
 
+declare interface ExportDeviceDownloadTaskRequest {
+  /** 系统类型（0: win，1：linux，2: mac，4：android，5：ios；默认值0） */
+  OsType?: number;
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
+  /** 分组id */
+  GroupId?: number;
+  /** 在线状态 2 在线 0，1 离线 */
+  OnlineStatus?: number;
+  /** 导出顺序，接口返回的数据字段 */
+  ExportOrder?: string;
+  /** 导出类型， 0：终端树；7:硬件信息列表导出； */
+  ExportType?: number;
+  /** 过滤条件。同DescribeDevices接口 */
+  Condition?: Condition;
+}
+
+declare interface ExportDeviceDownloadTaskResponse {
+  /** 业务响应数据 */
+  Data?: DeviceDownloadTask;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ExportSoftwareInformationListRequest {
   /** 终端唯一标识Mid */
   Mid?: string;
@@ -1393,6 +1425,8 @@ declare interface Ioa {
   DescribeSoftwareInformation(data?: DescribeSoftwareInformationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSoftwareInformationResponse>;
   /** 展示自定义分组终端列表 {@link DescribeVirtualDevicesRequest} {@link DescribeVirtualDevicesResponse} */
   DescribeVirtualDevices(data?: DescribeVirtualDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirtualDevicesResponse>;
+  /** 导出终端相关的数据 {@link ExportDeviceDownloadTaskRequest} {@link ExportDeviceDownloadTaskResponse} */
+  ExportDeviceDownloadTask(data?: ExportDeviceDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ExportDeviceDownloadTaskResponse>;
   /** 导出软件信息列表 {@link ExportSoftwareInformationListRequest} {@link ExportSoftwareInformationListResponse} */
   ExportSoftwareInformationList(data?: ExportSoftwareInformationListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportSoftwareInformationListResponse>;
   /** 终端手动自定义分组增减终端 {@link ModifyVirtualDeviceGroupsRequest} {@link ModifyVirtualDeviceGroupsResponse} */
