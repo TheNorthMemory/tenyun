@@ -80,7 +80,7 @@ declare interface AccelerationDomain {
 
 /** 加速域名所对应的证书信息。 */
 declare interface AccelerationDomainCertificate {
-  /** 配置证书的模式，取值有： disable：不配置证书； eofreecert：配置 EdgeOne 免费证书； sslcert：配置 SSL 证书。 */
+  /** 配置服务端证书的模式，取值有： disable：不配置服务端证书； eofreecert：通过自动验证申请免费证书并部署。验证方式详见：[申请免费证书支持的验证方式](https://cloud.tencent.com/document/product/1552/90437) - 在 NS 或者 DNSPod 托管接入模式下，仅支持自动验证的方式申请免费证书。 - 当免费证书申请失败时会导致证书部署失败，您可以通过检查免费证书申请结果接口获取申请失败原因。eofreecert_manual：部署 DNS 委派验证或者文件验证申请的免费证书。在部署免费证书前，您需要触发申请免费证书接口申请免费证书。在免费证书申请成功后，你可以通过该枚举值对免费证书进行部署； 注意：在对免费证书部署时，需要保证当前已存在申请成功的免费证书。您可以通过检查免费证书申请结果接口检查当前是否已存在申请成功的免费证书。 sslcert：配置 SSL 托管服务端证书。 */
   Mode?: string;
   /** 服务端证书列表，相关证书部署在 EO 的入口侧。 */
   List?: CertificateInfo[] | null;
@@ -1258,7 +1258,7 @@ declare interface DnsRecord {
   ModifiedOn?: string;
 }
 
-/** CNAME 接入，使用 DNS 解析验证时所需的信息。 */
+/** 站点 CNAME 模式接入验证归属权或域名申请免费证书时，使用 DNS 解析验证时所需的信息。 */
 declare interface DnsVerification {
   /** 主机记录。 */
   Subdomain?: string;
@@ -1446,9 +1446,9 @@ declare interface FileAscriptionInfo {
   IdentifyContent: string;
 }
 
-/** CNAME 接入，使用文件验证时所需的信息。 */
+/** 站点 CNAME 模式接入验证归属权或域名申请免费证书时，使用 HTTP 访问验证文件时所需的信息。 */
 declare interface FileVerification {
-  /** EdgeOne 后台服务器将通过 Scheme + Host + URL Path 的格式（例如 https://www.example.com/.well-known/teo-verification/z12h416twn.txt）获取文件验证信息。该字段为您需要创建的 URL Path 部分。 */
+  /** EdgeOne 后台服务器将通过 http://{Host}{URL Path} 的格式（例如 http://www.example.com/.well-known/teo-verification/z12h416twn.txt）获取文件验证信息。其中，本字段为您需要创建的 URL Path 部分，Host 为当前加速域名。 */
   Path?: string;
   /** 验证文件的内容。该字段的内容需要您填写至 Path 字段返回的 txt 文件中。 */
   Content?: string;
@@ -6775,7 +6775,7 @@ declare interface ModifyHostsCertificateRequest {
   ZoneId: string;
   /** 需要修改证书配置的加速域名。 */
   Hosts: string[];
-  /** 配置服务端证书的模式，取值有：disable：不配置服务端证书；eofreecert：配置 EdgeOne 免费服务端证书；sslcert：配置 SSL 托管服务端证书；不填写表示服务端证书保持原有配置。 */
+  /** 配置服务端证书的模式，取值有：disable：不配置服务端证书；eofreecert：通过自动验证申请免费证书并部署。验证方式详见：[申请免费证书支持的验证方式](https://cloud.tencent.com/document/product/1552/90437)- 在 NS 或者 DNSPod 托管接入模式下，仅支持自动验证的方式申请免费证书。- 当免费证书申请失败时会导致证书部署失败，您可以通过检查免费证书申请结果接口获取申请失败原因。eofreecert_manual：部署 DNS 委派验证或者文件验证申请的免费证书。在部署免费证书前，您需要触发申请免费证书接口申请免费证书。在免费证书申请成功后，你可以通过该枚举值对免费证书进行部署；注意：在对免费证书部署时，需要保证当前已存在申请成功的免费证书。您可以通过检查免费证书申请结果接口检查当前是否已存在申请成功的免费证书。sslcert：配置 SSL 托管服务端证书。 */
   Mode?: string;
   /** SSL 证书配置，本参数仅在 mode 为 sslcert 时生效，传入对应证书的 CertId 即可。您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/ssl) 查看 CertId。 */
   ServerCertInfo?: ServerCertInfo[];

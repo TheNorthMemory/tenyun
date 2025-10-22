@@ -2531,6 +2531,12 @@ declare namespace V20180724 {
     VoiceConfirmKey?: string | null;
   }
 
+  /** 数据写向目标 */
+  interface WriteDestination {
+    /** 存储标识 */
+    Destination?: string;
+  }
+
   interface BindPrometheusManagedGrafanaRequest {
     /** Prometheus 实例 ID */
     InstanceId: string;
@@ -4648,6 +4654,8 @@ declare namespace V20180724 {
   }
 
   interface DescribePrometheusScrapeStatisticsRequest {
+    /** 实例ID列表 */
+    InstanceIds: string[];
     /** job 类型 */
     JobType?: string;
   }
@@ -4761,6 +4769,24 @@ declare namespace V20180724 {
   interface DescribeRemoteURLsResponse {
     /** 多写配置 */
     RemoteWrites?: RemoteWrite[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeRemoteWritesRequest {
+    /** 实例 ID */
+    InstanceId: string;
+    /** 列表 offset */
+    Offset?: number;
+    /** 返回 limit */
+    Limit?: number;
+  }
+
+  interface DescribeRemoteWritesResponse {
+    /** 存储数据 */
+    Count?: number;
+    /** 多写信息 */
+    RemoteWrites?: WriteDestination[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4894,7 +4920,7 @@ declare namespace V20180724 {
     StartTime?: string;
     /** 结束时间，如2018-09-22T20:51:23+08:00，默认为当前时间。 EndTime不能小于StartTime */
     EndTime?: string;
-    /** 返回多种统计方式数据。avg, max, min (1,2,4)可以自由组合。注意: 仅支持对API配置文档中展示的统计方式返回对应的统计数据。如所需的统计方式不满足您的查询需求，请提工单反馈。 */
+    /** 返回多种统计方式数据。avg, max, min (1,2,4)可以自由组合。特别说明：建议查询时严格参考API配置文档中提供的统计方式。如选择其他未提供的统计方式，可能有数据统计误差。 */
     SpecifyStatistics?: number;
   }
 
@@ -5917,6 +5943,8 @@ declare interface Monitor {
   DescribeRecordingRules(data: V20180724.DescribeRecordingRulesRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeRecordingRulesResponse>;
   /** 获取多写配置详情 {@link V20180724.DescribeRemoteURLsRequest} {@link V20180724.DescribeRemoteURLsResponse} */
   DescribeRemoteURLs(data: V20180724.DescribeRemoteURLsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeRemoteURLsResponse>;
+  /** 查询数据多写 {@link V20180724.DescribeRemoteWritesRequest} {@link V20180724.DescribeRemoteWritesResponse} */
+  DescribeRemoteWrites(data: V20180724.DescribeRemoteWritesRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeRemoteWritesResponse>;
   /** 列出授权账号 {@link V20180724.DescribeSSOAccountRequest} {@link V20180724.DescribeSSOAccountResponse} */
   DescribeSSOAccount(data: V20180724.DescribeSSOAccountRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeSSOAccountResponse>;
   /** 列出服务发现列表 {@link V20180724.DescribeServiceDiscoveryRequest} {@link V20180724.DescribeServiceDiscoveryResponse} */

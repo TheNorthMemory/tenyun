@@ -482,6 +482,8 @@ declare interface TaskListItem {
   ArchId?: string;
   /** 架构名称 */
   ArchName?: string;
+  /** 来源 */
+  TaskSource?: number;
 }
 
 /** 监控指标 */

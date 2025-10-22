@@ -60,6 +60,8 @@ declare interface AccessKeyAlarm {
   Evidence?: string;
   /** 告警规则标识 */
   RuleKey?: string;
+  /** 云厂商类型 0:腾讯云 1:亚马逊云 2:微软云 3:谷歌云 4:阿里云 5:华为云 */
+  CloudType?: number;
 }
 
 /** 访问密钥告警数量 */
@@ -116,6 +118,8 @@ declare interface AccessKeyAsset {
   Status?: number;
   /** 0 表示已检测1 表示检测中 */
   CheckStatus?: number;
+  /** 云厂商类型 0:腾讯云 1:亚马逊云 2:微软云 3:谷歌云 4:阿里云 5:华为云 */
+  CloudType?: number;
 }
 
 /** 访问密钥风险记录 */
@@ -204,6 +208,8 @@ declare interface AccessKeyUser {
   LoginFlag?: number;
   /** 0 表示已检测 1 表示检测中 */
   CheckStatus?: number;
+  /** 云厂商类型 0:腾讯云 1:亚马逊云 2:微软云 3:谷歌云 4:阿里云 5:华为云 */
+  CloudType?: number;
 }
 
 /** 告警下拉字段 */
@@ -2500,7 +2506,7 @@ declare interface SourceIPAsset {
   AppID?: number;
   /** IP地域 */
   Region?: string;
-  /** 调用方式0:控制台调用1:API */
+  /** 调用方式-1:未统计0:控制台调用1:API */
   EventType?: number;
   /** IP类型0:账号内（未备注）1:账号外（未备注）2:账号内 (已备注)3:账号外 (已备注) */
   IPType?: number;
@@ -2524,6 +2530,10 @@ declare interface SourceIPAsset {
   ShowStatus?: boolean;
   /** 运营商字段 */
   ISP?: string;
+  /** 账号外vpc信息 */
+  VpcInfo?: SourceIPVpcInfo[];
+  /** 云类型0为腾讯云 */
+  CloudType?: number;
 }
 
 /** 调用源IP 外部账号信息 */

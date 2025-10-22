@@ -1135,6 +1135,12 @@ declare namespace V20180416 {
     Message?: string;
     /** 集群节点ID */
     NodeID?: string;
+    /** 慢日志索引名 */
+    IndexName?: string;
+    /** 慢日志索引分片 */
+    Shard?: string;
+    /** 慢日志索引查询耗时 */
+    QueryCost?: string;
   }
 
   /** 节点IP、访问IP、访问时间 */
@@ -1737,6 +1743,10 @@ declare namespace V20180416 {
     ClusterType?: number | null;
     /** 空间标签信息 */
     TagList?: TagInfo[] | null;
+    /** 是否开启mcp服务 */
+    EnableMcpAccess?: number;
+    /** mcp的访问地址 */
+    McpAccess?: string;
   }
 
   /** ServerlessSpaceUser */
@@ -2364,6 +2374,16 @@ declare namespace V20180416 {
     Limit?: number;
     /** 时间排序方式，默认值为00, 降序1, 升序 */
     OrderByType?: number;
+    /** 日志级别 */
+    LogLevels?: string[];
+    /** 节点ID */
+    NodeIds?: string[];
+    /** 慢日志索引名 */
+    IndexName?: string;
+    /** 慢日志索引分片 */
+    ShardId?: string;
+    /** 慢日志查询耗时 */
+    QueryCost?: number;
   }
 
   interface DescribeInstanceLogsResponse {
