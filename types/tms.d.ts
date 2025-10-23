@@ -44,6 +44,24 @@ declare interface Device {
   IDFV?: string;
 }
 
+/** 金融大模型审校 违规明细 */
+declare interface FinancialLLMViolationDetail {
+  /** 违规点 */
+  Label?: string;
+  /** 处置建议 */
+  Suggestion?: string;
+  /** 违规原因列表 */
+  Reasons?: FinancialLLMViolationReason[];
+}
+
+/** 金融大模型审校-违规原因 */
+declare interface FinancialLLMViolationReason {
+  /** 违规原文片段 */
+  TargetText?: string;
+  /** 违规原因 */
+  Reason?: string;
+}
+
 /** 关键词命中位置信息 */
 declare interface HitInfo {
   /** 标识模型命中还是关键词命中 */
@@ -130,6 +148,46 @@ declare interface User {
   ReceiverId?: string;
   /** 消息生成时间，精确到毫秒 */
   SendTime?: number;
+}
+
+declare interface CreateFinancialLLMTaskRequest {
+  /** 审核策略BizType */
+  BizType: string;
+  /** 待审文件类型，目前支持：PDF, DOC, DOCX */
+  FileType?: string;
+  /** 送审内容类型：1-文档，2-文本 */
+  ContentType?: number;
+  /** 送审内容，根据ContentType字段的取值，传入送审文档的Url链接，或送审文本的Base64编码文档限制：- 文件下载时间不超过15秒（文件存储于腾讯云的Url可保障更高的下载速度和稳定性，建议文件存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。）- 所下载文件经 Base64 编码后不超过支持的文件大小：PDF/DOC/DOCX - 200M- 文档解析后的纯文本长度不超过 10000字文本限制：Base64解码后的文本长度不超过10000字 */
+  Content?: string;
+}
+
+declare interface CreateFinancialLLMTaskResponse {
+  /** 金融大模型审校任务ID */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetFinancialLLMTaskResultRequest {
+  /** 金融大模型审校任务ID */
+  TaskId: string;
+}
+
+declare interface GetFinancialLLMTaskResultResponse {
+  /** 审校任务状态：- Success: 成功- Processing: 处理中，请等待- Failed: 失败 */
+  Status?: string;
+  /** 大模型审校结果 */
+  ModerationResult?: string;
+  /** 审校任务失败原因，仅当任务失败时有值 */
+  FailureReason?: string;
+  /** 审校任务开始时间 */
+  StartTime?: string;
+  /** 本次检测的违规点列表 */
+  ReviewedLabels?: string[];
+  /** 违规明细 */
+  Details?: FinancialLLMViolationDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface TextModerationRequest {
@@ -414,6 +472,10 @@ declare namespace V20200713 {
 /** {@link Tms 文本内容安全} */
 declare interface Tms {
   (): Versions;
+  /** 创建金融大模型审校任务 {@link CreateFinancialLLMTaskRequest} {@link CreateFinancialLLMTaskResponse} */
+  CreateFinancialLLMTask(data: CreateFinancialLLMTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFinancialLLMTaskResponse>;
+  /** 查询金融大模型审校任务结果 {@link GetFinancialLLMTaskResultRequest} {@link GetFinancialLLMTaskResultResponse} */
+  GetFinancialLLMTaskResult(data: GetFinancialLLMTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetFinancialLLMTaskResultResponse>;
   /** 文本内容安全服务 {@link TextModerationRequest} {@link TextModerationResponse} */
   TextModeration(data: TextModerationRequest, config?: AxiosRequestConfig): AxiosPromise<TextModerationResponse>;
   /** 账号举报接口 {@link V20200713.AccountTipoffAccessRequest} {@link V20200713.AccountTipoffAccessResponse} */

@@ -1314,7 +1314,7 @@ declare interface RecentPullInfo {
 declare interface RecordParam {
   /** 录制间隔。单位秒，默认：1800。FLV、MP4取值范围： 60-43200， AAC取值范围： 60-7200 。此参数对 HLS 无效，当录制 HLS 时从推流到断流生成一个文件。 */
   RecordInterval?: number;
-  /** 录制存储时长。单位秒，取值范围： 0 - 1500天。0：表示永久存储。 */
+  /** 录制存储时长。单位秒，取值范围： 0 - 1500天。0：表示永久存储。注：此参数只对录制到VOD有效。 */
   StorageTime?: number;
   /** 是否开启当前格式录制，默认值为0，0：否， 1：是。 */
   Enable?: number;

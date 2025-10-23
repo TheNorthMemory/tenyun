@@ -1348,6 +1348,12 @@ declare interface ExclusiveInstance {
   RegionId?: string;
   /** 实例命名空间ID，通过[北极星控制台](https://console.cloud.tencent.com/tse/governance)获取 */
   InstanceNamespaceId?: string;
+  /** 部署组Id */
+  GroupId?: string | null;
+  /** 创建时间 */
+  CreateTime?: number | null;
+  /** 更新时间 */
+  UpdateTime?: number | null;
 }
 
 /** 容器 env 的 FieldRef */
@@ -5102,6 +5108,8 @@ declare interface DeployContainerApplicationRequest {
   PodManagementPolicyType?: string;
   /** 滚动更新分区序号 */
   Partition?: number;
+  /** 是否是增量部署，增量部署只运行增量覆盖一级参数，不支持对一级参数中的子参数进行增量更新，例如更新VolumeMountInfoList时必须传入VolumeMountInfoList更新后的全量参数 */
+  IncrementalDeployment?: boolean;
 }
 
 declare interface DeployContainerApplicationResponse {
@@ -6816,6 +6824,8 @@ declare interface DescribeSimpleGroupsRequest {
   SearchWord?: string;
   /** 部署组类型，精确过滤字段，M：service mesh, P：原生应用， G：网关应用 */
   AppMicroServiceType?: string;
+  /** 按照【部署组名称】进行过滤，不填写时查询全量。可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/product/649/36068)查询已创建的部署组列表或登录[控制台](https://console.cloud.tencent.com/tsf/app-detail?rid=1&id=application-zvw6zp9a&tab=publish&subTab=group)进行查看；也可以调用[CreateGroup](https://cloud.tencent.com/document/product/649/36074)创建新的部署组。 */
+  GroupName?: string;
 }
 
 declare interface DescribeSimpleGroupsResponse {
@@ -6890,6 +6900,8 @@ declare interface DescribeStatisticsRequest {
   NamespaceIdList?: string[];
   /** 独占配置中心的ID。可通过调用[DescribeClusterInstances](https://cloud.tencent.com/document/product/649/36048)查询已导入的实例列表或登录[控制台](https://console.cloud.tencent.com/tsf/resource?rid=1&tab=instance)进行查询。实例ID例如：ins-6decplwk。 */
   ConfigCenterInstanceId?: string;
+  /** 服务过滤 */
+  ServiceFilter?: string;
 }
 
 declare interface DescribeStatisticsResponse {

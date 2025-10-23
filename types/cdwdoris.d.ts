@@ -1258,6 +1258,8 @@ declare interface DescribeClusterConfigsResponse {
   ErrorMsg?: string;
   /** 是否包含CN节点 */
   HasCN?: boolean;
+  /** 实例已经存在的jar包列表 */
+  ExistingJarConfList?: ClusterConfigsInfoFromEMR[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

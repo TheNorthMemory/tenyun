@@ -2988,6 +2988,8 @@ declare interface SetExternalSAMLIdentityProviderRequest {
 }
 
 declare interface SetExternalSAMLIdentityProviderResponse {
+  /** 证书ID。 */
+  CertificateIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

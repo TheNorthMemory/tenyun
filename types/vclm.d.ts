@@ -72,6 +72,24 @@ declare interface DescribeImageAnimateJobResponse {
   RequestId?: string;
 }
 
+declare interface DescribeImageToVideoGeneralJobRequest {
+  /** 任务ID */
+  JobId: string;
+}
+
+declare interface DescribeImageToVideoGeneralJobResponse {
+  /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
+  Status?: string;
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为""。 */
+  ErrorCode?: string;
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。 */
+  ErrorMessage?: string;
+  /** 结果视频 URL。有效期 24 小时。 */
+  ResultVideoUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePortraitSingJobRequest {
   /** 任务ID */
   JobId: string;
@@ -158,6 +176,24 @@ declare interface SubmitImageAnimateJobResponse {
   RequestId?: string;
 }
 
+declare interface SubmitImageToVideoGeneralJobRequest {
+  /** 输入图片Base64 和 Url 必须提供一个，如果都提供以ImageUrl为准。上传图url大小不超过 8M支持jpg，png，jpeg，webp，bmp，tiff 格式单边分辨率不超过5000，不小于50，长宽限制1:4 ~ 4:1 */
+  Image: Image;
+  /** 视频内容的描述，中文正向提示词。最多支持200个 utf-8 字符（首尾空格不计入字符数）。 */
+  Prompt?: string;
+  /** 为生成视频添加标识的开关，默认为1，0 需前往 控制台 申请开启显示标识自主完成方可生效。 1：添加标识； 0：不添加标识； 其他数值：默认按1处理。 */
+  LogoAdd?: number;
+  /** 默认在生成视频的右下角添加“ AI 生成”字样，如需替换为其他的标识图片，需前往 控制台 申请开启显示标识自主完成。 */
+  LogoParam?: LogoParam;
+}
+
+declare interface SubmitImageToVideoGeneralJobResponse {
+  /** 任务ID */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SubmitPortraitSingJobRequest {
   /** 传入音频URL地址，音频要求：- 音频时长：2秒 - 60秒- 音频格式：mp3、wav、m4a */
   AudioUrl: string;
@@ -227,6 +263,8 @@ declare interface Vclm {
   CheckAnimateImageJob(data: CheckAnimateImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAnimateImageJobResponse>;
   /** 查询图片跳舞任务 {@link DescribeImageAnimateJobRequest} {@link DescribeImageAnimateJobResponse} */
   DescribeImageAnimateJob(data?: DescribeImageAnimateJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageAnimateJobResponse>;
+  /** 查询图生视频通用能力任务 {@link DescribeImageToVideoGeneralJobRequest} {@link DescribeImageToVideoGeneralJobResponse} */
+  DescribeImageToVideoGeneralJob(data: DescribeImageToVideoGeneralJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageToVideoGeneralJobResponse>;
   /** 查询图片唱演任务 {@link DescribePortraitSingJobRequest} {@link DescribePortraitSingJobResponse} */
   DescribePortraitSingJob(data: DescribePortraitSingJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePortraitSingJobResponse>;
   /** 查询视频特效任务 {@link DescribeTemplateToVideoJobRequest} {@link DescribeTemplateToVideoJobResponse} */
@@ -235,6 +273,8 @@ declare interface Vclm {
   DescribeVideoStylizationJob(data: DescribeVideoStylizationJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoStylizationJobResponse>;
   /** 提交图片跳舞任务 {@link SubmitImageAnimateJobRequest} {@link SubmitImageAnimateJobResponse} */
   SubmitImageAnimateJob(data?: SubmitImageAnimateJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitImageAnimateJobResponse>;
+  /** 提交图生视频通用能力任务 {@link SubmitImageToVideoGeneralJobRequest} {@link SubmitImageToVideoGeneralJobResponse} */
+  SubmitImageToVideoGeneralJob(data: SubmitImageToVideoGeneralJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitImageToVideoGeneralJobResponse>;
   /** 提交图片唱演任务 {@link SubmitPortraitSingJobRequest} {@link SubmitPortraitSingJobResponse} */
   SubmitPortraitSingJob(data: SubmitPortraitSingJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitPortraitSingJobResponse>;
   /** 提交视频特效任务 {@link SubmitTemplateToVideoJobRequest} {@link SubmitTemplateToVideoJobResponse} */

@@ -404,6 +404,20 @@ declare interface BandwidthAbuseDefense {
   Action?: SecurityAction;
 }
 
+/** Bot 管理的基础配置，对策略关联的所有域名生效。可以通过 CustomRules 进行精细化定制。 */
+declare interface BasicBotSettings {
+  /** 客户端 IP 的来源 IDC 配置，用于处置来自 IDC（数据中心） 的客户端 IP 的访问请求。此类来源请求不是由移动端或浏览器端直接访问。 */
+  SourceIDC?: SourceIDC;
+  /** 搜索引擎爬虫配置，用于处置来自搜索引擎爬虫的请求。此类请求的 IP、User-Agent 或 rDNS 结果匹配已知搜索引擎爬虫。 */
+  SearchEngineBots?: SearchEngineBots;
+  /** 商业或开源工具 UA 特征配置（原 UA 特征规则），用于处置来自已知商业工具或开源工具的访问请求。此类请求的 User-Agent 头部符合已知商业或开源工具特征。 */
+  KnownBotCategories?: KnownBotCategories;
+  /** IP 威胁情报库（原客户端画像分析）配置，用于处置近期访问行为具有特定风险特征的客户端 IP。 */
+  IPReputation?: IPReputation;
+  /** Bot 智能分析的具体配置。 */
+  BotIntelligence?: BotIntelligence;
+}
+
 /** 计费数据项。 */
 declare interface BillingData {
   /** 数据时间戳。 */
@@ -478,6 +492,14 @@ declare interface BotExtendAction {
   Percent?: number;
 }
 
+/** Bot 智能分析的具体配置。 */
+declare interface BotIntelligence {
+  /** 基于客户端和请求特征，将请求来源分为人类来源请求、合法 Bot 请求、疑似 Bot 请求和高风险 Bot 请求，并提供请求处置选项。 */
+  BotRatings?: BotRatings;
+  /** Bot 智能分析的具体配置开关。取值有：on：开启；off：关闭。 */
+  Enabled?: string;
+}
+
 /** Bot 规则，下列规则ID可参考接口 DescribeBotManagedRules返回的ID信息 */
 declare interface BotManagedRule {
   /** 触发规则后的处置方式，取值有：drop：拦截；trans：放行；alg：Javascript挑战；monitor：观察。 */
@@ -498,8 +520,46 @@ declare interface BotManagedRule {
 
 /** Web 安全的 BOT 规则结构。 */
 declare interface BotManagement {
-  /** 客户端认证规则的定义列表。该功能内测中，如需使用，请提工单或联系智能客服。 */
+  /** Bot 管理是否开启。取值有：on：开启；off：关闭。 */
+  Enabled?: string;
+  /** Bot 管理的自定义规则，组合各类爬虫和请求行为特征，精准定义 Bot 并配置定制化处置方式。 */
+  CustomRules?: BotManagementCustomRules;
+  /** Bot 管理的基础配置，对策略关联的所有域名生效。可以通过 CustomRules 进行精细化定制。 */
+  BasicBotSettings?: BasicBotSettings;
+  /** 客户端认证规则的定义列表。该功能内测中，如需使用，请提工单。 */
   ClientAttestationRules?: ClientAttestationRules;
+  /** 配置浏览器伪造识别规则（原主动特征识别规则）。设置注入 JavaScript 的响应页面范围，浏览器校验选项，以及对非浏览器客户端的处置方式。 */
+  BrowserImpersonationDetection?: BrowserImpersonationDetection;
+}
+
+/** Bot 规则项的具体配置，用于覆盖上层的默认配置。 */
+declare interface BotManagementActionOverrides {
+  /** Bot 规则组下的具体项，用于改写此单条规则项配置的内容，Ids 所对应的具体信息请参考 DescribeBotManagedRules 接口返回的信息。 */
+  Ids?: string[];
+  /** Ids 中指定 Bot 规则项的处置动作。 SecurityAction 的 Name 取值支持：Deny：拦截；Monitor：观察；Disabled：未启用，不启用指定规则；Challenge：挑战，其中 ChallengeActionParameters 中的 ChallengeOption 支持 JSChallenge 和 ManagedChallenge；Allow：放行（仅限Bot基础特征管理）。 */
+  Action?: SecurityAction;
+}
+
+/** Web 安全的 Bot 自定义规则。 */
+declare interface BotManagementCustomRule {
+  /** Bot 自定义规则的 ID。通过规则 ID 可支持不同的规则配置操作： 增加新规则：ID 为空或不指定 ID 参数；修改已有规则：指定需要更新/修改的规则 ID；删除已有规则：BotManagementCustomRules 参数中，Rules 列表中未包含的已有规则将被删除。 */
+  Id?: string;
+  /** Bot 自定义规则的名称。 */
+  Name?: string;
+  /** Bot 自定义规则是否开启。取值有：on：开启；off：关闭。 */
+  Enabled?: string;
+  /** Bot 自定义规则的优先级，范围是 1 ~ 100，默认为 50。 */
+  Priority?: number;
+  /** Bot 自定义规则的具体内容，需符合表达式语法，详细规范参见产品文档。 */
+  Condition?: string;
+  /** Bot 自定义规则的处置方式。取值有：Monitor：观察；Deny：拦截，其中 DenyActionParameters.Name 支持 Deny 和 ReturnCustomPage；Challenge：挑战，其中 ChallengeActionParameters.Name 支持 JSChallenge 和 ManagedChallenge；Redirect：重定向至 URL。 */
+  Action?: SecurityWeightedAction[];
+}
+
+/** Bot 自定义规则的配置。 */
+declare interface BotManagementCustomRules {
+  /** Bot 自定义规则的列表。使用 ModifySecurityPolicy 修改 Web 防护配置时： 若未指定 SecurityPolicy.BotManagement.CustomRules 中的 Rules 参数，或 Rules 参数长度为零：清空所有 Bot 自定义规则配置。 若 SecurityPolicy.BotManagement 参数中，未指定 CustomRules 参数值：保持已有 Bot 自定义规则配置，不做修改。 */
+  Rules?: BotManagementCustomRule[];
 }
 
 /** bot 用户画像规则 */
@@ -516,6 +576,32 @@ declare interface BotPortraitRule {
   MonManagedIds?: number[];
   /** 拦截的规则ID。默认所有规则不配置拦截。 */
   DropManagedIds?: number[];
+}
+
+/** 基于客户端和请求特征，将请求来源分为人类来源请求、合法 Bot 请求、疑似 Bot 请求和高风险 Bot 请求，并提供请求处置选项。 */
+declare interface BotRatings {
+  /** 恶意 Bot 请求的执行动作。 SecurityAction 的 Name 取值支持：Deny：拦截；Monitor：观察；Allow：放行；Challenge：挑战，其中 ChallengeActionParameters 中的 ChallengeOption 支持 JSChallenge 和 ManagedChallenge。 */
+  HighRiskBotRequestsAction?: SecurityAction;
+  /** 疑似 Bot 请求的执行动作。 SecurityAction 的 Name 取值支持：Deny：拦截；Monitor：观察；Allow：放行；Challenge：挑战，其中 ChallengeActionParameters 中的 ChallengeOption 支持 JSChallenge 和 ManagedChallenge。 */
+  LikelyBotRequestsAction?: SecurityAction;
+  /** 友好 Bot 请求的执行动作。 SecurityAction 的 Name 取值支持：Deny：拦截；Monitor：观察；Allow：放行；Challenge：挑战，其中 ChallengeActionParameters 中的 ChallengeOption 支持 JSChallenge 和 ManagedChallenge。 */
+  VerifiedBotRequestsAction?: SecurityAction;
+  /** 正常 Bot 请求的执行动作。 SecurityAction 的 Name 取值支持：Allow：放行。 */
+  HumanRequestsAction?: SecurityAction;
+}
+
+/** Cookie 校验和会话跟踪行为具体配置。 */
+declare interface BotSessionValidation {
+  /** 是否更新 Cookie 并校验。取值有：on：更新 Cookie 并校验；off：仅校验。 */
+  IssueNewBotSessionCookie?: string;
+  /** 更新 Cookie 并校验时的触发阈值，仅当 IssueNewBotSessionCookie 为 on 时有效。 */
+  MaxNewSessionTriggerConfig?: MaxNewSessionTriggerConfig;
+  /** 未携带 Cookie 或 Cookie 已过期的执行动作。 SecurityAction 的 Name 取值支持：Deny：拦截，其中 DenyActionParameters 中支持 Stall 配置；Monitor：观察；Allow：等待后响应，其中 AllowActionParameters 需要 MinDelayTime 和 MaxDelayTime 配置。 */
+  SessionExpiredAction?: SecurityAction;
+  /** 不合法 Cookie 的执行动作。 SecurityAction 的 Name 取值支持：Deny：拦截，其中 DenyActionParameters 中支持 Stall 配置；Monitor：观察；Allow：等待后响应，其中 AllowActionParameters 需要 MinDelayTime 和 MaxDelayTime 配置。 */
+  SessionInvalidAction?: SecurityAction;
+  /** 会话速率和周期特征校验的具体配置。 */
+  SessionRateControl?: SessionRateControl;
 }
 
 /** Bot自定义规则 */
@@ -550,6 +636,34 @@ declare interface BotUserRule {
   RedirectUrl?: string;
 }
 
+/** 浏览器伪造识别规则（原主动特征识别规则）的配置。 */
+declare interface BrowserImpersonationDetection {
+  /** 浏览器伪造识别规则的列表。使用 ModifySecurityPolicy 修改 Web 防护配置时： 若未指定 SecurityPolicy.BotManagement.BrowserImpersonationDetection 中的 Rules 参数，或 Rules 参数长度为零： 清空所有浏览器伪造识别规则配置。 若 SecurityPolicy.BotManagement 参数中，未指定 BrowserImpersonationDetection 参数值： 保持已有浏览器伪造识别规则配置，不做修改。 */
+  Rules?: BrowserImpersonationDetectionRule[];
+}
+
+/** Bot 浏览器校验规则（原主动特征识别规则）的 Action。 */
+declare interface BrowserImpersonationDetectionAction {
+  /** Cookie 校验和会话跟踪配置。 */
+  BotSessionValidation?: BotSessionValidation;
+  /** 客户端行为校验配置。 */
+  ClientBehaviorDetection?: ClientBehaviorDetection;
+}
+
+/** 浏览器伪造识别规则（原主动特征识别规则）。 */
+declare interface BrowserImpersonationDetectionRule {
+  /** 浏览器伪造识别规则的 ID。通过规则 ID 可支持不同的规则配置操作： 增加新规则：ID 为空或不指定 ID 参数；修改已有规则：指定需要更新/修改的规则 ID；删除已有规则：BrowserImpersonationDetection 参数中，Rules 列表中未包含的已有规则将被删除。 */
+  Id?: string;
+  /** 浏览器伪造识别规则的名称。 */
+  Name?: string;
+  /** 浏览器伪造识别规则是否开启。取值有：on：开启；off：关闭。 */
+  Enabled?: string;
+  /** 浏览器伪造识别规则的具体内容，其中仅支持请求方式（Method）、请求路径（Path）和请求 URL 的配置，需符合表达式语法，详细规范参见产品文档。 */
+  Condition?: string;
+  /** 浏览器伪造识别规则的处置方式，包括 Cookie 校验和会话跟踪配置以及客户端行为校验配置。 */
+  Action?: BrowserImpersonationDetectionAction;
+}
+
 /** cc配置项。 */
 declare interface CC {
   /** Waf开关，取值为： on：开启； off：关闭。 */
@@ -566,6 +680,14 @@ declare interface CLSTopic {
   TopicId: string;
   /** 腾讯云 CLS 日志集所在的地域。 */
   LogSetRegion: string;
+}
+
+/** CNAME 接入类型站点参数详情。 */
+declare interface CNAMEDetail {
+  /** 是否伪站点，取值有： 0：非伪站点； 1：伪站点。 */
+  IsFake?: number;
+  /** 归属权验证信息。详情请参考 [站点/域名归属权验证](https://cloud.tencent.com/document/product/1552/70789) 。 */
+  OwnershipVerification?: OwnershipVerification;
 }
 
 /** 缓存时间设置 */
@@ -782,6 +904,24 @@ declare interface ClientAttester {
   TCRCEOption?: TCRCEOption;
   /** TC-CAPTCHA 认证的配置信息。当 AttesterSource 参数值为 TC-CAPTCHA 时，此字段必填。 */
   TCCaptchaOption?: TCCaptchaOption;
+}
+
+/** 客户端行为校验 */
+declare interface ClientBehaviorDetection {
+  /** 工作量证明校验强度。取值有：low：低；medium：中；high：高。 */
+  CryptoChallengeIntensity?: string;
+  /** 客户端行为校验的执行方式。取值有：0ms：立即执行；100ms：延迟 100ms 执行；200ms：延迟 200ms 执行；300ms：延迟 300ms 执行；400ms：延迟 400ms 执行；500ms：延迟 500ms 执行；600ms：延迟 600ms 执行；700ms：延迟 700ms 执行；800ms：延迟 800ms 执行；900ms：延迟 900ms 执行；1000ms：延迟 1000ms 执行。 */
+  CryptoChallengeDelayBefore?: string;
+  /** 触发阈值统计的时间窗口，取值有：5s：5 秒内；10s：10 秒内；15s：15 秒内；30s：30 秒内；60s：60 秒内；5m：5 分钟内；10m：10 分钟内；30m：30 分钟内；60m：60 分钟内。 */
+  MaxChallengeCountInterval?: string;
+  /** 触发阈值统计的累计次数，取值范围 1 ~ 100000000。 */
+  MaxChallengeCountThreshold?: number;
+  /** 客户端未启用 JS（未完成检测）时的执行动作。 SecurityAction 的 Name 取值支持：Deny：拦截，其中 DenyActionParameters 中支持 Stall 配置；Monitor：观察；Allow：等待后响应，其中 AllowActionParameters 需要 MinDelayTime 和 MaxDelayTime 配置。 */
+  ChallengeNotFinishedAction?: SecurityAction;
+  /** 客户端检测超时的执行动作。 SecurityAction 的 Name 取值支持：Deny：拦截，其中 DenyActionParameters 中支持 Stall 配置；Monitor：观察；Allow：等待后响应，其中 AllowActionParameters 需要 MinDelayTime 和 MaxDelayTime 配置。 */
+  ChallengeTimeoutAction?: SecurityAction;
+  /** Bot 客户端的执行动作。 SecurityAction 的 Name 取值支持：Deny：拦截，其中 DenyActionParameters 中支持 Stall 配置；Monitor：观察；Allow：等待后响应，其中 AllowActionParameters 需要 MinDelayTime 和 MaxDelayTime 配置。 */
+  BotClientAction?: SecurityAction;
 }
 
 /** 智能客户端过滤 */
@@ -1062,6 +1202,12 @@ declare interface DDosProtectionConfig {
   MaxBandwidthMainland?: number;
   /** 全球（除中国大陆以外）地区独立 DDoS 防护的规格。PLATFORM：平台默认防护，即不开启独立 DDoS 防护；ANYCAST300：开启独立 DDoS 防护，提供 300 Gbps 防护带宽；ANYCAST_ALLIN：开启独立 DDoS 防护，使用全部可用防护资源进行防护。不填写参数时，取默认值 PLATFORM。 */
   LevelOverseas?: string;
+}
+
+/** DNSPod 托管类型站点参数详情。 */
+declare interface DNSPodDetail {
+  /** 是否伪站点，取值有： 0：非伪站点； 1：伪站点。 */
+  IsFake?: number;
 }
 
 /** https 服务端证书配置 */
@@ -1782,6 +1928,22 @@ declare interface IPRegionInfo {
   IsEdgeOneIP?: string;
 }
 
+/** IP 情报库（原客户端画像分析）配置。 */
+declare interface IPReputation {
+  /** IP 情报库（原客户端画像分析）。取值有：on：开启；off：关闭。 */
+  Enabled?: string;
+  /** IP 情报库（原客户端画像分析）的具体配置内容。 */
+  IPReputationGroup?: IPReputationGroup;
+}
+
+/** IP 情报库（原客户端画像分析）的具体配置。 */
+declare interface IPReputationGroup {
+  /** IP 情报库（原客户端画像分析）的执行动作。SecurityAction 的 Name 取值支持：Deny：拦截；Monitor：观察；Disabled：未启用，不启用指定规则；Challenge：挑战，其中 ChallengeActionParameters 中的 ChallengeOption 支持 JSChallenge 和 ManagedChallenge。 */
+  BaseAction?: SecurityAction;
+  /** IP 情报库（原客户端画像分析）的具体配置，用于覆盖 BaseAction 中的默认配置。其中 BotManagementActionOverrides 的 Ids 中可以填写：IPREP_WEB_AND_DDOS_ATTACKERS_LOW：网络攻击 - 一般置信度；IPREP_WEB_AND_DDOS_ATTACKERS_MID：网络攻击 - 中等置信度；IPREP_WEB_AND_DDOS_ATTACKERS_HIGH：网络攻击 - 高置信度；IPREP_PROXIES_AND_ANONYMIZERS_LOW：网络代理 - 一般置信度；IPREP_PROXIES_AND_ANONYMIZERS_MID：网络代理 - 中等置信度；IPREP_PROXIES_AND_ANONYMIZERS_HIGH：网络代理 - 高置信度；IPREP_SCANNING_TOOLS_LOW：扫描器 - 一般置信度；IPREP_SCANNING_TOOLS_MID：扫描器 - 中等置信度；IPREP_SCANNING_TOOLS_HIGH：扫描器 - 高置信度；IPREP_ATO_ATTACKERS_LOW：账号接管攻击 - 一般置信度；IPREP_ATO_ATTACKERS_MID：账号接管攻击 - 中等置信度；IPREP_ATO_ATTACKERS_HIGH：账号接管攻击 - 高置信度；IPREP_WEB_SCRAPERS_AND_TRAFFIC_BOTS_LOW：恶意 BOT - 一般置信度；IPREP_WEB_SCRAPERS_AND_TRAFFIC_BOTS_MID：恶意 BOT - 中等置信度；IPREP_WEB_SCRAPERS_AND_TRAFFIC_BOTS_HIGH：恶意 BOT - 高置信度。 */
+  BotManagementActionOverrides?: BotManagementActionOverrides[];
+}
+
 /** 源站防护IP白名单 */
 declare interface IPWhitelist {
   /** IPv4列表。 */
@@ -1910,6 +2072,14 @@ declare interface JustInTimeTranscodeTemplate {
   CreateTime?: string;
   /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
   UpdateTime?: string;
+}
+
+/** 商业或开源工具 UA 特征配置（原 UA 特征规则）。 */
+declare interface KnownBotCategories {
+  /** 来自已知商业工具或开源工具的访问请求的处置方式。 SecurityAction 的 Name 取值支持：Deny：拦截；Monitor：观察；Disabled：未启用，不启用指定规则；Challenge：挑战，其中 ChallengeActionParameters 中的 ChallengeOption 支持 JSChallenge 和 ManagedChallenge；Allow：放行（待废弃）。 */
+  BaseAction?: SecurityAction;
+  /** 指定已知商业工具或开源工具的访问请求的处置方式。 */
+  BotManagementActionOverrides?: BotManagementActionOverrides[];
 }
 
 /** 离线日志详细信息 */
@@ -2150,6 +2320,14 @@ declare interface MaxAgeParameters {
   CacheTime?: number;
 }
 
+/** Bot 管理中校验的触发阈值。 */
+declare interface MaxNewSessionTriggerConfig {
+  /** 触发阈值统计的时间窗口，取值有：5s：5 秒内；10s：10 秒内；15s：15 秒内；30s：30 秒内；60s：60 秒内；5m：5 分钟内；10m：10 分钟内；30m：30 分钟内；60m：60 分钟内。 */
+  MaxNewSessionCountInterval?: string;
+  /** 触发阈值统计的累计次数，取值范围 1 ~ 100000000。 */
+  MaxNewSessionCountThreshold?: number;
+}
+
 /** 正文传输最小速率阈值的具体配置。 */
 declare interface MinimalRequestBodyTransferRate {
   /** 正文传输最小速率阈值，单位仅支持bps。 */
@@ -2264,6 +2442,24 @@ declare interface MutualTLS {
   Switch: string;
   /** 双向认证证书列表。注意：MutualTLS 在 ModifyHostsCertificate 作为入参使用时，该参数传入对应证书的 CertId 即可。您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/ssl) 查看 CertId。 */
   CertInfos?: CertificateInfo[];
+}
+
+/** NS 接入类型站点参数详情。 */
+declare interface NSDetail {
+  /** 是否开启 CNAME 加速，取值有： enabled：开启； disabled：关闭。 */
+  CnameSpeedUp?: string;
+  /** 是否存在同名站点，取值有： 0：不存在同名站点； 1：已存在同名站点。 */
+  IsFake?: number;
+  /** 归属权验证信息。针对 NS 接入类型的站点，将当前的 NS 服务器切换至腾讯云 EdgeOne 指定的 NS 服务器，即视为通过归属权验证。详情请参考 [站点/域名归属权验证](https://cloud.tencent.com/document/product/1552/70789) 。 */
+  OwnershipVerification?: OwnershipVerification;
+  /** 由 EdgeOne 检测到的站点当前正在使用的 NS 服务器列表。 */
+  OriginalNameServers?: string[];
+  /** 腾讯云 EdgeOne 分配的 NS 服务器列表。需要将当前站点 NS 服务器指向该地址，站点才能生效。 */
+  NameServers?: string[];
+  /** 用户自定义 NS 服务器域名信息。如果启用了自定义 NS 服务，需要在域名注册厂商内将 NS 指向该地址。 */
+  VanityNameServers?: VanityNameServers;
+  /** 用户自定义 NS 服务器对应的 IP 地址信息。 */
+  VanityNameServersIps?: VanityNameServersIps[];
 }
 
 /** 当回源 IP 网段发生更新时，该字段会返回下一个版本将要生效的回源 IP 网段，包含与当前生效的回源 IP 网段的对比。 */
@@ -3208,6 +3404,14 @@ declare interface S3 {
   CompressType?: string;
 }
 
+/** 搜索引擎规则配置。 */
+declare interface SearchEngineBots {
+  /** 来自搜索引擎爬虫的请求的执行动作。 SecurityAction 的 Name 取值支持：Deny：拦截；Monitor：观察；Disabled：未启用，不启用指定规则；Challenge：挑战，其中 ChallengeActionParameters 中的 ChallengeOption 支持 JSChallenge 和 ManagedChallenge；Allow：放行（待废弃）。 */
+  BaseAction?: SecurityAction;
+  /** 指定搜索引擎爬虫请求的处置方式。 */
+  BotManagementActionOverrides?: BotManagementActionOverrides[];
+}
+
 /** 安全数据Entry返回值 */
 declare interface SecEntry {
   /** 查询维度值。 */
@@ -3232,7 +3436,7 @@ declare interface SecEntryValue {
 
 /** 安全的执行动作 */
 declare interface SecurityAction {
-  /** 安全执行的具体动作。取值有：Deny：拦截，阻止请求访问站点资源；Monitor：观察，仅记录日志；Redirect：重定向至 URL；Disabled：未启用，不启用指定规则；Allow：允许访问，但延迟处理请求；Challenge：挑战，响应挑战内容；BlockIP：待废弃，IP 封禁；ReturnCustomPage：待废弃，使用指定页面拦截；JSChallenge：待废弃，JavaScript 挑战；ManagedChallenge：待废弃，托管挑战。 */
+  /** 安全执行的具体动作。取值有：Deny：拦截，阻止请求访问站点资源；Monitor：观察，仅记录日志；Redirect：重定向至 URL；Disabled：未启用，不启用指定规则；Allow：允许访问，但延迟处理请求；Challenge：挑战，响应挑战内容；Trans：放行，允许请求直接访问站点资源；BlockIP：待废弃，IP 封禁；ReturnCustomPage：待废弃，使用指定页面拦截；JSChallenge：待废弃，JavaScript 挑战；ManagedChallenge：待废弃，托管挑战。 */
   Name: string;
   /** 当 Name 为 Deny 时的附加参数。 */
   DenyActionParameters?: DenyActionParameters;
@@ -3316,6 +3520,14 @@ declare interface SecurityType {
   Switch: string;
 }
 
+/** 按权重分配的 SecurityAction。 */
+declare interface SecurityWeightedAction {
+  /** Bot 自定义规则的处置方式。取值有：Allow：放行，其中 AllowActionParameters 支持 MinDelayTime 和 MaxDelayTime 配置；Deny：拦截，其中 DenyActionParameters 中支持 BlockIp、ReturnCustomPage 和 Stall 配置；Monitor：观察；Challenge：挑战，其中 ChallengeActionParameters.ChallengeOption 支持 JSChallenge 和 ManagedChallenge；Redirect：重定向至URL。 */
+  SecurityAction?: SecurityAction;
+  /** 当前 SecurityAction 的权重，仅支持 10 ~ 100 且必须为 10 的倍数，其中 Weight 参数全部相加须等于 100。 */
+  Weight?: number;
+}
+
 /** https 服务端证书配置 */
 declare interface ServerCertInfo {
   /** 服务器证书 ID。来源于 SSL 侧，您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/ssl) 查看 CertId。 */
@@ -3332,6 +3544,18 @@ declare interface ServerCertInfo {
   SignAlgo?: string;
   /** 证书归属域名名称。 */
   CommonName?: string;
+}
+
+/** 会话速率和周期特征校验配置。 */
+declare interface SessionRateControl {
+  /** 会话速率和周期特征校验配置是否开启。取值有：on：启用off：关闭 */
+  Enabled?: string;
+  /** 会话速率和周期特征校验高风险的执行动作。 SecurityAction 的 Name 取值支持：Deny：拦截，其中 DenyActionParameters 中支持 Stall 配置；Monitor：观察；Allow：等待后响应，其中 AllowActionParameters 需要 MinDelayTime 和 MaxDelayTime 配置。 */
+  HighRateSessionAction?: SecurityAction;
+  /** 会话速率和周期特征校验中风险的执行动作。 SecurityAction 的 Name 取值支持：Deny：拦截，其中 DenyActionParameters 中支持 Stall 配置；Monitor：观察；Allow：等待后响应，其中 AllowActionParameters 需要 MinDelayTime 和 MaxDelayTime 配置。 */
+  MidRateSessionAction?: SecurityAction;
+  /** 会话速率和周期特征校验低风险的执行动作。 SecurityAction 的 Name 取值支持：Deny：拦截，其中 DenyActionParameters 中支持 Stall 配置；Monitor：观察；Allow：等待后响应，其中 AllowActionParameters 需要 MinDelayTime 和 MaxDelayTime 配置。 */
+  LowRateSessionAction?: SecurityAction;
 }
 
 /** 内容标识配置参数。 */
@@ -3402,6 +3626,14 @@ declare interface SmartRouting {
 declare interface SmartRoutingParameters {
   /** 智能加速配置开关，取值有：on：开启；off：关闭。 */
   Switch?: string;
+}
+
+/** IDC 规则配置的具体内容。 */
+declare interface SourceIDC {
+  /** 来自指定 IDC 请求的处置方式。 SecurityAction 的 Name 取值支持：Deny：拦截；Monitor：观察；Disabled：未启用，不启用指定规则；Challenge：挑战，其中 ChallengeActionParameters 中的 ChallengeOption 支持 JSChallenge 和 ManagedChallenge；Allow：放行（待废弃）。 */
+  BaseAction?: SecurityAction;
+  /** 指定 IDC 请求的处置方式。 */
+  BotManagementActionOverrides?: BotManagementActionOverrides[];
 }
 
 /** 支持标准debug结构体 */
@@ -3768,50 +4000,56 @@ declare interface WebSocketParameters {
   Timeout?: number;
 }
 
-/** 站点信息 */
+/** 站点详情。 */
 declare interface Zone {
   /** 站点 ID。 */
   ZoneId?: string;
   /** 站点名称。 */
   ZoneName?: string;
-  /** 站点当前使用的 NS 列表。 */
-  OriginalNameServers?: string[];
-  /** 腾讯云分配的 NS 列表。 */
-  NameServers?: string[];
-  /** 站点状态，取值有： active：NS 已切换； pending：NS 未切换； moved：NS 已切走； deactivated：被封禁。 initializing：待绑定套餐。 */
-  Status?: string;
-  /** 站点接入方式，取值有： full：NS 接入； partial：CNAME 接入； noDomainAccess：无域名接入； */
+  /** 同名站点标识。允许输入数字、英文、"." 、"-" 和 "_" 组合，长度 200 个字符以内。 */
+  AliasZoneName?: string;
+  /** 站点加速区域，取值有： global：全球可用区； mainland：中国大陆可用区； overseas：全球可用区（不含中国大陆）。 */
+  Area?: string;
+  /** 站点接入类型，取值有： full：NS 接入类型； partial：CNAME 接入类型； noDomainAccess：无域名接入类型；dnsPodAccess：DNSPod 托管类型，该类型要求您的域名已托管在腾讯云 DNSPod； pages：Pages 类型。 */
   Type?: string;
-  /** 站点是否关闭。 */
-  Paused?: boolean;
-  /** 是否开启 CNAME 加速，取值有： enabled：开启； disabled：关闭。 */
-  CnameSpeedUp?: string;
-  /** CNAME 接入状态，取值有： finished：站点已验证； pending：站点验证中。 */
-  CnameStatus?: string;
-  /** 资源标签列表。 */
+  /** 站点关联的标签。 */
   Tags?: Tag[];
   /** 计费资源列表。 */
   Resources?: Resource[];
+  /** NS 类型站点详情。仅当 Type = full 时返回值。 */
+  NSDetail?: NSDetail;
+  /** CNAME 类型站点详情。仅当 Type = partial 时返回值。 */
+  CNAMEDetail?: CNAMEDetail;
+  /** DNSPod 托管类型站点详情。仅当 Type = dnsPodAccess 时返回值。 */
+  DNSPodDetail?: DNSPodDetail;
   /** 站点创建时间。 */
   CreatedOn?: string;
   /** 站点修改时间。 */
   ModifiedOn?: string;
-  /** 站点接入地域，取值有： global：全球； mainland：中国大陆； overseas：境外区域。 */
-  Area?: string;
-  /** 用户自定义 NS 信息。 */
-  VanityNameServers?: VanityNameServers | null;
-  /** 用户自定义 NS IP 信息。 */
-  VanityNameServersIps?: VanityNameServersIps[] | null;
+  /** 站点状态，取值有： active：NS 已切换； pending：NS 未切换； moved：NS 已切走； deactivated：被封禁。 initializing：待绑定套餐。 */
+  Status?: string;
+  /** CNAME 接入状态，取值有： finished：站点已验证； pending：站点验证中。 */
+  CnameStatus?: string;
   /** 展示状态，取值有： active：已启用； inactive：未生效； paused：已停用。 */
   ActiveStatus?: string;
-  /** 站点别名。数字、英文、-和_组合，限制20个字符。 */
-  AliasZoneName?: string;
-  /** 是否伪站点，取值有： 0：非伪站点； 1：伪站点。 */
-  IsFake?: number;
   /** 锁定状态，取值有： enable：正常，允许进行修改操作； disable：锁定中，不允许进行修改操作； plan_migrate：套餐迁移中，不允许进行修改操作。 */
   LockStatus?: string;
-  /** 归属权验证信息。 */
+  /** 站点是否关闭。 */
+  Paused?: boolean;
+  /** 是否伪站点（该字段为历史保留字段，已不再维护，请根据站点类型参考对应字段），取值有： 0：非伪站点； 1：伪站点。 */
+  IsFake?: number;
+  /** 是否开启 CNAME 加速（该字段为历史保留字段，已不再维护，请根据站点类型参考对应字段），取值有： enabled：开启； disabled：关闭。 */
+  CnameSpeedUp?: string;
+  /** 归属权验证信息。（该字段为历史保留字段，已不再维护，请根据站点类型参考对应字段） */
   OwnershipVerification?: OwnershipVerification | null;
+  /** 站点当前使用的 NS 列表。（该字段为历史保留字段，已不再维护，请根据站点类型参考对应字段） */
+  OriginalNameServers?: string[];
+  /** 腾讯云分配的 NS 列表。（该字段为历史保留字段，已不再维护，请根据站点类型参考对应字段） */
+  NameServers?: string[];
+  /** 用户自定义 NS 信息。（该字段为历史保留字段，已不再维护，请根据站点类型参考对应字段） */
+  VanityNameServers?: VanityNameServers | null;
+  /** 用户自定义 NS IP 信息。（该字段为历史保留字段，已不再维护，请根据站点类型参考对应字段） */
+  VanityNameServersIps?: VanityNameServersIps[] | null;
 }
 
 /** 站点加速配置。 */
@@ -6315,7 +6553,7 @@ declare interface DescribeZonesRequest {
   Offset?: number;
   /** 分页查询限制数目。默认值：20，最大值：100。 */
   Limit?: number;
-  /** 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回当前 appid 下有权限的所有站点信息。详细的过滤条件如下：zone-name：按照站点名称进行过滤；zone-id：按照站点 ID进行过滤。站点 ID 形如：zone-2noz78a8ev6k；status：按照站点状态进行过滤；tag-key：按照标签键进行过滤；tag-value： 按照标签值进行过滤。alias-zone-name： 按照同名站点标识进行过滤。模糊查询时支持过滤字段名为 zone-name 或 alias-zone-name。 */
+  /** 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回当前 appid 下有权限的所有站点信息。详细的过滤条件如下：zone-name：按照站点名称进行过滤；zone-type：按照站点类型进行过滤。可选项： full：NS 接入类型； partial：CNAME 接入类型； partialComposite：无域名接入类型； dnsPodAccess：DNSPod 托管接入类型； pages：Pages 类型。zone-id：按照站点 ID 进行过滤，站点 ID 形如：zone-2noz78a8ev6k；status：按照站点状态进行过滤。可选项： active：NS 已切换； pending：NS 待切换； deleted：已删除。tag-key：按照标签键进行过滤；tag-value： 按照标签值进行过滤；alias-zone-name： 按照同名站点标识进行过滤。模糊查询时支持过滤字段名为 zone-name 或 alias-zone-name。 */
   Filters?: AdvancedFilter[];
   /** 可根据该字段对返回结果进行排序，取值有： type：接入类型； area：加速区域； create-time：创建时间； zone-name：站点名称； use-time：最近使用时间； active-status：生效状态。不填写时对返回结果默认按照 create-time 排序。 */
   Order?: string;
@@ -6326,7 +6564,7 @@ declare interface DescribeZonesRequest {
 declare interface DescribeZonesResponse {
   /** 符合条件的站点个数。 */
   TotalCount?: number;
-  /** 站点详细信息。 */
+  /** 站点列表详情。 */
   Zones?: Zone[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -7139,9 +7377,9 @@ declare interface ModifySecurityJSInjectionRuleResponse {
 declare interface ModifySecurityPolicyRequest {
   /** 站点 ID。 */
   ZoneId: string;
-  /** 安全策略配置。当 SecurityPolicy 参数中的 ExceptionRules 被设置时，SecurityConfig 参数中的 ExceptConfig 将被忽略；当 SecurityPolicy 参数中的 CustomRules 被设置时，SecurityConfig 参数中的 AclConfig、 IpTableConfig 将被忽略；当 SecurityPolicy 参数中的 HttpDDoSProtection 和 RateLimitingRules 被设置时，SecurityConfig 参数中的 RateLimitConfig 将被忽略；当 SecurityPolicy 参数中的 ManagedRule 被设置时，SecurityConfig 参数中的 WafConfig 将被忽略；对于例外规则、自定义规则、速率限制以及托管规则策略配置建议使用 SecurityPolicy 参数进行设置。 */
+  /** 安全策略配置。当 SecurityPolicy 参数中的 ExceptionRules 被设置时，SecurityConfig 参数中的 ExceptConfig 将被忽略；当 SecurityPolicy 参数中的 CustomRules 被设置时，SecurityConfig 参数中的 AclConfig、 IpTableConfig 将被忽略；当 SecurityPolicy 参数中的 HttpDDoSProtection 和 RateLimitingRules 被设置时，SecurityConfig 参数中的 RateLimitConfig 将被忽略；当 SecurityPolicy 参数中的 ManagedRule 被设置时，SecurityConfig 参数中的 WafConfig 将被忽略；当 SecurityPolicy 参数中的 BotManagement 被设置时，SecurityConfig 参数中的 BotConfig 将被忽略；对于例外规则、自定义规则、速率限制、托管规则以及 Bot 管理策略配置建议使用 SecurityPolicy 参数进行设置。 */
   SecurityConfig: SecurityConfig;
-  /** 安全策略配置。对 Web 例外规则、防护自定义策略、速率规则和托管规则配置建议使用，支持表达式语法对安全策略进行配置。 */
+  /** 安全策略配置。对 Web 例外规则、防护自定义策略、速率规则、托管规则和 Bot 管理配置建议使用，支持表达式语法对安全策略进行配置。 */
   SecurityPolicy?: SecurityPolicy;
   /** 安全策略类型，可使用以下参数值： ZoneDefaultPolicy：用于指定站点级策略；Template：用于指定策略模板，需要同时指定 TemplateId 参数；Host：用于指定域名级策略（注意：当使用域名来指定域名服务策略时，仅支持已经应用了域名级策略的域名服务或者策略模板）。 */
   Entity?: string;
