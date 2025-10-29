@@ -28,7 +28,7 @@ declare interface RegionProduct {
 
 /** 可用区信息 */
 declare interface ZoneInfo {
-  /** 可用区名称，例如，ap-guangzhou-3全网可用区名称如下： ap-chongqing-1 ap-seoul-1 ap-seoul-2 ap-chengdu-1 ap-chengdu-2 ap-hongkong-1 ap-hongkong-2 ap-shenzhen-fsi-1 ap-shenzhen-fsi-2 ap-shenzhen-fsi-3 ap-guangzhou-1（售罄） ap-guangzhou-2（售罄） ap-guangzhou-3 ap-guangzhou-4 ap-guangzhou-6 ap-tokyo-1 ap-singapore-1 ap-singapore-2 ap-shanghai-fsi-1 ap-shanghai-fsi-2 ap-shanghai-fsi-3 ap-bangkok-1 ap-shanghai-1（售罄） ap-shanghai-2 ap-shanghai-3 ap-shanghai-4 ap-shanghai-5 ap-mumbai-1 ap-mumbai-2 ap-beijing-1 ap-beijing-2 ap-beijing-3 ap-beijing-4 ap-beijing-5 na-siliconvalley-1 na-siliconvalley-2 eu-frankfurt-1 na-ashburn-1 na-ashburn-2 ap-nanjing-1 ap-nanjing-2 */
+  /** 可用区名称，例如，ap-guangzhou-3全网可用区名称如下： ap-chongqing-1 ap-seoul-1 ap-seoul-2 ap-chengdu-1 ap-chengdu-2 ap-hongkong-1 ap-hongkong-2 ap-shenzhen-fsi-1 ap-shenzhen-fsi-2 ap-shenzhen-fsi-3 ap-guangzhou-1（售罄） ap-guangzhou-3 ap-guangzhou-4 ap-guangzhou-6 ap-tokyo-1 ap-singapore-1 ap-singapore-2 ap-shanghai-fsi-1 ap-shanghai-fsi-2 ap-shanghai-fsi-3 ap-bangkok-1 ap-shanghai-1（售罄） ap-shanghai-2 ap-shanghai-3 ap-shanghai-4 ap-shanghai-5 ap-mumbai-1 ap-mumbai-2 ap-beijing-1 ap-beijing-2 ap-beijing-3 ap-beijing-4 ap-beijing-5 na-siliconvalley-1 na-siliconvalley-2 eu-frankfurt-1 na-ashburn-1 na-ashburn-2 ap-nanjing-1 ap-nanjing-2 */
   Zone?: string;
   /** 可用区描述，例如，广州三区 */
   ZoneName?: string;

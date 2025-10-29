@@ -1840,6 +1840,8 @@ declare interface SparkSessionInfo {
   TotalSpecMin?: number;
   /** 总规格最大 */
   TotalSpecMax?: number;
+  /** 状态，STARTING、RUNNING、TERMINATED */
+  State?: string;
 }
 
 /** 节点规格信息 */
@@ -4392,6 +4394,10 @@ declare interface DescribeNativeSparkSessionsRequest {
 declare interface DescribeNativeSparkSessionsResponse {
   /** spark session列表 */
   SparkSessionsList?: SparkSessionInfo[];
+  /** 资源组总规格 */
+  TotalSpec?: number;
+  /** 资源组当前可用规格 */
+  TotalAvailable?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -746,13 +746,13 @@ declare interface RedisInstanceConf {
   ShardSize?: string;
 }
 
-/** redis key空间信息。 */
+/** redis key的内存占用等信息。 */
 declare interface RedisKeySpaceData {
   /** key名。 */
   Key?: string;
   /** key类型。 */
   Type?: string;
-  /** key编码方式。 */
+  /** key编码方式。包括 int、string、linkedlist、hashtable、skiplist、zipmap、ziplist、intset、quicklist、listpack。 */
   Encoding?: string;
   /** key过期时间戳（毫秒），0代表未设置过期时间。 */
   ExpireTime?: number;
@@ -766,6 +766,8 @@ declare interface RedisKeySpaceData {
   AveElementSize?: number;
   /** 所属分片序号。 */
   ShardId?: string;
+  /** key所属数据库编号。 */
+  Db?: number;
 }
 
 /** Redis DescribeMetricTopProxies 接口返回数据 */

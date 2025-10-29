@@ -916,6 +916,14 @@ declare interface IntentionQuestionResult {
   AsrResult?: string[];
 }
 
+/** 跳转事件的结构体，其中包括认证期间收录，授权书审核，企业认证的回跳事件。 */
+declare interface JumpEvent {
+  /** 跳转事件枚举，* 1 - 企业收录。* 2 - 超管授权书审核。* 3 - 认证完成。 */
+  JumpEventType?: number;
+  /** 为认证成功后页面进行回跳的URL，请确保回跳地址的可用性。Endpoint如果是APP 类型，请传递"true"如果 Endpoint 是 H5 类型，请参考文档[跳转电子签H5](https://qian.tencent.com/developers/partner/openqianh5)p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，仅会进行回跳。 */
+  JumpUrl?: string;
+}
+
 /** 需要进行签署审核的签署人信息 */
 declare interface NeedReviewApproverInfo {
   /** 签署方经办人的类型，支持以下类型 ORGANIZATION 企业（含企业自动签）PERSON 个人（含个人自动签） */
@@ -2843,13 +2851,13 @@ declare interface CreateConsoleLoginUrlRequest {
   MenuStatus?: string;
   /** 生成链接的类型：**PC**：(默认)web控制台链接, 需要在PC浏览器中打开**CHANNEL**：H5跳转到电子签小程序链接, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序**SHORT_URL**：H5跳转到电子签小程序链接的短链形式, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序**WEIXIN_QRCODE_URL**：直接跳转至电子签小程序的二维码链接，无需通过中转页。您需要自行将其转换为二维码，使用微信扫码后可直接进入。请注意，直接点击链接是无效的。**APP**：APP或小程序跳转电子签小程序链接, 一般用于贵方小程序或者APP跳转过来, 打开后进入腾讯电子签小程序**H5**：H5长链接跳转H5链接, 一般用于贵方H5跳转过来, 打开后进入腾讯电子签H5页面**SHORT_H5**：H5短链跳转H5的短链形式, 一般用于发送短信中带的链接, 打开后进入腾讯电子签H5页面 */
   Endpoint?: string;
-  /** 触发自动跳转事件，仅对EndPoint为App类型有效，可选值包括： **VERIFIED** :企业认证完成/员工认证完成后跳回原App/小程序 */
+  /** 已废弃 请使用 JumpEvents 参数，进行替换。触发自动跳转事件，仅对EndPoint为App类型有效，可选值包括： **VERIFIED** :企业认证完成/员工认证完成后跳回原App/小程序 */
   AutoJumpBackEvent?: string;
   /** 可选的此企业允许的授权方式, 可以设置的方式有:2：转法定代表人授权5：授权书+对公打款 */
   AuthorizationTypes?: number[];
   /** 子客经办人身份证注意：`如果已同步，这里非空会更新同步的经办人身份证号，暂时只支持中国大陆居民身份证类型`。 */
   ProxyOperatorIdCardNumber?: string;
-  /** 认证完成跳转链接。注意：`此功能仅在Endpoint参数设置成 H5 或 PC时才有效`。 */
+  /** 已废弃 请使用 JumpEvents 参数，进行替换。认证完成跳转链接。注意：`此功能仅在Endpoint参数设置成 H5 或 PC时才有效`。 */
   AutoJumpUrl?: string;
   /** 是否展示头顶导航栏 **ENABLE** : (默认)进入web控制台展示头顶导航栏 **DISABLE** : 进入web控制台不展示头顶导航栏 注：该参数**仅在企业和员工激活完成，登录控制台场景才生效**。点击查看头顶导航栏位置 */
   TopNavigationStatus?: string;
@@ -2869,6 +2877,8 @@ declare interface CreateConsoleLoginUrlRequest {
   BankAccountNumber?: string;
   /** 无 */
   Operator?: UserInfo;
+  /** 跳转事件，其中包括认证期间收录，授权书审核，企业认证的回跳事件。p.s.Endpoint如果是APP 类型，请传递JumpUrl为"true" 如果 Endpoint 是 H5 类型，请参考文档跳转电子签H5 p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，仅会进行回跳。 */
+  JumpEvents?: JumpEvent[];
 }
 
 declare interface CreateConsoleLoginUrlResponse {
@@ -3055,12 +3065,16 @@ declare interface CreatePartnerAutoSignAuthUrlRequest {
   AuthorizedOrganizationId?: string;
   /** 被授企业名称/授权方企业的名字，如果是企业之间授权和AuthorizedOrganizationId二选一传入即可。请确认该名称与企业营业执照中注册的名称一致。注: 1. 如果名称中包含英文括号()，请使用中文括号（）代替。2. 被授权企业必须和当前企业在同一应用号下 */
   AuthorizedOrganizationName?: string;
-  /** 是否给平台应用授权true: 表示是，授权平台应用。在此情况下，无需设置AuthorizedOrganizationId和AuthorizedOrganizationName。false: （默认）表示否，不是授权平台应用。 注：授权给平台应用需要开通【基于子客授权第三方应用可文件发起子客自动签署】白名单，请联系运营经理开通。 */
+  /** 是否给平台应用授权true: 表示是，授权平台应用。在此情况下，无需设置AuthorizedOrganizationIds和AuthorizedOrganizationNames。false: （默认）表示否，不是授权平台应用。 注：授权给平台应用需要开通【基于子客授权第三方应用可文件发起子客自动签署】白名单，请联系运营经理开通。 */
   PlatformAppAuthorization?: boolean;
   /** 在设置印章授权时，可以指定特定的印章类型，以确保在授权过程中只使用相应类型的印章。支持的印章类型包括：OFFICIAL：企业公章，用于代表企业对外的正式文件和重要事务的认证。CONTRACT：合同专用章，专门用于签署各类合同。FINANCE：财务专用章，用于企业的财务相关文件，如发票、收据等财务凭证的认证。PERSONNEL：人事专用章，用于人事管理相关文件，如劳动合同、人事任命等。 */
   SealTypes?: string[];
-  /** 在处理授权关系时，授权的方向false（默认值）：表示我方授权他方。在这种情况下，AuthorizedOrganizationName 代表的是【被授权方】的企业名称，即接收授权的企业。true：表示他方授权我方。在这种情况下，AuthorizedOrganizationName 代表的是【授权方】的企业名称，即提供授权的企业。 */
+  /** 在处理授权关系时，授权的方向false（默认值）：表示我方授权他方。在这种情况下，AuthorizedOrganizationNames 代表的是【被授权方】的企业名称，即接收授权的企业。true：表示他方授权我方。在这种情况下，AuthorizedOrganizationNames 代表的是【授权方】的企业名称，即提供授权的企业。此场景下不支持批量 */
   AuthToMe?: boolean;
+  /** 被授企业id/授权方企业id（即OrganizationId），如果是企业之间授权和AuthorizedOrganizationNames二选一传入，最大支持50个，注：`被授权企业必须和当前企业在同一应用号下` */
+  AuthorizedOrganizationIds?: string[];
+  /** 被授企业名称/授权方企业的名字，如果是企业之间授权和AuthorizedOrganizationIds二选一传入即可。请确认该名称与企业营业执照中注册的名称一致。注: 1. 如果名称中包含英文括号()，请使用中文括号（）代替。2. 被授权企业必须和当前企业在同一应用号下 3. 数组最大长度50 */
+  AuthorizedOrganizationNames?: string[];
 }
 
 declare interface CreatePartnerAutoSignAuthUrlResponse {

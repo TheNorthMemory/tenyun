@@ -516,6 +516,10 @@ declare interface DbNormalDetail {
   CreateTime?: string;
   /** 是否全文启用 0：否 1：是 */
   IsFullTextEnabled?: string;
+  /** 是否是可用性组 0：否 1：是 */
+  IsAvailabilityGroups?: string;
+  /** AG组数据库同步状态 */
+  AGSyncState?: string;
 }
 
 /** 数据库可回档时间范围信息 */
@@ -602,11 +606,11 @@ declare interface Events {
   Size?: number;
   /** 事件类型，slow-慢SQL事件，blocked-阻塞事件，deadlock-死锁事件 */
   EventType?: string;
-  /** 事件记录状态，1-成功，2-失败 */
+  /** 事件记录状态，1-成功，2-失败，3-文件待删除，4-写入中 */
   Status?: number;
   /** 扩展文件生成开始时间 */
   StartTime?: string;
-  /** 扩展文件生成开始时间 */
+  /** 扩展文件最后更新时间 */
   EndTime?: string;
   /** 内网下载地址 */
   InternalAddr?: string;
@@ -4479,6 +4483,8 @@ declare interface UpgradeDBInstanceRequest {
   WaitSwitch?: number;
   /** 多节点架构实例的备节点可用区，默认为空。如果需要在变配的同时修改指定备节点的可用区时必传，当MultiZones = MultiZones时主节点和备节点可用区不能全部相同。备机可用区集合最小为2个，最大不超过5个。 */
   DrZones?: DrZoneInfo[];
+  /** 是否自动升级数据库的兼容性级别，默认0。0-否，1-是 */
+  UpgradeCompatLevel?: number;
 }
 
 declare interface UpgradeDBInstanceResponse {

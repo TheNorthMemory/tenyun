@@ -1048,6 +1048,14 @@ declare interface IntentionQuestionResult {
   AsrResult?: string[];
 }
 
+/** 跳转事件的结构体，其中包括认证期间收录，授权书审核，企业认证的回跳事件。 */
+declare interface JumpEvent {
+  /** 跳转事件枚举，* 1 - 企业收录。* 2 - 超管授权书审核。* 3 - 认证完成。 */
+  JumpEventType?: number;
+  /** 为认证成功后页面进行回跳的URL，请确保回跳地址的可用性。Endpoint如果是APP 类型，请传递"true"如果 Endpoint 是 H5 类型，请参考文档[跳转电子签H5](https://qian.tencent.com/developers/company/openqianh5/)p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，仅会进行回跳。 */
+  JumpUrl?: string;
+}
+
 /** 创建流程的签署方信息 */
 declare interface MiniAppCreateApproverInfo {
   /** 在指定签署方时，可以选择企业B端或个人C端等不同的参与者类型，可选类型如下： 0 :企业B端。 1 :个人C端。 3 :企业B端静默（自动）签署，无需签署人参与，自动签署可以参考自动签署使用说明文档。 7 :个人C端自动签署，适用于个人自动签场景。注: 个人自动签场景为白名单功能，使用前请联系对接的客户经理沟通。 */
@@ -2947,7 +2955,7 @@ declare interface CreateOrganizationAuthUrlRequest {
   UniformSocialCreditCode?: string;
   /** 企业法人的姓名 */
   LegalName?: string;
-  /** 认证完成跳回的链接，最长500个字符 */
+  /** 即将废弃，入参请使用JumpEvents。认证完成跳回的链接，最长500个字符。 */
   AutoJumpUrl?: string;
   /** 营业执照企业地址 */
   OrganizationAddress?: string;
@@ -2985,6 +2993,8 @@ declare interface CreateOrganizationAuthUrlRequest {
   BankAccountNumber?: string;
   /** 对方打开链接认证时，对公打款账号是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。p.s. 仅在对公打款不为空时有效 */
   BankAccountNumberSame?: boolean;
+  /** 跳转事件，其中包括认证期间收录，授权书审核，企业认证的回跳事件。p.s.Endpoint如果是APP 类型，请传递JumpUrl为"true" 如果 Endpoint 是 H5 类型，请参考文档跳转电子签H5 p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，仅会进行回跳。 */
+  JumpEvents?: JumpEvent[];
 }
 
 declare interface CreateOrganizationAuthUrlResponse {

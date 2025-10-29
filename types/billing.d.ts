@@ -1464,9 +1464,9 @@ declare interface BudgetInfoDiffEntity {
 
 /** 预算修改记录信息 */
 declare interface BudgetOperationLogEntity {
-  /** Uin */
+  /** 支付者Uin */
   PayerUin?: number;
-  /** 主用户Uin */
+  /** 使用者Uin */
   OwnerUin?: number;
   /** 操作用户Uin */
   OperateUin?: number;
@@ -1474,7 +1474,7 @@ declare interface BudgetOperationLogEntity {
   BillDay?: number;
   /** 月份 */
   BillMonth?: string;
-  /** 修改类型：ADD(新增)、UPDATE(更新) */
+  /** 修改类型：ADD(新增)、UPDATE(更新)、DELETE(删除) */
   Action?: string;
   /** 变更信息 */
   DiffValue?: BudgetInfoDiffEntity[];
@@ -1482,7 +1482,7 @@ declare interface BudgetOperationLogEntity {
   CreateTime?: string;
   /** 修改时间 */
   UpdateTime?: string;
-  /** 修改渠道：官网修改/API修改 */
+  /** 修改渠道：CONSOLE/API */
   OperationChannel?: string;
   /** 预算项目id */
   BudgetId?: string;

@@ -2266,8 +2266,10 @@ declare interface CreateOutputInfo {
   Zones?: string[];
   /** 输出的RIST的配置。 */
   RISTSettings?: CreateOutputRistSettings;
-  /** 对于含有多个音/视频轨的流，可以指定需要使用的轨道 */
+  /** 对于含有多个音/视频轨的流，可以指定需要使用的轨道。PidSelector 与 TrackSelector 只能存在一个 */
   PidSelector?: PidSelector;
+  /** 对于含有多个音/视频轨的流，可以指定需要使用的轨道。PidSelector 与 TrackSelector 只能存在一个 */
+  StreamSelector?: StreamSelector;
 }
 
 /** 创建媒体传输流的输出的RTP配置。 */
@@ -2554,6 +2556,8 @@ declare interface DescribeOutput {
   PidSelector?: PidSelector;
   /** 输出模块配置，相关的URL，包括提供的拉流地址，或者配置的输出到第三方的转推地址 */
   StreamUrls?: StreamUrlDetail[];
+  /** 对于含有多个音/视频轨的流，可以指定需要使用的轨道 */
+  StreamSelector?: StreamSelector;
 }
 
 /** 查询输出的HLS拉流URL信息。 */
@@ -4418,6 +4422,8 @@ declare interface ModifyOutputInfo {
   OutputType?: string;
   /** 对于含有多个音/视频轨的流，可以指定需要使用的轨道 */
   PidSelector?: PidSelector;
+  /** 对于含有多个音/视频轨的流，可以指定需要使用的轨道 */
+  StreamSelector?: StreamSelector;
 }
 
 /** 媒体处理任务中的马赛克参数类型 */
@@ -5700,6 +5706,16 @@ declare interface StreamLinkRegionInfo {
   Regions: RegionInfo[];
 }
 
+/** 选择指定的音轨或者视频输出 */
+declare interface StreamSelector {
+  /** 选择类型: PID | TRACK */
+  SelectorType?: string;
+  /** 根据 PID 配置选择器 */
+  PidSelector?: PidSelector;
+  /** 根据 Track 配置选择器 */
+  TrackSelector?: TrackSelector;
+}
+
 /** 描述 URL 的完整信息 */
 declare interface StreamUrlDetail {
   /** 会描述运营商信息等 */
@@ -5972,6 +5988,14 @@ declare interface TrackInfo {
   TrackNum?: string | null;
   /** 声道音量大小，说明：当：AudioChannel的值为1时，此数组长度为1，例如：[6]；当：AudioChannel的值为2时，此数组长度为2，例如：[0,6]；当：AudioChannel的值为6时，此数组长度大于2小于16，例如：[-60,0,0,6]。此值数组值取值范围：[-60, 6]，其中-60代表静音、0代表保持原音量，6表示原音量增加一倍，默认值为-60。注意：支持3位小数。 */
   ChannelVolume?: number[] | null;
+}
+
+/** 音视频轨道选择 */
+declare interface TrackSelector {
+  /** 视频轨道序号，从1开始. */
+  VideoIndex?: number[];
+  /** 音频轨道序号，从1开始. */
+  AudioIndex?: number[];
 }
 
 /** 转码任务输入参数类型 */
@@ -7682,6 +7706,12 @@ declare interface DescribeImageTaskDetailResponse {
   TaskType?: string | null;
   /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成。 */
   Status?: string | null;
+  /** 任务失败时的错误码。 */
+  ErrCode?: number;
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369) 列表。 */
+  ErrMsg?: string;
+  /** 任务异常Message。 */
+  Message?: string;
   /** 图片处理任务的执行状态与结果。 */
   ImageProcessTaskResultSet?: ImageProcessTaskResult[] | null;
   /** 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */

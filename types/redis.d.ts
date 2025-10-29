@@ -1214,10 +1214,12 @@ declare interface CloneInstancesRequest {
 }
 
 declare interface CloneInstancesResponse {
-  /** 请求任务 ID。 */
+  /** 交易的ID。 */
   DealId?: string;
   /** 克隆实例的 ID。 */
   InstanceIds?: string[];
+  /** 订单号。 */
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1259,7 +1261,7 @@ declare interface CreateInstanceAccountResponse {
 }
 
 declare interface CreateInstancesRequest {
-  /** 实例类型。2：Redis 2.8 内存版（标准架构）。3：CKV 3.2 内存版（标准架构）。4：CKV 3.2 内存版（集群架构）。6：Redis 4.0 内存版（标准架构）。7：Redis 4.0 内存版（集群架构）。8：Redis 5.0 内存版（标准架构）。9：Redis 5.0 内存版（集群架构）。15：Redis 6.2 内存版（标准架构）。16：Redis 6.2 内存版（集群架构）。17：Redis 7.0 内存版（标准架构）。18：Redis 7.0 内存版（集群架构）。200：Memcached 1.6 内存版（集群架构）。说明：CKV 版本当前有存量用户使用，暂时保留。 */
+  /** 实例类型。- 2：Redis 2.8 内存版（标准架构）。- 3：CKV 3.2 内存版（标准架构）。- 4：CKV 3.2 内存版（集群架构）。- 6：Redis 4.0 内存版（标准架构）。- 7：Redis 4.0 内存版（集群架构）。- 8：Redis 5.0 内存版（标准架构）。- 9：Redis 5.0 内存版（集群架构）。- 15：Redis 6.2 内存版（标准架构）。- 16：Redis 6.2 内存版（集群架构）。- 17：Redis 7.0 内存版（标准架构）。- 18：Redis 7.0 内存版（集群架构）。- 200：Memcached 1.6 内存版（集群架构）。**说明**：CKV 版本当前有存量用户使用，暂时保留。 */
   TypeId: number;
   /** 内存容量，单位为MB， 数值需为1024的整数倍。具体规格，请通过 [DescribeProductInfo](https://cloud.tencent.com/document/api/239/30600) 接口查询全地域的售卖规格。- **TypeId**为标准架构时，**MemSize**是实例总内存容量；- **TypeId**为集群架构时，**MemSize**是单分片内存容量。 */
   MemSize: number;
@@ -1287,7 +1289,7 @@ declare interface CreateInstancesRequest {
   VPort?: number;
   /** 实例分片数量。- 标准版实例无需配置该参数。- 集群版实例，分片数量范围为：[1、3、5、8、12、16、24、32、40、48、64、80、96、128]。 */
   RedisShardNum?: number;
-  /** 实例副本数量。- Redis 内存版 4.0、5.0、6.2 标准架构和集群架构支持副本数量范围为[1,5]。- Redis 2.8标准版、CKV标准版只支持1副本。 */
+  /** 实例副本数量。- Redis 内存版 4.0、5.0、6.2、7.0 标准架构和集群架构支持副本数量范围为[1,5]。- Redis 2.8标准版、CKV标准版只支持1副本。 */
   RedisReplicasNum?: number;
   /** 标识实例是否需支持副本只读。- Redis 2.8 标准版、CKV标准版不支持副本只读。- 开启副本只读，实例将自动读写分离，写请求路由到主节点，读请求路由到副本节点。- 如需开启副本只读，建议副本数量大于等于2。 */
   ReplicasReadonly?: boolean;
@@ -1307,7 +1309,7 @@ declare interface CreateInstancesRequest {
   DryRun?: boolean;
   /** 指实例部署模式。- local：传统架构，默认为 local。- cdc：独享集群。- cloud：云原生，当前已暂停售卖。 */
   ProductVersion?: string;
-  /** 独享集群 ID。当**ProductVersion**设置为**cdc**时，该参数必须设置。 */
+  /** 独享集群 ID。- 当 **ProductVersion** 设置为 **cdc** 时，该参数必须设置。- 请通过接口[ DescribeRedisClusters](https://cloud.tencent.com/document/product/239/109628) 获取集群 ID。 */
   RedisClusterId?: string;
   /** 告警策略 ID 数组。- 请登录[腾讯云可观测平台-告警管理-策略管理](https://console.cloud.tencent.com/monitor/alarm/policy)获取告警策略 ID。- 若不配置该参数，则绑定默认告警策略。默认告警策略具体信息，请登录[腾讯云可观测平台-告警管理-策略管理](https://console.cloud.tencent.com/monitor/alarm/policy)查看。 */
   AlarmPolicyList?: string[];
@@ -1320,6 +1322,8 @@ declare interface CreateInstancesResponse {
   DealId?: string;
   /** 实例ID。 */
   InstanceIds?: string[];
+  /** 订单号。 */
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1661,8 +1665,10 @@ declare interface DescribeInstanceDTSInfoResponse {
 }
 
 declare interface DescribeInstanceDealDetailRequest {
-  /** 订单交易ID数组，即 [CreateInstances](https://cloud.tencent.com/document/api/239/20026) 的输出参数DealId。数组最大长度限制为10 */
-  DealIds: string[];
+  /** 订单号，即 [CreateInstances](https://cloud.tencent.com/document/api/239/20026) 的输出参数DealId。数组最大长度限制为10 */
+  DealIds?: string[];
+  /** 订单号，即 [CreateInstances](https://cloud.tencent.com/document/api/239/20026) 的输出参数DealName。数组最大长度限制为10 */
+  DealName?: string;
 }
 
 declare interface DescribeInstanceDealDetailResponse {
@@ -2396,6 +2402,8 @@ declare interface DestroyPrepaidInstanceRequest {
 declare interface DestroyPrepaidInstanceResponse {
   /** 订单Id */
   DealId?: string;
+  /** 订单号。 */
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2578,12 +2586,12 @@ declare interface ModifyAutoBackupConfigRequest {
   /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
   /** 设置自动备份周期。可设置为Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday。该参数暂不支持修改。 */
-  WeekDays: string[];
+  WeekDays?: string[];
   /** 备份时间段。可设置为每个整点。格式如：00:00-01:00, 01:00-02:00...... 23:00-00:00。 */
-  TimePeriod: string;
+  TimePeriod?: string;
   /** 自动备份类型。目前仅能配置为：1 ，指定时备份。 */
   AutoBackupType?: number;
-  /** 全量备份文件保存天数。单位：天。 */
+  /** 全量备份文件保存天数。 仅支持设置为 7，单位：天。如需更长天数，请[提交工单](https://console.cloud.tencent.com/workorder/category)申请。 */
   BackupStorageDays?: number;
 }
 
@@ -2957,17 +2965,19 @@ declare interface RemoveReplicationInstanceResponse {
 }
 
 declare interface RenewInstanceRequest {
-  /** 购买时长，单位：月。 */
+  /** 购买时长。- 单位：月。- 取值范围 [1,2,3,4,5,6,7,8,9,10,11,12,24,36]。 */
   Period: number;
-  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
+  /** 实例 ID，请登录 [Redis 控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 标识是否修改计费模式。当前实例计费模式为按量计费方式，预转换为包年包月而续费，请指定该参数为 prepaid。当前实例计费模式为包年包月方式，可不设置该参数。 */
+  /** 标识是否修改计费模式。- 当前实例计费模式为按量计费方式，预转换为包年包月而续费，请指定该参数为 prepaid。- 当前实例计费模式为包年包月方式，可不设置该参数。 */
   ModifyPayMode?: string;
 }
 
 declare interface RenewInstanceResponse {
   /** 交易ID。 */
   DealId?: string;
+  /** 订单号。 */
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3067,11 +3077,11 @@ declare interface SwitchProxyResponse {
 declare interface UpgradeInstanceRequest {
   /** 待变更实例 ID。请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 指实例每个分片内存变更后的大小。单位 MB。每次只能修改参数MemSize、RedisShardNum和RedisReplicasNum其中的一个，不能同时修改。且修改其中一个参数时，其他两个参数需输入实例原有的配置规格。缩容时，缩容后的规格务必要大于等于使用容量的1.3倍，否则将执行失败。 */
+  /** 指实例每个分片内存变更后的大小。- 单位 MB。- 每次只能修改参数MemSize、RedisShardNum和RedisReplicasNum其中的一个，不能同时修改。且修改其中一个参数时，其他两个参数需输入实例原有的配置规格。- 缩容时，缩容后的规格务必要大于等于使用容量的1.3倍，否则将执行失败。 */
   MemSize: number;
-  /** 指实例变更后的分片数量。标准架构不需要配置该参数，集群架构为必填参数。集群架构，每次只能修改参数RedisShardNum、MemSize和RedisReplicasNum其中的一个，不能同时修改。且修改其中一个参数时，其他两个参数需输入实例原有的配置规格。 */
+  /** 指实例变更后的分片数量。- 标准架构不需要配置该参数，集群架构为必填参数。- 集群架构，每次只能修改参数RedisShardNum、MemSize和RedisReplicasNum其中的一个，不能同时修改。且修改其中一个参数时，其他两个参数需输入实例原有的配置规格。 */
   RedisShardNum?: number;
-  /** 指实例变更后的副本数量。每次只能修改参数RedisReplicasNum、MemSize和RedisShardNum其中的一个，不能同时修改。且修改其中一个参数时，其他两个参数需输入实例原有的配置规格。多AZ实例修改副本时必须要传入NodeSet。 */
+  /** 指实例变更后的副本数量。- 每次只能修改参数 RedisReplicasNum、MemSize 和 RedisShardNum 其中的一个，不能同时修改。且修改其中一个参数时，其他两个参数需输入实例原有的配置规格。- 多AZ实例修改副本时必须要传入 NodeSet。 */
   RedisReplicasNum?: number;
   /** 多AZ实例，增加副本时的节点信息，包括副本的 ID 编号及可用区信息。非多AZ实例不需要配置该参数。 */
   NodeSet?: RedisNodeInfo[];
@@ -3082,6 +3092,8 @@ declare interface UpgradeInstanceRequest {
 declare interface UpgradeInstanceResponse {
   /** 订单ID。 */
   DealId?: string;
+  /** 订单号。 */
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3098,6 +3110,8 @@ declare interface UpgradeInstanceVersionRequest {
 declare interface UpgradeInstanceVersionResponse {
   /** 订单ID */
   DealId?: string;
+  /** 订单号。 */
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3214,7 +3228,7 @@ declare interface Redis {
   /** 查询实例DTS信息 {@link DescribeInstanceDTSInfoRequest} {@link DescribeInstanceDTSInfoResponse} */
   DescribeInstanceDTSInfo(data: DescribeInstanceDTSInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDTSInfoResponse>;
   /** 查询订单信息 {@link DescribeInstanceDealDetailRequest} {@link DescribeInstanceDealDetailResponse} */
-  DescribeInstanceDealDetail(data: DescribeInstanceDealDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDealDetailResponse>;
+  DescribeInstanceDealDetail(data?: DescribeInstanceDealDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDealDetailResponse>;
   /** 查询实例事件信息 {@link DescribeInstanceEventsRequest} {@link DescribeInstanceEventsResponse} */
   DescribeInstanceEvents(data: DescribeInstanceEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceEventsResponse>;
   /** 查询实例日志投递配置 {@link DescribeInstanceLogDeliveryRequest} {@link DescribeInstanceLogDeliveryResponse} */

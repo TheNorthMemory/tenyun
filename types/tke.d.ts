@@ -272,9 +272,9 @@ declare interface InstanceAdvancedSettings {
 
 /** 包年包月配置 */
 declare interface InstanceChargePrepaid {
-  /** 后付费计费周期，单位（月）：1，2，3，4，5，，6，7， 8，9，10，11，12，24，36，48，60 */
-  Period: number;
-  /** 预付费续费方式：- NOTIFY_AND_AUTO_RENEW：通知用户过期，且自动续费 (默认）- NOTIFY_AND_MANUAL_RENEW：通知用户过期，但不自动续费- DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知用户过期，也不自动续费 */
+  /** 后付费计费周期，单位（月）：1，2，3，4，5，6，7， 8，9，10，11，12，24，36，48，60 */
+  Period?: number;
+  /** 预付费续费方式：- NOTIFY_AND_AUTO_RENEW：通知用户过期，且自动续费 - NOTIFY_AND_MANUAL_RENEW：通知用户过期，但不自动续费(默认)- DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知用户过期，也不自动续费 */
   RenewFlag?: string;
 }
 
@@ -668,6 +668,8 @@ declare interface UpdateNativeNodePoolParam {
   InstanceTypes?: string[];
   /** 期望节点数 */
   Replicas?: number;
+  /** 是否更新存量节点 */
+  UpdateExistedNode?: boolean;
   /** 数据盘列表 */
   DataDisks?: DataDisk[];
   /** ssh公钥id数组 */
@@ -3321,7 +3323,7 @@ declare namespace V20180525 {
 
   /** 路由表冲突对象 */
   interface RouteTableConflict {
-    /** 路由表类型。 */
+    /** 路由表类型。枚举值：CcsCluster、Vpc、VpcRouteTable、CcsClusterRouteTable */
     RouteTableType?: string;
     /** 路由表CIDR。 */
     RouteTableCidrBlock?: string;
@@ -3720,7 +3722,7 @@ declare namespace V20180525 {
   }
 
   interface AddVpcCniSubnetsRequest {
-    /** 集群ID */
+    /** 集群 ID，请[登录控制台](https://console.cloud.tencent.com/tke2/cluster)在集群列表复制ID */
     ClusterId: string;
     /** 为集群容器网络增加的子网列表 */
     SubnetIds: string[];
@@ -3824,7 +3826,7 @@ declare namespace V20180525 {
     ClusterId: string;
     /** CLS日志集ID */
     LogsetId?: string;
-    /** 当前集群类型支持tke、eks */
+    /** 当前集群类型支持tke（标准集群）、eks（serverless集群） */
     ClusterType?: string;
   }
 
@@ -5316,7 +5318,7 @@ declare namespace V20180525 {
   }
 
   interface DescribeClusterRoutesRequest {
-    /** 路由表名称。 */
+    /** 路由表名称。与集群 ID 一致，可以到[集群控制台](https://console.cloud.tencent.com/tke2)进行复制。 */
     RouteTableName: string;
     /** 过滤条件,当前只支持按照单个条件GatewayIP进行过滤（可选） */
     Filters?: Filter[];
@@ -5750,7 +5752,7 @@ declare namespace V20180525 {
   }
 
   interface DescribeIPAMDRequest {
-    /** 集群ID */
+    /** 集群 ID，请[登录控制台](https://console.cloud.tencent.com/tke2/cluster)在集群列表复制ID */
     ClusterId: string;
   }
 
@@ -6412,7 +6414,7 @@ declare namespace V20180525 {
   interface DescribeRouteTableConflictsRequest {
     /** 路由表CIDR */
     RouteTableCidrBlock: string;
-    /** 路由表绑定的VPC */
+    /** 路由表绑定的VPC，请到 [VPC 控制台](https://console.cloud.tencent.com/vpc/vpc)复制 VPC ID */
     VpcId: string;
   }
 
@@ -6636,9 +6638,9 @@ declare namespace V20180525 {
   interface EnableClusterAuditRequest {
     /** 集群ID */
     ClusterId: string;
-    /** CLS日志集ID */
+    /** CLS日志集ID，可以通过cls接口或者控制台获取 */
     LogsetId?: string;
-    /** CLS日志主题ID */
+    /** CLS日志主题ID，可以通过cls接口或者控制台获取 */
     TopicId?: string;
     /** topic所在region，默认为集群当前region */
     TopicRegion?: string;
@@ -6674,9 +6676,9 @@ declare namespace V20180525 {
   interface EnableEventPersistenceRequest {
     /** 集群ID */
     ClusterId: string;
-    /** cls服务的logsetID */
+    /** cls服务的logsetID，通过cls接口或者控制台获取 */
     LogsetId?: string;
-    /** cls服务的topicID */
+    /** cls服务的topicID，通过cls接口或者控制台获取 */
     TopicId?: string;
     /** topic所在地域，默认为集群所在地域 */
     TopicRegion?: string;

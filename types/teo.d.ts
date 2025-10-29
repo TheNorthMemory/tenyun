@@ -1886,7 +1886,7 @@ declare interface Https {
   Http2?: string;
   /** OCSP 配置开关，取值有：on：开启；off：关闭。 */
   OcspStapling?: string;
-  /** Tls 版本设置，取值有：TLSv1：TLSv1版本；TLSV1.1：TLSv1.1版本；TLSV1.2：TLSv1.2版本；TLSv1.3：TLSv1.3版本。修改时必须开启连续的版本。 */
+  /** Tls 版本设置，取值有：TLSv1：TLSv1版本；TLSv1.1：TLSv1.1版本；TLSv1.2：TLSv1.2版本；TLSv1.3：TLSv1.3版本。修改时必须开启连续的版本。 */
   TlsVersion?: string[];
   /** HSTS 配置。 */
   Hsts?: Hsts | null;
@@ -2308,7 +2308,7 @@ declare interface ManagedRules {
 declare interface MaxAge {
   /** 是否遵循源站，取值有：on：遵循源站，忽略MaxAge 时间设置；off：不遵循源站，使用MaxAge 时间设置。 */
   FollowOrigin?: string;
-  /** MaxAge 时间设置，单位秒，最大365天。注意：时间为0，即不缓存。 */
+  /** MaxAge 时间设置，单位为秒，取值：0～315360000。注意：时间为0，即不缓存。 */
   MaxAgeTime?: number;
 }
 
@@ -5479,7 +5479,7 @@ declare interface DescribeDDoSAttackDataRequest {
   EndTime: string;
   /** 统计指标列表，取值有：ddos_attackMaxBandwidth：攻击带宽峰值；ddos_attackMaxPackageRate：攻击包速率峰值 ；ddos_attackBandwidth：攻击带宽曲线；ddos_attackPackageRate：攻击包速率曲线。 */
   MetricNames: string[];
-  /** 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
+  /** 站点 ID 集合，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
   ZoneIds?: string[];
   /** DDoS策略组ID列表，不填默认选择全部策略ID。 */
   PolicyIds?: number[];
@@ -5505,7 +5505,7 @@ declare interface DescribeDDoSAttackEventRequest {
   EndTime: string;
   /** ddos策略组集合，不填默认选择全部策略。 */
   PolicyIds?: number[];
-  /** 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
+  /** 站点 ID 集合，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
   ZoneIds?: string[];
   /** 分页查询的限制数目，默认值为20，最大查询条目为1000。 */
   Limit?: number;
@@ -5537,7 +5537,7 @@ declare interface DescribeDDoSAttackTopDataRequest {
   EndTime: string;
   /** 查询的统计指标，取值有：ddos_attackFlux_protocol：按各协议的攻击流量排行；ddos_attackPackageNum_protocol：按各协议的攻击包量排行；ddos_attackNum_attackType：按各攻击类型的攻击数量排行；ddos_attackNum_sregion：按攻击源地区的攻击数量排行；ddos_attackFlux_sip：按攻击源IP的攻击数量排行；ddos_attackFlux_sregion：按攻击源地区的攻击数量排行。 */
   MetricName: string;
-  /** 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
+  /** 站点 ID 集合，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
   ZoneIds?: string[];
   /** DDoS策略组ID集合，不填默认选择全部策略ID。 */
   PolicyIds?: number[];
@@ -6077,7 +6077,7 @@ declare interface DescribePlansResponse {
 }
 
 declare interface DescribePrefetchTasksRequest {
-  /** 站点ID。该参数必填。 */
+  /** 站点ID。此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。 */
   ZoneId?: string;
   /** 查询起始时间，时间与 job-id 必填一个。 */
   StartTime?: string;
@@ -6087,7 +6087,7 @@ declare interface DescribePrefetchTasksRequest {
   Offset?: number;
   /** 分页查询限制数目，默认值：20，上限：1000。 */
   Limit?: number;
-  /** 过滤条件，Filters.Values 的上限为 20。详细的过滤条件如下：job-id：按照任务 ID 进行过滤。job-id 形如：1379afjk91u32h，暂不支持多值，不支持模糊查询；target：按照目标资源信息进行过滤。target 形如：http://www.qq.com/1.txt，暂不支持多值，不支持模糊查询；domains：按照域名行过滤。domains 形如：www.qq.com，不支持模糊查询；statuses：按照任务状态进行过滤，不支持模糊查询。可选项： processing：处理中 success：成功 failed：失败 timeout：超时 invalid：无效。即源站响应非 2xx 状态码，请检查源站服务。 */
+  /** 过滤条件，Filters.Values 的上限为 20。详细的过滤条件如下：job-id：按照任务 ID 进行过滤。job-id 形如：1379afjk91u32h，暂不支持多值，不支持模糊查询；target：按照目标资源信息进行过滤。target 形如：http://www.qq.com/1.txt，暂不支持多值，不支持模糊查询；domains：按照域名行过滤。domains 形如：www.qq.com，不支持模糊查询；statuses：按照任务状态进行过滤，不支持模糊查询。可选项： processing：处理中 success：成功 failed：失败 timeout：超时 canceled：已取消 invalid：无效。即源站响应非 2xx 状态码，请检查源站服务。 */
   Filters?: AdvancedFilter[];
 }
 
@@ -6101,7 +6101,7 @@ declare interface DescribePrefetchTasksResponse {
 }
 
 declare interface DescribePurgeTasksRequest {
-  /** 站点 ID。该参数必填。 */
+  /** 站点 ID。此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。 */
   ZoneId?: string;
   /** 查询起始时间，时间与 job-id 必填一个。 */
   StartTime?: string;
@@ -6111,7 +6111,7 @@ declare interface DescribePurgeTasksRequest {
   Offset?: number;
   /** 分页查询限制数目，默认值：20，最大值：1000。 */
   Limit?: number;
-  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：job-id：按照任务 ID 进行过滤。job-id 形如：1379afjk91u32h，暂不支持多值，不支持模糊查询；target：按照目标资源信息进行过滤，target 形如：http://www.qq.com/1.txt 或者 tag1，暂不支持多值，支持模糊查询；domains：按照域名进行过滤，形如：www.qq.com，不支持模糊查询；statuses：按照任务状态进行过滤，不支持模糊查询。可选项： processing：处理中 success：成功 failed：失败 timeout：超时type：按照清除缓存类型进行过滤，暂不支持多值，不支持模糊查询。可选项： purge_url：URL purge_prefix：前缀 purge_all：全部缓存内容 purge_host：Hostname purge_cache_tag：CacheTag */
+  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：job-id：按照任务 ID 进行过滤。job-id 形如：1379afjk91u32h，暂不支持多值，不支持模糊查询；target：按照目标资源信息进行过滤，target 形如：http://www.qq.com/1.txt 或者 tag1，暂不支持多值，支持模糊查询；domains：按照域名进行过滤，形如：www.qq.com，不支持模糊查询；statuses：按照任务状态进行过滤，不支持模糊查询。可选项： processing：处理中 success：成功 failed：失败 timeout：超时 canceled：已取消type：按照清除缓存类型进行过滤，暂不支持多值，不支持模糊查询。可选项： purge_url：URL purge_prefix：前缀 purge_all：全部缓存内容 purge_host：Hostname purge_cache_tag：CacheTag */
   Filters?: AdvancedFilter[];
 }
 
@@ -6333,7 +6333,7 @@ declare interface DescribeTimingL4DataRequest {
   EndTime: string;
   /** 查询指标，取值有：l4Flow_connections: 访问并发连接数；l4Flow_flux: 访问总流量；l4Flow_inFlux: 访问入流量；l4Flow_outFlux: 访问出流量；l4Flow_inBandwidth: 访问入向带宽峰值；l4Flow_outBandwidth: 访问出向带宽峰值。 */
   MetricNames: string[];
-  /** 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
+  /** 站点ID，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
   ZoneIds?: string[];
   /** 四层实例列表, 不填表示选择全部实例。 */
   ProxyIds?: string[];
@@ -6361,7 +6361,7 @@ declare interface DescribeTimingL7AnalysisDataRequest {
   EndTime: string;
   /** 指标列表，取值有:l7Flow_outFlux: L7 EdgeOne 响应流量，单位：Byte；l7Flow_inFlux: L7 客户端请求流量，单位：Byte；l7Flow_flux: L7 访问总流量（EdgeOne 响应+客户端请求），单位：Byte；l7Flow_outBandwidth: L7 EdgeOne 响应带宽，单位：bps；l7Flow_inBandwidth：L7 客户端请求带宽，单位：bps；l7Flow_bandwidth：L7 访问总带宽（EdgeOne 响应+客户端请求），单位：bps；l7Flow_request: L7 访问请求数，单位：次； l7Flow_avgResponseTime: L7 访问平均响应耗时，单位：ms； l7Flow_avgFirstByteResponseTime: L7 访问平均首字节响应耗时，单位：ms。 */
   MetricNames: string[];
-  /** 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
+  /** 站点 ID 集合，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
   ZoneIds?: string[];
   /** 查询时间粒度，取值有：min: 1分钟；5min: 5分钟；hour: 1小时；day: 1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：2 小时范围内以 min 粒度查询，2 天范围内以 5min 粒度查询，7 天范围内以 hour 粒度查询，超过 7 天以 day 粒度查询。 */
   Interval?: string;
@@ -6437,7 +6437,7 @@ declare interface DescribeTopL7AnalysisDataRequest {
   EndTime: string;
   /** 查询的指标，取值有： l7Flow_outFlux_country：按国家/地区维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_province：按中国大陆境内省份维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_statusCode：按状态码维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_domain：按域名维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_url：按 URL Path 维度统计 L7 EdgeOne 响应流量指标; l7Flow_outFlux_resourceType：按资源类型维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_sip：按客户端 IP 维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_referers：按 Referer 维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_ua_device：按设备类型维度统计 L7 EdgeOne 响应流量指标; l7Flow_outFlux_ua_browser：按浏览器类型维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_ua_os：按操作系统类型维度统计 L7 EdgeOne 响应流量指标； l7Flow_outFlux_ua：按 User-Agent 维度统计 L7 EdgeOne 响应流量指标； l7Flow_request_country：按国家/地区维度统计 L7 访问请求数指标； l7Flow_request_province：按中国大陆境内省份维度统计 L7 访问请求数指标； l7Flow_request_statusCode：按状态码维度统计 L7 访问请求数指标； l7Flow_request_domain：按域名维度统计 L7 访问请求数指标； l7Flow_request_url：按 URL Path 维度统计 L7 访问请求数指标; l7Flow_request_resourceType：按资源类型维度统计 L7 访问请求数指标； l7Flow_request_sip：按客户端 IP 维度统计 L7 访问请求数指标； l7Flow_request_referer：按 Referer 维度统计 L7 访问请求数指标； l7Flow_request_ua_device：按设备类型维度统计 L7 访问请求数指标; l7Flow_request_ua_browser：按浏览器类型维度统计 L7 访问请求数指标； l7Flow_request_ua_os：按操作系统类型维度统计 L7 访问请求数指标； l7Flow_request_ua：按 User-Agent 维度统计 L7 访问请求数指标。 */
   MetricName: string;
-  /** 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
+  /** 站点 ID 集合，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
   ZoneIds?: string[];
   /** 查询前多少个 top 数据，最大值为1000。不填默认为10，表示查询 top10 的数据。 */
   Limit?: number;
@@ -6595,7 +6595,7 @@ declare interface DownloadL4LogsRequest {
   StartTime: string;
   /** 结束时间。 */
   EndTime: string;
-  /** 站点 ID 集合，此参数必填。 */
+  /** 站点 ID 集合，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。 */
   ZoneIds?: string[];
   /** 四层实例 ID 集合。 */
   ProxyIds?: string[];
@@ -6619,7 +6619,7 @@ declare interface DownloadL7LogsRequest {
   StartTime: string;
   /** 结束时间。 */
   EndTime: string;
-  /** 站点ID集合，此参数必填。 */
+  /** 站点ID集合，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。 */
   ZoneIds?: string[];
   /** 子域名集合，不填默认选择全部子域名。 */
   Domains?: string[];

@@ -58,6 +58,40 @@ declare interface DeviceInfo {
   ProjectId: string;
 }
 
+/** 会话时长明细 */
+declare interface DurationDetails {
+  /** 会话时间 */
+  SessionTime?: string;
+  /** 语音:min */
+  Voice?: number;
+  /** 标清:min */
+  SD?: number;
+  /** 高清:min */
+  HD?: number;
+  /** 超高清:min */
+  FHD?: number;
+  /** 2k:min */
+  TwoK?: number;
+  /** 4k:min */
+  FourK?: number;
+  /** 在线时长:min */
+  Online?: number;
+  /** 多网标清:min */
+  MultiSD?: number;
+  /** 多网高清:min */
+  MultiHD?: number;
+  /** 多网超高清:min */
+  MultiFHD?: number;
+  /** 多网2k:min */
+  MultiTwoK?: number;
+  /** 多网4k:min */
+  MultiFourK?: number;
+  /** 多网在线时长:min */
+  MultiOnline?: number;
+  /** 抵扣时长:min */
+  DeductDuration?: number;
+}
+
 /** 按授权查看的license列表 */
 declare interface License {
   /** 该类型的license个数 */
@@ -660,6 +694,30 @@ declare interface GetDevicesResponse {
   RequestId?: string;
 }
 
+declare interface GetDurationDetailsRequest {
+  /** 开始时间 */
+  StartTime: number;
+  /** 结束时间 */
+  EndTime: number;
+  /** 页码 */
+  PageNum: number;
+  /** 页面数量 */
+  PageSize: number;
+  /** 项目id */
+  ProjectId: string;
+  /** 设备ID，不传查全部设备 */
+  DeviceId?: string;
+}
+
+declare interface GetDurationDetailsResponse {
+  /** 列表总数 */
+  TotalCount?: number;
+  /** 时长明细列表 */
+  DurationDetails?: DurationDetails[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetLicenseStatRequest {
 }
 
@@ -696,6 +754,50 @@ declare interface GetLicensesResponse {
   Licenses?: License[];
   /** license列表项数量 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetTotalDurationRequest {
+  /** 开始时间 */
+  StartTime: number;
+  /** 结束时间 */
+  EndTime: number;
+  /** 项目id */
+  ProjectId: string;
+  /** 设备id，不传查全部 */
+  DeviceId?: string;
+}
+
+declare interface GetTotalDurationResponse {
+  /** 语音:min */
+  Voice?: number;
+  /** 标清:min */
+  SD?: number;
+  /** 高清:min */
+  HD?: number;
+  /** 超高清:min */
+  FHD?: number;
+  /** 2k:min */
+  TwoK?: number;
+  /** 4k:min */
+  FourK?: number;
+  /** 在线时长:min */
+  Online?: number;
+  /** 多网标清:min */
+  MultiSD?: number;
+  /** 多网高清:min */
+  MultiHD?: number;
+  /** 多网超高清:min */
+  MultiFHD?: number;
+  /** 多网2k:min */
+  MultiTwoK?: number;
+  /** 多网4k:min */
+  MultiFourK?: number;
+  /** 多网在线时长:min */
+  MultiOnline?: number;
+  /** 总抵扣时长:min */
+  DeductDuration?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -861,10 +963,14 @@ declare interface Trro {
   GetDeviceLicense(data: GetDeviceLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceLicenseResponse>;
   /** 设备的授权列表 {@link GetDevicesRequest} {@link GetDevicesResponse} */
   GetDevices(data: GetDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<GetDevicesResponse>;
+  /** 累计时长明细 {@link GetDurationDetailsRequest} {@link GetDurationDetailsResponse} */
+  GetDurationDetails(data: GetDurationDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<GetDurationDetailsResponse>;
   /** licenses统计 {@link GetLicenseStatRequest} {@link GetLicenseStatResponse} */
   GetLicenseStat(data?: GetLicenseStatRequest, config?: AxiosRequestConfig): AxiosPromise<GetLicenseStatResponse>;
   /** 查看license列表 {@link GetLicensesRequest} {@link GetLicensesResponse} */
   GetLicenses(data: GetLicensesRequest, config?: AxiosRequestConfig): AxiosPromise<GetLicensesResponse>;
+  /** 累计时长 {@link GetTotalDurationRequest} {@link GetTotalDurationResponse} */
+  GetTotalDuration(data: GetTotalDurationRequest, config?: AxiosRequestConfig): AxiosPromise<GetTotalDurationResponse>;
   /** 修改录制和转推回调URL {@link ModifyCallbackUrlRequest} {@link ModifyCallbackUrlResponse} */
   ModifyCallbackUrl(data: ModifyCallbackUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCallbackUrlResponse>;
   /** 修改设备信息 {@link ModifyDeviceRequest} {@link ModifyDeviceResponse} */

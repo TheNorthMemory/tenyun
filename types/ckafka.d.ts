@@ -1639,7 +1639,7 @@ declare interface MqttConnectParam {
   /** 是否为自建集群 */
   SelfBuilt?: boolean;
   /** 是否更新到关联的Dip任务 */
-  IsUpdate?: boolean;
+  IsUpdate?: boolean | null;
   /** MQTT连接源的实例资源地域, 跨地域时必填 */
   Region?: string;
   /** IP */

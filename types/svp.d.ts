@@ -102,16 +102,18 @@ declare interface SavingPlanOverviewDetail {
   StartTime?: string;
   /** 结束时间 yyyy-mm-dd HH:mm:ss格式 */
   EndTime?: string;
-  /** 状态 */
+  /** 1 生效 2 失效 3 作废 */
   Status?: number;
   /** 累计节省金额（单位：元） */
   SavingAmount?: string;
   /** 地域 */
   Region?: string[];
-  /** 支付类型 */
+  /** 1 全预付 2 部分预付 3 全不预付 */
   PayType?: number;
   /** 购买时间 yyyy-mm-dd HH:mm:ss格式 */
   BuyTime?: string;
+  /** 承诺金额 */
+  PromiseAmount?: string | null;
 }
 
 /** 节省计划使用率数据 */

@@ -250,6 +250,8 @@ declare interface HostNameSettings {
   HostNameStyle?: string | null;
   /** 云服务器的主机名后缀。HostNameSettings的该入参非必选，未选时不设置主机名后缀。 点号（.）和短横线（-）不能作为 HostNameSuffix 的首尾字符，不能连续使用。 不支持 Windows 实例。 其他类型（Linux 等）实例：字符长度为[1, 39]，且与 HostName 的长度和不能超过 41，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。 假设后缀名称为 suffix，原主机名为 test.0，最终主机名为 test.0.suffix。 */
   HostNameSuffix?: string | null;
+  /** 云服务器的主机名分隔符。默认的分隔符是点号（.），可选短横线（-）。仅有点号（.）和短横线（-）能作为主机名的分隔符。如果不设置，则默认采用点号（.）分隔符。通过分割符连接多段。假设原主机名为“product-as-host”，分隔符HostNameDelimiter为“-”，设置主机名后缀"suffix"，那么最终主机名为“product-as-host-suffix”。 */
+  HostNameDelimiter?: string;
 }
 
 /** 描述了启动配置创建实例的IPv6地址公网可访问性，声明了IPv6地址公网使用计费模式，最大带宽等 */
@@ -320,6 +322,8 @@ declare interface InstanceNameSettings {
   InstanceNameStyle?: string;
   /** 云服务器实例名后缀。字符长度为[1,105]，且与 InstanceName 的长度和不能超过107。假设后缀名称为 suffix，原实例名为 test.0，最终实例名为 test.0.suffix。 */
   InstanceNameSuffix?: string | null;
+  /** 云服务器实例名分隔符。 默认的分隔符是点号（.），可选短横线（-）。仅有点号（.）和短横线（-）能作为实例名的分隔符。如果不设置，则默认采用点号（.）分隔符。 通过分割符连接多段。假设原实例名为“product-as-instance”，分隔符InstanceNameDelimiter为“-”，设置实例名后缀"suffix"，那么最终实例名为“product-as-instance-suffix”。 */
+  InstanceNameDelimiter?: string;
 }
 
 /** 实例标签。通过指定该参数，可以为扩容的实例绑定标签。 */

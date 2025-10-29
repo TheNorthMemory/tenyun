@@ -4656,8 +4656,12 @@ declare namespace V20180724 {
   interface DescribePrometheusScrapeStatisticsRequest {
     /** 实例ID列表 */
     InstanceIds: string[];
+    /** 集群ID */
+    ClusterId?: string;
     /** job 类型 */
     JobType?: string;
+    /** job 过滤，不写就是全部 job */
+    Job?: string;
   }
 
   interface DescribePrometheusScrapeStatisticsResponse {

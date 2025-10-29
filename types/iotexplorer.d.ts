@@ -2068,6 +2068,16 @@ declare interface CreateTWeSeeRecognitionTaskResponse {
   RequestId?: string;
 }
 
+declare interface CreateTWeSeeServiceRequest {
+  /** 服务类型1.VideoSummary2.ImageSummary */
+  Service: string;
+}
+
+declare interface CreateTWeSeeServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateTWeTalkProductConfigRequest {
   /** 产品ID */
   ProductId: string;
@@ -4970,6 +4980,20 @@ declare interface UpdateOtaModuleResponse {
   RequestId?: string;
 }
 
+declare interface UpdateOtaTaskStatusRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 固件升级任务ID */
+  TaskId: number;
+  /** 固件任务取消状态 */
+  Status: number;
+}
+
+declare interface UpdateOtaTaskStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UploadFirmwareRequest {
   /** 产品ID */
   ProductID: string;
@@ -5057,6 +5081,8 @@ declare interface Iotexplorer {
   CreateTRTCSignaturesWithRoomId(data: CreateTRTCSignaturesWithRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTRTCSignaturesWithRoomIdResponse>;
   /** 创建 TWeSee 语义理解任务 {@link CreateTWeSeeRecognitionTaskRequest} {@link CreateTWeSeeRecognitionTaskResponse} */
   CreateTWeSeeRecognitionTask(data: CreateTWeSeeRecognitionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeSeeRecognitionTaskResponse>;
+  /** 开通 TWeSee 后付费服务 {@link CreateTWeSeeServiceRequest} {@link CreateTWeSeeServiceResponse} */
+  CreateTWeSeeService(data: CreateTWeSeeServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeSeeServiceResponse>;
   /** 新增TWeTalk连接配置信息 {@link CreateTWeTalkProductConfigRequest} {@link CreateTWeTalkProductConfigResponse} */
   CreateTWeTalkProductConfig(data: CreateTWeTalkProductConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeTalkProductConfigResponse>;
   /** 新增TWeTalk连接产品配置v2版 {@link CreateTWeTalkProductConfigV2Request} {@link CreateTWeTalkProductConfigV2Response} */
@@ -5369,6 +5395,8 @@ declare interface Iotexplorer {
   UpdateFirmware(data: UpdateFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFirmwareResponse>;
   /** 修改OTA模块 {@link UpdateOtaModuleRequest} {@link UpdateOtaModuleResponse} */
   UpdateOtaModule(data: UpdateOtaModuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOtaModuleResponse>;
+  /** 更新固件升级任务状态 {@link UpdateOtaTaskStatusRequest} {@link UpdateOtaTaskStatusResponse} */
+  UpdateOtaTaskStatus(data: UpdateOtaTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOtaTaskStatusResponse>;
   /** 创建固件版本信息 {@link UploadFirmwareRequest} {@link UploadFirmwareResponse} */
   UploadFirmware(data: UploadFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<UploadFirmwareResponse>;
 }

@@ -2042,6 +2042,14 @@ declare interface CreateDatasetResponse {
   RequestId?: string;
 }
 
+declare interface CreateExportRequest {
+}
+
+declare interface CreateExportResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateModelServiceAuthTokenRequest {
   /** 服务组 id */
   ServiceGroupId: string;
@@ -2356,6 +2364,16 @@ declare interface DeleteDatasetResponse {
   RequestId?: string;
 }
 
+declare interface DeleteExportRequest {
+  /** 日志下载任务的ID */
+  ExportId: string;
+}
+
+declare interface DeleteExportResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteModelServiceAuthTokenRequest {
   /** 服务组 id */
   ServiceGroupId: string;
@@ -2602,6 +2620,18 @@ declare interface DescribeEventsResponse {
   Events?: Event[] | null;
   /** 此次查询的事件的个数 */
   TotalCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeExportRequest {
+}
+
+declare interface DescribeExportResponse {
+  /** 日志文件大小 */
+  FileSize?: string;
+  /** 日志下载状态。Processing:导出正在进行中，Completed:导出完成，Failed:导出失败，Expired:日志导出已过期(三天有效期), Queuing 排队中 */
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3817,6 +3847,8 @@ declare interface Tione {
   ChatCompletion(data: ChatCompletionRequest, config?: AxiosRequestConfig): AxiosPromise<ChatCompletionResponse>;
   /** 创建数据集 {@link CreateDatasetRequest} {@link CreateDatasetResponse} */
   CreateDataset(data: CreateDatasetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatasetResponse>;
+  /** 创建日志下载任务 {@link CreateExportRequest} {@link CreateExportResponse} */
+  CreateExport(data?: CreateExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExportResponse>;
   /** 创建模型服务 {@link CreateModelServiceRequest} {@link CreateModelServiceResponse} */
   CreateModelService(data?: CreateModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelServiceResponse>;
   /** 在线服务创建 AuthToken {@link CreateModelServiceAuthTokenRequest} {@link CreateModelServiceAuthTokenResponse} */
@@ -3831,6 +3863,8 @@ declare interface Tione {
   CreateTrainingTask(data: CreateTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrainingTaskResponse>;
   /** 删除数据集 {@link DeleteDatasetRequest} {@link DeleteDatasetResponse} */
   DeleteDataset(data: DeleteDatasetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDatasetResponse>;
+  /** 删除日志下载任务 {@link DeleteExportRequest} {@link DeleteExportResponse} */
+  DeleteExport(data: DeleteExportRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteExportResponse>;
   /** 删除模型服务 {@link DeleteModelServiceRequest} {@link DeleteModelServiceResponse} */
   DeleteModelService(data: DeleteModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelServiceResponse>;
   /** 在线服务删除 AuthToken {@link DeleteModelServiceAuthTokenRequest} {@link DeleteModelServiceAuthTokenResponse} */
@@ -3861,6 +3895,8 @@ declare interface Tione {
   DescribeDatasets(data?: DescribeDatasetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasetsResponse>;
   /** 获取事件 {@link DescribeEventsRequest} {@link DescribeEventsResponse} */
   DescribeEvents(data: DescribeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventsResponse>;
+  /** 查询日志下载任务详情 {@link DescribeExportRequest} {@link DescribeExportResponse} */
+  DescribeExport(data?: DescribeExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportResponse>;
   /** @deprecated 查询推理镜像模板 {@link DescribeInferTemplatesRequest} {@link DescribeInferTemplatesResponse} */
   DescribeInferTemplates(data?: DescribeInferTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInferTemplatesResponse>;
   /** 获取日志 {@link DescribeLogsRequest} {@link DescribeLogsResponse} */

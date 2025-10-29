@@ -1718,6 +1718,10 @@ declare interface ImageRepoInfo {
   SensitiveInfoCnt?: number;
   /** 是否推荐处置 */
   RecommendedFix?: boolean;
+  /** 解决方案 */
+  Solution?: string;
+  /** 原因 */
+  Reason?: string;
 }
 
 /** 容器安全镜像仓库列表 */
@@ -2024,6 +2028,10 @@ declare interface ImagesInfo {
   IsLatestImage?: boolean;
   /** 是否推荐处置 */
   RecommendedFix?: boolean;
+  /** 解决方案 */
+  Solution?: string;
+  /** 原因 */
+  Reason?: string;
 }
 
 /** 容器安全镜像漏洞 */
@@ -4649,6 +4657,8 @@ declare interface CreateExportComplianceStatusListJobRequest {
   ExportAll: boolean;
   /** 要导出的资产ID列表或检测项ID列表，由ExportByAsset的取值决定。 */
   IdList?: number[];
+  /** 筛选 */
+  Filters?: RunTimeFilters[];
 }
 
 declare interface CreateExportComplianceStatusListJobResponse {
@@ -6012,6 +6022,10 @@ declare interface DescribeAssetImageDetailResponse {
   RemainScanTime?: number;
   /** 授权为：1，未授权为：0 */
   IsAuthorized?: number;
+  /** 解决方案 */
+  Solution?: string;
+  /** 原因 */
+  Reason?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6142,6 +6156,10 @@ declare interface DescribeAssetImageRegistryDetailResponse {
   SensitiveInfoCnt?: number;
   /** Id */
   Id?: number;
+  /** 解决方案 */
+  Solution?: string;
+  /** 原因 */
+  Reason?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6290,7 +6308,7 @@ declare interface DescribeAssetImageRegistryRiskInfoListResponse {
 
 declare interface DescribeAssetImageRegistryRiskListExportRequest {
   /** 导出字段 */
-  ExportField: string[];
+  ExportField?: string[];
   /** 需要返回的数量，默认为10，最大值为100 */
   Limit?: number;
   /** 偏移量，默认为0。 */
@@ -6306,6 +6324,8 @@ declare interface DescribeAssetImageRegistryRiskListExportRequest {
 declare interface DescribeAssetImageRegistryRiskListExportResponse {
   /** excel文件下载地址 */
   DownloadUrl?: string;
+  /** 导出任务id */
+  JobId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11214,7 +11234,7 @@ declare interface Tcss {
   /** 镜像仓库查询镜像高危行为列表 {@link DescribeAssetImageRegistryRiskInfoListRequest} {@link DescribeAssetImageRegistryRiskInfoListResponse} */
   DescribeAssetImageRegistryRiskInfoList(data?: DescribeAssetImageRegistryRiskInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryRiskInfoListResponse>;
   /** 镜像仓库敏感信息列表导出 {@link DescribeAssetImageRegistryRiskListExportRequest} {@link DescribeAssetImageRegistryRiskListExportResponse} */
-  DescribeAssetImageRegistryRiskListExport(data: DescribeAssetImageRegistryRiskListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryRiskListExportResponse>;
+  DescribeAssetImageRegistryRiskListExport(data?: DescribeAssetImageRegistryRiskListExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryRiskListExportResponse>;
   /** 镜像仓库查询一键镜像扫描状态 {@link DescribeAssetImageRegistryScanStatusOneKeyRequest} {@link DescribeAssetImageRegistryScanStatusOneKeyResponse} */
   DescribeAssetImageRegistryScanStatusOneKey(data?: DescribeAssetImageRegistryScanStatusOneKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetImageRegistryScanStatusOneKeyResponse>;
   /** 镜像仓库查询镜像统计信息 {@link DescribeAssetImageRegistrySummaryRequest} {@link DescribeAssetImageRegistrySummaryResponse} */

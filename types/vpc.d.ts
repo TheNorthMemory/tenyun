@@ -1002,13 +1002,13 @@ declare interface FilterObject {
 
 /** 流日志 */
 declare interface FlowLog {
-  /** 私用网络唯一ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口获取。 */
+  /** 私有网络唯一ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口获取。 */
   VpcId?: string;
   /** 流日志唯一ID。 */
   FlowLogId?: string;
   /** 流日志实例名字。 */
   FlowLogName?: string;
-  /** 流日志所属资源类型：VPC(私有网络)，SUBNET（子网），NETWORKINTERFACE（网卡），CCN（云联网），NAT（网络地址转化），DCG（专线网关）。 */
+  /** 流日志所属资源类型：VPC(私有网络)，SUBNET（子网），NETWORKINTERFACE（网卡），CCN（云联网），NAT（网络地址转换），DCG（专线网关）。 */
   ResourceType?: string;
   /** 资源唯一ID。 */
   ResourceId?: string;
@@ -1032,6 +1032,8 @@ declare interface FlowLog {
   FlowLogStorage?: FlowLogStorage;
   /** 流日志存储ID对应的地域信息。 */
   CloudLogRegion?: string;
+  /** 流日志采集周期，只支持CCN类型流日志。取值范围（单位s）：60， 300， 600。 */
+  Period?: number;
 }
 
 /** 流日志存储信息 */
@@ -4003,7 +4005,7 @@ declare interface CreateDirectConnectGatewayResponse {
 declare interface CreateFlowLogRequest {
   /** 流日志实例名称。长度为不超过60个字符。 */
   FlowLogName: string;
-  /** 流日志所属资源类型，VPC（私有网络），SUBNET（子网），NETWORKINTERFACE（网卡），CCN（云联网），NAT（网络地址转化），DCG（专线网关）。当选择VPC，SUBNET，CCN，DCG时，请通过工单加入白名单。 */
+  /** 流日志所属资源类型，NETWORKINTERFACE（网卡），CCN（云联网），NAT（网络地址转化），DCG（专线网关）。当选择CCN，DCG时，请通过工单加入白名单。 */
   ResourceType: string;
   /** 资源唯一ID。 */
   ResourceId: string;
@@ -4023,6 +4025,8 @@ declare interface CreateFlowLogRequest {
   FlowLogStorage?: FlowLogStorage;
   /** 流日志存储ID对应的地域，不传递默认为本地域。 */
   CloudLogRegion?: string;
+  /** 流日志采集周期，只支持CCN类型流日志。取值范围（单位s）：60， 300， 600。 */
+  Period?: number;
 }
 
 declare interface CreateFlowLogResponse {
@@ -5681,7 +5685,7 @@ declare interface DescribeAddressTemplatesResponse {
 declare interface DescribeAddressesRequest {
   /** 标识 EIP 的唯一 ID 列表。EIP 唯一 ID 形如：`eip-11112222`。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取AddressId。参数不支持同时指定`AddressIds`和`Filters.address-id`。 */
   AddressIds?: string[];
-  /** 每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。详细的过滤条件如下： address-id - String - 是否必填：否 - （过滤条件）按照 EIP 的唯一 ID 过滤。EIP 唯一 ID 形如：eip-11112222。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取address-id。 address-name - String - 是否必填：否 - （过滤条件）按照 EIP 名称过滤。不支持模糊过滤。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取address-name。 address-ip - String - 是否必填：否 - （过滤条件）按照 EIP 的 IP 地址过滤。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取address-ip。 address-status - String - 是否必填：否 - （过滤条件）按照 EIP 的状态过滤。状态包含：'CREATING'：创建中，'BINDING'：绑定中，'BIND'：已绑，'UNBINDING'：解绑中，'UNBIND'：未绑定，'OFFLINING'：下线中，'BIND_ENI'：绑定了ENI。 instance-id - String - 是否必填：否 - （过滤条件）按照 EIP 绑定的实例 ID 过滤。实例 ID 形如：ins-11112222。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取instance-id。 private-ip-address - String - 是否必填：否 - （过滤条件）按照 EIP 绑定的内网 IP 过滤。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取private-ip-address。 network-interface-id - String - 是否必填：否 - （过滤条件）按照 EIP 绑定的弹性网卡 ID 过滤。弹性网卡 ID 形如：eni-11112222。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取network-interface-id。 is-arrears - String - 是否必填：否 - （过滤条件）按照 EIP 是否欠费进行过滤。（TRUE：EIP 处于欠费状态|FALSE：EIP 费用状态正常） address-type - String - 是否必填：否 - （过滤条件）按照 IP类型 进行过滤。可选值：'WanIP'：普通公网 IP, 'EIP'：弹性公网 IP，'AnycastEIP'：加速 IP，'HighQualityEIP'：精品弹性公网 IP， 'AntiDDoSEIP'：高防 IP。默认值是'EIP'。 address-isp - String - 是否必填：否 - （过滤条件）按照 运营商类型 进行过滤。可选值：'BGP'：常规BGP，'CMCC'：移动，'CUCC'：联通, 'CTCC'：电信 dedicated-cluster-id - String - 是否必填：否 - （过滤条件）按照 CDC 的唯一 ID 过滤。CDC 唯一 ID 形如：cluster-11112222。 tag-key - String - 是否必填：否 - （过滤条件）按照标签键进行过滤。 tag-value - String - 是否必填：否 - （过滤条件）按照标签值进行过滤。 tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。tag-key使用具体的标签键进行替换。 */
+  /** 每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。详细的过滤条件如下： address-id - String - 是否必填：否 - （过滤条件）按照 EIP 的唯一 ID 过滤。EIP 唯一 ID 形如：eip-11112222。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取address-id。 address-name - String - 是否必填：否 - （过滤条件）按照 EIP 名称过滤。不支持模糊过滤。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取address-name。注意：当指定 address-name 参数时，仅支持按第一个传入的 address-name 参数执行查询操作。 address-ip - String - 是否必填：否 - （过滤条件）按照 EIP 的 IP 地址过滤。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取address-ip。 address-status - String - 是否必填：否 - （过滤条件）按照 EIP 的状态过滤。状态包含：'CREATING'：创建中，'BINDING'：绑定中，'BIND'：已绑，'UNBINDING'：解绑中，'UNBIND'：未绑定，'OFFLINING'：下线中，'BIND_ENI'：绑定了ENI。 instance-id - String - 是否必填：否 - （过滤条件）按照 EIP 绑定的实例 ID 过滤。实例 ID 形如：ins-11112222。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取instance-id。 private-ip-address - String - 是否必填：否 - （过滤条件）按照 EIP 绑定的内网 IP 过滤。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取private-ip-address。注意：当指定 private-ip-address 参数时，仅支持按第一个传入的 private-ip-address 参数执行查询操作。 network-interface-id - String - 是否必填：否 - （过滤条件）按照 EIP 绑定的弹性网卡 ID 过滤。弹性网卡 ID 形如：eni-11112222。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取network-interface-id。 is-arrears - String - 是否必填：否 - （过滤条件）按照 EIP 是否欠费进行过滤。（TRUE：EIP 处于欠费状态|FALSE：EIP 费用状态正常） address-type - String - 是否必填：否 - （过滤条件）按照 IP类型 进行过滤。可选值：'WanIP'：普通公网 IP, 'EIP'：弹性公网 IP，'AnycastEIP'：加速 IP，'HighQualityEIP'：精品弹性公网 IP， 'AntiDDoSEIP'：高防 IP。默认值是'EIP'。 address-isp - String - 是否必填：否 - （过滤条件）按照 运营商类型 进行过滤。可选值：'BGP'：常规BGP，'CMCC'：移动，'CUCC'：联通, 'CTCC'：电信 dedicated-cluster-id - String - 是否必填：否 - （过滤条件）按照 CDC 的唯一 ID 过滤。CDC 唯一 ID 形如：cluster-11112222。 tag-key - String - 是否必填：否 - （过滤条件）按照标签键进行过滤。 tag-value - String - 是否必填：否 - （过滤条件）按照标签值进行过滤。 tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。tag-key使用具体的标签键进行替换。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API 中的相关小节。 */
   Offset?: number;
@@ -7014,6 +7018,20 @@ declare interface DescribeSecurityGroupAssociationStatisticsRequest {
 declare interface DescribeSecurityGroupAssociationStatisticsResponse {
   /** 安全组关联实例统计。 */
   SecurityGroupAssociationStatisticsSet?: SecurityGroupAssociationStatistics[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSecurityGroupExpandedPoliciesRequest {
+  /** 安全组实例ID，例如：sg-33ocnj9n，可通过DescribeSecurityGroups获取。 */
+  SecurityGroupId: string;
+  /** 过滤条件。security-group-id - String - 规则中的安全组ID。ip - String - IP，支持IPV4和IPV6模糊匹配。address-module - String - IP地址模板或IP地址组模板ID。service-module - String - 协议端口模板或协议端口组模板ID。protocol-type - String - 安全组策略支持的协议，可选值：`TCP`, `UDP`, `ICMP`, `ICMPV6`, `GRE`, `ALL`。port - String - 是否必填：否 -协议端口，支持模糊匹配，值为`ALL`时，查询所有的端口。poly - String - 协议策略，可选值：`ALL`，所有策略；`ACCEPT`，允许；`DROP`，拒绝。direction - String - 协议规则，可选值：`ALL`，所有策略；`INBOUND`，入站规则；`OUTBOUND`，出站规则。description - String - 协议描述，该过滤条件支持模糊匹配。 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeSecurityGroupExpandedPoliciesResponse {
+  /** 安全组规则集合。 */
+  SecurityGroupPolicySet?: SecurityGroupPolicySet;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10465,6 +10483,8 @@ declare interface Vpc {
   DescribeRoutes(data?: DescribeRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoutesResponse>;
   /** 查询安全组关联实例统计 {@link DescribeSecurityGroupAssociationStatisticsRequest} {@link DescribeSecurityGroupAssociationStatisticsResponse} */
   DescribeSecurityGroupAssociationStatistics(data: DescribeSecurityGroupAssociationStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupAssociationStatisticsResponse>;
+  /** 查看参数模板展开后的安全组规则 {@link DescribeSecurityGroupExpandedPoliciesRequest} {@link DescribeSecurityGroupExpandedPoliciesResponse} */
+  DescribeSecurityGroupExpandedPolicies(data: DescribeSecurityGroupExpandedPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupExpandedPoliciesResponse>;
   /** 查询用户安全组配额 {@link DescribeSecurityGroupLimitsRequest} {@link DescribeSecurityGroupLimitsResponse} */
   DescribeSecurityGroupLimits(data?: DescribeSecurityGroupLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupLimitsResponse>;
   /** 查询安全组规则 {@link DescribeSecurityGroupPoliciesRequest} {@link DescribeSecurityGroupPoliciesResponse} */

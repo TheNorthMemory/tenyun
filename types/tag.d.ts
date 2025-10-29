@@ -66,7 +66,7 @@ declare interface TagInfo {
   Category?: string;
 }
 
-/** tag过滤数组多个是与的关系 */
+/** 标签键值过滤条件 */
 declare interface TagFilter {
   /** 标签键 */
   TagKey: string;
@@ -359,7 +359,7 @@ declare interface DescribeResourceTagsResponse {
 }
 
 declare interface DescribeResourcesByTagsRequest {
-  /** 标签过滤数组 */
+  /** 标签过滤数组，数量最多6个 */
   TagFilters: TagFilter[];
   /** 创建标签者uin */
   CreateUin?: number;
@@ -391,7 +391,7 @@ declare interface DescribeResourcesByTagsResponse {
 }
 
 declare interface DescribeResourcesByTagsUnionRequest {
-  /** 标签过滤数组 */
+  /** 标签过滤数组，数量最多六个 */
   TagFilters: TagFilter[];
   /** 创建标签者uin */
   CreateUin?: number;
