@@ -102,18 +102,6 @@ declare interface BindDetailItem {
   UconfigId?: string;
 }
 
-/** 配置绑定关系 */
-declare interface BindItem {
-  /** 配置绑定的CLB ID */
-  LoadBalancerId: string;
-  /** 配置绑定的监听器ID */
-  ListenerId: string;
-  /** 配置绑定的域名 */
-  Domain: string;
-  /** 配置绑定的规则 */
-  LocationId?: string;
-}
-
 /** 加入了12306黑名单的IP */
 declare interface BlockedIP {
   /** 黑名单IP */
@@ -1412,36 +1400,6 @@ declare interface ZoneResource {
   Egress?: string;
 }
 
-declare interface AddCustomizedConfigRequest {
-  /** 配置名字 */
-  ConfigName: string;
-  /** 配置类型，取值范围["CLB", "SERVER", "LOCATION"]，分别表示CLB配置，server配置，location配置。 */
-  ConfigType: string;
-  /** 配置内容 */
-  ConfigContent: string;
-  /** 标签 */
-  Tags?: TagInfo[];
-}
-
-declare interface AddCustomizedConfigResponse {
-  /** 配置ID */
-  ConfigId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface AssociateCustomizedConfigRequest {
-  /** 配置ID */
-  UconfigId: string;
-  /** 关联的server或location */
-  BindList: BindItem[];
-}
-
-declare interface AssociateCustomizedConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface AssociateTargetGroupsRequest {
   /** 绑定的关系数组，目标组类型需要一致。一次请求最多支持20个。 */
   Associations: TargetGroupAssociation[];
@@ -1637,6 +1595,16 @@ declare interface CreateListenerRequest {
   SslCloseSwitch?: boolean;
   /** 数据压缩模式。可选值：transparent（透传模式）、compatibility（兼容模式） */
   DataCompressMode?: string;
+  /** 重新调度功能，权重调为0开关，打开此开关，后端服务器权重调为0时触发重新调度。仅TCP/UDP监听器支持。 */
+  RescheduleTargetZeroWeight?: boolean;
+  /** 重新调度功能，健康检查异常开关，打开此开关，后端服务器健康检查异常时触发重新调度。仅TCP/UDP监听器支持。 */
+  RescheduleUnhealthy?: boolean;
+  /** 重新调度功能，扩容后端服务开关，打开此开关，后端服务器增加或者减少时触发重新调度。仅TCP/UDP监听器支持。 */
+  RescheduleExpandTarget?: boolean;
+  /** 重新调度触发开始时间，取值0~3600s。仅TCP/UDP监听器支持。 */
+  RescheduleStartTime?: number;
+  /** 重新调度触发持续时间，取值0~3600s。仅TCP/UDP监听器支持。 */
+  RescheduleInterval?: number;
 }
 
 declare interface CreateListenerResponse {
@@ -1661,7 +1629,7 @@ declare interface CreateLoadBalancerRequest {
   ProjectId?: number;
   /** 仅适用于公网负载均衡。IP版本，可取值：IPV4、IPV6、IPv6FullChain，不区分大小写，默认值 IPV4。说明：取值为IPV6表示为IPV6 NAT64版本；取值为IPv6FullChain，表示为IPv6版本。 */
   AddressIPVersion?: string;
-  /** 创建负载均衡的个数，默认值 1。创建个数不能超过帐号所能创建的最大值，默认创建最大值为20。 */
+  /** 创建负载均衡的个数，默认值 1。创建个数不能超过账号所能创建的最大值，默认创建最大值为20。 */
   Number?: number;
   /** 仅适用于公网且IP版本为IPv4的负载均衡。设置跨可用区容灾时的主可用区ID， 可用区 ID 和名称均支持，例如 100001 或 ap-guangzhou-1注：主可用区是需要承载流量的可用区，备可用区默认不承载流量，主可用区不可用时才使用备可用区。 */
   MasterZoneId?: string;
@@ -1808,16 +1776,6 @@ declare interface CreateTopicResponse {
   RequestId?: string;
 }
 
-declare interface DeleteCustomizedConfigRequest {
-  /** 删除的配置ID列表 */
-  UconfigIdList: string[];
-}
-
-declare interface DeleteCustomizedConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DeleteListenerRequest {
   /** 负载均衡实例ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口查询。 */
   LoadBalancerId: string;
@@ -1845,7 +1803,7 @@ declare interface DeleteLoadBalancerListenersResponse {
 declare interface DeleteLoadBalancerRequest {
   /** 要删除的负载均衡实例 ID 数组，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取，数组大小最大支持20。 */
   LoadBalancerIds: string[];
-  /** 是否强制删除clb。True表示强制删除，False表示不是强制删除，需要做拦截校验。默认为 False。以下几种情况会默认拦截删除操作，如果确认强制删除则需要传强制校验参数ForceDelete为True。1、删除后端绑定大于等于 20 个 RS 的实例时。2、删除后端有 RS 且 5 分钟 内“出/入带宽”峰值取大 > 10Mbps 的实例时。3、单地域内 5 分钟 内删除大于等于 30 个实例时。 */
+  /** 是否强制删除clb。true表示强制删除，false表示不是强制删除，需要做拦截校验。默认为false。以下几种情况会默认拦截删除操作，如果触发情况1、2但确认强制删除则需要传强制校验参数ForceDelete为true。1、删除后端绑定大于等于 20 个 RS 的实例时。2、删除后端有 RS 且 5 分钟 内“出/入带宽”峰值取大 > 10Mbps 的实例时。3、单地域内 5 分钟 内删除大于等于 30 个实例时。 */
   ForceDelete?: boolean;
 }
 
@@ -2510,18 +2468,6 @@ declare interface DescribeTaskStatusResponse {
   RequestId?: string;
 }
 
-declare interface DisassociateCustomizedConfigRequest {
-  /** 配置ID */
-  UconfigId: string;
-  /** 解绑的列表 */
-  BindList: BindItem[];
-}
-
-declare interface DisassociateCustomizedConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DisassociateTargetGroupsRequest {
   /** 待解绑的规则关系数组，支持批量解绑多个监听器，单次批量解除最多20个。 */
   Associations: TargetGroupAssociation[];
@@ -2650,20 +2596,6 @@ declare interface ModifyBlockIPListResponse {
   RequestId?: string;
 }
 
-declare interface ModifyCustomizedConfigRequest {
-  /** 配置名字 */
-  ConfigName: string;
-  /** 配置ID */
-  UconfigId: string;
-  /** 配置内容 */
-  ConfigContent: string;
-}
-
-declare interface ModifyCustomizedConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ModifyDomainAttributesRequest {
   /** 负载均衡实例ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口查询。 */
   LoadBalancerId: string;
@@ -2769,6 +2701,16 @@ declare interface ModifyListenerRequest {
   SnatEnable?: boolean;
   /** 数据压缩模式 */
   DataCompressMode?: string;
+  /** 重新调度功能，权重调为0开关，打开此开关，后端服务器权重调为0时触发重新调度。仅TCP/UDP监听器支持。 */
+  RescheduleTargetZeroWeight?: boolean;
+  /** 重新调度功能，健康检查异常开关，打开此开关，后端服务器健康检查异常时触发重新调度。仅TCP/UDP监听器支持。 */
+  RescheduleUnhealthy?: boolean;
+  /** 重新调度功能，扩容后端服务开关，打开此开关，后端服务器增加或者减少时触发重新调度。仅TCP/UDP监听器支持。 */
+  RescheduleExpandTarget?: boolean;
+  /** 重新调度触发开始时间，取值0~3600s。仅TCP/UDP监听器支持。 */
+  RescheduleStartTime?: number;
+  /** 重新调度触发持续时间，取值0~3600s。仅TCP/UDP监听器支持。 */
+  RescheduleInterval?: number;
 }
 
 declare interface ModifyListenerResponse {
@@ -3117,10 +3059,6 @@ declare interface SetSecurityGroupForLoadbalancersResponse {
 /** {@link Clb 负载均衡} */
 declare interface Clb {
   (): Versions;
-  /** 新增个性化配置 {@link AddCustomizedConfigRequest} {@link AddCustomizedConfigResponse} */
-  AddCustomizedConfig(data: AddCustomizedConfigRequest, config?: AxiosRequestConfig): AxiosPromise<AddCustomizedConfigResponse>;
-  /** 关联个性化配置 {@link AssociateCustomizedConfigRequest} {@link AssociateCustomizedConfigResponse} */
-  AssociateCustomizedConfig(data: AssociateCustomizedConfigRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateCustomizedConfigResponse>;
   /** 规则关联目标组 {@link AssociateTargetGroupsRequest} {@link AssociateTargetGroupsResponse} */
   AssociateTargetGroups(data: AssociateTargetGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateTargetGroupsResponse>;
   /** 自动生成负载均衡转发规则的重定向关系 {@link AutoRewriteRequest} {@link AutoRewriteResponse} */
@@ -3149,8 +3087,6 @@ declare interface Clb {
   CreateTargetGroup(data?: CreateTargetGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTargetGroupResponse>;
   /** 创建主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
-  /** 删除个性化配置 {@link DeleteCustomizedConfigRequest} {@link DeleteCustomizedConfigResponse} */
-  DeleteCustomizedConfig(data: DeleteCustomizedConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomizedConfigResponse>;
   /** 删除负载均衡监听器 {@link DeleteListenerRequest} {@link DeleteListenerResponse} */
   DeleteListener(data: DeleteListenerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteListenerResponse>;
   /** 删除负载均衡实例 {@link DeleteLoadBalancerRequest} {@link DeleteLoadBalancerResponse} */
@@ -3233,8 +3169,6 @@ declare interface Clb {
   DescribeTargets(data: DescribeTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetsResponse>;
   /** 查询异步任务状态 {@link DescribeTaskStatusRequest} {@link DescribeTaskStatusResponse} */
   DescribeTaskStatus(data?: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
-  /** 去关联个性化配置 {@link DisassociateCustomizedConfigRequest} {@link DisassociateCustomizedConfigResponse} */
-  DisassociateCustomizedConfig(data: DisassociateCustomizedConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateCustomizedConfigResponse>;
   /** 解除规则的目标组关联关系 {@link DisassociateTargetGroupsRequest} {@link DisassociateTargetGroupsResponse} */
   DisassociateTargetGroups(data: DisassociateTargetGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateTargetGroupsResponse>;
   /** 创建负载均衡实例询价 {@link InquiryPriceCreateLoadBalancerRequest} {@link InquiryPriceCreateLoadBalancerResponse} */
@@ -3251,8 +3185,6 @@ declare interface Clb {
   MigrateClassicalLoadBalancers(data: MigrateClassicalLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<MigrateClassicalLoadBalancersResponse>;
   /** 修改负载均衡的IP封禁黑名单列表 {@link ModifyBlockIPListRequest} {@link ModifyBlockIPListResponse} */
   ModifyBlockIPList(data: ModifyBlockIPListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockIPListResponse>;
-  /** 修改个性化配置 {@link ModifyCustomizedConfigRequest} {@link ModifyCustomizedConfigResponse} */
-  ModifyCustomizedConfig(data: ModifyCustomizedConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomizedConfigResponse>;
   /** 修改七层转发规则的域名 {@link ModifyDomainRequest} {@link ModifyDomainResponse} */
   ModifyDomain(data: ModifyDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainResponse>;
   /** 修改负载均衡七层监听器转发规则的域名级别属性 {@link ModifyDomainAttributesRequest} {@link ModifyDomainAttributesResponse} */

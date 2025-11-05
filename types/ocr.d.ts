@@ -816,16 +816,6 @@ declare interface GeneralMachineItem {
   Tax?: string;
 }
 
-/** 通用告警详情 */
-declare interface GeneralWarnInfo {
-  /** 是否存在该告警 */
-  IsWarn?: boolean;
-  /** 告警位置四点坐标 */
-  Polygon?: Polygon[];
-  /** 特殊判定，支持包括Finger：由手指导致的不完整，仅在不完整告警中返回 */
-  SpecificMatter?: string;
-}
-
 /** 组在图中的序号 */
 declare interface GroupInfo {
   /** 每一行的元素 */
@@ -1394,8 +1384,8 @@ declare interface OCRResult {
 declare interface OnlineTaxiItinerary {
   /** 发票名称 */
   Title?: string;
-  /** 识别出的字段名称(关键字) */
-  Content?: OtherInvoiceItem[];
+  /** 识别出的字段名称 */
+  Content?: OnlineTaxiItineraryInfo[];
 }
 
 /** 网约车行程单识别结果 */
@@ -3941,9 +3931,9 @@ declare interface HandwritingEssayOCRResponse {
 }
 
 declare interface HmtResidentPermitOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
   /** FRONT：有照片的一面（人像面），BACK：无照片的一面（国徽面），该参数如果不填或填错，将为您自动判断正反面。 */
   CardSide?: string;
@@ -4038,28 +4028,6 @@ declare interface ImageEnhancementResponse {
   ImageTag?: string;
   /** 图片数据，返回预处理后图像或原图像base64字符 */
   Image?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface InstitutionOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-}
-
-declare interface InstitutionOCRResponse {
-  /** 注册号 */
-  RegId?: string;
-  /** 有效期 */
-  ValidDate?: string;
-  /** 住所 */
-  Location?: string;
-  /** 名称 */
-  Name?: string;
-  /** 法定代表人 */
-  LegalPerson?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4296,26 +4264,6 @@ declare interface MixedInvoiceOCRResponse {
   RequestId?: string;
 }
 
-declare interface OrgCodeCertOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-}
-
-declare interface OrgCodeCertOCRResponse {
-  /** 代码 */
-  OrgCode?: string;
-  /** 机构名称 */
-  Name?: string;
-  /** 地址 */
-  Address?: string;
-  /** 有效期 */
-  ValidDate?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface PassportOCRRequest {
   /** 图片的 Base64 值。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -4394,30 +4342,6 @@ declare interface PermitOCRResponse {
   PortraitImage?: string;
   /** 返回类型 */
   Type?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface PropOwnerCertOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-}
-
-declare interface PropOwnerCertOCRResponse {
-  /** 房地产权利人 */
-  Owner?: string;
-  /** 共有情况 */
-  Possession?: string;
-  /** 登记时间 */
-  RegisterTime?: string;
-  /** 规划用途 */
-  Purpose?: string;
-  /** 房屋性质 */
-  Nature?: string;
-  /** 房地坐落 */
-  Location?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4618,44 +4542,6 @@ declare interface RecognizeEncryptedIDCardOCRResponse {
   RequestId?: string;
 }
 
-declare interface RecognizeForeignPermanentResidentIdCardRequest {
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。示例值：https://ocr-demo-1254418846.cos.ap-guangzhou.myqcloud.com/docume */
-  ImageUrl?: string;
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。 */
-  EnablePdf?: boolean;
-  /** 需要识别的PDF页面的对应页码，传入时仅支持PDF单页识别，当上传文件为PDF且EnablePdf参数值为true时有效，默认值为1。示例值：1 */
-  PdfPageNumber?: number;
-  /** 是否返回头像和位置坐标 */
-  CropPortrait?: boolean;
-}
-
-declare interface RecognizeForeignPermanentResidentIdCardResponse {
-  /** 中文姓名。 */
-  CnName?: string;
-  /** 英文名。 */
-  EnName?: string;
-  /** 性别。 */
-  Sex?: string;
-  /** 出生日期。规范格式为 XXXX年XX月XX日。 */
-  DateOfBirth?: string;
-  /** 国籍。 */
-  Nationality?: string;
-  /** 有效期限。 */
-  PeriodOfValidity?: string;
-  /** 证件号码。 */
-  No?: string;
-  /** 曾持证件号码。 */
-  PreviousNumber?: string;
-  /** 签发机关。 */
-  IssuedAuthority?: string;
-  /** 头像和坐标信息。 */
-  PortraitImageInfo?: PortraitImageInfo;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface RecognizeFormulaOCRRequest {
   /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
@@ -4746,34 +4632,6 @@ declare interface RecognizeGeneralInvoiceResponse {
   MixedInvoiceItems?: InvoiceItem[];
   /** PDF文件总页码 */
   TotalPDFCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface RecognizeGeneralTextImageWarnRequest {
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 示例值：false */
-  EnablePdf?: boolean;
-  /** 需要识别的PDF页面的对应页码，传入时仅支持PDF单页识别，当上传文件为PDF且EnablePdf参数值为true时有效，默认值为1。 示例值：1 */
-  PdfPageNumber?: number;
-  /** 支持的模板类型- General 通用告警（支持所有类型告警）- LicensePlate 车牌告警（支持翻拍告警） */
-  Type?: string;
-}
-
-declare interface RecognizeGeneralTextImageWarnResponse {
-  /** 复印告警信息 */
-  Copy?: GeneralWarnInfo;
-  /** 翻拍告警信息 */
-  Reprint?: GeneralWarnInfo;
-  /** 模糊告警信息 */
-  Blur?: GeneralWarnInfo;
-  /** 反光告警信息 */
-  Reflection?: GeneralWarnInfo;
-  /** 边框不完整告警信息 */
-  BorderIncomplete?: GeneralWarnInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5705,8 +5563,6 @@ declare interface Ocr {
   IDCardOCR(data?: IDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<IDCardOCRResponse>;
   /** 文本图像增强 {@link ImageEnhancementRequest} {@link ImageEnhancementResponse} */
   ImageEnhancement(data?: ImageEnhancementRequest, config?: AxiosRequestConfig): AxiosPromise<ImageEnhancementResponse>;
-  /** @deprecated 事业单位法人证书识别 {@link InstitutionOCRRequest} {@link InstitutionOCRResponse} */
-  InstitutionOCR(data?: InstitutionOCRRequest, config?: AxiosRequestConfig): AxiosPromise<InstitutionOCRResponse>;
   /** 保险单据识别 {@link InsuranceBillOCRRequest} {@link InsuranceBillOCRResponse} */
   InsuranceBillOCR(data?: InsuranceBillOCRRequest, config?: AxiosRequestConfig): AxiosPromise<InsuranceBillOCRResponse>;
   /** 通用机打发票识别 {@link InvoiceGeneralOCRRequest} {@link InvoiceGeneralOCRResponse} */
@@ -5723,14 +5579,10 @@ declare interface Ocr {
   MixedInvoiceDetect(data: MixedInvoiceDetectRequest, config?: AxiosRequestConfig): AxiosPromise<MixedInvoiceDetectResponse>;
   /** 混贴票据识别 {@link MixedInvoiceOCRRequest} {@link MixedInvoiceOCRResponse} */
   MixedInvoiceOCR(data?: MixedInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MixedInvoiceOCRResponse>;
-  /** @deprecated 组织机构代码证识别 {@link OrgCodeCertOCRRequest} {@link OrgCodeCertOCRResponse} */
-  OrgCodeCertOCR(data?: OrgCodeCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<OrgCodeCertOCRResponse>;
   /** 护照识别（中国大陆地区护照） {@link PassportOCRRequest} {@link PassportOCRResponse} */
   PassportOCR(data?: PassportOCRRequest, config?: AxiosRequestConfig): AxiosPromise<PassportOCRResponse>;
   /** 港澳台通行证识别 {@link PermitOCRRequest} {@link PermitOCRResponse} */
   PermitOCR(data?: PermitOCRRequest, config?: AxiosRequestConfig): AxiosPromise<PermitOCRResponse>;
-  /** @deprecated 房产证识别 {@link PropOwnerCertOCRRequest} {@link PropOwnerCertOCRResponse} */
-  PropOwnerCertOCR(data?: PropOwnerCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<PropOwnerCertOCRResponse>;
   /** 二维码和条形码识别 {@link QrcodeOCRRequest} {@link QrcodeOCRResponse} */
   QrcodeOCR(data?: QrcodeOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QrcodeOCRResponse>;
   /** 试题识别 {@link QuestionOCRRequest} {@link QuestionOCRResponse} */
@@ -5745,16 +5597,12 @@ declare interface Ocr {
   RecognizeContainerOCR(data?: RecognizeContainerOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeContainerOCRResponse>;
   /** 身份证识别（安全加密版） {@link RecognizeEncryptedIDCardOCRRequest} {@link RecognizeEncryptedIDCardOCRResponse} */
   RecognizeEncryptedIDCardOCR(data: RecognizeEncryptedIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeEncryptedIDCardOCRResponse>;
-  /** @deprecated 外国人永久居留身份证识别 {@link RecognizeForeignPermanentResidentIdCardRequest} {@link RecognizeForeignPermanentResidentIdCardResponse} */
-  RecognizeForeignPermanentResidentIdCard(data?: RecognizeForeignPermanentResidentIdCardRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeForeignPermanentResidentIdCardResponse>;
   /** 公式识别 {@link RecognizeFormulaOCRRequest} {@link RecognizeFormulaOCRResponse} */
   RecognizeFormulaOCR(data?: RecognizeFormulaOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeFormulaOCRResponse>;
   /** 通用卡证鉴伪 {@link RecognizeGeneralCardWarnRequest} {@link RecognizeGeneralCardWarnResponse} */
   RecognizeGeneralCardWarn(data?: RecognizeGeneralCardWarnRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeGeneralCardWarnResponse>;
   /** 通用票据识别（高级版） {@link RecognizeGeneralInvoiceRequest} {@link RecognizeGeneralInvoiceResponse} */
   RecognizeGeneralInvoice(data?: RecognizeGeneralInvoiceRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeGeneralInvoiceResponse>;
-  /** @deprecated 通用文本图像告警 {@link RecognizeGeneralTextImageWarnRequest} {@link RecognizeGeneralTextImageWarnResponse} */
-  RecognizeGeneralTextImageWarn(data?: RecognizeGeneralTextImageWarnRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeGeneralTextImageWarnResponse>;
   /** 健康码识别 {@link RecognizeHealthCodeOCRRequest} {@link RecognizeHealthCodeOCRResponse} */
   RecognizeHealthCodeOCR(data?: RecognizeHealthCodeOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeHealthCodeOCRResponse>;
   /** 医疗票据识别 {@link RecognizeMedicalInvoiceOCRRequest} {@link RecognizeMedicalInvoiceOCRResponse} */

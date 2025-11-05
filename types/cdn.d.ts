@@ -2038,6 +2038,8 @@ declare interface UrlRedirectRule {
   RedirectHost?: string | null;
   /** 指定是全路径配置还是任意匹配 */
   FullMatch?: boolean | null;
+  /** pattern是否支持正则 */
+  Regex?: boolean | null;
 }
 
 /** UserAgent黑白名单配置 */
@@ -2323,9 +2325,9 @@ declare interface DescribeBillingDataRequest {
 
 declare interface DescribeBillingDataResponse {
   /** 时间粒度，根据查询时传递参数指定：min：1 分钟粒度5min：5 分钟粒度hour：1 小时粒度day：天粒度 */
-  Interval: string;
+  Interval?: string;
   /** 数据明细 */
-  Data: ResourceBillingData[];
+  Data?: ResourceBillingData[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

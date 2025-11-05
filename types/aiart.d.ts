@@ -260,6 +260,30 @@ declare interface QueryMemeJobResponse {
   RequestId?: string;
 }
 
+declare interface QueryTextToImageJobRequest {
+  /** 任务 ID。 */
+  JobId: string;
+}
+
+declare interface QueryTextToImageJobResponse {
+  /** 当前任务状态码：1：等待中、2：运行中、4：处理失败、5：处理完成。 */
+  JobStatusCode?: string;
+  /** 当前任务状态：排队中、处理中、处理失败或者处理完成。 */
+  JobStatusMsg?: string;
+  /** 任务处理失败错误码。 */
+  JobErrorCode?: string;
+  /** 任务处理失败错误信息。 */
+  JobErrorMsg?: string;
+  /** 生成图 URL 列表，有效期1小时，请及时保存。 */
+  ResultImage?: string[];
+  /** 结果 detail 数组，Success 代表成功。 */
+  ResultDetails?: string[];
+  /** 对应 SubmitTextToImageProJob 接口中 Revise 参数。开启扩写时，返回扩写后的 prompt 文本。 如果关闭扩写，将直接返回原始输入的 prompt。 */
+  RevisedPrompt?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface QueryTextToImageProJobRequest {
   /** 任务 ID。 */
   JobId: string;
@@ -446,6 +470,28 @@ declare interface SubmitMemeJobResponse {
   RequestId?: string;
 }
 
+declare interface SubmitTextToImageJobRequest {
+  /** 文本描述。 算法将根据输入的文本智能生成与之相关的图像。 不能为空，推荐使用中文。最多可传1024个 utf-8 字符。 */
+  Prompt: string;
+  /** 生成图分辨率，仅支持以下分辨率：640:1408,704:1344,768:1280,832:1216,896:1152,960:1088,1024:1024,1088:960,1152:896,1216:832,1280:768,1344:704,1408:640 */
+  Resolution?: string;
+  /** 随机种子，默认随机。不传：随机种子生成。正数：固定种子生成。扩写开启时固定种子不生效，将保持随机。 */
+  Seed?: number;
+  /** 为生成结果图添加显式水印标识的开关，默认为1。 1：添加。 0：不添加。 其他数值：默认按1处理。 建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。 */
+  LogoAdd?: number;
+  /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。 */
+  LogoParam?: LogoParam;
+  /** 是否开启prompt改写，默认开启，改写预计会增加20s左右耗时。如果关闭改写，需要调用方自己接改写，否则对生图效果有较大影响，改写方法可以参考：[改写](https://github.com/Tencent-Hunyuan/HunyuanImage-3.0/tree/main/PE) */
+  Revise?: number;
+}
+
+declare interface SubmitTextToImageJobResponse {
+  /** 任务 ID。 */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SubmitTextToImageProJobRequest {
   /** 文本描述。 算法将根据输入的文本智能生成与之相关的图像。 不能为空，推荐使用中文。最多可传100个 utf-8 字符。 */
   Prompt: string;
@@ -571,6 +617,8 @@ declare interface Aiart {
   QueryGlamPicJob(data: QueryGlamPicJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryGlamPicJobResponse>;
   /** 查询表情动图生成任务 {@link QueryMemeJobRequest} {@link QueryMemeJobResponse} */
   QueryMemeJob(data: QueryMemeJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMemeJobResponse>;
+  /** 查询混元生图3.0任务 {@link QueryTextToImageJobRequest} {@link QueryTextToImageJobResponse} */
+  QueryTextToImageJob(data: QueryTextToImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryTextToImageJobResponse>;
   /** 查询文生图（高级版）任务（即将下线） {@link QueryTextToImageProJobRequest} {@link QueryTextToImageProJobResponse} */
   QueryTextToImageProJob(data: QueryTextToImageProJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryTextToImageProJobResponse>;
   /** 查询训练写真模型任务 {@link QueryTrainPortraitModelJobRequest} {@link QueryTrainPortraitModelJobResponse} */
@@ -587,6 +635,8 @@ declare interface Aiart {
   SubmitGlamPicJob(data: SubmitGlamPicJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitGlamPicJobResponse>;
   /** 提交表情动图生成任务 {@link SubmitMemeJobRequest} {@link SubmitMemeJobResponse} */
   SubmitMemeJob(data: SubmitMemeJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitMemeJobResponse>;
+  /** 提交混元生图3.0任务 {@link SubmitTextToImageJobRequest} {@link SubmitTextToImageJobResponse} */
+  SubmitTextToImageJob(data: SubmitTextToImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTextToImageJobResponse>;
   /** 提交文生图（高级版）任务（即将下线） {@link SubmitTextToImageProJobRequest} {@link SubmitTextToImageProJobResponse} */
   SubmitTextToImageProJob(data: SubmitTextToImageProJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTextToImageProJobResponse>;
   /** 提交训练写真模型任务 {@link SubmitTrainPortraitModelJobRequest} {@link SubmitTrainPortraitModelJobResponse} */

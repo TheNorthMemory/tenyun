@@ -58,7 +58,7 @@ declare interface DescribeSignListStatus {
   SignId?: number;
   /** 是否国际/港澳台短信，其中0表示国内短信，1表示国际/港澳台短信。 */
   International?: number;
-  /** 申请签名状态，其中0表示审核通过且已生效，1表示审核中，2表示审核通过待生效，-1表示审核未通过或审核失败。 */
+  /** 签名状态，其中：国内短信0表示签名可用，1表示审核中，2表示审核通过待生效，-1表示审核未通过、审核失败或未完成首次报备等原因导致签名不可用。具体可参考 [国内短信签名状态值说明](https://cloud.tencent.com/document/product/382/39022)。国际短信0表示审核通过且已生效，1表示审核中，2表示审核通过待生效，-1表示审核未通过或审核失败。 */
   StatusCode?: number;
   /** 审核回复，审核人员审核后给出的回复，通常是审核未通过的原因。 */
   ReviewReply?: string;
@@ -152,7 +152,7 @@ declare interface PullSmsSendStatus {
   PhoneNumber?: string;
   /** 本次发送标识 ID。 */
   SerialNo?: string;
-  /** 实际是否收到短信接收状态，SUCCESS（成功）、FAIL（失败）。 */
+  /** 实际是否收到的短信接收状态，SUCCESS（下发成功）、FAIL（下发失败）。注：仅当运营商有返回短信接收状态时回包中才会有状态数据。 */
   ReportStatus?: string;
   /** 用户接收短信状态描述。 */
   Description?: string;
@@ -178,7 +178,7 @@ declare interface SendStatus {
   Fee?: number;
   /** 用户 session 内容。 */
   SessionContext?: string;
-  /** 短信请求错误码，具体含义请参考 [错误码](https://cloud.tencent.com/document/api/382/55981)，发送成功返回 "Ok"。 */
+  /** 短信请求错误码，具体含义请参考 [错误码](https://cloud.tencent.com/document/product/382/59177)，发送成功返回 "Ok"。 */
   Code?: string;
   /** 短信请求错误码描述。 */
   Message?: string;
@@ -505,12 +505,12 @@ declare interface SendSmsRequest {
   ExtendCode?: string;
   /** 用户的 session 内容，可以携带用户侧 ID 等上下文信息，server 会原样返回。注意长度需小于512字节。 */
   SessionContext?: string;
-  /** 国内短信无需填写该项；国际/港澳台短信已申请独立 SenderId 需要填写该字段，默认使用公共 SenderId，无需填写该字段。注：月度使用量达到指定量级可申请独立 SenderId 使用，详情请联系 [腾讯云短信小助手](https://cloud.tencent.com/document/product/382/3773)。 */
+  /** 国际/港澳台短信 Sender ID。可参考 [Sender ID 说明](https://cloud.tencent.com/document/product/382/102831)。注：国内短信无需填写该项；国际/港澳台短信已申请独立 SenderId 需要填写该字段，默认使用公共 SenderId，无需填写该字段。 */
   SenderId?: string;
 }
 
 declare interface SendSmsResponse {
-  /** 短信发送状态。 */
+  /** 短信发送状态。注：可参考 示例 ，包含短信发送成功和发送失败的输出示例。 */
   SendStatusSet?: SendStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -617,7 +617,7 @@ declare namespace V20190711 {
     SignId?: number;
     /** 是否国际/港澳台短信：0：表示国内短信。1：表示国际/港澳台短信。 */
     International?: number;
-    /** 申请签名状态。其中0表示审核通过且已生效，1表示审核中，2表示审核通过待生效，-1表示审核未通过或审核失败。 */
+    /** 签名状态，其中：国内短信0表示签名可用，1表示审核中，2表示审核通过待生效，-1表示审核未通过、审核失败或未完成首次报备等原因导致签名不可用。具体可参考 [国内短信签名状态值说明](https://cloud.tencent.com/document/product/382/39022)。国际短信0表示审核通过且已生效，1表示审核中，2表示审核通过待生效，-1表示审核未通过或审核失败。 */
     StatusCode?: number;
     /** 审核回复，审核人员审核后给出的回复，通常是审核未通过的原因。 */
     ReviewReply?: string;
@@ -695,7 +695,7 @@ declare namespace V20190711 {
     PhoneNumber?: string;
     /** 本次发送标识 ID。 */
     SerialNo?: string;
-    /** 实际是否收到短信接收状态，SUCCESS（成功）、FAIL（失败）。 */
+    /** 实际是否收到的短信接收状态，SUCCESS（下发成功）、FAIL（下发失败）。注：仅当运营商有返回短信接收状态时回包中才会有状态数据。 */
     ReportStatus?: string;
     /** 用户接收短信状态描述。 */
     Description?: string;
@@ -711,7 +711,7 @@ declare namespace V20190711 {
     Fee?: number;
     /** 用户Session内容。 */
     SessionContext?: string;
-    /** 短信请求错误码，具体含义请参考错误码。 */
+    /** 短信请求错误码，具体含义请参考 [错误码](https://cloud.tencent.com/document/product/382/59177)。 */
     Code?: string;
     /** 短信请求错误码描述。 */
     Message?: string;
@@ -1012,12 +1012,12 @@ declare namespace V20190711 {
     ExtendCode?: string;
     /** 用户的 session 内容，可以携带用户侧 ID 等上下文信息，server 会原样返回。注意长度需小于512字节。 */
     SessionContext?: string;
-    /** 国内短信无senderid，无需填写该项；若需开通国际/港澳台短信senderid，请联系smshelper。 */
+    /** 国际/港澳台短信 Sender ID。可参考 [Sender ID 说明](https://cloud.tencent.com/document/product/382/102831)。注：国内短信无需填写该项；国际/港澳台短信已申请独立 SenderId 需要填写该字段，默认使用公共 SenderId，无需填写该字段。 */
     SenderId?: string;
   }
 
   interface SendSmsResponse {
-    /** 短信发送状态。 */
+    /** 短信发送状态。注：可参考 示例 ，包含短信发送成功和发送失败的输出示例。 */
     SendStatusSet?: SendStatus[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;

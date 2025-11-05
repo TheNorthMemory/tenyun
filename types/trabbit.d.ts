@@ -104,6 +104,8 @@ declare interface RabbitMQClusterInfo {
   SendReceiveRatio?: number;
   /** 消息轨迹保留时间，单位小时 */
   TraceTime?: number;
+  /** 实例标签列表 */
+  Tags?: RabbitMQServerlessTag[];
 }
 
 /** RabbitMQ集群规格信息 */
@@ -146,6 +148,16 @@ declare interface RabbitMQConnection {
   Protocol?: string;
   /** 连接下的channel数 */
   Channels?: number;
+  /** 入流量大小，单位 bytes */
+  IncomingBytes?: number;
+  /** 出流量大小，单位bytes */
+  OutgoingBytes?: number;
+  /** 心跳间隔时间，默认60s */
+  Heartbeat?: number;
+  /** 一个链接最大的channel数，默认1024 */
+  MaxChannel?: number;
+  /** 空闲时间点 */
+  IdleSince?: string;
 }
 
 /** 队列消费者列表信息 */
@@ -154,6 +166,20 @@ declare interface RabbitMQConsumersListInfo {
   ClientIp?: string;
   /** 消费者Tag */
   ConsumerTag?: string;
+  /** 消费目标队列 */
+  QueueName?: string;
+  /** 是否需要消费者手动 ack */
+  AckRequired?: boolean;
+  /** 消费者 qos 值 */
+  PrefetchCount?: number;
+  /** 消费者状态 */
+  Active?: string;
+  /** 最后一次投递消息时间 */
+  LastDeliveredTime?: string;
+  /** 消费者未确认消息数 */
+  UnAckMsgCount?: number;
+  /** consumer 所属的 channel */
+  ChannelName?: string;
 }
 
 /** RabbitMQ exchange列表成员信息 */
@@ -328,6 +354,16 @@ declare interface RabbitMQServerlessInstance {
   IsolatedTime?: number;
   /** Serverless 扩展字段 */
   ServerlessExt?: string;
+  /** 实例标签列表 */
+  Tags?: RabbitMQServerlessTag[];
+}
+
+/** 标签 */
+declare interface RabbitMQServerlessTag {
+  /** 标签键 */
+  TagKey?: string;
+  /** 标签值 */
+  TagValue?: string;
 }
 
 /** 公网白名单信息 */
@@ -715,6 +751,16 @@ declare interface DescribeRabbitMQServerlessConnectionRequest {
   InstanceId: string;
   /** vhost名 */
   VirtualHost: string;
+  /** 按哪个字段排序，支持：channel(channel数),incoming_bytes(入流量大小),outgoing_bytes(出流量大小) */
+  SortElement?: string;
+  /** 排序方式：ASC,DESC */
+  SortType?: string;
+  /** 分页参数，从第几条数据开始 */
+  Offset?: number;
+  /** 一页大小 */
+  Limit?: number;
+  /** 连接名模糊搜索 */
+  Name?: string;
 }
 
 declare interface DescribeRabbitMQServerlessConnectionResponse {
@@ -730,15 +776,17 @@ declare interface DescribeRabbitMQServerlessConsumersRequest {
   /** 实例Id */
   InstanceId: string;
   /** Vhost参数 */
-  VirtualHost: string;
+  VirtualHost?: string;
   /** 队列名 */
-  QueueName: string;
+  QueueName?: string;
   /** 分页Limit */
   Limit?: number;
   /** 分页Offset */
   Offset?: number;
   /** 搜索关键词 */
   SearchWord?: string;
+  /** channelId */
+  Channel?: string;
 }
 
 declare interface DescribeRabbitMQServerlessConsumersResponse {
@@ -1063,6 +1111,10 @@ declare interface ModifyRabbitMQServerlessInstanceRequest {
   TraceFlag?: boolean;
   /** 限流生产消费比例 */
   SendReceiveRatio?: number;
+  /** 是否删除所有标签，默认为false */
+  DeleteAllTags?: boolean;
+  /** 修改的实例标签列表 */
+  InstanceTags?: RabbitMQServerlessTag[];
 }
 
 declare interface ModifyRabbitMQServerlessInstanceResponse {
@@ -1101,6 +1153,12 @@ declare interface ModifyRabbitMQServerlessQueueRequest {
   QueueName: string;
   /** 新修改的备注 */
   Remark?: string;
+  /** MessageTTL参数单位ms,classic类型专用 */
+  MessageTTL?: number;
+  /** DeadLetterExchange参数。可将过期或被拒绝的消息投往指定的死信 exchange。 */
+  DeadLetterExchange?: string;
+  /** DeadLetterRoutingKey参数。只能包含字母、数字、"."、"-"，"@"，"_" */
+  DeadLetterRoutingKey?: string;
 }
 
 declare interface ModifyRabbitMQServerlessQueueResponse {

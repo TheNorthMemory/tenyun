@@ -848,6 +848,8 @@ declare interface UserInfo {
   IsSelected?: boolean;
   /** 用户密码 */
   Password?: string;
+  /** 下次登录是否需要重置密码， true: 需要重置密码， false：不需要重置密码 */
+  NeedResetPassword?: boolean;
 }
 
 /** 用户同步信息 */
@@ -1425,6 +1427,8 @@ declare interface CreateUserRequest {
   UserStatus?: string;
   /** 用户类型 Manual：手动创建，Synchronized：外部导入 */
   UserType?: string;
+  /** 是否需要重置密码： true: 需要重置 false: 不需要重置密码。 默认false */
+  NeedResetPassword?: boolean;
 }
 
 declare interface CreateUserResponse {
@@ -3209,6 +3213,8 @@ declare interface UpdateUserRequest {
   NewDescription?: string;
   /** 用户的电子邮箱。 */
   NewEmail?: string;
+  /** 是否需要重置密码 */
+  NeedResetPassword?: boolean;
 }
 
 declare interface UpdateUserResponse {

@@ -923,7 +923,7 @@ declare interface OrderFlowPackageRequest {
   DeviceList: string[];
   /** 是否自动续费，该选项和流量截断冲突，只能开启一个 */
   AutoRenewFlag: boolean;
-  /** 区域标识，0：国内，1：国外 */
+  /** 区域标识，0：中国境内，1：中国境外 */
   PackageRegion: number;
   /** 是否开启流量截断功能，该选项和自动续费冲突 */
   FlowTruncFlag?: boolean;

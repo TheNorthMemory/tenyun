@@ -796,23 +796,23 @@ declare interface DestinationIpPortTranslationNatRule {
 declare interface DestinationIpPortTranslationNatRuleDiff {
   /** 协议 */
   Protocol: string;
-  /** 源端口 */
+  /** 映射前端口 */
   OriginalPort: number;
-  /** 源IP */
+  /** 映射前IP */
   OriginalIp: string;
-  /** 目的端口 */
+  /** 映射后端口 */
   TranslationPort: number;
-  /** 目的IP */
+  /** 映射后IP */
   TranslationIp: string;
   /** 旧协议。 */
   OldProtocol: string;
-  /** 旧源端口 */
+  /** 旧映射前端口 */
   OldOriginalPort: number;
-  /** 旧源IP */
+  /** 旧映射前IP */
   OldOriginalIp: string;
-  /** 旧目的端口 */
+  /** 旧映射后端口 */
   OldTranslationPort: number;
-  /** 旧目的IP */
+  /** 旧映射后IP */
   OldTranslationIp: string;
   /** 描述 */
   Description?: string;
@@ -1470,15 +1470,15 @@ declare interface ItemPrice {
 
 /** 本端目的IP端口转换复杂结构 */
 declare interface LocalDestinationIpPortTranslationNatRule {
-  /** 协议 */
+  /** 协议，包含TCP和UDP */
   Protocol: string;
-  /** 源端口 */
+  /** 映射前端口 */
   OriginalPort: number;
-  /** 源IP */
+  /** 映射前IP */
   OriginalIp: string;
-  /** 目的端口 */
+  /** 映射后端口 */
   TranslationPort: number;
-  /** 目的IP */
+  /** 映射后IP */
   TranslationIp: string;
   /** 描述 */
   Description?: string;
@@ -1938,13 +1938,13 @@ declare interface PrivateNatCrossDomainInfo {
 declare interface PrivateNatDestinationIpPortTranslationNatRule {
   /** 协议 */
   Protocol: string;
-  /** 原端口 */
+  /** 映射前端口 */
   OriginalPort: number;
-  /** 原IP */
+  /** 映射前IP */
   OriginalIp: string;
-  /** 映射端口 */
+  /** 映射后端口 */
   TranslationPort: number;
-  /** 映射IP */
+  /** 映射后IP */
   TranslationIp: string;
   /** 描述 */
   Description?: string;
@@ -1972,7 +1972,7 @@ declare interface PrivateNatGateway {
   TagSet?: Tag[];
   /** 专线网关唯一`ID` */
   DirectConnectGatewayIds?: string[];
-  /** 私网网关类型 */
+  /** 私网网关类型。可选类型："DCG","VPC","CCN"，分别对应专线网关、私有网络、云联网。 */
   NatType?: string;
   /** 私网NAT跨域信息 */
   CrossDomainInfo?: PrivateNatCrossDomainInfo;
@@ -2544,7 +2544,7 @@ declare interface SnapshotPolicy {
 declare interface SourceIpTranslationNatRule {
   /** 资源ID，如果ResourceType为USERDEFINED，可以为空字符串 */
   ResourceId: string;
-  /** 资源类型，目前包含SUBNET、NETWORKINTERFACE、USERDEFINED */
+  /** 资源类型，目前包含SUBNET、NETWORKINTERFACE、USERDEFINED，分别表示子网、网卡、自定义网段 */
   ResourceType: string;
   /** 源IP/网段 */
   PrivateIpAddress: string;
@@ -2847,7 +2847,7 @@ declare interface TranslationAclRule {
   /** 目的地址。 */
   DestinationCidr: string;
   /** ACL规则`ID`。 */
-  AclRuleId?: number;
+  AclRuleId: number;
   /** 是否匹配。 */
   Action?: number;
   /** ACL规则描述 */
@@ -2858,13 +2858,13 @@ declare interface TranslationAclRule {
 declare interface TranslationNatRule {
   /** 转换规则目标，可选值"LOCAL","PEER"。 */
   TranslationDirection: string;
-  /** 转换规则类型，可选值"NETWORK_LAYER","TRANSPORT_LAYER"。 */
+  /** 转换规则类型，可选值"NETWORK_LAYER","TRANSPORT_LAYER"。分别对应三层和四层。 */
   TranslationType: string;
-  /** 转换`IP`,当转换规则类型为四层时为`IP`池。 */
+  /** 映射后IP,当转换规则类型为四层时为`IP`池。 */
   TranslationIp: string;
   /** 转换规则描述。 */
   Description: string;
-  /** 源`IP`,当转换规则类型为三层时有效。 */
+  /** 映射前IP,当转换规则类型为三层时有效。 */
   OriginalIp?: string;
   /** 创建时间。 */
   CreateTime?: string;
@@ -2876,17 +2876,17 @@ declare interface TranslationNatRule {
 declare interface TranslationNatRuleDiff {
   /** 转发规则目标，可选值"LOCAL","PEER"。 */
   TranslationDirection: string;
-  /** 转发规则类型，可选值"NETWORK_LAYER","TRANSPORT_LAYER"。 */
+  /** 转换规则类型，可选值"NETWORK_LAYER","TRANSPORT_LAYER"。分别对应三层、四层。 */
   TranslationType: string;
-  /** 转发规则映射`IP`,当转发规则类型为四层时为`IP`池 */
+  /** 转发规则映射后`IP`,当转发规则类型为四层时为`IP`池 */
   TranslationIp: string;
-  /** 转发规则描述。 */
-  Description: string;
-  /** 旧转发规则映射`IP`,当转发规则类型为四层时为`IP`池 */
+  /** 旧转发规则映射后`IP`,当转发规则类型为四层时为`IP`池 */
   OldTranslationIp: string;
-  /** 新转发规则源`IP`,当转发规则类型为三层时有效 */
+  /** 转发规则描述。 */
+  Description?: string;
+  /** 新转发规则映射前`IP`,当转发规则类型为三层时有效 */
   OriginalIp?: string;
-  /** 旧转发规则源`IP`,当转发规则类型为三层时有效 */
+  /** 旧转发规则映射前`IP`,当转发规则类型为三层时有效 */
   OldOriginalIp?: string;
 }
 
@@ -2894,13 +2894,13 @@ declare interface TranslationNatRuleDiff {
 declare interface TranslationNatRuleInput {
   /** 转换规则目标，可选值"LOCAL","PEER"。 */
   TranslationDirection: string;
-  /** 转换规则类型，可选值"NETWORK_LAYER","TRANSPORT_LAYER"。 */
+  /** 转换规则类型，可选值"NETWORK_LAYER","TRANSPORT_LAYER"。分别对应三层、四层。 */
   TranslationType: string;
-  /** 转换`IP`,当转换规则类型为四层时为`IP`池。 */
+  /** 映射后`IP`,当转换规则类型为四层时为`IP`池。 */
   TranslationIp: string;
   /** 转换规则描述。 */
-  Description: string;
-  /** 源`IP`,当转换规则类型为三层时有效。 */
+  Description?: string;
+  /** 映射前`IP`,当转换规则类型为三层时有效。 */
   OriginalIp?: string;
 }
 
@@ -2956,6 +2956,8 @@ declare interface VpcInfo {
   TagSet?: Tag[];
   /** 辅助CIDR */
   AssistantCidrSet?: AssistantCidr[];
+  /** vpc关联云联网时路由发布策略， true：开启cidr路由发布，false：开启subnet子网路由发布。创建vpc时默认为子网路由发布，当选择cidr路由发布时,请通过工单加入白名单 */
+  EnableRouteVpcPublish?: boolean;
   /** 返回多运营商IPv6 Cidr Block */
   Ipv6CidrBlockSet?: ISPIPv6CidrBlock[];
 }
@@ -4775,6 +4777,8 @@ declare interface CreateVpcRequest {
   DomainName?: string;
   /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
   Tags?: Tag[];
+  /** vpc关联云联网时路由发布策略， true：开启cidr路由发布，false：开启subnet子网路由发布。创建vpc时默认为子网路由发布，当选择cidr路由发布时,请通过工单加入白名单 */
+  EnableRouteVpcPublish?: boolean;
 }
 
 declare interface CreateVpcResponse {
@@ -9197,6 +9201,8 @@ declare interface ModifyVpcAttributeRequest {
   DnsServers?: string[];
   /** 域名。 */
   DomainName?: string;
+  /** vpc关联云联网时路由发布策略， true：开启cidr路由发布，false：开启subnet子网路由发布。创建vpc时默认为子网路由发布，当选择cidr路由发布时,请通过工单加入白名单 */
+  EnableRouteVpcPublish?: boolean;
   /** 发布cdc 子网到云联网的开关。true: 发布, false: 不发布。 */
   EnableCdcPublish?: boolean;
 }

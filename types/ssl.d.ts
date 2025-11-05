@@ -1447,6 +1447,8 @@ declare interface CertificateInfoSubmitRequest {
   CaType?: string;
   /** 签名算法 */
   SignAlgo?: string;
+  /** 是否使用交叉根证书 */
+  UseCrossSignRoot?: boolean;
 }
 
 declare interface CertificateInfoSubmitResponse {
@@ -1870,6 +1872,8 @@ declare interface DescribeCertificateDetailResponse {
   DomainType?: number;
   /** 证书类型，DV（域名型）；OV（企业型）；EV（增强型） */
   CertType?: string;
+  /** 是否使用交叉根 */
+  UseCrossSignRoot?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2707,6 +2711,8 @@ declare interface ReplaceCertificateRequest {
   CertCSRKeyParameter?: string;
   /** 签名算法 */
   SignAlgo?: string;
+  /** 是否使用交叉根证书，默认为true */
+  UseCrossSignRoot?: boolean;
 }
 
 declare interface ReplaceCertificateResponse {

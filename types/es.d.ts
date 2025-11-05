@@ -1121,6 +1121,8 @@ declare namespace V20180416 {
     ShowKibanaIpPort?: string;
     /** 是否为CDZLite可用区 */
     IsCdzLite?: boolean;
+    /** 集群内网tcp地址 */
+    EsPrivateTcpUrl?: string;
   }
 
   /** ES集群日志详细信息 */
@@ -3194,6 +3196,8 @@ declare namespace V20180416 {
     DiskSize?: number;
     /** 可维护时间段 */
     OperationDuration?: OperationDurationUpdated;
+    /** 多可用区部署 */
+    MultiZoneInfo?: ZoneDetail[];
   }
 
   interface UpdateLogstashInstanceResponse {

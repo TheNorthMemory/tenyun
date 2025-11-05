@@ -1460,6 +1460,10 @@ declare interface KafkaParam {
   KeepPartition?: boolean;
   /** 正则匹配Topic列表 */
   TopicRegularExpression?: string;
+  /** Topic 前缀 */
+  Prefix?: string;
+  /** Topic前缀分隔符 */
+  Separator?: string;
 }
 
 /** CVM和IP 信息列表 */
@@ -4448,6 +4452,18 @@ declare interface ModifyTopicAttributesResponse {
   RequestId?: string;
 }
 
+declare interface PauseDatahubTaskRequest {
+  /** 任务id */
+  TaskId: string;
+}
+
+declare interface PauseDatahubTaskResponse {
+  /** 任务id */
+  Result?: DatahubTaskIdRes | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RenewCkafkaInstanceRequest {
   /** ckafka集群实例Id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取 */
   InstanceId: string;
@@ -4458,6 +4474,30 @@ declare interface RenewCkafkaInstanceRequest {
 declare interface RenewCkafkaInstanceResponse {
   /** 返回值 */
   Result?: RenewCkafkaInstanceResp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RestartDatahubTaskRequest {
+  /** 任务id */
+  TaskId: string;
+}
+
+declare interface RestartDatahubTaskResponse {
+  /** 任务id */
+  Result?: DatahubTaskIdRes | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ResumeDatahubTaskRequest {
+  /** 任务id */
+  TaskId: string;
+}
+
+declare interface ResumeDatahubTaskResponse {
+  /** 任务id */
+  Result?: DatahubTaskIdRes | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4737,8 +4777,14 @@ declare interface Ckafka {
   ModifyRoutineMaintenanceTask(data: ModifyRoutineMaintenanceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoutineMaintenanceTaskResponse>;
   /** 设置主题属性 {@link ModifyTopicAttributesRequest} {@link ModifyTopicAttributesResponse} */
   ModifyTopicAttributes(data: ModifyTopicAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicAttributesResponse>;
+  /** 暂停Dip任务 {@link PauseDatahubTaskRequest} {@link PauseDatahubTaskResponse} */
+  PauseDatahubTask(data: PauseDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<PauseDatahubTaskResponse>;
   /** 续费Ckafka实例 {@link RenewCkafkaInstanceRequest} {@link RenewCkafkaInstanceResponse} */
   RenewCkafkaInstance(data: RenewCkafkaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RenewCkafkaInstanceResponse>;
+  /** 重启Datahub任务 {@link RestartDatahubTaskRequest} {@link RestartDatahubTaskResponse} */
+  RestartDatahubTask(data: RestartDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RestartDatahubTaskResponse>;
+  /** 恢复Dip任务 {@link ResumeDatahubTaskRequest} {@link ResumeDatahubTaskResponse} */
+  ResumeDatahubTask(data: ResumeDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeDatahubTaskResponse>;
   /** HTTP发送消息 {@link SendMessageRequest} {@link SendMessageResponse} */
   SendMessage(data: SendMessageRequest, config?: AxiosRequestConfig): AxiosPromise<SendMessageResponse>;
 }

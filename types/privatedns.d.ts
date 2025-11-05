@@ -387,7 +387,7 @@ declare interface CreateInboundEndpointResponse {
 }
 
 declare interface CreatePrivateDNSAccountRequest {
-  /** 私有域解析账号 */
+  /** 私有域解析账号，该账号不能与主账号一致且需要子账号授权 */
   Account: PrivateDNSAccount;
 }
 
@@ -913,7 +913,7 @@ declare interface Privatedns {
   CreateForwardRule(data: CreateForwardRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateForwardRuleResponse>;
   /** 创建入站终端节点 {@link CreateInboundEndpointRequest} {@link CreateInboundEndpointResponse} */
   CreateInboundEndpoint(data: CreateInboundEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInboundEndpointResponse>;
-  /** 添加绑定账号 {@link CreatePrivateDNSAccountRequest} {@link CreatePrivateDNSAccountResponse} */
+  /** 添加关联账号 {@link CreatePrivateDNSAccountRequest} {@link CreatePrivateDNSAccountResponse} */
   CreatePrivateDNSAccount(data: CreatePrivateDNSAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateDNSAccountResponse>;
   /** 创建私有域 {@link CreatePrivateZoneRequest} {@link CreatePrivateZoneResponse} */
   CreatePrivateZone(data: CreatePrivateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateZoneResponse>;
@@ -925,7 +925,7 @@ declare interface Privatedns {
   DeleteForwardRule(data?: DeleteForwardRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteForwardRuleResponse>;
   /** 删除入站终端节点 {@link DeleteInboundEndpointRequest} {@link DeleteInboundEndpointResponse} */
   DeleteInboundEndpoint(data: DeleteInboundEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInboundEndpointResponse>;
-  /** 删除私有域解析账号 {@link DeletePrivateDNSAccountRequest} {@link DeletePrivateDNSAccountResponse} */
+  /** 移除账号关联 {@link DeletePrivateDNSAccountRequest} {@link DeletePrivateDNSAccountResponse} */
   DeletePrivateDNSAccount(data: DeletePrivateDNSAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateDNSAccountResponse>;
   /** 删除私有域 {@link DeletePrivateZoneRequest} {@link DeletePrivateZoneResponse} */
   DeletePrivateZone(data?: DeletePrivateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateZoneResponse>;
@@ -945,7 +945,7 @@ declare interface Privatedns {
   DescribeForwardRuleList(data?: DescribeForwardRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeForwardRuleListResponse>;
   /** 获取入站终端节点列表 {@link DescribeInboundEndpointListRequest} {@link DescribeInboundEndpointListResponse} */
   DescribeInboundEndpointList(data?: DescribeInboundEndpointListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInboundEndpointListResponse>;
-  /** 获取私有域解析账号列表 {@link DescribePrivateDNSAccountListRequest} {@link DescribePrivateDNSAccountListResponse} */
+  /** 获取关联账号列表 {@link DescribePrivateDNSAccountListRequest} {@link DescribePrivateDNSAccountListResponse} */
   DescribePrivateDNSAccountList(data?: DescribePrivateDNSAccountListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateDNSAccountListResponse>;
   /** 获取私有域信息 {@link DescribePrivateZoneRequest} {@link DescribePrivateZoneResponse} */
   DescribePrivateZone(data: DescribePrivateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateZoneResponse>;

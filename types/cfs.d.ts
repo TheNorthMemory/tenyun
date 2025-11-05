@@ -948,18 +948,6 @@ declare interface DeleteMigrationTaskResponse {
   RequestId?: string;
 }
 
-declare interface DeleteMountTargetRequest {
-  /** 文件系统 ID */
-  FileSystemId: string;
-  /** 挂载点 ID */
-  MountTargetId: string;
-}
-
-declare interface DeleteMountTargetResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DeleteUserQuotaRequest {
   /** 文件系统ID，通过查询文件系统列表获取；[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170) */
   FileSystemId: string;
@@ -1645,8 +1633,6 @@ declare interface Cfs {
   DeleteLifecyclePolicy(data: DeleteLifecyclePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLifecyclePolicyResponse>;
   /** 删除迁移任务 {@link DeleteMigrationTaskRequest} {@link DeleteMigrationTaskResponse} */
   DeleteMigrationTask(data: DeleteMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMigrationTaskResponse>;
-  /** 删除挂载点 {@link DeleteMountTargetRequest} {@link DeleteMountTargetResponse} */
-  DeleteMountTarget(data: DeleteMountTargetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMountTargetResponse>;
   /** 删除文件系统配额 {@link DeleteUserQuotaRequest} {@link DeleteUserQuotaResponse} */
   DeleteUserQuota(data: DeleteUserQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserQuotaResponse>;
   /** 查询文件系统快照策略列表信息 {@link DescribeAutoSnapshotPoliciesRequest} {@link DescribeAutoSnapshotPoliciesResponse} */

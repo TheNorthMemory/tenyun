@@ -800,6 +800,14 @@ declare interface DescribeApplicationListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAuditResultExternalRequest {
+}
+
+declare interface DescribeAuditResultExternalResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRealtimeScanConfigRequest {
   /** 应用ID。 */
   BizId: number;
@@ -1241,6 +1249,8 @@ declare interface Gme {
   DescribeApplicationData(data: DescribeApplicationDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationDataResponse>;
   /** 查询某账号下的应用列表 {@link DescribeApplicationListRequest} {@link DescribeApplicationListResponse} */
   DescribeApplicationList(data: DescribeApplicationListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationListResponse>;
+  /** 获取GME审核结果明细（外部API） {@link DescribeAuditResultExternalRequest} {@link DescribeAuditResultExternalResponse} */
+  DescribeAuditResultExternal(data?: DescribeAuditResultExternalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditResultExternalResponse>;
   /** 获取用户自定义送检信息 {@link DescribeRealtimeScanConfigRequest} {@link DescribeRealtimeScanConfigResponse} */
   DescribeRealtimeScanConfig(data: DescribeRealtimeScanConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRealtimeScanConfigResponse>;
   /** 查询录制任务信息 {@link DescribeRecordInfoRequest} {@link DescribeRecordInfoResponse} */

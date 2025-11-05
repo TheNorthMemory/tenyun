@@ -102,6 +102,10 @@ declare interface CompareDetailInfo {
   DifferenceData?: DifferenceDataDetail;
   /** 数据行不一致的详情，mongodb业务用到 */
   DifferenceRow?: DifferenceRowDetail;
+  /** 表结构不一致详情，pg用 */
+  DifferenceSchema?: DifferenceSchemaDetail;
+  /** 对象owner不一致详情，pg用 */
+  DifferenceOwner?: DifferenceOwnerDetail;
 }
 
 /** 一致性对比对象配置 */
@@ -490,12 +494,28 @@ declare interface DifferenceItem {
   FinishedAt?: string;
 }
 
+/** pg owner不一致性详情 */
+declare interface DifferenceOwnerDetail {
+  /** owner不一致总数 */
+  TotalCount?: number;
+  /** owner不一致详情 */
+  Items?: OwnerDifference[] | null;
+}
+
 /** mongodb行数校验不一致性详情结果 */
 declare interface DifferenceRowDetail {
   /** 不一致总数 */
   TotalCount?: number;
   /** 不一致列表 */
   Items?: RowsCountDifference[] | null;
+}
+
+/** 表结构不一致信息 */
+declare interface DifferenceSchemaDetail {
+  /** 表结构不一致的数量 */
+  TotalCount?: number;
+  /** 表结构不一致信息 */
+  Items?: SchemaDifference[] | null;
 }
 
 /** 订阅任务的kafka分区规则。符合库名和表名正则表达式的数据将按照RuleType计算该条数据将被投递的kafka分区。如果配置了多个规则，将按照配置的顺序，第一条命中的规则生效。 */
@@ -882,6 +902,22 @@ declare interface Options {
   FilterCheckpoint?: boolean;
 }
 
+/** pg对象owner不一致信息 */
+declare interface OwnerDifference {
+  /** owner不一致的pg对象所在库 */
+  Db?: string;
+  /** owner不一致的pg对象所在schema */
+  Schema?: string;
+  /** owner不一致的pg对象名 */
+  ObjectName?: string;
+  /** owner不一致的pg对象类型 */
+  ObjectType?: string;
+  /** 源库对象owner */
+  SrcOwner?: string;
+  /** 目标库对象owner */
+  DstOwner?: string;
+}
+
 /** 数据订阅中kafka消费者组的分区分配情况。该数据是实时查询的，如果需要最新数据，需重新掉接口查询。 */
 declare interface PartitionAssignment {
   /** 消费者的clientId */
@@ -968,6 +1004,20 @@ declare interface RowsCountDifference {
   SrcCount?: number;
   /** 目标端行数 */
   DstCount?: number;
+}
+
+/** 结构不一致详情 */
+declare interface SchemaDifference {
+  /** 结构不一致的表所在库 */
+  Db?: string;
+  /** 结构不一致的表所在schema */
+  Schema?: string;
+  /** 结构不一致的表 */
+  Table?: string;
+  /** 源库表结构 */
+  SrcSchema?: string;
+  /** 目标库表结构 */
+  DstSchema?: string;
 }
 
 /** 跳过校验的表详情 */

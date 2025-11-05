@@ -380,6 +380,22 @@ declare interface KMSInfoDetail {
   KmsRegion?: string;
 }
 
+/** 日志详情 */
+declare interface LogInfo {
+  /** 日志类别 */
+  LogComponent?: string | null;
+  /** 日志级别 */
+  LogLevel?: string | null;
+  /** 日志产生时间 */
+  LogTime?: string | null;
+  /** 日志详情 */
+  LogDetail?: string | null;
+  /** 日志连接信息 */
+  LogConnection?: string | null;
+  /** 日志id */
+  LogId?: string | null;
+}
+
 /** 修改mongoDB实例，请求参数 */
 declare interface ModifyMongoDBParamType {
   /** 需要修改的参数名称，请严格参考通过 DescribeInstanceParams 获取的当前实例支持的参数名。 */
@@ -636,6 +652,26 @@ declare interface TagInfo {
   TagValue: string;
 }
 
+/** 日志下载任务描述 */
+declare interface Task {
+  /** 下载任务类型，0:慢日志，1:错误日志 */
+  TaskType?: number;
+  /** 任务ID */
+  TaskId?: string;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** 文件大小 */
+  FileSize?: number | null;
+  /** 任务状态，0:初始化，1:运行中，2:成功，3:失败 */
+  Status?: number | null;
+  /** 百分比 */
+  Percent?: number | null;
+  /** 下载链接 */
+  Url?: string | null;
+}
+
 /** 账户基本信息 */
 declare interface UserInfo {
   /** 账号名。 */
@@ -880,6 +916,34 @@ declare interface CreateDBInstanceResponse {
   RequestId?: string;
 }
 
+declare interface CreateLogDownloadTaskRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 开始时间 */
+  StartTime: string;
+  /** 结束时间 */
+  EndTime: string;
+  /** 节点名称 */
+  NodeNames?: string[];
+  /** 日志类别 */
+  LogComponents?: string[];
+  /** 日志等级 */
+  LogLevels?: string[];
+  /** 日志ID */
+  LogIds?: string[];
+  /** 日志连接信息 */
+  LogConnections?: string[];
+  /** 日志详情过滤字段 */
+  LogDetailParams?: string[];
+}
+
+declare interface CreateLogDownloadTaskResponse {
+  /** 任务状态 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAccountUserRequest {
   /** 指定待删除账号的实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceId: string;
@@ -892,6 +956,20 @@ declare interface DeleteAccountUserRequest {
 declare interface DeleteAccountUserResponse {
   /** 账户删除任务ID。 */
   FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteLogDownloadTaskRequest {
+  /** 实例 ID */
+  InstanceId: string;
+  /** 任务ID */
+  TaskId: string;
+}
+
+declare interface DeleteLogDownloadTaskResponse {
+  /** 任务状态，0:成功 */
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1254,6 +1332,62 @@ declare interface DescribeInstanceParamsResponse {
   InstanceMultiParam?: InstanceMultiParam[];
   /** 当前实例支持修改的参数数量。 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLogDownloadTasksRequest {
+  /** 实例 ID */
+  InstanceId: string;
+  /** 查询条数 */
+  Limit?: number;
+  /** 页码 */
+  Offset?: number;
+  /** 下载任务的开始时间 */
+  StartTime?: string;
+  /** 下载任务的结束时间 */
+  EndTime?: string;
+}
+
+declare interface DescribeLogDownloadTasksResponse {
+  /** 数量 */
+  TotalCount?: number;
+  /** 任务列表 */
+  Tasks?: Task[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMongodbLogsRequest {
+  /** 实例 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb#/)在实例列表复制实例 ID。 */
+  InstanceId: string;
+  /** 查询日志的开启时间。- 格式：yyyy-mm-dd hh:mm:ss，如：2019-06-01 10:00:00。- 查询时间范围：仅支持查询最近 7 天内的日志数据。 */
+  StartTime: string;
+  /** 查询日志的结束时间。- 格式：yyyy-mm-dd hh:mm:ss，如：2019-06-01 10:00:00。- 查询时间范围：仅支持查询最近 7 天内的日志数据。 */
+  EndTime: string;
+  /** 节点 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)的**节点管理**页面获取查询的节点 ID。 */
+  NodeNames?: string[];
+  /** 日志类别。- 日志类别包括但不限于 COMMAND、ACCESS、CONTROL、FTDC、INDEX、NETWORK、QUERY、REPL、SHARDING、STORAGE、RECOVERY、JOURNAL 和 WRITE 等。具体支持的类别可能会因 MongoDB 的版本而存在差异。具体信息，请参见[日志消息](https://www.mongodb.com/zh-cn/docs/v5.0/reference/log-messages/#log-message-examples)。- 登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)，在**日志管理**页面的**错误日志**页签，也可查看**日志类别**。 */
+  LogComponents?: string[];
+  /** 日志级别。- 日志级别按严重性从高到低依次为：FATAL、ERROR、WARNING。- 登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)，在**日志管理**页面的**错误日志**页签，可查看**日志级别**。 */
+  LogLevels?: string[];
+  /** 日志 ID。登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)，在**日志管理**页面的**错误日志**页签，可查看**日志 ID**。 */
+  LogIds?: string[];
+  /** 日志连接信息。登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)，在**日志管理**页面的**错误日志**页签，可查看**日志连接信息**。 */
+  LogConnections?: string[];
+  /** 指定日志筛选的字段。 */
+  LogDetailParams?: string[];
+  /** 偏移量，最小值为0，最大值为10000，默认值为0。 */
+  Offset?: number;
+  /** 分页大小，最小值为1，最大值为100，默认值为20。 */
+  Limit?: number;
+}
+
+declare interface DescribeMongodbLogsResponse {
+  /** 日志总数。 */
+  TotalCount?: number;
+  /** 日志详情列表。 */
+  LogList?: LogInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1736,6 +1870,36 @@ declare interface TerminateDBInstancesResponse {
   RequestId?: string;
 }
 
+declare interface UpgradeDBInstanceKernelVersionRequest {
+  /** 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同 */
+  InstanceId: string;
+  /** 是否维护时间内升级。0-否，1-是 */
+  InMaintenance?: number;
+}
+
+declare interface UpgradeDBInstanceKernelVersionResponse {
+  /** 异步流程任务ID */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpgradeDbInstanceVersionRequest {
+  /** 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同。 */
+  InstanceId: string;
+  /** 新升级的数据库版本，当前仅支持MONGO_40_WT（MongoDB 4.0 WiredTiger存储引擎版本）及MONGO_42_WT（MongoDB 4.0 WiredTiger存储引擎版本）。 */
+  MongoVersion: string;
+  /** 是否在维护时间内升级。0-立即升级 1-维护时间内升级 */
+  InMaintenance?: number;
+}
+
+declare interface UpgradeDbInstanceVersionResponse {
+  /** 异步流程任务ID */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare namespace V20180408 {
   type VersionHeader = { headers: { 'X-TC-Version': '2018-04-08' } }
 
@@ -2209,8 +2373,12 @@ declare interface Mongodb {
   CreateDBInstanceHour(data: CreateDBInstanceHourRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceHourResponse>;
   /** 创建数据库参数模板 {@link CreateDBInstanceParamTplRequest} {@link CreateDBInstanceParamTplResponse} */
   CreateDBInstanceParamTpl(data: CreateDBInstanceParamTplRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceParamTplResponse>;
+  /** 创建日志下载任务 {@link CreateLogDownloadTaskRequest} {@link CreateLogDownloadTaskResponse} */
+  CreateLogDownloadTask(data: CreateLogDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogDownloadTaskResponse>;
   /** 删除账号 {@link DeleteAccountUserRequest} {@link DeleteAccountUserResponse} */
   DeleteAccountUser(data: DeleteAccountUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountUserResponse>;
+  /** 删除日志下载任务 {@link DeleteLogDownloadTaskRequest} {@link DeleteLogDownloadTaskResponse} */
+  DeleteLogDownloadTask(data: DeleteLogDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogDownloadTaskResponse>;
   /** 全部账号列表 {@link DescribeAccountUsersRequest} {@link DescribeAccountUsersResponse} */
   DescribeAccountUsers(data: DescribeAccountUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountUsersResponse>;
   /** 查询异步任务状态接口 {@link DescribeAsyncRequestInfoRequest} {@link DescribeAsyncRequestInfoResponse} */
@@ -2243,6 +2411,10 @@ declare interface Mongodb {
   DescribeDetailedSlowLogs(data: DescribeDetailedSlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDetailedSlowLogsResponse>;
   /** 获取当前实例可修改的参数列表 {@link DescribeInstanceParamsRequest} {@link DescribeInstanceParamsResponse} */
   DescribeInstanceParams(data: DescribeInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamsResponse>;
+  /** 日志下载任务查询 {@link DescribeLogDownloadTasksRequest} {@link DescribeLogDownloadTasksResponse} */
+  DescribeLogDownloadTasks(data: DescribeLogDownloadTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogDownloadTasksResponse>;
+  /** 日志查询接口 {@link DescribeMongodbLogsRequest} {@link DescribeMongodbLogsResponse} */
+  DescribeMongodbLogs(data: DescribeMongodbLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMongodbLogsResponse>;
   /** 查询实例绑定的安全组 {@link DescribeSecurityGroupRequest} {@link DescribeSecurityGroupResponse} */
   DescribeSecurityGroup(data: DescribeSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupResponse>;
   /** 获取慢日志统计信息 {@link DescribeSlowLogPatternsRequest} {@link DescribeSlowLogPatternsResponse} */
@@ -2301,6 +2473,10 @@ declare interface Mongodb {
   SetInstanceMaintenance(data: SetInstanceMaintenanceRequest, config?: AxiosRequestConfig): AxiosPromise<SetInstanceMaintenanceResponse>;
   /** 包年包月退货退费 {@link TerminateDBInstancesRequest} {@link TerminateDBInstancesResponse} */
   TerminateDBInstances(data: TerminateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateDBInstancesResponse>;
+  /** 升级实例内核小版本号 {@link UpgradeDBInstanceKernelVersionRequest} {@link UpgradeDBInstanceKernelVersionResponse} */
+  UpgradeDBInstanceKernelVersion(data: UpgradeDBInstanceKernelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDBInstanceKernelVersionResponse>;
+  /** 升级数据库版本 {@link UpgradeDbInstanceVersionRequest} {@link UpgradeDbInstanceVersionResponse} */
+  UpgradeDbInstanceVersion(data: UpgradeDbInstanceVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDbInstanceVersionResponse>;
   /** 指定云数据库实例的所属项目 {@link V20180408.AssignProjectRequest} {@link V20180408.AssignProjectResponse} */
   AssignProject(data: V20180408.AssignProjectRequest, config: AxiosRequestConfig & V20180408.VersionHeader): AxiosPromise<V20180408.AssignProjectResponse>;
   /** 创建云数据库实例（包年包月） {@link V20180408.CreateDBInstanceRequest} {@link V20180408.CreateDBInstanceResponse} */

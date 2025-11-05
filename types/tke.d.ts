@@ -32,6 +32,30 @@ declare interface AutoscalingAdded {
   Total?: number;
 }
 
+/** 集群信息结构体 */
+declare interface Cluster {
+  /** 集群ID */
+  ClusterId?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 集群描述 */
+  ClusterDescription?: string;
+  /** 集群版本（默认值为1.10.5） */
+  ClusterVersion?: string;
+  /** 集群类型，托管集群：MANAGED_CLUSTER，独立集群：INDEPENDENT_CLUSTER。 */
+  ClusterType?: string;
+  /** 标签描述列表。 */
+  TagSpecification?: TagSpecification[] | null;
+  /** 集群状态 (Trading 集群开通中,Creating 创建中,Running 运行中,Deleting 删除中,Idling 闲置中,Recovering 唤醒中,Upgrading 升级中,NodeUpgrading 节点升级中,RuntimeUpgrading 节点运行时升级中,MasterScaling Master扩缩容中,ClusterLevelUpgrading 调整规格中,ResourceIsolate 欠费隔离中,ResourceIsolated 欠费已隔离,ResourceReverse 冲正恢复中,Abnormal 异常) */
+  ClusterStatus?: string;
+  /** 创建时间 */
+  CreatedTime?: string | null;
+  /** 集群等级，针对托管集群生效 */
+  ClusterLevel?: string | null;
+  /** 集群所在vpc的id */
+  VpcId?: string | null;
+}
+
 /** 原生节点池创建参数 */
 declare interface CreateNativeNodePoolParam {
   /** 节点池伸缩配置 */
@@ -786,6 +810,30 @@ declare interface DescribeClusterInstancesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeClustersRequest {
+  /** 集群ID列表(为空时，表示获取账号下所有集群) */
+  ClusterIds?: string[];
+  /** 偏移量,默认0 */
+  Offset?: number;
+  /** 最大输出条数，默认20，最大为100 */
+  Limit?: number;
+  /** · ClusterName 按照【集群名】进行过滤。 类型：String 必选：否· ClusterType 按照【集群类型】进行过滤。 类型：String 必选：否· ClusterStatus 按照【集群状态】进行过滤。 类型：String 必选：否· Tags 按照【标签键值对】进行过滤。 类型：String 必选：否· vpc-id 按照【VPC】进行过滤。 类型：String 必选：否· tag-key 按照【标签键】进行过滤。 类型：String 必选：否· tag-value 按照【标签值】进行过滤。 类型：String 必选：否· tag:tag-key 按照【标签键值对】进行过滤。 类型：String 必选：否 */
+  Filters?: Filter[];
+  /** 集群类型，例如：MANAGED_CLUSTER */
+  ClusterType?: string;
+}
+
+declare interface DescribeClustersResponse {
+  /** 集群总个数 */
+  TotalCount?: number;
+  /** 集群信息列表 */
+  Clusters?: Cluster[];
+  /** 错误信息集合 */
+  Errors?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeHealthCheckPoliciesRequest {
   /** 集群 ID */
   ClusterId: string;
@@ -1097,15 +1145,15 @@ declare namespace V20180525 {
     ContainerRuntime?: string;
     /** 创建时间 */
     CreatedTime?: string;
-    /** 删除保护开关 */
+    /** 集群删除保护开关，打开：true，关闭：false */
     DeletionProtection?: boolean;
-    /** 集群是否开启第三方节点支持 */
+    /** 集群是否开启第三方节点支持，开启：true，关闭：false */
     EnableExternalNode?: boolean;
     /** 集群等级，针对托管集群生效 */
     ClusterLevel?: string;
-    /** 自动变配集群等级，针对托管集群生效 */
+    /** 自动变配集群等级，针对托管集群生效。开启：true，关闭：false */
     AutoUpgradeClusterLevel?: boolean;
-    /** 是否开启QGPU共享 */
+    /** 是否开启QGPU共享，开启：true，关闭：false */
     QGPUShareEnable?: boolean;
     /** 运行时版本 */
     RuntimeVersion?: string;
@@ -1209,9 +1257,9 @@ declare namespace V20180525 {
     OkTotalUnreadyCount?: number | null;
     /** 未就绪节点的最大百分比，此后CA会停止操作 */
     MaxTotalUnreadyPercentage?: number | null;
-    /** 表示未准备就绪的节点在有资格进行缩减之前应该停留多长时间 */
+    /** 表示未准备就绪的节点在有资格进行缩减之前应该停留多少分钟 */
     ScaleDownUnreadyTime?: number | null;
-    /** CA删除未在Kubernetes中注册的节点之前等待的时间 */
+    /** CA删除未在Kubernetes中注册的节点之前等待的分钟数 */
     UnregisteredNodeRemovalTime?: number | null;
   }
 
@@ -2245,6 +2293,10 @@ declare namespace V20180525 {
     Name?: string;
     /** 诊断结果统计 */
     Statistics?: KubeJarvisStateStatistic[];
+    /** 诊断数据开始时间 */
+    StartTime?: string;
+    /** 诊断数据结束时间 */
+    EndTime?: string;
   }
 
   /** 集群巡检诊断对象信息 */
@@ -2277,7 +2329,7 @@ declare namespace V20180525 {
 
   /** 集群巡检统计结果 */
   interface KubeJarvisStateStatistic {
-    /** 诊断结果的健康水平 */
+    /** 诊断结果的健康水平，健康水平取值：serious：高风险risk：中风险warn：低风险good：健康failed：诊断流程异常 */
     HealthyLevel?: string;
     /** 诊断结果的统计 */
     Count?: number;
@@ -2419,11 +2471,11 @@ declare namespace V20180525 {
   interface NodePoolRuntime {
     /** 节点池ID */
     NodePoolId?: string;
-    /** 运行时类型 */
+    /** 运行时类型，参考：https://cloud.tencent.com/document/api/457/105241 */
     RuntimeType?: string;
-    /** 运行时版本 */
+    /** 运行时版本，参考：https://cloud.tencent.com/document/api/457/105241 */
     RuntimeVersion?: string;
-    /** 节点池名称 */
+    /** 节点池名称，限制 255 字符 */
     NodePoolName?: string;
   }
 
@@ -3295,9 +3347,9 @@ declare namespace V20180525 {
 
   /** 集群资源使用量 */
   interface ResourceUsage {
-    /** 资源类型 */
+    /** 资源类型，参考k8s 官方资源 */
     Name?: string;
-    /** 资源使用量 */
+    /** 资源使用量，单位：个数 */
     Usage?: number;
     /** 资源使用详情 */
     Details?: ResourceUsageDetail[];
@@ -3373,9 +3425,9 @@ declare namespace V20180525 {
 
   /** 运行时配置 */
   interface RuntimeConfig {
-    /** 运行时类型 */
+    /** 运行时类型，支持的类型有 docker、containerd */
     RuntimeType?: string;
-    /** 运行时版本 */
+    /** 运行时版本，参考：https://cloud.tencent.com/document/api/457/105241 */
     RuntimeVersion?: string;
   }
 
@@ -3670,9 +3722,9 @@ declare namespace V20180525 {
   }
 
   interface AddExistedInstancesRequest {
-    /** 集群ID */
+    /** 集群ID（请登录 [TKE 控制台](https://console.cloud.tencent.com/tke2) 获取集群 ID ） */
     ClusterId: string;
-    /** 实例列表，不支持竞价实例 */
+    /** 实例列表，不支持竞价实例（请登录 [CVM控制台](https://console.cloud.tencent.com/cvm) 获取待添加节点ID ） */
     InstanceIds: string[];
     /** 实例额外需要设置参数信息(默认值) */
     InstanceAdvancedSettings?: InstanceAdvancedSettings;
@@ -3712,7 +3764,7 @@ declare namespace V20180525 {
     ClusterId: string;
     /** 节点池id */
     NodePoolId: string;
-    /** 节点id */
+    /** 节点id，获取参考 https://cloud.tencent.com/document/product/213/15728 */
     InstanceIds: string[];
   }
 
@@ -3804,9 +3856,9 @@ declare namespace V20180525 {
   interface CreateBackupStorageLocationRequest {
     /** 存储仓库所属地域，比如COS广州(ap-guangzhou) */
     StorageRegion: string;
-    /** 对象存储桶名称，如果是COS必须是tke-backup前缀开头 */
+    /** 对象存储桶名称，如果是COS必须是tke-backup前缀开头，字符长度是19 */
     Bucket: string;
-    /** 备份仓库名称 */
+    /** 备份仓库名称，字符长度为63 */
     Name: string;
     /** 存储服务提供方，默认腾讯云 */
     Provider?: string;
@@ -3838,13 +3890,13 @@ declare namespace V20180525 {
   interface CreateClusterEndpointRequest {
     /** 集群ID */
     ClusterId: string;
-    /** 集群端口所在的子网ID (仅在开启非外网访问时需要填，必须为集群所在VPC内的子网) */
+    /** 集群端口所在的子网ID (仅在开启非外网访问时需要填，必须为集群所在VPC内的子网)。获取方式：https://cloud.tencent.com/document/product/215/15784 */
     SubnetId?: string;
     /** 是否为外网访问（TRUE 外网访问 FALSE 内网访问，默认值： FALSE） */
     IsExtranet?: boolean;
     /** 设置域名 */
     Domain?: string;
-    /** 使用的安全组，只有外网访问需要传递（开启外网访问且不使用已有clb时必传） */
+    /** 使用的安全组，只有外网访问需要传递（开启外网访问且不使用已有clb时必传）。获取方式：https://cloud.tencent.com/document/api/215/15808 */
     SecurityGroup?: string;
     /** 创建lb参数，只有外网访问需要设置，是一个json格式化后的字符串：{"InternetAccessible":{"InternetChargeType":"TRAFFIC_POSTPAID_BY_HOUR","InternetMaxBandwidthOut":200},"VipIsp":"","BandwidthPackageId":""}。各个参数意义：InternetAccessible.InternetChargeType含义：TRAFFIC_POSTPAID_BY_HOUR按流量按小时后计费;BANDWIDTH_POSTPAID_BY_HOUR 按带宽按小时后计费;InternetAccessible.BANDWIDTH_PACKAGE 按带宽包计费。InternetMaxBandwidthOut含义：最大出带宽，单位Mbps，范围支持0到2048，默认值10。VipIsp含义：CMCC | CTCC | CUCC，分别对应 移动 | 电信 | 联通，如果不指定本参数，则默认使用BGP。可通过 DescribeSingleIsp 接口查询一个地域所支持的Isp。如果指定运营商，则网络计费式只能使用按带宽包计费BANDWIDTH_PACKAGE。BandwidthPackageId含义：带宽包ID，指定此参数时，网络计费方式InternetAccessible.InternetChargeType只支持按带宽包计费BANDWIDTH_PACKAGE。 */
     ExtensiveParameters?: string;
@@ -4884,9 +4936,9 @@ declare namespace V20180525 {
   }
 
   interface DescribeAvailableClusterVersionRequest {
-    /** 集群 Id。若只查询某个集群可升级的版本，需填写此项。 */
+    /** 集群 Id。若只查询某个集群可升级的版本，需填写此项，与ClusterIds 参数二选一。 */
     ClusterId?: string;
-    /** 集群 Id 列表。若查询多个集群可升级的版本，需填写此项。 */
+    /** 集群 Id 列表。若查询多个集群可升级的版本，需填写此项，与ClusterId 参数二选一。 */
     ClusterIds?: string[];
   }
 
@@ -5029,7 +5081,7 @@ declare namespace V20180525 {
   }
 
   interface DescribeClusterEndpointStatusResponse {
-    /** 查询集群访问端口状态（Created 开启成功，Creating 开启中，NotFound 未开启） */
+    /** 查询集群访问端口状态（Created 开启成功，Creating 开启中，NotFound 未开启，CreateFailed 开启失败） */
     Status?: string;
     /** 开启访问入口失败信息 */
     ErrorMsg?: string;
@@ -5416,7 +5468,7 @@ declare namespace V20180525 {
     Limit?: number;
     /** · "Name":"ClusterName","Values": ["test"] 按照【集群名】进行过滤。 类型：String 必选：否 · "Name":"ClusterType","Values": ["MANAGED_CLUSTER"] 按照【集群类型】进行过滤。 类型：String 必选：否 · "Name":"ClusterStatus","Values": ["Running"] 按照【集群状态】进行过滤。 类型：String 必选：否 · "Name":"vpc-id","Values": ["vpc-2wds9k9p"] 按照【VPC】进行过滤。 类型：String 必选：否 · "Name":"tag-key","Values": ["testKey"] 按照【标签键】进行过滤。 类型：String 必选：否 · "Name":"tag-value","Values": ["testValue"] 按照【标签值】进行过滤。 类型：String 必选：否 · "Name":"Tags","Values": ["product:tke"] 按照【标签键值对】进行过滤。 类型：String 必选：否 */
     Filters?: Filter[];
-    /** 集群类型，例如：MANAGED_CLUSTER */
+    /** 集群类型，托管集群：MANAGED_CLUSTER，独立集群：INDEPENDENT_CLUSTER。 */
     ClusterType?: string;
   }
 
@@ -6399,11 +6451,11 @@ declare namespace V20180525 {
   interface DescribeResourceUsageResponse {
     /** CRD使用量 */
     CRDUsage?: ResourceUsage;
-    /** Pod使用量 */
+    /** Pod使用量，单位：个数 */
     PodUsage?: number;
-    /** ReplicaSet使用量 */
+    /** ReplicaSet使用量，单位：个数 */
     RSUsage?: number;
-    /** ConfigMap使用量 */
+    /** ConfigMap使用量，单位：个数 */
     ConfigMapUsage?: number;
     /** 其他资源使用量 */
     OtherUsage?: ResourceUsage;
@@ -6734,7 +6786,7 @@ declare namespace V20180525 {
   }
 
   interface GetClusterLevelPriceRequest {
-    /** 集群规格，托管集群询价 */
+    /** 集群规格，托管集群询价，集群等级：L20、L50、L100、L200、L500、L1000、L3000、L5000 */
     ClusterLevel: string;
   }
 
@@ -6846,7 +6898,7 @@ declare namespace V20180525 {
   }
 
   interface ListClusterInspectionResultsItemsRequest {
-    /** 目标集群ID */
+    /** 目标集群ID取值可参考：[查询TKE集群列表](https://cloud.tencent.com/document/api/457/31862) */
     ClusterId: string;
     /** 查询历史结果的开始时间，Unix时间戳 */
     StartTime?: string;
@@ -6906,11 +6958,11 @@ declare namespace V20180525 {
     ClusterId: string;
     /** 集群所属项目 */
     ProjectId?: number;
-    /** 集群名称 */
+    /** 集群名称,字符长度50 */
     ClusterName?: string;
     /** 集群描述 */
     ClusterDesc?: string;
-    /** 集群等级 */
+    /** 集群等级，等级类型：L20、L50、L100、L200、L500、L1000、L3000、L5000 */
     ClusterLevel?: string;
     /** 自动变配集群等级 */
     AutoUpgradeClusterLevel?: AutoUpgradeClusterLevel;
@@ -6984,7 +7036,7 @@ declare namespace V20180525 {
     ClusterId: string;
     /** 节点池ID */
     NodePoolId: string;
-    /** 名称 */
+    /** 名称，最长63个字符，只能包含小写字母、数字及分隔符“_”，且必须以小写字母开头，数字或小写字母结尾 */
     Name?: string;
     /** 最大节点数 */
     MaxNodesNum?: number;
@@ -7030,11 +7082,11 @@ declare namespace V20180525 {
   interface ModifyClusterRuntimeConfigRequest {
     /** 集群ID，必填 */
     ClusterId: string;
-    /** 当需要修改运行时版本是根据另外的K8S版本获取时，需填写。例如升级校验有冲突后修改场景 */
+    /** 运行时版本需依据指定的Kubernetes版本进行设置。典型情况为，在升级过程中因版本冲突而需要调整运行时版本时。 */
     DstK8SVersion?: string;
-    /** 需要修改集群运行时时填写 */
+    /** 需要修改集群运行时填写 */
     ClusterRuntimeConfig?: RuntimeConfig;
-    /** 需要修改节点池运行时时，填需要修改的部分 */
+    /** 需要修改节点池运行时，填需要修改的部分 */
     NodePoolRuntimeConfig?: NodePoolRuntime[];
   }
 
@@ -7046,7 +7098,7 @@ declare namespace V20180525 {
   interface ModifyClusterTagsRequest {
     /** 集群ID */
     ClusterId: string;
-    /** 集群标签 */
+    /** 集群标签:[{"TagKey":"env","TagValue":"dev"}]}] */
     Tags?: Tag[];
     /** 是否同步集群内子资源标签 */
     SyncSubresource?: boolean;
@@ -7116,7 +7168,7 @@ declare namespace V20180525 {
     ClusterId: string;
     /** 节点池id */
     NodePoolId: string;
-    /** 机型列表，主实例机型不支持修改 */
+    /** 机型列表，参考 https://cloud.tencent.com/document/product/213/11518，主实例机型不支持修改 */
     InstanceTypes: string[];
   }
 
@@ -7484,9 +7536,9 @@ declare namespace V20180525 {
     DstVersion: string;
     /** 集群自定义参数 */
     ExtraArgs?: ClusterExtraArgs;
-    /** 可容忍的最大不可用pod数目 */
+    /** 可容忍的最大不可用pod数目。默认0 */
     MaxNotReadyPercent?: number;
-    /** 是否跳过预检查阶段 */
+    /** 是否跳过预检查阶段，默认false */
     SkipPreCheck?: boolean;
   }
 
@@ -7699,6 +7751,8 @@ declare interface Tke {
   DeleteNodePool(data: DeleteNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNodePoolResponse>;
   /** 查询集群节点信息 {@link DescribeClusterInstancesRequest} {@link DescribeClusterInstancesResponse} */
   DescribeClusterInstances(data: DescribeClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInstancesResponse>;
+  /** 查询集群列表 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
+  DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
   /** 查询健康检测策略 {@link DescribeHealthCheckPoliciesRequest} {@link DescribeHealthCheckPoliciesResponse} */
   DescribeHealthCheckPolicies(data: DescribeHealthCheckPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHealthCheckPoliciesResponse>;
   /** 查询健康检测策略绑定关系 {@link DescribeHealthCheckPolicyBindingsRequest} {@link DescribeHealthCheckPolicyBindingsResponse} */

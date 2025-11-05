@@ -16,6 +16,8 @@ declare interface Application {
   OutputRedirect?: OutputRedirect;
   /** 表示所选训练框架，支持可选参数 - PyTorch：表示提交PyTorch训练作业- Custom：表示用户自定义作业默认参数为：Custom */
   JobType?: string;
+  /** 表示所选训练框架，支持可选参数 - PyTorch：表示提交PyTorch训练作业- Custom：表示用户自定义作业默认参数为：Custom */
+  TaskType?: string;
 }
 
 /** 描述CFS文件系统版本和挂载信息 */
@@ -108,6 +110,8 @@ declare interface ClusterOverview {
   VpcId?: string;
   /** 集群类型 */
   ClusterType?: string;
+  /** 集群销毁保护开关状态，当前支持参数：- ON: 集群销毁保护打开- OFF: 集群销毁保护关闭 */
+  DeletionProtection?: string;
 }
 
 /** 任务执行命令脚本。 */
@@ -808,7 +812,7 @@ declare interface AttachNodesResponse {
 
 declare interface CreateClusterRequest {
   /** 集群中实例所在的位置。 */
-  Placement: Placement;
+  Placement?: Placement;
   /** 指定管理节点。 */
   ManagerNode?: ManagerNode;
   /** 指定管理节点的数量。默认取值：1。取值范围：1～2。 */
@@ -1067,9 +1071,17 @@ declare interface DescribeJobSubmitInfoResponse {
 }
 
 declare interface DescribeJobsOverviewRequest {
+  /** 集群ID */
+  ClusterId: string;
 }
 
 declare interface DescribeJobsOverviewResponse {
+  /** 作业任务数量 */
+  JobTotal?: number;
+  /** 排队中的作业任务数量 */
+  QueuingJobTotal?: number;
+  /** 运行中的作业数量 */
+  RunningJobTotal?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1164,6 +1176,18 @@ declare interface DetachNodesResponse {
   RequestId?: string;
 }
 
+declare interface ModifyClusterDeletionProtectionRequest {
+  /** 集群ID。 */
+  ClusterId: string;
+  /** 集群删除保护开关。 可选值：OFF：关闭集群删除保护。ON：打开集群删除保护。 */
+  DeletionProtection: string;
+}
+
+declare interface ModifyClusterDeletionProtectionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyInitNodeScriptsRequest {
   /** 集群ID。 */
   ClusterId: string;
@@ -1219,9 +1243,17 @@ declare interface SetAutoScalingConfigurationResponse {
 }
 
 declare interface SubmitJobRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 作业任务参数配置 */
+  Job: Job;
+  /** 队列名称。不指定则为默认队列：SLURM默认队列为：compute。 SGE默认队列为：all.q。 */
+  QueueName?: string;
 }
 
 declare interface SubmitJobResponse {
+  /** 作业任务ID */
+  JobId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2238,7 +2270,7 @@ declare interface Thpc {
   /** 绑定计算资源到集群 {@link AttachNodesRequest} {@link AttachNodesResponse} */
   AttachNodes(data: AttachNodesRequest, config?: AxiosRequestConfig): AxiosPromise<AttachNodesResponse>;
   /** 创建集群 {@link CreateClusterRequest} {@link CreateClusterResponse} */
-  CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
+  CreateCluster(data?: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
   /** 创建工作空间 {@link CreateWorkspacesRequest} {@link CreateWorkspacesResponse} */
   CreateWorkspaces(data?: CreateWorkspacesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkspacesResponse>;
   /** 删除集群 {@link DeleteClusterRequest} {@link DeleteClusterResponse} */
@@ -2266,7 +2298,7 @@ declare interface Thpc {
   /** 查询作业任务 {@link DescribeJobsRequest} {@link DescribeJobsResponse} */
   DescribeJobs(data?: DescribeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobsResponse>;
   /** 查询集群下作业任务的概览信息 {@link DescribeJobsOverviewRequest} {@link DescribeJobsOverviewResponse} */
-  DescribeJobsOverview(data?: DescribeJobsOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobsOverviewResponse>;
+  DescribeJobsOverview(data: DescribeJobsOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobsOverviewResponse>;
   /** 查询指定集群节点列表 {@link DescribeNodesRequest} {@link DescribeNodesResponse} */
   DescribeNodes(data?: DescribeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodesResponse>;
   /** 查询队列列表 {@link DescribeQueuesRequest} {@link DescribeQueuesResponse} */
@@ -2275,6 +2307,8 @@ declare interface Thpc {
   DescribeWorkspaces(data?: DescribeWorkspacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspacesResponse>;
   /** 从集群解绑节点 {@link DetachNodesRequest} {@link DetachNodesResponse} */
   DetachNodes(data: DetachNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DetachNodesResponse>;
+  /** 修改集群删除保护状态 {@link ModifyClusterDeletionProtectionRequest} {@link ModifyClusterDeletionProtectionResponse} */
+  ModifyClusterDeletionProtection(data: ModifyClusterDeletionProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterDeletionProtectionResponse>;
   /** 修改节点初始化脚本 {@link ModifyInitNodeScriptsRequest} {@link ModifyInitNodeScriptsResponse} */
   ModifyInitNodeScripts(data: ModifyInitNodeScriptsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInitNodeScriptsResponse>;
   /** 修改工作空间的属性 {@link ModifyWorkspacesAttributeRequest} {@link ModifyWorkspacesAttributeResponse} */
@@ -2284,7 +2318,7 @@ declare interface Thpc {
   /** 设置弹性伸缩配置信息 {@link SetAutoScalingConfigurationRequest} {@link SetAutoScalingConfigurationResponse} */
   SetAutoScalingConfiguration(data: SetAutoScalingConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<SetAutoScalingConfigurationResponse>;
   /** 提交作业任务 {@link SubmitJobRequest} {@link SubmitJobResponse} */
-  SubmitJob(data?: SubmitJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitJobResponse>;
+  SubmitJob(data: SubmitJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitJobResponse>;
   /** 终止作业任务 {@link TerminateJobRequest} {@link TerminateJobResponse} */
   TerminateJob(data: TerminateJobRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateJobResponse>;
   /** 销毁工作空间 {@link TerminateWorkspacesRequest} {@link TerminateWorkspacesResponse} */

@@ -551,7 +551,7 @@ declare interface CleanUpInstanceRequest {
 
 declare interface CleanUpInstanceResponse {
   /** 任务 ID。 */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -640,6 +640,8 @@ declare interface CreateInstancesResponse {
   DealId?: string;
   /** 实例 ID 。 */
   InstanceIds?: string[];
+  /** 订单号。 */
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -750,7 +752,9 @@ declare interface DescribeInstanceBinlogsResponse {
 
 declare interface DescribeInstanceDealDetailRequest {
   /** 订单交易ID数组，即 [CreateInstances](https://cloud.tencent.com/document/api/1520/86207) 的输出参数DealId。 */
-  DealIds: string[];
+  DealIds?: string[];
+  /** 订单号，订单交易ID数组，即 [CreateInstances](https://cloud.tencent.com/document/api/1520/86207) 的输出参数DealName。 */
+  DealName?: string;
 }
 
 declare interface DescribeInstanceDealDetailResponse {
@@ -1049,7 +1053,7 @@ declare interface DestroyPostpaidInstanceRequest {
 
 declare interface DestroyPostpaidInstanceResponse {
   /** 任务 ID。 */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1061,7 +1065,9 @@ declare interface DestroyPrepaidInstanceRequest {
 
 declare interface DestroyPrepaidInstanceResponse {
   /** 交易ID。 */
-  DealId: string;
+  DealId?: string;
+  /** 订单号。 */
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1141,9 +1147,9 @@ declare interface ModifyInstanceParamsRequest {
 
 declare interface ModifyInstanceParamsResponse {
   /** 修改是否成功。true：修改成功。false：修改失败。 */
-  Changed: boolean;
+  Changed?: boolean;
   /** 任务 ID。 */
-  TaskId: number;
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1222,6 +1228,8 @@ declare interface RenewInstanceRequest {
 declare interface RenewInstanceResponse {
   /** 交易 ID。 */
   DealId?: string;
+  /** 订单号。 */
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1270,6 +1278,8 @@ declare interface UpgradeInstanceRequest {
 declare interface UpgradeInstanceResponse {
   /** 交易ID。 */
   DealId?: string;
+  /** 订单号。 */
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1300,7 +1310,7 @@ declare interface Keewidb {
   /** 查询增量备份列表 {@link DescribeInstanceBinlogsRequest} {@link DescribeInstanceBinlogsResponse} */
   DescribeInstanceBinlogs(data: DescribeInstanceBinlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceBinlogsResponse>;
   /** 查询订单信息 {@link DescribeInstanceDealDetailRequest} {@link DescribeInstanceDealDetailResponse} */
-  DescribeInstanceDealDetail(data: DescribeInstanceDealDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDealDetailResponse>;
+  DescribeInstanceDealDetail(data?: DescribeInstanceDealDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDealDetailResponse>;
   /** 查询实例节点信息 {@link DescribeInstanceNodeInfoRequest} {@link DescribeInstanceNodeInfoResponse} */
   DescribeInstanceNodeInfo(data: DescribeInstanceNodeInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceNodeInfoResponse>;
   /** 查询参数修改历史列表 {@link DescribeInstanceParamRecordsRequest} {@link DescribeInstanceParamRecordsResponse} */

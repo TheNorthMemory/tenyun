@@ -2043,9 +2043,31 @@ declare interface CreateDatasetResponse {
 }
 
 declare interface CreateExportRequest {
+  /** 服务类型，TRAIN为任务式建模, NOTEBOOK为Notebook, INFER为在线服务, BATCH为批量预测枚举值：- TRAIN- NOTEBOOK- INFER- BATCH */
+  Service: string;
+  /** 服务ID，和Service参数对应，不同Service的服务ID获取方式不同，具体如下：- Service类型为TRAIN： 调用[DescribeTrainingTask接口](/document/product/851/75089)查询训练任务详情，ServiceId为接口返回值中Response.TrainingTaskDetail.LatestInstanceId- Service类型为NOTEBOOK： 调用[DescribeNotebook接口](/document/product/851/95662)查询Notebook详情，ServiceId为接口返回值中Response.NotebookDetail.PodName- Service类型为INFER： 调用[DescribeModelServiceGroup接口](/document/product/851/82285)查询服务组详情，ServiceId为接口返回值中Response.ServiceGroup.Services.ServiceId- Service类型为BATCH： 调用[DescribeBatchTask接口](/document/product/851/80180)查询跑批任务详情，ServiceId为接口返回值中Response.BatchTaskDetail.LatestInstanceId */
+  ServiceId?: string;
+  /** 日志查询开始时间（RFC3339格式的时间字符串），默认值为当前时间的前一个小时 */
+  StartTime?: string;
+  /** 日志查询结束时间（RFC3339格式的时间字符串），开始时间和结束时间必须同时填或同时不填，默认值为当前时间 */
+  EndTime?: string;
+  /** 日志导出数据格式。json，csv，默认为csv */
+  Format?: string;
+  /** Pod的名称，即需要查询服务对应的Pod，和Service参数对应，不同Service的PodName获取方式不同，具体如下：- Service类型为TRAIN： 调用[DescribeTrainingTaskPods接口](/document/product/851/75088)查询训练任务pod列表，PodName为接口返回值中Response.PodNames- Service类型为NOTEBOOK： 调用[DescribeNotebook接口](/document/product/851/95662)查询Notebook详情，PodName为接口返回值中Response.NotebookDetail.PodName- Service类型为INFER： 调用[DescribeModelService接口](/document/product/851/82287)查询单个服务详情，PodName为接口返回值中Response.Service.ServiceInfo.PodInfos- Service类型为BATCH： 调用[DescribeBatchTask接口](/document/product/851/80180)查询跑批任务详情，PodName为接口返回值中Response.BatchTaskDetail. PodList注：支持结尾通配符* */
+  PodName?: string;
+  /** 描述任务的类型 */
+  JobCategory?: string;
+  /** 实例的类型 */
+  InstanceType?: string;
+  /** 查实例Id */
+  InstanceId?: string;
+  /** 日志类型： PLATFORM_INIT, PLATFORM_SANITY_CHECK, USER */
+  Type?: string;
 }
 
 declare interface CreateExportResponse {
+  /** 日志下载任务的ID */
+  ExportId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2625,9 +2647,19 @@ declare interface DescribeEventsResponse {
 }
 
 declare interface DescribeExportRequest {
+  /** 日志下载任务的ID */
+  ExportId: string;
 }
 
 declare interface DescribeExportResponse {
+  /** 日志下载任务的ID */
+  ExportId?: string;
+  /** 日志下载文件名 */
+  FileName?: string;
+  /** 日志导出路径,有效期一个小时，请尽快使用该路径下载。 */
+  CosPath?: string;
+  /** 下载任务创建时间 */
+  CreateTime?: string;
   /** 日志文件大小 */
   FileSize?: string;
   /** 日志下载状态。Processing:导出正在进行中，Completed:导出完成，Failed:导出失败，Expired:日志导出已过期(三天有效期), Queuing 排队中 */
@@ -3848,7 +3880,7 @@ declare interface Tione {
   /** 创建数据集 {@link CreateDatasetRequest} {@link CreateDatasetResponse} */
   CreateDataset(data: CreateDatasetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatasetResponse>;
   /** 创建日志下载任务 {@link CreateExportRequest} {@link CreateExportResponse} */
-  CreateExport(data?: CreateExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExportResponse>;
+  CreateExport(data: CreateExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExportResponse>;
   /** 创建模型服务 {@link CreateModelServiceRequest} {@link CreateModelServiceResponse} */
   CreateModelService(data?: CreateModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelServiceResponse>;
   /** 在线服务创建 AuthToken {@link CreateModelServiceAuthTokenRequest} {@link CreateModelServiceAuthTokenResponse} */
@@ -3896,7 +3928,7 @@ declare interface Tione {
   /** 获取事件 {@link DescribeEventsRequest} {@link DescribeEventsResponse} */
   DescribeEvents(data: DescribeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventsResponse>;
   /** 查询日志下载任务详情 {@link DescribeExportRequest} {@link DescribeExportResponse} */
-  DescribeExport(data?: DescribeExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportResponse>;
+  DescribeExport(data: DescribeExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportResponse>;
   /** @deprecated 查询推理镜像模板 {@link DescribeInferTemplatesRequest} {@link DescribeInferTemplatesResponse} */
   DescribeInferTemplates(data?: DescribeInferTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInferTemplatesResponse>;
   /** 获取日志 {@link DescribeLogsRequest} {@link DescribeLogsResponse} */

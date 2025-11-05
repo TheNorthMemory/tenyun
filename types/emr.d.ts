@@ -4865,6 +4865,8 @@ declare interface ModifyUserManagerPwdRequest {
   UserName: string;
   /** 密码 */
   PassWord: string;
+  /** 是否同步密码 */
+  SyncPwd?: boolean;
 }
 
 declare interface ModifyUserManagerPwdResponse {

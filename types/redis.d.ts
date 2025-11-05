@@ -1925,9 +1925,25 @@ declare interface DescribeInstanceShardsResponse {
 }
 
 declare interface DescribeInstanceSpecBandwidthRequest {
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。填写实例id或者规格，两者必选其一。 */
+  InstanceId?: string;
+  /** 分片大小，单位：MB */
+  ShardSize?: number;
+  /** 分片数量。 */
+  ShardNum?: number;
+  /** 复制组数量。 */
+  ReplicateNum?: number;
+  /** 只读权重。- 100：开启从只读。- 0：关闭从只读。 */
+  ReadOnlyWeight?: number;
+  /** 实例类型，同 [CreateInstances](https://cloud.tencent.com/document/api/239/20026) 的Type。 */
+  Type?: number;
 }
 
 declare interface DescribeInstanceSpecBandwidthResponse {
+  /** 基础带宽。 */
+  Bandwidth?: number;
+  /** 链接限制。 */
+  ClientLimit?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

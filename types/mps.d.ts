@@ -240,6 +240,22 @@ declare interface AddOnSubtitle {
   DefaultTrack?: boolean;
 }
 
+/** 超分配置 */
+declare interface AdvancedSuperResolutionConfig {
+  /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
+  Switch?: string;
+  /** 类型，可选值：standard：通用超分super：高级超分。默认值：standard。 */
+  Type?: string | null;
+  /** 输出图片模式，默认percent。 aspect: 超分至指定宽高的较大矩形。 fixed: 超分至固定宽高，强制缩放。 percent: 超分倍率，可以为小数。 */
+  Mode?: string | null;
+  /** 超分倍率，可以为小数。 */
+  Percent?: number | null;
+  /** 目标图片宽度，不能超过4096。 */
+  Width?: number | null;
+  /** 目标图片高度，不能超过4096。 */
+  Height?: number | null;
+}
+
 /** 智能分析结果 */
 declare interface AiAnalysisResult {
   /** 任务的类型，可以取的值有：Classification：智能分类Cover：智能封面Tag：智能标签FrameTag：智能按帧标签Highlight：智能精彩集锦DeLogo：智能擦除Description：大模型摘要Dubbing：智能译制VideoRemake: 视频去重VideoComprehension: 视频（音频）理解 */
@@ -2106,7 +2122,7 @@ declare interface CosFileUploadTrigger {
   Region: string;
   /** 工作流绑定的输入路径目录，必须为绝对路径，即以 `/` 开头和结尾。如`/movie/201907/`，不填代表根目录`/`。 */
   Dir?: string;
-  /** 工作流允许触发的文件格式列表，如 ["mp4", "flv", "mov"]。不填代表所有格式的文件都可以触发工作流。 */
+  /** 支持的所有格式如下：- 视频文件扩展名，支持以下选择，共15种：`.mp4`、`.avi`、`.mov`、`.wmv`、`.flv`、`.mkv`、`.mpg`、`.mpeg`、`.rm`、`.rmvb`、`.asf`、`.3gp`、`.webm`、`.ts`、`.m4v`- 音频文件扩展名，支持以下选择，共7种：`.mp3`、`.wav`、`.aac`、`.flac`、`.ogg`、`.m4a`、`.amr`- 字幕文件扩展名，支持以下选择，共2种：`.vtt`、`.srt`- `*`：支持任意文件格式- 不传或者传空列表：支持系统预设文件格式（视频：`.mp4`、`.ts`、`.flv`、`.wmv`、`.asf`、`.rm`、`.rmvb`、`.mpg`、`.mpeg`、`.3gp`、`.mov`、`.webm`、`.mkv`、`.avi`、`.m4v`，音频：`.mp3`、`.m4a`、`.flac`、`.ogg`、`.wav`、`.amr`、`.aac`，字幕：`.vtt`、`.srt`）**注意**：1. 如果传入的格式列表中有`*`则表示为支持任意文件格式。2. 扩展名传入时带不带`.`都可以，比如 `.mp4` 或 `mp4` 均支持。3. 自定义文件扩展名需满足数字、字母字符，长度在[1,64]范围内。 */
   Formats?: string[];
 }
 
@@ -2686,9 +2702,17 @@ declare interface DiagnoseResult {
   SeverityLevel?: string | null;
 }
 
+/** 大模型增强 */
+declare interface DiffusionEnhanceConfig {
+  /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认，OFF。 */
+  Switch?: string;
+  /** 强度类型，可选值：weaknormalstrong默认值：normal。 */
+  Type?: string | null;
+}
+
 /** Drm 加密信息。 */
 declare interface DrmInfo {
-  /** 加密类型：- simpleaes只能用于HLS，切片格式支持ts和mp4只能使用切片模式，不能使用singlefile模式- fairplay：只能用于HLS，切片格式只能是mp4可以使用切片模式或singlefile模式- widevine：可以用于HLS和DASH，切片格式只能是mp4输出HLS：可以使用切片模式或singlefile模式输出DASH：只能singlefile模式- playready：可以用于HLS和DASH，切片格式只能是mp4输出HLS：可以使用切片模式或singlefile模式输出DASH：只能singlefile模式 */
+  /** 加密类型：- simpleaes只能用于HLS，切片格式支持ts和mp4只能使用切片模式，不能使用singlefile模式- fairplay：只能用于HLS，切片格式只能是mp4可以使用切片模式或singlefile模式- widevine：可以用于HLS和DASH，切片格式只能是mp4输出HLS：可以使用切片模式或singlefile模式输出DASH：只能singlefile模式- playready：可以用于HLS和DASH，切片格式只能是mp4输出HLS：可以使用切片模式或singlefile模式输出DASH：只能singlefile模式- widevine+fairplay: 只能用于HLS，切片格式只能是mp4 可以使用切片模式或singfile模式 */
   Type: string;
   /** SimpleAes 加密信息。 */
   SimpleAesDrm?: SimpleAesDrm | null;
@@ -3148,6 +3172,16 @@ declare interface FrameRateConfig {
   Fps?: number | null;
 }
 
+/** 新插帧配置，支持分数帧率 */
+declare interface FrameRateWithDenConfig {
+  /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
+  Switch?: string;
+  /** 帧率分子，取值范围：非负数，除以分母后小于120，单位：Hz。 默认值 0。 注意：对于转码，该参数会覆盖 VideoTemplate 内部的 Fps。 */
+  FpsNum?: number | null;
+  /** 帧率分母，取值范围：大于等于1。 默认值 1。 注意：对于转码，该参数会覆盖 VideoTemplate 内部的 FpsDenominator。 */
+  FpsDen?: number | null;
+}
+
 /** 智能按帧标签任务控制参数 */
 declare interface FrameTagConfigureInfo {
   /** 智能按帧标签任务开关，可选值：ON：开启智能按帧标签任务；OFF：关闭智能按帧标签任务。 */
@@ -3180,7 +3214,7 @@ declare interface HLSPullSourceAddress {
 declare interface HdrConfig {
   /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
   Switch?: string;
-  /** 类型，可选值：HDR10HLG默认值：HDR10。注意：video的编码方式需要为h265；注意：视频编码位深为10。 */
+  /** 类型，可选值：HDR10HLG默认值：HDR10。注意：video的编码方式需要为h264或h265；注意：视频编码位深为10。 */
   Type?: string | null;
 }
 
@@ -3242,6 +3276,8 @@ declare interface ImageEncodeConfig {
 declare interface ImageEnhanceConfig {
   /** 超分配置。 */
   SuperResolution?: SuperResolutionConfig | null;
+  /** 高级超分配置。 */
+  AdvancedSuperResolutionConfig?: AdvancedSuperResolutionConfig;
   /** 降噪配置。 */
   Denoise?: ImageDenoiseConfig | null;
   /** 综合增强配置。 */
@@ -3286,6 +3322,8 @@ declare interface ImageProcessTaskOutput {
 declare interface ImageProcessTaskResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
   Status?: string | null;
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369) 列表。 */
+  ErrMsg?: string;
   /** 错误信息。 */
   Message?: string | null;
   /** 转码任务的输出。 */
@@ -4774,6 +4812,32 @@ declare interface ProhibitedOcrReviewTemplateInfoForUpdate {
   ReviewConfidence?: number;
 }
 
+/** 纯字幕翻译结果 */
+declare interface PureSubtitleTransResult {
+  /** 任务状态（有以下三种）： - PROCESSING- SUCCESS - FAIL */
+  Status?: string;
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 媒体处理类错误码 列表。 */
+  ErrCodeExt?: string;
+  /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
+  ErrCode?: number;
+  /** 错误信息 */
+  Message?: string;
+  /** 翻译任务输入信息。 */
+  Input?: SmartSubtitleTaskResultInput;
+  /** 纯字幕翻译输出结果 */
+  Output?: PureSubtitleTransResultOutput | null;
+  /** 任务进度。 */
+  Progress?: number;
+}
+
+/** 翻译详细输出结果 */
+declare interface PureSubtitleTransResultOutput {
+  /** 字幕文件存储位置。 */
+  OutputStorage?: TaskOutputStorage | null;
+  /** 多语言翻译的结果集合 */
+  SubtitleResults?: SubtitleTransResultItem[];
+}
+
 /** 媒体质检结果输出。 */
 declare interface QualityControlData {
   /** 为true时表示视频无音频轨。 */
@@ -4912,18 +4976,20 @@ declare interface RawSmartEraseParameter {
 declare interface RawSmartSubtitleParameter {
   /** 智能字幕字幕语言类型0: 源语言1: 翻译语言2: 源语言+翻译语言当TranslateSwitch为OFF时仅支持取0当TranslateSwitch为ON时仅支持取1或2 */
   SubtitleType: number;
-  /** 智能字幕视频源语言当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语zh-PY：中英粤zh-medical：中文医疗yue：中文粤语vi：越南语ms：马来语id：印度尼西亚语fil：菲律宾语th：泰语pt：葡萄牙语tr：土耳其语ar：阿拉伯语es：西班牙语hi：印地语fr：法语de：德语zh_dialect：中文方言zh_en: 中英prime_zh: 中英方言 */
+  /** 智能字幕视频源语言当前支持以下语言：`zh`：简体中文`yue`：中文粵语`zh-PY`：中英粤`zh_medical`：中文医疗`zh_dialect`：中文方言`prime_zh`：中英方言`zh_en`：中英`en`：英语`ja`：日语`ko`：韩语`fr`：法语`es`：西班牙语`it`：意大利语`de`：德语`tr`：土耳其语`ru`：俄语`pt`：葡萄牙语（巴西）`pt-PT`：葡萄牙语（葡萄牙）`vi`：越南语`id`：印度尼西亚语`ms`：马来语`th`：泰语`ar`：阿拉伯语`hi`：印地语`fil`：菲律宾语`auto`：自动识别（仅在纯字幕翻译中支持） */
   VideoSrcLanguage: string;
-  /** 智能字幕文件格式 vtt: WebVTT 格式srt: SRT格式不填或填空：不生成字幕文件 */
+  /** 智能字幕文件格式:- ASR识别翻译处理类型下： - vtt: WebVTT 格式字幕 - srt: SRT 格式字幕 - 不填或填空：不生成字幕文件- 纯字幕翻译处理类型下： - original：与源文件一致 - vtt: WebVTT 格式字幕 - srt: SRT 格式字幕**注意**：- ASR识别方式下，翻译大于等于2种语言时不允许传空或不传；- 纯字幕翻译方式下，不允许传空或不传 */
   SubtitleFormat?: string | null;
-  /** 字幕翻译开关ON: 开启翻译OFF: 关闭翻译 */
+  /** 字幕翻译开关`ON`: 开启翻译`OFF`: 关闭翻译**注意**：纯字幕翻译方式下，不传默认是打开的，不允许传空或`OFF`； */
   TranslateSwitch?: string | null;
-  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语fr：法语es：西班牙语it：意大利语de：德语tr：土耳其语ru：俄语pt：葡萄牙语vi：越南语id：印度尼西亚语ms：马来语th：泰语ar：阿拉伯语hi：印地语 */
+  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效，翻译语言列表：`zh`：简体中文`zh-TW`：繁体中文`en`：英语`ja`：日语`ko`：韩语`fr`：法语`es`：西班牙语 `it`：意大利语`de`：德语`tr`：土耳其语`ru`：俄语`pt`：葡萄牙语（巴西）`pt-PT`：葡萄牙语（葡萄牙）`vi`：越南语`id`：印度尼西亚语 `ms`：马来语`th`：泰语`ar`：阿拉伯语`hi`：印地语`fil`：菲律宾语**注意**：多语言方式，则使用 `/` 分割，如：`en/ja`，表示英语和日语。 */
   TranslateDstLanguage?: string | null;
   /** ASR热词库参数 */
   AsrHotWordsConfigure?: AsrHotWordsConfigure | null;
   /** 自定义参数 */
   ExtInfo?: string;
+  /** 字幕处理类型：- 0：ASR识别字幕- 1：纯字幕翻译**注意**：不传的情况下默认类型为 ASR识别字幕 */
+  ProcessType?: number;
 }
 
 /** 自定义转码的规格参数。 */
@@ -5498,6 +5564,8 @@ declare interface SmartSubtitleTaskAsrFullTextResult {
 declare interface SmartSubtitleTaskAsrFullTextResultOutput {
   /** 语音全文识别片段列表。 */
   SegmentSet?: SmartSubtitleTaskAsrFullTextSegmentItem[] | null;
+  /** 字幕文件路径 */
+  Path?: string;
   /** 字幕文件地址。 */
   SubtitlePath?: string;
   /** 字幕文件存储位置。 */
@@ -5568,6 +5636,10 @@ declare interface SmartSubtitleTaskTransTextResultOutput {
   SubtitlePath?: string;
   /** 字幕文件存储位置。 */
   OutputStorage?: TaskOutputStorage;
+  /** 字幕文件地址 */
+  Path?: string;
+  /** 多语言翻译时返回翻译结果。 */
+  SubtitleResults?: SubtitleTransResultItem[];
 }
 
 /** 翻译片段。 */
@@ -5600,15 +5672,15 @@ declare interface SmartSubtitleTemplateItem {
   AsrHotWordsConfigure?: AsrHotWordsConfigure | null;
   /** 模板关联热词库名称 */
   AsrHotWordsLibraryName?: string | null;
-  /** 智能字幕视频源语言当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语zh-PY：中英粤zh-medical：中文医疗yue：中文粤语vi：越南语ms：马来语id：印度尼西亚语fil：菲律宾语th：泰语pt：葡萄牙语tr：土耳其语ar：阿拉伯语es：西班牙语hi：印地语fr：法语de：德语zh_dialect：中文方言 */
+  /** 智能字幕视频源语言列表：`zh`：简体中文`yue`：中文粵语`zh-PY`：中英粤`zh_medical`：中文医疗`zh_dialect`：中文方言`prime_zh`：中英方言`zh_en`：中英`en`：英语`ja`：日语`ko`：韩语`fr`：法语`es`：西班牙语`it`：意大利语`de`：德语`tr`：土耳其语`ru`：俄语`pt`：葡萄牙语（巴西）`pt-PT`：葡萄牙语（葡萄牙）`vi`：越南语`id`：印度尼西亚语`ms`：马来语`th`：泰语`ar`：阿拉伯语`hi`：印地语`fil`：菲律宾语`auto`：自动识别（仅在纯字幕翻译中支持） */
   VideoSrcLanguage?: string;
-  /** 智能字幕文件格式 vtt: WebVTT 格式不填或填空：不生成字幕文件 */
+  /** 智能字幕文件格式- vtt: WebVTT 格式- srt: SRT格式- original：与源字幕文件一致（用于纯字幕翻译模版）- 不填或填空：不生成字幕文件 */
   SubtitleFormat?: string | null;
   /** 智能字幕字幕语言类型0: 源语言1: 翻译语言2: 源语言+翻译语言当TranslateSwitch为OFF时仅支持取0当TranslateSwitch为ON时仅支持取1或2 */
   SubtitleType?: number;
   /** 字幕翻译开关ON: 开启翻译OFF: 关闭翻译 */
   TranslateSwitch?: string | null;
-  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语fr：法语es：西班牙语it：意大利语de：德语tr：土耳其语ru：俄语pt：葡萄牙语vi：越南语id：印度尼西亚语ms：马来语th：泰语ar：阿拉伯语hi：印地语 */
+  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效`zh`：简体中文`zh-TW`：繁体中文`en`：英语`ja`：日语`ko`：韩语`fr`：法语`es`：西班牙语 `it`：意大利语`de`：德语`tr`：土耳其语`ru`：俄语`pt`：葡萄牙语（巴西）`pt-PT`：葡萄牙语（葡萄牙）`vi`：越南语`id`：印度尼西亚语 `ms`：马来语`th`：泰语`ar`：阿拉伯语`hi`：印地语`fil`：菲律宾语**注意**：多语言方式，则使用 `/` 分割，如：`en/ja`，表示英语和日语。 */
   TranslateDstLanguage?: string | null;
   /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
   CreateTime?: string;
@@ -5616,16 +5688,20 @@ declare interface SmartSubtitleTemplateItem {
   UpdateTime?: string;
   /** 智能字幕预设模板别名 */
   AliasName?: string | null;
+  /** 字幕处理类型：- 0：ASR识别字幕- 1：纯字幕翻译 */
+  ProcessType?: number;
 }
 
 /** 智能字幕结果。 */
 declare interface SmartSubtitlesResult {
-  /** 任务的类型，取值范围： AsrFullTextRecognition：语音全文识别， TransTextRecognition：语音翻译。 */
+  /** 任务的类型，取值范围：- AsrFullTextRecognition：语音全文识别- TransTextRecognition：语音翻译- PureSubtitleTrans: 纯字幕翻译 */
   Type?: string;
   /** 语音全文识别结果，当 Type 为 AsrFullTextRecognition 时有效。 */
   AsrFullTextTask?: SmartSubtitleTaskAsrFullTextResult | null;
   /** 翻译结果，当 Type 为TransTextRecognition 时有效。 */
   TransTextTask?: SmartSubtitleTaskTransTextResult | null;
+  /** 当翻译类型为：PureSubtitleTrans 是返回纯字幕文件翻译结果。 */
+  PureSubtitleTransTask?: PureSubtitleTransResult | null;
 }
 
 /** 智能字幕输入结构体 */
@@ -5688,13 +5764,13 @@ declare interface SnapshotByTimeOffsetTemplate {
 
 /** FairPlay，WideVine，PlayReady 等Drm加密方式。 */
 declare interface SpekeDrm {
-  /** 资源标记，该字段内容为用户自定义；支持1-128个字符的数字、字母、下划线(_)、中划线(-)。 */
+  /** 资源标记，该字段内容为用户自定义；支持1-128个字符的数字、字母、下划线(`_`)、中划线(-)。该字段对应Speke请求中的cid字段。注：不同DRM厂商对该字段的限制有所区别（如：华曦达不支持该字段带`_`），具体规则请与DRM厂商进行确认。 */
   ResourceId: string;
   /** DRM厂商访问地址，该字段内容从DRM厂商获取。注: 不同DRM厂商对子流的数量限制不一样，如 PallyCon 限制不能超过5条子流，DRMtoday厂商最多仅支持9条子流加密 */
   KeyServerUrl: string;
   /** 加密初始化向量(十六进制32字节字符串)，该字段内容为用户自定义。 */
   Vector: string;
-  /** 加密方式，FairPlay 默认cbcs，PlayReady，Widevine 默认cenccbcs：PlayReady，Widevine，FairPlay 支持；cenc：PlayReady，Widevine支持； */
+  /** 加密方式，FairPlay 默认cbcs，PlayReady，Widevine 默认cenc加密方式选择WideVine+FairPlay时，仅支持cbcscbcs：PlayReady，Widevine，FairPlay，WideVine+FairPlay 支持；cenc：PlayReady，Widevine支持； */
   EncryptionMethod?: string;
   /** 子流加密规则，默认 preset0preset0：全部子流使用同一个key加密；preset1：每个子流使用不同的key加密； */
   EncryptionPreset?: string;
@@ -5776,6 +5852,18 @@ declare interface SubtitleTemplate {
   LineSpacing?: number | null;
   /** 对齐方式，，取值：top: 顶部对齐，字幕顶部按位置固定，底部随行数变化。bottom: 底部对齐，字幕底部按位置固定，顶部随行数变化。 */
   Alignment?: string | null;
+}
+
+/** 字幕翻译输出结果 */
+declare interface SubtitleTransResultItem {
+  /** 翻译标识：- Success- Error */
+  Status?: string;
+  /** 源语言（如"en"） */
+  TransSrc?: string;
+  /** 目标语言（如"zh"） */
+  TransDst?: string;
+  /** 字幕文件地址 */
+  Path?: string;
 }
 
 /** 超分配置 */
@@ -6274,28 +6362,30 @@ declare interface VideoDenoiseConfig {
 
 /** 视频增强配置 */
 declare interface VideoEnhanceConfig {
-  /** 插帧帧率配置。 */
+  /** 插帧帧率配置（旧）。新用户建议使用FrameRateWithDen配置插帧帧率，支持分数，且效果更好。注意，FrameRate 与FrameRateWithDen 只能二选一，同时配置可能导致任务失败。源帧率大于等于目标帧率时能力不会生效。 */
   FrameRate?: FrameRateConfig | null;
-  /** 超分配置。 */
+  /** 超分配置。源分辨率高于目标分辨率时不对视频做处理。注意与大模型增强不可同时开启。 */
   SuperResolution?: SuperResolutionConfig | null;
   /** HDR配置。 */
   Hdr?: HdrConfig | null;
-  /** 视频降噪配置。 */
+  /** 视频降噪配置。注意与大模型增强不可同时开启。 */
   Denoise?: VideoDenoiseConfig | null;
-  /** 综合增强配置。 */
+  /** 综合增强配置。注意大模型、综合增强、去毛刺三项里最多配置一项 */
   ImageQualityEnhance?: ImageQualityEnhanceConfig | null;
   /** 色彩增强配置。 */
   ColorEnhance?: ColorEnhanceConfig | null;
-  /** 细节增强配置。 */
-  SharpEnhance?: SharpEnhanceConfig | null;
-  /** 人脸增强配置。 */
-  FaceEnhance?: FaceEnhanceConfig | null;
   /** 低光照增强配置。 */
   LowLightEnhance?: LowLightEnhanceConfig | null;
   /** 去划痕配置。 */
   ScratchRepair?: ScratchRepairConfig | null;
-  /** 去伪影（毛刺）配置。 */
+  /** 去伪影（毛刺）配置。注意大模型、综合增强、去毛刺三项里最多配置一项 */
   ArtifactRepair?: ArtifactRepairConfig | null;
+  /** 增强场景配置，可选值：common（通用），通用增强参数，适用于各种视频类型的基础优化参数，提升整体画质。AIGC，整体分辨率提升，利用AI技术提升视频整体分辨率，增强画面清晰度。short_play（短剧），增强面部与字幕细节，突出人物面部表情细节和字幕清晰度，提升观剧体验。short_video（短视频），优化复杂多样的画质问题，针对短视频的复杂场景，优化画质，解决多种视觉问题。game（游戏视频），修复运动模糊，提升细节，重点提升游戏细节清晰度，恢复运动模糊区域，使游戏画面内容更清晰，更丰富。HD_movie_series（超高清影视剧），获得超高清流畅效果，针对广电/OTT超高清视频的诉求，生成4K 60fps HDR的超高清标准视频。支持广电场景格式标准要求。LQ_material（低清素材/老片修复），整体分辨率提升，针对老旧视频由于拍摄年代较久存在的分辨率不足、模糊失真、划痕损伤和色温等问题进行专门优化。lecture（秀场/电商/大会/讲座），美化提升面部效果，针对秀场/电商/大会/讲座等存在人物进行讲解的场景，进行人脸区域、噪声消除、毛刺处理的专门优化。填空字符串代表不使用增强场景 */
+  EnhanceSceneType?: string | null;
+  /** 大模型增强配置。注意大模型、综合增强、去毛刺三项里最多配置一项。且不可与超分、降噪同时开启。 */
+  DiffusionEnhance?: DiffusionEnhanceConfig | null;
+  /** 新插帧帧率配置，支持分数。注意与FrameRate二选一。源帧率大于等于目标帧率时能力不会生效。 */
+  FrameRateWithDen?: FrameRateWithDenConfig | null;
 }
 
 /** 视频流配置参数 */
@@ -6957,20 +7047,22 @@ declare interface CreateSmartEraseTemplateResponse {
 declare interface CreateSmartSubtitleTemplateRequest {
   /** 智能字幕模板名称长度限制：64 个字符。 */
   Name: string;
-  /** 智能字幕视频源语言当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语zh-PY：中英粤zh-medical：中文医疗yue：中文粤语vi：越南语ms：马来语id：印度尼西亚语fil：菲律宾语th：泰语pt：葡萄牙语tr：土耳其语ar：阿拉伯语es：西班牙语hi：印地语fr：法语de：德语zh_dialect：中文方言zh_en: 中英prime_zh: 中英方言 */
+  /** 智能字幕视频源语言当前支持以下语言：`zh`：简体中文`yue`：中文粵语`zh-PY`：中英粤`zh_medical`：中文医疗`zh_dialect`：中文方言`prime_zh`：中英方言`zh_en`：中英`en`：英语`ja`：日语`ko`：韩语`fr`：法语`es`：西班牙语`it`：意大利语`de`：德语`tr`：土耳其语`ru`：俄语`pt`：葡萄牙语（巴西）`pt-PT`：葡萄牙语（葡萄牙）`vi`：越南语`id`：印度尼西亚语`ms`：马来语`th`：泰语`ar`：阿拉伯语`hi`：印地语`fil`：菲律宾语`auto`：自动识别（仅在纯字幕翻译中支持） */
   VideoSrcLanguage: string;
   /** 智能字幕字幕语言类型0: 源语言1: 翻译语言2: 源语言+翻译语言当TranslateSwitch为OFF时仅支持取0当TranslateSwitch为ON时仅支持取1或2 */
   SubtitleType: number;
   /** 智能字幕模板描述信息长度限制：256 个字符。 */
   Comment?: string;
-  /** 智能字幕文件格式 vtt: WebVTT 格式 srt: SRT 格式不填或填空：不生成字幕文件 */
+  /** 智能字幕文件格式:- ASR识别翻译处理类型下： - vtt: WebVTT 格式字幕 - srt: SRT 格式字幕 - 不填或填空：不生成字幕文件- 纯字幕翻译处理类型下： - original：与源文件一致 - vtt: WebVTT 格式字幕 - srt: SRT 格式字幕**注意**：- ASR识别方式下，翻译大于等于2种语言时不允许传空或不传；- 纯字幕翻译方式下，不允许传空或不传 */
   SubtitleFormat?: string;
   /** ASR热词库参数 */
   AsrHotWordsConfigure?: AsrHotWordsConfigure;
-  /** 字幕翻译开关ON: 开启翻译OFF: 关闭翻译 */
+  /** 字幕翻译开关`ON`: 开启翻译`OFF`: 关闭翻译**注意**：纯字幕翻译方式下，不传默认是打开的，不允许传空或`OFF`； */
   TranslateSwitch?: string;
-  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语fr：法语es：西班牙语it：意大利语de：德语tr：土耳其语ru：俄语pt：葡萄牙语vi：越南语id：印度尼西亚语ms：马来语th：泰语ar：阿拉伯语hi：印地语 */
+  /** 字幕翻译目标语言，当TranslateSwitch为`ON`的时候生效当前支持以下语言：`zh`：简体中文`zh-TW`：繁体中文`en`：英语`ja`：日语`ko`：韩语`fr`：法语`es`：西班牙语 `it`：意大利语`de`：德语`tr`：土耳其语`ru`：俄语`pt`：葡萄牙语（巴西）`pt-PT`：葡萄牙语（葡萄牙）`vi`：越南语`id`：印度尼西亚语 `ms`：马来语`th`：泰语`ar`：阿拉伯语`hi`：印地语`fil`：菲律宾语**注意**：多语言方式，则使用 `/` 分割，如：`en/ja`，表示英语和日语。 */
   TranslateDstLanguage?: string;
+  /** 字幕处理类型：- 0：ASR识别字幕- 1：纯字幕翻译**注意**：不传的情况下默认类型为 ASR识别字幕 */
+  ProcessType?: number;
 }
 
 declare interface CreateSmartSubtitleTemplateResponse {
@@ -7879,6 +7971,8 @@ declare interface DescribeSmartSubtitleTemplatesRequest {
   Type?: string;
   /** 智能字幕模板标识过滤条件，长度限制：64 个字符。 */
   Name?: string;
+  /** 字幕处理类型：- 0：ASR识别字幕- 1：纯字幕翻译 */
+  ProcessType?: number;
 }
 
 declare interface DescribeSmartSubtitleTemplatesResponse {
@@ -8247,6 +8341,12 @@ declare interface DescribeTranscodeTemplatesRequest {
   SceneType?: string;
   /** 转码策略，可选值： ultra_compress：极致压缩：相比标准压缩，该策略能在保证一定画质的基础上最大限度压缩码率，极大节约带宽和存储成本。 standard_compress：综合最优：平衡压缩率与画质，在保证主观画质没有明显降低的情况下尽可能压缩文件。该策略仅收取音视频极速高清转码费用。 high_compress：码率优先：优先保证降低文件体积大小，可能有一定画质损失。该策略仅收取音视频极速高清转码费用。 low_compress：画质优先：优先保证画质，压缩出来的文件体积可能相对较大。该策略仅收取音视频极速高清转码费用。 no_config：未配置。 */
   CompressType?: string;
+  /** 增强场景配置，可选值：common（通用），通用增强参数，适用于各种视频类型的基础优化参数，提升整体画质。AIGC，整体分辨率提升，利用AI技术提升视频整体分辨率，增强画面清晰度。short_play（短剧），增强面部与字幕细节，突出人物面部表情细节和字幕清晰度，提升观剧体验。short_video（短视频），优化复杂多样的画质问题，针对短视频的复杂场景，优化画质，解决多种视觉问题。game（游戏视频），修复运动模糊，提升细节，重点提升游戏细节清晰度，恢复运动模糊区域，使游戏画面内容更清晰，更丰富。HD_movie_series（超高清影视剧），获得超高清流畅效果，针对广电/OTT超高清视频的诉求，生成4K 60fps HDR的超高清标准视频。支持广电场景格式标准要求。LQ_material（低清素材/老片修复），整体分辨率提升，针对老旧视频由于拍摄年代较久存在的分辨率不足、模糊失真、划痕损伤和色温等问题进行专门优化。lecture（秀场/电商/大会/讲座），美化提升面部效果，针对秀场/电商/大会/讲座等存在人物进行讲解的场景，进行人脸区域、噪声消除、毛刺处理的专门优化。 */
+  EnhanceSceneType?: string;
+  /** 增强转码类型，可选值：Common（普通转码）TEHD-100（极速高清视频转码）TEHD-200（极速高清音频转码） */
+  EnhanceTranscodeType?: string;
+  /** 增强类型，可选值：VideoEnhance（仅视频增强）AudioEnhance（仅音频增强）VideoAudioEnhance（视频音频增强都含） */
+  EnhanceType?: string;
 }
 
 declare interface DescribeTranscodeTemplatesResponse {
@@ -8775,22 +8875,24 @@ declare interface ModifySmartEraseTemplateResponse {
 declare interface ModifySmartSubtitleTemplateRequest {
   /** 智能字幕模板唯一标识 */
   Definition: number;
-  /** 字幕翻译开关ON: 开启翻译OFF: 关闭翻译 */
+  /** 字幕翻译开关`ON`: 开启翻译`OFF`: 关闭翻译**注意**：纯字幕翻译方式下，不传默认是打开的，不允许传空或`OFF`； */
   TranslateSwitch?: string;
   /** 智能字幕模板名称长度限制：64 个字符。 */
   Name?: string;
   /** 智能字幕模板描述信息长度限制：256 个字符。 */
   Comment?: string;
-  /** 智能字幕视频源语言当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语zh-PY：中英粤zh-medical：中文医疗yue：中文粤语vi：越南语ms：马来语id：印度尼西亚语fil：菲律宾语th：泰语pt：葡萄牙语tr：土耳其语ar：阿拉伯语es：西班牙语hi：印地语fr：法语de：德语zh_dialect：中文方言zh_en: 中英prime_zh: 中英方言 */
+  /** 智能字幕视频源语言当前支持以下语言：`zh`：简体中文`yue`：中文粵语`zh-PY`：中英粤`zh_medical`：中文医疗`zh_dialect`：中文方言`prime_zh`：中英方言`zh_en`：中英`en`：英语`ja`：日语`ko`：韩语`fr`：法语`es`：西班牙语`it`：意大利语`de`：德语`tr`：土耳其语`ru`：俄语`pt`：葡萄牙语（巴西）`pt-PT`：葡萄牙语（葡萄牙）`vi`：越南语`id`：印度尼西亚语`ms`：马来语`th`：泰语`ar`：阿拉伯语`hi`：印地语`fil`：菲律宾语`auto`：自动识别（仅在纯字幕翻译中支持） */
   VideoSrcLanguage?: string;
-  /** 智能字幕文件格式 vtt: WebVTT 格式srt: SRT格式不填或填空：不生成字幕文件 */
+  /** 智能字幕文件格式:- ASR识别翻译处理类型下： - vtt: WebVTT 格式字幕 - srt: SRT 格式字幕 - 不填或填空：不生成字幕文件- 纯字幕翻译处理类型下： - original：与源文件一致 - vtt: WebVTT 格式字幕 - srt: SRT 格式字幕**注意**：- ASR识别方式下，翻译大于等于2种语言时不允许传空或不传；- 纯字幕翻译方式下，不允许传空或不传 */
   SubtitleFormat?: string;
   /** 智能字幕字幕语言类型0: 源语言1: 翻译语言2: 源语言+翻译语言当TranslateSwitch为OFF时仅支持取0当TranslateSwitch为ON时仅支持取1或2 */
   SubtitleType?: number;
   /** ASR热词库参数 */
   AsrHotWordsConfigure?: AsrHotWordsConfigure;
-  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语fr：法语es：西班牙语it：意大利语de：德语tr：土耳其语ru：俄语pt：葡萄牙语vi：越南语id：印度尼西亚语ms：马来语th：泰语ar：阿拉伯语hi：印地语 */
+  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效当前支持以下语言：`zh`：简体中文`zh-TW`：繁体中文`en`：英语`ja`：日语`ko`：韩语`fr`：法语`es`：西班牙语 `it`：意大利语`de`：德语`tr`：土耳其语`ru`：俄语`pt`：葡萄牙语（巴西）`pt-PT`：葡萄牙语（葡萄牙）`vi`：越南语`id`：印度尼西亚语 `ms`：马来语`th`：泰语`ar`：阿拉伯语`hi`：印地语`fil`：菲律宾语**注意**：多语言方式，则使用 `/` 分割，如：`en/ja`，表示英语和日语。 */
   TranslateDstLanguage?: string;
+  /** 字幕处理类型：- 0：ASR识别字幕- 1：纯字幕翻译**注意**：不传的情况下，默认是ASR方式 */
+  ProcessType?: number;
 }
 
 declare interface ModifySmartSubtitleTemplateResponse {

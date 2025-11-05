@@ -1148,6 +1148,36 @@ declare interface GdnTaskInfo {
   StandbyClusterName?: string;
 }
 
+/** 商品价格 */
+declare interface GoodsPrice {
+  /** 实例价格 */
+  InstancePrice: TradePrice | null;
+  /** 存储价格 */
+  StoragePrice: TradePrice | null;
+  /** 商品规格 */
+  GoodsSpec: GoodsSpec | null;
+}
+
+/** 商品规格 */
+declare interface GoodsSpec {
+  /** 商品数量 */
+  GoodsNum?: number | null;
+  /** CPU核数，PREPAID与POSTPAID实例类型必传 */
+  Cpu?: number | null;
+  /** 内存大小，单位G，PREPAID与POSTPAID实例类型必传 */
+  Memory?: number | null;
+  /** Ccu大小，serverless类型必传 */
+  Ccu?: number | null;
+  /** 存储大小，PREPAID存储类型必传 */
+  StorageLimit?: number | null;
+  /** 购买时长 */
+  TimeSpan?: number | null;
+  /** 时长单位 */
+  TimeUnit?: string | null;
+  /** 机器类型 */
+  DeviceType?: string;
+}
+
 /** 账号，包含accountName和host */
 declare interface InputAccount {
   /** 账号 */
@@ -1266,6 +1296,14 @@ declare interface InstanceInitInfo {
   DeviceType?: string;
 }
 
+/** 实例权重 */
+declare interface InstanceNameWeight {
+  /** 实例名称，创建集群中InstanceInitInfo.InstanceName所指定名称 */
+  InstanceName?: string;
+  /** 权重 */
+  Weight?: number;
+}
+
 /** 实例网络信息 */
 declare interface InstanceNetInfo {
   /** 网络类型 */
@@ -1326,6 +1364,32 @@ declare interface InstanceSpec {
   MaxCpu?: number;
   /** 最小cpu */
   MinCpu?: number;
+}
+
+/** 集成集群配置 */
+declare interface IntegrateCreateClusterConfig {
+  /** binlog保留天数[7,1830] */
+  BinlogSaveDays?: number;
+  /** 备份保留天数[7,1830] */
+  BackupSaveDays?: number;
+  /** 半同步超时时间[1000,4294967295] */
+  SemiSyncTimeout?: number;
+  /** proxy连接地址配置信息 */
+  ProxyEndPointConfigs?: ProxyEndPointConfigInfo[];
+}
+
+/** 实例初始化配置信息 */
+declare interface IntegrateInstanceInfo {
+  /** 实例cpu */
+  Cpu: number;
+  /** 实例内存 */
+  Memory: number;
+  /** 实例类型 rw/ro */
+  InstanceType: string;
+  /** 实例个数,范围[1,15] */
+  InstanceCount: number;
+  /** 实例机器类型 common-公通用型,exclusive-独享型 */
+  DeviceType?: string;
 }
 
 /** 审计日志命中规则模板的基本信息 */
@@ -1744,6 +1808,20 @@ declare interface ProxyConfig {
   ProxyZones?: ProxyZone[];
 }
 
+/** 访问代理配置 */
+declare interface ProxyConfigInfo {
+  /** 数据库代理组节点个数。该参数不再建议使用,建议使用ProxyZones */
+  ProxyCount?: number;
+  /** cpu核数 */
+  Cpu?: number;
+  /** 内存 */
+  Mem?: number;
+  /** 描述说明 */
+  Description?: string;
+  /** 数据库节点信息（该参数与ProxyCount需要任选一个输入） */
+  ProxyZones?: ProxyZone[];
+}
+
 /** 数据库代理连接池信息 */
 declare interface ProxyConnectionPoolInfo {
   /** 连接池保持阈值：单位（秒） */
@@ -1752,6 +1830,24 @@ declare interface ProxyConnectionPoolInfo {
   OpenConnectionPool?: string;
   /** 连接池类型：SessionConnectionPool（会话级别连接池） */
   ConnectionPoolType?: string;
+}
+
+/** 集成集群proxy地址配置 */
+declare interface ProxyEndPointConfigInfo {
+  /** 所属VPC网络ID */
+  UniqueVpcId?: string;
+  /** 所属子网ID */
+  UniqueSubnetId?: string;
+  /** 安全组id数组 */
+  SecurityGroupIds?: string[];
+  /** 权重模式： system-系统分配，custom-自定义 */
+  WeightMode?: string;
+  /** 是否自动添加只读实例，yes-是，no-不自动添加 */
+  AutoAddRo?: string;
+  /** 读写属性： READWRITE,READONLY */
+  RwType?: string;
+  /** 权重信息 */
+  InstanceNameWeights?: InstanceNameWeight[];
 }
 
 /** proxy组 */
@@ -1814,6 +1910,10 @@ declare interface ProxyGroupRwInfo {
   TransSplit?: boolean;
   /** 连接模式，可选值：balance，nearby */
   AccessMode?: string;
+  /** 是否将libra节点当作普通RO节点 */
+  ApNodeAsRoNode?: boolean;
+  /** libra节点故障，是否转发给其他节点 */
+  ApQueryToOtherNode?: boolean;
 }
 
 /** 数据库代理，读写分离实例权重 */
@@ -2772,6 +2872,86 @@ declare interface CreateClustersResponse {
   RequestId?: string;
 }
 
+declare interface CreateIntegrateClusterRequest {
+  /** 可用区 */
+  Zone: string;
+  /** 所属VPC网络ID */
+  VpcId: string;
+  /** 所属子网ID */
+  SubnetId: string;
+  /** 数据库版本，取值范围: MYSQL可选值：5.7，8.0 */
+  DbVersion: string;
+  /** 所属项目ID */
+  ProjectId?: number;
+  /** 集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（'-','_','.'） */
+  ClusterName?: string;
+  /** 账号密码(8-64个字符，包含大小写英文字母、数字和符号~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/中的任意三种) */
+  AdminPassword?: string;
+  /** 端口，默认3306，取值范围[0, 65535) */
+  Port?: number;
+  /** 计费模式，按量计费：0，包年包月：1。默认按量计费。 */
+  PayMode?: number;
+  /** 购买集群数，可选值范围[1,3]，默认为1 */
+  Count?: number;
+  /** 普通实例存储上限，单位GB当DbType为MYSQL，且存储计费模式为预付费时，该参数需不大于cpu与memory对应存储规格上限 */
+  StorageLimit?: number;
+  /** 包年包月购买时长 */
+  TimeSpan?: number;
+  /** 包年包月购买时长单位，['s','d','m','y'] */
+  TimeUnit?: string;
+  /** 包年包月购买是否自动续费，默认为0。0标识默认续费方式，1表示自动续费，2表示不自动续费。 */
+  AutoRenewFlag?: number;
+  /** 是否自动选择代金券 1是 0否 默认为0 */
+  AutoVoucher?: number;
+  /** 集群创建需要绑定的tag数组信息 */
+  ResourceTags?: Tag[];
+  /** 集群存储计费模式，按量计费：0，包年包月：1。默认按量计费当DbType为MYSQL时，在集群计算计费模式为后付费（包括DbMode为SERVERLESS）时，存储计费模式仅可为按量计费回档与克隆均不支持包年包月存储 */
+  StoragePayMode?: number;
+  /** 安全组id数组 */
+  SecurityGroupIds?: string[];
+  /** 告警策略Id数组 */
+  AlarmPolicyIds?: string[];
+  /** 参数数组，暂时支持character_set_server （utf8｜latin1｜gbk｜utf8mb4） ，lower_case_table_names，1-大小写不敏感，0-大小写敏感 */
+  ClusterParams?: ParamItem[];
+  /** 交易模式，0-下单且支付，1-下单 */
+  DealMode?: number;
+  /** 参数模板ID，可以通过查询参数模板信息DescribeParamTemplates获得参数模板ID */
+  ParamTemplateId?: number;
+  /** 多可用区地址 */
+  SlaveZone?: string;
+  /** 实例初始化配置信息，主要用于购买集群时选不同规格实例 */
+  InstanceInitInfos?: IntegrateInstanceInfo[];
+  /** 全球数据库唯一标识 */
+  GdnId?: string;
+  /** 数据库代理配置 */
+  ProxyConfig?: ProxyConfigInfo;
+  /** 是否自动归档 */
+  AutoArchive?: string;
+  /** 暂停后的归档处理时间 */
+  AutoArchiveDelayHours?: number;
+  /** 加密方法（由加密算法和密钥对版本组成） */
+  EncryptMethod?: string;
+  /** 集成集群配置信息 */
+  IntegrateCreateClusterConfig?: IntegrateCreateClusterConfig;
+  /** 存储架构类型。 枚举值：1.0/2.0 默认值：1.0 */
+  StorageVersion?: string;
+}
+
+declare interface CreateIntegrateClusterResponse {
+  /** 冻结流水ID */
+  TranId?: string;
+  /** 订单号 */
+  DealNames?: string[];
+  /** 资源ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取资源ID） */
+  ResourceIds?: string[];
+  /** 集群ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取集群ID） */
+  ClusterIds?: string[];
+  /** 大订单号 */
+  BigDealIds?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateParamTemplateRequest {
   /** 模板名称 */
   TemplateName: string;
@@ -2891,7 +3071,7 @@ declare interface CreateResourcePackageRequest {
   PackageType: string;
   /** 资源包版本base-基础版本，common-通用版本，enterprise-企业版本 */
   PackageVersion: string;
-  /** 资源包大小，计算资源单位：万个；存储资源：GB */
+  /** 资源包大小，计算资源单位：个；存储资源：GB */
   PackageSpec: number;
   /** 资源包有效期，单位:天 */
   ExpireDay: number;
@@ -3792,6 +3972,24 @@ declare interface DescribeInstancesWithinSameClusterResponse {
   RequestId?: string;
 }
 
+declare interface DescribeIntegrateTaskRequest {
+  /** 大订单id，大订单id和子订单id必须二选一 */
+  BigDealId?: string;
+  /** 订单列表 */
+  DealNames?: string[];
+}
+
+declare interface DescribeIntegrateTaskResponse {
+  /** 当前步骤 */
+  CurrentStep?: string;
+  /** 当前进度 */
+  CurrentProgress?: string;
+  /** 任务状态 */
+  TaskStatus?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeIsolatedInstancesRequest {
   /** 返回数量，默认为 20，最大值为 100 */
   Limit?: number;
@@ -4380,6 +4578,24 @@ declare interface InquirePriceModifyResponse {
   RequestId?: string;
 }
 
+declare interface InquirePriceMultiSpecRequest {
+  /** 可用区,每个地域提供最佳实践 */
+  Zone: string;
+  /** 实例购买类型，可选值为：PREPAID, POSTPAID, SERVERLESS */
+  InstancePayMode: string;
+  /** 存储购买类型，可选值为：PREPAID, POSTPAID */
+  StoragePayMode: string;
+  /** 商品规格 */
+  GoodsSpecs: GoodsSpec[];
+}
+
+declare interface InquirePriceMultiSpecResponse {
+  /** 商品价格 */
+  GoodsPrice?: GoodsPrice[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface InquirePriceRenewRequest {
   /** 集群ID */
   ClusterId: string;
@@ -4913,6 +5129,10 @@ declare interface ModifyProxyRwSplitRequest {
   ConnectionPoolType?: string;
   /** 连接池时间。可选范围:0~300（秒） */
   ConnectionPoolTimeOut?: number;
+  /** 是否将libra节点当作普通RO节点 */
+  ApNodeAsRoNode?: boolean;
+  /** libra节点故障，是否转发给其他节点 */
+  ApQueryToOtherNode?: boolean;
 }
 
 declare interface ModifyProxyRwSplitResponse {
@@ -5739,6 +5959,8 @@ declare interface Cynosdb {
   CreateClusterDatabase(data: CreateClusterDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterDatabaseResponse>;
   /** 购买新集群 {@link CreateClustersRequest} {@link CreateClustersResponse} */
   CreateClusters(data: CreateClustersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClustersResponse>;
+  /** 购买集成集群 {@link CreateIntegrateClusterRequest} {@link CreateIntegrateClusterResponse} */
+  CreateIntegrateCluster(data: CreateIntegrateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrateClusterResponse>;
   /** 创建参数模板 {@link CreateParamTemplateRequest} {@link CreateParamTemplateResponse} */
   CreateParamTemplate(data: CreateParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateParamTemplateResponse>;
   /** 创建数据库代理 {@link CreateProxyRequest} {@link CreateProxyResponse} */
@@ -5841,6 +6063,8 @@ declare interface Cynosdb {
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** 查询同一集群下实例列表 {@link DescribeInstancesWithinSameClusterRequest} {@link DescribeInstancesWithinSameClusterResponse} */
   DescribeInstancesWithinSameCluster(data: DescribeInstancesWithinSameClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesWithinSameClusterResponse>;
+  /** 查询集成集群创建任务 {@link DescribeIntegrateTaskRequest} {@link DescribeIntegrateTaskResponse} */
+  DescribeIntegrateTask(data?: DescribeIntegrateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrateTaskResponse>;
   /** 查询回收站实例列表 {@link DescribeIsolatedInstancesRequest} {@link DescribeIsolatedInstancesResponse} */
   DescribeIsolatedInstances(data?: DescribeIsolatedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIsolatedInstancesResponse>;
   /** 查询实例维护时间窗 {@link DescribeMaintainPeriodRequest} {@link DescribeMaintainPeriodResponse} */
@@ -5895,6 +6119,8 @@ declare interface Cynosdb {
   InquirePriceCreate(data: InquirePriceCreateRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceCreateResponse>;
   /** 变配预付费集群询价 {@link InquirePriceModifyRequest} {@link InquirePriceModifyResponse} */
   InquirePriceModify(data: InquirePriceModifyRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceModifyResponse>;
+  /** 查询多规格价格 {@link InquirePriceMultiSpecRequest} {@link InquirePriceMultiSpecResponse} */
+  InquirePriceMultiSpec(data: InquirePriceMultiSpecRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceMultiSpecResponse>;
   /** 续费集群询价 {@link InquirePriceRenewRequest} {@link InquirePriceRenewResponse} */
   InquirePriceRenew(data: InquirePriceRenewRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRenewResponse>;
   /** 隔离集群 {@link IsolateClusterRequest} {@link IsolateClusterResponse} */

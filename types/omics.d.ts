@@ -76,6 +76,14 @@ declare interface CosFileInfo {
   Region?: string;
 }
 
+/** Cromwell工作流引擎设置 */
+declare interface CromwellConfig {
+  /** 工作流并发数 */
+  MaxConcurrentWorkflows: number;
+  /** 作业并发数 */
+  ConcurrentJobLimit: number;
+}
+
 /** 数据库配置。 */
 declare interface DatabaseOption {
   /** 数据库可用区。 */
@@ -110,6 +118,8 @@ declare interface Environment {
   LastWorkflowUuid?: string;
   /** 创建时间。 */
   CreationTime?: string;
+  /** 运行时配置。 */
+  RuntimeConfig?: EnvironmentRuntimeConfig;
 }
 
 /** 环境配置。 */
@@ -126,6 +136,14 @@ declare interface EnvironmentConfig {
   CVMOption: CVMOption;
   /** 安全组配置。 */
   SecurityGroupOption?: SecurityGroupOption;
+}
+
+/** 环境运行时配置 */
+declare interface EnvironmentRuntimeConfig {
+  /** Cromwell工作流引擎设置 */
+  CromwellConfig: CromwellConfig;
+  /** Nextflow工作流引擎设置 */
+  NextflowConfig: NextflowConfig;
 }
 
 /** 执行时间。 */
@@ -182,6 +200,12 @@ declare interface NFOption {
   NFVersion?: string;
   /** 启动路径。可填写指定缓存卷内的绝对路径，nextflow run 命令将在此路径执行。当WorkDir为COS路径时必填；当WorkDir为缓存卷路径时选填，不填默认使用WorkDir作为LaunchDir。 */
   LaunchDir?: string;
+}
+
+/** Nextflow工作流引擎设置 */
+declare interface NextflowConfig {
+  /** 工作流任务并发数 */
+  ExecutorQueueSize: number;
 }
 
 /** 通知类型 */
