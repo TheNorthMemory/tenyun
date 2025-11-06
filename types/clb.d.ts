@@ -1064,6 +1064,8 @@ declare interface RuleInput {
   Domains?: string[];
   /** 证书信息，支持同时传入不同算法类型的多本服务端证书；此参数和Certificate不能同时传入。 */
   MultiCertInfo?: MultiCertInfo;
+  /** 自定义cookie名 */
+  CookieName?: string;
 }
 
 /** HTTP/HTTPS监听器的转发规则（输出） */
@@ -1116,6 +1118,8 @@ declare interface RuleOutput {
   TargetGroupList?: BasicTargetGroupInfo[] | null;
   /** OAuth配置状态信息。 */
   OAuth?: OAuth;
+  /** 自定义cookie名。 */
+  CookieName?: string;
 }
 
 /** HTTP/HTTPS监听器下的转发规则绑定的后端服务信息 */
@@ -2805,6 +2809,8 @@ declare interface ModifyRuleRequest {
   TrpcFunc?: string;
   /** OAuth配置信息。 */
   OAuth?: OAuth;
+  /** 自定义cookie名 */
+  CookieName?: string;
 }
 
 declare interface ModifyRuleResponse {

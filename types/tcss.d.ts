@@ -10830,6 +10830,16 @@ declare interface SyncAssetImageRegistryAssetResponse {
   RequestId?: string;
 }
 
+declare interface UninstallClusterContainerSecurityRequest {
+  /** 集群ID */
+  ClusterIDs: string[];
+}
+
+declare interface UninstallClusterContainerSecurityResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateAndPublishNetworkFirewallPolicyDetailRequest {
   /** 集群Id */
   ClusterId: string;
@@ -11677,6 +11687,8 @@ declare interface Tcss {
   SwitchImageAutoAuthorizedRule(data: SwitchImageAutoAuthorizedRuleRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchImageAutoAuthorizedRuleResponse>;
   /** 镜像仓库资产刷新 {@link SyncAssetImageRegistryAssetRequest} {@link SyncAssetImageRegistryAssetResponse} */
   SyncAssetImageRegistryAsset(data?: SyncAssetImageRegistryAssetRequest, config?: AxiosRequestConfig): AxiosPromise<SyncAssetImageRegistryAssetResponse>;
+  /** 卸载集群容器安全 {@link UninstallClusterContainerSecurityRequest} {@link UninstallClusterContainerSecurityResponse} */
+  UninstallClusterContainerSecurity(data: UninstallClusterContainerSecurityRequest, config?: AxiosRequestConfig): AxiosPromise<UninstallClusterContainerSecurityResponse>;
   /** 容器网络创建网络策略更新并发布任务 {@link UpdateAndPublishNetworkFirewallPolicyDetailRequest} {@link UpdateAndPublishNetworkFirewallPolicyDetailResponse} */
   UpdateAndPublishNetworkFirewallPolicyDetail(data: UpdateAndPublishNetworkFirewallPolicyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAndPublishNetworkFirewallPolicyDetailResponse>;
   /** 容器网络更新Yaml网络策略并发布任务 {@link UpdateAndPublishNetworkFirewallPolicyYamlDetailRequest} {@link UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse} */

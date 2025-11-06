@@ -2,6 +2,14 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 智能体信息 */
+declare interface AIAgentInfo {
+  /** 智能体ID */
+  AIAgentId?: number;
+  /** 智能体名称 */
+  AIAgentName?: string;
+}
+
 /** AI会话分析结果 */
 declare interface AIAnalysisResult {
   /** summary: 会话小结mood: 情绪分析intention: 意向提取 */
@@ -1566,6 +1574,24 @@ declare interface DeleteStaffResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAIAgentInfoListRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 分页尺寸，上限 100 */
+  PageSize: number;
+  /** 分页页码，从 0 开始 */
+  PageNumber: number;
+}
+
+declare interface DescribeAIAgentInfoListResponse {
+  /** 智能体信息列表 */
+  AIAgentInfoList?: AIAgentInfo[];
+  /** 智能体总数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAIAnalysisResultRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -2695,6 +2721,8 @@ declare interface Ccc {
   DeletePredictiveDialingCampaign(data: DeletePredictiveDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePredictiveDialingCampaignResponse>;
   /** 删除坐席信息 {@link DeleteStaffRequest} {@link DeleteStaffResponse} */
   DeleteStaff(data: DeleteStaffRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStaffResponse>;
+  /** 获取智能体信息列表 {@link DescribeAIAgentInfoListRequest} {@link DescribeAIAgentInfoListResponse} */
+  DescribeAIAgentInfoList(data: DescribeAIAgentInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIAgentInfoListResponse>;
   /** 获取 AI 会话分析结果 {@link DescribeAIAnalysisResultRequest} {@link DescribeAIAnalysisResultResponse} */
   DescribeAIAnalysisResult(data: DescribeAIAnalysisResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIAnalysisResultResponse>;
   /** 查询 AI 通话内容提取结果 {@link DescribeAICallExtractResultRequest} {@link DescribeAICallExtractResultResponse} */

@@ -889,7 +889,7 @@ declare interface CreateWorkspacesRequest {
   SpaceCount?: number;
   /** 工作空间显示名称 */
   SpaceName?: string;
-  /** 工作空间登陆设置 */
+  /** 工作空间登录设置 */
   LoginSettings?: LoginSettings;
   /** 工作空间所属安全组 */
   SecurityGroupIds?: string[];

@@ -2169,7 +2169,7 @@ declare interface CreateModelServiceRequest {
   RollingUpdate?: RollingUpdate;
   /** sidecar配置 */
   Sidecar?: SidecarSpec;
-  /** 数据盘批量挂载配置，当前仅支持CFS，仅针对“模型来源-资源组缓存”。 */
+  /** 数据盘批量挂载配置，当前仅支持CFS，仅针对“模型来源-腾讯云存储、模型来源-腾讯云容器镜像、模型来源-资源组、模型来源-数据源”。 */
   VolumeMounts?: VolumeMount[];
 }
 
@@ -3071,7 +3071,7 @@ declare interface ModifyModelServiceRequest {
   Sidecar?: SidecarSpec;
   /** 资源组 id */
   ResourceGroupId?: string;
-  /** 数据盘批量挂载配置，当前仅支持CFS，仅针对“模型来源-资源组缓存”。 */
+  /** 数据盘批量挂载配置，当前仅支持CFS，仅针对“模型来源-腾讯云存储、模型来源-腾讯云容器镜像、模型来源-资源组、模型来源-数据源”。 */
   VolumeMounts?: VolumeMount[];
 }
 

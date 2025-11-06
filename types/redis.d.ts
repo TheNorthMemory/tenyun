@@ -246,6 +246,10 @@ declare interface InstanceClusterShard {
   RunId?: string;
   /** 服务状态。- 0：down。- 1：on。 */
   Connected?: number;
+  /** 可用区信息。 */
+  ZoneId?: string;
+  /** 节点组 ID。 */
+  ReplicasNodeId?: number;
 }
 
 /** 实例枚举类型参数描述 */

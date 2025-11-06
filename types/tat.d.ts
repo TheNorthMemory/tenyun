@@ -409,6 +409,8 @@ declare interface CreateInvokerRequest {
   Parameters?: string;
   /** 周期执行器设置。当执行器类型为 `SCHEDULE` 时，必须指定此参数。 */
   ScheduleSettings?: ScheduleSettings;
+  /** 为命令关联的标签，列表长度不超过10 */
+  Tags?: Tag[];
 }
 
 declare interface CreateInvokerResponse {

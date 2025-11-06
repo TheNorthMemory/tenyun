@@ -72,7 +72,7 @@ declare interface AlarmInfo {
   Classifications?: AlarmClassification[];
   /** 多触发条件。与Condition互斥。 */
   MultiConditions?: MultiCondition[];
-  /** 云监控通知渠道相关信息，和AlarmNoticeIds互斥 */
+  /** 腾讯云可观测平台通知渠道相关信息，和AlarmNoticeIds互斥 */
   MonitorNotice?: MonitorNotice;
 }
 
@@ -224,7 +224,7 @@ declare interface AlertHistoryRecord {
   AlarmLevel?: number;
   /** 监控对象类型。0:执行语句共用监控对象; 1:每个执行语句单独选择监控对象。 */
   MonitorObjectType?: number;
-  /** 通知渠道类型，0默认代表cls内部通知渠道，1代表云监控通知渠道 */
+  /** 通知渠道类型，0默认代表cls内部通知渠道，1代表腾讯云可观测平台通知渠道 */
   SendType?: number;
 }
 
@@ -1240,7 +1240,7 @@ declare interface MonitorNotice {
   Notices?: MonitorNoticeRule[];
 }
 
-/** 云监控通知渠道组信息 */
+/** 腾讯云可观测平台通知渠道组信息 */
 declare interface MonitorNoticeRule {
   /** 腾讯云可观测平台通知模板 ID */
   NoticeId?: string;

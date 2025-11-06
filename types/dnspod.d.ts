@@ -334,7 +334,7 @@ declare interface DomainCreateInfo {
 declare interface DomainInfo {
   /** 域名ID */
   DomainId?: number;
-  /** 域名状态 */
+  /** 域名状态，正常：ENABLE，暂停：PAUSE，封禁：SPAM */
   Status?: string;
   /** 域名套餐等级 */
   Grade?: string;
@@ -342,7 +342,7 @@ declare interface DomainInfo {
   GroupId?: number;
   /** 是否星标域名 */
   IsMark?: string;
-  /** TTL(DNS记录缓存时间) */
+  /** TTL(DNS记录缓存时间)，单位：秒 */
   TTL?: number;
   /** cname加速启用状态 */
   CnameSpeedup?: string;
@@ -350,7 +350,7 @@ declare interface DomainInfo {
   Remark?: string;
   /** 域名Punycode */
   Punycode?: string;
-  /** 域名DNS状态 */
+  /** 域名DNS状态，错误：dnserror，正常：空字符串 */
   DnsStatus?: string;
   /** 域名的NS列表 */
   DnspodNsList?: string[];
@@ -806,7 +806,7 @@ declare interface RecordListItem {
   Remark?: string;
   /** 记录缓存时间 */
   TTL?: number;
-  /** MX值，只有MX记录有 */
+  /** MX值 */
   MX?: number;
   /** 是否是默认的ns记录 */
   DefaultNS?: boolean;
@@ -976,19 +976,19 @@ declare interface UserInfo {
   Id?: number;
   /** 用户账号, 邮箱格式 */
   Email?: string;
-  /** 账号状态：”enabled”: 正常；”disabled”: 被封禁 */
+  /** 账号状态: "enabled": 正常; "disabled": 被封禁 */
   Status?: string;
   /** 电话号码 */
   Telephone?: string;
-  /** 邮箱是否通过验证：”yes”: 通过；”no”: 未通过 */
+  /** 邮箱是否通过验证："yes": 通过; "no": 未通过 */
   EmailVerified?: string;
-  /** 手机是否通过验证：”yes”: 通过；”no”: 未通过 */
+  /** 手机是否通过验证："yes": 通过； "no": 未通过 */
   TelephoneVerified?: string;
   /** 账号等级, 按照用户账号下域名等级排序, 选取一个最高等级为账号等级, 具体对应情况参见域名等级。 */
   UserGrade?: string;
   /** 用户名称, 企业用户对应为公司名称 */
   RealName?: string;
-  /** 是否绑定微信：”yes”: 通过；”no”: 未通过 */
+  /** 是否绑定微信： "yes": 通过； "no": 未通过 */
   WechatBinded?: string;
   /** 用户UIN */
   Uin?: number;
@@ -1243,7 +1243,7 @@ declare interface CreateDomainRequest {
   Domain: string;
   /** 域名分组ID。可以通过接口DescribeDomainGroupList查看当前域名分组信息 */
   GroupId?: number;
-  /** 是否星标域名，”yes”、”no” 分别代表是和否。 */
+  /** 是否星标域名，"yes"、"no" 分别代表是和否。 */
   IsMark?: string;
   /** 添加子域名时，是否迁移相关父域名的解析记录。不传默认为 true */
   TransferSubDomain?: boolean;
@@ -2390,6 +2390,20 @@ declare interface DownloadSnapshotResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDomainCNAMESpeedupStatusBatchRequest {
+  /** 域名列表 */
+  DomainList: string[];
+  /** 状态。ENABLE-开启；DISABLE-关闭。 */
+  Status: string;
+}
+
+declare interface ModifyDomainCNAMESpeedupStatusBatchResponse {
+  /** 任务 ID */
+  JobId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDomainCustomLineRequest {
   /** 域名 */
   Domain: string;
@@ -2434,6 +2448,20 @@ declare interface ModifyDomainOwnerRequest {
 }
 
 declare interface ModifyDomainOwnerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDomainRecursiveStatusBatchRequest {
+  /** 域名列表 */
+  DomainList: string[];
+  /** ENABLE-开启；DISABLE-关闭。 */
+  Status: string;
+}
+
+declare interface ModifyDomainRecursiveStatusBatchResponse {
+  /** 任务 ID */
+  JobId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2741,9 +2769,9 @@ declare interface ModifyTXTRecordRequest {
   DomainId?: number;
   /** 主机记录，如 www，如果不传，默认为 @。 */
   SubDomain?: string;
-  /** 线路的 ID，通过 API 记录线路获得，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。 */
+  /** 线路的 ID，通过 API 记录线路获得，字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。 */
   RecordLineId?: string;
-  /** TTL，范围1-604800，不同等级域名最小值不同。 */
+  /** TTL，范围1-604800，不同等级域名最小值不同。单位：秒 */
   TTL?: number;
   /** 记录初始状态，取值范围为 ENABLE 和 DISABLE 。默认为 ENABLE ，如果传入 DISABLE，解析不会生效，也不会验证负载均衡的限制。 */
   Status?: string;
@@ -2963,12 +2991,16 @@ declare interface Dnspod {
   DescribeVasList(data?: DescribeVasListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVasListResponse>;
   /** 下载快照 {@link DownloadSnapshotRequest} {@link DownloadSnapshotResponse} */
   DownloadSnapshot(data: DownloadSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadSnapshotResponse>;
+  /** 批量修改域名CNAME加速状态 {@link ModifyDomainCNAMESpeedupStatusBatchRequest} {@link ModifyDomainCNAMESpeedupStatusBatchResponse} */
+  ModifyDomainCNAMESpeedupStatusBatch(data: ModifyDomainCNAMESpeedupStatusBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainCNAMESpeedupStatusBatchResponse>;
   /** 修改域名的自定义线路 {@link ModifyDomainCustomLineRequest} {@link ModifyDomainCustomLineResponse} */
   ModifyDomainCustomLine(data: ModifyDomainCustomLineRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainCustomLineResponse>;
   /** 锁定域名 {@link ModifyDomainLockRequest} {@link ModifyDomainLockResponse} */
   ModifyDomainLock(data: ModifyDomainLockRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainLockResponse>;
   /** 域名过户 {@link ModifyDomainOwnerRequest} {@link ModifyDomainOwnerResponse} */
   ModifyDomainOwner(data: ModifyDomainOwnerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainOwnerResponse>;
+  /** 批量修改域名递归解析加速状态 {@link ModifyDomainRecursiveStatusBatchRequest} {@link ModifyDomainRecursiveStatusBatchResponse} */
+  ModifyDomainRecursiveStatusBatch(data: ModifyDomainRecursiveStatusBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainRecursiveStatusBatchResponse>;
   /** 设置域名备注 {@link ModifyDomainRemarkRequest} {@link ModifyDomainRemarkResponse} */
   ModifyDomainRemark(data: ModifyDomainRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainRemarkResponse>;
   /** 修改域名状态 {@link ModifyDomainStatusRequest} {@link ModifyDomainStatusResponse} */

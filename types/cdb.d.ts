@@ -3415,11 +3415,11 @@ declare interface DescribeCpuExpandHistoryRequest {
   Status?: string;
   /** 查询的开始时间。只能查看30天内的扩容历史，格式为 Integer 的时间戳（秒级）。 */
   StartTime?: number;
-  /** 查询的结束时间。只能查看30天内的扩容历史，格式为 Integer 的时间戳（秒级）。 */
+  /** 查询的结束时间，默认为当前时间。只能查看30天内的扩容历史，格式为 Integer 的时间戳（秒级）。 */
   EndTime?: number;
   /** 分页入参 */
   Offset?: number;
-  /** 分页入参 */
+  /** 分页入参，默认20 */
   Limit?: number;
 }
 

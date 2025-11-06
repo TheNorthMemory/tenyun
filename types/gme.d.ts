@@ -154,6 +154,28 @@ declare interface AudioTextStatisticsItem {
   Data?: number;
 }
 
+/** 审核结果明细（对外） */
+declare interface AuditResultDetailExternal {
+  /** 任务 ID */
+  TaskId?: string;
+  /** 房间 ID */
+  RoomId?: string;
+  /** UserID */
+  OpenId?: string;
+  /** 标签 */
+  Label?: string;
+  /** 恶意分数 */
+  Rate?: number;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 音频 Url */
+  Url?: string;
+  /** 文件Id */
+  FileId?: string;
+  /** ASR结果 */
+  Info?: string;
+}
+
 /** CreateApp的输出参数 */
 declare interface CreateAppResp {
   /** 应用ID，由后台自动生成。 */
@@ -801,9 +823,33 @@ declare interface DescribeApplicationListResponse {
 }
 
 declare interface DescribeAuditResultExternalRequest {
+  /** 应用 ID */
+  BizId: number;
+  /** 页数 取值范围：>=1 */
+  PageNo: number;
+  /** 每页大小 */
+  PageSize: number;
+  /** 起始时间戳（秒） */
+  BeginTime: number;
+  /** 截止时间戳（秒） */
+  EndTime: number;
+  /** 最小恶意分数 */
+  MinRate: number;
+  /** 最大恶意分数 */
+  MaxRate: number;
+  /** UserID */
+  OpenId: string;
+  /** 恶意分类 */
+  Label?: string;
+  /** 房间 ID */
+  RoomId?: string;
 }
 
 declare interface DescribeAuditResultExternalResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 明细列表 */
+  Data?: AuditResultDetailExternal[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1250,7 +1296,7 @@ declare interface Gme {
   /** 查询某账号下的应用列表 {@link DescribeApplicationListRequest} {@link DescribeApplicationListResponse} */
   DescribeApplicationList(data: DescribeApplicationListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationListResponse>;
   /** 获取GME审核结果明细（外部API） {@link DescribeAuditResultExternalRequest} {@link DescribeAuditResultExternalResponse} */
-  DescribeAuditResultExternal(data?: DescribeAuditResultExternalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditResultExternalResponse>;
+  DescribeAuditResultExternal(data: DescribeAuditResultExternalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditResultExternalResponse>;
   /** 获取用户自定义送检信息 {@link DescribeRealtimeScanConfigRequest} {@link DescribeRealtimeScanConfigResponse} */
   DescribeRealtimeScanConfig(data: DescribeRealtimeScanConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRealtimeScanConfigResponse>;
   /** 查询录制任务信息 {@link DescribeRecordInfoRequest} {@link DescribeRecordInfoResponse} */
