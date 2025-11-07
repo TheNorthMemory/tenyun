@@ -3615,7 +3615,7 @@ declare interface ExtractDocMultiRequest {
   ItemNamesShowMode?: boolean;
   /** 是否开启全文字段识别 */
   ReturnFullText?: boolean;
-  /** 配置id支持：General -- 通用场景 InvoiceEng -- 国际invoice模板 WayBillEng --海运订单模板CustomsDeclaration -- 进出口报关单WeightNote -- 磅单MedicalMeter -- 血压仪表识别BillOfLading -- 海运提单EntrustmentBook -- 海运托书Statement -- 对账单识别模板BookingConfirmation -- 配舱通知书识别模板AirWayBill -- 航空运单识别模板Table -- 表格模板SteelLabel -- 实物标签识别模板CarInsurance -- 车辆保险单识别模板MultiRealEstateCertificate -- 房产材料识别模板MultiRealEstateMaterial -- 房产证明识别模板HongKongUtilityBill -- 中国香港水电煤单识别模板OverseasCheques -- 海外支票RegistrationCertificate -- 备案证​GridPhoto -- 电网系统照片​SignaturePage -- 签署页 */
+  /** 配置id支持：General -- 通用场景 InvoiceEng -- 国际invoice模板 WayBillEng --海运订单模板CustomsDeclaration -- 进出口报关单WeightNote -- 磅单MedicalMeter -- 血压仪表识别BillOfLading -- 海运提单EntrustmentBook -- 海运托书Statement -- 对账单识别模板BookingConfirmation -- 配舱通知书识别模板AirWayBill -- 航空运单识别模板Table -- 表格模板SteelLabel -- 实物标签识别模板CarInsurance -- 车辆保险单识别模板MultiRealEstateCertificate -- 房产材料识别模板MultiRealEstateMaterial -- 房产证明识别模板HongKongUtilityBill -- 中国香港水电煤单识别模板OverseasCheques -- 海外支票RegistrationCertificate -- 备案证​GridPhoto -- 电网系统照片​SignaturePage -- 签署页​SalesDeliveryNote -- 销售发货单 */
   ConfigId?: string;
   /** 是否开启全文字段坐标值的识别 */
   EnableCoord?: boolean;

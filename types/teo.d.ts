@@ -4170,6 +4170,24 @@ declare interface ZoneSetting {
   JITVideoProcess?: JITVideoProcess | null;
 }
 
+declare interface ApplyFreeCertificateRequest {
+  /** 站点ID。 */
+  ZoneId: string;
+  /** 申请免费证书的目标域名。 */
+  Domain: string;
+  /** 申请免费证书时验证方式，详细验证方式说明参考[免费证书申请方式说明文档](https://cloud.tencent.com/document/product/1552/90437) ，相关取值有：http_challenge：HTTP 访问文件验证方式，通过 HTTP 访问域名指定 URL 获取文件信息以完成免费证书申请验证；dns_challenge：DNS 委派验证方式，通过添加指定的主机记录解析指向 EdgeOne 以完成免费证书申请验证。注意：在触发本接口后，你需要根据返回的验证信息，完成验证内容配置。配置完成后，还需要通过检查免费证书申请结果接口进行验证，验证通过后，即可申请成功。在免费证书申请成功后，你可以调用配置域名证书接口为当前域名部署免费证书。 */
+  VerificationMethod: string;
+}
+
+declare interface ApplyFreeCertificateResponse {
+  /** 当 VerificationMethod 为 dns_challenge 时，域名申请免费证书的相关验证信息。 */
+  DnsVerification?: DnsVerification;
+  /** 当 VerificationMethod 为 http_challenge 时，域名申请免费证书的相关验证信息。 */
+  FileVerification?: FileVerification;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BindSecurityTemplateToEntityRequest {
   /** 需要绑定或解绑的策略模板所属站点 ID。 */
   ZoneId: string;
@@ -4224,6 +4242,24 @@ declare interface CheckCnameStatusRequest {
 declare interface CheckCnameStatusResponse {
   /** 加速域名 CNAME 状态信息列表。 */
   CnameStatus?: CnameStatus[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CheckFreeCertificateVerificationRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 加速域名，该域名为[申请免费证书](https://tcloud4api.woa.com/document/product/1657/927654?!preview&!document=1)时使用的域名。 */
+  Domain: string;
+}
+
+declare interface CheckFreeCertificateVerificationResponse {
+  /** 免费证书申请成功时，该证书颁发给的域名。注意：一个域名只允许申请一本免费证书， 如果已经有泛域名申请了免费证书的情况下，其子域名会匹配使用该泛域名证书。 */
+  CommonName?: string;
+  /** 免费证书申请成功时，该证书使用的签名算法，当前仅支持 RSA 2048。 */
+  SignatureAlgorithm?: string;
+  /** 免费证书申请成功时，该证书的过期时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。 */
+  ExpireTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7793,6 +7829,8 @@ declare namespace V20220106 {
 /** {@link Teo 边缘安全加速平台} */
 declare interface Teo {
   (): Versions;
+  /** 申请免费证书 {@link ApplyFreeCertificateRequest} {@link ApplyFreeCertificateResponse} */
+  ApplyFreeCertificate(data: ApplyFreeCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyFreeCertificateResponse>;
   /** 绑定或解绑安全策略模板 {@link BindSecurityTemplateToEntityRequest} {@link BindSecurityTemplateToEntityResponse} */
   BindSecurityTemplateToEntity(data: BindSecurityTemplateToEntityRequest, config?: AxiosRequestConfig): AxiosPromise<BindSecurityTemplateToEntityResponse>;
   /** 绑定共享 CNAME {@link BindSharedCNAMERequest} {@link BindSharedCNAMEResponse} */
@@ -7801,6 +7839,8 @@ declare interface Teo {
   BindZoneToPlan(data: BindZoneToPlanRequest, config?: AxiosRequestConfig): AxiosPromise<BindZoneToPlanResponse>;
   /** 校验域名 CNAME 状态 {@link CheckCnameStatusRequest} {@link CheckCnameStatusResponse} */
   CheckCnameStatus(data: CheckCnameStatusRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCnameStatusResponse>;
+  /** 检查免费证书申请结果 {@link CheckFreeCertificateVerificationRequest} {@link CheckFreeCertificateVerificationResponse} */
+  CheckFreeCertificateVerification(data: CheckFreeCertificateVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<CheckFreeCertificateVerificationResponse>;
   /** 确认多通道安全加速网关回源 IP 网段更新 {@link ConfirmMultiPathGatewayOriginACLRequest} {@link ConfirmMultiPathGatewayOriginACLResponse} */
   ConfirmMultiPathGatewayOriginACL(data: ConfirmMultiPathGatewayOriginACLRequest, config?: AxiosRequestConfig): AxiosPromise<ConfirmMultiPathGatewayOriginACLResponse>;
   /** 确认回源 IP 网段更新 {@link ConfirmOriginACLUpdateRequest} {@link ConfirmOriginACLUpdateResponse} */

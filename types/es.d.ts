@@ -1155,6 +1155,48 @@ declare namespace V20180416 {
     NodeIp?: string;
   }
 
+  /** IP溯源配置 */
+  interface IpTraceConfig {
+    /** 请求溯源开关 */
+    EnableRequest?: boolean;
+    /** 返回溯源开关 */
+    EnableResponse?: boolean;
+    /** 请求消息体溯源开关 */
+    EnableRequestBody?: boolean;
+    /** 返回消息体溯源开关 */
+    EnableResponseBody?: boolean;
+    /** 排除IP */
+    RemoteIpInclude?: string[];
+    /** 包含IP */
+    RemoteIpExclude?: string[];
+    /** 排除uri */
+    UriInclude?: string[];
+    /** 包含uri */
+    UriExclude?: string[];
+  }
+
+  /** IP溯源日志 */
+  interface IpTraceLogEntry {
+    /** 时间 */
+    Timestamp?: string;
+    /** 访问IP */
+    RemoteIp?: string;
+    /** 溯源类型rsp/req */
+    TraceType?: string;
+    /** 访问网络类型，公网/私网 */
+    NetType?: string;
+    /** 原始消息 */
+    Message?: string;
+    /** 访问uri */
+    Uri?: string;
+    /** 公网IP */
+    PublicIp?: string;
+    /** 请求类型或返回状态 */
+    ReqTypeOrRspStatus?: string;
+    /** 集群节点IP */
+    NodeIp?: string;
+  }
+
   /** 智能运维诊断参数 */
   interface JobParam {
     /** 诊断项列表 */
@@ -2805,6 +2847,28 @@ declare namespace V20180416 {
     RequestId?: string;
   }
 
+  interface GetIpTraceStatusRequest {
+    /** 集群ID */
+    InstanceId?: string;
+  }
+
+  interface GetIpTraceStatusResponse {
+    /** 是否开启IP溯源 */
+    OpenIpTrace?: boolean;
+    /** IP溯源开启持续时间，单位：秒 */
+    DurationTime?: number;
+    /** IP溯源配置 */
+    IpTraceConfig?: IpTraceConfig;
+    /** 上次执行时间 */
+    LastStartTime?: string;
+    /** 上次关闭时间 */
+    LastEndTime?: string;
+    /** 是否过滤Kibana节点IP */
+    FilterKibanaIp?: boolean;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface GetRequestTargetNodeTypesRequest {
     /** 实例ID */
     InstanceId: string;
@@ -2863,6 +2927,42 @@ declare namespace V20180416 {
   }
 
   interface ModifyEsVipSecurityGroupResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface QueryIpTraceLogRequest {
+    /** ES集群ID */
+    InstanceId: string;
+    /** 开始时间 */
+    StartTime?: string;
+    /** 结束时间 */
+    EndTime?: string;
+    /** 起始偏移量 */
+    Offset?: number;
+    /** 数据条数 */
+    Limit?: number;
+    /** 访问IP */
+    RemoteIp?: string[];
+    /** Request/Response 请求/返回, 非必填 */
+    TraceType?: string[];
+    /** Public/Private 公网访问/内网访问, 非必填 */
+    NetType?: string[];
+    /** POST/GET/PUT/DELETE/HEAD/OPTIONS/PATCH/CONNECT/TRACE/CONNECT等, 非必填 */
+    ReqTypeOrRspStatus?: string[];
+    /** 关键字模糊查询，支持Lucene Query String */
+    SearchKey?: string;
+    /** Uri搜索 */
+    Uri?: string;
+    /** 集群节点IP */
+    NodeIp?: string[];
+  }
+
+  interface QueryIpTraceLogResponse {
+    /** 总数 */
+    Total?: number;
+    /** IP溯源日志列表 */
+    IpTraceLogList?: IpTraceLogEntry[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3161,6 +3261,24 @@ declare namespace V20180416 {
     RequestId?: string;
   }
 
+  interface UpdateIpTraceStatusRequest {
+    /** 集群ID */
+    InstanceId?: string;
+    /** IP溯源配置开关 */
+    OpenIpTrace?: boolean;
+    /** IP溯源开启持续时间，单位：秒 */
+    DurationTime?: number;
+    /** IP溯源配置 */
+    IpTraceConfig?: IpTraceConfig;
+    /** 是否过滤kibana节点IP */
+    FilterKibanaIp?: boolean;
+  }
+
+  interface UpdateIpTraceStatusResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface UpdateJdkRequest {
     /** ES实例ID */
     InstanceId: string;
@@ -3443,6 +3561,8 @@ declare interface Es {
   ExportIpTraceLog(data: V20180416.ExportIpTraceLogRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.ExportIpTraceLogResponse>;
   /** 查看智能运维配置 {@link V20180416.GetDiagnoseSettingsRequest} {@link V20180416.GetDiagnoseSettingsResponse} */
   GetDiagnoseSettings(data: V20180416.GetDiagnoseSettingsRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.GetDiagnoseSettingsResponse>;
+  /** 查询集群IP溯源状态 {@link V20180416.GetIpTraceStatusRequest} {@link V20180416.GetIpTraceStatusResponse} */
+  GetIpTraceStatus(data: V20180416.GetIpTraceStatusRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.GetIpTraceStatusResponse>;
   /** 获取接收客户端请求的节点类型 {@link V20180416.GetRequestTargetNodeTypesRequest} {@link V20180416.GetRequestTargetNodeTypesResponse} */
   GetRequestTargetNodeTypes(data: V20180416.GetRequestTargetNodeTypesRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.GetRequestTargetNodeTypesResponse>;
   /** 集群续费询价 {@link V20180416.InquirePriceRenewInstanceRequest} {@link V20180416.InquirePriceRenewInstanceResponse} */
@@ -3451,6 +3571,8 @@ declare interface Es {
   InstallInstanceModel(data: V20180416.InstallInstanceModelRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.InstallInstanceModelResponse>;
   /** 修改集群VIP绑定的安全组 {@link V20180416.ModifyEsVipSecurityGroupRequest} {@link V20180416.ModifyEsVipSecurityGroupResponse} */
   ModifyEsVipSecurityGroup(data: V20180416.ModifyEsVipSecurityGroupRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.ModifyEsVipSecurityGroupResponse>;
+  /** 查询IP溯源日志 {@link V20180416.QueryIpTraceLogRequest} {@link V20180416.QueryIpTraceLogResponse} */
+  QueryIpTraceLog(data: V20180416.QueryIpTraceLogRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.QueryIpTraceLogResponse>;
   /** 重启ES集群实例 {@link V20180416.RestartInstanceRequest} {@link V20180416.RestartInstanceResponse} */
   RestartInstance(data: V20180416.RestartInstanceRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.RestartInstanceResponse>;
   /** 重启Kibana {@link V20180416.RestartKibanaRequest} {@link V20180416.RestartKibanaResponse} */
@@ -3475,6 +3597,8 @@ declare interface Es {
   UpdateIndex(data: V20180416.UpdateIndexRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.UpdateIndexResponse>;
   /** 更新ES集群实例 {@link V20180416.UpdateInstanceRequest} {@link V20180416.UpdateInstanceResponse} */
   UpdateInstance(data: V20180416.UpdateInstanceRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.UpdateInstanceResponse>;
+  /** 更新IP溯源状态 {@link V20180416.UpdateIpTraceStatusRequest} {@link V20180416.UpdateIpTraceStatusResponse} */
+  UpdateIpTraceStatus(data: V20180416.UpdateIpTraceStatusRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.UpdateIpTraceStatusResponse>;
   /** 更新实例Jdk配置 {@link V20180416.UpdateJdkRequest} {@link V20180416.UpdateJdkResponse} */
   UpdateJdk(data: V20180416.UpdateJdkRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.UpdateJdkResponse>;
   /** 更新Logstash实例 {@link V20180416.UpdateLogstashInstanceRequest} {@link V20180416.UpdateLogstashInstanceResponse} */

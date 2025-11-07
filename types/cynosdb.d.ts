@@ -20,6 +20,14 @@ declare interface Ability {
   NoSupportTransparentDataEncryptionReason?: string;
   /** 是否支持手动发起逻辑备份 */
   IsSupportManualLogic?: string;
+  /** 是否支持开启全局加密 */
+  IsSupportGlobalEncryption?: string;
+  /** 不支持全局加密的原因 */
+  NoSupportGlobalEncryptionReason?: string;
+  /** 不支持透明加密原因状态码 */
+  NoSupportTransparentDataEncryptionReasonCode?: string;
+  /** 不支持全局加密原因状态码 */
+  NoSupportGlobalEncryptionReasonCode?: string;
 }
 
 /** 数据库账号信息 */
@@ -3746,6 +3754,10 @@ declare interface DescribeClusterTransparentEncryptInfoResponse {
   KeyId?: string;
   /** 加密秘钥地域 */
   KeyRegion?: string;
+  /** 秘钥类型 */
+  KeyType?: string;
+  /** 是否已经开启全局加密 */
+  IsOpenGlobalEncryption?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3777,7 +3789,7 @@ declare interface DescribeClustersResponse {
 declare interface DescribeDBSecurityGroupsRequest {
   /** 实例ID（InstanceId与InstanceGroupId必须任选一个传入） */
   InstanceId?: string;
-  /** 实例组ID（InstanceId与InstanceGroupId必须任选一个传入） */
+  /** 实例组 ID，可通过 [DescribeClusterInstanceGroups](https://cloud.tencent.com/document/product/1003/103934) 接口查询。 */
   InstanceGroupId?: string;
 }
 
@@ -5337,6 +5349,8 @@ declare interface OpenClusterTransparentEncryptRequest {
   KeyId?: string;
   /** 秘钥地域 */
   KeyRegion?: string;
+  /** 是否开启全局加密 */
+  IsOpenGlobalEncryption?: boolean;
 }
 
 declare interface OpenClusterTransparentEncryptResponse {

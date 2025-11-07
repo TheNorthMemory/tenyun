@@ -104,8 +104,10 @@ declare interface AudioEncodeParams {
 
 /** TTS音频输出的格式 */
 declare interface AudioFormat {
-  /** 生成的音频格式，默认pcm，目前支持的格式列表：[pcm]。 */
+  /** 生成的音频格式，默认pcm，目前支持的格式列表：流式：[pcm]，非流式 [pcm，wav] */
   Format?: string;
+  /** 采样率，默认24000， 可选16000, 24000 */
+  SampleRate?: number;
 }
 
 /** 录制音频转码参数。 */
@@ -1022,6 +1024,8 @@ declare interface TRTCDataResult {
 declare interface TTSConfig {
   /** 音色ID */
   VoiceId: string;
+  /** TTS 的模型，默认是：flow_01_turbo, 可选: [ flow_01_turbo, flow_01_ex] */
+  Model?: string;
 }
 
 /** 腾讯云点播相关参数。 */
@@ -1188,6 +1192,12 @@ declare interface VideoParams {
 declare interface Voice {
   /** TTS的声音的ID */
   VoiceId: string;
+  /** 语速，范围 0.5-2.0，默认 1.0 */
+  Speed?: number;
+  /** (0, 10] 默认值1.0 */
+  Volume?: number;
+  /** 取值[-12,12],默认0 */
+  Pitch?: number;
 }
 
 /** 声纹配置参数 */
@@ -2539,6 +2549,10 @@ declare interface TextToSpeechRequest {
   AudioFormat?: AudioFormat;
   /** TTS的API密钥 */
   APIKey?: string;
+  /** TTS的模型：flow_01_turbo，flow_01_ex */
+  Model?: string;
+  /** 语言参数，默认为空， 参考： (ISO 639-1) */
+  Language?: string;
 }
 
 declare interface TextToSpeechResponse {
@@ -2559,6 +2573,10 @@ declare interface TextToSpeechSSERequest {
   AudioFormat?: AudioFormat;
   /** TTS的API密钥 */
   APIKey?: string;
+  /** TTS的模型：flow_01_turbo，flow_01_ex */
+  Model?: string;
+  /** 语言参数，默认为空， 参考： (ISO 639-1) */
+  Language?: string;
 }
 
 declare interface TextToSpeechSSEResponse {
@@ -2665,6 +2683,10 @@ declare interface VoiceCloneRequest {
   APIKey?: string;
   /** 声音克隆的参考文本，为参考音频对应的文字。 */
   PromptText?: string;
+  /** TTS的模型：flow_01_turbo，flow_01_ex */
+  Model?: string;
+  /** 语言参数，默认为空， 参考： (ISO 639-1) */
+  Language?: string;
 }
 
 declare interface VoiceCloneResponse {

@@ -1278,6 +1278,8 @@ declare interface ResourceInfo {
   RealGpu?: number;
   /** 创建或更新时无需填写，仅展示需要关注。详细的GPU使用信息。 */
   RealGpuDetailSet?: GpuDetail[];
+  /** 是否开启rdma */
+  EnableRDMA?: boolean | null;
 }
 
 /** 资源组节点运行任务信息 */

@@ -740,6 +740,34 @@ declare interface SessionEvent {
   StaffEventDetail?: EventStaffDetail;
 }
 
+/** 创建 staff 的信息 item */
+declare interface SetStaffStatusItem {
+  /** 座席账号 */
+  StaffUserId: string;
+  /** 状态，free 示闲 notReady 示忙 rest 小休 */
+  Status: string;
+  /** 如果设置小休状态，这里是原因 */
+  Reason?: string;
+}
+
+/** 设置 staff 状态应答 item */
+declare interface SetStaffStatusRspItem {
+  /** 座席账号 */
+  StaffUserId?: string;
+  /** 错误码，参考协议整体错误码 */
+  ErrorCode?: string;
+  /** 错误信息 */
+  ErrorMessage?: string;
+  /** 当前状态 */
+  Status?: string;
+  /** 当前状态如果是小休，这里是原因 */
+  Reason?: string;
+  /** 之前状态 */
+  PreviousStatus?: string;
+  /** 之前状态如果是小休，这里是原因 */
+  PreviousReason?: string;
+}
+
 /** 技能组信息 */
 declare interface SkillGroupInfoItem {
   /** 技能组ID */
@@ -2536,6 +2564,20 @@ declare interface ResumePredictiveDialingCampaignResponse {
   RequestId?: string;
 }
 
+declare interface SetStaffStatusRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 设置座席状态列表，最大个数 10 */
+  StaffStatusList: SetStaffStatusItem[];
+}
+
+declare interface SetStaffStatusResponse {
+  /** 设置座席状态应答列表 */
+  StaffStatusList?: SetStaffStatusRspItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopAutoCalloutTaskRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -2811,6 +2853,8 @@ declare interface Ccc {
   RestoreMemberOnline(data: RestoreMemberOnlineRequest, config?: AxiosRequestConfig): AxiosPromise<RestoreMemberOnlineResponse>;
   /** 恢复预测式外呼任务 {@link ResumePredictiveDialingCampaignRequest} {@link ResumePredictiveDialingCampaignResponse} */
   ResumePredictiveDialingCampaign(data: ResumePredictiveDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<ResumePredictiveDialingCampaignResponse>;
+  /** 设置 staff 状态 {@link SetStaffStatusRequest} {@link SetStaffStatusResponse} */
+  SetStaffStatus(data: SetStaffStatusRequest, config?: AxiosRequestConfig): AxiosPromise<SetStaffStatusResponse>;
   /** 停止自动外呼任务 {@link StopAutoCalloutTaskRequest} {@link StopAutoCalloutTaskResponse} */
   StopAutoCalloutTask(data: StopAutoCalloutTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopAutoCalloutTaskResponse>;
   /** 转接人工 {@link TransferToManualRequest} {@link TransferToManualResponse} */

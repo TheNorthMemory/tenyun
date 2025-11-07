@@ -2575,7 +2575,7 @@ declare namespace V20180525 {
     Name?: string;
     /** 应用命名空间 */
     Namespace?: string;
-    /** 应用状态(参考helm的发布状态： unknown, deployed, uninstalled, superseded, failed, uninstalling, pending-install, pending-upgrade 或 pending-rollback) */
+    /** 应用状态，参考 Helm 发布状态。可选值及其释义如下：• ​​unknown​​: 状态未知• ​​deployed​​: 已成功部署• ​​uninstalled​​: 已卸载• ​​superseded​​: 已被新版本替代• ​​failed​​: 部署失败• ​​uninstalling​​: 正在卸载中• ​​pending-install​​: 等待安装/安装进行中• ​​pending-upgrade​​: 等待升级/升级进行中• ​​pending-rollback​​: 等待回滚/回滚进行中 */
     Status?: string;
     /** 更新时间 */
     UpdatedTime?: string;
@@ -3169,7 +3169,7 @@ declare namespace V20180525 {
     Namespace?: string;
     /** 应用当前版本 */
     Revision?: string;
-    /** 应用状态 */
+    /** 应用状态，参考 Helm 发布状态。可选值及其释义如下：• ​​unknown​​: 状态未知• ​​deployed​​: 已成功部署• ​​uninstalled​​: 已卸载• ​​superseded​​: 已被新版本替代• ​​failed​​: 部署失败• ​​uninstalling​​: 正在卸载中• ​​pending-install​​: 等待安装/安装进行中• ​​pending-upgrade​​: 等待升级/升级进行中• ​​pending-rollback​​: 等待回滚/回滚进行中 */
     Status?: string;
     /** 制品名称 */
     ChartName?: string;
@@ -3191,7 +3191,7 @@ declare namespace V20180525 {
     Namespace?: string;
     /** 应用当前版本 */
     Version?: number;
-    /** 应用状态 */
+    /** 应用状态，参考 Helm 发布状态。 可选值及其释义如下：• ​​unknown​​: 状态未知 • ​​deployed​​: 已成功部署 • ​​uninstalled​​: 已卸载 • ​​superseded​​: 已被新版本替代 • ​​failed​​: 部署失败 • ​​uninstalling​​: 正在卸载中• ​​pending-install​​: 等待安装/安装进行中• ​​pending-upgrade​​: 等待升级/升级进行中 • ​​pending-rollback​​: 等待回滚/回滚进行中 */
     Status?: string;
     /** 应用描述 */
     Description?: string;
@@ -3231,7 +3231,7 @@ declare namespace V20180525 {
     Namespace?: string;
     /** 应用版本 */
     Revision?: number;
-    /** 应用状态 */
+    /** 应用状态，参考 Helm 发布状态。 可选值及其释义如下：• ​​unknown​​: 状态未知 • ​​deployed​​: 已成功部署 • ​​uninstalled​​: 已卸载 • ​​superseded​​: 已被新版本替代 • ​​failed​​: 部署失败 • ​​uninstalling​​: 正在卸载中• ​​pending-install​​: 等待安装/安装进行中• ​​pending-upgrade​​: 等待升级/升级进行中 • ​​pending-rollback​​: 等待回滚/回滚进行中 */
     Status?: string;
     /** 应用制品名称 */
     Chart?: string;
@@ -3712,7 +3712,7 @@ declare namespace V20180525 {
     ClusterId: string;
     /** 增加的ClusterCIDR */
     ClusterCIDRs: string[];
-    /** 是否忽略ClusterCIDR与VPC路由表的冲突 */
+    /** 是否忽略ClusterCIDR与VPC路由表的冲突，默认false，为true时忽略冲突 */
     IgnoreClusterCIDRConflict?: boolean;
   }
 
@@ -3794,7 +3794,7 @@ declare namespace V20180525 {
     ID: string;
     /** 集群ID */
     ClusterId?: string;
-    /** 集群类型 */
+    /** 集群类型，支持传入 tke(标准集群), eks(Serverless集群), external(注册集群） */
     ClusterType?: string;
   }
 
@@ -3984,11 +3984,11 @@ declare namespace V20180525 {
   interface CreateClusterReleaseRequest {
     /** 集群ID */
     ClusterId: string;
-    /** 应用名称 */
+    /** 应用名称，最长63个字符，只能包含小写字母、数字及分隔符“-”，且必须以小写字母开头，数字或小写字母结尾 */
     Name: string;
-    /** 应用命名空间 */
+    /** 应用命名空间，从集群详情命名空间获取 */
     Namespace: string;
-    /** 制品名称或从第三方repo 安装chart时，制品压缩包下载地址, 不支持重定向类型chart 地址，结尾为*.tgz */
+    /** 制品名称(从应用市场获取)或从第三方repo 安装chart时，制品压缩包下载地址, 不支持重定向类型chart 地址，结尾为*.tgz */
     Chart: string;
     /** 自定义参数 */
     Values?: ReleaseValues;
@@ -5274,7 +5274,7 @@ declare namespace V20180525 {
     Limit?: number;
     /** 偏移量，默认0 */
     Offset?: number;
-    /** 集群类型 */
+    /** 集群类型，支持传入tke（标准集群），eks（Serverless集群)，external（注册集群） */
     ClusterType?: string;
   }
 
@@ -5298,7 +5298,7 @@ declare namespace V20180525 {
     Name: string;
     /** 应用所在命名空间 */
     Namespace: string;
-    /** 集群类型 */
+    /** 集群类型，传入 tke(标准集群), eks(Serverless集群), external(注册集群） */
     ClusterType?: string;
   }
 
@@ -5316,7 +5316,7 @@ declare namespace V20180525 {
     Name: string;
     /** 应用所在命名空间 */
     Namespace: string;
-    /** 集群类型 */
+    /** 集群类型，传入 tke(标准集群), eks(Serverless集群), external(注册集群） */
     ClusterType?: string;
   }
 
@@ -5332,11 +5332,11 @@ declare namespace V20180525 {
   interface DescribeClusterReleasesRequest {
     /** 集群id */
     ClusterId: string;
-    /** 每页数量限制 */
+    /** 每页数量限制，默认值为20 */
     Limit?: number;
-    /** 页偏移量 */
+    /** 页偏移量，默认值为0 */
     Offset?: number;
-    /** 集群类型, 目前支持传入 tke, eks, tkeedge, external */
+    /** 集群类型，传入 tke(标准集群)，eks(Serverless集群)，external(注册集群） */
     ClusterType?: string;
     /** helm Release 安装的namespace */
     Namespace?: string;
@@ -6834,7 +6834,7 @@ declare namespace V20180525 {
   }
 
   interface GetUpgradeInstanceProgressRequest {
-    /** 集群ID */
+    /** 集群ID（请登录 [TKE 控制台](https://console.cloud.tencent.com/tke2) 获取集群 ID ） */
     ClusterId: string;
     /** 最多获取多少个节点的进度 */
     Limit?: number;
@@ -6847,7 +6847,7 @@ declare namespace V20180525 {
     Total?: number;
     /** 已升级节点总数 */
     Done?: number;
-    /** 升级任务生命周期process 运行中paused 已停止pauing 正在停止done 已完成timeout 已超时aborted 已取消 */
+    /** 升级任务生命周期pending 还未开始process 运行中paused 已停止pauing 正在停止done 已完成timeout 已超时aborted 已取消 */
     LifeState?: string;
     /** 各节点升级进度详情 */
     Instances?: InstanceUpgradeProgressItem[];
@@ -7362,7 +7362,7 @@ declare namespace V20180525 {
     Namespace: string;
     /** 回滚版本号 */
     Revision: number;
-    /** 集群类型 */
+    /** 集群类型，传入 tke(标准集群)，eks(Serverless集群)，external(注册集群） */
     ClusterType?: string;
   }
 
@@ -7466,7 +7466,7 @@ declare namespace V20180525 {
     Name: string;
     /** 应用命名空间 */
     Namespace: string;
-    /** 集群类型 */
+    /** 集群类型，传入 tke(标准集群)， eks(Serverless集群)，external(注册集群） */
     ClusterType?: string;
   }
 

@@ -716,7 +716,7 @@ declare interface CreateDocumentRequest {
   DocumentName: string;
   /** 文档所有者的Id */
   Owner: string;
-  /** 转码类型，可以有如下取值：0 无需转码（默认），bmp，jpg，jpeg，png，gif1 需要转码的文档，ppt，pptx，pdf，doc，docx，xls，xlsx2 需要转码的视频，mp4，3pg，mpeg，avi，flv，wmv，rm，h264等2 需要转码的音频，mp3，wav，wma，aac，flac，opus请注意，待录制的页面中任何视频的分辨率不能超过页面录制最大分辨率（1920*1080），否则将导致录制失败。 - ppt课件内嵌视频或纯视频课件，在上传课件时，云api会进行转码，以确保视频分辨率不超过页面录制最大分辨率。 - h5课件中内嵌音视频内容时，由于平台无法获取视频内容，因此在制作环节需确保视频分辨率不超过页面录制最大分辨率。 */
+  /** 转码类型，可以有如下取值：0 无需转码（默认），bmp，jpg，jpeg，png，gif1 需要转码的文档，ppt，pptx，pdf，doc，docx，xls，xlsx2 需要转码的视频，mp4，3pg，mpeg，avi，flv，wmv，rm，h264等2 需要转码的音频，mp3，wav，wma，aac，flac，opus3 备用转码，建议 WPS 制作的课件使用此方式转码，保证课件显示效果请注意，待录制的页面中任何视频的分辨率不能超过页面录制最大分辨率（1920*1080），否则将导致录制失败。 - ppt课件内嵌视频或纯视频课件，在上传课件时，云api会进行转码，以确保视频分辨率不超过页面录制最大分辨率。 - h5课件中内嵌音视频内容时，由于平台无法获取视频内容，因此在制作环节需确保视频分辨率不超过页面录制最大分辨率。 */
   TranscodeType?: number;
   /** 权限，可以有如下取值：0 私有文档（默认）1 公共文档 */
   Permission?: number;
