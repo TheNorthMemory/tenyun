@@ -1998,7 +1998,7 @@ declare interface QueryFilter {
 
 /** 查询参数过滤器 */
 declare interface QueryParamFilter {
-  /** 搜索字段，目前支持："InstanceId", "ProjectId", "InstanceName", "Vip" */
+  /** 搜索字段，目前支持：ProxyGroupId */
   Names: string[];
   /** 搜索字符串 */
   Values: string[];
@@ -2799,7 +2799,7 @@ declare interface CreateClustersRequest {
   AdminPassword?: string;
   /** 端口，默认3306，取值范围[0, 65535) */
   Port?: number;
-  /** 计费模式，按量计费：0，包年包月：1。默认按量计费。 */
+  /** 计费模式，支持值为0和1，默认值为0。取值为0，表示按量计费。取值为1，表示包年包月。 */
   PayMode?: number;
   /** 购买集群数，可选值范围[1,50]，默认为1 */
   Count?: number;
