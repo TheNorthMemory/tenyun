@@ -6410,7 +6410,7 @@ declare interface VideoTemplateInfo {
   FillType?: string;
   /** 视频的恒定码率控制因子，取值范围为[0, 51]，不填表示“自动”。如果没有特殊需求，建议不指定该参数。当Mode参数设置为VBR时，如果同时配置了Vcrf值，MPS将在VBR模式下处理视频，同时考虑Vcrf和Bitrate参数的设置，以平衡视频质量、码率、转码效率和文件大小。当Mode参数设置为CRF，Bitrate设置将失效，编码将根据Vcrf值进行。当Mode参数选择ABR或CBR时，无需配置Vcrf值。 */
   Vcrf?: number | null;
-  /** 分片平均时长，范围：（0-10]，单位：秒不填表示自动，将根据视频的GOP等特征自动选择合适的分片时长。注意：只能在封装格式hls的情况下使用 */
+  /** 分片平均时长，范围：（0-10]，单位：秒不填表示自动，将根据视频的GOP等特征自动选择合适的分片时长。 */
   HlsTime?: number | null;
   /** hls 分片类型，可选值 ：0：HLS+TS 切片2：HLS+TS byte range7：HLS+MP4 切片5：HLS+MP4 byte range默认值：0注意：该字段用于普通/极速高清转码设置，对自适应码流不生效，如需给自适应码流配置分片类型，可以使用外层字段 */
   SegmentType?: number | null;
@@ -6769,7 +6769,7 @@ declare interface CreateAdaptiveDynamicStreamingTemplateRequest {
   Comment?: string;
   /** 是否为纯音频，0表示视频模板，1表示纯音频模板当值为1：1. StreamInfos.N.RemoveVideo=12. StreamInfos.N.RemoveAudio=03. StreamInfos.N.Video.Codec=copy当值为0：1. StreamInfos.N.Video.Codec不能为copy2. StreamInfos.N.Video.Fps不能为null注意：此值只是区分模板类型，任务使用RemoveAudio和RemoveVideo的值 */
   PureAudio?: number;
-  /** hls 分片类型，可选值： ts-segment：HLS+TS 切片 ts-byterange：HLS+TS byte range mp4-segment：HLS+MP4 切片 mp4-byterange：HLS+MP4 byte range ts-packed-audio：TS+Packed Audio mp4-packed-audio：MP4+Packed Audio 默认值：ts-segment 注：自适应码流的hls分片格式已此字段为准 */
+  /** 分片类型，可选值： ts-segment：HLS+TS 切片 ts-byterange：HLS+TS byte range mp4-segment：HLS+MP4 切片 mp4-byterange：HLS+MP4 byte range ts-packed-audio：TS+Packed Audio mp4-packed-audio：MP4+Packed Audio 默认值：ts-segment 注：自适应码流的分片格式以此字段为准 */
   SegmentType?: string;
 }
 
@@ -7119,6 +7119,8 @@ declare interface CreateStreamLinkFlowRequest {
   InputGroup?: CreateInput[];
   /** 该Flow关联的媒体传输事件ID，每个flow只能关联一个Event。 */
   EventId?: string;
+  /** 流的输出组。 */
+  OutputGroup?: CreateOutputInfo;
 }
 
 declare interface CreateStreamLinkFlowResponse {

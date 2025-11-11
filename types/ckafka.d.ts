@@ -2995,7 +2995,7 @@ declare interface CreatePrometheusResponse {
 }
 
 declare interface CreateRouteRequest {
-  /** ckafka集群实例id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取 */
+  /** ckafka集群实例id,可通过DescribeInstances接口获取 */
   InstanceId: string;
   /** 路由网络类型(3:vpc路由;7:内部支撑路由;1:公网路由) */
   VipType: number;
@@ -3015,6 +3015,8 @@ declare interface CreateRouteRequest {
   Ip?: string;
   /** 备注信息 */
   Note?: string;
+  /** 关联安全组有序列表 */
+  SecurityGroupIds?: string[];
 }
 
 declare interface CreateRouteResponse {
@@ -4755,7 +4757,7 @@ declare interface Ckafka {
   FetchMessageListByTimestamp(data: FetchMessageListByTimestampRequest, config?: AxiosRequestConfig): AxiosPromise<FetchMessageListByTimestampResponse>;
   /** Ckafka询价 {@link InquireCkafkaPriceRequest} {@link InquireCkafkaPriceResponse} */
   InquireCkafkaPrice(data: InquireCkafkaPriceRequest, config?: AxiosRequestConfig): AxiosPromise<InquireCkafkaPriceResponse>;
-  /** 按量实例缩容 {@link InstanceScalingDownRequest} {@link InstanceScalingDownResponse} */
+  /** 按量实例扩缩容 {@link InstanceScalingDownRequest} {@link InstanceScalingDownResponse} */
   InstanceScalingDown(data: InstanceScalingDownRequest, config?: AxiosRequestConfig): AxiosPromise<InstanceScalingDownResponse>;
   /** 修改Acl预设规则 {@link ModifyAclRuleRequest} {@link ModifyAclRuleResponse} */
   ModifyAclRule(data: ModifyAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAclRuleResponse>;

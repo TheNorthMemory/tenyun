@@ -104,6 +104,10 @@ declare interface DisplayAsset {
   Domains?: string;
   /** 端口和服务最近更新时间 */
   LastModify?: string;
+  /** 是否为云资产 */
+  IsCloudAsset?: number;
+  /** 云资产状态，-1为下线 */
+  CloudAssetStatus?: number;
 }
 
 /** 目录爆破详情 */
@@ -130,6 +134,10 @@ declare interface DisplayConfig {
   RiskLevel?: number;
   /** 建议 */
   Suggestion?: string;
+  /** 是否为云资产 */
+  IsCloudAsset?: number;
+  /** 云资产状态，-1为下线 */
+  CloudAssetStatus?: number;
 }
 
 /** 暗网详情 */
@@ -164,6 +172,10 @@ declare interface DisplayDomain {
   Company?: string;
   /** 公共字段 */
   DisplayToolCommon?: DisplayToolCommon;
+  /** 是否为云资产 */
+  IsCloudAsset?: number;
+  /** 云资产状态，-1为下线 */
+  CloudAssetStatus?: number;
 }
 
 /** 企业架构详情 */
@@ -334,6 +346,18 @@ declare interface DisplayHttp {
   SslExpiredTime?: string;
   /** 资产是否发生变动 */
   IsChange?: boolean | null;
+  /** 是否为云资产：0-非云资产 1-是云资产 */
+  IsCloudAsset?: number;
+  /** 云资产是否下线：-1-已下线 0-正常 */
+  CloudAssetStatus?: number;
+  /** 可用率（百分比） */
+  AvailabilityRate?: number;
+  /** 可用状态 1:异常 0:正常 */
+  AvailabilityState?: number;
+  /** 平均响应时间：单位ms */
+  ResponseTime?: number;
+  /** 域名解析状态 1:异常 0:正常 */
+  AnalysisState?: number;
 }
 
 /** 任务详情 */
@@ -482,6 +506,10 @@ declare interface DisplayManage {
   Host?: string;
   /** 状态：not_converged:未收敛, converged:已收敛, ignore:已忽略 */
   Status?: string;
+  /** 是否为云资产：0-非云资产 1-是云资产 */
+  IsCloudAsset?: number;
+  /** 云资产是否下线：-1-已下线 0-正常 */
+  CloudAssetStatus?: number;
 }
 
 /** 网盘泄露详情 */
@@ -526,6 +554,12 @@ declare interface DisplayPort {
   LastCheckTime?: string;
   /** 状态，close:连接超时，端口可能已关闭，open:端口开放, checking:复测中, ignore:已忽略 */
   Status?: string;
+  /** 是否为云资产：0-非云资产 1-是云资产 */
+  IsCloudAsset?: number;
+  /** 云资产是否下线：-1-已下线 0-正常 */
+  CloudAssetStatus?: number;
+  /** 域名解析状态 1:异常 0:正常 */
+  AnalysisState?: number;
 }
 
 /** 敏感信息泄露数据 */
@@ -540,6 +574,10 @@ declare interface DisplaySensitiveInfo {
   Value?: string;
   /** 公共字段 */
   DisplayToolCommon?: DisplayToolCommon;
+  /** 是否为云资产：0-非云资产 1-是云资产 */
+  IsCloudAsset?: number;
+  /** 云资产是否下线：-1-已下线 0-正常 */
+  CloudAssetStatus?: number;
 }
 
 /** 子域名详情 */
@@ -560,6 +598,20 @@ declare interface DisplaySubDomain {
   Isp?: string;
   /** 公共字段 */
   DisplayToolCommon?: DisplayToolCommon;
+  /** 是否为云资产：0-非云资产 1-是云资产 */
+  IsCloudAsset?: number;
+  /** 云资产是否下线：-1-已下线 0-正常 */
+  CloudAssetStatus?: number;
+  /** 可用率（百分比） */
+  AvailabilityRate?: number;
+  /** 可用状态 1:异常 0:正常 */
+  AvailabilityState?: number;
+  /** 域名解析状态 1:异常 0:正常 */
+  AnalysisState?: number;
+  /** 平均时延：单位ms */
+  AverageDelay?: number;
+  /** 丢包率（百分比） */
+  LossRate?: number;
 }
 
 /** 影子资产详情 */
@@ -660,6 +712,12 @@ declare interface DisplayVul {
   Status?: string;
   /** 上次复测时间 */
   LastCheckTime?: string;
+  /** 是否为云资产：0-非云资产 1-是云资产 */
+  IsCloudAsset?: number;
+  /** 云资产是否下线：-1-已下线 0-正常 */
+  CloudAssetStatus?: number;
+  /** 域名解析状态 1:异常 0:正常 */
+  AnalysisState?: number;
 }
 
 /** 弱口令详情 */
@@ -680,7 +738,7 @@ declare interface DisplayWeakPassword {
   Account?: string;
   /** 弱口令密码 */
   Password?: string;
-  /** 是否蜜罐 */
+  /** 是否为蜜罐 */
   IsHoneypot?: boolean;
   /** 截图 */
   ScreenshotUrl?: string;
@@ -688,6 +746,10 @@ declare interface DisplayWeakPassword {
   Status?: string;
   /** 上次复测时间 */
   LastCheckTime?: string;
+  /** 是否为云资产：0-非云资产 1-是云资产 */
+  IsCloudAsset?: number;
+  /** 云资产是否下线：-1-已下线 0-正常 */
+  CloudAssetStatus?: number;
 }
 
 /** 微信小程序详情 */
@@ -1305,6 +1367,8 @@ declare interface DescribeHttpsRequest {
   IsShowChange?: boolean;
   /** 是否仅显示过期风险资产 */
   HasExpirationRisk?: boolean;
+  /** 是否只查询离线网站 */
+  OnlyOffline?: boolean;
 }
 
 declare interface DescribeHttpsResponse {
@@ -1659,6 +1723,8 @@ declare interface DescribeSubDomainsRequest {
   Filters?: Filter[];
   /** 是否显示被忽略的数据 */
   Ignored?: boolean;
+  /** 是否只查询离线子域名 */
+  OnlyOffline?: boolean;
 }
 
 declare interface DescribeSubDomainsResponse {

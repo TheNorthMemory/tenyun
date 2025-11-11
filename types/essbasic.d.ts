@@ -482,8 +482,10 @@ declare interface EmbedUrlOption {
   ShowFlowDetailComponent?: boolean;
   /** 模板预览，允许展示模板控件信息 true :允许在模板预览页展示控件 false :（默认）不允许在模板预览页展示控件 */
   ShowTemplateComponent?: boolean;
-  /** 跳过上传文件，默认为false(展示上传文件页）![image](https://qcloudimg.tencent-cloud.cn/raw/8ca33745cf772e79831dbe5a70e82400.png)- false: 展示上传文件页- true: 不展示上传文件页 注意: 此参数仅针对**EmbedType=CREATE_TEMPLATE(创建模板)有效**， */
-  SkipUploadFile?: string;
+  /** 跳过上传文件，默认为false(展示上传文件页)![image](https://qcloudimg.tencent-cloud.cn/raw/8ca33745cf772e79831dbe5a70e82400.png)- false: 展示上传文件页- true: 不展示上传文件页 注意: 此参数仅针对**EmbedType=CREATE_TEMPLATE(创建模板)有效**， */
+  SkipUploadFile?: boolean;
+  /** 隐藏下载文件按钮，默认为false(展示下载文件按钮)- false: 展示下载文件按钮- true: 不展示下载文件按钮注意: 此参数仅针对**EmbedType=PREVIEW_FLOW_DETAIL(查看合同详情)**有效 */
+  SkipDownloadFile?: boolean;
   /** 是否禁止编辑（展示）水印控件属性（默认） false -否 true - 禁止编辑 */
   ForbidEditWatermark?: boolean;
   /** 印章描述 */
@@ -3201,7 +3203,7 @@ declare interface CreateSignUrlsRequest {
   JumpUrl?: string;
   /** 暂未开放 */
   Operator?: UserInfo;
-  /** 生成的签署链接在签署页面隐藏的按钮列表，可设置如下： **0** :合同签署页面更多操作按钮 **1** :合同签署页面更多操作的拒绝签署按钮 **2** :合同签署页面更多操作的转他人处理按钮 **3** :签署成功页的查看详情按钮注: `字段为数组, 可以传值隐藏多个按钮` */
+  /** 生成的签署链接在签署页面隐藏的按钮列表，可设置如下： **0** :合同签署页面更多操作按钮 **1** :合同签署页面更多操作的拒绝签署按钮 **2** :合同签署页面更多操作的转他人处理按钮 **3** :签署成功页的查看详情按钮 **4** :合同签署页面更多操作的查看合同基本信息按钮 **5** :合同签署页面更多操作的撤销按钮注: `字段为数组, 可以传值隐藏多个按钮` */
   Hides?: number[];
   /** 参与方角色ID，用于生成动态签署人链接完成领取。注：`使用此参数需要与flow_ids数量一致并且一一对应, 表示在对应同序号的流程中的参与角色ID`， */
   RecipientIds?: string[];
