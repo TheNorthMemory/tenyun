@@ -1302,8 +1302,14 @@ declare interface InstanceStatistic {
 
 /** 公网询价出参 */
 declare interface InternetPrice {
-  /** 公网IP询价详细参数。 */
+  /** 公网IP网络费询价详细参数。 */
   AddressPrice?: InternetPriceDetail;
+  /** 公网IP资源费询价详细参数。仅原生IP价格查询返回。 */
+  IPPrice?: InternetPriceDetail;
+  /** 总原价，单位：元，仅预付费价格查询返回。 */
+  OriginalPrice?: number;
+  /** 折扣后的总价格，单位：元。仅预付费价格查询返回。 */
+  DiscountPrice?: number;
 }
 
 /** 公网IP询价出参 */
@@ -3285,6 +3291,8 @@ declare interface AllocateAddressesRequest {
   AntiDDoSPackageId?: string;
   /** 保证请求幂等性。从您的客户端生成一个参数值，确保不同请求间该参数值唯一。ClientToken只支持ASCII字符，且不能超过64个字符。 */
   ClientToken?: string;
+  /** 原生EIP IP资源的计费方式。账号为标准账户类型的用户，可选值：IP_POSTPAID_BY_HOUR：IP资源按小时后付费IP_PREPAID_BY_MONTH：IP资源包月预付费 */
+  IPChargeType?: string;
 }
 
 declare interface AllocateAddressesResponse {
@@ -8219,6 +8227,8 @@ declare interface InquiryPriceAllocateAddressesRequest {
   AddressChargePrepaid?: AddressChargePrepaid;
   /** EIP类型。默认值：EIP。弹性公网IP，可选值：EIP：弹性公网IP精品IP，可选值：HighQualityEIP：精品IP注意：仅新加坡和中国香港支持精品IP。高防IP，可选值：AntiDDoSEIP：高防IP注意：仅部分地域支持高防IP，详情可见弹性公网IP[产品概述](https://cloud.tencent.com/document/product/1199/41646)。 */
   AddressType?: string;
+  /** 原生EIP IP资源的计费方式。账号为标准账户类型的用户，可选值：IP_POSTPAID_BY_HOUR：IP资源按小时后付费IP_PREPAID_BY_MONTH：IP资源包月预付费 */
+  IPChargeType?: string;
 }
 
 declare interface InquiryPriceAllocateAddressesResponse {

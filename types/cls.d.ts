@@ -710,6 +710,22 @@ declare interface DataTransformResouceInfo {
   Alias?: string;
 }
 
+/** 外部表SQL信息 */
+declare interface DataTransformSqlDataSource {
+  /** 数据源类型 1:MySql;2:自建mysql;3:pgsql */
+  DataSource: number;
+  /** InstanceId所属地域。例如：ap-guangzhou */
+  Region: string;
+  /** 实例Id。- 当DataSource为1时，表示云数据库Mysql 实例id，如：cdb-zxcvbnm */
+  InstanceId: string;
+  /** mysql访问用户名 */
+  User: string;
+  /** 别名。数据加工语句中使用 */
+  AliasName: string;
+  /** mysql访问密码。 */
+  Password?: string;
+}
+
 /** 数据加工任务基本详情 */
 declare interface DataTransformTaskInfo {
   /** 数据加工任务名称 */
@@ -724,7 +740,7 @@ declare interface DataTransformTaskInfo {
   SrcTopicId?: string;
   /** 当前加工任务状态（1准备中/2运行中/3停止中/4已停止） */
   Status?: number;
-  /** 加工任务创建时间时间格式：yyyy-MM-dd HH:mm:ss */
+  /** 创建时间时间格式：yyyy-MM-dd HH:mm:ss */
   CreateTime?: string;
   /** 最近修改时间时间格式：yyyy-MM-dd HH:mm:ss */
   UpdateTime?: string;
@@ -738,12 +754,28 @@ declare interface DataTransformTaskInfo {
   DstResources?: DataTransformResouceInfo[];
   /** 加工逻辑函数。 */
   EtlContent?: string;
+  /** 兜底topic_id */
+  BackupTopicID?: string;
+  /** 超限之后是否丢弃日志数据 */
+  BackupGiveUpData?: boolean;
+  /** 是否开启投递服务日志。 1关闭,2开启 */
+  HasServicesLog?: number;
+  /** 任务目标日志主题数量 */
+  TaskDstCount?: number;
   /** 数据加工类型。0：标准加工任务；1：前置加工任务。 */
   DataTransformType?: number;
   /** 保留失败日志状态。 1:不保留，2:保留 */
   KeepFailureLog?: number;
   /** 失败日志的字段名称 */
   FailureLogKey?: string;
+  /** 指定加工数据的开始时间，秒级时间戳。- 日志主题生命周期内的任意时间范围，如果超出了生命周期,只处理生命周期内有数据的部分。 */
+  ProcessFromTimestamp?: number;
+  /** 指定加工数据的结束时间，秒级时间戳。1. 不可指定未来的时间2. 不填则表示持续执行 */
+  ProcessToTimestamp?: number;
+  /** sql数据源信息 */
+  DataTransformSqlDataSources?: DataTransformSqlDataSource[];
+  /** 环境变量 */
+  EnvInfos?: EnvInfo[];
 }
 
 /** 投递配置入参 */
@@ -760,6 +792,14 @@ declare interface DeliverConfig {
 declare interface DynamicIndex {
   /** 键值索引自动配置开关 */
   Status?: boolean;
+}
+
+/** 数据加工-高级设置-环境变量 */
+declare interface EnvInfo {
+  /** 环境变量名 */
+  Key: string;
+  /** 环境变量值 */
+  Value?: string;
 }
 
 /** 升级通知 */
@@ -2103,12 +2143,26 @@ declare interface CreateDataTransformRequest {
   EnableFlag?: number;
   /** 用于预览加工结果的测试数据目标日志主题ID通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   PreviewLogStatistics?: PreviewLogStatistic[];
+  /** 当FuncType为2时，动态创建的日志集、日志主题的个数超出产品规格限制是否丢弃数据， 默认为false。false：创建兜底日志集、日志主题并将日志写入兜底主题；true：丢弃日志数据。 */
+  BackupGiveUpData?: boolean;
+  /** 是否开启投递服务日志。1：关闭，2：开启。 */
+  HasServicesLog?: number;
   /** 数据加工类型。0：标准加工任务； 1：前置加工任务。前置加工任务将采集的日志处理完成后，再写入日志主题。 */
   DataTransformType?: number;
   /** 保留失败日志状态，1:不保留(默认)，2:保留。 */
   KeepFailureLog?: number;
   /** 失败日志的字段名称 */
   FailureLogKey?: string;
+  /** 指定加工数据的开始时间, 秒级时间戳。 - 日志主题生命周期内的任意时间范围，如果超出了生命周期,只处理生命周期内有数据的部分。 */
+  ProcessFromTimestamp?: number;
+  /** 指定加工数据的结束时间，秒级时间戳。- 不可指定未来的时间- 不填则表示持续执行 */
+  ProcessToTimestamp?: number;
+  /** 对已经创建的并且使用了关联外部数据库能力的任务预览（TaskType 为 1 或 2）时，该值必传数据加工任务ID- 通过[获取数据加工任务列表基本信息](https://cloud.tencent.com/document/product/614/72182)获取数据加工任务Id。 */
+  TaskId?: string;
+  /** 关联的数据源信息 */
+  DataTransformSqlDataSources?: DataTransformSqlDataSource[];
+  /** 设置的环境变量 */
+  EnvInfos?: EnvInfo[];
 }
 
 declare interface CreateDataTransformResponse {
@@ -2893,7 +2947,7 @@ declare interface DescribeDashboardsResponse {
 }
 
 declare interface DescribeDataTransformInfoRequest {
-  /** - taskName按照【加工任务名称】进行过滤。类型：String必选：否示例：test-task- taskId按照【加工任务id】进行过滤。类型：String必选：否示例：a3622556-6402-4942-b4ff-5ae32ec29810数据加工任务ID- 通过[获取数据加工任务列表基本信息](https://cloud.tencent.com/document/product/614/72182)获取数据加工任务Id。- topicId按照【源topicId】进行过滤。类型：String必选：否示例：756cec3e-a0a5-44c3-85a8-090870582000日志主题ID- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。- status按照【 任务运行状态】进行过滤。 1：准备中，2：运行中，3：停止中，4：已停止类型：String必选：否示例：1- hasServiceLog按照【是否开启服务日志】进行过滤。 1：未开启，2：已开启类型：String必选：否示例：1- dstTopicType按照【目标topic类型】进行过滤。 1：固定，2：动态类型：String必选：否示例：1每次请求的Filters的上限为10，Filter.Values的上限为100。 */
+  /** - taskName按照【加工任务名称】进行过滤。类型：String必选：否示例：test-task- taskId按照【加工任务id】进行过滤。类型：String必选：否示例：a3622556-6402-4942-b4ff-5ae32ec29810数据加工任务ID- 通过[获取数据加工任务列表基本信息](https://cloud.tencent.com/document/product/614/72182)获取数据加工任务Id。- topicId按照【源topicId】进行过滤。类型：String必选：否示例：756cec3e-a0a5-44c3-85a8-090870582000日志主题ID通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。- status按照【 任务运行状态】进行过滤。 1：准备中，2：运行中，3：停止中，4：已停止类型：String必选：否示例：1- hasServiceLog按照【是否开启服务日志】进行过滤。 1：未开启，2：已开启类型：String必选：否示例：1- dstTopicType按照【目标topic类型】进行过滤。 1：固定，2：动态类型：String必选：否示例：1每次请求的Filters的上限为10，Filter.Values的上限为100。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0。 */
   Offset?: number;
@@ -3633,8 +3687,18 @@ declare interface ModifyDataTransformRequest {
   EnableFlag?: number;
   /** 加工任务目的topic_id以及别名 */
   DstResources?: DataTransformResouceInfo[];
+  /** 超限之后是否丢弃日志数据 */
+  BackupGiveUpData?: boolean;
   /** 是否开启投递服务日志。1关闭，2开启 */
   HasServicesLog?: number;
+  /** 保留失败日志状态。 1:不保留，2:保留 */
+  KeepFailureLog?: number;
+  /** 失败日志的字段名称 */
+  FailureLogKey?: string;
+  /** 外部数据源信息 */
+  DataTransformSqlDataSources?: DataTransformSqlDataSource[];
+  /** 设置的环境变量 */
+  EnvInfos?: EnvInfo[];
 }
 
 declare interface ModifyDataTransformResponse {
