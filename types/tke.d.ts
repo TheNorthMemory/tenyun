@@ -1061,6 +1061,18 @@ declare namespace V20180525 {
     Total?: number;
   }
 
+  /** 集群可用的自定义参数 */
+  interface AvailableExtraArgs {
+    /** kube-apiserver可用的自定义参数 */
+    KubeAPIServer?: Flag[] | null;
+    /** kube-controller-manager可用的自定义参数 */
+    KubeControllerManager?: Flag[] | null;
+    /** kube-scheduler可用的自定义参数 */
+    KubeScheduler?: Flag[] | null;
+    /** kubelet可用的自定义参数 */
+    Kubelet?: Flag[] | null;
+  }
+
   /** 仓储仓库信息 */
   interface BackupStorageLocation {
     /** 备份仓库名称 */
@@ -1987,6 +1999,20 @@ declare namespace V20180525 {
     Name: string;
     /** 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
     Values: string[];
+  }
+
+  /** 参数描述 */
+  interface Flag {
+    /** 参数名 */
+    Name: string;
+    /** 参数类型 */
+    Type: string;
+    /** 参数描述 */
+    Usage: string;
+    /** 参数默认值 */
+    Default: string;
+    /** 参数可选范围（目前包含range和in两种，"[]"代表range，如"[1, 5]"表示参数必须>=1且 <=5, "()"代表in， 如"('aa', 'bb')"表示参数只能为字符串'aa'或者'bb'，该参数为空表示不校验） */
+    Constraint: string;
   }
 
   /** GPU相关的参数，包括驱动版本，CUDA版本，cuDNN版本以及是否开启MIG */
@@ -3569,6 +3595,28 @@ declare namespace V20180525 {
     Effect?: string;
   }
 
+  /** 任务信息 */
+  interface Task {
+    /** 任务状态（process(运行中)、pause(暂停)、pausing(暂停中)、paused(已暂停)、done(已完成)、abort(中止)、aborted(已中止)、resume(重新执行)） */
+    LifeState?: string | null;
+    /** 任务目标ID */
+    TargetObj?: string | null;
+    /** 任务参数 */
+    Param?: string | null;
+    /** 任务类型 */
+    TaskType?: string | null;
+    /** 任务失败原因 */
+    LastError?: string | null;
+    /** 任务所属集群ID */
+    ClusterID?: string | null;
+    /** 任务开始时间 */
+    CreatedAt?: string | null;
+    /** 任务更新时间 */
+    UpdatedAt?: string | null;
+    /** 创建任务唯一请求ID */
+    TaskID?: string | null;
+  }
+
   /** 任务步骤信息 */
   interface TaskStepInfo {
     /** 步骤名称 */
@@ -5043,6 +5091,24 @@ declare namespace V20180525 {
     LatestOperationState?: string;
     /** OIDC认证配置 */
     OIDCConfig?: OIDCConfigAuthenticationOptions;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeClusterAvailableExtraArgsRequest {
+    /** 集群版本 */
+    ClusterVersion: string;
+    /** 集群类型(MANAGED_CLUSTER或INDEPENDENT_CLUSTER) */
+    ClusterType: string;
+  }
+
+  interface DescribeClusterAvailableExtraArgsResponse {
+    /** 集群版本 */
+    ClusterVersion?: string;
+    /** 可用的自定义参数 */
+    AvailableExtraArgs?: AvailableExtraArgs;
+    /** 集群类型 */
+    ClusterType?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6593,6 +6659,20 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface DescribeTasksRequest {
+    /** 根据filter做过滤，支持ClusterId（取值示例：cls-xxxx）、TaskType（任务类型，取值示例：add_cluster_cidr、node_upgrade、node_upgrade_ctl等）其中任务类型必传 */
+    Filter?: Filter[];
+    /** 表示最新的任务条目，此值为true的话，输出任务列表中只会有最新的一条 */
+    Latest?: boolean;
+  }
+
+  interface DescribeTasksResponse {
+    /** 任务步骤信息 */
+    Tasks?: Task[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeVersionsRequest {
   }
 
@@ -7017,6 +7097,30 @@ declare namespace V20180525 {
   }
 
   interface ModifyClusterEndpointSPResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface ModifyClusterExtraArgsRequest {
+    /** 目标集群ID */
+    ClusterId: string;
+    /** 集群自定义参数 */
+    ClusterExtraArgs?: ClusterExtraArgs;
+  }
+
+  interface ModifyClusterExtraArgsResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface ModifyClusterExtraArgsTaskStateRequest {
+    /** 集群实例ID */
+    ClusterId: string;
+    /** 操作类型：abort 取消并回退任务 */
+    Operation?: string;
+  }
+
+  interface ModifyClusterExtraArgsTaskStateResponse {
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -7929,6 +8033,8 @@ declare interface Tke {
   DescribeClusterAsGroups(data: V20180525.DescribeClusterAsGroupsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeClusterAsGroupsResponse>;
   /** 查看集群认证配置 {@link V20180525.DescribeClusterAuthenticationOptionsRequest} {@link V20180525.DescribeClusterAuthenticationOptionsResponse} */
   DescribeClusterAuthenticationOptions(data: V20180525.DescribeClusterAuthenticationOptionsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeClusterAuthenticationOptionsResponse>;
+  /** 查询集群可用的自定义参数 {@link V20180525.DescribeClusterAvailableExtraArgsRequest} {@link V20180525.DescribeClusterAvailableExtraArgsResponse} */
+  DescribeClusterAvailableExtraArgs(data: V20180525.DescribeClusterAvailableExtraArgsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeClusterAvailableExtraArgsResponse>;
   /** 获取集群子账户CommonName映射关系 {@link V20180525.DescribeClusterCommonNamesRequest} {@link V20180525.DescribeClusterCommonNamesResponse} */
   DescribeClusterCommonNames(data: V20180525.DescribeClusterCommonNamesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeClusterCommonNamesResponse>;
   /** 查询Kubernetes控制器状态 {@link V20180525.DescribeClusterControllersRequest} {@link V20180525.DescribeClusterControllersResponse} */
@@ -8097,6 +8203,8 @@ declare interface Tke {
   DescribeTKEEdgeExternalKubeconfig(data: V20180525.DescribeTKEEdgeExternalKubeconfigRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeTKEEdgeExternalKubeconfigResponse>;
   /** 获取边缘脚本链接 {@link V20180525.DescribeTKEEdgeScriptRequest} {@link V20180525.DescribeTKEEdgeScriptResponse} */
   DescribeTKEEdgeScript(data: V20180525.DescribeTKEEdgeScriptRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeTKEEdgeScriptResponse>;
+  /** 查询任务相关信息 {@link V20180525.DescribeTasksRequest} {@link V20180525.DescribeTasksResponse} */
+  DescribeTasks(data: V20180525.DescribeTasksRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeTasksResponse>;
   /** 集群版本信息 {@link V20180525.DescribeVersionsRequest} {@link V20180525.DescribeVersionsResponse} */
   DescribeVersions(data: V20180525.DescribeVersionsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeVersionsResponse>;
   /** 查询机型可支持的最大VPC-CNI模式Pod数量 {@link V20180525.DescribeVpcCniPodLimitsRequest} {@link V20180525.DescribeVpcCniPodLimitsResponse} */
@@ -8153,6 +8261,10 @@ declare interface Tke {
   ModifyClusterAuthenticationOptions(data: V20180525.ModifyClusterAuthenticationOptionsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterAuthenticationOptionsResponse>;
   /** 修改托管集群外网端口的安全策略 {@link V20180525.ModifyClusterEndpointSPRequest} {@link V20180525.ModifyClusterEndpointSPResponse} */
   ModifyClusterEndpointSP(data: V20180525.ModifyClusterEndpointSPRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterEndpointSPResponse>;
+  /** 更新集群自定义参数 {@link V20180525.ModifyClusterExtraArgsRequest} {@link V20180525.ModifyClusterExtraArgsResponse} */
+  ModifyClusterExtraArgs(data: V20180525.ModifyClusterExtraArgsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterExtraArgsResponse>;
+  /** 集群更新参数任务控制 {@link V20180525.ModifyClusterExtraArgsTaskStateRequest} {@link V20180525.ModifyClusterExtraArgsTaskStateResponse} */
+  ModifyClusterExtraArgsTaskState(data: V20180525.ModifyClusterExtraArgsTaskStateRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterExtraArgsTaskStateResponse>;
   /** 修改集群镜像 {@link V20180525.ModifyClusterImageRequest} {@link V20180525.ModifyClusterImageResponse} */
   ModifyClusterImage(data: V20180525.ModifyClusterImageRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterImageResponse>;
   /** 编辑节点池 {@link V20180525.ModifyClusterNodePoolRequest} {@link V20180525.ModifyClusterNodePoolResponse} */

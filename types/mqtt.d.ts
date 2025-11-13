@@ -1310,6 +1310,18 @@ declare interface DescribeUserListResponse {
   RequestId?: string;
 }
 
+declare interface KickOutClientRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 客户端id */
+  ClientId: string;
+}
+
+declare interface KickOutClientResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAuthorizationPolicyRequest {
   /** 授权策略ID，从 [查询授权策略](https://cloud.tencent.com/document/product/1778/111074) 接口获取 */
   Id: number;
@@ -1715,6 +1727,8 @@ declare interface Mqtt {
   DescribeTopicList(data: DescribeTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicListResponse>;
   /** 查询MQTT用户列表 {@link DescribeUserListRequest} {@link DescribeUserListResponse} */
   DescribeUserList(data: DescribeUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserListResponse>;
+  /** 踢出客户端 {@link KickOutClientRequest} {@link KickOutClientResponse} */
+  KickOutClient(data: KickOutClientRequest, config?: AxiosRequestConfig): AxiosPromise<KickOutClientResponse>;
   /** 修改授权策略 {@link ModifyAuthorizationPolicyRequest} {@link ModifyAuthorizationPolicyResponse} */
   ModifyAuthorizationPolicy(data: ModifyAuthorizationPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuthorizationPolicyResponse>;
   /** 修改设备标识 {@link ModifyDeviceIdentityRequest} {@link ModifyDeviceIdentityResponse} */

@@ -4845,6 +4845,8 @@ declare interface ModifySLInstanceResponse {
 }
 
 declare interface ModifyUserGroupRequest {
+  /** 集群字符串ID */
+  InstanceId: string;
   /** 用户信息列表 */
   Users: string[];
   /** 用户主组，cvm集群为必填参数，tke集群选填 */
