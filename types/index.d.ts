@@ -84,6 +84,7 @@ import Cwp, { Versions as CwpVersions } from "./cwp";
 import Cws, { Versions as CwsVersions } from "./cws";
 import Cynosdb, { Versions as CynosdbVersions } from "./cynosdb";
 import Dasb, { Versions as DasbVersions } from "./dasb";
+import Dataagent, { Versions as DataagentVersions } from "./dataagent";
 import Dayu, { Versions as DayuVersions } from "./dayu";
 import Dbbrain, { Versions as DbbrainVersions } from "./dbbrain";
 import Dbdc, { Versions as DbdcVersions } from "./dbdc";
@@ -331,6 +332,7 @@ export declare type SERVICE_VERSIONS = {
   cws: CwsVersions,
   cynosdb: CynosdbVersions,
   dasb: DasbVersions,
+  dataagent: DataagentVersions,
   dayu: DayuVersions,
   dbbrain: DbbrainVersions,
   dbdc: DbdcVersions,
@@ -675,6 +677,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   cynosdb: Cynosdb,
   /** {@link Dasb 运维安全中心（堡垒机）} */
   dasb: Dasb,
+  /** {@link Dataagent 腾讯云数据分析智能体} */
+  dataagent: Dataagent,
   /** {@link Dayu DDoS 高防包} */
   dayu: Dayu,
   /** {@link Dbbrain 数据库智能管家 DBbrain} */
