@@ -104,6 +104,12 @@ declare interface Acl {
   AllowKeyboardLogger?: boolean;
   /** 关联的应用资产列表 */
   AppAssetSet?: AppAsset[];
+  /** 权限类型 0-默认普通权限 1-工单权限,2-权限工单权限 */
+  AclType?: number;
+  /** 权限所属工单id */
+  TicketId?: string;
+  /** 权限所属工单名称 */
+  TicketName?: string;
 }
 
 /** 应用资产信息 */
@@ -146,6 +152,14 @@ declare interface AppAsset {
   GroupSet?: Group[];
   /** 资产所属部门 */
   Department?: Department;
+}
+
+/** 资产同步标志 */
+declare interface AssetSyncFlags {
+  /** 是否已完成角色授权 */
+  RoleGranted?: boolean;
+  /** 是否已开启自动资产同步 */
+  AutoSync?: boolean;
 }
 
 /** 资产同步状态 */
@@ -312,6 +326,8 @@ declare interface Device {
   PrivateIp?: string;
   /** 地域编码 */
   ApCode?: string;
+  /** 地域名称 */
+  ApName?: string;
   /** 操作系统名称 */
   OsName?: string;
   /** 资产类型 1 - Linux, 2 - Windows, 3 - MySQL, 4 - SQLServer */
@@ -354,6 +370,16 @@ declare interface Device {
   SyncPodCount?: number;
   /** K8S集群pod总数量 */
   TotalPodCount?: number;
+  /** 云账号id */
+  CloudAccountId?: number;
+  /** 云账号名称 */
+  CloudAccountName?: string;
+  /** 云厂商类型1-腾讯云，2-阿里云 */
+  ProviderType?: number;
+  /** 云厂商名称 */
+  ProviderName?: string;
+  /** 同步的云资产状态，标记同步的资产的状态情况，0-已删除,1-正常,2-已隔离,3-已过期 */
+  SyncCloudDeviceStatus?: number;
 }
 
 /** 主机账号 */
@@ -416,6 +442,18 @@ declare interface ExternalDevice {
   SSLCert?: string;
   /** SSL证书名称，EnableSSL时必填 */
   SSLCertName?: string;
+  /** 资产实例id */
+  InstanceId?: string;
+  /** 资产所属地域 */
+  ApCode?: string;
+  /** 地域名称 */
+  ApName?: string;
+  /** 资产所属VPC */
+  VpcId?: string;
+  /** 资产所属子网 */
+  SubnetId?: string;
+  /** 公网IP */
+  PublicIp?: string;
 }
 
 /** 描述键值对过滤器，用于条件过滤查询 */
@@ -604,6 +642,8 @@ declare interface Resource {
   IntranetVpcId?: string;
   /** 开通内网访问vpc的网段 */
   IntranetVpcCidr?: string;
+  /** 堡垒机内网ip自定义域名 */
+  DomainName?: string;
   /** 是否共享clb，true-共享clb，false-独享clb */
   ShareClb?: boolean;
   /** 共享clb id */
@@ -1547,6 +1587,8 @@ declare interface DescribeAclsRequest {
   AuthorizedAppAssetIdSet?: number[];
   /** 访问权限状态，1 - 已生效，2 - 未生效，3 - 已过期 */
   Status?: number;
+  /** 访问权限状态，1 - 已生效，2 - 未生效，3 - 已过期 */
+  StatusSet?: number[];
   /** 部门ID，用于过滤属于某个部门的访问权限 */
   DepartmentId?: string;
   /** 是否根据AuthorizedDeviceIdSet,对资产账号进行精确匹配，默认false, 设置true时，确保AuthorizedDeviceIdSet只有一个元素 */
@@ -1560,6 +1602,16 @@ declare interface DescribeAclsResponse {
   TotalCount?: number;
   /** 访问权限列表 */
   AclSet?: Acl[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAssetSyncFlagRequest {
+}
+
+declare interface DescribeAssetSyncFlagResponse {
+  /** 资产同步标志 */
+  AssetSyncFlags?: AssetSyncFlags;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1625,6 +1677,8 @@ declare interface DescribeCmdTemplatesRequest {
   Name?: string;
   /** 命令模板类型 1-内置模板 2-自定义模板 */
   Type?: number;
+  /** 命令模板类型 1-内置模板 2-自定义模板 */
+  TypeSet?: number[];
   /** 分页偏移位置，默认值为0 */
   Offset?: number;
   /** 每页条目数量，默认20 */
@@ -1741,6 +1795,12 @@ declare interface DescribeDevicesRequest {
   ManagedAccount?: string;
   /** 过滤条件，可按照部门ID进行过滤 */
   DepartmentId?: string;
+  /** 资产所属云账号id */
+  AccountIdSet?: number[];
+  /** 云厂商类型，1-腾讯云，2-阿里云 */
+  ProviderTypeSet?: number[];
+  /** 同步的云资产状态，标记同步的资产的状态情况，0-已删除,1-正常,2-已隔离,3-已过期 */
+  CloudDeviceStatusSet?: number[];
   /** 过滤条件，可按照标签键、标签进行过滤。如果同时指定标签键和标签过滤条件，它们之间为“AND”的关系 */
   TagFilters?: TagFilter[];
   /** 过滤数组。支持的Name：BindingStatus 绑定状态 */
@@ -1819,8 +1879,12 @@ declare interface DescribeLoginEventRequest {
   SourceIp?: string;
   /** 登录入口：1-字符界面,2-图形界面，3-web页面, 4-API */
   Entry?: number;
+  /** 登录入口：1-字符界面,2-图形界面，3-web页面, 4-API */
+  EntrySet?: number[];
   /** 操作结果，1-成功，2-失败 */
   Result?: number;
+  /** 操作结果，1-成功，2-失败 */
+  ResultSet?: number[];
   /** 分页偏移位置，默认值为0 */
   Offset?: number;
   /** 分页每页记录数，默认20 */
@@ -1849,8 +1913,12 @@ declare interface DescribeOperationEventRequest {
   SourceIp?: string;
   /** 操作类型，参考DescribeOperationType返回结果 */
   Kind?: number;
+  /** 操作类型，参考DescribeOperationType返回结果 */
+  KindSet?: number[];
   /** 操作结果，1-成功，2-失败 */
   Result?: number;
+  /** 操作结果，1-成功，2-失败 */
+  ResultSet?: number[];
   /** 分页偏移位置，默认值为0 */
   Offset?: number;
   /** 分页每页记录数，默认20 */
@@ -1904,6 +1972,14 @@ declare interface DescribeResourcesResponse {
   ResourceSet?: Resource[];
   /** 堡垒机资源数量 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSecuritySettingRequest {
+}
+
+declare interface DescribeSecuritySettingResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1994,14 +2070,98 @@ declare interface DescribeUsersResponse {
   RequestId?: string;
 }
 
+declare interface DisableExternalAccessRequest {
+  /** 堡垒机id */
+  ResourceId: string;
+}
+
+declare interface DisableExternalAccessResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DisableIntranetAccessRequest {
+  /** 堡垒机id */
+  ResourceId?: string;
+}
+
+declare interface DisableIntranetAccessResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EnableExternalAccessRequest {
+  /** 堡垒机id */
+  ResourceId: string;
+}
+
+declare interface EnableExternalAccessResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EnableIntranetAccessRequest {
+  /** 堡垒机实例id */
+  ResourceId?: string;
+  /** 开通内网访问的vpc id */
+  VpcId?: string;
+  /** vpc的网段 */
+  VpcCidrBlock?: string;
+  /** 开通内网访问的subnet id */
+  SubnetId?: string;
+  /** 内网ip的自定义域名，可为空 */
+  DomainName?: string;
+}
+
+declare interface EnableIntranetAccessResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ImportExternalDeviceRequest {
   /** 资产参数列表 */
   DeviceSet: ExternalDevice[];
+  /** 资产所属云账号id */
+  AccountId?: number;
 }
 
 declare interface ImportExternalDeviceResponse {
   /** 资产ID列表 */
   DeviceIdSet?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAccessWhiteListAutoStatusRequest {
+  /** true：放开自动添加IP；false：不放开自动添加IP */
+  AllowAuto: boolean;
+}
+
+declare interface ModifyAccessWhiteListAutoStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAccessWhiteListRuleRequest {
+  /** 白名单规则ID */
+  Id: number;
+  /** ip或网段信息，如10.10.10.1或10.10.10.0/24，最大长度40字节 */
+  Source: string;
+  /** 备注信息，最大长度64字符。 */
+  Remark?: string;
+}
+
+declare interface ModifyAccessWhiteListRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAccessWhiteListStatusRequest {
+  /** true：放开全部来源IP；false：不放开全部来源IP */
+  AllowAny: boolean;
+}
+
+declare interface ModifyAccessWhiteListStatusResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2070,6 +2230,28 @@ declare interface ModifyAclRequest {
 }
 
 declare interface ModifyAclResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAssetSyncFlagRequest {
+  /** 是否开启资产自动同步，false-不开启，true-开启 */
+  AutoSync: boolean;
+}
+
+declare interface ModifyAssetSyncFlagResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAuthModeSettingRequest {
+  /** 双因子认证，0-不开启，1-OTP，2-短信，3-USB Key */
+  AuthMode: number;
+  /** 资源类型，0：普通 1：国密 */
+  ResourceType?: number;
+}
+
+declare interface ModifyAuthModeSettingResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2270,6 +2452,18 @@ declare interface ModifyOperationTaskRequest {
 }
 
 declare interface ModifyOperationTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyReconnectionSettingRequest {
+  /** 重试次数,取值范围：0-20 */
+  ReconnectionMaxCount: number;
+  /** true：限制重连次数，false：不限制重连次数 */
+  Enable: boolean;
+}
+
+declare interface ModifyReconnectionSettingResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2499,6 +2693,8 @@ declare interface SearchFileBySidRequest {
   Offset?: number;
   /** 1-已执行， 2-被阻断 */
   AuditAction?: number;
+  /** 1-已执行， 2-被阻断 */
+  AuditActionSet?: number[];
   /** 以Protocol和Method为条件查询 */
   TypeFilters?: SearchFileTypeFilter[];
 }
@@ -2599,6 +2795,8 @@ declare interface SearchSessionRequest {
   DeviceName?: string;
   /** 状态，1为活跃，2为结束，3为强制离线，4为其他错误 */
   Status?: number;
+  /** 状态，1为活跃，2为结束，3为强制离线 */
+  StatusSet?: number[];
   /** 若入参为Id，则其他入参字段不作为搜索依据，仅按照Id来搜索会话 */
   Id?: string;
   /** 应用资产类型, 1-web */
@@ -2607,6 +2805,8 @@ declare interface SearchSessionRequest {
   AppAssetUrl?: string;
   /** 资产类型 */
   DeviceKind?: string;
+  /** 资产类型 Linux, EKS,TKE */
+  DeviceKindSet?: string[];
 }
 
 declare interface SearchSessionResponse {
@@ -2755,6 +2955,8 @@ declare interface Bh {
   DescribeAccessWhiteListRules(data?: DescribeAccessWhiteListRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessWhiteListRulesResponse>;
   /** 查询访问权限列表 {@link DescribeAclsRequest} {@link DescribeAclsResponse} */
   DescribeAcls(data?: DescribeAclsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAclsResponse>;
+  /** 查询资产自动同步开关 {@link DescribeAssetSyncFlagRequest} {@link DescribeAssetSyncFlagResponse} */
+  DescribeAssetSyncFlag(data?: DescribeAssetSyncFlagRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetSyncFlagResponse>;
   /** 查询资产同步状态 {@link DescribeAssetSyncStatusRequest} {@link DescribeAssetSyncStatusResponse} */
   DescribeAssetSyncStatus(data: DescribeAssetSyncStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetSyncStatusResponse>;
   /** 查询改密任务列表 {@link DescribeChangePwdTaskRequest} {@link DescribeChangePwdTaskResponse} */
@@ -2783,16 +2985,36 @@ declare interface Bh {
   DescribeOperationTask(data?: DescribeOperationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOperationTaskResponse>;
   /** 查询堡垒机服务信息 {@link DescribeResourcesRequest} {@link DescribeResourcesResponse} */
   DescribeResources(data?: DescribeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesResponse>;
+  /** 查询安全配置信息 {@link DescribeSecuritySettingRequest} {@link DescribeSecuritySettingResponse} */
+  DescribeSecuritySetting(data?: DescribeSecuritySettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecuritySettingResponse>;
   /** 查询用户组成员列表 {@link DescribeUserGroupMembersRequest} {@link DescribeUserGroupMembersResponse} */
   DescribeUserGroupMembers(data: DescribeUserGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserGroupMembersResponse>;
   /** 查询用户组列表 {@link DescribeUserGroupsRequest} {@link DescribeUserGroupsResponse} */
   DescribeUserGroups(data?: DescribeUserGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserGroupsResponse>;
   /** 查询用户列表 {@link DescribeUsersRequest} {@link DescribeUsersResponse} */
   DescribeUsers(data?: DescribeUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsersResponse>;
+  /** 关闭公网访问堡垒机 {@link DisableExternalAccessRequest} {@link DisableExternalAccessResponse} */
+  DisableExternalAccess(data: DisableExternalAccessRequest, config?: AxiosRequestConfig): AxiosPromise<DisableExternalAccessResponse>;
+  /** 关闭内网访问 {@link DisableIntranetAccessRequest} {@link DisableIntranetAccessResponse} */
+  DisableIntranetAccess(data?: DisableIntranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<DisableIntranetAccessResponse>;
+  /** 开启公网访问堡垒机 {@link EnableExternalAccessRequest} {@link EnableExternalAccessResponse} */
+  EnableExternalAccess(data: EnableExternalAccessRequest, config?: AxiosRequestConfig): AxiosPromise<EnableExternalAccessResponse>;
+  /** 开通内网访问 {@link EnableIntranetAccessRequest} {@link EnableIntranetAccessResponse} */
+  EnableIntranetAccess(data?: EnableIntranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<EnableIntranetAccessResponse>;
   /** 导入外部资产信息 {@link ImportExternalDeviceRequest} {@link ImportExternalDeviceResponse} */
   ImportExternalDevice(data: ImportExternalDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ImportExternalDeviceResponse>;
+  /** 修改访问白名单自动添加IP状态 {@link ModifyAccessWhiteListAutoStatusRequest} {@link ModifyAccessWhiteListAutoStatusResponse} */
+  ModifyAccessWhiteListAutoStatus(data: ModifyAccessWhiteListAutoStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessWhiteListAutoStatusResponse>;
+  /** 修改访问白名单规则 {@link ModifyAccessWhiteListRuleRequest} {@link ModifyAccessWhiteListRuleResponse} */
+  ModifyAccessWhiteListRule(data: ModifyAccessWhiteListRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessWhiteListRuleResponse>;
+  /** 修改访问白名单状态 {@link ModifyAccessWhiteListStatusRequest} {@link ModifyAccessWhiteListStatusResponse} */
+  ModifyAccessWhiteListStatus(data: ModifyAccessWhiteListStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessWhiteListStatusResponse>;
   /** 修改访问权限 {@link ModifyAclRequest} {@link ModifyAclResponse} */
   ModifyAcl(data: ModifyAclRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAclResponse>;
+  /** 修改资产自动同步开关 {@link ModifyAssetSyncFlagRequest} {@link ModifyAssetSyncFlagResponse} */
+  ModifyAssetSyncFlag(data: ModifyAssetSyncFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetSyncFlagResponse>;
+  /** 修改认证方式配置信息 {@link ModifyAuthModeSettingRequest} {@link ModifyAuthModeSettingResponse} */
+  ModifyAuthModeSetting(data: ModifyAuthModeSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuthModeSettingResponse>;
   /** 更新修改密码任务 {@link ModifyChangePwdTaskRequest} {@link ModifyChangePwdTaskResponse} */
   ModifyChangePwdTask(data: ModifyChangePwdTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyChangePwdTaskResponse>;
   /** 修改高危命令模板 {@link ModifyCmdTemplateRequest} {@link ModifyCmdTemplateResponse} */
@@ -2807,6 +3029,8 @@ declare interface Bh {
   ModifyOAuthSetting(data: ModifyOAuthSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOAuthSettingResponse>;
   /** 修改运维任务 {@link ModifyOperationTaskRequest} {@link ModifyOperationTaskResponse} */
   ModifyOperationTask(data: ModifyOperationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOperationTaskResponse>;
+  /** 修改运维连接资产的重试次数 {@link ModifyReconnectionSettingRequest} {@link ModifyReconnectionSettingResponse} */
+  ModifyReconnectionSetting(data: ModifyReconnectionSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReconnectionSettingResponse>;
   /** 资源变配 {@link ModifyResourceRequest} {@link ModifyResourceResponse} */
   ModifyResource(data: ModifyResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceResponse>;
   /** 修改用户信息 {@link ModifyUserRequest} {@link ModifyUserResponse} */

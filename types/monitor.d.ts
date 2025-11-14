@@ -3514,6 +3514,8 @@ declare namespace V20180724 {
     ConvergenceHistoryIDs?: string[];
     /** 告警类型 */
     AlarmTypes?: string[];
+    /** 是否已屏蔽 */
+    ShieldStatus?: string[];
   }
 
   interface DescribeAlarmHistoriesResponse {

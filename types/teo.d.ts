@@ -86,7 +86,7 @@ declare interface AccelerationDomainCertificate {
   List?: CertificateInfo[] | null;
   /** 在边缘双向认证场景下，该字段为客户端的 CA 证书，部署在 EO 节点内，用于 EO 节点认证客户端证书。 */
   ClientCertInfo?: MutualTLS;
-  /** 用于 EO 节点回源时携带的证书，源站启用双向认证握手时使用，用于源站认证客户端证书是否有效，确保请求来源于受信任的 EO 节点。 */
+  /** 用于分别开启/关闭回源双向认证和源站证书校验。回源双向认证的证书用于 EO 回源时携带，源站可选择校验该证书用于确保请求来源于受信任的 EO 节点。源站证书校验开启时，证书配置用于 EO 节点校验源站证书是否可信。 */
   UpstreamCertInfo?: UpstreamCertInfo;
 }
 
@@ -2552,6 +2552,14 @@ declare interface OriginACLInfo {
   Status?: string;
 }
 
+/** HTTPS 源站证书校验的模式。 */
+declare interface OriginCertificateVerify {
+  /** 源站证书校验模式。取值有：disable:禁用源站证书校验。custom_ca:使用指定受信任 CA 证书校验。 */
+  VerificationMode: string;
+  /** 指定受信任的 CA 证书列表，源站证书需要由该 CA 签发才能校验通过。 注意：仅当 VerificationMode 为 custom_ca 时，需要传入该参数，指定受信任的CA证书信息。OriginCertificateVerify 在 ModifyHostsCertificate 作为入参使用时，该参数传入对应证书的 CertId 即可。您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/ssl) 查看 CertId。 */
+  CustomCACerts?: CertificateInfo[];
+}
+
 /** 加速域名源站信息。 */
 declare interface OriginDetail {
   /** 源站类型，取值有：IP_DOMAIN：IPV4、IPV6 或域名类型源站；COS：腾讯云 COS 对象存储源站；AWS_S3：AWS S3 对象存储源站；ORIGIN_GROUP：源站组类型源站；VOD：云点播；SPACE：源站卸载，当前仅白名单开放；LB：负载均衡，当前仅白名单开放。 */
@@ -3846,10 +3854,12 @@ declare interface URLPath {
   Value?: string;
 }
 
-/** 用于 EO 节点回源时携带的证书，源站启用双向认证握手时使用，用于源站认证客户端证书是否有效，确保请求来源于受信任的 EO 节点。 */
+/** 用于分别开启/关闭回源双向认证和源站证书校验。回源双向认证的证书用于 EO 回源时携带，源站可选择校验该证书用于确保请求来源于受信任的 EO 节点。源站证书校验开启时，证书配置用于 EO 节点校验源站证书是否可信。 */
 declare interface UpstreamCertInfo {
   /** 在回源双向认证场景下，该字段为 EO 节点回源时携带的证书（包含公钥、私钥即可），部署在 EO 节点，用于源站对 EO 节点进行认证。在作为入参使用时，不填写表示保持原有配置。 */
   UpstreamMutualTLS?: MutualTLS;
+  /** 在源站证书校验场景下，该字段为 EO 节点回源时用于验证的 CA 证书，部署在 EO 节点，用于 EO 节点对服务端证书进行认证。在作为入参使用时，不填写表示保持原有配置。 */
+  UpstreamCertificateVerify?: OriginCertificateVerify;
 }
 
 /** 回源跟随重定向参数配置。 */
@@ -7057,7 +7067,7 @@ declare interface ModifyHostsCertificateRequest {
   ApplyType?: string;
   /** 在边缘双向认证场景下，该字段为客户端的 CA 证书，部署在 EO 节点内，用于客户端对 EO 节点进行认证。默认关闭，不填写表示保持原有配置。 */
   ClientCertInfo?: MutualTLS;
-  /** 用于配置 EO 节点回源时携带的证书，用于回源双向认证握手，默认关闭，不填写表示保持原有配置。该配置当前为白名单内测中，如需使用，请[联系我们](https://cloud.tencent.com/online-service)。 */
+  /** 用于分别开启/关闭回源双向认证和源站证书校验。默认关闭，不填写表示保持原有配置。回源双向认证配置当前为白名单内侧中，如需使用，请[联系我们](https://cloud.tencent.com/online-service)。 */
   UpstreamCertInfo?: UpstreamCertInfo;
 }
 

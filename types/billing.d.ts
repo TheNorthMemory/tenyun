@@ -3540,6 +3540,8 @@ declare interface DescribeBillSummaryRequest {
   GroupType: string;
   /** 标签键，GroupType=tag获取标签维度账单时传 */
   TagKey?: string[];
+  /** 操作者UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的 ID 或者角色 ID ） */
+  OperateUin?: string;
 }
 
 declare interface DescribeBillSummaryResponse {

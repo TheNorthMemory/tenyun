@@ -6431,7 +6431,7 @@ declare interface DescribeAssetImageRegistryVulListExportRequest {
   Filters?: AssetFilters[];
   /** 镜像信息 */
   ImageInfo?: ImageInfo;
-  /** 必填参数，镜像唯一ID，可通过DescribeAssetImageRegistryList接口获取 */
+  /** 镜像唯一ID，可通过DescribeAssetImageRegistryList接口获取 */
   Id?: number;
 }
 
@@ -6453,7 +6453,7 @@ declare interface DescribeAssetImageRegistryVulListRequest {
   Filters?: AssetFilters[];
   /** 镜像信息 */
   ImageInfo?: ImageInfo;
-  /** 必填参数，镜像唯一ID，可通过DescribeAssetImageRegistryList接口获取 */
+  /** 镜像唯一ID，可通过DescribeAssetImageRegistryList接口获取 */
   Id?: number;
 }
 

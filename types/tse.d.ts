@@ -766,6 +766,8 @@ declare interface DescribeCloudNativeAPIGatewayResult {
   PublicIpAddresses?: string[];
   /** 是否开启删除保护 */
   DeleteProtect?: boolean;
+  /** 表示可以升级的版本号 */
+  AvailableVersions?: string[] | null;
 }
 
 /** 获取云原生API网关实例协议端口列表响应结果 */
@@ -804,6 +806,20 @@ declare interface DescribeInstanceRegionInfo {
   MainRegion?: boolean;
   /** 该地域所在的EKS集群 */
   EKSClusterID?: string;
+}
+
+/** 查询云原生网关访问控制配置出参 */
+declare interface DescribeKongIpRestrictionResult {
+  /** 访问控制插件绑定的资源类型：route | service */
+  SourceType?: string | null;
+  /** 路由或服务的id */
+  SourceId?: string | null;
+  /** 是否启用插件 */
+  Enabled?: boolean | null;
+  /** 访问控制类型：whiteList｜blackList */
+  RestrictionType?: string | null;
+  /** cidr｜ip */
+  AddressList?: string[] | null;
 }
 
 /** 获取云原生api网关公网地址信息响应结果 */
@@ -2540,6 +2556,26 @@ declare interface CreateNativeGatewayServiceSourceResponse {
   RequestId?: string;
 }
 
+declare interface CreateOrModifyCloudNativeAPIGatewayIPRestrictionRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 访问控制插件绑定的资源类型：route|service */
+  SourceType: string;
+  /** 路由或服务的id */
+  SourceId: string;
+  /** 是否启用插件 */
+  Enabled: boolean;
+  /** 访问控制类型：whiteList｜blackList */
+  RestrictionType: string;
+  /** cidr｜ip */
+  AddressList: string[];
+}
+
+declare interface CreateOrModifyCloudNativeAPIGatewayIPRestrictionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateOrUpdateConfigFileAndReleaseRequest {
   /** 实例id */
   InstanceId: string;
@@ -2610,6 +2646,20 @@ declare interface DeleteCloudNativeAPIGatewayCertificateRequest {
 }
 
 declare interface DeleteCloudNativeAPIGatewayCertificateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayIPRestrictionRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 访问控制插件绑定的资源类型：route|service */
+  SourceType: string;
+  /** 路由或服务的id */
+  SourceId: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayIPRestrictionResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2972,6 +3022,22 @@ declare interface DescribeCloudNativeAPIGatewayConfigRequest {
 declare interface DescribeCloudNativeAPIGatewayConfigResponse {
   /** 获取云原生API网关响应结果。 */
   Result?: DescribeCloudNativeAPIGatewayConfigResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayIPRestrictionRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 访问控制插件绑定的资源类型：route|service */
+  SourceType: string;
+  /** 路由或服务的id */
+  SourceId: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayIPRestrictionResponse {
+  /** 出参 */
+  Result?: DescribeKongIpRestrictionResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4384,6 +4450,8 @@ declare interface Tse {
   CreateNativeGatewayServerGroup(data: CreateNativeGatewayServerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNativeGatewayServerGroupResponse>;
   /** 创建网关服务来源 {@link CreateNativeGatewayServiceSourceRequest} {@link CreateNativeGatewayServiceSourceResponse} */
   CreateNativeGatewayServiceSource(data: CreateNativeGatewayServiceSourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNativeGatewayServiceSourceResponse>;
+  /** 创建或编辑云原生网关访问控制 {@link CreateOrModifyCloudNativeAPIGatewayIPRestrictionRequest} {@link CreateOrModifyCloudNativeAPIGatewayIPRestrictionResponse} */
+  CreateOrModifyCloudNativeAPIGatewayIPRestriction(data: CreateOrModifyCloudNativeAPIGatewayIPRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrModifyCloudNativeAPIGatewayIPRestrictionResponse>;
   /** 创建或更新配置文件并发布配置 {@link CreateOrUpdateConfigFileAndReleaseRequest} {@link CreateOrUpdateConfigFileAndReleaseResponse} */
   CreateOrUpdateConfigFileAndRelease(data: CreateOrUpdateConfigFileAndReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrUpdateConfigFileAndReleaseResponse>;
   /** 新建 WAF 防护域名 {@link CreateWafDomainsRequest} {@link CreateWafDomainsResponse} */
@@ -4396,6 +4464,8 @@ declare interface Tse {
   DeleteCloudNativeAPIGatewayCanaryRule(data: DeleteCloudNativeAPIGatewayCanaryRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayCanaryRuleResponse>;
   /** 删除云原生网关证书 {@link DeleteCloudNativeAPIGatewayCertificateRequest} {@link DeleteCloudNativeAPIGatewayCertificateResponse} */
   DeleteCloudNativeAPIGatewayCertificate(data: DeleteCloudNativeAPIGatewayCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayCertificateResponse>;
+  /** 删除云原生网关访问控制 {@link DeleteCloudNativeAPIGatewayIPRestrictionRequest} {@link DeleteCloudNativeAPIGatewayIPRestrictionResponse} */
+  DeleteCloudNativeAPIGatewayIPRestriction(data: DeleteCloudNativeAPIGatewayIPRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayIPRestrictionResponse>;
   /** 删除公网网络配置 {@link DeleteCloudNativeAPIGatewayPublicNetworkRequest} {@link DeleteCloudNativeAPIGatewayPublicNetworkResponse} */
   DeleteCloudNativeAPIGatewayPublicNetwork(data: DeleteCloudNativeAPIGatewayPublicNetworkRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayPublicNetworkResponse>;
   /** 删除云原生网关路由 {@link DeleteCloudNativeAPIGatewayRouteRequest} {@link DeleteCloudNativeAPIGatewayRouteResponse} */
@@ -4446,6 +4516,8 @@ declare interface Tse {
   DescribeCloudNativeAPIGatewayCertificates(data: DescribeCloudNativeAPIGatewayCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayCertificatesResponse>;
   /** 获取云原生API网关实例网络配置信息 {@link DescribeCloudNativeAPIGatewayConfigRequest} {@link DescribeCloudNativeAPIGatewayConfigResponse} */
   DescribeCloudNativeAPIGatewayConfig(data: DescribeCloudNativeAPIGatewayConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayConfigResponse>;
+  /** 查询云原生网关访问控制 {@link DescribeCloudNativeAPIGatewayIPRestrictionRequest} {@link DescribeCloudNativeAPIGatewayIPRestrictionResponse} */
+  DescribeCloudNativeAPIGatewayIPRestriction(data: DescribeCloudNativeAPIGatewayIPRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayIPRestrictionResponse>;
   /** 根据公网IP查询云原生网关实例信息 {@link DescribeCloudNativeAPIGatewayInfoByIpRequest} {@link DescribeCloudNativeAPIGatewayInfoByIpResponse} */
   DescribeCloudNativeAPIGatewayInfoByIp(data: DescribeCloudNativeAPIGatewayInfoByIpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayInfoByIpResponse>;
   /** 获取云原生网关节点列表 {@link DescribeCloudNativeAPIGatewayNodesRequest} {@link DescribeCloudNativeAPIGatewayNodesResponse} */

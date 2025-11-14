@@ -40,12 +40,16 @@ declare interface Choice {
 
 /** 可以传入多种类型的内容，如图片、文本。 */
 declare interface Content {
-  /** 内容类型注意：需包含至少一个 Type 为"text"的参数。参数值可选范围：[text", "image_url"] */
+  /** 内容类型注意：需包含至少一个 Type 为"text"的参数。参数值可选范围：[text", "image_url","video_url"] */
   Type: string | null;
   /** 当 Type 为 text 时使用，表示具体的文本内容。当 Type 为 image_url 时，当前字段内容需保持为空，传递内容不生效。 */
   Text?: string | null;
   /** 图片的url，当 Type 为 image_url 时使用，表示具体的图片内容如"https://example.com/1.png" 或 图片的base64（注意 "data:image/jpeg;base64," 为必要部分）："data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAA......"。当 Type 为 text 时，当前字段内容需保持为空，传递内容不生效。 */
   ImageUrl?: ImageUrl | null;
+  /** 当type为video_url时使用，标识具体的视频链接内容 */
+  VideoUrl?: VideoUrl | null;
+  /** 当type为video_frames时使用，标识具体的视频内图像帧内容 */
+  VideoFrames?: VideoFrames | null;
 }
 
 /** 返回的内容（流式返回） */
@@ -490,6 +494,20 @@ declare interface UserLocation {
   Type?: string;
   /** 用户近似位置的详细信息 */
   Approximate?: Approximate;
+}
+
+/** 当type为video_frames时使用，标识具体的视频内图像帧内容 */
+declare interface VideoFrames {
+  /** 视频图像帧列表，图像帧传url */
+  Frames?: string[];
+}
+
+/** 当type为video_url时使用，标识具体的视频链接内容 */
+declare interface VideoUrl {
+  /** 视频的url，如"https://your-video-path.mp/4" */
+  Url?: string;
+  /** 控制视频抽帧频率，取值范围为 0.1 ~5，表示每隔 1/fps 秒抽取一帧，默认为 1s抽取一帧 */
+  Fps?: number;
 }
 
 /** 知识注入相关的参数信息 */

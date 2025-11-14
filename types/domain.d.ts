@@ -70,6 +70,8 @@ declare interface BiddingResult {
 declare interface BiddingSuccessfulResult {
   /** 支付结束时间格式:YYYY-MM-DD HH:mm:ss */
   PayEndTime?: string;
+  /** 交割时间格式:YYYY-MM-DD HH:mm:ss */
+  ModifyOwnerEndTime?: string;
 }
 
 /** 认证资料信息 */
@@ -896,6 +898,8 @@ declare interface DescribeBiddingSuccessfulDetailResponse {
   BiddingBondPrice?: number;
   /** 状态：5 等待支付 6 等待转移， 7 转移中，8 交易成功，11 尾款阶段持有者索回，12 已违约 */
   Status?: number;
+  /** 交割时间格式:YYYY-MM-DD HH:mm:ss */
+  ModifyOwnerEndTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

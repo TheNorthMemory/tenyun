@@ -7385,6 +7385,20 @@ declare interface ModifyContainerReplicasResponse {
   RequestId?: string;
 }
 
+declare interface ModifyGroupLaneRequest {
+  /** 部署组ID。该参数可以通过调用 [DescribeSimpleGroups](https://cloud.tencent.com/document/product/649/36064) 的返回值中的 GroupId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource)-查看部署组页查看；也可以调用[CreateGroup](https://cloud.tencent.com/document/product/649/36074)创建新的部署组。 */
+  GroupId: string;
+  /** 泳道部署组列表。 */
+  LaneList: LaneGroup[];
+}
+
+declare interface ModifyGroupLaneResponse {
+  /** 操作结果。- true：成功- false：失败 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyGroupRequest {
   /** 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的部署组。 */
   GroupId: string;
@@ -8549,6 +8563,8 @@ declare interface Tsf {
   ModifyContainerReplicas(data: ModifyContainerReplicasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContainerReplicasResponse>;
   /** 更新分组信息 {@link ModifyGroupRequest} {@link ModifyGroupResponse} */
   ModifyGroup(data: ModifyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGroupResponse>;
+  /** 更新部署组泳道信息 {@link ModifyGroupLaneRequest} {@link ModifyGroupLaneResponse} */
+  ModifyGroupLane(data: ModifyGroupLaneRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGroupLaneResponse>;
   /** 更新泳道配置信息 {@link ModifyLaneRequest} {@link ModifyLaneResponse} */
   ModifyLane(data: ModifyLaneRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLaneResponse>;
   /** 更新灰度发布规则 {@link ModifyLaneRuleRequest} {@link ModifyLaneRuleResponse} */

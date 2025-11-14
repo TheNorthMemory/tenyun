@@ -40,8 +40,10 @@ declare interface ConsumeGroupItem {
   FullNamespaceV4?: string | null;
   /** 订阅的主题个数 */
   SubscribeTopicNum?: number;
-  /** 1753153590 */
+  /** 创建时间 */
   CreateTime?: number | null;
+  /** 绑定的标签列表 */
+  TagList?: Tag[];
 }
 
 /** 消费者客户端 */
@@ -160,6 +162,10 @@ declare interface FusionInstanceItem {
   ZoneIds?: number[] | null;
   /** 是否开启删除保护 */
   EnableDeletionProtection?: boolean;
+  /** 实例创建时间 */
+  CreateTime?: number | null;
+  /** 弹性TPS开关 */
+  ScaledTpsEnabled?: boolean | null;
 }
 
 /** 实例列表页中的实例信息 */
@@ -708,6 +714,8 @@ declare interface TopicItem {
   FullNamespaceV4?: string | null;
   /** 消息保留时长 */
   MsgTTL?: number;
+  /** 绑定的标签列表 */
+  TagList?: Tag[];
 }
 
 /** 迁移主题修改状态后的结果 */
@@ -726,6 +734,14 @@ declare interface VpcInfo {
   VpcId: string;
   /** 子网ID */
   SubnetId: string;
+}
+
+/** proxy调度时各个可用区有无调度任务 */
+declare interface ZoneScheduledItem {
+  /** 可用区ID */
+  ZoneId?: string;
+  /** 有剔除的调度任务且没有切回的可用区时，该值为true，反之为false */
+  NodePermWipeFlag?: boolean;
 }
 
 declare interface ChangeMigratingTopicToNextStageRequest {
@@ -1095,6 +1111,8 @@ declare interface DescribeConsumerClientResponse {
 declare interface DescribeConsumerGroupListRequest {
   /** 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。 */
   InstanceId: string;
+  /** 标签过滤器 */
+  TagFilters?: TagFilter[];
   /** 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。 */
   Filters?: Filter[];
   /** 查询起始位置，默认为0。 */
@@ -1276,6 +1294,10 @@ declare interface DescribeInstanceResponse {
   TopicNumUpperLimit?: number | null;
   /** 所属可用区列表，参考 [DescribeZones](https://cloud.tencent.com/document/product/1596/77929) 接口返回中的 [ZoneInfo](https://cloud.tencent.com/document/api/1596/77932) 数据结构。 */
   ZoneIds?: number[];
+  /** proxy节点数量 */
+  NodeCount?: number | null;
+  /** proxy调度详情 */
+  ZoneScheduledList?: ZoneScheduledItem[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1841,6 +1863,8 @@ declare interface DescribeTopicListByGroupResponse {
 declare interface DescribeTopicListRequest {
   /** 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。 */
   InstanceId: string;
+  /** 标签过滤器 */
+  TagFilters?: TagFilter[];
   /** 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。 */
   Filters?: Filter[];
   /** 查询起始位置，默认为0。 */
