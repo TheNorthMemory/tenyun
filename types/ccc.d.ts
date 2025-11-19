@@ -1223,6 +1223,12 @@ declare interface CreateAICallRequest {
   ToneWord?: ToneWordInfo;
   /** 合规提示音， 该参数传true（默认）表示通话开始播放摩斯码，提示对话内容为 AI 生成。该参数传false表示关闭合规提示音。该参数传false则代表您知晓并同意以下协议：我方充分知悉和理解，根据[《网络安全法》](https://www.cac.gov.cn/2016-11/07/c_1119867116.htm)[《互联网信息服务深度合成管理规定》](https://www.gov.cn/zhengce/zhengceku/2022-12/12/content_5731431.htm)[《生成式人工智能服务管理暂行办法》](https://www.gov.cn/zhengce/zhengceku/202307/content_6891752.htm)[《人工智能生成合成内容标识办法》](https://www.gov.cn/zhengce/zhengceku/202503/content_7014286.htm)的法律法规的规定，对人工智能生成合成内容应当添加显式标识和隐式标识。我方基于业务需求，请腾讯云对生成合成内容不添加显式标识，我方承诺合法合规使用生成合成内容，避免造成混淆、误认；如果使用生成合成内容对公众提供服务的，或通过网络传播的，我方将自觉主动添加符合法律规定和国家标准要求的显式标识，承担人工智能生成合成内容标识的法律义务。我方未能恰当、合理地履行人工智能内容标识义务造成不良后果的，或遭受主管部门责罚的，相关责任由我方完全承担。 */
   EnableComplianceAudio?: boolean;
+  /** 是否开启语音信箱识别 */
+  EnableVoicemailDetection?: boolean;
+  /** 识别到对端为语音信箱时的行为，当EnableVoicemailDetection为True时生效0: 挂断电话（默认） */
+  VoicemailAction?: number;
+  /** 大模型拓展参数， 格式为json字符串 */
+  LLMExtraBody?: string;
 }
 
 declare interface CreateAICallResponse {
@@ -2514,6 +2520,18 @@ declare interface ModifyStaffResponse {
   RequestId?: string;
 }
 
+declare interface PauseAutoCalloutTaskRequest {
+  /** 任务Id */
+  TaskId: number;
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+}
+
+declare interface PauseAutoCalloutTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface PausePredictiveDialingCampaignRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -2548,6 +2566,18 @@ declare interface RestoreMemberOnlineRequest {
 }
 
 declare interface RestoreMemberOnlineResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ResumeAutoCalloutTaskRequest {
+  /** 任务Id */
+  TaskId: number;
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+}
+
+declare interface ResumeAutoCalloutTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2845,12 +2875,16 @@ declare interface Ccc {
   ModifyStaff(data: ModifyStaffRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStaffResponse>;
   /** 修改座席密码 {@link ModifyStaffPasswordRequest} {@link ModifyStaffPasswordResponse} */
   ModifyStaffPassword(data: ModifyStaffPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStaffPasswordResponse>;
+  /** 暂停自动外呼任务 {@link PauseAutoCalloutTaskRequest} {@link PauseAutoCalloutTaskResponse} */
+  PauseAutoCalloutTask(data: PauseAutoCalloutTaskRequest, config?: AxiosRequestConfig): AxiosPromise<PauseAutoCalloutTaskResponse>;
   /** 暂停预测式外呼任务 {@link PausePredictiveDialingCampaignRequest} {@link PausePredictiveDialingCampaignResponse} */
   PausePredictiveDialingCampaign(data: PausePredictiveDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<PausePredictiveDialingCampaignResponse>;
   /** 重置话机注册密码 {@link ResetExtensionPasswordRequest} {@link ResetExtensionPasswordResponse} */
   ResetExtensionPassword(data: ResetExtensionPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetExtensionPasswordResponse>;
   /** 恢复客服上线 {@link RestoreMemberOnlineRequest} {@link RestoreMemberOnlineResponse} */
   RestoreMemberOnline(data: RestoreMemberOnlineRequest, config?: AxiosRequestConfig): AxiosPromise<RestoreMemberOnlineResponse>;
+  /** 恢复暂停的自动外呼任务 {@link ResumeAutoCalloutTaskRequest} {@link ResumeAutoCalloutTaskResponse} */
+  ResumeAutoCalloutTask(data: ResumeAutoCalloutTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeAutoCalloutTaskResponse>;
   /** 恢复预测式外呼任务 {@link ResumePredictiveDialingCampaignRequest} {@link ResumePredictiveDialingCampaignResponse} */
   ResumePredictiveDialingCampaign(data: ResumePredictiveDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<ResumePredictiveDialingCampaignResponse>;
   /** 设置 staff 状态 {@link SetStaffStatusRequest} {@link SetStaffStatusResponse} */

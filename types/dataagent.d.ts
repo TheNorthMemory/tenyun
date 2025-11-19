@@ -2,6 +2,16 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 文件分片 */
+declare interface Chunk {
+  /** 切片ID */
+  Id?: string;
+  /** 切片内容 */
+  Content?: string;
+  /** 切片的字数 */
+  Size?: number;
+}
+
 /** 知识库信息 */
 declare interface KnowledgeBase {
   /** 知识库id */
@@ -20,6 +30,80 @@ declare interface KnowledgeBase {
   DatasourceIds?: string[];
 }
 
+/** 问答结构 */
+declare interface Record {
+  /** 问题内容 */
+  Question: string;
+  /** 回答内容 */
+  Answer?: string;
+  /** 思考内容 */
+  Think?: string;
+  /** 任务列表 */
+  TaskList?: Task[];
+  /** 记录创建时间 */
+  CreateTime?: string;
+  /** 记录更新时间 */
+  UpdateTime?: string;
+  /** 记录id */
+  RecordId?: string;
+  /** 总结内容 */
+  FinalSummary?: string;
+  /** 会话ID */
+  SessionId?: string;
+  /** 1=赞，2=踩，0=无反馈 */
+  Feedback?: number;
+  /** 数据库信息 */
+  DbInfo?: string;
+  /** 错误信息 */
+  ErrorContext?: string;
+  /** TaskList的string字符串 */
+  TaskListStr?: string;
+  /** 知识库id列表 */
+  KnowledgeBaseIds?: string[];
+  /** 上下文 */
+  Context?: string;
+}
+
+/** 步骤扩展结构 */
+declare interface StepExpand {
+  /** 标题 */
+  Title?: string;
+  /** 状态 */
+  Status?: string;
+  /** cellid数组 */
+  CellIds?: string[];
+}
+
+/** 任务步骤 */
+declare interface StepInfo {
+  /** 步骤id */
+  Id: number;
+  /** 步骤名称 */
+  Name: string;
+  /** 步骤状态 */
+  Status: string;
+  /** 类型(text/expand) */
+  Type: string;
+  /** 总结 */
+  Summary?: string;
+  /** 步骤扩展结构 */
+  Expand?: StepExpand;
+  /** 描述 */
+  Desc?: string;
+}
+
+/** 任务信息 */
+declare interface Task {
+  /** 任务ID */
+  Id?: number;
+  /** 任务名称 */
+  Name?: string;
+  /** 任务状态 */
+  Status?: string;
+  /** 任务步骤列表 */
+  StepInfoList?: StepInfo[];
+}
+
 declare interface AddChunkRequest {
   /** 实例ID */
   InstanceId: string;
@@ -36,7 +120,7 @@ declare interface AddChunkRequest {
 }
 
 declare interface AddChunkResponse {
-  /** 新增的chunkid */
+  /** 新增的ChunkId */
   ChunkId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -71,9 +155,13 @@ declare interface ChatAIResponse {
 }
 
 declare interface CreateDataAgentSessionRequest {
+  /** 实例ID */
+  InstanceId?: string;
 }
 
 declare interface CreateDataAgentSessionResponse {
+  /** 会话 */
+  SessionId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -93,9 +181,15 @@ declare interface DeleteChunkResponse {
 }
 
 declare interface DeleteDataAgentSessionRequest {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 会话ID */
+  SessionId?: string;
 }
 
 declare interface DeleteDataAgentSessionResponse {
+  /** 删除的会话ID */
+  SessionId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -113,9 +207,15 @@ declare interface GetKnowledgeBaseListResponse {
 }
 
 declare interface GetSessionDetailsRequest {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 会话ID */
+  SessionId?: string;
 }
 
 declare interface GetSessionDetailsResponse {
+  /** 会话记录详情 */
+  RecordList?: Record[];
   /** 记录总数 */
   RecordCount?: number;
   /** 当前在运行的record信息 */
@@ -161,21 +261,31 @@ declare interface ModifyKnowledgeBaseResponse {
 }
 
 declare interface QueryChunkListRequest {
-  /** 默认 1 表示第一页 */
+  /** 表示第一页 */
   Page?: number;
-  /** 默认 10 一页展示 10 条 */
+  /** 默认一页展示 10 条 */
   PageSize?: number;
 }
 
 declare interface QueryChunkListResponse {
+  /** 总数 */
+  Total?: number;
+  /** 分片信息 */
+  Chunks?: Chunk[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface StopChatAIRequest {
+  /** 会话ID */
+  SessionId?: string;
+  /** 实例ID */
+  InstanceId?: string;
 }
 
 declare interface StopChatAIResponse {
+  /** 会话 */
+  SessionId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

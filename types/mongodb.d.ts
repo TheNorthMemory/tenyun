@@ -10,6 +10,64 @@ declare interface AddNodeList {
   Zone: string;
 }
 
+/** 审计实例信息 */
+declare interface AuditInstance {
+  /** 实例 ID。 */
+  InstanceId?: string;
+  /** 审计状态。 */
+  AuditStatus?: string;
+  /** 是否存在审计任务，0：无任务，1：创建中，2：关闭中 */
+  AuditTask?: number | null;
+  /** 审计日志过期时间 */
+  LogExpireDay?: number | null;
+  /** 高频日志过期时间 */
+  HighLogExpireDay?: number | null;
+  /** 低频日志过期时间 */
+  LowLogExpireDay?: number | null;
+  /** 费用信息。 */
+  BillingAmount?: number;
+  /** 高频存储容量 */
+  HighRealStorage?: number | null;
+  /** 低频存储容量 */
+  LowRealStorage?: number | null;
+  /** 实例详情。 */
+  InstanceInfo?: InstanceInfo | null;
+  /** 性能分析 */
+  PerformancesAnalyse?: number | null;
+  /** true表示全审计，false表示规则审计 */
+  AuditAll?: boolean | null;
+  /** 实例审计最近一次的开通时间 */
+  CreateAt?: string | null;
+  /** 实例绑定的规则模版ID */
+  RuleTemplateIds?: string[] | null;
+  /** 是否开启投递：ON，OFF */
+  Deliver?: string | null;
+  /** 日志投递信息 */
+  DeliverSummary?: DeliverSummary[];
+  /** 旧规则 */
+  OldRule?: boolean;
+  /** 实际存储容量 */
+  RealStorage?: number;
+}
+
+/** 审计日志过滤条件 */
+declare interface AuditLogFilter {
+  /** 客户端地址。 */
+  Host?: string[];
+  /** 用户名。 */
+  User?: string[];
+  /** 执行时间。单位为：ms。表示筛选执行时间大于该值的审计日志。 */
+  ExecTime?: number;
+  /** 影响行数。表示筛选影响行数大于该值的审计日志。 */
+  AffectRows?: number;
+  /** 操作类型。 */
+  Atype?: string[];
+  /** 执行结果。 */
+  Result?: string[];
+  /** 根据此关键字过滤日志 */
+  Param?: string[];
+}
+
 /** 用户权限 */
 declare interface Auth {
   /** 当前账号具有的权限信息。- 0：无权限。- 1：只读。- 3：读写。 */
@@ -144,12 +202,28 @@ declare interface DbURL {
   Address?: string;
 }
 
+/** 日志投递信息 */
+declare interface DeliverSummary {
+  /** 投递类型，store（存储类），mq（消息通道） */
+  DeliverType?: string;
+  /** 投递子类型：cls，ckafka。 */
+  DeliverSubType?: string;
+}
+
 /** 按 Key 闪回键值对 */
 declare interface FBKeyValue {
   /** 指定按 Key 闪回的目标 Key （键） 。 */
   Key?: string;
   /** 指定按 Key 闪回的目标 Key 所对应的 Value（值）。 */
   Value?: string;
+}
+
+/** 过滤条件 */
+declare interface Filters {
+  /** 搜索字段，目前支持："InstanceId"：实例Id，例如：cmgo-****）"InstanceName"：实例名称"ClusterId"：实例组Id，例如：cmgo-**** */
+  Name: string;
+  /** 筛选值 */
+  Values: string[];
 }
 
 /** 按 Key 闪回数据表 */
@@ -298,6 +372,36 @@ declare interface InstanceEnumParam {
   Status?: number;
 }
 
+/** 实例信息详情 */
+declare interface InstanceInfo {
+  /** 审计日志保存时长。 */
+  AuditLogExpireDay?: number | null;
+  /** 审计状态。 */
+  AuditStatus?: string | null;
+  /** 实例 ID。 */
+  InstanceId?: string | null;
+  /** 实例名。 */
+  InstanceName?: string | null;
+  /** 实例角色。 */
+  InstanceRole?: string | null;
+  /** 实例类型。 */
+  InstanceType?: string | null;
+  /** 数据库版本。 */
+  MongodbVersion?: string | null;
+  /** 项目 ID。 */
+  ProjectId?: number | null;
+  /** 地域。 */
+  Region?: string | null;
+  /** 实例状态。 */
+  Status?: string | null;
+  /** 是否支持审计。 */
+  SupportAudit?: boolean | null;
+  /** 可用区。 */
+  Zone?: string | null;
+  /** 标签信息 */
+  TagList?: TagInfo[] | null;
+}
+
 /** 实例可修改参数 Integer 类型集合。 */
 declare interface InstanceIntegerParam {
   /** 参数当前值。 */
@@ -378,6 +482,16 @@ declare interface KMSInfoDetail {
   KeyOrigin?: string;
   /** kms所在地域。 */
   KmsRegion?: string;
+}
+
+/** 过滤条件 */
+declare interface LogFilter {
+  /** 过滤条件名称 */
+  Type: string;
+  /** 过滤条件匹配类型，注意：此参数取值只能等于EQ */
+  Compare: string;
+  /** 过滤条件匹配值 */
+  Value: string[];
 }
 
 /** 日志详情 */
@@ -724,6 +838,28 @@ declare interface CreateAccountUserResponse {
   RequestId?: string;
 }
 
+declare interface CreateAuditLogFileRequest {
+  /** 实例 ID，格式如：cmgo-xfts****，与云数据库控制台页面中显示的实例 ID 相同。 */
+  InstanceId: string;
+  /** 开始时间，格式为："2021-07-12 10:29:20"。 */
+  StartTime: string;
+  /** 结束时间，格式为："2021-07-12 10:39:20"。 */
+  EndTime: string;
+  /** 审计日志文件的排序方式。ASC：升序。DESC：降序。 */
+  Order?: string;
+  /** 审计日志文件的排序字段。当前支持的取值包括：timestamp：时间戳。affectRows：影响行数。execTime：执行时间。 */
+  OrderBy?: string;
+  /** 过滤条件。可按设置的过滤条件过滤审计日志。 */
+  Filter?: AuditLogFilter;
+}
+
+declare interface CreateAuditLogFileResponse {
+  /** 审计日志文件名称。 */
+  FileName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateBackupDBInstanceRequest {
   /** 实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceId: string;
@@ -960,6 +1096,18 @@ declare interface DeleteAccountUserResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAuditLogFileRequest {
+  /** 实例ID，格式如：cmgo-test1234，与云数据库控制台页面中显示的实例 ID 相同。 */
+  InstanceId: string;
+  /** 审计日志文件名称，须保证文件名的准确性。 */
+  FileName: string;
+}
+
+declare interface DeleteAuditLogFileResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteLogDownloadTaskRequest {
   /** 实例 ID */
   InstanceId: string;
@@ -998,6 +1146,28 @@ declare interface DescribeAsyncRequestInfoResponse {
   StartTime?: string;
   /** 任务执行结束时间。 */
   EndTime?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAuditInstanceListRequest {
+  /** 指明待查询的实例为已开通审计或未开通审计。1：已开通审计功能。0：未开通审计功能。 */
+  AuditSwitch?: number;
+  /** 筛选条件。 */
+  Filters?: Filters[];
+  /** 审计类型，不传 默认全部，0 全审计，1 规则审计 */
+  AuditMode?: number;
+  /** 每页显示数量。 */
+  Limit?: number;
+  /** 分页偏移量。 */
+  Offset?: number;
+}
+
+declare interface DescribeAuditInstanceListResponse {
+  /** 实例总数。 */
+  TotalCount?: number;
+  /** 审计实例详情。 */
+  Items?: AuditInstance[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1638,6 +1808,22 @@ declare interface KillOpsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAuditServiceRequest {
+  /** 实例ID，格式如：cmgo-xfts****，与云数据库控制台页面中显示的实例 ID 相同。 */
+  InstanceId: string;
+  /** 审计日志保存时长。单位为：天。当前支持的取值包括： 7： 一周。 30： 一个月。 90： 三个月。 180 ： 六个月。 365 ： 一年。 1095 ： 三年。 1825 ： 五年。 */
+  LogExpireDay?: number;
+  /** true-全审计，false-规则审计，注意：AuditAll=true 时，RuleFilters 无需填参 */
+  AuditAll?: boolean;
+  /** 审计过滤规则，Type的范围【SrcIp、DB、Collection、User、SqlType】，注意：Type=SqlType时，Value必须在这个范围 ["query", "insert", "update", "delete", "command"] */
+  RuleFilters?: LogFilter[];
+}
+
+declare interface ModifyAuditServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDBInstanceNetworkAddressRequest {
   /** 指定需修改网络的实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceId: string;
@@ -1742,6 +1928,22 @@ declare interface OfflineIsolatedDBInstanceRequest {
 declare interface OfflineIsolatedDBInstanceResponse {
   /** 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。 */
   AsyncRequestId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface OpenAuditServiceRequest {
+  /** 实例 ID，格式如：cmgo-xfts****，与云数据库控制台页面中显示的实例 ID 相同。 */
+  InstanceId: string;
+  /** 审计日志保存时长。单位为：天。当前支持的取值包括： 7： 一周。 30： 一个月。 90： 三个月。 180 ： 六个月。 365 ： 一年。 1095 ： 三年。 1825 ： 五年。 */
+  LogExpireDay: number;
+  /** true-全审计，false-规则审计，注意：AuditAll=true 时，RuleFilters 无需填参 */
+  AuditAll?: boolean;
+  /** 审计过滤规则，Type的范围【SrcIp、DB、Collection、User、SqlType】，注意：Type=SqlType时，Value必须在这个范围 ["query", "insert", "update", "delete", "command"] */
+  RuleFilters?: LogFilter[];
+}
+
+declare interface OpenAuditServiceResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2363,6 +2565,8 @@ declare interface Mongodb {
   AssignProject(data: AssignProjectRequest, config?: AxiosRequestConfig): AxiosPromise<AssignProjectResponse>;
   /** 创建账号 {@link CreateAccountUserRequest} {@link CreateAccountUserResponse} */
   CreateAccountUser(data: CreateAccountUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountUserResponse>;
+  /** 创建审计日志文件 {@link CreateAuditLogFileRequest} {@link CreateAuditLogFileResponse} */
+  CreateAuditLogFile(data: CreateAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditLogFileResponse>;
   /** 备份实例接口 {@link CreateBackupDBInstanceRequest} {@link CreateBackupDBInstanceResponse} */
   CreateBackupDBInstance(data: CreateBackupDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupDBInstanceResponse>;
   /** 创建备份下载任务 {@link CreateBackupDownloadTaskRequest} {@link CreateBackupDownloadTaskResponse} */
@@ -2377,12 +2581,16 @@ declare interface Mongodb {
   CreateLogDownloadTask(data: CreateLogDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogDownloadTaskResponse>;
   /** 删除账号 {@link DeleteAccountUserRequest} {@link DeleteAccountUserResponse} */
   DeleteAccountUser(data: DeleteAccountUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountUserResponse>;
+  /** 删除审计日志文件 {@link DeleteAuditLogFileRequest} {@link DeleteAuditLogFileResponse} */
+  DeleteAuditLogFile(data: DeleteAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditLogFileResponse>;
   /** 删除日志下载任务 {@link DeleteLogDownloadTaskRequest} {@link DeleteLogDownloadTaskResponse} */
   DeleteLogDownloadTask(data: DeleteLogDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogDownloadTaskResponse>;
   /** 全部账号列表 {@link DescribeAccountUsersRequest} {@link DescribeAccountUsersResponse} */
   DescribeAccountUsers(data: DescribeAccountUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountUsersResponse>;
   /** 查询异步任务状态接口 {@link DescribeAsyncRequestInfoRequest} {@link DescribeAsyncRequestInfoResponse} */
   DescribeAsyncRequestInfo(data: DescribeAsyncRequestInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAsyncRequestInfoResponse>;
+  /** 查询审计实例 {@link DescribeAuditInstanceListRequest} {@link DescribeAuditInstanceListResponse} */
+  DescribeAuditInstanceList(data?: DescribeAuditInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditInstanceListResponse>;
   /** 查询备份下载任务信息 {@link DescribeBackupDownloadTaskRequest} {@link DescribeBackupDownloadTaskResponse} */
   DescribeBackupDownloadTask(data: DescribeBackupDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDownloadTaskResponse>;
   /** 获取云数据库实例自动备份配置 {@link DescribeBackupRulesRequest} {@link DescribeBackupRulesResponse} */
@@ -2443,6 +2651,8 @@ declare interface Mongodb {
   IsolateDBInstance(data: IsolateDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDBInstanceResponse>;
   /** 终止数据库实例特定操作 {@link KillOpsRequest} {@link KillOpsResponse} */
   KillOps(data: KillOpsRequest, config?: AxiosRequestConfig): AxiosPromise<KillOpsResponse>;
+  /** 修改审计配置 {@link ModifyAuditServiceRequest} {@link ModifyAuditServiceResponse} */
+  ModifyAuditService(data: ModifyAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditServiceResponse>;
   /** 修改云数据库实例网络信息 {@link ModifyDBInstanceNetworkAddressRequest} {@link ModifyDBInstanceNetworkAddressResponse} */
   ModifyDBInstanceNetworkAddress(data: ModifyDBInstanceNetworkAddressRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceNetworkAddressResponse>;
   /** 修改数据库参数模板 {@link ModifyDBInstanceParamTplRequest} {@link ModifyDBInstanceParamTplResponse} */
@@ -2455,6 +2665,8 @@ declare interface Mongodb {
   ModifyInstanceParams(data: ModifyInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceParamsResponse>;
   /** 下线隔离状态的云数据库实例 {@link OfflineIsolatedDBInstanceRequest} {@link OfflineIsolatedDBInstanceResponse} */
   OfflineIsolatedDBInstance(data: OfflineIsolatedDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<OfflineIsolatedDBInstanceResponse>;
+  /** 开通审计 {@link OpenAuditServiceRequest} {@link OpenAuditServiceResponse} */
+  OpenAuditService(data: OpenAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenAuditServiceResponse>;
   /** 修改实例名称 {@link RenameInstanceRequest} {@link RenameInstanceResponse} */
   RenameInstance(data: RenameInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RenameInstanceResponse>;
   /** 续费云数据库实例 {@link RenewDBInstancesRequest} {@link RenewDBInstancesResponse} */

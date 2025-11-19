@@ -346,6 +346,8 @@ declare interface InputMapping {
   DestinationPath: string;
   /** 挂载配置项参数 */
   MountOptionParameter?: string;
+  /** 挂载COS存储时支持的挂载工具；当前可选值：COSFS、GooseFS-Lite。 */
+  MountType?: string;
 }
 
 /** 描述实例的信息 */

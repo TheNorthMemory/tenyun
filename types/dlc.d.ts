@@ -772,6 +772,8 @@ declare interface DatasourceConnectionConfig {
   TCHouseD?: TCHouseD | null;
   /** TccHive数据目录连接信息 */
   TccHive?: TccHive;
+  /** MongoDB 数据源 */
+  MongoDB?: DataSourceInfo;
 }
 
 /** 数据源信息 */

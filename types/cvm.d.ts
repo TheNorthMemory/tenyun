@@ -320,8 +320,8 @@ declare interface HostResource {
   GpuTotal?: number;
   /** 专用宿主机实例可用GPU卡数 */
   GpuAvailable?: number;
-  /** CDH owner */
-  ExclusiveOwner?: string;
+  /** CDH 拥有者 */
+  ExclusiveOwner?: string | null;
 }
 
 /** 高性能计算集群 */
@@ -1264,7 +1264,7 @@ declare interface CreateDisasterRecoverGroupResponse {
   CvmQuotaTotal?: number;
   /** 置放群组内已有的云服务器数量。 */
   CurrentNum?: number;
-  /** 置放群组创建时间。 */
+  /** 分散置放群组创建时间。按照ISO8601标准表示，并且使用UTC时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
   CreateTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1647,7 +1647,7 @@ declare interface DescribeDisasterRecoverGroupsResponse {
 }
 
 declare interface DescribeHostsRequest {
-  /** zone按照【可用区】进行过滤。可用区形如：ap-guangzhou-1。类型：String必选：否可选项：可用区列表project-id按照【项目ID】进行过滤，可通过调用[DescribeProject](https://cloud.tencent.com/document/api/651/78725)查询已创建的项目列表或登录[控制台](https://console.cloud.tencent.com/cvm/index)进行查看；也可以调用[AddProject](https://cloud.tencent.com/document/api/651/81952)创建新的项目。项目ID形如：1002189。类型：Integer必选：否host-id按照【[CDH](https://cloud.tencent.com/document/product/416) ID】进行过滤。[CDH](https://cloud.tencent.com/document/product/416) ID形如：host-xxxxxxxx。类型：String必选：否host-name按照【CDH实例名称】进行过滤。类型：String必选：否host-state按照【CDH实例状态】进行过滤。（PENDING：创建中 | LAUNCH_FAILURE：创建失败 | RUNNING：运行中 | EXPIRED：已过期）类型：String必选：否host-type按照【CDH机型】进行过滤。类型：String必选：否tag-key 按照【标签键】进行过滤。类型：String必选：否 tag-value 按照【标签值】进行过滤。类型：String必选：否 tag:tag-key 按照【标签键值对】进行过滤。tag-key使用具体的标签键进行替换。使用请参考示例。每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。 */
+  /** zone按照【可用区】进行过滤。可用区形如：ap-guangzhou-6。类型：String必选：否可选项：可用区列表project-id按照【项目ID】进行过滤，可通过调用[DescribeProject](https://cloud.tencent.com/document/api/651/78725)查询已创建的项目列表或登录[控制台](https://console.cloud.tencent.com/cvm/index)进行查看；也可以调用[AddProject](https://cloud.tencent.com/document/api/651/81952)创建新的项目。项目ID形如：1002189。类型：Integer必选：否host-id按照【[CDH](https://cloud.tencent.com/document/product/416) ID】进行过滤。[CDH](https://cloud.tencent.com/document/product/416) ID形如：host-xxxxxxxx。类型：String必选：否host-name按照【CDH实例名称】进行过滤。类型：String必选：否host-state按照【CDH实例状态】进行过滤。（PENDING：创建中 | LAUNCH_FAILURE：创建失败 | RUNNING：运行中 | EXPIRED：已过期）类型：String必选：否host-type按照【CDH机型】进行过滤。类型：String必选：否tag-key 按照【标签键】进行过滤。类型：String必选：否 tag-value 按照【标签值】进行过滤。类型：String必选：否 tag:tag-key 按照【标签键值对】进行过滤。tag-key使用具体的标签键进行替换。使用请参考示例。每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -1737,7 +1737,7 @@ declare interface DescribeImagesRequest {
   Offset?: number;
   /** 数量限制，默认为20，最大值为100。关于Limit详见[API简介](/document/api/213/568)。 */
   Limit?: number;
-  /** 实例类型，如 `S1.SMALL1`。可通过 [DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/product/213/15749) 接口返回的 `InstanceType` 获取。 */
+  /** 实例类型，如 `SA5.MEDIUM2`。可通过 [DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/product/213/15749) 接口返回的 `InstanceType` 获取。 */
   InstanceType?: string;
 }
 
@@ -1925,7 +1925,7 @@ declare interface DescribeInternetChargeTypeConfigsResponse {
 declare interface DescribeKeyPairsRequest {
   /** 密钥对ID，密钥对ID形如：`skey-11112222`（此接口支持同时传入多个ID进行过滤。此参数的具体格式可参考 API [简介](https://cloud.tencent.com/document/api/213/15688)的 `id.N` 一节）。参数不支持同时指定 `KeyIds` 和 `Filters`。密钥对ID可以通过登录[控制台](https://console.cloud.tencent.com/cvm/index)查询。 */
   KeyIds?: string[];
-  /** 过滤条件。 project-id - Integer - 是否必填：否 -（过滤条件）按照项目ID过滤。可以通过[项目列表](https://console.cloud.tencent.com/project)查询项目ID，或者调用接口 [DescribeProject](https://cloud.tencent.com/document/api/378/4400)，取返回信息中的projectId获取项目ID。 key-name - String - 是否必填：否 -（过滤条件）按照密钥对名称过滤。 tag-key - String - 是否必填：否 -（过滤条件）按照标签键过滤。 tag-value - String - 是否必填：否 -（过滤条件）按照标签值过滤。 tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对过滤。tag-key使用具体的标签键进行替换。参数不支持同时指定 `KeyIds` 和 `Filters`。 */
+  /** 过滤条件。 project-id - Integer - 是否必填：否 -（过滤条件）按照项目ID过滤。可以通过[项目列表](https://console.cloud.tencent.com/project)查询项目ID，或者调用接口 [DescribeProjects](https://cloud.tencent.com/document/api/651/78725)，取返回信息中的projectId获取项目ID。 key-name - String - 是否必填：否 -（过滤条件）按照密钥对名称过滤。 tag-key - String - 是否必填：否 -（过滤条件）按照标签键过滤。 tag-value - String - 是否必填：否 -（过滤条件）按照标签值过滤。 tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对过滤。tag-key使用具体的标签键进行替换。参数不支持同时指定 `KeyIds` 和 `Filters`。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。关于 `Offset` 的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
   Offset?: number;
@@ -1949,13 +1949,13 @@ declare interface DescribeLaunchTemplateVersionsRequest {
   LaunchTemplateVersions?: number[];
   /** 通过范围指定版本时的最小版本号，默认为0。 */
   MinVersion?: number;
-  /** 过范围指定版本时的最大版本号，默认为30。 */
+  /** 通过范围指定版本时的最大版本号，默认为30。 */
   MaxVersion?: number;
   /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
   Offset?: number;
   /** 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
   Limit?: number;
-  /** 是否查询默认版本。该参数不可与LaunchTemplateVersions同时指定。 */
+  /** 是否查询默认版本。默认值：false */
   DefaultVersion?: boolean;
 }
 
@@ -2758,7 +2758,7 @@ declare interface ResetInstanceResponse {
 }
 
 declare interface ResetInstancesInternetMaxBandwidthRequest {
-  /** 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/9388)接口返回值中的 `InstanceId` 获取。 每次请求批量实例的上限为100。当调整 `BANDWIDTH_PREPAID` 和 `BANDWIDTH_POSTPAID_BY_HOUR` 计费方式的带宽时，只支持一个实例。 */
+  /** 一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/213/9388)接口返回值中的 `InstanceId` 获取。 每次请求批量实例的上限为100。当调整 `BANDWIDTH_PREPAID` 和 `BANDWIDTH_POSTPAID_BY_HOUR` 计费方式的带宽时，只支持一个实例。 */
   InstanceIds: string[];
   /** 公网出带宽配置。不同机型带宽上限范围不一致，具体限制详见带宽限制对账表。暂时只支持 `InternetMaxBandwidthOut` 参数。 */
   InternetAccessible: InternetAccessible;

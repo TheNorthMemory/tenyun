@@ -10,6 +10,22 @@ declare interface Admin {
   Mobile?: string;
 }
 
+/** 企业变更超管信息。 */
+declare interface AdminChangeInvitationInfo {
+  /** 要变更的企业Id。使用接口进行变更，所支持的企业有两种。1. 集团主企业替子企业进行超管变更。 子企业的企业 Id 可在更多-组织管理-集团组织管理处获取。如图位置![image](https://qcloudimg.tencent-cloud.cn/raw/3d4469c13ca9e66a847560fc4309c58b.png)2. 使用接口[创建企业认证链接](https://qian.tencent.com/developers/companyApis/organizations/CreateOrganizationAuthUrl) 创建的企业，企业 Id 可以从回调[企业引导企业实名认证后回调](https://qian.tencent.com/developers/company/callback_types_staffs#%E5%8D%81%E4%B8%80-%E4%BC%81%E4%B8%9A%E5%BC%95%E5%AF%BC%E4%BC%81%E4%B8%9A%E5%AE%9E%E5%90%8D%E8%AE%A4%E8%AF%81%E5%90%8E%E5%9B%9E%E8%B0%83)得到。 */
+  ChangeAdminOrganizationId: string;
+  /** 组织机构要变更的超管姓名。 跟超管变更的操作人保持一致。 */
+  NewAdminName: string;
+  /** 授权书(PNG或JPG或PDF) base64格式, 大小不超过8M 。p.s. 如果上传授权书 ，需遵循以下条件1. 超管的信息（超管姓名，超管手机号）必须为必填参数。 */
+  AuthFiles: string[];
+  /** 组织机构要变更的超管手机号。跟超管变更的操作人保持一致。超管变更的手机号和超管变更的证件号，必须要传递一个。 */
+  NewAdminMobile?: string;
+  /** 组织机构要变更的超管证件类型支持以下类型- ID_CARD : 中国大陆居民身份证 (默认值)- HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证- HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)跟超管变更的操作人保持一致。 */
+  NewAdminIdCardType?: string;
+  /** 组织机构新超管证件号。跟超管变更的操作人保持一致。超管变更的手机号和超管变更的证件号，必须要传递一个。 */
+  NewAdminIdCardNumber?: string;
+}
+
 /** 代理相关应用信息，如集团主企业代子企业操作 */
 declare interface Agent {
   /** 代理机构的应用编号,32位字符串，一般不用传 */
@@ -390,6 +406,8 @@ declare interface CreateFlowOption {
   PreviewAfterStart?: boolean;
   /** 发起成功之后是否签署合同，仅当前经办人作为签署人时生效 （默认） false -否 true - 展示签署按钮 */
   SignAfterStart?: boolean;
+  /** 发起过程中是否保存草稿 */
+  NeedFlowDraft?: boolean;
 }
 
 /** 发起流程的可嵌入页面操作结果页配置 */
@@ -1236,6 +1254,22 @@ declare interface OrganizationInfo {
   ProxyIp?: string;
 }
 
+/** 审查通过项对应的引文信息 */
+declare interface OutputReference {
+  /** 合同审查风险结果ID */
+  RiskId?: string;
+  /** 风险名称 */
+  RiskName?: string;
+  /** 风险描述 */
+  RiskDescription?: string;
+  /** 风险要点分类名称 */
+  CategoryName?: string;
+  /** 审查依据 */
+  RiskBasis?: string;
+  /** 引文内容 */
+  Excerpts?: ReferenceExcerpt[] | null;
+}
+
 /** 合同审查任务识别出的风险结果信息 */
 declare interface OutputRisk {
   /** 合同审查风险结果ID */
@@ -1256,6 +1290,8 @@ declare interface OutputRisk {
   Positions?: PositionInfo[];
   /** 审查依据 */
   RiskBasis?: string;
+  /** 风险等级id */
+  RiskLevelId?: number;
 }
 
 /** 合同文件验签单个结果结构体 */
@@ -1400,6 +1436,14 @@ declare interface RecipientComponentInfo {
   IsPromoter?: boolean;
   /** 改参与方填写控件信息列表 */
   Components?: FilledComponent[];
+}
+
+/** 引用的资料 */
+declare interface ReferenceExcerpt {
+  /** 原文内容 */
+  Content?: string;
+  /** 坐标信息 */
+  Position?: PositionInfo | null;
 }
 
 /** 发起流程快速注册相关信息 */
@@ -1892,6 +1936,48 @@ declare interface CancelUserAutoSignEnableUrlRequest {
 }
 
 declare interface CancelUserAutoSignEnableUrlResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateBatchAdminChangeInvitationsRequest {
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 组织机构超管变更信息。一次最多支持10条超管变更信息。 */
+  AdminChangeInvitationInfos: AdminChangeInvitationInfo[];
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+}
+
+declare interface CreateBatchAdminChangeInvitationsResponse {
+  /** 批量生成企业认证链接的详细错误信息，顺序与输入参数保持一致。若企业认证均成功生成，则不返回错误信息；若存在任何错误，则返回具体的错误描述。 */
+  ErrorMessages?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateBatchAdminChangeInvitationsUrlRequest {
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 组织机构要变更的超管姓名。 在超管变更流程中，必须是超管本人进行操作，需要更当前操作人的姓名保持一致。 */
+  NewAdminName: string;
+  /** 组织机构要变更的超管手机号。 在超管变更流程中，必须是超管本人进行操作，需要更当前操作人的手机号保持一致。超管手机号 和超管证件号 二选一 必填。注意：1. 如果新超管的个人身份在电子签进行了手机号的变更，之前提交的超管变更任务将无法获取。 */
+  NewAdminMobile?: string;
+  /** 组织机构要变更的超管证件类型支持以下类型- ID_CARD : 中国大陆居民身份证 (默认值)- HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证- HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)需要更当前操作人的证件类型保持一致。 */
+  NewAdminIdCardType?: string;
+  /** 组织机构要变更的超管证件号。 在超管变更流程中，必须是超管本人进行操作，需要更当前操作人的证件号保持一致。超管手机号和超管证件号 二选一必填。 */
+  NewAdminIdCardNumber?: string;
+  /** 通知方式。 NONE（默认） SMS - 如果使用这个方式，则会给即将变更的超管发信息。注意：发送信息的手机号，是用户传递的手机号。如果用户同时传递了证件号，手机号会用用户在电子签注册的手机号进行覆盖。 */
+  NotifyType?: string;
+  /** 要跳转的链接类型 **HTTP**：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型 ，此时返回长链 (默认类型)**HTTP_SHORT_URL**：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型，此时返回短链**APP**： 第三方APP或小程序跳转电子签小程序的path, APP或者小程序跳转适合此类型**QR_CODE**： 跳转电子签小程序的http_url的二维码形式, 可以在页面展示适合此类型 */
+  Endpoint?: string;
+}
+
+declare interface CreateBatchAdminChangeInvitationsUrlResponse {
+  /** 批量企业注册链接-单链接包含多条认证流，根据Endpoint的不同设置，返回不同的链接地址。失效时间：7天跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表 Endpoint 示例 链接有效期限 HTTP https://res.ess.tencent.cn/cdn/h5-activity-dev/jump-mp.html?to=AUTHORIZATION_ENTERPRISE_FOR_BATCH_SUBMIT&shortKey=yDCHHURDfBxSB2rj2Bfa 7天 HTTP_SHORT_URL https://test.essurl.cn/8gDKUBAWK8 7天 APP pages/guide/index?to=AUTHORIZATION_ENTERPRISE_FOR_BATCH_SUBMIT&shortKey=yDCHpURDfR6iEkdpsDde 7天 QR_CODE https://dyn.test.ess.tencent.cn/imgs/qrcode_urls/authorization_enterprise_for_batch_submit/yDCHHUUckpbdauq9UEjnoFDCCumAMmv1.png 7天 注： `1.创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义` */
+  Url?: string;
+  /** 链接过期时间，为 7 天后，创建时间，格式为Unix标准时间戳（秒）。 */
+  ExpireTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3015,6 +3101,8 @@ declare interface CreateOrganizationAuthUrlRequest {
   BankAccountNumberSame?: boolean;
   /** 跳转事件，其中包括认证期间收录，授权书审核，企业认证的回跳事件。p.s.Endpoint如果是APP 类型，请传递JumpUrl为"true" 如果 Endpoint 是 H5 类型，请参考文档跳转电子签H5 p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，仅会进行回跳。 */
   JumpEvents?: JumpEvent[];
+  /** 企业证照类型： **USCC** :(默认)工商组织营业执照 **PRACTICELICENSEOFMEDICALINSTITUTION** :医疗机构执业许可证 */
+  OrganizationIdCardType?: string;
 }
 
 declare interface CreateOrganizationAuthUrlResponse {
@@ -3175,11 +3263,11 @@ declare interface CreatePrepareFlowGroupResponse {
 declare interface CreatePrepareFlowRequest {
   /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。支持填入集团子公司经办人 userId 代发合同。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 资源id，与ResourceType相对应，取值范围：文件Id（通过UploadFiles获取文件资源Id）模板Id（通过控制台创建模板后获取模板Id）注意：需要同时设置 ResourceType 参数指定资源类型 */
+  /** 资源id，与ResourceType相对应，取值范围：文件Id（通过UploadFiles获取文件资源Id）模板Id（通过控制台创建模板后获取模板Id）草稿Id（通过嵌入页面保存草稿后获取草稿Id）注意：需要同时设置 ResourceType 参数指定资源类型 */
   ResourceId: string;
   /** 自定义的合同流程的名称，长度不能超过200个字符，只能由中文汉字、中文标点、英文字母、阿拉伯数字、空格、小括号、中括号、中划线、下划线以及（,）、（;）、（.）、(&)、（+）组成。该名称还将用于合同签署完成后文件下载的默认文件名称。 */
   FlowName: string;
-  /** 资源类型，取值有： **1**：模板 **2**：文件（默认值） */
+  /** 资源类型，取值有： **1**：模板 **2**：文件（默认值） **3**：草稿 */
   ResourceType?: number;
   /** 合同流程的签署顺序类型： **false**：(默认)有序签署, 本合同多个参与人需要依次签署 **true**：无序签署, 本合同多个参与人没有先后签署限制 */
   Unordered?: boolean;
@@ -3222,6 +3310,8 @@ declare interface CreatePrepareFlowResponse {
   Url?: string;
   /** 创建的合同id（还未实际发起），每次调用会生成新的id，用户可以记录此字段对应后续页面发起的合同，若在页面上未成功发起，则此字段无效。 */
   FlowId?: string;
+  /** 临时的草稿id（还未实际保存草稿），用户可以记录此字段对应后续页面保存的草稿，若在页面上未保存草稿，则此字段无效。 */
+  DraftId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3912,6 +4002,8 @@ declare interface DescribeContractReviewTaskResponse {
   HighRiskCount?: number;
   /** 合同审查出的风险总数 */
   TotalRiskCount?: number;
+  /** 通过项信息(详细引文信息) */
+  ApprovedLists?: OutputReference[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4887,6 +4979,10 @@ declare interface Ess {
   CancelMultiFlowSignQRCode(data: CancelMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CancelMultiFlowSignQRCodeResponse>;
   /** 撤销个人用户自动签的开通链接 {@link CancelUserAutoSignEnableUrlRequest} {@link CancelUserAutoSignEnableUrlResponse} */
   CancelUserAutoSignEnableUrl(data: CancelUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CancelUserAutoSignEnableUrlResponse>;
+  /** 批量创建变更超管任务 {@link CreateBatchAdminChangeInvitationsRequest} {@link CreateBatchAdminChangeInvitationsResponse} */
+  CreateBatchAdminChangeInvitations(data: CreateBatchAdminChangeInvitationsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchAdminChangeInvitationsResponse>;
+  /** 创建企业批量变更超管链接 {@link CreateBatchAdminChangeInvitationsUrlRequest} {@link CreateBatchAdminChangeInvitationsUrlResponse} */
+  CreateBatchAdminChangeInvitationsUrl(data: CreateBatchAdminChangeInvitationsUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchAdminChangeInvitationsUrlResponse>;
   /** 获取批量撤销签署流程腾讯电子签小程序链接 {@link CreateBatchCancelFlowUrlRequest} {@link CreateBatchCancelFlowUrlResponse} */
   CreateBatchCancelFlowUrl(data: CreateBatchCancelFlowUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchCancelFlowUrlResponse>;
   /** 批量创建合同审查任务 {@link CreateBatchContractReviewTaskRequest} {@link CreateBatchContractReviewTaskResponse} */

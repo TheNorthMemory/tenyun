@@ -197,6 +197,8 @@ declare namespace V20180724 {
     CLSNotices?: CLSNotice[] | null;
     /** 通知模板绑定的标签 */
     Tags?: Tag[] | null;
+    /** 是否免登录，0-否，1-是 */
+    IsLoginFree?: number;
   }
 
   /** 告警策略详情 */
@@ -2626,6 +2628,8 @@ declare namespace V20180724 {
     CLSNotices?: CLSNotice[];
     /** 模板绑定的标签 */
     Tags?: Tag[];
+    /** 是否免登录，0-否，1-是 */
+    IsLoginFree?: number;
   }
 
   interface CreateAlarmNoticeResponse {
@@ -2844,7 +2848,7 @@ declare namespace V20180724 {
     InstanceName: string;
     /** VPC ID (私有网络 ID) */
     VpcId: string;
-    /** 子网 ID 数组(VPC ID下的子网 ID，只取第一个) */
+    /** 子网 ID 数组(VPC ID下的子网 ID，只取第一个)。注意：并不是所有可用区都可用（可通过 monitor:DescribePrometheusZones 接口获取可用区状态，选择 ZoneState 和ZoneResourceState 都为1的可用区） */
     SubnetIds: string[];
     /** 是否启用外网 */
     EnableInternet: boolean;
@@ -5026,6 +5030,8 @@ declare namespace V20180724 {
     CLSNotices?: CLSNotice[];
     /** 告警通知模板绑定的告警策略ID列表 */
     PolicyIds?: string[];
+    /** 是否免登录，0-否，1-是 */
+    IsLoginFree?: number;
   }
 
   interface ModifyAlarmNoticeResponse {

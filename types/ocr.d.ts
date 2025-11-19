@@ -1014,7 +1014,7 @@ declare interface ItemCoord {
   Height: number;
 }
 
-/** 智能结构化元素组 */
+/** 文档智能元素组 */
 declare interface ItemInfo {
   /** key信息组 */
   Key?: Key | null;
@@ -1924,18 +1924,18 @@ declare interface StoreInfo {
   Rect?: Rect;
 }
 
-/** 智能结构化识别 */
+/** 文档智能识别 */
 declare interface StructuralItem {
   /** 识别出的字段名称(关键字)。 */
-  Name: string;
+  Name?: string;
   /** 识别出的字段名称对应的值。 */
-  Value: string;
+  Value?: string;
   /** 置信度 0 ~100。 */
-  Confidence: number;
+  Confidence?: number;
   /** 文本行在旋转纠正之后的图像中的像素坐标。 */
-  ItemCoord: ItemCoord;
+  ItemCoord?: ItemCoord;
   /** 字段所在行号，下标从0开始，非行字段或未能识别行号的该值返回-1。 */
-  Row: number;
+  Row?: number;
 }
 
 /** 单元格数据 */
@@ -2686,7 +2686,7 @@ declare interface VatInvoice {
   Remark?: string;
   /** 机器编码 */
   MachineNo?: string;
-  /** 票种类型01：增值税专用发票，02：货运运输业增值税专用发票，03：机动车销售统一发票，04：增值税普通发票，08：增值税电子专用发票（含全电，全电仅新版接口支持），10：增值税电子普通发票（含全电，全电仅新版接口支持），11：增值税普通发票（卷式），14：增值税电子（通行费）发票，15：二手车销售统一发票，32：深圳区块链发票，102：通用机打电子发票61：电子发票（航空运输电子客票行程单）83：电子发票（铁路电子发票）0915：全电纸质（二手车统一销售发票）0903：全电纸质（机动车统一发票） */
+  /** 票种类型01：增值税专用发票，02：货运运输业增值税专用发票，03：机动车销售统一发票，04：增值税普通发票，08：增值税电子专用发票（含全电，全电仅新版接口支持），09：全电发票，0901：全电纸质发票(增值税专用发票)，0903：全电纸质(机动车销售统一发票)，0904：全电纸质发票(增值税普通发票)，0910：电子发票(普通发票)，0915：全电纸质(二手车销售统一发票)，0920：电子发票(增值税专用发票)，0930：电子发票(机动车销售统一发票)，0940：电子发票(二手车销售统一发票)，10：增值税电子普通发票（含全电，全电仅新版接口支持），11：增值税普通发票（卷式），14：增值税电子（通行费）发票，15：二手车销售统一发票，32：深圳区块链发票，61：电子发票（航空运输电子客票行程单），8208：电子发票(通行费发票)，83：电子发票(铁路电子客票)，100：区块链发票，101：财政票据，102：通用电子发票，103：车辆通行费 */
   Type?: string;
   /** 具体的全电发票类型：01: 全电专用发票；02：全电普通发票；03：全电火车票；04：全电机票行程单 */
   ElectronicType?: string;
@@ -3900,7 +3900,7 @@ declare interface HKIDCardOCRResponse {
   SmallHeadImage?: string | null;
   /** 该字段已废弃， 将固定返回空数组，不建议使用。 */
   WarningCode?: number[];
-  /** 告警码-9101 证件边框不完整告警-9102 证件复印件告警-9103 证件翻拍告警-9104 证件PS告警-9107 证件反光告警-9108 证件模糊告警-9109 告警能力未开通 */
+  /** 该字段仅对国际站请求起作用，国内站该字段将固定返回空数组。国际站告警码如下： 告警码-9101 证件边框不完整告警-9102 证件复印件告警-9103 证件翻拍告警-9104 证件PS告警-9107 证件反光告警-9108 证件模糊告警-9109 告警能力未开通 */
   WarnCardInfos?: number[];
   /** 证件透明视窗内的文本信息 */
   WindowEmbeddedText?: string;
@@ -4170,7 +4170,7 @@ declare interface MLIDPassportOCRResponse {
   Type?: string;
   /** 信息区证件内容 */
   PassportRecognizeInfos?: PassportRecognizeInfos;
-  /** 告警码-9101 证件边框不完整告警-9102 证件复印件告警-9103 证件翻拍告警-9104 证件PS告警-9107 证件反光告警-9108 证件模糊告警-9109 告警能力未开通 */
+  /** 该字段仅对国际站请求起作用，国内站该字段将固定返回空数组。国际站告警码如下： 告警码-9101 证件边框不完整告警-9102 证件复印件告警-9103 证件翻拍告警-9104 证件PS告警-9107 证件反光告警-9108 证件模糊告警-9109 告警能力未开通 */
   WarnCardInfos?: number[];
   /** 输入图片中的卡证数量（仅请求曼谷地域[ap-bangkok]返回） */
   CardCount?: number;
@@ -5603,7 +5603,7 @@ declare interface Ocr {
   RecognizeGeneralCardWarn(data?: RecognizeGeneralCardWarnRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeGeneralCardWarnResponse>;
   /** 通用票据识别（高级版） {@link RecognizeGeneralInvoiceRequest} {@link RecognizeGeneralInvoiceResponse} */
   RecognizeGeneralInvoice(data?: RecognizeGeneralInvoiceRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeGeneralInvoiceResponse>;
-  /** 健康码识别 {@link RecognizeHealthCodeOCRRequest} {@link RecognizeHealthCodeOCRResponse} */
+  /** @deprecated 健康码识别 {@link RecognizeHealthCodeOCRRequest} {@link RecognizeHealthCodeOCRResponse} */
   RecognizeHealthCodeOCR(data?: RecognizeHealthCodeOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeHealthCodeOCRResponse>;
   /** 医疗票据识别 {@link RecognizeMedicalInvoiceOCRRequest} {@link RecognizeMedicalInvoiceOCRResponse} */
   RecognizeMedicalInvoiceOCR(data?: RecognizeMedicalInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeMedicalInvoiceOCRResponse>;
@@ -5619,7 +5619,7 @@ declare interface Ocr {
   RecognizeTableOCR(data?: RecognizeTableOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTableOCRResponse>;
   /** 泰国身份证识别 {@link RecognizeThaiIDCardOCRRequest} {@link RecognizeThaiIDCardOCRResponse} */
   RecognizeThaiIDCardOCR(data?: RecognizeThaiIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeThaiIDCardOCRResponse>;
-  /** 通信行程卡识别 {@link RecognizeTravelCardOCRRequest} {@link RecognizeTravelCardOCRResponse} */
+  /** @deprecated 通信行程卡识别 {@link RecognizeTravelCardOCRRequest} {@link RecognizeTravelCardOCRResponse} */
   RecognizeTravelCardOCR(data?: RecognizeTravelCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTravelCardOCRResponse>;
   /** 有效身份证件识别（鉴伪版） {@link RecognizeValidIDCardOCRRequest} {@link RecognizeValidIDCardOCRResponse} */
   RecognizeValidIDCardOCR(data?: RecognizeValidIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeValidIDCardOCRResponse>;

@@ -606,7 +606,7 @@ declare interface Listener {
   KeepaliveEnable?: number | null;
   /** 仅支持Nat64 CLB TCP监听器 */
   Toa?: boolean;
-  /** 解绑后端目标时，是否发RST给客户端，（此参数仅对于TCP监听器有意义）。 */
+  /** 重新调度功能，解绑后端服务开关，打开此开关，当解绑后端服务时触发重新调度。仅TCP/UDP监听器支持。 */
   DeregisterTargetRst?: boolean;
   /** 监听器的属性 */
   AttrFlags?: string[];
@@ -1579,7 +1579,7 @@ declare interface CreateListenerRequest {
   KeepaliveEnable?: number;
   /** 创建端口段监听器时必须传入此参数，用以标识结束端口。同时，入参Ports只允许传入一个成员，用以标识开始端口。【如果您需要体验端口段功能，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)】。 */
   EndPort?: number;
-  /** 解绑后端目标时，是否发RST给两端（客户端和服务器），此参数仅适用于TCP监听器。 */
+  /** 重新调度功能，解绑后端服务开关，打开此开关，当解绑后端服务时触发重新调度。仅TCP/UDP监听器支持。 */
   DeregisterTargetRst?: boolean;
   /** 证书信息，支持同时传入不同算法类型的多本服务端证书，参数限制如下：此参数仅适用于TCP_SSL监听器和未开启SNI特性的HTTPS监听器。创建TCP_SSL监听器和未开启SNI特性的HTTPS监听器时，此参数和参数Certificate至少需要传一个， 但不能同时传入。 */
   MultiCertInfo?: MultiCertInfo;
@@ -1591,7 +1591,7 @@ declare interface CreateListenerRequest {
   IdleConnectTimeout?: number;
   /** TCP_SSL和QUIC是否支持PP */
   ProxyProtocol?: boolean;
-  /** 是否开启SNAT，True（开启）、False（关闭）。默认为关闭。 */
+  /** 是否开启SNAT（源IP替换），True（开启）、False（关闭）。默认为关闭。注意：SnatEnable开启时会替换客户端源IP，此时`透传客户端源IP`选项关闭，反之亦然。 */
   SnatEnable?: boolean;
   /** 全端口段监听器的结束端口，端口范围：2 - 65535 */
   FullEndPorts?: number[];
@@ -2689,7 +2689,7 @@ declare interface ModifyListenerRequest {
   TargetType?: string;
   /** 是否开启长连接，此参数仅适用于HTTP/HTTPS监听器。默认值0表示不开启，1表示开启。若后端服务对连接数上限有限制，则建议谨慎开启。此功能目前处于内测中，如需使用，请提交 [内测申请](https://cloud.tencent.com/apply/p/tsodp6qm21)。 */
   KeepaliveEnable?: number;
-  /** 解绑后端目标时，是否发RST给客户端，此参数仅适用于TCP监听器。True表示发送 RST 给客户端，False表示不发送 RST 给客户端。不传则表示不修改。 */
+  /** 重新调度功能，解绑后端服务开关，打开此开关，当解绑后端服务时触发重新调度。仅TCP/UDP监听器支持。 */
   DeregisterTargetRst?: boolean;
   /** 会话保持类型。NORMAL表示默认会话保持类型。QUIC_CID表示根据Quic Connection ID做会话保持。QUIC_CID只支持UDP协议。使用场景：适用于TCP/UDP/TCP_SSL/QUIC监听器。默认为 NORMAL。 */
   SessionType?: string;
@@ -2703,7 +2703,7 @@ declare interface ModifyListenerRequest {
   IdleConnectTimeout?: number;
   /** TCP_SSL和QUIC是否支持PP */
   ProxyProtocol?: boolean;
-  /** 是否开启SNAT， True 表示开启 SNAT，False 表示不开启 SNAT。不传则表示不修改。 */
+  /** 是否开启SNAT（源IP替换），True（开启）、False（关闭）。默认为关闭。注意：SnatEnable开启时会替换客户端源IP，此时`透传客户端源IP`选项关闭，反之亦然。 */
   SnatEnable?: boolean;
   /** 数据压缩模式 */
   DataCompressMode?: string;

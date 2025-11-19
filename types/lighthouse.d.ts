@@ -44,7 +44,7 @@ declare interface Blueprint {
   ImageUrl?: string;
   /** 镜像所需系统盘大小，单位 GB。 */
   RequiredSystemDiskSize?: number;
-  /** 镜像状态。可选值：NORMAL（正常）、SYNCING（同步中）、OFFLINE（下线）、ISOLATED（已隔离）、CREATEFAILED（创建失败）、SYNCING_FAILED（目的地域同步失败）、ISOLATING（隔离中）、ISOLATED（已隔离）、DELETING（删除中）、DESTROYING（销毁中）。 */
+  /** 镜像状态。可选值：NORMAL（正常）、SYNCING（同步中）、OFFLINE（下线）、CREATEFAILED（创建失败）、SYNCING_FAILED（目的地域同步失败）、ISOLATING（隔离中）、ISOLATED（已隔离）、DELETING（删除中）、DESTROYING（销毁中）。 */
   BlueprintState?: string;
   /** 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
   CreatedTime?: string | null;
@@ -2791,7 +2791,7 @@ declare interface StopDockerContainersResponse {
 declare interface StopInstancesRequest {
   /** 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。 */
   InstanceIds: string[];
-  /** 关机类型。取值范围： - SOFT：表示软关机- HARD：表示硬关机 - SOFT_FIRST：表示优先软关机，失败再执行硬关机 默认取值：SOFT_FIRST */
+  /** 关机类型。取值范围： SOFT：表示软关机HARD：表示硬关机 SOFT_FIRST：表示优先软关机，失败再执行硬关机 默认取值：SOFT_FIRST */
   StopType?: string;
 }
 

@@ -1886,17 +1886,17 @@ declare interface TaskConfiguration {
   BrokerIp?: string | null;
   /** 资源池队列名称，需要通过 DescribeProjectClusterQueues 获取 */
   YarnQueue?: string | null;
-  /** 来源数据源ID, 使用 ; 分隔, 需要通过 DescribeDataSourceWithoutInfo 获取 */
+  /** 来源数据源ID, 需要通过 DescribeDataSourceWithoutInfo 获取 */
   SourceServiceId?: string | null;
-  /** 来源数据源类型, 使用 ; 分隔, 需要通过 DescribeDataSourceWithoutInfo 获取 */
+  /** 来源数据源类型, 需要通过 DescribeDataSourceWithoutInfo 获取 */
   SourceServiceType?: string | null;
-  /** 来源数据源名称, 使用 ; 分隔, 需要通过 DescribeDataSourceWithoutInfo 获取 */
+  /** 来源数据源名称, 需要通过 DescribeDataSourceWithoutInfo 获取 */
   SourceServiceName?: string | null;
-  /** 目标数据源ID, 使用 ; 分隔, 需要通过 DescribeDataSourceWithoutInfo 获取 */
+  /** 目标数据源ID, 需要通过 DescribeDataSourceWithoutInfo 获取 */
   TargetServiceId?: string | null;
-  /** 目标数据源类型, 使用 ; 分隔, 需要通过 DescribeDataSourceWithoutInfo 获取 */
+  /** 目标数据源类型, 需要通过 DescribeDataSourceWithoutInfo 获取 */
   TargetServiceType?: string | null;
-  /** 目标数据源名称, 使用 ; 分隔, 需要通过 DescribeDataSourceWithoutInfo 获取 */
+  /** 目标数据源名称, 需要通过 DescribeDataSourceWithoutInfo 获取 */
   TargetServiceName?: string | null;
   /** 资源组ID： 需要通过 DescribeNormalSchedulerExecutorGroups 获取 ExecutorGroupId */
   ResourceGroup?: string | null;

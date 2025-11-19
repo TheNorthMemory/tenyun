@@ -687,15 +687,15 @@ declare interface CreateCfsPGroupRequest {
 
 declare interface CreateCfsPGroupResponse {
   /** 权限组 ID */
-  PGroupId: string;
+  PGroupId?: string;
   /** 权限组名字 */
-  Name: string;
+  Name?: string;
   /** 权限组描述信息 */
-  DescInfo: string;
+  DescInfo?: string;
   /** 已经与该权限组绑定的文件系统个数 */
-  BindCfsNum: number;
+  BindCfsNum?: number;
   /** 权限组创建时间 */
-  CDate: string;
+  CDate?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1427,7 +1427,7 @@ declare interface SignUpCfsServiceRequest {
 
 declare interface SignUpCfsServiceResponse {
   /** 该用户当前 CFS 服务的状态，creating 是开通中，created 是已开通 */
-  CfsServiceStatus: string;
+  CfsServiceStatus?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

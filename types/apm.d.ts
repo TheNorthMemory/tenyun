@@ -18,6 +18,16 @@ declare interface APMKVItem {
   Value: string;
 }
 
+/** 探针有关接口的相关配置 */
+declare interface AgentOperationConfigView {
+  /** 当前接口配置是否开启了接口白名单配置 */
+  RetentionValid?: boolean | null;
+  /** RetentionValid为false时生效，接口配置中的黑名单配置，配置中的接口不采集 */
+  IgnoreOperation?: string | null;
+  /** RetentionValid为true时生效，接口配置中的白名单配置，仅采集配置中的接口 */
+  RetentionOperation?: string | null;
+}
+
 /** APM Agent 信息 */
 declare interface ApmAgentInfo {
   /** Agent 下载地址 */
@@ -32,6 +42,114 @@ declare interface ApmAgentInfo {
   InnerCollectorURL?: string;
   /** 内网上报地址( Private Link 上报地址) */
   PrivateLinkCollectorURL?: string;
+}
+
+/** 查询应用配置返回参数 */
+declare interface ApmAppConfig {
+  /** 实例ID */
+  InstanceKey?: string;
+  /** 服务名 */
+  ServiceName?: string;
+  /** URL收敛开关 */
+  UrlConvergenceSwitch?: number;
+  /** URL收敛阈值 */
+  UrlConvergenceThreshold?: number;
+  /** URL收敛正则 */
+  UrlConvergence?: string;
+  /** 异常过滤正则 */
+  ExceptionFilter?: string;
+  /** 错误码过滤 */
+  ErrorCodeFilter?: string;
+  /** 服务组件类型 */
+  Components?: string;
+  /** URL排除正则 */
+  UrlExclude?: string;
+  /** 日志来源 */
+  LogSource?: string;
+  /** 日志所在地域 */
+  LogRegion?: string;
+  /** 是否开启日志 0 关 1 开 */
+  IsRelatedLog?: number;
+  /** 日志主题ID */
+  LogTopicID?: string;
+  /** 需过滤的接口名 */
+  IgnoreOperationName?: string;
+  /** CLS日志集 | ES集群ID */
+  LogSet?: string;
+  /** 探针每秒上报trace数 */
+  TraceRateLimit?: number;
+  /** 是否开启线程剖析 */
+  EnableSnapshot?: boolean;
+  /** 线程剖析超时阈值 */
+  SnapshotTimeout?: number;
+  /** 是否开启agent */
+  AgentEnable?: boolean;
+  /** 组件列表 */
+  InstrumentList?: Instrument[] | null;
+  /** 是否开启链路压缩 */
+  TraceSquash?: boolean;
+  /** 是否开启应用诊断开关 */
+  EventEnable?: boolean;
+  /** 探针接口相关配置 */
+  AgentOperationConfigView?: AgentOperationConfigView | null;
+  /** 是否开启应用日志配置 */
+  EnableLogConfig?: boolean;
+  /** 应用ID */
+  ServiceID?: string | null;
+  /** 应用是否开启dashboard配置： false 关（与业务系统保持一致）/true 开（应用级配置） */
+  EnableDashboardConfig?: boolean | null;
+  /** 是否关联dashboard： 0 关 1 开 */
+  IsRelatedDashboard?: number | null;
+  /** dashboard ID */
+  DashboardTopicID?: string | null;
+  /** 是否开启应用级别配置 */
+  EnableSecurityConfig?: boolean | null;
+  /** 是否开启组件漏洞检测 */
+  IsInstrumentationVulnerabilityScan?: number | null;
+  /** 是否开启SQL注入分析 */
+  IsSqlInjectionAnalysis?: number | null;
+  /** 是否开启远程命令执行分析 */
+  IsRemoteCommandExecutionAnalysis?: number | null;
+  /** 是否开启内存马检测分析 */
+  IsMemoryHijackingAnalysis?: number | null;
+  /** CLS索引类型(0=全文索引，1=键值索引) */
+  LogIndexType?: number;
+  /** traceId的索引key: 当CLS索引类型为键值索引时生效 */
+  LogTraceIdKey?: string;
+  /** 是否开启删除任意文件检测（0-关闭，1-开启） */
+  IsDeleteAnyFileAnalysis?: number | null;
+  /** 是否开启读取任意文件检测（0-关闭，1-开启） */
+  IsReadAnyFileAnalysis?: number | null;
+  /** 是否开启上传任意文件检测（0-关闭，1-开启） */
+  IsUploadAnyFileAnalysis?: number | null;
+  /** 是否开启包含任意文件检测（0-关闭，1-开启） */
+  IsIncludeAnyFileAnalysis?: number | null;
+  /** 是否开启目录遍历检测（0-关闭，1-开启） */
+  IsDirectoryTraversalAnalysis?: number | null;
+  /** 是否开启模板引擎注入检测（0-关闭，1-开启） */
+  IsTemplateEngineInjectionAnalysis?: number | null;
+  /** 是否开启脚本引擎注入检测（0-关闭，1-开启） */
+  IsScriptEngineInjectionAnalysis?: number | null;
+  /** 是否开启表达式注入检测（0-关闭，1-开启） */
+  IsExpressionInjectionAnalysis?: number | null;
+  /** 是否开启JNDI注入检测（0-关闭，1-开启） */
+  IsJNDIInjectionAnalysis?: number | null;
+  /** 是否开启JNI注入检测（0-关闭，1-开启） */
+  IsJNIInjectionAnalysis?: number | null;
+  /** 是否开启Webshell后门检测（0-关闭，1-开启） */
+  IsWebshellBackdoorAnalysis?: number | null;
+  /** 是否开启反序列化检测（0-关闭，1-开启） */
+  IsDeserializationAnalysis?: number | null;
+  /** 接口名称自动收敛开关（0-关闭，1-开启） */
+  UrlAutoConvergenceEnable?: boolean;
+  /** URL长分段收敛阈值 */
+  UrlLongSegmentThreshold?: number;
+  /** URL数字分段收敛阈值 */
+  UrlNumberSegmentThreshold?: number;
+  /** 探针熔断内存阈值 */
+  DisableMemoryUsed?: number;
+  /** 探针熔断CPU阈值 */
+  DisableCpuUsed?: number;
 }
 
 /** 应用相关的配置列表项 */
@@ -78,6 +196,16 @@ declare interface ApmApplicationConfigView {
   DisableMemoryUsed?: number;
   /** 探针熔断CPU阈值 */
   DisableCpuUsed?: number;
+}
+
+/** 展示apm业务系统与其他云产品关联关系返回体 */
+declare interface ApmAssociation {
+  /** 关联产品的实例ID */
+  PeerId?: string | null;
+  /** 关联关系状态：1（启用）、2（不启用）、3（已失效） */
+  Status?: number | null;
+  /** CKafka消息主题 */
+  Topic?: string;
 }
 
 /** 指标维度信息 */
@@ -222,6 +350,46 @@ declare interface ApmMetricRecord {
   Fields?: ApmField[];
   /** tag数组，用于区分 Groupby 的对象 */
   Tags?: ApmTag[];
+}
+
+/** 展示apm业务系统关联prometheus关系返回体 */
+declare interface ApmPrometheusRules {
+  /** 指标匹配规则ID */
+  Id?: number;
+  /** 指标匹配规则名 */
+  Name?: string | null;
+  /** 规则生效的应用。生效于全部应用就传空字符串 */
+  ServiceName?: string | null;
+  /** 指标匹配规则状态：1(启用)、2（不启用） */
+  Status?: number | null;
+  /** 指标匹配规则 */
+  MetricNameRule?: string | null;
+  /** 匹配类型：0精准匹配，1前缀匹配，2后缀匹配 */
+  MetricMatchType?: number | null;
+}
+
+/** 采样配置信息 */
+declare interface ApmSampleConfig {
+  /** 实例ID */
+  InstanceKey?: string;
+  /** 服务名 */
+  ServiceName?: string;
+  /** 采样名字 */
+  SampleName?: string;
+  /** 接口名 */
+  OperationName?: string;
+  /** 采样的span数 */
+  SpanNum?: number;
+  /** 采样配置开关 0 关 1 开 */
+  Status?: number;
+  /** tags数组 */
+  Tags?: APMKVItem[] | null;
+  /** 采样率 */
+  SampleRate?: number;
+  /** 0=精确匹配（默认）；1=前缀匹配；2=后缀匹配 */
+  OperationType?: number | null;
+  /** 配置Id */
+  Id?: number | null;
 }
 
 /** apm应用指标信息 */
@@ -412,6 +580,48 @@ declare interface CreateApmInstanceResponse {
   RequestId?: string;
 }
 
+declare interface CreateApmPrometheusRuleRequest {
+  /** 指标匹配规则名 */
+  Name: string;
+  /** 规则生效的应用。作用全部应用就传空字符串 */
+  ServiceName: string;
+  /** 指标匹配类型：0精准匹配，1前缀匹配，2后缀匹配 */
+  MetricMatchType: number;
+  /** 客户定义的命中指标名规则。 */
+  MetricNameRule: string;
+  /** 业务系统ID */
+  InstanceId: string;
+}
+
+declare interface CreateApmPrometheusRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateApmSampleConfigRequest {
+  /** 业务系统ID */
+  InstanceId: string;
+  /** 采样率 */
+  SampleRate: number;
+  /** 应用名 */
+  ServiceName: string;
+  /** 采样规则名 */
+  SampleName: string;
+  /** 采样Tags */
+  Tags?: APMKVItem[];
+  /** 接口名 */
+  OperationName?: string;
+  /** 0=精确匹配（默认）；1=前缀匹配；2=后缀匹配 */
+  OperationType?: number;
+}
+
+declare interface CreateApmSampleConfigResponse {
+  /** 采样配置参数 */
+  ApmSampleConfig?: ApmSampleConfig;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateProfileTaskRequest {
   /** 应用名称 */
   ServiceName: string;
@@ -438,6 +648,18 @@ declare interface CreateProfileTaskResponse {
   RequestId?: string;
 }
 
+declare interface DeleteApmSampleConfigRequest {
+  /** 业务系统ID */
+  InstanceId: string;
+  /** 采样规则名 */
+  SampleName: string;
+}
+
+declare interface DeleteApmSampleConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeApmAgentRequest {
   /** 业务系统 ID */
   InstanceId: string;
@@ -454,6 +676,34 @@ declare interface DescribeApmAgentRequest {
 declare interface DescribeApmAgentResponse {
   /** Agent 信息 */
   ApmAgent?: ApmAgentInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeApmApplicationConfigRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 服务名称 */
+  ServiceName: string;
+}
+
+declare interface DescribeApmApplicationConfigResponse {
+  /** Apm应用配置 */
+  ApmAppConfig: ApmAppConfig | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeApmAssociationRequest {
+  /** 关联的产品名，当前只支持Prometheus */
+  ProductName: string;
+  /** 业务系统名 */
+  InstanceId: string;
+}
+
+declare interface DescribeApmAssociationResponse {
+  /** 关联的产品实例ID */
+  ApmAssociation?: ApmAssociation;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -476,6 +726,32 @@ declare interface DescribeApmInstancesRequest {
 declare interface DescribeApmInstancesResponse {
   /** APM 业务系统列表 */
   Instances?: ApmInstanceDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeApmPrometheusRuleRequest {
+  /** 业务系统ID */
+  InstanceId: string;
+}
+
+declare interface DescribeApmPrometheusRuleResponse {
+  /** 指标匹配规则 */
+  ApmPrometheusRules?: ApmPrometheusRules[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeApmSampleConfigRequest {
+  /** 业务系统ID */
+  InstanceId: string;
+  /** 采样规则名 */
+  SampleName?: string;
+}
+
+declare interface DescribeApmSampleConfigResponse {
+  /** 采样配置列表 */
+  ApmSampleConfigs?: ApmSampleConfig[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -720,6 +996,130 @@ declare interface DescribeTagValuesResponse {
   RequestId?: string;
 }
 
+declare interface ModifyApmApplicationConfigRequest {
+  /** 业务系统 ID */
+  InstanceId: string;
+  /** 应用名 */
+  ServiceName: string;
+  /** URL收敛开关,0 关 | 1 开 */
+  UrlConvergenceSwitch: number;
+  /** URL收敛阈值 */
+  UrlConvergenceThreshold?: number;
+  /** 异常过滤正则规则，逗号分隔 */
+  ExceptionFilter?: string;
+  /** URL收敛正则规则，逗号分隔 */
+  UrlConvergence?: string;
+  /** 错误码过滤，逗号分隔 */
+  ErrorCodeFilter?: string;
+  /** URL排除正则规则，逗号分隔 */
+  UrlExclude?: string;
+  /** 日志开关 0 关 1 开 */
+  IsRelatedLog?: number;
+  /** 日志地域 */
+  LogRegion?: string;
+  /** 日志主题ID */
+  LogTopicID?: string;
+  /** CLS 日志集 | ES 集群ID */
+  LogSet?: string;
+  /** 日志来源 CLS | ES */
+  LogSource?: string;
+  /** 需过滤的接口 */
+  IgnoreOperationName?: string;
+  /** 是否开启线程剖析 */
+  EnableSnapshot?: boolean;
+  /** 线程剖析超时阈值 */
+  SnapshotTimeout?: number;
+  /** 是否开启agent */
+  AgentEnable?: boolean;
+  /** 是否开启链路压缩 */
+  TraceSquash?: boolean;
+  /** 是否开启应用诊断的开关 */
+  EventEnable?: boolean;
+  /** 组件列表 */
+  InstrumentList?: Instrument[];
+  /** 探针接口相关配置 */
+  AgentOperationConfigView?: AgentOperationConfigView;
+  /** 是否开启应用日志配置 */
+  EnableLogConfig?: boolean;
+  /** 应用是否开启dashboard配置： false 关（与业务系统保持一致）/true 开（应用级配置） */
+  EnableDashboardConfig?: boolean;
+  /** 是否关联dashboard： 0 关 1 开 */
+  IsRelatedDashboard?: number;
+  /** dashboard ID */
+  DashboardTopicID?: string;
+  /** CLS索引类型(0=全文索引，1=键值索引) */
+  LogIndexType?: number;
+  /** traceId的索引key: 当CLS索引类型为键值索引时生效 */
+  LogTraceIdKey?: string;
+  /** 是否开启应用安全配置 */
+  EnableSecurityConfig?: boolean;
+  /** 是否开启SQL注入分析 */
+  IsSqlInjectionAnalysis?: number;
+  /** 是否开启组件漏洞检测 */
+  IsInstrumentationVulnerabilityScan?: number;
+  /** 是否开启远程命令检测 */
+  IsRemoteCommandExecutionAnalysis?: number;
+  /** 是否开启内存马检测 */
+  IsMemoryHijackingAnalysis?: number;
+  /** 是否开启删除任意文件检测（0-关闭，1-开启） */
+  IsDeleteAnyFileAnalysis?: number;
+  /** 是否开启读取任意文件检测（0-关闭，1-开启） */
+  IsReadAnyFileAnalysis?: number;
+  /** 是否开启上传任意文件检测（0-关闭，1-开启） */
+  IsUploadAnyFileAnalysis?: number;
+  /** 是否开启包含任意文件检测（0-关闭，1-开启） */
+  IsIncludeAnyFileAnalysis?: number;
+  /** 是否开启目录遍历检测（0-关闭，1-开启） */
+  IsDirectoryTraversalAnalysis?: number;
+  /** 是否开启模板引擎注入检测（0-关闭，1-开启） */
+  IsTemplateEngineInjectionAnalysis?: number;
+  /** 是否开启脚本引擎注入检测（0-关闭，1-开启） */
+  IsScriptEngineInjectionAnalysis?: number;
+  /** 是否开启表达式注入检测（0-关闭，1-开启） */
+  IsExpressionInjectionAnalysis?: number;
+  /** 是否开启JNDI注入检测（0-关闭，1-开启） */
+  IsJNDIInjectionAnalysis?: number;
+  /** 是否开启JNI注入检测（0-关闭，1-开启） */
+  IsJNIInjectionAnalysis?: number;
+  /** 是否开启Webshell后门检测（0-关闭，1-开启） */
+  IsWebshellBackdoorAnalysis?: number;
+  /** 是否开启反序列化检测（0-关闭，1-开启） */
+  IsDeserializationAnalysis?: number;
+  /** 接口自动收敛开关,0 关 | 1 开 */
+  UrlAutoConvergenceEnable?: boolean;
+  /** URL长分段收敛阈值 */
+  UrlLongSegmentThreshold?: number;
+  /** URL数字分段收敛阈值 */
+  UrlNumberSegmentThreshold?: number;
+  /** 探针熔断内存阈值 */
+  DisableMemoryUsed?: number;
+  /** 探针熔断CPU阈值 */
+  DisableCpuUsed?: number;
+}
+
+declare interface ModifyApmApplicationConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyApmAssociationRequest {
+  /** 关联的产品名，当前只支持Prometheus */
+  ProductName: string;
+  /** 关联关系的状态：// 关联关系状态：1（启用）、2（不启用）、4（已删除） */
+  Status: number;
+  /** 业务系统ID */
+  InstanceId: string;
+  /** 关联的产品实例ID */
+  PeerId?: string;
+  /** CKafka消息主题 */
+  Topic?: string;
+}
+
+declare interface ModifyApmAssociationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyApmInstanceRequest {
   /** 业务系统 ID */
   InstanceId: string;
@@ -812,6 +1212,54 @@ declare interface ModifyApmInstanceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyApmPrometheusRuleRequest {
+  /** 规则ID */
+  Id: number;
+  /** 业务系统ID */
+  InstanceId: string;
+  /** 所要修改的规则名 */
+  Name?: string;
+  /** 规则状态：1(启用)、2（不启用）、3（删除） */
+  Status?: number;
+  /** 规则生效的应用。生效于全部应用就传空（这个如果不修改也要传旧的规则） */
+  ServiceName?: string;
+  /** 匹配类型：0精准匹配，1前缀匹配，2后缀匹配（这个如果不修改也要传旧的规则） */
+  MetricMatchType?: number;
+  /** 客户定义的命中指标名规则。 */
+  MetricNameRule?: string;
+}
+
+declare interface ModifyApmPrometheusRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyApmSampleConfigRequest {
+  /** 业务系统ID */
+  InstanceId: string;
+  /** 采样规则名 */
+  SampleName: string;
+  /** 采样率 */
+  SampleRate: number;
+  /** 应用名，生效于所有应用则填空 */
+  ServiceName?: string;
+  /** 接口名 */
+  OperationName?: string;
+  /** 采样tag */
+  Tags?: APMKVItem[];
+  /** 采样开关 0关 1开 2删除 */
+  Status?: number;
+  /** 配置Id */
+  Id?: number;
+  /** 0=精确匹配（默认）；1=前缀匹配；2=后缀匹配 */
+  OperationType?: number;
+}
+
+declare interface ModifyApmSampleConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyGeneralApmApplicationConfigRequest {
   /** 业务系统Id */
   InstanceId: string;
@@ -843,12 +1291,26 @@ declare interface Apm {
   (): Versions;
   /** 创建 APM 业务系统 {@link CreateApmInstanceRequest} {@link CreateApmInstanceResponse} */
   CreateApmInstance(data: CreateApmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApmInstanceResponse>;
+  /** 创建apm业务系统与Prometheus实例的指标匹配规则 {@link CreateApmPrometheusRuleRequest} {@link CreateApmPrometheusRuleResponse} */
+  CreateApmPrometheusRule(data: CreateApmPrometheusRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApmPrometheusRuleResponse>;
+  /** 创建采样配置 {@link CreateApmSampleConfigRequest} {@link CreateApmSampleConfigResponse} */
+  CreateApmSampleConfig(data: CreateApmSampleConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApmSampleConfigResponse>;
   /** 创建性能剖析事件任务 {@link CreateProfileTaskRequest} {@link CreateProfileTaskResponse} */
   CreateProfileTask(data: CreateProfileTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProfileTaskResponse>;
+  /** 删除采样配置 {@link DeleteApmSampleConfigRequest} {@link DeleteApmSampleConfigResponse} */
+  DeleteApmSampleConfig(data: DeleteApmSampleConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApmSampleConfigResponse>;
   /** 获取 APM 接入点 {@link DescribeApmAgentRequest} {@link DescribeApmAgentResponse} */
   DescribeApmAgent(data: DescribeApmAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmAgentResponse>;
+  /** 查询应用配置 {@link DescribeApmApplicationConfigRequest} {@link DescribeApmApplicationConfigResponse} */
+  DescribeApmApplicationConfig(data: DescribeApmApplicationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmApplicationConfigResponse>;
+  /** 查询apm业务系统与其他产品的关联关系 {@link DescribeApmAssociationRequest} {@link DescribeApmAssociationResponse} */
+  DescribeApmAssociation(data: DescribeApmAssociationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmAssociationResponse>;
   /** 获取 APM 业务系统列表 {@link DescribeApmInstancesRequest} {@link DescribeApmInstancesResponse} */
   DescribeApmInstances(data?: DescribeApmInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmInstancesResponse>;
+  /** 查询apm业务系统与Prometheus实例的指标匹配规则 {@link DescribeApmPrometheusRuleRequest} {@link DescribeApmPrometheusRuleResponse} */
+  DescribeApmPrometheusRule(data: DescribeApmPrometheusRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmPrometheusRuleResponse>;
+  /** 查询采样配置 {@link DescribeApmSampleConfigRequest} {@link DescribeApmSampleConfigResponse} */
+  DescribeApmSampleConfig(data: DescribeApmSampleConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmSampleConfigResponse>;
   /** 获取 APM 应用指标 {@link DescribeApmServiceMetricRequest} {@link DescribeApmServiceMetricResponse} */
   DescribeApmServiceMetric(data: DescribeApmServiceMetricRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmServiceMetricResponse>;
   /** 查询应用配置信息 {@link DescribeGeneralApmApplicationConfigRequest} {@link DescribeGeneralApmApplicationConfigResponse} */
@@ -865,8 +1327,16 @@ declare interface Apm {
   DescribeServiceOverview(data: DescribeServiceOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceOverviewResponse>;
   /** 查询 Tag 数据 {@link DescribeTagValuesRequest} {@link DescribeTagValuesResponse} */
   DescribeTagValues(data: DescribeTagValuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagValuesResponse>;
+  /** 修改应用配置 {@link ModifyApmApplicationConfigRequest} {@link ModifyApmApplicationConfigResponse} */
+  ModifyApmApplicationConfig(data: ModifyApmApplicationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApmApplicationConfigResponse>;
+  /** 修改apm业务系统与其他产品的关联关系 {@link ModifyApmAssociationRequest} {@link ModifyApmAssociationResponse} */
+  ModifyApmAssociation(data: ModifyApmAssociationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApmAssociationResponse>;
   /** 修改 APM 业务系统 {@link ModifyApmInstanceRequest} {@link ModifyApmInstanceResponse} */
   ModifyApmInstance(data: ModifyApmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApmInstanceResponse>;
+  /** 修改apm业务系统与Prometheus实例的指标匹配规则 {@link ModifyApmPrometheusRuleRequest} {@link ModifyApmPrometheusRuleResponse} */
+  ModifyApmPrometheusRule(data: ModifyApmPrometheusRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApmPrometheusRuleResponse>;
+  /** 修改采样配置 {@link ModifyApmSampleConfigRequest} {@link ModifyApmSampleConfigResponse} */
+  ModifyApmSampleConfig(data: ModifyApmSampleConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApmSampleConfigResponse>;
   /** 修改应用配置信息 {@link ModifyGeneralApmApplicationConfigRequest} {@link ModifyGeneralApmApplicationConfigResponse} */
   ModifyGeneralApmApplicationConfig(data: ModifyGeneralApmApplicationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGeneralApmApplicationConfigResponse>;
   /** 销毁业务系统 {@link TerminateApmInstanceRequest} {@link TerminateApmInstanceResponse} */

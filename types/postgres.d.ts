@@ -936,6 +936,22 @@ declare interface CloneDBInstanceResponse {
   RequestId?: string;
 }
 
+declare interface CloseAccountCAMRequest {
+  /** 实例ID */
+  DBInstanceId: string;
+  /** 需要关闭CAM服务的账号名称 */
+  UserName: string;
+  /** 关闭CAM后，登录该账号所需要的新密码 */
+  Password: string;
+  /** 密码是否加密 */
+  PasswordEncrypt?: boolean;
+}
+
+declare interface CloseAccountCAMResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CloseDBExtranetAccessRequest {
   /** 实例ID，可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取。形如postgres-6r233v55 */
   DBInstanceId: string;
@@ -2342,6 +2358,18 @@ declare interface ModifyDBInstanceChargeTypeResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDBInstanceDeletionProtectionRequest {
+  /** 实例 ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取 */
+  DBInstanceId: string;
+  /** 开启或关闭实例删除保护。true - 开启 ；false - 关闭。 */
+  DeletionProtection: boolean;
+}
+
+declare interface ModifyDBInstanceDeletionProtectionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDBInstanceDeploymentRequest {
   /** 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取 */
   DBInstanceId: string;
@@ -2600,6 +2628,18 @@ declare interface ModifySwitchTimePeriodResponse {
   RequestId?: string;
 }
 
+declare interface OpenAccountCAMRequest {
+  /** 数据库实例ID */
+  DBInstanceId: string;
+  /** 需要开启CAM服务的账号名称 */
+  UserName: string;
+}
+
+declare interface OpenAccountCAMResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface OpenDBExtranetAccessRequest {
   /** 实例ID，形如postgres-hez4fh0v。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取。 */
   DBInstanceId: string;
@@ -2622,6 +2662,18 @@ declare interface RebalanceReadOnlyGroupRequest {
 }
 
 declare interface RebalanceReadOnlyGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RefreshAccountPasswordRequest {
+  /** 实例ID */
+  DBInstanceId: string;
+  /** 账号名称 */
+  UserName: string;
+}
+
+declare interface RefreshAccountPasswordResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2809,6 +2861,8 @@ declare interface Postgres {
   AddDBInstanceToReadOnlyGroup(data: AddDBInstanceToReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AddDBInstanceToReadOnlyGroupResponse>;
   /** 克隆实例 {@link CloneDBInstanceRequest} {@link CloneDBInstanceResponse} */
   CloneDBInstance(data: CloneDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CloneDBInstanceResponse>;
+  /** 关闭数据库账户的CAM验证 {@link CloseAccountCAMRequest} {@link CloseAccountCAMResponse} */
+  CloseAccountCAM(data: CloseAccountCAMRequest, config?: AxiosRequestConfig): AxiosPromise<CloseAccountCAMResponse>;
   /** 关闭实例公网地址 {@link CloseDBExtranetAccessRequest} {@link CloseDBExtranetAccessResponse} */
   CloseDBExtranetAccess(data: CloseDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseDBExtranetAccessResponse>;
   /** 创建数据库账号 {@link CreateAccountRequest} {@link CreateAccountResponse} */
@@ -2951,6 +3005,8 @@ declare interface Postgres {
   ModifyBaseBackupExpireTime(data: ModifyBaseBackupExpireTimeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBaseBackupExpireTimeResponse>;
   /** 修改实例计费类型 {@link ModifyDBInstanceChargeTypeRequest} {@link ModifyDBInstanceChargeTypeResponse} */
   ModifyDBInstanceChargeType(data: ModifyDBInstanceChargeTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceChargeTypeResponse>;
+  /** 修改实例删除保护 {@link ModifyDBInstanceDeletionProtectionRequest} {@link ModifyDBInstanceDeletionProtectionResponse} */
+  ModifyDBInstanceDeletionProtection(data: ModifyDBInstanceDeletionProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceDeletionProtectionResponse>;
   /** 修改实例部署方式 {@link ModifyDBInstanceDeploymentRequest} {@link ModifyDBInstanceDeploymentResponse} */
   ModifyDBInstanceDeployment(data: ModifyDBInstanceDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceDeploymentResponse>;
   /** 修改实例HA配置信息 {@link ModifyDBInstanceHAConfigRequest} {@link ModifyDBInstanceHAConfigResponse} */
@@ -2981,10 +3037,14 @@ declare interface Postgres {
   ModifyReadOnlyGroupConfig(data: ModifyReadOnlyGroupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReadOnlyGroupConfigResponse>;
   /** 修改变更配置切换时间 {@link ModifySwitchTimePeriodRequest} {@link ModifySwitchTimePeriodResponse} */
   ModifySwitchTimePeriod(data: ModifySwitchTimePeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySwitchTimePeriodResponse>;
+  /** 为数据库账户开启CAM验证 {@link OpenAccountCAMRequest} {@link OpenAccountCAMResponse} */
+  OpenAccountCAM(data: OpenAccountCAMRequest, config?: AxiosRequestConfig): AxiosPromise<OpenAccountCAMResponse>;
   /** 开通实例公网地址 {@link OpenDBExtranetAccessRequest} {@link OpenDBExtranetAccessResponse} */
   OpenDBExtranetAccess(data: OpenDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenDBExtranetAccessResponse>;
   /** 均衡只读组内实例的负载 {@link RebalanceReadOnlyGroupRequest} {@link RebalanceReadOnlyGroupResponse} */
   RebalanceReadOnlyGroup(data: RebalanceReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RebalanceReadOnlyGroupResponse>;
+  /** 刷新启用CAM验证的账户密码 {@link RefreshAccountPasswordRequest} {@link RefreshAccountPasswordResponse} */
+  RefreshAccountPassword(data: RefreshAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<RefreshAccountPasswordResponse>;
   /** 将只读实例从只读组中移除 {@link RemoveDBInstanceFromReadOnlyGroupRequest} {@link RemoveDBInstanceFromReadOnlyGroupResponse} */
   RemoveDBInstanceFromReadOnlyGroup(data: RemoveDBInstanceFromReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveDBInstanceFromReadOnlyGroupResponse>;
   /** 续费实例 {@link RenewInstanceRequest} {@link RenewInstanceResponse} */

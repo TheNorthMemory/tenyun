@@ -388,6 +388,8 @@ declare interface AgentToolInfo {
   Query?: AgentPluginQuery[];
   /** 工具计费状态 0-不计费 1-可用 2-不可用（欠费、无资源等） */
   FinanceStatus?: number;
+  /** 工具来源: 0-来自插件，1-来自工作流 */
+  ToolSource?: number;
 }
 
 /** Agent工具的请求参数定义 */
@@ -662,6 +664,8 @@ declare interface CateInfo {
   CanDelete?: boolean | null;
   /** 子分类 */
   Children?: CateInfo[] | null;
+  /** 是否为叶子节点 */
+  IsLeaf?: boolean | null;
 }
 
 /** 渠道详情信息 */
@@ -1684,6 +1688,8 @@ declare interface QACate {
   CanDelete?: boolean | null;
   /** 子分类 */
   Children?: QACate[] | null;
+  /** 是否是叶子节点 */
+  IsLeaf?: boolean | null;
 }
 
 /** 问答列表 */
@@ -2096,6 +2102,8 @@ declare interface UnsatisfiedReply {
   UpdateTime?: string;
   /** 操作人 */
   Operator?: string;
+  /** 自定义反馈 */
+  FeedbackContent?: string;
 }
 
 /** 更新时间策略 */
@@ -3811,6 +3819,16 @@ declare interface ListChannelResponse {
 declare interface ListDocCateRequest {
   /** 应用ID */
   BotBizId: string;
+  /** 分类查询类型：0-全量查询整棵标签树，1-根据父节点BizId分页查询子节点，2-关键词检索所有匹配的分类链路 */
+  QueryType?: number;
+  /** QueryType=1时，父节点分类ID */
+  ParentCateBizId?: string;
+  /** QueryType=1时，页码（从1开始） */
+  PageNumber?: number;
+  /** 每页数量（默认10） */
+  PageSize?: number;
+  /** QueryType=2时，搜索内容 */
+  Query?: string;
 }
 
 declare interface ListDocCateResponse {
@@ -3875,6 +3893,16 @@ declare interface ListModelResponse {
 declare interface ListQACateRequest {
   /** 应用ID */
   BotBizId: string;
+  /** 分类查询类型：0-全量查询整棵标签树，1-根据父节点BizId分页查询子节点，2-关键词检索所有匹配的分类链路 */
+  QueryType?: number;
+  /** QueryType=1时，父节点分类ID */
+  ParentCateBizId?: string;
+  /** QueryType=1时，页码（从1开始） */
+  PageNumber?: number;
+  /** 每页数量（默认10） */
+  PageSize?: number;
+  /** QueryType=2时，搜索内容 */
+  Query?: string;
 }
 
 declare interface ListQACateResponse {
@@ -4435,6 +4463,8 @@ declare interface RateMsgRecordRequest {
   Score: number;
   /** 原因，只有Score参数为2即点踩的时候才需要输入 */
   Reasons?: string[];
+  /** 用户自定义反馈内容 */
+  FeedbackContent?: string;
 }
 
 declare interface RateMsgRecordResponse {

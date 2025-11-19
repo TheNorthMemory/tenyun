@@ -94,6 +94,8 @@ declare interface SavingPlanDeductDetail {
 
 /** 节省计划总览明细数据 */
 declare interface SavingPlanOverviewDetail {
+  /** 节省计划资源id */
+  SpId?: string;
   /** 节省计划类型 */
   SpType?: string;
   /** 支付金额（单位：元） */

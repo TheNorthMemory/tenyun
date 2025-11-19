@@ -458,6 +458,22 @@ declare interface ActivateDeviceCertificateResponse {
   RequestId?: string;
 }
 
+declare interface AddClientSubscriptionRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 客户端id */
+  ClientId: string;
+  /** 订阅 */
+  TopicFilter: string;
+  /** 服务质量:0,1,2 */
+  Qos?: string;
+}
+
+declare interface AddClientSubscriptionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ApplyRegistrationCodeRequest {
   /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
   InstanceId: string;
@@ -740,6 +756,20 @@ declare interface DeleteCaCertificateRequest {
 }
 
 declare interface DeleteCaCertificateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteClientSubscriptionRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 客户端id */
+  ClientId?: string;
+  /** 订阅 */
+  TopicFilter?: string;
+}
+
+declare interface DeleteClientSubscriptionResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1134,6 +1164,8 @@ declare interface DescribeInstanceResponse {
   MessageRate?: number;
   /** 服务端tls支持的协议，使用“,”分割。例如：TLSv1.3,TLSv1.2,TLSv1.1,TLSv1 */
   TransportLayerSecurity?: string;
+  /** 消息属性增强规则配额 */
+  MessageEnrichmentRuleLimit?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1643,6 +1675,8 @@ declare interface Mqtt {
   ActivateCaCertificate(data: ActivateCaCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateCaCertificateResponse>;
   /** 生效设备证书 {@link ActivateDeviceCertificateRequest} {@link ActivateDeviceCertificateResponse} */
   ActivateDeviceCertificate(data: ActivateDeviceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateDeviceCertificateResponse>;
+  /** 为MQTT客户端增加一条订阅 {@link AddClientSubscriptionRequest} {@link AddClientSubscriptionResponse} */
+  AddClientSubscription(data: AddClientSubscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<AddClientSubscriptionResponse>;
   /** 申请注册ca用的注册码 {@link ApplyRegistrationCodeRequest} {@link ApplyRegistrationCodeResponse} */
   ApplyRegistrationCode(data: ApplyRegistrationCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyRegistrationCodeResponse>;
   /** 创建授权策略 {@link CreateAuthorizationPolicyRequest} {@link CreateAuthorizationPolicyResponse} */
@@ -1673,6 +1707,8 @@ declare interface Mqtt {
   DeleteAuthorizationPolicy(data: DeleteAuthorizationPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuthorizationPolicyResponse>;
   /** 删除Ca证书 {@link DeleteCaCertificateRequest} {@link DeleteCaCertificateResponse} */
   DeleteCaCertificate(data: DeleteCaCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCaCertificateResponse>;
+  /** 为MQTT客户端删除一条订阅 {@link DeleteClientSubscriptionRequest} {@link DeleteClientSubscriptionResponse} */
+  DeleteClientSubscription(data: DeleteClientSubscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClientSubscriptionResponse>;
   /** 删除设备证书 {@link DeleteDeviceCertificateRequest} {@link DeleteDeviceCertificateResponse} */
   DeleteDeviceCertificate(data: DeleteDeviceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceCertificateResponse>;
   /** 删除设备标识 {@link DeleteDeviceIdentityRequest} {@link DeleteDeviceIdentityResponse} */

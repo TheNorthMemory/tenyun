@@ -650,6 +650,22 @@ declare interface CCRuleItems {
   PageId?: string;
   /** 动作灰度比例，默认值100 */
   ActionRatio?: number;
+  /** 批量cc规则配置的批量域名 */
+  Domains?: string[];
+  /** 批量cc规则使用的批量防护组 */
+  GroupIds?: number[];
+  /** 定时任务类型 */
+  JobType?: string;
+  /** 定时任务配置 */
+  JobDateTime?: JobDateTime;
+  /** 定时任务类型：month or week */
+  CronType?: string;
+  /** 过期时间 */
+  ExpireTime?: number;
+  /** 是否生效 */
+  ValidStatus?: number;
+  /** 来源：批量还是单个规则 */
+  Source?: string;
 }
 
 /** CC规则总览 */
@@ -658,6 +674,10 @@ declare interface CCRuleLists {
   TotalCount?: number;
   /** 规则 */
   Res?: CCRuleItems[];
+  /** 规则限制总数 */
+  Limit?: number;
+  /** 规则剩余多少可用 */
+  Available?: number;
 }
 
 /** 防篡改url元素 */
@@ -1022,7 +1042,7 @@ declare interface DomainInfo {
   LoadBalancerSet: LoadBalancerPackageNew[];
   /** 用户id */
   AppId: number;
-  /** 负载均衡型WAF域名LB监听器状态。0：操作成功 4：正在绑定LB 6：正在解绑LB 7：解绑LB失败 8：绑定LB失败 10：内部错误 */
+  /** SAAS型WAF域名状态：-2：配置下发失败-1：配置下发中0：DNS解析中1：无DNS解析记录，请接入WAF10：DNS解析未知，域名启用了代理11：DNS解析异常，使用A记录接入WAF IP200：检测源站不可达220：源站不支持长连接311：证书过期312：证书即将过期310：证书异常316：备案异常5：WAF回源已变更负载均衡型WAF域名LB监听器状态：0：操作成功 4：正在绑定LB 6：正在解绑LB 7：解绑LB失败 8：绑定LB失败 10：内部错误 */
   State: number;
   /** 创建时间 */
   CreateTime?: string;
@@ -1208,6 +1228,8 @@ declare interface DomainsPartInfo {
   UseCase?: number;
   /** gzip开关。0：关闭 1：默认值，打开。 */
   Gzip?: number;
+  /** SAAS型WAF域名状态：-2：配置下发失败-1：配置下发中0：DNS解析中1：无DNS解析记录，请接入WAF10：DNS解析未知，域名启用了代理11：DNS解析异常，使用A记录接入WAF IP200：检测源站不可达220：源站不支持长连接311：证书过期312：证书即将过期310：证书异常316：备案异常5：WAF回源已变更负载均衡型WAF域名LB监听器状态：0：操作成功 4：正在绑定LB 6：正在解绑LB 7：解绑LB失败 8：绑定LB失败 10：内部错误 */
+  State?: number;
 }
 
 /** 下载攻击日志记录数据项 */
@@ -1746,6 +1768,10 @@ declare interface InstanceInfo {
   LLMPkg?: LLMPkg;
   /** 弹性资源Id */
   ElasticResourceId?: string;
+  /** 预付费大模型安全信息包 */
+  LLMMonPkg?: LLMMonPkg;
+  /** 地域id */
+  RegionId?: number;
 }
 
 /** 数据封装 */
@@ -1848,6 +1874,28 @@ declare interface KVInt {
   Key?: string;
   /** Value */
   Value?: number;
+}
+
+/** 有效预付费大模型安全包信息 */
+declare interface LLMMonPkg {
+  /** 资源id */
+  ResourceIds?: string;
+  /** 状态 */
+  Status?: number;
+  /** 地域 */
+  Region?: number;
+  /** 开始时间 */
+  BeginTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 计费项 */
+  InquireKey?: string;
+  /** 预付费大模型安全续费标识0 手动续费；1自动续费；2 到期不续 */
+  RenewFlag?: number;
+  /** 大模型安全Token使用量 */
+  UseToken?: number;
+  /** 实例id */
+  InstanceId?: string;
 }
 
 /** 有效大模型安全包信息 */
@@ -2140,6 +2188,8 @@ declare interface OwaspWhiteRule {
   CronType?: string;
   /** 当前是否有效 */
   ValidStatus?: boolean;
+  /** 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系 */
+  LogicalOp?: string;
 }
 
 /** bot-自定义规则请求参数比对结构体 */
@@ -2843,31 +2893,35 @@ declare interface VipInfo {
 /** waf模块的规格 */
 declare interface WafRuleLimit {
   /** 自定义CC的规格 */
-  CC: number;
+  CC?: number;
   /** 自定义策略的规格 */
-  CustomRule: number;
+  CustomRule?: number;
   /** 黑白名单的规格 */
-  IPControl: number;
+  IPControl?: number;
   /** 信息防泄漏的规格 */
-  AntiLeak: number;
+  AntiLeak?: number;
   /** 防篡改的规格 */
-  AntiTamper: number;
+  AntiTamper?: number;
   /** 紧急CC的规格 */
-  AutoCC: number;
+  AutoCC?: number;
   /** 地域封禁的规格 */
-  AreaBan: number;
+  AreaBan?: number;
   /** 自定义CC中配置session */
-  CCSession: number;
+  CCSession?: number;
   /** AI的规格 */
-  AI: number;
+  AI?: number;
   /** 精准白名单的规格 */
-  CustomWhite: number;
+  CustomWhite?: number;
   /** api安全的规格 */
-  ApiSecurity: number;
+  ApiSecurity?: number;
   /** 客户端流量标记的规格 */
-  ClientMsg: number;
+  ClientMsg?: number;
   /** 流量标记的规格 */
-  TrafficMarking: number;
+  TrafficMarking?: number;
+  /** 批量cc */
+  BatchCC?: number;
+  /** 批量session */
+  BatchSession?: number;
 }
 
 /** 当前WAF威胁情报封禁模块详情 */
@@ -3375,6 +3429,8 @@ declare interface CreateOwaspWhiteRuleRequest {
   ExpireTime: number;
   /** 规则状态，0：关闭、1：开启，默认为开启 */
   Status?: number;
+  /** 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系 */
+  LogicalOp?: string;
 }
 
 declare interface CreateOwaspWhiteRuleResponse {
@@ -6181,6 +6237,8 @@ declare interface ModifyOwaspWhiteRuleRequest {
   ExpireTime: number;
   /** 规则状态，0：关闭、1：开启，默认为开启 */
   Status?: number;
+  /** 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系 */
+  LogicalOp?: string;
 }
 
 declare interface ModifyOwaspWhiteRuleResponse {
@@ -6709,6 +6767,8 @@ declare interface UpsertCCRuleRequest {
   PageId?: string;
   /** 动作灰度比例，默认值100 */
   ActionRatio?: number;
+  /** 规则来源 */
+  Source?: string;
 }
 
 declare interface UpsertCCRuleResponse {

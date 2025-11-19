@@ -400,7 +400,7 @@ declare interface ConfigInfo {
   UserDefineRule?: string;
   /** 高级采集配置。 Json字符串， Key/Value定义为如下：- ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时- ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数- ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false样例：`{\"ClsAgentFileTimeout\":0,\"ClsAgentMaxDepth\":10,\"ClsAgentParseFailMerge\":true}`控制台默认占位值：`{\"ClsAgentDefault\":0}` */
   AdvancedConfig?: string;
-  /** 日志输入类型，支持file、window_event、syslog、k8s_stdout、k8s_file */
+  /** 日志输入类型（注：windows场景必填且仅支持file和windows_event类型）- file: 文件类型采集- windows_event：windows事件采集- syslog：系统日志采集 */
   InputType?: string;
 }
 
@@ -2051,7 +2051,7 @@ declare interface CreateConfigRequest {
   UserDefineRule?: string;
   /** 高级采集配置。 Json字符串， Key/Value定义为如下：- ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时- ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数- ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false样例：`{\"ClsAgentFileTimeout\":0,\"ClsAgentMaxDepth\":10,\"ClsAgentParseFailMerge\":true}`控制台默认占位值：`{\"ClsAgentDefault\":0}` */
   AdvancedConfig?: string;
-  /** 日志输入类型，支持file、window_event、syslog、k8s_stdout、k8s_file */
+  /** 日志输入类型（注：windows场景必填且仅支持file和windows_event类型）- file: 文件类型采集- windows_event：windows事件采集- syslog：系统日志采集 */
   InputType?: string;
 }
 
@@ -3605,7 +3605,7 @@ declare interface ModifyConfigRequest {
   UserDefineRule?: string;
   /** 高级采集配置。 Json字符串， Key/Value定义为如下：- ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时- ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数- ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false样例：`{\"ClsAgentFileTimeout\":0,\"ClsAgentMaxDepth\":10,\"ClsAgentParseFailMerge\":true}` */
   AdvancedConfig?: string;
-  /** 日志输入类型，支持file、window_event、syslog、k8s_stdout、k8s_file */
+  /** 日志输入类型（注：windows场景必填且仅支持file和windows_event类型）- file: 文件类型采集- windows_event：windows事件采集- syslog：系统日志采集 */
   InputType?: string;
 }
 

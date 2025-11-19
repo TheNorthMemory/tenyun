@@ -410,6 +410,8 @@ declare interface CreateFlowOption {
   SelfName?: string;
   /** 发起后签署码隐藏，默认false，注：仅对新版页面生效 */
   HideSignCodeAfterStart?: boolean;
+  /** 发起过程中是否保存草稿 */
+  NeedFlowDraft?: boolean;
 }
 
 /** 清理的企业认证流信息 */
@@ -458,7 +460,7 @@ declare interface DynamicFlowApproverResult {
 
 /** 动态合同信息 */
 declare interface DynamicFlowInfo {
-  /** 合同流程ID，为32位字符串。 - 建议开发者妥善保存此流程ID，以便于顺利进行后续操作。 - 可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 - 不建议继续使用，请使用补充签署人结构体中的FlowId指定合同 */
+  /** 合同流程ID，为32位字符串。 - FlowId 在通过[ChannelCreateFlowByFiles](https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowByFiles) 发起，可以在返回参数FlowId中获取。- 建议开发者妥善保存此流程ID，以便于顺利进行后续操作。 - 可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
   FlowId: string;
   /** 合同流程的参与方列表, 最多可支持50个参与方，可在列表中指定企业B端签署方和个人C端签署方的联系和认证方式等信息，不同类型的签署方传参方式可以参考文档 [签署方入参指引](https://qian.tencent.com/developers/partner/flow_approver)。 如果合同流程是有序签署，Approvers列表中参与人的顺序就是默认的签署顺序, 请确保列表中参与人的顺序符合实际签署顺序。 */
   FlowApprovers: FlowApproverInfo[];
@@ -2099,13 +2101,13 @@ declare interface ChannelCreatePrepareFlowGroupResponse {
 }
 
 declare interface ChannelCreatePrepareFlowRequest {
-  /** 资源类型，取值有： **1**：模板 **2**：文件（默认值） */
+  /** 资源类型，取值有： **1**：模板 **2**：文件（默认值） **3**：草稿 */
   ResourceType: number;
   /** 要创建的合同信息 */
   FlowInfo: BaseFlowInfo;
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent?: Agent;
-  /** 资源id，与ResourceType相对应，取值范围：文件Id（通过UploadFiles获取文件资源Id）模板Id（通过控制台创建模板后获取模板Id）注意：需要同时设置 ResourceType 参数指定资源类型 */
+  /** 资源id，与ResourceType相对应，取值范围：文件Id（通过UploadFiles获取文件资源Id）模板Id（通过控制台创建模板后获取模板Id）草稿Id（通过嵌入页面保存草稿后获取草稿Id）注意：需要同时设置 ResourceType 参数指定资源类型 */
   ResourceId?: string;
   /** 合同流程配置信息，用于配置发起合同时定制化如是否允许修改，某些按钮的隐藏等逻辑 */
   FlowOption?: CreateFlowOption;
@@ -2130,6 +2132,8 @@ declare interface ChannelCreatePrepareFlowResponse {
   PreviewFlowUrl?: string;
   /** 发起的合同临时Id， 只有当点击进入链接，成功发起合同后， 此Id才有效 */
   FlowId?: string;
+  /** 临时的草稿id（还未实际保存草稿），用户可以记录此字段对应后续页面保存的草稿，若在页面上未保存草稿，则此字段无效。 */
+  DraftId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2895,6 +2899,8 @@ declare interface CreateConsoleLoginUrlRequest {
   Operator?: UserInfo;
   /** 跳转事件，其中包括认证期间收录，授权书审核，企业认证的回跳事件。p.s.Endpoint如果是APP 类型，请传递JumpUrl为"true" 如果 Endpoint 是 H5 类型，请参考文档跳转电子签H5 p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，仅会进行回跳。 */
   JumpEvents?: JumpEvent[];
+  /** 企业证照类型： **USCC** :(默认)工商组织营业执照 **PRACTICELICENSEOFMEDICALINSTITUTION** :医疗机构执业许可证 */
+  ProxyOrganizationIdCardType?: string;
 }
 
 declare interface CreateConsoleLoginUrlResponse {
