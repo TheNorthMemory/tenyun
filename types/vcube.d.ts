@@ -504,6 +504,8 @@ declare interface CreateApplicationAndVideoRequest {
 }
 
 declare interface CreateApplicationAndVideoResponse {
+  /** license唯一标识 */
+  LicenseId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -516,6 +518,8 @@ declare interface CreateApplicationAndWebPlayerLicenseRequest {
 }
 
 declare interface CreateApplicationAndWebPlayerLicenseResponse {
+  /** license的唯一标识 */
+  LicenseId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -743,6 +747,8 @@ declare interface DescribeVcubeApplicationAndPlayListRequest {
   MacBundleId?: string;
   /** Windows 进程名 */
   WinProcessName?: string;
+  /** license唯一标识 */
+  LicenseId?: number;
 }
 
 declare interface DescribeVcubeApplicationAndPlayListResponse {

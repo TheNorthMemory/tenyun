@@ -2547,13 +2547,6 @@ declare interface AclResponse {
   AclList?: Acl[];
 }
 
-declare interface AppIdResponse {
-  /** 符合要求的所有AppId数量 */
-  TotalCount?: number;
-  /** 符合要求的App Id列表 */
-  AppIdList?: number[];
-}
-
 declare interface AuthorizeTokenRequest {
   /** ckafka集群实例Id, 可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取 */
   InstanceId: string;
@@ -3338,20 +3331,6 @@ declare interface DescribeAclRuleRequest {
 declare interface DescribeAclRuleResponse {
   /** 返回的AclRule结果集对象 */
   Result?: AclRuleResp;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeAppInfoRequest {
-  /** 偏移位置 */
-  Offset?: number;
-  /** 本次查询用户数目最大数量限制，最大值为50，默认50 */
-  Limit?: number;
-}
-
-declare interface DescribeAppInfoResponse {
-  /** 返回的符合要求的App Id列表 */
-  Result?: AppIdResponse;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4683,8 +4662,6 @@ declare interface Ckafka {
   DescribeACL(data: DescribeACLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeACLResponse>;
   /** 查询ACL规则列表 {@link DescribeAclRuleRequest} {@link DescribeAclRuleResponse} */
   DescribeAclRule(data: DescribeAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAclRuleResponse>;
-  /** 查询用户列表 {@link DescribeAppInfoRequest} {@link DescribeAppInfoResponse} */
-  DescribeAppInfo(data?: DescribeAppInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppInfoResponse>;
   /** 查看可用区列表 {@link DescribeCkafkaZoneRequest} {@link DescribeCkafkaZoneResponse} */
   DescribeCkafkaZone(data?: DescribeCkafkaZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCkafkaZoneResponse>;
   /** 查询Datahub连接源 {@link DescribeConnectResourceRequest} {@link DescribeConnectResourceResponse} */

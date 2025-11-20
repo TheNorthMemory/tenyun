@@ -1506,6 +1506,8 @@ declare interface Policy {
   Id?: number | null;
   /** 引擎类型 */
   EngineGeneration?: string;
+  /** 需要授权的Model名，填 * 代表当前Database下所有表。当授权类型为管理员级别时，只允许填“*”，当授权类型为数据连接级别、数据库级别时只允许填空，其他类型下可以任意指定数据表。 */
+  Model?: string;
 }
 
 /** 策略集合 */
@@ -2408,6 +2410,8 @@ declare interface UserDetailInfo {
   AccountType?: string;
   /** 数据源权限集合 */
   CatalogPolicyInfo?: Policys | null;
+  /** 模型权限集合 */
+  ModelPolicyInfo?: Policys;
 }
 
 /** 绑定到同一个工作组的用户Id的集合 */
@@ -2445,15 +2449,17 @@ declare interface UserInfo {
 /** 用户部分信息 */
 declare interface UserMessage {
   /** 用户Id，和CAM侧子用户Uin匹配 */
-  UserId: string;
+  UserId?: string;
   /** 用户描述 */
-  UserDescription: string | null;
+  UserDescription?: string | null;
   /** 当前用户的创建者 */
-  Creator: string;
+  Creator?: string;
   /** 当前用户的创建时间，形如2021-07-28 16:19:32 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 用户别名 */
-  UserAlias: string;
+  UserAlias?: string;
+  /** 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户） */
+  AccountType?: string;
 }
 
 /** 用户角色 */
@@ -2799,6 +2805,8 @@ declare interface AttachUserPolicyRequest {
   UserId: string;
   /** 鉴权策略集合 */
   PolicySet?: Policy[];
+  /** 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户） */
+  AccountType?: string;
 }
 
 declare interface AttachUserPolicyResponse {
@@ -3663,6 +3671,8 @@ declare interface CreateUserRequest {
   WorkGroupIds?: number[];
   /** 用户别名，字符长度小50 */
   UserAlias?: string;
+  /** 账号类型，UserAccount：用户账号 RoleAccount：角色账号，默认为用户账号 */
+  AccountType?: string;
 }
 
 declare interface CreateUserResponse {
@@ -3823,6 +3833,8 @@ declare interface DeleteThirdPartyAccessUserResponse {
 declare interface DeleteUserRequest {
   /** 需要删除的用户的Id */
   UserIds: string[];
+  /** 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户） */
+  AccountType?: string;
 }
 
 declare interface DeleteUserResponse {
@@ -5195,6 +5207,8 @@ declare interface DescribeUserInfoRequest {
   Limit?: number;
   /** 偏移量，默认为0 */
   Offset?: number;
+  /** 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户） */
+  AccountType?: string;
 }
 
 declare interface DescribeUserInfoResponse {
@@ -5243,6 +5257,8 @@ declare interface DescribeUserRolesResponse {
 declare interface DescribeUserTypeRequest {
   /** 用户ID（UIN），如果不填默认为调用方的子UIN */
   UserId?: string;
+  /** 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户） */
+  AccountType?: string;
 }
 
 declare interface DescribeUserTypeResponse {
@@ -5281,13 +5297,15 @@ declare interface DescribeUsersRequest {
   Sorting?: string;
   /** 过滤条件，支持如下字段类型，user-type：根据用户类型过滤。user-keyword：根据用户名称过滤 */
   Filters?: Filter[];
+  /** 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户） */
+  AccountType?: string;
 }
 
 declare interface DescribeUsersResponse {
   /** 查询到的用户总数 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 查询到的授权用户信息集合 */
-  UserSet: UserInfo[];
+  UserSet?: UserInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5377,6 +5395,8 @@ declare interface DetachUserPolicyRequest {
   UserId: string;
   /** 解绑的权限集合 */
   PolicySet?: Policy[];
+  /** 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户） */
+  AccountType?: string;
 }
 
 declare interface DetachUserPolicyResponse {
@@ -5717,6 +5737,8 @@ declare interface ModifyUserRequest {
   UserId: string;
   /** 用户描述 */
   UserDescription: string;
+  /** 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户） */
+  AccountType?: string;
 }
 
 declare interface ModifyUserResponse {
@@ -5729,6 +5751,8 @@ declare interface ModifyUserTypeRequest {
   UserId: string;
   /** 用户要修改到的类型，ADMIN：管理员，COMMON：一般用户。 */
   UserType: string;
+  /** 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户） */
+  AccountType?: string;
 }
 
 declare interface ModifyUserTypeResponse {

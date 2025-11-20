@@ -270,6 +270,54 @@ declare interface CountDataInfo {
   EventSuccessRate?: string;
 }
 
+/** 批量创建的 TWeSee 语义理解任务 */
+declare interface CreateVisionRecognitionTaskInput {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 输入视频 / 图片的 URL */
+  InputURL?: string;
+  /** 视频 / 图片文件的 Base64 编码字符串 */
+  InputBase64?: string;
+  /** 通道 ID */
+  ChannelId?: number;
+  /** 自定义事件 ID */
+  CustomId?: string;
+  /** 是否保存该事件使其可被搜索 */
+  EnableSearch?: boolean;
+  /** 事件起始时间事件起始时间（毫秒级 UNIX 时间戳，若不传则默认为接口调用时间） */
+  StartTimeMs?: number;
+  /** 事件结束时间事件起始时间（毫秒级 UNIX 时间戳，若不传则默认为接口调用时间） */
+  EndTimeMs?: number;
+  /** 算法配置 */
+  Config?: string;
+  /** 是否自定义设备，为 true 时不检查设备存在性，默认为 false */
+  IsCustomDevice?: boolean;
+  /** 输入类型。可选值：- `video`：视频（默认值）- `image`：图片 */
+  InputType?: string;
+  /** 摘要服务质量。可选值：- `minutely`：分钟级（默认值）- `immediate`：立即 */
+  SummaryQOS?: string;
+  /** 摘要输出配置 */
+  SummaryConfig?: VisionSummaryConfig;
+  /** 算法类型，可能取值：- `Summary`：视频/图片摘要- `ObjectDetect`：目标检测 */
+  ServiceType?: string;
+  /** 目标检测配置 */
+  ObjectDetectConfig?: VisionObjectDetectConfig;
+}
+
+/** 批量创建 TWeSee 语义理解任务的响应 */
+declare interface CreateVisionRecognitionTaskOutput {
+  /** 创建任务成功 */
+  Created?: boolean;
+  /** 任务 ID */
+  TaskId?: string;
+  /** 错误码 */
+  ErrorCode?: string;
+  /** 错误消息 */
+  ErrorMessage?: string;
+}
+
 /** 设备激活详情信息 */
 declare interface DeviceActivationDetail {
   /** 可注册设备数 */
@@ -650,6 +698,20 @@ declare interface InstanceDetail {
   EverydayFreeMessageCount?: number;
   /** 最大在线设备数 */
   MaxDeviceOnlineCount?: number;
+}
+
+/** 批量同步执行 TWeSee 语义理解任务的响应 */
+declare interface InvokeVisionRecognitionTaskOutput {
+  /** 任务是否已完成 */
+  Completed?: boolean;
+  /** 任务 ID */
+  TaskId?: string;
+  /** 错误码 */
+  ErrorCode?: string;
+  /** 错误消息 */
+  ErrorMessage?: string;
+  /** 任务结果 */
+  Result?: VisionRecognitionResult;
 }
 
 /** 应用信息 */
@@ -1336,6 +1398,26 @@ declare interface VideoLicenseEntity {
   ExpiresSoonCount?: number;
 }
 
+/** TWeSee 语义理解自定义标签请求 */
+declare interface VisionCustomDetectQuery {
+  /** 自定义标签的标识符 */
+  Key: string;
+  /** 自定义标签的描述文本 */
+  Query: string;
+}
+
+/** 目标检测算法检测到的目标详情 */
+declare interface VisionDetectedObject {
+  /** 目标出现的媒体时间戳（以图片为输入时始终取值 0） */
+  Time?: number;
+  /** 目标类别名 */
+  ClassName?: string;
+  /** 目标边界框（坐标顺序为 x1, y1, x2, y2） */
+  BoundingBox?: number[];
+  /** 置信度（取值范围 0.0 至 1.0） */
+  Confidence?: number;
+}
+
 /** 目标检测配置 */
 declare interface VisionObjectDetectConfig {
   /** 检测类别，可选值：- `adult`：成年人- `child`：儿童 */
@@ -1354,6 +1436,8 @@ declare interface VisionRecognitionResult {
   AlternativeSummary?: string;
   /** 错误码，可能取值：- `DownloadFailed`：下载视频/图片文件失败- `ReadFailed`：读取视频/图片文件失败 */
   ErrorCode?: string;
+  /** 目标检测算法检测到的目标列表 */
+  DetectedObjects?: VisionDetectedObject[];
 }
 
 /** TWeSee 语义理解任务信息 */
@@ -1392,12 +1476,16 @@ declare interface VisionRecognitionTask {
 
 /** 视频摘要配置 */
 declare interface VisionSummaryConfig {
-  /** 主输出语言支持列表如下：zh 中文en 英语ja 日语ko 韩文pt-BR 葡萄牙语（巴西）th 泰语 */
+  /** 主输出语言，可选值包括：- `zh` 中文（默认值）- `en` 英语- `ja` 日语- `ko` 韩文- `pt-BR` 葡萄牙语（巴西）- `th` 泰语- `ms` 马来语 */
   OutputLang?: string;
-  /** 可选输出语言支持列表如下：zh 中文en 英语ja 日语ko 韩文pt-BR 葡萄牙语（巴西）th 泰语 */
+  /** 次选输出语言，可选值包括：- `zh` 中文- `en` 英语- `ja` 日语- `ko` 韩文- `pt-BR` 葡萄牙语（巴西）- `th` 泰语- `ms` 马来语 */
   AlternativeOutputLang?: string;
-  /** 多摄像头布局定义。可能取值：- 单摄（默认值）：`Single`- 双摄（纵向排列）- 全部画面：`Vertical,Num=2,Index=0;1`- 双摄（纵向排列）- 画面1：`Vertical,Num=2,Index=0`- 双摄（纵向排列）- 画面2：`Vertical,Num=2,Index=1`- 三摄（纵向排列）- 全部画面：`Vertical,Num=3,Index=0;1;2`- 三摄（纵向排列）- 画面1：`Vertical,Num=3,Index=0`- 三摄（纵向排列）- 画面2：`Vertical,Num=3,Index=1`- 三摄（纵向排列）- 画面3：`Vertical,Num=3,Index=2`- 三摄（纵向排列）- 画面1+2：`Vertical,Num=3,Index=0;1`- 三摄（纵向排列）- 画面1+3：`Vertical,Num=3,Index=0;2`- 三摄（纵向排列）- 画面2+3：`Vertical,Num=3,Index=1;2` */
+  /** 多摄像头布局定义。可选值包括：- 单摄（默认值）：`Single`- 双摄（纵向排列）- 全部画面：`Vertical,Num=2,Index=0;1`- 双摄（纵向排列）- 画面1：`Vertical,Num=2,Index=0`- 双摄（纵向排列）- 画面2：`Vertical,Num=2,Index=1`- 三摄（纵向排列）- 全部画面：`Vertical,Num=3,Index=0;1;2`- 三摄（纵向排列）- 画面1：`Vertical,Num=3,Index=0`- 三摄（纵向排列）- 画面2：`Vertical,Num=3,Index=1`- 三摄（纵向排列）- 画面3：`Vertical,Num=3,Index=2`- 三摄（纵向排列）- 画面1+2：`Vertical,Num=3,Index=0;1`- 三摄（纵向排列）- 画面1+3：`Vertical,Num=3,Index=0;2`- 三摄（纵向排列）- 画面2+3：`Vertical,Num=3,Index=1;2` */
   MultiCameraLayout?: string;
+  /** 拓展的目标及事件检测类别。可选值包括：**通用事件标签**- `person_enter` 有人进入- `vehicle_entering` 车辆进入- `vehicle_parking` 车辆停靠- `pet` 有宠物- `no_signal` 视频画面异常（无信号等）**看家护院**- `person_climbing_fence` 有人翻围墙- `door_window_open` 门窗被开启- `person_carrying_object` 有人搬运物品**商铺看管**- `person_at_cashier` 有人在收银台- `person_taking_goods` 有人拿商品- `person_night_moving` 夜间有人移动**公共及防火安全**- `person_stealing` 有人偷盗- `crowd` 多人聚集- `smoking` 有人吸烟- `safety_fire` 明火- `safety_smoke` 浓烟- `fireworks` 有人燃放烟花爆竹- `knife` 有人持刀- `gun` 有人持枪- `fight` 有人打架- `hurt` 有人受伤流血**养殖看护**- `person_feeding_animal` 有人投喂牲畜- `animal_lying` 有动物躺地上- `animal_wild_intrusion` 野生动物入侵**果园农田**- `person_picking_fruit` 有人采摘果实- `person_carrying_bag` 有人携带包裹**鱼塘看管**- `fishing` 有人钓鱼- `net_fishing` 有人撒网- `person_carrying_fishing_gear` 有人携带渔具- `loitering_near_water` 有人岸边逗留- `throwing_into_water` 有人投掷物品**婴儿看护**- `baby` 有婴儿- `baby_dropping` 婴儿跌落床铺- `person_holding_baby` 有人抱起婴儿- `baby_rolling` 婴儿翻滚- `baby_crying` 婴儿哭闹**儿童看护**- `child` 有小孩- `child_falling` 小孩摔倒- `child_entering_kitchen` 小孩进入厨房- `child_climbing_window` 小孩攀爬室内窗户- `child_near_water` 小孩靠近水域**老人看护**- `elderly` 有老人- `elderly_falling` 老人摔倒- `elderly_eating` 老人用餐- `elderly_using_stove` 老人使用灶具**宠物看护**- `pet_eating` 宠物进食- `pet_damaging` 宠物损坏家具- `pet_barking` 宠物吠叫- `pet_scratching_door` 宠物挠门 */
+  DetectTypes?: string[];
+  /** 自定义检测标签 */
+  CustomDetectQueries?: VisionCustomDetectQuery[];
 }
 
 /** 微信硬件设备信息 */
@@ -1418,14 +1506,6 @@ declare interface WXIoTDeviceInfo {
   ModelId?: string;
 }
 
-/** wifi定位信息 */
-declare interface WifiInfo {
-  /** mac地址 */
-  MAC: string;
-  /** 信号强度 */
-  RSSI: number;
-}
-
 declare interface ActivateTWeCallLicenseRequest {
   /** TWecall类型：0-体验套餐；1-基础版；3-高级版； */
   PkgType: number;
@@ -1442,6 +1522,30 @@ declare interface ActivateTWeCallLicenseResponse {
   FailureList?: DeviceActiveResult[];
   /** 设备激活成功返回数据 */
   SuccessList?: DeviceActiveResult[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchCreateTWeSeeRecognitionTaskRequest {
+  /** 待创建的 TWeSee 语义理解任务列表 */
+  Inputs: CreateVisionRecognitionTaskInput[];
+}
+
+declare interface BatchCreateTWeSeeRecognitionTaskResponse {
+  /** TWeSee 语义理解任务的创建结果。与入参 Inputs 一一对应。 */
+  Outputs?: CreateVisionRecognitionTaskOutput[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchInvokeTWeSeeRecognitionTaskRequest {
+  /** 待执行的 TWeSee 语义理解任务列表 */
+  Inputs: CreateVisionRecognitionTaskInput[];
+}
+
+declare interface BatchInvokeTWeSeeRecognitionTaskResponse {
+  /** TWeSee 语义理解任务的执行结果。与入参 Inputs 一一对应。 */
+  Outputs?: InvokeVisionRecognitionTaskOutput[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2068,6 +2172,46 @@ declare interface CreateTWeSeeRecognitionTaskResponse {
   RequestId?: string;
 }
 
+declare interface CreateTWeSeeRecognitionTaskWithFileRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 视频 / 图片文件的 Base64 编码字符串 */
+  InputBase64: string;
+  /** 通道 ID */
+  ChannelId?: number;
+  /** 自定义事件 ID */
+  CustomId?: string;
+  /** 是否保存该事件使其可被搜索 */
+  EnableSearch?: boolean;
+  /** 事件起始时间事件起始时间（毫秒级 UNIX 时间戳，若不传则默认为接口调用时间） */
+  StartTimeMs?: number;
+  /** 事件结束时间事件起始时间（毫秒级 UNIX 时间戳，若不传则默认为接口调用时间） */
+  EndTimeMs?: number;
+  /** 算法配置 */
+  Config?: string;
+  /** 是否自定义设备，为 true 时不检查设备存在性，默认为 false */
+  IsCustomDevice?: boolean;
+  /** 输入类型。可选值：- `video`：视频（默认值）- `image`：图片 */
+  InputType?: string;
+  /** 摘要服务质量。可选值：- `minutely`：分钟级（默认值）- `immediate`：立即 */
+  SummaryQOS?: string;
+  /** 摘要输出配置 */
+  SummaryConfig?: VisionSummaryConfig;
+  /** 算法类型，可能取值：- `Summary`：视频/图片摘要- `ObjectDetect`：目标检测 */
+  ServiceType?: string;
+  /** 目标检测配置 */
+  ObjectDetectConfig?: VisionObjectDetectConfig;
+}
+
+declare interface CreateTWeSeeRecognitionTaskWithFileResponse {
+  /** 任务 ID */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateTWeSeeServiceRequest {
   /** 服务类型1.VideoSummary2.ImageSummary */
   Service: string;
@@ -2286,6 +2430,20 @@ declare interface DeleteStudioProductRequest {
 }
 
 declare interface DeleteStudioProductResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteTWeTalkProductConfigV2Request {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName?: string;
+  /** 支持的语言，zh-中文；en-英文；默认zh */
+  TargetLanguage?: string;
+}
+
+declare interface DeleteTWeTalkProductConfigV2Response {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2894,32 +3052,6 @@ declare interface DescribeDeviceFirmwaresRequest {
 declare interface DescribeDeviceFirmwaresResponse {
   /** 固件信息列表 */
   Firmwares?: DeviceFirmwareInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeDeviceLocationSolveRequest {
-  /** 产品ID */
-  ProductId: string;
-  /** 设备名称 */
-  DeviceName: string;
-  /** 定位解析类型，wifi或GNSSNavigation */
-  LocationType: string;
-  /** LoRaEdge卫星导航电文 */
-  GNSSNavigation?: string;
-  /** wifi信息 */
-  WiFiInfo?: WifiInfo[];
-}
-
-declare interface DescribeDeviceLocationSolveResponse {
-  /** 经度 */
-  Longitude?: number;
-  /** 纬度 */
-  Latitude?: number;
-  /** 类型 */
-  LocationType?: string;
-  /** 误差精度预估，单位为米 */
-  Accuracy?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4160,6 +4292,50 @@ declare interface InvokeTWeSeeRecognitionTaskResponse {
   RequestId?: string;
 }
 
+declare interface InvokeTWeSeeRecognitionTaskWithFileRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 视频 / 图片文件的 Base64 编码字符串 */
+  InputBase64: string;
+  /** 通道 ID */
+  ChannelId?: number;
+  /** 自定义事件 ID */
+  CustomId?: string;
+  /** 是否保存该事件使其可被搜索 */
+  EnableSearch?: boolean;
+  /** 事件起始时间事件起始时间（毫秒级 UNIX 时间戳，若不传则默认为接口调用时间） */
+  StartTimeMs?: number;
+  /** 事件结束时间事件起始时间（毫秒级 UNIX 时间戳，若不传则默认为接口调用时间） */
+  EndTimeMs?: number;
+  /** 算法配置 */
+  Config?: string;
+  /** 是否自定义设备，为 true 时不检查设备存在性，默认为 false */
+  IsCustomDevice?: boolean;
+  /** 输入类型。可选值：- `video`：视频（默认值）- `image`：图片 */
+  InputType?: string;
+  /** 摘要服务质量。可选值：- `minutely`：分钟级（默认值）- `immediate`：立即 */
+  SummaryQOS?: string;
+  /** 摘要输出配置 */
+  SummaryConfig?: VisionSummaryConfig;
+  /** 算法类型，可能取值：- `Summary`：视频/图片摘要- `ObjectDetect`：目标检测 */
+  ServiceType?: string;
+  /** 目标检测配置 */
+  ObjectDetectConfig?: VisionObjectDetectConfig;
+}
+
+declare interface InvokeTWeSeeRecognitionTaskWithFileResponse {
+  /** 任务 ID */
+  TaskId?: string;
+  /** 任务是否执行完成 */
+  Completed?: boolean;
+  /** 语义理解任务结果（仅当 Completed 为 true 时包含该出参） */
+  Result?: VisionRecognitionResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface InvokeVideosKeywordsAnalyzerRequest {
   /** 产品ID */
   ProductId: string;
@@ -5023,6 +5199,10 @@ declare interface Iotexplorer {
   (): Versions;
   /** 激活TWeCall {@link ActivateTWeCallLicenseRequest} {@link ActivateTWeCallLicenseResponse} */
   ActivateTWeCallLicense(data: ActivateTWeCallLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateTWeCallLicenseResponse>;
+  /** 批量创建 TWeSee 语义理解任务 {@link BatchCreateTWeSeeRecognitionTaskRequest} {@link BatchCreateTWeSeeRecognitionTaskResponse} */
+  BatchCreateTWeSeeRecognitionTask(data: BatchCreateTWeSeeRecognitionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<BatchCreateTWeSeeRecognitionTaskResponse>;
+  /** 批量同步执行 TWeSee 语义理解任务 {@link BatchInvokeTWeSeeRecognitionTaskRequest} {@link BatchInvokeTWeSeeRecognitionTaskResponse} */
+  BatchInvokeTWeSeeRecognitionTask(data: BatchInvokeTWeSeeRecognitionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<BatchInvokeTWeSeeRecognitionTaskResponse>;
   /** 批量升级固件 {@link BatchUpdateFirmwareRequest} {@link BatchUpdateFirmwareResponse} */
   BatchUpdateFirmware(data: BatchUpdateFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<BatchUpdateFirmwareResponse>;
   /** 绑定云存用户 {@link BindCloudStorageUserRequest} {@link BindCloudStorageUserResponse} */
@@ -5081,6 +5261,8 @@ declare interface Iotexplorer {
   CreateTRTCSignaturesWithRoomId(data: CreateTRTCSignaturesWithRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTRTCSignaturesWithRoomIdResponse>;
   /** 创建 TWeSee 语义理解任务 {@link CreateTWeSeeRecognitionTaskRequest} {@link CreateTWeSeeRecognitionTaskResponse} */
   CreateTWeSeeRecognitionTask(data: CreateTWeSeeRecognitionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeSeeRecognitionTaskResponse>;
+  /** 上传文件并创建 TWeSee 语义理解任务 {@link CreateTWeSeeRecognitionTaskWithFileRequest} {@link CreateTWeSeeRecognitionTaskWithFileResponse} */
+  CreateTWeSeeRecognitionTaskWithFile(data: CreateTWeSeeRecognitionTaskWithFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeSeeRecognitionTaskWithFileResponse>;
   /** 开通 TWeSee 后付费服务 {@link CreateTWeSeeServiceRequest} {@link CreateTWeSeeServiceResponse} */
   CreateTWeSeeService(data: CreateTWeSeeServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeSeeServiceResponse>;
   /** 新增TWeTalk连接配置信息 {@link CreateTWeTalkProductConfigRequest} {@link CreateTWeTalkProductConfigResponse} */
@@ -5113,6 +5295,8 @@ declare interface Iotexplorer {
   DeleteProject(data: DeleteProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectResponse>;
   /** 删除产品 {@link DeleteStudioProductRequest} {@link DeleteStudioProductResponse} */
   DeleteStudioProduct(data: DeleteStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStudioProductResponse>;
+  /** 删除WeTalk连接产品配置v2版 {@link DeleteTWeTalkProductConfigV2Request} {@link DeleteTWeTalkProductConfigV2Response} */
+  DeleteTWeTalkProductConfigV2(data: DeleteTWeTalkProductConfigV2Request, config?: AxiosRequestConfig): AxiosPromise<DeleteTWeTalkProductConfigV2Response>;
   /** 删除Topic。 {@link DeleteTopicPolicyRequest} {@link DeleteTopicPolicyResponse} */
   DeleteTopicPolicy(data: DeleteTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicPolicyResponse>;
   /** 删除规则 {@link DeleteTopicRuleRequest} {@link DeleteTopicRuleResponse} */
@@ -5175,8 +5359,6 @@ declare interface Iotexplorer {
   DescribeDeviceFirmWare(data: DescribeDeviceFirmWareRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceFirmWareResponse>;
   /** 获取设备当前固件信息 {@link DescribeDeviceFirmwaresRequest} {@link DescribeDeviceFirmwaresResponse} */
   DescribeDeviceFirmwares(data: DescribeDeviceFirmwaresRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceFirmwaresResponse>;
-  /** @deprecated 获取实时位置解析 {@link DescribeDeviceLocationSolveRequest} {@link DescribeDeviceLocationSolveResponse} */
-  DescribeDeviceLocationSolve(data: DescribeDeviceLocationSolveRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceLocationSolveResponse>;
   /** 拉取有效云存套餐列表 {@link DescribeDevicePackagesRequest} {@link DescribeDevicePackagesResponse} */
   DescribeDevicePackages(data: DescribeDevicePackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicePackagesResponse>;
   /** 获取设备位置列表 {@link DescribeDevicePositionListRequest} {@link DescribeDevicePositionListResponse} */
@@ -5301,6 +5483,8 @@ declare interface Iotexplorer {
   InvokeExternalSourceAIServiceTask(data: InvokeExternalSourceAIServiceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeExternalSourceAIServiceTaskResponse>;
   /** 同步执行 TWeSee 语义理解任务 {@link InvokeTWeSeeRecognitionTaskRequest} {@link InvokeTWeSeeRecognitionTaskResponse} */
   InvokeTWeSeeRecognitionTask(data: InvokeTWeSeeRecognitionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeTWeSeeRecognitionTaskResponse>;
+  /** 上传文件并同步执行 TWeSee 语义理解任务 {@link InvokeTWeSeeRecognitionTaskWithFileRequest} {@link InvokeTWeSeeRecognitionTaskWithFileResponse} */
+  InvokeTWeSeeRecognitionTaskWithFile(data: InvokeTWeSeeRecognitionTaskWithFileRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeTWeSeeRecognitionTaskWithFileResponse>;
   /** 获取某个时间段的视频内容关键字 {@link InvokeVideosKeywordsAnalyzerRequest} {@link InvokeVideosKeywordsAnalyzerResponse} */
   InvokeVideosKeywordsAnalyzer(data: InvokeVideosKeywordsAnalyzerRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeVideosKeywordsAnalyzerResponse>;
   /** 获取设备的历史事件 {@link ListEventHistoryRequest} {@link ListEventHistoryResponse} */

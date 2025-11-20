@@ -3464,6 +3464,30 @@ declare interface LiveActivityResult {
   LiveActivityResItem?: LiveActivityResItem | null;
 }
 
+/** 直播摘要结果信息。 */
+declare interface LiveAiAnalysisDescriptionItem {
+  /** 分段结果。 */
+  Paragraphs?: LiveAiParagraphInfo[] | null;
+}
+
+/** 分段信息。 */
+declare interface LiveAiParagraphInfo {
+  /** 分段摘要 */
+  Summary?: string;
+  /** 分段标题 */
+  Title?: string;
+  /** 分段关键词 */
+  Keywords?: string[];
+  /** 分段起始时间点，秒 */
+  StartTimeOffset?: number;
+  /** 分段结束时间点，秒 */
+  EndTimeOffset?: number;
+  /** 直播切片对应直播起始时间点，采用 ISO 日期格式。 */
+  BeginTime?: string;
+  /** 直播切片对应直播结束时间点，采用 ISO 日期格式。 */
+  EndTime?: string;
+}
+
 /** 直播录制输出文件信息 */
 declare interface LiveRecordFile {
   /** 直播录制文件地址 */
@@ -3556,18 +3580,20 @@ declare interface LiveScheduleTask {
 
 /** 直播流分析结果 */
 declare interface LiveStreamAiAnalysisResultInfo {
-  /** 直播分析子任务结果，暂时只支持直播拆条。 */
+  /** 直播分析子任务结果，支持：直播拆条直播高光集锦直播摘要 */
   ResultSet?: LiveStreamAiAnalysisResultItem[] | null;
 }
 
 /** 直播流 AI 分析结果 */
 declare interface LiveStreamAiAnalysisResultItem {
-  /** 结果的类型，取值范围：SegmentRecognition：拆条。Highlight ：集锦。 */
+  /** 结果的类型，取值范围：SegmentRecognition：拆条。Highlight ：集锦。 Description：摘要。 */
   Type?: string;
   /** 拆条结果，当 Type 为SegmentRecognition 时有效。 */
   SegmentResultSet?: SegmentRecognitionItem[] | null;
   /** 集锦结果，当Type 为 Highlight 时有效。 */
   HighlightResultSet?: MediaAiAnalysisHighlightItem[] | null;
+  /** 摘要结果，当Type 为 Description 时有效。 */
+  DescriptionResult?: LiveAiAnalysisDescriptionItem;
 }
 
 /** 直播流媒体质检结果 */
@@ -7951,6 +7977,8 @@ declare interface DescribeSmartEraseTemplatesRequest {
   Limit?: number;
   /** 模板类型过滤条件，不填则返回所有，可选值：* Preset：系统预置模板；* Custom：用户自定义模板。 */
   Type?: string;
+  /** 智能擦除模板擦除类型过滤条件。- subtitle 去字幕- watermark 去水印- privacy 隐私保护 */
+  EraseType?: string;
   /** 智能擦除模板名过滤条件，长度限制：64 个字符。 */
   Name?: string;
 }
@@ -9072,7 +9100,7 @@ declare interface ParseLiveStreamProcessNotificationRequest {
 }
 
 declare interface ParseLiveStreamProcessNotificationResponse {
-  /** 直播流处理结果类型，包含：AiReviewResult：内容审核结果；AiRecognitionResult：内容识别结果；LiveRecordResult：直播录制结果；AiQualityControlResult：媒体质检结果；ProcessEof：直播流处理结束。 */
+  /** 直播流处理结果类型，包含：AiReviewResult：内容审核结果；AiRecognitionResult：内容识别结果；LiveRecordResult：直播录制结果；AiQualityControlResult：媒体质检结果；AiAnalysisResult：内容分析结果；ProcessEof：直播流处理结束。 */
   NotificationType?: string;
   /** 视频处理任务 ID。 */
   TaskId?: string;

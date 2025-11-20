@@ -125,7 +125,7 @@ declare interface ImageInpaintingRemovalRequest {
   Mask?: string;
   /** 消除区域 Mask 图 Url。Mask 为单通道灰度图，待消除部分呈白色区域，原图保持部分呈黑色区域。Mask 的 Base64 和 Url 必须提供一个，如果都提供以 Url 为准。图片限制：Mask 分辨率需要和输入原图保持一致，转成 Base64 字符串后小于 6MB。 */
   MaskUrl?: string;
-  /** 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。 */
+  /** 返回图像方式（base64 或 url），二选一，默认为 base64。url 有效期为1小时。 */
   RspImgType?: string;
   /** 为生成结果图添加标识的开关，默认为1。1：添加标识。0：不添加标识。其他数值：默认按1处理。建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。 */
   LogoAdd?: number;
@@ -147,7 +147,7 @@ declare interface ImageOutpaintingRequest {
   InputImage?: string;
   /** 输入图 Url。Base64 和 Url 必须提供一个，如果都提供以 Url 为准。图片限制：单边分辨率小于5000，转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。 */
   InputUrl?: string;
-  /** 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。 */
+  /** 返回图像方式（base64 或 url），二选一，默认为 base64。url 有效期为1小时。 */
   RspImgType?: string;
   /** 为生成结果图添加标识的开关，默认为1。1：添加标识。0：不添加标识。其他数值：默认按1处理。建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。 */
   LogoAdd?: number;
@@ -331,7 +331,7 @@ declare interface RefineImageRequest {
   InputUrl?: string;
   /** 输入图 Base64 数据。Base64 和 Url 必须提供一个，如果都提供以 Url 为准。图片限制：转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。 */
   InputImage?: string;
-  /** 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。 示例值：url */
+  /** 返回图像方式（base64 或 url），二选一，默认为 base64。url 有效期为1小时。 示例值：url */
   RspImgType?: string;
 }
 
@@ -481,7 +481,7 @@ declare interface SubmitTextToImageJobRequest {
   LogoAdd?: number;
   /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。 */
   LogoParam?: LogoParam;
-  /** 是否开启prompt改写，默认开启，改写预计会增加20s左右耗时。如果关闭改写，需要调用方自己接改写，否则对生图效果有较大影响，改写方法可以参考：[改写](https://github.com/Tencent-Hunyuan/HunyuanImage-3.0/tree/main/PE) */
+  /** 是否开启prompt改写，为空时默认开启，改写预计会增加20s左右耗时。0：关闭改写1：开启改写建议默认开启，如果关闭改写，需要调用方自己接改写，否则对生图效果有较大影响，改写方法可以参考：[改写](https://github.com/Tencent-Hunyuan/HunyuanImage-3.0/tree/main/PE)示例值：1 */
   Revise?: number;
 }
 
@@ -565,7 +565,7 @@ declare interface TextToImageRapidRequest {
   LogoAdd?: number;
   /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。 */
   LogoParam?: LogoParam;
-  /** 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。 */
+  /** 返回图像方式（base64 或 url），二选一，默认为 base64。url 有效期为1小时。 */
   RspImgType?: string;
 }
 
@@ -617,7 +617,7 @@ declare interface Aiart {
   QueryGlamPicJob(data: QueryGlamPicJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryGlamPicJobResponse>;
   /** 查询表情动图生成任务 {@link QueryMemeJobRequest} {@link QueryMemeJobResponse} */
   QueryMemeJob(data: QueryMemeJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMemeJobResponse>;
-  /** 查询混元生图3.0任务 {@link QueryTextToImageJobRequest} {@link QueryTextToImageJobResponse} */
+  /** 查询混元生图（3.0）任务 {@link QueryTextToImageJobRequest} {@link QueryTextToImageJobResponse} */
   QueryTextToImageJob(data: QueryTextToImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryTextToImageJobResponse>;
   /** 查询文生图（高级版）任务（即将下线） {@link QueryTextToImageProJobRequest} {@link QueryTextToImageProJobResponse} */
   QueryTextToImageProJob(data: QueryTextToImageProJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryTextToImageProJobResponse>;
@@ -635,7 +635,7 @@ declare interface Aiart {
   SubmitGlamPicJob(data: SubmitGlamPicJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitGlamPicJobResponse>;
   /** 提交表情动图生成任务 {@link SubmitMemeJobRequest} {@link SubmitMemeJobResponse} */
   SubmitMemeJob(data: SubmitMemeJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitMemeJobResponse>;
-  /** 提交混元生图3.0任务 {@link SubmitTextToImageJobRequest} {@link SubmitTextToImageJobResponse} */
+  /** 提交混元生图（3.0）任务 {@link SubmitTextToImageJobRequest} {@link SubmitTextToImageJobResponse} */
   SubmitTextToImageJob(data: SubmitTextToImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTextToImageJobResponse>;
   /** 提交文生图（高级版）任务（即将下线） {@link SubmitTextToImageProJobRequest} {@link SubmitTextToImageProJobResponse} */
   SubmitTextToImageProJob(data: SubmitTextToImageProJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTextToImageProJobResponse>;

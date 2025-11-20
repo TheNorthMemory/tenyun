@@ -756,6 +756,8 @@ declare interface KafkaOption {
   DDLTopicName?: string;
   /** 单topic和自定义topic的描述 */
   TopicRules?: TopicRule[];
+  /** 其他附加信息，对于特定数据类型可设置额外参数，比如针对Canal兼容的功能支持："canalOfficialFormat":"on"表示打开Canal兼容功能，默认不带。 */
+  DataOption?: KeyValuePairOption[];
 }
 
 /** 存放配置时的额外信息 */

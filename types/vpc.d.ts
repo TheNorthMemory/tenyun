@@ -5269,6 +5269,8 @@ declare interface DeletePrivateNatGatewayDestinationIpPortTranslationNatRuleResp
 declare interface DeletePrivateNatGatewayRequest {
   /** 私网网关唯一`ID`，形如"intranat-xxxxxxxx"。 */
   NatGatewayId: string;
+  /** 忽略操作风险 */
+  IgnoreOperationRisk?: boolean;
 }
 
 declare interface DeletePrivateNatGatewayResponse {

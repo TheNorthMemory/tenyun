@@ -636,7 +636,7 @@ declare interface DetailDomain {
   Authentication?: Authentication | null;
   /** SEO 优化配置 */
   Seo?: Seo | null;
-  /** 域名封禁状态normal：正常状态overdue：账号欠费导致域名关闭，充值完成后可自行启动加速服务malicious：域名出现恶意行为，强制关闭加速服务ddos：域名被大规模 DDoS 攻击，关闭加速服务idle：域名超过 90 天内无任何操作、数据产生，判定为不活跃域名自动关闭加速服务，可自行启动加速服务unlicensed：域名未备案/备案注销，自动关闭加速服务，备案完成后可自行启动加速服务capping：触发配置的带宽阈值上限readonly：域名存在特殊配置，被锁定 */
+  /** 域名封禁状态normal：正常状态overdue：账号欠费导致域名关闭，充值完成后可自行启动加速服务malicious：域名出现恶意行为，强制关闭加速服务ddos：域名被大规模 DDoS 攻击，关闭加速服务ddos_risk: 域名存在ddos攻击风险idle：域名超过 90 天内无任何操作、数据产生，判定为不活跃域名自动关闭加速服务，可自行启动加速服务unlicensed：域名未备案/备案注销，自动关闭加速服务，备案完成后可自行启动加速服务capping：触发配置的带宽阈值上限readonly：域名存在特殊配置，被锁定 */
   Disable?: string | null;
   /** 访问协议强制跳转配置 */
   ForceRedirect?: ForceRedirect | null;

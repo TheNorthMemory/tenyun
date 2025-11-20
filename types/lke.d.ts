@@ -4461,7 +4461,7 @@ declare interface RateMsgRecordRequest {
   RecordId: string;
   /** 0: 取消前置状态 ; 1: 点赞; 2: 点踩; 注：(1) 评测端不支持点赞、点踩(2) 消息回复类型为欢迎语、并发超限、实时文档，不支持点赞、点踩(3) 点赞或者点踩之后，如果想要取消状态，传值为0即可 */
   Score: number;
-  /** 原因，只有Score参数为2即点踩的时候才需要输入 */
+  /** 支持通过API自定义，字符上限值为20字符；通过API 自定义标签，可以支持平台端用户在不满意问题错误类型中筛选、查看 */
   Reasons?: string[];
   /** 用户自定义反馈内容 */
   FeedbackContent?: string;
