@@ -52,6 +52,32 @@ declare interface Customer {
   EnableGroupMemberDiscovered?: boolean;
 }
 
+/** API安全详情 */
+declare interface DisplayApiSec {
+  /** 主键ID */
+  Id?: number;
+  /** 公共字段 */
+  DisplayToolCommon?: DisplayToolCommon;
+  /** Url */
+  Url?: string;
+  /** Host地址 */
+  Host?: string;
+  /** Path路径 */
+  Path?: string;
+  /** 方法：POST、GET、DELETE等 */
+  Method?: string;
+  /** 修复状态：unrepaired:未修复，repaired:已修复, ignore:已忽略,checking:复测中 */
+  Status?: string;
+  /** 状态码 */
+  Code?: number;
+  /** 请求体 */
+  Request?: string;
+  /** 响应体 */
+  Response?: string;
+  /** 是否风险API */
+  IsRiskAPI?: boolean;
+}
+
 /** 移动资产详情 */
 declare interface DisplayApp {
   /** 主键ID */
@@ -868,6 +894,36 @@ declare interface CreateCustomerResponse {
   RequestId?: string;
 }
 
+declare interface CreateEnterpriseRequest {
+  /** 企业ID */
+  CustomerId: number;
+  /** 名称 */
+  Name: string;
+  /** 上一级企业 */
+  ParentEnterpriseUid?: string;
+  /** 统一社会信用代码 */
+  CreditCode?: string;
+  /** 企业状态:存续、已注销 */
+  Status?: string;
+  /** 注册资本（单位:元） */
+  RegisteredCapital?: string;
+  /** 持股比例 */
+  ShareholdingRatio?: string;
+  /** 法人代表 */
+  LegalPerson?: string;
+  /** 类型 */
+  Type?: string;
+  /** 行业类型 */
+  Industry?: string;
+  /** 子公司ID */
+  EnterpriseUid?: string;
+}
+
+declare interface CreateEnterpriseResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateJobRecordRequest {
   /** 企业ID */
   CustomerId: number;
@@ -884,6 +940,46 @@ declare interface CreateJobRecordRequest {
 declare interface CreateJobRecordResponse {
   /** 任务Id */
   Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeApiSecsRequest {
+  /** 是否聚合数据 */
+  IsAggregation?: boolean;
+  /** 分页偏移 */
+  Offset?: number;
+  /** 分页大小 */
+  Limit?: number;
+  /** 是否显示被忽略的数据 */
+  Ignored?: boolean;
+  /** 更新时间-结束 */
+  UpdateAtEnd?: string;
+  /** 创建时间-结束 */
+  CreateAtEnd?: string;
+  /** 更新时间-开始 */
+  UpdateAtStart?: string;
+  /** 创建时间-开始 */
+  CreateAtStart?: string;
+  /** 数据输出格式：json、file，默认不填为json */
+  Format?: string;
+  /** 是否新增数据 */
+  IsNew?: boolean;
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
+  /** 子公司ID列表 */
+  EnterpriseUidList?: string[];
+  /** 查询数组 */
+  Filters?: Filter[];
+  /** 企业ID */
+  CustomerId?: number;
+}
+
+declare interface DescribeApiSecsResponse {
+  /** 总数 */
+  Total?: number;
+  /** API安全数组 */
+  List?: DisplayApiSec[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2011,8 +2107,12 @@ declare interface Ctem {
   (): Versions;
   /** 创建企业 {@link CreateCustomerRequest} {@link CreateCustomerResponse} */
   CreateCustomer(data: CreateCustomerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomerResponse>;
+  /** 添加企业架构数据 {@link CreateEnterpriseRequest} {@link CreateEnterpriseResponse} */
+  CreateEnterprise(data: CreateEnterpriseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnterpriseResponse>;
   /** 启动测绘 {@link CreateJobRecordRequest} {@link CreateJobRecordResponse} */
   CreateJobRecord(data: CreateJobRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJobRecordResponse>;
+  /** 查看API安全风险 {@link DescribeApiSecsRequest} {@link DescribeApiSecsResponse} */
+  DescribeApiSecs(data?: DescribeApiSecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiSecsResponse>;
   /** 查看移动端资产 {@link DescribeAppsRequest} {@link DescribeAppsResponse} */
   DescribeApps(data?: DescribeAppsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppsResponse>;
   /** 查看主机资产 {@link DescribeAssetsRequest} {@link DescribeAssetsResponse} */

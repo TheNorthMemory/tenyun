@@ -282,6 +282,8 @@ declare interface ServerBaseConfig {
   VpcConf?: VpcConf;
   /** 存储配置信息 */
   VolumesConf?: VolumeConf[];
+  /** 关联镜像密钥 */
+  LinkImageRegistry?: string;
 }
 
 /** 服务基本信息 */

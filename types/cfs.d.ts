@@ -46,6 +46,8 @@ declare interface AutoSnapshotPolicyInfo {
   IntervalDays?: number | null;
   /** 跨地域复制的快照保留时间，单位天 */
   CrossRegionsAliveDays?: number;
+  /** 快照策略标签 */
+  Tags?: TagInfo[];
 }
 
 /** 版本控制-协议详情 */
@@ -607,6 +609,8 @@ declare interface CreateAutoSnapshotPolicyRequest {
   DayOfMonth?: string;
   /** 间隔天数，与DayOfWeek，DayOfMonth 三者选一 */
   IntervalDays?: number;
+  /** 快照策略标签 */
+  ResourceTags?: TagInfo[];
 }
 
 declare interface CreateAutoSnapshotPolicyResponse {

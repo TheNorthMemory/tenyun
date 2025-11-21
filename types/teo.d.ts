@@ -2462,6 +2462,18 @@ declare interface NSDetail {
   VanityNameServersIps?: VanityNameServersIps[];
 }
 
+/** 网络错误日志记录配置项 */
+declare interface NetworkErrorLogging {
+  /** 是否开启网络错误日志记录配置，取值有：on：开启；off：关闭。 */
+  Switch: string;
+}
+
+/** 网络错误日志记录配置项。 */
+declare interface NetworkErrorLoggingParameters {
+  /** 网络错误日志记录配置开关，取值有：on：开启；off：关闭。 */
+  Switch?: string;
+}
+
 /** 当回源 IP 网段发生更新时，该字段会返回下一个版本将要生效的回源 IP 网段，包含与当前生效的回源 IP 网段的对比。 */
 declare interface NextOriginACL {
   /** 版本号。 */
@@ -4104,6 +4116,8 @@ declare interface ZoneConfig {
   ClientIPCountry?: ClientIPCountryParameters | null;
   /** gRPC 协议支持配置。 */
   Grpc?: GrpcParameters | null;
+  /** 网络错误日志记录配置。 */
+  NetworkErrorLogging?: NetworkErrorLoggingParameters | null;
   /** 中国大陆加速优化配置。 */
   AccelerateMainland?: AccelerateMainlandParameters | null;
   /** 标准 Debug 配置。 */
@@ -4170,6 +4184,8 @@ declare interface ZoneSetting {
   ClientIpCountry?: ClientIpCountry | null;
   /** Grpc协议支持配置。 */
   Grpc?: Grpc | null;
+  /** 网络错误日志记录配置。 */
+  NetworkErrorLogging?: NetworkErrorLogging | null;
   /** 图片优化相关配置。 */
   ImageOptimize?: ImageOptimize | null;
   /** 中国大陆加速优化配置。 */
@@ -7515,6 +7531,8 @@ declare interface ModifyZoneSettingRequest {
   ClientIpCountry?: ClientIpCountry;
   /** Grpc 协议支持配置。不填写表示保持原有配置。 */
   Grpc?: Grpc;
+  /** 网络错误日志记录配置。不填写表示保持原有配置。 */
+  NetworkErrorLogging?: NetworkErrorLogging;
   /** 图片优化配置。不填写表示关闭。 */
   ImageOptimize?: ImageOptimize;
   /** 标准 Debug 配置。 */

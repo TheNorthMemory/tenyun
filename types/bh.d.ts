@@ -38,6 +38,36 @@ declare interface AccessWhiteListRule {
   ModifyTime?: string;
 }
 
+/** ioa账号组 */
+declare interface AccountGroup {
+  /** 账号组id */
+  Id?: number;
+  /** 账号组名称 */
+  Name?: string;
+  /** 账号组id路径 */
+  IdPath?: string;
+  /** 账号组名称路径 */
+  NamePath?: string;
+  /** 父账号组id */
+  ParentId?: number;
+  /** 账号组来源 */
+  Source?: number;
+  /** 账号组下用户总数 */
+  UserTotal?: number;
+  /** 是否叶子节点 */
+  IsLeaf?: boolean;
+  /** 账号组导入类型 */
+  ImportType?: string;
+  /** 账号组描述 */
+  Description?: string;
+  /** 父源账号组织ID。使用第三方导入用户源时，记录该分组在源组织架构下的分组ID */
+  ParentOrgId?: string;
+  /** 源账号组织ID。使用第三方导入用户源时，记录该分组在源组织架构下的分组ID */
+  OrgId?: string;
+  /** 账号组是否已经接入，0表示未接入，1表示接入 */
+  Status?: number;
+}
+
 /** 访问权限 */
 declare interface Acl {
   /** 访问权限ID */
@@ -878,6 +908,18 @@ declare interface SessionResult {
   PodName?: string;
 }
 
+/** ioa用户源信息 */
+declare interface SourceType {
+  /** 账号组来源 */
+  Source?: number;
+  /** 账号组来源类型 */
+  Type?: string;
+  /** 账号组来源名称 */
+  Name?: string;
+  /** 区分ioa原来和iam-mini */
+  Target?: string;
+}
+
 /** 资产标签 */
 declare interface TagFilter {
   /** 标签键 */
@@ -948,6 +990,40 @@ declare interface User {
   UserFrom?: number;
   /** ioa同步过来的用户相关信息 */
   IOAUserGroup?: IOAUserGroup;
+}
+
+/** 用户目录信息 */
+declare interface UserDirectory {
+  /** 目录id */
+  Id?: number;
+  /** ioa目录id */
+  DirId?: number;
+  /** ioa目录名称 */
+  DirName?: string;
+  /** ioa关联用户源类型 */
+  Source?: number;
+  /** ioa关联用户源名称 */
+  SourceName?: string;
+  /** 目录包含用户数 */
+  UserTotal?: number;
+  /** 目录接入时间 */
+  CreateTime?: string;
+  /** 目录下的组织细节信息 */
+  UserOrgSet?: UserOrg[];
+}
+
+/** 同步的ioa用户组织信息 */
+declare interface UserOrg {
+  /** ioa用户组织id */
+  OrgId: number;
+  /** ioa用户组织名称 */
+  OrgName: string;
+  /** ioa用户组织id路径 */
+  OrgIdPath: string;
+  /** ioa用户组织名称路径 */
+  OrgNamePath: string;
+  /** ioa用户组织id下的用户数 */
+  UserTotal?: number;
 }
 
 declare interface AccessDevicesRequest {
@@ -1338,6 +1414,38 @@ declare interface CreateResourceResponse {
   RequestId?: string;
 }
 
+declare interface CreateSyncUserTaskRequest {
+  /** 同步用户类型, 1-同步ioa用户 */
+  UserKind: number;
+}
+
+declare interface CreateSyncUserTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateUserDirectoryRequest {
+  /** 目录id */
+  DirId: number;
+  /** 目录名称 */
+  DirName: string;
+  /** ioa分组信息 */
+  UserOrgSet: UserOrg[];
+  /** ioa关联用户源类型 */
+  Source: number;
+  /** ioa关联用户源名称 */
+  SourceName: string;
+  /** 目录包含用户数 */
+  UserCount: number;
+}
+
+declare interface CreateUserDirectoryResponse {
+  /** 目录Id */
+  Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateUserGroupRequest {
   /** 用户组名，最大长度32字符 */
   Name: string;
@@ -1474,6 +1582,16 @@ declare interface DeleteOperationTasksResponse {
   RequestId?: string;
 }
 
+declare interface DeleteUserDirectoryRequest {
+  /** 目录id集合 */
+  IdSet: number[];
+}
+
+declare interface DeleteUserDirectoryResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteUserGroupMembersRequest {
   /** 用户组ID */
   Id: number;
@@ -1564,6 +1682,28 @@ declare interface DescribeAccessWhiteListRulesResponse {
   AllowAny?: boolean;
   /** 是否开启自动添加来源IP, 如果为true, 在开启访问白名单的情况下将自动添加来源IP */
   AllowAuto?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAccountGroupsRequest {
+  /** 是否递归查询，0为不递归，1为递归 */
+  DeepIn?: number;
+  /** 父账号组ID, 默认0,查询根账号组下所有分组 */
+  ParentId?: number;
+  /** 账号组名称，模糊查询 */
+  GroupName?: string;
+  /** 分页查询，每页条数 */
+  PageSize?: number;
+  /** 获取第几页的数据 */
+  PageNum?: number;
+}
+
+declare interface DescribeAccountGroupsResponse {
+  /** 账号组总数 */
+  TotalCount?: number;
+  /** 账号组信息 */
+  AccountGroupSet?: AccountGroup[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1984,6 +2124,34 @@ declare interface DescribeSecuritySettingResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSourceTypesRequest {
+}
+
+declare interface DescribeSourceTypesResponse {
+  /** 认证源总数 */
+  TotalCount?: number;
+  /** 认证源信息 */
+  SourceTypeSet?: SourceType[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUserDirectoryRequest {
+  /** 分页大小 */
+  Limit?: number;
+  /** 分页偏移 */
+  Offset?: number;
+}
+
+declare interface DescribeUserDirectoryResponse {
+  /** 用户目录集 */
+  UserDirSet?: UserDirectory[];
+  /** 用户目录集总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUserGroupMembersRequest {
   /** 用户组ID */
   Id: number;
@@ -2026,6 +2194,18 @@ declare interface DescribeUserGroupsResponse {
   TotalCount?: number;
   /** 用户组列表 */
   GroupSet?: Group[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUserSyncStatusRequest {
+  /** 获取用户同步状态， 1-获取ioa用户同步状态 */
+  UserKind: number;
+}
+
+declare interface DescribeUserSyncStatusResponse {
+  /** 用户同步状态 */
+  Status?: AssetSyncStatus;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2492,6 +2672,18 @@ declare interface ModifyResourceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyUserDirectoryRequest {
+  /** 目录id */
+  Id: number;
+  /** ioa分组信息 */
+  UserOrgSet: UserOrg[];
+}
+
+declare interface ModifyUserDirectoryResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyUserGroupRequest {
   /** 用户组ID */
   Id: number;
@@ -2876,6 +3068,26 @@ declare interface SetLDAPSyncFlagResponse {
   RequestId?: string;
 }
 
+declare interface SyncDevicesToIOARequest {
+  /** 资产ID集合。资产必须已绑定支持IOA功能的堡垒机实例。每次最多同步200个资产。 */
+  DeviceIdSet: number[];
+}
+
+declare interface SyncDevicesToIOAResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SyncUserToIOARequest {
+  /** 需要同步到ioa的本地用户的id集合 */
+  UserIdSet: number[];
+}
+
+declare interface SyncUserToIOAResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UnlockUserRequest {
   /** 用户id */
   IdSet: number[];
@@ -2921,8 +3133,12 @@ declare interface Bh {
   CreateOperationTask(data: CreateOperationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOperationTaskResponse>;
   /** 创建堡垒机实例 {@link CreateResourceRequest} {@link CreateResourceResponse} */
   CreateResource(data: CreateResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceResponse>;
+  /** 创建用户同步任务 {@link CreateSyncUserTaskRequest} {@link CreateSyncUserTaskResponse} */
+  CreateSyncUserTask(data: CreateSyncUserTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSyncUserTaskResponse>;
   /** 新建用户 {@link CreateUserRequest} {@link CreateUserResponse} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
+  /** 新建用户目录 {@link CreateUserDirectoryRequest} {@link CreateUserDirectoryResponse} */
+  CreateUserDirectory(data: CreateUserDirectoryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserDirectoryResponse>;
   /** 新建用户组 {@link CreateUserGroupRequest} {@link CreateUserGroupResponse} */
   CreateUserGroup(data: CreateUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserGroupResponse>;
   /** 删除访问白名单规则 {@link DeleteAccessWhiteListRulesRequest} {@link DeleteAccessWhiteListRulesResponse} */
@@ -2943,6 +3159,8 @@ declare interface Bh {
   DeleteDevices(data: DeleteDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDevicesResponse>;
   /** 删除运维任务 {@link DeleteOperationTasksRequest} {@link DeleteOperationTasksResponse} */
   DeleteOperationTasks(data: DeleteOperationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOperationTasksResponse>;
+  /** 删除用户目录 {@link DeleteUserDirectoryRequest} {@link DeleteUserDirectoryResponse} */
+  DeleteUserDirectory(data: DeleteUserDirectoryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserDirectoryResponse>;
   /** 删除用户组成员 {@link DeleteUserGroupMembersRequest} {@link DeleteUserGroupMembersResponse} */
   DeleteUserGroupMembers(data: DeleteUserGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserGroupMembersResponse>;
   /** 删除用户组 {@link DeleteUserGroupsRequest} {@link DeleteUserGroupsResponse} */
@@ -2953,6 +3171,8 @@ declare interface Bh {
   DeployResource(data: DeployResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeployResourceResponse>;
   /** 查询访问白名单规则列表 {@link DescribeAccessWhiteListRulesRequest} {@link DescribeAccessWhiteListRulesResponse} */
   DescribeAccessWhiteListRules(data?: DescribeAccessWhiteListRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessWhiteListRulesResponse>;
+  /** 获取账号组信息 {@link DescribeAccountGroupsRequest} {@link DescribeAccountGroupsResponse} */
+  DescribeAccountGroups(data?: DescribeAccountGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountGroupsResponse>;
   /** 查询访问权限列表 {@link DescribeAclsRequest} {@link DescribeAclsResponse} */
   DescribeAcls(data?: DescribeAclsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAclsResponse>;
   /** 查询资产自动同步开关 {@link DescribeAssetSyncFlagRequest} {@link DescribeAssetSyncFlagResponse} */
@@ -2987,10 +3207,16 @@ declare interface Bh {
   DescribeResources(data?: DescribeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesResponse>;
   /** 查询安全配置信息 {@link DescribeSecuritySettingRequest} {@link DescribeSecuritySettingResponse} */
   DescribeSecuritySetting(data?: DescribeSecuritySettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecuritySettingResponse>;
+  /** 获取认证源类型列表 {@link DescribeSourceTypesRequest} {@link DescribeSourceTypesResponse} */
+  DescribeSourceTypes(data?: DescribeSourceTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSourceTypesResponse>;
+  /** 获取用户目录 {@link DescribeUserDirectoryRequest} {@link DescribeUserDirectoryResponse} */
+  DescribeUserDirectory(data?: DescribeUserDirectoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDirectoryResponse>;
   /** 查询用户组成员列表 {@link DescribeUserGroupMembersRequest} {@link DescribeUserGroupMembersResponse} */
   DescribeUserGroupMembers(data: DescribeUserGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserGroupMembersResponse>;
   /** 查询用户组列表 {@link DescribeUserGroupsRequest} {@link DescribeUserGroupsResponse} */
   DescribeUserGroups(data?: DescribeUserGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserGroupsResponse>;
+  /** 获取用户同步状态 {@link DescribeUserSyncStatusRequest} {@link DescribeUserSyncStatusResponse} */
+  DescribeUserSyncStatus(data: DescribeUserSyncStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserSyncStatusResponse>;
   /** 查询用户列表 {@link DescribeUsersRequest} {@link DescribeUsersResponse} */
   DescribeUsers(data?: DescribeUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsersResponse>;
   /** 关闭公网访问堡垒机 {@link DisableExternalAccessRequest} {@link DisableExternalAccessResponse} */
@@ -3035,6 +3261,8 @@ declare interface Bh {
   ModifyResource(data: ModifyResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceResponse>;
   /** 修改用户信息 {@link ModifyUserRequest} {@link ModifyUserResponse} */
   ModifyUser(data: ModifyUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserResponse>;
+  /** 修改用户目录 {@link ModifyUserDirectoryRequest} {@link ModifyUserDirectoryResponse} */
+  ModifyUserDirectory(data: ModifyUserDirectoryRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserDirectoryResponse>;
   /** 修改用户组 {@link ModifyUserGroupRequest} {@link ModifyUserGroupResponse} */
   ModifyUserGroup(data: ModifyUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserGroupResponse>;
   /** 会话回放 {@link ReplaySessionRequest} {@link ReplaySessionResponse} */
@@ -3069,6 +3297,10 @@ declare interface Bh {
   SearchTaskResult(data?: SearchTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<SearchTaskResultResponse>;
   /** 设置LDAP 立即同步标记 {@link SetLDAPSyncFlagRequest} {@link SetLDAPSyncFlagResponse} */
   SetLDAPSyncFlag(data?: SetLDAPSyncFlagRequest, config?: AxiosRequestConfig): AxiosPromise<SetLDAPSyncFlagResponse>;
+  /** 同步资产到IOA {@link SyncDevicesToIOARequest} {@link SyncDevicesToIOAResponse} */
+  SyncDevicesToIOA(data: SyncDevicesToIOARequest, config?: AxiosRequestConfig): AxiosPromise<SyncDevicesToIOAResponse>;
+  /** 同步用户到IOA {@link SyncUserToIOARequest} {@link SyncUserToIOAResponse} */
+  SyncUserToIOA(data: SyncUserToIOARequest, config?: AxiosRequestConfig): AxiosPromise<SyncUserToIOAResponse>;
   /** 解锁用户 {@link UnlockUserRequest} {@link UnlockUserResponse} */
   UnlockUser(data: UnlockUserRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockUserResponse>;
 }

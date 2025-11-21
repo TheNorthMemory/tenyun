@@ -450,6 +450,22 @@ declare interface CreateAndroidInstanceADBResponse {
   RequestId?: string;
 }
 
+declare interface CreateAndroidInstanceAcceleratorTokenRequest {
+  /** 用户IP，用户客户端的公网IP，用于就近选择起始加速节点 */
+  UserIP: string;
+  /** 实例 ID 列表。每次请求的实例的上限为 500。 */
+  AndroidInstanceIds: string[];
+}
+
+declare interface CreateAndroidInstanceAcceleratorTokenResponse {
+  /** 加速信息 */
+  AcceleratorInfo?: string;
+  /** 安卓实例错误列表。列表包含有问题的安卓实例 ID 以及发生的错误信息。 */
+  AndroidInstanceErrors?: AndroidInstanceError[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAndroidInstanceImageRequest {
   /** 安卓实例镜像名称 */
   AndroidInstanceImageName: string;
@@ -940,6 +956,18 @@ declare interface DisableAndroidInstancesAppRequest {
 declare interface DisableAndroidInstancesAppResponse {
   /** 错误列表。如果实例操作都成功，则响应没有这个字段；如果有实例操作失败，该字段包含了实例操作的错误信息 */
   AndroidInstanceErrors?: AndroidInstanceError[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DisconnectAndroidInstanceAcceleratorRequest {
+  /** 实例ID */
+  AndroidInstanceId: string;
+  /** 用户 ID。用户 ID 为空，将断开该实例的所有用户连接；用户 ID 不为空，只断开该用户的连接。 */
+  UserId?: string;
+}
+
+declare interface DisconnectAndroidInstanceAcceleratorResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1633,6 +1661,8 @@ declare interface Gs {
   CreateAndroidAppVersion(data: CreateAndroidAppVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidAppVersionResponse>;
   /** 创建安卓实例 ADB 连接 {@link CreateAndroidInstanceADBRequest} {@link CreateAndroidInstanceADBResponse} */
   CreateAndroidInstanceADB(data: CreateAndroidInstanceADBRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidInstanceADBResponse>;
+  /** 创建安卓实例加速Token {@link CreateAndroidInstanceAcceleratorTokenRequest} {@link CreateAndroidInstanceAcceleratorTokenResponse} */
+  CreateAndroidInstanceAcceleratorToken(data: CreateAndroidInstanceAcceleratorTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidInstanceAcceleratorTokenResponse>;
   /** 创建安卓实例镜像 {@link CreateAndroidInstanceImageRequest} {@link CreateAndroidInstanceImageResponse} */
   CreateAndroidInstanceImage(data: CreateAndroidInstanceImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidInstanceImageResponse>;
   /** 创建安卓实例标签 {@link CreateAndroidInstanceLabelRequest} {@link CreateAndroidInstanceLabelResponse} */
@@ -1689,6 +1719,8 @@ declare interface Gs {
   DisableAndroidInstancesApp(data: DisableAndroidInstancesAppRequest, config?: AxiosRequestConfig): AxiosPromise<DisableAndroidInstancesAppResponse>;
   /** 断开安卓实例 {@link DisconnectAndroidInstanceRequest} {@link DisconnectAndroidInstanceResponse} */
   DisconnectAndroidInstance(data: DisconnectAndroidInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DisconnectAndroidInstanceResponse>;
+  /** 断开安卓实例加速节点 {@link DisconnectAndroidInstanceAcceleratorRequest} {@link DisconnectAndroidInstanceAcceleratorResponse} */
+  DisconnectAndroidInstanceAccelerator(data: DisconnectAndroidInstanceAcceleratorRequest, config?: AxiosRequestConfig): AxiosPromise<DisconnectAndroidInstanceAcceleratorResponse>;
   /** 分发安卓实例镜像到宿主机 {@link DistributeAndroidInstanceImageToHostsRequest} {@link DistributeAndroidInstanceImageToHostsResponse} */
   DistributeAndroidInstanceImageToHosts(data: DistributeAndroidInstanceImageToHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DistributeAndroidInstanceImageToHostsResponse>;
   /** 分发文件到安卓实例 {@link DistributeFileToAndroidInstancesRequest} {@link DistributeFileToAndroidInstancesResponse} */

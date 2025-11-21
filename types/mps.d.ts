@@ -156,6 +156,8 @@ declare interface AdaptiveDynamicStreamingTaskInput {
   Definition: number;
   /** 水印列表，支持多张图片或文字水印，最大可支持 10 张。 */
   WatermarkSet?: WatermarkInput[];
+  /** 数字水印参数 */
+  BlindWatermark?: BlindWatermarkInput | null;
   /** 转自适应码流后文件的目标存储，不填则继承上层的 OutputStorage 值。 */
   OutputStorage?: TaskOutputStorage | null;
   /** 转自适应码流后，manifest 文件的输出路径，可以为相对路径或者绝对路径。若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。相对路径示例：文件名_{变量名}.{format}文件名.{format}绝对路径示例：/自定义路径/文件名_{变量名}.{format}如果不填，则默认为相对路径：{inputName}_adaptiveDynamicStreaming_{definition}.{format}。 */
@@ -1820,6 +1822,12 @@ declare interface BlindWatermarkEmbedInfo {
   EmbedText?: string | null;
 }
 
+/** 媒体处理任务中的数字水印参数类型 */
+declare interface BlindWatermarkInput {
+  /** 数字水印模板ID */
+  Definition: number;
+}
+
 /** 智能分类任务控制参数 */
 declare interface ClassificationConfigureInfo {
   /** 智能分类任务开关，可选值：ON：开启智能分类任务；OFF：关闭智能分类任务。 */
@@ -3252,10 +3260,12 @@ declare interface HighlightSegmentItem {
 declare interface ImageAreaBoxInfo {
   /** 图片框选区域类型，可选值：logo：图标；text：文字；默认值：logo。 */
   Type?: string | null;
-  /** 图片框选区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。示例值：[101, 85, 111, 95] */
+  /** 图片框选区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。注意：该字段最大值为4096。示例值：[101, 85, 111, 95] */
   AreaCoordSet?: number[] | null;
-  /** 图片框选区域坐标，[x1, y1, x2, y2]，即左上角坐标、右下角坐标， 当AreaCoordSet未指定时生效。- [0.1, 0.1, 0.3, 0.3] : 表示比例 （数值小于1）- [50, 50, 350, 280] : 表示像素 （数值大于等于1） */
+  /** 图片框选区域坐标，[x1, y1, x2, y2]，即左上角坐标、右下角坐标， 当AreaCoordSet未指定时生效。当表示像素时，该字段最大值为4096。- [0.1, 0.1, 0.3, 0.3] : 表示比例 （数值小于1）- [50, 50, 350, 280] : 表示像素 （数值大于等于1） */
   BoundingBox?: number[] | null;
+  /** BoundingBox字段单位。设置为0时，按照该字段规则自动选择单位；设置为1时，单位为比例；设置为2时，单位为像素。 */
+  BoundingBoxUnitType?: number;
 }
 
 /** 图片降噪配置 */
@@ -6124,6 +6134,8 @@ declare interface TranscodeTaskInput {
   OverrideParameter?: OverrideTranscodeParameter | null;
   /** 水印列表，支持多张图片或文字水印，最大可支持 10 张。 */
   WatermarkSet?: WatermarkInput[];
+  /** 数字水印参数。 */
+  BlindWatermark?: BlindWatermarkInput | null;
   /** 马赛克列表，最大可支持 10 张。 */
   MosaicSet?: MosaicInput[];
   /** 转码后的视频的起始时间偏移，单位：秒。不填或填0，表示转码后的视频从原始视频的起始位置开始；当数值大于0时（假设为 n），表示转码后的视频从原始视频的第 n 秒位置开始；当数值小于0时（假设为 -n），表示转码后的视频从原始视频结束 n 秒前的位置开始。 */
@@ -9165,6 +9177,10 @@ declare interface ProcessImageRequest {
   OutputDir?: string;
   /** 输出路径，可以为相对路径或者绝对路径。若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。相对路径示例：文件名_{变量名}.{format}文件名.{format}绝对路径示例：/自定义路径/文件名_{变量名}.{format}如果不填，则默认为相对路径：{inputName}.{format}。 */
   OutputPath?: string;
+  /** 图片处理模板唯一标识。 */
+  Definition?: number;
+  /** 资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。 */
+  ResourceId?: string;
   /** 图片处理参数。 */
   ImageTask?: ImageTaskInput;
 }

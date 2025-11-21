@@ -1506,6 +1506,22 @@ declare interface DescribeInstanceParamsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceSSLRequest {
+  /** 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同 */
+  InstanceId: string;
+}
+
+declare interface DescribeInstanceSSLResponse {
+  /** SSL开启状态。0为关闭，1为开启 */
+  Status?: number | null;
+  /** 证书过期时间，格式为2023-05-01 12:00:00 */
+  ExpiredTime?: string | null;
+  /** 证书下载链接 */
+  CertUrl?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLogDownloadTasksRequest {
   /** 实例 ID */
   InstanceId: string;
@@ -1780,6 +1796,26 @@ declare interface InquirePriceRenewDBInstancesRequest {
 declare interface InquirePriceRenewDBInstancesResponse {
   /** 价格 */
   Price?: DBInstancePrice;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface InstanceEnableSSLRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 配置是否要开启SSL访问。- true：开启。- false：关闭。 */
+  Enable: boolean;
+}
+
+declare interface InstanceEnableSSLResponse {
+  /** SSL开启状态。- 0：关闭。- 1：开启。 */
+  Status?: number | null;
+  /** 证书文件过期时间，格式为：2023-05-01 12:00:00。 */
+  ExpiredTime?: string | null;
+  /** 证书文件的下载链接。 */
+  CertUrl?: string | null;
+  /** 流程id */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2619,6 +2655,8 @@ declare interface Mongodb {
   DescribeDetailedSlowLogs(data: DescribeDetailedSlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDetailedSlowLogsResponse>;
   /** 获取当前实例可修改的参数列表 {@link DescribeInstanceParamsRequest} {@link DescribeInstanceParamsResponse} */
   DescribeInstanceParams(data: DescribeInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamsResponse>;
+  /** 查看实例SSL开启状态 {@link DescribeInstanceSSLRequest} {@link DescribeInstanceSSLResponse} */
+  DescribeInstanceSSL(data: DescribeInstanceSSLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSSLResponse>;
   /** 日志下载任务查询 {@link DescribeLogDownloadTasksRequest} {@link DescribeLogDownloadTasksResponse} */
   DescribeLogDownloadTasks(data: DescribeLogDownloadTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogDownloadTasksResponse>;
   /** 日志查询接口 {@link DescribeMongodbLogsRequest} {@link DescribeMongodbLogsResponse} */
@@ -2647,6 +2685,8 @@ declare interface Mongodb {
   InquirePriceModifyDBInstanceSpec(data: InquirePriceModifyDBInstanceSpecRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceModifyDBInstanceSpecResponse>;
   /** 续费实例询价 {@link InquirePriceRenewDBInstancesRequest} {@link InquirePriceRenewDBInstancesResponse} */
   InquirePriceRenewDBInstances(data: InquirePriceRenewDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRenewDBInstancesResponse>;
+  /** 设置实例SSL状态 {@link InstanceEnableSSLRequest} {@link InstanceEnableSSLResponse} */
+  InstanceEnableSSL(data: InstanceEnableSSLRequest, config?: AxiosRequestConfig): AxiosPromise<InstanceEnableSSLResponse>;
   /** 隔离云数据库实例 {@link IsolateDBInstanceRequest} {@link IsolateDBInstanceResponse} */
   IsolateDBInstance(data: IsolateDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDBInstanceResponse>;
   /** 终止数据库实例特定操作 {@link KillOpsRequest} {@link KillOpsResponse} */

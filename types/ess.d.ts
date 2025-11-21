@@ -358,6 +358,18 @@ declare interface ComponentLimit {
   ComponentValue?: string[];
 }
 
+/** 合同审查个性化参数，用于控制页面的展示内容 */
+declare interface ContractReviewWebUrlOption {
+  /** 禁用暂存。 默认 false，设置为 true 会隐藏界面上的临时保存按钮 */
+  DisableTemporaryStore?: boolean;
+  /** 禁用导出。默认 false，设置为 true 会隐藏界面上的导出按钮 */
+  DisableExport?: boolean;
+  /** 禁用重新审查。默认 false，设置为 true 会隐藏界面上的重新审查按钮 */
+  DisableReviewAgain?: boolean;
+  /** 禁用二维码分享。默认 false，设置为 true 会隐藏界面上的分享二维码 */
+  DisableWxQrcode?: boolean;
+}
+
 /** 创建合同个性化参数 */
 declare interface CreateFlowOption {
   /** 是否允许修改发起合同时确认弹窗的合同信息（合同名称、合同类型、签署截止时间），若不允许编辑，则表单字段将被禁止输入。true：允许编辑false：不允许编辑（默认值） */
@@ -1967,9 +1979,9 @@ declare interface CreateBatchAdminChangeInvitationsUrlRequest {
   NewAdminIdCardType?: string;
   /** 组织机构要变更的超管证件号。 在超管变更流程中，必须是超管本人进行操作，需要更当前操作人的证件号保持一致。超管手机号和超管证件号 二选一必填。 */
   NewAdminIdCardNumber?: string;
-  /** 通知方式。 NONE（默认） SMS - 如果使用这个方式，则会给即将变更的超管发信息。注意：发送信息的手机号，是用户传递的手机号。如果用户同时传递了证件号，手机号会用用户在电子签注册的手机号进行覆盖。 */
+  /** 通知方式。 NONE（默认） SMS - 如果使用这个方式，则会给即将变更的超管发信息。注意：发送信息的手机号，是用户传递的手机号。如果用户同时传递了证件号，手机号会被用户在电子签注册的手机号进行覆盖。 */
   NotifyType?: string;
-  /** 要跳转的链接类型 **HTTP**：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型 ，此时返回长链 (默认类型)**HTTP_SHORT_URL**：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型，此时返回短链**APP**： 第三方APP或小程序跳转电子签小程序的path, APP或者小程序跳转适合此类型**QR_CODE**： 跳转电子签小程序的http_url的二维码形式, 可以在页面展示适合此类型 */
+  /** 要跳转的链接类型 **HTTP**：跳转电子签小程序的http_url，短信通知或者H5跳转适合此类型 ，此时返回长链 （默认类型）。**HTTP_SHORT_URL**：跳转电子签小程序的http_url，短信通知或者H5跳转适合此类型，此时返回短链。**APP**： 第三方APP或小程序跳转电子签小程序的path，APP或者小程序跳转适合此类型。**QR_CODE**： 跳转电子签小程序的http_url的二维码形式，可以在页面展示适合此类型。 */
   Endpoint?: string;
 }
 
@@ -2187,7 +2199,7 @@ declare interface CreateBatchSignUrlRequest {
   NotifyType?: string;
   /** 批量签署的合同流程ID数组，此参数必传。注: `在调用此接口时，请确保合同流程均为本企业发起，且合同数量不超过100个。` */
   FlowIds?: string[];
-  /** 目标签署人的企业名称，签署人如果是企业员工身份，需要传此参数。注：请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。请确保此企业已完成腾讯电子签企业认证。 */
+  /** 目标签署人的企业名称，签署人如果是企业员工身份，需要传此参数。注：请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。 */
   OrganizationName?: string;
   /** 是否直接跳转至合同内容页面进行签署**false**: 会跳转至批量合同流程的列表, 点击需要批量签署合同后进入合同内容页面进行签署(默认)**true**: 跳过合同流程列表, 直接进入合同内容页面进行签署 */
   JumpToDetail?: boolean;
@@ -2271,6 +2283,8 @@ declare interface CreateContractReviewWebUrlRequest {
   ResourceId?: string;
   /** 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 1024长度。在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的[回调通知](https://qian.tencent.com/developers/company/callback_types_v2)模块。 */
   UserData?: string;
+  /** 个性化参数，用于控制页面展示内容 */
+  Option?: ContractReviewWebUrlOption;
 }
 
 declare interface CreateContractReviewWebUrlResponse {

@@ -494,6 +494,36 @@ declare interface ElectronicFlightTicketFull {
   InvoiceStatus?: string;
 }
 
+/** 其他发票 */
+declare interface ElectronicTollSummary {
+  /** 发票名称 */
+  Title?: string;
+  /** 金额 */
+  Total?: string;
+  /** 列表 */
+  Items?: ElectronicTollSummaryItem[];
+  /** 表格 */
+  TableItems?: ElectronicTollSummaryList[];
+  /** 发票日期 */
+  Date?: string;
+}
+
+/** ElectronicTollSummaryItem */
+declare interface ElectronicTollSummaryItem {
+  /** 票面key值 */
+  Name?: string;
+  /** 票面value值 */
+  Value?: string;
+  /** 字段所在行，下标从0开始，非行字段或未能识别行号的返回-1 */
+  Row?: number;
+}
+
+/** 其他票Table */
+declare interface ElectronicTollSummaryList {
+  /** 列表 */
+  Items?: ElectronicTollSummaryItem[];
+}
+
 /** 全电发票（铁路电子客票） */
 declare interface ElectronicTrainTicket {
   /** 购方名称 */
@@ -1912,6 +1942,8 @@ declare interface SingleInvoiceItem {
   MotorVehicleSaleInvoiceElectronic?: MotorVehicleSaleInvoice | null;
   /** 二手车销售统一发票（电子） */
   UsedCarPurchaseInvoiceElectronic?: UsedCarPurchaseInvoice | null;
+  /** 通行费电子票据汇总单 */
+  ElectronicTollSummary?: ElectronicTollSummary | null;
 }
 
 /** 门头照识别结果 */

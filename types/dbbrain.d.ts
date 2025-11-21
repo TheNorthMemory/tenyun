@@ -246,7 +246,7 @@ declare interface ContactItem {
 
 /** 实例诊断历史事件 */
 declare interface DiagHistoryEventItem {
-  /** 诊断类型。 */
+  /** 诊断类型。支持值包括"高危账号","自增键耗尽","连接性检查","CPU利用率","死锁","全表扫描","高并发/压力请求","预编译语句过多","内存利用率","Metadata lock","磁盘超限","内存超限","只读锁","只读实例剔除","行锁","活跃会话","慢SQL","数据库快照","磁盘空间利用率","执行计划变化","主从切换","Table open cache命中率低","大表","事务未提交","事务导致复制延迟"等。 */
   DiagType?: string;
   /** 结束时间。 */
   EndTime?: string;
@@ -580,6 +580,38 @@ declare interface MongoDBIndex {
   IndexesToBuild?: IndexesToBuild[];
   /** 无效索引列表。 */
   IndexesToDrop?: IndexesToDrop[];
+}
+
+/** mongodb会话详情 */
+declare interface MongoDBProcessItem {
+  /** 是否内部IP */
+  IsInternalIp?: boolean | null;
+  /** 语句类型 */
+  Type?: string | null;
+  /** 语句详情 */
+  Command?: string | null;
+  /** 节点ID */
+  InstanceNodeId?: string | null;
+  /** 客户端ip */
+  Host?: string | null;
+  /** 运行时间 */
+  Time?: number | null;
+  /** 会话ID */
+  ID?: number | null;
+  /** 分片名称 */
+  ShardName?: string | null;
+  /** 用户 */
+  User?: string | null;
+  /** 数据库 */
+  DB?: string | null;
+}
+
+/** mongodb 会话列表 返回数据结构 */
+declare interface MongoDBProcessList {
+  /** 列名字段 */
+  Names?: string[] | null;
+  /** 接口返回数据详情 */
+  Data?: MongoDBProcessItem[] | null;
 }
 
 /** 监控数据（浮点型） */
@@ -1771,11 +1803,11 @@ declare interface DescribeDBAutonomyEventsResponse {
 }
 
 declare interface DescribeDBDiagEventRequest {
-  /** 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。 */
+  /** 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。查询TDSQL MySQL分布式实例:Instanceld：填写集群ID&Shard实例ID，如：dcdbt-157xxxk&shard-qxxxx */
   InstanceId: string;
   /** 事件 ID 。通过“获取实例诊断历史[DescribeDBDiagHistory](https://cloud.tencent.com/document/product/1130/39559) ”获取。 */
   EventId?: number;
-  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，"redis" - 云数据库 Redis，默认为"mysql"。 */
+  /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"mariadb"-mariadb;"cynosdb"-TDSQL-C for MySQL ;"dcdb"-TDSQL MySQL ;"redis" - 云数据库 Redis，默认为"mysql"。 */
   Product?: string;
 }
 
@@ -1809,13 +1841,13 @@ declare interface DescribeDBDiagEventResponse {
 declare interface DescribeDBDiagEventsRequest {
   /** 开始时间，如“2021-05-27 00:00:00”，支持的最早查询时间为当前时间的前30天。 */
   StartTime: string;
-  /** 结束时间，如“2021-05-27 01:00:00”，结束时间与开始时间的间隔最大可为7天。 */
+  /** 结束时间，如“2021-05-27 01:00:00”，支持的最早查询时间为当前时间的前30天。 */
   EndTime: string;
   /** 风险等级列表，取值按影响程度从高至低分别为：1 - 致命、2 -严重、3 - 告警、4 - 提示、5 -健康。 */
   Severities?: number[];
-  /** 实例ID列表。 */
+  /** 实例ID列表。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。查询TDSQL MySQL分布式实例:Instanceld：填写集群ID&Shard实例ID，如：dcdbt-157xxxk&shard-qxxxx */
   InstanceIds?: string[];
-  /** 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"redis" - 云数据库 Redis，默认为"mysql"。 */
+  /** 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"redis" - 云数据库 Redis，"mariadb"-数据库mariadb 默认为"mysql"。 */
   Product?: string;
   /** 偏移量，默认0。 */
   Offset?: number;
@@ -1833,13 +1865,13 @@ declare interface DescribeDBDiagEventsResponse {
 }
 
 declare interface DescribeDBDiagHistoryRequest {
-  /** 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。 */
+  /** 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。查询TDSQL MySQL分布式实例:Instanceld：填写集群ID&Shard实例ID，如：dcdbt-157xxxk&shard-qxxxx */
   InstanceId: string;
   /** 开始时间，如“2019-09-10 12:13:14”。结束时间与开始时间的间隔最大可为2天。 */
   StartTime: string;
   /** 结束时间，如“2019-09-11 12:13:14”，结束时间与开始时间的间隔最大可为2天。 */
   EndTime: string;
-  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，默认为"mysql"。 */
+  /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"mariadb"-mariadb;"cynosdb"-TDSQL-C for MySQL ;"dcdb"-TDSQL MySQL ;"redis" - 云数据库 Redis，默认为"mysql"。 */
   Product?: string;
 }
 
@@ -2094,6 +2126,32 @@ declare interface DescribeMetricTopProxiesRequest {
 declare interface DescribeMetricTopProxiesResponse {
   /** 命令列表 */
   Data?: RedisMetricTopProxiesData[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMongoDBProcessListRequest {
+  /** 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。 */
+  InstanceId: string;
+  /** 服务产品类型，支持值：mongodb */
+  Product: string;
+  /** 线程的ID，用于筛选线程列表。 */
+  ID?: number;
+  /** 线程的操作主机地址，用于筛选线程列表。 */
+  Host?: string;
+  /** 线程的操作数据库，用于筛选线程列表,如果是多个 使用 ',' 分割 */
+  DB?: string;
+  /** 命令类型 ,如果是多个 使用 ',' 分割 */
+  Type?: string;
+  /** 线程的操作时长最小值，单位秒，用于筛选操作时长大于该值的线程列表。 */
+  Time?: number;
+  /** 返回数量，默认20。 */
+  Limit?: number;
+}
+
+declare interface DescribeMongoDBProcessListResponse {
+  /** 数据 */
+  ProcessList?: MongoDBProcessList | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4233,6 +4291,8 @@ declare interface Dbbrain {
   DescribeMailProfile(data: DescribeMailProfileRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMailProfileResponse>;
   /** 获取Redis Proxy 指标 {@link DescribeMetricTopProxiesRequest} {@link DescribeMetricTopProxiesResponse} */
   DescribeMetricTopProxies(data: DescribeMetricTopProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMetricTopProxiesResponse>;
+  /** 查询MongoDB实时会话列表 {@link DescribeMongoDBProcessListRequest} {@link DescribeMongoDBProcessListResponse} */
+  DescribeMongoDBProcessList(data: DescribeMongoDBProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMongoDBProcessListResponse>;
   /** 查询实时线程列表 {@link DescribeMySqlProcessListRequest} {@link DescribeMySqlProcessListResponse} */
   DescribeMySqlProcessList(data: DescribeMySqlProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMySqlProcessListResponse>;
   /** 查询实例无主键表 {@link DescribeNoPrimaryKeyTablesRequest} {@link DescribeNoPrimaryKeyTablesResponse} */

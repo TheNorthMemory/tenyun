@@ -3084,6 +3084,8 @@ declare interface CreateTopicRequest {
   RetentionBytes?: number;
   /** 标签列表 */
   Tags?: Tag[];
+  /** 消息保存的时间类型:CreateTime/LogAppendTime */
+  LogMsgTimestampType?: string;
 }
 
 declare interface CreateTopicResponse {
@@ -3331,6 +3333,16 @@ declare interface DescribeAclRuleRequest {
 declare interface DescribeAclRuleResponse {
   /** 返回的AclRule结果集对象 */
   Result?: AclRuleResp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCkafkaVersionRequest {
+  /** ckafka集群实例Id */
+  InstanceId: string;
+}
+
+declare interface DescribeCkafkaVersionResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3658,6 +3670,8 @@ declare interface DescribeRouteRequest {
   InstanceId: string;
   /** 路由Id */
   RouteId?: number;
+  /** 是否显示主路由，true时会在返回原路由列表的基础上,再额外展示实例创建时的主路由信息(且不被InternalFlag/UsedFor等参数过滤影响) */
+  MainRouteFlag?: boolean;
 }
 
 declare interface DescribeRouteResponse {
@@ -4101,6 +4115,10 @@ declare interface InstanceAttributesResponse {
   RemainingTopics?: number;
   /** 动态硬盘扩容策略 */
   DynamicDiskConfig?: DynamicDiskConfig;
+  /** 系统维护时间 */
+  SystemMaintenanceTime?: string;
+  /** 实例级别消息最大大小 */
+  MaxMessageByte?: number;
   /** 实例计费类型 POSTPAID_BY_HOUR 按小时付费; PREPAID 包年包月 */
   InstanceChargeType?: string;
   /** 是否开启弹性带宽白名单 1:已开启弹性带宽白名单;0:未开启弹性带宽白名单; */
@@ -4424,6 +4442,8 @@ declare interface ModifyTopicAttributesRequest {
   QuotaConsumerByteRate?: number;
   /** topic副本数 最小值 1,最大值 3 */
   ReplicaNum?: number;
+  /** 消息保存的时间类型：CreateTime/LogAppendTime */
+  LogMsgTimestampType?: string;
 }
 
 declare interface ModifyTopicAttributesResponse {
@@ -4541,6 +4561,26 @@ declare interface TopicDetailResponse {
   TopicList?: TopicDetail[];
   /** 符合条件的所有主题详情数量 */
   TotalCount?: number;
+}
+
+declare interface UpgradeBrokerVersionRequest {
+  /** ckafka集群实例Id */
+  InstanceId: string;
+  /** 1.平滑升配.2.垂直升配 */
+  Type: number;
+  /** 版本号 */
+  SourceVersion: string;
+  /** 版本号 */
+  TargetVersion: string;
+  /** 延迟时间 */
+  DelayTimeStamp?: string;
+}
+
+declare interface UpgradeBrokerVersionResponse {
+  /** 升配结果 */
+  Result?: JgwOperateResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface UserResponse {
@@ -4662,6 +4702,8 @@ declare interface Ckafka {
   DescribeACL(data: DescribeACLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeACLResponse>;
   /** 查询ACL规则列表 {@link DescribeAclRuleRequest} {@link DescribeAclRuleResponse} */
   DescribeAclRule(data: DescribeAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAclRuleResponse>;
+  /** 查询实例版本信息 {@link DescribeCkafkaVersionRequest} {@link DescribeCkafkaVersionResponse} */
+  DescribeCkafkaVersion(data: DescribeCkafkaVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCkafkaVersionResponse>;
   /** 查看可用区列表 {@link DescribeCkafkaZoneRequest} {@link DescribeCkafkaZoneResponse} */
   DescribeCkafkaZone(data?: DescribeCkafkaZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCkafkaZoneResponse>;
   /** 查询Datahub连接源 {@link DescribeConnectResourceRequest} {@link DescribeConnectResourceResponse} */
@@ -4766,6 +4808,8 @@ declare interface Ckafka {
   ResumeDatahubTask(data: ResumeDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeDatahubTaskResponse>;
   /** HTTP发送消息 {@link SendMessageRequest} {@link SendMessageResponse} */
   SendMessage(data: SendMessageRequest, config?: AxiosRequestConfig): AxiosPromise<SendMessageResponse>;
+  /** broker版本升级接口 {@link UpgradeBrokerVersionRequest} {@link UpgradeBrokerVersionResponse} */
+  UpgradeBrokerVersion(data: UpgradeBrokerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeBrokerVersionResponse>;
 }
 
 export declare type Versions = ["2019-08-19"];
