@@ -251,9 +251,11 @@ declare interface GooseFSOptionOverview {
 /** 描述GooseFSx挂载信息 */
 declare interface GooseFSxOption {
   /** 文件系统master的ip和端口列表。 */
-  Masters: string[] | null;
+  Masters?: string[];
   /** 文件系统的本地挂载路径。GooseFSx目前只支持挂载在/goosefsx/{文件系统ID}_proxy/目录下。 */
-  LocalPath: string | null;
+  LocalPath?: string;
+  /** GooseFSx文件系统ID 文件系统ID通过调用接口[DescribeFileSystems](https://cloud.tencent.com/document/api/1424/95789)获取。 */
+  FileSystemId?: string;
 }
 
 /** GooseFSx存储选项概览信息。 */

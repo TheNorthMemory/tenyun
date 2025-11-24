@@ -2033,6 +2033,8 @@ declare interface CreateBatchContractReviewTaskRequest {
   Comment?: string;
   /** 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 1024长度。在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的[回调通知](https://qian.tencent.com/developers/company/callback_types_v2)模块。 */
   UserData?: string;
+  /** 启用附加通用风险审查清单。默认为启用状态可选值如下：- 1: 启用系统提供的附加通用风险审查清单- 2:不启用系统提供的附加通用风险审查清单 */
+  EnableGeneralChecklist?: number;
 }
 
 declare interface CreateBatchContractReviewTaskResponse {

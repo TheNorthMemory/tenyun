@@ -1339,7 +1339,7 @@ declare interface Apm {
   ModifyApmSampleConfig(data: ModifyApmSampleConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApmSampleConfigResponse>;
   /** 修改应用配置信息 {@link ModifyGeneralApmApplicationConfigRequest} {@link ModifyGeneralApmApplicationConfigResponse} */
   ModifyGeneralApmApplicationConfig(data: ModifyGeneralApmApplicationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGeneralApmApplicationConfigResponse>;
-  /** 销毁业务系统 {@link TerminateApmInstanceRequest} {@link TerminateApmInstanceResponse} */
+  /** 销毁APM业务系统 {@link TerminateApmInstanceRequest} {@link TerminateApmInstanceResponse} */
   TerminateApmInstance(data: TerminateApmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateApmInstanceResponse>;
 }
 

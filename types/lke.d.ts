@@ -2262,6 +2262,8 @@ declare interface WorkflowRunDetail {
   MainModelName?: string;
   /** API参数配置 */
   CustomVariables?: CustomVariable[];
+  /** 工作流的流程图 */
+  WorkflowGraph?: string;
 }
 
 /** 工作流运行节点信息 */
@@ -3343,6 +3345,10 @@ declare interface DescribeWorkflowRunRequest {
   AppBizId: string;
   /** 工作流运行实例ID */
   WorkflowRunId: string;
+  /** 指定的子工作流对应的NodePath。格式：`[[].]*[]`- 此路径用于定位一个具体的工作流实例（Workflow Run），可以是主工作流实例或某个子工作流节点产生的子实例。- 路径由点号（.）分隔的节点标识符组成，每个节点标识符格式为 `节点ID[实例索引]`。- **节点ID (node_id)**：子工作流所属的节点的ID。- **实例索引 (index)**：“实例索引” 在工作流节点的时候为空，循环、批处理节点非空，从1开始。示例：- "" 或 不设置 -> 查询主工作流实例 (父工作流)- "node_id_a" -> 查询由主工作流中工作流节点`node_id_a`对应的子工作流实例- "node_id_a.node_id_b[1]" -> 查询工作流节点`node_id_a`对应的子工作流的循环节点node_id_b的第1轮循环的子工作流运行状态 */
+  SubWorkflowNodePath?: string;
+  /** 是否需要返回工作流的流程图配置 */
+  IncludeWorkflowGraph?: boolean;
 }
 
 declare interface DescribeWorkflowRunResponse {
@@ -3350,6 +3356,8 @@ declare interface DescribeWorkflowRunResponse {
   WorkflowRun?: WorkflowRunDetail;
   /** 节点列表 */
   NodeRuns?: NodeRunBase[];
+  /** 子工作流对应的NodePath */
+  SubWorkflowNodePath?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

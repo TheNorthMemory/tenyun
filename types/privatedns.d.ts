@@ -268,6 +268,54 @@ declare interface RecordInfo {
   Remark?: string;
 }
 
+/** 私有域解析记录信息 */
+declare interface RecordsInfo {
+  /** 记录类型，可选的记录类型为："A", "AAAA", "CNAME", "MX", "TXT", "PTR" */
+  RecordType: string;
+  /** 子域名，例如 "www", "m", "@" */
+  SubDomain: string;
+  /** 记录值，例如 IP：192.168.10.2，CNAME：cname.qcloud.com.，MX：mail.qcloud.com. */
+  RecordValue: string;
+  /** 记录权重，值为1-100 */
+  Weight?: number | null;
+  /** 记录缓存时间，数值越小生效越快，取值1-86400s, 默认 600 */
+  TTL?: number | null;
+  /** MX优先级：记录类型为MX时必填。取值范围：5,10,15,20,30,40,50 */
+  MX?: number | null;
+}
+
+/** 批量添加解析记录返回结果 */
+declare interface RecordsInfoResult {
+  /** 私有域ID */
+  ZoneId: string;
+  /** 私有域域名 */
+  Domain: string;
+  /** 私有域解析记录创建结果 */
+  RecordsStatus: RecordsInfoStatus[];
+  /** 备注 */
+  Remark: string | null;
+}
+
+/** 批量添加解析记录结果 */
+declare interface RecordsInfoStatus {
+  /** 记录类型，可选的记录类型为："A", "AAAA", "CNAME", "MX", "TXT", "PTR" */
+  RecordType: string;
+  /** 子域名，例如 "www", "m", "@" */
+  SubDomain: string;
+  /** 记录值，例如 IP：192.168.10.2，CNAME：cname.qcloud.com.，MX：mail.qcloud.com. */
+  RecordValue: string;
+  /** 记录权重，值为1-100 */
+  Weight: number | null;
+  /** 记录缓存时间，数值越小生效越快，取值1-86400s, 默认 600 */
+  TTL: number | null;
+  /** MX优先级：记录类型为MX时必填。取值范围：5,10,15,20,30,40,50 */
+  MX: number | null;
+  /** 是否添加成功：0是失败，1是成功 */
+  Status: number | null;
+  /** 若status为0，则此处为失败原因描述 */
+  Message: string | null;
+}
+
 /** 终端节点信息 */
 declare interface SubnetIpInfo {
   /** 子网ID */
@@ -302,6 +350,16 @@ declare interface VpcInfo {
   UniqVpcId: string;
   /** Vpc所属地区: ap-guangzhou, ap-shanghai */
   Region: string;
+}
+
+/** 创建私有域成功后返回私有域信息 */
+declare interface ZoneInfo {
+  /** 私有域ID */
+  ZoneId: string | null;
+  /** 私有域域名 */
+  Domain: string;
+  /** 失败原因 */
+  Reason: string | null;
 }
 
 declare interface AddSpecifyPrivateZoneVpcRequest {
@@ -392,6 +450,28 @@ declare interface CreatePrivateDNSAccountRequest {
 }
 
 declare interface CreatePrivateDNSAccountResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreatePrivateZoneListRequest {
+  /** 私有域域名数组，域名格式必须是标准的TLD */
+  Domains: string[];
+}
+
+declare interface CreatePrivateZoneListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreatePrivateZoneRecordListRequest {
+  /** 私有域ID数组 */
+  ZoneIds: string[];
+  /** 私有域解析记录数据 */
+  RecordsInfo: RecordsInfo[];
+}
+
+declare interface CreatePrivateZoneRecordListResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -552,9 +632,9 @@ declare interface DescribeAccountVpcListRequest {
 }
 
 declare interface DescribeAccountVpcListResponse {
-  /** VPC数量 */
+  /** 关联账号VPC数量 */
   TotalCount?: number;
-  /** VPC 列表 */
+  /** 关联账号VPC 列表 */
   VpcSet?: AccountVpcInfoOut[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -576,6 +656,32 @@ declare interface DescribeAuditLogRequest {
 declare interface DescribeAuditLogResponse {
   /** 操作日志列表 */
   Data?: AuditLog[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCreateRecordListResultRequest {
+  /** 私有域ID数组 */
+  ZoneIds: string[];
+  /** 私有域解析记录数据 */
+  RecordsInfo: RecordsInfo[];
+}
+
+declare interface DescribeCreateRecordListResultResponse {
+  /** 批量添加解析记录结果 */
+  RecordsResult?: RecordsInfoResult[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCreateZoneListResultRequest {
+  /** 私有域域名数组，域名格式必须是标准的TLD */
+  Domains: string[];
+}
+
+declare interface DescribeCreateZoneListResultResponse {
+  /** 私有域域名和zoneId */
+  ZonesInfo?: ZoneInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -633,7 +739,7 @@ declare interface DescribeInboundEndpointListRequest {
   Offset?: number;
   /** 分页限制数目， 最大100，默认20 */
   Limit?: number;
-  /** 过滤参数，支持EndPointName，EndpointName，EndpointId */
+  /** 过滤参数，支持EndPointName，EndpointName，EndPointId */
   Filters?: Filter[];
 }
 
@@ -917,8 +1023,12 @@ declare interface Privatedns {
   CreatePrivateDNSAccount(data: CreatePrivateDNSAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateDNSAccountResponse>;
   /** 创建私有域 {@link CreatePrivateZoneRequest} {@link CreatePrivateZoneResponse} */
   CreatePrivateZone(data: CreatePrivateZoneRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateZoneResponse>;
+  /** 批量创建私有域 {@link CreatePrivateZoneListRequest} {@link CreatePrivateZoneListResponse} */
+  CreatePrivateZoneList(data: CreatePrivateZoneListRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateZoneListResponse>;
   /** 添加私有域解析记录 {@link CreatePrivateZoneRecordRequest} {@link CreatePrivateZoneRecordResponse} */
   CreatePrivateZoneRecord(data: CreatePrivateZoneRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateZoneRecordResponse>;
+  /** 批量添加私有域解析记录 {@link CreatePrivateZoneRecordListRequest} {@link CreatePrivateZoneRecordListResponse} */
+  CreatePrivateZoneRecordList(data: CreatePrivateZoneRecordListRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateZoneRecordListResponse>;
   /** 删除终端节点 {@link DeleteEndPointRequest} {@link DeleteEndPointResponse} */
   DeleteEndPoint(data?: DeleteEndPointRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEndPointResponse>;
   /** 删除转发规则 {@link DeleteForwardRuleRequest} {@link DeleteForwardRuleResponse} */
@@ -933,10 +1043,14 @@ declare interface Privatedns {
   DeletePrivateZoneRecord(data?: DeletePrivateZoneRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateZoneRecordResponse>;
   /** 删除与私有域关联的VPC {@link DeleteSpecifyPrivateZoneVpcRequest} {@link DeleteSpecifyPrivateZoneVpcResponse} */
   DeleteSpecifyPrivateZoneVpc(data: DeleteSpecifyPrivateZoneVpcRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSpecifyPrivateZoneVpcResponse>;
-  /** 获取私有域解析账号的VPC列表 {@link DescribeAccountVpcListRequest} {@link DescribeAccountVpcListResponse} */
+  /** 获取关联账号的VPC列表 {@link DescribeAccountVpcListRequest} {@link DescribeAccountVpcListResponse} */
   DescribeAccountVpcList(data: DescribeAccountVpcListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountVpcListResponse>;
   /** 获取操作日志列表 {@link DescribeAuditLogRequest} {@link DescribeAuditLogResponse} */
   DescribeAuditLog(data: DescribeAuditLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogResponse>;
+  /** 查询批量添加私有域解析记录结果 {@link DescribeCreateRecordListResultRequest} {@link DescribeCreateRecordListResultResponse} */
+  DescribeCreateRecordListResult(data: DescribeCreateRecordListResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCreateRecordListResultResponse>;
+  /** 查询批量添加私有域结果 {@link DescribeCreateZoneListResultRequest} {@link DescribeCreateZoneListResultResponse} */
+  DescribeCreateZoneListResult(data: DescribeCreateZoneListResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCreateZoneListResultResponse>;
   /** 获取私有域解析概览 {@link DescribeDashboardRequest} {@link DescribeDashboardResponse} */
   DescribeDashboard(data?: DescribeDashboardRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDashboardResponse>;
   /** 获取增强型终端节点列表 {@link DescribeExtendEndpointListRequest} {@link DescribeExtendEndpointListResponse} */

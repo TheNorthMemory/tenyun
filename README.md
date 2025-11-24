@@ -114,7 +114,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 244+ 款产品，12937+ 服务数</summary>
+<details><summary>共计 244+ 款产品，12975+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -192,7 +192,7 @@ controlcenter | [控制中心](https://cloud.tencent.com/document/product/1708) 
 cpdp | [企业收付平台](https://cloud.tencent.com/document/product/1122) | 2019-08-20(219) |
 csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(82) |
 csxg | [5G入云服务](https://cloud.tencent.com/document/product/1687) | 2023-03-03(5) |
-ctem | [暴露面管理服务](https://cloud.tencent.com/document/product/1755) | 2023-11-28(35) |
+ctem | [暴露面管理服务](https://cloud.tencent.com/document/product/1755) | 2023-11-28(61) |
 ctsdb | [时序数据库 CTSDB](https://cloud.tencent.com/document/product/652) | 2023-02-02(2) |
 cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-12(98) |
 cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(514) |
@@ -236,7 +236,7 @@ hai | [高性能应用服务](https://cloud.tencent.com/document/product/1721) |
 hasim | [高可用物联网卡](https://cloud.tencent.com/document/product/1482) | 2021-07-16(22) |
 hcm | [数学作业批改](https://cloud.tencent.com/document/product/1004) | 2018-11-06(1) |
 hunyuan | [腾讯混元大模型](https://cloud.tencent.com/document/product/1729) | 2023-09-01(21) |
-iai | [人脸识别](https://cloud.tencent.com/document/product/867) | 2020-03-03(36) | 2018-03-01(33) |
+iai | [人脸识别](https://cloud.tencent.com/document/product/867) | 2020-03-03(35) | 2018-03-01(33) |
 iap | [身份识别平台](https://cloud.tencent.com/document/product/1782) | 2024-07-13(6) |
 ic | [图片瘦身](https://cloud.tencent.com/document/product/636) | 2019-03-07(9) |
 icr | [对话机器人](https://cloud.tencent.com/document/product/1268) | 2021-10-14(1) |
@@ -283,7 +283,7 @@ open | 腾讯云 OAuth | 2018-12-25(2) |
 organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(129) | 2018-12-25(20) |
 partners | [渠道合作伙伴](https://cloud.tencent.com/document/product/563) | 2018-03-21(23) |
 postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) | 2017-03-12(104) |
-privatedns | [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) | 2020-10-28(36) |
+privatedns | [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) | 2020-10-28(40) |
 pts | [云压测](https://cloud.tencent.com/document/product/1484) | 2021-07-28(48) |
 rce | [全栈式风控引擎](https://cloud.tencent.com/document/product/1343) | 2020-11-03(11) |
 redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 2018-04-12(110) |
@@ -345,7 +345,7 @@ tsw | [微服务观测平台 TSW](https://cloud.tencent.com/document/product/131
 tts | [语音合成](https://cloud.tencent.com/document/product/1073) | 2019-08-23(3) |
 vcg | [视频生成](https://cloud.tencent.com/document/product/1770) | 2024-04-04(2) |
 vclm | [腾讯混元生视频](https://cloud.tencent.com/document/product/1616) | 2024-05-23(13) |
-vcube | [音视频终端引擎](https://cloud.tencent.com/document/product/1449) | 2022-04-10(34) |
+vcube | [音视频终端引擎](https://cloud.tencent.com/document/product/1449) | 2022-04-10(36) |
 vdb | [向量数据库](https://cloud.tencent.com/document/product/1709) | 2023-06-16(14) |
 vm | [视频内容安全](https://cloud.tencent.com/document/product/1265) | 2021-09-22(4) | 2020-12-29(4)<br/>2020-07-09(5) |
 vms | [语音消息](https://cloud.tencent.com/document/product/1128) | 2020-09-02(2) |
@@ -353,7 +353,7 @@ vod | [云点播](https://cloud.tencent.com/document/product/266) | 2024-07-18(7
 vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(431) |
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(8) |
 vtc | [视频转译](https://cloud.tencent.com/document/product/1769) | 2024-02-23(3) |
-waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(185) |
+waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(192) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
 wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2025-08-06(119) | 2021-08-20(297) |
 weilingwith | [微瓴同业开放平台](https://cloud.tencent.com/document/product/1693) | 2023-04-27(64) |

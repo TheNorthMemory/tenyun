@@ -1232,7 +1232,7 @@ declare interface ConvertOperatingSystemsRequest {
 }
 
 declare interface ConvertOperatingSystemsResponse {
-  /** 转换的目标操系统信息，仅在入参 DryRun 为 true 时返回。 */
+  /** 转换的目标操作系统信息，仅在入参 DryRun 为 true 时返回。 */
   SupportTargetOSList?: TargetOS[];
   /** 操作系统转换的任务 ID */
   TaskId?: string;

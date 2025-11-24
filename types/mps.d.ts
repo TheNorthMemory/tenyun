@@ -9164,6 +9164,8 @@ declare interface ParseNotificationResponse {
   Sign?: string;
   /** 批量处理任务信息，仅当 EventType 为 BatchTask，该字段有值。 */
   BatchTaskEvent?: BatchSubTaskResult | null;
+  /** 数字水印提取任务信息，仅当 EventType 为 ExtractBlindWatermark，该字段有值。 */
+  ExtractBlindWatermarkTask?: ExtractBlindWatermarkTask | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

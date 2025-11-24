@@ -588,6 +588,26 @@ declare interface DisplayPort {
   AnalysisState?: number;
 }
 
+/** 种子详情 */
+declare interface DisplaySeed {
+  /** 主键ID */
+  Id?: number;
+  /** 企业ID */
+  CustomerId?: number;
+  /** 分类，包括：domain(主域名)、icon(图标)、ip(IP)、keyword(关键词)、parent_company(母公司)、sub_domain(子域名)、title(标题) */
+  Category?: string;
+  /** 值 */
+  Value?: string;
+  /** md5值 */
+  Md5?: string;
+  /** 来源 */
+  Source?: string;
+  /** 创建时间 */
+  CreateAt?: string;
+  /** 是否可信 */
+  IsValid?: boolean;
+}
+
 /** 敏感信息泄露数据 */
 declare interface DisplaySensitiveInfo {
   /** 主键Id */
@@ -852,6 +872,64 @@ declare interface JobRecordProgress {
   Todo?: number;
 }
 
+declare interface CreateAppRequest {
+  /** 企业ID */
+  CustomerId: number;
+  /** 移动端名称 */
+  Name?: string;
+  /** 图片地址 */
+  Logo?: string;
+  /** 平台，ios或android */
+  Platform?: string;
+  /** 版本 */
+  AppVersion?: string;
+  /** 下载地址 */
+  DownloadUrl?: string;
+  /** 安装包名 */
+  PackageName?: string;
+  /** 开发者 */
+  Developer?: string;
+  /** 移动端地址 */
+  ServerUrl?: string;
+  /** 描述 */
+  Description?: string;
+  /** 子公司ID */
+  EnterpriseUid?: string;
+}
+
+declare interface CreateAppResponse {
+  /** Id */
+  Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAssetRequest {
+  /** IP地址 */
+  Ip: string;
+  /** 企业Id */
+  CustomerId: number;
+  /** 类型 */
+  Os?: string;
+  /** 国家 */
+  Country?: string;
+  /** 省份 */
+  Province?: string;
+  /** 城市 */
+  City?: string;
+  /** 运营商 */
+  Isp?: string;
+  /** 子公司Id */
+  EnterpriseUid?: string;
+}
+
+declare interface CreateAssetResponse {
+  /** Id */
+  Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCustomerRequest {
   /** 企业名称 */
   Name: string;
@@ -894,6 +972,30 @@ declare interface CreateCustomerResponse {
   RequestId?: string;
 }
 
+declare interface CreateDomainRequest {
+  /** 企业Id */
+  CustomerId: number;
+  /** 主域名 */
+  Domain: string;
+  /** ICP */
+  ICP?: string;
+  /** 注册时间 */
+  RegisteredTime?: string;
+  /** 过期时间 */
+  ExpiredTime?: string;
+  /** 公司 */
+  Company?: string;
+  /** 子公司 */
+  EnterpriseUid?: string;
+}
+
+declare interface CreateDomainResponse {
+  /** Id */
+  Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateEnterpriseRequest {
   /** 企业ID */
   CustomerId: number;
@@ -920,6 +1022,42 @@ declare interface CreateEnterpriseRequest {
 }
 
 declare interface CreateEnterpriseResponse {
+  /** Id */
+  Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateHttpRequest {
+  /** 企业Id */
+  CustomerId: number;
+  /** Url */
+  Url: string;
+  /** 子公司 */
+  EnterpriseUid?: string;
+  /** 标题 */
+  Title?: string;
+  /** 报文长度 */
+  ContentLength?: number;
+  /** 报文内容 */
+  Content?: string;
+  /** 缩略图Url */
+  ScreenshotUrl?: string;
+  /** 标签 */
+  Tags?: string;
+  /** 状态码 */
+  Code?: number;
+  /** 解析的IP */
+  Ip?: string;
+  /** 证书信息 */
+  Ssl?: string;
+  /** ssl证书过期时间 */
+  SslExpiredTime?: string;
+}
+
+declare interface CreateHttpResponse {
+  /** Id */
+  Id?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -940,6 +1078,328 @@ declare interface CreateJobRecordRequest {
 declare interface CreateJobRecordResponse {
   /** 任务Id */
   Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateManageRequest {
+  /** 企业Id */
+  CustomerId: number;
+  /** Url */
+  Url: string;
+  /** 标题 */
+  Title?: string;
+  /** Screenshot */
+  Screenshot?: string;
+  /** 状态码 */
+  Code?: number;
+  /** 子公司 */
+  EnterpriseUid?: string;
+}
+
+declare interface CreateManageResponse {
+  /** Id */
+  Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreatePortRequest {
+  /** 企业Id */
+  CustomerId: number;
+  /** 端口 */
+  Port: number;
+  /** IP或域名地址 */
+  Asset: string;
+  /** 是否高危 */
+  IsHighRisk: boolean;
+  /** 子公司 */
+  EnterpriseUid?: string;
+  /** base64编码后的指纹 */
+  Banner?: string;
+  /** 解析的IP */
+  Ip?: string;
+  /** 组件名称 */
+  App?: string;
+  /** 服务名称 */
+  Service?: string;
+}
+
+declare interface CreatePortResponse {
+  /** Id */
+  Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSeedsRequest {
+  /** 企业ID */
+  CustomerId: number;
+  /** ip种子数组 */
+  Ips?: string[];
+  /** icon种子数组 */
+  Icons?: string[];
+  /** 主域名种子数组 */
+  Domains?: string[];
+  /** title种子数组 */
+  Titles?: string[];
+  /** 子域名种子数组 */
+  SubDomains?: string[];
+  /** 关键词种子数组 */
+  Keywords?: string[];
+  /** 母公司种子数组 */
+  ParentCompanies?: string[];
+}
+
+declare interface CreateSeedsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSubDomainRequest {
+  /** 企业Id */
+  CustomerId: number;
+  /** 子域名 */
+  SubDomain: string;
+  /** Ip */
+  Ip?: string;
+  /** 国家 */
+  Country?: string;
+  /** 省 */
+  Province?: string;
+  /** 城市 */
+  City?: string;
+  /** Isp */
+  Isp?: string;
+  /** 子公司 */
+  EnterpriseUid?: string;
+}
+
+declare interface CreateSubDomainResponse {
+  /** Id */
+  Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSuspiciousAssetRequest {
+  /** 企业Id */
+  CustomerId: number;
+  /** Url */
+  Url?: string;
+  /** 子公司 */
+  EnterpriseUid?: string;
+  /** 标题 */
+  Title?: string;
+  /** 标签 */
+  Tags?: string;
+  /** 所属者 */
+  Owner?: string;
+  /** 来源类型 */
+  SourceType?: string;
+  /** 来源值 */
+  SourceValue?: string;
+  /** 是否信任 */
+  Trusted?: boolean;
+}
+
+declare interface CreateSuspiciousAssetResponse {
+  /** Id */
+  Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateWechatAppletRequest {
+  /** 企业Id */
+  CustomerId: number;
+  /** 名称 */
+  Name?: string;
+  /** 图片地址 */
+  Logo?: string;
+  /** 账号 */
+  AccountId?: string;
+  /** 二维码 */
+  QrCode?: string;
+  /** 描述 */
+  Description?: string;
+  /** 子公司 */
+  EnterpriseUid?: string;
+  /** 账号Appid */
+  AccountAppid?: string;
+  /** 认证主体 */
+  RecordSubject?: string;
+}
+
+declare interface CreateWechatAppletResponse {
+  /** Id */
+  Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateWechatOfficialAccountRequest {
+  /** 企业Id */
+  CustomerId: number;
+  /** 名称 */
+  Name?: string;
+  /** 图片地址 */
+  Logo?: string;
+  /** 账号 */
+  AccountId?: string;
+  /** 二维码 */
+  QrCode?: string;
+  /** 描述 */
+  Description?: string;
+  /** 子公司 */
+  EnterpriseUid?: string;
+  /** 认证主体 */
+  RecordSubject?: string;
+}
+
+declare interface CreateWechatOfficialAccountResponse {
+  /** Id */
+  Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAppsRequest {
+  /** ID列表 */
+  Ids: number[];
+}
+
+declare interface DeleteAppsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAssetsRequest {
+  /** ID列表 */
+  Ids: number[];
+}
+
+declare interface DeleteAssetsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDomainsRequest {
+  /** ID列表 */
+  Ids: number[];
+}
+
+declare interface DeleteDomainsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteEnterprisesRequest {
+  /** ID列表 */
+  Ids: number[];
+}
+
+declare interface DeleteEnterprisesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteHttpsRequest {
+  /** ID列表 */
+  Ids: number[];
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
+  /** 是否聚合数据 */
+  IsAggregation?: boolean;
+}
+
+declare interface DeleteHttpsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteManagesRequest {
+  /** ID列表 */
+  Ids: number[];
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
+  /** 是否聚合数据 */
+  IsAggregation?: boolean;
+}
+
+declare interface DeleteManagesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeletePortsRequest {
+  /** ID列表 */
+  Ids: number[];
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
+  /** 是否聚合数据 */
+  IsAggregation?: boolean;
+}
+
+declare interface DeletePortsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSeedsRequest {
+  /** ID列表 */
+  Ids: number[];
+}
+
+declare interface DeleteSeedsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSubDomainsRequest {
+  /** ID列表 */
+  Ids: number[];
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
+  /** 是否聚合数据 */
+  IsAggregation?: boolean;
+}
+
+declare interface DeleteSubDomainsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSuspiciousAssetsRequest {
+  /** ID列表 */
+  Ids: number[];
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
+  /** 是否聚合数据 */
+  IsAggregation?: boolean;
+}
+
+declare interface DeleteSuspiciousAssetsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteWechatAppletsRequest {
+  /** ID列表 */
+  Ids: number[];
+}
+
+declare interface DeleteWechatAppletsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteWechatOfficialAccountsRequest {
+  /** ID列表 */
+  Ids: number[];
+}
+
+declare interface DeleteWechatOfficialAccountsResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1750,6 +2210,30 @@ declare interface DescribePortsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSeedsRequest {
+  /** 企业ID */
+  CustomerId: number;
+  /** 创建时间-开始 */
+  CreateAtStart?: string;
+  /** 创建时间-结束 */
+  CreateAtEnd?: string;
+  /** 分页偏移 */
+  Offset?: number;
+  /** 分页大小 */
+  Limit?: number;
+  /** 查询数组 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeSeedsResponse {
+  /** 总数 */
+  Total?: number;
+  /** 种子列表 */
+  List?: DisplaySeed[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSensitiveInfosRequest {
   /** 企业ID列表，可多选 */
   CustomerIdList?: number[];
@@ -2024,6 +2508,26 @@ declare interface DescribeWechatOfficialAccountsResponse {
   RequestId?: string;
 }
 
+declare interface IgnoreDataRequest {
+  /** ID列表 */
+  Ids: number[];
+  /** 模块，包括：enterprise：企业架构，domain：主域名，sub_domain：子域名，asset：IP资产，port：端口服务，http：HTTP资产，vul：漏洞信息，app：APP，wechat_applet：微信小程序，wechat_official_account：微信公众号，github：Github信息泄露，manage：管理后台暴露，config：目录爆破，dark_web：暗网泄露，net_disk：文库网盘泄露，supply_chain：供应链，weak_password：弱口令，sensitive_info：敏感信息泄露 */
+  Module: string;
+  /** 企业ID列表，可多选 */
+  CustomerIdList?: number[];
+  /** 是否聚合数据 */
+  IsAggregation?: boolean;
+  /** 是否显示被忽略的数据 */
+  Ignored?: boolean;
+  /** 是否忽略全部 */
+  IsAffectOther?: boolean;
+}
+
+declare interface IgnoreDataResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCustomerRequest {
   /** 企业名称 */
   Name: string;
@@ -2090,6 +2594,18 @@ declare interface ModifyLabelResponse {
   RequestId?: string;
 }
 
+declare interface ModifySeedStatusRequest {
+  /** ID */
+  Id: number;
+  /** 是否可信 */
+  IsValid?: boolean;
+}
+
+declare interface ModifySeedStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopJobRecordRequest {
   /** 企业ID */
   CustomerId?: number;
@@ -2105,12 +2621,58 @@ declare interface StopJobRecordResponse {
 /** {@link Ctem 暴露面管理服务} */
 declare interface Ctem {
   (): Versions;
+  /** 添加APP资产 {@link CreateAppRequest} {@link CreateAppResponse} */
+  CreateApp(data: CreateAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppResponse>;
+  /** 添加主机资产 {@link CreateAssetRequest} {@link CreateAssetResponse} */
+  CreateAsset(data: CreateAssetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetResponse>;
   /** 创建企业 {@link CreateCustomerRequest} {@link CreateCustomerResponse} */
   CreateCustomer(data: CreateCustomerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomerResponse>;
-  /** 添加企业架构数据 {@link CreateEnterpriseRequest} {@link CreateEnterpriseResponse} */
+  /** 添加主域名资产 {@link CreateDomainRequest} {@link CreateDomainResponse} */
+  CreateDomain(data: CreateDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainResponse>;
+  /** 添加企业架构资产 {@link CreateEnterpriseRequest} {@link CreateEnterpriseResponse} */
   CreateEnterprise(data: CreateEnterpriseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnterpriseResponse>;
+  /** 添加网站资产 {@link CreateHttpRequest} {@link CreateHttpResponse} */
+  CreateHttp(data: CreateHttpRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHttpResponse>;
   /** 启动测绘 {@link CreateJobRecordRequest} {@link CreateJobRecordResponse} */
   CreateJobRecord(data: CreateJobRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJobRecordResponse>;
+  /** 添加后台数据 {@link CreateManageRequest} {@link CreateManageResponse} */
+  CreateManage(data: CreateManageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateManageResponse>;
+  /** 添加端口服务资产 {@link CreatePortRequest} {@link CreatePortResponse} */
+  CreatePort(data: CreatePortRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePortResponse>;
+  /** 创建种子 {@link CreateSeedsRequest} {@link CreateSeedsResponse} */
+  CreateSeeds(data: CreateSeedsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSeedsResponse>;
+  /** 添加子域名资产 {@link CreateSubDomainRequest} {@link CreateSubDomainResponse} */
+  CreateSubDomain(data: CreateSubDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubDomainResponse>;
+  /** 添加影子资产 {@link CreateSuspiciousAssetRequest} {@link CreateSuspiciousAssetResponse} */
+  CreateSuspiciousAsset(data: CreateSuspiciousAssetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSuspiciousAssetResponse>;
+  /** 添加微信小程序资产 {@link CreateWechatAppletRequest} {@link CreateWechatAppletResponse} */
+  CreateWechatApplet(data: CreateWechatAppletRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWechatAppletResponse>;
+  /** 添加微信公众号资产 {@link CreateWechatOfficialAccountRequest} {@link CreateWechatOfficialAccountResponse} */
+  CreateWechatOfficialAccount(data: CreateWechatOfficialAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWechatOfficialAccountResponse>;
+  /** 删除APP数据 {@link DeleteAppsRequest} {@link DeleteAppsResponse} */
+  DeleteApps(data: DeleteAppsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAppsResponse>;
+  /** 删除主机资产数据 {@link DeleteAssetsRequest} {@link DeleteAssetsResponse} */
+  DeleteAssets(data: DeleteAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAssetsResponse>;
+  /** 删除主域名数据 {@link DeleteDomainsRequest} {@link DeleteDomainsResponse} */
+  DeleteDomains(data: DeleteDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainsResponse>;
+  /** 删除企业架构数据 {@link DeleteEnterprisesRequest} {@link DeleteEnterprisesResponse} */
+  DeleteEnterprises(data: DeleteEnterprisesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEnterprisesResponse>;
+  /** 删除网站资产数据 {@link DeleteHttpsRequest} {@link DeleteHttpsResponse} */
+  DeleteHttps(data: DeleteHttpsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHttpsResponse>;
+  /** 删除后台数据 {@link DeleteManagesRequest} {@link DeleteManagesResponse} */
+  DeleteManages(data: DeleteManagesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteManagesResponse>;
+  /** 删除端口数据 {@link DeletePortsRequest} {@link DeletePortsResponse} */
+  DeletePorts(data: DeletePortsRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePortsResponse>;
+  /** 删除种子 {@link DeleteSeedsRequest} {@link DeleteSeedsResponse} */
+  DeleteSeeds(data: DeleteSeedsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSeedsResponse>;
+  /** 删除子域名数据 {@link DeleteSubDomainsRequest} {@link DeleteSubDomainsResponse} */
+  DeleteSubDomains(data: DeleteSubDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSubDomainsResponse>;
+  /** 删除影子资产数据 {@link DeleteSuspiciousAssetsRequest} {@link DeleteSuspiciousAssetsResponse} */
+  DeleteSuspiciousAssets(data: DeleteSuspiciousAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSuspiciousAssetsResponse>;
+  /** 删除微信小程序数据 {@link DeleteWechatAppletsRequest} {@link DeleteWechatAppletsResponse} */
+  DeleteWechatApplets(data: DeleteWechatAppletsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWechatAppletsResponse>;
+  /** 删除微信公众号数据 {@link DeleteWechatOfficialAccountsRequest} {@link DeleteWechatOfficialAccountsResponse} */
+  DeleteWechatOfficialAccounts(data: DeleteWechatOfficialAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWechatOfficialAccountsResponse>;
   /** 查看API安全风险 {@link DescribeApiSecsRequest} {@link DescribeApiSecsResponse} */
   DescribeApiSecs(data?: DescribeApiSecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiSecsResponse>;
   /** 查看移动端资产 {@link DescribeAppsRequest} {@link DescribeAppsResponse} */
@@ -2155,6 +2717,8 @@ declare interface Ctem {
   DescribeNetDisks(data?: DescribeNetDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetDisksResponse>;
   /** 查看端口数据 {@link DescribePortsRequest} {@link DescribePortsResponse} */
   DescribePorts(data?: DescribePortsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePortsResponse>;
+  /** 查看种子列表 {@link DescribeSeedsRequest} {@link DescribeSeedsResponse} */
+  DescribeSeeds(data: DescribeSeedsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSeedsResponse>;
   /** 查看敏感信息数据 {@link DescribeSensitiveInfosRequest} {@link DescribeSensitiveInfosResponse} */
   DescribeSensitiveInfos(data?: DescribeSensitiveInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSensitiveInfosResponse>;
   /** 查看子域名数据 {@link DescribeSubDomainsRequest} {@link DescribeSubDomainsResponse} */
@@ -2169,10 +2733,14 @@ declare interface Ctem {
   DescribeWechatApplets(data?: DescribeWechatAppletsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWechatAppletsResponse>;
   /** 查看微信公众号数据 {@link DescribeWechatOfficialAccountsRequest} {@link DescribeWechatOfficialAccountsResponse} */
   DescribeWechatOfficialAccounts(data?: DescribeWechatOfficialAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWechatOfficialAccountsResponse>;
+  /** 忽略数据 {@link IgnoreDataRequest} {@link IgnoreDataResponse} */
+  IgnoreData(data: IgnoreDataRequest, config?: AxiosRequestConfig): AxiosPromise<IgnoreDataResponse>;
   /** 编辑企业 {@link ModifyCustomerRequest} {@link ModifyCustomerResponse} */
   ModifyCustomer(data: ModifyCustomerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomerResponse>;
   /** 修改标签 {@link ModifyLabelRequest} {@link ModifyLabelResponse} */
   ModifyLabel(data: ModifyLabelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLabelResponse>;
+  /** 修改种子状态 {@link ModifySeedStatusRequest} {@link ModifySeedStatusResponse} */
+  ModifySeedStatus(data: ModifySeedStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySeedStatusResponse>;
   /** 停止扫描 {@link StopJobRecordRequest} {@link StopJobRecordResponse} */
   StopJobRecord(data?: StopJobRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StopJobRecordResponse>;
 }

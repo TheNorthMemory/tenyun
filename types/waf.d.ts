@@ -178,6 +178,28 @@ declare interface ApiDetailSampleHistory {
   RspLog?: string;
 }
 
+/** 带有请求方式的apiname结构体 */
+declare interface ApiNameMethod {
+  /** api名称 */
+  ApiName?: string;
+  /** api请求方式 */
+  Method?: string;
+  /** api近30天请求数量 */
+  Count?: number;
+  /** api标签 */
+  Label?: string[];
+}
+
+/** 带有匹配方式的apiname列表 */
+declare interface ApiNameOp {
+  /** 匹配值列表 */
+  Value?: string[];
+  /** 匹配方式，如属于和正则等 */
+  Op?: string;
+  /** 手动筛选的时候，要传该结构体 */
+  ApiNameMethod?: ApiNameMethod[];
+}
+
 /** api请求参数类型 */
 declare interface ApiParameterType {
   /** 参数名称 */
@@ -224,6 +246,62 @@ declare interface ApiPkg {
   IsAPISecurityTrial?: number;
 }
 
+/** api安全自定义事件规则结构体 */
+declare interface ApiSecCustomEventRule {
+  /** 规则名称 */
+  RuleName: string;
+  /** 开关，1：开，0:关 */
+  Status: number;
+  /** api匹配列表 */
+  ApiNameOp?: ApiNameOp[];
+  /** 事件详情 */
+  Description?: string;
+  /** 时间戳，出参有该值，入参不需要传没有 */
+  UpdateTime?: number;
+  /** 匹配规则列表 */
+  MatchRuleList?: ApiSecSceneRuleEntry[];
+  /** 统计规则列表 */
+  StatRuleList?: ApiSecSceneRuleEntry[];
+  /** 访问频次，第一个字段表示次数，第二个字段表示分钟 */
+  ReqFrequency?: number[];
+  /** 风险等级，取值为100,200,300，分别表示低位、中危、高危 */
+  RiskLevel?: string;
+  /** 规则来源 */
+  Source?: string;
+}
+
+/** api安全客户自定义敏感检测规则 */
+declare interface ApiSecCustomSensitiveRule {
+  /** 参数位置 */
+  Position: string[];
+  /** 匹配条件 */
+  MatchKey: string;
+  /** 匹配值 */
+  MatchValue: string[];
+  /** 风险等级 */
+  Level: string;
+  /** 匹配符号，当匹配条件为关键字匹配和字符匹配的时候传该值,可传多个 */
+  MatchCond?: string[];
+  /** 规则是否泛化，默认0表示不泛化 */
+  IsPan?: number;
+}
+
+/** api提取规则内容 */
+declare interface ApiSecExtractRule {
+  /** 规则名称 */
+  RuleName?: string;
+  /** api名称 */
+  ApiName?: string;
+  /** 请求方法列表 */
+  Methods?: string[];
+  /** 开关状态，0是关，1是开 */
+  Status?: number;
+  /** 正则匹配内容 */
+  Regex?: string;
+  /** 10更新时间戳 */
+  UpdateTime?: number;
+}
+
 /** api列表 */
 declare interface ApiSecKey {
   /** api名称 */
@@ -232,6 +310,54 @@ declare interface ApiSecKey {
   Domain: string;
   /** 请求方法 */
   Method: string;
+}
+
+/** 自定义api鉴权规则 */
+declare interface ApiSecPrivilegeRule {
+  /** 规则名称，不可重复 */
+  RuleName: string;
+  /** 1:开，0:关 */
+  Status: number;
+  /** 最多输入20个api */
+  ApiName?: string[];
+  /** 鉴权位置 */
+  Position?: string;
+  /** 鉴权参数列表 */
+  ParameterList?: string[];
+  /** 更新时间戳 */
+  UpdateTime?: number;
+  /** 规则来源 */
+  Source?: string;
+  /** 带有匹配方式的api列表 */
+  ApiNameOp?: ApiNameOp[];
+  /** 应用对象取值，1表示手动填写，2表示从api资产中获取 */
+  Option?: number;
+}
+
+/** api安全自定义场景规则 */
+declare interface ApiSecSceneRule {
+  /** 场景名称 */
+  RuleName?: string;
+  /** 开关状态，1表示开，0表示关 */
+  Status?: number;
+  /** 更新时间，10位时间戳 */
+  UpdateTime?: number;
+  /** 规则列表 */
+  RuleList?: ApiSecSceneRuleEntry[];
+  /** 规则来源，系统内置:OS客户自定义：custom */
+  Source?: string;
+}
+
+/** api安全用户自定义场景规则结构体 */
+declare interface ApiSecSceneRuleEntry {
+  /** 匹配字段 */
+  Key?: string;
+  /** 匹配值 */
+  Value?: string[];
+  /** 操作符 */
+  Operate?: string;
+  /** 当匹配字段是get参数值，post参数值，cookie参数值，header参数值，rsp参数值的时候，可填充此字段 */
+  Name?: string;
 }
 
 /** 地域信息 */
@@ -354,6 +480,20 @@ declare interface BotActionScopeRuleEntry {
   Name?: string;
   /** 470后使用此字段存储多值 */
   ValueArray?: string[];
+}
+
+/** BOT-ID规则信息 */
+declare interface BotIdConfig {
+  /** 规则ID */
+  RuleId: string;
+  /** 规则开关 */
+  Status: boolean;
+  /** 动作配置 */
+  Action: string;
+  /** 规则名称 */
+  BotId?: string;
+  /** 重定向路径 */
+  Redirect?: string;
 }
 
 /** Bot资源信息 */
@@ -1258,6 +1398,14 @@ declare interface DownloadAttackRecordInfo {
   TotalCount?: number;
 }
 
+/** EnableLimitRuleItem */
+declare interface EnableLimitRuleItem {
+  /** 规则ID */
+  LimitRuleId?: number;
+  /** 规则开关，0开启，1关闭 */
+  Status?: number;
+}
+
 /** DescribeAccessExports接口 */
 declare interface ExportAccessInfo {
   /** 日志导出任务ID */
@@ -1914,6 +2062,102 @@ declare interface LLMPkg {
   InquireKey?: string;
 }
 
+/** 限流Header数据结构 */
+declare interface LimitHeader {
+  /** key */
+  Key?: string | null;
+  /** value */
+  Value?: string | null;
+  /** 匹配方式，支持EXACT(等于), REGEX（正则） , IN（属于） , NOT_IN（不属于）, CONTAINS（包含）, NOT_CONTAINS（不包含） */
+  Type?: string | null;
+}
+
+/** 限流Header参数名 */
+declare interface LimitHeaderName {
+  /** 参数名 */
+  ParamsName?: string | null;
+  /** 操作符号,支持REGEX(正则),IN(属于),NOT_IN(不属于), EACH(每个参数值) */
+  Type?: string | null;
+}
+
+/** 限流方法数据结构 */
+declare interface LimitMethod {
+  /** 需要限流的请求方式 */
+  Method?: string | null;
+  /** 匹配方式，支持EXACT(等于), REGEX（正则） , IN（属于） , NOT_IN（不属于）, CONTAINS（包含）, NOT_CONTAINS（不包含） */
+  Type?: string | null;
+}
+
+/** 限流Path */
+declare interface LimitPath {
+  /** 限流路径 */
+  Path?: string | null;
+  /** 匹配方式 */
+  Type?: string | null;
+}
+
+/** 自研版限流规则数据结构 */
+declare interface LimitRuleV2 {
+  /** 规则ID */
+  LimitRuleID?: number;
+  /** 规则名 */
+  Name?: string;
+  /** 优先级 */
+  Priority?: number;
+  /** 规则开关，0表示关闭，1表示开启 */
+  Status?: number;
+  /** 时间戳 */
+  TsVersion?: number;
+  /** 限流对象，API或Domain */
+  LimitObject?: string;
+  /** 限流方法名 */
+  LimitMethod?: LimitMethod | null;
+  /** 路径 */
+  LimitPaths?: LimitPath | null;
+  /** Header参数 */
+  LimitHeaders?: LimitHeader[] | null;
+  /** 限流窗口 */
+  LimitWindow?: LimitWindow;
+  /** 限流策略，0:观察,1:拦截，2:人机 */
+  LimitStrategy?: number;
+  /** Header参数名 */
+  LimitHeaderName?: LimitHeaderName | null;
+  /** Get参数名 */
+  GetParamsName?: MatchOption | null;
+  /** Get参数值 */
+  GetParamsValue?: MatchOption | null;
+  /** Post参数名 */
+  PostParamsName?: MatchOption | null;
+  /** Post参数值 */
+  PostParamsValue?: MatchOption | null;
+  /** Ip属地 */
+  IpLocation?: MatchOption | null;
+  /** 重定向信息，当LimitStrategy为2时，此字段不为空 */
+  RedirectInfo?: RedirectInfo | null;
+  /** 拦截页面，0表示429，否则为BlockPageID */
+  BlockPage?: number;
+  /** 限流对象来源，0：手动填写，1：API资产 */
+  ObjectSrc?: number;
+  /** 是否共享配额，只有当对象为URL时有效，false表示URL独享配额，true表示所有URL共享配额 */
+  QuotaShare?: boolean;
+  /** 路径选项,可配置每个路径的请求方法 */
+  PathsOption?: PathItem[] | null;
+  /** 574新增需求，限流执行顺序，0：默认情况，限流优先，1：安全防护优先 */
+  Order?: number;
+}
+
+/** 限流窗口大小 */
+declare interface LimitWindow {
+  /** 每秒允许通过的最大请求数 */
+  Second?: number | null;
+  /** 每分钟允许通过的最大请求数 */
+  Minute?: number | null;
+  /** 每小时允许通过的最大请求数 */
+  Hour?: number | null;
+  /** 是否共享配额，只有当对象为URL时有效，false表示URL独享配额，true表示所有URL共享配额 */
+  QuotaShare?: boolean | null;
+}
+
 /** 负载均衡的监听器 */
 declare interface LoadBalancer {
   /** 负载均衡LD的ID */
@@ -2064,6 +2308,16 @@ declare interface MajorEventsProPkg {
   BillingItem?: string;
 }
 
+/** 限流规则中匹配条件 */
+declare interface MatchOption {
+  /** 匹配参数 */
+  Params?: string | null;
+  /** 逻辑符号 */
+  Func?: string | null;
+  /** 匹配内容 */
+  Content?: string | null;
+}
+
 /** 小程序安全接入ID扩展资源信息 */
 declare interface MiniExtendPkg {
   /** 资源id */
@@ -2198,6 +2452,14 @@ declare interface ParamCompareList {
   Key?: string;
   /** 请求参数比对的匹配值 */
   Value?: string;
+}
+
+/** 指定限流path和对应的method */
+declare interface PathItem {
+  /** 请求路径 */
+  Path?: string;
+  /** 请求方法 */
+  Method?: string;
 }
 
 /** PeakPoints数组项 */
@@ -2396,6 +2658,24 @@ declare interface RCEPkg {
   RenewFlag?: number;
   /** 计费项 */
   BillingItem?: string;
+}
+
+/** 限流相关通用返回 */
+declare interface RateLimitCommonRsp {
+  /** 响应码 */
+  Code?: number;
+  /** 提示信息 */
+  Info?: string;
+}
+
+/** 重定向信息 */
+declare interface RedirectInfo {
+  /** 协议 */
+  Protocol: string | null;
+  /** 域名 */
+  Domain: string | null;
+  /** url路径 */
+  Url?: string | null;
 }
 
 /** 用户规则更新输出规则子项 */
@@ -3488,6 +3768,60 @@ declare interface CreatePostCLSFlowResponse {
   RequestId?: string;
 }
 
+declare interface CreateRateLimitV2Request {
+  /** 域名 */
+  Domain: string;
+  /** 规则名 */
+  Name: string;
+  /** 规则优先级 */
+  Priority: number;
+  /** 规则开关，0关闭，1开启 */
+  Status: number;
+  /** 限流窗口 */
+  LimitWindow: LimitWindow;
+  /** 支持API或Domain，如果是基于API，则LimitPaths不能为空，否则LimitPaths为空 */
+  LimitObject: string;
+  /** 限流策略，0:观察,1:拦截，2:人机 */
+  LimitStrategy: number;
+  /** 限流方法 */
+  LimitMethod?: LimitMethod;
+  /** 限流路径列表 */
+  LimitPaths?: LimitPath;
+  /** 限流Headers */
+  LimitHeaders?: LimitHeader[];
+  /** 基于Header参数名限流 */
+  LimitHeaderName?: LimitHeaderName;
+  /** 基于Get参数名限流 */
+  GetParamsName?: MatchOption;
+  /** 基于Get参数值限流 */
+  GetParamsValue?: MatchOption;
+  /** 基于Post参数名限流 */
+  PostParamsName?: MatchOption;
+  /** 基于Post参数值限流 */
+  PostParamsValue?: MatchOption;
+  /** 基于IP归属地限流 */
+  IpLocation?: MatchOption;
+  /** 重定向信息,当LimitStrategy为重定向时，此字段必填 */
+  RedirectInfo?: RedirectInfo;
+  /** 拦截页面,0表示429，否则填写blockPageID */
+  BlockPage?: number;
+  /** 限流对象来源，0：手动填写，1：API资产 */
+  ObjectSrc?: number;
+  /** 是否共享配额，只有当对象为URL时有效，false表示URL独享配额，true表示所有URL共享配额 */
+  QuotaShare?: boolean;
+  /** 路径选项,可配置每个路径的请求方法 */
+  PathsOption?: PathItem[];
+  /** 限流执行顺序，0：默认情况，限流优先，1：安全防护优先 */
+  Order?: number;
+}
+
+declare interface CreateRateLimitV2Response {
+  /** 操作结果 */
+  BaseInfo?: RateLimitCommonRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAccessExportRequest {
   /** 日志导出ID */
   ExportId: string;
@@ -3726,6 +4060,20 @@ declare interface DeleteOwaspWhiteRuleRequest {
 }
 
 declare interface DeleteOwaspWhiteRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRateLimitsV2Request {
+  /** 域名 */
+  Domain: string;
+  /** 要删除的限流ID列表 */
+  LimitRuleIds: number[];
+}
+
+declare interface DeleteRateLimitsV2Response {
+  /** 操作结果 */
+  BaseInfo?: RateLimitCommonRsp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4992,6 +5340,42 @@ declare interface DescribeProtectionModesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRateLimitsV2Request {
+  /** 域名 */
+  Domain: string;
+  /** 限流规则ID */
+  Id?: number;
+  /** 规则名 */
+  Name?: string;
+  /** 限流接口名 */
+  Method?: string;
+  /** 限流对象，可选API、Domain */
+  LimitObject?: string;
+  /** 规则开关，0表示关闭，1表示开启 */
+  Status?: number;
+  /** 排序方式，可选desc、asc */
+  Order?: string;
+  /** 排序字段，可选Priority、Timestamp、ID */
+  By?: string;
+  /** 分页的起始位置 */
+  Offset?: number;
+  /** 每页行数 */
+  Limit?: number;
+  /** 过滤器 */
+  Filters?: FiltersItemNew[];
+}
+
+declare interface DescribeRateLimitsV2Response {
+  /** 查询结果中规则数量 */
+  Total?: number;
+  /** 操作结果 */
+  BaseInfo?: RateLimitCommonRsp;
+  /** 规则列表 */
+  RateLimits?: LimitRuleV2[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRuleLimitRequest {
   /** 域名 */
   Domain: string;
@@ -5374,6 +5758,20 @@ declare interface DestroyPostCLSFlowResponse {
   RequestId?: string;
 }
 
+declare interface EnableRateLimitsV2Request {
+  /** 域名 */
+  Domain: string;
+  /** 具体规则列表 */
+  EnableItems: EnableLimitRuleItem[];
+}
+
+declare interface EnableRateLimitsV2Response {
+  /** 操作结果 */
+  BaseInfo?: RateLimitCommonRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface FreshAntiFakeUrlRequest {
   /** 域名 */
   Domain: string;
@@ -5594,6 +5992,40 @@ declare interface ModifyApiSecEventChangeResponse {
   RequestId?: string;
 }
 
+declare interface ModifyApiSecSensitiveRuleRequest {
+  /** 域名 */
+  Domain: string;
+  /** 1表示开，0表示关，3表示删除 */
+  Status: number;
+  /** 规则名称 */
+  RuleName?: string;
+  /** 客户自定义配置 */
+  CustomRule?: ApiSecCustomSensitiveRule;
+  /** rulename列表，批量操作的时候填改值 */
+  RuleNameList?: string[];
+  /** api提取规则内容 */
+  CustomApiExtractRule?: ApiSecExtractRule;
+  /** 批量操作的时候的api提取规则 */
+  ApiExtractRuleName?: string[];
+  /** 自定义api鉴权规则 */
+  ApiSecPrivilegeRule?: ApiSecPrivilegeRule;
+  /** 匹配操作时候的api鉴权规则 */
+  ApiSecPrivilegeRuleName?: string[];
+  /** 批量操作的时候的自定义场景列表 */
+  ApiSecSceneRuleNameList?: string[];
+  /** 单条自定义api场景规则 */
+  ApiSecSceneRule?: ApiSecSceneRule;
+  /** 批量操作的时候的自定义事件规则列表 */
+  ApiSecCustomEventRuleNameList?: string[];
+  /** 自定义事件规则 */
+  ApiSecCustomEventRuleRule?: ApiSecCustomEventRule;
+}
+
+declare interface ModifyApiSecSensitiveRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAreaBanAreasRequest {
   /** 需要修改的域名 */
   Domain: string;
@@ -5690,6 +6122,30 @@ declare interface ModifyBatchIpAccessControlRequest {
 declare interface ModifyBatchIpAccessControlResponse {
   /** 编辑失败的域名列表，如果非空则表示有域名编辑失败，整个批量规则编辑失败，否则则表示批量规则编辑成功。 */
   Failed?: BatchDomainResult[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyBotIdRuleRequest {
+  /** 域名 */
+  Domain: string;
+  /** 场景ID */
+  SceneId: string;
+  /** 配置信息，支持批量 */
+  Data?: BotIdConfig[];
+  /** 0-全局设置不生效 1-全局开关配置字段生效 2-全局动作配置字段生效 3-全局开关和动作字段都生效 4-只修改全局重定向路径 5-只修改全局防护等级 */
+  GlobalSwitch?: number;
+  /** 全局开关 */
+  Status?: boolean;
+  /** 全局动作 */
+  RuleAction?: string;
+  /** 全局重定向路径 */
+  GlobalRedirect?: string;
+  /** 防护等级：normal-正常；strict-严格 */
+  ProtectLevel?: string;
+}
+
+declare interface ModifyBotIdRuleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6702,6 +7158,62 @@ declare interface UpdateProtectionModesResponse {
   RequestId?: string;
 }
 
+declare interface UpdateRateLimitV2Request {
+  /** 域名 */
+  Domain: string;
+  /** 规则ID */
+  LimitRuleId: number;
+  /** 规则名 */
+  Name: string;
+  /** 优先级 */
+  Priority: number;
+  /** 开关，0关闭，1开启 */
+  Status: number;
+  /** 支持API，Domain。如果基于API，则LimitPaths不能为空，否则LimitPaths为空 */
+  LimitObject: string;
+  /** 限流策略，0:观察,1:拦截，2:人机 */
+  LimitStrategy: number;
+  /** 基于Header参数名限流 */
+  LimitHeaderName?: LimitHeaderName;
+  /** 限流方法 */
+  LimitMethod?: LimitMethod;
+  /** 限流路径 */
+  LimitPaths?: LimitPath;
+  /** 限流Headers */
+  LimitHeaders?: LimitHeader[];
+  /** 限流窗口 */
+  LimitWindow?: LimitWindow;
+  /** 基于Get参数名限流 */
+  GetParamsName?: MatchOption;
+  /** 基于Get参数值限流 */
+  GetParamsValue?: MatchOption;
+  /** 基于Post参数名限流 */
+  PostParamsName?: MatchOption;
+  /** 基于Post参数值限流 */
+  PostParamsValue?: MatchOption;
+  /** 基于IP归属地限流 */
+  IpLocation?: MatchOption;
+  /** 重定向信息,当LimitStrategy为重定向时，此字段必填 */
+  RedirectInfo?: RedirectInfo;
+  /** 拦截页面,0表示429，否则填写blockPageID */
+  BlockPage?: number;
+  /** 限流对象来源，0：手动填写，1：API资产 */
+  ObjectSrc?: number;
+  /** 是否共享配额，只有当对象为URL时有效，false表示URL独享配额，true表示所有URL共享配额 */
+  QuotaShare?: boolean;
+  /** 路径选项,可配置每个路径的请求方法 */
+  PathsOption?: PathItem[];
+  /** 限流执行顺序，0：默认情况，限流优先，1：安全防护优先 */
+  Order?: number;
+}
+
+declare interface UpdateRateLimitV2Response {
+  /** 操作结果 */
+  BaseInfo?: RateLimitCommonRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpsertCCAutoStatusRequest {
   /** 域名 */
   Domain: string;
@@ -6879,6 +7391,8 @@ declare interface Waf {
   CreatePostCKafkaFlow(data: CreatePostCKafkaFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePostCKafkaFlowResponse>;
   /** 创建CLS投递流任务 {@link CreatePostCLSFlowRequest} {@link CreatePostCLSFlowResponse} */
   CreatePostCLSFlow(data?: CreatePostCLSFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePostCLSFlowResponse>;
+  /** 创建自研版限流规则 {@link CreateRateLimitV2Request} {@link CreateRateLimitV2Response} */
+  CreateRateLimitV2(data: CreateRateLimitV2Request, config?: AxiosRequestConfig): AxiosPromise<CreateRateLimitV2Response>;
   /** 删除访问日志导出 {@link DeleteAccessExportRequest} {@link DeleteAccessExportResponse} */
   DeleteAccessExport(data: DeleteAccessExportRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccessExportResponse>;
   /** 删除防篡改url {@link DeleteAntiFakeUrlRequest} {@link DeleteAntiFakeUrlResponse} */
@@ -6913,6 +7427,8 @@ declare interface Waf {
   DeleteOwaspRuleStatus(data: DeleteOwaspRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOwaspRuleStatusResponse>;
   /** 删除用户规则引擎白名单 {@link DeleteOwaspWhiteRuleRequest} {@link DeleteOwaspWhiteRuleResponse} */
   DeleteOwaspWhiteRule(data: DeleteOwaspWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOwaspWhiteRuleResponse>;
+  /** 删除自研版限流规则列表 {@link DeleteRateLimitsV2Request} {@link DeleteRateLimitsV2Response} */
+  DeleteRateLimitsV2(data: DeleteRateLimitsV2Request, config?: AxiosRequestConfig): AxiosPromise<DeleteRateLimitsV2Response>;
   /** 删除CC攻击的session设置 {@link DeleteSessionRequest} {@link DeleteSessionResponse} */
   DeleteSession(data: DeleteSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSessionResponse>;
   /** 删除SaaS型WAF防护域名 {@link DeleteSpartaProtectionRequest} {@link DeleteSpartaProtectionResponse} */
@@ -7029,6 +7545,8 @@ declare interface Waf {
   DescribePostCLSFlows(data?: DescribePostCLSFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePostCLSFlowsResponse>;
   /** 查询tiga引擎下大类规则的防护模式 {@link DescribeProtectionModesRequest} {@link DescribeProtectionModesResponse} */
   DescribeProtectionModes(data: DescribeProtectionModesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectionModesResponse>;
+  /** 查询限流规则列表接口 {@link DescribeRateLimitsV2Request} {@link DescribeRateLimitsV2Response} */
+  DescribeRateLimitsV2(data: DescribeRateLimitsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeRateLimitsV2Response>;
   /** 获取规格限制 {@link DescribeRuleLimitRequest} {@link DescribeRuleLimitResponse} */
   DescribeRuleLimit(data: DescribeRuleLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleLimitResponse>;
   /** DescribeScanIp {@link DescribeScanIpRequest} {@link DescribeScanIpResponse} */
@@ -7071,6 +7589,8 @@ declare interface Waf {
   DestroyPostCKafkaFlow(data: DestroyPostCKafkaFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyPostCKafkaFlowResponse>;
   /** 销毁CLS投递流任务 {@link DestroyPostCLSFlowRequest} {@link DestroyPostCLSFlowResponse} */
   DestroyPostCLSFlow(data: DestroyPostCLSFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyPostCLSFlowResponse>;
+  /** 批量更改自研版限流规则开关 {@link EnableRateLimitsV2Request} {@link EnableRateLimitsV2Response} */
+  EnableRateLimitsV2(data: EnableRateLimitsV2Request, config?: AxiosRequestConfig): AxiosPromise<EnableRateLimitsV2Response>;
   /** 刷新防篡改url {@link FreshAntiFakeUrlRequest} {@link FreshAntiFakeUrlResponse} */
   FreshAntiFakeUrl(data: FreshAntiFakeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<FreshAntiFakeUrlResponse>;
   /** 计费资源购买、续费下单接口 {@link GenerateDealsAndPayNewRequest} {@link GenerateDealsAndPayNewResponse} */
@@ -7097,6 +7617,8 @@ declare interface Waf {
   ModifyApiAnalyzeStatus(data: ModifyApiAnalyzeStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiAnalyzeStatusResponse>;
   /** api安全状态变更接口 {@link ModifyApiSecEventChangeRequest} {@link ModifyApiSecEventChangeResponse} */
   ModifyApiSecEventChange(data?: ModifyApiSecEventChangeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiSecEventChangeResponse>;
+  /** 修改api安全配置规则 {@link ModifyApiSecSensitiveRuleRequest} {@link ModifyApiSecSensitiveRuleResponse} */
+  ModifyApiSecSensitiveRule(data: ModifyApiSecSensitiveRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiSecSensitiveRuleResponse>;
   /** 修改地域封禁中地域信息 {@link ModifyAreaBanAreasRequest} {@link ModifyAreaBanAreasResponse} */
   ModifyAreaBanAreas(data: ModifyAreaBanAreasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAreaBanAreasResponse>;
   /** 编辑地域封禁规则 {@link ModifyAreaBanRuleRequest} {@link ModifyAreaBanRuleResponse} */
@@ -7107,6 +7629,8 @@ declare interface Waf {
   ModifyAttackWhiteRule(data: ModifyAttackWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAttackWhiteRuleResponse>;
   /** 批量IP黑白名单编辑接口 {@link ModifyBatchIpAccessControlRequest} {@link ModifyBatchIpAccessControlResponse} */
   ModifyBatchIpAccessControl(data: ModifyBatchIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBatchIpAccessControlResponse>;
+  /** 修改Bot-ID规则配置 {@link ModifyBotIdRuleRequest} {@link ModifyBotIdRuleResponse} */
+  ModifyBotIdRule(data: ModifyBotIdRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBotIdRuleResponse>;
   /** bot子场景开关 {@link ModifyBotSceneStatusRequest} {@link ModifyBotSceneStatusResponse} */
   ModifyBotSceneStatus(data: ModifyBotSceneStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBotSceneStatusResponse>;
   /** 场景化后更新Bot的UCB自定义规则 {@link ModifyBotSceneUCBRuleRequest} {@link ModifyBotSceneUCBRuleResponse} */
@@ -7203,6 +7727,8 @@ declare interface Waf {
   SwitchElasticMode(data: SwitchElasticModeRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchElasticModeResponse>;
   /** 批量更新规则防护模式 {@link UpdateProtectionModesRequest} {@link UpdateProtectionModesResponse} */
   UpdateProtectionModes(data: UpdateProtectionModesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProtectionModesResponse>;
+  /** 更新自研版限流规则 {@link UpdateRateLimitV2Request} {@link UpdateRateLimitV2Response} */
+  UpdateRateLimitV2(data: UpdateRateLimitV2Request, config?: AxiosRequestConfig): AxiosPromise<UpdateRateLimitV2Response>;
   /** 编辑SAAS型接入的紧急CC防护状态 {@link UpsertCCAutoStatusRequest} {@link UpsertCCAutoStatusResponse} */
   UpsertCCAutoStatus(data: UpsertCCAutoStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpsertCCAutoStatusResponse>;
   /** Waf CC V2 Upsert接口 {@link UpsertCCRuleRequest} {@link UpsertCCRuleResponse} */
