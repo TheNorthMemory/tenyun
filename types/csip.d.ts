@@ -650,6 +650,8 @@ declare interface AssetRiskItem {
   Severity?: string;
   /** 风险规则ID */
   RiskRuleId?: string;
+  /** 处置分类 */
+  Classify?: string;
 }
 
 /** 安全中心资产标签 */
@@ -1268,6 +1270,8 @@ declare interface CheckViewRiskItem {
   AssetType?: string;
   /** 事件类型 */
   EventType?: string;
+  /** 处置分类 */
+  Classify?: string;
 }
 
 /** clb实例和监听器信息 */
@@ -1616,6 +1620,14 @@ declare interface ExposesItem {
   PortDetectCount?: number;
   /** 端口开放结果 */
   PortDetectResult?: string;
+  /** 标签 */
+  Tag?: string;
+  /** 备注 */
+  Comment?: string;
+  /** 待治理风险数量 */
+  ToGovernedRiskCount?: number;
+  /** 待治理风险内容 */
+  ToGovernedRiskContent?: string;
 }
 
 /** 列表查询接口采用新filter 接口，直接传给后台供后台查询过滤 */
@@ -1714,6 +1726,8 @@ declare interface GateWayAsset {
   Status?: string;
   /** TSE的网关真实地域 */
   EngineRegion?: string;
+  /** 弱口令风险 */
+  WeakPasswordRisk?: number;
 }
 
 /** 高危基线风险内容 */

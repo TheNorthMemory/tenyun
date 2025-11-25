@@ -504,6 +504,8 @@ declare interface CreateInstanceRequest {
 }
 
 declare interface CreateInstanceResponse {
+  /** 实例id */
+  InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -691,6 +693,8 @@ declare interface DescribeDetectPackageDetailResponse {
 }
 
 declare interface DescribeDetectTaskPackageListRequest {
+  /** 偏移量 */
+  Offset?: number;
   /** 每页条数 */
   Limit?: number;
   /** 探测任务过滤条件：ResourceId 探测任务的资源id，PeriodStart 最小过期时间,PeriodEnd 最大过期时间 */
@@ -729,6 +733,8 @@ declare interface DescribeDnsLineListResponse {
 }
 
 declare interface DescribeInstanceDetailRequest {
+  /** 实例id */
+  InstanceId: string;
 }
 
 declare interface DescribeInstanceDetailResponse {
@@ -759,6 +765,8 @@ declare interface DescribeInstanceListResponse {
 }
 
 declare interface DescribeInstancePackageListRequest {
+  /** 偏移量 */
+  Offset?: number;
   /** 每页条数 */
   Limit?: number;
   /** InstanceId实例Id，InstanceName实例名称，ResourceId套餐Id，PackageType套餐类型 */
@@ -793,6 +801,8 @@ declare interface DescribeMonitorsRequest {
   Offset?: number;
   /** 分页，当前分页记录数 */
   Limit?: number;
+  /** 查询过滤条件：MonitorName：监控器名称；MonitorId：监控器id */
+  Filters?: ResourceFilter[];
   /** 是否查探测次数0否1是 */
   IsDetectNum?: number;
 }
@@ -873,6 +883,8 @@ declare interface ModifyAddressPoolResponse {
 }
 
 declare interface ModifyInstanceConfigRequest {
+  /** 实例id */
+  InstanceId: string;
   /** 实例配置详情 */
   InstanceConfig?: InstanceConfig;
 }
@@ -990,7 +1002,7 @@ declare interface Igtm {
   /** 查询分组线路列表 {@link DescribeDnsLineListRequest} {@link DescribeDnsLineListResponse} */
   DescribeDnsLineList(data: DescribeDnsLineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDnsLineListResponse>;
   /** 实例详情 {@link DescribeInstanceDetailRequest} {@link DescribeInstanceDetailResponse} */
-  DescribeInstanceDetail(data?: DescribeInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDetailResponse>;
+  DescribeInstanceDetail(data: DescribeInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDetailResponse>;
   /** 获取实例列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */
   DescribeInstanceList(data?: DescribeInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceListResponse>;
   /** 获取实例套餐列表 {@link DescribeInstancePackageListRequest} {@link DescribeInstancePackageListResponse} */
@@ -1008,7 +1020,7 @@ declare interface Igtm {
   /** 修改地址池 {@link ModifyAddressPoolRequest} {@link ModifyAddressPoolResponse} */
   ModifyAddressPool(data: ModifyAddressPoolRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAddressPoolResponse>;
   /** 修改实例配置 {@link ModifyInstanceConfigRequest} {@link ModifyInstanceConfigResponse} */
-  ModifyInstanceConfig(data?: ModifyInstanceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceConfigResponse>;
+  ModifyInstanceConfig(data: ModifyInstanceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceConfigResponse>;
   /** 修改监控器 {@link ModifyMonitorRequest} {@link ModifyMonitorResponse} */
   ModifyMonitor(data: ModifyMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMonitorResponse>;
   /** 修改策略 {@link ModifyStrategyRequest} {@link ModifyStrategyResponse} */

@@ -128,7 +128,7 @@ declare interface DetectInfoText {
   Comparestatus?: number | null;
   /** 本次流程最终一比一结果描述。- 仅描述用，文案更新时不会通知。 */
   Comparemsg?: string | null;
-  /** 本次流程活体一比一的分数。- 取值范围 [0.00, 100.00]。- 相似度大于等于70时才判断为同一人，也可根据具体场景自行调整阈值。- 阈值70的误通过率为千分之一，阈值80的误通过率是万分之一。 */
+  /** 本次流程活体一比一的分数。- 取值范围 [0.00, 100.00]。- 相似度大于等于70时才判断为同一人，阈值不支持自定义。- 阈值70的误通过率为千分之一，阈值80的误通过率是万分之一。 */
   Sim?: string | null;
   /** 地理位置经纬度。 */
   Location?: string | null;
@@ -152,6 +152,8 @@ declare interface DetectInfoText {
   PassNo?: string | null;
   /** 港澳台居住证签发次数。 */
   VisaNum?: string | null;
+  /** 活体检测的动作顺序，多动作以“,”分隔。输出格式如：“1,2”表示“张嘴+眨眼”。- 详细序列值含义如下： 1：张嘴2：眨眼3：点头4：摇头5：静默注：仅浮层H5产品返回 */
+  LivenessActionSequence?: string | null;
 }
 
 /** 核身视频信息。 */
@@ -220,7 +222,7 @@ declare interface GetEidTokenConfig {
 
 /** 意愿核身（点头确认模式）配置 */
 declare interface IntentionActionConfig {
-  /** 点头确认模式下，系统语音播报使用的问题文本，问题最大长度为150个字符。 */
+  /** 点头确认模式下，系统语音播报使用的问题文本，问题最大长度为250个字符。 */
   Text: string;
 }
 
@@ -244,7 +246,7 @@ declare interface IntentionActionResultDetail {
 
 /** 意愿核身过程中播报的问题文本、用户回答的标准文本。 */
 declare interface IntentionQuestion {
-  /** 当选择语音问答模式时，系统自动播报的问题文本。- 最大长度为150个字符。 */
+  /** 当选择语音问答模式时，系统自动播报的问题文本。- 最大长度为250个字符。 */
   Question: string;
   /** 当选择语音问答模式时，用于判断用户回答是否通过的标准答案列表。- 传入后可自动判断用户回答文本是否在标准文本列表中。- 列表长度最大为50，单个答案长度限制10个字符。 */
   Answers: string[];
@@ -515,9 +517,9 @@ declare interface CheckPhoneAndNameResponse {
 }
 
 declare interface DetectAIFakeFacesRequest {
-  /** 传入需要检测的人脸图片或人脸视频（当前仅支持单人脸检测），使用base64编码的形式，如您的场景视频和图片都有，我们更建议您使用视频进行检测，为了提供更好的检测效果，请您注意以下输入数据的限制与建议：- 图片的Base64值：建议整体图像480x640的分辨率，脸部大小在 100X100 以上，由手机前置摄像头拍摄。Base64编码后的图片数据大小建议不超过3M、最大不可超过10M，仅支持jpg、png格式。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。- 视频的Base64值：Base64编码后的大小建议在8M以内、最大不可超过10M，支持mp4、avi、flv格式，由手机前置摄像头拍摄。视频建议时长为2～5s，最大不可超过20s。视频分辨率建议为480x640（最大支持720p），帧率在25fps~30fps之间。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。示例值：/9j/4AAQSkZJRg.....s97n//2Q== */
+  /** 传入需要检测的人脸图片或人脸视频（当前仅支持单人脸检测），使用base64编码的形式，如您的场景视频和图片都有，我们更建议您使用视频进行检测，为了提供更好的检测效果，请您注意以下输入数据的限制与建议：- 图片的Base64值：建议整体图像480x640的分辨率，脸部大小在 100X100 以上，由手机前置摄像头拍摄。Base64编码后的图片数据大小建议不超过3M、最大不可超过10M，仅支持jpg、png格式。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。- 视频的Base64值：Base64编码后的大小建议在8M以内、最大不可超过10M，支持mp4、avi、flv格式，由手机前置摄像头拍摄。视频建议时长为2～5s，最大不可超过20s。视频分辨率建议为480x640（最大支持720p），帧率在25fps~30fps之间。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。若您未使用Encryption进行加密传输，则本字段为必填参数。 */
   FaceInput?: string;
-  /** 传入的类型。- 取值范围：1：传入的是图片类型。2：传入的是视频类型。其他：返回错误码InvalidParameter。 */
+  /** 传入的类型。- 取值范围：1：传入的是图片类型。2：传入的是视频类型。其他：返回错误码InvalidParameter。若您未使用Encryption进行加密传输，则本字段为必填参数。 */
   FaceInputType?: number;
   /** 是否需要对请求信息进行全包体加密。- 支持的加密算法:AES-256-CBC、SM4-GCM。- 有加密需求的用户可使用此参数，详情请点击左侧链接。 */
   Encryption?: Encryption;
@@ -1044,30 +1046,6 @@ declare interface LivenessRecognitionResponse {
   RequestId?: string;
 }
 
-declare interface LivenessRequest {
-  /** 用于活体检测的视频，视频的BASE64值；BASE64编码后的大小不超过8M，支持mp4、avi、flv格式。 */
-  VideoBase64: string;
-  /** 活体检测类型，取值：LIP/ACTION/SILENT。LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模式选择一种传入。 */
-  LivenessType: string;
-  /** 数字模式传参：数字验证码(1234)，需先调用接口获取数字验证码；动作模式传参：传动作顺序(2,1 or 1,2)，需先调用接口获取动作顺序；静默模式传参：不需要传递此参数。 */
-  ValidateData?: string;
-  /** 额外配置，传入JSON字符串。{"BestFrameNum": 2 //需要返回多张最佳截图，取值范围1-10} */
-  Optional?: string;
-}
-
-declare interface LivenessResponse {
-  /** 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。 */
-  BestFrameBase64?: string | null;
-  /** 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分 */
-  Result?: string;
-  /** 业务结果描述。 */
-  Description?: string;
-  /** 最佳最佳截图列表，仅在配置了返回多张最佳截图时有效。 */
-  BestFrameList?: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface MinorsVerificationRequest {
   /** 参与校验的参数类型。0：使用手机号进行校验；1：使用姓名与身份证号进行校验。 */
   Type: string;
@@ -1329,8 +1307,6 @@ declare interface Faceid {
   ImageRecognition(data: ImageRecognitionRequest, config?: AxiosRequestConfig): AxiosPromise<ImageRecognitionResponse>;
   /** 照片人脸核身(V2.0) {@link ImageRecognitionV2Request} {@link ImageRecognitionV2Response} */
   ImageRecognitionV2(data: ImageRecognitionV2Request, config?: AxiosRequestConfig): AxiosPromise<ImageRecognitionV2Response>;
-  /** 活体检测 {@link LivenessRequest} {@link LivenessResponse} */
-  Liveness(data: LivenessRequest, config?: AxiosRequestConfig): AxiosPromise<LivenessResponse>;
   /** 活体人脸比对 {@link LivenessCompareRequest} {@link LivenessCompareResponse} */
   LivenessCompare(data: LivenessCompareRequest, config?: AxiosRequestConfig): AxiosPromise<LivenessCompareResponse>;
   /** 活体人脸核身 {@link LivenessRecognitionRequest} {@link LivenessRecognitionResponse} */

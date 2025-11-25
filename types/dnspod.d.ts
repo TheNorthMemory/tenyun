@@ -804,7 +804,7 @@ declare interface RecordListItem {
   MonitorStatus?: string;
   /** 记录备注说明 */
   Remark?: string;
-  /** 记录缓存时间 */
+  /** 记录缓存时间，单位：秒 */
   TTL?: number;
   /** MX值 */
   MX?: number;

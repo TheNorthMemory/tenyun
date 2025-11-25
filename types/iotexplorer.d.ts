@@ -2143,6 +2143,8 @@ declare interface CreateTWeSeeRecognitionTaskRequest {
   DeviceName: string;
   /** 输入视频 / 图片的 URL */
   InputURL: string;
+  /** 通道 ID */
+  ChannelId?: number;
   /** 自定义事件 ID */
   CustomId?: string;
   /** 是否保存该事件使其可被搜索 */

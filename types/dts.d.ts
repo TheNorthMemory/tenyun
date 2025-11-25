@@ -162,6 +162,10 @@ declare interface CompareTableItem {
   ColumnMode?: string;
   /** 当 ColumnMode 为 partial 时必填(该参数仅对数据同步任务有效) */
   Columns?: CompareColumnItem[];
+  /** 过滤条件 */
+  FilterCondition?: string;
+  /** 时区选择。如 "+08:00", "-08:00", "+00:00"（空值等价于"+00:00"） */
+  FilterTimeZone?: string;
 }
 
 /** 数据一致性校验结果 */
@@ -702,6 +706,20 @@ declare interface GroupInfo {
   ConsumerGroupState?: string;
   /** 每个消费者正在消费的分区 */
   PartitionAssignment?: PartitionAssignment[];
+}
+
+/** 增量校验阶段的摘要信息 */
+declare interface IncCompareAbstractInfo {
+  /** 增量起始位点 */
+  StartPosition?: string;
+  /** 增量当前位点 */
+  CurrentPosition?: string;
+  /** 已校验行数 */
+  CheckedRecord?: number;
+  /** 不一致行数 */
+  DiffRecord?: number;
+  /** 不一致表的数量 */
+  DiffTable?: number;
 }
 
 /** 迁移任务列表 */
@@ -1654,6 +1672,26 @@ declare interface CreateSubscribeResponse {
   RequestId?: string;
 }
 
+declare interface CreateSyncCompareTaskRequest {
+  /** 任务 Id */
+  JobId: string;
+  /** 数据对比任务名称，若为空则默认给CompareTaskId相同值 */
+  TaskName?: string;
+  /** 数据对比对象模式，sameAsMigrate(全部迁移对象， 默认为此项配置)，custom(自定义模式) */
+  ObjectMode?: string;
+  /** 对比对象，当ObjectMode值为custom时，此项需要填写 */
+  Objects?: CompareObject;
+  /** 一致性校验选项 */
+  Options?: CompareOptions;
+}
+
+declare interface CreateSyncCompareTaskResponse {
+  /** 数据对比任务 ID，形如：sync-8yv4w2i1-cmp-37skmii9 */
+  CompareTaskId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSyncJobRequest {
   /** 付款类型, 如：PrePay(表示包年包月)、PostPay(表示按时按量) */
   PayMode: string;
@@ -1712,6 +1750,18 @@ declare interface DeleteConsumerGroupRequest {
 }
 
 declare interface DeleteConsumerGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSyncCompareTaskRequest {
+  /** 任务 Id */
+  JobId: string;
+  /** 对比任务 ID，形如：sync-8yv4w2i1-cmp-37skmii9 */
+  CompareTaskId: string;
+}
+
+declare interface DeleteSyncCompareTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2140,6 +2190,62 @@ declare interface DescribeSubscribeReturnableResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSyncCompareReportRequest {
+  /** 任务 Id */
+  JobId: string;
+  /** 校验任务 Id */
+  CompareTaskId: string;
+  /** 校验不一致结果的 limit */
+  DifferenceLimit?: number;
+  /** 不一致的 Offset */
+  DifferenceOffset?: number;
+  /** 搜索条件，不一致的库名 */
+  DifferenceDB?: string;
+  /** 搜索条件，不一致的表名 */
+  DifferenceTable?: string;
+  /** 未校验的 Limit */
+  SkippedLimit?: number;
+  /** 未校验的 Offset */
+  SkippedOffset?: number;
+  /** 搜索条件，未校验的库名 */
+  SkippedDB?: string;
+  /** 搜索条件，未校验的表名 */
+  SkippedTable?: string;
+}
+
+declare interface DescribeSyncCompareReportResponse {
+  /** 一致性校验摘要信息 */
+  Abstract?: CompareAbstractInfo | null;
+  /** 一致性校验详细信息 */
+  Detail?: CompareDetailInfo | null;
+  /** 增量校验阶段的摘要 */
+  IncAbstract?: IncCompareAbstractInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSyncCompareTasksRequest {
+  /** 任务 Id */
+  JobId: string;
+  /** 分页设置，表示每页显示多少条任务，默认为 20 */
+  Limit?: number;
+  /** 分页偏移量 */
+  Offset?: number;
+  /** 校验任务 ID */
+  CompareTaskId?: string;
+  /** 任务状态过滤，可能的值：created - 创建完成；readyRun - 等待运行；running - 运行中；success - 成功；stopping - 结束中；failed - 失败；canceled - 已终止 */
+  Status?: string[];
+}
+
+declare interface DescribeSyncCompareTasksResponse {
+  /** 数量 */
+  TotalCount?: number | null;
+  /** 一致性校验任务列表 */
+  Items?: CompareTaskItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSyncJobsRequest {
   /** 同步任务id，如sync-werwfs23，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。 */
   JobId?: string;
@@ -2432,6 +2538,40 @@ declare interface ModifySubscribeObjectsResponse {
   RequestId?: string;
 }
 
+declare interface ModifySyncCompareTaskNameRequest {
+  /** 任务 Id */
+  JobId: string;
+  /** 对比任务 ID，形如：sync-8yv4w2i1-cmp-37skmii9 */
+  CompareTaskId: string;
+  /** 一致性校验任务名称 */
+  TaskName: string;
+}
+
+declare interface ModifySyncCompareTaskNameResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySyncCompareTaskRequest {
+  /** 任务 Id */
+  JobId: string;
+  /** 对比任务 ID，形如：sync-8yv4w2i1-cmp-37skmii9 */
+  CompareTaskId: string;
+  /** 任务名称 */
+  TaskName?: string;
+  /** 数据对比对象模式，sameAsMigrate(全部迁移对象， 默认为此项配置)、custom(自定义)，注意自定义对比对象必须是迁移对象的子集 */
+  ObjectMode?: string;
+  /** 对比对象，若CompareObjectMode取值为custom，则此项必填 */
+  Objects?: CompareObject;
+  /** 一致性校验选项 */
+  Options?: CompareOptions;
+}
+
+declare interface ModifySyncCompareTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifySyncJobConfigRequest {
   /** 同步任务ID，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。 */
   JobId: string;
@@ -2660,6 +2800,18 @@ declare interface StartSubscribeResponse {
   RequestId?: string;
 }
 
+declare interface StartSyncCompareRequest {
+  /** 任务 Id */
+  JobId: string;
+  /** 对比任务 ID，形如：sync-8yv4w2i1-cmp-37skmii9 */
+  CompareTaskId: string;
+}
+
+declare interface StartSyncCompareResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StartSyncJobRequest {
   /** 同步任务id，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。 */
   JobId?: string;
@@ -2690,6 +2842,20 @@ declare interface StopMigrateJobRequest {
 }
 
 declare interface StopMigrateJobResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopSyncCompareRequest {
+  /** 任务 Id */
+  JobId: string;
+  /** 对比任务 ID，形如：sync-8yv4w2i1-cmp-37skmii9 */
+  CompareTaskId: string;
+  /** 是否强制停止。如果填true，迁移任务增量阶段会跳过一致性校验产生的binlog，达到快速恢复任务的效果 */
+  ForceStop?: boolean;
+}
+
+declare interface StopSyncCompareResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3407,12 +3573,16 @@ declare interface Dts {
   CreateSubscribe(data: CreateSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubscribeResponse>;
   /** 校验订阅任务 {@link CreateSubscribeCheckJobRequest} {@link CreateSubscribeCheckJobResponse} */
   CreateSubscribeCheckJob(data: CreateSubscribeCheckJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubscribeCheckJobResponse>;
+  /** 创建同步一致性校验任务 {@link CreateSyncCompareTaskRequest} {@link CreateSyncCompareTaskResponse} */
+  CreateSyncCompareTask(data: CreateSyncCompareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSyncCompareTaskResponse>;
   /** 创建同步任务 {@link CreateSyncJobRequest} {@link CreateSyncJobResponse} */
   CreateSyncJob(data: CreateSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSyncJobResponse>;
   /** 删除一致性校验任务 {@link DeleteCompareTaskRequest} {@link DeleteCompareTaskResponse} */
   DeleteCompareTask(data: DeleteCompareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCompareTaskResponse>;
   /** 删除消费组 {@link DeleteConsumerGroupRequest} {@link DeleteConsumerGroupResponse} */
   DeleteConsumerGroup(data: DeleteConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsumerGroupResponse>;
+  /** 删除同步一致性校验任务 {@link DeleteSyncCompareTaskRequest} {@link DeleteSyncCompareTaskResponse} */
+  DeleteSyncCompareTask(data: DeleteSyncCompareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSyncCompareTaskResponse>;
   /** 查询同步校验任务结果 {@link DescribeCheckSyncJobResultRequest} {@link DescribeCheckSyncJobResultResponse} */
   DescribeCheckSyncJobResult(data?: DescribeCheckSyncJobResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCheckSyncJobResultResponse>;
   /** 查询一致性校验任务详情 {@link DescribeCompareReportRequest} {@link DescribeCompareReportResponse} */
@@ -3441,6 +3611,10 @@ declare interface Dts {
   DescribeSubscribeJobs(data?: DescribeSubscribeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscribeJobsResponse>;
   /** 查询订阅实例是否可以退换 {@link DescribeSubscribeReturnableRequest} {@link DescribeSubscribeReturnableResponse} */
   DescribeSubscribeReturnable(data: DescribeSubscribeReturnableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscribeReturnableResponse>;
+  /** 查询同步一致性校验任务详情 {@link DescribeSyncCompareReportRequest} {@link DescribeSyncCompareReportResponse} */
+  DescribeSyncCompareReport(data: DescribeSyncCompareReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSyncCompareReportResponse>;
+  /** 查询同步一致性校验任务列表 {@link DescribeSyncCompareTasksRequest} {@link DescribeSyncCompareTasksResponse} */
+  DescribeSyncCompareTasks(data: DescribeSyncCompareTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSyncCompareTasksResponse>;
   /** 查询同步任务信息 {@link DescribeSyncJobsRequest} {@link DescribeSyncJobsResponse} */
   DescribeSyncJobs(data?: DescribeSyncJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSyncJobsResponse>;
   /** 下线已隔离的数据订阅任务 {@link DestroyIsolatedSubscribeRequest} {@link DestroyIsolatedSubscribeResponse} */
@@ -3479,6 +3653,10 @@ declare interface Dts {
   ModifySubscribeName(data: ModifySubscribeNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubscribeNameResponse>;
   /** 修改订阅对象 {@link ModifySubscribeObjectsRequest} {@link ModifySubscribeObjectsResponse} */
   ModifySubscribeObjects(data: ModifySubscribeObjectsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubscribeObjectsResponse>;
+  /** 修改同步一致性校验任务 {@link ModifySyncCompareTaskRequest} {@link ModifySyncCompareTaskResponse} */
+  ModifySyncCompareTask(data: ModifySyncCompareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySyncCompareTaskResponse>;
+  /** 修改同步一致性校验任务名称 {@link ModifySyncCompareTaskNameRequest} {@link ModifySyncCompareTaskNameResponse} */
+  ModifySyncCompareTaskName(data: ModifySyncCompareTaskNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySyncCompareTaskNameResponse>;
   /** 修改同步任务配置 {@link ModifySyncJobConfigRequest} {@link ModifySyncJobConfigResponse} */
   ModifySyncJobConfig(data: ModifySyncJobConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySyncJobConfigResponse>;
   /** 修改同步任务的传输速率 {@link ModifySyncRateLimitRequest} {@link ModifySyncRateLimitResponse} */
@@ -3517,12 +3695,16 @@ declare interface Dts {
   StartModifySyncJob(data: StartModifySyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<StartModifySyncJobResponse>;
   /** 启动订阅任务 {@link StartSubscribeRequest} {@link StartSubscribeResponse} */
   StartSubscribe(data: StartSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<StartSubscribeResponse>;
+  /** 启动同步一致性校验任务 {@link StartSyncCompareRequest} {@link StartSyncCompareResponse} */
+  StartSyncCompare(data: StartSyncCompareRequest, config?: AxiosRequestConfig): AxiosPromise<StartSyncCompareResponse>;
   /** 启动同步任务 {@link StartSyncJobRequest} {@link StartSyncJobResponse} */
   StartSyncJob(data?: StartSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<StartSyncJobResponse>;
   /** 终止一致性校验任务 {@link StopCompareRequest} {@link StopCompareResponse} */
   StopCompare(data: StopCompareRequest, config?: AxiosRequestConfig): AxiosPromise<StopCompareResponse>;
   /** 终止数据迁移任务 {@link StopMigrateJobRequest} {@link StopMigrateJobResponse} */
   StopMigrateJob(data: StopMigrateJobRequest, config?: AxiosRequestConfig): AxiosPromise<StopMigrateJobResponse>;
+  /** 终止同步一致性校验任务 {@link StopSyncCompareRequest} {@link StopSyncCompareResponse} */
+  StopSyncCompare(data: StopSyncCompareRequest, config?: AxiosRequestConfig): AxiosPromise<StopSyncCompareResponse>;
   /** 结束同步任务 {@link StopSyncJobRequest} {@link StopSyncJobResponse} */
   StopSyncJob(data: StopSyncJobRequest, config?: AxiosRequestConfig): AxiosPromise<StopSyncJobResponse>;
   /** 配置数据订阅通道 {@link V20180330.ActivateSubscribeRequest} {@link V20180330.ActivateSubscribeResponse} */

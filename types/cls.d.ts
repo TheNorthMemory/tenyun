@@ -790,6 +790,96 @@ declare interface DeliverConfig {
   Scope: number;
 }
 
+/** 投递DLC任务配置信息 */
+declare interface DlcDeliverInfo {
+  /** 任务id。 */
+  TaskId?: string;
+  /** 账号id。 */
+  Uin?: number;
+  /** 日志主题id。 */
+  TopicId?: string;
+  /** 任务名称。 */
+  Name?: string;
+  /** 投递类型，0：实时投递，1：历史投递 */
+  DeliverType?: number;
+  /** 投递文件大小，单位MB */
+  MaxSize?: number;
+  /** 投递间隔 单位秒 */
+  Interval?: number;
+  /** 投递时间范围的开始时间 */
+  StartTime?: number;
+  /** 投递时间范围的结束时间 */
+  EndTime?: number;
+  /** dlc配置信息 */
+  DlcInfo?: DlcInfo;
+  /** 是否开启投递服务日志。1关闭，2开启 */
+  HasServicesLog?: number;
+  /** 任务状态。 */
+  Status?: number;
+  /** 任务进度。历史投递任务生效。 */
+  Progress?: number;
+  /** 日志主题类型。0:标准主题，1:指标主题 */
+  BizType?: number;
+  /** 任务创建时间。 */
+  CreateTime?: number;
+  /** 任务修改时间。 */
+  UpdateTime?: number;
+}
+
+/** 数据湖计算服务（Data Lake Compute，简称DLC）数据字段配置信息 */
+declare interface DlcFiledInfo {
+  /** cls日志中的字段名 */
+  ClsField: string;
+  /** 数据湖计算服务表的列名 */
+  DlcField: string;
+  /** 数据湖计算服务字段类型 */
+  DlcFieldType: string;
+  /** 解析失败填充字段 */
+  FillField?: string;
+  /** 是否禁用 */
+  Disable?: boolean;
+}
+
+/** 数据湖计算服务（Data Lake Compute，简称DLC）导入配置信息 */
+declare interface DlcInfo {
+  /** dlc表信息 */
+  TableInfo: DlcTableInfo;
+  /** dlc数据字段信息 */
+  FieldInfos: DlcFiledInfo[];
+  /** dlc分区信息 */
+  PartitionInfos: DlcPartitionInfo[];
+  /** dlc分区额外信息 */
+  PartitionExtra?: DlcPartitionExtra;
+}
+
+/** 数据湖计算服务（Data Lake Compute，简称DLC）数据分区额外信息 */
+declare interface DlcPartitionExtra {
+  /** 时间格式	eg: %Y-%m-%d %H:%M:%S.%f */
+  TimeFormat?: string;
+  /** 时间时区 */
+  TimeZone?: string;
+}
+
+/** 数据湖计算服务（Data Lake Compute，简称DLC）数据分区配置 */
+declare interface DlcPartitionInfo {
+  /** cls日志中的字段名 */
+  ClsField: string;
+  /** dlc表的列名 */
+  DlcField: string;
+  /** dlc字段类型 */
+  DlcFieldType: string;
+}
+
+/** 数据湖计算服务（Data Lake Compute，简称DLC）数据表配置信息 */
+declare interface DlcTableInfo {
+  /** 数据目录 */
+  DataDirectory: string;
+  /** 数据库 */
+  DatabaseName: string;
+  /** 数据表 */
+  TableName: string;
+}
+
 /** 键值索引自动配置，启用后自动将日志内的字段添加到键值索引中，包括日志中后续新增的字段。 */
 declare interface DynamicIndex {
   /** 键值索引自动配置开关 */
@@ -2208,6 +2298,34 @@ declare interface CreateDeliverCloudFunctionResponse {
   RequestId?: string;
 }
 
+declare interface CreateDlcDeliverRequest {
+  /** 日志主题id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  TopicId: string;
+  /** 名称：长度不超过64字符，以字母开头，接受0-9,a-z,A-Z, _,-,中文字符。 */
+  Name: string;
+  /** 投递类型。0:批投递,1:实时投递 */
+  DeliverType: number;
+  /** 投递时间范围的开始时间 */
+  StartTime: number;
+  /** dlc配置信息 */
+  DlcInfo: DlcInfo;
+  /** 投递文件大小,单位MB。 DeliverType=0时必填，范围 5<= MaxSize <= 256。 */
+  MaxSize?: number;
+  /** 投递间隔，单位秒。 DeliverType=0时必填，范围 300<= Interval <=900。 */
+  Interval?: number;
+  /** 投递时间范围的结束时间。 如果为空，则表示不限时。EndTime不为空时，需要大于StartTime。 */
+  EndTime?: number;
+  /** 是否开启投递服务日志。1关闭，2开启。默认开启 */
+  HasServicesLog?: number;
+}
+
+declare interface CreateDlcDeliverResponse {
+  /** 配置id */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateExportRequest {
   /** 日志主题Id- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
@@ -2618,6 +2736,18 @@ declare interface DeleteDataTransformResponse {
   RequestId?: string;
 }
 
+declare interface DeleteDlcDeliverRequest {
+  /** 日志主题id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  TopicId: string;
+  /** 任务id。 */
+  TaskId: string;
+}
+
+declare interface DeleteDlcDeliverResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteExportRequest {
   /** 日志导出任务Id- 通过[获取日志下载任务列表](https://cloud.tencent.com/document/product/614/56449)获取日志导出任务Id。 */
   ExportId: string;
@@ -2982,6 +3112,26 @@ declare interface DescribeDataTransformInfoResponse {
   DataTransformTaskInfos?: DataTransformTaskInfo[];
   /** 任务总次数 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDlcDeliversRequest {
+  /** 日志主题id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  TopicId: string;
+  /** - taskId按照【任务id】进行过滤。类型：String必选：否- name按照【任务名称】进行过滤。类型：String必选：否- tableName按照【数据表】进行过滤。类型：String必选：否- statusFlag按照【状态】进行过滤。支持："1","2","3","4"。含义：1：RUNNING，2：STOPPED，3：FINISHED，4：FAILED类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为10。 */
+  Filters?: Filter[];
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
+}
+
+declare interface DescribeDlcDeliversResponse {
+  /** 告警渠道回调配置列表。 */
+  Infos?: DlcDeliverInfo[];
+  /** 符合条件的通知内容配置总数。 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3726,6 +3876,36 @@ declare interface ModifyDataTransformResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDlcDeliverRequest {
+  /** 日志主题id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  TopicId: string;
+  /** 任务id。 */
+  TaskId: string;
+  /** 名称：长度不超过64字符，以字母开头，接受0-9,a-z,A-Z, _,-,中文字符。 */
+  Name?: string;
+  /** 投递类型。0:批投递,1:实时投递 */
+  DeliverType?: number;
+  /** 投递时间范围的开始时间 */
+  StartTime?: number;
+  /** 投递时间范围的结束时间。 如果为空，则表示不限时 */
+  EndTime?: number;
+  /** 投递文件大小,单位MB。 DeliverType=0时必填，范围 5<= MaxSize <= 256。 */
+  MaxSize?: number;
+  /** 投递间隔，单位秒。 DeliverType=0时必填，范围 300<= Interval <=900。 */
+  Interval?: number;
+  /** dlc配置信息 */
+  DlcInfo?: DlcInfo;
+  /** 是否开启投递服务日志。1关闭，2开启。默认开启 */
+  HasServicesLog?: number;
+  /** 任务状态。 */
+  Status?: number;
+}
+
+declare interface ModifyDlcDeliverResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyIndexRequest {
   /** 日志主题Id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
@@ -4251,6 +4431,8 @@ declare interface Cls {
   CreateDataTransform(data: CreateDataTransformRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataTransformResponse>;
   /** 创建投递SCF任务 {@link CreateDeliverCloudFunctionRequest} {@link CreateDeliverCloudFunctionResponse} */
   CreateDeliverCloudFunction(data: CreateDeliverCloudFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeliverCloudFunctionResponse>;
+  /** 创建DLC投递任务 {@link CreateDlcDeliverRequest} {@link CreateDlcDeliverResponse} */
+  CreateDlcDeliver(data: CreateDlcDeliverRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDlcDeliverResponse>;
   /** 创建日志下载任务 {@link CreateExportRequest} {@link CreateExportResponse} */
   CreateExport(data: CreateExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExportResponse>;
   /** 创建索引 {@link CreateIndexRequest} {@link CreateIndexResponse} */
@@ -4295,6 +4477,8 @@ declare interface Cls {
   DeleteDashboardSubscribe(data: DeleteDashboardSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDashboardSubscribeResponse>;
   /** 删除数据加工任务 {@link DeleteDataTransformRequest} {@link DeleteDataTransformResponse} */
   DeleteDataTransform(data: DeleteDataTransformRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataTransformResponse>;
+  /** 删除DLC投递任务 {@link DeleteDlcDeliverRequest} {@link DeleteDlcDeliverResponse} */
+  DeleteDlcDeliver(data: DeleteDlcDeliverRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDlcDeliverResponse>;
   /** 删除日志下载任务 {@link DeleteExportRequest} {@link DeleteExportResponse} */
   DeleteExport(data: DeleteExportRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteExportResponse>;
   /** 删除索引配置 {@link DeleteIndexRequest} {@link DeleteIndexResponse} */
@@ -4345,6 +4529,8 @@ declare interface Cls {
   DescribeDashboards(data?: DescribeDashboardsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDashboardsResponse>;
   /** 获取数据加工任务列表基本信息 {@link DescribeDataTransformInfoRequest} {@link DescribeDataTransformInfoResponse} */
   DescribeDataTransformInfo(data?: DescribeDataTransformInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataTransformInfoResponse>;
+  /** 获取DLC投递任务列表 {@link DescribeDlcDeliversRequest} {@link DescribeDlcDeliversResponse} */
+  DescribeDlcDelivers(data: DescribeDlcDeliversRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDlcDeliversResponse>;
   /** 获取日志下载任务列表 {@link DescribeExportsRequest} {@link DescribeExportsResponse} */
   DescribeExports(data: DescribeExportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportsResponse>;
   /** 获取索引配置信息 {@link DescribeIndexRequest} {@link DescribeIndexResponse} */
@@ -4409,6 +4595,8 @@ declare interface Cls {
   ModifyDashboardSubscribe(data: ModifyDashboardSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDashboardSubscribeResponse>;
   /** 修改数据加工任务 {@link ModifyDataTransformRequest} {@link ModifyDataTransformResponse} */
   ModifyDataTransform(data: ModifyDataTransformRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataTransformResponse>;
+  /** 修改DLC投递任务 {@link ModifyDlcDeliverRequest} {@link ModifyDlcDeliverResponse} */
+  ModifyDlcDeliver(data: ModifyDlcDeliverRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDlcDeliverResponse>;
   /** 修改索引 {@link ModifyIndexRequest} {@link ModifyIndexResponse} */
   ModifyIndex(data: ModifyIndexRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIndexResponse>;
   /** 修改Kafka协议消费信息 {@link ModifyKafkaConsumerRequest} {@link ModifyKafkaConsumerResponse} */

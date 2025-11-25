@@ -2564,6 +2564,22 @@ declare interface OriginACLInfo {
   Status?: string;
 }
 
+/** 回源鉴权参数。 */
+declare interface OriginAuthenticationParameters {
+  /** 回源鉴权请求属性。 */
+  RequestProperties: OriginAuthenticationRequestProperties[];
+}
+
+/** 回源鉴权请求属性。 */
+declare interface OriginAuthenticationRequestProperties {
+  /** 设置回源鉴权参数类型，取值有：QueryString：表示设置回源鉴权参数类型为查询字符串；Header：表示设置回源鉴权参数类型为请求头。 */
+  Type: string;
+  /** 设置回源鉴权类型对应的参数名称。 */
+  Name: string;
+  /** 设置回源鉴权类型对应的参数值。 */
+  Value: string;
+}
+
 /** HTTPS 源站证书校验的模式。 */
 declare interface OriginCertificateVerify {
   /** 源站证书校验模式。取值有：disable:禁用源站证书校验。custom_ca:使用指定受信任 CA 证书校验。 */
@@ -3232,7 +3248,7 @@ declare interface RuleCondition {
 
 /** 规则引擎操作。 */
 declare interface RuleEngineAction {
-  /** 操作名称。名称需要与参数结构体对应，例如 Name=Cache，则 CacheParameters 必填。Cache：节点缓存 TTL；CacheKey：自定义 Cache Key；CachePrefresh：缓存预刷新；AccessURLRedirect：访问 URL 重定向；UpstreamURLRewrite：回源 URL 重写；QUIC：QUIC；WebSocket：WebSocket；Authentication：Token 鉴权；MaxAge：浏览器缓存 TTL；StatusCodeCache：状态码缓存 TTL；OfflineCache：离线缓存；SmartRouting：智能加速；RangeOriginPull：分片回源 ；UpstreamHTTP2：HTTP2 回源；HostHeader：Host Header 重写；ForceRedirectHTTPS：访问协议强制 HTTPS 跳转配置；OriginPullProtocol：回源 HTTPS；Compression：智能压缩配置；HSTS：HSTS；ClientIPHeader：存储客户端请求 IP 的头部信息配置；OCSPStapling：OCSP 装订；HTTP2：HTTP2 接入；PostMaxSize：POST 请求上传文件流式传输最大限制配置；ClientIPCountry：回源时携带客户端 IP 所属地域信息；UpstreamFollowRedirect：回源跟随重定向参数配置；UpstreamRequest：回源请求参数；TLSConfig：SSL/TLS 安全；ModifyOrigin：修改源站；HTTPUpstreamTimeout：七层回源超时配置；HttpResponse：HTTP 应答；ErrorPage：自定义错误页面；ModifyResponseHeader：修改 HTTP 节点响应头；ModifyRequestHeader：修改 HTTP 节点请求头；ResponseSpeedLimit：单连接下载限速；SetContentIdentifier：设置内容标识符；Vary：Vary 特性配置。 */
+  /** 操作名称。名称需要与参数结构体对应，例如 Name=Cache，则 CacheParameters 必填。Cache：节点缓存 TTL；CacheKey：自定义 Cache Key；CachePrefresh：缓存预刷新；AccessURLRedirect：访问 URL 重定向；UpstreamURLRewrite：回源 URL 重写；QUIC：QUIC；WebSocket：WebSocket；Authentication：Token 鉴权；MaxAge：浏览器缓存 TTL；StatusCodeCache：状态码缓存 TTL；OfflineCache：离线缓存；SmartRouting：智能加速；RangeOriginPull：分片回源 ；UpstreamHTTP2：HTTP2 回源；HostHeader：Host Header 重写；ForceRedirectHTTPS：访问协议强制 HTTPS 跳转配置；OriginPullProtocol：回源 HTTPS；Compression：智能压缩配置；HSTS：HSTS；ClientIPHeader：存储客户端请求 IP 的头部信息配置；OCSPStapling：OCSP 装订；HTTP2：HTTP2 接入；PostMaxSize：POST 请求上传文件流式传输最大限制配置；ClientIPCountry：回源时携带客户端 IP 所属地域信息；UpstreamFollowRedirect：回源跟随重定向参数配置；UpstreamRequest：回源请求参数；TLSConfig：SSL/TLS 安全；ModifyOrigin：修改源站；HTTPUpstreamTimeout：七层回源超时配置；HttpResponse：HTTP 应答；ErrorPage：自定义错误页面；ModifyResponseHeader：修改 HTTP 节点响应头；ModifyRequestHeader：修改 HTTP 节点请求头；ResponseSpeedLimit：单连接下载限速；SetContentIdentifier：设置内容标识符；Vary：Vary 特性配置；ContentCompression：内容压缩配置；OriginAuthentication：回源鉴权配置。 */
   Name: string;
   /** 节点缓存 TTL 配置参数，当 Name 取值为 Cache 时，该参数必填。 */
   CacheParameters?: CacheParameters | null;
@@ -3308,6 +3324,8 @@ declare interface RuleEngineAction {
   VaryParameters?: VaryParameters;
   /** 内容压缩配置参数，当 Name 取值为 ContentCompression 时，该参数必填。该参数为白名单功能，如有需要，请联系腾讯云工程师处理。 */
   ContentCompressionParameters?: ContentCompressionParameters;
+  /** 回源鉴权配置参数，当 Name 取值为 OriginAuthentication 时，该参数必填。该参数为白名单功能，如有需要，请联系腾讯云工程师处理。 */
+  OriginAuthenticationParameters?: OriginAuthenticationParameters;
 }
 
 /** 规则引擎规则详情。 */

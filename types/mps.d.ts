@@ -1828,6 +1828,24 @@ declare interface BlindWatermarkInput {
   Definition: number;
 }
 
+/** 数字水印模板详情 */
+declare interface BlindWatermarkTemplate {
+  /** 数字水印模板唯一标识。 */
+  Definition?: number;
+  /** 数字水印类型，可选值：blind-basic：基础版权数字水印；blind-nagra：NAGRA取证水印； */
+  Type?: string;
+  /** 数字水印模板名称。 */
+  Name?: string;
+  /** 数字水印模板文本内容，长度不超过64个字符。 */
+  TextContent?: string;
+  /** 数字水印模板描述信息。 */
+  Comment?: string;
+  /** 数字水印模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  CreateTime?: string;
+  /** 数字水印模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  UpdateTime?: string;
+}
+
 /** 智能分类任务控制参数 */
 declare interface ClassificationConfigureInfo {
   /** 智能分类任务开关，可选值：ON：开启智能分类任务；OFF：关闭智能分类任务。 */
@@ -4794,6 +4812,24 @@ declare interface PornOcrReviewTemplateInfoForUpdate {
   ReviewConfidence?: number;
 }
 
+/** 图片处理模板 */
+declare interface ProcessImageTemplate {
+  /** 图片处理模板唯一标识。 */
+  Definition?: number;
+  /** 图片处理模板名称。 */
+  Name?: string;
+  /** 图片处理模板描述信息。 */
+  Comment?: string;
+  /** 模板类型。 */
+  Type?: string;
+  /** 图片处理模板配置参数。 */
+  ProcessImageConfig?: ImageTaskInput;
+  /** 模板创建时间。 */
+  CreateTime?: string;
+  /** 模板最后修改时间。 */
+  UpdateTime?: string;
+}
+
 /** 语音违禁任务控制参数 */
 declare interface ProhibitedAsrReviewTemplateInfo {
   /** 语音违禁任务开关，可选值：ON：开启语音违禁任务；OFF：关闭语音违禁任务。 */
@@ -6866,6 +6902,24 @@ declare interface CreateAsrHotwordsResponse {
   RequestId?: string;
 }
 
+declare interface CreateBlindWatermarkTemplateRequest {
+  /** 数字水印类型，可选值：blind-basic：基础版权数字水印；blind-nagra：NAGRA水印； */
+  Type: string;
+  /** 数字水印文字内容，长度不超过64个字符，NAGRA水印类型的模板创建后不支持修改文字内容。 */
+  TextContent: string;
+  /** 数字水印模板名称，支持中文、英文、数字、_、-和. 六种格式，长度限制：64 个字符。 */
+  Name?: string;
+  /** 数字水印模板描述信息，长度限制：256 个字符。 */
+  Comment?: string;
+}
+
+declare interface CreateBlindWatermarkTemplateResponse {
+  /** 数字水印模板唯一标识。 */
+  Definition?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateContentReviewTemplateRequest {
   /** 内容审核模板名称，长度限制：64 个字符。 */
   Name?: string;
@@ -6986,6 +7040,22 @@ declare interface CreatePersonSampleResponse {
   Person?: AiSamplePerson;
   /** 处理失败的五官定位信息。 */
   FailFaceInfoSet?: AiSampleFailFaceInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateProcessImageTemplateRequest {
+  /** 图片处理模板。 */
+  ProcessImageTemplate: ImageTaskInput;
+  /** 图片处理模板名称，长度限制：64个字符。 */
+  Name?: string;
+  /** 图片处理模板描述信息，长度限制：256个字符。 */
+  Comment?: string;
+}
+
+declare interface CreateProcessImageTemplateResponse {
+  /** 图片处理模板唯一标识 */
+  Definition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7394,6 +7464,16 @@ declare interface DeleteAsrHotwordsResponse {
   RequestId?: string;
 }
 
+declare interface DeleteBlindWatermarkTemplateRequest {
+  /** 数字水印模板唯一标识。 */
+  Definition: number;
+}
+
+declare interface DeleteBlindWatermarkTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteContentReviewTemplateRequest {
   /** 内容审核模板唯一标识。 */
   Definition: number;
@@ -7430,6 +7510,16 @@ declare interface DeletePersonSampleRequest {
 }
 
 declare interface DeletePersonSampleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteProcessImageTemplateRequest {
+  /** 图片处理模板唯一标识。 */
+  Definition?: number;
+}
+
+declare interface DeleteProcessImageTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7774,6 +7864,28 @@ declare interface DescribeBatchTaskDetailResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBlindWatermarkTemplatesRequest {
+  /** 数字水印模板唯一标识过滤条件，数组长度限制：100。 */
+  Definitions?: number[];
+  /** 数字水印模板标识过滤条件，长度限制：64 个字符。 */
+  Name?: string;
+  /** 数字水印类型，可选值：blind-basic：基础版权数字水印；blind-nagra：Nagra取证水印； */
+  Type?: string;
+  /** 分页偏移量，默认值：0。 */
+  Offset?: number;
+  /** 返回记录条数默认值：10；最大值：100。 */
+  Limit?: number;
+}
+
+declare interface DescribeBlindWatermarkTemplatesResponse {
+  /** 符合过滤条件的记录总数。 */
+  TotalCount?: number;
+  /** 数字水印模板详情列表。 */
+  BlindWatermarkTemplateSet?: BlindWatermarkTemplate[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeContentReviewTemplatesRequest {
   /** 智能审核模板唯一标识过滤条件，数组长度限制：50。 */
   Definitions?: number[];
@@ -7910,6 +8022,32 @@ declare interface DescribePersonSamplesResponse {
   TotalCount?: number;
   /** 素材信息。 */
   PersonSet?: AiSamplePerson[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeProcessImageTemplatesRequest {
+  /** 图片处理模板唯一标识过滤条件，数组长度限制：100。 */
+  Definitions?: number[];
+  /** 分页偏移量，默认值：0。 */
+  Offset?: number;
+  /** 返回记录条数 默认值：10；最大值：100。 */
+  Limit?: number;
+  /** 图片处理模板标识过滤条件。 */
+  Name?: string;
+  /** 排序方式，OrderBy设置后才有效，可选值： 0：升序 1：降序 默认 0。 */
+  OrderType?: number;
+  /** 排序字段，可选值： Definition：模板唯一标识； 默认值：创建时间。 */
+  OrderBy?: string;
+  /** 模板类型过滤条件，可选值： Preset：系统预置模板； Custom：用户自定义模板。 */
+  Type?: string;
+}
+
+declare interface DescribeProcessImageTemplatesResponse {
+  /** 符合过滤条件的记录总数。 */
+  TotalCount?: number;
+  /** 图片处理模板详情列表。 */
+  ProcessImageTemplateSet?: ProcessImageTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8592,6 +8730,26 @@ declare interface ExecuteFunctionResponse {
   RequestId?: string;
 }
 
+declare interface ExtractBlindWatermarkRequest {
+  /** 数字水印类型，可选值：blind-basic：基础版权数字水印；blind-abseq：ab序列版权数字水印； */
+  Type: string;
+  /** 媒体处理的文件输入信息。 */
+  InputInfo: MediaInputInfo;
+  /** 任务的事件通知信息，不填代表不获取事件通知。 */
+  TaskNotifyConfig?: TaskNotifyConfig;
+  /** 提取数字水印任务配置 */
+  ExtractBlindWatermarkConfig?: ExtractBlindWatermarkTaskConfig;
+  /** 资源ID，需要保证对应资源是开启状态。默认为账号主资源ID。 */
+  ResourceId?: string;
+}
+
+declare interface ExtractBlindWatermarkResponse {
+  /** 任务 ID。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ManageTaskRequest {
   /** 操作类型，取值范围：Abort：终止任务。使用说明：若 [任务类型](/document/product/862/37614) 为直播流处理任务（LiveStreamProcessTask），支持终止 [任务状态](/document/product/862/37614) 为等待中（WAITING）或处理中（PROCESSING）的任务；否则，对于其他 [任务类型](/document/product/862/37614)，只支持终止 [任务状态](/document/product/862/37614) 为等待中（WAITING）的任务。 */
   OperationType: string;
@@ -8722,6 +8880,22 @@ declare interface ModifyAsrHotwordsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyBlindWatermarkTemplateRequest {
+  /** 数字水印模板唯一标识。 */
+  Definition: number;
+  /** 数字水印模板名称，支持 中文、英文、数字、_、-和. 六种格式，长度限制：64 个字符。 */
+  Name?: string;
+  /** 数字水印模板描述信息，长度限制：256 个字符。 */
+  Comment?: string;
+  /** 数字水印文字内容，长度不超过64个字符，NAGRA水印类型的模板不支持修改文字内容。 */
+  TextContent?: string;
+}
+
+declare interface ModifyBlindWatermarkTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyContentReviewTemplateRequest {
   /** 内容审核模板唯一标识。 */
   Definition: number;
@@ -8818,6 +8992,22 @@ declare interface ModifyPersonSampleResponse {
   Person?: AiSamplePerson;
   /** 处理失败的五官信息。 */
   FailFaceInfoSet?: AiSampleFailFaceInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyProcessImageTemplateRequest {
+  /** 图片处理模板唯一标识。 */
+  Definition: number;
+  /** 图片处理模板名称，长度限制：64个字符。 */
+  Name?: string;
+  /** 模板描述信息，长度限制256个字符。 */
+  Comment?: string;
+  /** 图片处理模板参数。 */
+  ProcessImageTemplate?: ImageTaskInput;
+}
+
+declare interface ModifyProcessImageTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9375,6 +9565,8 @@ declare interface Mps {
   CreateAnimatedGraphicsTemplate(data: CreateAnimatedGraphicsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAnimatedGraphicsTemplateResponse>;
   /** 创建智能字幕热词库 {@link CreateAsrHotwordsRequest} {@link CreateAsrHotwordsResponse} */
   CreateAsrHotwords(data: CreateAsrHotwordsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAsrHotwordsResponse>;
+  /** 创建数字水印模板 {@link CreateBlindWatermarkTemplateRequest} {@link CreateBlindWatermarkTemplateResponse} */
+  CreateBlindWatermarkTemplate(data: CreateBlindWatermarkTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBlindWatermarkTemplateResponse>;
   /** 创建内容审核模板 {@link CreateContentReviewTemplateRequest} {@link CreateContentReviewTemplateResponse} */
   CreateContentReviewTemplate(data?: CreateContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContentReviewTemplateResponse>;
   /** 创建雪碧图模板 {@link CreateImageSpriteTemplateRequest} {@link CreateImageSpriteTemplateResponse} */
@@ -9385,6 +9577,8 @@ declare interface Mps {
   CreateMediaEvaluation(data: CreateMediaEvaluationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMediaEvaluationResponse>;
   /** 创建素材样本 {@link CreatePersonSampleRequest} {@link CreatePersonSampleResponse} */
   CreatePersonSample(data: CreatePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonSampleResponse>;
+  /** 创建图片处理模板 {@link CreateProcessImageTemplateRequest} {@link CreateProcessImageTemplateResponse} */
+  CreateProcessImageTemplate(data: CreateProcessImageTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProcessImageTemplateResponse>;
   /** 创建媒体质检模板 {@link CreateQualityControlTemplateRequest} {@link CreateQualityControlTemplateResponse} */
   CreateQualityControlTemplate(data: CreateQualityControlTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQualityControlTemplateResponse>;
   /** 创建采样截图模板 {@link CreateSampleSnapshotTemplateRequest} {@link CreateSampleSnapshotTemplateResponse} */
@@ -9429,6 +9623,8 @@ declare interface Mps {
   DeleteAnimatedGraphicsTemplate(data: DeleteAnimatedGraphicsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAnimatedGraphicsTemplateResponse>;
   /** 删除智能字幕热词库 {@link DeleteAsrHotwordsRequest} {@link DeleteAsrHotwordsResponse} */
   DeleteAsrHotwords(data: DeleteAsrHotwordsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAsrHotwordsResponse>;
+  /** 删除数字水印模板 {@link DeleteBlindWatermarkTemplateRequest} {@link DeleteBlindWatermarkTemplateResponse} */
+  DeleteBlindWatermarkTemplate(data: DeleteBlindWatermarkTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBlindWatermarkTemplateResponse>;
   /** 删除内容审核模板 {@link DeleteContentReviewTemplateRequest} {@link DeleteContentReviewTemplateResponse} */
   DeleteContentReviewTemplate(data: DeleteContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteContentReviewTemplateResponse>;
   /** 删除雪碧图模板 {@link DeleteImageSpriteTemplateRequest} {@link DeleteImageSpriteTemplateResponse} */
@@ -9437,6 +9633,8 @@ declare interface Mps {
   DeleteLiveRecordTemplate(data: DeleteLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveRecordTemplateResponse>;
   /** 删除素材样本 {@link DeletePersonSampleRequest} {@link DeletePersonSampleResponse} */
   DeletePersonSample(data: DeletePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePersonSampleResponse>;
+  /** 删除图片处理模板 {@link DeleteProcessImageTemplateRequest} {@link DeleteProcessImageTemplateResponse} */
+  DeleteProcessImageTemplate(data?: DeleteProcessImageTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProcessImageTemplateResponse>;
   /** 删除媒体质检模板 {@link DeleteQualityControlTemplateRequest} {@link DeleteQualityControlTemplateResponse} */
   DeleteQualityControlTemplate(data: DeleteQualityControlTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQualityControlTemplateResponse>;
   /** 删除采样截图模板 {@link DeleteSampleSnapshotTemplateRequest} {@link DeleteSampleSnapshotTemplateResponse} */
@@ -9479,6 +9677,8 @@ declare interface Mps {
   DescribeAsrHotwordsList(data?: DescribeAsrHotwordsListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAsrHotwordsListResponse>;
   /** 批量任务详情查询 {@link DescribeBatchTaskDetailRequest} {@link DescribeBatchTaskDetailResponse} */
   DescribeBatchTaskDetail(data: DescribeBatchTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTaskDetailResponse>;
+  /** 获取数字水印模板列表 {@link DescribeBlindWatermarkTemplatesRequest} {@link DescribeBlindWatermarkTemplatesResponse} */
+  DescribeBlindWatermarkTemplates(data?: DescribeBlindWatermarkTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlindWatermarkTemplatesResponse>;
   /** 获取智能审核模板列表 {@link DescribeContentReviewTemplatesRequest} {@link DescribeContentReviewTemplatesResponse} */
   DescribeContentReviewTemplates(data?: DescribeContentReviewTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentReviewTemplatesResponse>;
   /** 反查媒体传输安全组绑定的Flow信息 {@link DescribeGroupAttachFlowsByIdRequest} {@link DescribeGroupAttachFlowsByIdResponse} */
@@ -9493,6 +9693,8 @@ declare interface Mps {
   DescribeMediaMetaData(data: DescribeMediaMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMediaMetaDataResponse>;
   /** 获取素材样本列表 {@link DescribePersonSamplesRequest} {@link DescribePersonSamplesResponse} */
   DescribePersonSamples(data?: DescribePersonSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonSamplesResponse>;
+  /** 查询图片处理模板列表 {@link DescribeProcessImageTemplatesRequest} {@link DescribeProcessImageTemplatesResponse} */
+  DescribeProcessImageTemplates(data?: DescribeProcessImageTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcessImageTemplatesResponse>;
   /** 获取媒体质检模板列表 {@link DescribeQualityControlTemplatesRequest} {@link DescribeQualityControlTemplatesResponse} */
   DescribeQualityControlTemplates(data?: DescribeQualityControlTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQualityControlTemplatesResponse>;
   /** 获取采样截图模板列表 {@link DescribeSampleSnapshotTemplatesRequest} {@link DescribeSampleSnapshotTemplatesResponse} */
@@ -9561,6 +9763,8 @@ declare interface Mps {
   EnableWorkflow(data: EnableWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<EnableWorkflowResponse>;
   /** 执行定制 API {@link ExecuteFunctionRequest} {@link ExecuteFunctionResponse} */
   ExecuteFunction(data: ExecuteFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteFunctionResponse>;
+  /** 提取视频数字水印 {@link ExtractBlindWatermarkRequest} {@link ExtractBlindWatermarkResponse} */
+  ExtractBlindWatermark(data: ExtractBlindWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<ExtractBlindWatermarkResponse>;
   /** 任务管理 {@link ManageTaskRequest} {@link ManageTaskResponse} */
   ManageTask(data: ManageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ManageTaskResponse>;
   /** 修改内容分析模板 {@link ModifyAIAnalysisTemplateRequest} {@link ModifyAIAnalysisTemplateResponse} */
@@ -9573,6 +9777,8 @@ declare interface Mps {
   ModifyAnimatedGraphicsTemplate(data: ModifyAnimatedGraphicsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAnimatedGraphicsTemplateResponse>;
   /** 修改智能字幕热词库 {@link ModifyAsrHotwordsRequest} {@link ModifyAsrHotwordsResponse} */
   ModifyAsrHotwords(data: ModifyAsrHotwordsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAsrHotwordsResponse>;
+  /** 修改数字水印模板 {@link ModifyBlindWatermarkTemplateRequest} {@link ModifyBlindWatermarkTemplateResponse} */
+  ModifyBlindWatermarkTemplate(data: ModifyBlindWatermarkTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlindWatermarkTemplateResponse>;
   /** 修改内容审核模板 {@link ModifyContentReviewTemplateRequest} {@link ModifyContentReviewTemplateResponse} */
   ModifyContentReviewTemplate(data: ModifyContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContentReviewTemplateResponse>;
   /** 修改雪碧图模板 {@link ModifyImageSpriteTemplateRequest} {@link ModifyImageSpriteTemplateResponse} */
@@ -9581,6 +9787,8 @@ declare interface Mps {
   ModifyLiveRecordTemplate(data: ModifyLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveRecordTemplateResponse>;
   /** 修改素材样本 {@link ModifyPersonSampleRequest} {@link ModifyPersonSampleResponse} */
   ModifyPersonSample(data: ModifyPersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPersonSampleResponse>;
+  /** 修改图片处理模板 {@link ModifyProcessImageTemplateRequest} {@link ModifyProcessImageTemplateResponse} */
+  ModifyProcessImageTemplate(data: ModifyProcessImageTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProcessImageTemplateResponse>;
   /** 修改媒体质检模板 {@link ModifyQualityControlTemplateRequest} {@link ModifyQualityControlTemplateResponse} */
   ModifyQualityControlTemplate(data: ModifyQualityControlTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyQualityControlTemplateResponse>;
   /** 修改采样截图模板 {@link ModifySampleSnapshotTemplateRequest} {@link ModifySampleSnapshotTemplateResponse} */

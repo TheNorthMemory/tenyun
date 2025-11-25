@@ -1736,6 +1736,28 @@ declare interface OpScope {
   ServiceInfoList?: ServiceBasicRestartInfo[] | null;
 }
 
+/** 操作日志描述 */
+declare interface OperationLog {
+  /** EMR实例ID */
+  InstanceId?: number;
+  /** 操作名称 */
+  Operation?: string;
+  /** 操作类型 */
+  OperationType?: number;
+  /** 用户类型 */
+  UserType?: number;
+  /** 操作者 */
+  Operator?: string;
+  /** 操作时间 */
+  CreateTime?: string;
+  /** 操作对象 */
+  Operand?: string;
+  /** 操作详情 */
+  OperationDesc?: string;
+  /** 安全级别 */
+  SecurityLevel?: string;
+}
+
 /** 描述排序，用于排序. */
 declare interface Order {
   /** 排序字段。 */
@@ -3874,6 +3896,38 @@ declare interface DescribeInspectionTaskResultResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceOplogRequest {
+  /** EMR实例ID */
+  InstanceId: string;
+  /** 偏移量 */
+  Offset: number;
+  /** 页大小 */
+  Limit: number;
+  /** 开头时间时间戳 */
+  StartTime?: number;
+  /** 结尾时间时间戳 */
+  EndTime?: number;
+  /** 搜索项数组 */
+  SearchFields?: SearchItem[];
+  /** 集群、节点、组件 */
+  Operand?: string;
+  /** 一般、危险、高危 */
+  SecurityLevel?: string;
+}
+
+declare interface DescribeInstanceOplogResponse {
+  /** 操作日志数量 */
+  TotalCnt?: number;
+  /** 操作日志列表 */
+  LogList?: OperationLog[];
+  /** 操作对象筛选项数组 */
+  OperandList?: string[];
+  /** 安全级别筛选数组 */
+  SecurityLevelList?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceRenewNodesRequest {
   /** 集群实例ID,实例ID形如: emr-xxxxxxxx */
   InstanceId: string;
@@ -5321,6 +5375,8 @@ declare interface Emr {
   DescribeInsightList(data: DescribeInsightListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInsightListResponse>;
   /** 获取巡检任务结果列表 {@link DescribeInspectionTaskResultRequest} {@link DescribeInspectionTaskResultResponse} */
   DescribeInspectionTaskResult(data: DescribeInspectionTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInspectionTaskResultResponse>;
+  /** 获取实例操作日志 {@link DescribeInstanceOplogRequest} {@link DescribeInstanceOplogResponse} */
+  DescribeInstanceOplog(data: DescribeInstanceOplogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceOplogResponse>;
   /** 查询待续费节点信息 {@link DescribeInstanceRenewNodesRequest} {@link DescribeInstanceRenewNodesResponse} */
   DescribeInstanceRenewNodes(data: DescribeInstanceRenewNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceRenewNodesResponse>;
   /** 查询集群实例信息 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */

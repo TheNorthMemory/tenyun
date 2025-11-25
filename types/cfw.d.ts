@@ -228,6 +228,24 @@ declare interface CommonFilter {
   Values: string[];
 }
 
+/** ID NAME 组合 */
+declare interface CommonIdName {
+  /** 资源ID */
+  Id?: string | null;
+  /** 资源名字 */
+  Name?: string | null;
+}
+
+/** ID NAME STATUS 组合结构 */
+declare interface CommonIdNameStatus {
+  /** 资源id */
+  Id?: string | null;
+  /** 资源name */
+  Name?: string | null;
+  /** 状态 */
+  Status?: number | null;
+}
+
 /** 创建NAT ACL规则参数结构 */
 declare interface CreateNatRuleItem {
   /** 访问源示例： net：IP/CIDR(192.168.0.2) */
@@ -912,6 +930,50 @@ declare interface NatInstanceInfo {
   ElasticBandwidth?: number;
   /** 是否首次开通按量付费1 是0 不是 */
   IsFirstAfterPay?: number;
+}
+
+/** NAT防火墙开关列表数据 */
+declare interface NatSwitchListData {
+  /** 列表ID */
+  Id?: number;
+  /** 子网ID */
+  SubnetId?: string | null;
+  /** 子网名称 */
+  SubnetName?: string | null;
+  /** IPv4 CIDR */
+  SubnetCidr?: string | null;
+  /** 关联路由ID */
+  RouteId?: string | null;
+  /** 关联路由名称 */
+  RouteName?: string | null;
+  /** 云服务器个数 */
+  CvmNum?: number | null;
+  /** 所属VPC ID */
+  VpcId?: string | null;
+  /** 所属VPC名称 */
+  VpcName?: string | null;
+  /** 是否生效 */
+  Enable?: number | null;
+  /** 开关状态 */
+  Status?: number | null;
+  /** NAT网关ID */
+  NatId?: string | null;
+  /** NAT网关名称 */
+  NatName?: string | null;
+  /** NAT防火墙实例ID */
+  NatInsId?: string | null;
+  /** NAT防火墙实例名称 */
+  NatInsName?: string | null;
+  /** 地域 */
+  Region?: string | null;
+  /** 开关是否异常,0:正常,1:异常 */
+  Abnormal?: number | null;
+  /** nat防火墙出口路由表id */
+  ORTableId?: string | null;
+  /** nat防火墙出口路由表名称 */
+  ORTableName?: string | null;
+  /** 出口Snat Ip列表 */
+  Ohavips?: string[] | null;
 }
 
 /** 网络实例信息 */
@@ -2750,6 +2812,40 @@ declare interface DescribeNatFwInstancesInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeNatFwSwitchRequest {
+  /** 偏移量，分页用 */
+  Offset: number;
+  /** 条数，分页用 */
+  Limit: number;
+  /** 过滤条件组合 */
+  Filters?: CommonFilter[];
+  /** desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值 */
+  Order?: string;
+  /** 排序所用到的字段 */
+  By?: string;
+}
+
+declare interface DescribeNatFwSwitchResponse {
+  /** 总数 */
+  Total?: number | null;
+  /** NAT边界防火墙开关列表数据 */
+  Data?: NatSwitchListData[] | null;
+  /** 开关相关VPC列表 */
+  VpcList?: CommonIdName[] | null;
+  /** 开关相关NAT列表 */
+  NatList?: CommonIdName[] | null;
+  /** 开关相关ROUTE列表 */
+  RouteList?: CommonIdName[] | null;
+  /** 开启开关个数 */
+  OnNum?: number | null;
+  /** 关闭开关个数 */
+  OffNum?: number | null;
+  /** 失败开关状态 */
+  FailData?: CommonIdNameStatus[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeNatFwVpcDnsLstRequest {
   /** natfw 防火墙实例id */
   NatFwInsId: string;
@@ -3899,6 +3995,8 @@ declare interface Cfw {
   DescribeNatFwInstanceWithRegion(data?: DescribeNatFwInstanceWithRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwInstanceWithRegionResponse>;
   /** 获取租户所有NAT实例卡片信息 {@link DescribeNatFwInstancesInfoRequest} {@link DescribeNatFwInstancesInfoResponse} */
   DescribeNatFwInstancesInfo(data?: DescribeNatFwInstancesInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwInstancesInfoResponse>;
+  /** 查询NAT防火墙开关列表 {@link DescribeNatFwSwitchRequest} {@link DescribeNatFwSwitchResponse} */
+  DescribeNatFwSwitch(data: DescribeNatFwSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwSwitchResponse>;
   /** 展示当前natfw 实例对应的vpc dns开关 {@link DescribeNatFwVpcDnsLstRequest} {@link DescribeNatFwVpcDnsLstResponse} */
   DescribeNatFwVpcDnsLst(data: DescribeNatFwVpcDnsLstRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwVpcDnsLstResponse>;
   /** 资产中心资产树信息查询 {@link DescribeResourceGroupRequest} {@link DescribeResourceGroupResponse} */

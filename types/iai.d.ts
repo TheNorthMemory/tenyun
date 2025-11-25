@@ -1829,26 +1829,6 @@ declare namespace V20180301 {
     RequestId?: string;
   }
 
-  interface DetectLiveFaceRequest {
-    /** 图片 base64 数据，base64 编码后大小不可超过5M（图片的宽高比请接近3:4，不符合宽高比的图片返回的分值不具备参考意义）。支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。 */
-    Image?: string;
-    /** 图片的 Url 。对应图片 base64 编码后大小不可超过5M。Url、Image必须提供一个，如果都提供，只使用 Url。 （图片的宽高比请接近 3:4，不符合宽高比的图片返回的分值不具备参考意义） 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 非腾讯云存储的Url速度和稳定性可能受一定影响。支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。 */
-    Url?: string;
-    /** 人脸识别服务所用的算法模型版本。目前入参支持 “2.0”和“3.0“ 两个输入。2020年4月2日开始，默认为“3.0”，之前使用过本接口的账号若未填写本参数默认为“2.0”。2020年11月26日后开通服务的账号仅支持输入“3.0”。不同算法模型版本对应的人脸识别算法不同，新版本的整体效果会优于旧版本，建议使用“3.0”版本。 */
-    FaceModelVersion?: string;
-  }
-
-  interface DetectLiveFaceResponse {
-    /** 活体打分，取值范围 [0,100]，分数一般落于[80, 100]区间内，0分也为常见值。推荐相大于 87 时可判断为活体。可根据具体场景自行调整阈值。本字段当且仅当FaceModelVersion为2.0时才具备参考意义。 */
-    Score?: number;
-    /** 人脸识别所用的算法模型版本。 */
-    FaceModelVersion?: string;
-    /** 活体检测是否通过。本字段只有FaceModelVersion为3.0时才具备参考意义。 */
-    IsLiveness?: boolean;
-    /** 唯一请求 ID，每次请求都会返回。 */
-    RequestId?: string;
-  }
-
   interface GetGroupInfoRequest {
     /** 人员库 ID。 */
     GroupId: string;
@@ -2353,8 +2333,6 @@ declare interface Iai {
   DetectFace(data: V20180301.DetectFaceRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.DetectFaceResponse>;
   /** 人脸检测与属性分析 {@link V20180301.DetectFaceAttributesRequest} {@link V20180301.DetectFaceAttributesResponse} */
   DetectFaceAttributes(data: V20180301.DetectFaceAttributesRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.DetectFaceAttributesResponse>;
-  /** 人脸静态活体检测 {@link V20180301.DetectLiveFaceRequest} {@link V20180301.DetectLiveFaceResponse} */
-  DetectLiveFace(data: V20180301.DetectLiveFaceRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.DetectLiveFaceResponse>;
   /** 获取人员库信息 {@link V20180301.GetGroupInfoRequest} {@link V20180301.GetGroupInfoResponse} */
   GetGroupInfo(data: V20180301.GetGroupInfoRequest, config: AxiosRequestConfig & V20180301.VersionHeader): AxiosPromise<V20180301.GetGroupInfoResponse>;
   /** 获取人员库列表 {@link V20180301.GetGroupListRequest} {@link V20180301.GetGroupListResponse} */
