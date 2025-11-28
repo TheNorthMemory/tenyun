@@ -4293,7 +4293,7 @@ declare interface CheckCnameStatusResponse {
 declare interface CheckFreeCertificateVerificationRequest {
   /** 站点 ID。 */
   ZoneId: string;
-  /** 加速域名，该域名为[申请免费证书](https://tcloud4api.woa.com/document/product/1657/927654?!preview&!document=1)时使用的域名。 */
+  /** 加速域名，该域名为[申请免费证书](https://cloud.tencent.com/document/product/1552/124807)时使用的域名。 */
   Domain: string;
 }
 

@@ -618,6 +618,20 @@ declare interface DealInstanceDTO {
   InstanceIdList?: string[];
 }
 
+/** 变配类型查询出参 */
+declare interface DescModifyType {
+  /** 变配类型 */
+  ModifyType: number;
+  /** 是否迁移标志 */
+  MigrateFlag: boolean;
+  /** 迁移预计耗时(稳定模式)秒 */
+  MigrateCostTime: number | null;
+  /** 升配模式(1:稳定模式，2:高速模式) */
+  UpgradeStrategy: number | null;
+  /** 迁移预计耗时(高速模式)秒 */
+  MigrateCostTimeHighSpeed: number | null;
+}
+
 /** topic链接信息 */
 declare interface DescribeConnectInfoResultDTO {
   /** ip地址 */
@@ -3199,6 +3213,22 @@ declare interface DeleteGroupResponse {
   RequestId?: string;
 }
 
+declare interface DeleteGroupSubscribeTopicRequest {
+  /** ckafka集群实例Id */
+  InstanceId: string;
+  /** 消费分组名称 */
+  Group: string;
+  /** 主题名 */
+  Topic: string;
+}
+
+declare interface DeleteGroupSubscribeTopicResponse {
+  /** 返回结果 */
+  Result?: JgwOperateResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteInstancePostRequest {
   /** ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取 */
   InstanceId: string;
@@ -3631,6 +3661,32 @@ declare interface DescribeInstancesRequest {
 declare interface DescribeInstancesResponse {
   /** 返回的结果 */
   Result?: InstanceResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeModifyTypeRequest {
+  /** ckafka集群实例Id */
+  InstanceId: string;
+  /** 升配后的带宽，单位mb */
+  BandWidth: number;
+  /** 升配后的磁盘，单位G */
+  DiskSize: number;
+  /** 磁盘类型，例如 CLOUD_PREMIUM */
+  DiskType: string;
+  /** 分区数量 */
+  Partition: number;
+  /** topic数量 */
+  Topic: number;
+  /** 实例类型例如 sp_ckafka_profession */
+  Type: string;
+  /** 变配入口 */
+  ModifyEntry?: string;
+}
+
+declare interface DescribeModifyTypeResponse {
+  /** 返回的变配类型结构 */
+  Result?: DescModifyType;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4684,6 +4740,8 @@ declare interface Ckafka {
   DeleteDatahubTopic(data: DeleteDatahubTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDatahubTopicResponse>;
   /** 删除消费组 {@link DeleteGroupRequest} {@link DeleteGroupResponse} */
   DeleteGroup(data: DeleteGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupResponse>;
+  /** 删除消费分组订阅的topic {@link DeleteGroupSubscribeTopicRequest} {@link DeleteGroupSubscribeTopicResponse} */
+  DeleteGroupSubscribeTopic(data: DeleteGroupSubscribeTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupSubscribeTopicResponse>;
   /** 删除后付费实例 {@link DeleteInstancePostRequest} {@link DeleteInstancePostResponse} */
   DeleteInstancePost(data: DeleteInstancePostRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstancePostResponse>;
   /** 删除预付费实例 {@link DeleteInstancePreRequest} {@link DeleteInstancePreResponse} */
@@ -4736,6 +4794,8 @@ declare interface Ckafka {
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** 获取实例集群列表详情 {@link DescribeInstancesDetailRequest} {@link DescribeInstancesDetailResponse} */
   DescribeInstancesDetail(data?: DescribeInstancesDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesDetailResponse>;
+  /** 查询实例变配类型 {@link DescribeModifyTypeRequest} {@link DescribeModifyTypeResponse} */
+  DescribeModifyType(data: DescribeModifyTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModifyTypeResponse>;
   /** 获取实例Prometheus信息 {@link DescribePrometheusRequest} {@link DescribePrometheusResponse} */
   DescribePrometheus(data: DescribePrometheusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrometheusResponse>;
   /** 枚举地域 {@link DescribeRegionRequest} {@link DescribeRegionResponse} */

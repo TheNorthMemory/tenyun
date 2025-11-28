@@ -2673,7 +2673,7 @@ declare interface DescribeLogStorageStatisticResponse {
 declare interface DescribeLogsRequest {
   /** 日志类型标识流量日志：互联网边界防火墙netflow_border，NAT边界防火墙netflow_nat，VPC间防火墙vpcnetflow，内网流量日志netflow_fl，流量分析日志netflow_nta入侵防御日志rule_threatinfo访问控制日志：互联网边界规则rule_acl，NAT边界规则rule_acl，内网间规则rule_vpcacl，企业安全组rule_sg操作日志：防火墙开关-开关操作operate_switch，防火墙开关-实例配置operate_instance，资产中心操作operate_assetgroup，访问控制操作operate_acl，零信任防护操作operate_identity，入侵防御操作-入侵防御operate_ids，入侵防御操作-安全基线operate_baseline，常用工具操作operate_tool，网络蜜罐操作operate_honeypot，日志投递操作operate_logdelivery，通用设置操作operate_logstorage，登录日志operate_login */
   Index: string;
-  /** 每页条数，最大支持2000 */
+  /** 每页条数，最大支持1000 */
   Limit: number;
   /** 偏移值，最大支持60000 */
   Offset: number;

@@ -886,6 +886,8 @@ declare interface RabbitMQClusterAccessInfo {
   ControlPlaneEndpointInfo?: VpcEndpointInfo;
   /** TLS加密的数据流公网接入点 */
   PublicTlsAccessEndpoint?: string;
+  /** 公网IP是否复用 */
+  PublicIpReused?: boolean;
 }
 
 /** RabbitMQ 集群基本信息 */
@@ -1170,7 +1172,7 @@ declare interface RabbitMQVipInstance {
   PayMode?: number;
   /** 备注信息 */
   Remark?: string;
-  /** 集群的节点规格，需要输入对应的规格标识：2C8G：rabbit-vip-basic-2c8g4C16G：rabbit-vip-basic-4c16g8C32G：rabbit-vip-basic-8c32g16C32G：rabbit-vip-basic-416C64G：rabbit-vip-basic-16c64g2C4G：rabbit-vip-basic-54C8G：rabbit-vip-basic-18C16G（已售罄）：rabbit-vip-basic-2不传默认为4C8G：rabbit-vip-basic-1 */
+  /** 集群的节点规格，对应的规格标识：2C8G：rabbit-vip-profession-2c8g4C16G：rabbit-vip-profession-4c16g8C32G：rabbit-vip-profession-8c32g16C32G：rabbit-vip-basic-416C64G：rabbit-vip-profession-16c64g2C4G：rabbit-vip-basic-54C8G：rabbit-vip-basic-18C16G（已售罄）：rabbit-vip-basic-2不传默认为 4C8G：rabbit-vip-basic-1 */
   SpecName?: string;
   /** 集群异常信息 */
   ExceptionInformation?: string | null;
@@ -1442,6 +1444,8 @@ declare interface RocketMQGroup {
   Namespace?: string | null;
   /** 订阅的主题个数 */
   SubscribeTopicNum?: number;
+  /** 绑定的标签列表 */
+  TagList?: Tag[];
 }
 
 /** RocketMQ消费组配置信息 */
@@ -1458,18 +1462,6 @@ declare interface RocketMQGroupConfig {
   Remark?: string;
   /** 协议类型，支持以下枚举值TCP;HTTP; */
   ConsumerGroupType?: string;
-}
-
-/** RocketMQ消费组配置信息 */
-declare interface RocketMQGroupConfigOutput {
-  /** 命名空间 */
-  Namespace?: string | null;
-  /** 消费组名称 */
-  GroupName?: string | null;
-  /** 是否已导入 */
-  Imported?: boolean | null;
-  /** remark */
-  Remark?: string | null;
 }
 
 /** RocketMQ专享集群实例配置 */
@@ -1508,6 +1500,8 @@ declare interface RocketMQInstanceConfig {
   TopicNumLowerLimit?: number | null;
   /** Topic个数最大配额，默认为集群规格单节点最大配额*节点个数 */
   TopicNumUpperLimit?: number | null;
+  /** 控制生产和消费消息的 TPS 占比，取值范围0～1，默认值为0.5 */
+  SendReceiveRatio?: number;
 }
 
 /** Rocketmq消息消费track信息 */
@@ -1566,24 +1560,6 @@ declare interface RocketMQNamespace {
   VpcEndpoint?: string | null;
   /** 内部接入点地址 */
   InternalEndpoint?: string | null;
-}
-
-/** RocketMQ平滑迁移任务 */
-declare interface RocketMQSmoothMigrationTaskItem {
-  /** 任务ID */
-  TaskId?: string | null;
-  /** 任务名称 */
-  TaskName?: string | null;
-  /** 源集群名称 */
-  SourceClusterName?: string | null;
-  /** 目标集群ID */
-  ClusterId?: string | null;
-  /** 网络连接类型，PUBLIC 公网VPC 私有网络OTHER 其他 */
-  ConnectionType?: string | null;
-  /** 源集群NameServer地址 */
-  SourceNameServer?: string | null;
-  /** 任务状态Configuration 迁移配置SourceConnecting 连接源集群中MetaDataImport 元数据导入EndpointSetup 切换接入点ServiceMigration 切流中Completed 已完成Cancelled 已取消 */
-  TaskStatus?: string | null;
 }
 
 /** RocketMQ消费组订阅信息 */
@@ -1648,6 +1624,8 @@ declare interface RocketMQTopic {
   SubscriptionCount?: number | null;
   /** 订阅关系列表 */
   SubscriptionData?: RocketMQSubscription[] | null;
+  /** 绑定的标签列表 */
+  TagList?: Tag[];
 }
 
 /** RocketMQ主题配置信息 */
@@ -1662,22 +1640,6 @@ declare interface RocketMQTopicConfig {
   Partitions: number;
   /** 备注信息 */
   Remark?: string;
-}
-
-/** RocketMQ主题配置信息 */
-declare interface RocketMQTopicConfigOutput {
-  /** 命名空间 */
-  Namespace?: string | null;
-  /** 主题名称 */
-  TopicName?: string | null;
-  /** 主题类型：Normal，普通GlobalOrder， 全局顺序PartitionedOrder, 分区顺序Transaction，事务消息DelayScheduled，延迟/定时消息 */
-  Type?: string | null;
-  /** 分区个数 */
-  Partitions?: number | null;
-  /** 备注信息 */
-  Remark?: string | null;
-  /** 是否导入 */
-  Imported?: boolean | null;
 }
 
 /** RocketMQtopic分布情况 */
@@ -1832,6 +1794,14 @@ declare interface Tag {
   TagKey: string | null;
   /** 标签的Value的值 */
   TagValue: string | null;
+}
+
+/** 标签过滤器 */
+declare interface TagFilter {
+  /** 标签键名称 */
+  TagKey: string;
+  /** 标签值列表 */
+  TagValues: string[];
 }
 
 /** 主题实例 */
@@ -2279,7 +2249,7 @@ declare interface CreateRabbitMQVipInstanceRequest {
   SubnetId: string;
   /** 集群名称 */
   ClusterName: string;
-  /** 集群的节点规格，需要输入对应的规格标识：2C8G：rabbit-vip-basic-2c8g4C16G：rabbit-vip-basic-4c16g8C32G：rabbit-vip-basic-8c32g16C32G：rabbit-vip-basic-416C64G：rabbit-vip-basic-16c64g2C4G：rabbit-vip-basic-54C8G：rabbit-vip-basic-18C16G（已售罄）：rabbit-vip-basic-2不传默认为 4C8G：rabbit-vip-basic-1 */
+  /** 集群的节点规格，需要输入对应的规格标识：2C8G：rabbit-vip-profession-2c8g4C16G：rabbit-vip-profession-4c16g8C32G：rabbit-vip-profession-8c32g16C32G：rabbit-vip-basic-416C64G：rabbit-vip-profession-16c64g2C4G：rabbit-vip-basic-54C8G：rabbit-vip-basic-18C16G（已售罄）：rabbit-vip-basic-2不传默认为 4C8G：rabbit-vip-basic-1 */
   NodeSpec?: string;
   /** 节点数量,多可用区最少为3节点。不传默认单可用区为1,多可用区为3 */
   NodeNum?: number;
@@ -2293,7 +2263,7 @@ declare interface CreateRabbitMQVipInstanceRequest {
   TimeSpan?: number;
   /** 付费方式，0 为后付费，即按量计费；1 为预付费，即包年包月。默认包年包月 */
   PayMode?: number;
-  /** 集群版本，不传默认为 3.8.30，可选值为 3.8.30 和 3.11.8 */
+  /** 集群版本，不传默认为 3.8.30，可选值为 3.8.30、3.11.8和3.13.7 */
   ClusterVersion?: string;
   /** 是否国际站请求，默认 false */
   IsIntl?: boolean;
@@ -3214,6 +3184,10 @@ declare interface DescribeMsgResponse {
   MsgId?: string;
   /** 生产者名称。 */
   ProducerName?: string;
+  /** 消息 key */
+  Key?: string | null;
+  /** 消息的元数据信息 */
+  Metadata?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3835,6 +3809,8 @@ declare interface DescribeRocketMQGroupsRequest {
   FilterOneGroup?: string;
   /** group类型 */
   Types?: string[];
+  /** 标签过滤器 */
+  TagFilters?: TagFilter[];
 }
 
 declare interface DescribeRocketMQGroupsResponse {
@@ -4056,24 +4032,6 @@ declare interface DescribeRocketMQRolesResponse {
   RequestId?: string;
 }
 
-declare interface DescribeRocketMQSmoothMigrationTaskListRequest {
-  /** 查询起始偏移量 */
-  Offset: number;
-  /** 查询最大数量 */
-  Limit: number;
-  /** 查询过滤器，支持的字段如下TaskStatus, 支持多选ConnectionType，支持多选ClusterId，精确搜索TaskName，支持模糊搜索 */
-  Filters?: Filter[];
-}
-
-declare interface DescribeRocketMQSmoothMigrationTaskListResponse {
-  /** 任务总数 */
-  TotalCount?: number;
-  /** 任务列表 */
-  Data?: RocketMQSmoothMigrationTaskItem[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeRocketMQSmoothMigrationTaskRequest {
   /** 任务ID */
   TaskId: string;
@@ -4110,46 +4068,6 @@ declare interface DescribeRocketMQSmoothMigrationTaskResponse {
   TopicTypeDistribution?: RocketMQTopicDistribution[] | null;
   /** 主题迁移进度分布情况 */
   TopicStageDistribution?: RocketMQMigrationTopicDistribution[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeRocketMQSourceClusterGroupListRequest {
-  /** 页大小 */
-  Limit: number;
-  /** 偏移量 */
-  Offset: number;
-  /** 迁移任务名称 */
-  TaskId: string;
-  /** 查询过滤器，支持字段groupName，imported */
-  Filters?: Filter[];
-}
-
-declare interface DescribeRocketMQSourceClusterGroupListResponse {
-  /** group列表 */
-  Groups?: RocketMQGroupConfigOutput[];
-  /** 总条数 */
-  TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeRocketMQSourceClusterTopicListRequest {
-  /** 分页大小 */
-  Limit: number;
-  /** 偏移量 */
-  Offset: number;
-  /** 迁移任务名 */
-  TaskId: string;
-  /** 查询过滤器，支持字段如下TopicName,Type，Imported */
-  Filters?: Filter[];
-}
-
-declare interface DescribeRocketMQSourceClusterTopicListResponse {
-  /** topic层列表 */
-  Topics?: RocketMQTopicConfigOutput[];
-  /** 总条数 */
-  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4236,6 +4154,28 @@ declare interface DescribeRocketMQTopicMsgsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRocketMQTopicRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 命名空间 */
+  NamespaceId: string;
+  /** 主题名称 */
+  TopicName: string;
+  /** 消费组名称 */
+  ConsumerGroup?: string;
+  /** 订阅列表分页参数Offset */
+  Offset?: number;
+  /** 订阅列表分页参数Limit */
+  Limit?: number;
+}
+
+declare interface DescribeRocketMQTopicResponse {
+  /** Topic详情 */
+  Topic?: RocketMQTopic;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRocketMQTopicStatsRequest {
   /** 实例ID */
   ClusterId: string;
@@ -4289,6 +4229,8 @@ declare interface DescribeRocketMQTopicsRequest {
   FilterName?: string;
   /** 按订阅消费组名称过滤 */
   FilterGroup?: string;
+  /** 标签过滤器 */
+  TagFilters?: TagFilter[];
 }
 
 declare interface DescribeRocketMQTopicsResponse {
@@ -4735,6 +4677,10 @@ declare interface ModifyRabbitMQVipInstanceRequest {
   Remark?: string;
   /** 是否开启删除保护，不填则不修改 */
   EnableDeletionProtection?: boolean;
+  /** 是否删除所有标签，默认为false */
+  RemoveAllTags?: boolean;
+  /** 修改实例的标签信息，全量标签信息，非增量 */
+  Tags?: Tag[];
 }
 
 declare interface ModifyRabbitMQVipInstanceResponse {
@@ -4827,6 +4773,8 @@ declare interface ModifyRocketMQInstanceRequest {
   MessageRetention?: number;
   /** 是否开启删除保护 */
   EnableDeletionProtection?: boolean;
+  /** 控制生产和消费消息的 TPS 占比，取值范围0～1，默认值为0.5 */
+  SendReceiveRatio?: number;
 }
 
 declare interface ModifyRocketMQInstanceResponse {
@@ -5441,16 +5389,12 @@ declare interface Tdmq {
   DescribeRocketMQRoles(data: DescribeRocketMQRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQRolesResponse>;
   /** 获取RocketMQ平滑迁移任务详情 {@link DescribeRocketMQSmoothMigrationTaskRequest} {@link DescribeRocketMQSmoothMigrationTaskResponse} */
   DescribeRocketMQSmoothMigrationTask(data: DescribeRocketMQSmoothMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQSmoothMigrationTaskResponse>;
-  /** @deprecated 获取RocketMQ平滑迁移任务列表 {@link DescribeRocketMQSmoothMigrationTaskListRequest} {@link DescribeRocketMQSmoothMigrationTaskListResponse} */
-  DescribeRocketMQSmoothMigrationTaskList(data: DescribeRocketMQSmoothMigrationTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQSmoothMigrationTaskListResponse>;
-  /** @deprecated 平滑迁移：获取源集群的group列表 {@link DescribeRocketMQSourceClusterGroupListRequest} {@link DescribeRocketMQSourceClusterGroupListResponse} */
-  DescribeRocketMQSourceClusterGroupList(data: DescribeRocketMQSourceClusterGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQSourceClusterGroupListResponse>;
-  /** @deprecated 平滑迁移：获取源集群的topic列表 {@link DescribeRocketMQSourceClusterTopicListRequest} {@link DescribeRocketMQSourceClusterTopicListResponse} */
-  DescribeRocketMQSourceClusterTopicList(data: DescribeRocketMQSourceClusterTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQSourceClusterTopicListResponse>;
   /** 获取RocketMQ消费组订阅关系 {@link DescribeRocketMQSubscriptionsRequest} {@link DescribeRocketMQSubscriptionsResponse} */
   DescribeRocketMQSubscriptions(data: DescribeRocketMQSubscriptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQSubscriptionsResponse>;
   /** 获取 RocketMQ 集群相关指标排序列表 {@link DescribeRocketMQTopUsagesRequest} {@link DescribeRocketMQTopUsagesResponse} */
   DescribeRocketMQTopUsages(data: DescribeRocketMQTopUsagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQTopUsagesResponse>;
+  /** 获取RocketMQ主题详情 {@link DescribeRocketMQTopicRequest} {@link DescribeRocketMQTopicResponse} */
+  DescribeRocketMQTopic(data: DescribeRocketMQTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQTopicResponse>;
   /** rocketmq 消息查询 {@link DescribeRocketMQTopicMsgsRequest} {@link DescribeRocketMQTopicMsgsResponse} */
   DescribeRocketMQTopicMsgs(data: DescribeRocketMQTopicMsgsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQTopicMsgsResponse>;
   /** 获取Topic生产详情列表 {@link DescribeRocketMQTopicStatsRequest} {@link DescribeRocketMQTopicStatsResponse} */

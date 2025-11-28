@@ -2563,6 +2563,8 @@ declare interface CreateTopicRequest {
   Describes?: string;
   /** 0：日志主题关闭日志沉降。非0：日志主题开启日志沉降后标准存储的天数，HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效，指标主题不支持该配置。 */
   HotPeriod?: number;
+  /** 加密相关参数。 支持加密地域并且开白用户可以传此参数，其他场景不能传递该参数。0或者不传： 不加密1：kms-cls 云产品密钥加密支持地域：ap-beijing,ap-guangzhou,ap-shanghai,ap-singapore,ap-bangkok,ap-jakarta,eu-frankfurt,ap-seoul,ap-tokyo */
+  Encryption?: number;
   /** 主题类型- 0:日志主题，默认值- 1:指标主题 */
   BizType?: number;
   /** 主题自定义ID，格式为：用户自定义部分-用户APPID。未填写该参数时将自动生成ID。- 用户自定义部分仅支持小写字母、数字和-，且不能以-开头和结尾，长度为3至40字符- 尾部需要使用-拼接用户APPID，APPID可在https://console.cloud.tencent.com/developer页面查询。- 如果指定该字段，需保证全地域唯一 */

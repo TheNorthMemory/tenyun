@@ -692,20 +692,6 @@ declare interface FlvSpecialParam {
   UploadInRecording?: boolean;
 }
 
-/** 禁推流列表 */
-declare interface ForbidStreamInfo {
-  /** 流名称。 */
-  StreamName?: string;
-  /** 创建时间。注：此字段为北京时间（UTC+8时区）。 */
-  CreateTime?: string;
-  /** 禁推过期时间。注：此字段为北京时间（UTC+8时区）。 */
-  ExpireTime?: string;
-  /** 推流路径。 */
-  AppName?: string | null;
-  /** 推流域名。 */
-  DomainName?: string | null;
-}
-
 /** 某省份某运营商在某段时间内的带宽，流量，请求数和并发数 */
 declare interface GroupProIspDataInfo {
   /** 省份。 */
@@ -3550,30 +3536,6 @@ declare interface DescribeLiveEnhanceInfoListResponse {
   RequestId?: string;
 }
 
-declare interface DescribeLiveForbidStreamListRequest {
-  /** 取得第几页，默认1。 */
-  PageNum?: number;
-  /** 每页大小，最大100。 取值：1~100之前的任意整数。默认值：10。 */
-  PageSize?: number;
-  /** 按流名称查询。 */
-  StreamName?: string;
-}
-
-declare interface DescribeLiveForbidStreamListResponse {
-  /** 符合条件的总个数。 */
-  TotalNum: number;
-  /** 总页数。 */
-  TotalPage: number;
-  /** 分页的页码。 */
-  PageNum: number;
-  /** 每页显示的条数。 */
-  PageSize: number;
-  /** 禁推流列表。 */
-  ForbidStreamList: ForbidStreamInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeLivePackageInfoRequest {
   /** 包类型，可选值：0：流量包1：转码包2: 连麦包。 */
   PackageType: number;
@@ -5723,8 +5685,6 @@ declare interface Live {
   DescribeLiveDomains(data?: DescribeLiveDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveDomainsResponse>;
   /** 查询直播增强用量明细 {@link DescribeLiveEnhanceInfoListRequest} {@link DescribeLiveEnhanceInfoListResponse} */
   DescribeLiveEnhanceInfoList(data: DescribeLiveEnhanceInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveEnhanceInfoListResponse>;
-  /** 获取禁推流列表 {@link DescribeLiveForbidStreamListRequest} {@link DescribeLiveForbidStreamListResponse} */
-  DescribeLiveForbidStreamList(data?: DescribeLiveForbidStreamListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveForbidStreamListResponse>;
   /** 查询直播套餐包信息 {@link DescribeLivePackageInfoRequest} {@link DescribeLivePackageInfoResponse} */
   DescribeLivePackageInfo(data: DescribeLivePackageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLivePackageInfoResponse>;
   /** 获取直播垫片规则列表 {@link DescribeLivePadRulesRequest} {@link DescribeLivePadRulesResponse} */

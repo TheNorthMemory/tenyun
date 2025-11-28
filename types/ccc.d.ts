@@ -1313,6 +1313,8 @@ declare interface CreateAutoCalloutTaskRequest {
   AvailableTime?: TimeRange[];
   /** 智能体 ID，不填写时需要填写 IvrId */
   AIAgentId?: number;
+  /** 任务失败重试时间间隔，重试间隔 600秒～86400 秒 */
+  RetryInterval?: number;
 }
 
 declare interface CreateAutoCalloutTaskResponse {

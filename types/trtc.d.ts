@@ -576,7 +576,7 @@ declare interface MixLayout {
   MediaId?: number;
   /** 该画布的图层顺序, 这个值越小表示图层越靠后。默认值为0。 */
   ImageLayer?: number;
-  /** 图片的url地址， 只支持jpg, png, jpeg，大小限制不超过5M。注意，url必须携带格式后缀，url内只支持特定的字符串, 范围是a-z A-Z 0-9 '-', '.', '_', '~', ':', '/', '?', '#', '[', ']' '@', '!', '&', '(', ')', '*', '+', ',', '%', '=' */
+  /** 图片的url地址， 只支持jpg, png, jpeg，图片分辨率限制不超过2K，图片大小限制不超过5MB。注意，url必须携带格式后缀，url内只支持特定的字符串, 范围是a-z A-Z 0-9 '-', '.', '_', '~', ':', '/', '?', '#', '[', ']' '@', '!', '&', '(', ')', '*', '+', ',', '%', '=' */
   SubBackgroundImage?: string;
 }
 
@@ -592,13 +592,13 @@ declare interface MixLayoutParams {
   MaxResolutionUserId?: string;
   /** 主辅路标识，0：主流（默认）；1：辅流（屏幕分享）；这个位置的MediaId代表的是对应MaxResolutionUserId的主辅路，MixLayoutList内代表的是自定义用户的主辅路。 */
   MediaId?: number;
-  /** 图片的url地址，只支持jpg, png, jpeg，大小限制不超过5M。注意，url必须携带格式后缀，url内只支持特定的字符串, 范围是a-z A-Z 0-9 '-', '.', '_', '~', ':', '/', '?', '#', '[', ']' '@', '!', '&', '(', ')', '*', '+', ',', '%', '=' */
+  /** 图片的url地址，只支持jpg, png, jpeg，图片分辨率限制不超过2K，图片大小限制不超过5MB。注意，url必须携带格式后缀，url内只支持特定的字符串, 范围是a-z A-Z 0-9 '-', '.', '_', '~', ':', '/', '?', '#', '[', ']' '@', '!', '&', '(', ')', '*', '+', ',', '%', '=' */
   BackgroundImageUrl?: string;
   /** 设置为1时代表启用占位图功能，0时代表不启用占位图功能，默认为0。启用占位图功能时，在预设位置的用户没有上行音视频时可显示对应的占位图。 */
   PlaceHolderMode?: number;
   /** 背景画面宽高比不一致的时候处理方案，与MixLayoutList定义的RenderMode一致。 */
   BackgroundImageRenderMode?: number;
-  /** 子画面占位图url地址，只支持jpg, png, jpeg，大小限制不超过5M。注意，url必须携带格式后缀，url内只支持特定的字符串, 范围是a-z A-Z 0-9 '-', '.', '_', '~', ':', '/', '?', '#', '[', ']' '@', '!', '&', '(', ')', '*', '+', ',', '%', '=' */
+  /** 子画面占位图url地址，只支持jpg, png, jpeg，图片分辨率限制不超过2K，图片大小限制不超过5MB。注意，url必须携带格式后缀，url内只支持特定的字符串, 范围是a-z A-Z 0-9 '-', '.', '_', '~', ':', '/', '?', '#', '[', ']' '@', '!', '&', '(', ')', '*', '+', ',', '%', '=' */
   DefaultSubBackgroundImage?: string;
   /** 水印布局参数， 最多支持25个。 */
   WaterMarkList?: WaterMark[];
@@ -910,6 +910,8 @@ declare interface ServerPushText {
   Priority?: number;
   /** 是否将文本加入到llm历史上下文中 */
   AddHistory?: boolean;
+  /** 如果填写，会和字幕绑定发送到端上，注意确保内容为json字符串 */
+  MetaInfo?: string;
 }
 
 /** 单流旁路转推的用户上行信息。 */

@@ -3306,6 +3306,14 @@ declare interface AddAttackWhiteRuleResponse {
   RequestId?: string;
 }
 
+declare interface AddBypassAllRuleRequest {
+}
+
+declare interface AddBypassAllRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AddCustomRuleRequest {
   /** 规则名称 */
   Name: string;
@@ -6982,12 +6990,30 @@ declare interface PostAttackDownloadTaskResponse {
   RequestId?: string;
 }
 
+declare interface QueryBypassAllStatusRequest {
+}
+
+declare interface QueryBypassAllStatusResponse {
+  /** 该用户是否被加入了全局的bypass列表 */
+  Result: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RefreshAccessCheckResultRequest {
   /** 域名 */
   Domain: string;
 }
 
 declare interface RefreshAccessCheckResultResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RemoveBypassAllRuleRequest {
+}
+
+declare interface RemoveBypassAllRuleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7361,6 +7387,8 @@ declare interface Waf {
   AddAreaBanAreas(data: AddAreaBanAreasRequest, config?: AxiosRequestConfig): AxiosPromise<AddAreaBanAreasResponse>;
   /** 增加规则引擎白名单 {@link AddAttackWhiteRuleRequest} {@link AddAttackWhiteRuleResponse} */
   AddAttackWhiteRule(data: AddAttackWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddAttackWhiteRuleResponse>;
+  /** 添加一键bypass规则 {@link AddBypassAllRuleRequest} {@link AddBypassAllRuleResponse} */
+  AddBypassAllRule(data?: AddBypassAllRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddBypassAllRuleResponse>;
   /** 新增自定义规则 {@link AddCustomRuleRequest} {@link AddCustomRuleResponse} */
   AddCustomRule(data: AddCustomRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddCustomRuleResponse>;
   /** 添加精准白名单规则 {@link AddCustomWhiteRuleRequest} {@link AddCustomWhiteRuleResponse} */
@@ -7713,8 +7741,12 @@ declare interface Waf {
   ModifyWebshellStatus(data: ModifyWebshellStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWebshellStatusResponse>;
   /** 创建搜索下载攻击日志任务 {@link PostAttackDownloadTaskRequest} {@link PostAttackDownloadTaskResponse} */
   PostAttackDownloadTask(data: PostAttackDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<PostAttackDownloadTaskResponse>;
+  /** 查询该用户是否被加入了全局的bypass列表 {@link QueryBypassAllStatusRequest} {@link QueryBypassAllStatusResponse} */
+  QueryBypassAllStatus(data?: QueryBypassAllStatusRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBypassAllStatusResponse>;
   /** 刷新接入检查的结果 {@link RefreshAccessCheckResultRequest} {@link RefreshAccessCheckResultResponse} */
   RefreshAccessCheckResult(data: RefreshAccessCheckResultRequest, config?: AxiosRequestConfig): AxiosPromise<RefreshAccessCheckResultResponse>;
+  /** 删除一键bypass规则 {@link RemoveBypassAllRuleRequest} {@link RemoveBypassAllRuleResponse} */
+  RemoveBypassAllRule(data?: RemoveBypassAllRuleRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveBypassAllRuleResponse>;
   /** 搜索访问日志 {@link SearchAccessLogRequest} {@link SearchAccessLogResponse} */
   SearchAccessLog(data: SearchAccessLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchAccessLogResponse>;
   /** 搜索CLS新版本攻击日志 {@link SearchAttackLogRequest} {@link SearchAttackLogResponse} */

@@ -2231,7 +2231,7 @@ declare interface DescribeRecordPlaybackUrlRequest {
   EndTime: number;
   /** 是否获取内网地址 */
   IsInternal?: boolean;
-  /** 云录像回放时，是否需要开启时间戳矫正，主要解决时间戳反转，会退等问题导致无法播放 */
+  /** 云录像回放时，是否需要开启时间戳矫正，主要解决时间戳反转、回退等问题导致无法播放 */
   CorrectTimestamp?: boolean;
 }
 

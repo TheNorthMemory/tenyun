@@ -1469,6 +1469,18 @@ declare namespace V20180525 {
     SecurityGroup?: string;
   }
 
+  /** 集群发布序列标签 */
+  interface ClusterRollOutSequenceTag {
+    /** 集群ID */
+    ClusterID?: string;
+    /** 集群名称 */
+    ClusterName?: string;
+    /** 集群发布序列标签 */
+    Tags?: Tag[];
+    /** 地域 */
+    Region?: string;
+  }
+
   /** 集群状态信息 */
   interface ClusterStatus {
     /** 集群Id */
@@ -2029,6 +2041,22 @@ declare namespace V20180525 {
     MIGEnable?: boolean;
   }
 
+  /** 全局维护时间窗口和排除项 */
+  interface GlobalMaintenanceWindowAndExclusion {
+    /** 地域 */
+    TargetRegions?: string[];
+    /** 维护开始时间 */
+    MaintenanceTime?: string;
+    /** 维护时长（小时） */
+    Duration?: number;
+    /** 维护周期（一周中的哪几天） */
+    DayOfWeek?: string[];
+    /** 排除项 */
+    Exclusions?: MaintenanceExclusion[];
+    /** 维护窗口ID */
+    ID?: number;
+  }
+
   /** Probe中的HttpGet */
   interface HttpGet {
     /** HttpGet检测的路径 */
@@ -2389,6 +2417,38 @@ declare namespace V20180525 {
     KeyIds?: string[] | null;
     /** 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为true。取值范围：true：表示保持镜像的登录设置false：表示不保持镜像的登录设置默认取值：false。 */
     KeepImageLogin?: string;
+  }
+
+  /** 维护时间排除项 */
+  interface MaintenanceExclusion {
+    /** 维护排除项名称 */
+    Name: string;
+    /** 维护排除项开始时间 */
+    StartAt: string;
+    /** 维护排除项结束时间 */
+    EndAt: string;
+    /** 维护排除项ID */
+    ID?: number;
+  }
+
+  /** 维护时间窗口和排除项 */
+  interface MaintenanceWindowAndExclusion {
+    /** 维护开始时间 */
+    MaintenanceTime: string;
+    /** 维护时长（小时） */
+    Duration: number;
+    /** 集群ID */
+    ClusterID: string;
+    /** 维护周期（一周中的哪几天） */
+    DayOfWeek: string[];
+    /** 地域 */
+    Region: string;
+    /** 集群名称 */
+    ClusterName?: string;
+    /** 集群版本 */
+    ClusterVersion?: string;
+    /** 排除项 */
+    Exclusions?: MaintenanceExclusion[];
   }
 
   /** 手动加入的节点 */
@@ -3389,6 +3449,18 @@ declare namespace V20180525 {
     Usage?: number;
   }
 
+  /** 发布序列 */
+  interface RollOutSequence {
+    /** 发布序列名称 */
+    Name: string;
+    /** 发布序列步骤 */
+    SequenceFlows: SequenceFlow[];
+    /** 是否启用 */
+    Enabled: boolean;
+    /** 发布序列ID */
+    ID?: number;
+  }
+
   /** 集群路由对象 */
   interface RouteInfo {
     /** 路由表名称。 */
@@ -3471,6 +3543,22 @@ declare namespace V20180525 {
   interface SecurityContext {
     /** 安全能力清单 */
     Capabilities?: Capabilities | null;
+  }
+
+  /** 发布序列步骤 */
+  interface SequenceFlow {
+    /** 发布序列步骤标签 */
+    Tags: SequenceTag[];
+    /** 等待时间（秒） */
+    SoakTime: number;
+  }
+
+  /** 发布序列标签 */
+  interface SequenceTag {
+    /** 标签键 */
+    Key?: string;
+    /** 标签值 */
+    Value?: string[];
   }
 
   /** ServiceAccount认证相关配置 */
@@ -3681,6 +3769,44 @@ declare namespace V20180525 {
     SecurityGroupIds?: string[];
   }
 
+  /** 升级计划 */
+  interface UpgradePlan {
+    /** 升级计划ID */
+    ID?: number;
+    /** 集群ID */
+    ClusterID?: string;
+    /** 集群名称 */
+    ClusterName?: string;
+    /** 预计开始时间 */
+    PlanedStartAt?: string;
+    /** 升级开始时间 */
+    UpgradeStartAt?: string;
+    /** 升级结束时间 */
+    UpgradeEndAt?: string;
+    /** 升级状态 */
+    Status?: string;
+    /** 原因 */
+    Reason?: string;
+  }
+
+  /** 升级任务 */
+  interface UpgradeTask {
+    /** 任务ID */
+    ID?: number;
+    /** 任务名称 */
+    Name?: string;
+    /** 组件名称 */
+    Component?: string;
+    /** 关联资源 */
+    RelatedResources?: string[];
+    /** 升级影响 */
+    UpgradeImpact?: string;
+    /** 预计开始时间 */
+    PlanedStartAt?: string;
+    /** 创建时间 */
+    CreatedAt?: string;
+  }
+
   /** 版本信息 */
   interface VersionInstance {
     /** 版本名称 */
@@ -3853,6 +3979,18 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface CancelUpgradePlanRequest {
+    /** 集群ID */
+    ClusterID: string;
+    /** 升级计划ID */
+    PlanID: number;
+  }
+
+  interface CancelUpgradePlanResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface CheckEdgeClusterCIDRRequest {
     /** 集群的vpc-id */
     VpcId: string;
@@ -3985,6 +4123,24 @@ declare namespace V20180525 {
   interface CreateClusterInstancesResponse {
     /** 节点实例ID */
     InstanceIdSet?: string[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface CreateClusterMaintenanceWindowAndExclusionsRequest {
+    /** 集群ID */
+    ClusterID: string;
+    /** 维护开始时间 */
+    MaintenanceTime: string;
+    /** 维护时长（小时） */
+    Duration: number;
+    /** 维护周期（一周中的哪几天） */
+    DayOfWeek: string[];
+    /** 维护排除项 */
+    Exclusions?: MaintenanceExclusion[];
+  }
+
+  interface CreateClusterMaintenanceWindowAndExclusionsResponse {
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4343,6 +4499,24 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface CreateGlobalMaintenanceWindowAndExclusionsRequest {
+    /** 维护开始时间 */
+    MaintenanceTime: string;
+    /** 维护时长(小时) */
+    Duration: number;
+    /** 维护周期（一周中的哪几天） */
+    DayOfWeek: string[];
+    /** 地域 */
+    TargetRegions: string[];
+    /** 维护排除项 */
+    Exclusions?: MaintenanceExclusion[];
+  }
+
+  interface CreateGlobalMaintenanceWindowAndExclusionsResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface CreateImageCacheRequest {
     /** 用于制作镜像缓存的容器镜像列表 */
     Images: string[];
@@ -4531,6 +4705,20 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface CreateRollOutSequenceRequest {
+    /** 发布序列名称 */
+    Name: string;
+    /** 发布序列步骤 */
+    SequenceFlows: SequenceFlow[];
+    /** 是否启用 */
+    Enabled: boolean;
+  }
+
+  interface CreateRollOutSequenceResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface CreateTKEEdgeClusterRequest {
     /** k8s版本号 */
     K8SVersion: string;
@@ -4649,6 +4837,16 @@ declare namespace V20180525 {
     FailedInstanceIds?: string[] | null;
     /** 未匹配到的实例ID列表 */
     NotFoundInstanceIds?: string[] | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DeleteClusterMaintenanceWindowAndExclusionRequest {
+    /** 集群ID */
+    ClusterID: string;
+  }
+
+  interface DeleteClusterMaintenanceWindowAndExclusionResponse {
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4787,6 +4985,16 @@ declare namespace V20180525 {
   }
 
   interface DeleteEdgeClusterInstancesResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DeleteGlobalMaintenanceWindowAndExclusionRequest {
+    /** 全局维护时间窗口ID */
+    ID: number;
+  }
+
+  interface DeleteGlobalMaintenanceWindowAndExclusionResponse {
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4941,6 +5149,16 @@ declare namespace V20180525 {
   }
 
   interface DeleteReservedInstancesResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DeleteRollOutSequenceRequest {
+    /** 发布序列ID */
+    ID: number;
+  }
+
+  interface DeleteRollOutSequenceResponse {
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5303,6 +5521,24 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface DescribeClusterMaintenanceWindowAndExclusionsRequest {
+    /** 偏移量，默认为0 */
+    Offset?: number;
+    /** 最大输出条目数，默认为20 */
+    Limit?: number;
+    /** 过滤项 */
+    Filters?: Filter[];
+  }
+
+  interface DescribeClusterMaintenanceWindowAndExclusionsResponse {
+    /** 维护时间窗口和排除项 */
+    MaintenanceWindowAndExclusions?: MaintenanceWindowAndExclusion[];
+    /** 总条目数 */
+    TotalCount?: number;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeClusterNodePoolDetailRequest {
     /** 集群id */
     ClusterId: string;
@@ -5421,6 +5657,24 @@ declare namespace V20180525 {
     ReleaseSet?: Release[];
     /** 已安装应用总数量 */
     Total?: number;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeClusterRollOutSequenceTagsRequest {
+    /** 偏移量，默认为0 */
+    Offset?: number;
+    /** 最大输出条目数，默认为20 */
+    Limit?: number;
+    /** 过滤项 */
+    Filters?: Filter[];
+  }
+
+  interface DescribeClusterRollOutSequenceTagsResponse {
+    /** 集群发布序列标签 */
+    ClusterTags?: ClusterRollOutSequenceTag[];
+    /** 总条目数 */
+    TotalCount?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5867,6 +6121,24 @@ declare namespace V20180525 {
     PublicConnectUrl?: string;
     /** 注册节点公网版自定义域名 */
     PublicCustomDomain?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeGlobalMaintenanceWindowAndExclusionsRequest {
+    /** 偏移量，默认为0 */
+    Offset?: number;
+    /** 最大输出条目数，默认为20 */
+    Limit?: number;
+    /** 筛选项 */
+    Filters?: Filter[];
+  }
+
+  interface DescribeGlobalMaintenanceWindowAndExclusionsResponse {
+    /** 总条目数 */
+    TotalCount?: number;
+    /** 维护时间窗口 */
+    MaintenanceWindowAndExclusions?: GlobalMaintenanceWindowAndExclusion[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6531,6 +6803,22 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface DescribeRollOutSequencesRequest {
+    /** 偏移量，默认为0 */
+    Offset?: number;
+    /** 最大输出条目数，默认为20 */
+    Limit?: number;
+  }
+
+  interface DescribeRollOutSequencesResponse {
+    /** 发布序列 */
+    Sequences?: RollOutSequence[];
+    /** 总条目数 */
+    TotalCount?: number;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeRouteTableConflictsRequest {
     /** 路由表CIDR */
     RouteTableCidrBlock: string;
@@ -6669,6 +6957,40 @@ declare namespace V20180525 {
   interface DescribeTasksResponse {
     /** 任务步骤信息 */
     Tasks?: Task[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeUpgradeTaskDetailRequest {
+    /** 升级任务ID */
+    ID: number;
+    /** 偏移量，默认为0 */
+    Offset?: number;
+    /** 最大输出条目数，默认为20 */
+    Limit?: number;
+  }
+
+  interface DescribeUpgradeTaskDetailResponse {
+    /** 升级计划 */
+    UpgradePlans?: UpgradePlan[];
+    /** 总条目数 */
+    TotalCount?: number;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeUpgradeTasksRequest {
+    /** 偏移量，默认为0 */
+    Offset?: number;
+    /** 最大输出条目数，默认为20 */
+    Limit?: number;
+  }
+
+  interface DescribeUpgradeTasksResponse {
+    /** 升级任务 */
+    UpgradeTasks?: UpgradeTask[];
+    /** 总条目数 */
+    TotalCount?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -7137,6 +7459,24 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface ModifyClusterMaintenanceWindowAndExclusionsRequest {
+    /** 集群ID */
+    ClusterID: string;
+    /** 维护开始时间 */
+    MaintenanceTime: string;
+    /** 维护时长（小时） */
+    Duration: number;
+    /** 维护周期（一周中的哪几天） */
+    DayOfWeek: string[];
+    /** 维护排除项 */
+    Exclusions?: MaintenanceExclusion[];
+  }
+
+  interface ModifyClusterMaintenanceWindowAndExclusionsResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface ModifyClusterNodePoolRequest {
     /** 集群ID */
     ClusterId: string;
@@ -7181,6 +7521,18 @@ declare namespace V20180525 {
   }
 
   interface ModifyClusterNodePoolResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface ModifyClusterRollOutSequenceTagsRequest {
+    /** 集群ID */
+    ClusterID: string;
+    /** 集群发布序列标签（为空时表示移除集群标签） */
+    Tags?: Tag[];
+  }
+
+  interface ModifyClusterRollOutSequenceTagsResponse {
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -7235,6 +7587,26 @@ declare namespace V20180525 {
   }
 
   interface ModifyClusterVirtualNodePoolResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface ModifyGlobalMaintenanceWindowAndExclusionsRequest {
+    /** 维护窗口ID */
+    ID: number;
+    /** 地域 */
+    TargetRegions: string[];
+    /** 维护开始时间 */
+    MaintenanceTime: string;
+    /** 维护时长（小时） */
+    Duration: number;
+    /** 维护周期（一周中的哪几天） */
+    DayOfWeek: string[];
+    /** 维护排除项 */
+    Exclusions?: MaintenanceExclusion[];
+  }
+
+  interface ModifyGlobalMaintenanceWindowAndExclusionsResponse {
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -7419,6 +7791,22 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface ModifyRollOutSequenceRequest {
+    /** 发布序列ID */
+    ID: number;
+    /** 发布序列名称 */
+    Name: string;
+    /** 发布序列步骤 */
+    SequenceFlows: SequenceFlow[];
+    /** 是否启用 */
+    Enabled: boolean;
+  }
+
+  interface ModifyRollOutSequenceResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface RemoveNodeFromNodePoolRequest {
     /** 集群id */
     ClusterId: string;
@@ -7535,6 +7923,20 @@ declare namespace V20180525 {
     SucceedInstanceIds?: string[];
     /** 没有成功设置的节点id */
     FailedInstanceIds?: string[] | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface SwitchClusterEndpointRequest {
+    /** 集群ID */
+    ClusterId: string;
+    /** 是否为外网访问（TRUE 外网访问 FALSE 内网访问，默认值： FALSE） */
+    IsExtranet?: boolean;
+    /** 切换回滚至非直连 */
+    Rollback?: boolean;
+  }
+
+  interface SwitchClusterEndpointResponse {
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -7891,6 +8293,8 @@ declare interface Tke {
   AddVpcCniSubnets(data: V20180525.AddVpcCniSubnetsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.AddVpcCniSubnetsResponse>;
   /** 集群取消安装应用 {@link V20180525.CancelClusterReleaseRequest} {@link V20180525.CancelClusterReleaseResponse} */
   CancelClusterRelease(data: V20180525.CancelClusterReleaseRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CancelClusterReleaseResponse>;
+  /** 取消集群升级计划 {@link V20180525.CancelUpgradePlanRequest} {@link V20180525.CancelUpgradePlanResponse} */
+  CancelUpgradePlan(data: V20180525.CancelUpgradePlanRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CancelUpgradePlanResponse>;
   /** 检查边缘计算集群的CIDR是否冲突 {@link V20180525.CheckEdgeClusterCIDRRequest} {@link V20180525.CheckEdgeClusterCIDRResponse} */
   CheckEdgeClusterCIDR(data: V20180525.CheckEdgeClusterCIDRRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CheckEdgeClusterCIDRResponse>;
   /** 节点是否可升级 {@link V20180525.CheckInstancesUpgradeAbleRequest} {@link V20180525.CheckInstancesUpgradeAbleResponse} */
@@ -7907,6 +8311,8 @@ declare interface Tke {
   CreateClusterEndpointVip(data: V20180525.CreateClusterEndpointVipRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CreateClusterEndpointVipResponse>;
   /** 扩展集群节点 {@link V20180525.CreateClusterInstancesRequest} {@link V20180525.CreateClusterInstancesResponse} */
   CreateClusterInstances(data: V20180525.CreateClusterInstancesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CreateClusterInstancesResponse>;
+  /** 创建集群维护时间窗口和排除项 {@link V20180525.CreateClusterMaintenanceWindowAndExclusionsRequest} {@link V20180525.CreateClusterMaintenanceWindowAndExclusionsResponse} */
+  CreateClusterMaintenanceWindowAndExclusions(data: V20180525.CreateClusterMaintenanceWindowAndExclusionsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CreateClusterMaintenanceWindowAndExclusionsResponse>;
   /** 创建节点池 {@link V20180525.CreateClusterNodePoolRequest} {@link V20180525.CreateClusterNodePoolResponse} */
   CreateClusterNodePool(data: V20180525.CreateClusterNodePoolRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CreateClusterNodePoolResponse>;
   /** 集群安装应用 {@link V20180525.CreateClusterReleaseRequest} {@link V20180525.CreateClusterReleaseResponse} */
@@ -7931,6 +8337,8 @@ declare interface Tke {
   CreateEdgeLogConfig(data: V20180525.CreateEdgeLogConfigRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CreateEdgeLogConfigResponse>;
   /** 弹性集群创建日志采集配置 {@link V20180525.CreateEksLogConfigRequest} {@link V20180525.CreateEksLogConfigResponse} */
   CreateEksLogConfig(data: V20180525.CreateEksLogConfigRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CreateEksLogConfigResponse>;
+  /** 创建全局维护时间窗口和排除项 {@link V20180525.CreateGlobalMaintenanceWindowAndExclusionsRequest} {@link V20180525.CreateGlobalMaintenanceWindowAndExclusionsResponse} */
+  CreateGlobalMaintenanceWindowAndExclusions(data: V20180525.CreateGlobalMaintenanceWindowAndExclusionsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CreateGlobalMaintenanceWindowAndExclusionsResponse>;
   /** 创建镜像缓存 {@link V20180525.CreateImageCacheRequest} {@link V20180525.CreateImageCacheResponse} */
   CreateImageCache(data: V20180525.CreateImageCacheRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CreateImageCacheResponse>;
   /** 创建告警策略 {@link V20180525.CreatePrometheusAlertPolicyRequest} {@link V20180525.CreatePrometheusAlertPolicyResponse} */
@@ -7953,6 +8361,8 @@ declare interface Tke {
   CreatePrometheusTemplate(data: V20180525.CreatePrometheusTemplateRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CreatePrometheusTemplateResponse>;
   /** 购买预留券实例 {@link V20180525.CreateReservedInstancesRequest} {@link V20180525.CreateReservedInstancesResponse} */
   CreateReservedInstances(data: V20180525.CreateReservedInstancesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CreateReservedInstancesResponse>;
+  /** 创建集群发布序列 {@link V20180525.CreateRollOutSequenceRequest} {@link V20180525.CreateRollOutSequenceResponse} */
+  CreateRollOutSequence(data: V20180525.CreateRollOutSequenceRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CreateRollOutSequenceResponse>;
   /** 创建边缘计算集群 {@link V20180525.CreateTKEEdgeClusterRequest} {@link V20180525.CreateTKEEdgeClusterResponse} */
   CreateTKEEdgeCluster(data: V20180525.CreateTKEEdgeClusterRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CreateTKEEdgeClusterResponse>;
   /** 删除addon {@link V20180525.DeleteAddonRequest} {@link V20180525.DeleteAddonResponse} */
@@ -7969,6 +8379,8 @@ declare interface Tke {
   DeleteClusterEndpointVip(data: V20180525.DeleteClusterEndpointVipRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeleteClusterEndpointVipResponse>;
   /** 删除集群中的节点 {@link V20180525.DeleteClusterInstancesRequest} {@link V20180525.DeleteClusterInstancesResponse} */
   DeleteClusterInstances(data: V20180525.DeleteClusterInstancesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeleteClusterInstancesResponse>;
+  /** 删除集群维护时间窗口和排除项 {@link V20180525.DeleteClusterMaintenanceWindowAndExclusionRequest} {@link V20180525.DeleteClusterMaintenanceWindowAndExclusionResponse} */
+  DeleteClusterMaintenanceWindowAndExclusion(data: V20180525.DeleteClusterMaintenanceWindowAndExclusionRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeleteClusterMaintenanceWindowAndExclusionResponse>;
   /** 删除节点池 {@link V20180525.DeleteClusterNodePoolRequest} {@link V20180525.DeleteClusterNodePoolResponse} */
   DeleteClusterNodePool(data: V20180525.DeleteClusterNodePoolRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeleteClusterNodePoolResponse>;
   /** 删除集群路由 {@link V20180525.DeleteClusterRouteRequest} {@link V20180525.DeleteClusterRouteResponse} */
@@ -7989,6 +8401,8 @@ declare interface Tke {
   DeleteEdgeCVMInstances(data: V20180525.DeleteEdgeCVMInstancesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeleteEdgeCVMInstancesResponse>;
   /** 删除边缘计算实例 {@link V20180525.DeleteEdgeClusterInstancesRequest} {@link V20180525.DeleteEdgeClusterInstancesResponse} */
   DeleteEdgeClusterInstances(data: V20180525.DeleteEdgeClusterInstancesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeleteEdgeClusterInstancesResponse>;
+  /** 删除全局维护时间窗口和排除项 {@link V20180525.DeleteGlobalMaintenanceWindowAndExclusionRequest} {@link V20180525.DeleteGlobalMaintenanceWindowAndExclusionResponse} */
+  DeleteGlobalMaintenanceWindowAndExclusion(data: V20180525.DeleteGlobalMaintenanceWindowAndExclusionRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeleteGlobalMaintenanceWindowAndExclusionResponse>;
   /** 删除镜像缓存 {@link V20180525.DeleteImageCachesRequest} {@link V20180525.DeleteImageCachesResponse} */
   DeleteImageCaches(data: V20180525.DeleteImageCachesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeleteImageCachesResponse>;
   /** 删除日志采集规则 {@link V20180525.DeleteLogConfigsRequest} {@link V20180525.DeleteLogConfigsResponse} */
@@ -8013,6 +8427,8 @@ declare interface Tke {
   DeletePrometheusTemplateSync(data: V20180525.DeletePrometheusTemplateSyncRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeletePrometheusTemplateSyncResponse>;
   /** 退还预留券实例 {@link V20180525.DeleteReservedInstancesRequest} {@link V20180525.DeleteReservedInstancesResponse} */
   DeleteReservedInstances(data: V20180525.DeleteReservedInstancesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeleteReservedInstancesResponse>;
+  /** 删除集群发布序列 {@link V20180525.DeleteRollOutSequenceRequest} {@link V20180525.DeleteRollOutSequenceResponse} */
+  DeleteRollOutSequence(data: V20180525.DeleteRollOutSequenceRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeleteRollOutSequenceResponse>;
   /** 删除边缘计算集群 {@link V20180525.DeleteTKEEdgeClusterRequest} {@link V20180525.DeleteTKEEdgeClusterResponse} */
   DeleteTKEEdgeCluster(data: V20180525.DeleteTKEEdgeClusterRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeleteTKEEdgeClusterResponse>;
   /** 获取addon列表 {@link V20180525.DescribeAddonRequest} {@link V20180525.DescribeAddonResponse} */
@@ -8057,6 +8473,8 @@ declare interface Tke {
   DescribeClusterLevelAttribute(data: V20180525.DescribeClusterLevelAttributeRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeClusterLevelAttributeResponse>;
   /** 查询集群变配记录 {@link V20180525.DescribeClusterLevelChangeRecordsRequest} {@link V20180525.DescribeClusterLevelChangeRecordsResponse} */
   DescribeClusterLevelChangeRecords(data: V20180525.DescribeClusterLevelChangeRecordsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeClusterLevelChangeRecordsResponse>;
+  /** 获取集群维护时间窗口和排除项 {@link V20180525.DescribeClusterMaintenanceWindowAndExclusionsRequest} {@link V20180525.DescribeClusterMaintenanceWindowAndExclusionsResponse} */
+  DescribeClusterMaintenanceWindowAndExclusions(data: V20180525.DescribeClusterMaintenanceWindowAndExclusionsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeClusterMaintenanceWindowAndExclusionsResponse>;
   /** 查询节点池详情 {@link V20180525.DescribeClusterNodePoolDetailRequest} {@link V20180525.DescribeClusterNodePoolDetailResponse} */
   DescribeClusterNodePoolDetail(data: V20180525.DescribeClusterNodePoolDetailRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeClusterNodePoolDetailResponse>;
   /** 查询节点池列表 {@link V20180525.DescribeClusterNodePoolsRequest} {@link V20180525.DescribeClusterNodePoolsResponse} */
@@ -8069,6 +8487,8 @@ declare interface Tke {
   DescribeClusterReleaseHistory(data: V20180525.DescribeClusterReleaseHistoryRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeClusterReleaseHistoryResponse>;
   /** 查询集群已安装应用列表 {@link V20180525.DescribeClusterReleasesRequest} {@link V20180525.DescribeClusterReleasesResponse} */
   DescribeClusterReleases(data: V20180525.DescribeClusterReleasesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeClusterReleasesResponse>;
+  /** 查询集群发布序列标签 {@link V20180525.DescribeClusterRollOutSequenceTagsRequest} {@link V20180525.DescribeClusterRollOutSequenceTagsResponse} */
+  DescribeClusterRollOutSequenceTags(data: V20180525.DescribeClusterRollOutSequenceTagsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeClusterRollOutSequenceTagsResponse>;
   /** 查询集群路由表 {@link V20180525.DescribeClusterRouteTablesRequest} {@link V20180525.DescribeClusterRouteTablesResponse} */
   DescribeClusterRouteTables(data: V20180525.DescribeClusterRouteTablesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeClusterRouteTablesResponse>;
   /** 查询集群路由 {@link V20180525.DescribeClusterRoutesRequest} {@link V20180525.DescribeClusterRoutesResponse} */
@@ -8117,6 +8537,8 @@ declare interface Tke {
   DescribeExistedInstances(data: V20180525.DescribeExistedInstancesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeExistedInstancesResponse>;
   /** 查看开启第三方节点池配置信息 {@link V20180525.DescribeExternalNodeSupportConfigRequest} {@link V20180525.DescribeExternalNodeSupportConfigResponse} */
   DescribeExternalNodeSupportConfig(data: V20180525.DescribeExternalNodeSupportConfigRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeExternalNodeSupportConfigResponse>;
+  /** 获取全局维护时间窗口和排除项 {@link V20180525.DescribeGlobalMaintenanceWindowAndExclusionsRequest} {@link V20180525.DescribeGlobalMaintenanceWindowAndExclusionsResponse} */
+  DescribeGlobalMaintenanceWindowAndExclusions(data: V20180525.DescribeGlobalMaintenanceWindowAndExclusionsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeGlobalMaintenanceWindowAndExclusionsResponse>;
   /** 获取eniipamd组件信息 {@link V20180525.DescribeIPAMDRequest} {@link V20180525.DescribeIPAMDResponse} */
   DescribeIPAMD(data: V20180525.DescribeIPAMDRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeIPAMDResponse>;
   /** 查询镜像缓存信息 {@link V20180525.DescribeImageCachesRequest} {@link V20180525.DescribeImageCachesResponse} */
@@ -8189,6 +8611,8 @@ declare interface Tke {
   DescribeReservedInstances(data: V20180525.DescribeReservedInstancesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeReservedInstancesResponse>;
   /** 获取集群资源使用量 {@link V20180525.DescribeResourceUsageRequest} {@link V20180525.DescribeResourceUsageResponse} */
   DescribeResourceUsage(data: V20180525.DescribeResourceUsageRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeResourceUsageResponse>;
+  /** 查询集群发布序列 {@link V20180525.DescribeRollOutSequencesRequest} {@link V20180525.DescribeRollOutSequencesResponse} */
+  DescribeRollOutSequences(data: V20180525.DescribeRollOutSequencesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeRollOutSequencesResponse>;
   /** 查询路由表冲突列表 {@link V20180525.DescribeRouteTableConflictsRequest} {@link V20180525.DescribeRouteTableConflictsResponse} */
   DescribeRouteTableConflicts(data: V20180525.DescribeRouteTableConflictsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeRouteTableConflictsResponse>;
   /** 基于K8S版本获取可选运行时版本 {@link V20180525.DescribeSupportedRuntimeRequest} {@link V20180525.DescribeSupportedRuntimeResponse} */
@@ -8205,6 +8629,10 @@ declare interface Tke {
   DescribeTKEEdgeScript(data: V20180525.DescribeTKEEdgeScriptRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeTKEEdgeScriptResponse>;
   /** 查询任务相关信息 {@link V20180525.DescribeTasksRequest} {@link V20180525.DescribeTasksResponse} */
   DescribeTasks(data: V20180525.DescribeTasksRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeTasksResponse>;
+  /** 查询计划升级任务详情 {@link V20180525.DescribeUpgradeTaskDetailRequest} {@link V20180525.DescribeUpgradeTaskDetailResponse} */
+  DescribeUpgradeTaskDetail(data: V20180525.DescribeUpgradeTaskDetailRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeUpgradeTaskDetailResponse>;
+  /** 查询计划升级任务 {@link V20180525.DescribeUpgradeTasksRequest} {@link V20180525.DescribeUpgradeTasksResponse} */
+  DescribeUpgradeTasks(data: V20180525.DescribeUpgradeTasksRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeUpgradeTasksResponse>;
   /** 集群版本信息 {@link V20180525.DescribeVersionsRequest} {@link V20180525.DescribeVersionsResponse} */
   DescribeVersions(data: V20180525.DescribeVersionsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeVersionsResponse>;
   /** 查询机型可支持的最大VPC-CNI模式Pod数量 {@link V20180525.DescribeVpcCniPodLimitsRequest} {@link V20180525.DescribeVpcCniPodLimitsResponse} */
@@ -8267,14 +8695,20 @@ declare interface Tke {
   ModifyClusterExtraArgsTaskState(data: V20180525.ModifyClusterExtraArgsTaskStateRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterExtraArgsTaskStateResponse>;
   /** 修改集群镜像 {@link V20180525.ModifyClusterImageRequest} {@link V20180525.ModifyClusterImageResponse} */
   ModifyClusterImage(data: V20180525.ModifyClusterImageRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterImageResponse>;
+  /** 更新集群维护时间窗口和排除项 {@link V20180525.ModifyClusterMaintenanceWindowAndExclusionsRequest} {@link V20180525.ModifyClusterMaintenanceWindowAndExclusionsResponse} */
+  ModifyClusterMaintenanceWindowAndExclusions(data: V20180525.ModifyClusterMaintenanceWindowAndExclusionsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterMaintenanceWindowAndExclusionsResponse>;
   /** 编辑节点池 {@link V20180525.ModifyClusterNodePoolRequest} {@link V20180525.ModifyClusterNodePoolResponse} */
   ModifyClusterNodePool(data: V20180525.ModifyClusterNodePoolRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterNodePoolResponse>;
+  /** 更新集群发布序列标签 {@link V20180525.ModifyClusterRollOutSequenceTagsRequest} {@link V20180525.ModifyClusterRollOutSequenceTagsResponse} */
+  ModifyClusterRollOutSequenceTags(data: V20180525.ModifyClusterRollOutSequenceTagsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterRollOutSequenceTagsResponse>;
   /** 修改集群运行时配置 {@link V20180525.ModifyClusterRuntimeConfigRequest} {@link V20180525.ModifyClusterRuntimeConfigResponse} */
   ModifyClusterRuntimeConfig(data: V20180525.ModifyClusterRuntimeConfigRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterRuntimeConfigResponse>;
   /** 修改集群标签 {@link V20180525.ModifyClusterTagsRequest} {@link V20180525.ModifyClusterTagsResponse} */
   ModifyClusterTags(data: V20180525.ModifyClusterTagsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterTagsResponse>;
   /** 修改超级节点池 {@link V20180525.ModifyClusterVirtualNodePoolRequest} {@link V20180525.ModifyClusterVirtualNodePoolResponse} */
   ModifyClusterVirtualNodePool(data: V20180525.ModifyClusterVirtualNodePoolRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterVirtualNodePoolResponse>;
+  /** 更新全局维护时间窗口和排除项 {@link V20180525.ModifyGlobalMaintenanceWindowAndExclusionsRequest} {@link V20180525.ModifyGlobalMaintenanceWindowAndExclusionsResponse} */
+  ModifyGlobalMaintenanceWindowAndExclusions(data: V20180525.ModifyGlobalMaintenanceWindowAndExclusionsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyGlobalMaintenanceWindowAndExclusionsResponse>;
   /** 修改托管集群master组件 {@link V20180525.ModifyMasterComponentRequest} {@link V20180525.ModifyMasterComponentResponse} */
   ModifyMasterComponent(data: V20180525.ModifyMasterComponentRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyMasterComponentResponse>;
   /** 修改节点池关联伸缩组的期望实例数 {@link V20180525.ModifyNodePoolDesiredCapacityAboutAsgRequest} {@link V20180525.ModifyNodePoolDesiredCapacityAboutAsgResponse} */
@@ -8301,6 +8735,8 @@ declare interface Tke {
   ModifyPrometheusTemplate(data: V20180525.ModifyPrometheusTemplateRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyPrometheusTemplateResponse>;
   /** 修改预留券的抵扣范围 {@link V20180525.ModifyReservedInstanceScopeRequest} {@link V20180525.ModifyReservedInstanceScopeResponse} */
   ModifyReservedInstanceScope(data: V20180525.ModifyReservedInstanceScopeRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyReservedInstanceScopeResponse>;
+  /** 更新集群发布序列 {@link V20180525.ModifyRollOutSequenceRequest} {@link V20180525.ModifyRollOutSequenceResponse} */
+  ModifyRollOutSequence(data: V20180525.ModifyRollOutSequenceRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyRollOutSequenceResponse>;
   /** 移出节点池节点 {@link V20180525.RemoveNodeFromNodePoolRequest} {@link V20180525.RemoveNodeFromNodePoolResponse} */
   RemoveNodeFromNodePool(data: V20180525.RemoveNodeFromNodePoolRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.RemoveNodeFromNodePoolResponse>;
   /** 续费预留券实例 {@link V20180525.RenewReservedInstancesRequest} {@link V20180525.RenewReservedInstancesResponse} */
@@ -8317,6 +8753,8 @@ declare interface Tke {
   ScaleOutClusterMaster(data: V20180525.ScaleOutClusterMasterRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ScaleOutClusterMasterResponse>;
   /** 节点池节点设置移出保护 {@link V20180525.SetNodePoolNodeProtectionRequest} {@link V20180525.SetNodePoolNodeProtectionResponse} */
   SetNodePoolNodeProtection(data: V20180525.SetNodePoolNodeProtectionRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.SetNodePoolNodeProtectionResponse>;
+  /** 切换集群网络访问链路为直连 {@link V20180525.SwitchClusterEndpointRequest} {@link V20180525.SwitchClusterEndpointResponse} */
+  SwitchClusterEndpoint(data: V20180525.SwitchClusterEndpointRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.SwitchClusterEndpointResponse>;
   /** 同步模板 {@link V20180525.SyncPrometheusTempRequest} {@link V20180525.SyncPrometheusTempResponse} */
   SyncPrometheusTemp(data: V20180525.SyncPrometheusTempRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.SyncPrometheusTempResponse>;
   /** 同步模板到实例或者集群 {@link V20180525.SyncPrometheusTemplateRequest} {@link V20180525.SyncPrometheusTemplateResponse} */

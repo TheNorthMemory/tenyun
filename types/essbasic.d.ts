@@ -3617,7 +3617,7 @@ declare interface OperateChannelTemplateRequest {
   OperateType: string;
   /** 合同模板ID，为32位字符串。注: ` 此处为第三方应用平台模板库模板ID，非子客模板ID` */
   TemplateId: string;
-  /** 第三方平台子客企业的唯一标识，支持批量(用,分割)， */
+  /** 第三方平台子客企业的唯一标识，支持批量(用,分割) 一次批量操作最多支持100个第三方平台子客 */
   ProxyOrganizationOpenIds?: string;
   /** 模板可见范围, 可以设置的值如下:**all**: 所有本第三方应用合作企业可见**part**: 指定的本第三方应用合作企业对应控制台的位置![image](https://qcloudimg.tencent-cloud.cn/raw/68b97812c68d6af77a5991e3bff5c790.png) */
   AuthTag?: string;
@@ -3625,6 +3625,10 @@ declare interface OperateChannelTemplateRequest {
   Available?: number;
   /** 暂未开放 */
   Operator?: UserInfo;
+  /** 指定分页每页返回的数据条数，单页最大支持 100。不传默认值为 20 */
+  Limit?: number;
+  /** 分页查询偏移量，默认为0 */
+  Offset?: number;
 }
 
 declare interface OperateChannelTemplateResponse {
@@ -3636,10 +3640,12 @@ declare interface OperateChannelTemplateResponse {
   OperateResult?: string;
   /** 模板可见范围:**all**: 所有本第三方应用合作企业可见**part**: 指定的本第三方应用合作企业 */
   AuthTag?: string;
-  /** 第三方平台子客企业标识列表 */
+  /** 第三方平台子客企业标识列表，仅在select 模式下返回 */
   ProxyOrganizationOpenIds?: string[];
   /** 操作失败信息数组 */
   FailMessageList?: AuthFailMessage[];
+  /** 授权的平台子企业数量，OperateType 为select 时返回。 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

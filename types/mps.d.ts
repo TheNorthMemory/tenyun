@@ -5836,6 +5836,14 @@ declare interface SnapshotByTimeOffsetTemplate {
   FillType?: string;
 }
 
+/** 指定规格任务统计数据。 */
+declare interface SpecificationDataItem {
+  /** 任务规格。 */
+  Specification: string;
+  /** 统计数据。 */
+  Data: TaskStatDataItem[];
+}
+
 /** FairPlay，WideVine，PlayReady 等Drm加密方式。 */
 declare interface SpekeDrm {
   /** 资源标记，该字段内容为用户自定义；支持1-128个字符的数字、字母、下划线(`_`)、中划线(-)。该字段对应Speke请求中的cid字段。注：不同DRM厂商对该字段的限制有所区别（如：华曦达不支持该字段带`_`），具体规则请与DRM厂商进行确认。 */
@@ -6042,6 +6050,26 @@ declare interface TaskSimpleInfo {
   FinishTime?: string;
   /** 子任务类型。 */
   SubTaskTypes?: string[];
+}
+
+/** 任务统计数据。 */
+declare interface TaskStatData {
+  /** 任务类型。Transcode: 转码Enhance: 增强AIAnalysis: 智能分析AIRecognition: 智能识别AIReview: 内容审核Snapshot: 截图AnimatedGraphics: 转动图ImageProcess: 图片处理 */
+  TaskType?: string;
+  /** 任务数统计数据概览。Transcode：用量单位为秒Enhance：用量单位为秒AIAnalysis：用量单位为秒AIRecognition：用量单位为秒AIReview：用量单位为秒Snapshot：用量单位为张AnimatedGraphics: 用量单位为秒ImageProcess: 用量单位为张 */
+  Summary?: TaskStatDataItem[];
+  /** 不同规格任务统计数据详情。1、转码规格：Audio：纯音频Remuxing：转封装其他转码规格：{TYPE}.{CODEC}.{SPECIFICATION} 其中 TYPE 取值 Standard：普通转码 TESHD-10：视频极速高清 TESHD-20：音频极速高清 TESHD-30：音视频极速高清 TESHD-30-SDK：音视频极速高清SDK按时长计费 TESHD-30-SDKCores：音视频极速高清SDK按核心数计费 Edit：视频编辑 其中 CODEC 取值 H264：H.264 编码 H265：H.265 编码 AV1：AV1 编码 MV-HEVC：MV-HEVC 编码 其中 SPECIFICATION 取值 SD：标清 HD：高清 FHD：全高清 2K：2K 4K：4K例如 TESHD-10.H265.HD 表示 H.265 编码方式高清极速高清转码2、增强规格：视频增强格式：{TYPE}.{CODEC}.{SPECIFICATION}.{FPS}，其中 CODEC 和 SPECIFICATION 同转码，FPS在原子类型时才存在；音频增强格式：{TYPE}。增强TYPE 取值：Enhance：通用增强类型，可能是任意一种原子增强类型原子增强类型 视频原子增强类型取值： Sdr2hdr：SDR2HDR SuperResolution：超分 InsertFrame：插帧 ComprehensiveEnhancement：综合增强 NoiseReduction：视频降噪 ColorEnhancement：色彩增强 RemoveScratches：去划痕 Deburr：去毛刺 DetailEnhancement：细节增强 LightEnhancement：低光照增强 FaceEnhancement：人脸增强 音频原子增强类型取值： AudioNoiseReduction VolumeBalance AudioBeautify AudioSeparation3、截图规格：ImageSprite：雪碧图SampleSnapshot：采样截图SnapshotByTime：时间点截图4、图片处理规格：{TYPE}.{CODEC}.{SPECIFICATION} ImageCompression：图片编码 ImageSuperResolution：图片超分 EnhanceImageColor：图片色彩增强5、智能分析规格：AIAnalysis：分析大类，对于未拆分的VideoTag：视频标签VideoClassification：视频分类SmartCover：智能封面FrameLabel：帧标签VideoSplit：视频拆条Highlights：精彩集锦OpeningAndEnding：片头片尾6、智能识别规格：AIRecognition：识别大类，对于未拆分的FaceRecognition：人脸识别TextRecognition：文字识别ObjectRecognition：物体识别VoiceRecognition：语音识别VoiceTranslation：语音翻译7、内容审核、转动图无细分规格。 */
+  Details?: SpecificationDataItem[];
+}
+
+/** 任务统计数据，包括任务数和用量。 */
+declare interface TaskStatDataItem {
+  /** 数据所在时间区间的开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。如：当时间粒度为天，2018-12-01T00:00:00+08:00，表示2018年12月1日（含）到2018年12月2日（不含）区间。 */
+  Time: string;
+  /** 任务数。 */
+  Count: number;
+  /** 任务用量。 */
+  Usage: number;
 }
 
 /** 涉敏任务控制参数 */
@@ -8540,6 +8568,24 @@ declare interface DescribeTranscodeTemplatesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUsageDataRequest {
+  /** 起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  StartTime: string;
+  /** 结束日期，需大于等于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  EndTime: string;
+  /** 查询媒体处理任务类型，默认查询转码。Transcode：转码Enhance：增强AIAnalysis：智能分析AIRecognition：智能识别AIReview：内容审核Snapshot：截图AnimatedGraphics：转动图AiQualityControl：质检Evaluation：视频评测ImageProcess: 图片处理AddBlindWatermark: 添加基础版权数字水印AddNagraWatermark: 添加NAGRA数字水印ExtractBlindWatermark: 提取基础版权数字水印 */
+  Types?: string[];
+  /** 媒体处理园区，默认返回 ap-guangzhou 园区。ap-guangzhou：广州ap-hongkong：中国香港ap-taipei：中国台北ap-singapore：新加坡ap-mumbai：印度ap-jakarta：雅加达ap-seoul：首尔ap-bangkok：泰国ap-tokyo：日本na-siliconvalley：美国硅谷na-ashburn：弗吉尼亚na-toronto：多伦多sa-saopaulo：圣保罗eu-frankfurt：法兰克福eu-moscow：俄罗斯aws：AWS */
+  ProcessRegions?: string[];
+}
+
+declare interface DescribeUsageDataResponse {
+  /** 媒体处理统计数据概览，展示所查询任务的概览以及详细数据。 */
+  Data?: TaskStatData[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeVideoDatabaseEntryTaskDetailRequest {
   /** 待查询的任务Id */
   TaskId: string;
@@ -9739,6 +9785,8 @@ declare interface Mps {
   DescribeTasks(data: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
   /** 获取转码模板列表 {@link DescribeTranscodeTemplatesRequest} {@link DescribeTranscodeTemplatesResponse} */
   DescribeTranscodeTemplates(data?: DescribeTranscodeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTranscodeTemplatesResponse>;
+  /** 查询用量信息 {@link DescribeUsageDataRequest} {@link DescribeUsageDataResponse} */
+  DescribeUsageData(data: DescribeUsageDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsageDataResponse>;
   /** 查询视频入库任务详情 {@link DescribeVideoDatabaseEntryTaskDetailRequest} {@link DescribeVideoDatabaseEntryTaskDetailResponse} */
   DescribeVideoDatabaseEntryTaskDetail(data: DescribeVideoDatabaseEntryTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoDatabaseEntryTaskDetailResponse>;
   /** 查询视频检索任务详情 {@link DescribeVideoSearchTaskDetailRequest} {@link DescribeVideoSearchTaskDetailResponse} */

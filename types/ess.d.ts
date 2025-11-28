@@ -284,6 +284,8 @@ declare interface CcInfo {
 
 /** 合同对比差异结果详情。 */
 declare interface ComparisonDetail {
+  /** 合同对比差异点唯一ID。 */
+  ComparisonPointId?: string;
   /** 对比前后差异类型，具体如下： **add**：新增 **change**：变更 **delete**：删除 */
   ComparisonType?: string;
   /** 对比内容类型，具体如下： **text**：文本 **table**：表格 **picture**：图片 */
@@ -638,7 +640,7 @@ declare interface FillApproverInfo {
   ApproverSource?: string;
   /** 企业微信UserId当ApproverSource为WEWORKAPP的企微或签场景下，必须指企业自有应用获取企业微信的UserId */
   CustomUserId?: string;
-  /** 补充企业签署人员工姓名ApproverSource!=WEWORKAPP时，必传 */
+  /** 企业签署人的员工姓名。除企业微信应用场景（ApproverSource设置为WEWORKAPP）外，本字段为必填。 */
   ApproverName?: string;
   /** 补充企业签署人员工手机号ApproverSource!=WEWORKAPP时，必传 */
   ApproverMobile?: string;

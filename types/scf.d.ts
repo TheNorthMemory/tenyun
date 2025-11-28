@@ -310,6 +310,14 @@ declare interface InstanceConcurrencyConfig {
   DynamicEnabled?: string | null;
   /** 单实例并发数最大值。取值范围 [1,100] */
   MaxConcurrency?: number | null;
+  /** 安全隔离开关 */
+  InstanceIsolationEnabled?: string;
+  /** 基于会话：Session-Based ， 或者基于请求：Request-Based，二选一 */
+  Type?: string;
+  /** 动态并发参数 */
+  MixNodeConfig?: MixNodeConfig[];
+  /** 会话配置参数 */
+  SessionConfig?: SessionConfig;
 }
 
 /** 内网配置 */
@@ -402,6 +410,14 @@ declare interface LogSearchContext {
   Keyword?: string;
   /** 日志类型，支持Application和Platform，默认为Application */
   Type?: string;
+}
+
+/** 动态并发配置 */
+declare interface MixNodeConfig {
+  /** GPU机型名 */
+  NodeSpec?: string;
+  /** 并发个数 */
+  Num?: number;
 }
 
 /** 命名空间 */
@@ -578,6 +594,24 @@ declare interface SearchKey {
   Key: string;
   /** 搜索内容 */
   Value: string;
+}
+
+/** 会话参数 */
+declare interface SessionConfig {
+  /** session 来源，三选一：'HEADER', 'COOKIE', 'QUERY_STRING' */
+  SessionSource?: string;
+  /** session 名称，以字母开头，非首字母可包含数字、字母、下划线、中划线，长度5-40个字符 */
+  SessionName?: string;
+  /** 最大并发会话数 */
+  MaximumConcurrencySessionPerInstance?: number;
+  /** 生命周期 */
+  MaximumTTLInSeconds?: number;
+  /** 空闲时长 */
+  MaximumIdleTimeInSeconds?: number;
+  /** session 对应的路径信息 */
+  SessionPath?: string;
+  /** 自动销毁 FATAL、自动暂停PAUSE， 只有启动安全隔离的时候才会有 */
+  IdleTimeoutStrategy?: string;
 }
 
 /** 状态原因描述 */
@@ -1330,6 +1364,8 @@ declare interface GetFunctionResponse {
   ProtocolType?: string | null;
   /** HTTP函数配置ProtocolType访问协议，当前协议配置的参数 */
   ProtocolParams?: ProtocolParams | null;
+  /** 单实例多并发配置。只支持Web函数。 */
+  InstanceConcurrencyConfig?: InstanceConcurrencyConfig | null;
   /** 是否开启DNS缓存 */
   DnsCache?: string;
   /** 内网访问配置 */

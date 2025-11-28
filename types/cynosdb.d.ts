@@ -902,7 +902,7 @@ declare interface CynosdbInstanceDetail {
   Region?: string;
   /** 可用区 */
   Zone?: string;
-  /** 实例状态 */
+  /** 实例状态creating：创建中running：运行中isolating：隔离中isolated：已隔离activating：解隔离中offlining：下线中offlined：已下线deleting：删除中deleted：已删除 */
   Status?: string;
   /** 实例状态中文描述 */
   StatusDesc?: string;
@@ -1152,7 +1152,7 @@ declare interface GdnTaskInfo {
   StandbyClusterRegion?: string;
   /** 从集群ID */
   StandbyClusterId?: string;
-  /** 从集群别名 */
+  /** 从集群名称 */
   StandbyClusterName?: string;
 }
 
@@ -2408,6 +2408,12 @@ declare interface TradePrice {
   UnitPriceDiscount?: number;
   /** 计费价格单位 */
   ChargeUnit?: string;
+  /** 高精度下不包含优惠价格 */
+  UnitPriceHighPrecision?: string;
+  /** 高精度下优惠后价格 */
+  UnitPriceDiscountHighPrecision?: string;
+  /** 货币单位 */
+  AmountUnit?: string;
 }
 
 /** 添加实例或者变配实例时同步升级proxy. */
@@ -5899,6 +5905,10 @@ declare interface UpgradeProxyRequest {
   IsInMaintainPeriod?: string;
   /** 数据库代理节点信息 */
   ProxyZones?: ProxyZone[];
+  /** 是否滚动升级 */
+  IsRollUpgrade?: string;
+  /** 滚动升级等待时间，单位：秒 */
+  RollUpgradeWaitingTime?: number;
 }
 
 declare interface UpgradeProxyResponse {

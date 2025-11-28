@@ -10,6 +10,8 @@ declare interface Chunk {
   Content?: string;
   /** 切片的字数 */
   Size?: number;
+  /** 切片概要 */
+  Summary?: string;
 }
 
 /** 知识库信息 */

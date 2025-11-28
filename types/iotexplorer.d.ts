@@ -1174,6 +1174,70 @@ declare interface TWeCallLicenseInfo {
   UsedNum?: number;
 }
 
+/** Talk配置信息描述。 */
+declare interface TalkAIBotInfo {
+  /** UIN */
+  Uin?: number;
+  /** APPID */
+  AppId?: number;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 智能体ID */
+  BotId?: string;
+  /** 名称 */
+  Name?: string;
+  /** 描述 */
+  Description?: string;
+  /** 语言 */
+  TargetLanguage?: string;
+  /** 语音识别 */
+  STTConfig?: TalkSTTConfigInfo;
+  /** 大模型 */
+  LLMConfig?: TalkLLMConfigInfo;
+  /** 语音合成 */
+  TTSConfig?: TalkTTSConfigInfo;
+  /** 智能体配置 */
+  AgentConfig?: TalkAgentConfigInfo;
+  /** 产品信息列表 */
+  ProductList?: TalkProductInfo;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+}
+
+/** 智能体配置信息。 */
+declare interface TalkAgentConfigInfo {
+  /** 会话超时（秒），指连接会话的时间，例如30秒是指会话在30秒后断开 */
+  SessionTimeout?: number;
+  /** 允许打断 */
+  InterruptionEnabled?: boolean;
+  /** 最大上下文 */
+  MaxContextTokens?: number;
+  /** 空闲检测配置 */
+  IdleDetection?: TalkIdleDetectionConfigInfo;
+  /** 是否启用情绪识别 */
+  EmotionEnabled?: boolean;
+  /** 是否启用语义vad */
+  SemanticVADEnabled?: boolean;
+  /** 语义vad灵敏度， 1-慢 2-适中 3-快 */
+  SemanticVADSensitivity?: number;
+  /** VAD 静默检测时间， 当开启语义vad此配置失效 */
+  SilenceTime?: number;
+  /** 是否启用噪声过滤 */
+  NoiseFilterEnabled?: boolean;
+  /** 是否开启长记忆，默认开启 */
+  LongTermMemoryEnabled?: boolean;
+  /** 系统提示词，仅当未配置LLMConfig时使用 */
+  SystemPrompt?: string;
+  /** 开机问候语，如果未配置默认不开启 */
+  GreetingMessage?: string;
+  /** 系统默认音色，当配置复刻音色时，默认值为200000000 */
+  DefaultVoiceType?: number;
+  /** 复刻音色 */
+  FastVoiceType?: string;
+}
+
 /** 基础配置信息。 */
 declare interface TalkBasicConfigInfo {
   /** 系统提示词 */
@@ -1218,7 +1282,7 @@ declare interface TalkIdleDetectionConfigInfo {
 
 /** LLM配置信息。 */
 declare interface TalkLLMConfigInfo {
-  /** 支持的LLM类型，tencent-腾讯；openai-OPENAI格式；anthropic-ANTHROPIC；gemini-GEMINI;gemini-GEMINI;coze-扣子;dify-DIFY；tencent_lke-腾讯智能体平台；系统默认-openai。 */
+  /** 支持的LLM类型，openai-OPENAI格式。 */
   LLMType?: string;
   /** 是否开启 */
   Enabled?: boolean;
@@ -1226,7 +1290,7 @@ declare interface TalkLLMConfigInfo {
   Model?: string;
   /** 是否开启 */
   Streaming?: boolean;
-  /** 配置信息JSON字符串，根据`LLMType`进行不同的值匹配。例如`LLMType`是`openai`，`Config`值是`{\"ApiKey\":\"sk-09***\",\"ApiUrl\":\"base_url\",\"SystemPrompt\":\"你是一个语音助手\",\"Timeout\":30,\"History\":0,\"MetaInfo\":{\"productID\":\"test\"}}`## openai```{ "ApiKey": "sk-XXXXXXXXXXXX", "ApiUrl": "https://api.openai.com/v1", "SystemPrompt": "一个小小助手", "Timeout":20, "History":10, "MetaInfo":{}}```## anthropic```{ "ApiKey": "sk-XXXXXXXXXXXX", "ApiUrl": "https://api.openai.com/v1", "SystemPrompt": "一个小小助手"}```## gemini```{ "AppId": 123456, "AccessToken": "*****", "ResourceId": "SecretKey****", "ModelName": "16k_zh", "Language":""}```## coze```{ "ApiKey": "sk-XXXXXXXXXXXX", "BotId": "v1", "UserId": "xxx", "ApiUrl": "https://api.coze.cn/v3/chat"}```## dify```{ "ApiKey": "sk-XXXXXXXXXXXX", "ApiUrl": "https://api.openai.com/v1", "User": "xxx", "Inputs":{}, "ConversationId":"c1"}```## tencent_lke```{ "ApiKey": "sk-XXXXXXXXXXXX", "ApiUrl": "https://api.openai.com/v1", "SystemRole": "一个小小助手", "SessionId":"123456"}``` */
+  /** 配置信息JSON字符串，根据`LLMType`进行不同的值匹配。例如`LLMType`是`openai`，`Config`值是`{\"ApiKey\":\"sk-09***\",\"ApiUrl\":\"base_url\",\"SystemPrompt\":\"你是一个语音助手\",\"Timeout\":30,\"History\":0,\"MetaInfo\":{\"productID\":\"test\"}}`## openai```{ "ApiKey": "sk-XXXXXXXXXXXX", "ApiUrl": "https://api.openai.com/v1", "SystemPrompt": "一个小小助手", "Timeout":20, "History":10, "MetaInfo":{}}``` */
   Config?: string;
   /** 温度 */
   Temperature?: number;
@@ -1234,6 +1298,8 @@ declare interface TalkLLMConfigInfo {
   MaxTokens?: number;
   /** topP */
   TopP?: number;
+  /** 工具ID列表 */
+  Tools?: string[];
 }
 
 /** Talk配置信息描述。 */
@@ -1286,13 +1352,21 @@ declare interface TalkProductConfigV2Info {
   UpdateTime?: number;
 }
 
+/** 智能体产品信息。 */
+declare interface TalkProductInfo {
+  /** 产品ID */
+  ProductId?: string;
+  /** 产品名称 */
+  ProductName?: string;
+}
+
 /** STT配置信息。 */
 declare interface TalkSTTConfigInfo {
-  /** 支持的STT类型，tencent-腾讯；azure-亚马逊；volcengine-火山引擎；deepgram-Deepgram;系统默认-tencent。 */
+  /** 支持的STT类型，tencent-腾讯；azure-亚马逊；deepgram-Deepgram;系统默认-tencent。 */
   STTType?: string;
   /** 是否开启 */
   Enabled?: boolean;
-  /** 配置信息JSON字符串，根据STTType进行不同的值匹配。例如`STTType`是`tencent`，`Config`值是`{\"AppId\":123456,\"SecretId\":\"secretId*****\",\"SecretKey\":\"SecretKey****\",\"EngineType\":\"16k_zh\"}`## tencent```{ "AppId": 123456, "SecretId": "secretId*****", "SecretKey": "SecretKey****", "EngineType": "16k_zh"}```## azure```{ "Region": "", "EndpointId": "id", "Language": "zh-CN", "SubscriptionKey": "*****"}```## volcengine```{ "AppId": 123456, "AccessToken": "*****", "ResourceId": "SecretKey****", "ModelName": "16k_zh", "Language":""}```## deepgram```{ "Model": "nova-2", "Language": "zh", "BaseUrl":"http://www.deepgram.com", "ApiKey": "SecretKey****"}``` */
+  /** 配置信息JSON字符串，根据STTType进行不同的值匹配。例如`STTType`是`tencent`，`Config`值是`{\"AppId\":123456,\"SecretId\":\"secretId*****\",\"SecretKey\":\"SecretKey****\",\"EngineType\":\"16k_zh\"}`## tencent```{ "AppId": 123456, "SecretId": "secretId*****", "SecretKey": "SecretKey****", "EngineType": "16k_zh"}```## azure```{ "Region": "", "EndpointId": "id", "Language": "zh-CN", "SubscriptionKey": "*****"}```## deepgram```{ "Model": "nova-2", "Language": "zh", "BaseUrl":"http://www.deepgram.com", "ApiKey": "SecretKey****"}``` */
   Config?: string;
 }
 
@@ -1585,6 +1659,8 @@ declare interface BatchUpdateFirmwareRequest {
   FwType?: string;
   /** 用户自定义信息 */
   TaskUserDefine?: string;
+  /** 每分钟下发设备量 */
+  RateLimit?: number;
 }
 
 declare interface BatchUpdateFirmwareResponse {
@@ -1632,6 +1708,18 @@ declare interface BindProductsRequest {
 }
 
 declare interface BindProductsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BindTWeTalkAIBotRequest {
+  /** 智能体ID */
+  BotId: string;
+  /** 产品ID */
+  ProductId: string;
+}
+
+declare interface BindTWeTalkAIBotResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2226,6 +2314,32 @@ declare interface CreateTWeSeeServiceResponse {
   RequestId?: string;
 }
 
+declare interface CreateTWeTalkAIBotRequest {
+  /** 产品ID */
+  Name: string;
+  /** 名称 */
+  Description?: string;
+  /** 支持的语言，zh-中文；en-英文；默认zh */
+  TargetLanguage?: string;
+  /** 自定义语音识别配置 */
+  STTConfig?: TalkSTTConfigInfo;
+  /** 自定义大模型配置 */
+  LLMConfig?: TalkLLMConfigInfo;
+  /** 语音合成配置 */
+  TTSConfig?: TalkTTSConfigInfo;
+  /** 智能体配置 */
+  AgentConfig?: TalkAgentConfigInfo;
+  /** 实例ID */
+  InstanceId?: string;
+}
+
+declare interface CreateTWeTalkAIBotResponse {
+  /** 智能体ID */
+  BotId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateTWeTalkProductConfigRequest {
   /** 产品ID */
   ProductId: string;
@@ -2434,6 +2548,16 @@ declare interface DeleteStudioProductRequest {
 }
 
 declare interface DeleteStudioProductResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteTWeTalkAIBotRequest {
+  /** 智能体ID */
+  BotId: string;
+}
+
+declare interface DeleteTWeTalkAIBotResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3602,6 +3726,18 @@ declare interface DescribeTWeSeeRecognitionTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTWeTalkAIBotRequest {
+  /** 智能体ID */
+  BotId: string;
+}
+
+declare interface DescribeTWeTalkAIBotResponse {
+  /** 无 */
+  Data?: TalkAIBotInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTWeTalkProductConfigRequest {
   /** 产品ID */
   ProductId: string;
@@ -4054,6 +4190,30 @@ declare interface GetTWeCallActiveStatusRequest {
 declare interface GetTWeCallActiveStatusResponse {
   /** 激活状态 */
   TWeCallActiveInfos?: TWeCallActiveInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetTWeTalkAIBotListRequest {
+  /** 智能体ID */
+  BotId?: string;
+  /** 产品ID */
+  ProductId?: string;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 是否脱敏 */
+  IncludeCredentials?: boolean;
+  /** 1 */
+  Offset?: number;
+  /** 10 */
+  Limit?: number;
+}
+
+declare interface GetTWeTalkAIBotListResponse {
+  /** 无 */
+  Data?: TalkAIBotInfo[];
+  /** 1 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4726,6 +4886,30 @@ declare interface ModifyTWeSeeConfigResponse {
   RequestId?: string;
 }
 
+declare interface ModifyTWeTalkAIBotRequest {
+  /** 智能体ID */
+  BotId: string;
+  /** 产品ID */
+  Name?: string;
+  /** 名称 */
+  Description?: string;
+  /** 支持的语言，zh-中文；en-英文；默认zh */
+  TargetLanguage?: string;
+  /** 自定义语音识别配置 */
+  STTConfig?: TalkSTTConfigInfo;
+  /** 自定义大模型配置 */
+  LLMConfig?: TalkLLMConfigInfo;
+  /** 语音合成配置 */
+  TTSConfig?: TalkTTSConfigInfo;
+  /** 智能体配置 */
+  AgentConfig?: TalkAgentConfigInfo;
+}
+
+declare interface ModifyTWeTalkAIBotResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyTWeTalkProductConfigRequest {
   /** 产品ID */
   ProductId: string;
@@ -5094,6 +5278,18 @@ declare interface UnbindProductsResponse {
   RequestId?: string;
 }
 
+declare interface UnbindTWeTalkAIBotRequest {
+  /** 智能体ID */
+  BotId: string;
+  /** 产品ID */
+  ProductId: string;
+}
+
+declare interface UnbindTWeTalkAIBotResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateDeviceTWeCallAuthorizeStatusRequest {
   /** TweCall授权状态：0未授权，1已授权 */
   Status?: number;
@@ -5215,6 +5411,8 @@ declare interface Iotexplorer {
   BindDevices(data: BindDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<BindDevicesResponse>;
   /** 批量绑定子产品 {@link BindProductsRequest} {@link BindProductsResponse} */
   BindProducts(data: BindProductsRequest, config?: AxiosRequestConfig): AxiosPromise<BindProductsResponse>;
+  /** 绑定智能体 {@link BindTWeTalkAIBotRequest} {@link BindTWeTalkAIBotResponse} */
+  BindTWeTalkAIBot(data: BindTWeTalkAIBotRequest, config?: AxiosRequestConfig): AxiosPromise<BindTWeTalkAIBotResponse>;
   /** 异步调用设备行为 {@link CallDeviceActionAsyncRequest} {@link CallDeviceActionAsyncResponse} */
   CallDeviceActionAsync(data: CallDeviceActionAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<CallDeviceActionAsyncResponse>;
   /** 同步调用设备行为 {@link CallDeviceActionSyncRequest} {@link CallDeviceActionSyncResponse} */
@@ -5269,6 +5467,8 @@ declare interface Iotexplorer {
   CreateTWeSeeRecognitionTaskWithFile(data: CreateTWeSeeRecognitionTaskWithFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeSeeRecognitionTaskWithFileResponse>;
   /** 开通 TWeSee 后付费服务 {@link CreateTWeSeeServiceRequest} {@link CreateTWeSeeServiceResponse} */
   CreateTWeSeeService(data: CreateTWeSeeServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeSeeServiceResponse>;
+  /** 新增TWeTalk智能体 {@link CreateTWeTalkAIBotRequest} {@link CreateTWeTalkAIBotResponse} */
+  CreateTWeTalkAIBot(data: CreateTWeTalkAIBotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeTalkAIBotResponse>;
   /** 新增TWeTalk连接配置信息 {@link CreateTWeTalkProductConfigRequest} {@link CreateTWeTalkProductConfigResponse} */
   CreateTWeTalkProductConfig(data: CreateTWeTalkProductConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeTalkProductConfigResponse>;
   /** 新增TWeTalk连接产品配置v2版 {@link CreateTWeTalkProductConfigV2Request} {@link CreateTWeTalkProductConfigV2Response} */
@@ -5299,6 +5499,8 @@ declare interface Iotexplorer {
   DeleteProject(data: DeleteProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectResponse>;
   /** 删除产品 {@link DeleteStudioProductRequest} {@link DeleteStudioProductResponse} */
   DeleteStudioProduct(data: DeleteStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStudioProductResponse>;
+  /** 删除TWeTalk智能体 {@link DeleteTWeTalkAIBotRequest} {@link DeleteTWeTalkAIBotResponse} */
+  DeleteTWeTalkAIBot(data: DeleteTWeTalkAIBotRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTWeTalkAIBotResponse>;
   /** 删除WeTalk连接产品配置v2版 {@link DeleteTWeTalkProductConfigV2Request} {@link DeleteTWeTalkProductConfigV2Response} */
   DeleteTWeTalkProductConfigV2(data: DeleteTWeTalkProductConfigV2Request, config?: AxiosRequestConfig): AxiosPromise<DeleteTWeTalkProductConfigV2Response>;
   /** 删除Topic。 {@link DeleteTopicPolicyRequest} {@link DeleteTopicPolicyResponse} */
@@ -5417,6 +5619,8 @@ declare interface Iotexplorer {
   DescribeTWeSeeConfig(data: DescribeTWeSeeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeSeeConfigResponse>;
   /** 查询 TWeSee 语义理解任务 {@link DescribeTWeSeeRecognitionTaskRequest} {@link DescribeTWeSeeRecognitionTaskResponse} */
   DescribeTWeSeeRecognitionTask(data: DescribeTWeSeeRecognitionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeSeeRecognitionTaskResponse>;
+  /** 获取TWeTalk智能体详情 {@link DescribeTWeTalkAIBotRequest} {@link DescribeTWeTalkAIBotResponse} */
+  DescribeTWeTalkAIBot(data: DescribeTWeTalkAIBotRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeTalkAIBotResponse>;
   /** 获取TWeTalk连接配置信息详情 {@link DescribeTWeTalkProductConfigRequest} {@link DescribeTWeTalkProductConfigResponse} */
   DescribeTWeTalkProductConfig(data: DescribeTWeTalkProductConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeTalkProductConfigResponse>;
   /** 查询WeTalk连接产品配置信息 {@link DescribeTWeTalkProductConfigV2Request} {@link DescribeTWeTalkProductConfigV2Response} */
@@ -5469,6 +5673,8 @@ declare interface Iotexplorer {
   GetStudioProductList(data?: GetStudioProductListRequest, config?: AxiosRequestConfig): AxiosPromise<GetStudioProductListResponse>;
   /** 查询TWeCall激活状态 {@link GetTWeCallActiveStatusRequest} {@link GetTWeCallActiveStatusResponse} */
   GetTWeCallActiveStatus(data?: GetTWeCallActiveStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeCallActiveStatusResponse>;
+  /** 获取TWeTalk智能体列表 {@link GetTWeTalkAIBotListRequest} {@link GetTWeTalkAIBotListResponse} */
+  GetTWeTalkAIBotList(data?: GetTWeTalkAIBotListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeTalkAIBotListResponse>;
   /** 获取TWeTalk连接配置信息列表 {@link GetTWeTalkProductConfigListRequest} {@link GetTWeTalkProductConfigListResponse} */
   GetTWeTalkProductConfigList(data?: GetTWeTalkProductConfigListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeTalkProductConfigListResponse>;
   /** 查询WeTalk连接产品配置信息列表 {@link GetTWeTalkProductConfigListV2Request} {@link GetTWeTalkProductConfigListV2Response} */
@@ -5529,6 +5735,8 @@ declare interface Iotexplorer {
   ModifyStudioProduct(data: ModifyStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStudioProductResponse>;
   /** 修改 TWeSee 配置 {@link ModifyTWeSeeConfigRequest} {@link ModifyTWeSeeConfigResponse} */
   ModifyTWeSeeConfig(data: ModifyTWeSeeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTWeSeeConfigResponse>;
+  /** 修改TWeTalk智能体 {@link ModifyTWeTalkAIBotRequest} {@link ModifyTWeTalkAIBotResponse} */
+  ModifyTWeTalkAIBot(data: ModifyTWeTalkAIBotRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTWeTalkAIBotResponse>;
   /** 修改TWeTalk连接配置信息 {@link ModifyTWeTalkProductConfigRequest} {@link ModifyTWeTalkProductConfigResponse} */
   ModifyTWeTalkProductConfig(data: ModifyTWeTalkProductConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTWeTalkProductConfigResponse>;
   /** 修改TWeTalk连接产品配置v2版 {@link ModifyTWeTalkProductConfigV2Request} {@link ModifyTWeTalkProductConfigV2Response} */
@@ -5575,6 +5783,8 @@ declare interface Iotexplorer {
   UnbindDevices(data: UnbindDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindDevicesResponse>;
   /** 批量解绑子产品 {@link UnbindProductsRequest} {@link UnbindProductsResponse} */
   UnbindProducts(data: UnbindProductsRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindProductsResponse>;
+  /** 解绑智能体 {@link UnbindTWeTalkAIBotRequest} {@link UnbindTWeTalkAIBotResponse} */
+  UnbindTWeTalkAIBot(data: UnbindTWeTalkAIBotRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindTWeTalkAIBotResponse>;
   /** 更新用户对设备的TweCall授权状态 {@link UpdateDeviceTWeCallAuthorizeStatusRequest} {@link UpdateDeviceTWeCallAuthorizeStatusResponse} */
   UpdateDeviceTWeCallAuthorizeStatus(data?: UpdateDeviceTWeCallAuthorizeStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDeviceTWeCallAuthorizeStatusResponse>;
   /** 批量禁用启用设备 {@link UpdateDevicesEnableStateRequest} {@link UpdateDevicesEnableStateResponse} */
