@@ -3390,6 +3390,8 @@ declare interface DescribeFirmwareTaskResponse {
   OverrideMode?: number;
   /** 用户自定义消息 */
   TaskUserDefine?: string;
+  /** 每分钟发送设备量 */
+  RateLimit?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

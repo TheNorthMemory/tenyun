@@ -339,8 +339,12 @@ declare interface DescribeChatDetailRequest {
   InstanceId: string;
   /** 会话Id */
   ChatId?: string;
-  /** 最后一条流式TokenID */
-  LastStreamingTokenId?: number;
+  /** 流ID */
+  StreamingId?: string;
+  /** 开始拉取的流式TokenID。0表示从该流最早的TokenID开始获取 */
+  BeginStreamingTokenId?: string;
+  /** 单次获取的token数量，默认2000 */
+  TokenLimit?: number;
 }
 
 declare interface DescribeChatDetailResponse {

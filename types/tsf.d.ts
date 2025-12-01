@@ -4588,9 +4588,9 @@ declare interface CreateTaskFlowRequest {
   TriggerRule: TaskRule;
   /** 工作流任务节点列表 */
   FlowEdges: TaskFlowEdge[];
-  /** 工作流执行超时时间 */
+  /** 工作流执行超时时间，单位：毫秒 */
   TimeOut: number;
-  /** 无 */
+  /** 数据集列表 */
   ProgramIdList?: string[];
 }
 

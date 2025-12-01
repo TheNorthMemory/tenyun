@@ -3334,7 +3334,7 @@ declare interface ImageEraseLogoConfig {
   Switch?: string | null;
   /** 需要擦除的多个框选区域，最多开启16个区域。 */
   ImageAreaBoxes?: ImageAreaBoxInfo[] | null;
-  /** 图片框选区域类型，可选值：logo：图标；text：文字； */
+  /** 图片框选区域类型，可选值：logo：图标；text：文字；watermark：水印； */
   DetectTypes?: string[] | null;
 }
 
@@ -9415,9 +9415,9 @@ declare interface ProcessImageRequest {
   OutputDir?: string;
   /** 输出路径，可以为相对路径或者绝对路径。若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。相对路径示例：文件名_{变量名}.{format}文件名.{format}绝对路径示例：/自定义路径/文件名_{变量名}.{format}如果不填，则默认为相对路径：{inputName}.{format}。 */
   OutputPath?: string;
-  /** 图片处理模板唯一标识。 */
+  /** 图片处理模板唯一标识。图片模板功能内测中，如需使用请提交工单申请。 */
   Definition?: number;
-  /** 资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。 */
+  /** 资源ID，需要保证对应资源是开启状态。默认为账号主资源ID。 */
   ResourceId?: string;
   /** 图片处理参数。 */
   ImageTask?: ImageTaskInput;
