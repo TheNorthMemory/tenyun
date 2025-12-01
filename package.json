@@ -1,6 +1,6 @@
 {
   "name": "tenyun",
-  "version": "0.14.1",
+  "version": "0.14.2",
   "description": "Promise based and chained Tencent Cloud OpenAPI client for NodeJS",
   "main": "index.js",
   "types": "types/index.d.ts",
