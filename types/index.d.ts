@@ -107,6 +107,7 @@ import Emr, { Versions as EmrVersions } from "./emr";
 import Es, { Versions as EsVersions } from "./es";
 import Ess, { Versions as EssVersions } from "./ess";
 import Essbasic, { Versions as EssbasicVersions } from "./essbasic";
+import Evt, { Versions as EvtVersions } from "./evt";
 import Facefusion, { Versions as FacefusionVersions } from "./facefusion";
 import Faceid, { Versions as FaceidVersions } from "./faceid";
 import Fmu, { Versions as FmuVersions } from "./fmu";
@@ -355,6 +356,7 @@ export declare type SERVICE_VERSIONS = {
   es: EsVersions,
   ess: EssVersions,
   essbasic: EssbasicVersions,
+  evt: EvtVersions,
   facefusion: FacefusionVersions,
   faceid: FaceidVersions,
   fmu: FmuVersions,
@@ -723,6 +725,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   ess: Ess,
   /** {@link Essbasic 腾讯电子签（基础版）} */
   essbasic: Essbasic,
+  /** {@link Evt 事件中心} */
+  evt: Evt,
   /** {@link Facefusion 人脸融合} */
   facefusion: Facefusion,
   /** {@link Faceid 人脸核身} */
