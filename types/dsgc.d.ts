@@ -2197,12 +2197,12 @@ declare interface CreateDSPAComplianceRulesResponse {
 declare interface CreateDSPACosMetaResourcesRequest {
   /** DSPA实例ID。 */
   DspaId: string;
+  /** 必填，COS资源列表 */
+  CosBucketItems: CosBucketItem[];
   /** 资源所处地域。 */
   ResourceRegion?: string;
   /** COS桶列表 */
   Buckets?: string[];
-  /** 必填，COS资源列表 */
-  CosBucketItems?: CosBucketItem[];
 }
 
 declare interface CreateDSPACosMetaResourcesResponse {
@@ -2215,6 +2215,8 @@ declare interface CreateDSPADbMetaResourcesRequest {
   DspaId: string;
   /** 资源类型，支持：cdb（云数据库 MySQL）、dcdb（TDSQL MySQL版）、mariadb（云数据库 MariaDB）、postgres（云数据库 PostgreSQL）、cynosdbpg（TDSQL-C PostgreSQL版）、cynosdbmysql（TDSQL-C MySQL版） */
   MetaType: string;
+  /** 必填，云数据库资源列表。 */
+  CloudResourceItems: CloudResourceItem[];
   /** 资源所处地域。 */
   ResourceRegion?: string;
   /** 用来标记本次更新是否已经是最后一次，可选值：continue（后续还需要更新）、finished（本次是最后一次更新）。 */
@@ -2223,8 +2225,6 @@ declare interface CreateDSPADbMetaResourcesRequest {
   UpdateId?: string;
   /** 云上资源列表。 */
   Items?: DspaCloudResourceMeta[];
-  /** 必填，云数据库资源列表。 */
-  CloudResourceItems?: CloudResourceItem[];
 }
 
 declare interface CreateDSPADbMetaResourcesResponse {

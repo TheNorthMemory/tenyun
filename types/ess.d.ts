@@ -98,6 +98,8 @@ declare interface ApproverInfo {
   SignEndpoints?: string[];
   /** 快速注册相关信息 */
   RegisterInfo?: RegisterInfo;
+  /** 是否不保存联系人默认 false 保存联系人 true 不保存联系人设置这个参数为保存联系人的时候,他方企业签署人会被保存进发起人的联系人中。联系人查看可登录[电子签控制台](https://test.qian.tencent.cn/console/) 进行查看。如下图位置：![](https://qcloudimg.tencent-cloud.cn/raw/fb8a22cd615d24c21acfa0e37e2cd873.png) */
+  NotSaveContact?: boolean;
 }
 
 /** 签署方信息，发起合同后可获取到对应的签署方信息，如角色ID，角色名称 */
@@ -840,6 +842,8 @@ declare interface FlowCreateApprover {
   Intention?: Intention;
   /** 进入签署流程的限制，目前支持以下选项： 空值（默认） :无限制，可在任何场景进入签署流程。 link :选择此选项后，将无法通过控制台或电子签小程序列表进入填写或签署操作，仅可预览合同。填写或签署流程只能通过短信或发起方提供的专用链接进行。 */
   SignEndpoints?: string[];
+  /** 是否不保存联系人默认 false 保存联系人 true 不保存联系人设置这个参数为保存联系人的时候,他方企业签署人会被保存进发起人的联系人中。联系人查看可登录[电子签控制台](https://test.qian.tencent.cn/console/) 进行查看。如下图位置：![](https://qcloudimg.tencent-cloud.cn/raw/fb8a22cd615d24c21acfa0e37e2cd873.png) */
+  NotSaveContact?: boolean;
 }
 
 /** 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息 */
@@ -1460,7 +1464,7 @@ declare interface ReferenceExcerpt {
   Position?: PositionInfo | null;
 }
 
-/** 发起流程快速注册相关信息 */
+/** 创建合同，若对方签署人的企业信息还未在腾讯电子签注册。则在进行引导企业注册时控制企业填写的信息。具体可查看[视频](https://qian.tencent.com/developers/video/?menu=scene&id=6) */
 declare interface RegisterInfo {
   /** 法人姓名 */
   LegalName: string;
@@ -1474,6 +1478,22 @@ declare interface RegisterInfo {
   AuthorizationTypes?: number[];
   /** 指定企业认证的授权方式:2: 法人授权方式5: 授权书+对公打款方式 */
   AuthorizationType?: number;
+  /** 指定企业认证的授权方式 支持多选:1: 上传营业执照2: 腾讯云快速认证3: 腾讯商户号授权（仅支持小程序端） */
+  AuthorizationMethods?: number[];
+  /** 企业证照类型：USCC :(默认)工商组织营业执照PRACTICELICENSEOFMEDICALINSTITUTION :医疗机构执业许可证 */
+  OrganizationIdCardType?: string;
+  /** 企业创建时候的个性化参数。其中，包括一下内容：LegalNameSame 是否可以编辑法人。UnifiedSocialCreditCodeSame 是否可以编辑证件号码。OrganizationIdCardTypeSame 是否可以更改证照类型。 */
+  RegisterInfoOption?: RegisterInfoOption;
+}
+
+/** 创建合同，若对方签署人的企业信息还未在腾讯电子签注册。则在进行引导企业注册时控制企业填写信息的个性化参数。具体可查看[视频](https://qian.tencent.com/developers/video/?menu=scene&id=6) */
+declare interface RegisterInfoOption {
+  /** 是否允许编辑企业注册时的法人姓名。true：允许编辑false：不允许编辑（默认值）注意：RegisterInfo 中的LegalName值不为空的时候，才可设置为不可编辑。 */
+  LegalNameSame?: boolean;
+  /** 是否允许编辑企业注册时统一社会信用代码。true:不允许编辑。false:允许编辑（默认值）。注意：RegisterInfo 中的UnifiedSocialCreditCode值不为空的时候，才可设置为不可编辑。 */
+  UnifiedSocialCreditCodeCNameSame?: boolean;
+  /** 是否允许编辑企业注册时的证照类型true:不允许编辑。false:允许编辑（默认值）。注意：RegisterInfo 中的OrganizationIdCardType值不为空的时候，才可设置为不可编辑。 */
+  OrganizationIdCardTypeSame?: boolean;
 }
 
 /** 企业认证信息参数， 需要保证这些参数跟营业执照中的信息一致。 */
@@ -3119,8 +3139,12 @@ declare interface CreateOrganizationAuthUrlRequest {
   BankAccountNumberSame?: boolean;
   /** 跳转事件，其中包括认证期间收录，授权书审核，企业认证的回跳事件。p.s.Endpoint如果是APP 类型，请传递JumpUrl为"true" 如果 Endpoint 是 H5 类型，请参考文档跳转电子签H5 p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，仅会进行回跳。 */
   JumpEvents?: JumpEvent[];
-  /** 企业证照类型： **USCC** :(默认)工商组织营业执照 **PRACTICELICENSEOFMEDICALINSTITUTION** :医疗机构执业许可证 */
+  /** 企业证照类型： **USCC** :(默认)工商组织营业执照 **PRACTICELICENSEOFMEDICALINSTITUTION** :医疗机构执业许可证注意 ：如果企业证照类型是医疗机构，则参数设置企业授权方式(AuthorizationTypes)和企业认证方式(AuthorizationMethods)都无效.医疗机构的企业授权方式 仅有授权书的方式。企业认证仅有上传营业执照的方式。 */
   OrganizationIdCardType?: string;
+  /** 是否允许编辑企业注册时的证照类型true:不允许编辑。false:允许编辑（默认值）。注意：入参中的OrganizationIdCardType值不为空的时候，才可设置为不可编辑。 */
+  OrganizationIdCardTypeSame?: boolean;
+  /** 指定企业认证的授权方式 支持多选:1: 上传营业执照2: 腾讯云快速认证3: 腾讯商户号授权（仅支持小程序端）注意：1.如果没有指定，则默认是1,仅有上传营业执照。2.H5 仅支持上传营业执照。 */
+  AuthorizationMethod?: number[];
 }
 
 declare interface CreateOrganizationAuthUrlResponse {

@@ -2424,6 +2424,28 @@ declare interface CreateRocketMQTopicResponse {
   RequestId?: string;
 }
 
+declare interface CreateRocketMQTopicV2Request {
+  /** 主题名称 */
+  Topic: string;
+  /** 主题类型，可选值为Normal, GlobalOrder, PartitionedOrder, Transaction, DelayScheduled。Transaction仅在专享版支持。 */
+  Type: string;
+  /** 集群ID */
+  ClusterId: string;
+  /** 命名空间 */
+  Namespace: string;
+  /** 备注 */
+  Remark?: string;
+  /** 分区数，全局顺序无效 */
+  PartitionNum?: number;
+  /** 标签列表 */
+  TagList?: Tag[];
+}
+
+declare interface CreateRocketMQTopicV2Response {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateRocketMQVipInstanceRequest {
   /** 实例名称 */
   Name: string;
@@ -5239,6 +5261,8 @@ declare interface Tdmq {
   CreateRocketMQRole(data: CreateRocketMQRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQRoleResponse>;
   /** 创建RocketMQ主题 {@link CreateRocketMQTopicRequest} {@link CreateRocketMQTopicResponse} */
   CreateRocketMQTopic(data: CreateRocketMQTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQTopicResponse>;
+  /** 创建 RocketMQ 主题 {@link CreateRocketMQTopicV2Request} {@link CreateRocketMQTopicV2Response} */
+  CreateRocketMQTopicV2(data: CreateRocketMQTopicV2Request, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQTopicV2Response>;
   /** 创建RocketMQ专享实例 {@link CreateRocketMQVipInstanceRequest} {@link CreateRocketMQVipInstanceResponse} */
   CreateRocketMQVipInstance(data: CreateRocketMQVipInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQVipInstanceResponse>;
   /** 创建角色 {@link CreateRoleRequest} {@link CreateRoleResponse} */

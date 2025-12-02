@@ -7695,7 +7695,7 @@ declare interface DeleteWorkflowResponse {
 }
 
 declare interface DescribeAIAnalysisTemplatesRequest {
-  /** 视频内容分析模板唯一标识过滤条件，数组长度限制：10。 */
+  /** 视频内容分析模板唯一标识过滤条件，数组长度限制：100。 */
   Definitions?: number[];
   /** 分页偏移量，默认值：0。 */
   Offset?: number;
@@ -7717,7 +7717,7 @@ declare interface DescribeAIAnalysisTemplatesResponse {
 }
 
 declare interface DescribeAIRecognitionTemplatesRequest {
-  /** 视频内容识别模板唯一标识过滤条件，数组长度限制：10。 */
+  /** 视频内容识别模板唯一标识过滤条件，数组长度限制：100。 */
   Definitions?: number[];
   /** 分页偏移量，默认值：0。 */
   Offset?: number;

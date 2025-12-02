@@ -237,6 +237,8 @@ declare interface CreateAgentInstanceResponse {
 declare interface CreateChatCompletionRequest {
   /** 是否隐藏 */
   IsHidden?: boolean;
+  /** 是否隐藏会话 */
+  IsChatHidden?: boolean;
 }
 
 declare interface CreateChatCompletionResponse {
