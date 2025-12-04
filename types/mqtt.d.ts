@@ -342,6 +342,38 @@ declare interface MQTTUserItem {
   ModifiedTime?: number;
 }
 
+/** MessageEnrichmentRuleItem */
+declare interface MessageEnrichmentRuleItem {
+  /** 策略规则ID */
+  Id?: number;
+  /** MQTT集群ID */
+  InstanceId?: string;
+  /** 策略规则名 */
+  RuleName?: string;
+  /** 规则匹配条件，JSON格式，需要Base64编码 样例 {"clientId":"client-1","username":"client-1","topic":"home/room1"}Base64后 eyJjbGllbnRJZCI6ImNsaWVudC0xIiwidXNlcm5hbWUiOiJjbGllbnQtMSIsInRvcGljIjoiaG9tZS9yb29tMSJ9 */
+  Condition?: string;
+  /** 规则执行的动作，JSON格式，需要Base64编码 样例{"messageExpiryInterval":360,"response Topic":"replies/devices/${clientid}","correlationData":"${traceid}","userProperty":[{"key":"trace-id","value":"${traceid}"},{"key":"data-source","value":"rule-engine"}]}BASE64后 eyJtZXNzYWdlRXhwaXJ5SW50ZXJ2YWwiOjM2MCwicmVzcG9uc2UgVG9waWMiOiJyZXBsaWVzL2RldmljZXMvJHtjbGllbnRpZH0iLCJjb3JyZWxhdGlvbkRhdGEiOiIke3RyYWNlaWR9IiwidXNlclByb3BlcnR5IjpbeyJrZXkiOiJ0cmFjZS1pZCIsInZhbHVlIjoiJHt0cmFjZWlkfSJ9LHsia2V5IjoiZGF0YS1zb3VyY2UiLCJ2YWx1ZSI6InJ1bGUtZW5naW5lIn1dfQ== */
+  Actions?: string;
+  /** 规则优先级，数字越小，优先级越高，高优先级覆盖低优先级。UserProperty字段会合并 */
+  Priority?: number;
+  /** 策略状态。 0:未定义；1:激活；2:不激活；默认不激活 */
+  Status?: number;
+  /** 备注 */
+  Remark?: string;
+  /** 创建时间。毫秒级时间戳 。 */
+  CreatedTime?: number;
+  /** 更新时间。毫秒级时间戳 。 */
+  UpdateTime?: number;
+}
+
+/** 消息属性增强规则优先级 */
+declare interface MessageEnrichmentRulePriority {
+  /** 消息属性增强规则id */
+  Id: number;
+  /** 优先级 */
+  Priority: number;
+}
+
 /** 价格标签信息 */
 declare interface PriceTag {
   /** 计价名称，表示规格的计费项项目分类，具体规格的计价名称可参考 [获取MQTT产品售卖规格](https://cloud.tencent.com/document/product/1778/116232) 接口的返回结果。 */
@@ -666,6 +698,32 @@ declare interface CreateJWTAuthenticatorResponse {
   RequestId?: string;
 }
 
+declare interface CreateMessageEnrichmentRuleRequest {
+  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  InstanceId: string;
+  /** 规则名称 */
+  RuleName: string;
+  /** 规则匹配条件，JSON格式，需要Base64编码样例{"clientId":"client-1","username":"client-1","topic":"home/room1"}Base64后eyJjbGllbnRJZCI6ImNsaWVudC0xIiwidXNlcm5hbWUiOiJjbGllbnQtMSIsInRvcGljIjoiaG9tZS9yb29tMSJ9 */
+  Condition: string;
+  /** 规则执行的动作，JSON格式，需要Base64编码样例{"messageExpiryInterval":360,"responseTopic":"replies/devices/${clientid}","correlationData":"${traceid}","userProperty":[{"key":"trace-id","value":"${traceid}"}]}BASE64后eyJtZXNzYWdlRXhwaXJ5SW50ZXJ2YWwiOjM2MCwicmVzcG9uc2VUb3BpYyI6InJlcGxpZXMvZGV2aWNlcy8ke2NsaWVudGlkfSIsImNvcnJlbGF0aW9uRGF0YSI6IiR7dHJhY2VpZH0iLCJ1c2VyUHJvcGVydHkiOlt7ImtleSI6InRyYWNlLWlkIiwidmFsdWUiOiIke3RyYWNlaWR9In1dfQ== */
+  Actions: string;
+  /** 规则优先级，数字越小，优先级越高，高优先级覆盖低低优先级。UserPropertiy字段会合并 */
+  Priority: number;
+  /** 策略状态。 0:未定义；1:激活；2:不激活；默认不激活 */
+  Status?: number;
+  /** 备注，长度不超过128个字符。 */
+  Remark?: string;
+}
+
+declare interface CreateMessageEnrichmentRuleResponse {
+  /** 集群id */
+  InstanceId?: string;
+  /** 规则id */
+  Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateTopicRequest {
   /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
   InstanceId: string;
@@ -814,6 +872,18 @@ declare interface DeleteInstanceRequest {
 }
 
 declare interface DeleteInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteMessageEnrichmentRuleRequest {
+  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  InstanceId: string;
+  /** 消息属性增强规则id */
+  Id: number;
+}
+
+declare interface DeleteMessageEnrichmentRuleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1228,6 +1298,18 @@ declare interface DescribeMessageDetailsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMessageEnrichmentRulesRequest {
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
+  InstanceId: string;
+}
+
+declare interface DescribeMessageEnrichmentRulesResponse {
+  /** 消息增强策略 */
+  Data?: MessageEnrichmentRuleItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeMessageListRequest {
   /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
   InstanceId: string;
@@ -1546,6 +1628,30 @@ declare interface ModifyJWTAuthenticatorResponse {
   RequestId?: string;
 }
 
+declare interface ModifyMessageEnrichmentRuleRequest {
+  /** 消息属性增强规则ID */
+  Id: number;
+  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  InstanceId: string;
+  /** 策略名称，不能为空，3-64个字符，支持中文、字母、数字、“-”及“_”。 */
+  RuleName?: string;
+  /** 规则匹配条件，JSON格式，需要Base64编码样例{"clientId":"client-1","username":"client-1","topic":"home/room1"}Base64后eyJjbGllbnRJZCI6ImNsaWVudC0xIiwidXNlcm5hbWUiOiJjbGllbnQtMSIsInRvcGljIjoiaG9tZS9yb29tMSJ9 */
+  Condition?: string;
+  /** 规则执行的动作，JSON格式，需要Base64编码 样例{"messageExpiryInterval":360,"responseTopic":"replies/${clientid}","correlationData":"${traceid}","userProperty":[{"key":"trace-id","value":"${traceid}"}]} BASE64后 eyJtZXNzYWdlRXhwaXJ5SW50ZXJ2YWwiOjM2MCwicmVzcG9uc2VUb3BpYyI6InJlcGxpZXMvJHtjbGllbnRpZH0iLCJjb3JyZWxhdGlvbkRhdGEiOiIke3RyYWNlaWR9IiwidXNlclByb3BlcnR5IjpbeyJrZXkiOiJ0cmFjZS1pZCIsInZhbHVlIjoiJHt0cmFjZWlkfSJ9XX0= */
+  Actions?: string;
+  /** 规则优先级，数字越小，优先级越高，高优先级覆盖低优先级。UserProperty字段会合并 */
+  Priority?: number;
+  /** 策略状态。 0:未定义；1:激活；2:不激活；默认不激活 */
+  Status?: number;
+  /** 备注信息，最长 128 字符 */
+  Remark?: string;
+}
+
+declare interface ModifyMessageEnrichmentRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyTopicRequest {
   /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
   InstanceId: string;
@@ -1668,6 +1774,18 @@ declare interface UpdateAuthorizationPolicyPriorityResponse {
   RequestId?: string;
 }
 
+declare interface UpdateMessageEnrichmentRulePriorityRequest {
+  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  InstanceId: string;
+  /** 策略ID和优先级 */
+  Priorities?: MessageEnrichmentRulePriority[];
+}
+
+declare interface UpdateMessageEnrichmentRulePriorityResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Mqtt 消息队列 MQTT 版} */
 declare interface Mqtt {
   (): Versions;
@@ -1693,6 +1811,8 @@ declare interface Mqtt {
   CreateJWKSAuthenticator(data: CreateJWKSAuthenticatorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJWKSAuthenticatorResponse>;
   /** 创建一个MQTTJWT认证器 {@link CreateJWTAuthenticatorRequest} {@link CreateJWTAuthenticatorResponse} */
   CreateJWTAuthenticator(data: CreateJWTAuthenticatorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJWTAuthenticatorResponse>;
+  /** 创建消息属性增强规则 {@link CreateMessageEnrichmentRuleRequest} {@link CreateMessageEnrichmentRuleResponse} */
+  CreateMessageEnrichmentRule(data: CreateMessageEnrichmentRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMessageEnrichmentRuleResponse>;
   /** 创建MQTT主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
   /** 添加MQTT角色 {@link CreateUserRequest} {@link CreateUserResponse} */
@@ -1717,6 +1837,8 @@ declare interface Mqtt {
   DeleteInsPublicEndpoint(data: DeleteInsPublicEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInsPublicEndpointResponse>;
   /** 删除MQTT实例 {@link DeleteInstanceRequest} {@link DeleteInstanceResponse} */
   DeleteInstance(data: DeleteInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceResponse>;
+  /** 删除消息属性增强规则 {@link DeleteMessageEnrichmentRuleRequest} {@link DeleteMessageEnrichmentRuleResponse} */
+  DeleteMessageEnrichmentRule(data: DeleteMessageEnrichmentRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMessageEnrichmentRuleResponse>;
   /** 删除MQTT主题 {@link DeleteTopicRequest} {@link DeleteTopicResponse} */
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
   /** 删除MQTT角色 {@link DeleteUserRequest} {@link DeleteUserResponse} */
@@ -1751,6 +1873,8 @@ declare interface Mqtt {
   DescribeMessageByTopic(data: DescribeMessageByTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageByTopicResponse>;
   /** 查询MQTT详细信息 {@link DescribeMessageDetailsRequest} {@link DescribeMessageDetailsResponse} */
   DescribeMessageDetails(data: DescribeMessageDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageDetailsResponse>;
+  /** 查询消息属性增强规则 {@link DescribeMessageEnrichmentRulesRequest} {@link DescribeMessageEnrichmentRulesResponse} */
+  DescribeMessageEnrichmentRules(data: DescribeMessageEnrichmentRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageEnrichmentRulesResponse>;
   /** 查询MQTT消息列表 {@link DescribeMessageListRequest} {@link DescribeMessageListResponse} */
   DescribeMessageList(data: DescribeMessageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageListResponse>;
   /** 获取MQTT产品售卖规格 {@link DescribeProductSKUListRequest} {@link DescribeProductSKUListResponse} */
@@ -1781,6 +1905,8 @@ declare interface Mqtt {
   ModifyJWKSAuthenticator(data: ModifyJWKSAuthenticatorRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyJWKSAuthenticatorResponse>;
   /** 修改MQTTJWT认证器 {@link ModifyJWTAuthenticatorRequest} {@link ModifyJWTAuthenticatorResponse} */
   ModifyJWTAuthenticator(data: ModifyJWTAuthenticatorRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyJWTAuthenticatorResponse>;
+  /** 修改消息属性增强规则 {@link ModifyMessageEnrichmentRuleRequest} {@link ModifyMessageEnrichmentRuleResponse} */
+  ModifyMessageEnrichmentRule(data: ModifyMessageEnrichmentRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMessageEnrichmentRuleResponse>;
   /** 修改MQTT主题属性 {@link ModifyTopicRequest} {@link ModifyTopicResponse} */
   ModifyTopic(data: ModifyTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicResponse>;
   /** 修改MQTT角色 {@link ModifyUserRequest} {@link ModifyUserResponse} */
@@ -1795,6 +1921,8 @@ declare interface Mqtt {
   RevokedDeviceCertificate(data: RevokedDeviceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<RevokedDeviceCertificateResponse>;
   /** 更新授权策略优先级 {@link UpdateAuthorizationPolicyPriorityRequest} {@link UpdateAuthorizationPolicyPriorityResponse} */
   UpdateAuthorizationPolicyPriority(data: UpdateAuthorizationPolicyPriorityRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAuthorizationPolicyPriorityResponse>;
+  /** 更新消息增强规则优先级 {@link UpdateMessageEnrichmentRulePriorityRequest} {@link UpdateMessageEnrichmentRulePriorityResponse} */
+  UpdateMessageEnrichmentRulePriority(data: UpdateMessageEnrichmentRulePriorityRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateMessageEnrichmentRulePriorityResponse>;
 }
 
 export declare type Versions = ["2024-05-16"];

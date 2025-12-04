@@ -638,6 +638,16 @@ declare interface ConflictSource {
   ConflictItemSet?: ConflictItem[];
 }
 
+/** NAT网关超时时间 */
+declare interface ConnectionStateTimeouts {
+  /** UDP映射空闲时间，指多少秒以后UDP流停止向端点发送。取值范围为：3-7200秒，默认为10秒。 */
+  UDPMappingTimeout?: number;
+  /** TCP已建立的连接空闲超时，指多少秒以后连接变为空闲状态。取值范围为：40-10800秒，默认为10800秒。 */
+  TCPEstablishedConnectionTimeout?: number;
+  /** TCP TIME_WAIT超时，指完全关闭的TCP连接在到期后保留在NAT映射中的秒数。取值范围为：10-600秒，默认为120秒。 */
+  TcpTimeWaitTimeout?: number;
+}
+
 /** 创建路由添加的指向此通道的路由 */
 declare interface CreateVpnConnRoute {
   /** 目的端IDC网段 */
@@ -1590,6 +1600,10 @@ declare interface NatGateway {
   DedicatedClusterId?: string;
   /** NAT实例是否开启删除保护 */
   DeletionProtectionEnabled?: boolean;
+  /** NAT实例连接超时时间 */
+  ConnectionStateTimeouts?: ConnectionStateTimeouts;
+  /** 独享实例规格。取值范围：ExclusiveSmall/ExclusiveMedium1/ExclusiveLarge1 */
+  ExclusiveType?: string;
 }
 
 /** NAT网关绑定的弹性IP */
@@ -2854,14 +2868,14 @@ declare interface TranslationAclRule {
   Protocol: string;
   /** 源端口。 */
   SourcePort: string;
-  /** 源地址。支持`ip`或`cidr`格式"xxx.xxx.xxx.000/xx" */
-  SourceCidr: string;
   /** 目的端口。 */
   DestinationPort: string;
   /** 目的地址。 */
   DestinationCidr: string;
+  /** 源地址。支持`ip`或`cidr`格式"xxx.xxx.xxx.000/xx" */
+  SourceCidr?: string;
   /** ACL规则`ID`。 */
-  AclRuleId: number;
+  AclRuleId?: number;
   /** 是否匹配。 */
   Action?: number;
   /** ACL规则描述 */
@@ -2974,6 +2988,8 @@ declare interface VpcInfo {
   EnableRouteVpcPublish?: boolean;
   /** 返回多运营商IPv6 Cidr Block */
   Ipv6CidrBlockSet?: ISPIPv6CidrBlock[];
+  /** vpc关联云联网时IPv6类型路由发布策略， true：开启cidr路由发布，false：开启subnet子网路由发布。创建vpc时默认为子网路由发布，当选择cidr路由发布时，请通过工单加入白名单。 */
+  EnableRouteVpcPublishIpv6?: boolean;
 }
 
 /** 终端节点服务的服务白名单对象详情。 */
@@ -3271,11 +3287,13 @@ declare interface AllocateAddressesRequest {
   InternetServiceProvider?: string;
   /** EIP计费方式。标准账户类型，可选值：BANDWIDTH_PACKAGE：[共享带宽包](https://cloud.tencent.com/document/product/684/15255)付费BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费BANDWIDTH_PREPAID_BY_MONTH：包月按带宽预付费TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费默认值：TRAFFIC_POSTPAID_BY_HOUR。传统账户类型，无需传递此参数，EIP计费方式与其绑定的实例的计费方式一致，无需传递此参数。 */
   InternetChargeType?: string;
+  /** IP 资源计费模式，当前仅支持原生 IP。账号为标准账户类型的用户，可选值：IP_POSTPAID_BY_HOUR：IP资源按小时后付费IP_PREPAID_BY_MONTH：IP资源包月预付费 */
+  IPChargeType?: string;
   /** EIP出带宽上限，单位：Mbps。标准账户类型EIP出带宽上限，可选值范围取决于EIP计费方式：BANDWIDTH_PACKAGE：1 Mbps 至 2000 MbpsBANDWIDTH_POSTPAID_BY_HOUR：1 Mbps 至 100 MbpsBANDWIDTH_PREPAID_BY_MONTH：1 Mbps 至 200 MbpsTRAFFIC_POSTPAID_BY_HOUR：1 Mbps 至 100 Mbps默认值：1 Mbps。传统账户类型无需传递此参数，EIP出带宽上限取决于与其绑定的实例的公网出带宽上限，无需传递此参数。 */
   InternetMaxBandwidthOut?: number;
   /** 包月按带宽预付费EIP的计费参数。EIP为包月按带宽预付费时，该参数必传，其余场景不需传递 */
   AddressChargePrepaid?: AddressChargePrepaid;
-  /** EIP类型。各种EIP类型详情可参考：[EIP 的 IP 地址类型](https://cloud.tencent.com/document/product/1199/41646)。默认值：EIP。EIP：弹性公网 IP。 AnycastEIP：加速 IP，已开通 [Anycast 公网加速](https://cloud.tencent.com/document/product/644)白名单的用户可选。仅部分地域支持加速IP，详情可见Anycast公网加速[购买指南](https://cloud.tencent.com/document/product/644/12617)。HighQualityEIP：精品 IP。仅新加坡和中国香港支持精品IP。AntiDDoSEIP：高防 IP。仅部分地域支持高防IP，详情可见弹性公网IP[产品概述](https://cloud.tencent.com/document/product/1199/41646)。 */
+  /** EIP类型。各种EIP类型详情可参考：[EIP 的 IP 地址类型](https://cloud.tencent.com/document/product/1199/41646)。默认值：EIP。EIP：弹性公网 IP。 AnycastEIP：加速 IP，已开通 [Anycast 公网加速](https://cloud.tencent.com/document/product/644)白名单的用户可选。仅部分地域支持加速IP，详情可见Anycast公网加速[购买指南](https://cloud.tencent.com/document/product/644/12617)。HighQualityEIP：精品 IP。仅新加坡和中国香港支持精品IP。AntiDDoSEIP：高防 IP。仅部分地域支持高防IP。ResidentialEIP：原生 IP。仅部分地域支持原生IP。关于弹性公网 IP 支持的 IP 类型，请见[产品概述](https://cloud.tencent.com/document/product/1199/41646)。 */
   AddressType?: string;
   /** Anycast发布域。已开通Anycast公网加速白名单的用户，可选值：ANYCAST_ZONE_GLOBAL：全球发布域（需要额外开通Anycast全球加速白名单）ANYCAST_ZONE_OVERSEAS：境外发布域默认值：ANYCAST_ZONE_OVERSEAS。 */
   AnycastZone?: string;
@@ -3299,8 +3317,6 @@ declare interface AllocateAddressesRequest {
   AntiDDoSPackageId?: string;
   /** 保证请求幂等性。从您的客户端生成一个参数值，确保不同请求间该参数值唯一。ClientToken只支持ASCII字符，且不能超过64个字符。 */
   ClientToken?: string;
-  /** 原生EIP IP资源的计费方式。账号为标准账户类型的用户，可选值：IP_POSTPAID_BY_HOUR：IP资源按小时后付费IP_PREPAID_BY_MONTH：IP资源包月预付费 */
-  IPChargeType?: string;
 }
 
 declare interface AllocateAddressesResponse {
@@ -4203,6 +4219,8 @@ declare interface CreateNatGatewayRequest {
   NatProductVersion?: number;
   /** NAT实例是否开启删除保护 */
   DeletionProtectionEnabled?: boolean;
+  /** 独享实例规格。取值范围：ExclusiveSmall/ExclusiveMedium1/ExclusiveLarge1 */
+  ExclusiveType?: string;
 }
 
 declare interface CreateNatGatewayResponse {
@@ -4797,6 +4815,8 @@ declare interface CreateVpcRequest {
   Tags?: Tag[];
   /** vpc关联云联网时路由发布策略， true：开启cidr路由发布，false：开启subnet子网路由发布。创建vpc时默认为子网路由发布，当选择cidr路由发布时,请通过工单加入白名单 */
   EnableRouteVpcPublish?: boolean;
+  /** vpc关联云联网时IPv6类型路由发布策略， true：开启cidr路由发布，false：开启subnet子网路由发布。创建vpc时默认为子网路由发布，当选择cidr路由发布时，请通过工单加入白名单。 */
+  EnableRouteVpcPublishIpv6?: boolean;
 }
 
 declare interface CreateVpcResponse {
@@ -9251,6 +9271,8 @@ declare interface ModifyVpcAttributeRequest {
   EnableRouteVpcPublish?: boolean;
   /** 发布cdc 子网到云联网的开关。true: 发布, false: 不发布。 */
   EnableCdcPublish?: boolean;
+  /** vpc关联云联网时IPv6类型路由发布策略， true：开启cidr路由发布，false：开启subnet子网路由发布。创建vpc时默认为子网路由发布，当选择cidr路由发布时，请通过工单加入白名单。 */
+  EnableRouteVpcPublishIpv6?: boolean;
 }
 
 declare interface ModifyVpcAttributeResponse {
@@ -9769,6 +9791,8 @@ declare interface ResetNatGatewayConnectionRequest {
   NatGatewayId: string;
   /** NAT网关并发连接上限，形如：1000000、3000000、10000000。 */
   MaxConcurrentConnection: number;
+  /** 独享实例规格。如果要变配到独享实例，此参数必选，取值范围：ExclusiveSmall/ExclusiveMedium1/ExclusiveLarge1 */
+  ExclusiveType?: string;
 }
 
 declare interface ResetNatGatewayConnectionResponse {

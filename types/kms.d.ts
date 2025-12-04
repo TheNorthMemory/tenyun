@@ -22,6 +22,8 @@ declare interface DataKeyMetadata {
   DataKeyId?: string;
   /** CMK的全局唯一标识 */
   KeyId?: string;
+  /** CMK的名称 */
+  KeyName?: string;
   /** 作为密钥更容易辨识，更容易被人看懂的数据密钥名称 */
   DataKeyName?: string;
   /** 数据密钥的长度,单位字节 */
@@ -414,7 +416,7 @@ declare interface DescribeKeyRequest {
 }
 
 declare interface DescribeKeyResponse {
-  /** 密钥属性信息 */
+  /** 密钥属性信息。 */
   KeyMetadata?: KeyMetadata;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -697,6 +699,8 @@ declare interface GenerateDataKeyRequest {
   Description?: string;
   /** KMS 独享版对应的 HSM 集群 ID。如果指定HsmClusterId，表明根密钥在此集群里，会校验KeyId是否和HsmClusterId对应。 */
   HsmClusterId?: string;
+  /** 标签列表,当参数IsHostedByKms=1，数据密钥托管到kms时有效. */
+  Tags?: Tag[];
 }
 
 declare interface GenerateDataKeyResponse {
@@ -708,6 +712,10 @@ declare interface GenerateDataKeyResponse {
   CiphertextBlob?: string;
   /** DataKey的全局唯一标识,当KMS托管数据密钥时返回。 */
   DataKeyId?: string;
+  /** 标签操作的返回码. 0: 成功；1: 内部错误；2: 业务处理错误 */
+  TagCode?: number;
+  /** 标签操作的返回信息 */
+  TagMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -869,6 +877,8 @@ declare interface ImportDataKeyRequest {
   KeyId?: string;
   /** KMS 独享版对应的 HSM 集群 ID。如果指定HsmClusterId，表明根密钥在此集群里，会校验KeyId是否和HsmClusterId对应。 */
   HsmClusterId?: string;
+  /** 标签列表 */
+  Tags?: Tag[];
 }
 
 declare interface ImportDataKeyResponse {
@@ -876,6 +886,10 @@ declare interface ImportDataKeyResponse {
   KeyId?: string;
   /** DataKey的全局唯一标识 否 官网/国内&国际站展示 */
   DataKeyId?: string;
+  /** 标签操作的返回码. 0: 成功；1: 内部错误；2: 业务处理错误 */
+  TagCode?: number;
+  /** 标签操作的返回信息 */
+  TagMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -931,6 +945,8 @@ declare interface ListDataKeyDetailRequest {
   KeyId?: string;
   /** 数据密钥的长度 */
   DataKeyLen?: number;
+  /** 标签过滤条件 */
+  TagFilters?: TagFilter[];
 }
 
 declare interface ListDataKeyDetailResponse {

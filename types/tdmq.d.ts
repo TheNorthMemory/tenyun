@@ -3979,9 +3979,9 @@ declare interface DescribeRocketMQProducersResponse {
 }
 
 declare interface DescribeRocketMQPublicAccessMonitorDataRequest {
-  /** 专享集群ID */
+  /** 集群 ID */
   InstanceId: string;
-  /** 指标名称，仅支持单指标拉取。目前仅支持：ClientIntraffic; ClientOuttraffic */
+  /** 指标名称，仅支持单指标拉取。指标枚举如下：- ClientIntraffic：入流量- ClientOuttraffic：出流量 */
   MetricName: string;
   /** 起始时间 */
   StartTime?: string;
@@ -5405,7 +5405,7 @@ declare interface Tdmq {
   DescribeRocketMQNamespaces(data: DescribeRocketMQNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQNamespacesResponse>;
   /** 查询生产者客户端列表 {@link DescribeRocketMQProducersRequest} {@link DescribeRocketMQProducersResponse} */
   DescribeRocketMQProducers(data: DescribeRocketMQProducersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQProducersResponse>;
-  /** 拉取公网指标监控数据 {@link DescribeRocketMQPublicAccessMonitorDataRequest} {@link DescribeRocketMQPublicAccessMonitorDataResponse} */
+  /** 查询 RocketMQ 集群公网指标监控数据 {@link DescribeRocketMQPublicAccessMonitorDataRequest} {@link DescribeRocketMQPublicAccessMonitorDataResponse} */
   DescribeRocketMQPublicAccessMonitorData(data: DescribeRocketMQPublicAccessMonitorDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQPublicAccessMonitorDataResponse>;
   /** 查询RocketMQ实例公网接入点信息 {@link DescribeRocketMQPublicAccessPointRequest} {@link DescribeRocketMQPublicAccessPointResponse} */
   DescribeRocketMQPublicAccessPoint(data: DescribeRocketMQPublicAccessPointRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQPublicAccessPointResponse>;

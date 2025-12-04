@@ -4517,7 +4517,7 @@ declare interface DescribeSingleSignOnEmployeesRequest {
   Operator: UserInfo;
   /** 单点登录应用号的id,获取位置如下图![image](https://qcloudimg.tencent-cloud.cn/raw/9e61aaf390a5f90ea7606fe29b9a65fd.png) */
   SsoApplicationId: string;
-  /** 需要删除的单点登录员工的唯一Id 值.不能超过 200 个。如果传递了 openIds，limit 和 offset 参数无效， */
+  /** 需要查询的单点登录员工的唯一Id 值.不能超过 200 个。如果传递了 openIds，limit 和 offset 参数无效， */
   OpenIds?: string[];
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;

@@ -1326,6 +1326,8 @@ declare interface DescribeDBInstanceDetailResponse {
   CpuType?: string;
   /** 删除保护标记，1: 已开启删除保护，0: 未开启删除保护 */
   ProtectedProperty?: number;
+  /** 流程Id，标志实例当前所处的异步任务 */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1607,7 +1609,7 @@ declare interface DescribeFlowRequest {
 
 declare interface DescribeFlowResponse {
   /** 流程状态，0：成功，1：失败，2：运行中 */
-  Status: number;
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -4900,6 +4900,20 @@ declare interface ModifyClusterDatabaseResponse {
   RequestId?: string;
 }
 
+declare interface ModifyClusterGlobalEncryptionRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 开启或关闭全局加密 */
+  IsOpenGlobalEncryption?: boolean;
+}
+
+declare interface ModifyClusterGlobalEncryptionResponse {
+  /** 异步任务id */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyClusterNameRequest {
   /** 集群ID */
   ClusterId: string;
@@ -6177,6 +6191,8 @@ declare interface Cynosdb {
   ModifyBinlogSaveDays(data: ModifyBinlogSaveDaysRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBinlogSaveDaysResponse>;
   /** 修改数据库 {@link ModifyClusterDatabaseRequest} {@link ModifyClusterDatabaseResponse} */
   ModifyClusterDatabase(data: ModifyClusterDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterDatabaseResponse>;
+  /** 开关全局加密 {@link ModifyClusterGlobalEncryptionRequest} {@link ModifyClusterGlobalEncryptionResponse} */
+  ModifyClusterGlobalEncryption(data: ModifyClusterGlobalEncryptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterGlobalEncryptionResponse>;
   /** 修改集群名称 {@link ModifyClusterNameRequest} {@link ModifyClusterNameResponse} */
   ModifyClusterName(data: ModifyClusterNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterNameResponse>;
   /** 修改集群参数 {@link ModifyClusterParamRequest} {@link ModifyClusterParamResponse} */

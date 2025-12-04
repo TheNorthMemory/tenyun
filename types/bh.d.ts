@@ -204,6 +204,12 @@ declare interface AssetSyncStatus {
   ErrMsg?: string;
 }
 
+/** 认证方式设置 */
+declare interface AuthModeSetting {
+  /** 双因子认证，0-不开启，1-OTP，2-短信 */
+  AuthMode?: number;
+}
+
 /** 查询改密计划详情 */
 declare interface ChangePwdTaskDetail {
   /** 资产信息 */
@@ -578,6 +584,14 @@ declare interface OperationTask {
   FirstTime?: string;
 }
 
+/** 运维资产重连次数 */
+declare interface ReconnectionSetting {
+  /** 重连次数 */
+  ReconnectionMaxCount?: number;
+  /** true：可以重连，false：不可以重连 */
+  Enable?: boolean;
+}
+
 /** 回放所需字段信息 */
 declare interface ReplayInformation {
   /** 令牌 */
@@ -854,6 +868,14 @@ declare interface SearchFileTypeFilter {
   Method?: number[];
 }
 
+/** 系统安全设置 */
+declare interface SecuritySetting {
+  /** 国密认证方式设置 */
+  AuthModeGM?: AuthModeSetting;
+  /** 资产重连次数 */
+  Reconnection?: ReconnectionSetting;
+}
+
 /** 搜索字符或图形会话时返回的SessionResul结构体 */
 declare interface SessionResult {
   /** 用户名 */
@@ -952,7 +974,7 @@ declare interface TaskResult {
 
 /** 用户信息 */
 declare interface User {
-  /** 用户名, 3-20个字符 必须以英文字母开头，且不能包含字母、数字、.、_、-以外的字符 */
+  /** 用户名,1 - 128个字符 必须以英文字母开头，只能由a-zA-Z0-9以及+=,.@_-组成，支持邮箱格式 */
   UserName: string;
   /** 用户姓名， 最大20个字符，不能包含空白字符 */
   RealName: string;
@@ -990,6 +1012,8 @@ declare interface User {
   UserFrom?: number;
   /** ioa同步过来的用户相关信息 */
   IOAUserGroup?: IOAUserGroup;
+  /** cam角色用户载体 */
+  RoleArn?: string;
 }
 
 /** 用户目录信息 */
@@ -2120,6 +2144,8 @@ declare interface DescribeSecuritySettingRequest {
 }
 
 declare interface DescribeSecuritySettingResponse {
+  /** 无 */
+  SecuritySetting?: SecuritySetting;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

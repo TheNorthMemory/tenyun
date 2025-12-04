@@ -904,6 +904,22 @@ declare interface DescribeNodePoolsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyClusterMachineRequest {
+  /** 集群 ID */
+  ClusterId: string;
+  /** 节点名列表 */
+  MachineNames: string[];
+  /** machine的display name */
+  DisplayName?: string;
+  /** 节点预付费信息 */
+  InstanceChargePrepaid?: InstanceChargePrepaid;
+}
+
+declare interface ModifyClusterMachineResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyHealthCheckPolicyRequest {
   /** 集群 ID */
   ClusterId: string;
@@ -8269,6 +8285,8 @@ declare interface Tke {
   DescribeHealthCheckTemplate(data?: DescribeHealthCheckTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHealthCheckTemplateResponse>;
   /** 查询 TKE 节点池列表 {@link DescribeNodePoolsRequest} {@link DescribeNodePoolsResponse} */
   DescribeNodePools(data: DescribeNodePoolsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodePoolsResponse>;
+  /** 修改原生节点 {@link ModifyClusterMachineRequest} {@link ModifyClusterMachineResponse} */
+  ModifyClusterMachine(data: ModifyClusterMachineRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterMachineResponse>;
   /** 修改健康检测策略 {@link ModifyHealthCheckPolicyRequest} {@link ModifyHealthCheckPolicyResponse} */
   ModifyHealthCheckPolicy(data: ModifyHealthCheckPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHealthCheckPolicyResponse>;
   /** 更新 TKE 节点池 {@link ModifyNodePoolRequest} {@link ModifyNodePoolResponse} */

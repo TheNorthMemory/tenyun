@@ -102,6 +102,10 @@ declare interface DescribeInstanceDetail {
   FenceId?: string;
   /** 所属集群ID(默认集群为空) */
   ClusterId?: string;
+  /** 实例标签 */
+  ResourceTags?: ResourceTag[];
+  /** CPU类型：Intel/AMD,Hygon */
+  CpuType?: string;
 }
 
 /** 设备信息 */
@@ -244,6 +248,14 @@ declare interface InstanceExpand {
   Pid?: number;
 }
 
+/** 标签对象，包含tagKey & tagValue */
+declare interface ResourceTag {
+  /** 标签键 */
+  TagKey: string;
+  /** 标签值 */
+  TagValue: string;
+}
+
 declare interface DescribeDBInstancesRequest {
   /** 独享集群实例Id */
   InstanceId: string;
@@ -344,6 +356,10 @@ declare interface DescribeInstanceDetailResponse {
   FenceId?: string;
   /** 所属集群ID(默认集群为空) */
   ClusterId?: string;
+  /** 独享集群的标签信息 */
+  ResourceTags?: ResourceTag[];
+  /** CPU类型，Intel/AMD,Hygon */
+  CpuType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -28,6 +28,16 @@ declare interface AssociationItem {
   RuleId?: string;
 }
 
+/** 可用区转发亲和信息 */
+declare interface AvailableZoneAffinityInfo {
+  /** 是否开启可用区转发亲和。true：开启可用区转发亲和；false：开启可用区转发亲和。 */
+  Enable?: boolean;
+  /** 可用区转发亲和失效阈值，当可用区内后端服务健康比例小于该阈值时，负载均衡会退出可用区转发亲和，转为全可用区转发。 */
+  ExitRatio?: number | null;
+  /** 可用区转发亲和的重新生效阈值，当处于全可用区转发，且负载均衡可用区内的后端服务健康比例大于等于该阈值时，负载均衡会重新进入可用区转发亲和。 */
+  ReentryRatio?: number | null;
+}
+
 /** 监听器绑定的后端服务的详细信息 */
 declare interface Backend {
   /** 后端服务的类型，可取：CVM、ENI、CCN、EVM、GLOBALROUTE、NAT、SRV等 */
@@ -50,6 +60,8 @@ declare interface Backend {
   EniId?: string | null;
   /** 标签。 */
   Tag?: string;
+  /** 后端服务所在的可用区，如ap-guangzhou-1 */
+  Zone?: string | null;
 }
 
 /** 监听器或者转发规则绑定的目标组基本信息 */
@@ -790,6 +802,8 @@ declare interface LoadBalancer {
   TargetCount?: number;
   /** 负载均衡实例关联的Endpoint id。 */
   AssociateEndpoint?: string;
+  /** 可用区转发亲和信息 */
+  AvailableZoneAffinityInfo?: AvailableZoneAffinityInfo;
 }
 
 /** 负载均衡详细信息 */
@@ -878,6 +892,8 @@ declare interface LoadBalancerDetail {
   SlaType?: string | null;
   /** 0：表示非独占型实例，1：表示独占型态实例。 */
   Exclusive?: number | null;
+  /** 可用区转发亲和信息 */
+  AvailableZoneAffinityInfo?: AvailableZoneAffinityInfo | null;
 }
 
 /** 负载均衡实例的健康检查状态 */

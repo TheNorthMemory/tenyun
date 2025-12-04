@@ -134,6 +134,10 @@ declare interface ClusterConfigsInfoFromEMR {
   NeedRestart?: number;
   /** 保存配置文件的路径 */
   FilePath?: string;
+  /** 节点级配置的ip，当ConfigLevel取值为node时，此参数必选； */
+  Ip?: string;
+  /** 可选参数，参数取值：node,cluster; node: 节点级参数配置，cluster: 实例级参数配置； */
+  ConfigLevel?: string;
 }
 
 /** clickhouse vcluster信息 */

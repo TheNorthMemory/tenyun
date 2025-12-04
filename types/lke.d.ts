@@ -74,6 +74,12 @@ declare interface AgentDebugInfo {
   ModelName?: string;
 }
 
+/** Agent转交高级设置 */
+declare interface AgentHandoffAdvancedSetting {
+  /** 对话流转策略；0-由上一轮回复用户的 Agent 继续发起，1- 回到主Agent */
+  ConversationPolicy?: number;
+}
+
 /** Agent输入值，支持直接赋值和引用 */
 declare interface AgentInput {
   /** 输入来源类型：0 用户输入，3 自定义变量（API参数） */
@@ -390,6 +396,8 @@ declare interface AgentToolInfo {
   FinanceStatus?: number;
   /** 工具来源: 0-来自插件，1-来自工作流 */
   ToolSource?: number;
+  /** 计费状态；0-不计费，1-限时免费，2-官方收费 */
+  FinanceType?: number;
 }
 
 /** Agent工具的请求参数定义 */
@@ -2704,6 +2712,8 @@ declare interface DescribeAppAgentListResponse {
   StaringAgentId?: string;
   /** 应用Agent信息列表 */
   Agents?: Agent[];
+  /** Agent转交高级设置 */
+  HandoffAdvancedSetting?: AgentHandoffAdvancedSetting;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

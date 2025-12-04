@@ -14,6 +14,16 @@ declare interface Chunk {
   Summary?: string;
 }
 
+/** cos 文件信息 */
+declare interface CosFileInfo {
+  /** 文件名称，包含后缀 */
+  FileName?: string;
+  /** 文件类型，"PDF", "DOC", "DOCX", "XLS", "XLSX", "PPT", "PPTX", "MD", "TXT", "PNG", "JPG", "JPEG", "CSV" */
+  FileType?: string;
+  /** 用户文件的cosurl */
+  UserCosUrl?: string;
+}
+
 /** 知识库信息 */
 declare interface KnowledgeBase {
   /** 知识库id */
@@ -104,6 +114,30 @@ declare interface Task {
   Status?: string;
   /** 任务步骤列表 */
   StepInfoList?: StepInfo[];
+}
+
+/** 上传任务 */
+declare interface UploadJob {
+  /** id */
+  Id?: number;
+  /** 任务id */
+  JobId?: string;
+  /** 实例id */
+  InstanceId?: string;
+  /** 知识库id */
+  KnowledgeBaseId?: string;
+  /** uin */
+  Uin?: string;
+  /** subuin */
+  SubUin?: string;
+  /** Pending、FileUploading、FileParsing、Success、Failed */
+  Status?: string;
+  /** 任务创建时间 */
+  CreateTime?: string;
+  /** 任务更新时间 */
+  UpdateTime?: string;
+  /** 错误信息 */
+  Message?: string;
 }
 
 declare interface AddChunkRequest {
@@ -226,6 +260,20 @@ declare interface GetSessionDetailsResponse {
   RequestId?: string;
 }
 
+declare interface GetUploadJobDetailsRequest {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 任务id */
+  JobId?: string;
+}
+
+declare interface GetUploadJobDetailsResponse {
+  /** 任务详情 */
+  Job?: UploadJob;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyChunkRequest {
   /** 实例ID */
   InstanceId: string;
@@ -292,6 +340,22 @@ declare interface StopChatAIResponse {
   RequestId?: string;
 }
 
+declare interface UploadAndCommitFileRequest {
+  /** 实例id */
+  InstanceId?: string;
+  /** 上传文件列表 */
+  CosFiles?: CosFileInfo[];
+  /** 知识库id */
+  KnowledgeBaseId?: string;
+}
+
+declare interface UploadAndCommitFileResponse {
+  /** 上传任务 */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Dataagent 腾讯云数据分析智能体} */
 declare interface Dataagent {
   (): Versions;
@@ -309,6 +373,8 @@ declare interface Dataagent {
   GetKnowledgeBaseList(data: GetKnowledgeBaseListRequest, config?: AxiosRequestConfig): AxiosPromise<GetKnowledgeBaseListResponse>;
   /** 获取会话详情 {@link GetSessionDetailsRequest} {@link GetSessionDetailsResponse} */
   GetSessionDetails(data?: GetSessionDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<GetSessionDetailsResponse>;
+  /** 查询上传任务详情 {@link GetUploadJobDetailsRequest} {@link GetUploadJobDetailsResponse} */
+  GetUploadJobDetails(data?: GetUploadJobDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<GetUploadJobDetailsResponse>;
   /** 编辑分片 {@link ModifyChunkRequest} {@link ModifyChunkResponse} */
   ModifyChunk(data: ModifyChunkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyChunkResponse>;
   /** 修改知识库 {@link ModifyKnowledgeBaseRequest} {@link ModifyKnowledgeBaseResponse} */
@@ -317,6 +383,8 @@ declare interface Dataagent {
   QueryChunkList(data?: QueryChunkListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChunkListResponse>;
   /** 终止问答返回流 {@link StopChatAIRequest} {@link StopChatAIResponse} */
   StopChatAI(data?: StopChatAIRequest, config?: AxiosRequestConfig): AxiosPromise<StopChatAIResponse>;
+  /** cos上传提交文件 {@link UploadAndCommitFileRequest} {@link UploadAndCommitFileResponse} */
+  UploadAndCommitFile(data?: UploadAndCommitFileRequest, config?: AxiosRequestConfig): AxiosPromise<UploadAndCommitFileResponse>;
 }
 
 export declare type Versions = ["2025-05-13"];

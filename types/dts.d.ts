@@ -352,6 +352,18 @@ declare interface DBItem {
   Triggers?: string[];
 }
 
+/** 库/表/视图级别的 DDL/DML 白名单 */
+declare interface DBOpFilter {
+  /** 规则生效的库名 */
+  DbName: string;
+  /** 库级 DDL/DML 过滤规则 */
+  OpFilter?: OpFilter;
+  /** 表级 DDL/DML 过滤信息 */
+  Tables?: TableFilter[];
+  /** 视图级 DDL/DML 过滤信息 */
+  Views?: ViewFilter[];
+}
+
 /** 需要同步的库表对象 */
 declare interface Database {
   /** 需要迁移或同步的库名，当ObjectMode为Partial时，此项必填 */
@@ -876,6 +888,8 @@ declare interface Objects {
   AdvancedObjects?: string[];
   /** OnlineDDL类型，冗余字段不做配置用途 */
   OnlineDDL?: OnlineDDL;
+  /** 库/表/视图级 DML/DDL 白名单 */
+  DatabasesOpFilter?: DBOpFilter[];
 }
 
 /** 数据订阅kafka分区中checkpoint信息 */
@@ -890,6 +904,14 @@ declare interface OffsetTimeMap {
 declare interface OnlineDDL {
   /** 状态，ON-启用，OFF-不启用。 */
   Status: string;
+}
+
+/** DDL/DML 过滤规则 */
+declare interface OpFilter {
+  /** DML 白名单 */
+  OpTypes?: string[];
+  /** DDL 白名单 */
+  DdlOptions?: DdlOption[];
 }
 
 /** 数据同步中的选项 */
@@ -1350,6 +1372,14 @@ declare interface Table {
   TableEditMode?: string;
 }
 
+/** 表级 DDL/DML 过滤信息 */
+declare interface TableFilter {
+  /** 规则生效的表名 */
+  TableName: string;
+  /** 表级 DDL/DML 过滤规则 */
+  OpFilter?: OpFilter;
+}
+
 /** 表对象集合，当 TableMode 为 partial 时，此项需要填写 */
 declare interface TableItem {
   /** 迁移的表名，大小写敏感 */
@@ -1428,6 +1458,14 @@ declare interface View {
   ViewName?: string;
   /** 预留字段、目前暂时不支持view的重命名 */
   NewViewName?: string;
+}
+
+/** 视图级 DDL/DML 过滤信息 */
+declare interface ViewFilter {
+  /** 规则生效的视图名 */
+  ViewName: string;
+  /** 视图级 DDL/DML 过滤规则 */
+  OpFilter?: OpFilter;
 }
 
 /** 视图对象 */
