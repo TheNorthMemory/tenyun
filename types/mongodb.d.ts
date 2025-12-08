@@ -286,7 +286,7 @@ declare interface InstanceDetail {
   CreateTime?: string;
   /** 实例到期时间。 */
   DeadLine?: string;
-  /** 实例存储引擎版本信息。- MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本。- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。- MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。 */
+  /** 实例存储引擎版本信息。- MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本。- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。- MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。- MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。 */
   MongoVersion?: string;
   /** 实例内存规格，单位：MB。 */
   Memory?: number;
@@ -578,7 +578,7 @@ declare interface ParamTpl {
   TplName?: string;
   /** 参数模板 ID。 */
   TplId?: string;
-  /** 参数模板适用的数据库版本。- MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本，- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本，- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。- MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。 */
+  /** 参数模板适用的数据库版本。- MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本，- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本，- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。- MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。- MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。 */
   MongoVersion?: string;
   /** 参数模板适用的数据库类型。- REPLSET：副本集实例。- SHARD：分片实例。- STANDALONE：单节点实例。 */
   ClusterType?: string;
@@ -704,7 +704,7 @@ declare interface SlowLogPattern {
 declare interface SpecItem {
   /** 规格信息标识。格式如：mongo.HIO10G.128g。由节点类型、规格类型、内存规格三部分组成。- 节点类型：**mongo**，指 Mongod 节点；**mongos**，指 Mongos 节点；**cfgstr**，指 Configserver 节点。- 规格类型：**HIO10G**，指通用高HIO万兆型；**HCD**：指云盘版类型。- 内存规格：支持4、8、16、32、64、128、240、512。单位g：表示GB。128g 则表示128GB。 */
   SpecCode?: string;
-  /** 售卖规格有效标志，取值范围如下：- 0：停止售卖，- 1：开放售卖。 */
+  /** 售卖规格有效标志，取值范围如下：- 0：停止售卖。- 1：开放售卖。 */
   Status?: number;
   /** 计算资源规格，CPU核数。 */
   Cpu?: number;
@@ -720,13 +720,13 @@ declare interface SpecItem {
   Qps?: number;
   /** 规格所支持的最大连接数限制。 */
   Conns?: number;
-  /** 实例存储引擎版本信息。- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。- MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。 */
+  /** 实例存储引擎版本信息。- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。- MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。- MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。 */
   MongoVersionCode?: string;
-  /** 实例版本对应的数字版本。 */
+  /** 实例版本对应的数字版本。- MongoDB 3.2 版本：2。- MongoDB 3.6 版本：4。- MongoDB 4.0 版本：5。- MongoDB 4.2 版本：9。- MongoDB 4.4 版本：10。- MongoDB 5.0 版本：11。- MongoDB 6.0 版本：12。- MongoDB 7.0 版本：13。- MongoDB 8.0 版本：14。 */
   MongoVersionValue?: number;
-  /** 实例版本信息。支持：4.2、4.4、5.0、6.0、7.0。 */
+  /** 实例版本信息。支持：4.2、4.4、5.0、6.0、7.0、8.0。 */
   Version?: string;
-  /** 存储引擎。 */
+  /** 存储引擎，仅支持 WiredTiger。 */
   EngineName?: string;
   /** 集群类型，取值如下：- 1：分片集群。- 0：副本集集群。 */
   ClusterType?: number;
@@ -901,7 +901,7 @@ declare interface CreateDBInstanceHourRequest {
   ReplicateSetNum: number;
   /** - 创建副本集实例，指每个副本集内主从节点数量。每个副本集所支持的最大节点数与最小节点数，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。- 创建分片集群实例，指每个分片的主从节点数量。每个分片所支持的最大节点数与最小节点数，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。 */
   NodeNum: number;
-  /** 指版本信息。具体支持的版本信息 ，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。- MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。 */
+  /** 指版本信息。具体支持的版本信息 ，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。- MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。- MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。 */
   MongoVersion: string;
   /** 产品规格类型。- HIO10G：通用高HIO万兆型。- HCD：云盘版类型。 */
   MachineCode: string;
@@ -961,7 +961,7 @@ declare interface CreateDBInstanceHourResponse {
 declare interface CreateDBInstanceParamTplRequest {
   /** 参数模板名称。 */
   TplName: string;
-  /** 参数模板版本号。当**MirrorTplId**为空时，该字段必填。参数模板支持的售卖版本，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/35767) 获取。- MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本，- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本，- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。- MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。 */
+  /** 参数模板版本号。当**MirrorTplId**为空时，该字段必填。参数模板支持的售卖版本，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/35767) 获取。- MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本，- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本，- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。- MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。- MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。 */
   MongoVersion?: string;
   /** 实例类型。当 MirrorTplId 为空值时，该参数必填。- REPLSET：副本集实例。- SHARD：分片实例。- STANDALONE：单节点实例。 */
   ClusterType?: string;
@@ -987,7 +987,7 @@ declare interface CreateDBInstanceRequest {
   Memory: number;
   /** 实例硬盘大小，单位：GB。每一个 CPU 规格对应的最大磁盘与最小磁盘范围，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。 */
   Volume: number;
-  /** 指版本信息。具体支持的版本信息 ，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。- MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。 */
+  /** 指版本信息。具体支持的版本信息 ，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。- MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。- MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。 */
   MongoVersion: string;
   /** 实例数量, 最小值1，最大值为30。 */
   GoodsNum: number;
@@ -1368,7 +1368,7 @@ declare interface DescribeDBInstanceParamTplDetailResponse {
   InstanceMultiParams?: InstanceMultiParam[];
   /** 参数总个数。 */
   TotalCount?: number;
-  /** 模板适配的实例版本。- MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本，- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本，- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。- MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。 */
+  /** 模板适配的实例版本。- MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本，- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本，- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。- MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。- MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。 */
   MongoVersion?: string;
   /** 模板适配集群类型。- REPLSET：副本集实例。- SHARD：分片实例。- STANDALONE：单节点实例。 */
   ClusterType?: string;
@@ -1383,7 +1383,7 @@ declare interface DescribeDBInstanceParamTplRequest {
   TplIds?: string[];
   /** 指定查询的模板名称。 */
   TplNames?: string[];
-  /** 指定所需查询的参数模板的数据库版本号。具体支持的版本信息，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。- MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本，- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本，- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。- MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。 */
+  /** 指定所需查询的参数模板的数据库版本号。具体支持的版本信息，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。- MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本，- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本，- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。- MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。- MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。 */
   MongoVersion?: string[];
   /** 指定查询的模板类型。- DEFAULT：系统默认模板。- CUSTOMIZE：自定义模板。 */
   TplType?: string;
@@ -1731,7 +1731,7 @@ declare interface InquirePriceCreateDBInstancesRequest {
   Memory: number;
   /** 实例硬盘大小。- 单位：GB。- 取值范围：请通过接口[DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567)查询，其返回的数据结构SpecItems中的参数MinStorage与MaxStorage分别对应其最小磁盘规格与最大磁盘规格。 */
   Volume: number;
-  /** 实例版本信息。具体支持的版本，请通过接口[DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567)查询，其返回的数据结构SpecItems中的参数MongoVersionCode为实例所支持的版本信息。版本信息与版本号对应关系如下：- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。- MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。 */
+  /** 实例版本信息。具体支持的版本，请通过接口[DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567)查询，其返回的数据结构SpecItems中的参数MongoVersionCode为实例所支持的版本信息。版本信息与版本号对应关系如下：- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。- MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。- MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。 */
   MongoVersion: string;
   /** 产品规格类型。- HIO10G：通用高HIO万兆型。- HCD：云盘版。 */
   MachineCode: string;

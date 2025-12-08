@@ -124,8 +124,12 @@ declare interface Cluster {
   Version?: string | null;
   /** 公网访问接入点 */
   PublicEndPoint?: string | null;
+  /** 旧的公网访问接入点 */
+  OldPublicEndPoint?: string;
   /** VPC访问接入点 */
   VpcEndPoint?: string | null;
+  /** 旧的VPC访问接入点 */
+  OldVpcEndPoint?: string;
   /** 命名空间数量 */
   NamespaceNum?: number | null;
   /** 已使用存储限制，MB为单位 */
@@ -146,6 +150,10 @@ declare interface Cluster {
   PublicAccessEnabled?: boolean | null;
   /** 标签 */
   Tags?: Tag[] | null;
+  /** 旧的支撑网 Pulsar 接入点 */
+  OldInternalPulsarEndPoint?: string;
+  /** 旧的支撑网 HTTP 接入点 */
+  OldInternalHttpEndPoint?: string;
   /** 计费模式：0: 按量计费1: 包年包月 */
   PayMode?: number | null;
   /** 项目ID */
@@ -402,7 +410,7 @@ declare interface DetailedRolePerm {
   PermWrite: boolean;
   /** 是否开启消费权限 */
   PermRead: boolean;
-  /** 授权资源类型（Topic:主题; Group:消费组） */
+  /** 授权资源类型，枚举值如下：- Topic：主题维度- Group：消费组维度- Cluster：集群维度（默认值） */
   ResourceType: string;
   /** 资源备注 */
   Remark?: string;
@@ -444,6 +452,10 @@ declare interface Environment {
   RetentionPolicy?: RetentionPolicy | null;
   /** 是否自动创建订阅 */
   AutoSubscriptionCreation?: boolean | null;
+  /** 离线订阅过期自动清理时间 */
+  SubscriptionExpirationTime?: number;
+  /** 离线订阅过期自动清理时间开关 */
+  SubscriptionExpirationTimeEnable?: boolean;
 }
 
 /** 环境角色集合 */
@@ -558,6 +570,10 @@ declare interface InternalTenant {
   MaxRetentionSizeInMB?: number | null;
   /** public Access Enabled */
   PublicAccessEnabled?: boolean | null;
+  /** 实例标签列表 */
+  TagList?: string[];
+  /** 实例规格 */
+  TenantSpec?: string;
 }
 
 /** 迁移topic列表数据 */
@@ -718,6 +734,8 @@ declare interface PulsarNetworkAccessPointInfo {
   Tls?: boolean;
   /** 接入点自定义域名 */
   CustomUrl?: string;
+  /** 接入点绑定的安全组id列表，仅限vpc接入点有效 */
+  SecurityGroupIds?: string[];
 }
 
 /** Pulsar专业版集群信息 */
@@ -1860,6 +1878,8 @@ declare interface Topic {
   IsolateConsumerEnable?: boolean;
   /** 消费者 Ack 超时时间，单位：秒 */
   AckTimeOut?: number;
+  /** Pulsar主题消息类型0: 混合消息1:普通消息2:延迟消息 */
+  PulsarTopicMessageType?: number;
 }
 
 /** 主题关键信息 */
@@ -2021,7 +2041,7 @@ declare interface CreateClusterResponse {
 }
 
 declare interface CreateCmqQueueRequest {
-  /** 队列名字，在单个地域同一账号下唯一。队列名称是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
+  /** 队列名字，在单个地域同一账号下唯一。队列名称以字母起始，只能包含字母、数字、“-”及“_”，最大64字符，不区分大小写。 */
   QueueName: string;
   /** 最大堆积消息数。取值范围在公测期间为 1,000,000 - 10,000,000，正式上线后范围可达到 1000,000-1000,000,000。默认取值在公测期间为 10,000,000，正式上线后为 100,000,000。 */
   MaxMsgHeapNum?: number;
@@ -2067,7 +2087,7 @@ declare interface CreateCmqQueueResponse {
 declare interface CreateCmqSubscribeRequest {
   /** 主题名字，在单个地域同一账号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。 */
   TopicName: string;
-  /** 订阅名字，在单个地域同一账号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。 */
+  /** 订阅名字，在单个地域同一账号的同一主题下唯一。订阅名称以字母起始，只能包含字母、数字、“-”及“_”，最大64字符，创建后不能修改。 */
   SubscriptionName: string;
   /** 订阅的协议，目前支持两种协议：http、queue。使用http协议，用户需自己搭建接受消息的web server。使用queue，消息会自动推送到CMQ queue，用户可以并发地拉取消息。 */
   Protocol: string;
@@ -2091,7 +2111,7 @@ declare interface CreateCmqSubscribeResponse {
 }
 
 declare interface CreateCmqTopicRequest {
-  /** 主题名字，在单个地域同一账号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。 */
+  /** 主题名字，在单个地域同一账号下唯一。主题名称只能包含字母、数字、“-”及“_”，最大64字符，创建后不能修改，不区分大小写。 */
   TopicName: string;
   /** 消息最大长度。取值范围 1024-65536 Byte（即1-64K），默认值 65536。 */
   MaxMsgSize?: number;
@@ -2125,6 +2145,10 @@ declare interface CreateEnvironmentRequest {
   RetentionPolicy?: RetentionPolicy;
   /** 是否开启自动创建订阅 */
   AutoSubscriptionCreation?: boolean;
+  /** 离线订阅过期自动清理时间 */
+  SubscriptionExpirationTime?: number;
+  /** 离线订阅过期自动清理时间开关 */
+  SubscriptionExpirationTimeEnable?: boolean;
 }
 
 declare interface CreateEnvironmentResponse {
@@ -2136,6 +2160,10 @@ declare interface CreateEnvironmentResponse {
   Remark?: string | null;
   /** 命名空间ID */
   NamespaceId?: string;
+  /** 离线订阅过期自动清理时间 */
+  SubscriptionExpirationTime?: number;
+  /** 离线订阅过期自动清理时间 */
+  SubscriptionExpirationTimeEnable?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2161,8 +2189,6 @@ declare interface CreateProClusterRequest {
   ZoneIds: number[];
   /** 集群规格代号参考 [专业集群规格](https://cloud.tencent.com/document/product/1179/83705) */
   ProductName: string;
-  /** 存储规格参考 [专业集群规格](https://cloud.tencent.com/document/product/1179/83705) */
-  StorageSize: number;
   /** 1: true，开启自动按月续费0: false，关闭自动按月续费 */
   AutoRenewFlag: number;
   /** 购买时长，取值范围：1～50 */
@@ -2171,6 +2197,8 @@ declare interface CreateProClusterRequest {
   ClusterName: string;
   /** 是否自动选择代金券 1是 0否 默认为0 */
   AutoVoucher: number;
+  /** 存储规格参考 [专业集群规格](https://cloud.tencent.com/document/product/1179/83705) */
+  StorageSize?: number;
   /** vpc网络标签 */
   Vpc?: VpcInfo;
   /** 集群的标签列表(已废弃) */
@@ -2323,7 +2351,7 @@ declare interface CreateRocketMQClusterResponse {
 }
 
 declare interface CreateRocketMQEnvironmentRoleRequest {
-  /** 命名空间 */
+  /** 命名空间，4.x 通用集群命名空间固定为: tdmq_default */
   EnvironmentId: string;
   /** 角色名称。 */
   RoleName: string;
@@ -2551,6 +2579,8 @@ declare interface CreateTopicRequest {
   IsolateConsumerEnable?: boolean;
   /** 消费者 Ack 超时时间，单位：秒，范围60-（3600*24） */
   AckTimeOut?: number;
+  /** Pulsar主题消息类型0: 混合消息1:普通消息2:延迟消息 */
+  PulsarTopicMessageType?: number;
 }
 
 declare interface CreateTopicResponse {
@@ -2737,7 +2767,7 @@ declare interface DeleteRocketMQClusterResponse {
 }
 
 declare interface DeleteRocketMQEnvironmentRolesRequest {
-  /** 环境（命名空间）名称。 */
+  /** 命名空间，4.x 通用集群命名空间固定为: tdmq_default */
   EnvironmentId: string;
   /** 角色名称数组。 */
   RoleNames: string[];
@@ -3102,6 +3132,10 @@ declare interface DescribeEnvironmentAttributesResponse {
   Replicas?: number;
   /** 备注。 */
   Remark?: string;
+  /** 离线订阅过期自动清理时间 */
+  SubscriptionExpirationTime?: number;
+  /** 离线订阅过期自动清理时间开关 */
+  SubscriptionExpirationTimeEnable?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3229,6 +3263,8 @@ declare interface DescribeMsgTraceRequest {
   SubscriptionName?: string;
   /** Pulsar 集群的ID */
   ClusterId?: string;
+  /** topic 名字 */
+  TopicName?: string;
 }
 
 declare interface DescribeMsgTraceResponse {
@@ -3333,7 +3369,7 @@ declare interface DescribePublishersResponse {
 }
 
 declare interface DescribePulsarProInstanceDetailRequest {
-  /** 集群ID */
+  /** 集群id */
   ClusterId: string;
 }
 
@@ -3344,6 +3380,8 @@ declare interface DescribePulsarProInstanceDetailResponse {
   NetworkAccessPointInfos?: PulsarNetworkAccessPointInfo[] | null;
   /** 集群规格信息 */
   ClusterSpecInfo?: PulsarProClusterSpecInfo | null;
+  /** 集群的证书列表 */
+  CertificateList?: CertificateInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3789,7 +3827,7 @@ declare interface DescribeRocketMQConsumerConnectionsResponse {
 declare interface DescribeRocketMQEnvironmentRolesRequest {
   /** 必填字段，RocketMQ集群的ID */
   ClusterId: string;
-  /** 命名空间 */
+  /** 命名空间，4.x 通用集群命名空间固定为: tdmq_default */
   EnvironmentId?: string;
   /** 起始下标，不填默认为0。 */
   Offset?: number;
@@ -3802,9 +3840,9 @@ declare interface DescribeRocketMQEnvironmentRolesRequest {
 }
 
 declare interface DescribeRocketMQEnvironmentRolesResponse {
-  /** 记录数。 */
+  /** 总数 */
   TotalCount?: number;
-  /** 命名空间角色集合。 */
+  /** 角色授权列表 */
   EnvironmentRoleSets?: EnvironmentRole[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -4046,9 +4084,9 @@ declare interface DescribeRocketMQRolesRequest {
 }
 
 declare interface DescribeRocketMQRolesResponse {
-  /** 记录数。 */
+  /** 总数 */
   TotalCount?: number;
-  /** 角色数组。 */
+  /** 角色列表 */
   RoleSets?: Role[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -4601,6 +4639,10 @@ declare interface ModifyEnvironmentAttributesRequest {
   RetentionPolicy?: RetentionPolicy;
   /** 是否开启自动创建订阅 */
   AutoSubscriptionCreation?: boolean;
+  /** 离线订阅过期自动清理时间 */
+  SubscriptionExpirationTime?: number;
+  /** 离线订阅过期自动清理时间开关 */
+  SubscriptionExpirationTimeEnable?: boolean;
 }
 
 declare interface ModifyEnvironmentAttributesResponse {
@@ -4612,6 +4654,10 @@ declare interface ModifyEnvironmentAttributesResponse {
   Remark?: string | null;
   /** 命名空间ID */
   NamespaceId?: string | null;
+  /** 离线订阅过期自动清理时间 */
+  SubscriptionExpirationTime?: number;
+  /** 离线订阅过期自动清理时间开关 */
+  SubscriptionExpirationTimeEnable?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4745,7 +4791,7 @@ declare interface ModifyRocketMQClusterResponse {
 }
 
 declare interface ModifyRocketMQEnvironmentRoleRequest {
-  /** 环境（命名空间）名称。 */
+  /** 命名空间，4.x 通用集群命名空间固定为: tdmq_default */
   EnvironmentId: string;
   /** 角色名称。 */
   RoleName: string;
@@ -5009,7 +5055,7 @@ declare interface ResetMsgSubOffsetByTimestampResponse {
 declare interface ResetRocketMQConsumerOffSetRequest {
   /** 集群ID */
   ClusterId: string;
-  /** 命名空间名称 */
+  /** 命名空间，4.x 通用集群命名空间固定为: tdmq_default */
   NamespaceId: string;
   /** 消费组名称 */
   GroupId: string;
@@ -5017,7 +5063,7 @@ declare interface ResetRocketMQConsumerOffSetRequest {
   Type: number;
   /** 主题名称 */
   Topic?: string;
-  /** 重置指定的时间戳，仅在 Type 为1是生效，以毫秒为单位 */
+  /** 重置指定的时间戳，仅在 Type 为1时生效，以毫秒为单位 */
   ResetTimestamp?: number;
   /** 重置的是否是retry topic */
   RetryFlag?: boolean;
@@ -5251,13 +5297,13 @@ declare interface Tdmq {
   CreateRabbitMQVirtualHost(data: CreateRabbitMQVirtualHostRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRabbitMQVirtualHostResponse>;
   /** 创建RocketMQ集群 {@link CreateRocketMQClusterRequest} {@link CreateRocketMQClusterResponse} */
   CreateRocketMQCluster(data: CreateRocketMQClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQClusterResponse>;
-  /** 创建RocketMQ环境角色授权 {@link CreateRocketMQEnvironmentRoleRequest} {@link CreateRocketMQEnvironmentRoleResponse} */
+  /** 创建 RocketMQ 角色授权 {@link CreateRocketMQEnvironmentRoleRequest} {@link CreateRocketMQEnvironmentRoleResponse} */
   CreateRocketMQEnvironmentRole(data: CreateRocketMQEnvironmentRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQEnvironmentRoleResponse>;
   /** 创建RocketMQ消费组 {@link CreateRocketMQGroupRequest} {@link CreateRocketMQGroupResponse} */
   CreateRocketMQGroup(data: CreateRocketMQGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQGroupResponse>;
   /** 创建RocketMQ命名空间 {@link CreateRocketMQNamespaceRequest} {@link CreateRocketMQNamespaceResponse} */
   CreateRocketMQNamespace(data: CreateRocketMQNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQNamespaceResponse>;
-  /** 创建RocketMQ角色 {@link CreateRocketMQRoleRequest} {@link CreateRocketMQRoleResponse} */
+  /** 创建 RocketMQ 角色 {@link CreateRocketMQRoleRequest} {@link CreateRocketMQRoleResponse} */
   CreateRocketMQRole(data: CreateRocketMQRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQRoleResponse>;
   /** 创建RocketMQ主题 {@link CreateRocketMQTopicRequest} {@link CreateRocketMQTopicResponse} */
   CreateRocketMQTopic(data: CreateRocketMQTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQTopicResponse>;
@@ -5297,13 +5343,13 @@ declare interface Tdmq {
   DeleteRabbitMQVirtualHost(data: DeleteRabbitMQVirtualHostRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRabbitMQVirtualHostResponse>;
   /** 删除RocketMQ集群 {@link DeleteRocketMQClusterRequest} {@link DeleteRocketMQClusterResponse} */
   DeleteRocketMQCluster(data: DeleteRocketMQClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRocketMQClusterResponse>;
-  /** 批量删除RocketMQ环境角色授权 {@link DeleteRocketMQEnvironmentRolesRequest} {@link DeleteRocketMQEnvironmentRolesResponse} */
+  /** 批量删除 RocketMQ 角色授权 {@link DeleteRocketMQEnvironmentRolesRequest} {@link DeleteRocketMQEnvironmentRolesResponse} */
   DeleteRocketMQEnvironmentRoles(data: DeleteRocketMQEnvironmentRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRocketMQEnvironmentRolesResponse>;
   /** 删除RocketMQ消费组 {@link DeleteRocketMQGroupRequest} {@link DeleteRocketMQGroupResponse} */
   DeleteRocketMQGroup(data: DeleteRocketMQGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRocketMQGroupResponse>;
   /** 删除RocketMQ命名空间 {@link DeleteRocketMQNamespaceRequest} {@link DeleteRocketMQNamespaceResponse} */
   DeleteRocketMQNamespace(data: DeleteRocketMQNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRocketMQNamespaceResponse>;
-  /** 批量删除RocketMQ角色 {@link DeleteRocketMQRolesRequest} {@link DeleteRocketMQRolesResponse} */
+  /** 批量删除 RocketMQ 角色 {@link DeleteRocketMQRolesRequest} {@link DeleteRocketMQRolesResponse} */
   DeleteRocketMQRoles(data: DeleteRocketMQRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRocketMQRolesResponse>;
   /** 删除RocketMQ主题 {@link DeleteRocketMQTopicRequest} {@link DeleteRocketMQTopicResponse} */
   DeleteRocketMQTopic(data: DeleteRocketMQTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRocketMQTopicResponse>;
@@ -5391,7 +5437,7 @@ declare interface Tdmq {
   DescribeRocketMQConsumerConnectionDetail(data: DescribeRocketMQConsumerConnectionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQConsumerConnectionDetailResponse>;
   /** 获取指定消费组下当前客户端的连接情况 {@link DescribeRocketMQConsumerConnectionsRequest} {@link DescribeRocketMQConsumerConnectionsResponse} */
   DescribeRocketMQConsumerConnections(data: DescribeRocketMQConsumerConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQConsumerConnectionsResponse>;
-  /** 获取RocketMQ命名空间角色列表 {@link DescribeRocketMQEnvironmentRolesRequest} {@link DescribeRocketMQEnvironmentRolesResponse} */
+  /** 查询 RocketMQ 角色授权列表 {@link DescribeRocketMQEnvironmentRolesRequest} {@link DescribeRocketMQEnvironmentRolesResponse} */
   DescribeRocketMQEnvironmentRoles(data: DescribeRocketMQEnvironmentRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQEnvironmentRolesResponse>;
   /** 获取RocketMQ消费组列表 {@link DescribeRocketMQGroupsRequest} {@link DescribeRocketMQGroupsResponse} */
   DescribeRocketMQGroups(data: DescribeRocketMQGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQGroupsResponse>;
@@ -5409,7 +5455,7 @@ declare interface Tdmq {
   DescribeRocketMQPublicAccessMonitorData(data: DescribeRocketMQPublicAccessMonitorDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQPublicAccessMonitorDataResponse>;
   /** 查询RocketMQ实例公网接入点信息 {@link DescribeRocketMQPublicAccessPointRequest} {@link DescribeRocketMQPublicAccessPointResponse} */
   DescribeRocketMQPublicAccessPoint(data: DescribeRocketMQPublicAccessPointRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQPublicAccessPointResponse>;
-  /** 获取RocketMQ角色列表 {@link DescribeRocketMQRolesRequest} {@link DescribeRocketMQRolesResponse} */
+  /** 查询 RocketMQ 角色列表 {@link DescribeRocketMQRolesRequest} {@link DescribeRocketMQRolesResponse} */
   DescribeRocketMQRoles(data: DescribeRocketMQRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQRolesResponse>;
   /** 获取RocketMQ平滑迁移任务详情 {@link DescribeRocketMQSmoothMigrationTaskRequest} {@link DescribeRocketMQSmoothMigrationTaskResponse} */
   DescribeRocketMQSmoothMigrationTask(data: DescribeRocketMQSmoothMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQSmoothMigrationTaskResponse>;
@@ -5473,7 +5519,7 @@ declare interface Tdmq {
   ModifyRabbitMQVirtualHost(data: ModifyRabbitMQVirtualHostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRabbitMQVirtualHostResponse>;
   /** 更新RocketMQ集群信息 {@link ModifyRocketMQClusterRequest} {@link ModifyRocketMQClusterResponse} */
   ModifyRocketMQCluster(data: ModifyRocketMQClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQClusterResponse>;
-  /** 修改RocketMQ环境角色授权 {@link ModifyRocketMQEnvironmentRoleRequest} {@link ModifyRocketMQEnvironmentRoleResponse} */
+  /** 修改 RocketMQ 角色授权 {@link ModifyRocketMQEnvironmentRoleRequest} {@link ModifyRocketMQEnvironmentRoleResponse} */
   ModifyRocketMQEnvironmentRole(data: ModifyRocketMQEnvironmentRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQEnvironmentRoleResponse>;
   /** 更新RocketMQ消费组信息 {@link ModifyRocketMQGroupRequest} {@link ModifyRocketMQGroupResponse} */
   ModifyRocketMQGroup(data: ModifyRocketMQGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQGroupResponse>;
@@ -5483,7 +5529,7 @@ declare interface Tdmq {
   ModifyRocketMQInstanceSpec(data: ModifyRocketMQInstanceSpecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQInstanceSpecResponse>;
   /** 更新RocketMQ命名空间 {@link ModifyRocketMQNamespaceRequest} {@link ModifyRocketMQNamespaceResponse} */
   ModifyRocketMQNamespace(data: ModifyRocketMQNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQNamespaceResponse>;
-  /** RocketMQ角色修改 {@link ModifyRocketMQRoleRequest} {@link ModifyRocketMQRoleResponse} */
+  /** 修改 RocketMQ 角色 {@link ModifyRocketMQRoleRequest} {@link ModifyRocketMQRoleResponse} */
   ModifyRocketMQRole(data: ModifyRocketMQRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQRoleResponse>;
   /** 更新RocketMQ主题信息 {@link ModifyRocketMQTopicRequest} {@link ModifyRocketMQTopicResponse} */
   ModifyRocketMQTopic(data: ModifyRocketMQTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRocketMQTopicResponse>;
@@ -5497,7 +5543,7 @@ declare interface Tdmq {
   ReceiveMessage(data: ReceiveMessageRequest, config?: AxiosRequestConfig): AxiosPromise<ReceiveMessageResponse>;
   /** 消息回溯 {@link ResetMsgSubOffsetByTimestampRequest} {@link ResetMsgSubOffsetByTimestampResponse} */
   ResetMsgSubOffsetByTimestamp(data: ResetMsgSubOffsetByTimestampRequest, config?: AxiosRequestConfig): AxiosPromise<ResetMsgSubOffsetByTimestampResponse>;
-  /** 重置RocketMQ消费位点 {@link ResetRocketMQConsumerOffSetRequest} {@link ResetRocketMQConsumerOffSetResponse} */
+  /** 重置 RocketMQ 消费位点 {@link ResetRocketMQConsumerOffSetRequest} {@link ResetRocketMQConsumerOffSetResponse} */
   ResetRocketMQConsumerOffSet(data: ResetRocketMQConsumerOffSetRequest, config?: AxiosRequestConfig): AxiosPromise<ResetRocketMQConsumerOffSetResponse>;
   /** 重发RocketMQ死信消息 {@link RetryRocketMQDlqMessageRequest} {@link RetryRocketMQDlqMessageResponse} */
   RetryRocketMQDlqMessage(data: RetryRocketMQDlqMessageRequest, config?: AxiosRequestConfig): AxiosPromise<RetryRocketMQDlqMessageResponse>;

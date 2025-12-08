@@ -3976,6 +3976,12 @@ declare interface MediaAiAnalysisDescriptionItem {
   Paragraphs?: AiParagraphInfo[] | null;
   /** 摘要思维导图地址 */
   MindMapUrl?: string | null;
+  /** 摘要思维导图路径。 */
+  MindMapPath?: string;
+  /** 视频字幕文件路径。 */
+  SubtitlePath?: string;
+  /** 摘要文件存储位置。 */
+  OutputStorage?: TaskOutputStorage;
 }
 
 /** 智能按帧标签结果信息 */
@@ -6873,7 +6879,7 @@ declare interface CreateAdaptiveDynamicStreamingTemplateRequest {
   Comment?: string;
   /** 是否为纯音频，0表示视频模板，1表示纯音频模板当值为1：1. StreamInfos.N.RemoveVideo=12. StreamInfos.N.RemoveAudio=03. StreamInfos.N.Video.Codec=copy当值为0：1. StreamInfos.N.Video.Codec不能为copy2. StreamInfos.N.Video.Fps不能为null注意：此值只是区分模板类型，任务使用RemoveAudio和RemoveVideo的值 */
   PureAudio?: number;
-  /** 分片类型，可选值： ts-segment：HLS+TS 切片 ts-byterange：HLS+TS byte range mp4-segment：HLS+MP4 切片 mp4-byterange：HLS+MP4 byte range ts-packed-audio：TS+Packed Audio mp4-packed-audio：MP4+Packed Audio 默认值：ts-segment 注：自适应码流的分片格式以此字段为准 */
+  /** 分片类型，可选值： ts-segment：HLS+TS 切片 ts-byterange：HLS+TS byte range mp4-segment：HLS+MP4 切片 mp4-byterange：HLS/DASH+MP4 byte range ts-packed-audio：TS+Packed Audio mp4-packed-audio：MP4+Packed Audio 默认值：ts-segment 注：自适应码流的分片格式以此字段为准。DASH格式下SegmentType只能为mp4-byterange。 */
   SegmentType?: string;
 }
 
@@ -8873,7 +8879,7 @@ declare interface ModifyAdaptiveDynamicStreamingTemplateRequest {
   Comment?: string;
   /** 是否为纯音频，0表示视频模板，1表示纯音频模板当值为1：1. StreamInfos.N.RemoveVideo=12. StreamInfos.N.RemoveAudio=03. StreamInfos.N.Video.Codec=copy当值为0：1. StreamInfos.N.Video.Codec不能为copy2. StreamInfos.N.Video.Fps不能为null注意：此值只是区分模板类型，任务使用RemoveAudio和RemoveVideo的值 */
   PureAudio?: number;
-  /** hls 分片类型，可选值： ts-segment：HLS+TS 切片 ts-byterange：HLS+TS byte range mp4-segment：HLS+MP4 切片 mp4-byterange：HLS+MP4 byte range ts-packed-audio：TS+Packed Audio mp4-packed-audio：MP4+Packed Audio 默认值：ts-segment 注：自适应码流的hls分片格式已此字段为准 */
+  /** 分片类型，可选值： ts-segment：HLS+TS 切片 ts-byterange：HLS+TS byte range mp4-segment：HLS+MP4 切片 mp4-byterange：HLS/DASH+MP4 byte range ts-packed-audio：TS+Packed Audio mp4-packed-audio：MP4+Packed Audio 默认值：ts-segment 注：自适应码流的hls分片格式已此字段为准。DASH格式下SegmentType只能为mp4-byterange。 */
   SegmentType?: string;
 }
 

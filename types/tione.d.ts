@@ -386,6 +386,10 @@ declare interface ExecAction {
   Command?: string[];
 }
 
+/** 暴露端口信息 */
+declare interface ExposePortConfig {
+}
+
 /** 过滤器 */
 declare interface Filter {
   /** 过滤字段名称 */
@@ -1026,6 +1030,8 @@ declare interface NotebookSetItem {
   SubUinName?: string;
   /** AppId */
   AppId?: string | null;
+  /** 容器服务暴露端口配置 */
+  ExposePortConfig?: ExposePortConfig;
 }
 
 /** 用于表示百分比或数量 */
@@ -2265,7 +2271,7 @@ declare interface CreateTrainingModelRequest {
   TrainingJobName?: string;
   /** 模型来源cos目录，以/结尾 */
   TrainingModelCosPath?: CosPathInfo;
-  /** 算法框架 （PYTORCH/TENSORFLOW/DETECTRON2/PMML/MMDETECTION) */
+  /** 算法框架 （PYTORCH/TENSORFLOW/DETECTRON2/PMML/MMDETECTION/ONNX) */
   AlgorithmFramework?: string;
   /** 推理环境 */
   ReasoningEnvironment?: string;
@@ -2293,7 +2299,7 @@ declare interface CreateTrainingModelRequest {
   TrainingJobVersion?: string;
   /** 模型版本类型；枚举值：NORMAL(通用) ACCELERATE(加速)注意: 默认为NORMAL */
   ModelVersionType?: string;
-  /** 模型格式 （PYTORCH/TORCH_SCRIPT/DETECTRON2/SAVED_MODEL/FROZEN_GRAPH/PMML/MMDETECTION/ONNX/HUGGING_FACE） */
+  /** 模型格式 （PYTORCH/TORCH_SCRIPT/DETECTRON2/SAVED_MODEL/FROZEN_GRAPH/PMML/MMDETECTION/ONNX/HUGGING_FACE_BERT/HUGGING_FACE_STABLE_DIFFUSION/HUGGING_FACE_STABLE_DIFFUSION_LORA/WEB_UI_STABLE_DIFFUSION） */
   ModelFormat?: string;
   /** 推理镜像ID */
   ReasoningEnvironmentId?: string;
@@ -2383,7 +2389,7 @@ declare interface DeleteDatasetRequest {
 
 declare interface DeleteDatasetResponse {
   /** 删除的datasetId */
-  DatasetId: string;
+  DatasetId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2719,13 +2725,13 @@ declare interface DescribeModelAccelerateTaskRequest {
 
 declare interface DescribeModelAccelerateTaskResponse {
   /** 模型加速任务详情 */
-  ModelAccelerateTask: ModelAccelerateTask | null;
+  ModelAccelerateTask?: ModelAccelerateTask | null;
   /** 模型加速时长，单位s */
-  ModelAccRuntimeInSecond: number | null;
+  ModelAccRuntimeInSecond?: number | null;
   /** 模型加速任务开始时间 */
-  ModelAccStartTime: string | null;
+  ModelAccStartTime?: string | null;
   /** 模型加速任务结束时间 */
-  ModelAccEndTime: string | null;
+  ModelAccEndTime?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2876,7 +2882,7 @@ declare interface DescribeNotebooksRequest {
 }
 
 declare interface DescribeNotebooksResponse {
-  /** 详情 */
+  /** notebook详情 */
   NotebookSet?: NotebookSetItem[];
   /** 总条数 */
   TotalCount?: number;
@@ -2909,7 +2915,7 @@ declare interface DescribeTrainingModelVersionRequest {
 
 declare interface DescribeTrainingModelVersionResponse {
   /** 模型版本 */
-  TrainingModelVersion: TrainingModelVersionDTO;
+  TrainingModelVersion?: TrainingModelVersionDTO;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3133,9 +3139,9 @@ declare interface StopModelAccelerateTaskRequest {
 
 declare interface StopModelAccelerateTaskResponse {
   /** 模型加速任务ID */
-  ModelAccTaskId: string | null;
+  ModelAccTaskId?: string | null;
   /** 异步任务ID */
-  AsyncTaskId: string | null;
+  AsyncTaskId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

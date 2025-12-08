@@ -418,6 +418,14 @@ declare interface ElectronicAirTransport {
   ElectronicNumber?: string | null;
   /** 全电发票（航空运输电子客票行程单）详细信息 */
   ElectronicAirTransportDetails?: ElectronicAirTransportDetail[] | null;
+  /** 票价 */
+  Fare?: string;
+  /** 燃油附加费 */
+  FuelSurcharge?: string;
+  /** 增值税税额 */
+  TaxAmount?: string;
+  /** 民航发展基金 */
+  DevelopmentFund?: string;
 }
 
 /** 全电发票（航空运输电子客票行程单）详细信息 */
@@ -3579,7 +3587,7 @@ declare interface ExtractDocBasicRequest {
   ItemNames?: string[];
   /** 是否开启全文字段识别 */
   ReturnFullText?: boolean;
-  /** 配置id支持：General -- 通用场景OnlineTaxiItinerary -- 网约车行程单RideHailingDriverLicense -- 网约车驾驶证RideHailingTransportLicense -- 网约车运输证WayBill -- 快递运单AccountOpeningPermit -- 银行开户许可证InvoiceEng -- 国际发票模板Coin --钱币识别模板OnboardingDocuments -- 入职材料识别PropertyOwnershipCertificate -- 房产证识别RealEstateCertificate --不动产权证识别HouseEncumbranceCertificate -- 他权证识别CarInsurance -- 车险保单MultiRealEstateCertificate -- 房产证、不动产证、产权证等材料合一模板 */
+  /** 配置id支持：General -- 通用场景GeneralNoDate -- 无后处理日期格式模版OnlineTaxiItinerary -- 网约车行程单RideHailingDriverLicense -- 网约车驾驶证RideHailingTransportLicense -- 网约车运输证WayBill -- 快递运单AccountOpeningPermit -- 银行开户许可证InvoiceEng -- 国际发票模板Coin --钱币识别模板OnboardingDocuments -- 入职材料识别PropertyOwnershipCertificate -- 房产证识别RealEstateCertificate --不动产权证识别HouseEncumbranceCertificate -- 他权证识别CarInsurance -- 车险保单MultiRealEstateCertificate -- 房产证、不动产证、产权证等材料合一模板 */
   ConfigId?: string;
   /** 是否打开印章识别 */
   EnableSealRecognize?: boolean;
@@ -4778,7 +4786,7 @@ declare interface RecognizeTableAccurateOCRResponse {
   Data?: string;
   /** 图片为PDF时，返回PDF的总页数，默认为0 */
   PdfPageSize?: number | null;
-  /** 图片旋转角度（角度制），文本的水平方向为0°，统一以逆时针方向旋转，逆时针为负，角度范围为-360°至0°。 */
+  /** 图片旋转角度（角度制），文本的水平方向为0°。 */
   Angle?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

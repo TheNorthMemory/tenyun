@@ -2168,7 +2168,7 @@ declare interface ChannelCreatePreparedPersonalEsignRequest {
   /** 电子印章名字，1-50个中文字符注:`同一企业下电子印章名字不能相同` */
   SealName: string;
   /** 电子印章图片base64编码，大小不超过10M（原始图片不超过5M），只支持PNG或JPG图片格式。 */
-  SealImage: string;
+  SealImage?: string;
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator?: UserInfo;
   /** 证件类型，支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)OTHER_CARD_TYPE : 其他注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。` */
@@ -2183,6 +2183,8 @@ declare interface ChannelCreatePreparedPersonalEsignRequest {
   LicenseType?: number;
   /** **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景 **OTHER** : 通用场景 */
   SceneKey?: string;
+  /** 印章图片文件 id取值：填写的FileId通过UploadFiles接口上传文件获取。 */
+  FileId?: string;
 }
 
 declare interface ChannelCreatePreparedPersonalEsignResponse {
@@ -2501,8 +2503,8 @@ declare interface ChannelDescribeFlowComponentsResponse {
 declare interface ChannelDescribeOrganizationSealsRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 指定分页每页返回的数据条数，单页最大支持 100。 */
-  Limit: number;
+  /** 指定分页每页返回的数据条数，单页最大支持 100。默认值为20 */
+  Limit?: number;
   /** 分页查询偏移量，默认为0，最大为20000 */
   Offset?: number;
   /** 查询授权用户信息类型，取值如下： 0：（默认）不返回授权用户信息 1：返回授权用户的信息 */

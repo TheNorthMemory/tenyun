@@ -606,7 +606,7 @@ declare interface Events {
   Size?: number;
   /** 事件类型，slow-慢SQL事件，blocked-阻塞事件，deadlock-死锁事件 */
   EventType?: string;
-  /** 事件记录状态，1-成功，2-失败，3-文件待删除，4-写入中 */
+  /** 事件记录状态，1-成功，4-写入中 */
   Status?: number;
   /** 扩展文件生成开始时间 */
   StartTime?: string;

@@ -1296,7 +1296,7 @@ declare interface OutputRisk {
   RiskName?: string;
   /** 风险描述 */
   RiskDescription?: string;
-  /** 风险等级。等级描述如下： **HIGH** - 高风险 **NORMAL** - 风险 */
+  /** 风险等级别名。等级描述如下： **HIGH** - 高风险 **NORMAL** - 风险 */
   RiskLevel?: string;
   /** 风险建议 */
   RiskAdvice?: string;
@@ -1308,7 +1308,7 @@ declare interface OutputRisk {
   Positions?: PositionInfo[];
   /** 审查依据 */
   RiskBasis?: string;
-  /** 风险等级id */
+  /** 风险等级id。1 为最高风险等级，0 为最低风险等级，从[2,n]数字越大风险等级逐渐降低。 */
   RiskLevelId?: number;
 }
 

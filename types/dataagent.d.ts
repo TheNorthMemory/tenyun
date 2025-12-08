@@ -230,6 +230,22 @@ declare interface DeleteDataAgentSessionResponse {
   RequestId?: string;
 }
 
+declare interface GetKnowledgeBaseFileListRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 默认 1 表示第一页，可以不填 */
+  Page?: number;
+  /** 默认 10 一页展示 10 条，可以不填 */
+  PageSize?: number;
+  /** 知识库id */
+  KnowledgeBaseId?: string;
+}
+
+declare interface GetKnowledgeBaseFileListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetKnowledgeBaseListRequest {
   /** 实例id */
   InstanceId: string;
@@ -369,6 +385,8 @@ declare interface Dataagent {
   DeleteChunk(data: DeleteChunkRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteChunkResponse>;
   /** 删除会话 {@link DeleteDataAgentSessionRequest} {@link DeleteDataAgentSessionResponse} */
   DeleteDataAgentSession(data?: DeleteDataAgentSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataAgentSessionResponse>;
+  /** 获取知识库文件列表 {@link GetKnowledgeBaseFileListRequest} {@link GetKnowledgeBaseFileListResponse} */
+  GetKnowledgeBaseFileList(data: GetKnowledgeBaseFileListRequest, config?: AxiosRequestConfig): AxiosPromise<GetKnowledgeBaseFileListResponse>;
   /** 获取知识库列表 {@link GetKnowledgeBaseListRequest} {@link GetKnowledgeBaseListResponse} */
   GetKnowledgeBaseList(data: GetKnowledgeBaseListRequest, config?: AxiosRequestConfig): AxiosPromise<GetKnowledgeBaseListResponse>;
   /** 获取会话详情 {@link GetSessionDetailsRequest} {@link GetSessionDetailsResponse} */

@@ -312,8 +312,12 @@ declare interface CCN {
   Ipv6Flag?: boolean;
   /** 是否支持路由表聚合策略 */
   MrtbAggregatePolicyFlag?: boolean;
-  /** 是否支持策略值 */
+  /** 是否支持AsPath策略值 */
   MrtbPolicyValueFlag?: boolean;
+  /** 是否支持Community策略值 */
+  RouteTablePolicyValueCommunityFlag?: boolean;
+  /** 是否支持策略路由 */
+  PolicyBasedRoutingFlag?: boolean;
 }
 
 /** 云联网（CCN）关联实例（Instance）对象 */

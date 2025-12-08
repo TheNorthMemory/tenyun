@@ -2578,6 +2578,22 @@ declare interface ModifyPackageAutoRenewResponse {
   RequestId?: string;
 }
 
+declare interface ModifyPackageDomainRequest {
+  /** 操作类型：change: 套餐换域名；unbind: 解绑套餐域名；bind: 套餐绑定域名。 */
+  Operation: string;
+  /** 域名ID。Operation为change时必传，代表更换前的域名。 */
+  DomainId?: number;
+  /** 域名ID。Operation为change或bind时必传，代表更换后或要绑定的域名。 */
+  NewDomainId?: number;
+  /** 套餐资源ID。Operation为bind或unbind时必传，代表将要操作的套餐资源。 */
+  ResourceId?: string;
+}
+
+declare interface ModifyPackageDomainResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyRecordBatchRequest {
   /** 记录ID数组。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId。单次最多修改5000条记录。 */
   RecordIdList: number[];
@@ -3015,6 +3031,8 @@ declare interface Dnspod {
   ModifyLineGroup(data: ModifyLineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLineGroupResponse>;
   /** DNS 解析套餐自动续费设置 {@link ModifyPackageAutoRenewRequest} {@link ModifyPackageAutoRenewResponse} */
   ModifyPackageAutoRenew(data: ModifyPackageAutoRenewRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPackageAutoRenewResponse>;
+  /** 套餐绑定、解绑、更换域名 {@link ModifyPackageDomainRequest} {@link ModifyPackageDomainResponse} */
+  ModifyPackageDomain(data: ModifyPackageDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPackageDomainResponse>;
   /** 修改记录 {@link ModifyRecordRequest} {@link ModifyRecordResponse} */
   ModifyRecord(data: ModifyRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordResponse>;
   /** 批量修改记录 {@link ModifyRecordBatchRequest} {@link ModifyRecordBatchResponse} */

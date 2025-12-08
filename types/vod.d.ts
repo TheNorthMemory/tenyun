@@ -3139,6 +3139,30 @@ declare namespace V20180717 {
     Type?: string;
   }
 
+  /** 使用MPS进行处理后的智能媒体信息 */
+  interface MPSAiMediaInfo {
+    /** MPS处理后的智能媒体信息列表 */
+    AiMediaList?: MPSAiMediaItem[];
+  }
+
+  /** MPS AI媒资任务项 */
+  interface MPSAiMediaItem {
+    /** MPS智能处理任务类型 */
+    TaskType?: string;
+    /** MPS 智能媒资任务输出 */
+    AiMediaTasks?: MPSAiMediaTask[];
+  }
+
+  /** MPS智能任务 */
+  interface MPSAiMediaTask {
+    /** MPS智能任务的模板 ID */
+    Definition?: number;
+    /** MPS智能任务输出文件集合 */
+    OutputFile?: MPSOutputFileInfo[];
+    /** MPS智能任务输出 */
+    OutputText?: string;
+  }
+
   /** 用于描述 MPS 视频处理任务中的返回文件结果。 */
   interface MPSOutputFile {
     /** 文件类型。用于标识 MPS 视频处理任务执行结果中的特定返回文件。取值：AiAnalysis.DeLogo.Video: 智能擦除任务中产生的擦除后视频文件，默认以原文件类型存储；AiAnalysis.DeLogo.OriginSubtitle: 智能擦除任务中基于画面提取的字幕文件；AiAnalysis.DeLogo.TranslateSubtitle: 智能擦除任务中基于画面提取的字幕翻译文件。MediaProcess.Transcode.Video: 音视频增强任务中增强后的音视频文件，默认以转码文件类型存储。 */
@@ -3153,6 +3177,14 @@ declare namespace V20180717 {
     Definition?: string;
     /** 过期时间。当 StorageMode 为 Temporary 时有效，表示 Url 的过期时间，单位为秒。 */
     ExpiredTime?: number;
+  }
+
+  /** MPS输出文件信息 */
+  interface MPSOutputFileInfo {
+    /** MPS输出文件类型 */
+    FileType?: string;
+    /** MPS输出文件的URL */
+    Url?: string;
   }
 
   /** MPS 具体子任务查询结果类型。 */
@@ -3175,6 +3207,8 @@ declare namespace V20180717 {
   interface MPSTaskOutput {
     /** 任务返回结果中的文件类型结果。如智能擦除中，擦除后的视频文件将被存入媒资，并在此字段中给出 FileId；基于画面提取的字幕文件 Url 将在此字段中给出。 */
     OutputFiles?: MPSOutputFile[];
+    /** 任务返回的结果JSON */
+    OutputText?: string;
   }
 
   /** MPS 任务模板详情。 */
@@ -3489,6 +3523,8 @@ declare namespace V20180717 {
     FileId?: string;
     /** 审核信息。 */
     ReviewInfo?: FileReviewInfo | null;
+    /** MPS智能媒资信息 */
+    MPSAiMediaInfo?: MPSAiMediaInfo;
   }
 
   /** 要处理的源视频信息，视频名称、视频自定义 ID。 */

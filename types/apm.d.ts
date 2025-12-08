@@ -150,6 +150,10 @@ declare interface ApmAppConfig {
   DisableMemoryUsed?: number;
   /** 探针熔断CPU阈值 */
   DisableCpuUsed?: number;
+  /** 是否开启SQL参数获取 */
+  DbStatementParametersEnabled?: boolean;
+  /** 慢SQL阈值 */
+  SlowSQLThresholds?: ApmTag[];
 }
 
 /** 应用相关的配置列表项 */
@@ -196,6 +200,10 @@ declare interface ApmApplicationConfigView {
   DisableMemoryUsed?: number;
   /** 探针熔断CPU阈值 */
   DisableCpuUsed?: number;
+  /** 是否开启SQL参数获取 */
+  DbStatementParametersEnabled?: boolean;
+  /** 慢SQL阈值 */
+  SlowSQLThresholds?: ApmTag[];
 }
 
 /** 展示apm业务系统与其他云产品关联关系返回体 */
@@ -594,6 +602,8 @@ declare interface CreateApmPrometheusRuleRequest {
 }
 
 declare interface CreateApmPrometheusRuleResponse {
+  /** 指标匹配规则的ID */
+  RuleId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1095,6 +1105,10 @@ declare interface ModifyApmApplicationConfigRequest {
   DisableMemoryUsed?: number;
   /** 探针熔断CPU阈值 */
   DisableCpuUsed?: number;
+  /** 是否开启SQL参数获取 */
+  DbStatementParametersEnabled?: boolean;
+  /** 慢SQL阈值 */
+  SlowSQLThresholds?: ApmTag[];
 }
 
 declare interface ModifyApmApplicationConfigResponse {
@@ -1103,9 +1117,9 @@ declare interface ModifyApmApplicationConfigResponse {
 }
 
 declare interface ModifyApmAssociationRequest {
-  /** 关联的产品名，当前只支持Prometheus */
+  /** 关联的产品名，当前只支持Prometheus、CKafka */
   ProductName: string;
-  /** 关联关系的状态：// 关联关系状态：1（启用）、2（不启用）、4（已删除） */
+  /** 关联关系的状态：// 关联关系状态：1（启用）、2（不启用） */
   Status: number;
   /** 业务系统ID */
   InstanceId: string;

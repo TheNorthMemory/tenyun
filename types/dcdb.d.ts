@@ -1672,6 +1672,8 @@ declare interface DescribeDCDBInstanceDetailResponse {
   CpuType?: string;
   /** 实例删除保护标签，1: 已开启删除保护，0: 未开启删除保护 */
   ProtectedProperty?: number;
+  /** 流程Id，标志实例当前所处的异步任务 */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

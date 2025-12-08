@@ -2208,6 +2208,44 @@ declare interface RollbackMigratingTopicStageResponse {
   RequestId?: string;
 }
 
+declare interface SendMessageRequest {
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。 */
+  InstanceId: string;
+  /** 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031) 或控制台获得。 */
+  Topic: string;
+  /** 消息内容 */
+  MsgBody: string;
+  /** 消息Key */
+  MsgKey?: string;
+  /** 消息Tag */
+  MsgTag?: string;
+}
+
+declare interface SendMessageResponse {
+  /** 消息ID */
+  MsgId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface VerifyMessageConsumptionRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 主题 */
+  Topic: string;
+  /** 客户端ID */
+  ClientId: string;
+  /** 消息ID */
+  MsgId: string;
+  /** 消费组名称 */
+  ConsumerGroup?: string;
+}
+
+declare interface VerifyMessageConsumptionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Trocket 消息队列 RocketMQ 版} */
 declare interface Trocket {
   (): Versions;
@@ -2351,6 +2389,10 @@ declare interface Trocket {
   ResetConsumerGroupOffset(data: ResetConsumerGroupOffsetRequest, config?: AxiosRequestConfig): AxiosPromise<ResetConsumerGroupOffsetResponse>;
   /** 回滚主题迁移进度至上一阶段 {@link RollbackMigratingTopicStageRequest} {@link RollbackMigratingTopicStageResponse} */
   RollbackMigratingTopicStage(data: RollbackMigratingTopicStageRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackMigratingTopicStageResponse>;
+  /** 发送消息 {@link SendMessageRequest} {@link SendMessageResponse} */
+  SendMessage(data: SendMessageRequest, config?: AxiosRequestConfig): AxiosPromise<SendMessageResponse>;
+  /** 消息消费验证 {@link VerifyMessageConsumptionRequest} {@link VerifyMessageConsumptionResponse} */
+  VerifyMessageConsumption(data: VerifyMessageConsumptionRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyMessageConsumptionResponse>;
 }
 
 export declare type Versions = ["2023-03-08"];
