@@ -4302,10 +4302,10 @@ declare namespace V20180525 {
     ClusterId: string;
     /** 节点池名称 */
     Name: string;
+    /** 安全组ID列表 */
+    SecurityGroupIds: string[];
     /** 子网ID列表 */
     SubnetIds?: string[];
-    /** 安全组ID列表，必选参数 */
-    SecurityGroupIds?: string[];
     /** 虚拟节点label */
     Labels?: Label[];
     /** 虚拟节点taint */

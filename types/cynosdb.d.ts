@@ -902,7 +902,7 @@ declare interface CynosdbInstanceDetail {
   Region?: string;
   /** 可用区 */
   Zone?: string;
-  /** 实例状态creating：创建中running：运行中isolating：隔离中isolated：已隔离activating：解隔离中offlining：下线中offlined：已下线deleting：删除中deleted：已删除 */
+  /** 实例状态creating：创建中running：运行中isolating：隔离中isolated：已隔离activating：恢复中offlining：下线中offlined：已下线 */
   Status?: string;
   /** 实例状态中文描述 */
   StatusDesc?: string;

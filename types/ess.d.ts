@@ -2195,6 +2195,8 @@ declare interface CreateBatchQuickSignUrlRequest {
   CanBatchReject?: boolean;
   /** 预设的动态签署方的补充信息，仅匹配对应信息的签署方才能领取合同。暂时仅对个人参与方生效。 */
   PresetApproverInfo?: PresetApproverInfo;
+  /** 是否允许此链接中签署方批量确认已读文件。 false (默认): 不允许批量确认已读文件。 true : 允许批量确认已读文件。注：`1. 此功能为白名单功能，使用前请联系对应客户经理进行开通。2. 若批量签署的合同中第一份待签署合同所选择的印章或者签名无法完全覆盖后续合同要求，或者当前签署人没有指定印章使用权限，则无法使用此功能，会自动退化为逐份确认。` */
+  CanSkipReadFlow?: boolean;
 }
 
 declare interface CreateBatchQuickSignUrlResponse {
@@ -2447,6 +2449,8 @@ declare interface CreateEmployeeQualificationSealQrCodeRequest {
   Agent?: Agent;
   /** 提示信息，扫码后此信息会展示给扫描用户，用来提示用户授权操作的目的，会在授权界面下面的位置展示。![image](https://qcloudimg.tencent-cloud.cn/raw/8436ffd78c20605e6b133ff4bc4d2ac7.png) */
   HintText?: string;
+  /** 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 2000长度。在执业章授权完成后的回调场景，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的回调通知模块。示例值:QmFzZTYOIEJhc2U2NCA= */
+  UserData?: string;
 }
 
 declare interface CreateEmployeeQualificationSealQrCodeResponse {

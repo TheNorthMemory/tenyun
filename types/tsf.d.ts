@@ -4094,7 +4094,7 @@ declare interface CreateClusterRequest {
   ProgramId?: string;
   /** api地址 */
   KuberneteApiServer?: string;
-  /** K : kubeconfig, S : service account */
+  /** K : kubeconfig, S : service account (公有云不支持通过kubeconfig和service account的方式创建集群) */
   KuberneteNativeType?: string;
   /** Kubernetes 原生 Secret 资源对象 */
   KuberneteNativeSecret?: string;

@@ -5119,6 +5119,74 @@ declare namespace V20210820 {
     Classification: string;
   }
 
+  /** 资产维度信息结构定义 */
+  interface AssetDim {
+    /** 文件夹 ID */
+    FolderId?: number | null;
+    /** 维度编码 */
+    DimCode?: string | null;
+    /** 维度名称 */
+    DimName?: string | null;
+    /** 维度描述 */
+    Description?: string | null;
+    /** 维度负责人UserId */
+    OwnerAccount?: number | null;
+    /** 维度负责人名称 */
+    Owner?: string | null;
+    /** 变更人ID */
+    ModifyUserId?: number | null;
+    /** 维度最近修改人名称 */
+    ModifyUser?: string | null;
+    /** 修改时间 */
+    ModifyTime?: string | null;
+    /** 创建时间 */
+    CreateTime?: string | null;
+    /** 维度录入方式， 取值：manual-手动录入；dict-关联字典表； */
+    DimType?: string | null;
+    /** 枚举值数量 */
+    ValuePairCount?: number | null;
+    /** 关联指标数量 */
+    IndicatorPairCount?: number | null;
+    /** 关联字段数量 */
+    TableColumnCount?: number | null;
+    /** 维度 ID */
+    DimId?: number | null;
+    /** 维度关联表字段 */
+    DimTableLink?: DimTableLink | null;
+    /** 枚举值列表 */
+    ValuePairs?: Pair[] | null;
+    /** 维度关联字段 */
+    TableColumns?: AssetDimTableColumn[] | null;
+    /** 关联指标列表 */
+    SourceIndicatorIds?: IndicatorBaseSimpleInfo[] | null;
+    /** 权限 */
+    DimPermission?: PermissionStatus | null;
+    /** 项目id */
+    ProjectId?: string;
+    /** 项目名称 */
+    ProjectName?: string;
+  }
+
+  /** 资产维度关联数据表字段结构定义 */
+  interface AssetDimTableColumn {
+    /** 表字段名称 */
+    ColumnName?: string | null;
+    /** 表字段中文名称 */
+    ColumnNameCn?: string | null;
+    /** 表字段类型 */
+    ColumnType?: string | null;
+    /** 表字段描述 */
+    ColumnDescription?: string | null;
+    /** 表名称 */
+    TableName?: string | null;
+    /** 表GUID */
+    TableGuid?: string | null;
+    /** 表归属的数据库名称 */
+    DatabaseName?: string | null;
+    /** 表归属的Schema名称 */
+    SchemaName?: string | null;
+  }
+
   /** 操作资源DTO */
   interface AsyncResourceVO {
     /** 处理Id */
@@ -5683,6 +5751,14 @@ declare namespace V20210820 {
     InfluxCategory?: string | null;
     /** 字段使用说明 */
     Specification?: string | null;
+    /** 目录名称 */
+    CategoryName?: string | null;
+    /** 源类型 */
+    OriginType?: string | null;
+    /** 列绑定的指标信息 */
+    IndicatorBase?: IndicatorBaseSimpleInfo | null;
+    /** 列绑定的维度信息 */
+    AssetDim?: AssetDim | null;
   }
 
   /** 字段值变量 */
@@ -5717,6 +5793,8 @@ declare namespace V20210820 {
   interface CommonIdOpsDto {
     /** 返回补录计划名称_ok */
     Id?: string | null;
+    /** 补录计划Id */
+    MakeId?: string | null;
   }
 
   /** 质量检查对比结果 */
@@ -5923,6 +6001,8 @@ declare namespace V20210820 {
     EnvDataSourceId?: string | null;
     /** 配置信息 */
     BizParams?: string | null;
+    /** 是否支持tccatalog */
+    TcCatalogOpen?: boolean;
   }
 
   /** 数据源对象 */
@@ -6011,6 +6091,8 @@ declare namespace V20210820 {
     ForbidProbe?: boolean;
     /** 数据源类型 */
     DatasourceType?: string | null;
+    /** 是否开通tccatalog,默认没有开启 */
+    TcCatalogOpen?: boolean;
   }
 
   /** 查询数据源分页列表 */
@@ -6387,6 +6469,18 @@ declare namespace V20210820 {
     Content?: Content | null;
     /** 诊断结果相关信息列表 */
     Table?: Table | null;
+  }
+
+  /** 维度关联单个表字段 */
+  interface DimTableLink {
+    /** 维度主键KEY对应的表列 */
+    Key: string | null;
+    /** 维度值对应的表列 */
+    Value: string | null;
+    /** 表 GUID */
+    TableGuid: string | null;
+    /** 表名称 */
+    TableName?: string | null;
   }
 
   /** 维度统计业务视图 */
@@ -7223,6 +7317,28 @@ declare namespace V20210820 {
     DatasourceEnv?: string | null;
   }
 
+  /** 指标列表简单结构 */
+  interface IndicatorBaseSimpleInfo {
+    /** ID */
+    Id?: number;
+    /** 名称 */
+    Name?: string | null;
+    /** 单位 */
+    MeasureUnit?: number | null;
+    /** 状态 */
+    Status?: number | null;
+    /** 编码 */
+    IndicatorCode?: string | null;
+    /** 业务负责人名称 */
+    BizOwnerName?: string | null;
+    /** 技术服务站名称 */
+    TechOwnerName?: string | null;
+    /** 业务口径 */
+    BizCaliber?: string | null;
+    /** 指标类型（1-原子指标 2-衍生指标 3-复合指标） */
+    IndicatorType?: number | null;
+  }
+
   /** 实例检索条件 */
   interface InstanceCondition {
     /** 执行类型 */
@@ -7697,6 +7813,8 @@ declare namespace V20210820 {
     InstanceCycleType?: string;
     /** 实例执行计划描述 */
     InstanceSchedulerDesc?: string;
+    /** 当前用户对该实例的权限列表 */
+    Privileges?: string[];
   }
 
   /** 任务运行历史分页记录 */
@@ -8837,6 +8955,16 @@ declare namespace V20210820 {
     Params?: string | null;
   }
 
+  /** 读写权限状态 */
+  interface PermissionStatus {
+    /** 写权限 */
+    CanWrite?: boolean | null;
+    /** 写权限 */
+    CanDelete?: boolean | null;
+    /** 写权限 */
+    CanRead?: boolean | null;
+  }
+
   /** 数据质量生产调度任务业务实体 */
   interface ProdSchedulerTask {
     /** 生产调度任务工作流ID */
@@ -8851,6 +8979,10 @@ declare namespace V20210820 {
     TaskType?: string | null;
     /** 时区 */
     ScheduleTimeZone?: string | null;
+    /** 负责人id */
+    InChargeIdList?: string[] | null;
+    /** 负责人name */
+    InChargeNameList?: string[] | null;
   }
 
   /** 项目信息 */
@@ -10229,6 +10361,8 @@ declare namespace V20210820 {
     ScheduleDesc?: string | null;
     /** 任务类型描述 */
     TaskTypeDesc?: string | null;
+    /** 当前用户对该资源的权限列表CAN_MANAGE 有修改操作权限NO_PERMISSION 无权限 */
+    Privileges?: string[];
   }
 
   /** 角色对象 */
@@ -10767,18 +10901,26 @@ declare namespace V20210820 {
     TableNumber: number | null;
   }
 
-  /** 基于表的标签统计信息 */
+  /** 基于资产的标签统计信息 */
   interface TagVoteSum {
     /** 标签id */
-    TagId?: number;
+    TagId: number;
+    /** 标签名 */
+    TagName: string;
     /** 该表该标签投票次数 */
     VoteSum?: number;
     /** 当前用户对这张表是否加了该标签 true 已添加 false 未添加 */
     Status?: boolean;
-    /** 标签名 */
-    TagName?: string;
     /** 标签描述 */
     TagDesc?: string | null;
+    /** 标签值Id */
+    TagValueId?: number | null;
+    /** 标签值 */
+    TagValue?: string | null;
+    /** 标签是否已删除 */
+    TagIsDeleted?: boolean | null;
+    /** 标签值是否已删除 */
+    TagValueIsDeleted?: boolean | null;
   }
 
   /** 任务告警信息 */
@@ -11597,6 +11739,12 @@ declare namespace V20210820 {
     AllowRedoType?: string;
     /** 负责人Id */
     OwnerId?: string | null;
+    /** 当前用户对该任务的权限列表， 当前支持CAN_MANAGE : 有权限管理操作 */
+    Privileges?: string[];
+    /** bundle客户端唯一id */
+    BundleId?: string | null;
+    /** bundle客户端信息 */
+    BundleInfo?: string | null;
   }
 
   /** 任务执行脚本 */
@@ -12293,6 +12441,10 @@ declare namespace V20210820 {
     ModifyUser?: string | null;
     /** 工作流类型，周期cycle，手动manual */
     WorkflowType?: string | null;
+    /** bundle客户端绑定唯一id */
+    BundleId?: string;
+    /** bundle客户端扩展信息，json格式 */
+    BundleInfo?: string;
   }
 
   /** 用户生产工作流列表分页 */
@@ -15299,6 +15451,10 @@ declare namespace V20210820 {
     ScheduleTimeZone?: string;
     /** 根据任务优先级筛选 */
     RunPriorityList?: number[];
+    /** 是否包含手动工作流 */
+    IncludeManualTask?: string;
+    /** 是否检查权限 */
+    CheckPrivilege?: boolean;
   }
 
   interface DescribeOperateOpsTasksResponse {
@@ -15433,6 +15589,8 @@ declare namespace V20210820 {
     KeyWord?: string;
     /** **时区** timeZone, 默认UTC+8 */
     ScheduleTimeZone?: string;
+    /** 是否过滤无权限的工作流true: 过滤无权限的仅返回有权限的工作流列表(默认)false： 返回所有的工作流列表 */
+    CheckPrivilege?: boolean;
   }
 
   interface DescribeOpsWorkflowsResponse {
@@ -18535,9 +18693,9 @@ declare namespace V20210820 {
     TimeUnit: string;
     /** 事件所属人 */
     Owner: string;
-    /** 必填，事件类型，默认值：TIME_SERIES */
+    /** 事件类型，不填会使用默认值 TIME_SERIES 填充 */
     EventType?: string;
-    /** 必填，对应day： yyyyMMdd，对应HOUR：yyyyMMddHH，对应MIN：yyyyMMddHHmm，对应SECOND：yyyyMMddHHmmss，默认值：yyyyMMdd */
+    /** 对应day： yyyyMMdd，对应HOUR：yyyyMMddHH，对应MIN：yyyyMMddHHmm，对应SECOND：yyyyMMddHHmmss，默认值：yyyyMMdd */
     DimensionFormat?: string;
     /** 存活时间 */
     TimeToLive?: number;

@@ -1717,6 +1717,214 @@ declare namespace V20180717 {
     Tags?: string[];
   }
 
+  /** AIGC 生图任务的输出媒体文件配置。 */
+  interface AigcImageOutputConfig {
+    /** 存储模式。取值有： Permanent：永久存储，生成的图片文件将存储到云点播，可在事件通知中获取到 FileId； Temporary：临时存储，生成的图片文件不会存储到云点播，可在事件通知中获取到临时访问的 URL；默认值：Temporary */
+    StorageMode?: string;
+    /** 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。 */
+    MediaName?: string;
+    /** 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。默认值：0，表示其他分类。 */
+    ClassId?: number;
+    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+    ExpireTime?: string;
+    /** 生成图片的分辨率。可选值为 720P、1080P、2K、4K、1024x1024、2048x2048、2304x1728、2496x1664、2560x1440、3024x1296、4096x4096、4694x3520、4992x3328、5404x3040、6198x2656，其中使用模型 Jimeng 时，推荐通过 Prompt 指定图片分辨率和宽高比。 */
+    Resolution?: string;
+    /** 指定所生成图片的宽高比。当 ModelName 是 GEM，可选值是 1:1、3:2、2:3、3:4、4:3、4:5、5:4、9:16、16:9 和 21:9；当 ModelName 是 Qwen、Jimeng，则暂不支持，其中 Jimeng 会结合 Prompt意图、参考图片尺寸，由模型智能判断输出图片的宽高比。 */
+    AspectRatio?: string;
+    /** 是否允许人物或人脸生成。取值有： AllowAdult：允许生成成人； Disallowed：禁止在图片中包含人物或人脸； */
+    PersonGeneration?: string;
+    /** 是否开启输入内容的合规性检查。取值有： Enabled：开启； Disabled：关闭； */
+    InputComplianceCheck?: string;
+    /** 是否开启输出内容的合规性检查。取值有： Enabled：开启； Disabled：关闭； */
+    OutputComplianceCheck?: string;
+  }
+
+  /** AIGC 生图任务信息 */
+  interface AigcImageTask {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 任务状态，取值：PROCESSING：处理中；FINISH：已完成。 */
+    Status?: string;
+    /** 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。 */
+    ErrCode?: number;
+    /** 错误信息。 */
+    Message?: string;
+    /** 任务进度，取值范围 [0-100] 。 */
+    Progress?: number;
+    /** AIGC 生图任务的输入信息。 */
+    Input?: AigcImageTaskInput;
+    /** AIGC 生图任务的输出信息。 */
+    Output?: AigcImageTaskOutput;
+    /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+    /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+  }
+
+  /** AIGC 生图任务的输入。 */
+  interface AigcImageTaskInput {
+    /** 模型名称。 */
+    ModelName?: string;
+    /** 模型版本。 */
+    ModelVersion?: string;
+    /** AIGC生图任务输入文件信息。 */
+    FileInfos?: AigcImageTaskInputFileInfo[];
+    /** 生成图片的提示词。最大支持1000字符，当 FileInfos 为空时，此参数必填。 */
+    Prompt?: string;
+    /** 要阻止模型生成图片的提示词。最大支持1000字符。 */
+    NegativePrompt?: string;
+    /** 是否自动优化提示词。开启时将自动优化传入的Prompt，以提升生成质量。取值有： Enabled：开启； Disabled：关闭； */
+    EnhancePrompt?: string;
+    /** 生成模式。取值有： Standard：标准模式； Professional：高品质模式； */
+    GenerationMode?: string;
+    /** AIGC 生图输出结果文件输出。 */
+    OutputConfig?: AigcImageOutputConfig;
+  }
+
+  /** AIGC生图任务输入文件信息 */
+  interface AigcImageTaskInputFileInfo {
+    /** 输入的视频文件类型。取值有： File：点播媒体文件； Url：可访问的 URL； */
+    Type?: string;
+    /** 图片文件的媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。当 Type 取值为 File 时，本参数有效。说明：1. 推荐使用小于7M的图片；2. 图片格式的取值为：jpeg，jpg, png, webp。 */
+    FileId?: string;
+    /** 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。说明：1. 推荐使用小于7M的图片；2. 图片格式的取值为：jpeg，jpg, png, webp。 */
+    Url?: string;
+  }
+
+  /** AIGC 生图任务的输出。 */
+  interface AigcImageTaskOutput {
+    /** AIGC 生图任务的输出文件信息。 */
+    FileInfos?: AigcImageTaskOutputFileInfo[];
+  }
+
+  /** AIGC 生图任务的输出文件信息。 */
+  interface AigcImageTaskOutputFileInfo {
+    /** 存储模式。取值有： Permanent：永久存储； Temporary：临时存储； */
+    StorageMode?: string;
+    /** 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。当 StorageMode 为 Permanent 时有效。 */
+    MediaName?: string;
+    /** 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。当 StorageMode 为 Permanent 时有效。 */
+    ClassId?: number;
+    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+    ExpireTime?: string;
+    /** 文件类型，例如 mp4、flv 等。 */
+    FileType?: string;
+    /** 媒体文件播放地址。 */
+    FileUrl?: string;
+    /** 媒体文件 ID。当 StorageMode 为 Permanent 时有效。 */
+    FileId?: string;
+    /** 输出视频的元信息。当 StorageMode 为 Permanent 时有效。 */
+    MetaData?: MediaMetaData;
+  }
+
+  /** AIGC 生视频任务的输出媒体文件配置。 */
+  interface AigcVideoOutputConfig {
+    /** 存储模式。取值有： Permanent：永久存储，生成的视频文件将存储到云点播，可在事件通知中获取到 FileId； Temporary：临时存储，生成的视频文件不会存储到云点播，可在事件通知中获取到临时访问的 URL；默认值：Temporary */
+    StorageMode?: string;
+    /** 输出媒体文件名，最长 64 个字符。缺省由系统指定生成文件名。 */
+    MediaName?: string;
+    /** 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。默认值：0，表示其他分类。 */
+    ClassId?: number;
+    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+    ExpireTime?: string;
+    /** 生成视频的时长，单位：秒。当 ModelName 是 Kling，可选值为 5、10，默认为 5；当 ModelName 是 Jimeng，可选值为 5、10，默认为 5；当 ModelName 是 Hailuo，可选值为 6、10，默认为 6；当 ModelName 是 Vidu，可指定1-10；当 ModelName 是 GV，可选值为 8，默认为 8；当 ModelName 是 OS，可选值为 4、8、12，默认为 8； */
+    Duration?: number;
+    /** 生成视频的分辨率。当 ModelName 是 Kling，可选值为 720P、1080P，默认为 720P；当 ModelName 是 Jimeng，可选值为 768P、1080P，默认为 768P；当 ModelName 是 Hailuo，可选值为 1080P；当 ModelName 是 Vidu，可选值为 720P、1080P，默认为 720P；当 ModelName 是 GV，可选值为 720P、1080P，默认为 720P；当 ModelName 是 OS，可选值为 720P；说明：除模型可支持的分辨率外，还支持 2K、4K分辨率。 */
+    Resolution?: string;
+    /** 指定所生成视频的宽高比。当 ModelName 是 Kling，当文生视频时，则可选值为 16:9、9:16、 1:1，默认为16:9；当 ModelName 是 Jimeng，当文生视频时，则可选值为 16:9、4:3、1:1、3:4、9:16、21:9当 ModelName 是 Vidu，当文生视频时和使用参考图片生成时，则可选值为 16:9、9:16、4:3、3:4、1:1，其中仅版本q2支持4:3、3:4当 ModelName 是 GV，则可选值为 16:9、9:16，默认为 16:9；当 ModelName 是 OS，当文生视频时，则可选值为 16:9、9:16，默认为 16:9；当 ModelName 是 Hailuo，则暂不支持。 */
+    AspectRatio?: string;
+    /** 是否生成音频。支持的模型包括 GV、OS。取值有： Enabled：开启； Disabled：关闭；默认值：Enabled */
+    AudioGeneration?: string;
+    /** 是否允许人物或人脸生成。取值有： AllowAdult：允许生成成人； Disallowed：禁止在图片中包含人物或人脸； */
+    PersonGeneration?: string;
+    /** 是否开启输入内容的合规性检查。取值有： Enabled：开启； Disabled：关闭； */
+    InputComplianceCheck?: string;
+    /** 是否开启输出内容的合规性检查。取值有： Enabled：开启； Disabled：关闭； */
+    OutputComplianceCheck?: string;
+    /** 是否启用视频增强。取值有： Enabled：开启； Disabled：关闭； 说明：1. 对于选择的分辨率超过模型可生成分辨率时，默认会启用增强。2. 对于模型可以直出的分辨率，也可以主动选择模型直出低分辨率，使用增强获得指定分辨率。 */
+    EnhanceSwitch?: string;
+  }
+
+  /** AIGC 生视频任务信息 */
+  interface AigcVideoTask {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 任务状态，取值：PROCESSING：处理中；FINISH：已完成。 */
+    Status?: string;
+    /** 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。 */
+    ErrCode?: number;
+    /** 错误信息。 */
+    Message?: string;
+    /** 任务进度，取值范围 [0-100] 。 */
+    Progress?: number;
+    /** AIGC 生视频任务的输入信息。 */
+    Input?: AigcVideoTaskInput;
+    /** AIGC 生视频任务的输出信息。 */
+    Output?: AigcVideoTaskOutput;
+    /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+    /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+  }
+
+  /** AIGC 生视频任务的输入。 */
+  interface AigcVideoTaskInput {
+    /** 模型名称。 */
+    ModelName?: string;
+    /** 模型版本。 */
+    ModelVersion?: string;
+    /** AIGC生图任务输入文件信息。 */
+    FileInfos?: AigcVideoTaskInputFileInfo[];
+    /** 用于作为尾帧画面来生成视频的媒体文件 ID。该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。 */
+    LastFrameFileId?: string;
+    /** 生成视频的提示词。最大支持1000字符，当 FileInfos 为空时，此参数必填。 */
+    Prompt?: string;
+    /** 要阻止模型生成视频的提示词。最大支持1000字符。 */
+    NegativePrompt?: string;
+    /** 是否自动优化提示词。开启时将自动优化传入的Prompt，以提升生成质量。取值有： Enabled：开启； Disabled：关闭； */
+    EnhancePrompt?: string;
+    /** 生成模式。取值有： Standard：标准模式； Professional：高品质模式； */
+    GenerationMode?: string;
+    /** AIGC 生图输出结果文件输出。 */
+    OutputConfig?: AigcVideoOutputConfig;
+  }
+
+  /** AIGC 生视频任务输入的图片文件信息。 */
+  interface AigcVideoTaskInputFileInfo {
+    /** 输入的视频文件类型。取值有： File：点播媒体文件； Url：可访问的 URL； */
+    Type?: string;
+    /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。当 Type 取值为 File 时，本参数有效。说明：1. 推荐使用小于10M的图片；2. 图片格式的取值为：jpeg，jpg, png。 */
+    FileId?: string;
+    /** 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。说明：1. 推荐使用小于10M的图片；2. 图片格式的取值为：jpeg，jpg, png。 */
+    Url?: string;
+  }
+
+  /** AIGC 生视频任务的输出信息。 */
+  interface AigcVideoTaskOutput {
+    /** AIGC 生视频任务的输出文件信息。 */
+    FileInfos?: AigcVideoTaskOutputFileInfo[];
+  }
+
+  /** AIGC 生视频任务的输出文件信息。 */
+  interface AigcVideoTaskOutputFileInfo {
+    /** 存储模式。取值有： Permanent：永久存储； Temporary：临时存储；默认值：Temporary */
+    StorageMode?: string;
+    /** 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。当 StorageMode 为 Permanent 时有效。 */
+    MediaName?: string;
+    /** 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。当 StorageMode 为 Permanent 时有效。 */
+    ClassId?: number;
+    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+    ExpireTime?: string;
+    /** 文件类型，例如 mp4、flv 等。 */
+    FileType?: string;
+    /** 媒体文件播放地址。 */
+    FileUrl?: string;
+    /** 媒体文件 ID。当 StorageMode 为 Permanent 时有效。 */
+    FileId?: string;
+    /** 输出视频的元信息。当 StorageMode 为 Permanent 时有效。 */
+    MetaData?: MediaMetaData;
+  }
+
   /** 转动图任务类型 */
   interface AnimatedGraphicTaskInput {
     /** 视频转动图模板 ID */
@@ -2577,7 +2785,7 @@ declare namespace V20180717 {
   interface EventContent {
     /** 事件句柄，调用方必须调用 ConfirmEvents 来确认消息已经收到，确认有效时间 30 秒。失效后，事件可重新被获取。 */
     EventHandle?: string;
-    /** 支持事件类型：NewFileUpload：视频上传完成；ProcedureStateChanged：任务流状态变更；FileDeleted：视频删除完成；RestoreMediaComplete：视频取回完成；PullComplete：视频转拉完成；EditMediaComplete：视频编辑完成；SplitMediaComplete：视频拆分完成；ComposeMediaComplete：制作媒体文件完成；WechatMiniProgramPublishComplete：微信小程序发布完成。RemoveWatermark：智能去除水印完成。RebuildMediaComplete：音画质重生完成事件（不推荐使用）。ReviewAudioVideoComplete：音视频审核完成；ExtractTraceWatermarkComplete：提取溯源水印完成；ExtractCopyRightWatermarkComplete：提取版权水印完成；DescribeFileAttributesComplete：获取文件属性完成；QualityInspectComplete：音画质检测完成；QualityEnhanceComplete：音画质重生任务完成；PersistenceComplete：剪辑固化完成；ComplexAdaptiveDynamicStreamingComplete：复杂自适应码流任务完成。ProcessMediaByMPSComplete：MPS视频处理完成。AigcImageComplete：AIGC 生图任务完成。AigcVideoComplete：AIGC 生视频任务完成。兼容 2017 版的事件类型：TranscodeComplete：视频转码完成；ConcatComplete：视频拼接完成；ClipComplete：视频剪辑完成；CreateImageSpriteComplete：视频截取雪碧图完成；CreateSnapshotByTimeOffsetComplete：视频按时间点截图完成。 */
+    /** 支持事件类型：NewFileUpload：视频上传完成；ProcedureStateChanged：任务流状态变更；FileDeleted：视频删除完成；RestoreMediaComplete：视频取回完成；PullComplete：视频转拉完成；EditMediaComplete：视频编辑完成；SplitMediaComplete：视频拆分完成；ComposeMediaComplete：制作媒体文件完成；WechatMiniProgramPublishComplete：微信小程序发布完成。RemoveWatermark：智能去除水印完成。RebuildMediaComplete：音画质重生完成事件（不推荐使用）。ReviewAudioVideoComplete：音视频审核完成；ExtractTraceWatermarkComplete：提取溯源水印完成；ExtractCopyRightWatermarkComplete：提取版权水印完成；DescribeFileAttributesComplete：获取文件属性完成；QualityInspectComplete：音画质检测完成；QualityEnhanceComplete：音画质重生任务完成；PersistenceComplete：剪辑固化完成；ComplexAdaptiveDynamicStreamingComplete：复杂自适应码流任务完成。ProcessMediaByMPSComplete：MPS视频处理完成。AigcImageTaskComplete：AIGC 生图任务完成。AigcVideoTaskComplete：AIGC 生视频任务完成。兼容 2017 版的事件类型：TranscodeComplete：视频转码完成；ConcatComplete：视频拼接完成；ClipComplete：视频剪辑完成；CreateImageSpriteComplete：视频截取雪碧图完成；CreateSnapshotByTimeOffsetComplete：视频按时间点截图完成。 */
     EventType?: string;
     /** 视频上传完成事件，当事件类型为 NewFileUpload 时有效。 */
     FileUploadEvent?: FileUploadTask | null;
@@ -2635,6 +2843,10 @@ declare namespace V20180717 {
     ComplexAdaptiveDynamicStreamingCompleteEvent?: ComplexAdaptiveDynamicStreamingTask | null;
     /** MPS 视频处理任务信息，仅当 EventType 为 ProcessMediaByMPSComplete 时有效。 */
     ProcessMediaByMPSCompleteEvent?: ProcessMediaByMPS;
+    /** AIGC 生图任务信息，仅当 EventType 为 AigcImageTaskComplete 时有效。 */
+    AigcImageCompleteEvent?: AigcImageTask;
+    /** AIGC 生视频任务信息，仅当 EventType 为 AigcVideoTaskComplete 时有效。 */
+    AigcVideoCompleteEvent?: AigcVideoTask;
   }
 
   /** 提取版权水印任务。 */
@@ -6583,6 +6795,76 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface CreateAigcImageTaskRequest {
+    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId: number;
+    /** 模型名称。取值：GEM：Gemini；Jimeng：即梦；Qwen：千问。 */
+    ModelName: string;
+    /** 模型版本。取值：当 ModelName 是 GEM，可选值为 2.5、3.0；当 ModelName 是 Jimeng，可选值为 4.0；当 ModelName 是 Qwen，可选值为 0925； */
+    ModelVersion: string;
+    /** AIGC 生图任务的输入图片的文件信息。默认只支持指定1个，使用模型 GEM 时最多指定3个。 */
+    FileInfos?: AigcImageTaskInputFileInfo[];
+    /** 生成图片的提示词。最大支持1000字符，当 FileInfos 为空时，此参数必填。 */
+    Prompt?: string;
+    /** 要阻止模型生成图片的提示词。最大支持500个字符。 */
+    NegativePrompt?: string;
+    /** 是否自动优化提示词。开启时将自动优化传入的 Prompt，以提升生成质量。取值有： Enabled：开启； Disabled：关闭； */
+    EnhancePrompt?: string;
+    /** 生图任务的输出媒体文件配置。 */
+    OutputConfig?: AigcImageOutputConfig;
+    /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+    /** 来源上下文，用于透传用户请求信息，音画质重生完成回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+    /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
+    TasksPriority?: number;
+    /** 保留字段，特殊用途时使用。 */
+    ExtInfo?: string;
+  }
+
+  interface CreateAigcImageTaskResponse {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface CreateAigcVideoTaskRequest {
+    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId: number;
+    /** 模型名称。取值：Hailuo：海螺；Kling：可灵； Jimeng：即梦；Vidu；GV：Google Veo；OS：OpenAI Sora。 */
+    ModelName: string;
+    /** 模型版本。取值：当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5；当 ModelName 是 Jimeng，可选值为 3.0pro；当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo；当 ModelName 是 GV，可选值为 3.1；当 ModelName 是 OS，可选值为 2.0； */
+    ModelVersion: string;
+    /** AIGC 生视频任务的输入图片的文件信息。说明1. 当 ModelName 是 GV 时，最大长度为 3；其他情况下最大长度为1。2. 当 ModelName 是 GV 时，并且长度大于1时，则不能再指定 LastFrameFileId 参数。 */
+    FileInfos?: AigcVideoTaskInputFileInfo[];
+    /** 用于作为尾帧画面来生成视频的媒体文件 ID。该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。说明：1. 只支持模型 GV 、Kling、Vidu，其他模型暂不支持。当 ModelName 为 GV 时，如果指定该参数，则需同时指定 FileInfos 作为待生成视频的首帧。当 ModelName 为 Kling 、ModelVersion 为 2.1 并且指定输出分辨率 Resolution 为 1080P 时，才能指定该参数。当 ModelName 为 Vidu、ModelVersion 为 q2-pro、q2-turbo 时，才能指定该参数。2. 图片大小需小于5M。3. 图片格式的取值为：jpeg，jpg, png, webp。 */
+    LastFrameFileId?: string;
+    /** 生成图片的提示词。最大支持2000个字符，当 FileInfos 为空时，此参数必填。 */
+    Prompt?: string;
+    /** 要阻止模型生成图片的提示词。最大支持500个字符。 */
+    NegativePrompt?: string;
+    /** 是否自动优化提示词。开启时将自动优化传入的 Prompt，以提升生成质量。取值有： Enabled：开启； Disabled：关闭； */
+    EnhancePrompt?: string;
+    /** 生视频任务的输出媒体文件配置。 */
+    OutputConfig?: AigcVideoOutputConfig;
+    /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+    /** 来源上下文，用于透传用户请求信息，音画质重生完成回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+    /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
+    TasksPriority?: number;
+    /** 保留字段，特殊用途时使用。 */
+    ExtInfo?: string;
+  }
+
+  interface CreateAigcVideoTaskResponse {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface CreateAnimatedGraphicsTemplateRequest {
     /** 帧率，取值范围：[1, 30]，单位：Hz。 */
     Fps: number;
@@ -8591,6 +8873,10 @@ declare namespace V20180717 {
     ComplexAdaptiveDynamicStreamingTask?: ComplexAdaptiveDynamicStreamingTask | null;
     /** MPS 视频处理任务信息，仅当 TaskType 为 ProcessMediaByMPS，该字段有值。 */
     ProcessMediaByMPSTask?: ProcessMediaByMPS;
+    /** AIGC 生图任务信息，仅当 TaskType 为 AigcImageTask，该字段有值。 */
+    AigcImageTask?: AigcImageTask;
+    /** AIGC 生视频任务信息，仅当 TaskType 为 AigcVideoTask，该字段有值。 */
+    AigcVideoTask?: AigcVideoTask;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -10411,6 +10697,10 @@ declare interface Vod {
   CreateAIRecognitionTemplate(data: V20180717.CreateAIRecognitionTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAIRecognitionTemplateResponse>;
   /** 创建转自适应码流模板 {@link V20180717.CreateAdaptiveDynamicStreamingTemplateRequest} {@link V20180717.CreateAdaptiveDynamicStreamingTemplateResponse} */
   CreateAdaptiveDynamicStreamingTemplate(data: V20180717.CreateAdaptiveDynamicStreamingTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAdaptiveDynamicStreamingTemplateResponse>;
+  /** 创建 AIGC 生图任务 {@link V20180717.CreateAigcImageTaskRequest} {@link V20180717.CreateAigcImageTaskResponse} */
+  CreateAigcImageTask(data: V20180717.CreateAigcImageTaskRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcImageTaskResponse>;
+  /** 创建 AIGC 生视频任务 {@link V20180717.CreateAigcVideoTaskRequest} {@link V20180717.CreateAigcVideoTaskResponse} */
+  CreateAigcVideoTask(data: V20180717.CreateAigcVideoTaskRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcVideoTaskResponse>;
   /** 创建转动图模板 {@link V20180717.CreateAnimatedGraphicsTemplateRequest} {@link V20180717.CreateAnimatedGraphicsTemplateResponse} */
   CreateAnimatedGraphicsTemplate(data: V20180717.CreateAnimatedGraphicsTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAnimatedGraphicsTemplateResponse>;
   /** 创建日志集 {@link V20180717.CreateCLSLogsetRequest} {@link V20180717.CreateCLSLogsetResponse} */

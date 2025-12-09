@@ -14,6 +14,20 @@ declare interface Chunk {
   Summary?: string;
 }
 
+/** 知识库文档表列信息 */
+declare interface ColumnInfo {
+  /** 列名称 */
+  Name?: string;
+  /** 列类型：int, bigint, double, date, datetime, string，decimal */
+  Type?: string;
+  /** 列名称描述 */
+  Description?: string;
+  /** 列索引 */
+  Index?: number;
+  /** 原始字段名称 */
+  OriginalName?: string;
+}
+
 /** cos 文件信息 */
 declare interface CosFileInfo {
   /** 文件名称，包含后缀 */
@@ -22,6 +36,34 @@ declare interface CosFileInfo {
   FileType?: string;
   /** 用户文件的cosurl */
   UserCosUrl?: string;
+}
+
+/** 知识库文件信息 */
+declare interface FileInfo {
+  /** 文件名称 */
+  FileName: string;
+  /** 文件大小，字节 */
+  FileSize: number;
+  /** 文件类型,0=文本,1=表格，默认0 */
+  Type: number;
+  /** 文件ID */
+  FileId: string;
+  /** 状态，0：数据处理中 1：可用 -1：错误 */
+  Status?: number;
+  /** 操作者 */
+  CreateUser?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 分片策略 */
+  ChunkConfig?: KnowledgeTaskConfig;
+  /** 文件来源0=unknow,1=user_cos,2=local */
+  Source?: number;
+  /** 文件url */
+  FileUrl?: string;
+  /** 是否官方示例，0=否，1=是 */
+  IsShowCase?: number;
+  /** 文档摘要 */
+  DocumentSummary?: string;
 }
 
 /** 知识库信息 */
@@ -40,6 +82,26 @@ declare interface KnowledgeBase {
   FileNum?: number;
   /** 知识库关联的数据库列表，目前是只绑定一个数据源，数组预留拓展 */
   DatasourceIds?: string[];
+}
+
+/** 任务配置 */
+declare interface KnowledgeTaskConfig {
+  /** 切片类型 0:自定义切片，1：智能切片 */
+  ChunkType?: number;
+  /** /智能切片：最小值 1000，默认 4800 自定义切片：正整数即可,默认值 1000 */
+  MaxChunkSize?: number;
+  /** 切片分隔符,自定义切片使用：默认值为：["\n\n", "\n", "。", "！", "？", "，", ""] */
+  Delimiters?: string[] | null;
+  /** 自定义切片使用:默认0 可重叠字符长度 */
+  ChunkOverlap?: number;
+  /** 表格类文档解析 */
+  Columns?: ColumnInfo[];
+  /** 带检索的索引列表 */
+  Indexes?: number[];
+  /** 0：不生成文档摘要，1：生成文档概要。默认0，当取1时，GenParaSummary必须也为1 */
+  GenDocSummary?: number;
+  /** 0：不生成段落摘要，1：生成段落概要。默认0 */
+  GenParaSummary?: number;
 }
 
 /** 问答结构 */
@@ -242,6 +304,10 @@ declare interface GetKnowledgeBaseFileListRequest {
 }
 
 declare interface GetKnowledgeBaseFileListResponse {
+  /** 文件信息列表 */
+  FileList?: FileInfo[];
+  /** 文件信息总数 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

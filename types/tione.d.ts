@@ -817,7 +817,7 @@ declare interface ModelInfo {
   /** cos路径信息 */
   CosPathInfo?: CosPathInfo;
   /** GooseFSx的配置，ModelSource为GooseFSx时有效 */
-  GooseFSx?: GooseFSx;
+  GooseFSx?: GooseFSx | null;
   /** 模型对应的算法框架，预留 */
   AlgorithmFramework?: string | null;
   /** 默认为 NORMAL, 已加速模型: ACCELERATE, 自动学习模型 AUTO_ML */
