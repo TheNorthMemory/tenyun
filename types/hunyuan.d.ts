@@ -260,6 +260,12 @@ declare interface Processes {
   Num?: number;
 }
 
+/** 输入token的详细信息。 */
+declare interface PromptTokensDetails {
+  /** 缓存 token 的数量。 */
+  CachedTokens?: string;
+}
+
 /** 翻译对话参考示例 */
 declare interface Reference {
   /** 翻译文本类型，枚举"sentence"表示句子, "term"表示术语 */
@@ -486,6 +492,8 @@ declare interface Usage {
   CompletionTokens?: number;
   /** 总 Token 数量。 */
   TotalTokens?: number;
+  /** 输入 token 的详情。 */
+  PromptTokensDetails?: PromptTokensDetails;
 }
 
 /** 用户位置详细信息 */

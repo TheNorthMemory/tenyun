@@ -308,6 +308,8 @@ declare interface BinlogItem {
   FinishTime?: string;
   /** Binlog文件ID */
   BinlogId?: number;
+  /** binlog所跨地域 */
+  CrossRegions?: string[];
 }
 
 /** 任务信息 */
@@ -646,7 +648,7 @@ declare interface CynosdbClusterDetail {
   Zone?: string;
   /** 物理可用区 */
   PhysicalZone?: string;
-  /** 状态 */
+  /** 状态，支持的值如下：- creating：创建中- running：运行中- isolating：隔离中- isolated：已隔离- activating：从回收站重新恢复- offlining：下线中- offlined：已下线- deleting：删除中- deleted：已删除 */
   Status?: string;
   /** 状态描述 */
   StatusDesc?: string;
@@ -2491,7 +2493,7 @@ declare interface AddInstancesRequest {
   Memory: number;
   /** 新增只读实例数，取值范围为(0,15] */
   ReadOnlyCount: number;
-  /** 实例机器类型 */
+  /** 实例机器类型，支持值如下：- common：表示通用型- exclusive：表示独享型 */
   DeviceType?: string;
   /** 实例组ID，在已有RO组中新增实例时使用，不传则新增RO组。当前版本不建议传输该值。 */
   InstanceGrpId?: string;
@@ -4545,7 +4547,7 @@ declare interface InquirePriceCreateRequest {
   InstancePayMode: string;
   /** 存储购买类型，可选值为：PREPAID, POSTPAID */
   StoragePayMode: string;
-  /** 实例设备类型 */
+  /** 实例设备类型，支持值如下：- common：表示通用型- exclusive：表示独享型 */
   DeviceType?: string;
   /** CPU核数，PREPAID与POSTPAID实例类型必传 */
   Cpu?: number;

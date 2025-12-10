@@ -2229,15 +2229,15 @@ declare interface SendMessageResponse {
 }
 
 declare interface VerifyMessageConsumptionRequest {
-  /** 实例ID */
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。 */
   InstanceId: string;
-  /** 主题 */
+  /** 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031) 或控制台获得。 */
   Topic: string;
   /** 客户端ID */
   ClientId: string;
   /** 消息ID */
   MsgId: string;
-  /** 消费组名称 */
+  /** 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031) 或控制台获得。 */
   ConsumerGroup?: string;
 }
 
@@ -2255,13 +2255,13 @@ declare interface Trocket {
   CreateConsumerGroup(data: CreateConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerGroupResponse>;
   /** 创建集群 {@link CreateInstanceRequest} {@link CreateInstanceResponse} */
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
-  /** 为MQTT实例创建公网接入点 {@link CreateMQTTInsPublicEndpointRequest} {@link CreateMQTTInsPublicEndpointResponse} */
+  /** @deprecated 为MQTT实例创建公网接入点 {@link CreateMQTTInsPublicEndpointRequest} {@link CreateMQTTInsPublicEndpointResponse} */
   CreateMQTTInsPublicEndpoint(data: CreateMQTTInsPublicEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMQTTInsPublicEndpointResponse>;
-  /** 购买MQTT实例 {@link CreateMQTTInstanceRequest} {@link CreateMQTTInstanceResponse} */
+  /** @deprecated 购买MQTT实例 {@link CreateMQTTInstanceRequest} {@link CreateMQTTInstanceResponse} */
   CreateMQTTInstance(data: CreateMQTTInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMQTTInstanceResponse>;
-  /** 创建MQTT主题 {@link CreateMQTTTopicRequest} {@link CreateMQTTTopicResponse} */
+  /** @deprecated 创建MQTT主题 {@link CreateMQTTTopicRequest} {@link CreateMQTTTopicResponse} */
   CreateMQTTTopic(data: CreateMQTTTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMQTTTopicResponse>;
-  /** 添加MQTT角色 {@link CreateMQTTUserRequest} {@link CreateMQTTUserResponse} */
+  /** @deprecated 添加MQTT角色 {@link CreateMQTTUserRequest} {@link CreateMQTTUserResponse} */
   CreateMQTTUser(data: CreateMQTTUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMQTTUserResponse>;
   /** 创建角色 {@link CreateRoleRequest} {@link CreateRoleResponse} */
   CreateRole(data: CreateRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoleResponse>;
@@ -2271,13 +2271,13 @@ declare interface Trocket {
   DeleteConsumerGroup(data: DeleteConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsumerGroupResponse>;
   /** 删除集群 {@link DeleteInstanceRequest} {@link DeleteInstanceResponse} */
   DeleteInstance(data: DeleteInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceResponse>;
-  /** 删除MQTT实例的公网接入点 {@link DeleteMQTTInsPublicEndpointRequest} {@link DeleteMQTTInsPublicEndpointResponse} */
+  /** @deprecated 删除MQTT实例的公网接入点 {@link DeleteMQTTInsPublicEndpointRequest} {@link DeleteMQTTInsPublicEndpointResponse} */
   DeleteMQTTInsPublicEndpoint(data: DeleteMQTTInsPublicEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMQTTInsPublicEndpointResponse>;
-  /** 删除MQTT实例 {@link DeleteMQTTInstanceRequest} {@link DeleteMQTTInstanceResponse} */
+  /** @deprecated 删除MQTT实例 {@link DeleteMQTTInstanceRequest} {@link DeleteMQTTInstanceResponse} */
   DeleteMQTTInstance(data: DeleteMQTTInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMQTTInstanceResponse>;
-  /** 删除MQTT主题 {@link DeleteMQTTTopicRequest} {@link DeleteMQTTTopicResponse} */
+  /** @deprecated 删除MQTT主题 {@link DeleteMQTTTopicRequest} {@link DeleteMQTTTopicResponse} */
   DeleteMQTTTopic(data: DeleteMQTTTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMQTTTopicResponse>;
-  /** 删除MQTT角色 {@link DeleteMQTTUserRequest} {@link DeleteMQTTUserResponse} */
+  /** @deprecated 删除MQTT角色 {@link DeleteMQTTUserRequest} {@link DeleteMQTTUserResponse} */
   DeleteMQTTUser(data: DeleteMQTTUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMQTTUserResponse>;
   /** 删除角色 {@link DeleteRoleRequest} {@link DeleteRoleResponse} */
   DeleteRole(data: DeleteRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoleResponse>;
@@ -2301,29 +2301,29 @@ declare interface Trocket {
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
   /** 查询 5.X 集群列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */
   DescribeInstanceList(data?: DescribeInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceListResponse>;
-  /** 查询 MQTT 客户端详情 {@link DescribeMQTTClientRequest} {@link DescribeMQTTClientResponse} */
+  /** @deprecated 查询 MQTT 客户端详情 {@link DescribeMQTTClientRequest} {@link DescribeMQTTClientResponse} */
   DescribeMQTTClient(data: DescribeMQTTClientRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTClientResponse>;
-  /** 查询MQTT实例公网接入点 {@link DescribeMQTTInsPublicEndpointsRequest} {@link DescribeMQTTInsPublicEndpointsResponse} */
+  /** @deprecated 查询MQTT实例公网接入点 {@link DescribeMQTTInsPublicEndpointsRequest} {@link DescribeMQTTInsPublicEndpointsResponse} */
   DescribeMQTTInsPublicEndpoints(data: DescribeMQTTInsPublicEndpointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTInsPublicEndpointsResponse>;
-  /** 查询MQTT实例VPC接入点 {@link DescribeMQTTInsVPCEndpointsRequest} {@link DescribeMQTTInsVPCEndpointsResponse} */
+  /** @deprecated 查询MQTT实例VPC接入点 {@link DescribeMQTTInsVPCEndpointsRequest} {@link DescribeMQTTInsVPCEndpointsResponse} */
   DescribeMQTTInsVPCEndpoints(data: DescribeMQTTInsVPCEndpointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTInsVPCEndpointsResponse>;
-  /** 查询MQTT实例详情信息 {@link DescribeMQTTInstanceRequest} {@link DescribeMQTTInstanceResponse} */
+  /** @deprecated 查询MQTT实例详情信息 {@link DescribeMQTTInstanceRequest} {@link DescribeMQTTInstanceResponse} */
   DescribeMQTTInstance(data: DescribeMQTTInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTInstanceResponse>;
-  /** 查询MQTT集群证书列表 {@link DescribeMQTTInstanceCertRequest} {@link DescribeMQTTInstanceCertResponse} */
+  /** @deprecated 查询MQTT集群证书列表 {@link DescribeMQTTInstanceCertRequest} {@link DescribeMQTTInstanceCertResponse} */
   DescribeMQTTInstanceCert(data: DescribeMQTTInstanceCertRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTInstanceCertResponse>;
-  /** 获取MQTT实例列表 {@link DescribeMQTTInstanceListRequest} {@link DescribeMQTTInstanceListResponse} */
+  /** @deprecated 获取MQTT实例列表 {@link DescribeMQTTInstanceListRequest} {@link DescribeMQTTInstanceListResponse} */
   DescribeMQTTInstanceList(data?: DescribeMQTTInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTInstanceListResponse>;
-  /** 查询MQTT消息 {@link DescribeMQTTMessageRequest} {@link DescribeMQTTMessageResponse} */
+  /** @deprecated 查询MQTT消息 {@link DescribeMQTTMessageRequest} {@link DescribeMQTTMessageResponse} */
   DescribeMQTTMessage(data: DescribeMQTTMessageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTMessageResponse>;
-  /** 查询MQTT消息列表 {@link DescribeMQTTMessageListRequest} {@link DescribeMQTTMessageListResponse} */
+  /** @deprecated 查询MQTT消息列表 {@link DescribeMQTTMessageListRequest} {@link DescribeMQTTMessageListResponse} */
   DescribeMQTTMessageList(data: DescribeMQTTMessageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTMessageListResponse>;
-  /** 获取MQTT产品售卖规格 {@link DescribeMQTTProductSKUListRequest} {@link DescribeMQTTProductSKUListResponse} */
+  /** @deprecated 获取MQTT产品售卖规格 {@link DescribeMQTTProductSKUListRequest} {@link DescribeMQTTProductSKUListResponse} */
   DescribeMQTTProductSKUList(data?: DescribeMQTTProductSKUListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTProductSKUListResponse>;
-  /** 查询MQTT主题详情 {@link DescribeMQTTTopicRequest} {@link DescribeMQTTTopicResponse} */
+  /** @deprecated 查询MQTT主题详情 {@link DescribeMQTTTopicRequest} {@link DescribeMQTTTopicResponse} */
   DescribeMQTTTopic(data: DescribeMQTTTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTTopicResponse>;
-  /** 查询MQTT主题列表 {@link DescribeMQTTTopicListRequest} {@link DescribeMQTTTopicListResponse} */
+  /** @deprecated 查询MQTT主题列表 {@link DescribeMQTTTopicListRequest} {@link DescribeMQTTTopicListResponse} */
   DescribeMQTTTopicList(data: DescribeMQTTTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTTopicListResponse>;
-  /** 查询MQTT用户列表 {@link DescribeMQTTUserListRequest} {@link DescribeMQTTUserListResponse} */
+  /** @deprecated 查询MQTT用户列表 {@link DescribeMQTTUserListRequest} {@link DescribeMQTTUserListResponse} */
   DescribeMQTTUserList(data: DescribeMQTTUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTUserListResponse>;
   /** 查询消息详情 {@link DescribeMessageRequest} {@link DescribeMessageResponse} */
   DescribeMessage(data: DescribeMessageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageResponse>;
@@ -2367,15 +2367,15 @@ declare interface Trocket {
   ModifyInstance(data: ModifyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceResponse>;
   /** 修改集群接入点 {@link ModifyInstanceEndpointRequest} {@link ModifyInstanceEndpointResponse} */
   ModifyInstanceEndpoint(data: ModifyInstanceEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceEndpointResponse>;
-  /** 更新MQTT实例公网接入点 {@link ModifyMQTTInsPublicEndpointRequest} {@link ModifyMQTTInsPublicEndpointResponse} */
+  /** @deprecated 更新MQTT实例公网接入点 {@link ModifyMQTTInsPublicEndpointRequest} {@link ModifyMQTTInsPublicEndpointResponse} */
   ModifyMQTTInsPublicEndpoint(data: ModifyMQTTInsPublicEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMQTTInsPublicEndpointResponse>;
-  /** 修改MQTT实例属性 {@link ModifyMQTTInstanceRequest} {@link ModifyMQTTInstanceResponse} */
+  /** @deprecated 修改MQTT实例属性 {@link ModifyMQTTInstanceRequest} {@link ModifyMQTTInstanceResponse} */
   ModifyMQTTInstance(data: ModifyMQTTInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMQTTInstanceResponse>;
-  /** 更新MQTT集群证书证书 {@link ModifyMQTTInstanceCertBindingRequest} {@link ModifyMQTTInstanceCertBindingResponse} */
+  /** @deprecated 更新MQTT集群证书证书 {@link ModifyMQTTInstanceCertBindingRequest} {@link ModifyMQTTInstanceCertBindingResponse} */
   ModifyMQTTInstanceCertBinding(data: ModifyMQTTInstanceCertBindingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMQTTInstanceCertBindingResponse>;
-  /** 修改MQTT主题属性 {@link ModifyMQTTTopicRequest} {@link ModifyMQTTTopicResponse} */
+  /** @deprecated 修改MQTT主题属性 {@link ModifyMQTTTopicRequest} {@link ModifyMQTTTopicResponse} */
   ModifyMQTTTopic(data: ModifyMQTTTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMQTTTopicResponse>;
-  /** 修改MQTT角色 {@link ModifyMQTTUserRequest} {@link ModifyMQTTUserResponse} */
+  /** @deprecated 修改MQTT角色 {@link ModifyMQTTUserRequest} {@link ModifyMQTTUserResponse} */
   ModifyMQTTUser(data: ModifyMQTTUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMQTTUserResponse>;
   /** 修改角色 {@link ModifyRoleRequest} {@link ModifyRoleResponse} */
   ModifyRole(data: ModifyRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoleResponse>;
