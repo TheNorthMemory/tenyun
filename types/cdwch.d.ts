@@ -118,6 +118,8 @@ declare interface CkUserAlterInfo {
   PassWord: string;
   /** 描述 */
   Describe?: string;
+  /** 账户的当前密码 */
+  OriginalPassword?: string;
 }
 
 /** 用于返回XML格式的配置文件和内容以及其他配置文件有关的信息 */

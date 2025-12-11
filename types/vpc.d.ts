@@ -2210,7 +2210,7 @@ declare interface ResourceStatisticsItem {
 declare interface Route {
   /** 创建IPv4目的网段，取值不能在私有网络网段内，例如：112.20.51.0/24。 */
   DestinationCidrBlock: string;
-  /** 下一跳类型，目前我们支持的类型有：CVM：公网网关类型的云服务器；VPN：VPN网关；DIRECTCONNECT：专线网关；PEERCONNECTION：对等连接；HAVIP：高可用虚拟IP；NAT：公网NAT网关; NORMAL_CVM：普通云服务器；EIP：云服务器的公网IP；LOCAL_GATEWAY：CDC本地网关；INTRANAT：私网NAT网关；USER_CCN；云联网（自定义路由）。 */
+  /** 下一跳类型，目前我们支持的类型有：CVM：公网网关类型的云服务器；VPN：VPN网关；DIRECTCONNECT：专线网关；PEERCONNECTION：对等连接；HAVIP：高可用虚拟IP；NAT：公网NAT网关; NORMAL_CVM：普通云服务器；EIP：云服务器的公网IP；LOCAL_GATEWAY：CDC本地网关；INTRANAT：私网NAT网关；USER_CCN：云联网（自定义路由）；GWLB_ENDPOINT：网关负载均衡终端节点。 */
   GatewayType: string;
   /** 下一跳地址，这里只需要指定不同下一跳类型的网关ID，系统会自动匹配到下一跳地址。特殊说明：GatewayType为NORMAL_CVM时，GatewayId填写实例的内网IP。GatewayType为EIP时，GatewayId填写0。 */
   GatewayId: string;
@@ -10325,7 +10325,7 @@ declare interface Vpc {
   DeleteDirectConnectGatewayCcnRoutes(data: DeleteDirectConnectGatewayCcnRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDirectConnectGatewayCcnRoutesResponse>;
   /** 删除流日志 {@link DeleteFlowLogRequest} {@link DeleteFlowLogResponse} */
   DeleteFlowLog(data: DeleteFlowLogRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFlowLogResponse>;
-  /** 删除全局路由。 {@link DeleteGlobalRoutesRequest} {@link DeleteGlobalRoutesResponse} */
+  /** 删除全局路由 {@link DeleteGlobalRoutesRequest} {@link DeleteGlobalRoutesResponse} */
   DeleteGlobalRoutes(data: DeleteGlobalRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGlobalRoutesResponse>;
   /** 删除HAVIP {@link DeleteHaVipRequest} {@link DeleteHaVipResponse} */
   DeleteHaVip(data: DeleteHaVipRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHaVipResponse>;

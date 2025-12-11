@@ -6321,7 +6321,7 @@ declare namespace V20210820 {
     UpdateTime?: string | null;
     /** 创造时间 */
     CreateTime?: string | null;
-    /** 周期类型 */
+    /** 周期类型D天周期H小时Ccrontab类型I分钟O一次性Y年R用户驱动W周M月 */
     CycleUnit?: string | null;
     /** 调度计划 */
     ScheduleDesc?: string | null;
@@ -6329,6 +6329,12 @@ declare namespace V20210820 {
     DatasourceId?: string | null;
     /** 数据源类型 */
     DatasourceType?: string | null;
+    /** 引擎名称 */
+    ComputeResource?: string | null;
+    /** dlc地域 */
+    DlcRegion?: string | null;
+    /** 资源组或自定义 */
+    IsInherit?: string | null;
   }
 
   /** 批量操作任务列表分页 */
@@ -14335,6 +14341,12 @@ declare namespace V20210820 {
     CycleUnitList?: string[];
     /** 是否筛选出可提交的任务 */
     CanSubmit?: boolean;
+    /** 返回时间字段需要转换的时区 */
+    TimeZone?: string;
+    /** 任务最后更新时间最小值，ISO8601格式，如2025-07-16T15:00:00+08:00 */
+    MinUpdateTime?: string;
+    /** 任务最后更新时间最大值，ISO8601格式，如2025-07-17T15:00:00+08:00 */
+    MaxUpdateTime?: string;
   }
 
   interface DescribeBatchOperateTaskResponse {

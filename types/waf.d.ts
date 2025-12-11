@@ -496,6 +496,28 @@ declare interface BotIdConfig {
   Redirect?: string;
 }
 
+/** BOT安全监测资源信息 */
+declare interface BotMonitorPkg {
+  /** 资源id */
+  ResourceIds?: string;
+  /** 状态 */
+  Status?: number;
+  /** 地域 */
+  Region?: number;
+  /** 开始时间 */
+  BeginTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 申请数量 */
+  InquireNum?: number;
+  /** 使用数量 */
+  UsedNum?: number;
+  /** 续费标志 */
+  RenewFlag?: number;
+  /** 计费项 */
+  BillingItem?: string;
+}
+
 /** Bot资源信息 */
 declare interface BotPkg {
   /** 资源id */
@@ -660,6 +682,28 @@ declare interface BotScoreRuleEntry {
   Label: string;
   /** 重定向 */
   Redirect?: string;
+}
+
+/** BOT安全护航资源信息 */
+declare interface BotSecurityPkg {
+  /** 资源id */
+  ResourceIds?: string;
+  /** 状态 */
+  Status?: number;
+  /** 地域 */
+  Region?: number;
+  /** 开始时间 */
+  BeginTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 申请数量 */
+  InquireNum?: number;
+  /** 使用数量 */
+  UsedNum?: number;
+  /** 续费标志 */
+  RenewFlag?: number;
+  /** 计费项 */
+  BillingItem?: string;
 }
 
 /** bot的趋势图对象 */
@@ -1920,6 +1964,10 @@ declare interface InstanceInfo {
   LLMMonPkg?: LLMMonPkg;
   /** 地域id */
   RegionId?: number;
+  /** BOT安全护航信息 */
+  BotSecurityPkg?: BotSecurityPkg;
+  /** BOT安全监测资源信息 */
+  BotMonitorPkg?: BotMonitorPkg;
 }
 
 /** 数据封装 */

@@ -1829,7 +1829,7 @@ declare namespace V20180717 {
     ExpireTime?: string;
     /** 生成视频的时长，单位：秒。当 ModelName 是 Kling，可选值为 5、10，默认为 5；当 ModelName 是 Jimeng，可选值为 5、10，默认为 5；当 ModelName 是 Hailuo，可选值为 6、10，默认为 6；当 ModelName 是 Vidu，可指定1-10；当 ModelName 是 GV，可选值为 8，默认为 8；当 ModelName 是 OS，可选值为 4、8、12，默认为 8； */
     Duration?: number;
-    /** 生成视频的分辨率。当 ModelName 是 Kling，可选值为 720P、1080P，默认为 720P；当 ModelName 是 Jimeng，可选值为 768P、1080P，默认为 768P；当 ModelName 是 Hailuo，可选值为 1080P；当 ModelName 是 Vidu，可选值为 720P、1080P，默认为 720P；当 ModelName 是 GV，可选值为 720P、1080P，默认为 720P；当 ModelName 是 OS，可选值为 720P；说明：除模型可支持的分辨率外，还支持 2K、4K分辨率。 */
+    /** 生成视频的分辨率。当 ModelName 是 Kling，可选值为 720P、1080P，默认为 720P；当 ModelName 是 Hailuo，可选值为 768P、1080P，默认为 768P；当 ModelName 是 Jimeng，可选值为 1080P；当 ModelName 是 Vidu，可选值为 720P、1080P，默认为 720P；当 ModelName 是 GV，可选值为 720P、1080P，默认为 720P；当 ModelName 是 OS，可选值为 720P；说明：除模型可支持的分辨率外，还支持 2K、4K分辨率。 */
     Resolution?: string;
     /** 指定所生成视频的宽高比。当 ModelName 是 Kling，当文生视频时，则可选值为 16:9、9:16、 1:1，默认为16:9；当 ModelName 是 Jimeng，当文生视频时，则可选值为 16:9、4:3、1:1、3:4、9:16、21:9当 ModelName 是 Vidu，当文生视频时和使用参考图片生成时，则可选值为 16:9、9:16、4:3、3:4、1:1，其中仅版本q2支持4:3、3:4当 ModelName 是 GV，则可选值为 16:9、9:16，默认为 16:9；当 ModelName 是 OS，当文生视频时，则可选值为 16:9、9:16，默认为 16:9；当 ModelName 是 Hailuo，则暂不支持。 */
     AspectRatio?: string;
@@ -5615,6 +5615,18 @@ declare namespace V20180717 {
     Switch?: string;
   }
 
+  /** 语义搜索结果。 */
+  interface SemanticsSearchResult {
+    /** 媒体文件唯一标识 ID。 */
+    FileId?: string;
+    /** 视频在本次检索中的得分，得分越高和检索值越相似，取值范围[0,1] */
+    Score?: number;
+    /** 视频片段的开始时间，单位：秒 */
+    StartTimeOffset?: number;
+    /** 视频片段的开始时间，单位：秒 */
+    EndTimeOffset?: number;
+  }
+
   /** 细节增强控制 */
   interface SharpEnhanceInfo {
     /** 细节增强控制开关，可选值：ON：开启细节增强；OFF：关闭细节增强。 */
@@ -9211,6 +9223,22 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface ImportMediaKnowledgeRequest {
+    /** 点播[应用](/document/product/266/14574) ID。 */
+    SubAppId: number;
+    /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。 */
+    FileId: string;
+    /** 需要导入知识库任务类型，可选值有：- AiAnalysis.DescriptionTask- SmartSubtitle.AsrFullTextTask */
+    ImportTasks: string[];
+  }
+
+  interface ImportMediaKnowledgeResponse {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface InspectMediaQualityRequest {
     /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。 */
     FileId: string;
@@ -10451,6 +10479,28 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface SearchMediaBySemanticsRequest {
+    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId: number;
+    /** 需要进行搜索的内容 */
+    Text: string;
+    /** 返回的记录条数，默认值：20。 */
+    Limit?: number;
+    /** 文件类型。匹配集合中的任意元素： Video: 视频文件 Audio: 音频文件 Image: 图片文件 */
+    Categories?: string[];
+    /** 标签集合，匹配集合中任意元素。 单个标签长度限制：32个字符。 数组长度限制：16。 */
+    Tags?: string[];
+    /** 搜索的任务类型，可选值有： - AiAnalysis.DescriptionTask - SmartSubtitle.AsrFullTextTask */
+    TaskTypes?: string[];
+  }
+
+  interface SearchMediaBySemanticsResponse {
+    /** 媒体列表。 */
+    SearchResults?: SemanticsSearchResult[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface SearchMediaRequest {
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
@@ -10939,6 +10989,8 @@ declare interface Vod {
   ForbidMediaDistribution(data: V20180717.ForbidMediaDistributionRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ForbidMediaDistributionResponse>;
   /** 操作轮播当前播放列表 {@link V20180717.HandleCurrentPlaylistRequest} {@link V20180717.HandleCurrentPlaylistResponse} */
   HandleCurrentPlaylist(data: V20180717.HandleCurrentPlaylistRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.HandleCurrentPlaylistResponse>;
+  /** 导入媒体到知识库 {@link V20180717.ImportMediaKnowledgeRequest} {@link V20180717.ImportMediaKnowledgeResponse} */
+  ImportMediaKnowledge(data: V20180717.ImportMediaKnowledgeRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ImportMediaKnowledgeResponse>;
   /** 音画质检测 {@link V20180717.InspectMediaQualityRequest} {@link V20180717.InspectMediaQualityResponse} */
   InspectMediaQuality(data: V20180717.InspectMediaQualityRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.InspectMediaQualityResponse>;
   /** 直播即时剪辑 {@link V20180717.LiveRealTimeClipRequest} {@link V20180717.LiveRealTimeClipResponse} */
@@ -11043,6 +11095,8 @@ declare interface Vod {
   ReviewImage(data: V20180717.ReviewImageRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ReviewImageResponse>;
   /** 搜索媒体信息 {@link V20180717.SearchMediaRequest} {@link V20180717.SearchMediaResponse} */
   SearchMedia(data: V20180717.SearchMediaRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.SearchMediaResponse>;
+  /** 按语义搜索媒体 {@link V20180717.SearchMediaBySemanticsRequest} {@link V20180717.SearchMediaBySemanticsResponse} */
+  SearchMediaBySemantics(data: V20180717.SearchMediaBySemanticsRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.SearchMediaBySemanticsResponse>;
   /** 设置日志投递目标 {@link V20180717.SetCLSPushTargetRequest} {@link V20180717.SetCLSPushTargetResponse} */
   SetCLSPushTarget(data: V20180717.SetCLSPushTargetRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.SetCLSPushTargetResponse>;
   /** 设置 DRM 密钥提供商信息 {@link V20180717.SetDrmKeyProviderInfoRequest} {@link V20180717.SetDrmKeyProviderInfoResponse} */

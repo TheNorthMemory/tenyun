@@ -460,11 +460,11 @@ declare interface ClusterInstanceDetail {
   InstanceTasks?: ObjectTask[];
   /** 实例机器类型 */
   InstanceDeviceType?: string;
-  /** 实例存储类型 */
+  /** 实例存储类型说明：仅当要查询的资源为 LibraDB 时，此参数才会返回值。 */
   InstanceStorageType?: string;
   /** 数据库类型 */
   DbMode?: string;
-  /** 节点列表 */
+  /** 节点列表说明：仅当要查询的资源为 LibraDB 时，此参数才会返回值。 */
   NodeList?: string[];
 }
 
@@ -3535,7 +3535,7 @@ declare interface DescribeBinlogsRequest {
   EndTime?: string;
   /** 偏移量 */
   Offset?: number;
-  /** 限制条数 */
+  /** 限制条数，默认值为20 */
   Limit?: number;
 }
 

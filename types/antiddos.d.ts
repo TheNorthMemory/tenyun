@@ -1148,9 +1148,9 @@ declare interface TagFilter {
 
 /** 标签信息，用于资源列表返回关联的标签 */
 declare interface TagInfo {
-  /** 标签键 */
+  /** 标签键。 */
   TagKey: string;
-  /** 标签值 */
+  /** 标签值。 */
   TagValue: string;
 }
 

@@ -911,6 +911,8 @@ declare interface ModifyClusterMachineRequest {
   MachineNames: string[];
   /** machine的display name */
   DisplayName?: string;
+  /** 系统盘的信息 */
+  SystemDisk?: Disk;
   /** 节点预付费信息 */
   InstanceChargePrepaid?: InstanceChargePrepaid;
 }

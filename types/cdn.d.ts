@@ -2351,9 +2351,9 @@ declare interface DescribeCdnDataRequest {
   Isp?: number;
   /** 查询中国境内CDN数据时，指定省份查询，不填充表示查询所有省份查询中国境外CDN数据时，指定国家/地区查询，不填充表示查询所有国家/地区省份、国家/地区编码可以查看 [省份编码映射](https://cloud.tencent.com/document/product/228/6316)指定（中国境内）省份查询时，不可同时指定运营商、IP协议查询 */
   District?: number;
-  /** 指定协议查询，不填充表示查询所有协议all：所有协议http：指定查询 HTTP 对应指标https：指定查询 HTTPS 对应指标 */
+  /** 指定协议查询，不填充表示查询所有协议all：所有协议http：指定查询 HTTP 对应指标https：指定查询 HTTPS 对应指标quic：指定查询 QUIC 对应指标 */
   Protocol?: string;
-  /** 指定数据源查询，白名单功能 */
+  /** 指定数据源查询monitor：监控数据 */
   DataSource?: string;
   /** 指定IP协议查询，不填充表示查询所有协议all：所有协议ipv4：指定查询 ipv4 对应指标ipv6：指定查询 ipv6 对应指标指定IP协议查询时，不可同时指定省份、运营商查询注意：非IPv6白名单用户不可指定ipv4、ipv6进行查询 */
   IpProtocol?: string;
