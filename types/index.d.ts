@@ -88,6 +88,7 @@ import Dataagent, { Versions as DataagentVersions } from "./dataagent";
 import Dayu, { Versions as DayuVersions } from "./dayu";
 import Dbbrain, { Versions as DbbrainVersions } from "./dbbrain";
 import Dbdc, { Versions as DbdcVersions } from "./dbdc";
+import Dbs, { Versions as DbsVersions } from "./dbs";
 import Dc, { Versions as DcVersions } from "./dc";
 import Dcdb, { Versions as DcdbVersions } from "./dcdb";
 import Dlc, { Versions as DlcVersions } from "./dlc";
@@ -337,6 +338,7 @@ export declare type SERVICE_VERSIONS = {
   dayu: DayuVersions,
   dbbrain: DbbrainVersions,
   dbdc: DbdcVersions,
+  dbs: DbsVersions,
   dc: DcVersions,
   dcdb: DcdbVersions,
   dlc: DlcVersions,
@@ -687,6 +689,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   dbbrain: Dbbrain,
   /** {@link Dbdc 云数据库独享集群} */
   dbdc: Dbdc,
+  /** {@link Dbs 数据库备份服务} */
+  dbs: Dbs,
   /** {@link Dc 专线接入} */
   dc: Dc,
   /** {@link Dcdb TDSQL MySQL 版} */
