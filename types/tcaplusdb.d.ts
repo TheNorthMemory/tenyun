@@ -648,6 +648,8 @@ declare interface TableInfoNew {
   TxhBackupExpireDay?: number;
   /** 表格的缓写信息 */
   SyncTableInfo?: SyncTableInfo;
+  /** 表格分片数量 */
+  ShardNum?: number;
 }
 
 /** 表处理结果信息 */

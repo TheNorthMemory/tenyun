@@ -104,9 +104,9 @@ declare interface AudioEncodeParams {
 
 /** TTS音频输出的格式 */
 declare interface AudioFormat {
-  /** 生成的音频格式，默认pcm，目前支持的格式列表：流式：[pcm]，非流式 [pcm，wav] */
+  /** 生成的音频格式- TextToSpeech流式接口 支持 pcm, 默认: pcm- TextToSpeech非流式接口 支持 pcm,wav, 默认: pcm */
   Format?: string;
-  /** 采样率，默认24000， 可选16000, 24000 */
+  /** 生成的音频采样率，默认24000可选- 16000- 24000 */
   SampleRate?: number;
 }
 
@@ -1194,15 +1194,15 @@ declare interface VideoParams {
   Gop: number;
 }
 
-/** TTS的声音参数 */
+/** TTS的声音参数配置 */
 declare interface Voice {
-  /** TTS的声音的ID */
+  /** 音色 ID，可从音色列表获取，或使用声音克隆生成的自定义音色 ID */
   VoiceId: string;
-  /** 语速，范围 0.5-2.0，默认 1.0 */
+  /** 语速调节，0.5 为半速慢放，2.0 为两倍速快放，1.0 为正常语速，区间：[0.5, 2.0]，默认1.0 */
   Speed?: number;
-  /** (0, 10] 默认值1.0 */
+  /** 音量调节，0 为静音，10 为最大音量，建议保持默认值 1.0，区间：[0, 10]，默认1.0 */
   Volume?: number;
-  /** 取值[-12,12],默认0 */
+  /** 音高调节，负值声音更低沉，正值声音更尖锐，0 为原始音高，区间 [-12, 12], 默认0 */
   Pitch?: number;
 }
 
@@ -2555,9 +2555,9 @@ declare interface TextToSpeechRequest {
   AudioFormat?: AudioFormat;
   /** TTS的API密钥 */
   APIKey?: string;
-  /** TTS的模型：flow_01_turbo，flow_01_ex */
+  /** TTS的模型，当前固定为：flow_01_turbo */
   Model?: string;
-  /** 语言参数，默认为空， 参考： (ISO 639-1) */
+  /** 需要合成的语言（ISO 639-1），支持 zh（中文）、en（英文）、yue（粤语）、ja（日语）、ko（韩语），默认自动识别 */
   Language?: string;
 }
 
@@ -2579,9 +2579,9 @@ declare interface TextToSpeechSSERequest {
   AudioFormat?: AudioFormat;
   /** TTS的API密钥 */
   APIKey?: string;
-  /** TTS的模型：flow_01_turbo，flow_01_ex */
+  /** TTS的模型，当前固定为：flow_01_turbo */
   Model?: string;
-  /** 语言参数，默认为空， 参考： (ISO 639-1) */
+  /** 需要合成的语言（ISO 639-1），支持 zh（中文）、en（英文）、yue（粤语）、ja（日语）、ko（韩语），默认自动识别 */
   Language?: string;
 }
 
@@ -2835,9 +2835,9 @@ declare interface Trtc {
   StopStreamIngest(data: StopStreamIngestRequest, config?: AxiosRequestConfig): AxiosPromise<StopStreamIngestResponse>;
   /** 停止页面录制 {@link StopWebRecordRequest} {@link StopWebRecordResponse} */
   StopWebRecord(data: StopWebRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StopWebRecordResponse>;
-  /** 文本转语音 {@link TextToSpeechRequest} {@link TextToSpeechResponse} */
+  /** 实时文本转语音 {@link TextToSpeechRequest} {@link TextToSpeechResponse} */
   TextToSpeech(data: TextToSpeechRequest, config?: AxiosRequestConfig): AxiosPromise<TextToSpeechResponse>;
-  /** SSE流式文本转语音 {@link TextToSpeechSSERequest} {@link TextToSpeechSSEResponse} */
+  /** 实时SSE流式文本转语音 {@link TextToSpeechSSERequest} {@link TextToSpeechSSEResponse} */
   TextToSpeechSSE(data: TextToSpeechSSERequest, config?: AxiosRequestConfig): AxiosPromise<TextToSpeechSSEResponse>;
   /** 更新AI对话 {@link UpdateAIConversationRequest} {@link UpdateAIConversationResponse} */
   UpdateAIConversation(data: UpdateAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAIConversationResponse>;

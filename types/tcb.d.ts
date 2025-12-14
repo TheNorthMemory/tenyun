@@ -56,14 +56,6 @@ declare interface BaasPackageInfo {
   IsExternal?: boolean;
 }
 
-/** 网关服务信息 */
-declare interface BackendServiceInfo {
-  /** 服务名称 */
-  ServiceName: string;
-  /** 服务状态 */
-  Status: string;
-}
-
 /** 封禁配置 */
 declare interface BanConfig {
   /** ip白名单，支持ipv4、ipv6，支持CIDR */
@@ -606,38 +598,6 @@ declare interface DatabasesInfo {
   UpdateTime?: string;
 }
 
-/** 终端用户信息 */
-declare interface EndUserInfo {
-  /** 用户唯一ID */
-  UUId?: string;
-  /** 微信ID */
-  WXOpenId?: string;
-  /** qq ID */
-  QQOpenId?: string;
-  /** 手机号 */
-  Phone?: string;
-  /** 邮箱 */
-  Email?: string;
-  /** 昵称 */
-  NickName?: string;
-  /** 性别 */
-  Gender?: string;
-  /** 头像地址 */
-  AvatarUrl?: string;
-  /** 更新时间 */
-  UpdateTime?: string;
-  /** 创建时间 */
-  CreateTime?: string;
-  /** 是否为匿名用户 */
-  IsAnonymous?: boolean;
-  /** 是否禁用账户 */
-  IsDisabled?: boolean;
-  /** 是否设置过密码 */
-  HasPassword?: boolean;
-  /** 用户名 */
-  UserName?: string;
-}
-
 /** 环境计费信息 */
 declare interface EnvBillingInfoItem {
   /** 环境ID */
@@ -924,18 +884,6 @@ declare interface LogServiceInfo {
   Period?: number;
 }
 
-/** 终端用户登录新增统计 */
-declare interface LoginStatistic {
-  /** 统计类型 新增NEWUSER 和登录 LOGIN */
-  StatisticalType?: string;
-  /** 统计周期：日DAY，周WEEK，月MONTH */
-  StatisticalCycle?: string;
-  /** 统计总量 */
-  Count?: number;
-  /** 更新时间 */
-  UpdateTime?: string;
-}
-
 /** Key-Value类型，模拟的 object 类型 */
 declare interface ObjectKV {
   /** object 的 key */
@@ -1002,16 +950,6 @@ declare interface PackageFreeQuotaInfo {
   FreeQuotaType?: string;
 }
 
-/** 终端用户平台统计信息 */
-declare interface PlatformStatistic {
-  /** 终端用户从属平台 */
-  Platform?: string;
-  /** 平台终端用户数 */
-  Count?: number;
-  /** 更新时间 */
-  UpdateTime?: string;
-}
-
 /** 后付费计费详情 */
 declare interface PostPaidEnvDeductInfo {
   /** 资源方 */
@@ -1066,44 +1004,6 @@ declare interface SpecialCostItem {
   EnvId?: string;
   /** 上报任务状态 */
   Status?: string;
-}
-
-/** 独立网关信息 */
-declare interface StandaloneGatewayInfo {
-  /** 独立网关名称 */
-  GatewayName: string;
-  /** CPU核心数 */
-  CPU: number;
-  /** 内存大小，单位MB */
-  Mem: number;
-  /** 套餐包版本名称 */
-  PackageVersion: string;
-  /** 网关别名 */
-  GatewayAlias: string;
-  /** 私有网络ID */
-  VpcId: string;
-  /** 子网ID列表 */
-  SubnetIds: string[];
-  /** 网关描述 */
-  GatewayDesc: string;
-  /** 网关状态 */
-  GateWayStatus: string;
-  /** 服务信息 */
-  ServiceInfo: BackendServiceInfo;
-  /** 公网CLBIP */
-  PublicClbIp: string;
-  /** 内网CLBIP */
-  InternalClbIp: string;
-}
-
-/** 小租户网关套餐配置 */
-declare interface StandaloneGatewayPackageInfo {
-  /** CPU核心数 */
-  CPU: number;
-  /** 内存大小，单位MB */
-  Mem: number;
-  /** 套餐包版本名称 */
-  PackageVersion: string;
 }
 
 /** 静态CDN资源信息 */
@@ -1452,28 +1352,6 @@ declare interface CreatePostpayPackageResponse {
   RequestId?: string;
 }
 
-declare interface CreateStandaloneGatewayRequest {
-  /** 环境ID */
-  EnvId: string;
-  /** 网关名 */
-  GatewayAlias: string;
-  /** 私有网络ID */
-  VpcId: string;
-  /** 子网ID */
-  SubnetIds: string[];
-  /** 网关描述 */
-  GatewayDesc: string;
-  /** 网关套餐版本 */
-  PackageVersion: string;
-}
-
-declare interface CreateStandaloneGatewayResponse {
-  /** 网关名称 */
-  GatewayName: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateStaticStoreRequest {
   /** 环境ID */
   EnvId: string;
@@ -1570,18 +1448,6 @@ declare interface DeleteCloudBaseRunServerVersionRequest {
 declare interface DeleteCloudBaseRunServerVersionResponse {
   /** 返回结果，succ为成功 */
   Result?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteEndUserRequest {
-  /** 环境ID */
-  EnvId: string;
-  /** 用户列表，每一项都是uuid */
-  UserList: string[];
-}
-
-declare interface DeleteEndUserResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2326,54 +2192,6 @@ declare interface DescribeDownloadFileResponse {
   RequestId?: string;
 }
 
-declare interface DescribeEndUserLoginStatisticRequest {
-  /** 环境id */
-  EnvId: string;
-  /** 终端用户来源 qcloud miniapp */
-  Source?: string;
-}
-
-declare interface DescribeEndUserLoginStatisticResponse {
-  /** 环境终端用户新增与登录统计 */
-  LoginStatistics?: LoginStatistic[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeEndUserStatisticRequest {
-  /** 环境id */
-  EnvId: string;
-}
-
-declare interface DescribeEndUserStatisticResponse {
-  /** 终端用户各平台统计 */
-  PlatformStatistics?: PlatformStatistic[];
-  /** 终端用户总数 */
-  TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeEndUsersRequest {
-  /** 开发者的环境ID */
-  EnvId: string;
-  /** 可选参数，偏移量，默认 0 */
-  Offset?: number;
-  /** 可选参数，拉取数量，默认 20 */
-  Limit?: number;
-  /** 按照 uuid 列表过滤，最大个数为100 */
-  UUIds?: string[];
-}
-
-declare interface DescribeEndUsersResponse {
-  /** 用户总数 */
-  Total?: number;
-  /** 用户列表 */
-  Users?: EndUserInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeEnvDealRegionRequest {
   /** 环境ID */
   EnvId: string;
@@ -2684,40 +2502,6 @@ declare interface DescribeSpecialCostItemsResponse {
   RequestId?: string;
 }
 
-declare interface DescribeStandaloneGatewayPackageRequest {
-  /** 环境ID */
-  EnvId?: string;
-  /** 套餐版本，包含starter、basic、advanced、enterprise */
-  PackageVersion?: string;
-}
-
-declare interface DescribeStandaloneGatewayPackageResponse {
-  /** 总数 */
-  Total: number;
-  /** 套餐详情 */
-  StandaloneGatewayPackageList: StandaloneGatewayPackageInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeStandaloneGatewayRequest {
-  /** 环境ID */
-  EnvId: string;
-  /** 网关名称 */
-  GatewayName?: string;
-  /** 网关别名 */
-  GatewayAlias?: string;
-}
-
-declare interface DescribeStandaloneGatewayResponse {
-  /** 独立网关信息列表 */
-  StandaloneGatewayList: StandaloneGatewayInfo[];
-  /** 总数 */
-  Total: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeUserActivityInfoRequest {
   /** 活动id */
   ActivityId: number;
@@ -2824,22 +2608,6 @@ declare interface DestroyEnvRequest {
 }
 
 declare interface DestroyEnvResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DestroyStandaloneGatewayRequest {
-  /** 环境ID */
-  EnvId: string;
-  /** 网名名称 */
-  GatewayName: string;
-  /** 是否强制释放 */
-  IsForce: boolean;
-}
-
-declare interface DestroyStandaloneGatewayResponse {
-  /** 删除独立网关状态 */
-  Status: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3026,20 +2794,6 @@ declare interface ModifyDatabaseACLResponse {
   RequestId?: string;
 }
 
-declare interface ModifyEndUserRequest {
-  /** 环境ID */
-  EnvId: string;
-  /** C端用户端的唯一ID */
-  UUId: string;
-  /** 账号的状态ENABLEDISABLE */
-  Status?: string;
-}
-
-declare interface ModifyEndUserResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ModifyEnvRequest {
   /** 环境ID */
   EnvId: string;
@@ -3202,38 +2956,6 @@ declare interface SearchClsLogResponse {
   RequestId?: string;
 }
 
-declare interface TurnOffStandaloneGatewayRequest {
-  /** 环境ID */
-  EnvId: string;
-  /** 网关名称 */
-  GatewayName: string;
-  /** 服务名称列表 */
-  ServiceNameList: string[];
-}
-
-declare interface TurnOffStandaloneGatewayResponse {
-  /** 关闭独立网关状态 */
-  Status: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface TurnOnStandaloneGatewayRequest {
-  /** 环境ID */
-  EnvId: string;
-  /** 网关名称 */
-  GatewayName: string;
-  /** 服务名称列表 */
-  ServiceNameList: string[];
-}
-
-declare interface TurnOnStandaloneGatewayResponse {
-  /** 小租户网关开启状态 */
-  Status: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface UnfreezeCloudBaseRunServersRequest {
   /** 环境ID */
   EnvId: string;
@@ -3271,8 +2993,6 @@ declare interface Tcb {
   CreateHostingDomain(data: CreateHostingDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostingDomainResponse>;
   /** 开通后付费资源 {@link CreatePostpayPackageRequest} {@link CreatePostpayPackageResponse} */
   CreatePostpayPackage(data?: CreatePostpayPackageRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePostpayPackageResponse>;
-  /** 创建独立网关 {@link CreateStandaloneGatewayRequest} {@link CreateStandaloneGatewayResponse} */
-  CreateStandaloneGateway(data: CreateStandaloneGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStandaloneGatewayResponse>;
   /** 创建静态托管资源 {@link CreateStaticStoreRequest} {@link CreateStaticStoreResponse} */
   CreateStaticStore(data: CreateStaticStoreRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStaticStoreResponse>;
   /** 创建微信云托管 {@link CreateWxCloudBaseRunEnvRequest} {@link CreateWxCloudBaseRunEnvResponse} */
@@ -3283,8 +3003,6 @@ declare interface Tcb {
   DeleteCloudBaseProjectLatestVersion(data: DeleteCloudBaseProjectLatestVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudBaseProjectLatestVersionResponse>;
   /** 删除服务版本 {@link DeleteCloudBaseRunServerVersionRequest} {@link DeleteCloudBaseRunServerVersionResponse} */
   DeleteCloudBaseRunServerVersion(data: DeleteCloudBaseRunServerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudBaseRunServerVersionResponse>;
-  /** 删除终端用户 {@link DeleteEndUserRequest} {@link DeleteEndUserResponse} */
-  DeleteEndUser(data: DeleteEndUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEndUserResponse>;
   /** 删除网关某版本 {@link DeleteGatewayVersionRequest} {@link DeleteGatewayVersionResponse} */
   DeleteGatewayVersion(data: DeleteGatewayVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGatewayVersionResponse>;
   /** 删除安全网关路由 {@link DeleteWxGatewayRouteRequest} {@link DeleteWxGatewayRouteResponse} */
@@ -3337,12 +3055,6 @@ declare interface Tcb {
   DescribeDatabaseACL(data: DescribeDatabaseACLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseACLResponse>;
   /** 获取下载文件信息 {@link DescribeDownloadFileRequest} {@link DescribeDownloadFileResponse} */
   DescribeDownloadFile(data: DescribeDownloadFileRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDownloadFileResponse>;
-  /** 获取终端用户新增与登录信息 {@link DescribeEndUserLoginStatisticRequest} {@link DescribeEndUserLoginStatisticResponse} */
-  DescribeEndUserLoginStatistic(data: DescribeEndUserLoginStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEndUserLoginStatisticResponse>;
-  /** 获取终端用户分布 {@link DescribeEndUserStatisticRequest} {@link DescribeEndUserStatisticResponse} */
-  DescribeEndUserStatistic(data: DescribeEndUserStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEndUserStatisticResponse>;
-  /** 获取终端用户列表 {@link DescribeEndUsersRequest} {@link DescribeEndUsersResponse} */
-  DescribeEndUsers(data: DescribeEndUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEndUsersResponse>;
   /** 获取环境下单地域 {@link DescribeEnvDealRegionRequest} {@link DescribeEnvDealRegionResponse} */
   DescribeEnvDealRegion(data: DescribeEnvDealRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvDealRegionResponse>;
   /** 查询后付费免费配额信息 {@link DescribeEnvFreeQuotaRequest} {@link DescribeEnvFreeQuotaResponse} */
@@ -3375,10 +3087,6 @@ declare interface Tcb {
   DescribeSmsQuotas(data: DescribeSmsQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmsQuotasResponse>;
   /** 查询环境1分钱抵扣信息 {@link DescribeSpecialCostItemsRequest} {@link DescribeSpecialCostItemsResponse} */
   DescribeSpecialCostItems(data?: DescribeSpecialCostItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecialCostItemsResponse>;
-  /** 查询小租户网关信息 {@link DescribeStandaloneGatewayRequest} {@link DescribeStandaloneGatewayResponse} */
-  DescribeStandaloneGateway(data: DescribeStandaloneGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStandaloneGatewayResponse>;
-  /** 查询小租户网关套餐信息 {@link DescribeStandaloneGatewayPackageRequest} {@link DescribeStandaloneGatewayPackageResponse} */
-  DescribeStandaloneGatewayPackage(data?: DescribeStandaloneGatewayPackageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStandaloneGatewayPackageResponse>;
   /** 查询用户活动信息 {@link DescribeUserActivityInfoRequest} {@link DescribeUserActivityInfoResponse} */
   DescribeUserActivityInfo(data: DescribeUserActivityInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserActivityInfoResponse>;
   /** 查询微信云托管环境信息 {@link DescribeWxCloudBaseRunEnvsRequest} {@link DescribeWxCloudBaseRunEnvsResponse} */
@@ -3391,8 +3099,6 @@ declare interface Tcb {
   DescribeWxGateways(data?: DescribeWxGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWxGatewaysResponse>;
   /** 销毁环境 {@link DestroyEnvRequest} {@link DestroyEnvResponse} */
   DestroyEnv(data: DestroyEnvRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyEnvResponse>;
-  /** 销毁小租户网关 {@link DestroyStandaloneGatewayRequest} {@link DestroyStandaloneGatewayResponse} */
-  DestroyStandaloneGateway(data: DestroyStandaloneGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyStandaloneGatewayResponse>;
   /** 销毁静态资源 {@link DestroyStaticStoreRequest} {@link DestroyStaticStoreResponse} */
   DestroyStaticStore(data: DestroyStaticStoreRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyStaticStoreResponse>;
   /** 编辑登录配置 {@link EditAuthConfigRequest} {@link EditAuthConfigResponse} */
@@ -3411,8 +3117,6 @@ declare interface Tcb {
   ModifyClsTopic(data: ModifyClsTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClsTopicResponse>;
   /** 修改数据库权限 {@link ModifyDatabaseACLRequest} {@link ModifyDatabaseACLResponse} */
   ModifyDatabaseACL(data: ModifyDatabaseACLRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatabaseACLResponse>;
-  /** 管理终端用户 {@link ModifyEndUserRequest} {@link ModifyEndUserResponse} */
-  ModifyEndUser(data: ModifyEndUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEndUserResponse>;
   /** 更新环境信息 {@link ModifyEnvRequest} {@link ModifyEnvResponse} */
   ModifyEnv(data: ModifyEnvRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvResponse>;
   /** 设置网关版本的流量比例 {@link ModifyGatewayVersionTrafficRequest} {@link ModifyGatewayVersionTrafficResponse} */
@@ -3425,10 +3129,6 @@ declare interface Tcb {
   RollUpdateCloudBaseRunServerVersion(data: RollUpdateCloudBaseRunServerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<RollUpdateCloudBaseRunServerVersionResponse>;
   /** 搜索CLS日志 {@link SearchClsLogRequest} {@link SearchClsLogResponse} */
   SearchClsLog(data: SearchClsLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClsLogResponse>;
-  /** 关闭小租户网关 {@link TurnOffStandaloneGatewayRequest} {@link TurnOffStandaloneGatewayResponse} */
-  TurnOffStandaloneGateway(data: TurnOffStandaloneGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<TurnOffStandaloneGatewayResponse>;
-  /** 开启小租户网关 {@link TurnOnStandaloneGatewayRequest} {@link TurnOnStandaloneGatewayResponse} */
-  TurnOnStandaloneGateway(data: TurnOnStandaloneGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<TurnOnStandaloneGatewayResponse>;
   /** 批量解冻服务 {@link UnfreezeCloudBaseRunServersRequest} {@link UnfreezeCloudBaseRunServersResponse} */
   UnfreezeCloudBaseRunServers(data: UnfreezeCloudBaseRunServersRequest, config?: AxiosRequestConfig): AxiosPromise<UnfreezeCloudBaseRunServersResponse>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */

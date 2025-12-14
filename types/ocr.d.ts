@@ -4638,6 +4638,8 @@ declare interface RecognizeGeneralCardWarnResponse {
   Overlap?: GeneralCardWarnInfo;
   /** 是否水印 */
   Watermark?: GeneralCardWarnInfo;
+  /** 是否电子证照（目前仅支持电子身份证、电子营业执照识别 */
+  Electron?: GeneralCardWarnInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
