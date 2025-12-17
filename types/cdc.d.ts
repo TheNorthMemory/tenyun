@@ -718,6 +718,8 @@ declare interface DescribeDedicatedClusterOverviewResponse {
   HostStandbyCount?: number;
   /** 普通宿主机数量 */
   HostNormalCount?: number;
+  /** 异常宿主机数量 */
+  HostAbnormalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

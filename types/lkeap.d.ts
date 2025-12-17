@@ -272,6 +272,16 @@ declare interface Usage {
   TotalTokens?: number;
 }
 
+declare interface CancelTaskRequest {
+  /** 取消任务的任务ID */
+  TaskId: string;
+}
+
+declare interface CancelTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ChatCompletionsRequest {
   /** 模型名称 */
   Model: string;
@@ -761,6 +771,8 @@ declare interface UploadDocResponse {
 /** {@link Lkeap 知识引擎原子能力} */
 declare interface Lkeap {
   (): Versions;
+  /** 取消任务 {@link CancelTaskRequest} {@link CancelTaskResponse} */
+  CancelTask(data: CancelTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelTaskResponse>;
   /** DeepSeek API 接口 {@link ChatCompletionsRequest} {@link ChatCompletionsResponse} */
   ChatCompletions(data: ChatCompletionsRequest, config?: AxiosRequestConfig): AxiosPromise<ChatCompletionsResponse>;
   /** 创建属性标签 {@link CreateAttributeLabelRequest} {@link CreateAttributeLabelResponse} */

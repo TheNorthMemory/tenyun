@@ -1958,6 +1958,8 @@ declare interface CostDetail {
   ComponentSet?: CostComponentSet[];
   /** 子产品名称代码 */
   ProductCode?: string;
+  /** 标签信息 */
+  Tags?: BillTagInfo[];
 }
 
 /** 获取预算管理的基础信息分页数据 */

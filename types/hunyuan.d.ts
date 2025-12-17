@@ -38,17 +38,17 @@ declare interface Choice {
   ModerationLevel?: string;
 }
 
-/** 可以传入多种类型的内容，如图片、文本。 */
+/** 可以传入多种类型的内容，目前支持文本、图片、视频。 */
 declare interface Content {
-  /** 内容类型注意：需包含至少一个 Type 为"text"的参数。参数值可选范围：[text", "image_url","video_url"] */
+  /** 内容类型注意：需包含至少一个 Type 为"text"的参数。参数值可选范围：["text", "image_url","video_url","video_frames"] */
   Type: string | null;
-  /** 当 Type 为 text 时使用，表示具体的文本内容。当 Type 为 image_url 时，当前字段内容需保持为空，传递内容不生效。 */
+  /** 当 Type 为 text 时使用，表示具体的文本内容。当 Type 为 其他类型 时，当前字段内容需保持为空，传递内容不生效。 */
   Text?: string | null;
-  /** 图片的url，当 Type 为 image_url 时使用，表示具体的图片内容如"https://example.com/1.png" 或 图片的base64（注意 "data:image/jpeg;base64," 为必要部分）："data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAA......"。当 Type 为 text 时，当前字段内容需保持为空，传递内容不生效。 */
+  /** 图片的url，当 Type 为 image_url 时使用，表示具体的图片内容如"https://example.com/1.png" 或 图片的base64（注意 "data:image/jpeg;base64," 为必要部分）："data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAA......"。当 Type 为 其他类型 时，当前字段内容需保持为空，传递内容不生效。 */
   ImageUrl?: ImageUrl | null;
-  /** 当type为video_url时使用，标识具体的视频链接内容 */
+  /** 当 Type 为 video_url 时使用，标识具体的视频链接内容，如"https://your-video-path.mp4"。当 Type 为 其他类型 时，当前字段内容需保持为空，传递内容不生效。 */
   VideoUrl?: VideoUrl | null;
-  /** 当type为video_frames时使用，标识具体的视频内图像帧内容 */
+  /** 当 Type 为 video_frames 时使用，标识具体的视频内图像帧内容，当 Type 为 其他类型 时，当前字段内容需保持为空，传递内容不生效。 */
   VideoFrames?: VideoFrames | null;
 }
 
@@ -196,7 +196,7 @@ declare interface Message {
   Role: string;
   /** 文本内容 */
   Content?: string;
-  /** 多种类型内容（目前支持图片和文本），仅 hunyuan-vision 和 hunyuan-turbo-vision 模型支持 */
+  /** 多种类型内容（目前支持文本、图片和视频），图片支持混元图生文系列模型，视频支持混元视频生文系列模型，详情参考[产品概述](https://cloud.tencent.com/document/product/1729/104753) */
   Contents?: Content[] | null;
   /** 当role为tool时传入，标识具体的函数调用 */
   ToolCallId?: string | null;
@@ -506,13 +506,13 @@ declare interface UserLocation {
 
 /** 当type为video_frames时使用，标识具体的视频内图像帧内容 */
 declare interface VideoFrames {
-  /** 视频图像帧列表，图像帧传url */
+  /** 视频图像帧列表，图像帧传url，最大支持传入数量为512帧 */
   Frames?: string[];
 }
 
 /** 当type为video_url时使用，标识具体的视频链接内容 */
 declare interface VideoUrl {
-  /** 视频的url，如"https://your-video-path.mp/4" */
+  /** 视频的url，如"https://your-video-path.mp4"，视频文件大小不超过100M。 */
   Url?: string;
   /** 控制视频抽帧频率，取值范围为 0.1 ~5，表示每隔 1/fps 秒抽取一帧，默认为 1s抽取一帧 */
   Fps?: number;

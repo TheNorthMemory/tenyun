@@ -274,7 +274,7 @@ declare interface CasterInputInfo {
 
 /** 导播台布局参数。 */
 declare interface CasterLayoutInfo {
-  /** 布局Index。 */
+  /** 布局Index。取值范围：[1, 1000] */
   LayoutIndex: number;
   /** 布局模板Id。有效值[1，20，21，31，32，41]当使用布局模板时，无需LayoutParams参数，导播台将使用模板布局参数。 */
   LayoutTemplateId?: number;

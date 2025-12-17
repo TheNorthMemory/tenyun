@@ -6,16 +6,22 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 declare interface ActivityRecordItem {
   /** 用户uin */
   Uin?: string;
+  /** 环境ID */
+  EnvId?: string;
   /** 活动id */
   ActivityId?: number;
+  /** 活动名称（唯一英文标识） */
+  ActivityName?: string;
   /** 自定义状态码 */
   Status?: number;
   /** 自定义子状态码 */
   SubStatus?: string;
   /** 整型子状态码 */
   SubStatusInt?: number;
-  /** 是否软删除 */
+  /** 是否已删除 */
   IsDeleted?: boolean;
+  /** 活动参与时间 */
+  CreateTime?: string;
 }
 
 /** 合法域名 */

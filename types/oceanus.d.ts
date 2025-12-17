@@ -136,6 +136,8 @@ declare interface Cluster {
   SlaveZones?: SlaveZone[] | null;
   /** 集群的日志cos存储 */
   LogCOSBucket?: string;
+  /** Cdc集群Id */
+  CdcId?: string | null;
 }
 
 /** 工作空间集群组信息 */

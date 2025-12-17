@@ -3767,6 +3767,8 @@ declare interface CloneSecurityGroupRequest {
   RemoteRegion?: string;
   /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。若指定Tags入参且指定IsCloneTags为true，会合并源安全组的标签和新增的标签。 */
   Tags?: Tag[];
+  /** 是否克隆标签。 */
+  IsCloneTags?: boolean;
 }
 
 declare interface CloneSecurityGroupResponse {
@@ -6339,7 +6341,7 @@ declare interface DescribeGlobalRoutesResponse {
 declare interface DescribeHaVipsRequest {
   /** `HAVIP`唯一`ID`，形如：`havip-9o233uri`。 */
   HaVipIds?: string[];
-  /** 过滤条件，参数不支持同时指定`HaVipIds`和`Filters`。havip-id - String - `HAVIP`唯一`ID`，形如：`havip-9o233uri`。havip-name - String - `HAVIP`名称。vpc-id - String - `HAVIP`所在私有网络`ID`。subnet-id - String - `HAVIP`所在子网`ID`。vip - String - `HAVIP`的地址`VIP`。address-ip - String - `HAVIP`绑定的弹性公网`IP`。havip-association.instance-id - String - `HAVIP`绑定的子机或网卡。havip-association.instance-type - String - `HAVIP`绑定的类型，取值:CVM, ENI。check-associate - Bool - 是否开启HaVip飘移时校验绑定的子机或网卡。cdc-id - String - CDC实例ID。 */
+  /** 过滤条件，参数不支持同时指定`HaVipIds`和`Filters`。havip-id - String - `HAVIP`唯一`ID`，形如：`havip-9o233uri`。havip-name - String - `HAVIP`名称。vpc-id - String - `HAVIP`所在私有网络`ID`。subnet-id - String - `HAVIP`所在子网`ID`。vip - String - `HAVIP`的地址`VIP`。address-ip - String - `HAVIP`绑定的弹性公网`IP`。havip-association.instance-id - String - `HAVIP`绑定的子机或网卡。havip-association.instance-type - String - `HAVIP`绑定的类型，取值:CVM, ENI。check-associate - Bool - 是否开启HaVip飘移时校验绑定的子机或网卡。cdc-id - String - CDC实例ID。type- String - HAVIP类型。取值: NORMAL(普通); GWLB(网关负载均衡); OPTIMIZATION(优化模式)。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -6972,6 +6974,28 @@ declare interface DescribeRouteListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRoutePoliciesRequest {
+  /** 路由策略实例唯一ID。形如：rrp-q7ywkx31。每次请求的实例的上限为100。参数不支持同时指定RoutePolicyIds和Filters。 */
+  RoutePolicyIds?: string[];
+  /** 过滤条件，不支持同时指定RoutePolicyIds和Filters参数。支持的过滤条件如下：route-policy-name：路由策略实例名称，支持模糊查询。route-policy-description：路由策略实例描述，支持模糊查询。route-policy-id ：路由策略实例ID，例如：rrp-q7ywkx3w。 **说明：**若同一个过滤条件（Filter）存在多个Values，则同一Filter下Values间的关系为逻辑或（OR）关系；若存在多个过滤条件（Filter），Filter之间的关系为逻辑与（AND）关系。 */
+  Filters?: Filter[];
+  /** 偏移量，默认为0。 */
+  Offset?: string;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: string;
+  /** 是否返回路由策略条目。默认为False。当该参数为False时，仍然会返回空的返回空的RoutePolicyEntrySet。 */
+  NeedRoutePolicyEntry?: boolean;
+}
+
+declare interface DescribeRoutePoliciesResponse {
+  /** 符合条件的对象数。 */
+  TotalCount?: number;
+  /** 路由策略对象。 */
+  RoutePolicySet?: RoutePolicy[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRoutePolicyEntriesRequest {
   /** 过滤条件，参数不支持同时指定RoutePolicyEntryIds和Filters。route-policy-id - String - （过滤条件）路由接收策略实例ID，形如：rrp-f49l6u0z。cidr-block - String - （过滤条件）CIDR(只取掩码前的子网部分)，形如：10.0.0.0/8。priority - Integer - （过滤条件）优先级，形如：20。gateway-type - String - （过滤条件）下一跳类型，形如：CVM。gateway-id - String - （过滤条件）下一跳实例唯一ID，形如：ccn-f49l6u0z。route-type - String - （过滤条件）路由类型，取值：USER（用户路由），NETD（网络探测下发的路由），CCN（云联网路由）。action - String - （过滤条件）动作，取值：DROP（丢弃），DISABLE（接收且禁用），ACCEPT（接收且启用）。description - String - （过滤条件）描述，形如：TEST。route-policy-item-id - String - （过滤条件）路由接收策略条目唯一ID，形如：rrpi-dq782kw7。 */
   Filters?: Filter[];
@@ -7033,7 +7057,7 @@ declare interface DescribeRouteTableSelectionPoliciesResponse {
 }
 
 declare interface DescribeRouteTablesRequest {
-  /** 过滤条件，参数不支持同时指定RouteTableIds和Filters。route-table-id - String - （过滤条件）路由表实例ID。route-table-name - String - （过滤条件）路由表名称。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。association.main - String - （过滤条件）是否主路由表。tag-key - String -是否必填：否 - （过滤条件）按照标签键进行过滤。tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。next-hop-type - String - 是否必填：否 - （过滤条件）按下一跳类型进行过滤。使用next-hop-type进行过滤时，必须同时携带route-table-id与vpc-id。目前我们支持的类型有：LOCAL: 本地路由CVM：公网网关类型的云服务器；VPN：VPN网关；DIRECTCONNECT：专线网关；PEERCONNECTION：对等连接；HAVIP：高可用虚拟IP；NAT：NAT网关; NORMAL_CVM：普通云服务器；EIP：云服务器的公网IP；CCN：云联网；LOCAL_GATEWAY：本地网关。 */
+  /** 过滤条件，参数不支持同时指定RouteTableIds和Filters。route-table-id - String - （过滤条件）路由表实例ID。route-table-name - String - （过滤条件）路由表名称。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。association.main - String - （过滤条件）是否主路由表。tag-key - String -是否必填：否 - （过滤条件）按照标签键进行过滤。tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。visible - String - （过滤条件）是否可见。next-hop-type - String - 是否必填：否 - （过滤条件）按下一跳类型进行过滤。使用next-hop-type进行过滤时，必须同时携带route-table-id与vpc-id。目前我们支持的类型有：LOCAL: 本地路由CVM：公网网关类型的云服务器；VPN：VPN网关；DIRECTCONNECT：专线网关；PEERCONNECTION：对等连接；HAVIP：高可用虚拟IP；NAT：NAT网关; NORMAL_CVM：普通云服务器；EIP：云服务器的公网IP；CCN：云联网；LOCAL_GATEWAY：本地网关。GWLB_ENDPOINT：网关负载均衡终端节点。 */
   Filters?: Filter[];
   /** 路由表实例ID，例如：rtb-azd4dt1c。 */
   RouteTableIds?: string[];
@@ -9661,8 +9685,8 @@ declare interface ReplaceDirectConnectGatewayCcnRoutesResponse {
 declare interface ReplaceHighPriorityRouteTableAssociationRequest {
   /** 高优路由表唯一 ID。 */
   HighPriorityRouteTableId: string;
-  /** 子网唯一 ID */
-  SubnetId: string;
+  /** 子网唯一 ID。对于存在子网唯一ID的场景，该参数为必选。对于不存在子网ID的特殊场景，SubnetId和CidrBlock参数至少提供一个，二选一。 */
+  SubnetId?: string;
 }
 
 declare interface ReplaceHighPriorityRouteTableAssociationResponse {
@@ -9709,10 +9733,10 @@ declare interface ReplaceRoutePolicyEntriesResponse {
 }
 
 declare interface ReplaceRouteTableAssociationRequest {
-  /** 子网实例ID，例如：subnet-3x5lf5q0。可通过DescribeSubnets接口查询。 */
-  SubnetId: string;
   /** 路由表实例ID，例如：rtb-azd4dt1c。 */
   RouteTableId: string;
+  /** 子网实例ID，例如：subnet-3x5lf5q0。可通过DescribeSubnets接口查询。对于存在子网唯一ID的子网，该参数为必选；否则， SubnetId和CidrBlock必选二选一。 */
+  SubnetId?: string;
 }
 
 declare interface ReplaceRouteTableAssociationResponse {
@@ -9741,8 +9765,10 @@ declare interface ReplaceSecurityGroupPoliciesRequest {
   SecurityGroupId: string;
   /** 安全组规则集合对象。 */
   SecurityGroupPolicySet: SecurityGroupPolicySet;
-  /** 旧的安全组规则集合对象，可选，日志记录用。 */
+  /** 旧的安全组规则集合对象，当更新优先级时为必选，且修改顺序与SecurityGroupPolicySet参数顺序一一对应，入参长度需要与SecurityGroupPolicySet参数保持一致。 */
   OriginalSecurityGroupPolicySet?: SecurityGroupPolicySet;
+  /** 更新类型，默认 Policy Policy：只更新内容 Priority：只更新优先级 Both：内容和优先级都更新 */
+  UpdateType?: string;
 }
 
 declare interface ReplaceSecurityGroupPoliciesResponse {
@@ -10555,6 +10581,8 @@ declare interface Vpc {
   DescribeRouteConflicts(data: DescribeRouteConflictsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteConflictsResponse>;
   /** 查询路由条目列表 {@link DescribeRouteListRequest} {@link DescribeRouteListResponse} */
   DescribeRouteList(data?: DescribeRouteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRouteListResponse>;
+  /** 用户查询路由策略列表 {@link DescribeRoutePoliciesRequest} {@link DescribeRoutePoliciesResponse} */
+  DescribeRoutePolicies(data?: DescribeRoutePoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoutePoliciesResponse>;
   /** 查看路由接收策略条目 {@link DescribeRoutePolicyEntriesRequest} {@link DescribeRoutePolicyEntriesResponse} */
   DescribeRoutePolicyEntries(data?: DescribeRoutePolicyEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoutePolicyEntriesResponse>;
   /** 查询实例绑定路由表信息 {@link DescribeRouteTableAssociatedInstancesRequest} {@link DescribeRouteTableAssociatedInstancesResponse} */

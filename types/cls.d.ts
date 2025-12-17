@@ -12,6 +12,14 @@ declare interface AdvanceFilterRuleInfo {
   Value?: string;
 }
 
+/** 投递Ckafka 高级配置 */
+declare interface AdvancedConsumerConfiguration {
+  /** Ckafka分区hash状态。 默认 false- true：开启根据字段 Hash 值结果相等的信息投递到统一 ckafka 分区- false：关闭根据字段 Hash 值结果相等的信息投递到统一 ckafka 分区 */
+  PartitionHashStatus?: boolean;
+  /** 需要计算 hash 的字段列表。最大支持5个字段。 */
+  PartitionFields?: string[];
+}
+
 /** 告警多维分析一些配置信息 */
 declare interface AlarmAnalysisConfig {
   /** 键。支持以下key：SyntaxRule：语法规则，value支持 0：Lucene语法；1： CQL语法。QueryIndex：执行语句序号。value支持 -1：自定义； 1：执行语句1； 2：执行语句2。CustomQuery：检索语句。 QueryIndex为-1时有效且必填，value示例： "* | select count(*) as count"。Fields：字段。value支持 __SOURCE__；__FILENAME__；__HOSTNAME__；__TIMESTAMP__；__INDEX_STATUS__；__PKG_LOGID__；__TOPIC__。Format：显示形式。value支持 1：每条日志一行；2：每条日志每个字段一行。Limit：最大日志条数。 value示例： 5。 */
@@ -102,6 +110,14 @@ declare interface AlarmNotice {
   CreateTime?: string;
   /** 最近更新时间。格式： YYYY-MM-DD HH:MM:SS */
   UpdateTime?: string;
+  /** 投递日志开关。参数值：1：关闭2：开启 */
+  DeliverStatus?: number;
+  /** 投递日志标识。参数值：1：未启用2：已启用3：投递异常 */
+  DeliverFlag?: number;
+  /** 通知渠道组配置的告警屏蔽统计状态数量信息。 */
+  AlarmShieldCount?: AlarmShieldCount | null;
+  /** 统一设定自定义回调参数。- true: 使用通知内容模板中的自定义回调参数覆盖告警策略中单独配置的请求头及请求内容。- false:优先使用告警策略中单独配置的请求头及请求内容。 */
+  CallbackPrioritize?: boolean;
 }
 
 /** 通知渠道投递日志配置信息 */
@@ -110,6 +126,18 @@ declare interface AlarmNoticeDeliverConfig {
   DeliverConfig?: DeliverConfig;
   /** 投递失败原因。 */
   ErrMsg?: string;
+}
+
+/** 告警屏蔽统计信息 */
+declare interface AlarmShieldCount {
+  /** 符合检索条件的告警屏蔽总数量 */
+  TotalCount?: number;
+  /** 告警屏蔽未生效数量 */
+  InvalidCount?: number;
+  /** 告警屏蔽生效中数量 */
+  ValidCount?: number;
+  /** 告警屏蔽已过期数量 */
+  ExpireCount?: number;
 }
 
 /** 告警屏蔽任务配置 */
@@ -1286,6 +1314,8 @@ declare interface LogsetInfo {
   LogsetName?: string;
   /** 创建时间。格式 `YYYY-MM-DD HH:MM:SS` */
   CreateTime?: string;
+  /** 若AssumerUin非空，则表示创建该日志集的服务方Uin */
+  AssumerUin?: number;
   /** 云产品标识，日志集由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE */
   AssumerName?: string;
   /** 日志集绑定的标签 */
@@ -1294,6 +1324,8 @@ declare interface LogsetInfo {
   TopicCount?: number;
   /** 若AssumerName非空，则表示创建该日志集的服务方角色 */
   RoleName?: string;
+  /** 日志集下指标主题的数目 */
+  MetricTopicCount?: number;
 }
 
 /** 机器组信息 */
@@ -1700,6 +1732,12 @@ declare interface ShipperInfo {
   HistoryStatus?: number;
   /** 对象存储类型，默认值为 STANDARD。枚举值请参见[ 存储类型概述](https://cloud.tencent.com/document/product/436/33417) 文档。参考值有：STANDARD：标准存储STANDARD_IA：低频存储ARCHIVE：归档存储DEEP_ARCHIVE：深度归档存储MAZ_STANDARD：标准存储（多 AZ）MAZ_STANDARD_IA：低频存储（多 AZ）INTELLIGENT_TIERING：智能分层存储MAZ_INTELLIGENT_TIERING：智能分层存储（多 AZ） */
   StorageType?: string;
+  /** 角色访问描述名 [创建角色](https://cloud.tencent.com/document/product/598/19381) */
+  RoleArn?: string;
+  /** 外部ID */
+  ExternalId?: string;
+  /** 任务运行状态。支持`0`,`1`,`2`- `0`: 停止- `1`: 运行中- `2`: 异常 */
+  TaskStatus?: number;
 }
 
 /** 投递任务信息 */
@@ -1758,14 +1796,18 @@ declare interface TopicInfo {
   PartitionCount?: number;
   /** 主题是否开启索引（主题类型需为日志主题） */
   Index?: boolean;
+  /** AssumerUin非空则表示创建该日志主题的服务方Uin */
+  AssumerUin?: number;
   /** 云产品标识，主题由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE */
   AssumerName?: string;
-  /** 创建时间时间格式：yyyy-MM-dd HH:mm:ss */
+  /** 创建时间。格式：yyyy-MM-dd HH:mm:ss */
   CreateTime?: string;
   /** 主题是否开启采集，true：开启采集；false：关闭采集。创建日志主题时默认开启，可通过SDK调用ModifyTopic修改此字段。控制台目前不支持修改此参数。 */
   Status?: boolean;
   /** 主题绑定的标签信息 */
   Tags?: Tag[];
+  /** RoleName非空则表示创建该日志主题的服务方使用的角色 */
+  RoleName?: string;
   /** 该主题是否开启自动分裂 */
   AutoSplit?: boolean;
   /** 若开启自动分裂的话，该主题能够允许的最大分区数 */
@@ -1792,6 +1834,8 @@ declare interface TopicInfo {
   MigrationStatus?: number;
   /** 异步迁移完成后，预计生效日期时间格式：yyyy-MM-dd HH:mm:ss */
   EffectiveDate?: string;
+  /** IsSourceFrom 开启记录公网来源ip和服务端接收时间 */
+  IsSourceFrom?: boolean;
 }
 
 /** 用户kafka扩展信息 */
@@ -1959,6 +2003,8 @@ declare interface CreateAlarmNoticeRequest {
   DeliverConfig?: DeliverConfig;
   /** 免登录操作告警开关。可取值如下：- 1：关闭- 2：开启（默认值） */
   AlarmShieldStatus?: number;
+  /** 统一设定自定义回调参数。- true: 使用通知内容模板中的自定义回调参数覆盖告警策略中单独配置的请求头及请求内容。- false:优先使用告警策略中单独配置的请求头及请求内容。 */
+  CallbackPrioritize?: boolean;
 }
 
 declare interface CreateAlarmNoticeResponse {
@@ -2177,6 +2223,12 @@ declare interface CreateConsumerRequest {
   Ckafka?: Ckafka;
   /** 投递时压缩方式，取值0，2，3。[0：NONE；2：SNAPPY；3：LZ4] */
   Compression?: number;
+  /** 角色访问描述名 [创建角色](https://cloud.tencent.com/document/product/598/19381) */
+  RoleArn?: string;
+  /** 外部ID */
+  ExternalId?: string;
+  /** 高级配置项 */
+  AdvancedConfig?: AdvancedConsumerConfiguration;
 }
 
 declare interface CreateConsumerResponse {
@@ -2365,6 +2417,8 @@ declare interface CreateIndexRequest {
   IncludeInternalFields?: boolean;
   /** 元数据字段（前缀为`__TAG__`的字段）是否包含至全文索引，默认为0，推荐设置为1* 0:仅包含开启键值索引的元数据字段* 1:包含所有元数据字段* 2:不包含任何元数据字段 */
   MetadataFlag?: number;
+  /** 自定义日志解析异常存储字段。 */
+  CoverageField?: string;
 }
 
 declare interface CreateIndexResponse {
@@ -2533,6 +2587,10 @@ declare interface CreateShipperRequest {
   EndTime?: number;
   /** 对象存储类型，默认值为 STANDARD。枚举值请参见[ 存储类型概述](https://cloud.tencent.com/document/product/436/33417) 文档。参考值有：- STANDARD：标准存储- STANDARD_IA：低频存储- ARCHIVE：归档存储- DEEP_ARCHIVE：深度归档存储- MAZ_STANDARD：标准存储（多 AZ）- MAZ_STANDARD_IA：低频存储（多 AZ）- INTELLIGENT_TIERING：智能分层存储- MAZ_INTELLIGENT_TIERING：智能分层存储（多 AZ） */
   StorageType?: string;
+  /** 角色访问描述名 [创建角色](https://cloud.tencent.com/document/product/598/19381) */
+  RoleArn?: string;
+  /** 外部ID */
+  ExternalId?: string;
 }
 
 declare interface CreateShipperResponse {
@@ -2867,12 +2925,14 @@ declare interface DeleteWebCallbackResponse {
 }
 
 declare interface DescribeAlarmNoticesRequest {
-  /** name按照【通知渠道组名称】进行过滤。类型：String示例："Filters":[{"Key":"name","Values":["test-notice"]}]必选：否 alarmNoticeId按照【通知渠道组ID】进行过滤。类型：String示例："Filters": [{Key: "alarmNoticeId", Values: ["notice-5281f1d2-6275-4e56-9ec3-a1eb19d8bc2f"]}]必选：否 uid按照【接收用户ID】进行过滤。类型：String示例："Filters": [{Key: "uid", Values: ["1137546"]}]必选：否 groupId按照【接收用户组ID】进行过滤。类型：String示例："Filters": [{Key: "groupId", Values: ["344098"]}]必选：否 deliverFlag按照【投递状态】进行过滤。类型：String必选：否可选值： "1":未启用, "2": 已启用, "3":投递异常示例："Filters":[{"Key":"deliverFlag","Values":["2"]}]每次请求的Filters的上限为10，Filter.Values的上限为5。 */
+  /** name按照【通知渠道组名称】进行过滤。类型：String示例："Filters":[{"Key":"name","Values":["test-notice"]}]必选：否alarmNoticeId按照【通知渠道组ID】进行过滤。类型：String示例："Filters": [{Key: "alarmNoticeId", Values: ["notice-5281f1d2-6275-4e56-9ec3-a1eb19d8bc2f"]}]必选：否uid按照【接收用户ID】进行过滤。类型：String示例："Filters": [{Key: "uid", Values: ["1137546"]}]必选：否groupId按照【接收用户组ID】进行过滤。类型：String示例："Filters": [{Key: "groupId", Values: ["344098"]}]必选：否deliverFlag按照【投递状态】进行过滤。类型：String必选：否可选值： "1":未启用, "2": 已启用, "3":投递异常示例："Filters":[{"Key":"deliverFlag","Values":["2"]}]每次请求的Filters的上限为10，Filter.Values的上限为5。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0。 */
   Offset?: number;
   /** 分页单页限制数目，默认值为20，最大值100。 */
   Limit?: number;
+  /** 是否需要返回通知渠道组配置的告警屏蔽统计状态数量信息。- true：需要返回；- false：不返回（默认false）。 */
+  HasAlarmShieldCount?: boolean;
 }
 
 declare interface DescribeAlarmNoticesResponse {
@@ -3174,6 +3234,8 @@ declare interface DescribeIndexResponse {
   IncludeInternalFields?: boolean;
   /** 元数据字段（前缀为`__TAG__`的字段）是否包含至全文索引* 0:仅包含开启键值索引的元数据字段* 1:包含所有元数据字段* 2:不包含任何元数据字段 */
   MetadataFlag?: number;
+  /** 自定义日志解析异常存储字段。 */
+  CoverageField?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3597,6 +3659,8 @@ declare interface ModifyAlarmNoticeRequest {
   DeliverConfig?: DeliverConfig;
   /** 免登录操作告警开关。参数值： 1：关闭 2：开启（默认开启） */
   AlarmShieldStatus?: number;
+  /** 统一设定自定义回调参数。- true: 使用通知内容模板中的自定义回调参数覆盖告警策略中单独配置的请求头及请求内容。- false:优先使用告警策略中单独配置的请求头及请求内容。 */
+  CallbackPrioritize?: boolean;
 }
 
 declare interface ModifyAlarmNoticeResponse {
@@ -3791,6 +3855,12 @@ declare interface ModifyConsumerRequest {
   Ckafka?: Ckafka;
   /** 投递时压缩方式，取值0，2，3。[0：NONE；2：SNAPPY；3：LZ4] */
   Compression?: number;
+  /** 角色访问描述名 [创建角色](https://cloud.tencent.com/document/product/598/19381) */
+  RoleArn?: string;
+  /** 外部ID */
+  ExternalId?: string;
+  /** 高级配置 */
+  AdvancedConfig?: AdvancedConsumerConfiguration;
 }
 
 declare interface ModifyConsumerResponse {
@@ -3919,6 +3989,8 @@ declare interface ModifyIndexRequest {
   IncludeInternalFields?: boolean;
   /** 元数据字段（前缀为`__TAG__`的字段）是否包含至全文索引，默认为0，推荐设置为1* 0:仅包含开启键值索引的元数据字段* 1:包含所有元数据字段* 2:不包含任何元数据字段 */
   MetadataFlag?: number;
+  /** 自定义日志解析异常存储字段。 */
+  CoverageField?: string;
 }
 
 declare interface ModifyIndexResponse {
@@ -4099,6 +4171,10 @@ declare interface ModifyShipperRequest {
   FilenameMode?: number;
   /** 对象存储类型，默认值为 STANDARD。枚举值请参见[ 存储类型概述](https://cloud.tencent.com/document/product/436/33417) 文档。参考值有：- STANDARD：标准存储- STANDARD_IA：低频存储- ARCHIVE：归档存储- DEEP_ARCHIVE：深度归档存储- MAZ_STANDARD：标准存储（多 AZ）- MAZ_STANDARD_IA：低频存储（多 AZ）- INTELLIGENT_TIERING：智能分层存储- MAZ_INTELLIGENT_TIERING：智能分层存储（多 AZ） */
   StorageType?: string;
+  /** 角色访问描述名 [创建角色](https://cloud.tencent.com/document/product/598/19381) */
+  RoleArn?: string;
+  /** 外部ID */
+  ExternalId?: string;
 }
 
 declare interface ModifyShipperResponse {
@@ -4121,6 +4197,8 @@ declare interface ModifyTopicRequest {
   MaxSplitPartitions?: number;
   /** 生命周期，单位天，标准存储取值范围1\~3600，低频存储取值范围7\~3600。取值为3640时代表永久保存 */
   Period?: number;
+  /** 存储类型：cold 低频存储，hot 标准存储 */
+  StorageType?: string;
   /** 主题描述 */
   Describes?: string;
   /** 0：日志主题关闭日志沉降。非0：日志主题开启日志沉降后标准存储的天数。HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效，指标主题不支持该配置。 */
@@ -4133,6 +4211,10 @@ declare interface ModifyTopicRequest {
   PartitionCount?: number;
   /** 取消切换存储任务的id- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取取消切换存储任务的id【Topics中的TopicAsyncTaskID字段】。 */
   CancelTopicAsyncTaskID?: string;
+  /** 加密相关参数。 支持加密地域并且开白用户可以传此参数，其他场景不能传递该参数。只支持传入1：kms-cls 云产品秘钥加密 */
+  Encryption?: number;
+  /** 开启记录公网来源ip和服务端接收时间 */
+  IsSourceFrom?: boolean;
 }
 
 declare interface ModifyTopicResponse {

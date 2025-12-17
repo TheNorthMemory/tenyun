@@ -472,7 +472,7 @@ declare interface UserIdAndUserName {
   LastLogin?: string | null;
   /** 停启用状态 */
   Status?: number | null;
-  /** 首次登陆是否修改密码 */
+  /** 首次登录是否修改密码 */
   FirstModify?: number | null;
   /** 手机号码 */
   PhoneNumber?: string | null;
@@ -482,13 +482,13 @@ declare interface UserIdAndUserName {
   CreatedUser?: string | null;
   /** 创建时间 */
   CreatedAt?: string | null;
-  /** 更改人 */
+  /** 修改人 */
   UpdatedUser?: string | null;
   /** 更改时间 */
   UpdatedAt?: string | null;
-  /** 全局角色 */
+  /** 系统全局角色 */
   GlobalUserName?: string | null;
-  /** 全局角色编码 */
+  /** 系统全局角色编码 */
   GlobalUserCode?: string | null;
   /** 手机号 */
   Mobile?: string | null;

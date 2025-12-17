@@ -1346,6 +1346,20 @@ declare interface TargetGroupInstance {
   NewPort?: number;
 }
 
+/** 用于目标组后端rs健康检查状态。 */
+declare interface TargetGroupInstanceStatus {
+  /** 后端rs的IP */
+  InstanceIp?: string;
+  /** 健康检查状态，参数值及含义如下：● on：表示探测中。● off：表示健康检查关闭。● health：表示健康。● unhealth：表示异常。 */
+  Status?: string;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 端口 */
+  Port?: number;
+  /** 网卡ID */
+  EniId?: string | null;
+}
+
 /** 描述一个Target的健康信息 */
 declare interface TargetHealth {
   /** Target的内网IP */
@@ -2376,6 +2390,20 @@ declare interface DescribeRewriteResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTargetGroupInstanceStatusRequest {
+  /** 目标组唯一id */
+  TargetGroupId: string;
+  /** 目标组绑定的后端服务ip列表 */
+  TargetGroupInstanceIps?: string[];
+}
+
+declare interface DescribeTargetGroupInstanceStatusResponse {
+  /** 健康检查后端rs状态列表 */
+  TargetGroupInstanceSet?: TargetGroupInstanceStatus[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTargetGroupInstancesRequest {
   /** 过滤条件，当前支持按照 TargetGroupId，BindIP，InstanceId 多个条件组合过滤。 */
   Filters: Filter[];
@@ -3181,6 +3209,8 @@ declare interface Clb {
   DescribeResources(data?: DescribeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesResponse>;
   /** 查询负载均衡转发规则的重定向关系 {@link DescribeRewriteRequest} {@link DescribeRewriteResponse} */
   DescribeRewrite(data: DescribeRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRewriteResponse>;
+  /** 查询目标组后端服务状态 {@link DescribeTargetGroupInstanceStatusRequest} {@link DescribeTargetGroupInstanceStatusResponse} */
+  DescribeTargetGroupInstanceStatus(data: DescribeTargetGroupInstanceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetGroupInstanceStatusResponse>;
   /** 获取目标组绑定的服务器 {@link DescribeTargetGroupInstancesRequest} {@link DescribeTargetGroupInstancesResponse} */
   DescribeTargetGroupInstances(data: DescribeTargetGroupInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetGroupInstancesResponse>;
   /** 获取目标组列表 {@link DescribeTargetGroupListRequest} {@link DescribeTargetGroupListResponse} */

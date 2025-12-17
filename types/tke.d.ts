@@ -104,6 +104,8 @@ declare interface CreateNativeNodePoolParam {
   MachineType?: string;
   /** 原生节点池安装节点自动化助手开关 */
   AutomationService?: boolean;
+  /** 原生节点池密码 */
+  Password?: string;
 }
 
 /** 描述了k8s节点数据盘相关配置与信息。 */
@@ -700,6 +702,8 @@ declare interface UpdateNativeNodePoolParam {
   KeyIds?: string[];
   /** 节点池 GPU 配置 */
   GPUConfigs?: GPUConfig[];
+  /** 原生节点池密码 */
+  Password?: string;
 }
 
 declare interface CreateHealthCheckPolicyRequest {
@@ -1539,6 +1543,20 @@ declare namespace V20180525 {
     SubaccountUin?: string;
     /** 子账户客户端证书中的CommonName字段 */
     CN?: string;
+  }
+
+  /** 组件日志采集配置 */
+  interface ComponentLogConfig {
+    /** 组件名称 */
+    Name: string;
+    /** 日志级别，对于支持动态调整日志级别的组件，开启日志时可指定该参数 */
+    LogLevel?: number;
+    /** 日志集ID。如果不指定，则自动创建 */
+    LogSetId?: string;
+    /** 日志主题ID。如果不指定，则自动创建 */
+    TopicId?: string;
+    /** topic 所属region。 该参数可实现日志跨地域投递 */
+    TopicRegion?: string;
   }
 
   /** EKS Instance Container容器 */
@@ -5821,6 +5839,20 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface DescribeControlPlaneLogsRequest {
+    /** 集群ID */
+    ClusterId: string;
+    /** 集群类型。当前只支持tke */
+    ClusterType: string;
+  }
+
+  interface DescribeControlPlaneLogsResponse {
+    /** 日志采集配置查询结果 */
+    Details?: ComponentLogConfig[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeECMInstancesRequest {
     /** 集群id */
     ClusterID: string;
@@ -7065,6 +7097,22 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface DisableControlPlaneLogsRequest {
+    /** 集群ID */
+    ClusterId: string;
+    /** 集群类型。当前只支持tke */
+    ClusterType: string;
+    /** 组件名称列表，目前支持的组件有：kube-apiserver、kube-controller-manager、kube-scheduler、cluster-autoscaler、kapenter */
+    ComponentNames: string[];
+    /** 是否删除日志集和topic。 如果日志集和topic被其他采集规则使用，则不会被删除 */
+    DeleteLogSetAndTopic?: boolean;
+  }
+
+  interface DisableControlPlaneLogsResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DisableEncryptionProtectionRequest {
     /** 集群ID */
     ClusterId: string;
@@ -7131,6 +7179,20 @@ declare namespace V20180525 {
   }
 
   interface EnableClusterDeletionProtectionResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface EnableControlPlaneLogsRequest {
+    /** 集群ID */
+    ClusterId: string;
+    /** 集群类型。当前只支持tke */
+    ClusterType: string;
+    /** 各组件日志采集配置，目前支持的组件有：kube-apiserver、kube-controller-manager、kube-scheduler、cluster-autoscaler、kapenter */
+    Components: ComponentLogConfig[];
+  }
+
+  interface EnableControlPlaneLogsResponse {
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -8523,6 +8585,8 @@ declare interface Tke {
   DescribeClusterVirtualNodePools(data: V20180525.DescribeClusterVirtualNodePoolsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeClusterVirtualNodePoolsResponse>;
   /** 查询TKE集群列表 {@link V20180525.DescribeClustersRequest} {@link V20180525.DescribeClustersResponse} */
   DescribeClusters(data: V20180525.DescribeClustersRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeClustersResponse>;
+  /** 查询用户托管组件日志采集开启状态 {@link V20180525.DescribeControlPlaneLogsRequest} {@link V20180525.DescribeControlPlaneLogsResponse} */
+  DescribeControlPlaneLogs(data: V20180525.DescribeControlPlaneLogsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeControlPlaneLogsResponse>;
   /** 获取ECM实例相关信息 {@link V20180525.DescribeECMInstancesRequest} {@link V20180525.DescribeECMInstancesResponse} */
   DescribeECMInstances(data: V20180525.DescribeECMInstancesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeECMInstancesResponse>;
   /** 获取弹性容器集群的认证信息 {@link V20180525.DescribeEKSClusterCredentialRequest} {@link V20180525.DescribeEKSClusterCredentialResponse} */
@@ -8661,6 +8725,8 @@ declare interface Tke {
   DisableClusterAudit(data: V20180525.DisableClusterAuditRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DisableClusterAuditResponse>;
   /** 关闭集群删除保护 {@link V20180525.DisableClusterDeletionProtectionRequest} {@link V20180525.DisableClusterDeletionProtectionResponse} */
   DisableClusterDeletionProtection(data: V20180525.DisableClusterDeletionProtectionRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DisableClusterDeletionProtectionResponse>;
+  /** 关闭用户托管组件日志采集 {@link V20180525.DisableControlPlaneLogsRequest} {@link V20180525.DisableControlPlaneLogsResponse} */
+  DisableControlPlaneLogs(data: V20180525.DisableControlPlaneLogsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DisableControlPlaneLogsResponse>;
   /** 关闭加密信息保护 {@link V20180525.DisableEncryptionProtectionRequest} {@link V20180525.DisableEncryptionProtectionResponse} */
   DisableEncryptionProtection(data: V20180525.DisableEncryptionProtectionRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DisableEncryptionProtectionResponse>;
   /** 关闭事件持久化功能 {@link V20180525.DisableEventPersistenceRequest} {@link V20180525.DisableEventPersistenceResponse} */
@@ -8673,6 +8739,8 @@ declare interface Tke {
   EnableClusterAudit(data: V20180525.EnableClusterAuditRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.EnableClusterAuditResponse>;
   /** 启用集群删除保护 {@link V20180525.EnableClusterDeletionProtectionRequest} {@link V20180525.EnableClusterDeletionProtectionResponse} */
   EnableClusterDeletionProtection(data: V20180525.EnableClusterDeletionProtectionRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.EnableClusterDeletionProtectionResponse>;
+  /** 开启指定集群的托管组件日志采集 {@link V20180525.EnableControlPlaneLogsRequest} {@link V20180525.EnableControlPlaneLogsResponse} */
+  EnableControlPlaneLogs(data: V20180525.EnableControlPlaneLogsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.EnableControlPlaneLogsResponse>;
   /** 开启加密数据保护 {@link V20180525.EnableEncryptionProtectionRequest} {@link V20180525.EnableEncryptionProtectionResponse} */
   EnableEncryptionProtection(data: V20180525.EnableEncryptionProtectionRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.EnableEncryptionProtectionResponse>;
   /** 开启事件持久化功能 {@link V20180525.EnableEventPersistenceRequest} {@link V20180525.EnableEventPersistenceResponse} */

@@ -1817,6 +1817,14 @@ declare namespace V20180717 {
     MetaData?: MediaMetaData;
   }
 
+  /** AIGC 统计数据 */
+  interface AigcUsageDataItem {
+    /** AIGC规格。取值有：Qwen2.0Gem2.5Gem3.0_1KGem3.0_2KGem3.0_4KSeedream4.0Sora2Veo3.1StandardVeo3.1FastKling2.5pro_720PKling2.5pro_1080PKling2.0&2.1std_720PKling2.0&2.1pro_1080PHailuo02&2.3_1080PHailuo02&2.3_768PHailuo2.3fast_768PHailuo2.3fast_1080PSeedance3.0proJimeng4.0Jimeng3.0proVidu2.0_720PVidu2.0_1080PViduQ2pro_720PViduQ2pro_1080PViduQ2turbo_720PViduQ2turbo_1080P unknown */
+    Specification?: string;
+    /** 用量数据。 */
+    DataSet?: TaskStatDataItem[];
+  }
+
   /** AIGC 生视频任务的输出媒体文件配置。 */
   interface AigcVideoOutputConfig {
     /** 存储模式。取值有： Permanent：永久存储，生成的视频文件将存储到云点播，可在事件通知中获取到 FileId； Temporary：临时存储，生成的视频文件不会存储到云点播，可在事件通知中获取到临时访问的 URL；默认值：Temporary */
@@ -7919,6 +7927,24 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface DescribeAigcUsageDataRequest {
+    /** 起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    StartTime: string;
+    /** 结束日期，需大于等于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    EndTime: string;
+    /** AIGC类型，取值有： Video：视频。 Image：图片。 */
+    AigcType: string;
+    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: number;
+  }
+
+  interface DescribeAigcUsageDataResponse {
+    /** AIGC统计数据。 */
+    AigcUsageDataSet?: AigcUsageDataItem[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeAllClassRequest {
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
@@ -10867,6 +10893,8 @@ declare interface Vod {
   DescribeAIRecognitionTemplates(data: V20180717.DescribeAIRecognitionTemplatesRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAIRecognitionTemplatesResponse>;
   /** 获取转自适应码流模板列表 {@link V20180717.DescribeAdaptiveDynamicStreamingTemplatesRequest} {@link V20180717.DescribeAdaptiveDynamicStreamingTemplatesResponse} */
   DescribeAdaptiveDynamicStreamingTemplates(data: V20180717.DescribeAdaptiveDynamicStreamingTemplatesRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAdaptiveDynamicStreamingTemplatesResponse>;
+  /** 查询 AIGC 用量统计数据 {@link V20180717.DescribeAigcUsageDataRequest} {@link V20180717.DescribeAigcUsageDataResponse} */
+  DescribeAigcUsageData(data: V20180717.DescribeAigcUsageDataRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAigcUsageDataResponse>;
   /** 获取所有分类 {@link V20180717.DescribeAllClassRequest} {@link V20180717.DescribeAllClassResponse} */
   DescribeAllClass(data: V20180717.DescribeAllClassRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAllClassResponse>;
   /** 获取转动图模板列表 {@link V20180717.DescribeAnimatedGraphicsTemplatesRequest} {@link V20180717.DescribeAnimatedGraphicsTemplatesResponse} */

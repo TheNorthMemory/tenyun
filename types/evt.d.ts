@@ -4,25 +4,45 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 
 /** 人员属性 */
 declare interface UserAttribute {
-  /** 属性键名 */
+  /** 自定义角色体系中用户属性的ID属性键名 */
   Key: string;
-  /** 属性值 */
+  /** 自定义角色体系中的用户属性值，只支持传入对应用户属性支持的角色ID属性值 */
   Value: number[];
 }
 
+declare interface CompleteApprovalRequest {
+  /** 审批单号 */
+  ApprovalId: string;
+  /** 审批节点 */
+  NodeId: string;
+  /** 审批结果，1通过2拒绝 */
+  Result: number;
+  /** 审批意见 */
+  Opinion?: string;
+  /** 审批人的身份认证Token，通过自定义角色体系回调接口分发token信息 */
+  UserToken?: string;
+}
+
+declare interface CompleteApprovalResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateRoleUserRequest {
-  /** 角色体系ID */
+  /** 自定义角色体系的ID角色体系ID */
   RoleSystemId: number;
-  /** 人员ID */
+  /** 要添加的自定义用户ID，建议与腾讯云-子用户的用户名称保持一致人员ID */
   UserId: string;
-  /** 人员名称 */
+  /** 自定义用户的名称人员名称 */
   Username: string;
-  /** 是否启用 */
+  /** 是否启用当前用户枚举值： 1： 启用 2： 禁用是否启用 */
   Enabled: number;
-  /** 手机号 */
+  /** 自定义用户的手机号手机号 */
   Phone?: string;
-  /** 属性列表 */
+  /** 自定义用户的身份属性列表属性列表 */
   Attributes?: UserAttribute[];
+  /** 自定义用户与腾讯云-子用户关联，如果不传默认按照子用户名称进行匹配 */
+  TencentUin?: number;
 }
 
 declare interface CreateRoleUserResponse {
@@ -35,6 +55,8 @@ declare interface CreateRoleUserResponse {
 /** {@link Evt 事件中心} */
 declare interface Evt {
   (): Versions;
+  /** 执行审批 {@link CompleteApprovalRequest} {@link CompleteApprovalResponse} */
+  CompleteApproval(data: CompleteApprovalRequest, config?: AxiosRequestConfig): AxiosPromise<CompleteApprovalResponse>;
   /** 创建人员 {@link CreateRoleUserRequest} {@link CreateRoleUserResponse} */
   CreateRoleUser(data: CreateRoleUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoleUserResponse>;
 }

@@ -348,6 +348,16 @@ declare interface DepartmentManagerUser {
   ManagerName?: string;
 }
 
+/** 部门列表 */
+declare interface Departments {
+  /** 部门列表 */
+  DepartmentSet?: Department[];
+  /** 是否开启了部门管理 true - 已开启, false - 未开启 */
+  Enabled?: boolean;
+  /** 当前操作UIN是否是根部门管理员 */
+  RootManager?: boolean;
+}
+
 /** 资产信息 */
 declare interface Device {
   /** 资产ID */
@@ -1460,7 +1470,7 @@ declare interface CreateUserDirectoryRequest {
   /** ioa关联用户源名称 */
   SourceName: string;
   /** 目录包含用户数 */
-  UserCount: number;
+  UserCount?: number;
 }
 
 declare interface CreateUserDirectoryResponse {
@@ -1854,6 +1864,16 @@ declare interface DescribeCmdTemplatesResponse {
   CmdTemplateSet?: CmdTemplate[];
   /** 总记录数 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDepartmentsRequest {
+}
+
+declare interface DescribeDepartmentsResponse {
+  /** 部门列表 */
+  Departments?: Departments;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3211,6 +3231,8 @@ declare interface Bh {
   DescribeChangePwdTaskDetail(data: DescribeChangePwdTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChangePwdTaskDetailResponse>;
   /** 查询命令模板列表 {@link DescribeCmdTemplatesRequest} {@link DescribeCmdTemplatesResponse} */
   DescribeCmdTemplates(data?: DescribeCmdTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmdTemplatesResponse>;
+  /** 查询部门信息 {@link DescribeDepartmentsRequest} {@link DescribeDepartmentsResponse} */
+  DescribeDepartments(data?: DescribeDepartmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDepartmentsResponse>;
   /** 查询主机账号列表 {@link DescribeDeviceAccountsRequest} {@link DescribeDeviceAccountsResponse} */
   DescribeDeviceAccounts(data?: DescribeDeviceAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceAccountsResponse>;
   /** 查询资产组成员列表 {@link DescribeDeviceGroupMembersRequest} {@link DescribeDeviceGroupMembersResponse} */

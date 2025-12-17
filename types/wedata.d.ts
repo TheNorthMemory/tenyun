@@ -6459,6 +6459,12 @@ declare namespace V20210820 {
     RelatedTaskList?: RelatedTask[] | null;
   }
 
+  /** 分组获取编排空间测试运行记录 */
+  interface DescribeTaskInstancesStatusDto {
+    /** 根据任务信息获取实例状态信息实例 */
+    Instances?: ParamGetTaskInstancesStatusInfoResponseInstance[] | null;
+  }
+
   /** 批量操作任务列表分页 */
   interface DescribeTasksForCodeTemplatePage {
     /** 总页码数 */
@@ -8839,6 +8845,18 @@ declare namespace V20210820 {
     Value?: string | null;
     /** 描述 */
     Description?: string;
+  }
+
+  /** 根据任务信息获取实例状态信息实例 */
+  interface ParamGetTaskInstancesStatusInfoResponseInstance {
+    /** 实例编号 */
+    InstanceId?: string | null;
+    /** 状态 */
+    Status?: string | null;
+    /** 记录编号 */
+    RecordId?: string | null;
+    /** 任务编号 */
+    TaskId?: string | null;
   }
 
   /** 参数参数 */
@@ -16834,6 +16852,22 @@ declare namespace V20210820 {
     RequestId?: string;
   }
 
+  interface DescribeTaskInstancesStatusRequest {
+    /** 任务列表 */
+    RecordIdList: string[];
+    /** 工作流id */
+    WorkflowId: string;
+    /** 项目id */
+    ProjectId: string;
+  }
+
+  interface DescribeTaskInstancesStatusResponse {
+    /** 实例列表 */
+    Data?: DescribeTaskInstancesStatusDto[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeTaskLineageRequest {
     /** 请求来源，WEB 前端；CLIENT 客户端 */
     RequestFromSource?: string;
@@ -20344,6 +20378,8 @@ declare interface Wedata {
   DescribeTaskByStatusReport(data: V20210820.DescribeTaskByStatusReportRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeTaskByStatusReportResponse>;
   /** 查询任务具体详情【新】 {@link V20210820.DescribeTaskDetailDsRequest} {@link V20210820.DescribeTaskDetailDsResponse} */
   DescribeTaskDetailDs(data: V20210820.DescribeTaskDetailDsRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeTaskDetailDsResponse>;
+  /** 分组获取编排空间调试任务实例状态信息 {@link V20210820.DescribeTaskInstancesStatusRequest} {@link V20210820.DescribeTaskInstancesStatusResponse} */
+  DescribeTaskInstancesStatus(data: V20210820.DescribeTaskInstancesStatusRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeTaskInstancesStatusResponse>;
   /** 通过任务查询表的血缘关系 {@link V20210820.DescribeTaskLineageRequest} {@link V20210820.DescribeTaskLineageResponse} */
   DescribeTaskLineage(data: V20210820.DescribeTaskLineageRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeTaskLineageResponse>;
   /** 查看任务锁状态信息 {@link V20210820.DescribeTaskLockStatusRequest} {@link V20210820.DescribeTaskLockStatusResponse} */

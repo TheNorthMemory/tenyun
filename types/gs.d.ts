@@ -451,13 +451,15 @@ declare interface CreateAndroidInstanceADBResponse {
 }
 
 declare interface CreateAndroidInstanceAcceleratorTokenRequest {
-  /** 用户IP，用户客户端的公网IP，用于就近选择起始加速节点 */
-  UserIP: string;
   /** 实例 ID 列表。每次请求的实例的上限为 500。 */
   AndroidInstanceIds: string[];
+  /** 用户IP，可以根据该 IP 选择就近加速点。如果不填，将自动选择就近加速点。 */
+  UserIP?: string;
 }
 
 declare interface CreateAndroidInstanceAcceleratorTokenResponse {
+  /** token */
+  Token?: string;
   /** 加速信息 */
   AcceleratorInfo?: string;
   /** 安卓实例错误列表。列表包含有问题的安卓实例 ID 以及发生的错误信息。 */

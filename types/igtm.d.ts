@@ -554,6 +554,32 @@ declare interface CreateMonitorResponse {
   RequestId?: string;
 }
 
+declare interface CreatePackageAndPayRequest {
+  /** 下单类型：CREATE 新购；RENEW 续费；MODIFY 变配 */
+  DealType: string;
+  /** 套餐类型：STANDARD 标准版；ULTIMATE 旗舰版；TASK 任务探测 */
+  GoodsType: string;
+  /** 商品数量：STANDARD和ULTIMATE固定为1，TASK为任务探测数量。取值范围：1～10000 */
+  GoodsNum: number;
+  /** 自动续费：1 开启自动续费；2 关闭自动续费 */
+  AutoRenew: number;
+  /** 资源ID，续费和变配的时候需要传 */
+  ResourceId?: string;
+  /** 套餐时长，以月为单位，创建和续费的时候需要传。取值范围：1～120 */
+  TimeSpan?: number;
+  /** 升级的套餐类型，暂时只支持传ULTIMATE，不支持降配 */
+  NewPackageType?: string;
+  /** 是否自动选择代金券，1 是；0否，默认为0 */
+  AutoVoucher?: number;
+}
+
+declare interface CreatePackageAndPayResponse {
+  /** 资源id列表，目前只会返回一个资源，取第一个值即可 */
+  ResourceIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateStrategyRequest {
   /** 实例id */
   InstanceId: string;
@@ -942,6 +968,20 @@ declare interface ModifyMonitorResponse {
   RequestId?: string;
 }
 
+declare interface ModifyPackageAutoRenewRequest {
+  /** 资源ID，续费和变配的时候需要传 */
+  ResourceId: string;
+  /** 自动续费：1 开启自动续费；2 关闭自动续费 */
+  AutoRenew: number;
+}
+
+declare interface ModifyPackageAutoRenewResponse {
+  /** 资源id列表，目前只会返回一个资源，取第一个值即可 */
+  ResourceIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyStrategyRequest {
   /** 实例id */
   InstanceId: string;
@@ -979,6 +1019,8 @@ declare interface Igtm {
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
   /** 新增监控器 {@link CreateMonitorRequest} {@link CreateMonitorResponse} */
   CreateMonitor(data: CreateMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMonitorResponse>;
+  /** 购买套餐并支付 {@link CreatePackageAndPayRequest} {@link CreatePackageAndPayResponse} */
+  CreatePackageAndPay(data: CreatePackageAndPayRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePackageAndPayResponse>;
   /** 新建策略 {@link CreateStrategyRequest} {@link CreateStrategyResponse} */
   CreateStrategy(data: CreateStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStrategyResponse>;
   /** 删除地址池 {@link DeleteAddressPoolRequest} {@link DeleteAddressPoolResponse} */
@@ -1023,6 +1065,8 @@ declare interface Igtm {
   ModifyInstanceConfig(data: ModifyInstanceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceConfigResponse>;
   /** 修改监控器 {@link ModifyMonitorRequest} {@link ModifyMonitorResponse} */
   ModifyMonitor(data: ModifyMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMonitorResponse>;
+  /** 设置自动续费 {@link ModifyPackageAutoRenewRequest} {@link ModifyPackageAutoRenewResponse} */
+  ModifyPackageAutoRenew(data: ModifyPackageAutoRenewRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPackageAutoRenewResponse>;
   /** 修改策略 {@link ModifyStrategyRequest} {@link ModifyStrategyResponse} */
   ModifyStrategy(data: ModifyStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStrategyResponse>;
 }

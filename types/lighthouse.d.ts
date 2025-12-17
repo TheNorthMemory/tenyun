@@ -2103,7 +2103,7 @@ declare interface DescribeSnapshotsDeniedActionsResponse {
 declare interface DescribeSnapshotsRequest {
   /** 要查询快照的 ID 列表。每次请求批量快照的上限为 100。 可通过 [DescribeSnapshots](https://cloud.tencent.com/document/product/1207/54388) 接口返回值中的 SnapshotId 获取。参数不支持同时指定 SnapshotIds 和 Filters。 */
   SnapshotIds?: string[];
-  /** 过滤器列表。snapshot-id按照【快照 ID】进行过滤。类型：String必选：否可通过 DescribeSnapshots 接口返回值中的 SnapshotId 获取。disk-id按照【磁盘 ID】进行过滤。类型：String必选：否可通过 DescribeDisks 接口返回值中的 DiskId 获取。snapshot-name按照【快照名称】进行过滤。类型：String必选：否可通过 DescribeSnapshots 接口返回值中的 SnapshotName 获取。instance-id按照【实例 ID 】进行过滤。类型：String必选：否可通过 DescribeInstances 接口返回值中的 InstanceId 获取。tag-key按照【标签键】进行过滤。 类型：String 必选：否tag-value按照【标签值】进行过滤。 类型：String 必选：否tag:tag-key按照【标签键值对】进行过滤。 tag-key使用具体的标签键进行替换。每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 SnapshotIds 和 Filters。 */
+  /** 过滤器列表。snapshot-id按照【快照 ID】进行过滤。类型：String必选：否可通过 DescribeSnapshots 接口返回值中的 SnapshotId 获取。disk-id按照【磁盘 ID】进行过滤。类型：String必选：否可通过 DescribeDisks 接口返回值中的 DiskId 获取。snapshot-name按照【快照名称】进行过滤。类型：String必选：否可通过 DescribeSnapshots 接口返回值中的 SnapshotName 获取。instance-id按照【实例 ID 】进行过滤。类型：String必选：否可通过 DescribeInstances 接口返回值中的 InstanceId 获取。tag-key按照【标签键】进行过滤。类型：String必选：否tag-value按照【标签值】进行过滤。类型：String必选：否tag:tag-key按照【标签键值对】进行过滤。 tag-key使用具体的标签键进行替换。每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 SnapshotIds 和 Filters。 */
   Filters?: Filter[];
   /** 偏移量，默认为 0。 */
   Offset?: number;

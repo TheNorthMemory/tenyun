@@ -3574,6 +3574,30 @@ declare interface EstateCertOCRResponse {
   RequestId?: string;
 }
 
+declare interface ExtractDocAgentRequest {
+  /** 图片/PDF的 Base64 值。 要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。 图片支持的像素范围：需介于20-10000px之间。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  ImageBase64?: string;
+  /** 图片/PDF的 Url 地址。 要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。 图片支持的像素范围：需介于20-10000px之间。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  ImageUrl?: string;
+  /** 自定义抽取需要的字段名称、字段类型、字段提示词。 */
+  ItemNames?: ItemNames[];
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF时有效。 */
+  PdfPageNumber?: number;
+}
+
+declare interface ExtractDocAgentResponse {
+  /** 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负。 */
+  Angle?: number;
+  /** 配置结构化文本信息。 */
+  StructuralList?: GroupInfo[];
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为""。 */
+  ErrorCode?: string;
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。 */
+  ErrorMessage?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ExtractDocBasicRequest {
   /** 图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
@@ -5567,6 +5591,8 @@ declare interface Ocr {
   EnterpriseLicenseOCR(data?: EnterpriseLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EnterpriseLicenseOCRResponse>;
   /** 不动产权证识别 {@link EstateCertOCRRequest} {@link EstateCertOCRResponse} */
   EstateCertOCR(data?: EstateCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EstateCertOCRResponse>;
+  /** 实时文档抽取Agent {@link ExtractDocAgentRequest} {@link ExtractDocAgentResponse} */
+  ExtractDocAgent(data?: ExtractDocAgentRequest, config?: AxiosRequestConfig): AxiosPromise<ExtractDocAgentResponse>;
   /** 文档抽取（基础版） {@link ExtractDocBasicRequest} {@link ExtractDocBasicResponse} */
   ExtractDocBasic(data?: ExtractDocBasicRequest, config?: AxiosRequestConfig): AxiosPromise<ExtractDocBasicResponse>;
   /** 文档抽取（多模态版） {@link ExtractDocMultiRequest} {@link ExtractDocMultiResponse} */
