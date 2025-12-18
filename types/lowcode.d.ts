@@ -96,6 +96,8 @@ declare interface DataSourceDetail {
   PublishedTableName?: string | null;
   /** DB来源类型 */
   DbSourceType?: string | null;
+  /** 模型预览状态开关 */
+  StagingSwitch?: boolean;
 }
 
 /** 数据详情列表 */

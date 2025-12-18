@@ -132,6 +132,14 @@ declare interface SentenceWords {
   OffsetEndMs?: number | null;
 }
 
+/** 说话人注册角色声纹信息 */
+declare interface SpeakerRoleInfo {
+  /** 音频url地址，建议不超过30秒，最大45秒 */
+  RoleAudioUrl: string;
+  /** 不超过30字节 */
+  RoleName: string;
+}
+
 /** [录音文件识别](https://cloud.tencent.com/document/product/1093/37823)、[实时语音异步识别](https://cloud.tencent.com/document/product/1093/52061)请求的返回数据 */
 declare interface Task {
   /** 任务ID，可通过此ID在轮询接口获取识别状态与结果。TaskId数据类型为**uint64**。**注意：TaskId有效期为24小时，不同日期可能出现重复TaskId，请不要依赖TaskId作为您业务系统里的唯一ID。** */
@@ -351,7 +359,7 @@ declare interface CreateRecTaskRequest {
   Url?: string;
   /** 回调 URL用户自行搭建的用于接收识别结果的服务URL回调格式和内容详见：[录音识别回调说明](https://cloud.tencent.com/document/product/1093/52632)注意：- 如果用户使用轮询方式获取识别结果，则无需提交该参数- 建议在回调URL中带上您的业务ID等信息，以便处理业务逻辑 */
   CallbackUrl?: string;
-  /** 是否开启说话人分离0：不开启；1：开启（仅支持以下引擎：8k_zh/8k_zh_large/16k_zh/16k_ms/16k_en/16k_id/16k_zh_large/16k_zh_dialect/16k_zh_en，且ChannelNum=1时可用）；默认值为 0注意：8k双声道电话音频请按 **ChannelNum 识别声道数** 的参数描述使用默认值 */
+  /** 是否开启说话人分离0：不开启；1：开启（仅支持以下引擎：8k_zh/8k_zh_large/16k_zh/16k_ms/16k_en/16k_id/16k_zh_large/16k_zh_dialect/16k_zh_en，且ChannelNum=1时可用）；3: 开启角色分离，需配合SpeakerRoles参数使用（增值服务，仅支持16k_zh_en引擎，可支持传入声纹对录音文件内的说话人进行角色认证）默认值为 0注意：8k双声道电话音频请按 **ChannelNum 识别声道数** 的参数描述使用默认值 */
   SpeakerDiarization?: number;
   /** 说话人分离人数**需配合开启说话人分离使用，不开启无效**，取值范围：0-100：自动分离（最多分离出20个人）；1-10：指定人数分离；默认值为 0注:16k引擎不支持指定人数分离 */
   SpeakerNumber?: number;
@@ -383,6 +391,8 @@ declare interface CreateRecTaskRequest {
   KeyWordLibIdList?: string[];
   /** 替换词汇表id, 适用于热词和自学习场景也无法解决的极端case词组, 会对识别结果强制替换。具体可参考[配置控制台](https://console.cloud.tencent.com/asr/replaceword);强制替换功能可能会影响正常识别结果，请谨慎使用注意：1. 本功能配置完成后，预计在10分钟后生效 */
   ReplaceTextId?: string;
+  /** 开启角色分离能力配合SpeakerDiarization: 3 使用，ASR增值服务，可传入一组声纹信息进行角色认证，仅支持16k_zh_en引擎。需传入SpeakerRoleInfo数据组，确定说话人的角色信息，涉及RoleAudioUrl和RoleName两个参数。 RoleAudioUrl：需要认证角色的声纹音频地址，建议30s内的纯净人声，最长不能超过45s。 RoleName：需要认证角色的名称，若匹配成功，会替换话者分离中的SpeakerID。 示例： "{\"EngineModelType\":\"16k_zh_en\",\"ChannelNum\":1,\"ResTextFormat\":1,\"SourceType\":0,\"Url\":\"需要进行ASR识别的音频链接\",\"SpeakerDiarization\":3,\"SpeakerRoles\":[{\"RoleAudioUrl\":\"需要认证角色的声纹音频地址\",\"RoleName\":\"需要认证角色的名称\"}]}" */
+  SpeakerRoles?: SpeakerRoleInfo[];
 }
 
 declare interface CreateRecTaskResponse {

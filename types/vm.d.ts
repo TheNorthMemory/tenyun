@@ -42,6 +42,8 @@ declare interface AudioResult {
   LabelResults?: LabelResult[];
   /** 审核命中类型 */
   HitType?: string;
+  /** ASR句子的起止时间 */
+  Sentences?: Sentence[];
 }
 
 /** 音频小语种检测结果 */
@@ -302,6 +304,16 @@ declare interface SegmentCosUrlList {
   AudioBlockUrl?: string;
   /** 全量音频识别文本的cos url */
   AsrUrl?: string;
+}
+
+/** ASR识别结果在音频中的起止时间 */
+declare interface Sentence {
+  /** ASR句子 */
+  Text?: string;
+  /** 起始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
 }
 
 /** 说话人结果 */

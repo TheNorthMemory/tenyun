@@ -529,6 +529,8 @@ declare namespace V20180416 {
     PaasEsRepository?: string;
     /** 客户快照仓库名称 */
     UserEsRepository?: string;
+    /** cos存储文件夹目录 */
+    CosBasePath?: string;
     /** 快照存储周期 单位天 */
     StorageDuration?: number;
     /** 自动备份频率单位小时 */

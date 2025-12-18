@@ -1822,6 +1822,8 @@ declare interface TopicInfo {
   Describes?: string;
   /** 开启日志沉降，标准存储的生命周期， hotPeriod < Period。标准存储为 hotPeriod, 低频存储则为 Period-hotPeriod。（主题类型需为日志主题）HotPeriod=0为没有开启日志沉降。 */
   HotPeriod?: number;
+  /** kms-cls服务秘钥id */
+  KeyId?: string;
   /** 主题类型。- 0: 日志主题 - 1: 指标主题 */
   BizType?: number;
   /** 免鉴权开关。 false：关闭； true：开启。开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。 */

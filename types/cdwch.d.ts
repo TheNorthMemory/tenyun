@@ -168,6 +168,10 @@ declare interface CnInstanceInfo {
   InstanceID?: string;
   /** 无 */
   Resources?: CNResource[];
+  /** desc */
+  IsSecondaryZone?: string;
+  /** desc */
+  SecondaryZoneInfo?: string;
 }
 
 /** 配置文件修改信息 */

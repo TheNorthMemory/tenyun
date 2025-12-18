@@ -238,6 +238,30 @@ declare interface BGPInstance {
   ZoneId?: number;
 }
 
+/** { "InstanceId": "bgp-00000436", "InstanceChargePrepaid": { "Period": 3, "RenewFlag": "NOTIFY_AND_AUTO_RENEW" }, "EnterprisePackageConfig": null, "StandardPackageConfig": null, "StandardPlusPackageConfig": { "Region": "ap-guangzhou", "ProtectCount": "TWO_TIMES", "ProtectIpCount": 1, "Bandwidth": 100, "ElasticBandwidthFlag": true }, "TagInfoList": [ ], "PackageType": "StandardPlus", "InstanceCount": 1, "InstanceChargeType": "PREPAID", "DryRun": false} */
+declare interface BGPInstanceInfo {
+  /** 实例Id */
+  InstanceId?: string;
+  /** 续费周期相关 */
+  InstanceChargePrepaid?: InstanceChargePrepaid | null;
+  /** 企业版高防包配置 */
+  EnterprisePackageConfig?: EnterprisePackageConfig | null;
+  /** 标准版高防包配置 */
+  StandardPackageConfig?: StandardPackageConfig | null;
+  /** 标准版2.0高防包配置 */
+  StandardPlusPackageConfig?: StandardPlusPackageConfig | null;
+  /** tag信息 */
+  TagInfoList?: TagInfo[] | null;
+  /** 高防包类型 */
+  PackageType?: string | null;
+  /** 数量1 */
+  InstanceCount?: number;
+  /** 付费方式 */
+  InstanceChargeType?: string;
+  /** 无实际意义，创建时如果为true，只进行参数校验，默认为false */
+  DryRun?: boolean;
+}
+
 /** 高防包资产实例的规格信息 */
 declare interface BGPInstanceSpecification {
   /** 保底防护峰值，单位Gbps */
@@ -610,6 +634,22 @@ declare interface EipProductInfo {
   Domain?: string;
 }
 
+/** { "Region": "ap-guangzhou", "ProtectIpCount": 1, "BasicProtectBandwidth": 300, "Bandwidth": 100, "ElasticProtectBandwidth": 0, "ElasticBandwidthFlag": true} */
+declare interface EnterprisePackageConfig {
+  /** 购买高防包所属地域 */
+  Region: string;
+  /** 防护IP数 */
+  ProtectIpCount: number;
+  /** 保底防护带宽 */
+  BasicProtectBandwidth: number;
+  /** 业务带宽规模 */
+  Bandwidth: number;
+  /** 弹性带宽 Gbps，可选择的弹性带宽[0,400,500,600,800,1000]默认为0 */
+  ElasticProtectBandwidth?: number;
+  /** 是否开启弹性业务带宽默认为false */
+  ElasticBandwidthFlag?: boolean;
+}
+
 /** 转发监听器 */
 declare interface ForwardListener {
   /** 转发监听端口下限，取值1~65535 */
@@ -684,6 +724,14 @@ declare interface InsL7Rules {
   VirtualPort: string;
   /** 证书ID */
   SSLId: string;
+}
+
+/** { "Period": 12, "RenewFlag": "NOTIFY_AND_AUTO_RENEW"} */
+declare interface InstanceChargePrepaid {
+  /** 购买时长：单位月 */
+  Period?: number | null;
+  /** NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费NOTIFY_AND_AUTO_RENEW：到期通知且自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费默认为：通知过期不自动续费 */
+  RenewFlag?: string | null;
 }
 
 /** 资源实例IP信息 */
@@ -1116,6 +1164,32 @@ declare interface SpeedValue {
   Value: number;
 }
 
+/** { "Region": "ap-guangzhou", "ProtectIpCount": 1, "Bandwidth": 100, "ElasticBandwidthFlag": true} */
+declare interface StandardPackageConfig {
+  /** 高防包购买地域 */
+  Region: string | null;
+  /** 防护IP数量 */
+  ProtectIpCount: number | null;
+  /** 防护业务带宽 50Mbps */
+  Bandwidth: number | null;
+  /** 是否开启弹性防护带宽 true 开启 默认为false 不开启 */
+  ElasticBandwidthFlag?: boolean | null;
+}
+
+/** { "Region": "ap-guangzhou", "ProtectCount": "TWO_TIMES", "ProtectIpCount": 1, "Bandwidth": 50, "ElasticBandwidthFlag": true} */
+declare interface StandardPlusPackageConfig {
+  /** 购买高防包所属地域 */
+  Region: string | null;
+  /** 防护次数：TWO_TIMES:两次全力防 UNLIMITED无限次防 */
+  ProtectCount: string | null;
+  /** 防护IP数量 */
+  ProtectIpCount: number | null;
+  /** 防护带宽50Mbps */
+  Bandwidth: number | null;
+  /** 是否开启弹性业务带宽true 开启false 不开启 默认不开启 */
+  ElasticBandwidthFlag?: boolean | null;
+}
+
 /** 三网高防套餐详情 */
 declare interface StaticPackRelation {
   /** 保底带宽 */
@@ -1222,6 +1296,34 @@ declare interface AssociateDDoSEipLoadBalancerRequest {
 }
 
 declare interface AssociateDDoSEipLoadBalancerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateBgpInstanceRequest {
+  /** 付费类型：付费模式：PREPAID 预付费 POSTPAID_BY_MONTH 后付费 */
+  InstanceChargeType: string;
+  /** 高防包类型：高防包类型，Enterprise(企业版) Standard(标准版) StandardPlus(标准版2.0) */
+  PackageType: string;
+  /** 购买高防包的数量，一次购买数量不超过10 */
+  InstanceCount: number;
+  /** { "Period": 3, "RenewFlag": "NOTIFY_AND_AUTO_RENEW" } */
+  InstanceChargePrepaid?: InstanceChargePrepaid;
+  /** { "Region": "ap-guangzhou", "ProtectIpCount": 1, "BasicProtectBandwidth": 300, "Bandwidth": 100, "ElasticProtectLimit": 0, "ElasticBandwidthFlag": true } */
+  EnterprisePackageConfig?: EnterprisePackageConfig;
+  /** { "Region": "ap-guangzhou", "ProtectIpCount": 1, "BasicProtectBandwidth": 300, "Bandwidth": 100, "ElasticProtectLimit": 0, "ElasticBandwidthFlag": true } */
+  StandardPackageConfig?: StandardPackageConfig;
+  /** { "Region": "ap-guangzhou", "ProtectCount": "TWO_TIMES", "ProtectIpCount": 1, "Bandwidth": 100, "ElasticBandwidthFlag": true } */
+  StandardPlusPackageConfig?: StandardPlusPackageConfig;
+  /** [ { "TagKey": "beal-test", "TagValue": "beal-test" } ] */
+  TagInfoList?: TagInfo[];
+  /** 默认为false,true表示只进行参数校验，不进行实际购买 */
+  DryRun?: boolean;
+}
+
+declare interface CreateBgpInstanceResponse {
+  /** bgpIds */
+  ResourceIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1782,6 +1884,28 @@ declare interface DescribeBgpBizTrendResponse {
   MetricName?: string;
   /** 返回数组最大值 */
   MaxData?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBgpInstancesRequest {
+  /** 地域 */
+  FilterRegion: string;
+  /** ["bgp-0000041i"] */
+  FilterInstanceIdList?: string[];
+  /** [{}] */
+  FilterTag?: TagInfo[];
+  /** 分页数量 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+}
+
+declare interface DescribeBgpInstancesResponse {
+  /** 返回数量 */
+  Total?: number;
+  /** 返回购买高防包信息 */
+  BGPInstanceList?: BGPInstanceInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2979,6 +3103,8 @@ declare interface Antiddos {
   AssociateDDoSEipAddress(data: AssociateDDoSEipAddressRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateDDoSEipAddressResponse>;
   /** 绑定高防弹性公网IP到Clb {@link AssociateDDoSEipLoadBalancerRequest} {@link AssociateDDoSEipLoadBalancerResponse} */
   AssociateDDoSEipLoadBalancer(data: AssociateDDoSEipLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateDDoSEipLoadBalancerResponse>;
+  /** 购买高防包 {@link CreateBgpInstanceRequest} {@link CreateBgpInstanceResponse} */
+  CreateBgpInstance(data: CreateBgpInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBgpInstanceResponse>;
   /** 添加DDoS防护的IP黑白名单 {@link CreateBlackWhiteIpListRequest} {@link CreateBlackWhiteIpListResponse} */
   CreateBlackWhiteIpList(data: CreateBlackWhiteIpListRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBlackWhiteIpListResponse>;
   /** 绑定IP到高防包实例 {@link CreateBoundIPRequest} {@link CreateBoundIPResponse} */
@@ -3055,6 +3181,8 @@ declare interface Antiddos {
   DescribeBasicDeviceStatus(data?: DescribeBasicDeviceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBasicDeviceStatusResponse>;
   /** 获取高防包流量折线图 {@link DescribeBgpBizTrendRequest} {@link DescribeBgpBizTrendResponse} */
   DescribeBgpBizTrend(data: DescribeBgpBizTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBgpBizTrendResponse>;
+  /** 查询高防包资源列表 {@link DescribeBgpInstancesRequest} {@link DescribeBgpInstancesResponse} */
+  DescribeBgpInstances(data: DescribeBgpInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBgpInstancesResponse>;
   /** 获取业务流量状态码统计列表 {@link DescribeBizHttpStatusRequest} {@link DescribeBizHttpStatusResponse} */
   DescribeBizHttpStatus(data: DescribeBizHttpStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBizHttpStatusResponse>;
   /** 获取高防IP业务监控流量曲线 {@link DescribeBizMonitorTrendRequest} {@link DescribeBizMonitorTrendResponse} */

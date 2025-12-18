@@ -2044,6 +2044,8 @@ declare interface Deal {
   SubProductName?: string;
   /** 订单对应的资源id, 查询参数Limit超过200，将返回null */
   ResourceId?: string[] | null;
+  /** 订单对应的可用区Id */
+  ZoneCode?: string;
 }
 
 /** 计量标准接入类产品支持API接口获取用量明细返回数据结构 */
@@ -3826,6 +3828,8 @@ declare interface DescribeDealsByCondRequest {
   BigDealId?: string;
   /** 资源id */
   ResourceId?: string;
+  /** 订单状态 */
+  StatusSet?: number[];
 }
 
 declare interface DescribeDealsByCondResponse {

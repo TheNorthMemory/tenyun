@@ -5243,11 +5243,15 @@ declare interface ModifyServerlessStrategyRequest {
   MaxRoCount?: number;
   /** 是否开启归档，可选范围yesno默认值:yes */
   AutoArchive?: string;
+  /** 升级类型。 默认值：upgradeImmediate。 可选值： upgradeImmediate：立即完成修改 upgradeInMaintain：在维护时间窗口内完成修改 */
+  UpgradeType?: string;
 }
 
 declare interface ModifyServerlessStrategyResponse {
   /** 异步流程id */
   FlowId?: number;
+  /** 任务id */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
