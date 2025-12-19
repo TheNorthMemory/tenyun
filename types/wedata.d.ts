@@ -8215,12 +8215,108 @@ declare namespace V20210820 {
     DateFormat?: string[] | null;
   }
 
+  /** LineageCommonInfoVO */
+  interface LineageCommonInfoVO {
+    /** 当前节点 */
+    CurrentResource?: LineageResouce | null;
+    /** 上游节点 */
+    ParentSet?: LineageNodeInfoVO[] | null;
+    /** 下游节点 */
+    ChildSet?: LineageNodeInfoVO[] | null;
+    /** 下游数量 */
+    DownStreamCount?: number | null;
+    /** 上游数量 */
+    UpStreamCount?: number | null;
+    /** 父/子节点是否展示上下游数量 */
+    StreamCountFlag?: boolean | null;
+  }
+
+  /** LineageNodeInfoVo */
+  interface LineageNodeInfoVO {
+    /** 当前资源 */
+    CurrentResource?: LineageResouce | null;
+    /** 关系 */
+    Relation?: LineageRelationVO | null;
+    /** 上游数量 */
+    DownStreamCount?: number | null;
+    /** 下游数量 */
+    UpStreamCount?: number | null;
+    /** 上游节点 */
+    ParentSet?: LineageNodeInfoVO[] | null;
+    /** 下游节点 */
+    ChildSet?: LineageNodeInfoVO[] | null;
+    /** 父/子节点是否展示上下游数量 */
+    StreamCountFlag?: boolean | null;
+  }
+
   /** 血缘参数记录 */
   interface LineageParamRecord {
     /** 字段名 */
     Name: string;
     /** 字段值 */
     Value: string | null;
+  }
+
+  /** LineageProcessVO */
+  interface LineageProcessVO {
+    /** 原始唯一ID */
+    ProcessId?: string | null;
+    /** 任务类型 */
+    ProcessType?: string | null;
+    /** 任务子类型 */
+    ProcessSubType?: string | null;
+    /** 名称 */
+    ProcessName?: string | null;
+    /** 描述 */
+    Description?: string | null;
+    /** 唯一ID */
+    QualifiedId?: string | null;
+    /** 来源 */
+    Platform?: string | null;
+    /** 额外扩展参数 */
+    ProcessProperties?: LineageProperty[] | null;
+  }
+
+  /** LineageProperty额外扩展参数 */
+  interface LineageProperty {
+    /** 属性名称 */
+    Name?: string | null;
+    /** 属性值 */
+    Value?: string | null;
+  }
+
+  /** LineageRelationVO */
+  interface LineageRelationVO {
+    /** 关联ID */
+    RelationId?: string | null;
+    /** 源端唯一血缘ID */
+    SourceQualifiedId?: string | null;
+    /** 目标端唯一血缘ID */
+    TargetQualifiedId?: string | null;
+    /** 血缘加工过程 */
+    Processes?: LineageProcessVO[] | null;
+  }
+
+  /** 血缘实体 */
+  interface LineageResouce {
+    /** 实体原始唯一ID */
+    ResourceOriId?: string | null;
+    /** 业务名称：库名.表名｜指标名称｜模型名称|字段名称 */
+    ResourceName?: string | null;
+    /** 实体类型TABLE|METRIC|MODEL|SERVICE|COLUMN */
+    ResourceType?: string | null;
+    /** 血缘全局唯一ID */
+    QualifiedId?: string | null;
+    /** 描述：表类型｜指标描述｜模型描述|字段描述 */
+    Description?: string | null;
+    /** 来源：WEDATA|THIRD默认wedata */
+    Platform?: string | null;
+    /** 创建时间 */
+    CreateTime?: string | null;
+    /** 更新时间 */
+    UpdateTime?: string | null;
+    /** resource 额外扩展参数 */
+    ResourceProperties?: LineageProperty[] | null;
   }
 
   /** 血缘任务 */
@@ -15382,6 +15478,36 @@ declare namespace V20210820 {
     RequestId?: string;
   }
 
+  interface DescribeLineageInfoRequest {
+    /** 实体原始唯一ID */
+    ResourceOriId?: string;
+    /** 实体类型 */
+    ResourceType?: string;
+    /** 血缘唯一ID */
+    QualifiedId?: string;
+    /** 查询方向 */
+    Direction?: string;
+    /** 查询入度 */
+    InputDepth?: number;
+    /** 查询出度 */
+    OutputDepth?: number;
+    /** 数据来源 */
+    Platform?: string;
+    /** 血缘类型（分页使用） */
+    LineageType?: string;
+    /** 页码 */
+    PageNumber?: number;
+    /** 分页大小 */
+    PageSize?: number;
+  }
+
+  interface DescribeLineageInfoResponse {
+    /** 血缘信息 */
+    Data?: LineageCommonInfoVO | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeManualTriggerRecordPageRequest {
     /** 项目ID */
     ProjectId: string;
@@ -20252,6 +20378,8 @@ declare interface Wedata {
   DescribeIntegrationTasks(data: V20210820.DescribeIntegrationTasksRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeIntegrationTasksResponse>;
   /** 查询集成任务版本节点信息 {@link V20210820.DescribeIntegrationVersionNodesInfoRequest} {@link V20210820.DescribeIntegrationVersionNodesInfoResponse} */
   DescribeIntegrationVersionNodesInfo(data: V20210820.DescribeIntegrationVersionNodesInfoRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeIntegrationVersionNodesInfoResponse>;
+  /** 通用血缘查询 {@link V20210820.DescribeLineageInfoRequest} {@link V20210820.DescribeLineageInfoResponse} */
+  DescribeLineageInfo(data: V20210820.DescribeLineageInfoRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeLineageInfoResponse>;
   /** 查询手动任务触发记录 {@link V20210820.DescribeManualTriggerRecordPageRequest} {@link V20210820.DescribeManualTriggerRecordPageResponse} */
   DescribeManualTriggerRecordPage(data: V20210820.DescribeManualTriggerRecordPageRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeManualTriggerRecordPageResponse>;
   /** 获取离线任务长连接Token {@link V20210820.DescribeOfflineTaskTokenRequest} {@link V20210820.DescribeOfflineTaskTokenResponse} */

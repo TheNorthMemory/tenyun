@@ -52,6 +52,18 @@ declare interface CreateRoleUserResponse {
   RequestId?: string;
 }
 
+declare interface DeleteRoleUserRequest {
+  /** 自定义角色体系的ID */
+  RoleSystemId?: number;
+  /** 需要删除的自定义用户ID */
+  UserId?: string;
+}
+
+declare interface DeleteRoleUserResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Evt 事件中心} */
 declare interface Evt {
   (): Versions;
@@ -59,6 +71,8 @@ declare interface Evt {
   CompleteApproval(data: CompleteApprovalRequest, config?: AxiosRequestConfig): AxiosPromise<CompleteApprovalResponse>;
   /** 创建人员 {@link CreateRoleUserRequest} {@link CreateRoleUserResponse} */
   CreateRoleUser(data: CreateRoleUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoleUserResponse>;
+  /** 删除自定义角色的用户 {@link DeleteRoleUserRequest} {@link DeleteRoleUserResponse} */
+  DeleteRoleUser(data?: DeleteRoleUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoleUserResponse>;
 }
 
 export declare type Versions = ["2025-02-17"];

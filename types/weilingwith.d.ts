@@ -76,16 +76,6 @@ declare interface AdministrationData {
   AdministrationName?: string;
 }
 
-/** 行政区划详情 */
-declare interface AdministrativeDetail {
-  /** 行政区域类型编码 */
-  AdministrativeTypeCode?: string;
-  /** 行政区域编码 */
-  AdministrativeCode?: string;
-  /** 行政区域名称 */
-  AdministrativeName?: string;
-}
-
 /** 告警信息 */
 declare interface AlarmInfo {
   /** 工作空间id */
@@ -474,12 +464,6 @@ declare interface DescribeAlarmStatusListRes {
 declare interface DescribeAlarmTypeListRes {
   /** 告警类型查询列表 */
   AlarmTypeSet?: AlarmTypeDetailInfo[];
-}
-
-/** 通过城市id查询工作空间列表 */
-declare interface DescribeCityWorkspaceListRes {
-  /** 通过城市id查询工作空间列表结果 */
-  WorkspaceSet?: WorkspaceInfo[];
 }
 
 /** 设备分组信息 */
@@ -1514,24 +1498,6 @@ declare interface VideoRecordStreamRes {
   Stream?: string;
 }
 
-/** 工作空间信息描述 */
-declare interface WorkspaceInfo {
-  /** 工作空间Id */
-  WorkspaceId?: number;
-  /** 工作空间中文名字 */
-  ChineseName?: string;
-  /** 工作空间描述 */
-  Description?: string;
-  /** 工作空间是否删除状态 */
-  Status?: number;
-  /** 该工作空间绑定的区/县的行政区名字 */
-  ParkName?: string;
-  /** 该工作空间绑定的区/县的行政区编码 */
-  ParkNum?: string;
-  /** 获取该工作空间绑定的区/县的上级行政区划信息 */
-  AdministrativeDetailSet?: AdministrativeDetail[];
-}
-
 /** 项目空间列表 */
 declare interface WorkspaceInfoList {
   /** 项目空间列表 */
@@ -1960,20 +1926,6 @@ declare interface DescribeCameraExtendInfoRequest {
 declare interface DescribeCameraExtendInfoResponse {
   /** 获取视频扩展信息结果 */
   Result?: CameraExtendInfoRes;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeCityWorkspaceListRequest {
-  /** 行政区编码集合 */
-  AdministrativeCodeSet: string[];
-  /** 应用token */
-  ApplicationToken: string;
-}
-
-declare interface DescribeCityWorkspaceListResponse {
-  /** 工作空间信息集合 */
-  Result?: DescribeCityWorkspaceListRes | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2654,6 +2606,8 @@ declare interface DescribeVideoRecordStreamRequest {
 }
 
 declare interface DescribeVideoRecordStreamResponse {
+  /** 获取历史流结果 */
+  Result?: VideoRecordStreamRes;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2903,8 +2857,6 @@ declare interface Weilingwith {
   DescribeBuildingProfile(data: DescribeBuildingProfileRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBuildingProfileResponse>;
   /** 获取视频扩展信息 {@link DescribeCameraExtendInfoRequest} {@link DescribeCameraExtendInfoResponse} */
   DescribeCameraExtendInfo(data: DescribeCameraExtendInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCameraExtendInfoResponse>;
-  /** @deprecated 通过城市id查询工作空间列表 {@link DescribeCityWorkspaceListRequest} {@link DescribeCityWorkspaceListResponse} */
-  DescribeCityWorkspaceList(data: DescribeCityWorkspaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCityWorkspaceListResponse>;
   /** 设备分组列表 {@link DescribeDeviceGroupListRequest} {@link DescribeDeviceGroupListResponse} */
   DescribeDeviceGroupList(data: DescribeDeviceGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceGroupListResponse>;
   /** 设备列表查询 {@link DescribeDeviceListRequest} {@link DescribeDeviceListResponse} */

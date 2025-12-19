@@ -2569,7 +2569,7 @@ declare interface CreateVarResponse {
 }
 
 declare interface CreateWorkflowRunRequest {
-  /** 应用ID */
+  /** 应用ID, 获取方法参看如何获取 [BotBizId](https://cloud.tencent.com/document/product/1759/109469) */
   AppBizId: string;
   /** 运行环境。0: 测试环境； 1: 正式环境 */
   RunEnv?: number;
@@ -3809,19 +3809,19 @@ declare interface ListAppResponse {
 }
 
 declare interface ListAttributeLabelRequest {
-  /** 应用ID */
+  /** 应用ID，获取方法参看如何获取[BotBizId](https://cloud.tencent.com/document/product/1759/109469) */
   BotBizId: string;
-  /** 页码 */
+  /** 页码，取值范围：大于0 */
   PageNumber: number;
-  /** 每页数量 */
+  /** 每页数量，取值范围：大于0 */
   PageSize: number;
   /** 登录用户主账号(集成商模式必填) */
   LoginUin?: string;
   /** 登录用户子账号(集成商模式必填) */
   LoginSubAccountUin?: string;
-  /** 查询内容 */
+  /** 查询内容，同时匹配标签内容和标签值内容 */
   Query?: string;
-  /** 每个属性同步拉取的标签值数量 */
+  /** 每个标签同步拉取的标签值数量。即在展示标签列表时，为每一个标签加载多少个具体的标签值。 */
   LabelSize?: number;
 }
 
@@ -3835,17 +3835,17 @@ declare interface ListAttributeLabelResponse {
 }
 
 declare interface ListChannelRequest {
-  /** 应用ID */
+  /** 应用ID（获取方法参看如何获取 [BotBizId](https://cloud.tencent.com/document/product/1759/109469)） */
   AppBizId: string;
   /** 应用ID */
   BotBizId?: string;
-  /** 页码 */
+  /** 页码（必须大于0） */
   PageNumber?: number;
-  /** 分页数量 */
+  /** 分页数量（取值范围为1-200） */
   PageSize?: number;
-  /** 渠道类型, 10000: 微信订阅号，10001: 微信服务号，10002：企微应用，10004：微信客服，10005：小程序，10009：企微智能机器人 */
+  /** 渠道类型, 10000: 微信订阅号，10001: 微信服务号，10002：企微应用，10004：微信客服，10005：小程序，10009：企微智能机器人 。（默认为[]） */
   ChannelType?: number[];
-  /** 渠道状态 1未发布 2运行中 3已下线 */
+  /** 渠道状态 1未发布 2运行中 3已下线 （默认为[]） */
   ChannelStatus?: number[];
 }
 
@@ -4017,21 +4017,21 @@ declare interface ListReferShareKnowledgeResponse {
 }
 
 declare interface ListRejectedQuestionPreviewRequest {
-  /** 应用ID */
+  /** 应用ID（获取方法参看如何获取 [BotBizId](https://cloud.tencent.com/document/product/1759/109469)） */
   BotBizId: string;
-  /** 页码 */
+  /** 页码（必须大于0） */
   PageNumber: number;
-  /** 每页数量 */
+  /** 每页数量（取值范围为1-200） */
   PageSize: number;
-  /** 查询内容 */
+  /** 查询内容关键字，用于模糊查询，若未提供该参数，默认为查询全部。 */
   Query?: string;
-  /** 发布单ID */
+  /** 发布单ID（可以通过[ListRelease](https://cloud.tencent.com/document/product/1759/105077)获得） */
   ReleaseBizId?: string;
   /** 状态(1新增2更新3删除) */
   Actions?: number[];
-  /** 开始时间 */
+  /** 开始时间。Unix 时间戳，单位是秒，默认为空。 */
   StartTime?: string;
-  /** 结束时间 */
+  /** 结束时间。Unix 时间戳，单位是秒，默认为空。 */
   EndTime?: string;
 }
 
@@ -4045,11 +4045,11 @@ declare interface ListRejectedQuestionPreviewResponse {
 }
 
 declare interface ListRejectedQuestionRequest {
-  /** 应用ID */
+  /** 应用ID, 获取方法参看如何获取 [BotBizId](https://cloud.tencent.com/document/product/1759/109469)。 */
   BotBizId: string;
-  /** 页码 */
+  /** 页码（必须大于0） */
   PageNumber: number;
-  /** 每页数量 */
+  /** 每页数量（取值范围1-200） */
   PageSize: number;
   /** 查询内容 */
   Query?: string;
@@ -4065,23 +4065,23 @@ declare interface ListRejectedQuestionResponse {
 }
 
 declare interface ListReleaseConfigPreviewRequest {
-  /** 应用ID */
+  /** 应用ID（获取方法参看如何获取 [BotBizId](https://cloud.tencent.com/document/product/1759/109469)） */
   BotBizId: string;
-  /** 页码 */
+  /** 页码（必须大于0） */
   PageNumber: number;
-  /** 每页数量 */
+  /** 每页数量（取值范围为1-200） */
   PageSize: number;
-  /** 查询内容 */
+  /** 查询内容关键字，用于模糊查询，若未提供该参数，默认为查询全部。 */
   Query?: string;
-  /** 发布单ID */
+  /** 发布单ID（可以通过[ListRelease](https://cloud.tencent.com/document/product/1759/105077)获得） */
   ReleaseBizId?: string;
   /** 状态(1新增2更新3删除) */
   Actions?: number[];
-  /** 开始时间 */
+  /** 开始时间。Unix 时间戳，单位是秒，默认为空。 */
   StartTime?: string;
-  /** 结束时间 */
+  /** 结束时间。Unix 时间戳，单位是秒，默认为空。 */
   EndTime?: string;
-  /** 发布状态 */
+  /** 发布状态(2 待发布 3 发布中 4 已发布 5 发布失败)，默认为空 */
   ReleaseStatus?: number[];
 }
 
@@ -4095,21 +4095,21 @@ declare interface ListReleaseConfigPreviewResponse {
 }
 
 declare interface ListReleaseDocPreviewRequest {
-  /** 应用ID */
+  /** 应用ID（获取方法参看如何获取 [BotBizId](https://cloud.tencent.com/document/product/1759/109469)） */
   BotBizId: string;
-  /** 页码 */
+  /** 页码（必须大于0） */
   PageNumber: number;
-  /** 每页数量 */
+  /** 每页数量（取值范围为1-200） */
   PageSize: number;
-  /** 查询内容 */
+  /** 查询内容关键字，用于模糊查询，若未提供该参数，默认为查询全部。 */
   Query?: string;
-  /** 发布单ID */
+  /** 发布单ID（可以通过[ListRelease](https://cloud.tencent.com/document/product/1759/105077)获得） */
   ReleaseBizId?: string;
-  /** 开始时间 */
+  /** 开始时间。Unix 时间戳，单位是秒，默认为空。 */
   StartTime?: string;
-  /** 结束时间 */
+  /** 结束时间。Unix 时间戳，单位是秒，默认为空。 */
   EndTime?: string;
-  /** 状态(1新增2修改3删除) */
+  /** 状态(1新增2修改3删除)，其和ReleaseStatus的区别为： Actions表示的是对数据/内容的操作状态，ReleaseStatus表示数据 / 内容本身的发布状态 */
   Actions?: number[];
 }
 
@@ -4123,23 +4123,23 @@ declare interface ListReleaseDocPreviewResponse {
 }
 
 declare interface ListReleaseQAPreviewRequest {
-  /** 应用ID */
+  /** 应用ID（获取方法参看如何获取 [BotBizId](https://cloud.tencent.com/document/product/1759/109469)） */
   BotBizId: string;
-  /** 页码 */
+  /** 页码（必须大于0） */
   PageNumber: number;
-  /** 每页数量 */
+  /** 每页数量（取值范围为1-200） */
   PageSize: number;
-  /** 查询内容 */
+  /** 查询内容关键字，用于模糊查询，若未提供该参数，默认为查询全部。 */
   Query?: string;
-  /** 发布单ID */
+  /** 发布单ID（可以通过[ListRelease](https://cloud.tencent.com/document/product/1759/105077)获得） */
   ReleaseBizId?: string;
-  /** 开始时间 */
+  /** 开始时间。Unix 时间戳，单位是秒，默认为空。 */
   StartTime?: string;
-  /** 结束时间 */
+  /** 结束时间。Unix 时间戳，单位是秒，默认为空。 */
   EndTime?: string;
-  /** 状态(1新增2修改3删除) */
+  /** 状态(1新增2修改3删除)，其和ReleaseStatus的区别为：Actions表示的是对数据/内容的操作状态，ReleaseStatus表示数据/内容本身的发布状态 */
   Actions?: number[];
-  /** 发布状态(4发布成功5发布失败) */
+  /** 发布状态(4发布成功5发布失败)。其和Actions的区别为：Actions表示的是对数据/内容的操作状态，ReleaseStatus表示数据/内容本身的发布状态 */
   ReleaseStatus?: number[];
 }
 
@@ -4277,13 +4277,13 @@ declare interface ListUsageCallDetailResponse {
 }
 
 declare interface ListWorkflowRunsRequest {
-  /** 应用ID */
+  /** 应用ID, 获取方法参看如何获取 [BotBizId](https://cloud.tencent.com/document/product/1759/109469) */
   AppBizId: string;
-  /** 每页数量 */
+  /** 每页数量(取值范围1-200) */
   PageSize: number;
   /** 运行环境。0: 测试环境； 1: 正式环境 */
   RunEnv?: number;
-  /** 页码 */
+  /** 页码(必须大于0) */
   Page?: number;
   /** 登录用户主账号(集成商模式必填) */
   LoginUin?: string;
@@ -4485,11 +4485,11 @@ declare interface ModifyQAResponse {
 }
 
 declare interface ModifyRejectedQuestionRequest {
-  /** 应用ID */
+  /** 应用ID, 获取方法参看如何获取 [BotBizId](https://cloud.tencent.com/document/product/1759/109469) */
   BotBizId: string;
   /** 拒答问题 */
   Question: string;
-  /** 拒答问题来源的数据源唯一id */
+  /** 拒答问题来源的数据源唯一id, 通过[ListRejectedQuestion](https://capi.woa.com/api/detail?product=lke&version=2023-11-30&action=ListRejectedQuestion)接口获取 */
   RejectedBizId: string;
 }
 
@@ -4501,7 +4501,7 @@ declare interface ModifyRejectedQuestionResponse {
 declare interface RateMsgRecordRequest {
   /** 应用appKey */
   BotAppKey: string;
-  /** 消息ID 【大模型回复答案的RecordID】 */
+  /** 消息ID 【大模型回复答案的RecordID】可以通过[GetMsgRecord](https://cloud.tencent.com/document/product/1759/105090)接口获取 */
   RecordId: string;
   /** 0: 取消前置状态 ; 1: 点赞; 2: 点踩; 注：(1) 评测端不支持点赞、点踩(2) 消息回复类型为欢迎语、并发超限、实时文档，不支持点赞、点踩(3) 点赞或者点踩之后，如果想要取消状态，传值为0即可 */
   Score: number;
@@ -4749,6 +4749,8 @@ declare interface VerifyQARequest {
   LoginUin?: string;
   /** 登录用户子账号(集成商模式必填) */
   LoginSubAccountUin?: string;
+  /** 用于操作共享知识库 */
+  KnowledgeBizId?: string;
 }
 
 declare interface VerifyQAResponse {

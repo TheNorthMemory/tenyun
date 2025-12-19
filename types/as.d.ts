@@ -134,6 +134,10 @@ declare interface AutoScalingGroup {
   CapacityRebalance?: boolean;
   /** 实例名称序号相关设置。 */
   InstanceNameIndexSettings?: InstanceNameIndexSettings;
+  /** 实例主机名序号相关设置。 */
+  HostNameIndexSettings?: HostNameIndexSettings;
+  /** 匹配期望数并发扩容功能，不能在InstanceAllocationPolicy为竞价混合模式时设置，也不能在ScalingMode为扩容优先开机模式时设置。目前仅支持两个匹配期望数扩容活动并发进行，不支持指定数量扩容、缩容等其他类型活动并发。默认值为FALSE，表示不开启。 */
+  ConcurrentScaleOutForDesiredCapacity?: boolean;
 }
 
 /** 伸缩组简明信息。 */
@@ -240,6 +244,16 @@ declare interface ForwardLoadBalancerIdentification {
   ListenerId: string;
   /** 转发规则ID，注意：针对七层监听器此参数必填 */
   LocationId?: string;
+}
+
+/** 实例主机名称序号相关设置。 */
+declare interface HostNameIndexSettings {
+  /** 是否开启实例主机名创建序号，默认不开启。取值范围：TRUE：表示开启实例主机名创建序号FALSE：表示不开启实例主机名创建序号 */
+  Enabled?: boolean;
+  /** 初始序号。序号固定位数 IndexLength 为默认值0时，取值范围为 [0, 99999999]。序号固定位数 IndexLength 为 [1, 8] 时，取值范围为为 [0, 10^IndexLength-1]，最大值即为固定位数的最大数字。当序号递增后超出取值范围时，扩容活动会失败。首次开启实例主机名称序号：默认值为 0。非首次开启实例主机名称序号：若不指定该参数，沿用历史序号。下调初始序号可能会造成伸缩组内实例主机名称序号重复。 */
+  BeginIndex?: number;
+  /** 实例主机名递增序号位数，默认为0，表示不指定序号位数。不指定序号时，采用默认值0。取值范围：0-8，最大为整数8。采用取值1-8时，会检查序号是否超过此序号位数的最大数字。假设设置为3，那么序号形如：001、002 ... 010、011 ... 100 ... 999，序号上限为999;假设设置为0，对应的序号为1、2 ... 10、11 ... 100 ... 1000 ...10000 ... 99999999，序号上限为99999999。 */
+  IndexLength?: number;
 }
 
 /** 云服务器主机名（HostName）的相关设置 */
@@ -929,6 +943,10 @@ declare interface CreateAutoScalingGroupRequest {
   CapacityRebalance?: boolean;
   /** 实例名称序号相关设置。若不指定该参数，则默认不开启。开启后为伸缩组内自动创建的实例名称添加递增的数字序号。 */
   InstanceNameIndexSettings?: InstanceNameIndexSettings;
+  /** 实例主机名序号相关设置。若不指定该参数，则默认不开启。开启后为伸缩组内自动创建的实例主机名添加递增的数字序号。 */
+  HostNameIndexSettings?: HostNameIndexSettings;
+  /** 匹配期望数并发扩容功能，不能在InstanceAllocationPolicy为竞价混合模式时设置，也不能在ScalingMode为扩容优先开机模式时设置。目前仅支持两个匹配期望数扩容活动并发进行，不支持指定数量扩容、缩容等其他类型活动并发。默认值为FALSE，表示不开启。 */
+  ConcurrentScaleOutForDesiredCapacity?: boolean;
 }
 
 declare interface CreateAutoScalingGroupResponse {
@@ -1548,6 +1566,10 @@ declare interface ModifyAutoScalingGroupRequest {
   CapacityRebalance?: boolean;
   /** 实例名称序号相关设置。开启后为伸缩组内自动创建的实例名称添加递增的数字序号。 */
   InstanceNameIndexSettings?: InstanceNameIndexSettings;
+  /** 实例主机名序号相关设置。开启后为伸缩组内自动创建的实例主机名添加递增的数字序号。 */
+  HostNameIndexSettings?: HostNameIndexSettings;
+  /** 匹配期望数并发扩容功能，不能在InstanceAllocationPolicy为竞价混合模式时设置，也不能在ScalingMode为扩容优先开机模式时设置。目前仅支持两个匹配期望数扩容活动并发进行，不支持指定数量扩容、缩容等其他类型活动并发。设置为FALSE表示不开启。 */
+  ConcurrentScaleOutForDesiredCapacity?: boolean;
 }
 
 declare interface ModifyAutoScalingGroupResponse {

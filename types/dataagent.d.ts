@@ -292,6 +292,20 @@ declare interface DeleteDataAgentSessionResponse {
   RequestId?: string;
 }
 
+declare interface GetJobsByKnowledgeBaseIdRequest {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 知识库id */
+  KnowledgeBaseId?: string;
+}
+
+declare interface GetJobsByKnowledgeBaseIdResponse {
+  /** 任务列表详情 */
+  Jobs?: UploadJob[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetKnowledgeBaseFileListRequest {
   /** 实例id */
   InstanceId: string;
@@ -451,6 +465,8 @@ declare interface Dataagent {
   DeleteChunk(data: DeleteChunkRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteChunkResponse>;
   /** 删除会话 {@link DeleteDataAgentSessionRequest} {@link DeleteDataAgentSessionResponse} */
   DeleteDataAgentSession(data?: DeleteDataAgentSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataAgentSessionResponse>;
+  /** 根据知识库id查询上传job列表 {@link GetJobsByKnowledgeBaseIdRequest} {@link GetJobsByKnowledgeBaseIdResponse} */
+  GetJobsByKnowledgeBaseId(data?: GetJobsByKnowledgeBaseIdRequest, config?: AxiosRequestConfig): AxiosPromise<GetJobsByKnowledgeBaseIdResponse>;
   /** 获取知识库文件列表 {@link GetKnowledgeBaseFileListRequest} {@link GetKnowledgeBaseFileListResponse} */
   GetKnowledgeBaseFileList(data: GetKnowledgeBaseFileListRequest, config?: AxiosRequestConfig): AxiosPromise<GetKnowledgeBaseFileListResponse>;
   /** 获取知识库列表 {@link GetKnowledgeBaseListRequest} {@link GetKnowledgeBaseListResponse} */

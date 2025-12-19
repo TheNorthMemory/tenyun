@@ -3551,7 +3551,7 @@ declare interface ModifyRunSyncAssetRequest {
 
 declare interface ModifyRunSyncAssetResponse {
   /** 0：同步成功，1：资产更新中，2：后台同步调用失败 */
-  Status: number;
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3925,7 +3925,7 @@ declare interface Cfw {
   DeleteAcRule(data: DeleteAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAcRuleResponse>;
   /** 删除地址模板规则 {@link DeleteAddressTemplateRequest} {@link DeleteAddressTemplateResponse} */
   DeleteAddressTemplate(data: DeleteAddressTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAddressTemplateResponse>;
-  /** 全部删除规则 {@link DeleteAllAccessControlRuleRequest} {@link DeleteAllAccessControlRuleResponse} */
+  /** @deprecated 全部删除规则 {@link DeleteAllAccessControlRuleRequest} {@link DeleteAllAccessControlRuleResponse} */
   DeleteAllAccessControlRule(data?: DeleteAllAccessControlRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAllAccessControlRuleResponse>;
   /** 批量删除入侵防御封禁列表、放通列表规则 {@link DeleteBlockIgnoreRuleListRequest} {@link DeleteBlockIgnoreRuleListResponse} */
   DeleteBlockIgnoreRuleList(data: DeleteBlockIgnoreRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBlockIgnoreRuleListResponse>;
