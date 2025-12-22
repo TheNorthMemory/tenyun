@@ -16,6 +16,16 @@ declare interface APIKeyInfo {
   CreatedAt?: string;
 }
 
+/** 沙箱实例对象存储挂载配置 */
+declare interface CosStorageSource {
+  /** 对象存储访问域名 */
+  Endpoint?: string;
+  /** 对象存储桶名称 */
+  BucketName?: string;
+  /** 对象存储桶路径，必须为以/起始的绝对路径 */
+  BucketPath?: string;
+}
+
 /** 过滤列表规则 */
 declare interface Filter {
   /** 属性名称, 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。 */
@@ -24,10 +34,24 @@ declare interface Filter {
   Values?: string[];
 }
 
+/** 沙箱实例存储挂载配置可选项，用于覆盖沙箱工具的存储配置的部分选项，并提供子路径挂载配置。 */
+declare interface MountOption {
+  /** 指定沙箱工具中的存储配置名称 */
+  Name?: string;
+  /** 沙箱实例本地挂载路径（可选），默认继承工具中的存储配置 */
+  MountPath?: string;
+  /** 沙箱实例存储挂载子路径（可选） */
+  SubPath?: string;
+  /** 沙箱实例存储挂载读写权限（可选），默认继承工具存储配置 */
+  ReadOnly?: boolean;
+}
+
 /** 沙箱网络配置 */
 declare interface NetworkConfiguration {
-  /** 网络模式（当前支持 PUBLIC） */
+  /** 网络模式（当前支持 PUBLIC, VPC, SANDBOX） */
   NetworkMode: string;
+  /** VPC网络相关配置 */
+  VpcConfig?: VPCConfig;
 }
 
 /** 沙箱实例结构体 */
@@ -50,6 +74,8 @@ declare interface SandboxInstance {
   CreateTime?: string;
   /** 更新时间（ISO 8601 格式） */
   UpdateTime?: string;
+  /** 存储挂载选项 */
+  MountOptions?: MountOption[];
 }
 
 /** 沙箱工具结构体 */
@@ -74,6 +100,28 @@ declare interface SandboxTool {
   CreateTime?: string;
   /** 沙箱工具更新时间，格式：ISO8601 */
   UpdateTime?: string;
+  /** 沙箱工具绑定角色ARN */
+  RoleArn?: string;
+  /** 沙箱工具中实例存储挂载配置 */
+  StorageMounts?: StorageMount[];
+}
+
+/** 沙箱工具中实例存储挂载配置 */
+declare interface StorageMount {
+  /** 存储挂载配置名称 */
+  Name?: string;
+  /** 存储配置 */
+  StorageSource?: StorageSource;
+  /** 沙箱实例本地挂载路径 */
+  MountPath?: string;
+  /** 存储挂载读写权限配置，默认为false */
+  ReadOnly?: boolean;
+}
+
+/** 挂载存储配置 */
+declare interface StorageSource {
+  /** 对象存储桶配置 */
+  Cos?: CosStorageSource;
 }
 
 /** 标签 */
@@ -82,6 +130,14 @@ declare interface Tag {
   Key?: string;
   /** 标签值 */
   Value?: string;
+}
+
+/** 沙箱工具VPC相关配置 */
+declare interface VPCConfig {
+  /** VPC子网ID列表 */
+  SubnetIds?: string[];
+  /** 安全组ID列表 */
+  SecurityGroupIds?: string[];
 }
 
 declare interface AcquireSandboxInstanceTokenRequest {
@@ -129,6 +185,10 @@ declare interface CreateSandboxToolRequest {
   Tags?: Tag[];
   /** 幂等性 Token，长度不超过 64 字符 */
   ClientToken?: string;
+  /** 角色ARN */
+  RoleArn?: string;
+  /** 沙箱工具存储配置 */
+  StorageMounts?: StorageMount[];
 }
 
 declare interface CreateSandboxToolResponse {
@@ -221,6 +281,8 @@ declare interface StartSandboxInstanceRequest {
   Timeout?: string;
   /** 幂等性 Token，长度不超过 64 字符 */
   ClientToken?: string;
+  /** 沙箱实例存储挂载配置 */
+  MountOptions?: MountOption[];
 }
 
 declare interface StartSandboxInstanceResponse {

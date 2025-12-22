@@ -2991,50 +2991,50 @@ declare interface CreateParamTemplateResponse {
 }
 
 declare interface CreateProxyEndPointRequest {
-  /** 集群ID */
+  /** 集群 ID。 */
   ClusterId: string;
-  /** 私有网络ID，默认与集群私有网络ID保持一致 */
+  /** 私有网络 ID，默认与集群私有网络 ID 保持一致。 */
   UniqueVpcId: string;
-  /** 私有网络子网ID，默认与集群子网ID保持一致 */
+  /** 私有网络子网 ID，默认与集群子网 ID 保持一致。 */
   UniqueSubnetId: string;
-  /** 连接池类型：SessionConnectionPool(会话级别连接池 ) */
+  /** 连接池类型：SessionConnectionPool（会话级别连接池）。 */
   ConnectionPoolType?: string;
-  /** 是否开启连接池,yes-开启，no-不开启 */
+  /** 是否开启连接池。yes：表示开启。no：表示不开启。 */
   OpenConnectionPool?: string;
-  /** 连接池阈值：单位（秒） */
+  /** 连接池阈值：单位（秒），可选范围：0 - 300秒。 */
   ConnectionPoolTimeOut?: number;
-  /** 绑定的安全组ID数组 */
+  /** 绑定的安全组 ID 数组。 */
   SecurityGroupIds?: string[];
-  /** 描述说明 */
+  /** 描述说明。 */
   Description?: string;
-  /** 想要绑定的vip信息，需与UniqueVpcId对应。 */
+  /** 想要绑定的 vip 信息，需与 UniqueVpcId 对应。 */
   Vip?: string;
-  /** 权重模式：system-系统分配，custom-自定义 */
+  /** 权重模式：system：系统分配。custom：自定义。 */
   WeightMode?: string;
-  /** 是否自动添加只读实例，yes-是，no-不自动添加 */
+  /** 是否自动添加只读实例。yes：表示自动添加只读实例。no：表示不自动添加只读实例。 */
   AutoAddRo?: string;
-  /** 是否开启故障转移。yes：开启no：不开启。数据库代理出现故障时，链接地址将会路由到主实例 */
+  /** 是否开启故障转移。yes：表示开启，开启后，当数据库代理出现故障时，连接地址将会路由到主实例。no：表示不开启。说明：仅当 RwType 参数值为 READWRITE 时，才支持设置此项。 */
   FailOver?: string;
-  /** 一致性类型：eventual,global,session */
+  /** 一致性类型：eventual：最终一致性。global：全局一致性。session：会话一致性。说明：仅当 RwType 参数值为 READWRITE 时，才支持设置此项。 */
   ConsistencyType?: string;
-  /** 读写属性：READWRITE,READONLY */
+  /** 读写属性：READWRITE：表示读写分离。当此参数值为 READWRITE 时，才支持设置 FailOver、ConsistencyType 参数。READONLY：表示只读。 */
   RwType?: string;
-  /** 一致性超时时间。取值范围：0~1000000（微秒）,设置0则表示若只读实例出现延迟, 导致一致性策略不满足, 请求将一直等待 */
+  /** 一致性超时时间。取值范围：0 ~ 1000000（微秒）。设置为0时，表示若只读实例出现延迟导致一致性策略不满足时，请求将一直等待。 */
   ConsistencyTimeOut?: number;
-  /** 是否开启事务拆分。在一个事务中拆分读和写到不同的实例上去执行 */
+  /** 是否开启事务拆分。开启后，在一个事务中拆分读和写到不同的实例上去执行。 */
   TransSplit?: boolean;
-  /** 连接模式：nearby,balance */
+  /** 接入模式：nearby：就近访问。balance：均衡分配。 */
   AccessMode?: string;
-  /** 实例权重 */
+  /** 实例权重。 */
   InstanceWeights?: ProxyInstanceWeight[];
 }
 
 declare interface CreateProxyEndPointResponse {
-  /** 异步流程ID */
+  /** 异步流程 ID。 */
   FlowId?: number;
-  /** 异步任务ID */
+  /** 异步任务 ID。 */
   TaskId?: number;
-  /** 数据库代理组ID */
+  /** 数据库代理组 ID。 */
   ProxyGroupId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

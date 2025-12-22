@@ -1789,6 +1789,8 @@ declare namespace V20180717 {
     FileId?: string;
     /** 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。说明：1. 推荐使用小于7M的图片；2. 图片格式的取值为：jpeg，jpg, png, webp。 */
     Url?: string;
+    /** 输入图片的描述信息，用于帮助模型理解图片。仅GEM 2.5、GEM 3.0 有效。 */
+    Text?: string;
   }
 
   /** AIGC 生图任务的输出。 */
@@ -1819,7 +1821,7 @@ declare namespace V20180717 {
 
   /** AIGC 统计数据 */
   interface AigcUsageDataItem {
-    /** AIGC规格。取值有：Qwen2.0Gem2.5Gem3.0_1KGem3.0_2KGem3.0_4KSeedream4.0Sora2Veo3.1StandardVeo3.1FastKling2.5pro_720PKling2.5pro_1080PKling2.0&2.1std_720PKling2.0&2.1pro_1080PHailuo02&2.3_1080PHailuo02&2.3_768PHailuo2.3fast_768PHailuo2.3fast_1080PSeedance3.0proJimeng4.0Jimeng3.0proVidu2.0_720PVidu2.0_1080PViduQ2pro_720PViduQ2pro_1080PViduQ2turbo_720PViduQ2turbo_1080P unknown */
+    /** AIGC规格。取值有：Qwen2.0Gem2.5Gem3.0_1KGem3.0_2KGem3.0_4KSora2Veo3.1StandardVeo3.1FastKling2.5pro_720PKling2.5pro_1080PKling2.0&2.1std_720PKling2.0&2.1pro_1080PHailuo02&2.3_1080PHailuo02&2.3_768PHailuo2.3fast_768PHailuo2.3fast_1080PJimeng4.0Jimeng3.0proVidu2.0_720PVidu2.0_1080PViduQ2pro_720PViduQ2pro_1080PViduQ2turbo_720PViduQ2turbo_1080P unknown */
     Specification?: string;
     /** 用量数据。 */
     DataSet?: TaskStatDataItem[];
@@ -1837,7 +1839,7 @@ declare namespace V20180717 {
     ExpireTime?: string;
     /** 生成视频的时长，单位：秒。当 ModelName 是 Kling，可选值为 5、10，默认为 5；当 ModelName 是 Jimeng，可选值为 5、10，默认为 5；当 ModelName 是 Hailuo，可选值为 6、10，默认为 6；当 ModelName 是 Vidu，可指定1-10；当 ModelName 是 GV，可选值为 8，默认为 8；当 ModelName 是 OS，可选值为 4、8、12，默认为 8； */
     Duration?: number;
-    /** 生成视频的分辨率。当 ModelName 是 Kling，可选值为 720P、1080P，默认为 720P；当 ModelName 是 Hailuo，可选值为 768P、1080P，默认为 768P；当 ModelName 是 Jimeng，可选值为 1080P；当 ModelName 是 Vidu，可选值为 720P、1080P，默认为 720P；当 ModelName 是 GV，可选值为 720P、1080P，默认为 720P；当 ModelName 是 OS，可选值为 720P；说明：除模型可支持的分辨率外，还支持 2K、4K分辨率。 */
+    /** 生成视频的分辨率。当 ModelName 是 Kling，可选值为 720P、1080P，默认为 720P；当 ModelName 是 Hailuo，可选值为 768P、1080P，默认为 768P；当 ModelName 是 Jimeng，可选值为 1080P；当 ModelName 是 Vidu，可选值为 720P、1080P，默认为 720P；当 ModelName 是 GV，可选值为 720P、1080P，默认为 720P；当 ModelName 是 OS，可选值为 720P； */
     Resolution?: string;
     /** 指定所生成视频的宽高比。当 ModelName 是 Kling，当文生视频时，则可选值为 16:9、9:16、 1:1，默认为16:9；当 ModelName 是 Jimeng，当文生视频时，则可选值为 16:9、4:3、1:1、3:4、9:16、21:9当 ModelName 是 Vidu，当文生视频时和使用参考图片生成时，则可选值为 16:9、9:16、4:3、3:4、1:1，其中仅版本q2支持4:3、3:4当 ModelName 是 GV，则可选值为 16:9、9:16，默认为 16:9；当 ModelName 是 OS，当文生视频时，则可选值为 16:9、9:16，默认为 16:9；当 ModelName 是 Hailuo，则暂不支持。 */
     AspectRatio?: string;
@@ -6818,13 +6820,13 @@ declare namespace V20180717 {
   interface CreateAigcImageTaskRequest {
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId: number;
-    /** 模型名称。取值：GEM：Gemini；Jimeng：即梦；Qwen：千问。 */
+    /** 模型名称。取值：GEM：Gemini；Jimeng：即梦；Qwen：千问。Hunyuan：混元。Mingmou：明眸。 */
     ModelName: string;
-    /** 模型版本。取值：当 ModelName 是 GEM，可选值为 2.5、3.0；当 ModelName 是 Jimeng，可选值为 4.0；当 ModelName 是 Qwen，可选值为 0925； */
+    /** 模型版本。取值：当 ModelName 是 GEM，可选值为 2.5、3.0；当 ModelName 是 Jimeng，可选值为 4.0；当 ModelName 是 Qwen，可选值为 0925；当 ModelName 是 Hunyuan，可选值为 3.0；当 ModelName 是 Mingmou，可选值为 1.0； */
     ModelVersion: string;
     /** AIGC 生图任务的输入图片的文件信息。默认只支持指定1个，使用模型 GEM 时最多指定3个。 */
     FileInfos?: AigcImageTaskInputFileInfo[];
-    /** 生成图片的提示词。最大支持1000字符，当 FileInfos 为空时，此参数必填。 */
+    /** 生成图片的提示词。最大支持2000字符，当 FileInfos 为空时，此参数必填。 */
     Prompt?: string;
     /** 要阻止模型生成图片的提示词。最大支持500个字符。 */
     NegativePrompt?: string;

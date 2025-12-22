@@ -408,7 +408,7 @@ declare interface DomainListItem {
   Name?: string;
   /** 域名的状态，正常：ENABLE，暂停：PAUSE，封禁：SPAM */
   Status?: string;
-  /** 域名默认的解析记录默认TTL值 */
+  /** 域名默认的解析记录默认TTL值，单位：秒 */
   TTL?: number;
   /** 是否开启CNAME加速，开启：ENABLE，未开启：DISABLE */
   CNAMESpeedup?: string;
@@ -1733,7 +1733,7 @@ declare interface DescribeDomainFilterListRequest {
   RecordCountBegin?: number;
   /** 要获取域名的记录数查询区间终点。 */
   RecordCountEnd?: number;
-  /** 项目ID */
+  /** 项目ID，"帐号中心-项目管理"拿到项目ID */
   ProjectId?: number;
   /** 标签过滤 */
   Tags?: TagItemFilter[];

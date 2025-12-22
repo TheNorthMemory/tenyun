@@ -349,15 +349,15 @@ declare interface BusinessLogConfig {
   /** 配置项日志路径 */
   ConfigPath?: string;
   /** 配置项描述 */
-  ConfigDesc?: string | null;
+  ConfigDesc?: string;
   /** 配置项标签 */
-  ConfigTags?: string | null;
+  ConfigTags?: string;
   /** 配置项对应的ES管道 */
   ConfigPipeline?: string;
   /** 配置项创建时间，格式为yyyy-MM-dd HH:mm:ss */
-  ConfigCreateTime?: string | null;
+  ConfigCreateTime?: string;
   /** 配置项更新时间，格式为yyyy-MM-dd HH:mm:ss */
-  ConfigUpdateTime?: string | null;
+  ConfigUpdateTime?: string;
   /** 配置项解析规则 */
   ConfigSchema?: BusinessLogConfigSchema;
   /** 配置项关联部署组 */
@@ -376,6 +376,8 @@ declare interface BusinessLogConfig {
   FilebeatCloseInactive?: number;
   /** filebeat clean_inactive参数 */
   FilebeatCleanInactive?: number;
+  /** 是否开启自定义pattern */
+  CustomMultilinePattern?: boolean;
 }
 
 /** 业务日志配置关联部署组信息 */
@@ -409,15 +411,15 @@ declare interface BusinessLogConfigSchema {
   /** 解析规则类型。可选值 0（SPRING_BOOT：默认Spring Boot格式），1（NONE：无解析规则），4（NGINX_ACCESS：nginx access日志），5（CUSTOM_LOGBACK：自定义Logback），6（CUSTOM_LOG4J：自定义Log4J），7（CUSTOM_LOG4J2：自定义Log4J2），8（TEXT：单行/多行文本），9（ENVOY_MSGW_ACCESS：envoy access日志）。 */
   SchemaType: number;
   /** 解析规则内容 */
-  SchemaContent?: string | null;
+  SchemaContent?: string;
   /** 解析规则时间格式 */
-  SchemaDateFormat?: string | null;
+  SchemaDateFormat?: string;
   /** 解析规则对应的多行匹配规则 */
-  SchemaMultilinePattern?: string | null;
+  SchemaMultilinePattern?: string;
   /** 解析规则创建时间，格式为yyyy-MM-dd HH:mm:ss */
   SchemaCreateTime?: string;
   /** 用户填写的解析规则 */
-  SchemaPatternLayout?: string | null;
+  SchemaPatternLayout?: string;
 }
 
 /** 业务日志 */

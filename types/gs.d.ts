@@ -122,6 +122,22 @@ declare interface AndroidInstanceAppInfo {
   VersionName?: string;
 }
 
+/** 安卓实例备份 */
+declare interface AndroidInstanceBackup {
+  /** 备份ID */
+  BackupId?: string;
+  /** 备份状态 */
+  State?: string;
+  /** 可用区 */
+  Zone?: string;
+  /** 大小，单位 Byte */
+  Size?: number;
+  /** 备份的安卓实例 ID */
+  AndroidInstanceId?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+}
+
 /** 安卓实例设备信息 */
 declare interface AndroidInstanceDevice {
   /** 品牌 */
@@ -788,6 +804,10 @@ declare interface DescribeAndroidInstanceBackupsRequest {
 }
 
 declare interface DescribeAndroidInstanceBackupsResponse {
+  /** 备份列表 */
+  Backups?: AndroidInstanceBackup[];
+  /** 备份总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

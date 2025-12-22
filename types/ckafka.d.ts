@@ -1390,6 +1390,22 @@ declare interface InstanceRoute {
   RouteId: number;
 }
 
+/** 实例版本信息 */
+declare interface InstanceVersion {
+  /** ckafka集群实例版本 */
+  KafkaVersion?: string;
+  /** broker版本信息 */
+  CurBrokerVersion?: string;
+  /** 最新版本信息 */
+  LatestBrokerVersion?: LatestBrokerVersion[];
+  /** 允许跨大版本内核升级 */
+  AllowUpgradeHighVersion?: boolean;
+  /** 允许升级的大版本 */
+  HighVersionSet?: string[];
+  /** 允许小版本号配置自动删除消费者组 */
+  AllowAutoDeleteTimestamp?: boolean;
+}
+
 /** 数据处理——Value处理参数——Jsonpath替换参数 */
 declare interface JsonPathReplaceParam {
   /** 被替换值，Jsonpath表达式 */
@@ -1478,6 +1494,14 @@ declare interface KafkaParam {
   Prefix?: string;
   /** Topic前缀分隔符 */
   Separator?: string;
+}
+
+/** 最新版本信息列表 */
+declare interface LatestBrokerVersion {
+  /** ckafka集群实例版本 */
+  KafkaVersion?: string;
+  /** broker版本号 */
+  BrokerVersion?: string;
 }
 
 /** CVM和IP 信息列表 */
@@ -2868,7 +2892,7 @@ declare interface CreateDatahubTopicResponse {
 declare interface CreateInstancePreRequest {
   /** ckafka集群实例Name，是一个不超过 128 个字符的任意字符串。 */
   InstanceName: string;
-  /** 可用区。当购买多可用区实例时，当前参数为主可用区。 [查看可用区](https://cloud.tencent.com/document/product/597/55246) */
+  /** 可用区。当购买多可用区实例时，当前参数为主可用区。 查看可用区 */
   ZoneId: number;
   /** 预付费购买时长，例如 "1m",就是一个月,取值范围 1m~36m */
   Period: string;
@@ -2910,6 +2934,8 @@ declare interface CreateInstancePreRequest {
   AutoVoucher?: number;
   /** 弹性带宽开关 0不开启 1开启（0默认） */
   ElasticBandwidthSwitch?: number;
+  /** 自定义证书Id,仅当SpecificationsType为profession时生效,支持自定义证书能力可通过DescribeCertificateDetail接口获取 */
+  CustomSSLCertId?: string;
 }
 
 declare interface CreateInstancePreResponse {
@@ -2936,9 +2962,9 @@ declare interface CreatePartitionResponse {
 }
 
 declare interface CreatePostPaidInstanceRequest {
-  /** 私有网络Id,可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口获取 */
+  /** 私有网络Id,可通过DescribeVpcs接口获取 */
   VpcId: string;
-  /** 子网Id,可通过[DescribeSubnets](https://cloud.tencent.com/document/product/215/15784)接口获取 */
+  /** 子网Id,可通过DescribeSubnets接口获取 */
   SubnetId: string;
   /** ckafka集群实例名称，是一个长度不超过128的任意字符。 */
   InstanceName?: string;
@@ -2962,11 +2988,11 @@ declare interface CreatePostPaidInstanceRequest {
   Partition?: number;
   /** 实例最大 topic 数量，需要满足当前实例的计费规格。默认值为800，步长设置为100。 */
   TopicNum?: number;
-  /** 实例所在的可用区。当创建多可用区实例时，该参数为创建的默认接入点所在子网的可用区 id。ZoneId、ZoneIds不能同时为空，可通过[DescribeCkafkaZone](https://cloud.tencent.com/document/product/597/55246)接口获取。 */
+  /** 实例所在的可用区。当创建多可用区实例时，该参数为创建的默认接入点所在子网的可用区 id。ZoneId、ZoneIds不能同时为空，可通过DescribeCkafkaZone接口获取。 */
   ZoneId?: number;
   /** 当前实例是否为多可用区实例。 */
   MultiZoneFlag?: boolean;
-  /** 当实例为多可用区实例时，多可用区 id 列表。注意参数 ZoneId 对应的多可用区需要包含在该参数数组中。ZoneId、ZoneIds不能同时为空，可通过[DescribeCkafkaZone](https://cloud.tencent.com/document/product/597/55246)接口获取。 */
+  /** 当实例为多可用区实例时，多可用区 id 列表。注意参数 ZoneId 对应的多可用区需要包含在该参数数组中。ZoneId、ZoneIds不能同时为空，可通过DescribeCkafkaZone接口获取。 */
   ZoneIds?: number[];
   /** 购买实例数量。非必填，默认值为 1。当传入该参数时，会创建多个 instanceName 加后缀区分的实例 */
   InstanceNum?: number;
@@ -2976,6 +3002,8 @@ declare interface CreatePostPaidInstanceRequest {
   Tags?: Tag[];
   /** 弹性带宽开关 0不开启 1开启（0默认) */
   ElasticBandwidthSwitch?: number;
+  /** 自定义证书Id,仅当SpecificationsType为profession时生效,支持自定义证书能力可通过DescribeCertificateDetail接口获取 */
+  CustomSSLCertId?: string;
 }
 
 declare interface CreatePostPaidInstanceResponse {
@@ -3373,6 +3401,8 @@ declare interface DescribeCkafkaVersionRequest {
 }
 
 declare interface DescribeCkafkaVersionResponse {
+  /** 实例版本信息 */
+  Result?: InstanceVersion;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4181,7 +4211,7 @@ declare interface InstanceAttributesResponse {
   ElasticBandwidthSwitch?: number;
   /** 弹性带宽开通状态1:未开启弹性带宽;16: 开启弹性带宽中;32:开启弹性带宽成功;33:关闭弹性带宽中;34:关闭弹性带宽成功;64:开启弹性带宽失败;65:关闭弹性带宽失败; */
   ElasticBandwidthOpenStatus?: number;
-  /** 集群类型 CLOUD_IDC IDC集群CLOUD_CVM_SHARE CVM共享集群CLOUD_CVM_YUNTI 云梯CVM集群CLOUD_CVM CVM集群CLOUD_CDC CDC集群CLOUD_EKS_TSE EKS集群 */
+  /** 集群类型CLOUD_IDC IDC集群CLOUD_CVM_SHARE CVM共享集群CLOUD_CVM_YUNTI 云梯CVM集群CLOUD_CVM CVM集群CLOUD_CDC CDC集群CLOUD_EKS_TSE EKS集群 */
   ClusterType?: string;
   /** 免费分区数量 */
   FreePartitionNumber?: number;

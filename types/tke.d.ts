@@ -346,6 +346,48 @@ declare interface LifecycleConfig {
   PostInit?: string | null;
 }
 
+/** 节点信息 */
+declare interface Machine {
+  /** 节点名称 */
+  MachineName?: string;
+  /** Machine 状态 */
+  MachineState?: string;
+  /** Machine 所在可用区 */
+  Zone?: string;
+  /** 节点计费类型。PREPAID：包年包月；POSTPAID_BY_HOUR：按量计费（默认）； */
+  InstanceChargeType?: string;
+  /** 创建时间 */
+  CreatedAt?: string;
+  /** Machine 登录状态 */
+  LoginStatus?: string | null;
+  /** 是否开启缩容保护 */
+  IsProtectedFromScaleIn?: boolean | null;
+  /** Machine 名字 */
+  DisplayName?: string | null;
+  /** CPU核数，单位：核 */
+  CPU?: number;
+  /** GPU核数，单位：核 */
+  GPU?: number | null;
+  /** 自动续费标识 */
+  RenewFlag?: string;
+  /** 节点计费模式（已弃用） */
+  PayMode?: string;
+  /** 节点内存容量，单位：`GB` */
+  Memory?: number;
+  /** 节点系统盘配置信息 */
+  SystemDisk?: Disk;
+  /** 公网带宽相关信息设置 */
+  InternetAccessible?: InternetAccessible;
+  /** 机型所属机型族 */
+  InstanceFamily?: string;
+  /** 节点内网 IP */
+  LanIP?: string;
+  /** 机型 */
+  InstanceType?: string;
+  /** 包年包月节点计费过期时间 */
+  ExpiredTime?: string | null;
+}
+
 /** 节点池弹性伸缩配置 */
 declare interface MachineSetScaling {
   /** 节点池最小副本数 */
@@ -810,6 +852,26 @@ declare interface DescribeClusterInstancesResponse {
   InstanceSet?: Instance[];
   /** 错误信息集合 */
   Errors?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterMachinesRequest {
+  /** 集群 ID */
+  ClusterId: string;
+  /** 节点过滤条件，支持以下过滤条件：· NodePoolsName 按照【节点池名】进行过滤。 类型：String 必选：否· NodePoolsId 按照【节点池id】进行过滤。 类型：String 必选：否· tags 按照【标签键值对】进行过滤。 类型：String 必选：否· tag:tag-key 按照【标签键值对】进行过滤。 类型：String 必选：否 */
+  Filters?: Filter[];
+  /** 偏移量，默认0 */
+  Limit?: number;
+  /** 最大输出条数，默认20，最大为100 */
+  Offset?: number;
+}
+
+declare interface DescribeClusterMachinesResponse {
+  /** 节点池节点列表 */
+  Machines?: Machine[] | null;
+  /** 资源总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8339,6 +8401,8 @@ declare interface Tke {
   DeleteNodePool(data: DeleteNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNodePoolResponse>;
   /** 查询集群节点信息 {@link DescribeClusterInstancesRequest} {@link DescribeClusterInstancesResponse} */
   DescribeClusterInstances(data: DescribeClusterInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInstancesResponse>;
+  /** 查询原生节点列表 {@link DescribeClusterMachinesRequest} {@link DescribeClusterMachinesResponse} */
+  DescribeClusterMachines(data: DescribeClusterMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterMachinesResponse>;
   /** 查询集群列表 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
   /** 查询健康检测策略 {@link DescribeHealthCheckPoliciesRequest} {@link DescribeHealthCheckPoliciesResponse} */

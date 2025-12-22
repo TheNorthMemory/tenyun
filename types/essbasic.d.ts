@@ -1386,11 +1386,11 @@ declare interface SignUrlInfo {
 declare interface Staff {
   /** 员工在电子签平台的用户ID */
   UserId?: string;
-  /** 显示的员工名注意：2024-07-08 及之后创建的应用号，该字段返回的是打码信息 */
+  /** 显示的员工名注意：该字段返回的是打码信息 */
   DisplayName?: string;
-  /** 员工手机号注意：2024-07-08 及之后创建的应用号，该字段返回的是打码信息 */
+  /** 员工手机号注意：该字段返回的是打码信息 */
   Mobile?: string;
-  /** 员工邮箱 */
+  /** 员工邮箱注意：该字段返回的是打码信息 */
   Email?: string;
   /** 员工在第三方应用平台的用户ID */
   OpenId?: string;

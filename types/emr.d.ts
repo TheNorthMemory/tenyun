@@ -970,6 +970,18 @@ declare interface GroupInfos {
   GroupTypeDesc?: string;
 }
 
+/** HBase监控数据结构 */
+declare interface HBaseMetricData {
+  /** 指标名称，如 read_request_rate */
+  MetricName?: string;
+  /** 指标描述，如 read request rate */
+  MetricDesc?: string;
+  /** 时间戳数组 */
+  Timestamps?: number[];
+  /** 数值数组 */
+  Values?: number[];
+}
+
 /** 进程健康状态 */
 declare interface HealthStatus {
   /** 运行正常 */
@@ -3770,6 +3782,50 @@ declare interface DescribeHBaseTableOverviewResponse {
   RequestId?: string;
 }
 
+declare interface DescribeHBaseTableRequestMetricRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** Hbase表名 */
+  TableName: string;
+  /** Hbase的RegionServer服务 */
+  RegionServer?: string;
+  /** 获取监控的数据粒度 */
+  Downsample?: string;
+  /** 查询监控数据起始时间戳 */
+  StartTime?: number;
+  /** 查询监控数据结束时间戳 */
+  EndTime?: number;
+}
+
+declare interface DescribeHBaseTableRequestMetricResponse {
+  /** Hbase监控指标返回包装结构 */
+  MetricDataList?: HBaseMetricData[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeHBaseTableStoreSizeMetricRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** Hbase表名 */
+  TableName: string;
+  /** Hbase的RegionServer服务 */
+  RegionServer?: string;
+  /** 获取监控的数据粒度 */
+  Downsample?: string;
+  /** 查询监控数据起始时间戳 */
+  StartTime?: number;
+  /** 查询监控数据结束时间戳 */
+  EndTime?: number;
+}
+
+declare interface DescribeHBaseTableStoreSizeMetricResponse {
+  /** Hbase监控指标返回包装结构 */
+  MetricDataList?: HBaseMetricData[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeHDFSStorageInfoRequest {
   /** 集群id */
   InstanceId: string;
@@ -5365,6 +5421,10 @@ declare interface Emr {
   DescribeGroupsSTD(data: DescribeGroupsSTDRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupsSTDResponse>;
   /** 获取Hbase表级监控数据概览 {@link DescribeHBaseTableOverviewRequest} {@link DescribeHBaseTableOverviewResponse} */
   DescribeHBaseTableOverview(data: DescribeHBaseTableOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHBaseTableOverviewResponse>;
+  /** 获取Hbase表级监控表的读写请求指标 {@link DescribeHBaseTableRequestMetricRequest} {@link DescribeHBaseTableRequestMetricResponse} */
+  DescribeHBaseTableRequestMetric(data: DescribeHBaseTableRequestMetricRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHBaseTableRequestMetricResponse>;
+  /** 获取Hbase表级监控表的StoreSize监控指标数据 {@link DescribeHBaseTableStoreSizeMetricRequest} {@link DescribeHBaseTableStoreSizeMetricResponse} */
+  DescribeHBaseTableStoreSizeMetric(data: DescribeHBaseTableStoreSizeMetricRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHBaseTableStoreSizeMetricResponse>;
   /** 查询HDFS存储文件数量 {@link DescribeHDFSStorageInfoRequest} {@link DescribeHDFSStorageInfoResponse} */
   DescribeHDFSStorageInfo(data: DescribeHDFSStorageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHDFSStorageInfoResponse>;
   /** 获取hive查询信息 {@link DescribeHiveQueriesRequest} {@link DescribeHiveQueriesResponse} */

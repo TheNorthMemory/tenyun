@@ -472,6 +472,20 @@ declare interface RemoveChatResponse {
   RequestId?: string;
 }
 
+declare interface StartAgentTaskRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 配置Token */
+  InstanceToken?: string;
+}
+
+declare interface StartAgentTaskResponse {
+  /** 任务ID */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface TerminateAgentInstanceRequest {
   /** 实例ID，为空时查询所有，如果填写则会根据InstanceId筛选 */
   InstanceId: string;
@@ -519,6 +533,8 @@ declare interface Tdai {
   RecoverAgentInstance(data: RecoverAgentInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverAgentInstanceResponse>;
   /** 删除会话 {@link RemoveChatRequest} {@link RemoveChatResponse} */
   RemoveChat(data: RemoveChatRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveChatResponse>;
+  /** 启动智能体任务 {@link StartAgentTaskRequest} {@link StartAgentTaskResponse} */
+  StartAgentTask(data: StartAgentTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StartAgentTaskResponse>;
   /** 下线Agent实例 {@link TerminateAgentInstanceRequest} {@link TerminateAgentInstanceResponse} */
   TerminateAgentInstance(data: TerminateAgentInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateAgentInstanceResponse>;
 }

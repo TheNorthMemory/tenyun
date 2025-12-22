@@ -220,6 +220,14 @@ declare interface Permission {
   Actions: string[];
 }
 
+/** 策略过滤条件 */
+declare interface PolicyFilter {
+  /** 策略过滤类型 */
+  Type?: string | null;
+  /** 策略过滤值 */
+  Value?: string | null;
+}
+
 /** 地域信息 */
 declare interface Region {
   /** gz */
@@ -326,6 +334,30 @@ declare interface ReplicationLog {
   StartTime?: string;
   /** 结束时间 */
   EndTime?: string;
+}
+
+/** 实例复制/实例同步策略信息ID */
+declare interface ReplicationPolicyInfo {
+  /** 策略ID */
+  ID?: number | null;
+  /** 策略名字 */
+  Name?: string | null;
+  /** 策略描述信息 */
+  Description?: string | null;
+  /** 策略过滤条件 */
+  Filters?: PolicyFilter[] | null;
+  /** 是否覆盖对端同名镜像 */
+  Override?: boolean | null;
+  /** 是否开启 */
+  Enabled?: boolean | null;
+  /** 源信息 */
+  SrcResource?: string | null;
+  /** 目的资源 */
+  DestResource?: string | null;
+  /** 创建时间 */
+  CreationTime?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
 }
 
 /** 企业版复制实例 */
@@ -1456,6 +1488,20 @@ declare interface DeleteReplicationInstanceResponse {
   RequestId?: string;
 }
 
+declare interface DeleteReplicationRuleRequest {
+  /** 源实例ID */
+  SourceRegistryId: string;
+  /** 同步规则名称 */
+  RuleName: string;
+  /** 规则描述 */
+  Description?: string;
+}
+
+declare interface DeleteReplicationRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteRepositoryPersonalRequest {
   /** 仓库名称 */
   RepoName: string;
@@ -2022,6 +2068,24 @@ declare interface DescribeReplicationInstancesResponse {
   TotalCount: number;
   /** 同步实例列表 */
   ReplicationRegistries: ReplicationRegistry[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeReplicationPoliciesRequest {
+  /** 实例ID */
+  RegistryId: string;
+  /** 页数，默认为1 */
+  Page?: number;
+  /** 每页展示个数，默认为100 */
+  PageSize?: number;
+}
+
+declare interface DescribeReplicationPoliciesResponse {
+  /** 实例同步策略列表 */
+  ReplicationPolicyInfoList?: ReplicationPolicyInfo[] | null;
+  /** 策略总数 */
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2751,6 +2815,8 @@ declare interface Tcr {
   DeleteNamespacePersonal(data: DeleteNamespacePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNamespacePersonalResponse>;
   /** 删除从实例 {@link DeleteReplicationInstanceRequest} {@link DeleteReplicationInstanceResponse} */
   DeleteReplicationInstance(data: DeleteReplicationInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReplicationInstanceResponse>;
+  /** 删除实例同步规则 {@link DeleteReplicationRuleRequest} {@link DeleteReplicationRuleResponse} */
+  DeleteReplicationRule(data: DeleteReplicationRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReplicationRuleResponse>;
   /** 删除镜像仓库 {@link DeleteRepositoryRequest} {@link DeleteRepositoryResponse} */
   DeleteRepository(data: DeleteRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRepositoryResponse>;
   /** 删除个人版镜像仓库 {@link DeleteRepositoryPersonalRequest} {@link DeleteRepositoryPersonalResponse} */
@@ -2821,6 +2887,8 @@ declare interface Tcr {
   DescribeReplicationInstanceSyncStatus(data: DescribeReplicationInstanceSyncStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReplicationInstanceSyncStatusResponse>;
   /** 查询从实例列表 {@link DescribeReplicationInstancesRequest} {@link DescribeReplicationInstancesResponse} */
   DescribeReplicationInstances(data: DescribeReplicationInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReplicationInstancesResponse>;
+  /** 查询实例同步策略列表 {@link DescribeReplicationPoliciesRequest} {@link DescribeReplicationPoliciesResponse} */
+  DescribeReplicationPolicies(data: DescribeReplicationPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReplicationPoliciesResponse>;
   /** 查询镜像仓库信息 {@link DescribeRepositoriesRequest} {@link DescribeRepositoriesResponse} */
   DescribeRepositories(data: DescribeRepositoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoriesResponse>;
   /** 获取满足输入搜索条件的个人版镜像仓库 {@link DescribeRepositoryFilterPersonalRequest} {@link DescribeRepositoryFilterPersonalResponse} */
