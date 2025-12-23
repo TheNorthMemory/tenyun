@@ -1890,16 +1890,6 @@ declare interface ImageTagsResult {
   Content?: ImageTag[];
 }
 
-/** 监控指标坐标 */
-declare interface IndicatorCoord {
-  /** 指标横坐标值 */
-  CoordX?: string;
-  /** 指标纵坐标值 */
-  CoordY?: string;
-  /** 指标标签，用于标识附加信息 */
-  CoordTag?: string;
-}
-
 /** 机器实例 */
 declare interface Instance {
   /** 机器实例ID */
@@ -2042,26 +2032,6 @@ declare interface InstanceResourceConfig {
   Container: ContainerInstanceResourceConfig | null;
   /** 虚拟机实例相关的参数配置 */
   Vm: VmInstanceResourceConfig | null;
-}
-
-/** 服务调用监控指标 */
-declare interface InvocationIndicator {
-  /** 总请求数 */
-  InvocationQuantity?: number | null;
-  /** 请求成功率，百分比 */
-  InvocationSuccessRate?: number | null;
-  /** 请求平均耗时，单位毫秒 */
-  InvocationAvgDuration?: number | null;
-  /** 成功请求数时间分布 */
-  InvocationSuccessDistribution?: IndicatorCoord[];
-  /** 失败请求数时间分布 */
-  InvocationFailedDistribution?: IndicatorCoord[];
-  /** 状态码分布 */
-  InvocationStatusDistribution?: IndicatorCoord[];
-  /** 时延分布 */
-  InvocationDurationDistribution?: IndicatorCoord[];
-  /** 并发请求次数时间分布 */
-  InvocationQuantityDistribution?: IndicatorCoord[];
 }
 
 /** 监控数据散点图 */
@@ -6149,40 +6119,6 @@ declare interface DescribeImageTagsResponse {
   RequestId?: string;
 }
 
-declare interface DescribeInovcationIndicatorsRequest {
-  /** 维度 */
-  Dimension: string;
-  /** 开始时间 */
-  StartTime: string;
-  /** 结束时间 */
-  EndTime: string;
-  /** 命名空间ID */
-  NamespaceId?: string;
-  /** 微服务ID */
-  ServiceId?: string;
-  /** 调用方服务名 */
-  CallerServiceName?: string;
-  /** 被调方服务名 */
-  CalleeServiceName?: string;
-  /** 调用方接口名 */
-  CallerInterfaceName?: string;
-  /** 被调方接口名 */
-  CalleeInterfaceName?: string;
-  /** 应用ID */
-  ApplicationId?: string;
-  /** 部署组ID */
-  GroupId?: string;
-  /** 实例ID */
-  InstanceId?: string;
-}
-
-declare interface DescribeInovcationIndicatorsResponse {
-  /** 服务调用监控指标 */
-  Result?: InvocationIndicator | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeInstancesRequest {
   /** 过滤条件。多个 filter 之间是与关系，单个 filter 多个 value 之间是或关系。参考：[{"Name":"ip","Values":["172.16.16.139"]}]filter name 取值范围：- `id`：实例ID- ` name `：实例名- ` ip `：内网IP（可填wan_ip或lan_ip） */
   Filters?: Filter[];
@@ -8429,8 +8365,6 @@ declare interface Tsf {
   DescribeImageRepository(data?: DescribeImageRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRepositoryResponse>;
   /** 查询镜像版本列表 {@link DescribeImageTagsRequest} {@link DescribeImageTagsResponse} */
   DescribeImageTags(data?: DescribeImageTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageTagsResponse>;
-  /** @deprecated 查询调用监控指标 {@link DescribeInovcationIndicatorsRequest} {@link DescribeInovcationIndicatorsResponse} */
-  DescribeInovcationIndicators(data: DescribeInovcationIndicatorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInovcationIndicatorsResponse>;
   /** 查询机器列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** 查询调用指标数据变化曲线 {@link DescribeInvocationMetricDataCurveRequest} {@link DescribeInvocationMetricDataCurveResponse} */

@@ -344,7 +344,7 @@ declare interface DescribeChatDetailRequest {
   /** 流ID */
   StreamingId?: string;
   /** 开始拉取的流式TokenID。0表示从该流最早的TokenID开始获取 */
-  BeginStreamingTokenId?: string;
+  BeginStreamingTokenId?: number;
   /** 单次获取的token数量，默认2000 */
   TokenLimit?: number;
 }

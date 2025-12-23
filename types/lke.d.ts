@@ -1264,6 +1264,8 @@ declare interface ListDocItem {
   IsDisabled?: boolean;
   /** 员工名称 */
   StaffName?: string;
+  /** 文档生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域 */
+  EnableScope?: number | null;
 }
 
 /** 问答详情数据 */
@@ -1316,6 +1318,10 @@ declare interface ListQaItem {
   IsDisabled?: boolean;
   /** 员工名称 */
   StaffName?: string;
+  /** 问答生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域 */
+  EnableScope?: number | null;
+  /** 问答关联的文档生效域 */
+  DocEnableScope?: number;
 }
 
 /** 发布列表详情 */
@@ -2461,7 +2467,7 @@ declare interface CreateQACateResponse {
 }
 
 declare interface CreateQARequest {
-  /** 应用ID */
+  /** 应用ID若要操作共享知识库，传KnowledgeBizId */
   BotBizId: string;
   /** 问题 */
   Question: string;
@@ -2477,7 +2483,7 @@ declare interface CreateQARequest {
   DocBizId?: string;
   /** 分类ID */
   CateBizId?: string;
-  /** 有效开始时间，unix时间戳 */
+  /** 有效开始时间，单位是unix时间戳。默认值为0，表示问答为永久有效. */
   ExpireStart?: string;
   /** 有效结束时间，unix时间戳，0代表永久有效 */
   ExpireEnd?: string;
@@ -2485,6 +2491,8 @@ declare interface CreateQARequest {
   SimilarQuestions?: string[];
   /** 问题描述 */
   QuestionDesc?: string;
+  /** 问答生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域 */
+  EnableScope?: number;
 }
 
 declare interface CreateQAResponse {
@@ -2982,6 +2990,12 @@ declare interface DescribeDocResponse {
   SplitRule?: string | null;
   /** 文档更新频率 */
   UpdatePeriodInfo?: UpdatePeriodInfo | null;
+  /** 从根节点开始的路径分类ID */
+  CateBizIdPath?: string[] | null;
+  /** 从根节点开始的路径分类名称 */
+  CateNamePath?: string[] | null;
+  /** 文档生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域 */
+  EnableScope?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3098,6 +3112,14 @@ declare interface DescribeQAResponse {
   QuestionDesc?: string;
   /** 问答是否停用，false:未停用，true已停用 */
   IsDisabled?: boolean;
+  /** 从根节点开始的路径分类ID */
+  CateBizIdPath?: string[] | null;
+  /** 从根节点开始的路径分类名称 */
+  CateNamePath?: string[] | null;
+  /** 问答生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域 */
+  EnableScope?: number | null;
+  /** 问答关联的文档生效域 */
+  DocEnableScope?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3881,11 +3903,11 @@ declare interface ListDocCateResponse {
 }
 
 declare interface ListDocRequest {
-  /** 应用ID */
+  /** 应用ID, 获取方式参看 [BotBizId](https://cloud.tencent.com/document/product/1759/109469) */
   BotBizId: string;
-  /** 页码 */
+  /** 页码(必须大于0) */
   PageNumber: number;
-  /** 每页数量 */
+  /** 每页数量(取值范围1-200) */
   PageSize: number;
   /** 查询内容输入特定标识 lke:system:untagged 将查询所有未关联标签的文档 */
   Query?: string;
@@ -3893,7 +3915,7 @@ declare interface ListDocRequest {
   Status?: number[];
   /** 查询类型 filename 文档、 attribute 标签 */
   QueryType?: string;
-  /** 分类ID */
+  /** 分类ID, 调用接口[ListDocCate](https://capi.woa.com/api/detail?product=lke&version=2023-11-30&action=ListDocCate)获取 */
   CateBizId?: string;
   /** 文件类型分类筛选 */
   FileTypes?: string[];
@@ -3901,6 +3923,8 @@ declare interface ListDocRequest {
   FilterFlag?: DocFilterFlag[];
   /** 是否只展示当前分类的数据 0不是，1是 */
   ShowCurrCate?: number;
+  /** 文档生效域；不检索默认为0 */
+  EnableScope?: number;
 }
 
 declare interface ListDocResponse {
@@ -3955,21 +3979,21 @@ declare interface ListQACateResponse {
 }
 
 declare interface ListQARequest {
-  /** 应用ID */
+  /** 应用ID若要操作共享知识库，传KnowledgeBizId */
   BotBizId: string;
-  /** 页码 */
+  /** 页码（取值范围>0） */
   PageNumber: number;
-  /** 每页大小 */
+  /** 每页大小(取值范围1-200) */
   PageSize: number;
   /** 查询问题输入特定标识 lke:system:untagged 将查询所有未关联标签的问答 */
   Query?: string;
-  /** 校验状态(1未校验2采纳3不采纳) */
+  /** 校验状态(1未校验2采纳3不采纳)如果不填默认值为空数组，表示不筛选，返回所有状态 */
   AcceptStatus?: number[];
-  /** 发布状态(2待发布 3发布中 4已发布 7审核中 8审核失败 9人工申述中 11人工申述失败 12已过期 13超量失效 14超量失效恢复) */
+  /** 发布状态(2待发布 3发布中 4已发布 7审核中 8审核失败 9人工申述中 11人工申述失败 12已过期 13超量失效 14超量失效恢复)如果不填默认值为空数组，表示不筛选返回所有状态 */
   ReleaseStatus?: number[];
   /** 文档ID */
   DocBizId?: string;
-  /** 来源(1 文档生成 2 批量导入 3 手动添加) */
+  /** 来源(1 文档生成 2 批量导入 3 手动添加)不填默认值为0，表示不过滤，返回所有状态 */
   Source?: number;
   /** 查询答案 */
   QueryAnswer?: string;
@@ -3977,10 +4001,12 @@ declare interface ListQARequest {
   CateBizId?: string;
   /** QA业务ID列表 */
   QaBizIds?: string[];
-  /** 查询类型 filename 名称、 attribute 标签 */
+  /** 查询类型 filename 名称、 attribute 标签如果不填默认值为"filename" */
   QueryType?: string;
   /** 是否只展示当前分类的数据 0不是，1是 */
   ShowCurrCate?: number;
+  /** // 知识生效作用域枚举值 enum RetrievalEnableScope { ENABLE_SCOPE_TYPE_UNKNOWN = 0; // 未知类型 ENABLE_SCOPE_TYPE_NONE = 1; // 停用 ENABLE_SCOPE_TYPE_DEV = 2; // 仅开发域 ENABLE_SCOPE_TYPE_RELEASE = 3; // 仅发布域 ENABLE_SCOPE_TYPE_ALL = 4; // 全域 } 问答生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域 */
+  EnableScope?: number;
 }
 
 declare interface ListQAResponse {
@@ -4381,13 +4407,13 @@ declare interface ModifyDocCateResponse {
 }
 
 declare interface ModifyDocRequest {
-  /** 应用ID */
+  /** 应用ID，获取方法参看[如何获取 BotBizId](https://cloud.tencent.com/document/product/1759/109469) */
   BotBizId: string;
   /** 文档ID */
   DocBizId: string;
   /** 是否引用链接 */
   IsRefer: boolean;
-  /** 标签适用范围，需要传参为1 */
+  /** 标签适用范围，1:全部，2:按条件。默认为1。 */
   AttrRange: number;
   /** 登录用户主账号(集成商模式必填) */
   LoginUin?: string;
@@ -4399,9 +4425,9 @@ declare interface ModifyDocRequest {
   WebUrl?: string;
   /** 外部引用链接类型 0：系统链接 1：自定义链接值为1时，WebUrl 字段不能为空，否则不生效。 */
   ReferUrlType?: number;
-  /** 有效开始时间，unix时间戳 */
+  /** 有效开始时间，单位为unix时间戳 */
   ExpireStart?: string;
-  /** 有效结束时间，unix时间戳，0代表永久有效 */
+  /** 有效结束时间，单位为unix时间戳，默认值为0代表永久有效 */
   ExpireEnd?: string;
   /** 分类ID */
   CateBizId?: string;
@@ -4413,6 +4439,8 @@ declare interface ModifyDocRequest {
   UpdatePeriodInfo?: UpdatePeriodInfo;
   /** 自定义切分规则 */
   SplitRule?: string;
+  /** 文档生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域 */
+  EnableScope?: number;
 }
 
 declare interface ModifyDocResponse {
@@ -4451,7 +4479,7 @@ declare interface ModifyQACateResponse {
 }
 
 declare interface ModifyQARequest {
-  /** 应用ID */
+  /** 应用ID若要操作共享知识库，传KnowledgeBizId */
   BotBizId: string;
   /** 问答ID */
   QaBizId: string;
@@ -4461,7 +4489,7 @@ declare interface ModifyQARequest {
   Answer: string;
   /** 自定义参数 */
   CustomParam?: string;
-  /** 标签适用范围 1：全部，2：按条件 */
+  /** 标签适用范围 1：全部，2：按条件默认值：当没有属性标签，labelRefers为空时，默认值为1有属性标签，labelRefers不为空，默认值为2 */
   AttrRange?: number;
   /** 标签引用 */
   AttrLabels?: AttrLabelRefer[];
@@ -4469,14 +4497,16 @@ declare interface ModifyQARequest {
   DocBizId?: string;
   /** 分类ID */
   CateBizId?: string;
-  /** 有效开始时间，unix时间戳 */
+  /** 有效开始时间，单位是unix时间戳，默认值为0，代表永久有效 */
   ExpireStart?: string;
-  /** 有效结束时间，unix时间戳，0代表永久有效 */
+  /** 有效结束时间，单位是unix时间戳，默认值为0，代表永久有效 */
   ExpireEnd?: string;
   /** 相似问修改信息(相似问没有修改则不传) */
   SimilarQuestionModify?: SimilarQuestionModify;
   /** 问题描述 */
   QuestionDesc?: string;
+  /** 问答生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域 */
+  EnableScope?: number;
 }
 
 declare interface ModifyQAResponse {
@@ -4589,9 +4619,9 @@ declare interface RetryReleaseResponse {
 }
 
 declare interface SaveDocRequest {
-  /** 应用ID */
+  /** 应用ID，获取方法参看[如何获取 BotBizId](https://cloud.tencent.com/document/product/1759/109469) */
   BotBizId: string;
-  /** 文件名 */
+  /** 文件名，需要包含文件扩展名 */
   FileName: string;
   /** 文档支持下面类型pdf、doc、docx、ppt、mhtml、pptx、wps、ppsx，单个文件不超过200MB；xlsx、xls、md、txt、csv、html，单个文件不超过20MB；图片支持下面类型：jpg、png、jpeg、tiff、bmp、gif，单个文件不超过50MB */
   FileType: string;
@@ -4603,7 +4633,7 @@ declare interface SaveDocRequest {
   CosHash: string;
   /** 文件大小 */
   Size: string;
-  /** 标签适用范围，需要传参为1 */
+  /** 标签适用范围，1:全部，2:按条件。默认为1。 */
   AttrRange?: number;
   /** 来源（0 从本地文档导入），默认值为0 */
   Source?: number;
@@ -4613,13 +4643,13 @@ declare interface SaveDocRequest {
   AttrLabels?: AttrLabelRefer[];
   /** 外部引用链接类型 0：系统链接 1：自定义链接值为1时，WebUrl 字段不能为空，否则不生效。 */
   ReferUrlType?: number;
-  /** 有效开始时间，unix秒级时间戳 */
+  /** 有效开始时间，unix秒级时间戳，默认为0 */
   ExpireStart?: string;
-  /** 有效结束时间，unix秒级时间戳，0代表永久有效 */
+  /** 有效结束时间，unix秒级时间戳，默认为0代表永久有效 */
   ExpireEnd?: string;
-  /** 是否引用链接 */
+  /** 是否显示引用的文档来源(false不显示 true显示）默认false */
   IsRefer?: boolean;
-  /** 文档操作类型：1：批量导入（批量导入问答对）；2:文档导入（正常导入单个文档） 默认为1 请注意，opt=1的时候请从腾讯云智能体开发平台页面下载excel模板 */
+  /** 文档操作类型：1：批量导入（批量导入问答对）；2:文档导入（正常导入单个文档） 默认为2 请注意，opt=1的时候请从腾讯云智能体开发平台页面下载excel模板 */
   Opt?: number;
   /** 分类ID */
   CateBizId?: string;
@@ -4629,8 +4659,10 @@ declare interface SaveDocRequest {
   DuplicateFileHandles?: DuplicateFileHandle[];
   /** 自定义切分规则请求参数为一个 **JSON Object**，具体格式可参见接口示例值。包含以下主要字段：| 字段名 | 类型 | 说明 ||--------------------|--------|----------------------------------------|| `xlsx_splitter` | Object | **Excel（xlsx）文件切分策略配置**，仅当处理 Excel 文件时有效 || `common_splitter` | Object | **通用文件（如 txt、pdf 等）切分策略配置**，按页或按标签切分 || `table_style` | String | 表格内容的输出格式，如 HTML 或 Markdown |---## `xlsx_splitter`（Excel 切分策略）用于配置 **表格文件的切分方式**。**类型：Object**```json"xlsx_splitter": { "header_interval": [1, 2], "content_start": 10, "split_row": 2}```### 字段说明：| 字段名 | 类型 | 说明 ||-------------------|--------|----------------------------------------------------------------------|| `header_interval` | Array\ | 表头所在的行区间，格式为 `[起始行, 结束行]`，**行号从 1 开始计数**。例如 `[1, 2]` 表示第 1~2 行为表头。 || `content_start` | Number | **表格内容的起始行号（从 1 开始）**。 || `split_row` | Number | **切分行数**。 |---## `common_splitter`（通用文件切分策略）用于配置 **非 Excel 文件（如 TXT、PDF、DOCX 等）的切分方式**，支持两种策略：**按页切分（page）** 或 **按标识符切分（tag）**。**类型：Object**```json"common_splitter": { "splitter": "page", "page_splitter": { "chunk_length": 1000, "chunk_overlap_length": 100 }}```### 字段说明：| 字段名 | 类型 | 说明 ||-------------------|--------|---------------------------------------------------|| `splitter` | String | 切分策略类型，可选值为：`"page"`（按页切分） 或 `"tag"`（按标识符切分）。 || `page_splitter` | Object | **按页切分的配置**。 || `page_splitter.chunk_length` | 1000 | **切片最大长度**。 || `page_splitter.chunk_overlap_length` | 100 | **切片重叠长度**。 || `tag_splitter` | Object | **自定义切分配置**。 || `tag_splitter.tag` | Array\ | **切分标识符**。 || `tag_splitter.chunk_length`| Number | **切片最大长度**。 || `tag_splitter.chunk_overlap_length` | Number | **切块重叠长度**。 |🔹 **补充说明：**- `splitter` 字段的值可以是： - `"page"`：只使用按页切分逻辑，此时只需要关心 `page_splitter` 相关字段。 - `"tag"`：只使用按标识符（如分号、换行等）切分逻辑，此时关注 `tag_splitter`。---## `table_style`（表格输出样式）用于指定 **表格类内容（比如从 Excel 或 CSV 中提取的表格）最终以何种格式返回**，方便前端展示或后续处理。**类型：String**```json"table_style": "md"```### 字段说明：| 字段名 | 类型 | 说明 ||--------------|--------|----------------------------------------------------------------------|| `table_style` | String | 指定表格内容的输出格式。可用值：• `"html"`：以 HTML 表格形式返回，适合网页展示。• `"md"`：以 Markdown 表格语法返回，适合文档或 Markdown 渲染环境。| */
   SplitRule?: string;
-  /** 文档更新频率 */
+  /** 文档更新频率，默认值为0不更新 */
   UpdatePeriodInfo?: UpdatePeriodInfo;
+  /** 文档生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域 */
+  EnableScope?: number;
 }
 
 declare interface SaveDocResponse {

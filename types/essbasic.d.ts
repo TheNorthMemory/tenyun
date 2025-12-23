@@ -271,7 +271,7 @@ declare interface CommonApproverOption {
 /** 通用签署人信息 */
 declare interface CommonFlowApprover {
   /** 指定签署人非第三方平台子客企业下员工还是SaaS平台企业，在ApproverType为ORGANIZATION时指定。false: 默认值，第三方平台子客企业下员工true: SaaS平台企业下的员工 */
-  NotChannelOrganization: boolean;
+  NotChannelOrganization?: boolean;
   /** 在指定签署方时，可选择企业B端或个人C端等不同的参与者类型，可选类型如下: **0** :企业/企业员工（企业签署方或模板发起时的企业静默签） **1** :个人/自然人**3** :企业/企业员工自动签（他方企业自动签署或文件发起时的本方企业自动签）注：类型为3（企业/企业员工自动签）时，此接口会默认完成该签署方的签署。静默签署仅进行盖章操作，不能自动签名。使用自动签时，请确保企业已经开通自动签功能，开通方式：控制台 -> 企业设置 -> 扩展服务 -> 企业自动签。使用文件发起自动签时使用前请联系对接的客户经理沟通。 */
   ApproverType?: number;
   /** 电子签平台给企业生成的企业id */

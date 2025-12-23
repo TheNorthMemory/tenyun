@@ -1899,7 +1899,7 @@ declare interface DescribeInstancesDiskNumResponse {
 declare interface DescribeInstancesRequest {
   /** 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。 */
   InstanceIds?: string[];
-  /** 过滤器列表。instance-name按照【实例名称】进行过滤。类型：String必选：否private-ip-address按照【实例主网卡的内网 IP】进行过滤。类型：String必选：否public-ip-address按照【实例主网卡的公网 IP】进行过滤。类型：String必选：否zone按照【可用区】进行过滤。类型：String必选：否instance-state按照【实例状态】进行过滤。类型：String必选：否tag-key按照【标签键】进行过滤。类型：String必选：否tag-value按照【标签值】进行过滤。类型：String必选：否 tag:tag-key按照【标签键值对】进行过滤。 tag-key使用具体的标签键进行替换。类型：String必选：否每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 InstanceIds 和 Filters。 */
+  /** 过滤器列表。instance-name按照【实例名称】进行过滤。类型：String必选：否private-ip-address按照【实例主网卡的内网 IP】进行过滤。类型：String必选：否public-ip-address按照【实例主网卡的公网 IP】进行过滤。类型：String必选：否zone按照【可用区】进行过滤。类型：String必选：否instance-state按照【实例状态】进行过滤。类型：String必选：否tag-key按照【标签键】进行过滤。类型：String必选：否tag-value按照【标签值】进行过滤。类型：String必选：否 tag:tag-key按照【标签键值对】进行过滤。 tag-key使用具体的标签键进行替换。类型：String必选：否bundle-id按照【套餐 ID】进行过滤。类型：String必选：否每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 InstanceIds 和 Filters。 */
   Filters?: Filter[];
   /** 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。 */
   Offset?: number;

@@ -468,6 +468,14 @@ declare interface Domain {
   Default?: number;
 }
 
+/** 大区环境网络配置 */
+declare interface EnvInternetAccessSetting {
+  /** true：不能访问公网 */
+  DisableExternalAccess?: boolean;
+  /** true：不能创建数据下载权限 */
+  DisableDownloadDataAcl?: boolean;
+}
+
 /** 主机参数，导入外部主机时使用 */
 declare interface ExternalDevice {
   /** 操作系统名称，只能是Linux、Windows或MySQL */
@@ -694,6 +702,8 @@ declare interface Resource {
   IntranetPrivateIpSet?: string[];
   /** 开通内网访问的vpc */
   IntranetVpcId?: string;
+  /** 开通内网访问的subnetId */
+  IntranetSubnetId?: string;
   /** 开通内网访问vpc的网段 */
   IntranetVpcCidr?: string;
   /** 堡垒机内网ip自定义域名 */
@@ -884,6 +894,8 @@ declare interface SecuritySetting {
   AuthModeGM?: AuthModeSetting;
   /** 资产重连次数 */
   Reconnection?: ReconnectionSetting;
+  /** 大区环境网络设置 */
+  EnvInternetAccess?: EnvInternetAccessSetting;
 }
 
 /** 搜索字符或图形会话时返回的SessionResul结构体 */

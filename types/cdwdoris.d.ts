@@ -48,6 +48,32 @@ declare interface BackUpJobDisplay {
   SnapshotRemainPolicy?: SnapshotRemainPolicy;
   /** 隔离次数 */
   IsolationCount?: number;
+  /** 是否开启安全锁 */
+  EnableSecurityLock?: number;
+  /** 宽限期天数 */
+  GracePeriod?: number;
+  /** 宽限期开始时间 */
+  GraceStartTime?: string;
+  /** 是否在宽限期内 */
+  IsWithinGracePeriod?: boolean;
+  /** 是否使用托管桶 */
+  UseManagedBucket?: boolean;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 实例状态 */
+  InstanceStatus?: string;
+  /** 实例状态描述 */
+  InstanceStatusDesc?: string;
+  /** 备份远程桶地域 */
+  DataRemoteRegion?: string;
+  /** 桶加密状态信息 */
+  BucketEncryption?: BucketEncryptionInfo;
+  /** 备份任务创建时记录的加密类型：SSE-COS/SSE-KMS/disabled */
+  Encryption?: string;
+  /** 是否开通加密存储：0-未开通，1-已开通 */
+  EncryptionEnabled?: boolean;
 }
 
 /** 备份实例中关于cos的信息 */
@@ -96,6 +122,8 @@ declare interface BackupStatus {
   BackupJobId?: number;
   /** 实例对应Snapshot的id */
   TaskId?: number;
+  /** 上传大小 */
+  UploadBytes?: number;
 }
 
 /** 备份表信息 */
@@ -122,6 +150,18 @@ declare interface BindUser {
   UserName?: string;
   /** 主机信息 */
   Host?: string;
+}
+
+/** 桶加密状态信息 */
+declare interface BucketEncryptionInfo {
+  /** 是否已加密 */
+  IsEncrypted?: boolean;
+  /** 加密类型：SSE-COS/SSE-KMS/disabled */
+  EncryptionType?: string;
+  /** 最后操作类型：enable/disable */
+  LastOperation?: string;
+  /** 最后更新时间 */
+  LastUpdateTime?: string;
 }
 
 /** 集群计费相关信息 */
@@ -458,6 +498,12 @@ declare interface InstanceInfo {
   CosPkgCapacity?: number;
   /** 集群是否使用托管桶 */
   UseManagedBucket?: boolean;
+  /** 集群类型 */
+  InstanceType?: string;
+  /** 对应主集群 */
+  MasterInstance?: string;
+  /** 对应备集群 */
+  SlaveInstances?: string[];
 }
 
 /** 实例节点描述信息 */
@@ -558,6 +604,8 @@ declare interface NodeInfo {
   CreateTime?: string;
   /** 虚拟可用区 */
   VirtualZone?: string;
+  /** 是否有fdb */
+  HasFDB?: boolean;
 }
 
 /** 节点信息列表 */
@@ -586,6 +634,8 @@ declare interface NodeInfos {
   RIp?: string;
   /** 虚拟可用区 */
   VirtualZone?: string;
+  /** 是否有fdb */
+  HasFDB?: boolean;
 }
 
 /** 节点角色描述信息 */
@@ -967,6 +1017,12 @@ declare interface CreateBackUpScheduleRequest {
   SnapshotRemainPolicy?: SnapshotRemainPolicy;
   /** 备份数据所在地域，当前地域应该为空 */
   DataRemoteRegion?: string;
+  /** 托管桶类型：standard-标准，maz-多可用区 */
+  BucketType?: string;
+  /** 是否开启安全锁：0-未开启，1-开启 */
+  EnableSecurityLock?: number;
+  /** 宽限期（天数） */
+  GracePeriod?: number;
 }
 
 declare interface CreateBackUpScheduleResponse {
@@ -1145,6 +1201,8 @@ declare interface DescribeBackUpJobRequest {
   EndTime?: string;
   /** jobid的string类型 */
   JobIdFiltersStr?: string;
+  /** 0-未加密；1-已加密 */
+  EncryptionFilters?: number[];
 }
 
 declare interface DescribeBackUpJobResponse {
@@ -1154,6 +1212,8 @@ declare interface DescribeBackUpJobResponse {
   ErrorMsg?: string;
   /** 总数 */
   TotalCount?: number;
+  /** 当前时间 */
+  CurrentTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1161,9 +1221,15 @@ declare interface DescribeBackUpJobResponse {
 declare interface DescribeBackUpSchedulesRequest {
   /** 任务类型0-不限制，或使用TypeFilters过滤；1-备份恢复（包括周期备份和一次性备份）；2-数据迁移（包括跨集群迁移和cos迁移） */
   ApplicationType?: number;
+  /** 0-未加密；1-已加密 */
+  EncryptionFilters?: number[];
 }
 
 declare interface DescribeBackUpSchedulesResponse {
+  /** 当前系统时间 */
+  CurrentTime?: string;
+  /** 桶加密状态信息 */
+  BucketEncryption?: BucketEncryptionInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

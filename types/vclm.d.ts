@@ -204,6 +204,24 @@ declare interface DescribeTemplateToVideoJobResponse {
   RequestId?: string;
 }
 
+declare interface DescribeVideoEditJobRequest {
+  /** 任务ID。 */
+  JobId: string;
+}
+
+declare interface DescribeVideoEditJobResponse {
+  /** 任务状态。 WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
+  Status?: string;
+  /** 结果视频URL。有效期 24 小时。 */
+  ResultVideoUrl?: string;
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为""。 */
+  ErrorCode?: string;
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。 */
+  ErrorMessage?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeVideoFaceFusionJobRequest {
   /** 任务ID */
   JobId?: string;
@@ -398,6 +416,26 @@ declare interface SubmitTemplateToVideoJobResponse {
   RequestId?: string;
 }
 
+declare interface SubmitVideoEditJobRequest {
+  /** 输入视频- 视频格式：MP4- 视频时长：5s以内- 视频分辨率：无限制（待验证是否可以无损输出） */
+  VideoUrl: string;
+  /** 视频内容的描述，中文正向提示词。最多支持200个 utf-8 字符（首尾空格不计入字符数）。支持风格迁移、替换、元素增加、删除控制 */
+  Prompt: string;
+  /** 图片base64或者图片url- Base64 和 Url 必须提供一个，如果都提供以Url为准。- 上传图url大小不超过 8M- 支持jpg，png，jpeg，webp，bmp，tiff 格式- 单边分辨率不超过5000，不小于50，长宽限制1:4 ~ 4:1 */
+  Image?: Image;
+  /** 为生成视频添加标识的开关，默认为1。 1：添加标识。 0：不添加标识。 其他数值：默认按1处理。 建议您使用显著标识来提示，该视频是 AI 生成的视频。 */
+  LogoAdd?: number;
+  /** 标识内容设置。 默认在生成视频的右下角添加“视频由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。 */
+  LogoParam?: LogoParam;
+}
+
+declare interface SubmitVideoEditJobResponse {
+  /** 任务ID。 */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SubmitVideoFaceFusionJobRequest {
   /** 视频素材下载地址。用户自定义模版视频下载地址，使用前需要先调用视频审核接口进行内容审核。视频限制：分辨率≤4k，fps≤25，视频大小≤1G，时长≤20 秒，支持格式mp4。输入视频建议：姿态：人脸相对镜头水平方向角度转动不超过 90°,垂直方向角度转动不超过 20°。遮挡：脸部遮挡面积不超过 50%，不要完全遮挡五官，不要有半透明遮挡（强光，玻璃，透明眼镜等）、以及细碎离散的脸部遮挡（如飘落的花瓣）。妆容及光照：避免浓妆、复杂妆容，避免复杂光照、闪烁，这些属性无法完全恢复，并对稳定性有影响。针对特殊表情和微表情，针对局部肌肉控制下的微表情，以及过于夸张的特殊表情等不保证表情效果完全恢复。 */
   VideoUrl?: string;
@@ -471,6 +509,8 @@ declare interface Vclm {
   DescribePortraitSingJob(data: DescribePortraitSingJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePortraitSingJobResponse>;
   /** 查询视频特效任务 {@link DescribeTemplateToVideoJobRequest} {@link DescribeTemplateToVideoJobResponse} */
   DescribeTemplateToVideoJob(data: DescribeTemplateToVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateToVideoJobResponse>;
+  /** 查询视频编辑任务 {@link DescribeVideoEditJobRequest} {@link DescribeVideoEditJobResponse} */
+  DescribeVideoEditJob(data: DescribeVideoEditJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoEditJobResponse>;
   /** 查询视频人脸融合任务 {@link DescribeVideoFaceFusionJobRequest} {@link DescribeVideoFaceFusionJobResponse} */
   DescribeVideoFaceFusionJob(data?: DescribeVideoFaceFusionJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoFaceFusionJobResponse>;
   /** 查询视频风格化任务 {@link DescribeVideoStylizationJobRequest} {@link DescribeVideoStylizationJobResponse} */
@@ -489,6 +529,8 @@ declare interface Vclm {
   SubmitPortraitSingJob(data: SubmitPortraitSingJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitPortraitSingJobResponse>;
   /** 提交视频特效任务 {@link SubmitTemplateToVideoJobRequest} {@link SubmitTemplateToVideoJobResponse} */
   SubmitTemplateToVideoJob(data: SubmitTemplateToVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTemplateToVideoJobResponse>;
+  /** 提交视频编辑任务 {@link SubmitVideoEditJobRequest} {@link SubmitVideoEditJobResponse} */
+  SubmitVideoEditJob(data: SubmitVideoEditJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitVideoEditJobResponse>;
   /** 提交视频人脸融合任务 {@link SubmitVideoFaceFusionJobRequest} {@link SubmitVideoFaceFusionJobResponse} */
   SubmitVideoFaceFusionJob(data?: SubmitVideoFaceFusionJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitVideoFaceFusionJobResponse>;
   /** 提交视频风格化任务 {@link SubmitVideoStylizationJobRequest} {@link SubmitVideoStylizationJobResponse} */

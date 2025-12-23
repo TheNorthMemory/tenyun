@@ -334,6 +334,8 @@ declare interface CreateTaskBaseAttribute {
   OwnerUin?: string;
   /** 任务描述 */
   TaskDescription?: string;
+  /** 任务文件夹路径注意：- 路径上不要填写任务节点类型；例如，在 一个名为 wf01 的工作流，“通用” 分类下，现在想要在这个分类下的 tf_01 文件夹下，新建一个 shell 任务；则 填写 /tf_01 即可；- 如果 tf_01 文件夹不存在，则需要先创建这个文件夹（使用 CreateTaskFolder 接口）才能操作成功； */
+  TaskFolderPath?: string;
 }
 
 /** 创建任务配置信息 */
@@ -384,8 +386,6 @@ declare interface CreateTaskSchedulerConfiguration {
   ExecutionStartTime?: string;
   /** 执行时间 右闭区间，默认 23:59 */
   ExecutionEndTime?: string;
-  /** 调度类型: 0 正常调度 1 空跑调度，默认为 0 */
-  ScheduleRunType?: string;
   /** 日历调度 取值为 0 和 1， 1为打开，0为关闭，默认为0 */
   CalendarOpen?: string;
   /** 日历调度 日历 ID */
@@ -396,16 +396,6 @@ declare interface CreateTaskSchedulerConfiguration {
   UpstreamDependencyConfigList?: DependencyTaskBrief[];
   /** 事件数组 */
   EventListenerList?: EventListener[];
-  /** 任务调度优先级 运行优先级 4高 5中 6低 , 默认:6 */
-  RunPriority?: string;
-  /** 重试策略 重试等待时间,单位分钟: 默认: 5 */
-  RetryWait?: string;
-  /** 重试策略 最大尝试次数, 默认: 4 */
-  MaxRetryAttempts?: string;
-  /** 超时处理策略 运行耗时超时（单位：分钟）默认为 -1 */
-  ExecutionTTL?: string;
-  /** 超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1 */
-  WaitExecutionTotalTTL?: string;
   /** 重跑&补录配置, 默认为 ALL; , ALL 运行成功或失败后皆可重跑或补录, FAILURE 运行成功后不可重跑或补录，运行失败后可重跑或补录, NONE 运行成功或失败后皆不可重跑或补录; */
   AllowRedoType?: string;
   /** 输出参数数组 */
@@ -416,6 +406,30 @@ declare interface CreateTaskSchedulerConfiguration {
   TaskOutputRegistryList?: TaskDataRegistry[];
   /** **实例生成策略*** T_PLUS_0: T+0生成,默认策略* T_PLUS_1: T+1生成 */
   InitStrategy?: string;
+  /** 调度类型: 0 正常调度 1 空跑调度，默认为 0 */
+  ScheduleRunType?: string;
+  /** 任务调度优先级 运行优先级 4高 5中 6低 , 默认:6 */
+  RunPriority?: string;
+  /** 重试策略 重试等待时间,单位分钟: 默认: 5 */
+  RetryWait?: string;
+  /** 重试策略 最大尝试次数, 默认: 4 */
+  MaxRetryAttempts?: string;
+  /** 超时处理策略 运行耗时超时（单位：分钟）默认为 -1 */
+  ExecutionTTL?: string;
+  /** 超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1 */
+  WaitExecutionTotalTTL?: string;
+  /** 调度类型: 0 正常调度 1 空跑调度，默认为 0 */
+  ScheduleType?: number;
+  /** 任务调度优先级 运行优先级 4高 5中 6低 , 默认:6 */
+  RunPriorityType?: number;
+  /** 重试策略 重试等待时间,单位分钟: 默认: 5 */
+  RetryWaitMinute?: number;
+  /** 重试策略 最大尝试次数, 默认: 4 */
+  MaxRetryNumber?: number;
+  /** 超时处理策略 运行耗时超时（单位：分钟）默认为 -1 */
+  ExecutionTTLMinute?: number;
+  /** 超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1 */
+  WaitExecutionTotalTTLMinute?: number;
 }
 
 /** 创建工作流结果 */
@@ -1856,6 +1870,8 @@ declare interface TaskBaseAttribute {
   UpdateUserUin?: string | null;
   /** 创建用户ID */
   CreateUserUin?: string | null;
+  /** 任务文件夹路径注意：- 路径上不要填写任务节点类型；例如，在 一个名为 wf01 的工作流，“通用” 分类下，现在想要在这个分类下的 tf_01 文件夹下，新建一个 shell 任务；则 填写 /tf_01 即可；- 如果 tf_01 文件夹不存在，则需要先创建这个文件夹（使用 CreateTaskFolder 接口）才能操作成功； */
+  TaskFolderPath?: string | null;
 }
 
 /** 任务代码 */
@@ -2178,8 +2194,6 @@ declare interface TaskSchedulerConfiguration {
   ExecutionStartTime?: string | null;
   /** 执行时间 右闭区间 */
   ExecutionEndTime?: string | null;
-  /** 调度类型: 0 正常调度 1 空跑调度 */
-  ScheduleRunType?: number | null;
   /** 日历调度 取值为 0 和 1， 1为打开，0为关闭，默认为0 */
   CalendarOpen?: string | null;
   /** 日历调度 日历 ID */
@@ -2191,19 +2205,9 @@ declare interface TaskSchedulerConfiguration {
   /** 上游依赖数组 */
   UpstreamDependencyConfigList?: DependencyTaskBrief[] | null;
   /** 下游依赖数组 */
-  DownStreamDependencyConfigList?: DependencyTaskBrief[] | null;
+  DownstreamDependencyConfigList?: DependencyTaskBrief[] | null;
   /** 事件数组 */
   EventListenerList?: EventListener[] | null;
-  /** 任务调度优先级 运行优先级 4高 5中 6低 , 默认:6 */
-  RunPriority?: number | null;
-  /** 重试策略 重试等待时间,单位分钟: 默认: 5 */
-  RetryWait?: number | null;
-  /** 重试策略 最大尝试次数, 默认: 4 */
-  MaxRetryAttempts?: number | null;
-  /** 超时处理策略 运行耗时超时（单位：分钟）默认为 -1 */
-  ExecutionTTL?: number | null;
-  /** 超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1 */
-  WaitExecutionTotalTTL?: string | null;
   /** 重跑&补录配置, 默认为 ALL; , ALL 运行成功或失败后皆可重跑或补录, FAILURE 运行成功后不可重跑或补录，运行失败后可重跑或补录, NONE 运行成功或失败后皆不可重跑或补录; */
   AllowRedoType?: string | null;
   /** 输出参数数组 */
@@ -2214,6 +2218,32 @@ declare interface TaskSchedulerConfiguration {
   TaskOutputRegistryList?: TaskDataRegistry[] | null;
   /** **实例生成策略*** T_PLUS_0: T+0生成,默认策略* T_PLUS_1: T+1生成 */
   InitStrategy?: string | null;
+  /** 调度类型: 0 正常调度 1 空跑调度，默认为 0 */
+  ScheduleRunType?: number | null;
+  /** （废弃，建议使用 DownstreamDependencyConfigList）下游依赖数组 */
+  DownStreamDependencyConfigList?: DependencyTaskBrief[] | null;
+  /** 任务调度优先级 运行优先级 4高 5中 6低 , 默认:6 */
+  RunPriority?: number | null;
+  /** 重试策略 重试等待时间,单位分钟: 默认: 5 */
+  RetryWait?: number | null;
+  /** 重试策略 最大尝试次数, 默认: 4 */
+  MaxRetryAttempts?: number | null;
+  /** 超时处理策略 运行耗时超时（单位：分钟）默认为 -1 */
+  ExecutionTTL?: number | null;
+  /** 超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1 */
+  WaitExecutionTotalTTL?: string | null;
+  /** 调度类型: 0 正常调度 1 空跑调度，默认为 0 */
+  ScheduleType?: number | null;
+  /** 任务调度优先级 运行优先级 4高 5中 6低 , 默认:6 */
+  RunPriorityType?: number | null;
+  /** 重试策略 重试等待时间,单位分钟: 默认: 5 */
+  RetryWaitMinute?: number | null;
+  /** 重试策略 最大尝试次数, 默认: 4 */
+  MaxRetryNumber?: number | null;
+  /** 超时处理策略 运行耗时超时（单位：分钟）默认为 -1 */
+  ExecutionTTLMinute?: number | null;
+  /** 超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1 */
+  WaitExecutionTotalTTLMinute?: number | null;
 }
 
 /** 任务调度变量参数 */
@@ -2318,6 +2348,8 @@ declare interface UpdateTaskBaseAttribute {
   OwnerUin: string;
   /** 任务描述 */
   TaskDescription: string;
+  /** 注意：- 路径上不要填写任务节点类型；例如，在 一个名为 wf01 的工作流，“通用” 分类下，现在想要在这个分类下的 tf_01 文件夹下，新建一个 shell 任务；则 填写 /tf_01 即可；- 如果 tf_01 文件夹不存在，则需要先创建这个文件夹（使用 CreateTaskFolder 接口）才能操作成功； */
+  TaskFolderPath?: string;
 }
 
 /** 更新任务对象入参 */
@@ -2681,7 +2713,7 @@ declare interface CreateResourceFileRequest {
   CosRegion: string;
   /** 项目中资源文件上传的路径, 取值示例: /wedata/qxxxm/, 根目录,请使用/即可 */
   ParentFolderPath: string;
-  /** - 上传文件及手填两种方式只能选择其一，如果两者均提供，取值顺序为文件>手填值- 手填值必须是存在的cos路径, /datastudio/resource/ 为固定前缀, projectId 为项目ID,需传入具体值, parentFolderPath为父文件夹路径, name为文件名, 手填值取值示例: /datastudio/resource/projectId/parentFolderPath/name */
+  /** - 上传文件及手填两种方式只能选择其一，如果两者均提供，取值顺序为文件>手填值- 手填值必须是存在的cos路径, parentFolderPath为父文件夹路径, name为文件名, 手填值取值示例: /datastudio/resource/projectId/parentFolderPath/name */
   ResourceFile: string;
   /** bundle客户端ID */
   BundleId?: string;
@@ -4587,7 +4619,7 @@ declare interface UpdateResourceFileRequest {
   ProjectId: string;
   /** 资源文件ID,可通过ListResourceFiles接口获取 */
   ResourceId: string;
-  /** - 上传文件及手填两种方式只能选择其一，如果两者均提供，取值顺序为文件>手填值- 手填值必须是存在的cos路径, /datastudio/resource/ 为固定前缀, projectId 为项目ID,需传入具体值, parentFolderPath为父文件夹路径, name为文件名, 手填值取值示例: /datastudio/resource/projectId/parentFolderPath/name */
+  /** - 上传文件及手填两种方式只能选择其一，如果两者均提供，取值顺序为文件>手填值- 手填值必须是存在的cos路径, parentFolderPath为父文件夹路径, name为文件名, 手填值取值示例: /datastudio/resource/projectId/parentFolderPath/name */
   ResourceFile?: string;
   /** 资源名称, 尽可能和文件名保持一致 */
   ResourceName?: string;
@@ -5098,7 +5130,11 @@ declare namespace V20210820 {
     /** 审批id */
     ApplyId?: string | null;
     /** 扩展字段 */
-    Metadata?: string;
+    Metadata?: string | null;
+    /** 创建时间 */
+    CreateTimestamp?: number | null;
+    /** 审批时间 */
+    ApproveTimestamp?: number | null;
   }
 
   /** 修改审批单状态 */
@@ -5255,6 +5291,10 @@ declare namespace V20210820 {
     RangerUserName?: string | null;
     /** cdw账号（用于展示） */
     CdwUserName?: string | null;
+    /** 创建时间 */
+    CreateTimestamp?: number | null;
+    /** 修改时间 */
+    UpdateTimestamp?: number | null;
   }
 
   /** 项目信息 */
@@ -5277,6 +5317,8 @@ declare namespace V20210820 {
     Status?: number | null;
     /** 项目类型，SIMPLE：简单模式 STANDARD：标准模式 */
     Model?: string | null;
+    /** 项目调度模式，task：任务模式 workflow：工作流模式 */
+    ScheduleMode?: string;
   }
 
   /** 基础角色对象 */
@@ -6267,6 +6309,16 @@ declare namespace V20210820 {
     Offset?: string | null;
   }
 
+  /** 超时弱依赖配置 */
+  interface DependencyConfigTimeoutDTO {
+    /** 超时类型WAIT_TOTAL_TIMEOUT 等待总时长RUNNING_TIMEOUT 运行时长WAIT_TIME_POINT_TIMEOUT 等待超过配置时间 */
+    TimeoutType?: string | null;
+    /** 超时时间 */
+    TimeoutValue?: number | null;
+    /** 固定时间点 */
+    TimeoutPoint?: string | null;
+  }
+
   /** 依赖配置策略 */
   interface DependencyStrategyDs {
     /** 等待上游任务实例策略：EXECUTING（执行）；WAITING（等待） */
@@ -6275,6 +6327,8 @@ declare namespace V20210820 {
     TaskDependencyExecutingStrategies?: string[] | null;
     /** 仅当TaskDependencyExecutingStrategies中包含PARENT_TIMEOUT时才需要填本字段，下游任务依赖父实例执行超时时间，单位：分钟。 */
     TaskDependencyExecutingTimeoutValue?: number | null;
+    /** 超时依赖策略 */
+    DependencyConfigTimeoutTypeList?: DependencyConfigTimeoutDTO[] | null;
   }
 
   /** 申请列表 */
@@ -9141,6 +9195,8 @@ declare namespace V20210820 {
     Owner?: BaseUser | null;
     /** 项目扩展信息 */
     WorkspaceExt?: WorkspaceExt[] | null;
+    /** 创建时间时间戳 */
+    CreateTimestamp?: number | null;
   }
 
   /** 查询数据源分页列表 */
@@ -9183,6 +9239,10 @@ declare namespace V20210820 {
     AppId?: string | null;
     /** 是否项目负责人 */
     IsProjectOwner?: boolean | null;
+    /** 创建时间 */
+    CreateTimestamp?: number | null;
+    /** 用户状态 0:历史 1:正常 2:已删除 */
+    Status?: number | null;
   }
 
   /** 项目下的用户集合 */
@@ -15037,6 +15097,8 @@ declare namespace V20210820 {
     Page?: number;
     /** 页号 */
     Size?: number;
+    /** 来源 studio(Studio脚本)/codeTemplate(代码模版) */
+    Source?: string;
   }
 
   interface DescribeFormVersionParamResponse {

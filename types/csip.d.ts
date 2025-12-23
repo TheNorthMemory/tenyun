@@ -652,6 +652,8 @@ declare interface AssetRiskItem {
   RiskRuleId?: string;
   /** 处置分类 */
   Classify?: string;
+  /** 等保合规 */
+  StandardTerms?: StandardTerm[];
 }
 
 /** 安全中心资产标签 */
@@ -1272,6 +1274,8 @@ declare interface CheckViewRiskItem {
   EventType?: string;
   /** 处置分类 */
   Classify?: string;
+  /** cspm规范条款 */
+  StandardTerms?: StandardTerm[];
 }
 
 /** clb实例和监听器信息 */
@@ -2562,6 +2566,22 @@ declare interface SourceIPVpcInfo {
   VpcName?: string;
 }
 
+/** CSPM规范 */
+declare interface StandardItem {
+  /** 规范ID */
+  ID?: number;
+  /** 规范名称 */
+  Name?: string;
+}
+
+/** CSPM条款 */
+declare interface StandardTerm {
+  /** 标签 */
+  Tag?: string;
+  /** 条款 */
+  Terms?: string[];
+}
+
 /** 用户行为分析 统计条件 */
 declare interface StatisticalFilter {
   /** 0:不基于统计检测1:发生次数高于固定值2:发生次数高于周期平均值的百分之3:发生次数高于用户平均值的百分之 */
@@ -3689,6 +3709,8 @@ declare interface DescribeAssetRiskListResponse {
   TotalCount?: number;
   /** 资产视角下风险列表 */
   AssetRiskList?: AssetRiskItem[];
+  /** 等保规范名称集合 */
+  StandardNameList?: StandardItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3861,6 +3883,8 @@ declare interface DescribeCheckViewRisksResponse {
   TotalCount?: number;
   /** 检查视角下风险列表 */
   CheckViewRiskList?: CheckViewRiskItem[];
+  /** 检查视角下cspm规范标签列表 */
+  StandardNameList?: StandardItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

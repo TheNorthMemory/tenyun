@@ -230,6 +230,20 @@ declare interface AddBlindWatermarkConfig {
   EmbedInfo?: BlindWatermarkEmbedInfo | null;
 }
 
+/** 图片处理编排中使用的输入参数。 */
+declare interface AddOnImageInput {
+  /** 图片路径。 */
+  Image?: MediaInputInfo;
+}
+
+/** 图片处理附加输入参数。 */
+declare interface AddOnParameter {
+  /** 附加图片输入。 */
+  ImageSet?: AddOnImageInput[];
+  /** 图片处理输出配置。 */
+  OutputConfig?: ImageProcessOutputConfig;
+}
+
 /** 外挂字幕。 */
 declare interface AddOnSubtitle {
   /** 插入形式，可选值：subtitle-stream：插入字幕轨道close-caption-708：CEA-708字幕编码到SEI帧close-caption-608：CEA-608字幕编码到SEI帧 */
@@ -3336,6 +3350,16 @@ declare interface ImageEraseLogoConfig {
   ImageAreaBoxes?: ImageAreaBoxInfo[] | null;
   /** 图片框选区域类型，可选值：logo：图标；text：文字；watermark：水印； */
   DetectTypes?: string[] | null;
+}
+
+/** 图片处理编排输出配置。 */
+declare interface ImageProcessOutputConfig {
+  /** 输出图片的宽高比。可以配合ImageWidth 和 ImageHeight 使用，规则如下：1. 仅指定 AspectRatio 时，根据原图输入进行自适应调整。2. 指定 AspectRatio 和 ImageWidth 时，ImageHeight 由两者计算得出，反亦是如此。3. 当AspectRatio、ImageWidth、ImageHeight 同时指定的时候，优先使用ImageWidth、ImageHeight。可取值：1:1、3:2、2:3、3:4、4:3、4:5、5:4、9:16、16:9、21:9支持该参数 ScheduleId: 30010(扩图) */
+  AspectRatio?: string;
+  /** 图片输出高度，单位：像素。 */
+  ImageHeight?: number;
+  /** 图片输出宽度，单位：像素。 */
+  ImageWidth?: number;
 }
 
 /** 图片处理结果信息 */
@@ -9467,6 +9491,10 @@ declare interface ProcessImageRequest {
   ResourceId?: string;
   /** 图片处理参数。 */
   ImageTask?: ImageTaskInput;
+  /** 图片处理编排场景 ID。- 30000：文字水印擦除- 30010：图片扩展- 30100：换装场景 */
+  ScheduleId?: number;
+  /** 图片处理附加参数。 */
+  AddOnParameter?: AddOnParameter;
 }
 
 declare interface ProcessImageResponse {

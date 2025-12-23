@@ -68,6 +68,32 @@ declare interface DeployParam {
   ReleaseType?: string;
 }
 
+/** 云托管实例的部署记录, 包括扩缩容状态和流量分配情况 */
+declare interface DeployRecord {
+  /** 部署Id */
+  DeployId?: string;
+  /** 部署开始时间 */
+  DeployTime?: string;
+  /** 状态：running/deploying/deploy_failed */
+  Status?: string;
+  /** 部署运行Id 用户查询部署日志 */
+  RunId?: string;
+  /** 构建Id */
+  BuildId?: number;
+  /** 流量比例 */
+  FlowRatio?: number;
+  /** 镜像url */
+  ImageUrl?: string | null;
+  /** 缩容状态 缩容为 zero 否则为空 */
+  ScaleStatus?: string;
+  /** 是否分配流量 */
+  HasTraffic?: boolean;
+  /** 流量分配方式, FLOW: 百分比分配; URL_PARAMS: 匹配 query 参数; HEADERS: 匹配请求 Header */
+  TrafficType?: string;
+  /** 当前版本是否在发布中 */
+  IsReleasing?: boolean;
+}
+
 /** 服务配置入参 */
 declare interface DiffConfigItem {
   /** 配置项 KeyMinNum 最小副本数MaxNum 最大副本数PolicyDetails 扩缩容策略AccessTypes 访问类型TimerScale 定时扩缩容InternalAccess 内网访问OperationMode 运行模式 noScale | condScale | alwaysScale | custom ｜ manualScaleSessionAffinity 会话亲和性 open | closeCpuSpecs cpu 规格MemSpecs mem规格EnvParam 环境变量LogPath 日志采集路径Port 端口Dockerfile dockerfile 文件名BuildDir 目标目录Tag 服务标签LogType 日志类型 none | default | custom LogSetId 日志集IdLogTopicId 日志主题IDLogParseType 日志解析类型 json ｜ lineEntryPoint entrypoint 命令Cmd cmd命令VpcConf 网络信息 */
@@ -162,6 +188,18 @@ declare interface EnvInfo {
   PackageName?: string;
 }
 
+/** 删除失败版本信息 */
+declare interface FailDeleteVersions {
+  /** 删除失败版本信息 */
+  Version: SimpleVersion;
+  /** 删除失败错误码 */
+  ErrorCode: number;
+  /** 删除失败错误信息 */
+  ErrorMsg: string;
+  /** 删除操作 RequestId */
+  RequestId: string;
+}
+
 /** 函数的信息 */
 declare interface FunctionInfo {
   /** 命名空间 */
@@ -176,6 +214,34 @@ declare interface HpaPolicy {
   PolicyType: string;
   /** 扩缩容阈值 */
   PolicyThreshold: number;
+}
+
+/** CLS日志单条信息 */
+declare interface LogObject {
+  /** 日志属于的 topic ID */
+  TopicId?: string | null;
+  /** 日志主题的名字 */
+  TopicName?: string | null;
+  /** 日志时间 */
+  Timestamp?: string | null;
+  /** 日志内容 */
+  Content?: string | null;
+  /** 采集路径 */
+  FileName?: string | null;
+  /** 日志来源设备 */
+  Source?: string | null;
+  /** 日志唯一标识 */
+  PkgLogId?: string;
+}
+
+/** CLS日志结果 */
+declare interface LogResObject {
+  /** 获取更多检索结果的游标 */
+  Context: string | null;
+  /** 搜索结果是否已经全部返回 */
+  ListOver: boolean | null;
+  /** 日志内容信息 */
+  Results: LogObject[] | null;
 }
 
 /** 云日志服务相关信息 */
@@ -200,6 +266,16 @@ declare interface ObjectKV {
   Value: string;
 }
 
+/** 通用键值权重对 */
+declare interface ObjectKVPriority {
+  /** 键值对Key */
+  Key: string;
+  /** 键值对Value */
+  Value: string;
+  /** 键值对权重 */
+  Priority: number;
+}
+
 /** 在线版本信息 */
 declare interface OnlineVersionInfo {
   /** 版本名 */
@@ -208,6 +284,32 @@ declare interface OnlineVersionInfo {
   ImageUrl?: string;
   /** 流量 */
   FlowRatio?: string;
+}
+
+/** 发布单信息 */
+declare interface ReleaseOrderInfo {
+  /** 发布单Id */
+  Id: number;
+  /** 服务名 */
+  ServerName: string;
+  /** 当前版本 */
+  CurrentVersion: VersionInfo;
+  /** 发布版本 */
+  ReleaseVersion: VersionInfo;
+  /** 灰度状态 */
+  GrayStatus: string;
+  /** 发布状态 */
+  ReleaseStatus: string;
+  /** 流量值 */
+  TrafficTypeValues: ObjectKV[];
+  /** 流量类型 */
+  TrafficType: string;
+  /** 百分比 */
+  FlowRatio: number;
+  /** 创建时间 */
+  CreateTime: string;
+  /** 是否发布中 */
+  IsReleasing: boolean;
 }
 
 /** 代码仓库信息 */
@@ -346,6 +448,16 @@ declare interface ServerManageTaskInfo {
   OperatorRemark?: string;
 }
 
+/** 删除版本时需要的简化信息 */
+declare interface SimpleVersion {
+  /** 要删除版本的环境 Id */
+  EnvId: string;
+  /** 要删除版本的服务名 */
+  ServerName: string;
+  /** 要删除版本的版本名 */
+  VersionName: string;
+}
+
 /** 静态CDN资源信息 */
 declare interface StaticStorageInfo {
   /** 静态CDN域名 */
@@ -370,6 +482,16 @@ declare interface StorageInfo {
   CdnDomain: string;
   /** 资源所属用户的腾讯云appId */
   AppId: string;
+}
+
+/** 删除成功的版本信息 */
+declare interface SuccessDeleteVersions {
+  /** 版本简化信息 */
+  Version: SimpleVersion;
+  /** 删除版本的 RequestId */
+  RequestId: string;
+  /** 删除版本结果 */
+  Result: string;
 }
 
 /** 标签键值对 */
@@ -424,6 +546,58 @@ declare interface VersionFlowInfo {
   UrlParam?: ObjectKV;
   /** 权重 */
   Priority?: number;
+}
+
+/** 版本信息 */
+declare interface VersionInfo {
+  /** 版本名 */
+  VersionName?: string;
+  /** 流量比例 */
+  FlowRatio?: number;
+  /** 版本状态 */
+  Status?: string;
+  /** 创建时间 */
+  CreatedTime?: string;
+  /** 更新时间 */
+  UpdatedTime?: string;
+  /** 构建Id */
+  BuildId?: number;
+  /** 上传方式 */
+  UploadType?: string;
+  /** 操作标识 */
+  Remark?: string;
+  /** 测试参数 */
+  UrlParam?: ObjectKV;
+  /** 权重 */
+  Priority?: number;
+  /** 是否默认 */
+  IsDefaultPriority?: boolean;
+  /** 流量参数 */
+  FlowParams?: ObjectKVPriority[];
+  /** 最小副本数 */
+  MinReplicas?: number;
+  /** 最大副本数 */
+  MaxReplicas?: number;
+  /** 操作Id */
+  RunId?: string;
+  /** 百分比 */
+  Percent?: number;
+  /** 当前副本数 */
+  CurrentReplicas?: number;
+  /** 架构类型 */
+  Architecture?: string;
+}
+
+/** 版本Pod实例信息 */
+declare interface VersionPodInstance {
+  /** 实例webshell链接 */
+  Webshell?: string;
+  /** 实例Id */
+  PodId?: string;
+  /** 实例状态 */
+  Status?: string;
+  /** 创建时间 */
+  CreateTime?: string;
 }
 
 /** 存储配置 */
@@ -508,6 +682,60 @@ declare interface CreateCloudRunServerResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCloudRunServerRequest {
+  /** 环境Id */
+  EnvId: string;
+  /** 服务名 */
+  ServerName: string;
+  /** 操作人信息 */
+  OperatorRemark?: string;
+}
+
+declare interface DeleteCloudRunServerResponse {
+  /** 删除结果：success / failed */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCloudRunVersionsRequest {
+  /** 环境 Id */
+  EnvId: string;
+  /** 是否删除服务，只有最后一个版本的时候才生效 */
+  IsDeleteServer: boolean;
+  /** 只有删除服务的时候，才生效 */
+  IsDeleteImage: boolean;
+  /** 删除版本的信息 */
+  SimpleVersions: SimpleVersion[];
+  /** 操作备注 */
+  OperatorRemark?: string;
+}
+
+declare interface DeleteCloudRunVersionsResponse {
+  /** succ | fail | partial */
+  Result?: string;
+  /** 删除失败的版本列表 */
+  FailVersions?: FailDeleteVersions[];
+  /** 删除成功的版本列表 */
+  SuccessVersions?: SuccessDeleteVersions[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudRunDeployRecordRequest {
+  /** 环境Id */
+  EnvId: string;
+  /** 服务名 */
+  ServerName: string;
+}
+
+declare interface DescribeCloudRunDeployRecordResponse {
+  /** 部署列表 */
+  DeployRecords?: DeployRecord[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCloudRunEnvsRequest {
   /** 环境ID，如果传了这个参数则只返回该环境的相关信息 */
   EnvId?: string;
@@ -520,6 +748,42 @@ declare interface DescribeCloudRunEnvsRequest {
 declare interface DescribeCloudRunEnvsResponse {
   /** 环境信息列表 */
   EnvList?: EnvInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudRunPodListRequest {
+  /** 环境Id */
+  EnvId: string;
+  /** 服务名 */
+  ServerName: string;
+  /** 版本名 */
+  VersionName?: string;
+  /** 默认为10， 最大为50不传或传0时 取默认10大于50时取50 */
+  PageSize?: number;
+  /** 不传或传0时 会默认为1 */
+  PageNum?: number;
+}
+
+declare interface DescribeCloudRunPodListResponse {
+  /** pod实例列表 */
+  PodList?: VersionPodInstance[];
+  /** pod总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudRunProcessLogRequest {
+  /** 环境 Id */
+  EnvId: string;
+  /** 操作 Id */
+  RunId: string;
+}
+
+declare interface DescribeCloudRunProcessLogResponse {
+  /** 运行日志列表 */
+  Logs?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -580,6 +844,26 @@ declare interface DescribeEnvBaseInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeReleaseOrderRequest {
+  /** 环境 Id */
+  EnvId: string;
+  /** 服务名 */
+  ServerName: string;
+  /** 发布单状态 */
+  Status?: string;
+}
+
+declare interface DescribeReleaseOrderResponse {
+  /** 是否存在 */
+  IsExist?: boolean;
+  /** 发布单信息 */
+  ReleaseOrderInfo?: ReleaseOrderInfo;
+  /** 上一次成功发布时间 */
+  LastReleasedSuccessTime?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeServerManageTaskRequest {
   /** 环境Id */
   EnvId: string;
@@ -596,6 +880,58 @@ declare interface DescribeServerManageTaskResponse {
   IsExist?: boolean;
   /** 任务信息 */
   Task?: ServerManageTaskInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVersionDetailRequest {
+  /** 环境Id */
+  EnvId: string;
+  /** 服务名 */
+  ServerName: string;
+  /** 版本名 */
+  VersionName: string;
+  /** channel */
+  Channel?: string;
+}
+
+declare interface DescribeVersionDetailResponse {
+  /** 版本名 */
+  Name?: string;
+  /** 端口号 */
+  Port?: number;
+  /** cpu 规格 */
+  Cpu?: number;
+  /** mem 规格 */
+  Mem?: number;
+  /** 最小副本数 */
+  MinNum?: number;
+  /** 最大副本数 */
+  MaxNum?: number;
+  /** 扩缩容策略 */
+  PolicyDetails?: HpaPolicy[];
+  /** Dockerfile path */
+  Dockerfile?: string;
+  /** 目标目录 */
+  BuildDir?: string;
+  /** 环境变量 */
+  EnvParams?: string;
+  /** 状态 */
+  Status?: string;
+  /** 创建时间 */
+  CreatedTime?: string;
+  /** 更新时间 */
+  UpdatedTime?: string;
+  /** 日志采集路径 */
+  LogPath?: string;
+  /** entryPoint */
+  EntryPoint?: string | null;
+  /** Cmd */
+  Cmd?: string | null;
+  /** vpc conf */
+  VpcConf?: VpcConf | null;
+  /** volume conf */
+  VolumesConf?: VolumeConf[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -640,6 +976,54 @@ declare interface ReleaseGrayResponse {
   RequestId?: string;
 }
 
+declare interface SearchClsLogRequest {
+  /** 环境Id */
+  EnvId: string;
+  /** 开始时间 */
+  StartTime: string;
+  /** 结束时间 */
+  EndTime: string;
+  /** 查询语句，详情参考 https://cloud.tencent.com/document/product/614/47044 */
+  QueryString: string;
+  /** 单次要返回的日志条数，单次返回的最大条数为100 */
+  Limit: number;
+  /** 加载更多使用，透传上次返回的 context 值，获取后续的日志内容，通过游标最多可获取10000条，请尽可能缩小时间范围 */
+  Context?: string;
+  /** 按时间排序 asc（升序）或者 desc（降序），默认为 desc */
+  Sort?: string;
+  /** 是否使用Lucene语法，默认为false */
+  UseLucene?: boolean;
+  /** 日志类型 */
+  LogType?: number;
+}
+
+declare interface SearchClsLogResponse {
+  /** 日志内容结果 */
+  LogResults?: LogResObject;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SubmitServerRollbackRequest {
+  /** 环境Id */
+  EnvId: string;
+  /** 服务名 */
+  ServerName: string;
+  /** 当前版本 */
+  CurrentVersionName: string;
+  /** 回滚版本 */
+  RollbackVersionName: string;
+  /** 操作标识 */
+  OperatorRemark?: string;
+}
+
+declare interface SubmitServerRollbackResponse {
+  /** 任务Id */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateCloudRunServerRequest {
   /** 环境Id */
   EnvId: string;
@@ -671,30 +1055,44 @@ declare interface Tcbr {
   CreateCloudRunEnv(data: CreateCloudRunEnvRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudRunEnvResponse>;
   /** 创建云托管服务 {@link CreateCloudRunServerRequest} {@link CreateCloudRunServerResponse} */
   CreateCloudRunServer(data: CreateCloudRunServerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudRunServerResponse>;
+  /** 删除云托管服务 {@link DeleteCloudRunServerRequest} {@link DeleteCloudRunServerResponse} */
+  DeleteCloudRunServer(data: DeleteCloudRunServerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudRunServerResponse>;
+  /** 批量删除版本 {@link DeleteCloudRunVersionsRequest} {@link DeleteCloudRunVersionsResponse} */
+  DeleteCloudRunVersions(data: DeleteCloudRunVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudRunVersionsResponse>;
+  /** 查询云托管部署记录 {@link DescribeCloudRunDeployRecordRequest} {@link DescribeCloudRunDeployRecordResponse} */
+  DescribeCloudRunDeployRecord(data: DescribeCloudRunDeployRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudRunDeployRecordResponse>;
   /** 查询云托管环境列表 {@link DescribeCloudRunEnvsRequest} {@link DescribeCloudRunEnvsResponse} */
   DescribeCloudRunEnvs(data?: DescribeCloudRunEnvsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudRunEnvsResponse>;
+  /** 查询云托管Pod实例列表接口 {@link DescribeCloudRunPodListRequest} {@link DescribeCloudRunPodListResponse} */
+  DescribeCloudRunPodList(data: DescribeCloudRunPodListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudRunPodListResponse>;
+  /** 查询运行日志 {@link DescribeCloudRunProcessLogRequest} {@link DescribeCloudRunProcessLogResponse} */
+  DescribeCloudRunProcessLog(data: DescribeCloudRunProcessLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudRunProcessLogResponse>;
   /** 查询云托管服务详情 {@link DescribeCloudRunServerDetailRequest} {@link DescribeCloudRunServerDetailResponse} */
   DescribeCloudRunServerDetail(data: DescribeCloudRunServerDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudRunServerDetailResponse>;
   /** 查询云托管服务列表 {@link DescribeCloudRunServersRequest} {@link DescribeCloudRunServersResponse} */
   DescribeCloudRunServers(data: DescribeCloudRunServersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudRunServersResponse>;
   /** 查询环境基础信息 {@link DescribeEnvBaseInfoRequest} {@link DescribeEnvBaseInfoResponse} */
   DescribeEnvBaseInfo(data: DescribeEnvBaseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvBaseInfoResponse>;
+  /** 查询发布单 {@link DescribeReleaseOrderRequest} {@link DescribeReleaseOrderResponse} */
+  DescribeReleaseOrder(data: DescribeReleaseOrderRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleaseOrderResponse>;
   /** 查询服务管理任务信息 {@link DescribeServerManageTaskRequest} {@link DescribeServerManageTaskResponse} */
   DescribeServerManageTask(data: DescribeServerManageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerManageTaskResponse>;
+  /** 查询版本详情 {@link DescribeVersionDetailRequest} {@link DescribeVersionDetailResponse} */
+  DescribeVersionDetail(data: DescribeVersionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVersionDetailResponse>;
   /** 操作发布单 {@link OperateServerManageRequest} {@link OperateServerManageResponse} */
   OperateServerManage(data: OperateServerManageRequest, config?: AxiosRequestConfig): AxiosPromise<OperateServerManageResponse>;
   /** 灰度发布 {@link ReleaseGrayRequest} {@link ReleaseGrayResponse} */
   ReleaseGray(data: ReleaseGrayRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseGrayResponse>;
+  /** 查询日志cls日志信息 {@link SearchClsLogRequest} {@link SearchClsLogResponse} */
+  SearchClsLog(data: SearchClsLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClsLogResponse>;
+  /** 回滚版本 {@link SubmitServerRollbackRequest} {@link SubmitServerRollbackResponse} */
+  SubmitServerRollback(data: SubmitServerRollbackRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitServerRollbackResponse>;
   /** 更新云托管服务 {@link UpdateCloudRunServerRequest} {@link UpdateCloudRunServerResponse} */
   UpdateCloudRunServer(data: UpdateCloudRunServerRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCloudRunServerResponse>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   CreateCloudRunPeeringConnection(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DeleteCloudRunPeeringConnection(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  DeleteCloudRunServer(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  DeleteCloudRunVersions(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeArchitectureType(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
@@ -705,8 +1103,6 @@ declare interface Tcbr {
   DescribeStableIP(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   RecoverEnv(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  SearchClsLog(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
 }
 
 export declare type Versions = ["2022-02-17"];

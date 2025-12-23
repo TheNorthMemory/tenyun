@@ -2214,6 +2214,8 @@ declare interface LoadBalancer {
   L4UsedList?: string[];
   /** 该负载均衡实例绑定的七层域名列表。 */
   L7UsedList?: string[];
+  /** 负载均衡被引用实例的列表。 */
+  References?: OriginGroupReference[];
 }
 
 /** 实时日志投递的输出格式。您可以直接通过 FormatType 参数使用指定预设日志输出格式（JSON Lines / csv），也可以在预设日志输出格式基础上，通过其他参数来自定义变体输出格式。 */
@@ -2672,12 +2674,18 @@ declare interface OriginGroupInLoadBalancer {
 
 /** 源站组引用服务。 */
 declare interface OriginGroupReference {
-  /** 引用服务类型，取值有：AccelerationDomain: 加速域名；RuleEngine: 规则引擎；Loadbalance: 负载均衡；ApplicationProxy: 四层代理。 */
+  /** 引用服务类型，取值有：acceleration-domain: 加速域名；rule-engine: 规则引擎；load-balancer: 负载均衡；application-proxy: 四层代理。 */
   InstanceType?: string;
   /** 引用类型的实例ID。 */
   InstanceId?: string;
-  /** 应用类型的实例名称。 */
+  /** 引用类型的实例名称。 */
   InstanceName?: string;
+  /** 引用站点ID。 */
+  ZoneId?: string;
+  /** 引用站点名称。 */
+  ZoneName?: string;
+  /** 引用站点别名。 */
+  AliasZoneName?: string;
 }
 
 /** 源站组里的源站健康状态。 */
@@ -4785,13 +4793,15 @@ declare interface CreatePlanResponse {
 declare interface CreatePrefetchTaskRequest {
   /** 站点 ID。若您希望快速提交不同站点下的 Targets Url，可以将其填写为 *，但前提是调用该 API 的账号必须具备主账号下全部站点资源的权限。 */
   ZoneId: string;
-  /** 要预热的资源列表，每个元素格式类似如下:http://www.example.com/example.txt。参数值当前必填。注意：提交任务数受计费套餐配额限制，请查看 [EO计费套餐](https://cloud.tencent.com/document/product/1552/77380)。 */
+  /** 要预热的资源列表，必填。每个元素格式类似如下:http://www.example.com/example.txt。注意：提交任务数受计费套餐配额限制，请查看 [EO计费套餐](https://cloud.tencent.com/document/product/1552/77380)。 */
   Targets?: string[];
+  /** 预热模式，取值有：default：默认模式，即预热到中间层；edge：边缘预热模式，即预热到边缘和中间层。不填写时，默认值为 default。注意事项：1.预热至边缘产生的边缘层流量，会计入计费流量；2.边缘预热默认分配单独的预热额度 1000 条/天，不消费常规预热额度。说明：该参数为白名单功能，如有需要，请联系腾讯云工程师处理。 */
+  Mode?: string;
   /** 是否对url进行encode，若内容含有非 ASCII 字符集的字符，请开启此开关进行编码转换（编码规则遵循 RFC3986）。 */
   EncodeUrl?: boolean;
-  /** 附带的http头部信息。 */
+  /** 若需要携带 HTTP 头部信息预热，可入参该参数，否则放空即可。 */
   Headers?: Header[];
-  /** 媒体分片预热控制，取值有：on：开启分片预热，预热描述文件，并递归解析描述文件分片进行预热；off：仅预热提交的描述文件；不填写时，默认值为 off。注意事项：1. 支持的描述文件为 M3U8，对应分片为 TS；2. 要求描述文件能正常请求，并按行业标准描述分片路径；3. 递归解析深度不超过 3 层；4. 解析获取的分片会正常累加每日预热用量，当用量超出配额时，会静默处理，不再执行预热。该参数为白名单功能，如有需要，请联系腾讯云工程师处理。 */
+  /** 媒体分片预热控制，取值有：on：开启分片预热，预热描述文件，并递归解析描述文件分片进行预热；off：仅预热提交的描述文件；不填写时，默认值为 off。注意事项：1. 支持的描述文件为 M3U8，对应分片为 TS；2. 要求描述文件能正常请求，并按行业标准描述分片路径；3. 递归解析深度不超过 3 层；4. 解析获取的分片会正常累加每日预热用量，当用量超出配额时，会静默处理，不再执行预热。说明：该参数为白名单功能，如有需要，请联系腾讯云工程师处理。 */
   PrefetchMediaSegments?: string;
 }
 

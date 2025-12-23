@@ -114,7 +114,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 246+ 款产品，13078+ 服务数</summary>
+<details><summary>共计 246+ 款产品，13124+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -183,7 +183,7 @@ cloudapp | [云应用](https://cloud.tencent.com/document/product/1689) | 2022-0
 cloudaudit | [操作审计](https://cloud.tencent.com/document/product/629) | 2019-03-19(19) |
 cloudhsm | [云加密机](https://cloud.tencent.com/document/product/639) | 2019-11-12(14) |
 cloudstudio | [Cloud Studio（云端 IDE）](https://cloud.tencent.com/document/product/1039) | 2023-05-08(9) |
-cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-16(121) |
+cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-16(160) |
 cme | [多媒体创作引擎](https://cloud.tencent.com/document/product/1156) | 2019-10-29(50) |
 cmq | [消息队列 CMQ](https://cloud.tencent.com/document/product/406) | 2019-03-04(2) |
 cms | 内容安全 | 2019-03-21(6) |
@@ -287,7 +287,7 @@ partners | [渠道合作伙伴](https://cloud.tencent.com/document/product/563) 
 postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) | 2017-03-12(104) |
 privatedns | [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) | 2020-10-28(40) |
 pts | [云压测](https://cloud.tencent.com/document/product/1484) | 2021-07-28(48) |
-rce | [全栈式风控引擎](https://cloud.tencent.com/document/product/1343) | 2020-11-03(11) |
+rce | [全栈式风控引擎](https://cloud.tencent.com/document/product/1343) | 2025-04-25(1) | 2020-11-03(11) |
 redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 2018-04-12(110) |
 region | [地域管理系统](https://cloud.tencent.com/document/product/1596) | 2022-06-27(3) |
 rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(54) |
@@ -310,9 +310,9 @@ tag | [标签](https://cloud.tencent.com/document/product/651) | 2018-08-13(31) 
 tat | [自动化助手](https://cloud.tencent.com/document/product/1340) | 2020-10-28(29) |
 tbaas | [腾讯云区块链服务平台 TBaaS](https://cloud.tencent.com/document/product/663) | 2018-04-16(24) |
 tbp | [腾讯智能对话平台](https://cloud.tencent.com/document/product/1060) | 2019-06-27(2) | 2019-03-11(4) |
-tcaplusdb | [游戏数据库 TcaplusDB](https://cloud.tencent.com/document/product/596) | 2019-08-23(53) |
+tcaplusdb | [游戏数据库 TcaplusDB](https://cloud.tencent.com/document/product/596) | 2019-08-23(52) |
 tcb | [云开发 CloudBase](https://cloud.tencent.com/document/product/876) | 2018-06-08(78+195) |
-tcbr | [云托管 CloudBase Run](https://cloud.tencent.com/document/product/1243) | 2022-02-17(10+10) |
+tcbr | [云托管 CloudBase Run](https://cloud.tencent.com/document/product/1243) | 2022-02-17(19+7) |
 tccatalog | [统一Catalog服务](https://cloud.tencent.com/document/product/1784) | 2024-10-24(4) |
 tchd | [腾讯云健康看板](https://cloud.tencent.com/document/product/1688) | 2023-03-06(2) |
 tcm | [服务网格](https://cloud.tencent.com/document/product/1261) | 2021-04-13(12) |
@@ -341,12 +341,12 @@ trp | [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) 
 trro | [实时互动-工业能源版](https://cloud.tencent.com/document/product/1584) | 2022-03-25(31) |
 trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(72) |
 tse | [TSF-Polaris&ZK&网关](https://cloud.tencent.com/document/product/1364) | 2020-12-07(123) |
-tsf | [TSF-应用管理&Consul](https://cloud.tencent.com/document/product/649) | 2018-03-26(228) |
+tsf | [TSF-应用管理&Consul](https://cloud.tencent.com/document/product/649) | 2018-03-26(227) |
 tsi | [腾讯同传系统](https://cloud.tencent.com/document/product/1399) | 2021-03-25(3) |
 tsw | [微服务观测平台 TSW](https://cloud.tencent.com/document/product/1311) | 2021-04-12(3) | 2020-09-24(1) |
 tts | [语音合成](https://cloud.tencent.com/document/product/1073) | 2019-08-23(3) |
 vcg | [视频生成](https://cloud.tencent.com/document/product/1770) | 2024-04-04(2) |
-vclm | [腾讯混元生视频](https://cloud.tencent.com/document/product/1616) | 2024-05-23(19) |
+vclm | [腾讯混元生视频](https://cloud.tencent.com/document/product/1616) | 2024-05-23(21) |
 vcube | [音视频终端引擎](https://cloud.tencent.com/document/product/1449) | 2022-04-10(36) |
 vdb | [向量数据库](https://cloud.tencent.com/document/product/1709) | 2023-06-16(14) |
 vm | [视频内容安全](https://cloud.tencent.com/document/product/1265) | 2021-09-22(4) | 2020-12-29(4)<br/>2020-07-09(5) |

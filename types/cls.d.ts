@@ -276,6 +276,22 @@ declare interface AnonymousInfo {
   Conditions?: ConditionInfo[];
 }
 
+/** 元数据Pod label标签结构体 */
+declare interface AppointLabel {
+  /** 指定标签类型。- 0：所有Pod label，Keys字段无效- 1：指定Pod label，Keys字段不能为空 */
+  Type: number | null;
+  /** 元数据Pod标签的键。有效标签键有两个部分：可选前缀和名称，以斜杠 (/) 分隔。名称部分是必需的，并且必须不超过 63 个字符，以字母数字字符 ([a-z0-9A-Z]) 开头和结尾，中间有破折号(-)、下划线(_)、点(.) 和字母数字。前缀是可选的。如果指定，前缀必须是 DNS 子域：一系列以点 (.) 分隔的 DNS 标签，总长度不超过 253 个字符，后跟斜杠 ( /)。- prefix 格式 `[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*`- name 格式 `([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]`- key不能重复 */
+  Keys?: string[] | null;
+}
+
+/** 指标采集配置 */
+declare interface BaseMetricCollectConfig {
+  /** 机器组id */
+  GroupId?: string | null;
+  /** 基础监控采集配置信息 */
+  Configs?: MetricCollectConfig[] | null;
+}
+
 /** 回调配置 */
 declare interface CallBackInfo {
   /** 回调时的Body。可将各类告警变量放在请求内容中，详见[帮助文档](https://cloud.tencent.com/document/product/614/74718)。如下示例：```{"TopicId": "{{ .QueryLog[0][0].topicId }}","key": "{{.Alarm}}","time": "{{ .QueryLog[0][0].time }}","log": "{{ .QueryLog[0][0].content.__CONTENT__ }}","namespace": "{{ .QueryLog[0][0].content.__TAG__.namespace }}"}``` */
@@ -514,6 +530,44 @@ declare interface ConsumerGroup {
   ProtocolName?: string;
 }
 
+/** 消费组信息 */
+declare interface ConsumerGroupInfo {
+  /** 消费组标识 */
+  ConsumerGroup?: string;
+  /** 消费者心跳超时时间（秒） */
+  Timeout?: number;
+  /** topic列表 */
+  Topics?: string[];
+}
+
+/** 投递规则 */
+declare interface ConsumerInfo {
+  /** 投递规则ID */
+  ConsumerId?: string;
+  /** 日志主题ID */
+  TopicId?: string;
+  /** 投递任务是否生效 */
+  Effective?: boolean;
+  /** CKafka的描述 */
+  Ckafka?: Ckafka;
+  /** 是否投递日志的元数据信息 */
+  NeedContent?: boolean;
+  /** 如果需要投递元数据信息，元数据信息的描述 */
+  Content?: ConsumerContent | null;
+  /** 压缩方式[0:NONE；2:SNAPPY；3:LZ4] */
+  Compression?: number | null;
+  /** 投递任务创建毫秒时间戳 */
+  CreateTime?: number | null;
+  /** 角色访问描述名 [创建角色](https://cloud.tencent.com/document/product/598/19381) */
+  RoleArn?: string | null;
+  /** 外部ID */
+  ExternalId?: string | null;
+  /** 任务运行状态。支持`0`,`1`,`2` - `0`: 停止 - `1`: 运行中 - `2`: 异常 */
+  TaskStatus?: number | null;
+  /** 高级配置 */
+  AdvancedConfig?: AdvancedConsumerConfiguration;
+}
+
 /** 自建k8s-容器文件路径信息 */
 declare interface ContainerFileInfo {
   /** namespace可以多个，用分隔号分割,例如A,B */
@@ -632,6 +686,26 @@ declare interface CsvInfo {
   EscapeChar: string;
   /** 对于上面指定的不存在字段使用该内容填充 */
   NonExistingField: string;
+}
+
+/** 自定义标签结构体 */
+declare interface CustomLabel {
+  /** 标签的键。- 必须以字母或下划线开头，但不可以双下划线（__）开头，后面可以跟任意字母，数字或下划线。- 最大支持256个字符。- key不能重复 */
+  Key: string | null;
+  /** 标签的值。- 最大支持256个字符。 */
+  Value: string | null;
+}
+
+/** 自定义指标采集对象 */
+declare interface CustomMetricSpec {
+  /** 端口。取值范围 [1,65535] */
+  Port: string | null;
+  /** Metric地址。校验格式：`^/[a-zA-Z0-9-_./]*$` */
+  Path: string | null;
+  /** 命名空间列表。- 最大支持100个- namespace 校验格式 `[a-z0-9]([-a-z0-9]*[a-z0-9])?` ， 长度不能超过63- namespace 不能重复 */
+  Namespaces?: string[] | null;
+  /** Pod标签。- 最大支持100个 */
+  PodLabel?: Label[] | null;
 }
 
 /** 仪表盘信息 */
@@ -818,6 +892,14 @@ declare interface DeliverConfig {
   Scope: number;
 }
 
+/** 云产品实例维度信息 */
+declare interface Dimension {
+  /** 实例维度名称,此字段可能返回 null，表示取不到有效值。 */
+  Name?: string | null;
+  /** 实例维度值,此字段可能返回 null，表示取不到有效值。 */
+  Value?: string | null;
+}
+
 /** 投递DLC任务配置信息 */
 declare interface DlcDeliverInfo {
   /** 任务id。 */
@@ -920,6 +1002,88 @@ declare interface EnvInfo {
   Key: string;
   /** 环境变量值 */
   Value?: string;
+}
+
+/** Es导入信息 */
+declare interface EsImportInfo {
+  /** 导入模式。1. 导入历史数据2. 导入实时数据 */
+  Type: number;
+  /** 开始时间。 单位:秒级时间戳。 */
+  StartTime?: number;
+  /** 结束时间。 单位：秒级时间戳。 */
+  EndTime?: number;
+  /** 最大延迟时间。单位：s导入模式为 2: 导入实时数据时必填 */
+  MaxDelay?: number;
+  /** 检查间隔。单位：s导入模式为 2: 导入实时数据时必填 */
+  CheckInterval?: number;
+}
+
+/** es集群配置信息 */
+declare interface EsInfo {
+  /** es类型。 1:云es, 2:自建es */
+  EsType: number;
+  /** 访问方式 1:内网, 2:外网。自建es必填 */
+  AccessMode?: number;
+  /** 实例id。云es实例必填 */
+  InstanceId?: string;
+  /** 用户名。 */
+  User?: string;
+  /** 访问地址。自建es必填 */
+  Address?: string;
+  /** 访问端口。自建es必填 */
+  Port?: number;
+  /** 所属网络。自建es且访问方式为内网访问时必填 */
+  VpcId?: string;
+  /** 网络服务类型。自建es且访问方式为内网访问时必填。负载均衡 CLB:1025 云服务器CVM:0 */
+  VirtualGatewayType?: number;
+  /** 密码。 */
+  Password?: string;
+}
+
+/** es导入配置信息 */
+declare interface EsRechargeInfo {
+  /** 任务id。 */
+  TaskId?: string;
+  /** 主账号id。 */
+  Uin?: number;
+  /** 日志主题id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
+  TopicId?: string;
+  /** 配置名称。 */
+  Name?: string;
+  /** es索引。 */
+  Index?: string;
+  /** es查询语句。 */
+  Query?: string;
+  /** es集群信息。 */
+  EsInfo?: EsInfo;
+  /** es导入信息。 */
+  ImportInfo?: EsImportInfo;
+  /** es导入时间配置信息。 */
+  TimeInfo?: EsTimeInfo;
+  /** 任务状态。1. 运行中2. 暂停3. 完成4. 异常 */
+  Status?: number;
+  /** 任务进度 0~100 百分比。100：表示完成。 */
+  Progress?: number;
+  /** 子账号id。 */
+  SubUin?: number;
+  /** 创建时间。 */
+  CreateTime?: number;
+  /** 修改时间。 */
+  UpdateTime?: number;
+  /** 是否开启投递服务日志。1：关闭，2：开启。 */
+  HasServicesLog?: number;
+}
+
+/** Es导入时间字段信息 */
+declare interface EsTimeInfo {
+  /** 时间类型 1: 日志采集时间 2: 指定日志字段 */
+  Type: number;
+  /** 日志时间字段。时间类型为 2: 指定日志字段时必填 */
+  TimeKey?: string;
+  /** 日志时间格式。时间类型为 2: 指定日志字段时必填 */
+  TimeFormat?: string;
+  /** 时间字段时区。时间类型为 2: 指定日志字段时必填 */
+  TimeZone?: string;
 }
 
 /** 升级通知 */
@@ -1116,6 +1280,62 @@ declare interface HostFileInfo {
   CustomLabels?: string[] | null;
 }
 
+/** 主机指标采集配置 */
+declare interface HostMetricConfig {
+  /** 采集配置 id */
+  ConfigId?: string;
+  /** 采集配置名称 */
+  Name?: string;
+  /** 采集频率,单位ms */
+  Interval?: number;
+  /** 采集项. */
+  HostMetricItems?: HostMetricItem[];
+  /** 机器组 id 列表 */
+  MachineGroupIds?: string[];
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 修改时间 */
+  UpdateTime?: number;
+}
+
+/** 主机指标采集项 */
+declare interface HostMetricItem {
+  /** 主机指标采集项类型。支持"cpu"，"mem"，"net"，"disk"，"system"。- cpu：CPU- mem：内存- net：网络- disk：磁盘- system：系统 */
+  Type: string;
+}
+
+/** 实例信息 */
+declare interface Instance {
+  /** 实例信息 */
+  Values: string[];
+}
+
+/** 实例配置信息 */
+declare interface InstanceConfig {
+  /** 实例维度 */
+  InstanceDimension: string[];
+  /** 实例值 */
+  Instances: Instance[];
+}
+
+/** 云产品指标订阅预览结果实例信息 */
+declare interface InstanceData {
+  /** 云监控指标名称 */
+  MetricName?: string | null;
+  /** CLS指标名称 */
+  CLSMetricName?: string | null;
+  /** 云产品命名空间 */
+  Namespace?: string | null;
+  /** 实例信息 */
+  Dimensions?: Dimension[] | null;
+  /** 周期,单位：秒 */
+  Period?: number | null;
+  /** 指标统计值 */
+  Value?: number | null;
+  /** 错误信息 */
+  ErrMsg?: string | null;
+}
+
 /** JSON类型描述 */
 declare interface JsonInfo {
   /** 启用标志 */
@@ -1202,6 +1422,16 @@ declare interface KeyValueInfo {
   Key: string;
   /** 字段的索引描述信息 */
   Value: ValueInfo;
+}
+
+/** 标签结构体 */
+declare interface Label {
+  /** 标签的键。有效标签键有两个部分：可选前缀和名称，以斜杠 (/) 分隔。名称部分是必需的，并且必须不超过 63 个字符，以字母数字字符 ([a-z0-9A-Z]) 开头和结尾，中间有破折号(-)、下划线(_)、点(.) 和字母数字。前缀是可选的。如果指定，前缀必须是 DNS 子域：一系列以点 (.) 分隔的 DNS 标签，总长度不超过 253 个字符，后跟斜杠 ( /)。- prefix 格式 `[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*`- name 格式 `([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]`- key不能重复 */
+  Key: string | null;
+  /** 标签键值直接的比较关系。 不同业务场景支持的比较符不同，具体支持那些参考接口业务描述。例如：`in`、`notin` */
+  Operate: string | null;
+  /** 标签的值.- 最大支持63个字符。- 格式：`([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]` */
+  Values?: string[] | null;
 }
 
 /** 日志上下文信息 */
@@ -1394,12 +1624,124 @@ declare interface MetaTagInfo {
   Value?: string;
 }
 
+/** Splunk任务投递元信息 */
+declare interface MetadataInfo {
+  /** 数据格式,rawlog/json */
+  Format: string;
+  /** 投递字段，包括\_\_SOURCE\_\_、\_\_FILENAME\_\_、\_\_TIMESTAMP\_\_、\_\_HOSTNAME\_\_、\_\_PKG\_ID\_\_ */
+  MetaFields?: string[];
+  /** 是否投递__TAG__字段 */
+  EnableTag?: boolean;
+  /** JSON是否平铺，投递__TAG__字段时必填 */
+  TagJsonTiled?: boolean;
+}
+
+/** 指标采集配置 */
+declare interface MetricCollectConfig {
+  /** 采集配置id */
+  ConfigId?: string;
+  /** 日志主题id。 */
+  TopicIds?: string[];
+  /** 采集配置来源。支持 ：`0`、`1`- 0:自建k8s- 1:TKE */
+  Source?: number;
+  /** 机器组id。 */
+  GroupIds?: string[];
+  /** 监控类型。支持 ：`0`、`1`，不支持修改- 0:基础监控- 1:自定义监控, */
+  Type?: number;
+  /** 采集配置方式。支持 ：`0`、`1`，不支持修改- 0:普通配置方式，Type字段只能为：`1`- 1:YAML导入方式，Type 可以是：`0`或者`1` */
+  Flag?: number;
+  /** 名称：长度不超过253字符，校验格式 ` [a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*`。 */
+  Name?: string | null;
+  /** 采集对象, Flag=0时生效 */
+  Spec?: MetricSpec | null;
+  /** 标签处理, Flag=0时生效 */
+  MetricRelabels?: Relabeling[] | null;
+  /** 自定义元数据, Flag=0时生效 */
+  MetricLabel?: MetricConfigLabel | null;
+  /** 通信协议 `http`、`https`；Flag=0时生效 */
+  Scheme?: string | null;
+  /** 采集频率, Flag=0时生效- 校验格式：`^(((\d+)y)?((\d+)w)?((\d+)d)?((\d+)h)?((\d+)m)?((\d+)s)?((\d+)ms)?|0)$` */
+  ScrapeInterval?: string | null;
+  /** 采集超时时间。 Flag=0 && Type=1时生效- format:`^(((\d+)y)?((\d+)w)?((\d+)d)?((\d+)h)?((\d+)m)?((\d+)s)?((\d+)ms)?|0)$` */
+  ScrapeTimeout?: string | null;
+  /** Prometheus如何处理标签之间的冲突。当Flag=0生效，支持`true`,`false`- `false`:配置数据中冲突的标签重命名- `true`:忽略冲突的服务器端标签 */
+  HonorLabels?: boolean | null;
+  /** 采集配置yaml格式字符串, Flag=1时必填 */
+  YamlSpec?: MetricYamlSpec | null;
+  /** 操作状态,0:应用,1:暂停 */
+  Operate?: number;
+  /** 创建时间戳 秒级 */
+  CreateTime?: number;
+  /** 更新时间戳 秒级 */
+  UpdateTime?: number;
+}
+
+/** 指标配置信息 */
+declare interface MetricConfig {
+  /** 指标名称 */
+  MetricName: string;
+  /** 统计周期,单位:秒（s） */
+  Periods: number[];
+  /** 自定义指标标签 */
+  MetricLabels?: MetricLabel[];
+}
+
+/** 指标采集label配置信息 */
+declare interface MetricConfigLabel {
+  /** 元数据。支持- `namespace`- `pod_name`- `pod_ip`- `pod_uid`- `container_name`- `container_id`- `image_name`- `cluster_id`- `node_id`- `node_ip` */
+  Metadata?: string[] | null;
+  /** 元数据Pod Label信息。 */
+  Label?: AppointLabel | null;
+  /** 自定义label信息。 */
+  CustomLabels?: CustomLabel[] | null;
+}
+
 /** 过滤器 */
 declare interface MetricLabel {
   /** 指标名称 */
   Key: string;
   /** 指标内容 */
   Value: string;
+}
+
+/** 采集对象 */
+declare interface MetricSpec {
+  /** 自定义指标采集配置项 */
+  CustomSpecs?: CustomMetricSpec[] | null;
+}
+
+/** 指标订阅配置信息 */
+declare interface MetricSubscribeInfo {
+  /** 订阅任务id。 */
+  TaskId?: string;
+  /** 日志主题id。 */
+  TopicId?: string;
+  /** 订阅任务名称。 */
+  Name?: string;
+  /** 云产品命名空间。 */
+  Namespace?: string;
+  /** 指标配置信息。 */
+  Metrics?: MetricConfig[];
+  /** 实例配置信息。 */
+  InstanceInfo?: InstanceConfig;
+  /** 订阅任务开关。1:暂停 2:启用 */
+  Enable?: number;
+  /** 订阅任务运行状态。0:创建中 1:暂停 2:运行中 3:异常 */
+  Status?: number;
+  /** 订阅任务运行异常时的错误信息。 */
+  ErrMsg?: string | null;
+  /** 创建时间（秒级时间戳） */
+  CreateTime?: number | null;
+  /** 更新时间（秒级时间戳） */
+  UpdateTime?: number | null;
+}
+
+/** 指标采集yaml格式配置 */
+declare interface MetricYamlSpec {
+  /** yaml监控类型。支持：- PodMonitor- ServiceMonitor- ScrapeConfig- ScrapeConfig-prometheus`PodMonitor `,`ServiceMonitor `,`ScrapeConfig ` 属于prometheus-operator`ScrapeConfig-prometheus` 属于prometheus */
+  Type: string | null;
+  /** 配置yaml格式。例如：Type: ServiceMonitor```apiVersion: monitoring.coreos.com/v1kind: ServiceMonitormetadata: name: test namespace: test labels: k8s-app1: test k8s-app2: testspec: endpoints: - interval: 15s port: 8080-8080-tcp path: /metrics relabelings: - action: replace sourceLabels: - __meta_kubernetes_pod_label_app targetLabel: application namespaceSelector: matchNames: - test selector: matchLabels: app: test``` */
+  Spec: string | null;
 }
 
 /** 提供多个Notice信息 */
@@ -1442,6 +1784,24 @@ declare interface MultiTopicSearchInformation {
   TopicId?: string;
   /** 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时 */
   Context?: string;
+}
+
+/** Splunk投递任务-目标配置网络信息相关 */
+declare interface NetInfo {
+  /** 网络地址 */
+  Host: string;
+  /** 端口 */
+  Port: number;
+  /** 认证token */
+  Token: string;
+  /** 网络类型;1：内网；2:外网 */
+  NetType: number;
+  /** 所属网络；如果网络类型为内网，该字段必填 */
+  VpcId?: string;
+  /** 网络服务类型；如果网络类型为内网，该字段必填- 0:云上cvm- 3:云上专线网关- 11:云联网- 1025:云上clb */
+  VirtualGatewayType?: number;
+  /** 认证机制，是否使用SSL，默认不使用 */
+  IsSSL?: boolean;
 }
 
 /** 通知内容模板详细配置 */
@@ -1554,6 +1914,14 @@ declare interface PartitionInfo {
   LastWriteTime?: string | null;
 }
 
+/** PartitionOffsetInfo */
+declare interface PartitionOffsetInfo {
+  /** 分区id */
+  PartitionId: number | null;
+  /** offset点位 */
+  Offset?: number | null;
+}
+
 /** 预览数据详情 */
 declare interface PreviewLogStatistic {
   /** 日志内容 */
@@ -1568,6 +1936,24 @@ declare interface PreviewLogStatistic {
   Time?: string;
   /** 目标topic-name */
   DstTopicName?: string | null;
+}
+
+/** 标签重新标记配置。允许动态重写目标、警报、抓取样本和远程写入样本的标签集。 */
+declare interface Relabeling {
+  /** 基于正则表达式匹配执行的动作。- replace: Label替换, 必填: SourceLabels, Separator, Regex, TargetLabel, Replacement- labeldrop: 丢弃Label, 必填: Regex- labelkeep: 保留Label, 必填: Regex- lowercase: 小写化, 必填: SourceLabels, Separator, TargetLabel- uppercase: 大写化, 必填: SourceLabels, Separator, TargetLabel- dropequal: 丢弃指标-完全匹配, 必填: SourceLabels, Separator, TargetLabel- keepequal: 保留指标-完全匹配, 必填: SourceLabels, Separator, TargetLabel- drop: 丢弃指标-正则匹配, 必填: SourceLabels, Separator, Regex- keep: 保留指标-正则匹配, 必填: SourceLabels, Separator, Regex- hashmod:哈希取模, 必填: SourceLabels, Separator, TargetLabel, Modulus- labelmap:Label映射, 必填: Regex, Replacement */
+  Action: string | null;
+  /** 原始label */
+  SourceLabels?: string[] | null;
+  /** 原始label连接符。 必填时不能为空串， 长度不能超过256 */
+  Separator?: string | null;
+  /** 目标label。必填时不能为空串，校验格式：`^[a-zA-Z_][a-zA-Z0-9_]*$` ， 长度不能超过256 */
+  TargetLabel?: string | null;
+  /** 替换值。如果正则表达式匹配，则对其执行替换操作。- 必填时不能为空串，长度不能超过256- 当action为LabelMap时， Replacement 校验格式：`^(?:(?:[a-zA-Z_]|\$(?:\{\w+\}|\w+))+\w*)+$` */
+  Replacement?: string | null;
+  /** 正则表达式。提取与之匹配值。必填时不能为空串，校验必须是一个合法的 RE2 */
+  Regex?: string | null;
+  /** 获取源标签值的哈希值。必填时不能为空,不能为0 */
+  Modulus?: number | null;
 }
 
 /** 索引规则，FullText、KeyValue、Tag参数必须输入一个有效参数 */
@@ -1762,6 +2148,42 @@ declare interface ShipperTaskInfo {
   Message?: string;
 }
 
+/** Splunk投递任务信息 */
+declare interface SplunkDeliverInfo {
+  /** 任务id */
+  TaskId?: string;
+  /** 任务名称 */
+  Name?: string;
+  /** 用户id */
+  Uin?: number;
+  /** 日志主题id */
+  TopicId?: string;
+  /** 任务状态；1.运行中；2:暂停；3：异常 */
+  Status?: number;
+  /** 启用状态；0:禁用；1:启用 */
+  Enable?: number;
+  /** 创建时间；单位：秒 */
+  CreateTime?: number;
+  /** 更新时间；单位：秒 */
+  UpdateTime?: number;
+  /** splunk投递任务-目标配置 */
+  NetInfo?: NetInfo;
+  /** splunk投递任务元信息 */
+  Metadata?: MetadataInfo;
+  /** 是否启用服务日志；1:关闭；2:开启 */
+  HasServiceLog?: number;
+  /** 高级配置-数据来源； */
+  Source?: string;
+  /** 高级配置-数据来源类型； */
+  SourceType?: string;
+  /** 高级配置-Splunk写入的索引 */
+  Index?: string;
+  /** 高级配置-是否启用索引器；1-不开启；2-开启； */
+  IndexAck?: number;
+  /** 高级配置-通道 */
+  Channel?: string;
+}
+
 /** 创建资源实例时同时绑定的标签对说明 */
 declare interface Tag {
   /** 标签键 */
@@ -1838,6 +2260,22 @@ declare interface TopicInfo {
   EffectiveDate?: string;
   /** IsSourceFrom 开启记录公网来源ip和服务端接收时间 */
   IsSourceFrom?: boolean;
+}
+
+/** Partitions */
+declare interface TopicPartitionInfo {
+  /** 日志主题ID */
+  TopicID: string | null;
+  /** 分区id列表 */
+  Partitions: number[] | null;
+}
+
+/** TopicPartitionOffsetInfo */
+declare interface TopicPartitionOffsetInfo {
+  /** 日志主题id */
+  TopicID: string | null;
+  /** 分区点位信息 */
+  PartitionOffsets: PartitionOffsetInfo[] | null;
 }
 
 /** 用户kafka扩展信息 */
@@ -1980,6 +2418,22 @@ declare interface CloseKafkaConsumerRequest {
 }
 
 declare interface CloseKafkaConsumerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CommitConsumerOffsetsRequest {
+  /** 消费组标识 */
+  ConsumerGroup: string;
+  /** 消费机器名称 */
+  Consumer: string;
+  /** 日志集id */
+  LogsetId: string;
+  /** topic分区点位信息 */
+  TopicPartitionOffsetsInfo: TopicPartitionOffsetInfo[];
+}
+
+declare interface CommitConsumerOffsetsResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2214,6 +2668,24 @@ declare interface CreateConsoleSharingResponse {
   RequestId?: string;
 }
 
+declare interface CreateConsumerGroupRequest {
+  /** 创建的消费者组标识限制： 字母数字下划线，不允许数字开头，长度限制256 */
+  ConsumerGroup: string;
+  /** 消费者心跳超时时间（秒） */
+  Timeout: number;
+  /** 创建的消费者组包含的日志主题列表 */
+  Topics: string[];
+  /** 日志集Id（日志主题所属的日志集） */
+  LogsetId: string;
+}
+
+declare interface CreateConsumerGroupResponse {
+  /** 消费组标识 */
+  ConsumerGroup?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateConsumerRequest {
   /** 投递任务绑定的日志主题Id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
   TopicId: string;
@@ -2380,6 +2852,32 @@ declare interface CreateDlcDeliverResponse {
   RequestId?: string;
 }
 
+declare interface CreateEsRechargeRequest {
+  /** 日志主题id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
+  TopicId: string;
+  /** 名称：长度不超过64字符。 */
+  Name: string;
+  /** 索引信息。不同索引可以通过英文逗号分隔，支持*通配符 */
+  Index: string;
+  /** es查询语句。 */
+  Query: string;
+  /** es集群配置信息。 */
+  EsInfo: EsInfo;
+  /** es导入信息。 */
+  ImportInfo: EsImportInfo;
+  /** es导入时间字段信息。 */
+  TimeInfo: EsTimeInfo;
+  /** 是否开启投递服务日志。1：关闭，2：开启。默认开启。 */
+  HasServicesLog?: number;
+}
+
+declare interface CreateEsRechargeResponse {
+  /** 配置id */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateExportRequest {
   /** 日志主题Id- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
@@ -2404,6 +2902,26 @@ declare interface CreateExportRequest {
 declare interface CreateExportResponse {
   /** 日志导出ID。 */
   ExportId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateHostMetricConfigRequest {
+  /** 指标日志主题id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。注意BizType 0:日志主题（默认值）， 1:指标主题- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。注意BizType 0:日志主题（默认值）， 1:指标主题 */
+  TopicId: string;
+  /** 名称。- 长度不超过 64字符。 */
+  Name: string;
+  /** 机器组id列表。最多支持100个机器组。 */
+  MachineGroupIds: string[];
+  /** 采集频率。单位:ms。 最小支持5000ms */
+  Interval: number;
+  /** 采集项。支持"cpu"，"mem"，"net"，"disk"，"system"。**目前仅支持:所有采集项都需配置**。- cpu：CPU- mem：内存- net：网络- disk：磁盘- system：系统 */
+  HostMetricItems: HostMetricItem[];
+}
+
+declare interface CreateHostMetricConfigResponse {
+  /** 主机指标采集配置id */
+  ConfigId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2508,6 +3026,64 @@ declare interface CreateMachineGroupResponse {
   RequestId?: string;
 }
 
+declare interface CreateMetricConfigRequest {
+  /** 指标日志主题id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。注意BizType 0:日志主题（默认值）， 1:指标主题- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。注意BizType 0:日志主题（默认值）， 1:指标主题 */
+  TopicId: string;
+  /** 采集配置来源。支持 ：`0`、`1`- 0:自建k8s- 1:TKE */
+  Source: number;
+  /** 机器组id。 */
+  GroupIds: string[];
+  /** 监控类型。支持 ：`0`、`1`，不支持修改- 0:基础监控- 1:自定义监控, */
+  Type: number;
+  /** 采集配置方式。支持 ：`0`、`1`，不支持修改- 0:普通配置方式，Type字段只能为：``1`- 1:YAML导入方式， Type 可以是：`0`或者`1` */
+  Flag: number;
+  /** 名称：长度不超过253字符，校验格式 ` [a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*`。 */
+  Name?: string;
+  /** 采集对象, Flag=0时生效 */
+  Spec?: MetricSpec;
+  /** 标签处理, Flag=0时生效 */
+  MetricRelabels?: Relabeling[];
+  /** 自定义元数据, Flag=0时生效 */
+  MetricLabel?: MetricConfigLabel;
+  /** 通信协议 http、https; Flag=0时生效 */
+  Scheme?: string;
+  /** 采集频率, Flag=0时生效- 校验格式：`^(((\d+)y)?((\d+)w)?((\d+)d)?((\d+)h)?((\d+)m)?((\d+)s)?((\d+)ms)?|0)$`- 默认：60s */
+  ScrapeInterval?: string;
+  /** 采集超时时间， Flag=0时生效- 校验格式：`^(((\d+)y)?((\d+)w)?((\d+)d)?((\d+)h)?((\d+)m)?((\d+)s)?((\d+)ms)?|0)$`- 默认：30s */
+  ScrapeTimeout?: string;
+  /** Prometheus如何处理标签之间的冲突。当Flag=0时生效，支持`true`,`false`- `false`:配置数据中冲突的标签重命名- `true`:忽略冲突的服务器端标签 */
+  HonorLabels?: boolean;
+  /** 采集配置yaml格式字符串, Flag=1时必填 */
+  YamlSpec?: MetricYamlSpec;
+}
+
+declare interface CreateMetricConfigResponse {
+  /** 指标采集配置id列表。 */
+  ConfigIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateMetricSubscribeRequest {
+  /** 名称：长度不超过64字符，以字母开头，接受0-9,a-z,A-Z, _,-,中文字符。 */
+  Name: string;
+  /** 日志主题id。 */
+  TopicId: string;
+  /** 云产品命名空间。 */
+  Namespace: string;
+  /** 数据库配置信息。 */
+  Metrics: MetricConfig[];
+  /** 实例配置配置。 */
+  InstanceInfo: InstanceConfig;
+}
+
+declare interface CreateMetricSubscribeResponse {
+  /** 配置id */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateNoticeContentRequest {
   /** 模板名称。最大支持255个字节 */
   Name: string;
@@ -2598,6 +3174,36 @@ declare interface CreateShipperRequest {
 declare interface CreateShipperResponse {
   /** 投递任务ID */
   ShipperId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSplunkDeliverRequest {
+  /** 日志主题id- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  TopicId: string;
+  /** splunk投递任务名称；name有如下限制：- 不能为空- 长度不大于64- 只能包含aA-zZ、下划线、-、0-9 */
+  Name: string;
+  /** Splunk投递任务-目标配置-网络信息 */
+  NetInfo: NetInfo;
+  /** Splunk投递任务元信息 */
+  MetadataInfo: MetadataInfo;
+  /** 是否开启服务日志 1:关闭；2:开启 ;默认开启 */
+  HasServiceLog?: number;
+  /** 高级配置-是否启用索引器；1-不启用；2-启用；默认：1 */
+  IndexAck?: number;
+  /** 高级配置-数据来源；不超过64个字符 */
+  Source?: string;
+  /** 高级配置-数据来源类型；不超过64个字符 */
+  SourceType?: string;
+  /** 高级配置-Splunk写入的索引；不超过64个字符 */
+  Index?: string;
+  /** 高级配置-通道需满足限制：如果启用索引器，那么Channel必填 */
+  Channel?: string;
+}
+
+declare interface CreateSplunkDeliverResponse {
+  /** splunk投递任务id */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2756,6 +3362,18 @@ declare interface DeleteConsoleSharingResponse {
   RequestId?: string;
 }
 
+declare interface DeleteConsumerGroupRequest {
+  /** 需要删除的消费者组标识 */
+  ConsumerGroup: string;
+  /** 日志集id */
+  LogsetId: string;
+}
+
+declare interface DeleteConsumerGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteConsumerRequest {
   /** 投递任务绑定的日志主题Id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
   TopicId: string;
@@ -2810,12 +3428,36 @@ declare interface DeleteDlcDeliverResponse {
   RequestId?: string;
 }
 
+declare interface DeleteEsRechargeRequest {
+  /** 任务id */
+  TaskId: string;
+  /** 任务配置的日志主题id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
+  TopicId: string;
+}
+
+declare interface DeleteEsRechargeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteExportRequest {
   /** 日志导出任务Id- 通过[获取日志下载任务列表](https://cloud.tencent.com/document/product/614/56449)获取日志导出任务Id。 */
   ExportId: string;
 }
 
 declare interface DeleteExportResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteHostMetricConfigRequest {
+  /** 指标日志主题id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。注意BizType 0:日志主题（默认值）， 1:指标主题- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。注意BizType 0:日志主题（默认值）， 1:指标主题 */
+  TopicId: string;
+  /** 采集配置id。 */
+  ConfigId: string;
+}
+
+declare interface DeleteHostMetricConfigResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2874,6 +3516,30 @@ declare interface DeleteMachineGroupResponse {
   RequestId?: string;
 }
 
+declare interface DeleteMetricConfigRequest {
+  /** 指标日志主题id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。注意BizType 0:日志主题（默认值）， 1:指标主题- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。注意BizType 0:日志主题（默认值）， 1:指标主题 */
+  TopicId: string;
+  /** 指标采集配置id。 */
+  ConfigId: string;
+}
+
+declare interface DeleteMetricConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteMetricSubscribeRequest {
+  /** 指标采集任务id */
+  TaskId: string;
+  /** 指标采集任务配置的日志主题id。 */
+  TopicId: string;
+}
+
+declare interface DeleteMetricSubscribeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteNoticeContentRequest {
   /** 通知内容模板ID。-通过[获取通知内容模板](https://cloud.tencent.com/document/api/614/111714)获取通知内容模版ID */
   NoticeContentId: string;
@@ -2902,6 +3568,18 @@ declare interface DeleteShipperRequest {
 }
 
 declare interface DeleteShipperResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSplunkDeliverRequest {
+  /** 任务id */
+  TaskId: string;
+  /** 日志主题id- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  TopicId: string;
+}
+
+declare interface DeleteSplunkDeliverResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3024,6 +3702,46 @@ declare interface DescribeCloudProductLogTasksResponse {
   RequestId?: string;
 }
 
+declare interface DescribeClusterBaseMetricConfigsRequest {
+  /** 机器组id */
+  GroupId: string;
+  /** topicId按照【指标主题id】进行过滤。类型：String 必选：否 每次请求的Filters的上限为10，所有Filter.Values总和上限为100。 */
+  Filters?: Filter[];
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
+}
+
+declare interface DescribeClusterBaseMetricConfigsResponse {
+  /** 总数目 */
+  TotalCount?: number;
+  /** 指标采集配置列表 */
+  Datas?: BaseMetricCollectConfig[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterMetricConfigsRequest {
+  /** 机器组id */
+  GroupId: string;
+  /** configId按照【指标采集配置id】进行过滤。类型：String 必选：否 name按照【配置名称】进行过滤。类型：String 必选：否 每次请求的Filters的上限为10，所有Filter.Values总和上限为100。 */
+  Filters?: Filter[];
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
+}
+
+declare interface DescribeClusterMetricConfigsResponse {
+  /** 总数目 */
+  TotalCount?: number;
+  /** 指标采集配置列表 */
+  Datas?: MetricCollectConfig[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeConfigExtrasRequest {
   /** 过滤器，支持如下选项：name- 按照【特殊采集配置名称】进行模糊匹配过滤。- 类型：String- 示例：test-configconfigExtraId- 按照【特殊采集配置ID】进行过滤。- 类型：String- 示例：3b83f9d6-3a4d-47f9-9b7f-285c868b2f9atopicId- 按照【日志主题】进行过滤。- 类型：String- 示例：3581a3be-aa41-423b-995a-54ec84da6264machineGroupId- 按照【机器组ID】进行过滤。- 类型：String- 示例：f948972f-a063-408c-a59f-8c3230bddaf6每次请求的Filters的上限为10，Filter.Values的上限为5。 */
   Filters?: Filter[];
@@ -3084,6 +3802,50 @@ declare interface DescribeConsoleSharingListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeConsumerGroupsRequest {
+  /** 日志集Id（日志主题所属的日志集） */
+  LogsetId: string;
+  /** topic列表 */
+  Topics?: string[];
+}
+
+declare interface DescribeConsumerGroupsResponse {
+  /** 消费组详情列表 */
+  ConsumerGroupsInfo?: ConsumerGroupInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConsumerOffsetsRequest {
+  /** 日志主题对应的消费组标识 */
+  ConsumerGroup: string;
+  /** 时间戳(秒级时间戳) */
+  From: string;
+  /** 日志集id(日志主题对应的id) */
+  LogsetId: string;
+  /** 日志主题id */
+  TopicId?: string;
+  /** 分区id */
+  PartitionId?: string;
+}
+
+declare interface DescribeConsumerOffsetsResponse {
+  /** 消费者组标识 */
+  ConsumerGroup?: string;
+  /** 消费点位信息 */
+  TopicPartitionOffsetsInfo?: TopicPartitionOffsetInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConsumerPreviewRequest {
+}
+
+declare interface DescribeConsumerPreviewResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeConsumerRequest {
   /** 投递任务绑定的日志主题Id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
   TopicId: string;
@@ -3100,6 +3862,24 @@ declare interface DescribeConsumerResponse {
   Ckafka?: Ckafka;
   /** 压缩方式[0:NONE；2:SNAPPY；3:LZ4] */
   Compression?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConsumersRequest {
+  /** - consumerId按照【投递规则ID】进行过滤。类型：String必选：否- topicId按照【日志主题】进行过滤。类型：String必选：否- taskStatus按照【任务运行状态】进行过滤。 支持`0`：停止，`1`：运行中，`2`：异常类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为10。 */
+  Filters?: Filter[];
+  /** 分页的偏移量，默认值为0 */
+  Offset?: number;
+  /** 分页单页的限制数目，默认值为20，最大值100 */
+  Limit?: number;
+}
+
+declare interface DescribeConsumersResponse {
+  /** 投递规则列表 */
+  Consumers?: ConsumerInfo[] | null;
+  /** 本次查询获取到的总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3200,6 +3980,50 @@ declare interface DescribeDlcDeliversResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEsRechargePreviewRequest {
+  /** 名称：长度不超过64字符。 */
+  Name: string;
+  /** 日志主题id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
+  TopicId: string;
+  /** 索引信息。不同索引可以通过英文逗号分隔，支持*通配符 */
+  Index: string;
+  /** es查询语句。 */
+  Query: string;
+  /** es集群配置信息。 */
+  EsInfo: EsInfo;
+  /** es导入信息。 */
+  ImportInfo: EsImportInfo;
+  /** es导入时间字段信息。 */
+  TimeInfo: EsTimeInfo;
+}
+
+declare interface DescribeEsRechargePreviewResponse {
+  /** 预览数据信息 */
+  Data?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeEsRechargesRequest {
+  /** 日志主题id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
+  TopicId: string;
+  /** - taskId按照【配置id】进行过滤。类型：String 必选：否- name按照【配置名称】进行过滤。类型：String 必选：否- statusFlag按照【配置状态标记】进行过滤。类型：String 必选：否- 每次请求的Filters的上限为10，Filter.Values的上限为100。 */
+  Filters?: Filter[];
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
+}
+
+declare interface DescribeEsRechargesResponse {
+  /** 总数目 */
+  TotalCount?: number;
+  /** es导入配置信息 */
+  Infos?: EsRechargeInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeExportsRequest {
   /** 日志主题Id- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
@@ -3214,6 +4038,26 @@ declare interface DescribeExportsResponse {
   Exports?: ExportInfo[];
   /** 总数目 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeHostMetricConfigsRequest {
+  /** 指标日志主题id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。注意BizType 0:日志主题（默认值）， 1:指标主题- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。注意BizType 0:日志主题（默认值）， 1:指标主题 */
+  TopicId: string;
+  /** - configId按照【配置id】进行过滤。类型：String 必选：否- name按照【配置名称】进行过滤。类型：String 必选：否每次请求的Filters的上限为10，Filter.Values的上限为10。 */
+  Filters?: Filter[];
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
+}
+
+declare interface DescribeHostMetricConfigsResponse {
+  /** 总数目 */
+  TotalCount?: number;
+  /** 指标订阅配置信息 */
+  Infos?: HostMetricConfig[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3286,6 +4130,14 @@ declare interface DescribeKafkaConsumerGroupListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeKafkaConsumerPreviewRequest {
+}
+
+declare interface DescribeKafkaConsumerPreviewResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeKafkaConsumerRequest {
   /** 日志主题Id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
   FromTopicId: string;
@@ -3300,6 +4152,14 @@ declare interface DescribeKafkaConsumerResponse {
   Compression?: number;
   /** kafka协议消费数据格式 */
   ConsumerContent?: KafkaConsumerContent;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeKafkaConsumerTopicsRequest {
+}
+
+declare interface DescribeKafkaConsumerTopicsResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3458,6 +4318,58 @@ declare interface DescribeMachinesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMetricCorrectDimensionRequest {
+}
+
+declare interface DescribeMetricCorrectDimensionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMetricSubscribePreviewRequest {
+  /** 云产品命名空间。 */
+  Namespace: string;
+  /** 数据库配置信息。 */
+  Metrics: MetricConfig[];
+  /** 实例配置配置。 */
+  InstanceInfo: InstanceConfig;
+}
+
+declare interface DescribeMetricSubscribePreviewResponse {
+  /** 总数量 */
+  TotalCount?: number;
+  /** 成功数量 */
+  SuccessCount?: number;
+  /** 失败数量 */
+  FailCount?: number;
+  /** 成功实例数据 */
+  SuccessInstances?: InstanceData[];
+  /** 失败实例数据 */
+  FailInstances?: InstanceData[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMetricSubscribesRequest {
+  /** 日志主题id */
+  TopicId: string;
+  /** taskId按照【配置id】进行过滤。类型：String 必选：否 name按照【配置名称】进行过滤。类型：String 必选：否 status按照【配置状态标记】进行过滤。类型：String 必选：否 每次请求的Filters的上限为10，Filter.Values的上限为100。 */
+  Filters?: Filter[];
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
+}
+
+declare interface DescribeMetricSubscribesResponse {
+  /** 总数目 */
+  TotalCount?: number;
+  /** 指标订阅配置信息 */
+  Datas?: MetricSubscribeInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeNoticeContentsRequest {
   /** name按照【通知内容模板名称】进行过滤。类型：String必选：否 noticeContentId按照【通知内容模板ID】进行过滤。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为100。 */
   Filters?: Filter[];
@@ -3546,6 +4458,80 @@ declare interface DescribeShippersResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSplunkDeliversRequest {
+  /** 日志主题Id- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  TopicId: string;
+  /** - taskId 按照【任务id】进行过滤。 类型：String 必选：否 - name 按照【任务名称】进行过滤。 类型：String 必选：否 - statusFlag 按照【状态】进行过滤。 类型：String 必选：否 每次请求的Filters的上限为10，Filter.Values的上限为10。 */
+  Filters?: Filter[];
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
+}
+
+declare interface DescribeSplunkDeliversResponse {
+  /** Splunk投递任务信息列表 */
+  Infos?: SplunkDeliverInfo[];
+  /** 符合条件的任务总数。 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSplunkPreviewRequest {
+  /** 日志主题id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  TopicId: string;
+  /** splunk投递任务-元信息 */
+  MetadataInfo: MetadataInfo;
+}
+
+declare interface DescribeSplunkPreviewResponse {
+  /** 预览结果 */
+  PreviewInfos?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTopicBaseMetricConfigsRequest {
+  /** 指标日志主题id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。注意BizType 0:日志主题（默认值）， 1:指标主题- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。注意BizType 0:日志主题（默认值）， 1:指标主题 */
+  TopicId: string;
+  /** groupId按照【机器组id】进行过滤。类型：String 必选：否每次请求的Filters的上限为10，所有Filter.Values总和上限为100。 */
+  Filters?: Filter[];
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
+}
+
+declare interface DescribeTopicBaseMetricConfigsResponse {
+  /** 总数目 */
+  TotalCount?: number;
+  /** 指标采集配置列表 */
+  Datas?: BaseMetricCollectConfig[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTopicMetricConfigsRequest {
+  /** 指标日志主题id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。注意BizType 0:日志主题（默认值）， 1:指标主题- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。注意BizType 0:日志主题（默认值）， 1:指标主题 */
+  TopicId: string;
+  /** configId按照【指标采集配置id】进行过滤。类型：String 必选：否name按照【配置名称】进行过滤。类型：String 必选：否每次请求的Filters的上限为10，所有Filter.Values总和上限为100。 */
+  Filters?: Filter[];
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
+}
+
+declare interface DescribeTopicMetricConfigsResponse {
+  /** 总数目 */
+  TotalCount?: number;
+  /** 指标采集配置列表 */
+  Datas?: MetricCollectConfig[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTopicsRequest {
   /** topicName 按照【主题名称】进行过滤，默认为模糊匹配，可使用 PreciseSearch 参数设置为精确匹配。类型：String。必选：否logsetName 按照【日志集名称】进行过滤，默认为模糊匹配，可使用 PreciseSearch 参数设置为精确匹配。类型：String。必选：否topicId 按照【主题ID】进行过滤。类型：String。必选：否logsetId 按照【日志集ID】进行过滤，可通过调用 DescribeLogsets 查询已创建的日志集列表或登录控制台进行查看；也可以调用CreateLogset 创建新的日志集。类型：String。必选：否tagKey 按照【标签键】进行过滤。类型：String。必选：否tag:tagKey 按照【标签键值对】进行过滤。tagKey 使用具体的标签键进行替换，例如 tag:exampleKey。类型：String。必选：否storageType 按照【主题的存储类型】进行过滤。可选值 hot（标准存储），cold（低频存储）类型：String。必选：否注意：每次请求的 Filters 的上限为10，Filter.Values 的上限为100。 */
   Filters?: Filter[];
@@ -3620,6 +4606,16 @@ declare interface GetAlarmLogResponse {
   AnalysisRecords?: string[] | null;
   /** 分析结果的列名， UseNewAnalysis为true有效 */
   Columns?: Column[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetMetricLabelValuesRequest {
+}
+
+declare interface GetMetricLabelValuesResponse {
+  /** 时序metric label values */
+  Values?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3844,6 +4840,22 @@ declare interface ModifyConsoleSharingResponse {
   RequestId?: string;
 }
 
+declare interface ModifyConsumerGroupRequest {
+  /** 更新的目标消费者组标识 */
+  ConsumerGroup: string;
+  /** 消费者心跳超时时间（秒） */
+  Timeout: number;
+  /** 更新的消费者组包含的日志主题列表 */
+  Topics: string[];
+  /** 日志集Id（日志主题所属的日志集） */
+  LogsetId: string;
+}
+
+declare interface ModifyConsumerGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyConsumerRequest {
   /** 投递任务绑定的日志主题Id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
   TopicId: string;
@@ -3980,6 +4992,54 @@ declare interface ModifyDlcDeliverResponse {
   RequestId?: string;
 }
 
+declare interface ModifyEsRechargeRequest {
+  /** 导入任务id。 */
+  TaskId: string;
+  /** 日志主题id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
+  TopicId: string;
+  /** 名称：长度不超过64字符。 */
+  Name?: string;
+  /** 索引信息。不同索引可以通过英文逗号分隔，支持*通配符 */
+  Index?: string;
+  /** es查询语句。 */
+  Query?: string;
+  /** es集群配置信息。 */
+  EsInfo?: EsInfo;
+  /** es导入信息。 */
+  ImportInfo?: EsImportInfo;
+  /** es导入时间字段信息。 */
+  TimeInfo?: EsTimeInfo;
+  /** 任务状态。1:运行， 2:暂停 */
+  Status?: number;
+  /** 是否开启投递服务日志。1：关闭，2：开启。 */
+  HasServicesLog?: number;
+}
+
+declare interface ModifyEsRechargeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyHostMetricConfigRequest {
+  /** 指标日志主题id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。注意BizType 0:日志主题（默认值）， 1:指标主题- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。注意BizType 0:日志主题（默认值）， 1:指标主题 */
+  TopicId: string;
+  /** 采集配置id */
+  ConfigId: string;
+  /** 名称。- 长度不超过 64字符。 */
+  Name?: string;
+  /** 机器组id列表。最多支持100个机器组。 */
+  MachineGroupIds?: string[];
+  /** 采集频率。单位:ms。 最小支持5000ms */
+  Interval?: number;
+  /** 采集项。支持"cpu"，"mem"，"net"，"disk"，"system"。**目前仅支持:所有采集项都需配置**。- cpu：CPU- mem：内存- net：网络- disk：磁盘- system：系统 */
+  HostMetricItems?: HostMetricItem[];
+}
+
+declare interface ModifyHostMetricConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyIndexRequest {
   /** 日志主题Id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
@@ -4100,6 +5160,62 @@ declare interface ModifyMachineGroupResponse {
   RequestId?: string;
 }
 
+declare interface ModifyMetricConfigRequest {
+  /** 指标日志主题id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。注意BizType 0:日志主题（默认值）， 1:指标主题- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。注意BizType 0:日志主题（默认值）， 1:指标主题 */
+  TopicId: string;
+  /** 指标采集配置id */
+  ConfigId: string;
+  /** 采集配置来源。支持 ：`0`、`1`- 0:自建k8s- 1:TKE */
+  Source?: number;
+  /** 机器组id。 */
+  GroupIds?: string[];
+  /** 操作状态,0:应用,1:暂停 */
+  Operate?: number;
+  /** 采集对象, Flag=0时生效 */
+  Spec?: MetricSpec;
+  /** 标签处理, Flag=0时生效 */
+  MetricRelabels?: Relabeling[];
+  /** 自定义元数据, Flag=0时生效 */
+  MetricLabel?: MetricConfigLabel;
+  /** 通信协议 `http`、`https`；Flag=0时生效 */
+  Scheme?: string;
+  /** 采集频率, Flag=0时生效- 校验格式：`^(((\d+)y)?((\d+)w)?((\d+)d)?((\d+)h)?((\d+)m)?((\d+)s)?((\d+)ms)?|0)$`- 默认：60s */
+  ScrapeInterval?: string;
+  /** 采集超时时间。 Flag=0时生效- 校验格式：`^(((\d+)y)?((\d+)w)?((\d+)d)?((\d+)h)?((\d+)m)?((\d+)s)?((\d+)ms)?|0)$` */
+  ScrapeTimeout?: string;
+  /** Prometheus如何处理标签之间的冲突。当Flag=0 && Type=1时生效，支持`true`,`false`- `false`:配置数据中冲突的标签重命名- `true`:忽略冲突的服务器端标签 */
+  HonorLabels?: boolean;
+  /** 采集配置yaml格式字符串, Flag=1时必填 */
+  YamlSpec?: MetricYamlSpec;
+}
+
+declare interface ModifyMetricConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyMetricSubscribeRequest {
+  /** 指标采集任务的日志主题id。必填字段 */
+  TopicId: string;
+  /** 指标采集任务id。必填字段 */
+  TaskId: string;
+  /** 名称：长度不超过64字符，以字母开头，接受0-9,a-z,A-Z, _,-,中文字符。 */
+  Name?: string;
+  /** 云产品命名空间。 */
+  Namespace?: string;
+  /** 指标配置信息。 */
+  Metrics?: MetricConfig[];
+  /** 实例配置信息。 */
+  InstanceInfo?: InstanceConfig;
+  /** 任务状态。1： 未启用2： 启用 */
+  Enable?: number;
+}
+
+declare interface ModifyMetricSubscribeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyNoticeContentRequest {
   /** 通知内容模板ID。-通过[获取通知内容模板](https://cloud.tencent.com/document/api/614/111714)获取通知内容模板ID */
   NoticeContentId: string;
@@ -4180,6 +5296,38 @@ declare interface ModifyShipperRequest {
 }
 
 declare interface ModifyShipperResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySplunkDeliverRequest {
+  /** 任务id */
+  TaskId: string;
+  /** 日志主题id- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  TopicId: string;
+  /** 投递任务名称name有以下限制：- 不能为空- 长度不大于64- 只能包含aA-zZ、下划线、-、0-9 */
+  Name?: string;
+  /** 投递任务启用状态；0:禁用；1:启用 */
+  Enable?: number;
+  /** splunk投递任务-目标配置 */
+  NetInfo?: NetInfo;
+  /** splunk投递任务元信息 */
+  MetadataInfo?: MetadataInfo;
+  /** 是否启用服务日志；1:关闭；2:开启 */
+  HasServiceLog?: number;
+  /** 高级配置-是否启用索引器;1-不开启；2-开启；默认为：1 */
+  IndexAck?: number;
+  /** 高级配置-数据来源；不超过64个字符 */
+  Source?: string;
+  /** 高级配置-数据来源类型；不超过64个字符 */
+  SourceType?: string;
+  /** 高级配置-Splunk写入的索引；不超过64个字符 */
+  Index?: string;
+  /** 高级配置-通道。需满足限制：如果启用索引器，该值不能为空 */
+  Channel?: string;
+}
+
+declare interface ModifySplunkDeliverResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4448,6 +5596,26 @@ declare interface SearchLogResponse {
   RequestId?: string;
 }
 
+declare interface SendConsumerHeartbeatRequest {
+  /** 上报心跳的消费组标识 */
+  ConsumerGroup: string;
+  /** 上报心跳的消费者名称（字母数字下划线，不允许数字、_开头， 长度小于256） */
+  Consumer: string;
+  /** 日志集ID */
+  LogsetId: string;
+  /** topic 分区信息 */
+  TopicPartitionsInfo: TopicPartitionInfo[];
+}
+
+declare interface SendConsumerHeartbeatResponse {
+  /** 日志主题对应的消费组标识 */
+  ConsumerGroup?: string;
+  /** 分区信息 */
+  TopicPartitionsInfo?: TopicPartitionInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SplitPartitionRequest {
   /** 日志主题Id- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   TopicId: string;
@@ -4493,6 +5661,8 @@ declare interface Cls {
   CheckRechargeKafkaServer(data: CheckRechargeKafkaServerRequest, config?: AxiosRequestConfig): AxiosPromise<CheckRechargeKafkaServerResponse>;
   /** 关闭Kafka协议消费 {@link CloseKafkaConsumerRequest} {@link CloseKafkaConsumerResponse} */
   CloseKafkaConsumer(data: CloseKafkaConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<CloseKafkaConsumerResponse>;
+  /** 提交消费点位 {@link CommitConsumerOffsetsRequest} {@link CommitConsumerOffsetsResponse} */
+  CommitConsumerOffsets(data: CommitConsumerOffsetsRequest, config?: AxiosRequestConfig): AxiosPromise<CommitConsumerOffsetsResponse>;
   /** 创建告警策略 {@link CreateAlarmRequest} {@link CreateAlarmResponse} */
   CreateAlarm(data: CreateAlarmRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlarmResponse>;
   /** 创建通知渠道组 {@link CreateAlarmNoticeRequest} {@link CreateAlarmNoticeResponse} */
@@ -4509,6 +5679,8 @@ declare interface Cls {
   CreateConsoleSharing(data: CreateConsoleSharingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsoleSharingResponse>;
   /** 创建投递Ckafka任务 {@link CreateConsumerRequest} {@link CreateConsumerResponse} */
   CreateConsumer(data: CreateConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerResponse>;
+  /** 创建消费组 {@link CreateConsumerGroupRequest} {@link CreateConsumerGroupResponse} */
+  CreateConsumerGroup(data: CreateConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerGroupResponse>;
   /** 创建cos导入任务 {@link CreateCosRechargeRequest} {@link CreateCosRechargeResponse} */
   CreateCosRecharge(data: CreateCosRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosRechargeResponse>;
   /** 创建仪表盘订阅 {@link CreateDashboardSubscribeRequest} {@link CreateDashboardSubscribeResponse} */
@@ -4519,8 +5691,12 @@ declare interface Cls {
   CreateDeliverCloudFunction(data: CreateDeliverCloudFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeliverCloudFunctionResponse>;
   /** 创建DLC投递任务 {@link CreateDlcDeliverRequest} {@link CreateDlcDeliverResponse} */
   CreateDlcDeliver(data: CreateDlcDeliverRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDlcDeliverResponse>;
+  /** 创建es导入任务 {@link CreateEsRechargeRequest} {@link CreateEsRechargeResponse} */
+  CreateEsRecharge(data: CreateEsRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEsRechargeResponse>;
   /** 创建日志下载任务 {@link CreateExportRequest} {@link CreateExportResponse} */
   CreateExport(data: CreateExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExportResponse>;
+  /** 创建主机指标采集配置 {@link CreateHostMetricConfigRequest} {@link CreateHostMetricConfigResponse} */
+  CreateHostMetricConfig(data: CreateHostMetricConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostMetricConfigResponse>;
   /** 创建索引 {@link CreateIndexRequest} {@link CreateIndexResponse} */
   CreateIndex(data: CreateIndexRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIndexResponse>;
   /** 创建Kafka数据订阅任务 {@link CreateKafkaRechargeRequest} {@link CreateKafkaRechargeResponse} */
@@ -4529,12 +5705,18 @@ declare interface Cls {
   CreateLogset(data: CreateLogsetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogsetResponse>;
   /** 创建机器组 {@link CreateMachineGroupRequest} {@link CreateMachineGroupResponse} */
   CreateMachineGroup(data: CreateMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMachineGroupResponse>;
+  /** 创建指标采集配置 {@link CreateMetricConfigRequest} {@link CreateMetricConfigResponse} */
+  CreateMetricConfig(data: CreateMetricConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMetricConfigResponse>;
+  /** 创建指标订阅配置 {@link CreateMetricSubscribeRequest} {@link CreateMetricSubscribeResponse} */
+  CreateMetricSubscribe(data: CreateMetricSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMetricSubscribeResponse>;
   /** 创建通知内容模板 {@link CreateNoticeContentRequest} {@link CreateNoticeContentResponse} */
   CreateNoticeContent(data: CreateNoticeContentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNoticeContentResponse>;
   /** 创建定时SQL分析任务 {@link CreateScheduledSqlRequest} {@link CreateScheduledSqlResponse} */
   CreateScheduledSql(data: CreateScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScheduledSqlResponse>;
   /** 新建投递到COS的任务 {@link CreateShipperRequest} {@link CreateShipperResponse} */
   CreateShipper(data: CreateShipperRequest, config?: AxiosRequestConfig): AxiosPromise<CreateShipperResponse>;
+  /** 创建Splunk投递任务 {@link CreateSplunkDeliverRequest} {@link CreateSplunkDeliverResponse} */
+  CreateSplunkDeliver(data: CreateSplunkDeliverRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSplunkDeliverResponse>;
   /** 创建主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
   /** 创建告警渠道回调配置 {@link CreateWebCallbackRequest} {@link CreateWebCallbackResponse} */
@@ -4557,6 +5739,8 @@ declare interface Cls {
   DeleteConsoleSharing(data: DeleteConsoleSharingRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsoleSharingResponse>;
   /** 删除投递Ckafka任务 {@link DeleteConsumerRequest} {@link DeleteConsumerResponse} */
   DeleteConsumer(data: DeleteConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsumerResponse>;
+  /** 删除消费组 {@link DeleteConsumerGroupRequest} {@link DeleteConsumerGroupResponse} */
+  DeleteConsumerGroup(data: DeleteConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsumerGroupResponse>;
   /** 删除cos导入任务 {@link DeleteCosRechargeRequest} {@link DeleteCosRechargeResponse} */
   DeleteCosRecharge(data: DeleteCosRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCosRechargeResponse>;
   /** 删除仪表盘订阅 {@link DeleteDashboardSubscribeRequest} {@link DeleteDashboardSubscribeResponse} */
@@ -4565,8 +5749,12 @@ declare interface Cls {
   DeleteDataTransform(data: DeleteDataTransformRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataTransformResponse>;
   /** 删除DLC投递任务 {@link DeleteDlcDeliverRequest} {@link DeleteDlcDeliverResponse} */
   DeleteDlcDeliver(data: DeleteDlcDeliverRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDlcDeliverResponse>;
+  /** 删除es导入配置 {@link DeleteEsRechargeRequest} {@link DeleteEsRechargeResponse} */
+  DeleteEsRecharge(data: DeleteEsRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEsRechargeResponse>;
   /** 删除日志下载任务 {@link DeleteExportRequest} {@link DeleteExportResponse} */
   DeleteExport(data: DeleteExportRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteExportResponse>;
+  /** 删除主机指标采集配置 {@link DeleteHostMetricConfigRequest} {@link DeleteHostMetricConfigResponse} */
+  DeleteHostMetricConfig(data: DeleteHostMetricConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHostMetricConfigResponse>;
   /** 删除索引配置 {@link DeleteIndexRequest} {@link DeleteIndexResponse} */
   DeleteIndex(data: DeleteIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIndexResponse>;
   /** 删除Kafka数据订阅任务 {@link DeleteKafkaRechargeRequest} {@link DeleteKafkaRechargeResponse} */
@@ -4577,12 +5765,18 @@ declare interface Cls {
   DeleteMachineGroup(data: DeleteMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineGroupResponse>;
   /** 删除机器组信息 {@link DeleteMachineGroupInfoRequest} {@link DeleteMachineGroupInfoResponse} */
   DeleteMachineGroupInfo(data: DeleteMachineGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineGroupInfoResponse>;
+  /** 删除指标采集配置 {@link DeleteMetricConfigRequest} {@link DeleteMetricConfigResponse} */
+  DeleteMetricConfig(data: DeleteMetricConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMetricConfigResponse>;
+  /** 删除指标订阅配置 {@link DeleteMetricSubscribeRequest} {@link DeleteMetricSubscribeResponse} */
+  DeleteMetricSubscribe(data: DeleteMetricSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMetricSubscribeResponse>;
   /** 删除通知内容模板 {@link DeleteNoticeContentRequest} {@link DeleteNoticeContentResponse} */
   DeleteNoticeContent(data: DeleteNoticeContentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNoticeContentResponse>;
   /** 删除定时SQL分析任务 {@link DeleteScheduledSqlRequest} {@link DeleteScheduledSqlResponse} */
   DeleteScheduledSql(data: DeleteScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScheduledSqlResponse>;
   /** 删除投递COS任务 {@link DeleteShipperRequest} {@link DeleteShipperResponse} */
   DeleteShipper(data: DeleteShipperRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShipperResponse>;
+  /** 删除Splunk投递任务 {@link DeleteSplunkDeliverRequest} {@link DeleteSplunkDeliverResponse} */
+  DeleteSplunkDeliver(data: DeleteSplunkDeliverRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSplunkDeliverResponse>;
   /** 删除主题 {@link DeleteTopicRequest} {@link DeleteTopicResponse} */
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
   /** 删除告警渠道回调配置 {@link DeleteWebCallbackRequest} {@link DeleteWebCallbackResponse} */
@@ -4597,6 +5791,10 @@ declare interface Cls {
   DescribeAlertRecordHistory(data: DescribeAlertRecordHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlertRecordHistoryResponse>;
   /** 查看云产品日志投递任务列表 {@link DescribeCloudProductLogTasksRequest} {@link DescribeCloudProductLogTasksResponse} */
   DescribeCloudProductLogTasks(data?: DescribeCloudProductLogTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudProductLogTasksResponse>;
+  /** 获取集群指标基础监控采集配置 {@link DescribeClusterBaseMetricConfigsRequest} {@link DescribeClusterBaseMetricConfigsResponse} */
+  DescribeClusterBaseMetricConfigs(data: DescribeClusterBaseMetricConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterBaseMetricConfigsResponse>;
+  /** 获取集群指标采集配置 {@link DescribeClusterMetricConfigsRequest} {@link DescribeClusterMetricConfigsResponse} */
+  DescribeClusterMetricConfigs(data: DescribeClusterMetricConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterMetricConfigsResponse>;
   /** 获取特殊采集配置 {@link DescribeConfigExtrasRequest} {@link DescribeConfigExtrasResponse} */
   DescribeConfigExtras(data?: DescribeConfigExtrasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigExtrasResponse>;
   /** 获取采集规则配置所绑定的机器组 {@link DescribeConfigMachineGroupsRequest} {@link DescribeConfigMachineGroupsResponse} */
@@ -4607,6 +5805,14 @@ declare interface Cls {
   DescribeConsoleSharingList(data?: DescribeConsoleSharingListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsoleSharingListResponse>;
   /** 获取投递配置 {@link DescribeConsumerRequest} {@link DescribeConsumerResponse} */
   DescribeConsumer(data: DescribeConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerResponse>;
+  /** 获取消费组列表 {@link DescribeConsumerGroupsRequest} {@link DescribeConsumerGroupsResponse} */
+  DescribeConsumerGroups(data: DescribeConsumerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerGroupsResponse>;
+  /** 获取消费组点位信息 {@link DescribeConsumerOffsetsRequest} {@link DescribeConsumerOffsetsResponse} */
+  DescribeConsumerOffsets(data: DescribeConsumerOffsetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerOffsetsResponse>;
+  /** 投递kafka数据预览 {@link DescribeConsumerPreviewRequest} {@link DescribeConsumerPreviewResponse} */
+  DescribeConsumerPreview(data?: DescribeConsumerPreviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerPreviewResponse>;
+  /** 获取投递到Ckafka的任务配置列表 {@link DescribeConsumersRequest} {@link DescribeConsumersResponse} */
+  DescribeConsumers(data?: DescribeConsumersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumersResponse>;
   /** 获取cos导入配置 {@link DescribeCosRechargesRequest} {@link DescribeCosRechargesResponse} */
   DescribeCosRecharges(data: DescribeCosRechargesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosRechargesResponse>;
   /** 获取仪表盘订阅列表 {@link DescribeDashboardSubscribesRequest} {@link DescribeDashboardSubscribesResponse} */
@@ -4617,8 +5823,14 @@ declare interface Cls {
   DescribeDataTransformInfo(data?: DescribeDataTransformInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataTransformInfoResponse>;
   /** 获取DLC投递任务列表 {@link DescribeDlcDeliversRequest} {@link DescribeDlcDeliversResponse} */
   DescribeDlcDelivers(data: DescribeDlcDeliversRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDlcDeliversResponse>;
+  /** es导入预览 {@link DescribeEsRechargePreviewRequest} {@link DescribeEsRechargePreviewResponse} */
+  DescribeEsRechargePreview(data: DescribeEsRechargePreviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEsRechargePreviewResponse>;
+  /** 获取es导入配置 {@link DescribeEsRechargesRequest} {@link DescribeEsRechargesResponse} */
+  DescribeEsRecharges(data: DescribeEsRechargesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEsRechargesResponse>;
   /** 获取日志下载任务列表 {@link DescribeExportsRequest} {@link DescribeExportsResponse} */
   DescribeExports(data: DescribeExportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportsResponse>;
+  /** 获取主机指标采集配置列表 {@link DescribeHostMetricConfigsRequest} {@link DescribeHostMetricConfigsResponse} */
+  DescribeHostMetricConfigs(data: DescribeHostMetricConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostMetricConfigsResponse>;
   /** 获取索引配置信息 {@link DescribeIndexRequest} {@link DescribeIndexResponse} */
   DescribeIndex(data: DescribeIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexResponse>;
   /** 获取Kafka协议消费信息 {@link DescribeKafkaConsumerRequest} {@link DescribeKafkaConsumerResponse} */
@@ -4627,6 +5839,10 @@ declare interface Cls {
   DescribeKafkaConsumerGroupDetail(data: DescribeKafkaConsumerGroupDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKafkaConsumerGroupDetailResponse>;
   /** 获取Kafka协议消费组列表 {@link DescribeKafkaConsumerGroupListRequest} {@link DescribeKafkaConsumerGroupListResponse} */
   DescribeKafkaConsumerGroupList(data: DescribeKafkaConsumerGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKafkaConsumerGroupListResponse>;
+  /** kafka协议消费预览接口 {@link DescribeKafkaConsumerPreviewRequest} {@link DescribeKafkaConsumerPreviewResponse} */
+  DescribeKafkaConsumerPreview(data?: DescribeKafkaConsumerPreviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKafkaConsumerPreviewResponse>;
+  /** 获取kafka协议消费主题信息列表 {@link DescribeKafkaConsumerTopicsRequest} {@link DescribeKafkaConsumerTopicsResponse} */
+  DescribeKafkaConsumerTopics(data?: DescribeKafkaConsumerTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKafkaConsumerTopicsResponse>;
   /** 获取Kafka数据订阅任务列表 {@link DescribeKafkaRechargesRequest} {@link DescribeKafkaRechargesResponse} */
   DescribeKafkaRecharges(data: DescribeKafkaRechargesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKafkaRechargesResponse>;
   /** 上下文检索 {@link DescribeLogContextRequest} {@link DescribeLogContextResponse} */
@@ -4641,6 +5857,12 @@ declare interface Cls {
   DescribeMachineGroups(data?: DescribeMachineGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineGroupsResponse>;
   /** 获取机器状态 {@link DescribeMachinesRequest} {@link DescribeMachinesResponse} */
   DescribeMachines(data: DescribeMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachinesResponse>;
+  /** 获取指标校准维度信息 {@link DescribeMetricCorrectDimensionRequest} {@link DescribeMetricCorrectDimensionResponse} */
+  DescribeMetricCorrectDimension(data?: DescribeMetricCorrectDimensionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMetricCorrectDimensionResponse>;
+  /** 指标订阅数据预览 {@link DescribeMetricSubscribePreviewRequest} {@link DescribeMetricSubscribePreviewResponse} */
+  DescribeMetricSubscribePreview(data: DescribeMetricSubscribePreviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMetricSubscribePreviewResponse>;
+  /** 获取指标订阅配置 {@link DescribeMetricSubscribesRequest} {@link DescribeMetricSubscribesResponse} */
+  DescribeMetricSubscribes(data: DescribeMetricSubscribesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMetricSubscribesResponse>;
   /** 获取通知内容模板 {@link DescribeNoticeContentsRequest} {@link DescribeNoticeContentsResponse} */
   DescribeNoticeContents(data?: DescribeNoticeContentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNoticeContentsResponse>;
   /** 获取分区列表 {@link DescribePartitionsRequest} {@link DescribePartitionsResponse} */
@@ -4651,12 +5873,22 @@ declare interface Cls {
   DescribeShipperTasks(data: DescribeShipperTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShipperTasksResponse>;
   /** 获取投递到COS的任务配置信息 {@link DescribeShippersRequest} {@link DescribeShippersResponse} */
   DescribeShippers(data?: DescribeShippersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShippersResponse>;
+  /** 获取Splunk投递任务列表 {@link DescribeSplunkDeliversRequest} {@link DescribeSplunkDeliversResponse} */
+  DescribeSplunkDelivers(data: DescribeSplunkDeliversRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSplunkDeliversResponse>;
+  /** Splunk投递任务预览 {@link DescribeSplunkPreviewRequest} {@link DescribeSplunkPreviewResponse} */
+  DescribeSplunkPreview(data: DescribeSplunkPreviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSplunkPreviewResponse>;
+  /** 获取指标基础监控采集配置 {@link DescribeTopicBaseMetricConfigsRequest} {@link DescribeTopicBaseMetricConfigsResponse} */
+  DescribeTopicBaseMetricConfigs(data: DescribeTopicBaseMetricConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicBaseMetricConfigsResponse>;
+  /** 获取指标采集配置 {@link DescribeTopicMetricConfigsRequest} {@link DescribeTopicMetricConfigsResponse} */
+  DescribeTopicMetricConfigs(data: DescribeTopicMetricConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicMetricConfigsResponse>;
   /** 获取主题列表 {@link DescribeTopicsRequest} {@link DescribeTopicsResponse} */
   DescribeTopics(data?: DescribeTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicsResponse>;
   /** 获取告警渠道回调配置列表 {@link DescribeWebCallbacksRequest} {@link DescribeWebCallbacksResponse} */
   DescribeWebCallbacks(data?: DescribeWebCallbacksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebCallbacksResponse>;
   /** 获取告警策略执行详情 {@link GetAlarmLogRequest} {@link GetAlarmLogResponse} */
   GetAlarmLog(data: GetAlarmLogRequest, config?: AxiosRequestConfig): AxiosPromise<GetAlarmLogResponse>;
+  /** 获取指标标签列表 {@link GetMetricLabelValuesRequest} {@link GetMetricLabelValuesResponse} */
+  GetMetricLabelValues(data?: GetMetricLabelValuesRequest, config?: AxiosRequestConfig): AxiosPromise<GetMetricLabelValuesResponse>;
   /** 合并分区 {@link MergePartitionRequest} {@link MergePartitionResponse} */
   MergePartition(data: MergePartitionRequest, config?: AxiosRequestConfig): AxiosPromise<MergePartitionResponse>;
   /** 修改告警策略 {@link ModifyAlarmRequest} {@link ModifyAlarmResponse} */
@@ -4675,6 +5907,8 @@ declare interface Cls {
   ModifyConsoleSharing(data: ModifyConsoleSharingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsoleSharingResponse>;
   /** 修改投递Ckafka任务 {@link ModifyConsumerRequest} {@link ModifyConsumerResponse} */
   ModifyConsumer(data: ModifyConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsumerResponse>;
+  /** 更新消费组信息 {@link ModifyConsumerGroupRequest} {@link ModifyConsumerGroupResponse} */
+  ModifyConsumerGroup(data: ModifyConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsumerGroupResponse>;
   /** 修改cos导入任务 {@link ModifyCosRechargeRequest} {@link ModifyCosRechargeResponse} */
   ModifyCosRecharge(data: ModifyCosRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCosRechargeResponse>;
   /** 修改仪表盘订阅 {@link ModifyDashboardSubscribeRequest} {@link ModifyDashboardSubscribeResponse} */
@@ -4683,6 +5917,10 @@ declare interface Cls {
   ModifyDataTransform(data: ModifyDataTransformRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataTransformResponse>;
   /** 修改DLC投递任务 {@link ModifyDlcDeliverRequest} {@link ModifyDlcDeliverResponse} */
   ModifyDlcDeliver(data: ModifyDlcDeliverRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDlcDeliverResponse>;
+  /** 修改es导入任务 {@link ModifyEsRechargeRequest} {@link ModifyEsRechargeResponse} */
+  ModifyEsRecharge(data: ModifyEsRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEsRechargeResponse>;
+  /** 修改主机指标采集配置 {@link ModifyHostMetricConfigRequest} {@link ModifyHostMetricConfigResponse} */
+  ModifyHostMetricConfig(data: ModifyHostMetricConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostMetricConfigResponse>;
   /** 修改索引 {@link ModifyIndexRequest} {@link ModifyIndexResponse} */
   ModifyIndex(data: ModifyIndexRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIndexResponse>;
   /** 修改Kafka协议消费信息 {@link ModifyKafkaConsumerRequest} {@link ModifyKafkaConsumerResponse} */
@@ -4695,12 +5933,18 @@ declare interface Cls {
   ModifyLogset(data: ModifyLogsetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLogsetResponse>;
   /** 修改机器组 {@link ModifyMachineGroupRequest} {@link ModifyMachineGroupResponse} */
   ModifyMachineGroup(data: ModifyMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMachineGroupResponse>;
+  /** 修改指标采集配置 {@link ModifyMetricConfigRequest} {@link ModifyMetricConfigResponse} */
+  ModifyMetricConfig(data: ModifyMetricConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMetricConfigResponse>;
+  /** 修改指标订阅配置 {@link ModifyMetricSubscribeRequest} {@link ModifyMetricSubscribeResponse} */
+  ModifyMetricSubscribe(data: ModifyMetricSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMetricSubscribeResponse>;
   /** 修改通知内容模板 {@link ModifyNoticeContentRequest} {@link ModifyNoticeContentResponse} */
   ModifyNoticeContent(data: ModifyNoticeContentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNoticeContentResponse>;
   /** 修改定时SQL分析任务 {@link ModifyScheduledSqlRequest} {@link ModifyScheduledSqlResponse} */
   ModifyScheduledSql(data: ModifyScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyScheduledSqlResponse>;
   /** 修改投递COS任务 {@link ModifyShipperRequest} {@link ModifyShipperResponse} */
   ModifyShipper(data: ModifyShipperRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyShipperResponse>;
+  /** 修改splunk任务投递信息 {@link ModifySplunkDeliverRequest} {@link ModifySplunkDeliverResponse} */
+  ModifySplunkDeliver(data: ModifySplunkDeliverRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySplunkDeliverResponse>;
   /** 修改主题 {@link ModifyTopicRequest} {@link ModifyTopicResponse} */
   ModifyTopic(data: ModifyTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicResponse>;
   /** 修改告警渠道回调配置 {@link ModifyWebCallbackRequest} {@link ModifyWebCallbackResponse} */
@@ -4721,6 +5965,8 @@ declare interface Cls {
   SearchDashboardSubscribe(data: SearchDashboardSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<SearchDashboardSubscribeResponse>;
   /** 检索分析日志 {@link SearchLogRequest} {@link SearchLogResponse} */
   SearchLog(data: SearchLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchLogResponse>;
+  /** 消费组心跳 {@link SendConsumerHeartbeatRequest} {@link SendConsumerHeartbeatResponse} */
+  SendConsumerHeartbeat(data: SendConsumerHeartbeatRequest, config?: AxiosRequestConfig): AxiosPromise<SendConsumerHeartbeatResponse>;
   /** 分裂主题分区 {@link SplitPartitionRequest} {@link SplitPartitionResponse} */
   SplitPartition(data: SplitPartitionRequest, config?: AxiosRequestConfig): AxiosPromise<SplitPartitionResponse>;
   /** 上传日志 {@link UploadLogRequest} {@link UploadLogResponse} */

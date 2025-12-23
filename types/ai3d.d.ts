@@ -39,7 +39,7 @@ declare interface ViewImage {
 }
 
 declare interface Convert3DFormatRequest {
-  /** 3D文件url地址。 */
+  /** 3D文件url地址，模型文件大小≤60m，支持fbx，obj，glb格式3D文件输入。 */
   File3D: string;
   /** 返回的3D文件格式，参考值：STL, USDZ, FBX, MP4, GIF。 */
   Format: string;
@@ -175,11 +175,11 @@ declare interface SubmitHunyuan3DPartJobResponse {
 declare interface SubmitHunyuanTo3DProJobRequest {
   /** 文生3D，3D内容的描述，中文正向提示词。最多支持1024个 utf-8 字符。ImageBase64、ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。 */
   Prompt?: string;
-  /** 输入图 Base64 数据。大小：单边分辨率要求不小于128，不大于5000。大小不超过8m（base64编码后会大30%左右，建议实际输入图片不超过5m）格式：jpg，png，jpeg，webp。ImageBase64、ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。 */
+  /** 输入图 Base64 数据。大小: 单边分辨率要求不小于128，不大于5000，大小≤6m (因base64编码后会大30%左右)格式: jpg，png，jpeg，webp.lmageBase64、lmageUr和 Prompt必填其一，且Prompt和lmageBase64/mageUr不能同时存在。 */
   ImageBase64?: string;
-  /** 输入图Url。大小：单边分辨率要求不小于128，不大于5000。大小不超过8m（base64编码后会大30%左右，建议实际输入图片不超过5m）格式：jpg，png，jpeg，webp。ImageBase64、ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。 */
+  /** 输入图Url大小: 单边分辨率要求不小于128，不大于5000，大小≤8m格式: jpg，png，jpeg，webp.lmageBase64、lmageUr和 Prompt必填其一，且Prompt和lmageBase64/mageUr不能同时存在。 */
   ImageUrl?: string;
-  /** 多视角的模型图片，视角参考值：left：左视图；right：右视图；back：后视图；每个视角仅限制一张图片。●图片大小限制：编码后大小不可超过8M。（base64编码后会大30%左右，建议实际输入图片不超过5m）●图片分辨率限制：单边分辨率小于5000且大于128。●支持图片格式：支持jpg或png */
+  /** 多视角的模型图片，视角参考值：left：左视图；right：右视图；back：后视图；每个视角仅限制一张图片。●图片大小限制：编码后所有图片大小总和不可超过8M。（base64编码下图片大小总和不超过6M，因base64编码后图片大小会大30%左右）●图片分辨率限制：单边分辨率小于5000且大于128。●支持图片格式：支持jpg或png */
   MultiViewImages?: ViewImage[];
   /** 是否开启 PBR材质生成，默认 false。 */
   EnablePBR?: boolean;
@@ -201,9 +201,9 @@ declare interface SubmitHunyuanTo3DProJobResponse {
 declare interface SubmitHunyuanTo3DRapidJobRequest {
   /** 文生3D，3D内容的描述，中文正向提示词。最多支持200个 utf-8 字符。文生3D, ImageBase64、ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。 */
   Prompt?: string;
-  /** 输入图 Base64 数据。大小：单边分辨率要求不小于128，不大于5000。大小不超过8m（base64编码后会大30%左右，建议实际输入图片不超过5m）格式：jpg，png，jpeg，webp。ImageBase64、ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。 */
+  /** 输入图 Base64 数据。大小: 单边分辨率要求不小于128，不大于5000，大小≤6m (因base64编码后会大30%左右)格式: jpg，png，jpeg，webp.lmageBase64、lmageUr和 Prompt必填其一，且Prompt和lmageBase64/mageUr不能同时存在。 */
   ImageBase64?: string;
-  /** 输入图Url。大小：单边分辨率要求不小于128，不大于5000。大小不超过8m（base64编码后会大30%左右，建议实际输入图片不超过5m）格式：jpg，png，jpeg，webp。ImageBase64、ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。 */
+  /** 输入图Url大小: 单边分辨率要求不小于128，不大于5000，大小≤8m格式: jpg，png，jpeg，webp.lmageBase64、lmageUr和 Prompt必填其一，且Prompt和lmageBase64/mageUr不能同时存在。 */
   ImageUrl?: string;
   /** 生成模型的格式，仅限制生成一种格式。生成模型文件组默认返回obj格式。可选值：OBJ，GLB，STL，USDZ，FBX，MP4。 */
   ResultFormat?: string;

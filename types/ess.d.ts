@@ -1480,7 +1480,7 @@ declare interface RegisterInfo {
   AuthorizationType?: number;
   /** 指定企业认证的授权方式 支持多选:1: 上传营业执照2: 腾讯云快速认证3: 腾讯商户号授权（仅支持小程序端） */
   AuthorizationMethods?: number[];
-  /** 企业证照类型：USCC :(默认)工商组织营业执照PRACTICELICENSEOFMEDICALINSTITUTION :医疗机构执业许可证 */
+  /** 企业证照类型：USCC :(默认)工商组织营业执照PRACTICELICENSEOFMEDICALINSTITUTION :医疗机构执业许可证CLINICFILLINGCERTIFICATE:诊所备案证 */
   OrganizationIdCardType?: string;
   /** 企业创建时候的个性化参数。其中，包括一下内容：LegalNameSame 是否可以编辑法人。UnifiedSocialCreditCodeSame 是否可以编辑证件号码。OrganizationIdCardTypeSame 是否可以更改证照类型。 */
   RegisterInfoOption?: RegisterInfoOption;
@@ -3147,7 +3147,7 @@ declare interface CreateOrganizationAuthUrlRequest {
   BankAccountNumberSame?: boolean;
   /** 跳转事件，其中包括认证期间收录，授权书审核，企业认证的回跳事件。p.s.Endpoint如果是APP 类型，请传递JumpUrl为"true" 如果 Endpoint 是 H5 类型，请参考文档跳转电子签H5 p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，仅会进行回跳。 */
   JumpEvents?: JumpEvent[];
-  /** 企业证照类型： **USCC** :(默认)工商组织营业执照 **PRACTICELICENSEOFMEDICALINSTITUTION** :医疗机构执业许可证注意 ：如果企业证照类型是医疗机构，则参数设置企业授权方式(AuthorizationTypes)和企业认证方式(AuthorizationMethods)都无效.医疗机构的企业授权方式 仅有授权书的方式。企业认证仅有上传营业执照的方式。 */
+  /** 企业证照类型： **USCC** :(默认)工商组织营业执照 **PRACTICELICENSEOFMEDICALINSTITUTION** :医疗机构执业许可证 **CLINICFILLINGCERTIFICATE** :诊所备案证注意 ：如果企业证照类型是医疗机构执业许可证或者诊所备案证，则参数设置企业授权方式(AuthorizationTypes)和企业认证方式(AuthorizationMethods)都无效.医疗机构执业许可证和诊所备案证的企业授权方式 仅有授权书的方式。企业认证仅有上传营业执照的方式。 */
   OrganizationIdCardType?: string;
   /** 是否允许编辑企业注册时的证照类型true:不允许编辑。false:允许编辑（默认值）。注意：入参中的OrganizationIdCardType值不为空的时候，才可设置为不可编辑。 */
   OrganizationIdCardTypeSame?: boolean;

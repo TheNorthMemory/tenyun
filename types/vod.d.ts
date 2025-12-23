@@ -1821,7 +1821,7 @@ declare namespace V20180717 {
 
   /** AIGC 统计数据 */
   interface AigcUsageDataItem {
-    /** AIGC规格。取值有：Qwen2.0Gem2.5Gem3.0_1KGem3.0_2KGem3.0_4KSora2Veo3.1StandardVeo3.1FastKling2.5pro_720PKling2.5pro_1080PKling2.0&2.1std_720PKling2.0&2.1pro_1080PHailuo02&2.3_1080PHailuo02&2.3_768PHailuo2.3fast_768PHailuo2.3fast_1080PJimeng4.0Jimeng3.0proVidu2.0_720PVidu2.0_1080PViduQ2pro_720PViduQ2pro_1080PViduQ2turbo_720PViduQ2turbo_1080P unknown */
+    /** AIGC规格。取值有：Qwen2.0Gem2.5Gem3.0_1KGem3.0_2KGem3.0_4KSora2Veo3.1FastVeo3.1StandardKling2.5pro_720PKling2.5pro_1080PKlingO1_1080PKling2.0&2.1std_720PKling2.0&2.1pro_1080PKlingO1_720PHailuo02&2.3_1080PHailuo02&2.3_768PHailuo2.3fast_768PHailuo2.3fast_1080PJimeng4.0Jimeng3.0proVidu2.0_720PVidu2.0_1080PViduQ2pro_720PViduQ2pro_1080PViduQ2turbo_720PViduQ2turbo_1080PHunyuan1.5_720PHunyuan1.5_1080PHunyuan3.0_1KHunyuan3.0_2KHunyuan3.0_4KMingmou1.0_1080PMingmou1.0_1KMingmou1.0_2KMingmou1.0_4KMingmou1.0_720P unknown */
     Specification?: string;
     /** 用量数据。 */
     DataSet?: TaskStatDataItem[];
@@ -6826,9 +6826,9 @@ declare namespace V20180717 {
     ModelVersion: string;
     /** AIGC 生图任务的输入图片的文件信息。默认只支持指定1个，使用模型 GEM 时最多指定3个。 */
     FileInfos?: AigcImageTaskInputFileInfo[];
-    /** 生成图片的提示词。最大支持2000字符，当 FileInfos 为空时，此参数必填。 */
+    /** 生成图片的提示词。当 FileInfos 为空时，此参数必填。 */
     Prompt?: string;
-    /** 要阻止模型生成图片的提示词。最大支持500个字符。 */
+    /** 要阻止模型生成图片的提示词。 */
     NegativePrompt?: string;
     /** 是否自动优化提示词。开启时将自动优化传入的 Prompt，以提升生成质量。取值有： Enabled：开启； Disabled：关闭； */
     EnhancePrompt?: string;
@@ -6854,17 +6854,17 @@ declare namespace V20180717 {
   interface CreateAigcVideoTaskRequest {
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId: number;
-    /** 模型名称。取值：Hailuo：海螺；Kling：可灵； Jimeng：即梦；Vidu；GV：Google Veo；OS：OpenAI Sora。 */
+    /** 模型名称。取值：Hailuo：海螺；Kling：可灵； Jimeng：即梦；Vidu；GV：Google Veo；OS：OpenAI Sora；Hunyuan：混元；Mingmou：明眸； */
     ModelName: string;
-    /** 模型版本。取值：当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5；当 ModelName 是 Jimeng，可选值为 3.0pro；当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo；当 ModelName 是 GV，可选值为 3.1；当 ModelName 是 OS，可选值为 2.0； */
+    /** 模型版本。取值：当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、O1；当 ModelName 是 Jimeng，可选值为 3.0pro；当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo；当 ModelName 是 GV，可选值为 3.1、3.1-Fast；当 ModelName 是 OS，可选值为 2.0；当 ModelName 是 Hunyuan，可选值为 1.5；当 ModelName 是 Mingmou，可选值为 1.0； */
     ModelVersion: string;
     /** AIGC 生视频任务的输入图片的文件信息。说明1. 当 ModelName 是 GV 时，最大长度为 3；其他情况下最大长度为1。2. 当 ModelName 是 GV 时，并且长度大于1时，则不能再指定 LastFrameFileId 参数。 */
     FileInfos?: AigcVideoTaskInputFileInfo[];
     /** 用于作为尾帧画面来生成视频的媒体文件 ID。该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。说明：1. 只支持模型 GV 、Kling、Vidu，其他模型暂不支持。当 ModelName 为 GV 时，如果指定该参数，则需同时指定 FileInfos 作为待生成视频的首帧。当 ModelName 为 Kling 、ModelVersion 为 2.1 并且指定输出分辨率 Resolution 为 1080P 时，才能指定该参数。当 ModelName 为 Vidu、ModelVersion 为 q2-pro、q2-turbo 时，才能指定该参数。2. 图片大小需小于5M。3. 图片格式的取值为：jpeg，jpg, png, webp。 */
     LastFrameFileId?: string;
-    /** 生成图片的提示词。最大支持2000个字符，当 FileInfos 为空时，此参数必填。 */
+    /** 生成图片的提示词。当 FileInfos 为空时，此参数必填。 */
     Prompt?: string;
-    /** 要阻止模型生成图片的提示词。最大支持500个字符。 */
+    /** 要阻止模型生成图片的提示词。 */
     NegativePrompt?: string;
     /** 是否自动优化提示词。开启时将自动优化传入的 Prompt，以提升生成质量。取值有： Enabled：开启； Disabled：关闭； */
     EnhancePrompt?: string;

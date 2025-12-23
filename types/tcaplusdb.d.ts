@@ -674,32 +674,6 @@ declare interface TableResultNew {
   ApplicationId?: string;
 }
 
-/** 表格回档结果信息 */
-declare interface TableRollbackResultNew {
-  /** 表格实例ID，形如：tcaplus-3be64cbb */
-  TableInstanceId?: string;
-  /** 任务ID，对于创建单任务的接口有效 */
-  TaskId?: string;
-  /** 表格名称 */
-  TableName?: string;
-  /** 表格数据结构类型，如：`GENERIC`或`LIST` */
-  TableType?: string;
-  /** 表格数据描述语言（IDL）类型，如：`PROTO`或`TDR` */
-  TableIdlType?: string;
-  /** 表格所属表格组ID */
-  TableGroupId?: string;
-  /** 错误信息 */
-  Error?: ErrorInfo;
-  /** 任务ID列表，对于创建多任务的接口有效 */
-  TaskIds?: string[];
-  /** 上传的key文件ID */
-  FileId?: string;
-  /** 校验成功Key数量 */
-  SuccKeyNum?: number;
-  /** Key文件中包含总的Key数量 */
-  TotalKeyNum?: number;
-}
-
 /** 标签信息单元 */
 declare interface TagInfoUnit {
   /** 标签键 */
@@ -1608,26 +1582,6 @@ declare interface RecoverRecycleTablesResponse {
   RequestId?: string;
 }
 
-declare interface RollbackTablesRequest {
-  /** 待回档表格所在集群ID */
-  ClusterId: string;
-  /** 待回档表格列表 */
-  SelectedTables: SelectedTableInfoNew[];
-  /** 待回档时间 */
-  RollbackTime: string;
-  /** 回档模式，支持：`KEYS` */
-  Mode?: string;
-}
-
-declare interface RollbackTablesResponse {
-  /** 表格回档任务结果数量 */
-  TotalCount?: number;
-  /** 表格回档任务结果列表 */
-  TableResults?: TableRollbackResultNew[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface SetBackupExpireRuleRequest {
   /** 表所属集群实例ID */
   ClusterId: string;
@@ -1807,8 +1761,6 @@ declare interface Tcaplusdb {
   ModifyTables(data: ModifyTablesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTablesResponse>;
   /** 恢复回收站中的表 {@link RecoverRecycleTablesRequest} {@link RecoverRecycleTablesResponse} */
   RecoverRecycleTables(data: RecoverRecycleTablesRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverRecycleTablesResponse>;
-  /** @deprecated 表格数据回档 {@link RollbackTablesRequest} {@link RollbackTablesResponse} */
-  RollbackTables(data: RollbackTablesRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackTablesResponse>;
   /** 新增、删除、修改备份过期策略 {@link SetBackupExpireRuleRequest} {@link SetBackupExpireRuleResponse} */
   SetBackupExpireRule(data: SetBackupExpireRuleRequest, config?: AxiosRequestConfig): AxiosPromise<SetBackupExpireRuleResponse>;
   /** 新增、修改表格数据订阅 {@link SetTableDataFlowRequest} {@link SetTableDataFlowResponse} */

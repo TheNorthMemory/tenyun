@@ -596,6 +596,8 @@ declare interface MediaReplacementInfo {
   StartTimeOffset?: number;
   /** 预处理操作。注：目前该功能暂不支持，请勿使用。 */
   PreprocessOperation?: MediaPreprocessOperation;
+  /** 静音开关，仅对视频类型媒体生效。取值有：ON：视频媒体开启静音，该段媒体在导出中会屏蔽音频；OFF：视频媒体关闭静音；注：默认为 OFF，即不对视频媒体的音频做静音处理。 */
+  MuteSwitch?: string;
 }
 
 /** 轨道信息 */
