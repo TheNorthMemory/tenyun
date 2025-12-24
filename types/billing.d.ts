@@ -2430,6 +2430,18 @@ declare interface TagsForm {
   TagValue?: string[] | null;
 }
 
+/** 临时额度详情 */
+declare interface UinTempAmountModel {
+  /** 用户uin */
+  Uin?: string;
+  /** 临时额度 */
+  TempAmount?: number;
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+}
+
 /** 购买商品信息 */
 declare interface UsageDetails {
   /** 商品名 */
@@ -2680,6 +2692,8 @@ declare interface DeleteGatherRuleResponse {
 }
 
 declare interface DescribeAccountBalanceRequest {
+  /** 是否查询临时额度 */
+  TempCredit?: boolean;
 }
 
 declare interface DescribeAccountBalanceResponse {
@@ -2709,6 +2723,10 @@ declare interface DescribeAccountBalanceResponse {
   CreditBalance?: number;
   /** 真实可用信用额度,单位 分 */
   RealCreditBalance?: number;
+  /** 临时额度，单位 分 */
+  TempCredit?: number;
+  /** 临时额度详情 */
+  TempAmountInfoList?: UinTempAmountModel[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3628,13 +3646,13 @@ declare interface DescribeCostDetailRequest {
   Limit: number;
   /** 偏移量 */
   Offset: number;
-  /** 周期开始时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为同一月份，暂不支持跨月拉取。可拉取的数据是开通成本分析后，且距今 24 个月内的数据。 */
+  /** 周期开始时间，查询粒度为天级别，需传入时分秒参数，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为同一月份，暂不支持跨月拉取。可拉取的数据是开通消耗账单后，且距今 18 个月内的数据。 */
   BeginTime?: string;
-  /** 周期结束时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为同一月份，暂不支持跨月拉取。可拉取的数据是开通成本分析后，且距今 24 个月内的数据。 */
+  /** 周期结束时间，查询粒度为天级别，需传入时分秒参数，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为同一月份，暂不支持跨月拉取。可拉取的数据是开通消耗账单后，且距今 18 个月内的数据。 */
   EndTime?: string;
   /** 是否需要访问列表的总记录数，用于前端分页1-表示需要， 0-表示不需要 */
   NeedRecordNum?: number;
-  /** 月份，格式为yyyy-mm，Month和BeginTime&EndTime必传一个，如果有传BeginTime&EndTime则Month字段无效。不能早于开通成本分析的月份，最多可拉取24个月内的数据。 */
+  /** 月份，格式为yyyy-mm，Month和BeginTime&EndTime必传一个，如果有传BeginTime&EndTime则Month字段无效。不能早于开通消耗账单的月份，最多可拉取18个月内的数据。 */
   Month?: string;
   /** 查询指定产品信息 */
   ProductCode?: string;

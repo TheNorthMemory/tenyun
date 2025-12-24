@@ -2874,6 +2874,22 @@ declare interface PostMaxSizeParameters {
   MaxSize?: number;
 }
 
+/** 回源限速限制详情。 */
+declare interface PrefetchOriginLimit {
+  /** 站点 ID。 */
+  ZoneId?: string;
+  /** 加速域名。 */
+  DomainName?: string;
+  /** 回源限速限制的加速区域。预热时，该加速区域将会受到配置的Bandwidth值限制。取值有：Overseas：全球可用区（不含中国大陆）；MainlandChina：中国大陆可用区。 */
+  Area?: string;
+  /** 回源限速带宽。预热时回到源站的带宽上限值，取值范围 100 - 100,000，单位 Mbps。 */
+  Bandwidth?: number;
+  /** 回源限速限制创建的时间。 */
+  CreateTime?: string;
+  /** 回源限速限制更新的时间。 */
+  UpdateTime?: string;
+}
+
 /** 预付费套餐计费参数 */
 declare interface PrepaidPlanParam {
   /** 订阅预付费套餐的周期，单位：月，取值有：1，2，3，4，5，6，7，8，9，10，11，12，24，36。不填写使用默认值 1。 */
@@ -6166,6 +6182,26 @@ declare interface DescribePlansResponse {
   RequestId?: string;
 }
 
+declare interface DescribePrefetchOriginLimitRequest {
+  /** 站点ID。 */
+  ZoneId: string;
+  /** 分页查询偏移量，默认为 0。 */
+  Offset?: number;
+  /** 分页查询限制数目，默认值：20，上限：100。 */
+  Limit?: number;
+  /** 过滤条件，Filters.Values 的上限为 20。详细的过滤条件如下：domain-name：按照域名过滤。domain-name 形如：www.qq.com，不支持模糊查询；area：按照限制加速区域过滤，不支持模糊查询。可选项： Overseas：全球可用区（不含中国大陆）； MainlandChina：中国大陆可用区。 */
+  Filters?: Filter[];
+}
+
+declare interface DescribePrefetchOriginLimitResponse {
+  /** 回源限速限制总数。 */
+  TotalCount?: number;
+  /** 回源限速限制详情List。 */
+  Limits?: PrefetchOriginLimit[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePrefetchTasksRequest {
   /** 站点ID。此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。 */
   ZoneId?: string;
@@ -7348,6 +7384,24 @@ declare interface ModifyPlanResponse {
   RequestId?: string;
 }
 
+declare interface ModifyPrefetchOriginLimitRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 加速域名。 */
+  DomainName: string;
+  /** 回源限速限制的加速区域。预热时，该加速区域将会受到配置的Bandwidth值限制。取值有：Overseas：全球可用区（不含中国大陆）；MainlandChina：中国大陆可用区。 */
+  Area: string;
+  /** 回源限速带宽。预热时回到源站的带宽上限值，取值范围 100 - 100,000，单位 Mbps。 */
+  Bandwidth: number;
+  /** 回源限速限制控制开关。用于启用/删除本条回源限速限制，取值有：on：启用限制；off：删除限制。 */
+  Enabled: string;
+}
+
+declare interface ModifyPrefetchOriginLimitResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyRealtimeLogDeliveryTaskRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -8109,6 +8163,8 @@ declare interface Teo {
   DescribeOverviewL7Data(data: DescribeOverviewL7DataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewL7DataResponse>;
   /** 查询套餐信息列表 {@link DescribePlansRequest} {@link DescribePlansResponse} */
   DescribePlans(data?: DescribePlansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlansResponse>;
+  /** 查询预热回源限速限制 {@link DescribePrefetchOriginLimitRequest} {@link DescribePrefetchOriginLimitResponse} */
+  DescribePrefetchOriginLimit(data: DescribePrefetchOriginLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrefetchOriginLimitResponse>;
   /** 查询预热任务状态 {@link DescribePrefetchTasksRequest} {@link DescribePrefetchTasksResponse} */
   DescribePrefetchTasks(data?: DescribePrefetchTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrefetchTasksResponse>;
   /** 查询清除缓存历史记录 {@link DescribePurgeTasksRequest} {@link DescribePurgeTasksResponse} */
@@ -8243,6 +8299,8 @@ declare interface Teo {
   ModifyOriginGroup(data: ModifyOriginGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOriginGroupResponse>;
   /** 修改套餐配置 {@link ModifyPlanRequest} {@link ModifyPlanResponse} */
   ModifyPlan(data: ModifyPlanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPlanResponse>;
+  /** 配置预热回源限速限制 {@link ModifyPrefetchOriginLimitRequest} {@link ModifyPrefetchOriginLimitResponse} */
+  ModifyPrefetchOriginLimit(data: ModifyPrefetchOriginLimitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPrefetchOriginLimitResponse>;
   /** 修改实时日志投递任务 {@link ModifyRealtimeLogDeliveryTaskRequest} {@link ModifyRealtimeLogDeliveryTaskResponse} */
   ModifyRealtimeLogDeliveryTask(data: ModifyRealtimeLogDeliveryTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRealtimeLogDeliveryTaskResponse>;
   /** 修改规则引擎规则（旧） {@link ModifyRuleRequest} {@link ModifyRuleResponse} */

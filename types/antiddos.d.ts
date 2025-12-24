@@ -2631,9 +2631,9 @@ declare interface DescribeListProtectThresholdConfigNewRequest {
   FilterInstanceId: string;
   /** IP搜索 */
   FilterIp?: string;
-  /** 域名搜索(查询域名与协议的CC防护阈值时使用） */
+  /** 域名搜索，查询域名与协议的CC防护阈值时使用 */
   FilterDomain?: string;
-  /** 协议搜索(查询域名与协议的CC防护阈值时使用） */
+  /** 协议搜索，查询域名与协议的CC防护阈值时使用 */
   FilterProtocol?: string;
 }
 

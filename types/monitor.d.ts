@@ -371,6 +371,20 @@ declare namespace V20180724 {
     Password?: string | null;
   }
 
+  /** 绑定进度参数 */
+  interface BindProgressStep {
+    /** 结束时间 */
+    EndAt?: string | null;
+    /** 错误信息 */
+    FailedMsg?: string | null;
+    /** 状态 */
+    LifeState?: string;
+    /** 开始时间 */
+    StartAt?: string | null;
+    /** 任务进程"prepare_env" // 准备环境,安装instance EKS"check_target" // 检查target是否为running"install_crd" // 安装需要测crd"install_rbac" // 安装rbac"install_agent" // 安装agent"install_cr" // 安装prometheus CR"install_basic" // 安装基础采集信息，标记target状态为normal */
+    Step?: string;
+  }
+
   /** 策略绑定实例维度信息 */
   interface BindingPolicyObjectDimension {
     /** 地域名 */
@@ -2539,6 +2553,15 @@ declare namespace V20180724 {
     Destination?: string;
   }
 
+  interface BindProgressResponse {
+    /** 绑定步骤 */
+    Steps?: BindProgressStep[] | null;
+    /** 集群id */
+    ClusterId?: string | null;
+    /** 集群绑定状态 */
+    Status?: string | null;
+  }
+
   interface BindPrometheusManagedGrafanaRequest {
     /** Prometheus 实例 ID */
     InstanceId: string;
@@ -3842,9 +3865,15 @@ declare namespace V20180724 {
   }
 
   interface DescribeClusterAgentCreatingProgressRequest {
+    /** prom实例id */
+    InstanceId: string;
+    /** 集群ids */
+    ClusterIds: string[];
   }
 
   interface DescribeClusterAgentCreatingProgressResponse {
+    /** 绑定状态response */
+    Response?: BindProgressResponse[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

@@ -3979,7 +3979,7 @@ declare interface HandwritingEssayOCRRequest {
   ImageBase64?: string;
   /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为前3页。 */
   PdfPageNumber?: number;
-  /** 配置id支持：ArticleRecognize -- 手写作文模板默认：ArticleRecognize */
+  /** 配置id支持：ArticleRecognize -- 手写中文作文模板ArticleRecognizeEng -- 手写英文作文模板默认：ArticleRecognize */
   ConfigId?: string;
   /** 模板的单个属性配置 */
   Scene?: string;

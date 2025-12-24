@@ -4551,6 +4551,10 @@ declare interface DescribeNativeSparkSessionsRequest {
   DataEngineId?: string;
   /** 资源组ID */
   ResourceGroupId?: string;
+  /** 项目ID */
+  ProjectId?: string;
+  /** 用户Uin */
+  UserUin?: string;
 }
 
 declare interface DescribeNativeSparkSessionsResponse {

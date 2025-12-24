@@ -1532,6 +1532,8 @@ declare interface RocketMQMessageTrack {
   TrackType?: string;
   /** 异常信息 */
   ExceptionDesc?: string | null;
+  /** 消费状态来源，枚举值如下：- DIFF_OFFSET：通过服务端offset计算- TRACE_REPORT：通过上报的轨迹判断 */
+  ConsumeStatusSource?: string;
 }
 
 /** 迁移主题的阶段分布 */
@@ -3855,7 +3857,7 @@ declare interface DescribeRocketMQGroupsRequest {
   NamespaceId: string;
   /** 偏移量 */
   Offset: number;
-  /** 限制条数 */
+  /** 单次查询最大条数。取值范围：[0~100]，默认值为20 */
   Limit: number;
   /** 主题名称，输入此参数可查询该主题下所有的订阅组 */
   FilterTopic?: string;

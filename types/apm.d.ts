@@ -899,7 +899,7 @@ declare interface DescribeGeneralSpanListRequest {
   OrderBy?: OrderBy;
   /** 业务自身服务名，控制台用户请填写taw */
   BusinessName?: string;
-  /** 单页项目个数，默认为10000，合法取值范围为0～10000 */
+  /** 单页项目个数，默认为1000，合法取值范围为1～1000 */
   Limit?: number;
   /** 分页 */
   Offset?: number;

@@ -410,6 +410,8 @@ declare interface MessageTrackItem {
   TrackType?: string;
   /** 异常信息 */
   ExceptionDesc?: string | null;
+  /** 消费状态来源，枚举值如下：- DIFF_OFFSET：通过服务端offset计算- TRACE_REPORT：通过上报的轨迹判断 */
+  ConsumeStatusSource?: string;
 }
 
 /** 迁移中的主题 */
@@ -1969,12 +1971,12 @@ declare interface ImportSourceClusterTopicsResponse {
 declare interface ModifyConsumerGroupRequest {
   /** 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。 */
   InstanceId: string;
+  /** 是否开启消费 */
+  ConsumeEnable: boolean;
+  /** 顺序投递：true并发投递：false */
+  ConsumeMessageOrderly: boolean;
   /** 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031) 或控制台获得。 */
   ConsumerGroup?: string;
-  /** 是否开启消费 */
-  ConsumeEnable?: boolean;
-  /** 顺序投递：true并发投递：false */
-  ConsumeMessageOrderly?: boolean;
   /** 最大重试次数，取值范围0～1000 */
   MaxRetryTimes?: number;
   /** 备注信息，最多 128 个字符 */

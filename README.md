@@ -114,7 +114,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 246+ 款产品，13124+ 服务数</summary>
+<details><summary>共计 246+ 款产品，13128+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -126,7 +126,7 @@ af | [借贷反欺诈](https://cloud.tencent.com/document/product/668) | 2020-02
 afc | [定制建模](https://cloud.tencent.com/document/product/1029) | 2020-02-26(3) |
 ags | [Agent 沙箱服务](https://cloud.tencent.com/document/product/1814) | 2025-09-20(12) |
 ai3d | [腾讯混元生3D](https://cloud.tencent.com/document/product/1804) | 2025-05-13(13) |
-aiart | [腾讯混元生图](https://cloud.tencent.com/document/product/1668) | 2022-12-29(23) |
+aiart | [腾讯混元生图](https://cloud.tencent.com/document/product/1668) | 2022-12-29(25) |
 ame | [正版曲库直通车](https://cloud.tencent.com/document/product/1155) | 2019-09-16(31) |
 ams | [音频内容安全](https://cloud.tencent.com/document/product/1219) | 2020-12-29(5) | 2020-06-08(7) |
 anicloud | [动效素材服务](https://cloud.tencent.com/document/product/1641) | 2022-09-23(3) |
@@ -324,7 +324,7 @@ tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021
 tdmq | [消息队列 TDMQ](https://cloud.tencent.com/document/product/1179) | 2020-02-17(149) |
 tds | [设备安全](https://cloud.tencent.com/document/product/1628) | 2022-08-01(5) |
 tem | [弹性微服务](https://cloud.tencent.com/document/product/1371) | 2021-07-01(51) | 2020-12-21(17) |
-teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) | 2022-09-01(195) | 2022-01-06(5) |
+teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) | 2022-09-01(197) | 2022-01-06(5) |
 thpc | [高性能计算平台](https://cloud.tencent.com/document/product/1527) | 2023-03-21(31) | 2022-04-01(16)<br/>2021-11-09(4) |
 tia | [智能钛机器学习](https://cloud.tencent.com/document/product/851) | 2018-02-26(10) |
 tiia | [图像分析](https://cloud.tencent.com/document/product/865) | 2019-05-29(21) |

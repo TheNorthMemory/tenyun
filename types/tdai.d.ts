@@ -28,6 +28,24 @@ declare interface Agent {
   UpdateTime?: string;
 }
 
+/** 智能体值守任务信息 */
+declare interface AgentDutyTask {
+  /** 任务ID */
+  TaskId?: string;
+  /** 任务创建时间 */
+  CreateTime?: string;
+  /** 任务开始运行时间 */
+  StartTime?: string;
+  /** 任务结束时间 */
+  FinishTime?: string;
+  /** 任务状态 */
+  Status?: string;
+  /** 对外展示的Extra信息 */
+  ResultExtraKey?: string[];
+  /** 业务的额外敏感信息 */
+  Extra?: ExtraInfo[];
+}
+
 /** 智能体实例 */
 declare interface AgentInstance {
   /** 智能体实例ID */
@@ -128,6 +146,18 @@ declare interface CreateChatCompletionRes {
   TaskId?: string;
   /** 消息的数据详情 */
   Choices?: UploadChoice[];
+}
+
+/** 智能体值守任务额外信息 */
+declare interface ExtraInfo {
+  /** 出参额外信息的Key */
+  Key?: string;
+  /** 额外信息描述 */
+  Description?: string;
+  /** ExtraInfo的值 */
+  Value?: string;
+  /** 值的数据结构类型 */
+  ValueType?: string;
 }
 
 /** 实例信息 */
@@ -252,6 +282,8 @@ declare interface DescribeAgentDutyTaskDetailRequest {
 }
 
 declare interface DescribeAgentDutyTaskDetailResponse {
+  /** 任务详细信息 */
+  AgentDutyTask?: AgentDutyTask;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
