@@ -44,6 +44,8 @@ declare interface AudioResult {
   HitType?: string;
   /** ASR句子的起止时间 */
   Sentences?: Sentence[];
+  /** 切片请求ID */
+  RequestId?: string;
 }
 
 /** 音频语言种类检测结果 */

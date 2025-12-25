@@ -4995,6 +4995,28 @@ declare namespace V20210820 {
     ModifyTime?: string | null;
   }
 
+  /** 告警分组信息 */
+  interface AlarmGroup {
+    /** 告警方式,1.邮件，2.短信，3.微信，4.语音，5.企业微信，6.Http，7.企业微信群；告警方式code列表（默认1.邮件） */
+    AlarmWays?: string[];
+    /** 告警接收人类型：1.指定人员，2.任务责任人，3.值班表（默认1.指定人员） */
+    AlarmRecipientType?: number;
+    /** 告警接收人 */
+    AlarmRecipients?: string[];
+    /** 告警接收人ID */
+    AlarmRecipientIds?: string[];
+    /** 告警升级人 */
+    AlarmEscalationRecipients?: string[];
+    /** 告警升级人ID */
+    AlarmEscalationRecipientIds?: string[];
+    /** 告警升级间隔 */
+    AlarmEscalationInterval?: number;
+    /** 告警通知疲劳度配置。 */
+    NotificationFatigue?: NotificationFatigue;
+    /** 告警渠道规则 json 格式 */
+    AlarmMessageRule?: string;
+  }
+
   /** 告警指标 */
   interface AlarmIndicatorInfo {
     /** 指标id */
@@ -5047,6 +5069,16 @@ declare namespace V20210820 {
     AlarmId?: string;
     /** 告警状态设置；1表示可用；0表示不可用，默认可用 */
     Status?: number;
+  }
+
+  /** 告警免打扰时间区间 */
+  interface AlarmQuietInterval {
+    /** ISO标准，1表示周一，7表示周日。 */
+    DaysOfWeek?: number[] | null;
+    /** 开始时间，精度时分秒，格式 HH:mm:ss */
+    StartTime?: string | null;
+    /** 结束时间，精度时分秒，格式 HH:mm:ss */
+    EndTime?: string | null;
   }
 
   /** 告警接收组 */
@@ -5252,6 +5284,16 @@ declare namespace V20210820 {
     /** Value值 */
     Value?: string | null;
     /** 描述 */
+    Description?: string | null;
+  }
+
+  /** 任务扩展信息 */
+  interface AttributeItemOpsDto {
+    /** 属性键 */
+    Key?: string | null;
+    /** 属性值 */
+    Value?: string | null;
+    /** 属性描述 */
     Description?: string | null;
   }
 
@@ -6175,6 +6217,8 @@ declare namespace V20210820 {
     ClusterDeployType?: string | null;
     /** 模式名称 */
     SchemaName?: string | null;
+    /** 是否展示目录 */
+    ShowEnableCatalog?: boolean | null;
   }
 
   /** 数据源元数据 */
@@ -7881,6 +7925,14 @@ declare namespace V20210820 {
     InstanceSchedulerDesc?: string;
     /** 当前用户对该实例的权限列表 */
     Privileges?: string[];
+    /** 任务执行id */
+    TaskExecutionId?: string | null;
+    /** dlc taskid */
+    DlcTaskId?: string | null;
+    /** dlc jobid */
+    DlcSparkJobId?: string | null;
+    /** 扩展属性 */
+    Ext?: StrToStrMap | null;
   }
 
   /** 任务运行历史分页记录 */
@@ -8259,6 +8311,32 @@ declare namespace V20210820 {
     V: string | null;
   }
 
+  /** 资产标签 */
+  interface LabelTag {
+    /** 标签id */
+    TagId?: number | null;
+    /** 标签名 */
+    TagName?: string | null;
+    /** 标签描述 */
+    TagDesc?: string | null;
+    /** 标签值Id */
+    TagValueId?: number | null;
+    /** 标签值 */
+    TagValue?: string | null;
+    /** 标签是否已删除 */
+    TagIsDeleted?: boolean | null;
+    /** 标签值是否已删除 */
+    TagValueIsDeleted?: boolean | null;
+  }
+
+  /** 标签值选择列表 */
+  interface LabelValueSelection {
+    /** 标签ID */
+    LabelId?: number | null;
+    /** 标签值ID */
+    LabelValue?: string | null;
+  }
+
   /** 表生命周期相关信息 */
   interface LifecycleInfo {
     /** 生命周期值 */
@@ -8463,6 +8541,18 @@ declare namespace V20210820 {
     LifeTime?: number | null;
   }
 
+  /** 补录计划告警规则 */
+  interface MakePlanAlarmRule {
+    /** 告警的级别1 -- 普通2 -- 重要3 -- 紧急 */
+    AlarmLevel?: number;
+    /** 告警的类型，补录计划支持：start：启动告警failure：失败告警success：成功告警overtime：超过配置时间告警 */
+    AlarmTypes?: string[];
+    /** 告警超时时间 */
+    ExtInfo?: string;
+    /** 告警接受人 升级人配置信息 */
+    AlarmGroup?: AlarmGroup[];
+  }
+
   /** 补录计划实例集合 */
   interface MakePlanInstanceOpsDtoCollection {
     /** 记录总数 */
@@ -8543,6 +8633,18 @@ declare namespace V20210820 {
     AppParam?: string;
     /** 补录计划时间范围的类型： DATA_TIME：实例数据时间；SCHEDULE_TIME 计划调度时间 */
     TimeType?: string;
+    /** 开始时间 */
+    StartTime?: string;
+    /** 结束时间 */
+    EndTime?: string;
+    /** 失败百分比 */
+    FailurePercent?: number | null;
+    /** 补录计划的告警规则 */
+    AlarmRule?: MakePlanAlarmRule | null;
+    /** 运行类型 */
+    RunType?: number | null;
+    /** 定时运行时间 */
+    RunDateTime?: string | null;
   }
 
   /** 补录计划集合 */
@@ -8571,8 +8673,10 @@ declare namespace V20210820 {
     CompletePercent?: number | null;
     /** 补录任务实例成功百分数 */
     SuccessPercent?: number | null;
-    /** 预计生成的总实例个数，由于是异步生成，-1代表实例还未完完全生成 */
+    /** 预计生成的总实例个数，由于是异步生成，-1代表实例还未完全生成 */
     InstanceTotalCount?: number | null;
+    /** 补录任务实例失败百分数 */
+    FailurePercent?: number | null;
   }
 
   /** 补录计划任务集合 */
@@ -8645,6 +8749,16 @@ declare namespace V20210820 {
     PageCount?: number | null;
     /** 总条数 */
     TotalCount?: number | null;
+  }
+
+  /** 任务告警通知疲劳度配置，包括通知次数、间隔、免打扰时间。 */
+  interface NotificationFatigue {
+    /** 通知次数 */
+    NotifyCount?: number | null;
+    /** 通知间隔，单位分钟。 */
+    NotifyInterval?: number | null;
+    /** 免打扰时间，例如示例值每周一、周二的00:00到09:00免打扰 */
+    QuietIntervals?: AlarmQuietInterval[] | null;
   }
 
   /** 离线实例 */
@@ -9609,6 +9723,14 @@ declare namespace V20210820 {
     DatabaseName?: string | null;
     /** 失败原因 */
     FailMsg?: string | null;
+    /** 任务类型 */
+    GroupType?: string | null;
+    /** 编排任务id */
+    AspectTaskId?: string | null;
+    /** 目录 */
+    CatalogName?: string | null;
+    /** 目标目录 */
+    TargetCatalogName?: string | null;
   }
 
   /** 规则配置 */
@@ -9739,6 +9861,12 @@ declare namespace V20210820 {
     MonitorType?: number | null;
     /** 执行结束时间 */
     FinishTime?: string | null;
+    /** 任务类型 */
+    GroupType?: string | null;
+    /** 编排任务id */
+    AspectTaskId?: string | null;
+    /** 目录 */
+    CatalogName?: string | null;
   }
 
   /** 规则执行结果详情 */
@@ -9881,11 +10009,19 @@ declare namespace V20210820 {
     Description?: string | null;
     /** 监控创建人 */
     CreateUserName?: string | null;
+    /** 任务类型 */
+    GroupType?: string | null;
+    /** 任务id */
+    AspectTaskId?: string | null;
+    /** catalog名称 */
+    CatalogName?: string | null;
   }
 
   /** 任务配置 */
   interface RuleGroupConfig {
-    /** 模型检测类型 */
+    /** 分析类型，可选值：INFERENCE-推理表TIME_SERIES-时序表SNAPSHOT-快照表 */
+    AnalysisType?: string | null;
+    /** 模型检测类型，分析类型为推理表（INFERENCE）时必填，可选值：CLAASSIFICATION-分类REGRESSION-回归 */
     ModelMonitorType?: string | null;
     /** 预测列 */
     PredictColumn?: string | null;
@@ -9919,8 +10055,12 @@ declare namespace V20210820 {
     ProtectionValue?: string | null;
     /** 正类值 */
     PositiveValue?: string | null;
-    /** 特征列 */
+    /** 数值型特征列 */
     FeatureColumn?: string | null;
+    /** 分类型特征列 */
+    CategoricalFeatureColumn?: string | null;
+    /** 目录 */
+    BaseCatalog?: string | null;
   }
 
   /** 规则组执行结果 */
@@ -10047,6 +10187,8 @@ declare namespace V20210820 {
     GroupConfig?: RuleGroupConfig | null;
     /** 引擎参数 */
     EngineParam?: string | null;
+    /** catalog名称 */
+    CatalogName?: string | null;
   }
 
   /** 规则组分页 */
@@ -10971,6 +11113,28 @@ declare namespace V20210820 {
     DataLayerName?: string | null;
     /** 字段数量 */
     ColumnCount?: number | null;
+    /** 权限标记 */
+    TablePermissionFlag?: boolean | null;
+    /** 资产状态 */
+    AssetStatus?: number | null;
+    /** 资产等级 */
+    AssetLevel?: number | null;
+    /** 资产code */
+    AssetCode?: string | null;
+    /** 审批状态 */
+    AssetAuditStatus?: string | null;
+    /** 发布时间 */
+    PublishedTime?: string | null;
+    /** 标签列表 */
+    TagInfoList?: LabelTag[] | null;
+    /** 标签值选择列表 */
+    LabelValueSelections?: LabelValueSelection[] | null;
+    /** 命名空间 - 对应TC-Catalog */
+    Namespace?: string | null;
+    /** Catalog来源 */
+    MetaFrom?: string | null;
+    /** 引擎侧创建者 */
+    EngineCreator?: string | null;
   }
 
   /** 表附加信息 */
@@ -11061,6 +11225,8 @@ declare namespace V20210820 {
     SchemaName?: string | null;
     /** 规则表 */
     RuleGroupTableId?: string | null;
+    /** catalog名称 */
+    CatalogName?: string | null;
   }
 
   /** 表质量分分页结果 */
@@ -11527,6 +11693,18 @@ declare namespace V20210820 {
     Value?: string;
   }
 
+  /** 任务扩展信息 */
+  interface TaskExtOpsDto {
+    /** 任务ID */
+    TaskId?: string | null;
+    /** 任务属性（key-value 形式） */
+    Properties?: StrToStrMap | null;
+    /** 任务试运行-扩展业务属性 */
+    DryRunExtAttributes?: AttributeItemOpsDto[] | null;
+    /** 任务试运行动态传参 */
+    DryRunParameter?: AttributeItemOpsDto[] | null;
+  }
+
   /** 任务参数 */
   interface TaskFormParams {
     /** 任务ID */
@@ -11925,6 +12103,10 @@ declare namespace V20210820 {
     BundleId?: string | null;
     /** bundle客户端信息 */
     BundleInfo?: string | null;
+    /** 工作流类型 */
+    WorkflowType?: string | null;
+    /** 任务扩展信息 */
+    TaskExtDTO?: TaskExtOpsDto | null;
   }
 
   /** 任务执行脚本 */
@@ -15272,7 +15454,7 @@ declare namespace V20210820 {
     /** 任务ID */
     TaskId: string;
     /** 实例数据时间 */
-    CurRunDate: string;
+    CurRunDate?: string;
     /** 请求来源，WEB 前端；CLIENT 客户端 */
     RequestFromSource?: string;
     /** 执行机IP */
@@ -16253,6 +16435,10 @@ declare namespace V20210820 {
     RuleGroupExecId?: number;
     /** 项目Id */
     ProjectId?: string;
+    /** 过滤条件 */
+    Filters?: Filter[];
+    /** 排序字段 */
+    OrderFields?: OrderField[];
   }
 
   interface DescribeRuleExecResultsResponse {
@@ -18442,6 +18628,10 @@ declare namespace V20210820 {
     TargetSchemaName?: string;
     /** 目标表名 */
     TargetTableName?: string;
+    /** 目录 */
+    CatalogName?: string;
+    /** 目标目录 */
+    TargetCatalogName?: string;
   }
 
   interface ModifyRuleResponse {

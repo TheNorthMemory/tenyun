@@ -859,9 +859,9 @@ declare interface DescribeTasksRequest {
 
 declare interface DescribeTasksResponse {
   /** 满足过滤条件的任务总数量 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 满足过滤条件的任务数组 */
-  TaskInfoSet: TaskInfo[] | null;
+  TaskInfoSet?: TaskInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

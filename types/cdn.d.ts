@@ -272,6 +272,12 @@ declare interface AuthenticationTypeD {
   BackupSecretKey?: string | null;
 }
 
+/** 流量防盗刷配置（仅限大陆地区） */
+declare interface AutoGuard {
+  /** 流量防盗刷配置开关，取值有： on：开启 off：关闭 */
+  Switch: string | null;
+}
+
 /** 图片优化-AvifAdapter配置 */
 declare interface AvifAdapter {
   /** 图片优化AvifAdapter配置项开关，取值有：on：开启off：关闭 */
@@ -712,6 +718,10 @@ declare interface DetailDomain {
   OthersPrivateAccess?: OthersPrivateAccess | null;
   /** 参数黑名单 */
   ParamFilter?: ParamFilter | null;
+  /** 流量一键防盗刷配置 */
+  AutoGuard?: AutoGuard;
+  /** 区域访问控制配置 */
+  GeoBlocker?: GeoBlocker;
 }
 
 /** 诊断报告内容数据 */
@@ -906,6 +916,26 @@ declare interface ForceRedirect {
   RedirectStatusCode?: number | null;
   /** 强制跳转时是否返回增加的头部。 */
   CarryHeaders?: string | null;
+}
+
+/** 区域访问控制策略 */
+declare interface GeoBlockStrategy {
+  /** 规则类型whitelist: 白名单blacklist: 黑名单 */
+  BlockType: string;
+  /** 生效规则 */
+  RulePaths: string[];
+  /** 生效类型all: 全部directory: 目录 */
+  RuleType: string;
+  /** 生效区域，可选值有: CN-AH CN-BJ CN-CQ CN-FJ CN-GD CN-GS CN-GX CN-GZ CN-HA CN-HB CN-HE CN-HI CN-HK CN-HL CN-HN CN-JL CN-JS CN-JX CN-LN CN-MO CN-NM CN-NX CN-QH CN-SC CN-SD CN-SH CN-SN CN-SX CN-TJ CN-TW CN-XJ CN-XZ CN-YN CN-ZJ AF AX AL DZ AS AD AO AI AQ AG AR AM AW AU AT AZ BS BH BD BB BY BE BZ BJ BM BT BO BQ BA BW BV BR IO BN BG BF BI CV KH CM CA KY CF TD CL CN CX CC CO KM CG CD CK CR CI HR CU CW CY CZ DK DJ DM DO EC EG SV GQ ER EE SZ ET FK FO FJ FI FR GF PF TF GA GM GE DE GH GI GR GL GD GP GU GT GG GN GW GY HT HM VA HN HK HU IS IN ID IR IQ IE IM IL IT JM JP JE JO KZ KE KI KP KR KW KG LA LV LB LS LR LY LI LT LU MO MG MW MY MV ML MT MH MQ MR MU YT MX FM MD MC MN ME MS MA MZ MM NA NR NP NL NC NZ NI NE NG NU NF MK MP NO OM PK PW PS PA PG PY PE PH PN PL PT PR QA RE RO RU RW BL SH KN LC MF PM VC WS SM ST SA SN RS SC SL SG SX SK SI SB SO ZA GS SS ES LK SD SR SJ SE CH SY TW TJ TZ TH TL TG TK TO TT TN TR TM TC TV UG UA AE GB US UM UY UZ VU VE VN VG VI WF EH YE ZM ZW */
+  Districts: string[];
+}
+
+/** 区域访问控制配置，默认为关闭状态 */
+declare interface GeoBlocker {
+  /** IP 黑白名单配置开关，取值有on：开启off：关闭 */
+  Switch: string;
+  /** [ { "BlockType": "whitelist", "RulePaths": [ "*" ], "RuleType": "all", "Districts": [ "CN-HK" ] } ] */
+  BlockRules?: GeoBlockStrategy[];
 }
 
 /** 图片优化-GuetzliAdapter配置 */
@@ -3317,6 +3347,10 @@ declare interface UpdateDomainConfigRequest {
   HttpsBilling?: HttpsBilling;
   /** 参数黑名单 */
   ParamFilter?: ParamFilter;
+  /** 流量防盗刷配置 */
+  AutoGuard?: AutoGuard;
+  /** 区域访问控制配置 */
+  GeoBlocker?: GeoBlocker;
 }
 
 declare interface UpdateDomainConfigResponse {

@@ -418,6 +418,24 @@ declare interface ApmTag {
   Value: string;
 }
 
+/** CVM元数据 */
+declare interface CVMMeta {
+  /** 地域 */
+  Region?: string | null;
+  /** 实例ID */
+  InstanceID?: string | null;
+}
+
+/** 包含了视图中节点组件类型的数量 */
+declare interface ComponentTopologyView {
+  /** 服务纬度的节点数量 */
+  Service?: number | null;
+  /** 数据库节点数量 */
+  Database?: number | null;
+  /** 消息队列节点数量 */
+  MQ?: number | null;
+}
+
 /** 查询过滤参数 */
 declare interface Filter {
   /** 过滤方式（=, !=, in） */
@@ -468,6 +486,14 @@ declare interface OrderBy {
   Value: string;
 }
 
+/** 节点位置信息 */
+declare interface Position {
+  /** 节点位置横坐标 */
+  X?: number | null;
+  /** 节点位置纵坐标 */
+  Y?: number | null;
+}
+
 /** 查询 */
 declare interface QueryMetricItem {
   /** 指标名 */
@@ -476,6 +502,28 @@ declare interface QueryMetricItem {
   Compares?: string[];
   /** 同比，已弃用，不建议使用 */
   Compare?: string;
+}
+
+/** 资源层信息 */
+declare interface Resource {
+  /** 资源类型 */
+  Type?: string[] | null;
+  /** tke资源层信息 */
+  TKEMeta?: TkeMeta[];
+  /** cvm资源信息 */
+  CVMMeta?: CVMMeta[] | null;
+}
+
+/** 包含了节点的组件数量和健康度数量 */
+declare interface SelectorView {
+  /** 组件数量 */
+  Component?: ComponentTopologyView | null;
+}
+
+/** 视图方案勾选情况 */
+declare interface Selectors {
+  /** 组件勾选情况 */
+  Component?: string[] | null;
 }
 
 /** 应用详细信息 */
@@ -562,6 +610,98 @@ declare interface SpanTag {
   Key: string;
   /** 标签值 */
   Value: string;
+}
+
+/** tke资源元数据 */
+declare interface TkeMeta {
+  /** 地域 */
+  Region?: string;
+  /** 集群ID */
+  ClusterID?: string;
+  /** pod name */
+  PodName?: string;
+  /** 命名空间 */
+  Namespace?: string;
+  /** 工作负载 */
+  Deployment?: string;
+  /** pod ip */
+  PodIP?: string;
+  /** node ip */
+  NodeIP?: string;
+}
+
+/** 拓扑图边定义 */
+declare interface TopologyEdgeNew {
+  /** 源节点 */
+  Source?: string;
+  /** 边ID */
+  Id?: string;
+  /** 边权重 */
+  Weight?: number | null;
+  /** 目标节点 */
+  Target?: string;
+  /** 响应时间 */
+  Duration?: number | null;
+  /** 错误率 */
+  ErrRate?: number | null;
+  /** 吞吐量 */
+  Qps?: number | null;
+  /** 边类型 */
+  Type?: string | null;
+  /** 边颜色 */
+  Color?: string | null;
+  /** Sql调用数 */
+  SqlRequestCount?: number | null;
+  /** Sql调用错误数 */
+  SqlErrorRequestCount?: number | null;
+  /** 边上源节点类型 应用/MQ/DB */
+  SourceComp?: string;
+  /** 边上目标节点类型 应用/MQ/DB */
+  TargetComp?: string;
+}
+
+/** 拓扑图边节点 */
+declare interface TopologyNode {
+  /** 错误率 */
+  ErrRate?: number | null;
+  /** 节点类型 */
+  Kind?: string | null;
+  /** 节点名 */
+  Name?: string;
+  /** 节点权重 */
+  Weight?: number | null;
+  /** 节点颜色 */
+  Color?: string | null;
+  /** 响应时间 */
+  Duration?: number | null;
+  /** 吞吐量 */
+  Qps?: number | null;
+  /** 节点类型 */
+  Type?: string | null;
+  /** 节点ID */
+  Id?: string;
+  /** 节点大小 */
+  Size?: string | null;
+  /** 节点是否为组件类型 */
+  IsModule?: boolean | null;
+  /** 节点位置信息 */
+  Position?: Position | null;
+  /** 节点标签 */
+  Tags?: ApmTag[] | null;
+  /** 节点是否可以下钻 */
+  CanDrillDown?: boolean | null;
+  /** 资源层信息 */
+  Resource?: Resource | null;
+  /** 拓扑节点视图名字 */
+  NodeView?: string;
+  /** MQ 消费者视角的响应时间 ms */
+  ConsumerDuration?: number;
+  /** MQ 消费者视角的错误率 % */
+  ConsumerErrRate?: number;
+  /** MQ 消费者视角的吞吐量 */
+  ConsumerQps?: number;
+  /** 应用 ID */
+  ServiceId?: string;
 }
 
 declare interface CreateApmInstanceRequest {
@@ -1006,6 +1146,56 @@ declare interface DescribeTagValuesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTopologyNewRequest {
+  /** 业务系统 ID */
+  InstanceId: string;
+  /** 查询开始时间 */
+  StartTime: number;
+  /** 查询结束时间 */
+  EndTime: number;
+  /** 应用名 */
+  ServiceName?: string;
+  /** 上游层级 */
+  UpLevel?: number;
+  /** 应用实例信息 */
+  ServiceInstance?: string;
+  /** 下游层级 */
+  DownLevel?: number;
+  /** 视角 */
+  View?: string;
+  /** 过滤器 */
+  Filters?: Filter[];
+  /** 表示Topic（MQ拓扑图用） */
+  Topic?: string;
+  /** 视图筛选列表 */
+  Selectors?: Selectors;
+  /** 视图ID */
+  Id?: string;
+  /** TraceID */
+  TraceID?: string;
+  /** 查询top5慢响应节点 */
+  IsSlowTopFive?: boolean;
+  /** 是否获取资源层信息 */
+  GetResource?: boolean;
+  /** 根据应用标签过滤 */
+  Tags?: ApmTag[];
+  /** 不显示的节点类型 */
+  Hidden?: Selectors;
+}
+
+declare interface DescribeTopologyNewResponse {
+  /** 节点集合 */
+  Nodes?: TopologyNode[] | null;
+  /** 边集合 */
+  Edges?: TopologyEdgeNew[];
+  /** 拓扑图是否有修改 */
+  TopologyModifyFlag?: number | null;
+  /** 节点数量 */
+  Selectors?: SelectorView | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyApmApplicationConfigRequest {
   /** 业务系统 ID */
   InstanceId: string;
@@ -1341,6 +1531,8 @@ declare interface Apm {
   DescribeServiceOverview(data: DescribeServiceOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceOverviewResponse>;
   /** 查询 Tag 数据 {@link DescribeTagValuesRequest} {@link DescribeTagValuesResponse} */
   DescribeTagValues(data: DescribeTagValuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagValuesResponse>;
+  /** 获取拓扑图 {@link DescribeTopologyNewRequest} {@link DescribeTopologyNewResponse} */
+  DescribeTopologyNew(data: DescribeTopologyNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopologyNewResponse>;
   /** 修改应用配置 {@link ModifyApmApplicationConfigRequest} {@link ModifyApmApplicationConfigResponse} */
   ModifyApmApplicationConfig(data: ModifyApmApplicationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApmApplicationConfigResponse>;
   /** 修改apm业务系统与其他产品的关联关系 {@link ModifyApmAssociationRequest} {@link ModifyApmAssociationResponse} */

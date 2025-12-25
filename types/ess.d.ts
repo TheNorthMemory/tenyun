@@ -4449,7 +4449,7 @@ declare interface DescribeOrganizationSealsRequest {
   InfoType?: number;
   /** 印章id，是否查询特定的印章（没有输入返回所有） */
   SealId?: string;
-  /** 印章种类列表（均为组织机构印章）。 若无特定需求，将展示所有类型的印章。 目前支持以下几种： OFFICIAL：企业公章； CONTRACT：合同专用章； FINANCE：财务专用章； PERSONNEL：人事专用章；INVOICE：发票专用章；LEGAL_PERSON_SEAL：法定代表人章。 EMPLOYEE_QUALIFICATION_SEAL：员工执业章。 */
+  /** 印章种类列表（均为组织机构印章）。 若无特定需求，将展示所有类型的印章。 目前支持以下几种： OFFICIAL：企业公章； CONTRACT：合同专用章； FINANCE：财务专用章； PERSONNEL：人事专用章；INVOICE：发票专用章；LEGAL_PERSON_SEAL：法定代表人章。 EMPLOYEE_QUALIFICATION_SEAL：员工执业章。OTHER其他类型印章 */
   SealTypes?: string[];
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;

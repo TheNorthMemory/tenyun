@@ -327,11 +327,17 @@ declare interface DescribeAccessGroupsRequest {
   VpcId?: string;
   /** 资源所属者Uin */
   OwnerUin?: number;
+  /** 起始权限组ID标记 */
+  AccessGroupIdMarker?: string;
 }
 
 declare interface DescribeAccessGroupsResponse {
   /** 权限组列表 */
   AccessGroups?: AccessGroup[];
+  /** 标识是否已获取全量 */
+  IsOver?: boolean;
+  /** 下一次请求起始权限组ID标记 */
+  NextAccessGroupIdMarker?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -373,11 +379,17 @@ declare interface DescribeFileSystemResponse {
 }
 
 declare interface DescribeFileSystemsRequest {
+  /** 起始文件系统ID标记 */
+  FileSystemIdMarker?: string;
 }
 
 declare interface DescribeFileSystemsResponse {
   /** 文件系统列表 */
   FileSystems?: FileSystem[];
+  /** 标识是否已获取全量 */
+  IsOver?: boolean;
+  /** 下一次请求起始文件系统ID标记 */
+  NextFileSystemIdMarker?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -437,11 +449,17 @@ declare interface DescribeResourceTagsResponse {
 declare interface DescribeRestoreTasksRequest {
   /** 文件系统ID */
   FileSystemId: string;
+  /** 起始回热任务ID标记 */
+  RestoreTaskIdMarker?: number;
 }
 
 declare interface DescribeRestoreTasksResponse {
   /** 回热任务列表 */
-  RestoreTasks: RestoreTask[];
+  RestoreTasks?: RestoreTask[];
+  /** 标识是否已获取全量 */
+  IsOver?: boolean;
+  /** 下一次请求起始回热任务ID标记 */
+  NextRestoreTaskIdMarker?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1742,6 +1742,22 @@ declare interface TransitionTypeInfo {
   Index?: number;
 }
 
+/** 拉流转推任务流数据信息。 */
+declare interface TurnPushInfo {
+  /** 视频帧率，单位fps。 */
+  VideoFps: number;
+  /** 音频帧率，单位fps。 */
+  AudioFps: number;
+  /** 视频码率，单位bps。 */
+  VideoRate: number;
+  /** 音频码率，单位bps。 */
+  AudioRate: number;
+  /** 流标识。 */
+  StreamFlag: string;
+  /** 时间，utc格式：yyyy-mm-ddTHH:MM:SSZ，参考https://cloud.tencent.com/document/product/266/11732 */
+  Time: string;
+}
+
 /** 水印信息。 */
 declare interface WatermarkInfo {
   /** 水印 ID。 */
@@ -4318,6 +4334,22 @@ declare interface DescribePullStreamConfigsResponse {
   RequestId?: string;
 }
 
+declare interface DescribePullTransformPushInfoListRequest {
+  /** utc开始时间，格式为：yyyy-mm-ddTHH:MM:SSZ，参考https://cloud.tencent.com/document/product/266/11732 */
+  StartTime: string;
+  /** utc结束时间，格式为：yyyy-mm-ddTHH:MM:SSZ，参考https://cloud.tencent.com/document/product/266/11732 */
+  EndTime: string;
+  /** 拉流转推任务Id。 */
+  TaskId: string;
+}
+
+declare interface DescribePullTransformPushInfoListResponse {
+  /** 拉流任务流信息列表。 */
+  DataInfoList: TurnPushInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePullTransformPushInfoRequest {
   /** 起始时间点，接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
   StartTime: string;
@@ -5771,6 +5803,8 @@ declare interface Live {
   DescribePullStreamConfigs(data?: DescribePullStreamConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePullStreamConfigsResponse>;
   /** 查询拉流转推任务的时长信息 {@link DescribePullTransformPushInfoRequest} {@link DescribePullTransformPushInfoResponse} */
   DescribePullTransformPushInfo(data: DescribePullTransformPushInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePullTransformPushInfoResponse>;
+  /** 查询拉流转推任务流数据 {@link DescribePullTransformPushInfoListRequest} {@link DescribePullTransformPushInfoListResponse} */
+  DescribePullTransformPushInfoList(data: DescribePullTransformPushInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePullTransformPushInfoListResponse>;
   /** 直播推流带宽和流量数据查询 {@link DescribePushBandwidthAndFluxListRequest} {@link DescribePushBandwidthAndFluxListResponse} */
   DescribePushBandwidthAndFluxList(data: DescribePushBandwidthAndFluxListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePushBandwidthAndFluxListResponse>;
   /** 查询录制任务列表（新） {@link DescribeRecordTaskRequest} {@link DescribeRecordTaskResponse} */

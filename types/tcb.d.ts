@@ -208,36 +208,6 @@ declare interface CloudBaseRunEmptyDirVolumeSource {
   SizeLimit?: string;
 }
 
-/** 独立网关云托管服务配置信息 */
-declare interface CloudBaseRunForGatewayConf {
-  /** 是否缩容到0 */
-  IsZero: boolean;
-  /** 按百分比灰度的权重 */
-  Weight: number;
-  /** 按请求/header参数的灰度Key */
-  GrayKey: string;
-  /** 按请求/header参数的灰度Value */
-  GrayValue: string;
-  /** 是否为默认版本(按请求/header参数) */
-  IsDefault: boolean;
-  /** 访问权限，对应二进制分多段，vpc内网｜公网｜oa */
-  AccessType: number;
-  /** 访问的URL（域名＋路径）列表 */
-  URLs: string[];
-  /** 环境ID */
-  EnvId?: string;
-  /** 服务名称 */
-  ServerName?: string;
-  /** 版本名称 */
-  VersionName?: string;
-  /** 灰度类型：FLOW(权重), URL_PARAMS/HEAD_PARAMS */
-  GrayType?: string;
-  /** CLB的IP:Port */
-  LbAddr?: string;
-  /** 0:http访问服务配置信息, 1: 服务域名 */
-  ConfigType?: number;
-}
-
 /** CloudBaseRun 镜像信息 */
 declare interface CloudBaseRunImageInfo {
   /** 镜像仓库名称 */
@@ -382,20 +352,6 @@ declare interface CloudBaseRunVersionFlowItem {
   Priority?: number;
   /** 是否是默认兜底版本 */
   IsDefaultPriority?: boolean;
-}
-
-/** pod信息 */
-declare interface CloudBaseRunVersionPod {
-  /** webshell链接 */
-  Webshell?: string;
-  /** pod name */
-  PodId?: string;
-  /** pod ip */
-  PodIp?: string;
-  /** 状态 */
-  Status?: string;
-  /** 创建时间 */
-  CreateTime?: string;
 }
 
 /** cfs挂载点 */
@@ -898,22 +854,6 @@ declare interface ObjectKV {
   Value?: string;
 }
 
-/** 一键部署步骤信息 */
-declare interface OneClickTaskStepInfo {
-  /** 未启动："todo"运行中："running"失败："failed"成功结束："finished" */
-  Status?: string;
-  /** 开始时间 */
-  StartTime?: string;
-  /** 结束时间 */
-  EndTime?: string;
-  /** 耗时：秒 */
-  CostTime?: number;
-  /** 失败原因 */
-  FailReason?: string;
-  /** 步骤名 */
-  Name?: string;
-}
-
 /** 订单信息 */
 declare interface OrderInfo {
   /** 订单号 */
@@ -1372,54 +1312,6 @@ declare interface CreateStaticStoreResponse {
   RequestId?: string;
 }
 
-declare interface CreateWxCloudBaseRunEnvRequest {
-  /** wx应用Id */
-  WxAppId: string;
-  /** 环境别名，要以a-z开头，不能包含 a-z,0-9,- 以外的字符 */
-  Alias?: string;
-  /** 用户享有的免费额度级别，目前只能为“basic”，不传该字段或该字段为空，标识不享受免费额度。 */
-  FreeQuota?: string;
-  /** 订单标记。建议使用方统一转大小写之后再判断。QuickStart：快速启动来源Activity：活动来源 */
-  Flag?: string;
-  /** 私有网络Id */
-  VpcId?: string;
-  /** 子网列表 */
-  SubNetIds?: string[];
-  /** 是否打开云调用 */
-  IsOpenCloudInvoke?: boolean;
-  /** 创建来源：wechat | cloud */
-  Source?: string;
-  /** 渠道：wechat | cloud */
-  Channel?: string;
-}
-
-declare interface CreateWxCloudBaseRunEnvResponse {
-  /** 环境Id */
-  EnvId?: string;
-  /** 后付费订单号 */
-  TranId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateWxCloudBaseRunServerDBClusterRequest {
-  /** 账户密码 */
-  AccountPassword: string;
-  /** 环境ID */
-  EnvId: string;
-  /** 微信appid */
-  WxAppId?: string;
-  /** mysql内核版本，支持5.7,8.0 */
-  DbVersion?: string;
-  /** 0: 大小写敏感1: 非大小写敏感默认为0 */
-  LowerCaseTableName?: string;
-}
-
-declare interface CreateWxCloudBaseRunServerDBClusterResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DeleteCloudBaseProjectLatestVersionRequest {
   /** 环境id */
   EnvId: string;
@@ -1724,114 +1616,6 @@ declare interface DescribeCloudBaseProjectVersionListResponse {
   RequestId?: string;
 }
 
-declare interface DescribeCloudBaseRunAllVpcsRequest {
-  /** 环境ID */
-  EnvId: string;
-}
-
-declare interface DescribeCloudBaseRunAllVpcsResponse {
-  /** 所有vpcid */
-  Vpcs?: string[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeCloudBaseRunConfForGateWayRequest {
-  /** 环境ID */
-  EnvID: string;
-  /** vpc信息 */
-  VpcID?: string;
-}
-
-declare interface DescribeCloudBaseRunConfForGateWayResponse {
-  /** 最近更新时间 */
-  LastUpTime?: string;
-  /** 配置信息 */
-  Data?: CloudBaseRunForGatewayConf[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeCloudBaseRunOneClickTaskExternalRequest {
-  /** 外部任务Id 最长64字节 */
-  ExternalId: string;
-}
-
-declare interface DescribeCloudBaseRunOneClickTaskExternalResponse {
-  /** 外部任务Id */
-  ExternalId?: string;
-  /** 弃用 */
-  EnvId?: string;
-  /** 用户uin */
-  UserUin?: string;
-  /** 服务名 */
-  ServerName?: string;
-  /** 版本名 */
-  VersionName?: string;
-  /** 创建时间 */
-  CreateTime?: string;
-  /** 当前阶段微信云托管环境创建阶段：envStage存储资源创建阶段：storageStage服务创建阶段：serverStage */
-  Stage?: string;
-  /** 状态runningstoppedfailedfinished */
-  Status?: string;
-  /** 失败原因 */
-  FailReason?: string;
-  /** 用户envId */
-  UserEnvId?: string;
-  /** 创建时间 */
-  StartTime?: string;
-  /** 步骤信息 */
-  Steps?: OneClickTaskStepInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeCloudBaseRunOperationTypesRequest {
-  /** 环境ID */
-  EnvId: string;
-  /** 服务名称，精确匹配 */
-  ServerName?: string;
-}
-
-declare interface DescribeCloudBaseRunOperationTypesResponse {
-  /** 操作类型 */
-  Action?: string[];
-  /** 服务名列表 */
-  ServerName?: string[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeCloudBaseRunPodListRequest {
-  /** 环境id */
-  EnvId: string;
-  /** 服务名 */
-  ServerName: string;
-  /** 版本名 */
-  VersionName: string;
-  /** 分页限制 */
-  Limit?: number;
-  /** 分页偏移量 */
-  Offset?: number;
-  /** 容器状态 */
-  Status?: string;
-  /** 容器名 */
-  PodName?: string;
-}
-
-declare interface DescribeCloudBaseRunPodListResponse {
-  /** 偏移量 */
-  Offset?: number;
-  /** 分页大小 */
-  Limit?: number;
-  /** 总数 */
-  TotalCount?: number;
-  /** 容器列表 */
-  PodList?: CloudBaseRunVersionPod[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeCloudBaseRunResourceForExtendRequest {
   /** 环境ID */
   EnvId: string;
@@ -1868,28 +1652,6 @@ declare interface DescribeCloudBaseRunResourceResponse {
   Region?: string;
   /** 子网信息 */
   SubnetIds?: CloudBaseRunVpcSubnet[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeCloudBaseRunServerDomainNameRequest {
-  /** 服务名 */
-  ServerName: string;
-  /** 环境Id */
-  UserEnvId: string;
-  /** 用户Uin */
-  UserUin: string;
-  /** 外部Id */
-  ExternalId: string;
-}
-
-declare interface DescribeCloudBaseRunServerDomainNameResponse {
-  /** 公网服务域名 */
-  PublicDomain?: string;
-  /** 内部服务域名 */
-  InternalDomain?: string;
-  /** 弃用 */
-  DomainName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2096,20 +1858,6 @@ declare interface DescribeCloudBaseRunVersionResponse {
   Cpu?: number;
   /** Mem的Request值 */
   Mem?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeCloudBaseRunVersionRsByConditionRequest {
-  /** 环境ID；EnvId和ClusterId不能同时为空 */
-  EnvId?: string;
-  /** 集群ID；EnvId和ClusterId不能同时为空 */
-  ClusterId?: string;
-  /** 过滤网关服务开关 */
-  FilterGwSwitch?: boolean;
-}
-
-declare interface DescribeCloudBaseRunVersionRsByConditionResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2534,34 +2282,6 @@ declare interface DescribeUserActivityInfoResponse {
   RequestId?: string;
 }
 
-declare interface DescribeWxCloudBaseRunEnvsRequest {
-  /** wx应用Id */
-  WxAppId?: string;
-  /** 是否查询全地域 */
-  AllRegions?: boolean;
-}
-
-declare interface DescribeWxCloudBaseRunEnvsResponse {
-  /** env列表 */
-  EnvList?: EnvInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeWxCloudBaseRunSubNetsRequest {
-  /** VPC id */
-  VpcId: string;
-  /** 查询个数限制，不填或小于等于0，等于不限制 */
-  Limit?: number;
-}
-
-declare interface DescribeWxCloudBaseRunSubNetsResponse {
-  /** 子网Id列表 */
-  SubNetIds?: string[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeWxGatewayRoutesRequest {
   /** 环境ID */
   EnvId: string;
@@ -2854,88 +2574,6 @@ declare interface ReplaceActivityRecordResponse {
   RequestId?: string;
 }
 
-declare interface RollUpdateCloudBaseRunServerVersionRequest {
-  /** 环境ID */
-  EnvId: string;
-  /** 要替换的版本名称，可以为latest */
-  VersionName: string;
-  /** 枚举（package/repository/image) */
-  UploadType?: string;
-  /** repository的类型(coding/gitlab/github) */
-  RepositoryType?: string;
-  /** 流量占比 */
-  FlowRatio?: number;
-  /** dockerfile地址 */
-  DockerfilePath?: string;
-  /** 构建目录 */
-  BuildDir?: string;
-  /** Cpu的大小，单位：核 */
-  Cpu?: string;
-  /** Mem的大小，单位：G */
-  Mem?: string;
-  /** 最小副本数，最小值：0 */
-  MinNum?: string;
-  /** 最大副本数 */
-  MaxNum?: string;
-  /** 策略类型cpu/mem */
-  PolicyType?: string;
-  /** 策略阈值 */
-  PolicyThreshold?: string;
-  /** 环境变量 */
-  EnvParams?: string;
-  /** 容器端口 */
-  ContainerPort?: number;
-  /** 服务名称 */
-  ServerName?: string;
-  /** repository地址 */
-  Repository?: string;
-  /** 分支 */
-  Branch?: string;
-  /** 版本备注 */
-  VersionRemark?: string;
-  /** 代码包名字 */
-  PackageName?: string;
-  /** 代码包版本 */
-  PackageVersion?: string;
-  /** Image的详情 */
-  ImageInfo?: CloudBaseRunImageInfo;
-  /** Github等拉取代码的详情 */
-  CodeDetail?: CloudBaseCodeRepoDetail;
-  /** 是否回放流量 */
-  IsRebuild?: boolean;
-  /** 延迟多长时间开始健康检查（单位s） */
-  InitialDelaySeconds?: number;
-  /** cfs挂载信息 */
-  MountVolumeInfo?: CloudBaseRunVolumeMount[];
-  /** 是否回滚 */
-  Rollback?: boolean;
-  /** 版本历史名 */
-  SnapshotName?: string;
-  /** 自定义采集路径 */
-  CustomLogs?: string;
-  /** 是否启用统一域名 */
-  EnableUnion?: boolean;
-  /** 操作备注 */
-  OperatorRemark?: string;
-  /** 服务路径（只会第一次生效） */
-  ServerPath?: string;
-  /** 是否更新Cls */
-  IsUpdateCls?: boolean;
-  /** 自动扩缩容策略组 */
-  PolicyDetail?: HpaPolicy[];
-}
-
-declare interface RollUpdateCloudBaseRunServerVersionResponse {
-  /** succ为成功 */
-  Result?: string;
-  /** 滚动更新的VersionName */
-  VersionName?: string;
-  /** 操作记录id */
-  RunId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface SearchClsLogRequest {
   /** 环境唯一ID */
   EnvId: string;
@@ -3001,10 +2639,6 @@ declare interface Tcb {
   CreatePostpayPackage(data?: CreatePostpayPackageRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePostpayPackageResponse>;
   /** 创建静态托管资源 {@link CreateStaticStoreRequest} {@link CreateStaticStoreResponse} */
   CreateStaticStore(data: CreateStaticStoreRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStaticStoreResponse>;
-  /** 创建微信云托管 {@link CreateWxCloudBaseRunEnvRequest} {@link CreateWxCloudBaseRunEnvResponse} */
-  CreateWxCloudBaseRunEnv(data: CreateWxCloudBaseRunEnvRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWxCloudBaseRunEnvResponse>;
-  /** 开通微信云托管MySQL数据库服务 {@link CreateWxCloudBaseRunServerDBClusterRequest} {@link CreateWxCloudBaseRunServerDBClusterResponse} */
-  CreateWxCloudBaseRunServerDBCluster(data: CreateWxCloudBaseRunServerDBClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWxCloudBaseRunServerDBClusterResponse>;
   /** 删除云项目 {@link DeleteCloudBaseProjectLatestVersionRequest} {@link DeleteCloudBaseProjectLatestVersionResponse} */
   DeleteCloudBaseProjectLatestVersion(data: DeleteCloudBaseProjectLatestVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudBaseProjectLatestVersionResponse>;
   /** 删除服务版本 {@link DeleteCloudBaseRunServerVersionRequest} {@link DeleteCloudBaseRunServerVersionResponse} */
@@ -3029,30 +2663,16 @@ declare interface Tcb {
   DescribeCloudBaseProjectLatestVersionList(data: DescribeCloudBaseProjectLatestVersionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseProjectLatestVersionListResponse>;
   /** 云项目部署版本列表 {@link DescribeCloudBaseProjectVersionListRequest} {@link DescribeCloudBaseProjectVersionListResponse} */
   DescribeCloudBaseProjectVersionList(data: DescribeCloudBaseProjectVersionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseProjectVersionListResponse>;
-  /** 查看环境下的所有vpc {@link DescribeCloudBaseRunAllVpcsRequest} {@link DescribeCloudBaseRunAllVpcsResponse} */
-  DescribeCloudBaseRunAllVpcs(data: DescribeCloudBaseRunAllVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunAllVpcsResponse>;
-  /** 独立网关云托管服务配置 {@link DescribeCloudBaseRunConfForGateWayRequest} {@link DescribeCloudBaseRunConfForGateWayResponse} */
-  DescribeCloudBaseRunConfForGateWay(data: DescribeCloudBaseRunConfForGateWayRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunConfForGateWayResponse>;
-  /** 查询一键部署任务 {@link DescribeCloudBaseRunOneClickTaskExternalRequest} {@link DescribeCloudBaseRunOneClickTaskExternalResponse} */
-  DescribeCloudBaseRunOneClickTaskExternal(data: DescribeCloudBaseRunOneClickTaskExternalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunOneClickTaskExternalResponse>;
-  /** 查询操作类型接口 {@link DescribeCloudBaseRunOperationTypesRequest} {@link DescribeCloudBaseRunOperationTypesResponse} */
-  DescribeCloudBaseRunOperationTypes(data: DescribeCloudBaseRunOperationTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunOperationTypesResponse>;
-  /** 查询云托管服务版本容器列表 {@link DescribeCloudBaseRunPodListRequest} {@link DescribeCloudBaseRunPodListResponse} */
-  DescribeCloudBaseRunPodList(data: DescribeCloudBaseRunPodListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunPodListResponse>;
   /** 查看容器托管的资源状态 {@link DescribeCloudBaseRunResourceRequest} {@link DescribeCloudBaseRunResourceResponse} */
   DescribeCloudBaseRunResource(data: DescribeCloudBaseRunResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunResourceResponse>;
   /** 查看容器托管的资源状态扩展使用 {@link DescribeCloudBaseRunResourceForExtendRequest} {@link DescribeCloudBaseRunResourceForExtendResponse} */
   DescribeCloudBaseRunResourceForExtend(data: DescribeCloudBaseRunResourceForExtendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunResourceForExtendResponse>;
   /** 查询单个服务的详情 {@link DescribeCloudBaseRunServerRequest} {@link DescribeCloudBaseRunServerResponse} */
   DescribeCloudBaseRunServer(data: DescribeCloudBaseRunServerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunServerResponse>;
-  /** 查询微信云托管服务域名 {@link DescribeCloudBaseRunServerDomainNameRequest} {@link DescribeCloudBaseRunServerDomainNameResponse} */
-  DescribeCloudBaseRunServerDomainName(data: DescribeCloudBaseRunServerDomainNameRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunServerDomainNameResponse>;
   /** 查询云托管服务版本的详情 {@link DescribeCloudBaseRunServerVersionRequest} {@link DescribeCloudBaseRunServerVersionResponse} */
   DescribeCloudBaseRunServerVersion(data: DescribeCloudBaseRunServerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunServerVersionResponse>;
   /** 查询服务版本详情 {@link DescribeCloudBaseRunVersionRequest} {@link DescribeCloudBaseRunVersionResponse} */
   DescribeCloudBaseRunVersion(data: DescribeCloudBaseRunVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunVersionResponse>;
-  /** 获取云托管详情 {@link DescribeCloudBaseRunVersionRsByConditionRequest} {@link DescribeCloudBaseRunVersionRsByConditionResponse} */
-  DescribeCloudBaseRunVersionRsByCondition(data?: DescribeCloudBaseRunVersionRsByConditionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunVersionRsByConditionResponse>;
   /** 查询版本历史 {@link DescribeCloudBaseRunVersionSnapshotRequest} {@link DescribeCloudBaseRunVersionSnapshotResponse} */
   DescribeCloudBaseRunVersionSnapshot(data: DescribeCloudBaseRunVersionSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunVersionSnapshotResponse>;
   /** 查询环境监控曲线 {@link DescribeCurveDataRequest} {@link DescribeCurveDataResponse} */
@@ -3095,10 +2715,6 @@ declare interface Tcb {
   DescribeSpecialCostItems(data?: DescribeSpecialCostItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecialCostItemsResponse>;
   /** 查询用户活动信息 {@link DescribeUserActivityInfoRequest} {@link DescribeUserActivityInfoResponse} */
   DescribeUserActivityInfo(data: DescribeUserActivityInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserActivityInfoResponse>;
-  /** 查询微信云托管环境信息 {@link DescribeWxCloudBaseRunEnvsRequest} {@link DescribeWxCloudBaseRunEnvsResponse} */
-  DescribeWxCloudBaseRunEnvs(data?: DescribeWxCloudBaseRunEnvsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWxCloudBaseRunEnvsResponse>;
-  /** 查询微信云托管子网 {@link DescribeWxCloudBaseRunSubNetsRequest} {@link DescribeWxCloudBaseRunSubNetsResponse} */
-  DescribeWxCloudBaseRunSubNets(data: DescribeWxCloudBaseRunSubNetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWxCloudBaseRunSubNetsResponse>;
   /** 查看安全网关路由 {@link DescribeWxGatewayRoutesRequest} {@link DescribeWxGatewayRoutesResponse} */
   DescribeWxGatewayRoutes(data: DescribeWxGatewayRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWxGatewayRoutesResponse>;
   /** 查看安全网关 {@link DescribeWxGatewaysRequest} {@link DescribeWxGatewaysResponse} */
@@ -3131,8 +2747,6 @@ declare interface Tcb {
   ReinstateEnv(data: ReinstateEnvRequest, config?: AxiosRequestConfig): AxiosPromise<ReinstateEnvResponse>;
   /** 更新活动详情 {@link ReplaceActivityRecordRequest} {@link ReplaceActivityRecordResponse} */
   ReplaceActivityRecord(data: ReplaceActivityRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceActivityRecordResponse>;
-  /** 滚动更新服务版本 {@link RollUpdateCloudBaseRunServerVersionRequest} {@link RollUpdateCloudBaseRunServerVersionResponse} */
-  RollUpdateCloudBaseRunServerVersion(data: RollUpdateCloudBaseRunServerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<RollUpdateCloudBaseRunServerVersionResponse>;
   /** 搜索CLS日志 {@link SearchClsLogRequest} {@link SearchClsLogResponse} */
   SearchClsLog(data: SearchClsLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClsLogResponse>;
   /** 批量解冻服务 {@link UnfreezeCloudBaseRunServersRequest} {@link UnfreezeCloudBaseRunServersResponse} */
@@ -3188,9 +2802,13 @@ declare interface Tcb {
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   CreateWxCloudBaseRunDBAccount(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
+  CreateWxCloudBaseRunEnv(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
+  /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   CreateWxCloudBaseRunPipeline(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   CreateWxCloudBaseRunReleaseOrder(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
+  /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
+  CreateWxCloudBaseRunServerDBCluster(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   CreateWxRunPackageDeal(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
@@ -3281,6 +2899,8 @@ declare interface Tcb {
   DescribeCloudBaseRunImages(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeCloudBaseRunOperationDetails(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
+  /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
+  DescribeCloudBaseRunPodList(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeCloudBaseRunProcessLog(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
@@ -3422,6 +3042,8 @@ declare interface Tcb {
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeWxCloudBaseRunDBParams(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
+  DescribeWxCloudBaseRunEnvs(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
+  /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeWxCloudBaseRunFreeQuota(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeWxCloudBaseRunPipelineTasks(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
@@ -3429,6 +3051,8 @@ declare interface Tcb {
   DescribeWxCloudBaseRunPipelines(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeWxCloudBaseRunReleaseOrder(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
+  /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
+  DescribeWxCloudBaseRunSubNets(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeWxRunPackageGoods(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
@@ -3501,6 +3125,8 @@ declare interface Tcb {
   ResumeCloudBaseRunTdsql(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   RevokeInvoice(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
+  /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
+  RollUpdateCloudBaseRunServerVersion(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   SetCommonRenewFlag(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */

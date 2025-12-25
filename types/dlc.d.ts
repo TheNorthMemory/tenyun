@@ -5973,11 +5973,13 @@ declare interface QueryInternalTableWarehouseRequest {
   DatabaseName: string;
   /** 表名 */
   TableName: string;
+  /** catalog名称 */
+  DatasourceConnectionName?: string;
 }
 
 declare interface QueryInternalTableWarehouseResponse {
   /** warehouse路径 */
-  WarehousePath: string;
+  WarehousePath?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

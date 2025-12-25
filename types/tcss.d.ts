@@ -1522,6 +1522,8 @@ declare interface HostInfo {
   DefendStatus?: string;
   /** 核数 */
   CoresCnt?: number;
+  /** 最近在线时间 */
+  LastOnlineTime?: string;
 }
 
 /** 镜像自动授权任务信息 */

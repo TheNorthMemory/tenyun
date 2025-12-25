@@ -623,6 +623,8 @@ declare interface CreateXMagicResponse {
 }
 
 declare interface DeleteApplicationAndVideoLicenseRequest {
+  /** license唯一标识 */
+  LicenseId: number;
 }
 
 declare interface DeleteApplicationAndVideoLicenseResponse {
@@ -1064,7 +1066,7 @@ declare interface Vcube {
   /** 创建Xmagic {@link CreateXMagicRequest} {@link CreateXMagicResponse} */
   CreateXMagic(data: CreateXMagicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateXMagicResponse>;
   /** 删除视频播放器 License 和相关应用 {@link DeleteApplicationAndVideoLicenseRequest} {@link DeleteApplicationAndVideoLicenseResponse} */
-  DeleteApplicationAndVideoLicense(data?: DeleteApplicationAndVideoLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationAndVideoLicenseResponse>;
+  DeleteApplicationAndVideoLicense(data: DeleteApplicationAndVideoLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationAndVideoLicenseResponse>;
   /** 删除web播放器license和应用 {@link DeleteApplicationAndWebPlayerLicenseRequest} {@link DeleteApplicationAndWebPlayerLicenseResponse} */
   DeleteApplicationAndWebPlayerLicense(data: DeleteApplicationAndWebPlayerLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationAndWebPlayerLicenseResponse>;
   /** 查询功能列表 {@link DescribeFeatureListRequest} {@link DescribeFeatureListResponse} */

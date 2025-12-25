@@ -44,6 +44,8 @@ declare interface AudioResult {
   HitType?: string;
   /** ASR句子的起止时间 */
   Sentences?: Sentence[];
+  /** 切片请求ID */
+  RequestId?: string;
 }
 
 /** 音频小语种检测结果 */
@@ -142,6 +144,8 @@ declare interface ImageResult {
   RecognitionResults?: RecognitionResult[];
   /** 审核命中类型 */
   HitType?: string;
+  /** 截帧请求ID */
+  RequestId?: string;
 }
 
 /** 图片输出结果的子结果 */

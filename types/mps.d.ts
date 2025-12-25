@@ -5132,6 +5132,18 @@ declare interface RawWatermarkParameter {
   ImageTemplate?: RawImageWatermarkInput;
 }
 
+/** 识别音频单句结果 */
+declare interface RecognizeAudioSentence {
+  /** 在音频中的起始时间，单位秒 */
+  Start?: number;
+  /** 在音频中的截止时间，单位秒 */
+  End?: number;
+  /** 音频识别结果 */
+  Text?: string;
+  /** 字词时间戳结果 */
+  WordsInfo?: WordResult[];
+}
+
 /** 地区信息。 */
 declare interface RegionInfo {
   /** 地区名称。 */
@@ -9582,6 +9594,28 @@ declare interface ProcessMediaResponse {
   RequestId?: string;
 }
 
+declare interface RecognizeAudioRequest {
+  /** base64编码的音频数据 */
+  AudioData: string;
+  /** 识别目标语言，为空默认 auto 自动识别语种。注：如果自动识别语种识别效果不佳，可以指定语种提高准确率当前支持语言：auto: 自动识别zh: 简体中文en: 英语ja: 日语ko: 韩语vi: 越南语ms: 马来语id: 印度尼西亚语fil: 菲律宾语th: 泰语pt: 葡萄牙语tr: 土耳其语ar: 阿拉伯语es: 西班牙语hi: 印地语fr: 法语de: 德语it: 意大利语yue: 粤语ru: 俄语af: 南非荷兰语sq: 阿尔巴尼亚语am: 阿姆哈拉语hy: 亚美尼亚语az: 阿塞拜疆语eu: 巴斯克语bn: 孟加拉语bs: 波斯尼亚语bg: 保加利亚语my: 缅甸语ca: 加泰罗尼亚语hr: 克罗地亚语cs: 捷克语da: 丹麦语nl: 荷兰语et: 爱沙尼亚语fi: 芬兰语gl: 加利西亚语ka: 格鲁吉亚语el: 希腊语gu: 古吉拉特语iw: 希伯来语hu: 匈牙利语is: 冰岛语jv: 爪哇语kn: 卡纳达语kk: 哈萨克语km: 高棉语rw: 卢旺达语lo: 老挝语lv: 拉脱维亚语lt: 立陶宛语mk: 马其顿语ml: 马拉雅拉姆语mr: 马拉地语mn: 蒙古语ne: 尼泊尔语no: 博克马尔挪威语fa: 波斯语pl: 波兰语ro: 罗马尼亚语sr: 塞尔维亚语si: 僧伽罗语sk: 斯洛伐克语sl: 斯洛文尼亚语st: 南索托语su: 巽他语sw: 斯瓦希里语sv: 瑞典语ta: 泰米尔语te: 泰卢固语ts: 聪加语uk: 乌克兰语ur: 乌尔都语uz: 乌兹别克语ve: 文达语xh: 科萨语zu: 祖鲁语 */
+  Source?: string;
+  /** 音频数据格式，默认为 pcm支持的格式：pcm (16k 采样率的单声道 16 位采样 pcm 数据) */
+  AudioFormat?: string;
+  /** 扩展参数，默认不填，特殊需求使用 */
+  UserExtPara?: string;
+}
+
+declare interface RecognizeAudioResponse {
+  /** 整段音频的识别结果 */
+  Text?: string;
+  /** 音频长度，单位秒 */
+  AudioLength?: number;
+  /** 分句的识别结果 */
+  Sentence?: RecognizeAudioSentence[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RecognizeMediaForZhiXueRequest {
   /** 输入媒体文件存储信息。 */
   InputInfo: MediaInputInfo;
@@ -9971,6 +10005,8 @@ declare interface Mps {
   ProcessLiveStream(data: ProcessLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessLiveStreamResponse>;
   /** 发起媒体处理 {@link ProcessMediaRequest} {@link ProcessMediaResponse} */
   ProcessMedia(data: ProcessMediaRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessMediaResponse>;
+  /** 识别音频 {@link RecognizeAudioRequest} {@link RecognizeAudioResponse} */
+  RecognizeAudio(data: RecognizeAudioRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeAudioResponse>;
   /** 智学智能媒体识别 {@link RecognizeMediaForZhiXueRequest} {@link RecognizeMediaForZhiXueResponse} */
   RecognizeMediaForZhiXue(data: RecognizeMediaForZhiXueRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeMediaForZhiXueResponse>;
   /** 重设工作流 {@link ResetWorkflowRequest} {@link ResetWorkflowResponse} */

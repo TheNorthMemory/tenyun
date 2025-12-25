@@ -807,6 +807,8 @@ declare interface DescribeRelatedUsersRequest {
   PageSize: number;
   /** 环境类型 */
   EnvType?: string;
+  /** 新角色id */
+  RoleStringId?: string;
 }
 
 declare interface DescribeRelatedUsersResponse {

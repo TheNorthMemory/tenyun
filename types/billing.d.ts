@@ -3829,6 +3829,26 @@ declare interface DescribeCostSummaryByResourceResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCostSummaryByTagRequest {
+  /** 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2025-12，EndTime 为 2025-12，查询结果是 2025 年 12 月数据。 */
+  BeginTime: string;
+  /** 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2025-12，EndTime 为 2025-12，查询结果是 2025 年 12 月数据。 */
+  EndTime: string;
+  /** 分账标签键，用户自定义 */
+  TagKey: string;
+}
+
+declare interface DescribeCostSummaryByTagResponse {
+  /** 数据是否准备好，0准备中，1已就绪。 */
+  Ready?: number;
+  /** 各标签值消耗分布详情 */
+  SummaryOverview?: TagSummaryOverviewItem[];
+  /** 总计 */
+  SummaryTotal?: SummaryTotal;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDealsByCondRequest {
   /** 开始时间 2016-01-01 00:00:00 */
   StartTime: string;
@@ -4336,6 +4356,8 @@ declare interface Billing {
   DescribeCostSummaryByRegion(data: DescribeCostSummaryByRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCostSummaryByRegionResponse>;
   /** 获取按资源汇总消耗详情 {@link DescribeCostSummaryByResourceRequest} {@link DescribeCostSummaryByResourceResponse} */
   DescribeCostSummaryByResource(data: DescribeCostSummaryByResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCostSummaryByResourceResponse>;
+  /** 获取按标签汇总消耗详情 {@link DescribeCostSummaryByTagRequest} {@link DescribeCostSummaryByTagResponse} */
+  DescribeCostSummaryByTag(data: DescribeCostSummaryByTagRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCostSummaryByTagResponse>;
   /** 查询订单数据 {@link DescribeDealsByCondRequest} {@link DescribeDealsByCondResponse} */
   DescribeDealsByCond(data: DescribeDealsByCondRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDealsByCondResponse>;
   /** 获取COS产品用量明细 {@link DescribeDosageCosDetailByDateRequest} {@link DescribeDosageCosDetailByDateResponse} */

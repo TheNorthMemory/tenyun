@@ -2511,7 +2511,7 @@ declare interface ChannelDescribeOrganizationSealsRequest {
   InfoType?: number;
   /** 印章id，是否查询特定的印章（没有输入返回所有）注: `没有输入返回所有记录，最大返回100条。` */
   SealId?: string;
-  /** 电子印章类型 , 可选类型如下: **OFFICIAL**: 公章**CONTRACT**: 合同专用章;**FINANCE**: 财务专用章;**PERSONNEL**: 人事专用章**INVOICE**: 发票专用章**LEGAL_PERSON_SEAL**: 法定代表人章;**EMPLOYEE_QUALIFICATION_SEAL**: 员工执业章注: `1.为空时查询所有类型的印章。` */
+  /** 电子印章类型 , 可选类型如下: **OFFICIAL**: 公章**CONTRACT**: 合同专用章;**FINANCE**: 财务专用章;**PERSONNEL**: 人事专用章**INVOICE**: 发票专用章**LEGAL_PERSON_SEAL**: 法定代表人章;**EMPLOYEE_QUALIFICATION_SEAL**: 员工执业章**OTHER**: 其他类型印章注: `1.为空时查询所有类型的印章。` */
   SealTypes?: string[];
   /** 需查询的印章状态列表。 空，()仅查询启用状态的印章； ALL，查询所有状态的印章； CHECKING，查询待审核的印章； SUCCESS，查询启用状态的印章； FAIL，查询印章审核拒绝的印章； DISABLE，查询已停用的印章； STOPPED，查询已终止的印章； VOID，查询已作废的印章； INVALID，查询已失效的印章。 */
   SealStatuses?: string[];

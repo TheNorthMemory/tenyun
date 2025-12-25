@@ -988,6 +988,12 @@ declare interface ClbObject {
   ModifyTime?: string;
   /** 创建时间 */
   AddTime?: string;
+  /** 跨账号时，表示成员账号的appid */
+  MemberAppId?: number;
+  /** 跨账号时，表示成员账号的uin */
+  MemberUin?: string;
+  /** 跨账号时，表示成员账号的昵称 */
+  MemberNickName?: string;
 }
 
 /** Clb-waf地域信息 */
@@ -2232,6 +2238,10 @@ declare interface LoadBalancer {
   LoadBalancerType?: string;
   /** 负载均衡的域名 */
   LoadBalancerDomain?: string;
+  /** 监听器所属成员id */
+  MemberAppId?: number;
+  /** 监听器所属成员的uin */
+  MemberUin?: string;
 }
 
 /** 负载均衡器 */
@@ -2260,6 +2270,14 @@ declare interface LoadBalancerPackageNew {
   LoadBalancerType: string;
   /** 负载均衡器的域名 */
   LoadBalancerDomain?: string;
+  /** 监听器所属appid */
+  MemberAppId?: number;
+  /** 监听器自身所属uin */
+  MemberUin?: string;
+  /** 监听器被接入的waf账号 */
+  Appid?: number;
+  /** 集团账号昵称 */
+  MemberNickName?: string;
 }
 
 /** 攻击日志统计详情 */
@@ -5197,6 +5215,10 @@ declare interface DescribeObjectsRequest {
   Order?: string;
   /** 根据哪个字段排序 */
   By?: string;
+  /** 集团成员列表 */
+  MemberAppIdList?: number[];
+  /** 1代表跨账号情况，0代表单账号情况 */
+  IsCrossAccount?: number;
 }
 
 declare interface DescribeObjectsResponse {
@@ -6659,6 +6681,10 @@ declare interface ModifyObjectRequest {
   Proxy?: number;
   /** IsCdn=3时，需要填此参数，表示自定义header(OpType为Status或Proxy时，该值有效) */
   IpHeaders?: string[];
+  /** 对象所属集团成员appid */
+  MemberAppId?: number;
+  /** 对象所属集团成员uin */
+  MemberUin?: string;
 }
 
 declare interface ModifyObjectResponse {
