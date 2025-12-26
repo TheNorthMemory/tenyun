@@ -932,6 +932,8 @@ declare interface DescribeVersionDetailResponse {
   VpcConf?: VpcConf | null;
   /** volume conf */
   VolumesConf?: VolumeConf[] | null;
+  /** buildpack 信息 */
+  BuildPacks?: BuildPacksInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

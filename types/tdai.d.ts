@@ -289,15 +289,29 @@ declare interface DescribeAgentDutyTaskDetailResponse {
 }
 
 declare interface DescribeAgentDutyTasksRequest {
+  /** agent实例ID */
+  InstanceId: string;
+  /** 会话ID */
+  ChatId?: string;
   /** 查询开始位置 */
   Offset?: number;
   /** 列表查询数量 */
   Limit?: number;
+  /** 任务启动时间 */
+  StartTime?: string;
+  /** 任务结束时间 */
+  EndTime?: string;
+  /** 任务类型 */
+  AgentTaskType?: string;
+  /** 业务参数 */
+  Parameters?: Parameter[];
 }
 
 declare interface DescribeAgentDutyTasksResponse {
   /** 查询结果总数量 */
   TotalCount?: number;
+  /** 任务详细信息 */
+  DutyTasks?: AgentDutyTask[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -540,7 +554,7 @@ declare interface Tdai {
   /** 查询Agent实例值守任务详情 {@link DescribeAgentDutyTaskDetailRequest} {@link DescribeAgentDutyTaskDetailResponse} */
   DescribeAgentDutyTaskDetail(data?: DescribeAgentDutyTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDutyTaskDetailResponse>;
   /** 查询Agent实例值守任务列表 {@link DescribeAgentDutyTasksRequest} {@link DescribeAgentDutyTasksResponse} */
-  DescribeAgentDutyTasks(data?: DescribeAgentDutyTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDutyTasksResponse>;
+  DescribeAgentDutyTasks(data: DescribeAgentDutyTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDutyTasksResponse>;
   /** 查询指定Agent实例的详细信息 {@link DescribeAgentInstanceRequest} {@link DescribeAgentInstanceResponse} */
   DescribeAgentInstance(data?: DescribeAgentInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentInstanceResponse>;
   /** 查询Agent实例列表 {@link DescribeAgentInstancesRequest} {@link DescribeAgentInstancesResponse} */

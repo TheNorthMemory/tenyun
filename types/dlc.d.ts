@@ -6104,6 +6104,16 @@ declare interface RollbackDataEngineImageResponse {
   RequestId?: string;
 }
 
+declare interface SetOptimizerPolicyRequest {
+  /** 优化策略 */
+  SmartPolicy: SmartPolicy;
+}
+
+declare interface SetOptimizerPolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SuspendResumeDataEngineRequest {
   /** 虚拟集群名称 */
   DataEngineName: string;
@@ -6737,6 +6747,8 @@ declare interface Dlc {
   RevokeDLCCatalogAccess(data: RevokeDLCCatalogAccessRequest, config?: AxiosRequestConfig): AxiosPromise<RevokeDLCCatalogAccessResponse>;
   /** 回滚引擎镜像版本 {@link RollbackDataEngineImageRequest} {@link RollbackDataEngineImageResponse} */
   RollbackDataEngineImage(data: RollbackDataEngineImageRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackDataEngineImageResponse>;
+  /** 设置优化策略 {@link SetOptimizerPolicyRequest} {@link SetOptimizerPolicyResponse} */
+  SetOptimizerPolicy(data: SetOptimizerPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<SetOptimizerPolicyResponse>;
   /** 挂起或启动数据引擎 {@link SuspendResumeDataEngineRequest} {@link SuspendResumeDataEngineResponse} */
   SuspendResumeDataEngine(data: SuspendResumeDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<SuspendResumeDataEngineResponse>;
   /** 切换主备集群 {@link SwitchDataEngineRequest} {@link SwitchDataEngineResponse} */

@@ -276,6 +276,8 @@ declare interface AuthenticationTypeD {
 declare interface AutoGuard {
   /** 流量防盗刷配置开关，取值有： on：开启 off：关闭 */
   Switch: string | null;
+  /** 流量防盗刷配置规则 */
+  FilterRules: FilterRules[] | null;
 }
 
 /** 图片优化-AvifAdapter配置 */
@@ -896,6 +898,16 @@ declare interface ExtraLogset {
   Logset: LogSetInfo | null;
   /** 日志主题信息列表 */
   Topics: TopicInfo[] | null;
+}
+
+/** 防盗刷配置规则 */
+declare interface FilterRules {
+  /** 封禁类型 */
+  FilterType: string | null;
+  /** 封禁规则类型 */
+  RuleType: string | null;
+  /** 封禁规则路径 */
+  RulePaths: string[] | null;
 }
 
 /** 回源 301/302 状态码自动跟随配置，默认为关闭状态 */

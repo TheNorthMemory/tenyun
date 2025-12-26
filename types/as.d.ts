@@ -807,11 +807,11 @@ declare interface AttachInstancesResponse {
 }
 
 declare interface AttachLoadBalancersRequest {
-  /** 伸缩组ID。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 或调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。 */
+  /** 伸缩组ID。可通过登录 控制台 或调用接口 DescribeAutoScalingGroups ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。 */
   AutoScalingGroupId: string;
-  /** 传统型负载均衡器ID列表，每个伸缩组绑定传统型负载均衡器数量上限为20，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个。可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。 */
+  /** 传统型负载均衡器ID列表，每个伸缩组绑定传统型负载均衡器数量上限为20，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个。可以通过 DescribeLoadBalancers 接口获取。 */
   LoadBalancerIds?: string[];
-  /** 负载均衡器列表，每个伸缩组绑定应用型负载均衡器数量上限为100，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个。可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。 */
+  /** 负载均衡器列表，每个伸缩组绑定应用型负载均衡器数量上限为100，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个。可以通过 DescribeLoadBalancers 接口获取。 */
   ForwardLoadBalancers?: ForwardLoadBalancer[];
 }
 
@@ -961,11 +961,11 @@ declare interface CreateAutoScalingGroupResponse {
 declare interface CreateLaunchConfigurationRequest {
   /** 启动配置显示名称。名称仅支持中文、英文、数字、下划线、分隔符"-"、小数点，最大长度不能超60个字节。 */
   LaunchConfigurationName: string;
-  /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-8toqc6s3`。镜像Id与镜像族名称，二者必填一个且只能填写一个。镜像类型分为四种：公共镜像自定义镜像共享镜像服务市场镜像可通过以下方式获取可用的镜像ID：`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，取返回信息中的`ImageId`字段。 */
+  /** 指定有效的镜像ID，格式形如img-8toqc6s3。镜像Id与镜像族名称，二者必填一个且只能填写一个。镜像类型分为四种：公共镜像自定义镜像共享镜像服务市场镜像可通过以下方式获取可用的镜像ID：公共镜像、自定义镜像、共享镜像的镜像ID可通过登录控制台查询；服务镜像市场的镜像ID可通过云市场查询。通过调用接口 DescribeImages ，取返回信息中的ImageId字段。 */
   ImageId?: string;
-  /** 启动配置所属项目ID。默认值为0，表示使用默认项目。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。注意：伸缩组内实例所属项目ID取伸缩组项目ID，与这里取值无关。 */
+  /** 启动配置所属项目ID。默认值为0，表示使用默认项目。该参数可以通过调用 DescribeProject 的返回值中的 projectId 字段来获取。注意：伸缩组内实例所属项目ID取伸缩组项目ID，与这里取值无关。 */
   ProjectId?: number;
-  /** 实例机型。不同实例机型指定了不同的资源规格，具体取值可通过调用接口 [DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749) 来获得最新的规格表或参见[实例类型](https://cloud.tencent.com/document/product/213/11518)描述。`InstanceType`和`InstanceTypes`参数互斥，二者必填一个且只能填写一个。 */
+  /** 实例机型。不同实例机型指定了不同的资源规格，具体取值可通过调用接口 DescribeInstanceTypeConfigs 来获得最新的规格表或参见实例类型描述。InstanceType和InstanceTypes参数互斥，二者必填一个且只能填写一个。 */
   InstanceType?: string;
   /** 实例系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。 */
   SystemDisk?: SystemDisk;
@@ -975,7 +975,7 @@ declare interface CreateLaunchConfigurationRequest {
   InternetAccessible?: InternetAccessible;
   /** 实例登录设置。通过该参数可以设置实例的登录方式密码、密钥或保持镜像的原始登录设置。默认情况下会随机生成密码，并以站内信方式知会到用户。 */
   LoginSettings?: LoginSettings;
-  /** 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的`SecurityGroupId`字段来获取。若不指定该参数，则默认不绑定安全组。 */
+  /** 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的SecurityGroupId字段来获取。若不指定该参数，则默认不绑定安全组。 */
   SecurityGroupIds?: string[];
   /** 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认开启云监控、云安全服务。 */
   EnhancedService?: EnhancedService;
@@ -985,9 +985,9 @@ declare interface CreateLaunchConfigurationRequest {
   InstanceChargeType?: string;
   /** 实例的市场相关选项，如竞价实例相关参数，若指定实例的付费模式为竞价付费则该参数必传。 */
   InstanceMarketOptions?: InstanceMarketOptionsRequest;
-  /** 实例机型列表，不同实例机型指定了不同的资源规格，最多支持10种实例机型。`InstanceType`和`InstanceTypes`参数互斥，二者必填一个且只能填写一个。具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格描述](https://cloud.tencent.com/document/product/213/11518)。 */
+  /** 实例机型列表，不同实例机型指定了不同的资源规格，最多支持10种实例机型。InstanceType和InstanceTypes参数互斥，二者必填一个且只能填写一个。具体取值可通过调用接口DescribeInstanceTypeConfigs来获得最新的规格表或参见实例规格描述。 */
   InstanceTypes?: string[];
-  /** CAM角色名称。可通过[DescribeRoleList](https://cloud.tencent.com/document/product/598/36223)接口返回值中的roleName获取。 */
+  /** CAM角色名称。可通过DescribeRoleList接口返回值中的roleName获取。 */
   CamRoleName?: string;
   /** 实例类型校验策略，取值包括 ALL 和 ANY，默认取值为ANY。该参数仅在 InstanceTypes 入参包含多个机型时生效。 ALL，所有实例类型（InstanceType）都可用则通过校验，否则校验报错。 ANY，存在任何一个实例类型（InstanceType）可用则通过校验，否则校验报错。实例类型不可用的常见原因包括该实例类型售罄、对应云盘售罄等。如果 InstanceTypes 中一款机型不存在或者已下线，则无论 InstanceTypesCheckPolicy 采用何种取值，都会校验报错。 */
   InstanceTypesCheckPolicy?: string;
@@ -1003,15 +1003,15 @@ declare interface CreateLaunchConfigurationRequest {
   InstanceChargePrepaid?: InstanceChargePrepaid;
   /** 云盘类型选择策略，默认取值 ORIGINAL，取值范围：ORIGINAL：使用设置的云盘类型AUTOMATIC：自动选择当前可用的云盘类型 */
   DiskTypePolicy?: string;
-  /** 高性能计算集群ID。可通过调用[DescribeHpcClusters](https://cloud.tencent.com/document/product/213/83220)接口获取该参数。注意：此字段默认为空。 */
+  /** 高性能计算集群ID。可通过调用DescribeHpcClusters接口获取该参数。注意：此字段默认为空。 */
   HpcClusterId?: string;
   /** IPv6公网带宽相关信息设置。若新建实例包含IPv6地址，该参数可为新建实例的IPv6地址分配公网带宽。关联启动配置的伸缩组Ipv6AddressCount参数为0时，该参数不会生效。 */
   IPv6InternetAccessible?: IPv6InternetAccessible;
   /** 置放群组id，仅支持指定一个。 */
   DisasterRecoverGroupIds?: string[];
-  /** 镜像族名称。镜像Id与镜像族名称，二者必填一个且只能填写一个。可通过调用[DescribeImages](https://cloud.tencent.com/document/product/213/15715)接口获取该参数。 */
+  /** 镜像族名称。镜像Id与镜像族名称，二者必填一个且只能填写一个。可通过调用DescribeImages接口获取该参数。 */
   ImageFamily?: string;
-  /** 本地专用集群ID。可通过 [DescribeDedicatedClusters](https://cloud.tencent.com/document/product/1346/73758) 接口获取该参数。 */
+  /** 本地专用集群ID。可通过 DescribeDedicatedClusters 接口获取该参数。 */
   DedicatedClusterId?: string;
   /** 自定义metadata。 */
   Metadata?: Metadata;
@@ -1487,7 +1487,7 @@ declare interface EnterStandbyResponse {
 }
 
 declare interface ExecuteScalingPolicyRequest {
-  /** 告警伸缩策略ID，不支持目标追踪策略。可通过 [DescribeScalingPolicies](https://cloud.tencent.com/document/api/377/33178) 接口返回的 `ScalingPolicyType ` 参数获取告警策略类型。 */
+  /** 告警伸缩策略ID，不支持目标追踪策略。可通过 DescribeScalingPolicies 接口返回的 ScalingPolicyType 参数获取告警策略类型。 */
   AutoScalingPolicyId: string;
   /** 是否检查伸缩组活动处于冷却时间内，默认值为false */
   HonorCooldown?: boolean;
@@ -1734,7 +1734,7 @@ declare interface ModifyNotificationConfigurationResponse {
 }
 
 declare interface ModifyScalingPolicyRequest {
-  /** 告警策略ID。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 或调用接口 [DescribeScalingPolicies](https://cloud.tencent.com/document/api/377/33178) ，取返回信息中的 AutoScalingPolicyId 获取告警策略ID。 */
+  /** 告警策略ID。可通过登录 控制台 或调用接口 DescribeScalingPolicies ，取返回信息中的 AutoScalingPolicyId 获取告警策略ID。 */
   AutoScalingPolicyId: string;
   /** 告警策略名称，在您账号中必须唯一。名称长度不能超过60，名称仅支持中文、英文、数字、下划线、分隔符"-"、小数点。 */
   ScalingPolicyName?: string;
@@ -1748,13 +1748,13 @@ declare interface ModifyScalingPolicyRequest {
   MetricAlarm?: MetricAlarm;
   /** 预定义监控项，仅适用于目标追踪策略。取值范围：ASG_AVG_CPU_UTILIZATION：平均CPU使用率ASG_AVG_LAN_TRAFFIC_OUT：平均内网出带宽ASG_AVG_LAN_TRAFFIC_IN：平均内网入带宽ASG_AVG_WAN_TRAFFIC_OUT：平均外网出带宽ASG_AVG_WAN_TRAFFIC_IN：平均外网出带宽 */
   PredefinedMetricType?: string;
-  /** 目标值，仅适用于目标追踪策略。ASG_AVG_CPU_UTILIZATION：[1, 100)，单位：%ASG_AVG_LAN_TRAFFIC_OUT：>0，单位：MbpsASG_AVG_LAN_TRAFFIC_IN：>0，单位：MbpsASG_AVG_WAN_TRAFFIC_OUT：>0，单位：MbpsASG_AVG_WAN_TRAFFIC_IN：>0，单位：Mbps */
+  /** 目标值，仅适用于目标追踪策略。ASG_AVG_CPU_UTILIZATION：[1, 100)，单位：%ASG_AVG_LAN_TRAFFIC_OUT：&gt;0，单位：MbpsASG_AVG_LAN_TRAFFIC_IN：&gt;0，单位：MbpsASG_AVG_WAN_TRAFFIC_OUT：&gt;0，单位：MbpsASG_AVG_WAN_TRAFFIC_IN：&gt;0，单位：Mbps */
   TargetValue?: number;
   /** 实例预热时间，单位为秒，仅适用于目标追踪策略。取值范围为0-3600。 */
   EstimatedInstanceWarmup?: number;
   /** 是否禁用缩容，仅适用于目标追踪策略。取值范围：true：目标追踪策略仅触发扩容false：目标追踪策略触发扩容和缩容 */
   DisableScaleIn?: boolean;
-  /** 此参数已不再生效，请使用[创建通知](https://cloud.tencent.com/document/api/377/33185)。通知组ID，即为用户组ID集合。 */
+  /** 此参数已不再生效，请使用创建通知。通知组ID，即为用户组ID集合。 */
   NotificationUserGroupIds?: string[];
 }
 
@@ -1864,9 +1864,9 @@ declare interface ScaleOutInstancesResponse {
 }
 
 declare interface SetInstancesProtectionRequest {
-  /** 伸缩组ID。可以通过如下方式获取可用的伸缩组ID:通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 查询伸缩组ID。通过调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。 */
+  /** 伸缩组ID。可以通过如下方式获取可用的伸缩组ID:通过登录 控制台 查询伸缩组ID。通过调用接口 DescribeAutoScalingGroups ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。 */
   AutoScalingGroupId: string;
-  /** 实例ID。可以通过以下方式获取可用的实例ID：通过登录[控制台](https://console.cloud.tencent.com/cvm/index)查询实例ID。通过调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) ，取返回信息中的 `InstanceId` 获取实例ID。 */
+  /** 实例ID。可以通过以下方式获取可用的实例ID：通过登录控制台查询实例ID。通过调用接口 DescribeInstances ，取返回信息中的 InstanceId 获取实例ID。 */
   InstanceIds: string[];
   /** 实例是否需要设置保护。 */
   ProtectedFromScaleIn: boolean;
@@ -1938,7 +1938,7 @@ declare interface StopInstanceRefreshResponse {
 declare interface UpgradeLaunchConfigurationRequest {
   /** 启动配置ID。 */
   LaunchConfigurationId: string;
-  /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-8toqc6s3`。镜像类型分为四种：公共镜像自定义镜像共享镜像服务市场镜像可通过以下方式获取可用的镜像ID：`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，取返回信息中的`ImageId`字段。 */
+  /** 指定有效的镜像ID，格式形如img-8toqc6s3。镜像类型分为四种：公共镜像自定义镜像共享镜像服务市场镜像可通过以下方式获取可用的镜像ID：公共镜像、自定义镜像、共享镜像的镜像ID可通过登录控制台查询；服务镜像市场的镜像ID可通过云市场查询。通过调用接口 DescribeImages ，取返回信息中的ImageId字段。 */
   ImageId: string;
   /** 实例机型列表，不同实例机型指定了不同的资源规格，最多支持5种实例机型。 */
   InstanceTypes: string[];
@@ -1960,7 +1960,7 @@ declare interface UpgradeLaunchConfigurationRequest {
   LoginSettings?: LoginSettings;
   /** 实例所属项目ID。不填为默认项目。 */
   ProjectId?: number;
-  /** 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的`SecurityGroupId`字段来获取。若不指定该参数，则默认不绑定安全组。 */
+  /** 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的SecurityGroupId字段来获取。若不指定该参数，则默认不绑定安全组。 */
   SecurityGroupIds?: string[];
   /** 实例系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。 */
   SystemDisk?: SystemDisk;
@@ -1988,13 +1988,13 @@ declare interface UpgradeLaunchConfigurationResponse {
 }
 
 declare interface UpgradeLifecycleHookRequest {
-  /** 生命周期挂钩ID。可以通过调用接口 [DescribeLifecycleHooks](https://cloud.tencent.com/document/api/377/34452) ，取返回信息中的 LifecycleHookId 获取生命周期挂钩ID。 */
+  /** 生命周期挂钩ID。可以通过调用接口 DescribeLifecycleHooks ，取返回信息中的 LifecycleHookId 获取生命周期挂钩ID。 */
   LifecycleHookId: string;
   /** 生命周期挂钩名称。名称仅支持中文、英文、数字、下划线（_）、短横线（-）、小数点（.），最大长度不能超128个字符。 */
   LifecycleHookName: string;
-  /** 进行生命周期挂钩的场景，取值范围如下:* INSTANCE_LAUNCHING: 扩容生命周期挂钩* INSTANCE_TERMINATING: 缩容生命周期挂钩 */
+  /** 进行生命周期挂钩的场景，取值范围如下: INSTANCE_LAUNCHING: 扩容生命周期挂钩 INSTANCE_TERMINATING: 缩容生命周期挂钩 */
   LifecycleTransition: string;
-  /** 定义伸缩组在生命周期挂钩超时或 LifecycleCommand 执行失败时应采取的操作，取值范围是如下：* CONTINUE: 默认值，表示继续执行扩缩容活动* ABANDON: 针对扩容挂钩，挂钩超时或 LifecycleCommand 执行失败的 CVM 实例会直接释放或移出；而针对缩容挂钩，会继续执行缩容活动。 */
+  /** 定义伸缩组在生命周期挂钩超时或 LifecycleCommand 执行失败时应采取的操作，取值范围是如下： CONTINUE: 默认值，表示继续执行扩缩容活动 ABANDON: 针对扩容挂钩，挂钩超时或 LifecycleCommand 执行失败的 CVM 实例会直接释放或移出；而针对缩容挂钩，会继续执行缩容活动。 */
   DefaultResult?: string;
   /** 生命周期挂钩超时之前可以经过的最长时间（以秒为单位），范围从30到7200秒，默认值为300秒 */
   HeartbeatTimeout?: number;

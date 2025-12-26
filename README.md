@@ -114,7 +114,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 246+ 款产品，13129+ 服务数</summary>
+<details><summary>共计 246+ 款产品，13132+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -206,7 +206,7 @@ dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/132
 dbs | [数据库备份服务](https://cloud.tencent.com/document/product/1513) | 2021-11-08(8) |
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(22) |
 dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(83) |
-dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(183) |
+dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(184) |
 dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(94) |
 domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(55) |
 drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 2018-11-15(11) |
@@ -223,7 +223,7 @@ emr | [弹性 MapReduce](https://cloud.tencent.com/document/product/589) | 2019-
 es | [Elasticsearch Service](https://cloud.tencent.com/document/product/845) | 2025-01-01(10) | 2018-04-16(65) |
 ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323) | 2020-11-11(129) |
 essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(94) | 2020-12-22(53) |
-evt | [事件中心](https://cloud.tencent.com/document/product/1808) | 2025-02-17(3) |
+evt | [事件中心](https://cloud.tencent.com/document/product/1808) | 2025-02-17(4) |
 facefusion | [人脸融合](https://cloud.tencent.com/document/product/670) | 2022-09-27(3) | 2018-12-01(3) |
 faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-03-01(36) |
 fmu | [人脸试妆](https://cloud.tencent.com/document/product/1172) | 2019-12-13(7) |
@@ -355,7 +355,7 @@ vod | [云点播](https://cloud.tencent.com/document/product/266) | 2024-07-18(7
 vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(432) |
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(8) |
 vtc | [视频转译](https://cloud.tencent.com/document/product/1769) | 2024-02-23(3) |
-waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(195) |
+waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(196) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
 wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2025-08-06(119) | 2021-08-20(299) |
 weilingwith | [微瓴同业开放平台](https://cloud.tencent.com/document/product/1693) | 2023-04-27(63) |

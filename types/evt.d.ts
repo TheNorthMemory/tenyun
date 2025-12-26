@@ -64,6 +64,22 @@ declare interface DeleteRoleUserResponse {
   RequestId?: string;
 }
 
+declare interface PutMessageRequest {
+  /** 事件ID */
+  EventId: string;
+  /** 需要推送的事件数据内容，格式为json，字段定义需要与事件中的定义一致 */
+  Data?: string;
+  /** 数据推送来源，会在生成的单据中展示数据来源 */
+  Source?: string;
+}
+
+declare interface PutMessageResponse {
+  /** 满足条件时生成的事件单id，不满足条件时为空 */
+  TicketId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Evt 事件中心} */
 declare interface Evt {
   (): Versions;
@@ -73,6 +89,8 @@ declare interface Evt {
   CreateRoleUser(data: CreateRoleUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoleUserResponse>;
   /** 删除自定义角色的用户 {@link DeleteRoleUserRequest} {@link DeleteRoleUserResponse} */
   DeleteRoleUser(data?: DeleteRoleUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoleUserResponse>;
+  /** 推送消息 {@link PutMessageRequest} {@link PutMessageResponse} */
+  PutMessage(data: PutMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PutMessageResponse>;
 }
 
 export declare type Versions = ["2025-02-17"];

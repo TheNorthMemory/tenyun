@@ -2755,7 +2755,7 @@ declare interface Ccc {
   BindStaffSkillGroupList(data: BindStaffSkillGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<BindStaffSkillGroupListResponse>;
   /** 控制AI对话 {@link ControlAIConversationRequest} {@link ControlAIConversationResponse} */
   ControlAIConversation(data: ControlAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<ControlAIConversationResponse>;
-  /** 创建单次智能体通话任务 {@link CreateAIAgentCallRequest} {@link CreateAIAgentCallResponse} */
+  /** 创建单次智能体通话 {@link CreateAIAgentCallRequest} {@link CreateAIAgentCallResponse} */
   CreateAIAgentCall(data: CreateAIAgentCallRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIAgentCallResponse>;
   /** 创建AI通话 {@link CreateAICallRequest} {@link CreateAICallResponse} */
   CreateAICall(data: CreateAICallRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAICallResponse>;
@@ -2763,7 +2763,7 @@ declare interface Ccc {
   CreateAdminURL(data: CreateAdminURLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAdminURLResponse>;
   /** 创建座席巡航式外呼任务 {@link CreateAgentCruiseDialingCampaignRequest} {@link CreateAgentCruiseDialingCampaignResponse} */
   CreateAgentCruiseDialingCampaign(data: CreateAgentCruiseDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgentCruiseDialingCampaignResponse>;
-  /** 创建自动外呼任务 {@link CreateAutoCalloutTaskRequest} {@link CreateAutoCalloutTaskResponse} */
+  /** 创建批量自动外呼任务 {@link CreateAutoCalloutTaskRequest} {@link CreateAutoCalloutTaskResponse} */
   CreateAutoCalloutTask(data: CreateAutoCalloutTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAutoCalloutTaskResponse>;
   /** 新建技能组 {@link CreateCCCSkillGroupRequest} {@link CreateCCCSkillGroupResponse} */
   CreateCCCSkillGroup(data: CreateCCCSkillGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCCCSkillGroupResponse>;
@@ -2795,13 +2795,13 @@ declare interface Ccc {
   DeletePredictiveDialingCampaign(data: DeletePredictiveDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePredictiveDialingCampaignResponse>;
   /** 删除坐席信息 {@link DeleteStaffRequest} {@link DeleteStaffResponse} */
   DeleteStaff(data: DeleteStaffRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStaffResponse>;
-  /** 获取智能体信息列表 {@link DescribeAIAgentInfoListRequest} {@link DescribeAIAgentInfoListResponse} */
+  /** 查询智能体信息列表 {@link DescribeAIAgentInfoListRequest} {@link DescribeAIAgentInfoListResponse} */
   DescribeAIAgentInfoList(data: DescribeAIAgentInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIAgentInfoListResponse>;
   /** 获取 AI 会话分析结果 {@link DescribeAIAnalysisResultRequest} {@link DescribeAIAnalysisResultResponse} */
   DescribeAIAnalysisResult(data: DescribeAIAnalysisResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIAnalysisResultResponse>;
-  /** 查询 AI 通话内容提取结果 {@link DescribeAICallExtractResultRequest} {@link DescribeAICallExtractResultResponse} */
+  /** 查询智能体通话话后标签数据 {@link DescribeAICallExtractResultRequest} {@link DescribeAICallExtractResultResponse} */
   DescribeAICallExtractResult(data: DescribeAICallExtractResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAICallExtractResultResponse>;
-  /** 获取 AI 耗时 {@link DescribeAILatencyRequest} {@link DescribeAILatencyResponse} */
+  /** 查询智能体通话中 AI 服务时延信息 {@link DescribeAILatencyRequest} {@link DescribeAILatencyResponse} */
   DescribeAILatency(data: DescribeAILatencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAILatencyResponse>;
   /** 查询生效运营商白名单规则 {@link DescribeActiveCarrierPrivilegeNumberRequest} {@link DescribeActiveCarrierPrivilegeNumberResponse} */
   DescribeActiveCarrierPrivilegeNumber(data: DescribeActiveCarrierPrivilegeNumberRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeActiveCarrierPrivilegeNumberResponse>;

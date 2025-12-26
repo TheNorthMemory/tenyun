@@ -2434,6 +2434,18 @@ declare interface NetworkConfig {
   VipStatus?: number;
 }
 
+/** 对象 */
+declare interface Object {
+  /** 对象id */
+  ObjectId?: string;
+  /** 成员appid */
+  MemberAppId?: number;
+  /** 成员uin */
+  MemberUin?: string;
+  /** 成员昵称 */
+  MemberNickName?: string;
+}
+
 /** Owasp规则 */
 declare interface OwaspRule {
   /** 规则ID */
@@ -6692,6 +6704,22 @@ declare interface ModifyObjectResponse {
   RequestId?: string;
 }
 
+declare interface ModifyObjectsRequest {
+  /** 修改对象标识 */
+  ObjectId: string[];
+  /** 改动作类型:InstanceId绑定实例；UnbindInstance解绑实例。 */
+  OpType: string;
+  /** 新的实例ID，如果和已绑定的实例相同认为修改成功 */
+  InstanceId?: string;
+  /** 对象列表，仅跨账号接入使用 */
+  Objects?: Object[];
+}
+
+declare interface ModifyObjectsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyOwaspRuleStatusRequest {
   /** 域名 */
   Domain: string;
@@ -7781,6 +7809,8 @@ declare interface Waf {
   ModifyModuleStatus(data: ModifyModuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModuleStatusResponse>;
   /** 修改防护对象 {@link ModifyObjectRequest} {@link ModifyObjectResponse} */
   ModifyObject(data: ModifyObjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyObjectResponse>;
+  /** 批量修改防护对象 {@link ModifyObjectsRequest} {@link ModifyObjectsResponse} */
+  ModifyObjects(data: ModifyObjectsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyObjectsResponse>;
   /** 更新规则的开关 {@link ModifyOwaspRuleStatusRequest} {@link ModifyOwaspRuleStatusResponse} */
   ModifyOwaspRuleStatus(data: ModifyOwaspRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOwaspRuleStatusResponse>;
   /** 更新规则类型的防护模式 {@link ModifyOwaspRuleTypeActionRequest} {@link ModifyOwaspRuleTypeActionResponse} */

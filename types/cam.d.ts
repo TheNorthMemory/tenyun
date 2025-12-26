@@ -403,7 +403,7 @@ declare interface StrategyInfo {
   /** 策略名称。 */
   PolicyName?: string;
   /** 策略创建时间。 */
-  AddTime?: string | null;
+  AddTime?: string;
   /** 策略类型。1 表示自定义策略，2 表示预设策略。 */
   Type?: number;
   /** 策略描述。 */
@@ -428,6 +428,8 @@ declare interface StrategyInfo {
   AttachEntityBoundaryCount?: number | null;
   /** 最后编辑时间 */
   UpdateTime?: string | null;
+  /** 标签列表 */
+  Tags?: Tag[];
 }
 
 /** 子用户信息 */
@@ -472,6 +474,14 @@ declare interface SubAccountUser {
   LastLoginIp: string;
   /** 最近登录时间，回参为空，即为未登录过控制台 */
   LastLoginTime: string | null;
+}
+
+/** 标签 */
+declare interface Tag {
+  /** 标签键 */
+  Key: string;
+  /** 标签值 */
+  Value: string;
 }
 
 /** 企业微信子用户 */
@@ -683,6 +693,8 @@ declare interface CreatePolicyRequest {
   PolicyDocument: string;
   /** 策略描述 */
   Description?: string;
+  /** 策略关联的标签列表 */
+  Tags?: Tag[];
 }
 
 declare interface CreatePolicyResponse {
@@ -1224,6 +1236,8 @@ declare interface GetPolicyResponse {
   PresetAlias?: string | null;
   /** 是否是服务相关策略，0代表不是服务相关策略，1代表是服务相关策略。 */
   IsServiceLinkedRolePolicy?: number;
+  /** 策略关联的标签列表 */
+  Tags?: Tag[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

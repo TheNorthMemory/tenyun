@@ -504,6 +504,8 @@ declare interface InstanceInfo {
   MasterInstance?: string;
   /** 对应备集群 */
   SlaveInstances?: string[];
+  /** ccr服务部署节点ip */
+  SyncerIp?: string;
 }
 
 /** 实例节点描述信息 */
