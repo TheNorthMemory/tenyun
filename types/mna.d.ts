@@ -351,7 +351,7 @@ declare interface AddDeviceRequest {
   Remark?: string;
   /** 新建设备的base64密钥字符串，非必选，如果不填写则由系统自动生成 */
   DataKey?: string;
-  /** 是否设置预置密钥 */
+  /** 是否设置预置密钥。true：设置预置密钥；false：不设置预置密钥。 */
   Encrypted?: boolean;
   /** 接入环境。0：公有云网关；1：自有网关；2：公有云网关和自有网关。不填默认公有云网关。具体含义：公有云网关：即该设备只能接入公有云网关（就近接入）自有网关：即该设备只能接入已经注册上线的自有网关（就近接入或固定ip接入）公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入） */
   AccessScope?: number;
@@ -691,9 +691,9 @@ declare interface GetFlowStatisticResponse {
 declare interface GetGroupDetailRequest {
   /** 分组ID */
   GroupId: string;
-  /** 每页显示记录数，PageSize、PageNumber值均为-1 时，按照1页无限制条数匹配所有设备 */
+  /** 每页显示记录数，PageSize、PageNumber值均为-1 时，按照1页无限制条数匹配所有设备	示例值：1 */
   PageSize: number;
-  /** 每页显示记录数，PageSize、PageNumber值均为-1 时，按照1页无限制条数匹配所有设备 */
+  /** 每页显示记录数，PageSize、PageNumber值均为-1 时，按照1页无限制条数匹配所有设备	示例值：10 */
   PageNumber: number;
   /** 搜索关键字 */
   KeyWord?: string;
@@ -713,9 +713,9 @@ declare interface GetGroupDetailResponse {
 }
 
 declare interface GetGroupListRequest {
-  /** 每页显示记录数，PageSize、PageNumber值均为-1 时，按照1页无限制条数匹配所有设备 */
+  /** 每页显示记录数，PageSize、PageNumber值均为-1 时，按照1页无限制条数匹配所有设备示例值：10 */
   PageSize: number;
-  /** 当前查看页码，PageSize、PageNumber值均为-1 时，按照1页无限制条数匹配所有设备 */
+  /** 当前查看页码，PageSize、PageNumber值均为-1 时，按照1页无限制条数匹配所有设备示例值：1 */
   PageNumber: number;
   /** 搜索分组的关键字，为空时匹配所有分组 */
   Keyword?: string;

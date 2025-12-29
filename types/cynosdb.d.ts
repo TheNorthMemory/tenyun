@@ -5834,7 +5834,7 @@ declare interface SwitchProxyVpcRequest {
   /** 旧地址回收时间 */
   OldIpReserveHours: number;
   /** 数据库代理组Id（该参数为必填项，可以通过DescribeProxies接口获得） */
-  ProxyGroupId?: string;
+  ProxyGroupId: string;
 }
 
 declare interface SwitchProxyVpcResponse {

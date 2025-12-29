@@ -4416,6 +4416,8 @@ declare interface CreatePrivateNatGatewayTranslationAclRuleRequest {
 }
 
 declare interface CreatePrivateNatGatewayTranslationAclRuleResponse {
+  /** 创建成功的访问控制列表。 */
+  TranslationAclRuleSet?: TranslationAclRule[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6861,6 +6863,8 @@ declare interface DescribePrivateNatGatewayTranslationAclRulesRequest {
   Limit?: number;
   /** ACL规则描述 */
   Description?: string;
+  /** 过滤条件。AclRuleId - Integer - ACL规则ID。 */
+  Filters?: Filter[];
 }
 
 declare interface DescribePrivateNatGatewayTranslationAclRulesResponse {

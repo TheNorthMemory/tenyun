@@ -67,6 +67,7 @@ import Clb, { Versions as ClbVersions } from "./clb";
 import Cloudapp, { Versions as CloudappVersions } from "./cloudapp";
 import Cloudaudit, { Versions as CloudauditVersions } from "./cloudaudit";
 import Cloudhsm, { Versions as CloudhsmVersions } from "./cloudhsm";
+import Cloudmate, { Versions as CloudmateVersions } from "./cloudmate";
 import Cloudstudio, { Versions as CloudstudioVersions } from "./cloudstudio";
 import Cls, { Versions as ClsVersions } from "./cls";
 import Cme, { Versions as CmeVersions } from "./cme";
@@ -317,6 +318,7 @@ export declare type SERVICE_VERSIONS = {
   cloudapp: CloudappVersions,
   cloudaudit: CloudauditVersions,
   cloudhsm: CloudhsmVersions,
+  cloudmate: CloudmateVersions,
   cloudstudio: CloudstudioVersions,
   cls: ClsVersions,
   cme: CmeVersions,
@@ -647,6 +649,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   cloudaudit: Cloudaudit,
   /** {@link Cloudhsm 云加密机} */
   cloudhsm: Cloudhsm,
+  /** {@link Cloudmate Cloud Mate} */
+  cloudmate: Cloudmate,
   /** {@link Cloudstudio Cloud Studio（云端 IDE）} */
   cloudstudio: Cloudstudio,
   /** {@link Cls 日志服务} */

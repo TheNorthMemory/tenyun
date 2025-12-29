@@ -1618,6 +1618,48 @@ declare interface AiSampleWordInfo {
   Tags?: string[];
 }
 
+/** 用于AIGC创作图片时用到的扩展参数信息。 */
+declare interface AigcImageExtraParam {
+  /** 指定所生成视频的宽高比。不同模型支持的宽高比:1. GEM支持：1:1、3:2、2:3、3:4、4:3、4:5、5:4、9:16、16:9 和 21:9。2. Jimeng：合用户prompt意图、参考图尺寸，由模型智能判断生图宽高比。注：具体模型的宽高比参数，可查看相应模型官网获取更完整描述。 */
+  AspectRatio?: string;
+  /** 指定图片输出分辨率。支持该参数的模型：支持选择: 720P, 1080P, 2K, 4K。1. Jimeng推荐通过prompt指定图片分辨率和宽高比。 2K 2048x2048 （1:1） 2304x1728（4:3） 2496x1664 （3:2） 2560x1440 （16:9） 3024x1296 （21:9） 4K 4096x4096 （1:1） 4694x3520（4:3） 4992x3328 （3:2） 5404x3040 （16:9） 6198x2656 （21:9） */
+  Resolution?: string;
+}
+
+/** 用于AIGC创作的图片信息。 */
+declare interface AigcImageInfo {
+  /** 用于指导视频生成的图片 URL。该URL需外网可访问。同时允许爬虫拉取。 */
+  ImageUrl?: string;
+  /** 参考类型。注意：1. 当模型使用Vidu的q2多参考生图时，也可用于指定主体id。2. 当使用GV模型时，可作为参考方式,可选asset(素材)、style(风格)。 */
+  ReferenceType?: string;
+}
+
+/** Aigc结果文件上传COS时，需传入的信息。 需创建并授权LVB_QCSRole角色。 */
+declare interface AigcStoreCosParam {
+  /** 存储至 cos 的 bucket 桶名称。需要cos存储时，该值必填。 示例值：bucket。 */
+  CosBucketName?: string;
+  /** 存储至 cos 的 bucket 区域。与bucket所属区域相同，上传cos时必填。 示例值：ap-guangzhou */
+  CosBucketRegion?: string;
+  /** 存储至 cos 的 bucket 路径。可选。示例值：my_file */
+  CosBucketPath?: string;
+}
+
+/** 用于AIGC创作视频时用到的扩展参数信息。 */
+declare interface AigcVideoExtraParam {
+  /** 生成视频的分辨率，分辨率与选择模型及设置的视频时长相关。 不同模型支持的分辨率选项:1. Kling 720P(默认), 1080P。2. Hailuo 768P(默认), 1080P。3. Jimeng 1080P(默认)。4. Vidu 720P(默认)，1080P。5. GV 720P(默认),1080P。6. OS 720P, 图片仅支持1280x720、720x1280，暂不支持指定。注意：除模型可支持的分辨率外，还可以生成 2K、4K分辨率。 */
+  Resolution?: string;
+  /** 指定所生成视频的宽高比。 不同模型对于此参数的支持：1. Kling 仅文生视频支持, 16:9(默认值)、9:16、 1:1。2. Hailuo 暂不支持。3. Jimeng ["16:9"、"4:3"、"1:1"、"3:4"、"9:16"、"21:9"]4. Vidu 仅文生和参考图生视频 支持[16:9、9:16、4:3、3:4、1:1]，其中仅q2支持4:3、3:4。5. GV 16:9(默认值)、9:16。6. OS 仅文生视频支持, 16:9(默认), 9:16。注：关于具体模型支持的宽高比例，可查看具体模型官网介绍获取更完整描述。 */
+  AspectRatio?: string;
+}
+
+/** 用于AIGC生视频创作的参考图片信息。 */
+declare interface AigcVideoReferenceImageInfo {
+  /** 用于指导视频生成的图片 URL。该URL需外网可访问。同时允许爬虫拉取。 */
+  ImageUrl?: string;
+  /** 参考类型。注意：1. 当使用GV模型时，可作为参考方式,可选asset(素材)、style(风格)。 */
+  ReferenceType?: string;
+}
+
 /** 转动图任务类型。 */
 declare interface AnimatedGraphicTaskInput {
   /** 视频转动图模板 ID。 */
@@ -7056,6 +7098,68 @@ declare interface CreateAdaptiveDynamicStreamingTemplateResponse {
   RequestId?: string;
 }
 
+declare interface CreateAigcImageTaskRequest {
+  /** 模型名称。当前支持的模型列表：GEM，Jimeng，Qwen。 */
+  ModelName?: string;
+  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。1. GEM， 可选[2.5,3.0]。2. Jimeng，可选[4.0]。 */
+  ModelVersion?: string;
+  /** 生成图片的描述。(注：最大支持1000字符)。当未传入参考图片时，此参数必填。 */
+  Prompt?: string;
+  /** 用于描述您想要阻止模型生成的内容。 注意：部分模型支持。 例如： 顶部照明、明亮的色彩 人物、动物 多辆汽车、风。 */
+  NegativePrompt?: string;
+  /** 默认取值为False，模型会严格地遵循指令。如果需要更精细的prompt获得最佳效果，可将此参数设置为True，将自动优化传入的prompt，以提升生成质量。 */
+  EnhancePrompt?: boolean;
+  /** 用于传入参考的资源图片信息，默认支持传入一张图片。支持多图输入的模型：1. GEM，可支持最多3张图片输入作为资源图。注意：1. 推荐图片小于7M，各模型限制不同。2. 图片格式支持：jpeg, png, webp。 */
+  ImageInfos?: AigcImageInfo[];
+  /** 用于传入模型要求的额外参数。 */
+  ExtraParameters?: AigcImageExtraParam;
+  /** 文件结果指定存储Cos桶信息。 注意：需开通Cos，创建并授权MPS_QcsRole角色。 */
+  StoreCosParam?: AigcStoreCosParam;
+  /** 接口操作者名称。 */
+  Operator?: string;
+}
+
+declare interface CreateAigcImageTaskResponse {
+  /** 返回的任务ID。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAigcVideoTaskRequest {
+  /** 模型名称。当前支持的模型列表:Hailuo，Kling，Jimeng，Vidu，OS，GV。 */
+  ModelName?: string;
+  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。1. Hailuo， 可选[02、2.3]。2. Kling，可选[2.0、2.1、2.5]。3. Jimeng, 可选[3.0pro]。4. Vidu,可选[q2、q2-pro、q2-turbo]。4. GV, 可选[3.1]。5. OS，可选[2.0]。 */
+  ModelVersion?: string;
+  /** 生成视频的描述。(注：最大支持2000字符)。当未传入图片时，此参数必填。 */
+  Prompt?: string;
+  /** 用于描述您想要阻止模型生成的内容。注意：部分模型支持。例如：顶部照明、明亮的色彩人物、动物多辆汽车、风。 */
+  NegativePrompt?: string;
+  /** 默认取值为False，模型会严格地遵循指令。如果需要更精细的prompt获得最佳效果，可将此参数设置为True，将自动优化传入的prompt，以提升生成质量。 */
+  EnhancePrompt?: boolean;
+  /** 用于指导视频生成的图片 URL。该URL需外网可访问。注意：1. 推荐图片大小不超过10M，不同模型大小限制不相同。2. 支持的图片格式：jpeg、png。3. 使用OS模型时，需输入图片尺寸为: 1280x720、720x1280。 */
+  ImageUrl?: string;
+  /** 模型将以此参数传入的图片作为尾帧画面来生成视频。支持此参数的模型：1. GV，传入尾帧图片时，必须同时传入ImageUrl作为首帧。2. Kling， 在Resolution:1080P的情况下 2.1版本支持首位帧。3. Vidu, q2-pro, q2-turbo 支持首尾帧。注意：1. 推荐图片大小不超过10M，各模型限制不同。2. 支持的图片格式：jpeg、png。 */
+  LastImageUrl?: string;
+  /** 最多包含三张素材资源图片的列表，用于描述模型在生成视频时要使用的资源图片。支持多图输入的模型：1. GV，使用多图输入时，不可使用ImageUrl和LastImageUrl。2. Vidu，支持多图参考生视频。q2模型1-7张图片，可通过ImageInfos里面的ReferenceType作为主体id来传入。注意：1. 图片大小不超过10M。2. 支持的图片格式：jpeg、png。 */
+  ImageInfos?: AigcVideoReferenceImageInfo[];
+  /** 生成视频的时长。注意：1. Kling支持 5、10秒。默认: 5秒。2. Jimeng支持5、10秒。 默认: 5秒。3. Hailuo的std模式可支持6、10秒，其他仅6秒。默认：6秒。4. Vidu支持1-10秒。4. GV支持 8秒。 默认：8秒。5. OS支持4、8、12秒。 默认：8秒。 */
+  Duration?: number;
+  /** 用于传入模型要求的额外参数。 */
+  ExtraParameters?: AigcVideoExtraParam;
+  /** 文件结果指定存储Cos桶信息。 注意：需开通Cos，创建并授权MPS_QcsRole角色。 */
+  StoreCosParam?: AigcStoreCosParam;
+  /** 接口操作者名称。 */
+  Operator?: string;
+}
+
+declare interface CreateAigcVideoTaskResponse {
+  /** 任务创建成功后，返回的任务ID。调用查询接口，轮询获取任务进度及生成结果。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAnimatedGraphicsTemplateRequest {
   /** 帧率，取值范围：[1, 30]，单位：Hz。 */
   Fps: number;
@@ -7369,10 +7473,12 @@ declare interface CreateSmartSubtitleTemplateRequest {
   AsrHotWordsConfigure?: AsrHotWordsConfigure;
   /** 字幕翻译开关`ON`: 开启翻译`OFF`: 关闭翻译**注意**：纯字幕翻译方式下，不传默认是打开的，不允许传空或`OFF`； */
   TranslateSwitch?: string;
-  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效，翻译语言列表：`ab`：阿布哈兹语`ace`：亚齐语`ach`：阿乔利语`af`：南非荷兰语`ak`：契维语（阿坎语）`am`：Amharic`ar`：阿拉伯语`as`：阿萨姆语`ay`：艾马拉语`az`：阿塞拜疆语`ba`：巴什基尔语`ban`：巴厘语`bbc`：巴塔克托巴语`bem`：Bemba`bew`：Betawi`bg`：保加利亚语`bho`：博杰普尔语`bik`：Bikol`bm`：班巴拉语`bn`：孟加拉语`br`：布列塔尼语`bs`：波斯尼亚语`btx`：巴塔克卡罗语`bts`：巴塔克西马隆贡语`bua`：布里亚特语`ca`：加泰罗尼亚语`ceb`：宿务语`cgg`：Kiga`chm`：草原马里语`ckb`：库尔德语（索拉尼语）`cnh`：哈卡钦语`co`：科西嘉语`crh`：克里米亚鞑靼语`crs`：塞舌尔克里奥尔语`cs`：捷克语`cv`：楚瓦什语`cy`：威尔士语`da`：丹麦语`de`：德语`din`：Dinka`doi`：多格来语`dov`：敦贝语`dv`：第维埃语`dz`：宗卡语`ee`：Ewe`el`：希腊语`en`：英语`eo`：世界语`es`：西班牙语`et`：爱沙尼亚语`eu`：巴斯克语`fa`：波斯语`ff`：富拉语`fi`：芬兰语`fil`：菲律宾语（塔加拉语）`fj`：斐济语`fr`：法语`fr-CA`：法语（加拿大）`fr-FR`：法语（法国）`fy`：弗里斯兰语`ga`：爱尔兰语`gaa`：加 (Ga) 语`gd`：苏格兰盖尔语`gl`：加利西亚语`gn`：瓜拉尼语`gom`：贡根语`gu`：古吉拉特语`gv`：马恩岛语`ha`：Hausa`haw`：夏威夷语`he`：希伯来语`hi`：印地语`hil`：希利盖农语`hmn`：苗语`hr`：克罗地亚语`hrx`：洪斯吕克语`ht`：海地克里奥尔语`hu`：匈牙利语`hy`：亚美尼亚语`id`：印度尼西亚语`ig`：Igbo`ilo`：伊洛果语`is`：冰岛语`it`：意大利语`iw`：希伯来语`ja`：日语`jv`：爪哇语`jw`：爪哇语`ka`：格鲁吉亚语`kk`：哈萨克语`km`：高棉语`kn`：卡纳达语`ko`：韩语`kri`：Krio`ku`：库尔德语（库尔曼吉语）`ktu`：吉土巴语`ky`：吉尔吉斯语`la`：拉丁语`lb`：卢森堡语`lg`：干达语（卢干达语）`li`：林堡语`lij`：利古里亚语`lmo`：伦巴第语`ln`：林加拉语`lo`：老挝语`lt`：立陶宛语`ltg`：拉特加莱语`luo`：Luo`lus`：米佐语`lv`：拉脱维亚语`mai`：迈蒂利语`mak`：马卡萨`mg`：马尔加什语`mi`：毛利语`min`：米南语`mk`：马其顿语`ml`：马拉雅拉姆语`mn`：蒙古语`mr`：马拉地语`ms`：马来语`mt`：马耳他语`my`：缅甸语`ne`：尼泊尔语`new`：尼瓦尔语`nl`：荷兰语`no`：挪威语`nr`：恩德贝莱语（南部）`nso`：北索托语（塞佩蒂语）`nus`：努尔语`ny`：齐切瓦语（尼扬贾语）`oc`：奥克斯坦语`om`：Oromo`or`：奥里亚语`pa`：旁遮普语`pag`：邦阿西楠语`pam`：邦板牙语`pap`：Papiamento`pl`：波兰语`ps`：Pashto`pt`：葡萄牙语`pt-BR`：葡萄牙语（巴西）`pt-PT`：葡萄牙语（葡萄牙）`qu`：克丘亚语`ro`：罗马尼亚语`rom`：罗姆语`rn`：Rundi`ru`：俄语`rw`：卢旺达语`sa`：梵语`scn`：西西里语`sd`：信德语`sg`：Sango`shn`：掸语`si`：僧伽罗语`sk`：斯洛伐克语`sl`：斯洛文尼亚语`sm`：萨摩亚语`sn`：修纳语`so`：索马里语`sq`：阿尔巴尼亚语`sr`：塞尔维亚语`ss`：斯瓦特语`st`：塞索托语`su`：巽他语`sv`：瑞典语`sw`：斯瓦希里语`szl`：西里西亚语`ta`：泰米尔语`te`：泰卢固语`tet`：德顿语`tg`：塔吉克语`th`：泰语`ti`：提格里尼亚语`tk`：土库曼语`tl`：菲律宾语（塔加拉语）`tn`：茨瓦纳语`tr`：土耳其语`ts`：聪加语`tt`：鞑靼语`ug`：维吾尔语`uk`：乌克兰语`ur`：乌尔都语`uz`：乌兹别克语`vi`：越南语`xh`：科萨语`yi`：意第绪语`yo`：约鲁巴语`yua`：尤卡坦玛雅语`yue`：粤语`zh`：简体中文`zh-TW`：中文（繁体）`zu`：祖鲁语**注意**：多语言方式，则使用 `/` 分割，如：`en/ja`，表示英语和日语。 */
+  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效，翻译语言列表：`ab`：阿布哈兹语`ace`：亚齐语`ach`：阿乔利语`af`：南非荷兰语`ak`：契维语（阿坎语）`am`：Amharic`ar`：阿拉伯语`as`：阿萨姆语`ay`：艾马拉语`az`：阿塞拜疆语`ba`：巴什基尔语`ban`：巴厘语`bbc`：巴塔克托巴语`bem`：Bemba`bew`：Betawi`bg`：保加利亚语`bho`：博杰普尔语`bik`：Bikol`bm`：班巴拉语`bn`：孟加拉语`br`：布列塔尼语`bs`：波斯尼亚语`btx`：巴塔克卡罗语`bts`：巴塔克西马隆贡语`bua`：布里亚特语`ca`：加泰罗尼亚语`ceb`：宿务语`cgg`：Kiga`chm`：草原马里语`ckb`：库尔德语（索拉尼语）`cnh`：哈卡钦语`co`：科西嘉语`crh`：克里米亚鞑靼语`crs`：塞舌尔克里奥尔语`cs`：捷克语`cv`：楚瓦什语`cy`：威尔士语`da`：丹麦语`de`：德语`din`：Dinka`doi`：多格来语`dov`：敦贝语`dv`：第维埃语`dz`：宗卡语`ee`：Ewe`el`：希腊语`en`：英语`eo`：世界语`es`：西班牙语`et`：爱沙尼亚语`eu`：巴斯克语`fa`：波斯语`ff`：富拉语`fi`：芬兰语`fil`：菲律宾语（塔加拉语）`fj`：斐济语`fr`：法语`fr-CA`：法语（加拿大）`fr-FR`：法语（法国）`fy`：弗里斯兰语`ga`：爱尔兰语`gaa`：加 (Ga) 语`gd`：苏格兰盖尔语`gl`：加利西亚语`gn`：瓜拉尼语`gom`：贡根语`gu`：古吉拉特语`gv`：马恩岛语`ha`：Hausa`haw`：夏威夷语`he`：希伯来语`hi`：印地语`hil`：希利盖农语`hmn`：苗语`hr`：克罗地亚语`hrx`：洪斯吕克语`ht`：海地克里奥尔语`hu`：匈牙利语`hy`：亚美尼亚语`id`：印度尼西亚语`ig`：Igbo`ilo`：伊洛果语`is`：冰岛语`it`：意大利语`iw`：希伯来语`ja`：日语`jv`：爪哇语`ka`：格鲁吉亚语`kk`：哈萨克语`km`：高棉语`kn`：卡纳达语`ko`：韩语`kri`：Krio`ku`：库尔德语（库尔曼吉语）`ktu`：吉土巴语`ky`：吉尔吉斯语`la`：拉丁语`lb`：卢森堡语`lg`：干达语（卢干达语）`li`：林堡语`lij`：利古里亚语`lmo`：伦巴第语`ln`：林加拉语`lo`：老挝语`lt`：立陶宛语`ltg`：拉特加莱语`luo`：Luo`lus`：米佐语`lv`：拉脱维亚语`mai`：迈蒂利语`mak`：马卡萨`mg`：马尔加什语`mi`：毛利语`min`：米南语`mk`：马其顿语`ml`：马拉雅拉姆语`mn`：蒙古语`mr`：马拉地语`ms`：马来语`mt`：马耳他语`my`：缅甸语`ne`：尼泊尔语`new`：尼瓦尔语`nl`：荷兰语`no`：挪威语`nr`：恩德贝莱语（南部）`nso`：北索托语（塞佩蒂语）`nus`：努尔语`ny`：齐切瓦语（尼扬贾语）`oc`：奥克斯坦语`om`：Oromo`or`：奥里亚语`pa`：旁遮普语`pag`：邦阿西楠语`pam`：邦板牙语`pap`：Papiamento`pl`：波兰语`ps`：Pashto`pt`：葡萄牙语`pt-BR`：葡萄牙语（巴西）`pt-PT`：葡萄牙语（葡萄牙）`qu`：克丘亚语`ro`：罗马尼亚语`rom`：罗姆语`rn`：Rundi`ru`：俄语`rw`：卢旺达语`sa`：梵语`scn`：西西里语`sd`：信德语`sg`：Sango`shn`：掸语`si`：僧伽罗语`sk`：斯洛伐克语`sl`：斯洛文尼亚语`sm`：萨摩亚语`sn`：修纳语`so`：索马里语`sq`：阿尔巴尼亚语`sr`：塞尔维亚语`ss`：斯瓦特语`st`：塞索托语`su`：巽他语`sv`：瑞典语`sw`：斯瓦希里语`szl`：西里西亚语`ta`：泰米尔语`te`：泰卢固语`tet`：德顿语`tg`：塔吉克语`th`：泰语`ti`：提格里尼亚语`tk`：土库曼语`tn`：茨瓦纳语`tr`：土耳其语`ts`：聪加语`tt`：鞑靼语`ug`：维吾尔语`uk`：乌克兰语`ur`：乌尔都语`uz`：乌兹别克语`vi`：越南语`xh`：科萨语`yi`：意第绪语`yo`：约鲁巴语`yua`：尤卡坦玛雅语`yue`：粤语`zh`：简体中文`zh-TW`：中文（繁体）`zu`：祖鲁语**注意**：多语言方式，则使用 `/` 分割，如：`en/ja`，表示英语和日语。 */
   TranslateDstLanguage?: string;
   /** 字幕处理类型：- 0：ASR识别字幕- 1：纯字幕翻译- 2：OCR识别字幕**注意**：不传的情况下默认类型为 ASR识别字幕 */
   ProcessType?: number;
+  /** 字幕OCR提取框选区域配置 */
+  SelectingSubtitleAreasConfig?: SelectingSubtitleAreasConfig;
 }
 
 declare interface CreateSmartSubtitleTemplateResponse {
@@ -7930,6 +8036,40 @@ declare interface DescribeAdaptiveDynamicStreamingTemplatesResponse {
   TotalCount?: number;
   /** 转自适应码流模板详情列表。 */
   AdaptiveDynamicStreamingTemplateSet?: AdaptiveDynamicStreamingTemplate[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAigcImageTaskRequest {
+  /** 创建的AIGC生图片任务ID。 */
+  TaskId: string;
+}
+
+declare interface DescribeAigcImageTaskResponse {
+  /** 任务当前状态。 WAIT：等待中， RUN：执行中， FAIL：任务失败， DONE：任务成功。 */
+  Status?: string;
+  /** 当任务状态为 DONE时，返回的图片Url列表，图片存储12小时，请尽快取走使用。 */
+  ImageUrls?: string[];
+  /** 当任务状态为 FAIL时，返回失败信息。 */
+  Message?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAigcVideoTaskRequest {
+  /** 创建AIGC生视频任务时，返回的任务ID。 */
+  TaskId: string;
+}
+
+declare interface DescribeAigcVideoTaskResponse {
+  /** 任务当前状态。 WAIT：等待中， RUN：执行中， FAIL：任务失败， DONE：任务成功。 */
+  Status?: string;
+  /** 当任务状态为 DONE时，返回视频Url列表，视频存储12小时，请尽快取走使用。 */
+  VideoUrls?: string[];
+  /** 输出视频的分辨率。示例：1080*720； */
+  Resolution?: string;
+  /** 当任务状态为 FAIL时，返回失败信息。 */
+  Message?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9341,10 +9481,12 @@ declare interface ModifySmartSubtitleTemplateRequest {
   SubtitleType?: number;
   /** ASR热词库参数 */
   AsrHotWordsConfigure?: AsrHotWordsConfigure;
-  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效，翻译语言列表：`ab`：阿布哈兹语`ace`：亚齐语`ach`：阿乔利语`af`：南非荷兰语`ak`：契维语（阿坎语）`am`：Amharic`ar`：阿拉伯语`as`：阿萨姆语`ay`：艾马拉语`az`：阿塞拜疆语`ba`：巴什基尔语`ban`：巴厘语`bbc`：巴塔克托巴语`bem`：Bemba`bew`：Betawi`bg`：保加利亚语`bho`：博杰普尔语`bik`：Bikol`bm`：班巴拉语`bn`：孟加拉语`br`：布列塔尼语`bs`：波斯尼亚语`btx`：巴塔克卡罗语`bts`：巴塔克西马隆贡语`bua`：布里亚特语`ca`：加泰罗尼亚语`ceb`：宿务语`cgg`：Kiga`chm`：草原马里语`ckb`：库尔德语（索拉尼语）`cnh`：哈卡钦语`co`：科西嘉语`crh`：克里米亚鞑靼语`crs`：塞舌尔克里奥尔语`cs`：捷克语`cv`：楚瓦什语`cy`：威尔士语`da`：丹麦语`de`：德语`din`：Dinka`doi`：多格来语`dov`：敦贝语`dv`：第维埃语`dz`：宗卡语`ee`：Ewe`el`：希腊语`en`：英语`eo`：世界语`es`：西班牙语`et`：爱沙尼亚语`eu`：巴斯克语`fa`：波斯语`ff`：富拉语`fi`：芬兰语`fil`：菲律宾语（塔加拉语）`fj`：斐济语`fr`：法语`fr-CA`：法语（加拿大）`fr-FR`：法语（法国）`fy`：弗里斯兰语`ga`：爱尔兰语`gaa`：加 (Ga) 语`gd`：苏格兰盖尔语`gl`：加利西亚语`gn`：瓜拉尼语`gom`：贡根语`gu`：古吉拉特语`gv`：马恩岛语`ha`：Hausa`haw`：夏威夷语`he`：希伯来语`hi`：印地语`hil`：希利盖农语`hmn`：苗语`hr`：克罗地亚语`hrx`：洪斯吕克语`ht`：海地克里奥尔语`hu`：匈牙利语`hy`：亚美尼亚语`id`：印度尼西亚语`ig`：Igbo`ilo`：伊洛果语`is`：冰岛语`it`：意大利语`iw`：希伯来语`ja`：日语`jv`：爪哇语`jw`：爪哇语`ka`：格鲁吉亚语`kk`：哈萨克语`km`：高棉语`kn`：卡纳达语`ko`：韩语`kri`：Krio`ku`：库尔德语（库尔曼吉语）`ktu`：吉土巴语`ky`：吉尔吉斯语`la`：拉丁语`lb`：卢森堡语`lg`：干达语（卢干达语）`li`：林堡语`lij`：利古里亚语`lmo`：伦巴第语`ln`：林加拉语`lo`：老挝语`lt`：立陶宛语`ltg`：拉特加莱语`luo`：Luo`lus`：米佐语`lv`：拉脱维亚语`mai`：迈蒂利语`mak`：马卡萨`mg`：马尔加什语`mi`：毛利语`min`：米南语`mk`：马其顿语`ml`：马拉雅拉姆语`mn`：蒙古语`mr`：马拉地语`ms`：马来语`mt`：马耳他语`my`：缅甸语`ne`：尼泊尔语`new`：尼瓦尔语`nl`：荷兰语`no`：挪威语`nr`：恩德贝莱语（南部）`nso`：北索托语（塞佩蒂语）`nus`：努尔语`ny`：齐切瓦语（尼扬贾语）`oc`：奥克斯坦语`om`：Oromo`or`：奥里亚语`pa`：旁遮普语`pag`：邦阿西楠语`pam`：邦板牙语`pap`：Papiamento`pl`：波兰语`ps`：Pashto`pt`：葡萄牙语`pt-BR`：葡萄牙语（巴西）`pt-PT`：葡萄牙语（葡萄牙）`qu`：克丘亚语`ro`：罗马尼亚语`rom`：罗姆语`rn`：Rundi`ru`：俄语`rw`：卢旺达语`sa`：梵语`scn`：西西里语`sd`：信德语`sg`：Sango`shn`：掸语`si`：僧伽罗语`sk`：斯洛伐克语`sl`：斯洛文尼亚语`sm`：萨摩亚语`sn`：修纳语`so`：索马里语`sq`：阿尔巴尼亚语`sr`：塞尔维亚语`ss`：斯瓦特语`st`：塞索托语`su`：巽他语`sv`：瑞典语`sw`：斯瓦希里语`szl`：西里西亚语`ta`：泰米尔语`te`：泰卢固语`tet`：德顿语`tg`：塔吉克语`th`：泰语`ti`：提格里尼亚语`tk`：土库曼语`tl`：菲律宾语（塔加拉语）`tn`：茨瓦纳语`tr`：土耳其语`ts`：聪加语`tt`：鞑靼语`ug`：维吾尔语`uk`：乌克兰语`ur`：乌尔都语`uz`：乌兹别克语`vi`：越南语`xh`：科萨语`yi`：意第绪语`yo`：约鲁巴语`yua`：尤卡坦玛雅语`yue`：粤语`zh`：简体中文`zh-TW`：中文（繁体）`zu`：祖鲁语**注意**：多语言方式，则使用 `/` 分割，如：`en/ja`，表示英语和日语。 */
+  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效，翻译语言列表：`ab`：阿布哈兹语`ace`：亚齐语`ach`：阿乔利语`af`：南非荷兰语`ak`：契维语（阿坎语）`am`：Amharic`ar`：阿拉伯语`as`：阿萨姆语`ay`：艾马拉语`az`：阿塞拜疆语`ba`：巴什基尔语`ban`：巴厘语`bbc`：巴塔克托巴语`bem`：Bemba`bew`：Betawi`bg`：保加利亚语`bho`：博杰普尔语`bik`：Bikol`bm`：班巴拉语`bn`：孟加拉语`br`：布列塔尼语`bs`：波斯尼亚语`btx`：巴塔克卡罗语`bts`：巴塔克西马隆贡语`bua`：布里亚特语`ca`：加泰罗尼亚语`ceb`：宿务语`cgg`：Kiga`chm`：草原马里语`ckb`：库尔德语（索拉尼语）`cnh`：哈卡钦语`co`：科西嘉语`crh`：克里米亚鞑靼语`crs`：塞舌尔克里奥尔语`cs`：捷克语`cv`：楚瓦什语`cy`：威尔士语`da`：丹麦语`de`：德语`din`：Dinka`doi`：多格来语`dov`：敦贝语`dv`：第维埃语`dz`：宗卡语`ee`：Ewe`el`：希腊语`en`：英语`eo`：世界语`es`：西班牙语`et`：爱沙尼亚语`eu`：巴斯克语`fa`：波斯语`ff`：富拉语`fi`：芬兰语`fil`：菲律宾语（塔加拉语）`fj`：斐济语`fr`：法语`fr-CA`：法语（加拿大）`fr-FR`：法语（法国）`fy`：弗里斯兰语`ga`：爱尔兰语`gaa`：加 (Ga) 语`gd`：苏格兰盖尔语`gl`：加利西亚语`gn`：瓜拉尼语`gom`：贡根语`gu`：古吉拉特语`gv`：马恩岛语`ha`：Hausa`haw`：夏威夷语`he`：希伯来语`hi`：印地语`hil`：希利盖农语`hmn`：苗语`hr`：克罗地亚语`hrx`：洪斯吕克语`ht`：海地克里奥尔语`hu`：匈牙利语`hy`：亚美尼亚语`id`：印度尼西亚语`ig`：Igbo`ilo`：伊洛果语`is`：冰岛语`it`：意大利语`iw`：希伯来语`ja`：日语`jv`：爪哇语`ka`：格鲁吉亚语`kk`：哈萨克语`km`：高棉语`kn`：卡纳达语`ko`：韩语`kri`：Krio`ku`：库尔德语（库尔曼吉语）`ktu`：吉土巴语`ky`：吉尔吉斯语`la`：拉丁语`lb`：卢森堡语`lg`：干达语（卢干达语）`li`：林堡语`lij`：利古里亚语`lmo`：伦巴第语`ln`：林加拉语`lo`：老挝语`lt`：立陶宛语`ltg`：拉特加莱语`luo`：Luo`lus`：米佐语`lv`：拉脱维亚语`mai`：迈蒂利语`mak`：马卡萨`mg`：马尔加什语`mi`：毛利语`min`：米南语`mk`：马其顿语`ml`：马拉雅拉姆语`mn`：蒙古语`mr`：马拉地语`ms`：马来语`mt`：马耳他语`my`：缅甸语`ne`：尼泊尔语`new`：尼瓦尔语`nl`：荷兰语`no`：挪威语`nr`：恩德贝莱语（南部）`nso`：北索托语（塞佩蒂语）`nus`：努尔语`ny`：齐切瓦语（尼扬贾语）`oc`：奥克斯坦语`om`：Oromo`or`：奥里亚语`pa`：旁遮普语`pag`：邦阿西楠语`pam`：邦板牙语`pap`：Papiamento`pl`：波兰语`ps`：Pashto`pt`：葡萄牙语`pt-BR`：葡萄牙语（巴西）`pt-PT`：葡萄牙语（葡萄牙）`qu`：克丘亚语`ro`：罗马尼亚语`rom`：罗姆语`rn`：Rundi`ru`：俄语`rw`：卢旺达语`sa`：梵语`scn`：西西里语`sd`：信德语`sg`：Sango`shn`：掸语`si`：僧伽罗语`sk`：斯洛伐克语`sl`：斯洛文尼亚语`sm`：萨摩亚语`sn`：修纳语`so`：索马里语`sq`：阿尔巴尼亚语`sr`：塞尔维亚语`ss`：斯瓦特语`st`：塞索托语`su`：巽他语`sv`：瑞典语`sw`：斯瓦希里语`szl`：西里西亚语`ta`：泰米尔语`te`：泰卢固语`tet`：德顿语`tg`：塔吉克语`th`：泰语`ti`：提格里尼亚语`tk`：土库曼语`tn`：茨瓦纳语`tr`：土耳其语`ts`：聪加语`tt`：鞑靼语`ug`：维吾尔语`uk`：乌克兰语`ur`：乌尔都语`uz`：乌兹别克语`vi`：越南语`xh`：科萨语`yi`：意第绪语`yo`：约鲁巴语`yua`：尤卡坦玛雅语`yue`：粤语`zh`：简体中文`zh-TW`：中文（繁体）`zu`：祖鲁语**注意**：多语言方式，则使用 `/` 分割，如：`en/ja`，表示英语和日语。 */
   TranslateDstLanguage?: string;
   /** 字幕处理类型：- 0：ASR识别字幕- 1：纯字幕翻译- 2：OCR识别字幕**注意**：不传的情况下，默认是ASR方式 */
   ProcessType?: number;
+  /** 字幕OCR提取框选区域配置 */
+  SelectingSubtitleAreasConfig?: SelectingSubtitleAreasConfig;
 }
 
 declare interface ModifySmartSubtitleTemplateResponse {
@@ -9827,6 +9969,10 @@ declare interface Mps {
   CreateAIRecognitionTemplate(data?: CreateAIRecognitionTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIRecognitionTemplateResponse>;
   /** 创建转自适应码流模板 {@link CreateAdaptiveDynamicStreamingTemplateRequest} {@link CreateAdaptiveDynamicStreamingTemplateResponse} */
   CreateAdaptiveDynamicStreamingTemplate(data: CreateAdaptiveDynamicStreamingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAdaptiveDynamicStreamingTemplateResponse>;
+  /** 创建AIGC生图片任务 {@link CreateAigcImageTaskRequest} {@link CreateAigcImageTaskResponse} */
+  CreateAigcImageTask(data?: CreateAigcImageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAigcImageTaskResponse>;
+  /** 创建AIGC生视频任务 {@link CreateAigcVideoTaskRequest} {@link CreateAigcVideoTaskResponse} */
+  CreateAigcVideoTask(data?: CreateAigcVideoTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAigcVideoTaskResponse>;
   /** 创建转动图模板 {@link CreateAnimatedGraphicsTemplateRequest} {@link CreateAnimatedGraphicsTemplateResponse} */
   CreateAnimatedGraphicsTemplate(data: CreateAnimatedGraphicsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAnimatedGraphicsTemplateResponse>;
   /** 创建智能字幕热词库 {@link CreateAsrHotwordsRequest} {@link CreateAsrHotwordsResponse} */
@@ -9935,6 +10081,10 @@ declare interface Mps {
   DescribeAIRecognitionTemplates(data?: DescribeAIRecognitionTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIRecognitionTemplatesResponse>;
   /** 获取转自适应码流模板列表 {@link DescribeAdaptiveDynamicStreamingTemplatesRequest} {@link DescribeAdaptiveDynamicStreamingTemplatesResponse} */
   DescribeAdaptiveDynamicStreamingTemplates(data?: DescribeAdaptiveDynamicStreamingTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAdaptiveDynamicStreamingTemplatesResponse>;
+  /** 查询AIGC生图片任务 {@link DescribeAigcImageTaskRequest} {@link DescribeAigcImageTaskResponse} */
+  DescribeAigcImageTask(data: DescribeAigcImageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAigcImageTaskResponse>;
+  /** 查询AIGC生视频任务 {@link DescribeAigcVideoTaskRequest} {@link DescribeAigcVideoTaskResponse} */
+  DescribeAigcVideoTask(data: DescribeAigcVideoTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAigcVideoTaskResponse>;
   /** 获取转动图模板列表 {@link DescribeAnimatedGraphicsTemplatesRequest} {@link DescribeAnimatedGraphicsTemplatesResponse} */
   DescribeAnimatedGraphicsTemplates(data?: DescribeAnimatedGraphicsTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAnimatedGraphicsTemplatesResponse>;
   /** 查询智能字幕热词库详情 {@link DescribeAsrHotwordsRequest} {@link DescribeAsrHotwordsResponse} */

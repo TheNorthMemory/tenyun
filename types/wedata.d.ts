@@ -100,6 +100,14 @@ declare interface AlarmRuleDetail {
   ReconciliationExtInfo?: ReconciliationStrategyInfo[] | null;
   /** 监控对象的白名单配置 */
   MonitorWhiteTasks?: MonitorWhiteTask[];
+  /** 3.0 Workflow 完成时间（周期）告警策略 */
+  WorkflowCompletionTimeCycleExtInfo?: TimeOutStrategyInfo[] | null;
+  /** 工作流执行触发告警条件 */
+  WorkflowExecutionTrigger?: number | null;
+  /** 工作流执行失败告警条件 */
+  WorkflowExecutionFailureTrigger?: number | null;
+  /** 工作流执行成功告警条件 */
+  WorkflowExecutionSuccessTrigger?: number | null;
 }
 
 /** 告警渠道 企业微信群/钉钉群/飞书群 等webhook地址配置 */
@@ -2318,6 +2326,12 @@ declare interface TimeOutStrategyInfo {
   Min?: number | null;
   /** 超时时间对应的时区配置， 如 UTC+7, 默认为UTC+8 */
   ScheduleTimeZone?: string | null;
+  /** 秒（用于 Spark Streaming 策略） */
+  Second?: number | null;
+  /** 次数（用于 Spark Streaming 重试次数超限策略，ruleType=10） */
+  Times?: number | null;
+  /** 告警触发频率（用于 Spark Streaming 策略 ruleType=8/9/10） * 单位：分钟，范围：5-1440 * 告警触发后，在该时间内暂停检测，避免告警风暴 */
+  AlarmTriggerFrequency?: number | null;
 }
 
 /** 资源组指标趋势 */

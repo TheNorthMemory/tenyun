@@ -742,8 +742,12 @@ declare interface UpdateNativeNodePoolParam {
   DataDisks?: DataDisk[];
   /** ssh公钥id数组 */
   KeyIds?: string[];
+  /** 节点移出策略，有Random（随机）、Newest（优先移出最新实例）、Oldest（优先移出最旧实例）三种可选，默认是Newest */
+  DeletePolicy?: string;
   /** 节点池 GPU 配置 */
   GPUConfigs?: GPUConfig[];
+  /** 原生节点池安装自动化助手开关状态 */
+  AutomationService?: boolean;
   /** 原生节点池密码 */
   Password?: string;
 }

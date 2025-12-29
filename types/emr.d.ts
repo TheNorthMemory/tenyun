@@ -266,6 +266,8 @@ declare interface CloudResource {
   Affinity?: NodeAffinity | null;
   /** 所选数据盘信息 */
   Disks?: Disk[] | null;
+  /** 容忍 */
+  Tolerations?: Toleration[] | null;
 }
 
 /** 当前集群共用组件与集群对应关系 */
@@ -1778,6 +1780,14 @@ declare interface Order {
   Direction?: string;
 }
 
+/** 其他账号信息 */
+declare interface OtherAccountInfo {
+  /** 其他账号UIN */
+  OtherUin?: string | null;
+  /** 其他账号授权角色名称 */
+  RoleName?: string | null;
+}
+
 /** 资源详情 */
 declare interface OutterResource {
   /** 规格 */
@@ -1914,6 +1924,8 @@ declare interface PodNewSpec {
   SubnetId?: string;
   /** pod name */
   PodName?: string;
+  /** 其他账号授权信息 */
+  OtherAccountInfo?: OtherAccountInfo;
 }
 
 /** POD自定义权限和自定义参数 */
@@ -2792,6 +2804,20 @@ declare interface TkeLabel {
   Name?: string;
   /** Label Value */
   Value?: string;
+}
+
+/** Tolerations */
+declare interface Toleration {
+  /** 键 */
+  Key?: string;
+  /** 值 */
+  Value?: string;
+  /** 操作符 */
+  Operator?: string;
+  /** 污点排斥效果 */
+  Effect?: string;
+  /** 驱逐等待时间 */
+  TolerationSeconds?: number;
 }
 
 /** 集群节点拓扑信息 */
@@ -4063,9 +4089,9 @@ declare interface DescribeJobFlowRequest {
 
 declare interface DescribeJobFlowResponse {
   /** 流程任务状态，可以为以下值：JobFlowInit，流程任务初始化。JobFlowResourceApplied，资源申请中，通常为JobFlow需要新建集群时的状态。JobFlowResourceReady，执行流程任务的资源就绪。JobFlowStepsRunning，流程任务步骤已提交。JobFlowStepsComplete，流程任务步骤已完成。JobFlowTerminating，流程任务所需资源销毁中。JobFlowFinish，流程任务已完成。 */
-  State: string;
+  State?: string;
   /** 流程任务步骤结果。 */
-  Details: JobResult[];
+  Details?: JobResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4313,7 +4339,7 @@ declare interface DescribeServiceNodeInfosRequest {
   OperatorStateId?: number;
   /** 过滤条件：健康状态"0"代表不可用"1"代表良好"-2"代表未知"-99"代表所有"-3"代表存在隐患"-4"代表未探测 */
   HealthStateId?: string;
-  /** 服务组件名称，都是大写例如YARN */
+  /** 服务组件名称应采用全大写形式（例如：YARN），api调用时须与 ServiceGroupType 在两者之中任选其一并保证必填。 */
   ServiceName?: string;
   /** 节点名称master,core,task,common,router */
   NodeTypeName?: string;

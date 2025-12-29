@@ -104,6 +104,7 @@ const SERVICE_VERSIONS = {
   cloudapp: ['2022-05-30'],
   cloudaudit: ['2019-03-19'],
   cloudhsm: ['2019-11-12'],
+  cloudmate: ['20025-10-30'],
   cloudstudio: ['2023-05-08'],
   cls: ['2020-10-16'],
   cme: ['2019-10-29'],

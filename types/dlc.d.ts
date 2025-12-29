@@ -594,6 +594,20 @@ declare interface DataEngineInfo {
   IsAIEngine?: number | null;
   /** 引擎资源弹性伸缩策略 */
   ScheduleElasticityConf?: ScheduleElasticityConf;
+  /** GPU 信息 */
+  GPUInfo?: GPUInfo;
+  /** GPU 使用量 */
+  EngineResourceUsedGPU?: number;
+  /** GPU 总规格 */
+  GPUTotalSize?: number;
+  /** GPU 机型 */
+  InstanceModel?: string;
+  /** 节点数量 */
+  NodeNum?: number;
+  /** 引擎规格，包含负载弹性或分时弹性 */
+  SizeWithElastic?: number;
+  /** 最大弹性值，包含负载弹性或分时弹性 */
+  MaxElasticSize?: number;
 }
 
 /** 引擎规格详情 */
@@ -862,6 +876,8 @@ declare interface ElasticPlan {
   StartTime?: string;
   /** 结束时间，Once格式：yyyy-MM-dd HH:mm:ss; 非Once格式： HH:mm:ss */
   EndTime?: string;
+  /** 分时弹性上限 */
+  ElasticLimit?: number;
 }
 
 /** Elasticsearch数据源的详细信息 */
@@ -948,6 +964,26 @@ declare interface Filter {
   Name: string;
   /** 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
   Values: string[];
+}
+
+/** GPU 机型 */
+declare interface GPUInfo {
+  /** 计费项 */
+  BillingItem?: string;
+  /** 机型 */
+  Model?: string;
+  /** cu */
+  CU?: number;
+  /** gpu 机型 */
+  Type?: string;
+  /** 数量 */
+  Num?: number;
+  /** 显存 */
+  GPUMemory?: number;
+  /** 机型 */
+  InstanceType?: string;
+  /** 售卖情况（1-缺货，2-低库存，3-充足） */
+  SaleStatus?: number;
 }
 
 /** 网关基础信息，包括id，名称，规格和状态 */
@@ -1674,6 +1710,8 @@ declare interface SmartOptimizerPolicy {
 declare interface SmartOptimizerWrittenPolicy {
   /** none/enable/disable/default */
   WrittenEnable?: string;
+  /** 用户自定义高级参数 */
+  AdvancePolicy?: WrittenAdvancePolicy | null;
 }
 
 /** SmartPolicyRequest */
@@ -1706,6 +1744,16 @@ declare interface Sort {
   Field: string;
   /** 是否按照ASC排序，否则DESC排序 */
   Asc: boolean;
+}
+
+/** 合并策略sort类型的规则定义 */
+declare interface SortOrder {
+  /** sort的数据表列名称 */
+  Column?: string;
+  /** 按照升序或者降序进行排序 */
+  SortDirection?: string;
+  /** null值放在开头或者末尾 */
+  NullOrder?: string;
 }
 
 /** spark作业详情。 */
@@ -2774,6 +2822,32 @@ declare interface WorkGroups {
   WorkGroupSet?: WorkGroupMessage[] | null;
   /** 工作组总数 */
   TotalCount?: number;
+}
+
+/** Smart Optimizer高级参数配置数据结构 */
+declare interface WrittenAdvancePolicy {
+  /** 是否启用合并 */
+  CompactEnable?: string;
+  /** 是否启用历史数据清理 */
+  DeleteEnable?: string;
+  /** 合并最新文件数量 */
+  MinInputFiles?: number;
+  /** 合并文件目录文件大小 */
+  TargetFileSizeBytes?: number;
+  /** 保留过期时间的快照数量 */
+  RetainLast?: number;
+  /** 快照过期时间 */
+  BeforeDays?: number;
+  /** 快照过期执行周期 */
+  ExpiredSnapshotsIntervalMin?: number;
+  /** 移除孤立文件执行周期 */
+  RemoveOrphanIntervalMin?: number;
+  /** 是否开启COW表合并 */
+  CowCompactEnable?: string;
+  /** 文件合并策略 */
+  CompactStrategy?: string;
+  /** sort合并策略的规则定义 */
+  SortOrders?: SortOrder[] | null;
 }
 
 declare interface AddDMSPartitionsRequest {

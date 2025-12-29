@@ -994,6 +994,10 @@ declare interface TelCdrInfo {
   VoicemailRecordURL?: string[];
   /** 通话中语音留言ASR文本信息地址 */
   VoicemailAsrURL?: string[];
+  /** 如果是智能体相关通话，这里是智能体 ID */
+  AIAgentId?: number;
+  /** 如果是智能体相关通话，这里是智能体名称 */
+  AIAgentName?: string;
 }
 
 /** 时间范围，24 小时制，格式为 09:00:00 */
@@ -2546,6 +2550,22 @@ declare interface PausePredictiveDialingCampaignResponse {
   RequestId?: string;
 }
 
+declare interface PlaySoundCallRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 会话ID */
+  SessionId: string;
+  /** 音频文件 ID，参见管理端-电话客服-放音文件管理 */
+  FileId?: number;
+  /** 放音次数，默认 1 次 */
+  PlayTimes?: number;
+}
+
+declare interface PlaySoundCallResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ResetExtensionPasswordRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -2881,6 +2901,8 @@ declare interface Ccc {
   PauseAutoCalloutTask(data: PauseAutoCalloutTaskRequest, config?: AxiosRequestConfig): AxiosPromise<PauseAutoCalloutTaskResponse>;
   /** 暂停预测式外呼任务 {@link PausePredictiveDialingCampaignRequest} {@link PausePredictiveDialingCampaignResponse} */
   PausePredictiveDialingCampaign(data: PausePredictiveDialingCampaignRequest, config?: AxiosRequestConfig): AxiosPromise<PausePredictiveDialingCampaignResponse>;
+  /** 通话中放音 {@link PlaySoundCallRequest} {@link PlaySoundCallResponse} */
+  PlaySoundCall(data: PlaySoundCallRequest, config?: AxiosRequestConfig): AxiosPromise<PlaySoundCallResponse>;
   /** 重置话机注册密码 {@link ResetExtensionPasswordRequest} {@link ResetExtensionPasswordResponse} */
   ResetExtensionPassword(data: ResetExtensionPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetExtensionPasswordResponse>;
   /** 恢复客服上线 {@link RestoreMemberOnlineRequest} {@link RestoreMemberOnlineResponse} */

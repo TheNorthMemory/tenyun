@@ -62,6 +62,10 @@ declare interface AgentAdvancedConfig {
   EnableStructuredOutput?: boolean;
   /** 结构化输出配置 */
   StructuredOutputConfig?: StructuredOutputConfig;
+  /** Agent输出配置 */
+  AgentOutputConfig?: AgentOutputConfig;
+  /** 澄清询问配置 */
+  ClarificationConfig?: ClarificationConfig;
 }
 
 /** Agent调试信息 */
@@ -94,6 +98,8 @@ declare interface AgentInput {
   AppVarId?: string;
   /** 系统参数 */
   SystemVariable?: AgentInputSystemVariable;
+  /** 工具参数 */
+  ToolParam?: string;
 }
 
 /** 系统参数 */
@@ -206,6 +212,16 @@ declare interface AgentModelInfo {
   MaxReasoningRound?: number;
   /** 模型参数 */
   ModelParams?: ModelParams;
+}
+
+/** Agent输出配置 */
+declare interface AgentOutputConfig {
+  /** 输出类型，1-文本 2-json 3-widget */
+  OutputType?: number;
+  /** Json结构化输出参数列表 */
+  StructuredOutputParams?: ParameterConfig[];
+  /** widget id */
+  WidgetId?: string;
 }
 
 /** 应用配置MCP插件header信息 */
@@ -398,6 +414,8 @@ declare interface AgentToolInfo {
   ToolSource?: number;
   /** 计费状态；0-不计费，1-限时免费，2-官方收费 */
   FinanceType?: number;
+  /** 工具高级设置 */
+  ToolAdvanceConfig?: ToolAdvanceConfig;
 }
 
 /** Agent工具的请求参数定义 */
@@ -710,6 +728,28 @@ declare interface ChannelListInfo {
   YuanQiInfo?: YuanQi | null;
 }
 
+/** 澄清询问配置 */
+declare interface ClarificationConfig {
+  /** 输出类型，1-文本 3-widget */
+  OutputType?: number;
+  /** 澄清widget配置 */
+  WidgetConfigs?: ClarificationWidgetConfig[];
+}
+
+/** 澄清widget配置 */
+declare interface ClarificationWidgetConfig {
+  /** widget id */
+  WidgetId?: string;
+  /** 澄清widget类型 */
+  ClarificationWidgetType?: number;
+  /** Widget名称 */
+  WidgetName?: string;
+  /** Widget预览 */
+  WidgetPreview?: string;
+  /** 是否启用该Widget作为澄清样式 */
+  Enabled?: boolean;
+}
+
 /** 标签提取配置 */
 declare interface ClassifyConfig {
   /** 模型配置 */
@@ -728,6 +768,54 @@ declare interface ClassifyLabel {
   Description?: string | null;
   /** 标签取值范围 */
   Values?: string[] | null;
+}
+
+/** 对话记录内容详情 */
+declare interface Content {
+  /** 消息内容类型text：文本image：图片file：文件option_cards：选项卡custom_params：用户自定义业务参数sandbox：云桌面custom_variables：自定义输入参数web_search: 网页搜索内容file_collection：文件收集信息widget：widget信息widget_action：用户端widget动作信息 */
+  Type?: string;
+  /** 文本内容 */
+  Text?: string | null;
+  /** 引用信息 */
+  QuoteInfos?: QuoteInfo[] | null;
+  /** 参考文献信息 */
+  References?: ContentReference[] | null;
+  /** 图片信息 */
+  Image?: ImageInfoContent | null;
+  /** 文件信息 */
+  File?: FileInfoContent | null;
+  /** 选项卡信息 */
+  OptionCards?: string[] | null;
+  /** 用户自定义业务参数信息 */
+  CustomParams?: string[] | null;
+  /** 自定义变量 */
+  CustomVariables?: string[] | null;
+  /** 沙盒信息 */
+  Sandbox?: SandboxContent | null;
+  /** 网页搜索内容 */
+  WebSearch?: WebSearchContent | null;
+  /** 文件收集信息 */
+  FileCollection?: FileCollection | null;
+  /** Widget信息 */
+  Widget?: Widget | null;
+  /** Widget动作信息 */
+  WidgetAction?: WidgetAction | null;
+}
+
+/** 会话内容参考文献信息 */
+declare interface ContentReference {
+  /** 引用来源索引ID */
+  Index?: number | null;
+  /** 参考来源名称 */
+  Name?: string;
+  /** 参考来源类型1：问答2：文档片段4：联网检索到的内容 */
+  Type?: number;
+  /** 文档片段参考信息 */
+  DocRefer?: DocReference | null;
+  /** 问答参考信息 */
+  QaRefer?: QaReference | null;
+  /** 联网检索内容参考信息 */
+  WebSearchRefer?: WebSearchReference | null;
 }
 
 /** 获取不满意回复上下文响 */
@@ -788,6 +876,22 @@ declare interface DocFilterFlag {
   Value?: boolean;
 }
 
+/** 文档类参考来源信息 */
+declare interface DocReference {
+  /** 文档业务ID */
+  DocBizId?: number;
+  /** 文档片段参考ID */
+  ReferBizId?: number | null;
+  /** 文档名称 */
+  DocName?: string | null;
+  /** 文档所在知识库业务ID */
+  KnowledgeBizId?: number | null;
+  /** 文档所在知识库名称 */
+  KnowledgeName?: string | null;
+  /** 文档访问地址 */
+  Url?: string | null;
+}
+
 /** 文档片段 */
 declare interface DocSegment {
   /** 片段ID */
@@ -830,6 +934,14 @@ declare interface ExtraInfo {
   EChartsInfo?: string[] | null;
 }
 
+/** 文件收集信息 */
+declare interface FileCollection {
+  /** 最大上传文件的数量 */
+  MaxFileCount: number;
+  /** 支持的上传文件类型 */
+  SupportedFileTypes: string[] | null;
+}
+
 /** 实时上传的文件信息 */
 declare interface FileInfo {
   /** 文件名称 */
@@ -844,6 +956,20 @@ declare interface FileInfo {
   DocId?: string | null;
   /** 创建时间 */
   CreatedAt?: string | null;
+}
+
+/** 文件信息内容 */
+declare interface FileInfoContent {
+  /** 实时文档解析接口返回的 DocBizId */
+  DocBizId?: number;
+  /** 文件名称 */
+  FileName?: string | null;
+  /** 文件类型 */
+  FileType?: string | null;
+  /** 文件大小 */
+  FileSize?: number | null;
+  /** 文件 URL */
+  FileUrl?: string | null;
 }
 
 /** 不满意回复检索过滤 */
@@ -880,6 +1006,12 @@ declare interface HistorySummary {
   Assistant?: string | null;
   /** 用户 */
   User?: string | null;
+}
+
+/** 图片信息 */
+declare interface ImageInfoContent {
+  /** 图片文件链接 */
+  Url?: string;
 }
 
 /** 输入框配置 */
@@ -1344,6 +1476,10 @@ declare interface ListReleaseItem {
   SuccessCount?: number;
   /** 发布失败数 */
   FailCount?: number;
+  /** 版本号，格式是 v{date}{time} */
+  ReleaseVersion?: string;
+  /** 是否可还原 */
+  CanRollback?: boolean;
 }
 
 /** 模型信息 */
@@ -1404,14 +1540,20 @@ declare interface ModelInfo {
 
 /** 模型参数范围 */
 declare interface ModelParameter {
+  /** 超参名称 */
+  Name?: string | null;
+  /** 类型 */
+  Type?: string;
+  /** 默认值 */
+  DefaultValue?: string;
+  /** 枚举值 */
+  EnumValues?: string[];
   /** 默认值 */
   Default?: number | null;
   /** 最小值 */
   Min?: number | null;
   /** 最大值 */
   Max?: number | null;
-  /** 超参名称 */
-  Name?: string | null;
 }
 
 /** 模型参数 */
@@ -1434,6 +1576,10 @@ declare interface ModelParams {
   StopSequences?: string[];
   /** 输出格式 */
   ReplyFormat?: string;
+  /** 深度思考值disabledenabled */
+  DeepThinking?: string | null;
+  /** 效果 disabled low medium high */
+  ReasoningEffort?: string | null;
 }
 
 /** 文档信息 */
@@ -1504,6 +1650,10 @@ declare interface MsgRecord {
   ExtraInfo?: ExtraInfo | null;
   /** 工作流信息 */
   WorkFlow?: WorkflowInfo | null;
+  /** Widget信息 */
+  Widgets?: Widget[] | null;
+  /** Widget动作信息 */
+  WidgetAction?: WidgetAction | null;
 }
 
 /** 聊天详情Refer */
@@ -1624,6 +1774,16 @@ declare interface OptionCardIndex {
   RecordId?: string;
   /** 选项卡索引 */
   Index?: number;
+}
+
+/** Widget输出参数配置 */
+declare interface OutputWidgetConfig {
+  /** widget id */
+  WidgetId?: string;
+  /** widget名字 */
+  WidgetName?: string;
+  /** 展示结果 */
+  WidgetParam?: WidgetParam[];
 }
 
 /** 参数配置列表 */
@@ -1766,6 +1926,18 @@ declare interface QAQuery {
   QueryAnswer?: string;
   /** 查询类型 filename 名称、 attribute 标签 */
   QueryType?: string;
+}
+
+/** 问答对参考信息 */
+declare interface QaReference {
+  /** 问答业务ID */
+  QaBizId?: number;
+  /** 文档片段参考ID */
+  ReferBizId?: number | null;
+  /** 问答所在知识库业务ID */
+  KnowledgeBizId?: number | null;
+  /** 问答所在知识库名称 */
+  KnowledgeName?: string | null;
 }
 
 /** 搜索引擎参考来源索引 */
@@ -1918,6 +2090,16 @@ declare interface RunNodeInfo {
   InvokeApi?: InvokeAPI | null;
   /** 当前节点的所有槽位的值，key：SlotID。没有值的时候也要返回空。 */
   SlotValues?: ValueInfo[] | null;
+}
+
+/** 沙盒信息内容 */
+declare interface SandboxContent {
+  /** 沙盒的URL地址 */
+  Url?: string | null;
+  /** 沙盒通过浏览器打开的URL地址 */
+  DisplayUrl?: string | null;
+  /** 沙盒输出内容 */
+  Content?: string | null;
 }
 
 /** 检索范围配置 */
@@ -2118,6 +2300,20 @@ declare interface TokenStat {
   TraceId?: string | null;
 }
 
+/** 工具高级设置 */
+declare interface ToolAdvanceConfig {
+  /** 工具调用结果是否直接返回给用户 */
+  EnableDirectResultReturn?: boolean;
+  /** 输出样式 1-文本 2-json 3-widget */
+  OutputType?: number;
+  /** 原始结构化JSON输出 */
+  RawStructuredOutput?: string;
+  /** 自定义文本输出，多行展示 */
+  CustomTextOutputs?: string;
+  /** Widget输出配置 */
+  OutputWidgetConfig?: OutputWidgetConfig;
+}
+
 /** 不满意回复 */
 declare interface UnsatisfiedReply {
   /** 不满意回复ID */
@@ -2186,6 +2382,60 @@ declare interface VoiceConfig {
   VoiceName?: string | null;
 }
 
+/** 网页搜索内容 */
+declare interface WebSearchContent {
+  /** 网页搜索结果，json格式的string */
+  Content?: string;
+}
+
+/** 联网检索内容参考详情 */
+declare interface WebSearchReference {
+  /** 网页URL */
+  Url?: string;
+}
+
+/** 对话端Widget结构 */
+declare interface Widget {
+  /** Widget配置ID */
+  WidgetId?: string;
+  /** Widget实例ID */
+  WidgetRunId?: string;
+  /** Widget状态数据 */
+  State?: string | null;
+  /** Widget位置 */
+  Position?: number | null;
+  /** Base64编码的Widget信息 */
+  EncodedWidget?: string | null;
+  /** 用户最近一次提交的payload */
+  Payload?: string | null;
+}
+
+/** 对话端Widget动作提交结构 */
+declare interface WidgetAction {
+  /** Widget配置ID */
+  WidgetId?: string;
+  /** Widget实例ID */
+  WidgetRunId?: string | null;
+  /** Widget动作 */
+  ActionType?: string;
+  /** Widget动作提交的数据 */
+  Payload?: string | null;
+}
+
+/** Widget参数配置 */
+declare interface WidgetParam {
+  /** 参数名称 */
+  Name?: string;
+  /** 参数类型 */
+  Type?: number;
+  /** 子参数 */
+  SubParams?: WidgetParam[];
+  /** 默认值, Input未指定时，使用该值 */
+  DefaultValue?: string;
+  /** 输入的值 */
+  Input?: AgentInput;
+}
+
 /** 工作流程调试信息 */
 declare interface WorkFlowSummary {
   /** 工作流ID */
@@ -2206,6 +2456,8 @@ declare interface WorkFlowSummary {
   PendingMessages?: string[];
   /** 选项卡索引 */
   OptionCardIndex?: OptionCardIndex;
+  /** 工作流多气泡输出 */
+  Contents?: Content[] | null;
 }
 
 /** 工作流信息 */
@@ -2222,6 +2474,8 @@ declare interface WorkflowInfo {
   Outputs?: string[] | null;
   /** 工作流发布时间，unix时间戳 */
   WorkflowReleaseTime?: string | null;
+  /** 工作流多气泡输出 */
+  Contents?: Content[] | null;
 }
 
 /** WorkflowRef详情 */
@@ -2445,11 +2699,11 @@ declare interface CreateDocCateResponse {
 }
 
 declare interface CreateQACateRequest {
-  /** 应用ID */
+  /** 应用ID若要操作共享知识库，传KnowledgeBizId */
   BotBizId: string;
   /** 父级业务ID，创建顶级分类时传字符串"0" */
   ParentBizId: string;
-  /** 分类名称 */
+  /** 创建的分类名称 */
   Name: string;
 }
 
@@ -2491,7 +2745,7 @@ declare interface CreateQARequest {
   SimilarQuestions?: string[];
   /** 问题描述 */
   QuestionDesc?: string;
-  /** 问答生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域 */
+  /** 问答生效域: 1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效默认值：应用内默认知识库为2，共享知识库为4。 */
   EnableScope?: number;
 }
 
@@ -2827,13 +3081,13 @@ declare interface DescribeAttributeLabelResponse {
 }
 
 declare interface DescribeCallStatsGraphRequest {
-  /** uin */
+  /** 子账号标识列表，支持批量查询多个子账号。不填时查询主账号下所有子账号的汇总数据 */
   UinAccount?: string[];
   /** 登录用户主账号(集成商模式必填) */
   LoginUin?: string;
   /** 登录用户子账号(集成商模式必填) */
   LoginSubAccountUin?: string;
-  /** 子业务类型 */
+  /** 子业务类型，用于筛选不同业务场景的调用统计 */
   SubBizType?: string;
   /** 模型标识 */
   ModelName?: string;
@@ -2847,11 +3101,11 @@ declare interface DescribeCallStatsGraphRequest {
   SubScenes?: string[];
   /** 应用类型(knowledge_qa应用管理， shared_knowlege 共享知识库) */
   AppType?: string;
-  /** 空间id */
+  /** 空间ID，用于限定查询范围。不填时查询所有空间的数据 */
   SpaceId?: string;
-  /** 开始时间戳, 单位为秒 */
+  /** 开始时间。Unix 时间戳，单位是秒，默认为空。 */
   StatStartTime?: number;
-  /** 结束时间戳, 单位为秒 */
+  /** 结束时间。Unix 时间戳，单位是秒，默认为空。 */
   StatEndTime?: number;
 }
 
@@ -2994,7 +3248,7 @@ declare interface DescribeDocResponse {
   CateBizIdPath?: string[] | null;
   /** 从根节点开始的路径分类名称 */
   CateNamePath?: string[] | null;
-  /** 文档生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域 */
+  /** 文档生效域: 1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效 */
   EnableScope?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3003,7 +3257,7 @@ declare interface DescribeDocResponse {
 declare interface DescribeKnowledgeUsagePieGraphRequest {
   /** 应用ID数组 */
   AppBizIds?: string[];
-  /** 空间列表 */
+  /** 空间ID，用于限定查询范围。不填时查询所有空间的数据 */
   SpaceId?: string;
 }
 
@@ -3116,9 +3370,9 @@ declare interface DescribeQAResponse {
   CateBizIdPath?: string[] | null;
   /** 从根节点开始的路径分类名称 */
   CateNamePath?: string[] | null;
-  /** 问答生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域 */
+  /** 问答生效域: 1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效 */
   EnableScope?: number | null;
-  /** 问答关联的文档生效域 */
+  /** 问答关联的文档生效域:1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效.若问答未关联文档，则该字段值同问答生效域 */
   DocEnableScope?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3161,9 +3415,9 @@ declare interface DescribeReleaseInfoResponse {
 }
 
 declare interface DescribeReleaseRequest {
-  /** 应用ID */
+  /** 应用ID。获取方法参看如何获取 [BotBizId](https://cloud.tencent.com/document/product/1759/109469) */
   BotBizId: string;
-  /** 发布详情 */
+  /** 发布ID */
   ReleaseBizId?: string;
 }
 
@@ -3287,7 +3541,7 @@ declare interface DescribeStorageCredentialResponse {
 }
 
 declare interface DescribeTokenUsageGraphRequest {
-  /** 腾讯云主账号 */
+  /** 子账号标识列表，支持批量查询多个子账号。不填时查询主账号下所有子账号的汇总数据 */
   UinAccount?: string[];
   /** 知识引擎子业务类型: FileParse(文档解析)、Embedding、Rewrite(多轮改写)、 Concurrency(并发)、KnowledgeSummary(知识总结) KnowledgeQA(知识问答)、KnowledgeCapacity(知识库容量)、SearchEngine(搜索引擎) */
   SubBizType?: string;
@@ -3297,15 +3551,15 @@ declare interface DescribeTokenUsageGraphRequest {
   StartTime?: string;
   /** 结束时间戳, 单位为秒(废弃) */
   EndTime?: string;
-  /** 应用id列表 */
+  /** 应用ID列表。不填时：若指定SpaceId则查该空间所有应用；否则查用户下所有应用 */
   AppBizIds?: string[];
-  /** 应用类型(knowledge_qa应用管理， shared_knowlege 共享知识库) */
+  /** 应用类型。可选值：knowledge_qa(知识问答)/plugin_parsing_qa(插件)/shared_knowledge(知识库)/evaluate_test(评测)。不填时查所有类型 */
   AppType?: string;
   /** 筛选子场景 */
   SubScenes?: string[];
-  /** 开始时间戳, 单位为秒 */
+  /** 开始时间。Unix 时间戳，单位是秒，默认为空。 */
   StatStartTime?: number;
-  /** 结束时间戳, 单位为秒 */
+  /** 结束时间。Unix 时间戳，单位是秒，默认为空。 */
   StatEndTime?: number;
 }
 
@@ -3321,7 +3575,7 @@ declare interface DescribeTokenUsageGraphResponse {
 }
 
 declare interface DescribeTokenUsageRequest {
-  /** 腾讯云主账号 */
+  /** 子账号标识列表，用于筛选指定子账号的统计数据，不填时查询主账号下所有子账号的汇总数据 */
   UinAccount?: string[];
   /** 登录用户主账号(集成商模式必填) */
   LoginUin?: string;
@@ -3341,11 +3595,11 @@ declare interface DescribeTokenUsageRequest {
   SubScenes?: string[];
   /** 应用类型(knowledge_qa应用管理， shared_knowlege 共享知识库) */
   AppType?: string;
-  /** 空间id */
+  /** 空间ID，用于限定查询范围。不填时查询所有空间的数据 */
   SpaceId?: string;
-  /** 开始时间戳, 单位为秒 */
+  /** 开始时间。Unix 时间戳，单位是秒，默认为空。 */
   StatStartTime?: number;
-  /** 结束时间戳, 单位为秒 */
+  /** 结束时间。Unix 时间戳，单位是秒，默认为空。 */
   StatEndTime?: number;
 }
 
@@ -3379,7 +3633,7 @@ declare interface DescribeTokenUsageResponse {
 declare interface DescribeUnsatisfiedReplyContextRequest {
   /** 应用ID，获取方法参看如何获取[BotBizId](https://cloud.tencent.com/document/product/1759/109469) */
   BotBizId: string;
-  /** 回复ID，调用这个接口获得：[ListUnsatisfiedReply](https://capi.woa.com/api/detail?product=lke&version=2023-11-30&action=ListUnsatisfiedReply) */
+  /** 回复ID */
   ReplyBizId: string;
   /** 登录用户主账号(集成商模式必填) */
   LoginUin?: string;
@@ -3437,11 +3691,11 @@ declare interface ExportAttributeLabelResponse {
 }
 
 declare interface ExportQAListRequest {
-  /** 应用ID */
+  /** 应用ID若要操作共享知识库，传KnowledgeBizId */
   BotBizId: string;
   /** QA业务ID */
   QaBizIds: string[];
-  /** 查询参数 */
+  /** 查询参数Filters.pageNumber范围是>0,0<Filters.pageSize<=200Filters.query用于内容检索，模糊匹配Filters.AcceptStatus默认值是0，表示不筛选，返回所有状态Filters.ReleaseStatus默认值是0，表示不筛选，返回所有状态Filters.Source默认值是0，表示不筛选，返回所有来源。表示来源(1 文档生成 2 批量导入 3 手动添加)。Filter.QueryType默认值是"filename"，表示查询类型。ShowCurrCate表示，是否只展示当前分类的数据 0不是，1是 */
   Filters?: QAQuery;
 }
 
@@ -3451,9 +3705,9 @@ declare interface ExportQAListResponse {
 }
 
 declare interface ExportUnsatisfiedReplyRequest {
-  /** 应用ID */
+  /** 应用ID若要操作共享知识库，传KnowledgeBizId */
   BotBizId: string;
-  /** 勾选导出ID列表 */
+  /** 勾选导出不满意回复的ID列表 */
   ReplyBizIds: string[];
   /** 登录用户主账号(集成商模式必填) */
   LoginUin?: string;
@@ -3621,19 +3875,19 @@ declare interface GetLikeDataCountResponse {
 }
 
 declare interface GetMsgRecordRequest {
-  /** 类型 */
+  /** 接入类型， 5-API 访客，目前仅支持传5 */
   Type: number;
   /** 数量, 数量需大于2, 最大1000 */
   Count: number;
-  /** 会话sessionid */
+  /** 会话sessionid。 */
   SessionId: string;
   /** 应用AppKey, 当Type=5[API访客]时, 该字段必填 : 获取方式: 1、应用发布后在应用页面[发布管理]-[调用信息]-[API管理]处获取 2、参考 https://cloud.tencent.com/document/product/1759/109469 第二项 */
   BotAppKey?: string;
-  /** 场景, 体验: 1; 正式: 2 */
+  /** 场景, 体验: 1; 正式: 2 。体验用于创建应用测试的时候使用，正式是应用发布后对外的时候使用 */
   Scene?: number;
-  /** 最后一条记录ID， 消息从后往前获取MidRecordId与LastRecordId只能选择一个 */
+  /** 最后一条记录ID， 消息从后往前获取MidRecordId与LastRecordId只能选择一个LastRecordId 和MidRecordId都不填的时候，默认从最新的消息ID开始取。 */
   LastRecordId?: string;
-  /** 传该值，代表拉取该记录id的前后总共count条消息记录MidRecordId与LastRecordId只能选择一个 */
+  /** 传该值，代表拉取该记录id的前后总共count条消息记录MidRecordId与LastRecordId只能选择一个LastRecordId 和MidRecordId都不填的时候，默认从最新的消息Id开始取 */
   MidRecordId?: string;
 }
 
@@ -3703,7 +3957,7 @@ declare interface GetWsTokenRequest {
   Type: number;
   /** 应用AppKey 获取方式: 1、应用发布后在应用页面[发布管理]-[调用信息]-[API管理]处获取 2、参考 https://cloud.tencent.com/document/product/1759/109469 第二项 */
   BotAppKey?: string;
-  /** 访客ID（外部输入，建议唯一，标识当前接入会话的用户）长度限制： string(64) */
+  /** 访客ID（外部输入，建议唯一，标识当前接入会话的用户）长度限制： string(64)，即最长不超过64个字符 */
   VisitorBizId?: string;
   /** 知识标签，用于知识库中知识的检索过滤。该字段即将下线，请使用对话端接口中的 custom_variables 字段替代该字段。 */
   VisitorLabels?: GetWsTokenReq_Label[];
@@ -3741,7 +3995,7 @@ declare interface GroupDocResponse {
 }
 
 declare interface GroupQARequest {
-  /** 应用ID */
+  /** 应用ID若要操作共享知识库，传KnowledgeBizId */
   BotBizId: string;
   /** QaBizID列表 */
   QaBizIds: string[];
@@ -3957,7 +4211,7 @@ declare interface ListModelResponse {
 }
 
 declare interface ListQACateRequest {
-  /** 应用ID */
+  /** 应用ID若要操作共享知识库，传KnowledgeBizId */
   BotBizId: string;
   /** 分类查询类型：0-全量查询整棵标签树，1-根据父节点BizId分页查询子节点，2-关键词检索所有匹配的分类链路 */
   QueryType?: number;
@@ -4179,11 +4433,11 @@ declare interface ListReleaseQAPreviewResponse {
 }
 
 declare interface ListReleaseRequest {
-  /** 应用ID */
+  /** 应用ID（获取方法参看如何获取 [BotBizId](https://cloud.tencent.com/document/product/1759/109469)） */
   BotBizId: string;
-  /** 页码 */
+  /** 页码(必须大于0) */
   PageNumber: number;
-  /** 每页数量 */
+  /** 每页数量（取值范围为1-200） */
   PageSize: number;
 }
 
@@ -4327,9 +4581,9 @@ declare interface ListWorkflowRunsResponse {
 }
 
 declare interface ModifyAppRequest {
-  /** 应用 ID */
+  /** 应用ID, 获取方法参看如何获取 [BotBizId](https://cloud.tencent.com/document/product/1759/109469)。 */
   AppBizId: string;
-  /** 应用类型；knowledge_qa-知识问答管理；summary-知识摘要；classify-知识标签提取 */
+  /** 应用类型；"knowledge_qa" 知识问答应用（包含标准模式 单工作流 Multi-Agent 等模式） */
   AppType: string;
   /** 应用基础配置 */
   BaseConfig: BaseConfig;
@@ -4439,7 +4693,7 @@ declare interface ModifyDocRequest {
   UpdatePeriodInfo?: UpdatePeriodInfo;
   /** 自定义切分规则 */
   SplitRule?: string;
-  /** 文档生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域 */
+  /** 文档生效域: 1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效。若不传，则不会修改文档生效域。 */
   EnableScope?: number;
 }
 
@@ -4505,7 +4759,7 @@ declare interface ModifyQARequest {
   SimilarQuestionModify?: SimilarQuestionModify;
   /** 问题描述 */
   QuestionDesc?: string;
-  /** 问答生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域 */
+  /** 问答生效范围: 1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效。若不传该字段，则不修改问答的生效范围。 */
   EnableScope?: number;
 }
 
@@ -4519,7 +4773,7 @@ declare interface ModifyRejectedQuestionRequest {
   BotBizId: string;
   /** 拒答问题 */
   Question: string;
-  /** 拒答问题来源的数据源唯一id, 通过[ListRejectedQuestion](https://capi.woa.com/api/detail?product=lke&version=2023-11-30&action=ListRejectedQuestion)接口获取 */
+  /** 拒答问题来源的数据源唯一id, 通过调用ListRejectedQuestion接口获取 */
   RejectedBizId: string;
 }
 
@@ -4607,9 +4861,9 @@ declare interface RetryDocParseResponse {
 }
 
 declare interface RetryReleaseRequest {
-  /** 机器人ID */
+  /** 应用ID（获取方法参看如何获取 [BotBizId](https://cloud.tencent.com/document/product/1759/109469)） */
   BotBizId: string;
-  /** 发布业务ID */
+  /** 发布单ID（可以通过[ListRelease](https://cloud.tencent.com/document/product/1759/105077)获得） */
   ReleaseBizId: string;
 }
 
@@ -4661,7 +4915,7 @@ declare interface SaveDocRequest {
   SplitRule?: string;
   /** 文档更新频率，默认值为0不更新 */
   UpdatePeriodInfo?: UpdatePeriodInfo;
-  /** 文档生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域 */
+  /** 文档生效域: 1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效默认值：应用内默认知识库为2，共享知识库为4。 */
   EnableScope?: number;
 }
 
@@ -4843,7 +5097,7 @@ declare interface Lke {
   DescribeAppAgentList(data?: DescribeAppAgentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppAgentListResponse>;
   /** 查询标签详情 {@link DescribeAttributeLabelRequest} {@link DescribeAttributeLabelResponse} */
   DescribeAttributeLabel(data: DescribeAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttributeLabelResponse>;
-  /** 接口调用折线图 {@link DescribeCallStatsGraphRequest} {@link DescribeCallStatsGraphResponse} */
+  /** 接口调用调用量统计 {@link DescribeCallStatsGraphRequest} {@link DescribeCallStatsGraphResponse} */
   DescribeCallStatsGraph(data?: DescribeCallStatsGraphRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallStatsGraphResponse>;
   /** 并发调用 {@link DescribeConcurrencyUsageRequest} {@link DescribeConcurrencyUsageResponse} */
   DescribeConcurrencyUsage(data: DescribeConcurrencyUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConcurrencyUsageResponse>;
@@ -4853,7 +5107,7 @@ declare interface Lke {
   DescribeDoc(data: DescribeDocRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDocResponse>;
   /** 查询知识库用量 {@link DescribeKnowledgeUsageRequest} {@link DescribeKnowledgeUsageResponse} */
   DescribeKnowledgeUsage(data?: DescribeKnowledgeUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKnowledgeUsageResponse>;
-  /** 查询知识库容量饼图 {@link DescribeKnowledgeUsagePieGraphRequest} {@link DescribeKnowledgeUsagePieGraphResponse} */
+  /** 查询知识库容量分布统计 {@link DescribeKnowledgeUsagePieGraphRequest} {@link DescribeKnowledgeUsagePieGraphResponse} */
   DescribeKnowledgeUsagePieGraph(data?: DescribeKnowledgeUsagePieGraphRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKnowledgeUsagePieGraphResponse>;
   /** 查看工作流异步运行实例的节点的运行详情 {@link DescribeNodeRunRequest} {@link DescribeNodeRunResponse} */
   DescribeNodeRun(data: DescribeNodeRunRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodeRunResponse>;
@@ -4877,7 +5131,7 @@ declare interface Lke {
   DescribeStorageCredential(data?: DescribeStorageCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStorageCredentialResponse>;
   /** 接口调用token详情 {@link DescribeTokenUsageRequest} {@link DescribeTokenUsageResponse} */
   DescribeTokenUsage(data?: DescribeTokenUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenUsageResponse>;
-  /** 接口调用token折线图 {@link DescribeTokenUsageGraphRequest} {@link DescribeTokenUsageGraphResponse} */
+  /** 接口调用token调用量统计 {@link DescribeTokenUsageGraphRequest} {@link DescribeTokenUsageGraphResponse} */
   DescribeTokenUsageGraph(data?: DescribeTokenUsageGraphRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenUsageGraphResponse>;
   /** 获取不满意回复上下文 {@link DescribeUnsatisfiedReplyContextRequest} {@link DescribeUnsatisfiedReplyContextResponse} */
   DescribeUnsatisfiedReplyContext(data: DescribeUnsatisfiedReplyContextRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnsatisfiedReplyContextResponse>;

@@ -355,6 +355,8 @@ declare interface SubmitImageToVideoGeneralJobRequest {
   Image: Image;
   /** 视频内容的描述，中文正向提示词。最多支持200个 utf-8 字符（首尾空格不计入字符数）。 */
   Prompt?: string;
+  /** 输出视频分辨率。可选择：480p、720p、1080p。 */
+  Resolution?: string;
   /** 为生成视频添加标识的开关，默认为1，0 需前往 控制台 申请开启显示标识自主完成方可生效。 1：添加标识； 0：不添加标识； 其他数值：默认按1处理。 */
   LogoAdd?: number;
   /** 默认在生成视频的右下角添加“ AI 生成”字样，如需替换为其他的标识图片，需前往 控制台 申请开启显示标识自主完成。 */

@@ -388,6 +388,14 @@ declare interface ExecAction {
 
 /** 暴露端口信息 */
 declare interface ExposePortConfig {
+  /** 是否开启暴露容器服务端口 */
+  Enable?: boolean | null;
+  /** vpc id */
+  VpcId?: string | null;
+  /** clb id */
+  ClbId?: string | null;
+  /** clb domain */
+  ClbHost?: string | null;
 }
 
 /** 过滤器 */
@@ -1286,6 +1294,10 @@ declare interface ResourceInfo {
   RealGpuDetailSet?: GpuDetail[];
   /** 是否开启rdma */
   EnableRDMA?: boolean | null;
+  /** root disk size(GB) */
+  RootDisk?: number;
+  /** data disk size(GB) */
+  DataDisk?: number;
 }
 
 /** 资源组节点运行任务信息 */
@@ -1389,9 +1401,9 @@ declare interface Service {
   /** 服务的业务状态 */
   BusinessStatus?: string | null;
   /** 已废弃,以ServiceInfo中的对应为准 */
-  ServiceLimit?: ServiceLimit | null;
+  ServiceLimit?: ServiceLimit;
   /** 已废弃,以ServiceInfo中的对应为准 */
-  ScheduledAction?: ScheduledAction | null;
+  ScheduledAction?: ScheduledAction;
   /** 服务创建失败的原因，创建成功后该字段为默认值 CREATE_SUCCEED */
   CreateFailedReason?: string | null;
   /** 服务状态CREATING 创建中CREATE_FAILED 创建失败Normal	正常运行中Stopped 已停止Stopping 停止中Abnormal 异常Pending 启动中Waiting 就绪中 */
@@ -1545,17 +1557,17 @@ declare interface ServiceInfo {
   /** 资源信息 */
   Resources: ResourceInfo | null;
   /** 后付费实例对应的机型规格 */
-  InstanceType: string | null;
+  InstanceType: string;
   /** 模型信息 */
-  ModelInfo: ModelInfo | null;
+  ModelInfo: ModelInfo;
   /** 是否启用日志 */
-  LogEnable: boolean | null;
+  LogEnable: boolean;
   /** 日志配置 */
-  LogConfig: LogConfig | null;
+  LogConfig: LogConfig;
   /** 是否开启鉴权 */
-  AuthorizationEnable: boolean | null;
+  AuthorizationEnable: boolean;
   /** hpa配置 */
-  HorizontalPodAutoscaler: HorizontalPodAutoscaler | null;
+  HorizontalPodAutoscaler: HorizontalPodAutoscaler;
   /** 服务的状态描述 */
   Status: WorkloadStatus | null;
   /** 权重 */
@@ -1614,6 +1626,10 @@ declare interface ServiceInfo {
   InstancePerReplicas?: number;
   /** 批量数据盘挂载配置 */
   VolumeMounts?: VolumeMount[];
+  /** 调度策略 [binpack] 优先占满整机，尽量避免碎卡（默认值）[spread] 优先分散在各个节点，确保服务高可用 */
+  SchedulingStrategy?: string;
+  /** 服务实际运行的节点数 */
+  NodeCount?: number;
 }
 
 /** 服务的限流限速等配置 */
@@ -2179,6 +2195,8 @@ declare interface CreateModelServiceRequest {
   Sidecar?: SidecarSpec;
   /** 数据盘批量挂载配置，当前仅支持CFS，仅针对“模型来源-腾讯云存储、模型来源-腾讯云容器镜像、模型来源-资源组、模型来源-数据源”。 */
   VolumeMounts?: VolumeMount[];
+  /** 调度策略 [binpack] 优先占满整机，尽量避免碎卡（默认值）[spread] 优先分散在各个节点，确保服务高可用 */
+  SchedulingStrategy?: string;
 }
 
 declare interface CreateModelServiceResponse {
@@ -3081,6 +3099,8 @@ declare interface ModifyModelServiceRequest {
   ResourceGroupId?: string;
   /** 数据盘批量挂载配置，当前仅支持CFS，仅针对“模型来源-腾讯云存储、模型来源-腾讯云容器镜像、模型来源-资源组、模型来源-数据源”。 */
   VolumeMounts?: VolumeMount[];
+  /** 调度策略 [binpack] 优先占满整机，尽量避免碎卡（默认值）[spread] 优先分散在各个节点，确保服务高可用 */
+  SchedulingStrategy?: string;
 }
 
 declare interface ModifyModelServiceResponse {

@@ -2,10 +2,44 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 业务入参 */
+declare interface ManageIPPortraitRiskInput {
+  /** 用户公网ip（仅支持IPv4） */
+  UserIp: string;
+  /** 渠道号 */
+  Channel: number;
+}
+
+/** IP画像出参 */
+declare interface ManageIPPortraitRiskOutput {
+  /** 返回码 */
+  Code?: number;
+  /** 返回消息 */
+  Message?: string;
+  /** 结果 */
+  Value?: ManageIPPortraitRiskValueOutput;
+}
+
+/** 业务出参 */
+declare interface ManageIPPortraitRiskValueOutput {
+  /** 对应的IP */
+  UserIp?: string;
+  /** 返回风险等级, 0 - 4，0代表无风险，数值越大，风险越高 */
+  RiskScore?: number;
+  /** 风险类型 */
+  RiskType?: number[];
+}
+
 declare interface ManageIPPortraitRiskRequest {
+  /** 请求秒级时间戳 */
+  PostTime: number;
+  /** 业务入参 */
+  BusinessSecurityData?: ManageIPPortraitRiskInput;
 }
 
 declare interface ManageIPPortraitRiskResponse {
+  /** 出参 */
+  Data?: ManageIPPortraitRiskOutput;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -680,7 +714,7 @@ declare namespace V20201103 {
 declare interface Rce {
   (): Versions;
   /** IP风险画像 {@link ManageIPPortraitRiskRequest} {@link ManageIPPortraitRiskResponse} */
-  ManageIPPortraitRisk(data?: ManageIPPortraitRiskRequest, config?: AxiosRequestConfig): AxiosPromise<ManageIPPortraitRiskResponse>;
+  ManageIPPortraitRisk(data: ManageIPPortraitRiskRequest, config?: AxiosRequestConfig): AxiosPromise<ManageIPPortraitRiskResponse>;
   /** 创建黑白名单 {@link V20201103.CreateNameListRequest} {@link V20201103.CreateNameListResponse} */
   CreateNameList(data: V20201103.CreateNameListRequest, config: AxiosRequestConfig & V20201103.VersionHeader): AxiosPromise<V20201103.CreateNameListResponse>;
   /** 删除黑白名单 {@link V20201103.DeleteNameListRequest} {@link V20201103.DeleteNameListResponse} */
