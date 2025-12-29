@@ -7164,7 +7164,7 @@ declare namespace V20180525 {
     ClusterId: string;
     /** 集群类型。当前只支持tke */
     ClusterType: string;
-    /** 组件名称列表，目前支持的组件有：kube-apiserver、kube-controller-manager、kube-scheduler、cluster-autoscaler、kapenter */
+    /** 组件名称列表，目前支持的组件有：cluster-autoscaler、kapenter */
     ComponentNames: string[];
     /** 是否删除日志集和topic。 如果日志集和topic被其他采集规则使用，则不会被删除 */
     DeleteLogSetAndTopic?: boolean;
@@ -7250,7 +7250,7 @@ declare namespace V20180525 {
     ClusterId: string;
     /** 集群类型。当前只支持tke */
     ClusterType: string;
-    /** 各组件日志采集配置，目前支持的组件有：kube-apiserver、kube-controller-manager、kube-scheduler、cluster-autoscaler、kapenter */
+    /** 组件名称列表，目前支持的组件有：cluster-autoscaler、kapenter */
     Components: ComponentLogConfig[];
   }
 

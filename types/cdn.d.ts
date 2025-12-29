@@ -494,18 +494,6 @@ declare interface ClientCert {
   DeployTime?: string | null;
 }
 
-/** 客户端信息 */
-declare interface ClientInfo {
-  /** 省份。 */
-  ProvName?: string | null;
-  /** 国家。 */
-  Country?: string | null;
-  /** 运营商。 */
-  IspName?: string | null;
-  /** 客户端IP */
-  Ip?: string | null;
-}
-
 /** 通过Cls日志，计算出来的IP每秒访问数量 */
 declare interface ClsLogIpData {
   /** IP */
@@ -724,58 +712,6 @@ declare interface DetailDomain {
   AutoGuard?: AutoGuard;
   /** 区域访问控制配置 */
   GeoBlocker?: GeoBlocker;
-}
-
-/** 诊断报告内容数据 */
-declare interface DiagnoseData {
-  /** 诊断报告内容 */
-  Data?: DiagnoseUnit[] | null;
-  /** 当前诊断项是否正常。"ok"：正常"error"：异常"warning"："警告" */
-  Status?: string | null;
-}
-
-/** 诊断信息 */
-declare interface DiagnoseInfo {
-  /** 待诊断的URL。 */
-  DiagnoseUrl?: string | null;
-  /** 由系统生成的诊断链接。 */
-  DiagnoseLink?: string | null;
-  /** 诊断创建时间。 */
-  CreateTime?: string | null;
-  /** 诊断链接过期时间。 */
-  ExpireDate?: string | null;
-  /** 诊断链接当前访问次数，一个诊断链接最多可访问10次。 */
-  VisitCount?: number | null;
-  /** 访问诊断链接的客户端简易信息 */
-  ClientList?: DiagnoseList[] | null;
-  /** 域名加速区域 */
-  Area?: string | null;
-}
-
-/** 客户端访问诊断URL信息列表 */
-declare interface DiagnoseList {
-  /** 诊断任务标签。 */
-  DiagnoseTag?: string | null;
-  /** 报告ID，用于获取详细诊断报告。 */
-  ReportId?: string | null;
-  /** 客户端信息。 */
-  ClientInfo?: ClientInfo[] | null;
-  /** 最终诊断结果。-1：已提交0 ：检测中1 ：检测正常2 ： 检测异常3 ： 诊断页面异常关闭 */
-  FinalDiagnose?: number | null;
-  /** 诊断任务创建时间。 */
-  CreateTime?: string | null;
-}
-
-/** 诊断报告单元信息 */
-declare interface DiagnoseUnit {
-  /** 内容单元英文名称。 */
-  Key?: string | null;
-  /** 内容单元中文名称。 */
-  KeyText?: string | null;
-  /** 报告内容。 */
-  Value?: string | null;
-  /** 报告内容。 */
-  ValueText?: string | null;
 }
 
 /** 地区运营商明细数据 */
@@ -2266,20 +2202,6 @@ declare interface CreateClsLogTopicResponse {
   RequestId?: string;
 }
 
-declare interface CreateDiagnoseUrlRequest {
-  /** 需诊断的url，形如：http://www.test.com/test.txt。 */
-  Url: string;
-  /** 请求源带协议头，形如：https://console.cloud.tencent.com */
-  Origin?: string;
-}
-
-declare interface CreateDiagnoseUrlResponse {
-  /** 系统生成的诊断链接，一个诊断链接最多可访问10次，有效期为24h。 */
-  DiagnoseLink?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateEdgePackTaskRequest {
   /** apk 所在的 cos 存储桶, 如 edgepack-xxxxxxxx */
   CosBucket: string;
@@ -2482,34 +2404,6 @@ declare interface DescribeCertDomainsResponse {
   Domains?: string[];
   /** 已配置证书的CDN域名列表 */
   CertifiedDomains?: string[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeDiagnoseReportRequest {
-  /** 报告ID */
-  ReportId: string;
-}
-
-declare interface DescribeDiagnoseReportResponse {
-  /** 诊断报告基础信息 */
-  BaskInfo?: DiagnoseData;
-  /** CNAME检测信息 */
-  CnameInfo?: DiagnoseData;
-  /** 客户端检测信息 */
-  ClientInfo?: DiagnoseData;
-  /** DNS检测信息 */
-  DnsInfo?: DiagnoseData;
-  /** 网络检测信息 */
-  NetworkInfo?: DiagnoseData;
-  /** 边缘节点检测信息 */
-  OcNodeInfo?: DiagnoseData;
-  /** 中间源节点检测信息 */
-  MidNodeInfo?: DiagnoseData;
-  /** 源站检测信息 */
-  OriginInfo?: DiagnoseData;
-  /** 刷新检测信息 */
-  PurgeInfo?: DiagnoseData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3020,22 +2914,6 @@ declare interface ListClsTopicDomainsResponse {
   RequestId?: string;
 }
 
-declare interface ListDiagnoseReportRequest {
-  /** 用于搜索诊断URL的关键字，不填时返回用户所有的诊断任务。 */
-  KeyWords?: string;
-  /** 用于搜索诊断系统返回的诊断链接，形如：http://cdn.cloud.tencent.com/self_diagnose/xxxxx */
-  DiagnoseLink?: string;
-  /** 请求源带协议头，形如：https://console.cloud.tencent.com */
-  Origin?: string;
-}
-
-declare interface ListDiagnoseReportResponse {
-  /** 诊断信息。 */
-  Data?: DiagnoseInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ListTopClsLogDataRequest {
   /** 需要查询的日志集ID */
   LogsetId: string;
@@ -3423,8 +3301,6 @@ declare interface Cdn {
   AddCdnDomain(data: AddCdnDomainRequest, config?: AxiosRequestConfig): AxiosPromise<AddCdnDomainResponse>;
   /** 创建日志主题 {@link CreateClsLogTopicRequest} {@link CreateClsLogTopicResponse} */
   CreateClsLogTopic(data: CreateClsLogTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClsLogTopicResponse>;
-  /** @deprecated 添加诊断URL(已废弃) {@link CreateDiagnoseUrlRequest} {@link CreateDiagnoseUrlResponse} */
-  CreateDiagnoseUrl(data: CreateDiagnoseUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDiagnoseUrlResponse>;
   /** 动态打包任务提交 {@link CreateEdgePackTaskRequest} {@link CreateEdgePackTaskResponse} */
   CreateEdgePackTask(data: CreateEdgePackTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgePackTaskResponse>;
   /** 生成解析记录 {@link CreateVerifyRecordRequest} {@link CreateVerifyRecordResponse} */
@@ -3445,8 +3321,6 @@ declare interface Cdn {
   DescribeCdnOriginIp(data?: DescribeCdnOriginIpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdnOriginIpResponse>;
   /** 获取SSL证书中的可用域名 {@link DescribeCertDomainsRequest} {@link DescribeCertDomainsResponse} */
   DescribeCertDomains(data?: DescribeCertDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertDomainsResponse>;
-  /** @deprecated 获取诊断报告(已废弃) {@link DescribeDiagnoseReportRequest} {@link DescribeDiagnoseReportResponse} */
-  DescribeDiagnoseReport(data: DescribeDiagnoseReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiagnoseReportResponse>;
   /** 地区运营商明细查询 {@link DescribeDistrictIspDataRequest} {@link DescribeDistrictIspDataResponse} */
   DescribeDistrictIspData(data: DescribeDistrictIspDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDistrictIspDataResponse>;
   /** 查询域名基本信息 {@link DescribeDomainsRequest} {@link DescribeDomainsResponse} */
@@ -3495,8 +3369,6 @@ declare interface Cdn {
   ListClsLogTopics(data?: ListClsLogTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<ListClsLogTopicsResponse>;
   /** 获取日志主题下绑定的域名 {@link ListClsTopicDomainsRequest} {@link ListClsTopicDomainsResponse} */
   ListClsTopicDomains(data: ListClsTopicDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<ListClsTopicDomainsResponse>;
-  /** @deprecated 获取诊断任务列表(已废弃) {@link ListDiagnoseReportRequest} {@link ListDiagnoseReportResponse} */
-  ListDiagnoseReport(data?: ListDiagnoseReportRequest, config?: AxiosRequestConfig): AxiosPromise<ListDiagnoseReportResponse>;
   /** 通过CLS日志计算Top信息 {@link ListTopClsLogDataRequest} {@link ListTopClsLogDataResponse} */
   ListTopClsLogData(data: ListTopClsLogDataRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopClsLogDataResponse>;
   /** TOP 数据查询 {@link ListTopDataRequest} {@link ListTopDataResponse} */

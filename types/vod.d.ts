@@ -1907,6 +1907,12 @@ declare namespace V20180717 {
     FileId?: string;
     /** 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。说明：1. 推荐使用小于10M的图片；2. 图片格式的取值为：jpeg，jpg, png。 */
     Url?: string;
+    /** 参考类型，GV模型适用。注意：当使用GV模型时，可作为参考方式,可选asset(素材)、style(风格)。 */
+    ReferenceType?: string;
+    /** 主体id.适用模型：Vidu-q2.当需要对图片标识主体时，需要每个图片都带主体id，后续生成时可以通过@主体id的方式使用。 */
+    ObjectId?: string;
+    /** 适用于Vidu-q2模型。当全部图片携带主体id时，可针对主体设置音色id。 音色列表：https://shengshu.feishu.cn/sheets/EgFvs6DShhiEBStmjzccr5gonOg */
+    VoiceId?: string;
   }
 
   /** AIGC 生视频任务的输出信息。 */
@@ -6858,15 +6864,15 @@ declare namespace V20180717 {
     ModelName: string;
     /** 模型版本。取值：当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、O1；当 ModelName 是 Jimeng，可选值为 3.0pro；当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo；当 ModelName 是 GV，可选值为 3.1、3.1-Fast；当 ModelName 是 OS，可选值为 2.0；当 ModelName 是 Hunyuan，可选值为 1.5；当 ModelName 是 Mingmou，可选值为 1.0； */
     ModelVersion: string;
-    /** AIGC 生视频任务的输入图片的文件信息。说明1. 当 ModelName 是 GV 时，最大长度为 3；其他情况下最大长度为1。2. 当 ModelName 是 GV 时，并且长度大于1时，则不能再指定 LastFrameFileId 参数。 */
+    /** 最多包含三张素材资源图片的列表，用于描述模型在生成视频时要使用的资源图片。支持多图输入的模型：1. GV，使用多图输入时，不可使用LastFrameFileId和LastFrameUrl。2. Vidu，支持多图参考生视频。q2模型1-7张图片，可通过FileInfos里面的ObjectId作为主体id来传入。注意：1. 图片大小不超过10M。2. 支持的图片格式：jpeg、png。 */
     FileInfos?: AigcVideoTaskInputFileInfo[];
     /** 用于作为尾帧画面来生成视频的媒体文件 ID。该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。说明：1. 只支持模型 GV 、Kling、Vidu，其他模型暂不支持。当 ModelName 为 GV 时，如果指定该参数，则需同时指定 FileInfos 作为待生成视频的首帧。当 ModelName 为 Kling 、ModelVersion 为 2.1 并且指定输出分辨率 Resolution 为 1080P 时，才能指定该参数。当 ModelName 为 Vidu、ModelVersion 为 q2-pro、q2-turbo 时，才能指定该参数。2. 图片大小需小于5M。3. 图片格式的取值为：jpeg，jpg, png, webp。 */
     LastFrameFileId?: string;
     /** 用于作为尾帧画面来生成视频的媒体文件 URL。说明：1. 只支持模型 GV 、Kling、Vidu，其他模型暂不支持。当 ModelName 为 GV 时，如果指定该参数，则需同时指定 FileInfos 作为待生成视频的首帧。当 ModelName 为 Kling 、ModelVersion 为 2.1 并且指定输出分辨率 Resolution 为 1080P 时，才能指定该参数。当 ModelName 为 Vidu、ModelVersion 为 q2-pro、q2-turbo 时，才能指定该参数。2. 图片大小需小于5M。3. 3. 图片格式的取值为：jpeg，jpg, png, webp。 */
     LastFrameUrl?: string;
-    /** 生成图片的提示词。当 FileInfos 为空时，此参数必填。 */
+    /** 生成视频的提示词。当 FileInfos 为空时，此参数必填。示例值：move the picture */
     Prompt?: string;
-    /** 要阻止模型生成图片的提示词。 */
+    /** 要阻止模型生成视频的提示词。 */
     NegativePrompt?: string;
     /** 是否自动优化提示词。开启时将自动优化传入的 Prompt，以提升生成质量。取值有： Enabled：开启； Disabled：关闭； */
     EnhancePrompt?: string;
@@ -6880,6 +6886,8 @@ declare namespace V20180717 {
     TasksPriority?: number;
     /** 保留字段，特殊用途时使用。 */
     ExtInfo?: string;
+    /** 输入图片的区域信息。当图片url是国外地址时候，可选Oversea。默认Mainland。 */
+    InputRegion?: string;
   }
 
   interface CreateAigcVideoTaskResponse {

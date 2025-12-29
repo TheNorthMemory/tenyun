@@ -2058,24 +2058,6 @@ declare interface DeleteAddressTemplateResponse {
   RequestId?: string;
 }
 
-declare interface DeleteAllAccessControlRuleRequest {
-  /** 方向，0：出站，1：入站 默认值是 0 */
-  Direction?: number;
-  /** VPC间防火墙开关ID 全部删除 EdgeId和Area只填写一个，不填写则不删除vpc间防火墙开关 ，默认值为‘’ */
-  EdgeId?: string;
-  /** nat地域 全部删除 EdgeId和Area只填写一个，不填写则不删除nat防火墙开关 默认值为‘’ */
-  Area?: string;
-}
-
-declare interface DeleteAllAccessControlRuleResponse {
-  /** 状态值 0: 修改成功, 非0: 修改失败 */
-  Status?: number;
-  /** 删除了几条访问控制规则 */
-  Info?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DeleteBlockIgnoreRuleListRequest {
   /** 规则列表 */
   Rules: IocListData[];
@@ -3925,8 +3907,6 @@ declare interface Cfw {
   DeleteAcRule(data: DeleteAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAcRuleResponse>;
   /** 删除地址模板规则 {@link DeleteAddressTemplateRequest} {@link DeleteAddressTemplateResponse} */
   DeleteAddressTemplate(data: DeleteAddressTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAddressTemplateResponse>;
-  /** @deprecated 全部删除规则 {@link DeleteAllAccessControlRuleRequest} {@link DeleteAllAccessControlRuleResponse} */
-  DeleteAllAccessControlRule(data?: DeleteAllAccessControlRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAllAccessControlRuleResponse>;
   /** 批量删除入侵防御封禁列表、放通列表规则 {@link DeleteBlockIgnoreRuleListRequest} {@link DeleteBlockIgnoreRuleListResponse} */
   DeleteBlockIgnoreRuleList(data: DeleteBlockIgnoreRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBlockIgnoreRuleListResponse>;
   /** 批量删除入侵防御封禁列表、放通列表规则（新） {@link DeleteBlockIgnoreRuleNewRequest} {@link DeleteBlockIgnoreRuleNewResponse} */

@@ -154,6 +154,10 @@ declare interface ApmAppConfig {
   DbStatementParametersEnabled?: boolean;
   /** 慢SQL阈值 */
   SlowSQLThresholds?: ApmTag[];
+  /** 是否开启脱敏规则 */
+  EnableDesensitizationRule?: number;
+  /** 脱敏规则 */
+  DesensitizationRule?: string;
 }
 
 /** 应用相关的配置列表项 */
@@ -204,6 +208,10 @@ declare interface ApmApplicationConfigView {
   DbStatementParametersEnabled?: boolean;
   /** 慢SQL阈值 */
   SlowSQLThresholds?: ApmTag[];
+  /** 是否开启脱敏规则 */
+  EnableDesensitizationRule?: number;
+  /** 脱敏规则 */
+  DesensitizationRule?: string;
 }
 
 /** 展示apm业务系统与其他云产品关联关系返回体 */
@@ -1299,6 +1307,10 @@ declare interface ModifyApmApplicationConfigRequest {
   DbStatementParametersEnabled?: boolean;
   /** 慢SQL阈值 */
   SlowSQLThresholds?: ApmTag[];
+  /** 是否开启脱敏规则 */
+  EnableDesensitizationRule?: number;
+  /** 脱敏规则 */
+  DesensitizationRule?: string;
 }
 
 declare interface ModifyApmApplicationConfigResponse {

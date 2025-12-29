@@ -3022,6 +3022,20 @@ declare interface RegisterTargetsWithClassicalLBResponse {
   RequestId?: string;
 }
 
+declare interface RenewLoadBalancersRequest {
+  /** 负载均衡实例唯一ID数组，最多支持20个。 */
+  LoadBalancerIds: string[];
+  /** 负载均衡实例的预付费相关属性。 */
+  LBChargePrepaid: LBChargePrepaid;
+}
+
+declare interface RenewLoadBalancersResponse {
+  /** 订单号。 */
+  DealName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ReplaceCertForLoadBalancersRequest {
   /** 需要被替换的证书的ID，可以是服务端证书或客户端证书 */
   OldCertificateId: string;
@@ -3277,6 +3291,8 @@ declare interface Clb {
   RegisterTargets(data: RegisterTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterTargetsResponse>;
   /** 绑定后端服务到传统型负载均衡 {@link RegisterTargetsWithClassicalLBRequest} {@link RegisterTargetsWithClassicalLBResponse} */
   RegisterTargetsWithClassicalLB(data: RegisterTargetsWithClassicalLBRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterTargetsWithClassicalLBResponse>;
+  /** 续费包年包月实例 {@link RenewLoadBalancersRequest} {@link RenewLoadBalancersResponse} */
+  RenewLoadBalancers(data: RenewLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<RenewLoadBalancersResponse>;
   /** 替换负载均衡实例所关联的证书 {@link ReplaceCertForLoadBalancersRequest} {@link ReplaceCertForLoadBalancersResponse} */
   ReplaceCertForLoadBalancers(data: ReplaceCertForLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceCertForLoadBalancersResponse>;
   /** 负载均衡维度的个性化配置相关操作 {@link SetCustomizedConfigForLoadBalancerRequest} {@link SetCustomizedConfigForLoadBalancerResponse} */

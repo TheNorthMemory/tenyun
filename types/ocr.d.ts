@@ -1098,6 +1098,8 @@ declare interface LicensePlateInfo {
   Rect?: Rect;
   /** 识别出的车牌颜色，目前支持颜色包括 “白”、“黑”、“蓝”、“绿“、“黄”、“黄绿”、“临牌”、“喷漆”、“其它”。 */
   Color?: string;
+  /** 车牌类别， 如： 实体车牌、非实体车牌 */
+  LicensePlateCategory?: string;
 }
 
 /** 按行输出，行序号 */
@@ -4144,10 +4146,12 @@ declare interface LicensePlateOCRResponse {
   Confidence?: number;
   /** 文本行在原图片中的像素坐标框。 */
   Rect?: Rect;
-  /** 识别出的车牌颜色，目前支持颜色包括 “白”、“黑”、“蓝”、“绿“、“黄”、“黄绿”、“临牌”、“喷漆”、“其它”。 */
+  /** 识别出的车牌颜色，目前支持颜色包括 “白”、“黑”、“蓝”、“绿”、“黄”、“黄绿”、“临牌”、“喷漆”、“其它”。 */
   Color?: string;
   /** 全部车牌信息。 */
   LicensePlateInfos?: LicensePlateInfo[];
+  /** 车牌类别， 如： 实体车牌、非实体车牌 示例值：实体车牌 */
+  LicensePlateCategory?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

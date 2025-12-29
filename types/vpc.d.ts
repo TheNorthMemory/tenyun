@@ -1598,6 +1598,8 @@ declare interface NatGateway {
   RestrictState?: string;
   /** NAT网关类型，1表示传统型NAT网关，2表示标准型NAT网关 */
   NatProductVersion?: number;
+  /** true代表仅允许匹配SNAT规则的内网IP的流量进行转发，false代表所有内网IP发起的流量都进行转发。默认为false。 */
+  StrictSnatMode?: boolean;
   /** 是否启用根据目的网段选择SNAT使用的EIP功能 */
   SmartScheduleMode?: boolean;
   /** NAT实例归属的专属集群id */
@@ -1608,6 +1610,12 @@ declare interface NatGateway {
   ConnectionStateTimeouts?: ConnectionStateTimeouts;
   /** 独享实例规格。取值范围：ExclusiveSmall/ExclusiveMedium1/ExclusiveLarge1 */
   ExclusiveType?: string;
+  /** 标准型NAT网关自动扩容 */
+  AutoScaling?: boolean;
+  /** 是否代答公网发给NAT网关上弹性公网IP的ICMP echo请求报文，当前适用于标准型NAT网关 */
+  ICMPProxy?: boolean;
+  /** true代表同一个私网IP访问同一个公网目的IP时，固定使用同一个NAT网关上的弹性公网IP；false代表这种情况下使用的弹性公网IP不固定。默认为true。 */
+  PublicAddressAffinity?: boolean;
 }
 
 /** NAT网关绑定的弹性IP */

@@ -2377,7 +2377,7 @@ declare interface CreateCloneInstanceRequest {
   InstanceId: string;
   /** 如果需要克隆实例回档到指定时间，则指定该值。时间格式为：yyyy-mm-dd hh:mm:ss。说明：此参数和 SpecifiedBackupId 参数需要2选1进行设置。 */
   SpecifiedRollbackTime?: string;
-  /** 如果需要克隆实例回档到指定备份集，则指定该值为备份文件的 Id。请使用 [查询数据备份文件列表](/document/api/236/15842)。说明：如果是克隆双节点、三节点实例，备份文件为物理备份，如果是克隆单节点、集群版实例，备份文件为快照备份。 */
+  /** 如果需要克隆实例回档到指定备份集，则指定该值为备份文件的 Id。请使用 [查询数据备份文件列表](/document/api/236/15842)。说明：如果是克隆双节点、三节点实例，备份文件为物理备份，如果是克隆单节点、云盘版实例，备份文件为快照备份。 */
   SpecifiedBackupId?: number;
   /** 私有网络 ID，请使用 [查询私有网络列表](/document/api/215/15778)。 */
   UniqVpcId?: string;
@@ -2403,7 +2403,7 @@ declare interface CreateCloneInstanceRequest {
   SlaveZone?: string;
   /** 备库 2 的可用区信息，默认为空，克隆强同步主实例时可指定该参数。 */
   BackupZone?: string;
-  /** 克隆实例类型。支持值包括："UNIVERSAL" - 通用型实例，"EXCLUSIVE" - 独享型实例，"CLOUD_NATIVE_CLUSTER" - 集群版标准型，"CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 集群版加强型。不指定则默认为通用型。 */
+  /** 克隆实例类型。支持值包括："UNIVERSAL" - 通用型实例，"EXCLUSIVE" - 独享型实例，"CLOUD_NATIVE_CLUSTER" - 云盘版标准型，"CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 云盘版加强型。不指定则默认为通用型。 */
   DeviceType?: string;
   /** 新克隆实例节点数。如果需要克隆出三节点实例， 请将该值设置为3 或指定 BackupZone 参数。如果需要克隆出两节点实例，请将该值设置为2。默认克隆出两节点实例。 */
   InstanceNodes?: number;
@@ -2419,12 +2419,14 @@ declare interface CreateCloneInstanceRequest {
   PayType?: string;
   /** 实例时长，PayType为PRE_PAID时必传，单位：月，可选值包括 [1,2,3,4,5,6,7,8,9,10,11,12,24,36]。 */
   Period?: number;
-  /** 集群版节点拓扑配置。 */
+  /** 云盘版节点拓扑配置。 */
   ClusterTopology?: ClusterTopology;
   /** 原实例所在地域名，当传入异地备份时为必选项，例：ap-guangzhou */
   SrcRegion?: string;
   /** 异地数据备份id */
   SpecifiedSubBackupId?: number;
+  /** 新产生的克隆实例主库的可用区信息，默认同源实例 Zone 的值。 */
+  MasterZone?: string;
 }
 
 declare interface CreateCloneInstanceResponse {
@@ -3847,13 +3849,13 @@ declare interface DescribeDeviceMonitorInfoRequest {
 
 declare interface DescribeDeviceMonitorInfoResponse {
   /** 实例CPU监控数据 */
-  Cpu: DeviceCpuInfo;
+  Cpu?: DeviceCpuInfo;
   /** 实例内存监控数据 */
-  Mem: DeviceMemInfo;
+  Mem?: DeviceMemInfo;
   /** 实例网络监控数据 */
-  Net: DeviceNetInfo;
+  Net?: DeviceNetInfo;
   /** 实例磁盘监控数据 */
-  Disk: DeviceDiskInfo;
+  Disk?: DeviceDiskInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5199,7 +5201,7 @@ declare interface ReleaseIsolatedDBInstancesResponse {
 declare interface ReloadBalanceProxyNodeRequest {
   /** 代理组 ID。可通过 [DescribeCdbProxyInfo](https://cloud.tencent.com/document/api/236/90585) 接口获取。 */
   ProxyGroupId: string;
-  /** 代理组地址 ID。可通过 [DescribeCdbProxyInfo](https://cloud.tencent.com/document/api/236/90585) 接口获取。如果不传则会对所有代理组地址进行负载均衡。 */
+  /** 代理组地址 ID。可通过 [DescribeCdbProxyInfo](https://cloud.tencent.com/document/api/236/90585) 接口获取。说明：1. 对于双节点实例而言，此参数为非必填，如果不传则会对所有代理组地址进行负载均衡。2. 对于云盘版实例而言，此参数为必填。 */
   ProxyAddressId?: string;
 }
 

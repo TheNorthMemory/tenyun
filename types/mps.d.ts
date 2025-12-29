@@ -276,7 +276,7 @@ declare interface AdvancedSuperResolutionConfig {
 
 /** 智能分析结果 */
 declare interface AiAnalysisResult {
-  /** 任务的类型，可以取的值有：Classification：智能分类Cover：智能封面Tag：智能标签FrameTag：智能按帧标签Highlight：智能精彩集锦DeLogo：智能擦除Description：大模型摘要Dubbing：智能译制VideoRemake: 视频去重VideoComprehension: 视频（音频）理解 */
+  /** 任务的类型，可以取的值有：Classification：智能分类Cover：智能封面Tag：智能标签FrameTag：智能按帧标签Highlight：智能精彩集锦DeLogo：智能擦除Description：大模型摘要Dubbing：智能译制VideoRemake: 视频去重VideoComprehension: 视频（音频）理解Cutout：视频抠图Reel：智能成片 */
   Type?: string;
   /** 视频内容分析智能分类任务的查询结果，当任务类型为 Classification 时有效。 */
   ClassificationTask?: AiAnalysisTaskClassificationResult | null;
@@ -304,6 +304,10 @@ declare interface AiAnalysisResult {
   VideoRemakeTask?: AiAnalysisTaskVideoRemakeResult | null;
   /** 视频（音频）理解任务的查询结果，当任务类型为 VideoComprehension 时有效。 */
   VideoComprehensionTask?: AiAnalysisTaskVideoComprehensionResult | null;
+  /** 视频内容分析抠图任务的查询结果，当任务类型为Cutout时有效。 */
+  CutoutTask?: AiAnalysisTaskCutoutResult | null;
+  /** 视频内容分析成片任务的查询结果，当任务类型为Reel时有效。 */
+  ReelTask?: AiAnalysisTaskReelResult | null;
 }
 
 /** 智能分类任务输入类型 */
@@ -362,6 +366,40 @@ declare interface AiAnalysisTaskCoverResult {
   Input?: AiAnalysisTaskCoverInput;
   /** 智能封面任务输出。 */
   Output?: AiAnalysisTaskCoverOutput | null;
+}
+
+/** 智能抠图任务输入类型 */
+declare interface AiAnalysisTaskCutoutInput {
+  /** 视频智能抠图模板 ID。 */
+  Definition: number;
+}
+
+/** 视频抠图结果信息 */
+declare interface AiAnalysisTaskCutoutOutput {
+  /** 视频智能抠图文件路径。 */
+  Path?: string;
+  /** 视频智能抠图的存储位置。 */
+  OutputStorage?: TaskOutputStorage;
+}
+
+/** 视频抠图结果数据结构 */
+declare interface AiAnalysisTaskCutoutResult {
+  /** 任务状态，有 `PROCESSING`，`SUCCESS` 和 `FAIL` 三种 */
+  Status?: string;
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369) 列表。 */
+  ErrCodeExt?: string;
+  /** 错误信息 */
+  Message?: string;
+  /** 抠图任务输入 */
+  Input?: AiAnalysisTaskCutoutInput;
+  /** 抠图任务输出 */
+  Output?: AiAnalysisTaskCutoutOutput | null;
+  /** 任务进度 */
+  Progress?: number;
+  /** 任务开始执行的时间，采用 ISO 日期格式。 */
+  BeginProcessTime?: string;
+  /** 任务结束执行的时间，采用 ISO 日期格式。 */
+  FinishTime?: string;
 }
 
 /** 智能擦除任务输入类型 */
@@ -578,6 +616,44 @@ declare interface AiAnalysisTaskInput {
   Definition: number;
   /** 扩展参数，其值为序列化的 json字符串。注意：此参数为定制需求参数，参考如下：[智能檫除](https://cloud.tencent.com/document/product/862/101530)[智能拆条](https://cloud.tencent.com/document/product/862/112098)[高光集锦](https://cloud.tencent.com/document/product/862/107280)[智能横转竖](https://cloud.tencent.com/document/product/862/112112) */
   ExtendedParameter?: string | null;
+}
+
+/** 智能成片任务输入类型 */
+declare interface AiAnalysisTaskReelInput {
+  /** 智能成片模板 ID。 */
+  Definition?: number;
+}
+
+/** 智能成片结果信息 */
+declare interface AiAnalysisTaskReelOutput {
+  /** 成片视频路径。 */
+  VideoPath?: string;
+  /** 脚本文件路径 */
+  ScriptPath?: string;
+  /** 成片视频存储位置。 */
+  OutputStorage?: TaskOutputStorage;
+}
+
+/** 智能成片结果类型 */
+declare interface AiAnalysisTaskReelResult {
+  /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
+  Status?: string;
+  /** 错误码，0：成功，其他值：失败。 */
+  ErrCode?: number;
+  /** 错误信息。 */
+  Message?: string;
+  /** 智能成片任务输入。 */
+  Input?: AiAnalysisTaskReelInput;
+  /** 智能成片任务输出。 */
+  Output?: AiAnalysisTaskReelOutput | null;
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 媒体处理类错误码 列表。 */
+  ErrCodeExt?: string | null;
+  /** 任务进度。 */
+  Progress?: number | null;
+  /** 任务开始执行的时间，采用 ISO 日期格式。 */
+  BeginProcessTime?: string | null;
+  /** 任务执行完毕的时间，采用 ISO 日期格式。 */
+  FinishTime?: string | null;
 }
 
 /** 拆条任务输入类型 */
@@ -5086,7 +5162,7 @@ declare interface RawSmartSubtitleParameter {
   SubtitleFormat?: string | null;
   /** 字幕翻译开关`ON`: 开启翻译`OFF`: 关闭翻译**注意**：纯字幕翻译方式下，不传默认是打开的，不允许传空或`OFF`； */
   TranslateSwitch?: string | null;
-  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效，翻译语言列表：`ab`：阿布哈兹语`ace`：亚齐语`ach`：阿乔利语`af`：南非荷兰语`ak`：契维语（阿坎语）`am`：Amharic`ar`：阿拉伯语`as`：阿萨姆语`ay`：艾马拉语`az`：阿塞拜疆语`ba`：巴什基尔语`ban`：巴厘语`bbc`：巴塔克托巴语`bem`：Bemba`bew`：Betawi`bg`：保加利亚语`bho`：博杰普尔语`bik`：Bikol`bm`：班巴拉语`bn`：孟加拉语`br`：布列塔尼语`bs`：波斯尼亚语`btx`：巴塔克卡罗语`bts`：巴塔克西马隆贡语`bua`：布里亚特语`ca`：加泰罗尼亚语`ceb`：宿务语`cgg`：Kiga`chm`：草原马里语`ckb`：库尔德语（索拉尼语）`cnh`：哈卡钦语`co`：科西嘉语`crh`：克里米亚鞑靼语`crs`：塞舌尔克里奥尔语`cs`：捷克语`cv`：楚瓦什语`cy`：威尔士语`da`：丹麦语`de`：德语`din`：Dinka`doi`：多格来语`dov`：敦贝语`dv`：第维埃语`dz`：宗卡语`ee`：Ewe`el`：希腊语`en`：英语`eo`：世界语`es`：西班牙语`et`：爱沙尼亚语`eu`：巴斯克语`fa`：波斯语`ff`：富拉语`fi`：芬兰语`fil`：菲律宾语（塔加拉语）`fj`：斐济语`fr`：法语`fr-CA`：法语（加拿大）`fr-FR`：法语（法国）`fy`：弗里斯兰语`ga`：爱尔兰语`gaa`：加 (Ga) 语`gd`：苏格兰盖尔语`gl`：加利西亚语`gn`：瓜拉尼语`gom`：贡根语`gu`：古吉拉特语`gv`：马恩岛语`ha`：Hausa`haw`：夏威夷语`he`：希伯来语`hi`：印地语`hil`：希利盖农语`hmn`：苗语`hr`：克罗地亚语`hrx`：洪斯吕克语`ht`：海地克里奥尔语`hu`：匈牙利语`hy`：亚美尼亚语`id`：印度尼西亚语`ig`：Igbo`ilo`：伊洛果语`is`：冰岛语`it`：意大利语`iw`：希伯来语`ja`：日语`jv`：爪哇语`jw`：爪哇语`ka`：格鲁吉亚语`kk`：哈萨克语`km`：高棉语`kn`：卡纳达语`ko`：韩语`kri`：Krio`ku`：库尔德语（库尔曼吉语）`ktu`：吉土巴语`ky`：吉尔吉斯语`la`：拉丁语`lb`：卢森堡语`lg`：干达语（卢干达语）`li`：林堡语`lij`：利古里亚语`lmo`：伦巴第语`ln`：林加拉语`lo`：老挝语`lt`：立陶宛语`ltg`：拉特加莱语`luo`：Luo`lus`：米佐语`lv`：拉脱维亚语`mai`：迈蒂利语`mak`：马卡萨`mg`：马尔加什语`mi`：毛利语`min`：米南语`mk`：马其顿语`ml`：马拉雅拉姆语`mn`：蒙古语`mr`：马拉地语`ms`：马来语`mt`：马耳他语`my`：缅甸语`ne`：尼泊尔语`new`：尼瓦尔语`nl`：荷兰语`no`：挪威语`nr`：恩德贝莱语（南部）`nso`：北索托语（塞佩蒂语）`nus`：努尔语`ny`：齐切瓦语（尼扬贾语）`oc`：奥克斯坦语`om`：Oromo`or`：奥里亚语`pa`：旁遮普语`pag`：邦阿西楠语`pam`：邦板牙语`pap`：Papiamento`pl`：波兰语`ps`：Pashto`pt`：葡萄牙语`pt-BR`：葡萄牙语（巴西）`pt-PT`：葡萄牙语（葡萄牙）`qu`：克丘亚语`ro`：罗马尼亚语`rom`：罗姆语`rn`：Rundi`ru`：俄语`rw`：卢旺达语`sa`：梵语`scn`：西西里语`sd`：信德语`sg`：Sango`shn`：掸语`si`：僧伽罗语`sk`：斯洛伐克语`sl`：斯洛文尼亚语`sm`：萨摩亚语`sn`：修纳语`so`：索马里语`sq`：阿尔巴尼亚语`sr`：塞尔维亚语`ss`：斯瓦特语`st`：塞索托语`su`：巽他语`sv`：瑞典语`sw`：斯瓦希里语`szl`：西里西亚语`ta`：泰米尔语`te`：泰卢固语`tet`：德顿语`tg`：塔吉克语`th`：泰语`ti`：提格里尼亚语`tk`：土库曼语`tl`：菲律宾语（塔加拉语）`tn`：茨瓦纳语`tr`：土耳其语`ts`：聪加语`tt`：鞑靼语`ug`：维吾尔语`uk`：乌克兰语`ur`：乌尔都语`uz`：乌兹别克语`vi`：越南语`xh`：科萨语`yi`：意第绪语`yo`：约鲁巴语`yua`：尤卡坦玛雅语`yue`：粤语`zh`：简体中文`zh-TW`：中文（繁体）`zu`：祖鲁语**注意**：多语言方式，则使用 `/` 分割，如：`en/ja`，表示英语和日语。 */
+  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效，翻译语言列表：`ab`：阿布哈兹语`ace`：亚齐语`ach`：阿乔利语`af`：南非荷兰语`ak`：契维语（阿坎语）`am`：Amharic`ar`：阿拉伯语`as`：阿萨姆语`ay`：艾马拉语`az`：阿塞拜疆语`ba`：巴什基尔语`ban`：巴厘语`bbc`：巴塔克托巴语`bem`：Bemba`bew`：Betawi`bg`：保加利亚语`bho`：博杰普尔语`bik`：Bikol`bm`：班巴拉语`bn`：孟加拉语`br`：布列塔尼语`bs`：波斯尼亚语`btx`：巴塔克卡罗语`bts`：巴塔克西马隆贡语`bua`：布里亚特语`ca`：加泰罗尼亚语`ceb`：宿务语`cgg`：Kiga`chm`：草原马里语`ckb`：库尔德语（索拉尼语）`cnh`：哈卡钦语`co`：科西嘉语`crh`：克里米亚鞑靼语`crs`：塞舌尔克里奥尔语`cs`：捷克语`cv`：楚瓦什语`cy`：威尔士语`da`：丹麦语`de`：德语`din`：Dinka`doi`：多格来语`dov`：敦贝语`dv`：第维埃语`dz`：宗卡语`ee`：Ewe`el`：希腊语`en`：英语`eo`：世界语`es`：西班牙语`et`：爱沙尼亚语`eu`：巴斯克语`fa`：波斯语`ff`：富拉语`fi`：芬兰语`fil`：菲律宾语（塔加拉语）`fj`：斐济语`fr`：法语`fr-CA`：法语（加拿大）`fr-FR`：法语（法国）`fy`：弗里斯兰语`ga`：爱尔兰语`gaa`：加 (Ga) 语`gd`：苏格兰盖尔语`gl`：加利西亚语`gn`：瓜拉尼语`gom`：贡根语`gu`：古吉拉特语`gv`：马恩岛语`ha`：Hausa`haw`：夏威夷语`he`：希伯来语`hi`：印地语`hil`：希利盖农语`hmn`：苗语`hr`：克罗地亚语`hrx`：洪斯吕克语`ht`：海地克里奥尔语`hu`：匈牙利语`hy`：亚美尼亚语`id`：印度尼西亚语`ig`：Igbo`ilo`：伊洛果语`is`：冰岛语`it`：意大利语`iw`：希伯来语`ja`：日语`jv`：爪哇语`ka`：格鲁吉亚语`kk`：哈萨克语`km`：高棉语`kn`：卡纳达语`ko`：韩语`kri`：Krio`ku`：库尔德语（库尔曼吉语）`ktu`：吉土巴语`ky`：吉尔吉斯语`la`：拉丁语`lb`：卢森堡语`lg`：干达语（卢干达语）`li`：林堡语`lij`：利古里亚语`lmo`：伦巴第语`ln`：林加拉语`lo`：老挝语`lt`：立陶宛语`ltg`：拉特加莱语`luo`：Luo`lus`：米佐语`lv`：拉脱维亚语`mai`：迈蒂利语`mak`：马卡萨`mg`：马尔加什语`mi`：毛利语`min`：米南语`mk`：马其顿语`ml`：马拉雅拉姆语`mn`：蒙古语`mr`：马拉地语`ms`：马来语`mt`：马耳他语`my`：缅甸语`ne`：尼泊尔语`new`：尼瓦尔语`nl`：荷兰语`no`：挪威语`nr`：恩德贝莱语（南部）`nso`：北索托语（塞佩蒂语）`nus`：努尔语`ny`：齐切瓦语（尼扬贾语）`oc`：奥克斯坦语`om`：Oromo`or`：奥里亚语`pa`：旁遮普语`pag`：邦阿西楠语`pam`：邦板牙语`pap`：Papiamento`pl`：波兰语`ps`：Pashto`pt`：葡萄牙语`pt-BR`：葡萄牙语（巴西）`pt-PT`：葡萄牙语（葡萄牙）`qu`：克丘亚语`ro`：罗马尼亚语`rom`：罗姆语`rn`：Rundi`ru`：俄语`rw`：卢旺达语`sa`：梵语`scn`：西西里语`sd`：信德语`sg`：Sango`shn`：掸语`si`：僧伽罗语`sk`：斯洛伐克语`sl`：斯洛文尼亚语`sm`：萨摩亚语`sn`：修纳语`so`：索马里语`sq`：阿尔巴尼亚语`sr`：塞尔维亚语`ss`：斯瓦特语`st`：塞索托语`su`：巽他语`sv`：瑞典语`sw`：斯瓦希里语`szl`：西里西亚语`ta`：泰米尔语`te`：泰卢固语`tet`：德顿语`tg`：塔吉克语`th`：泰语`ti`：提格里尼亚语`tk`：土库曼语`tn`：茨瓦纳语`tr`：土耳其语`ts`：聪加语`tt`：鞑靼语`ug`：维吾尔语`uk`：乌克兰语`ur`：乌尔都语`uz`：乌兹别克语`vi`：越南语`xh`：科萨语`yi`：意第绪语`yo`：约鲁巴语`yua`：尤卡坦玛雅语`yue`：粤语`zh`：简体中文`zh-TW`：中文（繁体）`zu`：祖鲁语**注意**：多语言方式，则使用 `/` 分割，如：`en/ja`，表示英语和日语。 */
   TranslateDstLanguage?: string | null;
   /** ASR热词库参数 */
   AsrHotWordsConfigure?: AsrHotWordsConfigure | null;
@@ -5094,6 +5170,8 @@ declare interface RawSmartSubtitleParameter {
   ExtInfo?: string;
   /** 字幕处理类型：- 0：ASR识别字幕- 1：纯字幕翻译- 2：OCR识别字幕**注意**：不传的情况下默认类型为 ASR识别字幕 */
   ProcessType?: number;
+  /** 字幕OCR提取框选区域配置 */
+  SelectingSubtitleAreasConfig?: SelectingSubtitleAreasConfig | null;
 }
 
 /** 自定义转码的规格参数。 */
@@ -5538,6 +5616,16 @@ declare interface SegmentSpecificInfo {
   FragmentEndNum?: number | null;
 }
 
+/** 字幕OCR提取框选区域配置 */
+declare interface SelectingSubtitleAreasConfig {
+  /** 自动选择自定义区域。对选定区域，利用AI模型自动检测其中存在的选择目标并提取。 */
+  AutoAreas?: EraseArea[];
+  /** 示例视频或图片的宽，单位像素值 */
+  SampleWidth?: number;
+  /** 示例视频或图片的高，单位像素值 */
+  SampleHeight?: number;
+}
+
 /** 细节增强配置 */
 declare interface SharpEnhanceConfig {
   /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
@@ -5818,7 +5906,7 @@ declare interface SmartSubtitleTemplateItem {
   AsrHotWordsLibraryName?: string | null;
   /** 智能字幕视频源语言列表：`zh`：简体中文`yue`：中文粵语`zh-PY`：中英粤`zh_medical`：中文医疗`zh_dialect`：中文方言`prime_zh`：中英方言`zh_en`：中英`en`：英语`ja`：日语`ko`：韩语`fr`：法语`es`：西班牙语`it`：意大利语`de`：德语`tr`：土耳其语`ru`：俄语`pt`：葡萄牙语（巴西）`pt-PT`：葡萄牙语（葡萄牙）`vi`：越南语`id`：印度尼西亚语`ms`：马来语`th`：泰语`ar`：阿拉伯语`hi`：印地语`fil`：菲律宾语`auto`：自动识别（仅在纯字幕翻译中支持） */
   VideoSrcLanguage?: string;
-  /** 智能字幕文件格式- vtt: WebVTT 格式- srt: SRT格式- original：与源字幕文件一致（用于纯字幕翻译模版）- 不填或填空：不生成字幕文件 */
+  /** 智能字幕文件格式- vtt: WebVTT 格式- srt: SRT格式- original：与源字幕文件一致（用于纯字幕翻译模板）- 不填或填空：不生成字幕文件 */
   SubtitleFormat?: string | null;
   /** 智能字幕字幕语言类型0: 源语言1: 翻译语言2: 源语言+翻译语言当TranslateSwitch为OFF时仅支持取0当TranslateSwitch为ON时仅支持取1或2 */
   SubtitleType?: number;
@@ -5832,8 +5920,10 @@ declare interface SmartSubtitleTemplateItem {
   UpdateTime?: string;
   /** 智能字幕预设模板别名 */
   AliasName?: string | null;
-  /** 字幕处理类型：- 0：ASR识别字幕- 1：纯字幕翻译 */
+  /** 字幕处理类型：- 0：ASR识别字幕- 1：纯字幕翻译- 2: OCR识别字幕 */
   ProcessType?: number;
+  /** 字幕OCR提取框选区域配置信息 */
+  SelectingSubtitleAreasConfig?: SelectingSubtitleAreasConfig | null;
 }
 
 /** 智能字幕结果。 */
