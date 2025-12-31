@@ -241,7 +241,7 @@ declare interface CreateGatewayLoadBalancerResponse {
 declare interface CreateTargetGroupRequest {
   /** 目标组名称，限定60个字符。 */
   TargetGroupName?: string;
-  /** 网关负载均衡后端目标组所属的网络 ID，如vpc-12345678，可以通过 [DescribeVpcs](https://cloud.tencent.com/document/product/215/15778) 接口获取。 不填此参数则默认为DefaultVPC。 */
+  /** 网关负载均衡后端目标组所属的网络 ID，如vpc-12345678，可以通过 DescribeVpcs 接口获取。 不填此参数则默认为DefaultVPC。 */
   VpcId?: string;
   /** 目标组的默认端口， 后续添加服务器时可使用该默认端口。Port和TargetGroupInstances.N中的port二者必填其一。仅支持6081。 */
   Port?: number;
@@ -251,13 +251,13 @@ declare interface CreateTargetGroupRequest {
   Protocol?: string;
   /** 健康检查设置。 */
   HealthCheck?: TargetGroupHealthCheck;
-  /** 均衡算法。- IP_HASH_3_ELASTIC：弹性哈希 */
+  /** 均衡算法。IP_HASH_2_CONSISTENT：二元组一致性哈希IP_HASH_3_CONSISTENT：三元组一致性哈希IP_HASH_5_CONSISTENT：五元组一致性哈希 */
   ScheduleAlgorithm?: string;
   /** 是否支持全死全活。默认支持。 */
   AllDeadToAlive?: boolean;
   /** 标签。 */
   Tags?: TagInfo[];
-  /** 流量分发方式- STATELESS：无状态- STATEFUL： 有状态 */
+  /** 流量分发方式STATELESS：无状态STATEFUL： 有状态 */
   ForwardingMode?: string;
   /** TCP协议连接空闲超时时间，可配置60s-6000s，默认350s。 */
   TcpIdleConnectTimeout?: number;

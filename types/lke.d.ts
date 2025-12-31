@@ -2588,6 +2588,28 @@ declare interface YuanQi {
   VisibleRange?: string;
 }
 
+declare interface CallbackWorkflowToolNodeRequest {
+  /** ADP调用外部API时,通过HTTP Header(X-ADP-Callback-Token)传递回调CallbackToken */
+  CallbackToken: string;
+  /** 回调结果,可选,为JSON字符串 */
+  Result: string;
+  /** 登录用户主账号(集成商模式必填) */
+  LoginUin?: string;
+  /** 登录用户子账号(集成商模式必填) */
+  LoginSubAccountUin?: string;
+  /** 应用ID */
+  AppBizId?: string;
+}
+
+declare interface CallbackWorkflowToolNodeResponse {
+  /** 状态码 */
+  Code?: number;
+  /** 状态详情 */
+  Msg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CheckAttributeLabelExistRequest {
   /** 应用ID，获取方法参看如何获取[BotBizId](https://cloud.tencent.com/document/product/1759/109469) */
   BotBizId: string;
@@ -5047,6 +5069,8 @@ declare interface VerifyQAResponse {
 /** {@link Lke 腾讯云智能体开发平台} */
 declare interface Lke {
   (): Versions;
+  /** 工作流工具节点异步调用回调 {@link CallbackWorkflowToolNodeRequest} {@link CallbackWorkflowToolNodeResponse} */
+  CallbackWorkflowToolNode(data: CallbackWorkflowToolNodeRequest, config?: AxiosRequestConfig): AxiosPromise<CallbackWorkflowToolNodeResponse>;
   /** 检查标签下的标签值是否存在 {@link CheckAttributeLabelExistRequest} {@link CheckAttributeLabelExistResponse} */
   CheckAttributeLabelExist(data: CheckAttributeLabelExistRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAttributeLabelExistResponse>;
   /** 检查标签引用 {@link CheckAttributeLabelReferRequest} {@link CheckAttributeLabelReferResponse} */

@@ -374,6 +374,24 @@ declare interface ContractReviewWebUrlOption {
   DisableWxQrcode?: boolean;
 }
 
+/** 合同摘要 */
+declare interface ContractSummary {
+  /** 提取内容分类：Base 合同信息Identity 主体信息Performance 履约条款 */
+  Name?: string;
+  /** 详细信息 */
+  Infos?: ContractSummaryInfo[];
+}
+
+/** 合同摘要信息 */
+declare interface ContractSummaryInfo {
+  /** 字段 key */
+  Key?: string;
+  /** 字段值 */
+  Value?: string;
+  /** 主体信息 */
+  Identity?: Identity | null;
+}
+
 /** 创建合同个性化参数 */
 declare interface CreateFlowOption {
   /** 是否允许修改发起合同时确认弹窗的合同信息（合同名称、合同类型、签署截止时间），若不允许编辑，则表单字段将被禁止输入。true：允许编辑false：不允许编辑（默认值） */
@@ -1028,6 +1046,64 @@ declare interface HasAuthUser {
   MainOrganizationId?: string;
 }
 
+/** 主体信息 */
+declare interface Identity {
+  /** 统一社会信用代码 */
+  CreditCode?: string;
+  /** 组织机构代码 */
+  OrgCode?: string;
+  /** 营业执照注册编号 */
+  RegNo?: string;
+  /** 企业名称 */
+  EntName?: string;
+  /** 修改人法人代表姓名 */
+  LegalRepName?: string;
+  /** 渠道经营状态 */
+  OpState?: string;
+  /** 经营期限自(格式YYYY-MM-DD) */
+  OpFromDate?: string;
+  /** 经营期限至 */
+  OpToDate?: string;
+  /** 成立日期(格式YYYY-MM-DD) */
+  EstabDate?: string;
+  /** 核准日期(格式YYYY-MM-DD) */
+  ApprDate?: string;
+  /** 吊销日期(格式YYYY-MM-DD) */
+  RevoDate?: string;
+  /** 注销日期(格式YYYY-MM-DD) */
+  CancelDate?: string;
+  /** 登记机关 */
+  RegOrg?: string;
+  /** 企业类型编码 */
+  EntTypeCode?: string;
+  /** 企业类型 */
+  EntType?: string;
+  /** 经营业务范围 */
+  BizScope?: string;
+  /** 许可经营项目 */
+  LicenseBizItem?: string;
+  /** 注册地址行政编号 */
+  RegAreaCode?: string;
+  /** 注册地址 */
+  RegAddress?: string;
+  /** 注册资本币种 */
+  RegCapitalCurtype?: string;
+  /** 注册资本（万元） */
+  RegCapital?: string;
+  /** 实收资本（万元） */
+  PaidCapital?: string;
+  /** 原注册号 */
+  OriRegNo?: string;
+  /** 企业英文名称 */
+  EntNameEng?: string;
+  /** 曾用名 */
+  OriEntName?: string;
+  /** 企业经营状态枚举。常见值如下：未定义的状态 = 0正常 = 1注销 = 2吊销 = 3吊销后注销 = 4撤销 = 5其他 = 99 */
+  OpStateCode?: number;
+  /** 查询日期(格式YYYY-MM-DD) */
+  SearchDate?: string;
+}
+
 /** 企业角色数据信息 */
 declare interface IntegrateRole {
   /** 角色id */
@@ -1318,6 +1394,16 @@ declare interface OutputRisk {
   RiskBasis?: string;
   /** 风险等级id。1 为最高风险等级，0 为最低风险等级，从[2,n]数字越大风险等级逐渐降低。 */
   RiskLevelId?: number;
+  /** 风险标签 */
+  RiskLabels?: string[];
+  /** 风险来源 0:模型标注的风险 1:人工标注的风险 */
+  RiskOrigin?: number;
+  /** 创建人 */
+  Creator?: string;
+  /** 创建人ID */
+  CreatorId?: string;
+  /** 创建时间 */
+  CreatedOn?: number;
 }
 
 /** 合同文件验签单个结果结构体 */
@@ -1402,6 +1488,12 @@ declare interface PositionInfo {
   PageIndex?: number;
   /** 系统生成的唯一ID值 */
   Id?: string;
+  /** 开始位置 */
+  Begin?: number;
+  /** 结束位置 */
+  End?: number;
+  /** 文档类型，1：pdf，2：doc 文档 */
+  DocType?: number;
 }
 
 /** 预设的动态签署方的补充信息，仅匹配对应信息的签署方才能领取合同。暂时仅对个人参与方生效。 */
@@ -4064,6 +4156,8 @@ declare interface DescribeContractReviewTaskResponse {
   TotalRiskCount?: number;
   /** 通过项信息(详细引文信息) */
   ApprovedLists?: OutputReference[] | null;
+  /** 摘要信息 */
+  Summaries?: ContractSummary[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

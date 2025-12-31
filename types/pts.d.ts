@@ -220,6 +220,18 @@ declare interface DomainNameConfig {
   DNSConfig?: DNSConfig | null;
 }
 
+/** 环境变量 */
+declare interface EnvVar {
+  /** 变量引用键，建议为 C_IDENTIFIER 全大写风格 */
+  Name?: string;
+  /** 默认 NORMAL，支持 NORMAL、PASSWORD 类型 */
+  Type?: string;
+  /** 变量引用值 */
+  Value?: string;
+  /** 描述内容 */
+  Description?: string;
+}
+
 /** 错误信息汇总 */
 declare interface ErrorSummary {
   /** 状态码 */
@@ -971,9 +983,19 @@ declare interface CreateCronJobResponse {
 }
 
 declare interface CreateEnvironmentRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 环境名 */
+  Name: string;
+  /** 环境变量 */
+  EnvVars: EnvVar[];
+  /** 环境描述 */
+  Description?: string;
 }
 
 declare interface CreateEnvironmentResponse {
+  /** 环境ID */
+  EnvId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1878,7 +1900,7 @@ declare interface Pts {
   /** 创建定时任务 {@link CreateCronJobRequest} {@link CreateCronJobResponse} */
   CreateCronJob(data: CreateCronJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCronJobResponse>;
   /** 创建环境 {@link CreateEnvironmentRequest} {@link CreateEnvironmentResponse} */
-  CreateEnvironment(data?: CreateEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvironmentResponse>;
+  CreateEnvironment(data: CreateEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvironmentResponse>;
   /** 创建文件 {@link CreateFileRequest} {@link CreateFileResponse} */
   CreateFile(data: CreateFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileResponse>;
   /** 创建项目 {@link CreateProjectRequest} {@link CreateProjectResponse} */

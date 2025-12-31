@@ -4810,6 +4810,22 @@ declare interface DescribeOtherCHDFSBindingListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeResourceGroupUsageInfoRequest {
+  /** 资源组ID */
+  SessionId: string;
+}
+
+declare interface DescribeResourceGroupUsageInfoResponse {
+  /** 资源上限 */
+  Total?: number;
+  /** 已占用资源 */
+  Used?: number;
+  /** 剩余可用资源 */
+  Available?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeResultDownloadRequest {
   /** 查询任务Id */
   DownloadId: string;
@@ -6683,6 +6699,8 @@ declare interface Dlc {
   DescribeNotebookSessions(data: DescribeNotebookSessionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookSessionsResponse>;
   /** 查询其他产品元数据加速桶绑定列表 {@link DescribeOtherCHDFSBindingListRequest} {@link DescribeOtherCHDFSBindingListResponse} */
   DescribeOtherCHDFSBindingList(data: DescribeOtherCHDFSBindingListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOtherCHDFSBindingListResponse>;
+  /** 展示标准引擎资源组资源用量 {@link DescribeResourceGroupUsageInfoRequest} {@link DescribeResourceGroupUsageInfoResponse} */
+  DescribeResourceGroupUsageInfo(data: DescribeResourceGroupUsageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGroupUsageInfoResponse>;
   /** 查询结果下载任务 {@link DescribeResultDownloadRequest} {@link DescribeResultDownloadResponse} */
   DescribeResultDownload(data: DescribeResultDownloadRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResultDownloadResponse>;
   /** 查询SQL脚本列表 {@link DescribeScriptsRequest} {@link DescribeScriptsResponse} */

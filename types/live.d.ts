@@ -4071,9 +4071,9 @@ declare interface DescribeLiveTranscodeTemplatesResponse {
 }
 
 declare interface DescribeLiveTranscodeTotalInfoRequest {
-  /** 开始时间，支持最近三个月的数据查询，起始时间和结束时间跨度不能超过三个月。接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543)2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。 */
+  /** 开始时间，支持最近三个月的数据查询，起始时间和结束时间跨度不能超过三个月。接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见 ISO 日期格式说明2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。 */
   StartTime: string;
-  /** 结束时间，支持最近三个月的数据查询，起始时间和结束时间跨度不能超过三个月。接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543)2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。 */
+  /** 结束时间，支持最近三个月的数据查询，起始时间和结束时间跨度不能超过三个月。接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见 ISO 日期格式说明2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。 */
   EndTime: string;
   /** 推流域名列表，若不填，表示查询所有域名总体数据。指定域名时返回1小时粒度数据。 */
   PushDomains?: string[];

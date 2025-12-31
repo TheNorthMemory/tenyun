@@ -4615,6 +4615,8 @@ declare namespace V20180525 {
   }
 
   interface CreateGlobalMaintenanceWindowAndExclusionsResponse {
+    /** 维护窗口ID */
+    ID?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6246,7 +6248,7 @@ declare namespace V20180525 {
     Offset?: number;
     /** 最大输出条目数，默认为20 */
     Limit?: number;
-    /** 筛选项 */
+    /** 筛选项，支持按照以下字段过滤：- "ID"：维护窗口ID，如：10 */
     Filters?: Filter[];
   }
 

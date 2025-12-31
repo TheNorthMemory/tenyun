@@ -6,6 +6,8 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 declare interface ExtraParam {
   /** 预签名的上传url，支持把视频直接传到客户指定的地址。 */
   UserDesignatedUrl?: string;
+  /** 回调地址需要您在创建任务时主动设置 CallbackUrl，请求方法为 POST，当视频生成结束时，我们将向此地址发送生成结果。数据格式如下：{ "JobId": "1397428070633955328", "Status": "DONE", "ErrorCode": "", "ErrorMessage": "", "ResultVideoUrl": "https://vcg.cos.tencentcos.cn/template_to_video/fa80b846-b933-4981-afad-8a39b46ef2ca.mp4"} */
+  CallbackUrl?: string;
 }
 
 /** 人脸图片和待被融合的素材模板图的人脸位置信息。 */
@@ -422,7 +424,9 @@ declare interface SubmitVideoEditJobRequest {
   /** 输入视频- 视频格式：MP4- 视频时长：5s以内- 视频分辨率：无限制（待验证是否可以无损输出） */
   VideoUrl: string;
   /** 视频内容的描述，中文正向提示词。最多支持200个 utf-8 字符（首尾空格不计入字符数）。支持风格迁移、替换、元素增加、删除控制 */
-  Prompt: string;
+  Prompt?: string;
+  /** 图片数组 */
+  Images?: Image[];
   /** 图片base64或者图片url- Base64 和 Url 必须提供一个，如果都提供以Url为准。- 上传图url大小不超过 8M- 支持jpg，png，jpeg，webp，bmp，tiff 格式- 单边分辨率不超过5000，不小于50，长宽限制1:4 ~ 4:1 */
   Image?: Image;
   /** 为生成视频添加标识的开关，默认为1。 1：添加标识。 0：不添加标识。 其他数值：默认按1处理。 建议您使用显著标识来提示，该视频是 AI 生成的视频。 */

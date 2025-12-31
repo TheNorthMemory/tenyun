@@ -7099,7 +7099,7 @@ declare interface CreateAdaptiveDynamicStreamingTemplateResponse {
 }
 
 declare interface CreateAigcImageTaskRequest {
-  /** 模型名称。当前支持的模型列表：GEM，Jimeng，Qwen。 */
+  /** 模型名称。当前支持的模型列表：Hunyuan,GEM，Jimeng，Qwen。 */
   ModelName?: string;
   /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。1. GEM， 可选[2.5,3.0]。2. Jimeng，可选[4.0]。 */
   ModelVersion?: string;
@@ -7127,7 +7127,7 @@ declare interface CreateAigcImageTaskResponse {
 }
 
 declare interface CreateAigcVideoTaskRequest {
-  /** 模型名称。当前支持的模型列表:Hailuo，Kling，Jimeng，Vidu，OS，GV。 */
+  /** 模型名称。当前支持的模型列表:Hunyuan,Hailuo，Kling，Jimeng，Vidu，OS，GV。 */
   ModelName?: string;
   /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。1. Hailuo， 可选[02、2.3]。2. Kling，可选[2.0、2.1、2.5]。3. Jimeng, 可选[3.0pro]。4. Vidu,可选[q2、q2-pro、q2-turbo]。4. GV, 可选[3.1]。5. OS，可选[2.0]。 */
   ModelVersion?: string;

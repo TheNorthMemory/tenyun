@@ -36,7 +36,7 @@ declare interface CloudMateAgentRequest {
 declare interface CloudMateAgentResponse {
   /** 会话ID，用于后续继续对话 */
   SessionId?: string;
-  /** unix时间戳 */
+  /** Unix 时间戳 */
   Timestamp?: number;
   /** 诊断内容 */
   Content?: ChatContent;

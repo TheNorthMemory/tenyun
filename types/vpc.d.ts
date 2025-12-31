@@ -3192,6 +3192,8 @@ declare interface VpnGatewayRoute {
   CreateTime?: string;
   /** 更新时间。 */
   UpdateTime?: string;
+  /** 路由备注 */
+  Description?: string;
 }
 
 /** 修改VPN状态参数 */
@@ -3199,7 +3201,9 @@ declare interface VpnGatewayRouteModify {
   /** VPN网关路由ID。 */
   RouteId: string;
   /** VPN网关状态, ENABLE 启用, DISABLE禁用。 */
-  Status: string;
+  Status?: string;
+  /** VPN路由备注 */
+  Description?: string;
 }
 
 /** VPN网关云联网路由信息 */

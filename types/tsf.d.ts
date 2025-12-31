@@ -2779,7 +2779,7 @@ declare interface ScalableRule {
 /** tsf 容器集群节点调度策略 */
 declare interface SchedulingStrategy {
   /** NONE：不使用调度策略；CROSS_AZ：跨可用区部署 */
-  Type: string;
+  Type?: string;
   /** - */
   NodeScheduleStrategyType?: string;
   /** - */
@@ -2831,7 +2831,7 @@ declare interface ServiceSetting {
   /** 容器端口映射 */
   ProtocolPorts: ProtocolPort[];
   /** 子网ID */
-  SubnetId: string;
+  SubnetId?: string;
   /** 是否创建 k8s service，默认为 false */
   DisableService?: boolean;
   /** service 是否为 headless 类型 */
@@ -3251,9 +3251,9 @@ declare interface TsfPageBusinessLogV2 {
   /** 业务日志列表 */
   Content?: BusinessLogV2[];
   /** 游标ID */
-  ScrollId?: string | null;
+  ScrollId?: string;
   /** 查询状态，SUCCESS：查询成功完成，ERROR_RANGE_EXCEED：查询范围过大异常，ERROR_COMPLEX_CONDITION：查询条件复杂异常，ERROR_OTHER_CAUSE：其他异常 */
-  Status?: string | null;
+  Status?: string;
   /** 查询es时，使用searchAfter返回的游标 */
   SearchAfter?: string[];
 }
@@ -3409,9 +3409,9 @@ declare interface TsfPageStdoutLogV2 {
   /** 标准输出日志列表 */
   Content?: StdoutLogV2[];
   /** 游标ID */
-  ScrollId?: string | null;
+  ScrollId?: string;
   /** 查询状态，SUCCESS：查询成功完成，ERROR_RANGE_EXCEED：查询范围过大异常，ERROR_COMPLEX_CONDITION：查询条件复杂异常，ERROR_OTHER_CAUSE：其他异常 */
-  Status?: string | null;
+  Status?: string;
   /** 查询es使用searchAfter时，游标 */
   SearchAfter?: string[];
 }
