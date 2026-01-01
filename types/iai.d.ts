@@ -694,9 +694,9 @@ declare interface DetectFaceRequest {
 }
 
 declare interface DetectFaceResponse {
-  /** 请求的图片宽度。 */
+  /** ，单位为：像素（px）。 */
   ImageWidth?: number;
-  /** 请求的图片高度。 */
+  /** ，单位为：像素（px）。 */
   ImageHeight?: number;
   /** 人脸信息列表。- 包含人脸坐标信息、属性信息（若需要）、质量分信息（若需要）。 */
   FaceInfos?: FaceInfo[];
@@ -1817,9 +1817,9 @@ declare namespace V20180301 {
   }
 
   interface DetectFaceResponse {
-    /** 请求的图片宽度。 */
+    /** 请求的图片宽度，单位为：像素（px）。 */
     ImageWidth?: number;
-    /** 请求的图片高度。 */
+    /** 请求的图片高度，单位为：像素（px）。 */
     ImageHeight?: number;
     /** 人脸信息列表。包含人脸坐标信息、属性信息（若需要）、质量分信息（若需要）。 */
     FaceInfos?: FaceInfo[];

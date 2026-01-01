@@ -26,12 +26,84 @@ declare interface CosStorageSource {
   BucketPath?: string;
 }
 
+/** 沙箱自定义配置 */
+declare interface CustomConfiguration {
+  /** 镜像地址 */
+  Image?: string;
+  /** 镜像仓库类型：`enterprise`、`personal`。 */
+  ImageRegistryType?: string;
+  /** 启动命令 */
+  Command?: string[];
+  /** 启动参数 */
+  Args?: string[];
+  /** 环境变量 */
+  Env?: EnvVar[];
+  /** 端口配置 */
+  Ports?: PortConfiguration[];
+  /** 资源配置 */
+  Resources?: ResourceConfiguration;
+  /** 探针配置 */
+  Probe?: ProbeConfiguration;
+}
+
+/** 沙箱自定义配置详细信息 */
+declare interface CustomConfigurationDetail {
+  /** 镜像地址 */
+  Image?: string;
+  /** 镜像仓库类型：`TCR`、`CCR`。 */
+  ImageRegistryType?: string;
+  /** 镜像 Digest */
+  ImageDigest?: string;
+  /** 启动命令 */
+  Command?: string[];
+  /** 启动参数 */
+  Args?: string[];
+  /** 环境变量 */
+  Env?: EnvVar[];
+  /** 端口配置 */
+  Ports?: PortConfiguration[];
+  /** 资源配置 */
+  Resources?: ResourceConfiguration;
+  /** 探针配置 */
+  Probe?: ProbeConfiguration;
+}
+
+/** 环境变量 */
+declare interface EnvVar {
+  /** 环境变量名 */
+  Name?: string;
+  /** 环境变量值 */
+  Value?: string;
+}
+
 /** 过滤列表规则 */
 declare interface Filter {
   /** 属性名称, 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。 */
   Name?: string;
   /** 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
   Values?: string[];
+}
+
+/** HTTP GET 探测动作配置 */
+declare interface HttpGetAction {
+  /** 路径 */
+  Path?: string;
+  /** 端口 */
+  Port?: number;
+  /** 协议 */
+  Scheme?: string;
+}
+
+/** 镜像卷挂载源配置 */
+declare interface ImageStorageSource {
+  /** 镜像地址 */
+  Reference?: string;
+  /** 镜像仓库类型：`enterprise`、`personal`。 */
+  ImageRegistryType?: string;
+  /** 镜像内部的路径 */
+  SubPath?: string;
+  /** 镜像 Digest，请求时无需传入 */
+  Digest?: string;
 }
 
 /** 沙箱实例存储挂载配置可选项，用于覆盖沙箱工具的存储配置的部分选项，并提供子路径挂载配置。 */
@@ -52,6 +124,40 @@ declare interface NetworkConfiguration {
   NetworkMode: string;
   /** VPC网络相关配置 */
   VpcConfig?: VPCConfig;
+}
+
+/** 端口配置 */
+declare interface PortConfiguration {
+  /** 端口名 */
+  Name?: string;
+  /** 端口 */
+  Port?: number;
+  /** 协议 */
+  Protocol?: string;
+}
+
+/** 健康检查探针配置 */
+declare interface ProbeConfiguration {
+  /** HTTP GET 探测配置 */
+  HttpGet?: HttpGetAction;
+  /** 健康检查就绪超时 */
+  ReadyTimeoutMs?: number;
+  /** 健康检查单次探测超时 */
+  ProbeTimeoutMs?: number;
+  /** 健康检查间隔 */
+  ProbePeriodMs?: number;
+  /** 健康检查成功阈值 */
+  SuccessThreshold?: number;
+  /** 健康检查失败阈值 */
+  FailureThreshold?: number;
+}
+
+/** 资源配置 */
+declare interface ResourceConfiguration {
+  /** cpu 资源量 */
+  CPU?: string;
+  /** 内存资源量 */
+  Memory?: string;
 }
 
 /** 沙箱实例结构体 */
@@ -76,6 +182,8 @@ declare interface SandboxInstance {
   UpdateTime?: string;
   /** 存储挂载选项 */
   MountOptions?: MountOption[];
+  /** 沙箱实例自定义配置 */
+  CustomConfiguration?: CustomConfigurationDetail;
 }
 
 /** 沙箱工具结构体 */
@@ -104,6 +212,8 @@ declare interface SandboxTool {
   RoleArn?: string;
   /** 沙箱工具中实例存储挂载配置 */
   StorageMounts?: StorageMount[];
+  /** 沙箱工具自定义配置 */
+  CustomConfiguration?: CustomConfigurationDetail;
 }
 
 /** 沙箱工具中实例存储挂载配置 */
@@ -122,6 +232,8 @@ declare interface StorageMount {
 declare interface StorageSource {
   /** 对象存储桶配置 */
   Cos?: CosStorageSource;
+  /** 镜像卷配置 */
+  Image?: ImageStorageSource;
 }
 
 /** 标签 */
@@ -173,7 +285,7 @@ declare interface CreateAPIKeyResponse {
 declare interface CreateSandboxToolRequest {
   /** 沙箱工具名称，长度 1-50 字符，支持英文、数字、下划线和连接线。同一 AppId 下沙箱工具名称必须唯一 */
   ToolName: string;
-  /** 沙箱工具类型，目前支持：browser、code-interpreter */
+  /** 沙箱工具类型，目前支持：browser、code-interpreter、custom */
   ToolType: string;
   /** 网络配置 */
   NetworkConfiguration: NetworkConfiguration;
@@ -189,6 +301,8 @@ declare interface CreateSandboxToolRequest {
   RoleArn?: string;
   /** 沙箱工具存储配置 */
   StorageMounts?: StorageMount[];
+  /** 沙箱工具自定义配置 */
+  CustomConfiguration?: CustomConfiguration;
 }
 
 declare interface CreateSandboxToolResponse {
@@ -283,6 +397,8 @@ declare interface StartSandboxInstanceRequest {
   ClientToken?: string;
   /** 沙箱实例存储挂载配置 */
   MountOptions?: MountOption[];
+  /** 沙箱实例自定义配置 */
+  CustomConfiguration?: CustomConfiguration;
 }
 
 declare interface StartSandboxInstanceResponse {
@@ -323,6 +439,8 @@ declare interface UpdateSandboxToolRequest {
   NetworkConfiguration?: NetworkConfiguration;
   /** 标签 */
   Tags?: Tag[];
+  /** 沙箱工具自定义配置 */
+  CustomConfiguration?: CustomConfiguration;
 }
 
 declare interface UpdateSandboxToolResponse {

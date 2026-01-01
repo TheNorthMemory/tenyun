@@ -1851,7 +1851,7 @@ declare namespace V20180717 {
     Resolution?: string;
     /** 指定所生成视频的宽高比。当 ModelName 是 Kling，当文生视频时，则可选值为 16:9、9:16、 1:1，默认为16:9；当 ModelName 是 Jimeng，当文生视频时，则可选值为 16:9、4:3、1:1、3:4、9:16、21:9当 ModelName 是 Vidu，当文生视频时和使用参考图片生成时，则可选值为 16:9、9:16、4:3、3:4、1:1，其中仅版本q2支持4:3、3:4当 ModelName 是 GV，则可选值为 16:9、9:16，默认为 16:9；当 ModelName 是 OS，当文生视频时，则可选值为 16:9、9:16，默认为 16:9；当 ModelName 是 Hailuo，则暂不支持。 */
     AspectRatio?: string;
-    /** 是否生成音频。支持的模型包括 GV、OS。取值有： Enabled：开启； Disabled：关闭；默认值：Enabled */
+    /** 是否生成音频。支持的模型包括 GV、OS、Vidu。取值有： Enabled：开启； Disabled：关闭；默认值：Disabled */
     AudioGeneration?: string;
     /** 是否允许人物或人脸生成。取值有： AllowAdult：允许生成成人； Disallowed：禁止在图片中包含人物或人脸； */
     PersonGeneration?: string;
@@ -3313,6 +3313,18 @@ declare namespace V20180717 {
     Transparency: number;
   }
 
+  /** 媒体导入知识库任务 */
+  interface ImportMediaKnowledgeTask {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 任务状态，取值：PROCESSING：处理中；FINISH：已完成。 */
+    Status?: string;
+    /** 错误码，0 表示成功，其他值表示失败 */
+    ErrCode?: number;
+    /** 错误信息。 */
+    Message?: string;
+  }
+
   /** 视频画面抖动重影检测的控制参数。 */
   interface JitterConfigureInfo {
     /** 视频画面抖动重影检测开关，可选值：ON：开启；OFF：关闭。 */
@@ -3407,7 +3419,7 @@ declare namespace V20180717 {
 
   /** 用于描述 MPS 视频处理任务中的返回文件结果。 */
   interface MPSOutputFile {
-    /** 文件类型。用于标识 MPS 视频处理任务执行结果中的特定返回文件。取值：AiAnalysis.DeLogo.Video: 智能擦除任务中产生的擦除后视频文件，默认以原文件类型存储；AiAnalysis.DeLogo.OriginSubtitle: 智能擦除任务中基于画面提取的字幕文件；AiAnalysis.DeLogo.TranslateSubtitle: 智能擦除任务中基于画面提取的字幕翻译文件。MediaProcess.Transcode.Video: 音视频增强任务中增强后的音视频文件，默认以转码文件类型存储。 */
+    /** 文件类型。用于标识 MPS 视频处理任务执行结果中的特定返回文件。取值：AiAnalysis.DeLogo.Video: 智能擦除任务中产生的擦除后视频文件，默认以原文件类型存储；AiAnalysis.DeLogo.OriginSubtitle: 智能擦除任务中基于画面提取的字幕文件；AiAnalysis.DeLogo.TranslateSubtitle: 智能擦除任务中基于画面提取的字幕翻译文件。MediaProcess.Transcode.Video: 音视频增强任务中增强后的音视频文件，默认以转码文件类型存储。AiAnalysis.HorizontalToVerticalTask.Video: 横转竖任务中生成的视频文件，默认以智能媒体文件类型存储。AiAnalysis.VideoRemakeTaskk.Video: 智能去重任务中生成的视频文件，默认以智能媒体文件类型存储。AiAnalysis.SegmentTask.Video: 智能拆条任务中生成的视频文件，默认以智能媒体文件类型存储。SmartErase.Video: 智能擦除任务中生成的视频文件，默认以智能媒体文件类型存储。 */
     FileType?: string;
     /** 存储形式。用于表示该结果文件的存储形式，取值有： Permanent：永久存储； Temporary：临时存储。 */
     StorageMode?: string;
@@ -3423,7 +3435,7 @@ declare namespace V20180717 {
 
   /** MPS输出文件信息 */
   interface MPSOutputFileInfo {
-    /** MPS输出文件类型 */
+    /** MPS输出文件类型，可取值：Video：任务生成的视频文件。Cover：任务生成的封面文件。Audio：任务生成的音频文件。Output：任务生成的结果输出，文件对应 MPS 任务返回中的Output结果，以 JSON 格式生成文件。Output类型文件，不同MPS任务对应输出结果不同，具体返回内容参考MPS任务输出结构体，结构体经过JSON序列化后生成Output类型文件[智能分类结果](https://cloud.tencent.com/document/product/862/37615)[智能封面结果](https://cloud.tencent.com/document/product/862/37615)[智能标签结果](https://cloud.tencent.com/document/product/862/37615)[智能按帧标签分类结果](https://cloud.tencent.com/document/product/862/37615)[智能高光结果](https://cloud.tencent.com/document/product/862/37615)[智能拆条结果](https://cloud.tencent.com/document/product/862/37615)[智能片头片尾结果](https://cloud.tencent.com/document/product/862/37615)[智能摘要结果](https://cloud.tencent.com/document/product/862/37615)[智能横转竖结果](https://cloud.tencent.com/document/product/862/37615)[智能译制结果](https://cloud.tencent.com/document/product/862/37615)[智能视频理解结果](https://cloud.tencent.com/document/product/862/37615)[智能字幕语音全文识别结果](https://cloud.tencent.com/document/product/862/37615)[智能字幕翻译结果](https://cloud.tencent.com/document/product/862/37615)[智能字幕纯字幕文件翻译结果](https://cloud.tencent.com/document/product/862/37615)[智能字幕文字提取字幕结果](https://cloud.tencent.com/document/product/862/37615) */
     FileType?: string;
     /** MPS输出文件的URL */
     Url?: string;
@@ -3431,7 +3443,7 @@ declare namespace V20180717 {
 
   /** MPS 具体子任务查询结果类型。 */
   interface MPSSubTaskResult {
-    /** 任务类型。MPS 的 WorkflowTask 结构中的具体子任务类型。取值：AiAnalysis.DeLogo：智能擦除任务。MediaProcess.Transcode：音视频增强任务。 */
+    /** 任务类型。MPS 的 WorkflowTask 结构中的具体子任务类型。取值：MediaProcess.Transcode：音视频转码任务。AiAnalysis.DeLogo：智能擦除任务。AiAnalysis.ClassificationTask：智能分类任务。AiAnalysis.CoverTask：智能封面任务。AiAnalysis.TagTask：智能标签任务。AiAnalysis.FrameTagTask：智能按帧标签任务。AiAnalysis.HighlightTask：智能高光任务。AiAnalysis.SegmentTask：智能拆条任务。AiAnalysis.HeadTailTask：智能片头片尾任务。AiAnalysis.DescriptionTask：智能摘要任务。AiAnalysis.HorizontalToVerticalTask：智能横转竖任务。AiAnalysis.DubbingTask：智能译制任务。AiAnalysis.VideoRemakeTask：智能去重任务。AiAnalysis.VideoComprehensionTask：视频理解任务。SmartSubtitle.AsrFullTextTask：智能语音全文识别任务。SmartSubtitle.TransTextTask：	翻译结果。SmartSubtitle.PureSubtitleTransTask：返回纯字幕文件翻译结果。SmartSubtitle.OcrFullTextTask：智能文字提取字幕任务。SmartErase：智能擦除任务。 */
     TaskType?: string;
     /** 任务状态。有 PROCESSING，SUCCESS 和 FAIL 三种。 */
     Status?: string;
@@ -3449,7 +3461,7 @@ declare namespace V20180717 {
   interface MPSTaskOutput {
     /** 任务返回结果中的文件类型结果。如智能擦除中，擦除后的视频文件将被存入媒资，并在此字段中给出 FileId；基于画面提取的字幕文件 Url 将在此字段中给出。 */
     OutputFiles?: MPSOutputFile[];
-    /** 任务返回的结果JSON */
+    /** 任务返回的结果，该字段对应 MPS 任务返回中的Output结果，以 JSON 格式返回不同MPS任务输出结果结构不同，具体返回内容参考MPS任务输出结构体[智能分类结果](https://cloud.tencent.com/document/product/862/37615)[智能封面结果](https://cloud.tencent.com/document/product/862/37615)[智能标签结果](https://cloud.tencent.com/document/product/862/37615)[智能按帧标签分类结果](https://cloud.tencent.com/document/product/862/37615)[智能高光结果](https://cloud.tencent.com/document/product/862/37615)[智能拆条结果](https://cloud.tencent.com/document/product/862/37615)[智能片头片尾结果](https://cloud.tencent.com/document/product/862/37615)[智能摘要结果](https://cloud.tencent.com/document/product/862/37615)[智能横转竖结果](https://cloud.tencent.com/document/product/862/37615)[智能译制结果](https://cloud.tencent.com/document/product/862/37615)[智能视频理解结果](https://cloud.tencent.com/document/product/862/37615)[智能字幕语音全文识别结果](https://cloud.tencent.com/document/product/862/37615)[智能字幕翻译结果](https://cloud.tencent.com/document/product/862/37615)[智能字幕纯字幕文件翻译结果](https://cloud.tencent.com/document/product/862/37615)[智能字幕文字提取字幕结果](https://cloud.tencent.com/document/product/862/37615) */
     OutputText?: string;
   }
 
@@ -5635,6 +5647,38 @@ declare namespace V20180717 {
     ExpireTime?: string;
   }
 
+  /** 场景化 AIGC 生图任务信息 */
+  interface SceneAigcImageTask {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 任务状态，取值：PROCESSING：处理中；FINISH：已完成。 */
+    Status?: string;
+    /** 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。 */
+    ErrCode?: number;
+    /** 错误信息。 */
+    Message?: string;
+    /** 任务进度，取值范围 [0-100] 。 */
+    Progress?: number;
+    /** AIGC 生图任务的输入信息。 */
+    Input?: SceneAigcImageTaskInput;
+    /** AIGC 生图任务的输出信息。 */
+    Output?: SceneAigcImageTaskOutput;
+    /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+    /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+  }
+
+  /** 场景化 AIGC 生图任务信息 */
+  interface SceneAigcImageTaskInput {
+    /** 场景化生图参数配置。 */
+    SceneInfo?: AigcImageSceneInfo;
+    /** 输入图片列表。 */
+    FileInfos?: SceneAigcImageTaskInputFileInfo[];
+    /** 场景化生图任务的输出媒体文件配置。 */
+    OutputConfig?: SceneAigcImageOutputConfig;
+  }
+
   /** AIGC场景化生图任务输入文件信息 */
   interface SceneAigcImageTaskInputFileInfo {
     /** 输入的视频文件类型。取值有： File：点播媒体文件； Url：可访问的 URL； */
@@ -5643,6 +5687,32 @@ declare namespace V20180717 {
     FileId?: string;
     /** 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。说明：1. 推荐使用小于7M的图片；2. 图片格式的取值为：jpeg，jpg, png, webp。 */
     Url?: string;
+  }
+
+  /** 场景化 AIGC 生图任务的输出。 */
+  interface SceneAigcImageTaskOutput {
+    /** AIGC 生图任务的输出文件信息。 */
+    FileInfos?: SceneAigcImageTaskOutputFileInfo[];
+  }
+
+  /** 场景化 AIGC 生图任务的输出文件信息。 */
+  interface SceneAigcImageTaskOutputFileInfo {
+    /** 存储模式。取值有： Permanent：永久存储； Temporary：临时存储； */
+    StorageMode?: string;
+    /** 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。当 StorageMode 为 Permanent 时有效。 */
+    MediaName?: string;
+    /** 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。当 StorageMode 为 Permanent 时有效。 */
+    ClassId?: number;
+    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+    ExpireTime?: string;
+    /** 文件类型，例如 mp4、flv 等。 */
+    FileType?: string;
+    /** 媒体文件播放地址。 */
+    FileUrl?: string;
+    /** 媒体文件 ID。当 StorageMode 为 Permanent 时有效。 */
+    FileId?: string;
+    /** 输出视频的元信息。当 StorageMode 为 Permanent 时有效。 */
+    MetaData?: MediaMetaData;
   }
 
   /** 去划痕控制信息 */
@@ -6896,11 +6966,11 @@ declare namespace V20180717 {
   interface CreateAigcVideoTaskRequest {
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId: number;
-    /** 模型名称。取值：Hailuo：海螺；Kling：可灵； Jimeng：即梦；Vidu；GV：Google Veo；OS：OpenAI Sora；Hunyuan：混元；Mingmou：明眸； */
+    /** 模型名称。取值：Hailuo：海螺；Kling：可灵； Jimeng：即梦；Vidu；GV：Google Veo；OS：OpenAI Sora；Hunyuan：混元；Mingmou：明眸； Seedance； */
     ModelName: string;
-    /** 模型版本。取值：当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、O1；当 ModelName 是 Jimeng，可选值为 3.0pro；当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo；当 ModelName 是 GV，可选值为 3.1、3.1-Fast；当 ModelName 是 OS，可选值为 2.0；当 ModelName 是 Hunyuan，可选值为 1.5；当 ModelName 是 Mingmou，可选值为 1.0； */
+    /** 模型版本。取值：当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、O1；当 ModelName 是 Jimeng，可选值为 3.0pro；当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo；当 ModelName 是 GV，可选值为 3.1、3.1-Fast；当 ModelName 是 OS，可选值为 2.0；当 ModelName 是 Hunyuan，可选值为 1.5；当 ModelName 是 Mingmou，可选值为 1.0；当 ModelName 是 Seedance，可选值为 1.5-pro，1.0-pro，1.0-lite-i2v，1.0-pro-fast，其中1.5-pro区分有声、无声，声音参数字段：OutputConfig.AudioGeneration，开启Enabled，关闭Disabled； */
     ModelVersion: string;
-    /** 最多包含三张素材资源图片的列表，用于描述模型在生成视频时要使用的资源图片。支持多图输入的模型：1. GV，使用多图输入时，不可使用LastFrameFileId和LastFrameUrl。2. Vidu，支持多图参考生视频。q2模型1-7张图片，可通过FileInfos里面的ObjectId作为主体id来传入。注意：1. 图片大小不超过10M。2. 支持的图片格式：jpeg、png。 */
+    /** 最多包含三张素材资源图片的列表，用于描述模型在生成视频时要使用的资源图片。首尾帧视频生成：用FileInfos第一张表示首帧（此时FileInfos最多包含一张图片），LastFrameFileId或者LastFrameUrl表示尾帧。支持多图输入的模型：1. GV，使用多图输入时，不可使用LastFrameFileId和LastFrameUrl。2. Vidu，支持多图参考生视频。q2模型1-7张图片，可通过FileInfos里面的ObjectId作为主体id来传入。注意：1. 图片大小不超过10M。2. 支持的图片格式：jpeg、png。 */
     FileInfos?: AigcVideoTaskInputFileInfo[];
     /** 用于作为尾帧画面来生成视频的媒体文件 ID。该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。说明：1. 只支持模型 GV 、Kling、Vidu，其他模型暂不支持。当 ModelName 为 GV 时，如果指定该参数，则需同时指定 FileInfos 作为待生成视频的首帧。当 ModelName 为 Kling 、ModelVersion 为 2.1 并且指定输出分辨率 Resolution 为 1080P 时，才能指定该参数。当 ModelName 为 Vidu、ModelVersion 为 q2-pro、q2-turbo 时，才能指定该参数。2. 图片大小需小于5M。3. 图片格式的取值为：jpeg，jpg, png, webp。 */
     LastFrameFileId?: string;
@@ -8929,7 +8999,7 @@ declare namespace V20180717 {
   }
 
   interface DescribeTaskDetailResponse {
-    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务；ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；ProcessMediaByMPS：MPS 视频处理任务；AigcImageTask：AIGC 生图任务；AigcVideoTask：AIGC 生视频任务。 */
+    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务；ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；ProcessMediaByMPS：MPS 视频处理任务；AigcImageTask：AIGC 生图任务；SceneAigcImageTask：场景化 AIGC 生图任务；AigcVideoTask：AIGC 生视频任务；ImportMediaKnowledge：导入媒体知识任务。 */
     TaskType?: string;
     /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成；ABORTED：已终止。 */
     Status?: string;
@@ -8989,6 +9059,10 @@ declare namespace V20180717 {
     AigcImageTask?: AigcImageTask;
     /** AIGC 生视频任务信息，仅当 TaskType 为 AigcVideoTask，该字段有值。 */
     AigcVideoTask?: AigcVideoTask;
+    /** 媒体导入知识库任务信息，仅当 TaskType 为 ImportMediaKnowledge，该字段有值。 */
+    ImportMediaKnowledge?: ImportMediaKnowledgeTask;
+    /** 场景化 AIGC 生图任务信息，仅当 TaskType 为 SceneAigcImageTask，该字段有值。 */
+    SceneAigcImageTask?: SceneAigcImageTask;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
