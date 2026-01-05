@@ -1548,6 +1548,8 @@ declare interface PermanentResidencePermitInfo {
   HolderNum?: ContentInfo;
   /** 国籍，外国人永久居留证 返回该字段 */
   Nationality?: ContentInfo;
+  /** 英文名示例值：Ming Li */
+  EnName?: ContentInfo;
 }
 
 /** 文本的坐标，以四个顶点坐标表示注意：此字段可能返回 null，表示取不到有效值 */

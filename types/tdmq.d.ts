@@ -510,6 +510,24 @@ declare interface FilterSubscription {
   SubscriptionNames?: string[];
 }
 
+/** 通用集群售卖信息 */
+declare interface GeneralSKU {
+  /** 规格标识 */
+  SkuCode?: string;
+  /** 是否可售卖 */
+  OnSale?: boolean;
+  /** TPS上限 */
+  TpsLimit?: number;
+  /** 主题数免费额度 */
+  TopicNumLimit?: number;
+  /** 主题数上限 */
+  TopicNumUpperLimit?: number;
+  /** 计费项信息 */
+  PriceTags?: PriceTag[];
+  /** 存储节点个数 */
+  NodeCount?: number;
+}
+
 /** 实例节点分布信息 */
 declare interface InstanceNodeDistribution {
   /** 可用区 */
@@ -630,6 +648,18 @@ declare interface PartitionsTopic {
   TotalSize?: string | null;
   /** topic类型描述。 */
   TopicType?: number | null;
+}
+
+/** 价格标签信息，一个完整的价格标签包含计价类别和计费项标签。 */
+declare interface PriceTag {
+  /** 计价名称。枚举值如下：- tps：TPS基础价- stepTps：TPS步长 */
+  Name?: string;
+  /** 计价类别 */
+  Category?: string;
+  /** 计费项标签 */
+  Code?: string;
+  /** 计费项对应的步长数 */
+  Step?: number;
 }
 
 /** 生产者客户端详情 */
@@ -3850,6 +3880,16 @@ declare interface DescribeRocketMQEnvironmentRolesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRocketMQGeneralSKUsRequest {
+}
+
+declare interface DescribeRocketMQGeneralSKUsResponse {
+  /** 商品配置信息 */
+  Skus?: GeneralSKU[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRocketMQGroupsRequest {
   /** 集群ID */
   ClusterId: string;
@@ -5441,6 +5481,8 @@ declare interface Tdmq {
   DescribeRocketMQConsumerConnections(data: DescribeRocketMQConsumerConnectionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQConsumerConnectionsResponse>;
   /** 查询 RocketMQ 角色授权列表 {@link DescribeRocketMQEnvironmentRolesRequest} {@link DescribeRocketMQEnvironmentRolesResponse} */
   DescribeRocketMQEnvironmentRoles(data: DescribeRocketMQEnvironmentRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQEnvironmentRolesResponse>;
+  /** 查询 RocketMQ 通用集群规格列表 {@link DescribeRocketMQGeneralSKUsRequest} {@link DescribeRocketMQGeneralSKUsResponse} */
+  DescribeRocketMQGeneralSKUs(data?: DescribeRocketMQGeneralSKUsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQGeneralSKUsResponse>;
   /** 查询 RocketMQ 消费组列表 {@link DescribeRocketMQGroupsRequest} {@link DescribeRocketMQGroupsResponse} */
   DescribeRocketMQGroups(data: DescribeRocketMQGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQGroupsResponse>;
   /** 平滑迁移：查询Topic迁移状态列表 {@link DescribeRocketMQMigratingTopicListRequest} {@link DescribeRocketMQMigratingTopicListResponse} */

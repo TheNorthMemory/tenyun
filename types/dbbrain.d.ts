@@ -768,6 +768,18 @@ declare interface RedisCostCmd {
   MaxCost?: number;
 }
 
+/** Redis全量Key的聚合信息。 */
+declare interface RedisGlobalKeyInfo {
+  /** 占用内存大小，单位Byte。 */
+  Capacity?: number;
+  /** Key个数。 */
+  Count?: number;
+  /** 剩余过期时间范围的结束时间，当小于0时，代表已过期时间，单位：小时。当RangeMin与RangeMax同时为空时，代表未设置过期时间。当RangeMax为空时，代表剩余过期时间大于等于RangeMin小时。 */
+  RangeMax?: number | null;
+  /** 剩余过期时间范围的起始时间，当小于0时，代表已过期时间，单位：小时。当RangeMin与RangeMax同时为空时，代表未设置过期时间。当RangeMin为空时，代表已过期。 */
+  RangeMin?: number | null;
+}
+
 /** Redis实例内存配置参数 */
 declare interface RedisInstanceConf {
   /** 副本数量 */
@@ -2395,10 +2407,10 @@ declare interface DescribeRedisSlowLogTopSqlsResponse {
 declare interface DescribeRedisTopBigKeysRequest {
   /** 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。 */
   InstanceId: string;
-  /** 查询日期，如2021-05-27，最早可为前30天的日期。 */
-  Date: string;
   /** 服务产品类型，支持值包括 "redis" - 云数据库 Redis。 */
   Product: string;
+  /** 查询某个日期最新的任务，如2021-05-27，最早可为前30天的日期。该参数与AsyncRequestId参数不可同时为空。 */
+  Date?: string;
   /** 排序字段，取值包括Capacity - 内存，ItemCount - 元素数量，默认为Capacity。 */
   SortBy?: string;
   /** key类型筛选条件，默认为不进行筛选，取值包括string, list, set, hash, sortedset, stream。 */
@@ -2409,6 +2421,8 @@ declare interface DescribeRedisTopBigKeysRequest {
   AsyncRequestId?: number;
   /** 分片节点序号列表。当列表为空时，选择所有分片节点。 */
   ShardIds?: number[];
+  /** 是否仅查询未设置过期时间的大Key。当为true时，仅查询未设置过期时间的大Key，默认为false。 */
+  UnExpireKey?: boolean;
 }
 
 declare interface DescribeRedisTopBigKeysResponse {
@@ -2482,6 +2496,26 @@ declare interface DescribeRedisTopKeyPrefixListResponse {
   Items?: RedisPreKeySpaceData[];
   /** 采集时间戳（秒）。 */
   Timestamp?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRedisUnExpiredKeyStatisticsRequest {
+  /** 实例 ID。可通过接口获取。 */
+  InstanceId: string;
+  /** 服务产品类型，支持值包括 "redis" - 云数据库 Redis。 */
+  Product: string;
+  /** 查询某个日期最新的任务，如2021-05-27，最早可为前30天的日期。该参数与AsyncRequestId参数不可同时为空。 */
+  Date?: string;
+  /** 异步任务ID。当为空时，选择最近任务的ID。 */
+  AsyncRequestId?: number;
+  /** 分片节点序号列表。当列表为空时，选择所有分片节点。 */
+  ShardIds?: number[];
+}
+
+declare interface DescribeRedisUnExpiredKeyStatisticsResponse {
+  /** 全量Key的聚合分布信息列表。 */
+  SeriesData?: RedisGlobalKeyInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4321,6 +4355,8 @@ declare interface Dbbrain {
   DescribeRedisTopHotKeys(data: DescribeRedisTopHotKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisTopHotKeysResponse>;
   /** 查询redis实例top key前缀列表 {@link DescribeRedisTopKeyPrefixListRequest} {@link DescribeRedisTopKeyPrefixListResponse} */
   DescribeRedisTopKeyPrefixList(data: DescribeRedisTopKeyPrefixListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisTopKeyPrefixListResponse>;
+  /** 查询redis全量key统计分布 {@link DescribeRedisUnExpiredKeyStatisticsRequest} {@link DescribeRedisUnExpiredKeyStatisticsResponse} */
+  DescribeRedisUnExpiredKeyStatistics(data: DescribeRedisUnExpiredKeyStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedisUnExpiredKeyStatisticsResponse>;
   /** 查询安全审计日志导出文件下载链接 {@link DescribeSecurityAuditLogDownloadUrlsRequest} {@link DescribeSecurityAuditLogDownloadUrlsResponse} */
   DescribeSecurityAuditLogDownloadUrls(data: DescribeSecurityAuditLogDownloadUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityAuditLogDownloadUrlsResponse>;
   /** 查询安全审计日志导出任务列表 {@link DescribeSecurityAuditLogExportTasksRequest} {@link DescribeSecurityAuditLogExportTasksResponse} */

@@ -100,6 +100,16 @@ declare interface AssociatedInstanceInfo {
   CdbId?: string;
 }
 
+/** 关联实例信息 */
+declare interface AttachInsInfo {
+  /** 实例对象可以是cvm类型:ins-ad21xuds1形式;路由表类型:rtb-da12daxd形式;vpc类型:vpc-1dxdad2d形式 */
+  InsId?: string;
+  /** 实例对象名称 */
+  InsName?: string;
+  /** 实例的cidr */
+  Cidr?: string;
+}
+
 /** 封禁列表和放通列表结构体 */
 declare interface BanAndAllowRule {
   /** 规则评论 */
@@ -252,6 +262,46 @@ declare interface CfwNatDnatRule {
   PrivatePort: number;
   /** NAT防火墙转发规则描述。 */
   Description: string;
+}
+
+/** 集群模式防火墙开关数据详情 */
+declare interface ClusterSwitchDetail {
+  /** 实例对象可以是ccnid类型:ccn-ad21xuds形式;nat网关类型:nat-da12daxd形式;ip类型:1.1.1.1形式等 */
+  InsObj?: string;
+  /** 实例对象名称 */
+  ObjName?: string;
+  /** 防火墙类型，ew：vpc间防火墙；nat：nat防火墙；border：互联网边界防火墙 */
+  FwType?: string;
+  /** 资产类型，ccn：ccn实例类型；nat：nat网关类型 */
+  AssetType?: string;
+  /** 地域 */
+  Region?: string;
+  /** 开关状态0 : 关闭1 : 开启2 : 开启中3 : 关闭中4 : 异常 */
+  Status?: number;
+  /** 开关接入模式，1：自动接入；2，手动接入，0：未选择 */
+  SwitchMode?: number;
+  /** 实例对象是否处于非集群接入场景（主备模式） */
+  NonCluster?: number;
+  /** ip版本，0：ipv4；1：ipv6 */
+  IpVersion?: number;
+  /** 关联实例 */
+  AttachIns?: AttachInsInfo[] | null;
+  /** 引流私有网络端点信息 */
+  Endpoints?: EndpointInfo[] | null;
+  /** 入侵防护模式,0:观察;1:拦截;2:严格;3:关闭 */
+  Idpsaction?: number;
+  /** //透明模式开关,0:未开启,1:已开启 */
+  TransEnable?: number;
+  /** 开关状态 0关闭 1开启 */
+  Enable?: number;
+  /** 路由模式：0：多路由表，1：策略路由 */
+  RoutingMode?: number;
+  /** 是否跨租户开关 1是 0不是 */
+  IsPeer?: number;
+  /** 跨租户appid */
+  PeerAppid?: string;
+  /** 跨租户操作状态 1不允许操作 0可以 */
+  PeerStatus?: number;
 }
 
 /** 日志分析的列属性 */
@@ -572,6 +622,18 @@ declare interface EdgeIpSwitch {
   EndpointIp?: string;
   /** 0 : 旁路 1 : 串行 */
   SwitchMode?: number;
+}
+
+/** 私有连接端点信息 */
+declare interface EndpointInfo {
+  /** 引流私有连接端点id */
+  EndpointId?: string;
+  /** 引流VpcId */
+  VpcId?: string;
+  /** 所属地域 */
+  Region?: string;
+  /** 引流Vpc的Cidr */
+  VpcCidr?: string;
 }
 
 /** 企业安全组自动化任务信息 */
@@ -2502,6 +2564,20 @@ declare interface DescribeCcnInstanceRegionStatusResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCcnVpcFwPolicyLimitRequest {
+}
+
+declare interface DescribeCcnVpcFwPolicyLimitResponse {
+  /** 支持的引流策略数量（最外层总条数） */
+  CcnPolicyInterconnectPairLenLimit?: number;
+  /** 单条引流策略中单组的最大配置数量（内层单组总条数） */
+  CcnPolicyGroupLenLimit?: number;
+  /** 接入的实例网段长度（网段数量）限制 */
+  CcnPolicyCidrLenLimit?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCcnVpcFwSwitchRequest {
   /** 云联网ID */
   CcnId: string;
@@ -2538,6 +2614,34 @@ declare interface DescribeCfwInsStatusResponse {
   CfwInsStatus?: CfwInsStatus[] | null;
   /** 0 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterVpcFwSwitchsRequest {
+  /** 需要查询的索引，特定场景使用，可不填 */
+  Index?: string;
+  /** 过滤条件组合 */
+  Filters?: CommonFilter[];
+  /** 每页条数 */
+  Limit?: number;
+  /** 偏移值 */
+  Offset?: number;
+  /** 检索的起始时间，可不传 */
+  StartTime?: string;
+  /** 检索的截止时间，可不传 */
+  EndTime?: string;
+  /** desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值 */
+  Order?: string;
+  /** 排序所用到的字段 */
+  By?: string;
+}
+
+declare interface DescribeClusterVpcFwSwitchsResponse {
+  /** 总条数 */
+  Total?: number;
+  /** 防火墙开关列表 */
+  Data?: ClusterSwitchDetail[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4129,12 +4233,16 @@ declare interface Cfw {
   DescribeCcnAssociatedInstances(data: DescribeCcnAssociatedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnAssociatedInstancesResponse>;
   /** 查询CCN关联传入实例的地域防火墙引流网络部署状态 {@link DescribeCcnInstanceRegionStatusRequest} {@link DescribeCcnInstanceRegionStatusResponse} */
   DescribeCcnInstanceRegionStatus(data: DescribeCcnInstanceRegionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnInstanceRegionStatusResponse>;
+  /** 查询CCN中VPC防火墙接入策略配置时的规则条数限制 {@link DescribeCcnVpcFwPolicyLimitRequest} {@link DescribeCcnVpcFwPolicyLimitResponse} */
+  DescribeCcnVpcFwPolicyLimit(data?: DescribeCcnVpcFwPolicyLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnVpcFwPolicyLimitResponse>;
   /** 查询CCN VPC防火墙开关配置 {@link DescribeCcnVpcFwSwitchRequest} {@link DescribeCcnVpcFwSwitchResponse} */
   DescribeCcnVpcFwSwitch(data: DescribeCcnVpcFwSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnVpcFwSwitchResponse>;
   /** 查询防火墙弹性公网IP {@link DescribeCfwEipsRequest} {@link DescribeCfwEipsResponse} */
   DescribeCfwEips(data: DescribeCfwEipsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfwEipsResponse>;
   /** cfw实例运行状态查询 {@link DescribeCfwInsStatusRequest} {@link DescribeCfwInsStatusResponse} */
   DescribeCfwInsStatus(data?: DescribeCfwInsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfwInsStatusResponse>;
+  /** 查询集群模式Vpc间防火墙开关 {@link DescribeClusterVpcFwSwitchsRequest} {@link DescribeClusterVpcFwSwitchsResponse} */
+  DescribeClusterVpcFwSwitchs(data?: DescribeClusterVpcFwSwitchsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterVpcFwSwitchsResponse>;
   /** 获取入侵防御按钮列表 {@link DescribeDefenseSwitchRequest} {@link DescribeDefenseSwitchResponse} */
   DescribeDefenseSwitch(data?: DescribeDefenseSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefenseSwitchResponse>;
   /** 查询新版安全组下发进度 {@link DescribeEnterpriseSGRuleProgressRequest} {@link DescribeEnterpriseSGRuleProgressResponse} */
