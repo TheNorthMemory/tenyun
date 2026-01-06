@@ -118,6 +118,14 @@ declare interface AlarmWayWebHook {
   WebHooks?: string[];
 }
 
+/** 权限用户项目信息 */
+declare interface AuthInfo {
+  /** 授权给的目标项目id */
+  AuthProjectIds?: string[] | null;
+  /** 授权给的项目下用户列表 */
+  AuthUsers?: string[] | null;
+}
+
 /** 单次补录实例详情 */
 declare interface BackfillInstance {
   /** 任务名称 */
@@ -150,6 +158,18 @@ declare interface BackfillInstanceCollection {
   Items?: BackfillInstance[];
 }
 
+/** 批量操作的结果返回 */
+declare interface BatchOperationOpsDto {
+  /** 批量操作成功数 */
+  SuccessCount?: number;
+  /** 批量操作失败数 */
+  FailedCount?: number;
+  /** 批量操作的总数 */
+  TotalCount?: number;
+  /** 异步操作记录的唯一id */
+  AsyncActionId?: string;
+}
+
 /** 关联绑定的project */
 declare interface BindProject {
   /** 项目id */
@@ -158,6 +178,16 @@ declare interface BindProject {
   ProjectName?: string | null;
   /** 项目展示名称 */
   ProjectDisplayName?: string | null;
+}
+
+/** 工作流执行的业务枚举信息 */
+declare interface BizStateEnumInfoBrief {
+  /** 标签key */
+  LabelKey?: string | null;
+  /** 标签值 */
+  LabelValue?: string | null;
+  /** 标签总数量 */
+  Count?: number | null;
 }
 
 /** 展示任务id和任务名称信息 */
@@ -262,6 +292,16 @@ declare interface CodeFolderNode {
   ParentFolderPath?: string | null;
 }
 
+/** 数据探索文件授权结果 */
+declare interface CodePermissionsResultItem {
+  /** 资源id */
+  Item?: string | null;
+  /** 该资源权限操作是否成功 */
+  Result?: boolean | null;
+  /** 若是创建失败, 提供失败原因 */
+  Reason?: string | null;
+}
+
 /** CodeStudio文件对象操作结果 */
 declare interface CodeStudioFileActionResult {
   /** 成功true，失败false */
@@ -284,6 +324,12 @@ declare interface CodeStudioFolderResult {
   FolderId?: string | null;
 }
 
+/** 用户对CodeStudio文件/文件夹的递归最大权限类型 */
+declare interface CodeStudioMaxPermission {
+  /** 授权权限类型(CAN_VIEW/CAN_RUN/CAN_EDIT/CAN_MANAGE) */
+  PermissionType?: string | null;
+}
+
 /** ColumnInfo */
 declare interface ColumnInfo {
   /** 字段类型 */
@@ -298,6 +344,48 @@ declare interface ColumnInfo {
   Position?: number | null;
   /** 是否为分区字段 */
   IsPartition?: boolean | null;
+}
+
+/** 单条规则操作结果 */
+declare interface CommonQualityOperateResult {
+  /** id */
+  Id?: number | null;
+  /** 名称 */
+  Name?: string | null;
+  /** 文案提示 */
+  Msg?: string | null;
+  /** 操作是否成功 */
+  Success?: boolean | null;
+}
+
+/** 质量检查对比结果 */
+declare interface CompareQualityResult {
+  /** 对比结果项列表 */
+  Items: CompareQualityResultItem[] | null;
+  /** 检测总行数 */
+  TotalRows: number | null;
+  /** 检测通过行数 */
+  PassRows: number | null;
+  /** 检测不通过行数 */
+  TriggerRows: number | null;
+  /** 比较关系 */
+  ComputeExpression?: string | null;
+}
+
+/** 对比结果项 */
+declare interface CompareQualityResultItem {
+  /** 对比结果， 1为真 2为假 */
+  FixResult: number | null;
+  /** 质量sql执行结果 */
+  ResultValue: string | null;
+  /** 阈值列表 */
+  Values: QualityThresholdValue[] | null;
+  /** 比较操作类型 */
+  Operator: string | null;
+  /** 比较类型 */
+  CompareType: number | null;
+  /** 值比较类型 */
+  ValueComputeType: number | null;
 }
 
 /** 创建告警规则响应结果 */
@@ -322,6 +410,12 @@ declare interface CreateFolderResult {
 declare interface CreateProjectResult {
   /** 项目id */
   ProjectId?: string | null;
+}
+
+/** 监控任务 */
+declare interface CreateQualityRuleGroupResultVO {
+  /** 任务创建结构 */
+  RuleGroupResultList?: QualityRuleGroupResult[];
 }
 
 /** 创建资源文件结果 */
@@ -370,6 +464,12 @@ declare interface CreateTaskConfiguration {
   BundleId?: string;
   /** Bundle信息 */
   BundleInfo?: string;
+}
+
+/** 创建任务文件夹结果 */
+declare interface CreateTaskFolderResult {
+  /** 创建成功的文件夹ID。如果创建失败则报错。 */
+  TaskFolderId?: string;
 }
 
 /** 创建任务返回体 */
@@ -438,6 +538,84 @@ declare interface CreateTaskSchedulerConfiguration {
   ExecutionTTLMinute?: number;
   /** 超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1 */
   WaitExecutionTotalTTLMinute?: number;
+}
+
+/** 创建任务基本属性信息 */
+declare interface CreateTriggerTaskBaseAttribute {
+  /** 任务名称 */
+  TaskName: string;
+  /** 任务类型ID：* 26:OfflineSynchronization* 30:Python* 32:DLC SQL* 35:Shell* 38:Shell Form Mode* 46:DLC Spark* 50:DLC PySpark* 130:Branch Node* 131:Merged Node* 132:Notebook* 133:SSH* 137:For-each* 139:DLC Spark Streaming* 140:Run Workflow */
+  TaskTypeId: string;
+  /** 工作流ID */
+  WorkflowId: string;
+  /** 任务负责人ID，默认为当前用户 */
+  OwnerUin?: string;
+  /** 任务描述 */
+  TaskDescription?: string;
+  /** 任务文件夹路径注意：- 路径上不要填写任务节点类型；例如，在 一个名为 wf01 的工作流，“通用” 分类下，现在想要在这个分类下的 tf_01 文件夹下，新建一个 shell 任务；则 填写 /tf_01 即可；- 如果 tf_01 文件夹不存在，则需要先创建这个文件夹（使用 CreateTaskFolder 接口）才能操作成功； */
+  TaskFolderPath?: string;
+}
+
+/** 创建任务配置信息 */
+declare interface CreateTriggerTaskConfiguration {
+  /** 资源组ID： 需要通过 DescribeNormalSchedulerExecutorGroups 获取 ExecutorGroupId */
+  ResourceGroup?: string;
+  /** 代码内容的Base64编码 */
+  CodeContent?: string;
+  /** 任务扩展属性配置列表 */
+  TaskExtConfigurationList?: TaskExtParameter[];
+  /** 集群ID */
+  DataCluster?: string;
+  /** 指定的运行节点 */
+  BrokerIp?: string;
+  /** 资源池队列名称，需要通过 DescribeProjectClusterQueues 获取 */
+  YarnQueue?: string;
+  /** 来源数据源ID, 使用 ; 分隔, 需要通过 DescribeDataSourceWithoutInfo 获取 */
+  SourceServiceId?: string;
+  /** 目标数据源ID, 使用 ; 分隔, 需要通过 DescribeDataSourceWithoutInfo 获取 */
+  TargetServiceId?: string;
+  /** 调度参数 */
+  TaskSchedulingParameterList?: TaskSchedulingParameter[];
+  /** Bundle使用的ID */
+  BundleId?: string;
+  /** Bundle信息 */
+  BundleInfo?: string;
+}
+
+/** 创建任务调度配置信息 */
+declare interface CreateTriggerTaskSchedulerConfiguration {
+  /** 上游依赖的任务数组 */
+  UpstreamDependencyConfigList?: DependencyTriggerTaskBrief[];
+  /** 任务调度优先级 运行优先级 4高 5中 6低 , 默认:6 */
+  RunPriorityType?: number;
+  /** 重试策略 重试等待时间,单位分钟: 默认: 5 */
+  RetryWaitMinute?: number;
+  /** 重试策略 最大尝试次数, 默认: 4 */
+  MaxRetryNumber?: number;
+  /** 超时处理策略 运行耗时超时（单位：分钟）默认为 -1 */
+  ExecutionTTLMinute?: number;
+  /** 超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1 */
+  WaitExecutionTotalTTLMinute?: number;
+  /** 重跑&补录配置, 默认为 ALL; , ALL 运行成功或失败后皆可重跑或补录, FAILURE 运行成功后不可重跑或补录，运行失败后可重跑或补录, NONE 运行成功或失败后皆不可重跑或补录; */
+  AllowRedoType?: string;
+  /** 输出参数数组 */
+  ParamTaskOutList?: OutTaskParameter[];
+  /** 输入参数数组 */
+  ParamTaskInList?: InTaskParameter[];
+  /** 产出登记 */
+  TaskOutputRegistryList?: TaskDataRegistry[];
+}
+
+/** 创建工作流结果 */
+declare interface CreateTriggerWorkflowResult {
+  /** 创建成功后的工作流id */
+  WorkflowId?: string | null;
+}
+
+/** 工作流授权结果 */
+declare interface CreateWorkflowPermissionsResult {
+  /** 实体授权结果，true/false */
+  Status?: boolean;
 }
 
 /** 创建工作流结果 */
@@ -638,9 +816,27 @@ declare interface DeleteFolderResult {
   Status?: boolean;
 }
 
+/** 批量规则操作的返回信息 */
+declare interface DeleteQualityRuleGroupResultVO {
+  /** 总条数 */
+  SumCount?: number | null;
+  /** 成功条数 */
+  SuccessCount?: number | null;
+  /** 失败条数 */
+  FailedCount?: number | null;
+  /** 操作详情 */
+  Results?: CommonQualityOperateResult[] | null;
+}
+
 /** 删除资源文件结果 */
 declare interface DeleteResourceFileResult {
   /** true */
+  Status?: boolean;
+}
+
+/** 删除资源文件夹结果 */
+declare interface DeleteTaskFolderResult {
+  /** 删除状态,true表示成功，false表示失败 */
   Status?: boolean;
 }
 
@@ -648,6 +844,28 @@ declare interface DeleteResourceFileResult {
 declare interface DeleteTaskResult {
   /** 删除状态,true表示成功，false表示失败 */
   Status?: boolean | null;
+}
+
+/** 删除工作流结果 */
+declare interface DeleteTriggerWorkflowResult {
+  /** 删除工作流是否成功 */
+  Status?: boolean | null;
+}
+
+/** 要删除的数据开发授权信息 */
+declare interface DeleteWorkflowPermission {
+  /** 要删除的授权目标类型（用户：user，角色：role，组：group） */
+  PermissionTargetType: string;
+  /** 要删除的授权目标id(userId/roleId) */
+  PermissionTargetId: string;
+  /** 要删除的授权权限类型数组(CAN_VIEW/CAN_RUN/CAN_EDIT/CAN_MANAGE，当前仅支持CAN_MANAGE) */
+  PermissionTypeList: string[];
+}
+
+/** 数据开发权限删除结果 */
+declare interface DeleteWorkflowPermissionsResult {
+  /** 整体删除结果 true/false */
+  Status?: boolean;
 }
 
 /** 删除工作流结果 */
@@ -694,6 +912,12 @@ declare interface DependencyTaskBrief {
   DependencyStrategy?: DependencyStrategyTask | null;
 }
 
+/** 依赖任务信息 */
+declare interface DependencyTriggerTaskBrief {
+  /** 任务ID */
+  TaskId: string | null;
+}
+
 /** 监听事件器 */
 declare interface EventListener {
   /** 事件名 */
@@ -704,6 +928,20 @@ declare interface EventListener {
   EventBroadcastType: string | null;
   /** 扩展信息 */
   PropertiesList?: ParamInfo[] | null;
+}
+
+/** 执行操作结果 */
+declare interface ExecutionActionBrief {
+  /** 操作实体 ID */
+  ItemId?: string | null;
+  /** 操作实体名称 */
+  ItemName?: string | null;
+  /** 操作 ID */
+  ExecutionActionId?: string | null;
+  /** 失败信息 */
+  ErrorMessage?: string | null;
+  /** 操作状态，true：成功，false：失败 */
+  OpStatus?: boolean;
 }
 
 /** ExecutorResourceGroup分页对象 */
@@ -740,6 +978,80 @@ declare interface ExecutorResourceGroupInfo {
   SubNet?: string | null;
   /** 是否自动续费 */
   AutoRenewEnabled?: boolean | null;
+}
+
+/** 数据探索文件授权主体 */
+declare interface ExploreAuthorizationObject {
+  /** 授权资源信息，包含resourceId和resourceType */
+  Resource?: ExploreFileResource | null;
+  /** 授权详情 */
+  AuthorizeSubjects?: ExploreAuthorizeSubject[] | null;
+}
+
+/** 数据探索文件回收策略 */
+declare interface ExploreAuthorizationRecycleObject {
+  /** 文件资源信息 */
+  Resource?: ExploreFileResource | null;
+  /** 授权详情 */
+  RecycleSubjects?: ExploreAuthorizeSubject[] | null;
+}
+
+/** 数据探索文件授权主体 */
+declare interface ExploreAuthorizeSubject {
+  /** 主体类型（用户：user，角色：role，组：group） */
+  SubjectType?: string | null;
+  /** 主体值列表 */
+  SubjectValues?: string[] | null;
+  /** 权限列表 */
+  Privileges?: string[] | null;
+}
+
+/** 数据探索文件权限列表分页 */
+declare interface ExploreFilePermissionsPage {
+  /** 分页页码 */
+  PageNumber?: number | null;
+  /** 分页大小 */
+  PageSize?: number | null;
+  /** 权限列表 */
+  Rows?: ExploreFilePrivilegeItem[] | null;
+  /** 总个数 */
+  TotalCount?: number | null;
+  /** 总分页页码 */
+  TotalPageNumber?: number | null;
+}
+
+/** 探索文件权限详情 */
+declare interface ExploreFilePrivilegeItem {
+  /** 权限点 */
+  Privileges?: string[] | null;
+  /** 用户：user 角色： role 组：group */
+  RoleType?: string | null;
+  /** 用户或角色ID */
+  RoleId?: string | null;
+  /** 授权资源 */
+  Resource?: ExploreFileResource | null;
+  /** 是否可以被删除 */
+  DeleteAble?: boolean | null;
+}
+
+/** 数据探索文件资源 */
+declare interface ExploreFileResource {
+  /** 资源类型，只能是这两种类型: folder, script */
+  ResourceType?: string | null;
+  /** 资源ID：目录id或脚本id */
+  ResourceId?: string | null;
+  /** id全路径，用于递归鉴权 */
+  ResourceIdForPath?: string | null;
+  /** cfs路径 */
+  ResourceCFSPath?: string | null;
+}
+
+/** 通用过滤器 */
+declare interface Filter {
+  /** 过滤字段名称 */
+  Name?: string;
+  /** 过滤值列表 */
+  Values?: string[];
 }
 
 /** 参数传递-引用参数 */
@@ -1090,6 +1402,80 @@ declare interface ListProcessLineagePage {
   TotalCount?: number;
 }
 
+/** 规则组执行结果 */
+declare interface ListQualityRuleGroupExecResult {
+  /** 规则组执行ID */
+  RuleGroupExecId?: number | null;
+  /** 规则组ID */
+  RuleGroupId?: number | null;
+  /** 执行触发类型（1：手动触发， 2：调度事中触发，3：周期调度触发） */
+  TriggerType?: number | null;
+  /** 执行时间 yyyy-MM-dd HH:mm:ss */
+  ExecTime?: string | null;
+  /** 执行状态（1.已提交 2.检测中 3.正常 4.异常） */
+  Status?: number | null;
+  /** 异常规则数 */
+  AlarmRuleCount?: number | null;
+  /** 总规则数 */
+  TotalRuleCount?: number | null;
+  /** 源表负责人 */
+  TableOwnerName?: string | null;
+  /** 源表名称 */
+  TableName?: string | null;
+  /** 表id */
+  TableId?: string | null;
+  /** 数据库id */
+  DatabaseId?: string | null;
+  /** 数据源ID */
+  DatasourceId?: string | null;
+  /** 有无权限 */
+  Permission?: boolean | null;
+  /** 执行详情，调度计划或者关联生产任务ID */
+  ExecDetail?: string | null;
+  /** 实际执行引擎 */
+  EngineType?: string | null;
+  /** 规则执行结果 */
+  RuleExecResultVOList?: QualityRuleExecResult[] | null;
+  /** 数据库名称 */
+  DatabaseName?: string | null;
+  /** 本地规则表id */
+  RuleGroupTableId?: number | null;
+  /** 集群部署类型 */
+  ClusterDeployType?: string | null;
+  /** 实例id */
+  InstanceId?: string | null;
+  /** 数据库所属环境，0.未定义，1.生产 2.开发 */
+  DsEnvType?: number | null;
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 项目名称 */
+  ProjectName?: string | null;
+  /** 实例状态 */
+  InstanceStatus?: string | null;
+  /** 实例运行的开始时间 */
+  StartTime?: string | null;
+  /** 实例运行的结束时间 */
+  FinishTime?: string | null;
+  /** 监控名称 */
+  RuleGroupName?: string | null;
+  /** 判断是否屏蔽监控 0.屏蔽 1.不屏蔽 */
+  RuleGroupExist?: number | null;
+  /** 类目名 */
+  BizCatalogName?: string | null;
+  /** 类目id */
+  BizCatalogId?: string | null;
+  /** 失败原因 */
+  FailMsg?: string | null;
+}
+
+/** 规则组执行结果分页 */
+declare interface ListQualityRuleGroupExecResultPage {
+  /** 记录数 */
+  TotalCount?: number | null;
+  /** 规则组执行结果 */
+  Items?: ListQualityRuleGroupExecResult[] | null;
+}
+
 /** ListSchemaPage */
 declare interface ListSchemaPage {
   /** Schema记录列表 */
@@ -1148,6 +1534,50 @@ declare interface ListTaskVersions {
   PageNumber?: number | null;
 }
 
+/** 查询任务信息分页 */
+declare interface ListTriggerTaskInfo {
+  /** 任务数组 */
+  Items?: TriggerTaskBaseAttribute[] | null;
+  /** 当前请求的数据页数 */
+  PageNumber?: number | null;
+  /** 当前请求的数据页条数 */
+  PageSize?: number | null;
+  /** 满足查询条件的数据总条数 */
+  TotalCount?: number | null;
+  /** 满足查询条件的数据总页数 */
+  TotalPageNumber?: number | null;
+}
+
+/** 查询任务版本分页列表 */
+declare interface ListTriggerTaskVersions {
+  /** 记录列表 */
+  Items?: TriggerTaskVersion[] | null;
+  /** 满足查询条件的数据总条数。 */
+  TotalCount?: number | null;
+  /** 满足查询条件的数据总页数。 */
+  TotalPageNumber?: number | null;
+  /** 当前页记录数 */
+  PageCount?: number | null;
+  /** 当前请求的数据页条数。 */
+  PageSize?: number | null;
+  /** 当前请求的数据页数。 */
+  PageNumber?: number | null;
+}
+
+/** 查询工作流分页列表 */
+declare interface ListTriggerWorkflowInfo {
+  /** 列表item */
+  Items?: TriggerWorkflowInfo[] | null;
+  /** 满足查询条件的数据总页数 */
+  TotalPageNumber?: number | null;
+  /** 当前请求的数据页数 */
+  PageNumber?: number | null;
+  /** 当前请求的数据页条数 */
+  PageSize?: number | null;
+  /** 满足查询条件的数据总条数 */
+  TotalCount?: number | null;
+}
+
 /** 查询工作流分页列表 */
 declare interface ListWorkflowInfo {
   /** 列表item */
@@ -1176,6 +1606,12 @@ declare interface MetricData {
 declare interface ModifyAlarmRuleResult {
   /** 是否更新成功 */
   Status?: boolean;
+}
+
+/** 监控任务 */
+declare interface ModifyQualityRuleGroupResultVO {
+  /** 结果 */
+  Result?: boolean | null;
 }
 
 /** 告警规则监控白名单配置 */
@@ -1362,6 +1798,14 @@ declare interface OpsWorkflows {
   PageNumber?: number | null;
 }
 
+/** 通用排序字段 */
+declare interface OrderField {
+  /** 排序字段名称 */
+  Name: string;
+  /** 排序方向：ASC|DESC */
+  Direction: string;
+}
+
 /** 参数传递-输出参数 */
 declare interface OutTaskParameter {
   /** 参数名 */
@@ -1506,6 +1950,592 @@ declare interface ProjectUsersBrief {
   TotalPageNumber?: number | null;
 }
 
+/** 字段值变量 */
+declare interface QualityColumnValueConfig {
+  /** 字段值key */
+  FieldKey?: string | null;
+  /** 字段值 */
+  FieldValue?: string | null;
+  /** 字段值类型 */
+  FieldDataType?: string | null;
+}
+
+/** 对比规则 */
+declare interface QualityCompareRule {
+  /** 比较条件列表 */
+  Items?: QualityCompareRuleItem[] | null;
+  /** 周期性模板默认周期，单位秒 */
+  CycleStep?: number | null;
+  /** o 表示 或，a 表示 且，数字表示items下标 */
+  ComputeExpression?: string | null;
+}
+
+/** 比较条件 */
+declare interface QualityCompareRuleItem {
+  /** 比较类型 1.固定值 2.波动值 3.数值范围比较 4.枚举范围比较 5.不用比较 */
+  CompareType?: number | null;
+  /** 比较操作类型< <= == => > !=IRLCRO:在区间内(左闭右开)IRLORC:在区间内(左开右闭)IRLCRC:在区间内(左闭右闭)IRLORO:在区间内(左开右开)NRLCRO:不在区间内(左闭右开)NRLORC:不在区间内(左开右闭)NRLCRC:不在区间内(左闭右闭)NRLORO:不在区间内(左开右开) */
+  Operator?: string | null;
+  /** 质量统计值类型 1.绝对值 2.上升 3. 下降 4._C包含 5. N_C不包含 */
+  ValueComputeType?: number | null;
+  /** 比较阈值列表 */
+  ValueList?: QualityThresholdValue[] | null;
+}
+
+/** 字段变量 */
+declare interface QualityFieldConfig {
+  /** 字段key */
+  FieldKey?: string | null;
+  /** 字段值 */
+  FieldValue?: string | null;
+  /** 字段值类型 */
+  FieldDataType?: string | null;
+  /** 字段值变量信息 */
+  ValueConfig?: QualityColumnValueConfig | null;
+}
+
+/** 数据质量生产调度任务业务实体 */
+declare interface QualityProdSchedulerTask {
+  /** 生产调度任务工作流ID */
+  WorkflowId: string | null;
+  /** 生产调度任务Id */
+  TaskId: string | null;
+  /** 生产调度任务名称 */
+  TaskName: string | null;
+  /** 生产调度任务周期类型 */
+  CycleType?: number | null;
+  /** 生产任务类型 */
+  TaskType?: string | null;
+  /** 时区 */
+  ScheduleTimeZone?: string | null;
+  /** 负责人id */
+  InChargeIdList?: string[] | null;
+  /** 负责人name */
+  InChargeNameList?: string[] | null;
+}
+
+/** 数据质量规则 */
+declare interface QualityRule {
+  /** 规则ID */
+  RuleId?: number | null;
+  /** 规则组ID */
+  RuleGroupId?: number | null;
+  /** 数据表Id */
+  TableId?: string | null;
+  /** 规则名称 */
+  Name?: string | null;
+  /** 规则类型 1.系统模版, 2.自定义模版, 3.自定义SQL */
+  Type?: number | null;
+  /** 规则模板Id */
+  RuleTemplateId?: number | null;
+  /** 规则模板概述 */
+  RuleTemplateContent?: string | null;
+  /** 规则所属质量维度 1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性 */
+  QualityDim?: number | null;
+  /** 规则适用的源数据对象类型（1：常量，2：离线表级，3：离线字段级别） */
+  SourceObjectType?: number | null;
+  /** 规则适用的源数据对象类型（1：数值，2：字符串） */
+  SourceObjectDataType?: number | null;
+  /** 源字段详细类型，INT、STRING */
+  SourceObjectDataTypeName?: string | null;
+  /** 源字段名称 */
+  SourceObjectValue?: string | null;
+  /** 检测范围 1.全表, 2.条件扫描 */
+  ConditionType?: number | null;
+  /** 条件扫描WHERE条件表达式 */
+  ConditionExpression?: string | null;
+  /** 自定义SQL */
+  CustomSql?: string | null;
+  /** 报警触发条件 */
+  CompareRule?: QualityCompareRule | null;
+  /** 报警触发级别 1.低, 2.中, 3.高 */
+  AlarmLevel?: number | null;
+  /** 规则描述 */
+  Description?: string | null;
+  /** 规则配置人 */
+  Operator?: string | null;
+  /** 目标库Id */
+  TargetDatabaseId?: string | null;
+  /** 目标库名称 */
+  TargetDatabaseName?: string | null;
+  /** 目标表Id */
+  TargetTableId?: string | null;
+  /** 目标表名称 */
+  TargetTableName?: string | null;
+  /** 目标字段过滤条件表达式 */
+  TargetConditionExpr?: string | null;
+  /** 源字段与目标字段关联条件on表达式 */
+  RelConditionExpr?: string | null;
+  /** 自定义模版sql表达式参数 */
+  FieldConfig?: QualityRuleFieldConfig | null;
+  /** 是否关联多表 */
+  MultiSourceFlag?: boolean | null;
+  /** 是否where参数 */
+  WhereFlag?: boolean | null;
+  /** 模版原始SQL */
+  TemplateSql?: string | null;
+  /** 模版子维度：0.父维度类型,1.一致性: 枚举范围一致性,2.一致性：数值范围一致性,3.一致性：字段数据相关性 */
+  SubQualityDim?: number | null;
+  /** 规则适用的目标数据对象类型（1：常量，2：离线表级，3：离线字段级别） */
+  TargetObjectType?: number | null;
+  /** 规则适用的目标数据对象类型（1：数值，2：字符串） */
+  TargetObjectDataType?: number | null;
+  /** 目标字段详细类型，INT、STRING */
+  TargetObjectDataTypeName?: string | null;
+  /** 目标字段名称 */
+  TargetObjectValue?: string | null;
+  /** 源端对应的引擎类型 */
+  SourceEngineTypes?: number[] | null;
+  /** 表名称 */
+  TableName?: string | null;
+  /** 表负责人名称 */
+  TableOwnerName?: string | null;
+  /** 执行策略信息 */
+  ExecStrategy?: QualityRuleGroupExecStrategy | null;
+  /** 订阅信息 */
+  Subscription?: QualityRuleGroupSubscribe | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 数据源 id */
+  DatasourceId?: number | null;
+  /** 数据库 id */
+  DatabaseId?: string | null;
+  /** 监控是否开启.0false,1true */
+  MonitorStatus?: number | null;
+  /** 触发条件 */
+  TriggerCondition?: string | null;
+  /** 0或者未返回或者null：未定义，1：生产，2：开发 */
+  DsEnvType?: number | null;
+  /** 数据源类型 */
+  DatasourceType?: number | null;
+  /** 模式名称 */
+  SchemaName?: string | null;
+  /** 目标模式名称 */
+  TargetSchemaName?: string | null;
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 项目名称 */
+  ProjectName?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** 数据源名称 */
+  DatasourceName?: string | null;
+  /** 数据库名称 */
+  DatabaseName?: string | null;
+  /** 失败原因 */
+  FailMsg?: string | null;
+  /** 任务类型 */
+  GroupType?: string | null;
+  /** 编排任务id */
+  AspectTaskId?: string | null;
+  /** 数据目录 */
+  CatalogName?: string | null;
+  /** 目标表的数据目录 */
+  TargetCatalogName?: string | null;
+}
+
+/** 规则执行结果 */
+declare interface QualityRuleExecResult {
+  /** 规则执行ID */
+  RuleExecId?: number | null;
+  /** 规则组执行ID */
+  RuleGroupExecId?: number | null;
+  /** 规则组ID */
+  RuleGroupId?: number | null;
+  /** 规则ID */
+  RuleId?: number | null;
+  /** 规则名称 */
+  RuleName?: string | null;
+  /** 规则类型 1.系统模版, 2.自定义模版, 3.自定义SQL */
+  RuleType?: number | null;
+  /** 源字段详细类型，int string */
+  SourceObjectDataTypeName?: string | null;
+  /** 源字段名称 */
+  SourceObjectValue?: string | null;
+  /** 条件扫描WHERE条件表达式 */
+  ConditionExpression?: string | null;
+  /** 检测结果（1:检测通过，2：触发规则，3：检测失败） */
+  ExecResultStatus?: number | null;
+  /** 触发结果，告警发送成功, 阻断任务成功 */
+  TriggerResult?: string | null;
+  /** 对比结果 */
+  CompareResult?: CompareQualityResult | null;
+  /** 模版名称 */
+  TemplateName?: string | null;
+  /** 质量维度 */
+  QualityDim?: number | null;
+  /** 目标表-库表名称 */
+  TargetDBTableName?: string | null;
+  /** 目标表-字段名称 */
+  TargetObjectValue?: string | null;
+  /** 目标表-字段类型 */
+  TargetObjectDataType?: string | null;
+  /** 自定义模版sql表达式参数 */
+  FieldConfig?: QualityRuleFieldConfig | null;
+  /** 源字段与目标字段关联条件on表达式 */
+  RelConditionExpr?: string | null;
+  /** 执行时间 */
+  StartTime?: string | null;
+  /** 1/2/3:低/中/高 */
+  AlarmLevel?: number | null;
+  /** 触发条件 */
+  TriggerCondition?: string | null;
+  /** 任务名称 */
+  RuleGroupName?: string | null;
+  /** 数据源ID */
+  DatasourceId?: string | null;
+  /** 数据源名称 */
+  DatasourceName?: string | null;
+  /** 数据库名称 */
+  DatabaseName?: string | null;
+  /** 模式名称 */
+  SchemaName?: string | null;
+  /** 表名称 */
+  TableName?: string | null;
+  /** 判断是否屏蔽监控 0.屏蔽 1.不屏蔽 */
+  RuleGroupExist?: number | null;
+  /** 数据源类型 */
+  DatasourceType?: number | null;
+  /** 数据表id */
+  RuleGroupTableId?: number | null;
+  /** 监控方式 1.未配置, 2.关联生产调度, 3.离线周期检测 */
+  MonitorType?: number | null;
+  /** 执行结束时间 */
+  FinishTime?: string | null;
+  /** 监控任务类型 */
+  GroupType?: string | null;
+  /** 编排任务ID */
+  AspectTaskId?: string | null;
+  /** 数据目录 */
+  CatalogName?: string | null;
+}
+
+/** 规则变量替换 */
+declare interface QualityRuleFieldConfig {
+  /** where变量 */
+  WhereConfig?: QualityFieldConfig[] | null;
+  /** 库表变量 */
+  TableConfig?: QualityTableConfig[] | null;
+}
+
+/** 任务配置 */
+declare interface QualityRuleGroupConfig {
+  /** 分析类型，可选值：INFERENCE-推理表TIME_SERIES-时序表SNAPSHOT-快照表 */
+  AnalysisType?: string | null;
+  /** 模型检测类型，分析类型为推理表（INFERENCE）时必填，可选值：CLAASSIFICATION-分类REGRESSION-回归 */
+  ModelMonitorType?: string | null;
+  /** 预测列 */
+  PredictColumn?: string | null;
+  /** 预测列类型 */
+  PredictColumnType?: string | null;
+  /** 标签列 */
+  LabelColumn?: string | null;
+  /** 标签列类型 */
+  LabelColumnType?: string | null;
+  /** 模型id列 */
+  ModelIdColumn?: string | null;
+  /** 模型id列类型 */
+  ModelIdColumnType?: string | null;
+  /** 时间戳列 */
+  TimestampColumn?: string | null;
+  /** 时间戳列类型 */
+  TimestampColumnType?: string | null;
+  /** 指标粒度 */
+  Granularity?: number | null;
+  /** 指标粒度单位 */
+  GranularityType?: string | null;
+  /** 基准表 */
+  BaseTable?: string | null;
+  /** 基准库 */
+  BaseDb?: string | null;
+  /** 对比列 */
+  ComparisonColumn?: string | null;
+  /** 对比列类型 */
+  ComparisonColumnType?: string | null;
+  /** 保护组 */
+  ProtectionValue?: string | null;
+  /** 正类值 */
+  PositiveValue?: string | null;
+  /** 特征列 */
+  FeatureColumn?: string | null;
+}
+
+/** 质量监控任务执行策略 */
+declare interface QualityRuleGroupExecStrategy {
+  /** 监控类型 2.关联生产调度, 3.离线周期检测 */
+  MonitorType: number | null;
+  /** 执行资源组ID */
+  ExecutorGroupId: string | null;
+  /** 监控任务名称 */
+  RuleGroupName: string | null;
+  /** 数据库名称 */
+  DatabaseName: string | null;
+  /** 数据源id */
+  DatasourceId: string | null;
+  /** 表名称 */
+  TableName: string | null;
+  /** 监控任务的Id，编辑更新监控任务时必填 */
+  RuleGroupId?: number | null;
+  /** 计算队列，数据源为HIVE、ICEBERG、DLC时必填，数据源为DLC时，该字段填写DLC数据引擎名称 */
+  ExecQueue?: string | null;
+  /** 执行资源组名称 */
+  ExecutorGroupName?: string | null;
+  /** 关联的生产调度任务列表，MonitorType=2时必填 */
+  Tasks?: QualityProdSchedulerTask[] | null;
+  /** 周期开始时间，MonitorType=3时必填 */
+  StartTime?: string | null;
+  /** 周期结束时间，MonitorType=3时必填 */
+  EndTime?: string | null;
+  /** 调度周期类型，MonitorType=3时必填，具体可填值参考：I：按分钟调度H：按小时调度D：按天调度W：按周调度M：按月调度 */
+  CycleType?: string | null;
+  /** 延迟调度时间，MonitorType=3时必填，主要用于调度周期为天/周/月的任务，计量单位为分钟，比如天任务需要延迟到02:00执行，则该字段值为120，表示延迟2小时（120分钟）对于小时/分钟任务，该字段无意义，填固定值0，否则字段校验不通过 */
+  DelayTime?: number | null;
+  /** 间隔，MonitorType=3时必填，表示周期任务间隔时间周/月/天任务可选：1分钟任务可选：10，20，30小时任务可选：1，2，3，4，6，8，12 */
+  CycleStep?: number | null;
+  /** 时间指定，主要用于调度周期为周/月的任务调度周期为周时：含义为指定周几运行，可选多个，英文逗号隔开可填1,2...7，依次代表周日，周一...周六，例如填“1,2”，表示周日、周一执行；调度周期为月时，含义为指定每月的几号运行，可选多个，英文逗号隔开可填1,2,...,31，依次代表1号，2号...31号，例如填“1,2”，表示每月的1号、2号执行 */
+  TaskAction?: string | null;
+  /** 运行的执行引擎，不传时会请求该数据源下默认的执行引擎 */
+  ExecEngineType?: string | null;
+  /** 执行计划 */
+  ExecPlan?: string | null;
+  /** 规则id */
+  RuleId?: number | null;
+  /** 规则名称 */
+  RuleName?: string | null;
+  /** 触发类型，主要用于“关联生产调度”（MonitorType=2）的监控任务，可选值：CYCLE：周期调度MAKE_UP：补录RERUN：重跑 */
+  TriggerTypes?: string[] | null;
+  /** 数据源为DLC时，对应DLC资源组，根据ExecQueue中填的DLC引擎名称，选择对应引擎下的资源组 */
+  DlcGroupName?: string | null;
+  /** schema名称 */
+  SchemaName?: string | null;
+  /** 任务描述 */
+  Description?: string | null;
+  /** 时区，默认为UTC+8 */
+  ScheduleTimeZone?: string | null;
+  /** 任务监控参数 */
+  GroupConfig?: QualityRuleGroupConfig | null;
+  /** 引擎参数 */
+  EngineParam?: string | null;
+  /** 数据目录名称，不填默认为DataLakeCatalog */
+  CatalogName?: string | null;
+}
+
+/** 任务创建结果 */
+declare interface QualityRuleGroupResult {
+  /** 任务id */
+  Id?: number | null;
+  /** 任务名称 */
+  Name?: string | null;
+  /** 监控表id */
+  RuleGroupTableId?: number | null;
+  /** 数据源ID */
+  DatasourceId?: string | null;
+  /** 数据库名称 */
+  DatabaseName?: string | null;
+  /** 模式名称 */
+  SchemaName?: string | null;
+  /** 表名称 */
+  TableName?: string | null;
+  /** 监控类型：1.未配置, 2.关联生产调度, 3.离线周期检测 */
+  MonitorType?: number | null;
+  /** 执行描述 */
+  ExecDetail?: string | null;
+  /** 失败原因 */
+  FailMsg?: string | null;
+  /** 数据目录名称 */
+  CatalogName?: string | null;
+}
+
+/** 数据质量规则组订阅信息 */
+declare interface QualityRuleGroupSubscribe {
+  /** 规则组Id */
+  RuleGroupId?: number | null;
+  /** 订阅接收人列表 */
+  Receivers?: QualitySubscribeReceiver[] | null;
+  /** 订阅方式 1.邮件email 2.短信sms */
+  SubscribeType?: number[] | null;
+  /** 群机器人配置的webhook信息 */
+  WebHooks?: QualitySubscribeWebHook[] | null;
+  /** 规则Id */
+  RuleId?: number | null;
+  /** 规则名称 */
+  RuleName?: string | null;
+  /** 发送对象 */
+  AlarmMessageRule?: string | null;
+}
+
+/** 规则表 */
+declare interface QualityRuleGroupTableV2 {
+  /** id */
+  Id?: number | null;
+  /** 规则组id */
+  RuleGroupId?: number | null;
+  /** 表id */
+  TableId?: string | null;
+  /** 表名称 */
+  TableName?: string | null;
+  /** 模式名称 */
+  SchemaName?: string | null;
+  /** 表负责人id */
+  TableOwnerUserId?: number | null;
+  /** 表负责人名称 */
+  TableOwnerName?: string | null;
+  /** 数据源id */
+  DatasourceId?: string | null;
+  /** 数据源名称 */
+  DatasourceName?: string | null;
+  /** 数据库名称 */
+  DatabaseId?: string | null;
+  /** 数据库名称 */
+  DatabaseName?: string | null;
+  /** 数据源类型 */
+  DatasourceType?: number | null;
+  /** 实例id */
+  InstanceId?: string | null;
+  /** 监控数量 */
+  RuleGroupCount?: number | null;
+  /** 规则数量 */
+  RuleCount?: number | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** 生效监控数量 */
+  EnableRuleGroupCount?: number | null;
+  /** 数据目录名称 */
+  CatalogName?: string | null;
+}
+
+/** 规则组分页 */
+declare interface QualityRuleGroupsTableVO {
+  /** 记录数 */
+  TotalCount?: number | null;
+  /** 监控对象列表 */
+  Items?: QualityRuleGroupTableV2[] | null;
+}
+
+/** 数据质量规则分页 */
+declare interface QualityRulePage {
+  /** 记录数 */
+  TotalCount?: number | null;
+  /** 规则列表 */
+  Items?: QualityRule[] | null;
+}
+
+/** 规则模版 */
+declare interface QualityRuleTemplate {
+  /** 规则模版ID */
+  RuleTemplateId?: number;
+  /** 规则模版名称 */
+  Name?: string;
+  /** 规则模版描述 */
+  Description?: string;
+  /** 模版类型（1：系统模版，2：自定义） */
+  Type?: number;
+  /** 规则适用的源数据对象类型（1：常量，2：离线表级，3：离线字段级别） */
+  SourceObjectType?: number;
+  /** 规则适用的源数据对象类型（1：数值，2：字符串） */
+  SourceObjectDataType?: number;
+  /** 规则模版源侧内容，区分引擎，JSON 结构 */
+  SourceContent?: string | null;
+  /** 源数据适用类型 */
+  SourceEngineTypes?: number[] | null;
+  /** 规则所属质量维度（1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性） */
+  QualityDim?: number | null;
+  /** 规则支持的比较方式类型（1：固定值比较，大于、小于，大于等于等 2：波动值比较，绝对值、上升、下降） */
+  CompareType?: number | null;
+  /** 引用次数 */
+  CitationCount?: number | null;
+  /** 创建人id */
+  UserId?: number | null;
+  /** 创建人昵称 */
+  UserName?: string | null;
+  /** 更新时间yyyy-MM-dd HH:mm:ss */
+  UpdateTime?: string | null;
+  /** 是否添加where参数 */
+  WhereFlag?: boolean | null;
+  /** 是否关联多个库表 */
+  MultiSourceFlag?: boolean | null;
+  /** 自定义模板SQL表达式 */
+  SqlExpression?: string | null;
+  /** 模版子维度，0.父维度类型,1.一致性: 枚举范围一致性,2.一致性：数值范围一致性,3.一致性：字段数据相关性 */
+  SubQualityDim?: number | null;
+  /** sql表达式解析对象 */
+  ResolvedSqlExpression?: QualitySqlExpression | null;
+  /** 支持的数据源类型 */
+  DatasourceTypes?: number[] | null;
+  /** 创建人IdStr */
+  UserIdStr?: string | null;
+}
+
+/** RuleTemplatePage 结果 */
+declare interface QualityRuleTemplatePage {
+  /** 记录数 */
+  TotalCount?: number;
+  /** 模版列表 */
+  Items?: QualityRuleTemplate[];
+}
+
+/** 数据质量自定义规则时的sql表达式解析对象 */
+declare interface QualitySqlExpression {
+  /** sql表达式表名 */
+  TableExpressions?: QualitySqlExpressionTable[] | null;
+  /** sql表达式字段名 */
+  ParamExpressions?: string[] | null;
+  /** 新增模型检测类系统模板sql中占位符集合 */
+  SystemTemplateExpressions?: string[] | null;
+}
+
+/** 数据质量自定义规则时的sql表达式解析表对象 */
+declare interface QualitySqlExpressionTable {
+  /** sql表达式表名 */
+  TableExpression?: string | null;
+  /** sql表达式字段名 */
+  ColumnExpression?: string[] | null;
+}
+
+/** 订阅接收人 */
+declare interface QualitySubscribeReceiver {
+  /** 接收人Uin */
+  ReceiverUserId?: number | null;
+  /** 接收人名称 */
+  ReceiverName?: string | null;
+  /** 接收人Uin */
+  ReceiverUserIdStr?: string | null;
+}
+
+/** 群机器人订阅配置 */
+declare interface QualitySubscribeWebHook {
+  /** 群机器人类型，当前支持飞书 */
+  HookType?: string | null;
+  /** 群机器人webhook地址，配置方式参考https://cloud.tencent.com/document/product/1254/70736 */
+  HookAddress?: string | null;
+}
+
+/** 规则表变量替换 */
+declare interface QualityTableConfig {
+  /** 数据库Id */
+  DatabaseId?: string | null;
+  /** 数据库名称 */
+  DatabaseName?: string | null;
+  /** 表Id */
+  TableId?: string | null;
+  /** 表名称 */
+  TableName?: string | null;
+  /** 表Key */
+  TableKey?: string | null;
+  /** 字段变量 */
+  FieldConfig?: QualityFieldConfig[] | null;
+}
+
+/** 数据质量阈值 */
+declare interface QualityThresholdValue {
+  /** 阈值类型 1.低阈值 2.高阈值 3.普通阈值 4.枚举值 */
+  ValueType?: number | null;
+  /** 阈值 */
+  Value?: string | null;
+}
+
 /** 离线集成对账告警规则 */
 declare interface ReconciliationStrategyInfo {
   /** 离线告警规则类型reconciliationFailure： 离线对账失败告警reconciliationOvertime： 离线对账任务运行超时告警(需配置超时时间)reconciliationMismatch： 离线对账不一致条数告警(需配置不一致条数阀值) */
@@ -1602,6 +2632,24 @@ declare interface ResourceFolder {
   FolderPath?: string;
   /** 文件夹名称 */
   FolderName?: string;
+}
+
+/** 资源文件夹详情 */
+declare interface ResourceFolderDetail {
+  /** 资源文件夹ID */
+  FolderId?: string;
+  /** 创建人ID */
+  CreateUserUin?: string;
+  /** 创建人名称 */
+  CreateUserName?: string;
+  /** 文件夹路径 */
+  FolderPath?: string;
+  /** 文件夹名称 */
+  FolderName?: string;
+  /** 父文件夹绝对路径,不包含文件名夹名 */
+  ParentFolderPath?: string;
+  /** 项目id */
+  ProjectId?: string;
 }
 
 /** 资源文件夹分页 */
@@ -1762,6 +2810,16 @@ declare interface SQLScriptConfig {
 declare interface SQLStopResult {
   /** 是否成功 */
   Status?: boolean | null;
+}
+
+/** 任务调度变量参数 */
+declare interface SchedulingParameter {
+  /** 参数名 */
+  ParamKey?: string | null;
+  /** 参数值 */
+  ParamValue?: string | null;
+  /** 拓展参数json */
+  ExtProperties?: string | null;
 }
 
 /** Schema信息 */
@@ -1998,6 +3056,52 @@ declare interface TaskExtParameter {
   ParamKey: string | null;
   /** 参数值 */
   ParamValue: string | null;
+}
+
+/** 任务文件夹信息 */
+declare interface TaskFolder {
+  /** 项目ID */
+  ProjectId?: string | null;
+  /** 文件夹ID */
+  TaskFolderId?: string | null;
+  /** 文件夹绝对路径 */
+  TaskFolderPath?: string | null;
+  /** 创建人ID */
+  CreateUserUin?: string | null;
+}
+
+/** 任务文件夹详细信息 */
+declare interface TaskFolderDetail {
+  /** 项目ID */
+  ProjectId?: string | null;
+  /** 文件夹ID */
+  TaskFolderId?: string | null;
+  /** 文件夹绝对路径 */
+  TaskFolderPath?: string | null;
+  /** 创建人ID */
+  CreateUserUin?: string | null;
+  /** 父文件夹绝对路径 */
+  ParentTaskFolderPath?: string | null;
+  /** 文件夹名称 */
+  TaskFolderName?: string | null;
+  /** 工作流ID */
+  WorkflowId?: string | null;
+  /** 任务文件夹类型| 任务文件夹类型取值 | 任务文件夹类型界面对应名称 || ---------------- | ------------------------ || ETL | 集成任务 || EMR | EMR || DLC | DLC || SETATS | SETATS || TDSQL | TDSQL || TCHOUSE | TCHOUSE || GENERAL | 通用 || TI_ONE | TI-ONE机器学习 || ACROSS_WORKFLOWS | 跨工作流 | */
+  TaskFolderType?: string | null;
+}
+
+/** 任务文件夹分页 */
+declare interface TaskFolderPage {
+  /** 数据页数，大于等于1 */
+  PageNumber?: number | null;
+  /** 每页显示的数据条数，最小为10条，最大为200 条 */
+  PageSize?: number | null;
+  /** 文件夹总数 */
+  TotalCount?: number | null;
+  /** 总页数 */
+  TotalPageNumber?: number | null;
+  /** 文件夹列表 */
+  Items?: TaskFolder[] | null;
 }
 
 /** 调度任务实例实体 */
@@ -2342,6 +3446,538 @@ declare interface TrendData {
   Value?: number;
 }
 
+/** 查询任务上游依赖详情分页 */
+declare interface TriggerDependencyConfigPage {
+  /** 满足查询条件的数据总条数。 */
+  TotalCount?: number | null;
+  /** 满足查询条件的数据总页数。 */
+  TotalPageNumber?: number | null;
+  /** 当前请求的数据页数。 */
+  PageNumber?: number | null;
+  /** 当前请求的数据页条数。 */
+  PageSize?: number | null;
+  /** 分页数据 */
+  Items?: TriggerTaskDependDto[] | null;
+}
+
+/** 任务对象 */
+declare interface TriggerTask {
+  /** 任务基本属性 */
+  TriggerTaskBaseAttribute: TriggerTaskBaseAttribute | null;
+  /** 任务配置 */
+  TriggerTaskConfiguration: TriggerTaskConfiguration | null;
+  /** 任务调度配置 */
+  TriggerTaskSchedulerConfiguration: TriggerTaskSchedulerConfiguration | null;
+}
+
+/** 任务基本属性信息 */
+declare interface TriggerTaskBaseAttribute {
+  /** 任务ID */
+  TaskId: string | null;
+  /** 任务类型ID：- 26:OfflineSynchronization- 30:Python- 32:DLC SQL- 35:Shell- 38:Shell Form Mode- 46:DLC Spark- 50:DLC PySpark- 130:Branch Node- 131:Merged Node- 132:Notebook- 133:SSH- 137:For-each- 139:DLC Spark Streaming- 140:Run Workflow */
+  TaskTypeId: number | null;
+  /** 工作流ID */
+  WorkflowId: string | null;
+  /** 任务名称 */
+  TaskName?: string | null;
+  /** 最近一次保存版本号 */
+  TaskLatestVersionNo?: string | null;
+  /** 最近一次提交的版本号 */
+  TaskLatestSubmitVersionNo?: string | null;
+  /** 工作流名称 */
+  WorkflowName?: string | null;
+  /** 任务状态：* N: 新建* Y: 调度中 */
+  Status?: string | null;
+  /** 任务最新提交状态，任务是否已经提交：true/false */
+  Submit?: boolean | null;
+  /** 任务创建时间，示例：2022-02-12 11:13:41 */
+  CreateTime?: string | null;
+  /** 最后更新时间，示例：2025-08-13 16:34:06 */
+  LastUpdateTime?: string | null;
+  /** 最后更新人名称 */
+  LastUpdateUserName?: string | null;
+  /** 最后运维时间 */
+  LastOpsTime?: string | null;
+  /** 最后运维人名称 */
+  LastOpsUserName?: string | null;
+  /** 任务负责人ID */
+  OwnerUin?: string | null;
+  /** 任务描述 */
+  TaskDescription?: string | null;
+  /** 最近一次更新用户ID */
+  UpdateUserUin?: string | null;
+  /** 创建用户ID */
+  CreateUserUin?: string | null;
+  /** 任务文件夹路径注意：路径上不要填写任务节点类型；例如，在 一个名为 wf01 的工作流，“通用” 分类下，现在想要在这个分类下的 tf_01 文件夹下，新建一个 shell 任务；则 填写 /tf_01 即可；如果 tf_01 文件夹不存在，则需要先创建这个文件夹（使用 CreateTaskFolder 接口）才能操作成功； */
+  TaskFolderPath?: string | null;
+}
+
+/** 任务概要信息 */
+declare interface TriggerTaskBrief {
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 项目名称 */
+  ProjectName?: string | null;
+  /** 工作流id */
+  WorkflowId?: string | null;
+  /** 工作流名称 */
+  WorkflowName?: string | null;
+  /** 任务id */
+  TaskId?: string | null;
+  /** 任务名称 */
+  TaskName?: string | null;
+  /** 任务类型 */
+  TaskType?: string | null;
+  /** 责任人user UIN */
+  UserUinInCharge?: string | null;
+  /** 责任人名称 */
+  UserNameInCharge?: string | null;
+  /** 文件夹ID */
+  FolderId?: string | null;
+  /** 文件夹名称 */
+  FolderName?: string | null;
+  /** 任务类型ID */
+  TaskTypeId?: number | null;
+  /** 任务状态 */
+  ExecutionState?: string | null;
+  /** 运行开始时间 */
+  ExecutionStartTime?: string | null;
+}
+
+/** 任务配置信息 */
+declare interface TriggerTaskConfiguration {
+  /** 代码内容的Base64编码 */
+  CodeContent?: string | null;
+  /** 任务扩展属性配置列表 */
+  TaskExtConfigurationList?: TaskExtParameter[] | null;
+  /** 集群ID */
+  DataCluster?: string | null;
+  /** 指定的运行节点 */
+  BrokerIp?: string | null;
+  /** 资源池队列名称，需要通过 DescribeProjectClusterQueues 获取 */
+  YarnQueue?: string | null;
+  /** 来源数据源ID, 需要通过 DescribeDataSourceWithoutInfo 获取 */
+  SourceServiceId?: string | null;
+  /** 来源数据源类型, 需要通过 DescribeDataSourceWithoutInfo 获取 */
+  SourceServiceType?: string | null;
+  /** 来源数据源名称, 需要通过 DescribeDataSourceWithoutInfo 获取 */
+  SourceServiceName?: string | null;
+  /** 目标数据源ID, 需要通过 DescribeDataSourceWithoutInfo 获取 */
+  TargetServiceId?: string | null;
+  /** 目标数据源类型, 需要通过 DescribeDataSourceWithoutInfo 获取 */
+  TargetServiceType?: string | null;
+  /** 目标数据源名称, 需要通过 DescribeDataSourceWithoutInfo 获取 */
+  TargetServiceName?: string | null;
+  /** 资源组ID： 需要通过 DescribeNormalSchedulerExecutorGroups 获取 ExecutorGroupId */
+  ResourceGroup?: string | null;
+  /** 资源组名称： 需要通过 DescribeNormalSchedulerExecutorGroups 获取 ExecutorGroupName */
+  ResourceGroupName?: string | null;
+  /** 调度参数 */
+  TaskSchedulingParameterList?: TaskSchedulingParameter[] | null;
+  /** Bundle使用的ID */
+  BundleId?: string | null;
+  /** Bundle信息 */
+  BundleInfo?: string | null;
+}
+
+/** 工作流任务概要信息 */
+declare interface TriggerTaskDAGBrief {
+  /** 任务信息合集 */
+  TriggerTasks?: TriggerTaskBrief[] | null;
+  /** 任务连接信息合集 */
+  TriggerTaskLinks?: TriggerTaskLinkBrief[] | null;
+}
+
+/** 依赖的工作流调度任务信息 */
+declare interface TriggerTaskDependDto {
+  /** 任务Id */
+  TaskId?: string | null;
+  /** 任务名称 */
+  TaskName?: string | null;
+  /** 工作流id */
+  WorkflowId?: string | null;
+  /** 工作流名称 */
+  WorkflowName?: string | null;
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 任务状态:- Y: 运行- N: 新建 */
+  Status?: string | null;
+  /** 任务类型id */
+  TaskTypeId?: number | null;
+  /** 任务类型描述 - 20 : 通用数据同步 - 25 : ETLTaskType - 26 : ETLTaskType - 30 : python - 31 : pyspark - 34 : hivesql - 35 : shell - 36 : sparksql - 21 : jdbcsql - 32 : dlc - 33 : ImpalaTaskType - 40 : CDWTaskType - 41 : kettle - 42 : TCHouse-X - 43 : TCHouse-X SQL - 46 : dlcsparkTaskType - 47 : TiOneMachineLearningTaskType - 48 : Trino - 50 : DLCPyspark - 23 : TencentDistributedSQL - 39 : spark - 92 : MRTaskType - 38 : ShellScript - 70 : HiveSQLScrip - 130 : 分支 - 131 : 归并 - 132 : Notebook探索 - 133 : SSH节点 - 134 : StarRocks - 137 : For-each - 10000 : 自定义业务通用 */
+  TaskTypeDesc?: string | null;
+  /** 负责人 */
+  OwnerUin?: string | null;
+}
+
+/** 任务链接概要信息 */
+declare interface TriggerTaskLinkBrief {
+  /** 连接ID */
+  LinkId?: string | null;
+  /** 所属工作流ID */
+  WorkflowId?: string | null;
+  /** 所属工作流版本ID */
+  WorkflowVersionId?: string | null;
+  /** 上游任务ID */
+  UpstreamTaskId?: string | null;
+  /** 下游任务ID */
+  DownstreamTaskId?: string | null;
+}
+
+/** 工作流调度模式下的任务运行概要信息 */
+declare interface TriggerTaskRunBrief {
+  /** 任务运行ID */
+  ExecutionId?: string | null;
+  /** 执行状态，运行失败:FAILED、运行成功:SUCCESS、等待中:PENDING、跳过运行:SKIP、运行中:RUNNING */
+  ExecutionState?: string | null;
+  /** 项目ID */
+  ProjectId?: string | null;
+  /** 工作流ID */
+  WorkflowId?: string | null;
+  /** 工作流运行ID */
+  WorkflowExecutionId?: string | null;
+  /** 任务 ID */
+  TaskId?: string | null;
+  /** 任务类型 */
+  TaskType?: string | null;
+  /** 任务版本 */
+  TaskVersionId?: string | null;
+  /** 触发类型 */
+  TriggerType?: string | null;
+  /** 等待时长，单位秒 */
+  WaitTime?: string | null;
+  /** 所属资源组 */
+  ResourceGroup?: string | null;
+  /** 错误码 */
+  ErrorCode?: string | null;
+  /** 运行账号 */
+  ExecuteUserUin?: string | null;
+  /** 创建人 ID */
+  CreaterUin?: string | null;
+  /** 执行平台执行 ID */
+  JobId?: string | null;
+  /** 创建时间戳 */
+  CreateTime?: string | null;
+  /** 更新时间戳 */
+  UpdateTime?: string | null;
+  /** 依赖任务完成时间 */
+  DependenceFinishedTime?: string | null;
+  /** 任务下发执行平台时间 */
+  QueueStartTime?: string | null;
+  /** 开始等待资源时间 */
+  PendingStartTime?: string | null;
+  /** 运行开始时间 */
+  ExecutionStartTime?: string | null;
+  /** 运行结束时间 */
+  ExecutionEndTime?: string | null;
+  /** 排队时间 */
+  QueueCostTime?: string | null;
+  /** 运行时间 */
+  ExecutionTime?: string | null;
+  /** 总花费时间 */
+  AllCostTime?: string | null;
+  /** 时区 */
+  TimeZone?: string | null;
+  /** 依赖上游任务 ID 列表 */
+  DependOnList?: string[] | null;
+  /** 运行参数 */
+  RunParams?: string | null;
+  /** 任务扩展信息，包含脚本路径 */
+  TaskTypeExtensions?: string | null;
+  /** 重试次数，为 0 则表示首次运行 */
+  RetryTimes?: number | null;
+  /** 左侧坐标 */
+  LeftCoordinate?: number | null;
+  /** 顶部坐标 */
+  TopCoordinate?: number | null;
+  /** 资源组 ID */
+  ResourceGroupId?: string | null;
+  /** 错误码描述 */
+  ErrorCodeStr?: string | null;
+  /** 创建人 UIN */
+  CreateUin?: string | null;
+  /** 下发执行平台时间 */
+  IssueTime?: string | null;
+  /** 任务名称 */
+  TaskName?: string | null;
+  /** 工作流名称 */
+  WorkflowName?: string | null;
+  /** 运行人名称 */
+  ExecuteUserName?: string | null;
+  /** 重跑次数 */
+  RerunTimes?: number | null;
+  /** 是否是最新一次运行 */
+  IsLatestExecution?: boolean | null;
+  /** 任务运行状态 */
+  TaskExecutionState?: string | null;
+  /** 周期类型 */
+  CycleType?: string | null;
+  /** 责任人名称 */
+  UserNameInCharge?: string | null;
+  /** 责任人id */
+  UserUinInCharge?: string | null;
+  /** 资源组名称 */
+  ResourceGroupName?: string | null;
+  /** 时区 */
+  Timezone?: string | null;
+  /** 文件夹id */
+  FolderId?: string | null;
+  /** 文件夹名称 */
+  FolderName?: string | null;
+  /** 项目名称 */
+  ProjectName?: string | null;
+  /** 任务类型id */
+  TaskTypeId?: number | null;
+  /** 工作流运行参数 */
+  WorkflowParams?: string | null;
+  /** 是否支持重跑 */
+  SupportRerun?: boolean | null;
+  /** 工作流运行状态 */
+  WorkflowExecutionState?: string | null;
+  /** 任务执行结果 */
+  ExecutionResult?: string | null;
+}
+
+/** 任务调度配置信息 */
+declare interface TriggerTaskSchedulerConfiguration {
+  /** 上游依赖数组 */
+  UpstreamDependencyConfigList?: DependencyTriggerTaskBrief[] | null;
+  /** 任务调度优先级 运行优先级 4高 5中 6低 , 默认:6 */
+  RunPriorityType?: number | null;
+  /** 重试策略 重试等待时间,单位分钟: 默认: 5 */
+  RetryWaitMinute?: number | null;
+  /** 重试策略 最大尝试次数, 默认: 4 */
+  MaxRetryNumber?: number | null;
+  /** 超时处理策略 运行耗时超时（单位：分钟）默认为 -1 */
+  ExecutionTTLMinute?: number | null;
+  /** 超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1 */
+  WaitExecutionTotalTTLMinute?: number | null;
+  /** 重跑&补录配置, 默认为 ALL; , ALL 运行成功或失败后皆可重跑或补录, FAILURE 运行成功后不可重跑或补录，运行失败后可重跑或补录, NONE 运行成功或失败后皆不可重跑或补录; */
+  AllowRedoType?: string | null;
+  /** 输出参数数组 */
+  ParamTaskOutList?: OutTaskParameter[] | null;
+  /** 输入参数数组 */
+  ParamTaskInList?: InTaskParameter[] | null;
+  /** 产出登记 */
+  TaskOutputRegistryList?: TaskDataRegistry[] | null;
+}
+
+/** 任务版本列表信息 */
+declare interface TriggerTaskVersion {
+  /** 保存时间 */
+  CreateTime?: string | null;
+  /** 版本号 */
+  VersionNum?: string | null;
+  /** 创建人 */
+  CreateUserUin?: string | null;
+  /** 保存版本id */
+  VersionId?: string | null;
+  /** 版本描述信息 */
+  VersionRemark?: string | null;
+  /** 审批状态（只有提交版本有） */
+  ApproveStatus?: string | null;
+  /** 生产状态（只有提交版本有） */
+  Status?: string | null;
+  /** 审批人（只有提交版本有） */
+  ApproveUserUin?: string | null;
+}
+
+/** 任务版本列表信息 */
+declare interface TriggerTaskVersionDetail {
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 版本号 */
+  VersionNum?: string | null;
+  /** 版本创建人 */
+  CreateUserUin?: string | null;
+  /** 保存版本Id */
+  VersionId?: string | null;
+  /** 版本描述信息 */
+  VersionRemark?: string | null;
+  /** 审批状态（只有提交版本有） */
+  ApproveStatus?: string | null;
+  /** 生产状态（只有提交版本有） */
+  ApproveTime?: string | null;
+  /** 审批人Id */
+  ApproveUserUin?: string | null;
+  /** 版本的任务详情 */
+  Task?: TriggerTask | null;
+}
+
+/** 工作流概要信息 */
+declare interface TriggerWorkflowBrief {
+  /** 项目ID */
+  ProjectId?: string | null;
+  /** 工作ID */
+  WorkflowId?: string | null;
+  /** 工作流名称 */
+  WorkflowName?: string | null;
+  /** 任务数量 */
+  TaskCount?: number | null;
+  /** 文件夹ID */
+  FolderId?: string | null;
+  /** 文件夹名称 */
+  FolderName?: string | null;
+  /** 调度配置 */
+  WorkflowTriggerConfig?: WorkflowTriggerConfig | null;
+  /** 责任人 */
+  UserNameInCharge?: string | null;
+  /** 责任人ID */
+  UserUinInCharge?: string | null;
+  /** 工作流参数 */
+  WorkflowParams?: string;
+}
+
+/** 查询工作流详细信息 */
+declare interface TriggerWorkflowDetail {
+  /** 工作流名称 */
+  WorkflowName?: string | null;
+  /** 责任人ID */
+  OwnerUin?: string | null;
+  /** 创建人ID */
+  CreateUserUin?: string | null;
+  /** 工作流参数数组 */
+  WorkflowParams?: ParamInfo[] | null;
+  /** 统一调度参数 */
+  TriggerWorkflowSchedulerConfigurations?: WorkflowTriggerConfig[] | null;
+  /** 工作流描述 */
+  WorkflowDesc?: string | null;
+  /** 工作流所属路径 */
+  Path?: string | null;
+  /** BundleId项 */
+  BundleId?: string | null;
+  /** BundleInfo项 */
+  BundleInfo?: string | null;
+  /** 通用参数 */
+  GeneralTaskParams?: WorkflowGeneralTaskParam[] | null;
+  /** Trigger 状态 启动ACTIVE，暂停PAUSED */
+  SchedulerStatus?: string | null;
+}
+
+/** 获取工作流的列表信息item */
+declare interface TriggerWorkflowInfo {
+  /** 工作流ID */
+  WorkflowId?: string | null;
+  /** 工作流名称 */
+  WorkflowName?: string | null;
+  /** 负责人ID */
+  OwnerUin?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 最新修改时间 */
+  ModifyTime?: string | null;
+  /** 最后更新人ID */
+  UpdateUserUin?: string | null;
+  /** 工作流描述 */
+  WorkflowDesc?: string | null;
+  /** 创建人ID */
+  CreateUserUin?: string | null;
+}
+
+/** 工作流列表查询 */
+declare interface TriggerWorkflowResult {
+  /** 总记录数 */
+  TotalCount?: number | null;
+  /** 页数 */
+  TotalPageNumber?: number | null;
+  /** 页码 */
+  PageNumber?: number | null;
+  /** 页大小 */
+  PageSize?: number | null;
+  /** 工作流信息集合 */
+  Items?: TriggerWorkflowBrief[] | null;
+}
+
+/** 工作流运行概要信息 */
+declare interface TriggerWorkflowRunBrief {
+  /** 用户AppId */
+  AppId?: string | null;
+  /** 项目ID */
+  ProjectId?: string | null;
+  /** 工作流名称 */
+  WorkflowName?: string | null;
+  /** 工作流ID */
+  WorkflowId?: string | null;
+  /** 工作流运行ID */
+  ExecutionId?: string | null;
+  /** 触发器ID */
+  TriggerId?: string | null;
+  /** 触发方式:调度触发Scheduler、手动触发ManualTrigger、事件触发Event */
+  TriggerType?: string | null;
+  /** 工作流触发时间 */
+  CreateTime?: string | null;
+  /** 执行开始时间戳 */
+  ExecutionStartTime?: string | null;
+  /** 执行结束时间戳 */
+  ExecutionEndTime?: string | null;
+  /** 运行时长，单位秒 */
+  ExecutionCostTime?: string | null;
+  /** 并发排队花费时间，单位秒 */
+  QueueCostTime?: string | null;
+  /** 等待资源花费时间，单位秒 */
+  PendingCostTime?: string | null;
+  /** 执行状态，运行失败:FAILED、运行成功:SUCCESS、等待中:PENDING、跳过运行:SKIPED、运行中:RUNNING */
+  ExecutionState?: string | null;
+  /** 运行用户UIN */
+  ExecuteUserUin?: string | null;
+  /** 运行用户名称 */
+  ExecuteUserName?: string | null;
+  /** 错误码 */
+  ErrorCodeStr?: string | null;
+  /** 运行参数 */
+  WorkflowParams?: string | null;
+  /** 工作流版本信息ID */
+  WorkflowVersionId?: string | null;
+  /** 是否支持重跑 */
+  SupportRerun?: boolean | null;
+  /** 重跑次数 */
+  RerunTimes?: number | null;
+  /** 运行的任务范围,逗号分隔的任务ID列表 */
+  SelectedTaskIds?: string[] | null;
+  /** 等待并发开始时间 */
+  PendingStartTime?: string | null;
+  /** 排队等待开始时间 */
+  QueueStartTime?: string | null;
+  /** 运行结束时间 */
+  EndTime?: string | null;
+  /** 文件夹ID */
+  FolderId?: string | null;
+  /** 文件夹名称 */
+  FolderName?: string | null;
+  /** 计划调度时间 */
+  PlannedSchedulingTime?: string | null;
+  /** 周期类型 */
+  CycleType?: string | null;
+  /** 责任人名称 */
+  UserNameInCharge?: string | null;
+  /** 责任人ID */
+  UserUinInCharge?: string | null;
+}
+
+/** 查询工作流结果 */
+declare interface TriggerWorkflowRunResult {
+  /** 总记录数 */
+  TotalCount?: number | null;
+  /** 页数 */
+  TotalPageNumber?: number | null;
+  /** 页码 */
+  PageNumber?: number | null;
+  /** 页大小 */
+  PageSize?: number | null;
+  /** 工作流运行以及相关任务运行信息集合 */
+  Items?: TriggerWorkflowRunBrief[] | null;
+}
+
+/** 工作流任务运行详情 */
+declare interface TriggerWorkflowTaskRunDetailBrief {
+  /** 工作流运行信息 */
+  TriggerWorkflowRun?: TriggerWorkflowRunBrief;
+  /** 任务运行信息 */
+  TriggerTaskRuns?: TriggerTaskRunBrief[];
+  /** 业务状态枚举信息 */
+  BizStateEnumInfos?: BizStateEnumInfoBrief[];
+}
+
 /** 更新文件夹结果 */
 declare interface UpdateFolderResult {
   /** 更新状态,true表示更新成功，false表示更新失败 */
@@ -2366,6 +4002,18 @@ declare interface UpdateTaskBaseAttribute {
   TaskFolderPath?: string;
 }
 
+/** 更新任务基本属性信息 */
+declare interface UpdateTaskBaseAttributePart {
+  /** 任务名称 */
+  TaskName?: string;
+  /** 任务负责人ID */
+  OwnerUin?: string;
+  /** 任务描述 */
+  TaskDescription?: string;
+  /** 注意：- 路径上不要填写任务节点类型；例如，在 一个名为 wf01 的工作流，“通用” 分类下，现在想要在这个分类下的 tf_01 文件夹下，新建一个 shell 任务；则 填写 /tf_01 即可；- 如果 tf_01 文件夹不存在，则需要先创建这个文件夹（使用 CreateTaskFolder 接口）才能操作成功； */
+  TaskFolderPath?: string;
+}
+
 /** 更新任务对象入参 */
 declare interface UpdateTaskBrief {
   /** 任务基本属性 */
@@ -2374,6 +4022,22 @@ declare interface UpdateTaskBrief {
   TaskConfiguration: TaskConfiguration;
   /** 任务调度配置 */
   TaskSchedulerConfiguration: TaskSchedulerConfiguration;
+}
+
+/** 更新文件夹结果 */
+declare interface UpdateTaskFolderResult {
+  /** 更新状态,true表示更新成功，false表示更新失败 */
+  Status?: boolean;
+}
+
+/** 更新任务对象入参 */
+declare interface UpdateTaskPart {
+  /** 任务基本属性 */
+  TaskBaseAttribute?: UpdateTaskBaseAttributePart;
+  /** 任务配置 */
+  TaskConfiguration?: TaskConfiguration;
+  /** 任务调度配置 */
+  TaskSchedulerConfiguration?: TaskSchedulerConfiguration;
 }
 
 /** 更新任务返回体 */
@@ -2386,6 +4050,74 @@ declare interface UpdateTaskResult {
 declare interface UpdateTasksOwner {
   /** 修改任务责任人结果 */
   Status?: boolean;
+}
+
+/** 更新任务基本属性信息 */
+declare interface UpdateTriggerTaskBaseAttribute {
+  /** 任务名称 */
+  TaskName: string;
+  /** 任务负责人ID */
+  OwnerUin: string;
+  /** 任务描述 */
+  TaskDescription: string;
+  /** 注意：- 路径上不要填写任务节点类型；例如，在 一个名为 wf01 的工作流，“通用” 分类下，现在想要在这个分类下的 tf_01 文件夹下，新建一个 shell 任务；则 填写 /tf_01 即可；- 如果 tf_01 文件夹不存在，则需要先创建这个文件夹（使用 CreateTaskFolder 接口）才能操作成功； */
+  TaskFolderPath?: string;
+}
+
+/** 更新任务基本属性信息 */
+declare interface UpdateTriggerTaskBaseAttributePart {
+  /** 任务名称 */
+  TaskName?: string;
+  /** 任务负责人ID */
+  OwnerUin?: string;
+  /** 任务描述 */
+  TaskDescription?: string;
+}
+
+/** 更新任务对象入参 */
+declare interface UpdateTriggerTaskBrief {
+  /** 任务基本属性 */
+  TriggerTaskBaseAttribute: UpdateTriggerTaskBaseAttribute;
+  /** 任务配置 */
+  TriggerTaskConfiguration: TriggerTaskConfiguration;
+  /** 任务调度配置 */
+  TriggerTaskSchedulerConfiguration: TriggerTaskSchedulerConfiguration;
+}
+
+/** 更新任务对象入参 */
+declare interface UpdateTriggerTaskPart {
+  /** 任务基本属性 */
+  TriggerTaskBaseAttribute?: UpdateTriggerTaskBaseAttributePart;
+  /** 任务配置 */
+  TriggerTaskConfiguration?: TriggerTaskConfiguration;
+  /** 任务调度配置 */
+  TriggerTaskSchedulerConfiguration?: TriggerTaskSchedulerConfiguration;
+}
+
+/** 查询工作流详细信息 */
+declare interface UpdateTriggerWorkflowPartially {
+  /** 工作流名称 */
+  WorkflowName?: string;
+  /** 责任人ID */
+  OwnerUin?: string;
+  /** 工作流参数数组 */
+  WorkflowParams?: ParamInfo[];
+  /** 统一调度参数 */
+  TriggerWorkflowSchedulerConfigurations?: WorkflowTriggerConfig[];
+  /** 工作流描述 */
+  WorkflowDesc?: string;
+  /** BundleId项 */
+  BundleId?: string;
+  /** BundleInfo项 */
+  BundleInfo?: string;
+  /** 通用参数 */
+  GeneralTaskParams?: WorkflowGeneralTaskParam[];
+}
+
+/** 更新工作流结果 */
+declare interface UpdateTriggerWorkflowResult {
+  /** 更新工作流结果 */
+  Status?: boolean | null;
 }
 
 /** 更新工作流结果 */
@@ -2430,6 +4162,22 @@ declare interface WorkflowFolder {
   CreateUserUin?: string | null;
 }
 
+/** 文件夹详细信息 */
+declare interface WorkflowFolderDetail {
+  /** 项目ID */
+  ProjectId?: string;
+  /** 文件夹ID */
+  FolderId?: string;
+  /** 文件夹绝对路径 */
+  FolderPath?: string;
+  /** 创建人ID */
+  CreateUserUin?: string | null;
+  /** 父文件夹绝对路径 */
+  ParentFolderPath?: string;
+  /** 文件夹名称 */
+  FolderName?: string;
+}
+
 /** 资源文件分页 */
 declare interface WorkflowFolderPage {
   /** 数据页数，大于等于1 */
@@ -2442,6 +4190,14 @@ declare interface WorkflowFolderPage {
   TotalPageNumber?: number;
   /** 文件夹列表 */
   Items?: WorkflowFolder[];
+}
+
+/** 工作流SPARK_SQL参数 */
+declare interface WorkflowGeneralTaskParam {
+  /** 通用任务参数类型,目前只支持SPARK_SQL */
+  Type?: string | null;
+  /** 通用任务参数内容, 不同参数用;分割 */
+  Value?: string | null;
 }
 
 /** 获取工作流的列表信息item */
@@ -2464,6 +4220,36 @@ declare interface WorkflowInfo {
   WorkflowDesc?: string | null;
   /** 创建人ID */
   CreateUserUin?: string | null;
+}
+
+/** 用户对工作流文件夹的递归最大权限类型 */
+declare interface WorkflowMaxPermission {
+  /** 授权权限类型(CAN_VIEW/CAN_RUN/CAN_EDIT/CAN_MANAGE，当前仅支持CAN_MANAGE) */
+  PermissionType?: string | null;
+}
+
+/** 数据开发授权信息 */
+declare interface WorkflowPermission {
+  /** 授权目标类型（用户：user，角色：role） */
+  PermissionTargetType: string | null;
+  /** 授权目标id数组(userId/roleId) */
+  PermissionTargetId: string | null;
+  /** 授权权限类型数组(CAN_VIEW/CAN_RUN/CAN_EDIT/CAN_MANAGE，当前仅支持CAN_MANAGE) */
+  PermissionTypeList: string[] | null;
+}
+
+/** 数据开发分页的权限信息 */
+declare interface WorkflowPermissionPage {
+  /** 数据页数，大于等于1 */
+  PageNumber?: number;
+  /** 每页显示的数据条数，最小为10条，最大为200 条 */
+  PageSize?: number;
+  /** 授权数据总数 */
+  TotalCount?: number;
+  /** 总页数 */
+  TotalPageNumber?: number;
+  /** 授权信息列表 */
+  Items?: WorkflowPermission[];
 }
 
 /** 工作流统一调度出参 */
@@ -2528,6 +4314,36 @@ declare interface WorkflowSchedulerConfigurationInfo {
   CalendarId?: string;
 }
 
+/** 工作流调度配置 */
+declare interface WorkflowTriggerConfig {
+  /** 触发方式，- 定时触发：TIME_TRIGGER- 持续运行：CONTINUE_RUN- 文件到达：FILE_ARRIVAL注意：- TIME_TRIGGER 和 CONTINUE_RUN 模式下，SchedulerStatus、SchedulerTimeZone、StartTime、EndTime、ConfigMode、CycleType、CrontabExpression 必填；- FILE_ARRIVAL 模式下，FileArrivalPath、TriggerMinimumIntervalSecond、TriggerWaitTimeSecond 必填； */
+  TriggerMode: string | null;
+  /** WorkflowTriggerConfig转换成Json格式，对账使用 */
+  ExtraInfo?: string | null;
+  /** 调度时区 */
+  ScheduleTimeZone?: string | null;
+  /** 调度生效时间 */
+  StartTime?: string | null;
+  /** 调度结束时间 */
+  EndTime?: string | null;
+  /** 配置方式，常规：COMMON，CRON表达式：CRON_EXPRESSION */
+  ConfigMode?: string | null;
+  /** 周期类型：支持的类型为ONEOFF_CYCLE: 一次性YEAR_CYCLE: 年MONTH_CYCLE: 月WEEK_CYCLE: 周DAY_CYCLE: 天HOUR_CYCLE: 小时MINUTE_CYCLE: 分钟CRONTAB_CYCLE: crontab表达式类型 */
+  CycleType?: string | null;
+  /** cron表达式 */
+  CrontabExpression?: string | null;
+  /** triggerId, uuid */
+  TriggerId?: string | null;
+  /** 文件到达模式下	存储系统中的监听路径 */
+  FileArrivalPath?: string | null;
+  /** 文件到达模式下	触发最短间隔时间（单位：秒） */
+  TriggerMinimumIntervalSecond?: number | null;
+  /** 文件到达模式下	触发等待时间（单位：秒） */
+  TriggerWaitTimeSecond?: number | null;
+  /** Trigger 状态 启动ACTIVE，暂停PAUSED */
+  SchedulerStatus?: string | null;
+}
+
 declare interface AddCalcEnginesToProjectRequest {
   /** 修改的项目ID */
   ProjectId: string;
@@ -2550,6 +4366,22 @@ declare interface AssociateResourceGroupToProjectRequest {
 declare interface AssociateResourceGroupToProjectResponse {
   /** 输出 */
   Data?: ResourceStatus | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AuthorizeDataSourceRequest {
+  /** 数据源ID */
+  DataSourceId: string;
+  /** 授权给的目标项目id */
+  AuthProjectId?: string;
+  /** 授权项目下用户列表，格式为：项目id_用户id与AuthProjectId参数只能选填一个当授权给多个对象时，项目id必须一致 */
+  AuthUsers?: string[];
+}
+
+declare interface AuthorizeDataSourceResponse {
+  /** 是否成功 */
+  Data?: DataSourceStatus | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2586,6 +4418,20 @@ declare interface CreateCodeFolderRequest {
 declare interface CreateCodeFolderResponse {
   /** 成功true，失败false */
   Data?: CodeStudioFolderResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCodePermissionsRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 权限操作对象 */
+  AuthorizePermissionObjects: ExploreAuthorizationObject[];
+}
+
+declare interface CreateCodePermissionsResponse {
+  /** 授权结果列表 */
+  Data?: CodePermissionsResultItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2716,6 +4562,20 @@ declare interface CreateProjectResponse {
   RequestId?: string;
 }
 
+declare interface CreateQualityRuleGroupRequest {
+  /** 任务参数 */
+  RuleGroupExecStrategyBOList: QualityRuleGroupExecStrategy[];
+  /** 项目ID */
+  ProjectId: string;
+}
+
+declare interface CreateQualityRuleGroupResponse {
+  /** 是否更新成功 */
+  Data?: CreateQualityRuleGroupResultVO | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateResourceFileRequest {
   /** 项目ID */
   ProjectId: string;
@@ -2826,6 +4686,26 @@ declare interface CreateSQLScriptResponse {
   RequestId?: string;
 }
 
+declare interface CreateTaskFolderRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 父文件夹绝对路径，如/abc/de，如果是根目录则传/ */
+  ParentTaskFolderPath: string;
+  /** 要创建的文件夹名字 */
+  TaskFolderName: string;
+  /** 任务文件夹类型| 任务文件夹类型取值 | 任务文件夹类型界面对应名称 || ---------------- | ------------------------ || ETL | 集成任务 || EMR | EMR || DLC | DLC || SETATS | SETATS || TDSQL | TDSQL || TCHOUSE | TCHOUSE || GENERAL | 通用 || TI_ONE | TI-ONE机器学习 || ACROSS_WORKFLOWS | 跨工作流 | */
+  TaskFolderType: string;
+  /** 工作流ID */
+  WorkflowId: string;
+}
+
+declare interface CreateTaskFolderResponse {
+  /** 创建文件夹结果，如果创建失败则报错。 */
+  Data?: CreateTaskFolderResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateTaskRequest {
   /** 项目ID */
   ProjectId: string;
@@ -2844,6 +4724,54 @@ declare interface CreateTaskResponse {
   RequestId?: string;
 }
 
+declare interface CreateTriggerTaskRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 任务基本属性 */
+  TriggerTaskBaseAttribute: CreateTriggerTaskBaseAttribute;
+  /** 任务配置 */
+  TriggerTaskConfiguration: CreateTriggerTaskConfiguration;
+  /** 任务调度配置 */
+  TriggerTaskSchedulerConfiguration: CreateTriggerTaskSchedulerConfiguration;
+}
+
+declare interface CreateTriggerTaskResponse {
+  /** 任务ID */
+  Data?: CreateTaskResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateTriggerWorkflowRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 工作流名称 */
+  WorkflowName: string;
+  /** 所属文件夹路径 */
+  ParentFolderPath: string;
+  /** 工作流描述 */
+  WorkflowDesc?: string;
+  /** 工作流负责人ID */
+  OwnerUin?: string;
+  /** 工作流参数 */
+  WorkflowParams?: ParamInfo[];
+  /** 统一调度信息 */
+  TriggerWorkflowSchedulerConfigurations?: WorkflowTriggerConfig[];
+  /** BundleId项 */
+  BundleId?: string;
+  /** Bundle信息 */
+  BundleInfo?: string;
+  /** 通用参数配置 */
+  GeneralTaskParams?: WorkflowGeneralTaskParam[];
+}
+
+declare interface CreateTriggerWorkflowResponse {
+  /** 返回工作流ID */
+  Data?: CreateTriggerWorkflowResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateWorkflowFolderRequest {
   /** 项目ID */
   ProjectId: string;
@@ -2856,6 +4784,24 @@ declare interface CreateWorkflowFolderRequest {
 declare interface CreateWorkflowFolderResponse {
   /** 创建文件夹结果，如果创建失败则报错。 */
   Data?: CreateFolderResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateWorkflowPermissionsRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 授权实体ID */
+  EntityId: string;
+  /** 授权实体类型,folder/workflow */
+  EntityType: string;
+  /** 授权信息数组 */
+  PermissionList: WorkflowPermission[];
+}
+
+declare interface CreateWorkflowPermissionsResponse {
+  /** 实体授权结果 */
+  Data?: CreateWorkflowPermissionsResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2918,6 +4864,34 @@ declare interface DeleteCodeFolderResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCodePermissionsRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 回收的权限列表 */
+  RecyclePolicySet?: ExploreAuthorizationRecycleObject[];
+}
+
+declare interface DeleteCodePermissionsResponse {
+  /** 权限回收结果 */
+  Data?: CodePermissionsResultItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDataBackfillPlanAsyncRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 补录计划id */
+  DataBackfillPlanId: string;
+}
+
+declare interface DeleteDataBackfillPlanAsyncResponse {
+  /** 删除执行计划返回的异步响应 */
+  Data?: OpsAsyncResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteDataSourceRequest {
   /** 项目id */
   ProjectId: string;
@@ -2966,6 +4940,34 @@ declare interface DeleteProjectMemberRequest {
 }
 
 declare interface DeleteProjectMemberResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteQualityRuleGroupRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 监控任务id */
+  RuleGroupIdList: number[];
+}
+
+declare interface DeleteQualityRuleGroupResponse {
+  /** 批量删除操作的具体执行结果 */
+  Data?: DeleteQualityRuleGroupResultVO | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteQualityRuleRequest {
+  /** 质量规则ID */
+  RuleId: number;
+  /** 项目ID */
+  ProjectId: string;
+}
+
+declare interface DeleteQualityRuleResponse {
+  /** 是否删除成功 */
+  Data?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3038,6 +5040,22 @@ declare interface DeleteSQLScriptResponse {
   RequestId?: string;
 }
 
+declare interface DeleteTaskFolderRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 工作流ID */
+  WorkflowId: string;
+  /** 文件夹ID，可通过ListTaskFolders接口获取 */
+  TaskFolderId: string;
+}
+
+declare interface DeleteTaskFolderResponse {
+  /** 删除结果 */
+  Data?: DeleteTaskFolderResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteTaskRequest {
   /** 项目Id */
   ProjectId: string;
@@ -3056,6 +5074,38 @@ declare interface DeleteTaskResponse {
   RequestId?: string;
 }
 
+declare interface DeleteTriggerTaskRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 任务ID和VirtualTaskId选填一个 */
+  TaskId: string;
+  /** 任务操作是否消息通知下游任务责任人true：通知false：不通知不传默认false */
+  OperateInform?: boolean;
+  /** 任务删除方式true：不针对下游任务实例进行强制失败false：针对下游任务实例进行强制失败不传默认false */
+  DeleteMode?: boolean;
+}
+
+declare interface DeleteTriggerTaskResponse {
+  /** 是否删除成功 */
+  Data?: DeleteTaskResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteTriggerWorkflowRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 工作流id */
+  WorkflowId: string;
+}
+
+declare interface DeleteTriggerWorkflowResponse {
+  /** 是否删除成功 */
+  Data?: DeleteTriggerWorkflowResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteWorkflowFolderRequest {
   /** 项目ID */
   ProjectId: string;
@@ -3070,6 +5120,24 @@ declare interface DeleteWorkflowFolderResponse {
   RequestId?: string;
 }
 
+declare interface DeleteWorkflowPermissionsRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 授权实体ID */
+  EntityId: string;
+  /** 授权实体类型,folder/workflow */
+  EntityType: string;
+  /** 删除权限数组 */
+  DeletePermissionList: DeleteWorkflowPermission[];
+}
+
+declare interface DeleteWorkflowPermissionsResponse {
+  /** 资源删除结果 */
+  Data?: DeleteWorkflowPermissionsResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteWorkflowRequest {
   /** 项目Id */
   ProjectId: string;
@@ -3080,6 +5148,18 @@ declare interface DeleteWorkflowRequest {
 declare interface DeleteWorkflowResponse {
   /** 是否删除成功 */
   Data?: DeleteWorkflowResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDataSourceAuthorityRequest {
+  /** 对象唯一ID */
+  Id: number;
+}
+
+declare interface DescribeDataSourceAuthorityResponse {
+  /** 数据源权限对象 */
+  Data?: AuthInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3210,6 +5290,36 @@ declare interface GetDataSourceResponse {
   RequestId?: string;
 }
 
+declare interface GetMyCodeMaxPermissionRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 授权资源唯一id，文件夹id或文件id、 */
+  ResourceId: string;
+}
+
+declare interface GetMyCodeMaxPermissionResponse {
+  /** 用户对CodeStudio文件/文件夹的递归最大权限类型 */
+  Data?: CodeStudioMaxPermission;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetMyWorkflowMaxPermissionRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 授权实体ID */
+  EntityId: string;
+  /** 授权实体类型,folder/workflow */
+  EntityType: string;
+}
+
+declare interface GetMyWorkflowMaxPermissionResponse {
+  /** 当前用户对实体资源的递归最大权限类型 */
+  Data?: WorkflowMaxPermission | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetOpsAlarmRuleRequest {
   /** 项目id */
   ProjectId: string;
@@ -3266,6 +5376,22 @@ declare interface GetOpsTaskResponse {
   RequestId?: string;
 }
 
+declare interface GetOpsTriggerWorkflowRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 工作流ID */
+  WorkflowId: string;
+  /** 工作流执行ID */
+  WorkflowExecutionId?: string;
+}
+
+declare interface GetOpsTriggerWorkflowResponse {
+  /** 工作流任务信息 */
+  Data?: TriggerTaskDAGBrief;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetOpsWorkflowRequest {
   /** 项目Id */
   ProjectId: string;
@@ -3302,6 +5428,20 @@ declare interface GetResourceFileRequest {
 declare interface GetResourceFileResponse {
   /** 资源文件详情 */
   Data?: ResourceFile;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetResourceFolderRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 文件夹id */
+  FolderId: string;
+}
+
+declare interface GetResourceFolderResponse {
+  /** 资源文件夹信息 */
+  Data?: ResourceFolderDetail | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3392,6 +5532,22 @@ declare interface GetTaskCodeResponse {
   RequestId?: string;
 }
 
+declare interface GetTaskFolderRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 工作流ID */
+  WorkflowId: string;
+  /** 文件夹ID */
+  TaskFolderId: string;
+}
+
+declare interface GetTaskFolderResponse {
+  /** 文件夹详情 */
+  Data?: TaskFolderDetail | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetTaskInstanceLogRequest {
   /** **项目ID** */
   ProjectId: string;
@@ -3458,6 +5614,110 @@ declare interface GetTaskVersionResponse {
   RequestId?: string;
 }
 
+declare interface GetTriggerTaskCodeRequest {
+  /** 所属项目id */
+  ProjectId: string;
+  /** 任务Id */
+  TaskId: string;
+}
+
+declare interface GetTriggerTaskCodeResponse {
+  /** 获取任务代码结果 */
+  Data?: TaskCodeResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetTriggerTaskRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 任务ID */
+  TaskId: string;
+}
+
+declare interface GetTriggerTaskResponse {
+  /** 任务详情 */
+  Data?: TriggerTask | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetTriggerTaskRunRequest {
+  /** 工作空间 ID */
+  ProjectId: string;
+  /** 任务运行 ID */
+  TaskExecutionId: string;
+}
+
+declare interface GetTriggerTaskRunResponse {
+  /** 工作流任务运行列表分页结果 */
+  Data?: TriggerTaskRunBrief;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetTriggerTaskVersionRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 任务ID */
+  TaskId: string;
+  /** 提交版本ID，不填默认拿最新提交版本 */
+  VersionId?: string;
+}
+
+declare interface GetTriggerTaskVersionResponse {
+  /** 版本详情 */
+  Data?: TriggerTaskVersionDetail | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetTriggerWorkflowRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 工作流ID 通过ListWorkflows接口获取 */
+  WorkflowId: string;
+}
+
+declare interface GetTriggerWorkflowResponse {
+  /** 工作流详细信息 */
+  Data?: TriggerWorkflowDetail | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetTriggerWorkflowRunRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 工作流执行ID */
+  WorkflowExecutionId: string;
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 排序条件 */
+  OrderFields?: OrderField[];
+}
+
+declare interface GetTriggerWorkflowRunResponse {
+  /** 工作流任务信息 */
+  Data?: TriggerWorkflowTaskRunDetailBrief;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetWorkflowFolderRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 文件夹id */
+  FolderId: string;
+}
+
+declare interface GetWorkflowFolderResponse {
+  /** 文件夹详情 */
+  Data?: WorkflowFolderDetail | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetWorkflowRequest {
   /** 项目ID */
   ProjectId: string;
@@ -3496,6 +5756,26 @@ declare interface KillTaskInstancesAsyncRequest {
 declare interface KillTaskInstancesAsyncResponse {
   /** 批量中止操作的返回的异步id, 可以在接口GetAsyncJob获取具体执行详情 */
   Data?: OpsAsyncResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface KillTriggerWorkflowRunsRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 工作流ID */
+  WorkflowId: string;
+  /** 指定要停止的工作流执行ID */
+  WorkflowExecutionIdList?: string[];
+  /** 当指定的工作流运行为空时，是否全部终止正在运行的工作流执行 */
+  All?: boolean;
+  /** 当指定的工作流运行为空时，是否仅停止等待中的工作流运行 */
+  Pending?: boolean;
+}
+
+declare interface KillTriggerWorkflowRunsResponse {
+  /** 工作流运行操作结果 */
+  Data?: ExecutionActionBrief[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3558,6 +5838,26 @@ declare interface ListCodeFolderContentsRequest {
 declare interface ListCodeFolderContentsResponse {
   /** 结果 */
   Data?: CodeFolderNode[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListCodePermissionsRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 页码，默认1 */
+  PageNumber: number;
+  /** 返回数量，默认为20，最大值为100。要求500、1000或者更大 */
+  PageSize: number;
+  /** 授权资源 */
+  Resource: ExploreFileResource;
+  /** 用户筛选条件 */
+  Users?: string[];
+}
+
+declare interface ListCodePermissionsResponse {
+  /** 权限列表 */
+  Data?: ExploreFilePermissionsPage;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3704,6 +6004,24 @@ declare interface ListDownstreamTasksResponse {
   RequestId?: string;
 }
 
+declare interface ListDownstreamTriggerTasksRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 任务ID */
+  TaskId: string;
+  /** 分页页码 */
+  PageNumber?: number;
+  /** 分页大小 */
+  PageSize?: number;
+}
+
+declare interface ListDownstreamTriggerTasksResponse {
+  /** 下游依赖详情 */
+  Data?: TriggerDependencyConfigPage | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListLineageRequest {
   /** 实体唯一ID */
   ResourceUniqueId: string;
@@ -3798,6 +6116,26 @@ declare interface ListOpsTasksRequest {
 declare interface ListOpsTasksResponse {
   /** 任务列表 */
   Data?: ListOpsTasksPage;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListOpsTriggerWorkflowsRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 页码 */
+  PageNumber?: number;
+  /** 页大小 */
+  PageSize?: number;
+  /** 过滤参数,工作流名称或ID查询名称：Keyword,工作流ID查询名称：WorkflowId,文件夹查询名称：FolderId,负责人查询名称：InChargeUin */
+  Filters?: Filter[];
+  /** 排序字段，排序字段名称 如下 任务数：TaskCount */
+  OrderFields?: OrderField[];
+}
+
+declare interface ListOpsTriggerWorkflowsResponse {
+  /** 工作流查询结果 */
+  Data?: TriggerWorkflowResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3914,6 +6252,86 @@ declare interface ListProjectsRequest {
 declare interface ListProjectsResponse {
   /** 项目列表 */
   Data?: ProjectBrief;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListQualityRuleGroupExecResultsByPageRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 分页序号，默认1 */
+  PageNumber?: number;
+  /** 分页大小，默认10 */
+  PageSize?: number;
+  /** 过滤条件，支持的过滤条件如下：1. GroupType描述：规则组类型，标识规则组所属的分类。取值：DEFAULT - 默认类型；WORKFLOW_NODE - 编排空间工作流节点类型2. InstanceId描述：规则组执行实例ID。取值：字符串3. ParentInstanceId描述：父实例ID。取值：字符串4. LifeCycleRunNum描述：生命周期运行号。取值：字符串5. InstanceStatus描述：实例状态。质量侧的实例状态，一个状态对应调度侧多个状态，具体参考取值说明取值：等待运行 - ["INITIAL", "EVENT_LISTENING", "DEPENDENCE", "ALLOCATED", "LAUNCHED", "BEFORE_ASPECT", "ISSUED"]；运行中 - ["RUNNING", "AFTER_ASPECT", "WAITING_AFTER_ASPECT"]失败 - ["FAILED", "EXPIRED", "KILL", "KILLING", "PENDING"]成功 - ["COMPLETED"]6. DatasourceId描述：数据源ID。取值：字符串7. DatasourceType描述：数据源类型。取值：1 - MYSQL；2 - HIVE；3 - DLC；4 - GBASE；5 - TCHouse-P/CDW；6 - ICEBERG；7 - DORIS；8 - TCHouse-D；9 - EMR_STARROCKS；10 - TBDS_STARROCKS；11 - TCHouse-X8. DatabaseName描述：数据库名称。取值：字符串9. DatabaseId描述：数据库ID。取值：字符串10. SchemaName描述：Schema名称。取值：字符串11. ReceiverFlag描述：是否为当前登录用户的订阅。取值：true - 是；false - 否12. TableName描述：数据表名称，支持模糊匹配。取值：字符串13. RuleGroupName描述：规则组名称。取值：字符串14. RuleGroupExecId描述：规则组执行ID。取值：整数15. RuleGroupTableId描述：规则组表ID。取值：整数16. Keyword描述：关键字搜索，支持规则组执行Id、表名称、表负责人模糊搜索。如果keyword是纯数字，默认只匹配规则组执行Id。取值：字符串17. StartTime描述：实际运行时间，开始时间。取值：Unix时间戳（秒）18. EndTime描述：实际运行时间，结束时间。取值：Unix时间戳（秒）19. ScheduledStartTime描述：计划调度时间，开始时间。取值：Unix时间戳（秒）20. ScheduledEndTime描述：计划调度时间，结束时间。取值：Unix时间戳（秒）21. DsJobId描述：数据源任务ID。取值：字符串22. TriggerType描述：触发类型。取值：1 - 手动触发；2 - 调度事中触发；3 - 周期调度触发；23. Status描述：规则组执行状态。取值：0 - 初始状态，未提交；1 - 已提交；2 - 检测中；3 - 正常；4 - 异常；5 - 下发中；6 - 执行链路异常；7 - 未检测，没有执行结果；24. TableIds描述：数据表ID集合。取值：字符串，支持多个值（OR关系）25. RuleGroupId描述：规则组ID。取值：整数26. BizCatalogIds描述：业务目录ID。取值：整数，支持多个值（OR关系）27. CatalogName描述：数据目录名称。取值：字符串 */
+  Filters?: Filter[];
+  /** 通用排序， 支持的排序字段：CreateTime - 按创建时间排序UpdateTime - 按更新时间排序（默认）排序方向：1 - 升序（ASC）2 - 降序（DESC） */
+  OrderFields?: OrderField[];
+}
+
+declare interface ListQualityRuleGroupExecResultsByPageResponse {
+  /** 规则组执行结果列表 */
+  Data?: ListQualityRuleGroupExecResultPage | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListQualityRuleGroupsTableRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 分页序号，默认1 */
+  PageNumber?: number;
+  /** 分页大小，默认10 */
+  PageSize?: number;
+  /** 过滤条件, 可选过滤条件如下：1. GroupType描述：规则组类型，标识规则组所属的分类。取值：DEFAULT - 默认类型；DASHBOARD-仪表盘类型；WORKFLOW_NODE - 编排空间工作流节点类型2. DeployStatus描述：规则组部署状态，主要用于WORKFLOW_NODE类型的规则组取值：PRODUCTION - 生产环境；DRAFT - 草稿套3. RuleGroupName描述：规则组名称。取值：字符串4. RuleGroupId描述：规则组ID。取值：整数5. TableOwnerName描述：表负责人名称，支持模糊匹配。取值：字符串6. TableOwnerAccount描述：表负责人账号ID。取值：整数，支持多个值（OR关系）7. TableOwnerFlag描述：是否为当前表负责人。取值：true - 是；false - 否8. DatasourceType描述：数据源类型。取值：1 - MYSQL；2 - HIVE；3 - DLC；4 - GBASE；5 - TCHouse-P/CDW；6 - ICEBERG；7 - DORIS；8 - TCHouse-D；9 - EMR_STARROCKS；10 - TBDS_STARROCKS；11 - TCHouse-X9. DatasourceId描述：数据源ID。取值：字符串10. DatabaseName描述：数据库名称。取值：字符串11. SchemaName描述：Schema名称。取值：字符串12. TableName描述：数据源表名称，支持模糊匹配。取值：字符串13. BizCatalogIds描述：业务目录ID。取值：整数，支持多个值（OR关系）14. CatalogName描述：数据目录名称。取值：字符串 */
+  Filters?: Filter[];
+  /** 通用排序，支持的排序字段：UpdateTime - 按更新时间排序（默认）排序方向：1 - 升序（ASC）2 - 降序（DESC） */
+  OrderFields?: OrderField[];
+}
+
+declare interface ListQualityRuleGroupsTableResponse {
+  /** 监控对象列表 */
+  Data?: QualityRuleGroupsTableVO | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListQualityRuleTemplatesRequest {
+  /** 工作空间ID */
+  ProjectId: string;
+  /** 当前页，默认1 */
+  PageNumber?: number;
+  /** 每页记录数，默认10 */
+  PageSize?: number;
+  /** 通用排序，支持的排序字段：CitationCount - 按引用数量排序UpdateTime - 按更新时间排序排序方向：1 - 升序（ASC）2 - 降序（DESC） */
+  OrderFields?: OrderField[];
+  /** 通用过滤条件1. Id描述：模板ID。取值：模板的唯一标识2. Keyword描述：关键字搜索，支持模板名称模糊搜索。取值：字符串3. Type描述：模板类型。取值：1 - 系统模板；2 - 自定义模板；支持多个值（OR关系）4. QualityDim描述：质量检测维度。取值：1 - 准确性；2 - 唯一性；3 - 完整性；4 - 一致性；5 - 及时性；6 - 有效性；支持多个值（OR关系）5. SourceObjectType描述：规则适用的源数据对象类型。取值：1 - 常量；2 - 离线表级；3 - 离线字段级；4 - 库级；支持多个值（OR关系）6. SourceEngineTypes描述：模板适用的源数据引擎类型。取值：1 - MySQL；2 - Hive；4 - Spark；8 - Livy；16 - DLC；32 - Gbase；64 - TCHouse-P；128 - Doris；256 - TCHouse-D；512 - EMR_StarRocks；1024 - TCHouse-X；支持多个值（OR关系） */
+  Filters?: Filter[];
+}
+
+declare interface ListQualityRuleTemplatesResponse {
+  /** 结果 */
+  Data?: QualityRuleTemplatePage;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListQualityRulesRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 分页序号，默认1 */
+  PageNumber?: number;
+  /** 分页大小，默认10 */
+  PageSize?: number;
+  /** 过滤条件，可选过滤条件如下：1. GroupType描述：规则组类型，标识规则组所属的分类。取值：DEFAULT - 默认类型，DASHBOARD - 仪表盘类型，WORKFLOW_NODE - 编排空间工作流节点类型2. Operator描述：创建人ID。取值：用户ID，支持多个值（OR关系）3. Keyword描述：关键字搜索，支持规则名称模糊搜索。取值：字符串4. RuleName描述：规则名称。取值：字符串5. Type描述：规则类型。取值：1 - 系统模板，2 - 自定义SQL，3 - 自定义模板6. SourceObjectValue描述：数据对象，可以是字段名称或表名称。取值：字符串，支持多个值（OR关系）7. RuleGroupId描述：规则所属的规则组ID。取值：整数8. RuleGroupName描述：规则所属的规则组名称。取值：字符串9. TableId描述：数据表ID。取值：字符串，支持多个值（OR关系）10. TableName描述：数据表名称。取值：字符串11. SourceEngineType描述：数据源引擎类型。取值：整数，1 - MYSQL；2 - HIVE；4 - SPARK；8 - LIVY；16 - DLC；32 - GBASE；64 - TCHouse-P；128 - DORIS；256 - TCHouse-D；512 - EMR_STARROCKS；1024 - TCHouse-X；支持多个值（OR关系）12. DatasourceId描述：数据源ID。取值：整数13. DatasourceType描述：数据源类型。取值：1 - MYSQL；2 - HIVE；3 - DLC；4 - GBASE；5 - TCHouse-P/CDW；6 - ICEBERG；7 - DORIS；8 - TCHouse-D；9 - EMR_STARROCKS；10 - TBDS_STARROCKS；11 - TCHouse-X14. DatabaseName描述：数据库名称。取值：字符串15. SchemaName描述：Schema名称。取值：字符串16. RuleIds描述：规则ID集合。取值：整数，支持多个值（OR关系）17. RuleTemplateId描述：规则模板ID。取值：整数，支持多个值（OR关系）18. ReceiverUserId / ReceiverUserIdStr描述：订阅人用户ID。取值：整数19. StartTime描述：查询开始时间。取值：Unix时间戳（秒）20. EndTime描述：查询结束时间。取值：Unix时间戳（秒）21. ReceiverFlag描述：是否为当前登录用户的订阅。取值：true - 是false - 否22. MonitorType描述：规则的监控执行方式。取值：1 - 未配置；2 - 关联生产调度；3 - 离线周期检测；支持多个值（OR关系）支持多个值（OR关系）23. MonitorStatus描述：规则的监控状态。取值：true - 已启用false - 已禁用24. BizCatalogIds描述：业务目录ID。取值：整数，支持多个值（OR关系）25. CatalogName描述：数据目录名称。取值：字符串26. DeployStatus描述：规则部署状态，主要用于WORKFLOW_NODE类型的规则组（监控）上取值：PRODUCTION - 生产环境，DRAFT - 草稿态 */
+  Filters?: Filter[];
+  /** 通用排序，支持的排序字段：CreateTime - 按创建时间排序UpdateTime - 按更新时间排序（默认）排序方向：1 - 升序（ASC）2 - 降序（DESC） */
+  OrderFields?: OrderField[];
+}
+
+declare interface ListQualityRulesResponse {
+  /** 规则质量列表 */
+  Data?: QualityRulePage | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4080,6 +6498,28 @@ declare interface ListTableResponse {
   RequestId?: string;
 }
 
+declare interface ListTaskFoldersRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 父文件夹绝对路径，如/abc/de，如果是根目录则传/ */
+  ParentTaskFolderPath: string;
+  /** 工作流ID */
+  WorkflowId: string;
+  /** 任务文件夹类型| 任务文件夹类型取值 | 任务文件夹类型界面对应名称 || ---------------- | ------------------------ || ETL | 集成任务 || EMR | EMR || DLC | DLC || SETATS | SETATS || TDSQL | TDSQL || TCHOUSE | TCHOUSE || GENERAL | 通用 || TI_ONE | TI-ONE机器学习 || ACROSS_WORKFLOWS | 跨工作流 | */
+  TaskFolderType: string;
+  /** 数据页数，大于等于1。默认1 */
+  PageNumber?: number;
+  /** 每页显示的数据条数，最小为10条，最大为200 条。默认10 */
+  PageSize?: number;
+}
+
+declare interface ListTaskFoldersResponse {
+  /** 分页的文件夹查询结果 */
+  Data?: TaskFolderPage | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListTaskInstanceExecutionsRequest {
   /** 所属项目id */
   ProjectId: string;
@@ -4220,6 +6660,112 @@ declare interface ListTenantRolesResponse {
   RequestId?: string;
 }
 
+declare interface ListTriggerTaskVersionsRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 任务ID */
+  TaskId: string;
+  /** 保存版本：SAVE提交版本：SUBMIT默认为SAVE */
+  TaskVersionType?: string;
+  /** 请求的数据页数。默认值为1，取值大于等于1。 */
+  PageNumber?: number;
+  /** 每页显示的数据条数。默认值为10 ，最小值为10，最大值为200。 */
+  PageSize?: number;
+}
+
+declare interface ListTriggerTaskVersionsResponse {
+  /** 版本列表 */
+  Data?: ListTriggerTaskVersions | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListTriggerTasksRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 请求的数据页数。默认值为1，取值大于等于1 */
+  PageNumber?: number;
+  /** 每页显示的数据条数。默认值为10 ，最小值为10，最大值为200 */
+  PageSize?: number;
+  /** 任务名称 */
+  TaskName?: string;
+  /** 所属工作流ID */
+  WorkflowId?: string;
+  /** 责任人ID */
+  OwnerUin?: string;
+  /** 任务类型 */
+  TaskTypeId?: number;
+  /** 任务状态* N: 新建 * Y: 调度中 */
+  Status?: string;
+  /** 提交状态 */
+  Submit?: boolean;
+  /** BundleId信息 */
+  BundleId?: string;
+  /** 创建人ID */
+  CreateUserUin?: string;
+  /** 修改时间区间 yyyy-MM-dd HH:mm:ss，需要在数组填入两个时间 */
+  ModifyTime?: string[];
+  /** 创建时间区间 yyyy-MM-dd HH:mm:ss，需要在数组填入两个时间 */
+  CreateTime?: string[];
+}
+
+declare interface ListTriggerTasksResponse {
+  /** 任务分页信息 */
+  Data?: ListTriggerTaskInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListTriggerWorkflowRunsRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 过滤参数,工作流名称或ID查询名称：Keyword,工作流ID查询名称：WorkflowId,文件夹查询名称：FolderId,负责人查询名称：InChargeUin, 工作流执行id: ExecutionId */
+  Filters?: Filter[];
+  /** 排序字段，排序字段名称	如下开始时间：CreateTime，结束时间：EndTime */
+  OrderFields?: OrderField[];
+  /** 页码 */
+  PageNumber?: number;
+  /** 页大小 */
+  PageSize?: number;
+}
+
+declare interface ListTriggerWorkflowRunsResponse {
+  /** 工作流运行查询结果 */
+  Data?: TriggerWorkflowRunResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListTriggerWorkflowsRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 请求的数据页数。默认值为1，取值大于等于1 */
+  PageNumber?: number;
+  /** 每页显示的数据条数。默认值为10 ，最小值为10，最大值为200 */
+  PageSize?: number;
+  /** 搜索关键词 */
+  Keyword?: string;
+  /** 工作流所属文件夹 */
+  ParentFolderPath?: string;
+  /** bundleId项 */
+  BundleId?: string;
+  /** 负责人ID */
+  OwnerUin?: string;
+  /** 创建人ID */
+  CreateUserUin?: string;
+  /** 修改时间区间 yyyy-MM-dd HH:mm:ss，需要在数组填入两个时间 */
+  ModifyTime?: string[];
+  /** 创建时间区间 yyyy-MM-dd HH:mm:ss，需要在数组填入两个时间 */
+  CreateTime?: string[];
+}
+
+declare interface ListTriggerWorkflowsResponse {
+  /** 查询工作流分页信息 */
+  Data?: ListTriggerWorkflowInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListUpstreamOpsTasksRequest {
   /** 项目Id */
   ProjectId: string;
@@ -4276,6 +6822,24 @@ declare interface ListUpstreamTasksResponse {
   RequestId?: string;
 }
 
+declare interface ListUpstreamTriggerTasksRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 任务Id */
+  TaskId: string;
+  /** 请求的数据页数。默认值为1，取值大于等于1。 */
+  PageNumber?: number;
+  /** 请求的数据页数。默认值为1，取值大于等于1。 */
+  PageSize?: number;
+}
+
+declare interface ListUpstreamTriggerTasksResponse {
+  /** 上游任务详情 */
+  Data?: TriggerDependencyConfigPage | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListWorkflowFoldersRequest {
   /** 项目ID */
   ProjectId: string;
@@ -4290,6 +6854,26 @@ declare interface ListWorkflowFoldersRequest {
 declare interface ListWorkflowFoldersResponse {
   /** 分页的文件夹查询结果 */
   Data?: WorkflowFolderPage;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListWorkflowPermissionsRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 授权实体ID */
+  EntityId: string;
+  /** 授权实体类型,folder/workflow */
+  EntityType: string;
+  /** 请求的数据页数。默认值为1，取值大于等于1 */
+  PageNumber?: number;
+  /** 每页显示的数据条数。默认值为10 ，最小值为10，最大值为200。 */
+  PageSize?: number;
+}
+
+declare interface ListWorkflowPermissionsResponse {
+  /** 分页的授权信息查询结果 */
+  Data?: WorkflowPermissionPage;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4322,6 +6906,86 @@ declare interface ListWorkflowsRequest {
 declare interface ListWorkflowsResponse {
   /** 查询工作流分页信息 */
   Data?: ListWorkflowInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyQualityRuleGroupRequest {
+  /** 任务参数 */
+  RuleGroupExecStrategyBOList?: QualityRuleGroupExecStrategy[];
+  /** 项目ID */
+  ProjectId?: string;
+}
+
+declare interface ModifyQualityRuleGroupResponse {
+  /** 是否更新成功 */
+  Data?: ModifyQualityRuleGroupResultVO | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyQualityRuleRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 规则ID */
+  RuleId: number;
+  /** 规则名称 */
+  Name: string;
+  /** 规则类型 1.系统模版, 2.自定义模版, 3.自定义SQL */
+  Type: number;
+  /** 报警触发条件 */
+  CompareRule: QualityCompareRule;
+  /** 报警触发级别 1.低, 2.中, 3.高 */
+  AlarmLevel: number;
+  /** 数据表ID */
+  TableId?: string;
+  /** 规则模板ID，当Type≠3（自定义SQL）时必填 */
+  RuleTemplateId?: number;
+  /** 规则所属质量维度，Type=3（自定义SQL）时必填（1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性） */
+  QualityDim?: number;
+  /** 规则组ID */
+  RuleGroupId?: number;
+  /** 源字段详细类型，int、string */
+  SourceObjectDataTypeName?: string;
+  /** 源字段名称 */
+  SourceObjectValue?: string;
+  /** 检测范围，当Type=1(系统模板)时必填。 1.全表 2.条件扫描 */
+  ConditionType?: number;
+  /** 条件扫描WHERE条件表达式，ConditionType=2(条件扫描)时必填 */
+  ConditionExpression?: string;
+  /** 自定义SQL，Type=3（自定义SQL）时必填 */
+  CustomSql?: string;
+  /** 规则描述 */
+  Description?: string;
+  /** 目标库Id */
+  TargetDatabaseId?: string;
+  /** 目标表Id */
+  TargetTableId?: string;
+  /** 目标过滤条件表达式 */
+  TargetConditionExpr?: string;
+  /** 源字段与目标字段关联条件on表达式 */
+  RelConditionExpr?: string;
+  /** 自定义模版sql表达式字段替换参数，Type=2时必填 */
+  FieldConfig?: QualityRuleFieldConfig;
+  /** 目标字段名称 CITY */
+  TargetObjectValue?: string;
+  /** 该规则支持的执行引擎列表，Type=3（自定义SQL）时必填，可选值如下：1 - MYSQL2 - HIVE4 - SPARK8 - LIVY16 - DLC32 - GBASE64 - TCHouse-P128 - DORIS256 - TCHouse-D512 - EMR_STARROCKS1024 - TCHouse-X */
+  SourceEngineTypes?: number[];
+  /** 目标库名 */
+  TargetDatabaseName?: string;
+  /** 目标模式名 */
+  TargetSchemaName?: string;
+  /** 目标表名 */
+  TargetTableName?: string;
+  /** 数据目录名称，主要用于dlc数据源 */
+  CatalogName?: string;
+  /** 目标数据目录名称，主要用于dlc数据源 */
+  TargetCatalogName?: string;
+}
+
+declare interface ModifyQualityRuleResponse {
+  /** 是否更新成功 */
+  Data?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4406,6 +7070,48 @@ declare interface RerunTaskInstancesAsyncRequest {
 declare interface RerunTaskInstancesAsyncResponse {
   /** 批量重跑操作的返回的异步id, 可以在接口GetAsyncJob获取具体执行详情 */
   Data?: OpsAsyncResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RerunTriggerWorkflowRunAsyncRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 工作流ID */
+  WorkflowId: string;
+  /** 工作流运行ID */
+  WorkflowExecutionId: string;
+  /** 运行方式：普通运行默认所有参数：1，高级运行可选任务范围和运行参数：2 */
+  ExecuteType: string;
+  /** 运行类型为高级运行时填写的自定义运行参数 */
+  AdvancedParams?: SchedulingParameter[];
+  /** 高级运行模式下本次需要运行指定的任务ID集合 */
+  TaskIds?: string[];
+  /** 指定调度资源组,为空时默认使用配置的原调度资源组 */
+  SchedulingResourceGroup?: string;
+  /** 指定集成资源组,为空时默认使用配置的原集成资源组 */
+  IntegrationResourceGroup?: string;
+}
+
+declare interface RerunTriggerWorkflowRunAsyncResponse {
+  /** 操作结果 */
+  Data?: OpsAsyncResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RevokeDataSourceAuthorizationRequest {
+  /** 数据源id */
+  DataSourceId: string;
+  /** 回收的项目id，与UserUin参数只能填一个 */
+  RevokeProjectId?: string;
+  /** 回收项目下用户列表，格式为：项目id_用户id与RevokeProjectId参数只能填一个 */
+  RevokeUser?: string;
+}
+
+declare interface RevokeDataSourceAuthorizationResponse {
+  /** 回收数据源响应体 */
+  Data?: DataSourceStatus;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4500,6 +7206,22 @@ declare interface SubmitTaskRequest {
 declare interface SubmitTaskResponse {
   /** 成功或者失败 */
   Data?: SubmitTaskResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SubmitTriggerTaskRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 任务ID */
+  TaskId: string;
+  /** 版本备注 */
+  VersionRemark: string;
+}
+
+declare interface SubmitTriggerTaskResponse {
+  /** 成功或者失败 */
+  Data?: SubmitTaskResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4608,6 +7330,22 @@ declare interface UpdateOpsTasksOwnerRequest {
 declare interface UpdateOpsTasksOwnerResponse {
   /** 操作结果 */
   Data?: UpdateTasksOwner;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateOpsTriggerTasksOwnerRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 负责人UIN */
+  OwnerIds: string[];
+  /** 将要修改的任务ID集合 */
+  TaskIds?: string[];
+}
+
+declare interface UpdateOpsTriggerTasksOwnerResponse {
+  /** 批量操作结果 */
+  Data?: BatchOperationOpsDto;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4722,6 +7460,42 @@ declare interface UpdateSQLScriptResponse {
   RequestId?: string;
 }
 
+declare interface UpdateTaskFolderRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 工作流ID */
+  WorkflowId: string;
+  /** 文件夹ID，可通过ListTaskFolders接口获取 */
+  TaskFolderId: string;
+  /** 更新后的任务文件夹名称 */
+  TaskFolderName: string;
+}
+
+declare interface UpdateTaskFolderResponse {
+  /** 更新文件夹结果，如果更新失败则报错。 */
+  Data?: UpdateTaskFolderResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateTaskPartiallyRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 任务ID */
+  TaskId: string;
+  /** 任务基本属性 */
+  NewSetting?: UpdateTaskPart;
+  /** 删除字段内容，采用属性路径的形式标识，删除的值以":"分割，多个值以","分割 // 删除调度参数中 ParamKey 为 aa,bb 的属性 "TaskConfiguration/TaskSchedulingParameterList:aa,bb" // 删除上游依赖中 TaskId 为 2509162129381111,2509162129381112 的上游依赖 "TaskSchedulerConfiguration/UpstreamDependencyConfigList:2509162129381111,2509162129381112" // 删除下游循环依赖中 TaskId 为 2509162129382222,2509162129382223 的下游依赖 "TaskSchedulerConfiguration/DownStreamDependencyConfigList:2509162129382222,2509162129382223" // 删除事件中 EventName 为 event_250916_213234,event_250916_213235 的事件 "TaskSchedulerConfiguration/EventListenerList:event_250916_213234,event_250916_213235" // 删除传递参数输出中 ParamKey 为 pp_out,pp_1 的参数 "TaskSchedulerConfiguration/ParamTaskOutList:pp_out,pp_1" // 删除传递参数应用中 ParamKey 为 pp_in,pp_1 的参数 "TaskSchedulerConfiguration/ParamTaskInList:pp_in,pp_1" // 删除产品登记中 TablePhysicalId 为6578laxif4d1的产出登记 "TaskSchedulerConfiguration/TaskOutputRegistryList:6578laxif4d1" */
+  FieldToRemoveList?: string[];
+}
+
+declare interface UpdateTaskPartiallyResponse {
+  /** 任务ID */
+  Data?: UpdateTaskResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateTaskRequest {
   /** 项目ID */
   ProjectId: string;
@@ -4734,6 +7508,88 @@ declare interface UpdateTaskRequest {
 declare interface UpdateTaskResponse {
   /** 任务ID */
   Data?: UpdateTaskResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateTriggerTaskPartiallyRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 任务ID */
+  TaskId: string;
+  /** 任务基本属性 */
+  NewSetting?: UpdateTriggerTaskPart;
+  /** 删除字段内容，采用属性路径的形式标识，删除的值以":"分割，多个值以","分割 // 删除调度参数中 ParamKey 为 aa,bb 的属性 "TaskConfiguration/TaskSchedulingParameterList:aa,bb" // 删除上游依赖中 TaskId 为 2509162129381111,2509162129381112 的上游依赖 "TaskSchedulerConfiguration/UpstreamDependencyConfigList:2509162129381111,2509162129381112" // 删除下游循环依赖中 TaskId 为 2509162129382222,2509162129382223 的下游依赖 "TaskSchedulerConfiguration/DownStreamDependencyConfigList:2509162129382222,2509162129382223" // 删除事件中 EventName 为 event_250916_213234,event_250916_213235 的事件 "TaskSchedulerConfiguration/EventListenerList:event_250916_213234,event_250916_213235" // 删除传递参数输出中 ParamKey 为 pp_out,pp_1 的参数 "TaskSchedulerConfiguration/ParamTaskOutList:pp_out,pp_1" // 删除传递参数应用中 ParamKey 为 pp_in,pp_1 的参数 "TaskSchedulerConfiguration/ParamTaskInList:pp_in,pp_1" // 删除产品登记中 TablePhysicalId 为6578laxif4d1的产出登记 "TaskSchedulerConfiguration/TaskOutputRegistryList:6578laxif4d1" */
+  FieldToRemoveList?: string[];
+}
+
+declare interface UpdateTriggerTaskPartiallyResponse {
+  /** 任务ID */
+  Data?: UpdateTaskResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateTriggerTaskRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 任务ID */
+  TaskId: string;
+  /** 任务基本属性 */
+  Task: UpdateTriggerTaskBrief;
+}
+
+declare interface UpdateTriggerTaskResponse {
+  /** 任务ID */
+  Data?: UpdateTaskResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateTriggerWorkflowPartiallyRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 工作流ID */
+  WorkflowId: string;
+  /** 责任人ID */
+  NewSetting?: UpdateTriggerWorkflowPartially;
+  /** 删除字段内容，采用属性路径的形式标识，删除的值以":"分割，多个值以","分割 // 删除调度参数中 ParamKey 为 aa,bb 的属性 "WorkflowParams:aa,bb" // 删除配置的 TriggerId 为 da46d950-d5ca-4cfb-a5a9-f3c2eeea1bf0 的调度配置"TriggerWorkflowSchedulerConfigurations :da46d950-d5ca-4cfb-a5a9-f3c2eeea1bf0" // 删除spark sql通用参数 "GeneralTaskParams: SPARK_SQL" */
+  FieldToRemoveList?: string[];
+}
+
+declare interface UpdateTriggerWorkflowPartiallyResponse {
+  /** true代表成功，false代表失败 */
+  Data?: UpdateTriggerWorkflowResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateTriggerWorkflowRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 工作流ID */
+  WorkflowId: string;
+  /** 工作流名称 */
+  WorkflowName?: string;
+  /** 责任人ID */
+  OwnerUin?: string;
+  /** 备注 */
+  WorkflowDesc?: string;
+  /** 工作流参数列表 */
+  WorkflowParams?: ParamInfo[];
+  /** 统一调度参数 */
+  TriggerWorkflowSchedulerConfigurations?: WorkflowTriggerConfig[];
+  /** BundleId项 */
+  BundleId?: string;
+  /** Bundle信息 */
+  BundleInfo?: string;
+  /** 通用参数配置 */
+  GeneralTaskParams?: WorkflowGeneralTaskParam[];
+}
+
+declare interface UpdateTriggerWorkflowResponse {
+  /** true代表成功，false代表失败 */
+  Data?: UpdateTriggerWorkflowResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -20162,10 +23018,14 @@ declare interface Wedata {
   AddCalcEnginesToProject(data: AddCalcEnginesToProjectRequest, config?: AxiosRequestConfig): AxiosPromise<AddCalcEnginesToProjectResponse>;
   /** 关联资源组到某个项目 {@link AssociateResourceGroupToProjectRequest} {@link AssociateResourceGroupToProjectResponse} */
   AssociateResourceGroupToProject(data: AssociateResourceGroupToProjectRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateResourceGroupToProjectResponse>;
+  /** 授权数据源 {@link AuthorizeDataSourceRequest} {@link AuthorizeDataSourceResponse} */
+  AuthorizeDataSource(data: AuthorizeDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<AuthorizeDataSourceResponse>;
   /** 新建代码文件 {@link CreateCodeFileRequest} {@link CreateCodeFileResponse} */
   CreateCodeFile(data: CreateCodeFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodeFileResponse>;
   /** 新建代码文件夹 {@link CreateCodeFolderRequest} {@link CreateCodeFolderResponse} */
   CreateCodeFolder(data: CreateCodeFolderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodeFolderResponse>;
+  /** 配置CodeStudio实体权限 {@link CreateCodePermissionsRequest} {@link CreateCodePermissionsResponse} */
+  CreateCodePermissions(data: CreateCodePermissionsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodePermissionsResponse>;
   /** 创建数据补录计划 {@link CreateDataBackfillPlanRequest} {@link CreateDataBackfillPlanResponse} */
   CreateDataBackfillPlan(data: CreateDataBackfillPlanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataBackfillPlanResponse>;
   /** 创建数据源 {@link CreateDataSourceRequest} {@link CreateDataSourceResponse} */
@@ -20176,6 +23036,8 @@ declare interface Wedata {
   CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
   /** 创建项目成员 {@link CreateProjectMemberRequest} {@link CreateProjectMemberResponse} */
   CreateProjectMember(data: CreateProjectMemberRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectMemberResponse>;
+  /** 质量创建监控任务 {@link CreateQualityRuleGroupRequest} {@link CreateQualityRuleGroupResponse} */
+  CreateQualityRuleGroup(data: CreateQualityRuleGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQualityRuleGroupResponse>;
   /** 创建资源文件 {@link CreateResourceFileRequest} {@link CreateResourceFileResponse} */
   CreateResourceFile(data: CreateResourceFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceFileResponse>;
   /** 创建资源文件夹 {@link CreateResourceFolderRequest} {@link CreateResourceFolderResponse} */
@@ -20188,14 +23050,26 @@ declare interface Wedata {
   CreateSQLScript(data: CreateSQLScriptRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSQLScriptResponse>;
   /** 创建任务 {@link CreateTaskRequest} {@link CreateTaskResponse} */
   CreateTask(data: CreateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskResponse>;
+  /** 创建任务文件夹 {@link CreateTaskFolderRequest} {@link CreateTaskFolderResponse} */
+  CreateTaskFolder(data: CreateTaskFolderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskFolderResponse>;
+  /** 创建工作流调度任务 {@link CreateTriggerTaskRequest} {@link CreateTriggerTaskResponse} */
+  CreateTriggerTask(data: CreateTriggerTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTriggerTaskResponse>;
+  /** 创建调度工作流 {@link CreateTriggerWorkflowRequest} {@link CreateTriggerWorkflowResponse} */
+  CreateTriggerWorkflow(data: CreateTriggerWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTriggerWorkflowResponse>;
   /** 创建工作流 {@link CreateWorkflowRequest} {@link CreateWorkflowResponse} */
   CreateWorkflow(data: CreateWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkflowResponse>;
   /** 创建工作流文件夹 {@link CreateWorkflowFolderRequest} {@link CreateWorkflowFolderResponse} */
   CreateWorkflowFolder(data: CreateWorkflowFolderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkflowFolderResponse>;
+  /** 配置工作流文件夹权限 {@link CreateWorkflowPermissionsRequest} {@link CreateWorkflowPermissionsResponse} */
+  CreateWorkflowPermissions(data: CreateWorkflowPermissionsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkflowPermissionsResponse>;
   /** 删除代码文件 {@link DeleteCodeFileRequest} {@link DeleteCodeFileResponse} */
   DeleteCodeFile(data: DeleteCodeFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCodeFileResponse>;
   /** 删除代码文件夹 {@link DeleteCodeFolderRequest} {@link DeleteCodeFolderResponse} */
   DeleteCodeFolder(data: DeleteCodeFolderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCodeFolderResponse>;
+  /** 删除CodeStudio实体权限 {@link DeleteCodePermissionsRequest} {@link DeleteCodePermissionsResponse} */
+  DeleteCodePermissions(data: DeleteCodePermissionsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCodePermissionsResponse>;
+  /** 异步删除补录计划 {@link DeleteDataBackfillPlanAsyncRequest} {@link DeleteDataBackfillPlanAsyncResponse} */
+  DeleteDataBackfillPlanAsync(data: DeleteDataBackfillPlanAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataBackfillPlanAsyncResponse>;
   /** 删除数据源 {@link DeleteDataSourceRequest} {@link DeleteDataSourceResponse} */
   DeleteDataSource(data: DeleteDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataSourceResponse>;
   /** 血缘删除 {@link DeleteLineageRequest} {@link DeleteLineageResponse} */
@@ -20204,6 +23078,10 @@ declare interface Wedata {
   DeleteOpsAlarmRule(data: DeleteOpsAlarmRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOpsAlarmRuleResponse>;
   /** 移除项目成员 {@link DeleteProjectMemberRequest} {@link DeleteProjectMemberResponse} */
   DeleteProjectMember(data: DeleteProjectMemberRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectMemberResponse>;
+  /** 质量删除规则接口 {@link DeleteQualityRuleRequest} {@link DeleteQualityRuleResponse} */
+  DeleteQualityRule(data: DeleteQualityRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQualityRuleResponse>;
+  /** 质量删除监控任务 {@link DeleteQualityRuleGroupRequest} {@link DeleteQualityRuleGroupResponse} */
+  DeleteQualityRuleGroup(data: DeleteQualityRuleGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQualityRuleGroupResponse>;
   /** 删除资源文件 {@link DeleteResourceFileRequest} {@link DeleteResourceFileResponse} */
   DeleteResourceFile(data: DeleteResourceFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceFileResponse>;
   /** 删除资源文件夹 {@link DeleteResourceFolderRequest} {@link DeleteResourceFolderResponse} */
@@ -20216,10 +23094,20 @@ declare interface Wedata {
   DeleteSQLScript(data: DeleteSQLScriptRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSQLScriptResponse>;
   /** 删除任务 {@link DeleteTaskRequest} {@link DeleteTaskResponse} */
   DeleteTask(data: DeleteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskResponse>;
+  /** 删除任务文件夹 {@link DeleteTaskFolderRequest} {@link DeleteTaskFolderResponse} */
+  DeleteTaskFolder(data: DeleteTaskFolderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskFolderResponse>;
+  /** 删除工作流调度任务 {@link DeleteTriggerTaskRequest} {@link DeleteTriggerTaskResponse} */
+  DeleteTriggerTask(data: DeleteTriggerTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTriggerTaskResponse>;
+  /** 删除调度工作流 {@link DeleteTriggerWorkflowRequest} {@link DeleteTriggerWorkflowResponse} */
+  DeleteTriggerWorkflow(data: DeleteTriggerWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTriggerWorkflowResponse>;
   /** 删除工作流 {@link DeleteWorkflowRequest} {@link DeleteWorkflowResponse} */
   DeleteWorkflow(data: DeleteWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkflowResponse>;
   /** 删除工作流文件夹 {@link DeleteWorkflowFolderRequest} {@link DeleteWorkflowFolderResponse} */
   DeleteWorkflowFolder(data: DeleteWorkflowFolderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkflowFolderResponse>;
+  /** 删除工作流文件夹权限 {@link DeleteWorkflowPermissionsRequest} {@link DeleteWorkflowPermissionsResponse} */
+  DeleteWorkflowPermissions(data: DeleteWorkflowPermissionsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkflowPermissionsResponse>;
+  /** 数据源管理-查看数据源权限 {@link DescribeDataSourceAuthorityRequest} {@link DescribeDataSourceAuthorityResponse} */
+  DescribeDataSourceAuthority(data: DescribeDataSourceAuthorityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataSourceAuthorityResponse>;
   /** 禁用项目 {@link DisableProjectRequest} {@link DisableProjectResponse} */
   DisableProject(data: DisableProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DisableProjectResponse>;
   /** 解绑项目关联的资源组 {@link DissociateResourceGroupFromProjectRequest} {@link DissociateResourceGroupFromProjectResponse} */
@@ -20238,6 +23126,10 @@ declare interface Wedata {
   GetDataSource(data: GetDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<GetDataSourceResponse>;
   /** 查看数据源关联任务列表 {@link GetDataSourceRelatedTasksRequest} {@link GetDataSourceRelatedTasksResponse} */
   GetDataSourceRelatedTasks(data: GetDataSourceRelatedTasksRequest, config?: AxiosRequestConfig): AxiosPromise<GetDataSourceRelatedTasksResponse>;
+  /** 查看当前用户对CodeStudio实体的最大权限 {@link GetMyCodeMaxPermissionRequest} {@link GetMyCodeMaxPermissionResponse} */
+  GetMyCodeMaxPermission(data: GetMyCodeMaxPermissionRequest, config?: AxiosRequestConfig): AxiosPromise<GetMyCodeMaxPermissionResponse>;
+  /** 查询当前用户对工作流文件夹的递归最大权限 {@link GetMyWorkflowMaxPermissionRequest} {@link GetMyWorkflowMaxPermissionResponse} */
+  GetMyWorkflowMaxPermission(data: GetMyWorkflowMaxPermissionRequest, config?: AxiosRequestConfig): AxiosPromise<GetMyWorkflowMaxPermissionResponse>;
   /** 获取告警规则详细信息 {@link GetOpsAlarmRuleRequest} {@link GetOpsAlarmRuleResponse} */
   GetOpsAlarmRule(data: GetOpsAlarmRuleRequest, config?: AxiosRequestConfig): AxiosPromise<GetOpsAlarmRuleResponse>;
   /** 查询运维中心异步操作详情 {@link GetOpsAsyncJobRequest} {@link GetOpsAsyncJobResponse} */
@@ -20246,12 +23138,16 @@ declare interface Wedata {
   GetOpsTask(data: GetOpsTaskRequest, config?: AxiosRequestConfig): AxiosPromise<GetOpsTaskResponse>;
   /** 获取任务代码 {@link GetOpsTaskCodeRequest} {@link GetOpsTaskCodeResponse} */
   GetOpsTaskCode(data: GetOpsTaskCodeRequest, config?: AxiosRequestConfig): AxiosPromise<GetOpsTaskCodeResponse>;
+  /** 查看工作流详情 {@link GetOpsTriggerWorkflowRequest} {@link GetOpsTriggerWorkflowResponse} */
+  GetOpsTriggerWorkflow(data: GetOpsTriggerWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<GetOpsTriggerWorkflowResponse>;
   /** 获取工作流详情 {@link GetOpsWorkflowRequest} {@link GetOpsWorkflowResponse} */
   GetOpsWorkflow(data: GetOpsWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<GetOpsWorkflowResponse>;
   /** 查看项目详情 {@link GetProjectRequest} {@link GetProjectResponse} */
   GetProject(data: GetProjectRequest, config?: AxiosRequestConfig): AxiosPromise<GetProjectResponse>;
   /** 查看资源文件详情 {@link GetResourceFileRequest} {@link GetResourceFileResponse} */
   GetResourceFile(data: GetResourceFileRequest, config?: AxiosRequestConfig): AxiosPromise<GetResourceFileResponse>;
+  /** 查询资源文件夹详情 {@link GetResourceFolderRequest} {@link GetResourceFolderResponse} */
+  GetResourceFolder(data: GetResourceFolderRequest, config?: AxiosRequestConfig): AxiosPromise<GetResourceFolderResponse>;
   /** 查看某个资源组的监控指标 {@link GetResourceGroupMetricsRequest} {@link GetResourceGroupMetricsResponse} */
   GetResourceGroupMetrics(data: GetResourceGroupMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<GetResourceGroupMetricsResponse>;
   /** 获取SQL文件夹详情 {@link GetSQLFolderRequest} {@link GetSQLFolderResponse} */
@@ -20266,24 +23162,44 @@ declare interface Wedata {
   GetTask(data: GetTaskRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskResponse>;
   /** 查看任务代码 {@link GetTaskCodeRequest} {@link GetTaskCodeResponse} */
   GetTaskCode(data: GetTaskCodeRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskCodeResponse>;
+  /** 查看任务文件夹详情 {@link GetTaskFolderRequest} {@link GetTaskFolderResponse} */
+  GetTaskFolder(data: GetTaskFolderRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskFolderResponse>;
   /** 获取实例详情 {@link GetTaskInstanceRequest} {@link GetTaskInstanceResponse} */
   GetTaskInstance(data: GetTaskInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskInstanceResponse>;
   /** 查询调度实例日志内容 {@link GetTaskInstanceLogRequest} {@link GetTaskInstanceLogResponse} */
   GetTaskInstanceLog(data: GetTaskInstanceLogRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskInstanceLogResponse>;
   /** 查看任务版本详情 {@link GetTaskVersionRequest} {@link GetTaskVersionResponse} */
   GetTaskVersion(data: GetTaskVersionRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskVersionResponse>;
+  /** 获取工作流调度任务详情信息 {@link GetTriggerTaskRequest} {@link GetTriggerTaskResponse} */
+  GetTriggerTask(data: GetTriggerTaskRequest, config?: AxiosRequestConfig): AxiosPromise<GetTriggerTaskResponse>;
+  /** 查看工作流调度任务代码 {@link GetTriggerTaskCodeRequest} {@link GetTriggerTaskCodeResponse} */
+  GetTriggerTaskCode(data: GetTriggerTaskCodeRequest, config?: AxiosRequestConfig): AxiosPromise<GetTriggerTaskCodeResponse>;
+  /** 查看任务运行详情 {@link GetTriggerTaskRunRequest} {@link GetTriggerTaskRunResponse} */
+  GetTriggerTaskRun(data: GetTriggerTaskRunRequest, config?: AxiosRequestConfig): AxiosPromise<GetTriggerTaskRunResponse>;
+  /** 查看调度工作流任务版本详情 {@link GetTriggerTaskVersionRequest} {@link GetTriggerTaskVersionResponse} */
+  GetTriggerTaskVersion(data: GetTriggerTaskVersionRequest, config?: AxiosRequestConfig): AxiosPromise<GetTriggerTaskVersionResponse>;
+  /** 获取调度工作流信息 {@link GetTriggerWorkflowRequest} {@link GetTriggerWorkflowResponse} */
+  GetTriggerWorkflow(data: GetTriggerWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<GetTriggerWorkflowResponse>;
+  /** 查询工作流运行详情 {@link GetTriggerWorkflowRunRequest} {@link GetTriggerWorkflowRunResponse} */
+  GetTriggerWorkflowRun(data: GetTriggerWorkflowRunRequest, config?: AxiosRequestConfig): AxiosPromise<GetTriggerWorkflowRunResponse>;
   /** 获取工作流信息 {@link GetWorkflowRequest} {@link GetWorkflowResponse} */
   GetWorkflow(data: GetWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<GetWorkflowResponse>;
+  /** 查看工作流文件夹详情 {@link GetWorkflowFolderRequest} {@link GetWorkflowFolderResponse} */
+  GetWorkflowFolder(data: GetWorkflowFolderRequest, config?: AxiosRequestConfig): AxiosPromise<GetWorkflowFolderResponse>;
   /** 授予项目成员项目角色 {@link GrantMemberProjectRoleRequest} {@link GrantMemberProjectRoleResponse} */
   GrantMemberProjectRole(data: GrantMemberProjectRoleRequest, config?: AxiosRequestConfig): AxiosPromise<GrantMemberProjectRoleResponse>;
   /** 实例批量终止操作(异步) {@link KillTaskInstancesAsyncRequest} {@link KillTaskInstancesAsyncResponse} */
   KillTaskInstancesAsync(data: KillTaskInstancesAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<KillTaskInstancesAsyncResponse>;
+  /** 终止运行 {@link KillTriggerWorkflowRunsRequest} {@link KillTriggerWorkflowRunsResponse} */
+  KillTriggerWorkflowRuns(data: KillTriggerWorkflowRunsRequest, config?: AxiosRequestConfig): AxiosPromise<KillTriggerWorkflowRunsResponse>;
   /** 获取告警信息列表 {@link ListAlarmMessagesRequest} {@link ListAlarmMessagesResponse} */
   ListAlarmMessages(data: ListAlarmMessagesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAlarmMessagesResponse>;
   /** 查询类目树列表 {@link ListCatalogRequest} {@link ListCatalogResponse} */
   ListCatalog(data: ListCatalogRequest, config?: AxiosRequestConfig): AxiosPromise<ListCatalogResponse>;
   /** 获取文件夹内容 {@link ListCodeFolderContentsRequest} {@link ListCodeFolderContentsResponse} */
   ListCodeFolderContents(data: ListCodeFolderContentsRequest, config?: AxiosRequestConfig): AxiosPromise<ListCodeFolderContentsResponse>;
+  /** 查看CodeStudio实体权限 {@link ListCodePermissionsRequest} {@link ListCodePermissionsResponse} */
+  ListCodePermissions(data: ListCodePermissionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListCodePermissionsResponse>;
   /** 查询表列血缘列表 {@link ListColumnLineageRequest} {@link ListColumnLineageResponse} */
   ListColumnLineage(data: ListColumnLineageRequest, config?: AxiosRequestConfig): AxiosPromise<ListColumnLineageResponse>;
   /** 获取单次补录的所有实例详情 {@link ListDataBackfillInstancesRequest} {@link ListDataBackfillInstancesResponse} */
@@ -20298,12 +23214,16 @@ declare interface Wedata {
   ListDownstreamTaskInstances(data: ListDownstreamTaskInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ListDownstreamTaskInstancesResponse>;
   /** 查看下游任务列表 {@link ListDownstreamTasksRequest} {@link ListDownstreamTasksResponse} */
   ListDownstreamTasks(data: ListDownstreamTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListDownstreamTasksResponse>;
+  /** 查看调度工作流下游任务列表 {@link ListDownstreamTriggerTasksRequest} {@link ListDownstreamTriggerTasksResponse} */
+  ListDownstreamTriggerTasks(data: ListDownstreamTriggerTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListDownstreamTriggerTasksResponse>;
   /** 查询血缘列表 {@link ListLineageRequest} {@link ListLineageResponse} */
   ListLineage(data: ListLineageRequest, config?: AxiosRequestConfig): AxiosPromise<ListLineageResponse>;
   /** 获取告警规则列表 {@link ListOpsAlarmRulesRequest} {@link ListOpsAlarmRulesResponse} */
   ListOpsAlarmRules(data: ListOpsAlarmRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ListOpsAlarmRulesResponse>;
   /** 获取任务列表 {@link ListOpsTasksRequest} {@link ListOpsTasksResponse} */
   ListOpsTasks(data: ListOpsTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListOpsTasksResponse>;
+  /** 查看工作流列表 {@link ListOpsTriggerWorkflowsRequest} {@link ListOpsTriggerWorkflowsResponse} */
+  ListOpsTriggerWorkflows(data: ListOpsTriggerWorkflowsRequest, config?: AxiosRequestConfig): AxiosPromise<ListOpsTriggerWorkflowsResponse>;
   /** 获取工作流列表 {@link ListOpsWorkflowsRequest} {@link ListOpsWorkflowsResponse} */
   ListOpsWorkflows(data: ListOpsWorkflowsRequest, config?: AxiosRequestConfig): AxiosPromise<ListOpsWorkflowsResponse>;
   /** 查询任务血缘列表 {@link ListProcessLineageRequest} {@link ListProcessLineageResponse} */
@@ -20314,6 +23234,14 @@ declare interface Wedata {
   ListProjectRoles(data: ListProjectRolesRequest, config?: AxiosRequestConfig): AxiosPromise<ListProjectRolesResponse>;
   /** 查看项目详情列表 {@link ListProjectsRequest} {@link ListProjectsResponse} */
   ListProjects(data?: ListProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<ListProjectsResponse>;
+  /** 质量规则组执行结果分页查询接口 {@link ListQualityRuleGroupExecResultsByPageRequest} {@link ListQualityRuleGroupExecResultsByPageResponse} */
+  ListQualityRuleGroupExecResultsByPage(data: ListQualityRuleGroupExecResultsByPageRequest, config?: AxiosRequestConfig): AxiosPromise<ListQualityRuleGroupExecResultsByPageResponse>;
+  /** 质量分页查询监控表 {@link ListQualityRuleGroupsTableRequest} {@link ListQualityRuleGroupsTableResponse} */
+  ListQualityRuleGroupsTable(data: ListQualityRuleGroupsTableRequest, config?: AxiosRequestConfig): AxiosPromise<ListQualityRuleGroupsTableResponse>;
+  /** 质量规则模版查询接口 {@link ListQualityRuleTemplatesRequest} {@link ListQualityRuleTemplatesResponse} */
+  ListQualityRuleTemplates(data: ListQualityRuleTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<ListQualityRuleTemplatesResponse>;
+  /** 质量分页查询规则 {@link ListQualityRulesRequest} {@link ListQualityRulesResponse} */
+  ListQualityRules(data: ListQualityRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ListQualityRulesResponse>;
   /** 查看资源文件列表 {@link ListResourceFilesRequest} {@link ListResourceFilesResponse} */
   ListResourceFiles(data: ListResourceFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ListResourceFilesResponse>;
   /** 查看资源文件夹列表 {@link ListResourceFoldersRequest} {@link ListResourceFoldersResponse} */
@@ -20328,6 +23256,8 @@ declare interface Wedata {
   ListSchema(data: ListSchemaRequest, config?: AxiosRequestConfig): AxiosPromise<ListSchemaResponse>;
   /** 通过参数查询数据表列表 {@link ListTableRequest} {@link ListTableResponse} */
   ListTable(data: ListTableRequest, config?: AxiosRequestConfig): AxiosPromise<ListTableResponse>;
+  /** 查看任务文件夹列表 {@link ListTaskFoldersRequest} {@link ListTaskFoldersResponse} */
+  ListTaskFolders(data: ListTaskFoldersRequest, config?: AxiosRequestConfig): AxiosPromise<ListTaskFoldersResponse>;
   /** 获取实例执行列表 {@link ListTaskInstanceExecutionsRequest} {@link ListTaskInstanceExecutionsResponse} */
   ListTaskInstanceExecutions(data: ListTaskInstanceExecutionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListTaskInstanceExecutionsResponse>;
   /** 获取调度实例列表 {@link ListTaskInstancesRequest} {@link ListTaskInstancesResponse} */
@@ -20338,16 +23268,32 @@ declare interface Wedata {
   ListTasks(data: ListTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListTasksResponse>;
   /** 查看全局级角色详情列表 {@link ListTenantRolesRequest} {@link ListTenantRolesResponse} */
   ListTenantRoles(data?: ListTenantRolesRequest, config?: AxiosRequestConfig): AxiosPromise<ListTenantRolesResponse>;
+  /** 查看工作流调度任务版本列表 {@link ListTriggerTaskVersionsRequest} {@link ListTriggerTaskVersionsResponse} */
+  ListTriggerTaskVersions(data: ListTriggerTaskVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListTriggerTaskVersionsResponse>;
+  /** 查询调度工作流任务列表 {@link ListTriggerTasksRequest} {@link ListTriggerTasksResponse} */
+  ListTriggerTasks(data: ListTriggerTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListTriggerTasksResponse>;
+  /** 查询工作流运行 {@link ListTriggerWorkflowRunsRequest} {@link ListTriggerWorkflowRunsResponse} */
+  ListTriggerWorkflowRuns(data: ListTriggerWorkflowRunsRequest, config?: AxiosRequestConfig): AxiosPromise<ListTriggerWorkflowRunsResponse>;
+  /** 查询调度工作流列表 {@link ListTriggerWorkflowsRequest} {@link ListTriggerWorkflowsResponse} */
+  ListTriggerWorkflows(data: ListTriggerWorkflowsRequest, config?: AxiosRequestConfig): AxiosPromise<ListTriggerWorkflowsResponse>;
   /** 获取任务上游 {@link ListUpstreamOpsTasksRequest} {@link ListUpstreamOpsTasksResponse} */
   ListUpstreamOpsTasks(data: ListUpstreamOpsTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListUpstreamOpsTasksResponse>;
   /** 获取实例直接上游 {@link ListUpstreamTaskInstancesRequest} {@link ListUpstreamTaskInstancesResponse} */
   ListUpstreamTaskInstances(data: ListUpstreamTaskInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ListUpstreamTaskInstancesResponse>;
   /** 查看上游任务列表 {@link ListUpstreamTasksRequest} {@link ListUpstreamTasksResponse} */
   ListUpstreamTasks(data: ListUpstreamTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListUpstreamTasksResponse>;
+  /** 查看调度工作流上游任务列表 {@link ListUpstreamTriggerTasksRequest} {@link ListUpstreamTriggerTasksResponse} */
+  ListUpstreamTriggerTasks(data: ListUpstreamTriggerTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListUpstreamTriggerTasksResponse>;
   /** 查看工作流文件夹列表 {@link ListWorkflowFoldersRequest} {@link ListWorkflowFoldersResponse} */
   ListWorkflowFolders(data: ListWorkflowFoldersRequest, config?: AxiosRequestConfig): AxiosPromise<ListWorkflowFoldersResponse>;
+  /** 获取工作流文件夹权限列表 {@link ListWorkflowPermissionsRequest} {@link ListWorkflowPermissionsResponse} */
+  ListWorkflowPermissions(data: ListWorkflowPermissionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListWorkflowPermissionsResponse>;
   /** 查询工作流列表 {@link ListWorkflowsRequest} {@link ListWorkflowsResponse} */
   ListWorkflows(data: ListWorkflowsRequest, config?: AxiosRequestConfig): AxiosPromise<ListWorkflowsResponse>;
+  /** 质量更新规则接口 {@link ModifyQualityRuleRequest} {@link ModifyQualityRuleResponse} */
+  ModifyQualityRule(data: ModifyQualityRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyQualityRuleResponse>;
+  /** 质量编辑监控任务 {@link ModifyQualityRuleGroupRequest} {@link ModifyQualityRuleGroupResponse} */
+  ModifyQualityRuleGroup(data?: ModifyQualityRuleGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyQualityRuleGroupResponse>;
   /** 异步批量暂停任务 {@link PauseOpsTasksAsyncRequest} {@link PauseOpsTasksAsyncResponse} */
   PauseOpsTasksAsync(data: PauseOpsTasksAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<PauseOpsTasksAsyncResponse>;
   /** 血缘注册 {@link RegisterLineageRequest} {@link RegisterLineageResponse} */
@@ -20356,6 +23302,10 @@ declare interface Wedata {
   RemoveMemberProjectRole(data: RemoveMemberProjectRoleRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveMemberProjectRoleResponse>;
   /** 实例批量重跑(异步) {@link RerunTaskInstancesAsyncRequest} {@link RerunTaskInstancesAsyncResponse} */
   RerunTaskInstancesAsync(data: RerunTaskInstancesAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<RerunTaskInstancesAsyncResponse>;
+  /** 重跑运行 {@link RerunTriggerWorkflowRunAsyncRequest} {@link RerunTriggerWorkflowRunAsyncResponse} */
+  RerunTriggerWorkflowRunAsync(data: RerunTriggerWorkflowRunAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<RerunTriggerWorkflowRunAsyncResponse>;
+  /** 回收数据源权限 {@link RevokeDataSourceAuthorizationRequest} {@link RevokeDataSourceAuthorizationResponse} */
+  RevokeDataSourceAuthorization(data: RevokeDataSourceAuthorizationRequest, config?: AxiosRequestConfig): AxiosPromise<RevokeDataSourceAuthorizationResponse>;
   /** 运行SQL脚本 {@link RunSQLScriptRequest} {@link RunSQLScriptResponse} */
   RunSQLScript(data: RunSQLScriptRequest, config?: AxiosRequestConfig): AxiosPromise<RunSQLScriptResponse>;
   /** 实例批量置成功(异步) {@link SetSuccessTaskInstancesAsyncRequest} {@link SetSuccessTaskInstancesAsyncResponse} */
@@ -20368,6 +23318,8 @@ declare interface Wedata {
   StopSQLScriptRun(data: StopSQLScriptRunRequest, config?: AxiosRequestConfig): AxiosPromise<StopSQLScriptRunResponse>;
   /** 提交任务 {@link SubmitTaskRequest} {@link SubmitTaskResponse} */
   SubmitTask(data: SubmitTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTaskResponse>;
+  /** 提交工作流调度任务 {@link SubmitTriggerTaskRequest} {@link SubmitTriggerTaskResponse} */
+  SubmitTriggerTask(data: SubmitTriggerTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTriggerTaskResponse>;
   /** 更新代码文件 {@link UpdateCodeFileRequest} {@link UpdateCodeFileResponse} */
   UpdateCodeFile(data: UpdateCodeFileRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCodeFileResponse>;
   /** 更新代码文件夹 {@link UpdateCodeFolderRequest} {@link UpdateCodeFolderResponse} */
@@ -20378,6 +23330,8 @@ declare interface Wedata {
   UpdateOpsAlarmRule(data: UpdateOpsAlarmRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOpsAlarmRuleResponse>;
   /** 修改任务负责人 {@link UpdateOpsTasksOwnerRequest} {@link UpdateOpsTasksOwnerResponse} */
   UpdateOpsTasksOwner(data: UpdateOpsTasksOwnerRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOpsTasksOwnerResponse>;
+  /** 修改任务责任人 {@link UpdateOpsTriggerTasksOwnerRequest} {@link UpdateOpsTriggerTasksOwnerResponse} */
+  UpdateOpsTriggerTasksOwner(data: UpdateOpsTriggerTasksOwnerRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOpsTriggerTasksOwnerResponse>;
   /** 更新项目 {@link UpdateProjectRequest} {@link UpdateProjectResponse} */
   UpdateProject(data: UpdateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProjectResponse>;
   /** 更新资源文件 {@link UpdateResourceFileRequest} {@link UpdateResourceFileResponse} */
@@ -20392,6 +23346,18 @@ declare interface Wedata {
   UpdateSQLScript(data: UpdateSQLScriptRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateSQLScriptResponse>;
   /** 更新任务 {@link UpdateTaskRequest} {@link UpdateTaskResponse} */
   UpdateTask(data: UpdateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTaskResponse>;
+  /** 更新任务文件夹 {@link UpdateTaskFolderRequest} {@link UpdateTaskFolderResponse} */
+  UpdateTaskFolder(data: UpdateTaskFolderRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTaskFolderResponse>;
+  /** 更新任务部分属性 {@link UpdateTaskPartiallyRequest} {@link UpdateTaskPartiallyResponse} */
+  UpdateTaskPartially(data: UpdateTaskPartiallyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTaskPartiallyResponse>;
+  /** 更新工作流调度任务 {@link UpdateTriggerTaskRequest} {@link UpdateTriggerTaskResponse} */
+  UpdateTriggerTask(data: UpdateTriggerTaskRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTriggerTaskResponse>;
+  /** 更新调度工作流任务部分属性 {@link UpdateTriggerTaskPartiallyRequest} {@link UpdateTriggerTaskPartiallyResponse} */
+  UpdateTriggerTaskPartially(data: UpdateTriggerTaskPartiallyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTriggerTaskPartiallyResponse>;
+  /** 更新调度工作流信息 {@link UpdateTriggerWorkflowRequest} {@link UpdateTriggerWorkflowResponse} */
+  UpdateTriggerWorkflow(data: UpdateTriggerWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTriggerWorkflowResponse>;
+  /** 更新部分调度工作流信息 {@link UpdateTriggerWorkflowPartiallyRequest} {@link UpdateTriggerWorkflowPartiallyResponse} */
+  UpdateTriggerWorkflowPartially(data: UpdateTriggerWorkflowPartiallyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTriggerWorkflowPartiallyResponse>;
   /** 更新工作流信息 {@link UpdateWorkflowRequest} {@link UpdateWorkflowResponse} */
   UpdateWorkflow(data: UpdateWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateWorkflowResponse>;
   /** 更新工作流文件夹 {@link UpdateWorkflowFolderRequest} {@link UpdateWorkflowFolderResponse} */

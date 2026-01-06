@@ -120,9 +120,11 @@ declare interface SavingPlanOverviewDetail {
 
 /** 节省计划使用率数据 */
 declare interface SavingPlanUsageDetail {
+  /** 节省计划资源id */
+  SpId?: string;
   /** 节省计划类型 */
   SpType?: string;
-  /** 节省计划状态 */
+  /** 节省计划状态枚举值： 1： 生效 2： 失效 3： 作废 */
   Status?: number;
   /** 累计抵扣的金额（单位：元） */
   DeductAmount?: string;

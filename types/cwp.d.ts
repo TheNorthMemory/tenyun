@@ -2028,6 +2028,8 @@ declare interface BruteAttackInfo {
   AttackStatusDesc?: string;
   /** 阻断过期时间（仅阻断中事件有效） */
   BanExpiredTime?: string;
+  /** IP分析 */
+  IPAnalyse?: IPAnalyse;
 }
 
 /** 标准阻断模式规则 */
@@ -2152,12 +2154,14 @@ declare interface CommandLine {
 
 /** 创建修复任务的quuids */
 declare interface CreateVulFixTaskQuuids {
-  /** 漏洞id */
-  VulId: number;
   /** 需要修复漏洞的主机，所有主机必须有VulId的这个漏洞且是待修复状态。 */
   Quuids: string[];
+  /** 漏洞id */
+  VulId?: number;
   /** 修复方式 0组件更新或者安装补丁,1禁用服务 */
   FixMethod?: number;
+  /** kb id */
+  KbId?: number;
 }
 
 /** 默认策略基础信息 */
@@ -2232,22 +2236,6 @@ declare interface EffectiveMachineInfo {
   InstanceID?: string;
 }
 
-/** 专家服务-应急响应信息 */
-declare interface EmergencyResponseInfo {
-  /** 任务id */
-  TaskId?: string;
-  /** 主机个数 */
-  HostNum?: number;
-  /** 服务状态 0未启动，·响应中，2响应完成 */
-  Status?: number;
-  /** 服务开始时间 */
-  StartTime?: string;
-  /** 服务结束时间 */
-  EndTime?: string;
-  /** 报告下载地址 */
-  ReportPath?: string;
-}
-
 /** 应急漏洞信息 */
 declare interface EmergencyVul {
   /** 漏洞id */
@@ -2292,24 +2280,6 @@ declare interface EventStat {
   EventsNum?: number;
   /** 受影响的主机数 */
   MachineAffectNum?: number;
-}
-
-/** 专家服务订单信息 */
-declare interface ExpertServiceOrderInfo {
-  /** 订单id */
-  OrderId?: number;
-  /** 订单类型 1应急 2 旗舰重保 3 安全管家 */
-  InquireType?: number;
-  /** 服务数量 */
-  InquireNum?: number;
-  /** 服务开始时间 */
-  BeginTime?: string;
-  /** 服务结束时间 */
-  EndTime?: string;
-  /** 服务时长几个月 */
-  ServiceTime?: number;
-  /** 订单状态 0 未启动 1 服务中 2已过期 3完成，4退费销毁 */
-  Status?: number;
 }
 
 /** 日志下载任务列表 */
@@ -2630,6 +2600,8 @@ declare interface HostLoginList {
   MachineExtraInfo?: MachineExtraInfo;
   /** 请求目的端口 */
   Port?: number;
+  /** ip分析 */
+  IPAnalyse?: IPAnalyse;
 }
 
 /** 新增登录审计白名单实体 */
@@ -2700,6 +2672,20 @@ declare interface HostTagInfo {
   RegionName?: string;
   /** 可用区ID */
   RegionId?: number;
+}
+
+/** ip 分析 */
+declare interface IPAnalyse {
+  /** 0 安全1 可疑2 恶意3 未知 */
+  Status?: number;
+  /** 标签特征 */
+  Tags?: string[];
+  /** 家族信息 */
+  Family?: string[];
+  /** 画像 */
+  Profile?: string[];
+  /** 运营商 */
+  Isp?: string;
 }
 
 /** 忽略的基线检测项信息 */
@@ -3502,16 +3488,6 @@ declare interface MalwareWhiteListInfo {
   ModifyTime?: string;
 }
 
-/** 专家服务-月巡检报告 */
-declare interface MonthInspectionReport {
-  /** 巡检报告名称 */
-  ReportName?: string;
-  /** 巡检报告下载地址 */
-  ReportPath?: string;
-  /** 巡检报告更新时间 */
-  ModifyTime?: string;
-}
-
 /** 网络攻击事件 */
 declare interface NetAttackEvent {
   /** 日志ID */
@@ -3548,6 +3524,10 @@ declare interface NetAttackEvent {
   Count?: number;
   /** 是否今日新增主机 */
   New?: boolean;
+  /** 是否开启应用防护，0关闭，1开启 */
+  RaspOpen?: number;
+  /** ip分析 */
+  IPAnalyse?: IPAnalyse;
 }
 
 /** 网络攻击事件详情 */
@@ -3598,6 +3578,8 @@ declare interface NetAttackEventInfo {
   HostOpType?: number;
   /** 进程树,需要用base64 解码 */
   HostOpProcessTree?: string;
+  /** IP分析 */
+  IPAnalyse?: IPAnalyse;
 }
 
 /** 网络攻击top统计数据 */
@@ -3682,6 +3664,22 @@ declare interface OsName {
   Name?: string;
   /** 操作系统类型枚举值 */
   MachineOSType?: number;
+}
+
+/** 补丁信息详情 */
+declare interface PatchInfoDetail {
+  /** KB编号 */
+  KBNo?: string;
+  /** KB名称 */
+  Name?: string;
+  /** 2025-05 */
+  PublishTime?: string;
+  /** KB影响的漏洞 */
+  RelatedCveId?: string[];
+  /** KB说明文档 */
+  KbDocUrl?: string;
+  /** KB id编号 */
+  Id?: number;
 }
 
 /** 登录地信息 */
@@ -3968,22 +3966,6 @@ declare interface ProtectMachineInfo {
   CreateTime?: string;
   /** 到期时间 */
   ExpireTime?: string;
-}
-
-/** 专家服务-旗舰重保信息 */
-declare interface ProtectNetInfo {
-  /** 任务id */
-  TaskId?: string;
-  /** 重保天数 */
-  ProtectDays?: number;
-  /** 重保状态 0未启动，1重保中，2已完成 */
-  Status?: number;
-  /** 重保启动时间 */
-  StartTime?: string;
-  /** 重保完成时间 */
-  EndTime?: string;
-  /** 报告下载地址 */
-  ReportPath?: string;
 }
 
 /** 防护信息统计 */
@@ -4954,30 +4936,6 @@ declare interface SearchTemplate {
   Id?: number;
 }
 
-/** 安全管家列表信息 */
-declare interface SecurityButlerInfo {
-  /** 数据id */
-  Id?: number;
-  /** 订单id */
-  OrderId?: number;
-  /** cvm id */
-  Quuid?: string;
-  /** 服务状态 0-服务中,1-已到期 2已销毁 */
-  Status?: number;
-  /** 服务开始时间 */
-  StartTime?: string;
-  /** 服务结束时间 */
-  EndTime?: string;
-  /** 主机名称 */
-  HostName?: string;
-  /** 主机Ip */
-  HostIp?: string;
-  /** 主机 uuid */
-  Uuid?: string;
-  /** 主机风险数 */
-  RiskCount?: number;
-}
-
 /** 安全事件消息数据。 */
 declare interface SecurityDynamic {
   /** 主机安全客户端UUID。 */
@@ -5488,7 +5446,7 @@ declare interface VulEffectModuleInfo {
 declare interface VulEmergentMsgInfo {
   /** 漏洞id */
   VulId?: number;
-  /** 漏洞纰漏时间 */
+  /** 漏洞披露时间 */
   PublishTime?: string;
   /** 漏洞名 */
   Name?: string;
@@ -5498,6 +5456,10 @@ declare interface VulEmergentMsgInfo {
   SupportFix?: number;
   /** 是否支持自动防御 0:不支持 1:支持 */
   SupportDefense?: number;
+  /** KB对应的ID */
+  KbId?: number;
+  /** KB号 */
+  KbNumber?: string;
 }
 
 /** 查看漏洞修复详情 每台主机每个漏洞修复状态 */
@@ -5532,6 +5494,14 @@ declare interface VulFixStatusInfo {
   FixSuccessCnt?: number;
   /** 修复方式 0组件更新或者安装补丁,1禁用服务 */
   FixMethod?: number;
+  /** kb的ID */
+  KbId?: number;
+  /** kb号 */
+  KbNumber?: string;
+  /** kb名字 */
+  KbName?: string;
+  /** 前置kb列表 */
+  PreKbList?: string[];
 }
 
 /** 机器快照信息 */
@@ -5596,6 +5566,8 @@ declare interface VulInfoHostInfo {
   InstanceId?: string;
   /** 主机类型 */
   MachineType?: string;
+  /** agent是否在线；0不在线，1在线 */
+  AgentStatus?: number;
 }
 
 /** 主机安全-漏洞管理-漏洞列表 */
@@ -5656,6 +5628,10 @@ declare interface VulInfoList {
   VulFixSwitch?: number;
   /** 最近修复时间 */
   LatestFixTime?: string;
+  /** 漏洞对应机器的应用防护开启数量 */
+  RaspOpenNodeCount?: number;
+  /** 漏洞对应机器的应用防护关闭数量 */
+  RaspClosedNodeCount?: number;
 }
 
 /** 漏洞等级数量实体 */
@@ -5806,6 +5782,8 @@ declare interface WebHookPolicy {
   HostCount?: number;
   /** 需排除的机器列表 */
   ExcludedQuuids?: string[];
+  /** 推送语言类型，中文zh，英文en */
+  MsgLanguage?: string;
 }
 
 /** 告警接收人 */
@@ -5816,6 +5794,18 @@ declare interface WebHookReceiver {
   Name?: string;
   /** webhook地址 */
   Addr?: string;
+  /** 类型 */
+  Type?: number;
+  /** 目标地域 */
+  SCFRegion?: string;
+  /** 命名空间 */
+  Namespace?: string;
+  /** 函数名称 */
+  FunctionName?: string;
+  /** 版本 */
+  FunctionVersion?: string;
+  /** 别名 */
+  Alias?: string;
 }
 
 /** 告警接收人的关联策略使用信息 */
@@ -5890,16 +5880,6 @@ declare interface AddLoginWhiteListsRequest {
 declare interface AddLoginWhiteListsResponse {
   /** 重复添加的提示列表 */
   DuplicateHosts?: DuplicateHosts[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CancelIgnoreVulRequest {
-  /** 漏洞事件id串，多个用英文逗号分隔 */
-  EventIds: string;
-}
-
-declare interface CancelIgnoreVulResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7878,26 +7858,6 @@ declare interface DescribeAttackVulTypeListResponse {
   RequestId?: string;
 }
 
-declare interface DescribeAvailableExpertServiceDetailRequest {
-}
-
-declare interface DescribeAvailableExpertServiceDetailResponse {
-  /** 安全管家订单 */
-  ExpertService?: ExpertServiceOrderInfo[];
-  /** 应急响应可用次数 */
-  EmergencyResponse?: number;
-  /** 旗舰护网可用次数 */
-  ProtectNet?: number;
-  /** 是否购买过安全管家 */
-  ExpertServiceBuy?: boolean;
-  /** 是否购买过应急响应 */
-  EmergencyResponseBuy?: boolean;
-  /** 是否购买过旗舰护网 */
-  ProtectNetBuy?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeBanModeRequest {
 }
 
@@ -8770,28 +8730,6 @@ declare interface DescribeESAggregationsResponse {
   RequestId?: string;
 }
 
-declare interface DescribeEmergencyResponseListRequest {
-  /** 过滤条件。Keyword- String - 是否必填：否 - 关键词过滤，Uuids - String - 是否必填：否 - 主机id过滤 */
-  Filters?: Filters[];
-  /** 需要返回的数量，最大值为100 */
-  Limit?: number;
-  /** 排序步长 */
-  Offset?: number;
-  /** 排序方法 */
-  Order?: string;
-  /** 排序字段 StartTime，EndTime */
-  By?: string;
-}
-
-declare interface DescribeEmergencyResponseListResponse {
-  /** 总条数 */
-  TotalCount?: number;
-  /** 应急响应列表 */
-  List?: EmergencyResponseInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeEmergencyVulListRequest {
   /** 返回数量，最大值为100。 */
   Limit?: number;
@@ -8830,46 +8768,6 @@ declare interface DescribeEventByTableResponse {
   Type?: string;
   /** 事件内容的json编码字符串，字段结构对齐事件表 */
   Value?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeExpertServiceListRequest {
-  /** 过滤条件。Keyword- String - 是否必填：否 - 关键词过滤，Uuids - String - 是否必填：否 - 主机id过滤 */
-  Filters?: Filters[];
-  /** 需要返回的数量，最大值为100 */
-  Limit?: number;
-  /** 排序步长 */
-  Offset?: number;
-  /** 排序方法 */
-  Order?: string;
-  /** 排序字段 StartTime，EndTime */
-  By?: string;
-}
-
-declare interface DescribeExpertServiceListResponse {
-  /** 总条数 */
-  TotalCount?: number;
-  /** 安全管家数据 */
-  List?: SecurityButlerInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeExpertServiceOrderListRequest {
-  /** InquireType- String - 是否必填：否 - 订单类型过滤， */
-  Filters?: Filters[];
-  /** 分页条数 最大100条 */
-  Limit?: number;
-  /** 分页步长 */
-  Offset?: number;
-}
-
-declare interface DescribeExpertServiceOrderListResponse {
-  /** 总条数 */
-  TotalCount?: number;
-  /** 订单列表 */
-  List?: ExpertServiceOrderInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9370,6 +9268,8 @@ declare interface DescribeLicenseGeneralResponse {
   AutoBindRaspSwitch?: boolean;
   /** 是否自动新增机器开启rasp防护,false 关闭 true 开启 */
   AutoOpenRaspSwitch?: boolean;
+  /** 是否自动缩容开关开启 */
+  AutoDowngradeSwitch?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9909,7 +9809,7 @@ declare interface DescribeMachineSnapshotResponse {
 declare interface DescribeMachinesRequest {
   /** 机器所属专区类型 CVM 云服务器BM 黑石ECM 边缘计算LH 轻量应用服务器Other 混合云专区 */
   MachineType: string;
-  /** 机器所属地域。如：ap-guangzhou，ap-shanghai */
+  /** 机器所属地域。如：ap-guangzhou，ap-shanghai，非腾讯云主机使用：ap-others */
   MachineRegion: string;
   /** 返回数量，默认为10，最大值为100。 */
   Limit?: number;
@@ -9933,7 +9833,7 @@ declare interface DescribeMachinesResponse {
 declare interface DescribeMachinesSimpleRequest {
   /** 机器所属专区类型 CVM 云服务器BM 黑石ECM 边缘计算LH 轻量应用服务器Other 混合云专区 */
   MachineType: string;
-  /** 机器所属地域。如：ap-guangzhou，ap-shanghai */
+  /** 机器所属地域。如：ap-guangzhou，ap-shangha，非腾讯云主机使用：ap-others */
   MachineRegion: string;
   /** 返回数量，默认为10，最大值为100。 */
   Limit?: number;
@@ -10140,22 +10040,6 @@ declare interface DescribeMalwareWhiteListResponse {
   TotalCount?: number;
   /** 白名单列表 */
   WhiteList?: MalwareWhiteListInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeMonthInspectionReportRequest {
-  /** 分页大小 */
-  Limit: number;
-  /** 分页步长 */
-  Offset: number;
-}
-
-declare interface DescribeMonthInspectionReportResponse {
-  /** 总条数 */
-  TotalCount?: number;
-  /** 巡检报告列表 */
-  List?: MonthInspectionReport[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10398,28 +10282,6 @@ declare interface DescribeProtectDirRelatedServerResponse {
   RequestId?: string;
 }
 
-declare interface DescribeProtectNetListRequest {
-  /** 过滤条件。Keyword- String - 是否必填：否 - 关键词过滤，Uuids - String - 是否必填：否 - 主机id过滤 */
-  Filters?: Filters[];
-  /** 需要返回的数量，最大值为100 */
-  Limit?: number;
-  /** 排序步长 */
-  Offset?: number;
-  /** 排序方法 */
-  Order?: string;
-  /** 排序字段 StartTime，EndTime */
-  By?: string;
-}
-
-declare interface DescribeProtectNetListResponse {
-  /** 总条数 */
-  TotalCount?: number;
-  /** 安全管家数据 */
-  List?: ProtectNetInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribePublicProxyInstallCommandRequest {
   /** nginx主机IP列表，逗号分隔 */
   Ip?: string;
@@ -10644,7 +10506,7 @@ declare interface DescribeRaspMaxCpuRequest {
 }
 
 declare interface DescribeRaspMaxCpuResponse {
-  /** rasp当前最大cpu限制，0<cpu<=100，默认100表示不限制 */
+  /** rasp当前最大cpu限制，大于0，小于等于100，默认100表示不限制 */
   RaspMaxCpu?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -10934,6 +10796,8 @@ declare interface DescribeScanStateResponse {
   RiskEventCount?: number;
   /** 扫描结束时间 */
   ScanEndTime?: string;
+  /** 任务扫描的KB编号 */
+  KBNumber?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10982,6 +10846,8 @@ declare interface DescribeScanTaskDetailsResponse {
   StoppingAll?: boolean;
   /** 扫描出漏洞个数 */
   VulCount?: number;
+  /** 单独扫描kb时的信息 */
+  PatchInfo?: PatchInfoDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11775,6 +11641,8 @@ declare interface DescribeVulFixStatusRequest {
   VulId?: number;
   /** 主机quuid 和VulId 组合可查 某主机最近一次修复任务详情 */
   Quuid?: string;
+  /** 补丁 id */
+  KbId?: number;
 }
 
 declare interface DescribeVulFixStatusResponse {
@@ -13400,16 +13268,6 @@ declare interface GetLocalStorageItemResponse {
   RequestId?: string;
 }
 
-declare interface IgnoreImpactedHostsRequest {
-  /** 漏洞ID数组。 */
-  Ids: number[];
-}
-
-declare interface IgnoreImpactedHostsResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface KeysLocalStorageRequest {
 }
 
@@ -13423,6 +13281,8 @@ declare interface KeysLocalStorageResponse {
 declare interface ModifyAutoOpenProVersionConfigRequest {
   /** 设置自动开通状态。CLOSE：关闭OPEN：打开 */
   Status: string;
+  /** 加固防护模式PROVERSION_POSTPAY 专业版-按量计费PROVERSION_PREPAY 专业版-包年包月FLAGSHIP_PREPAY 旗舰版-包年包月 */
+  ProtectType?: string;
   /** 自动加购/扩容授权开关,默认 1, 0关闭, 1开启 */
   AutoRepurchaseSwitch?: number;
   /** 自动加购的订单是否自动续费,默认0 ,0关闭, 1开启 */
@@ -13433,6 +13293,8 @@ declare interface ModifyAutoOpenProVersionConfigRequest {
   AutoBindRaspSwitch?: number;
   /** 新增机器自动开启rasp防护,默认关闭,0 关闭 1开启 */
   AutoOpenRaspSwitch?: number;
+  /** 自动缩容开关,0 关闭 1开启 */
+  AutoDowngradeSwitch?: number;
 }
 
 declare interface ModifyAutoOpenProVersionConfigResponse {
@@ -14073,7 +13935,7 @@ declare interface ModifyRansomDefenseStrategyStatusResponse {
 }
 
 declare interface ModifyRaspMaxCpuRequest {
-  /** rasp当前最大cpu限制，0<cpu<=100，默认100表示不限制 */
+  /** rasp当前最大cpu限制，大于0，小于等于100，默认100表示不限制 */
   RaspMaxCpu?: number;
 }
 
@@ -14277,6 +14139,8 @@ declare interface ModifyWebHookPolicyRequest {
   Quuids?: string[];
   /** 需排除的机器列表 */
   ExcludedQuuids?: string[];
+  /** 推送语言类型，中文zh，英文en */
+  MsgLanguage?: string;
 }
 
 declare interface ModifyWebHookPolicyResponse {
@@ -14305,6 +14169,18 @@ declare interface ModifyWebHookReceiverRequest {
   Addr?: string;
   /** 是否修改 */
   IsModify?: boolean;
+  /** 类型 */
+  Type?: number;
+  /** 目标地域 */
+  SCFRegion?: string;
+  /** 命名空间 */
+  Namespace?: string;
+  /** 函数名称 */
+  FunctionName?: string;
+  /** 函数版本 */
+  FunctionVersion?: string;
+  /** 别名 */
+  Alias?: string;
 }
 
 declare interface ModifyWebHookReceiverResponse {
@@ -14448,7 +14324,9 @@ declare interface RetryVulFixRequest {
   /** 主机Quuid */
   Quuid: string;
   /** 漏洞id */
-  VulId: number;
+  VulId?: number;
+  /** Kb Id */
+  KbId?: number;
 }
 
 declare interface RetryVulFixResponse {
@@ -14517,9 +14395,15 @@ declare interface ScanVulAgainRequest {
   EventIds: string;
   /** 重新检查的机器uuid,多个逗号分隔 */
   Uuids?: string;
+  /** 0漏洞,1windows 补丁 */
+  EventType?: number;
 }
 
 declare interface ScanVulAgainResponse {
+  /** 执行成功主机数 */
+  SuccessCount?: number;
+  /** 基础版(不支持)的主机数 */
+  BasicVersionCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -14541,6 +14425,8 @@ declare interface ScanVulRequest {
   VulIds?: number[];
   /** 0版本比对，2版本比对+poc */
   ScanMethod?: number;
+  /** kb编号 */
+  KBNumber?: string[];
 }
 
 declare interface ScanVulResponse {
@@ -14857,8 +14743,6 @@ declare interface Cwp {
   (): Versions;
   /** 批量添加异地登录白名单 {@link AddLoginWhiteListsRequest} {@link AddLoginWhiteListsResponse} */
   AddLoginWhiteLists(data: AddLoginWhiteListsRequest, config?: AxiosRequestConfig): AxiosPromise<AddLoginWhiteListsResponse>;
-  /** @deprecated 取消漏洞忽略 {@link CancelIgnoreVulRequest} {@link CancelIgnoreVulResponse} */
-  CancelIgnoreVul(data: CancelIgnoreVulRequest, config?: AxiosRequestConfig): AxiosPromise<CancelIgnoreVulResponse>;
   /** 修改事件忽略状态 {@link ChangeRuleEventsIgnoreStatusRequest} {@link ChangeRuleEventsIgnoreStatusResponse} */
   ChangeRuleEventsIgnoreStatus(data: ChangeRuleEventsIgnoreStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeRuleEventsIgnoreStatusResponse>;
   /** 修改策略可用状态 {@link ChangeStrategyEnableStatusRequest} {@link ChangeStrategyEnableStatusResponse} */
@@ -15105,8 +14989,6 @@ declare interface Cwp {
   DescribeAttackTrends(data?: DescribeAttackTrendsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackTrendsResponse>;
   /** 获取网络攻击威胁类型列表 {@link DescribeAttackVulTypeListRequest} {@link DescribeAttackVulTypeListResponse} */
   DescribeAttackVulTypeList(data?: DescribeAttackVulTypeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackVulTypeListResponse>;
-  /** 可用订单详情 {@link DescribeAvailableExpertServiceDetailRequest} {@link DescribeAvailableExpertServiceDetailResponse} */
-  DescribeAvailableExpertServiceDetail(data?: DescribeAvailableExpertServiceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableExpertServiceDetailResponse>;
   /** 获取爆破阻断模式 {@link DescribeBanModeRequest} {@link DescribeBanModeResponse} */
   DescribeBanMode(data?: DescribeBanModeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBanModeResponse>;
   /** 获取阻断地域 {@link DescribeBanRegionsRequest} {@link DescribeBanRegionsResponse} */
@@ -15203,16 +15085,10 @@ declare interface Cwp {
   DescribeDirectConnectInstallCommand(data: DescribeDirectConnectInstallCommandRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDirectConnectInstallCommandResponse>;
   /** 获取ES字段聚合结果 {@link DescribeESAggregationsRequest} {@link DescribeESAggregationsResponse} */
   DescribeESAggregations(data: DescribeESAggregationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeESAggregationsResponse>;
-  /** 应急响应列表 {@link DescribeEmergencyResponseListRequest} {@link DescribeEmergencyResponseListResponse} */
-  DescribeEmergencyResponseList(data?: DescribeEmergencyResponseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmergencyResponseListResponse>;
   /** 应急漏洞列表 {@link DescribeEmergencyVulListRequest} {@link DescribeEmergencyVulListResponse} */
   DescribeEmergencyVulList(data?: DescribeEmergencyVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmergencyVulListResponse>;
   /** 根据事件表名和id查询告警事件详情 {@link DescribeEventByTableRequest} {@link DescribeEventByTableResponse} */
   DescribeEventByTable(data: DescribeEventByTableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventByTableResponse>;
-  /** 安全管家列表 {@link DescribeExpertServiceListRequest} {@link DescribeExpertServiceListResponse} */
-  DescribeExpertServiceList(data?: DescribeExpertServiceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExpertServiceListResponse>;
-  /** 专家服务订单列表 {@link DescribeExpertServiceOrderListRequest} {@link DescribeExpertServiceOrderListResponse} */
-  DescribeExpertServiceOrderList(data?: DescribeExpertServiceOrderListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExpertServiceOrderListResponse>;
   /** 导出区域主机列表 {@link DescribeExportMachinesRequest} {@link DescribeExportMachinesResponse} */
   DescribeExportMachines(data: DescribeExportMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportMachinesResponse>;
   /** 日志快速分析统计 {@link DescribeFastAnalysisRequest} {@link DescribeFastAnalysisResponse} */
@@ -15337,8 +15213,6 @@ declare interface Cwp {
   DescribeMalwareWhiteList(data?: DescribeMalwareWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMalwareWhiteListResponse>;
   /** 获取木马白名单受影响列表 {@link DescribeMalwareWhiteListAffectListRequest} {@link DescribeMalwareWhiteListAffectListResponse} */
   DescribeMalwareWhiteListAffectList(data: DescribeMalwareWhiteListAffectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMalwareWhiteListAffectListResponse>;
-  /** 安全管家月巡检报告下载 {@link DescribeMonthInspectionReportRequest} {@link DescribeMonthInspectionReportResponse} */
-  DescribeMonthInspectionReport(data: DescribeMonthInspectionReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonthInspectionReportResponse>;
   /** 查询网络攻击设置 {@link DescribeNetAttackSettingRequest} {@link DescribeNetAttackSettingResponse} */
   DescribeNetAttackSetting(data?: DescribeNetAttackSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetAttackSettingResponse>;
   /** 获取网络攻击白名单列表 {@link DescribeNetAttackWhiteListRequest} {@link DescribeNetAttackWhiteListResponse} */
@@ -15365,8 +15239,6 @@ declare interface Cwp {
   DescribeProtectDirList(data: DescribeProtectDirListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectDirListResponse>;
   /** 查询防护目录关联服务器 {@link DescribeProtectDirRelatedServerRequest} {@link DescribeProtectDirRelatedServerResponse} */
   DescribeProtectDirRelatedServer(data: DescribeProtectDirRelatedServerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectDirRelatedServerResponse>;
-  /** 旗舰重保列表 {@link DescribeProtectNetListRequest} {@link DescribeProtectNetListResponse} */
-  DescribeProtectNetList(data?: DescribeProtectNetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectNetListResponse>;
   /** 获取公网接入代理安装命令 {@link DescribePublicProxyInstallCommandRequest} {@link DescribePublicProxyInstallCommandResponse} */
   DescribePublicProxyInstallCommand(data?: DescribePublicProxyInstallCommandRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicProxyInstallCommandResponse>;
   /** 查询主机快照备份列表 {@link DescribeRansomDefenseBackupListRequest} {@link DescribeRansomDefenseBackupListResponse} */
@@ -15707,8 +15579,6 @@ declare interface Cwp {
   FixBaselineDetect(data: FixBaselineDetectRequest, config?: AxiosRequestConfig): AxiosPromise<FixBaselineDetectResponse>;
   /** 获取本地存储数据 {@link GetLocalStorageItemRequest} {@link GetLocalStorageItemResponse} */
   GetLocalStorageItem(data: GetLocalStorageItemRequest, config?: AxiosRequestConfig): AxiosPromise<GetLocalStorageItemResponse>;
-  /** @deprecated 忽略漏洞 {@link IgnoreImpactedHostsRequest} {@link IgnoreImpactedHostsResponse} */
-  IgnoreImpactedHosts(data: IgnoreImpactedHostsRequest, config?: AxiosRequestConfig): AxiosPromise<IgnoreImpactedHostsResponse>;
   /** 获取本地存储键值列表 {@link KeysLocalStorageRequest} {@link KeysLocalStorageResponse} */
   KeysLocalStorage(data?: KeysLocalStorageRequest, config?: AxiosRequestConfig): AxiosPromise<KeysLocalStorageResponse>;
   /** 设置自动开通配置 {@link ModifyAutoOpenProVersionConfigRequest} {@link ModifyAutoOpenProVersionConfigResponse} */

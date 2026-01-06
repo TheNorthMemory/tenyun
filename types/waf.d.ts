@@ -496,6 +496,56 @@ declare interface BotIdConfig {
   Redirect?: string;
 }
 
+/** BOT-ID规则配置详情 */
+declare interface BotIdDetail {
+  /** 规则ID */
+  RuleId?: string;
+  /** 规则名称 */
+  BotId?: string;
+  /** 规则开关 */
+  Status?: boolean;
+  /** 规则动作 */
+  Action?: string;
+  /** 风险等级 */
+  Level?: number;
+  /** 规则类型 */
+  BotIdType?: string;
+  /** 修改时间 */
+  ModifyTime?: number;
+  /** 插入时间 */
+  InsertTime?: number;
+  /** 规则描述 */
+  Description?: string;
+  /** 影响 */
+  Influence?: string;
+  /** 重定向路径 */
+  Redirect?: string;
+  /** 是否关联事件 */
+  HasEvent?: boolean;
+}
+
+/** Bot-Id规则统计信息 */
+declare interface BotIdStat {
+  /** 模式：观察/拦截/自定义 */
+  Pattern?: string;
+  /** 规则总数 */
+  TotalCount?: number;
+  /** 配置观察的规则数 */
+  MonitorCount?: number;
+  /** 配置拦截的规则数 */
+  InterceptCount?: number;
+  /** 配置重定向的规则数 */
+  RedirectCount?: number;
+  /** 配置人机识别的规则数 */
+  CaptchaCount?: number;
+  /** 全局防护等级 */
+  ProtectLevel?: string;
+  /** 全局重定向路径 */
+  GlobalRedirect?: string;
+  /** JS挑战的数目 */
+  JsChallengeCount?: number;
+}
+
 /** BOT安全监测资源信息 */
 declare interface BotMonitorPkg {
   /** 资源id */
@@ -4568,6 +4618,36 @@ declare interface DescribeBatchIpAccessControlResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBotIdRuleRequest {
+  /** 域名 */
+  Domain: string;
+  /** 场景ID */
+  SceneId: string;
+  /** 规则ID */
+  RuleId?: string;
+  /** 规则名称 */
+  BotId?: string;
+  /** 风险等级筛选 */
+  Level?: number[];
+  /** 规则类型筛选 */
+  BotIdType?: string[];
+  /** 规则开关-用于筛选: 0-全部 1-关闭 2-开启 */
+  Status?: number;
+  /** 动作类型-用于筛选 */
+  RuleAction?: string[];
+}
+
+declare interface DescribeBotIdRuleResponse {
+  /** 规则列表 */
+  Data?: BotIdDetail[] | null;
+  /** 符合条件的规则数量 */
+  TotalCount?: number;
+  /** Bot规则数量统计信息 */
+  StatInfo?: BotIdStat;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBotSceneListRequest {
   /** 域名 */
   Domain: string;
@@ -7595,6 +7675,8 @@ declare interface Waf {
   DescribeAutoDenyIP(data: DescribeAutoDenyIPRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoDenyIPResponse>;
   /** 批量防护IP黑白名单查询 {@link DescribeBatchIpAccessControlRequest} {@link DescribeBatchIpAccessControlResponse} */
   DescribeBatchIpAccessControl(data: DescribeBatchIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchIpAccessControlResponse>;
+  /** 获取BotId规则列表 {@link DescribeBotIdRuleRequest} {@link DescribeBotIdRuleResponse} */
+  DescribeBotIdRule(data: DescribeBotIdRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBotIdRuleResponse>;
   /** 获取BOT场景列表与概览 {@link DescribeBotSceneListRequest} {@link DescribeBotSceneListResponse} */
   DescribeBotSceneList(data: DescribeBotSceneListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBotSceneListResponse>;
   /** 获取Bot场景全局概览 {@link DescribeBotSceneOverviewRequest} {@link DescribeBotSceneOverviewResponse} */

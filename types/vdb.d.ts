@@ -360,6 +360,82 @@ declare interface DescribeInstancesResponse {
   RequestId?: string;
 }
 
+declare interface DescribePriceCreateInstanceRequest {
+  /** 实例类型。- base：免费测试版。- single：单机版。- cluster：高可用版。 */
+  InstanceType: string;
+  /** 指定实例所需的 CPU 核数。实例类型不同，支持的 CPU 核数存在差异。- 计算型： 1、2、4、8、16、24、32。- 标准型： 1、2、4、8、12、16。- 存储型： 1、2、4、6、8。 */
+  Cpu: number;
+  /** 指定实例所需的内存大小。单位：GB。选择具体规格，请参见[配置规格（选型）](https://cloud.tencent.com/document/product/1709/113399)。 */
+  Memory: number;
+  /** 指定实例所需的磁盘大小，单位：GB。选择具体规格，请参见[配置规格（选型）](https://cloud.tencent.com/document/product/1709/113399)。 */
+  DiskSize: number;
+  /** 指定实例所需配置的节点数量。选择方法，请参见[配置规格（选型）](https://cloud.tencent.com/document/product/1709/113399)。 */
+  WorkerNodeNum: number;
+  /** 指定实例计费方式。- 0：按量付费。- 1：包年包月。 */
+  PayMode: number;
+  /** 购买实例数量。 */
+  GoodsNum: number;
+  /** 产品版本，0-标准版，1-容量增强版 */
+  ProductType?: number;
+  /** 实例类型为高可用版，需指定可用区选项。- two：两可用区。- three：三可用区。 */
+  Mode?: string;
+  /** 若计费方式为包年包月，指定包年包月续费的时长。- 单位：月。- 取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。默认为1。 */
+  PayPeriod?: number;
+}
+
+declare interface DescribePriceCreateInstanceResponse {
+  /** 优惠后价格，单位：分 */
+  Price?: number;
+  /** 原价格，单位：分 */
+  OriginalPrice?: number;
+  /** 币种。CNY-人民币，USD-美元 */
+  Currency?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePriceRenewInstanceRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 包年包月的时长，单位：月 */
+  PayPeriod: number;
+}
+
+declare interface DescribePriceRenewInstanceResponse {
+  /** 优惠后价格，单位：分 */
+  Price?: number;
+  /** 原价格，单位：分 */
+  OriginalPrice?: number;
+  /** 币种。CNY-人民币，USD-美元 */
+  Currency?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePriceResizeInstanceRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 指定实例所需的 CPU 核数。实例类型不同，支持的 CPU 核数存在差异。- 计算型： 1、2、4、8、16、24、32。- 标准型： 1、2、4、8、12、16。- 存储型： 1、2、4、6、8。 */
+  Cpu?: number;
+  /** 指定实例所需的内存大小。单位：GB。选择具体规格，请参见[配置规格（选型）](https://cloud.tencent.com/document/product/1709/113399)。 */
+  Memory?: number;
+  /** 指定实例所需的磁盘大小，单位：GB。选择具体规格，请参见[配置规格（选型）](https://cloud.tencent.com/document/product/1709/113399)。 */
+  DiskSize?: number;
+  /** 指定实例所需配置的节点数量。选择方法，请参见[配置规格（选型）](https://cloud.tencent.com/document/product/1709/113399)。 */
+  WorkerNodeNum?: number;
+}
+
+declare interface DescribePriceResizeInstanceResponse {
+  /** 优惠后价格，单位：分 */
+  Price?: number;
+  /** 原价格，单位：分 */
+  OriginalPrice?: number;
+  /** 币种。CNY-人民币，USD-美元 */
+  Currency?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DestroyInstancesRequest {
   /** 以数组形式指定待销毁下线的实例 ID。 */
   InstanceIds: string[];
@@ -477,6 +553,12 @@ declare interface Vdb {
   DescribeInstanceNodes(data: DescribeInstanceNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceNodesResponse>;
   /** 查询实例列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
+  /** 查询新购实例价格 {@link DescribePriceCreateInstanceRequest} {@link DescribePriceCreateInstanceResponse} */
+  DescribePriceCreateInstance(data: DescribePriceCreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePriceCreateInstanceResponse>;
+  /** 查询实例续费价格 {@link DescribePriceRenewInstanceRequest} {@link DescribePriceRenewInstanceResponse} */
+  DescribePriceRenewInstance(data: DescribePriceRenewInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePriceRenewInstanceResponse>;
+  /** 查询实例变配价格 {@link DescribePriceResizeInstanceRequest} {@link DescribePriceResizeInstanceResponse} */
+  DescribePriceResizeInstance(data: DescribePriceResizeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePriceResizeInstanceResponse>;
   /** 销毁实例 {@link DestroyInstancesRequest} {@link DestroyInstancesResponse} */
   DestroyInstances(data: DestroyInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyInstancesResponse>;
   /** 安全组批量解绑云资源 {@link DisassociateSecurityGroupsRequest} {@link DisassociateSecurityGroupsResponse} */

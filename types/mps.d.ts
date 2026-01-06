@@ -1646,9 +1646,9 @@ declare interface AigcStoreCosParam {
 
 /** 用于AIGC创作视频时用到的扩展参数信息。 */
 declare interface AigcVideoExtraParam {
-  /** 生成视频的分辨率，分辨率与选择模型及设置的视频时长相关。 不同模型支持的分辨率选项:1. Kling 720P(默认), 1080P。2. Hailuo 768P(默认), 1080P。3. Jimeng 1080P(默认)。4. Vidu 720P(默认)，1080P。5. GV 720P(默认),1080P。6. OS 720P, 图片仅支持1280x720、720x1280，暂不支持指定。注意：除模型可支持的分辨率外，还可以生成 2K、4K分辨率。 */
+  /** 生成视频的分辨率，分辨率与选择模型及设置的视频时长相关。 不同模型支持的分辨率选项:1. Kling 720P(默认), 1080P。2. Hailuo 768P(默认), 1080P。3. Vidu 720P(默认)，1080P。4. GV 720P(默认),1080P。5. OS 720P, 图片仅支持1280x720、720x1280，暂不支持指定。注意：除模型可支持的分辨率外，还可以生成 2K、4K分辨率。 */
   Resolution?: string;
-  /** 指定所生成视频的宽高比。 不同模型对于此参数的支持：1. Kling 仅文生视频支持, 16:9(默认值)、9:16、 1:1。2. Hailuo 暂不支持。3. Jimeng ["16:9"、"4:3"、"1:1"、"3:4"、"9:16"、"21:9"]4. Vidu 仅文生和参考图生视频 支持[16:9、9:16、4:3、3:4、1:1]，其中仅q2支持4:3、3:4。5. GV 16:9(默认值)、9:16。6. OS 仅文生视频支持, 16:9(默认), 9:16。注：关于具体模型支持的宽高比例，可查看具体模型官网介绍获取更完整描述。 */
+  /** 指定所生成视频的宽高比。 不同模型对于此参数的支持：1. Kling 仅文生视频支持, 16:9(默认值)、9:16、 1:1。2. Hailuo 暂不支持。3. Vidu 仅文生和参考图生视频 支持[16:9、9:16、4:3、3:4、1:1]，其中仅q2支持4:3、3:4。4. GV 16:9(默认值)、9:16。5. OS 仅文生视频支持, 16:9(默认), 9:16。注：关于具体模型支持的宽高比例，可查看具体模型官网介绍获取更完整描述。 */
   AspectRatio?: string;
 }
 
@@ -7099,9 +7099,9 @@ declare interface CreateAdaptiveDynamicStreamingTemplateResponse {
 }
 
 declare interface CreateAigcImageTaskRequest {
-  /** 模型名称。当前支持的模型列表：Hunyuan,GEM，Jimeng，Qwen。 */
+  /** 模型名称。当前支持的模型列表：Hunyuan,GEM，Qwen。 */
   ModelName?: string;
-  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。1. GEM， 可选[2.5,3.0]。2. Jimeng，可选[4.0]。 */
+  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。1. GEM， 可选[2.5,3.0]。 */
   ModelVersion?: string;
   /** 生成图片的描述。(注：最大支持1000字符)。当未传入参考图片时，此参数必填。 */
   Prompt?: string;
@@ -7127,9 +7127,9 @@ declare interface CreateAigcImageTaskResponse {
 }
 
 declare interface CreateAigcVideoTaskRequest {
-  /** 模型名称。当前支持的模型列表:Hunyuan,Hailuo，Kling，Jimeng，Vidu，OS，GV。 */
+  /** 模型名称。当前支持的模型列表:Hunyuan,Hailuo，Kling，Vidu，OS，GV。 */
   ModelName?: string;
-  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。1. Hailuo， 可选[02、2.3]。2. Kling，可选[2.0、2.1、2.5]。3. Jimeng, 可选[3.0pro]。4. Vidu,可选[q2、q2-pro、q2-turbo]。4. GV, 可选[3.1]。5. OS，可选[2.0]。 */
+  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。1. Hailuo， 可选[02、2.3]。2. Kling，可选[2.0、2.1、2.5、O1、2.6]。3. Vidu,可选[q2、q2-pro、q2-turbo]。4. GV, 可选[3.1]。5. OS，可选[2.0]。 */
   ModelVersion?: string;
   /** 生成视频的描述。(注：最大支持2000字符)。当未传入图片时，此参数必填。 */
   Prompt?: string;
@@ -7143,12 +7143,14 @@ declare interface CreateAigcVideoTaskRequest {
   LastImageUrl?: string;
   /** 最多包含三张素材资源图片的列表，用于描述模型在生成视频时要使用的资源图片。支持多图输入的模型：1. GV，使用多图输入时，不可使用ImageUrl和LastImageUrl。2. Vidu，支持多图参考生视频。q2模型1-7张图片，可通过ImageInfos里面的ReferenceType作为主体id来传入。注意：1. 图片大小不超过10M。2. 支持的图片格式：jpeg、png。 */
   ImageInfos?: AigcVideoReferenceImageInfo[];
-  /** 生成视频的时长。注意：1. Kling支持 5、10秒。默认: 5秒。2. Jimeng支持5、10秒。 默认: 5秒。3. Hailuo的std模式可支持6、10秒，其他仅6秒。默认：6秒。4. Vidu支持1-10秒。4. GV支持 8秒。 默认：8秒。5. OS支持4、8、12秒。 默认：8秒。 */
+  /** 生成视频的时长。注意：1. Kling支持 5、10秒。默认: 5秒。2. Hailuo的std模式可支持6、10秒，其他仅6秒。默认：6秒。3. Vidu支持1-10秒。4. GV支持 8秒。 默认：8秒。5. OS支持4、8、12秒。 默认：8秒。 */
   Duration?: number;
-  /** 用于传入模型要求的额外参数。 */
+  /** 用于传入要求的额外参数。 */
   ExtraParameters?: AigcVideoExtraParam;
   /** 文件结果指定存储Cos桶信息。 注意：需开通Cos，创建并授权MPS_QcsRole角色。 */
   StoreCosParam?: AigcStoreCosParam;
+  /** 用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。示例：{\"camera_control\":{\"type\":\"simple\"}} */
+  AdditionalParameters?: string;
   /** 接口操作者名称。 */
   Operator?: string;
 }

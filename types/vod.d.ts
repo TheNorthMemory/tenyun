@@ -1727,9 +1727,9 @@ declare namespace V20180717 {
     ClassId?: number;
     /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
     ExpireTime?: string;
-    /** 生成图片的分辨率。可选值为 720P、1080P、2K、4K、1024x1024、2048x2048、2304x1728、2496x1664、2560x1440、3024x1296、4096x4096、4694x3520、4992x3328、5404x3040、6198x2656，其中使用模型 Jimeng 时，推荐通过 Prompt 指定图片分辨率和宽高比。 */
+    /** 生成图片的分辨率。可选值为 720P、1080P、2K、4K、1024x1024、2048x2048、2304x1728、2496x1664、2560x1440、3024x1296、4096x4096、4694x3520、4992x3328、5404x3040、6198x2656。 */
     Resolution?: string;
-    /** 指定所生成图片的宽高比。当 ModelName 是 GEM，可选值是 1:1、3:2、2:3、3:4、4:3、4:5、5:4、9:16、16:9 和 21:9；当 ModelName 是 Qwen、Jimeng，则暂不支持，其中 Jimeng 会结合 Prompt意图、参考图片尺寸，由模型智能判断输出图片的宽高比。 */
+    /** 指定所生成图片的宽高比。当 ModelName 是 GEM，可选值是 1:1、3:2、2:3、3:4、4:3、4:5、5:4、9:16、16:9 和 21:9；当 ModelName 是 Qwen，则暂不支持。 */
     AspectRatio?: string;
     /** 是否允许人物或人脸生成。取值有： AllowAdult：允许生成成人； Disallowed：禁止在图片中包含人物或人脸； */
     PersonGeneration?: string;
@@ -1741,10 +1741,12 @@ declare namespace V20180717 {
 
   /** 场景化 AIGC 生图配置。 */
   interface AigcImageSceneInfo {
-    /** AI生图场景类型，可选值：- change_clothes：AI换衣。 */
+    /** AI生图场景类型，可选值：- change_clothes：AI换衣。- product_image：AI生商品图。 */
     Type: string;
     /** 当 Type 为 change_clothes 时有效，则该项为必填，表示AI 换衣生图配置参数。 */
     ChangeClothesConfig?: ChangeClothesConfig;
+    /** 当 Type 为 product_image 时有效，表示AI 生商品图配置参数。 */
+    ProductImageConfig?: ProductImageConfig;
   }
 
   /** AIGC 生图任务信息 */
@@ -1829,7 +1831,7 @@ declare namespace V20180717 {
 
   /** AIGC 统计数据 */
   interface AigcUsageDataItem {
-    /** AIGC规格。取值有：Qwen2.0Gem2.5Gem3.0_1KGem3.0_2KGem3.0_4KSora2Veo3.1FastVeo3.1StandardKling2.5pro_720PKling2.5pro_1080PKlingO1_1080PKling2.0&2.1std_720PKling2.0&2.1pro_1080PKlingO1_720PHailuo02&2.3_1080PHailuo02&2.3_768PHailuo2.3fast_768PHailuo2.3fast_1080PJimeng4.0Jimeng3.0proViduQ2_720PViduQ2_1080PViduQ2pro_720PViduQ2pro_1080PViduQ2turbo_720PViduQ2turbo_1080PViduQ2_720P_OffPeakViduQ2_1080P_OffPeakViduQ2turbo_720P_OffPeakViduQ2turbo_1080P_OffPeakViduQ2pro_720P_OffPeakViduQ2pro_1080P_OffPeakHunyuan1.5_720PHunyuan1.5_1080PHunyuan3.0_1KHunyuan3.0_2KHunyuan3.0_4KMingmou1.0_1080PMingmou1.0_1KMingmou1.0_2KMingmou1.0_4KMingmou1.0_720PSeedance1.5ProAudioOn_480PSeedance1.5ProAudioOff_480PSeedance1.5ProAudioOn_720PSeedance1.5ProAudioOff_720PSeedance1.0Pro_480PSeedance1.0Pro_720PSeedance1.0Pro_1080PSeedance1.0ProFast480PSeedance1.0ProFast720PSeedance1.0ProFast1080PSeedance1.0Lite480PSeedance1.0Lite720PSeedance1.0Lite1080P unknown */
+    /** AIGC规格。取值有：Qwen2.0Gem2.5Gem3.0_1KGem3.0_2KGem3.0_4KSora2Veo3.1FastVeo3.1StandardKling2.5pro_720PKling2.5pro_1080PKlingO1_1080PKling2.0&2.1std_720PKling2.0&2.1pro_1080PKlingO1_720PHailuo02&2.3_1080PHailuo02&2.3_768PHailuo2.3fast_768PHailuo2.3fast_1080PViduQ2_720PViduQ2_1080PViduQ2pro_720PViduQ2pro_1080PViduQ2turbo_720PViduQ2turbo_1080PViduQ2_720P_OffPeakViduQ2_1080P_OffPeakViduQ2turbo_720P_OffPeakViduQ2turbo_1080P_OffPeakViduQ2pro_720P_OffPeakViduQ2pro_1080P_OffPeakHunyuan1.5_720PHunyuan1.5_1080PHunyuan3.0_1KHunyuan3.0_2KHunyuan3.0_4KMingmou1.0_1080PMingmou1.0_1KMingmou1.0_2KMingmou1.0_4KMingmou1.0_720P unknown */
     Specification?: string;
     /** 用量数据。 */
     DataSet?: TaskStatDataItem[];
@@ -1845,11 +1847,11 @@ declare namespace V20180717 {
     ClassId?: number;
     /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
     ExpireTime?: string;
-    /** 生成视频的时长，单位：秒。当 ModelName 是 Kling，可选值为 5、10，默认为 5；当 ModelName 是 Jimeng，可选值为 5、10，默认为 5；当 ModelName 是 Hailuo，可选值为 6、10，默认为 6；当 ModelName 是 Vidu，可指定1-10；当 ModelName 是 GV，可选值为 8，默认为 8；当 ModelName 是 OS，可选值为 4、8、12，默认为 8； */
+    /** 生成视频的时长，单位：秒。当 ModelName 是 Kling，可选值为 5、10，默认为 5；当 ModelName 是 Hailuo，可选值为 6、10，默认为 6；当 ModelName 是 Vidu，可指定1-10；当 ModelName 是 GV，可选值为 8，默认为 8；当 ModelName 是 OS，可选值为 4、8、12，默认为 8； */
     Duration?: number;
-    /** 生成视频的分辨率。当 ModelName 是 Kling，可选值为 720P、1080P，默认为 720P；当 ModelName 是 Hailuo，可选值为 768P、1080P，默认为 768P；当 ModelName 是 Jimeng，可选值为 1080P；当 ModelName 是 Vidu，可选值为 720P、1080P，默认为 720P；当 ModelName 是 GV，可选值为 720P、1080P，默认为 720P；当 ModelName 是 OS，可选值为 720P； */
+    /** 生成视频的分辨率。当 ModelName 是 Kling，可选值为 720P、1080P，默认为 720P；当 ModelName 是 Hailuo，可选值为 768P、1080P，默认为 768P；当 ModelName 是 Vidu，可选值为 720P、1080P，默认为 720P；当 ModelName 是 GV，可选值为 720P、1080P，默认为 720P；当 ModelName 是 OS，可选值为 720P； */
     Resolution?: string;
-    /** 指定所生成视频的宽高比。当 ModelName 是 Kling，当文生视频时，则可选值为 16:9、9:16、 1:1，默认为16:9；当 ModelName 是 Jimeng，当文生视频时，则可选值为 16:9、4:3、1:1、3:4、9:16、21:9当 ModelName 是 Vidu，当文生视频时和使用参考图片生成时，则可选值为 16:9、9:16、4:3、3:4、1:1，其中仅版本q2支持4:3、3:4当 ModelName 是 GV，则可选值为 16:9、9:16，默认为 16:9；当 ModelName 是 OS，当文生视频时，则可选值为 16:9、9:16，默认为 16:9；当 ModelName 是 Hailuo，则暂不支持。 */
+    /** 指定所生成视频的宽高比。当 ModelName 是 Kling，当文生视频时，则可选值为 16:9、9:16、 1:1，默认为16:9；当 ModelName 是 Vidu，当文生视频时和使用参考图片生成时，则可选值为 16:9、9:16、4:3、3:4、1:1，其中仅版本q2支持4:3、3:4当 ModelName 是 GV，则可选值为 16:9、9:16，默认为 16:9；当 ModelName 是 OS，当文生视频时，则可选值为 16:9、9:16，默认为 16:9；当 ModelName 是 Hailuo，则暂不支持。 */
     AspectRatio?: string;
     /** 是否生成音频。支持的模型包括 GV、OS、Vidu。取值有： Enabled：开启； Disabled：关闭；默认值：Disabled */
     AudioGeneration?: string;
@@ -4705,6 +4707,20 @@ declare namespace V20180717 {
     SubTaskSet?: MPSSubTaskResult[];
   }
 
+  /** AI 生商品图参数配置 */
+  interface ProductImageConfig {
+    /** 生成图片背景的提示词。如果此字段缺省则内部会自行生成灵感。 */
+    Prompt?: string;
+    /** 要阻止模型生成图片的提示词。 */
+    NegativePrompt?: string;
+    /** 关于产品的描述，详细的描述，有助于生成更符合要求的图片。 */
+    ProductDesc?: string;
+    /** 特殊要求。如有特殊要求，可通过该字段传入。 */
+    MoreRequirement?: string;
+    /** 期望生成的图片张数。不传默认值为1，最大合法值为10。 */
+    OutputImageCount?: number;
+  }
+
   /** 预付费商品实例 */
   interface ProductInstance {
     /** 预付费商品实例类型，取值有：StarterPackage：点播新手包。MiniProgramPlugin：点播小程序插件。ResourcePackage：点播资源包。 */
@@ -5645,6 +5661,8 @@ declare namespace V20180717 {
     ClassId?: number;
     /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
     ExpireTime?: string;
+    /** 指定所生成图片的宽高比。输入格式为 W:H。仅生商品图场景有效。 */
+    AspectRatio?: string;
   }
 
   /** 场景化 AIGC 生图任务信息 */
@@ -6932,9 +6950,9 @@ declare namespace V20180717 {
   interface CreateAigcImageTaskRequest {
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId: number;
-    /** 模型名称。取值：GEM：Gemini；Jimeng：即梦；Qwen：千问。Hunyuan：混元。Mingmou：明眸。 */
+    /** 模型名称。取值：GEM：Gemini；Qwen：千问。Hunyuan：混元。Mingmou：明眸。 */
     ModelName: string;
-    /** 模型版本。取值：当 ModelName 是 GEM，可选值为 2.5、3.0；当 ModelName 是 Jimeng，可选值为 4.0；当 ModelName 是 Qwen，可选值为 0925；当 ModelName 是 Hunyuan，可选值为 3.0；当 ModelName 是 Mingmou，可选值为 1.0； */
+    /** 模型版本。取值：当 ModelName 是 GEM，可选值为 2.5、3.0；当 ModelName 是 Qwen，可选值为 0925；当 ModelName 是 Hunyuan，可选值为 3.0；当 ModelName 是 Mingmou，可选值为 1.0； */
     ModelVersion: string;
     /** AIGC 生图任务的输入图片的文件信息。默认只支持指定1个，使用模型 GEM 时，版本2.5最多指定3个，版本3.0最多指定14个。 */
     FileInfos?: AigcImageTaskInputFileInfo[];
@@ -6966,9 +6984,9 @@ declare namespace V20180717 {
   interface CreateAigcVideoTaskRequest {
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId: number;
-    /** 模型名称。取值：Hailuo：海螺；Kling：可灵； Jimeng：即梦；Vidu；GV：Google Veo；OS：OpenAI Sora；Hunyuan：混元；Mingmou：明眸； Seedance； */
+    /** 模型名称。取值：Hailuo：海螺；Kling：可灵； Jimeng：即梦；Vidu；GV：Google Veo；OS：OpenAI Sora；Hunyuan：混元；Mingmou：明眸； */
     ModelName: string;
-    /** 模型版本。取值：当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、O1；当 ModelName 是 Jimeng，可选值为 3.0pro；当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo；当 ModelName 是 GV，可选值为 3.1、3.1-Fast；当 ModelName 是 OS，可选值为 2.0；当 ModelName 是 Hunyuan，可选值为 1.5；当 ModelName 是 Mingmou，可选值为 1.0；当 ModelName 是 Seedance，可选值为 1.5-pro，1.0-pro，1.0-lite-i2v，1.0-pro-fast，其中1.5-pro区分有声、无声，声音参数字段：OutputConfig.AudioGeneration，开启Enabled，关闭Disabled； */
+    /** 模型版本。取值：当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、O1；当 ModelName 是 Jimeng，可选值为 3.0pro；当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo；当 ModelName 是 GV，可选值为 3.1、3.1-Fast；当 ModelName 是 OS，可选值为 2.0；当 ModelName 是 Hunyuan，可选值为 1.5；当 ModelName 是 Mingmou，可选值为 1.0； */
     ModelVersion: string;
     /** 最多包含三张素材资源图片的列表，用于描述模型在生成视频时要使用的资源图片。首尾帧视频生成：用FileInfos第一张表示首帧（此时FileInfos最多包含一张图片），LastFrameFileId或者LastFrameUrl表示尾帧。支持多图输入的模型：1. GV，使用多图输入时，不可使用LastFrameFileId和LastFrameUrl。2. Vidu，支持多图参考生视频。q2模型1-7张图片，可通过FileInfos里面的ObjectId作为主体id来传入。注意：1. 图片大小不超过10M。2. 支持的图片格式：jpeg、png。 */
     FileInfos?: AigcVideoTaskInputFileInfo[];
@@ -7480,7 +7498,7 @@ declare namespace V20180717 {
     SubAppId: number;
     /** 场景化生图参数配置。 */
     SceneInfo: AigcImageSceneInfo;
-    /** 输入图片列表，支持的图片格式：jpg、jpeg、png、webp。不同的场景需要不同的输入数据：- change_clothes：只能输入1张**模特**图片。 */
+    /** 输入图片列表，支持的图片格式：jpg、jpeg、png、webp。不同的场景需要不同的输入数据：- AI换衣场景：只能输入 1 张**模特**图片。- AI生商品图场景：需输入 1～10 张**同一产品**的不同角度的图片 */
     FileInfos?: SceneAigcImageTaskInputFileInfo[];
     /** 场景化生图任务的输出媒体文件配置。 */
     OutputConfig?: SceneAigcImageOutputConfig;

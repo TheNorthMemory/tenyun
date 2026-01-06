@@ -8151,7 +8151,7 @@ declare interface Tsf {
   BindPlugin(data: BindPluginRequest, config?: AxiosRequestConfig): AxiosPromise<BindPluginResponse>;
   /** 启用或禁用API {@link ChangeApiUsableStatusRequest} {@link ChangeApiUsableStatusResponse} */
   ChangeApiUsableStatus(data: ChangeApiUsableStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeApiUsableStatusResponse>;
-  /** 续跑任务批次 {@link ContinueRunFailedTaskBatchRequest} {@link ContinueRunFailedTaskBatchResponse} */
+  /** @deprecated 续跑任务批次 {@link ContinueRunFailedTaskBatchRequest} {@link ContinueRunFailedTaskBatchResponse} */
   ContinueRunFailedTaskBatch(data: ContinueRunFailedTaskBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ContinueRunFailedTaskBatchResponse>;
   /** 一键导入API分组 {@link CreateAllGatewayApiAsyncRequest} {@link CreateAllGatewayApiAsyncResponse} */
   CreateAllGatewayApiAsync(data: CreateAllGatewayApiAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAllGatewayApiAsyncResponse>;
@@ -8205,9 +8205,9 @@ declare interface Tsf {
   CreatePublicConfigWithDetailResp(data: CreatePublicConfigWithDetailRespRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePublicConfigWithDetailRespResponse>;
   /** 创建仓库 {@link CreateRepositoryRequest} {@link CreateRepositoryResponse} */
   CreateRepository(data: CreateRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRepositoryResponse>;
-  /** 创建任务 {@link CreateTaskRequest} {@link CreateTaskResponse} */
+  /** @deprecated 创建任务 {@link CreateTaskRequest} {@link CreateTaskResponse} */
   CreateTask(data: CreateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskResponse>;
-  /** 创建工作流 {@link CreateTaskFlowRequest} {@link CreateTaskFlowResponse} */
+  /** @deprecated 创建工作流 {@link CreateTaskFlowRequest} {@link CreateTaskFlowResponse} */
   CreateTaskFlow(data: CreateTaskFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskFlowResponse>;
   /** 批量创建单元化命名空间 {@link CreateUnitNamespacesRequest} {@link CreateUnitNamespacesResponse} */
   CreateUnitNamespaces(data: CreateUnitNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUnitNamespacesResponse>;
@@ -8255,7 +8255,7 @@ declare interface Tsf {
   DeleteRepository(data: DeleteRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRepositoryResponse>;
   /** @deprecated 删除部署组 {@link DeleteServerlessGroupRequest} {@link DeleteServerlessGroupResponse} */
   DeleteServerlessGroup(data: DeleteServerlessGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServerlessGroupResponse>;
-  /** 删除任务 {@link DeleteTaskRequest} {@link DeleteTaskResponse} */
+  /** @deprecated 删除任务 {@link DeleteTaskRequest} {@link DeleteTaskResponse} */
   DeleteTask(data: DeleteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskResponse>;
   /** 删除单元化命名空间 {@link DeleteUnitNamespacesRequest} {@link DeleteUnitNamespacesResponse} */
   DeleteUnitNamespaces(data: DeleteUnitNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUnitNamespacesResponse>;
@@ -8333,7 +8333,7 @@ declare interface Tsf {
   DescribeFileConfigReleases(data?: DescribeFileConfigReleasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileConfigReleasesResponse>;
   /** 查询文件配置项列表 {@link DescribeFileConfigsRequest} {@link DescribeFileConfigsResponse} */
   DescribeFileConfigs(data?: DescribeFileConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileConfigsResponse>;
-  /** 查询工作流最近一个批次的执行状态 {@link DescribeFlowLastBatchStateRequest} {@link DescribeFlowLastBatchStateResponse} */
+  /** @deprecated 查询工作流最近一个批次的执行状态 {@link DescribeFlowLastBatchStateRequest} {@link DescribeFlowLastBatchStateResponse} */
   DescribeFlowLastBatchState(data: DescribeFlowLastBatchStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowLastBatchStateResponse>;
   /** 查询网关所有分组下Api列表 {@link DescribeGatewayAllGroupApisRequest} {@link DescribeGatewayAllGroupApisResponse} */
   DescribeGatewayAllGroupApis(data: DescribeGatewayAllGroupApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayAllGroupApisResponse>;
@@ -8437,11 +8437,11 @@ declare interface Tsf {
   DescribeSimpleNamespaces(data?: DescribeSimpleNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSimpleNamespacesResponse>;
   /** 服务统计 {@link DescribeStatisticsRequest} {@link DescribeStatisticsResponse} */
   DescribeStatistics(data: DescribeStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStatisticsResponse>;
-  /** 查询任务详情 {@link DescribeTaskDetailRequest} {@link DescribeTaskDetailResponse} */
+  /** @deprecated 查询任务详情 {@link DescribeTaskDetailRequest} {@link DescribeTaskDetailResponse} */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
-  /** 查看任务最近执行批次状态 {@link DescribeTaskLastStatusRequest} {@link DescribeTaskLastStatusResponse} */
+  /** @deprecated 查看任务最近执行批次状态 {@link DescribeTaskLastStatusRequest} {@link DescribeTaskLastStatusResponse} */
   DescribeTaskLastStatus(data: DescribeTaskLastStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLastStatusResponse>;
-  /** 查询任务列表 {@link DescribeTaskRecordsRequest} {@link DescribeTaskRecordsResponse} */
+  /** @deprecated 查询任务列表 {@link DescribeTaskRecordsRequest} {@link DescribeTaskRecordsResponse} */
   DescribeTaskRecords(data?: DescribeTaskRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskRecordsResponse>;
   /** 查询单元化网关API监控明细数据 {@link DescribeUnitApiUseDetailRequest} {@link DescribeUnitApiUseDetailResponse} */
   DescribeUnitApiUseDetail(data: DescribeUnitApiUseDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnitApiUseDetailResponse>;
@@ -8459,9 +8459,9 @@ declare interface Tsf {
   DescribeUsableUnitNamespaces(data?: DescribeUsableUnitNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsableUnitNamespacesResponse>;
   /** 禁用灰度发布规则 {@link DisableLaneRuleRequest} {@link DisableLaneRuleResponse} */
   DisableLaneRule(data: DisableLaneRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DisableLaneRuleResponse>;
-  /** 停用任务 {@link DisableTaskRequest} {@link DisableTaskResponse} */
+  /** @deprecated 停用任务 {@link DisableTaskRequest} {@link DisableTaskResponse} */
   DisableTask(data: DisableTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DisableTaskResponse>;
-  /** 停用工作流 {@link DisableTaskFlowRequest} {@link DisableTaskFlowResponse} */
+  /** @deprecated 停用工作流 {@link DisableTaskFlowRequest} {@link DisableTaskFlowResponse} */
   DisableTaskFlow(data: DisableTaskFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DisableTaskFlowResponse>;
   /** 禁用单元化路由 {@link DisableUnitRouteRequest} {@link DisableUnitRouteResponse} */
   DisableUnitRoute(data: DisableUnitRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DisableUnitRouteResponse>;
@@ -8475,17 +8475,17 @@ declare interface Tsf {
   DraftApiGroup(data: DraftApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DraftApiGroupResponse>;
   /** 启用灰度发布规则 {@link EnableLaneRuleRequest} {@link EnableLaneRuleResponse} */
   EnableLaneRule(data: EnableLaneRuleRequest, config?: AxiosRequestConfig): AxiosPromise<EnableLaneRuleResponse>;
-  /** 启用任务 {@link EnableTaskRequest} {@link EnableTaskResponse} */
+  /** @deprecated 启用任务 {@link EnableTaskRequest} {@link EnableTaskResponse} */
   EnableTask(data: EnableTaskRequest, config?: AxiosRequestConfig): AxiosPromise<EnableTaskResponse>;
-  /** 启用工作流 {@link EnableTaskFlowRequest} {@link EnableTaskFlowResponse} */
+  /** @deprecated 启用工作流 {@link EnableTaskFlowRequest} {@link EnableTaskFlowResponse} */
   EnableTaskFlow(data: EnableTaskFlowRequest, config?: AxiosRequestConfig): AxiosPromise<EnableTaskFlowResponse>;
   /** 启用单元化路由 {@link EnableUnitRouteRequest} {@link EnableUnitRouteResponse} */
   EnableUnitRoute(data: EnableUnitRouteRequest, config?: AxiosRequestConfig): AxiosPromise<EnableUnitRouteResponse>;
   /** 启用单元化规则 {@link EnableUnitRuleRequest} {@link EnableUnitRuleResponse} */
   EnableUnitRule(data: EnableUnitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<EnableUnitRuleResponse>;
-  /** 手动执行一次任务 {@link ExecuteTaskRequest} {@link ExecuteTaskResponse} */
+  /** @deprecated 手动执行一次任务 {@link ExecuteTaskRequest} {@link ExecuteTaskResponse} */
   ExecuteTask(data: ExecuteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteTaskResponse>;
-  /** 执行一次工作流 {@link ExecuteTaskFlowRequest} {@link ExecuteTaskFlowResponse} */
+  /** @deprecated 执行一次工作流 {@link ExecuteTaskFlowRequest} {@link ExecuteTaskFlowResponse} */
   ExecuteTaskFlow(data?: ExecuteTaskFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteTaskFlowResponse>;
   /** 虚拟机部署组添加实例 {@link ExpandGroupRequest} {@link ExpandGroupResponse} */
   ExpandGroup(data: ExpandGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ExpandGroupResponse>;
@@ -8513,7 +8513,7 @@ declare interface Tsf {
   ModifyPathRewrite(data: ModifyPathRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPathRewriteResponse>;
   /** 更新数据集 {@link ModifyProgramRequest} {@link ModifyProgramResponse} */
   ModifyProgram(data: ModifyProgramRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProgramResponse>;
-  /** 修改任务 {@link ModifyTaskRequest} {@link ModifyTaskResponse} */
+  /** @deprecated 修改任务 {@link ModifyTaskRequest} {@link ModifyTaskResponse} */
   ModifyTask(data: ModifyTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskResponse>;
   /** 更新上传程序包信息 {@link ModifyUploadInfoRequest} {@link ModifyUploadInfoResponse} */
   ModifyUploadInfo(data: ModifyUploadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUploadInfoResponse>;
@@ -8521,13 +8521,13 @@ declare interface Tsf {
   OperateApplicationTcrBinding(data?: OperateApplicationTcrBindingRequest, config?: AxiosRequestConfig): AxiosPromise<OperateApplicationTcrBindingResponse>;
   /** @deprecated 重关联业务日志配置 {@link ReassociateBusinessLogConfigRequest} {@link ReassociateBusinessLogConfigResponse} */
   ReassociateBusinessLogConfig(data: ReassociateBusinessLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ReassociateBusinessLogConfigResponse>;
-  /** 重新执行任务 {@link RedoTaskRequest} {@link RedoTaskResponse} */
+  /** @deprecated 重新执行任务 {@link RedoTaskRequest} {@link RedoTaskResponse} */
   RedoTask(data: RedoTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RedoTaskResponse>;
-  /** 重新执行任务批次 {@link RedoTaskBatchRequest} {@link RedoTaskBatchResponse} */
+  /** @deprecated 重新执行任务批次 {@link RedoTaskBatchRequest} {@link RedoTaskBatchResponse} */
   RedoTaskBatch(data: RedoTaskBatchRequest, config?: AxiosRequestConfig): AxiosPromise<RedoTaskBatchResponse>;
-  /** 重新执行任务的一次执行 {@link RedoTaskExecuteRequest} {@link RedoTaskExecuteResponse} */
+  /** @deprecated 重新执行任务的一次执行 {@link RedoTaskExecuteRequest} {@link RedoTaskExecuteResponse} */
   RedoTaskExecute(data: RedoTaskExecuteRequest, config?: AxiosRequestConfig): AxiosPromise<RedoTaskExecuteResponse>;
-  /** 重新执行工作流批次 {@link RedoTaskFlowBatchRequest} {@link RedoTaskFlowBatchResponse} */
+  /** @deprecated 重新执行工作流批次 {@link RedoTaskFlowBatchRequest} {@link RedoTaskFlowBatchResponse} */
   RedoTaskFlowBatch(data: RedoTaskFlowBatchRequest, config?: AxiosRequestConfig): AxiosPromise<RedoTaskFlowBatchResponse>;
   /** 发布Api分组 {@link ReleaseApiGroupRequest} {@link ReleaseApiGroupResponse} */
   ReleaseApiGroup(data: ReleaseApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseApiGroupResponse>;
@@ -8565,11 +8565,11 @@ declare interface Tsf {
   StopContainerGroup(data: StopContainerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<StopContainerGroupResponse>;
   /** 停止虚拟机部署组 {@link StopGroupRequest} {@link StopGroupResponse} */
   StopGroup(data: StopGroupRequest, config?: AxiosRequestConfig): AxiosPromise<StopGroupResponse>;
-  /** 停止执行中的任务批次 {@link StopTaskBatchRequest} {@link StopTaskBatchResponse} */
+  /** @deprecated 停止执行中的任务批次 {@link StopTaskBatchRequest} {@link StopTaskBatchResponse} */
   StopTaskBatch(data: StopTaskBatchRequest, config?: AxiosRequestConfig): AxiosPromise<StopTaskBatchResponse>;
-  /** 停止正在执行的任务 {@link StopTaskExecuteRequest} {@link StopTaskExecuteResponse} */
+  /** @deprecated 停止正在执行的任务 {@link StopTaskExecuteRequest} {@link StopTaskExecuteResponse} */
   StopTaskExecute(data: StopTaskExecuteRequest, config?: AxiosRequestConfig): AxiosPromise<StopTaskExecuteResponse>;
-  /** 停止一个工作流批次 {@link TerminateTaskFlowBatchRequest} {@link TerminateTaskFlowBatchResponse} */
+  /** @deprecated 停止一个工作流批次 {@link TerminateTaskFlowBatchRequest} {@link TerminateTaskFlowBatchResponse} */
   TerminateTaskFlowBatch(data: TerminateTaskFlowBatchRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateTaskFlowBatchResponse>;
   /** API分组批量与网关解绑 {@link UnbindApiGroupRequest} {@link UnbindApiGroupResponse} */
   UnbindApiGroup(data: UnbindApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindApiGroupResponse>;

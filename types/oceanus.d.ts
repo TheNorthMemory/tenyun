@@ -238,14 +238,18 @@ declare interface ClusterSession {
   TaskManagerCpu?: number;
   /** TaskManagerMem */
   TaskManagerMem?: number;
+  /** jdk版本 */
+  JdkVersion?: string;
 }
 
 /** 集群的版本相关信息 */
 declare interface ClusterVersion {
   /** 集群的Flink版本 */
-  Flink: string | null;
+  Flink?: string | null;
   /** 集群支持的Flink版本 */
-  SupportedFlink: string[] | null;
+  SupportedFlink?: string[] | null;
+  /** jdk支持版本 */
+  JdkSupportVersion?: FlinkJdkVersion[];
 }
 
 /** 解析Connector */
@@ -350,6 +354,14 @@ declare interface Filter {
   Values: string[];
 }
 
+/** flink jdk版本 */
+declare interface FlinkJdkVersion {
+  /** flink版本 */
+  FlinkVersion?: string;
+  /** jdk版本 */
+  JdkVersions?: string[];
+}
+
 /** Gateway引用资源信息 */
 declare interface GatewayRefItem {
   /** 空间唯一标识 */
@@ -408,7 +420,7 @@ declare interface JobConfig {
   UpdateTime?: string | null;
   /** 作业绑定的存储桶 */
   COSBucket?: string | null;
-  /** 是否启用日志收集，0-未启用，1-已启用，2-历史集群未设置日志集，3-历史集群已开启 */
+  /** 是否启用日志收集，0-未启用，1-采集到cls，4-采集到cos，5-采集到es */
   LogCollect?: number | null;
   /** 作业的最大并行度 */
   MaxParallelism?: number | null;
@@ -450,6 +462,8 @@ declare interface JobConfig {
   WorkspaceName?: string | null;
   /** flink 版本 */
   FlinkVersion?: string | null;
+  /** jdk版本 */
+  JdkVersion?: string;
   /** jm使用cpu数目 */
   JobManagerCpu?: number | null;
   /** jm使用内存数目 */
@@ -620,6 +634,10 @@ declare interface JobV1 {
   ContinueAlarm?: number;
   /** 作业重启次数 */
   RestartCount?: number;
+  /** 期望是开启默认告警 */
+  ExpectJobDefaultAlarmStatus?: number;
+  /** jdk版本 */
+  JdkVersion?: string;
 }
 
 /** 日志查询的每行日志信息 */
@@ -816,6 +834,8 @@ declare interface ResourceRefDetail {
   SystemProvide?: number;
   /** Connector */
   Connector?: string;
+  /** Connector版本 */
+  ConnectorVersion?: string;
 }
 
 /** 资源被Job 引用信息 */
@@ -1062,6 +1082,8 @@ declare interface SqlGatewayItem {
   Cpu?: number;
   /** Mem */
   Mem?: number;
+  /** jdk版本 */
+  JdkVersion?: string;
 }
 
 /** Sql Gateway 返回Result结构类型 */
@@ -1417,6 +1439,8 @@ declare interface CreateJobConfigRequest {
   JobManagerCpu?: number;
   /** JobManager 内存 */
   JobManagerMem?: number;
+  /** jdk版本 */
+  JdkVersion?: string;
   /** TaskManager cpu */
   TaskManagerCpu?: number;
   /** TaskManager 内存 */
@@ -1463,6 +1487,10 @@ declare interface CreateJobRequest {
   Description?: string;
   /** 开启默认告警 */
   OpenJobDefaultAlarm?: number;
+  /** 用户Uid */
+  Uid?: number;
+  /** jdk版本 */
+  JdkVersion?: string;
 }
 
 declare interface CreateJobResponse {
@@ -2113,7 +2141,7 @@ declare interface ModifyConnectorResponse {
 }
 
 declare interface ModifyFolderRequest {
-  /** 文件夹ID（必填） */
+  /** 只有移动文件夹的场景必填，如果是批量移动作业的场景，非必填。 */
   SourceFolderId?: string;
   /** 如需拖拽文件夹，需传入目标文件夹ID */
   TargetFolderId?: string;

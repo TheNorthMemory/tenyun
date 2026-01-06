@@ -189,6 +189,8 @@ declare interface SubmitHunyuanTo3DProJobRequest {
   GenerateType?: string;
   /** 该参数仅在GenerateType中选择LowPoly模式可生效。多边形类型，表示模型的表面由几边形网格构成，默认为triangle,参考值:triangle: 三角形面。quadrilateral: 四边形面与三角形面混合生成。 */
   PolygonType?: string;
+  /** 生成模型的格式，仅限制生成一种格式； 生成模型文件组默认返回obj、glb格式（开启时Geometry参数时，默认为glb格式）； 可选值：STL，USDZ，FBX； */
+  ResultFormat?: string;
 }
 
 declare interface SubmitHunyuanTo3DProJobResponse {

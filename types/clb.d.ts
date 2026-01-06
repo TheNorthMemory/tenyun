@@ -2883,6 +2883,8 @@ declare interface ModifyTargetGroupAttributeRequest {
   KeepaliveEnable?: boolean;
   /** 会话保持时间，单位：秒。可选值：30~3600，默认 0，表示不开启。TCP/UDP目标组不支持该参数。 */
   SessionExpireTime?: number;
+  /** 是否开启SNAT（源IP替换），True（开启）、False（关闭）。默认为关闭。注意：SnatEnable开启时会替换客户端源IP，此时透传客户端源IP选项关闭，反之亦然。 */
+  SnatEnable?: boolean;
 }
 
 declare interface ModifyTargetGroupAttributeResponse {

@@ -16,8 +16,10 @@ declare interface Account {
   ReadonlyPolicy?: string[];
   /** 子账号状态.- 1：账号变更中。- 2：账号有效。- 4：账号已删除。 */
   Status?: number;
-  /** 创建时间 */
+  /** 账号创建时间。若该参数为空字符串，说明该账号创建于早期版本，未支持创建时间记录功能。 */
   CreateTime?: string;
+  /** 账号最后修改密码的时间。若该参数为空字符串，说明该账号创建于早期版本，未支持密码修改时间记录功能。 */
+  PasswordLastModifiedTime?: string;
 }
 
 /** 可使用的地域信息 */
@@ -1599,11 +1601,11 @@ declare interface DescribeGlobalReplicationAreaResponse {
 }
 
 declare interface DescribeInstanceAccountRequest {
-  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录Redis控制台在实例列表复制实例 ID。 */
   InstanceId: string;
   /** 分页大小。默认值为20，最小值为1，最大值为100。 */
   Limit: number;
-  /** 分页偏移量。取Limit整数倍。计算公式：offset=limit*(页码-1)。 */
+  /** 分页偏移量。参数取值：Limit 的整数倍，offset=limit*(页码-1)。默认值：0。 */
   Offset: number;
 }
 
@@ -1929,9 +1931,9 @@ declare interface DescribeInstanceShardsResponse {
 }
 
 declare interface DescribeInstanceSpecBandwidthRequest {
-  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。填写实例id或者规格，两者必选其一。 */
+  /** 指定实例 ID。请登录 Redis控制台 在实例列表复制实例 ID。同时，InstanceId 与规格参数不能同时为空，至少提供一种。若仅指定 InstanceId：查询该实例当前规格的带宽。若指定 InstanceId + 至少一个规格参数（ShardSize、ShardNum 或 ReplicateNum）：计算变更规格后的带宽。若指定部分或所有规格参数（ShardSize、ShardNum、ReplicateNum 与 Type），而不指定 InstanceId：根据规格组合查询理论带宽。 */
   InstanceId?: string;
-  /** 分片大小，单位：MB */
+  /** 分片大小。单位：MB。 */
   ShardSize?: number;
   /** 分片数量。 */
   ShardNum?: number;
@@ -1939,7 +1941,7 @@ declare interface DescribeInstanceSpecBandwidthRequest {
   ReplicateNum?: number;
   /** 只读权重。- 100：开启从只读。- 0：关闭从只读。 */
   ReadOnlyWeight?: number;
-  /** 实例类型，同 [CreateInstances](https://cloud.tencent.com/document/api/239/20026) 的Type。 */
+  /** 实例类型，同 CreateInstances 的Type。 */
   Type?: number;
 }
 
