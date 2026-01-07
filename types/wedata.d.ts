@@ -4944,6 +4944,18 @@ declare interface DeleteProjectMemberResponse {
   RequestId?: string;
 }
 
+declare interface DeleteProjectRequest {
+  /** 删除的项目ID */
+  ProjectId: string;
+}
+
+declare interface DeleteProjectResponse {
+  /** 删除结果 */
+  Data?: ProjectResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteQualityRuleGroupRequest {
   /** 项目Id */
   ProjectId: string;
@@ -23076,6 +23088,8 @@ declare interface Wedata {
   DeleteLineage(data: DeleteLineageRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLineageResponse>;
   /** 删除告警规则 {@link DeleteOpsAlarmRuleRequest} {@link DeleteOpsAlarmRuleResponse} */
   DeleteOpsAlarmRule(data: DeleteOpsAlarmRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOpsAlarmRuleResponse>;
+  /** 删除项目 {@link DeleteProjectRequest} {@link DeleteProjectResponse} */
+  DeleteProject(data: DeleteProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectResponse>;
   /** 移除项目成员 {@link DeleteProjectMemberRequest} {@link DeleteProjectMemberResponse} */
   DeleteProjectMember(data: DeleteProjectMemberRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectMemberResponse>;
   /** 质量删除规则接口 {@link DeleteQualityRuleRequest} {@link DeleteQualityRuleResponse} */

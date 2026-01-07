@@ -1863,6 +1863,8 @@ declare namespace V20180717 {
     OutputComplianceCheck?: string;
     /** 是否启用视频增强。取值有： Enabled：开启； Disabled：关闭； 说明：1. 对于选择的分辨率超过模型可生成分辨率时，默认会启用增强。2. 对于模型可以直出的分辨率，也可以主动选择模型直出低分辨率，使用增强获得指定分辨率。 */
     EnhanceSwitch?: string;
+    /** 是否开启vidu智能插帧。取值有： Enabled：开启； Disabled：关闭； */
+    FrameInterpolate?: string;
   }
 
   /** AIGC 生视频任务信息 */
@@ -6950,9 +6952,9 @@ declare namespace V20180717 {
   interface CreateAigcImageTaskRequest {
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId: number;
-    /** 模型名称。取值：GEM：Gemini；Qwen：千问。Hunyuan：混元。Mingmou：明眸。 */
+    /** 模型名称。取值：GEM：Gemini；Qwen：千问。Hunyuan：混元。 */
     ModelName: string;
-    /** 模型版本。取值：当 ModelName 是 GEM，可选值为 2.5、3.0；当 ModelName 是 Qwen，可选值为 0925；当 ModelName 是 Hunyuan，可选值为 3.0；当 ModelName 是 Mingmou，可选值为 1.0； */
+    /** 模型版本。取值：当 ModelName 是 GEM，可选值为 2.5、3.0；当 ModelName 是 Qwen，可选值为 0925；当 ModelName 是 Hunyuan，可选值为 3.0； */
     ModelVersion: string;
     /** AIGC 生图任务的输入图片的文件信息。默认只支持指定1个，使用模型 GEM 时，版本2.5最多指定3个，版本3.0最多指定14个。 */
     FileInfos?: AigcImageTaskInputFileInfo[];

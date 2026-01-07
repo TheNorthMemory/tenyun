@@ -1595,6 +1595,8 @@ declare interface DescribeScoresRequest {
   ID?: number;
   /** 该参数已废弃 */
   IsDemo?: number;
+  /** 项目 ID 列表 */
+  IDList?: number[];
 }
 
 declare interface DescribeScoresResponse {

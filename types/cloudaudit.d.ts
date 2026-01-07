@@ -305,7 +305,7 @@ declare interface DescribeEventsRequest {
   NextToken?: number;
   /** 返回日志的最大条数（最大 50 条） */
   MaxResults?: number;
-  /** 检索条件（目前支持：RequestId：请求 IDEventName：事件名称ActionType：操作类型（Write：写；Read：读）PrincipalId：子账号、ResourceType：资源类型ResourceId：资源IdResourceName：资源名称AccessKeyId：密钥 IDSensitiveAction：是否敏感操作ApiErrorCode：API 错误码CamErrorCode：CAM 错误码SourceIPAddress：请求IPTags：标签（AttributeValue格式：[{"key":"*","value":"*"}]）备注:检索的各个条件间是与的关系,EventName传多个值内部是或的关系） */
+  /** 检索条件（目前支持：RequestId：请求 IDEventName：事件名称ActionType：操作类型（Write：写；Read：读）PrincipalId：子账号ResourceType：资源类型ResourceId：资源IdResourceName：资源名称AccessKeyId：密钥 IDSensitiveAction：是否敏感操作ApiErrorCode：API 错误码CamErrorCode：CAM 错误码SourceIPAddress：请求IPTags：标签（AttributeValue格式：[{"key":"*","value":"*"}]）备注:检索的各个条件间是与的关系,EventName传多个值内部是或的关系） */
   LookupAttributes?: LookupAttribute[];
   /** 是否返回 IP 归属地（1 返回，0 不返回） */
   IsReturnLocation?: number;

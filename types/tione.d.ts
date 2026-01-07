@@ -2761,7 +2761,7 @@ declare interface DescribeModelAccelerateVersionsRequest {
   OrderField?: string;
   /** 排序方向; 枚举值: ASC | DESC；默认DESC */
   Order?: string;
-  /** 分页查询起始位置，如：Limit为100，第一页Offset为0，第二页Offset为100....即每页左边为闭区间; 默认0 */
+  /** 分页查询起始位置，如：Limit为100，第一页Offset为0，第二页Offset为100...即每页左边为闭区间; 默认0 */
   Offset?: number;
   /** 分页查询每页大小，最大20000; 默认10 */
   Limit?: number;

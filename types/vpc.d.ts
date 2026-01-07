@@ -1082,10 +1082,12 @@ declare interface GatewayQos {
   VpcId?: string;
   /** 云服务器内网IP。 */
   IpAddress?: string;
-  /** 流控带宽值。 */
+  /** 网关流控出方向带宽值，当值为-1时，代表未限速；当值大于等于0时，限速带宽上限为返回值。 */
   Bandwidth?: number;
   /** 创建时间。 */
   CreateTime?: string;
+  /** 网关流控入方向带宽值，当值为-1时，代表未限速；当值大于等于0时，限速带宽上限为返回值。 */
+  InBandwidth?: number;
 }
 
 /** 全局路由对象。 */
@@ -6325,9 +6327,9 @@ declare interface DescribeGatewayFlowQosRequest {
 
 declare interface DescribeGatewayFlowQosResponse {
   /** 实例详细信息列表。 */
-  GatewayQosSet: GatewayQos[];
+  GatewayQosSet?: GatewayQos[];
   /** 符合条件的实例数量。 */
-  TotalCount: number;
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
