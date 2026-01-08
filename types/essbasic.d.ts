@@ -738,7 +738,7 @@ declare interface FlowDetailInfo {
   FlowName?: string;
   /** 合同流程的类别分类（如销售合同/入职合同等）。该字段将被废弃，不建议使用。	请使用 UserFlowType */
   FlowType?: string;
-  /** 合同流程当前的签署状态, 会存在下列的状态值 **INIT** :合同创建 **PART** :合同签署中(至少有一个签署方已经签署) **REJECT** :合同拒签 **ALL** :合同签署完成 **DEADLINE** :合同流签(合同过期) **CANCEL** :合同撤回 **RELIEVED** :解除协议（已解除） */
+  /** 合同流程当前的签署状态, 会存在下列的状态值 **INIT** :合同创建 **PART** :合同签署中(至少有一个签署方已经签署) **REJECT** :合同拒签 **ALL** :合同签署完成 **DEADLINE** :合同流签(合同过期) **CANCEL** :合同撤回 **INVALID** : 已失效（签署期间有签署人改名等原因导致） **RELIEVED** :解除协议（已解除） */
   FlowStatus?: string;
   /** 当合同流程状态为已拒签（即 FlowStatus=REJECT）或已撤销（即 FlowStatus=CANCEL ）时，此字段 FlowMessage 为拒签或撤销原因。 */
   FlowMessage?: string;

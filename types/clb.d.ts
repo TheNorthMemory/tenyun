@@ -1016,7 +1016,7 @@ declare interface RsTagRule {
   Targets: Target[];
   /** 转发规则的ID，七层规则时需要此参数，4层规则不需要。 */
   LocationId?: string;
-  /** 后端服务修改后的标签。此参数的优先级低于前述[Target](https://cloud.tencent.com/document/api/214/30694)中的Tag参数，即最终的标签以Target中的Tag参数值为准，仅当Target中的Tag参数为空时，才以RsTagRule中的Tag参数为准。 */
+  /** 后端服务修改后的标签。此参数的优先级低于前述Target中的Tag参数，即最终的标签以Target中的Tag参数值为准，仅当Target中的Tag参数为空时，才以RsTagRule中的Tag参数为准。 */
   Tag?: string;
 }
 
@@ -1583,7 +1583,7 @@ declare interface CreateClsLogSetResponse {
 }
 
 declare interface CreateListenerRequest {
-  /** 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。 */
+  /** 负载均衡实例 ID，可以通过 DescribeLoadBalancers 接口获取。 */
   LoadBalancerId: string;
   /** 要将监听器创建到哪些端口，每个端口对应一个新的监听器。端口范围：1~65535 */
   Ports: number[];
@@ -1605,9 +1605,9 @@ declare interface CreateListenerRequest {
   TargetType?: string;
   /** 会话保持类型。不传或传NORMAL表示默认会话保持类型。QUIC_CID 表示根据Quic Connection ID做会话保持。QUIC_CID只支持UDP协议。此参数仅适用于TCP/UDP监听器。七层监听器应在转发规则中设置。（若选择QUIC_CID，则Protocol必须为UDP，Scheduler必须为WRR，同时只支持ipv4） */
   SessionType?: string;
-  /** 是否开启长连接，此参数仅适用于HTTP/HTTPS监听器，0:关闭；1:开启， 默认关闭。若后端服务对连接数上限有限制，则建议谨慎开启。此功能目前处于内测中，如需使用，请提交 [内测申请](https://cloud.tencent.com/apply/p/tsodp6qm21)。 */
+  /** 是否开启长连接，此参数仅适用于HTTP/HTTPS监听器，0:关闭；1:开启， 默认关闭。若后端服务对连接数上限有限制，则建议谨慎开启。此功能目前处于内测中，如需使用，请提交 内测申请。 */
   KeepaliveEnable?: number;
-  /** 创建端口段监听器时必须传入此参数，用以标识结束端口。同时，入参Ports只允许传入一个成员，用以标识开始端口。【如果您需要体验端口段功能，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)】。 */
+  /** 创建端口段监听器时必须传入此参数，用以标识结束端口。同时，入参Ports只允许传入一个成员，用以标识开始端口。【如果您需要体验端口段功能，请通过 工单申请】。 */
   EndPort?: number;
   /** 重新调度功能，解绑后端服务开关，打开此开关，当解绑后端服务时触发重新调度。仅TCP/UDP监听器支持。 */
   DeregisterTargetRst?: boolean;
@@ -1617,17 +1617,17 @@ declare interface CreateListenerRequest {
   MaxConn?: number;
   /** 监听器最大新增连接数，当前仅性能容量型实例且仅TCP/UDP/TCP_SSL/QUIC监听器支持，不传或者传-1表示监听器维度不限速。基础网络实例不支持该参数。 */
   MaxCps?: number;
-  /** 空闲连接超时时间，此参数仅适用于TCP/UDP监听器，单位：秒。默认值：TCP监听器默认值为900s，UDP监听器默认值为300s。取值范围：共享型实例和独占型实例支持：10-900，性能容量型实例支持：10-1980。如需设置超过取值范围的值请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)。 */
+  /** 空闲连接超时时间，此参数仅适用于TCP/UDP监听器，单位：秒。默认值：TCP监听器默认值为900s，UDP监听器默认值为300s。取值范围：共享型实例和独占型实例支持：10-900，性能容量型实例支持：10-1980。如需设置超过取值范围的值请通过 工单申请。 */
   IdleConnectTimeout?: number;
   /** TCP_SSL和QUIC是否支持PP */
   ProxyProtocol?: boolean;
-  /** 是否开启SNAT（源IP替换），True（开启）、False（关闭）。默认为关闭。注意：SnatEnable开启时会替换客户端源IP，此时`透传客户端源IP`选项关闭，反之亦然。 */
+  /** 是否开启SNAT（源IP替换），True（开启）、False（关闭）。默认为关闭。注意：SnatEnable开启时会替换客户端源IP，此时透传客户端源IP选项关闭，反之亦然。 */
   SnatEnable?: boolean;
   /** 全端口段监听器的结束端口，端口范围：2 - 65535 */
   FullEndPorts?: number[];
   /** 内网http监听器开启h2c开关，True（开启）、False（关闭）。默认为关闭。 */
   H2cSwitch?: boolean;
-  /** TCP_SSL监听器支持关闭SSL后仍然支持混绑，此参数为关闭开关。True（关闭）、False（开启）.默认为关闭。 */
+  /** 控制 TCP_SSL 类型的监听器是否移除 SSL 加密层。开启后，监听器将作为普通 TCP 协议运行。 可选值：- True： 关闭 SSL 功能（协议降级为纯文本 TCP）。- False（默认）： 保持 SSL 功能开启。 */
   SslCloseSwitch?: boolean;
   /** 数据压缩模式。可选值：transparent（透传模式）、compatibility（兼容模式） */
   DataCompressMode?: string;

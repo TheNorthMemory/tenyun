@@ -2507,7 +2507,7 @@ declare interface DescribeBillingResourceGroupRequest {
   ResourceGroupId: string;
   /** 过滤条件注意: 1. Filter.Name 只支持以下枚举值: InstanceId (资源组节点id) InstanceStatus (资源组节点状态)2. Filter.Values: 长度为1且Filter.Fuzzy=true时，支持模糊查询; 不为1时，精确查询3. 每次请求的Filters的上限为10，Filter.Values的上限为100 */
   Filters?: Filter[];
-  /** 分页查询起始位置，如：Limit为10，第一页Offset为0，第二页Offset为10....即每页左边为闭区间; 默认0 */
+  /** 分页查询起始位置，如：Limit为10，第一页Offset为0，第二页Offset为10...即每页左边为闭区间; 默认0 */
   Offset?: number;
   /** 分页查询每页大小，默认20 */
   Limit?: number;
@@ -3106,6 +3106,64 @@ declare interface ModifyModelServiceRequest {
 declare interface ModifyModelServiceResponse {
   /** 生成的模型服务 */
   Service?: Service | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyNotebookRequest {
+  /** notebook id */
+  Id: string;
+  /** 名称。不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
+  Name: string;
+  /** （不允许修改）计算资源付费模式 ，可选值为：PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费 */
+  ChargeType: string;
+  /** 计算资源配置 */
+  ResourceConf: ResourceConf;
+  /** 是否自动停止 */
+  AutoStopping: boolean;
+  /** 是否访问公网 */
+  DirectInternetAccess: boolean;
+  /** 是否ROOT权限 */
+  RootAccess: boolean;
+  /** 是否上报日志 */
+  LogEnable: boolean;
+  /** 资源组ID(for预付费) */
+  ResourceGroupId?: string;
+  /** （不允许修改）Vpc-Id */
+  VpcId?: string;
+  /** （不允许修改）子网Id */
+  SubnetId?: string;
+  /** 存储卷大小，单位GB */
+  VolumeSizeInGB?: number;
+  /** （不允许修改）存储的类型。取值包含： FREE: 预付费的免费存储 CLOUD_PREMIUM： 高性能云硬盘 CLOUD_SSD： SSD云硬盘 CFS: CFS存储，包含NFS和turbo */
+  VolumeSourceType?: string;
+  /** （不允许修改）CFS存储的配置 */
+  VolumeSourceCFS?: CFSConfig;
+  /** 日志配置 */
+  LogConfig?: LogConfig;
+  /** 生命周期脚本的ID */
+  LifecycleScriptId?: string;
+  /** 默认GIT存储库的ID */
+  DefaultCodeRepoId?: string;
+  /** 其他GIT存储库的ID，最多3个 */
+  AdditionalCodeRepoIds?: string[];
+  /** 自动停止时间，单位小时 */
+  AutomaticStopTime?: number;
+  /** 标签配置 */
+  Tags?: Tag[];
+  /** 数据配置，只支持WEDATA_HDFS */
+  DataConfigs?: DataConfig[];
+  /** 镜像信息 */
+  ImageInfo?: ImageInfo;
+  /** 镜像类型，包括SYSTEM、TCR、CCR */
+  ImageType?: string;
+  /** SSH配置 */
+  SSHConfig?: SSHConfig;
+  /** 自定义环境变量 */
+  Envs?: EnvVar[];
+}
+
+declare interface ModifyNotebookResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3997,6 +4055,8 @@ declare interface Tione {
   ModifyModelServiceAuthToken(data: ModifyModelServiceAuthTokenRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelServiceAuthTokenResponse>;
   /** 修改服务鉴权配置 {@link ModifyModelServiceAuthorizationRequest} {@link ModifyModelServiceAuthorizationResponse} */
   ModifyModelServiceAuthorization(data: ModifyModelServiceAuthorizationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelServiceAuthorizationResponse>;
+  /** 修改Notebook {@link ModifyNotebookRequest} {@link ModifyNotebookResponse} */
+  ModifyNotebook(data: ModifyNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotebookResponse>;
   /** 修改Notebook标签 {@link ModifyNotebookTagsRequest} {@link ModifyNotebookTagsResponse} */
   ModifyNotebookTags(data: ModifyNotebookTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotebookTagsResponse>;
   /** 上报训练自定义指标 {@link PushTrainingMetricsRequest} {@link PushTrainingMetricsResponse} */

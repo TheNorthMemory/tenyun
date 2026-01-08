@@ -312,7 +312,7 @@ declare interface AutoStrategy {
 declare interface BackupConfig {
   /** 第二个从库复制方式，可能的返回值：async-异步，semisync-半同步 */
   ReplicationMode?: string;
-  /** 第二个从库可用区的正式名称，如ap-shanghai-1 */
+  /** 第二个从库可用区的正式名称，如 ap-shanghai-2 */
   Zone?: string;
   /** 第二个从库内网IP地址 */
   Vip?: string;
@@ -1522,7 +1522,7 @@ declare interface RoInstanceInfo {
   Weight?: number;
   /** RO实例所在区域名称，如ap-shanghai */
   Region?: string;
-  /** RO可用区的正式名称，如ap-shanghai-1 */
+  /** RO可用区的正式名称，如 ap-shanghai-2 */
   Zone?: string;
   /** RO实例ID，格式如：cdbro-c1nl9rpv */
   InstanceId?: string;
@@ -1718,7 +1718,7 @@ declare interface SecurityGroup {
 declare interface SlaveConfig {
   /** 从库复制方式，可能的返回值：aysnc-异步，semisync-半同步 */
   ReplicationMode?: string;
-  /** 从库可用区的正式名称，如ap-shanghai-1 */
+  /** 从库可用区的正式名称，如 ap-shanghai-2 */
   Zone?: string;
 }
 
@@ -3510,7 +3510,7 @@ declare interface DescribeDBInstanceConfigResponse {
   ProtectMode?: number;
   /** 主实例部署方式，可能的返回值：0 - 单可用部署，1 - 多可用区部署。 */
   DeployMode?: number;
-  /** 实例可用区信息，格式如 "ap-shanghai-1"。 */
+  /** 实例可用区信息，格式如 "ap-shanghai-2"。 */
   Zone?: string;
   /** 备库的配置信息。 */
   SlaveConfig?: SlaveConfig | null;

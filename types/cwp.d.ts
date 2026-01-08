@@ -3580,6 +3580,8 @@ declare interface NetAttackEventInfo {
   HostOpProcessTree?: string;
   /** IP分析 */
   IPAnalyse?: IPAnalyse;
+  /** 响应数据包 base64编码 */
+  NetResponsePayload?: string;
 }
 
 /** 网络攻击top统计数据 */

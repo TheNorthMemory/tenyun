@@ -4768,6 +4768,26 @@ declare interface ForbidLiveStreamResponse {
   RequestId?: string;
 }
 
+declare interface InsertTaskTemporaryFilesRequest {
+  /** 直播拉流任务 ID。 */
+  TaskId: string;
+  /** 插播文件列表，支持一次性插播多个文件，文件个数最大支持30个。可在轮播过程中追加新的插播文件。 */
+  TemporaryFiles: string[];
+  /** 操作人名称。 */
+  Operator: string;
+  /** 将文件插在当前轮播序列的指定位置后面。索引序列从1开始。默认为：0，表示播完当前文件立即播放插入文件。注意：索引不要超过当前总文件个数，否则按播完全部文件后再处理插播文件。 */
+  InsertAfterIndex?: number;
+  /** 用于多个文件插播在同一个轮播序号之后时，可指定队列顺序。0 - 最高优先级队列。默认值。1 - 中等优先级队列。2 - 最低优先级队列。场景示例：比如当前播放第2个文件，多个新文件插播在第2个文件之后，播完第二个轮播文件之后，优先播放InsertPriorityType为0的插播队列中的文件，再播放InsertPriorityType为1的插播队列中的文件，最后播放InsertPriorityType为2的插播队列文件。如果插播无队列优先级要求，则无需使用此参数。 */
+  InsertPriorityType?: number;
+  /** 插播上下文信息。由用户自定义传入。当播放到使用本此插播请求插入的文件时，在文件播放开始和文件播放结束的回调时，将此上下文信息通过创建任务携带的回调地址回调给用户。注意：如果有关联每个插播文件的信息需要回调时，可将需要回调的信息自行拼接到插播文件URL上，通过回调信息中的URL进行读取使用。 */
+  InsertContext?: string;
+}
+
+declare interface InsertTaskTemporaryFilesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCasterInputInfoRequest {
   /** 导播台ID。 */
   CasterId: number;
@@ -5841,6 +5861,8 @@ declare interface Live {
   ForbidLiveDomain(data: ForbidLiveDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidLiveDomainResponse>;
   /** 禁推直播流 {@link ForbidLiveStreamRequest} {@link ForbidLiveStreamResponse} */
   ForbidLiveStream(data: ForbidLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidLiveStreamResponse>;
+  /** 轮播任务插播文件 {@link InsertTaskTemporaryFilesRequest} {@link InsertTaskTemporaryFilesResponse} */
+  InsertTaskTemporaryFiles(data: InsertTaskTemporaryFilesRequest, config?: AxiosRequestConfig): AxiosPromise<InsertTaskTemporaryFilesResponse>;
   /** 修改导播台 {@link ModifyCasterRequest} {@link ModifyCasterResponse} */
   ModifyCaster(data: ModifyCasterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCasterResponse>;
   /** 修改导播台输入源 {@link ModifyCasterInputInfoRequest} {@link ModifyCasterInputInfoResponse} */

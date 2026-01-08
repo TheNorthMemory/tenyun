@@ -4357,6 +4357,8 @@ declare interface CreateAssetImageRegistryScanTaskOneKeyRequest {
   ScanType?: string[];
   /** 扫描的镜像列表Id */
   Id?: number[];
+  /** 剔除扫描的镜像id列表 */
+  ExcludeIDs?: number[];
   /** 是否最新镜像 */
   IsLatest?: boolean;
   /** 扫描范围 0全部镜像，1自选镜像，2推荐扫描镜像 */
