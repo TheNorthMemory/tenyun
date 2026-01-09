@@ -1396,8 +1396,10 @@ declare interface ListDocItem {
   IsDisabled?: boolean;
   /** 员工名称 */
   StaffName?: string;
-  /** 文档生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域 */
+  /** 文档生效域: 1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效 */
   EnableScope?: number | null;
+  /** 文档大小，单位：字节 */
+  DocSize?: string;
 }
 
 /** 问答详情数据 */
@@ -1450,10 +1452,12 @@ declare interface ListQaItem {
   IsDisabled?: boolean;
   /** 员工名称 */
   StaffName?: string;
-  /** 问答生效域: 1-停用；2-仅开发域；3-仅发布域；4-全域 */
+  /** 问答生效域: 1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效 */
   EnableScope?: number | null;
-  /** 问答关联的文档生效域 */
+  /** 问答关联的文档生效域：1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效。若问答未关联文档，则该字段值同问答生效域。 */
   DocEnableScope?: number;
+  /** 问答大小（含相似问），单位：字节 */
+  QaSize?: string;
 }
 
 /** 发布列表详情 */

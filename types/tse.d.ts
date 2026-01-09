@@ -2405,7 +2405,7 @@ declare interface CreateEngineRequest {
   EngineName: string;
   /** 付费类型。参考值：- 0：后付费- 1：预付费（接口暂不支持创建预付费实例） */
   TradeType: number;
-  /** 引擎的节点规格 ID。参见EngineProductVersion字段说明 */
+  /** 引擎的节点规格 ID。参见EngineProductVersion字段说明北极星支持的引擎规格ID与节点数对应关系：基础版：spec-c160bas1 500spec-c160bas2 1000spec-c160bas3 2000spec-c160bas4 5000spec-c160bas5 10000spec-c160bas6 20000spec-c160bas7 50000企业版：spec-c160pro50 50spec-c160pro100 100spec-c160pro200 200spec-c160pro500 500spec-c160pro1k 1000spec-c160pro5k 5000spec-c160pro10k 10000spec-c160pro20k 20000spec-c160pro50k 50000开发版：spec-c160dev1 50 */
   EngineResourceSpec?: string;
   /** 引擎的节点数量。参见EngineProductVersion字段说明 */
   EngineNodeNum?: number;

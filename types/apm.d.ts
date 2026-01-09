@@ -158,6 +158,8 @@ declare interface ApmAppConfig {
   EnableDesensitizationRule?: number;
   /** 脱敏规则 */
   DesensitizationRule?: string;
+  /** spanId的索引key: 当CLS索引类型为键值索引时生效 */
+  LogSpanIdKey?: string;
 }
 
 /** 应用相关的配置列表项 */
@@ -358,6 +360,8 @@ declare interface ApmInstanceDetail {
   UrlLongSegmentThreshold?: number;
   /** URL数字分段收敛阈值 */
   UrlNumberSegmentThreshold?: number;
+  /** spanId的索引key: 当CLS索引类型为键值索引时生效 */
+  LogSpanIdKey?: string;
 }
 
 /** 指标列表单元 */
@@ -1311,6 +1315,8 @@ declare interface ModifyApmApplicationConfigRequest {
   EnableDesensitizationRule?: number;
   /** 脱敏规则 */
   DesensitizationRule?: string;
+  /** spanId的索引key: 当CLS索引类型为键值索引时生效 */
+  LogSpanIdKey?: string;
 }
 
 declare interface ModifyApmApplicationConfigResponse {
@@ -1421,6 +1427,8 @@ declare interface ModifyApmInstanceRequest {
   UrlLongSegmentThreshold?: number;
   /** URL数字分段收敛阈值 */
   UrlNumberSegmentThreshold?: number;
+  /** spanId的索引key: 当CLS索引类型为键值索引时生效 */
+  LogSpanIdKey?: string;
 }
 
 declare interface ModifyApmInstanceResponse {

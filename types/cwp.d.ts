@@ -3748,6 +3748,8 @@ declare interface PrivilegeEscalationProcess {
   MachineExtraInfo?: MachineExtraInfo;
   /** 进程id */
   Pid?: number;
+  /** 告警数量 */
+  Count?: number;
 }
 
 /** 本地提权数据 */
@@ -3804,6 +3806,8 @@ declare interface PrivilegeEventInfo {
   MachineStatus?: string;
   /** 处理时间 */
   ModifyTime?: string;
+  /** 告警数量 */
+  Count?: number;
 }
 
 /** 本地提权规则 */

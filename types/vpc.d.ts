@@ -1822,6 +1822,10 @@ declare interface NetworkAclQuintupleEntry {
   CreateTime?: string;
   /** 方向，INGRESS或EGRESS，用于DescribeNetworkAclQuintupleEntries的出参。 */
   NetworkAclDirection?: string;
+  /** IPv6源CIDR。 */
+  SourceIPv6Cidr?: string;
+  /** IPv6目的CIDR。 */
+  DestinationIPv6Cidr?: string;
 }
 
 /** 弹性网卡 */
@@ -2068,6 +2072,14 @@ declare interface ReferredSecurityGroup {
   SecurityGroupId?: string;
   /** 引用安全组实例ID（SecurityGroupId）的所有安全组实例ID。 */
   ReferredSecurityGroupIds?: string[];
+}
+
+/** 匹配路由接收策略对象 */
+declare interface ReplaceRoutesWithRoutePolicyRoute {
+  /** 路由唯一策略ID。 */
+  RouteItemId?: string;
+  /** 匹配路由接收策略标记。 */
+  ForceMatchPolicy?: boolean;
 }
 
 /** 内网保留IP数据 */
@@ -9778,6 +9790,18 @@ declare interface ReplaceRoutesResponse {
   RequestId?: string;
 }
 
+declare interface ReplaceRoutesWithRoutePolicyRequest {
+  /** 路由表实例ID。 */
+  RouteTableId: string;
+  /** 路由策略对象。需要指定路由策略唯一ID（RouteItemId）。 */
+  Routes: ReplaceRoutesWithRoutePolicyRoute[];
+}
+
+declare interface ReplaceRoutesWithRoutePolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ReplaceSecurityGroupPoliciesRequest {
   /** 安全组实例ID，例如sg-33ocnj9n，可通过DescribeSecurityGroups获取。 */
   SecurityGroupId: string;
@@ -10961,6 +10985,8 @@ declare interface Vpc {
   ReplaceRouteTableAssociation(data: ReplaceRouteTableAssociationRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceRouteTableAssociationResponse>;
   /** 替换路由策略 {@link ReplaceRoutesRequest} {@link ReplaceRoutesResponse} */
   ReplaceRoutes(data: ReplaceRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceRoutesResponse>;
+  /** 匹配路由接收策略 {@link ReplaceRoutesWithRoutePolicyRequest} {@link ReplaceRoutesWithRoutePolicyResponse} */
+  ReplaceRoutesWithRoutePolicy(data: ReplaceRoutesWithRoutePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceRoutesWithRoutePolicyResponse>;
   /** 批量修改安全组规则 {@link ReplaceSecurityGroupPoliciesRequest} {@link ReplaceSecurityGroupPoliciesResponse} */
   ReplaceSecurityGroupPolicies(data: ReplaceSecurityGroupPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceSecurityGroupPoliciesResponse>;
   /** 替换单条安全组规则 {@link ReplaceSecurityGroupPolicyRequest} {@link ReplaceSecurityGroupPolicyResponse} */

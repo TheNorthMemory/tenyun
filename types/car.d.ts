@@ -44,6 +44,22 @@ declare interface CreateSessionResponse {
   RequestId?: string;
 }
 
+declare interface DescribeConcurrentCountRequest {
+  /** 项目ID */
+  ProjectId?: string;
+  /** 应用类别（DESKTOP: 桌面端，MOBILE：移动端） */
+  ApplicationCategory?: string;
+}
+
+declare interface DescribeConcurrentCountResponse {
+  /** 并发总数 */
+  Total?: number;
+  /** 并发运行数，包括预启动中的、已连接的、等待重连、清理恢复等所有非空闲的并发数，所以刷新项目或断开并发包的用户连接，都会影响到该值 */
+  Running?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DestroySessionRequest {
   /** 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变） */
   UserId: string;
@@ -95,6 +111,8 @@ declare interface Car {
   ApplyConcurrent(data: ApplyConcurrentRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyConcurrentResponse>;
   /** 创建会话 {@link CreateSessionRequest} {@link CreateSessionResponse} */
   CreateSession(data: CreateSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSessionResponse>;
+  /** 获取并发计数 {@link DescribeConcurrentCountRequest} {@link DescribeConcurrentCountResponse} */
+  DescribeConcurrentCount(data?: DescribeConcurrentCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConcurrentCountResponse>;
   /** 销毁会话 {@link DestroySessionRequest} {@link DestroySessionResponse} */
   DestroySession(data: DestroySessionRequest, config?: AxiosRequestConfig): AxiosPromise<DestroySessionResponse>;
   /** 开始云端推流 {@link StartPublishStreamRequest} {@link StartPublishStreamResponse} */

@@ -2124,7 +2124,7 @@ declare interface L4Proxy {
   StaticIp?: string;
   /** 是否开启中国大陆网络优化。 on：开启 off：关闭 */
   AccelerateMainland?: string;
-  /** 安全防护配置。 */
+  /** 安全防护配置。本字段已废弃。 */
   DDosProtectionConfig?: DDosProtectionConfig | null;
   /** 四层代理实例下的转发规则数量。 */
   L4ProxyRuleCount?: number;
@@ -4631,7 +4631,7 @@ declare interface CreateL4ProxyRequest {
   StaticIp?: string;
   /** 是否开启中国大陆网络优化，不填写时默认为 off。该配置仅在部分加速区域和安全防护配置下支持开启，详情请参考 [新建四层代理实例](https://cloud.tencent.com/document/product/1552/90025) 。取值为：on：开启；off：关闭。 */
   AccelerateMainland?: string;
-  /** L3/L4 DDoS 防护配置，不填写时默认使用平台默认防护选项。详情参考 [独立 DDoS 防护](https://cloud.tencent.com/document/product/1552/95994)。 */
+  /** L3/L4 DDoS 防护配置，不填写时默认使用平台默认防护选项。详情参考 [独立 DDoS 防护](https://cloud.tencent.com/document/product/1552/95994)。本字段已废弃，请使用 DDosProtectionId 字段指定关联的DDoS防护配置。 */
   DDosProtectionConfig?: DDosProtectionConfig;
 }
 

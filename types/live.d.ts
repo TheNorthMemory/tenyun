@@ -3126,6 +3126,18 @@ declare interface DescribeCasterDisplayInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCasterEmergencyStatusRequest {
+  /** 导播台ID。 */
+  CasterId: number;
+}
+
+declare interface DescribeCasterEmergencyStatusResponse {
+  /** 备播状态，范围[0,1,2]0. 正常直播状态1. 备播状态2. 备播切换正常直播中，在配置了延播时长时出现 */
+  EmergencyStatus?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCasterInputInfosRequest {
   /** 导播台ID */
   CasterId: number;
@@ -5494,6 +5506,18 @@ declare interface SwitchBackupStreamResponse {
   RequestId?: string;
 }
 
+declare interface SwitchCasterToEmergencyRequest {
+  /** 导播台ID。 */
+  CasterId: number;
+}
+
+declare interface SwitchCasterToEmergencyResponse {
+  /** 备播状态，范围[0,1,2]0. 正常直播状态1. 备播状态2. 备播切换正常直播中，在配置了延播时长时出现 */
+  EmergencyStatus?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UnBindLiveDomainCertRequest {
   /** 播放域名。 */
   DomainName: string;
@@ -5681,6 +5705,8 @@ declare interface Live {
   DescribeCaster(data: DescribeCasterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterResponse>;
   /** 查询导播台展示信息 {@link DescribeCasterDisplayInfoRequest} {@link DescribeCasterDisplayInfoResponse} */
   DescribeCasterDisplayInfo(data: DescribeCasterDisplayInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterDisplayInfoResponse>;
+  /** 查询导播台备播状态 {@link DescribeCasterEmergencyStatusRequest} {@link DescribeCasterEmergencyStatusResponse} */
+  DescribeCasterEmergencyStatus(data: DescribeCasterEmergencyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterEmergencyStatusResponse>;
   /** 查询导播台输入源列表 {@link DescribeCasterInputInfosRequest} {@link DescribeCasterInputInfosResponse} */
   DescribeCasterInputInfos(data: DescribeCasterInputInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCasterInputInfosResponse>;
   /** 查询导播台布局列表 {@link DescribeCasterLayoutInfosRequest} {@link DescribeCasterLayoutInfosResponse} */
@@ -5935,6 +5961,8 @@ declare interface Live {
   StopScreenshotTask(data: StopScreenshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopScreenshotTaskResponse>;
   /** 直播备用流切换 {@link SwitchBackupStreamRequest} {@link SwitchBackupStreamResponse} */
   SwitchBackupStream(data: SwitchBackupStreamRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchBackupStreamResponse>;
+  /** 切换导播台备播 {@link SwitchCasterToEmergencyRequest} {@link SwitchCasterToEmergencyResponse} */
+  SwitchCasterToEmergency(data: SwitchCasterToEmergencyRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchCasterToEmergencyResponse>;
   /** 解绑域名证书 {@link UnBindLiveDomainCertRequest} {@link UnBindLiveDomainCertResponse} */
   UnBindLiveDomainCert(data: UnBindLiveDomainCertRequest, config?: AxiosRequestConfig): AxiosPromise<UnBindLiveDomainCertResponse>;
   /** 更新水印 {@link UpdateLiveWatermarkRequest} {@link UpdateLiveWatermarkResponse} */

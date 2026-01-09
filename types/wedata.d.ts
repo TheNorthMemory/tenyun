@@ -418,6 +418,22 @@ declare interface CreateQualityRuleGroupResultVO {
   RuleGroupResultList?: QualityRuleGroupResult[];
 }
 
+/** 数据质量规则批量创建结果 */
+declare interface CreateQualityRuleVO {
+  /** 操作结果文案 */
+  Msg?: string | null;
+  /** 单条数据新增结果对象 */
+  Results?: QualityRuleCreateResult[] | null;
+  /** 总新增条数 */
+  SumCount?: number | null;
+  /** 新增成功条数 */
+  SuccessCount?: number | null;
+  /** 新增失败条数 */
+  FailedCount?: number | null;
+  /** 新增成功的 ruleId集合 */
+  SuccessRuleIds?: number[] | null;
+}
+
 /** 创建资源文件结果 */
 declare interface CreateResourceFileResult {
   /** 资源文件ID */
@@ -1963,7 +1979,7 @@ declare interface QualityColumnValueConfig {
 /** 对比规则 */
 declare interface QualityCompareRule {
   /** 比较条件列表 */
-  Items?: QualityCompareRuleItem[] | null;
+  Items: QualityCompareRuleItem[] | null;
   /** 周期性模板默认周期，单位秒 */
   CycleStep?: number | null;
   /** o 表示 或，a 表示 且，数字表示items下标 */
@@ -1972,13 +1988,13 @@ declare interface QualityCompareRule {
 
 /** 比较条件 */
 declare interface QualityCompareRuleItem {
-  /** 比较类型 1.固定值 2.波动值 3.数值范围比较 4.枚举范围比较 5.不用比较 */
+  /** 比较类型【入参必填】，1.固定值 2.波动值 3.数值范围比较 4.枚举范围比较 5.不用比较 6.字段数据相关性 7.公平性 */
   CompareType?: number | null;
-  /** 比较操作类型< <= == => > !=IRLCRO:在区间内(左闭右开)IRLORC:在区间内(左开右闭)IRLCRC:在区间内(左闭右闭)IRLORO:在区间内(左开右开)NRLCRO:不在区间内(左闭右开)NRLORC:不在区间内(左开右闭)NRLCRC:不在区间内(左闭右闭)NRLORO:不在区间内(左开右开) */
+  /** 比较操作类型【入参条件必填】，CompareType ∈ {1,2,6,7} 时必填< <= == => > !=IRLCRO:在区间内(左闭右开)IRLORC:在区间内(左开右闭)IRLCRC:在区间内(左闭右闭)IRLORO:在区间内(左开右开)NRLCRO:不在区间内(左闭右开)NRLORC:不在区间内(左开右闭)NRLCRC:不在区间内(左闭右闭)NRLORO:不在区间内(左开右开) */
   Operator?: string | null;
-  /** 质量统计值类型 1.绝对值 2.上升 3. 下降 4._C包含 5. N_C不包含 */
+  /** 质量统计值类型【入参条件必填】，当 CompareType ∈ {2,3,7} 时必填可选值：当 compareType = 2(波动值) 时： - 1 = 绝对值(ABS) - 2 = 上升(ASCEND) - 3 = 下降(DESCEND)当 compareType = 3(数值范围) 时： - 4 = 范围内(WITH_IN_RANGE) - 5 = 范围外(OUT_OF_RANGE)当 compareType = 7(公平性) 时： - 6 = 公平率(FAIRNESS_RATE) - 7 = 公平差(FAIRNESS_GAP) */
   ValueComputeType?: number | null;
-  /** 比较阈值列表 */
+  /** 比较阈值列表【入参必填】 */
   ValueList?: QualityThresholdValue[] | null;
 }
 
@@ -2134,6 +2150,22 @@ declare interface QualityRule {
   TargetCatalogName?: string | null;
 }
 
+/** 批量创建规则时的单条数据创建结果 */
+declare interface QualityRuleCreateResult {
+  /** 操作结果文案 */
+  Msg?: string | null;
+  /** 操作结果 */
+  Success?: boolean | null;
+  /** 规则名 */
+  Name?: string | null;
+  /** 规则组id */
+  RuleGroupId?: number | null;
+  /** 本地表id */
+  RuleGroupTableId?: number | null;
+  /** 规则id */
+  RuleId?: number | null;
+}
+
 /** 规则执行结果 */
 declare interface QualityRuleExecResult {
   /** 规则执行ID */
@@ -2216,6 +2248,76 @@ declare interface QualityRuleFieldConfig {
   WhereConfig?: QualityFieldConfig[] | null;
   /** 库表变量 */
   TableConfig?: QualityTableConfig[] | null;
+}
+
+/** 数据质量监控任务 */
+declare interface QualityRuleGroup {
+  /** 规则组Id */
+  RuleGroupId?: number | null;
+  /** 数据源Id */
+  DatasourceId?: string | null;
+  /** 数据源名称 */
+  DatasourceName?: string | null;
+  /** 数据源类型 */
+  DatasourceType?: number | null;
+  /** 监控类型 1.未配置, 2.关联生产调度, 3.离线周期检测 */
+  MonitorType?: number | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** 关联数据表名称 */
+  TableName?: string | null;
+  /** 关联数据表Id */
+  TableId?: string | null;
+  /** 关联数据表负责人 */
+  TableOwnerName?: string | null;
+  /** 执行策略 */
+  ExecStrategy?: QualityRuleGroupExecStrategy | null;
+  /** 订阅信息 */
+  Subscription?: QualityRuleGroupSubscribe | null;
+  /** 数据库id */
+  DatabaseId?: string | null;
+  /** 数据库名称 */
+  DatabaseName?: string | null;
+  /** 模式名称 */
+  SchemaName?: string | null;
+  /** 是否有权限 */
+  Permission?: boolean | null;
+  /** 已经配置的规则数量 */
+  RuleCount?: number | null;
+  /** 监控状态 */
+  MonitorStatus?: boolean | null;
+  /** 表负责人UserId */
+  TableOwnerUserId?: number | null;
+  /** 实例ID */
+  InstanceId?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 是否已配置执行策略 */
+  StrategyConfig?: boolean | null;
+  /** 是否已配置执行策略 */
+  SubscribeConfig?: boolean | null;
+  /** 数据源环境：0或者未返回.未定义，1.生产 2.开发 */
+  DsEnvType?: number | null;
+  /** EMR集群部署方式：CVM/TKE */
+  ClusterDeployType?: string | null;
+  /** 任务名称 */
+  Name?: string | null;
+  /** 执行详情 */
+  ExecDetail?: string | null;
+  /** 事中关联任务数量 */
+  PipelineTaskCount?: number | null;
+  /** 有效规则数 */
+  EnableRuleCount?: number | null;
+  /** 任务描述 */
+  Description?: string | null;
+  /** 监控创建人 */
+  CreateUserName?: string | null;
+  /** 任务类型 */
+  GroupType?: string | null;
+  /** 任务id */
+  AspectTaskId?: string | null;
+  /** 数据目录名称 */
+  CatalogName?: string | null;
 }
 
 /** 任务配置 */
@@ -2316,8 +2418,16 @@ declare interface QualityRuleGroupExecStrategy {
   GroupConfig?: QualityRuleGroupConfig | null;
   /** 引擎参数 */
   EngineParam?: string | null;
-  /** 数据目录名称，不填默认为DataLakeCatalog */
+  /** 数据目录名称，不填默认为DataLakeCatalog（更新质量监控时该参数无效） */
   CatalogName?: string | null;
+}
+
+/** 质量监控分页 */
+declare interface QualityRuleGroupPage {
+  /** 总数 */
+  TotalCount?: number | null;
+  /** 质量监控列表 */
+  Items?: QualityRuleGroup[] | null;
 }
 
 /** 任务创建结果 */
@@ -2412,6 +2522,78 @@ declare interface QualityRuleGroupsTableVO {
   TotalCount?: number | null;
   /** 监控对象列表 */
   Items?: QualityRuleGroupTableV2[] | null;
+}
+
+/** 数据质量规则 */
+declare interface QualityRuleInfo {
+  /** 规则名称 */
+  Name: string | null;
+  /** 规则类型 1：系统模版2：自定义模版3：自定义SQL */
+  Type: number | null;
+  /** 数据源Id */
+  DatasourceId: string | null;
+  /** 数据库名称 */
+  DatabaseName: string | null;
+  /** 报警触发条件 */
+  CompareRule: QualityCompareRule | null;
+  /** 报警触发级别 1.低, 2.中, 3.高 */
+  AlarmLevel: number | null;
+  /** 该规则支持的执行引擎列表，可选值如下：1 - MYSQL2 - HIVE4 - SPARK8 - LIVY16 - DLC32 - GBASE64 - TCHouse-P128 - DORIS256 - TCHouse-D512 - EMR_STARROCKS1024 - TCHouse-X */
+  SourceEngineTypes: number[] | null;
+  /** 表名称，TableId和TableName至少填一个 */
+  TableName?: string | null;
+  /** 规则模板id，【条件必填】当Type≠3（自定义SQL）时必填 */
+  RuleTemplateId?: number | null;
+  /** 规则所属质量维度，Type=3（自定义SQL）时必填（1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性） */
+  QualityDim?: number | null;
+  /** 项目id */
+  ProjectId?: string | null;
+  /** 规则组Id */
+  RuleGroupId?: number | null;
+  /** 数据表ID，TableId和TableName至少要有一个 */
+  TableId?: string | null;
+  /** 源数据对象（表、字段等）详细类型，【条件必填】当Type=1（系统模板）时必填表对应固定值“table”（模板是表级的）字段则是对应字段类型：int、string等（模板是字段级的） */
+  SourceObjectDataTypeName?: string | null;
+  /** 源数据对象（表、字段等）名称，【条件必填】当Type=1（系统模板）时必填 */
+  SourceObjectValue?: string | null;
+  /** 检测范围，【条件必填】当Type=1（系统模板）或2（自定义模板）时必填。 1.全表2.条件扫描注意：CompareType为2（波动值）或 使用用户自定义模板时包含过滤条件${FILTER}时，检测范围必须为2条件扫描 */
+  ConditionType?: number | null;
+  /** 条件扫描WHERE条件表达式，【条件必填】ConditionType=2(条件扫描)时必填 */
+  ConditionExpression?: string | null;
+  /** 自定义SQL（Base64编码），【条件必填】Type=3（自定义SQL）时必填 */
+  CustomSql?: string | null;
+  /** 规则描述 */
+  Description?: string | null;
+  /** 数据库Id */
+  DatabaseId?: string | null;
+  /** 目标库Id */
+  TargetDatabaseId?: string | null;
+  /** 目标表Id */
+  TargetTableId?: string | null;
+  /** 目标过滤条件表达式 */
+  TargetConditionExpr?: string | null;
+  /** 源字段与目标字段关联条件on表达式，【条件必填】仅在字段数据相关性规则时必填（ruleTemplate中qualityDim=4(一致性) 且 subQualityDim=3(字段数据相关性)），例如sourceTable.model_id=targetTable.model_id */
+  RelConditionExpr?: string | null;
+  /** 自定义模版sql表达式字段替换参数，【条件必填】Type=2（自定义模板）时必填 */
+  FieldConfig?: QualityRuleFieldConfig | null;
+  /** 目标字段名称 CITY */
+  TargetObjectValue?: string | null;
+  /** 下标，新增时区分不同数据 */
+  Index?: string | null;
+  /** 模式名称 */
+  SchemaName?: string | null;
+  /** 目标schema名称，【条件必填】仅在系统模板的“字段数据相关性”规则以及数据源为TCHouse-P时必填（ruleTemplate的qualityDim=4 且 subQualityDim=3）。用于校验和关联跨表数据 */
+  TargetSchemaName?: string | null;
+  /** 目标库名称，【条件必填】仅在系统模板的“字段数据相关性”规则时必填（ruleTemplate的qualityDim=4 且 subQualityDim=3）。用于校验和关联跨表数据 */
+  TargetDatabaseName?: string | null;
+  /** 目标表名称，【条件必填】仅在系统模板的“字段数据相关性”规则时必填（ruleTemplate的qualityDim=4 且 subQualityDim=3）。用于校验和关联跨表数据 */
+  TargetTableName?: string | null;
+  /** 任务id */
+  TaskId?: string | null;
+  /** 数据目录名称，主要用于dlc数据源 */
+  CatalogName?: string | null;
+  /** 目标数据目录名称，【条件必填】仅在系统模板的“字段数据相关性”规则以及数据源为DLC时必填（ruleTemplate的qualityDim=4 且 subQualityDim=3）。用于校验和关联跨表数据 */
+  TargetCatalogName?: string | null;
 }
 
 /** 数据质量规则分页 */
@@ -2530,9 +2712,9 @@ declare interface QualityTableConfig {
 
 /** 数据质量阈值 */
 declare interface QualityThresholdValue {
-  /** 阈值类型 1.低阈值 2.高阈值 3.普通阈值 4.枚举值 */
+  /** 阈值类型【入参必填】 1.低阈值 2.高阈值 3.普通阈值 4.枚举值 */
   ValueType?: number | null;
-  /** 阈值 */
+  /** 阈值【入参必填】 */
   Value?: string | null;
 }
 
@@ -4576,6 +4758,22 @@ declare interface CreateQualityRuleGroupResponse {
   RequestId?: string;
 }
 
+declare interface CreateQualityRuleRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 规则创建场景1：单表多规则2：多表单规则3：克隆创建规则 */
+  CreateRuleScene: number;
+  /** 单条规则信息集合 */
+  RuleBOList: QualityRuleInfo[];
+}
+
+declare interface CreateQualityRuleResponse {
+  /** 规则创建结果 */
+  Data?: CreateQualityRuleVO | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateResourceFileRequest {
   /** 项目ID */
   ProjectId: string;
@@ -6284,6 +6482,26 @@ declare interface ListQualityRuleGroupExecResultsByPageRequest {
 declare interface ListQualityRuleGroupExecResultsByPageResponse {
   /** 规则组执行结果列表 */
   Data?: ListQualityRuleGroupExecResultPage | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListQualityRuleGroupsRequest {
+  /** 项目Id */
+  ProjectId: string;
+  /** 分页序号，默认1 */
+  PageNumber?: number;
+  /** 分页大小，默认10 */
+  PageSize?: number;
+  /** 过滤条件,每次请求的Filters的上限为10，Filter.Values的上限为5，可选过滤条件如下：1. RuleGroupId描述：规则组ID。取值：整数2. RuleGroupName描述：规则组名称。取值：字符串3. TableId描述：数据源表id取值：字符串4. TableName描述：数据源表名称，支持模糊匹配。取值：字符串5. TableOwnerName描述：表负责人名称，支持模糊匹配。取值：字符串6. DatasourceType描述：数据源类型。取值：1 - MYSQL；2 - HIVE；3 - DLC；4 - GBASE；5 - TCHouse-P/CDW；6 - ICEBERG；7 - DORIS；8 - TCHouse-D；9 - EMR_STARROCKS；10 - TBDS_STARROCKS；11 - TCHouse-X7. DatasourceId描述：数据源ID。取值：字符串8. DatabaseName描述：数据库名称。取值：字符串9. SchemaName描述：Schema名称。取值：字符串10. CatalogName描述：数据目录名称。取值：字符串 */
+  Filters?: Filter[];
+  /** 通用排序，支持的排序字段：CreateTime - 按创建时间排序UpdateTime - 按更新时间排序（默认）排序方向：1 - 升序（ASC）2 - 降序（DESC） */
+  OrderFields?: OrderField[];
+}
+
+declare interface ListQualityRuleGroupsResponse {
+  /** 任务列表 */
+  Data?: QualityRuleGroupPage | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -23048,6 +23266,8 @@ declare interface Wedata {
   CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
   /** 创建项目成员 {@link CreateProjectMemberRequest} {@link CreateProjectMemberResponse} */
   CreateProjectMember(data: CreateProjectMemberRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectMemberResponse>;
+  /** 质量创建规则接口 {@link CreateQualityRuleRequest} {@link CreateQualityRuleResponse} */
+  CreateQualityRule(data: CreateQualityRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQualityRuleResponse>;
   /** 质量创建监控任务 {@link CreateQualityRuleGroupRequest} {@link CreateQualityRuleGroupResponse} */
   CreateQualityRuleGroup(data: CreateQualityRuleGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQualityRuleGroupResponse>;
   /** 创建资源文件 {@link CreateResourceFileRequest} {@link CreateResourceFileResponse} */
@@ -23250,6 +23470,8 @@ declare interface Wedata {
   ListProjects(data?: ListProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<ListProjectsResponse>;
   /** 质量规则组执行结果分页查询接口 {@link ListQualityRuleGroupExecResultsByPageRequest} {@link ListQualityRuleGroupExecResultsByPageResponse} */
   ListQualityRuleGroupExecResultsByPage(data: ListQualityRuleGroupExecResultsByPageRequest, config?: AxiosRequestConfig): AxiosPromise<ListQualityRuleGroupExecResultsByPageResponse>;
+  /** 质量分页查询监控任务 {@link ListQualityRuleGroupsRequest} {@link ListQualityRuleGroupsResponse} */
+  ListQualityRuleGroups(data: ListQualityRuleGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ListQualityRuleGroupsResponse>;
   /** 质量分页查询监控表 {@link ListQualityRuleGroupsTableRequest} {@link ListQualityRuleGroupsTableResponse} */
   ListQualityRuleGroupsTable(data: ListQualityRuleGroupsTableRequest, config?: AxiosRequestConfig): AxiosPromise<ListQualityRuleGroupsTableResponse>;
   /** 质量规则模版查询接口 {@link ListQualityRuleTemplatesRequest} {@link ListQualityRuleTemplatesResponse} */

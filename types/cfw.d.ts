@@ -586,11 +586,11 @@ declare interface EdgeIpInfo {
   IsRegionEip?: number;
   /** EIP 所关联的VPC */
   VpcId?: string;
-  /** 0: 该地域暂未支持串行1: 该用户未在该地域配置串行带宽2: 该用户已在该地域配置串行带宽，可以开启串行开关 */
+  /** 0: 该地域暂未支持串行1: 该用户未在该地域配置串行带宽2: 该用户已在该地域配置串行带宽，可以开启串行开关3. 该地域可以支持串行，但是未部署公共集群 */
   IsSerialRegion?: number;
   /** 0: 不是公网CLB 可以开启串行开关1: 是公网CLB 不可以开启串行开关 */
   IsPublicClb?: number;
-  /** 0: 开启开关时提示要创建私有连接。1: 关闭该开关是提示删除私有连接。如果大于 1: 关闭开关 、开启开关不需提示创建删除私有连接。 */
+  /** 0: 开启开关时提示要创建私有连接。1: 关闭该开关时提示删除私有连接。如果大于 1: 关闭开关 、开启开关不需提示创建删除私有连接。 */
   EndpointBindEipNum?: number;
   /** 扫描深度 */
   ScanMode?: string;
@@ -610,6 +610,8 @@ declare interface EdgeIpInfo {
   Domain?: string;
   /** IP超量状态 */
   OverUsedStatus?: number;
+  /** 0 都不支持1 支持旁路2 支持串行3 旁路串行都支持 */
+  SwitchSupportType?: number;
 }
 
 /** 开启、关闭 防火墙互联网边界开关 */

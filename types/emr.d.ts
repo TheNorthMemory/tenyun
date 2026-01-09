@@ -2642,6 +2642,8 @@ declare interface StarRocksQueryInfo {
   ExecutionStatement?: string;
   /** 用户 */
   User?: string;
+  /** 错误码 */
+  ErrorCode?: string;
 }
 
 /** 执行步骤 */
@@ -2880,6 +2882,8 @@ declare interface TrinoQueryInfo {
   User?: string;
   /** 写入字节数 */
   WrittenBytes?: number;
+  /** Error日志 */
+  ErrorMessage?: string;
 }
 
 /** 变配资源规格 */
