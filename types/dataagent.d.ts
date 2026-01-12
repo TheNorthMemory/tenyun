@@ -104,6 +104,26 @@ declare interface KnowledgeTaskConfig {
   GenParaSummary?: number;
 }
 
+/** 用户对象的权限 */
+declare interface ModelUserAuthority {
+  /** 实例id */
+  InstanceId?: string;
+  /** 模块，分为知识库knowledge、数据源datasource、自定义场景scene */
+  Module?: string;
+  /** 对象创建者 */
+  CreatorUin?: string;
+  /** 对象id,分为知识库id、数据源id、场景id */
+  ObjectId?: string;
+  /** 作用范围：1仅自己使用，2指定用户，0全员 */
+  UseScope?: number;
+  /** 可使用的用户列表 */
+  AuthorityUins?: string[];
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+}
+
 /** 问答结构 */
 declare interface Record {
   /** 问题内容 */
@@ -416,6 +436,18 @@ declare interface ModifyKnowledgeBaseResponse {
   RequestId?: string;
 }
 
+declare interface ModifyUserAuthorityRequest {
+  /** 作用范围：1仅自己使用，2指定用户，0全员 */
+  UseScope?: number;
+  /** 可使用的用户列表，UseScope=0/1,取值为[] */
+  AuthorityUins?: string[];
+}
+
+declare interface ModifyUserAuthorityResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface QueryChunkListRequest {
   /** 表示第一页 */
   Page?: number;
@@ -430,6 +462,16 @@ declare interface QueryChunkListResponse {
   Total?: number;
   /** 分片信息 */
   Chunks?: Chunk[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface QueryUserAuthorityRequest {
+}
+
+declare interface QueryUserAuthorityResponse {
+  /** 对象权限信息 */
+  ModelUserAuthority?: ModelUserAuthority;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -491,8 +533,12 @@ declare interface Dataagent {
   ModifyChunk(data: ModifyChunkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyChunkResponse>;
   /** 修改知识库 {@link ModifyKnowledgeBaseRequest} {@link ModifyKnowledgeBaseResponse} */
   ModifyKnowledgeBase(data: ModifyKnowledgeBaseRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyKnowledgeBaseResponse>;
+  /** 修改对象的用户权限信息 {@link ModifyUserAuthorityRequest} {@link ModifyUserAuthorityResponse} */
+  ModifyUserAuthority(data?: ModifyUserAuthorityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserAuthorityResponse>;
   /** 文档切片查询 {@link QueryChunkListRequest} {@link QueryChunkListResponse} */
   QueryChunkList(data?: QueryChunkListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChunkListResponse>;
+  /** 查询对象的用户权限信息 {@link QueryUserAuthorityRequest} {@link QueryUserAuthorityResponse} */
+  QueryUserAuthority(data?: QueryUserAuthorityRequest, config?: AxiosRequestConfig): AxiosPromise<QueryUserAuthorityResponse>;
   /** 终止问答返回流 {@link StopChatAIRequest} {@link StopChatAIResponse} */
   StopChatAI(data?: StopChatAIRequest, config?: AxiosRequestConfig): AxiosPromise<StopChatAIResponse>;
   /** cos上传提交文件 {@link UploadAndCommitFileRequest} {@link UploadAndCommitFileResponse} */

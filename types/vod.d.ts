@@ -453,6 +453,8 @@ declare namespace V20180717 {
     RemoveVideo?: number;
     /** 极速高清转码参数。 */
     TEHDConfig?: TEHDConfig | null;
+    /** 音视频增强配置。 */
+    EnhanceConfig?: EnhanceConfig | null;
   }
 
   /** 智能分析结果 */
@@ -2083,12 +2085,42 @@ declare namespace V20180717 {
     LabelSet?: string[];
   }
 
+  /** 音频美化配置。 */
+  interface AudioBeautifyInfo {
+    /** 音频美化控制开关，可选值：ON：开启音频美化；OFF：关闭音频美化。 */
+    Switch: string;
+    /** 类型，可多选，可选值：declick：杂音去除deesser：齿音压制默认值：declick。 */
+    Types?: string[];
+  }
+
   /** 音频降噪控制信息 */
   interface AudioDenoiseInfo {
     /** 音频降噪控制开关，可选值：ON：开启音频降噪；OFF：关闭音频降噪。 */
     Switch: string;
-    /** 音频降噪类型，仅当音频降噪控制开关为 ON 时有效，可选值：weak：轻音频降噪；normal：正常音频降噪；strong：强音频降噪。默认值：weak。 */
+    /** 音频降噪类型，仅当音频降噪控制开关为 ON 时有效，可选值：normal：正常音频降噪；默认值：normal。 */
     Type?: string;
+  }
+
+  /** 音频增强配置。 */
+  interface AudioEnhanceConfig {
+    /** 音频降噪配置。 */
+    Denoise?: AudioDenoiseInfo | null;
+    /** 音频分离配置。 */
+    Separate?: AudioSeparateInfo | null;
+    /** 音量均衡配置。 */
+    VolumeBalance?: AudioVolumeBalanceInfo | null;
+    /** 音量美化配置。 */
+    Beautify?: AudioBeautifyInfo | null;
+  }
+
+  /** 音频分离配置。 */
+  interface AudioSeparateInfo {
+    /** 音频分离控制开关，可选值：ON：开启音频分离；OFF：关闭音频分离。 */
+    Switch: string;
+    /** 场景类型，可选值：normal：人声背景声场景music：演唱伴奏场景默认值：normal。 */
+    Type?: string;
+    /** 输出音轨，可选值：vocal：输出人声background：应用场景为normal时输出背景声，应用场景为music时输出伴奏默认值：vocal。 */
+    Track?: string;
   }
 
   /** 音频流配置参数 */
@@ -2135,6 +2167,14 @@ declare namespace V20180717 {
     Type: string;
     /** 音量调节参数， 当 Type = Volume 时有效。 */
     VolumeParam?: AudioVolumeParam;
+  }
+
+  /** 音量均衡配置。 */
+  interface AudioVolumeBalanceInfo {
+    /** 音量均衡控制开关，可选值：ON：开启音量均衡；OFF：关闭音量均衡。 */
+    Switch: string;
+    /** 类型，可选值：loudNorm：响度标准化gainControl：减小突变默认值：loudNorm。 */
+    Type?: string;
   }
 
   /** 音频增益调节参数 */
@@ -2607,6 +2647,14 @@ declare namespace V20180717 {
     Sha1?: string;
   }
 
+  /** 大模型增强配置。 */
+  interface DiffusionEnhanceInfo {
+    /** 大模型增强开关，可选值：ON：开启；OFF：关闭。 */
+    Switch: string;
+    /** 强度类型，仅当大模型增强控制开关为 ON 时有效，可选值：weak：弱；normal：正常；strong：强。默认值：normal。 */
+    Type?: string;
+  }
+
   /** 域名推送 CLS 目标。 */
   interface DomainCLSTargetInfo {
     /** 域名。 */
@@ -2803,6 +2851,22 @@ declare namespace V20180717 {
   interface EmptyTrackItem {
     /** 持续时间，单位为秒。 */
     Duration: number;
+  }
+
+  /** 音视频增强配置 */
+  interface EnhanceConfig {
+    /** 视频增强配置。 */
+    VideoEnhance?: VideoEnhanceConfig | null;
+    /** 音频增强配置。 */
+    AudioEnhance?: AudioEnhanceConfig | null;
+  }
+
+  /** 音视频增强配置 */
+  interface EnhanceConfigForUpdate {
+    /** 视频增强配置。 */
+    VideoEnhance?: VideoEnhanceConfig | null;
+    /** 音频增强配置。 */
+    AudioEnhance?: AudioEnhanceConfig | null;
   }
 
   /** 音画质重生结果文件输出。 */
@@ -3053,6 +3117,16 @@ declare namespace V20180717 {
     FileVerifyName?: string;
   }
 
+  /** 插帧帧率配置。 */
+  interface FrameRateWithDenInfo {
+    /** 插帧帧率配置控制开关，可选值：ON：开启；OFF：关闭。 */
+    Switch: string;
+    /** 帧率分子，取值范围：非负数，除以分母后小于100，单位：Hz。 默认值 0。 注意：对于转码，该参数会覆盖 VideoTemplate 内部的 Fps。 */
+    FpsNum?: number;
+    /** 帧率分母，取值范围：大于等于1。 默认值 1。 */
+    FpsDen?: number;
+  }
+
   /** 智能按帧标签任务控制参数 */
   interface FrameTagConfigureInfo {
     /** 智能按帧标签任务开关，可选值：ON：开启智能按帧标签任务；OFF：关闭智能按帧标签任务。 */
@@ -3073,7 +3147,7 @@ declare namespace V20180717 {
   interface HDRInfo {
     /** 高动态范围类型控制开关，可选值：ON：开启高动态范围类型转换；OFF：关闭高动态范围类型转换。 */
     Switch: string;
-    /** 高动态范围类型，可选值：hdr10：表示 hdr10 标准；hlg：表示 hlg 标准。注意： 仅当高动态范围类型控制开关为 ON 时有效；当画质重生目标参数中指定视频输出参数的视频流编码格式 Codec 为 libx265 时有效。 */
+    /** 高动态范围类型，可选值：hdr10：表示 hdr10 标准；hlg：表示 hlg 标准。注意： 仅当高动态范围类型控制开关为 ON 时有效；当目标参数中指定视频输出参数的视频流编码格式 Codec 为 libx264、libx265 时有效。 */
     Type?: string;
   }
 
@@ -3201,6 +3275,14 @@ declare namespace V20180717 {
     Operations?: ImageOperation[];
     /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
     CreateTime?: string;
+  }
+
+  /** 综合增强控制 */
+  interface ImageQualityEnhanceInfo {
+    /** 综合增强控制开关，可选值：ON：开启综合增强；OFF：关闭综合增强。 */
+    Switch: string;
+    /** 综合增强类型，仅当综合增强控制开关为 ON 时有效，可选值：weak：轻综合增强；normal：正常综合增强；strong：强综合增强。默认值：weak。 */
+    Type?: string;
   }
 
   /** 图片审核次数统计数据。 */
@@ -6019,7 +6101,7 @@ declare namespace V20180717 {
 
   /** 画面超分控制参数 */
   interface SuperResolutionInfo {
-    /** 画面超分控制开关，可选值：ON：开启画面超分；OFF：关闭画面超分。当开启画面超分时，默认2倍超分。 */
+    /** 画面超分控制开关，可选值：ON：开启画面超分；OFF：关闭画面超分。 */
     Switch: string;
     /** 画面超分类型，仅当画面超分控制开关为 ON 时有效，可选值：lq：针对低清晰度有较多噪声视频的超分；hq：针对高清晰度视频超分。默认值：lq。 */
     Type?: string;
@@ -6321,6 +6403,8 @@ declare namespace V20180717 {
     AudioTemplate?: AudioTemplateInfo;
     /** 极速高清转码参数。 */
     TEHDConfig?: TEHDConfig | null;
+    /** 音视频增强配置。 */
+    EnhanceConfig?: EnhanceConfig | null;
     /** 封装格式过滤条件，可选值：Video：视频格式，可以同时包含视频流和音频流的封装格式；PureAudio：纯音频格式，只能包含音频流的封装格式板。 */
     ContainerType?: string;
     /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
@@ -6485,6 +6569,32 @@ declare namespace V20180717 {
     Switch: string;
     /** 视频降噪类型，仅当视频降噪控制开关为 ON 时有效，可选值：weak：轻视频降噪；strong：强视频降噪。默认值：weak。 */
     Type?: string;
+  }
+
+  /** 视频增强配置。 */
+  interface VideoEnhanceConfig {
+    /** 增强场景配置，可选值：common（通用），通用增强参数，适用于各种视频类型的基础优化参数，提升整体画质。AIGC，整体分辨率提升，利用AI技术提升视频整体分辨率，增强画面清晰度。short_play（短剧），增强面部与字幕细节，突出人物面部表情细节和字幕清晰度，提升观剧体验。short_video（短视频），优化复杂多样的画质问题，针对短视频的复杂场景，优化画质，解决多种视觉问题。game（游戏视频），修复运动模糊，提升细节，重点提升游戏细节清晰度，恢复运动模糊区域，使游戏画面内容更清晰，更丰富。HD_movie_series（超高清影视剧），获得超高清流畅效果，针对广电/OTT超高清视频的诉求，生成4K 60fps HDR的超高清标准视频。支持广电场景格式标准要求。LQ_material（低清素材/老片修复），整体分辨率提升，针对老旧视频由于拍摄年代较久存在的分辨率不足、模糊失真、划痕损伤和色温等问题进行专门优化。lecture（秀场/电商/大会/讲座），美化提升面部效果，针对秀场/电商/大会/讲座等存在人物进行讲解的场景，进行人脸区域、噪声消除、毛刺处理的专门优化。填空字符串代表不使用增强场景 */
+    EnhanceScenarioType?: string;
+    /** 超分配置。源分辨率高于目标分辨率时不对视频做处理。注意与大模型增强不可同时开启。 */
+    SuperResolution?: SuperResolutionInfo | null;
+    /** HDR配置。 */
+    Hdr?: HDRInfo | null;
+    /** 视频降噪配置。注意与大模型增强不可同时开启。 */
+    Denoise?: VideoDenoiseInfo | null;
+    /** 综合增强配置。注意大模型、综合增强、去毛刺三项里最多配置一项 */
+    ImageQualityEnhance?: ImageQualityEnhanceInfo | null;
+    /** 色彩增强配置。 */
+    ColorEnhance?: ColorEnhanceInfo | null;
+    /** 低光照增强配置。 */
+    LowLightEnhance?: LowLightEnhanceInfo | null;
+    /** 去划痕配置。 */
+    ScratchRepair?: ScratchRepairInfo | null;
+    /** 去伪影（毛刺）配置。注意大模型、综合增强、去毛刺三项里最多配置一项。 */
+    ArtifactRepair?: ArtifactRepairInfo | null;
+    /** 大模型增强配置。注意大模型、综合增强、去毛刺三项里最多配置一项。且不可与超分、降噪同时开启。 */
+    DiffusionEnhance?: DiffusionEnhanceInfo | null;
+    /** 插帧帧率配置，支持分数。注意与FrameRate二选一。源帧率大于等于目标帧率时能力不会生效。 */
+    FrameRateWithDen?: FrameRateWithDenInfo | null;
   }
 
   /** 智能插帧控制参数 */
@@ -7626,6 +7736,8 @@ declare namespace V20180717 {
     AudioTemplate?: AudioTemplateInfo;
     /** 极速高清转码参数。 */
     TEHDConfig?: TEHDConfig;
+    /** 音视频增强配置。 */
+    EnhanceConfig?: EnhanceConfig;
     /** 切片类型，当 Container 为 hls 时有效，可选值：ts：ts 切片；fmp4：fmp4 切片。默认值：ts。 */
     SegmentType?: string;
   }
@@ -9130,6 +9242,10 @@ declare namespace V20180717 {
     Offset?: number;
     /** 返回记录条数，默认值：10，最大值：100。 */
     Limit?: number;
+    /** 增强类型，可选值：VideoEnhance（仅视频增强）AudioEnhance（仅音频增强）AudioVideoEnhance（音视频增强）AnyEnhance（包括仅视频增强、仅音频增强、音视频增强）None（非增强） */
+    EnhanceType?: string;
+    /** 增强场景配置，可选值： common（通用），通用增强参数，适用于各种视频类型的基础优化参数，提升整体画质。 AIGC，整体分辨率提升，利用AI技术提升视频整体分辨率，增强画面清晰度。 short_play（短剧），增强面部与字幕细节，突出人物面部表情细节和字幕清晰度，提升观剧体验。 short_video（短视频），优化复杂多样的画质问题，针对短视频的复杂场景，优化画质，解决多种视觉问题。 game（游戏视频），修复运动模糊，提升细节，重点提升游戏细节清晰度，恢复运动模糊区域，使游戏画面内容更清晰，更丰富。 HD_movie_series（超高清影视剧），获得超高清流畅效果，针对广电/OTT超高清视频的诉求，生成4K 60fps HDR的超高清标准视频。支持广电场景格式标准要求。 LQ_material（低清素材/老片修复），整体分辨率提升，针对老旧视频由于拍摄年代较久存在的分辨率不足、模糊失真、划痕损伤和色温等问题进行专门优化。 lecture（秀场/电商/大会/讲座），美化提升面部效果，针对秀场/电商/大会/讲座等存在人物进行讲解的场景，进行人脸区域、噪声消除、毛刺处理的专门优化。 */
+    EnhanceScenarioType?: string;
   }
 
   interface DescribeTranscodeTemplatesResponse {
@@ -10176,6 +10292,8 @@ declare namespace V20180717 {
     AudioTemplate?: AudioTemplateInfoForUpdate;
     /** 极速高清转码参数。 */
     TEHDConfig?: TEHDConfigForUpdate;
+    /** 音视频增强配置。 */
+    EnhanceConfig?: EnhanceConfigForUpdate;
     /** 切片类型，当 Container 为 hls 时有效，可选值：ts：ts 切片；fmp4：fmp4 切片。 */
     SegmentType?: string;
   }

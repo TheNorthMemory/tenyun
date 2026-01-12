@@ -587,7 +587,7 @@ declare interface CreateBackupManuallyResponse {
 }
 
 declare interface CreateInstancesRequest {
-  /** 产品版本。14：当前仅支持混合存储版。 */
+  /** 产品版本。14：极速版。 */
   TypeId: number;
   /** 私有网络唯一ID。请登录控制台在私有网络列表查询，如：vpc-azlk3***。 */
   UniqVpcId: string;
@@ -603,17 +603,17 @@ declare interface CreateInstancesRequest {
   ShardNum: number;
   /** 副本数。当前仅支持设置1个副本节点，即每一个分片仅包含1个主节点与1个副本节点，数据主从实时热备。 */
   ReplicasNum: number;
-  /** 实例内存容量，单位：GB。KeeWiDB 内存容量MachineMemory与持久内存容量MemSize为固定搭配，即2GB内存，固定分配8GB的持久内存，不可选择。具体信息，请参见[产品规格](https://cloud.tencent.com/document/product/1520/80808)。 */
+  /** 实例内存容量，单位：GB。KeeWiDB 内存容量MachineMemory与持久内存容量MemSize为固定搭配，即2GB内存，固定分配8GB的持久内存，不可选择。具体信息，请参见产品规格。 */
   MachineMemory: number;
-  /** 实例所属的可用区ID。具体取值，请参见[地域和可用区](https://cloud.tencent.com/document/product/239/4106)获取。参数ZoneId和ZoneName至少配置其中一个。 */
+  /** 实例所属的可用区ID。具体取值，请参见地域和可用区获取。参数ZoneId和ZoneName至少配置其中一个。 */
   ZoneId?: number;
-  /** 实例所属的可用区名称。具体取值，请参见[地域和可用区](https://cloud.tencent.com/document/product/239/4106)获取。参数ZoneId和ZoneName至少配置其中一个。 */
+  /** 实例所属的可用区名称。具体取值，请参见地域和可用区获取。参数ZoneId和ZoneName至少配置其中一个。 */
   ZoneName?: string;
   /** 创建实例的名称。仅支持长度小于60的中文、英文或者数字，短划线"-"、下划线"_"。 */
   InstanceName?: string;
   /** 指明创建的实例是否需要支持免密访问。true：免密实例。false：非免密实例，默认为非免密实例。此时，需要设置访问密码。 */
   NoAuth?: boolean;
-  /** 实例访问密码。当参数NoAuth为true时，Password为无需设置，否则Password为必填参数。密码复杂度要求：8-30个字符。至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&*-+=_|{}[]:;<>,.?/ 中的2种。不能以"/"开头。 */
+  /** 实例访问密码。当参数NoAuth为true时，Password为无需设置，否则Password为必填参数。密码复杂度要求：8-30个字符。至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/ 中的2种。不能以"/"开头。 */
   Password?: string;
   /** 自定义端口。默认为6379，范围[1024,65535]。 */
   VPort?: number;
@@ -623,13 +623,13 @@ declare interface CreateInstancesRequest {
   SecurityGroupIdList?: string[];
   /** 给实例绑定标签。 */
   ResourceTags?: ResourceTag[];
-  /** 混合存储版，单分片持久化内存容量，单位：GB。KeeWiDB 内存容量MachineMemory与持久内存容量MemSize为固定搭配，即2GB内存，固定分配8GB的持久内存，不可选择。具体信息，请参见[产品规格](https://cloud.tencent.com/document/product/1520/80808)。 */
+  /** 混合存储版，单分片持久化内存容量，单位：GB。KeeWiDB 内存容量MachineMemory与持久内存容量MemSize为固定搭配，即2GB内存，固定分配8GB的持久内存，不可选择。具体信息，请参见产品规格。 */
   MemSize?: number;
-  /** 每个分片硬盘的容量。单位：GB。每一缓存分片容量，对应的磁盘容量范围不同。具体信息，请参见[产品规格](https://cloud.tencent.com/document/product/1520/80808)。 */
+  /** 每个分片硬盘的容量。单位：GB。每一缓存分片容量，对应的磁盘容量范围不同。具体信息，请参见产品规格。 */
   DiskSize?: number;
-  /** 计算 CPU 核数，可忽略不传。CPU 核数与内存为固定搭配，具体信息，请参见[产品规格](https://cloud.tencent.com/document/product/1520/80808)。 */
+  /** 计算 CPU 核数，可忽略不传。CPU 核数与内存为固定搭配，具体信息，请参见产品规格。 */
   MachineCpu?: number;
-  /** 项目id，取值以用户账户>用户账户相关接口查询>项目列表返回的projectId为准。 */
+  /** 项目id，取值以用户账户&gt;用户账户相关接口查询&gt;项目列表返回的projectId为准。 */
   ProjectId?: number;
   /** 数据压缩开关。ON：开启，默认开启压缩。OFF：关闭。 */
   Compression?: string;
