@@ -284,6 +284,8 @@ declare interface CCN {
   QosLevel?: string;
   /** 付费类型，PREPAID为预付费，POSTPAID为后付费。 */
   InstanceChargeType?: string;
+  /** 计量类型 */
+  InstanceMeteringType?: string;
   /** 限速类型，`INTER_REGION_LIMIT` 为地域间限速；`OUTER_REGION_LIMIT` 为地域出口限速。 */
   BandwidthLimitType?: string;
   /** 标签键值对。 */
@@ -3263,6 +3265,8 @@ declare interface AddBandwidthPackageResourcesRequest {
   ResourceType?: string;
   /** 带宽包协议类型。当前支持'ipv4'和'ipv6'协议类型。 */
   Protocol?: string;
+  /** 用于带宽包内添加IP资源时指定IP带宽值。说明：当前功能处于内测中，如需使用，请提交[工单申请](https://console.cloud.tencent.com/workorder/category)。 */
+  InternetMaxBandwidthOut?: number;
 }
 
 declare interface AddBandwidthPackageResourcesResponse {
@@ -9627,6 +9631,10 @@ declare interface RemoveBandwidthPackageResourcesRequest {
   BandwidthPackageId?: string;
   /** 资源类型，可选值：Address：弹性公网IPLoadBalance：负载均衡 */
   ResourceType?: string;
+  /** 用于移除带宽包内IP资源时指定IP的带宽值。说明：当前功能处于内测中，如需使用，请提交[工单申请](https://console.cloud.tencent.com/workorder/category)。 */
+  InternetMaxBandwidthOut?: number;
+  /** 用于移除带宽包内IP资源时指定资源移除后的计费模式。小时流量：TRAFFIC_POSTPAID_BY_HOUR；小时带宽：BANDWIDTH_POSTPAID_BY_HOUR说明：当前功能处于内测中，如需使用，请提交[工单申请](https://console.cloud.tencent.com/workorder/category)。 */
+  InternetChargeType?: string;
 }
 
 declare interface RemoveBandwidthPackageResourcesResponse {

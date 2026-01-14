@@ -282,6 +282,24 @@ declare interface CreateAPIKeyResponse {
   RequestId?: string;
 }
 
+declare interface CreatePreCacheImageTaskRequest {
+  /** 镜像地址 */
+  Image: string;
+  /** 镜像仓库类型：`enterprise`、`personal`。 */
+  ImageRegistryType: string;
+}
+
+declare interface CreatePreCacheImageTaskResponse {
+  /** 镜像地址 */
+  Image?: string;
+  /** 镜像 Digest */
+  ImageDigest?: string;
+  /** 镜像仓库类型：`enterprise`、`personal`。 */
+  ImageRegistryType?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSandboxToolRequest {
   /** 沙箱工具名称，长度 1-50 字符，支持英文、数字、下划线和连接线。同一 AppId 下沙箱工具名称必须唯一 */
   ToolName: string;
@@ -340,6 +358,30 @@ declare interface DescribeAPIKeyListResponse {
   APIKeySet?: APIKeyInfo[];
   /** 列表中API密钥数量 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePreCacheImageTaskRequest {
+  /** 镜像地址 */
+  Image: string;
+  /** 镜像 Digest */
+  ImageDigest: string;
+  /** 镜像仓库类型：`enterprise`、`personal`。 */
+  ImageRegistryType: string;
+}
+
+declare interface DescribePreCacheImageTaskResponse {
+  /** 镜像地址 */
+  Image?: string;
+  /** 镜像 Digest */
+  ImageDigest?: string;
+  /** 镜像仓库类型：`enterprise`、`personal`。 */
+  ImageRegistryType?: string;
+  /** 镜像预热状态 */
+  Status?: string;
+  /** 镜像预热状态描述 */
+  Message?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -455,6 +497,8 @@ declare interface Ags {
   AcquireSandboxInstanceToken(data: AcquireSandboxInstanceTokenRequest, config?: AxiosRequestConfig): AxiosPromise<AcquireSandboxInstanceTokenResponse>;
   /** 创建新的API密钥 {@link CreateAPIKeyRequest} {@link CreateAPIKeyResponse} */
   CreateAPIKey(data?: CreateAPIKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAPIKeyResponse>;
+  /** 创建预热镜像任务 {@link CreatePreCacheImageTaskRequest} {@link CreatePreCacheImageTaskResponse} */
+  CreatePreCacheImageTask(data: CreatePreCacheImageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePreCacheImageTaskResponse>;
   /** 创建沙箱工具 {@link CreateSandboxToolRequest} {@link CreateSandboxToolResponse} */
   CreateSandboxTool(data: CreateSandboxToolRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSandboxToolResponse>;
   /** 删除API密钥 {@link DeleteAPIKeyRequest} {@link DeleteAPIKeyResponse} */
@@ -463,6 +507,8 @@ declare interface Ags {
   DeleteSandboxTool(data: DeleteSandboxToolRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSandboxToolResponse>;
   /** 获取API密钥列表 {@link DescribeAPIKeyListRequest} {@link DescribeAPIKeyListResponse} */
   DescribeAPIKeyList(data?: DescribeAPIKeyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAPIKeyListResponse>;
+  /** 查询镜像预热任务信息 {@link DescribePreCacheImageTaskRequest} {@link DescribePreCacheImageTaskResponse} */
+  DescribePreCacheImageTask(data: DescribePreCacheImageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePreCacheImageTaskResponse>;
   /** 查询沙箱实例列表 {@link DescribeSandboxInstanceListRequest} {@link DescribeSandboxInstanceListResponse} */
   DescribeSandboxInstanceList(data?: DescribeSandboxInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxInstanceListResponse>;
   /** 查询沙箱工具列表 {@link DescribeSandboxToolListRequest} {@link DescribeSandboxToolListResponse} */

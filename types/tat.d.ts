@@ -123,7 +123,7 @@ declare interface Invocation {
   /** 执行活动开始时间。格式为：YYYY-MM-DDThh:mm:ssZ */
   StartTime?: string;
   /** 执行活动结束时间。格式为：YYYY-MM-DDThh:mm:ssZ */
-  EndTime?: string;
+  EndTime?: string | null;
   /** 执行活动创建时间。格式为：YYYY-MM-DDThh:mm:ssZ */
   CreatedTime?: string;
   /** 执行活动更新时间。格式为：YYYY-MM-DDThh:mm:ssZ */

@@ -1517,18 +1517,18 @@ declare interface DescribeBackupUrlResponse {
 }
 
 declare interface DescribeBandwidthRangeRequest {
-  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
+  /** 实例 ID，请登录Redis控制台在实例列表复制实例 ID。 */
   InstanceId: string;
 }
 
 declare interface DescribeBandwidthRangeResponse {
-  /** 标准带宽。指购买实例时，系统为每个节点分配的带宽。 */
+  /** 标准带宽。指购买实例时，系统为每个节点分配的带宽。单位： MB/s。 */
   BaseBandwidth?: number;
-  /** 指实例的附加带宽。标准带宽不满足需求的情况下，用户可自行增加的带宽。开启副本只读时，实例总带宽 = 附加带宽 * 分片数 + 标准带宽 * 分片数 * Max ([只读副本数量, 1])，标准架构的分片数 = 1。没有开启副本只读时，实例总带宽 = 附加带宽 * 分片数 + 标准带宽 * 分片数，标准架构的分片数 = 1。 */
+  /** 指实例的附加带宽。标准带宽不满足需求的情况下，用户可自行增加的带宽。开启副本只读时，实例总带宽 = 附加带宽 * 分片数 + 标准带宽 * 分片数 * Max ([只读副本数量, 1])，标准架构的分片数 = 1。没有开启副本只读时，实例总带宽 = 附加带宽 * 分片数 + 标准带宽 * 分片数，标准架构的分片数 = 1。单位： MB/s。 */
   AddBandwidth?: number;
-  /** 附加带宽设置下限。 */
+  /** 附加带宽设置下限。单位： MB/s。 */
   MinAddBandwidth?: number;
-  /** 附加带宽设置上限。 */
+  /** 附加带宽设置上限。单位： MB/s。 */
   MaxAddBandwidth?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

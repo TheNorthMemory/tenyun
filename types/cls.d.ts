@@ -2742,6 +2742,22 @@ declare interface CreateCosRechargeResponse {
   RequestId?: string;
 }
 
+declare interface CreateDashboardRequest {
+  /** 仪表盘名称 */
+  DashboardName: string;
+  /** 仪表盘配置数据 */
+  Data?: string;
+  /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的日志主题。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。 */
+  Tags?: Tag[];
+}
+
+declare interface CreateDashboardResponse {
+  /** 仪表盘id */
+  DashboardId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDashboardSubscribeRequest {
   /** 仪表盘订阅名称。输入限制：- 不能为空- 长度不能超过128字节- 不能包含字符'|' */
   Name: string;
@@ -3392,6 +3408,16 @@ declare interface DeleteCosRechargeRequest {
 }
 
 declare interface DeleteCosRechargeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDashboardRequest {
+  /** 仪表盘id */
+  DashboardId: string;
+}
+
+declare interface DeleteDashboardResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4914,6 +4940,22 @@ declare interface ModifyCosRechargeResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDashboardRequest {
+  /** 仪表盘id。通过 [获取仪表盘](https://cloud.tencent.com/document/api/614/95636)接口获取DashboardId。 */
+  DashboardId: string;
+  /** 仪表盘名称 */
+  DashboardName?: string;
+  /** 仪表盘配置数据 */
+  Data?: string;
+  /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的日志主题。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。 */
+  Tags?: Tag[];
+}
+
+declare interface ModifyDashboardResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDashboardSubscribeRequest {
   /** 仪表盘订阅id。通过 [获取仪表盘订阅列表](https://cloud.tencent.com/document/api/614/105779)接口获取Id。 */
   Id: number;
@@ -5683,6 +5725,8 @@ declare interface Cls {
   CreateConsumerGroup(data: CreateConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerGroupResponse>;
   /** 创建cos导入任务 {@link CreateCosRechargeRequest} {@link CreateCosRechargeResponse} */
   CreateCosRecharge(data: CreateCosRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosRechargeResponse>;
+  /** 创建仪表盘 {@link CreateDashboardRequest} {@link CreateDashboardResponse} */
+  CreateDashboard(data: CreateDashboardRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDashboardResponse>;
   /** 创建仪表盘订阅 {@link CreateDashboardSubscribeRequest} {@link CreateDashboardSubscribeResponse} */
   CreateDashboardSubscribe(data: CreateDashboardSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDashboardSubscribeResponse>;
   /** 创建数据加工任务 {@link CreateDataTransformRequest} {@link CreateDataTransformResponse} */
@@ -5743,6 +5787,8 @@ declare interface Cls {
   DeleteConsumerGroup(data: DeleteConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsumerGroupResponse>;
   /** 删除cos导入任务 {@link DeleteCosRechargeRequest} {@link DeleteCosRechargeResponse} */
   DeleteCosRecharge(data: DeleteCosRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCosRechargeResponse>;
+  /** 删除仪表盘 {@link DeleteDashboardRequest} {@link DeleteDashboardResponse} */
+  DeleteDashboard(data: DeleteDashboardRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDashboardResponse>;
   /** 删除仪表盘订阅 {@link DeleteDashboardSubscribeRequest} {@link DeleteDashboardSubscribeResponse} */
   DeleteDashboardSubscribe(data: DeleteDashboardSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDashboardSubscribeResponse>;
   /** 删除数据加工任务 {@link DeleteDataTransformRequest} {@link DeleteDataTransformResponse} */
@@ -5911,6 +5957,8 @@ declare interface Cls {
   ModifyConsumerGroup(data: ModifyConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsumerGroupResponse>;
   /** 修改cos导入任务 {@link ModifyCosRechargeRequest} {@link ModifyCosRechargeResponse} */
   ModifyCosRecharge(data: ModifyCosRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCosRechargeResponse>;
+  /** 修改仪表盘 {@link ModifyDashboardRequest} {@link ModifyDashboardResponse} */
+  ModifyDashboard(data: ModifyDashboardRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDashboardResponse>;
   /** 修改仪表盘订阅 {@link ModifyDashboardSubscribeRequest} {@link ModifyDashboardSubscribeResponse} */
   ModifyDashboardSubscribe(data: ModifyDashboardSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDashboardSubscribeResponse>;
   /** 修改数据加工任务 {@link ModifyDataTransformRequest} {@link ModifyDataTransformResponse} */

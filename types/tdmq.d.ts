@@ -936,6 +936,12 @@ declare interface RabbitMQClusterAccessInfo {
   PublicTlsAccessEndpoint?: string;
   /** 公网IP是否复用 */
   PublicIpReused?: boolean;
+  /** 公网控制台接入点操作的错误信息 */
+  PublicWebConsoleErrorMessage?: string;
+  /** 内网控制台接入点操作的错误信息 */
+  VpcWebConsoleErrorMessage?: string;
+  /** 公网接入点操作的错误信息 */
+  PublicDataStreamErrorMessage?: string;
 }
 
 /** RabbitMQ 集群基本信息 */
@@ -996,6 +1002,14 @@ declare interface RabbitMQClusterInfo {
   Tags?: Tag[];
   /** 是否已开启删除保护 */
   EnableDeletionProtection?: boolean;
+  /** 是否有vhost未开启镜像队列风险 */
+  MirroredQueueRisk?: boolean;
+  /** 是否提示风险 */
+  EnableRiskWarning?: boolean;
+  /** 消费超时时间 */
+  ConsumeTimeout?: number;
+  /** 最大Channel数 */
+  ChannelMax?: number;
 }
 
 /** RabbitMQ集群规格信息 */
@@ -2004,6 +2018,8 @@ declare interface VpcEndpointInfo {
   VpcDataStreamEndpointStatus?: string;
   /** TLS加密的数据流接入点 */
   VpcTlsEndpoint?: string;
+  /** VPC 接入点操作失败的错误信息 */
+  VpcErrorMessage?: string;
 }
 
 /** vpc信息（由UniqVpcId和UniqSubnetId组成） */
@@ -4759,7 +4775,7 @@ declare interface ModifyRabbitMQPermissionResponse {
 declare interface ModifyRabbitMQUserRequest {
   /** 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。 */
   InstanceId: string;
-  /** 用户名，形如 admin。有效的 User 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，点击集群列表中的集群，进入集群详情，并在用户与权限页签中找到用户列表，从而找到用户名称。 */
+  /** 用户名，形如rabbitmq。有效的 User 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，点击集群列表中的集群，进入集群详情，并在用户与权限页签中找到用户列表，从而找到用户名称。当前不支持修改admin的密码。 */
   User: string;
   /** 密码，登录时使用。规范：不能为空，8-64个字符，至少要包含小写字母、大写字母、数字、特殊字符【()`~!@#$%^&*_=|{}[]:;',.?/】中的两项 */
   Password: string;
@@ -4791,6 +4807,8 @@ declare interface ModifyRabbitMQVipInstanceRequest {
   RemoveAllTags?: boolean;
   /** 修改实例的标签信息，全量标签信息，非增量 */
   Tags?: Tag[];
+  /** 是否开启集群风险提示 */
+  EnableRiskWarning?: boolean;
 }
 
 declare interface ModifyRabbitMQVipInstanceResponse {

@@ -38,6 +38,22 @@ declare interface CosFileInfo {
   UserCosUrl?: string;
 }
 
+/** 问答数据 */
+declare interface ExampleQA {
+  /** 示例记录的唯一业务 ID */
+  ExampleId?: string;
+  /** 问题列表 */
+  Questions?: string[];
+  /** 对应的标准答案或回复 */
+  Answer?: string;
+  /** 内容类型，类型包含 'text', 'sql', 'code' */
+  Type?: string;
+  /** 记录的创建时间 */
+  CreateTime?: string;
+  /** 记录的最后更新时间 */
+  UpdateTime?: string;
+}
+
 /** 知识库文件信息 */
 declare interface FileInfo {
   /** 文件名称 */
@@ -158,6 +174,48 @@ declare interface Record {
   Context?: string;
 }
 
+/** 场景 */
+declare interface Scene {
+  /** 场景ID */
+  SceneId?: string;
+  /** 场景名称 */
+  SceneName?: string;
+  /** 技能列表，包含：rag（知识检索）、data_analytics（数据分析）、data_prediction（数据预测） */
+  Skills?: string[];
+  /** 提示词文本 */
+  Prompt?: string;
+  /** 描述 */
+  Description?: string;
+  /** 检索配置 */
+  SearchConfig?: SearchConfig;
+  /** 示例问答列表 */
+  ExampleQAList?: ExampleQA[];
+  /** 记录的创建时间 */
+  CreateTime?: string;
+  /** 记录的最后更新时间 */
+  UpdateTime?: string;
+  /** 创建者Uin */
+  CreatorUin?: string;
+}
+
+/** 检索配置 */
+declare interface SearchConfig {
+  /** 检索类型：0:混合搜索 1：向量搜索 2：全文搜索 */
+  Type?: number;
+  /** 召回数量最大值 */
+  Num?: number;
+  /** 权重配置 */
+  EmbeddingWeight?: number;
+  /** 0:关闭 1:开启，默认1 */
+  Rerank?: number;
+  /** 0:关闭 1:开启，默认0 */
+  AutoRag?: number;
+  /** AutoRag关联的知识库ID列表 */
+  KnowledgeBaseIds?: string[];
+  /** AutoRag搜索状态：0-未完成，1-已完成。仅当AutoRag=1时，该字段有效 */
+  SearchStatus?: number;
+}
+
 /** 步骤扩展结构 */
 declare interface StepExpand {
   /** 标题 */
@@ -246,6 +304,24 @@ declare interface AddChunkResponse {
   RequestId?: string;
 }
 
+declare interface AddSceneRequest {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 场景 */
+  Scene?: Scene;
+  /** 1仅自己使用，2指定用户，0全员 */
+  UseScope?: number;
+  /** 可使用用户列表 */
+  AuthorityUins?: string[];
+}
+
+declare interface AddSceneResponse {
+  /** 场景id */
+  SceneId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ChatAIRequest {
   /** 会话ID */
   SessionId?: string;
@@ -312,6 +388,18 @@ declare interface DeleteDataAgentSessionRequest {
 declare interface DeleteDataAgentSessionResponse {
   /** 删除的会话ID */
   SessionId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSceneRequest {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 场景id */
+  SceneId?: string;
+}
+
+declare interface DeleteSceneResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -437,6 +525,12 @@ declare interface ModifyKnowledgeBaseResponse {
 }
 
 declare interface ModifyUserAuthorityRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 分为知识库knowledge、数据源datasource、自定义场景scene */
+  Module: string;
+  /** 对象id,分为知识库id、数据源id、场景id */
+  ObjectId: string;
   /** 作用范围：1仅自己使用，2指定用户，0全员 */
   UseScope?: number;
   /** 可使用的用户列表，UseScope=0/1,取值为[] */
@@ -466,7 +560,33 @@ declare interface QueryChunkListResponse {
   RequestId?: string;
 }
 
+declare interface QuerySceneListRequest {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 场景id */
+  SceneId?: string;
+  /** 场景名称 */
+  SceneName?: string;
+  /** 页数 */
+  Page?: number;
+  /** 页的大小 */
+  PageSize?: number;
+}
+
+declare interface QuerySceneListResponse {
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface QueryUserAuthorityRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 分为知识库knowledge、数据源datasource、自定义场景scene */
+  Module: string;
+  /** 对象id,分为知识库id、数据源id、场景id */
+  ObjectId: string;
 }
 
 declare interface QueryUserAuthorityResponse {
@@ -486,6 +606,18 @@ declare interface StopChatAIRequest {
 declare interface StopChatAIResponse {
   /** 会话 */
   SessionId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateSceneRequest {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 场景 */
+  Scene?: Scene;
+}
+
+declare interface UpdateSceneResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -511,6 +643,8 @@ declare interface Dataagent {
   (): Versions;
   /** 添加文档切片 {@link AddChunkRequest} {@link AddChunkResponse} */
   AddChunk(data: AddChunkRequest, config?: AxiosRequestConfig): AxiosPromise<AddChunkResponse>;
+  /** 新增场景 {@link AddSceneRequest} {@link AddSceneResponse} */
+  AddScene(data?: AddSceneRequest, config?: AxiosRequestConfig): AxiosPromise<AddSceneResponse>;
   /** DataAgent问答 {@link ChatAIRequest} {@link ChatAIResponse} */
   ChatAI(data?: ChatAIRequest, config?: AxiosRequestConfig): AxiosPromise<ChatAIResponse>;
   /** 生成DataAgent SessionID {@link CreateDataAgentSessionRequest} {@link CreateDataAgentSessionResponse} */
@@ -519,6 +653,8 @@ declare interface Dataagent {
   DeleteChunk(data: DeleteChunkRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteChunkResponse>;
   /** 删除会话 {@link DeleteDataAgentSessionRequest} {@link DeleteDataAgentSessionResponse} */
   DeleteDataAgentSession(data?: DeleteDataAgentSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataAgentSessionResponse>;
+  /** 删除场景 {@link DeleteSceneRequest} {@link DeleteSceneResponse} */
+  DeleteScene(data?: DeleteSceneRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSceneResponse>;
   /** 根据知识库id查询上传job列表 {@link GetJobsByKnowledgeBaseIdRequest} {@link GetJobsByKnowledgeBaseIdResponse} */
   GetJobsByKnowledgeBaseId(data?: GetJobsByKnowledgeBaseIdRequest, config?: AxiosRequestConfig): AxiosPromise<GetJobsByKnowledgeBaseIdResponse>;
   /** 获取知识库文件列表 {@link GetKnowledgeBaseFileListRequest} {@link GetKnowledgeBaseFileListResponse} */
@@ -534,13 +670,17 @@ declare interface Dataagent {
   /** 修改知识库 {@link ModifyKnowledgeBaseRequest} {@link ModifyKnowledgeBaseResponse} */
   ModifyKnowledgeBase(data: ModifyKnowledgeBaseRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyKnowledgeBaseResponse>;
   /** 修改对象的用户权限信息 {@link ModifyUserAuthorityRequest} {@link ModifyUserAuthorityResponse} */
-  ModifyUserAuthority(data?: ModifyUserAuthorityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserAuthorityResponse>;
+  ModifyUserAuthority(data: ModifyUserAuthorityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserAuthorityResponse>;
   /** 文档切片查询 {@link QueryChunkListRequest} {@link QueryChunkListResponse} */
   QueryChunkList(data?: QueryChunkListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChunkListResponse>;
+  /** 查询场景列表 {@link QuerySceneListRequest} {@link QuerySceneListResponse} */
+  QuerySceneList(data?: QuerySceneListRequest, config?: AxiosRequestConfig): AxiosPromise<QuerySceneListResponse>;
   /** 查询对象的用户权限信息 {@link QueryUserAuthorityRequest} {@link QueryUserAuthorityResponse} */
-  QueryUserAuthority(data?: QueryUserAuthorityRequest, config?: AxiosRequestConfig): AxiosPromise<QueryUserAuthorityResponse>;
+  QueryUserAuthority(data: QueryUserAuthorityRequest, config?: AxiosRequestConfig): AxiosPromise<QueryUserAuthorityResponse>;
   /** 终止问答返回流 {@link StopChatAIRequest} {@link StopChatAIResponse} */
   StopChatAI(data?: StopChatAIRequest, config?: AxiosRequestConfig): AxiosPromise<StopChatAIResponse>;
+  /** 更新场景 {@link UpdateSceneRequest} {@link UpdateSceneResponse} */
+  UpdateScene(data?: UpdateSceneRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateSceneResponse>;
   /** cos上传提交文件 {@link UploadAndCommitFileRequest} {@link UploadAndCommitFileResponse} */
   UploadAndCommitFile(data?: UploadAndCommitFileRequest, config?: AxiosRequestConfig): AxiosPromise<UploadAndCommitFileResponse>;
 }

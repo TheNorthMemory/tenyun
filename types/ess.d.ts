@@ -362,6 +362,12 @@ declare interface ComponentLimit {
   ComponentValue?: string[];
 }
 
+/** 合同审查清单个性化参数，用于控制页面的展示内容 */
+declare interface ContractReviewChecklistWebUrlOption {
+  /** 禁用新建清单功能。默认 false，设置为 true 会隐藏界面的新建按钮。 */
+  DisableCreateChecklist?: boolean;
+}
+
 /** 合同审查个性化参数，用于控制页面的展示内容 */
 declare interface ContractReviewWebUrlOption {
   /** 禁用暂存。 默认 false，设置为 true 会隐藏界面上的临时保存按钮 */
@@ -2189,7 +2195,7 @@ declare interface CreateBatchInformationExtractionTaskResponse {
 declare interface CreateBatchInitOrganizationUrlRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
-  /** 初始化操作类型CREATE_SEAL : 创建印章AUTH_JOIN_ORGANIZATION_GROUP : 加入集团企业OPEN_AUTO_SIGN :开通企业自动签署PARTNER_AUTO_SIGN_AUTH :合作方企业授权自动签 */
+  /** 初始化操作类型CREATE_SEAL : 创建印章AUTH_JOIN_ORGANIZATION_GROUP : 加入集团企业OPEN_AUTO_SIGN :开通企业自动签署PARTNER_AUTO_SIGN_AUTH :合作方企业授权自动签CHANGE_SUB_ORGANIZATION_ADMIN_AUTH :变更子企业超管授权(**授权后，主企业可变更子企业超管，此功能需联系客户经理开通白名单使用**) */
   OperateTypes: string[];
   /** 批量操作的企业Id列表，最大支持50个 */
   OrganizationIds: string[];
@@ -2197,6 +2203,8 @@ declare interface CreateBatchInitOrganizationUrlRequest {
   Agent?: Agent;
   /** 被授权的合作方企业在电子签的企业电子签账号，当操作类型包含 PARTNER_AUTO_SIGN_AUTH （合作方企业授权自动签）时必传。企业电子签账号可在[电子签的网页端](https://qian.tencent.com/console/company-settings/company-center) ，于企业设置-企业信息菜单栏下复制获取。![企业电子签账号](https://qcloudimg.tencent-cloud.cn/raw/4e6b30ee92f00671f7f1c5bd127c27db.png) */
   AuthorizedOrganizationId?: string;
+  /** 初始化操作类型里含有CHANGE_SUB_ORGANIZATION_ADMIN_AUTH（变更子企业超管授权）操作类型时，授权协议中主企业的签署方是否使用自动签（需操作人有自动签授权） */
+  ChangeAdminAuthAutoSign?: boolean;
 }
 
 declare interface CreateBatchInitOrganizationUrlResponse {
@@ -2398,6 +2406,18 @@ declare interface CreateContractDiffTaskWebUrlResponse {
   WebUrl?: string;
   /** 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 1024长度。 */
   UserData?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateContractReviewChecklistWebUrlRequest {
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+}
+
+declare interface CreateContractReviewChecklistWebUrlResponse {
+  /** 嵌入式web页面链接。注意：`链接有效期为5分钟，且链接仅能使用一次。` */
+  WebUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4118,6 +4138,48 @@ declare interface DescribeContractDiffTaskWebUrlResponse {
   RequestId?: string;
 }
 
+declare interface DescribeContractReviewChecklistWebUrlRequest {
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 清单 id */
+  Id: string;
+}
+
+declare interface DescribeContractReviewChecklistWebUrlResponse {
+  /** 嵌入式web页面链接。注意：`链接有效期为5分钟，且链接仅能使用一次。` */
+  WebUrl?: string;
+  /** 清单 id */
+  Id?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeContractReviewChecklistsWebUrlRequest {
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 合同审查清单个性化参数 */
+  Option?: ContractReviewChecklistWebUrlOption;
+}
+
+declare interface DescribeContractReviewChecklistsWebUrlResponse {
+  /** 嵌入式web页面链接。注意：`链接有效期为5分钟，且链接仅能使用一次。` */
+  WebUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeContractReviewTaskListWebUrlRequest {
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+}
+
+declare interface DescribeContractReviewTaskListWebUrlResponse {
+  /** 嵌入式web页面链接。注意：`链接有效期为5分钟，且链接仅能使用一次。` */
+  WebUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeContractReviewTaskRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -4760,6 +4822,24 @@ declare interface ExportContractComparisonTaskResponse {
   RequestId?: string;
 }
 
+declare interface ExportContractReviewResultRequest {
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 合同审查任务ID */
+  TaskId: string;
+  /** 导出文件类型。1 = 带风险批注文件; 2 = 审查结果＆摘要（.xIsx） */
+  FileType: number;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+}
+
+declare interface ExportContractReviewResultResponse {
+  /** 文件下载链接 */
+  Url?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetTaskResultApiRequest {
   /** 转换任务Id，通过接口创建文件转换任务接口得到的转换任务id */
   TaskId: string;
@@ -5157,6 +5237,8 @@ declare interface Ess {
   CreateContractComparisonTask(data: CreateContractComparisonTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContractComparisonTaskResponse>;
   /** 创建合同对比web页面 {@link CreateContractDiffTaskWebUrlRequest} {@link CreateContractDiffTaskWebUrlResponse} */
   CreateContractDiffTaskWebUrl(data: CreateContractDiffTaskWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContractDiffTaskWebUrlResponse>;
+  /** 新建审查要点清单web页面 {@link CreateContractReviewChecklistWebUrlRequest} {@link CreateContractReviewChecklistWebUrlResponse} */
+  CreateContractReviewChecklistWebUrl(data: CreateContractReviewChecklistWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContractReviewChecklistWebUrlResponse>;
   /** 创建合同审查web页面 {@link CreateContractReviewWebUrlRequest} {@link CreateContractReviewWebUrlResponse} */
   CreateContractReviewWebUrl(data: CreateContractReviewWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContractReviewWebUrlResponse>;
   /** 创建文件转换任务 {@link CreateConvertTaskApiRequest} {@link CreateConvertTaskApiResponse} */
@@ -5289,8 +5371,14 @@ declare interface Ess {
   DescribeContractComparisonTask(data: DescribeContractComparisonTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractComparisonTaskResponse>;
   /** 获取合同对比结果web页面 {@link DescribeContractDiffTaskWebUrlRequest} {@link DescribeContractDiffTaskWebUrlResponse} */
   DescribeContractDiffTaskWebUrl(data: DescribeContractDiffTaskWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractDiffTaskWebUrlResponse>;
+  /** 查看审查要点清单web页面 {@link DescribeContractReviewChecklistWebUrlRequest} {@link DescribeContractReviewChecklistWebUrlResponse} */
+  DescribeContractReviewChecklistWebUrl(data: DescribeContractReviewChecklistWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractReviewChecklistWebUrlResponse>;
+  /** 获取审查要点清单列表web页面 {@link DescribeContractReviewChecklistsWebUrlRequest} {@link DescribeContractReviewChecklistsWebUrlResponse} */
+  DescribeContractReviewChecklistsWebUrl(data: DescribeContractReviewChecklistsWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractReviewChecklistsWebUrlResponse>;
   /** 获取合同审查任务详情 {@link DescribeContractReviewTaskRequest} {@link DescribeContractReviewTaskResponse} */
   DescribeContractReviewTask(data: DescribeContractReviewTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractReviewTaskResponse>;
+  /** 获取合同审查记录列表web页面 {@link DescribeContractReviewTaskListWebUrlRequest} {@link DescribeContractReviewTaskListWebUrlResponse} */
+  DescribeContractReviewTaskListWebUrl(data: DescribeContractReviewTaskListWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractReviewTaskListWebUrlResponse>;
   /** 获取合同审查结果web页面 {@link DescribeContractReviewWebUrlRequest} {@link DescribeContractReviewWebUrlResponse} */
   DescribeContractReviewWebUrl(data: DescribeContractReviewWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractReviewWebUrlResponse>;
   /** 查询企业扩展服务授权详情 {@link DescribeExtendedServiceAuthDetailRequest} {@link DescribeExtendedServiceAuthDetailResponse} */
@@ -5347,6 +5435,8 @@ declare interface Ess {
   DisableUserAutoSign(data: DisableUserAutoSignRequest, config?: AxiosRequestConfig): AxiosPromise<DisableUserAutoSignResponse>;
   /** 导出合同对比任务详情 {@link ExportContractComparisonTaskRequest} {@link ExportContractComparisonTaskResponse} */
   ExportContractComparisonTask(data: ExportContractComparisonTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ExportContractComparisonTaskResponse>;
+  /** 导出合同审查结果 {@link ExportContractReviewResultRequest} {@link ExportContractReviewResultResponse} */
+  ExportContractReviewResult(data: ExportContractReviewResultRequest, config?: AxiosRequestConfig): AxiosPromise<ExportContractReviewResultResponse>;
   /** 查询转换任务状态 {@link GetTaskResultApiRequest} {@link GetTaskResultApiResponse} */
   GetTaskResultApi(data: GetTaskResultApiRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskResultApiResponse>;
   /** 修改企业回调配置 {@link ModifyApplicationCallbackInfoRequest} {@link ModifyApplicationCallbackInfoResponse} */

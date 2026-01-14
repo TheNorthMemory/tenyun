@@ -1982,6 +1982,14 @@ declare interface CopyCasterResponse {
   RequestId?: string;
 }
 
+declare interface CreateAuditKeywordLibRequest {
+}
+
+declare interface CreateAuditKeywordLibResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAuditKeywordsRequest {
   /** 关键词列表。 */
   Keywords: AuditKeyword[];
@@ -5581,6 +5589,8 @@ declare interface Live {
   CancelCommonMixStream(data: CancelCommonMixStreamRequest, config?: AxiosRequestConfig): AxiosPromise<CancelCommonMixStreamResponse>;
   /** 复制导播台 {@link CopyCasterRequest} {@link CopyCasterResponse} */
   CopyCaster(data: CopyCasterRequest, config?: AxiosRequestConfig): AxiosPromise<CopyCasterResponse>;
+  /** 直播审核创建词库 {@link CreateAuditKeywordLibRequest} {@link CreateAuditKeywordLibResponse} */
+  CreateAuditKeywordLib(data?: CreateAuditKeywordLibRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditKeywordLibResponse>;
   /** 直播审核创建关键词 {@link CreateAuditKeywordsRequest} {@link CreateAuditKeywordsResponse} */
   CreateAuditKeywords(data: CreateAuditKeywordsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditKeywordsResponse>;
   /** 创建导播台 {@link CreateCasterRequest} {@link CreateCasterResponse} */

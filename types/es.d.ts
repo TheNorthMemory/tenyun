@@ -1525,7 +1525,7 @@ declare namespace V20180416 {
     CpuNum?: number | null;
     /** 内存大小，单位GB */
     MemSize?: number | null;
-    /** / */
+    /** 硬盘额外性能 */
     DiskEnhance?: number | null;
     /** 节点Gpu信息 */
     GpuInfo?: GpuInfo | null;
@@ -2007,6 +2007,20 @@ declare namespace V20180416 {
     RequestId?: string;
   }
 
+  interface CreateAutoBackUpStrategyRequest {
+    /** 实例名称 */
+    InstanceId: string;
+    /** 策略信息 */
+    CosBackup: CosBackup;
+  }
+
+  interface CreateAutoBackUpStrategyResponse {
+    /** true 成功; false 失败 */
+    Status?: boolean;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface CreateClusterSnapshotRequest {
     /** 实例名称 */
     InstanceId: string;
@@ -2148,7 +2162,7 @@ declare namespace V20180416 {
     OperationDuration?: OperationDuration;
     /** 是否开启存算分离 */
     EnableHybridStorage?: boolean;
-    /** 是否开启essd 增强型云盘 */
+    /** 硬盘额外性能 */
     DiskEnhance?: number;
     /** 是否开启智能巡检 */
     EnableDiagnose?: boolean;
@@ -2287,6 +2301,20 @@ declare namespace V20180416 {
     RequestId?: string;
   }
 
+  interface DeleteAutoBackUpStrategyRequest {
+    /** 实例名称 */
+    InstanceId: string;
+    /** 策略名称 */
+    StrategyName: string[];
+  }
+
+  interface DeleteAutoBackUpStrategyResponse {
+    /** true 成功; false 失败 */
+    Status?: boolean;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DeleteClusterSnapshotRequest {
     /** 集群实例Id，格式：es-xxxx */
     InstanceId: string;
@@ -2373,6 +2401,18 @@ declare namespace V20180416 {
   }
 
   interface DeleteServerlessSpaceUserResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeAutoBackUpStrategyRequest {
+    /** 实例名称 */
+    InstanceId: string;
+  }
+
+  interface DescribeAutoBackUpStrategyResponse {
+    /** 策略信息 */
+    CosBackupList?: CosBackup[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -2993,6 +3033,30 @@ declare namespace V20180416 {
     RequestId?: string;
   }
 
+  interface ModifyAutoBackUpCommonInfoRequest {
+  }
+
+  interface ModifyAutoBackUpCommonInfoResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface ModifyAutoBackUpStrategyRequest {
+    /** 实例名称 */
+    InstanceId: string;
+    /** 当前策略名称 */
+    StrategyName: string;
+    /** 策略信息 */
+    CosBackup: CosBackup;
+  }
+
+  interface ModifyAutoBackUpStrategyResponse {
+    /** true 成功; false 失败 */
+    Status?: boolean;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface ModifyEsVipSecurityGroupRequest {
     /** es集群的实例id */
     InstanceId: string;
@@ -3563,6 +3627,8 @@ declare interface Es {
   RunRerank(data: RunRerankRequest, config?: AxiosRequestConfig): AxiosPromise<RunRerankResponse>;
   /** 检查cos迁移索引元数据 {@link V20180416.CheckMigrateIndexMetaDataRequest} {@link V20180416.CheckMigrateIndexMetaDataResponse} */
   CheckMigrateIndexMetaData(data: V20180416.CheckMigrateIndexMetaDataRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.CheckMigrateIndexMetaDataResponse>;
+  /** 新建自动备份快照策略 {@link V20180416.CreateAutoBackUpStrategyRequest} {@link V20180416.CreateAutoBackUpStrategyResponse} */
+  CreateAutoBackUpStrategy(data: V20180416.CreateAutoBackUpStrategyRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.CreateAutoBackUpStrategyResponse>;
   /** 创建集群快照 {@link V20180416.CreateClusterSnapshotRequest} {@link V20180416.CreateClusterSnapshotResponse} */
   CreateClusterSnapshot(data: V20180416.CreateClusterSnapshotRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.CreateClusterSnapshotResponse>;
   /** cos迁移流程 {@link V20180416.CreateCosMigrateToServerlessInstanceRequest} {@link V20180416.CreateCosMigrateToServerlessInstanceResponse} */
@@ -3577,6 +3643,8 @@ declare interface Es {
   CreateServerlessInstance(data: V20180416.CreateServerlessInstanceRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.CreateServerlessInstanceResponse>;
   /** 创建Serverless索引项目空间(new) {@link V20180416.CreateServerlessSpaceV2Request} {@link V20180416.CreateServerlessSpaceV2Response} */
   CreateServerlessSpaceV2(data: V20180416.CreateServerlessSpaceV2Request, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.CreateServerlessSpaceV2Response>;
+  /** 删除自动备份快照策略 {@link V20180416.DeleteAutoBackUpStrategyRequest} {@link V20180416.DeleteAutoBackUpStrategyResponse} */
+  DeleteAutoBackUpStrategy(data: V20180416.DeleteAutoBackUpStrategyRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DeleteAutoBackUpStrategyResponse>;
   /** 删除快照仓库里备份的快照 {@link V20180416.DeleteClusterSnapshotRequest} {@link V20180416.DeleteClusterSnapshotResponse} */
   DeleteClusterSnapshot(data: V20180416.DeleteClusterSnapshotRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DeleteClusterSnapshotResponse>;
   /** 删除索引 {@link V20180416.DeleteIndexRequest} {@link V20180416.DeleteIndexResponse} */
@@ -3591,6 +3659,8 @@ declare interface Es {
   DeleteServerlessInstance(data: V20180416.DeleteServerlessInstanceRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DeleteServerlessInstanceResponse>;
   /** 删除Serverless空间子用户 {@link V20180416.DeleteServerlessSpaceUserRequest} {@link V20180416.DeleteServerlessSpaceUserResponse} */
   DeleteServerlessSpaceUser(data: V20180416.DeleteServerlessSpaceUserRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DeleteServerlessSpaceUserResponse>;
+  /** 获取快照自动备份策略 {@link V20180416.DescribeAutoBackUpStrategyRequest} {@link V20180416.DescribeAutoBackUpStrategyResponse} */
+  DescribeAutoBackUpStrategy(data: V20180416.DescribeAutoBackUpStrategyRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeAutoBackUpStrategyResponse>;
   /** 获取快照备份列表 {@link V20180416.DescribeClusterSnapshotRequest} {@link V20180416.DescribeClusterSnapshotResponse} */
   DescribeClusterSnapshot(data: V20180416.DescribeClusterSnapshotRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeClusterSnapshotResponse>;
   /** 查询智能运维诊断结果报告 {@link V20180416.DescribeDiagnoseRequest} {@link V20180416.DescribeDiagnoseResponse} */
@@ -3643,6 +3713,10 @@ declare interface Es {
   InquirePriceRenewInstance(data: V20180416.InquirePriceRenewInstanceRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.InquirePriceRenewInstanceResponse>;
   /** 安装ES集群模型 {@link V20180416.InstallInstanceModelRequest} {@link V20180416.InstallInstanceModelResponse} */
   InstallInstanceModel(data: V20180416.InstallInstanceModelRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.InstallInstanceModelResponse>;
+  /** 修改自动备份快照策略公共信息 {@link V20180416.ModifyAutoBackUpCommonInfoRequest} {@link V20180416.ModifyAutoBackUpCommonInfoResponse} */
+  ModifyAutoBackUpCommonInfo(data: V20180416.ModifyAutoBackUpCommonInfoRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.ModifyAutoBackUpCommonInfoResponse>;
+  /** 修改自动备份快照策略 {@link V20180416.ModifyAutoBackUpStrategyRequest} {@link V20180416.ModifyAutoBackUpStrategyResponse} */
+  ModifyAutoBackUpStrategy(data: V20180416.ModifyAutoBackUpStrategyRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.ModifyAutoBackUpStrategyResponse>;
   /** 修改集群VIP绑定的安全组 {@link V20180416.ModifyEsVipSecurityGroupRequest} {@link V20180416.ModifyEsVipSecurityGroupResponse} */
   ModifyEsVipSecurityGroup(data: V20180416.ModifyEsVipSecurityGroupRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.ModifyEsVipSecurityGroupResponse>;
   /** 查询IP溯源日志 {@link V20180416.QueryIpTraceLogRequest} {@link V20180416.QueryIpTraceLogResponse} */

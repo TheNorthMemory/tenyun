@@ -170,6 +170,8 @@ declare interface AutoCalloutTaskInfo {
   State?: number;
   /** 任务Id */
   TaskId?: number;
+  /** 最大振铃时长，达到时长阈值自动挂断。 仅自携号码支持当前参数 */
+  MaxRingTimeoutSecond?: number;
 }
 
 /** 呼入实时指标 */
@@ -698,7 +700,7 @@ declare interface ServeParticipant {
   TransferToType?: string;
   /** 技能组 ID */
   SkillGroupId?: number;
-  /** 结束状态 */
+  /** 结束状态中文详情[参考](https://www.tencentcloud.com/zh/document/product/1229/71847)英文详情[参考](https://www.tencentcloud.com/document/product/1229/71847?lang=en) */
   EndStatusString?: string;
   /** 录音 URL */
   RecordURL?: string;
@@ -1151,6 +1153,8 @@ declare interface CreateAIAgentCallRequest {
   PromptVariables?: Variable[];
   /** 通用变量： 提示词变量 欢迎语变量 欢迎语延迟播放(秒级)：welcome-message-delay dify变量 1. dify-inputs-xxx 为dify的inputs变量2. dify-inputs-user 为dify的user值3. dify-inputs-conversation_id 为dify的conversation_id值 */
   Variables?: Variable[];
+  /** 最大振铃时长，达到时长阈值自动挂断。 仅自携号码支持当前参数 */
+  MaxRingTimeoutSecond?: number;
 }
 
 declare interface CreateAIAgentCallResponse {
@@ -1233,6 +1237,8 @@ declare interface CreateAICallRequest {
   VoicemailAction?: number;
   /** 大模型拓展参数， 格式为json字符串 */
   LLMExtraBody?: string;
+  /** 最大通话时长， 默认不限制。单位毫秒(ms) */
+  MaxCallDurationMs?: number;
 }
 
 declare interface CreateAICallResponse {
@@ -1319,6 +1325,8 @@ declare interface CreateAutoCalloutTaskRequest {
   AIAgentId?: number;
   /** 任务失败重试时间间隔，重试间隔 600秒～86400 秒 */
   RetryInterval?: number;
+  /** 最大振铃时长，达到时长阈值自动挂断。 仅自携号码支持当前参数 */
+  MaxRingTimeoutSecond?: number;
 }
 
 declare interface CreateAutoCalloutTaskResponse {
@@ -1349,7 +1357,7 @@ declare interface CreateCCCSkillGroupResponse {
 declare interface CreateCallOutSessionRequest {
   /** 应用 ID */
   SdkAppId: number;
-  /** 客服用户 ID，一般为客服邮箱，确保已经绑定了手机号 https://cloud.tencent.com/document/product/679/76067 */
+  /** 座席邮箱，确保已经绑定了手机号 https://cloud.tencent.com/document/product/679/76067 */
   UserId: string;
   /** 被叫号码，须带 0086 前缀 */
   Callee: string;
@@ -1433,6 +1441,8 @@ declare interface CreateIVRSessionRequest {
   Variables?: Variable[];
   /** 用户数据 */
   UUI?: string;
+  /** 最大振铃时长，达到时长阈值自动挂断。 仅自携号码支持当前参数 */
+  MaxRingTimeoutSecond?: number;
 }
 
 declare interface CreateIVRSessionResponse {
@@ -1766,6 +1776,8 @@ declare interface DescribeAutoCalloutTaskResponse {
   IvrId?: number;
   /** 任务状态 0初始 1运行中 2已完成 3结束中 4已终止 */
   State?: number;
+  /** 最大振铃时长，达到时长阈值自动挂断。 仅自携号码支持当前参数 */
+  MaxRingTimeoutSecond?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2777,7 +2789,7 @@ declare interface Ccc {
   ControlAIConversation(data: ControlAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<ControlAIConversationResponse>;
   /** 创建单次智能体通话 {@link CreateAIAgentCallRequest} {@link CreateAIAgentCallResponse} */
   CreateAIAgentCall(data: CreateAIAgentCallRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIAgentCallResponse>;
-  /** 创建AI通话 {@link CreateAICallRequest} {@link CreateAICallResponse} */
+  /** 创建单次智能体通话 - 自携模型 {@link CreateAICallRequest} {@link CreateAICallResponse} */
   CreateAICall(data: CreateAICallRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAICallResponse>;
   /** 创建管理端访问链接 {@link CreateAdminURLRequest} {@link CreateAdminURLResponse} */
   CreateAdminURL(data: CreateAdminURLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAdminURLResponse>;

@@ -4663,7 +4663,7 @@ declare interface CreateDataSourceRequest {
   Name: string;
   /** 数据源类型:枚举值- MYSQL- TENCENT_MYSQL- POSTGRE- ORACLE- SQLSERVER- FTP- HIVE- HUDI- HDFS- ICEBERG- KAFKA- DTS_KAFKA- HBASE- SPARK- TBASE- DB2- DM- GAUSSDB- GBASE- IMPALA- ES- TENCENT_ES- GREENPLUM- SAP_HANA- SFTP- OCEANBASE- CLICKHOUSE- KUDU- VERTICA- REDIS- COS- DLC- DORIS- CKAFKA- S3_DATAINSIGHT- TDSQL- TDSQL_MYSQL- MONGODB- TENCENT_MONGODB- REST_API- TiDB- StarRocks- Trino- Kyuubi- TCHOUSE_X- TCHOUSE_P- TCHOUSE_C- TCHOUSE_D- INFLUXDB- BIG_QUERY- SSH- BLOB- TDSQL_POSTGRE- GDB- TDENGINE- TDSQLC- FileSystem */
   Type: string;
-  /** 数据源的配置信息，以JSON KV存储，根据每个数据源类型不同，而KV存储信息不同> deployType: CONNSTR_PUBLICDB(公网实例) CONNSTR_CVMDB(自建实例)INSTANCE(云实例)```mysql: 自建实例{ "deployType": "CONNSTR_CVMDB", "url": "jdbc:mysql://1.1.1.1:1111/database", "username": "root", "password": "root", "region": "ap-shanghai", "vpcId": "vpc-kprq42yo", "type": "MYSQL"}mysql: 云实例{ "instanceid": "cdb-12uxdo5e", "db": "db", "region": "ap-shanghai", "username": "msyql", "password": "mysql", "deployType": "INSTANCE", "type": "TENCENT_MYSQL"}sql_server: { "deployType": "CONNSTR_PUBLICDB", "url": "jdbc:sqlserver://1.1.1.1:223;DatabaseName=database", "username": "user_1", "password": "pass_2", "type": "SQLSERVER"}redis: redisType: -NO_ACCOUT(免账号) -SELF_ACCOUNT(自定义账号){ "deployType": "CONNSTR_PUBLICDB", "username":"" "password": "pass", "ip": "1.1.1.1", "port": "6379", "redisType": "NO_ACCOUT", "type": "REDIS"}oracle: { "deployType": "CONNSTR_CVMDB", "url": "jdbc:oracle:thin:@1.1.1.1:1521:prod", "username": "oracle", "password": "pass", "region": "ap-shanghai", "vpcId": "vpc-kprq42yo", "type": "ORACLE"}mongodb: advanceParams(自定义参数，会拼接至url后){ "advanceParams": [ { "key": "authSource", "value": "auth" } ], "db": "admin", "deployType": "CONNSTR_PUBLICDB", "username": "user", "password": "pass", "type": "MONGODB", "host": "1.1.1.1:9200"}postgresql:{ "deployType": "CONNSTR_PUBLICDB", "url": "jdbc:postgresql://1.1.1.1:1921/database", "username": "user", "password": "pass", "type": "POSTGRE"}kafka: authType: - sasl - jaas - sasl_plaintext - sasl_ssl - GSSAPI ssl: -PLAIN -GSSAPI{ "deployType": "CONNSTR_PUBLICDB", "host": "1.1.1.1:9092", "ssl": "GSSAPI", "authType": "sasl", "type": "KAFKA", "principal": "aaaa", "serviceName": "kafka"}cos:{ "region": "ap-shanghai", "deployType": "INSTANCE", "secretId": "aaaaa", "secretKey": "sssssss", "bucket": "aaa", "type": "COS"}``` */
+  /** 数据源的配置信息，以JSON KV存储，根据每个数据源类型不同，而KV存储信息不同> deployType: CONNSTR_PUBLICDB(公网实例) CONNSTR_CVMDB(自建实例)INSTANCE(云实例)```mysql: 自建实例{ "deployType": "CONNSTR_CVMDB", "url": "jdbc:mysql://1.1.1.1:1111/example#test#123456", "username": "root", "password": "example#test#123456", "region": "ap-shanghai", "vpcId": "vpc-kprq42yo", "type": "MYSQL"}mysql: 云实例{ "instanceid": "cdb-12uxdo5e", "db": "db", "region": "ap-shanghai", "username": "msyql", "password": "example#test#123456", "deployType": "INSTANCE", "type": "TENCENT_MYSQL"}sql_server: { "deployType": "CONNSTR_PUBLICDB", "url": "jdbc:sqlserver://1.1.1.1:223;example#test#123456", "username": "user_1", "password": "example#test#123456", "type": "SQLSERVER"}redis: redisType: -NO_ACCOUT(免账号) -SELF_ACCOUNT(自定义账号){ "deployType": "CONNSTR_PUBLICDB", "username":"" "password": "example#test#123456", "ip": "1.1.1.1", "port": "6379", "redisType": "NO_ACCOUT", "type": "REDIS"}oracle: { "deployType": "CONNSTR_CVMDB", "url": "jdbc:oracle:thin:@1.1.1.1:1521:example#test#123456", "username": "oracle", "password": "example#test#123456", "region": "ap-shanghai", "vpcId": "vpc-kprq42yo", "type": "ORACLE"}mongodb: advanceParams(自定义参数，会拼接至url后){ "advanceParams": [ { "key": "authSource", "value": "auth" } ], "db": "admin", "deployType": "CONNSTR_PUBLICDB", "username": "user", "password": "example#test#123456", "type": "MONGODB", "host": "1.1.1.1:9200"}postgresql:{ "deployType": "CONNSTR_PUBLICDB", "url": "jdbc:postgresql://1.1.1.1:1921/example#test#123456", "username": "user", "password": "example#test#123456", "type": "POSTGRE"}kafka: authType: - sasl - jaas - sasl_plaintext - sasl_ssl - GSSAPI ssl: -PLAIN -GSSAPI{ "deployType": "CONNSTR_PUBLICDB", "host": "1.1.1.1:9092", "ssl": "GSSAPI", "authType": "sasl", "type": "KAFKA", "principal": "aaaa", "serviceName": "kafka"}cos:{ "region": "ap-shanghai", "deployType": "INSTANCE", "secretId": "aaaaa", "secretKey": "example#test#123456", "bucket": "aaa", "type": "COS"}``` */
   ProdConProperties: string;
   /** 开发环境数据源配置信息，若项目为标准模式，则此字段必填 */
   DevConProperties?: string;
@@ -5291,7 +5291,7 @@ declare interface DeleteTriggerTaskRequest {
   TaskId: string;
   /** 任务操作是否消息通知下游任务责任人true：通知false：不通知不传默认false */
   OperateInform?: boolean;
-  /** 任务删除方式true：不针对下游任务实例进行强制失败false：针对下游任务实例进行强制失败不传默认false */
+  /** (本参数暂不生效)当前删除上游任务时，不会针对下游任务实例进行强制失败 */
   DeleteMode?: boolean;
 }
 
@@ -7495,7 +7495,7 @@ declare interface UpdateDataSourceRequest {
   Id: number;
   /** 项目id */
   ProjectId: string;
-  /** 数据源的配置信息，以JSON KV存储，根据每个数据源类型不同，而KV存储信息不同> deployType: CONNSTR_PUBLICDB(公网实例) CONNSTR_CVMDB(自建实例)INSTANCE(云实例)```mysql: 自建实例{ "deployType": "CONNSTR_CVMDB", "url": "jdbc:mysql://1.1.1.1:1111/database", "username": "root", "password": "root", "region": "ap-shanghai", "vpcId": "vpc-kprq42yo", "type": "MYSQL"}mysql: 云实例{ "instanceid": "cdb-12uxdo5e", "db": "db", "region": "ap-shanghai", "username": "msyql", "password": "mysql", "deployType": "INSTANCE", "type": "TENCENT_MYSQL"}sql_server: { "deployType": "CONNSTR_PUBLICDB", "url": "jdbc:sqlserver://1.1.1.1:223;DatabaseName=database", "username": "user_1", "password": "pass_2", "type": "SQLSERVER"}redis: redisType: -NO_ACCOUT(免账号) -SELF_ACCOUNT(自定义账号){ "deployType": "CONNSTR_PUBLICDB", "username":"" "password": "pass", "ip": "1.1.1.1", "port": "6379", "redisType": "NO_ACCOUT", "type": "REDIS"}oracle: { "deployType": "CONNSTR_CVMDB", "url": "jdbc:oracle:thin:@1.1.1.1:1521:prod", "username": "oracle", "password": "pass", "region": "ap-shanghai", "vpcId": "vpc-kprq42yo", "type": "ORACLE"}mongodb: advanceParams(自定义参数，会拼接至url后){ "advanceParams": [ { "key": "authSource", "value": "auth" } ], "db": "admin", "deployType": "CONNSTR_PUBLICDB", "username": "user", "password": "pass", "type": "MONGODB", "host": "1.1.1.1:9200"}postgresql:{ "deployType": "CONNSTR_PUBLICDB", "url": "jdbc:postgresql://1.1.1.1:1921/database", "username": "user", "password": "pass", "type": "POSTGRE"}kafka: authType: - sasl - jaas - sasl_plaintext - sasl_ssl - GSSAPI ssl: -PLAIN -GSSAPI{ "deployType": "CONNSTR_PUBLICDB", "host": "1.1.1.1:9092", "ssl": "GSSAPI", "authType": "sasl", "type": "KAFKA", "principal": "aaaa", "serviceName": "kafka"}cos:{ "region": "ap-shanghai", "deployType": "INSTANCE", "secretId": "aaaaa", "secretKey": "sssssss", "bucket": "aaa", "type": "COS"}``` */
+  /** 数据源的配置信息，以JSON KV存储，根据每个数据源类型不同，而KV存储信息不同> deployType: CONNSTR_PUBLICDB(公网实例) CONNSTR_CVMDB(自建实例)INSTANCE(云实例)```mysql: 自建实例{ "deployType": "CONNSTR_CVMDB", "url": "jdbc:mysql://1.1.1.1:1111/example#test#123456", "username": "root", "password": "example#test#123456", "region": "ap-shanghai", "vpcId": "vpc-kprq42yo", "type": "MYSQL"}mysql: 云实例{ "instanceid": "cdb-12uxdo5e", "db": "db", "region": "ap-shanghai", "username": "msyql", "password": "example#test#123456", "deployType": "INSTANCE", "type": "TENCENT_MYSQL"}sql_server: { "deployType": "CONNSTR_PUBLICDB", "url": "jdbc:sqlserver://1.1.1.1:223;example#test#123456", "username": "user_1", "password": "example#test#123456", "type": "SQLSERVER"}redis: redisType: -NO_ACCOUT(免账号) -SELF_ACCOUNT(自定义账号){ "deployType": "CONNSTR_PUBLICDB", "username":"" "password": "example#test#123456", "ip": "1.1.1.1", "port": "6379", "redisType": "NO_ACCOUT", "type": "REDIS"}oracle: { "deployType": "CONNSTR_CVMDB", "url": "jdbc:oracle:thin:@1.1.1.1:1521:example#test#123456", "username": "oracle", "password": "example#test#123456", "region": "ap-shanghai", "vpcId": "vpc-kprq42yo", "type": "ORACLE"}mongodb: advanceParams(自定义参数，会拼接至url后){ "advanceParams": [ { "key": "authSource", "value": "auth" } ], "db": "admin", "deployType": "CONNSTR_PUBLICDB", "username": "user", "password": "example#test#123456", "type": "MONGODB", "host": "1.1.1.1:9200"}postgresql:{ "deployType": "CONNSTR_PUBLICDB", "url": "jdbc:postgresql://1.1.1.1:1921/example#test#123456", "username": "user", "password": "example#test#123456", "type": "POSTGRE"}kafka: authType: - sasl - jaas - sasl_plaintext - sasl_ssl - GSSAPI ssl: -PLAIN -GSSAPI{ "deployType": "CONNSTR_PUBLICDB", "host": "1.1.1.1:9092", "ssl": "GSSAPI", "authType": "sasl", "type": "KAFKA", "principal": "aaaa", "serviceName": "kafka"}cos:{ "region": "ap-shanghai", "deployType": "INSTANCE", "secretId": "aaaaa", "secretKey": "example#test#123456", "bucket": "aaa", "type": "COS"}``` */
   ProdConProperties?: string;
   /** 若项目为标准模式，则此字段必填 */
   DevConProperties?: string;
@@ -11439,7 +11439,7 @@ declare namespace V20210820 {
 
   /** 表生命周期相关信息 */
   interface LifecycleInfo {
-    /** 生命周期值 */
+    /** 生命周期值，如果PartitionLifeCycle=custom时，表示自定义生命周期 */
     Lifecycle?: number | null;
     /** 列名 */
     Columns?: string[] | null;
@@ -14123,8 +14123,6 @@ declare namespace V20210820 {
     BizCatalogNames?: string[] | null;
     /** true已收藏/false表示未收藏状态 */
     HasFavorite?: boolean | null;
-    /** 生命周期 */
-    LifeCycleTime?: number | null;
     /** 存储量，已转为适合的单位展示 */
     StorageSizeWithUnit?: string | null;
     /** 数据源引擎的实例ID：如EMR集群实例ID/数据源实例ID */
@@ -14175,10 +14173,14 @@ declare namespace V20210820 {
     IsView?: boolean | null;
     /** 存储位置 */
     Location?: string | null;
+    /** 生命周期 */
+    LifeCycleTime?: number | null;
     /** 判断是否是分区表1 是 0否 */
     IsPartitionTable?: number | null;
     /** 分区字段 key */
     PartitionColumns?: string[] | null;
+    /** 分区时间格式：yyyy-MM-dd */
+    DateFormat?: string | null;
     /** 生命周期-分区保留天数【分区保留策略时有效】 */
     PartitionExpireDays?: number | null;
     /** 表附属信息 */
@@ -20311,9 +20313,9 @@ declare namespace V20210820 {
   }
 
   interface DescribeTaskDetailDsRequest {
-    /** 任务Id */
+    /** 任务ID */
     TaskId: string;
-    /** 项目Id */
+    /** 项目ID （必填属性） */
     ProjectId?: string;
     /** 已废弃，无需填写 */
     TaskAlarmStatus?: number;

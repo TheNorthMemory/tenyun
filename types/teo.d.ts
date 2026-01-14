@@ -6533,18 +6533,20 @@ declare interface DescribeTimingL7CacheDataResponse {
 }
 
 declare interface DescribeTimingL7OriginPullDataRequest {
+  /** 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
+  ZoneIds: string[];
+  /** 指标列表，取值有:l7Flow_outFlux_hy: EdgeOne 节点至源站方向的请求流量，单位：Byte；l7Flow_outBandwidth_hy: EdgeOne 节点至源站方向的请求带宽，单位：bps；l7Flow_request_hy: EdgeOne 节点至源站方向的请求数，单位：次。l7Flow_inFlux_hy: 源站至 EdgeOne 节点方向的响应流量，单位：Byte；l7Flow_inBandwidth_hy: 源站至 EdgeOne 节点方向的响应带宽，单位：bps。 */
+  MetricNames: string[];
   /** 开始时间。 */
   StartTime: string;
   /** 结束时间。查询时间范围（`EndTime` - `StartTime`）需小于等于 31 天。 */
   EndTime: string;
-  /** 指标列表，取值有:l7Flow_outFlux_hy: EdgeOne 节点至源站方向的请求流量，单位：Byte；l7Flow_outBandwidth_hy: EdgeOne 节点至源站方向的请求带宽，单位：bps；l7Flow_request_hy: EdgeOne 节点至源站方向的请求数，单位：次。l7Flow_inFlux_hy: 源站至 EdgeOne 节点方向的响应流量，单位：Byte；l7Flow_inBandwidth_hy: 源站至 EdgeOne 节点方向的响应带宽，单位：bps； */
-  MetricNames: string[];
-  /** 站点 ID 集合，此参数必填。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
-  ZoneIds: string[];
   /** 查询时间粒度，取值有：min: 1分钟；5min: 5分钟；hour: 1小时；day: 1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：2 小时范围内以 min 粒度查询，2 天范围内以 5min 粒度查询，7 天范围内以 hour 粒度查询，超过 7 天以 day 粒度查询。 */
   Interval?: string;
-  /** 过滤条件，详细的过滤条件如下：domain：客户端请求的域名。若按泛域名接入 EdgeOne，则数据中记录为泛域名，而不是具体域名。 */
+  /** 过滤条件，详细的过滤条件如下：domain：客户端请求的域名。若按泛域名接入 EdgeOne，则数据中记录为泛域名，而不是具体域名。originStatusCode：回源状态码，仅当 MetricNames = ["l7Flow_request_hy"] 时支持本过滤项。对应的 Value 可选项如下：1xx：1xx 类型的状态码；2xx：2xx 类型的状态码；3xx：3xx 类型的状态码；4xx：4xx 类型的状态码；5xx：5xx 类型的状态码；在 [0, 600) 范围内的整数（不包括 600）。**注意**：当 DimensionName 不为空时，仅支持 equals 运算符。 */
   Filters?: QueryCondition[];
+  /** 查询维度名称，取值有：domain：客户端请求的域名。若按泛域名接入 EdgeOne，则数据中记录为泛域名。使用 domain 维度时必须在 Filters 中包含 domain 过滤项，指定总数不超过 100 个需要查询的域名列表；origin-status-code：回源状态码，如 200、404，仅当 MetricNames = ["l7Flow_request_hy"] 时支持本维度；origin-status-code-category：回源状态码类别，如 2xx、4xx，仅当 MetricNames =["l7Flow_request_hy"] 时支持本维度。若 DimensionName 入参为空，默认按 AppId 维度汇总，只返回一组数据。若 DimensionName 入参不为空，则按照传入的查询维度分组返回对应的时序数据。例如：当 DimensionName = origin-status-code 时：返回数据中 TimingDataRecords.TypeKey 为具体回源状态码，例如 200。返回数据中 TimingDataRecords.TypeValue 是该状态码对应的时序数据。注意：当指定 DimensionName 查询时，禁止并发调用。若超出查询频率限制，会返回错误 InvalidParameter.ActionInProgress 。 */
+  DimensionName?: string;
 }
 
 declare interface DescribeTimingL7OriginPullDataResponse {
