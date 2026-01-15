@@ -950,6 +950,14 @@ declare interface SessionResult {
   Workload?: string;
   /** K8S集群容器名称 */
   PodName?: string;
+  /** 访问方式 1-直链 2-客户端 3-web 大部分情况下是2 */
+  Mode?: number;
+  /** 是否禁用会话监控。0-不禁用；1-禁用会话，仅展示中断；2-禁用会话，不展示中断 */
+  DisableMonitor?: number;
+  /** 实时入带宽，单位Mbps */
+  RealTimeBandwidthIn?: number;
+  /** 实时出带宽，单位Mbps */
+  RealTimeBandwidthOut?: number;
 }
 
 /** ioa用户源信息 */
@@ -2855,6 +2863,10 @@ declare interface SearchAuditLogRequest {
   StartTime: string;
   /** 结束时间 */
   EndTime?: string;
+  /** 操作类型 */
+  OperationSet?: number[];
+  /** 会话类型 */
+  ProtocolSet?: string[];
   /** 偏移量 */
   Offset?: number;
   /** 每页容量，默认为20，最大200 */
@@ -3043,7 +3055,7 @@ declare interface SearchSessionRequest {
   RealName?: string;
   /** 主机名，长度不超过64 */
   DeviceName?: string;
-  /** 状态，1为活跃，2为结束，3为强制离线，4为其他错误 */
+  /** 状态，1为活跃，2为结束，3为强制离线，4为其他错误，5暂停会话 */
   Status?: number;
   /** 状态，1为活跃，2为结束，3为强制离线 */
   StatusSet?: number[];

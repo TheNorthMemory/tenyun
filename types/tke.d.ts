@@ -2769,6 +2769,20 @@ declare namespace V20180525 {
     UpdatedTime?: string;
   }
 
+  /** 用户权限项，定义用户在集群中的 RBAC 权限绑定 */
+  interface PermissionItem {
+    /** 集群 ID */
+    ClusterId: string;
+    /** 角色名称。预置角色包括：tke:admin（集群管理员）、tke:ops（运维人员）、tke:dev（开发人员）、tke:ro（只读用户）、tke:ns:dev（命名空间开发人员）、tke:ns:ro（命名空间只读用户），其余为用户自定义角色 */
+    RoleName: string;
+    /** 授权类型。枚举值：cluster（集群级别权限，对应 ClusterRoleBinding）、namespace（命名空间级别权限，对应 RoleBinding） */
+    RoleType: string;
+    /** 是否为自定义角色，默认 false */
+    IsCustom?: boolean;
+    /** 命名空间。当 RoleType 为 namespace 时必填 */
+    Namespace?: string | null;
+  }
+
   /** Pod计费信息 */
   interface PodChargeInfo {
     /** Pod计费开始时间 */
@@ -5279,6 +5293,18 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface DeleteUserPermissionsRequest {
+    /** 要授权的用户的唯一标识符（支持子账号 UIN和角色UIN） */
+    TargetUin: string;
+    /** 用户最终应拥有的完整权限列表。采用声明式语义，传入的列表代表用户最终应该拥有的全部权限，系统会自动计算差异并执行必要的创建/删除操作。为空或不提供时将清除该用户的所有权限。最大支持 100 个权限项。 */
+    Permissions?: PermissionItem[];
+  }
+
+  interface DeleteUserPermissionsResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeAddonRequest {
     /** 集群ID，请从容器服务控制台集群列表中获取（https://console.cloud.tencent.com/tke2/cluster）。 */
     ClusterId: string;
@@ -7115,6 +7141,20 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface DescribeUserPermissionsRequest {
+    /** 要查询的用户的唯一标识符（支持子账号 UIN和角色UIN） */
+    TargetUin: string;
+  }
+
+  interface DescribeUserPermissionsResponse {
+    /** 用户在当前地域下所有集群中的权限列表 */
+    Permissions?: PermissionItem[] | null;
+    /** 用户唯一标识符 */
+    TargetUin?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeVersionsRequest {
   }
 
@@ -7405,6 +7445,18 @@ declare namespace V20180525 {
     Instances?: InstanceUpgradeProgressItem[];
     /** 集群当前状态 */
     ClusterStatus?: InstanceUpgradeClusterStatus;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface GrantUserPermissionsRequest {
+    /** 要授权的用户的唯一标识符（支持子账号 UIN和角色UIN） */
+    TargetUin: string;
+    /** 用户最终应拥有的完整权限列表。采用声明式语义，传入的列表代表用户最终应该拥有的全部权限，系统会自动计算差异并执行必要的创建/删除操作。为空或不提供时将清除该用户的所有权限。最大支持 100 个权限项。 */
+    Permissions?: PermissionItem[];
+  }
+
+  interface GrantUserPermissionsResponse {
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -8585,6 +8637,8 @@ declare interface Tke {
   DeleteRollOutSequence(data: V20180525.DeleteRollOutSequenceRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeleteRollOutSequenceResponse>;
   /** 删除边缘计算集群 {@link V20180525.DeleteTKEEdgeClusterRequest} {@link V20180525.DeleteTKEEdgeClusterResponse} */
   DeleteTKEEdgeCluster(data: V20180525.DeleteTKEEdgeClusterRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeleteTKEEdgeClusterResponse>;
+  /** 删除用户权限 {@link V20180525.DeleteUserPermissionsRequest} {@link V20180525.DeleteUserPermissionsResponse} */
+  DeleteUserPermissions(data: V20180525.DeleteUserPermissionsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeleteUserPermissionsResponse>;
   /** 获取addon列表 {@link V20180525.DescribeAddonRequest} {@link V20180525.DescribeAddonResponse} */
   DescribeAddon(data: V20180525.DescribeAddonRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeAddonResponse>;
   /** 获取addon的参数 {@link V20180525.DescribeAddonValuesRequest} {@link V20180525.DescribeAddonValuesResponse} */
@@ -8789,6 +8843,8 @@ declare interface Tke {
   DescribeUpgradeTaskDetail(data: V20180525.DescribeUpgradeTaskDetailRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeUpgradeTaskDetailResponse>;
   /** 查询计划升级任务 {@link V20180525.DescribeUpgradeTasksRequest} {@link V20180525.DescribeUpgradeTasksResponse} */
   DescribeUpgradeTasks(data: V20180525.DescribeUpgradeTasksRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeUpgradeTasksResponse>;
+  /** 查询用户权限 {@link V20180525.DescribeUserPermissionsRequest} {@link V20180525.DescribeUserPermissionsResponse} */
+  DescribeUserPermissions(data: V20180525.DescribeUserPermissionsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeUserPermissionsResponse>;
   /** 集群版本信息 {@link V20180525.DescribeVersionsRequest} {@link V20180525.DescribeVersionsResponse} */
   DescribeVersions(data: V20180525.DescribeVersionsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeVersionsResponse>;
   /** 查询机型可支持的最大VPC-CNI模式Pod数量 {@link V20180525.DescribeVpcCniPodLimitsRequest} {@link V20180525.DescribeVpcCniPodLimitsResponse} */
@@ -8829,6 +8885,8 @@ declare interface Tke {
   GetTkeAppChartList(data: V20180525.GetTkeAppChartListRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.GetTkeAppChartListResponse>;
   /** 获得节点升级当前的进度 {@link V20180525.GetUpgradeInstanceProgressRequest} {@link V20180525.GetUpgradeInstanceProgressResponse} */
   GetUpgradeInstanceProgress(data: V20180525.GetUpgradeInstanceProgressRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.GetUpgradeInstanceProgressResponse>;
+  /** 全量授予用户权限 {@link V20180525.GrantUserPermissionsRequest} {@link V20180525.GrantUserPermissionsResponse} */
+  GrantUserPermissions(data: V20180525.GrantUserPermissionsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.GrantUserPermissionsResponse>;
   /** 安装addon {@link V20180525.InstallAddonRequest} {@link V20180525.InstallAddonResponse} */
   InstallAddon(data: V20180525.InstallAddonRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.InstallAddonResponse>;
   /** 安装边缘日志采集组件 {@link V20180525.InstallEdgeLogAgentRequest} {@link V20180525.InstallEdgeLogAgentResponse} */

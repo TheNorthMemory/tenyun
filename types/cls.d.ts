@@ -1938,6 +1938,28 @@ declare interface PreviewLogStatistic {
   DstTopicName?: string | null;
 }
 
+/** 索引重建任务信息 */
+declare interface RebuildIndexTaskInfo {
+  /** 索引重建任务ID */
+  TaskId: string;
+  /** 索引重建任务当前状态，0:索引重建任务已创建，1:创建索引重建资源，2:索引重建资源创建完成，3:重建中，4:暂停，5:重建索引成功，6:重建成功（可检索），7:重建失败，8:撤销，9:删除元数据和索引 */
+  Status: number;
+  /** 重建任务开始时间戳 */
+  StartTime: number;
+  /** 重建任务结束时间戳 */
+  EndTime: number;
+  /** 重投预估剩余时间，单位秒 */
+  RemainTime: number;
+  /** 重建任务创建时间戳 */
+  CreateTime: number;
+  /** 重投完成度，百分比 */
+  Progress: number;
+  /** 重建任务更新时间 */
+  UpdateTime: number;
+  /** 附加状态描述信息（目前仅描述失败时失败原因） */
+  StatusMessage: string;
+}
+
 /** 标签重新标记配置。允许动态重写目标、警报、抓取样本和远程写入样本的标签集。 */
 declare interface Relabeling {
   /** 基于正则表达式匹配执行的动作。- replace: Label替换, 必填: SourceLabels, Separator, Regex, TargetLabel, Replacement- labeldrop: 丢弃Label, 必填: Regex- labelkeep: 保留Label, 必填: Regex- lowercase: 小写化, 必填: SourceLabels, Separator, TargetLabel- uppercase: 大写化, 必填: SourceLabels, Separator, TargetLabel- dropequal: 丢弃指标-完全匹配, 必填: SourceLabels, Separator, TargetLabel- keepequal: 保留指标-完全匹配, 必填: SourceLabels, Separator, TargetLabel- drop: 丢弃指标-正则匹配, 必填: SourceLabels, Separator, Regex- keep: 保留指标-正则匹配, 必填: SourceLabels, Separator, Regex- hashmod:哈希取模, 必填: SourceLabels, Separator, TargetLabel, Modulus- labelmap:Label映射, 必填: Regex, Replacement */
@@ -2286,7 +2308,7 @@ declare interface UserKafkaMeta {
 
 /** 需要开启键值索引的字段的索引描述信息 */
 declare interface ValueInfo {
-  /** 字段类型，目前支持的类型有：long、text、double */
+  /** 字段类型，支持的类型有：long、text、double、json注意：json 类型目前仅部分用户或日志主题支持，如需使用请联系我们开启功能白名单 */
   Type: string;
   /** 字段的分词符，其中的每个字符代表一个分词符；仅支持英文符号、\n\t\r及转义符\；long及double类型字段需为空；注意：\n\t\r本身已被转义，直接使用双引号包裹即可作为入参，无需再次转义。使用API Explorer进行调试时请使用JSON参数输入方式，以避免\n\t\r被重复转义 */
   Tokenizer?: string;
@@ -2296,6 +2318,10 @@ declare interface ValueInfo {
   ContainZH?: boolean;
   /** 字段别名 */
   Alias?: string;
+  /** 仅为子节点开启索引，本字段不开启。注意：仅json类型字段可配置该参数 */
+  OpenIndexForChildOnly?: boolean;
+  /** json子节点列表注意：仅json类型字段可配置该参数 */
+  ChildNode?: KeyValueInfo[];
 }
 
 /** 回调地址 */
@@ -2368,6 +2394,18 @@ declare interface ApplyConfigToMachineGroupRequest {
 }
 
 declare interface ApplyConfigToMachineGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CancelRebuildIndexTaskRequest {
+  /** 日志主题ID */
+  TopicId: string;
+  /** 索引重建任务ID */
+  TaskId: string;
+}
+
+declare interface CancelRebuildIndexTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3112,6 +3150,22 @@ declare interface CreateNoticeContentRequest {
 declare interface CreateNoticeContentResponse {
   /** 通知内容配置ID */
   NoticeContentId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateRebuildIndexTaskRequest {
+  /** 日志主题ID */
+  TopicId: string;
+  /** 重建起始时间戳，毫秒起始时间不允许超过日志生命周期 */
+  StartTime: number;
+  /** 重建结束时间戳，毫秒结束时间不晚于当前时间往前推15分钟注意：建议提前使用“预估重建索引任务(EstimateRebuildIndexTask)”接口评估该时间范围重建索引涉及到的数据量及耗时，避免因数据量过大导致费用成本过高或耗时过长 */
+  EndTime: number;
+}
+
+declare interface CreateRebuildIndexTaskResponse {
+  /** 索引重建任务ID */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4426,6 +4480,26 @@ declare interface DescribePartitionsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRebuildIndexTasksRequest {
+  /** 日志主题ID */
+  TopicId: string;
+  /** 索引重建任务ID */
+  TaskId?: string;
+  /** 索引重建任务状态，不填返回所有状态任务列表，多种状态之间用逗号分隔，0:索引重建任务已创建，1:已创建索引重建资源，2:重建中，3:重建完成，4:重建成功（可检索），5:任务取消，6:元数据和索引已删除 */
+  Status?: string;
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为10，最大值20。 */
+  Limit?: number;
+}
+
+declare interface DescribeRebuildIndexTasksResponse {
+  /** 索引重建任务列表 */
+  RebuildTasks?: RebuildIndexTaskInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeScheduledSqlInfoRequest {
   /** 分页的偏移量，默认值为0。 */
   Offset?: number;
@@ -4594,6 +4668,24 @@ declare interface DescribeWebCallbacksResponse {
   WebCallbacks?: WebCallbackInfo[];
   /** 符合条件的通知内容配置总数。 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EstimateRebuildIndexTaskRequest {
+  /** 日志主题ID */
+  TopicId: string;
+  /** 预估任务起始时间，毫秒 */
+  StartTime: number;
+  /** 预估任务结束时间，毫秒 */
+  EndTime: number;
+}
+
+declare interface EstimateRebuildIndexTaskResponse {
+  /** 预估索引重建需要时间，单位秒 */
+  RemainTime?: number;
+  /** 预估写流量大小，单位MB */
+  WriteTraffic?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5697,6 +5789,8 @@ declare interface Cls {
   AddMachineGroupInfo(data: AddMachineGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<AddMachineGroupInfoResponse>;
   /** 应用采集配置到指定机器组 {@link ApplyConfigToMachineGroupRequest} {@link ApplyConfigToMachineGroupResponse} */
   ApplyConfigToMachineGroup(data: ApplyConfigToMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyConfigToMachineGroupResponse>;
+  /** 取消重建索引任务 {@link CancelRebuildIndexTaskRequest} {@link CancelRebuildIndexTaskResponse} */
+  CancelRebuildIndexTask(data: CancelRebuildIndexTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelRebuildIndexTaskResponse>;
   /** 语法校验接口 {@link CheckFunctionRequest} {@link CheckFunctionResponse} */
   CheckFunction(data: CheckFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<CheckFunctionResponse>;
   /** Kafka服务集群连通性校验 {@link CheckRechargeKafkaServerRequest} {@link CheckRechargeKafkaServerResponse} */
@@ -5755,6 +5849,8 @@ declare interface Cls {
   CreateMetricSubscribe(data: CreateMetricSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMetricSubscribeResponse>;
   /** 创建通知内容模板 {@link CreateNoticeContentRequest} {@link CreateNoticeContentResponse} */
   CreateNoticeContent(data: CreateNoticeContentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNoticeContentResponse>;
+  /** 创建重建索引任务 {@link CreateRebuildIndexTaskRequest} {@link CreateRebuildIndexTaskResponse} */
+  CreateRebuildIndexTask(data: CreateRebuildIndexTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRebuildIndexTaskResponse>;
   /** 创建定时SQL分析任务 {@link CreateScheduledSqlRequest} {@link CreateScheduledSqlResponse} */
   CreateScheduledSql(data: CreateScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScheduledSqlResponse>;
   /** 新建投递到COS的任务 {@link CreateShipperRequest} {@link CreateShipperResponse} */
@@ -5913,6 +6009,8 @@ declare interface Cls {
   DescribeNoticeContents(data?: DescribeNoticeContentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNoticeContentsResponse>;
   /** 获取分区列表 {@link DescribePartitionsRequest} {@link DescribePartitionsResponse} */
   DescribePartitions(data: DescribePartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePartitionsResponse>;
+  /** 获取重建索引任务列表 {@link DescribeRebuildIndexTasksRequest} {@link DescribeRebuildIndexTasksResponse} */
+  DescribeRebuildIndexTasks(data: DescribeRebuildIndexTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRebuildIndexTasksResponse>;
   /** 获取定时SQL分析任务列表 {@link DescribeScheduledSqlInfoRequest} {@link DescribeScheduledSqlInfoResponse} */
   DescribeScheduledSqlInfo(data?: DescribeScheduledSqlInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScheduledSqlInfoResponse>;
   /** 获取投递任务列表 {@link DescribeShipperTasksRequest} {@link DescribeShipperTasksResponse} */
@@ -5931,6 +6029,8 @@ declare interface Cls {
   DescribeTopics(data?: DescribeTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicsResponse>;
   /** 获取告警渠道回调配置列表 {@link DescribeWebCallbacksRequest} {@link DescribeWebCallbacksResponse} */
   DescribeWebCallbacks(data?: DescribeWebCallbacksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebCallbacksResponse>;
+  /** 预估重建索引任务 {@link EstimateRebuildIndexTaskRequest} {@link EstimateRebuildIndexTaskResponse} */
+  EstimateRebuildIndexTask(data: EstimateRebuildIndexTaskRequest, config?: AxiosRequestConfig): AxiosPromise<EstimateRebuildIndexTaskResponse>;
   /** 获取告警策略执行详情 {@link GetAlarmLogRequest} {@link GetAlarmLogResponse} */
   GetAlarmLog(data: GetAlarmLogRequest, config?: AxiosRequestConfig): AxiosPromise<GetAlarmLogResponse>;
   /** 获取指标标签列表 {@link GetMetricLabelValuesRequest} {@link GetMetricLabelValuesResponse} */

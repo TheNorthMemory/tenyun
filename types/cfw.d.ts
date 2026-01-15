@@ -946,6 +946,12 @@ declare interface LogItems {
   Data?: LogItem[];
 }
 
+/** 入侵防御防护模式相关 */
+declare interface ModeInfo {
+  /** 0-观察模式, 1-拦截模式, 2-严格模式 */
+  Mode?: number;
+}
+
 /** 多日志主题检索相关信息 */
 declare interface MultiTopicSearchInformation {
   /** 要检索分析的日志主题ID */
@@ -2846,6 +2852,20 @@ declare interface DescribeIPStatusListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeIpsModeSwitchRequest {
+}
+
+declare interface DescribeIpsModeSwitchResponse {
+  /** // Mode 取值校验：0-观察模式, 1-拦截模式, 2-严格模式 */
+  Data?: ModeInfo;
+  /** 0 成功 非0失败 */
+  ReturnCode?: number;
+  /** success 成功 其他失败 */
+  ReturnMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLogStorageStatisticRequest {
 }
 
@@ -3696,6 +3716,16 @@ declare interface ModifyFwGroupSwitchResponse {
   RequestId?: string;
 }
 
+declare interface ModifyIpsModeSwitchRequest {
+  /** 防护模式：0-观察模式, 1-拦截模式, 2-严格模式 */
+  Mode?: number;
+}
+
+declare interface ModifyIpsModeSwitchResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyNatAcRuleRequest {
   /** 需要编辑的规则数组,基于Uuid唯一id来修改该规则 */
   Rules: CreateNatRuleItem[];
@@ -4263,6 +4293,8 @@ declare interface Cfw {
   DescribeGuideScanInfo(data?: DescribeGuideScanInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGuideScanInfoResponse>;
   /** IP防护状态查询 {@link DescribeIPStatusListRequest} {@link DescribeIPStatusListResponse} */
   DescribeIPStatusList(data: DescribeIPStatusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPStatusListResponse>;
+  /** 获取入侵防御防护模式 {@link DescribeIpsModeSwitchRequest} {@link DescribeIpsModeSwitchResponse} */
+  DescribeIpsModeSwitch(data?: DescribeIpsModeSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpsModeSwitchResponse>;
   /** 租户日志存储统计 {@link DescribeLogStorageStatisticRequest} {@link DescribeLogStorageStatisticResponse} */
   DescribeLogStorageStatistic(data?: DescribeLogStorageStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogStorageStatisticResponse>;
   /** 日志审计日志查询 {@link DescribeLogsRequest} {@link DescribeLogsResponse} */
@@ -4347,6 +4379,8 @@ declare interface Cfw {
   ModifyEnterpriseSecurityGroupRule(data: ModifyEnterpriseSecurityGroupRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnterpriseSecurityGroupRuleResponse>;
   /** 修改防火墙(组)开关(支持单点模式、多点模式、全互通模式) {@link ModifyFwGroupSwitchRequest} {@link ModifyFwGroupSwitchResponse} */
   ModifyFwGroupSwitch(data: ModifyFwGroupSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFwGroupSwitchResponse>;
+  /** 修改IPS的防护模式 {@link ModifyIpsModeSwitchRequest} {@link ModifyIpsModeSwitchResponse} */
+  ModifyIpsModeSwitch(data?: ModifyIpsModeSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIpsModeSwitchResponse>;
   /** 修改NAT访问控制规则 {@link ModifyNatAcRuleRequest} {@link ModifyNatAcRuleResponse} */
   ModifyNatAcRule(data: ModifyNatAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatAcRuleResponse>;
   /** 防火墙实例重新选择vpc或nat {@link ModifyNatFwReSelectRequest} {@link ModifyNatFwReSelectResponse} */

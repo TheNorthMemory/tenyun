@@ -3931,6 +3931,8 @@ declare interface CreateCcnRequest {
   QosLevel?: string;
   /** 计费模式，`PREPAID`：表示预付费，即包年包月，`POSTPAID`：表示后付费，即按量计费。默认：`POSTPAID`。 */
   InstanceChargeType?: string;
+  /** 计量模式 */
+  InstanceMeteringType?: string;
   /** 限速类型，`OUTER_REGION_LIMIT`表示地域出口限速，`INTER_REGION_LIMIT`为地域间限速，默认为`OUTER_REGION_LIMIT`。预付费模式仅支持地域间限速，后付费模式支持地域间限速和地域出口限速。 */
   BandwidthLimitType?: string;
   /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}] */

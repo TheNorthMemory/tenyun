@@ -173,13 +173,15 @@ declare interface SubmitHunyuan3DPartJobResponse {
 }
 
 declare interface SubmitHunyuanTo3DProJobRequest {
+  /** 混元生3D生成模型版本，默认为3.0，可选项：3.0，3.1选择3.1版本时，LowPoly参数不可用。 */
+  Model?: string;
   /** 文生3D，3D内容的描述，中文正向提示词。最多支持1024个 utf-8 字符。ImageBase64、ImageUrl和 Prompt必填其一，且Prompt和ImageBase64/ImageUrl不能同时存在。 */
   Prompt?: string;
   /** 输入图 Base64 数据。大小: 单边分辨率要求不小于128，不大于5000，大小≤6m (因base64编码后会大30%左右)格式: jpg，png，jpeg，webp.lmageBase64、lmageUr和 Prompt必填其一，且Prompt和lmageBase64/mageUr不能同时存在。 */
   ImageBase64?: string;
   /** 输入图Url大小: 单边分辨率要求不小于128，不大于5000，大小≤8m格式: jpg，png，jpeg，webp.lmageBase64、lmageUr和 Prompt必填其一，且Prompt和lmageBase64/mageUr不能同时存在。 */
   ImageUrl?: string;
-  /** 多视角的模型图片，视角参考值：left：左视图；right：右视图；back：后视图；每个视角仅限制一张图片。●图片大小限制：编码后所有图片大小总和不可超过8M。（base64编码下图片大小总和不超过6M，因base64编码后图片大小会大30%左右）●图片分辨率限制：单边分辨率小于5000且大于128。●支持图片格式：支持jpg或png */
+  /** 多视角的模型图片，视角参考值：left：左视图；right：右视图；back：后视图；top：顶视图（仅3.1版本支持）；bottom：底视图（仅3.1版本支持）；left_front：左前45°视图（仅3.1版本支持）；right_front：右前45°视图（仅3.1版本支持）；每个视角仅限制一张图片。●图片大小限制：编码后所有图片大小总和不可超过8M。（base64编码下图片大小总和不超过6M，因base64编码后图片大小会大30%左右）●图片分辨率限制：单边分辨率小于5000且大于128。●支持图片格式：支持jpg或png */
   MultiViewImages?: ViewImage[];
   /** 是否开启 PBR材质生成，默认 false。 */
   EnablePBR?: boolean;

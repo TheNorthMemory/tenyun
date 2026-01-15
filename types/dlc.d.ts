@@ -2772,6 +2772,10 @@ declare interface WorkGroupDetailInfo {
   RowFilterInfo?: Policys;
   /** 数据目录权限集 */
   CatalogPolicyInfo?: Policy | null;
+  /** 数据目录权限 */
+  DataCatalogPolicyInfo?: Policys;
+  /** 模型权限 */
+  ModelPolicyInfo?: Policys;
 }
 
 /** 同一个用户绑定的工作组集合 */

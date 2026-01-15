@@ -4244,6 +4244,8 @@ declare interface MLIDPassportOCRResponse {
   WarnCardInfos?: number[];
   /** 输入图片中的卡证数量（仅请求曼谷地域[ap-bangkok]返回） */
   CardCount?: number;
+  /** 是否完整 */
+  IsComplete?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
