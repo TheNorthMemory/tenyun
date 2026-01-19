@@ -262,16 +262,20 @@ declare interface AddOnSubtitle {
 declare interface AdvancedSuperResolutionConfig {
   /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
   Switch?: string;
-  /** 类型，可选值：standard：通用超分super：高级超分。默认值：standard。 */
+  /** 类型，可选值：standard：通用超分super：高级超分super版。ultra：高级超分ultra版。默认值：standard。 */
   Type?: string | null;
   /** 输出图片模式，默认percent。 aspect: 超分至指定宽高的较大矩形。 fixed: 超分至固定宽高，强制缩放。 percent: 超分倍率，可以为小数。 */
   Mode?: string | null;
-  /** 超分倍率，可以为小数。 */
+  /** 超分倍率，可以为小数。注意：当Mode等于percent时使用。 */
   Percent?: number | null;
-  /** 目标图片宽度，不能超过4096。 */
+  /** 目标图片宽度，不能超过4096。注意：当Mode等于aspect或fixed时，优先使用此配置。 */
   Width?: number | null;
-  /** 目标图片高度，不能超过4096。 */
+  /** 目标图片高度，不能超过4096。注意：当Mode等于aspect或fixed时，优先使用此配置。 */
   Height?: number | null;
+  /** 目标图片长边长度，不能超过4096。注意：当Mode等于aspect或fixed，且未配置Width和Height字段时使用此配置。 */
+  LongSide?: number | null;
+  /** 目标图片短边长度，不能超过4096。注意：当Mode等于aspect或fixed，且未配置Width和Height字段时使用此配置。 */
+  ShortSide?: number | null;
 }
 
 /** 智能分析结果 */
@@ -1650,6 +1654,10 @@ declare interface AigcVideoExtraParam {
   Resolution?: string;
   /** 指定所生成视频的宽高比。 不同模型对于此参数的支持：1. Kling 仅文生视频支持, 16:9(默认值)、9:16、 1:1。2. Hailuo 暂不支持。3. Vidu 仅文生和参考图生视频 支持[16:9、9:16、4:3、3:4、1:1]，其中仅q2支持4:3、3:4。4. GV 16:9(默认值)、9:16。5. OS 仅文生视频支持, 16:9(默认), 9:16。注：关于具体模型支持的宽高比例，可查看具体模型官网介绍获取更完整描述。 */
   AspectRatio?: string;
+  /** 是否添加图标水印。1. Hailuo 支持此参数。2. Kling 支持此参数。3. Vidu 支持此参数。 */
+  LogoAdd?: number;
+  /** 为视频生成音频。接受的值包括 true 或 false。 支持此参数的模型：1. GV，默认true。2. OS，默认true。 */
+  EnableAudio?: boolean;
   /** 错峰模型，目前仅支持Vidu模型。错峰模式下提交的任务，会在48小时内生成，未能完成的任务会被自动取消。 */
   OffPeak?: boolean;
 }
@@ -3518,6 +3526,24 @@ declare interface ImageQualityEnhanceConfig {
   Type?: string | null;
 }
 
+/** 图片缩放配置 */
+declare interface ImageResizeConfig {
+  /** 能力配置开关，可选值：ON：开启OFF：关闭默认值：ON。 */
+  Switch?: string;
+  /** 输出图片模式，可选模式：percent: 指定缩放倍率，可以为小数mfit: 缩放至指定宽高的较大矩形lfit: 缩放至指定宽高的较小矩形fill: 缩放至指定宽高的较大矩形，并居中裁剪指定宽高pad: 缩放至指定宽高的较小矩形，并填充到指定宽高fixed: 缩放至固定宽高，强制缩放默认值：percent。 */
+  Mode?: string | null;
+  /** 缩放倍率，可以为小数，当Mode为percent时使用。默认值：1.0。取值范围：[0.1，10.0] */
+  Percent?: number | null;
+  /** 目标图片宽度。取值范围：[1，16384]。注意：此字段在Mode非percent时优先使用。 */
+  Width?: number | null;
+  /** 目标图片高度。取值范围：[1，16384]。注意：此字段在Mode非percent时优先使用。 */
+  Height?: number | null;
+  /** 目标图片长边。取值范围：[1，16384]。注意：此字段在Mode非percent且未配置Width和Height时使用。 */
+  LongSide?: number | null;
+  /** 目标图片短边。取值范围：[1，16384]。注意：此字段在Mode非percent且未配置Width和Height时使用。 */
+  ShortSide?: number | null;
+}
+
 /** 对视频截雪碧图任务输入参数类型 */
 declare interface ImageSpriteTaskInput {
   /** 雪碧图模板 ID。 */
@@ -3578,6 +3604,14 @@ declare interface ImageTaskInput {
   BlindWatermarkConfig?: BlindWatermarkConfig | null;
   /** 美颜配置。 */
   BeautyConfig?: BeautyConfig;
+  /** 图片基础转换能力。 */
+  TransformConfig?: ImageTransformConfig;
+}
+
+/** 图片基础转换能力 */
+declare interface ImageTransformConfig {
+  /** 图片缩放配置。 */
+  ImageResize?: ImageResizeConfig | null;
 }
 
 /** 图片水印模板输入参数 */
@@ -7145,7 +7179,7 @@ declare interface CreateAigcVideoTaskRequest {
   EnhancePrompt?: boolean;
   /** 用于指导视频生成的图片 URL。该URL需外网可访问。注意：1. 推荐图片大小不超过10M，不同模型大小限制不相同。2. 支持的图片格式：jpeg、png。3. 使用OS模型时，需输入图片尺寸为: 1280x720、720x1280。 */
   ImageUrl?: string;
-  /** 模型将以此参数传入的图片作为尾帧画面来生成视频。支持此参数的模型：1. GV，传入尾帧图片时，必须同时传入ImageUrl作为首帧。2. Kling， 在Resolution:1080P的情况下 2.1版本支持首位帧。3. Vidu, q2-pro, q2-turbo 支持首尾帧。注意：1. 推荐图片大小不超过10M，各模型限制不同。2. 支持的图片格式：jpeg、png。 */
+  /** 模型将以此参数传入的图片作为尾帧画面来生成视频。支持此参数的模型：1. GV，传入尾帧图片时，必须同时传入ImageUrl作为首帧。2. Kling， 在Resolution:1080P的情况下 2.1版本支持首尾帧。3. Vidu, q2-pro, q2-turbo 支持首尾帧。注意：1. 推荐图片大小不超过10M，各模型限制不同。2. 支持的图片格式：jpeg、png。 */
   LastImageUrl?: string;
   /** 最多包含三张素材资源图片的列表，用于描述模型在生成视频时要使用的资源图片。支持多图输入的模型：1. GV，使用多图输入时，不可使用ImageUrl和LastImageUrl。2. Vidu，支持多图参考生视频。q2模型1-7张图片，可通过ImageInfos里面的ReferenceType作为主体id来传入。注意：1. 图片大小不超过10M。2. 支持的图片格式：jpeg、png。 */
   ImageInfos?: AigcVideoReferenceImageInfo[];

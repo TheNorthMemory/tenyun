@@ -1718,6 +1718,20 @@ declare interface StatefulSetCondition {
   LastUpdateTime?: string | null;
 }
 
+/** 子账号信息 */
+declare interface SubAccountInfo {
+  /** 腾讯云主账号UIN */
+  Uin?: string;
+  /** 腾讯云子账号UIN */
+  SubUin?: string;
+  /** 子账号名称 */
+  SubUinName?: string;
+  /** 子账号在Linux下的UID */
+  LinuxUid?: number;
+  /** 子账号在Linux下的GID */
+  LinuxGid?: number;
+}
+
 /** tcp socket 健康探针检查行为 */
 declare interface TCPSocketAction {
   /** 调用端口 */
@@ -2926,6 +2940,16 @@ declare interface DescribePlatformImagesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSubAccountLinuxUserInfosRequest {
+}
+
+declare interface DescribeSubAccountLinuxUserInfosResponse {
+  /** 子账号信息列表 */
+  SubAccountList?: SubAccountInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTrainingModelVersionRequest {
   /** 模型版本ID */
   TrainingModelVersionId: string;
@@ -3240,6 +3264,16 @@ declare interface StopTrainingTaskRequest {
 }
 
 declare interface StopTrainingTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateSubAccountLinuxUserInfoRequest {
+  /** 子账号信息列表 */
+  SubAccountList?: SubAccountInfo[];
+}
+
+declare interface UpdateSubAccountLinuxUserInfoResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4039,6 +4073,8 @@ declare interface Tione {
   DescribeNotebooks(data?: DescribeNotebooksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebooksResponse>;
   /** 查询平台镜像信息 {@link DescribePlatformImagesRequest} {@link DescribePlatformImagesResponse} */
   DescribePlatformImages(data?: DescribePlatformImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlatformImagesResponse>;
+  /** 批量查询子账号Linux用户信息 {@link DescribeSubAccountLinuxUserInfosRequest} {@link DescribeSubAccountLinuxUserInfosResponse} */
+  DescribeSubAccountLinuxUserInfos(data?: DescribeSubAccountLinuxUserInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubAccountLinuxUserInfosResponse>;
   /** 查询模型版本 {@link DescribeTrainingModelVersionRequest} {@link DescribeTrainingModelVersionResponse} */
   DescribeTrainingModelVersion(data: DescribeTrainingModelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingModelVersionResponse>;
   /** 模型版本列表 {@link DescribeTrainingModelVersionsRequest} {@link DescribeTrainingModelVersionsResponse} */
@@ -4071,6 +4107,8 @@ declare interface Tione {
   StopNotebook(data: StopNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<StopNotebookResponse>;
   /** 停止模型训练任务 {@link StopTrainingTaskRequest} {@link StopTrainingTaskResponse} */
   StopTrainingTask(data: StopTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopTrainingTaskResponse>;
+  /** 更新子账号Linux用户信息 {@link UpdateSubAccountLinuxUserInfoRequest} {@link UpdateSubAccountLinuxUserInfoResponse} */
+  UpdateSubAccountLinuxUserInfo(data?: UpdateSubAccountLinuxUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateSubAccountLinuxUserInfoResponse>;
   /** 创建存储库 {@link V20191022.CreateCodeRepositoryRequest} {@link V20191022.CreateCodeRepositoryResponse} */
   CreateCodeRepository(data: V20191022.CreateCodeRepositoryRequest, config: AxiosRequestConfig & V20191022.VersionHeader): AxiosPromise<V20191022.CreateCodeRepositoryResponse>;
   /** 创建Notebook实例 {@link V20191022.CreateNotebookInstanceRequest} {@link V20191022.CreateNotebookInstanceResponse} */

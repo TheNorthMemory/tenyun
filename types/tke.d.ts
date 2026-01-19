@@ -3895,6 +3895,8 @@ declare namespace V20180525 {
     ClusterID?: string;
     /** 集群名称 */
     ClusterName?: string;
+    /** 集群地域 */
+    Region?: string;
     /** 预计开始时间 */
     PlanedStartAt?: string;
     /** 升级开始时间 */
@@ -4246,13 +4248,13 @@ declare namespace V20180525 {
   }
 
   interface CreateClusterMaintenanceWindowAndExclusionsRequest {
-    /** 集群ID */
+    /** 集群ID，可以从容器服务集群控制台获取（https://console.cloud.tencent.com/tke2/cluster）。 */
     ClusterID: string;
     /** 维护开始时间 */
     MaintenanceTime: string;
     /** 维护时长（小时） */
     Duration: number;
-    /** 维护周期（一周中的哪几天） */
+    /** 维护周期（一周中的哪几天），支持的参数值如下：- MO：周一- TU：周二- WE：周三- TH：周四- FR：周五- SA：周六- SU：周日 */
     DayOfWeek: string[];
     /** 维护排除项 */
     Exclusions?: MaintenanceExclusion[];
@@ -4962,7 +4964,7 @@ declare namespace V20180525 {
   }
 
   interface DeleteClusterMaintenanceWindowAndExclusionRequest {
-    /** 集群ID */
+    /** 集群ID，可以从容器服务控制台计划升级功能集群维护窗口页面获取（https://console.cloud.tencent.com/tke2/upgrade-plan）。 */
     ClusterID: string;
   }
 
@@ -7668,7 +7670,7 @@ declare namespace V20180525 {
     MaintenanceTime: string;
     /** 维护时长（小时） */
     Duration: number;
-    /** 维护周期（一周中的哪几天） */
+    /** 维护周期（一周中的哪几天），支持的参数值如下：- MO：周一- TU：周二- WE：周三- TH：周四- FR：周五- SA：周六- SU：周日 */
     DayOfWeek: string[];
     /** 维护排除项 */
     Exclusions?: MaintenanceExclusion[];
@@ -7728,9 +7730,9 @@ declare namespace V20180525 {
   }
 
   interface ModifyClusterRollOutSequenceTagsRequest {
-    /** 集群ID */
+    /** 集群ID，可以从容器服务集群控制台获取（https://console.cloud.tencent.com/tke2/cluster）。 */
     ClusterID: string;
-    /** 集群发布序列标签（为空时表示移除集群标签） */
+    /** 集群发布序列标签（为空时表示移除集群标签）。支持以下集群标签：- 标签键："Env"，支持的标签值：["Test","Pre-Production","Production"]- 标签键："Protection-Level"，支持的标签值：["Low","Medium","High"] */
     Tags?: Tag[];
   }
 

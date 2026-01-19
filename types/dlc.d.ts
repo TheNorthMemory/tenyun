@@ -3370,6 +3370,36 @@ declare interface CreateDatabaseResponse {
   RequestId?: string;
 }
 
+declare interface CreateDatasourceConnectionRequest {
+  /** 数据连接名称 */
+  DatasourceConnectionName: string;
+  /** 数据连接类型 */
+  DatasourceConnectionType: string;
+  /** 数据连接属性 */
+  DatasourceConnectionConfig: DatasourceConnectionConfig;
+  /** 数据连接所属服务 */
+  ServiceType: string;
+  /** 数据连接描述 */
+  DatasourceConnectionDesc?: string;
+  /** 数据引擎名称数组 */
+  DataEngineNames?: string[];
+  /** 网络连接名称 */
+  NetworkConnectionName?: string;
+  /** 网络连接描述 */
+  NetworkConnectionDesc?: string;
+  /** 网络连接类型 （2-夸源型，4-增强型） */
+  NetworkConnectionType?: number;
+  /** 自定义配置 */
+  CustomConfig?: CustomConfig[];
+}
+
+declare interface CreateDatasourceConnectionResponse {
+  /** 数据连接Id */
+  DatasourceConnectionId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateExportTaskRequest {
   /** 数据来源，lakefsStorage、taskResult */
   InputType: string;
@@ -6565,6 +6595,8 @@ declare interface Dlc {
   CreateDataMaskStrategy(data?: CreateDataMaskStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataMaskStrategyResponse>;
   /** 生成建库SQL语句 {@link CreateDatabaseRequest} {@link CreateDatabaseResponse} */
   CreateDatabase(data: CreateDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatabaseResponse>;
+  /** 创建数据源 {@link CreateDatasourceConnectionRequest} {@link CreateDatasourceConnectionResponse} */
+  CreateDatasourceConnection(data: CreateDatasourceConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatasourceConnectionResponse>;
   /** 创建导出任务 {@link CreateExportTaskRequest} {@link CreateExportTaskResponse} */
   CreateExportTask(data: CreateExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExportTaskResponse>;
   /** 创建导入任务 {@link CreateImportTaskRequest} {@link CreateImportTaskResponse} */

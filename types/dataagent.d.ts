@@ -574,6 +574,8 @@ declare interface QuerySceneListRequest {
 }
 
 declare interface QuerySceneListResponse {
+  /** 场景列表 */
+  Datas?: Scene[];
   /** 总数 */
   Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */

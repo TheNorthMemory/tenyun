@@ -212,6 +212,42 @@ declare interface DiskSpec {
   DiskCount: number;
 }
 
+/** 事件任务 */
+declare interface EventTask {
+  /** 集群id */
+  InstanceId?: string;
+  /** 事件任务的id */
+  EventTaskId?: number;
+  /** 处理人uin */
+  HandleUser?: string;
+  /** 事件名称 */
+  EventCode?: string;
+  /** CVM相关事件的维修id */
+  RepairId?: string;
+  /** 事件名称描述 */
+  EventNameDescribe?: string;
+  /** 事件等级（0-低；1-中；2-高；3-严重） */
+  EventPriority?: number;
+  /** 事件详情 */
+  EventDetail?: string;
+  /** 影响集群节点 */
+  IP?: string;
+  /** 事件触发时间 */
+  CreateTime?: string;
+  /** 事件状态(1-待处理;2-已预约;3-处理中;4-已完成;5-处理中;6-自动处理中;-1-已忽略;-2-已删除) */
+  Status?: number;
+  /** 是否需要授权维修：1-不需要，2-需要 */
+  NeedAuthorization?: number;
+  /** 该事件涉及到的操作类型（OnlineMigrationForInstance-实例在线迁移,OnlineMaintenanceForInstance-实例在线维修,等） */
+  OperationType?: string[];
+  /** 完成时间 */
+  FinishTime?: string;
+  /** 操作指引 */
+  OperationGuide?: string;
+  /** 资源id */
+  ResourceId?: string;
+}
+
 /** 集群分组信息描述 */
 declare interface GroupInfo {
   /** 分组名称 */
@@ -372,6 +408,10 @@ declare interface InstanceInfo {
   HasPublicCloudClb?: boolean;
   /** 可升级的zk版本 */
   UpgradeZkVersions?: string;
+  /** 是否显示rip */
+  ShowRip?: string;
+  /** 实例类型：标准型 standard，无keeper节点类型noKeeper； */
+  InstanceType?: string;
 }
 
 /** 实例节点描述信息 */
@@ -806,6 +846,38 @@ declare interface DescribeClusterConfigsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEventTasksRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 过滤的事件任务id */
+  EventTaskId?: number;
+  /** 页码，默认为1 */
+  PageNumber?: number;
+  /** 每页数量（支持10、20、30、50、100、200），默认为100 */
+  PageSize?: number;
+  /** 事件名称过滤 */
+  EventCode?: string;
+  /** (1-待处理;2-已预约;3-处理中;4-已结束;5-处理中;-1-已忽略;-2-已删除) */
+  Status?: number[];
+  /** 创建时间范围开始 (格式: YYYY-MM-DD HH:MM:SS)，最大支持查询180天信息 */
+  StartTime?: string;
+  /** 创建时间范围结束 (格式: YYYY-MM-DD HH:MM:SS) */
+  EndTime?: string;
+  /** 排序字段（事件类型：event_code；触发时间：create_time；完成时间：end_time） */
+  SortField?: string;
+  /** 排序顺序 (asc/desc) */
+  SortOrder?: string;
+}
+
+declare interface DescribeEventTasksResponse {
+  /** 产生的事件任务 */
+  EventTasks?: EventTask[];
+  /** 事件任务总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceClustersRequest {
   /** 实例ID */
   InstanceId: string;
@@ -1185,6 +1257,8 @@ declare interface Cdwch {
   DescribeCkSqlApis(data: DescribeCkSqlApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCkSqlApisResponse>;
   /** 获取集群配置文件内容 {@link DescribeClusterConfigsRequest} {@link DescribeClusterConfigsResponse} */
   DescribeClusterConfigs(data: DescribeClusterConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterConfigsResponse>;
+  /** 获取产生的事件任务 {@link DescribeEventTasksRequest} {@link DescribeEventTasksResponse} */
+  DescribeEventTasks(data: DescribeEventTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventTasksResponse>;
   /** 描述实例信息 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
   /** vcluster列表 {@link DescribeInstanceClustersRequest} {@link DescribeInstanceClustersResponse} */

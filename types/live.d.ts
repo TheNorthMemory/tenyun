@@ -2178,6 +2178,26 @@ declare interface CreateLiveCallbackTemplateResponse {
   RequestId?: string;
 }
 
+declare interface CreateLiveCloudEffectRequest {
+  /** 用于生成云端特效的 Prompt。示例：飞鸟。Prompt 和 ImageUrl 二选一。 */
+  Prompt?: string;
+  /** 模板生礼物的模板ID。目前支持的模板ID：queen_accession, wizard_of_oz，red_envelopes，fishermen，captain_america。 */
+  TemplateId?: string;
+  /** 输入我的图片地址，用于生成云端特效。ImageUrl 和 Prompt 二选一。 */
+  ImageUrl?: string;
+  /** 指定生成云端特效的方式。默认自动选取。标准方式：text2video，高品质方式：text2video_hq。 */
+  Type?: string;
+  /** 操作者名称。 */
+  Operator?: string;
+}
+
+declare interface CreateLiveCloudEffectResponse {
+  /** 云端特效 ID。 */
+  Id?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateLivePadRuleRequest {
   /** 推流域名。 */
   DomainName: string;
@@ -5609,6 +5629,8 @@ declare interface Live {
   CreateLiveCallbackRule(data: CreateLiveCallbackRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveCallbackRuleResponse>;
   /** 创建回调模板 {@link CreateLiveCallbackTemplateRequest} {@link CreateLiveCallbackTemplateResponse} */
   CreateLiveCallbackTemplate(data: CreateLiveCallbackTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveCallbackTemplateResponse>;
+  /** 生成直播云端特效 {@link CreateLiveCloudEffectRequest} {@link CreateLiveCloudEffectResponse} */
+  CreateLiveCloudEffect(data?: CreateLiveCloudEffectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveCloudEffectResponse>;
   /** 创建直播垫片规则 {@link CreateLivePadRuleRequest} {@link CreateLivePadRuleResponse} */
   CreateLivePadRule(data: CreateLivePadRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLivePadRuleResponse>;
   /** 创建直播垫片模板 {@link CreateLivePadTemplateRequest} {@link CreateLivePadTemplateResponse} */

@@ -2229,7 +2229,7 @@ declare interface DescribeCcBlackWhiteIpListResponse {
 }
 
 declare interface DescribeCcGeoIPBlockConfigListRequest {
-  /** DDoS防护子产品代号（bgpip-multip：表示高防包；bgpip：表示高防IP） */
+  /** DDoS防护子产品代号（bgp-multip：表示高防包；bgpip：表示高防IP） */
   Business: string;
   /** 页起始偏移，取值为(页码-1)*一页条数 */
   Offset: number;

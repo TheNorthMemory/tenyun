@@ -2,6 +2,14 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 元数据展示信息 */
+declare interface DisplayMetadata {
+  /** 展示的名称 */
+  Name?: string;
+  /** 展示的值 */
+  Value?: string;
+}
+
 /** 描述键值对过滤器，用于条件过滤查询。例如过滤 ID、名称、状态等- 若存在多个 Filter 时，Filter间的关系为逻辑与（AND）关系。- 若同一个 Filter 存在多个 Values，同一 Filter 下 Values 间的关系为逻辑或（OR）关系。 */
 declare interface Filter {
   /** 需要过滤的字段 */
@@ -48,6 +56,20 @@ declare interface License {
   LicenseType?: string;
   /** 授权的层级：Master 主授权；Child 子授权/增强型授权 */
   LicenseLevel?: string;
+  /** License 内容信息 */
+  LicenseData?: LicenseData;
+  /** License 颁发地址 */
+  IssueURL?: string;
+}
+
+/** License 内容信息 */
+declare interface LicenseData {
+  /** License 文本内容。支持密钥、证书等文本形式，二进制的密钥需要伙伴进行 base64 转码 */
+  Text: string;
+  /** 部署服务输出信息，基于部署签发 License 时需要该参数。 */
+  DeploymentOutput?: string;
+  /** License 前端展示信息。key、value 形式，比如可传入，颁发机构：XXXX 有限公司 */
+  Metadata?: DisplayMetadata[];
 }
 
 /** 表示商品 SKU 的单个售卖参数 */

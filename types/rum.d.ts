@@ -1056,6 +1056,78 @@ declare interface DescribeDataPvUrlStatisticsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDataPvUrlStatisticsV2Request {
+  /** 开始时间 */
+  StartTime: number;
+  /** allcount：性能视图，day：14天数据，vp：性能，ckuv：uv，ckpv：pv，condition：条件列表，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等 */
+  Type: string;
+  /** 结束时间 */
+  EndTime: number;
+  /** 项目ID */
+  ID: number;
+  /** 自定义2 */
+  ExtSecond?: string;
+  /** 浏览器引擎 */
+  Engine?: string;
+  /** 运营商 */
+  Isp?: string;
+  /** 来源页面 */
+  From?: string;
+  /** 日志等级 */
+  Level?: string;
+  /** 品牌 */
+  Brand?: string;
+  /** 地区 */
+  Area?: string;
+  /** 版本 */
+  VersionNum?: string;
+  /** 平台 */
+  Platform?: string;
+  /** 自定义3 */
+  ExtThird?: string;
+  /** 自定义1 */
+  ExtFirst?: string;
+  /** 网络类型 */
+  NetType?: string;
+  /** 机型 */
+  Device?: string;
+  /** 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
+  IsAbroad?: string;
+  /** 操作系统 */
+  Os?: string;
+  /** 浏览器 */
+  Browser?: string;
+  /** 环境 */
+  Env?: string;
+  /** group by 参数值枚举1:1m 2:5m 3:30m 4:1h 5:1d */
+  GroupByType?: number;
+  /** 1: 查询智研0: 走旧逻辑，已下线，勿使用 */
+  IsNewData?: number;
+  /** 自定义4 */
+  ExtFourth?: string;
+  /** 自定义5 */
+  ExtFifth?: string;
+  /** 自定义6 */
+  ExtSixth?: string;
+  /** 自定义7 */
+  ExtSeventh?: string;
+  /** 自定义8 */
+  ExtEighth?: string;
+  /** 自定义9 */
+  ExtNinth?: string;
+  /** 自定义10 */
+  ExtTenth?: string;
+  /** 时间段 */
+  Granularity?: string;
+}
+
+declare interface DescribeDataPvUrlStatisticsV2Response {
+  /** 返回值 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDataReportCountRequest {
   /** 开始时间 */
   StartTime: number;
@@ -1865,6 +1937,8 @@ declare interface Rum {
   DescribeDataPvUrlInfo(data: DescribeDataPvUrlInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataPvUrlInfoResponse>;
   /** 获取DescribeDataPvUrlStatistics信息 {@link DescribeDataPvUrlStatisticsRequest} {@link DescribeDataPvUrlStatisticsResponse} */
   DescribeDataPvUrlStatistics(data: DescribeDataPvUrlStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataPvUrlStatisticsResponse>;
+  /** 获取DescribeDataPvUrlStatistics信息V2 {@link DescribeDataPvUrlStatisticsV2Request} {@link DescribeDataPvUrlStatisticsV2Response} */
+  DescribeDataPvUrlStatisticsV2(data: DescribeDataPvUrlStatisticsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeDataPvUrlStatisticsV2Response>;
   /** 获取上报量 {@link DescribeDataReportCountRequest} {@link DescribeDataReportCountResponse} */
   DescribeDataReportCount(data: DescribeDataReportCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataReportCountResponse>;
   /** 获取DescribeDataSetUrlStatistics信息 {@link DescribeDataSetUrlStatisticsRequest} {@link DescribeDataSetUrlStatisticsResponse} */

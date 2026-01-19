@@ -2510,6 +2510,20 @@ declare interface ModifyInstanceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInstanceStorageRequest {
+  /** 实例ID */
+  RegistryId: string;
+  /** 目标存储资源地域 */
+  TargetRegion: string;
+  /** 目标存储资源名称 */
+  TargetStorageName: string;
+}
+
+declare interface ModifyInstanceStorageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyInstanceTokenRequest {
   /** 实例长期访问凭证 ID */
   TokenId: string;
@@ -2706,6 +2720,20 @@ declare interface RenewInstanceRequest {
 declare interface RenewInstanceResponse {
   /** 企业版实例Id */
   RegistryId: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface TerminateGCJobRequest {
+  /** 实例ID */
+  RegistryId: string;
+}
+
+declare interface TerminateGCJobResponse {
+  /** 操作结果枚举值： success： 操作成功 error： 操作失败 */
+  Status?: string;
+  /** 操作结果详细信息 */
+  Message?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2933,6 +2961,8 @@ declare interface Tcr {
   ModifyImmutableTagRules(data: ModifyImmutableTagRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImmutableTagRulesResponse>;
   /** 更新实例信息 {@link ModifyInstanceRequest} {@link ModifyInstanceResponse} */
   ModifyInstance(data: ModifyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceResponse>;
+  /** 修改TCR实例存储配置 {@link ModifyInstanceStorageRequest} {@link ModifyInstanceStorageResponse} */
+  ModifyInstanceStorage(data: ModifyInstanceStorageRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceStorageResponse>;
   /** 更新实例长期访问凭证 {@link ModifyInstanceTokenRequest} {@link ModifyInstanceTokenResponse} */
   ModifyInstanceToken(data: ModifyInstanceTokenRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceTokenResponse>;
   /** 更新命名空间信息 {@link ModifyNamespaceRequest} {@link ModifyNamespaceResponse} */
@@ -2957,6 +2987,8 @@ declare interface Tcr {
   ModifyWebhookTrigger(data: ModifyWebhookTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWebhookTriggerResponse>;
   /** 续费实例 {@link RenewInstanceRequest} {@link RenewInstanceResponse} */
   RenewInstance(data: RenewInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RenewInstanceResponse>;
+  /** 终止制品清理任务 {@link TerminateGCJobRequest} {@link TerminateGCJobResponse} */
+  TerminateGCJob(data: TerminateGCJobRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateGCJobResponse>;
   /** 验证个人版命名空间是否存在 {@link ValidateNamespaceExistPersonalRequest} {@link ValidateNamespaceExistPersonalResponse} */
   ValidateNamespaceExistPersonal(data: ValidateNamespaceExistPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<ValidateNamespaceExistPersonalResponse>;
   /** 验证个人版仓库是否存在 {@link ValidateRepositoryExistPersonalRequest} {@link ValidateRepositoryExistPersonalResponse} */
