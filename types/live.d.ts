@@ -482,6 +482,20 @@ declare interface CloudEffectInfo {
   UpdateTime?: string;
 }
 
+/** 云端特效模板信息。 */
+declare interface CloudEffectTemplateInfo {
+  /** 特效模板ID。 */
+  TemplateId?: string;
+  /** 特效模板名称。 */
+  TemplateName?: string;
+  /** 模板预览URL。 */
+  VideoUrl?: string;
+  /** 模板封面图片URL。 */
+  CoverImageUrl?: string;
+  /** 模板视频宽高比。 */
+  VideoRatio?: string;
+}
+
 /** 通用混流控制参数 */
 declare interface CommonMixControlParams {
   /** 取值范围[0,1]。填1时，当参数中图层分辨率参数与视频实际分辨率不一致时，自动从视频中按图层设置的分辨率比例进行裁剪。 */
@@ -3426,6 +3440,16 @@ declare interface DescribeLiveCertsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLiveCloudEffectConfigRequest {
+}
+
+declare interface DescribeLiveCloudEffectConfigResponse {
+  /** 模板生礼物的模板信息列表。 */
+  EffectTemplateList?: CloudEffectTemplateInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLiveCloudEffectListRequest {
   /** 云端特效ID。 */
   Id?: string;
@@ -5777,6 +5801,8 @@ declare interface Live {
   DescribeLiveCert(data: DescribeLiveCertRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCertResponse>;
   /** 获取证书信息列表(该接口已下线，请使用新接口 DescribeLiveDomainCertBindings) {@link DescribeLiveCertsRequest} {@link DescribeLiveCertsResponse} */
   DescribeLiveCerts(data?: DescribeLiveCertsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCertsResponse>;
+  /** 查询直播云端特效配置信息 {@link DescribeLiveCloudEffectConfigRequest} {@link DescribeLiveCloudEffectConfigResponse} */
+  DescribeLiveCloudEffectConfig(data?: DescribeLiveCloudEffectConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCloudEffectConfigResponse>;
   /** 查询直播云端特效列表 {@link DescribeLiveCloudEffectListRequest} {@link DescribeLiveCloudEffectListResponse} */
   DescribeLiveCloudEffectList(data?: DescribeLiveCloudEffectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCloudEffectListResponse>;
   /** 获取直播延播列表 {@link DescribeLiveDelayInfoListRequest} {@link DescribeLiveDelayInfoListResponse} */

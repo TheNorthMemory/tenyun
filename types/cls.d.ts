@@ -1226,6 +1226,16 @@ declare interface FilterRuleInfo {
   Value: string;
 }
 
+/** 投递类任务数据过滤统计信息 */
+declare interface FilterStatistics {
+  /** 原始日志数 */
+  OriginalCount?: number;
+  /** 过滤后日志数 */
+  FilteredCount?: number;
+  /** 过滤后结果 */
+  FilteredResult?: string[];
+}
+
 /** 全文索引配置 */
 declare interface FullTextInfo {
   /** 是否大小写敏感 */
@@ -2204,6 +2214,8 @@ declare interface SplunkDeliverInfo {
   IndexAck?: number;
   /** 高级配置-通道 */
   Channel?: string;
+  /** 预过滤处理-对写入 Splunk 原始数据进行预过滤处理语句 */
+  DSLFilter?: string;
 }
 
 /** 创建资源实例时同时绑定的标签对说明 */
@@ -3249,7 +3261,7 @@ declare interface CreateShipperResponse {
 }
 
 declare interface CreateSplunkDeliverRequest {
-  /** 日志主题id- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  /** 日志主题id- 通过获取日志主题列表获取日志主题Id。 */
   TopicId: string;
   /** splunk投递任务名称；name有如下限制：- 不能为空- 长度不大于64- 只能包含aA-zZ、下划线、-、0-9 */
   Name: string;
@@ -3269,6 +3281,8 @@ declare interface CreateSplunkDeliverRequest {
   Index?: string;
   /** 高级配置-通道需满足限制：如果启用索引器，那么Channel必填 */
   Channel?: string;
+  /** 日志预过滤-数据写入 Splunk 的原始数据进行预过滤处理 */
+  DSLFilter?: string;
 }
 
 declare interface CreateSplunkDeliverResponse {
@@ -4559,9 +4573,9 @@ declare interface DescribeShippersResponse {
 }
 
 declare interface DescribeSplunkDeliversRequest {
-  /** 日志主题Id- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  /** 日志主题Id- 通过获取日志主题列表获取日志主题Id。 */
   TopicId: string;
-  /** - taskId 按照【任务id】进行过滤。 类型：String 必选：否 - name 按照【任务名称】进行过滤。 类型：String 必选：否 - statusFlag 按照【状态】进行过滤。 类型：String 必选：否 每次请求的Filters的上限为10，Filter.Values的上限为10。 */
+  /** taskId 按照【任务id】进行过滤。 类型：String 必选：否 name 按照【任务名称】进行过滤。 类型：String 必选：否 statusFlag 按照【状态】进行过滤。 类型：String 必选：否 每次请求的Filters的上限为10，Filter.Values的上限为10。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0。 */
   Offset?: number;
@@ -4579,15 +4593,19 @@ declare interface DescribeSplunkDeliversResponse {
 }
 
 declare interface DescribeSplunkPreviewRequest {
-  /** 日志主题id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  /** 日志主题id。- 通过获取日志主题列表获取日志主题Id。 */
   TopicId: string;
   /** splunk投递任务-元信息 */
   MetadataInfo: MetadataInfo;
+  /** splunk投递任务-投递 splunk过滤原始日志语句 */
+  DSLFilter?: string;
 }
 
 declare interface DescribeSplunkPreviewResponse {
   /** 预览结果 */
   PreviewInfos?: string[];
+  /** 数据过滤结果 */
+  FilterStats?: FilterStatistics;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5437,7 +5455,7 @@ declare interface ModifyShipperResponse {
 declare interface ModifySplunkDeliverRequest {
   /** 任务id */
   TaskId: string;
-  /** 日志主题id- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  /** 日志主题id- 通过获取日志主题列表获取日志主题Id。 */
   TopicId: string;
   /** 投递任务名称name有以下限制：- 不能为空- 长度不大于64- 只能包含aA-zZ、下划线、-、0-9 */
   Name?: string;
@@ -5459,6 +5477,8 @@ declare interface ModifySplunkDeliverRequest {
   Index?: string;
   /** 高级配置-通道。需满足限制：如果启用索引器，该值不能为空 */
   Channel?: string;
+  /** 预过滤处理-对写入 Splunk 原始数据进行预过滤处理 */
+  DSLFilter?: string;
 }
 
 declare interface ModifySplunkDeliverResponse {

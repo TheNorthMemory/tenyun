@@ -3311,6 +3311,8 @@ declare interface CreateClusterRequest {
   DefaultMetaVersion?: string;
   /** 是否开通数据库审计 */
   NeedCdbAudit?: number;
+  /** 安全指定来源ip */
+  SgIP?: string;
 }
 
 declare interface CreateClusterResponse {
@@ -3409,6 +3411,8 @@ declare interface CreateInstanceRequest {
   DefaultMetaVersion?: string;
   /** 是否开通审计：0:不开通,1:开通 */
   NeedCdbAudit?: number;
+  /** 安全组指定来源ip */
+  SgIP?: string;
 }
 
 declare interface CreateInstanceResponse {

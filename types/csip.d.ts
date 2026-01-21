@@ -636,7 +636,7 @@ declare interface AssetProcessItem {
   Port?: string;
 }
 
-/** 资产视角风险项 */
+/** 资产视角风险信息 */
 declare interface AssetRiskItem {
   /** 租户ID */
   AppId?: number;
@@ -670,6 +670,8 @@ declare interface AssetRiskItem {
   Classify?: string;
   /** 等保合规 */
   StandardTerms?: StandardTerm[];
+  /** 资产类型 */
+  AssetType?: string;
 }
 
 /** 安全中心资产标签 */
@@ -3727,6 +3729,8 @@ declare interface DescribeAssetRiskListResponse {
   AssetRiskList?: AssetRiskItem[];
   /** 等保规范名称集合 */
   StandardNameList?: StandardItem[];
+  /** 资产类型集合 */
+  AssetTypeList?: AttributeOptionSet[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3901,6 +3905,8 @@ declare interface DescribeCheckViewRisksResponse {
   CheckViewRiskList?: CheckViewRiskItem[];
   /** 检查视角下cspm规范标签列表 */
   StandardNameList?: StandardItem[];
+  /** 资产类型集合 */
+  AssetTypeList?: AttributeOptionSet[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5242,7 +5248,7 @@ declare interface Csip {
   DescribeAlertList(data: DescribeAlertListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlertListResponse>;
   /** 查询云边界分析-暴露路径下主机节点的进程列表 {@link DescribeAssetProcessListRequest} {@link DescribeAssetProcessListResponse} */
   DescribeAssetProcessList(data?: DescribeAssetProcessListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetProcessListResponse>;
-  /** 资产视角下的云资源配置风险列表 {@link DescribeAssetRiskListRequest} {@link DescribeAssetRiskListResponse} */
+  /** 资产视角下的云资源配置风险 {@link DescribeAssetRiskListRequest} {@link DescribeAssetRiskListResponse} */
   DescribeAssetRiskList(data?: DescribeAssetRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetRiskListResponse>;
   /** 漏洞管理-资产视角的漏洞风险列表 {@link DescribeAssetViewVulRiskListRequest} {@link DescribeAssetViewVulRiskListResponse} */
   DescribeAssetViewVulRiskList(data?: DescribeAssetViewVulRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetViewVulRiskListResponse>;
@@ -5256,7 +5262,7 @@ declare interface Csip {
   DescribeCVMAssets(data?: DescribeCVMAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCVMAssetsResponse>;
   /** 获取调用记录 {@link DescribeCallRecordRequest} {@link DescribeCallRecordResponse} */
   DescribeCallRecord(data?: DescribeCallRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallRecordResponse>;
-  /** 检查项视角风险列表 {@link DescribeCheckViewRisksRequest} {@link DescribeCheckViewRisksResponse} */
+  /** 检查项视角云资源配置风险 {@link DescribeCheckViewRisksRequest} {@link DescribeCheckViewRisksResponse} */
   DescribeCheckViewRisks(data?: DescribeCheckViewRisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCheckViewRisksResponse>;
   /** 集群列表 {@link DescribeClusterAssetsRequest} {@link DescribeClusterAssetsResponse} */
   DescribeClusterAssets(data?: DescribeClusterAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterAssetsResponse>;

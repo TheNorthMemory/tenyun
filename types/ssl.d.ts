@@ -256,6 +256,14 @@ declare interface Certificates {
   HostingConfig?: HostingConfig | null;
   /** 是否是上传托管续费证书 */
   IsHostingUploadRenewCert?: boolean;
+  /** 订阅服务ID */
+  ServiceId?: string;
+  /** 订阅服务状态枚举值： initing： 未激活 running： 生效中 expired： 已过期 refunded： 已退款 nearExpire： 即将到期 */
+  ServiceStatus?: string;
+  /** 订阅服务开始时间 */
+  CertServiceBeginTime?: string;
+  /** 订阅服务结束时间 */
+  CertServiceEndTime?: string;
 }
 
 /** clb实例详情 */
@@ -2147,6 +2155,8 @@ declare interface DescribeCertificatesRequest {
   IsPendingIssue?: number;
   /** 筛选指定证书ID的证书，只支持有权限的证书ID */
   CertIds?: string[];
+  /** 订阅服务ID */
+  ServiceId?: string;
 }
 
 declare interface DescribeCertificatesResponse {

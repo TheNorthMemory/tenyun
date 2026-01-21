@@ -64,6 +64,22 @@ declare interface DeleteRoleUserResponse {
   RequestId?: string;
 }
 
+declare interface PutEventRequest {
+  /** 插件ID */
+  PluginId: string;
+  /** 需要推送的事件数据内容，格式为json，字段定义需要与事件中的定义一致 */
+  Data?: string;
+  /** 数据推送来源，会在生成的单据中展示数据来源 */
+  Source?: string;
+  /** 可以接受当前消息的Uin */
+  TargetUin?: number;
+}
+
+declare interface PutEventResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface PutMessageRequest {
   /** 事件ID */
   EventId: string;
@@ -89,6 +105,8 @@ declare interface Evt {
   CreateRoleUser(data: CreateRoleUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoleUserResponse>;
   /** 删除自定义角色的用户 {@link DeleteRoleUserRequest} {@link DeleteRoleUserResponse} */
   DeleteRoleUser(data?: DeleteRoleUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoleUserResponse>;
+  /** 推送事件 {@link PutEventRequest} {@link PutEventResponse} */
+  PutEvent(data: PutEventRequest, config?: AxiosRequestConfig): AxiosPromise<PutEventResponse>;
   /** 推送消息 {@link PutMessageRequest} {@link PutMessageResponse} */
   PutMessage(data: PutMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PutMessageResponse>;
 }

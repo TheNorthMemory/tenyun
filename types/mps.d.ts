@@ -5870,6 +5870,8 @@ declare interface SmartSubtitleTaskAsrFullTextSegmentItem {
   Text?: string;
   /** 字词时间戳信息。 */
   Wordlist?: WordResult[] | null;
+  /** 说话人ID（如启用说话人识别） */
+  SpeakerId?: string;
 }
 
 /** 智能字幕输出信息 */
@@ -7127,7 +7129,7 @@ declare interface CreateAdaptiveDynamicStreamingTemplateRequest {
   Comment?: string;
   /** 是否为纯音频，0表示视频模板，1表示纯音频模板当值为1：1. StreamInfos.N.RemoveVideo=12. StreamInfos.N.RemoveAudio=03. StreamInfos.N.Video.Codec=copy当值为0：1. StreamInfos.N.Video.Codec不能为copy2. StreamInfos.N.Video.Fps不能为null注意：此值只是区分模板类型，任务使用RemoveAudio和RemoveVideo的值 */
   PureAudio?: number;
-  /** 分片类型，可选值： ts-segment：HLS+TS 切片 ts-byterange：HLS+TS byte range mp4-segment：HLS+MP4 切片 mp4-byterange：HLS/DASH+MP4 byte range ts-packed-audio：TS+Packed Audio mp4-packed-audio：MP4+Packed Audio 默认值：ts-segment 注：自适应码流的分片格式以此字段为准。DASH格式下SegmentType只能为mp4-byterange。 */
+  /** 分片类型，可选值： ts-segment：HLS+TS 切片 ts-byterange：HLS+TS byte range mp4-segment：HLS+MP4 切片 mp4-byterange：HLS/DASH+MP4 byte range ts-packed-audio：HLS+TS+Packed Audio 切片 mp4-packed-audio：HLS+MP4+Packed Audio 切片 ts-ts-segment：HLS+TS+TS 切片 ts-ts-byterange：HLS+TS+TS byte range mp4-mp4-segment：HLS+MP4+MP4 切片 mp4-mp4-byterange：HLS/DASH+MP4+MP4 byte range ts-packed-audio-byterange：HLS+TS+Packed Audio byte range mp4-packed-audio-byterange：HLS+MP4+Packed Audio byte range 默认值：ts-segment 注：自适应码流的分片格式以此字段为准。DASH格式下SegmentType只能为mp4-byterange或mp4-mp4-byterange。 */
   SegmentType?: string;
 }
 
@@ -8927,7 +8929,7 @@ declare interface DescribeUsageDataRequest {
   StartTime: string;
   /** 结束日期，需大于等于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
   EndTime: string;
-  /** 查询媒体处理任务类型，默认查询转码。Transcode：转码Enhance：增强AIAnalysis：智能分析AIRecognition：智能识别AIReview：内容审核Snapshot：截图AnimatedGraphics：转动图AiQualityControl：质检Evaluation：视频评测ImageProcess: 图片处理AddBlindWatermark: 添加基础版权数字水印AddNagraWatermark: 添加NAGRA数字水印ExtractBlindWatermark: 提取基础版权数字水印 */
+  /** 查询媒体处理任务类型，默认查询转码。Transcode：转码Enhance：增强AIAnalysis：智能分析AIRecognition：智能识别AIReview：内容审核Snapshot：截图AnimatedGraphics：转动图AiQualityControl：质检Evaluation：视频评测ImageProcess: 图片处理AddBlindWatermark: 添加基础版权数字水印AddNagraWatermark: 添加NAGRA数字水印ExtractBlindWatermark: 提取基础版权数字水印AIGC: AIGC */
   Types?: string[];
   /** 媒体处理园区，默认返回 ap-guangzhou 园区。ap-guangzhou：广州ap-hongkong：中国香港ap-taipei：中国台北ap-singapore：新加坡ap-mumbai：印度ap-jakarta：雅加达ap-seoul：首尔ap-bangkok：泰国ap-tokyo：日本na-siliconvalley：美国硅谷na-ashburn：弗吉尼亚na-toronto：多伦多sa-saopaulo：圣保罗eu-frankfurt：法兰克福eu-moscow：俄罗斯aws：AWS */
   ProcessRegions?: string[];
@@ -9227,7 +9229,7 @@ declare interface ModifyAdaptiveDynamicStreamingTemplateRequest {
   Comment?: string;
   /** 是否为纯音频，0表示视频模板，1表示纯音频模板当值为1：1. StreamInfos.N.RemoveVideo=12. StreamInfos.N.RemoveAudio=03. StreamInfos.N.Video.Codec=copy当值为0：1. StreamInfos.N.Video.Codec不能为copy2. StreamInfos.N.Video.Fps不能为null注意：此值只是区分模板类型，任务使用RemoveAudio和RemoveVideo的值 */
   PureAudio?: number;
-  /** 分片类型，可选值： ts-segment：HLS+TS 切片 ts-byterange：HLS+TS byte range mp4-segment：HLS+MP4 切片 mp4-byterange：HLS/DASH+MP4 byte range ts-packed-audio：TS+Packed Audio mp4-packed-audio：MP4+Packed Audio 默认值：ts-segment 注：自适应码流的hls分片格式已此字段为准。DASH格式下SegmentType只能为mp4-byterange。 */
+  /** 分片类型，可选值： ts-segment：HLS+TS 切片 ts-byterange：HLS+TS byte range mp4-segment：HLS+MP4 切片 mp4-byterange：HLS/DASH+MP4 byte range ts-packed-audio：HLS+TS+Packed Audio 切片 mp4-packed-audio：HLS+MP4+Packed Audio 切片 ts-ts-segment：HLS+TS+TS 切片 ts-ts-byterange：HLS+TS+TS byte range mp4-mp4-segment：HLS+MP4+MP4 切片 mp4-mp4-byterange：HLS/DASH+MP4+MP4 byte range ts-packed-audio-byterange：HLS+TS+Packed Audio byte range mp4-packed-audio-byterange：HLS+MP4+Packed Audio byte range 默认值：ts-segment 注：自适应码流的分片格式以此字段为准。DASH格式下SegmentType只能为mp4-byterange或mp4-mp4-byterange。 */
   SegmentType?: string;
 }
 
@@ -10133,7 +10135,7 @@ declare interface Mps {
   DescribeAsrHotwords(data?: DescribeAsrHotwordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAsrHotwordsResponse>;
   /** 查询智能字幕热词库列表 {@link DescribeAsrHotwordsListRequest} {@link DescribeAsrHotwordsListResponse} */
   DescribeAsrHotwordsList(data?: DescribeAsrHotwordsListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAsrHotwordsListResponse>;
-  /** 批量任务详情查询 {@link DescribeBatchTaskDetailRequest} {@link DescribeBatchTaskDetailResponse} */
+  /** 查询多输入任务详情 {@link DescribeBatchTaskDetailRequest} {@link DescribeBatchTaskDetailResponse} */
   DescribeBatchTaskDetail(data: DescribeBatchTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTaskDetailResponse>;
   /** 获取数字水印模板列表 {@link DescribeBlindWatermarkTemplatesRequest} {@link DescribeBlindWatermarkTemplatesResponse} */
   DescribeBlindWatermarkTemplates(data?: DescribeBlindWatermarkTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlindWatermarkTemplatesResponse>;
