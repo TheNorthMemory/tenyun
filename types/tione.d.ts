@@ -1994,6 +1994,14 @@ declare interface VolumeMount {
   MountPath?: string | null;
 }
 
+/** 服务的权重 */
+declare interface WeightEntry {
+  /** 服务id */
+  ServiceId: string;
+  /** 流量权重值，同 ServiceGroup 下 总和应为 100 */
+  Weight: number;
+}
+
 /** 工作负载的状态 */
 declare interface WorkloadStatus {
   /** 当前实例数 */
@@ -3204,6 +3212,20 @@ declare interface ModifyNotebookTagsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyServiceGroupWeightsRequest {
+  /** 服务组id */
+  ServiceGroupId: string;
+  /** 权重设置 */
+  Weights: WeightEntry[];
+}
+
+declare interface ModifyServiceGroupWeightsResponse {
+  /** 更新权重后的服务组信息 */
+  ServiceGroup?: ServiceGroup | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface PushTrainingMetricsRequest {
   /** 指标数据 */
   Data?: MetricData[];
@@ -4095,6 +4117,8 @@ declare interface Tione {
   ModifyNotebook(data: ModifyNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotebookResponse>;
   /** 修改Notebook标签 {@link ModifyNotebookTagsRequest} {@link ModifyNotebookTagsResponse} */
   ModifyNotebookTags(data: ModifyNotebookTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotebookTagsResponse>;
+  /** 更新推理服务组流量分配 {@link ModifyServiceGroupWeightsRequest} {@link ModifyServiceGroupWeightsResponse} */
+  ModifyServiceGroupWeights(data: ModifyServiceGroupWeightsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServiceGroupWeightsResponse>;
   /** 上报训练自定义指标 {@link PushTrainingMetricsRequest} {@link PushTrainingMetricsResponse} */
   PushTrainingMetrics(data?: PushTrainingMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<PushTrainingMetricsResponse>;
   /** 启动Notebook {@link StartNotebookRequest} {@link StartNotebookResponse} */

@@ -3091,6 +3091,30 @@ declare namespace V20180717 {
     EndTimeOffset?: number;
   }
 
+  /** 云点播中存储的文件。 */
+  interface FileContent {
+    /** 对象键。 */
+    Key?: string;
+    /** 对象最后修改时间，为 ISO8601格式，例如2019-05-24T10:56:40Z。 */
+    LastModified?: string;
+    /** 对象的实体标签（Entity Tag），是对象被创建时标识对象内容的信息标签，可用于检查对象的内容是否发生变化。 */
+    ETag?: string;
+    /** 对象大小，单位为Byte。 */
+    Size?: number;
+    /** 枚举值请参见[存储类型](https://cloud.tencent.com/document/product/436/33417)文档，例如 STANDARD_IA，ARCHIVE。 */
+    StorageClass?: string;
+    /** 此文件对应的媒体文件的唯一标识。 */
+    FileId?: string;
+    /** 文件分类： Video: 视频文件 Audio: 音频文件 Image: 图片文件 Other: 其他文件 */
+    Category?: string;
+    /** 可选值有： - OriginalFiles：原文件- TranscodeFiles：转码文件- AdaptiveDynamicStreamingFiles：转自适应码流文件- SubtitleFiles：字幕文件- SampleSnapshotFiles：采样截图文件- ImageSpriteFiles：雪碧图截图文件- SnapshotByTimeOffsetFiles：时间点截图文件 */
+    FileType?: string;
+    /** 视频模板号，模板定义参见转码模板。 */
+    Definition?: number;
+    /** 字幕ID。仅当FileType=SubtitleFiles时有值。 */
+    SubtitleID?: string;
+  }
+
   /** 文件删除结果信息 */
   interface FileDeleteResultItem {
     /** 删除的文件 ID 。 */
@@ -3713,6 +3737,8 @@ declare namespace V20180717 {
     SourceInfo?: MediaSourceData | null;
     /** 媒体文件存储地区，如 ap-chongqing，参见[地域列表](https://cloud.tencent.com/document/product/266/9760)。 */
     StorageRegion?: string;
+    /** 媒体的存储路径。 */
+    StoragePath?: string;
     /** 媒体文件的标签信息。 */
     TagSet?: string[];
     /** 直播录制文件的唯一标识。 */
@@ -6181,6 +6207,12 @@ declare namespace V20180717 {
     Status?: string;
     /** 子应用名称（该字段已不推荐使用，建议使用新的子应用名称字段 SubAppIdName）。 */
     Name?: string;
+    /** 此应用的模式，可选值为：- fileid：仅FileID模式- - fileid+path：FileID & Path模式留空时默认选择仅FileID模式 */
+    Mode?: string;
+    /** 子应用已启用的存储地域。 */
+    StorageRegions?: string[];
+    /** 子应用绑定的tag。 */
+    Tags?: ResourceTag[];
   }
 
   /** 字幕格式列表操作。 */
@@ -6966,6 +6998,8 @@ declare namespace V20180717 {
     SessionContext?: string;
     /** 保留字段，特殊用途时使用。 */
     ExtInfo?: string;
+    /** 媒体存储路径，以/开头。 */
+    MediaStoragePath?: string;
   }
 
   interface ApplyUploadResponse {
@@ -7816,6 +7850,12 @@ declare namespace V20180717 {
     Description?: string;
     /** 应用类型， 取值有：AllInOne：一体化；Professional：专业版。默认值为 AllInOne。 */
     Type?: string;
+    /** 此应用的模式，可选值为：- fileid：仅FileID模式- fileid+path：FileID & Path模式留空时默认选择仅FileID模式 */
+    Mode?: string;
+    /** 存储地域 */
+    StorageRegion?: string;
+    /** 此应用需要绑定的tag */
+    Tags?: ResourceTag[];
   }
 
   interface CreateSubAppIdResponse {
@@ -9528,10 +9568,12 @@ declare namespace V20180717 {
   }
 
   interface EnhanceMediaQualityRequest {
-    /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。 */
-    FileId: string;
     /** 音画质重生模板 ID。针对典型的使用场景，云点播提供了多个[预置模板](https://cloud.tencent.com/document/product/266/102586)。 */
     Definition: number;
+    /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。 */
+    FileId?: string;
+    /** 媒体的存储路径。FileId和MediaStoragePath必须提供其中一个。 */
+    MediaStoragePath?: string;
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 音画质重生后的媒体文件配置。 */
@@ -9711,6 +9753,34 @@ declare namespace V20180717 {
   interface InspectMediaQualityResponse {
     /** 音画质检测任务 ID。 */
     TaskId?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface ListFilesRequest {
+    /** 点播[应用](/document/product/266/14574) ID。 */
+    SubAppId: number;
+    /** 对象键匹配前缀，限定响应中只包含指定前缀的对象键。 */
+    Prefix?: string;
+    /** 一个字符的分隔符，用于对对象键进行分组。所有对象键中从 prefix 或从头（如未指定 prefix）到首个 delimiter 之间相同的部分将作为 CommonPrefixes 下的一个 Prefix 节点。被分组的对象键不再出现在后续对象列表中。 */
+    Delimiter?: string;
+    /** ys 单次返回最大的条目数量，默认值为100，最小为1，最大为100。 */
+    MaxKeys?: number;
+    /** 起始对象键标记 */
+    Marker?: string;
+    /** 文件类型。匹配集合中的任意元素： Video: 视频文件 Audio: 音频文件 Image: 图片文件 */
+    Categories?: string[];
+  }
+
+  interface ListFilesResponse {
+    /** 响应条目是否被截断。 */
+    IsTruncated?: boolean;
+    /** 仅当响应条目有截断（IsTruncated 为 true）才会返回该节点，该节点的值为当前响应条目中的最后一个对象键，当需要继续请求后续条目时，将该节点的值作为下一次请求的 marker 参数传入。 */
+    NextMarker?: string;
+    /** 从 prefix 或从头（如未指定 prefix）到首个 delimiter 之间相同的部分，定义为 Common Prefix。仅当请求中指定了 delimiter 参数才有可能返回该节点。 */
+    CommonPrefixes?: string[];
+    /** 对象条目。 */
+    Contents?: FileContent[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -10578,10 +10648,12 @@ declare namespace V20180717 {
   }
 
   interface ProcessMediaByProcedureRequest {
-    /** 媒体文件 ID。 */
-    FileId: string;
     /** [任务流](https://cloud.tencent.com/document/product/266/33475)名称。 */
     ProcedureName: string;
+    /** 媒体文件 ID。FileId和MediaStoragePath必须提供其中一个。 */
+    FileId?: string;
+    /** 媒体的存储路径。FileId和MediaStoragePath必须提供其中一个。 */
+    MediaStoragePath?: string;
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 任务流的优先级，数值越大优先级越高，取值范围是-10到10，不填代表0。 */
@@ -10636,8 +10708,10 @@ declare namespace V20180717 {
   }
 
   interface ProcessMediaRequest {
-    /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。 */
-    FileId: string;
+    /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。FileId和MediaStoragePath必须提供其中一个。 */
+    FileId?: string;
+    /** 媒体的存储路径。FileId和MediaStoragePath必须提供其中一个。 */
+    MediaStoragePath?: string;
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 视频处理类型任务参数。 */
@@ -10710,6 +10784,8 @@ declare namespace V20180717 {
     ExtInfo?: string;
     /** 来源上下文，用于透传用户请求信息，[上传完成回调](/document/product/266/7830) 将返回该字段值，最长 250 个字符。 */
     SourceContext?: string;
+    /** 媒体存储路径，以/开头。 */
+    MediaStoragePath?: string;
   }
 
   interface PullUploadResponse {
@@ -10916,10 +10992,12 @@ declare namespace V20180717 {
   }
 
   interface ReviewImageRequest {
-    /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符。本接口要求媒体文件必须是图片格式。 */
-    FileId: string;
     /** 图片审核模板 ID，取值范围：10：预置模板，支持检测的违规标签包括色情（Porn）、暴力（Terror）和不适宜的信息（Polity）。 */
     Definition: number;
+    /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符。本接口要求媒体文件必须是图片格式。FileId和MediaStoragePath必须提供其中一个。 */
+    FileId?: string;
+    /** 媒体的存储路径。FileId和MediaStoragePath必须提供其中一个。 */
+    MediaStoragePath?: string;
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
   }
@@ -11455,6 +11533,8 @@ declare interface Vod {
   ImportMediaKnowledge(data: V20180717.ImportMediaKnowledgeRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ImportMediaKnowledgeResponse>;
   /** 音画质检测 {@link V20180717.InspectMediaQualityRequest} {@link V20180717.InspectMediaQualityResponse} */
   InspectMediaQuality(data: V20180717.InspectMediaQualityRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.InspectMediaQualityResponse>;
+  /** 列出子应用内的文件 {@link V20180717.ListFilesRequest} {@link V20180717.ListFilesResponse} */
+  ListFiles(data: V20180717.ListFilesRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ListFilesResponse>;
   /** 直播即时剪辑 {@link V20180717.LiveRealTimeClipRequest} {@link V20180717.LiveRealTimeClipResponse} */
   LiveRealTimeClip(data: V20180717.LiveRealTimeClipRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.LiveRealTimeClipResponse>;
   /** 任务管理 {@link V20180717.ManageTaskRequest} {@link V20180717.ManageTaskResponse} */

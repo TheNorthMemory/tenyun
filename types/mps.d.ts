@@ -242,6 +242,8 @@ declare interface AddOnParameter {
   ImageSet?: AddOnImageInput[];
   /** 图片处理输出配置。 */
   OutputConfig?: ImageProcessOutputConfig;
+  /** 图片处理附加 prompt，只针对某些场景可用。 */
+  ExtPrompt?: ImageProcessPrompt[];
 }
 
 /** 外挂字幕。 */
@@ -482,6 +484,8 @@ declare interface AiAnalysisTaskDubbingOutput {
   VideoPath?: string;
   /** 标记文件路径 */
   SpeakerPath?: string;
+  /** 音色id */
+  VoiceId?: string;
   /** 译制视频存储位置。 */
   OutputStorage?: TaskOutputStorage;
 }
@@ -3490,6 +3494,16 @@ declare interface ImageProcessOutputConfig {
   ImageWidth?: number;
   /** 图片输出分辨率，取值：1K/2K/4K。 */
   ImageSize?: string;
+  /** 图片输出编码格式，可取值：PNG、JPG、WEBP、HEIF、AVIF。 */
+  Format?: string;
+  /** 图片质量，对于某些输出格式可用，只有Format 有效的情况下生效，取值范围 0-100。 */
+  Quality?: number;
+}
+
+/** 图片处理相关提示词。 */
+declare interface ImageProcessPrompt {
+  /** 图片处理相关的prompt。 */
+  Prompt?: string;
 }
 
 /** 图片处理结果信息 */
@@ -7173,6 +7187,8 @@ declare interface CreateAigcVideoTaskRequest {
   ModelName?: string;
   /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。1. Hailuo， 可选[02、2.3]。2. Kling，可选[2.0、2.1、2.5、O1、2.6]。3. Vidu,可选[q2、q2-pro、q2-turbo]。4. GV, 可选[3.1]。5. OS，可选[2.0]。 */
   ModelVersion?: string;
+  /** 指定场景生视频。注意：仅部分模型支持指定场景。1. Kling支持动作控制，motion_control。2. Mingmou支持横转竖，land2port。3. Vidu支持特效模板，template_effect。 */
+  SceneType?: string;
   /** 生成视频的描述。(注：最大支持2000字符)。当未传入图片时，此参数必填。 */
   Prompt?: string;
   /** 用于描述您想要阻止模型生成的内容。注意：部分模型支持。例如：顶部照明、明亮的色彩人物、动物多辆汽车、风。 */
@@ -9875,8 +9891,10 @@ declare interface RecognizeAudioRequest {
   AudioData: string;
   /** 识别目标语言，为空默认 auto 自动识别语种。注：如果自动识别语种识别效果不佳，可以指定语种提高准确率当前支持语言：auto: 自动识别zh: 简体中文en: 英语ja: 日语ko: 韩语vi: 越南语ms: 马来语id: 印度尼西亚语fil: 菲律宾语th: 泰语pt: 葡萄牙语tr: 土耳其语ar: 阿拉伯语es: 西班牙语hi: 印地语fr: 法语de: 德语it: 意大利语yue: 粤语ru: 俄语af: 南非荷兰语sq: 阿尔巴尼亚语am: 阿姆哈拉语hy: 亚美尼亚语az: 阿塞拜疆语eu: 巴斯克语bn: 孟加拉语bs: 波斯尼亚语bg: 保加利亚语my: 缅甸语ca: 加泰罗尼亚语hr: 克罗地亚语cs: 捷克语da: 丹麦语nl: 荷兰语et: 爱沙尼亚语fi: 芬兰语gl: 加利西亚语ka: 格鲁吉亚语el: 希腊语gu: 古吉拉特语iw: 希伯来语hu: 匈牙利语is: 冰岛语jv: 爪哇语kn: 卡纳达语kk: 哈萨克语km: 高棉语rw: 卢旺达语lo: 老挝语lv: 拉脱维亚语lt: 立陶宛语mk: 马其顿语ml: 马拉雅拉姆语mr: 马拉地语mn: 蒙古语ne: 尼泊尔语no: 博克马尔挪威语fa: 波斯语pl: 波兰语ro: 罗马尼亚语sr: 塞尔维亚语si: 僧伽罗语sk: 斯洛伐克语sl: 斯洛文尼亚语st: 南索托语su: 巽他语sw: 斯瓦希里语sv: 瑞典语ta: 泰米尔语te: 泰卢固语ts: 聪加语uk: 乌克兰语ur: 乌尔都语uz: 乌兹别克语ve: 文达语xh: 科萨语zu: 祖鲁语 */
   Source?: string;
-  /** 音频数据格式，默认为 pcm支持的格式：pcm (16k 采样率的单声道 16 位采样 pcm 数据) */
+  /** 音频数据格式，默认为 pcm支持的格式：pcm (16000 采样率的单声道 16 位采样 pcm 数据)ogg-opus (16000 / 24000 / 48000 采样率的单声道 opus 编码的 ogg 数据) */
   AudioFormat?: string;
+  /** 音频的采样率支持的采样率：pcm 16000ogg-opus 16000 / 24000 / 48000 */
+  SampleRate?: number;
   /** 扩展参数，默认不填，特殊需求使用 */
   UserExtPara?: string;
 }

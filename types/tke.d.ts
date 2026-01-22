@@ -3973,6 +3973,8 @@ declare namespace V20180525 {
     SubnetId: string;
     /** 腾讯云标签 */
     Tags?: Tag[];
+    /** 按量配额 */
+    Quota?: SuperNodeResource;
   }
 
   /** 数据卷挂载路径信息 */

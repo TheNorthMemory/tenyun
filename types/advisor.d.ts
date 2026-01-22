@@ -94,7 +94,7 @@ declare interface DescribeTaskStrategyRisksResponse {
   RequestId?: string;
 }
 
-/** {@link Advisor 云顾问} */
+/** {@link Advisor 智能顾问} */
 declare interface Advisor {
   (): Versions;
   /** 查询评估项信息 {@link DescribeStrategiesRequest} {@link DescribeStrategiesResponse} */

@@ -8951,9 +8951,9 @@ declare interface ModifyLocalGatewayResponse {
 declare interface ModifyNatGatewayAttributeRequest {
   /** NAT网关的ID，形如：`nat-df45454`。 */
   NatGatewayId: string;
-  /** NAT网关的名称，形如：`test_nat`。 */
+  /** NAT网关的名称，形如：`test_nat`，边界值：[1,60] 字符。 */
   NatGatewayName?: string;
-  /** NAT网关最大外网出带宽(单位:Mbps)。 */
+  /** NAT网关最大外网出带宽(单位:Mbps)，边界值：[0,50000]。 */
   InternetMaxBandwidthOut?: number;
   /** 是否修改NAT网关绑定的安全组。 */
   ModifySecurityGroup?: boolean;
@@ -8961,6 +8961,8 @@ declare interface ModifyNatGatewayAttributeRequest {
   SecurityGroupIds?: string[];
   /** NAT实例是否开启删除保护 */
   DeletionProtectionEnabled?: boolean;
+  /** 同一个内网地址通过NAT网关访问同一个目的IP时，是否使用固定的弹性公网IP。默认为true，使用固定IP；false代表使用随机IP。当前适用于标准型NAT网关。 */
+  PublicAddressAffinity?: boolean;
 }
 
 declare interface ModifyNatGatewayAttributeResponse {
@@ -10174,6 +10176,22 @@ declare interface UpdateTrafficMirrorDirectionResponse {
   RequestId?: string;
 }
 
+declare interface UpgradeNatGatewayProductVersionRequest {
+  /** VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。 */
+  VpcId: string;
+  /** NAT网关的ID，形如：`nat-ig8xpno8`。 */
+  NatGatewayId: string;
+  /** 是否热迁移。1表示冷迁移，0表示热迁移，默认值是0。 */
+  Force: number;
+  /** 是否仅校验迁移可能性。true表示仅校验能否迁移，不做实际迁移。false表示正常迁移。默认值为false。仅校验模式，不报错表示校验迁移成功。 */
+  CheckOnlyMode?: boolean;
+}
+
+declare interface UpgradeNatGatewayProductVersionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface WithdrawNotifyRoutesRequest {
   /** 路由表唯一ID。 */
   RouteTableId: string;
@@ -11053,6 +11071,8 @@ declare interface Vpc {
   UpdateTrafficMirrorAllFilter(data: UpdateTrafficMirrorAllFilterRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTrafficMirrorAllFilterResponse>;
   /** 更新流量镜像采集方向 {@link UpdateTrafficMirrorDirectionRequest} {@link UpdateTrafficMirrorDirectionResponse} */
   UpdateTrafficMirrorDirection(data: UpdateTrafficMirrorDirectionRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTrafficMirrorDirectionResponse>;
+  /** 升级NAT实例产品版本 {@link UpgradeNatGatewayProductVersionRequest} {@link UpgradeNatGatewayProductVersionResponse} */
+  UpgradeNatGatewayProductVersion(data: UpgradeNatGatewayProductVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeNatGatewayProductVersionResponse>;
   /** 从云联网撤销路由 {@link WithdrawNotifyRoutesRequest} {@link WithdrawNotifyRoutesResponse} */
   WithdrawNotifyRoutes(data: WithdrawNotifyRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<WithdrawNotifyRoutesResponse>;
 }

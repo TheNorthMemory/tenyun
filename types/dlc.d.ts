@@ -1682,7 +1682,7 @@ declare interface SmartOptimizerLifecyclePolicy {
   LifecycleEnable?: string;
   /** 过期时间 */
   Expiration?: number;
-  /** 是否删表 */
+  /** 是否删表，该字段废弃已使用，用TableExpiration策略替代 */
   DropTable?: boolean;
   /** 过期字段 */
   ExpiredField?: string;
@@ -1694,11 +1694,11 @@ declare interface SmartOptimizerLifecyclePolicy {
 declare interface SmartOptimizerPolicy {
   /** 是否继承 */
   Inherit?: string;
-  /** ResourceInfo */
+  /** 数据治理资源 */
   Resources?: ResourceInfo[] | null;
-  /** SmartOptimizerWrittenPolicy */
+  /** 数据重写策略 */
   Written?: SmartOptimizerWrittenPolicy | null;
-  /** SmartOptimizerLifecyclePolicy */
+  /** 数据过期策略 */
   Lifecycle?: SmartOptimizerLifecyclePolicy | null;
   /** SmartOptimizerIndexPolicy */
   Index?: SmartOptimizerIndexPolicy | null;

@@ -94,6 +94,8 @@ declare interface AndroidInstance {
   CreateTime?: string;
   /** 机箱 ID */
   HostServerSerialNumber?: string;
+  /** 服务状态。IDLE：未连接ESTABLISHED：连接中 */
+  ServiceStatus?: string;
 }
 
 /** 安卓实例应用黑名单 */

@@ -3251,6 +3251,8 @@ declare interface CreateCloudInstanceRequest {
   DefaultMetaVersion?: string;
   /** 是否开通审计 */
   NeedCdbAudit?: number;
+  /** 安全组来源IP */
+  SgIP?: string;
 }
 
 declare interface CreateCloudInstanceResponse {

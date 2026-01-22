@@ -300,6 +300,8 @@ declare interface LifecycleDataTaskInfo {
   Type?: string;
   /** 数据流动Id */
   DataFlowId?: string;
+  /** 当CFSTurbo内的文件和外置存储存在同名情况时，是否覆盖。ture：覆盖false：不覆盖（同时也不会释放热存数据）为空时，默认为false */
+  IsOverwrite?: boolean;
 }
 
 /** 生命周期管理策略信息 */
@@ -330,6 +332,14 @@ declare interface LifecycleRule {
   FileMaxSize?: string | null;
   /** 数据转储文件最小规格。其数值需使用“数字+单位”格式进行表示，单位支持K（KiB）、M（MiB）、G（GiB）。 */
   FileMinSize?: string | null;
+  /** 策略类型 */
+  PolicyType?: string;
+  /** 阈值范围[10-90] */
+  ExpireThreshold?: number;
+  /** 阈值范围[10-90] */
+  TargetThreshold?: number;
+  /** 当CFSTurbo内的文件和外置存储存在同名情况时，是否覆盖。ture：覆盖false：不覆盖（同时也不会释放热存数据）为空时，默认为false */
+  IsOverwrite?: boolean;
 }
 
 /** CFS数据迁移任务信息 */
@@ -458,6 +468,8 @@ declare interface PathInfo {
   FileSystemId: string;
   /** 目录绝对路径 */
   Path: string;
+  /** 数据流动Id */
+  DataFlowId?: string;
 }
 
 /** 快照信息 */
@@ -797,6 +809,8 @@ declare interface CreateLifecycleDataTaskRequest {
   TaskName: string;
   /** 数据流动 ID ，该接口可以通过 DescribeDataFlow 查询 */
   DataFlowId?: string;
+  /** 当CFSTurbo内的文件和外置存储存在同名情况时，是否覆盖。 ture：覆盖 false：不覆盖（同时也不会释放热存数据） 为空时，默认为false */
+  IsOverwrite?: boolean;
 }
 
 declare interface CreateLifecycleDataTaskResponse {

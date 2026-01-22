@@ -2085,12 +2085,16 @@ declare interface DescribeParamTemplateInfoResponse {
 }
 
 declare interface DescribeParamTemplatesRequest {
-  /** 产品类型数组。- 2：Redis 2.8 内存版（标准架构）。- 3：CKV 3.2 内存版（标准架构）。- 4：CKV 3.2 内存版（集群架构）。- 6：Redis 4.0 内存版（标准架构）。- 7：Redis 4.0 内存版（集群架构）。- 8：Redis 5.0 内存版（标准架构）。- 9：Redis 5.0 内存版（集群架构）。- 15：Redis 6.2 内存版（标准架构）。- 16：Redis 6.2 内存版（集群架构）。- 17：Redis 7.0 内存版（标准架构）。- 18：Redis 7.0 内存版（集群架构）。 */
+  /** 指定查询的产品版本与架构。6：Redis 4.0 标准架构。7：Redis 4.0 集群架构。8：Redis 5.0 标准架构。9：Redis 5.0 集群架构。15：Redis 6.2 标准架构。16：Redis 6.2 集群架构。17：Redis 7.0 标准架构。18：Redis 7.0 集群架构。19：ValKey 8.0 标准架构。20：ValKey 8.0 集群架构。 */
   ProductTypes?: number[];
-  /** 模板名称数组。数组最大长度限制为50 */
+  /** 指定查询的参数模板名称。数据类型：字符串数组，最大长度限制为50。获取方式：请通过 Redis 控制台的参数模版 页面复制自定义模板或系统默认模板的模板名称。 */
   TemplateNames?: string[];
-  /** 模板ID数组。数组最大长度限制为50 */
+  /** 指定查询的参数模板 ID。数据类型：字符串数组，最大长度限制为50。获取方式：请通过 Redis 控制台的参数模版 页面复制自定义模板或系统默认模板的模板 ID。 */
   TemplateIds?: string[];
+  /** 指定查询结果的分页大小，即每页返回的记录数量。取值范围：0～200。默认值：200。 */
+  Limit?: number;
+  /** 分页偏移量，用于指定查询结果的起始位置。取值：必须为 Limit 的整数倍，默认值为 0。计算公式：offset=limit*(页码-1)。 */
+  Offset?: number;
 }
 
 declare interface DescribeParamTemplatesResponse {
@@ -3175,7 +3179,7 @@ declare interface UpgradeSmallVersionResponse {
 }
 
 declare interface UpgradeVersionToMultiAvailabilityZonesRequest {
-  /** 实例ID，请登录 [Redis 控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
+  /** 实例ID，请登录 Redis 控制台在实例列表复制实例 ID。 */
   InstanceId: string;
   /** 升级多可用区之后是否支持就近访问功能。- true：支持就近访问功能。升级过程，需同时升级 Proxy 版本和 Redis 内核小版本，涉及数据搬迁，可能会长达数小时。- false：无需支持就近访问功能。升级多可用区仅涉及管理元数据迁移，对服务没有影响，升级过程通常在3分钟内完成。默认为 false。 */
   UpgradeProxyAndRedisServer?: boolean;
@@ -3409,7 +3413,7 @@ declare interface Redis {
   UpgradeProxyVersion(data: UpgradeProxyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeProxyVersionResponse>;
   /** 实例小版本升级接口 {@link UpgradeSmallVersionRequest} {@link UpgradeSmallVersionResponse} */
   UpgradeSmallVersion(data: UpgradeSmallVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeSmallVersionResponse>;
-  /** 升级实例支持多AZ {@link UpgradeVersionToMultiAvailabilityZonesRequest} {@link UpgradeVersionToMultiAvailabilityZonesResponse} */
+  /** 升级实例支持多AZ（已废弃） {@link UpgradeVersionToMultiAvailabilityZonesRequest} {@link UpgradeVersionToMultiAvailabilityZonesResponse} */
   UpgradeVersionToMultiAvailabilityZones(data: UpgradeVersionToMultiAvailabilityZonesRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeVersionToMultiAvailabilityZonesResponse>;
 }
 

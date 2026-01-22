@@ -284,6 +284,26 @@ declare interface CcInfo {
   NotifyType?: string;
 }
 
+/** 合同审查清单 */
+declare interface Checklist {
+  /** 审查清单id */
+  Id?: string;
+  /** 审查清单名称 */
+  Name?: string;
+  /** 审查点数量 */
+  Count?: number;
+  /** 启用状态 */
+  Enabled?: boolean;
+  /** 修改人 */
+  Updater?: string;
+  /** 修改时间 */
+  ModifiedOn?: number;
+  /** 是否官方清单 */
+  Official?: boolean;
+  /** 配置状态，[0(未配置), 1(已配置)] */
+  ConfigStatus?: number;
+}
+
 /** 合同对比差异结果详情。 */
 declare interface ComparisonDetail {
   /** 合同对比差异点唯一ID。 */
@@ -3457,9 +3477,9 @@ declare interface CreatePrepareFlowRequest {
   Components?: Component;
   /** 发起合同个性化参数用于满足创建及页面操作过程中的个性化要求具体定制化内容详见数据接口说明 */
   FlowOption?: CreateFlowOption;
-  /** 发起方企业的签署人进行签署操作前，是否需要企业内部走审批流程，取值如下： **false**：（默认）不需要审批，直接签署。 **true**：需要走审批流程。当到对应参与人签署时，会阻塞其签署操作，等待企业内部审批完成。企业可以通过CreateFlowSignReview审批接口通知腾讯电子签平台企业内部审批结果 如果企业通知腾讯电子签平台审核通过，签署方可继续签署动作。 如果企业通知腾讯电子签平台审核未通过，平台将继续阻塞签署方的签署动作，直到企业通知平台审核通过。注：`此功能可用于与企业内部的审批流程进行关联，支持手动、静默签署合同` */
+  /** 发起方企业签署员工，在进行签署操作前，是否需要先通过企业内部审批流程 （签署审核）1. **false（默认）**： 无需审批，发起方企业签署员工可直接进行签署操作。2. **true**： 需要先走企业内部审批流程。 当流程进展到发起方企业签署员工时，其签署操作会被阻塞，等待企业内部审批结果。企业应通过 提交签署流程审批结果审批接口，将内部审批结果通知腾讯电子签平台：1. 若通知为“审核通过”，发起方企业签署员工可继续完成签署操作。2. 若通知为“审核未通过”，平台将继续阻塞该签署方的签署操作，直到企业再次通知平台审核通过为止。说明： 此能力可用于与企业内部审批流程打通，适用于手动签署和自动签署两种模式。 */
   NeedSignReview?: boolean;
-  /** 发起方企业的签署人进行发起操作是否需要企业内部审批。使用此功能需要发起方企业有参与签署。若设置为true，发起审核结果需通过接口 CreateFlowSignReview 通知电子签，审核通过后，发起方企业签署人方可进行发起操作，否则会阻塞其发起操作。 */
+  /** 发起方在创建合同流程前，是否必须先通过企业内部审批流程 （发起审核）当设置为 `true` 时： 1. 您需要在企业内部完成审批，并通过接口 提交签署流程审批结果 将审批结果回传给腾讯电子签。 2. 只有当审核状态为“通过”时，合同流程正常发起。 3. 若未通过或未回传审核结果，发起操作将被阻塞，阻止合同流程。当设置为 `false` （默认值）时： 发起方无需经过企业内部审批，可直接发起合同流程。 */
   NeedCreateReview?: boolean;
   /** 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 20480长度。在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的回调通知模块。 */
   UserData?: string;
@@ -4236,6 +4256,28 @@ declare interface DescribeContractReviewWebUrlResponse {
   WebUrl?: string;
   /** 合同审查任务状态。任务状态为`5`时没有WebUrl链接。状态如下： **1** - 合同审查任务创建成功 **2** - 合同审查任务排队中 **3** - 合同审查任务执行中 **4** - 合同审查任务执行成功 **5** - 合同审查任务执行失败 */
   Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeEnterpriseContractReviewChecklistsRequest {
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+  /** 过滤条件 */
+  Filters?: Filter;
+  /** 指定每页返回的数据条数，和Offset参数配合使用。 */
+  Limit?: number;
+  /** 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。 */
+  Offset?: number;
+}
+
+declare interface DescribeEnterpriseContractReviewChecklistsResponse {
+  /** 查询的总条数 */
+  Total?: number;
+  /** 清单列表 */
+  Checklists?: Checklist[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5381,6 +5423,8 @@ declare interface Ess {
   DescribeContractReviewTaskListWebUrl(data: DescribeContractReviewTaskListWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractReviewTaskListWebUrlResponse>;
   /** 获取合同审查结果web页面 {@link DescribeContractReviewWebUrlRequest} {@link DescribeContractReviewWebUrlResponse} */
   DescribeContractReviewWebUrl(data: DescribeContractReviewWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractReviewWebUrlResponse>;
+  /** 获取企业全部审查要点清单 {@link DescribeEnterpriseContractReviewChecklistsRequest} {@link DescribeEnterpriseContractReviewChecklistsResponse} */
+  DescribeEnterpriseContractReviewChecklists(data: DescribeEnterpriseContractReviewChecklistsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnterpriseContractReviewChecklistsResponse>;
   /** 查询企业扩展服务授权详情 {@link DescribeExtendedServiceAuthDetailRequest} {@link DescribeExtendedServiceAuthDetailResponse} */
   DescribeExtendedServiceAuthDetail(data: DescribeExtendedServiceAuthDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtendedServiceAuthDetailResponse>;
   /** 查询企业扩展服务授权信息 {@link DescribeExtendedServiceAuthInfosRequest} {@link DescribeExtendedServiceAuthInfosResponse} */

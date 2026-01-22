@@ -741,13 +741,13 @@ declare interface AddNodesRequest {
   VirtualPrivateCloud: VirtualPrivateCloud;
   /** 添加节点数量。 */
   Count: number;
-  /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前支持部分公有镜像和自定义镜像。公共镜像请参考[镜像限制](https://cloud.tencent.com/document/product/1527/64818) */
+  /** 指定有效的镜像ID，格式形如img-xxx。目前支持部分公有镜像和自定义镜像。公共镜像请参考镜像限制 */
   ImageId?: string;
-  /** 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费SPOTPAID：竞价付费默认值：POSTPAID_BY_HOUR。 */
+  /** 节点计费类型。PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费SPOTPAID：竞价付费默认值：POSTPAID_BY_HOUR。 */
   InstanceChargeType?: string;
   /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。 */
   InstanceChargePrepaid?: InstanceChargePrepaid;
-  /** 节点机型。不同实例机型指定了不同的资源规格。具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。 */
+  /** 节点机型。不同实例机型指定了不同的资源规格。具体取值可通过调用接口DescribeInstanceTypeConfigs来获得最新的规格表或参见实例规格描述。 */
   InstanceType?: string;
   /** 节点系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。 */
   SystemDisk?: SystemDisk;
@@ -759,7 +759,7 @@ declare interface AddNodesRequest {
   InstanceName?: string;
   /** 集群登录设置。 */
   LoginSettings?: LoginSettings;
-  /** 集群中实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。 */
+  /** 集群中实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。 */
   SecurityGroupIds?: string[];
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
@@ -771,7 +771,7 @@ declare interface AddNodesRequest {
   DryRun?: boolean;
   /** 添加节点类型。默认取值：STATIC。STATIC：静态节点，不会参与弹性伸缩流程。DYNAMIC：弹性节点，会被弹性缩容的节点。管控节点和登录节点不支持此参数。 */
   NodeType?: string;
-  /** 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。 */
+  /** 实例所属项目ID。该参数可以通过调用 DescribeProject 的返回值中的 projectId 字段来获取。不填为默认项目。 */
   ProjectId?: number;
   /** 要新增节点的资源类型。CVM：CVM实例类型资源WORKSPACE：工作空间类型实例资源默认值：CVM。 */
   ResourceType?: string;
@@ -827,15 +827,15 @@ declare interface CreateClusterRequest {
   ComputeNodeCount?: number;
   /** 调度器类型。默认取值：SLURM。SLURM：SLURM调度器。 */
   SchedulerType?: string;
-  /** 创建调度器的版本号，可填写版本号为“latest” 和 各调度器支持的版本号；如果是"latest", 则代表创建的是平台当前支持的该类型调度器最新版本。如果不填写，默认创建的是“latest”版本调度器各调度器支持的集群版本：SLURM：21.08.8、23.11.7 */
+  /** 创建调度器的版本号，可填写版本号为“latest” 和 各调度器支持的版本号；如果是&quot;latest&quot;, 则代表创建的是平台当前支持的该类型调度器最新版本。如果不填写，默认创建的是“latest”版本调度器各调度器支持的集群版本：SLURM：21.08.8、23.11.7 */
   SchedulerVersion?: string;
-  /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前支持部分公有镜像和自定义镜像。公共镜像请参考[镜像限制](https://cloud.tencent.com/document/product/1527/64818) */
+  /** 指定有效的镜像ID，格式形如img-xxx。目前支持部分公有镜像和自定义镜像。公共镜像请参考镜像限制 */
   ImageId?: string;
   /** 私有网络相关信息配置。 */
   VirtualPrivateCloud?: VirtualPrivateCloud;
   /** 集群登录设置。 */
   LoginSettings?: LoginSettings;
-  /** 集群中实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。 */
+  /** 集群中实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。 */
   SecurityGroupIds?: string[];
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
@@ -999,9 +999,9 @@ declare interface DescribeAutoScalingConfigurationResponse {
 declare interface DescribeClusterActivitiesRequest {
   /** 集群ID。通过该参数指定需要查询活动历史记录的集群。 */
   ClusterId: string;
-  /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+  /** 偏移量，默认为0。关于Offset的更进一步介绍请参考 API 简介中的相关小节。 */
   Offset?: number;
-  /** 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+  /** 返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API 简介中的相关小节。 */
   Limit?: number;
 }
 
@@ -1151,11 +1151,11 @@ declare interface DescribeQueuesResponse {
 declare interface DescribeWorkspacesRequest {
   /** 集群ID列表。通过该参数可以指定需要查询信息的集群列表。如果您不指定该参数，则返回Limit数量以内的集群信息。 */
   SpaceIds?: string[];
-  /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+  /** 偏移量，默认为0。关于Offset的更进一步介绍请参考 API 简介中的相关小节。 */
   Offset?: number;
-  /** 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+  /** 返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API 简介中的相关小节。 */
   Limit?: number;
-  /** zone 按照【可用区】进行过滤 类型：String 必选：否 space-id 按照【工作空间实例ID】进行过滤 类型：String 必选：否 cvm-instance-id 按照【CVM实例ID】进行过滤 类型：String 必选：否 space-state 按照【工作空间状态】进行过滤 类型：String 必选：否 space-name 按照【工作空间别名】进行过滤 类型：String 必选：否 space-charge-type 按照【工作空间实例付费模式】进行过滤 类型：String 必选：否 tag-key 按照【标签键】进行过滤 类型：String 必选：否 tag-value 按照【标签值】进行过滤 类型：String 必选：否 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。 */
+  /** zone 按照【可用区】进行过滤 类型：String 必选：否 space-id 按照【工作空间实例ID】进行过滤 类型：String 必选：否 cvm-instance-id 按照【CVM实例ID】进行过滤 类型：String 必选：否 space-state 按照【工作空间状态】进行过滤 类型：String 必选：否 space-name 按照【工作空间别名】进行过滤 类型：String 必选：否 space-charge-type 按照【工作空间实例付费模式】进行过滤 类型：String 必选：否 tag-key 按照【标签键】进行过滤 类型：String 必选：否 tag-value 按照【标签值】进行过滤 类型：String 必选：否 每次请求的Filters的上限为10，Filter.Values的上限为5。 */
   Filters?: Filter[];
 }
 
@@ -1200,6 +1200,22 @@ declare interface ModifyInitNodeScriptsRequest {
 }
 
 declare interface ModifyInitNodeScriptsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyNodeAttributeRequest {
+  /** 节点ID，节点ID通过调用接口 DescribeNodes获取。 */
+  NodeId: string;
+  /** 节点别名 */
+  NodeName?: string;
+  /** 资源的分配状态: - IDLE: 资源空闲 - ISOLATE: 资源隔离 */
+  NodeAllocateState?: string;
+  /** 目标队列名 */
+  QueueName?: string;
+}
+
+declare interface ModifyNodeAttributeResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1581,7 +1597,7 @@ declare namespace V20220401 {
     EnableAutoExpansion?: boolean;
     /** 是否开启自动缩容。 */
     EnableAutoShrink?: boolean;
-    /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜和特定自定义镜像。 */
+    /** 指定有效的镜像ID，格式形如img-xxx。目前仅支持公有镜和特定自定义镜像。 */
     ImageId?: string;
     /** 节点系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。 */
     SystemDisk?: SystemDisk;
@@ -1591,6 +1607,8 @@ declare namespace V20220401 {
     InternetAccessible?: InternetAccessible;
     /** 扩容节点配置信息。 */
     ExpansionNodeConfigs?: ExpansionNodeConfig[];
+    /** 扩容实例模板，可以在cvm侧进行设置 */
+    LaunchTemplateIds?: string[];
   }
 
   /** 扩容队列配置概览。 */
@@ -1676,13 +1694,13 @@ declare namespace V20220401 {
     VirtualPrivateCloud: VirtualPrivateCloud;
     /** 添加节点数量。 */
     Count: number;
-    /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜像和特定自定义镜像。 */
+    /** 指定有效的镜像ID，格式形如img-xxx。目前仅支持公有镜像和特定自定义镜像。 */
     ImageId?: string;
-    /** 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费SPOTPAID：竞价付费默认值：POSTPAID_BY_HOUR。 */
+    /** 节点计费类型。PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费SPOTPAID：竞价付费默认值：POSTPAID_BY_HOUR。 */
     InstanceChargeType?: string;
     /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。 */
     InstanceChargePrepaid?: InstanceChargePrepaid;
-    /** 节点机型。不同实例机型指定了不同的资源规格。具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。 */
+    /** 节点机型。不同实例机型指定了不同的资源规格。具体取值可通过调用接口DescribeInstanceTypeConfigs来获得最新的规格表或参见实例规格描述。 */
     InstanceType?: string;
     /** 节点系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。 */
     SystemDisk?: SystemDisk[];
@@ -1694,7 +1712,7 @@ declare namespace V20220401 {
     InstanceName?: string;
     /** 集群登录设置。 */
     LoginSettings?: LoginSettings;
-    /** 集群中实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。 */
+    /** 集群中实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。 */
     SecurityGroupIds?: string[];
     /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
     ClientToken?: string;
@@ -1764,13 +1782,13 @@ declare namespace V20220401 {
     ComputeNodeCount?: number;
     /** 调度器类型。默认取值：SLURM。SLURM：SLURM调度器。 */
     SchedulerType?: string;
-    /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前支持部分公有镜像和自定义镜像。 */
+    /** 指定有效的镜像ID，格式形如img-xxx。目前支持部分公有镜像和自定义镜像。 */
     ImageId?: string;
     /** 私有网络相关信息配置。 */
     VirtualPrivateCloud?: VirtualPrivateCloud;
     /** 集群登录设置。 */
     LoginSettings?: LoginSettings;
-    /** 集群中实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。 */
+    /** 集群中实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。 */
     SecurityGroupIds?: string[];
     /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
     ClientToken?: string;
@@ -1788,7 +1806,7 @@ declare namespace V20220401 {
     LoginNodeCount?: number;
     /** 创建集群时同时绑定的标签对说明。 */
     Tags?: Tag[];
-    /** 弹性伸缩类型。AS：集群自动扩缩容由[弹性伸缩](https://cloud.tencent.com/document/product/377/3154)产品实现。THPC_AS：集群自动扩缩容由THPC产品内部实现。 */
+    /** 弹性伸缩类型。AS：集群自动扩缩容由弹性伸缩产品实现。THPC_AS：集群自动扩缩容由THPC产品内部实现。 */
     AutoScalingType?: string;
   }
 
@@ -1866,9 +1884,9 @@ declare namespace V20220401 {
   interface DescribeClusterActivitiesRequest {
     /** 集群ID。通过该参数指定需要查询活动历史记录的集群。 */
     ClusterId: string;
-    /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+    /** 偏移量，默认为0。关于Offset的更进一步介绍请参考 API 简介中的相关小节。 */
     Offset?: number;
-    /** 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
+    /** 返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API 简介中的相关小节。 */
     Limit?: number;
   }
 
@@ -2315,6 +2333,8 @@ declare interface Thpc {
   ModifyClusterDeletionProtection(data: ModifyClusterDeletionProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterDeletionProtectionResponse>;
   /** 修改节点初始化脚本 {@link ModifyInitNodeScriptsRequest} {@link ModifyInitNodeScriptsResponse} */
   ModifyInitNodeScripts(data: ModifyInitNodeScriptsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInitNodeScriptsResponse>;
+  /** 修改节点属性 {@link ModifyNodeAttributeRequest} {@link ModifyNodeAttributeResponse} */
+  ModifyNodeAttribute(data: ModifyNodeAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNodeAttributeResponse>;
   /** 修改工作空间的属性 {@link ModifyWorkspacesAttributeRequest} {@link ModifyWorkspacesAttributeResponse} */
   ModifyWorkspacesAttribute(data: ModifyWorkspacesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkspacesAttributeResponse>;
   /** 修改工作空间的续费标识 {@link ModifyWorkspacesRenewFlagRequest} {@link ModifyWorkspacesRenewFlagResponse} */

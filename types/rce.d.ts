@@ -227,7 +227,7 @@ declare namespace V20201103 {
     OnlineScam?: OnlineScamInfo;
     /** 1：Android2：iOS3：H54：小程序 */
     Platform?: string;
-    /** 数据授权信息。 */
+    /** 数据授权信息。注意：新接入通用业务欺诈保护（RCE）服务的客户该字段【必传】。 */
     DataAuthorization?: DataAuthorizationInfo;
   }
 

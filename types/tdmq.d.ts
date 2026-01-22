@@ -1564,6 +1564,10 @@ declare interface RocketMQInstanceConfig {
   TopicNumUpperLimit?: number | null;
   /** 控制生产和消费消息的 TPS 占比，取值范围0～1，默认值为0.5 */
   SendReceiveRatio?: number;
+  /** 收发 TPS 峰值上限 */
+  TpsLimit?: number;
+  /** 通用集群规格 */
+  GeneralSkuCode?: string | null;
 }
 
 /** Rocketmq消息消费track信息 */
@@ -2527,8 +2531,6 @@ declare interface CreateRocketMQVipInstanceRequest {
   Name: string;
   /** 集群规格，支持规格有 1.通用型:rocket-vip-basic-0; 2.基础型:rocket-vip-basic-1; 3.标准型:rocket-vip-basic-2; 4.高阶Ⅰ型:rocket-vip-basic-3; 5.高阶Ⅱ型:rocket-vip-basic-4 */
   Spec: string;
-  /** 节点数量，最小2，最大20 */
-  NodeCount: number;
   /** 单节点存储空间，GB为单位，最低200GB */
   StorageSize: number;
   /** 节点部署的区域ID列表，如广州一区，则是100001，具体可查询腾讯云官网 */
@@ -2537,6 +2539,10 @@ declare interface CreateRocketMQVipInstanceRequest {
   VpcInfo: VpcInfo;
   /** 购买时长，月为单位 */
   TimeSpan: number;
+  /** 节点数量，创建专享集群时必填 */
+  NodeCount?: number;
+  /** 通用集群规格标识，新购通用集群时必填，从 [DescribeRocketMQGeneralSKUs](https://cloud.tencent.com/document/api/1179/127066) 接口返回的 [GeneralSKU](https://cloud.tencent.com/document/api/1179/46089) 字段获取。 */
+  GeneralSkuCode?: string;
   /** 是否用于迁移上云，默认为false */
   SupportsMigrateToCloud?: boolean;
   /** 是否开启公网 */

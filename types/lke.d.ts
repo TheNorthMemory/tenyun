@@ -416,6 +416,10 @@ declare interface AgentToolInfo {
   FinanceType?: number;
   /** 工具高级设置 */
   ToolAdvanceConfig?: ToolAdvanceConfig;
+  /** 授权模式； 0-开发者授权；1-使用者授权 */
+  AuthMode?: number;
+  /** 授权类型; 0-无鉴权；1-APIKey；2-CAM授权；3-Oauth2.0授权； */
+  AuthType?: number;
 }
 
 /** Agent工具的请求参数定义 */
@@ -630,6 +634,28 @@ declare interface AttributeLabelRefByWorkflow {
   AttributeLabelBizId?: string;
   /** 标签值引用的工作流列表 */
   WorkflowList?: WorkflowRef[];
+}
+
+/** 音频信息 */
+declare interface Audio {
+  /** 音频文件格式 */
+  Format?: string;
+  /** 音频文件地址 */
+  AudioUrl?: string;
+  /** 音频标题 */
+  Title?: string | null;
+  /** 音频文件在正文中的位置 */
+  Position?: number | null;
+  /** 音频转录后的文字列表 */
+  AudioTranscripts?: AudioTranscript[] | null;
+}
+
+/** 音频转录的文本内容 */
+declare interface AudioTranscript {
+  /** 音频的发言者 */
+  Speaker?: string | null;
+  /** 音频转录为文字后的内容 */
+  Transcript?: string | null;
 }
 
 /** 背景图相关配置 */
@@ -1658,6 +1684,8 @@ declare interface MsgRecord {
   Widgets?: Widget[] | null;
   /** Widget动作信息 */
   WidgetAction?: WidgetAction | null;
+  /** 音频信息 */
+  Audios?: Audio[] | null;
 }
 
 /** 聊天详情Refer */
@@ -4318,6 +4346,8 @@ declare interface ListReferShareKnowledgeRequest {
 declare interface ListReferShareKnowledgeResponse {
   /** 共享知识库信息列表 */
   List?: KnowledgeBaseInfo[];
+  /** 共享知识库数量 */
+  Total?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

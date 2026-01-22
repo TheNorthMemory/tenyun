@@ -6038,6 +6038,16 @@ declare interface GetInstanceQpsLimitResponse {
   RequestId?: string;
 }
 
+declare interface GetOrganizationRoleRequest {
+}
+
+declare interface GetOrganizationRoleResponse {
+  /** Admin:集团账号创建，DelegatedAdmin:委派管理员，Member：成员，NoMember：非集团账号成员 */
+  Role?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ImportIpAccessControlRequest {
   /** 导入的IP黑白名单列表 */
   Data: IpAccessControlParam[];
@@ -7815,6 +7825,8 @@ declare interface Waf {
   GetAttackTotalCount(data: GetAttackTotalCountRequest, config?: AxiosRequestConfig): AxiosPromise<GetAttackTotalCountResponse>;
   /** 获取套餐实例的弹性qps上限 {@link GetInstanceQpsLimitRequest} {@link GetInstanceQpsLimitResponse} */
   GetInstanceQpsLimit(data: GetInstanceQpsLimitRequest, config?: AxiosRequestConfig): AxiosPromise<GetInstanceQpsLimitResponse>;
+  /** 获取用户角色 {@link GetOrganizationRoleRequest} {@link GetOrganizationRoleResponse} */
+  GetOrganizationRole(data?: GetOrganizationRoleRequest, config?: AxiosRequestConfig): AxiosPromise<GetOrganizationRoleResponse>;
   /** 导入IP黑白名单 {@link ImportIpAccessControlRequest} {@link ImportIpAccessControlResponse} */
   ImportIpAccessControl(data: ImportIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<ImportIpAccessControlResponse>;
   /** 编辑防篡改url {@link ModifyAntiFakeUrlRequest} {@link ModifyAntiFakeUrlResponse} */

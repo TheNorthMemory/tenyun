@@ -2891,7 +2891,7 @@ declare interface CreateDeliverCloudFunctionResponse {
 }
 
 declare interface CreateDlcDeliverRequest {
-  /** 日志主题id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  /** 日志主题id。通过获取日志主题列表获取日志主题Id。 */
   TopicId: string;
   /** 名称：长度不超过64字符，以字母开头，接受0-9,a-z,A-Z, _,-,中文字符。 */
   Name: string;
@@ -2901,9 +2901,9 @@ declare interface CreateDlcDeliverRequest {
   StartTime: number;
   /** dlc配置信息 */
   DlcInfo: DlcInfo;
-  /** 投递文件大小,单位MB。 DeliverType=0时必填，范围 5<= MaxSize <= 256。 */
+  /** 投递文件大小,单位MB。 DeliverType=0时必填，范围 5&lt;= MaxSize &lt;= 256。 */
   MaxSize?: number;
-  /** 投递间隔，单位秒。 DeliverType=0时必填，范围 300<= Interval <=900。 */
+  /** 投递间隔，单位秒。 DeliverType=0时必填，范围 300&lt;= Interval &lt;=900。 */
   Interval?: number;
   /** 投递时间范围的结束时间。 如果为空，则表示不限时。EndTime不为空时，需要大于StartTime。 */
   EndTime?: number;

@@ -530,7 +530,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   aca: Aca,
   /** {@link Acp 应用合规平台} */
   acp: Acp,
-  /** {@link Advisor 云顾问} */
+  /** {@link Advisor 智能顾问} */
   advisor: Advisor,
   /** {@link Af 借贷反欺诈} */
   af: Af,
@@ -626,7 +626,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   cdwpg: Cdwpg,
   /** {@link Cdz 专属可用区} */
   cdz: Cdz,
-  /** {@link Cfg 云顾问-混沌演练} */
+  /** {@link Cfg 智能顾问-混沌演练} */
   cfg: Cfg,
   /** {@link Cfs 文件存储} */
   cfs: Cfs,

@@ -70,6 +70,24 @@ declare interface DescribeHunyuanTo3DUVJobResponse {
   RequestId?: string;
 }
 
+declare interface DescribeProfileTo3DJobRequest {
+  /** 任务ID。 */
+  JobId?: string;
+}
+
+declare interface DescribeProfileTo3DJobResponse {
+  /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
+  Status?: string;
+  /** 错误码 */
+  ErrorCode?: string;
+  /** 错误信息 */
+  ErrorMessage?: string;
+  /** 生成的3D文件数组。 */
+  ResultFile3Ds?: File3D[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeReduceFaceJobRequest {
   /** 任务ID。 */
   JobId?: string;
@@ -236,6 +254,20 @@ declare interface SubmitHunyuanTo3DUVJobResponse {
   RequestId?: string;
 }
 
+declare interface SubmitProfileTo3DJobRequest {
+  /** 真人头像参考图 Base64 数据和参考图 Url。- Base64 和 Url 必须提供一个，如果都提供以 Url 为准。- 图片限制：单边分辨率小于4096且大于500，转成 Base64 字符串后小于 10MB，格式支持 jpg、jpeg、png。 */
+  Profile?: Image;
+  /** 生成人物模板，参考值：basketball: 动感球手；badminton: 羽扬中华；pingpong: 国球荣耀；gymnastics:勇攀巅峰；pilidance: 舞动青春；tennis: 网球甜心；athletics: 东方疾风；footballboykicking1:激情逐风；footballboykicking2: 绿茵之星；guitar:甜酷弦音；footballboy: 足球小将；skateboard: 滑跃青春；futuresoilder: 未来战士；explorer: 逐梦旷野；beardollgirl:可爱女孩；bibpantsboy:都市白领；womansitpose: 职业丽影；womanstandpose2: 悠闲时光；mysteriousprincess: 海洋公主；manstandpose2: 演讲之星； */
+  Template?: string;
+}
+
+declare interface SubmitProfileTo3DJobResponse {
+  /** 任务ID（有效期24小时） */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SubmitReduceFaceJobRequest {
   /** 源3D模型文件。其中参数 Type 和 Url 必填，参数 PreviewImageUrl 无意义，可忽略。Type可选值：OBJ，GLB */
   File3D: File3D;
@@ -277,6 +309,8 @@ declare interface Ai3d {
   Convert3DFormat(data: Convert3DFormatRequest, config?: AxiosRequestConfig): AxiosPromise<Convert3DFormatResponse>;
   /** 查询UV展开任务 {@link DescribeHunyuanTo3DUVJobRequest} {@link DescribeHunyuanTo3DUVJobResponse} */
   DescribeHunyuanTo3DUVJob(data: DescribeHunyuanTo3DUVJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHunyuanTo3DUVJobResponse>;
+  /** 查询3D人物生成任务 {@link DescribeProfileTo3DJobRequest} {@link DescribeProfileTo3DJobResponse} */
+  DescribeProfileTo3DJob(data?: DescribeProfileTo3DJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProfileTo3DJobResponse>;
   /** 查询智能拓扑任务 {@link DescribeReduceFaceJobRequest} {@link DescribeReduceFaceJobResponse} */
   DescribeReduceFaceJob(data?: DescribeReduceFaceJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReduceFaceJobResponse>;
   /** 查询纹理生成任务 {@link DescribeTextureTo3DJobRequest} {@link DescribeTextureTo3DJobResponse} */
@@ -295,6 +329,8 @@ declare interface Ai3d {
   SubmitHunyuanTo3DRapidJob(data?: SubmitHunyuanTo3DRapidJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitHunyuanTo3DRapidJobResponse>;
   /** 提交UV展开任务 {@link SubmitHunyuanTo3DUVJobRequest} {@link SubmitHunyuanTo3DUVJobResponse} */
   SubmitHunyuanTo3DUVJob(data?: SubmitHunyuanTo3DUVJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitHunyuanTo3DUVJobResponse>;
+  /** 提交3D人物生成任务 {@link SubmitProfileTo3DJobRequest} {@link SubmitProfileTo3DJobResponse} */
+  SubmitProfileTo3DJob(data?: SubmitProfileTo3DJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitProfileTo3DJobResponse>;
   /** 提交智能拓扑任务 {@link SubmitReduceFaceJobRequest} {@link SubmitReduceFaceJobResponse} */
   SubmitReduceFaceJob(data: SubmitReduceFaceJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitReduceFaceJobResponse>;
   /** 提交纹理生成任务 {@link SubmitTextureTo3DJobRequest} {@link SubmitTextureTo3DJobResponse} */

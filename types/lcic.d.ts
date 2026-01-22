@@ -739,6 +739,22 @@ declare interface CreateDocumentResponse {
   RequestId?: string;
 }
 
+declare interface CreateGroupLiveCodesRequest {
+  /** 低代码互动课堂的SdkAppId。 */
+  SdkAppId: number;
+  /** 房间ID。 */
+  RoomId: number;
+  /** 分组数量。注：最大数量限制为30 */
+  Number: number;
+}
+
+declare interface CreateGroupLiveCodesResponse {
+  /** 分组直播参加码 */
+  GroupLiveCodes?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateGroupWithMembersRequest {
   /** 待创建群组名称 */
   GroupName: string;
@@ -784,7 +800,7 @@ declare interface CreateRoomRequest {
   EndTime: number;
   /** 低代码互动课堂的SdkAppId。 */
   SdkAppId: number;
-  /** 头像区域，摄像头视频画面的分辨率。可以有如下取值：1 标清2 高清3 全高清注意：连麦人数（MaxMicNumber）>6时，仅可使用标清 */
+  /** 头像区域，摄像头视频画面的分辨率。可以有如下取值：1 标清2 高清3 全高清注意：连麦人数（MaxMicNumber）&gt;6时，仅可使用标清 */
   Resolution: number;
   /** 设置课堂同时最大可与老师进行连麦互动的人数，该参数支持正式上课/开播前调用修改房间修改。小班课取值范围[0,16]，大班课取值范围[0,1]，当取值为0时表示当前课堂/直播，不支持连麦互动。该取值影响计费，请根据业务实际情况设置。计费规则见“购买指南”下“计费概述”。 */
   MaxMicNumber: number;
@@ -818,7 +834,7 @@ declare interface CreateRoomRequest {
   VideoOrientation?: number;
   /** 开启课后评分。 0：不开启(默认) 1：开启 */
   IsGradingRequiredPostClass?: number;
-  /** 课堂类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (预留参数，暂未开放); 3 圆桌会议 注：大班课的布局(layout)只有三分屏 */
+  /** 课堂类型。 注：大班课的布局(layout)只有三分屏枚举值：0： 小班课（默认值）1： 大班课2： 1V1 (预留参数，暂未开放);3： 圆桌会议4： 分组直播 默认值：0 */
   RoomType?: number;
   /** 嘉宾Id列表。当圆桌会议模式（RoomType==3）时生效 */
   Guests?: string[];
@@ -1147,6 +1163,20 @@ declare interface DescribeGroupListResponse {
   Total?: number;
   /** 群组信息列表。 */
   GroupInfos?: GroupInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeGroupLiveCodesRequest {
+  /** 学校ID */
+  SdkAppId?: number;
+  /** 房间ID */
+  RoomId?: number;
+}
+
+declare interface DescribeGroupLiveCodesResponse {
+  /** 分组直播参加码 */
+  GroupLiveCodes?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2036,6 +2066,8 @@ declare interface Lcic {
   BindDocumentToRoom(data: BindDocumentToRoomRequest, config?: AxiosRequestConfig): AxiosPromise<BindDocumentToRoomResponse>;
   /** 创建课件 {@link CreateDocumentRequest} {@link CreateDocumentResponse} */
   CreateDocument(data: CreateDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDocumentResponse>;
+  /** 创建分组直播参加码 {@link CreateGroupLiveCodesRequest} {@link CreateGroupLiveCodesResponse} */
+  CreateGroupLiveCodes(data: CreateGroupLiveCodesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGroupLiveCodesResponse>;
   /** 创建群组 {@link CreateGroupWithMembersRequest} {@link CreateGroupWithMembersResponse} */
   CreateGroupWithMembers(data: CreateGroupWithMembersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGroupWithMembersResponse>;
   /** 创建联合群组 {@link CreateGroupWithSubGroupRequest} {@link CreateGroupWithSubGroupResponse} */
@@ -2080,6 +2112,8 @@ declare interface Lcic {
   DescribeGroup(data: DescribeGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupResponse>;
   /** 获取群组列表 {@link DescribeGroupListRequest} {@link DescribeGroupListResponse} */
   DescribeGroupList(data: DescribeGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupListResponse>;
+  /** 获取分组直播参加码 {@link DescribeGroupLiveCodesRequest} {@link DescribeGroupLiveCodesResponse} */
+  DescribeGroupLiveCodes(data?: DescribeGroupLiveCodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupLiveCodesResponse>;
   /** 获取群组成员列表 {@link DescribeGroupMemberListRequest} {@link DescribeGroupMemberListResponse} */
   DescribeGroupMemberList(data: DescribeGroupMemberListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupMemberListResponse>;
   /** 查询跑马灯配置 {@link DescribeMarqueeRequest} {@link DescribeMarqueeResponse} */

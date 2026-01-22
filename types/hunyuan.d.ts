@@ -90,6 +90,16 @@ declare interface ErrorMsg {
   Code?: number;
 }
 
+/** 3D文件 */
+declare interface File3D {
+  /** 3D文件的格式。取值范围：GIF, OBJ */
+  Type?: string;
+  /** 文件的Url（有效期24小时） */
+  Url?: string;
+  /** 预览图片Url */
+  PreviewImageUrl?: string;
+}
+
 /** 已上传的文件对象。 */
 declare interface FileObject {
   /** 文件标识符，可在各个API中引用。 */
@@ -160,6 +170,14 @@ declare interface ImageMessage {
 declare interface ImageUrl {
   /** 图片的 Url（以 http:// 或 https:// 开头） */
   Url: string | null;
+}
+
+/** 3D文件 */
+declare interface InputFile3D {
+  /** 文件的Url（有效期24小时） */
+  Url: string;
+  /** 文件格式 */
+  Type: string;
 }
 
 /** 外部知识 */
@@ -668,6 +686,24 @@ declare interface CreateThreadResponse {
   RequestId?: string;
 }
 
+declare interface Describe3DSmartTopologyJobRequest {
+  /** 任务ID。 */
+  JobId: string;
+}
+
+declare interface Describe3DSmartTopologyJobResponse {
+  /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 示例值：RUN。 */
+  Status?: string;
+  /** 错误码。 */
+  ErrorCode?: string;
+  /** 错误信息。 */
+  ErrorMessage?: string;
+  /** 生成文件的URL地址，有效期1天。 */
+  ResultFile3Ds?: File3D[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface FilesDeletionsRequest {
   /** 文件标识符。 */
   ID: string;
@@ -998,6 +1034,22 @@ declare interface SetPayModeResponse {
   RequestId?: string;
 }
 
+declare interface Submit3DSmartTopologyJobRequest {
+  /** 源3D文件模型链接，参考值：Type：glb，obj格式文件必选其一。Url：文件大小不超过200MB。3D模型要求：复杂模型和拓扑过的模型暂无法支持减面操作，建议输入未拓扑过的高模，比如混元3D生成的模型，适用度比较高的类别：硬表面、游戏角色、道具、日常生活用品等。 */
+  File3D: InputFile3D;
+  /** 多边形类型，表示模型的表面由几边形网格构成，默认为triangle,参考值:triangle:三角形面。quadrilateral：四边形面。 */
+  PolygonType?: string;
+  /** 减面后面数档位类型，可选值：high，medium, low。 */
+  FaceLevel?: string;
+}
+
+declare interface Submit3DSmartTopologyJobResponse {
+  /** 任务ID。 */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SubmitHunyuanImageChatJobRequest {
   /** 本轮对话的文本描述。提交一个任务请求对应发起一轮生图对话，每轮对话中可输入一条 Prompt，生成一张图像，支持通过多轮输入 Prompt 来不断调整图像内容。推荐使用中文，最多可传1024个 utf-8 字符。输入示例： 第一轮对话：一颗红色的苹果 第二轮对话：将苹果改为绿色 第三轮对话：苹果放在桌子上 */
   Prompt: string;
@@ -1083,6 +1135,8 @@ declare interface Hunyuan {
   ChatTranslations(data: ChatTranslationsRequest, config?: AxiosRequestConfig): AxiosPromise<ChatTranslationsResponse>;
   /** 创建会话 {@link CreateThreadRequest} {@link CreateThreadResponse} */
   CreateThread(data?: CreateThreadRequest, config?: AxiosRequestConfig): AxiosPromise<CreateThreadResponse>;
+  /** 查询智能拓扑任务 {@link Describe3DSmartTopologyJobRequest} {@link Describe3DSmartTopologyJobResponse} */
+  Describe3DSmartTopologyJob(data: Describe3DSmartTopologyJobRequest, config?: AxiosRequestConfig): AxiosPromise<Describe3DSmartTopologyJobResponse>;
   /** 文件删除 {@link FilesDeletionsRequest} {@link FilesDeletionsResponse} */
   FilesDeletions(data: FilesDeletionsRequest, config?: AxiosRequestConfig): AxiosPromise<FilesDeletionsResponse>;
   /** 文件列表 {@link FilesListRequest} {@link FilesListResponse} */
@@ -1111,6 +1165,8 @@ declare interface Hunyuan {
   RunThread(data: RunThreadRequest, config?: AxiosRequestConfig): AxiosPromise<RunThreadResponse>;
   /** 设置付费模式 {@link SetPayModeRequest} {@link SetPayModeResponse} */
   SetPayMode(data: SetPayModeRequest, config?: AxiosRequestConfig): AxiosPromise<SetPayModeResponse>;
+  /** 提交智能拓扑任务 {@link Submit3DSmartTopologyJobRequest} {@link Submit3DSmartTopologyJobResponse} */
+  Submit3DSmartTopologyJob(data: Submit3DSmartTopologyJobRequest, config?: AxiosRequestConfig): AxiosPromise<Submit3DSmartTopologyJobResponse>;
   /** 提交混元生图（多轮对话）任务 {@link SubmitHunyuanImageChatJobRequest} {@link SubmitHunyuanImageChatJobResponse} */
   SubmitHunyuanImageChatJob(data: SubmitHunyuanImageChatJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitHunyuanImageChatJobResponse>;
   /** 提交混元生图任务 {@link SubmitHunyuanImageJobRequest} {@link SubmitHunyuanImageJobResponse} */
