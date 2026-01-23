@@ -56,6 +56,16 @@ declare interface Strategies {
   Conditions?: Conditions[];
 }
 
+declare interface CreateAdvisorAuthorizationRequest {
+}
+
+declare interface CreateAdvisorAuthorizationResponse {
+  /** 返回信息 */
+  Message?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeStrategiesRequest {
 }
 
@@ -97,6 +107,8 @@ declare interface DescribeTaskStrategyRisksResponse {
 /** {@link Advisor 智能顾问} */
 declare interface Advisor {
   (): Versions;
+  /** 开启智能顾问授权 {@link CreateAdvisorAuthorizationRequest} {@link CreateAdvisorAuthorizationResponse} */
+  CreateAdvisorAuthorization(data?: CreateAdvisorAuthorizationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAdvisorAuthorizationResponse>;
   /** 查询评估项信息 {@link DescribeStrategiesRequest} {@link DescribeStrategiesResponse} */
   DescribeStrategies(data?: DescribeStrategiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStrategiesResponse>;
   /** 查询评估项风险实例列表 {@link DescribeTaskStrategyRisksRequest} {@link DescribeTaskStrategyRisksResponse} */

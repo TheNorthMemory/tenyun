@@ -1097,7 +1097,7 @@ declare interface AttachPolicyRequest {
   TargetId: number;
   /** 目标类型。取值范围：NODE-部门、MEMBER-成员 */
   TargetType: string;
-  /** 策略ID。 */
+  /** 策略Id。可以调用ListPolicies获取 */
   PolicyId: number;
   /** 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略 */
   Type?: string;
@@ -2145,7 +2145,7 @@ declare interface DetachPolicyRequest {
   TargetId: number;
   /** 目标类型。取值范围：NODE-部门、MEMBER-成员 */
   TargetType: string;
-  /** 策略ID。 */
+  /** 策略Id。可以调用ListPolicies获取 */
   PolicyId: number;
   /** 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略 */
   Type?: string;

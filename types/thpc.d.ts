@@ -456,7 +456,7 @@ declare interface QueueConfig {
   EnableAutoExpansion?: boolean;
   /** 是否开启自动缩容。 */
   EnableAutoShrink?: boolean;
-  /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜和特定自定义镜像。 */
+  /** 指定有效的镜像ID，格式形如img-xxx。目前仅支持公有镜和特定自定义镜像。 */
   ImageId?: string;
   /** 节点系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。 */
   SystemDisk?: SystemDisk;
@@ -476,10 +476,12 @@ declare interface QueueConfig {
   ScaleOutNodeThreshold?: number;
   /** 每轮扩容最大节点个数。默认值：100。取值范围：1～100。 */
   MaxNodesPerCycle?: number;
-  /** 扩容过程中，作业的内存在匹配实例机型时增大比例（不会影响作业提交的内存大小，只影响匹配计算过程）。针对场景：由于实例机型的总内存会大于实例内部的可用内存，16GB内存规格的实例，实例操作系统内的可用内存只有约14.9GB内存。假设此时提交一个需要15GB内存的作业，- 当ScaleUpMemRatio=0时，会匹配到16GB内存规格的实例,但是由于操作系统内的可用内存为14.9GB小于作业所需的15GB，扩容出来的实例作业无法运行起来。- 当ScaleUpMemRatio=10时，匹配实例规格会按照15*(1+10%)=16.5GB来进行实例规格匹配，则不会匹配到16GB的实例，而是更大内存规格的实例来保证作业能够被运行起来。 */
+  /** 扩容过程中，作业的内存在匹配实例机型时增大比例（不会影响作业提交的内存大小，只影响匹配计算过程）。针对场景：由于实例机型的总内存会大于实例内部的可用内存，16GB内存规格的实例，实例操作系统内的可用内存只有约14.9GB内存。假设此时提交一个需要15GB内存的作业，当ScaleUpMemRatio=0时，会匹配到16GB内存规格的实例,但是由于操作系统内的可用内存为14.9GB小于作业所需的15GB，扩容出来的实例作业无法运行起来。当ScaleUpMemRatio=10时，匹配实例规格会按照15*(1+10%)=16.5GB来进行实例规格匹配，则不会匹配到16GB的实例，而是更大内存规格的实例来保证作业能够被运行起来。 */
   ScaleUpMemRatio?: number;
   /** 增强服务。通过该参数可以指定是否开启云安全、腾讯云可观测平台等服务。若不指定该参数，则默认开启腾讯云可观测平台、云安全服务、自动化助手服务。 */
   EnhancedService?: EnhancedService;
+  /** 扩容实例模板，可以在cvm侧进行设置 */
+  LaunchTemplateIds?: string[];
 }
 
 /** 扩容队列配置概览。 */

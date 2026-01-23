@@ -2629,6 +2629,42 @@ declare interface CreateGatherRuleResponse {
   RequestId?: string;
 }
 
+declare interface CreateInstanceRequest {
+  /** ClientToken是一个由客户端生成的唯一的、区分大小写、不超过64个ASCII字符的字符串。例如，ClientToken=123e4567-e89b-12d3-a456-42665544****。 */
+  ClientToken: string;
+  /** 产品一层code */
+  ProductCode: string;
+  /** 产品二层code */
+  SubProductCode: string;
+  /** 地域code */
+  RegionCode: string;
+  /** 可用区code */
+  ZoneCode: string;
+  /** 付费类型，取值： PrePay：预付费 */
+  PayMode: string;
+  /** 商品详情信息 */
+  Parameter: string;
+  /** 商品数量，默认取值1 */
+  Quantity?: number;
+  /** 项目id，默认取0 */
+  ProjectId?: number;
+  /** 新购时长，取值上限：36，默认取值1 */
+  Period?: number;
+  /** 新购时长单位，取值：m：按月购买，y：按年购买，默认取值m */
+  PeriodUnit?: string;
+  /** 自动续费标识，取值：NOTIFY_AND_MANUAL_RENEW：手动续费，NOTIFY_AND_AUTO_RENEW：自动续费，DISABLE_NOTIFY_AND_MANUAL_RENEW：到期不续，默认取值NOTIFY_AND_MANUAL_RENEW */
+  RenewFlag?: string;
+}
+
+declare interface CreateInstanceResponse {
+  /** 订单号 */
+  OrderId?: string;
+  /** 实例列表，商品发货延迟可能返回空 */
+  InstanceIdList?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAllocationRuleRequest {
   /** 所删除公摊规则ID */
   RuleId: number;
@@ -3682,7 +3718,7 @@ declare interface DescribeCostExplorerSummaryRequest {
   PeriodType: string;
   /** 分类维度（数据汇总维度），查询分类维度（请使用分类维度code入参）入参枚举值：default=仅总计feeType=费用类型billType=账单类型business=产品product=子产品region=地域zone=可用区actionType=交易类型payMode =计费模式tags=标签project =项目payerUin=支付者账号ownerUin=使用者账号 */
   Dimensions: string;
-  /** 费用类型：cost-总费用，totalCost-原价费用 */
+  /** 费用类型：cost-折后总费用，totalCost-原价费用 */
   FeeType: string;
   /** 数量，每页最大值为100 */
   PageSize: number;
@@ -4259,6 +4295,50 @@ declare interface PayDealsResponse {
   RequestId?: string;
 }
 
+declare interface RefundInstanceRequest {
+  /** ClientToken是一个由客户端生成的唯一的、区分大小写、不超过64个ASCII字符的字符串。例如，ClientToken=123e4567-e89b-12d3-a456-42665544****。 */
+  ClientToken: string;
+  /** 产品一层code */
+  ProductCode: string;
+  /** 产品二层code */
+  SubProductCode: string;
+  /** 实例id */
+  InstanceId: string;
+  /** 地域code */
+  RegionCode: string;
+}
+
+declare interface RefundInstanceResponse {
+  /** 订单号列表 */
+  OrderIdList?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RenewInstanceRequest {
+  /** ClientToken是一个由客户端生成的唯一的、区分大小写、不超过64个ASCII字符的字符串。例如，ClientToken=123e4567-e89b-12d3-a456-42665544****。 */
+  ClientToken: string;
+  /** 产品一层code */
+  ProductCode: string;
+  /** 产品二层code */
+  SubProductCode: string;
+  /** 地域code */
+  RegionCode: string;
+  /** 实例ID */
+  InstanceId: string;
+  /** 手动续费时长，取值上限：36，默认取值1 */
+  Period?: number;
+  /** 手动续费时长单位，取值：m：按月续费，y：按年续费，默认取值m */
+  PeriodUnit?: string;
+}
+
+declare interface RenewInstanceResponse {
+  /** 订单号列表 */
+  OrderIdList?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Billing 费用中心} */
 declare interface Billing {
   (): Versions;
@@ -4272,6 +4352,8 @@ declare interface Billing {
   CreateBudget(data: CreateBudgetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBudgetResponse>;
   /** 创建归集规则 {@link CreateGatherRuleRequest} {@link CreateGatherRuleResponse} */
   CreateGatherRule(data: CreateGatherRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGatherRuleResponse>;
+  /** 创建实例 {@link CreateInstanceRequest} {@link CreateInstanceResponse} */
+  CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
   /** 公摊规则删除接口 {@link DeleteAllocationRuleRequest} {@link DeleteAllocationRuleResponse} */
   DeleteAllocationRule(data: DeleteAllocationRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAllocationRuleResponse>;
   /** 批量取消设置分账标签 {@link DeleteAllocationTagRequest} {@link DeleteAllocationTagResponse} */
@@ -4388,6 +4470,10 @@ declare interface Billing {
   ModifyGatherRule(data: ModifyGatherRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGatherRuleResponse>;
   /** 支付订单 {@link PayDealsRequest} {@link PayDealsResponse} */
   PayDeals(data?: PayDealsRequest, config?: AxiosRequestConfig): AxiosPromise<PayDealsResponse>;
+  /** 退订实例 {@link RefundInstanceRequest} {@link RefundInstanceResponse} */
+  RefundInstance(data: RefundInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RefundInstanceResponse>;
+  /** 续费实例 {@link RenewInstanceRequest} {@link RenewInstanceResponse} */
+  RenewInstance(data: RenewInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RenewInstanceResponse>;
 }
 
 export declare type Versions = ["2018-07-09"];
