@@ -36,6 +36,20 @@ declare interface ActiveDeviceList {
   Time?: string;
 }
 
+/** 目标IP信息 */
+declare interface DestIpInfo {
+  /** 时间：s */
+  Time: string;
+  /** 网关IP */
+  GatewayIp: string | null;
+  /** 网关地址 */
+  GatewaySite: string | null;
+  /** 目标IP数量 */
+  IpCount: number | null;
+  /** 目标IP列表 */
+  IpList: string[] | null;
+}
+
 /** 设备的基本信息 */
 declare interface DeviceBaseInfo {
   /** 设备唯一ID */
@@ -514,6 +528,26 @@ declare interface GetActiveDeviceCountResponse {
   RequestId?: string;
 }
 
+declare interface GetDestIPByNameRequest {
+  /** 设备名 */
+  DeviceName: string;
+  /** 开始时间 */
+  BeginTime: number;
+  /** 结束时间 */
+  EndTime: number;
+  /** 网关类型。0：公有云网关；1：自有网关。不传默认为0。 */
+  GatewayType?: number;
+}
+
+declare interface GetDestIPByNameResponse {
+  /** 目标IP信息 */
+  DestIpInfo?: DestIpInfo[] | null;
+  /** 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲 */
+  AccessRegion?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetDevicePayModeRequest {
   /** 设备ID列表 */
   DeviceIdList: string[];
@@ -616,6 +650,38 @@ declare interface GetFlowStatisticByGroupRequest {
 }
 
 declare interface GetFlowStatisticByGroupResponse {
+  /** 流量详细信息 */
+  NetDetails?: NetDetails[];
+  /** 查找时间段流量使用最大值（单位：byte） */
+  MaxValue?: number;
+  /** 查找时间段流量使用平均值（单位：byte） */
+  AvgValue?: number;
+  /** 查找时间段流量使用总量（单位：byte） */
+  TotalValue?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetFlowStatisticByNameRequest {
+  /** 设备名称 */
+  DeviceName: string;
+  /** 开始查找时间 */
+  BeginTime: number;
+  /** 截止时间 */
+  EndTime: number;
+  /** 流量种类（1：上行流量，2：下行流量，3：上下行总和） */
+  Type: number;
+  /** 时间粒度（1：按小时统计，2：按天统计） */
+  TimeGranularity: number;
+  /** 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。 */
+  AccessRegion?: string;
+  /** 网关类型。0：公有云网关；1：自有网关。不传默认为0。 */
+  GatewayType?: number;
+  /** 设备名列表，用于查询多设备流量，该字段启用时DeviceId可传"-1" */
+  DeviceList?: string[];
+}
+
+declare interface GetFlowStatisticByNameResponse {
   /** 流量详细信息 */
   NetDetails?: NetDetails[];
   /** 查找时间段流量使用最大值（单位：byte） */
@@ -772,6 +838,24 @@ declare interface GetL3ConnListResponse {
   RequestId?: string;
 }
 
+declare interface GetMonitorDataByNameRequest {
+  /** 设备名称 */
+  DeviceName: string;
+  /** 开始时间 */
+  BeginTime: number;
+  /** 结束时间 */
+  EndTime: number;
+  /** 网关类型。0：公有云网关；1：自有网关。不传默认为0。 */
+  GatewayType?: number;
+}
+
+declare interface GetMonitorDataByNameResponse {
+  /** 文件下载链接 */
+  FilePath?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetMultiFlowStatisticRequest {
   /** 设备id列表，单次最多请求10个设备 */
   DeviceIds: string[];
@@ -792,6 +876,28 @@ declare interface GetMultiFlowStatisticRequest {
 declare interface GetMultiFlowStatisticResponse {
   /** 批量设备流量信息 */
   FlowDetails?: FlowDetails[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetNetMonitorByNameRequest {
+  /** 设备名 */
+  DeviceName: string;
+  /** 开始时间 */
+  BeginTime: number;
+  /** 结束时间 */
+  EndTime: number;
+  /** 统计指标（上行速率："TxRate":bit/s，下行速率："RxRate":bit/s，丢包："Loss":%，时延："RTT":ms） */
+  Metrics: string;
+  /** 网关类型。0：公有云网关；1：自有网关。不传默认为0。 */
+  GatewayType?: number;
+}
+
+declare interface GetNetMonitorByNameResponse {
+  /** 监控数据 */
+  MonitorData?: MonitorData[];
+  /** 接入区域。取值范围：['MC','AP','EU','AM']MC=中国大陆AP=亚太EU=欧洲AM=美洲 */
+  AccessRegion?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -824,6 +930,34 @@ declare interface GetPublicKeyRequest {
 declare interface GetPublicKeyResponse {
   /** 非对称公钥 */
   PublicKey?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetStatisticDataByNameRequest {
+  /** 设备名。若不指定设备，可传"-1" */
+  DeviceName: string;
+  /** 统计开始时间，单位：s */
+  BeginTime: number;
+  /** 统计结束时间，单位：s */
+  EndTime: number;
+  /** 聚合粒度：1:按小时统计2:按天统计 */
+  TimeGranularity: number;
+  /** 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。 */
+  AccessRegion?: string;
+  /** 网关类型。0：公有云网关；1：自有网关。不传默认为0。 */
+  GatewayType?: number;
+  /** 设备名列表，最多10个设备，下载多个设备流量时使用，此时DeviceName可传"-1" */
+  DeviceList?: string[];
+  /** 设备分组ID，若不指定分组则不传，按分组下载数据时使用 */
+  GroupId?: string;
+  /** 应用ID，若不指定应用不填，按应用下载数据时使用 */
+  MpApplicationId?: string;
+}
+
+declare interface GetStatisticDataByNameResponse {
+  /** 文件地址url */
+  FilePath?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1103,6 +1237,8 @@ declare interface Mna {
   DownloadActiveDeviceCount(data?: DownloadActiveDeviceCountRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadActiveDeviceCountResponse>;
   /** 活跃设备数量统计 {@link GetActiveDeviceCountRequest} {@link GetActiveDeviceCountResponse} */
   GetActiveDeviceCount(data?: GetActiveDeviceCountRequest, config?: AxiosRequestConfig): AxiosPromise<GetActiveDeviceCountResponse>;
+  /** 根据设备名统计目标IP地址 {@link GetDestIPByNameRequest} {@link GetDestIPByNameResponse} */
+  GetDestIPByName(data: GetDestIPByNameRequest, config?: AxiosRequestConfig): AxiosPromise<GetDestIPByNameResponse>;
   /** 获取设备详细信息 {@link GetDeviceRequest} {@link GetDeviceResponse} */
   GetDevice(data: GetDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<GetDeviceResponse>;
   /** 获取设备付费模式 {@link GetDevicePayModeRequest} {@link GetDevicePayModeResponse} */
@@ -1117,6 +1253,8 @@ declare interface Mna {
   GetFlowStatistic(data: GetFlowStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<GetFlowStatisticResponse>;
   /** 根据设备组获取数据流量统计数据 {@link GetFlowStatisticByGroupRequest} {@link GetFlowStatisticByGroupResponse} */
   GetFlowStatisticByGroup(data: GetFlowStatisticByGroupRequest, config?: AxiosRequestConfig): AxiosPromise<GetFlowStatisticByGroupResponse>;
+  /** 根据设备名获取数据流量统计数据 {@link GetFlowStatisticByNameRequest} {@link GetFlowStatisticByNameResponse} */
+  GetFlowStatisticByName(data: GetFlowStatisticByNameRequest, config?: AxiosRequestConfig): AxiosPromise<GetFlowStatisticByNameResponse>;
   /** 根据区域获取数据流量统计数据 {@link GetFlowStatisticByRegionRequest} {@link GetFlowStatisticByRegionResponse} */
   GetFlowStatisticByRegion(data: GetFlowStatisticByRegionRequest, config?: AxiosRequestConfig): AxiosPromise<GetFlowStatisticByRegionResponse>;
   /** 获取分组详细信息 {@link GetGroupDetailRequest} {@link GetGroupDetailResponse} */
@@ -1127,14 +1265,20 @@ declare interface Mna {
   GetHardwareList(data: GetHardwareListRequest, config?: AxiosRequestConfig): AxiosPromise<GetHardwareListResponse>;
   /** 获取互通规则列表 {@link GetL3ConnListRequest} {@link GetL3ConnListResponse} */
   GetL3ConnList(data: GetL3ConnListRequest, config?: AxiosRequestConfig): AxiosPromise<GetL3ConnListResponse>;
+  /** 根据设备名称下载监控数据文件 {@link GetMonitorDataByNameRequest} {@link GetMonitorDataByNameResponse} */
+  GetMonitorDataByName(data: GetMonitorDataByNameRequest, config?: AxiosRequestConfig): AxiosPromise<GetMonitorDataByNameResponse>;
   /** 批量获取设备流量统计 {@link GetMultiFlowStatisticRequest} {@link GetMultiFlowStatisticResponse} */
   GetMultiFlowStatistic(data: GetMultiFlowStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<GetMultiFlowStatisticResponse>;
   /** 获取流量监控信息 {@link GetNetMonitorRequest} {@link GetNetMonitorResponse} */
   GetNetMonitor(data: GetNetMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<GetNetMonitorResponse>;
+  /** 根据设备名获取流量监控信息 {@link GetNetMonitorByNameRequest} {@link GetNetMonitorByNameResponse} */
+  GetNetMonitorByName(data: GetNetMonitorByNameRequest, config?: AxiosRequestConfig): AxiosPromise<GetNetMonitorByNameResponse>;
   /** 获取公钥 {@link GetPublicKeyRequest} {@link GetPublicKeyResponse} */
   GetPublicKey(data?: GetPublicKeyRequest, config?: AxiosRequestConfig): AxiosPromise<GetPublicKeyResponse>;
   /** 下载用量统计数据 {@link GetStatisticDataRequest} {@link GetStatisticDataResponse} */
   GetStatisticData(data: GetStatisticDataRequest, config?: AxiosRequestConfig): AxiosPromise<GetStatisticDataResponse>;
+  /** 根据设备名下载用量统计数据 {@link GetStatisticDataByNameRequest} {@link GetStatisticDataByNameResponse} */
+  GetStatisticDataByName(data: GetStatisticDataByNameRequest, config?: AxiosRequestConfig): AxiosPromise<GetStatisticDataByNameResponse>;
   /** 获取厂商硬件设备列表 {@link GetVendorHardwareRequest} {@link GetVendorHardwareResponse} */
   GetVendorHardware(data: GetVendorHardwareRequest, config?: AxiosRequestConfig): AxiosPromise<GetVendorHardwareResponse>;
   /** 分组添加设备 {@link GroupAddDeviceRequest} {@link GroupAddDeviceResponse} */

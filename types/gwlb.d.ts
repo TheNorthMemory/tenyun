@@ -215,11 +215,11 @@ declare interface AssociateTargetGroupsResponse {
 }
 
 declare interface CreateGatewayLoadBalancerRequest {
-  /** 网关负载均衡后端目标设备所属的私有网络 ID，如vpc-azd4dt1c，可以通过 [DescribeVpcs](https://cloud.tencent.com/document/product/215/15778) 接口获取。 */
+  /** 网关负载均衡后端目标设备所属的私有网络 ID，如vpc-azd4dt1c，可以通过 DescribeVpcs 接口获取。 */
   VpcId: string;
-  /** 网关负载均衡后端目标设备所属的私有网络的子网ID。可通过[DescribeSubnets](https://cloud.tencent.com/document/product/215/15784)接口获取。 */
+  /** 网关负载均衡后端目标设备所属的私有网络的子网ID。可通过DescribeSubnets接口获取。 */
   SubnetId: string;
-  /** 网关负载均衡实例名称。可支持输入1-60个字符。不填写时默认自动生成。 */
+  /** 网关负载均衡实例名称。命名规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。不填写时默认自动生成。 */
   LoadBalancerName?: string;
   /** 创建网关负载均衡的个数，默认值为 1。批量创建数量最大支持10个。 */
   Number?: number;
@@ -230,7 +230,7 @@ declare interface CreateGatewayLoadBalancerRequest {
 }
 
 declare interface CreateGatewayLoadBalancerResponse {
-  /** 由网关负载均衡实例唯一 ID 组成的数组。存在某些场景，如创建出现延迟时，此字段可能返回为空；此时可以根据接口返回的RequestId或DealName参数，通过[DescribeTaskStatus](https://cloud.tencent.com/document/api/1782/111700)接口查询创建的资源ID。 */
+  /** 由网关负载均衡实例唯一 ID 组成的数组。存在某些场景，如创建出现延迟时，此字段可能返回为空；此时可以根据接口返回的RequestId或DealName参数，通过DescribeTaskStatus接口查询创建的资源ID。 */
   LoadBalancerIds?: string[];
   /** 订单号。 */
   DealName?: string;
@@ -239,7 +239,7 @@ declare interface CreateGatewayLoadBalancerResponse {
 }
 
 declare interface CreateTargetGroupRequest {
-  /** 目标组名称，限定60个字符。 */
+  /** 目标组名称。命名规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。 */
   TargetGroupName?: string;
   /** 网关负载均衡后端目标组所属的网络 ID，如vpc-12345678，可以通过 DescribeVpcs 接口获取。 不填此参数则默认为DefaultVPC。 */
   VpcId?: string;
@@ -247,7 +247,7 @@ declare interface CreateTargetGroupRequest {
   Port?: number;
   /** 目标组绑定的后端服务器 */
   TargetGroupInstances?: TargetGroupInstance[];
-  /** 网关负载均衡目标组协议。- TENCENT_GENEVE ：GENEVE 标准协议- AWS_GENEVE：GENEVE 兼容协议 */
+  /** 网关负载均衡目标组协议。TENCENT_GENEVE ：GENEVE 标准协议AWS_GENEVE：GENEVE 兼容协议 */
   Protocol?: string;
   /** 健康检查设置。 */
   HealthCheck?: TargetGroupHealthCheck;
@@ -463,9 +463,9 @@ declare interface InquirePriceCreateGatewayLoadBalancerResponse {
 }
 
 declare interface ModifyGatewayLoadBalancerAttributeRequest {
-  /** 网关负载均衡的唯一ID。可通过[DescribeGatewayLoadBalancers](https://cloud.tencent.com/document/api/1782/111683) 接口获取。 */
+  /** 网关负载均衡的唯一ID。可通过DescribeGatewayLoadBalancers 接口获取。 */
   LoadBalancerId: string;
-  /** 网关负载均衡实例名称。可支持输入1-60个字符。 */
+  /** 网关负载均衡实例名称。命名规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。 */
   LoadBalancerName?: string;
   /** 是否开启删除保护。 */
   DeleteProtect?: boolean;
@@ -477,9 +477,9 @@ declare interface ModifyGatewayLoadBalancerAttributeResponse {
 }
 
 declare interface ModifyTargetGroupAttributeRequest {
-  /** 目标组的ID，可以通过[DescribeTargetGroups](https://cloud.tencent.com/document/product/214/40554)获取。 */
+  /** 目标组的ID，可以通过DescribeTargetGroups获取。 */
   TargetGroupId: string;
-  /** 目标组的新名称。 */
+  /** 目标组的新名称。命名规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。 */
   TargetGroupName?: string;
   /** 健康检查详情。 */
   HealthCheck?: TargetGroupHealthCheck;

@@ -1313,20 +1313,20 @@ declare interface DescribeUserQuotaResponse {
 }
 
 declare interface DoDirectoryOperationRequest {
-  /** 文件系统Id */
+  /** 文件系统 ID。当前仅 Turbo 系列文件系统支持调用此接口，通用系列文件系统（含增强型）不支持调用。 */
   FileSystemId: string;
   /** create：创建目录，等同于mkdir。check：确认目录是否存在，等同于stat。move：对文件/目录进行重命名，等同于mv。 */
   OpetationType: string;
   /** 目录的绝对路径 默认递归创建（即如果目录中有子目录不存在，则先创建出对应子目录） */
   DirectoryPath: string;
-  /** 创建目录的权限，若不传，默认为0755 若Operation Type为check，此值无实际意义 */
+  /** 创建目录的权限，若不传，默认为0755。若OperationType为 check，此值无实际意义。 */
   Mode?: string;
-  /** mv操作的目标目录名称；如果是turbo文件系统必须以/cfs/开头 */
+  /** mv 操作的目标目录名称。路径必须以/cfs/开头 */
   DestPath?: string;
 }
 
 declare interface DoDirectoryOperationResponse {
-  /** 1:成功 0:失败 创建目录的操作，1表示创建成功，0表示创建失败。 确认目录是否存在的操作，1表示目录存在，0表示目录不存在。 说明：创建目录操作若目录已存在，也会返回创建成功。 */
+  /** 1:成功 0:失败。创建目录的操作，1表示创建成功，0表示创建失败。 确认目录是否存在的操作，1表示目录存在，0表示目录不存在。此外，创建目录操作若目录已存在，也会返回创建成功。 */
   Result?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

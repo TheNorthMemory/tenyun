@@ -808,6 +808,10 @@ declare interface DatabaseInfo {
   Location?: string | null;
   /** 数据库存储大小 */
   StorageSize?: number | null;
+  /** 数据源ID */
+  DatasourceId?: number | null;
+  /** 数据源类型 */
+  DatasourceType?: string | null;
 }
 
 /** 数据源关联任务信息 */
@@ -3068,6 +3072,12 @@ declare interface TableInfo {
   TechnicalMetadata?: TechnicalMetadata | null;
   /** 表的业务元数据 */
   BusinessMetadata?: BusinessMetadata | null;
+  /** 数据目录 */
+  CatalogName?: string | null;
+  /** 数据源ID */
+  DatasourceId?: number | null;
+  /** 数据源类型 */
+  DatasourceType?: string | null;
 }
 
 /** 任务对象 */
@@ -6021,7 +6031,7 @@ declare interface ListCatalogRequest {
   PageNumber: number;
   /** 分页大小，最大500 */
   PageSize: number;
-  /** 父目录ID */
+  /** 父目录ID(此参数还未支持) */
   ParentCatalogId?: string;
 }
 

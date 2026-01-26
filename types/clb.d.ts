@@ -1589,7 +1589,7 @@ declare interface CreateListenerRequest {
   Ports: number[];
   /** 监听器协议： TCP | UDP | HTTP | HTTPS | TCP_SSL | QUIC。 */
   Protocol: string;
-  /** 要创建的监听器名称列表，名称与Ports数组按序一一对应，如不需立即命名，则无需提供此参数。 */
+  /** 要创建的监听器名称列表，名称与Ports数组按序一一对应，如不需立即命名，则无需提供此参数。命名规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。 */
   ListenerNames?: string[];
   /** 健康检查相关参数，此参数仅适用于TCP/UDP/TCP_SSL/QUIC监听器。 */
   HealthCheck?: HealthCheck;
@@ -1627,7 +1627,7 @@ declare interface CreateListenerRequest {
   FullEndPorts?: number[];
   /** 内网http监听器开启h2c开关，True（开启）、False（关闭）。默认为关闭。 */
   H2cSwitch?: boolean;
-  /** 控制 TCP_SSL 类型的监听器是否移除 SSL 加密层。开启后，监听器将作为普通 TCP 协议运行。 可选值：- True： 关闭 SSL 功能（协议降级为纯文本 TCP）。- False（默认）： 保持 SSL 功能开启。 */
+  /** 控制 TCP_SSL 类型的监听器是否移除 SSL 加密层。开启后，监听器将作为普通 TCP 协议运行。 可选值：True： 关闭 SSL 功能（协议降级为纯文本 TCP）。False（默认）： 保持 SSL 功能开启。 */
   SslCloseSwitch?: boolean;
   /** 数据压缩模式。可选值：transparent（透传模式）、compatibility（兼容模式） */
   DataCompressMode?: string;
@@ -1655,13 +1655,13 @@ declare interface CreateLoadBalancerRequest {
   LoadBalancerType: string;
   /** 负载均衡实例的类型。1：通用的负载均衡实例，目前只支持传入1。 */
   Forward?: number;
-  /** 负载均衡实例的名称，只在创建一个实例的时候才会生效。规则：1-60 个英文、汉字、数字、连接线“-”或下划线“_”。注意：如果名称与系统中已有负载均衡实例的名称相同，则系统将会自动生成此次创建的负载均衡实例的名称。 */
+  /** 负载均衡实例的名称，只在创建一个实例的时候才会生效。规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。注意：如果名称与系统中已有负载均衡实例的名称相同，则系统将会自动生成此次创建的负载均衡实例的名称。 */
   LoadBalancerName?: string;
-  /** 负载均衡后端目标设备所属的网络 ID，如vpc-12345678，可以通过 [DescribeVpcs](https://cloud.tencent.com/document/product/215/15778) 接口获取。 不填此参数则默认为DefaultVPC。创建内网负载均衡实例时，此参数必填。 */
+  /** 负载均衡后端目标设备所属的网络 ID，如vpc-12345678，可以通过 DescribeVpcs 接口获取。 不填此参数则默认为DefaultVPC。创建内网负载均衡实例时，此参数必填。 */
   VpcId?: string;
   /** 在私有网络内购买内网负载均衡实例的情况下，必须指定子网 ID，内网负载均衡实例的 VIP 将从这个子网中产生。创建内网负载均衡实例时，此参数必填，创建公网IPv4负载均衡实例时，不支持指定该参数。 */
   SubnetId?: string;
-  /** 负载均衡实例所属的项目 ID，默认项目 ID 为0。可以通过 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 接口获取。不填此参数则视为默认项目。 */
+  /** 负载均衡实例所属的项目 ID，默认项目 ID 为0。可以通过 DescribeProject 接口获取。不填此参数则视为默认项目。 */
   ProjectId?: number;
   /** 仅适用于公网负载均衡。IP版本，可取值：IPV4、IPV6、IPv6FullChain，不区分大小写，默认值 IPV4。说明：取值为IPV6表示为IPV6 NAT64版本；取值为IPv6FullChain，表示为IPv6版本。 */
   AddressIPVersion?: string;
@@ -1671,21 +1671,21 @@ declare interface CreateLoadBalancerRequest {
   MasterZoneId?: string;
   /** 仅适用于公网且IP版本为IPv4的负载均衡。可用区ID，可用区 ID 和名称均支持，指定可用区以创建负载均衡实例。如：100001 或 ap-guangzhou-1。 */
   ZoneId?: string;
-  /** 网络计费模式，最大出带宽。仅对内网属性的性能容量型实例和公网属性的所有实例生效。API接口购买包年包月实例还在灰度中，如您需要体验该功能，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category) */
+  /** 网络计费模式，最大出带宽。仅对内网属性的性能容量型实例和公网属性的所有实例生效。API接口购买包年包月实例还在灰度中，如您需要体验该功能，请通过 工单申请 */
   InternetAccessible?: InternetAccessible;
-  /** 仅适用于公网负载均衡。目前仅广州、上海、南京、济南、杭州、福州、北京、石家庄、武汉、长沙、成都、重庆地域支持静态单线 IP 线路类型，如需体验，请联系商务经理申请。申请通过后，即可选择中国移动（CMCC）、中国联通（CUCC）或中国电信（CTCC）的运营商类型，网络计费模式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。 如果不指定本参数，则默认使用BGP。可通过 [DescribeResources](https://cloud.tencent.com/document/api/214/70213) 接口查询一个地域所支持的Isp。 */
+  /** 仅适用于公网负载均衡。目前仅广州、上海、南京、济南、杭州、福州、北京、石家庄、武汉、长沙、成都、重庆地域支持静态单线 IP 线路类型，如需体验，请联系商务经理申请。申请通过后，即可选择中国移动（CMCC）、中国联通（CUCC）或中国电信（CTCC）的运营商类型，网络计费模式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。 如果不指定本参数，则默认使用BGP。可通过 DescribeResources 接口查询一个地域所支持的Isp。 */
   VipIsp?: string;
   /** 购买负载均衡的同时，给负载均衡打上标签，最大支持20个标签键值对。 */
   Tags?: TagInfo[];
   /** 指定VIP申请负载均衡。此参数选填，不填写此参数时自动分配VIP。IPv4和IPv6类型支持此参数，IPv6 NAT64类型不支持。注意：当指定VIP创建内网实例、或公网IPv6 BGP实例时，若VIP不属于指定VPC子网的网段内时，会创建失败；若VIP已被占用，也会创建失败。 */
   Vip?: string;
-  /** 带宽包ID，可以通过 [DescribeBandwidthPackages](https://cloud.tencent.com/document/api/215/19209) 接口获取。指定此参数时，网络计费方式（InternetAccessible.InternetChargeType）只支持按带宽包计费（BANDWIDTH_PACKAGE），带宽包的属性即为其结算方式。非上移用户购买的 IPv6 负载均衡实例，且运营商类型非 BGP 时 ，不支持指定具体带宽包id。 */
+  /** 带宽包ID，可以通过 DescribeBandwidthPackages 接口获取。指定此参数时，网络计费方式（InternetAccessible.InternetChargeType）只支持按带宽包计费（BANDWIDTH_PACKAGE），带宽包的属性即为其结算方式。非上移用户购买的 IPv6 负载均衡实例，且运营商类型非 BGP 时 ，不支持指定具体带宽包id。 */
   BandwidthPackageId?: string;
   /** 独占型实例信息。若创建独占型的内网负载均衡实例，则此参数必填。 */
   ExclusiveCluster?: ExclusiveCluster;
   /** 性能容量型规格。若需要创建性能容量型实例，则此参数必填，取值范围： clb.c2.medium：标准型规格 clb.c3.small：高阶型1规格 clb.c3.medium：高阶型2规格 clb.c4.small：超强型1规格 clb.c4.medium：超强型2规格 clb.c4.large：超强型3规格 clb.c4.xlarge：超强型4规格 若需要创建共享型实例，则无需填写此参数。如需了解规格详情，请参见[实例规格对比](https://cloud.tencent.com/document/product/214/84689)。 */
   SlaType?: string;
-  /** 集群ID，集群标识，在需要配置公有云独占集群或本地专有集群时使用。公有云独占集群申请请[提交工单](https://console.cloud.tencent.com/workorder/category)，本地专有集群请参考[本地专有集群](https://cloud.tencent.com/document/product/1346)描述。 */
+  /** 集群ID，集群标识，在需要配置公有云独占集群或本地专有集群时使用。公有云独占集群申请请提交工单，本地专有集群请参考本地专有集群描述。 */
   ClusterIds?: string[];
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
@@ -1695,9 +1695,9 @@ declare interface CreateLoadBalancerRequest {
   SnatIps?: SnatIp[];
   /** Stgw独占集群的标签。 */
   ClusterTag?: string;
-  /** 仅适用于公网且IP版本为IPv4的负载均衡。设置跨可用区容灾时的备可用区ID，可用区 ID 和名称均支持，例如 100001 或 ap-guangzhou-1注：备可用区是主可用区故障后，需要承载流量的可用区。可通过 [DescribeResources](https://cloud.tencent.com/document/api/214/70213) 接口查询一个地域的主/备可用区的列表。【如果您需要体验该功能，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)】 */
+  /** 仅适用于公网且IP版本为IPv4的负载均衡。设置跨可用区容灾时的备可用区ID，可用区 ID 和名称均支持，例如 100001 或 ap-guangzhou-1注：备可用区是主可用区故障后，需要承载流量的可用区。可通过 DescribeResources 接口查询一个地域的主/备可用区的列表。【如果您需要体验该功能，请通过 工单申请】 */
   SlaveZoneId?: string;
-  /** EIP 的唯一 ID，可以通过 [DescribeAddresses](https://cloud.tencent.com/document/product/215/16702) 接口查询。形如：eip-qhx8udkc，仅适用于内网负载均衡绑定EIP。 */
+  /** EIP 的唯一 ID，可以通过 DescribeAddresses 接口查询。形如：eip-qhx8udkc，仅适用于内网负载均衡绑定EIP。 */
   EipAddressId?: string;
   /** Target是否放通来自CLB的流量。开启放通（true）：只验证CLB上的安全组；不开启放通（false）：需同时验证CLB和后端实例上的安全组。IPv6 CLB安全组默认放通，不需要传此参数。 */
   LoadBalancerPassToTarget?: boolean;
@@ -1705,9 +1705,9 @@ declare interface CreateLoadBalancerRequest {
   DynamicVip?: boolean;
   /** 网络出口 */
   Egress?: string;
-  /** 负载均衡实例的预付费相关属性，API接口购买包年包月实例还在灰度中，如您需要体验该功能，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category) */
+  /** 负载均衡实例的预付费相关属性，API接口购买包年包月实例还在灰度中，如您需要体验该功能，请通过 工单申请 */
   LBChargePrepaid?: LBChargePrepaid;
-  /** 负载均衡实例计费类型，取值：POSTPAID_BY_HOUR，PREPAID，默认是POSTPAID_BY_HOUR。API接口购买包年包月实例还在灰度中，如您需要体验该功能，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category) */
+  /** 负载均衡实例计费类型，取值：POSTPAID_BY_HOUR，PREPAID，默认是POSTPAID_BY_HOUR。API接口购买包年包月实例还在灰度中，如您需要体验该功能，请通过 工单申请 */
   LBChargeType?: string;
   /** 七层访问日志主题ID */
   AccessLogTopicId?: string;
@@ -1755,7 +1755,7 @@ declare interface CreateRuleResponse {
 }
 
 declare interface CreateTargetGroupRequest {
-  /** 目标组名称，限定50个字符 */
+  /** 目标组名称。命名规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。 */
   TargetGroupName?: string;
   /** 目标组的vpcId属性，不填则使用默认vpc。 */
   VpcId?: string;
@@ -1769,7 +1769,7 @@ declare interface CreateTargetGroupRequest {
   Protocol?: string;
   /** 健康检查。 */
   HealthCheck?: TargetGroupHealthCheck;
-  /** 调度算法，仅V2新版目标组，且后端转发协议为(HTTP|HTTPS|GRPC)时该参数有效。可选值：WRR:按权重轮询。LEAST_CONN:最小连接数。IP_HASH:按IP哈希。默认为 WRR。 */
+  /** 调度算法，仅V2新版目标组，且后端转发协议为(HTTP|HTTPS|GRPC)时该参数有效。可选值：&lt;ur&gt;WRR:按权重轮询。LEAST_CONN:最小连接数。IP_HASH:按IP哈希。默认为 WRR。&lt;ur&gt; */
   ScheduleAlgorithm?: string;
   /** 标签。 */
   Tags?: TagInfo[];
@@ -1783,6 +1783,8 @@ declare interface CreateTargetGroupRequest {
   SessionExpireTime?: number;
   /** IP版本类型。 */
   IpVersion?: string;
+  /** 是否开启SNAT（源IP替换），True（开启）、False（关闭）。默认为关闭。注意：SnatEnable开启时会替换客户端源IP，此时透传客户端源IP选项关闭，反之亦然。 */
+  SnatEnable?: boolean;
 }
 
 declare interface CreateTargetGroupResponse {
@@ -2713,11 +2715,11 @@ declare interface ModifyFunctionTargetsResponse {
 }
 
 declare interface ModifyListenerRequest {
-  /** 负载均衡实例ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口查询。 */
+  /** 负载均衡实例ID，可以通过 DescribeLoadBalancers 接口查询。 */
   LoadBalancerId: string;
-  /** 负载均衡监听器ID，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。 */
+  /** 负载均衡监听器ID，可以通过 DescribeListeners 接口查询。 */
   ListenerId: string;
-  /** 新的监听器名称，最大长度255。 */
+  /** 新的监听器名称。命名规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。 */
   ListenerName?: string;
   /** 会话保持时间，单位：秒。可选值：30~3600，默认 0，表示不开启。此参数仅适用于TCP/UDP监听器。 */
   SessionExpireTime?: number;
@@ -2731,7 +2733,7 @@ declare interface ModifyListenerRequest {
   SniSwitch?: number;
   /** 后端目标类型，NODE表示绑定普通节点，TARGETGROUP表示绑定目标组。 */
   TargetType?: string;
-  /** 是否开启长连接，此参数仅适用于HTTP/HTTPS监听器。默认值0表示不开启，1表示开启。若后端服务对连接数上限有限制，则建议谨慎开启。此功能目前处于内测中，如需使用，请提交 [内测申请](https://cloud.tencent.com/apply/p/tsodp6qm21)。 */
+  /** 是否开启长连接，此参数仅适用于HTTP/HTTPS监听器。默认值0表示不开启，1表示开启。若后端服务对连接数上限有限制，则建议谨慎开启。此功能目前处于内测中，如需使用，请提交 内测申请。 */
   KeepaliveEnable?: number;
   /** 重新调度功能，解绑后端服务开关，打开此开关，当解绑后端服务时触发重新调度。仅TCP/UDP监听器支持。 */
   DeregisterTargetRst?: boolean;
@@ -2743,11 +2745,11 @@ declare interface ModifyListenerRequest {
   MaxConn?: number;
   /** 监听器粒度新建连接数上限，当前仅性能容量型实例且仅TCP/UDP/TCP_SSL/QUIC监听器支持。取值范围：1-实例规格新建连接上限，其中-1表示关闭监听器粒度新建连接数限速。基础网络实例不支持该参数。默认为 -1 表示不限速。 */
   MaxCps?: number;
-  /** 空闲连接超时时间，此参数仅适用于TCP/UDP监听器，单位：秒。TCP监听器默认值：900，UDP监听器默认值：300s。取值范围：共享型实例和独占型实例支持：10～900，性能容量型实例支持：10~1980。如需设置超过1980s，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category),最大可设置到3600s。 */
+  /** 空闲连接超时时间，此参数仅适用于TCP/UDP监听器，单位：秒。TCP监听器默认值：900，UDP监听器默认值：300s。取值范围：共享型实例和独占型实例支持：10～900，性能容量型实例支持：10~1980。如需设置超过1980s，请通过 工单申请,最大可设置到3600s。 */
   IdleConnectTimeout?: number;
   /** TCP_SSL和QUIC是否支持PP */
   ProxyProtocol?: boolean;
-  /** 是否开启SNAT（源IP替换），True（开启）、False（关闭）。默认为关闭。注意：SnatEnable开启时会替换客户端源IP，此时`透传客户端源IP`选项关闭，反之亦然。 */
+  /** 是否开启SNAT（源IP替换），True（开启）、False（关闭）。默认为关闭。注意：SnatEnable开启时会替换客户端源IP，此时透传客户端源IP选项关闭，反之亦然。 */
   SnatEnable?: boolean;
   /** 数据压缩模式 */
   DataCompressMode?: string;
@@ -2771,7 +2773,7 @@ declare interface ModifyListenerResponse {
 declare interface ModifyLoadBalancerAttributesRequest {
   /** 负载均衡的唯一ID，可以通过 DescribeLoadBalancers 接口获取。 */
   LoadBalancerId: string;
-  /** 负载均衡实例名称，规则：1-60 个英文、汉字、数字、连接线“-”或下划线“_”。 */
+  /** 负载均衡实例名称，规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。 */
   LoadBalancerName?: string;
   /** 设置负载均衡跨地域绑定1.0的后端服务信息 */
   TargetRegionInfo?: TargetRegionInfo;
@@ -2869,11 +2871,11 @@ declare interface ModifyRuleResponse {
 declare interface ModifyTargetGroupAttributeRequest {
   /** 目标组的ID。 */
   TargetGroupId: string;
-  /** 目标组的新名称。 */
+  /** 目标组的新名称。命名规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。 */
   TargetGroupName?: string;
   /** 目标组的新默认端口。全监听目标组不支持此参数。 */
   Port?: number;
-  /** 调度算法，仅V2新版目标组，且后端转发协议为(HTTP|HTTPS|GRPC)时该参数有效。可选值：WRR:按权重轮询。LEAST_CONN:最小连接数。IP_HASH:按IP哈希。默认为 WRR。 */
+  /** 调度算法，仅V2新版目标组，且后端转发协议为(HTTP|HTTPS|GRPC)时该参数有效。可选值：&lt;ur&gt;WRR:按权重轮询。LEAST_CONN:最小连接数。IP_HASH:按IP哈希。默认为 WRR。&lt;ur&gt; */
   ScheduleAlgorithm?: string;
   /** 健康检查详情。 */
   HealthCheck?: TargetGroupHealthCheck;

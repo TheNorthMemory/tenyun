@@ -1016,6 +1016,14 @@ declare interface ConfigGroupVersionInfo {
   CreateTime?: string;
 }
 
+/** 版本管理配置组工作模式信息。 */
+declare interface ConfigGroupWorkModeInfo {
+  /** 配置组类型，可选项如下：l7_acceleration: 七层加速配置组；edge_functions: 边缘函数配置组。 */
+  ConfigGroupType: string;
+  /** 工作模式，可选项如下：immediate_effect: 即时生效模式；version_control: 版本管理模式。 */
+  WorkMode: string;
+}
+
 /** 内容压缩配置。 */
 declare interface ContentCompressionParameters {
   /** 内容压缩配置开关，取值有：on：开启；off：关闭。当 Switch 为 on 时，将同时支持 brotli 和 gzip 压缩算法。 */
@@ -4114,6 +4122,8 @@ declare interface Zone {
   VanityNameServers?: VanityNameServers | null;
   /** 用户自定义 NS IP 信息。（该字段为历史保留字段，已不再维护，请根据站点类型参考对应字段） */
   VanityNameServersIps?: VanityNameServersIps[] | null;
+  /** 版本管理配置组工作模式。站点各配置模块可按照配置组维度开启「版本管理模式」或「即时生效模式」，详情请参考 [版本管理](https://cloud.tencent.com/document/product/1552/113690)。 */
+  WorkModeInfos?: ConfigGroupWorkModeInfo[];
 }
 
 /** 站点加速配置。 */
@@ -6681,7 +6691,7 @@ declare interface DescribeZonesRequest {
   Offset?: number;
   /** 分页查询限制数目。默认值：20，最大值：100。 */
   Limit?: number;
-  /** 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回当前 appid 下有权限的所有站点信息。详细的过滤条件如下：zone-name：按照站点名称进行过滤；zone-type：按照站点类型进行过滤。可选项： full：NS 接入类型； partial：CNAME 接入类型； partialComposite：无域名接入类型； dnsPodAccess：DNSPod 托管接入类型； pages：Pages 类型。zone-id：按照站点 ID 进行过滤，站点 ID 形如：zone-2noz78a8ev6k；status：按照站点状态进行过滤。可选项： active：NS 已切换； pending：NS 待切换； deleted：已删除。tag-key：按照标签键进行过滤；tag-value： 按照标签值进行过滤；alias-zone-name： 按照同名站点标识进行过滤。模糊查询时支持过滤字段名为 zone-name 或 alias-zone-name。 */
+  /** 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回当前 appid 下有权限的所有站点信息。详细的过滤条件如下：zone-name：按照站点名称进行过滤；zone-type：按照站点类型进行过滤。可选项： full：NS 接入类型； partial：CNAME 接入类型； partialComposite：无域名接入类型； dnsPodAccess：DNSPod 托管接入类型； pages：Pages 接入类型。 zone-id：按照站点 ID 进行过滤，站点 ID 形如：zone-2noz78a8ev6k；status：按照站点状态进行过滤。可选项： active：NS 已切换； pending：NS 待切换； deleted：已删除。tag-key：按照标签键进行过滤；tag-value： 按照标签值进行过滤；alias-zone-name： 按照同名站点标识进行过滤。模糊查询时支持过滤字段名为 zone-name 或 alias-zone-name。 */
   Filters?: AdvancedFilter[];
   /** 可根据该字段对返回结果进行排序，取值有： type：接入类型； area：加速区域； create-time：创建时间； zone-name：站点名称； use-time：最近使用时间； active-status：生效状态。不填写时对返回结果默认按照 create-time 排序。 */
   Order?: string;
@@ -7642,6 +7652,18 @@ declare interface ModifyZoneStatusResponse {
   RequestId?: string;
 }
 
+declare interface ModifyZoneWorkModeRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 版本管理配置组工作模式。站点各配置模块可按照配置组维度开启「版本管理模式」或「即时生效模式」，详情请参考 [版本管理](https://cloud.tencent.com/document/product/1552/113690)。 */
+  WorkModeInfos?: ConfigGroupWorkModeInfo[];
+}
+
+declare interface ModifyZoneWorkModeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RefreshMultiPathGatewaySecretKeyRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -8327,6 +8349,8 @@ declare interface Teo {
   ModifyZoneSetting(data: ModifyZoneSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneSettingResponse>;
   /** 切换站点状态 {@link ModifyZoneStatusRequest} {@link ModifyZoneStatusResponse} */
   ModifyZoneStatus(data: ModifyZoneStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneStatusResponse>;
+  /** 修改站点工作模式 {@link ModifyZoneWorkModeRequest} {@link ModifyZoneWorkModeResponse} */
+  ModifyZoneWorkMode(data: ModifyZoneWorkModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneWorkModeResponse>;
   /** 刷新多通道安全加速网关密钥 {@link RefreshMultiPathGatewaySecretKeyRequest} {@link RefreshMultiPathGatewaySecretKeyResponse} */
   RefreshMultiPathGatewaySecretKey(data: RefreshMultiPathGatewaySecretKeyRequest, config?: AxiosRequestConfig): AxiosPromise<RefreshMultiPathGatewaySecretKeyResponse>;
   /** 续费套餐 {@link RenewPlanRequest} {@link RenewPlanResponse} */
