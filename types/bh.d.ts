@@ -544,6 +544,50 @@ declare interface IOAUserGroup {
   Source?: number;
 }
 
+/** LDAP配置信息 */
+declare interface LDAPSetting {
+  /** 是否开启LDAP认证，false-不开启，true-开启 */
+  Enable?: boolean;
+  /** 服务器地址 */
+  Ip?: string;
+  /** 备用服务器地址 */
+  IpBackup?: string;
+  /** 服务端口 */
+  Port?: number;
+  /** 是否开启SSL，false-不开启，true-开启 */
+  EnableSSL?: boolean;
+  /** Base DN */
+  BaseDN?: string;
+  /** 管理员账号 */
+  AdminAccount?: string;
+  /** 用户属性 */
+  AttributeUser?: string;
+  /** 用户名属性 */
+  AttributeUserName?: string;
+  /** 自动同步，false-不开启，true-开启 */
+  AutoSync?: boolean;
+  /** 覆盖用户信息，false-不开启，true-开启 */
+  Overwrite?: boolean;
+  /** 同步周期，30～60000之间的整数 */
+  SyncPeriod?: number;
+  /** 是否同步全部，false-不开启，true-开启 */
+  SyncAll?: boolean;
+  /** 同步OU列表 */
+  SyncUnitSet?: string[];
+  /** 组织单元属性 */
+  AttributeUnit?: string;
+  /** 用户姓名属性 */
+  AttributeRealName?: string;
+  /** 手机号属性 */
+  AttributePhone?: string;
+  /** 邮箱属性 */
+  AttributeEmail?: string;
+  /** 请求LDAP服务的堡垒机实例 */
+  ResourceId?: string | null;
+  /** 网络域Id */
+  DomainId?: string | null;
+}
+
 /** 登录日志 */
 declare interface LoginEvent {
   /** 用户名 */
@@ -558,6 +602,36 @@ declare interface LoginEvent {
   Entry?: number;
   /** 操作结果，1-成功，2-失败 */
   Result?: number;
+}
+
+/** 登录安全设置 */
+declare interface LoginSetting {
+  /** 登录会话超时，10分钟，20分钟，30分钟，默认20分钟 */
+  TimeOut: number;
+  /** 连续密码错误次数，超过锁定账号，3-5 */
+  LockThreshold: number;
+  /** 账号锁定时长，10分钟，20分钟，30分钟 */
+  LockTime: number;
+  /** 用户多少天不活跃，账号自动锁定 */
+  InactiveUserLock?: number;
+}
+
+/** OAuth认证配置 */
+declare interface OAuthSetting {
+  /** 是否开启OAuth认证 */
+  Enable?: boolean;
+  /** OAuth认证方式。 */
+  AuthMethod?: string;
+  /** OAuth认证客户端Id。 */
+  ClientId?: string;
+  /** 获取OAuth认证授权码URL。 */
+  CodeUrl?: string;
+  /** 获取OAuth令牌URL。 */
+  TokenUrl?: string;
+  /** 获取OAuth用户信息URL。 */
+  UserInfoUrl?: string;
+  /** 使用Okta认证时指定范围。 */
+  Scopes?: string[];
 }
 
 /** 操作日志 */
@@ -600,6 +674,18 @@ declare interface OperationTask {
   NextTime?: string;
   /** 下一次执行时间 */
   FirstTime?: string;
+}
+
+/** 密码要求设置。 */
+declare interface PasswordSetting {
+  /** 密码最小长度，8-20，默认8。 */
+  MinLength?: number;
+  /** 密码复杂度，0不限制，1包含字母和数字，2至少包括大写字母、小写字母、数字、特殊符号，默认2。 */
+  Complexity?: number;
+  /** 密码有效期，0不限制，30天，90天，180天。 */
+  ValidTerm?: number;
+  /** 检查最近n次密码设置是否存在相同密码，2-10，默认5。 */
+  CheckHistory?: number;
 }
 
 /** 运维资产重连次数 */
@@ -890,6 +976,16 @@ declare interface SearchFileTypeFilter {
 
 /** 系统安全设置 */
 declare interface SecuritySetting {
+  /** 认证方式设置 */
+  AuthMode?: AuthModeSetting;
+  /** 密码安全设置 */
+  Password?: PasswordSetting;
+  /** 登录安全设置 */
+  Login?: LoginSetting;
+  /** LDAP配置信息 */
+  LDAP?: LDAPSetting;
+  /** OAuth配置信息 */
+  OAuth?: OAuthSetting;
   /** 国密认证方式设置 */
   AuthModeGM?: AuthModeSetting;
   /** 资产重连次数 */
@@ -1929,6 +2025,8 @@ declare interface DescribeDeviceGroupMembersRequest {
   IdSet?: number[];
   /** 资产名或资产IP，模糊查询 */
   Name?: string;
+  /** 主机绑定的堡垒机服务ID集合 未绑定的通过Filters进行传递 */
+  ResourceIdSet?: string[];
   /** 分页偏移位置，默认值为0 */
   Offset?: number;
   /** 每页条目数，默认20, 最大500 */
@@ -1939,6 +2037,8 @@ declare interface DescribeDeviceGroupMembersRequest {
   KindSet?: number[];
   /** 所属部门ID */
   DepartmentId?: string;
+  /** 过滤条件,支持 BindingStatus｜VpcId ｜InstanceId ｜DeviceAccount ｜ManageDimension｜DomainId｜Ip｜Name */
+  Filters?: Filter[];
   /** 过滤条件，可按照标签键、标签进行过滤。如果同时指定标签键和标签过滤条件，它们之间为“AND”的关系 */
   TagFilters?: TagFilter[];
 }
@@ -2491,9 +2591,11 @@ declare interface ModifyAssetSyncFlagResponse {
 }
 
 declare interface ModifyAuthModeSettingRequest {
-  /** 双因子认证，0-不开启，1-OTP，2-短信，3-USB Key */
-  AuthMode: number;
-  /** 资源类型，0：普通 1：国密 */
+  /** 双因子认证，0-不开启（暂停使用），1-OTP，2-短信，3-USB Key（只有ResourceType=1且AuthModeGM不传时有效，其他情况不能为3） 备注：AuthMode和AuthModeGM至少有一个有效传参 */
+  AuthMode?: number;
+  /** 国密双因子认证，0-不开启（暂停使用），1-OTP，2-短信，3-USB Key备注：AuthMode和AuthModeGM至少有一个有效传参，AuthModeGM优先级高于ResourceType */
+  AuthModeGM?: number;
+  /** 资源类型，0：普通（暂停使用，由AuthMode和AuthModeGM传参决定） 1：国密 */
   ResourceType?: number;
 }
 
@@ -3312,7 +3414,7 @@ declare interface Bh {
   /** 修改资产自动同步开关 {@link ModifyAssetSyncFlagRequest} {@link ModifyAssetSyncFlagResponse} */
   ModifyAssetSyncFlag(data: ModifyAssetSyncFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetSyncFlagResponse>;
   /** 修改认证方式配置信息 {@link ModifyAuthModeSettingRequest} {@link ModifyAuthModeSettingResponse} */
-  ModifyAuthModeSetting(data: ModifyAuthModeSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuthModeSettingResponse>;
+  ModifyAuthModeSetting(data?: ModifyAuthModeSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuthModeSettingResponse>;
   /** 更新修改密码任务 {@link ModifyChangePwdTaskRequest} {@link ModifyChangePwdTaskResponse} */
   ModifyChangePwdTask(data: ModifyChangePwdTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyChangePwdTaskResponse>;
   /** 修改高危命令模板 {@link ModifyCmdTemplateRequest} {@link ModifyCmdTemplateResponse} */

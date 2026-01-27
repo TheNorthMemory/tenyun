@@ -2362,6 +2362,34 @@ declare interface RegionSummaryOverviewItem {
   TotalCost?: string;
 }
 
+/** 资源实例信息 */
+declare interface RenewInstance {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 产品编码 */
+  ProductCode?: string;
+  /** 子产品编码 */
+  SubProductCode?: string;
+  /** 地域编码 */
+  RegionCode?: string | null;
+  /** 实例状态：NORMAL 正常，ISOLATED 已隔离 */
+  Status?: string | null;
+  /** 续费标识：NOTIFY_AND_MANUAL_RENEW 手动续费，NOTIFY_AND_AUTO_RENEW 自动续费，DISABLE_NOTIFY_AND_MANUAL_RENEW 到期不续 */
+  RenewFlag?: string | null;
+  /** 实例到期时间 */
+  ExpireTime?: string | null;
+  /** 实例别名：用户在控制台为实例设置的名称，如果未设置，则默认为空 */
+  InstanceName?: string | null;
+  /** 产品名称：用户所采购的各类云产品，例如：云服务器 CVM */
+  ProductName?: string | null;
+  /** 项目名称：实例归属的项目，用户在控制台给实例自主分配项目，未分配则是默认项目 */
+  ProjectName?: string | null;
+  /** 自动续费周期长度 */
+  RenewPeriod?: number | null;
+  /** 自动续费周期单位：y 年，m 月 */
+  RenewPeriodUnit?: string | null;
+}
+
 /** 账单多维度汇总消费详情 */
 declare interface SummaryDetail {
   /** 账单维度编码 */
@@ -4053,6 +4081,32 @@ declare interface DescribeGatherRuleDetailResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRenewInstancesRequest {
+  /** 每页的最大实例条数。 取值范围：1~100。 */
+  MaxResults: number;
+  /** 查询返回结果下一页的令牌。首次调用 API 不需要NextToken。 */
+  NextToken?: string;
+  /** 获取实例的排序方向。枚举值如下：false=正序（默认）true=倒序 */
+  Reverse?: boolean;
+  /** 续费标识。多个值用英文逗号分隔。枚举值如下：NOTIFY_AND_MANUAL_RENEW：手动续费NOTIFY_AND_AUTO_RENEW：自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW：到期不续 */
+  RenewFlagList?: string[];
+  /** 实例ID。多个ID用英文逗号分隔，最多不超过100个。 */
+  InstanceIdList?: string[];
+  /** 到期时间段起，格式为yyyy-MM-dd HH:mm:ss。 */
+  ExpireTimeStart?: string;
+  /** 到期时间段止，格式为yyyy-MM-dd HH:mm:ss。 */
+  ExpireTimeEnd?: string;
+}
+
+declare interface DescribeRenewInstancesResponse {
+  /** 实例汇总列表。 */
+  InstanceList?: RenewInstance[];
+  /** 查询返回结果下一页的令牌。 */
+  NextToken?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSavingPlanResourceInfoRequest {
   /** 数量，最大值为100 */
   Limit: number;
@@ -4452,6 +4506,8 @@ declare interface Billing {
   DescribeGatherResource(data: DescribeGatherResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatherResourceResponse>;
   /** 查询归集规则详情 {@link DescribeGatherRuleDetailRequest} {@link DescribeGatherRuleDetailResponse} */
   DescribeGatherRuleDetail(data: DescribeGatherRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatherRuleDetailResponse>;
+  /** 查询续费实例 {@link DescribeRenewInstancesRequest} {@link DescribeRenewInstancesResponse} */
+  DescribeRenewInstances(data: DescribeRenewInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRenewInstancesResponse>;
   /** 查询节省计划可共享列表详情 {@link DescribeSavingPlanResourceInfoRequest} {@link DescribeSavingPlanResourceInfoResponse} */
   DescribeSavingPlanResourceInfo(data: DescribeSavingPlanResourceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSavingPlanResourceInfoResponse>;
   /** 获取分账标签 {@link DescribeTagListRequest} {@link DescribeTagListResponse} */

@@ -126,6 +126,24 @@ declare interface AuthInfo {
   AuthUsers?: string[] | null;
 }
 
+/** openapi授权返回 */
+declare interface AuthorizePrivilegesRsp {
+  /** 批量授权结果 */
+  OverallSuccess?: boolean;
+  /** 授权详情列表 */
+  Results?: AuthorizeResult[];
+}
+
+/** AuthorizeResult授权结果 */
+declare interface AuthorizeResult {
+  /** 授权资源 */
+  Resource?: PrivilegeResource | null;
+  /** 结果 */
+  Result?: boolean | null;
+  /** 原因 */
+  Reason?: string | null;
+}
+
 /** 单次补录实例详情 */
 declare interface BackfillInstance {
   /** 任务名称 */
@@ -1074,6 +1092,14 @@ declare interface Filter {
   Values?: string[];
 }
 
+/** GetResourcePrivilegeDetailRsp */
+declare interface GetResourcePrivilegeDetailRsp {
+  /** 权限详情列表 */
+  Details?: ResourcePrivilegeDetail[];
+  /** 总计 */
+  TotalCount?: number;
+}
+
 /** 参数传递-引用参数 */
 declare interface InTaskParameter {
   /** 参数名 */
@@ -1232,6 +1258,10 @@ declare interface LineageNodeInfo {
   Resource?: LineageResource | null;
   /** 关系 */
   Relation?: LineageRelation | null;
+  /** 上游数量 */
+  DownStreamCount?: number;
+  /** 下游数量 */
+  UpStreamCount?: number;
 }
 
 /** 血缘Pair对象 */
@@ -1834,6 +1864,14 @@ declare interface OutTaskParameter {
   ParamValue: string | null;
 }
 
+/** 页码参数 */
+declare interface Page {
+  /** 页大小 */
+  PageSize?: number | null;
+  /** 页码 */
+  PageNumber?: number | null;
+}
+
 /** 角色列表分页信息 */
 declare interface PageRoles {
   /** 角色信息 */
@@ -1868,6 +1906,46 @@ declare interface ParentDependencyConfigPage {
   PageSize?: number | null;
   /** 分页数据 */
   Items?: OpsTaskDepend[] | null;
+}
+
+/** 权限信息 */
+declare interface PrivilegeInfo {
+  /** 权限名称 */
+  Name?: string | null;
+  /** 权限展示名称 */
+  DisplayName?: string | null;
+  /** 权限描述 */
+  Description?: string | null;
+  /** 是否为读取权限 */
+  IsRead?: boolean | null;
+  /** 是否为管理权限 */
+  IsManage?: boolean | null;
+  /** 是否拥有此权限，检查权限时使用 */
+  Granted?: boolean | null;
+  /** 继承自哪个资源，查询权限详情时使用 */
+  InheritedObject?: PrivilegeResource | null;
+  /** 否继承获得，查询权限详情时使用 */
+  Inherited?: boolean | null;
+  /** 是否为编辑权限 */
+  IsEdit?: boolean | null;
+  /** 是否元数据权限（前端展示） */
+  IsMetaDataPermission?: boolean;
+  /** CatalogID(废弃) */
+  CatalogID?: string | null;
+  /** catalog名称(废弃) */
+  CatalogName?: string | null;
+  /** 空间ID(废弃) */
+  WorkSpaceID?: string | null;
+  /** 空间名称(废弃) */
+  WorkSpaceName?: string | null;
+}
+
+/** 权限资源模型 */
+declare interface PrivilegeResource {
+  /** 资源类型 Catalog、Schema等 */
+  ResourceType?: string | null;
+  /** 资源URI */
+  ResourceUri?: string | null;
 }
 
 /** 项目信息 */
@@ -2886,6 +2964,16 @@ declare interface ResourceNumber {
   Quantity?: number;
 }
 
+/** ResourcePrivilegeDetail */
+declare interface ResourcePrivilegeDetail {
+  /** 资源 */
+  Resource?: PrivilegeResource;
+  /** 主体 */
+  SubjectDetails?: SubjectInfo[];
+  /** 权限详情 */
+  PermissionDetails?: PrivilegeInfo[];
+}
+
 /** 资源组操作结果 */
 declare interface ResourceResult {
   /** 是否成功 */
@@ -2910,6 +2998,14 @@ declare interface ResourceType {
   Schedule?: ResourceGroupSpecification;
   /** 数据服务资源组(集成、调度、数据服务资源组不可以同时购买)- ds_t(测试规格)- ds_s(基础规格)- ds_m(普及规格)- ds_l(专业规格) */
   DataService?: ResourceGroupSpecification;
+}
+
+/** openapi回收授权返回 */
+declare interface RevokePrivilegesRsp {
+  /** 结果 */
+  OverallSuccess?: boolean;
+  /** 详情列表 */
+  Results?: AuthorizeResult[];
 }
 
 /** SQL探索文件/文件夹操作结果 */
@@ -3018,6 +3114,14 @@ declare interface SchemaInfo {
   DatabaseName?: string | null;
 }
 
+/** 数据安全使用的filter */
+declare interface SecurityFilter {
+  /** key */
+  Name?: string;
+  /** values */
+  Values?: string[];
+}
+
 /** 创建数据探索脚本文件夹返回类 */
 declare interface SqlCreateResult {
   /** 文件夹id */
@@ -3028,6 +3132,26 @@ declare interface SqlCreateResult {
 declare interface StartTasks {
   /** 任务启动是否成功 */
   Status?: boolean;
+}
+
+/** Subject主体信息，授权/回收主体 */
+declare interface Subject {
+  /** 主体类型 */
+  SubjectType?: string;
+  /** 主体列表 */
+  SubjectValues?: string[];
+}
+
+/** SubjectInfo */
+declare interface SubjectInfo {
+  /** 主体类型 */
+  SubjectType?: string;
+  /** 主题类型展示名 */
+  SubjectTypeDisplayName?: string;
+  /** 主体id */
+  SubjectValue?: string;
+  /** 主体名 */
+  SubjectValueDisplayName?: string;
 }
 
 /** 提交数据开发任务结果 */
@@ -4574,6 +4698,22 @@ declare interface AuthorizeDataSourceRequest {
 declare interface AuthorizeDataSourceResponse {
   /** 是否成功 */
   Data?: DataSourceStatus | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AuthorizePrivilegesRequest {
+  /** 资源数组ResourceType：来源于TCCATALOG模块的GetGrantPrivilegesSTD接口中返回的ResourceType，并改为首字母大写，例如METALAKE对应MetalakeResourceUri，取决于 ResourceType，Metalake时固定为default，其他类别采用catalog的三段式结构，例如- Metalake，固定为default- Catalog，取catalogName- Schema，取catalogName.SchemaName- Table,，取catalogName.SchemaName.TableName */
+  Resources: PrivilegeResource[];
+  /** 授权主体数组，SubjectType及对应SubjectValue取值规则- User 用户 - 取自DescribeTenantUserList中的UserId- Project 项目 - 取自DescribeUserProjects中的ProjectId- Role 角色（项目级角色） - 先调用DescribeUserProjects获取项目ID（ProjectId），再调用DescribeRoleList中的角色ID（RoleId），拼装为$ProjectId.$ProjectId. RoleId，例如"3085649716411588608.308335260274237440"- GlobalRole （平台级角色） - AllAccountUsers 全部用户 - 其他ID，取自DescribeTenantRole中的RoleId */
+  Subjects: Subject[];
+  /** 权限点，来源于TCCATALOG模块的GetGrantPrivilegesSTD接口中返回的各类Privileges中的NAME */
+  Privileges: PrivilegeInfo[];
+}
+
+declare interface AuthorizePrivilegesResponse {
+  /** 结果 */
+  Data?: AuthorizePrivilegesRsp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6396,6 +6536,24 @@ declare interface ListOpsWorkflowsResponse {
   RequestId?: string;
 }
 
+declare interface ListPermissionsRequest {
+  /** 资源ResourceType：来源于TCCATALOG模块的GetGrantPrivilegesSTD接口中返回的ResourceType，并改为首字母大写，例如METALAKE对应MetalakeResourceUri，取决于 ResourceType，Metalake时固定为default，其他类别采用catalog的三段式结构，例如- Metalake，固定为default- Catalog，取catalogName- Schema，取catalogName.SchemaName- Table,，取catalogName.SchemaName.TableName */
+  Resource?: PrivilegeResource;
+  /** 过滤条件(此参数还未支持) */
+  Filters?: SecurityFilter[];
+  /** 排序字段(此参数还未支持) */
+  OrderFields?: OrderField[];
+  /** 页参数(此参数还未支持) */
+  Page?: Page;
+}
+
+declare interface ListPermissionsResponse {
+  /** 获取资源权限详情 */
+  Data?: GetResourcePrivilegeDetailRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListProcessLineageRequest {
   /** 任务唯一ID */
   ProcessId: string;
@@ -7352,6 +7510,22 @@ declare interface RevokeDataSourceAuthorizationRequest {
 declare interface RevokeDataSourceAuthorizationResponse {
   /** 回收数据源响应体 */
   Data?: DataSourceStatus;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RevokePrivilegesRequest {
+  /** 资源数组，数据来源于ListPermissions接口返回的Resource中的ResourceType和ResourceUri */
+  Resources: PrivilegeResource[];
+  /** 授权回收主体数组，参数组装需要注意：1.SubjectType 和SubjectValues的取值参考ListPermissions接口中返回SubjectDetails中的SubjectType和SubjectValue2.批量回收时，Subjects数组长度需要与权限点Privileges长度一致，并且数据一一对应 */
+  Subjects: Subject[];
+  /** 权限点，Name来源于ListPermissions接口返回的PermissionDetails中的Name，例如：BROWSE 、GRANT_PRIVILEGES */
+  Privileges: PrivilegeInfo[];
+}
+
+declare interface RevokePrivilegesResponse {
+  /** 返回 */
+  Data?: RevokePrivilegesRsp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -23262,6 +23436,8 @@ declare interface Wedata {
   AssociateResourceGroupToProject(data: AssociateResourceGroupToProjectRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateResourceGroupToProjectResponse>;
   /** 授权数据源 {@link AuthorizeDataSourceRequest} {@link AuthorizeDataSourceResponse} */
   AuthorizeDataSource(data: AuthorizeDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<AuthorizeDataSourceResponse>;
+  /** Wedata3.0-Catalog模式下授权 {@link AuthorizePrivilegesRequest} {@link AuthorizePrivilegesResponse} */
+  AuthorizePrivileges(data: AuthorizePrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<AuthorizePrivilegesResponse>;
   /** 新建代码文件 {@link CreateCodeFileRequest} {@link CreateCodeFileResponse} */
   CreateCodeFile(data: CreateCodeFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodeFileResponse>;
   /** 新建代码文件夹 {@link CreateCodeFolderRequest} {@link CreateCodeFolderResponse} */
@@ -23472,6 +23648,8 @@ declare interface Wedata {
   ListOpsTriggerWorkflows(data: ListOpsTriggerWorkflowsRequest, config?: AxiosRequestConfig): AxiosPromise<ListOpsTriggerWorkflowsResponse>;
   /** 获取工作流列表 {@link ListOpsWorkflowsRequest} {@link ListOpsWorkflowsResponse} */
   ListOpsWorkflows(data: ListOpsWorkflowsRequest, config?: AxiosRequestConfig): AxiosPromise<ListOpsWorkflowsResponse>;
+  /** 获取资源的权限详情 {@link ListPermissionsRequest} {@link ListPermissionsResponse} */
+  ListPermissions(data?: ListPermissionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListPermissionsResponse>;
   /** 查询任务血缘列表 {@link ListProcessLineageRequest} {@link ListProcessLineageResponse} */
   ListProcessLineage(data: ListProcessLineageRequest, config?: AxiosRequestConfig): AxiosPromise<ListProcessLineageResponse>;
   /** 查看项目成员列表 {@link ListProjectMembersRequest} {@link ListProjectMembersResponse} */
@@ -23554,6 +23732,8 @@ declare interface Wedata {
   RerunTriggerWorkflowRunAsync(data: RerunTriggerWorkflowRunAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<RerunTriggerWorkflowRunAsyncResponse>;
   /** 回收数据源权限 {@link RevokeDataSourceAuthorizationRequest} {@link RevokeDataSourceAuthorizationResponse} */
   RevokeDataSourceAuthorization(data: RevokeDataSourceAuthorizationRequest, config?: AxiosRequestConfig): AxiosPromise<RevokeDataSourceAuthorizationResponse>;
+  /** Wedata3.0-Catalog模式下授权回收 {@link RevokePrivilegesRequest} {@link RevokePrivilegesResponse} */
+  RevokePrivileges(data: RevokePrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<RevokePrivilegesResponse>;
   /** 运行SQL脚本 {@link RunSQLScriptRequest} {@link RunSQLScriptResponse} */
   RunSQLScript(data: RunSQLScriptRequest, config?: AxiosRequestConfig): AxiosPromise<RunSQLScriptResponse>;
   /** 实例批量置成功(异步) {@link SetSuccessTaskInstancesAsyncRequest} {@link SetSuccessTaskInstancesAsyncResponse} */

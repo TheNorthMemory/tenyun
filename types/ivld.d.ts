@@ -909,19 +909,19 @@ declare interface DescribeVideoSummaryDetailResponse {
 }
 
 declare interface ImportMediaRequest {
-  /** 待分析视频的URL，目前只支持*不带签名的*COS地址，字段输入内容最大为1KB */
+  /** 待分析视频的URL，目前只支持不带签名的COS地址，字段输入内容最大为1KB */
   URL: string;
   /** 待分析视频的MD5，为空时不做校验，否则会做MD5校验，长度必须为32 */
   MD5?: string;
   /** 待分析视频的名称，指定后可支持筛选，视频名称的大小长度不能超过64 */
   Name?: string;
-  /** 当非本人外部视频地址导入时，该字段为转存的cos桶地址且不可为空; 示例：https://${Bucket}-${AppId}.cos.${Region}.myqcloud.com/${PathPrefix}/ (注意，cos路径需要以/分隔符结尾)。推荐采用本主帐号COS桶，如果使用其他帐号COS桶，请确保COS桶可写，否则可导致分析失败 */
+  /** 当非本人外部视频地址导入时，该字段为转存的cos桶地址且不可为空; 示例：https://${Bucket}-${AppId}.cos.${Region}.myqcloud.com/${PathPrefix}/ (注意，cos路径需要以/分隔符结尾)。推荐采用本主账号COS桶，如果使用其他账号COS桶，请确保COS桶可写，否则可导致分析失败 */
   WriteBackCosPath?: string;
   /** 自定义标签，可用于查询 */
   Label?: string;
   /** 媒资导入完成的回调地址，该设置优先级高于控制台全局的设置； */
   CallbackURL?: string;
-  /** 媒资文件类型，详细定义参见[MediaPreknownInfo.MediaType](https://cloud.tencent.com/document/product/1509/65063)默认为2(视频) */
+  /** 媒资文件类型，详细定义参见MediaPreknownInfo.MediaType默认为2(视频) */
   MediaType?: number;
 }
 

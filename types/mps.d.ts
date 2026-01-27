@@ -6168,9 +6168,11 @@ declare interface SubtitleTemplate {
   StreamIndex?: number | null;
   /** 要压制到视频中的字幕文件的输入信息，目前仅支持存储在COS的字幕文件 */
   SubtitleFileInput?: MediaInputInfo | null;
-  /** 字体类型，支持：hei.ttf：黑体song.ttf：宋体kai.ttf（推荐）或 simkai.ttf：楷体msyh.ttf：微软雅黑msyhbd.ttf：微软雅黑加粗hkjgt.ttf：华康金刚体dhttx.ttf：典黑体特细xqgdzt.ttf：喜鹊古字典体qpcyt.ttf：巧拼超圆体arial.ttf：仅支持英文dinalternate.ttf：DIN Alternate Boldhelveticalt.ttf：Helveticahelveticains.ttf：Helvetica Inserattrajanpro.ttf：TrajanPro-Boldkorean.ttf：韩语japanese.ttf：日语thai.ttf：泰语默认：hei.ttf 黑体。注意：楷体推荐使用kai.ttf */
+  /** 压制字幕字体文件的输入信息，目前仅支持url和cos。都填时url优先于cos。填了FontFileInput时FontFileInput优先于FontType */
+  FontFileInput?: MediaInputInfo;
+  /** 字体类型，支持：hei.ttf：黑体song.ttf：宋体kai.ttf（推荐）或 simkai.ttf：楷体msyh.ttf：微软雅黑msyhbd.ttf：微软雅黑加粗hkjgt.ttf：华康金刚体dhttx.ttf：典黑体特细xqgdzt.ttf：喜鹊古字典体qpcyt.ttf：巧拼超圆体arial.ttf：仅支持英文dinalternate.ttf：DIN Alternate Boldhelveticalt.ttf：Helveticahelveticains.ttf：Helvetica Inserattrajanpro.ttf：TrajanPro-Boldkorean.ttf：韩语japanese.ttf：日语thai.ttf：泰语默认：hei.ttf 黑体。注意：楷体推荐使用kai.ttf填了FontFileInput时FontFileInput优先 */
   FontType?: string | null;
-  /** 字体大小，格式：Npx，N 为数值，不指定则以字幕文件中为准。默认源视频高度的5%。 */
+  /** 字体大小，不指定则以字幕文件中为准。支持像素和百分比格式：- 像素：Npx，N范围：(0,4096]。- 百分百：N%，N范围：(0,100]；例如10%表示字幕字体大小=10%*源视频高度。不填且字幕文件无设置时，默认源视频高度的5%。 */
   FontSize?: string | null;
   /** 字体颜色，格式：0xRRGGBB，默认值：0xFFFFFF（白色）。 */
   FontColor?: string | null;
@@ -6180,30 +6182,40 @@ declare interface SubtitleTemplate {
   YPos?: string | null;
   /** 字幕背景底板的y轴坐标位置；支持像素和百分比格式：- 像素：Npx，N范围：[0,4096]。- 百分百：N%，N范围：[0,100]；例如10%表示字幕背景底板y坐标=10%*源视频高度。不传表示不开启字幕背景底板。注意：坐标轴原点位于源视频的中轴线底部，字幕背景底板的基准点在其中轴线底部，参考下图：![image](https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png) */
   BoardY?: string | null;
-  /** 底板的宽度，单位为像素，取值范围：[0,4096]。默认源视频宽像素的90%。 */
+  /** 底板的宽度，正整数。- 代表像素时，取值范围：[0,4096]。- 代表百分数时，[0, 100]。开启底板且不填此值时，默认源视频宽像素的90%。 */
   BoardWidth?: number | null;
-  /** 底板的高度。单位为像素，取值范围：[0,4096]。默认为源视频高像素的15%。 */
+  /** 底板的高度，正整数。- 代表像素时，取值范围：[0,4096]。- 代表百分数时，[0, 100]。开启底板且不填此值时，默认为源视频高像素的15%。 */
   BoardHeight?: number | null;
   /** 底板颜色。格式：0xRRGGBB，默认值：0x000000（黑色）。 */
   BoardColor?: string | null;
   /** 字幕背景板透明度，取值范围：[0, 1]0：完全透明1：完全不透明默认值：0.8。 */
   BoardAlpha?: number | null;
-  /** 描边宽度 */
-  OutlineWidth?: number | null;
-  /** 描边颜色。6位16进制RGB */
-  OutlineColor?: string | null;
-  /** 描边透明度。(0，1] 正浮点数 */
-  OutlineAlpha?: number | null;
-  /** 阴影宽度。浮点数 [0, 1000] */
-  ShadowWidth?: number | null;
-  /** 阴影颜色。6位16进制RGB */
-  ShadowColor?: string | null;
-  /** 阴影透明度。(0，1] 正浮点数 */
-  ShadowAlpha?: number | null;
-  /** 行间距。正整数 [0, 1000] */
-  LineSpacing?: number | null;
-  /** 对齐方式，，取值：top: 顶部对齐，字幕顶部按位置固定，底部随行数变化。bottom: 底部对齐，字幕底部按位置固定，顶部随行数变化。 */
-  Alignment?: string | null;
+  /** 描边宽度。浮点数。- 代表像素值时， [0, 1000]。- 代表百分数时，[0, 100]。不填默认源视频高度的0.3%。 */
+  OutlineWidth?: number;
+  /** 描边颜色。6位16进制RGB。不填默认黑色。 */
+  OutlineColor?: string;
+  /** 描边透明度。(0，1] 正浮点数。不填默认1，完全不透明 */
+  OutlineAlpha?: number;
+  /** 阴影宽度。浮点数。- 代表像素值时， [0, 1000]。- 代表百分数时，[0, 100]。不填默认无阴影。 */
+  ShadowWidth?: number;
+  /** 阴影颜色。6位16进制RGB。不填默认黑色（有设置阴影的情况下） */
+  ShadowColor?: string;
+  /** 阴影透明度。(0，1] 正浮点数。不填默认1，完全不透明（有设置阴影的情况下） */
+  ShadowAlpha?: number;
+  /** 行间距。正整数。- 代表像素值时， [0, 1000]。- 代表百分数时，[0, 100]。不填默认0。 */
+  LineSpacing?: number;
+  /** 对齐方式，取值：top: 顶部对齐，字幕顶部按位置固定，底部随行数变化。bottom: 底部对齐，字幕底部按位置固定，顶部随行数变化。不填默认底部对齐。 */
+  Alignment?: string;
+  /** 默认0。为1时BoardWidth代表百分之几，以视频宽为基准 */
+  BoardWidthUnit?: number;
+  /** 默认0。为1时BoardHeight代表百分之几，以视频高为基准 */
+  BoardHeightUnit?: number;
+  /** 默认0。为1时OutlineWidth代表百分之几，以视频高为基准 */
+  OutlineWidthUnit?: number;
+  /** 默认0。为1时ShadowWidth代表百分之几，以视频高为基准 */
+  ShadowWidthUnit?: number;
+  /** 默认0。为1时LineSpacing代表百分之几，以视频高为基准 */
+  LineSpacingUnit?: number;
 }
 
 /** 字幕翻译输出结果 */

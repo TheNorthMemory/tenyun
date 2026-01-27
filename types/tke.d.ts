@@ -7311,6 +7311,22 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface EnableEksEventPersistenceRequest {
+    /** 集群ID */
+    ClusterId: string;
+    /** cls服务的logsetID */
+    LogsetId?: string;
+    /** cls服务的topicID */
+    TopicId?: string;
+    /** topic所在region */
+    TopicRegion?: string;
+  }
+
+  interface EnableEksEventPersistenceResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface EnableEncryptionProtectionRequest {
     /** 集群ID */
     ClusterId: string;
@@ -8873,6 +8889,8 @@ declare interface Tke {
   EnableClusterDeletionProtection(data: V20180525.EnableClusterDeletionProtectionRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.EnableClusterDeletionProtectionResponse>;
   /** 开启指定集群的托管组件日志采集 {@link V20180525.EnableControlPlaneLogsRequest} {@link V20180525.EnableControlPlaneLogsResponse} */
   EnableControlPlaneLogs(data: V20180525.EnableControlPlaneLogsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.EnableControlPlaneLogsResponse>;
+  /** Eks集群开启事件持久化功能 {@link V20180525.EnableEksEventPersistenceRequest} {@link V20180525.EnableEksEventPersistenceResponse} */
+  EnableEksEventPersistence(data: V20180525.EnableEksEventPersistenceRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.EnableEksEventPersistenceResponse>;
   /** 开启加密数据保护 {@link V20180525.EnableEncryptionProtectionRequest} {@link V20180525.EnableEncryptionProtectionResponse} */
   EnableEncryptionProtection(data: V20180525.EnableEncryptionProtectionRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.EnableEncryptionProtectionResponse>;
   /** 开启事件持久化功能 {@link V20180525.EnableEventPersistenceRequest} {@link V20180525.EnableEventPersistenceResponse} */

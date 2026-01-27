@@ -469,8 +469,10 @@ declare interface DescribeDeviceListRequest {
   PageSize?: number;
   /** 当前页码，不填默认为1（首页） */
   PageNumber?: number;
-  /** 设备状态筛选，不填默认为不过滤。取值：["ready","connected","online"]，online代表ready或connected */
+  /** 设备状态筛选，不填默认为不过滤。取值：[&quot;ready&quot;,&quot;connected&quot;,&quot;online&quot;]，online代表ready或connected */
   DeviceStatus?: string;
+  /** 标识查询项目下的设备注册类型，默认不包含免注册登录设备。 若存在免注册登录设备，该参数传&quot;1&quot;枚举值：0： 项目不包含免注册登录设备1： 项目包含免注册登录设备默认值：0 */
+  RegisterType?: number;
 }
 
 declare interface DescribeDeviceListResponse {
