@@ -14,18 +14,6 @@ declare interface BasicParticiple {
   Pos?: string;
 }
 
-/** 分类详细信息 */
-declare interface Category {
-  /** 分类id。 */
-  Id?: number | null;
-  /** 分类英文名。 */
-  Label?: string | null;
-  /** 分类中文名。 */
-  Name?: string | null;
-  /** 分类置信度。 */
-  Score?: number | null;
-}
-
 /** 复合粒度分词和词性标注的结果。 */
 declare interface CompoundParticiple {
   /** 基础词。 */
@@ -74,14 +62,6 @@ declare interface Entity {
   Name?: string;
 }
 
-/** 待分析的句子对 */
-declare interface SentencePair {
-  /** 需要与目标句子计算相似度的源句子。（仅支持UTF-8格式，不超过500字符） */
-  SourceText: string | null;
-  /** 目标句子。（仅支持UTF-8格式，不超过500字符） */
-  TargetText: string | null;
-}
-
 declare interface AnalyzeSentimentRequest {
   /** 待分析的文本（仅支持UTF-8格式，不超过200字）。 */
   Text: string;
@@ -96,54 +76,6 @@ declare interface AnalyzeSentimentResponse {
   Negative?: number;
   /** 情感分类结果：positive：正面情感negative：负面情感neutral：中性、无情感 */
   Sentiment?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ClassifyContentRequest {
-  /** 待分类的文章的标题（仅支持UTF-8格式，不超过100字符）。 */
-  Title: string;
-  /** 待分类文章的内容, 每个元素对应一个段落。（仅支持UTF-8格式，文章内容长度总和不超过2000字符） */
-  Content: string[];
-}
-
-declare interface ClassifyContentResponse {
-  /** 一级分类。（请参见附录[三级分类体系表](https://cloud.tencent.com/document/product/271/94286)） */
-  FirstClassification?: Category;
-  /** 二级分类。（请参见附录[三级分类体系表](https://cloud.tencent.com/document/product/271/94286)） */
-  SecondClassification?: Category;
-  /** 三级分类。（请参见附录[三级分类体系表](https://cloud.tencent.com/document/product/271/94286)） */
-  ThirdClassification?: Category | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ComposeCoupletRequest {
-  /** 生成对联的关键词。长度需>=2，当长度>2时，自动截取前两个字作为关键字。内容需为常用汉字（不含有数字、英文、韩语、日语、符号等等其他）。 */
-  Text: string;
-  /** 返回的文本结果为繁体还是简体。0：简体；1：繁体。默认为0。 */
-  TargetType?: number;
-}
-
-declare interface ComposeCoupletResponse {
-  /** 横批。 */
-  TopScroll?: string;
-  /** 上联与下联。 */
-  Content?: string[];
-  /** 当对联随机生成时，展示随机生成原因。 */
-  RandomCause?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface EvaluateSentenceSimilarityRequest {
-  /** 待分析的句子对数组。句子对应不超过1对，仅支持中文文本，原句子与目标句子均应不超过500字符。 */
-  SentencePairList: SentencePair[];
-}
-
-declare interface EvaluateSentenceSimilarityResponse {
-  /** 每个句子对的相似度分值。 */
-  ScoreList?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -183,12 +115,6 @@ declare interface Nlp {
   (): Versions;
   /** 情感分析V2 {@link AnalyzeSentimentRequest} {@link AnalyzeSentimentResponse} */
   AnalyzeSentiment(data: AnalyzeSentimentRequest, config?: AxiosRequestConfig): AxiosPromise<AnalyzeSentimentResponse>;
-  /** @deprecated 文本分类V2 {@link ClassifyContentRequest} {@link ClassifyContentResponse} */
-  ClassifyContent(data: ClassifyContentRequest, config?: AxiosRequestConfig): AxiosPromise<ClassifyContentResponse>;
-  /** @deprecated 对联生成 {@link ComposeCoupletRequest} {@link ComposeCoupletResponse} */
-  ComposeCouplet(data: ComposeCoupletRequest, config?: AxiosRequestConfig): AxiosPromise<ComposeCoupletResponse>;
-  /** @deprecated 句子相似度V2 {@link EvaluateSentenceSimilarityRequest} {@link EvaluateSentenceSimilarityResponse} */
-  EvaluateSentenceSimilarity(data: EvaluateSentenceSimilarityRequest, config?: AxiosRequestConfig): AxiosPromise<EvaluateSentenceSimilarityResponse>;
   /** 词法分析V2 {@link ParseWordsRequest} {@link ParseWordsResponse} */
   ParseWords(data: ParseWordsRequest, config?: AxiosRequestConfig): AxiosPromise<ParseWordsResponse>;
   /** 句子纠错 {@link SentenceCorrectionRequest} {@link SentenceCorrectionResponse} */

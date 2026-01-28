@@ -206,6 +206,28 @@ declare interface AuditRuleTemplateInfo {
   AffectedInstances?: string[];
 }
 
+/** 备份设置 */
+declare interface BackupConfigInfo {
+  /** 系统自动时间 */
+  BackupCustomAutoTime?: boolean;
+  /** 表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200 */
+  BackupTimeBeg?: number;
+  /** 表示全备结束时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200 */
+  BackupTimeEnd?: number;
+  /** 该参数目前不支持修改，无需填写。备份频率，长度为7的数组，分别对应周日到周六的备份方式，full-全量备份，increment-增量备份 */
+  BackupWeekDays?: string[] | null;
+  /** 间隔时间 */
+  BackupIntervalTime?: number;
+  /** 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600247=604800，最大为158112000 */
+  ReserveDuration?: number;
+  /** 跨地域备份开启yes-开启no-关闭 */
+  CrossRegionsEnable?: string;
+  /** 跨地域备份地域 */
+  CrossRegions?: string[] | null;
+  /** 动数据备份触发策略，periodically:自动周期备份,frequent:高频备份 */
+  BackupTriggerStrategy?: string;
+}
+
 /** 备份文件信息 */
 declare interface BackupFileInfo {
   /** 快照文件ID，已废弃，请使用BackupId */
@@ -262,6 +284,14 @@ declare interface BackupLimitVpcItem {
   Region?: string;
   /** 限制下载的vpc列表 */
   VpcList?: string[];
+}
+
+/** 备份文件所在地域及ID */
+declare interface BackupRegionAndIds {
+  /** 备份地域 */
+  BackupRegion?: string;
+  /** 备份ID */
+  BackupId?: number;
 }
 
 /** 计费资源信息 */
@@ -750,6 +780,8 @@ declare interface CynosdbClusterDetail {
   ArchiveStatus?: string;
   /** 归档进度，百分比。 */
   ArchiveProgress?: number;
+  /** 是否开启透明加密 */
+  IsOpenTDE?: boolean;
 }
 
 /** 实例错误日志返回类型 */
@@ -2016,6 +2048,36 @@ declare interface QueryParamFilter {
   ExactMatch?: boolean;
 }
 
+/** 模糊查询过滤器 */
+declare interface QuerySimpleFilter {
+  /** 字段名称 */
+  Names?: string[];
+  /** 字段值 */
+  Values?: string[];
+  /** 模糊匹配，true-是，false否 */
+  ExactMatch?: boolean;
+}
+
+/** redo日志详情 */
+declare interface RedoLogItem {
+  /** 文件名 */
+  FileName?: string;
+  /** 文件大小 */
+  FileSize?: number;
+  /** 备份时间 */
+  BackupTime?: string;
+  /** redoLogId */
+  RedoLogId?: number;
+  /** 跨地域信息 */
+  RedoCrossRegions?: BackupRegionAndIds[];
+  /** 状态 */
+  Status?: string;
+  /** 开始时间 */
+  StartTime?: string;
+  /** 完成时间 */
+  FinishTime?: string;
+}
+
 /** 资源包信息 */
 declare interface ResourcePackage {
   /** 资源包的唯一ID */
@@ -2230,6 +2292,30 @@ declare interface SaleZone {
   IsSupportCreateCluster?: number;
 }
 
+/** 遗留备份列表 */
+declare interface SaveBackupClusterInfo {
+  /** 遗照备份id */
+  BackupId?: number;
+  /** 集群id */
+  ClusterId?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 地域 */
+  Region?: string;
+  /** 可用区 */
+  Zone?: string;
+  /** 备份时间 */
+  BackupTime?: string;
+  /** 数据库版本 */
+  DbVersion?: string;
+  /** Db类型(NORMAL, SERVERLESS) */
+  DbMode?: string;
+  /** 集群状态 */
+  ClusterStatus?: string;
+  /** 任务列表 */
+  Tasks?: ObjectTask[];
+}
+
 /** 安全组详情 */
 declare interface SecurityGroup {
   /** 项目ID */
@@ -2336,6 +2422,24 @@ declare interface SlowQueriesItem {
   SyncWriteTimeRemote?: number;
   /** 事务提交延迟（微秒）数据库内核版本大于3.1.12 */
   TrxCommitDelay?: number;
+}
+
+/** 快照备份设置 */
+declare interface SnapshotBackupConfig {
+  /** 系统自动时间 */
+  BackupCustomAutoTime?: boolean;
+  /** 表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200 */
+  BackupTimeBeg?: number;
+  /** 表示全备结束时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200 */
+  BackupTimeEnd?: number;
+  /** 该参数目前不支持修改，无需填写。备份频率，长度为7的数组，分别对应周日到周六的备份方式，full-全量备份，increment-增量备份 */
+  BackupWeekDays?: string[];
+  /** 间隔时间 */
+  BackupIntervalTime?: number;
+  /** 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600247=604800，最大为158112000 */
+  ReserveDuration?: number;
+  /** 动数据备份触发策略，periodically:自动周期备份,frequent:高频备份 */
+  BackupTriggerStrategy?: string;
 }
 
 /** 转换集群log bin开关 */
@@ -3194,6 +3298,20 @@ declare interface DeleteClusterDatabaseResponse {
   RequestId?: string;
 }
 
+declare interface DeleteClusterSaveBackupRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 保留备份文件ID，推荐使用 */
+  SaveBackupId?: number;
+}
+
+declare interface DeleteClusterSaveBackupResponse {
+  /** 任务ID */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteParamTemplateRequest {
   /** 参数模板ID */
   TemplateId: number;
@@ -3402,6 +3520,8 @@ declare interface DescribeBackupConfigResponse {
   LogicCrossRegionsConfigUpdateTime?: string;
   /** 自动逻辑备份配置 */
   LogicBackupConfig?: LogicBackupConfigInfo;
+  /** 二级快照备份配置信息 */
+  SnapshotSecondaryBackupConfig?: BackupConfigInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4198,6 +4318,30 @@ declare interface DescribeProxySpecsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRedoLogsRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 每页条数 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** redolog文件名 */
+  FileNames?: string[];
+}
+
+declare interface DescribeRedoLogsResponse {
+  /** 总条数 */
+  TotalCount?: number;
+  /** redo日志信息 */
+  RedoLogs?: RedoLogItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeResourcePackageDetailRequest {
   /** 资源包唯一ID */
   PackageId: string;
@@ -4318,6 +4462,24 @@ declare interface DescribeSSLStatusResponse {
   IsOpenSSL?: string;
   /** 证书下载地址 */
   DownloadUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSaveBackupClustersRequest {
+  /** 每页条数 */
+  Limit: number;
+  /** 偏移量 */
+  Offset?: number;
+  /** 检索条件 */
+  Filters?: QuerySimpleFilter[];
+}
+
+declare interface DescribeSaveBackupClustersResponse {
+  /** 总条数 */
+  TotalCount?: number;
+  /** 遗留备份信息 */
+  SaveBackupClusterInfos?: SaveBackupClusterInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4659,6 +4821,8 @@ declare interface IsolateClusterRequest {
   IsolateReasonTypes?: number[];
   /** 实例退还原因补充 */
   IsolateReason?: string;
+  /** 保留备份,true-保留（会产生费用） */
+  SaveBackup?: boolean;
 }
 
 declare interface IsolateClusterResponse {
@@ -4681,6 +4845,8 @@ declare interface IsolateInstanceRequest {
   IsolateReasonTypes?: number[];
   /** 实例退还原因补充 */
   IsolateReason?: string;
+  /** 保留备份 */
+  SaveBackup?: boolean;
 }
 
 declare interface IsolateInstanceResponse {
@@ -4811,6 +4977,8 @@ declare interface ModifyBackupConfigRequest {
   LogicBackupConfig?: LogicBackupConfigInfo;
   /** 是否删除自动逻辑备份 */
   DeleteAutoLogicBackup?: boolean;
+  /** 二级快照备份参数 */
+  SnapshotSecondaryBackupConfig?: SnapshotBackupConfig;
 }
 
 declare interface ModifyBackupConfigResponse {
@@ -5266,6 +5434,22 @@ declare interface ModifyServerlessStrategyResponse {
   RequestId?: string;
 }
 
+declare interface ModifySnapBackupCrossRegionConfigRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 是否开启跨地域快照备份ON/OFF */
+  CrossRegionsEnable?: string;
+  /** 快照备份所跨地域 */
+  CrossRegions?: string[];
+}
+
+declare interface ModifySnapBackupCrossRegionConfigResponse {
+  /** 任务id */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyVipVportRequest {
   /** 集群id */
   ClusterId: string;
@@ -5697,6 +5881,8 @@ declare interface RollbackToNewClusterRequest {
   ProjectId?: number;
   /** 是否开启归档，可选范围yesno默认值:yes */
   AutoArchive?: string;
+  /** 是否从保存备份中恢复 */
+  FromSaveBackup?: boolean;
 }
 
 declare interface RollbackToNewClusterResponse {
@@ -6035,6 +6221,8 @@ declare interface Cynosdb {
   DeleteCLSDelivery(data: DeleteCLSDeliveryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCLSDeliveryResponse>;
   /** 删除数据库 {@link DeleteClusterDatabaseRequest} {@link DeleteClusterDatabaseResponse} */
   DeleteClusterDatabase(data: DeleteClusterDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterDatabaseResponse>;
+  /** 删除保留备份 {@link DeleteClusterSaveBackupRequest} {@link DeleteClusterSaveBackupResponse} */
+  DeleteClusterSaveBackup(data: DeleteClusterSaveBackupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterSaveBackupResponse>;
   /** 删除参数模板 {@link DeleteParamTemplateRequest} {@link DeleteParamTemplateResponse} */
   DeleteParamTemplate(data: DeleteParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteParamTemplateResponse>;
   /** 查询账号所有可授予权限 {@link DescribeAccountAllGrantPrivilegesRequest} {@link DescribeAccountAllGrantPrivilegesResponse} */
@@ -6135,6 +6323,8 @@ declare interface Cynosdb {
   DescribeProxyNodes(data?: DescribeProxyNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyNodesResponse>;
   /** 查询数据库代理规格 {@link DescribeProxySpecsRequest} {@link DescribeProxySpecsResponse} */
   DescribeProxySpecs(data?: DescribeProxySpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxySpecsResponse>;
+  /** redo日志列表 {@link DescribeRedoLogsRequest} {@link DescribeRedoLogsResponse} */
+  DescribeRedoLogs(data: DescribeRedoLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedoLogsResponse>;
   /** 查询资源包使用详情 {@link DescribeResourcePackageDetailRequest} {@link DescribeResourcePackageDetailResponse} */
   DescribeResourcePackageDetail(data: DescribeResourcePackageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcePackageDetailResponse>;
   /** 查询资源包列表 {@link DescribeResourcePackageListRequest} {@link DescribeResourcePackageListResponse} */
@@ -6147,6 +6337,8 @@ declare interface Cynosdb {
   DescribeRollbackTimeRange(data: DescribeRollbackTimeRangeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTimeRangeResponse>;
   /** 查询实例SSL状态 {@link DescribeSSLStatusRequest} {@link DescribeSSLStatusResponse} */
   DescribeSSLStatus(data: DescribeSSLStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSSLStatusResponse>;
+  /** 遗留备份列表 {@link DescribeSaveBackupClustersRequest} {@link DescribeSaveBackupClustersResponse} */
+  DescribeSaveBackupClusters(data: DescribeSaveBackupClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSaveBackupClustersResponse>;
   /** 查询Serverless实例可选规格 {@link DescribeServerlessInstanceSpecsRequest} {@link DescribeServerlessInstanceSpecsResponse} */
   DescribeServerlessInstanceSpecs(data?: DescribeServerlessInstanceSpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerlessInstanceSpecsResponse>;
   /** 查询serverless策略 {@link DescribeServerlessStrategyRequest} {@link DescribeServerlessStrategyResponse} */
@@ -6245,6 +6437,8 @@ declare interface Cynosdb {
   ModifyResourcePackagesDeductionPriority(data: ModifyResourcePackagesDeductionPriorityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcePackagesDeductionPriorityResponse>;
   /** 修改serverless策略 {@link ModifyServerlessStrategyRequest} {@link ModifyServerlessStrategyResponse} */
   ModifyServerlessStrategy(data: ModifyServerlessStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServerlessStrategyResponse>;
+  /** 修改快照备份跨地域配置 {@link ModifySnapBackupCrossRegionConfigRequest} {@link ModifySnapBackupCrossRegionConfigResponse} */
+  ModifySnapBackupCrossRegionConfig(data: ModifySnapBackupCrossRegionConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapBackupCrossRegionConfigResponse>;
   /** 修改实例组ip，端口 {@link ModifyVipVportRequest} {@link ModifyVipVportResponse} */
   ModifyVipVport(data: ModifyVipVportRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVipVportResponse>;
   /** 销毁集群 {@link OfflineClusterRequest} {@link OfflineClusterResponse} */

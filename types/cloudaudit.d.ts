@@ -124,11 +124,11 @@ declare interface ResourceField {
 
 /** 跟踪集存储信息 */
 declare interface Storage {
-  /** 存储类型（目前支持 cos、cls） */
+  /** 存储类型（目前支持 cos、cls、ckafka） */
   StorageType: string;
   /** 存储所在地域 */
   StorageRegion: string;
-  /** 存储名称(cos：存储名称为用户自定义的存储桶名称，不包含"-APPID"，仅支持小写字母、数字以及中划线"-"的组合，不能超过50字符，且不支持中划线"-"开头或结尾； cls：存储名称为日志主题id，字符长度为1-50个字符) */
+  /** 存储名称(cos：存储名称为用户自定义的存储桶名称，不包含&quot;-APPID&quot;，仅支持小写字母、数字以及中划线&quot;-&quot;的组合，不能超过50字符，且不支持中划线&quot;-&quot;开头或结尾； cls：存储名称为日志主题id，字符长度为1-50个字符； ckafka： ckafka实例ID/topic. 举例：ckafka-xxxxxx/tencent_test_audit_log) */
   StorageName: string;
   /** 存储目录前缀，cos日志文件前缀仅支持字母和数字的组合，3-40个字符 */
   StoragePrefix: string;
@@ -165,13 +165,13 @@ declare interface CreateAuditTrackRequest {
   Name: string;
   /** 跟踪集状态（未开启：0；开启：1） */
   Status: number;
-  /** 数据投递存储（目前支持 cos、cls） */
+  /** 数据投递存储（目前支持 cos、cls 、ckafka） */
   Storage: Storage;
   /** 跟踪事件类型（读：Read；写：Write；全部：*） */
   ActionType: string;
   /** 跟踪事件所属产品（支持全部产品或单个产品，如：cos，全部：*） */
   ResourceType: string;
-  /** 跟踪事件接口名列表（ResourceType为 * 时，EventNames必须为全部：["*"]；指定ResourceType时，支持全部接口：["*"]；支持部分接口：["cos", "cls"]，接口列表上限10个） */
+  /** 跟踪事件接口名列表（ResourceType为 * 时，EventNames必须为全部：[&quot;*&quot;]；指定ResourceType时，支持全部接口：[&quot;*&quot;]；支持部分接口：[&quot;cos&quot;, &quot;cls&quot;]，接口列表上限10个） */
   EventNames: string[];
   /** 是否开启将集团成员操作日志投递到集团管理账号或者可信服务管理账号(0：未开启，1：开启，只能集团管理账号或者可信服务管理账号开启此项功能) */
   TrackForAllMembers?: number;
@@ -191,7 +191,7 @@ declare interface CreateEventsAuditTrackRequest {
   Name: string;
   /** 跟踪集状态（未开启：0；开启：1） */
   Status: number;
-  /** 数据投递存储（目前支持 cos、cls） */
+  /** 数据投递存储（目前支持 cos、cls、ckafka） */
   Storage: Storage;
   /** 数据过滤条件 */
   Filters: Filter;
@@ -437,9 +437,9 @@ declare interface ModifyAuditTrackRequest {
   ResourceType?: string;
   /** 跟踪集状态（未开启：0；开启：1） */
   Status?: number;
-  /** 跟踪事件接口名列表（ResourceType为 * 时，EventNames必须为全部：["*"]；指定ResourceType时，支持全部接口：["*"]；支持部分接口：["cos", "cls"]，接口列表上限10个） */
+  /** 跟踪事件接口名列表（ResourceType为 * 时，EventNames必须为全部：[&quot;*&quot;]；指定ResourceType时，支持全部接口：[&quot;*&quot;]；支持部分接口：[&quot;cos&quot;, &quot;cls&quot;]，接口列表上限10个） */
   EventNames?: string[];
-  /** 数据投递存储（目前支持 cos、cls） */
+  /** 数据投递存储（目前支持 cos、cls、ckafka） */
   Storage?: Storage;
   /** 是否开启将集团成员操作日志投递到集团管理账号或者可信服务管理账号(0：未开启，1：开启，只能集团管理账号或者可信服务管理账号开启此项功能) */
   TrackForAllMembers?: number;

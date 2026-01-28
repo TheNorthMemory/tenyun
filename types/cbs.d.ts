@@ -564,6 +564,22 @@ declare interface BindAutoSnapshotPolicyResponse {
   RequestId?: string;
 }
 
+declare interface CopyAutoSnapshotPolicyCrossAccountRequest {
+  /** 要备份的定期快照策略ID列表 */
+  AutoSnapshotPolicyIds: string[];
+  /** 目标账户uin */
+  TargetAccountUin: string;
+}
+
+declare interface CopyAutoSnapshotPolicyCrossAccountResponse {
+  /** 已备份的定期快照策略ID列表 */
+  AutoSnapshotPolicyIds?: string[] | null;
+  /** 目标账户uin */
+  TargetAccountUin?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CopySnapshotCrossRegionsRequest {
   /** 快照需要复制到的目标地域，各地域的标准取值可通过接口[DescribeRegions](https://cloud.tencent.com/document/product/213/9456)查询，且只能传入支持快照的地域。 */
   DestinationRegions: string[];
@@ -1285,6 +1301,8 @@ declare interface Cbs {
   AttachDisks(data: AttachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<AttachDisksResponse>;
   /** 绑定定期快照策略 {@link BindAutoSnapshotPolicyRequest} {@link BindAutoSnapshotPolicyResponse} */
   BindAutoSnapshotPolicy(data: BindAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<BindAutoSnapshotPolicyResponse>;
+  /** 自动快照策略的跨账号复制 {@link CopyAutoSnapshotPolicyCrossAccountRequest} {@link CopyAutoSnapshotPolicyCrossAccountResponse} */
+  CopyAutoSnapshotPolicyCrossAccount(data: CopyAutoSnapshotPolicyCrossAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CopyAutoSnapshotPolicyCrossAccountResponse>;
   /** 快照跨地域复制 {@link CopySnapshotCrossRegionsRequest} {@link CopySnapshotCrossRegionsResponse} */
   CopySnapshotCrossRegions(data: CopySnapshotCrossRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<CopySnapshotCrossRegionsResponse>;
   /** 创建定期快照策略 {@link CreateAutoSnapshotPolicyRequest} {@link CreateAutoSnapshotPolicyResponse} */

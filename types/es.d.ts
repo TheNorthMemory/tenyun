@@ -507,6 +507,76 @@ declare namespace V20180416 {
     SearchableSnapshotCosAppId: string | null;
   }
 
+  /** 采集器配置项 */
+  interface CollectorConfigInfo {
+    /** 采集器的主配置文件名，如filebeat.yml，metricbeat.yml等 */
+    FileName: string;
+    /** 采集器的主配置文件内容 */
+    FileContent: string;
+  }
+
+  /** 采集器输出的实例信息 */
+  interface CollectorOutputInstance {
+    /** 采集器输出的实例类型（支持elasticsearch、logstash） */
+    Type: string;
+    /** 采集器输出的实例ID */
+    InstanceId: string;
+    /** 采集器输出到的ES实例的用户名 */
+    ESUserName?: string;
+    /** 采集器输出到的ES实例的密码 */
+    ESUserPasswd?: string;
+    /** 采集器输出到ES实例时，是否开启监控（1为开启，0为不开启，默认为0） */
+    EnableMonitoring?: number;
+    /** 采集器输出到ES实例时，是否开启自动在kibana中生成Dashboard（1为开启，0为不开启，默认为0） */
+    EnableDashboard?: number;
+    /** Ckafka实例的vip */
+    KafkaEndpoint?: string;
+    /** Ckafka实例中的Topic */
+    KafkaTopic?: string;
+    /** Ckafka实例的版本号 */
+    KafkaVersion?: string;
+    /** topic id */
+    SesTopicId?: string;
+    /** topic name */
+    SesTopicName?: string;
+    /** topic address */
+    SesTopicAddress?: string;
+    /** / */
+    SesTopicUserName?: string;
+    /** / */
+    SesTopicPasswd?: string;
+    /** / */
+    LogstashListenPort?: number;
+  }
+
+  /** 容器日志采集配置 */
+  interface CollectorTarget {
+    /** 采集配置名称 */
+    TargetName: string;
+    /** 命名空间列表，包括Include包含和Exclude不包含选项，两者都为空时等同于全部命名空间(包含当前所有的以及未来创建的)。 */
+    Namespaces?: Namespaces | null;
+    /** Pod标签列表 */
+    PodLabels?: PodLabel[] | null;
+    /** 容器名称，支持小写字母、数字、连接符-、下划线_，最多支持63个字符 */
+    ContainerName?: string | null;
+    /** ES索引名称前缀，如果当前采集配置下的容器日志输出到ES集群，则使用该字段作为ES索引名称的前缀，支持大小写字母、数字、连接符-、下划线_，最多支持50个字符 */
+    IndexPrefix?: string | null;
+    /** 日志内容过滤，以逗号分隔，支持大小写字母、数字、连接符-、下划线_以及逗号，最多支持50个字符 */
+    LogFilters?: string | null;
+    /** 高级配置，可自定义采集规则，最多支持2048个字符 */
+    ConfigContent?: string | null;
+    /** Ckafka实例的Topic */
+    KafkaTopic?: string | null;
+    /** ES索引名称，如果当前采集配置下的容器日志输出到ES集群，则使用该字段作为ES索引名称，支持大小写字母、数字、连接符-、下划线_，最多支持50个字符 */
+    IndexAlias?: string | null;
+    /** / */
+    InputType?: string | null;
+    /** 日志采集host路径 */
+    InputPath?: string | null;
+    /** inputs.tail_files */
+    InputsTailFiles?: boolean | null;
+  }
+
   /** 普通索引信息列表 */
   interface CommonIndexInfo {
     /** 普通索引名 */
@@ -1503,6 +1573,14 @@ declare namespace V20180416 {
     MetricAllData?: MetricAllData;
   }
 
+  /** TKE命名空间 */
+  interface Namespaces {
+    /** 包含的命名空间的列表，单个命名空间支持小写字母、数字、连接符-、下划线_，最多支持63个字符 */
+    Include: string[];
+    /** 不包含的命名空间列表，单个命名空间支持小写字母、数字、连接符-、下划线_，最多支持63个字符 */
+    Exclude: string[];
+  }
+
   /** 集群中一种节点类型（如热数据节点，冷数据节点，专用主节点等）的规格描述信息，包括节点类型，节点个数，节点规格，磁盘类型，磁盘大小等, Type不指定时默认为热数据节点；如果节点为master节点，则DiskType和DiskSize参数会被忽略（主节点无数据盘） */
   interface NodeInfo {
     /** 节点数量 */
@@ -1663,6 +1741,14 @@ declare namespace V20180416 {
     NodeType: string | null;
     /** 允许节点出站访问的白名单 */
     WhiteHostList?: string[] | null;
+  }
+
+  /** Pod标签 */
+  interface PodLabel {
+    /** 标签键，支持大小写字母、数字、以及-_./，最多支持63个字符 */
+    LabelKey: string;
+    /** 标签值，支持大小写字母、数字、以及-_./，最多支持63个字符 */
+    LabelValue: string;
   }
 
   /** 任务进度详情 */
@@ -2049,6 +2135,36 @@ declare namespace V20180416 {
   interface CreateClusterSnapshotResponse {
     /** 实例名称 */
     InstanceId?: string | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface CreateCollectorRequest {
+    /** 采集器名称（1-50 个英文、汉字、数字、连接线-或下划线_） */
+    CollectorName: string;
+    /** 采集器版本（支持"6.8.15"、"7.10.2"） */
+    CollectorVersion: string;
+    /** 采集器类型（支持filebeat、metricbeat、heartbeat、auditbeat、packetbeat） */
+    CollectorType: string;
+    /** 采集器输出的ES实例信息 */
+    OutputInstance: CollectorOutputInstance;
+    /** 采集器配置 */
+    CollectorConfigs?: CollectorConfigInfo[];
+    /** 采集器下发的CVM实例ID列表 */
+    CVMInstanceIds?: string[];
+    /** 采集目标类型，CVM或者TKE */
+    TargetType?: string;
+    /** 容器集群ID，采集目标为TKE时必填 */
+    ContainerClusterId?: string;
+    /** 采集器配置，采集目标为TKE时必填 */
+    CollectorTargets?: CollectorTarget[];
+    /** 标签信息 */
+    TagList?: TagInfo[];
+  }
+
+  interface CreateCollectorResponse {
+    /** 采集器ID */
+    CollectorId?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3631,6 +3747,8 @@ declare interface Es {
   CreateAutoBackUpStrategy(data: V20180416.CreateAutoBackUpStrategyRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.CreateAutoBackUpStrategyResponse>;
   /** 创建集群快照 {@link V20180416.CreateClusterSnapshotRequest} {@link V20180416.CreateClusterSnapshotResponse} */
   CreateClusterSnapshot(data: V20180416.CreateClusterSnapshotRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.CreateClusterSnapshotResponse>;
+  /** 创建Beats采集器 {@link V20180416.CreateCollectorRequest} {@link V20180416.CreateCollectorResponse} */
+  CreateCollector(data: V20180416.CreateCollectorRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.CreateCollectorResponse>;
   /** cos迁移流程 {@link V20180416.CreateCosMigrateToServerlessInstanceRequest} {@link V20180416.CreateCosMigrateToServerlessInstanceResponse} */
   CreateCosMigrateToServerlessInstance(data: V20180416.CreateCosMigrateToServerlessInstanceRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.CreateCosMigrateToServerlessInstanceResponse>;
   /** 创建索引 {@link V20180416.CreateIndexRequest} {@link V20180416.CreateIndexResponse} */

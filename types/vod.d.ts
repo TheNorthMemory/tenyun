@@ -457,6 +457,22 @@ declare namespace V20180717 {
     EnhanceConfig?: EnhanceConfig | null;
   }
 
+  /** 超分配置 */
+  interface AdvancedSuperResolutionConfig {
+    /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
+    Switch?: string;
+    /** 类型，可选值：standard：通用超分super：高级超分。默认值：standard。 */
+    Type?: string;
+    /** 输出图片模式，默认percent。 aspect: 超分至指定宽高的较大矩形。 fixed: 超分至固定宽高，强制缩放。 percent: 超分倍率，可以为小数。 */
+    Mode?: string;
+    /** 超分倍率，可以为小数。 */
+    Percent?: number;
+    /** 目标图片宽度，不能超过4096。 */
+    Width?: number;
+    /** 目标图片高度，不能超过4096。 */
+    Height?: number;
+  }
+
   /** 智能分析结果 */
   interface AiAnalysisResult {
     /** 任务的类型，可以取的值有：Classification：智能分类Cover：智能封面Tag：智能标签FrameTag：智能按帧标签Highlight：智能精彩集锦 */
@@ -2271,6 +2287,8 @@ declare namespace V20180717 {
   interface ChangeClothesConfig {
     /** 输入需要更换的**衣物**图片列表。目前最大支持4张图片。 */
     ClothesFileInfos?: SceneAigcImageTaskInputFileInfo[];
+    /** AI换衣的提示词。 */
+    Prompt?: string;
   }
 
   /** 智能分类任务控制参数 */
@@ -3295,6 +3313,42 @@ declare namespace V20180717 {
     Definition: number;
   }
 
+  /** 图片降噪配置 */
+  interface ImageDenoiseConfig {
+    /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
+    Switch?: string;
+    /** 类型，可选值：weakstrong默认值：weak。 */
+    Type?: string;
+  }
+
+  /** 图片编码格式参数 */
+  interface ImageEncodeConfig {
+    /** 图片格式，取值范围：JPEG、PNG、BMP、WebP，缺省为原图格式。不支持动画。 */
+    Format?: string;
+    /** 图片的相对质量，取值范围：1 - 100，数值以原图质量为标准，缺省为原图质量。 */
+    Quality?: number;
+  }
+
+  /** 图片增强参数 */
+  interface ImageEnhanceConfig {
+    /** 超分配置。 */
+    SuperResolution?: SuperResolutionInfo | null;
+    /** 高级超分配置。 */
+    AdvancedSuperResolution?: AdvancedSuperResolutionConfig | null;
+    /** 降噪配置。 */
+    Denoise?: ImageDenoiseConfig | null;
+    /** 综合增强配置。 */
+    ImageQualityEnhance?: ImageQualityEnhanceInfo | null;
+    /** 色彩增强配置。 */
+    ColorEnhance?: ColorEnhanceInfo | null;
+    /** 细节增强配置。 */
+    SharpEnhance?: SharpEnhanceInfo | null;
+    /** 人脸增强配置。 */
+    FaceEnhance?: FaceEnhanceInfo | null;
+    /** 低光照增强配置。 */
+    LowLightEnhance?: LowLightEnhanceInfo | null;
+  }
+
   /** 单个图片处理操作。 */
   interface ImageOperation {
     /** 图片处理类型。可选类型有：Scale : 图片缩略处理；CenterCut : 图片裁剪处理；Blur : 图片模糊处理。 */
@@ -3351,6 +3405,14 @@ declare namespace V20180717 {
     LongEdge?: number;
     /** 输出图片的短边长度，单位为像素。当 Type 取值为 ShortEdgeFirst 时此字段有效。 */
     ShortEdge?: number;
+  }
+
+  /** 图片编码格式参数。 */
+  interface ImageSceneAigcEncodeConfig {
+    /** 图片格式，取值范围：JPEG、PNG，缺省为原图格式。不支持动画。 */
+    Format?: string;
+    /** 图片的相对质量，取值范围：1 - 100，数值以原图质量为标准，缺省为原图质量。 */
+    Quality?: number;
   }
 
   /** 对视频截雪碧图任务输入参数类型 */
@@ -4825,6 +4887,104 @@ declare namespace V20180717 {
     UpdateTime?: string;
   }
 
+  /** 图片异步处理任务信息 */
+  interface ProcessImageAsync {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 任务状态，取值：PROCESSING：处理中；FINISH：已完成。 */
+    Status?: string;
+    /** 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。 */
+    ErrCode?: number;
+    /** 错误信息。 */
+    Message?: string;
+    /** 任务进度，取值范围 [0-100] 。 */
+    Progress?: number;
+    /** 图片异步处理任务的输入信息。 */
+    Input?: ProcessImageAsyncInput;
+    /** 图片异步处理任务的输出信息。 */
+    Output?: ProcessImageAsyncOutput;
+    /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+    /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+  }
+
+  /** 图片异步处理任务信息。 */
+  interface ProcessImageAsyncInput {
+    /** 图片处理的FileId。 */
+    FileId?: string;
+    /** 图片处理参数。 */
+    ImageTaskInput?: ProcessImageAsyncTaskInput;
+    /** 图片处理任务的输出媒体文件配置。 */
+    OutputConfig?: ProcessImageAsyncOutputConfig;
+  }
+
+  /** 图片异步处理任务的输出。 */
+  interface ProcessImageAsyncOutput {
+    /** 图片异步处理任务的输出文件信息。 */
+    FileInfo?: ProcessImageAsyncOutputFileInfo;
+  }
+
+  /** 图片异步处理任务的输出媒体文件配置。 */
+  interface ProcessImageAsyncOutputConfig {
+    /** 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。 */
+    MediaName?: string;
+    /** 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。默认值：0，表示其他分类。 */
+    ClassId?: number;
+    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+    ExpireTime?: string;
+  }
+
+  /** 图片异步处理任务的输出文件信息。 */
+  interface ProcessImageAsyncOutputFileInfo {
+    /** 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。 */
+    MediaName?: string;
+    /** 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。当 StorageMode 为 Permanent 时有效。 */
+    ClassId?: number;
+    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+    ExpireTime?: string;
+    /** 文件类型，例如 mp4、flv 等。 */
+    FileType?: string;
+    /** 媒体文件播放地址。 */
+    FileUrl?: string;
+    /** 媒体文件 ID。当 StorageMode 为 Permanent 时有效。 */
+    FileId?: string;
+    /** 输出视频的元信息。当 StorageMode 为 Permanent 时有效。 */
+    MetaData?: MediaMetaData;
+  }
+
+  /** 图片异步处理配置 */
+  interface ProcessImageAsyncTask {
+    /** 图片转码输出配置。 */
+    EncodeConfig?: ImageEncodeConfig | null;
+    /** 图片增强配置。 */
+    EnhanceConfig?: ImageEnhanceConfig | null;
+  }
+
+  /** 图片处理配置。 */
+  interface ProcessImageAsyncTaskInput {
+    /** 图片异步处理模板ID。 */
+    Definition: number;
+  }
+
+  /** 图片异步处理模板详情。 */
+  interface ProcessImageAsyncTemplateItem {
+    /** 图片异步处理模板唯一标识。 */
+    Definition?: number;
+    /** 模板类型。 */
+    Type?: string;
+    /** 图片异步处理模板名称。 */
+    Name?: string;
+    /** 图片异步处理模板描述信息。 */
+    Comment?: string;
+    /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    CreateTime?: string;
+    /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    UpdateTime?: string;
+    /** 图片异步处理模板配置。 */
+    ProcessImageConfigure?: ProcessImageAsyncTask;
+  }
+
   /** MPS 媒体处理任务信息。 */
   interface ProcessMediaByMPS {
     /** 任务 ID。 */
@@ -5801,6 +5961,8 @@ declare namespace V20180717 {
     ExpireTime?: string;
     /** 指定所生成图片的宽高比。输入格式为 W:H。仅生商品图场景有效，可选值为：1:1、3:2、2:3、3:4、4:3、4:5、5:4、16:9、9:16、21:9 */
     AspectRatio?: string;
+    /** 输出图片编码格式参数。**仅AI换衣场景有效。** */
+    EncodeConfig?: ImageSceneAigcEncodeConfig;
   }
 
   /** 场景化 AIGC 生图任务信息 */
@@ -7607,6 +7769,24 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface CreateProcessImageAsyncTemplateRequest {
+    /** 图片异步处理任务配置。 */
+    ProcessImageConfigure: ProcessImageAsyncTask;
+    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: number;
+    /** 图片异步处理模板名称，长度限制：64 个字符。 */
+    Name?: string;
+    /** 图片异步处理模板描述信息，长度限制：256 个字符。 */
+    Comment?: string;
+  }
+
+  interface CreateProcessImageAsyncTemplateResponse {
+    /** 图片异步处理模板唯一标识。 */
+    Definition?: number;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface CreateQualityInspectTemplateRequest {
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
@@ -8183,6 +8363,18 @@ declare namespace V20180717 {
   }
 
   interface DeleteProcedureTemplateResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DeleteProcessImageAsyncTemplateRequest {
+    /** 图片异步处理模板唯一标识。 */
+    Definition: number;
+    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: number;
+  }
+
+  interface DeleteProcessImageAsyncTemplateResponse {
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -9043,6 +9235,26 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface DescribeProcessImageAsyncTemplatesRequest {
+    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: number;
+    /** 图片异步处理模板唯一标识过滤条件，数组长度最大值：100。 */
+    Definitions?: number[];
+    /** 分页偏移量，默认值：0。 */
+    Offset?: number;
+    /** 返回记录条数，默认值：10，最大值：100。 */
+    Limit?: number;
+  }
+
+  interface DescribeProcessImageAsyncTemplatesResponse {
+    /** 符合过滤条件的记录总数。 */
+    TotalCount?: number;
+    /** 图片异步处理模板详情列表。 */
+    ProcessImageAsyncTemplateSet?: ProcessImageAsyncTemplateItem[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeQualityInspectTemplatesRequest {
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
@@ -9377,6 +9589,8 @@ declare namespace V20180717 {
     SceneAigcImageTask?: SceneAigcImageTask;
     /** 场景化 AIGC 生视频任务信息，仅当 TaskType 为 SceneAigcVideoTask，该字段有值。 */
     SceneAigcVideoTask?: SceneAigcVideoTask;
+    /** 图像异步处理任务信息，仅当 TaskType 为 ProcessImageAsync，该字段有值。 */
+    ProcessImageAsyncTask?: ProcessImageAsync;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -10257,6 +10471,24 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface ModifyProcessImageAsyncTemplateRequest {
+    /** 图片异步处理模板唯一标识。 */
+    Definition: number;
+    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: number;
+    /** 图片异步处理模板名称，长度限制：64 个字符。 */
+    Name?: string;
+    /** 图片异步处理模板描述信息，长度限制：256 个字符。 */
+    Comment?: string;
+    /** 图片异步处理配置。 */
+    ProcessImageConfigure?: ProcessImageAsyncTask;
+  }
+
+  interface ModifyProcessImageAsyncTemplateResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface ModifyQualityInspectTemplateRequest {
     /** 模板 ID。 */
     Definition: number;
@@ -10607,6 +10839,32 @@ declare namespace V20180717 {
   interface ParseStreamingManifestResponse {
     /** 分片文件列表。 */
     MediaSegmentSet?: string[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface ProcessImageAsyncRequest {
+    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId: number;
+    /** 需要进行图片处理的FileId。 */
+    FileId: string;
+    /** 图片处理参数。 */
+    ImageTaskInput?: ProcessImageAsyncTaskInput;
+    /** 图片处理任务的输出媒体文件配置。 */
+    OutputConfig?: ProcessImageAsyncOutputConfig;
+    /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+    /** 来源上下文，用于透传用户请求信息，音画质重生完成回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+    /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
+    TasksPriority?: number;
+    /** 保留字段，特殊用途时使用。 */
+    ExtInfo?: string;
+  }
+
+  interface ProcessImageAsyncResponse {
+    /** 任务 ID。 */
+    TaskId?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -11317,6 +11575,8 @@ declare interface Vod {
   CreatePersonSample(data: V20180717.CreatePersonSampleRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreatePersonSampleResponse>;
   /** 创建任务流模板 {@link V20180717.CreateProcedureTemplateRequest} {@link V20180717.CreateProcedureTemplateResponse} */
   CreateProcedureTemplate(data: V20180717.CreateProcedureTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateProcedureTemplateResponse>;
+  /** 创建图片异步处理模板 {@link V20180717.CreateProcessImageAsyncTemplateRequest} {@link V20180717.CreateProcessImageAsyncTemplateResponse} */
+  CreateProcessImageAsyncTemplate(data: V20180717.CreateProcessImageAsyncTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateProcessImageAsyncTemplateResponse>;
   /** 创建音画质检测模板 {@link V20180717.CreateQualityInspectTemplateRequest} {@link V20180717.CreateQualityInspectTemplateResponse} */
   CreateQualityInspectTemplate(data: V20180717.CreateQualityInspectTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateQualityInspectTemplateResponse>;
   /** 创建视频重生模板 {@link V20180717.CreateRebuildMediaTemplateRequest} {@link V20180717.CreateRebuildMediaTemplateResponse} */
@@ -11379,6 +11639,8 @@ declare interface Vod {
   DeletePersonSample(data: V20180717.DeletePersonSampleRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeletePersonSampleResponse>;
   /** 删除任务流模板 {@link V20180717.DeleteProcedureTemplateRequest} {@link V20180717.DeleteProcedureTemplateResponse} */
   DeleteProcedureTemplate(data: V20180717.DeleteProcedureTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteProcedureTemplateResponse>;
+  /** 删除图片异步处理模板 {@link V20180717.DeleteProcessImageAsyncTemplateRequest} {@link V20180717.DeleteProcessImageAsyncTemplateResponse} */
+  DeleteProcessImageAsyncTemplate(data: V20180717.DeleteProcessImageAsyncTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteProcessImageAsyncTemplateResponse>;
   /** 删除音画质检测模板 {@link V20180717.DeleteQualityInspectTemplateRequest} {@link V20180717.DeleteQualityInspectTemplateResponse} */
   DeleteQualityInspectTemplate(data: V20180717.DeleteQualityInspectTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteQualityInspectTemplateResponse>;
   /** 删除视频重生模板 {@link V20180717.DeleteRebuildMediaTemplateRequest} {@link V20180717.DeleteRebuildMediaTemplateResponse} */
@@ -11477,6 +11739,8 @@ declare interface Vod {
   DescribePrepaidProducts(data: V20180717.DescribePrepaidProductsRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribePrepaidProductsResponse>;
   /** 获取任务流模板列表 {@link V20180717.DescribeProcedureTemplatesRequest} {@link V20180717.DescribeProcedureTemplatesResponse} */
   DescribeProcedureTemplates(data: V20180717.DescribeProcedureTemplatesRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeProcedureTemplatesResponse>;
+  /** 获取图片异步处理模板列表 {@link V20180717.DescribeProcessImageAsyncTemplatesRequest} {@link V20180717.DescribeProcessImageAsyncTemplatesResponse} */
+  DescribeProcessImageAsyncTemplates(data: V20180717.DescribeProcessImageAsyncTemplatesRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeProcessImageAsyncTemplatesResponse>;
   /** 获取音画质检测模板列表 {@link V20180717.DescribeQualityInspectTemplatesRequest} {@link V20180717.DescribeQualityInspectTemplatesResponse} */
   DescribeQualityInspectTemplates(data: V20180717.DescribeQualityInspectTemplatesRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeQualityInspectTemplatesResponse>;
   /** 获取视频重生模板列表 {@link V20180717.DescribeRebuildMediaTemplatesRequest} {@link V20180717.DescribeRebuildMediaTemplatesResponse} */
@@ -11575,6 +11839,8 @@ declare interface Vod {
   ModifyMediaStorageClass(data: V20180717.ModifyMediaStorageClassRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ModifyMediaStorageClassResponse>;
   /** 修改素材样本 {@link V20180717.ModifyPersonSampleRequest} {@link V20180717.ModifyPersonSampleResponse} */
   ModifyPersonSample(data: V20180717.ModifyPersonSampleRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ModifyPersonSampleResponse>;
+  /** 修改图片异步处理模板 {@link V20180717.ModifyProcessImageAsyncTemplateRequest} {@link V20180717.ModifyProcessImageAsyncTemplateResponse} */
+  ModifyProcessImageAsyncTemplate(data: V20180717.ModifyProcessImageAsyncTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ModifyProcessImageAsyncTemplateResponse>;
   /** 修改音画质检测模板 {@link V20180717.ModifyQualityInspectTemplateRequest} {@link V20180717.ModifyQualityInspectTemplateResponse} */
   ModifyQualityInspectTemplate(data: V20180717.ModifyQualityInspectTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ModifyQualityInspectTemplateResponse>;
   /** 修改视频重生模板 {@link V20180717.ModifyRebuildMediaTemplateRequest} {@link V20180717.ModifyRebuildMediaTemplateResponse} */
@@ -11607,6 +11873,8 @@ declare interface Vod {
   ParseStreamingManifest(data: V20180717.ParseStreamingManifestRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ParseStreamingManifestResponse>;
   /** 图片处理 {@link V20180717.ProcessImageRequest} {@link V20180717.ProcessImageResponse} */
   ProcessImage(data: V20180717.ProcessImageRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ProcessImageResponse>;
+  /** 图片异步处理 {@link V20180717.ProcessImageAsyncRequest} {@link V20180717.ProcessImageAsyncResponse} */
+  ProcessImageAsync(data: V20180717.ProcessImageAsyncRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ProcessImageAsyncResponse>;
   /** 媒体处理 {@link V20180717.ProcessMediaRequest} {@link V20180717.ProcessMediaResponse} */
   ProcessMedia(data: V20180717.ProcessMediaRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ProcessMediaResponse>;
   /** 使用 MPS 进行视频处理 {@link V20180717.ProcessMediaByMPSRequest} {@link V20180717.ProcessMediaByMPSResponse} */

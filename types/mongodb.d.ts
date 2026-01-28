@@ -1578,6 +1578,18 @@ declare interface DescribeMongodbLogsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSRVConnectionDomainRequest {
+  /** 实例 ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
+  InstanceId: string;
+}
+
+declare interface DescribeSRVConnectionDomainResponse {
+  /** 实例当前的srv域名信息。 */
+  Domain?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSecurityGroupRequest {
   /** 实例 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceId: string;
@@ -1668,12 +1680,36 @@ declare interface DescribeTransparentDataEncryptionStatusResponse {
   RequestId?: string;
 }
 
+declare interface DisableSRVConnectionUrlRequest {
+  /** 实例 ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
+  InstanceId: string;
+}
+
+declare interface DisableSRVConnectionUrlResponse {
+  /** 开启任务ID。 */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DropDBInstanceParamTplRequest {
   /** 参数模板 ID。请通过接口 [DescribeDBInstanceParamTpl](https://cloud.tencent.com/document/product/240/109155) 获取模板 ID。 */
   TplId: string;
 }
 
 declare interface DropDBInstanceParamTplResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EnableSRVConnectionUrlRequest {
+  /** 实例 ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
+  InstanceId: string;
+}
+
+declare interface EnableSRVConnectionUrlResponse {
+  /** 开启任务ID。 */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1952,6 +1988,20 @@ declare interface ModifyInstanceParamsResponse {
   Changed?: boolean;
   /** 该参数暂时无意义(兼容前端保留)。 */
   TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySRVConnectionUrlRequest {
+  /** 实例 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
+  InstanceId: string;
+  /** 自定义的实例的访问域名。 */
+  CustomDomain: string;
+}
+
+declare interface ModifySRVConnectionUrlResponse {
+  /** 开启任务ID。 */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2677,6 +2727,8 @@ declare interface Mongodb {
   DescribeLogDownloadTasks(data: DescribeLogDownloadTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogDownloadTasksResponse>;
   /** 日志查询接口 {@link DescribeMongodbLogsRequest} {@link DescribeMongodbLogsResponse} */
   DescribeMongodbLogs(data: DescribeMongodbLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMongodbLogsResponse>;
+  /** 查询实例的当前的SRV访问域名 {@link DescribeSRVConnectionDomainRequest} {@link DescribeSRVConnectionDomainResponse} */
+  DescribeSRVConnectionDomain(data: DescribeSRVConnectionDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSRVConnectionDomainResponse>;
   /** 查询实例绑定的安全组 {@link DescribeSecurityGroupRequest} {@link DescribeSecurityGroupResponse} */
   DescribeSecurityGroup(data: DescribeSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupResponse>;
   /** 获取慢日志统计信息 {@link DescribeSlowLogPatternsRequest} {@link DescribeSlowLogPatternsResponse} */
@@ -2687,8 +2739,12 @@ declare interface Mongodb {
   DescribeSpecInfo(data?: DescribeSpecInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecInfoResponse>;
   /** 获取实例透明加密的开启状态 {@link DescribeTransparentDataEncryptionStatusRequest} {@link DescribeTransparentDataEncryptionStatusResponse} */
   DescribeTransparentDataEncryptionStatus(data: DescribeTransparentDataEncryptionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTransparentDataEncryptionStatusResponse>;
+  /** 关闭实例SRV访问地址 {@link DisableSRVConnectionUrlRequest} {@link DisableSRVConnectionUrlResponse} */
+  DisableSRVConnectionUrl(data: DisableSRVConnectionUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DisableSRVConnectionUrlResponse>;
   /** 删除参数模板 {@link DropDBInstanceParamTplRequest} {@link DropDBInstanceParamTplResponse} */
   DropDBInstanceParamTpl(data: DropDBInstanceParamTplRequest, config?: AxiosRequestConfig): AxiosPromise<DropDBInstanceParamTplResponse>;
+  /** 开启实例的SRV访问地址 {@link EnableSRVConnectionUrlRequest} {@link EnableSRVConnectionUrlResponse} */
+  EnableSRVConnectionUrl(data: EnableSRVConnectionUrlRequest, config?: AxiosRequestConfig): AxiosPromise<EnableSRVConnectionUrlResponse>;
   /** 开启实例数据透明加密 {@link EnableTransparentDataEncryptionRequest} {@link EnableTransparentDataEncryptionResponse} */
   EnableTransparentDataEncryption(data: EnableTransparentDataEncryptionRequest, config?: AxiosRequestConfig): AxiosPromise<EnableTransparentDataEncryptionResponse>;
   /** 按 Key 回档 {@link FlashBackDBInstanceRequest} {@link FlashBackDBInstanceResponse} */
@@ -2719,6 +2775,8 @@ declare interface Mongodb {
   ModifyDBInstanceSpec(data: ModifyDBInstanceSpecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSpecResponse>;
   /** 修改mongoDB实例参数 {@link ModifyInstanceParamsRequest} {@link ModifyInstanceParamsResponse} */
   ModifyInstanceParams(data: ModifyInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceParamsResponse>;
+  /** 修改实例SRV访问地址自定义域名 {@link ModifySRVConnectionUrlRequest} {@link ModifySRVConnectionUrlResponse} */
+  ModifySRVConnectionUrl(data: ModifySRVConnectionUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySRVConnectionUrlResponse>;
   /** 下线隔离状态的云数据库实例 {@link OfflineIsolatedDBInstanceRequest} {@link OfflineIsolatedDBInstanceResponse} */
   OfflineIsolatedDBInstance(data: OfflineIsolatedDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<OfflineIsolatedDBInstanceResponse>;
   /** 开通审计 {@link OpenAuditServiceRequest} {@link OpenAuditServiceResponse} */

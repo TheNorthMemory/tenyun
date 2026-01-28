@@ -118,6 +118,14 @@ declare interface Filter {
   Values: string[];
 }
 
+/** 过滤选择器 */
+declare interface FilterSelector {
+  /** 过滤规则类型，在tag过滤中，可选值为matches（匹配），excludes(排除)，在仓库过滤中，可选值为repoMatches（仓库匹配），repoExcludes（仓库排除） */
+  Decoration?: string;
+  /** 过滤表达式 */
+  Pattern?: string;
+}
+
 /** GC 执行信息 */
 declare interface GCJobInfo {
   /** 作业 ID */
@@ -484,6 +492,8 @@ declare interface RetentionPolicy {
   NamespaceName?: string;
   /** 规则列表 */
   RetentionRuleList?: RetentionRule[];
+  /** 高级保留规则列表 */
+  AdvancedRuleItems?: RetentionRuleItem[];
   /** 定期执行方式 */
   CronSetting?: string;
   /** 是否启用规则 */
@@ -498,6 +508,16 @@ declare interface RetentionRule {
   Key: string;
   /** 规则设置下的对应值 */
   Value: number;
+}
+
+/** 版本保留规则 */
+declare interface RetentionRuleItem {
+  /** 版本保留规则 */
+  RetentionPolicy?: RetentionRule;
+  /** 标签过滤器 */
+  TagFilter?: FilterSelector;
+  /** 仓库过滤器 */
+  RepositoryFilter?: FilterSelector;
 }
 
 /** 版本保留执行的规则 */
@@ -1271,10 +1291,12 @@ declare interface CreateTagRetentionRuleRequest {
   RegistryId: string;
   /** 命名空间的Id */
   NamespaceId: number;
-  /** 保留策略 */
-  RetentionRule: RetentionRule;
   /** 执行周期，当前只能选择： manual;daily;weekly;monthly */
   CronSetting: string;
+  /** 保留策略，当基本保留策略和高级保留策略同时配置时，优先使用高级保留策略 */
+  RetentionRule?: RetentionRule;
+  /** 高级版本保留策略，当基本保留策略和高级保留策略同时配置时，优先使用高级保留策略 */
+  AdvancedRuleItems?: RetentionRuleItem[];
   /** 是否禁用规则，默认值为false */
   Disabled?: boolean;
 }
@@ -1519,6 +1541,8 @@ declare interface DeleteRepositoryRequest {
   NamespaceName: string;
   /** 镜像仓库的名称 */
   RepositoryName: string;
+  /** 默认值为true，表示无论仓库是否存在镜像都直接删除；false代表删除仓库前需检查是否存在镜像。 */
+  ForceDelete?: boolean;
 }
 
 declare interface DeleteRepositoryResponse {
@@ -2669,12 +2693,14 @@ declare interface ModifyTagRetentionRuleRequest {
   RegistryId: string;
   /** 命名空间的Id，必须填写原有的命名空间id */
   NamespaceId: number;
-  /** 保留策略 */
-  RetentionRule: RetentionRule;
   /** 执行周期，必须填写为原来的设置 */
   CronSetting: string;
   /** 规则Id */
   RetentionId: number;
+  /** 保留策略，当基本保留策略和高级保留策略同时配置时，优先使用高级保留策略 */
+  RetentionRule?: RetentionRule;
+  /** 高级保留策略，当基本保留策略和高级保留策略同时配置时，优先使用高级保留策略 */
+  AdvancedRuleItems?: RetentionRuleItem[];
   /** 是否禁用规则 */
   Disabled?: boolean;
 }

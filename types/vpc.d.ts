@@ -651,7 +651,7 @@ declare interface ConnectionStateTimeouts {
   /** TCP已建立的连接空闲超时，指多少秒以后连接变为空闲状态。取值范围为：40-10800秒，默认为10800秒。 */
   TCPEstablishedConnectionTimeout?: number;
   /** TCP TIME_WAIT超时，指完全关闭的TCP连接在到期后保留在NAT映射中的秒数。取值范围为：10-600秒，默认为120秒。 */
-  TcpTimeWaitTimeout?: number;
+  TCPTimeWaitTimeout?: number;
 }
 
 /** 创建路由添加的指向此通道的路由 */

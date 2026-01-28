@@ -11023,9 +11023,9 @@ declare interface UpdateNetworkFirewallPolicyYamlDetailResponse {
 /** {@link Tcss 容器安全服务} */
 declare interface Tcss {
   (): Versions;
-  /** 容器网络创建网络策略添加并发布任务 {@link AddAndPublishNetworkFirewallPolicyDetailRequest} {@link AddAndPublishNetworkFirewallPolicyDetailResponse} */
+  /** @deprecated 容器网络创建网络策略添加并发布任务 {@link AddAndPublishNetworkFirewallPolicyDetailRequest} {@link AddAndPublishNetworkFirewallPolicyDetailResponse} */
   AddAndPublishNetworkFirewallPolicyDetail(data: AddAndPublishNetworkFirewallPolicyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<AddAndPublishNetworkFirewallPolicyDetailResponse>;
-  /** 容器网络创建Yaml网络策略并发布任务 {@link AddAndPublishNetworkFirewallPolicyYamlDetailRequest} {@link AddAndPublishNetworkFirewallPolicyYamlDetailResponse} */
+  /** @deprecated 容器网络创建Yaml网络策略并发布任务 {@link AddAndPublishNetworkFirewallPolicyYamlDetailRequest} {@link AddAndPublishNetworkFirewallPolicyYamlDetailResponse} */
   AddAndPublishNetworkFirewallPolicyYamlDetail(data: AddAndPublishNetworkFirewallPolicyYamlDetailRequest, config?: AxiosRequestConfig): AxiosPromise<AddAndPublishNetworkFirewallPolicyYamlDetailResponse>;
   /** 新增单个镜像仓库详细信息 {@link AddAssetImageRegistryRegistryDetailRequest} {@link AddAssetImageRegistryRegistryDetailResponse} */
   AddAssetImageRegistryRegistryDetail(data: AddAssetImageRegistryRegistryDetailRequest, config?: AxiosRequestConfig): AxiosPromise<AddAssetImageRegistryRegistryDetailResponse>;
@@ -11051,15 +11051,15 @@ declare interface Tcss {
   AddEscapeWhiteList(data: AddEscapeWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<AddEscapeWhiteListResponse>;
   /** 新增漏洞扫描忽略漏洞 {@link AddIgnoreVulRequest} {@link AddIgnoreVulResponse} */
   AddIgnoreVul(data: AddIgnoreVulRequest, config?: AxiosRequestConfig): AxiosPromise<AddIgnoreVulResponse>;
-  /** 容器网络创建网络策略添加任务 {@link AddNetworkFirewallPolicyDetailRequest} {@link AddNetworkFirewallPolicyDetailResponse} */
+  /** @deprecated 容器网络创建网络策略添加任务 {@link AddNetworkFirewallPolicyDetailRequest} {@link AddNetworkFirewallPolicyDetailResponse} */
   AddNetworkFirewallPolicyDetail(data: AddNetworkFirewallPolicyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<AddNetworkFirewallPolicyDetailResponse>;
-  /** 容器网络创建Yaml网络策略添加任务 {@link AddNetworkFirewallPolicyYamlDetailRequest} {@link AddNetworkFirewallPolicyYamlDetailResponse} */
+  /** @deprecated 容器网络创建Yaml网络策略添加任务 {@link AddNetworkFirewallPolicyYamlDetailRequest} {@link AddNetworkFirewallPolicyYamlDetailResponse} */
   AddNetworkFirewallPolicyYamlDetail(data: AddNetworkFirewallPolicyYamlDetailRequest, config?: AxiosRequestConfig): AxiosPromise<AddNetworkFirewallPolicyYamlDetailResponse>;
-  /** 容器网络创建检查Yaml网络策略任务 {@link CheckNetworkFirewallPolicyYamlRequest} {@link CheckNetworkFirewallPolicyYamlResponse} */
+  /** @deprecated 容器网络创建检查Yaml网络策略任务 {@link CheckNetworkFirewallPolicyYamlRequest} {@link CheckNetworkFirewallPolicyYamlResponse} */
   CheckNetworkFirewallPolicyYaml(data: CheckNetworkFirewallPolicyYamlRequest, config?: AxiosRequestConfig): AxiosPromise<CheckNetworkFirewallPolicyYamlResponse>;
   /** 检查单个镜像仓库名是否重复 {@link CheckRepeatAssetImageRegistryRequest} {@link CheckRepeatAssetImageRegistryResponse} */
   CheckRepeatAssetImageRegistry(data: CheckRepeatAssetImageRegistryRequest, config?: AxiosRequestConfig): AxiosPromise<CheckRepeatAssetImageRegistryResponse>;
-  /** 容器网络创建网络策略确认任务 {@link ConfirmNetworkFirewallPolicyRequest} {@link ConfirmNetworkFirewallPolicyResponse} */
+  /** @deprecated 容器网络创建网络策略确认任务 {@link ConfirmNetworkFirewallPolicyRequest} {@link ConfirmNetworkFirewallPolicyResponse} */
   ConfirmNetworkFirewallPolicy(data: ConfirmNetworkFirewallPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ConfirmNetworkFirewallPolicyResponse>;
   /** 创建异常进程规则导出任务 {@link CreateAbnormalProcessRulesExportJobRequest} {@link CreateAbnormalProcessRulesExportJobResponse} */
   CreateAbnormalProcessRulesExportJob(data?: CreateAbnormalProcessRulesExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAbnormalProcessRulesExportJobResponse>;
@@ -11105,13 +11105,13 @@ declare interface Tcss {
   CreateK8sApiAbnormalRuleExportJob(data?: CreateK8sApiAbnormalRuleExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateK8sApiAbnormalRuleExportJobResponse>;
   /** 创建k8sapi异常事件规则 {@link CreateK8sApiAbnormalRuleInfoRequest} {@link CreateK8sApiAbnormalRuleInfoResponse} */
   CreateK8sApiAbnormalRuleInfo(data: CreateK8sApiAbnormalRuleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<CreateK8sApiAbnormalRuleInfoResponse>;
-  /** 容器网络集群下发刷新任务 {@link CreateNetworkFirewallClusterRefreshRequest} {@link CreateNetworkFirewallClusterRefreshResponse} */
+  /** @deprecated 容器网络集群下发刷新任务 {@link CreateNetworkFirewallClusterRefreshRequest} {@link CreateNetworkFirewallClusterRefreshResponse} */
   CreateNetworkFirewallClusterRefresh(data?: CreateNetworkFirewallClusterRefreshRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetworkFirewallClusterRefreshResponse>;
-  /** 容器网络集群网络策略创建自动发现任务 {@link CreateNetworkFirewallPolicyDiscoverRequest} {@link CreateNetworkFirewallPolicyDiscoverResponse} */
+  /** @deprecated 容器网络集群网络策略创建自动发现任务 {@link CreateNetworkFirewallPolicyDiscoverRequest} {@link CreateNetworkFirewallPolicyDiscoverResponse} */
   CreateNetworkFirewallPolicyDiscover(data: CreateNetworkFirewallPolicyDiscoverRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetworkFirewallPolicyDiscoverResponse>;
-  /** 容器网络创建网络策略发布任务 {@link CreateNetworkFirewallPublishRequest} {@link CreateNetworkFirewallPublishResponse} */
+  /** @deprecated 容器网络创建网络策略发布任务 {@link CreateNetworkFirewallPublishRequest} {@link CreateNetworkFirewallPublishResponse} */
   CreateNetworkFirewallPublish(data: CreateNetworkFirewallPublishRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetworkFirewallPublishResponse>;
-  /** 容器网络创建网络策略撤销任务 {@link CreateNetworkFirewallUndoPublishRequest} {@link CreateNetworkFirewallUndoPublishResponse} */
+  /** @deprecated 容器网络创建网络策略撤销任务 {@link CreateNetworkFirewallUndoPublishRequest} {@link CreateNetworkFirewallUndoPublishResponse} */
   CreateNetworkFirewallUndoPublish(data: CreateNetworkFirewallUndoPublishRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetworkFirewallUndoPublishResponse>;
   /** 创建或者编辑弹性计费上限 {@link CreateOrModifyPostPayCoresRequest} {@link CreateOrModifyPostPayCoresResponse} */
   CreateOrModifyPostPayCores(data: CreateOrModifyPostPayCoresRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrModifyPostPayCoresResponse>;
@@ -11161,7 +11161,7 @@ declare interface Tcss {
   DeleteK8sApiAbnormalRule(data: DeleteK8sApiAbnormalRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteK8sApiAbnormalRuleResponse>;
   /** 卸载Agent客户端 {@link DeleteMachineRequest} {@link DeleteMachineResponse} */
   DeleteMachine(data: DeleteMachineRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineResponse>;
-  /** 容器网络创建网络策略删除任务 {@link DeleteNetworkFirewallPolicyDetailRequest} {@link DeleteNetworkFirewallPolicyDetailResponse} */
+  /** @deprecated 容器网络创建网络策略删除任务 {@link DeleteNetworkFirewallPolicyDetailRequest} {@link DeleteNetworkFirewallPolicyDetailResponse} */
   DeleteNetworkFirewallPolicyDetail(data: DeleteNetworkFirewallPolicyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNetworkFirewallPolicyDetailResponse>;
   /** 删除rasp白名单规则 {@link DeleteRaspRulesRequest} {@link DeleteRaspRulesResponse} */
   DeleteRaspRules(data: DeleteRaspRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRaspRulesResponse>;
@@ -11395,27 +11395,27 @@ declare interface Tcss {
   DescribeK8sApiAbnormalTendency(data: DescribeK8sApiAbnormalTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeK8sApiAbnormalTendencyResponse>;
   /** 获取日志检索容量使用统计 {@link DescribeLogStorageStatisticRequest} {@link DescribeLogStorageStatisticResponse} */
   DescribeLogStorageStatistic(data?: DescribeLogStorageStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogStorageStatisticResponse>;
-  /** 查询集群策略审计列表 {@link DescribeNetworkFirewallAuditRecordRequest} {@link DescribeNetworkFirewallAuditRecordResponse} */
+  /** @deprecated 查询集群策略审计列表 {@link DescribeNetworkFirewallAuditRecordRequest} {@link DescribeNetworkFirewallAuditRecordResponse} */
   DescribeNetworkFirewallAuditRecord(data?: DescribeNetworkFirewallAuditRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallAuditRecordResponse>;
-  /** 查询集群策略列表 {@link DescribeNetworkFirewallClusterListRequest} {@link DescribeNetworkFirewallClusterListResponse} */
+  /** @deprecated 查询集群策略列表 {@link DescribeNetworkFirewallClusterListRequest} {@link DescribeNetworkFirewallClusterListResponse} */
   DescribeNetworkFirewallClusterList(data?: DescribeNetworkFirewallClusterListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallClusterListResponse>;
-  /** 容器网络查询资产任务进度 {@link DescribeNetworkFirewallClusterRefreshStatusRequest} {@link DescribeNetworkFirewallClusterRefreshStatusResponse} */
+  /** @deprecated 容器网络查询资产任务进度 {@link DescribeNetworkFirewallClusterRefreshStatusRequest} {@link DescribeNetworkFirewallClusterRefreshStatusResponse} */
   DescribeNetworkFirewallClusterRefreshStatus(data: DescribeNetworkFirewallClusterRefreshStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallClusterRefreshStatusResponse>;
-  /** 查询集群网络空间标签列表 {@link DescribeNetworkFirewallNamespaceLabelListRequest} {@link DescribeNetworkFirewallNamespaceLabelListResponse} */
+  /** @deprecated 查询集群网络空间标签列表 {@link DescribeNetworkFirewallNamespaceLabelListRequest} {@link DescribeNetworkFirewallNamespaceLabelListResponse} */
   DescribeNetworkFirewallNamespaceLabelList(data: DescribeNetworkFirewallNamespaceLabelListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallNamespaceLabelListResponse>;
-  /** 查询集群网络空间列表 {@link DescribeNetworkFirewallNamespaceListRequest} {@link DescribeNetworkFirewallNamespaceListResponse} */
+  /** @deprecated 查询集群网络空间列表 {@link DescribeNetworkFirewallNamespaceListRequest} {@link DescribeNetworkFirewallNamespaceListResponse} */
   DescribeNetworkFirewallNamespaceList(data: DescribeNetworkFirewallNamespaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallNamespaceListResponse>;
-  /** 查询集群网络pod标签 {@link DescribeNetworkFirewallPodLabelsListRequest} {@link DescribeNetworkFirewallPodLabelsListResponse} */
+  /** @deprecated 查询集群网络pod标签 {@link DescribeNetworkFirewallPodLabelsListRequest} {@link DescribeNetworkFirewallPodLabelsListResponse} */
   DescribeNetworkFirewallPodLabelsList(data: DescribeNetworkFirewallPodLabelsListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallPodLabelsListResponse>;
-  /** 容器网络集群查看策略详情 {@link DescribeNetworkFirewallPolicyDetailRequest} {@link DescribeNetworkFirewallPolicyDetailResponse} */
+  /** @deprecated 容器网络集群查看策略详情 {@link DescribeNetworkFirewallPolicyDetailRequest} {@link DescribeNetworkFirewallPolicyDetailResponse} */
   DescribeNetworkFirewallPolicyDetail(data: DescribeNetworkFirewallPolicyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallPolicyDetailResponse>;
-  /** 容器网络查询网络策略自动发现任务进度 {@link DescribeNetworkFirewallPolicyDiscoverRequest} {@link DescribeNetworkFirewallPolicyDiscoverResponse} */
+  /** @deprecated 容器网络查询网络策略自动发现任务进度 {@link DescribeNetworkFirewallPolicyDiscoverRequest} {@link DescribeNetworkFirewallPolicyDiscoverResponse} */
   DescribeNetworkFirewallPolicyDiscover(data: DescribeNetworkFirewallPolicyDiscoverRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallPolicyDiscoverResponse>;
-  /** 查询集群网络策略列表 {@link DescribeNetworkFirewallPolicyListRequest} {@link DescribeNetworkFirewallPolicyListResponse} */
+  /** @deprecated 查询集群网络策略列表 {@link DescribeNetworkFirewallPolicyListRequest} {@link DescribeNetworkFirewallPolicyListResponse} */
   DescribeNetworkFirewallPolicyList(data: DescribeNetworkFirewallPolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallPolicyListResponse>;
-  /** 容器网络查询网络策略策略执行状态 {@link DescribeNetworkFirewallPolicyStatusRequest} {@link DescribeNetworkFirewallPolicyStatusResponse} */
+  /** @deprecated 容器网络查询网络策略策略执行状态 {@link DescribeNetworkFirewallPolicyStatusRequest} {@link DescribeNetworkFirewallPolicyStatusResponse} */
   DescribeNetworkFirewallPolicyStatus(data: DescribeNetworkFirewallPolicyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallPolicyStatusResponse>;
-  /** 容器网络集群查看Yaml网络策略详情 {@link DescribeNetworkFirewallPolicyYamlDetailRequest} {@link DescribeNetworkFirewallPolicyYamlDetailResponse} */
+  /** @deprecated 容器网络集群查看Yaml网络策略详情 {@link DescribeNetworkFirewallPolicyYamlDetailRequest} {@link DescribeNetworkFirewallPolicyYamlDetailResponse} */
   DescribeNetworkFirewallPolicyYamlDetail(data: DescribeNetworkFirewallPolicyYamlDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallPolicyYamlDetailResponse>;
   /** 查询最新披露漏洞列表 {@link DescribeNewestVulRequest} {@link DescribeNewestVulResponse} */
   DescribeNewestVul(data?: DescribeNewestVulRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNewestVulResponse>;
@@ -11693,17 +11693,17 @@ declare interface Tcss {
   SyncAssetImageRegistryAsset(data?: SyncAssetImageRegistryAssetRequest, config?: AxiosRequestConfig): AxiosPromise<SyncAssetImageRegistryAssetResponse>;
   /** 卸载集群容器安全 {@link UninstallClusterContainerSecurityRequest} {@link UninstallClusterContainerSecurityResponse} */
   UninstallClusterContainerSecurity(data: UninstallClusterContainerSecurityRequest, config?: AxiosRequestConfig): AxiosPromise<UninstallClusterContainerSecurityResponse>;
-  /** 容器网络创建网络策略更新并发布任务 {@link UpdateAndPublishNetworkFirewallPolicyDetailRequest} {@link UpdateAndPublishNetworkFirewallPolicyDetailResponse} */
+  /** @deprecated 容器网络创建网络策略更新并发布任务 {@link UpdateAndPublishNetworkFirewallPolicyDetailRequest} {@link UpdateAndPublishNetworkFirewallPolicyDetailResponse} */
   UpdateAndPublishNetworkFirewallPolicyDetail(data: UpdateAndPublishNetworkFirewallPolicyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAndPublishNetworkFirewallPolicyDetailResponse>;
-  /** 容器网络更新Yaml网络策略并发布任务 {@link UpdateAndPublishNetworkFirewallPolicyYamlDetailRequest} {@link UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse} */
+  /** @deprecated 容器网络更新Yaml网络策略并发布任务 {@link UpdateAndPublishNetworkFirewallPolicyYamlDetailRequest} {@link UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse} */
   UpdateAndPublishNetworkFirewallPolicyYamlDetail(data: UpdateAndPublishNetworkFirewallPolicyYamlDetailRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse>;
   /** 更新单个镜像仓库详细信息 {@link UpdateAssetImageRegistryRegistryDetailRequest} {@link UpdateAssetImageRegistryRegistryDetailResponse} */
   UpdateAssetImageRegistryRegistryDetail(data: UpdateAssetImageRegistryRegistryDetailRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAssetImageRegistryRegistryDetailResponse>;
   /** 镜像仓库更新定时任务 {@link UpdateImageRegistryTimingScanTaskRequest} {@link UpdateImageRegistryTimingScanTaskResponse} */
   UpdateImageRegistryTimingScanTask(data: UpdateImageRegistryTimingScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateImageRegistryTimingScanTaskResponse>;
-  /** 容器网络创建网络策略更新任务 {@link UpdateNetworkFirewallPolicyDetailRequest} {@link UpdateNetworkFirewallPolicyDetailResponse} */
+  /** @deprecated 容器网络创建网络策略更新任务 {@link UpdateNetworkFirewallPolicyDetailRequest} {@link UpdateNetworkFirewallPolicyDetailResponse} */
   UpdateNetworkFirewallPolicyDetail(data: UpdateNetworkFirewallPolicyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateNetworkFirewallPolicyDetailResponse>;
-  /** 容器网络更新Yaml网络策略任务 {@link UpdateNetworkFirewallPolicyYamlDetailRequest} {@link UpdateNetworkFirewallPolicyYamlDetailResponse} */
+  /** @deprecated 容器网络更新Yaml网络策略任务 {@link UpdateNetworkFirewallPolicyYamlDetailRequest} {@link UpdateNetworkFirewallPolicyYamlDetailResponse} */
   UpdateNetworkFirewallPolicyYamlDetail(data: UpdateNetworkFirewallPolicyYamlDetailRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateNetworkFirewallPolicyYamlDetailResponse>;
 }
 
