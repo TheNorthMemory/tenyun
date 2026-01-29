@@ -90,7 +90,7 @@ declare interface DBInstance {
   ProjectId?: number;
   /** 实例所在地域名称，如 ap-shanghai */
   Region?: string;
-  /** 实例所在可用区名称，如 ap-shanghai-1 */
+  /** 实例所在可用区名称，如 ap-shanghai-2 */
   Zone?: string;
   /** 私有网络 ID，基础网络时为 0 */
   VpcId?: number;
@@ -1220,7 +1220,7 @@ declare interface DescribeDBInstanceDetailResponse {
   NodeCount?: number;
   /** 实例所在地域名称，如 ap-shanghai */
   Region?: string;
-  /** 实例所在可用区名称，如 ap-shanghai-1 */
+  /** 实例所在可用区名称，如 ap-shanghai-2 */
   Zone?: string;
   /** 字符串型的私有网络Id */
   VpcId?: string;
@@ -1242,7 +1242,7 @@ declare interface DescribeDBInstanceDetailResponse {
   Memory?: number;
   /** 实例存储大小，单位 GB */
   Storage?: number;
-  /** 主可用区，如 ap-shanghai-1 */
+  /** 主可用区，如 ap-shanghai-2 */
   MasterZone?: string;
   /** 从可用区列表，如 [ap-shanghai-2] */
   SlaveZones?: string[];

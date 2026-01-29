@@ -488,7 +488,7 @@ declare interface ClusterInstanceDetail {
   ServerlessStatus?: string;
   /** 实例任务信息 */
   InstanceTasks?: ObjectTask[];
-  /** 实例机器类型 */
+  /** 实例机器类型1. common，通用型。2. exclusive，独享型。 */
   InstanceDeviceType?: string;
   /** 实例存储类型说明：仅当要查询的资源为 LibraDB 时，此参数才会返回值。 */
   InstanceStorageType?: string;
@@ -904,7 +904,7 @@ declare interface CynosdbInstance {
   InstanceIndexMode?: string;
   /** 当前实例支持的能力 */
   InstanceAbility?: InstanceAbility;
-  /** 实例机器类型 */
+  /** 实例机器类型1. common，通用型。2. exclusive，独享型。 */
   DeviceType?: string;
   /** 实例存储类型 */
   InstanceStorageType?: string;
@@ -1224,7 +1224,7 @@ declare interface GoodsSpec {
   TimeSpan?: number | null;
   /** 时长单位 */
   TimeUnit?: string | null;
-  /** 机器类型 */
+  /** 实例机器类型1. common，通用型。2. exclusive，独享型。 */
   DeviceType?: string;
 }
 
@@ -1342,7 +1342,7 @@ declare interface InstanceInitInfo {
   MinRoCpu?: number;
   /** Serverless实例最大规格 */
   MaxRoCpu?: number;
-  /** 实例机器类型 */
+  /** 实例机器类型1. common，通用型。2. exclusive，独享型。 */
   DeviceType?: string;
 }
 
@@ -1512,9 +1512,9 @@ declare interface ModifyInstanceData {
   OldMemory?: number;
   /** 变配前存储上限 */
   OldStorageLimit?: number;
-  /** 变配前实例机器类型 */
+  /** 变配前实例机器类型1. common，通用型。2. exclusive，独享型。 */
   OldDeviceType?: string;
-  /** 变配后实例机器类型 */
+  /** 变配后实例机器类型1. common，通用型。2. exclusive，独享型。 */
   DeviceType?: string;
   /** 升级方式。升级完成后切换或维护时间内切换 */
   UpgradeType?: string;

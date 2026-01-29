@@ -1624,6 +1624,28 @@ declare interface FirstPartConfig {
   StatTime?: number;
 }
 
+/** 统计曲线数据项 */
+declare interface FloatTimingDataItem {
+  /** 返回数据对应时间点，采用 unix 秒级时间戳。 */
+  Timestamp?: number;
+  /** 具体数值。 */
+  Value?: number;
+}
+
+/** 时序类型详细数据 */
+declare interface FloatTimingTypeValue {
+  /** 数据和。 */
+  Sum?: number;
+  /** 最大值。 */
+  Max?: number;
+  /** 平均值。 */
+  Avg?: number;
+  /** 指标名。 */
+  MetricName?: string;
+  /** 详细数据。 */
+  Detail?: FloatTimingDataItem[];
+}
+
 /** 缓存遵循源站配置。 */
 declare interface FollowOrigin {
   /** 遵循源站配置开关，取值有：on：开启；off：关闭。 */
@@ -3855,9 +3877,11 @@ declare interface TimingDataItem {
 /** 时序数据信息 */
 declare interface TimingDataRecord {
   /** 查询维度值。 */
-  TypeKey: string;
-  /** 详细时序数据。 */
-  TypeValue: TimingTypeValue[];
+  TypeKey?: string;
+  /** Integer 类型的详细时序数据，查询指标值类型为 Integer 指标会由本字段返回对应时序数据。 **注意**：若查询指标未明确说明指标值类型，默认由本字段返回数据。 */
+  TypeValue?: TimingTypeValue[];
+  /** Float 类型的详细时序数据，查询指标值类型为 Float 指标会由本字段返回对应时序数据。 */
+  FloatTypeValue?: FloatTimingTypeValue[];
 }
 
 /** 时序类型详细数据 */
@@ -6467,15 +6491,15 @@ declare interface DescribeTimingL4DataRequest {
   StartTime: string;
   /** 结束时间。查询时间范围（`EndTime` - `StartTime`）需小于等于 31 天。 */
   EndTime: string;
-  /** 查询指标，取值有：l4Flow_connections: 访问并发连接数；l4Flow_flux: 访问总流量；l4Flow_inFlux: 访问入流量；l4Flow_outFlux: 访问出流量；l4Flow_inBandwidth: 访问入向带宽峰值；l4Flow_outBandwidth: 访问出向带宽峰值。 */
+  /** 查询指标，取值有：**l4Flow_flux**: 访问总流量，单位：Byte，指标值类型：Integer；**l4Flow_inFlux**: 访问入流量，单位：Byte，指标值类型：Integer；**l4Flow_outFlux**: 访问出流量，单位：Byte，指标值类型：Integer；**l4Flow_inBandwidth**: 访问入向带宽峰值，单位：bps，指标值类型：Integer；**l4Flow_outBandwidth**: 访问出向带宽峰值，单位：bps，指标值类型：Integer；**l4Flow_connections**: 访问并发连接数，单位：个，指标值类型：Integer ；**l4Flow_newConnectionsRate**: 新建连接数速率，单位：个/秒，指标值类型： Float，保留两位小数。**注意**： Integer 值类型的指标将从 Data.N.TypeValue 返回对应时序数据；Float 值类型的指标将从 Data.N.FloatTypeValue 返回对应时序数据。 */
   MetricNames: string[];
   /** 站点ID，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
-  ZoneIds?: string[];
+  ZoneIds: string[];
   /** 四层实例列表, 不填表示选择全部实例。 */
   ProxyIds?: string[];
-  /** 查询时间粒度，取值有：min: 1分钟 ；5min: 5分钟 ；hour: 1小时 ；day: 1天 。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：1小时范围内以min粒度查询，2天范围内以5min粒度查询，7天范围内以hour粒度查询，超过7天以day粒度查询。 */
+  /** 查询时间粒度，取值有：**min**: 1分钟 ；**5min**: 5分钟 ；**hour**: 1小时 ；**day**: 1天 。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：1小时范围内以 min 粒度查询，2天范围内以 5min 粒度查询，7天范围内以 hour 粒度查询，超过7天以 day 粒度查询。 */
   Interval?: string;
-  /** 过滤条件，详细的过滤条件Key值如下：ruleId：按照转发规则 ID 进行过滤。proxyId：按照四层代理实例 ID 进行过滤。 */
+  /** 过滤条件，详细的过滤条件Key值如下：**ruleId**：按照转发规则 ID 进行过滤。**proxyId**：按照四层代理实例 ID 进行过滤。 */
   Filters?: QueryCondition[];
   /** 数据归属地区。该参数已废弃。请在 Filters.country 中按客户端地域过滤数据。 */
   Area?: string;
@@ -6484,7 +6508,7 @@ declare interface DescribeTimingL4DataRequest {
 declare interface DescribeTimingL4DataResponse {
   /** 查询结果的总条数。 */
   TotalCount?: number;
-  /** 四层时序流量数据列表。 */
+  /** 四层时序流量数据列表。对于不同的查询指标，根据指标值类型的不同，会从不同的参数返回时序数据。目前存在的值类型有以下两种：Integer：Integer 值类型的指标将从 Data.N.TypeValue 返回对应时序数据。对应的查询指标 MetricName 有：l4Flow_flux：访问总流量；l4Flow_inFlux：访问入流量；l4Flow_outFlux：访问出流量；l4Flow_inBandwidth：访问入向带宽峰值；l4Flow_outBandwidth：访问出向带宽峰值；l4Flow_connections：访问并发连接数。Float：Float 值类型的指标将从 Data.N.FloatTypeValue 返回对应时序数据。对应的查询指标 MetricName 有：l4Flow_newConnectionsRate：新建连接数速率。本接口暂不支持指定维度查询，默认按主账号汇总返回数据，即 Data.N.TypeKey = AppId，AppId 是腾讯云主账号唯一标识，N 恒等于 1。 */
   Data?: TimingDataRecord[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

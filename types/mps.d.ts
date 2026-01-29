@@ -5520,6 +5520,8 @@ declare interface ScheduleQualityControlTaskResult {
   Input?: AiQualityControlTaskInput;
   /** 媒体质检任务的输出。 */
   Output?: QualityControlData | null;
+  /** 任务执行进度。 */
+  Progress?: number;
 }
 
 /** 编排视频识别任务结果类型 */
@@ -7427,6 +7429,8 @@ declare interface CreateProcessImageTemplateRequest {
   Name?: string;
   /** 图片处理模板描述信息，长度限制：256个字符。 */
   Comment?: string;
+  /** 图片处理模板拓展参数。 */
+  StdExtInfo?: string;
 }
 
 declare interface CreateProcessImageTemplateResponse {

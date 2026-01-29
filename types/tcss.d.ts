@@ -372,6 +372,10 @@ declare interface AssetClusterListItem {
   MemLimit?: number;
   /** cpu */
   CpuLimit?: number;
+  /** 集群审计开关状态：已关闭Closed/关闭中Closing/关闭失败CloseFailed/已开启Opened/开启中Opening/开启失败OpenFailed */
+  ClusterAuditStatus?: string;
+  /** 接入状态:未接入: AccessedNone已防护: AccessedDefended未防护: AccessedInstalled部分防护: AccessedPartialDefence接入异常: AccessedException卸载异常: AccessedUninstallException接入中: AccessedInstalling卸载中: AccessedUninstalling */
+  AccessedStatus?: string;
 }
 
 /** 容器安全描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */

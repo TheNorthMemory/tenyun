@@ -560,6 +560,16 @@ declare interface DatabasesInfo {
   UpdateTime?: string;
 }
 
+/** 数据库连接器实例信息 */
+declare interface DbInstance {
+  /** 云开发环境ID */
+  EnvId?: string;
+  /** MySQL 连接器实例 ID；`"default"` 或为空表示使用 TCB 环境的默认连接器 */
+  InstanceId?: string;
+  /** 数据库名；为空时使用连接器配置的默认数据库名 */
+  Schema?: string;
+}
+
 /** 环境计费信息 */
 declare interface EnvBillingInfoItem {
   /** 环境ID */
@@ -800,34 +810,6 @@ declare interface KVPair {
   Key: string;
   /** 值 */
   Value: string;
-}
-
-/** CLS日志单条信息 */
-declare interface LogObject {
-  /** 日志属于的 topic ID */
-  TopicId?: string;
-  /** 日志主题的名字 */
-  TopicName?: string;
-  /** 日志时间 */
-  Timestamp?: string;
-  /** 日志内容 */
-  Content?: string;
-  /** 采集路径 */
-  FileName?: string;
-  /** 日志来源设备 */
-  Source?: string;
-}
-
-/** CLS日志结果 */
-declare interface LogResObject {
-  /** 获取更多检索结果的游标 */
-  Context?: string;
-  /** 搜索结果是否已经全部返回 */
-  ListOver?: boolean;
-  /** 日志内容信息 */
-  Results?: LogObject[];
-  /** 日志聚合结果 */
-  AnalysisRecords?: string[];
 }
 
 /** 云日志服务相关信息 */
@@ -2574,28 +2556,24 @@ declare interface ReplaceActivityRecordResponse {
   RequestId?: string;
 }
 
-declare interface SearchClsLogRequest {
-  /** 环境唯一ID */
+declare interface RunSqlRequest {
+  /** 要执行的SQL语句 */
+  Sql: string;
+  /** 云开发环境ID */
   EnvId: string;
-  /** 查询起始时间条件 */
-  StartTime: string;
-  /** 查询结束时间条件 */
-  EndTime: string;
-  /** 查询语句，详情参考 https://cloud.tencent.com/document/product/614/47044 */
-  QueryString: string;
-  /** 单次要返回的日志条数，单次返回的最大条数为100 */
-  Limit: number;
-  /** 加载更多使用，透传上次返回的 context 值，获取后续的日志内容，通过游标最多可获取10000条，请尽可能缩小时间范围 */
-  Context?: string;
-  /** 按时间排序 asc（升序）或者 desc（降序），默认为 desc */
-  Sort?: string;
-  /** 是否使用Lucene语法，默认为false */
-  UseLucene?: boolean;
+  /** 数据库连接器实例信息 */
+  DbInstance?: DbInstance;
+  /** 是否只读；当 `true` 时仅允许以 `SELECT/WITH/SHOW/DESCRIBE/DESC/EXPLAIN` 开头的 SQL */
+  ReadOnly?: boolean;
 }
 
-declare interface SearchClsLogResponse {
-  /** 日志内容结果 */
-  LogResults?: LogResObject;
+declare interface RunSqlResponse {
+  /** 查询结果行，每个元素为 JSON 字符串 */
+  Items?: string[];
+  /** 列元数据信息，每个元素为 JSON 字符串，字段包含 `name/databaseType/nullable/length/precision/scale` */
+  Infos?: string[];
+  /** 受影响的行数（INSERT/UPDATE/DELETE 等语句） */
+  RowsAffected?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2747,8 +2725,8 @@ declare interface Tcb {
   ReinstateEnv(data: ReinstateEnvRequest, config?: AxiosRequestConfig): AxiosPromise<ReinstateEnvResponse>;
   /** 更新活动详情 {@link ReplaceActivityRecordRequest} {@link ReplaceActivityRecordResponse} */
   ReplaceActivityRecord(data: ReplaceActivityRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceActivityRecordResponse>;
-  /** 搜索CLS日志 {@link SearchClsLogRequest} {@link SearchClsLogResponse} */
-  SearchClsLog(data: SearchClsLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClsLogResponse>;
+  /** 执行SQL语句 {@link RunSqlRequest} {@link RunSqlResponse} */
+  RunSql(data: RunSqlRequest, config?: AxiosRequestConfig): AxiosPromise<RunSqlResponse>;
   /** 批量解冻服务 {@link UnfreezeCloudBaseRunServersRequest} {@link UnfreezeCloudBaseRunServersResponse} */
   UnfreezeCloudBaseRunServers(data: UnfreezeCloudBaseRunServersRequest, config?: AxiosRequestConfig): AxiosPromise<UnfreezeCloudBaseRunServersResponse>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
@@ -3127,6 +3105,8 @@ declare interface Tcb {
   RevokeInvoice(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   RollUpdateCloudBaseRunServerVersion(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
+  /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
+  SearchClsLog(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   SetCommonRenewFlag(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */

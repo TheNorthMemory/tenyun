@@ -480,6 +480,18 @@ declare interface TerminateInstancesResponse {
   RequestId?: string;
 }
 
+declare interface UpdateServiceConfigsRequest {
+  /** 服务ID */
+  ServiceId: string;
+  /** 期望副本数 */
+  TargetReplicas?: number;
+}
+
+declare interface UpdateServiceConfigsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Hai 高性能应用服务} */
 declare interface Hai {
   (): Versions;
@@ -515,6 +527,8 @@ declare interface Hai {
   StopInstance(data: StopInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<StopInstanceResponse>;
   /** 销毁实例 {@link TerminateInstancesRequest} {@link TerminateInstancesResponse} */
   TerminateInstances(data: TerminateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateInstancesResponse>;
+  /** 更新服务配置 {@link UpdateServiceConfigsRequest} {@link UpdateServiceConfigsResponse} */
+  UpdateServiceConfigs(data: UpdateServiceConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateServiceConfigsResponse>;
 }
 
 export declare type Versions = ["2023-08-12"];

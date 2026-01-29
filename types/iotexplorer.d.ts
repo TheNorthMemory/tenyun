@@ -1204,6 +1204,8 @@ declare interface TalkAIBotInfo {
   CreateTime?: number;
   /** 更新时间 */
   UpdateTime?: number;
+  /** 已关联产品信息列表 */
+  BoundProducts?: TalkProductInfo[];
 }
 
 /** 智能体配置信息。 */
@@ -1226,7 +1228,7 @@ declare interface TalkAgentConfigInfo {
   SilenceTime?: number;
   /** 是否启用噪声过滤 */
   NoiseFilterEnabled?: boolean;
-  /** 是否开启长记忆，默认开启 */
+  /** 是否开启长记忆，默认关闭 */
   LongTermMemoryEnabled?: boolean;
   /** 系统提示词，仅当未配置LLMConfig时使用 */
   SystemPrompt?: string;
@@ -1766,16 +1768,6 @@ declare interface CallDeviceActionSyncResponse {
   RequestId?: string;
 }
 
-declare interface CancelAssignTWeCallLicenseRequest {
-  /** 订单号 */
-  PkgId: string;
-}
-
-declare interface CancelAssignTWeCallLicenseResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ChangeP2PRouteRequest {
   /** 产品ID */
   ProductId: string;
@@ -1964,6 +1956,22 @@ declare interface CreateDeviceRequest {
 declare interface CreateDeviceResponse {
   /** 设备参数描述。 */
   Data?: DeviceData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDeviceSDPAnswerRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** SDP提议 */
+  SDPOffer: string;
+}
+
+declare interface CreateDeviceSDPAnswerResponse {
+  /** SDP应答 */
+  SDPAnswer?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4199,6 +4207,8 @@ declare interface GetTWeCallActiveStatusResponse {
 declare interface GetTWeTalkAIBotListRequest {
   /** 智能体ID */
   BotId?: string;
+  /** 智能体名称 */
+  Name?: string;
   /** 产品ID */
   ProductId?: string;
   /** 实例ID */
@@ -5419,8 +5429,6 @@ declare interface Iotexplorer {
   CallDeviceActionAsync(data: CallDeviceActionAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<CallDeviceActionAsyncResponse>;
   /** 同步调用设备行为 {@link CallDeviceActionSyncRequest} {@link CallDeviceActionSyncResponse} */
   CallDeviceActionSync(data: CallDeviceActionSyncRequest, config?: AxiosRequestConfig): AxiosPromise<CallDeviceActionSyncResponse>;
-  /** @deprecated 取消分配TWeCall {@link CancelAssignTWeCallLicenseRequest} {@link CancelAssignTWeCallLicenseResponse} */
-  CancelAssignTWeCallLicense(data: CancelAssignTWeCallLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<CancelAssignTWeCallLicenseResponse>;
   /** p2p线路切换 {@link ChangeP2PRouteRequest} {@link ChangeP2PRouteResponse} */
   ChangeP2PRoute(data: ChangeP2PRouteRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeP2PRouteResponse>;
   /** 查询设备可升级固件版本 {@link CheckFirmwareUpdateRequest} {@link CheckFirmwareUpdateResponse} */
@@ -5439,6 +5447,8 @@ declare interface Iotexplorer {
   CreateDevice(data: CreateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceResponse>;
   /** 创建设备通道 {@link CreateDeviceChannelRequest} {@link CreateDeviceChannelResponse} */
   CreateDeviceChannel(data: CreateDeviceChannelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceChannelResponse>;
+  /** 创建设备SDP应答 {@link CreateDeviceSDPAnswerRequest} {@link CreateDeviceSDPAnswerResponse} */
+  CreateDeviceSDPAnswer(data: CreateDeviceSDPAnswerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceSDPAnswerResponse>;
   /** 创建外部视频AI分析任务 {@link CreateExternalSourceAIServiceTaskRequest} {@link CreateExternalSourceAIServiceTaskResponse} */
   CreateExternalSourceAIServiceTask(data: CreateExternalSourceAIServiceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExternalSourceAIServiceTaskResponse>;
   /** 创建围栏绑定信息 {@link CreateFenceBindRequest} {@link CreateFenceBindResponse} */

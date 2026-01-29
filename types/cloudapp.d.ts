@@ -60,6 +60,10 @@ declare interface License {
   LicenseData?: LicenseData;
   /** License 颁发地址 */
   IssueURL?: string;
+  /** 商品供应商 UIN */
+  ProviderUin?: string;
+  /** License 创建来源 ID */
+  CreateSource?: string;
 }
 
 /** License 内容信息 */

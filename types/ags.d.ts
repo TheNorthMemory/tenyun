@@ -428,6 +428,26 @@ declare interface DescribeSandboxToolListResponse {
   RequestId?: string;
 }
 
+declare interface PauseSandboxInstanceRequest {
+  /** 沙箱实例ID */
+  InstanceId: string;
+}
+
+declare interface PauseSandboxInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ResumeSandboxInstanceRequest {
+  /** 沙箱实例ID */
+  InstanceId: string;
+}
+
+declare interface ResumeSandboxInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StartSandboxInstanceRequest {
   /** 沙箱工具 ID，与 ToolName 至少有一个要填 */
   ToolId?: string;
@@ -513,6 +533,10 @@ declare interface Ags {
   DescribeSandboxInstanceList(data?: DescribeSandboxInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxInstanceListResponse>;
   /** 查询沙箱工具列表 {@link DescribeSandboxToolListRequest} {@link DescribeSandboxToolListResponse} */
   DescribeSandboxToolList(data?: DescribeSandboxToolListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxToolListResponse>;
+  /** 暂停沙箱实例 {@link PauseSandboxInstanceRequest} {@link PauseSandboxInstanceResponse} */
+  PauseSandboxInstance(data: PauseSandboxInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<PauseSandboxInstanceResponse>;
+  /** 恢复沙箱实例 {@link ResumeSandboxInstanceRequest} {@link ResumeSandboxInstanceResponse} */
+  ResumeSandboxInstance(data: ResumeSandboxInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeSandboxInstanceResponse>;
   /** 启动沙箱实例 {@link StartSandboxInstanceRequest} {@link StartSandboxInstanceResponse} */
   StartSandboxInstance(data?: StartSandboxInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<StartSandboxInstanceResponse>;
   /** 停止沙箱实例 {@link StopSandboxInstanceRequest} {@link StopSandboxInstanceResponse} */

@@ -897,7 +897,7 @@ declare interface DescribeRecordInfoResponse {
 }
 
 declare interface DescribeRoomInfoRequest {
-  /** 应用ID，登录[控制台 - 服务管理](https://console.cloud.tencent.com/gamegme)创建应用得到的AppID */
+  /** 应用ID，登录控制台 - 服务管理创建应用得到的AppID */
   SdkAppId: number;
   /** 房间号列表，最大不能超过10个（RoomIds、StrRoomIds必须填一个） */
   RoomIds?: number[];
