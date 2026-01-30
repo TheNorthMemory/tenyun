@@ -200,6 +200,12 @@ declare interface SceneInfo {
   SceneName?: string;
 }
 
+/** 推理集群费用数据结构体 */
+declare interface ServicePriceDetail {
+  /** 推理集群价格信息 */
+  ServicePrice?: ItemPrice;
+}
+
 /** 描述了操作系统所在块设备即系统盘的信息 */
 declare interface SystemDisk {
   /** 系统盘类型。取值范围：CLOUD_PREMIUM：高性能云硬盘CLOUD_HSSD：增强型SSD云盘默认取值：当前有库存的硬盘类型。 */
@@ -386,6 +392,16 @@ declare interface InquirePriceRunInstancesResponse {
   RequestId?: string;
 }
 
+declare interface InquirePriceUpdateServiceConfigsRequest {
+}
+
+declare interface InquirePriceUpdateServiceConfigsResponse {
+  /** 发货参数对应的价格组合。 */
+  Price?: ServicePriceDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ResetInstancesPasswordRequest {
   /** 实例ID列表 */
   InstanceIds: string[];
@@ -515,6 +531,8 @@ declare interface Hai {
   DescribeServiceLoginSettings(data: DescribeServiceLoginSettingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceLoginSettingsResponse>;
   /** 创建实例询价 {@link InquirePriceRunInstancesRequest} {@link InquirePriceRunInstancesResponse} */
   InquirePriceRunInstances(data: InquirePriceRunInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRunInstancesResponse>;
+  /** 更新服务配置询价 {@link InquirePriceUpdateServiceConfigsRequest} {@link InquirePriceUpdateServiceConfigsResponse} */
+  InquirePriceUpdateServiceConfigs(data?: InquirePriceUpdateServiceConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceUpdateServiceConfigsResponse>;
   /** 重置实例的用户密码 {@link ResetInstancesPasswordRequest} {@link ResetInstancesPasswordResponse} */
   ResetInstancesPassword(data: ResetInstancesPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetInstancesPasswordResponse>;
   /** 扩容实例云硬盘 {@link ResizeInstanceDiskRequest} {@link ResizeInstanceDiskResponse} */

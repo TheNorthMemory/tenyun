@@ -72,6 +72,12 @@ declare interface LogoRect {
   Height?: number;
 }
 
+/** 视频编辑参数 */
+declare interface VideoEditParam {
+  /** 魔法词，针对特定场景生效。不同场景传不同的值。默认不传。- 换人场景：1 */
+  Magic?: string;
+}
+
 declare interface CheckAnimateImageJobRequest {
   /** 动作模板ID。 */
   TemplateId: string;
@@ -431,6 +437,8 @@ declare interface SubmitVideoEditJobRequest {
   Images?: Image[];
   /** 图片base64或者图片url- Base64 和 Url 必须提供一个，如果都提供以Url为准。- 上传图url大小不超过 8M- 支持jpg，png，jpeg，webp，bmp，tiff 格式- 单边分辨率不超过5000，不小于50，长宽限制1:4 ~ 4:1 */
   Image?: Image;
+  /** 扩展字段。 */
+  VideoEditParam?: VideoEditParam;
   /** 为生成视频添加标识的开关，默认为1。传0 需前往 [控制台](https://console.cloud.tencent.com/vtc/setting) 申请开启显式标识自主完成后方可生效。1：添加标识；0：不添加标识；其他数值：默认按1处理。建议您使用显著标识来提示，该视频是 AI 生成的视频。 */
   LogoAdd?: number;
   /** 标识内容设置。默认在生成视频的右下角添加“ AI 生成”或“视频由 AI 生成”字样，如需替换为其他的标识图片，需前往 [控制台](https://console.cloud.tencent.com/vtc/setting) 申请开启显式标识自主完成。 */

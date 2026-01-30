@@ -4687,13 +4687,13 @@ declare interface ModifyAttributeLabelResponse {
 }
 
 declare interface ModifyDocAttrRangeRequest {
-  /** 应用ID */
+  /** 应用ID，获取方法参看[如何获取 BotBizId](https://cloud.tencent.com/document/product/1759/109469) */
   BotBizId: string;
   /** 文档ID */
   DocBizIds: string[];
   /** 属性标签适用范围 1：全部，2：按条件 */
   AttrRange: number;
-  /** 属性标签引用 */
+  /** 属性标签引用，LabelBizIds可通过 DescribeAttributeLabel 接口获取 */
   AttrLabels: AttrLabelRefer[];
 }
 

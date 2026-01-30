@@ -1148,6 +1148,26 @@ declare interface DescribeDataReportCountResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDataReportCountV2Request {
+  /** 开始时间 */
+  StartTime: number;
+  /** 结束时间 */
+  EndTime: number;
+  /** 项目ID */
+  ID?: number;
+  /** 上报类型（custom，event，log，miniProgramData，performance，pv，speed，webvitals） */
+  ReportType?: string;
+  /** 实例ID */
+  InstanceID?: string;
+}
+
+declare interface DescribeDataReportCountV2Response {
+  /** 返回值 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDataRequest {
   /** 查询字符串 */
   Query: string;
@@ -1941,6 +1961,8 @@ declare interface Rum {
   DescribeDataPvUrlStatisticsV2(data: DescribeDataPvUrlStatisticsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeDataPvUrlStatisticsV2Response>;
   /** 获取上报量 {@link DescribeDataReportCountRequest} {@link DescribeDataReportCountResponse} */
   DescribeDataReportCount(data: DescribeDataReportCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataReportCountResponse>;
+  /** 获取上报量v2 {@link DescribeDataReportCountV2Request} {@link DescribeDataReportCountV2Response} */
+  DescribeDataReportCountV2(data: DescribeDataReportCountV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeDataReportCountV2Response>;
   /** 获取DescribeDataSetUrlStatistics信息 {@link DescribeDataSetUrlStatisticsRequest} {@link DescribeDataSetUrlStatisticsResponse} */
   DescribeDataSetUrlStatistics(data: DescribeDataSetUrlStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataSetUrlStatisticsResponse>;
   /** 获取DescribeDataStaticProject信息 {@link DescribeDataStaticProjectRequest} {@link DescribeDataStaticProjectResponse} */

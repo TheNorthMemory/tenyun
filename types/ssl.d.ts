@@ -2955,13 +2955,13 @@ declare interface SubmitCertificateInformationResponse {
 declare interface UpdateCertificateInstanceRequest {
   /** 一键更新的旧证书ID。 通过查询该证书ID绑定的云资源，然后使用新证书对这些云资源进行更新 */
   OldCertificateId: string;
-  /** 需要部署的资源类型，参数值可选（小写）：clb、cdn、waf、live、ddos、teo、apigateway、vod、tke、tcb、tse、cos */
+  /** 需要部署的资源类型，参数值可选（小写）：clb、cdn、waf、live、ddos、teo、apigateway、vod、tke、tcb、tse、cos、mqtt、scf、tdmq、gaap */
   ResourceTypes: string[];
   /** 一键更新的新证书ID。 不传该参数，则公钥证书和私钥证书必传 */
   CertificateId?: string;
   /** 需要部署的地域列表（废弃） */
   Regions?: string[];
-  /** 云资源需要部署的地域列表，支持地域的云资源类型必传，取值：clb、tke、apigateway、waf、tcb、tse、cos、mqtt */
+  /** 云资源需要部署的地域列表，支持地域的云资源类型必传，取值：clb、tke、apigateway、waf、tcb、tse、cos、mqtt、scf、tdmq */
   ResourceTypesRegions?: ResourceTypeRegions[];
   /** 公钥证书， 若上传公钥证书，那么私钥证书必传。 则CertificateId不用传 */
   CertificatePublicKey?: string;

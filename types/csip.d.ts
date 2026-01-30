@@ -5048,7 +5048,7 @@ declare interface DescribeVulViewVulRiskListResponse {
 }
 
 declare interface ModifyOrganizationAccountStatusRequest {
-  /** 修改集团账号状态，1 开启， 2关闭 */
+  /** 修改集团账号状态，1 开启， 0关闭 */
   Status: number;
   /** 集团账号的成员id */
   MemberId?: string[];

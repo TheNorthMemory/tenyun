@@ -2274,6 +2274,16 @@ declare interface JsonObject {
   Value?: string;
 }
 
+/** 资源操作返回详情 */
+declare interface OperateRsp {
+  /** 实例维度操作失败code码 */
+  Code?: number | null;
+  /** 资源操作失败原因 */
+  Message?: string | null;
+  /** 实例ID */
+  InstanceId?: string | null;
+}
+
 /** 字段排序 */
 declare interface OrderDto {
   /** 字段 */
@@ -4393,6 +4403,28 @@ declare interface RenewInstanceResponse {
   RequestId?: string;
 }
 
+declare interface SetRenewalRequest {
+  /** 产品编码。 */
+  ProductCode: string;
+  /** 地域编码。 */
+  RegionCode: string;
+  /** 实例ID，仅支持指定一个。 */
+  InstanceId: string;
+  /** 续费标识。枚举值如下：NOTIFY_AND_MANUAL_RENEW：手动续费NOTIFY_AND_AUTO_RENEW：自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW：到期不续 */
+  RenewFlag: string;
+  /** 自动续费周期长度，不填写时默认按产品侧设置的默认值如果是月，支持：1-11如果是年，支持：1-5实际按产品侧支持的范围为主 */
+  RenewPeriod?: string;
+  /** 自动续费周期单位，不填写时默认按产品侧设置的默认值y 年，m 月实际按产品侧支持的范围为主 */
+  RenewPeriodUnit?: string;
+}
+
+declare interface SetRenewalResponse {
+  /** 操作失败时的实例列表。 */
+  InstanceList?: OperateRsp[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Billing 费用中心} */
 declare interface Billing {
   (): Versions;
@@ -4530,6 +4562,8 @@ declare interface Billing {
   RefundInstance(data: RefundInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RefundInstanceResponse>;
   /** 续费实例 {@link RenewInstanceRequest} {@link RenewInstanceResponse} */
   RenewInstance(data: RenewInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RenewInstanceResponse>;
+  /** 设置续费参数 {@link SetRenewalRequest} {@link SetRenewalResponse} */
+  SetRenewal(data: SetRenewalRequest, config?: AxiosRequestConfig): AxiosPromise<SetRenewalResponse>;
 }
 
 export declare type Versions = ["2018-07-09"];

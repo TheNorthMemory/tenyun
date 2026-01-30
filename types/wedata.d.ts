@@ -6537,7 +6537,7 @@ declare interface ListOpsWorkflowsResponse {
 }
 
 declare interface ListPermissionsRequest {
-  /** 资源ResourceType：来源于TCCATALOG模块的GetGrantPrivilegesSTD接口中返回的ResourceType，并改为首字母大写，例如METALAKE对应MetalakeResourceUri，取决于 ResourceType，Metalake时固定为default，其他类别采用catalog的三段式结构，例如- Metalake，固定为default- Catalog，取catalogName- Schema，取catalogName.SchemaName- Table,，取catalogName.SchemaName.TableName */
+  /** 资源ResourceType：来源于TCCATALOG模块的GetGrantPrivilegesSTD接口中返回的ResourceType，并改为首字母大写，例如METALAKE对应MetalakeResourceUri，取决于 ResourceType，Metalake时固定为default，其他类别采用catalog的三段式结构，例如- Metalake，固定为default- Catalog，取catalogName- Schema，取catalogName.SchemaName- Table，取catalogName.SchemaName.TableName */
   Resource?: PrivilegeResource;
   /** 过滤条件(此参数还未支持) */
   Filters?: SecurityFilter[];
@@ -23436,7 +23436,7 @@ declare interface Wedata {
   AssociateResourceGroupToProject(data: AssociateResourceGroupToProjectRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateResourceGroupToProjectResponse>;
   /** 授权数据源 {@link AuthorizeDataSourceRequest} {@link AuthorizeDataSourceResponse} */
   AuthorizeDataSource(data: AuthorizeDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<AuthorizeDataSourceResponse>;
-  /** Wedata3.0-Catalog模式下授权 {@link AuthorizePrivilegesRequest} {@link AuthorizePrivilegesResponse} */
+  /** 授权 {@link AuthorizePrivilegesRequest} {@link AuthorizePrivilegesResponse} */
   AuthorizePrivileges(data: AuthorizePrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<AuthorizePrivilegesResponse>;
   /** 新建代码文件 {@link CreateCodeFileRequest} {@link CreateCodeFileResponse} */
   CreateCodeFile(data: CreateCodeFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodeFileResponse>;
@@ -23732,7 +23732,7 @@ declare interface Wedata {
   RerunTriggerWorkflowRunAsync(data: RerunTriggerWorkflowRunAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<RerunTriggerWorkflowRunAsyncResponse>;
   /** 回收数据源权限 {@link RevokeDataSourceAuthorizationRequest} {@link RevokeDataSourceAuthorizationResponse} */
   RevokeDataSourceAuthorization(data: RevokeDataSourceAuthorizationRequest, config?: AxiosRequestConfig): AxiosPromise<RevokeDataSourceAuthorizationResponse>;
-  /** Wedata3.0-Catalog模式下授权回收 {@link RevokePrivilegesRequest} {@link RevokePrivilegesResponse} */
+  /** 回收权限 {@link RevokePrivilegesRequest} {@link RevokePrivilegesResponse} */
   RevokePrivileges(data: RevokePrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<RevokePrivilegesResponse>;
   /** 运行SQL脚本 {@link RunSQLScriptRequest} {@link RunSQLScriptResponse} */
   RunSQLScript(data: RunSQLScriptRequest, config?: AxiosRequestConfig): AxiosPromise<RunSQLScriptResponse>;

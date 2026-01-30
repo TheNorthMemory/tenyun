@@ -813,6 +813,8 @@ declare interface CreateUserOIDCConfigRequest {
   Scope?: string[];
   /** 描述信息。由用户自行定义。 */
   Description?: string;
+  /** OIDC公钥自动轮转开关（默认为0代表关闭，1代表开启）如果不传的话会默认置0 */
+  AutoRotateKey?: number;
 }
 
 declare interface CreateUserOIDCConfigResponse {
@@ -1092,6 +1094,8 @@ declare interface DescribeUserOIDCConfigResponse {
   MappingFiled?: string;
   /** 描述 */
   Description?: string;
+  /** OIDC公钥自动轮转开关（默认为0代表关闭，1代表开启） */
+  AutoRotateKey?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1945,6 +1949,8 @@ declare interface UpdateUserOIDCConfigRequest {
   Scope?: string[];
   /** 描述，长度为1~255个英文或中文字符，默认值为空。 */
   Description?: string;
+  /** OIDC公钥自动轮转开关（默认为0代表关闭，1代表开启）如果不传的话，会默认置0 */
+  AutoRotateKey?: number;
 }
 
 declare interface UpdateUserOIDCConfigResponse {

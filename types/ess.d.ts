@@ -666,6 +666,30 @@ declare interface FailedUpdateStaffData {
   OpenId?: string;
 }
 
+/** 信息提取结果字段反馈 */
+declare interface FeedbackInfo {
+  /** 合同信息提取结果反馈。`值如下`：- 0: 未反馈- 1: 信息提取正确- 2: 信息提取有错误 */
+  Result?: number;
+  /** 信息提取错误原因，当Result为2时需要填写此信息 */
+  Reason?: FeedbackInfoReason;
+}
+
+/** 信息提取结果字段反馈错误原因 */
+declare interface FeedbackInfoReason {
+  /** 反馈信息提取错误原因。`值如下`：- 1: 提取错误(提取不精准、提取为空等)- 2: 其他错误 */
+  ReasonType?: number;
+  /** 反馈提取错误详细错误原因，不能超过500个字符 */
+  ReasonContent?: string;
+}
+
+/** 信息提取任务反馈信息列表 */
+declare interface FeedbackList {
+  /** 信息提取结果字段ID */
+  Id?: string;
+  /** 反馈信息 */
+  Info?: FeedbackInfo;
+}
+
 /** 模板中文件的信息结构 */
 declare interface FileInfo {
   /** 文件ID */
@@ -1700,6 +1724,16 @@ declare interface ReviewerInfo {
   Mobile?: string;
 }
 
+/** 合同审查反馈信息 */
+declare interface RiskIdentificationFeedbackInfo {
+  /** 审查结果ID */
+  RiskId?: string;
+  /** 反馈结果- 1: 其他错误- 2: 审查错误- 3: 审查正确 */
+  FeedbackResult?: number;
+  /** 反馈原因 */
+  Reason?: string;
+}
+
 /** 用于定义合同风险识别角色信息。 */
 declare interface RiskIdentificationRoleInfo {
   /** 风险识别角色的名称。用于唯一标识和区分不同的风险识别角色。注意：`最大长度应不超过200个字符` */
@@ -1826,6 +1860,14 @@ declare interface SubOrgBillUsage {
   Used?: number;
   /** 套餐类型对应关系如下:**CloudEnterprise**: 企业版合同**SingleSignature**: 单方签章**CloudProve**: 签署报告**CloudOnlineSign**: 腾讯会议在线签约**ChannelWeCard**: 微工卡**SignFlow**: 合同套餐**SignFace**: 签署意愿（人脸识别）**SignPassword**: 签署意愿（密码）**SignSMS**: 签署意愿（短信）**PersonalEssAuth**: 签署人实名（腾讯电子签认证）**PersonalThirdAuth**: 签署人实名（信任第三方认证）**OrgEssAuth**: 签署企业实名**FlowNotify**: 短信通知**AuthService**: 企业工商信息查询 */
   QuotaType?: string;
+}
+
+/** 信息提取子任务反馈信息 */
+declare interface SubTaskFeedback {
+  /** 信息提取子任务ID */
+  SubTaskId?: string;
+  /** 提取结果反馈信息 */
+  FeedbackList?: FeedbackList[];
 }
 
 /** 创建/修改员工成功返回的信息现在支持saas/企微/H5端进行加入。 */
@@ -3090,6 +3132,20 @@ declare interface CreateIntegrationUserRolesResponse {
   RequestId?: string;
 }
 
+declare interface CreateLMInformationExtractionTaskFieldFeedbackRequest {
+  /** 执行合同智能提取任务的员工信息。 */
+  Operator: UserInfo;
+  /** 合同智能提取任务结果字段ID值。该参数通过调用接口[获取合同智能提取任务详情](https://qian.tencent.com/developers/companyApis/%E5%90%88%E5%90%8C%E6%99%BA%E8%83%BD%E7%9B%B8%E5%85%B3%E6%8E%A5%E5%8F%A3/DescribeInformationExtractionTask)返回中的Results. ExtractionFieldResults.Id获取。 */
+  Id?: string;
+  /** 合同智能提取任务反馈信息 */
+  Feedback?: FeedbackInfo;
+}
+
+declare interface CreateLMInformationExtractionTaskFieldFeedbackResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateLegalSealQrCodeRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator?: UserInfo;
@@ -3568,6 +3624,22 @@ declare interface CreateReleaseFlowRequest {
 declare interface CreateReleaseFlowResponse {
   /** 解除协议流程编号`注意：这里的流程编号对应的合同是本次发起的解除协议。` */
   FlowId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateRiskIdentificationTaskFeedbackRequest {
+  /** 执行合同审查任务的员工信息。 */
+  Operator: UserInfo;
+  /** 合同审查风险结果ID，取值如下：- 反馈风险项结果。该参数通过调用接口[获取合同审查任务详情](https://qian.tencent.com/developers/companyApis/%E5%90%88%E5%90%8C%E6%99%BA%E8%83%BD%E7%9B%B8%E5%85%B3%E6%8E%A5%E5%8F%A3/DescribeContractReviewTask)获取（取Risks.RiskId值）。- 反馈通过项结果。该参数通过调用接口[获取合同审查任务详情](https://qian.tencent.com/developers/companyApis/%E5%90%88%E5%90%8C%E6%99%BA%E8%83%BD%E7%9B%B8%E5%85%B3%E6%8E%A5%E5%8F%A3/DescribeContractReviewTask)获取（取ApprovedLists.RiskId值） */
+  RiskId?: string;
+  /** 反馈结果- 1: 其他错误- 2: 审查错误- 3: 审查正确 */
+  FeedbackResult?: number;
+  /** 审查反馈原因 */
+  Reason?: string;
+}
+
+declare interface CreateRiskIdentificationTaskFeedbackResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4588,6 +4660,22 @@ declare interface DescribeIntegrationRolesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLMInformationExtractionTaskFieldFeedbackRequest {
+  /** 执行合同智能提取任务的员工信息。 */
+  Operator: UserInfo;
+  /** 合同智能提取任务ID，该参数通过调用接口[批量创建合同智能提取任务](https://qian.tencent.com/developers/companyApis/%E5%90%88%E5%90%8C%E6%99%BA%E8%83%BD%E7%9B%B8%E5%85%B3%E6%8E%A5%E5%8F%A3/CreateBatchInformationExtractionTask/)获取。 */
+  TaskId?: string;
+}
+
+declare interface DescribeLMInformationExtractionTaskFieldFeedbackResponse {
+  /** 合同智能提取子任务反馈信息 */
+  SubTaskFeedbackList?: SubTaskFeedback[];
+  /** 合同智能提取任务ID */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeOrganizationAuthStatusRequest {
   /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。 支持填入集团子公司经办人 userId 代发合同。 注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -4702,6 +4790,20 @@ declare interface DescribePersonCertificateRequest {
 declare interface DescribePersonCertificateResponse {
   /** 证书的Base64 */
   Cert?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRiskIdentificationTaskFeedbackRequest {
+  /** 执行合同审查任务的员工信息。 */
+  Operator: UserInfo;
+  /** 合同审查任务ID，该参数通过调用接口[批量创建合同智能提取任务](https://qian.tencent.com/developers/companyApis/%E5%90%88%E5%90%8C%E6%99%BA%E8%83%BD%E7%9B%B8%E5%85%B3%E6%8E%A5%E5%8F%A3/CreateBatchInformationExtractionTask)获取。 */
+  TaskId?: string;
+}
+
+declare interface DescribeRiskIdentificationTaskFeedbackResponse {
+  /** 合同审查任务反馈信息列表 */
+  FeedbackList?: RiskIdentificationFeedbackInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5335,6 +5437,8 @@ declare interface Ess {
   CreateIntegrationSubOrganizationActiveRecord(data: CreateIntegrationSubOrganizationActiveRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationSubOrganizationActiveRecordResponse>;
   /** 绑定员工角色 {@link CreateIntegrationUserRolesRequest} {@link CreateIntegrationUserRolesResponse} */
   CreateIntegrationUserRoles(data: CreateIntegrationUserRolesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrationUserRolesResponse>;
+  /** 创建合同智能提取任务字段反馈 {@link CreateLMInformationExtractionTaskFieldFeedbackRequest} {@link CreateLMInformationExtractionTaskFieldFeedbackResponse} */
+  CreateLMInformationExtractionTaskFieldFeedback(data: CreateLMInformationExtractionTaskFieldFeedbackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLMInformationExtractionTaskFieldFeedbackResponse>;
   /** 获取到电子签小程序创建法人章二维码 {@link CreateLegalSealQrCodeRequest} {@link CreateLegalSealQrCodeResponse} */
   CreateLegalSealQrCode(data?: CreateLegalSealQrCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLegalSealQrCodeResponse>;
   /** 创建小程序发起合同链接 {@link CreateMiniAppPrepareFlowRequest} {@link CreateMiniAppPrepareFlowResponse} */
@@ -5365,6 +5469,8 @@ declare interface Ess {
   CreatePreparedPersonalEsign(data: CreatePreparedPersonalEsignRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePreparedPersonalEsignResponse>;
   /** 发起解除协议 {@link CreateReleaseFlowRequest} {@link CreateReleaseFlowResponse} */
   CreateReleaseFlow(data: CreateReleaseFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReleaseFlowResponse>;
+  /** 创建合同审查任务反馈 {@link CreateRiskIdentificationTaskFeedbackRequest} {@link CreateRiskIdentificationTaskFeedbackResponse} */
+  CreateRiskIdentificationTaskFeedback(data: CreateRiskIdentificationTaskFeedbackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRiskIdentificationTaskFeedbackResponse>;
   /** 获取跳转至腾讯电子签小程序的签署链接 {@link CreateSchemeUrlRequest} {@link CreateSchemeUrlResponse} */
   CreateSchemeUrl(data: CreateSchemeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSchemeUrlResponse>;
   /** 创建企业电子印章 {@link CreateSealRequest} {@link CreateSealResponse} */
@@ -5453,6 +5559,8 @@ declare interface Ess {
   DescribeIntegrationEmployees(data: DescribeIntegrationEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationEmployeesResponse>;
   /** 查询企业角色列表 {@link DescribeIntegrationRolesRequest} {@link DescribeIntegrationRolesResponse} */
   DescribeIntegrationRoles(data: DescribeIntegrationRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrationRolesResponse>;
+  /** 查询合同智能提取任务字段反馈信息 {@link DescribeLMInformationExtractionTaskFieldFeedbackRequest} {@link DescribeLMInformationExtractionTaskFieldFeedbackResponse} */
+  DescribeLMInformationExtractionTaskFieldFeedback(data: DescribeLMInformationExtractionTaskFieldFeedbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLMInformationExtractionTaskFieldFeedbackResponse>;
   /** 查询待认证企业认证状态 {@link DescribeOrganizationAuthStatusRequest} {@link DescribeOrganizationAuthStatusResponse} */
   DescribeOrganizationAuthStatus(data: DescribeOrganizationAuthStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationAuthStatusResponse>;
   /** 查询集团企业列表 {@link DescribeOrganizationGroupOrganizationsRequest} {@link DescribeOrganizationGroupOrganizationsResponse} */
@@ -5463,6 +5571,8 @@ declare interface Ess {
   DescribeOrganizationVerifyStatus(data?: DescribeOrganizationVerifyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationVerifyStatusResponse>;
   /** 查询个人证书接口 {@link DescribePersonCertificateRequest} {@link DescribePersonCertificateResponse} */
   DescribePersonCertificate(data: DescribePersonCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonCertificateResponse>;
+  /** 查询合同审查任务反馈信息 {@link DescribeRiskIdentificationTaskFeedbackRequest} {@link DescribeRiskIdentificationTaskFeedbackResponse} */
+  DescribeRiskIdentificationTaskFeedback(data: DescribeRiskIdentificationTaskFeedbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskIdentificationTaskFeedbackResponse>;
   /** 查询H5签署认证人脸视频 {@link DescribeSignFaceVideoRequest} {@link DescribeSignFaceVideoResponse} */
   DescribeSignFaceVideo(data: DescribeSignFaceVideoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSignFaceVideoResponse>;
   /** 查询单点登录企业员工信息 {@link DescribeSingleSignOnEmployeesRequest} {@link DescribeSingleSignOnEmployeesResponse} */
