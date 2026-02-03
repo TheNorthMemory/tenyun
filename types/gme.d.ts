@@ -1107,7 +1107,7 @@ declare interface RegisterVoicePrintResponse {
 }
 
 declare interface ScanVoiceRequest {
-  /** 应用ID，登录[控制台 - 服务管理](https://console.cloud.tencent.com/gamegme)创建应用得到的AppID */
+  /** 应用ID，登录控制台 - 服务管理创建应用得到的AppID */
   BizId: number;
   /** 语音检测场景，参数值目前要求为 default。 预留场景设置： 谩骂、色情、广告、违禁等场景，具体取值见上述 Label 说明。 */
   Scenes: string[];

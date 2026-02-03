@@ -9994,6 +9994,34 @@ declare interface StopStreamLinkFlowResponse {
   RequestId?: string;
 }
 
+declare interface SyncDubbingRequest {
+  /** 合成文本，语音合成时必填，文本长度不超过2000字符 */
+  Text?: string;
+  /** 文本语言，不填默认中文。当前支持语言：zh	中文 (Chinese)en	英语 (English)ja	日语 (Japanese)de	德语 (German)fr	法语 (French)ko	韩语 (Korean)ru	俄语 (Russian)uk	乌克兰语 (Ukrainian)pt	葡萄牙语 (Portuguese)it	意大利语 (Italian)es	西班牙语 (Spanish)id	印度尼西亚语 (Indonesian)nl	荷兰语 (Dutch)tr	土耳其语 (Turkish)fil	菲律宾语 (Filipino)ms	马来语 (Malay)el	希腊语 (Greek)fi	芬兰语 (Finnish)hr	克罗地亚语 (Croatian)sk	斯洛伐克语 (Slovak)pl	波兰语 (Polish)sv	瑞典语 (Swedish)hi	印地语 (Hindi)bg	保加利亚语 (Bulgarian)ro	罗马尼亚语 (Romanian)ar	阿拉伯语 (Arabic)cs	捷克语 (Czech)da	丹麦语 (Danish)ta	泰米尔语 (Tamil)hun	匈牙利语（Hungarian）vi	越南语（Vietnamese）no	挪威语（Norwegian）yue	粤语（Cantonese）th	泰语（Thai）he	希伯来语（Hebrew）ca	加泰罗尼亚语（Catalan）nn	尼诺斯克语（Nynorsk）af	阿非利卡语（Afrikaans）fa	波斯语（Persian）sl	斯洛文尼亚语（Slovenian） */
+  TextLang?: string;
+  /** 音色Id，指定音色合成时填写，支持系统音色和克隆音色。 */
+  VoiceId?: string;
+  /** 克隆音频base64编码。 */
+  AudioData?: string;
+  /** 克隆音频语言，默认中文。当前支持语言同TextLang */
+  AudioLang?: string;
+  /** 扩展参数，json字符串 */
+  ExtParam?: string;
+}
+
+declare interface SyncDubbingResponse {
+  /** 错误码，成功时返回0 */
+  ErrorCode?: number;
+  /** 错误信息，成功时返回success */
+  Msg?: string;
+  /** 合成音频的base64编码，wav格式。 */
+  AudioData?: string | null;
+  /** 克隆的音色Id。 */
+  VoiceId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface TextTranslationRequest {
   /** 待翻译的文本，文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度需要低于2000字符。 */
   SourceText: string;
@@ -10335,6 +10363,8 @@ declare interface Mps {
   StartStreamLinkFlow(data: StartStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<StartStreamLinkFlowResponse>;
   /** 停止媒体传输流 {@link StopStreamLinkFlowRequest} {@link StopStreamLinkFlowResponse} */
   StopStreamLinkFlow(data: StopStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<StopStreamLinkFlowResponse>;
+  /** 同步配音 {@link SyncDubbingRequest} {@link SyncDubbingResponse} */
+  SyncDubbing(data?: SyncDubbingRequest, config?: AxiosRequestConfig): AxiosPromise<SyncDubbingResponse>;
   /** 文本翻译 {@link TextTranslationRequest} {@link TextTranslationResponse} */
   TextTranslation(data: TextTranslationRequest, config?: AxiosRequestConfig): AxiosPromise<TextTranslationResponse>;
   /** 提取盲水印 {@link WithdrawsWatermarkRequest} {@link WithdrawsWatermarkResponse} */

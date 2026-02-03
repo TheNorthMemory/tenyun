@@ -993,7 +993,7 @@ declare interface GovernanceAlias {
   /** 该服务别名是否可以编辑 */
   Editable?: boolean;
   /** 元数据信息 */
-  Metadatas?: Metadata[] | null;
+  Metadatas?: Metadata[];
 }
 
 /** 治理中心实例信息。 */
@@ -1147,7 +1147,7 @@ declare interface GovernanceNamespace {
   /** 是否开启同步到全局注册中心 */
   SyncToGlobalRegistry?: boolean;
   /** 元数据 */
-  Metadatas?: Metadata[] | null;
+  Metadatas?: Metadata[];
 }
 
 /** 治理中心命名空间输入参数 */
@@ -1241,7 +1241,7 @@ declare interface GovernanceServiceContract {
   /** 契约接口列表 */
   Interfaces?: GovernanceInterfaceDescription[];
   /** 元数据 */
-  Metadatas?: Metadata[] | null;
+  Metadatas?: Metadata[];
 }
 
 /** 服务契约版本信息 */

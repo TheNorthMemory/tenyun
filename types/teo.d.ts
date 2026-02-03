@@ -2,6 +2,14 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** AI 爬虫检测的具体配置。 */
+declare interface AICrawlerDetection {
+  /** AI 爬虫检测是否开启。取值有：on：开启；off：关闭。 */
+  Enabled?: string;
+  /** AI 爬虫检测的执行动作，当 Enabled 为 on 时，此字段必填。SecurityAction 的 Name 取值仅支持：Deny：拦截；Monitor：观察；Allow：放行；Challenge：挑战，其中 ChallengeActionParameters 中的 ChallengeOption 仅支持 JSChallenge 和 ManagedChallenge。 */
+  Action?: SecurityAction;
+}
+
 /** API 资源。 */
 declare interface APIResource {
   /** 资源 ID。 */
@@ -562,6 +570,14 @@ declare interface BotManagementCustomRules {
   Rules?: BotManagementCustomRule[];
 }
 
+/** Web 安全的基础 BOT 规则结构。 */
+declare interface BotManagementLite {
+  /** 人机校验页的具体配置。 */
+  CAPTCHAPageChallenge?: CAPTCHAPageChallenge;
+  /** AI爬虫检测的具体配置。 */
+  AICrawlerDetection?: AICrawlerDetection;
+}
+
 /** bot 用户画像规则 */
 declare interface BotPortraitRule {
   /** 本功能的开关，取值有：on：开启；off：关闭。 */
@@ -662,6 +678,12 @@ declare interface BrowserImpersonationDetectionRule {
   Condition?: string;
   /** 浏览器伪造识别规则的处置方式，包括 Cookie 校验和会话跟踪配置以及客户端行为校验配置。 */
   Action?: BrowserImpersonationDetectionAction;
+}
+
+/** 人机校验页的具体配置。 */
+declare interface CAPTCHAPageChallenge {
+  /** 人机校验页是否开启，取值有：on：开启；off：关闭。 */
+  Enabled?: string;
 }
 
 /** cc配置项。 */
@@ -964,13 +986,13 @@ declare interface ClientIpHeader {
   HeaderName?: string;
 }
 
-/** CNAME 状态 */
+/** 接入域名 CNAME 配置状态 */
 declare interface CnameStatus {
-  /** 记录名称。 */
+  /** 接入域名。 */
   RecordName?: string;
-  /** CNAME 地址。 */
-  Cname?: string | null;
-  /** CNAME 状态信息，取值有：active：生效；moved：不生效； */
+  /** EdgeOne 分配给接入域名的 CNAME。 */
+  Cname?: string;
+  /** CNAME 配置状态校验结果，取值有：active：表示接入域名已正确配置到 EdgeOne 为其分配的指定 CNAME；moved：表示接入域名未配置到 EdgeOne 为其分配的指定 CNAME；invalid：表示接入域名配置的 CNAME 为 EdgeOne 为其他域名分配的 CNAME，会导致服务异常，请修改为 EdgeOne 为该接入域名提供的指定 CNAME，您可通过本结构体的 Cname 字段获取 EdgeOne 为该接入域名提供的 CNAME。 */
   Status?: string;
 }
 
@@ -3584,6 +3606,8 @@ declare interface SecurityPolicy {
   ExceptionRules?: ExceptionRules;
   /** Bot 管理配置。 */
   BotManagement?: BotManagement;
+  /** 基础 Bot 管理配置。 */
+  BotManagementLite?: BotManagementLite;
 }
 
 /** 策略模板信息 */
@@ -4337,12 +4361,12 @@ declare interface BindZoneToPlanResponse {
 declare interface CheckCnameStatusRequest {
   /** 站点 ID。 */
   ZoneId: string;
-  /** 加速域名列表。 */
+  /** 需要检测 CNAME 配置状态的域名列表，可以为：加速域名;别称域名。 */
   RecordNames: string[];
 }
 
 declare interface CheckCnameStatusResponse {
-  /** 加速域名 CNAME 状态信息列表。 */
+  /** 接入域名的 CNAME 配置状态信息列表。 */
   CnameStatus?: CnameStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -7995,7 +8019,7 @@ declare interface Teo {
   BindSharedCNAME(data: BindSharedCNAMERequest, config?: AxiosRequestConfig): AxiosPromise<BindSharedCNAMEResponse>;
   /** 为站点绑定套餐 {@link BindZoneToPlanRequest} {@link BindZoneToPlanResponse} */
   BindZoneToPlan(data: BindZoneToPlanRequest, config?: AxiosRequestConfig): AxiosPromise<BindZoneToPlanResponse>;
-  /** 校验域名 CNAME 状态 {@link CheckCnameStatusRequest} {@link CheckCnameStatusResponse} */
+  /** 校验域名 CNAME 配置状态 {@link CheckCnameStatusRequest} {@link CheckCnameStatusResponse} */
   CheckCnameStatus(data: CheckCnameStatusRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCnameStatusResponse>;
   /** 检查免费证书申请结果 {@link CheckFreeCertificateVerificationRequest} {@link CheckFreeCertificateVerificationResponse} */
   CheckFreeCertificateVerification(data: CheckFreeCertificateVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<CheckFreeCertificateVerificationResponse>;

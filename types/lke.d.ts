@@ -1934,9 +1934,9 @@ declare interface QAList {
 
 /** QA查询参数 */
 declare interface QAQuery {
-  /** 页码 */
+  /** 页码 从1开始 */
   PageNumber: number;
-  /** 每页数量 */
+  /** 页大小 默认15 最大100 */
   PageSize: number;
   /** 应用ID */
   BotBizId: string;
@@ -1944,9 +1944,9 @@ declare interface QAQuery {
   Query?: string;
   /** 分类ID */
   CateBizId?: string;
-  /** 校验状态 */
+  /** 校验状态的枚举值 */
   AcceptStatus?: number[];
-  /** 发布状态 */
+  /** 发布状态的枚举值 */
   ReleaseStatus?: number[];
   /** 文档ID */
   DocBizId?: string;
@@ -1958,6 +1958,8 @@ declare interface QAQuery {
   QueryAnswer?: string;
   /** 查询类型 filename 名称、 attribute 标签 */
   QueryType?: string;
+  /** 问答生效域检索，不检索不传。枚举值如下：1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效。 */
+  EnableScope?: number;
 }
 
 /** 问答对参考信息 */

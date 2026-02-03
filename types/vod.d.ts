@@ -407,6 +407,8 @@ declare namespace V20180717 {
     TraceWatermark?: TraceWatermarkInput;
     /** 版权水印。 */
     CopyRightWatermark?: CopyRightWatermarkInput;
+    /** 数字水印。 */
+    BlindWatermark?: BlindWatermarkInput;
     /** 字幕列表，元素为字幕 ID，支持多个字幕，最大可支持16个。 */
     SubtitleSet?: string[];
   }
@@ -1735,6 +1737,36 @@ declare namespace V20180717 {
     Tags?: string[];
   }
 
+  /** 人脸身份信息。 */
+  interface AigcFaceIdentityInfo {
+    /** 视频中的人脸 ID。同一个人脸在视频中间隔超过1s时会视作不同 ID。 */
+    FaceId?: string;
+    /** 从视频中截取的人脸示意图。 */
+    FaceImage?: string;
+    /** 该人脸可对口型区间的起点时间，可作为对口型最佳开始时间。单位：毫秒。 */
+    StartTime?: number;
+    /** 该人脸可对口型区间的终点时间；注：此结果存在毫秒级误差，会长于实际区间终点。单位：毫秒。 */
+    EndTime?: number;
+  }
+
+  /** AIGC 人脸信息 */
+  interface AigcFaceInfo {
+    /** 主体 ID。需自行记录下返回的主体 ID。 */
+    SessionId?: string;
+    /** 人脸信息列表。 */
+    FaceInfoList?: AigcFaceIdentityInfo[];
+  }
+
+  /** AIGC 人脸输入文件信息 */
+  interface AigcFaceInputFileInfo {
+    /** 输入的视频文件类型。取值有： File：点播媒体文件； Url：可访问的 Url； */
+    Type?: string;
+    /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。当 Type 取值为 File 时，本参数有效。 */
+    FileId?: string;
+    /** 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。 */
+    Url?: string;
+  }
+
   /** AIGC 生图任务的输出媒体文件配置。 */
   interface AigcImageOutputConfig {
     /** 存储模式。取值有： Permanent：永久存储，生成的图片文件将存储到云点播，可在事件通知中获取到 FileId； Temporary：临时存储，生成的图片文件不会存储到云点播，可在事件通知中获取到临时访问的 URL；默认值：Temporary */
@@ -1811,7 +1843,7 @@ declare namespace V20180717 {
 
   /** AIGC生图任务输入文件信息 */
   interface AigcImageTaskInputFileInfo {
-    /** 输入的视频文件类型。取值有： File：点播媒体文件； Url：可访问的 URL； */
+    /** 输入的视频文件类型。取值有： File：点播媒体文件； Url：可访问的 Url； */
     Type?: string;
     /** 图片文件的媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。当 Type 取值为 File 时，本参数有效。说明：1. 推荐使用小于7M的图片；2. 图片格式的取值为：jpeg，jpg, png, webp。 */
     FileId?: string;
@@ -1883,6 +1915,8 @@ declare namespace V20180717 {
     EnhanceSwitch?: string;
     /** 是否开启vidu智能插帧。取值有： Enabled：开启； Disabled：关闭； */
     FrameInterpolate?: string;
+    /** 是否开启图标水印。取值有： Enabled：开启； Disabled：关闭； 目前支持的模型有 Vidu，其他模型暂不支持。 */
+    LogoAdd?: string;
   }
 
   /** 场景化 AIGC 生图配置。 */
@@ -1945,7 +1979,7 @@ declare namespace V20180717 {
 
   /** AIGC 生视频任务输入的图片文件信息。 */
   interface AigcVideoTaskInputFileInfo {
-    /** 输入的视频文件类型。取值有： File：点播媒体文件； Url：可访问的 URL； */
+    /** 输入的视频文件类型。取值有： File：点播媒体文件； Url：可访问的 Url； */
     Type?: string;
     /** 文件分类。取值为：Image: 图片；Video: 视频。 */
     Category?: string;
@@ -2227,6 +2261,12 @@ declare namespace V20180717 {
   interface BlackWhiteEdgeConfigureInfoForUpdate {
     /** 视频画面黑边、白边、黑屏、白屏检测开关，可选值：ON：开启；OFF：关闭。 */
     Switch?: string;
+  }
+
+  /** 媒体处理任务中的数字水印参数类型 */
+  interface BlindWatermarkInput {
+    /** 数字水印模板ID */
+    Definition: number;
   }
 
   /** 视频画面模糊检测的控制参数。 */
@@ -2985,6 +3025,56 @@ declare namespace V20180717 {
     AigcImageCompleteEvent?: AigcImageTask;
     /** AIGC 生视频任务信息，仅当 EventType 为 AigcVideoTaskComplete 时有效。 */
     AigcVideoCompleteEvent?: AigcVideoTask;
+    /** 提取数字水印信息，仅当 EventType 为 ExtractBlindWatermarkComplete 时有效。 */
+    ExtractBlindWatermarkComplete?: ExtractBlindWatermarkTask;
+    /** AIGC 场景化生图任务信息，仅当 EventType 为 SceneAigcImageCompleteEvent 时有效。 */
+    SceneAigcImageCompleteEvent?: SceneAigcImageTask;
+    /** 图片异步处理任务信息，仅当 EventType 为 ProcessImageAsyncCompleteEvent 时有效。 */
+    ProcessImageAsyncCompleteEvent?: ProcessImageAsyncTask;
+  }
+
+  /** 提取盲水印输入信息 */
+  interface ExtractBlindWatermarkInputInfo {
+    /** 提取数字水印输入类型，可选值：FILEID：文件媒资ID；URL：文件url； */
+    Type: string;
+    /** 需要提取的文件媒资ID */
+    FileId?: string;
+    /** 需要提取的视频文件url */
+    Url?: string;
+  }
+
+  /** 提取视频数字水印任务信息 */
+  interface ExtractBlindWatermarkTask {
+    /** 媒体处理任务 ID。 */
+    TaskId?: string;
+    /** 任务流状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成。 */
+    Status?: string;
+    /** 错误码，0 表示成功，其他值表示失败。 */
+    ErrCode?: number;
+    /** 错误信息。 */
+    Message?: string;
+    /** 提取数字水印的文件输入信息。 */
+    InputInfo?: ExtractBlindWatermarkInputInfo;
+    /** 数字水印类型，可选值：blind-basic：基础版权数字水印； blind-ab：ab版权数字水印； */
+    Type?: string;
+    /** 标记是否检测到水印，如果该参数为true， Result字段将返回水印提取结果，如果该参数为false，Result字段不会返回。 */
+    IsDetected?: boolean;
+    /** 提取出的数字水印内容，当没有检测到水印时该字段不会返回。 */
+    Result?: string;
+    /** 溯源水印提取出的播放者的 ID，以十六进制表示，共6位。 */
+    ResultUV?: string;
+    /** 提取数字水印配置。 */
+    ExtractBlindWatermarkConfig?: ExtractBlindWatermarkTaskConfig;
+    /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+    /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+  }
+
+  /** 提取视频转码数字水印任务配置 */
+  interface ExtractBlindWatermarkTaskConfig {
+    /** 当提取数字水印类型为blind-abseq时有效，用于指定输入视频的切片时长，单位：毫秒。如果不填默认切片时长为5秒。 */
+    SegmentDuration: number;
   }
 
   /** 提取版权水印任务。 */
@@ -6657,6 +6747,8 @@ declare namespace V20180717 {
     TraceWatermark?: TraceWatermarkInput;
     /** 版权水印。 */
     CopyRightWatermark?: CopyRightWatermarkInput;
+    /** 数字水印。 */
+    BlindWatermark?: BlindWatermarkInput;
     /** 马赛克列表，最大可支持 10 张。 */
     MosaicSet?: MosaicInput[];
     /** 片头片尾列表，支持多片头片尾，最大可支持 10 个。 */
@@ -7347,6 +7439,18 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface CreateAigcApiTokenRequest {
+    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId: number;
+  }
+
+  interface CreateAigcApiTokenResponse {
+    /** API的Token */
+    ApiToken?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface CreateAigcCustomElementRequest {
     /** 主体名称。不能超过20个字符 */
     ElementName: string;
@@ -7404,7 +7508,7 @@ declare namespace V20180717 {
     SubAppId: number;
     /** 模型名称。取值：Hailuo：海螺；Kling：可灵； Jimeng：即梦；Vidu；Hunyuan：混元；Mingmou：明眸； */
     ModelName: string;
-    /** 模型版本。取值：当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、O1；当 ModelName 是 Jimeng，可选值为 3.0pro；当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo；当 ModelName 是 GV，可选值为 3.1、3.1-Fast；当 ModelName 是 OS，可选值为 2.0；当 ModelName 是 Hunyuan，可选值为 1.5；当 ModelName 是 Mingmou，可选值为 1.0； */
+    /** 模型版本。取值：当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、O1；当 ModelName 是 Jimeng，可选值为 3.0pro；当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo；当 ModelName 是 GV，可选值为 3.1、3.1-fast；当 ModelName 是 OS，可选值为 2.0；当 ModelName 是 Hunyuan，可选值为 1.5；当 ModelName 是 Mingmou，可选值为 1.0； */
     ModelVersion: string;
     /** 最多包含三张素材资源文件的列表，用于描述模型在生成视频时要使用的资源文件。首尾帧视频生成：用 FileInfos 第一张表示首帧（此时 FileInfos 最多包含一张图片），LastFrameFileId 或者 LastFrameUrl 表示尾帧。支持多图输入的模型：1. GV，使用多图输入时，不可使用 LastFrameFileId 和 LastFrameUrl。2. Vidu，支持多图参考生视频。q2 模型1-7张图片，可通过 FileInfos 里面的 ObjectId 作为主体 id 来传入。注意：1. 图片大小不超过10M。2. 支持的图片格式：jpeg、png。 */
     FileInfos?: AigcVideoTaskInputFileInfo[];
@@ -7422,7 +7526,7 @@ declare namespace V20180717 {
     OutputConfig?: AigcVideoOutputConfig;
     /** 输入文件的区域信息。当文件url是国外地址时候，可选Oversea。默认Mainland。 */
     InputRegion?: string;
-    /** 场景类型。取值如下：当 ModelName 为 Kling 时，取值 motion_control 表示动作控制；其他 ModelName 暂不支持。 */
+    /** 场景类型。取值如下：当 ModelName 为 Kling 时： motion_control 表示动作控制； avatar_i2v 表示数字人； lip_sync 表示对口型；其他 ModelName 暂不支持。 */
     SceneType?: string;
     /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
     SessionId?: string;
@@ -8207,6 +8311,18 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface DeleteAigcApiTokenRequest {
+    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId: number;
+    /** API 的 Token */
+    ApiToken: string;
+  }
+
+  interface DeleteAigcApiTokenResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DeleteAnimatedGraphicsTemplateRequest {
     /** 转动图模板唯一标识。 */
     Definition: number;
@@ -8571,6 +8687,32 @@ declare namespace V20180717 {
     TotalCount?: number;
     /** 转自适应码流模板详情列表。 */
     AdaptiveDynamicStreamingTemplateSet?: AdaptiveDynamicStreamingTemplate[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeAigcApiTokensRequest {
+    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: number;
+  }
+
+  interface DescribeAigcApiTokensResponse {
+    /** API Token 列表 */
+    ApiTokens?: string[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeAigcFaceInfoRequest {
+    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId: number;
+    /** 需要获取人脸信息的输入视频信息，最多包含一个文件。 */
+    FileInfos?: AigcFaceInputFileInfo[];
+  }
+
+  interface DescribeAigcFaceInfoResponse {
+    /** 人脸信息。 */
+    FaceInfoSet?: AigcFaceInfo[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -9523,7 +9665,7 @@ declare namespace V20180717 {
   }
 
   interface DescribeTaskDetailResponse {
-    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务；ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；ProcessMediaByMPS：MPS 视频处理任务；AigcImageTask：AIGC 生图任务；SceneAigcImageTask：场景化 AIGC 生图任务；AigcVideoTask：AIGC 生视频任务；ImportMediaKnowledge：导入媒体知识任务。SceneAigcVideoTask：场景化 AIGC 生视频任务； */
+    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务；ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；ProcessMediaByMPS：MPS 视频处理任务；AigcImageTask：AIGC 生图任务；SceneAigcImageTask：场景化 AIGC 生图任务；AigcVideoTask：AIGC 生视频任务；ImportMediaKnowledge：导入媒体知识任务。SceneAigcVideoTask：场景化 AIGC 生视频任务； ExtractBlindWatermark：提取数字水印任务。 */
     TaskType?: string;
     /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成；ABORTED：已终止。 */
     Status?: string;
@@ -9591,6 +9733,8 @@ declare namespace V20180717 {
     SceneAigcVideoTask?: SceneAigcVideoTask;
     /** 图像异步处理任务信息，仅当 TaskType 为 ProcessImageAsync，该字段有值。 */
     ProcessImageAsyncTask?: ProcessImageAsync;
+    /** 提取数字水印任务信息，仅当 TaskType 为 ExtractBlindWatermark，该字段有值。 */
+    ExtractBlindWatermarkTask?: ExtractBlindWatermarkTask;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -11539,6 +11683,8 @@ declare interface Vod {
   CreateAIRecognitionTemplate(data: V20180717.CreateAIRecognitionTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAIRecognitionTemplateResponse>;
   /** 创建转自适应码流模板 {@link V20180717.CreateAdaptiveDynamicStreamingTemplateRequest} {@link V20180717.CreateAdaptiveDynamicStreamingTemplateResponse} */
   CreateAdaptiveDynamicStreamingTemplate(data: V20180717.CreateAdaptiveDynamicStreamingTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAdaptiveDynamicStreamingTemplateResponse>;
+  /** 创建AIGC API Token {@link V20180717.CreateAigcApiTokenRequest} {@link V20180717.CreateAigcApiTokenResponse} */
+  CreateAigcApiToken(data: V20180717.CreateAigcApiTokenRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcApiTokenResponse>;
   /** 创建AIGC自定义主体 {@link V20180717.CreateAigcCustomElementRequest} {@link V20180717.CreateAigcCustomElementResponse} */
   CreateAigcCustomElement(data: V20180717.CreateAigcCustomElementRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcCustomElementResponse>;
   /** 创建 AIGC 生图任务 {@link V20180717.CreateAigcImageTaskRequest} {@link V20180717.CreateAigcImageTaskResponse} */
@@ -11613,6 +11759,8 @@ declare interface Vod {
   DeleteAIRecognitionTemplate(data: V20180717.DeleteAIRecognitionTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteAIRecognitionTemplateResponse>;
   /** 删除转自适应码流模板 {@link V20180717.DeleteAdaptiveDynamicStreamingTemplateRequest} {@link V20180717.DeleteAdaptiveDynamicStreamingTemplateResponse} */
   DeleteAdaptiveDynamicStreamingTemplate(data: V20180717.DeleteAdaptiveDynamicStreamingTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteAdaptiveDynamicStreamingTemplateResponse>;
+  /** 删除 AIGC API Token {@link V20180717.DeleteAigcApiTokenRequest} {@link V20180717.DeleteAigcApiTokenResponse} */
+  DeleteAigcApiToken(data: V20180717.DeleteAigcApiTokenRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteAigcApiTokenResponse>;
   /** 删除转动图模板 {@link V20180717.DeleteAnimatedGraphicsTemplateRequest} {@link V20180717.DeleteAnimatedGraphicsTemplateResponse} */
   DeleteAnimatedGraphicsTemplate(data: V20180717.DeleteAnimatedGraphicsTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteAnimatedGraphicsTemplateResponse>;
   /** 删除日志主题 {@link V20180717.DeleteCLSTopicRequest} {@link V20180717.DeleteCLSTopicResponse} */
@@ -11669,6 +11817,10 @@ declare interface Vod {
   DescribeAIRecognitionTemplates(data: V20180717.DescribeAIRecognitionTemplatesRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAIRecognitionTemplatesResponse>;
   /** 获取转自适应码流模板列表 {@link V20180717.DescribeAdaptiveDynamicStreamingTemplatesRequest} {@link V20180717.DescribeAdaptiveDynamicStreamingTemplatesResponse} */
   DescribeAdaptiveDynamicStreamingTemplates(data: V20180717.DescribeAdaptiveDynamicStreamingTemplatesRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAdaptiveDynamicStreamingTemplatesResponse>;
+  /** 查询 AIGC API Token 列表 {@link V20180717.DescribeAigcApiTokensRequest} {@link V20180717.DescribeAigcApiTokensResponse} */
+  DescribeAigcApiTokens(data: V20180717.DescribeAigcApiTokensRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAigcApiTokensResponse>;
+  /** 获取 AIGC 人脸信息 {@link V20180717.DescribeAigcFaceInfoRequest} {@link V20180717.DescribeAigcFaceInfoResponse} */
+  DescribeAigcFaceInfo(data: V20180717.DescribeAigcFaceInfoRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAigcFaceInfoResponse>;
   /** 查询 AIGC 用量统计数据 {@link V20180717.DescribeAigcUsageDataRequest} {@link V20180717.DescribeAigcUsageDataResponse} */
   DescribeAigcUsageData(data: V20180717.DescribeAigcUsageDataRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAigcUsageDataResponse>;
   /** 获取所有分类 {@link V20180717.DescribeAllClassRequest} {@link V20180717.DescribeAllClassResponse} */

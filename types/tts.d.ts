@@ -45,13 +45,13 @@ declare interface CreateTtsTaskRequest {
   Text: string;
   /** 音量大小，范围[-10，10]，对应音量大小。默认为0，代表正常音量，值越大音量越高。 */
   Volume?: number;
-  /** 语速，范围：[-2，6]，分别对应不同语速：-2代表0.6倍-1代表0.8倍0代表1.0倍（默认）1代表1.2倍2代表1.5倍6代表2.5倍如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。参数值与实际语速转换，可参考[代码示例](https://sdk-1300466766.cos.ap-shanghai.myqcloud.com/sample/speed_sample.tar.gz) */
+  /** 语速，范围：[-2，6]，分别对应不同语速：-2代表0.6倍-1代表0.8倍0代表1.0倍（默认）1代表1.2倍2代表1.5倍6代表2.5倍如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。参数值与实际语速转换，可参考代码示例 */
   Speed?: number;
   /** 项目id，用户自定义，默认为0。 */
   ProjectId?: number;
   /** 模型类型，1-默认模型。 */
   ModelType?: number;
-  /** 音色 ID，价格请参见[购买指南](https://cloud.tencent.com/document/product/1073/34112)。完整的音色 ID 列表请参见[音色列表](https://cloud.tencent.com/document/product/1073/92668)。 */
+  /** 音色 ID，价格请参见购买指南。完整的音色 ID 列表请参见音色列表。 */
   VoiceType?: number;
   /** 主语言类型：1-中文（默认）2-英文 */
   PrimaryLanguage?: number;
@@ -59,7 +59,7 @@ declare interface CreateTtsTaskRequest {
   SampleRate?: number;
   /** 返回音频格式，可取值：mp3（默认），wav，pcm */
   Codec?: string;
-  /** 回调 URL，用户自行搭建的用于接收识别结果的服务URL。如果用户使用轮询方式获取识别结果，则无需提交该参数。[回调说明](https://cloud.tencent.com/document/product/1073/55746) */
+  /** 回调 URL，用户自行搭建的用于接收识别结果的服务URL。如果用户使用轮询方式获取识别结果，则无需提交该参数。回调说明 */
   CallbackUrl?: string;
   /** 是否开启时间戳功能，默认为false。 */
   EnableSubtitle?: boolean;
