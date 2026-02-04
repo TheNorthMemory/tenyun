@@ -3343,7 +3343,7 @@ declare interface CreateGroupsSTDResponse {
 }
 
 declare interface CreateInstanceRequest {
-  /** 产品ID，不同产品ID表示不同的EMR产品版本。取值范围：51:表示STARROCKS-V1.4.054:表示STARROCKS-V2.0.027:表示KAFKA-V1.0.050:表示KAFKA-V2.0.016:表示EMR-V2.3.020:表示EMR-V2.5.030:表示EMR-V2.6.038:表示EMR-V2.7.025:表示EMR-V3.1.033:表示EMR-V3.2.134:表示EMR-V3.3.037:表示EMR-V3.4.044:表示EMR-V3.5.053:表示EMR-V3.6.0 */
+  /** 产品ID，不同产品ID表示不同的EMR产品版本。取值范围：51:表示STARROCKS-V1.4.054:表示STARROCKS-V2.0.027:表示KAFKA-V1.0.050:表示KAFKA-V2.0.016:表示EMR-V2.3.020:表示EMR-V2.5.030:表示EMR-V2.6.038:表示EMR-V2.7.025:表示EMR-V3.1.033:表示EMR-V3.2.134:表示EMR-V3.3.037:表示EMR-V3.4.044:表示EMR-V3.5.053:表示EMR-V3.6.058:表示EMR-3.6.159:表示EMR-serverless-1.0.060:表示EMR-TKE-1.1.061:表示SR-V2.1.062:表示SR-V2.1.0-SharedData63:表示SR-V2.1.0.tlinux64:表示统一元数据管理项目65:表示EMR-TKE-AI-1.0.066:表示RSS-1.0.067:表示SR-V2.2.068:表示SR-V2.2.0.tlinux69:表示EMR-AI-1.1.070:表示SR-V2.2.171:表示EMR-3.7.072:表示EMR-serverless-1.0.173:表示KAFKA-2.0.174:表示SR-V2.2.275:表示EMR-TKE-AI-1.1.076:表示EMR-V3.7.177:表示SERVERLESS-TCBASE-1.0.078:表示EMR-V3.6.279:表示STARROCKS-V2.2.280:表示EMR-AI-V1.1.1 */
   ProductId: number;
   /** 部署的组件列表。不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）对应不同可选组件列表，不同产品版本可选组件列表查询：[组件版本](https://cloud.tencent.com/document/product/589/20279) ；填写实例值：hive、flink。 */
   Software: string[];

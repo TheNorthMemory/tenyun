@@ -3870,6 +3870,8 @@ declare interface DescribeCallRecordRequest {
   SourceIPID?: number;
   /** 访问账号uin */
   AccUin?: string;
+  /** 访问密钥，注意：不支持临时密钥的情况 */
+  AccessKey?: string;
   /** 过滤器 */
   Filter?: Filter;
 }

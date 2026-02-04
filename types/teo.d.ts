@@ -3834,6 +3834,8 @@ declare interface TCCaptchaOption {
 declare interface TCRCEOption {
   /** Channel 信息。 */
   Channel: string;
+  /** RCE Channel 的开通地域，目前可选的取值范围：ap-beijing：华北地区（北京）；ap-jakarta：亚太东南（雅加达）；ap-singapore：亚太东南（新加坡）；eu-frankfurt：欧洲地区（法兰克福）；na-siliconvalley：美国西部（硅谷）。 */
+  Region?: string;
 }
 
 /** SSL/TLS 安全配置参数。 */

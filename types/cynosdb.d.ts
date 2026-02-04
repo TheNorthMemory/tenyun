@@ -206,6 +206,20 @@ declare interface AuditRuleTemplateInfo {
   AffectedInstances?: string[];
 }
 
+/** 高级映射，自动映射规则 */
+declare interface AutoMapRule {
+  /** 源端实例Id */
+  SrcInstanceId: string;
+  /** 源端数据库正则 */
+  SrcDatabaseRegex: string;
+  /** 源端表正则 */
+  SrcTableRegex: string;
+  /** 目标端数据库正则 */
+  DstDatabaseRegex: string;
+  /** 目标端表正则 */
+  DstTableRegex: string;
+}
+
 /** 备份设置 */
 declare interface BackupConfigInfo {
   /** 系统自动时间 */
@@ -456,6 +470,18 @@ declare interface CLSInfo {
   GroupId?: string;
   /** 日志集name */
   GroupName?: string;
+}
+
+/** 校验项 */
+declare interface CheckItem {
+  /** 校验项名称 */
+  Item?: string | null;
+  /** 该项的校验结果 */
+  Result?: string | null;
+  /** 校验不通过的详细说明和修改建议 */
+  CurrentValue?: string | null;
+  /** 校验不通过的详细说明和修改建议 */
+  ExpectedValue?: string | null;
 }
 
 /** 集群实例信息 */
@@ -1082,6 +1108,30 @@ declare interface CynosdbInstanceGrp {
   NetServiceId?: number;
 }
 
+/** 数据源项 */
+declare interface DataSourceItem {
+  /** 源端实例ID */
+  InstanceId?: string;
+  /** 源端集群ID */
+  ClusterId?: string;
+  /** 源端数据库类型 */
+  DBType?: string;
+  /** 源端数据库IP */
+  IP?: string;
+  /** 源端数据库端口 */
+  Port?: number;
+  /** 源实例地域 */
+  Region?: string;
+  /** 源端实例可用区 */
+  Zone?: string;
+  /** 源端主账号uin */
+  SrcUin?: string;
+  /** 账号类型 */
+  AccountMode?: string;
+  /** 同步任务状态 */
+  ReplicationJobStatus?: string;
+}
+
 /** 数据库权限列表 */
 declare interface DatabasePrivileges {
   /** 数据库 */
@@ -1170,6 +1220,14 @@ declare interface ExchangeRoGroupInfo {
   SrcRoGroupInfo?: RollbackRoGroupInfo;
   /** 目标RO组信息 */
   DstRoGroupInfo?: RollbackRoGroupInfo;
+}
+
+/** 转发实例信息 */
+declare interface ForwardInstanceInfo {
+  /** 转发实例id */
+  InstanceId?: string | null;
+  /** 转发实例地域 */
+  Region?: string | null;
 }
 
 /** 全球数据库任务信息 */
@@ -1388,6 +1446,44 @@ declare interface InstanceParamItem {
   ParamsItems?: ParamItemDetail[];
 }
 
+/** 实例信息 */
+declare interface InstanceSet {
+  /** 数据库模式 */
+  DbMode?: string;
+  /** cpu核数 */
+  InstanceCpu?: number;
+  /** 实例类型 */
+  InstanceDeviceType?: string;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 内存 */
+  InstanceMemory?: number;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 实例角色 */
+  InstanceRole?: string;
+  /** 实例状态 */
+  InstanceStatus?: string;
+  /** 状态描述 */
+  InstanceStatusDesc?: string;
+  /** 硬盘 */
+  InstanceStorage?: number;
+  /** 硬盘类型 */
+  InstanceStorageType?: string;
+  /** 引擎类型 */
+  InstanceType?: string;
+  /** 持续的时间 */
+  MaintainDuration?: number;
+  /** 执行开始时间(距离0点的秒数) */
+  MaintainStartTime?: number;
+  /** 可以执行的时间，枚举值：["Mon","Tue","Wed","Thu","Fri", "Sat", "Sun"] */
+  MaintainWeekDays?: string[];
+  /** 节点列表 */
+  NodeList?: string[];
+  /** 实例任务 */
+  InstanceTasks?: ObjectTask[];
+}
+
 /** 实例可售卖规格详细信息，创建实例时Cpu/Memory确定实例规格，存储可选大小为[MinStorageSize,MaxStorageSize] */
 declare interface InstanceSpec {
   /** 实例CPU，单位：核 */
@@ -1442,6 +1538,314 @@ declare interface IntegrateInstanceInfo {
   DeviceType?: string;
 }
 
+/** libra集群信息 */
+declare interface LibraClusterSet {
+  /** 用户id */
+  AppId?: number;
+  /** 集群ID */
+  ClusterId?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 数据库版本 */
+  DbVersion?: string;
+  /** 实例信息 */
+  InstanceSet?: LibraInstanceSet[];
+  /** 付费模式 */
+  PayMode?: number;
+  /** 到期时间 */
+  PeriodEndTime?: string;
+  /** 项目id */
+  ProjectID?: number;
+  /** 地域 */
+  Region?: string;
+  /** 自动续费标识，1为自动续费，0为到期不续 */
+  RenewFlag?: number;
+  /** 状态 */
+  Status?: string;
+  /** 状态描述 */
+  StatusDesc?: string;
+  /** 存储大小 */
+  Storage?: number;
+  /** 使用容量 */
+  UsedStorage?: number;
+  /** vip地址 */
+  Vip?: string;
+  /** vport端口 */
+  Vport?: number;
+}
+
+/** libra集群详情 */
+declare interface LibraDBClusterDetail {
+  /** 集群id */
+  ClusterId?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 地域 */
+  Region?: string;
+  /** 状态 */
+  Status?: string;
+  /** 状态描述 */
+  StatusDesc?: string;
+  /** 存储大小 */
+  Storage?: number;
+  /** VPC名称 */
+  VpcName?: string;
+  /** vpc唯一id */
+  VpcId?: string;
+  /** 子网名称 */
+  SubnetName?: string;
+  /** 子网ID */
+  SubnetId?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 数据库版本 */
+  DbVersion?: string;
+  /** 使用容量 */
+  UsedStorage?: number;
+  /** vip地址 */
+  Vip?: string;
+  /** vport端口 */
+  Vport?: number;
+  /** 集群只读实例的vip地址和vport端口 */
+  RoAddr?: RoAddr[];
+  /** cynos版本 */
+  CynosVersion?: string;
+  /** 是否冻结 */
+  IsFreeze?: string;
+  /** 任务列表 */
+  Tasks?: ObjectTask[];
+  /** 主可用区 */
+  MasterZone?: string;
+  /** 实例集合 */
+  InstanceSet?: InstanceSet[];
+  /** 付费模式 */
+  PayMode?: number;
+  /** 到期时间 */
+  PeriodEndTime?: string;
+  /** 项目id */
+  ProjectID?: number;
+  /** 自动续费标识 */
+  RenewFlag?: number;
+  /** 版本标签 */
+  CynosVersionTag?: string;
+  /** 不支持添加ro yes-不支持添加ro， no/null/"" 支持添加ro */
+  NoSupportAddRo?: string;
+  /** 可用区 */
+  Zone?: string;
+  /** 物理可用区 */
+  PhysicalZone?: string;
+}
+
+/** 集群列表信息 */
+declare interface LibraDBClusterSet {
+  /** 用户id */
+  AppId?: number;
+  /** 集群ID */
+  ClusterId?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** cynos版本 */
+  CynosVersion?: string;
+  /** 版本标签 */
+  CynosVersionTag?: string;
+  /** 数据库版本 */
+  DbVersion?: string;
+  /** 实例数量 */
+  InstanceNum?: number;
+  /** 是否冻结 */
+  IsFreeze?: string;
+  /** 网络地址 */
+  NetAddrs?: NetAddr[];
+  /** 付费模式 */
+  PayMode?: number;
+  /** 到期时间 */
+  PeriodEndTime?: string;
+  /** 项目id */
+  ProjectID?: number;
+  /** 地域 */
+  Region?: string;
+  /** 自动续费标识，1为自动续费，0为到期不续 */
+  RenewFlag?: number;
+  /** 状态 */
+  Status?: string;
+  /** 状态描述 */
+  StatusDesc?: string;
+  /** 存储大小，单位为G */
+  Storage?: number;
+  /** 子网ID */
+  SubnetId?: string;
+  /** 任务列表 */
+  Tasks?: ObjectTask[];
+  /** 账户id */
+  Uin?: string;
+  /** vip地址 */
+  Vip?: string;
+  /** vpc唯一id */
+  VpcId?: string;
+  /** vport端口 */
+  Vport?: number;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 主可用区 */
+  MasterZone?: string;
+  /** 物理可用区 */
+  PhysicalZone?: string;
+  /** 可用区 */
+  Zone?: string;
+}
+
+/** libra分析集群源数据库信息 */
+declare interface LibraDBClusterSrcInfo {
+  /** 源端类型 */
+  SrcInstanceType: string;
+  /** 网络类型 */
+  AccessType?: string;
+  /** 源端实例ID */
+  SrcInstanceId?: string;
+  /** 源端集群ID */
+  SrcClusterId?: string;
+  /** 地址 */
+  IP?: string;
+  /** 端口 */
+  Port?: string;
+  /** 用户名 */
+  User?: string;
+  /** 密码 */
+  Password?: string;
+  /** 源端sql_mode */
+  SqlMode?: string;
+  /** 源端应用id */
+  SrcAppId?: number;
+  /** 源端账号 */
+  SrcUin?: string;
+  /** 源端子账号 */
+  SrcSubAccountUin?: string;
+  /** 账号 */
+  AccountMode?: string;
+  /** 源端实例地域 */
+  Region?: string;
+  /** 对源端实例的操作 */
+  Operation?: string;
+}
+
+/** libra实例初始化信息 */
+declare interface LibraDBInstanceInitInfo {
+  /** cpu */
+  Cpu?: number;
+  /** 内存 */
+  Memory?: number;
+  /** 硬盘 */
+  StorageSize?: number;
+  /** 存储类型 */
+  StorageType?: string;
+  /** 实例类型 */
+  InstanceType?: string;
+  /** 实例版本 */
+  LibraDBVersion?: string;
+  /** 实例数量 */
+  InstanceCount?: number;
+  /** vpc id */
+  VpcId?: string;
+  /** subnet id */
+  SubnetId?: string;
+  /** 端口 */
+  Port?: number;
+  /** 购买实例副本数 */
+  ReplicasNum?: number;
+}
+
+/** LibraDB 节点信息 */
+declare interface LibraDBNodeInfo {
+  /** LibraDB节点ID */
+  NodeId?: string;
+  /** 节点状态 */
+  Status?: string;
+  /** 数据同步中 */
+  DataStatus?: string;
+  /** CPU核数 */
+  Cpu?: number;
+  /** 内存大小，单位 G */
+  Memory?: number;
+  /** 磁盘大小，单位G */
+  Storage?: number;
+  /** 错误信息 */
+  Message?: string;
+}
+
+/** LibraDB 版本信息 */
+declare interface LibraDBVersion {
+  /** 版本号 */
+  Version?: string;
+  /** 版本tag */
+  Tag?: string;
+  /** 是否可以使用该版本 */
+  HasPermission?: boolean;
+}
+
+/** libra实例信息 */
+declare interface LibraInstanceSet {
+  /** 数据库模式 */
+  DbMode?: string;
+  /** cpu核数 */
+  InstanceCpu?: number;
+  /** 实例类型 */
+  InstanceDeviceType?: string;
+  /** 组id */
+  InstanceGroupId?: string;
+  /** 实例id */
+  InstanceId?: string;
+  /** 内存 */
+  InstanceMemory?: number;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 付费模式 */
+  InstancePayMode?: number;
+  /** 付费结束时间 */
+  InstancePeriodEndTime?: string;
+  /** 实例角色 */
+  InstanceRole?: string;
+  /** 实例状态 */
+  InstanceStatus?: string;
+  /** 实例状态描述 */
+  InstanceStatusDesc?: string;
+  /** 网络类型 */
+  NetType?: string;
+  /** 子网id */
+  UniqSubnetId?: string;
+  /** vpcid */
+  UniqVpcId?: string;
+  /** 虚拟ip */
+  Vip?: string;
+  /** 虚拟端口 */
+  Vport?: number;
+  /** 外网区域 */
+  WanDomain?: string;
+  /** 外网ip */
+  WanIP?: string;
+  /** 外网port */
+  WanPort?: number;
+  /** 外网状态 */
+  WanStatus?: string;
+  /** 硬盘 */
+  InstanceStorage?: number;
+  /** 硬盘类型 */
+  InstanceStorageType?: string;
+}
+
+/** 日志过滤条件 */
+declare interface LogFilter {
+  /** 过滤项。 */
+  Type?: string;
+  /** 过滤条件。支持以下条件： WINC-包含（分词维度）， WEXC-不包含（分词维度）, INC - 包含, EXC - 不包含, EQS - 等于, NEQ - 不等于, RA - 范围。 */
+  Compare?: string;
+  /** 过滤的值。反向查询时，多个值之前是且的关系，正向查询多个值是或的关系 */
+  Value?: string[];
+}
+
 /** 审计日志命中规则模板的基本信息 */
 declare interface LogRuleTemplateInfo {
   /** 模板ID */
@@ -1480,6 +1884,36 @@ declare interface ManualBackupData {
   SnapshotTime?: string;
   /** 跨地域备份项详细信息 */
   CrossRegionBackupInfos?: CrossRegionBackupItem[] | null;
+}
+
+/** 同步库表对象 */
+declare interface MigrateDBItem {
+  /** 数据库名称 */
+  DbName?: string | null;
+  /** 数据表迁移模式 */
+  MigrateTableMode?: string | null;
+  /** 数据表信息 */
+  Tables?: MigrateTableItem[] | null;
+}
+
+/** 同步数据对象 */
+declare interface MigrateObject {
+  /** 数据库迁移模式 */
+  MigrateDBMode?: string | null;
+  /** 数据库信息 */
+  Databases?: MigrateDBItem[] | null;
+}
+
+/** 同步对象详情 */
+declare interface MigrateOpt {
+  /** 包含数据库表信息 */
+  DatabaseTables?: MigrateObject;
+}
+
+/** 同步数据表名称 */
+declare interface MigrateTableItem {
+  /** 数据表名称 */
+  TableName?: string | null;
 }
 
 /** 参数是否可修改的详细信息 */
@@ -2078,6 +2512,44 @@ declare interface RedoLogItem {
   FinishTime?: string;
 }
 
+/** 该地域实例规格信息 */
+declare interface RegionInstanceSpecInfo {
+  /** cpu核数 */
+  Cpu?: number | null;
+  /** 内存大小 */
+  Memory?: number | null;
+  /** 最小存储大小 */
+  MinStorageSize?: number | null;
+  /** 最大存储大小 */
+  MaxStorageSize?: number | null;
+  /** 是否有库存 */
+  HasStock?: boolean | null;
+  /** 实例类型 */
+  InstanceType?: string | null;
+  /** 存储类型 */
+  StorageType?: string | null;
+  /** 最小副本数 */
+  MinReplicaNum?: number | null;
+  /** 最大副本数 */
+  MaxReplicaNum?: number | null;
+  /** 可用区库存信息列表 */
+  ZoneStockInfos?: ZoneStockInfo4Libra[] | null;
+}
+
+/** 分析引擎同步对象 */
+declare interface ReplicationObject {
+  /** 源端实例类型 */
+  SrcInstanceType: string | null;
+  /** 源端集群Id */
+  SrcClusterId?: string | null;
+  /** 源端实例ID */
+  SrcInstanceId?: string | null;
+  /** 复制任务ID */
+  ReplicationJobId?: string | null;
+  /** 同步对象详情 */
+  MigrateObjects?: MigrateOpt | null;
+}
+
 /** 资源包信息 */
 declare interface ResourcePackage {
   /** 资源包的唯一ID */
@@ -2086,6 +2558,14 @@ declare interface ResourcePackage {
   PackageType?: string;
   /** 当前资源包绑定在当前实例下的抵扣优先级 */
   DeductionPriority?: number;
+}
+
+/** 只读实例地址 */
+declare interface RoAddr {
+  /** IP地址 */
+  IP?: string;
+  /** 端口 */
+  Port?: number;
 }
 
 /** 回档任务信息 */
@@ -2448,6 +2928,32 @@ declare interface SwitchClusterLogBin {
   Status?: string;
 }
 
+/** 表映射关系 */
+declare interface TableMappingObject {
+  /** 源端实例Id */
+  SrcInstanceId?: string;
+  /** 数据库名称 */
+  DatabaseName?: string;
+  /** 表名 */
+  TableName?: string;
+  /** 映射数据库名称 */
+  MapDatabaseName?: string;
+  /** 映射表名 */
+  MapTableName?: string;
+  /** 同步状态 */
+  Status?: string;
+  /** 同步进度 */
+  Process?: number;
+  /** 延迟 */
+  Lag?: number;
+  /** 消息 */
+  Message?: string;
+  /** 是否为主表 */
+  IsPrimary?: boolean;
+  /** 虚拟列填充值 */
+  VirtualColValue?: string;
+}
+
 /** mysql表权限 */
 declare interface TablePrivileges {
   /** 数据库名 */
@@ -2564,6 +3070,14 @@ declare interface ZoneStockInfo {
   SlaveZoneStockInfos?: SlaveZoneStockInfo[];
 }
 
+/** Libra所售卖的地域库存信息 */
+declare interface ZoneStockInfo4Libra {
+  /** 可用区 */
+  Zone?: string | null;
+  /** 是否有库存 */
+  HasStock?: boolean | null;
+}
+
 declare interface ActivateInstanceRequest {
   /** 集群ID */
   ClusterId: string;
@@ -2574,6 +3088,32 @@ declare interface ActivateInstanceRequest {
 declare interface ActivateInstanceResponse {
   /** 任务流id */
   FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ActivateLibraDBClusterRequest {
+  /** 分析集群 ID */
+  ClusterId: string;
+}
+
+declare interface ActivateLibraDBClusterResponse {
+  /** flow id */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ActivateLibraDBInstanceRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 只读分析引擎实例 ID 列表 */
+  InstanceIdList: string[];
+}
+
+declare interface ActivateLibraDBInstanceResponse {
+  /** 任务流id */
+  FlowId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2670,6 +3210,22 @@ declare interface BindClusterResourcePackagesRequest {
 }
 
 declare interface BindClusterResourcePackagesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CheckCreateLibraDBInstanceRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 实例ID */
+  InstanceId?: string;
+}
+
+declare interface CheckCreateLibraDBInstanceResponse {
+  /** 整体校验状态 */
+  Status?: string | null;
+  /** 校验项 */
+  CheckItem?: CheckItem[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3082,6 +3638,78 @@ declare interface CreateIntegrateClusterResponse {
   RequestId?: string;
 }
 
+declare interface CreateLibraDBClusterAccountsRequest {
+  /** 分析集群id */
+  ClusterId: string;
+  /** 账户信息 */
+  Accounts: NewAccount[];
+  /** 加密方式 */
+  EncryptMethod?: string;
+}
+
+declare interface CreateLibraDBClusterAccountsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateLibraDBClustersRequest {
+  /** 数量 */
+  Count: number;
+  /** 可用区 */
+  Zone: string;
+  /** 实例初始化信息 */
+  InstanceInitInfos: LibraDBInstanceInitInfo[];
+  /** 用户密码 */
+  AdminPassword?: string;
+  /** 是否自动续费 */
+  AutoRenewFlag?: number;
+  /** 是否自动选择代金券 */
+  AutoVoucher?: number;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 下单模式 */
+  DealMode?: string;
+  /** 加密方法 */
+  EncryptMethod?: string;
+  /** LibraDBVersion 版本，缺省为最新版本 */
+  LibraDBVersion?: string;
+  /** 订单来源 */
+  OrderSource?: string;
+  /** 付费模式 */
+  PayMode?: number;
+  /** 项目id */
+  ProjectId?: string;
+  /** 安全组 */
+  SecurityGroupIds?: string[];
+  /** 时长 */
+  TimeSpan?: number;
+  /** 时间单位 */
+  TimeUnit?: string;
+  /** 实例创建绑定Tag数组信息 */
+  ResourceTags?: Tag[];
+  /** 集群所在vpcId */
+  VpcId?: string;
+  /** 集群所在SubnetId */
+  SubnetId?: string;
+  /** 端口 */
+  Port?: string;
+}
+
+declare interface CreateLibraDBClustersResponse {
+  /** 预付费总订单号 */
+  BigDealIds?: string[];
+  /** 集群ID */
+  ClusterIds?: string[];
+  /** 每个资源对应一个dealName，业务需要根据dealName保证发货接口幂等 */
+  DealNames?: string[];
+  /** 冻结流水 */
+  TranId?: string;
+  /** 实例id */
+  ResourceIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateParamTemplateRequest {
   /** 模板名称 */
   TemplateName: string;
@@ -3308,6 +3936,30 @@ declare interface DeleteClusterSaveBackupRequest {
 declare interface DeleteClusterSaveBackupResponse {
   /** 任务ID */
   TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteLibraDBClusterAccountsRequest {
+  /** 分析集群id */
+  ClusterId: string;
+  /** 账号 */
+  Accounts: InputAccount[];
+}
+
+declare interface DeleteLibraDBClusterAccountsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteLibraDBClusterRequest {
+  /** 分析集群 ID */
+  ClusterId: string;
+}
+
+declare interface DeleteLibraDBClusterResponse {
+  /** flow id */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4164,6 +4816,308 @@ declare interface DescribeIsolatedInstancesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLibraDBClusterAccountAllPrivilegesRequest {
+  /** 分析集群id */
+  ClusterId: string;
+  /** 账号 */
+  Account: InputAccount;
+}
+
+declare interface DescribeLibraDBClusterAccountAllPrivilegesResponse {
+  /** 权限语句 */
+  PrivilegeStatements?: string[] | null;
+  /** 全局权限 */
+  GlobalPrivileges?: string[] | null;
+  /** 数据库权限 */
+  DatabasePrivileges?: DatabasePrivileges[] | null;
+  /** 表权限 */
+  TablePrivileges?: TablePrivileges[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLibraDBClusterAccountPrivilegesRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 账号名 */
+  AccountName: string;
+  /** 主机名 */
+  Host: string;
+  /** 数据库名 */
+  Db: string;
+  /** 类型 */
+  Type: string;
+  /** 表名 */
+  TableName?: string;
+}
+
+declare interface DescribeLibraDBClusterAccountPrivilegesResponse {
+  /** 权限列表 */
+  Privileges?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLibraDBClusterAccountsRequest {
+  /** 分析集群id */
+  ClusterId: string;
+  /** 账号名 */
+  AccountNames?: string[];
+  /** 模糊匹配关键字 */
+  AccountRegular?: string;
+  /** 主机名 */
+  Hosts?: string[];
+  /** 限制 */
+  Limit?: number;
+  /** 偏移 */
+  Offset?: number;
+}
+
+declare interface DescribeLibraDBClusterAccountsResponse {
+  /** 账号信息 */
+  AccountSet?: Account[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLibraDBClusterAutoMapRuleRequest {
+  /** 分析集群ID */
+  ClusterId: string;
+  /** 分析实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeLibraDBClusterAutoMapRuleResponse {
+  /** 高级映射规则 */
+  AutoMapRules?: AutoMapRule[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLibraDBClusterDetailRequest {
+  /** 分析集群 ID */
+  ClusterId: string;
+  /** 是否获取更多服务器信息，可选值yes no */
+  GetServerInfo?: string;
+}
+
+declare interface DescribeLibraDBClusterDetailResponse {
+  /** 集群信息 */
+  Detail?: LibraDBClusterDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLibraDBClusterTableMappingRequest {
+  /** 分析集群ID */
+  ClusterId: string;
+  /** 分析引擎实例ID */
+  InstanceId: string;
+  /** 节点ID */
+  NodeId?: string;
+  /** 偏移量 */
+  Offset?: number;
+  /** 页面记录限制 */
+  Limit?: number;
+  /** 源端schema列表 */
+  SrcSchemas?: string[];
+  /** 源端表列表 */
+  SrcTableName?: string[];
+  /** 状态列表 */
+  StatusList?: string[];
+  /** 映射数据库名称 */
+  MapSchemas?: string[];
+  /** 映射表名 */
+  MapTableName?: string[];
+  /** 是否查询映射数据库名称不为空的记录 */
+  MapSchemaNotEmpty?: boolean;
+  /** 是否查询映射表名不为空的记录 */
+  MapTableNameNotEmpty?: boolean;
+}
+
+declare interface DescribeLibraDBClusterTableMappingResponse {
+  /** 总记录数 */
+  TotalCnt?: number;
+  /** 数据库映射信息 */
+  TableMappings?: TableMappingObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLibraDBClustersRequest {
+  /** 限制 */
+  Limit?: number;
+  /** 偏置 */
+  Offset?: number;
+  /** 排序字段 */
+  OrderBy?: string;
+  /** 排序方法 */
+  OrderByType?: string;
+  /** 过滤条件 */
+  Filters?: QueryFilter[];
+}
+
+declare interface DescribeLibraDBClustersResponse {
+  /** 集群信息 */
+  ClusterSet?: LibraDBClusterSet[];
+  /** 集群数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLibraDBDataSourceRequest {
+  /** 分析集群ID */
+  ClusterId: string;
+  /** 只读分析引擎实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeLibraDBDataSourceResponse {
+  /** 源端信息列表 */
+  DataSourceList?: DataSourceItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLibraDBForwardConfigRequest {
+  /** 只读分析引擎实例id */
+  InstanceId: string;
+}
+
+declare interface DescribeLibraDBForwardConfigResponse {
+  /** 是否开启转发 */
+  ForwardMode?: string;
+  /** 转发列表 */
+  ForwardList?: ForwardInstanceInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLibraDBInstanceDetailRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 只读分析引擎实例 ID */
+  InstanceId: string;
+}
+
+declare interface DescribeLibraDBInstanceDetailResponse {
+  /** 主账号 */
+  Uin?: string | null;
+  /** 账号唯一ID */
+  AppId?: number | null;
+  /** 集群ID */
+  ClusterId?: string | null;
+  /** 集群名称 */
+  ClusterName?: string | null;
+  /** 实例ID */
+  InstanceId?: string | null;
+  /** 实例名称 */
+  InstanceName?: string | null;
+  /** 项目ID */
+  ProjectId?: number | null;
+  /** 地域 */
+  Region?: string | null;
+  /** 可用区 */
+  Zone?: string | null;
+  /** 实例状态 */
+  Status?: string | null;
+  /** 状态描述 */
+  StatusDesc?: string | null;
+  /** Libra分析引擎版本 */
+  LibraDBVersion?: string | null;
+  /** cpu核数 */
+  Cpu?: number | null;
+  /** 内存大小 */
+  Memory?: number | null;
+  /** 存储大小 */
+  Storage?: number | null;
+  /** 存储类型 */
+  StorageType?: string | null;
+  /** 实例类型 */
+  InstanceType?: string | null;
+  /** 实例角色 */
+  InstanceRole?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 售卖方式 */
+  PayMode?: number | null;
+  /** 售卖开始时间 */
+  PeriodStartTime?: string | null;
+  /** 售卖结束时间 */
+  PeriodEndTime?: string | null;
+  /** 续费标识 */
+  RenewFlag?: number | null;
+  /** 网络类型 */
+  NetType?: number | null;
+  /** 私有网络ID */
+  VpcId?: string | null;
+  /** 子网ID */
+  SubnetId?: string | null;
+  /** 虚拟IP */
+  Vip?: string | null;
+  /** 端口 */
+  Vport?: number | null;
+  /** 实例网络信息 */
+  InstanceNetInfo?: InstanceNetInfo | null;
+  /** 实例标签信息 */
+  ResourceTags?: Tag[] | null;
+  /** 实例节点信息 */
+  NodeInfo?: LibraDBNodeInfo[];
+  /** 实例节点个数 */
+  NodeCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLibraDBInstanceSpecsRequest {
+}
+
+declare interface DescribeLibraDBInstanceSpecsResponse {
+  /** 该地域实例规格信息列表 */
+  InstanceSpecSet?: RegionInstanceSpecInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLibraDBSlowLogsRequest {
+  /** 只读分析引擎实例 ID */
+  InstanceId?: string;
+  /** 开始时间,1753171200。 */
+  StartTime?: number;
+  /** 结束时间,1753171200。 */
+  EndTime?: number;
+  /** 日志单页条数限制:0-200。 */
+  Limit?: string;
+  /** 日志分页，大于0。 */
+  Offset?: string;
+  /** 日志排序方式，DESC-降序，ASC-升序。 */
+  Order?: string;
+  /** 日志排序条件。 */
+  OrderBy?: string;
+  /** 过滤条件。 */
+  LogFilter?: LogFilter[];
+}
+
+declare interface DescribeLibraDBSlowLogsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLibraDBVersionRequest {
+}
+
+declare interface DescribeLibraDBVersionResponse {
+  /** 版本列表 */
+  VersionList?: LibraDBVersion[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeMaintainPeriodRequest {
   /** 实例ID */
   InstanceId: string;
@@ -4602,6 +5556,28 @@ declare interface DisassociateSecurityGroupsResponse {
   RequestId?: string;
 }
 
+declare interface DownloadLibraDBClusterListRequest {
+  /** 限制数 */
+  Limit?: number;
+  /** 偏移值 */
+  Offset?: number;
+  /** 排序字段 */
+  OrderBy?: string;
+  /** 排序方式，desc,asc,DESC,ASC */
+  OrderByType?: string;
+  /** 过滤条件 */
+  Filters?: QueryFilter[];
+}
+
+declare interface DownloadLibraDBClusterListResponse {
+  /** 分析集群信息 */
+  ClusterSet?: LibraClusterSet[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ExportInstanceErrorLogsRequest {
   /** 实例ID */
   InstanceId: string;
@@ -4853,6 +5829,46 @@ declare interface IsolateInstanceResponse {
   /** 任务流id */
   FlowId?: number;
   /** 隔离实例的订单id（预付费实例） */
+  DealNames?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface IsolateLibraDBClusterRequest {
+  /** 分析集群 ID */
+  ClusterId: string;
+  /** 隔离原因类型 */
+  IsolateReasonTypes?: number[];
+  /** 隔离原因 */
+  IsolateReason?: string;
+}
+
+declare interface IsolateLibraDBClusterResponse {
+  /** flow id */
+  FlowId?: number;
+  /** 返回订单号 */
+  DealNames?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface IsolateLibraDBInstanceRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 只读分析引擎实例 ID 列表 */
+  InstanceIdList: string[];
+  /** 是否是强制隔离 */
+  ForceIsolate?: boolean;
+  /** 隔离原因类型 */
+  IsolateReasonTypes?: number[];
+  /** 隔离原因 */
+  IsolateReason?: string;
+}
+
+declare interface IsolateLibraDBInstanceResponse {
+  /** 任务流id */
+  FlowId?: number | null;
+  /** 订单号列表 */
   DealNames?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -5264,6 +6280,132 @@ declare interface ModifyInstanceUpgradeLimitDaysResponse {
   RequestId?: string;
 }
 
+declare interface ModifyLibraDBClusterAccountDescriptionRequest {
+  /** 分析集群id */
+  ClusterId: string;
+  /** 账号名 */
+  AccountName: string;
+  /** 描述 */
+  Description: string;
+  /** 主机名 */
+  Host?: string;
+}
+
+declare interface ModifyLibraDBClusterAccountDescriptionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyLibraDBClusterAccountHostRequest {
+  /** 分析集群id */
+  ClusterId: string;
+  /** 账号信息 */
+  Account: InputAccount;
+  /** 主机名 */
+  NewHost: string;
+}
+
+declare interface ModifyLibraDBClusterAccountHostResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyLibraDBClusterAccountPrivilegeRequest {
+  /** 集群id */
+  ClusterId: string;
+  /** 账号 */
+  Account: InputAccount;
+  /** 全局权限 */
+  GlobalPrivileges?: string[];
+  /** 数据库权限 */
+  DatabasePrivileges?: DatabasePrivileges[];
+  /** 表权限 */
+  TablePrivileges?: TablePrivileges[];
+}
+
+declare interface ModifyLibraDBClusterAccountPrivilegeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyLibraDBClusterDataSourceRequest {
+  /** 分析集群ID */
+  ClusterId: string;
+  /** 只读分析引擎实例ID */
+  InstanceId: string;
+  /** 源端信息 */
+  SrcInfo?: LibraDBClusterSrcInfo[];
+}
+
+declare interface ModifyLibraDBClusterDataSourceResponse {
+  /** 异步任务ID */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyLibraDBClusterNameRequest {
+  /** 分析集群 ID */
+  ClusterId: string;
+  /** 集群名称 */
+  ClusterName: string;
+}
+
+declare interface ModifyLibraDBClusterNameResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyLibraDBClusterProjectRequest {
+  /** 分析集群 ID 列表 */
+  ClusterIdSet?: string[];
+  /** 项目 ID */
+  ProjectId?: number;
+}
+
+declare interface ModifyLibraDBClusterProjectResponse {
+  /** 集群列表 */
+  AffectedClusterIdSet?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyLibraDBClusterReplicationObjectRequest {
+  /** 分析集群ID */
+  ClusterId: string;
+  /** 只读分析引擎实例 ID */
+  InstanceId: string;
+  /** 映射模式 */
+  ForceDefaultMapRule?: string;
+  /** 同步对象 */
+  Objects?: ReplicationObject[];
+  /** 自动映射规则 */
+  AutoMapRules?: AutoMapRule[];
+  /** 是否按照最新映射规则刷新存量映射关系 */
+  RefreshMapping?: boolean;
+}
+
+declare interface ModifyLibraDBClusterReplicationObjectResponse {
+  /** 异步任务ID */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyLibraDBForwardConfigRequest {
+  /** 只读分析引擎实例Id */
+  InstanceId: string;
+  /** 转发模式 */
+  ForwardMode?: string;
+  /** 转发实例列表 */
+  ForwardList?: ForwardInstanceInfo[];
+}
+
+declare interface ModifyLibraDBForwardConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyMaintainPeriodConfigRequest {
   /** 实例ID */
   InstanceId: string;
@@ -5500,6 +6642,32 @@ declare interface OfflineInstanceResponse {
   RequestId?: string;
 }
 
+declare interface OfflineLibraDBClusterRequest {
+  /** 分析集群 ID */
+  ClusterId: string;
+}
+
+declare interface OfflineLibraDBClusterResponse {
+  /** flow id */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface OfflineLibraDBInstanceRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 只读分析引擎实例 ID 列表 */
+  InstanceIdList: string[];
+}
+
+declare interface OfflineLibraDBInstanceResponse {
+  /** 任务流id */
+  FlowId?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface OpenAuditServiceRequest {
   /** 实例ID。 */
   InstanceId: string;
@@ -5716,6 +6884,32 @@ declare interface RenewClustersResponse {
   RequestId?: string;
 }
 
+declare interface RenewLibraDBClustersRequest {
+  /** 时间间隔 */
+  TimeSpan: number;
+  /** 时间单位 */
+  TimeUnit: string;
+  /** 分析集群 ID */
+  ClusterId: string;
+  /** 订单模式 */
+  DealMode?: number;
+}
+
+declare interface RenewLibraDBClustersResponse {
+  /** 预付费总订单号 */
+  BigDealIds?: string[];
+  /** 冻结流水 */
+  TranId?: string;
+  /** 订单名称 */
+  DealNames?: string[];
+  /** 资源id */
+  ResourceIds?: string[];
+  /** 集群id */
+  ClusterIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ReplayInstanceAuditLogRequest {
   /** 源集群id */
   SourceClusterId: string;
@@ -5758,6 +6952,24 @@ declare interface ResetAccountPasswordResponse {
   RequestId?: string;
 }
 
+declare interface ResetLibraDBClusterAccountPasswordRequest {
+  /** 分析集群 ID */
+  ClusterId: string;
+  /** 密码 */
+  AccountPassword: string;
+  /** 账号 */
+  AccountName: string;
+  /** 加密方式 */
+  EncryptMethod?: string;
+  /** 主机 */
+  Host?: string;
+}
+
+declare interface ResetLibraDBClusterAccountPasswordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RestartInstanceRequest {
   /** 实例id */
   InstanceId: string;
@@ -5766,6 +6978,18 @@ declare interface RestartInstanceRequest {
 declare interface RestartInstanceResponse {
   /** 异步任务id */
   FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RestartLibraDBInstanceRequest {
+  /** 只读分析引擎实例 ID */
+  InstanceId: string;
+}
+
+declare interface RestartLibraDBInstanceResponse {
+  /** 异步任务id */
+  FlowId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5930,6 +7154,20 @@ declare interface SearchClusterTablesRequest {
 declare interface SearchClusterTablesResponse {
   /** 数据表列表 */
   Tables?: DatabaseTables[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SetLibraDBClusterRenewFlagRequest {
+  /** 分析集群 ID 列表 */
+  ResourceIds?: string[];
+  /** 续费标记 0:正常续费 1:自动续费 2:到期不续 */
+  AutoRenewFlag?: number;
+}
+
+declare interface SetLibraDBClusterRenewFlagResponse {
+  /** 数量 */
+  Count?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6163,6 +7401,10 @@ declare interface Cynosdb {
   (): Versions;
   /** 恢复实例访问 {@link ActivateInstanceRequest} {@link ActivateInstanceResponse} */
   ActivateInstance(data: ActivateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateInstanceResponse>;
+  /** 解除分析集群隔离 {@link ActivateLibraDBClusterRequest} {@link ActivateLibraDBClusterResponse} */
+  ActivateLibraDBCluster(data: ActivateLibraDBClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateLibraDBClusterResponse>;
+  /** 解除只读分析引擎隔离 {@link ActivateLibraDBInstanceRequest} {@link ActivateLibraDBInstanceResponse} */
+  ActivateLibraDBInstance(data: ActivateLibraDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateLibraDBInstanceResponse>;
   /** 开启多可用区部署 {@link AddClusterSlaveZoneRequest} {@link AddClusterSlaveZoneResponse} */
   AddClusterSlaveZone(data: AddClusterSlaveZoneRequest, config?: AxiosRequestConfig): AxiosPromise<AddClusterSlaveZoneResponse>;
   /** 集群添加实例 {@link AddInstancesRequest} {@link AddInstancesResponse} */
@@ -6171,6 +7413,8 @@ declare interface Cynosdb {
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
   /** 为集群绑定资源包 {@link BindClusterResourcePackagesRequest} {@link BindClusterResourcePackagesResponse} */
   BindClusterResourcePackages(data: BindClusterResourcePackagesRequest, config?: AxiosRequestConfig): AxiosPromise<BindClusterResourcePackagesResponse>;
+  /** 校验集群是否可以添加只读分析引擎 {@link CheckCreateLibraDBInstanceRequest} {@link CheckCreateLibraDBInstanceResponse} */
+  CheckCreateLibraDBInstance(data: CheckCreateLibraDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCreateLibraDBInstanceResponse>;
   /** 实例关闭审计服务 {@link CloseAuditServiceRequest} {@link CloseAuditServiceResponse} */
   CloseAuditService(data: CloseAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CloseAuditServiceResponse>;
   /** 关闭集群密码复杂度 {@link CloseClusterPasswordComplexityRequest} {@link CloseClusterPasswordComplexityResponse} */
@@ -6201,6 +7445,10 @@ declare interface Cynosdb {
   CreateClusters(data: CreateClustersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClustersResponse>;
   /** 购买集成集群 {@link CreateIntegrateClusterRequest} {@link CreateIntegrateClusterResponse} */
   CreateIntegrateCluster(data: CreateIntegrateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntegrateClusterResponse>;
+  /** 创建分析集群账号 {@link CreateLibraDBClusterAccountsRequest} {@link CreateLibraDBClusterAccountsResponse} */
+  CreateLibraDBClusterAccounts(data: CreateLibraDBClusterAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLibraDBClusterAccountsResponse>;
+  /** 创建分析集群 {@link CreateLibraDBClustersRequest} {@link CreateLibraDBClustersResponse} */
+  CreateLibraDBClusters(data: CreateLibraDBClustersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLibraDBClustersResponse>;
   /** 创建参数模板 {@link CreateParamTemplateRequest} {@link CreateParamTemplateResponse} */
   CreateParamTemplate(data: CreateParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateParamTemplateResponse>;
   /** 创建数据库代理 {@link CreateProxyRequest} {@link CreateProxyResponse} */
@@ -6223,6 +7471,10 @@ declare interface Cynosdb {
   DeleteClusterDatabase(data: DeleteClusterDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterDatabaseResponse>;
   /** 删除保留备份 {@link DeleteClusterSaveBackupRequest} {@link DeleteClusterSaveBackupResponse} */
   DeleteClusterSaveBackup(data: DeleteClusterSaveBackupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterSaveBackupResponse>;
+  /** 删除 TDSQL-C 分析集群 {@link DeleteLibraDBClusterRequest} {@link DeleteLibraDBClusterResponse} */
+  DeleteLibraDBCluster(data: DeleteLibraDBClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLibraDBClusterResponse>;
+  /** 删除分析集群账号 {@link DeleteLibraDBClusterAccountsRequest} {@link DeleteLibraDBClusterAccountsResponse} */
+  DeleteLibraDBClusterAccounts(data: DeleteLibraDBClusterAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLibraDBClusterAccountsResponse>;
   /** 删除参数模板 {@link DeleteParamTemplateRequest} {@link DeleteParamTemplateResponse} */
   DeleteParamTemplate(data: DeleteParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteParamTemplateResponse>;
   /** 查询账号所有可授予权限 {@link DescribeAccountAllGrantPrivilegesRequest} {@link DescribeAccountAllGrantPrivilegesResponse} */
@@ -6309,6 +7561,32 @@ declare interface Cynosdb {
   DescribeIntegrateTask(data?: DescribeIntegrateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntegrateTaskResponse>;
   /** 查询回收站实例列表 {@link DescribeIsolatedInstancesRequest} {@link DescribeIsolatedInstancesResponse} */
   DescribeIsolatedInstances(data?: DescribeIsolatedInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIsolatedInstancesResponse>;
+  /** 查询分析集群账号全部权限 {@link DescribeLibraDBClusterAccountAllPrivilegesRequest} {@link DescribeLibraDBClusterAccountAllPrivilegesResponse} */
+  DescribeLibraDBClusterAccountAllPrivileges(data: DescribeLibraDBClusterAccountAllPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLibraDBClusterAccountAllPrivilegesResponse>;
+  /** 查询分析集群账号权限 {@link DescribeLibraDBClusterAccountPrivilegesRequest} {@link DescribeLibraDBClusterAccountPrivilegesResponse} */
+  DescribeLibraDBClusterAccountPrivileges(data: DescribeLibraDBClusterAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLibraDBClusterAccountPrivilegesResponse>;
+  /** 查询分析集群账号 {@link DescribeLibraDBClusterAccountsRequest} {@link DescribeLibraDBClusterAccountsResponse} */
+  DescribeLibraDBClusterAccounts(data: DescribeLibraDBClusterAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLibraDBClusterAccountsResponse>;
+  /** 查询分析集群高级映射规则 {@link DescribeLibraDBClusterAutoMapRuleRequest} {@link DescribeLibraDBClusterAutoMapRuleResponse} */
+  DescribeLibraDBClusterAutoMapRule(data: DescribeLibraDBClusterAutoMapRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLibraDBClusterAutoMapRuleResponse>;
+  /** 查询分析集群详情 {@link DescribeLibraDBClusterDetailRequest} {@link DescribeLibraDBClusterDetailResponse} */
+  DescribeLibraDBClusterDetail(data: DescribeLibraDBClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLibraDBClusterDetailResponse>;
+  /** 查询分析集群库表映射 {@link DescribeLibraDBClusterTableMappingRequest} {@link DescribeLibraDBClusterTableMappingResponse} */
+  DescribeLibraDBClusterTableMapping(data: DescribeLibraDBClusterTableMappingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLibraDBClusterTableMappingResponse>;
+  /** 查询分析集群列表 {@link DescribeLibraDBClustersRequest} {@link DescribeLibraDBClustersResponse} */
+  DescribeLibraDBClusters(data?: DescribeLibraDBClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLibraDBClustersResponse>;
+  /** 查询分析引擎数据源信息 {@link DescribeLibraDBDataSourceRequest} {@link DescribeLibraDBDataSourceResponse} */
+  DescribeLibraDBDataSource(data: DescribeLibraDBDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLibraDBDataSourceResponse>;
+  /** 查询只读分析引擎转发参数 {@link DescribeLibraDBForwardConfigRequest} {@link DescribeLibraDBForwardConfigResponse} */
+  DescribeLibraDBForwardConfig(data: DescribeLibraDBForwardConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLibraDBForwardConfigResponse>;
+  /** 查询只读分析引擎实例详情 {@link DescribeLibraDBInstanceDetailRequest} {@link DescribeLibraDBInstanceDetailResponse} */
+  DescribeLibraDBInstanceDetail(data: DescribeLibraDBInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLibraDBInstanceDetailResponse>;
+  /** 查询只读分析引擎规格列表 {@link DescribeLibraDBInstanceSpecsRequest} {@link DescribeLibraDBInstanceSpecsResponse} */
+  DescribeLibraDBInstanceSpecs(data?: DescribeLibraDBInstanceSpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLibraDBInstanceSpecsResponse>;
+  /** 查询分析引擎慢日志 {@link DescribeLibraDBSlowLogsRequest} {@link DescribeLibraDBSlowLogsResponse} */
+  DescribeLibraDBSlowLogs(data?: DescribeLibraDBSlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLibraDBSlowLogsResponse>;
+  /** 查询分析引擎内核版本 {@link DescribeLibraDBVersionRequest} {@link DescribeLibraDBVersionResponse} */
+  DescribeLibraDBVersion(data?: DescribeLibraDBVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLibraDBVersionResponse>;
   /** 查询实例维护时间窗 {@link DescribeMaintainPeriodRequest} {@link DescribeMaintainPeriodResponse} */
   DescribeMaintainPeriod(data: DescribeMaintainPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaintainPeriodResponse>;
   /** 查询参数模板详情 {@link DescribeParamTemplateDetailRequest} {@link DescribeParamTemplateDetailResponse} */
@@ -6353,6 +7631,8 @@ declare interface Cynosdb {
   DescribeZones(data?: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
   /** 安全组批量解绑云资源 {@link DisassociateSecurityGroupsRequest} {@link DisassociateSecurityGroupsResponse} */
   DisassociateSecurityGroups(data: DisassociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateSecurityGroupsResponse>;
+  /** 下载分析集群列表 {@link DownloadLibraDBClusterListRequest} {@link DownloadLibraDBClusterListResponse} */
+  DownloadLibraDBClusterList(data?: DownloadLibraDBClusterListRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadLibraDBClusterListResponse>;
   /** 导出实例错误日志 {@link ExportInstanceErrorLogsRequest} {@link ExportInstanceErrorLogsResponse} */
   ExportInstanceErrorLogs(data: ExportInstanceErrorLogsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportInstanceErrorLogsResponse>;
   /** 导出实例慢日志 {@link ExportInstanceSlowQueriesRequest} {@link ExportInstanceSlowQueriesResponse} */
@@ -6373,6 +7653,10 @@ declare interface Cynosdb {
   IsolateCluster(data: IsolateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateClusterResponse>;
   /** 隔离实例 {@link IsolateInstanceRequest} {@link IsolateInstanceResponse} */
   IsolateInstance(data: IsolateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateInstanceResponse>;
+  /** 隔离分析集群 {@link IsolateLibraDBClusterRequest} {@link IsolateLibraDBClusterResponse} */
+  IsolateLibraDBCluster(data: IsolateLibraDBClusterRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateLibraDBClusterResponse>;
+  /** 隔离只读分析引擎 {@link IsolateLibraDBInstanceRequest} {@link IsolateLibraDBInstanceResponse} */
+  IsolateLibraDBInstance(data: IsolateLibraDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateLibraDBInstanceResponse>;
   /** 修改数据库账号描述信息 {@link ModifyAccountDescriptionRequest} {@link ModifyAccountDescriptionResponse} */
   ModifyAccountDescription(data: ModifyAccountDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountDescriptionResponse>;
   /** 修改账号主机 {@link ModifyAccountHostRequest} {@link ModifyAccountHostResponse} */
@@ -6421,6 +7705,22 @@ declare interface Cynosdb {
   ModifyInstanceParam(data: ModifyInstanceParamRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceParamResponse>;
   /** 修改实例小版本升级限制时间 {@link ModifyInstanceUpgradeLimitDaysRequest} {@link ModifyInstanceUpgradeLimitDaysResponse} */
   ModifyInstanceUpgradeLimitDays(data: ModifyInstanceUpgradeLimitDaysRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceUpgradeLimitDaysResponse>;
+  /** 修改分析集群账号描述 {@link ModifyLibraDBClusterAccountDescriptionRequest} {@link ModifyLibraDBClusterAccountDescriptionResponse} */
+  ModifyLibraDBClusterAccountDescription(data: ModifyLibraDBClusterAccountDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLibraDBClusterAccountDescriptionResponse>;
+  /** 修改分析集群账号支持的登录主机 {@link ModifyLibraDBClusterAccountHostRequest} {@link ModifyLibraDBClusterAccountHostResponse} */
+  ModifyLibraDBClusterAccountHost(data: ModifyLibraDBClusterAccountHostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLibraDBClusterAccountHostResponse>;
+  /** 修改分析集群账号权限 {@link ModifyLibraDBClusterAccountPrivilegeRequest} {@link ModifyLibraDBClusterAccountPrivilegeResponse} */
+  ModifyLibraDBClusterAccountPrivilege(data: ModifyLibraDBClusterAccountPrivilegeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLibraDBClusterAccountPrivilegeResponse>;
+  /** 修改分析集群数据源 {@link ModifyLibraDBClusterDataSourceRequest} {@link ModifyLibraDBClusterDataSourceResponse} */
+  ModifyLibraDBClusterDataSource(data: ModifyLibraDBClusterDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLibraDBClusterDataSourceResponse>;
+  /** 修改分析集群名称 {@link ModifyLibraDBClusterNameRequest} {@link ModifyLibraDBClusterNameResponse} */
+  ModifyLibraDBClusterName(data: ModifyLibraDBClusterNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLibraDBClusterNameResponse>;
+  /** 修改分析集群的项目 ID {@link ModifyLibraDBClusterProjectRequest} {@link ModifyLibraDBClusterProjectResponse} */
+  ModifyLibraDBClusterProject(data?: ModifyLibraDBClusterProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLibraDBClusterProjectResponse>;
+  /** 修改分析集群的同步对象 {@link ModifyLibraDBClusterReplicationObjectRequest} {@link ModifyLibraDBClusterReplicationObjectResponse} */
+  ModifyLibraDBClusterReplicationObject(data: ModifyLibraDBClusterReplicationObjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLibraDBClusterReplicationObjectResponse>;
+  /** 修改只读分析引擎自动转发参数 {@link ModifyLibraDBForwardConfigRequest} {@link ModifyLibraDBForwardConfigResponse} */
+  ModifyLibraDBForwardConfig(data: ModifyLibraDBForwardConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLibraDBForwardConfigResponse>;
   /** 修改维护时间配置 {@link ModifyMaintainPeriodConfigRequest} {@link ModifyMaintainPeriodConfigResponse} */
   ModifyMaintainPeriodConfig(data: ModifyMaintainPeriodConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMaintainPeriodConfigResponse>;
   /** 修改参数模板 {@link ModifyParamTemplateRequest} {@link ModifyParamTemplateResponse} */
@@ -6445,6 +7745,10 @@ declare interface Cynosdb {
   OfflineCluster(data: OfflineClusterRequest, config?: AxiosRequestConfig): AxiosPromise<OfflineClusterResponse>;
   /** 销毁实例 {@link OfflineInstanceRequest} {@link OfflineInstanceResponse} */
   OfflineInstance(data: OfflineInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<OfflineInstanceResponse>;
+  /** 下线分析集群 {@link OfflineLibraDBClusterRequest} {@link OfflineLibraDBClusterResponse} */
+  OfflineLibraDBCluster(data: OfflineLibraDBClusterRequest, config?: AxiosRequestConfig): AxiosPromise<OfflineLibraDBClusterResponse>;
+  /** 下线只读分析引擎 {@link OfflineLibraDBInstanceRequest} {@link OfflineLibraDBInstanceResponse} */
+  OfflineLibraDBInstance(data: OfflineLibraDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<OfflineLibraDBInstanceResponse>;
   /** 实例开通审计服务 {@link OpenAuditServiceRequest} {@link OpenAuditServiceResponse} */
   OpenAuditService(data: OpenAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenAuditServiceResponse>;
   /** 开启自定义密码复杂度功能 {@link OpenClusterPasswordComplexityRequest} {@link OpenClusterPasswordComplexityResponse} */
@@ -6469,12 +7773,18 @@ declare interface Cynosdb {
   RemoveClusterSlaveZone(data: RemoveClusterSlaveZoneRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveClusterSlaveZoneResponse>;
   /** 续费集群 {@link RenewClustersRequest} {@link RenewClustersResponse} */
   RenewClusters(data: RenewClustersRequest, config?: AxiosRequestConfig): AxiosPromise<RenewClustersResponse>;
+  /** 续费分析集群 {@link RenewLibraDBClustersRequest} {@link RenewLibraDBClustersResponse} */
+  RenewLibraDBClusters(data: RenewLibraDBClustersRequest, config?: AxiosRequestConfig): AxiosPromise<RenewLibraDBClustersResponse>;
   /** 回放实例审计日志 {@link ReplayInstanceAuditLogRequest} {@link ReplayInstanceAuditLogResponse} */
   ReplayInstanceAuditLog(data: ReplayInstanceAuditLogRequest, config?: AxiosRequestConfig): AxiosPromise<ReplayInstanceAuditLogResponse>;
   /** 修改数据库账号密码 {@link ResetAccountPasswordRequest} {@link ResetAccountPasswordResponse} */
   ResetAccountPassword(data: ResetAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetAccountPasswordResponse>;
+  /** 修改分析集群账号密码 {@link ResetLibraDBClusterAccountPasswordRequest} {@link ResetLibraDBClusterAccountPasswordResponse} */
+  ResetLibraDBClusterAccountPassword(data: ResetLibraDBClusterAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetLibraDBClusterAccountPasswordResponse>;
   /** 重启实例 {@link RestartInstanceRequest} {@link RestartInstanceResponse} */
   RestartInstance(data: RestartInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestartInstanceResponse>;
+  /** 重启只读分析引擎 {@link RestartLibraDBInstanceRequest} {@link RestartLibraDBInstanceResponse} */
+  RestartLibraDBInstance(data: RestartLibraDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestartLibraDBInstanceResponse>;
   /** 恢复serverless集群 {@link ResumeServerlessRequest} {@link ResumeServerlessResponse} */
   ResumeServerless(data: ResumeServerlessRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeServerlessResponse>;
   /** 批量回收账号权限 {@link RevokeAccountPrivilegesRequest} {@link RevokeAccountPrivilegesResponse} */
@@ -6487,6 +7797,8 @@ declare interface Cynosdb {
   SearchClusterDatabases(data: SearchClusterDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClusterDatabasesResponse>;
   /** 搜索集群数据表列表 {@link SearchClusterTablesRequest} {@link SearchClusterTablesResponse} */
   SearchClusterTables(data: SearchClusterTablesRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClusterTablesResponse>;
+  /** 设置分析集群续费模式 {@link SetLibraDBClusterRenewFlagRequest} {@link SetLibraDBClusterRenewFlagResponse} */
+  SetLibraDBClusterRenewFlag(data?: SetLibraDBClusterRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<SetLibraDBClusterRenewFlagResponse>;
   /** 设置自动续费 {@link SetRenewFlagRequest} {@link SetRenewFlagResponse} */
   SetRenewFlag(data: SetRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<SetRenewFlagResponse>;
   /** 开启日志投递 {@link StartCLSDeliveryRequest} {@link StartCLSDeliveryResponse} */

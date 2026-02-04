@@ -140,6 +140,12 @@ declare interface GCJobInfo {
   Schedule?: Schedule;
 }
 
+/** GC 参数 */
+declare interface GCParameters {
+  /** 模拟运行 */
+  Dryrun?: boolean;
+}
+
 /** Header KV */
 declare interface Header {
   /** Header Key */
@@ -966,6 +972,18 @@ declare interface CreateApplicationTriggerPersonalRequest {
 }
 
 declare interface CreateApplicationTriggerPersonalResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateGCJobRequest {
+  /** 实例 Id */
+  RegistryId: string;
+  /** GC 参数 */
+  GCParameters?: GCParameters;
+}
+
+declare interface CreateGCJobResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2801,6 +2819,8 @@ declare interface Tcr {
   CheckInstanceName(data: CheckInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<CheckInstanceNameResponse>;
   /** 创建应用更新触发器 {@link CreateApplicationTriggerPersonalRequest} {@link CreateApplicationTriggerPersonalResponse} */
   CreateApplicationTriggerPersonal(data: CreateApplicationTriggerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationTriggerPersonalResponse>;
+  /** 创建 GC 作业 {@link CreateGCJobRequest} {@link CreateGCJobResponse} */
+  CreateGCJob(data: CreateGCJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGCJobResponse>;
   /** 创建镜像加速服务 {@link CreateImageAccelerationServiceRequest} {@link CreateImageAccelerationServiceResponse} */
   CreateImageAccelerationService(data: CreateImageAccelerationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageAccelerationServiceResponse>;
   /** 创建镜像不可变规则 {@link CreateImmutableTagRulesRequest} {@link CreateImmutableTagRulesResponse} */

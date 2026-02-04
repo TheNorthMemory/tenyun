@@ -160,6 +160,8 @@ declare interface ApmAppConfig {
   DesensitizationRule?: string;
   /** spanId的索引key: 当CLS索引类型为键值索引时生效 */
   LogSpanIdKey?: string;
+  /** 自动性能剖析配置 */
+  AutoProfilingConfig?: AutoProfilingConfig;
 }
 
 /** 应用相关的配置列表项 */
@@ -214,6 +216,8 @@ declare interface ApmApplicationConfigView {
   EnableDesensitizationRule?: number;
   /** 脱敏规则 */
   DesensitizationRule?: string;
+  /** 自动性能剖析任务配置 */
+  AutoProfilingConfig?: AutoProfilingConfig;
 }
 
 /** 展示apm业务系统与其他云产品关联关系返回体 */
@@ -428,6 +432,22 @@ declare interface ApmTag {
   Key: string;
   /** 维度值（标签值） */
   Value: string;
+}
+
+/** 自动性能剖析配置 */
+declare interface AutoProfilingConfig {
+  /** 自动CPU剖析任务开关 */
+  CpuProfilingEnable?: boolean;
+  /** 自动内存剖析任务开关 */
+  MemoryProfilingEnable?: boolean;
+  /** 自动CPU剖析任务阈值 */
+  CpuProfilingThreshold?: number;
+  /** 自动内存剖析任务阈值 */
+  MemoryProfilingThreshold?: number;
+  /** CPU自动剖析任务时长 */
+  CpuProfilingDuration?: number;
+  /** 内存自动剖析任务时长 */
+  MemoryProfilingDuration?: number;
 }
 
 /** CVM元数据 */
@@ -1317,6 +1337,8 @@ declare interface ModifyApmApplicationConfigRequest {
   DesensitizationRule?: string;
   /** spanId的索引key: 当CLS索引类型为键值索引时生效 */
   LogSpanIdKey?: string;
+  /** 自动性能剖析任务配置 */
+  AutoProfilingConfig?: AutoProfilingConfig;
 }
 
 declare interface ModifyApmApplicationConfigResponse {

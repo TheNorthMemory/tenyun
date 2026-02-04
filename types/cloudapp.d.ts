@@ -76,6 +76,14 @@ declare interface LicenseData {
   Metadata?: DisplayMetadata[];
 }
 
+/** License 内容信息 */
+declare interface PartnerLicenseData {
+  /** License 文本内容。可传入密钥、证书等文本型 License 内容，二进制内容请进行 base64 编码 */
+  Text: string;
+  /** License 的额外信息，JSON 字符串格式 */
+  ExtraData?: string;
+}
+
 /** 表示商品 SKU 的单个售卖参数 */
 declare interface SaleParam {
   /** 售卖参数标识 */
@@ -112,6 +120,24 @@ declare interface DescribeLicenseResponse {
   RequestId?: string;
 }
 
+declare interface IssueLicenseRequest {
+  /** 云应用实例 ID */
+  CloudappId: string;
+  /** 云应用颁发的 License 授权 ID。系统中唯一，伙伴可通过 License 颁发的订阅接口中获取 */
+  LicenseId: string;
+  /** License 的详细数据 */
+  LicenseData: PartnerLicenseData;
+  /** License 的激活模式枚举值： immediate ： 立即激活 scheduled： 指定时间激活 */
+  ActivateMode?: string;
+  /** 激活时间，指定时间激活时需要传该字段 */
+  ActivateAt?: string;
+}
+
+declare interface IssueLicenseResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface VerifyLicenseRequest {
 }
 
@@ -131,6 +157,8 @@ declare interface Cloudapp {
   (): Versions;
   /** 获取license信息 {@link DescribeLicenseRequest} {@link DescribeLicenseResponse} */
   DescribeLicense(data?: DescribeLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseResponse>;
+  /** 颁发 License {@link IssueLicenseRequest} {@link IssueLicenseResponse} */
+  IssueLicense(data: IssueLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<IssueLicenseResponse>;
   /** 从应用软件进程验证授权信息 {@link VerifyLicenseRequest} {@link VerifyLicenseResponse} */
   VerifyLicense(data?: VerifyLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyLicenseResponse>;
 }

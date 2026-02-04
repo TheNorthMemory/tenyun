@@ -619,6 +619,8 @@ declare namespace V20180416 {
     StrategyName?: string;
     /** 备份索引列表，如果不填表示备份所有索引 */
     Indices?: string;
+    /** cos多AZ备份 0 单AZ; 1 多AZ */
+    MultiAz?: number;
     /** 策略创建时间 */
     CreateTime?: string;
   }
@@ -1735,6 +1737,14 @@ declare namespace V20180416 {
     CustomPrivateUrl?: string | null;
   }
 
+  /** updateInstance使用的额外的EsConfig和JvmHeapConfig */
+  interface OtherConfig {
+    /** es的yml额外配置 */
+    EsConfig?: string;
+    /** es的jvm heap config */
+    JvmHeapConfig?: string;
+  }
+
   /** 节点出站访问信息 */
   interface OutboundPublicAcl {
     /** 允许节点出站访问的节点类型 */
@@ -1987,6 +1997,8 @@ declare namespace V20180416 {
     KmsKey?: string | null;
     /** 策略名称 */
     StrategyName?: string | null;
+    /** cos多AZ备份 0 单AZ; 1 多AZ */
+    MultiAz?: number | null;
   }
 
   /** 实例操作记录流程任务中的子任务信息（如升级检查任务中的各个检查项） */
@@ -2130,6 +2142,8 @@ declare namespace V20180416 {
     RemoteCos?: number;
     /** 跨地域备份地域名称 ap-guangzhou */
     RemoteCosRegion?: string;
+    /** cos多AZ备份 0 单AZ; 1 多AZ */
+    MultiAz?: number;
   }
 
   interface CreateClusterSnapshotResponse {
@@ -3506,6 +3520,8 @@ declare namespace V20180416 {
     AutoScaleDiskInfoList?: AutoScaleDiskInfo[];
     /** 自动扩盘删除参数 */
     AutoScaleDiskDeleteNodeTypeList?: string[];
+    /** 其他附加配置，jvm或者yml */
+    OtherConfig?: OtherConfig;
   }
 
   interface UpdateInstanceResponse {

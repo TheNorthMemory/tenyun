@@ -391,6 +391,8 @@ declare namespace V20180717 {
     SubStreamSet?: MediaSubStreamInfoItem[];
     /** 版权信息。 */
     CopyRightWatermarkText?: string;
+    /** 数字水印模板id。 */
+    BlindWatermarkDefinition?: number;
     /** 字幕信息列表。 */
     SubtitleSet?: MediaSubtitleItem[];
     /** 默认字幕的唯一标识。 */
@@ -2267,6 +2269,24 @@ declare namespace V20180717 {
   interface BlindWatermarkInput {
     /** 数字水印模板ID */
     Definition: number;
+  }
+
+  /** 数字水印模板详情 */
+  interface BlindWatermarkTemplate {
+    /** 数字水印模板唯一标识。 */
+    Definition?: number;
+    /** 数字水印类型，可选值：blind-basic：基础版权数字水印；blind-nagra：NAGRA取证水印； */
+    Type?: string;
+    /** 数字水印模板名称。 */
+    Name?: string;
+    /** 数字水印模板文本内容，长度不超过64个字符。 */
+    TextContent?: string;
+    /** 数字水印模板描述信息。 */
+    Comment?: string;
+    /** 数字水印模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+    CreateTime?: string;
+    /** 数字水印模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+    UpdateTime?: string;
   }
 
   /** 视频画面模糊检测的控制参数。 */
@@ -4515,6 +4535,8 @@ declare namespace V20180717 {
     DigitalWatermarkType?: string;
     /** 版权信息。 */
     CopyRightWatermarkText?: string;
+    /** 数字水印模板id。 */
+    BlindWatermarkDefinition?: number;
   }
 
   /** 转场信息 */
@@ -7573,6 +7595,26 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface CreateBlindWatermarkTemplateRequest {
+    /** 数字水印类型，可选值：blind-basic：基础版权数字水印；blind-nagra：NAGRA水印； */
+    Type: string;
+    /** 数字水印文字内容，长度不超过64个字符，NAGRA水印类型的模板创建后不支持修改文字内容。 */
+    TextContent: string;
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: number;
+    /** 数字水印模板名称，支持中文、英文、数字、_、-和. 六种格式，长度限制：64 个字符。 */
+    Name?: string;
+    /** 数字水印模板描述信息，长度限制：256 个字符。 */
+    Comment?: string;
+  }
+
+  interface CreateBlindWatermarkTemplateResponse {
+    /** 数字水印模板唯一标识。 */
+    Definition?: number;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface CreateCLSLogsetRequest {
     /** 日志集所属的地域，取值有： ap-guangzhou：广州； ap-beijing：北京； ap-chengdu：成都； ap-chongqing：重庆； ap-nanjing：南京； ap-shanghai：上海； ap-singapore：新加坡。 */
     CLSRegion: string;
@@ -8335,6 +8377,18 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface DeleteBlindWatermarkTemplateRequest {
+    /** 数字水印模板唯一标识。 */
+    Definition: number;
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: number;
+  }
+
+  interface DeleteBlindWatermarkTemplateResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DeleteCLSTopicRequest {
     /** 日志集所属的地域，取值有： ap-guangzhou：广州； ap-beijing：北京； ap-chengdu：成都； ap-chongqing：重庆； ap-nanjing：南京； ap-shanghai：上海； ap-singapore：新加坡。 */
     CLSRegion?: string;
@@ -8765,6 +8819,28 @@ declare namespace V20180717 {
     TotalCount?: number;
     /** 转动图模板详情列表。 */
     AnimatedGraphicsTemplateSet?: AnimatedGraphicsTemplate[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeBlindWatermarkTemplatesRequest {
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: number;
+    /** 数字水印模板唯一标识过滤条件，数组长度限制：100。 */
+    Definitions?: number[];
+    /** 数字水印类型，可选值：blind-basic：基础版权数字水印；blind-nagra：Nagra取证水印； */
+    Type?: string;
+    /** 分页偏移量，默认值：0。 */
+    Offset?: number;
+    /** 返回记录条数默认值：10；最大值：100。 */
+    Limit?: number;
+  }
+
+  interface DescribeBlindWatermarkTemplatesResponse {
+    /** 符合过滤条件的记录总数。 */
+    TotalCount?: number;
+    /** 数字水印模板详情列表。 */
+    BlindWatermarkTemplateSet?: BlindWatermarkTemplate[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -9973,6 +10049,30 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface ExtractBlindWatermarkRequest {
+    /** 数字水印类型，可选值：blind-basic：基础版权数字水印；blind-trace：溯源ab序列水印； */
+    Type: string;
+    /** 媒体处理的文件输入信息。 */
+    InputInfo: ExtractBlindWatermarkInputInfo;
+    /** 添加水印时的点播应用 ID。注意不管是传入FILEID还是URL，都必须与添加水印时的SubAppId吻合才能提取到水印。 */
+    SubAppId: number;
+    /** 提取数字水印任务配置 */
+    ExtractBlindWatermarkConfig?: ExtractBlindWatermarkTaskConfig;
+    /** 标识来源上下文，用于透传用户请求信息，在 ExtractBlindWatermarkComplete 回调和任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+    /** 用于任务去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+    /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
+    TasksPriority?: number;
+  }
+
+  interface ExtractBlindWatermarkResponse {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface ExtractCopyRightWatermarkRequest {
     /** 需要提取水印的媒体 URL。 */
     Url: string;
@@ -10315,6 +10415,24 @@ declare namespace V20180717 {
   }
 
   interface ModifyAnimatedGraphicsTemplateResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface ModifyBlindWatermarkTemplateRequest {
+    /** 数字水印模板唯一标识。 */
+    Definition: number;
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: number;
+    /** 数字水印模板名称，支持 中文、英文、数字、_、-和. 六种格式，长度限制：64 个字符。 */
+    Name?: string;
+    /** 数字水印模板描述信息，长度限制：256 个字符。 */
+    Comment?: string;
+    /** 数字水印文字内容，长度不超过64个字符，NAGRA水印类型的模板不支持修改文字内容。 */
+    TextContent?: string;
+  }
+
+  interface ModifyBlindWatermarkTemplateResponse {
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -11693,6 +11811,8 @@ declare interface Vod {
   CreateAigcVideoTask(data: V20180717.CreateAigcVideoTaskRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcVideoTaskResponse>;
   /** 创建转动图模板 {@link V20180717.CreateAnimatedGraphicsTemplateRequest} {@link V20180717.CreateAnimatedGraphicsTemplateResponse} */
   CreateAnimatedGraphicsTemplate(data: V20180717.CreateAnimatedGraphicsTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAnimatedGraphicsTemplateResponse>;
+  /** 创建数字水印模板 {@link V20180717.CreateBlindWatermarkTemplateRequest} {@link V20180717.CreateBlindWatermarkTemplateResponse} */
+  CreateBlindWatermarkTemplate(data: V20180717.CreateBlindWatermarkTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateBlindWatermarkTemplateResponse>;
   /** 创建日志集 {@link V20180717.CreateCLSLogsetRequest} {@link V20180717.CreateCLSLogsetResponse} */
   CreateCLSLogset(data: V20180717.CreateCLSLogsetRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateCLSLogsetResponse>;
   /** 创建日志主题 {@link V20180717.CreateCLSTopicRequest} {@link V20180717.CreateCLSTopicResponse} */
@@ -11763,6 +11883,8 @@ declare interface Vod {
   DeleteAigcApiToken(data: V20180717.DeleteAigcApiTokenRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteAigcApiTokenResponse>;
   /** 删除转动图模板 {@link V20180717.DeleteAnimatedGraphicsTemplateRequest} {@link V20180717.DeleteAnimatedGraphicsTemplateResponse} */
   DeleteAnimatedGraphicsTemplate(data: V20180717.DeleteAnimatedGraphicsTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteAnimatedGraphicsTemplateResponse>;
+  /** 删除数字水印模板 {@link V20180717.DeleteBlindWatermarkTemplateRequest} {@link V20180717.DeleteBlindWatermarkTemplateResponse} */
+  DeleteBlindWatermarkTemplate(data: V20180717.DeleteBlindWatermarkTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteBlindWatermarkTemplateResponse>;
   /** 删除日志主题 {@link V20180717.DeleteCLSTopicRequest} {@link V20180717.DeleteCLSTopicResponse} */
   DeleteCLSTopic(data: V20180717.DeleteCLSTopicRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteCLSTopicResponse>;
   /** 删除分类 {@link V20180717.DeleteClassRequest} {@link V20180717.DeleteClassResponse} */
@@ -11827,6 +11949,8 @@ declare interface Vod {
   DescribeAllClass(data: V20180717.DescribeAllClassRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAllClassResponse>;
   /** 获取转动图模板列表 {@link V20180717.DescribeAnimatedGraphicsTemplatesRequest} {@link V20180717.DescribeAnimatedGraphicsTemplatesResponse} */
   DescribeAnimatedGraphicsTemplates(data: V20180717.DescribeAnimatedGraphicsTemplatesRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAnimatedGraphicsTemplatesResponse>;
+  /** 获取数字水印模板列表 {@link V20180717.DescribeBlindWatermarkTemplatesRequest} {@link V20180717.DescribeBlindWatermarkTemplatesResponse} */
+  DescribeBlindWatermarkTemplates(data: V20180717.DescribeBlindWatermarkTemplatesRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeBlindWatermarkTemplatesResponse>;
   /** 查询点播域名的 CDN 统计数据 {@link V20180717.DescribeCDNStatDetailsRequest} {@link V20180717.DescribeCDNStatDetailsResponse} */
   DescribeCDNStatDetails(data: V20180717.DescribeCDNStatDetailsRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeCDNStatDetailsResponse>;
   /** 查询点播 CDN 用量数据 {@link V20180717.DescribeCDNUsageDataRequest} {@link V20180717.DescribeCDNUsageDataResponse} */
@@ -11937,6 +12061,8 @@ declare interface Vod {
   EnhanceMediaQuality(data: V20180717.EnhanceMediaQualityRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.EnhanceMediaQualityResponse>;
   /** 执行定制 API {@link V20180717.ExecuteFunctionRequest} {@link V20180717.ExecuteFunctionResponse} */
   ExecuteFunction(data: V20180717.ExecuteFunctionRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ExecuteFunctionResponse>;
+  /** 提取视频数字水印 {@link V20180717.ExtractBlindWatermarkRequest} {@link V20180717.ExtractBlindWatermarkResponse} */
+  ExtractBlindWatermark(data: V20180717.ExtractBlindWatermarkRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ExtractBlindWatermarkResponse>;
   /** 提取版权水印 {@link V20180717.ExtractCopyRightWatermarkRequest} {@link V20180717.ExtractCopyRightWatermarkResponse} */
   ExtractCopyRightWatermark(data: V20180717.ExtractCopyRightWatermarkRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ExtractCopyRightWatermarkResponse>;
   /** 提取溯源水印 {@link V20180717.ExtractTraceWatermarkRequest} {@link V20180717.ExtractTraceWatermarkResponse} */
@@ -11965,6 +12091,8 @@ declare interface Vod {
   ModifyAdaptiveDynamicStreamingTemplate(data: V20180717.ModifyAdaptiveDynamicStreamingTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ModifyAdaptiveDynamicStreamingTemplateResponse>;
   /** 修改转动图模板 {@link V20180717.ModifyAnimatedGraphicsTemplateRequest} {@link V20180717.ModifyAnimatedGraphicsTemplateResponse} */
   ModifyAnimatedGraphicsTemplate(data: V20180717.ModifyAnimatedGraphicsTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ModifyAnimatedGraphicsTemplateResponse>;
+  /** 修改数字水印模板 {@link V20180717.ModifyBlindWatermarkTemplateRequest} {@link V20180717.ModifyBlindWatermarkTemplateResponse} */
+  ModifyBlindWatermarkTemplate(data: V20180717.ModifyBlindWatermarkTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ModifyBlindWatermarkTemplateResponse>;
   /** 修改分类 {@link V20180717.ModifyClassRequest} {@link V20180717.ModifyClassResponse} */
   ModifyClass(data: V20180717.ModifyClassRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ModifyClassResponse>;
   /** 修改音视频内容审核模板 {@link V20180717.ModifyContentReviewTemplateRequest} {@link V20180717.ModifyContentReviewTemplateResponse} */

@@ -1002,6 +1002,14 @@ declare interface Setats {
   ManagerUrl?: string | null;
   /** 隔离时间 */
   IsolatedTime?: string | null;
+  /** Setats集群自己的id */
+  OwnerClusterGroupSerialId?: string;
+  /** setats 集群类型 */
+  Type?: number;
+  /** Setats UI url */
+  SetatsUiUrl?: string;
+  /** setats镜像版本 */
+  ImageVersion?: string;
 }
 
 /** setats 机器规格 */
@@ -1230,6 +1238,8 @@ declare interface Warehouse {
   HiveUri?: string | null;
   /** 高级参数 */
   Properties?: Property[] | null;
+  /** hive cata 类型 */
+  HiveCatalogType?: number;
 }
 
 /** 空间和集群绑定关系 */

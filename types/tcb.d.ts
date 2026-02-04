@@ -102,6 +102,14 @@ declare interface CloudBaseCapabilities {
   Drop?: string[];
 }
 
+/** http访问服务客户端限频 */
+declare interface CloudBaseClientQPSPolicy {
+  /** UserID 或 ClientIP 或 None，如果为 None 代表不限制 */
+  LimitBy?: string;
+  /** 限制值 */
+  LimitValue?: number;
+}
+
 /** 代码仓库里 Repo的信息描述 */
 declare interface CloudBaseCodeRepoDetail {
   /** repo的名字 */
@@ -134,6 +142,100 @@ declare interface CloudBaseEsInfo {
   Account?: string;
   /** 密码 */
   Password?: string;
+}
+
+/** tcb 网关API */
+declare interface CloudBaseGWAPI {
+  /** 服务ID */
+  ServiceId?: string;
+  /** API ID */
+  APIId?: string;
+  /** API Path */
+  Path?: string;
+  /** API 类型 */
+  Type?: number;
+  /** API 名 */
+  Name?: string;
+  /** API创建时间 */
+  CreateTime?: number;
+  /** 自定义值通用字段：Type为1时，该值为空。Type为2时，该值为容器的代理IP:PORT数组。 */
+  Custom?: string;
+  /** 表示是否开启认证 */
+  EnableAuth?: boolean | null;
+  /** 云开发环境ID */
+  EnvId?: string | null;
+  /** 访问类型（该参数暂不对外暴露） */
+  AccessType?: number | null;
+  /** 统一发布状态 */
+  UnionStatus?: number | null;
+  /** 域名（*表示所有域名） */
+  Domain?: string | null;
+  /** 是否有路径冲突 */
+  ConflictFlag?: boolean | null;
+  /** 域名状态 */
+  DomainStatus?: number | null;
+  /** 是否开启路径透传，默认true表示短路径，即不开启(已弃用) */
+  IsShortPath?: boolean | null;
+  /** 路径透传，默认0关闭，1开启，2关闭 */
+  PathTransmission?: number | null;
+  /** 跨域校验，默认0开启，1开启，2关闭 */
+  EnableCheckAcrossDomain?: number | null;
+  /** 静态托管文件目录 */
+  StaticFileDirectory?: string | null;
+  /** QPS策略 */
+  QPSPolicy?: CloudBaseGWAPIQPSPolicy;
+}
+
+/** http访问服务路由qps策略 */
+declare interface CloudBaseGWAPIQPSPolicy {
+  /** qps限额总量 */
+  QPSTotal?: number;
+  /** 客户端限频，如果不限制，LimitBy=None */
+  QPSPerClient?: CloudBaseClientQPSPolicy;
+}
+
+/** 网关服务 */
+declare interface CloudBaseGWService {
+  /** 服务ID */
+  ServiceId?: string;
+  /** 服务域名 */
+  Domain?: string;
+  /** 开启时间 */
+  OpenTime?: number;
+  /** 绑定状态，1 绑定中；2绑定失败；3绑定成功 */
+  Status?: number | null;
+  /** 是否被抢占, 被抢占表示域名被其他环境绑定了，需要解绑或者重新绑定。 */
+  IsPreempted?: boolean | null;
+  /** 是否开启多地域 */
+  EnableRegion?: boolean | null;
+  /** cdn CName地址 */
+  Cname?: string | null;
+  /** 统一域名状态 */
+  UnionStatus?: number | null;
+  /** CName状态 */
+  CnameStatus?: number | null;
+  /** 证书Id */
+  CertId?: string | null;
+  /** 是否强制https */
+  ForceHttps?: boolean | null;
+  /** icp黑名单封禁状态，0-未封禁，1-封禁 */
+  IcpForbidStatus?: number | null;
+  /** 自定义路由规则 */
+  CustomRoutingRules?: string | null;
+  /** 绑定类型，1绑定cdn，2源站，4自定义 */
+  BindFlag?: number;
+  /** TcbIngress源站cname */
+  OriginCname?: string;
+  /** 自定义cname */
+  CustomCname?: string;
+}
+
+/** http service选项 */
+declare interface CloudBaseOption {
+  /** 键 */
+  Key: string;
+  /** 值 */
+  Value: string;
 }
 
 /** 云开发项目版本 */
@@ -878,6 +980,34 @@ declare interface KVPair {
   Value: string;
 }
 
+/** CLS日志单条信息 */
+declare interface LogObject {
+  /** 日志属于的 topic ID */
+  TopicId?: string;
+  /** 日志主题的名字 */
+  TopicName?: string;
+  /** 日志时间 */
+  Timestamp?: string;
+  /** 日志内容 */
+  Content?: string;
+  /** 采集路径 */
+  FileName?: string;
+  /** 日志来源设备 */
+  Source?: string;
+}
+
+/** CLS日志结果 */
+declare interface LogResObject {
+  /** 获取更多检索结果的游标 */
+  Context?: string;
+  /** 搜索结果是否已经全部返回 */
+  ListOver?: boolean;
+  /** 日志内容信息 */
+  Results?: LogObject[];
+  /** 日志聚合结果 */
+  AnalysisRecords?: string[];
+}
+
 /** 云日志服务相关信息 */
 declare interface LogServiceInfo {
   /** log名 */
@@ -1066,6 +1196,22 @@ declare interface StaticStorageInfo {
   Bucket?: string;
 }
 
+/** 静态托管资源信息 */
+declare interface StaticStoreInfo {
+  /** 环境ID */
+  EnvId?: string | null;
+  /** 静态域名 */
+  CdnDomain?: string | null;
+  /** COS桶 */
+  Bucket?: string | null;
+  /** cos区域 */
+  Regoin?: string | null;
+  /** 资源状态:init(初始化)/process(处理中)/online(上线)/destroying(销毁中)/offline(下线)) */
+  Status?: string | null;
+  /** 地域 */
+  Region?: string | null;
+}
+
 /** StorageInfo 资源信息 */
 declare interface StorageInfo {
   /** 资源所属地域。当前支持ap-shanghai */
@@ -1184,6 +1330,42 @@ declare interface WxGatewayRountItem {
   CustomHeader?: CustomHeader;
 }
 
+declare interface BindCloudBaseAccessDomainRequest {
+  /** 服务Id，目前是指环境Id */
+  ServiceId: string;
+  /** 自定义域名 */
+  Domain: string;
+  /** 腾讯云证书Id */
+  CertId?: string;
+  /** 默认1，1 绑定默认Cdn，2 绑定TcbIngress（不经过cdn），4 绑定自定义cdn */
+  BindFlag?: number;
+  /** 自定义cdn cname域名 */
+  CustomCname?: string;
+}
+
+declare interface BindCloudBaseAccessDomainResponse {
+  /** 服务Id，目前是指环境Id */
+  ServiceId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BindCloudBaseGWDomainRequest {
+  /** 服务ID */
+  ServiceId: string;
+  /** 服务域名 */
+  Domain: string;
+  /** 证书ID */
+  CertId?: string;
+  /** 是否启用多地域 */
+  EnableRegion?: boolean;
+}
+
+declare interface BindCloudBaseGWDomainResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BindEnvGatewayRequest {
   /** 子环境id */
   SubEnvId: string;
@@ -1264,6 +1446,54 @@ declare interface CreateAuthDomainRequest {
 }
 
 declare interface CreateAuthDomainResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateBillDealRequest {
+}
+
+declare interface CreateBillDealResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCloudBaseGWAPIRequest {
+  /** Service ID */
+  ServiceId: string;
+  /** API Path */
+  Path: string;
+  /** API类型（1表示云函数，2表示容器） */
+  Type: number;
+  /** API Name */
+  Name: string;
+  /** APIId，如果非空，表示修改绑定Path */
+  APIId?: string;
+  /** 自定义值通用字段（当Type为容器时必填） */
+  Custom?: string;
+  /** 认证开关 1为开启 2为关闭 */
+  AuthSwitch?: number;
+  /** 是否开启多地域 */
+  EnableRegion?: boolean;
+  /** 是否启用统一域名 */
+  EnableUnion?: boolean;
+  /** 域名 */
+  Domain?: string;
+  /** 访问类型："OA", "PUBLIC", "MINIAPP", "VPC" （不传默认PUBLIC+MINIAPP+VPC） */
+  AccessTypes?: string[];
+  /** 是否开启路径透传，默认true表示短路径，即不开启路径透传(已弃用) */
+  IsShortPath?: boolean;
+  /** 路径透传，默认0关闭，1开启，2关闭 */
+  PathTransmission?: number;
+  /** 跨域校验，默认0开启，1开启，2关闭 */
+  EnableCheckAcrossDomain?: number;
+  /** 静态托管资源目录 */
+  StaticFileDirectory?: string;
+}
+
+declare interface CreateCloudBaseGWAPIResponse {
+  /** API ID */
+  APIId: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1494,6 +1724,44 @@ declare interface CreateUserRequest {
 declare interface CreateUserResponse {
   /** 结果返回 */
   Data?: CreateUserResp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCloudBaseGWAPIRequest {
+  /** 服务ID */
+  ServiceId: string;
+  /** API Path */
+  Path?: string;
+  /** API ID */
+  APIId?: string;
+  /** API类型 */
+  Type?: number;
+  /** API Name */
+  Name?: string;
+  /** 自定义值字段（Type为2时，传递容器服务名表示需要删除JNSGW） */
+  Custom?: string;
+  /** 域名 */
+  Domain?: string;
+}
+
+declare interface DeleteCloudBaseGWAPIResponse {
+  /** 最终删除API个数 */
+  Count?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCloudBaseGWDomainRequest {
+  /** 服务ID */
+  ServiceId: string;
+  /** 服务域名 */
+  Domain: string;
+}
+
+declare interface DeleteCloudBaseGWDomainResponse {
+  /** 删除个数 */
+  Count?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1778,6 +2046,76 @@ declare interface DescribeCloudBaseBuildServiceResponse {
   DownloadHeaders?: KVPair[];
   /** 下载链接是否过期 */
   OutDate?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudBaseGWAPIRequest {
+  /** 服务ID */
+  ServiceId?: string;
+  /** API域名 */
+  Domain?: string;
+  /** API Path */
+  Path?: string;
+  /** API ID */
+  APIId?: string;
+  /** API类型，1为云函数，2为容器 */
+  Type?: number;
+  /** API名，Type为1时为云函数名，Type为2时为容器服务名 */
+  Name?: string;
+  /** 查询的分页参数，用于设置查询的偏移位置，0表示从头开始 */
+  Offset?: number;
+  /** 查询的分页参数，用于表示每次查询的最大返回数据量 */
+  Limit?: number;
+  /** 是否启用多地域 */
+  EnableRegion?: boolean;
+  /** 是否使用统一域名 */
+  EnableUnion?: boolean;
+}
+
+declare interface DescribeCloudBaseGWAPIResponse {
+  /** API列表 */
+  APISet?: CloudBaseGWAPI[] | null;
+  /** 是否开启http调用 */
+  EnableService?: boolean;
+  /** 查询结果的数据总量 */
+  Total?: number | null;
+  /** 查询的分页参数 */
+  Offset?: number | null;
+  /** 查询的分页参数 */
+  Limit?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudBaseGWServiceRequest {
+  /** 服务ID */
+  ServiceId?: string;
+  /** 服务域名 */
+  Domain?: string;
+  /** 是否启用多地域 */
+  EnableRegion?: boolean;
+  /** 是否启用统一域名 */
+  EnableUnion?: boolean;
+}
+
+declare interface DescribeCloudBaseGWServiceResponse {
+  /** 服务列表 */
+  ServiceSet?: CloudBaseGWService[] | null;
+  /** 是否开启服务 */
+  EnableService?: boolean;
+  /** 默认域名信息 */
+  DefaultDomain?: string | null;
+  /** 是否开启CDN迁移 */
+  EnableUnion?: boolean | null;
+  /** 是否开启跨域校验，默认开启 true */
+  EnableCheckAcrossDomain?: boolean | null;
+  /** 自定义路由规则 */
+  CustomRoutingRules?: string | null;
+  /** 默认域名绑定类型，1绑定TCB-CDN，2绑定tcbingres（不经过cdn） */
+  AccessFlag?: number;
+  /** 云接入源站域名 */
+  OriginDomain?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2162,6 +2500,20 @@ declare interface DescribeDownloadFileResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEnvAccountCircleRequest {
+  /** 环境ID */
+  EnvId: string;
+}
+
+declare interface DescribeEnvAccountCircleResponse {
+  /** 环境计费周期开始时间 */
+  StartTime?: string;
+  /** 环境计费周期结束时间 */
+  EndTime?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeEnvDealRegionRequest {
   /** 环境ID */
   EnvId: string;
@@ -2444,6 +2796,24 @@ declare interface DescribeQuotaDataResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSafeRuleRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 集合名称 */
+  CollectionName: string;
+  /** 微信AppId，微信必传 */
+  WxAppId?: string;
+}
+
+declare interface DescribeSafeRuleResponse {
+  /** 规则内容 */
+  Rule?: string | null;
+  /** 权限标签。包含以下取值： READONLY：所有用户可读，仅创建者和管理员可写 PRIVATE：仅创建者及管理员可读写 ADMINWRITE：所有用户可读，仅管理员可写 ADMINONLY：仅管理员可读写 CUSTOM：自定义安全规则 */
+  AclTag?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSmsQuotasRequest {
   /** 环境ID */
   EnvId: string;
@@ -2468,6 +2838,18 @@ declare interface DescribeSpecialCostItemsRequest {
 declare interface DescribeSpecialCostItemsResponse {
   /** 1分钱抵扣详情 */
   SpecialCostItems?: SpecialCostItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStaticStoreRequest {
+  /** 环境ID */
+  EnvId: string;
+}
+
+declare interface DescribeStaticStoreResponse {
+  /** 静态托管资源信息 */
+  Data?: StaticStoreInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2750,6 +3132,20 @@ declare interface ListTablesResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCloudBaseGWAPIRequest {
+  /** Service ID */
+  ServiceId: string;
+  /** API ID */
+  APIId: string;
+  /** 选项列表，key取值：domain, path。 */
+  Options: CloudBaseOption[];
+}
+
+declare interface ModifyCloudBaseGWAPIResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCloudBaseRunServerFlowConfRequest {
   /** 环境ID */
   EnvId: string;
@@ -2938,6 +3334,32 @@ declare interface RunSqlResponse {
   RequestId?: string;
 }
 
+declare interface SearchClsLogRequest {
+  /** 环境唯一ID */
+  EnvId: string;
+  /** 查询起始时间条件 */
+  StartTime: string;
+  /** 查询结束时间条件 */
+  EndTime: string;
+  /** 查询语句，例如查询云函数：(src:app OR src:system) AND log:\"START RequestId*\"， 查询云数据库：module:database，查询审批流：module:workflow，查询模型：module:model，查询用户权限：module:auth，以上仅为示例语句，实际使用时请根据具体日志内容进行调整，查询语句需严格遵循CLS（Cloud Log Service）语法规范 详细的语法规则请参考官方档：https://cloud.tencent.com/document/product/614/47044 */
+  QueryString: string;
+  /** 单次要返回的日志条数，单次返回的最大条数为100 */
+  Limit: number;
+  /** 加载更多使用，透传上次返回的 context 值，获取后续的日志内容，通过游标最多可获取10000条，请尽可能缩小时间范围 */
+  Context?: string;
+  /** 按时间排序 asc（升序）或者 desc（降序），默认为 desc */
+  Sort?: string;
+  /** 是否使用Lucene语法，默认为false */
+  UseLucene?: boolean;
+}
+
+declare interface SearchClsLogResponse {
+  /** 日志内容结果 */
+  LogResults?: LogResObject;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UnfreezeCloudBaseRunServersRequest {
   /** 环境ID */
   EnvId: string;
@@ -2977,6 +3399,10 @@ declare interface UpdateTableResponse {
 /** {@link Tcb 云开发 CloudBase} */
 declare interface Tcb {
   (): Versions;
+  /** 绑定云开发自定义域名 {@link BindCloudBaseAccessDomainRequest} {@link BindCloudBaseAccessDomainResponse} */
+  BindCloudBaseAccessDomain(data: BindCloudBaseAccessDomainRequest, config?: AxiosRequestConfig): AxiosPromise<BindCloudBaseAccessDomainResponse>;
+  /** 绑定自定义域名 {@link BindCloudBaseGWDomainRequest} {@link BindCloudBaseGWDomainResponse} */
+  BindCloudBaseGWDomain(data: BindCloudBaseGWDomainRequest, config?: AxiosRequestConfig): AxiosPromise<BindCloudBaseGWDomainResponse>;
   /** 绑定环境网关 {@link BindEnvGatewayRequest} {@link BindEnvGatewayResponse} */
   BindEnvGateway(data: BindEnvGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<BindEnvGatewayResponse>;
   /** 检查是否开通Tcb服务 {@link CheckTcbServiceRequest} {@link CheckTcbServiceResponse} */
@@ -2987,6 +3413,10 @@ declare interface Tcb {
   CreateAndDeployCloudBaseProject(data: CreateAndDeployCloudBaseProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndDeployCloudBaseProjectResponse>;
   /** 增加安全域名 {@link CreateAuthDomainRequest} {@link CreateAuthDomainResponse} */
   CreateAuthDomain(data: CreateAuthDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuthDomainResponse>;
+  /** 创建计费订单 {@link CreateBillDealRequest} {@link CreateBillDealResponse} */
+  CreateBillDeal(data?: CreateBillDealRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBillDealResponse>;
+  /** 创建云开发网关API {@link CreateCloudBaseGWAPIRequest} {@link CreateCloudBaseGWAPIResponse} */
+  CreateCloudBaseGWAPI(data: CreateCloudBaseGWAPIRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudBaseGWAPIResponse>;
   /** 开通容器托管的资源 {@link CreateCloudBaseRunResourceRequest} {@link CreateCloudBaseRunResourceResponse} */
   CreateCloudBaseRunResource(data: CreateCloudBaseRunResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudBaseRunResourceResponse>;
   /** 创建服务版本 {@link CreateCloudBaseRunServerVersionRequest} {@link CreateCloudBaseRunServerVersionResponse} */
@@ -3001,6 +3431,10 @@ declare interface Tcb {
   CreateTable(data: CreateTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTableResponse>;
   /** 创建tcb用户 {@link CreateUserRequest} {@link CreateUserResponse} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
+  /** 删除网关API {@link DeleteCloudBaseGWAPIRequest} {@link DeleteCloudBaseGWAPIResponse} */
+  DeleteCloudBaseGWAPI(data: DeleteCloudBaseGWAPIRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudBaseGWAPIResponse>;
+  /** 删除网关域名 {@link DeleteCloudBaseGWDomainRequest} {@link DeleteCloudBaseGWDomainResponse} */
+  DeleteCloudBaseGWDomain(data: DeleteCloudBaseGWDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudBaseGWDomainResponse>;
   /** 删除云项目 {@link DeleteCloudBaseProjectLatestVersionRequest} {@link DeleteCloudBaseProjectLatestVersionResponse} */
   DeleteCloudBaseProjectLatestVersion(data: DeleteCloudBaseProjectLatestVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudBaseProjectLatestVersionResponse>;
   /** 删除服务版本 {@link DeleteCloudBaseRunServerVersionRequest} {@link DeleteCloudBaseRunServerVersionResponse} */
@@ -3025,6 +3459,10 @@ declare interface Tcb {
   DescribeCbrServerVersion(data: DescribeCbrServerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCbrServerVersionResponse>;
   /** 获取云托管代码上传和下载url {@link DescribeCloudBaseBuildServiceRequest} {@link DescribeCloudBaseBuildServiceResponse} */
   DescribeCloudBaseBuildService(data: DescribeCloudBaseBuildServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseBuildServiceResponse>;
+  /** 获取网关API列表 {@link DescribeCloudBaseGWAPIRequest} {@link DescribeCloudBaseGWAPIResponse} */
+  DescribeCloudBaseGWAPI(data?: DescribeCloudBaseGWAPIRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseGWAPIResponse>;
+  /** 获取网关服务 {@link DescribeCloudBaseGWServiceRequest} {@link DescribeCloudBaseGWServiceResponse} */
+  DescribeCloudBaseGWService(data?: DescribeCloudBaseGWServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseGWServiceResponse>;
   /** 获取云开发项目列表 {@link DescribeCloudBaseProjectLatestVersionListRequest} {@link DescribeCloudBaseProjectLatestVersionListResponse} */
   DescribeCloudBaseProjectLatestVersionList(data: DescribeCloudBaseProjectLatestVersionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseProjectLatestVersionListResponse>;
   /** 云项目部署版本列表 {@link DescribeCloudBaseProjectVersionListRequest} {@link DescribeCloudBaseProjectVersionListResponse} */
@@ -3047,6 +3485,8 @@ declare interface Tcb {
   DescribeDatabaseACL(data: DescribeDatabaseACLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseACLResponse>;
   /** 获取下载文件信息 {@link DescribeDownloadFileRequest} {@link DescribeDownloadFileResponse} */
   DescribeDownloadFile(data: DescribeDownloadFileRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDownloadFileResponse>;
+  /** 查询环境计费周期 {@link DescribeEnvAccountCircleRequest} {@link DescribeEnvAccountCircleResponse} */
+  DescribeEnvAccountCircle(data: DescribeEnvAccountCircleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvAccountCircleResponse>;
   /** 获取环境下单地域 {@link DescribeEnvDealRegionRequest} {@link DescribeEnvDealRegionResponse} */
   DescribeEnvDealRegion(data: DescribeEnvDealRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvDealRegionResponse>;
   /** 查询后付费免费配额信息 {@link DescribeEnvFreeQuotaRequest} {@link DescribeEnvFreeQuotaResponse} */
@@ -3075,10 +3515,14 @@ declare interface Tcb {
   DescribePostpayPackageFreeQuotas(data?: DescribePostpayPackageFreeQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePostpayPackageFreeQuotasResponse>;
   /** 查询环境的配额使用量 {@link DescribeQuotaDataRequest} {@link DescribeQuotaDataResponse} */
   DescribeQuotaData(data: DescribeQuotaDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuotaDataResponse>;
+  /** 查询数据库安全规则 {@link DescribeSafeRuleRequest} {@link DescribeSafeRuleResponse} */
+  DescribeSafeRule(data: DescribeSafeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSafeRuleResponse>;
   /** 查询后付费短信资源量 {@link DescribeSmsQuotasRequest} {@link DescribeSmsQuotasResponse} */
   DescribeSmsQuotas(data: DescribeSmsQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmsQuotasResponse>;
   /** 查询环境1分钱抵扣信息 {@link DescribeSpecialCostItemsRequest} {@link DescribeSpecialCostItemsResponse} */
   DescribeSpecialCostItems(data?: DescribeSpecialCostItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecialCostItemsResponse>;
+  /** 查看静态托管资源信息 {@link DescribeStaticStoreRequest} {@link DescribeStaticStoreResponse} */
+  DescribeStaticStore(data: DescribeStaticStoreRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStaticStoreResponse>;
   /** 查询表信息 {@link DescribeTableRequest} {@link DescribeTableResponse} */
   DescribeTable(data: DescribeTableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableResponse>;
   /** 查询所有表信息 {@link DescribeTablesRequest} {@link DescribeTablesResponse} */
@@ -3105,6 +3549,8 @@ declare interface Tcb {
   FreezeCloudBaseRunServers(data: FreezeCloudBaseRunServersRequest, config?: AxiosRequestConfig): AxiosPromise<FreezeCloudBaseRunServersResponse>;
   /** 查询所有表 {@link ListTablesRequest} {@link ListTablesResponse} */
   ListTables(data: ListTablesRequest, config?: AxiosRequestConfig): AxiosPromise<ListTablesResponse>;
+  /** 修改云开发网关API {@link ModifyCloudBaseGWAPIRequest} {@link ModifyCloudBaseGWAPIResponse} */
+  ModifyCloudBaseGWAPI(data: ModifyCloudBaseGWAPIRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudBaseGWAPIResponse>;
   /** 修改容器内的版本流量配置 {@link ModifyCloudBaseRunServerFlowConfRequest} {@link ModifyCloudBaseRunServerFlowConfResponse} */
   ModifyCloudBaseRunServerFlowConf(data: ModifyCloudBaseRunServerFlowConfRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudBaseRunServerFlowConfResponse>;
   /** 修改服务版本信息 {@link ModifyCloudBaseRunServerVersionRequest} {@link ModifyCloudBaseRunServerVersionResponse} */
@@ -3125,6 +3571,8 @@ declare interface Tcb {
   ReplaceActivityRecord(data: ReplaceActivityRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceActivityRecordResponse>;
   /** 执行SQL语句 {@link RunSqlRequest} {@link RunSqlResponse} */
   RunSql(data: RunSqlRequest, config?: AxiosRequestConfig): AxiosPromise<RunSqlResponse>;
+  /** 搜索CLS日志 {@link SearchClsLogRequest} {@link SearchClsLogResponse} */
+  SearchClsLog(data: SearchClsLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClsLogResponse>;
   /** 批量解冻服务 {@link UnfreezeCloudBaseRunServersRequest} {@link UnfreezeCloudBaseRunServersResponse} */
   UnfreezeCloudBaseRunServers(data: UnfreezeCloudBaseRunServersRequest, config?: AxiosRequestConfig): AxiosPromise<UnfreezeCloudBaseRunServersResponse>;
   /** 修改表索引信息 {@link UpdateTableRequest} {@link UpdateTableResponse} */
@@ -3256,8 +3704,6 @@ declare interface Tcb {
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeCloudBaseCodeRepos(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  DescribeCloudBaseGWAPI(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeCloudBaseRunBaseImages(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeCloudBaseRunBuildLog(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
@@ -3305,8 +3751,6 @@ declare interface Tcb {
   DescribeDbDistribution(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeDeployOnOneClickTasks(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  DescribeEnvAccountCircle(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeEnvPostpayPackage(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
@@ -3374,8 +3818,6 @@ declare interface Tcb {
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeRestoreHistory(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  DescribeSafeRule(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeSecurityRule(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeServerManageTask(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
@@ -3389,8 +3831,6 @@ declare interface Tcb {
   DescribeSmsRecords(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeStatData(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  DescribeStaticStore(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeStorageACL(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
@@ -3505,8 +3945,6 @@ declare interface Tcb {
   RevokeInvoice(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   RollUpdateCloudBaseRunServerVersion(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  SearchClsLog(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   SetCommonRenewFlag(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */

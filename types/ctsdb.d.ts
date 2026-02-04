@@ -36,6 +36,70 @@ declare interface Cluster {
   Security?: string[] | null;
 }
 
+/** 实例详情信息 */
+declare interface ClusterDetail {
+  /** 用户APPID */
+  AppID?: number | null;
+  /** 实例id */
+  ClusterID?: string | null;
+  /** 账号id */
+  AccountID?: string | null;
+  /** 自定义实例名 */
+  Name?: string | null;
+  /** 地域 */
+  Region?: string | null;
+  /** 网络信息 */
+  Networks?: Network[] | null;
+  /** 实例状态枚举值： 0： 运行中 1： 创建中 16： 变配中 17： 隔离中 18： 已隔离 19： 恢复中 20： 已关机 21： 销毁中 22： 已销毁 30： 扩展节点添加中 31： 扩展节点变配中 32： 扩展节点删除中 33： 扩展节点禁用中 34： 扩展节点启用中 */
+  Status?: number | null;
+  /** 创建时间 */
+  CreatedAt?: string | null;
+  /** 最后修改时间 */
+  UpdatedAt?: string | null;
+  /** 标签 */
+  Tags?: Tag[] | null;
+  /** 安全组信息 */
+  Security?: string[] | null;
+  /** 组件信息 */
+  Components?: Component[] | null;
+  /** 过期时间 */
+  ExpiredAt?: string | null;
+  /** 续费标识枚举值： 0： 默认 1： 自动续费 2： 不自动续费 */
+  RenewFlag?: number | null;
+  /** 关机时间 */
+  ShutdownAt?: string | null;
+  /** 隔离时间 */
+  IsolatedAt?: string | null;
+  /** 实例类型枚举值： 0： 共享型 1： 独享型 2： 标准型 */
+  Type?: number;
+}
+
+/** 实例组件信息 */
+declare interface Component {
+  /** 所属实例id */
+  InstanceID?: string | null;
+  /** 名称 */
+  Name?: string | null;
+  /** 组件类型枚举值： gateway： 时序节点 database： 数据节点 gateway-worker： 扩展节点 */
+  Type?: string | null;
+  /** cpu */
+  Cpu?: number | null;
+  /** 内存 */
+  Memory?: number | null;
+  /** 磁盘 */
+  Disk?: number | null;
+  /** 节点数量 */
+  Shards?: number | null;
+  /** 副本数量 */
+  Replicas?: number | null;
+  /** 网络 */
+  Networks?: Network[] | null;
+  /** 组件状态枚举值： 0： 运行中 1： 创建中 2： 变配中 3： 隔离中 4： 已隔离 5： 删除中 6： 已删除 7： 禁用中 8： 已禁用 9： 启用中 */
+  State?: number | null;
+  /** 组件内部ID */
+  ID?: number | null;
+}
+
 /** 数据库相关信息 */
 declare interface Database {
   /** 实例ID */
@@ -126,6 +190,16 @@ declare interface Tenant {
   IsPasswordEncrypted?: boolean;
 }
 
+declare interface DescribeClusterDetailRequest {
+}
+
+declare interface DescribeClusterDetailResponse {
+  /** 实例详情 */
+  Cluster?: ClusterDetail | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeClustersRequest {
   /** 当前页数 */
   PageNumber: number;
@@ -167,6 +241,8 @@ declare interface DescribeDatabasesResponse {
 /** {@link Ctsdb 时序数据库 CTSDB} */
 declare interface Ctsdb {
   (): Versions;
+  /** 查询实例详情 {@link DescribeClusterDetailRequest} {@link DescribeClusterDetailResponse} */
+  DescribeClusterDetail(data?: DescribeClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDetailResponse>;
   /** 查询实例列表 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
   DescribeClusters(data: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
   /** 查看数据库列表 {@link DescribeDatabasesRequest} {@link DescribeDatabasesResponse} */
