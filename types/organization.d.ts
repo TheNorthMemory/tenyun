@@ -170,6 +170,8 @@ declare interface ManagerShareUnit {
   ShareMemberNum?: number;
   /** 共享范围。取值：1-仅允许集团组织内共享 2-允许共享给任意账号 */
   ShareScope?: number;
+  /** 共享单元部门数。 */
+  ShareNodeNum?: number;
 }
 
 /** 成员管理身份 */

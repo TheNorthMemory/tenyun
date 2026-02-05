@@ -310,9 +310,9 @@ declare interface AiAnalysisResult {
   VideoRemakeTask?: AiAnalysisTaskVideoRemakeResult | null;
   /** 视频（音频）理解任务的查询结果，当任务类型为 VideoComprehension 时有效。 */
   VideoComprehensionTask?: AiAnalysisTaskVideoComprehensionResult | null;
-  /** 视频内容分析抠图任务的查询结果，当任务类型为Cutout时有效。 */
+  /** 视频内容分析智能抠图任务的查询结果，当任务类型为Cutout时有效。 */
   CutoutTask?: AiAnalysisTaskCutoutResult | null;
-  /** 视频内容分析成片任务的查询结果，当任务类型为Reel时有效。 */
+  /** 视频内容分析AI解说二创任务的查询结果，当任务类型为Reel时有效。 */
   ReelTask?: AiAnalysisTaskReelResult | null;
 }
 
@@ -388,7 +388,7 @@ declare interface AiAnalysisTaskCutoutOutput {
   OutputStorage?: TaskOutputStorage;
 }
 
-/** 视频抠图结果数据结构 */
+/** 视频智能抠图结果数据结构 */
 declare interface AiAnalysisTaskCutoutResult {
   /** 任务状态，有 `PROCESSING`，`SUCCESS` 和 `FAIL` 三种 */
   Status?: string;
@@ -632,17 +632,19 @@ declare interface AiAnalysisTaskReelInput {
   Definition?: number;
 }
 
-/** 智能成片结果信息 */
+/** AI解说二创结果信息 */
 declare interface AiAnalysisTaskReelOutput {
-  /** 成片视频路径。 */
+  /** 解说视频路径。 */
   VideoPath?: string;
+  /** 解说视频路径列表。**注意**：1. 当返回一个文件时，`VideoPath `返回一个文件路径，`VideoPaths `也会填充同样路径的一个元素。2. 当返回多个文件时，`VideoPath `返回为空字符串，`VideoPaths `返回多文件路径列表。 */
+  VideoPaths?: string[];
   /** 脚本文件路径 */
   ScriptPath?: string;
-  /** 成片视频存储位置。 */
+  /** 解说视频存储位置。 */
   OutputStorage?: TaskOutputStorage;
 }
 
-/** 智能成片结果类型 */
+/** AI解说二创结果类型 */
 declare interface AiAnalysisTaskReelResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
   Status?: string;
@@ -650,9 +652,9 @@ declare interface AiAnalysisTaskReelResult {
   ErrCode?: number;
   /** 错误信息。 */
   Message?: string;
-  /** 智能成片任务输入。 */
+  /** AI解说二创任务输入。 */
   Input?: AiAnalysisTaskReelInput;
-  /** 智能成片任务输出。 */
+  /** AI解说二创任务输出。 */
   Output?: AiAnalysisTaskReelOutput | null;
   /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 媒体处理类错误码 列表。 */
   ErrCodeExt?: string | null;
@@ -730,6 +732,10 @@ declare interface AiAnalysisTaskVideoComprehensionInput {
 declare interface AiAnalysisTaskVideoComprehensionOutput {
   /** 视频（音频）理解内容详情 */
   VideoComprehensionAnalysisResult?: string;
+  /** 视频（音频）理解扩展信息 */
+  VideoComprehensionExtInfo?: string;
+  /** 视频分镜理解结果 */
+  VideoComprehensionResultList?: VideoComprehensionResultItem[];
 }
 
 /** 视频（音频）理解结果 */
@@ -1990,6 +1996,8 @@ declare interface BlindWatermarkTemplate {
   CreateTime?: string;
   /** 数字水印模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
   UpdateTime?: string;
+  /** 数字水印强度。 default: 默认，高清画质和抗性平衡 stronger:画质清晰，抗性较强 strongest:画质一般，抗性最强 */
+  Strength?: string;
 }
 
 /** 智能分类任务控制参数 */
@@ -3802,6 +3810,34 @@ declare interface LiveScheduleTask {
   LiveActivityResultSet?: LiveActivityResult[] | null;
 }
 
+/** 直播智能字幕结果 */
+declare interface LiveSmartSubtitleResult {
+  /** 识别文本。 */
+  Text?: string;
+  /** 翻译片段起始的 PTS 时间，单位：秒。 */
+  StartPTSTime?: number;
+  /** 翻译片段终止的 PTS 时间，单位：秒。 */
+  EndPTSTime?: number;
+  /** 翻译文本。 */
+  Trans?: string;
+  /** 翻译开始UTC时间。 */
+  StartTime?: string | null;
+  /** 翻译结束UTC时间。 */
+  EndTime?: string | null;
+  /** 稳态标记。 */
+  SteadyState?: boolean | null;
+  /** websocket与trtc实时翻译的UserId */
+  UserId?: string | null;
+}
+
+/** 直播智能字幕输入结构体 */
+declare interface LiveSmartSubtitlesTaskInput {
+  /** 智能字幕模板 ID 。 */
+  Definition?: number;
+  /** 用户扩展字段，一般场景不用填。 */
+  UserExtPara?: string;
+}
+
 /** 直播流分析结果 */
 declare interface LiveStreamAiAnalysisResultInfo {
   /** 直播分析子任务结果，支持：直播拆条直播高光集锦直播摘要 */
@@ -3950,6 +3986,12 @@ declare interface LiveStreamAiReviewVoicePornResult {
   Suggestion?: string;
   /** 视频鉴黄结果标签，取值范围：sexual_moan：呻吟。 */
   Label?: string;
+}
+
+/** 直播智能字幕结果 */
+declare interface LiveStreamAiSmartSubtitleResultInfo {
+  /** 直播智能字幕任务结果列表。 */
+  SmartSubtitleResult?: LiveSmartSubtitleResult[];
 }
 
 /** 直播识别 Asr 全文识别 */
@@ -6348,12 +6390,12 @@ declare interface TaskStatData {
 
 /** 任务统计数据，包括任务数和用量。 */
 declare interface TaskStatDataItem {
-  /** 数据所在时间区间的开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。如：当时间粒度为天，2018-12-01T00:00:00+08:00，表示2018年12月1日（含）到2018年12月2日（不含）区间。 */
-  Time: string;
+  /** 数据所在时间区间的开始时间，使用 ISO 日期格式。如：当时间粒度为天，2018-12-01T00:00:00+08:00，表示2018年12月1日（含）到2018年12月2日（不含）区间。 */
+  Time?: string;
   /** 任务数。 */
-  Count: number;
+  Count?: number;
   /** 任务用量。 */
-  Usage: number;
+  Usage?: number;
 }
 
 /** 涉敏任务控制参数 */
@@ -6734,6 +6776,20 @@ declare interface VODOutputStorage {
   SubAppId?: number;
 }
 
+/** 视频分镜理解结果 */
+declare interface VideoComprehensionResultItem {
+  /** 分镜片段起始时间（单位：秒） */
+  StartTime?: number;
+  /** 分镜片段结束时间（单位：秒） */
+  EndTime?: number;
+  /** 分镜片段标题 */
+  Title?: string;
+  /** 分镜片段信息描述 */
+  Description?: string;
+  /** 分镜片段关键词 */
+  Keywords?: string[];
+}
+
 /** 视频检索入库任务的结果 */
 declare interface VideoDBEntryTaskResult {
   /** 入库的视频ID */
@@ -7045,7 +7101,7 @@ declare interface BatchDeleteStreamLinkFlowResponse {
 declare interface BatchProcessMediaRequest {
   /** 媒体处理的文件输入信息。 */
   InputInfo: MediaInputInfo[];
-  /** 媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。注意：当InputInfo.Type为URL时，该参数是必填项 */
+  /** 媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。注意：当InputInfo.Type为URL时，该参数是必填项，目前只支持COS输出 */
   OutputStorage?: TaskOutputStorage;
   /** 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。如果不填，表示与 InputInfo 中文件所在的目录一致。 */
   OutputDir?: string;
@@ -7057,7 +7113,7 @@ declare interface BatchProcessMediaRequest {
   TasksPriority?: number;
   /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
   SessionContext?: string;
-  /** 资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。 */
+  /** 资源ID，需要保证对应资源是开启状态。默认为账号主资源ID。 */
   ResourceId?: string;
   /** 是否跳过元信息获取，可选值： 0：表示不跳过 1：表示跳过 默认值：0 */
   SkipMateData?: number;
@@ -7289,6 +7345,8 @@ declare interface CreateBlindWatermarkTemplateRequest {
   Name?: string;
   /** 数字水印模板描述信息，长度限制：256 个字符。 */
   Comment?: string;
+  /** 数字水印强度。default: 默认，高清画质和抗性平衡stronger:画质清晰，抗性较强strongest:画质一般，抗性最强 */
+  Strength?: string;
 }
 
 declare interface CreateBlindWatermarkTemplateResponse {
@@ -8957,7 +9015,7 @@ declare interface DescribeTranscodeTemplatesResponse {
 }
 
 declare interface DescribeUsageDataRequest {
-  /** 起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  /** 起始日期。使用 ISO 日期格式。 */
   StartTime: string;
   /** 结束日期，需大于等于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
   EndTime: string;
@@ -9323,6 +9381,8 @@ declare interface ModifyBlindWatermarkTemplateRequest {
   Comment?: string;
   /** 数字水印文字内容，长度不超过64个字符，NAGRA水印类型的模板不支持修改文字内容。 */
   TextContent?: string;
+  /** 数字水印强度。 default: 默认，高清画质和抗性平衡 stronger:画质清晰，抗性较强 strongest:画质一般，抗性最强 */
+  Strength?: string;
 }
 
 declare interface ModifyBlindWatermarkTemplateResponse {
@@ -9738,7 +9798,7 @@ declare interface ParseLiveStreamProcessNotificationRequest {
 }
 
 declare interface ParseLiveStreamProcessNotificationResponse {
-  /** 直播流处理结果类型，包含：AiReviewResult：内容审核结果；AiRecognitionResult：内容识别结果；LiveRecordResult：直播录制结果；AiQualityControlResult：媒体质检结果；AiAnalysisResult：内容分析结果；ProcessEof：直播流处理结束。 */
+  /** 直播流处理结果类型，包含：AiReviewResult：内容审核结果；AiRecognitionResult：内容识别结果；LiveRecordResult：直播录制结果；AiQualityControlResult：媒体质检结果；AiAnalysisResult：内容分析结果；AiSmartSubtitleResult：智能字幕结果；ProcessEof：直播流处理结束。 */
   NotificationType?: string;
   /** 视频处理任务 ID。 */
   TaskId?: string;
@@ -9754,6 +9814,8 @@ declare interface ParseLiveStreamProcessNotificationResponse {
   AiQualityControlResultInfo?: LiveStreamAiQualityControlResultInfo | null;
   /** 直播录制结果，当 NotificationType 为 LiveRecordResult 时有效。 */
   LiveRecordResultInfo?: LiveStreamRecordResultInfo | null;
+  /** 智能字幕结果，当 NotificationType 为 AiSmartSubtitleResult 时有效。 */
+  AiSmartSubtitleResultInfo?: LiveStreamAiSmartSubtitleResultInfo;
   /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长50个字符，不带或者带空字符串表示不做去重。 */
   SessionId?: string;
   /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长1000个字符。 */
@@ -9827,7 +9889,7 @@ declare interface ProcessImageResponse {
 }
 
 declare interface ProcessLiveStreamRequest {
-  /** 直播流 URL（必须是直播文件地址，支持 rtmp，hls 和 flv, trtc 等）。trtc地址如下： trtc: //trtc.rtc.qq.com/mps/``?sdkappid=``&userid=``&usersig=<`usersig>``` 为trtc的房间号id, 为数字`` 为trtc的sdk app id`` 为服务进入房间的用户id,可以区分谁是机器人<`usersig>` 为trtc 用户的签名 */
+  /** 直播流 URL（必须是直播流地址，支持 rtmp，hls 和 flv, trtc,webrtc,srt等）。trtc地址如下： trtc: //trtc.rtc.qq.com/mps/``?sdkappid=``&userid=``&usersig=<`usersig>``` 为trtc的房间号id, 为数字`` 为trtc的sdk app id`` 为服务进入房间的用户id,可以区分谁是机器人<`usersig>` 为trtc 用户的签名webrtc 支持[LEB](https://cloud.tencent.com/product/leb)的直播流，地址获取请[参考](https://cloud.tencent.com/document/product/267/32720)srt支持地址请[参考](https://ffmpeg.org/ffmpeg-protocols.html#srt) */
   Url: string;
   /** 任务的事件通知信息，用于指定直播流处理的结果。 */
   TaskNotifyConfig: LiveStreamTaskNotifyConfig;
@@ -9843,6 +9905,8 @@ declare interface ProcessLiveStreamRequest {
   AiAnalysisTask?: AiAnalysisTaskInput;
   /** 媒体质检类型任务参数。 */
   AiQualityControlTask?: AiQualityControlTaskInput;
+  /** 智能字幕任务参数。 */
+  SmartSubtitlesTask?: LiveSmartSubtitlesTaskInput;
   /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
   SessionId?: string;
   /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */

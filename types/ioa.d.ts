@@ -72,6 +72,8 @@ declare interface AggrSoftDeviceRow {
   SoftwareId?: number;
   /** 0:win 2:mac */
   OsType?: number;
+  /** 所有权 */
+  AssetType?: string;
 }
 
 /** 自动划分规则数据 */
@@ -94,6 +96,10 @@ declare interface Condition {
   PageSize?: number;
   /** PageNum 获取第几页(只支持32位) */
   PageNum?: number;
+  /** 复杂查询规则条件查询项（支持任意层级AND/OR组合） */
+  RulePayload?: RulePayload | null;
+  /** 规则模式：0-使用旧的FilterGroups，1-使用新的RulePayload */
+  RulePayloadMode?: number | null;
 }
 
 /** 文件鉴定任务分页数据 */
@@ -870,6 +876,28 @@ declare interface RuleItem {
   Values?: string[];
 }
 
+/** 条件筛选 */
+declare interface RulePayload {
+  /** 条件组 */
+  Groups?: RulePayloadItem[] | null;
+  /** 条件关系 or/and */
+  RelateOption?: string | null;
+}
+
+/** 条件 */
+declare interface RulePayloadItem {
+  /** 字段Key */
+  FieldKey?: string | null;
+  /** 选项（eq:等于,neq:不等于,like,nlike,gt:大于,lt:小于,egt:大于等于,elt:小于等于） */
+  Option?: string | null;
+  /** 值 */
+  Value?: string[] | null;
+  /** 嵌套条件组 */
+  Groups?: RulePayloadItem[] | null;
+  /** RelateOption 关系操作符（and/or），用于根级别条件关系 */
+  RelateOption?: string | null;
+}
+
 /** 简单规则表达式 */
 declare interface SimpleRule {
   /** 规则表达式 */
@@ -1065,6 +1093,10 @@ declare interface DescribeAggrSoftDeviceListRequest {
   Name?: string;
   /** 0:win 2:mac */
   OsType?: number;
+  /** 分组ID */
+  GroupId?: number;
+  /** 分组类型 1-终端分组 2-组织架构(账号分组) 3/4-虚拟分组 */
+  GroupType?: number;
 }
 
 declare interface DescribeAggrSoftDeviceListResponse {

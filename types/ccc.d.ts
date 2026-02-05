@@ -8,6 +8,8 @@ declare interface AIAgentInfo {
   AIAgentId?: number;
   /** 智能体名称 */
   AIAgentName?: string;
+  /** 智能体变量名列表 */
+  VariableNames?: string[];
 }
 
 /** AI会话分析结果 */
@@ -406,6 +408,24 @@ declare interface Filter {
   Name: string | null;
   /** 筛选条件值 */
   Values: string[] | null;
+}
+
+/** 闪信记录 */
+declare interface FlashSMSRecord {
+  /** 会话 ID */
+  SessionId?: string;
+  /** 闪信投递号码（被叫） */
+  DeliveryNumber?: string;
+  /** 呼叫关联的系统号码 */
+  ServingNumber?: string;
+  /** 投递状态，1 表示成功，其他表示失败 */
+  DeliveryStatus?: number;
+  /** 投递失败原因 */
+  DeliveryMessage?: string;
+  /** 投递时间戳，Unix 秒级时间戳 */
+  DeliveryTimestamp?: number;
+  /** 送达时间（送达成功），Unix 秒级时间戳 */
+  ArriveTimestamp?: number;
 }
 
 /** 呼转配置 */
@@ -1956,6 +1976,36 @@ declare interface DescribeExtensionsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeFlashSMSListRequest {
+  /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
+  SdkAppId: number;
+  /** 起始时间戳，Unix 秒级时间戳，最大支持近180天。 */
+  StartTimestamp: number;
+  /** 结束时间戳，Unix 秒级时间戳，结束时间与开始时间的区间范围小于90天。 */
+  EndTimestamp: number;
+  /** 闪信投递号码（被叫号码） */
+  DeliveryNumber?: string;
+  /** 呼叫关联的系统号码 */
+  ServingNumber?: string;
+  /** 会话 ID */
+  SessionId?: string;
+  /** 投递结果 1 为成功，其他为失败 */
+  DeliveryStatus?: number;
+  /** 分页大小，默认 20，最大 100 */
+  PageSize?: number;
+  /** 分页页码，从 0 开始 */
+  PageNumber?: number;
+}
+
+declare interface DescribeFlashSMSListResponse {
+  /** 记录总数 */
+  Total?: number;
+  /** 闪信记录列表 */
+  FlashSMSList?: FlashSMSRecord[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeIMCdrListRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
@@ -2859,6 +2909,8 @@ declare interface Ccc {
   DescribeExtension(data: DescribeExtensionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtensionResponse>;
   /** 查询话机列表信息 {@link DescribeExtensionsRequest} {@link DescribeExtensionsResponse} */
   DescribeExtensions(data: DescribeExtensionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtensionsResponse>;
+  /** 查询闪信投递列表 {@link DescribeFlashSMSListRequest} {@link DescribeFlashSMSListResponse} */
+  DescribeFlashSMSList(data: DescribeFlashSMSListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlashSMSListResponse>;
   /** 查询在线客服记录 {@link DescribeIMCdrListRequest} {@link DescribeIMCdrListResponse} */
   DescribeIMCdrList(data: DescribeIMCdrListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIMCdrListResponse>;
   /** 查询在线客服记录(已废弃) {@link DescribeIMCdrsRequest} {@link DescribeIMCdrsResponse} */

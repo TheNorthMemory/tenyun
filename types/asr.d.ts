@@ -776,11 +776,13 @@ declare interface VoicePrintEnrollRequest {
   /** 音频采样率，目前支持16000，单位：Hz，必填 */
   SampleRate: number;
   /** 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M */
-  Data: string;
+  Data?: string;
   /** 说话人昵称 不超过32字节 */
   SpeakerNick?: string;
   /** 分组id, 仅支持大小写字母和下划线的组合，不超过128个字符 */
   GroupId?: string;
+  /** 声纹cos url 注意:仅支持腾讯云cos url 地址 */
+  AudioUrl?: string;
 }
 
 declare interface VoicePrintEnrollResponse {
@@ -818,9 +820,11 @@ declare interface VoicePrintUpdateRequest {
   /** 说话人id， 说话人唯一标识 */
   VoicePrintId: string;
   /** 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M */
-  Data: string;
+  Data?: string;
   /** 说话人昵称 不超过32字节 */
   SpeakerNick?: string;
+  /** 声纹cos url 注意:仅支持腾讯云cos url 地址 */
+  AudioUrl?: string;
 }
 
 declare interface VoicePrintUpdateResponse {
@@ -835,10 +839,12 @@ declare interface VoicePrintVerifyRequest {
   VoiceFormat: number;
   /** 音频采样率，目前支持16000，单位：Hz，必填 */
   SampleRate: number;
-  /** 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M */
-  Data: string;
   /** 说话人id, 说话人唯一标识 */
   VoicePrintId: string;
+  /** 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M */
+  Data?: string;
+  /** 声纹cos url 注意:仅支持腾讯云cos url 地址 */
+  AudioUrl?: string;
 }
 
 declare interface VoicePrintVerifyResponse {

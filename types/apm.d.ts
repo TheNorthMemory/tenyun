@@ -434,6 +434,16 @@ declare interface ApmTag {
   Value: string;
 }
 
+/** APM应用实例漏洞相关信息 */
+declare interface ApmVulnerabilityServiceDetail {
+  /** 应用实例 */
+  ServiceInstance?: string | null;
+  /** 漏洞所在jar包路径 */
+  Path?: string | null;
+  /** 最近发生时间 */
+  LastOccurTime?: number | null;
+}
+
 /** 自动性能剖析配置 */
 declare interface AutoProfilingConfig {
   /** 自动CPU剖析任务开关 */
@@ -862,6 +872,26 @@ declare interface DescribeApmAgentResponse {
   RequestId?: string;
 }
 
+declare interface DescribeApmAllVulCountRequest {
+  /** 秒级时间戳 */
+  StartTime: number;
+  /** 秒级时间戳 */
+  EndTime: number;
+}
+
+declare interface DescribeApmAllVulCountResponse {
+  /** 包含漏洞指标以及业务系统个数 */
+  VulnerabilityList?: ApmMetricRecord[];
+  /** 总漏洞个数 */
+  VulnerabilityCount?: number;
+  /** 严重漏洞个数 */
+  ImportantVulnerabilityCount?: number;
+  /** 高危漏洞个数 */
+  CriticalVulnerabilityCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeApmApplicationConfigRequest {
   /** 实例ID */
   InstanceId: string;
@@ -982,6 +1012,52 @@ declare interface DescribeApmServiceMetricResponse {
   ErrorCount?: number;
   /** 警示应用数 */
   WarningCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeApmVulnerabilityCountRequest {
+  /** APM业务系统ID */
+  InstanceId: string;
+  /** APM应用名称 */
+  ServiceName: string;
+  /** 秒级时间戳 */
+  StartTime: number;
+  /** 秒级时间戳 */
+  EndTime?: number;
+  /** 查询的数据类型，攻击检测为“attack_detect” */
+  Type?: string;
+}
+
+declare interface DescribeApmVulnerabilityCountResponse {
+  /** 包含漏洞指标以及业务系统个数 */
+  VulnerabilityList?: ApmMetricRecord[];
+  /** 总漏洞个数 */
+  VulnerabilityCount?: number;
+  /** 严重漏洞个数 */
+  ImportantVulnerabilityCount?: number;
+  /** 高危漏洞个数 */
+  CriticalVulnerabilityCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeApmVulnerabilityDetailRequest {
+  /** 秒级时间戳 */
+  StartTime: number;
+  /** 秒级时间戳 */
+  EndTime: number;
+  /** APM业务系统ID */
+  InstanceId: string;
+  /** 条件过滤，必填service.name, instrumentation.name, version, vul.id */
+  Filters?: Filter[];
+}
+
+declare interface DescribeApmVulnerabilityDetailResponse {
+  /** 漏洞详情 */
+  Tags?: ApmTag[];
+  /** 漏洞相关业务系统列表 */
+  ServiceInstanceList?: ApmVulnerabilityServiceDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1122,6 +1198,26 @@ declare interface DescribeMetricRecordsResponse {
   Records?: ApmMetricRecord[];
   /** 查询指标结果集条数 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeOPRAllVulCountRequest {
+  /** 秒级时间戳 */
+  StartTime: number;
+  /** 秒级时间戳 */
+  EndTime: number;
+}
+
+declare interface DescribeOPRAllVulCountResponse {
+  /** 包含漏洞指标以及业务系统个数 */
+  VulnerabilityList?: ApmMetricRecord[];
+  /** 总漏洞个数 */
+  VulnerabilityCount?: number;
+  /** 严重漏洞个数 */
+  ImportantVulnerabilityCount?: number;
+  /** 高危漏洞个数 */
+  CriticalVulnerabilityCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1547,6 +1643,8 @@ declare interface Apm {
   DeleteApmSampleConfig(data: DeleteApmSampleConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApmSampleConfigResponse>;
   /** 获取 APM 接入点 {@link DescribeApmAgentRequest} {@link DescribeApmAgentResponse} */
   DescribeApmAgent(data: DescribeApmAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmAgentResponse>;
+  /** 查询用户名下应用安全漏洞数据 {@link DescribeApmAllVulCountRequest} {@link DescribeApmAllVulCountResponse} */
+  DescribeApmAllVulCount(data: DescribeApmAllVulCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmAllVulCountResponse>;
   /** 查询应用配置 {@link DescribeApmApplicationConfigRequest} {@link DescribeApmApplicationConfigResponse} */
   DescribeApmApplicationConfig(data: DescribeApmApplicationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmApplicationConfigResponse>;
   /** 查询apm业务系统与其他产品的关联关系 {@link DescribeApmAssociationRequest} {@link DescribeApmAssociationResponse} */
@@ -1559,6 +1657,10 @@ declare interface Apm {
   DescribeApmSampleConfig(data: DescribeApmSampleConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmSampleConfigResponse>;
   /** 获取 APM 应用指标 {@link DescribeApmServiceMetricRequest} {@link DescribeApmServiceMetricResponse} */
   DescribeApmServiceMetric(data: DescribeApmServiceMetricRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmServiceMetricResponse>;
+  /** 查询漏洞指标 {@link DescribeApmVulnerabilityCountRequest} {@link DescribeApmVulnerabilityCountResponse} */
+  DescribeApmVulnerabilityCount(data: DescribeApmVulnerabilityCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmVulnerabilityCountResponse>;
+  /** 查询漏洞详情 {@link DescribeApmVulnerabilityDetailRequest} {@link DescribeApmVulnerabilityDetailResponse} */
+  DescribeApmVulnerabilityDetail(data: DescribeApmVulnerabilityDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmVulnerabilityDetailResponse>;
   /** 查询应用配置信息 {@link DescribeGeneralApmApplicationConfigRequest} {@link DescribeGeneralApmApplicationConfigResponse} */
   DescribeGeneralApmApplicationConfig(data: DescribeGeneralApmApplicationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralApmApplicationConfigResponse>;
   /** 获取指标数据通用接口（推荐） {@link DescribeGeneralMetricDataRequest} {@link DescribeGeneralMetricDataResponse} */
@@ -1569,6 +1671,8 @@ declare interface Apm {
   DescribeGeneralSpanList(data: DescribeGeneralSpanListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralSpanListResponse>;
   /** 通用指标列表接口 {@link DescribeMetricRecordsRequest} {@link DescribeMetricRecordsResponse} */
   DescribeMetricRecords(data: DescribeMetricRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMetricRecordsResponse>;
+  /** 查询用户名下漏洞数 {@link DescribeOPRAllVulCountRequest} {@link DescribeOPRAllVulCountResponse} */
+  DescribeOPRAllVulCount(data: DescribeOPRAllVulCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOPRAllVulCountResponse>;
   /** 获取应用概览数据 {@link DescribeServiceOverviewRequest} {@link DescribeServiceOverviewResponse} */
   DescribeServiceOverview(data: DescribeServiceOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceOverviewResponse>;
   /** 查询 Tag 数据 {@link DescribeTagValuesRequest} {@link DescribeTagValuesResponse} */

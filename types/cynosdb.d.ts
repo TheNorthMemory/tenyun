@@ -2918,7 +2918,7 @@ declare interface SnapshotBackupConfig {
   BackupIntervalTime?: number;
   /** 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600247=604800，最大为158112000 */
   ReserveDuration?: number;
-  /** 动数据备份触发策略，periodically:自动周期备份,frequent:高频备份 */
+  /** 自动数据备份触发策略，periodically:自动周期备份,frequent:高频备份 */
   BackupTriggerStrategy?: string;
 }
 

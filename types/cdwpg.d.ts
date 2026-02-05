@@ -196,16 +196,48 @@ declare interface InstanceInfo {
   InstanceId?: string;
   /** 访问信息 */
   AccessDetails?: AccessInfo[];
+  /** 集群是否跨az，为0不跨az；为1跨az */
+  IsAz?: number;
+  /** 备可用区 */
+  SecondaryZone?: string;
+  /** 备子网 */
+  SecondarySubnet?: string;
+  /** 访问信息 */
+  AccessInfo?: string;
+  /** GTM节点信息 */
+  GTMNodes?: InstanceNodeGroup[];
 }
 
 /** Instance node */
 declare interface InstanceNode {
   /** id */
-  NodeId: number;
+  NodeId?: number;
   /** cn */
-  NodeType: string;
+  NodeType?: string;
   /** ip */
-  NodeIp: string;
+  NodeIp?: string;
+  /** 私有ip */
+  PrivateNetworkIp?: string;
+  /** 节点角色 */
+  NodeRole?: string;
+  /** 节点名称 */
+  NodeName?: string;
+  /** 规格名称 */
+  SpecName?: string;
+  /** cpu */
+  Cpu?: number;
+  /** 内存 */
+  Memory?: number;
+  /** 数据盘数量 */
+  DataDiskCount?: number;
+  /** 数据盘大小 */
+  DataDiskSize?: number;
+  /** 数据盘类型 */
+  DataDiskType?: string;
+  /** 唯一uuid */
+  UUID?: string;
+  /** 区域 */
+  Zone?: string;
 }
 
 /** 集群节点信息 */
@@ -366,6 +398,8 @@ declare interface ParamDetail {
   ShortDesc?: string;
   /** 参数名 */
   ParameterName?: string;
+  /** 最新修改值 */
+  LatestValue?: string;
 }
 
 /** ParamItem 信息 */
@@ -666,6 +700,8 @@ declare interface DescribeInstanceOperationsResponse {
   TotalCount?: number;
   /** 操作记录具体数据 */
   Operations?: InstanceOperation[] | null;
+  /** 错误信息 */
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -678,6 +714,8 @@ declare interface DescribeInstanceRequest {
 declare interface DescribeInstanceResponse {
   /** 实例描述信息 */
   InstanceInfo?: InstanceInfo;
+  /** 错误信息 */
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -704,6 +742,8 @@ declare interface DescribeInstanceStateResponse {
   ProcessName?: string;
   /** 集群备份任务开启状态 */
   BackupStatus?: number;
+  /** 集群备份任务开启状态2 */
+  BackupOpenStatus?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -804,6 +844,8 @@ declare interface DescribeUpgradeListResponse {
   UpgradeItems?: UpgradeItem[] | null;
   /** 升级记录总数 */
   TotalCount?: string;
+  /** 错误信息 */
+  ErrorMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

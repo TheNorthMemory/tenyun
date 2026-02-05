@@ -2750,9 +2750,9 @@ declare interface OriginHealthStatus {
 
 /** 加速域名源站信息。 */
 declare interface OriginInfo {
-  /** 源站类型，取值有：IP_DOMAIN：IPV4、IPV6 或域名类型源站；COS：腾讯云 COS 对象存储源站；AWS_S3：AWS S3 对象存储源站；ORIGIN_GROUP：源站组类型源站； VOD：云点播；SPACE：源站卸载，当前仅白名单开放；LB：负载均衡，当前仅白名单开放。 */
+  /** 源站类型，取值有：IP_DOMAIN：IPV4、IPV6 或域名类型源站；COS：腾讯云 COS 对象存储源站；AWS_S3：AWS S3 对象存储源站；ORIGIN_GROUP：源站组类型源站；VOD：云点播；SPACE：源站卸载，当前仅白名单开放；LB：负载均衡，当前仅白名单开放。 */
   OriginType: string;
-  /** 源站地址，根据 OriginType 的取值分为以下情况：当 OriginType = IP_DOMAIN 时，该参数请填写 IPv4、IPv6 地址或域名；当 OriginType = COS 时，该参数请填写 COS 桶的访问域名；当 OriginType = AWS_S3，该参数请填写 S3 桶的访问域名；当 OriginType = ORIGIN_GROUP 时，该参数请填写源站组 ID；当 OriginType = VOD 时，该参数请填写云点播应用 ID ；当 OriginType = LB 时，该参数请填写负载均衡实例 ID，该功能当前仅白名单开放；当 OriginType = SPACE 时，该参数请填写源站卸载空间 ID，该功能当前仅白名单开放。 */
+  /** 源站地址，根据 OriginType 的取值分为以下情况：当 OriginType = IP_DOMAIN 时，该参数为 IPv4、IPv6 地址或域名；当 OriginType = COS 时，该参数为 COS 桶的访问域名；当 OriginType = AWS_S3，该参数为 S3 桶的访问域名；当 OriginType = ORIGIN_GROUP 时，该参数为源站组 ID；如果引用了其它站点的源站组，格式为{源站组 ID}@{ZoneID}。例如：og-testorigin@zone-38moq1z10wwwy；当 OriginType = VOD 时，该参数为云点播应用 ID；当 OriginType = LB 时，该参数为负载均衡实例 ID，该功能当前仅白名单开放；如果引用了其它站点的负载均衡，格式为{负载均衡 ID}@{ZoneID}。例如：lb-2rxpamcyqfzg@zone-38moq1z10wwwy；当 OriginType = SPACE 时，该参数为源站卸载空间 ID，该功能当前仅白名单开放。 */
   Origin: string;
   /** 备用源站组 ID，该参数仅在 OriginType = ORIGIN_GROUP 时生效，该字段为旧版能力，调用后控制台无法进行配置修改，如需使用请提交工单咨询。 */
   BackupOrigin?: string;
@@ -2760,7 +2760,7 @@ declare interface OriginInfo {
   PrivateAccess?: string;
   /** 私有鉴权使用参数，该参数仅当源站类型 PrivateAccess = on 时会生效。 */
   PrivateParameters?: PrivateParameter[];
-  /** 自定义回源 HOST 头，该参数仅当 OriginType=IP_DOMAIN 时生效。如果 OriginType=COS 或 AWS_S3 时，回源 HOST 头将与源站域名保持一致。如果OriginType=ORIGIN_GROUP 时，回源 HOST 头遵循源站组内配置，如果没有配置则默认为加速域名。如果 OriginType=VOD 或 SPACE 时，无需配置该头部，按对应的回源域名生效。 */
+  /** 自定义回源 HOST 头，该参数仅当 OriginType = IP_DOMAIN 时生效。当 OriginType 是其它类型源站时，不需要传入该参数，否则会报错。当 OriginType = COS 或 AWS_S3 时，回源 HOST 头将与源站域名保持一致。当 OriginType = ORIGIN_GROUP 时，回源 HOST 头遵循源站组内配置，如果没有配置则默认为加速域名。当 OriginType = VOD 或 SPACE 时，无需配置该头部，按对应的回源域名生效。 */
   HostHeader?: string;
   /** VODEO 子应用 ID。该参数当 OriginType = VODEO 时必填。 */
   VodeoSubAppId?: number;
@@ -2768,7 +2768,7 @@ declare interface OriginInfo {
   VodeoDistributionRange?: string;
   /** VODEO 存储桶 ID，该参数当 OriginType = VODEO 且 VodeoDistributionRange = Bucket 时必填。 */
   VodeoBucketId?: string;
-  /** 云点播回源范围，该参数当 OriginType = VOD 时生效。取值有：all：当前源站对应的云点播应用内所有文件，默认值为 all；bucket：当前源站对应的云点播应用下指定某一个存储桶内的文件。通过参数 VodBucketId 来指定存储桶。 */
+  /** 云点播回源范围，该参数当 OriginType = VOD 时生效。取值有：all：当前源站对应的云点播应用内所有文件；bucket：当前源站对应的云点播应用下指定某一个存储桶内的文件，通过参数 VodBucketId 来指定存储桶。不填写时，默认值为 all。 */
   VodOriginScope?: string;
   /** VOD 存储桶 ID，该参数当 OriginType = VOD 且 VodOriginScope = bucket 时必填。数据来源：云点播专业版应用下存储桶的存储 ID 。 */
   VodBucketId?: string;
@@ -3102,9 +3102,9 @@ declare interface RateLimitingRule {
   Id?: string;
   /** 精准速率限制的名称。 */
   Name?: string;
-  /** 精准速率限制的具体内容，需符合表达式语法，详细规范参见产品文档。 */
+  /** 精准速率限制的具体内容，需符合表达式语法，详细规范参见[产品文档](https://cloud.tencent.com/document/product/1552/125343)。 */
   Condition?: string;
-  /** 速率阈值请求特征的匹配方式， 当 Enabled 为 on 时，此字段必填。当条件有多个时，将组合多个条件共同进行统计计算，条件最多不可超过5条。取值有：http.request.ip：客户端 IP；http.request.xff_header_ip：客户端 IP（优先匹配 XFF 头部）；http.request.uri.path：请求的访问路径；http.request.cookies['session']：名称为session的Cookie，其中session可替换为自己指定的参数；http.request.headers['user-agent']：名称为user-agent的HTTP头部，其中user-agent可替换为自己指定的参数；http.request.ja3：请求的JA3指纹；http.request.uri.query['test']：名称为test的URL查询参数，其中test可替换为自己指定的参数。 */
+  /** 速率阈值请求特征的匹配方式， 当 Enabled 为 on 时，此字段必填。当条件有多个时，将组合多个条件共同进行统计计算，条件最多不可超过5条。取值有：http.request.ip：客户端 IP；http.request.xff_header_ip：客户端 IP（优先匹配 XFF 头部）；http.request.uri.path：请求的访问路径；http.request.cookies['session']：名称为 session 的 Cookie，其中 session 可替换为自己指定的参数；http.request.headers['user-agent']：名称为 user-agent 的 HTTP 头部，其中 user-agent 可替换为自己指定的参数；http.request.ja3：请求的 JA3 指纹；http.request.ja4：请求的 JA4 指纹；http.request.uri.query['test']：名称为 test 的 URL 查询参数，其中 test 可替换为自己指定的参数。 */
   CountBy?: string[];
   /** 精准速率限制在时间范围内的累计拦截次数，取值范围 1 ~ 100000。 */
   MaxRequestThreshold?: number;
@@ -4132,7 +4132,7 @@ declare interface Zone {
   AliasZoneName?: string;
   /** 站点加速区域，取值有： global：全球可用区； mainland：中国大陆可用区； overseas：全球可用区（不含中国大陆）。 */
   Area?: string;
-  /** 站点接入类型，取值有： full：NS 接入类型； partial：CNAME 接入类型； noDomainAccess：无域名接入类型；dnsPodAccess：DNSPod 托管类型，该类型要求您的域名已托管在腾讯云 DNSPod； pages：Pages 类型。 */
+  /** 站点接入类型，取值有： full：NS 接入类型； partial：CNAME 接入类型； noDomainAccess：无域名接入类型；dnsPodAccess：DNSPod 托管类型，该类型要求您的域名已托管在腾讯云 DNSPod； pages：Pages 类型； ai：边缘推理接入类型。 */
   Type?: string;
   /** 站点关联的标签。 */
   Tags?: Tag[];
@@ -4423,13 +4423,13 @@ declare interface CreateAccelerationDomainRequest {
   DomainName: string;
   /** 源站信息。 */
   OriginInfo: OriginInfo;
-  /** 回源协议，取值有：FOLLOW: 协议跟随；HTTP: HTTP协议回源；HTTPS: HTTPS协议回源。不填默认为： FOLLOW。 */
+  /** 回源协议，取值有：FOLLOW：协议跟随；HTTP：HTTP 协议回源；HTTPS：HTTPS 协议回源。不填默认为：FOLLOW。 */
   OriginProtocol?: string;
-  /** HTTP回源端口，取值为1-65535，当OriginProtocol=FOLLOW/HTTP时生效, 不填默认为80。 */
+  /** HTTP 回源端口，默认值80，取值：1～65535。当 OriginProtocol = FOLLOW 或 HTTP 时生效。 */
   HttpOriginPort?: number;
-  /** HTTPS回源端口，取值为1-65535，当OriginProtocol=FOLLOW/HTTPS时生效，不填默认为443。 */
+  /** HTTPS 回源端口，默认值443，取值：1～65535。当 OriginProtocol = FOLLOW 或 HTTPS 时生效。 */
   HttpsOriginPort?: number;
-  /** IPv6状态，取值有：follow：遵循站点IPv6配置；on：开启状态；off：关闭状态。不填默认为：follow。 */
+  /** IPv6 状态，取值有：follow：遵循站点 IPv6 配置；on：开启状态；off：关闭状态。不填默认为：follow。 */
   IPv6Status?: string;
 }
 
@@ -5075,7 +5075,7 @@ declare interface CreateWebSecurityTemplateResponse {
 }
 
 declare interface CreateZoneRequest {
-  /** 站点接入类型。该参数取值如下，不填写时默认为 partial：partial：CNAME 接入；full：NS 接入；noDomainAccess：无域名接入；dnsPodAccess：DNSPod 托管接入，该接入模式要求您的域名已托管在 DNSPod 内。 */
+  /** 站点接入类型。该参数取值如下，不填写时默认为 partial：partial：CNAME 接入；full：NS 接入；noDomainAccess：无域名接入；dnsPodAccess：DNSPod 托管接入，该接入模式要求您的域名已托管在 DNSPod 内；ai：边缘推理接入。 */
   Type?: string;
   /** 站点名称。CNAME/NS 接入的时，请传入二级域名（example.com）作为站点名称；无域名接入时，该值请保留为空。 */
   ZoneName?: string;
@@ -6741,7 +6741,7 @@ declare interface DescribeZonesRequest {
   Offset?: number;
   /** 分页查询限制数目。默认值：20，最大值：100。 */
   Limit?: number;
-  /** 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回当前 appid 下有权限的所有站点信息。详细的过滤条件如下：zone-name：按照站点名称进行过滤；zone-type：按照站点类型进行过滤。可选项： full：NS 接入类型； partial：CNAME 接入类型； partialComposite：无域名接入类型； dnsPodAccess：DNSPod 托管接入类型； pages：Pages 接入类型。 zone-id：按照站点 ID 进行过滤，站点 ID 形如：zone-2noz78a8ev6k；status：按照站点状态进行过滤。可选项： active：NS 已切换； pending：NS 待切换； deleted：已删除。tag-key：按照标签键进行过滤；tag-value： 按照标签值进行过滤；alias-zone-name： 按照同名站点标识进行过滤。模糊查询时支持过滤字段名为 zone-name 或 alias-zone-name。 */
+  /** 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回当前 appid 下有权限的所有站点信息。详细的过滤条件如下：zone-name：按照站点名称进行过滤；zone-type：按照站点类型进行过滤。可选项： full：NS 接入类型； partial：CNAME 接入类型； partialComposite：无域名接入类型； dnsPodAccess：DNSPod 托管接入类型； pages：Pages 接入类型； ai：边缘推理接入类型。zone-id：按照站点 ID 进行过滤，站点 ID 形如：zone-2noz78a8ev6k；status：按照站点状态进行过滤。可选项： active：NS 已切换； pending：NS 待切换； deleted：已删除。tag-key：按照标签键进行过滤；tag-value： 按照标签值进行过滤；alias-zone-name： 按照同名站点标识进行过滤。模糊查询时支持过滤字段名为 zone-name 或 alias-zone-name。 */
   Filters?: AdvancedFilter[];
   /** 可根据该字段对返回结果进行排序，取值有： type：接入类型； area：加速区域； create-time：创建时间； zone-name：站点名称； use-time：最近使用时间； active-status：生效状态。不填写时对返回结果默认按照 create-time 排序。 */
   Order?: string;

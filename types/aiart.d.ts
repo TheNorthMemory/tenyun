@@ -90,24 +90,6 @@ declare interface ChangeClothesResponse {
   RequestId?: string;
 }
 
-declare interface DescribeTemplateToImageJobRequest {
-  /** 任务 ID。 */
-  JobId: string;
-}
-
-declare interface DescribeTemplateToImageJobResponse {
-  /** 当前任务状态码：1：等待中、2：运行中、4：处理失败、5：处理完成。 */
-  Status?: string;
-  /** 任务处理失败错误码。 */
-  ErrorCode?: string;
-  /** 任务处理失败错误信息。 */
-  ErrorMessage?: string;
-  /** 生成图 URL 列表，有效期1小时，请及时保存。 */
-  ResultImage?: string[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface GenerateAvatarRequest {
   /** 图像类型，默认为人像。human：人像头像，仅支持人像图片输入，建议避免上传无人、多人、人像过小的图片。pet：萌宠贴纸，仅支持动物图片输入，建议避免上传无动物、多动物、动物过小的图片。 */
   Type?: string;
@@ -488,26 +470,6 @@ declare interface SubmitMemeJobResponse {
   RequestId?: string;
 }
 
-declare interface SubmitTemplateToImageJobRequest {
-  /** 算法将根据输入的图片，结合文本描述智能生成与之相关的图像。Base64 和 Url 必须提供一个，如果都提供以 Url 为准。图片限制：单边分辨率小于5000且大于50，转成 Base64 字符串后小于 8MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。 */
-  Image: Image;
-  /** 绘画风格当前仅支持美术馆风格（gallerying）。 */
-  Style?: string;
-  /** 特效模式，默认使用人像模式。枚举值： Person： 人像模式，仅支持上传人像图片。 Pet： 宠物模式，支持宠物等非人像图片。默认值：Person */
-  Mode?: string;
-  /** 为生成结果图添加显式水印标识的开关，默认为1。1：添加。0：不添加。其他数值：默认按1处理。建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。 */
-  LogoAdd?: number;
-  /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。 */
-  LogoParam?: LogoParam;
-}
-
-declare interface SubmitTemplateToImageJobResponse {
-  /** 任务 ID。 */
-  JobId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface SubmitTextToImageJobRequest {
   /** 文本描述。算法将根据输入的文本智能生成与之相关的图像。不能为空，推荐使用中文。最多可传1024个 utf-8 字符。 */
   Prompt: string;
@@ -643,8 +605,6 @@ declare interface Aiart {
   (): Versions;
   /** 模特换装 {@link ChangeClothesRequest} {@link ChangeClothesResponse} */
   ChangeClothes(data: ChangeClothesRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeClothesResponse>;
-  /** 查询图片特效任务 {@link DescribeTemplateToImageJobRequest} {@link DescribeTemplateToImageJobResponse} */
-  DescribeTemplateToImageJob(data: DescribeTemplateToImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateToImageJobResponse>;
   /** 百变头像 {@link GenerateAvatarRequest} {@link GenerateAvatarResponse} */
   GenerateAvatar(data?: GenerateAvatarRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateAvatarResponse>;
   /** 局部消除 {@link ImageInpaintingRemovalRequest} {@link ImageInpaintingRemovalResponse} */
@@ -677,8 +637,6 @@ declare interface Aiart {
   SubmitGlamPicJob(data: SubmitGlamPicJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitGlamPicJobResponse>;
   /** 提交表情动图生成任务 {@link SubmitMemeJobRequest} {@link SubmitMemeJobResponse} */
   SubmitMemeJob(data: SubmitMemeJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitMemeJobResponse>;
-  /** 提交图片特效任务 {@link SubmitTemplateToImageJobRequest} {@link SubmitTemplateToImageJobResponse} */
-  SubmitTemplateToImageJob(data: SubmitTemplateToImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTemplateToImageJobResponse>;
   /** 提交混元生图（3.0）任务 {@link SubmitTextToImageJobRequest} {@link SubmitTextToImageJobResponse} */
   SubmitTextToImageJob(data: SubmitTextToImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTextToImageJobResponse>;
   /** 提交文生图（高级版）任务（即将下线） {@link SubmitTextToImageProJobRequest} {@link SubmitTextToImageProJobResponse} */

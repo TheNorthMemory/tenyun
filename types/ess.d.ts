@@ -1440,6 +1440,10 @@ declare interface OutputRisk {
   Content?: string;
   /** 审查出的PDF段落位置信息 */
   Positions?: PositionInfo[];
+  /** 是否已修订 */
+  IsMark?: boolean;
+  /** 是否已忽略 */
+  IsIgnore?: boolean;
   /** 审查依据 */
   RiskBasis?: string;
   /** 风险等级id。1 为最高风险等级，0 为最低风险等级，从[2,n]数字越大风险等级逐渐降低。 */
@@ -1454,6 +1458,8 @@ declare interface OutputRisk {
   CreatorId?: string;
   /** 创建时间 */
   CreatedOn?: number;
+  /** 风险等级别名 */
+  RiskLevelAliasName?: string;
 }
 
 /** 合同文件验签单个结果结构体 */

@@ -398,7 +398,7 @@ declare interface RoomInfo {
   EndDelayTime?: number;
   /** 直播类型：0 常规（默认）1 伪直播 2 RTMP推流直播 */
   LiveType?: number;
-  /** 伪直播回放链接 */
+  /** 伪直播链接。 支持的协议以及格式： 协议：HTTP、HTTPS、RTMP、HLS 。格式：FLV、MP3、MP4、MPEG-TS、MOV、MKV、M4A。视频编码：H.264、VP8。音频编码：AAC、OPUS。注意：伪直播视频规格建议最高使用1080p 30fps，4k视频会有兼容性问题导致直播失败。 */
   RecordLiveUrl?: string;
   /** 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1或2的时候有效 */
   EnableAutoStart?: number;
@@ -842,7 +842,7 @@ declare interface CreateRoomRequest {
   EndDelayTime?: number;
   /** 直播类型：0 常规（默认）1 伪直播 2 RTMP推流直播 */
   LiveType?: number;
-  /** 伪直播链接。 支持的协议以及格式： 协议：HTTP、HTTPS、RTMP、HLS 。格式：FLV、MP3、MP4、MPEG-TS、MOV、MKV、M4A。视频编码：H.264、VP8。音频编码：AAC、OPUS。 */
+  /** 伪直播链接。 支持的协议以及格式： 协议：HTTP、HTTPS、RTMP、HLS 。格式：FLV、MP3、MP4、MPEG-TS、MOV、MKV、M4A。视频编码：H.264、VP8。音频编码：AAC、OPUS。注意：伪直播视频规格建议最高使用1080p 30fps，4k视频会有兼容性问题导致直播失败。 */
   RecordLiveUrl?: string;
   /** 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1或2的时候有效 */
   EnableAutoStart?: number;
@@ -1804,7 +1804,7 @@ declare interface ModifyRoomRequest {
   EndDelayTime?: number;
   /** 直播方式：0 常规模式（默认）1 回放直播模式（伪直播）。 目前支持从回放直播模式（伪直播）改为常规模式，不支持从常规模式改为回放直播模式（伪直播） */
   LiveType?: number;
-  /** 伪直播链接 */
+  /** 伪直播链接。 支持的协议以及格式： 协议：HTTP、HTTPS、RTMP、HLS 。格式：FLV、MP3、MP4、MPEG-TS、MOV、MKV、M4A。视频编码：H.264、VP8。音频编码：AAC、OPUS。注意：伪直播视频规格建议最高使用1080p 30fps，4k视频会有兼容性问题导致直播失败。 */
   RecordLiveUrl?: string;
   /** 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1的时候有效 */
   EnableAutoStart?: number;

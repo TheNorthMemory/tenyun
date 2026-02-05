@@ -386,6 +386,14 @@ declare interface ExecAction {
   Command?: string[];
 }
 
+/** 暴露网络配置 */
+declare interface ExposeNetworkConfig {
+  /** ssh配置 */
+  SSHConfig?: SSHConfig;
+  /** 容器端口暴露到公网配置 */
+  ExposePortConfig?: ExposePortConfig;
+}
+
 /** 暴露端口信息 */
 declare interface ExposePortConfig {
   /** 是否开启暴露容器服务端口 */
@@ -1914,6 +1922,8 @@ declare interface TrainingTaskDetail {
   CallbackUrl?: string | null;
   /** 任务关联的代码仓库配置 */
   CodeRepos?: CodeRepoConfig[];
+  /** 暴露网络配置 */
+  ExposeNetworkConfig?: ExposeNetworkConfig;
 }
 
 /** 出参类型 */
@@ -1987,11 +1997,13 @@ declare interface Usage {
 /** 外部挂载信息 */
 declare interface VolumeMount {
   /** cfs的配置信息 */
-  CFSConfig: CFSConfig;
-  /** 挂载源类型，CFS、COS，默认为CFS */
+  CFSConfig?: CFSConfig;
+  /** 挂载源类型，CFS、COS、PUBLIC_DATA_SOURCE，默认为CFS */
   VolumeSourceType?: string;
   /** 自定义容器内挂载路径 */
   MountPath?: string | null;
+  /** 挂载数据源时的配置信息 */
+  PublicDataSource?: PublicDataSourceFS;
 }
 
 /** 服务的权重 */
@@ -2411,6 +2423,8 @@ declare interface CreateTrainingTaskRequest {
   EncodedStartCmdInfo?: EncodedStartCmdInfo;
   /** 代码仓库配置 */
   CodeRepos?: CodeRepoConfig[];
+  /** 网络暴露配置 */
+  ExposeNetworkConfig?: ExposeNetworkConfig;
 }
 
 declare interface CreateTrainingTaskResponse {

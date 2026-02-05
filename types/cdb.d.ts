@@ -1044,6 +1044,8 @@ declare interface InstanceInfo {
   DeviceBandwidth?: number;
   /** 实例销毁保护状态，on表示开启保护，否则为关闭保护 */
   DestroyProtect?: string;
+  /** TDSQL引擎参数 */
+  CpuModel?: string;
 }
 
 /** 实例预期重启时间 */

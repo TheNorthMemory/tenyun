@@ -176,6 +176,8 @@ declare interface ApiDetailSampleHistory {
   RepLog?: string;
   /** 响应样例 */
   RspLog?: string;
+  /** 完整请求样例 */
+  FullReqLog?: string;
 }
 
 /** 带有请求方式的apiname结构体 */
@@ -284,6 +286,20 @@ declare interface ApiSecCustomSensitiveRule {
   MatchCond?: string[];
   /** 规则是否泛化，默认0表示不泛化 */
   IsPan?: number;
+}
+
+/** 排除无效api资产的规则 */
+declare interface ApiSecExcludeRule {
+  /** 规则名称 */
+  RuleName?: string;
+  /** 匹配类型，regex、prefix、suffix、contain匹配模式 */
+  MatchType?: string;
+  /** 匹配内容 */
+  Content?: string;
+  /** 状态开关 */
+  Status?: number;
+  /** 规则更新时间 */
+  UpdateTime?: number;
 }
 
 /** api提取规则内容 */
@@ -508,7 +524,7 @@ declare interface BotIdDetail {
   Action?: string;
   /** 风险等级 */
   Level?: number;
-  /** 规则类型 */
+  /** "cbe-01": "爬虫型BOT",	"cbe-02": "刷量型BOT",	"cbe-03": "账号穷举型BOT",	"cbe-04": "恶意扫描型BOT",	"cbe-05": "DDoS型BOT",	"cbe-06": "垃圾邮件发送型BOT",	"cbe-07": "社交媒体自动化型BOT",	"cbe-08": "竞争对手数据收集型BOT",	"cbe-09": "恶意软件传播型BOT" */
   BotIdType?: string;
   /** 修改时间 */
   ModifyTime?: number;
@@ -792,6 +808,8 @@ declare interface BotToken {
   Priority?: number;
   /** token有效性配置信息 */
   TokenValidation?: TokenValidation;
+  /** 1表示开启了禁用嵌套功能 */
+  DisableMultiJson?: number;
 }
 
 /** 数据封装 */
@@ -1130,9 +1148,9 @@ declare interface CronJob {
   Days?: number[];
   /** 每个星期的星期几执行 */
   WDays?: number[];
-  /** 开始时间 */
+  /** 开始时间戳 */
   StartTime?: string;
-  /** 结束时间 */
+  /** 结束时间戳 */
   EndTime?: string;
 }
 
@@ -1142,6 +1160,28 @@ declare interface DealData {
   DealNames?: string[];
   /** 大订单号，一个大订单号下可以有多个子订单，说明是同一次下单[{},{}] */
   BigDealId?: string;
+}
+
+/** 独享IP套餐资源信息 */
+declare interface DedicatedIPPkg {
+  /** 资源id */
+  ResourceIds?: string;
+  /** 状态 */
+  Status?: number;
+  /** 地域 */
+  Region?: number;
+  /** 开始时间 */
+  BeginTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 申请数量 */
+  InquireNum?: number;
+  /** 使用数量 */
+  UsedNum?: number;
+  /** 续费标志 */
+  RenewFlag?: number;
+  /** 计费项 */
+  BillingItem?: string;
 }
 
 /** DescribeAntiInfoLeakRules返回的规则元素中的具体的规则元素 */
@@ -1320,6 +1360,8 @@ declare interface DomainInfo {
   AccessStatus?: number;
   /** 域名标签 */
   Labels?: string[];
+  /** saaswaf独享ip状态，0是关闭，1是开启，2是开启中 */
+  PrivateVipStatus?: number;
 }
 
 /** waf 域名扩展套餐 */
@@ -1470,6 +1512,8 @@ declare interface DomainsPartInfo {
   Gzip?: number;
   /** SAAS型WAF域名状态：-2：配置下发失败-1：配置下发中0：DNS解析中1：无DNS解析记录，请接入WAF10：DNS解析未知，域名启用了代理11：DNS解析异常，使用A记录接入WAF IP200：检测源站不可达220：源站不支持长连接311：证书过期312：证书即将过期310：证书异常316：备案异常5：WAF回源已变更负载均衡型WAF域名LB监听器状态：0：操作成功 4：正在绑定LB 6：正在解绑LB 7：解绑LB失败 8：绑定LB失败 10：内部错误 */
   State?: number;
+  /** saaswaf独享ip状态，0是关闭状态，1是开启状态，2是开启中 */
+  PrivateVipStatus?: number;
 }
 
 /** 下载攻击日志记录数据项 */
@@ -1576,6 +1620,8 @@ declare interface FieldWriteConfig {
   EnableBody?: number;
   /** 1:开启 0:不开启 */
   EnableBot?: number;
+  /** 响应方向body1:开启 0:不开启 */
+  EnableResponse?: number;
 }
 
 /** 过滤器 */
@@ -1888,6 +1934,10 @@ declare interface InOutputBotUCBRule {
   ActionList?: UCBActionProportion[];
   /** 惩罚时间 */
   DelayTime?: number;
+  /** 是否为批量规则：0表示场景规则，1表示批量规则 */
+  Batch?: number;
+  /** 24小时内命中数 */
+  HitCount?: number;
 }
 
 /** 自定义规则UCB的Rule生效条件 */
@@ -2024,6 +2074,10 @@ declare interface InstanceInfo {
   BotSecurityPkg?: BotSecurityPkg;
   /** BOT安全监测资源信息 */
   BotMonitorPkg?: BotMonitorPkg;
+  /** 独享ip资源信息 */
+  DedicatedIPPkg?: DedicatedIPPkg;
+  /** 已经配置独享ip的数量 */
+  DedicatedIPCount?: number;
 }
 
 /** 数据封装 */
@@ -2076,6 +2130,12 @@ declare interface IpAccessControlParam {
   ActionType: number;
   /** 备注 */
   Note?: string;
+  /** 任务类型（TimedJob/CronJob） */
+  JobType?: string;
+  /** 任务时间配置 */
+  JobDateTime?: JobDateTime;
+  /** 生效状态 */
+  ValidStatus?: number;
 }
 
 /** ip封堵状态数据 */
@@ -2472,6 +2532,8 @@ declare interface MiniPkg {
   RenewFlag?: number;
   /** 计费项 */
   BillingItem?: string;
+  /** 小程序网关类型 1新网关；0老网关 */
+  GatewayType?: number;
 }
 
 /** 实例的网络配置 */
@@ -2726,6 +2788,8 @@ declare interface PostCLSFlowInfo {
   LogTopicName?: string;
   /** CLS日志集合ID */
   LogTopicID?: string;
+  /** 写配置 */
+  WriteConfig?: FieldWriteConfig;
 }
 
 /** waf产品 */
@@ -3954,6 +4018,10 @@ declare interface CreateRateLimitV2Request {
 declare interface CreateRateLimitV2Response {
   /** 操作结果 */
   BaseInfo?: RateLimitCommonRsp;
+  /** 创建规则的ruleID */
+  LimitRuleID?: number;
+  /** 所属域名 */
+  Domain?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4388,6 +4456,8 @@ declare interface DescribeApiDetailRequest {
 declare interface DescribeApiDetailResponse {
   /** 请求样例，json字符串格式 */
   Log?: string;
+  /** 完整请求样例 */
+  FullReqLog?: string;
   /** 请求参数样例列表 */
   ParameterList?: ApiParameterType[];
   /** 当前场景标签 */
@@ -4629,7 +4699,7 @@ declare interface DescribeBotIdRuleRequest {
   BotId?: string;
   /** 风险等级筛选 */
   Level?: number[];
-  /** 规则类型筛选 */
+  /** 规则类型筛选"cbe-01": "爬虫型BOT", "cbe-02": "刷量型BOT", "cbe-03": "账号穷举型BOT", "cbe-04": "恶意扫描型BOT", "cbe-05": "DDoS型BOT", "cbe-06": "垃圾邮件发送型BOT", "cbe-07": "社交媒体自动化型BOT", "cbe-08": "竞争对手数据收集型BOT", "cbe-09": "恶意软件传播型BOT" */
   BotIdType?: string[];
   /** 规则开关-用于筛选: 0-全部 1-关闭 2-开启 */
   Status?: number;
@@ -4723,6 +4793,8 @@ declare interface DescribeBotSceneUCBRuleRequest {
   ValidStatus?: number;
   /** 规则id */
   RuleId?: string;
+  /** batch表示批量规则、scene表示场景规则，不传表示全部 */
+  Source?: string;
 }
 
 declare interface DescribeBotSceneUCBRuleResponse {
@@ -5347,7 +5419,7 @@ declare interface DescribeOwaspRulesRequest {
   Offset?: number;
   /** 每页容量，默认为10 */
   Limit?: number;
-  /** 排序字段，支持 RuleId, UpdateTime */
+  /** 排序字段，支持 RuleId, ModifyTime */
   By?: string;
   /** 排序方式，支持asc、desc */
   Order?: string;
@@ -6060,6 +6132,12 @@ declare interface ImportIpAccessControlRequest {
 }
 
 declare interface ImportIpAccessControlResponse {
+  /** 成功导入数量 */
+  SuccessCount?: number;
+  /** 导入数量 */
+  TotalCount?: number;
+  /** 执行时间 */
+  Timestamp?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6199,6 +6277,10 @@ declare interface ModifyApiSecSensitiveRuleRequest {
   ApiSecCustomEventRuleNameList?: string[];
   /** 自定义事件规则 */
   ApiSecCustomEventRuleRule?: ApiSecCustomEventRule;
+  /** 无效api排除规则 */
+  CustomApiExcludeRule?: ApiSecExcludeRule;
+  /** 批量操作的时候的无效api排除规则 */
+  ApiExcludeRuleName?: string[];
 }
 
 declare interface ModifyApiSecSensitiveRuleResponse {
@@ -6775,7 +6857,7 @@ declare interface ModifyObjectRequest {
   ObjectId: string;
   /** 改动作类型:Status修改开关，InstanceId绑定实例, Proxy设置代理状态 */
   OpType: string;
-  /** 新的Waf开关状态，如果和已有状态相同认为修改成功 */
+  /** 新的Waf开关状态，如果和已有状态相同认为修改成功。状态可以为0或1 */
   Status?: number;
   /** 新的实例ID，如果和已绑定的实例相同认为修改成功 */
   InstanceId?: string;
@@ -7428,6 +7510,10 @@ declare interface UpdateRateLimitV2Request {
 declare interface UpdateRateLimitV2Response {
   /** 操作结果 */
   BaseInfo?: RateLimitCommonRsp;
+  /** 操作的规则ID */
+  LimitRuleID?: number;
+  /** 所属域名 */
+  Domain?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7499,6 +7585,14 @@ declare interface UpsertCCRuleRequest {
   ActionRatio?: number;
   /** 规则来源 */
   Source?: string;
+  /** forever */
+  JobType?: string;
+  /** 无 */
+  JobDateTime?: JobDateTime;
+  /** 0 */
+  ExpireTime?: number;
+  /** 有效性 */
+  ValidStatus?: number;
 }
 
 declare interface UpsertCCRuleResponse {
