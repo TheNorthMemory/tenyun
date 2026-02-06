@@ -2,12 +2,206 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 钉钉机器人内容模板配置 */
+declare interface DingDingRobotNoticeTmpl {
+  /** 内容模板 */
+  ContentTmpl: string;
+  /** 标题模板 */
+  TitleTmpl?: string;
+}
+
+/** 钉钉机器人通知模板的匹配器 */
+declare interface DingDingRobotNoticeTmplMatcher {
+  /** 匹配状态 Invalid;Trigger 告警触发; Recovery 告警恢复 */
+  MatchingStatus: string[];
+  /** 模板配置 */
+  Template: DingDingRobotNoticeTmpl;
+}
+
+/** 飞书机器人内容模板配置 */
+declare interface FeiShuRobotNoticeTmpl {
+  /** 内容模板 */
+  ContentTmpl: string;
+  /** 标题模板 */
+  TitleTmpl?: string;
+}
+
+/** 飞书机器人通知模板的匹配器 */
+declare interface FeiShuRobotNoticeTmplMatcher {
+  /** 匹配状态 Invalid;Trigger 告警触发; Recovery 告警恢复 */
+  MatchingStatus: string[];
+  /** 模板配置 */
+  Template: FeiShuRobotNoticeTmpl;
+}
+
+/** 内容通知模板元素 */
+declare interface NoticeContentTmplItem {
+  /** 官网通知渠道配置 */
+  QCloudYehe?: QCloudYeheNoticeTmplMatcher[] | null;
+  /** 企业微信机器人通知渠道配置 */
+  WeWorkRobot?: WeWorkRobotNoticeTmplMatcher[] | null;
+  /** 钉钉机器人通知渠道配置 */
+  DingDingRobot?: DingDingRobotNoticeTmplMatcher[] | null;
+  /** 飞书机器人通知渠道配置 */
+  FeiShuRobot?: FeiShuRobotNoticeTmplMatcher[] | null;
+  /** 自定义Webhook通知渠道配置 */
+  Webhook?: WebhookNoticeTmplMatcher[] | null;
+  /** Teams机器人通知渠道配置 */
+  TeamsRobot?: TeamsRobotNoticeTmplMatcher[] | null;
+  /** PagerDutyRobot机器人通知渠道配置 */
+  PagerDutyRobot?: PagerDutyRobotNoticeTmplMatcher[] | null;
+}
+
 /** 分页请求参数 */
 declare interface PageByNoParams {
   /** 每个分页的数量是多少 */
   PerPage?: number | null;
   /** 第几个分页，从1开始 */
   PageNo?: string | null;
+}
+
+/** 告警通知自定义PagerDutyRobot内容模板 */
+declare interface PagerDutyRobotNoticeTmpl {
+  /** 请求体模板 仅支持json */
+  Body?: string;
+  /** 请求头 暂时未支持 */
+  Headers?: PagerDutyRobotNoticeTmplHeader[] | null;
+  /** 标题模板 */
+  TitleTmpl?: string;
+}
+
+/** 告警通知自定义PagerDutyRobot模板中的请求体头部描述 */
+declare interface PagerDutyRobotNoticeTmplHeader {
+  /** http请求中header的key */
+  Key: string;
+  /** http请求中header的value */
+  Values: string[];
+}
+
+/** 告警通知自定义PagerDutyRobot的通知内容模板匹配器 */
+declare interface PagerDutyRobotNoticeTmplMatcher {
+  /** 匹配状态 Invalid; Trigger 告警触发; Recovery 告警恢复 */
+  MatchingStatus?: string[];
+  /** 自定义PagerDutyRobot内容模板 */
+  Template?: PagerDutyRobotNoticeTmpl;
+}
+
+/** 官网通知内容模板 */
+declare interface QCloudYeheNoticeTmpl {
+  /** 邮件通知渠道 */
+  Email?: QCloudYeheNoticeTmplItem;
+  /** 企业微信通知渠道 */
+  QYWX?: QCloudYeheNoticeTmplItem;
+  /** 短信通知渠道 */
+  SMS?: QCloudYeheNoticeTmplItem;
+  /** 语音通知渠道 */
+  Voice?: QCloudYeheNoticeTmplItem;
+  /** 微信通知渠道 */
+  WeChat?: QCloudYeheWeChatNoticeTmplItem;
+  /** 站内信通知渠道 */
+  Site?: QCloudYeheNoticeTmplItem;
+  /** 安灯通知渠道 */
+  Andon?: QCloudYeheNoticeTmplItem;
+}
+
+/** 官网通知内容模板元素 */
+declare interface QCloudYeheNoticeTmplItem {
+  /** 内容模板 */
+  ContentTmpl: string;
+  /** 标题 */
+  TitleTmpl?: string;
+}
+
+/** 官网内容通知模板的匹配器 */
+declare interface QCloudYeheNoticeTmplMatcher {
+  /** 匹配状态 Invalid;Trigger 告警触发; Recovery 告警恢复 */
+  MatchingStatus: string[];
+  /** 模板配置 */
+  Template: QCloudYeheNoticeTmpl;
+}
+
+/** 官网通知内容模板元素 */
+declare interface QCloudYeheWeChatNoticeTmplItem {
+  /** 告警内容模板 */
+  AlarmContentTmpl?: string;
+  /** 告警对象模板 */
+  AlarmObjectTmpl?: string;
+  /** 告警地域模板 */
+  AlarmRegionTmpl?: string;
+  /** 告警时间模板 */
+  AlarmTimeTmpl?: string;
+}
+
+/** 企业微信机器人内容模板配置 */
+declare interface TeamsRobotNoticeTmpl {
+  /** 内容模板 */
+  ContentTmpl: string;
+}
+
+/** 企业微信机器人通知模板的匹配器 */
+declare interface TeamsRobotNoticeTmplMatcher {
+  /** 匹配状态 Invalid;Trigger 告警触发; Recovery 告警恢复 */
+  MatchingStatus: string[];
+  /** 模板配置 */
+  Template: TeamsRobotNoticeTmpl;
+}
+
+/** 企业微信机器人内容模板配置 */
+declare interface WeWorkRobotNoticeTmpl {
+  /** 内容模板 */
+  ContentTmpl: string;
+}
+
+/** 企业微信机器人通知模板的匹配器 */
+declare interface WeWorkRobotNoticeTmplMatcher {
+  /** 匹配状态 Invalid;Trigger 告警触发; Recovery 告警恢复 */
+  MatchingStatus: string[];
+  /** 模板配置 */
+  Template: WeWorkRobotNoticeTmpl;
+}
+
+/** 告警通知自定义Webhook内容模板 */
+declare interface WebhookNoticeTmpl {
+  /** 请求体 */
+  Body: string;
+  /** 请求体的类型，非必填、默认为JSON */
+  BodyContentType?: string | null;
+  /** 请求头 */
+  Headers?: WebhookNoticeTmplHeader[] | null;
+}
+
+/** 告警通知自定义Webhook模板中的请求体头部描述 */
+declare interface WebhookNoticeTmplHeader {
+  /** http请求中header的key */
+  Key: string;
+  /** http请求中header的value */
+  Values: string[];
+}
+
+/** 告警通知自定义Webhook的通知内容模板匹配器 */
+declare interface WebhookNoticeTmplMatcher {
+  /** 匹配状态 Invalid; Trigger 告警触发; Recovery 告警恢复 */
+  MatchingStatus?: string[];
+  /** 自定义Webhook内容模板 */
+  Template?: WebhookNoticeTmpl;
+}
+
+declare interface CreateNoticeContentTmplRequest {
+  /** 模板名称 */
+  TmplName: string;
+  /** 监控类型 */
+  MonitorType: string;
+  /** 模板内容 */
+  TmplContents: NoticeContentTmplItem;
+  /** 模板语言 en/zh */
+  TmplLanguage: string;
+}
+
+declare interface CreateNoticeContentTmplResponse {
+  /** 自定义内容模板ID */
+  TmplID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface DescribeAlarmNotifyHistoriesRequest {
@@ -5762,6 +5956,8 @@ declare namespace V20180724 {
 /** {@link Monitor 腾讯云可观测平台} */
 declare interface Monitor {
   (): Versions;
+  /** 创建通知内容模板 {@link CreateNoticeContentTmplRequest} {@link CreateNoticeContentTmplResponse} */
+  CreateNoticeContentTmpl(data: CreateNoticeContentTmplRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNoticeContentTmplResponse>;
   /** 查询告警通知历史 {@link DescribeAlarmNotifyHistoriesRequest} {@link DescribeAlarmNotifyHistoriesResponse} */
   DescribeAlarmNotifyHistories(data: DescribeAlarmNotifyHistoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmNotifyHistoriesResponse>;
   /** 绑定 Grafana 服务实例 {@link V20180724.BindPrometheusManagedGrafanaRequest} {@link V20180724.BindPrometheusManagedGrafanaResponse} */

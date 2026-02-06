@@ -1852,24 +1852,6 @@ declare interface DescribeTRTCMarketQualityDataResponse {
   RequestId?: string;
 }
 
-declare interface DescribeTRTCMarketQualityMetricDataRequest {
-  /** 用户SdkAppId（如：1400xxxxxx） */
-  SdkAppId: string;
-  /** 查询开始时间，格式为YYYY-MM-DD。（查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天） */
-  StartTime: string;
-  /** 查询结束时间，格式为YYYY-MM-DD。 */
-  EndTime: string;
-  /** 返回数据的粒度，支持设为以下值：d：按天。此时返回查询时间范围内 UTC 时间为零点的数据。h：按小时。此时返回查询时间范围内 UTC 时间为整小时的数据。 */
-  Period: string;
-}
-
-declare interface DescribeTRTCMarketQualityMetricDataResponse {
-  /** TRTC监控数据出参 */
-  Data: TRTCDataResp | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeTRTCMarketScaleDataRequest {
   /** 用户SdkAppId */
   SdkAppId: string;
@@ -1920,24 +1902,6 @@ declare interface DescribeTRTCRealTimeQualityDataRequest {
 declare interface DescribeTRTCRealTimeQualityDataResponse {
   /** TRTC监控数据出参 */
   Data?: TRTCDataResult | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeTRTCRealTimeQualityMetricDataRequest {
-  /** 用户SdkAppId（如：1400xxxxxx） */
-  SdkAppId: string;
-  /** 开始时间，unix时间戳，单位：秒（查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时） */
-  StartTime: number;
-  /** 结束时间，unix时间戳，单位：秒 */
-  EndTime: number;
-  /** 房间ID */
-  RoomId?: string;
-}
-
-declare interface DescribeTRTCRealTimeQualityMetricDataResponse {
-  /** TRTC监控数据出参 */
-  Data: TRTCDataResp | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2779,19 +2743,15 @@ declare interface Trtc {
   DescribeStreamIngest(data: DescribeStreamIngestRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamIngestResponse>;
   /** 查询TRTC数据大盘质量相关数据 {@link DescribeTRTCMarketQualityDataRequest} {@link DescribeTRTCMarketQualityDataResponse} */
   DescribeTRTCMarketQualityData(data: DescribeTRTCMarketQualityDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCMarketQualityDataResponse>;
-  /** @deprecated 查询TRTC数据大盘质量指标 {@link DescribeTRTCMarketQualityMetricDataRequest} {@link DescribeTRTCMarketQualityMetricDataResponse} */
-  DescribeTRTCMarketQualityMetricData(data: DescribeTRTCMarketQualityMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCMarketQualityMetricDataResponse>;
   /** 查询TRTC数据大盘规模数据 {@link DescribeTRTCMarketScaleDataRequest} {@link DescribeTRTCMarketScaleDataResponse} */
   DescribeTRTCMarketScaleData(data: DescribeTRTCMarketScaleDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCMarketScaleDataResponse>;
   /** @deprecated 查询TRTC数据大盘规模指标 {@link DescribeTRTCMarketScaleMetricDataRequest} {@link DescribeTRTCMarketScaleMetricDataResponse} */
   DescribeTRTCMarketScaleMetricData(data: DescribeTRTCMarketScaleMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCMarketScaleMetricDataResponse>;
   /** 查询TRTC实时监控质量数据 {@link DescribeTRTCRealTimeQualityDataRequest} {@link DescribeTRTCRealTimeQualityDataResponse} */
   DescribeTRTCRealTimeQualityData(data: DescribeTRTCRealTimeQualityDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCRealTimeQualityDataResponse>;
-  /** @deprecated 查询TRTC实时监控质量指标 {@link DescribeTRTCRealTimeQualityMetricDataRequest} {@link DescribeTRTCRealTimeQualityMetricDataResponse} */
-  DescribeTRTCRealTimeQualityMetricData(data: DescribeTRTCRealTimeQualityMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCRealTimeQualityMetricDataResponse>;
   /** 查询TRTC实时监控规模数据 {@link DescribeTRTCRealTimeScaleDataRequest} {@link DescribeTRTCRealTimeScaleDataResponse} */
   DescribeTRTCRealTimeScaleData(data: DescribeTRTCRealTimeScaleDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCRealTimeScaleDataResponse>;
-  /** 查询TRTC实时监控规模指标 {@link DescribeTRTCRealTimeScaleMetricDataRequest} {@link DescribeTRTCRealTimeScaleMetricDataResponse} */
+  /** @deprecated 查询TRTC实时监控规模指标 {@link DescribeTRTCRealTimeScaleMetricDataRequest} {@link DescribeTRTCRealTimeScaleMetricDataResponse} */
   DescribeTRTCRealTimeScaleMetricData(data: DescribeTRTCRealTimeScaleMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCRealTimeScaleMetricDataResponse>;
   /** 查询旁路转码计费时长（旧） {@link DescribeTrtcMcuTranscodeTimeRequest} {@link DescribeTrtcMcuTranscodeTimeResponse} */
   DescribeTrtcMcuTranscodeTime(data: DescribeTrtcMcuTranscodeTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrtcMcuTranscodeTimeResponse>;

@@ -1206,6 +1206,8 @@ declare interface TalkAIBotInfo {
   UpdateTime?: number;
   /** 已关联产品信息列表 */
   BoundProducts?: TalkProductInfo[];
+  /** 自定义工具列表，最多可创建10个 */
+  CustomTools?: string;
 }
 
 /** 智能体配置信息。 */
@@ -2339,6 +2341,8 @@ declare interface CreateTWeTalkAIBotRequest {
   AgentConfig?: TalkAgentConfigInfo;
   /** 实例ID */
   InstanceId?: string;
+  /** 自定义工具配置，最多可创建10个 */
+  CustomTools?: string;
 }
 
 declare interface CreateTWeTalkAIBotResponse {
@@ -4915,6 +4919,8 @@ declare interface ModifyTWeTalkAIBotRequest {
   TTSConfig?: TalkTTSConfigInfo;
   /** 智能体配置 */
   AgentConfig?: TalkAgentConfigInfo;
+  /** 自定义工具配置，最多可创建10个 */
+  CustomTools?: string;
 }
 
 declare interface ModifyTWeTalkAIBotResponse {

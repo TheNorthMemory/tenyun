@@ -1779,9 +1779,9 @@ declare namespace V20180717 {
     ClassId?: number;
     /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
     ExpireTime?: string;
-    /** 生成图片的分辨率。* GEM 2.5 可选值：1K、2K、4K；* GEM 3.0 可选值：1K、2K、4K；* Vidu q2 可选值：1080p、2K、4K，默认1080p；* Kling 2.1 可选值：1k、2k；* Hunyuan 3.0 可选值：768:768、768:1024、1024:768、1024:1024、720:1280、1280:720、768:1280、1280:768，不传默认使用1024:1024。 */
+    /** 生成图片的分辨率。* GEM 2.5 可选值：1K、2K、4K，默认1K；* GEM 3.0 可选值：1K、2K、4K，默认1K；* Vidu q2 可选值：1080p、2K、4K，默认1080p；* Kling 2.1 可选值：1k、2k，默认1k；* Hunyuan 3.0 可选值：720P、1080P、2K、4K。 */
     Resolution?: string;
-    /** 指定所生成图片的宽高比。当 ModelName 是 GEM，可选值是 1:1、3:2、2:3、3:4、4:3、4:5、5:4、9:16、16:9 和 21:9；当 ModelName 是 Qwen，则暂不支持。当 ModelName 是 Hunyuan，则暂不支持。当 ModelName 是 Vidu，可选值16:9、9:16、1:1、3:4、4:3、21:9、2:3、3:2。当 ModelName 是 Kling，可选值16:9、9:16、1:1、4:3、3:4、3:2、2:3、21:9。 */
+    /** 指定所生成图片的宽高比。当 ModelName 是 GEM，可选值是 1:1、3:2、2:3、3:4、4:3、4:5、5:4、9:16、16:9 和 21:9；当 ModelName 是 Qwen，则暂不支持。当 ModelName 是 Hunyuan，可选值16:9、9:16、1:1、4:3、3:4、3:2、2:3、21:9。当 ModelName 是 Vidu，可选值16:9、9:16、1:1、3:4、4:3、21:9、2:3、3:2。当 ModelName 是 Kling，可选值16:9、9:16、1:1、4:3、3:4、3:2、2:3、21:9。 */
     AspectRatio?: string;
     /** 是否允许人物或人脸生成。取值有： AllowAdult：允许生成成人； Disallowed：禁止在图片中包含人物或人脸； */
     PersonGeneration?: string;
@@ -1793,7 +1793,7 @@ declare namespace V20180717 {
 
   /** 场景化 AIGC 生图配置。 */
   interface AigcImageSceneInfo {
-    /** AI生图场景类型，可选值：- change_clothes：AI换衣。- product_image：AI生商品图。 */
+    /** AI生图场景类型，可选值：- change_clothes：AI换衣。- product_image：AI生商品图。- outpainting: AI扩图。 */
     Type: string;
     /** 当 Type 为 change_clothes 时有效，则该项为必填，表示AI 换衣生图配置参数。 */
     ChangeClothesConfig?: ChangeClothesConfig;
@@ -1883,7 +1883,7 @@ declare namespace V20180717 {
 
   /** AIGC 统计数据 */
   interface AigcUsageDataItem {
-    /** AIGC规格。取值有：Qwen2.0Gem2.5Gem3.0_1KGem3.0_2KGem3.0_4KSora2Veo3.1FastVeo3.1StandardKling2.5pro_720PKling2.5pro_1080PKlingO1_1080PKling2.0&2.1std_720PKling2.0&2.1pro_1080PKlingO1_720PHailuo02&2.3_1080PHailuo02&2.3_768PHailuo2.3fast_768PHailuo2.3fast_1080PViduQ2_720PViduQ2_1080PViduQ2pro_720PViduQ2pro_1080PViduQ2turbo_720PViduQ2turbo_1080PViduQ2_720P_OffPeakViduQ2_1080P_OffPeakViduQ2turbo_720P_OffPeakViduQ2turbo_1080P_OffPeakViduQ2pro_720P_OffPeakViduQ2pro_1080P_OffPeakHunyuan1.5_720PHunyuan1.5_1080PHunyuan3.0_1KHunyuan3.0_2KHunyuan3.0_4KMingmou1.0_1080PMingmou1.0_1KMingmou1.0_2KMingmou1.0_4KMingmou1.0_720P unknown */
+    /** AIGC规格。取值有：Qwen2.0Hunyuan3.0_1KHunyuan3.0_2KHunyuan3.0_4KMingmou1.0_1KMingmou1.0_2KMingmou1.0_4KViduQ2_T2i_1080PViduQ2_T2i_2KViduQ2_T2i_4KViduQ2_I2i_1080PViduQ2_I2i_2KViduQ2_I2i_4KViduQ2_Refer2i_1080PViduQ2_Refer2i_2KViduQ2_Refer2i_4KKling2.1_T2i_1K2KKling2.1_T2i_4KKling2.1_Refer2i_1KKling2.1_Refer2i_2KKling2.1_Refer2i_4KVeo3.1StandardVeo3.1FastKling2.0&2.1std_720PKling2.0&2.1pro_1080PKling2.5pro_720PKling2.5pro_1080PKlingO1_720PKlingO1_1080PKlingO1_NoVideo_720PKlingO1_NoVideo_1080PKling2.6Kling2.6SoundKling2.6MotionControl_720PKling2.6MotionControl_1080PKling_Avatar_I2v_720PKling_Avatar_I2v_1080PKling_IdentifyfaceHailuo02&2.3_768PHailuo02&2.3_1080PHailuo2.3fast_768PHailuo2.3fast_1080PViduQ2_720PViduQ2_720P_OffPeakViduQ2_1080PViduQ2_1080P_OffPeakViduQ2pro_720PViduQ2pro_720P_OffPeakViduQ2pro_1080PViduQ2pro_1080P_OffPeakViduQ2turbo_720PViduQ2turbo_720P_OffPeakViduQ2turbo_1080PViduQ2turbo_1080P_OffPeakViduQ3pro_720PViduQ3pro_720P_OffPeakViduQ3pro_1080PViduQ3pro_1080P_OffPeakVidu_TemplateEffectHunyuan1.5_720PHunyuan1.5_1080PMingmou1.0_720PMingmou1.0_1080PImageProductImageImageChangeClothesVideoProductShowcaseImageOutPaintingunknown */
     Specification?: string;
     /** 用量数据。 */
     DataSet?: TaskStatDataItem[];
@@ -6071,10 +6071,14 @@ declare namespace V20180717 {
     ClassId?: number;
     /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
     ExpireTime?: string;
-    /** 指定所生成图片的宽高比。输入格式为 W:H。仅生商品图场景有效，可选值为：1:1、3:2、2:3、3:4、4:3、4:5、5:4、16:9、9:16、21:9 */
+    /** 指定所生成图片的宽高比。输入格式为 W:H。本字段在以下场景有效：* 生商品图场景，可选值为：1:1、3:2、2:3、3:4、4:3、4:5、5:4、16:9、9:16、21:9* AI扩图场景。可选值为：1:1、3:2、2:3、3:4、4:3、4:5、5:4、9:16、16:9、21:9，可以配合 ImageWidth 和 ImageHeight 使用，规则如下： 1. 仅指定 AspectRatio 时，根据原图输入进行自适应调整。 2. 指定 AspectRatio 和 ImageWidth 时，ImageHeight 由两者计算得出，反亦是如此。 3. 当AspectRatio、ImageWidth、ImageHeight 同时指定的时候，优先使用ImageWidth、ImageHeight。 */
     AspectRatio?: string;
     /** 输出图片编码格式参数。**仅AI换衣场景有效。** */
     EncodeConfig?: ImageSceneAigcEncodeConfig;
+    /** 输出图像宽度，**仅AI扩图场景有效**。 */
+    ImageWidth?: number;
+    /** 输出图像高度，**仅AI扩图场景有效**。 */
+    ImageHeight?: number;
   }
 
   /** 场景化 AIGC 生图任务信息 */
@@ -8776,7 +8780,7 @@ declare namespace V20180717 {
     StartTime: string;
     /** 结束日期，需大于等于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
     EndTime: string;
-    /** AIGC类型，取值有： Video：视频。 Image：图片。 */
+    /** AIGC类型，取值有： Video：视频。 Image：图片。 Text：文本。 */
     AigcType: string;
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;

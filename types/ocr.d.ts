@@ -134,6 +134,22 @@ declare interface AirTransport {
   TaxAmount?: string;
 }
 
+/** 单题所有答案区域批改信息 */
+declare interface AnswerInfo {
+  /** 手写答案内容，比如选择题的手写的选项、填空题的手写内容 */
+  HandwriteInfo?: string;
+  /** 答案是否正确 */
+  IsCorrect?: boolean;
+  /** 答案分析结果 */
+  AnswerAnalysis?: string;
+  /** 答案区域的4个角点坐标, 是个长度为8的数组[0,1,2,3,4,5,6,7](0,1) 左上角坐标(2,3) 右上角坐标(4,5) 右下角坐标(6,7) 左下角坐标 */
+  HandwriteInfoPositions?: number[] | null;
+  /** 返回正确答案内容QuestionConfigMap配置了（“TrueAnswer”：1）才生效返回 */
+  RightAnswer?: string;
+  /** 返回题目的知识点内容QuestionConfigMap配置了（“KnowledgePoints”：1）才生效返回 */
+  KnowledgePoints?: string[] | null;
+}
+
 /** 银行回单 */
 declare interface BankSlip {
   /** 银行回单信息 */
@@ -1194,6 +1210,16 @@ declare interface MainlandTravelPermitBackInfos {
   IDNumber?: string | null;
   /** 历史通行证号码 */
   HistoryNumber?: string | null;
+}
+
+/** 整张试卷所有题目批改信息 */
+declare interface MarkInfo {
+  /** 题目的题干信息 */
+  MarkItemTitle?: string;
+  /** 批改答案列表（每个小题存在多个答案，比如多个填空区域答案，循序按照从左到右，从上到下排列） */
+  AnswerInfos?: AnswerInfo[];
+  /** 嵌套题目结构（如果有多层嵌套则会返回子题信息，如果没有嵌套题目则返回空） */
+  MarkInfos?: MarkInfo[];
 }
 
 /** 医疗票据信息 */
@@ -3406,6 +3432,26 @@ declare interface DescribeExtractDocAgentJobResponse {
   RequestId?: string;
 }
 
+declare interface DescribeQuestionMarkAgentJobRequest {
+  /** 任务唯一ID。由服务端生成。 */
+  JobId?: string;
+}
+
+declare interface DescribeQuestionMarkAgentJobResponse {
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为""。 */
+  ErrorCode?: string;
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。 */
+  ErrorMessage?: string;
+  /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
+  JobStatus?: string;
+  /** 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负。 */
+  Angle?: number;
+  /** 试题批改信息 */
+  MarkInfos?: MarkInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DriverLicenseOCRRequest {
   /** 图片的 Base64 值。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -5200,6 +5246,34 @@ declare interface SubmitExtractDocAgentJobResponse {
   RequestId?: string;
 }
 
+declare interface SubmitQuestionMarkAgentJobRequest {
+  /** 图片/PDF的 Base64 值。要求Base64不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 示例值：/9j/4AAQSkZJRg.....s97n//2Q== */
+  ImageBase64?: string;
+  /** 图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 示例值：https://ocr-demo-1254418846.cos.ap-guangzhou.myqcloud.com/general/GeneralAccurateOCR/GeneralAccurateOCR1.jpg */
+  ImageUrl?: string;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，默认值为1。 */
+  PdfPageNumber?: number;
+  /** 表示整张试卷批改需要先切题，默认为false */
+  BoolSingleQuestion?: boolean;
+  /** 默认false 表示关闭深度思考 true 表示打开深度思考，更深层次推理分析，速度更慢 */
+  EnableDeepThink?: boolean;
+  /** 题目信息输出配置，当key对应为true表示开启配置开关。 当key为KnowledgePoints value为true 表示输出每道题结构信息中输出知识点内容；当key为TrueAnswer value为true 表示输出每道题的正确答案 ；当key为ReturnAnswerPosition value为false表示不输出手写答案坐标（降低处理耗时，按需输出）； 设置方式参考 {"KnowledgePoints":true,"TrueAnswer":true} */
+  QuestionConfigMap?: string;
+  /** 仅有单题有效，如果切题有多题则不生效，单题批改的时候作为参考答案输入到批改模型中 */
+  ReferenceAnswer?: string;
+}
+
+declare interface SubmitQuestionMarkAgentJobResponse {
+  /** 任务唯一ID。由服务端生成. */
+  JobId?: string;
+  /** 切题题目边框坐标列表 （如果BoolSingleQuestion为true则返回空） */
+  QuestionInfo?: QuestionInfo[];
+  /** 题目切题数量，作为计费题目数总量 */
+  QuestionCount?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface TableOCRRequest {
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -5587,6 +5661,8 @@ declare interface Ocr {
   ClassifyStoreName(data?: ClassifyStoreNameRequest, config?: AxiosRequestConfig): AxiosPromise<ClassifyStoreNameResponse>;
   /** 查询文档抽取Agent任务 {@link DescribeExtractDocAgentJobRequest} {@link DescribeExtractDocAgentJobResponse} */
   DescribeExtractDocAgentJob(data?: DescribeExtractDocAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtractDocAgentJobResponse>;
+  /** 试题批改Agent（查询任务） {@link DescribeQuestionMarkAgentJobRequest} {@link DescribeQuestionMarkAgentJobResponse} */
+  DescribeQuestionMarkAgentJob(data?: DescribeQuestionMarkAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuestionMarkAgentJobResponse>;
   /** 驾驶证识别 {@link DriverLicenseOCRRequest} {@link DriverLicenseOCRResponse} */
   DriverLicenseOCR(data?: DriverLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<DriverLicenseOCRResponse>;
   /** 完税证明识别 {@link DutyPaidProofOCRRequest} {@link DutyPaidProofOCRResponse} */
@@ -5713,6 +5789,8 @@ declare interface Ocr {
   SmartStructuralOCR(data?: SmartStructuralOCRRequest, config?: AxiosRequestConfig): AxiosPromise<SmartStructuralOCRResponse>;
   /** 提交文档抽取Agent任务 {@link SubmitExtractDocAgentJobRequest} {@link SubmitExtractDocAgentJobResponse} */
   SubmitExtractDocAgentJob(data?: SubmitExtractDocAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitExtractDocAgentJobResponse>;
+  /** 试题批改Agent（提交任务） {@link SubmitQuestionMarkAgentJobRequest} {@link SubmitQuestionMarkAgentJobResponse} */
+  SubmitQuestionMarkAgentJob(data?: SubmitQuestionMarkAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitQuestionMarkAgentJobResponse>;
   /** 表格识别（V1) {@link TableOCRRequest} {@link TableOCRResponse} */
   TableOCR(data?: TableOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TableOCRResponse>;
   /** 出租车发票识别 {@link TaxiInvoiceOCRRequest} {@link TaxiInvoiceOCRResponse} */

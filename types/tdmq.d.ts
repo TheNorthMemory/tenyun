@@ -2460,6 +2460,32 @@ declare interface CreateRocketMQGroupResponse {
   RequestId?: string;
 }
 
+declare interface CreateRocketMQGroupV2Request {
+  /** 消费组名称 */
+  GroupId: string;
+  /** 消费组所在的命名空间，4.x 通用集群命名空间固定为: tdmq_default */
+  Namespace: string;
+  /** 是否开启消费 */
+  ReadEnable: boolean;
+  /** 是否开启广播消费 */
+  BroadcastEnable: boolean;
+  /** 集群ID */
+  ClusterId: string;
+  /** 备注 */
+  Remark?: string;
+  /** Group类型（TCP/HTTP） */
+  GroupType?: string;
+  /** Group最大重试次数 */
+  RetryMaxTimes?: number;
+  /** 标签列表 */
+  TagList?: Tag[];
+}
+
+declare interface CreateRocketMQGroupV2Response {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateRocketMQNamespaceRequest {
   /** 集群ID */
   ClusterId: string;
@@ -5389,6 +5415,8 @@ declare interface Tdmq {
   CreateRocketMQEnvironmentRole(data: CreateRocketMQEnvironmentRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQEnvironmentRoleResponse>;
   /** 批量创建 RocketMQ 消费组 {@link CreateRocketMQGroupRequest} {@link CreateRocketMQGroupResponse} */
   CreateRocketMQGroup(data: CreateRocketMQGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQGroupResponse>;
+  /** 创建 RocketMQ 消费组 {@link CreateRocketMQGroupV2Request} {@link CreateRocketMQGroupV2Response} */
+  CreateRocketMQGroupV2(data: CreateRocketMQGroupV2Request, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQGroupV2Response>;
   /** 创建 RocketMQ 命名空间 {@link CreateRocketMQNamespaceRequest} {@link CreateRocketMQNamespaceResponse} */
   CreateRocketMQNamespace(data: CreateRocketMQNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQNamespaceResponse>;
   /** 创建 RocketMQ 角色 {@link CreateRocketMQRoleRequest} {@link CreateRocketMQRoleResponse} */

@@ -498,6 +498,16 @@ declare interface BotActionScopeRuleEntry {
   ValueArray?: string[];
 }
 
+/** 搜索框内容，冒号前面是key, 冒号是操作，值是最后一位，操作（冒号）默认是相等 */
+declare interface BotDataFilter {
+  /** 查询维度 */
+  Entity?: string;
+  /** 操作符 */
+  Operator?: string;
+  /** 操作值，多个值用 */
+  Value?: string;
+}
+
 /** BOT-ID规则信息 */
 declare interface BotIdConfig {
   /** 规则ID */
@@ -810,6 +820,16 @@ declare interface BotToken {
   TokenValidation?: TokenValidation;
   /** 1表示开启了禁用嵌套功能 */
   DisableMultiJson?: number;
+}
+
+/** bot的topN复杂类型 */
+declare interface BotTopItem {
+  /** 对应的key */
+  Key?: string;
+  /** 对应的值 */
+  Value?: number;
+  /** key对应的展示描述语 */
+  Label?: string;
 }
 
 /** 数据封装 */
@@ -4440,6 +4460,30 @@ declare interface DescribeAntiInfoLeakageRulesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeApiAggregateTopNRequest {
+  /** 域名 */
+  Domain: string;
+  /** 需要的Top数，默认5， 最大值100 */
+  TopN: number;
+  /** 开始时间 */
+  StartTs: number;
+  /** 结束时间 */
+  EndTs: number;
+  /** 需要查询TOP的维度名 */
+  Dimension: string;
+  /** 过滤条件 */
+  Filters?: BotDataFilter[];
+  /** 是否查询全域名的三个特殊图标 */
+  GlobalFlag?: boolean;
+}
+
+declare interface DescribeApiAggregateTopNResponse {
+  /** topN结果 */
+  Data?: BotTopItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeApiDetailRequest {
   /** 域名 */
   Domain: string;
@@ -7759,6 +7803,8 @@ declare interface Waf {
   DescribeAntiFakeRules(data: DescribeAntiFakeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiFakeRulesResponse>;
   /** 获取信息防泄漏规则列表 {@link DescribeAntiInfoLeakageRulesRequest} {@link DescribeAntiInfoLeakageRulesResponse} */
   DescribeAntiInfoLeakageRules(data: DescribeAntiInfoLeakageRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiInfoLeakageRulesResponse>;
+  /** 获取Api安全模块的访问日志聚合topN {@link DescribeApiAggregateTopNRequest} {@link DescribeApiAggregateTopNResponse} */
+  DescribeApiAggregateTopN(data: DescribeApiAggregateTopNRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiAggregateTopNResponse>;
   /** 获取Api请求详情信息 {@link DescribeApiDetailRequest} {@link DescribeApiDetailResponse} */
   DescribeApiDetail(data: DescribeApiDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiDetailResponse>;
   /** api资产列表 {@link DescribeApiListVersionTwoRequest} {@link DescribeApiListVersionTwoResponse} */

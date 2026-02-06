@@ -142,6 +142,16 @@ declare interface BackupInfo {
   RestoreTime?: string;
 }
 
+/** 实例备份总大小 */
+declare interface BackupTotalSize {
+  /** 全量备份总大小，单位字节 */
+  SnapshotSize?: number;
+  /** 增量备份总大小 */
+  OplogSize?: number;
+  /** 免费额度 */
+  FreeQuota?: number;
+}
+
 /** 客户端连接信息，包括客户端IP和连接数 */
 declare interface ClientConnection {
   /** 连接的客户端 IP。 */
@@ -1210,10 +1220,28 @@ declare interface DescribeBackupRulesRequest {
 declare interface DescribeBackupRulesResponse {
   /** 备份数据保留期限。单位为：天。 */
   BackupSaveTime?: number;
+  /** 备份频率。备份时间间隔，单位小时。取值12，24 */
+  BackupFrequency?: number;
   /** 自动备份开始时间。 */
   BackupTime?: number;
-  /** 备份方式。- 0：逻辑备份。- 1：物理备份。 */
+  /** 备份方式。- 0：逻辑备份。- 1：物理备份。- 3：快照备份。**说明**:1. 通用版实例支持逻辑备份与物理备份。云盘版实例支持物理备份与快照备份，暂不支持逻辑备份。2. 实例开通存储加密，则备份方式不能为物理备份。 */
   BackupMethod?: number;
+  /** 周几备份，0-6，逗号分割 */
+  ActiveWeekdays?: string;
+  /** 长期备份周期。weekly-按周，monthly-按月，空不开启。 */
+  LongTermInterval?: string;
+  /** 长期备份的日期，周0-6，月1-31 */
+  LongTermActiveDays?: string;
+  /** 长期备份保留时间 */
+  LongTermExpiredDays?: number;
+  /** 增量备份保留时间 */
+  OplogExpiredDays?: number;
+  /** 备份版本号。0-旧备份方式，1-高级备份 */
+  BackupVersion?: number;
+  /** 备份大小 */
+  BackupTotalSize?: BackupTotalSize;
+  /** 告警额度 */
+  AlertThreshold?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2119,7 +2147,7 @@ declare interface SetBackupRulesRequest {
   BackupRetentionPeriod?: number;
   /** 指定每周内执行自动备份的具体日期。- 格式：请输入 0-6 之间的数字代表周日至周六（例如：1 代表周一），多个日期请用英文逗号 , 分隔。- 示例：输入 1,3,5 表示系统将在每周的周一、周三、周五执行备份。- 默认值：不设置，则默认为全周期 (0,1,2,3,4,5,6)，即每日执行备份。 */
   ActiveWeekdays?: string;
-  /** 长期保留周期。支持按周或按月选择特定日期的备份（例如，每月1日、15日的备份数据），将其保留更长周期。- 不开启（默认）：不启用长期保留功能。- 按周保留： 指定为 weekly。- 按月保留： 指定为 monthly。 */
+  /** 长期保留周期。支持按周或按月选择特定日期的备份（例如，每月1日、15日的备份数据），将其保留更长周期。- 不开启（默认）：不启用长期保留功能。- 按周保留： 指定为 weekly。- 按月保留： 指定为 monthly。待废弃，使用LongTermInterval */
   LongTermUnit?: string;
   /** 指定用于长期保留的具体备份日期。此设置仅在 **LongTermUnit** 被设为**weekly** 或 **monthly** 时生效。- 按周（weekly）保留：请输入 0-6 之间的数字来代表周日至周六。多个日期请用英文逗号分隔。- 按月（monthly）保留：请输入 1-31 之间的数字来代表月份中的具体日期。多个日期请用英文逗号分隔。 */
   LongTermActiveDays?: string;
@@ -2129,8 +2157,12 @@ declare interface SetBackupRulesRequest {
   OplogExpiredDays?: number;
   /** 指定备份版本。- 旧版本备份：0。- 开启高级备份：1。 */
   BackupVersion?: number;
-  /** 设置备份数据集存储空间使用率的告警阈值。- 单位：%。- 默认值：100。- 取值范围：[50,300]。 */
+  /** 设置备份数据集存储空间使用率的告警阈值。- 单位：%。- 默认值：100。- 取值范围：[50,300]。待废弃,使用AlertThreshold */
   AlarmWaterLevel?: number;
+  /** 长期保留周期。支持按周或按月选择特定日期的备份（例如，每月1日、15日的备份数据），将其保留更长周期。- 不开启（默认）：不启用长期保留功能。- 按周保留： 指定为 weekly。- 按月保留： 指定为 monthly。 */
+  LongTermInterval?: string;
+  /** 设置备份数据集存储空间使用率的告警阈值。- 单位：%。- 默认值：100。- 取值范围：[50,300]。 */
+  AlertThreshold?: number;
 }
 
 declare interface SetBackupRulesResponse {

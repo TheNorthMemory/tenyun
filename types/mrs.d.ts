@@ -1112,6 +1112,18 @@ declare interface EyeChildItem {
   Se?: BaseItem2;
 }
 
+/** 眼科子结构 平均后结果 */
+declare interface EyeFinalItem {
+  /** 球镜 */
+  Sph?: BaseItem3;
+  /** 柱镜 */
+  Cyl?: BaseItem3;
+  /** 轴位 */
+  Ax?: BaseItem3;
+  /** 等效球镜 */
+  Se?: BaseItem2;
+}
+
 /** 眼科结构体 */
 declare interface EyeItem {
   /** 左眼 */
@@ -1120,6 +1132,10 @@ declare interface EyeItem {
   Right?: EyeChildItem;
   /** 瞳距 */
   Pd?: BaseItem2;
+  /** 右眼平均后结果 */
+  RightFinal?: EyeFinalItem;
+  /** 左眼平均后结果 */
+  LeftFinal?: EyeFinalItem;
 }
 
 /** 眼科报告结构体 */

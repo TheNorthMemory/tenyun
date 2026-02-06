@@ -16,6 +16,14 @@ declare interface APIKeyInfo {
   CreatedAt?: string;
 }
 
+/** 文件存储配置 */
+declare interface CfsStorageSource {
+  /** CFS资源ID */
+  FileSystemId?: string;
+  /** CFS挂载路径 */
+  Path?: string;
+}
+
 /** 沙箱实例对象存储挂载配置 */
 declare interface CosStorageSource {
   /** 对象存储访问域名 */
@@ -234,6 +242,8 @@ declare interface StorageSource {
   Cos?: CosStorageSource;
   /** 镜像卷配置 */
   Image?: ImageStorageSource;
+  /** 文件存储配置 */
+  Cfs?: CfsStorageSource;
 }
 
 /** 标签 */
