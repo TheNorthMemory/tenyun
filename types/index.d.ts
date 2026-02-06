@@ -208,6 +208,7 @@ import Tdai, { Versions as TdaiVersions } from "./tdai";
 import Tdcpg, { Versions as TdcpgVersions } from "./tdcpg";
 import Tdid, { Versions as TdidVersions } from "./tdid";
 import Tdmq, { Versions as TdmqVersions } from "./tdmq";
+import Tdmysql, { Versions as TdmysqlVersions } from "./tdmysql";
 import Tds, { Versions as TdsVersions } from "./tds";
 import Tem, { Versions as TemVersions } from "./tem";
 import Teo, { Versions as TeoVersions } from "./teo";
@@ -460,6 +461,7 @@ export declare type SERVICE_VERSIONS = {
   tdcpg: TdcpgVersions,
   tdid: TdidVersions,
   tdmq: TdmqVersions,
+  tdmysql: TdmysqlVersions,
   tds: TdsVersions,
   tem: TemVersions,
   teo: TeoVersions,
@@ -932,6 +934,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   tdid: Tdid,
   /** {@link Tdmq 消息队列 TDMQ} */
   tdmq: Tdmq,
+  /** {@link Tdmysql TDSQL} */
+  tdmysql: Tdmysql,
   /** {@link Tds 设备安全} */
   tds: Tds,
   /** {@link Tem 弹性微服务} */
