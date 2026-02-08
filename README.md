@@ -3,7 +3,6 @@
 Promise based and chained Tencent Cloud OpenAPI client for NodeJS
 
 [![release](https://img.shields.io/npm/v/tenyun)](https://github.com/TheNorthMemory/tenyun/releases)
-[![advisor](https://snyk.io/advisor/npm-package/tenyun/badge.svg)](https://snyk.io/advisor/npm-package/tenyun)
 [![types](https://img.shields.io/badge/types-included-blue)](https://www.npmjs.com/package/tenyun)
 [![requirement](https://img.shields.io/node/v/tenyun)](https://www.npmjs.com/package/tenyun)
 [![downloads](https://img.shields.io/npm/dm/tenyun)](https://www.npmjs.com/package/tenyun)
