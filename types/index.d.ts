@@ -864,7 +864,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   privatedns: Privatedns,
   /** {@link Pts 云压测} */
   pts: Pts,
-  /** {@link Rce 全栈式风控引擎} */
+  /** {@link Rce 风险识别 RCE} */
   rce: Rce,
   /** {@link Redis 云数据库Redis} */
   redis: Redis,

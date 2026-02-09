@@ -383,11 +383,15 @@ declare interface DeleteDataAgentSessionRequest {
   InstanceId?: string;
   /** 会话ID */
   SessionId?: string;
+  /** 批量删除 会话id 列表 */
+  SessionIds?: string[];
 }
 
 declare interface DeleteDataAgentSessionResponse {
   /** 删除的会话ID */
   SessionId?: string;
+  /** 删除的会话ID列表 */
+  SessionIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

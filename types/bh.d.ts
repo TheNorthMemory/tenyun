@@ -1068,6 +1068,40 @@ declare interface SourceType {
   Target?: string;
 }
 
+/** 运维子任务执行结果 */
+declare interface SubtaskResult {
+  /** 执行日志ID */
+  Id?: string;
+  /** 执行主机实例ID */
+  InstanceId?: string;
+  /** 执行主机名称 */
+  Name?: string;
+  /** 执行主机地域 */
+  ApCode?: string;
+  /** 执行主机外网IP */
+  PublicIp?: string;
+  /** 执行主机内网IP */
+  PrivateIp?: string;
+  /** 运维任务状态 1 - 执行中，2 - 成功， 3 - 失败，4 - 超时 */
+  Status?: number;
+  /** 运维任务失败原因 */
+  Reason?: string;
+  /** 运维任务命令退出码 */
+  ExitCode?: number;
+  /** 运维任务开始时间 */
+  StartTime?: string;
+  /** 运维任务结束时间 */
+  EndTime?: string;
+  /** 运维任务执行结果输出。默认超出16384字节的内容会被自动截断 */
+  StdOut?: string;
+  /** 运维任务执行结果错误 */
+  StdErr?: string;
+  /** 资产名 */
+  DeviceName?: string;
+  /** 资产账号 */
+  Account?: string;
+}
+
 /** 资产标签 */
 declare interface TagFilter {
   /** 标签键 */
@@ -3193,13 +3227,15 @@ declare interface SearchSubtaskResultByIdRequest {
   Limit?: number;
   /** 运维父任务执行日志ID */
   Id?: string;
-  /** 运维父任务执行状态 */
+  /** 运维父任务执行状态。1 - 执行中，2 - 成功，3 - 失败，4 - 超时 */
   Status?: number[];
 }
 
 declare interface SearchSubtaskResultByIdResponse {
   /** 记录数 */
   TotalCount?: number;
+  /** 运维子任务执行结果 */
+  SubtaskResult?: SubtaskResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

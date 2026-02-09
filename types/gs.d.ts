@@ -96,6 +96,8 @@ declare interface AndroidInstance {
   HostServerSerialNumber?: string;
   /** 服务状态。IDLE：未连接ESTABLISHED：连接中 */
   ServiceStatus?: string;
+  /** 安卓实例型号。YS1：默认值，基础型云手机GC0、GC1、GC2：三种性能型云手机 */
+  AndroidInstanceModel?: string;
 }
 
 /** 安卓实例应用黑名单 */
@@ -180,6 +182,8 @@ declare interface AndroidInstanceImage {
   AndroidVersion?: string;
   /** 创建时间 */
   CreateTime?: string;
+  /** 镜像型号。YS1：基础型云手机GC0、GC1、GC2：三种性能型云手机 */
+  AndroidInstanceImageModel?: string;
 }
 
 /** 安卓实例信息 */
@@ -591,6 +595,8 @@ declare interface CreateAndroidInstancesRequest {
   ImageId?: string;
   /** 安卓实例标签列表 */
   Labels?: AndroidInstanceLabel[];
+  /** 安卓实例型号。YS1：默认值，基础型云手机GC0、GC1、GC2：三种性能型云手机 */
+  Model?: string;
 }
 
 declare interface CreateAndroidInstancesResponse {
@@ -823,7 +829,7 @@ declare interface DescribeAndroidInstanceImagesRequest {
   Offset?: number;
   /** 限制量，默认为20，最大值为100 */
   Limit?: number;
-  /** 字段过滤器。Filter 的 Name 有以下值：ImageName：镜像名称ImageState：镜像状态AndroidVersion：安卓版本 */
+  /** 字段过滤器。Filter 的 Name 有以下值：ImageModel：镜像型号ImageName：镜像名称ImageState：镜像状态AndroidVersion：安卓版本 */
   Filters?: Filter[];
 }
 
@@ -927,7 +933,7 @@ declare interface DescribeAndroidInstancesRequest {
   AndroidInstanceGroupIds?: string[];
   /** 实例标签选择器 */
   LabelSelector?: LabelRequirement[];
-  /** 字段过滤器。Filter 的 Name 有以下值：Name：实例名称UserId：实例用户IDHostSerialNumber：宿主机序列号HostServerSerialNumber：机箱序列号 */
+  /** 字段过滤器。Filter 的 Name 有以下值：Name：实例名称UserId：实例用户IDHostSerialNumber：宿主机序列号HostServerSerialNumber：机箱序列号AndroidInstanceModel：实例型号 */
   Filters?: Filter[];
 }
 

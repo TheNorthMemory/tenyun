@@ -710,7 +710,7 @@ declare namespace V20201103 {
   }
 }
 
-/** {@link Rce 全栈式风控引擎} */
+/** {@link Rce 风险识别 RCE} */
 declare interface Rce {
   (): Versions;
   /** IP风险画像 {@link ManageIPPortraitRiskRequest} {@link ManageIPPortraitRiskResponse} */

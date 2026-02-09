@@ -594,6 +594,32 @@ declare interface ClsInfo {
   CreateTime: string;
 }
 
+/** TDSQL-C数据库详情 */
+declare interface ClusterDetail {
+  /** 是否开启公网访问 */
+  IsOpenPubNetAccess?: boolean;
+  /** 最大算力 */
+  MaxCpu?: number | null;
+  /** 最小算力 */
+  MinCpu?: number | null;
+  /** TDSQL-C集群状态 */
+  Status?: string | null;
+  /** 存储用量（单位：MB） */
+  UsedStorage?: number | null;
+  /** 最大存储量（单位：GB） */
+  StorageLimit?: number | null;
+  /** 数据库类型 */
+  DbType?: string;
+  /** 数据库类型 */
+  DbVersion?: string;
+  /** 公网访问状态；open开启，opening开启中，closed关闭，closing关闭中 */
+  WanStatus?: string;
+  /** 数据库集群状态 */
+  ClusterStatus?: string | null;
+  /** serverless状态 */
+  ServerlessStatus?: string;
+}
+
 /** 云开发项目来源 */
 declare interface CodeSource {
   /** 类型, 可能的枚举: "coding","package","package_url","github","gitlab","gitee","rawcode" */
@@ -624,6 +650,12 @@ declare interface CreateIndex {
   IndexName?: string;
   /** 索引结构 */
   MgoKeySchema?: MgoKeySchema;
+}
+
+/** 开通Mysql 结果 */
+declare interface CreateMySQLResult {
+  /** 任务ID */
+  TaskId?: string;
 }
 
 /** 创建用户返回结果 */
@@ -694,12 +726,32 @@ declare interface DeleteUsersResp {
   FailedCount?: number;
 }
 
+/** 查询开通Mysql结果 */
+declare interface DescribeCreateMySQLResult {
+  /** 状态 notexist | init | doing | success | fail */
+  Status?: string;
+  /** 失败原因 */
+  FailReason?: string | null;
+  /** 是否冻结 */
+  FreezeStatus?: boolean;
+}
+
 /** 查询用户返回结果 */
 declare interface DescribeUserListResp {
   /** 用户总数 */
   Total?: number;
   /** 用户列表 */
   UserList?: User[];
+}
+
+/** 销毁 Mysql 结果 */
+declare interface DestroyMySQLResult {
+  /** 是否成功 */
+  IsSuccess?: boolean;
+  /** 任务ID */
+  TaskId?: string;
+  /** 任务名 */
+  TaskName?: string;
 }
 
 /** 本类型用于UpdateTable接口中描述待删除索引信息 */
@@ -1054,6 +1106,44 @@ declare interface MongoConnector {
   InstanceId?: string;
   /** MongoDB数据库名 */
   DatabaseName?: string;
+}
+
+/** MySql 集群详情 */
+declare interface MySQLClusterDetail {
+  /** 集群ID */
+  DbClusterId?: string;
+  /** 网络详情 */
+  NetInfo?: MySQLNetDetail;
+  /** 数据库详情 */
+  DbInfo?: ClusterDetail;
+}
+
+/** TDSQL-C网络信息类型 */
+declare interface MySQLNetDetail {
+  /** 内网地址 */
+  PrivateNetAddress?: string | null;
+  /** 外网地址 */
+  PubNetAddress?: string | null;
+  /** 网络信息（VPCID/SubnetID） */
+  Net?: string | null;
+  /** 是否开通公网 */
+  PubNetAccessEnabled?: boolean;
+  /** vpc id */
+  VpcId?: string;
+  /** vpc name */
+  VpcName?: string;
+  /** 子网ID */
+  SubnetId?: string;
+  /** 子网名 */
+  SubnetName?: string;
+}
+
+/** MySql 任务状态 */
+declare interface MySQLTaskStatus {
+  /** SUCCESS | FAILED | PENDING */
+  Status?: string;
+  /** 状态描述 */
+  StatusDesc?: string;
 }
 
 /** Key-Value类型，模拟的 object 类型 */
@@ -1451,6 +1541,38 @@ declare interface CreateAuthDomainResponse {
 }
 
 declare interface CreateBillDealRequest {
+  /** 当前下单的操作类型，可取[purchase,renew,modify]三种值，分别代表新购，续费，变配。 */
+  DealType: string;
+  /** 购买的产品类型，可取[tcb-baas,tcb-promotion,tcb-package], 分别代表baas套餐、大促包、资源包 */
+  ProductType: string;
+  /** 目标下单产品/套餐Id */
+  PackageId: string;
+  /** 默认只下单不支付，为ture则下单并支付 */
+  CreateAndPay?: boolean;
+  /** 购买时长 */
+  TimeSpan?: number;
+  /** 购买时长单位,按各产品规则可选d(天),m(月),y(年),p(一次性) */
+  TimeUnit?: string;
+  /** 资源唯一标识 */
+  ResourceId?: string;
+  /** 来源可选[qcloud,miniapp]，默认qcloud */
+  Source?: string;
+  /** 资源别名 */
+  Alias?: string;
+  /** 环境id */
+  EnvId?: string;
+  /** 开启超限按量 */
+  EnableExcess?: boolean;
+  /** 变配目标产品/套餐id */
+  ModifyPackageId?: string;
+  /** jsonstr附加信息 */
+  Extension?: string;
+  /** 是否自动选择代金券支付 */
+  AutoVoucher?: boolean;
+  /** 资源类型。代表新购环境（DealType=purchase 并且 ProductType=tcb-baas ）时需要发货哪些资源。可取值：flexdb, cos, cdn, scf */
+  ResourceTypes?: string[];
+  /** 环境标签。 代表新购环境（DealType=purchase 并且 ProductType=tcb-baas ）时需要打的标签。 */
+  EnvTags?: Tag[];
 }
 
 declare interface CreateBillDealResponse {
@@ -1626,6 +1748,28 @@ declare interface CreateHostingDomainRequest {
 }
 
 declare interface CreateHostingDomainResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateMySQLRequest {
+  /** 云开发环境ID */
+  EnvId: string;
+  /** Db类型 1. FLEXDB 2.MYSQL */
+  DbInstanceType: string;
+  /** mysql版本 */
+  MysqlVersion?: string;
+  /** vpc Id */
+  VpcId?: string;
+  /** 子网ID */
+  SubnetId?: string;
+  /** 0 区分表名大小写；1 不区分表名大小写(默认) */
+  LowerCaseTableNames?: string;
+}
+
+declare interface CreateMySQLResponse {
+  /** 开通结果 */
+  Data?: CreateMySQLResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2438,6 +2582,20 @@ declare interface DescribeCloudBaseRunVersionSnapshotResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCreateMySQLResultRequest {
+  /** 云开发环境ID */
+  EnvId: string;
+  /** OpenMysql 返回任务 Id */
+  TaskId?: string;
+}
+
+declare interface DescribeCreateMySQLResultResponse {
+  /** 查询开通结果 */
+  Data?: DescribeCreateMySQLResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCurveDataRequest {
   /** 环境ID */
   EnvId: string;
@@ -2750,6 +2908,34 @@ declare interface DescribeHostingDomainTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMySQLClusterDetailRequest {
+  /** 云开发环境ID */
+  EnvId: string;
+}
+
+declare interface DescribeMySQLClusterDetailResponse {
+  /** 集群详情 */
+  Data?: MySQLClusterDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMySQLTaskStatusRequest {
+  /** 云开发环境ID */
+  EnvId: string;
+  /** 任务Id */
+  TaskId?: string;
+  /** 任务名 */
+  TaskName?: string;
+}
+
+declare interface DescribeMySQLTaskStatusResponse {
+  /** 任务状态 */
+  Data?: MySQLTaskStatus;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePostpayFreeQuotasRequest {
   /** 环境ID */
   EnvId: string;
@@ -2998,6 +3184,18 @@ declare interface DestroyEnvRequest {
 }
 
 declare interface DestroyEnvResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DestroyMySQLRequest {
+  /** 云开发环境ID */
+  EnvId: string;
+}
+
+declare interface DestroyMySQLResponse {
+  /** 销毁结果 */
+  Data?: DestroyMySQLResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3414,7 +3612,7 @@ declare interface Tcb {
   /** 增加安全域名 {@link CreateAuthDomainRequest} {@link CreateAuthDomainResponse} */
   CreateAuthDomain(data: CreateAuthDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuthDomainResponse>;
   /** 创建计费订单 {@link CreateBillDealRequest} {@link CreateBillDealResponse} */
-  CreateBillDeal(data?: CreateBillDealRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBillDealResponse>;
+  CreateBillDeal(data: CreateBillDealRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBillDealResponse>;
   /** 创建云开发网关API {@link CreateCloudBaseGWAPIRequest} {@link CreateCloudBaseGWAPIResponse} */
   CreateCloudBaseGWAPI(data: CreateCloudBaseGWAPIRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudBaseGWAPIResponse>;
   /** 开通容器托管的资源 {@link CreateCloudBaseRunResourceRequest} {@link CreateCloudBaseRunResourceResponse} */
@@ -3423,6 +3621,8 @@ declare interface Tcb {
   CreateCloudBaseRunServerVersion(data: CreateCloudBaseRunServerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudBaseRunServerVersionResponse>;
   /** 创建托管域名 {@link CreateHostingDomainRequest} {@link CreateHostingDomainResponse} */
   CreateHostingDomain(data: CreateHostingDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostingDomainResponse>;
+  /** 开通 MySql {@link CreateMySQLRequest} {@link CreateMySQLResponse} */
+  CreateMySQL(data: CreateMySQLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMySQLResponse>;
   /** 开通后付费资源 {@link CreatePostpayPackageRequest} {@link CreatePostpayPackageResponse} */
   CreatePostpayPackage(data?: CreatePostpayPackageRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePostpayPackageResponse>;
   /** 创建静态托管资源 {@link CreateStaticStoreRequest} {@link CreateStaticStoreResponse} */
@@ -3479,6 +3679,8 @@ declare interface Tcb {
   DescribeCloudBaseRunVersion(data: DescribeCloudBaseRunVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunVersionResponse>;
   /** 查询版本历史 {@link DescribeCloudBaseRunVersionSnapshotRequest} {@link DescribeCloudBaseRunVersionSnapshotResponse} */
   DescribeCloudBaseRunVersionSnapshot(data: DescribeCloudBaseRunVersionSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunVersionSnapshotResponse>;
+  /** 开通 MySql 结果查询 {@link DescribeCreateMySQLResultRequest} {@link DescribeCreateMySQLResultResponse} */
+  DescribeCreateMySQLResult(data: DescribeCreateMySQLResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCreateMySQLResultResponse>;
   /** 查询环境监控曲线 {@link DescribeCurveDataRequest} {@link DescribeCurveDataResponse} */
   DescribeCurveData(data: DescribeCurveDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCurveDataResponse>;
   /** 获取数据库权限 {@link DescribeDatabaseACLRequest} {@link DescribeDatabaseACLResponse} */
@@ -3509,6 +3711,10 @@ declare interface Tcb {
   DescribeGraphData(data: DescribeGraphDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGraphDataResponse>;
   /** 查询静态托管域名任务状态 {@link DescribeHostingDomainTaskRequest} {@link DescribeHostingDomainTaskResponse} */
   DescribeHostingDomainTask(data: DescribeHostingDomainTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostingDomainTaskResponse>;
+  /** 查询Mysql集群信息 {@link DescribeMySQLClusterDetailRequest} {@link DescribeMySQLClusterDetailResponse} */
+  DescribeMySQLClusterDetail(data: DescribeMySQLClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMySQLClusterDetailResponse>;
+  /** 查询Mysql任务状态 {@link DescribeMySQLTaskStatusRequest} {@link DescribeMySQLTaskStatusResponse} */
+  DescribeMySQLTaskStatus(data: DescribeMySQLTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMySQLTaskStatusResponse>;
   /** 查询后付费资源免费用量 {@link DescribePostpayFreeQuotasRequest} {@link DescribePostpayFreeQuotasResponse} */
   DescribePostpayFreeQuotas(data: DescribePostpayFreeQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePostpayFreeQuotasResponse>;
   /** 获取后付费免费额度 {@link DescribePostpayPackageFreeQuotasRequest} {@link DescribePostpayPackageFreeQuotasResponse} */
@@ -3537,6 +3743,8 @@ declare interface Tcb {
   DescribeWxGateways(data?: DescribeWxGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWxGatewaysResponse>;
   /** 销毁环境 {@link DestroyEnvRequest} {@link DestroyEnvResponse} */
   DestroyEnv(data: DestroyEnvRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyEnvResponse>;
+  /** 销毁MySql {@link DestroyMySQLRequest} {@link DestroyMySQLResponse} */
+  DestroyMySQL(data: DestroyMySQLRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyMySQLResponse>;
   /** 销毁静态资源 {@link DestroyStaticStoreRequest} {@link DestroyStaticStoreResponse} */
   DestroyStaticStore(data: DestroyStaticStoreRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyStaticStoreResponse>;
   /** 编辑登录配置 {@link EditAuthConfigRequest} {@link EditAuthConfigResponse} */
