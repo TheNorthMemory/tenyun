@@ -461,6 +461,14 @@ declare namespace V20180717 {
     EnhanceConfig?: EnhanceConfig | null;
   }
 
+  /** 自定义主体信息 */
+  interface AdvancedElementInfo {
+    /** 主体 ID。 */
+    ElementId?: string;
+    /** 主体信息。 */
+    ElementInfo?: string;
+  }
+
   /** 超分配置 */
   interface AdvancedSuperResolutionConfig {
     /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
@@ -475,6 +483,10 @@ declare namespace V20180717 {
     Width?: number;
     /** 目标图片高度，不能超过4096。 */
     Height?: number;
+    /** 目标图片长边长度，不能超过4096。注意：当Mode等于aspect或fixed，且未配置Width和Height字段时使用此配置。 */
+    LongSide?: number;
+    /** 目标图片短边长度，不能超过4096。注意：当Mode等于aspect或fixed，且未配置Width和Height字段时使用此配置。 */
+    ShortSide?: number;
   }
 
   /** 智能分析结果 */
@@ -1809,6 +1821,8 @@ declare namespace V20180717 {
     Status?: string;
     /** 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。 */
     ErrCode?: number;
+    /** 扩展错误码。空字符串表示成功，其它值表示失败。枚举值：RequestLimitExceeded： 模型调用超出并发限制。InvalidParameter.VoilationContent： 输入 prompt 违反内容安全策略。InvalidParameterValue： 参数错误。FailedOperation： 模型任务堆积。InternalError： 内部错误。 */
+    ErrCodeExt?: string;
     /** 错误信息。 */
     Message?: string;
     /** 任务进度，取值范围 [0-100] 。 */
@@ -1883,7 +1897,7 @@ declare namespace V20180717 {
 
   /** AIGC 统计数据 */
   interface AigcUsageDataItem {
-    /** AIGC规格。取值有：Qwen2.0Hunyuan3.0_1KHunyuan3.0_2KHunyuan3.0_4KMingmou1.0_1KMingmou1.0_2KMingmou1.0_4KViduQ2_T2i_1080PViduQ2_T2i_2KViduQ2_T2i_4KViduQ2_I2i_1080PViduQ2_I2i_2KViduQ2_I2i_4KViduQ2_Refer2i_1080PViduQ2_Refer2i_2KViduQ2_Refer2i_4KKling2.1_T2i_1K2KKling2.1_T2i_4KKling2.1_Refer2i_1KKling2.1_Refer2i_2KKling2.1_Refer2i_4KVeo3.1StandardVeo3.1FastKling2.0&2.1std_720PKling2.0&2.1pro_1080PKling2.5pro_720PKling2.5pro_1080PKlingO1_720PKlingO1_1080PKlingO1_NoVideo_720PKlingO1_NoVideo_1080PKling2.6Kling2.6SoundKling2.6MotionControl_720PKling2.6MotionControl_1080PKling_Avatar_I2v_720PKling_Avatar_I2v_1080PKling_IdentifyfaceHailuo02&2.3_768PHailuo02&2.3_1080PHailuo2.3fast_768PHailuo2.3fast_1080PViduQ2_720PViduQ2_720P_OffPeakViduQ2_1080PViduQ2_1080P_OffPeakViduQ2pro_720PViduQ2pro_720P_OffPeakViduQ2pro_1080PViduQ2pro_1080P_OffPeakViduQ2turbo_720PViduQ2turbo_720P_OffPeakViduQ2turbo_1080PViduQ2turbo_1080P_OffPeakViduQ3pro_720PViduQ3pro_720P_OffPeakViduQ3pro_1080PViduQ3pro_1080P_OffPeakVidu_TemplateEffectHunyuan1.5_720PHunyuan1.5_1080PMingmou1.0_720PMingmou1.0_1080PImageProductImageImageChangeClothesVideoProductShowcaseImageOutPaintingunknown */
+    /** AIGC规格。取值有：Qwen2.0Hunyuan3.0_1KHunyuan3.0_2KHunyuan3.0_4KMingmou1.0_1KMingmou1.0_2KMingmou1.0_4KViduQ2_T2i_1080PViduQ2_T2i_2KViduQ2_T2i_4KViduQ2_I2i_1080PViduQ2_I2i_2KViduQ2_I2i_4KViduQ2_Refer2i_1080PViduQ2_Refer2i_2KViduQ2_Refer2i_4KKling2.1_T2i_1K2KKling2.1_T2i_4KKling2.1_Refer2i_1KKling2.1_Refer2i_2KKling2.1_Refer2i_4KVeo3.1StandardVeo3.1FastKling2.0&amp;2.1std_720PKling2.0&amp;2.1pro_1080PKling2.5pro_720PKling2.5pro_1080PKlingO1_720PKlingO1_1080PKlingO1_NoVideo_720PKlingO1_NoVideo_1080PKling2.6Kling2.6SoundKling2.6MotionControl_720PKling2.6MotionControl_1080PKling_Avatar_I2v_720PKling_Avatar_I2v_1080PKling_IdentifyfaceHailuo02&amp;2.3_768PHailuo02&amp;2.3_1080PHailuo2.3fast_768PHailuo2.3fast_1080PViduQ2_720PViduQ2_720P_OffPeakViduQ2_1080PViduQ2_1080P_OffPeakViduQ2_Refer_540P_OffPeakViduQ2_Refer_720PViduQ2_Refer_720P_OffPeakViduQ2_Refer_1080PViduQ2_Refer_1080P_OffPeakViduQ2pro_720PViduQ2pro_720P_OffPeakViduQ2pro_1080PViduQ2pro_1080P_OffPeakViduQ2pro_Refer_720PViduQ2pro_Refer_720P_OffPeakViduQ2pro_Refer_720PViduQ2pro_Refer_720P_OffPeakViduQ2pro_Refer_1080PViduQ2pro_Refer_1080P_OffPeakViduQ2turbo_720PViduQ2turbo_720P_OffPeakViduQ2turbo_1080PViduQ2turbo_1080P_OffPeakViduQ3pro_540PViduQ3pro_540P_OffPeakViduQ3pro_720PViduQ3pro_720P_OffPeakViduQ3pro_1080PViduQ3pro_1080P_OffPeakVidu_TemplateEffectHunyuan1.5_720PHunyuan1.5_1080PMingmou1.0_720PMingmou1.0_1080PImageProductImageImageChangeClothesVideoProductShowcaseImageOutPaintingunknown */
     Specification?: string;
     /** 用量数据。 */
     DataSet?: TaskStatDataItem[];
@@ -1937,6 +1951,8 @@ declare namespace V20180717 {
     Status?: string;
     /** 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。 */
     ErrCode?: number;
+    /** 扩展错误码。枚举值：RequestLimitExceeded： 调用超出并发限制。InvalidParameter.VoilationContent： 输入 prompt 违反内容安全策略。InvalidParameterValue： 参数错误。FailedOperation： 模型任务堆积。InternalError： 内部错误。 */
+    ErrCodeExt?: string;
     /** 错误信息。 */
     Message?: string;
     /** 任务进度，取值范围 [0-100] 。 */
@@ -1989,12 +2005,14 @@ declare namespace V20180717 {
     FileId?: string;
     /** 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。说明：1. 推荐使用小于10M的图片；2. 图片格式的取值为：jpeg，jpg, png。 */
     Url?: string;
-    /** 参考类型，GV模型适用。注意：当使用GV模型时，可作为参考方式,可选asset(素材)、style(风格)。 */
+    /** 参考类型，GV模型适用。注意：当使用 GV 模型时，可作为参考方式，可选值：asset 表示素材、style 表示风格；当使用 Kling 模型以及 Category 为 Video 时，可区分参考视频类型，feature 表示特征参考视频，base 表示待编辑视频。 */
     ReferenceType?: string;
-    /** 主体id.适用模型：Vidu-q2.当需要对图片标识主体时，需要每个图片都带主体id，后续生成时可以通过@主体id的方式使用。 */
+    /** 主体 Id。适用模型：Vidu-q2.当需要对图片标识主体时，需要每个图片都带主体 Id，后续生成时可以通过@主体 Id 的方式使用。当 Category 为 Image 时有效。 */
     ObjectId?: string;
-    /** 适用于Vidu-q2模型。当全部图片携带主体id时，可针对主体设置音色id。 音色列表：https://shengshu.feishu.cn/sheets/EgFvs6DShhiEBStmjzccr5gonOg */
+    /** 适用于 Vidu-q2 模型。当全部图片携带主体 Id 时，可针对主体设置音色 Id。 当 Category 为 Image 时有效。音色列表：https://shengshu.feishu.cn/sheets/EgFvs6DShhiEBStmjzccr5gonOg */
     VoiceId?: string;
+    /** 是否保留视频原声。当 Category 为 Video 时有效。取值如下：Enabled：保留Disabled：不保留 */
+    KeepOriginalSound?: string;
   }
 
   /** AIGC 生视频任务的输出信息。 */
@@ -2667,6 +2685,94 @@ declare namespace V20180717 {
     Switch?: string;
   }
 
+  /** 创建自定义主体输入。 */
+  interface CreateAigcAdvancedCustomElementInput {
+    /** 主体名称。 */
+    ElementName?: string;
+    /** 主体描述。 */
+    ElementDescription?: string;
+    /** 主体参考方式。 */
+    ReferenceType?: string;
+    /** 主体音色。 */
+    ElementVoiceId?: string;
+    /** 主体参考视频。 */
+    ElementVideoList?: string;
+    /** 主体参考图。 */
+    ElementImageList?: string;
+    /** 主体配置标签。 */
+    TagList?: string;
+  }
+
+  /** 创建自定义主体回调输出 */
+  interface CreateAigcAdvancedCustomElementOutput {
+    /** 自定义主体列表。 */
+    InfoList?: AdvancedElementInfo[];
+  }
+
+  /** 创建自定义主体任务信息。 */
+  interface CreateAigcAdvancedCustomElementTask {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 任务状态。枚举值：PROCESSING： 处理中FINISH： 已完成 */
+    Status?: string;
+    /** 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。 */
+    ErrCode?: number;
+    /** 扩展错误码。空字符串表示成功，其它值表示失败。 */
+    ErrCodeExt?: string;
+    /** 错误信息。 */
+    Message?: string;
+    /** 任务进度，取值范围 [0-100] 。 */
+    Progress?: number;
+    /** 创建 AIGC 自定义主体任务的输入信息。 */
+    Input?: CreateAigcAdvancedCustomElementInput;
+    /** 创建 AIGC 自定义主体任务输出信息。 */
+    Output?: CreateAigcAdvancedCustomElementOutput;
+    /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+    /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+  }
+
+  /** 创建自定义音色回调输入信息。 */
+  interface CreateAigcCustomVoiceInput {
+    /** 音色名称。 */
+    VoiceName?: string;
+    /** 音色数据文件获取链接。 */
+    VoiceUrl?: string;
+    /** 历史作品 ID，可通过引用历史作品提供音频素材。 */
+    VideoId?: string;
+  }
+
+  /** 创建自定义音色回调输出信息。 */
+  interface CreateAigcCustomVoiceOutput {
+    /** 自定义音色列表。 */
+    InfoList?: CustomVoiceInfo[];
+  }
+
+  /** 创建自定义音色任务信息。 */
+  interface CreateAigcCustomVoiceTask {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 任务状态。枚举值：PROCESSING： 处理中FINISH： 已完成 */
+    Status?: string;
+    /** 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。 */
+    ErrCode?: number;
+    /** 扩展错误码。空字符串表示成功，其它值表示失败。 */
+    ErrCodeExt?: string;
+    /** 错误信息。 */
+    Message?: string;
+    /** 任务进度，取值范围 [0-100] 。 */
+    Progress?: number;
+    /** 创建 AIGC 自定义音色输入信息。 */
+    Input?: CreateAigcCustomVoiceInput;
+    /** 创建 AIGC 自定义音色输出信息。 */
+    Output?: CreateAigcCustomVoiceOutput;
+    /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+    /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+  }
+
   /** 视频截取雪碧图任务，该结构仅用于对 2017 版[截取雪碧图](https://cloud.tencent.com/document/product/266/8101)接口发起的任务。 */
   interface CreateImageSpriteTask2017 {
     /** 截图雪碧图任务 ID。 */
@@ -2685,6 +2791,14 @@ declare namespace V20180717 {
     ImageSpriteUrlSet?: string[];
     /** 雪碧图子图位置与时间关系 WebVtt 文件地址。 */
     WebVttUrl?: string;
+  }
+
+  /** 自定义音色信息。 */
+  interface CustomVoiceInfo {
+    /** 音色 ID。 */
+    VoiceId?: string;
+    /** 音色信息。 */
+    VoiceInfo?: string;
   }
 
   /** DNS解析验证信息 */
@@ -3367,9 +3481,9 @@ declare namespace V20180717 {
   interface HighlightSegmentItem {
     /** 置信度。 */
     Confidence?: number;
-    /** 片段起始时间偏移。 */
+    /** 片段起始时间偏移。单位：秒 */
     StartTimeOffset?: number;
-    /** 片段结束时间偏移。 */
+    /** 片段结束时间偏移。单位：秒 */
     EndTimeOffset?: number;
   }
 
@@ -3575,6 +3689,20 @@ declare namespace V20180717 {
     Flip?: string;
   }
 
+  /** 图片理解信息。 */
+  interface ImageUnderstandingInfo {
+    /** 图片理解项集合。 */
+    ImageUnderstandingSet?: ImageUnderstandingItem[];
+  }
+
+  /** 图片理解信息项。 */
+  interface ImageUnderstandingItem {
+    /** 模板id。 */
+    Definition?: number;
+    /** 任务输出文件。 */
+    OutputFile?: MPSOutputFileInfo[];
+  }
+
   /** 图片水印模板输入参数 */
   interface ImageWatermarkInput {
     /** 水印图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串。支持 jpeg、png、gif 图片格式。 */
@@ -3655,6 +3783,54 @@ declare namespace V20180717 {
     WatermarkConfigure?: WatermarkConfigureData;
   }
 
+  /** 大模型解析文本转录解析配置 */
+  interface LLMComprehendAsr {
+    /** 文本转录任务开关，可选值：- ON：开启文本转录任务；- OFF：关闭文本转录任务。 */
+    Switch: string;
+  }
+
+  /** 大模型解析文本转录解析配置 */
+  interface LLMComprehendAsrForUpdate {
+    /** 文本转录任务开关，可选值：- ON：开启文本转录任务；- OFF：关闭文本转录任务。 */
+    Switch?: string;
+  }
+
+  /** 大模型解析分段摘要解析配置 */
+  interface LLMComprehendSummary {
+    /** 分段摘要任务开关，可选值：- ON：开启分段摘要任务；- OFF：关闭分段摘要任 */
+    Switch: string;
+    /** 扩展参数，其值为序列化的 json字符串。可参考[扩展参数说明](/document/product/862/104493) */
+    ExtendedParameter?: string;
+  }
+
+  /** 大模型解析分段摘要解析配置 */
+  interface LLMComprehendSummaryForUpdate {
+    /** 分段摘要任务开关，可选值：- ON：开启分段摘要任务；- OFF：关闭分段摘要任 */
+    Switch?: string;
+    /** 扩展参数，其值为序列化的 json字符串。可参考[扩展参数说明](/document/product/862/104493) */
+    ExtendedParameter?: string;
+  }
+
+  /** 大模型解析模板详情。 */
+  interface LLMComprehendTemplateItem {
+    /** 图片异步处理模板唯一标识。 */
+    Definition?: number;
+    /** 图片异步处理模板名称。 */
+    Name?: string;
+    /** 图片异步处理模板描述信息。 */
+    Comment?: string;
+    /** 解析级别，可选值为：- Audio: 音频级解析- Video: 视频级解析 */
+    Level?: string;
+    /** 分段摘要解析配置 */
+    Summary?: LLMComprehendSummary;
+    /** 文本转录解析配置 */
+    Asr?: LLMComprehendAsr;
+    /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    CreateTime?: string;
+    /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    UpdateTime?: string;
+  }
+
   /** License 请求次数统计数据。 */
   interface LicenseUsageDataItem {
     /** 数据所在时间区间的开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。如：当时间粒度为天，2018-12-01T00:00:00+08:00，表示2018年12月1日（含）到2018年12月2日（不含）区间。 */
@@ -3681,11 +3857,15 @@ declare namespace V20180717 {
 
   /** 直播录制信息 */
   interface LiveRecordInfo {
+    /** 直播录制域名 */
+    Domain?: string;
+    /** 直播录制Path */
+    Path?: string;
     /** 直播录制流 ID。 */
     StreamId?: string;
-    /** 录制起始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 录制起始时间，使用 ISO 日期格式。 */
     RecordStartTime?: string;
-    /** 录制结束时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 录制结束时间，使用 ISO 日期格式。 */
     RecordEndTime?: string;
   }
 
@@ -3811,9 +3991,9 @@ declare namespace V20180717 {
 
   /** 按帧标签片段列表 */
   interface MediaAiAnalysisFrameTagSegmentItem {
-    /** 按帧标签起始的偏移时间。 */
+    /** 按帧标签起始的偏移时间。单位：秒 */
     StartTimeOffset?: number;
-    /** 按帧标签结束的偏移时间。 */
+    /** 按帧标签结束的偏移时间。单位：秒 */
     EndTimeOffset?: number;
     /** 时间片段内的标签列表。 */
     TagSet?: MediaAiAnalysisFrameTagItem[];
@@ -3827,7 +4007,7 @@ declare namespace V20180717 {
     CovImgUrl?: string;
     /** 智能精彩集锦的可信度，取值范围是 0 到 100。 */
     Confidence?: number;
-    /** 智能精彩集锦持续时间。 */
+    /** 智能精彩集锦持续时间。单位：秒 */
     Duration?: number;
     /** 智能精彩集锦子片段列表，精彩集锦片段由这些子片段拼接生成。 */
     SegmentSet?: HighlightSegmentItem[];
@@ -4041,7 +4221,7 @@ declare namespace V20180717 {
 
   /** 雪碧图信息 */
   interface MediaImageSpriteItem {
-    /** 雪碧图规格，参见[雪碧图参数模板](https://cloud.tencent.com/document/product/266/33480)。 */
+    /** 雪碧图规格，参见雪碧图参数模板。 */
     Definition?: number;
     /** 雪碧图小图的高度。 */
     Height?: number;
@@ -4085,6 +4265,8 @@ declare namespace V20180717 {
     ReviewInfo?: FileReviewInfo | null;
     /** MPS智能媒资信息 */
     MPSAiMediaInfo?: MPSAiMediaInfo;
+    /** 图片理解信息。 */
+    ImageUnderstandingInfo?: ImageUnderstandingInfo | null;
   }
 
   /** 要处理的源视频信息，视频名称、视频自定义 ID。 */
@@ -5031,10 +5213,18 @@ declare namespace V20180717 {
     OutputConfig?: ProcessImageAsyncOutputConfig;
   }
 
+  /** 图片异步处理扩展参数。 */
+  interface ProcessImageAsyncInputExtendedParameter {
+    /** 输入模型的提示词。 */
+    Prompts?: string[];
+  }
+
   /** 图片异步处理任务的输出。 */
   interface ProcessImageAsyncOutput {
     /** 图片异步处理任务的输出文件信息。 */
     FileInfo?: ProcessImageAsyncOutputFileInfo;
+    /** 图片理解结果。 */
+    OutputText?: string;
   }
 
   /** 图片异步处理任务的输出媒体文件配置。 */
@@ -5077,6 +5267,8 @@ declare namespace V20180717 {
   interface ProcessImageAsyncTaskInput {
     /** 图片异步处理模板ID。 */
     Definition: number;
+    /** 图片异步处理扩展参数。 */
+    ExtendedParameter?: ProcessImageAsyncInputExtendedParameter;
   }
 
   /** 图片异步处理模板详情。 */
@@ -7496,13 +7688,13 @@ declare namespace V20180717 {
   }
 
   interface CreateAigcImageTaskRequest {
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId: number;
-    /** 模型名称。取值：GEM：Gemini；Qwen：千问。Hunyuan：混元。Vidu：生数。Kling：可灵。 */
+    /** 模型名称。取值：Qwen：千问。Hunyuan：混元。Vidu：生数。Kling：可灵。 */
     ModelName: string;
-    /** 模型版本。取值：当 ModelName 是 GEM，可选值为 2.5、3.0；当 ModelName 是 Qwen，可选值为 0925；当 ModelName 是 Hunyuan，可选值为 3.0；当 ModelName 是 Vidu，可选值为 q2；当 ModelName 是 Kling，可选值为 2.1； */
+    /** 模型版本。取值：当 ModelName 是 Qwen，可选值为 0925；当 ModelName 是 Hunyuan，可选值为 3.0；当 ModelName 是 Vidu，可选值为 q2；当 ModelName 是 Kling，可选值为 2.1； */
     ModelVersion: string;
-    /** AIGC 生图任务的输入图片的文件信息。默认只支持指定1个。下列模型可传多张参考图：* GEM 2.5：0～3张图片；* GEM 3.0：0～14张图片；* Vidu q2：0～7张图片，图片支持 png、jpeg、jpg、webp格式，图片像素不能小于 128x128，且比例需要小于1:4或4:1； */
+    /** AIGC 生图任务的输入图片的文件信息。默认只支持指定1个。下列模型可传多张参考图：GEM 2.5：0～3张图片；Vidu q2：0～7张图片，图片支持 png、jpeg、jpg、webp格式，图片像素不能小于 128x128，且比例需要小于1:4或4:1； */
     FileInfos?: AigcImageTaskInputFileInfo[];
     /** 生成图片的提示词。当 FileInfos 为空时，此参数必填。 */
     Prompt?: string;
@@ -7512,6 +7704,8 @@ declare namespace V20180717 {
     EnhancePrompt?: string;
     /** 生图任务的输出媒体文件配置。 */
     OutputConfig?: AigcImageOutputConfig;
+    /** 输入文件的区域信息。当文件url是国外地址时候，可选Oversea。默认Mainland。 */
+    InputRegion?: string;
     /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
     SessionId?: string;
     /** 来源上下文，用于透传用户请求信息，音画质重生完成回调将返回该字段值，最长 1000 个字符。 */
@@ -7552,7 +7746,7 @@ declare namespace V20180717 {
     OutputConfig?: AigcVideoOutputConfig;
     /** 输入文件的区域信息。当文件url是国外地址时候，可选Oversea。默认Mainland。 */
     InputRegion?: string;
-    /** 场景类型。取值如下：当 ModelName 为 Kling 时： motion_control 表示动作控制； avatar_i2v 表示数字人； lip_sync 表示对口型；其他 ModelName 暂不支持。 */
+    /** 场景类型。取值如下：当 ModelName 为 Kling 时： motion_control 表示动作控制； avatar_i2v 表示数字人； lip_sync 表示对口型；当 ModelName 为 Vidu 时： template_effect 表示特效模板；其他 ModelName 暂不支持。 */
     SceneType?: string;
     /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
     SessionId?: string;
@@ -7849,6 +8043,28 @@ declare namespace V20180717 {
   }
 
   interface CreateJustInTimeTranscodeTemplateResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface CreateLLMComprehendTemplateRequest {
+    /** 解析级别，可选值为：- Audio: 音频级解析- Video: 视频级解析 */
+    Level: string;
+    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: number;
+    /** 大模型解析模板名称，长度限制：64 个字符。 */
+    Name?: string;
+    /** 大模型解析模板描述信息，长度限制：256 个字符。 */
+    Comment?: string;
+    /** 分段摘要解析配置 */
+    Summary?: LLMComprehendSummary;
+    /** 文本转录解析配置 */
+    Asr?: LLMComprehendAsr;
+  }
+
+  interface CreateLLMComprehendTemplateResponse {
+    /** 大模型理解模板的唯一标识 */
+    Definition?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -8485,6 +8701,18 @@ declare namespace V20180717 {
   }
 
   interface DeleteJustInTimeTranscodeTemplateResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DeleteLLMComprehendTemplateRequest {
+    /** 大模型理解模板的唯一标识 */
+    Definition: number;
+    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: number;
+  }
+
+  interface DeleteLLMComprehendTemplateResponse {
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -9307,6 +9535,26 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface DescribeLLMComprehendTemplatesRequest {
+    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: number;
+    /** 大模型解析模板唯一标识过滤条件，数组长度最大值：100。 */
+    Definitions?: number[];
+    /** 分页偏移量，默认值：0。 */
+    Offset?: number;
+    /** 返回记录条数，默认值：10，最大值：100。 */
+    Limit?: number;
+  }
+
+  interface DescribeLLMComprehendTemplatesResponse {
+    /** 符合过滤条件的记录总数。 */
+    TotalCount?: number;
+    /** 图片异步处理模板详情列表。 */
+    LLMComprehendTemplateSet?: LLMComprehendTemplateItem[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeLicenseUsageDataRequest {
     /** 起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
     StartTime: string;
@@ -9388,7 +9636,7 @@ declare namespace V20180717 {
     EndTime: string;
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
-    /** 查询视频处理任务类型，目前支持的任务类型包括： Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去除水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生 QualityInspect: 音画质检测 VideoHighlight: 视频智能集锦 VideoTag: 视频智能标签 VideoClassification: 视频智能分类 VideoCover: 视频智能封面 VideoSegment: 视频智能拆条 VideoProduce: 视频制作 MediaCast: 媒体转推Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）VoiceTranslation: 语音翻译JITTranscoding: 即时转码VideoSnapshot: 视频截图JITEncryption: 即时加密 */
+    /** 查询视频处理任务类型，目前支持的任务类型包括： Transcoding: 普通转码 Transcoding-TESHD: 极速高清转码 Editing: 视频编辑 Editing-TESHD: 极速高清视频编辑 AdaptiveBitrateStreaming: 自适应码流 ContentAudit: 内容审核 ContentRecognition: 内容识别 RemoveWatermark: 去除水印 ExtractTraceWatermark: 提取水印 AddTraceWatermark: 添加水印 RebuildMedia: 音画质重生 QualityInspect: 音画质检测 VideoHighlight: 视频智能集锦 VideoTag: 视频智能标签 VideoClassification: 视频智能分类 VideoCover: 视频智能封面 VideoSegment: 视频智能拆条 VideoProduce: 视频制作 MediaCast: 媒体转推Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）VoiceTranslation: 语音翻译JITTranscoding: 即时转码VideoSnapshot: 视频截图JITEncryption: 即时加密MediaEnhancement: 音视频增强ImageCompression: 图片压缩ImageEnhancement: 图片增强ImageSuperResolution: 图片超分ImageAdvanceCompression: 图片高级压缩ImageUnderstanding: 图片理解AddTraceWatermark: 添加溯源水印AddBlindWatermark: 添加盲水印AddNagraWatermark: 添加NAGRA数字水印ExtractTraceWatermark: 提取溯源水印ExtractBlindWatermark: 提取盲水印ExtractNagraWatermark: 提取NAGRA数字水印 */
     Type?: string;
   }
 
@@ -9740,7 +9988,7 @@ declare namespace V20180717 {
   interface DescribeTaskDetailRequest {
     /** 视频处理任务的任务 ID。 */
     TaskId: string;
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
   }
 
@@ -9749,11 +9997,11 @@ declare namespace V20180717 {
     TaskType?: string;
     /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成；ABORTED：已终止。 */
     Status?: string;
-    /** 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 任务的创建时间，采用 ISO 日期格式。 */
     CreateTime?: string;
-    /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 任务开始执行的时间，采用 ISO 日期格式。 */
     BeginProcessTime?: string;
-    /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 任务执行完毕的时间，采用 ISO 日期格式。 */
     FinishTime?: string;
     /** 视频处理任务信息，仅当 TaskType 为 Procedure，该字段有值。 */
     ProcedureTask?: ProcedureTask | null;
@@ -9815,6 +10063,10 @@ declare namespace V20180717 {
     ProcessImageAsyncTask?: ProcessImageAsync;
     /** 提取数字水印任务信息，仅当 TaskType 为 ExtractBlindWatermark，该字段有值。 */
     ExtractBlindWatermarkTask?: ExtractBlindWatermarkTask;
+    /** 创建自定义主体信息，仅当 TaskType 为 CreateAigcAdvancedCustomElement，该字段有值。 */
+    CreateAigcAdvancedCustomElementTask?: CreateAigcAdvancedCustomElementTask;
+    /** 创建自定义音色信息，仅当 TaskType 为 CreateAigcCustomVoice，该字段有值。 */
+    CreateAigcCustomVoiceTask?: CreateAigcCustomVoiceTask;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -10184,8 +10436,10 @@ declare namespace V20180717 {
     SubAppId: number;
     /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。 */
     FileId: string;
+    /** 大模型理解模板的唯一标识 */
+    Definition?: number;
     /** 需要导入知识库任务类型，可选值有：- AiAnalysis.DescriptionTask- SmartSubtitle.AsrFullTextTask */
-    ImportTasks: string[];
+    ImportTasks?: string[];
   }
 
   interface ImportMediaKnowledgeResponse {
@@ -10633,6 +10887,28 @@ declare namespace V20180717 {
   }
 
   interface ModifyJustInTimeTranscodeTemplateResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface ModifyLLMComprehendTemplateRequest {
+    /** 大模型理解模板的唯一标识 */
+    Definition: number;
+    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: number;
+    /** 大模型解析模板名称，长度限制：64 个字符。 */
+    Name?: string;
+    /** 大模型解析模板描述信息，长度限制：256 个字符。 */
+    Comment?: string;
+    /** 解析模型，可选值为：- Basic: 基础模型- Pro: 优化模型 */
+    Model?: string;
+    /** 分段摘要解析配置 */
+    Summary?: LLMComprehendSummaryForUpdate;
+    /** 文本转录解析配置 */
+    Asr?: LLMComprehendAsrForUpdate;
+  }
+
+  interface ModifyLLMComprehendTemplateResponse {
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -11110,10 +11386,12 @@ declare namespace V20180717 {
   }
 
   interface ProcessImageAsyncRequest {
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId: number;
-    /** 需要进行图片处理的FileId。 */
-    FileId: string;
+    /** 需要进行图片处理的FileId。不能与Url同时输入。 */
+    FileId?: string;
+    /** 需要进行图片处理的Url。不能与FileId同时输入。 */
+    Url?: string;
     /** 图片处理参数。 */
     ImageTaskInput?: ProcessImageAsyncTaskInput;
     /** 图片处理任务的输出媒体文件配置。 */
@@ -11560,7 +11838,7 @@ declare namespace V20180717 {
   }
 
   interface SearchMediaRequest {
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 文件 ID 集合，匹配集合中的任意元素。数组长度限制：10。单个 ID 长度限制：40个字符。 */
     FileIds?: string[];
@@ -11576,7 +11854,7 @@ declare namespace V20180717 {
     Tags?: string[];
     /** 文件类型。匹配集合中的任意元素：Video: 视频文件Audio: 音频文件Image: 图片文件 */
     Categories?: string[];
-    /** 媒体文件来源集合，来源取值参见 [SourceType](https://cloud.tencent.com/document/product/266/31773)。数组长度限制：10。 */
+    /** 媒体文件来源集合，来源取值参见 SourceType。数组长度限制：10。 */
     SourceTypes?: string[];
     /** 推流直播码集合。匹配集合中的任意元素。数组长度限制：10。 */
     StreamIds?: string[];
@@ -11584,7 +11862,7 @@ declare namespace V20180717 {
     CreateTime?: TimeRange;
     /** 匹配过期时间在此时间段内的文件，无法检索到已过期文件。包含所指定的头尾时间点。 */
     ExpireTime?: TimeRange;
-    /** 媒体文件存储地区，如 ap-chongqing，参见[地域列表](https://cloud.tencent.com/document/product/266/9760)。单个存储地区长度限制：20个字符。数组长度限制：20。 */
+    /** 媒体文件存储地区，如 ap-chongqing，参见地域列表。单个存储地区长度限制：20个字符。数组长度限制：20。 */
     StorageRegions?: string[];
     /** 存储类型数组。可选值有： STANDARD：标准存储。 STANDARD_IA：低频存储。 ARCHIVE：归档存储。 DEEP_ARCHIVE：深度归档存储。 */
     StorageClasses?: string[];
@@ -11608,7 +11886,7 @@ declare namespace V20180717 {
     Limit?: number;
     /** （不推荐：应使用 Names、NamePrefixes 或 Descriptions 替代）搜索文本，模糊匹配媒体文件名称或描述信息，匹配项越多，匹配度越高，排序越优先。长度限制：64个字符。 */
     Text?: string;
-    /** （不推荐：应使用 SourceTypes 替代）媒体文件来源，来源取值参见 [SourceType](https://cloud.tencent.com/document/product/266/31773)。 */
+    /** （不推荐：应使用 SourceTypes 替代）媒体文件来源，来源取值参见 SourceType。 */
     SourceType?: string;
     /** （不推荐：应使用 StreamIds 替代）推流直播码。 */
     StreamId?: string;
@@ -11620,6 +11898,10 @@ declare namespace V20180717 {
     Vids?: string[];
     /** 该字段已无效。 */
     Vid?: string;
+    /** 直播推流Domain，当媒资来源是直播录制时有效。 */
+    StreamDomains?: string[];
+    /** 直播推流Path，当媒资来源是直播录制时有效。 */
+    StreamPaths?: string[];
   }
 
   interface SearchMediaResponse {
@@ -11839,6 +12121,8 @@ declare interface Vod {
   CreateImageSpriteTemplate(data: V20180717.CreateImageSpriteTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateImageSpriteTemplateResponse>;
   /** 创建即时转码模板 {@link V20180717.CreateJustInTimeTranscodeTemplateRequest} {@link V20180717.CreateJustInTimeTranscodeTemplateResponse} */
   CreateJustInTimeTranscodeTemplate(data: V20180717.CreateJustInTimeTranscodeTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateJustInTimeTranscodeTemplateResponse>;
+  /** 创建大模型解析模板 {@link V20180717.CreateLLMComprehendTemplateRequest} {@link V20180717.CreateLLMComprehendTemplateResponse} */
+  CreateLLMComprehendTemplate(data: V20180717.CreateLLMComprehendTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateLLMComprehendTemplateResponse>;
   /** 创建 MPS 任务模板 {@link V20180717.CreateMPSTemplateRequest} {@link V20180717.CreateMPSTemplateResponse} */
   CreateMPSTemplate(data: V20180717.CreateMPSTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateMPSTemplateResponse>;
   /** 创建素材样本 {@link V20180717.CreatePersonSampleRequest} {@link V20180717.CreatePersonSampleResponse} */
@@ -11905,6 +12189,8 @@ declare interface Vod {
   DeleteImageSpriteTemplate(data: V20180717.DeleteImageSpriteTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteImageSpriteTemplateResponse>;
   /** 删除即时转码模板 {@link V20180717.DeleteJustInTimeTranscodeTemplateRequest} {@link V20180717.DeleteJustInTimeTranscodeTemplateResponse} */
   DeleteJustInTimeTranscodeTemplate(data: V20180717.DeleteJustInTimeTranscodeTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteJustInTimeTranscodeTemplateResponse>;
+  /** 删除大模型解析模板 {@link V20180717.DeleteLLMComprehendTemplateRequest} {@link V20180717.DeleteLLMComprehendTemplateResponse} */
+  DeleteLLMComprehendTemplate(data: V20180717.DeleteLLMComprehendTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteLLMComprehendTemplateResponse>;
   /** 删除 MPS 任务模板 {@link V20180717.DeleteMPSTemplateRequest} {@link V20180717.DeleteMPSTemplateResponse} */
   DeleteMPSTemplate(data: V20180717.DeleteMPSTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteMPSTemplateResponse>;
   /** 删除媒体 {@link V20180717.DeleteMediaRequest} {@link V20180717.DeleteMediaResponse} */
@@ -12003,6 +12289,8 @@ declare interface Vod {
   DescribeImageSpriteTemplates(data: V20180717.DescribeImageSpriteTemplatesRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeImageSpriteTemplatesResponse>;
   /** 获取即时转码模板列表 {@link V20180717.DescribeJustInTimeTranscodeTemplatesRequest} {@link V20180717.DescribeJustInTimeTranscodeTemplatesResponse} */
   DescribeJustInTimeTranscodeTemplates(data: V20180717.DescribeJustInTimeTranscodeTemplatesRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeJustInTimeTranscodeTemplatesResponse>;
+  /** 获取大模型解析模板列表 {@link V20180717.DescribeLLMComprehendTemplatesRequest} {@link V20180717.DescribeLLMComprehendTemplatesResponse} */
+  DescribeLLMComprehendTemplates(data: V20180717.DescribeLLMComprehendTemplatesRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeLLMComprehendTemplatesResponse>;
   /** 查询 License 请求数统计数据 {@link V20180717.DescribeLicenseUsageDataRequest} {@link V20180717.DescribeLicenseUsageDataResponse} */
   DescribeLicenseUsageData(data: V20180717.DescribeLicenseUsageDataRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeLicenseUsageDataResponse>;
   /** 获取 MPS 任务模板列表 {@link V20180717.DescribeMPSTemplatesRequest} {@link V20180717.DescribeMPSTemplatesResponse} */
@@ -12115,6 +12403,8 @@ declare interface Vod {
   ModifyImageSpriteTemplate(data: V20180717.ModifyImageSpriteTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ModifyImageSpriteTemplateResponse>;
   /** 修改即时转码模板 {@link V20180717.ModifyJustInTimeTranscodeTemplateRequest} {@link V20180717.ModifyJustInTimeTranscodeTemplateResponse} */
   ModifyJustInTimeTranscodeTemplate(data: V20180717.ModifyJustInTimeTranscodeTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ModifyJustInTimeTranscodeTemplateResponse>;
+  /** 修改大模型解析模板 {@link V20180717.ModifyLLMComprehendTemplateRequest} {@link V20180717.ModifyLLMComprehendTemplateResponse} */
+  ModifyLLMComprehendTemplate(data: V20180717.ModifyLLMComprehendTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ModifyLLMComprehendTemplateResponse>;
   /** 修改 MPS 任务模板 {@link V20180717.ModifyMPSTemplateRequest} {@link V20180717.ModifyMPSTemplateResponse} */
   ModifyMPSTemplate(data: V20180717.ModifyMPSTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ModifyMPSTemplateResponse>;
   /** 修改媒体文件属性 {@link V20180717.ModifyMediaInfoRequest} {@link V20180717.ModifyMediaInfoResponse} */

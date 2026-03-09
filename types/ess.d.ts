@@ -316,6 +316,8 @@ declare interface ComparisonDetail {
   OriginText?: string;
   /** 对比文本。 */
   DiffText?: string;
+  /** 合同文本的格式类型。类型如下： **0**：段落（正文） **1**：标点符号 **2**：页眉页脚 **3**：目录 **4**：印章 **5**：序号 **6**：水印 **7**：下划线内容（填写区） */
+  FormatType?: number;
 }
 
 /** 此结构体 (Component) 用于描述控件属性。在通过文件发起合同时，对应的component有三种定位方式1. 绝对定位方式 （可以通过 [PDF坐标计算助手](https://qian.tencent.com/developers/tools/template-editor)计算控件的坐标）2. 表单域(FIELD)定位方式3. 关键字(KEYWORD)定位方式，使用关键字定位时，请确保PDF原始文件内是关键字以文字形式保存在PDF文件中，不支持对图片内文字进行关键字查找 */
@@ -574,7 +576,7 @@ declare interface ExtendAuthInfo {
 
 /** 印章扩展信息 */
 declare interface ExtendScene {
-  /** 印章来源类型 */
+  /** 印章来源类型印章来源类型包括下面几种：CREATE-客户上传图片创建GENERATE-系统模版印章生成SIST_SEAL-深圳电子印章 */
   GenerateType?: string;
   /** 印章来源类型描述 */
   GenerateTypeDesc?: string;
@@ -1532,13 +1534,13 @@ declare interface PermissionGroup {
 
 /** 坐标详情 */
 declare interface PositionInfo {
-  /** PDF文件页X坐标位置,以PDF单页左上角为坐标原点 */
+  /** PDF文件页X坐标位置,以PDF单页左上角为坐标原点，单位是 “点”（Point，简称 pt） */
   X?: number;
-  /** PDF文件页Y坐标位置,以PDF单页左上角为坐标原点 */
+  /** PDF文件页Y坐标位置,以PDF单页左上角为坐标原点，单位是 “点”（Point，简称 pt） */
   Y?: number;
-  /** 距离X坐标的宽度，用于在PDF文件进行画框。 */
+  /** 距离X坐标的宽度，用于在PDF文件进行画框，单位是 “点”（Point，简称 pt） */
   Width?: number;
-  /** 距离Y坐标的高度，用于在PDF文件进行画框。 */
+  /** 距离Y坐标的高度，用于在PDF文件进行画框，单位是 “点”（Point，简称 pt） */
   Height?: number;
   /** PDF文件页码索引，此值加1就是对应PDF文件的页码。 */
   PageIndex?: number;
@@ -4189,6 +4191,8 @@ declare interface DescribeContractComparisonTaskRequest {
   TaskId: string;
   /** 是否返回详细的对比结果。为 true时，响应中将包含详细的对比信息，如相似度、文本差异具体内容等；为 false时，仅返回任务基本状态信息。注：`详细结果数据量可能较大，请按需开启。` */
   ShowDetail?: boolean;
+  /** 搜索条件，具体参考Filter结构体。本接口取值：1. **format-type：**按照【 合同文本格式类型 】进行过滤；类型：String；是否必填项：否；类型如下： **0**：段落（正文） **1**：标点符号 **2**：页眉页脚 **3**：目录 **4**：印章 **5**：序号 **7**：下划线内容（填写区） */
+  Filters?: Filter[];
 }
 
 declare interface DescribeContractComparisonTaskResponse {
@@ -4709,15 +4713,15 @@ declare interface DescribeOrganizationAuthStatusResponse {
 declare interface DescribeOrganizationGroupOrganizationsRequest {
   /** 执行本接口操作的员工信息,userId必填。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
-  /** 指定分页每页返回的数据条数，单页最大1000 */
+  /** 指定分页每页返回的数据条数，单页最大支持 200。 */
   Limit: number;
-  /** 指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0 */
+  /** 偏移量，默认为0，最大20000。关于Offset的更进一步介绍请参考 API 简介中的相关小节。 */
   Offset: number;
   /** 查询成员企业的企业名，模糊匹配 */
   Name?: string;
   /** 成员企业加入集团的当前状态 **1**：待授权 **2**：已授权待激活 **3**：拒绝授权 **4**：已解除 **5**：已加入 */
   Status?: number;
-  /** 是否导出当前成员企业数据 **false**：不导出（默认值） **true**：导出 */
+  /** 是否导出当前成员企业数据 **false**：不导出（默认值） **true**：导出p.s.若传入此参数， LImit参数将无效，导出的为全量数据。 */
   Export?: boolean;
   /** 成员企业机构 ID，32 位字符串，在PC控制台 集团管理可获取 */
   Id?: string;

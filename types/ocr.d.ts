@@ -1212,6 +1212,24 @@ declare interface MainlandTravelPermitBackInfos {
   HistoryNumber?: string | null;
 }
 
+/** 作文批改建议 */
+declare interface MarkEssaySuggestions {
+  /** 作文批改序号 */
+  ID?: number;
+  /** 批改类型：主要包括：词汇、语句 */
+  Type?: string;
+  /** 子类型，基于Type返回二级类型词汇： 错别字、使用拼音、词语误用、词语冗余、词汇贫乏、多字/漏字语句：语法硬伤、逻辑问题、表达不佳、标点误用、优美句子 */
+  SubType?: string;
+  /** 原文内容 */
+  Origin?: string;
+  /** 批改后的内容 */
+  Replace?: string;
+  /** 点评内容 */
+  Message?: string;
+  /** array[][]二维数组，原文内容可能存在跨行的句子，会有多组坐标返回切图区域的4个角点坐标, 是个长度为8的数组[0,1,2,3,4,5,6,7](0,1) 左上角坐标(2,3) 右上角坐标(4,5) 右下角坐标(6,7) 左下角坐标 */
+  Positions?: Positions[];
+}
+
 /** 整张试卷所有题目批改信息 */
 declare interface MarkInfo {
   /** 题目的题干信息 */
@@ -1596,6 +1614,12 @@ declare interface PortraitImageInfo {
   PortraitImage?: string | null;
   /** 头像坐标 */
   ImageCoordinates?: ImageCoordinates | null;
+}
+
+/** 这是OCR在高精度识别下返回的坐标值，采用的是由一个数组表示4个顶点的坐标构成，如[0,1,2,3,4,5,6,7]- (0,1) 左上角坐标- (2,3) 右上角坐标- (4,5) 右下角坐标- (6,7) 左下角坐标 */
+declare interface Positions {
+  /** 这是OCR在高精度识别下返回的坐标值，采用的是由一个数组表示4个顶点的坐标构成，如[0,1,2,3,4,5,6,7]- (0,1) 左上角坐标- (2,3) 右上角坐标- (4,5) 右下角坐标- (6,7) 左下角坐标 */
+  Position?: number[];
 }
 
 /** 图片大小 */
@@ -3432,6 +3456,26 @@ declare interface DescribeExtractDocAgentJobResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMarkEssayAgentJobRequest {
+  /** 任务唯一ID。由服务端生成。 */
+  JobId?: string;
+}
+
+declare interface DescribeMarkEssayAgentJobResponse {
+  /** 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负。 */
+  Angle?: number;
+  /** 配置结构化文本信息。 */
+  SentenceSuggests?: MarkEssaySuggestions[];
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为""。 */
+  ErrorCode?: string;
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。 */
+  ErrorMessage?: string;
+  /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
+  JobStatus?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeQuestionMarkAgentJobRequest {
   /** 任务唯一ID。由服务端生成。 */
   JobId?: string;
@@ -4089,11 +4133,11 @@ declare interface IDCardOCRRequest {
   ImageUrl?: string;
   /** FRONT：身份证有照片的一面（人像面），BACK：身份证有国徽的一面（国徽面），该参数如果不填，将为您自动判断身份证正反面。 */
   CardSide?: string;
-  /** 以下可选字段均为bool 类型，默认false：CropIdCard，身份证照片裁剪（去掉证件外多余的边缘、自动矫正拍摄角度）CropPortrait，人像照片裁剪（自动抠取身份证头像区域）CopyWarn，复印件告警BorderCheckWarn，边框不完整和框内遮挡告警ReshootWarn，屏幕翻拍告警DetectPsWarn，疑似存在PS痕迹告警（CardWarnType参数为 Advanced时同时开启电子身份证告警）TempIdWarn，临时身份证告警InvalidDateWarn，身份证有效日期不合法告警Quality，图片质量分数（评价图片的模糊程度）MultiCardDetect，是否开启正反面同框识别（仅支持二代身份证正反页同框识别或临时身份证正反页同框识别）ReflectWarn，是否开启反光检测SDK 设置方式参考：Config = Json.stringify({"CropIdCard":true,"CropPortrait":true})API 3.0 Explorer 设置方式参考：Config = {"CropIdCard":true,"CropPortrait":true} */
+  /** 以下可选字段均为bool 类型，默认false：CropIdCard，身份证照片裁剪（去掉证件外多余的边缘、自动矫正拍摄角度）CropPortrait，人像照片裁剪（自动抠取身份证头像区域）CopyWarn，复印件告警BorderCheckWarn，边框不完整和框内遮挡告警ReshootWarn，屏幕翻拍告警DetectPsWarn，疑似存在PS痕迹告警（CardWarnType参数为 Advanced时同时开启电子身份证、水印告警）TempIdWarn，临时身份证告警InvalidDateWarn，身份证有效日期不合法告警Quality，图片质量分数（评价图片的模糊程度）MultiCardDetect，是否开启正反面同框识别（仅支持二代身份证正反页同框识别或临时身份证正反页同框识别）ReflectWarn，是否开启反光检测SDK 设置方式参考：Config = Json.stringify({&quot;CropIdCard&quot;:true,&quot;CropPortrait&quot;:true})API 3.0 Explorer 设置方式参考：Config = {&quot;CropIdCard&quot;:true,&quot;CropPortrait&quot;:true} */
   Config?: string;
   /** 默认值为true，打开识别结果纠正开关。开关开启后，身份证号、出生日期、性别，三个字段会进行矫正补齐，统一结果输出；若关闭此开关，以上三个字段不会进行矫正补齐，保持原始识别结果输出，若原图出现篡改情况，这三个字段的识别结果可能会不统一。 */
   EnableRecognitionRectify?: boolean;
-  /** 默认值为false。此开关需要在反光检测开关开启下才会生效（即此开关生效的前提是config入参里的"ReflectWarn":true），若EnableReflectDetail设置为true，则会返回反光点覆盖区域详情。反光点覆盖区域详情分为四部分：人像照片位置、国徽位置、识别字段位置、其他位置。一个反光点允许覆盖多个区域，且一张图片可能存在多个反光点。 */
+  /** 默认值为false。此开关需要在反光检测开关开启下才会生效（即此开关生效的前提是config入参里的&quot;ReflectWarn&quot;:true），若EnableReflectDetail设置为true，则会返回反光点覆盖区域详情。反光点覆盖区域详情分为四部分：人像照片位置、国徽位置、识别字段位置、其他位置。一个反光点允许覆盖多个区域，且一张图片可能存在多个反光点。 */
   EnableReflectDetail?: boolean;
   /** 用于控制是否开启日期校验，默认值为true，打开会进行日期校验。 */
   EnableDateVerify?: boolean;
@@ -4118,7 +4162,7 @@ declare interface IDCardOCRResponse {
   Authority?: string;
   /** 证件有效期（国徽面） */
   ValidDate?: string;
-  /** 扩展信息，不请求则不返回，具体输入参考示例3和示例4。IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;WarnInfos，告警信息，Code 告警码列表和释义：-9100 身份证有效日期不合法告警，-9101 身份证边框不完整告警，-9102 身份证复印件告警（黑白及彩色复印件）,-9108 身份证复印件告警（仅黑白复印件），-9103 身份证翻拍告警，-9105 身份证框内遮挡告警，-9104 临时身份证告警，-9106 身份证疑似存在PS痕迹告警，-9107 身份证反光告警，-9110 电子身份证告警 */
+  /** 扩展信息，不请求则不返回，具体输入参考示例3和示例4。IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;WarnInfos，告警信息，Code 告警码列表和释义：-9100 身份证有效日期不合法告警，-9101 身份证边框不完整告警，-9102 身份证复印件告警（黑白及彩色复印件）,-9108 身份证复印件告警（仅黑白复印件），-9103 身份证翻拍告警，-9105 身份证框内遮挡告警，-9104 临时身份证告警，-9106 身份证疑似存在PS痕迹告警，-9107 身份证反光告警，-9110 电子身份证告警，-9111 水印告警（仅CardWarnType参数为Advanced时） */
   AdvancedInfo?: string;
   /** 反光点覆盖区域详情结果，具体内容请点击左侧链接 */
   ReflectDetailInfos?: ReflectDetailInfo[];
@@ -4301,7 +4345,7 @@ declare interface MainlandPermitOCRRequest {
   ImageUrl?: string;
   /** 是否返回头像。默认不返回。 */
   RetProfile?: boolean;
-  /** 图片正反面FRONT：正面BACK：反面默认为FRONT */
+  /** 图片正反面FRONT：正面BACK：反面 （仅支持来往内地通行证反面识别，不支持港澳台通行证反面识别）默认为FRONT */
   CardSide?: string;
 }
 
@@ -4621,11 +4665,11 @@ declare interface RecognizeEncryptedIDCardOCRRequest {
   ImageUrl?: string;
   /** FRONT：身份证有照片的一面（人像面），BACK：身份证有国徽的一面（国徽面），该参数如果不填，将为您自动判断身份证正反面。 */
   CardSide?: string;
-  /** 以下可选字段均为bool 类型，默认false：CropIdCard，身份证照片裁剪（去掉证件外多余的边缘、自动矫正拍摄角度）CropPortrait，人像照片裁剪（自动抠取身份证头像区域）CopyWarn，复印件告警BorderCheckWarn，边框不完整和框内遮挡告警ReshootWarn，屏幕翻拍告警DetectPsWarn，疑似存在PS痕迹告警（CardWarnType参数为 Advanced时同时开启电子身份证告警）TempIdWarn，临时身份证告警InvalidDateWarn，身份证有效日期不合法告警Quality，图片质量分数（评价图片的模糊程度）MultiCardDetect，是否开启正反面同框识别（仅支持二代身份证正反页同框识别或临时身份证正反页同框识别）ReflectWarn，是否开启反光检测SDK 设置方式参考：Config = Json.stringify({"CropIdCard":true,"CropPortrait":true})API 3.0 Explorer 设置方式参考：Config = {"CropIdCard":true,"CropPortrait":true} */
+  /** 以下可选字段均为bool 类型，默认false：CropIdCard，身份证照片裁剪（去掉证件外多余的边缘、自动矫正拍摄角度）CropPortrait，人像照片裁剪（自动抠取身份证头像区域）CopyWarn，复印件告警BorderCheckWarn，边框不完整和框内遮挡告警ReshootWarn，屏幕翻拍告警DetectPsWarn，疑似存在PS痕迹告警（CardWarnType参数为 Advanced时同时开启电子身份证、水印告警）TempIdWarn，临时身份证告警InvalidDateWarn，身份证有效日期不合法告警Quality，图片质量分数（评价图片的模糊程度）MultiCardDetect，是否开启正反面同框识别（仅支持二代身份证正反页同框识别或临时身份证正反页同框识别）ReflectWarn，是否开启反光检测SDK 设置方式参考：Config = Json.stringify({&quot;CropIdCard&quot;:true,&quot;CropPortrait&quot;:true})API 3.0 Explorer 设置方式参考：Config = {&quot;CropIdCard&quot;:true,&quot;CropPortrait&quot;:true} */
   Config?: string;
   /** 默认值为true，打开识别结果纠正开关。开关开启后，身份证号、出生日期、性别，三个字段会进行矫正补齐，统一结果输出；若关闭此开关，以上三个字段不会进行矫正补齐，保持原始识别结果输出，若原图出现篡改情况，这三个字段的识别结果可能会不统一。 */
   EnableRecognitionRectify?: boolean;
-  /** 默认值为false。此开关需要在反光检测开关开启下才会生效（即此开关生效的前提是config入参里的"ReflectWarn":true），若EnableReflectDetail设置为true，则会返回反光点覆盖区域详情。反光点覆盖区域详情分为四部分：人像照片位置、国徽位置、识别字段位置、其他位置。一个反光点允许覆盖多个区域，且一张图片可能存在多个反光点。 */
+  /** 默认值为false。此开关需要在反光检测开关开启下才会生效（即此开关生效的前提是config入参里的&quot;ReflectWarn&quot;:true），若EnableReflectDetail设置为true，则会返回反光点覆盖区域详情。反光点覆盖区域详情分为四部分：人像照片位置、国徽位置、识别字段位置、其他位置。一个反光点允许覆盖多个区域，且一张图片可能存在多个反光点。 */
   EnableReflectDetail?: boolean;
   /** Basic：使用基础卡证告警能力（含基础PS告警）； Advanced：开启进阶PS告警能力，PS告警效果更佳但需要更长耗时；建议测试对比后选用，默认值为 Basic */
   CardWarnType?: string;
@@ -4648,7 +4692,7 @@ declare interface RecognizeEncryptedIDCardOCRResponse {
   Authority?: string;
   /** 证件有效期（国徽面） */
   ValidDate?: string;
-  /** 扩展信息，不请求则不返回，具体输入参考示例3和示例4。IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;WarnInfos，告警信息，Code 告警码列表和释义：-9100 身份证有效日期不合法告警，-9101 身份证边框不完整告警，-9102 身份证复印件告警（黑白及彩色复印件）,-9108 身份证复印件告警（仅黑白复印件），-9103 身份证翻拍告警，-9105 身份证框内遮挡告警，-9104 临时身份证告警，-9106 身份证疑似存在PS痕迹告警，-9107 身份证反光告警，-9110 电子身份证告警 */
+  /** 扩展信息，不请求则不返回，具体输入参考示例3和示例4。IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;WarnInfos，告警信息，Code 告警码列表和释义：-9100 身份证有效日期不合法告警，-9101 身份证边框不完整告警，-9102 身份证复印件告警（黑白及彩色复印件）,-9108 身份证复印件告警（仅黑白复印件），-9103 身份证翻拍告警，-9105 身份证框内遮挡告警，-9104 临时身份证告警，-9106 身份证疑似存在PS痕迹告警，-9107 身份证反光告警，-9110 电子身份证告警，-9111 水印告警（仅CardWarnType参数为Advanced时）， */
   AdvancedInfo?: string;
   /** 反光点覆盖区域详情结果，具体内容请点击左侧链接 */
   ReflectDetailInfos?: ReflectDetailInfo[];
@@ -4868,26 +4912,6 @@ declare interface RecognizeTableAccurateOCRResponse {
   PdfPageSize?: number | null;
   /** 图片旋转角度（角度制），文本的水平方向为0°。 */
   Angle?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface RecognizeTableMultiOCRRequest {
-  /** 图片/PDF的 Base64 值。 要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。 图片支持的像素范围：需介于20-10000px之间。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片/PDF的 Url 地址。 要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。 图片支持的像素范围：需介于20-10000px之间。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-  /** 文档的起始页码。 当传入文件是PDF型时，用来指定识别的起始页码，识别的页码包含当前值。 */
-  PdfStartPageNumber?: number;
-  /** 文档的结束页码。 当传入文件是PDF类型时，用来指定识别的结束页码，识别的页码包含当前值。单次调用最多支持识别3页内容，即PdfEndPageNumber-PdfStartPageNumber需要不大于3。 */
-  PdfEndPageNumber?: number;
-  /** 配置选项，支持配置输出数据格式。* **Mdbase64** 返回 base64 编码的 markdown 格式文本。* **Excelbase64** 返回 base64 编码的 excel 文件。 */
-  DataFormat?: string;
-}
-
-declare interface RecognizeTableMultiOCRResponse {
-  /** Base64 编码后的 Excel 数据或 Markdown 数据。 注意：此字段可能返回空，表示取不到有效值。 */
-  DataBase64?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5242,6 +5266,24 @@ declare interface SubmitExtractDocAgentJobRequest {
 declare interface SubmitExtractDocAgentJobResponse {
   /** 任务唯一ID。由服务端生成。 */
   JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SubmitMarkEssayAgentJobRequest {
+  /** 图片/PDF的 Base64 值。要求Base64不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 示例值：/9j/4AAQSkZJRg.....s97n//2Q== */
+  ImageBase64List?: string[];
+  /** 图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 示例值：https://ocr-demo-1254418846.cos.ap-guangzhou.myqcloud.com/general/GeneralAccurateOCR/GeneralAccurateOCR1.jpg */
+  ImageUrlList?: string[];
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，默认值为1。 示例值：1 */
+  PdfPageNumber?: number;
+  /** 批改信息输出配置，当key对应为1表示开启配置开关。 当key为StructureAndContent value为1 表示SentenceSuggest返回篇章结构和内容信息，默认只返回词汇、语句 */
+  QuestionConfigMap?: string;
+}
+
+declare interface SubmitMarkEssayAgentJobResponse {
+  /** 任务唯一ID。由服务端生成。 示例值：1334797167793684480 */
+  JobIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5659,8 +5701,10 @@ declare interface Ocr {
   ClassifyDetectOCR(data?: ClassifyDetectOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ClassifyDetectOCRResponse>;
   /** 商户照片分类 {@link ClassifyStoreNameRequest} {@link ClassifyStoreNameResponse} */
   ClassifyStoreName(data?: ClassifyStoreNameRequest, config?: AxiosRequestConfig): AxiosPromise<ClassifyStoreNameResponse>;
-  /** 查询文档抽取Agent任务 {@link DescribeExtractDocAgentJobRequest} {@link DescribeExtractDocAgentJobResponse} */
+  /** 异步文档抽取Agent(查询任务) {@link DescribeExtractDocAgentJobRequest} {@link DescribeExtractDocAgentJobResponse} */
   DescribeExtractDocAgentJob(data?: DescribeExtractDocAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtractDocAgentJobResponse>;
+  /** 作文批改Agent（查询任务） {@link DescribeMarkEssayAgentJobRequest} {@link DescribeMarkEssayAgentJobResponse} */
+  DescribeMarkEssayAgentJob(data?: DescribeMarkEssayAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMarkEssayAgentJobResponse>;
   /** 试题批改Agent（查询任务） {@link DescribeQuestionMarkAgentJobRequest} {@link DescribeQuestionMarkAgentJobResponse} */
   DescribeQuestionMarkAgentJob(data?: DescribeQuestionMarkAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuestionMarkAgentJobResponse>;
   /** 驾驶证识别 {@link DriverLicenseOCRRequest} {@link DriverLicenseOCRResponse} */
@@ -5765,8 +5809,6 @@ declare interface Ocr {
   RecognizeStoreName(data?: RecognizeStoreNameRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeStoreNameResponse>;
   /** 表格识别（V3） {@link RecognizeTableAccurateOCRRequest} {@link RecognizeTableAccurateOCRResponse} */
   RecognizeTableAccurateOCR(data?: RecognizeTableAccurateOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTableAccurateOCRResponse>;
-  /** 表格识别（多模态版） {@link RecognizeTableMultiOCRRequest} {@link RecognizeTableMultiOCRResponse} */
-  RecognizeTableMultiOCR(data?: RecognizeTableMultiOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTableMultiOCRResponse>;
   /** 表格识别（V2) {@link RecognizeTableOCRRequest} {@link RecognizeTableOCRResponse} */
   RecognizeTableOCR(data?: RecognizeTableOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTableOCRResponse>;
   /** 泰国身份证识别 {@link RecognizeThaiIDCardOCRRequest} {@link RecognizeThaiIDCardOCRResponse} */
@@ -5787,8 +5829,10 @@ declare interface Ocr {
   ShipInvoiceOCR(data?: ShipInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ShipInvoiceOCRResponse>;
   /** 智能结构化识别 {@link SmartStructuralOCRRequest} {@link SmartStructuralOCRResponse} */
   SmartStructuralOCR(data?: SmartStructuralOCRRequest, config?: AxiosRequestConfig): AxiosPromise<SmartStructuralOCRResponse>;
-  /** 提交文档抽取Agent任务 {@link SubmitExtractDocAgentJobRequest} {@link SubmitExtractDocAgentJobResponse} */
+  /** 异步文档抽取Agent(创建任务) {@link SubmitExtractDocAgentJobRequest} {@link SubmitExtractDocAgentJobResponse} */
   SubmitExtractDocAgentJob(data?: SubmitExtractDocAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitExtractDocAgentJobResponse>;
+  /** 作文批改Agent（提交任务） {@link SubmitMarkEssayAgentJobRequest} {@link SubmitMarkEssayAgentJobResponse} */
+  SubmitMarkEssayAgentJob(data?: SubmitMarkEssayAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitMarkEssayAgentJobResponse>;
   /** 试题批改Agent（提交任务） {@link SubmitQuestionMarkAgentJobRequest} {@link SubmitQuestionMarkAgentJobResponse} */
   SubmitQuestionMarkAgentJob(data?: SubmitQuestionMarkAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitQuestionMarkAgentJobResponse>;
   /** 表格识别（V1) {@link TableOCRRequest} {@link TableOCRResponse} */

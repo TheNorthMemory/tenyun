@@ -259,10 +259,6 @@ declare interface CreateTargetGroupRequest {
   Tags?: TagInfo[];
   /** 流量分发方式STATELESS：无状态STATEFUL： 有状态 */
   ForwardingMode?: string;
-  /** TCP协议连接空闲超时时间，可配置60s-6000s，默认350s。 */
-  TcpIdleConnectTimeout?: number;
-  /** 其他协议连接空闲超时时间，可配置5s-180s，默认120s */
-  OthersIdleConnectTimeout?: number;
   /** 重新调度功能内的解绑后端服务开关，开关打开后解绑后端服务会触发重新调度。 */
   RescheduleUnbindRs?: boolean;
   /** 解绑RS后开启重调度的时间，可配置0s-3600s，默认0s */
@@ -485,10 +481,6 @@ declare interface ModifyTargetGroupAttributeRequest {
   HealthCheck?: TargetGroupHealthCheck;
   /** 是否支持全死全活。 */
   AllDeadToAlive?: boolean;
-  /** TCP协议连接空闲超时时间，可配置60s-6000s，默认350s。 */
-  TcpIdleConnectTimeout?: number;
-  /** 其他协议连接空闲超时时间，可配置5s-180s，默认120s */
-  OthersIdleConnectTimeout?: number;
   /** 重新调度功能内的解绑后端服务开关，开关打开后解绑后端服务会触发重新调度。 */
   RescheduleUnbindRs?: boolean;
   /** 解绑RS后开启重调度的时间，可配置0s-3600s，默认0s */

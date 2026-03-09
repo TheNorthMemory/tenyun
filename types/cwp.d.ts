@@ -2274,6 +2274,36 @@ declare interface EmergencyVul {
   DefenseState?: boolean;
 }
 
+/** 补丁详细信息 */
+declare interface EventPatchInfo {
+  /** 补丁名 */
+  Name?: string;
+  /** 补丁编号 */
+  KbNo?: string;
+  /** 披露时间 */
+  PublishTime?: string;
+  /** 影响主机数量 */
+  EffectHostCount?: number;
+  /** 关联的漏洞数 */
+  RelateVulCount?: number;
+  /** 关联的漏洞编号数组 */
+  RelateVulList?: string[];
+  /** 是否为最新披露，0否，1是，默认为否 */
+  IsNew?: number;
+  /** 最后扫描时间 */
+  LastScanTime?: string;
+  /** 0待处理,1忽略,3修复 */
+  Status?: number;
+  /** 安装该kb的前置条件，一般为其他kb，且可能有多个，kb之间用", "分隔 */
+  KbPreCondition?: string;
+  /** 该kb关联的windows product名称 */
+  RelatedProduct?: string;
+  /** 补丁id */
+  KbId?: number;
+  /** 相关kb事件的id集合 */
+  Ids?: string;
+}
+
 /** 未处理的安全事件统计信息 */
 declare interface EventStat {
   /** 事件数 */
@@ -3668,6 +3698,42 @@ declare interface OsName {
   MachineOSType?: number;
 }
 
+/** 补丁影响主机列表 */
+declare interface PatchEffectHostList {
+  /** 版本信息：0-基础版 1-专业版 2-旗舰版 3-轻量版 */
+  HostVersion?: number;
+  /** 实例状态: "PENDING"-创建中 "LAUNCH_FAILED"-创建失败 "RUNNING"-运行中 "STOPPED"-关机 "STARTING"-表示开机中 "STOPPING"-表示关机中 "REBOOTING"-重启中 "SHUTDOWN"-表示停止待销毁 "TERMINATING"-表示销毁中 */
+  InstanceState?: string;
+  /** 首次扫描时间 */
+  FirstScanTime?: string;
+  /** 最近扫描时间 */
+  LatestScanTime?: string;
+  /** 修复状态：0-未进行修复；1-修复中；2-修复失败；3-修复成功；4-修复超时 */
+  FixStatus?: number;
+  /** 主机基础信息 */
+  MachineExtraInfo?: MachineExtraInfo;
+  /** 主机安全Uuid */
+  Uuid?: string;
+  /** CVM或BM机器唯一Uuid */
+  Quuid?: string;
+  /** 事件id */
+  Id?: number;
+  /** 状态：0: 待处理 1:忽略 3:已修复 5:检测中 6:修复中 7: 回滚中 8:修复失败 */
+  Status?: number;
+  /** 修复时间 */
+  LatestFixTime?: string;
+  /** KB id */
+  KbId?: number;
+  /** 是否需要重启 0不需要，1需要 */
+  RestartRequired?: number;
+  /** 可用区ID */
+  RegionId?: number;
+  /** 机器类型信息 */
+  MachineType?: string;
+  /** 修复任务是否创建了快照： 0-未创建，其他-已创建 */
+  HasSnapshot?: number;
+}
+
 /** 补丁信息详情 */
 declare interface PatchInfoDetail {
   /** KB编号 */
@@ -4322,6 +4388,24 @@ declare interface RegionSet {
   RegionName?: string;
   /** 可用区信息 */
   ZoneSet?: ZoneInfo[];
+}
+
+/** Windows补丁关联的漏洞信息 */
+declare interface RelateVulInfo {
+  /** CVEid */
+  CveId?: string;
+  /** 漏洞名 */
+  Name?: string;
+  /** 漏洞标签 */
+  Label?: string;
+  /** 漏洞等级 */
+  Level?: number;
+  /** CVSS评分 */
+  CVSS?: number;
+  /** 漏洞披露时间 */
+  PublishTime?: string;
+  /** 漏洞id */
+  Id?: number;
 }
 
 /** 反弹Shell数据 */
@@ -10132,6 +10216,52 @@ declare interface DescribeOverviewStatisticsResponse {
   RequestId?: string;
 }
 
+declare interface DescribePatchEffectHostListRequest {
+  /** 补丁id */
+  KbId: number;
+  /** 分页limit 最大100 */
+  Limit: number;
+  /** 分页偏移量 */
+  Offset: number;
+  /** 过滤条件： HostVersion : uint64类型 非必填 版本信息 : 0-基础版 1-专业版 2-旗舰版 3-轻量版 InstanceState : string类型 非必填 主机状态 : "PENDING"-创建中 "LAUNCH_FAILED"-创建失败 "RUNNING"-运行中 "STOPPED"-关机 "STARTING"-开机中 "STOPPING"-关机中 "REBOOTING"-重启中 "SHUTDOWN"-待销毁 "TERMINATING"-销毁中 "UNKNOWN"-未知（针对非腾讯云机器，且客户端离线的场景）Status : uint64类型 非必填 处理状态 0表示待处理，1表示忽略，3表示已修复HostName : string类型 非必填 主机名称InstanceID : string类型 非必填 主机idIpAddress : string类型 非必填 主机的ip地址Uuid : string类型 非必填 主机uuid */
+  Filters?: Filter[];
+}
+
+declare interface DescribePatchEffectHostListResponse {
+  /** 影响主机总数 */
+  TotalCount?: number;
+  /** 补丁影响主机列表 */
+  PatchEffectHostList?: PatchEffectHostList[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePatchInfoRequest {
+  /** 补丁id */
+  KbId: number;
+}
+
+declare interface DescribePatchInfoResponse {
+  /** kb编号 */
+  KbNo?: string;
+  /** kb名称 */
+  PatchName?: string;
+  /** kb 发布日期 */
+  PublishTime?: string;
+  /** 参考链接 */
+  ReferUrl?: string;
+  /** 包含漏洞数 */
+  VulCount?: number;
+  /** 补丁关联的漏洞详情列表 */
+  RelateVulInfoList?: RelateVulInfo[];
+  /** 补丁id */
+  KbId?: number;
+  /** 关联的漏洞CveId，多个id由","分隔 */
+  RelateVulCveId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePrivilegeEventInfoRequest {
   /** 事件id */
   Id: number;
@@ -12106,6 +12236,28 @@ declare interface DescribeWebPageServiceInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeWindowsPatchListRequest {
+  /** 分页参数 */
+  Limit?: number;
+  /** 排序顺序：desc 默认asc */
+  Order?: string;
+  /** 可选排序字段PublishTimeLastScanTimeHostCount */
+  By?: string;
+  /** 偏移量，默认为0 */
+  Offset?: number;
+  /** 过滤条件。 Status : string类型 非必填 处理状态 0待处理,1忽略,3修复ShowNew : int类型 非必填 展示最新版本 1-开启 0-关闭Name : string类型 非必填 补丁名称KbNo : string类型 非必填 补丁编号VulName : string类型 非必填 漏洞名称CVEId : string类型 非必填 漏洞CVE编号Uuid : string类型 非必填 主机uuid */
+  Filters?: Filters[];
+}
+
+declare interface DescribeWindowsPatchListResponse {
+  /** 补丁和漏洞的总数 */
+  TotalCount?: number;
+  /** Windows补丁信息列表 */
+  PatchInfoList?: EventPatchInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DestroyOrderRequest {
   /** 资源ID */
   ResourceId: string;
@@ -12892,6 +13044,20 @@ declare interface ExportNonlocalLoginPlacesResponse {
   RequestId?: string;
 }
 
+declare interface ExportPatchEffectHostListRequest {
+  /** 补丁id */
+  KbId: number;
+  /** 过滤条件： ProtectType : uint64类型 非必填 防护版本类型 0表示BASIC_VERSION，1表示Flagship InstanceState : string类型 非必填 主机状态 : "PENDING"-创建中 "LAUNCH_FAILED"-创建失败 "RUNNING"-运行中 "STOPPED"-关机 "STARTING"-开机中 "STOPPING"-关机中 "REBOOTING"-重启中 "SHUTDOWN"-待销毁 "TERMINATING"-销毁中 "UNKNOWN"-未知（针对非腾讯云机器，且客户端离线的场景） Status : uint64类型 非必填 处理状态 0表示待处理，1表示忽略，3表示已修复HostName : string类型 非必填 主机名称 InstanceID : string类型 非必填 主机id IpAddress : string类型 非必填 主机的ip地址 Uuid : string类型 非必填 主机uuid */
+  Filters?: Filter[];
+}
+
+declare interface ExportPatchEffectHostListResponse {
+  /** 导出任务Id , 可通过ExportTasks 接口下载 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ExportPrivilegeEventsRequest {
   /** 过滤参数 */
   Filters?: Filters[];
@@ -13243,6 +13409,18 @@ declare interface ExportWebPageEventListRequest {
 
 declare interface ExportWebPageEventListResponse {
   /** 任务id 可通过 ExportTasks接口下载 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ExportWindowsPatchListRequest {
+  /** 过滤条件。 Status : String类型 非必填 处理状态 0待处理,1忽略,3修复ShowNew : int类型 非必填 展示最新版本 0-开启 1-关闭Name : string类型 非必填 补丁名称 KbNo : string类型 非必填 补丁编号 Uuid : string类型 非必填 主机uuid */
+  Filters?: Filter[];
+}
+
+declare interface ExportWindowsPatchListResponse {
+  /** 导出文件Id 可通过ExportTasks接口下载 */
   TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -15227,6 +15405,10 @@ declare interface Cwp {
   DescribeOpenPortStatistics(data?: DescribeOpenPortStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOpenPortStatisticsResponse>;
   /** 获取概览统计数据 {@link DescribeOverviewStatisticsRequest} {@link DescribeOverviewStatisticsResponse} */
   DescribeOverviewStatistics(data?: DescribeOverviewStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewStatisticsResponse>;
+  /** 查询Windows补丁影响的主机 {@link DescribePatchEffectHostListRequest} {@link DescribePatchEffectHostListResponse} */
+  DescribePatchEffectHostList(data: DescribePatchEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePatchEffectHostListResponse>;
+  /** 获取Windows补丁信息 {@link DescribePatchInfoRequest} {@link DescribePatchInfoResponse} */
+  DescribePatchInfo(data: DescribePatchInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePatchInfoResponse>;
   /** 查询本地提权详情 {@link DescribePrivilegeEventInfoRequest} {@link DescribePrivilegeEventInfoResponse} */
   DescribePrivilegeEventInfo(data: DescribePrivilegeEventInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivilegeEventInfoResponse>;
   /** 获取本地提权事件列表 {@link DescribePrivilegeEventsRequest} {@link DescribePrivilegeEventsResponse} */
@@ -15443,6 +15625,8 @@ declare interface Cwp {
   DescribeWebPageProtectStat(data?: DescribeWebPageProtectStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebPageProtectStatResponse>;
   /** 查询网站防篡改服务信息 {@link DescribeWebPageServiceInfoRequest} {@link DescribeWebPageServiceInfoResponse} */
   DescribeWebPageServiceInfo(data?: DescribeWebPageServiceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebPageServiceInfoResponse>;
+  /** 查询Windows补丁风险列表 {@link DescribeWindowsPatchListRequest} {@link DescribeWindowsPatchListResponse} */
+  DescribeWindowsPatchList(data?: DescribeWindowsPatchListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWindowsPatchListResponse>;
   /** 销毁订单 {@link DestroyOrderRequest} {@link DestroyOrderResponse} */
   DestroyOrder(data: DestroyOrderRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyOrderResponse>;
   /** 新增或修改高危命令规则（支持多服务器选择） {@link EditBashRulesRequest} {@link EditBashRulesResponse} */
@@ -15535,6 +15719,8 @@ declare interface Cwp {
   ExportMalwares(data?: ExportMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<ExportMalwaresResponse>;
   /** 导出异地登录记录 {@link ExportNonlocalLoginPlacesRequest} {@link ExportNonlocalLoginPlacesResponse} */
   ExportNonlocalLoginPlaces(data?: ExportNonlocalLoginPlacesRequest, config?: AxiosRequestConfig): AxiosPromise<ExportNonlocalLoginPlacesResponse>;
+  /** 导出补丁影响主机列表 {@link ExportPatchEffectHostListRequest} {@link ExportPatchEffectHostListResponse} */
+  ExportPatchEffectHostList(data: ExportPatchEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportPatchEffectHostListResponse>;
   /** 导出本地提权事件 {@link ExportPrivilegeEventsRequest} {@link ExportPrivilegeEventsResponse} */
   ExportPrivilegeEvents(data?: ExportPrivilegeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportPrivilegeEventsResponse>;
   /** 导出防护目录列表 {@link ExportProtectDirListRequest} {@link ExportProtectDirListResponse} */
@@ -15581,6 +15767,8 @@ declare interface Cwp {
   ExportVulList(data?: ExportVulListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVulListResponse>;
   /** 导出篡改事件列表 {@link ExportWebPageEventListRequest} {@link ExportWebPageEventListResponse} */
   ExportWebPageEventList(data?: ExportWebPageEventListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportWebPageEventListResponse>;
+  /** 导出Windows补丁列表 {@link ExportWindowsPatchListRequest} {@link ExportWindowsPatchListResponse} */
+  ExportWindowsPatchList(data?: ExportWindowsPatchListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportWindowsPatchListResponse>;
   /** 修复基线检测 {@link FixBaselineDetectRequest} {@link FixBaselineDetectResponse} */
   FixBaselineDetect(data: FixBaselineDetectRequest, config?: AxiosRequestConfig): AxiosPromise<FixBaselineDetectResponse>;
   /** 获取本地存储数据 {@link GetLocalStorageItemRequest} {@link GetLocalStorageItemResponse} */

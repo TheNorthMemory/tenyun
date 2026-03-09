@@ -16,6 +16,12 @@ declare interface APIKeyInfo {
   CreatedAt?: string;
 }
 
+/** 沙箱工具日志推送CLS相关配置 */
+declare interface CLSConfig {
+  /** 沙箱工具日志推送所使用的CLS日志主题ID */
+  TopicId?: string;
+}
+
 /** 文件存储配置 */
 declare interface CfsStorageSource {
   /** CFS资源ID */
@@ -112,6 +118,12 @@ declare interface ImageStorageSource {
   SubPath?: string;
   /** 镜像 Digest，请求时无需传入 */
   Digest?: string;
+}
+
+/** 沙箱工具日志采集相关配置 */
+declare interface LogConfiguration {
+  /** 日志推送CLS的配置。 */
+  CLSConfig?: CLSConfig;
 }
 
 /** 沙箱实例存储挂载配置可选项，用于覆盖沙箱工具的存储配置的部分选项，并提供子路径挂载配置。 */
@@ -222,6 +234,10 @@ declare interface SandboxTool {
   StorageMounts?: StorageMount[];
   /** 沙箱工具自定义配置 */
   CustomConfiguration?: CustomConfigurationDetail;
+  /** 沙箱工具日志推送相关配置 */
+  LogConfiguration?: LogConfiguration;
+  /** 用于说明沙箱工具处于该状态的原因 */
+  StatusReason?: string;
 }
 
 /** 沙箱工具中实例存储挂载配置 */
@@ -331,6 +347,8 @@ declare interface CreateSandboxToolRequest {
   StorageMounts?: StorageMount[];
   /** 沙箱工具自定义配置 */
   CustomConfiguration?: CustomConfiguration;
+  /** 沙箱工具日志推送相关配置 */
+  LogConfiguration?: LogConfiguration;
 }
 
 declare interface CreateSandboxToolResponse {

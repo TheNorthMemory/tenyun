@@ -772,7 +772,7 @@ declare interface FlowFileInfo {
   Deadline?: number;
   /** 签署流程的描述，长度不超过1000个字符 */
   FlowDescription?: string;
-  /** 签署流程的类型，长度不超过255个字符 */
+  /** 签署流程的类型，长度不超过255个字符枚举值：入职合同： 入职合同劳动合同： 劳动合同 */
   FlowType?: string;
   /** 已废弃，请使用【应用号配置】中的回调地址统一接收消息 */
   CallbackUrl?: string;
@@ -786,7 +786,7 @@ declare interface FlowFileInfo {
   CustomShowMap?: string;
   /** 本企业(发起方企业)是否需要签署审批 */
   NeedSignReview?: boolean;
-  /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议 3 :文书效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
+  /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议 3 :文书效果如下: */
   FlowDisplayType?: number;
 }
 
@@ -1054,7 +1054,7 @@ declare interface OrganizationCommonInfo {
   UniformSocialCreditCode: string;
   /** 组织机构法人的姓名。请确认该企业统一社会信用代码与企业营业执照中注册的法人姓名一致。 */
   LegalName: string;
-  /** 组织机构法人的证件类型 */
+  /** 组织机构法人的证件类型枚举值：居民身份证： 中国大陆居民身份证 */
   LegalIdCardType?: string;
   /** 组织机构法人的证件号码 */
   LegalIdCardNumber?: string;
@@ -1062,7 +1062,7 @@ declare interface OrganizationCommonInfo {
   AdminName?: string;
   /** 组织机构超管手机号。 */
   AdminMobile?: string;
-  /** 组织机构超管证件类型 */
+  /** 组织机构超管证件类型枚举值：居民身份证： 中国大陆居民身份证 */
   AdminIdCardType?: string;
   /** 组织机构超管证件号码 */
   AdminIdCardNumber?: string;
@@ -1070,7 +1070,7 @@ declare interface OrganizationCommonInfo {
   OldAdminName?: string;
   /** 原超管手机号 */
   OldAdminMobile?: string;
-  /** 原超管证件类型 */
+  /** 原超管证件类型枚举值：居民身份证： 中国大陆居民身份证 */
   OldAdminIdCardType?: string;
   /** 原超管证件号码 */
   OldAdminIdCardNumber?: string;
@@ -1202,11 +1202,11 @@ declare interface Recipient {
   RequireValidation?: boolean;
   /** 是否必须填写，true-是，false-否 */
   RequireSign?: boolean;
-  /** 内部字段，签署类型 */
+  /** 内部字段，签署类型枚举值：0： 人脸 */
   SignType?: number;
   /** 签署顺序：数字越小优先级越高 */
   RoutingOrder?: number;
-  /** 是否是发起方，true-是 false-否 */
+  /** 是否是发起方，true-是false-否 */
   IsPromoter?: boolean;
   /** 签署人查看合同校验方式, 支持的类型如下: 1 :实名认证查看 2 :手机号校验查看 */
   ApproverVerifyTypes?: number[];

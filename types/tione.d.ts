@@ -1552,6 +1552,8 @@ declare interface ServiceGroup {
   MonitorSource?: string;
   /** 子用户的 nickname */
   SubUinName?: string;
+  /** 网关日志投递相关配置 */
+  GatewayLogConfig?: LogConfig;
 }
 
 /** 推理服务在集群中的信息 */
@@ -1738,6 +1740,8 @@ declare interface SubAccountInfo {
   LinuxUid?: number;
   /** 子账号在Linux下的GID */
   LinuxGid?: number;
+  /** 子账号在Linux下的用户名 */
+  LinuxUserName?: string;
 }
 
 /** tcp socket 健康探针检查行为 */
@@ -2010,7 +2014,7 @@ declare interface VolumeMount {
 declare interface WeightEntry {
   /** 服务id */
   ServiceId: string;
-  /** 流量权重值，同 ServiceGroup 下 总和应为 100 */
+  /** 流量权重值，ServiceGroup 下，不同服务版本根据权重比例分配流量 */
   Weight: number;
 }
 
@@ -2231,6 +2235,8 @@ declare interface CreateModelServiceRequest {
   VolumeMounts?: VolumeMount[];
   /** 调度策略 [binpack] 优先占满整机，尽量避免碎卡（默认值）[spread] 优先分散在各个节点，确保服务高可用 */
   SchedulingStrategy?: string;
+  /** 网关日志投递相关配置 */
+  GatewayLogConfig?: LogConfig;
 }
 
 declare interface CreateModelServiceResponse {
@@ -2541,7 +2547,7 @@ declare interface DeleteTrainingTaskResponse {
 declare interface DescribeBillingResourceGroupRequest {
   /** 资源组id, 取值为创建资源组接口(CreateBillingResourceGroup)响应中的ResourceGroupId */
   ResourceGroupId: string;
-  /** 过滤条件注意: 1. Filter.Name 只支持以下枚举值: InstanceId (资源组节点id) InstanceStatus (资源组节点状态)2. Filter.Values: 长度为1且Filter.Fuzzy=true时，支持模糊查询; 不为1时，精确查询3. 每次请求的Filters的上限为10，Filter.Values的上限为100 */
+  /** 过滤条件注意: 1. Filter.Name 只支持以下枚举值: InstanceId (资源组节点id) InstanceStatus (资源组节点状态)2. Filter.Values: 长度为1且Filter.Fuzzy=true时，支持模糊查询; 不为1时，精确查询3. Filter.Negative: 是否取反，默认为false4. Filter.Fuzzy: 是否模糊查询，默认为false5. 每次请求的Filters的上限为10，Filter.Values的上限为100 */
   Filters?: Filter[];
   /** 分页查询起始位置，如：Limit为10，第一页Offset为0，第二页Offset为10...即每页左边为闭区间; 默认0 */
   Offset?: number;
@@ -2565,9 +2571,7 @@ declare interface DescribeBillingResourceGroupResponse {
 }
 
 declare interface DescribeBillingResourceGroupsRequest {
-  /** 资源组类型;枚举值:空: 通用, TRAIN: 训练, INFERENCE: 推理 */
-  Type?: string;
-  /** Filter.Name: 枚举值: ResourceGroupId (资源组id列表) ResourceGroupName (资源组名称列表) AvailableNodeCount（资源组中可用节点数量）Filter.Values: 长度为1且Filter.Fuzzy=true时，支持模糊查询; 不为1时，精确查询每次请求的Filters的上限为5，Filter.Values的上限为100 */
+  /** Filter.Name: 枚举值: ResourceGroupId (资源组id列表) ResourceGroupName (资源组名称列表) AvailableNodeCount（资源组中可用节点数量） Filter.Values: 长度为1且Filter.Fuzzy=true时，支持模糊查询; 不为1时，精确查询每次请求的Filters的上限为5，Filter.Values的上限为100 */
   Filters?: Filter[];
   /** 标签过滤 */
   TagFilters?: TagFilter[];
@@ -2747,7 +2751,7 @@ declare interface DescribeLogsRequest {
   StartTime?: string;
   /** 日志查询结束时间（RFC3339格式的时间字符串），默认值为当前时间 */
   EndTime?: string;
-  /** 日志查询条数，默认值100，最大值100 */
+  /** 日志查询条数，默认值100，最大值1000 */
   Limit?: number;
   /** 服务ID，和Service参数对应，不同Service的服务ID获取方式不同，具体如下：- Service类型为TRAIN： 调用[DescribeTrainingTask接口](/document/product/851/75089)查询训练任务详情，ServiceId为接口返回值中Response.TrainingTaskDetail.LatestInstanceId- Service类型为NOTEBOOK： 调用[DescribeNotebook接口](/document/product/851/95662)查询Notebook详情，ServiceId为接口返回值中Response.NotebookDetail.PodName- Service类型为INFER： 调用[DescribeModelServiceGroup接口](/document/product/851/82285)查询服务组详情，ServiceId为接口返回值中Response.ServiceGroup.Services.ServiceId- Service类型为BATCH： 调用[DescribeBatchTask接口](/document/product/851/80180)查询跑批任务详情，ServiceId为接口返回值中Response.BatchTaskDetail.LatestInstanceId */
   ServiceId?: string;
@@ -2761,6 +2765,8 @@ declare interface DescribeLogsRequest {
   Context?: string;
   /** 过滤条件注意: 1. Filter.Name：目前只支持Key（也就是按关键字过滤日志）2. Filter.Values：表示过滤日志的关键字；Values为多个的时候表示同时满足3. Filter. Negative和Filter. Fuzzy没有使用 */
   Filters?: Filter[];
+  /** 使用OFFSET分页查询时，指定返回的数据偏移量，默认为0 */
+  Offset?: number;
 }
 
 declare interface DescribeLogsResponse {
@@ -4069,7 +4075,7 @@ declare interface Tione {
   DeleteTrainingTask(data: DeleteTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingTaskResponse>;
   /** 查询资源组节点列表 {@link DescribeBillingResourceGroupRequest} {@link DescribeBillingResourceGroupResponse} */
   DescribeBillingResourceGroup(data: DescribeBillingResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceGroupResponse>;
-  /** 查询资源组详情 {@link DescribeBillingResourceGroupsRequest} {@link DescribeBillingResourceGroupsResponse} */
+  /** 查询资源组列表 {@link DescribeBillingResourceGroupsRequest} {@link DescribeBillingResourceGroupsResponse} */
   DescribeBillingResourceGroups(data?: DescribeBillingResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceGroupsResponse>;
   /** 查询资源组节点运行中的任务 {@link DescribeBillingResourceInstanceRunningJobsRequest} {@link DescribeBillingResourceInstanceRunningJobsResponse} */
   DescribeBillingResourceInstanceRunningJobs(data: DescribeBillingResourceInstanceRunningJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceInstanceRunningJobsResponse>;

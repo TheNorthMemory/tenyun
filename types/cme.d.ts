@@ -1136,7 +1136,7 @@ declare interface VideoExportExtensionArgs {
   ShortEdge?: number;
   /** 指定码率，单位 bps。当该参数为 0 时则不强制限定码率。不填则使用视频导出编码配置。 */
   VideoBitrate?: number;
-  /** 帧率。取值范围：[15, 60]，不填默认值为 25。 */
+  /** 帧率。取值范围：[15, 60]，不填默认值为 25。单位：帧 */
   FrameRate?: number;
   /** 是否去除视频数据，可选值：0：保留；1：去除。不填则使用视频导出编码配置。 */
   RemoveVideo?: number;

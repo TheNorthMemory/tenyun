@@ -572,6 +572,8 @@ declare interface CreateTaskSchedulerConfiguration {
   ExecutionTTLMinute?: number;
   /** 超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1 */
   WaitExecutionTotalTTLMinute?: number;
+  /** - 任务依赖运行条件，默认为ALL_SUCCESS，暂时只支持工作流调度项目下配置- ALL_SUCCESS： 全部成功：所有上游依赖任务都达到终态时，进行依赖判断，如果上游全部都成功，则依赖判断成功，否则如果上游有一个跳过运行，则标记为跳过运行，其余情况标记为上游失败- ALL_FAILED：全部失败：所有上游依赖任务都达到终态时，进行依赖判断，如果上游状态都是失败或者上游失败，则依赖判断成功，否则就标记为跳过运行- ALL_DONE：全部完成：所有上游依赖任务都达到终态时，进行依赖判断，直接是依赖判断成功- ALL_DONE_AT_LEAST_ONE_SUCCESS：上游全部完成至少一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个成功，则依赖判断成功，否则就是跳过运行- ALL_SKIPPED：上游全部都跳过: 所有上游依赖任务都达到终态时，进行依赖判断，所有的上游都是跳过状态才算依赖判断成功，否则当前节点就是跳过运行- ONE_FAILED：至少一个失败: 上游只要有一个失败了，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有失败，则跳过运行- ONE_SUCCESS：至少一个成功：上游只要有一个成功，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有成功，则跳过运行- ONE_DONE：至少一个完成：上游只要有一个完成了，就进行依赖判断，且依赖判断成功，否则还是等待上游- NONE_FAILED：上游全部完成，没有失败: 所有上游依赖任务都达到终态时，进行依赖判断，如果上游都是成功或者跳过运行，则依赖判断成功，否则标记为上游失败- ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS：上游全部完成，没有失败，至少有一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，上游没有一个失败且至少有一个成功的情况下，依赖判断成功，否则就是跳过运行- NONE_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行- ALL_DONE_AT_LEAST_ONE_FAILED：上游全部完成至少一个失败: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个失败，则依赖判断成功，否则就是跳过运行 */
+  DependencyTriggerPolicy?: string;
 }
 
 /** 创建任务基本属性信息 */
@@ -638,6 +640,8 @@ declare interface CreateTriggerTaskSchedulerConfiguration {
   ParamTaskInList?: InTaskParameter[];
   /** 产出登记 */
   TaskOutputRegistryList?: TaskDataRegistry[];
+  /** - 任务依赖运行条件，默认为ALL_SUCCESS，暂时只支持工作流调度项目下配置- ALL_SUCCESS： 全部成功：所有上游依赖任务都达到终态时，进行依赖判断，如果上游全部都成功，则依赖判断成功，否则如果上游有一个跳过运行，则标记为跳过运行，其余情况标记为上游失败- ALL_FAILED：全部失败：所有上游依赖任务都达到终态时，进行依赖判断，如果上游状态都是失败或者上游失败，则依赖判断成功，否则就标记为跳过运行- ALL_DONE：全部完成：所有上游依赖任务都达到终态时，进行依赖判断，直接是依赖判断成功- ALL_DONE_AT_LEAST_ONE_SUCCESS：上游全部完成至少一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个成功，则依赖判断成功，否则就是跳过运行- ALL_SKIPPED：上游全部都跳过: 所有上游依赖任务都达到终态时，进行依赖判断，所有的上游都是跳过状态才算依赖判断成功，否则当前节点就是跳过运行- ONE_FAILED：至少一个失败: 上游只要有一个失败了，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有失败，则跳过运行- ONE_SUCCESS：至少一个成功：上游只要有一个成功，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有成功，则跳过运行- ONE_DONE：至少一个完成：上游只要有一个完成了，就进行依赖判断，且依赖判断成功，否则还是等待上游- NONE_FAILED：上游全部完成，没有失败: 所有上游依赖任务都达到终态时，进行依赖判断，如果上游都是成功或者跳过运行，则依赖判断成功，否则标记为上游失败- ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS：上游全部完成，没有失败，至少有一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，上游没有一个失败且至少有一个成功的情况下，依赖判断成功，否则就是跳过运行- NONE_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行- ALL_DONE_AT_LEAST_ONE_FAILED：上游全部完成至少一个失败: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个失败，则依赖判断成功，否则就是跳过运行 */
+  DependencyTriggerPolicy?: string;
 }
 
 /** 创建工作流结果 */
@@ -3326,6 +3330,12 @@ declare interface TaskDataRegistry {
   DbGuid?: string | null;
   /** 表唯一标识 */
   TableGuid?: string | null;
+  /** Catalog名称 */
+  CatalogName?: string | null;
+  /** 数据源名称 */
+  DatasourceName?: string | null;
+  /** Catalog(如有).数据库(如有).表名名称 */
+  QualifiedName?: string | null;
 }
 
 /** 依赖任务信息 */
@@ -3672,6 +3682,8 @@ declare interface TaskSchedulerConfiguration {
   ExecutionTTLMinute?: number | null;
   /** 超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1 */
   WaitExecutionTotalTTLMinute?: number | null;
+  /** - 任务依赖运行条件，默认为ALL_SUCCESS，暂时只支持工作流调度项目下配置- ALL_SUCCESS： 全部成功：所有上游依赖任务都达到终态时，进行依赖判断，如果上游全部都成功，则依赖判断成功，否则如果上游有一个跳过运行，则标记为跳过运行，其余情况标记为上游失败- ALL_FAILED：全部失败：所有上游依赖任务都达到终态时，进行依赖判断，如果上游状态都是失败或者上游失败，则依赖判断成功，否则就标记为跳过运行- ALL_DONE：全部完成：所有上游依赖任务都达到终态时，进行依赖判断，直接是依赖判断成功- ALL_DONE_AT_LEAST_ONE_SUCCESS：上游全部完成至少一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个成功，则依赖判断成功，否则就是跳过运行- ALL_SKIPPED：上游全部都跳过: 所有上游依赖任务都达到终态时，进行依赖判断，所有的上游都是跳过状态才算依赖判断成功，否则当前节点就是跳过运行- ONE_FAILED：至少一个失败: 上游只要有一个失败了，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有失败，则跳过运行- ONE_SUCCESS：至少一个成功：上游只要有一个成功，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有成功，则跳过运行- ONE_DONE：至少一个完成：上游只要有一个完成了，就进行依赖判断，且依赖判断成功，否则还是等待上游- NONE_FAILED：上游全部完成，没有失败: 所有上游依赖任务都达到终态时，进行依赖判断，如果上游都是成功或者跳过运行，则依赖判断成功，否则标记为上游失败- ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS：上游全部完成，没有失败，至少有一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，上游没有一个失败且至少有一个成功的情况下，依赖判断成功，否则就是跳过运行- NONE_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行- ALL_DONE_AT_LEAST_ONE_FAILED：上游全部完成至少一个失败: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个失败，则依赖判断成功，否则就是跳过运行 */
+  DependencyTriggerPolicy?: string | null;
 }
 
 /** 任务调度变量参数 */
@@ -3858,6 +3870,8 @@ declare interface TriggerTaskBrief {
   ExecutionState?: string | null;
   /** 运行开始时间 */
   ExecutionStartTime?: string | null;
+  /** 依赖策略 */
+  DependencyTriggerPolicy?: string | null;
 }
 
 /** 任务配置信息 */
@@ -3974,6 +3988,8 @@ declare interface TriggerTaskRunBrief {
   JobId?: string | null;
   /** 创建时间戳 */
   CreateTime?: string | null;
+  /** 计划调度时间 */
+  ScheduleTime?: string | null;
   /** 更新时间戳 */
   UpdateTime?: string | null;
   /** 依赖任务完成时间 */
@@ -4052,6 +4068,8 @@ declare interface TriggerTaskRunBrief {
   WorkflowExecutionState?: string | null;
   /** 任务执行结果 */
   ExecutionResult?: string | null;
+  /** 依赖策略 */
+  DependencyTriggerPolicy?: string | null;
 }
 
 /** 任务调度配置信息 */
@@ -4076,6 +4094,8 @@ declare interface TriggerTaskSchedulerConfiguration {
   ParamTaskInList?: InTaskParameter[] | null;
   /** 产出登记 */
   TaskOutputRegistryList?: TaskDataRegistry[] | null;
+  /** - 任务依赖运行条件，默认为ALL_SUCCESS，暂时只支持工作流调度项目下配置- ALL_SUCCESS： 全部成功：所有上游依赖任务都达到终态时，进行依赖判断，如果上游全部都成功，则依赖判断成功，否则如果上游有一个跳过运行，则标记为跳过运行，其余情况标记为上游失败- ALL_FAILED：全部失败：所有上游依赖任务都达到终态时，进行依赖判断，如果上游状态都是失败或者上游失败，则依赖判断成功，否则就标记为跳过运行- ALL_DONE：全部完成：所有上游依赖任务都达到终态时，进行依赖判断，直接是依赖判断成功- ALL_DONE_AT_LEAST_ONE_SUCCESS：上游全部完成至少一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个成功，则依赖判断成功，否则就是跳过运行- ALL_SKIPPED：上游全部都跳过: 所有上游依赖任务都达到终态时，进行依赖判断，所有的上游都是跳过状态才算依赖判断成功，否则当前节点就是跳过运行- ONE_FAILED：至少一个失败: 上游只要有一个失败了，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有失败，则跳过运行- ONE_SUCCESS：至少一个成功：上游只要有一个成功，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有成功，则跳过运行- ONE_DONE：至少一个完成：上游只要有一个完成了，就进行依赖判断，且依赖判断成功，否则还是等待上游- NONE_FAILED：上游全部完成，没有失败: 所有上游依赖任务都达到终态时，进行依赖判断，如果上游都是成功或者跳过运行，则依赖判断成功，否则标记为上游失败- ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS：上游全部完成，没有失败，至少有一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，上游没有一个失败且至少有一个成功的情况下，依赖判断成功，否则就是跳过运行- NONE_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行- ALL_DONE_AT_LEAST_ONE_FAILED：上游全部完成至少一个失败: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个失败，则依赖判断成功，否则就是跳过运行 */
+  DependencyTriggerPolicy?: string | null;
 }
 
 /** 任务版本列表信息 */
@@ -4222,6 +4242,8 @@ declare interface TriggerWorkflowRunBrief {
   TriggerType?: string | null;
   /** 工作流触发时间 */
   CreateTime?: string | null;
+  /** 计划调度时间 */
+  ScheduleTime?: string | null;
   /** 执行开始时间戳 */
   ExecutionStartTime?: string | null;
   /** 执行结束时间戳 */
@@ -4811,7 +4833,7 @@ declare interface CreateDataSourceRequest {
   ProjectId: string;
   /** 数据源名称 */
   Name: string;
-  /** 数据源类型:枚举值- MYSQL- TENCENT_MYSQL- POSTGRE- ORACLE- SQLSERVER- FTP- HIVE- HUDI- HDFS- ICEBERG- KAFKA- DTS_KAFKA- HBASE- SPARK- TBASE- DB2- DM- GAUSSDB- GBASE- IMPALA- ES- TENCENT_ES- GREENPLUM- SAP_HANA- SFTP- OCEANBASE- CLICKHOUSE- KUDU- VERTICA- REDIS- COS- DLC- DORIS- CKAFKA- S3_DATAINSIGHT- TDSQL- TDSQL_MYSQL- MONGODB- TENCENT_MONGODB- REST_API- TiDB- StarRocks- Trino- Kyuubi- TCHOUSE_X- TCHOUSE_P- TCHOUSE_C- TCHOUSE_D- INFLUXDB- BIG_QUERY- SSH- BLOB- TDSQL_POSTGRE- GDB- TDENGINE- TDSQLC- FileSystem */
+  /** 数据源类型:枚举值- MYSQL- TENCENT_MYSQL- POSTGRE- ORACLE- SQLSERVER- FTP- HIVE- HUDI- HDFS- ICEBERG- KAFKA- DTS_KAFKA- HBASE- SPARK- TBASE- DB2- DM- GAUSSDB- GBASE- IMPALA- ES- TENCENT_ES- GREENPLUM- SAP_HANA- SFTP- OCEANBASE- CLICKHOUSE- KUDU- VERTICA- REDIS- COS- DLC- DORIS- CKAFKA- S3_DATAINSIGHT- TDSQL- TDSQL_MYSQL- MONGODB- TENCENT_MONGODB- REST_API- TiDB- StarRocks- Trino- Kyuubi- TCHOUSE_X- TCHOUSE_P- TCHOUSE_C- TCHOUSE_D- INFLUXDB- BIG_QUERY- SSH- BLOB- TDSQL_POSTGRE- GDB- TDENGINE- TDSQLC- FileSystem- TCLake */
   Type: string;
   /** 数据源的配置信息，以JSON KV存储，根据每个数据源类型不同，而KV存储信息不同> deployType: CONNSTR_PUBLICDB(公网实例) CONNSTR_CVMDB(自建实例)INSTANCE(云实例)```mysql: 自建实例{ "deployType": "CONNSTR_CVMDB", "url": "jdbc:mysql://1.1.1.1:1111/example#test#123456", "username": "root", "password": "example#test#123456", "region": "ap-shanghai", "vpcId": "vpc-kprq42yo", "type": "MYSQL"}mysql: 云实例{ "instanceid": "cdb-12uxdo5e", "db": "db", "region": "ap-shanghai", "username": "msyql", "password": "example#test#123456", "deployType": "INSTANCE", "type": "TENCENT_MYSQL"}sql_server: { "deployType": "CONNSTR_PUBLICDB", "url": "jdbc:sqlserver://1.1.1.1:223;example#test#123456", "username": "user_1", "password": "example#test#123456", "type": "SQLSERVER"}redis: redisType: -NO_ACCOUT(免账号) -SELF_ACCOUNT(自定义账号){ "deployType": "CONNSTR_PUBLICDB", "username":"" "password": "example#test#123456", "ip": "1.1.1.1", "port": "6379", "redisType": "NO_ACCOUT", "type": "REDIS"}oracle: { "deployType": "CONNSTR_CVMDB", "url": "jdbc:oracle:thin:@1.1.1.1:1521:example#test#123456", "username": "oracle", "password": "example#test#123456", "region": "ap-shanghai", "vpcId": "vpc-kprq42yo", "type": "ORACLE"}mongodb: advanceParams(自定义参数，会拼接至url后){ "advanceParams": [ { "key": "authSource", "value": "auth" } ], "db": "admin", "deployType": "CONNSTR_PUBLICDB", "username": "user", "password": "example#test#123456", "type": "MONGODB", "host": "1.1.1.1:9200"}postgresql:{ "deployType": "CONNSTR_PUBLICDB", "url": "jdbc:postgresql://1.1.1.1:1921/example#test#123456", "username": "user", "password": "example#test#123456", "type": "POSTGRE"}kafka: authType: - sasl - jaas - sasl_plaintext - sasl_ssl - GSSAPI ssl: -PLAIN -GSSAPI{ "deployType": "CONNSTR_PUBLICDB", "host": "1.1.1.1:9092", "ssl": "GSSAPI", "authType": "sasl", "type": "KAFKA", "principal": "aaaa", "serviceName": "kafka"}cos:{ "region": "ap-shanghai", "deployType": "INSTANCE", "secretId": "aaaaa", "secretKey": "example#test#123456", "bucket": "aaa", "type": "COS"}``` */
   ProdConProperties: string;
@@ -7117,9 +7139,9 @@ declare interface ListTriggerTasksResponse {
 declare interface ListTriggerWorkflowRunsRequest {
   /** 项目ID */
   ProjectId: string;
-  /** 过滤参数,工作流名称或ID查询名称：Keyword,工作流ID查询名称：WorkflowId,文件夹查询名称：FolderId,负责人查询名称：InChargeUin, 工作流执行id: ExecutionId */
+  /** 过滤参数, 工作流名称或ID查询名称: Keyword, 工作流ID查询名称: WorkflowId,文件夹查询名称: FolderId, 负责人查询名称: InChargeUin, 工作流执行id: ExecutionId, 计划调度时间区间: ScheduleTimeGreaterEqual, ScheduleTimeLessEqual */
   Filters?: Filter[];
-  /** 排序字段，排序字段名称	如下开始时间：CreateTime，结束时间：EndTime */
+  /** 排序字段，排序字段名称	如下开始时间：CreateTime，结束时间：EndTime，计划调度时间：ScheduleTime */
   OrderFields?: OrderField[];
   /** 页码 */
   PageNumber?: number;
@@ -23758,7 +23780,7 @@ declare interface Wedata {
   UpdateOpsAlarmRule(data: UpdateOpsAlarmRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOpsAlarmRuleResponse>;
   /** 修改任务负责人 {@link UpdateOpsTasksOwnerRequest} {@link UpdateOpsTasksOwnerResponse} */
   UpdateOpsTasksOwner(data: UpdateOpsTasksOwnerRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOpsTasksOwnerResponse>;
-  /** 修改任务责任人 {@link UpdateOpsTriggerTasksOwnerRequest} {@link UpdateOpsTriggerTasksOwnerResponse} */
+  /** 修改工作流调度任务责任人 {@link UpdateOpsTriggerTasksOwnerRequest} {@link UpdateOpsTriggerTasksOwnerResponse} */
   UpdateOpsTriggerTasksOwner(data: UpdateOpsTriggerTasksOwnerRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOpsTriggerTasksOwnerResponse>;
   /** 更新项目 {@link UpdateProjectRequest} {@link UpdateProjectResponse} */
   UpdateProject(data: UpdateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProjectResponse>;

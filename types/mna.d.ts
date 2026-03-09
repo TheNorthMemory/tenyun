@@ -36,6 +36,12 @@ declare interface ActiveDeviceList {
   Time?: string;
 }
 
+/** 应用id列表 */
+declare interface DelApplicationList {
+  /** 应用id */
+  MpApplicationId: string;
+}
+
 /** 目标IP信息 */
 declare interface DestIpInfo {
   /** 时间：s */
@@ -358,6 +364,28 @@ declare interface ActivateHardwareResponse {
   RequestId?: string;
 }
 
+declare interface AddApplicationRequest {
+  /** 新建应用的应用名 */
+  MpApplicationName: string;
+  /** 新建设备的备注 */
+  Remark?: string;
+  /** 新建应用的base64密钥字符串，非必选，如果不填写则由系统自动生成 */
+  MpApplicationKey?: string;
+  /** 接入环境。0：公有云网关；1：自有网关；2：公有云网关和自有网关。不填默认公有云网关。 具体含义： 公有云网关：即该设备只能接入公有云网关（就近接入） 自有网关：即该设备只能接入已经注册上线的自有网关（就近接入或固定ip接入） 公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入） */
+  AccessScope?: number;
+}
+
+declare interface AddApplicationResponse {
+  /** 应用ID */
+  MpApplicationId?: string;
+  /** 经过加密算法加密后的base64格式密钥 */
+  MpApplicationKey?: string;
+  /** 应用名 */
+  MpApplicationName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AddDeviceRequest {
   /** 新建设备的名称 */
   DeviceName: string;
@@ -446,6 +474,16 @@ declare interface CreateEncryptedKeyResponse {
   RequestId?: string;
 }
 
+declare interface DeleteApplicationRequest {
+  /** 应用id列表 */
+  MpApplicationIdList: DelApplicationList[];
+}
+
+declare interface DeleteApplicationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteDeviceRequest {
   /** 删除设备的唯一ID */
   DeviceId: string;
@@ -524,6 +562,26 @@ declare interface GetActiveDeviceCountResponse {
   LicenseType?: string;
   /** 租户ID */
   AppId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetApplicationRequest {
+  /** 应用id */
+  MpApplicationId?: string;
+}
+
+declare interface GetApplicationResponse {
+  /** 应用ID */
+  MpApplicationId?: string;
+  /** 经过加密算法加密后的base64格式密钥 */
+  MpApplicationKey?: string;
+  /** 应用名 */
+  MpApplicationName?: string;
+  /** 设备的备注 */
+  Remark?: string;
+  /** 接入环境。0：公有云网关；1：自有网关；2：公有云网关和自有网关。不填默认公有云网关。 具体含义： 公有云网关：即该设备只能接入公有云网关（就近接入） 自有网关：即该设备只能接入已经注册上线的自有网关（就近接入或固定ip接入） 公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入） */
+  AccessScope?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1126,6 +1184,34 @@ declare interface SetNotifyUrlResponse {
   RequestId?: string;
 }
 
+declare interface UpdateApplicationInfoRequest {
+  /** 应用ID */
+  MpApplicationId: string;
+  /** 新建应用的应用名 */
+  MpApplicationName?: string;
+  /** 新建设备的备注 */
+  Remark?: string;
+  /** 接入环境。0：公有云网关；1：自有网关；2：公有云网关和自有网关。不填默认公有云网关。 具体含义： 公有云网关：即该设备只能接入公有云网关（就近接入） 自有网关：即该设备只能接入已经注册上线的自有网关（就近接入或固定ip接入） 公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入） */
+  AccessScope?: number;
+}
+
+declare interface UpdateApplicationInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateApplicationKeyRequest {
+  /** 应用的base64密钥字符串 */
+  MpApplicationKey: string;
+  /** 应用ID */
+  MpApplicationId: string;
+}
+
+declare interface UpdateApplicationKeyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateDeviceRequest {
   /** 设备id */
   DeviceId: string;
@@ -1217,6 +1303,8 @@ declare interface Mna {
   (): Versions;
   /** 批量激活硬件设备 {@link ActivateHardwareRequest} {@link ActivateHardwareResponse} */
   ActivateHardware(data: ActivateHardwareRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateHardwareResponse>;
+  /** 新建应用 {@link AddApplicationRequest} {@link AddApplicationResponse} */
+  AddApplication(data: AddApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<AddApplicationResponse>;
   /** 新建设备 {@link AddDeviceRequest} {@link AddDeviceResponse} */
   AddDevice(data: AddDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<AddDeviceResponse>;
   /** 新建分组 {@link AddGroupRequest} {@link AddGroupResponse} */
@@ -1227,6 +1315,8 @@ declare interface Mna {
   AddL3Conn(data: AddL3ConnRequest, config?: AxiosRequestConfig): AxiosPromise<AddL3ConnResponse>;
   /** 设置或更新密钥 {@link CreateEncryptedKeyRequest} {@link CreateEncryptedKeyResponse} */
   CreateEncryptedKey(data?: CreateEncryptedKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEncryptedKeyResponse>;
+  /** 删除应用 {@link DeleteApplicationRequest} {@link DeleteApplicationResponse} */
+  DeleteApplication(data: DeleteApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationResponse>;
   /** 删除设备 {@link DeleteDeviceRequest} {@link DeleteDeviceResponse} */
   DeleteDevice(data: DeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceResponse>;
   /** 删除分组 {@link DeleteGroupRequest} {@link DeleteGroupResponse} */
@@ -1237,6 +1327,8 @@ declare interface Mna {
   DownloadActiveDeviceCount(data?: DownloadActiveDeviceCountRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadActiveDeviceCountResponse>;
   /** 活跃设备数量统计 {@link GetActiveDeviceCountRequest} {@link GetActiveDeviceCountResponse} */
   GetActiveDeviceCount(data?: GetActiveDeviceCountRequest, config?: AxiosRequestConfig): AxiosPromise<GetActiveDeviceCountResponse>;
+  /** 获取应用信息 {@link GetApplicationRequest} {@link GetApplicationResponse} */
+  GetApplication(data?: GetApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<GetApplicationResponse>;
   /** 根据设备名统计目标IP地址 {@link GetDestIPByNameRequest} {@link GetDestIPByNameResponse} */
   GetDestIPByName(data: GetDestIPByNameRequest, config?: AxiosRequestConfig): AxiosPromise<GetDestIPByNameResponse>;
   /** 获取设备详细信息 {@link GetDeviceRequest} {@link GetDeviceResponse} */
@@ -1295,6 +1387,10 @@ declare interface Mna {
   ReportOrder(data: ReportOrderRequest, config?: AxiosRequestConfig): AxiosPromise<ReportOrderResponse>;
   /** 设置用户流量告警信息 {@link SetNotifyUrlRequest} {@link SetNotifyUrlResponse} */
   SetNotifyUrl(data: SetNotifyUrlRequest, config?: AxiosRequestConfig): AxiosPromise<SetNotifyUrlResponse>;
+  /** 更新应用信息 {@link UpdateApplicationInfoRequest} {@link UpdateApplicationInfoResponse} */
+  UpdateApplicationInfo(data: UpdateApplicationInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateApplicationInfoResponse>;
+  /** 更新应用密钥 {@link UpdateApplicationKeyRequest} {@link UpdateApplicationKeyResponse} */
+  UpdateApplicationKey(data: UpdateApplicationKeyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateApplicationKeyResponse>;
   /** 更新设备 {@link UpdateDeviceRequest} {@link UpdateDeviceResponse} */
   UpdateDevice(data: UpdateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDeviceResponse>;
   /** 更新分组信息 {@link UpdateGroupRequest} {@link UpdateGroupResponse} */

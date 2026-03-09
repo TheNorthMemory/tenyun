@@ -716,6 +716,10 @@ declare interface EnterpriseSecurityGroupRuleRuleInfo {
   CreateTime?: string;
   /** 规则最近更新时间 */
   UpdateTime?: string;
+  /** 规则分区，1最前分区，2中间分区，3最后分区 */
+  RulePartition?: number;
+  /** 规则生效范围，SG安全组，LH轻量服务器 */
+  Scope?: string;
 }
 
 /** 防火墙网段信息 */
@@ -1396,6 +1400,8 @@ declare interface SecurityGroupRule {
   Enable?: string;
   /** 规则对应的唯一内部id */
   Uid?: string;
+  /** 规则生效范围，SG安全组，LH轻量服务器 */
+  Scope?: string;
 }
 
 /** 安全组规则 */
@@ -1412,6 +1418,8 @@ declare interface SecurityGroupSimplifyRule {
   RuleUuid?: number;
   /** 规则序号 */
   Sequence?: number;
+  /** 规则生效范围，SG安全组，LH轻量服务器 */
+  Scope?: string;
 }
 
 /** 执行顺序对象 */

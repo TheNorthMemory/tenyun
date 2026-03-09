@@ -46,6 +46,8 @@ declare interface Agent {
   AgentMode?: number;
   /** 高级设置 */
   AdvancedConfig?: AgentAdvancedConfig;
+  /** 工具数量上限 */
+  MaxToolCount?: number;
 }
 
 /** Agent高级设置 */
@@ -245,11 +247,11 @@ declare interface AgentPluginInfo {
   /** 应用配置的插件header信息 */
   Headers?: AgentPluginHeader[];
   /** 插件调用LLM时使用的模型配置，一般用于指定知识库问答插件的生成模型 */
-  Model?: AgentModelInfo;
+  Model?: AgentModelInfo | null;
   /** 插件信息类型; 0: 未指定类型; 1: 知识库问答插件 */
   PluginInfoType?: number;
   /** 知识库问答插件配置 */
-  KnowledgeQa?: AgentKnowledgeQAPlugin;
+  KnowledgeQa?: AgentKnowledgeQAPlugin | null;
   /** 是否使用一键授权 */
   EnableRoleAuth?: boolean | null;
   /** 应用配置的插件query信息 */
@@ -420,6 +422,8 @@ declare interface AgentToolInfo {
   AuthMode?: number;
   /** 授权类型; 0-无鉴权；1-APIKey；2-CAM授权；3-Oauth2.0授权； */
   AuthType?: number;
+  /** 工具授权配置状态；0：不需要授权，1：需要授权-未配置，2：需要授权-已配置 */
+  AuthConfigStatus?: number;
 }
 
 /** Agent工具的请求参数定义 */
@@ -566,6 +570,12 @@ declare interface AppModelDetailInfo {
   HistoryLimit?: number;
   /** 模型别名 */
   AliasName?: string;
+}
+
+/** 异步工作流的消息 */
+declare interface AsyncWorkflowMessage {
+  /** 内容数组，包含多个内容对象 */
+  Contents?: Content[];
 }
 
 /** 标签详情信息 */
@@ -987,7 +997,7 @@ declare interface FileInfo {
 /** 文件信息内容 */
 declare interface FileInfoContent {
   /** 实时文档解析接口返回的 DocBizId */
-  DocBizId?: number;
+  DocBizId?: number | null;
   /** 文件名称 */
   FileName?: string | null;
   /** 文件类型 */
@@ -996,6 +1006,10 @@ declare interface FileInfoContent {
   FileSize?: number | null;
   /** 文件 URL */
   FileUrl?: string | null;
+  /** 实时文档解析接口返回的 doc_id。 */
+  DocId?: number | null;
+  /** 文件创建时间 */
+  CreateTime?: number | null;
 }
 
 /** 不满意回复检索过滤 */
@@ -2158,6 +2172,8 @@ declare interface SearchStrategy {
   RerankModel?: string | null;
   /** NL2SQL模型配置 */
   NatureLanguageToSqlModelConfig?: NL2SQLModelConfig | null;
+  /** 是否开启图谱检索 */
+  GraphRetrieval?: boolean;
 }
 
 /** 共享知识库配置 */
@@ -2434,6 +2450,8 @@ declare interface Widget {
   WidgetId?: string;
   /** Widget实例ID */
   WidgetRunId?: string;
+  /** Widget显示数据 */
+  View?: string | null;
   /** Widget状态数据 */
   State?: string | null;
   /** Widget位置 */
@@ -2588,6 +2606,8 @@ declare interface WorkflowRunDetail {
   CustomVariables?: CustomVariable[];
   /** 工作流的流程图 */
   WorkflowGraph?: string;
+  /** 当前的回复消息 */
+  LatestMessage?: AsyncWorkflowMessage | null;
 }
 
 /** 工作流运行节点信息 */
@@ -2929,10 +2949,10 @@ declare interface DeleteAgentResponse {
 }
 
 declare interface DeleteAppRequest {
-  /** 应用ID */
+  /** 应用ID，获取方法参看如何获取 [BotBizId](https://cloud.tencent.com/document/product/1759/109469)。 */
   AppBizId: string;
-  /** 应用类型；knowledge_qa-知识问答管理；summary-知识摘要；classifys-知识标签提取 */
-  AppType: string;
+  /** 应用类型；`"knowledge_qa"` 知识问答应用（包含标准模式 单工作流 Multi-Agent 等模式） */
+  AppType?: string;
 }
 
 declare interface DeleteAppResponse {
@@ -3054,6 +3074,8 @@ declare interface DescribeAppAgentListResponse {
   Agents?: Agent[];
   /** Agent转交高级设置 */
   HandoffAdvancedSetting?: AgentHandoffAdvancedSetting;
+  /** Agent数量上限 */
+  MaxAgentCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3563,7 +3585,7 @@ declare interface DescribeSharedKnowledgeResponse {
 declare interface DescribeStorageCredentialRequest {
   /** 应用ID，参数非必填不代表不需要填写，下面不同的参数组合会获取到不同的权限，具体请参考 https://cloud.tencent.com/document/product/1759/116238 */
   BotBizId?: string;
-  /** 文件类型,正常的文件名类型后缀，例如 xlsx、pdf、 docx、png 等 */
+  /** 文件类型,正常的文件名类型后缀，支持 docx、doc、pdf、txt、md、wps、pages、html、mhtml、epub、xml、json、log、xlsx、xls、csv、tsv、numbers、pptx、ppt、ppsx、ppsm、key、png、jpg、jpeg、gif、bmp、tiff、webp、heif、heic、jp2、eps、icns、im、pcx、ppm、xbm、xmind */
   FileType?: string;
   /** IsPublic用于上传文件或图片时选择场景，当上传对话端图片时IsPublic为true，上传文件（包括文档库文件/图片等和对话端文件）时IsPublic为false */
   IsPublic?: boolean;
@@ -3586,12 +3608,16 @@ declare interface DescribeStorageCredentialResponse {
   FilePath?: string;
   /** 存储类型 */
   Type?: string;
-  /** 主号 */
+  /** 企业主账号 */
   CorpUin?: string;
   /** 图片存储目录 */
   ImagePath?: string;
   /** 上传存储路径，到具体文件 */
   UploadPath?: string;
+  /** 文件上传地址，使用put请求上传文件到该地址 */
+  UploadUrl?: string;
+  /** 文件的预签名地址，支持下载 */
+  FileUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

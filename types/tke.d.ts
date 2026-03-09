@@ -136,7 +136,7 @@ declare interface DataDisk {
 declare interface Disk {
   /** 云盘类型 */
   DiskType: string;
-  /** 云盘大小(G） */
+  /** 云盘大小 (G） */
   DiskSize: number;
   /** 是否自动化格式盘并挂载 */
   AutoFormatAndMount?: boolean;
@@ -146,6 +146,10 @@ declare interface Disk {
   MountTarget?: string;
   /** 云盘ID */
   DiskId?: string | null;
+  /** 加密系统盘 */
+  Encrypt?: string | null;
+  /** 自定义 KMS ID */
+  KmsKeyId?: string | null;
 }
 
 /** 第三方节点 */
@@ -322,7 +326,7 @@ declare interface IntOrString {
 
 /** 公网带宽 */
 declare interface InternetAccessible {
-  /** 带宽 */
+  /** 带宽，单位为Mbps */
   MaxBandwidthOut: number;
   /** 网络计费方式 */
   ChargeType: string;
@@ -4044,6 +4048,8 @@ declare namespace V20180525 {
     InstanceAdvancedSettingsOverrides?: InstanceAdvancedSettings[];
     /** 节点镜像 */
     ImageId?: string;
+    /** 直接添加为原生节点 */
+    NodeType?: string;
   }
 
   interface AddExistedInstancesResponse {
@@ -4208,7 +4214,7 @@ declare namespace V20180525 {
     IsExtranet?: boolean;
     /** 设置域名 */
     Domain?: string;
-    /** 使用的安全组，只有外网访问需要传递（开启外网访问且不使用已有clb时必传）。获取方式：https://cloud.tencent.com/document/api/215/15808 */
+    /** 使用的安全组（开启内外网访问且不使用已有clb时可传，内网访问需要先找clb侧加白使用）。获取方式：https://cloud.tencent.com/document/api/215/15808 */
     SecurityGroup?: string;
     /** 创建lb参数，只有外网访问需要设置，是一个json格式化后的字符串：{"InternetAccessible":{"InternetChargeType":"TRAFFIC_POSTPAID_BY_HOUR","InternetMaxBandwidthOut":200},"VipIsp":"","BandwidthPackageId":""}。各个参数意义：InternetAccessible.InternetChargeType含义：TRAFFIC_POSTPAID_BY_HOUR按流量按小时后计费;BANDWIDTH_POSTPAID_BY_HOUR 按带宽按小时后计费;InternetAccessible.BANDWIDTH_PACKAGE 按带宽包计费。InternetMaxBandwidthOut含义：最大出带宽，单位Mbps，范围支持0到2048，默认值10。VipIsp含义：CMCC | CTCC | CUCC，分别对应 移动 | 电信 | 联通，如果不指定本参数，则默认使用BGP。可通过 DescribeSingleIsp 接口查询一个地域所支持的Isp。如果指定运营商，则网络计费式只能使用按带宽包计费BANDWIDTH_PACKAGE。BandwidthPackageId含义：带宽包ID，指定此参数时，网络计费方式InternetAccessible.InternetChargeType只支持按带宽包计费BANDWIDTH_PACKAGE。 */
     ExtensiveParameters?: string;
@@ -4464,7 +4470,7 @@ declare namespace V20180525 {
     ZoneInstanceCountISPSet: ECMZoneInstanceCountISP[];
     /** 密码 */
     Password?: string;
-    /** 公网带宽 */
+    /** 公网带宽，单位为Mbps */
     InternetMaxBandwidthOut?: number;
     /** 镜像id */
     ImageId?: string;
@@ -5553,6 +5559,8 @@ declare namespace V20180525 {
     SecurityGroup?: string;
     /** 内网访问所属子网 */
     ClusterIntranetSubnetId?: string;
+    /** 内网安全组 */
+    IntranetSecurityGroup?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -7862,7 +7870,7 @@ declare namespace V20180525 {
     ClusterId: string;
     /** 节点池id */
     NodePoolId: string;
-    /** 节点池所关联的伸缩组的期望实例数 */
+    /** 节点池所关联的伸缩组的期望实例数，单位个 */
     DesiredCapacity: number;
   }
 

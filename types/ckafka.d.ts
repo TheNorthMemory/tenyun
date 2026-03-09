@@ -406,6 +406,8 @@ declare interface CreateInstancePostData {
   InstanceId?: string;
   /** 订单和购买实例对应映射列表 */
   DealNameInstanceIdMapping?: DealInstanceDTO[];
+  /** CAM鉴权返回的eventId */
+  EventId?: string;
 }
 
 /** 后付费实例相关接口返回结构 */
@@ -428,6 +430,8 @@ declare interface CreateInstancePreData {
   InstanceId?: string;
   /** 订单和购买实例对应映射列表 */
   DealNameInstanceIdMapping?: DealInstanceDTO[];
+  /** CAM鉴权返回的eventId */
+  EventId?: string;
 }
 
 /** 预付费实例相关接口返回结构 */
@@ -621,15 +625,9 @@ declare interface DealInstanceDTO {
 /** 变配类型查询出参 */
 declare interface DescModifyType {
   /** 变配类型 */
-  ModifyType: number;
+  ModifyType?: number;
   /** 是否迁移标志 */
-  MigrateFlag: boolean;
-  /** 迁移预计耗时(稳定模式)秒 */
-  MigrateCostTime: number | null;
-  /** 升配模式(1:稳定模式，2:高速模式) */
-  UpgradeStrategy: number | null;
-  /** 迁移预计耗时(高速模式)秒 */
-  MigrateCostTimeHighSpeed: number | null;
+  MigrateFlag?: boolean;
 }
 
 /** topic链接信息 */
@@ -1372,6 +1370,8 @@ declare interface InstanceDetail {
   ClusterType?: string;
   /** 实例功能列表 */
   Features?: string[];
+  /** 实例级别消息保留大小单位：byte默认值：-1实例级别消息保留大小 */
+  RetentionBytes?: number;
 }
 
 /** 实例 / topic 维度限流策略 */
@@ -1404,6 +1404,8 @@ declare interface InstanceVersion {
   HighVersionSet?: string[];
   /** 允许小版本号配置自动删除消费者组 */
   AllowAutoDeleteTimestamp?: boolean;
+  /** 允许修改事务ID过期时间配置 */
+  AllowModifyTxnIdExpiration?: boolean;
 }
 
 /** 数据处理——Value处理参数——Jsonpath替换参数 */
@@ -2558,7 +2560,7 @@ declare interface VipEntity {
 declare interface ZoneInfo {
   /** 可用区 */
   ZoneId?: string;
-  /** 是否内部APP */
+  /** 是否内部APP枚举值：0： 外部1： 内部默认值：0 */
   IsInternalApp?: number;
   /** 应用标识 */
   AppId?: number;
@@ -2566,7 +2568,7 @@ declare interface ZoneInfo {
   Flag?: boolean;
   /** 可用区名称 */
   ZoneName?: string;
-  /** 可用区状态 枚举示例: 3: 开启，4: 关闭; 可用区状态以SoldOut为准 */
+  /** 可用区状态枚举值：3： 开启4： 关闭可用区状态以SoldOut为准 */
   ZoneStatus?: number;
   /** 额外标识 */
   Exflag?: string;
@@ -2622,7 +2624,7 @@ declare interface BatchCreateAclResponse {
 declare interface BatchModifyGroupOffsetsRequest {
   /** 消费分组名称 */
   GroupName: string;
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id取值参考：DescribeInstances */
   InstanceId: string;
   /** partition信息 */
   Partitions: Partitions[];
@@ -3092,7 +3094,7 @@ declare interface CreateTopicIpWhiteListResponse {
 }
 
 declare interface CreateTopicRequest {
-  /** 实例Id，可通过DescribeInstances接口获取。 */
+  /** 实例Id取值参考：DescribeInstances */
   InstanceId: string;
   /** 只能包含字母、数字、下划线、“-”、“.” */
   TopicName: string;
@@ -3104,17 +3106,17 @@ declare interface CreateTopicRequest {
   EnableWhiteList?: number;
   /** Ip白名单列表，配额限制，enableWhileList=1时必选 */
   IpWhiteList?: string[];
-  /** 清理日志策略，日志清理模式，默认为"delete"。"delete"：日志按保存时间删除，"compact"：日志按 key 压缩，"compact, delete"：日志按 key 压缩且会按保存时间删除。 */
+  /** 清理日志策略，日志清理模式，默认为&quot;delete&quot;。&quot;delete&quot;：日志按保存时间删除，&quot;compact&quot;：日志按 key 压缩，&quot;compact, delete&quot;：日志按 key 压缩且会按保存时间删除。 */
   CleanUpPolicy?: string;
-  /** 主题备注，是一个不超过 64 个字符的字符串，可以用字母和数字为首字符，剩余部分可以包含字母、数字和横划线(-) */
+  /** 主题备注入参限制：不超过 64 个字符 */
   Note?: string;
-  /** 最小同步副本数，默认为1 */
+  /** 最小同步副本数默认值：1最小值为1 */
   MinInsyncReplicas?: number;
   /** 是否允许未同步的副本选为leader，0:不允许，1:允许，默认不允许 */
   UncleanLeaderElectionEnable?: number;
-  /** 可选参数。消息保留时间，单位ms，当前最小值为60000。默认值为7200000ms（2小时），最大值为7776000000 ms（90天）。 */
+  /** 可选参数，消息保留时间取值范围：[60000, 7776000000]单位：毫秒默认值：7200000 */
   RetentionMs?: number;
-  /** Segment分片滚动的时长，单位ms，最小值为86400000ms（1天）。 */
+  /** Segment分片滚动的时长单位：毫秒默认值：86400000最小值为86400000ms（1天） */
   SegmentMs?: number;
   /** 主题消息最大值，单位为 Byte，最小值1024Bytes(即1KB)，最大值为12582912Bytes（即12MB） */
   MaxMessageBytes?: number;
@@ -3122,7 +3124,7 @@ declare interface CreateTopicRequest {
   EnableAclRule?: number;
   /** 预设ACL规则的名称 */
   AclRuleName?: string;
-  /** 可选, 保留文件大小. 默认为-1,单位Byte, 当前最小值为1073741824。 */
+  /** 可选, 保留文件大小. 默认为-1,单位Byte, 当前最小值为1073741824。取值范围：[1073741824, 1099511627776]单位：字节特殊值：-1表示无限制 */
   RetentionBytes?: number;
   /** 标签列表 */
   Tags?: Tag[];
@@ -3270,7 +3272,7 @@ declare interface DeleteInstancePostResponse {
 }
 
 declare interface DeleteInstancePreRequest {
-  /** ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取 */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取 */
   InstanceId: string;
 }
 
@@ -3588,11 +3590,11 @@ declare interface DescribeGroupInfoResponse {
 }
 
 declare interface DescribeGroupOffsetsRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id取值参考：DescribeInstances */
   InstanceId: string;
-  /** Kafka 消费分组 */
+  /** Kafka 消费分组取值参考：DescribeGroup */
   Group: string;
-  /** group 订阅的主题名称数组，如果没有该数组，则表示指定的 group 下所有 topic 信息 */
+  /** group 订阅的主题名称数组，如果没有该数组，则表示指定的 group 下所有 topic 信息取值参考：DescribeTopic */
   Topics?: string[];
   /** 模糊匹配 topicName */
   SearchWord?: string;
@@ -3610,13 +3612,13 @@ declare interface DescribeGroupOffsetsResponse {
 }
 
 declare interface DescribeGroupRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id取值参考：DescribeInstances */
   InstanceId: string;
   /** 搜索关键字 */
   SearchWord?: string;
   /** 偏移量 */
   Offset?: number;
-  /** 最大返回数量 */
+  /** 最大返回数量默认值：20 */
   Limit?: number;
   /** 仅支持 GroupState 筛选, 支持的筛选状态有 Empty/Stable 注意：该参数只能在2.8/3.2 版本生效 */
   Filters?: Filter[];
@@ -3646,7 +3648,7 @@ declare interface DescribeInstancesDetailRequest {
   InstanceId?: string;
   /** （过滤条件）按照实例名,实例Id,可用区,私有网络id,子网id 过滤，支持模糊查询 */
   SearchWord?: string;
-  /** （过滤条件）实例的状态。0：创建中，1：运行中，2：删除中，不填默认返回全部 */
+  /** （过滤条件）实例的状态，不填默认返回全部枚举值：-1： 创建失败0： 创建中1： 运行中2： 删除中3： 已删除4： 删除失败5： 隔离中7： 升级中 */
   Status?: number[];
   /** 偏移量，不填默认为0。 */
   Offset?: number;
@@ -3654,7 +3656,7 @@ declare interface DescribeInstancesDetailRequest {
   Limit?: number;
   /** 匹配标签key值。 */
   TagKey?: string;
-  /** 过滤器。filter.Name 支持('Ip', 'VpcId', 'SubNetId', 'InstanceType','InstanceId') ,filter.Values最多传递10个值. */
+  /** 过滤器。filter.Name 支持(&#39;Ip&#39;, &#39;VpcId&#39;, &#39;SubNetId&#39;, &#39;InstanceType&#39;,&#39;InstanceId&#39;) ,filter.Values最多传递10个值. */
   Filters?: Filter[];
   /** 已经废弃， 使用InstanceIdList */
   InstanceIds?: string;
@@ -3676,7 +3678,7 @@ declare interface DescribeInstancesRequest {
   InstanceId?: string;
   /** 搜索词 ex:（查询条件）按照实例名称过滤，支持模糊查询 */
   SearchWord?: string;
-  /** （查询条件）实例的状态 0：创建中，1：运行中，2：删除中，5: 隔离中, 7:升级中 不填默认返回全部 */
+  /** （查询条件）实例的状态 不填默认返回全部枚举值：-1： 创建失败0： 创建中1： 运行中2： 删除中3： 已删除4： 删除失败5： 隔离中7： 升级中 */
   Status?: number[];
   /** 偏移量，不填默认为0 */
   Offset?: number;
@@ -3712,6 +3714,8 @@ declare interface DescribeModifyTypeRequest {
   Type: string;
   /** 变配入口 */
   ModifyEntry?: string;
+  /** 是否可用区变更 false: 非可用区变更 true: 可用区变更 默认false */
+  ModifyZone?: boolean;
 }
 
 declare interface DescribeModifyTypeResponse {
@@ -3738,7 +3742,7 @@ declare interface DescribeRegionRequest {
   Offset?: number;
   /** 返回最大结果数 */
   Limit?: number;
-  /** 业务字段，可忽略 */
+  /** 业务字段，可忽略枚举值：ckafka： ckafka业务cmq： cmq业务默认值：ckafka */
   Business?: string;
   /** cdc专有集群业务字段，可忽略 */
   CdcId?: string;
@@ -3752,7 +3756,7 @@ declare interface DescribeRegionResponse {
 }
 
 declare interface DescribeRouteRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id取值参考：DescribeInstances */
   InstanceId: string;
   /** 路由Id */
   RouteId?: number;
@@ -3814,7 +3818,7 @@ declare interface DescribeTopicAttributesResponse {
 }
 
 declare interface DescribeTopicDetailRequest {
-  /** ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取 */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取 */
   InstanceId: string;
   /** （过滤条件）按照topicName过滤，支持模糊查询 */
   SearchWord?: string;
@@ -3824,7 +3828,7 @@ declare interface DescribeTopicDetailRequest {
   Limit?: number;
   /** Acl预设策略名称 */
   AclRuleName?: string;
-  /** 根据特定的属性排序(目前支持PartitionNum/CreateTime)，默认值为CreateTime。 */
+  /** 根据特定的属性排序(目前支持PartitionNum/CreateTime)，默认值为CreateTime。该参数为空时，默认按CreateTime倒序排序 */
   OrderBy?: string;
   /** 0-顺序、1-倒序，默认值为0。 */
   OrderType?: number;
@@ -3874,7 +3878,7 @@ declare interface DescribeTopicProduceConnectionResponse {
 }
 
 declare interface DescribeTopicRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id取值参考：DescribeInstances */
   InstanceId: string;
   /** 过滤条件，按照 topicName 过滤，支持模糊查询 */
   SearchWord?: string;
@@ -3894,13 +3898,13 @@ declare interface DescribeTopicResponse {
 }
 
 declare interface DescribeTopicSubscribeGroupRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id取值参考：DescribeInstances */
   InstanceId: string;
   /** 主题名 */
   TopicName: string;
   /** 分页时的起始位置 */
   Offset?: number;
-  /** 分页时的个数 */
+  /** 分页时的个数默认值：20 */
   Limit?: number;
 }
 
@@ -3912,9 +3916,9 @@ declare interface DescribeTopicSubscribeGroupResponse {
 }
 
 declare interface DescribeTopicSyncReplicaRequest {
-  /** 实例ID */
+  /** 实例ID取值参考：DescribeInstances */
   InstanceId: string;
-  /** 主题名称 */
+  /** 主题名称取值参考：DescribeTopic */
   TopicName: string;
   /** 偏移量，不填默认为0 */
   Offset?: number;
@@ -3936,7 +3940,7 @@ declare interface DescribeTypeInstancesRequest {
   InstanceId?: string;
   /** （过滤条件）按照实例名称过滤，支持模糊查询 */
   SearchWord?: string;
-  /** （过滤条件）实例的状态。0：创建中，1：运行中，2：删除中，不填默认返回全部 */
+  /** （过滤条件）实例的状态，不填默认返回全部枚举值：-1： 创建失败0： 创建中1： 运行中2： 删除中3： 已删除4： 删除失败5： 隔离中7： 升级中 */
   Status?: number[];
   /** 偏移量，不填默认为0 */
   Offset?: number;
@@ -3954,13 +3958,13 @@ declare interface DescribeTypeInstancesResponse {
 }
 
 declare interface DescribeUserRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id取值参考：DescribeInstances */
   InstanceId: string;
-  /** 按照名称过滤 */
+  /** 按照名称过滤支持模糊匹配 */
   SearchWord?: string;
   /** 偏移量 */
   Offset?: number;
-  /** 返回数量 */
+  /** 返回数量默认值：20 */
   Limit?: number;
 }
 
@@ -4006,9 +4010,9 @@ declare interface FetchLatestDatahubMessageListResponse {
 }
 
 declare interface FetchMessageByOffsetRequest {
-  /** ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取 */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取 */
   InstanceId: string;
-  /** 主题名，可通过[DescribeTopic](https://cloud.tencent.com/document/product/597/40847)接口获取 */
+  /** 主题名，可通过DescribeTopic接口获取 */
   Topic: string;
   /** 分区id */
   Partition: number;
@@ -4024,7 +4028,7 @@ declare interface FetchMessageByOffsetResponse {
 }
 
 declare interface FetchMessageListByOffsetRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id取值参考：DescribeInstances */
   InstanceId: string;
   /** 主题名 */
   Topic: string;
@@ -4223,6 +4227,10 @@ declare interface InstanceAttributesResponse {
   UncleanLeaderElectionEnable?: number;
   /** 实例删除保护开关: 1 开启 0 关闭 */
   DeleteProtectionEnable?: number;
+  /** 实例级别消息保留大小单位：bytes默认值：-1 */
+  RetentionBytes?: number;
+  /** 事务ID最大空闲时间，超时未提交的事务将被标记为过期单位：ms */
+  TransactionalIdExpirationMs?: number;
 }
 
 declare interface InstanceDeleteResponse {
@@ -4274,11 +4282,11 @@ declare interface JgwOperateResponse {
 }
 
 declare interface ModifyAclRuleRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id取值参考：DescribeInstances */
   InstanceId: string;
   /** ACL规则名 */
   RuleName: string;
-  /** 修改预设规则时传入,是否应用到新增的Topic */
+  /** 修改预设规则时传入,是否应用到新增的Topic枚举值：0： 不允许应用到新增的topic1： 允许应用到新增的topic默认值：0 */
   IsApplied?: number;
 }
 
@@ -4392,7 +4400,7 @@ declare interface ModifyGroupOffsetsResponse {
 }
 
 declare interface ModifyInstanceAttributesRequest {
-  /** ckafka集群实例Id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取 */
+  /** ckafka集群实例Id,可通过DescribeInstances接口获取 */
   InstanceId: string;
   /** 实例日志的最长保留时间，单位分钟，最大90天，最小为1min */
   MsgRetentionTime?: number;
@@ -4414,6 +4422,12 @@ declare interface ModifyInstanceAttributesRequest {
   UncleanLeaderElectionEnable?: number;
   /** 实例删除保护开关: 1 开启 0 关闭 */
   DeleteProtectionEnable?: number;
+  /** 实例级别消息保留大小单位：byte默认值：-1实例级别消息保留大小 */
+  RetentionBytes?: number;
+  /** 是否封禁高风险admin接口; true则封禁高风险adminApi; 关闭后不支持打开,仅专业版支持; 默认是false 对高风险admin接口不做处理 */
+  AdminSecurity?: boolean;
+  /** 事务ID最大空闲时间，超时未提交的事务将被标记为过期取值范围：[3600000, 604800000]单位：ms */
+  TransactionalIdExpirationMs?: number;
 }
 
 declare interface ModifyInstanceAttributesResponse {
@@ -4424,7 +4438,7 @@ declare interface ModifyInstanceAttributesResponse {
 }
 
 declare interface ModifyInstancePreRequest {
-  /** ckafka集群实例Id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取 */
+  /** ckafka集群实例Id,可通过DescribeInstances接口获取 */
   InstanceId: string;
   /** 磁盘大小 单位 GB 最大值为500000,步长100可以通过以下链接查看规格限制：https://cloud.tencent.com/document/product/597/122562 */
   DiskSize?: number;
@@ -4492,23 +4506,23 @@ declare interface ModifyRoutineMaintenanceTaskResponse {
 }
 
 declare interface ModifyTopicAttributesRequest {
-  /** ckafka集群实例Id */
+  /** ckafka集群实例Id取值参考：DescribeInstances */
   InstanceId: string;
   /** 主题名 */
   TopicName: string;
-  /** 主题备注，是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线-。 */
+  /** 主题备注入参限制：不超过64个字符默认值：&quot;&quot; */
   Note?: string;
   /** IP 白名单开关，1：打开；0：关闭。 */
   EnableWhiteList?: number;
-  /** 默认为1。 */
+  /** 最小同步副本数默认值：1最小值为1 */
   MinInsyncReplicas?: number;
-  /** 默认为 0，0：false；1：true。 */
+  /** 是否允许未同步的副本选为leader枚举值：0： 不允许1： 允许默认值：0 */
   UncleanLeaderElectionEnable?: number;
-  /** 消息保留时间，单位：ms，当前最小值为60000ms。 */
+  /** Segment分片滚动的时长单位：毫秒默认值：86400000最小值为86400000ms（1天） */
   RetentionMs?: number;
-  /** 主题消息最大值，单位为 Byte，最大值为12582912Byte（即12MB）。 */
+  /** 主题消息最大值取值范围：[1024, 12582912]单位：Bytes */
   MaxMessageBytes?: number;
-  /** Segment 分片滚动的时长，单位：ms，当前最小值86400000ms。 */
+  /** Segment 分片滚动的时长单位：毫秒最小值为86400000ms（1天） */
   SegmentMs?: number;
   /** 消息删除策略，可以选择delete 或者compact */
   CleanUpPolicy?: string;
@@ -4518,7 +4532,7 @@ declare interface ModifyTopicAttributesRequest {
   EnableAclRule?: number;
   /** ACL规则名 */
   AclRuleName?: string;
-  /** 可选, 保留文件大小. 默认为-1,单位bytes, 当前最小值为1048576B */
+  /** 可选, 保留文件大小取值范围：[1073741824, 1099511627776]单位：Bytes默认值：-1特殊值：-1表示无限制 */
   RetentionBytes?: number;
   /** 标签列表 */
   Tags?: Tag[];
@@ -4552,7 +4566,7 @@ declare interface PauseDatahubTaskResponse {
 }
 
 declare interface RenewCkafkaInstanceRequest {
-  /** ckafka集群实例Id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取 */
+  /** ckafka集群实例Id,可通过DescribeInstances接口获取 */
   InstanceId: string;
   /** 续费时长, 默认为1, 单位是月 */
   TimeSpan?: number;

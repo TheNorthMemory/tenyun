@@ -135,9 +135,9 @@ declare interface GetFileTranslateResponse {
 declare interface ImageTranslateLLMRequest {
   /** 图片数据的Base64字符串，经Base64编码后不超过 9M，分辨率建议600*800以上，支持PNG、JPG、JPEG格式。 */
   Data: string;
-  /** 目标语言，支持语言列表：- 中文：zh- 繁体（中国台湾）：zh-TW- 繁体（中国香港）：zh-HK- 英文：en- 日语：ja- 韩语：ko- 泰语：th- 越南语：vi- 俄语：ru- 德语：de- 法语：fr- 阿拉伯语：ar- 西班牙语：es- 意大利语：it- 印度尼西亚语：id- 马来西亚语：ms- 葡萄牙语：pt- 土耳其语：tr- */
+  /** 目标语言，支持语言列表：中文：zh繁体（中国台湾）：zh-TW繁体（中国香港）：zh-HK英文：en日语：ja韩语：ko泰语：th越南语：vi俄语：ru德语：de法语：fr阿拉伯语：ar西班牙语：es意大利语：it印度尼西亚语：id马来西亚语：ms葡萄牙语：pt土耳其语：tr- */
   Target: string;
-  /** 输入图 Url。 使用Url的时候，Data参数需要传入""。 图片限制：小于 10MB，分辨率建议600*800以上，格式支持 jpg、jpeg、png。 */
+  /** 输入图 Url。 使用Url的时候，Data参数需要传入&quot;&quot;。 图片限制：小于 10MB，分辨率建议600*800以上，格式支持 jpg、jpeg、png。 */
   Url?: string;
 }
 

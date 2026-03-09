@@ -88,7 +88,7 @@ declare interface SentenceDetail {
   FinalSentence?: string | null;
   /** 单句中间识别结果，使用空格拆分为多个词 */
   SliceSentence?: string | null;
-  /** 口语转书面语结果，开启改功能才有值 */
+  /** 口语转书面语结果，开启该功能才有值 */
   WrittenText?: string | null;
   /** 单句开始时间（毫秒） */
   StartMs?: number | null;
@@ -110,6 +110,10 @@ declare interface SentenceDetail {
   EmotionType?: string[] | null;
   /** 关键词识别结果列表 */
   KeyWordResults?: KeyWordResult[] | null;
+  /** 多语言识别类型中文 chinese英语 english日语 japanese韩语 korean阿拉伯语 arabic菲律宾语 filipino法语 french印地语 hindi印尼语 indonesian马来语 malay葡萄牙语 portugal西班牙语 spanish泰语 thai土耳其语 turkish越南语 vietnam德语 german */
+  LangType?: string;
+  /** 说话人角色名称 */
+  SpeakerRoleName?: string;
 }
 
 /** [一句话识别](https://cloud.tencent.com/document/product/1093/35646)返回的词时间戳 */

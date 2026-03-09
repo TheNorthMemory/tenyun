@@ -114,6 +114,18 @@ declare interface BindDetailItem {
   UconfigId?: string;
 }
 
+/** 配置绑定关系 */
+declare interface BindItem {
+  /** 配置绑定的CLB ID */
+  LoadBalancerId: string;
+  /** 配置绑定的监听器ID */
+  ListenerId: string;
+  /** 配置绑定的域名 */
+  Domain: string;
+  /** 配置绑定的规则 */
+  LocationId?: string;
+}
+
 /** 加入了12306黑名单的IP */
 declare interface BlockedIP {
   /** 黑名单IP */
@@ -210,9 +222,9 @@ declare interface ClassicalListener {
   SessionExpire?: number;
   /** 是否开启了健康检查：1（开启）、0（关闭） */
   HealthSwitch?: number;
-  /** 响应超时时间 */
+  /** 响应超时时间单位：秒 */
   TimeOut?: number;
-  /** 检查间隔 */
+  /** 检查间隔单位：秒 */
   IntervalTime?: number;
   /** 健康阈值 */
   HealthNum?: number;
@@ -596,7 +608,7 @@ declare interface Listener {
   HealthCheck?: HealthCheck | null;
   /** 请求的调度方式。 WRR、LEAST_CONN、IP_HASH分别表示按权重轮询、最小连接数、IP Hash。 */
   Scheduler?: string | null;
-  /** 会话保持时间，单位：秒。可选值：30~3600，默认 0，默认不开启。此参数仅适用于TCP/UDP监听器。 */
+  /** 会话保持时间，单位：秒。可选值：30~3600，默认 0，默认不开启。此参数仅适用于TCP/UDP监听器。单位：秒 */
   SessionExpireTime?: number | null;
   /** 是否开启SNI特性，1：表示开启，0：表示不开启（本参数仅对于HTTPS监听器有意义） */
   SniSwitch?: number;
@@ -630,7 +642,7 @@ declare interface Listener {
   MaxCps?: number;
   /** 空闲连接超时时间，仅支持TCP监听器。默认值:900；共享型实例和独占型实例取值范围：300～900，性能容量型实例取值范围:300～1980。 */
   IdleConnectTimeout?: number | null;
-  /** 重新调度触发持续时间，取值0~3600s。仅TCP/UDP监听器支持。触发重新调度后，长连接将会在设置的调度时间内断开并完成重新分配。 */
+  /** 重新调度触发持续时间，取值0~3600s。仅TCP/UDP监听器支持。触发重新调度后，长连接将会在设置的调度时间内断开并完成重新分配。单位：秒 */
   RescheduleInterval?: number;
   /** 数据压缩模式 */
   DataCompressMode?: string;
@@ -1434,6 +1446,18 @@ declare interface ZoneResource {
   EdgeZone?: boolean;
   /** 网络出口 */
   Egress?: string;
+}
+
+declare interface AssociateCustomizedConfigRequest {
+  /** 配置ID */
+  UconfigId: string;
+  /** 关联的server或location */
+  BindList: BindItem[];
+}
+
+declare interface AssociateCustomizedConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface AssociateTargetGroupsRequest {
@@ -2520,6 +2544,18 @@ declare interface DescribeTaskStatusResponse {
   RequestId?: string;
 }
 
+declare interface DisassociateCustomizedConfigRequest {
+  /** 配置ID */
+  UconfigId: string;
+  /** 解绑的列表 */
+  BindList: BindItem[];
+}
+
+declare interface DisassociateCustomizedConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DisassociateTargetGroupsRequest {
   /** 待解绑的规则关系数组，支持批量解绑多个监听器，单次批量解除最多20个。 */
   Associations: TargetGroupAssociation[];
@@ -2751,7 +2787,7 @@ declare interface ModifyListenerRequest {
   ProxyProtocol?: boolean;
   /** 是否开启SNAT（源IP替换），True（开启）、False（关闭）。默认为关闭。注意：SnatEnable开启时会替换客户端源IP，此时透传客户端源IP选项关闭，反之亦然。 */
   SnatEnable?: boolean;
-  /** 数据压缩模式 */
+  /** 数据压缩模式枚举值：transparent： 透明模式（默认值）compatibility： 兼容模式（开启 gzip 兼容压缩配置） */
   DataCompressMode?: string;
   /** 重新调度功能，权重调为0开关，打开此开关，后端服务器权重调为0时触发重新调度。仅TCP/UDP监听器支持。 */
   RescheduleTargetZeroWeight?: boolean;
@@ -3131,6 +3167,8 @@ declare interface SetSecurityGroupForLoadbalancersResponse {
 /** {@link Clb 负载均衡} */
 declare interface Clb {
   (): Versions;
+  /** 关联个性化配置 {@link AssociateCustomizedConfigRequest} {@link AssociateCustomizedConfigResponse} */
+  AssociateCustomizedConfig(data: AssociateCustomizedConfigRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateCustomizedConfigResponse>;
   /** 规则关联目标组 {@link AssociateTargetGroupsRequest} {@link AssociateTargetGroupsResponse} */
   AssociateTargetGroups(data: AssociateTargetGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateTargetGroupsResponse>;
   /** 自动生成负载均衡转发规则的重定向关系 {@link AutoRewriteRequest} {@link AutoRewriteResponse} */
@@ -3243,6 +3281,8 @@ declare interface Clb {
   DescribeTargets(data: DescribeTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetsResponse>;
   /** 查询异步任务状态 {@link DescribeTaskStatusRequest} {@link DescribeTaskStatusResponse} */
   DescribeTaskStatus(data?: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
+  /** 去关联个性化配置 {@link DisassociateCustomizedConfigRequest} {@link DisassociateCustomizedConfigResponse} */
+  DisassociateCustomizedConfig(data: DisassociateCustomizedConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateCustomizedConfigResponse>;
   /** 解除规则的目标组关联关系 {@link DisassociateTargetGroupsRequest} {@link DisassociateTargetGroupsResponse} */
   DisassociateTargetGroups(data: DisassociateTargetGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateTargetGroupsResponse>;
   /** 创建负载均衡实例询价 {@link InquiryPriceCreateLoadBalancerRequest} {@link InquiryPriceCreateLoadBalancerResponse} */

@@ -147,7 +147,7 @@ declare interface CompareOptions {
   /** 对比类型：builtin（内置校验）、independent（独立校验）。默认为builtin，mongodb及redis链路不支持独立校验。 */
   Type?: string;
   /** 校验类型，枚举值：structureCheck-结构校验(目前仅postgresql支持)、full-全量校验、increment-增量校验(如果勾选了增量校验，Method只能选dataCheck)、advanceObject-数据库信息校验(目前仅mongodb支持) */
-  CompareMode?: string[];
+  CompareMode?: string[] | null;
   /** 复检次数 */
   ReCheckTime?: number;
   /** 复检时间间隔，单位为分钟，取值 1-60 */
@@ -248,7 +248,7 @@ declare interface DBEndpointInfo {
   NodeType: string;
   /** 实例具体的连接信息，如ip、port、接入方式等 */
   Info: DBInfo[];
-  /** 实例服务提供商，如:"aliyun","others" */
+  /** 实例服务提供商，如:"others","aliyun","aws" */
   Supplier?: string;
   /** 此参数为数组类型，可以传多个键值对结构对象。MongoDB可定义如下的参数：'AuthDatabase':'admin', //认证库'AuthFlag': "1", //实例是否需要认证，"0": 不用认证；"1":需要认证'AuthMechanism':"SCRAM-SHA-1", //实例认证方式"fetchMethod":"oplog", //fetchMethod表示迁移方式，支持oplog、change_stream"connectMode":"srv", //外网srv连接模式"EncryptedConnProtocol":"mongo_atlas_ssl"； //加密连接方式其中fetchMethod表示迁移方式，还可支持change_stream；EncryptedConnProtocol值为mongo_atlas_ssl表示使用atlas ssl连接方式。 */
   ExtraAttr?: KeyValuePairOption[];
@@ -292,7 +292,7 @@ declare interface DBInfo {
   EngineVersion?: string;
   /** 实例所属账号 */
   Account?: string;
-  /** 跨账号迁移时的角色,只允许[a-zA-Z0-9\-\_]+ */
+  /** 跨账号迁移时的角色,只允许[a-zA-Z0-9-_]+ */
   AccountRole?: string;
   /** 资源所属账号 为空或self(表示本账号内资源)、other(表示其他账户资源) */
   AccountMode?: string;
@@ -608,7 +608,7 @@ declare interface Endpoint {
   Account?: string;
   /** 资源所属账号 为空或self(表示本账号内资源)、other(表示跨账号资源) */
   AccountMode?: string;
-  /** 跨账号同步时的角色，只允许[a-zA-Z0-9\-\_]+，如果为跨账号实例此项必填 */
+  /** 跨账号同步时的角色，只允许[a-zA-Z0-9-_]+，如果为跨账号实例此项必填 */
   AccountRole?: string;
   /** 外部角色id */
   RoleExternalId?: string;
@@ -750,7 +750,7 @@ declare interface JobItem {
   EndTime?: string;
   /** 迁移任务错误信息 */
   BriefMsg?: string;
-  /** 任务状态，取值为：creating(创建中)、created(创建完成)、checking(校验中)、checkPass(校验通过)、checkNotPass(校验不通过)、readyRun(准备运行)、running(任务运行)、readyComplete(准备完成)、success(任务成功)、failed(任务失败)、stopping(中止中)、completing(完成中)、pausing(暂停中)、manualPaused(已暂停) */
+  /** 任务状态，取值为：creating(创建中)、created(创建完成)、checking(校验中)、checkPass(校验通过)、checkNotPass(校验不通过)、readyRun(准备运行)、running(任务运行)、readyComplete(准备完成)、success(任务成功)、failed(任务失败)、stopping(终止中)、completing(完成中)、pausing(暂停中)、manualPaused(已暂停)、resumableErr(可重试错误)、resuming(重试中)、unknown(未知状态)、error(任务错误)、canceled(已取消) */
   Status?: string;
   /** 任务运行模式，值包括：immediate(立即运行)，timed(定时运行) */
   RunMode?: string;
@@ -2507,7 +2507,7 @@ declare interface ModifyMigrateRuntimeAttributeResponse {
 }
 
 declare interface ModifyMigrationJobRequest {
-  /** 任务id，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。 */
+  /** 任务id，可通过DescribeMigrationJobs接口获取。 */
   JobId: string;
   /** 运行模式，取值如：immediate(表示立即运行)、timed(表示定时运行) */
   RunMode: string;
@@ -2519,7 +2519,7 @@ declare interface ModifyMigrationJobRequest {
   DstInfo: DBEndpointInfo;
   /** 迁移任务名称，最大长度128 */
   JobName?: string;
-  /** 期待启动时间，当RunMode取值为timed时，此值必填，形如："2006-01-02 15:04:05" */
+  /** 期待启动时间，当RunMode取值为timed时，此值必填，形如：&quot;2006-01-02 15:04:05&quot; */
   ExpectRunTime?: string;
   /** 标签信息 */
   Tags?: TagItem[];

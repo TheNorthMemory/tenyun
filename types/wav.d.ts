@@ -1295,7 +1295,7 @@ declare interface Wav {
   (): Versions;
   /** 新增渠道活码接口 {@link CreateChannelCodeRequest} {@link CreateChannelCodeResponse} */
   CreateChannelCode(data: CreateChannelCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelCodeResponse>;
-  /** 新增标签库接口 {@link CreateCorpTagRequest} {@link CreateCorpTagResponse} */
+  /** @deprecated 新增标签库接口 {@link CreateCorpTagRequest} {@link CreateCorpTagResponse} */
   CreateCorpTag(data: CreateCorpTagRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCorpTagResponse>;
   /** 线索回收接口 {@link CreateLeadRequest} {@link CreateLeadResponse} */
   CreateLead(data: CreateLeadRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLeadResponse>;

@@ -539,7 +539,7 @@ declare interface ModifyMountPointRequest {
   MountPointId: string;
   /** 挂载点名称 */
   MountPointName?: string;
-  /** 挂载点状态 */
+  /** 挂载点状态枚举值：1： 打开2： 关闭 */
   MountPointStatus?: number;
 }
 

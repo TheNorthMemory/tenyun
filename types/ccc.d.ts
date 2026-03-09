@@ -1020,6 +1020,10 @@ declare interface TelCdrInfo {
   AIAgentId?: number;
   /** 如果是智能体相关通话，这里是智能体名称 */
   AIAgentName?: string;
+  /** 接通后系统挂断原因，枚举类似 */
+  SysHangupReason?: number;
+  /** 接通后系统挂断原因，文字描述信息 */
+  SysHangupReasonString?: string;
 }
 
 /** 时间范围，24 小时制，格式为 09:00:00 */
@@ -1261,6 +1265,10 @@ declare interface CreateAICallRequest {
   MaxCallDurationMs?: number;
   /** 最大振铃时长，达到时长阈值自动挂断。 **仅自携号码支持当前参数** */
   MaxRingTimeoutSecond?: number;
+  /** 环境音场景，没有的话不填。coffee_shops：咖啡店氛围，背景中有人聊天busy_office：客服中心 */
+  AmbientSoundType?: string;
+  /** 环境音音量。如果AmbientSoundType 为空，该字段不填。取值的范围是 [0,2]。值越低，环境音越小；值越高，环境音越响亮。如果未设置，则使用默认值 1。 */
+  AmbientSoundVolume?: number;
 }
 
 declare interface CreateAICallResponse {
@@ -1991,7 +1999,7 @@ declare interface DescribeFlashSMSListRequest {
   SessionId?: string;
   /** 投递结果 1 为成功，其他为失败 */
   DeliveryStatus?: number;
-  /** 分页大小，默认 20，最大 100 */
+  /** 分页大小，默认 20，最大 1000取值范围：[20, 1000]单位：条默认值：20 */
   PageSize?: number;
   /** 分页页码，从 0 开始 */
   PageNumber?: number;
@@ -2254,11 +2262,11 @@ declare interface DescribeSessionDetailResponse {
   QueuedSkillGroupId?: number;
   /** 排队技能组名称 */
   QueuedSkillGroupName?: string;
-  /** 录音链接，带鉴权和有效期，获取之后请在短时间内拉取，不要持久化此链接 */
+  /** 录音链接，带鉴权和有效期，获取之后请在24 小时内拉取，不要持久化此链接。如此链接已过期，请重新调用此接口获取新的链接 */
   RecordURL?: string;
   /** 录音转存第三方 COS 链接 */
   CustomRecordURL?: string;
-  /** 录音文本信息链接，带鉴权和有效期，获取之后请在短时间内拉取，不要持久化此链接 */
+  /** 录音文本信息链接，带鉴权和有效期，获取之后请在24 小时拉取，不要持久化此链接。如此链接已过期，请重新调用此接口获取新的链接 */
   AsrURL?: string;
   /** 语音留言录音链接 */
   VoicemailRecordURL?: string[];
@@ -2276,6 +2284,10 @@ declare interface DescribeSessionDetailResponse {
   Events?: SessionEvent[];
   /** 服务参与者列表 */
   ServeParticipants?: ServeParticipant[];
+  /** 接通后系统挂断原因状态码详见 */
+  SysHangupReason?: number;
+  /** 接通后系统挂断原因详见 */
+  SysHangupReasonString?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

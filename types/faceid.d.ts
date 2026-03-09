@@ -92,13 +92,13 @@ declare interface DetectInfoIdCardData {
 
 /** 核身文本信息。 */
 declare interface DetectInfoText {
-  /** 本次流程最终验证结果。- 取值范围：0为成功。- 仅包含活体人脸核身结果，不包含意愿核身结果。 */
+  /** 本次流程最终验证结果。取值范围：0为成功。仅包含活体人脸核身结果，不包含意愿核身结果。 */
   ErrCode?: number | null;
-  /** 本次流程最终验证结果描述。- 仅描述用，文案更新时不会通知。 */
+  /** 本次流程最终验证结果描述。仅描述用，文案更新时不会通知。 */
   ErrMsg?: string | null;
   /** 本次验证使用的身份证号。 */
   IdCard?: string | null;
-  /** 用户认证时使用的证件号码类型。- 取值范围： 0：二代身份证的证件号码。 1：港澳台居住证的证件号码。 2：其他（核验使用的证件号码非合法身份号码）。 */
+  /** 用户认证时使用的证件号码类型。取值范围： 0：二代身份证的证件号码。 1：港澳台居住证的证件号码。 2：其他（核验使用的证件号码非合法身份号码）。 */
   UseIDType?: number | null;
   /** 本次验证使用的姓名。 */
   Name?: string | null;
@@ -106,11 +106,11 @@ declare interface DetectInfoText {
   OcrNation?: string | null;
   /** 身份校验环节识别结果：家庭住址。 */
   OcrAddress?: string | null;
-  /** 身份校验环节识别结果：生日。- 格式为：YYYY/M/D */
+  /** 身份校验环节识别结果：生日。格式为：YYYY/M/D */
   OcrBirth?: string | null;
   /** 身份校验环节识别结果：签发机关。 */
   OcrAuthority?: string | null;
-  /** 身份校验环节识别结果：有效日期。- 格式为：YYYY.MM.DD-YYYY.MM.DD。 */
+  /** 身份校验环节识别结果：有效日期。格式为：YYYY.MM.DD-YYYY.MM.DD。 */
   OcrValidDate?: string | null;
   /** 身份校验环节识别结果：姓名。 */
   OcrName?: string | null;
@@ -118,17 +118,17 @@ declare interface DetectInfoText {
   OcrIdCard?: string | null;
   /** 身份校验环节识别结果：性别。 */
   OcrGender?: string | null;
-  /** 身份校验环节采用的信息上传方式。- 取值有"NFC"、"OCR"、"手动输入"、"其他" */
+  /** 身份校验环节采用的信息上传方式。取值有&quot;NFC&quot;、&quot;OCR&quot;、&quot;手动输入&quot;、&quot;其他&quot; */
   IdInfoFrom?: string | null;
-  /** 本次流程最终活体结果。- 0为成功 */
+  /** 本次流程最终活体结果。0为成功 */
   LiveStatus?: number | null;
-  /** 本次流程最终活体结果描述。- 仅描述用，文案更新时不会通知。 */
+  /** 本次流程最终活体结果描述。仅描述用，文案更新时不会通知。 */
   LiveMsg?: string | null;
-  /** 本次流程最终一比一结果。- 0为成功 */
+  /** 本次流程最终一比一结果。0为成功 */
   Comparestatus?: number | null;
-  /** 本次流程最终一比一结果描述。- 仅描述用，文案更新时不会通知。 */
+  /** 本次流程最终一比一结果描述。仅描述用，文案更新时不会通知。 */
   Comparemsg?: string | null;
-  /** 本次流程活体一比一的分数。- 取值范围 [0.00, 100.00]。- 相似度大于等于70时才判断为同一人，阈值不支持自定义。- 阈值70的误通过率为千分之一，阈值80的误通过率是万分之一。 */
+  /** 本次流程活体一比一的分数。- 取值范围 [0.00, 100.00]。- 相似度大于等于70时才判断为同一人，阈值不支持自定义。- 阈值70的误通过率为万分之一。 */
   Sim?: string | null;
   /** 地理位置经纬度。 */
   Location?: string | null;
@@ -136,13 +136,13 @@ declare interface DetectInfoText {
   Extra?: string | null;
   /** 本次流程进行的活体一比一流水。 */
   LivenessDetail?: DetectDetail[] | null;
-  /** 描述当前请求活体阶段被拒绝的详细原因，该参数仅限PLUS版本核身服务返回。- 详情如下： 01-用户全程闭眼 02-用户未完成指定动作 03-疑似翻拍攻击 04-疑似合成攻击 05-疑似黑产模版 06-疑似存在水印 07-反光校验未通过 08-疑似中途换人 09-人脸质量过差 10-距离校验不通过 11-疑似对抗样本攻击 12-嘴巴区域疑似存在攻击痕迹 13-眼睛区域疑似存在攻击痕迹 14-眼睛或嘴巴被遮挡 */
+  /** 描述当前请求活体阶段被拒绝的详细原因，该参数仅限PLUS版本核身服务返回。详情如下： 01-用户全程闭眼 02-用户未完成指定动作 03-疑似翻拍攻击 04-疑似合成攻击 05-疑似黑产模版 06-疑似存在水印 07-反光校验未通过 08-疑似中途换人 09-人脸质量过差 10-距离校验不通过 11-疑似对抗样本攻击 12-嘴巴区域疑似存在攻击痕迹 13-眼睛区域疑似存在攻击痕迹 14-眼睛或嘴巴被遮挡 */
   LivenessInfoTag?: string[] | null;
   /** 手机号码。 */
   Mobile?: string | null;
-  /** 本次流程最终比对库源类型。- 取值范围： 权威库。 业务方自有库（用户上传照片、客户的混合库、混合部署库）。 二次验证库。 人工审核库。 */
+  /** 本次流程最终比对库源类型。取值范围： 权威库。 业务方自有库（用户上传照片、客户的混合库、混合部署库）。 二次验证库。 人工审核库。 */
   CompareLibType?: string | null;
-  /** 本次流程最终活体类型。- 取值范围： 0：未知 1：数字活体 2：动作活体 3：静默活体 4：一闪活体（动作+光线） 5：远近活体 */
+  /** 本次流程最终活体类型。取值范围： 0：未知 1：数字活体 2：动作活体 3：静默活体 4：一闪活体（动作+光线） 5：远近活体 */
   LivenessMode?: number | null;
   /** nfc重复计费requestId列表。 */
   NFCRequestIds?: string[] | null;
@@ -152,7 +152,7 @@ declare interface DetectInfoText {
   PassNo?: string | null;
   /** 港澳台居住证签发次数。 */
   VisaNum?: string | null;
-  /** 活体检测的动作顺序，多动作以“,”分隔。输出格式如：“1,2”表示“张嘴+眨眼”。- 详细序列值含义如下： 1：张嘴2：眨眼3：点头4：摇头5：静默注：仅浮层H5产品返回 */
+  /** 活体检测的动作顺序，多动作以“,”分隔。输出格式如：“1,2”表示“张嘴+眨眼”。详细序列值含义如下： 1：张嘴2：眨眼3：点头4：摇头5：静默注：仅浮层H5产品返回 */
   LivenessActionSequence?: string | null;
 }
 
@@ -184,7 +184,7 @@ declare interface Encryption {
   CiphertextBlob: string | null;
   /** 有加密需求的用户，传入CBC加密的初始向量（客户自定义字符串，长度16字符）。 */
   Iv: string | null;
-  /** 加密使用的算法（支持'AES-256-CBC'、'SM4-GCM'），不传默认为'AES-256-CBC' */
+  /** 加密使用的算法（支持&#39;AES-256-CBC&#39;、&#39;SM4-GCM&#39;），不传默认为&#39;AES-256-CBC&#39; */
   Algorithm?: string | null;
   /** SM4-GCM算法生成的消息摘要（校验消息完整性时使用） */
   TagList?: string[] | null;
@@ -429,13 +429,13 @@ declare interface CheckEidTokenStatusResponse {
 }
 
 declare interface CheckIdCardInformationRequest {
-  /** 身份证人像面的 Base64 值。- 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。- 支持的图片大小：所下载图片经Base64编码后不超过 7M。- 请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。- ImageBase64、ImageUrl二者必须提供其中之一。若都提供了，则按照ImageUrl>ImageBase64的优先级使用参数。 */
+  /** 身份证人像面的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。ImageBase64、ImageUrl二者必须提供其中之一。若都提供了，则按照ImageUrl&gt;ImageBase64的优先级使用参数。 */
   ImageBase64?: string;
-  /** 身份证人像面的 Url 地址- 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。- 支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。- 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。- 非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  /** 身份证人像面的 Url 地址支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
-  /** 配置。- 以下可选字段均为bool 类型，默认false。CopyWarn，复印件告警。BorderCheckWarn，边框和框内遮挡告警。ReshootWarn，翻拍告警。DetectPsWarn，PS检测告警（疑似存在PS痕迹）。TempIdWarn，临时身份证告警。Quality，图片质量告警（评价图片模糊程度）。- SDK 设置方式参考：Config = Json.stringify({"CopyWarn":true,"ReshootWarn":true})。- API 3.0 Explorer 设置方式参考：Config = {"CopyWarn":true,"ReshootWarn":true}。 */
+  /** 配置。以下可选字段均为bool 类型，默认false。CopyWarn，复印件告警。BorderCheckWarn，边框和框内遮挡告警。ReshootWarn，翻拍告警。DetectPsWarn，PS检测告警（疑似存在PS痕迹）。TempIdWarn，临时身份证告警。Quality，图片质量告警（评价图片模糊程度）。SDK 设置方式参考：Config = Json.stringify({&quot;CopyWarn&quot;:true,&quot;ReshootWarn&quot;:true})。API 3.0 Explorer 设置方式参考：Config = {&quot;CopyWarn&quot;:true,&quot;ReshootWarn&quot;:true}。 */
   Config?: string;
-  /** 是否需要对返回中的敏感信息进行加密。- 默认false。- 敏感信息包括：Response.IdNum、Response.Name。 */
+  /** 是否需要对返回中的敏感信息进行加密。默认false。敏感信息包括：Response.IdNum、Response.Name。 */
   IsEncrypt?: boolean;
   /** 是否需要对响应体加密。 */
   IsEncryptResponse?: boolean;
@@ -444,7 +444,7 @@ declare interface CheckIdCardInformationRequest {
 }
 
 declare interface CheckIdCardInformationResponse {
-  /** 相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）。 */
+  /** 相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为万分之一）。 */
   Sim?: number;
   /** 业务错误码。- 成功情况返回Success。- 错误情况请参考下方错误码 列表中FailedOperation部分 */
   Result?: string;
@@ -464,9 +464,9 @@ declare interface CheckIdCardInformationResponse {
   IdNum?: string;
   /** 身份证头像照片的base64编码，如果抠图失败会拿整张身份证做比对并返回空。 */
   Portrait?: string;
-  /** 告警信息。- 当在Config中配置了告警信息会停止人像比对，Result返回错误（FailedOperation.OcrWarningOccurred）并有此告警信息。- Code 告警码列表和释义：'-9101'：身份证边框不完整告警。'-9102'：身份证复印件告警。'-9103'：身份证翻拍告警。'-9105'：身份证框内遮挡告警。'-9104'：临时身份证告警。'-9106'：身份证 PS 告警（疑似存在PS痕迹）。'-8001'：图片模糊告警。- 多个会用“|” 隔开，如 "-9101|-9106|-9104"。 */
+  /** 告警信息。当在Config中配置了告警信息会停止人像比对，Result返回错误（FailedOperation.OcrWarningOccurred）并有此告警信息。Code 告警码列表和释义：&#39;-9101&#39;：身份证边框不完整告警。&#39;-9102&#39;：身份证复印件告警。&#39;-9103&#39;：身份证翻拍告警。&#39;-9105&#39;：身份证框内遮挡告警。&#39;-9104&#39;：临时身份证告警。&#39;-9106&#39;：身份证 PS 告警（疑似存在PS痕迹）。&#39;-8001&#39;：图片模糊告警。多个会用“|” 隔开，如 &quot;-9101|-9106|-9104&quot;。 */
   Warnings?: string;
-  /** 图片质量分数。- 当请求Config中配置图片模糊告警该参数才有意义。- 取值范围（0～100），目前默认阈值是50分，低于50分会触发模糊告警。 */
+  /** 图片质量分数。当请求Config中配置图片模糊告警该参数才有意义。取值范围（0～100），目前默认阈值是50分，低于50分会触发模糊告警。 */
   Quality?: number;
   /** 敏感数据加密信息。 */
   Encryption?: Encryption | null;
@@ -955,22 +955,22 @@ declare interface ImageRecognitionResponse {
 declare interface ImageRecognitionV2Request {
   /** 身份证号。 */
   IdCard: string;
-  /** 姓名。- 中文请使用UTF-8编码。 */
+  /** 姓名。中文请使用UTF-8编码。 */
   Name: string;
   /** 用于人脸比对的照片，图片的Base64值；Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。 */
   ImageBase64: string;
   /** 本接口不需要传递此参数。 */
   Optional?: string;
-  /** 敏感数据加密信息。- 对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。 */
+  /** 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。 */
   Encryption?: Encryption;
-  /** 自定义描述字段。- 用于描述调用业务信息，出参中将返回此描述字段。 - 每个自定义描述字段支持[1,10]个字符。 */
+  /** 自定义描述字段。用于描述调用业务信息，出参中将返回此描述字段。 每个自定义描述字段支持[1,10]个字符。 */
   Extra?: string;
 }
 
 declare interface ImageRecognitionV2Response {
-  /** 相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一） */
+  /** 相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为万分之一） */
   Sim?: number;
-  /** 业务错误码。- 成功情况返回Success。- 错误情况请参考下方错误码 列表中FailedOperation部分 */
+  /** 业务错误码。成功情况返回Success。错误情况请参考下方错误码 列表中FailedOperation部分 */
   Result?: string;
   /** 业务结果描述。 */
   Description?: string;
@@ -981,32 +981,32 @@ declare interface ImageRecognitionV2Response {
 }
 
 declare interface LivenessCompareRequest {
-  /** 活体检测类型。- 取值：LIP/ACTION/SILENT。- LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模式选择一种传入。 */
+  /** 活体检测类型。取值：LIP/ACTION/SILENT。LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模式选择一种传入。 */
   LivenessType: string;
-  /** 用于人脸比对的照片的Base64值。- Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。- 请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。- 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageBase64。 */
+  /** 用于人脸比对的照片的Base64值。Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageBase64。 */
   ImageBase64?: string;
-  /** 用于人脸比对照片的URL地址。- 图片下载后经Base64编码后的数据大小不超过3M，仅支持jpg、png格式。- 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageBase64。- 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。- 非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  /** 用于人脸比对照片的URL地址。图片下载后经Base64编码后的数据大小不超过3M，仅支持jpg、png格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageBase64。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
-  /** 验证数据。- 数字模式传参：传数字验证码，验证码需先调用获取数字验证码接口得到；- 动作模式传参：传动作顺序，动作顺序需先调用获取动作顺序接口得到；- 静默模式传参：空。 */
+  /** 验证数据。数字模式传参：传数字验证码，验证码需先调用获取数字验证码接口得到；动作模式传参：传动作顺序，动作顺序需先调用获取动作顺序接口得到；静默模式传参：空。 */
   ValidateData?: string;
-  /** 额外配置，传入JSON字符串。- 格式如下：{"BestFrameNum": 2 //需要返回多张最佳截图，取值范围2-10} */
+  /** 额外配置，传入JSON字符串。格式如下：{&quot;BestFrameNum&quot;: 2 //需要返回多张最佳截图，取值范围2-10} */
   Optional?: string;
-  /** 用于活体检测的视频，视频的Base64值。- Base64编码后的大小不超过8M，支持mp4、avi、flv格式。- 请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。- 视频的 VideoUrl、VideoBase64 必须提供一个，如果都提供，只使用 VideoBase64。 */
+  /** 用于活体检测的视频，视频的Base64值。Base64编码后的大小不超过8M，支持mp4、avi、flv格式。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。视频的 VideoUrl、VideoBase64 必须提供一个，如果都提供，只使用 VideoBase64。 */
   VideoBase64?: string;
-  /** 用于活体检测的视频Url 地址。- 视频下载后经Base64编码后不超过 8M，视频下载耗时不超过4S，支持mp4、avi、flv格式。- 视频的 VideoUrl、VideoBase64 必须提供一个，如果都提供，只使用 VideoBase64。- 建议视频存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议视频存储于腾讯云。- 非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  /** 用于活体检测的视频Url 地址。视频下载后经Base64编码后不超过 8M，视频下载耗时不超过4S，支持mp4、avi、flv格式。视频的 VideoUrl、VideoBase64 必须提供一个，如果都提供，只使用 VideoBase64。建议视频存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议视频存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   VideoUrl?: string;
 }
 
 declare interface LivenessCompareResponse {
-  /** 验证通过后的视频最佳截图照片。- 照片为BASE64编码后的值，jpg格式。 */
+  /** 验证通过后的视频最佳截图照片。照片为BASE64编码后的值，jpg格式。 */
   BestFrameBase64?: string | null;
-  /** 相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）。 */
+  /** 相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为万分之一）。 */
   Sim?: number;
-  /** 业务错误码。- 成功情况返回Success。- 错误情况请参考下方错误码，列表中FailedOperation部分。 */
+  /** 业务错误码。成功情况返回Success。错误情况请参考下方错误码，列表中FailedOperation部分。 */
   Result?: string;
   /** 业务结果描述。 */
   Description?: string;
-  /** 最佳截图列表。- 仅在配置了返回多张最佳截图时返回。 */
+  /** 最佳截图列表。仅在配置了返回多张最佳截图时返回。 */
   BestFrameList?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1015,28 +1015,28 @@ declare interface LivenessCompareResponse {
 declare interface LivenessRecognitionRequest {
   /** 身份证号。 */
   IdCard: string;
-  /** 姓名。- 中文请使用UTF-8编码。 */
+  /** 姓名。中文请使用UTF-8编码。 */
   Name: string;
-  /** 活体检测类型。- 取值：LIP/ACTION/SILENT。- LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模式选择一种传入。 */
+  /** 活体检测类型。取值：LIP/ACTION/SILENT。LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模式选择一种传入。 */
   LivenessType: string;
   /** 用于活体检测的视频，视频的BASE64值；BASE64编码后的大小不超过8M，支持mp4、avi、flv格式。 */
   VideoBase64?: string;
-  /** 用于活体检测的视频Url 地址。- 视频下载后经Base64编码不超过 8M，视频下载耗时不超过4S，支持mp4、avi、flv格式。- 视频的 VideoUrl、VideoBase64 必须提供一个，如果都提供，只使用 VideoBase64。- 建议视频存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议视频存储于腾讯云。- 非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  /** 用于活体检测的视频Url 地址。视频下载后经Base64编码不超过 8M，视频下载耗时不超过4S，支持mp4、avi、flv格式。视频的 VideoUrl、VideoBase64 必须提供一个，如果都提供，只使用 VideoBase64。建议视频存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议视频存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   VideoUrl?: string;
-  /** 验证数据。- 数字模式传参：传数字验证码，验证码需先调用获取数字验证码接口得到；- 动作模式传参：传动作顺序，动作顺序需先调用获取动作顺序接口得到；- 静默模式传参：空。 */
+  /** 验证数据。数字活体模式传参：传数字验证码，验证码需先调用获取数字验证码接口得到；动作活体模式传参：传动作顺序，动作顺序需先调用获取动作顺序接口得到；静默活体模式传参：空。 */
   ValidateData?: string;
-  /** 额外配置，传入JSON字符串。- 格式如下：{"BestFrameNum": 2 //需要返回多张最佳截图，取值范围2-10} */
+  /** 额外配置，传入JSON字符串。格式如下：{&quot;BestFrameNum&quot;: 2 //需要返回多张最佳截图，取值范围2-10} */
   Optional?: string;
-  /** 敏感数据加密信息。- 对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。 */
+  /** 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。 */
   Encryption?: Encryption;
 }
 
 declare interface LivenessRecognitionResponse {
-  /** 验证通过后的视频最佳截图照片。- 照片为BASE64编码后的值，jpg格式。 */
+  /** 验证通过后的视频最佳截图照片。照片为BASE64编码后的值，jpg格式。 */
   BestFrameBase64?: string | null;
-  /** 相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一） */
+  /** 相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为万分之一） */
   Sim?: number;
-  /** 业务错误码。- 成功情况返回Success。- 错误情况请参考下方错误码 列表中FailedOperation部分 */
+  /** 业务错误码。成功情况返回Success。错误情况请参考下方错误码 列表中FailedOperation部分 */
   Result?: string;
   /** 业务结果描述。 */
   Description?: string;
@@ -1281,7 +1281,7 @@ declare interface Faceid {
   GetActionSequence(data?: GetActionSequenceRequest, config?: AxiosRequestConfig): AxiosPromise<GetActionSequenceResponse>;
   /** 获取实名核身结果信息 {@link GetDetectInfoRequest} {@link GetDetectInfoResponse} */
   GetDetectInfo(data: GetDetectInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetDetectInfoResponse>;
-  /** 获取实名核身结果信息增强版 {@link GetDetectInfoEnhancedRequest} {@link GetDetectInfoEnhancedResponse} */
+  /** 获取实名核身结果信息（适用所有版本） {@link GetDetectInfoEnhancedRequest} {@link GetDetectInfoEnhancedResponse} */
   GetDetectInfoEnhanced(data: GetDetectInfoEnhancedRequest, config?: AxiosRequestConfig): AxiosPromise<GetDetectInfoEnhancedResponse>;
   /** 获取E证通结果信息 {@link GetEidResultRequest} {@link GetEidResultResponse} */
   GetEidResult(data: GetEidResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetEidResultResponse>;

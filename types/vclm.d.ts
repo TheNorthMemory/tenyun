@@ -98,6 +98,24 @@ declare interface CheckAnimateImageJobResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAigcVideoJobRequest {
+  /** 任务ID。示例值：1194931538865782784 */
+  JobId?: string;
+}
+
+declare interface DescribeAigcVideoJobResponse {
+  /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功示例值：RUN */
+  Status?: string;
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为""。示例值：FailedOperation.DriverFailed */
+  ErrorCode?: string;
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。示例值：驱动失败 */
+  ErrorMessage?: string;
+  /** 结果视频 URL。有效期 24 小时。示例值：https://console.cloud.tencent.com/result.mp4 */
+  ResultUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeHumanActorJobRequest {
   /** 任务ID。 */
   JobId: string;
@@ -284,6 +302,28 @@ declare interface DescribeVideoVoiceJobResponse {
   RequestId?: string;
 }
 
+declare interface SubmitAigcVideoJobRequest {
+  /** 模型名称。枚举值：● Vidu；● Kling：可灵；● HY：混元；● YT：优图；示例值：Vidu */
+  Vendor: string;
+  /** 模型版本。枚举值：● 当Vendor为Vidu时，可选值[q2, q2-pro, q2-turbo]● 当Vendor为Kling时，可选值[v1.6, v2.0, v2.1, v2.5, , v2.6, O1]● 当Vendor为HY时，默认值：[v1.5]● 当Vendor为YT时，默认值：[v2.0] */
+  Model: string;
+  /** 模型参数Json-Format字符串 模型参数列表 */
+  ModelParam?: string;
+  /** 正向文本提示词。不能超过2000个字符示例值：一只小猫在草地奔跑 */
+  Prompt?: string;
+  /** 为生成结果图添加显式水印标识的开关，默认为1。1：添加。0：不添加。其他数值：默认按1处理。建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。示例值：1 */
+  LogoAdd?: number;
+  /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。 */
+  LogoParam?: LogoParam;
+}
+
+declare interface SubmitAigcVideoJobResponse {
+  /** 任务ID。 */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SubmitHumanActorJobRequest {
   /** 文本提示词，不能超过5000字符。提示词支持全局和局部控制：- 全局控制：正常输入提示词即可- 局部控制：可用双井号进行特定时间的提示词约束，例如： "画面中的人物正在对着镜头讲话，偶尔做些手势匹配说话的内容。镜头保持固定。#3"（意思是第三秒的时候让人物做出左方引导手势） -- 局部控制时间建议整数，最大可读小数点后两位。 */
   Prompt: string;
@@ -453,7 +493,7 @@ declare interface SubmitVideoEditJobResponse {
 }
 
 declare interface SubmitVideoFaceFusionJobRequest {
-  /** 视频素材下载地址。用户自定义模版视频下载地址，使用前需要先调用视频审核接口进行内容审核。视频限制：分辨率≤4k，fps≤25，视频大小≤1G，时长≤20 秒，支持格式mp4。输入视频建议：姿态：人脸相对镜头水平方向角度转动不超过 90°,垂直方向角度转动不超过 20°。遮挡：脸部遮挡面积不超过 50%，不要完全遮挡五官，不要有半透明遮挡（强光，玻璃，透明眼镜等）、以及细碎离散的脸部遮挡（如飘落的花瓣）。妆容及光照：避免浓妆、复杂妆容，避免复杂光照、闪烁，这些属性无法完全恢复，并对稳定性有影响。针对特殊表情和微表情，针对局部肌肉控制下的微表情，以及过于夸张的特殊表情等不保证表情效果完全恢复。 */
+  /** 视频素材下载地址。用户自定义模板视频下载地址，使用前需要先调用视频审核接口进行内容审核。视频限制：分辨率≤4k，fps≤25，视频大小≤1G，时长≤20 秒，支持格式mp4。输入视频建议：姿态：人脸相对镜头水平方向角度转动不超过 90°,垂直方向角度转动不超过 20°。遮挡：脸部遮挡面积不超过 50%，不要完全遮挡五官，不要有半透明遮挡（强光，玻璃，透明眼镜等）、以及细碎离散的脸部遮挡（如飘落的花瓣）。妆容及光照：避免浓妆、复杂妆容，避免复杂光照、闪烁，这些属性无法完全恢复，并对稳定性有影响。针对特殊表情和微表情，针对局部肌肉控制下的微表情，以及过于夸张的特殊表情等不保证表情效果完全恢复。 */
   VideoUrl?: string;
   /** 视频素材模板的人脸位置信息。目前最多支持融合视频素材中的 6 张人脸 输入图片要求： 1、用户图限制大小不超过 10MB 2、图片最大分辨率不超过 4k，建议最小为 128， 人脸框最小为 683、支持格式 jpg，png 4、如果用户图中未指定人脸且有多张人脸， 默认融合最大人脸 输入图片建议： 包含上述视频中出现的人物的单人照，并且正面、清晰、无遮挡 */
   TemplateInfos?: FaceTemplateInfo[];
@@ -513,6 +553,8 @@ declare interface Vclm {
   (): Versions;
   /** 校验图片跳舞输入图 {@link CheckAnimateImageJobRequest} {@link CheckAnimateImageJobResponse} */
   CheckAnimateImageJob(data: CheckAnimateImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAnimateImageJobResponse>;
+  /** 查询生视频任务 {@link DescribeAigcVideoJobRequest} {@link DescribeAigcVideoJobResponse} */
+  DescribeAigcVideoJob(data?: DescribeAigcVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAigcVideoJobResponse>;
   /** 查询人像驱动任务 {@link DescribeHumanActorJobRequest} {@link DescribeHumanActorJobResponse} */
   DescribeHumanActorJob(data: DescribeHumanActorJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHumanActorJobResponse>;
   /** 查询混元生视频任务 {@link DescribeHunyuanToVideoJobRequest} {@link DescribeHunyuanToVideoJobResponse} */
@@ -533,6 +575,8 @@ declare interface Vclm {
   DescribeVideoStylizationJob(data: DescribeVideoStylizationJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoStylizationJobResponse>;
   /** 查询视频配音效任务 {@link DescribeVideoVoiceJobRequest} {@link DescribeVideoVoiceJobResponse} */
   DescribeVideoVoiceJob(data?: DescribeVideoVoiceJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoVoiceJobResponse>;
+  /** 提交生视频任务 {@link SubmitAigcVideoJobRequest} {@link SubmitAigcVideoJobResponse} */
+  SubmitAigcVideoJob(data: SubmitAigcVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitAigcVideoJobResponse>;
   /** 提交人像驱动任务 {@link SubmitHumanActorJobRequest} {@link SubmitHumanActorJobResponse} */
   SubmitHumanActorJob(data: SubmitHumanActorJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitHumanActorJobResponse>;
   /** 提交混元生视频任务 {@link SubmitHunyuanToVideoJobRequest} {@link SubmitHunyuanToVideoJobResponse} */

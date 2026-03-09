@@ -32,7 +32,7 @@ declare interface ApplicationVersion {
 declare interface CVMOption {
   /** 云服务器可用区。 */
   Zone: string | null;
-  /** 云服务器实例规格。 */
+  /** 云服务器实例规格。详情参见实例规格描述 */
   InstanceType: string | null;
 }
 
@@ -50,7 +50,7 @@ declare interface CacheInfo {
 declare interface ClusterOption {
   /** 计算集群可用区。 */
   Zone: string;
-  /** 计算集群类型，取值范围：- KUBERNETES */
+  /** 计算集群类型，取值范围：KUBERNETES */
   Type: string;
   /** 计算集群Service CIDR，不能与VPC网段重合。 */
   ServiceCidr?: string;
@@ -58,7 +58,7 @@ declare interface ClusterOption {
   ResourceQuota?: ResourceQuota;
   /** 限制范围。 */
   LimitRange?: LimitRange;
-  /** 系统节点池实例规格。 */
+  /** 系统节点池实例规格。详情参见实例规格描述 */
   SystemNodeInstanceType?: string;
   /** 系统节点池实例数量。 */
   SystemNodeCount?: number;

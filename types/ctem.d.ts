@@ -840,6 +840,16 @@ declare interface DisplayWechatOfficialAccount {
   RecordSubject?: string;
 }
 
+/** 股权路径 */
+declare interface Equity {
+  /** 企业ID */
+  EnterpriseUid?: string;
+  /** 名称 */
+  Name?: string;
+  /** 持股比例 */
+  ShareholdingRatio?: string;
+}
+
 /** 支持按照各字段过滤 */
 declare interface Filter {
   /** 要搜索的字段 */
@@ -1950,6 +1960,8 @@ declare interface DescribeJobRecordDetailsResponse {
   Total?: number;
   /** 数组 */
   List?: DisplayJobRecordDetail[];
+  /** 持股路径 */
+  EnterpriseEquityPath?: Equity[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

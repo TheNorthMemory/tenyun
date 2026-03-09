@@ -28,6 +28,26 @@ declare interface ApolloEnvParam {
   EnvDesc?: string;
 }
 
+/** 路由规则来源服务的请求规则配置详情 */
+declare interface Argument {
+  /** 类型 */
+  Type?: string | null;
+  /** key值 */
+  Key?: string | null;
+  /** 匹配条件参数 */
+  Value?: ArgumentValue | null;
+}
+
+/** 被调服务配置表达式 */
+declare interface ArgumentValue {
+  /** 表达式类型 */
+  Type: string | null;
+  /** 匹配值 */
+  Value: string | null;
+  /** 值类型 */
+  ValueType: string | null;
+}
+
 /** 指标伸缩行为 */
 declare interface AutoScalerBehavior {
   /** 扩容行为配置 */
@@ -256,6 +276,8 @@ declare interface CloudNativeAPIGatewayRateLimitDetail {
   LimitBy?: string;
   /** 外部redis配置 */
   ExternalRedis?: ExternalRedis;
+  /** 全局配置中的redis配置 */
+  GlobalConfigId?: string;
   /** 计数器策略 local 单机redis 默认redisexternal_redis 外部redis */
   Policy?: string;
   /** 响应配置，响应策略为text */
@@ -676,6 +698,30 @@ declare interface DeleteCloudNativeAPIGatewayResult {
   GatewayId: string;
   /** 云原生网关状态。 */
   Status: string;
+}
+
+/** 泳道组 */
+declare interface DeleteGovernanceLaneGroup {
+  /** 泳道名称 */
+  Name: string | null;
+  /** 泳道组ID */
+  ID?: string | null;
+  /** 泳道入口服务列表 */
+  TrafficEntries?: LaneTrafficEntry[] | null;
+  /** 泳道服务列表 */
+  Destinations?: GovernanceServiceDestination[] | null;
+  /** 泳道组描述 */
+  Description?: string | null;
+  /** 规则内容摘要 */
+  Revision?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 修改时间 */
+  ModifyTime?: string | null;
+  /** 规则一致性状态 */
+  Consistency?: string | null;
+  /** 泳道规则列表 */
+  Rules?: GovernanceLaneRule[] | null;
 }
 
 /** 删除网关实例结果 */
@@ -1114,6 +1160,64 @@ declare interface GovernanceInterfaceDescription {
   Name?: string;
 }
 
+/** 泳道组 */
+declare interface GovernanceLaneGroup {
+  /** 泳道名称 */
+  Name: string | null;
+  /** 泳道组ID */
+  ID?: string | null;
+  /** 泳道入口服务列表 */
+  TrafficEntries?: LaneTrafficEntry[] | null;
+  /** 泳道服务列表 */
+  Destinations?: GovernanceServiceDestination[] | null;
+  /** 泳道组描述 */
+  Description?: string | null;
+  /** 该泳道组下的所有泳道规则列表 */
+  Rules?: GovernanceLaneRule[] | null;
+  /** 规则内容摘要 */
+  Revision?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 修改时间 */
+  ModifyTime?: string | null;
+  /** 规则一致性状态 */
+  Consistency?: string | null;
+}
+
+/** 泳道规则 */
+declare interface GovernanceLaneRule {
+  /** 泳道规则ID */
+  ID?: string | null;
+  /** 泳道名称 */
+  Name?: string | null;
+  /** 泳道所属泳道组 */
+  LaneGroup?: string | null;
+  /** 泳道规则启用状态 */
+  Enable?: boolean | null;
+  /** 流量标签 */
+  TrafficLabels?: Argument[] | null;
+  /** 多个流量标签匹配方式AND：与OR：或 */
+  TrafficMatchMode?: string | null;
+  /** 泳道匹配方式STRICT：严格匹配PERMISSIVE：宽松匹配 */
+  LaneMatchMode?: string | null;
+  /** 泳道灰度规则 */
+  TrafficGray?: TrafficGray;
+  /** 泳道规则描述 */
+  Description?: string | null;
+  /** 泳道标签内容 */
+  LaneLabelValue?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 启用时间 */
+  EnableTime?: string | null;
+  /** 修改时间 */
+  ModifyTime?: string | null;
+  /** 泳道规则优先级 */
+  Priority?: number | null;
+  /** 规则摘要 */
+  Revision?: string | null;
+}
+
 /** 治理中心命名空间 */
 declare interface GovernanceNamespace {
   /** 命名空间名称。 */
@@ -1252,6 +1356,16 @@ declare interface GovernanceServiceContractVersion {
   Name?: string;
   /** 唯一名称 */
   Key?: string;
+}
+
+/** 服务实例组 */
+declare interface GovernanceServiceDestination {
+  /** 命名空间 */
+  Namespace: string | null;
+  /** 服务 */
+  Service: string | null;
+  /** 实例标签 */
+  Labels?: RoutingDestinationRuleLabel[] | null;
 }
 
 /** 治理中心服务入参 */
@@ -1618,6 +1732,26 @@ declare interface KongUpstreamPreview {
   Target?: KongTarget[];
 }
 
+/** 标签 */
+declare interface Label {
+  /** 标签键名称 */
+  Key?: string;
+  /** 标签值 */
+  Value?: string;
+}
+
+/** 泳道入口信息 */
+declare interface LaneTrafficEntry {
+  /** // type == "polarismesh.cn/gateway/tse-gateway, 则 selector 为 TSEGatewaySelector // type == "polarismesh.cn/gateway/spring-cloud-gateway", 则 selector 为 ServiceGatewaySelector // type == "polarismesh.cn/service, 则 selector 为 ServiceSelector */
+  EntryType?: string | null;
+  /** TSE云原生网关选择器 */
+  TSEGatewaySelector?: TSEGatewaySelector | null;
+  /** 微服务网关选择器 */
+  ServiceGatewaySelector?: ServiceGatewaySelector | null;
+  /** 普通微服务选择器 */
+  ServiceSelector?: ServiceSelector | null;
+}
+
 /** 参数限流的规则 */
 declare interface LimitRule {
   /** 请求匹配条件 */
@@ -1854,6 +1988,18 @@ declare interface RouteWafStatus {
   ServiceId?: string;
 }
 
+/** 目标服务实例实例标签信息 */
+declare interface RoutingDestinationRuleLabel {
+  /** 标签键 */
+  LabelKey?: string | null;
+  /** 标签值 */
+  LabelValue?: string | null;
+  /** 表达式类型 */
+  LabelType?: string | null;
+  /** 值类型 */
+  LabelValueType?: string | null;
+}
+
 /** 限流规则的Filter */
 declare interface RuleFilter {
   /** 限流条件的Key */
@@ -1950,6 +2096,16 @@ declare interface SREInstance {
   IsMainRegion?: boolean;
 }
 
+/** 微服务网关选择器 */
+declare interface ServiceGatewaySelector {
+  /** 命名空间 */
+  Namespace: string | null;
+  /** 服务 */
+  Service: string | null;
+  /** 实例标签 */
+  Labels?: Label[] | null;
+}
+
 /** 服务治理相关的信息 */
 declare interface ServiceGovernanceInfo {
   /** 引擎所在的地域 */
@@ -1972,6 +2128,16 @@ declare interface ServiceGovernanceInfo {
   CLSTopics?: PolarisCLSTopicInfo[];
   /** 子用户密码 */
   SubPassword?: string;
+}
+
+/** 普通服务选择器 */
+declare interface ServiceSelector {
+  /** 命名空间 */
+  Namespace: string | null;
+  /** 服务 */
+  Service: string | null;
+  /** 实例标签 */
+  Labels?: Label[] | null;
 }
 
 /** 服务的 WAF 状态 */
@@ -2022,6 +2188,26 @@ declare interface StorageOption {
   Type?: string;
   /** 存储容量，[50, 3200]的范围 */
   Capacity?: number;
+}
+
+/** 网关服务信息匹配条件 */
+declare interface TSEGatewaySelector {
+  /** 网关引擎实例ID */
+  GatewayId: string | null;
+  /** 网关服务 */
+  Services?: string[] | null;
+}
+
+/** 泳道流量灰度规则 */
+declare interface TrafficGray {
+  /** 流量灰度规则，按比例灰度或预热方式 */
+  Mode?: string;
+  /** 按比例灰度的百分比值1-100 */
+  Percent?: number;
+  /** 预热的间隔 */
+  IntervalSecond?: number;
+  /** 预热的曲度 */
+  Curvature?: number;
 }
 
 /** 更新云原生API网关响应结果。 */
@@ -2482,6 +2668,20 @@ declare interface CreateGovernanceInstancesResponse {
   RequestId?: string;
 }
 
+declare interface CreateGovernanceLaneGroupsRequest {
+  /** 引擎实例ID */
+  InstanceId: string;
+  /** 泳道组规则列表 */
+  LaneGroups: GovernanceLaneGroup[];
+}
+
+declare interface CreateGovernanceLaneGroupsResponse {
+  /** 是否创建成功 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateGovernanceNamespacesRequest {
   /** tse 实例id。 */
   InstanceId: string;
@@ -2841,6 +3041,20 @@ declare interface DeleteGovernanceInstancesRequest {
 
 declare interface DeleteGovernanceInstancesResponse {
   /** 操作是否成功。 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteGovernanceLaneGroupsRequest {
+  /** 引擎实例ID */
+  InstanceId: string;
+  /** 泳道组规则列表 */
+  LaneGroups: DeleteGovernanceLaneGroup[];
+}
+
+declare interface DeleteGovernanceLaneGroupsResponse {
+  /** 是否创建成功 */
   Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3472,6 +3686,30 @@ declare interface DescribeGovernanceInstancesResponse {
   Content?: GovernanceInstance[];
   /** 地域 */
   Location?: Location;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeGovernanceLaneGroupsRequest {
+  /** 引擎实例ID */
+  InstanceId: string;
+  /** 分页查询偏移量 */
+  Offset: number;
+  /** 分页条数 */
+  Limit: number;
+  /** 泳道名称 */
+  Name?: string;
+  /** 泳道ID */
+  GroupID?: string;
+  /** 是否展示泳道规则列表 */
+  Brief?: boolean;
+}
+
+declare interface DescribeGovernanceLaneGroupsResponse {
+  /** 总数 */
+  Total?: number;
+  /** 泳道规则列表 */
+  LaneGroups?: GovernanceLaneGroup[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4122,6 +4360,20 @@ declare interface ModifyGovernanceInstancesResponse {
   RequestId?: string;
 }
 
+declare interface ModifyGovernanceLaneGroupsRequest {
+  /** 引擎实例ID */
+  InstanceId: string;
+  /** 泳道组规则列表 */
+  LaneGroups: GovernanceLaneGroup[];
+}
+
+declare interface ModifyGovernanceLaneGroupsResponse {
+  /** 是否创建成功 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyGovernanceNamespacesRequest {
   /** tse实例id。 */
   InstanceId: string;
@@ -4442,6 +4694,8 @@ declare interface Tse {
   CreateGovernanceAlias(data: CreateGovernanceAliasRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGovernanceAliasResponse>;
   /** 创建服务实例 {@link CreateGovernanceInstancesRequest} {@link CreateGovernanceInstancesResponse} */
   CreateGovernanceInstances(data: CreateGovernanceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGovernanceInstancesResponse>;
+  /** 创建泳道组 {@link CreateGovernanceLaneGroupsRequest} {@link CreateGovernanceLaneGroupsResponse} */
+  CreateGovernanceLaneGroups(data: CreateGovernanceLaneGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGovernanceLaneGroupsResponse>;
   /** 创建命名空间 {@link CreateGovernanceNamespacesRequest} {@link CreateGovernanceNamespacesResponse} */
   CreateGovernanceNamespaces(data: CreateGovernanceNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGovernanceNamespacesResponse>;
   /** 创建服务 {@link CreateGovernanceServicesRequest} {@link CreateGovernanceServicesResponse} */
@@ -4490,6 +4744,8 @@ declare interface Tse {
   DeleteGovernanceInstances(data: DeleteGovernanceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGovernanceInstancesResponse>;
   /** 根据HOST删除服务实例 {@link DeleteGovernanceInstancesByHostRequest} {@link DeleteGovernanceInstancesByHostResponse} */
   DeleteGovernanceInstancesByHost(data: DeleteGovernanceInstancesByHostRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGovernanceInstancesByHostResponse>;
+  /** 删除泳道组 {@link DeleteGovernanceLaneGroupsRequest} {@link DeleteGovernanceLaneGroupsResponse} */
+  DeleteGovernanceLaneGroups(data: DeleteGovernanceLaneGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGovernanceLaneGroupsResponse>;
   /** 删除命名空间 {@link DeleteGovernanceNamespacesRequest} {@link DeleteGovernanceNamespacesResponse} */
   DeleteGovernanceNamespaces(data: DeleteGovernanceNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGovernanceNamespacesResponse>;
   /** 删除服务 {@link DeleteGovernanceServicesRequest} {@link DeleteGovernanceServicesResponse} */
@@ -4558,6 +4814,8 @@ declare interface Tse {
   DescribeGovernanceAliases(data: DescribeGovernanceAliasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGovernanceAliasesResponse>;
   /** 查询服务实例 {@link DescribeGovernanceInstancesRequest} {@link DescribeGovernanceInstancesResponse} */
   DescribeGovernanceInstances(data: DescribeGovernanceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGovernanceInstancesResponse>;
+  /** 查询泳道组列表 {@link DescribeGovernanceLaneGroupsRequest} {@link DescribeGovernanceLaneGroupsResponse} */
+  DescribeGovernanceLaneGroups(data: DescribeGovernanceLaneGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGovernanceLaneGroupsResponse>;
   /** 查询命名空间列表 {@link DescribeGovernanceNamespacesRequest} {@link DescribeGovernanceNamespacesResponse} */
   DescribeGovernanceNamespaces(data: DescribeGovernanceNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGovernanceNamespacesResponse>;
   /** 查询服务下契约版本列表 {@link DescribeGovernanceServiceContractVersionsRequest} {@link DescribeGovernanceServiceContractVersionsResponse} */
@@ -4622,6 +4880,8 @@ declare interface Tse {
   ModifyGovernanceAlias(data: ModifyGovernanceAliasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGovernanceAliasResponse>;
   /** 修改服务实例 {@link ModifyGovernanceInstancesRequest} {@link ModifyGovernanceInstancesResponse} */
   ModifyGovernanceInstances(data: ModifyGovernanceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGovernanceInstancesResponse>;
+  /** 修改泳道组 {@link ModifyGovernanceLaneGroupsRequest} {@link ModifyGovernanceLaneGroupsResponse} */
+  ModifyGovernanceLaneGroups(data: ModifyGovernanceLaneGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGovernanceLaneGroupsResponse>;
   /** 修改命名空间 {@link ModifyGovernanceNamespacesRequest} {@link ModifyGovernanceNamespacesResponse} */
   ModifyGovernanceNamespaces(data: ModifyGovernanceNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGovernanceNamespacesResponse>;
   /** 修改服务 {@link ModifyGovernanceServicesRequest} {@link ModifyGovernanceServicesResponse} */

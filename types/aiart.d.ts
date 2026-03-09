@@ -6,7 +6,7 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 declare interface FaceInfo {
   /** 用户图 URL 列表 */
   ImageUrls?: string[];
-  /** 模版图人脸坐标。 */
+  /** 模板图人脸坐标。 */
   TemplateFaceRect?: Rect;
 }
 
@@ -471,9 +471,9 @@ declare interface SubmitMemeJobResponse {
 }
 
 declare interface SubmitTextToImageJobRequest {
-  /** 文本描述。算法将根据输入的文本智能生成与之相关的图像。不能为空，推荐使用中文。最多可传1024个 utf-8 字符。 */
+  /** 文本描述。算法将根据输入的文本智能生成与之相关的图像。不能为空，推荐使用中文。最多可传8192个 utf-8 字符。 */
   Prompt: string;
-  /** 垫图url列表，大小不超过10MB，支持 jpg jpeg png webp格式，最多3张图 */
+  /** 垫图url列表，base64后大小不超过10MB，支持 jpg jpeg png webp格式，最多3张图 */
   Images?: string[];
   /** 生成图分辨率，默认1024:1024：宽高维度均在 [512, 2048] 像素范围内;宽高乘积（即图像面积）不超过 1024×1024 像素; */
   Resolution?: string;

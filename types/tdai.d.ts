@@ -10,6 +10,8 @@ declare interface Agent {
   AgentName?: string;
   /** 智能体类型 */
   AgentInternalName?: string;
+  /** 架构：共享版-intranet，企业版-userVpc */
+  DeployPlace?: string;
   /** 智能体状态 */
   AgentStatus?: string;
   /** 默认版本 */
@@ -371,6 +373,8 @@ declare interface DescribeAgentsRequest {
   AgentInternalName?: string;
   /** 智能体状态，为空时查询所有，如果填写则会根据AgentStatus筛选 */
   AgentStatus?: string;
+  /** 架构，共享版-intranet，企业版-userVpc */
+  DeployPlace?: string;
 }
 
 declare interface DescribeAgentsResponse {

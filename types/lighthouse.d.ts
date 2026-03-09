@@ -166,13 +166,13 @@ declare interface ContainerEnv {
 declare interface DataDiskPrice {
   /** 云硬盘ID。 */
   DiskId?: string;
-  /** 云硬盘单价。 */
+  /** 云硬盘单价。单位：元 */
   OriginalDiskPrice?: number;
-  /** 云硬盘总价。 */
+  /** 云硬盘总价。单位：元 */
   OriginalPrice?: number;
   /** 折扣。 */
   Discount?: number;
-  /** 折后总价。 */
+  /** 折后总价。单位：元 */
   DiscountPrice?: number;
   /** 数据盘挂载的实例ID。 */
   InstanceId?: string;
@@ -200,13 +200,13 @@ declare interface DestinationRegionBlueprint {
 declare interface DetailPrice {
   /** 描述计费项目名称，目前取值"DiskSpace"代表云硬盘空间收费项。"DiskBackupQuota"代表数据盘备份点配额收费项。"Instance"代表实例收费项。"SystemDiskBackupQuota"代表系统盘备份点配额收费项。 */
   PriceName?: string;
-  /** 计费项维度单价。 */
+  /** 计费项维度单价。单位：元 */
   OriginUnitPrice?: number;
-  /** 计费项维度总价。 */
+  /** 计费项维度总价。单位：元 */
   OriginalPrice?: number;
   /** 计费项维度折扣。 */
   Discount?: number;
-  /** 计费项维度折后总价。 */
+  /** 计费项维度折后总价。单位：元 */
   DiscountPrice?: number;
 }
 
@@ -214,11 +214,11 @@ declare interface DetailPrice {
 declare interface DiscountDetail {
   /** 计费时长。 */
   TimeSpan?: number;
-  /** 时间单位。取值为：- m - 月- d - 日 */
+  /** 时间单位。取值为：m - 月d - 日 */
   TimeUnit?: string;
-  /** 总价。 */
+  /** 总价。单位：元 */
   TotalCost?: number;
-  /** 折后总价。 */
+  /** 折后总价。单位：元 */
   RealTotalCost?: number;
   /** 折扣。 */
   Discount?: number;
@@ -326,11 +326,11 @@ declare interface DiskConfig {
   DiskType?: string;
   /** 云硬盘可售卖状态。 */
   DiskSalesState?: string;
-  /** 最大云硬盘大小。 */
+  /** 最大云硬盘大小。单位：GB */
   MaxDiskSize?: number;
-  /** 最小云硬盘大小。 */
+  /** 最小云硬盘大小。单位：GB */
   MinDiskSize?: number;
-  /** 云硬盘步长。 */
+  /** 云硬盘步长。单位：GB */
   DiskStepSize?: number;
 }
 
@@ -684,13 +684,13 @@ declare interface InstanceIdentifier {
 
 /** 关于Lighthouse Instance实例的价格信息。 */
 declare interface InstancePrice {
-  /** 套餐单价原价。 */
+  /** 套餐单价原价。单位：元 */
   OriginalBundlePrice?: number;
-  /** 原价。 */
+  /** 原价。单位：元 */
   OriginalPrice?: number;
   /** 折扣。 */
   Discount?: number;
-  /** 折后价。 */
+  /** 折后价。单位：元 */
   DiscountPrice?: number;
   /** 价格货币单位。取值范围CNY:人民币。USD:美元。 */
   Currency?: string;
@@ -1024,9 +1024,9 @@ declare interface Tag {
 
 /** 总计价格信息 */
 declare interface TotalPrice {
-  /** 原始总计价格。 */
+  /** 原始总计价格。单位：元 */
   OriginalPrice?: number;
-  /** 折扣总计价格。 */
+  /** 折扣总计价格。单位：元 */
   DiscountPrice?: number;
 }
 

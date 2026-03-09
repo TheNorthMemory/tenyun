@@ -34,6 +34,36 @@ declare interface FeiShuRobotNoticeTmplMatcher {
   Template: FeiShuRobotNoticeTmpl;
 }
 
+/** 自定义通知内容模板 */
+declare interface NoticeContentTmpl {
+  /** 自定义通知内容模板id，唯一id */
+  TmplID?: string | null;
+  /** 自定义通知内容模板名 */
+  TmplName?: string | null;
+  /** 通知内容 */
+  TmplContents?: NoticeContentTmplItem | null;
+  /** Unix时间戳，秒 */
+  CreateTime?: number | null;
+  /** Unix时间戳，秒 */
+  UpdateTime?: number | null;
+  /** 最后修改人 */
+  LastModifier?: string | null;
+  /** 创建人 */
+  Creator?: string | null;
+  /** 监控类型 */
+  MonitorType?: string;
+  /** 模板语言 en/zh */
+  TmplLanguage?: string;
+}
+
+/** 通知内容模板绑定告警策略数量 */
+declare interface NoticeContentTmplBindPolicyCount {
+  /** 通知内容模板ID */
+  NoticeContentTmplID?: string;
+  /** 绑定告警策略数量 */
+  BindCount?: number;
+}
+
 /** 内容通知模板元素 */
 declare interface NoticeContentTmplItem {
   /** 官网通知渠道配置 */
@@ -204,6 +234,16 @@ declare interface CreateNoticeContentTmplResponse {
   RequestId?: string;
 }
 
+declare interface DeleteNoticeContentTmplsRequest {
+  /** 要删除的模板id */
+  TmplIDs?: string[];
+}
+
+declare interface DeleteNoticeContentTmplsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAlarmNotifyHistoriesRequest {
   /** 监控类型 */
   MonitorType: string;
@@ -222,6 +262,52 @@ declare interface DescribeAlarmNotifyHistoriesRequest {
 }
 
 declare interface DescribeAlarmNotifyHistoriesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNoticeContentTmplRequest {
+  /** 分页数 */
+  PageNumber: number;
+  /** 分页大小 */
+  PageSize: number;
+  /** 指定模板ID查询，查询参数都为空则默认查询账号下所有模板 */
+  TmplIDs?: string[];
+  /** 指定模板名称查询，查询参数都为空则默认查询账号下所有模板 */
+  TmplName?: string;
+  /** 指定通知模板ID查询，查询参数都为空则默认查询账号下所有模板 */
+  NoticeID?: string;
+  /** 模板语言 en/zh 缺省不过滤 */
+  TmplLanguage?: string;
+  /** 监控类型 */
+  MonitorType?: string;
+}
+
+declare interface DescribeNoticeContentTmplResponse {
+  /** 自定义通知内容模板 */
+  NoticeContentTmpls?: NoticeContentTmpl[] | null;
+  /** 通知内容模板绑定的告警策略数量 */
+  NoticeContentTmplBindPolicyCounts?: NoticeContentTmplBindPolicyCount[];
+  /** 分页数 */
+  PageNumber?: number;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 结果总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyNoticeContentTmplRequest {
+  /** 模板名称 */
+  TmplName: string;
+  /** 模板内容 */
+  TmplContents: NoticeContentTmplItem;
+  /** 需要修改的模板ID */
+  TmplID: string;
+}
+
+declare interface ModifyNoticeContentTmplResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1751,6 +1837,26 @@ declare namespace V20180724 {
     ContentTmplID?: string;
     /** 通知模板ID */
     NoticeID?: string;
+  }
+
+  /** 告警通知内容模板支持的变量或者函数列表 */
+  interface NotificationContentTemplateSupport {
+    /** 监控类型 */
+    MonitorType?: string;
+    /** 支持的变量 */
+    Variables?: NotificationContentTemplateSupportDetail[] | null;
+    /** 支持的函数 */
+    Functions?: NotificationContentTemplateSupportDetail[] | null;
+  }
+
+  /** 告警通知内容模板支持的变量或者函数 */
+  interface NotificationContentTemplateSupportDetail {
+    /** 变量/函数名称 */
+    Name?: string;
+    /** 描述 */
+    Desc?: string;
+    /** 示例 */
+    Example?: string;
   }
 
   /** 维度支持的操作符信息 */
@@ -4326,6 +4432,18 @@ declare namespace V20180724 {
     RequestId?: string;
   }
 
+  interface DescribeNotificationContentTemplateSupportsRequest {
+    /** 监控类型 */
+    MonitorType?: string;
+  }
+
+  interface DescribeNotificationContentTemplateSupportsResponse {
+    /** 配置详情 */
+    Support?: NotificationContentTemplateSupport | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribePhoneAlarmFlowTotalCountRequest {
     /** 默认monitor */
     Module: string;
@@ -5958,8 +6076,14 @@ declare interface Monitor {
   (): Versions;
   /** 创建通知内容模板 {@link CreateNoticeContentTmplRequest} {@link CreateNoticeContentTmplResponse} */
   CreateNoticeContentTmpl(data: CreateNoticeContentTmplRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNoticeContentTmplResponse>;
+  /** 批量删除通知内容模板 {@link DeleteNoticeContentTmplsRequest} {@link DeleteNoticeContentTmplsResponse} */
+  DeleteNoticeContentTmpls(data?: DeleteNoticeContentTmplsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNoticeContentTmplsResponse>;
   /** 查询告警通知历史 {@link DescribeAlarmNotifyHistoriesRequest} {@link DescribeAlarmNotifyHistoriesResponse} */
   DescribeAlarmNotifyHistories(data: DescribeAlarmNotifyHistoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmNotifyHistoriesResponse>;
+  /** 获取通知内容模板 {@link DescribeNoticeContentTmplRequest} {@link DescribeNoticeContentTmplResponse} */
+  DescribeNoticeContentTmpl(data: DescribeNoticeContentTmplRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNoticeContentTmplResponse>;
+  /** 修改通知内容模板 {@link ModifyNoticeContentTmplRequest} {@link ModifyNoticeContentTmplResponse} */
+  ModifyNoticeContentTmpl(data: ModifyNoticeContentTmplRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNoticeContentTmplResponse>;
   /** 绑定 Grafana 服务实例 {@link V20180724.BindPrometheusManagedGrafanaRequest} {@link V20180724.BindPrometheusManagedGrafanaResponse} */
   BindPrometheusManagedGrafana(data: V20180724.BindPrometheusManagedGrafanaRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.BindPrometheusManagedGrafanaResponse>;
   /** 绑定策略对象 {@link V20180724.BindingPolicyObjectRequest} {@link V20180724.BindingPolicyObjectResponse} */
@@ -6000,7 +6124,7 @@ declare interface Monitor {
   CreatePrometheusClusterAgent(data: V20180724.CreatePrometheusClusterAgentRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CreatePrometheusClusterAgentResponse>;
   /** 创建prometheus配置 {@link V20180724.CreatePrometheusConfigRequest} {@link V20180724.CreatePrometheusConfigResponse} */
   CreatePrometheusConfig(data: V20180724.CreatePrometheusConfigRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CreatePrometheusConfigResponse>;
-  /** 创建全局告警通知渠道 {@link V20180724.CreatePrometheusGlobalNotificationRequest} {@link V20180724.CreatePrometheusGlobalNotificationResponse} */
+  /** @deprecated 创建全局告警通知渠道 {@link V20180724.CreatePrometheusGlobalNotificationRequest} {@link V20180724.CreatePrometheusGlobalNotificationResponse} */
   CreatePrometheusGlobalNotification(data: V20180724.CreatePrometheusGlobalNotificationRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CreatePrometheusGlobalNotificationResponse>;
   /** 创建按量 Prometheus 实例 {@link V20180724.CreatePrometheusMultiTenantInstancePostPayModeRequest} {@link V20180724.CreatePrometheusMultiTenantInstancePostPayModeResponse} */
   CreatePrometheusMultiTenantInstancePostPayMode(data: V20180724.CreatePrometheusMultiTenantInstancePostPayModeRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CreatePrometheusMultiTenantInstancePostPayModeResponse>;
@@ -6118,6 +6242,8 @@ declare interface Monitor {
   DescribeMonitorResourceInfo(data: V20180724.DescribeMonitorResourceInfoRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeMonitorResourceInfoResponse>;
   /** 查询监控类型 {@link V20180724.DescribeMonitorTypesRequest} {@link V20180724.DescribeMonitorTypesResponse} */
   DescribeMonitorTypes(data: V20180724.DescribeMonitorTypesRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeMonitorTypesResponse>;
+  /** 查询通知内容模板支持的变量及函数 {@link V20180724.DescribeNotificationContentTemplateSupportsRequest} {@link V20180724.DescribeNotificationContentTemplateSupportsResponse} */
+  DescribeNotificationContentTemplateSupports(data: V20180724.DescribeNotificationContentTemplateSupportsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeNotificationContentTemplateSupportsResponse>;
   /** 查询周期内电话流水总数 {@link V20180724.DescribePhoneAlarmFlowTotalCountRequest} {@link V20180724.DescribePhoneAlarmFlowTotalCountResponse} */
   DescribePhoneAlarmFlowTotalCount(data: V20180724.DescribePhoneAlarmFlowTotalCountRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribePhoneAlarmFlowTotalCountResponse>;
   /** 列出所有 Grafana 插件 {@link V20180724.DescribePluginOverviewsRequest} {@link V20180724.DescribePluginOverviewsResponse} */
@@ -6148,7 +6274,7 @@ declare interface Monitor {
   DescribePrometheusConfig(data: V20180724.DescribePrometheusConfigRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribePrometheusConfigResponse>;
   /** 获得实例级别抓取配置 {@link V20180724.DescribePrometheusGlobalConfigRequest} {@link V20180724.DescribePrometheusGlobalConfigResponse} */
   DescribePrometheusGlobalConfig(data: V20180724.DescribePrometheusGlobalConfigRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribePrometheusGlobalConfigResponse>;
-  /** 查询全局告警通知渠道 {@link V20180724.DescribePrometheusGlobalNotificationRequest} {@link V20180724.DescribePrometheusGlobalNotificationResponse} */
+  /** @deprecated 查询全局告警通知渠道 {@link V20180724.DescribePrometheusGlobalNotificationRequest} {@link V20180724.DescribePrometheusGlobalNotificationResponse} */
   DescribePrometheusGlobalNotification(data: V20180724.DescribePrometheusGlobalNotificationRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribePrometheusGlobalNotificationResponse>;
   /** 获取TMP实例详情 {@link V20180724.DescribePrometheusInstanceDetailRequest} {@link V20180724.DescribePrometheusInstanceDetailResponse} */
   DescribePrometheusInstanceDetail(data: V20180724.DescribePrometheusInstanceDetailRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribePrometheusInstanceDetailResponse>;
@@ -6232,7 +6358,7 @@ declare interface Monitor {
   ModifyPrometheusAlertPolicy(data: V20180724.ModifyPrometheusAlertPolicyRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.ModifyPrometheusAlertPolicyResponse>;
   /** 修改prometheus配置 {@link V20180724.ModifyPrometheusConfigRequest} {@link V20180724.ModifyPrometheusConfigResponse} */
   ModifyPrometheusConfig(data: V20180724.ModifyPrometheusConfigRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.ModifyPrometheusConfigResponse>;
-  /** 修改全局告警通知渠道 {@link V20180724.ModifyPrometheusGlobalNotificationRequest} {@link V20180724.ModifyPrometheusGlobalNotificationResponse} */
+  /** @deprecated 修改全局告警通知渠道 {@link V20180724.ModifyPrometheusGlobalNotificationRequest} {@link V20180724.ModifyPrometheusGlobalNotificationResponse} */
   ModifyPrometheusGlobalNotification(data: V20180724.ModifyPrometheusGlobalNotificationRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.ModifyPrometheusGlobalNotificationResponse>;
   /** 修改 Prometheus 实例相关属性 {@link V20180724.ModifyPrometheusInstanceAttributesRequest} {@link V20180724.ModifyPrometheusInstanceAttributesResponse} */
   ModifyPrometheusInstanceAttributes(data: V20180724.ModifyPrometheusInstanceAttributesRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.ModifyPrometheusInstanceAttributesResponse>;

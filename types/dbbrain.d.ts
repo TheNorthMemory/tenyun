@@ -1446,6 +1446,32 @@ declare interface CreateMailProfileResponse {
   RequestId?: string;
 }
 
+declare interface CreateMongoDBKillTaskRequest {
+  /** kill会话任务的关联实例ID。 */
+  InstanceId: string;
+  /** 任务持续时间，单位秒，手动关闭任务传-1。 */
+  Duration: number;
+  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，默认为"mysql"。 */
+  Product: string;
+  /** 任务过滤条件，客户端IP。 */
+  Host?: string;
+  /** 命名空间 */
+  DB?: string[];
+  /** update,insert,query,getmore,remove,killcursors,command,compressed,none */
+  Type?: string;
+  /** kill任务过滤条件，会话持续时长，单位秒。 */
+  Time?: number;
+}
+
+declare interface CreateMongoDBKillTaskResponse {
+  /** kill会话任务创建成功返回1 */
+  Status?: number;
+  /** 异常信息 */
+  ErrorMsg?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateProxySessionKillTaskRequest {
   /** 实例 ID。 */
   InstanceId: string;
@@ -2643,16 +2669,20 @@ declare interface DescribeSlowLogTopSqlsResponse {
 }
 
 declare interface DescribeSlowLogUserHostStatsRequest {
-  /** 实例ID。 */
+  /** 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。 */
   InstanceId: string;
-  /** 查询范围的开始时间，时间格式如：2019-09-10 12:13:14。 */
+  /** 查询范围的开始时间，格式: "yyyy-MM-dd'T'HH:mm:ssXXX"。 */
   StartTime: string;
-  /** 查询范围的结束时间，时间格式如：2019-09-10 12:13:14。 */
+  /** 查询范围的结束时间，格式: "yyyy-MM-dd'T'HH:mm:ssXXX"。 */
   EndTime: string;
   /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。 */
   Product?: string;
   /** SQL模板的MD5值 */
   Md5?: string;
+  /** 仅Redis产品使用；实例Proxy ID。 */
+  InstanceProxyId?: string;
+  /** 仅Redis产品使用；命令。 */
+  Cmd?: string;
 }
 
 declare interface DescribeSlowLogUserHostStatsResponse {
@@ -4259,6 +4289,8 @@ declare interface Dbbrain {
   CreateKillTask(data: CreateKillTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKillTaskResponse>;
   /** 创建邮件配置 {@link CreateMailProfileRequest} {@link CreateMailProfileResponse} */
   CreateMailProfile(data: CreateMailProfileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMailProfileResponse>;
+  /** 创建MongoDB中断会话的任务 {@link CreateMongoDBKillTaskRequest} {@link CreateMongoDBKillTaskResponse} */
+  CreateMongoDBKillTask(data: CreateMongoDBKillTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMongoDBKillTaskResponse>;
   /** 创建中止代理节点会话的任务 {@link CreateProxySessionKillTaskRequest} {@link CreateProxySessionKillTaskResponse} */
   CreateProxySessionKillTask(data: CreateProxySessionKillTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProxySessionKillTaskResponse>;
   /** 创建redis实例即时大key分析任务 {@link CreateRedisBigKeyAnalysisTaskRequest} {@link CreateRedisBigKeyAnalysisTaskResponse} */

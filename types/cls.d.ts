@@ -942,7 +942,7 @@ declare interface DlcFiledInfo {
   ClsField: string;
   /** 数据湖计算服务表的列名 */
   DlcField: string;
-  /** 数据湖计算服务字段类型 */
+  /** 数据湖计算服务字段类型枚举值：int|string|struct等： 参考 DLC cloumn中的Type 定义 */
   DlcFieldType: string;
   /** 解析失败填充字段 */
   FillField?: string;
@@ -976,7 +976,7 @@ declare interface DlcPartitionInfo {
   ClsField: string;
   /** dlc表的列名 */
   DlcField: string;
-  /** dlc字段类型 */
+  /** 请参考 DLC cloumn中的Type 定义 枚举值：int|string|array等： 请参考 DLC cloumn中的Type 定义 */
   DlcFieldType: string;
 }
 
@@ -1132,7 +1132,7 @@ declare interface ExportInfo {
   Query?: string;
   /** 日志导出文件名 */
   FileName?: string;
-  /** 日志文件大小 */
+  /** 日志文件大小单位：Byte */
   FileSize?: number;
   /** 日志导出时间排序 */
   Order?: string;
@@ -1812,6 +1812,52 @@ declare interface NetInfo {
   VirtualGatewayType?: number;
   /** 认证机制，是否使用SSL，默认不使用 */
   IsSSL?: boolean;
+}
+
+/** 网络应用任务详情 */
+declare interface NetworkApplicationDetail {
+  /** 网络应用Id */
+  NetworkAppId?: string;
+  /** 网络应用名称 */
+  Name?: string;
+  /** 地域code */
+  Region?: string;
+  /** 日志主题id */
+  TopicId?: string;
+  /** 日志集id */
+  LogsetId?: string;
+  /** 应用token */
+  Token?: string;
+  /** 主账号id */
+  Uin?: number;
+  /** 子账号id */
+  SubUin?: number;
+  /** 创建时间，秒级时间戳 */
+  CreateTime?: number;
+  /** 更新时间，秒级时间戳 */
+  UpdateTime?: number;
+}
+
+/** 网络应用任务信息 */
+declare interface NetworkApplicationInfo {
+  /** 网络应用Id */
+  NetworkAppId?: string;
+  /** 网络应用名称 */
+  Name?: string;
+  /** 地域code */
+  Region?: string;
+  /** 日志主题id */
+  TopicId?: string;
+  /** 日志集id */
+  LogsetId?: string;
+  /** 主账号id */
+  Uin?: number;
+  /** 子账号id */
+  SubUin?: number;
+  /** 创建时间，秒级时间戳 */
+  CreateTime?: number;
+  /** 更新时间，秒级时间戳 */
+  UpdateTime?: number;
 }
 
 /** 通知内容模板详细配置 */
@@ -3150,6 +3196,22 @@ declare interface CreateMetricSubscribeResponse {
   RequestId?: string;
 }
 
+declare interface CreateNetworkApplicationRequest {
+  /** 网络应用名称：长度不超过64字符，名称不能重复。只能包含以下字符：英文字母（大小写）数字下划线连字符（减号）汉字至少包含一个字符不能包含空格不能包含其他特殊字符（如 @、#、$、% 等） */
+  Name: string;
+  /** 日志集ID通过获取日志集列表获取日志集Id。 */
+  LogsetId: string;
+  /** 主题名称。名称限制如下：不能为空字符串不能包含字符&#39;|&#39;不能使用以下名称[&quot;cls_service_log&quot;,&quot;loglistener_status&quot;,&quot;loglistener_alarm&quot;,&quot;loglistener_business&quot;,&quot;cls_service_metric&quot;] */
+  TopicName: string;
+}
+
+declare interface CreateNetworkApplicationResponse {
+  /** 网络应用id */
+  NetworkAppId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateNoticeContentRequest {
   /** 模板名称。最大支持255个字节 */
   Name: string;
@@ -3630,6 +3692,16 @@ declare interface DeleteMetricSubscribeRequest {
 }
 
 declare interface DeleteMetricSubscribeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteNetworkApplicationRequest {
+  /** 网络应用id。 */
+  NetworkAppId: string;
+}
+
+declare interface DeleteNetworkApplicationResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4464,6 +4536,36 @@ declare interface DescribeMetricSubscribesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeNetworkApplicationDetailRequest {
+  /** 网络应用id */
+  NetworkAppId: string;
+}
+
+declare interface DescribeNetworkApplicationDetailResponse {
+  /** 查询指定的网络应用详情 */
+  Info?: NetworkApplicationDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNetworkApplicationsRequest {
+  /** 过滤项name按照【任务名称】进行过滤。模糊匹配方式查询。类型：String必选：否networkAppId按照【网络应用id】进行过滤。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为10。 */
+  Filters?: Filter[];
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
+}
+
+declare interface DescribeNetworkApplicationsResponse {
+  /** 符合查询条件的大模型性能剖析任务列表 */
+  Infos?: NetworkApplicationInfo[];
+  /** 符合查询条件的任务总数。 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeNoticeContentsRequest {
   /** name按照【通知内容模板名称】进行过滤。类型：String必选：否 noticeContentId按照【通知内容模板ID】进行过滤。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为100。 */
   Filters?: Filter[];
@@ -4747,6 +4849,16 @@ declare interface GetAlarmLogResponse {
 }
 
 declare interface GetMetricLabelValuesRequest {
+  /** 时序主题id */
+  TopicId: string;
+  /** 时序label名称 */
+  LabelName: string;
+  /** 起始时间 */
+  Start?: number;
+  /** 结束时间 */
+  End?: number;
+  /** Label匹配规则 */
+  Match?: string[];
 }
 
 declare interface GetMetricLabelValuesResponse {
@@ -5115,7 +5227,7 @@ declare interface ModifyDataTransformResponse {
 }
 
 declare interface ModifyDlcDeliverRequest {
-  /** 日志主题id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  /** 日志主题id。通过获取日志主题列表获取日志主题Id。 */
   TopicId: string;
   /** 任务id。 */
   TaskId: string;
@@ -5127,15 +5239,15 @@ declare interface ModifyDlcDeliverRequest {
   StartTime?: number;
   /** 投递时间范围的结束时间。 如果为空，则表示不限时 */
   EndTime?: number;
-  /** 投递文件大小,单位MB。 DeliverType=0时必填，范围 5<= MaxSize <= 256。 */
+  /** 投递文件大小,单位MB。 DeliverType=0时必填，范围 5&lt;= MaxSize &lt;= 256。 */
   MaxSize?: number;
-  /** 投递间隔，单位秒。 DeliverType=0时必填，范围 300<= Interval <=900。 */
+  /** 投递间隔，单位秒。 DeliverType=0时必填，范围 300&lt;= Interval &lt;=900。 */
   Interval?: number;
   /** dlc配置信息 */
   DlcInfo?: DlcInfo;
   /** 是否开启投递服务日志。1关闭，2开启。默认开启 */
   HasServicesLog?: number;
-  /** 任务状态。 */
+  /** 任务状态。枚举值：1： 运行2： 停止 */
   Status?: number;
 }
 
@@ -5364,6 +5476,18 @@ declare interface ModifyMetricSubscribeRequest {
 }
 
 declare interface ModifyMetricSubscribeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyNetworkApplicationRequest {
+  /** 网络应用id */
+  NetworkAppId: string;
+  /** 网络应用名称：长度不超过64字符，名称不能重复。只能包含以下字符：英文字母（大小写）数字下划线连字符（减号）汉字至少包含一个字符不能包含空格不能包含其他特殊字符（如 @、#、$、% 等） */
+  Name?: string;
+}
+
+declare interface ModifyNetworkApplicationResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5867,6 +5991,8 @@ declare interface Cls {
   CreateMetricConfig(data: CreateMetricConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMetricConfigResponse>;
   /** 创建指标订阅配置 {@link CreateMetricSubscribeRequest} {@link CreateMetricSubscribeResponse} */
   CreateMetricSubscribe(data: CreateMetricSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMetricSubscribeResponse>;
+  /** 创建网络应用 {@link CreateNetworkApplicationRequest} {@link CreateNetworkApplicationResponse} */
+  CreateNetworkApplication(data: CreateNetworkApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNetworkApplicationResponse>;
   /** 创建通知内容模板 {@link CreateNoticeContentRequest} {@link CreateNoticeContentResponse} */
   CreateNoticeContent(data: CreateNoticeContentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNoticeContentResponse>;
   /** 创建重建索引任务 {@link CreateRebuildIndexTaskRequest} {@link CreateRebuildIndexTaskResponse} */
@@ -5931,6 +6057,8 @@ declare interface Cls {
   DeleteMetricConfig(data: DeleteMetricConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMetricConfigResponse>;
   /** 删除指标订阅配置 {@link DeleteMetricSubscribeRequest} {@link DeleteMetricSubscribeResponse} */
   DeleteMetricSubscribe(data: DeleteMetricSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMetricSubscribeResponse>;
+  /** 删除网络应用 {@link DeleteNetworkApplicationRequest} {@link DeleteNetworkApplicationResponse} */
+  DeleteNetworkApplication(data: DeleteNetworkApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNetworkApplicationResponse>;
   /** 删除通知内容模板 {@link DeleteNoticeContentRequest} {@link DeleteNoticeContentResponse} */
   DeleteNoticeContent(data: DeleteNoticeContentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNoticeContentResponse>;
   /** 删除定时SQL分析任务 {@link DeleteScheduledSqlRequest} {@link DeleteScheduledSqlResponse} */
@@ -6025,6 +6153,10 @@ declare interface Cls {
   DescribeMetricSubscribePreview(data: DescribeMetricSubscribePreviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMetricSubscribePreviewResponse>;
   /** 获取指标订阅配置 {@link DescribeMetricSubscribesRequest} {@link DescribeMetricSubscribesResponse} */
   DescribeMetricSubscribes(data: DescribeMetricSubscribesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMetricSubscribesResponse>;
+  /** 获取网络应用详情 {@link DescribeNetworkApplicationDetailRequest} {@link DescribeNetworkApplicationDetailResponse} */
+  DescribeNetworkApplicationDetail(data: DescribeNetworkApplicationDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkApplicationDetailResponse>;
+  /** 获取网络应用列表 {@link DescribeNetworkApplicationsRequest} {@link DescribeNetworkApplicationsResponse} */
+  DescribeNetworkApplications(data?: DescribeNetworkApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkApplicationsResponse>;
   /** 获取通知内容模板 {@link DescribeNoticeContentsRequest} {@link DescribeNoticeContentsResponse} */
   DescribeNoticeContents(data?: DescribeNoticeContentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNoticeContentsResponse>;
   /** 获取分区列表 {@link DescribePartitionsRequest} {@link DescribePartitionsResponse} */
@@ -6054,7 +6186,7 @@ declare interface Cls {
   /** 获取告警策略执行详情 {@link GetAlarmLogRequest} {@link GetAlarmLogResponse} */
   GetAlarmLog(data: GetAlarmLogRequest, config?: AxiosRequestConfig): AxiosPromise<GetAlarmLogResponse>;
   /** 获取指标标签列表 {@link GetMetricLabelValuesRequest} {@link GetMetricLabelValuesResponse} */
-  GetMetricLabelValues(data?: GetMetricLabelValuesRequest, config?: AxiosRequestConfig): AxiosPromise<GetMetricLabelValuesResponse>;
+  GetMetricLabelValues(data: GetMetricLabelValuesRequest, config?: AxiosRequestConfig): AxiosPromise<GetMetricLabelValuesResponse>;
   /** 合并分区 {@link MergePartitionRequest} {@link MergePartitionResponse} */
   MergePartition(data: MergePartitionRequest, config?: AxiosRequestConfig): AxiosPromise<MergePartitionResponse>;
   /** 修改告警策略 {@link ModifyAlarmRequest} {@link ModifyAlarmResponse} */
@@ -6105,6 +6237,8 @@ declare interface Cls {
   ModifyMetricConfig(data: ModifyMetricConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMetricConfigResponse>;
   /** 修改指标订阅配置 {@link ModifyMetricSubscribeRequest} {@link ModifyMetricSubscribeResponse} */
   ModifyMetricSubscribe(data: ModifyMetricSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMetricSubscribeResponse>;
+  /** 修改网络应用 {@link ModifyNetworkApplicationRequest} {@link ModifyNetworkApplicationResponse} */
+  ModifyNetworkApplication(data: ModifyNetworkApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNetworkApplicationResponse>;
   /** 修改通知内容模板 {@link ModifyNoticeContentRequest} {@link ModifyNoticeContentResponse} */
   ModifyNoticeContent(data: ModifyNoticeContentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNoticeContentResponse>;
   /** 修改定时SQL分析任务 {@link ModifyScheduledSqlRequest} {@link ModifyScheduledSqlResponse} */

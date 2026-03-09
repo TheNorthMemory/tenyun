@@ -244,6 +244,8 @@ declare interface ForwardLoadBalancerIdentification {
   ListenerId: string;
   /** 转发规则ID，注意：针对七层监听器此参数必填 */
   LocationId?: string;
+  /** 监听器或转发路径需解绑的端口号列表。取值范围：[1, 65535]不传递该参数时，默认解绑指定监听器或转发路径关联的所有端口。 */
+  PortList?: number[];
 }
 
 /** 实例主机名称序号相关设置。 */

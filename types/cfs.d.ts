@@ -486,7 +486,7 @@ declare interface SnapshotInfo {
   RegionName?: string;
   /** 文件系统ID */
   FileSystemId?: string;
-  /** 快照大小 */
+  /** 快照大小单位：MiB */
   Size?: number;
   /** 保留时长天 */
   AliveDay?: number;
@@ -540,9 +540,9 @@ declare interface TagInfo {
 
 /** 分层存储详细信息 */
 declare interface TieringDetailInfo {
-  /** 低频存储容量 */
+  /** 低频存储容量单位：Byte, B, 字节 */
   TieringSizeInBytes?: number;
-  /** 冷存储容量 */
+  /** 冷存储容量单位：Byte, B, 字节 */
   SecondaryTieringSizeInBytes?: number;
 }
 
@@ -1403,7 +1403,7 @@ declare interface ModifyLifecyclePolicyResponse {
 }
 
 declare interface ScaleUpFileSystemRequest {
-  /** 文件系统Id,该参数通过查询文件系统列表接口获取 */
+  /** 文件系统ID，通过查询文件系统列表获取；[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170) */
   FileSystemId: string;
   /** 扩容的目标容量（单位GiB） */
   TargetCapacity: number;

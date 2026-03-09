@@ -983,6 +983,8 @@ declare interface DeleteQueueResponse {
 declare interface DescribeAutoScalingConfigurationRequest {
   /** 集群ID。 */
   ClusterId: string;
+  /** 队列名称 */
+  QueueName?: string;
 }
 
 declare interface DescribeAutoScalingConfigurationResponse {

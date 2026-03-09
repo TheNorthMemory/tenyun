@@ -2519,7 +2519,7 @@ declare interface TextToSpeechRequest {
   APIKey?: string;
   /** TTS的模型，当前固定为：flow_01_turbo */
   Model?: string;
-  /** 需要合成的语言（ISO 639-1），支持 zh（中文）、en（英文）、yue（粤语）、ja（日语）、ko（韩语），默认自动识别 */
+  /** 需要合成的语言（ISO 639-1），默认自动识别，支持的语言如下：- zh（中文）- en（英文）- yue（粤语）- ja（日语）- ko（韩语）- ar（阿拉伯语）- id（印尼语）- th（泰语） */
   Language?: string;
 }
 
@@ -2649,7 +2649,7 @@ declare interface VoiceCloneRequest {
   SdkAppId: number;
   /** 声音克隆的名称, 只允许使用数字、字母、下划线，不能超过36位 */
   VoiceName: string;
-  /** 声音克隆的参考音频，必须为16k单声道的wav的base64字符串， 长度在10秒～180秒之间 */
+  /** 声音克隆的参考音频，必须为16k单声道的wav的base64字符串， 长度在6秒～180秒之间 */
   PromptAudio: string;
   /** TTS的API密钥 */
   APIKey?: string;

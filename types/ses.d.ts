@@ -2,6 +2,36 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 垃圾投诉数据 */
+declare interface AbuseReport {
+  /** 发送时间 */
+  DeliverTime?: string;
+  /** 发信地址 */
+  OriginalMailFrom?: string;
+  /** 收信地址 */
+  OriginalRcptTo?: string;
+  /** 发信域名 */
+  FromDomain?: string;
+  /** 投诉时间 */
+  ComplainTime?: string;
+  /** 收信域名 */
+  Mta?: string;
+  /** 来源ip */
+  SourceIp?: string;
+  /** 数据时间 */
+  InsertTime?: string;
+  /** 模板id */
+  TemplateId?: string;
+  /** bulkId */
+  BulkId?: string;
+  /** 邮件Message-Id */
+  MessageId?: string;
+  /** 投诉时间 */
+  AbuseTime?: string;
+  /** 邮件主题 */
+  Subject?: string;
+}
+
 /** 地址级退订配置 */
 declare interface AddressUnsubscribeConfigData {
   /** 发信地址 */
@@ -524,6 +554,36 @@ declare interface DeleteReceiverResponse {
   RequestId?: string;
 }
 
+declare interface GetAbuseReportRequest {
+  /** 起始时间 */
+  StartTime: string;
+  /** 结束时间 */
+  EndTime: string;
+  /** 偏移量 */
+  Offset?: number;
+  /** 限制数量（默认为1000） */
+  Limit?: number;
+  /** 发信域名 */
+  FromDomain?: string;
+  /** 发信地址 */
+  FromAddress?: string;
+  /** 收信域名 */
+  Mta?: string;
+  /** 收信地址 */
+  ToAddress?: string;
+  /** 模版id */
+  TemplateId?: string;
+}
+
+declare interface GetAbuseReportResponse {
+  /** 打开日志数据 */
+  Data?: AbuseReport[];
+  /** 总条数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetEmailIdentityRequest {
   /** 发信域名 */
   EmailIdentity: string;
@@ -919,6 +979,8 @@ declare interface Ses {
   DeleteEmailTemplate(data: DeleteEmailTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEmailTemplateResponse>;
   /** 删除收件人列表 {@link DeleteReceiverRequest} {@link DeleteReceiverResponse} */
   DeleteReceiver(data: DeleteReceiverRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteReceiverResponse>;
+  /** 获取垃圾投诉记录 {@link GetAbuseReportRequest} {@link GetAbuseReportResponse} */
+  GetAbuseReport(data: GetAbuseReportRequest, config?: AxiosRequestConfig): AxiosPromise<GetAbuseReportResponse>;
   /** 获取域名配置详情 {@link GetEmailIdentityRequest} {@link GetEmailIdentityResponse} */
   GetEmailIdentity(data: GetEmailIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<GetEmailIdentityResponse>;
   /** 获取模板详情 {@link GetEmailTemplateRequest} {@link GetEmailTemplateResponse} */

@@ -694,6 +694,20 @@ declare interface DynamicPodSpec {
   LimitMemory?: number;
 }
 
+/** 事件详情列表 */
+declare interface EMREventListItem {
+  /** 事件受影响ip */
+  Host?: string;
+  /** 事件受影响的服务角色 */
+  Role?: string;
+  /** 事件名称 */
+  Name?: string;
+  /** 事件告警详情 */
+  Detail?: string;
+  /** 事件发生时间 */
+  CreateTime?: string;
+}
+
 /** 集群列表返回示例 */
 declare interface EmrListInstance {
   /** 集群ID */
@@ -3690,6 +3704,34 @@ declare interface DescribeDAGInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEMREventListRequest {
+  /** 集群ID */
+  InstanceId: string;
+  /** 查询事件的开始时间 */
+  StartTime: number;
+  /** 查询事件的结束时间 */
+  EndTime: number;
+  /** 事件触发的IP */
+  Host?: string;
+  /** 事件受影响服务角色 */
+  Role?: string;
+  /** 事件名称 */
+  Name?: string;
+  /** 事件列表的偏移量 */
+  Offset?: number;
+  /** 事件列表的Limit */
+  Limit?: number;
+}
+
+declare interface DescribeEMREventListResponse {
+  /** 事件详情列表 */
+  EventList?: EMREventListItem[];
+  /** 符合的事件总量 */
+  TotalNum?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeEmrApplicationStaticsRequest {
   /** 集群id */
   InstanceId: string;
@@ -5451,6 +5493,8 @@ declare interface Emr {
   DescribeCvmQuota(data: DescribeCvmQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCvmQuotaResponse>;
   /** 查询DAG信息 {@link DescribeDAGInfoRequest} {@link DescribeDAGInfoResponse} */
   DescribeDAGInfo(data: DescribeDAGInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDAGInfoResponse>;
+  /** 查询EMR事件数据信息 {@link DescribeEMREventListRequest} {@link DescribeEMREventListResponse} */
+  DescribeEMREventList(data: DescribeEMREventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEMREventListResponse>;
   /** 查询YARN的任务统计信息 {@link DescribeEmrApplicationStaticsRequest} {@link DescribeEmrApplicationStaticsResponse} */
   DescribeEmrApplicationStatics(data: DescribeEmrApplicationStaticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmrApplicationStaticsResponse>;
   /** 查询监控概览页指标数据 {@link DescribeEmrOverviewMetricsRequest} {@link DescribeEmrOverviewMetricsResponse} */

@@ -106,6 +106,54 @@ declare interface FileObject {
   Purpose?: string;
 }
 
+/** 术语库 */
+declare interface Glossary {
+  /** 术语库唯一 ID */
+  GlossaryId?: string;
+  /** 术语库名称 */
+  Name?: string;
+  /** 术语库描述 */
+  Description?: string;
+  /** 源语言代码 */
+  Source?: string;
+  /** 目标语言代码 */
+  Target?: string;
+}
+
+/** 术语条目 */
+declare interface GlossaryEntry {
+  /** 源语言术语，限制1000字符 */
+  SourceTerm?: string;
+  /** 目标语言术语，限制1000字符 */
+  TargetTerm?: string;
+  /** 术语条目 ID */
+  EntryId?: string;
+}
+
+/** 术语条目 */
+declare interface GlossaryEntryCreateItem {
+  /** 源语言术语，限制1000字符 */
+  SourceTerm: string;
+  /** 目标语言术语，限制1000字符 */
+  TargetTerm: string;
+}
+
+/** 术语条目 */
+declare interface GlossaryEntryDeleteItem {
+  /** 术语条目 ID */
+  EntryId: string;
+}
+
+/** 术语条目 */
+declare interface GlossaryEntryUpdateItem {
+  /** 术语条目 ID */
+  EntryId: string;
+  /** 源语言术语，限制1000字符 */
+  SourceTerm?: string;
+  /** 目标语言术语，限制1000字符 */
+  TargetTerm?: string;
+}
+
 /** 群聊配置 */
 declare interface GroupChatConfig {
   /** 人物名称 */
@@ -633,6 +681,8 @@ declare interface ChatTranslationsRequest {
   Field?: string;
   /** 参考示例，最多10个 */
   References?: Reference[];
+  /** 关联的术语库 ID 列表，用于术语翻译，最大支持5个术语库 */
+  GlossaryIDs?: string[];
 }
 
 declare interface ChatTranslationsResponse {
@@ -652,6 +702,40 @@ declare interface ChatTranslationsResponse {
   RequestId?: string;
 }
 
+declare interface CreateGlossaryEntryRequest {
+  /** 术语库 ID */
+  GlossaryId: string;
+  /** 术语条目列表，单次请求限制100个 */
+  Entries: GlossaryEntryCreateItem[];
+}
+
+declare interface CreateGlossaryEntryResponse {
+  /** 成功创建的术语条目 */
+  Entries?: GlossaryEntry[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateGlossaryRequest {
+  /** 术语库名称，限制50个字符 */
+  Name: string;
+  /** 源语言代码，取值范围：zh(中文)、en(英语)、fr(法语)、pt(葡萄牙语)、es(西班牙语)、ja(日语)、tr(土耳其语)、ru(俄语)、ar(阿拉伯语)、ko(韩语)、th(泰语)、it(意大利语)、de(德语)、vi(越南语)、ms(马来语)、id(印尼语)、yue(粤语)、zh-TR(繁体中文)、hi(印地语)、fil(菲律宾语)、pl(波兰语)、cs(捷克语)、nl(荷兰语)、km(高棉语)、my(缅甸语)、fa(波斯语)、gu(古吉拉特语)、ur(乌尔都语)、te(泰卢固语)、mr(马拉地语)、he(希伯来语)、bn(孟加拉语)、ta(泰米尔语)、uk(乌克兰语)、bo(藏语)、kk(哈萨克语)、mn(蒙古语)、ug(维吾尔语) */
+  Source: string;
+  /** 目标语言代码，取值范围：zh(中文)、en(英语)、fr(法语)、pt(葡萄牙语)、es(西班牙语)、ja(日语)、tr(土耳其语)、ru(俄语)、ar(阿拉伯语)、ko(韩语)、th(泰语)、it(意大利语)、de(德语)、vi(越南语)、ms(马来语)、id(印尼语)、yue(粤语)、zh-TR(繁体中文)、hi(印地语)、fil(菲律宾语)、pl(波兰语)、cs(捷克语)、nl(荷兰语)、km(高棉语)、my(缅甸语)、fa(波斯语)、gu(古吉拉特语)、ur(乌尔都语)、te(泰卢固语)、mr(马拉地语)、he(希伯来语)、bn(孟加拉语)、ta(泰米尔语)、uk(乌克兰语)、bo(藏语)、kk(哈萨克语)、mn(蒙古语)、ug(维吾尔语) */
+  Target: string;
+  /** 术语库描述，限制255个字符 */
+  Description?: string;
+}
+
+declare interface CreateGlossaryResponse {
+  /** 术语库名称 */
+  Name?: string;
+  /** 术语库唯一 ID */
+  GlossaryId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateThreadRequest {
 }
 
@@ -665,6 +749,28 @@ declare interface CreateThreadResponse {
   /** 提供给工具的资源列表 */
   ToolResources?: ThreadToolResources | null;
   /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
+  RequestId?: string;
+}
+
+declare interface DeleteGlossaryEntryRequest {
+  /** 术语库 ID */
+  GlossaryId: string;
+  /** 需要更新的术语条目列表，单次请求限制100个 */
+  Entries: GlossaryEntryDeleteItem[];
+}
+
+declare interface DeleteGlossaryEntryResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteGlossaryRequest {
+  /** 术语库 ID */
+  GlossaryId: string;
+}
+
+declare interface DeleteGlossaryResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -908,6 +1014,48 @@ declare interface ImageQuestionResponse {
   RequestId?: string;
 }
 
+declare interface ListGlossaryEntryRequest {
+  /** 术语库 ID */
+  GlossaryId: string;
+  /** 页码，默认 1 */
+  Page?: number;
+  /** 每页数量，默认 10，最大200 */
+  PageSize?: number;
+}
+
+declare interface ListGlossaryEntryResponse {
+  /** 术语条目列表 */
+  Entries?: GlossaryEntry[];
+  /** 条目总数量 */
+  Total?: number;
+  /** 当前页码 */
+  Page?: number;
+  /** 每页数量 */
+  PageSize?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListGlossaryRequest {
+  /** 页码，默认 1 */
+  Page?: number;
+  /** 每页数量，默认 10，最大 100 */
+  PageSize?: number;
+}
+
+declare interface ListGlossaryResponse {
+  /** 术语库列表 */
+  Glossaries?: Glossary[];
+  /** 术语库总数量 */
+  Total?: number;
+  /** 当前页码 */
+  Page?: number;
+  /** 每页数量 */
+  PageSize?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface QueryHunyuanImageChatJobRequest {
   /** 任务 ID。 */
   JobId?: string;
@@ -1072,6 +1220,20 @@ declare interface TextToImageLiteResponse {
   RequestId?: string;
 }
 
+declare interface UpdateGlossaryEntryRequest {
+  /** 术语库 ID */
+  GlossaryId: string;
+  /** 需要更新的术语条目列表，单次请求限制100个 */
+  Entries: GlossaryEntryUpdateItem[];
+}
+
+declare interface UpdateGlossaryEntryResponse {
+  /** 成功更新的术语条目 */
+  Entries?: GlossaryEntry[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Hunyuan 腾讯混元大模型} */
 declare interface Hunyuan {
   (): Versions;
@@ -1081,8 +1243,16 @@ declare interface Hunyuan {
   ChatCompletions(data: ChatCompletionsRequest, config?: AxiosRequestConfig): AxiosPromise<ChatCompletionsResponse>;
   /** 翻译 {@link ChatTranslationsRequest} {@link ChatTranslationsResponse} */
   ChatTranslations(data: ChatTranslationsRequest, config?: AxiosRequestConfig): AxiosPromise<ChatTranslationsResponse>;
+  /** 创建术语库 {@link CreateGlossaryRequest} {@link CreateGlossaryResponse} */
+  CreateGlossary(data: CreateGlossaryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGlossaryResponse>;
+  /** 添加术语条目 {@link CreateGlossaryEntryRequest} {@link CreateGlossaryEntryResponse} */
+  CreateGlossaryEntry(data: CreateGlossaryEntryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGlossaryEntryResponse>;
   /** 创建会话 {@link CreateThreadRequest} {@link CreateThreadResponse} */
   CreateThread(data?: CreateThreadRequest, config?: AxiosRequestConfig): AxiosPromise<CreateThreadResponse>;
+  /** 删除术语库 {@link DeleteGlossaryRequest} {@link DeleteGlossaryResponse} */
+  DeleteGlossary(data: DeleteGlossaryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGlossaryResponse>;
+  /** 删除术语条目 {@link DeleteGlossaryEntryRequest} {@link DeleteGlossaryEntryResponse} */
+  DeleteGlossaryEntry(data: DeleteGlossaryEntryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGlossaryEntryResponse>;
   /** 文件删除 {@link FilesDeletionsRequest} {@link FilesDeletionsResponse} */
   FilesDeletions(data: FilesDeletionsRequest, config?: AxiosRequestConfig): AxiosPromise<FilesDeletionsResponse>;
   /** 文件列表 {@link FilesListRequest} {@link FilesListResponse} */
@@ -1103,6 +1273,10 @@ declare interface Hunyuan {
   GroupChatCompletions(data: GroupChatCompletionsRequest, config?: AxiosRequestConfig): AxiosPromise<GroupChatCompletionsResponse>;
   /** 拍照解题 {@link ImageQuestionRequest} {@link ImageQuestionResponse} */
   ImageQuestion(data: ImageQuestionRequest, config?: AxiosRequestConfig): AxiosPromise<ImageQuestionResponse>;
+  /** 查询术语库 {@link ListGlossaryRequest} {@link ListGlossaryResponse} */
+  ListGlossary(data?: ListGlossaryRequest, config?: AxiosRequestConfig): AxiosPromise<ListGlossaryResponse>;
+  /** 查询术语条目 {@link ListGlossaryEntryRequest} {@link ListGlossaryEntryResponse} */
+  ListGlossaryEntry(data: ListGlossaryEntryRequest, config?: AxiosRequestConfig): AxiosPromise<ListGlossaryEntryResponse>;
   /** 查询混元生图（多轮对话）任务 {@link QueryHunyuanImageChatJobRequest} {@link QueryHunyuanImageChatJobResponse} */
   QueryHunyuanImageChatJob(data?: QueryHunyuanImageChatJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryHunyuanImageChatJobResponse>;
   /** 查询混元生图任务 {@link QueryHunyuanImageJobRequest} {@link QueryHunyuanImageJobResponse} */
@@ -1117,6 +1291,8 @@ declare interface Hunyuan {
   SubmitHunyuanImageJob(data: SubmitHunyuanImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitHunyuanImageJobResponse>;
   /** 文生图轻量版 {@link TextToImageLiteRequest} {@link TextToImageLiteResponse} */
   TextToImageLite(data: TextToImageLiteRequest, config?: AxiosRequestConfig): AxiosPromise<TextToImageLiteResponse>;
+  /** 更新术语条目 {@link UpdateGlossaryEntryRequest} {@link UpdateGlossaryEntryResponse} */
+  UpdateGlossaryEntry(data: UpdateGlossaryEntryRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGlossaryEntryResponse>;
 }
 
 export declare type Versions = ["2023-09-01"];

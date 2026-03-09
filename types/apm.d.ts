@@ -162,6 +162,12 @@ declare interface ApmAppConfig {
   LogSpanIdKey?: string;
   /** 自动性能剖析配置 */
   AutoProfilingConfig?: AutoProfilingConfig;
+  /** 阈值配置开关。true 表示使用应用级阈值；false 表示使用业务系统级阈值 */
+  EnableThresholdConfig?: boolean;
+  /** 错误率阈值（%），用于判断应用健康状态为&quot;红色&quot; */
+  ErrRateThreshold?: number;
+  /** 响应时间预警阈值（ms），用于判断应用健康状态为&quot;黄色&quot; */
+  ResponseDurationWarningThreshold?: number;
 }
 
 /** 应用相关的配置列表项 */
@@ -204,6 +210,48 @@ declare interface ApmApplicationConfigView {
   InstrumentList?: Instrument[];
   /** 链路压缩开关（已废弃） */
   TraceSquash?: boolean;
+  /** 链路过滤配置 */
+  AgentIgnoreOperation?: string;
+  /** 开启应用安全开关 */
+  EnableSecurityConfig?: boolean;
+  /** 是否开启SQL注入检测 */
+  IsSqlInjectionAnalysis?: number;
+  /** 是否开启组件漏洞检测 */
+  IsInstrumentationVulnerabilityScan?: number;
+  /** 是否开启远程命令执行检测 */
+  IsRemoteCommandExecutionAnalysis?: number;
+  /** 是否开启内存泄漏检测 */
+  IsMemoryHijackingAnalysis?: number;
+  /** 是否开启删除任意文件检测 */
+  IsDeleteAnyFileAnalysis?: number;
+  /** 是否开启读取任意文件检测 */
+  IsReadAnyFileAnalysis?: number;
+  /** 是否开启上传任意文件检测 */
+  IsUploadAnyFileAnalysis?: number;
+  /** 是否开启包含任意文件检测 */
+  IsIncludeAnyFileAnalysis?: number;
+  /** 是否开启目录遍历检测 */
+  IsDirectoryTraversalAnalysis?: number;
+  /** 是否开启模板引擎注入检测 */
+  IsTemplateEngineInjectionAnalysis?: number;
+  /** 是否开启脚本引擎注入检测 */
+  IsScriptEngineInjectionAnalysis?: number;
+  /** 是否开启表达式注入检测 */
+  IsExpressionInjectionAnalysis?: number;
+  /** 是否开启JNDI注入检测 */
+  IsJndiInjectionAnalysis?: number;
+  /** 是否开启JNI注入检测 */
+  IsJniInjectionAnalysis?: number;
+  /** 是否开启Webshell后门检测 */
+  IsWebshellBackdoorAnalysis?: number;
+  /** 是否开启反序列化检测 */
+  IsDeserializationAnalysis?: number;
+  /** 是否开启控制台开关 */
+  EnableDashboardConfig?: boolean;
+  /** 是否关联Dashboard */
+  IsRelatedDashboard?: number;
+  /** Dashboard topic */
+  DashboardTopicID?: string;
   /** 探针熔断内存阈值 */
   DisableMemoryUsed?: number;
   /** 探针熔断CPU阈值 */
@@ -218,6 +266,12 @@ declare interface ApmApplicationConfigView {
   DesensitizationRule?: string;
   /** 自动性能剖析任务配置 */
   AutoProfilingConfig?: AutoProfilingConfig;
+  /** 阈值配置开关 */
+  EnableThresholdConfig?: boolean;
+  /** 错误率阈值单位：% */
+  ErrRateThreshold?: number;
+  /** 响应时间预警阈值单位：ms */
+  ResponseDurationWarningThreshold?: number;
 }
 
 /** 展示apm业务系统与其他云产品关联关系返回体 */
@@ -901,7 +955,7 @@ declare interface DescribeApmApplicationConfigRequest {
 
 declare interface DescribeApmApplicationConfigResponse {
   /** Apm应用配置 */
-  ApmAppConfig: ApmAppConfig | null;
+  ApmAppConfig?: ApmAppConfig | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -950,6 +1004,36 @@ declare interface DescribeApmPrometheusRuleRequest {
 declare interface DescribeApmPrometheusRuleResponse {
   /** 指标匹配规则 */
   ApmPrometheusRules?: ApmPrometheusRules[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeApmSQLInjectionDetailRequest {
+  /** 业务系统 ID */
+  InstanceId: string;
+  /** 限制 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+  /** 秒级时间戳 */
+  StartTime?: number;
+  /** 秒级时间戳 */
+  EndTime?: number;
+  /** 排序 */
+  OrderBy?: OrderBy;
+  /** 查询过滤条件 */
+  Filters?: Filter[];
+  /** 聚合维度 */
+  GroupBy?: string[];
+  /** 指标列表 */
+  Metrics?: QueryMetricItem[];
+}
+
+declare interface DescribeApmSQLInjectionDetailResponse {
+  /** SQL相关维度信息 */
+  Tags?: ApmTag[];
+  /** 链路相关信息 */
+  Records?: ApmMetricRecord[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1435,6 +1519,12 @@ declare interface ModifyApmApplicationConfigRequest {
   LogSpanIdKey?: string;
   /** 自动性能剖析任务配置 */
   AutoProfilingConfig?: AutoProfilingConfig;
+  /** 阈值配置开关。true 表示使用应用级阈值；false 表示使用业务系统级阈值 */
+  EnableThresholdConfig?: boolean;
+  /** 错误率阈值（%），用于判断应用健康状态为&quot;红色&quot; */
+  ErrRateThreshold?: number;
+  /** 响应时间预警阈值（ms），用于判断应用健康状态为&quot;黄色&quot; */
+  ResponseDurationWarningThreshold?: number;
 }
 
 declare interface ModifyApmApplicationConfigResponse {
@@ -1633,7 +1723,7 @@ declare interface Apm {
   (): Versions;
   /** 创建 APM 业务系统 {@link CreateApmInstanceRequest} {@link CreateApmInstanceResponse} */
   CreateApmInstance(data: CreateApmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApmInstanceResponse>;
-  /** 创建apm业务系统与Prometheus实例的指标匹配规则 {@link CreateApmPrometheusRuleRequest} {@link CreateApmPrometheusRuleResponse} */
+  /** 创建 APM 业务系统与 Prometheus 实例的指标匹配规则 {@link CreateApmPrometheusRuleRequest} {@link CreateApmPrometheusRuleResponse} */
   CreateApmPrometheusRule(data: CreateApmPrometheusRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApmPrometheusRuleResponse>;
   /** 创建采样配置 {@link CreateApmSampleConfigRequest} {@link CreateApmSampleConfigResponse} */
   CreateApmSampleConfig(data: CreateApmSampleConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApmSampleConfigResponse>;
@@ -1645,14 +1735,16 @@ declare interface Apm {
   DescribeApmAgent(data: DescribeApmAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmAgentResponse>;
   /** 查询用户名下应用安全漏洞数据 {@link DescribeApmAllVulCountRequest} {@link DescribeApmAllVulCountResponse} */
   DescribeApmAllVulCount(data: DescribeApmAllVulCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmAllVulCountResponse>;
-  /** 查询应用配置 {@link DescribeApmApplicationConfigRequest} {@link DescribeApmApplicationConfigResponse} */
+  /** 查询应用配置（推荐） {@link DescribeApmApplicationConfigRequest} {@link DescribeApmApplicationConfigResponse} */
   DescribeApmApplicationConfig(data: DescribeApmApplicationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmApplicationConfigResponse>;
-  /** 查询apm业务系统与其他产品的关联关系 {@link DescribeApmAssociationRequest} {@link DescribeApmAssociationResponse} */
+  /** 查询 APM 业务系统与其他产品的关联关系 {@link DescribeApmAssociationRequest} {@link DescribeApmAssociationResponse} */
   DescribeApmAssociation(data: DescribeApmAssociationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmAssociationResponse>;
   /** 获取 APM 业务系统列表 {@link DescribeApmInstancesRequest} {@link DescribeApmInstancesResponse} */
   DescribeApmInstances(data?: DescribeApmInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmInstancesResponse>;
-  /** 查询apm业务系统与Prometheus实例的指标匹配规则 {@link DescribeApmPrometheusRuleRequest} {@link DescribeApmPrometheusRuleResponse} */
+  /** 查询 APM 业务系统与 Prometheus 实例的指标匹配规则 {@link DescribeApmPrometheusRuleRequest} {@link DescribeApmPrometheusRuleResponse} */
   DescribeApmPrometheusRule(data: DescribeApmPrometheusRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmPrometheusRuleResponse>;
+  /** 查询SQL注入详情 {@link DescribeApmSQLInjectionDetailRequest} {@link DescribeApmSQLInjectionDetailResponse} */
+  DescribeApmSQLInjectionDetail(data: DescribeApmSQLInjectionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmSQLInjectionDetailResponse>;
   /** 查询采样配置 {@link DescribeApmSampleConfigRequest} {@link DescribeApmSampleConfigResponse} */
   DescribeApmSampleConfig(data: DescribeApmSampleConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmSampleConfigResponse>;
   /** 获取 APM 应用指标 {@link DescribeApmServiceMetricRequest} {@link DescribeApmServiceMetricResponse} */
@@ -1661,7 +1753,7 @@ declare interface Apm {
   DescribeApmVulnerabilityCount(data: DescribeApmVulnerabilityCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmVulnerabilityCountResponse>;
   /** 查询漏洞详情 {@link DescribeApmVulnerabilityDetailRequest} {@link DescribeApmVulnerabilityDetailResponse} */
   DescribeApmVulnerabilityDetail(data: DescribeApmVulnerabilityDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApmVulnerabilityDetailResponse>;
-  /** 查询应用配置信息 {@link DescribeGeneralApmApplicationConfigRequest} {@link DescribeGeneralApmApplicationConfigResponse} */
+  /** 查询应用配置信息（不推荐） {@link DescribeGeneralApmApplicationConfigRequest} {@link DescribeGeneralApmApplicationConfigResponse} */
   DescribeGeneralApmApplicationConfig(data: DescribeGeneralApmApplicationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralApmApplicationConfigResponse>;
   /** 获取指标数据通用接口（推荐） {@link DescribeGeneralMetricDataRequest} {@link DescribeGeneralMetricDataResponse} */
   DescribeGeneralMetricData(data: DescribeGeneralMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGeneralMetricDataResponse>;
@@ -1679,19 +1771,19 @@ declare interface Apm {
   DescribeTagValues(data: DescribeTagValuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagValuesResponse>;
   /** 获取拓扑图 {@link DescribeTopologyNewRequest} {@link DescribeTopologyNewResponse} */
   DescribeTopologyNew(data: DescribeTopologyNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopologyNewResponse>;
-  /** 修改应用配置 {@link ModifyApmApplicationConfigRequest} {@link ModifyApmApplicationConfigResponse} */
+  /** 修改应用配置（推荐） {@link ModifyApmApplicationConfigRequest} {@link ModifyApmApplicationConfigResponse} */
   ModifyApmApplicationConfig(data: ModifyApmApplicationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApmApplicationConfigResponse>;
-  /** 修改apm业务系统与其他产品的关联关系 {@link ModifyApmAssociationRequest} {@link ModifyApmAssociationResponse} */
+  /** 修改 APM 业务系统与其他产品的关联关系 {@link ModifyApmAssociationRequest} {@link ModifyApmAssociationResponse} */
   ModifyApmAssociation(data: ModifyApmAssociationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApmAssociationResponse>;
   /** 修改 APM 业务系统 {@link ModifyApmInstanceRequest} {@link ModifyApmInstanceResponse} */
   ModifyApmInstance(data: ModifyApmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApmInstanceResponse>;
-  /** 修改apm业务系统与Prometheus实例的指标匹配规则 {@link ModifyApmPrometheusRuleRequest} {@link ModifyApmPrometheusRuleResponse} */
+  /** 修改 APM 业务系统与 Prometheus 实例的指标匹配规则 {@link ModifyApmPrometheusRuleRequest} {@link ModifyApmPrometheusRuleResponse} */
   ModifyApmPrometheusRule(data: ModifyApmPrometheusRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApmPrometheusRuleResponse>;
   /** 修改采样配置 {@link ModifyApmSampleConfigRequest} {@link ModifyApmSampleConfigResponse} */
   ModifyApmSampleConfig(data: ModifyApmSampleConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApmSampleConfigResponse>;
-  /** 修改应用配置信息 {@link ModifyGeneralApmApplicationConfigRequest} {@link ModifyGeneralApmApplicationConfigResponse} */
+  /** 修改应用配置信息（不推荐） {@link ModifyGeneralApmApplicationConfigRequest} {@link ModifyGeneralApmApplicationConfigResponse} */
   ModifyGeneralApmApplicationConfig(data: ModifyGeneralApmApplicationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGeneralApmApplicationConfigResponse>;
-  /** 销毁APM业务系统 {@link TerminateApmInstanceRequest} {@link TerminateApmInstanceResponse} */
+  /** 销毁 APM 业务系统 {@link TerminateApmInstanceRequest} {@link TerminateApmInstanceResponse} */
   TerminateApmInstance(data: TerminateApmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateApmInstanceResponse>;
 }
 

@@ -22,6 +22,8 @@ declare interface ClientClusterManagerNodeInfo {
   NodeInstanceId?: string;
   /** 初始密码 */
   InitialPassword?: string;
+  /** 所属集群id */
+  ClusterId?: string;
 }
 
 /** 客户端节点属性 */
@@ -54,16 +56,20 @@ declare interface ClientToken {
   Token?: string | null;
 }
 
-/** ClusterRole */
-declare interface ClusterRole {
-  /** 集群ID */
-  ClusterId?: string;
-  /** 角色名 */
-  RoleName?: string;
-  /** 描述 */
-  Description?: string;
-  /** 目录列表 */
-  DirectoryList?: string[];
+/** 数据预热任务参数 */
+declare interface DistributedLoadAttrs {
+  /** 预热类型，枚举值 LoadByPath｜LoadByList */
+  LoadType: string;
+  /** 是否跳过相同文件，默认为 true */
+  SkipIfExists?: boolean;
+  /** 预热路径，入参单条挂载路径。入参数LoadType为LoadByPath，该参数不应为空 */
+  LoadByPath?: string;
+  /** 通过文件列表批量预热，入参为 cos://bucket-appid/ 开头的 COS 路径，且仅支持 txt 格式文件，长度不能超过255个字符。入参数LoadType为LoadByList，该参数不应为空 */
+  LoadByList?: string;
+  /** 副本数配置，枚举值，可选值 SingleReplica（单副本，默认）｜MaxReplica（最大副本） */
+  Replica?: string;
+  /** 同步执行元数据预热，并基于预热后的元数据执行 DistributedLoad。默认为 false */
+  MetadataSync?: boolean;
 }
 
 /** 文件系统属性 */
@@ -145,7 +151,7 @@ declare interface GooseFSxBuildElement {
   /** 容量单位是GB, 例如4608(4.5TB) */
   Capacity: number;
   /** 要关联映射的bucket列表 */
-  MappedBucketList: MappedBucket[];
+  MappedBucketList?: MappedBucket[];
 }
 
 /** 添加删除客户端节点列表 */
@@ -160,6 +166,50 @@ declare interface LinuxNodeAttribute {
   LinuxClientNodeIp?: string;
   /** 自定义挂载点 */
   MountPoint?: string;
+}
+
+/** 预热任务参数 */
+declare interface LoadTaskAttrs {
+  /** 预热任务 ID */
+  TaskId?: string;
+  /** 预热任务类型，枚举值，MetadataLoad｜DistributedLoad */
+  TaskType?: string;
+  /** 任务描述，支持中文 */
+  Description?: string;
+  /** 任务优先级，数值越高代表优先级越高，边界值 1-9999，默认值为 1 */
+  Priority?: number;
+  /** 元数据预热任务参数，用于仅预热元数据时入参。入参数TaskType为MetadataLoad时，该参数不应为空。 */
+  MetadataLoadAttrs?: MetadataLoadAttrs;
+  /** 数据预热任务参数。入参数TaskType为DistributedLoad时，该参数不应为空。 */
+  DistributedLoadAttrs?: DistributedLoadAttrs;
+  /** 将任务执行报告写入 COS 的路径，如果不需要报告则入参空 */
+  ReportPath?: string;
+  /** 枚举，Completed，Running，Waiting，Cancelled */
+  State?: string;
+  /** 任务执行信息，打印预热文件成功个数，失败个数，预热耗时信息 */
+  TaskMessage?: string;
+  /** 预热任务创建时间 */
+  CreateTime?: string;
+  /** 预热任务变更时间 */
+  ModifyTime?: string;
+  /** 任务提交账号，子账号或服务角色 ID */
+  Requester?: string;
+}
+
+/** 创建预热任务 */
+declare interface LoadTaskCreationAttrs {
+  /** 预热任务类型，枚举值，MetadataLoad｜DistributedLoad。 */
+  TaskType: string;
+  /** 任务优先级，数值越高代表优先级越高，边界值 1-9999，默认值为 1 */
+  Priority?: number;
+  /** 任务描述，支持中文 */
+  Description?: string;
+  /** 元数据预热任务参数，用于仅预热元数据时入参。入参数TaskType为MetadataLoad时，该参数不应为空。 */
+  MetadataLoadAttrs?: MetadataLoadAttrs;
+  /** 数据预热任务参数。入参数TaskType为DistributedLoad时，该参数不应为空。 */
+  DistributedLoadAttrs?: DistributedLoadAttrs;
+  /** 将任务执行报告写入 COS 的路径，如果不需要报告则入参空 */
+  ReportPath?: string;
 }
 
 /** 关联的对象Bucket, 并将其映射到文件系统某个路径上 */
@@ -184,6 +234,18 @@ declare interface MappedBucket {
   Endpoint?: string;
 }
 
+/** 元数据预热参数 */
+declare interface MetadataLoadAttrs {
+  /** 预热类型，枚举值 LoadByPath｜LoadByList */
+  LoadType: string;
+  /** 是否跳过相同文件，默认为 true */
+  SkipIfExists?: boolean;
+  /** 预热路径，入参单条挂载路径，长度不能超过255个字符。入参数LoadType为LoadByPath，该参数不应为空 */
+  LoadByPath?: string;
+  /** 通过文件列表批量预热，入参为 cos://bucket-appid/ 开头的 COS 路径，且仅支持 txt 格式文件，长度不能超过255个字符。入参数LoadType为LoadByList，该参数不应为空 */
+  LoadByList?: string;
+}
+
 /** 角色凭证 */
 declare interface RoleToken {
   /** 角色名 */
@@ -198,6 +260,12 @@ declare interface SubnetInfo {
   VpcId: string;
   /** 子网ID */
   SubnetId?: string;
+  /** 应用的集群；可以是集群id,也可以是All */
+  UsedCluster?: string;
+  /** cidr，只有当IsDirectConnect为true时才生效 */
+  CIDR?: string;
+  /** 是否为专线接入场景 */
+  IsDirectConnect?: boolean;
 }
 
 /** 文件系统关联的标签 */
@@ -239,6 +307,8 @@ declare interface BatchAddClientNodesRequest {
   ClientNodes: LinuxNodeAttribute[];
   /** 是否单集群默认是false */
   SingleClusterFlag?: boolean;
+  /** 客户端集群id */
+  ClusterId?: string;
 }
 
 declare interface BatchAddClientNodesResponse {
@@ -253,6 +323,8 @@ declare interface BatchDeleteClientNodesRequest {
   ClientNodes: LinuxNodeAttribute[];
   /** 是否单集群，默认是false */
   SingleClusterFlag?: boolean;
+  /** 客户端集群id */
+  ClusterId?: string;
 }
 
 declare interface BatchDeleteClientNodesResponse {
@@ -265,11 +337,25 @@ declare interface BuildClientNodeMountCommandRequest {
   FileSystemId: string;
   /** 自定义挂载目录的绝对路径, 如果未指定, 则会使用默认值, 格式/goosefsx/${fs_id}-proxy. 比如/goosefsx/x-c60-a2b3d4-proxy */
   CustomMountDir?: string;
+  /** 客户端集群ID */
+  ClusterId?: string;
 }
 
 declare interface BuildClientNodeMountCommandResponse {
   /** 挂载命令 */
   Command?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CancelLoadTaskRequest {
+  /** 集群 ID */
+  ClusterId: string;
+  /** 预热任务 ID */
+  TaskId: string;
+}
+
+declare interface CancelLoadTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -289,6 +375,10 @@ declare interface CreateDataRepositoryTaskRequest {
   RepositoryType?: string;
   /** 文件列表下载地址，以http开头 */
   TextLocation?: string;
+  /** 是否开启自定义路径(暂时仅供预热使用) */
+  EnableDataFlowSubPath?: boolean;
+  /** 自定义路径(暂时仅供预热使用) */
+  DataFlowSubPath?: string;
 }
 
 declare interface CreateDataRepositoryTaskResponse {
@@ -299,8 +389,6 @@ declare interface CreateDataRepositoryTaskResponse {
 }
 
 declare interface CreateFileSystemRequest {
-  /** 文件系统类型, 可填goosefs和goosefsx */
-  Type: string;
   /** 文件系统名 */
   Name: string;
   /** 文件系统备注描述 */
@@ -311,6 +399,8 @@ declare interface CreateFileSystemRequest {
   SubnetId: string;
   /** 子网所在的可用区 */
   Zone: string;
+  /** 文件系统类型, 可填goosefs和goosefsx */
+  Type?: string;
   /** 文件系统关联的tag */
   Tag?: Tag[];
   /** GooseFSx构建时要传递的参数 */
@@ -322,6 +412,8 @@ declare interface CreateFileSystemRequest {
 }
 
 declare interface CreateFileSystemResponse {
+  /** 创建成功返回的文件系统ID： */
+  FileSystemId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -344,6 +436,20 @@ declare interface CreateFilesetRequest {
 declare interface CreateFilesetResponse {
   /** Fileset id */
   FsetId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateLoadTaskRequest {
+  /** 集群 ID */
+  ClusterId: string;
+  /** 创建预热任务参数 */
+  LoadTaskCreationAttrs: LoadTaskCreationAttrs;
+}
+
+declare interface CreateLoadTaskResponse {
+  /** 预热任务 ID */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -416,20 +522,6 @@ declare interface DescribeClusterRoleTokenRequest {
 declare interface DescribeClusterRoleTokenResponse {
   /** 角色凭证 */
   RoleTokens?: RoleToken[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeClusterRolesRequest {
-  /** 集群ID */
-  ClusterId: string;
-  /** 角色名 */
-  RoleName?: string;
-}
-
-declare interface DescribeClusterRolesResponse {
-  /** 集群角色 */
-  ClusterRoles?: ClusterRole[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -512,6 +604,20 @@ declare interface DescribeFilesetsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLoadTaskRequest {
+  /** 集群 ID */
+  ClusterId: string;
+  /** 预热任务 ID */
+  TaskId: string;
+}
+
+declare interface DescribeLoadTaskResponse {
+  /** 预热任务参数 */
+  LoadTaskAttrs?: LoadTaskAttrs;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DetachFileSystemBucketRequest {
   /** 文件系统ID */
   FileSystemId: string;
@@ -534,6 +640,32 @@ declare interface ExpandCapacityRequest {
 }
 
 declare interface ExpandCapacityResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListLoadTasksRequest {
+  /** 集群 ID */
+  ClusterId: string;
+  /** 偏移量 */
+  Offset: number;
+  /** 偏移量 */
+  Limit: number;
+  /** 任务创建起始时间戳，默认为3天前：当前时间戳-86400*3 */
+  StartTimestamp?: number;
+  /** 任务变更时间戳 */
+  EndTimestamp?: number;
+  /** 筛选任务状态，枚举Waiting,Running,Canceled,Completed。默认返回所有任务 */
+  State?: string;
+  /** 筛选优先级任务，默认返回所有任务 */
+  Priority?: number;
+}
+
+declare interface ListLoadTasksResponse {
+  /** 预热任务参数 */
+  LoadTaskList?: LoadTaskAttrs[];
+  /** 任务数总量 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -608,6 +740,20 @@ declare interface UpdateFilesetResponse {
   RequestId?: string;
 }
 
+declare interface UpdateLoadTaskPriorityRequest {
+  /** 集群 ID */
+  ClusterId: string;
+  /** 预热任务 ID */
+  TaskId: string;
+  /** 任务优先级，数值越高代表优先级越高，边界值 1-9999，默认值为 1 */
+  Priority: number;
+}
+
+declare interface UpdateLoadTaskPriorityResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Goosefs 数据加速器 GooseFS} */
 declare interface Goosefs {
   (): Versions;
@@ -621,12 +767,16 @@ declare interface Goosefs {
   BatchDeleteClientNodes(data: BatchDeleteClientNodesRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteClientNodesResponse>;
   /** 生成客户端节点的挂载命令 {@link BuildClientNodeMountCommandRequest} {@link BuildClientNodeMountCommandResponse} */
   BuildClientNodeMountCommand(data: BuildClientNodeMountCommandRequest, config?: AxiosRequestConfig): AxiosPromise<BuildClientNodeMountCommandResponse>;
+  /** 取消 GooseFS 预热任务 {@link CancelLoadTaskRequest} {@link CancelLoadTaskResponse} */
+  CancelLoadTask(data: CancelLoadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelLoadTaskResponse>;
   /** 创建数据流动任务 {@link CreateDataRepositoryTaskRequest} {@link CreateDataRepositoryTaskResponse} */
   CreateDataRepositoryTask(data: CreateDataRepositoryTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataRepositoryTaskResponse>;
   /** 创建文件系统 {@link CreateFileSystemRequest} {@link CreateFileSystemResponse} */
   CreateFileSystem(data: CreateFileSystemRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileSystemResponse>;
   /** 创建Fileset {@link CreateFilesetRequest} {@link CreateFilesetResponse} */
   CreateFileset(data: CreateFilesetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFilesetResponse>;
+  /** 创建 GooseFS 预热任务 {@link CreateLoadTaskRequest} {@link CreateLoadTaskResponse} */
+  CreateLoadTask(data: CreateLoadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoadTaskResponse>;
   /** 为客户端节点删除跨vpc子网访问能力 {@link DeleteCrossVpcSubnetSupportForClientNodeRequest} {@link DeleteCrossVpcSubnetSupportForClientNodeResponse} */
   DeleteCrossVpcSubnetSupportForClientNode(data: DeleteCrossVpcSubnetSupportForClientNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCrossVpcSubnetSupportForClientNodeResponse>;
   /** 删除文件系统 {@link DeleteFileSystemRequest} {@link DeleteFileSystemResponse} */
@@ -639,8 +789,6 @@ declare interface Goosefs {
   DescribeClusterClientToken(data: DescribeClusterClientTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterClientTokenResponse>;
   /** 查询GooseFS集群角色凭证 {@link DescribeClusterRoleTokenRequest} {@link DescribeClusterRoleTokenResponse} */
   DescribeClusterRoleToken(data: DescribeClusterRoleTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterRoleTokenResponse>;
-  /** @deprecated 查询GooseFS集群角色 {@link DescribeClusterRolesRequest} {@link DescribeClusterRolesResponse} */
-  DescribeClusterRoles(data: DescribeClusterRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterRolesResponse>;
   /** 获取数据流动任务实时状态 {@link DescribeDataRepositoryTaskStatusRequest} {@link DescribeDataRepositoryTaskStatusResponse} */
   DescribeDataRepositoryTaskStatus(data: DescribeDataRepositoryTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataRepositoryTaskStatusResponse>;
   /** 罗列文件系统关联的Bucket映射 {@link DescribeFileSystemBucketsRequest} {@link DescribeFileSystemBucketsResponse} */
@@ -651,10 +799,14 @@ declare interface Goosefs {
   DescribeFilesetGeneralConfig(data: DescribeFilesetGeneralConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFilesetGeneralConfigResponse>;
   /** 查询Fileset列表 {@link DescribeFilesetsRequest} {@link DescribeFilesetsResponse} */
   DescribeFilesets(data: DescribeFilesetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFilesetsResponse>;
+  /** 查询 GooseFS 预热任务 {@link DescribeLoadTaskRequest} {@link DescribeLoadTaskResponse} */
+  DescribeLoadTask(data: DescribeLoadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadTaskResponse>;
   /** 解绑文件系统与Bucket的映射 {@link DetachFileSystemBucketRequest} {@link DetachFileSystemBucketResponse} */
   DetachFileSystemBucket(data: DetachFileSystemBucketRequest, config?: AxiosRequestConfig): AxiosPromise<DetachFileSystemBucketResponse>;
   /** 扩展文件系统容量 {@link ExpandCapacityRequest} {@link ExpandCapacityResponse} */
   ExpandCapacity(data: ExpandCapacityRequest, config?: AxiosRequestConfig): AxiosPromise<ExpandCapacityResponse>;
+  /** 列出 GooseFS 预热任务 {@link ListLoadTasksRequest} {@link ListLoadTasksResponse} */
+  ListLoadTasks(data: ListLoadTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListLoadTasksResponse>;
   /** 修改数据流动带宽 {@link ModifyDataRepositoryBandwidthRequest} {@link ModifyDataRepositoryBandwidthResponse} */
   ModifyDataRepositoryBandwidth(data: ModifyDataRepositoryBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataRepositoryBandwidthResponse>;
   /** 查询客户端节点跨vpc子网访问能力 {@link QueryCrossVpcSubnetSupportForClientNodeRequest} {@link QueryCrossVpcSubnetSupportForClientNodeResponse} */
@@ -665,6 +817,8 @@ declare interface Goosefs {
   UpdateFileset(data: UpdateFilesetRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFilesetResponse>;
   /** 修改Fileset通用配置 {@link UpdateFilesetGeneralConfigRequest} {@link UpdateFilesetGeneralConfigResponse} */
   UpdateFilesetGeneralConfig(data: UpdateFilesetGeneralConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFilesetGeneralConfigResponse>;
+  /** 变更 GooseFS 预热任务优先级 {@link UpdateLoadTaskPriorityRequest} {@link UpdateLoadTaskPriorityResponse} */
+  UpdateLoadTaskPriority(data: UpdateLoadTaskPriorityRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateLoadTaskPriorityResponse>;
 }
 
 export declare type Versions = ["2022-05-19"];

@@ -1158,6 +1158,24 @@ declare interface ResizeDiskResponse {
   RequestId?: string;
 }
 
+declare interface RestartInstanceRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 节点类型，可选值：CK / ZK / CHPROXY */
+  NodeType: string;
+  /** 符合节点类型的要重启的节点ip列表 */
+  NodeIpList: string[];
+  /** 是否滚动重启，默认为true */
+  RollingRestart?: boolean;
+}
+
+declare interface RestartInstanceResponse {
+  /** 任务id */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ScaleCNOutUpInstanceRequest {
   /** 实例唯一ID */
   InstanceId: string;
@@ -1289,6 +1307,8 @@ declare interface Cdwch {
   RecoverBackUpJob(data: RecoverBackUpJobRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverBackUpJobResponse>;
   /** 扩容磁盘容量 {@link ResizeDiskRequest} {@link ResizeDiskResponse} */
   ResizeDisk(data: ResizeDiskRequest, config?: AxiosRequestConfig): AxiosPromise<ResizeDiskResponse>;
+  /** 重启实例 {@link RestartInstanceRequest} {@link RestartInstanceResponse} */
+  RestartInstance(data: RestartInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestartInstanceResponse>;
   /** 通过接口弹性伸缩云原生集群(openapi) {@link ScaleCNOutUpInstanceRequest} {@link ScaleCNOutUpInstanceResponse} */
   ScaleCNOutUpInstance(data: ScaleCNOutUpInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleCNOutUpInstanceResponse>;
   /** 水平调整实例节点 {@link ScaleOutInstanceRequest} {@link ScaleOutInstanceResponse} */

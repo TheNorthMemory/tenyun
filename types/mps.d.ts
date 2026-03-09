@@ -1660,16 +1660,18 @@ declare interface AigcStoreCosParam {
 
 /** 用于AIGC创作视频时用到的扩展参数信息。 */
 declare interface AigcVideoExtraParam {
-  /** 生成视频的分辨率，分辨率与选择模型及设置的视频时长相关。 不同模型支持的分辨率选项:1. Kling 720P(默认), 1080P。2. Hailuo 768P(默认), 1080P。3. Vidu 720P(默认)，1080P。4. GV 720P(默认),1080P。5. OS 720P, 图片仅支持1280x720、720x1280，暂不支持指定。注意：除模型可支持的分辨率外，还可以生成 2K、4K分辨率。 */
+  /** 生成视频的分辨率，分辨率与选择模型及设置的视频时长相关。 不同模型支持的分辨率选项:Kling 720P(默认), 1080P。Hailuo 768P(默认), 1080P。Vidu 720P(默认)，1080P。GV 720P(默认),1080P。OS 720P, 图片仅支持1280x720、720x1280，暂不支持指定。注意：除模型可支持的分辨率外，还可以生成 2K、4K分辨率。 */
   Resolution?: string;
-  /** 指定所生成视频的宽高比。 不同模型对于此参数的支持：1. Kling 仅文生视频支持, 16:9(默认值)、9:16、 1:1。2. Hailuo 暂不支持。3. Vidu 仅文生和参考图生视频 支持[16:9、9:16、4:3、3:4、1:1]，其中仅q2支持4:3、3:4。4. GV 16:9(默认值)、9:16。5. OS 仅文生视频支持, 16:9(默认), 9:16。注：关于具体模型支持的宽高比例，可查看具体模型官网介绍获取更完整描述。 */
+  /** 指定所生成视频的宽高比。 不同模型对于此参数的支持：Kling 仅文生视频支持, 16:9(默认值)、9:16、 1:1。Hailuo 暂不支持。Vidu 仅文生和参考图生视频 支持[16:9、9:16、4:3、3:4、1:1]，其中仅q2支持4:3、3:4。GV 16:9(默认值)、9:16。OS 仅文生视频支持, 16:9(默认), 9:16。注：关于具体模型支持的宽高比例，可查看具体模型官网介绍获取更完整描述。 */
   AspectRatio?: string;
-  /** 是否添加图标水印。1. Hailuo 支持此参数。2. Kling 支持此参数。3. Vidu 支持此参数。 */
+  /** 是否添加图标水印。Hailuo 支持此参数。Kling 支持此参数。Vidu 支持此参数。 */
   LogoAdd?: number;
-  /** 为视频生成音频。接受的值包括 true 或 false。 支持此参数的模型：1. GV，默认true。2. OS，默认true。 */
+  /** 为视频生成音频。接受的值包括 true 或 false。 支持此参数的模型：GV，默认true。OS，默认true。 */
   EnableAudio?: boolean;
   /** 错峰模型，目前仅支持Vidu模型。错峰模式下提交的任务，会在48小时内生成，未能完成的任务会被自动取消。 */
   OffPeak?: boolean;
+  /** 是否为生成的视频添加背景音乐。默认：false，可选值 true 、false。注意：部分模型的版本支持。 */
+  EnableBgm?: boolean;
 }
 
 /** 用于AIGC生视频创作的参考图片信息。 */
@@ -1678,6 +1680,16 @@ declare interface AigcVideoReferenceImageInfo {
   ImageUrl?: string;
   /** 参考类型。注意：1. 当使用GV模型时，可作为参考方式,可选asset(素材)、style(风格)。 */
   ReferenceType?: string;
+}
+
+/** 用于AIGC视频生成的参考视频素材。 */
+declare interface AigcVideoReferenceVideoInfo {
+  /** 参考视频url。需要外网可访问。可作为特征参考视频，也可作为待编辑视频，默认为待编辑视频；可选择性保留视频原声通过ReferType参数区分参考视频类型：feature为特征参考视频，base为待编辑视频参考视频为待编辑视频时，不能定义视频首尾帧。 */
+  VideoUrl?: string;
+  /** 通过ReferType参数区分参考视频类型：feature为特征参考视频，base为待编辑视频。 */
+  ReferType?: string;
+  /** 通过KeepOriginalSound参数选择是否保留视频原声，yes为保留，no为不保留；当前参数对特征参考视频（feature）也生效。 */
+  KeepOriginalSound?: string;
 }
 
 /** 转动图任务类型。 */
@@ -7255,9 +7267,9 @@ declare interface CreateAigcImageTaskResponse {
 declare interface CreateAigcVideoTaskRequest {
   /** 模型名称。当前支持的模型列表:Hunyuan,Hailuo，Kling，Vidu，OS，GV。 */
   ModelName?: string;
-  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。1. Hailuo， 可选[02、2.3]。2. Kling，可选[2.0、2.1、2.5、O1、2.6]。3. Vidu,可选[q2、q2-pro、q2-turbo]。4. GV, 可选[3.1]。5. OS，可选[2.0]。 */
+  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。Hailuo， 可选[02、2.3]。Kling，可选[2.0、2.1、2.5、O1、2.6、3.0、3.0-Omni]。Vidu,可选[q2、q2-pro、q2-turbo、q3-pro、q3-turbo]。GV, 可选[3.1]。OS，可选[2.0]。 */
   ModelVersion?: string;
-  /** 指定场景生视频。注意：仅部分模型支持指定场景。1. Kling支持动作控制，motion_control。2. Mingmou支持横转竖，land2port。3. Vidu支持特效模板，template_effect。 */
+  /** 指定场景生视频。注意：仅部分模型支持指定场景。Kling支持动作控制，motion_control。Mingmou支持横转竖，land2port。Vidu支持特效模板，template_effect。 */
   SceneType?: string;
   /** 生成视频的描述。(注：最大支持2000字符)。当未传入图片时，此参数必填。 */
   Prompt?: string;
@@ -7265,19 +7277,21 @@ declare interface CreateAigcVideoTaskRequest {
   NegativePrompt?: string;
   /** 默认取值为False，模型会严格地遵循指令。如果需要更精细的prompt获得最佳效果，可将此参数设置为True，将自动优化传入的prompt，以提升生成质量。 */
   EnhancePrompt?: boolean;
-  /** 用于指导视频生成的图片 URL。该URL需外网可访问。注意：1. 推荐图片大小不超过10M，不同模型大小限制不相同。2. 支持的图片格式：jpeg、png。3. 使用OS模型时，需输入图片尺寸为: 1280x720、720x1280。 */
+  /** 用于指导视频生成的图片 URL。该URL需外网可访问。注意：推荐图片大小不超过10M，不同模型大小限制不相同。支持的图片格式：jpeg、png。使用OS模型时，需输入图片尺寸为: 1280x720、720x1280。 */
   ImageUrl?: string;
-  /** 模型将以此参数传入的图片作为尾帧画面来生成视频。支持此参数的模型：1. GV，传入尾帧图片时，必须同时传入ImageUrl作为首帧。2. Kling， 在Resolution:1080P的情况下 2.1版本支持首尾帧。3. Vidu, q2-pro, q2-turbo 支持首尾帧。注意：1. 推荐图片大小不超过10M，各模型限制不同。2. 支持的图片格式：jpeg、png。 */
+  /** 模型将以此参数传入的图片作为尾帧画面来生成视频。支持此参数的模型：GV，传入尾帧图片时，必须同时传入ImageUrl作为首帧。Kling， 在Resolution:1080P的情况下 2.1版本支持首尾帧。Vidu, q2-pro, q2-turbo 支持首尾帧。注意：推荐图片大小不超过10M，各模型限制不同。支持的图片格式：jpeg、png。 */
   LastImageUrl?: string;
-  /** 最多包含三张素材资源图片的列表，用于描述模型在生成视频时要使用的资源图片。支持多图输入的模型：1. GV，使用多图输入时，不可使用ImageUrl和LastImageUrl。2. Vidu，支持多图参考生视频。q2模型1-7张图片，可通过ImageInfos里面的ReferenceType作为主体id来传入。注意：1. 图片大小不超过10M。2. 支持的图片格式：jpeg、png。 */
+  /** 最多包含三张素材资源图片的列表，用于描述模型在生成视频时要使用的资源图片。支持多图输入的模型：GV，使用多图输入时，不可使用ImageUrl和LastImageUrl。Vidu，支持多图参考生视频。q2模型1-7张图片，可通过ImageInfos里面的ReferenceType作为主体id来传入。注意：图片大小不超过10M。支持的图片格式：jpeg、png。 */
   ImageInfos?: AigcVideoReferenceImageInfo[];
-  /** 生成视频的时长。注意：1. Kling支持 5、10秒。默认: 5秒。2. Hailuo的std模式可支持6、10秒，其他仅6秒。默认：6秒。3. Vidu支持1-10秒。4. GV支持 8秒。 默认：8秒。5. OS支持4、8、12秒。 默认：8秒。 */
+  /** 目前仅Kling O1版本支持参考视频信息传入。可作为特征参考视频，也可作为待编辑视频，默认为待编辑视频；可选择性保留视频原声。 */
+  VideoInfos?: AigcVideoReferenceVideoInfo[];
+  /** 生成视频的时长。注意：Kling支持 5、10秒。默认: 5秒。Hailuo的std模式可支持6、10秒，其他仅6秒。默认：6秒。Vidu支持1-10秒。GV支持 8秒。 默认：8秒。OS支持4、8、12秒。 默认：8秒。 */
   Duration?: number;
   /** 用于传入要求的额外参数。 */
   ExtraParameters?: AigcVideoExtraParam;
   /** 文件结果指定存储Cos桶信息。 注意：需开通Cos，创建并授权MPS_QcsRole角色。 */
   StoreCosParam?: AigcStoreCosParam;
-  /** 用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。示例：{\"camera_control\":{\"type\":\"simple\"}} */
+  /** 用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。示例：{"camera_control":{"type":"simple"}} */
   AdditionalParameters?: string;
   /** 接口操作者名称。 */
   Operator?: string;
@@ -9179,6 +9193,8 @@ declare interface EditMediaRequest {
   SessionId?: string;
   /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
   SessionContext?: string;
+  /** 资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。 */
+  ResourceId?: string;
 }
 
 declare interface EditMediaResponse {
@@ -9889,13 +9905,13 @@ declare interface ProcessImageResponse {
 }
 
 declare interface ProcessLiveStreamRequest {
-  /** 直播流 URL（必须是直播流地址，支持 rtmp，hls 和 flv, trtc,webrtc,srt等）。trtc地址如下： trtc: //trtc.rtc.qq.com/mps/``?sdkappid=``&userid=``&usersig=<`usersig>``` 为trtc的房间号id, 为数字`` 为trtc的sdk app id`` 为服务进入房间的用户id,可以区分谁是机器人<`usersig>` 为trtc 用户的签名webrtc 支持[LEB](https://cloud.tencent.com/product/leb)的直播流，地址获取请[参考](https://cloud.tencent.com/document/product/267/32720)srt支持地址请[参考](https://ffmpeg.org/ffmpeg-protocols.html#srt) */
+  /** 直播流 URL（必须是直播流地址，支持 rtmp，hls 和 flv, trtc,webrtc,srt等）。trtc地址如下： trtc: //trtc.rtc.qq.com/mps/&lt;roomid&gt;?sdkappid=&lt;sdkappid&gt;&amp;userid=&lt;userid&gt;&amp;usersig=&lt;usersig&gt;&lt;roomid&gt; 为trtc的房间号id, 为数字&lt;sdkappid&gt; 为trtc的sdk app id&lt;userid&gt; 为服务进入房间的用户id,可以区分谁是机器人&lt;usersig&gt; 为trtc 用户的签名webrtc 支持LEB的直播流，地址获取请参考srt支持地址请参考 */
   Url: string;
   /** 任务的事件通知信息，用于指定直播流处理的结果。 */
   TaskNotifyConfig: LiveStreamTaskNotifyConfig;
   /** 直播流处理输出文件的目标存储。如处理有文件输出，该参数为必填项。 */
   OutputStorage?: TaskOutputStorage;
-  /** 直播流处理生成的文件输出的目标目录，如`/movie/201909/`，如果不填为 `/` 目录。 */
+  /** 直播流处理生成的文件输出的目标目录，如/movie/201909/，如果不填为 / 目录。 */
   OutputDir?: string;
   /** 视频内容审核类型任务参数。 */
   AiContentReviewTask?: AiContentReviewTaskInput;
@@ -9913,6 +9929,8 @@ declare interface ProcessLiveStreamRequest {
   SessionContext?: string;
   /** 直播编排ID。注意1：对于OutputStorage、OutputDir参数：当服务编排中子任务节点配置了OutputStorage、OutputDir时，该子任务节点中配置的输出作为子任务的输出。当服务编排中子任务节点没有配置OutputStorage、OutputDir时，若对直播流发起处理（ProcessLiveStream）有输出，将覆盖原有编排的默认输出。注意2：对于TaskNotifyConfig参数，若创建任务接口（ProcessLiveStream）有设置，将覆盖原有编排的默认回调。 */
   ScheduleId?: number;
+  /** 资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。 */
+  ResourceId?: string;
 }
 
 declare interface ProcessLiveStreamResponse {

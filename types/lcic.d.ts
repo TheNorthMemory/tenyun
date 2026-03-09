@@ -336,6 +336,34 @@ declare interface MutedAccountList {
   MutedUntil?: number;
 }
 
+/** 信令录制视频观看记录详情 */
+declare interface PlayRecord {
+  /** 房间ID。 */
+  RoomId?: number;
+  /** 用户ID。 */
+  UserId?: string;
+  /** 单次播放会话ID。 */
+  SessionId?: string;
+  /** 播放开始时间，unix时间戳（秒）。 */
+  PlayBeginTime?: number;
+  /** 播放结束时间，unix时间戳（秒）。 */
+  PlayEndTime?: number;
+  /** 播放时长（毫秒）。 */
+  Duration?: number;
+}
+
+/** 课堂回放信息 */
+declare interface PlaybackItem {
+  /** 房间id */
+  RoomId?: number;
+  /** 回放地址 */
+  PlaybackUrl?: string;
+  /** 录制时长 */
+  Duration?: number;
+  /** 录制开始时间 */
+  CreateTime?: number;
+}
+
 /** 房间问答问题详情 */
 declare interface QuestionInfo {
   /** 问题ID */
@@ -526,6 +554,14 @@ declare interface TextMsgContent {
   Text: string;
 }
 
+/** token结果 */
+declare interface TokenResult {
+  /** 房间id */
+  RoomId?: number;
+  /** 该房间信令回放的token */
+  Token?: string;
+}
+
 /** 转存配置 */
 declare interface TransferItem {
   /** 转存状态， 1正常 2停用 */
@@ -672,6 +708,24 @@ declare interface BatchDescribeDocumentResponse {
   RequestId?: string;
 }
 
+declare interface BatchGetPlaybackTokenRequest {
+  /** 低代码平台的SdkAppId。 */
+  SdkAppId: number;
+  /** 房间ID。 */
+  RoomIds: number[];
+  /** token过期时间，单位秒。如果传0则表示不过期 */
+  ExpireSeconds?: number;
+}
+
+declare interface BatchGetPlaybackTokenResponse {
+  /** token值，用于回放鉴权。 */
+  Results?: TokenResult[];
+  /** 房间ID。 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BatchRegisterRequest {
   /** 批量注册用户信息列表 */
   Users: BatchUserRequest[];
@@ -814,7 +868,7 @@ declare interface CreateRoomRequest {
   TurnOffMic?: number;
   /** 声音音质。可以有以下取值：0：流畅模式（默认值），占用更小的带宽、拥有更好的降噪效果，适用于1对1、小班教学、多人音视频会议等场景。1：高音质模式，适合需要高保真传输音乐的场景，但降噪效果会被削弱，适用于音乐教学场景。 */
   AudioQuality?: number;
-  /** 录制方式，可以有以下取值：0 开启自动录制（默认值）1 禁止录制2 开启手动录制 注： - 如果该配置取值为0，录制将从上课后开始，课堂结束后停止。 - 如果该配置取值为2，需通过startRecord、stopRecord接口控制录制的开始和结束。 */
+  /** 录制方式。枚举值：0： 开启自动录制（默认）1： 禁止录制2： 开启手动录制。（仅支持页面录制，需通过startRecord、stopRecord接口控制录制的开始和结束。）3： 信令录制。 */
   DisableRecord?: number;
   /** 助教Id列表。通过[注册用户]接口获取的UserId。指定后该用户在房间内拥有助教权限。 */
   Assistants?: string[];
@@ -925,6 +979,18 @@ declare interface DeleteGroupRequest {
 }
 
 declare interface DeleteGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeletePlaybackItemRequest {
+  /** 低代码互动课堂的SdkAppId。 */
+  SdkAppId: number;
+  /** 课堂ID。 */
+  RoomId: number;
+}
+
+declare interface DeletePlaybackItemResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1253,6 +1319,52 @@ declare interface DescribeMarqueeResponse {
   Duration?: number;
   /** 跑马灯个数：目前仅支持1或2, 对应显示单排或双排 */
   MarqueeCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePlayRecordsRequest {
+  /** 低代码互动课堂的SdkAppId。 */
+  SdkAppId: number;
+  /** 房间ID。 */
+  RoomId: number;
+  /** 开始时间，unix时间戳（秒）。 */
+  StartTime: number;
+  /** 结束时间，unix时间戳（秒）。 */
+  EndTime: number;
+  /** 页码，从1开始递增。默认值：1 */
+  Page: number;
+  /** 每页获取的记录条数。取值范围：[1, 200]默认值：20 */
+  PageSize: number;
+  /** 用户ID。 */
+  UserId?: string;
+}
+
+declare interface DescribePlayRecordsResponse {
+  /** 总条数。 */
+  Total?: number;
+  /** 信令录制视频回放观看记录列表。 */
+  Records?: PlayRecord[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePlaybackListRequest {
+  /** 低代码平台的SdkAppId。 */
+  SdkAppId: number;
+  /** 房间ID */
+  RoomId?: number;
+  /** 分页查询当前页数，从1开始递增 */
+  Page?: number;
+  /** 默认10条，最大上限为100条 */
+  Limit?: number;
+}
+
+declare interface DescribePlaybackListResponse {
+  /** 总数 */
+  Total?: number;
+  /** 课堂回放信息列表 */
+  Items?: PlaybackItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1593,6 +1705,28 @@ declare interface ForbidSendMsgResponse {
   RequestId?: string;
 }
 
+declare interface GetPlaybackTokenRequest {
+  /** 低代码平台的SdkAppId。 */
+  SdkAppId: number;
+  /** 房间ID。 */
+  RoomId: number;
+  /** 用户ID。 */
+  UserId?: string;
+  /** token过期时间，单位秒。如果传0则表示不过期 */
+  ExpireSeconds?: number;
+}
+
+declare interface GetPlaybackTokenResponse {
+  /** token值，用于回放鉴权。 */
+  Token?: string;
+  /** 房间ID。 */
+  RoomId?: number;
+  /** 用户ID。 */
+  UserId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetRoomEventRequest {
   /** 课堂Id。 */
   RoomId: number;
@@ -1711,12 +1845,46 @@ declare interface LoginOriginIdResponse {
   RequestId?: string;
 }
 
+declare interface LoginOriginIdWithRoomRequest {
+  /** 低代码互动课堂的SdkAppId。 */
+  SdkAppId: number;
+  /** 用户在客户系统的Id，需要在同一应用下唯一。 */
+  OriginId: string;
+  /** 课堂 ID */
+  RoomId: number;
+}
+
+declare interface LoginOriginIdWithRoomResponse {
+  /** 用户Id。 */
+  UserId?: string;
+  /** 登录/注册成功后返回登录态token。有效期7天。 */
+  Token?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface LoginUserRequest {
   /** 注册获取的用户id。 */
   UserId: string;
 }
 
 declare interface LoginUserResponse {
+  /** 用户Id。 */
+  UserId?: string;
+  /** 注册成功后返回登录态token，有效期7天。token过期后可以通过调用“登录”或“源账号登录”进行更新。 */
+  Token?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface LoginUserWithRoomRequest {
+  /** 注册获取的用户id。 */
+  UserId: string;
+  /** 课堂 ID */
+  RoomId: number;
+}
+
+declare interface LoginUserWithRoomResponse {
   /** 用户Id。 */
   UserId?: string;
   /** 注册成功后返回登录态token，有效期7天。token过期后可以通过调用“登录”或“源账号登录”进行更新。 */
@@ -2060,6 +2228,8 @@ declare interface Lcic {
   BatchDeleteRecord(data: BatchDeleteRecordRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteRecordResponse>;
   /** 批量获取文档详情 {@link BatchDescribeDocumentRequest} {@link BatchDescribeDocumentResponse} */
   BatchDescribeDocument(data: BatchDescribeDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDescribeDocumentResponse>;
+  /** 批量获取回放token {@link BatchGetPlaybackTokenRequest} {@link BatchGetPlaybackTokenResponse} */
+  BatchGetPlaybackToken(data: BatchGetPlaybackTokenRequest, config?: AxiosRequestConfig): AxiosPromise<BatchGetPlaybackTokenResponse>;
   /** 用户批量注册 {@link BatchRegisterRequest} {@link BatchRegisterResponse} */
   BatchRegister(data: BatchRegisterRequest, config?: AxiosRequestConfig): AxiosPromise<BatchRegisterResponse>;
   /** 绑定课件到房间 {@link BindDocumentToRoomRequest} {@link BindDocumentToRoomResponse} */
@@ -2084,6 +2254,8 @@ declare interface Lcic {
   DeleteGroup(data: DeleteGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupResponse>;
   /** 删除群组成员 {@link DeleteGroupMemberRequest} {@link DeleteGroupMemberResponse} */
   DeleteGroupMember(data: DeleteGroupMemberRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupMemberResponse>;
+  /** 删除课堂的信令录制记录 {@link DeletePlaybackItemRequest} {@link DeletePlaybackItemResponse} */
+  DeletePlaybackItem(data: DeletePlaybackItemRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePlaybackItemResponse>;
   /** 删除指定房间的录制文件 {@link DeleteRecordRequest} {@link DeleteRecordResponse} */
   DeleteRecord(data: DeleteRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordResponse>;
   /** 删除课堂 {@link DeleteRoomRequest} {@link DeleteRoomResponse} */
@@ -2118,6 +2290,10 @@ declare interface Lcic {
   DescribeGroupMemberList(data: DescribeGroupMemberListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupMemberListResponse>;
   /** 查询跑马灯配置 {@link DescribeMarqueeRequest} {@link DescribeMarqueeResponse} */
   DescribeMarquee(data: DescribeMarqueeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMarqueeResponse>;
+  /** 获取信令录制回放视频观看记录 {@link DescribePlayRecordsRequest} {@link DescribePlayRecordsResponse} */
+  DescribePlayRecords(data: DescribePlayRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlayRecordsResponse>;
+  /** 查询信令录制回放列表 {@link DescribePlaybackListRequest} {@link DescribePlaybackListResponse} */
+  DescribePlaybackList(data: DescribePlaybackListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlaybackListResponse>;
   /** 获取课堂提问列表 {@link DescribeQuestionListRequest} {@link DescribeQuestionListResponse} */
   DescribeQuestionList(data: DescribeQuestionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuestionListResponse>;
   /** 查询录制信息 {@link DescribeRecordRequest} {@link DescribeRecordResponse} */
@@ -2148,6 +2324,8 @@ declare interface Lcic {
   EndRoom(data: EndRoomRequest, config?: AxiosRequestConfig): AxiosPromise<EndRoomResponse>;
   /** 禁言和取消禁言 {@link ForbidSendMsgRequest} {@link ForbidSendMsgResponse} */
   ForbidSendMsg(data: ForbidSendMsgRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidSendMsgResponse>;
+  /** 获取单节课的回放token {@link GetPlaybackTokenRequest} {@link GetPlaybackTokenResponse} */
+  GetPlaybackToken(data: GetPlaybackTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetPlaybackTokenResponse>;
   /** 获取课堂事件 {@link GetRoomEventRequest} {@link GetRoomEventResponse} */
   GetRoomEvent(data: GetRoomEventRequest, config?: AxiosRequestConfig): AxiosPromise<GetRoomEventResponse>;
   /** 获取课堂历史消息 {@link GetRoomMessageRequest} {@link GetRoomMessageResponse} */
@@ -2160,8 +2338,12 @@ declare interface Lcic {
   KickUserFromRoom(data: KickUserFromRoomRequest, config?: AxiosRequestConfig): AxiosPromise<KickUserFromRoomResponse>;
   /** 源账号登录 {@link LoginOriginIdRequest} {@link LoginOriginIdResponse} */
   LoginOriginId(data: LoginOriginIdRequest, config?: AxiosRequestConfig): AxiosPromise<LoginOriginIdResponse>;
+  /** 源账号登录课堂 {@link LoginOriginIdWithRoomRequest} {@link LoginOriginIdWithRoomResponse} */
+  LoginOriginIdWithRoom(data: LoginOriginIdWithRoomRequest, config?: AxiosRequestConfig): AxiosPromise<LoginOriginIdWithRoomResponse>;
   /** 登录 {@link LoginUserRequest} {@link LoginUserResponse} */
   LoginUser(data: LoginUserRequest, config?: AxiosRequestConfig): AxiosPromise<LoginUserResponse>;
+  /** 登录课堂 {@link LoginUserWithRoomRequest} {@link LoginUserWithRoomResponse} */
+  LoginUserWithRoom(data: LoginUserWithRoomRequest, config?: AxiosRequestConfig): AxiosPromise<LoginUserWithRoomResponse>;
   /** 修改应用 {@link ModifyAppRequest} {@link ModifyAppResponse} */
   ModifyApp(data: ModifyAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppResponse>;
   /** 修改群组 {@link ModifyGroupRequest} {@link ModifyGroupResponse} */

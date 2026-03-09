@@ -50,6 +50,46 @@ declare interface AuditInstance {
   RealStorage?: number;
 }
 
+/** 审计日志 */
+declare interface AuditLog {
+  /** 影响行数 */
+  AffectRows?: number;
+  /** 操作类型。如：grantRolesToRole、dropRole等。 */
+  Atype?: string;
+  /** 执行时间。单位为：ms。 */
+  ExecTime?: number;
+  /** 客户端地址。 */
+  Host?: string;
+  /** 操作参数。包含操作的详细参数信息。 */
+  Param?: string;
+  /** 执行结果。0表示成功，非0表示失败。 */
+  Result?: number;
+  /** 用户角色列表。格式为：role@db,role@db。 */
+  Roles?: string;
+  /** 操作时间戳。格式为：YYYY-MM-DD HH:mm:ss。 */
+  Timestamp?: string;
+  /** 用户名。格式为：user@db。 */
+  User?: string;
+}
+
+/** 审计日志文件 */
+declare interface AuditLogFile {
+  /** 审计日志文件名称。 */
+  FileName?: string;
+  /** 审计日志文件创建时间。格式为 : "2019-03-20 17:09:13"。 */
+  CreateTime?: string;
+  /** 文件状态值。可能返回的值为："creating" - 生成中；"failed" - 创建失败；"success" - 已生成。 */
+  Status?: string;
+  /** 文件大小，单位为 KB。 */
+  FileSize?: number | null;
+  /** 审计日志下载地址。 */
+  DownloadUrl?: string | null;
+  /** 错误信息。 */
+  ErrMsg?: string | null;
+  /** 下载进度 */
+  ProgressRate?: number;
+}
+
 /** 审计日志过滤条件 */
 declare interface AuditLogFilter {
   /** 客户端地址。 */
@@ -826,6 +866,16 @@ declare interface AssignProjectResponse {
   RequestId?: string;
 }
 
+declare interface CloseAuditServiceRequest {
+  /** 实例ID，格式如：cmgo-test1234，与云数据库控制台页面中显示的实例 ID 相同。 */
+  InstanceId: string;
+}
+
+declare interface CloseAuditServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAccountUserRequest {
   /** 实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceId: string;
@@ -1160,6 +1210,32 @@ declare interface DescribeAsyncRequestInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAuditConfigRequest {
+  /** 实例 ID，格式如：cmgo-xftsghuy，与云数据库控制台页面中显示的实例 ID 相同。 */
+  InstanceId: string;
+}
+
+declare interface DescribeAuditConfigResponse {
+  /** 实例id */
+  InstanceId?: string | null;
+  /** 实例名称 */
+  InstanceName?: string | null;
+  /** true表示全审计，false表示规则审计 */
+  AuditAll?: boolean | null;
+  /** 该实例开通数据库审计的时间。 */
+  CreateTime?: string;
+  /** 审计日志保存时长。单位：天。目前支持的保存时长包括：0、30、180、365，1095、1825。 */
+  LogExpireDay?: number | null;
+  /** 审计日志存储类型。目前仅支持storage：存储型。 */
+  LogType?: string;
+  /** 是否正在关闭审计功能。true：是。false：否。 */
+  IsClosing?: string;
+  /** 是否正在开启审计功能。true：是。false：否。 */
+  IsOpening?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAuditInstanceListRequest {
   /** 指明待查询的实例为已开通审计或未开通审计。1：已开通审计功能。0：未开通审计功能。 */
   AuditSwitch?: number;
@@ -1178,6 +1254,54 @@ declare interface DescribeAuditInstanceListResponse {
   TotalCount?: number;
   /** 审计实例详情。 */
   Items?: AuditInstance[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAuditLogFilesRequest {
+  /** 实例 ID，格式如：cmgo-xfts****，与云数据库控制台页面中显示的实例 ID 相同。 */
+  InstanceId: string;
+  /** 分页大小参数。默认值为 20，取值范围[1,100]。 */
+  Limit?: number;
+  /** 分页偏移量。 */
+  Offset?: number;
+  /** 审计日志文件名。该接口将根据此参数过滤相关的审计日志文件。 */
+  FileName?: string;
+}
+
+declare interface DescribeAuditLogFilesResponse {
+  /** 符合条件的审计日志文件个数。 */
+  TotalCount?: number;
+  /** 审计日志文件详情。 */
+  Items?: AuditLogFile[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAuditLogsRequest {
+  /** 实例ID，格式如：cmgo-xftsghuy，与云数据库控制台页面中显示的实例 ID 相同。 */
+  InstanceId: string;
+  /** 开始时间，格式为："2017-07-12 10:29:20"。 */
+  StartTime: string;
+  /** 结束时间，格式为："2017-07-12 10:29:20"。 */
+  EndTime: string;
+  /** 过滤条件，可按设置的过滤条件过滤日志。 */
+  Filter?: AuditLogFilter;
+  /** 分页参数，指单次返回的数据条数。默认值为100，最大值为100。 */
+  Limit?: number;
+  /** 分页偏移量。 */
+  Offset?: number;
+  /** 审计日志的排序方式。ASC：升序。DESC：降序。 */
+  Order?: string;
+  /** 审计日志的排序字段，包括：timestamp：时间戳。affectRows：影响行数。execTime：执行时间。 */
+  OrderBy?: string;
+}
+
+declare interface DescribeAuditLogsResponse {
+  /** 符合条件的审计日志条数。 */
+  TotalCount?: number;
+  /** 审计日志详情。 */
+  Items?: AuditLog[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2697,6 +2821,8 @@ declare interface Mongodb {
   (): Versions;
   /** 指定云数据库实例的所属项目 {@link AssignProjectRequest} {@link AssignProjectResponse} */
   AssignProject(data: AssignProjectRequest, config?: AxiosRequestConfig): AxiosPromise<AssignProjectResponse>;
+  /** 关闭审计 {@link CloseAuditServiceRequest} {@link CloseAuditServiceResponse} */
+  CloseAuditService(data: CloseAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CloseAuditServiceResponse>;
   /** 创建账号 {@link CreateAccountUserRequest} {@link CreateAccountUserResponse} */
   CreateAccountUser(data: CreateAccountUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountUserResponse>;
   /** 创建审计日志文件 {@link CreateAuditLogFileRequest} {@link CreateAuditLogFileResponse} */
@@ -2723,8 +2849,14 @@ declare interface Mongodb {
   DescribeAccountUsers(data: DescribeAccountUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountUsersResponse>;
   /** 查询异步任务状态接口 {@link DescribeAsyncRequestInfoRequest} {@link DescribeAsyncRequestInfoResponse} */
   DescribeAsyncRequestInfo(data: DescribeAsyncRequestInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAsyncRequestInfoResponse>;
+  /** 查询审计服务配置 {@link DescribeAuditConfigRequest} {@link DescribeAuditConfigResponse} */
+  DescribeAuditConfig(data: DescribeAuditConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditConfigResponse>;
   /** 查询审计实例 {@link DescribeAuditInstanceListRequest} {@link DescribeAuditInstanceListResponse} */
   DescribeAuditInstanceList(data?: DescribeAuditInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditInstanceListResponse>;
+  /** 查询审计日志文件 {@link DescribeAuditLogFilesRequest} {@link DescribeAuditLogFilesResponse} */
+  DescribeAuditLogFiles(data: DescribeAuditLogFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogFilesResponse>;
+  /** 查询数据库审计日志 {@link DescribeAuditLogsRequest} {@link DescribeAuditLogsResponse} */
+  DescribeAuditLogs(data: DescribeAuditLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogsResponse>;
   /** 查询备份下载任务信息 {@link DescribeBackupDownloadTaskRequest} {@link DescribeBackupDownloadTaskResponse} */
   DescribeBackupDownloadTask(data: DescribeBackupDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDownloadTaskResponse>;
   /** 获取云数据库实例自动备份配置 {@link DescribeBackupRulesRequest} {@link DescribeBackupRulesResponse} */
