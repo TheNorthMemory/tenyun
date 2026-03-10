@@ -2381,9 +2381,9 @@ declare interface DescribeStaffStatusMetricsResponse {
 }
 
 declare interface DescribeTelCallInfoRequest {
-  /** 起始时间戳，Unix 时间戳(查询维度仅支持天，例如查询5月1日应该传startTime:"2023-05-01 00:00:00","endTime":"2023-05-01 23:59:59"的时间戳,查5月1日和5月2日的应该传startTime:"2023-05-01 00:00:00","endTime":"2023-05-02 23:59:59"的时间戳) */
+  /** 起始时间戳，Unix 时间戳(查询维度仅支持天，例如查询5月1日应该传startTime:&quot;2023-05-01 00:00:00&quot;,&quot;endTime&quot;:&quot;2023-05-01 23:59:59&quot;的时间戳,查5月1日和5月2日的应该传startTime:&quot;2023-05-01 00:00:00&quot;,&quot;endTime&quot;:&quot;2023-05-02 23:59:59&quot;的时间戳) */
   StartTimeStamp: number;
-  /** 结束时间戳，Unix 时间戳，查询时间范围最大为90天(查询维度仅支持天，例如查询5月1日应该传startTime:"2023-05-01 00:00:00","endTime":"2023-05-01 23:59:59"的时间戳,查5月1日和5月2日的应该传startTime:"2023-05-01 00:00:00","endTime":"2023-05-02 23:59:59"的时间戳) */
+  /** 结束时间戳，Unix 时间戳，查询时间范围最大为90天(查询维度仅支持天，例如查询5月1日应该传startTime:&quot;2023-05-01 00:00:00&quot;,&quot;endTime&quot;:&quot;2023-05-01 23:59:59&quot;的时间戳,查5月1日和5月2日的应该传startTime:&quot;2023-05-01 00:00:00&quot;,&quot;endTime&quot;:&quot;2023-05-02 23:59:59&quot;的时间戳) */
   EndTimeStamp: number;
   /** 应用ID列表，多个ID时，返回值为多个ID使用总和 */
   SdkAppIdList: number[];
@@ -2945,7 +2945,7 @@ declare interface Ccc {
   DescribeSessionDetail(data: DescribeSessionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSessionDetailResponse>;
   /** 获取技能组信息列表 {@link DescribeSkillGroupInfoListRequest} {@link DescribeSkillGroupInfoListResponse} */
   DescribeSkillGroupInfoList(data: DescribeSkillGroupInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillGroupInfoListResponse>;
-  /** 获取坐席信息列表 {@link DescribeStaffInfoListRequest} {@link DescribeStaffInfoListResponse} */
+  /** 获取座席信息列表 {@link DescribeStaffInfoListRequest} {@link DescribeStaffInfoListResponse} */
   DescribeStaffInfoList(data: DescribeStaffInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStaffInfoListResponse>;
   /** 查询座席状态历史 {@link DescribeStaffStatusHistoryRequest} {@link DescribeStaffStatusHistoryResponse} */
   DescribeStaffStatusHistory(data: DescribeStaffStatusHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStaffStatusHistoryResponse>;

@@ -6418,7 +6418,7 @@ declare interface CreateWhiteListOrderRequest {
   /** 规则名称,大资产中心:asset_center */
   RuleName: string;
   /** 订单类型, 1 试用 2 赠送 3 体验 4 SSL-证书赠送 5 cvm赠送 */
-  SourceType?: number;
+  SourceType: number;
   /** 地域, 1 广州 9新加坡, 默认为 1. 非必要情况不要选9 */
   RegionId?: number;
   /** 额外参数,json字符串,包含ResourceId 资源ID,LicenseType 授权类型 */
@@ -9528,6 +9528,8 @@ declare interface DescribeLogStorageConfigResponse {
   PeriodModifyCount?: number;
   /** 日志存储时长单位，年year/月month/天day */
   Granularity?: string;
+  /** 语言类型 */
+  MsgLanguage?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -13883,6 +13885,8 @@ declare interface ModifyLogStorageConfigRequest {
   Period?: number;
   /** 日志存储时长单位，年year/月month/天day */
   Granularity?: string;
+  /** 语言类型 */
+  MsgLanguage?: string;
 }
 
 declare interface ModifyLogStorageConfigResponse {

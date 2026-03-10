@@ -70,9 +70,9 @@ declare interface KeyParam {
 
 /** 播放控制参数 */
 declare interface PlaybackPolicy {
-  /** 播放许可证的有效期 */
+  /** 播放许可证的有效期单位：秒 */
   LicenseDurationSeconds?: number;
-  /** 开始播放后，允许最长播放时间 */
+  /** 开始播放后，允许最长播放时间单位：秒 */
   PlaybackDurationSeconds?: number;
 }
 

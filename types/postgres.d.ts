@@ -1567,11 +1567,11 @@ declare interface DescribeBaseBackupsResponse {
 }
 
 declare interface DescribeClassesRequest {
-  /** 可用区名称。可以通过接口[DescribeZones](https://cloud.tencent.com/document/product/409/16769)获取。 */
+  /** 可用区名称。可以通过接口DescribeZones获取。 */
   Zone: string;
   /** 数据库引擎，支持：1、postgresql（云数据库PostgreSQL）；2、mssql_compatible（MSSQL兼容-云数据库PostgreSQL）； */
   DBEngine: string;
-  /** 数据库主版本号。例如12，13，可以通过接口[DescribeDBVersions](https://cloud.tencent.com/document/product/409/89018)获取。 */
+  /** 数据库主版本号。例如12，13，可以通过接口DescribeDBVersions获取。 */
   DBMajorVersion: string;
 }
 
@@ -2617,7 +2617,7 @@ declare interface ModifyReadOnlyGroupConfigResponse {
 }
 
 declare interface ModifySwitchTimePeriodRequest {
-  /** 处于等待切换状态中的实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取 */
+  /** 处于等待切换状态中的实例ID。可通过DescribeDBInstances接口获取 */
   DBInstanceId: string;
   /** 入参取值为 0 ，代表立即切换。 */
   SwitchTag: number;

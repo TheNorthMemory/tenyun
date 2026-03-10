@@ -20,6 +20,8 @@ declare interface AbnormalProcessChildRuleInfo {
   RuleId?: string;
   /** 威胁等级，HIGH:高，MIDDLE:中，LOW:低 */
   RuleLevel?: string;
+  /** 命令行参数 */
+  CmdLine?: string;
 }
 
 /** 运行时容器访问控制事件描述信息 */
@@ -88,9 +90,9 @@ declare interface AbnormalProcessEventInfo {
   MatchGroupName?: string;
   /** 命中规则等级，HIGH：高危，MIDDLE：中危，LOW：低危。 */
   MatchRuleLevel?: string;
-  /** 网络状态未隔离 NORMAL已隔离 ISOLATED隔离中 ISOLATING隔离失败	ISOLATE_FAILED解除隔离中 RESTORING解除隔离失败 RESTORE_FAILED */
+  /** 网络状态未隔离 NORMAL已隔离 ISOLATED隔离中 ISOLATING隔离失败 ISOLATE_FAILED解除隔离中 RESTORING解除隔离失败 RESTORE_FAILED */
   ContainerNetStatus?: string;
-  /** 容器子状态"AGENT_OFFLINE" //Agent离线"NODE_DESTROYED" //节点已销毁"CONTAINER_EXITED" //容器已退出"CONTAINER_DESTROYED" //容器已销毁"SHARED_HOST" // 容器与主机共享网络"RESOURCE_LIMIT" //隔离操作资源超限"UNKNOW" // 原因未知 */
+  /** 容器子状态&quot;AGENT_OFFLINE&quot; //Agent离线&quot;NODE_DESTROYED&quot; //节点已销毁&quot;CONTAINER_EXITED&quot; //容器已退出&quot;CONTAINER_DESTROYED&quot; //容器已销毁&quot;SHARED_HOST&quot; // 容器与主机共享网络&quot;RESOURCE_LIMIT&quot; //隔离操作资源超限&quot;UNKNOW&quot; // 原因未知 */
   ContainerNetSubStatus?: string;
   /** 容器隔离操作来源 */
   ContainerIsolateOperationSrc?: string;
@@ -118,6 +120,8 @@ declare interface AbnormalProcessEventInfo {
   HostIP?: string;
   /** 集群名称 */
   ClusterName?: string;
+  /** 命令行参数 */
+  CmdLine?: string;
 }
 
 /** 待处理异常进程事件趋势 */
@@ -184,6 +188,8 @@ declare interface AccessControlChildRuleInfo {
   TargetFilePath: string;
   /** 子策略id */
   RuleId?: string;
+  /** 命令行参数 */
+  CmdLine?: string;
 }
 
 /** 运行时容器访问控制事件描述信息 */
@@ -218,7 +224,7 @@ declare interface AccessControlEventInfo {
   ImageName?: string;
   /** 动作执行结果， BEHAVIOR_NONE: 无 BEHAVIOR_ALERT: 告警 BEHAVIOR_RELEASE：放行 BEHAVIOR_HOLDUP_FAILED:拦截失败 BEHAVIOR_HOLDUP_SUCCESSED：拦截失败 */
   Behavior?: string;
-  /** 状态0:未处理 “EVENT_UNDEAL”:事件未处理 "EVENT_DEALED":事件已经处理 "EVENT_INGNORE"：事件已经忽略 */
+  /** 状态0:未处理 “EVENT_UNDEAL”:事件未处理 &quot;EVENT_DEALED&quot;:事件已经处理 &quot;EVENT_INGNORE&quot;：事件已经忽略 */
   Status?: string;
   /** 事件记录的唯一id */
   Id?: string;
@@ -252,9 +258,9 @@ declare interface AccessControlEventInfo {
   LatestFoundTime?: string;
   /** 规则组id */
   RuleId?: string;
-  /** 网络状态未隔离 NORMAL已隔离 ISOLATED隔离中 ISOLATING隔离失败	ISOLATE_FAILED解除隔离中 RESTORING解除隔离失败 RESTORE_FAILED */
+  /** 网络状态未隔离 NORMAL已隔离 ISOLATED隔离中 ISOLATING隔离失败 ISOLATE_FAILED解除隔离中 RESTORING解除隔离失败 RESTORE_FAILED */
   ContainerNetStatus?: string;
-  /** 容器子状态"AGENT_OFFLINE" //Agent离线"NODE_DESTROYED" //节点已销毁"CONTAINER_EXITED" //容器已退出"CONTAINER_DESTROYED" //容器已销毁"SHARED_HOST" // 容器与主机共享网络"RESOURCE_LIMIT" //隔离操作资源超限"UNKNOW" // 原因未知 */
+  /** 容器子状态&quot;AGENT_OFFLINE&quot; //Agent离线&quot;NODE_DESTROYED&quot; //节点已销毁&quot;CONTAINER_EXITED&quot; //容器已退出&quot;CONTAINER_DESTROYED&quot; //容器已销毁&quot;SHARED_HOST&quot; // 容器与主机共享网络&quot;RESOURCE_LIMIT&quot; //隔离操作资源超限&quot;UNKNOW&quot; // 原因未知 */
   ContainerNetSubStatus?: string;
   /** 容器隔离操作来源 */
   ContainerIsolateOperationSrc?: string;
@@ -282,6 +288,8 @@ declare interface AccessControlEventInfo {
   HostIP?: string;
   /** 集群名称 */
   ClusterName?: string;
+  /** 命令行参数 */
+  CmdLine?: string;
 }
 
 /** 容器运行时，访问控制策略信息 */
@@ -8908,6 +8916,8 @@ declare interface DescribeSecLogJoinTypeListRequest {
 declare interface DescribeSecLogJoinTypeListResponse {
   /** 接入日志列表 */
   List?: SecLogJoinInfo[];
+  /** 语言类型 */
+  MsgLanguage?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

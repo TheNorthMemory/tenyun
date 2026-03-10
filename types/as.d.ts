@@ -82,13 +82,13 @@ declare interface AutoScalingGroup {
   DefaultCooldown?: number;
   /** 期望实例数 */
   DesiredCapacity?: number;
-  /** 启用状态，取值包括`ENABLED`和`DISABLED` */
+  /** 启用状态，取值包括ENABLED和DISABLED */
   EnabledStatus?: string;
   /** 应用型负载均衡器列表 */
   ForwardLoadBalancerSet?: ForwardLoadBalancer[];
   /** 实例数量 */
   InstanceCount?: number;
-  /** 状态为`IN_SERVICE`实例的数量 */
+  /** 状态为IN_SERVICE实例的数量 */
   InServiceInstanceCount?: number;
   /** 启动配置ID */
   LaunchConfigurationId?: string;
@@ -112,13 +112,13 @@ declare interface AutoScalingGroup {
   ZoneSet?: string[];
   /** 重试策略，部分成功的伸缩活动判定为一次失败活动。取值范围如下：IMMEDIATE_RETRY：默认取值，表示立即重试，在较短时间内快速重试，连续失败超过一定次数（5次）后不再重试。INCREMENTAL_INTERVALS：间隔递增重试，随着连续失败次数的增加，重试间隔逐渐增大。前 10 次重试为快速重试，后续重试间隔逐步递增至 10 分钟、30 分钟、60 分钟、一天。NO_RETRY，不进行重试，直到再次收到用户调用或者告警信息后才会重试。 */
   RetryPolicy?: string;
-  /** 伸缩组是否处于伸缩活动中，`IN_ACTIVITY`表示处于伸缩活动中，`NOT_IN_ACTIVITY`表示不处于伸缩活动中。 */
+  /** 伸缩组是否处于伸缩活动中，IN_ACTIVITY表示处于伸缩活动中，NOT_IN_ACTIVITY表示不处于伸缩活动中。 */
   InActivityStatus?: string;
   /** 伸缩组标签列表 */
   Tags?: Tag[];
   /** 服务设置 */
   ServiceSettings?: ServiceSettings;
-  /** 实例具有IPv6地址数量的配置，取值包括0、1。默认值为 0，表示实例不分配 IPv6 地址。需使用支持 IPv6 的私有网络，需在子网中开启 IPv6 CIDR，其他使用限制可参考 [IPv6使用限制](https://cloud.tencent.com/document/product/1142/38369)。 */
+  /** 实例具有IPv6地址数量的配置，取值包括0、1。默认值为 0，表示实例不分配 IPv6 地址。需使用支持 IPv6 的私有网络，需在子网中开启 IPv6 CIDR，其他使用限制可参考 IPv6使用限制。 */
   Ipv6AddressCount?: number;
   /** 多可用区/子网策略。 PRIORITY，按照可用区/子网列表的顺序，作为优先级来尝试创建实例，如果优先级最高的可用区/子网可以创建成功，则总在该可用区/子网创建。 EQUALITY：每次选择当前实例数最少的可用区/子网进行扩容，使得每个可用区/子网都有机会发生扩容，多次扩容出的实例会打散到多个可用区/子网。 */
   MultiZoneSubnetPolicy?: string;
@@ -1528,7 +1528,7 @@ declare interface InstanceMarketOptionsRequest {
 declare interface ModifyAutoScalingGroupRequest {
   /** 伸缩组ID。可以通过如下方式获取可用的伸缩组ID:通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/group) 查询伸缩组ID。通过调用接口 [DescribeAutoScalingGroups](https://cloud.tencent.com/document/api/377/20438) ，取返回信息中的 AutoScalingGroupId 获取伸缩组ID。 */
   AutoScalingGroupId: string;
-  /** 伸缩组名称，在您账号中必须唯一。名称仅支持中文、英文、数字、下划线、分隔符"-"、小数点，最大长度不能超55个字节。 */
+  /** 伸缩组名称，在您账号中必须唯一。名称仅支持中文、英文、数字、下划线、分隔符&quot;-&quot;、小数点，最大长度不能超55个字节。 */
   AutoScalingGroupName?: string;
   /** 默认冷却时间，单位秒，取值范围 [0,3600]，默认值为300。 */
   DefaultCooldown?: number;
@@ -1540,13 +1540,13 @@ declare interface ModifyAutoScalingGroupRequest {
   MaxSize?: number;
   /** 最小实例数，取值范围为 [0,2000]。需满足最大值大于等于期望值，期望值大于等于最小值。 */
   MinSize?: number;
-  /** 项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 ProjectId 字段来获取。默认值为 0，表示使用默认项目。 */
+  /** 项目ID。该参数可以通过调用 DescribeProject 的返回值中的 ProjectId 字段来获取。默认值为 0，表示使用默认项目。 */
   ProjectId?: number;
-  /** 子网ID列表。有效的私有网络子网ID可通过登录[控制台](https://console.cloud.tencent.com/vpc/subnet)查询；也可以调用接口 [DescribeSubnets](https://cloud.tencent.com/document/product/215/15784) ，从接口返回中的SubnetId字段获取。 */
+  /** 子网ID列表。有效的私有网络子网ID可通过登录控制台查询；也可以调用接口 DescribeSubnets ，从接口返回中的SubnetId字段获取。 */
   SubnetIds?: string[];
   /** 销毁策略，目前长度上限为1。取值包括 OLDEST_INSTANCE 和 NEWEST_INSTANCE。 OLDEST_INSTANCE 优先销毁伸缩组中最旧的实例。 NEWEST_INSTANCE，优先销毁伸缩组中最新的实例。 */
   TerminationPolicies?: string[];
-  /** 私有网络ID。修改私有网络时，需将 SubnetIds 参数同步修改为该私有网络的子网。有效的 VpcId 可通过登录[控制台](https://console.cloud.tencent.com/vpc/vpc)查询；也可以调用接口 [DescribeVpc](https://cloud.tencent.com/document/api/215/15778) ，从接口返回中的 VpcId 字段获取。 */
+  /** 私有网络ID。修改私有网络时，需将 SubnetIds 参数同步修改为该私有网络的子网。有效的 VpcId 可通过登录控制台查询；也可以调用接口 DescribeVpc ，从接口返回中的 VpcId 字段获取。 */
   VpcId?: string;
   /** 可用区列表 */
   Zones?: string[];
@@ -1556,13 +1556,13 @@ declare interface ModifyAutoScalingGroupRequest {
   ZonesCheckPolicy?: string;
   /** 服务设置，包括云监控不健康替换等服务设置。 */
   ServiceSettings?: ServiceSettings;
-  /** 实例具有IPv6地址数量的配置，取值包括0、1。默认值为 0，表示实例不分配 IPv6 地址。需使用支持 IPv6 的私有网络，需在子网中开启 IPv6 CIDR，其他使用限制可参考 [IPv6使用限制](https://cloud.tencent.com/document/product/1142/38369)。 */
+  /** 实例具有IPv6地址数量的配置，取值包括0、1。默认值为 0，表示实例不分配 IPv6 地址。需使用支持 IPv6 的私有网络，需在子网中开启 IPv6 CIDR，其他使用限制可参考 IPv6使用限制。 */
   Ipv6AddressCount?: number;
   /** 多可用区/子网策略，取值包括 PRIORITY 和 EQUALITY，默认为 PRIORITY。 PRIORITY，按照可用区/子网列表的顺序，作为优先级来尝试创建实例，如果优先级最高的可用区/子网可以创建成功，则总在该可用区/子网创建。 EQUALITY：扩容出的实例会打散到多个可用区/子网，保证扩容后的各个可用区/子网实例数相对均衡。 与本策略相关的注意点： 当伸缩组为基础网络时，本策略适用于多可用区；当伸缩组为VPC网络时，本策略适用于多子网，此时不再考虑可用区因素，例如四个子网ABCD，其中ABC处于可用区1，D处于可用区2，此时考虑子网ABCD进行排序，而不考虑可用区1、2。 本策略适用于多可用区/子网，不适用于启动配置的多机型。多机型按照优先级策略进行选择。 按照 PRIORITY 策略创建实例时，先保证多机型的策略，后保证多可用区/子网的策略。例如多机型A、B，多子网1、2、3，会按照A1、A2、A3、B1、B2、B3 进行尝试，如果A1售罄，会尝试A2（而非B1）。 */
   MultiZoneSubnetPolicy?: string;
   /** 伸缩组实例健康检查类型，取值如下：CVM：根据实例网络状态判断实例是否处于不健康状态，不健康的网络状态即发生实例 PING 不可达事件，详细判断标准可参考[实例健康检查](https://cloud.tencent.com/document/product/377/8553)CLB：根据 CLB 的健康检查状态判断实例是否处于不健康状态，CLB健康检查原理可参考[健康检查](https://cloud.tencent.com/document/product/214/6097) */
   HealthCheckType?: string;
-  /** CLB健康检查宽限期。 */
+  /** CLB健康检查宽限期，单位为秒。取值范围：[0, 7200]默认值：0 */
   LoadBalancerHealthCheckGracePeriod?: number;
   /** 实例分配策略，取值包括 LAUNCH_CONFIGURATION 和 SPOT_MIXED。 LAUNCH_CONFIGURATION，代表传统的按照启动配置模式。 SPOT_MIXED，代表竞价混合模式。目前仅支持启动配置为按量计费模式时使用混合模式，混合模式下，伸缩组将根据设定扩容按量或竞价机型。使用混合模式时，关联的启动配置的计费类型不可被修改。 */
   InstanceAllocationPolicy?: string;

@@ -3795,6 +3795,34 @@ declare namespace V20180717 {
     Switch?: string;
   }
 
+  /** 大模型解析人脸识别配置 */
+  interface LLMComprehendFaceRecognition {
+    /**  */
+    Switch: string;
+    /**  */
+    Score?: number;
+    /**  */
+    DefaultLibraryLabelSet?: string[];
+    /**  */
+    UserDefineLibraryLabelSet?: string[];
+    /**  */
+    FaceLibrary?: string;
+  }
+
+  /** 大模型解析人脸识别配置 */
+  interface LLMComprehendFaceRecognitionForUpdate {
+    /**  */
+    Switch?: string;
+    /**  */
+    Score?: number;
+    /**  */
+    DefaultLibraryLabelSet?: string[];
+    /**  */
+    UserDefineLibraryLabelSet?: string[];
+    /**  */
+    FaceLibrary?: string;
+  }
+
   /** 大模型解析分段摘要解析配置 */
   interface LLMComprehendSummary {
     /** 分段摘要任务开关，可选值：- ON：开启分段摘要任务；- OFF：关闭分段摘要任 */
@@ -8048,9 +8076,9 @@ declare namespace V20180717 {
   }
 
   interface CreateLLMComprehendTemplateRequest {
-    /** 解析级别，可选值为：- Audio: 音频级解析- Video: 视频级解析 */
+    /** 解析级别，可选值为：Audio: 音频级解析Video: 视频级解析 */
     Level: string;
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 大模型解析模板名称，长度限制：64 个字符。 */
     Name?: string;
@@ -8060,6 +8088,8 @@ declare namespace V20180717 {
     Summary?: LLMComprehendSummary;
     /** 文本转录解析配置 */
     Asr?: LLMComprehendAsr;
+    /** 人脸识别配置 */
+    FaceRecognition?: LLMComprehendFaceRecognition;
   }
 
   interface CreateLLMComprehendTemplateResponse {
@@ -10894,18 +10924,20 @@ declare namespace V20180717 {
   interface ModifyLLMComprehendTemplateRequest {
     /** 大模型理解模板的唯一标识 */
     Definition: number;
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 大模型解析模板名称，长度限制：64 个字符。 */
     Name?: string;
     /** 大模型解析模板描述信息，长度限制：256 个字符。 */
     Comment?: string;
-    /** 解析模型，可选值为：- Basic: 基础模型- Pro: 优化模型 */
+    /** 解析模型，可选值为：Basic: 基础模型Pro: 优化模型 */
     Model?: string;
     /** 分段摘要解析配置 */
     Summary?: LLMComprehendSummaryForUpdate;
     /** 文本转录解析配置 */
     Asr?: LLMComprehendAsrForUpdate;
+    /** 人脸识别配置 */
+    FaceRecognition?: LLMComprehendFaceRecognitionForUpdate;
   }
 
   interface ModifyLLMComprehendTemplateResponse {
@@ -11816,17 +11848,19 @@ declare namespace V20180717 {
   }
 
   interface SearchMediaBySemanticsRequest {
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId: number;
     /** 需要进行搜索的内容 */
     Text: string;
-    /** 返回的记录条数，默认值：20。 */
+    /** 返回的记录条数，默认值：20。取值范围：[1, 100] */
     Limit?: number;
     /** 文件类型。匹配集合中的任意元素： Video: 视频文件 Audio: 音频文件 Image: 图片文件 */
     Categories?: string[];
-    /** 标签集合，匹配集合中任意元素。 单个标签长度限制：32个字符。 数组长度限制：16。 */
+    /** 标签集合，匹配集合中任意元素。入参限制：单个标签长度限制：32个字符。数组长度限制：16。 */
     Tags?: string[];
-    /** 搜索的任务类型，可选值有： - AiAnalysis.DescriptionTask - SmartSubtitle.AsrFullTextTask */
+    /** 人物集合，匹配出现了所有传入人物的片段入参限制：数组长度限制：16 */
+    Persons?: string[];
+    /** 搜索的任务类型，可选值有： AiAnalysis.DescriptionTask SmartSubtitle.AsrFullTextTask */
     TaskTypes?: string[];
   }
 

@@ -376,6 +376,24 @@ declare interface ApiSecSceneRuleEntry {
   Name?: string;
 }
 
+/** api安全敏感规则列表 */
+declare interface ApiSecSensitiveRule {
+  /** 身份证号，唯一主键 */
+  RuleName?: string;
+  /** 表示OS系统内置，"custom"表示客户自定义 */
+  Source?: string;
+  /** 开关状态，0：表示关，1表示开 */
+  Status?: number;
+  /** 风险等级，100，200,300表示低中高三个等级 */
+  Level?: string;
+  /** 修改时间，默认0，表示没有进行修改 */
+  Timestamp?: number;
+  /** 自定义规则部分 */
+  CustomRule?: ApiSecCustomSensitiveRule;
+  /** 是否泛化 0:不泛化，1:泛化 */
+  IsPan?: number;
+}
+
 /** 地域信息 */
 declare interface Area {
   /** 国家，除了标准的国家外还支持国内、国外这两个特殊的标识 */
@@ -4558,6 +4576,46 @@ declare interface DescribeApiListVersionTwoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeApiSecSensitiveRuleListRequest {
+  /** 域名 */
+  Domain: string;
+  /** 是否查询api提取规则策略，true表示查询 */
+  IsQueryApiExtractRule?: boolean;
+  /** 是否查询api鉴权规则 */
+  IsQueryApiPrivilegeRule?: boolean;
+  /** 是否查询api场景规则 */
+  IsQueryApiSceneRule?: boolean;
+  /** 查询鉴权配置的时候，该rule只返回鉴权配置的规则 */
+  RuleName?: string;
+  /** 是否查询api自定义事件规则 */
+  IsQueryApiCustomEventRule?: boolean;
+  /** 是否查询无效api排除策略 */
+  IsQueryApiExcludeRule?: boolean;
+}
+
+declare interface DescribeApiSecSensitiveRuleListResponse {
+  /** api敏感规则列表 */
+  Data?: ApiSecSensitiveRule[] | null;
+  /** 规则数量 */
+  Total?: number | null;
+  /** 自定义敏感检测规则总开关 */
+  Status?: number;
+  /** 非内置规则的rulename列表 */
+  RuleNameList?: string[] | null;
+  /** api提取规则列表 */
+  ApiExtractRule?: ApiSecExtractRule[] | null;
+  /** api鉴权规则列表 */
+  ApiSecPrivilegeRule?: ApiSecPrivilegeRule[] | null;
+  /** api场景规则列表 */
+  ApiSecSceneRule?: ApiSecSceneRule[] | null;
+  /** 自定义事件规则 */
+  ApiSecCustomEventRule?: ApiSecCustomEventRule[] | null;
+  /** 无效api排除规则列表 */
+  ApiExcludeRule?: ApiSecExcludeRule[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAreaBanAreasRequest {
   /** 需要查询的域名 */
   Domain: string;
@@ -7809,6 +7867,8 @@ declare interface Waf {
   DescribeApiDetail(data: DescribeApiDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiDetailResponse>;
   /** api资产列表 {@link DescribeApiListVersionTwoRequest} {@link DescribeApiListVersionTwoResponse} */
   DescribeApiListVersionTwo(data: DescribeApiListVersionTwoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiListVersionTwoResponse>;
+  /** 获取api安全配置规则列表 {@link DescribeApiSecSensitiveRuleListRequest} {@link DescribeApiSecSensitiveRuleListResponse} */
+  DescribeApiSecSensitiveRuleList(data: DescribeApiSecSensitiveRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiSecSensitiveRuleListResponse>;
   /** 获取地域封禁配置 {@link DescribeAreaBanAreasRequest} {@link DescribeAreaBanAreasResponse} */
   DescribeAreaBanAreas(data: DescribeAreaBanAreasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAreaBanAreasResponse>;
   /** 获取地域封禁规则 {@link DescribeAreaBanRuleRequest} {@link DescribeAreaBanRuleResponse} */

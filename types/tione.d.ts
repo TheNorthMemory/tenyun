@@ -34,6 +34,8 @@ declare interface AuthTokenBase {
   CreateTime?: string;
   /** token状态 */
   Status?: string;
+  /** token的唯一id，与value一一对应，重置后id也会一并变化 */
+  Id?: string;
 }
 
 /** AuthToken 限流信息 */
@@ -982,6 +984,8 @@ declare interface NotebookDetail {
   JobCreateTime?: string;
   /** Appid */
   AppId?: string | null;
+  /** 描述 */
+  Description?: string | null;
 }
 
 /** Notebook列表元素 */
@@ -1048,6 +1052,8 @@ declare interface NotebookSetItem {
   AppId?: string | null;
   /** 容器服务暴露端口配置 */
   ExposePortConfig?: ExposePortConfig;
+  /** 描述 */
+  Description?: string | null;
 }
 
 /** 用于表示百分比或数量 */
@@ -2295,6 +2301,8 @@ declare interface CreateNotebookRequest {
   SSHConfig?: SSHConfig;
   /** GooseFS存储配置 */
   VolumeSourceGooseFS?: GooseFS;
+  /** 描述 */
+  Description?: string;
 }
 
 declare interface CreateNotebookResponse {
@@ -3023,6 +3031,8 @@ declare interface DescribeTrainingTaskPodsResponse {
 declare interface DescribeTrainingTaskRequest {
   /** 训练任务ID */
   Id: string;
+  /** 训练任务实例ID */
+  InstanceId?: string;
 }
 
 declare interface DescribeTrainingTaskResponse {
@@ -3213,6 +3223,8 @@ declare interface ModifyNotebookRequest {
   SSHConfig?: SSHConfig;
   /** 自定义环境变量 */
   Envs?: EnvVar[];
+  /** 描述 */
+  Description?: string;
 }
 
 declare interface ModifyNotebookResponse {

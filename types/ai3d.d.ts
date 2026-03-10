@@ -181,7 +181,7 @@ declare interface QueryHunyuanTo3DRapidJobResponse {
 declare interface SubmitHunyuan3DPartJobRequest {
   /** 需进行组件生成的3D模型文件，仅支持FBX格式。 */
   File?: InputFile3D;
-  /** 组件生成模型版本，默认为1.0，可选项：1.0，1.5； */
+  /** 组件生成模型版本，默认为1.5枚举值：1.5： 1.5模型默认值：1.5 */
   Model?: string;
 }
 
@@ -205,9 +205,9 @@ declare interface SubmitHunyuanTo3DProJobRequest {
   MultiViewImages?: ViewImage[];
   /** 是否开启 PBR材质生成，默认 false。 */
   EnablePBR?: boolean;
-  /** 生成3D模型的面数，默认值为500000。可支持生成面数范围，参考值：10000-1500000。GenerateType中选择LowPoly时，参考值：3000-1500000。 */
+  /** 生成3D模型的面数，默认值为500000。可支持生成面数范围，参考值：3000-1500000。GenerateType中选择LowPoly时，此参数不生效。取值范围：[3000, 1500000] */
   FaceCount?: number;
-  /** 生成任务类型，默认Normal，参考值：Normal：可生成带纹理的几何模型。LowPoly：可生成智能拓扑后的模型，选择此参数时，面数最低可到达3000面。Geometry：可生成不带纹理的几何模型（白模），选择此任务时，EnablePBR参数不生效。Sketch：可输入草图或线稿图生成模型，此模式下prompt和ImageUrl/ImageBase64可一起输入。 */
+  /** 生成任务类型，默认Normal，参考值：Normal：可生成带纹理的几何模型。LowPoly：可生成智能拓扑后的模型，FaceCount参数不生效。Geometry：可生成不带纹理的几何模型（白模），EnablePBR参数不生效。Sketch：可输入草图或线稿图生成模型，此模式下prompt和ImageUrl/ImageBase64可一起输入。枚举值：Normal： 可生成带纹理的几何模型LowPoly： 可生成智能拓扑后的模型，FaceCount参数不生效。Geometry： 可生成不带纹理的几何模型（白模），EnablePBR参数不生效。Sketch： 可输入草图或线稿图生成模型，此模式下prompt和ImageUrl/ImageBase64可一起输入。 */
   GenerateType?: string;
   /** 该参数仅在GenerateType中选择LowPoly模式可生效。多边形类型，表示模型的表面由几边形网格构成，默认为triangle,参考值:triangle: 三角形面。quadrilateral: 四边形面与三角形面混合生成。 */
   PolygonType?: string;

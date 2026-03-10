@@ -1443,6 +1443,8 @@ declare interface DescribeApiSecsRequest {
   Filters?: Filter[];
   /** 企业ID */
   CustomerId?: number;
+  /** 排序方式 */
+  OrderBy?: string;
 }
 
 declare interface DescribeApiSecsResponse {

@@ -2086,26 +2086,6 @@ declare interface ClearCmqSubscriptionFilterTagsResponse {
   RequestId?: string;
 }
 
-declare interface CreateClusterRequest {
-  /** 集群名称，不支持中字以及除了短线和下划线外的特殊字符且不超过64个字符。 */
-  ClusterName: string;
-  /** 用户专享物理集群ID，如果不传，则默认在公共集群上创建用户集群资源。 */
-  BindClusterId?: number;
-  /** 说明，128个字符以内。 */
-  Remark?: string;
-  /** 集群的标签列表(已废弃) */
-  Tags?: Tag[];
-  /** 是否开启公网访问，不填时默认开启 */
-  PublicAccessEnabled?: boolean;
-}
-
-declare interface CreateClusterResponse {
-  /** 集群ID */
-  ClusterId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateCmqQueueRequest {
   /** 队列名字，在单个地域同一账号下唯一。队列名称以字母起始，只能包含字母、数字、“-”及“_”，最大64字符，不区分大小写。 */
   QueueName: string;
@@ -5387,8 +5367,6 @@ declare interface Tdmq {
   ClearCmqQueue(data: ClearCmqQueueRequest, config?: AxiosRequestConfig): AxiosPromise<ClearCmqQueueResponse>;
   /** 清空cmq订阅者消息标签 {@link ClearCmqSubscriptionFilterTagsRequest} {@link ClearCmqSubscriptionFilterTagsResponse} */
   ClearCmqSubscriptionFilterTags(data: ClearCmqSubscriptionFilterTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ClearCmqSubscriptionFilterTagsResponse>;
-  /** 创建集群 {@link CreateClusterRequest} {@link CreateClusterResponse} */
-  CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
   /** 创建cmq队列接口 {@link CreateCmqQueueRequest} {@link CreateCmqQueueResponse} */
   CreateCmqQueue(data: CreateCmqQueueRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCmqQueueResponse>;
   /** 创建cmq订阅接口 {@link CreateCmqSubscribeRequest} {@link CreateCmqSubscribeResponse} */

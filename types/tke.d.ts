@@ -740,10 +740,12 @@ declare interface UpdateNativeNodePoolParam {
   InstanceTypes?: string[];
   /** 期望节点数 */
   Replicas?: number;
-  /** 是否更新存量节点 */
+  /** 是否更新存量节点MetaData(包括： metadata、annotation、label) */
   UpdateExistedNode?: boolean;
   /** 数据盘列表 */
   DataDisks?: DataDisk[];
+  /** 节点management参数存量更新开关，有enable（打开）、disable（关闭）两个状态可选management包括：nameserver、host、kubelet、kernel参数 */
+  UpdateMachineManagement?: string;
   /** ssh公钥id数组 */
   KeyIds?: string[];
   /** 节点移出策略，有Random（随机）、Newest（优先移出最新实例）、Oldest（优先移出最旧实例）三种可选，默认是Newest */
@@ -987,6 +989,8 @@ declare interface ModifyClusterMachineRequest {
   DisplayName?: string;
   /** 系统盘的信息 */
   SystemDisk?: Disk;
+  /** 安全组列表 */
+  SecurityGroupIDs?: string[];
   /** 节点预付费信息 */
   InstanceChargePrepaid?: InstanceChargePrepaid;
 }
@@ -3911,7 +3915,7 @@ declare namespace V20180525 {
     UpgradeStartAt?: string;
     /** 升级结束时间 */
     UpgradeEndAt?: string;
-    /** 升级状态 */
+    /** 升级状态，包括以下状态值：- Pending：等待中- Processing：升级配置处理中- Running：升级中- Succeed：升级成功- Failed：升级失败- Cancelled：已取消 */
     Status?: string;
     /** 原因 */
     Reason?: string;
