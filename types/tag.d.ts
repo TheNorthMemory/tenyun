@@ -455,7 +455,7 @@ declare interface DescribeTagValuesRequest {
   CreateUin?: number;
   /** 数据偏移量，默认为 0, 必须为Limit参数的整数倍 */
   Offset?: number;
-  /** 每页大小，默认为 15 */
+  /** 每页大小，默认为 15，最大1000 */
   Limit?: number;
   /** 标签类型。取值： Custom：自定义标签。 System：系统标签。 All：全部标签。 默认值：All。 */
   Category?: string;
@@ -505,7 +505,7 @@ declare interface DescribeTagsRequest {
   TagValue?: string;
   /** 数据偏移量，默认为 0, 必须为Limit参数的整数倍 */
   Offset?: number;
-  /** 每页大小，默认为 15 */
+  /** 每页大小，默认为 15，最大1000 */
   Limit?: number;
   /** 创建者用户 Uin，不传或为空只将 Uin 作为条件查询 */
   CreateUin?: number;

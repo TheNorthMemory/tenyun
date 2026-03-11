@@ -210,6 +210,56 @@ declare interface ScoreInfo {
   StaticAvaliableScore?: string;
 }
 
+/** project Score分数实体 */
+declare interface ScoreInfoV2 {
+  /** 项目id */
+  ProjectID?: number;
+  /** 项目总分 */
+  Score?: number;
+  /** API性能评分 */
+  ApiPerformanceScore?: number;
+  /** API可用性评分 */
+  ApiAvailableScore?: number;
+  /** API调用总数 */
+  ApiNum?: number;
+  /** API失败次数 */
+  ApiFail?: number;
+  /** API平均持续时间 */
+  ApiDuration?: number;
+  /** 页面性能评分 */
+  PagePerformanceScore?: number;
+  /** 页面浏览量 */
+  PagePv?: number;
+  /** 独立访客数 */
+  PageUv?: number;
+  /** 页面错误数 */
+  PageError?: number;
+  /** 首屏时间 */
+  PageDuration?: number;
+  /** 平均 LCP */
+  PageLCP?: number;
+  /** 平均 FID */
+  PageFID?: number;
+  /** 平均 CLS */
+  PageCLS?: number;
+  /** 平均 FCP */
+  PageFCP?: number;
+  /** 平均 INP */
+  PageINP?: number;
+  /** JavaScript错误评分 */
+  JsErrorScore?: number;
+  /** 静态资源可用性评分 */
+  StaticAvailableScore?: number;
+  /** 静态资源性能评分 */
+  StaticPerformanceScore?: number;
+  /** 静态资源请求总数 */
+  StaticNum?: number;
+  /** 静态资源加载失败数 */
+  StaticFail?: number;
+  /** 静态资源加载时间 */
+  StaticDuration?: number;
+}
+
 /** 标签 */
 declare interface Tag {
   /** 标签key */
@@ -313,13 +363,13 @@ declare interface CreateTawInstanceRequest {
   PeriodRetain?: string;
   /** 实例购买渠道("cdn" 等) */
   BuyingChannel?: string;
-  /** 预付费资源包类型(仅预付费需要) */
+  /** 资源包类型：1=5百万/30天，2=10百万/30天，3=50百万/180天，4=100百万/180天，5=300百万/180天，6=500百万/180天，7=1000百万/180天，8=2500百万/180天，9=10000百万/360天（单位：上报量=百万条，周期=天） */
   ResourcePackageType?: number;
   /** 预付费资源包数量(仅预付费需要) */
   ResourcePackageNum?: number;
   /** 实例类型 1:原web相关类型 2:app端类型 */
   InstanceType?: number;
-  /** 自动续费类型 */
+  /** 自动续费类型：0=不自动续费，1=开启自动续费；开启时需填写 AutoRenewalThreshold（1~50%）；同一实例最多允许存在 1 个自动续费资源包。 */
   AutoRenewalType?: number;
   /** 自动续费阈值 */
   AutoRenewalThreshold?: number;
@@ -532,7 +582,141 @@ declare interface DescribeAppSingleCaseListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDataBridgeUrlV2Request {
+  /** 项目ID */
+  ID: number;
+  /** 开始时间 */
+  StartTime: number;
+  /** 结束时间 */
+  EndTime: number;
+  /** pagepv：性能视图，allcount：性能视图，falls：页面加载瀑布图，samp：首屏时间，day：14天数据，nettype：网络/平台视图，performance：页面性能TOP视图，version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：ISP视图/地区视图/浏览器视图等 */
+  Type: string;
+  /** 日志等级 */
+  Level?: string;
+  /** 运营商 */
+  Isp?: string;
+  /** 地区 */
+  Area?: string;
+  /** 网络类型 */
+  NetType?: string;
+  /** 平台 */
+  Platform?: string;
+  /** 机型 */
+  Device?: string;
+  /** 版本 */
+  VersionNum?: string;
+  /** 自定义1 */
+  ExtFirst?: string;
+  /** 自定义2 */
+  ExtSecond?: string;
+  /** 自定义3 */
+  ExtThird?: string;
+  /** 是否海外 */
+  IsAbroad?: string;
+  /** 浏览器 */
+  Browser?: string;
+  /** 操作系统 */
+  Os?: string;
+  /** 浏览器引擎 */
+  Engine?: string;
+  /** 品牌 */
+  Brand?: string;
+  /** 来源页面 */
+  From?: string;
+  /** 耗时计算方式 */
+  CostType?: string;
+  /** 环境变量 */
+  Env?: string;
+  /** url名称 */
+  Name?: string;
+  /** http状态码 */
+  Status?: string;
+  /** retcode */
+  Ret?: string;
+  /** 网络状态 */
+  NetStatus?: string;
+  /** 自定义4 */
+  ExtFourth?: string;
+  /** 自定义5 */
+  ExtFifth?: string;
+  /** 自定义6 */
+  ExtSixth?: string;
+  /** 自定义7 */
+  ExtSeventh?: string;
+  /** 自定义8 */
+  ExtEighth?: string;
+  /** 自定义9 */
+  ExtNinth?: string;
+  /** 自定义10 */
+  ExtTenth?: string;
+  /** 时间段 */
+  Granularity?: string;
+}
+
+declare interface DescribeDataBridgeUrlV2Response {
+  /** 返回值 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDataCustomUrlRequest {
+  /** 开始时间 */
+  StartTime: number;
+  /** top：资源top视图，allcount：性能视图，day：14天数据，condition：条件列表，pagepv：性能视图，area：请求速度分布，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等 */
+  Type: string;
+  /** 结束时间 */
+  EndTime: number;
+  /** 项目ID */
+  ID: number;
+  /** 自定义2 */
+  ExtSecond?: string;
+  /** 浏览器引擎 */
+  Engine?: string;
+  /** 运营商 */
+  Isp?: string;
+  /** 来源页面 */
+  From?: string;
+  /** 日志等级 */
+  Level?: string;
+  /** 品牌 */
+  Brand?: string;
+  /** 地区 */
+  Area?: string;
+  /** 版本 */
+  VersionNum?: string;
+  /** 平台 */
+  Platform?: string;
+  /** 自定义3 */
+  ExtThird?: string;
+  /** 自定义1 */
+  ExtFirst?: string;
+  /** 网络类型（1,2,3,4,5,100），1表示WIFI, 2表示2G, 3表示3G, 4表示4G, 5表示5G, 6表示6G, 100表示未知。 */
+  NetType?: string;
+  /** 机型 */
+  Device?: string;
+  /** 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
+  IsAbroad?: string;
+  /** 操作系统 */
+  Os?: string;
+  /** 浏览器 */
+  Browser?: string;
+  /** 耗时口径："50"/"75"/"90"/"95"/"99"/"99.5" 分别表示 TP50/TP75/TP90/TP95/TP99/TP99.5（使用 percentile2 计算分位数）；"avg" 表示均值（使用 avg 计算）。 */
+  CostType?: string;
+  /** 自定义测速的key的值 */
+  Url?: string;
+  /** 环境 */
+  Env?: string;
+}
+
+declare interface DescribeDataCustomUrlResponse {
+  /** 返回值 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDataCustomUrlV2Request {
   /** 开始时间 */
   StartTime: number;
   /** top：资源top视图，allcount：性能视图，day：14天数据，condition：条件列表，pagepv：性能视图，area：请求速度分布，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等 */
@@ -579,9 +763,25 @@ declare interface DescribeDataCustomUrlRequest {
   Url?: string;
   /** 环境 */
   Env?: string;
+  /** 自定义4 */
+  ExtFourth?: string;
+  /** 自定义5 */
+  ExtFifth?: string;
+  /** 自定义6 */
+  ExtSixth?: string;
+  /** 自定义7 */
+  ExtSeventh?: string;
+  /** 自定义8 */
+  ExtEighth?: string;
+  /** 自定义9 */
+  ExtNinth?: string;
+  /** 自定义10 */
+  ExtTenth?: string;
+  /** 时间段 */
+  Granularity?: string;
 }
 
-declare interface DescribeDataCustomUrlResponse {
+declare interface DescribeDataCustomUrlV2Response {
   /** 返回值 */
   Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -589,6 +789,60 @@ declare interface DescribeDataCustomUrlResponse {
 }
 
 declare interface DescribeDataEventUrlRequest {
+  /** 开始时间 */
+  StartTime: number;
+  /** allcount：性能视图，day：14天数据，condition：条件列表，ckuv：获取uv趋势，ckpv：获取pv趋势，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等 */
+  Type: string;
+  /** 结束时间 */
+  EndTime: number;
+  /** 项目ID */
+  ID: number;
+  /** 自定义2 */
+  ExtSecond?: string;
+  /** 浏览器引擎 */
+  Engine?: string;
+  /** 运营商 */
+  Isp?: string;
+  /** 来源页面 */
+  From?: string;
+  /** 日志等级 */
+  Level?: string;
+  /** 品牌 */
+  Brand?: string;
+  /** 地区 */
+  Area?: string;
+  /** 版本 */
+  VersionNum?: string;
+  /** 平台 */
+  Platform?: string;
+  /** 自定义3 */
+  ExtThird?: string;
+  /** 自定义1 */
+  ExtFirst?: string;
+  /** netType | 网络类型(tag 值):用于过滤/聚合字段 netType；枚举值：1(WiFi)、2(2G)、3(3G)、4(4G)、5(5G)、6(6G)、100(未知网络)。也可通过 Type=condition（show tag values）查询当前数据集中的实际可选值。 */
+  NetType?: string;
+  /** 机型 */
+  Device?: string;
+  /** 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
+  IsAbroad?: string;
+  /** 操作系统 */
+  Os?: string;
+  /** 浏览器 */
+  Browser?: string;
+  /** 筛选条件 */
+  Name?: string;
+  /** 环境 */
+  Env?: string;
+}
+
+declare interface DescribeDataEventUrlResponse {
+  /** 返回值 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDataEventUrlV2Request {
   /** 开始时间 */
   StartTime: number;
   /** allcount：性能视图，day：14天数据，condition：条件列表，ckuv：获取uv趋势，ckpv：获取pv趋势，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等 */
@@ -633,9 +887,25 @@ declare interface DescribeDataEventUrlRequest {
   Name?: string;
   /** 环境 */
   Env?: string;
+  /** 自定义4 */
+  ExtFourth?: string;
+  /** 自定义5 */
+  ExtFifth?: string;
+  /** 自定义6 */
+  ExtSixth?: string;
+  /** 自定义7 */
+  ExtSeventh?: string;
+  /** 自定义8 */
+  ExtEighth?: string;
+  /** 自定义9 */
+  ExtNinth?: string;
+  /** 自定义10 */
+  ExtTenth?: string;
+  /** 时间段 */
+  Granularity?: string;
 }
 
-declare interface DescribeDataEventUrlResponse {
+declare interface DescribeDataEventUrlV2Response {
   /** 返回值 */
   Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -683,13 +953,13 @@ declare interface DescribeDataFetchProjectRequest {
   Os?: string;
   /** 浏览器 */
   Browser?: string;
-  /** 耗时计算方式 */
+  /** 耗时口径："50"/"75"/"90"/"95"/"99"/"99.5" 分别表示 TP50/TP75/TP90/TP95/TP99/TP99.5（percentile2）；"avg" 表示均值（avg）。 */
   CostType?: string;
   /** 来源 */
   Url?: string;
   /** 环境 */
   Env?: string;
-  /** httpcode响应码 */
+  /** HTTP 状态码（tag 值）：用于过滤字段 status；取值一般为 200/301/404/500 等，也可配合 4xx/5xx 统计逻辑使用 */
   Status?: string;
   /** retcode */
   Ret?: string;
@@ -733,7 +1003,7 @@ declare interface DescribeDataFetchUrlInfoRequest {
   ExtThird?: string;
   /** 自定义1 */
   ExtFirst?: string;
-  /** 网络类型 */
+  /** 网络类型(tag 值):用于过滤/聚合字段 netType；枚举值：1(WiFi)、2(2G)、3(3G)、4(4G)、5(5G)、6(6G)、100(未知网络)。 */
   NetType?: string;
   /** 机型 */
   Device?: string;
@@ -743,7 +1013,7 @@ declare interface DescribeDataFetchUrlInfoRequest {
   Os?: string;
   /** 浏览器 */
   Browser?: string;
-  /** 耗时计算方式 */
+  /** 耗时口径："50"/"75"/"90"/"95"/"99"/"99.5" 分别表示 TP50/TP75/TP90/TP95/TP99/TP99.5（percentile2）；"avg" 表示均值（avg）。 */
   CostType?: string;
   /** 来源 */
   Url?: string;
@@ -759,6 +1029,68 @@ declare interface DescribeDataFetchUrlInfoResponse {
 }
 
 declare interface DescribeDataFetchUrlRequest {
+  /** 开始时间 */
+  StartTime: number;
+  /** allcount：性能视图，pagepv：pv视图，day：14天数据，count40x：40X视图，count50x：50X视图，count5xand4x：40∑50视图，top：资源top视图，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等 */
+  Type: string;
+  /** 结束时间 */
+  EndTime: number;
+  /** 项目ID */
+  ID: number;
+  /** 自定义2 */
+  ExtSecond?: string;
+  /** 浏览器引擎 */
+  Engine?: string;
+  /** 运营商 */
+  Isp?: string;
+  /** 来源页面 */
+  From?: string;
+  /** 日志等级 */
+  Level?: string;
+  /** 品牌 */
+  Brand?: string;
+  /** 地区 */
+  Area?: string;
+  /** 版本 */
+  VersionNum?: string;
+  /** 平台 */
+  Platform?: string;
+  /** 自定义3 */
+  ExtThird?: string;
+  /** 自定义1 */
+  ExtFirst?: string;
+  /** 网络类型(tag 值):用于过滤/聚合字段 netType；枚举值：1(WiFi)、2(2G)、3(3G)、4(4G)、5(5G)、6(6G)、100(未知网络)。 */
+  NetType?: string;
+  /** 机型 */
+  Device?: string;
+  /** 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
+  IsAbroad?: string;
+  /** 操作系统 */
+  Os?: string;
+  /** 浏览器 */
+  Browser?: string;
+  /** 耗时口径："50"/"75"/"90"/"95"/"99"/"99.5" 分别表示 TP50/TP75/TP90/TP95/TP99/TP99.5（percentile2）；"avg" 表示均值（avg）。 */
+  CostType?: string;
+  /** 来源 */
+  Url?: string;
+  /** 环境 */
+  Env?: string;
+  /** HTTP 状态码（tag 值）：用于过滤字段 status；支持 4xx（status =~ /4[0-9]{2}/）和 5xx（status =~ /5[0-9]{2}/）等错误码统计。 */
+  Status?: string;
+  /** retcode */
+  Ret?: string;
+  /** 网络状态 */
+  NetStatus?: string;
+}
+
+declare interface DescribeDataFetchUrlResponse {
+  /** 返回值 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDataFetchUrlV2Request {
   /** 开始时间 */
   StartTime: number;
   /** allcount：性能视图，pagepv：pv视图，day：14天数据，count40x：40X视图，count50x：50X视图，count5xand4x：40∑50视图，top：资源top视图，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等 */
@@ -811,9 +1143,25 @@ declare interface DescribeDataFetchUrlRequest {
   Ret?: string;
   /** 网络状态 */
   NetStatus?: string;
+  /** 自定义4 */
+  ExtFourth?: string;
+  /** 自定义5 */
+  ExtFifth?: string;
+  /** 自定义6 */
+  ExtSixth?: string;
+  /** 自定义7 */
+  ExtSeventh?: string;
+  /** 自定义8 */
+  ExtEighth?: string;
+  /** 自定义9 */
+  ExtNinth?: string;
+  /** 自定义10 */
+  ExtTenth?: string;
+  /** 时间段 */
+  Granularity?: string;
 }
 
-declare interface DescribeDataFetchUrlResponse {
+declare interface DescribeDataFetchUrlV2Response {
   /** 返回值 */
   Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -867,7 +1215,7 @@ declare interface DescribeDataLogUrlStatisticsRequest {
   ExtThird?: string;
   /** 自定义1 */
   ExtFirst?: string;
-  /** 网络类型 */
+  /** 网络类型(tag 值):用于过滤/聚合字段 netType；枚举值：1(WiFi)、2(2G)、3(3G)、4(4G)、5(5G)、6(6G)、100(未知网络)。 */
   NetType?: string;
   /** 机型 */
   Device?: string;
@@ -890,7 +1238,135 @@ declare interface DescribeDataLogUrlStatisticsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDataLogUrlStatisticsV2Request {
+  /** 开始时间 */
+  StartTime: number;
+  /** analysis：异常分析，compare：异常列表对比，allcount：性能视图，condition：条件列表，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等 */
+  Type: string;
+  /** 结束时间 */
+  EndTime: number;
+  /** 项目ID */
+  ID: number;
+  /** 自定义2 */
+  ExtSecond?: string;
+  /** 浏览器引擎 */
+  Engine?: string;
+  /** 运营商 */
+  Isp?: string;
+  /** 来源页面 */
+  From?: string;
+  /** 日志等级 */
+  Level?: string;
+  /** 品牌 */
+  Brand?: string;
+  /** 地区 */
+  Area?: string;
+  /** 版本 */
+  VersionNum?: string;
+  /** 平台 */
+  Platform?: string;
+  /** 自定义3 */
+  ExtThird?: string;
+  /** 自定义1 */
+  ExtFirst?: string;
+  /** 网络类型 */
+  NetType?: string;
+  /** 机型 */
+  Device?: string;
+  /** 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
+  IsAbroad?: string;
+  /** 操作系统 */
+  Os?: string;
+  /** 浏览器 */
+  Browser?: string;
+  /** 环境区分 */
+  Env?: string;
+  /** js异常信息 */
+  ErrorMsg?: string;
+  /** 自定义4 */
+  ExtFourth?: string;
+  /** 自定义5 */
+  ExtFifth?: string;
+  /** 自定义6 */
+  ExtSixth?: string;
+  /** 自定义7 */
+  ExtSeventh?: string;
+  /** 自定义8 */
+  ExtEighth?: string;
+  /** 自定义9 */
+  ExtNinth?: string;
+  /** 自定义10 */
+  ExtTenth?: string;
+  /** 时间段 */
+  Granularity?: string;
+}
+
+declare interface DescribeDataLogUrlStatisticsV2Response {
+  /** 返回值 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDataPerformancePageRequest {
+  /** 项目ID */
+  ID: number;
+  /** 开始时间 */
+  StartTime: number;
+  /** 结束时间 */
+  EndTime: number;
+  /** pagepv：pv视图，allcount：性能视图，falls：页面加载瀑布图，samp：首屏时间，day：14天数据，nettype：网络/平台视图，performance：页面性能TOP视图，version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：ISP视图/地区视图/浏览器视图等 */
+  Type: string;
+  /** 日志等级 */
+  Level?: string;
+  /** 运营商 */
+  Isp?: string;
+  /** 地区 */
+  Area?: string;
+  /** 网络类型(tag 值):用于过滤/聚合字段 netType；枚举值：1(WiFi)、2(2G)、3(3G)、4(4G)、5(5G)、6(6G)、100(未知网络)。 */
+  NetType?: string;
+  /** 平台 */
+  Platform?: string;
+  /** 机型 */
+  Device?: string;
+  /** 版本 */
+  VersionNum?: string;
+  /** 自定义1 */
+  ExtFirst?: string;
+  /** 自定义2 */
+  ExtSecond?: string;
+  /** 自定义3 */
+  ExtThird?: string;
+  /** 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
+  IsAbroad?: string;
+  /** 浏览器 */
+  Browser?: string;
+  /** 操作系统 */
+  Os?: string;
+  /** 浏览器引擎 */
+  Engine?: string;
+  /** 品牌 */
+  Brand?: string;
+  /** 来源页面 */
+  From?: string;
+  /** 耗时口径："50"/"75"/"90"/"95"/"99"/"99.5" 分别表示 TP50/TP75/TP90/TP95/TP99/TP99.5（percentile2）；"avg" 表示均值（avg）。 */
+  CostType?: string;
+  /** 环境变量 */
+  Env?: string;
+  /** 网络状态(tag 值):用于过滤/聚合字段 netStatus；枚举值：0(正常)、1(弱网)、2(断网)、3(其他)。 */
+  NetStatus?: string;
+  /** 是否返回webvitals数据 */
+  WebVitals?: boolean;
+}
+
+declare interface DescribeDataPerformancePageResponse {
+  /** 返回值 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDataPerformancePageV2Request {
   /** 项目ID */
   ID: number;
   /** 开始时间 */
@@ -939,9 +1415,25 @@ declare interface DescribeDataPerformancePageRequest {
   NetStatus?: string;
   /** 是否返回webvitals数据 */
   WebVitals?: boolean;
+  /** 自定义4 */
+  ExtFourth?: string;
+  /** 自定义5 */
+  ExtFifth?: string;
+  /** 自定义6 */
+  ExtSixth?: string;
+  /** 自定义7 */
+  ExtSeventh?: string;
+  /** 自定义8 */
+  ExtEighth?: string;
+  /** 自定义9 */
+  ExtNinth?: string;
+  /** 自定义10 */
+  ExtTenth?: string;
+  /** 时间段 */
+  Granularity?: string;
 }
 
-declare interface DescribeDataPerformancePageResponse {
+declare interface DescribeDataPerformancePageV2Response {
   /** 返回值 */
   Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -951,7 +1443,7 @@ declare interface DescribeDataPerformancePageResponse {
 declare interface DescribeDataPvUrlInfoRequest {
   /** 开始时间 */
   StartTime: number;
-  /** 类型 */
+  /** 查询类型（string）：当前后端实现固定按 from 聚合统计，未使用该字段（保留字段，传值不会影响结果）。 */
   Type: string;
   /** 结束时间 */
   EndTime: number;
@@ -979,7 +1471,7 @@ declare interface DescribeDataPvUrlInfoRequest {
   ExtThird?: string;
   /** 自定义1 */
   ExtFirst?: string;
-  /** 网络类型 */
+  /** 网络类型(tag 值):用于过滤/聚合字段 netType；枚举值：1(WiFi)、2(2G)、3(3G)、4(4G)、5(5G)、6(6G)、100(未知网络)。 */
   NetType?: string;
   /** 机型 */
   Device?: string;
@@ -1003,7 +1495,7 @@ declare interface DescribeDataPvUrlInfoResponse {
 declare interface DescribeDataPvUrlStatisticsRequest {
   /** 开始时间 */
   StartTime: number;
-  /** allcount：性能视图，day：14天数据，vp：性能，ckuv：uv，ckpv：pv，condition：条件列表，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等 */
+  /** allcount：性能视图，day：14天数据，vp：性能，ckuv：uv，ckpv：pv，condition：条件列表，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等 */
   Type: string;
   /** 结束时间 */
   EndTime: number;
@@ -1031,7 +1523,7 @@ declare interface DescribeDataPvUrlStatisticsRequest {
   ExtThird?: string;
   /** 自定义1 */
   ExtFirst?: string;
-  /** 网络类型 */
+  /** 网络类型(tag 值):用于过滤/聚合字段 netType；枚举值：1(WiFi)、2(2G)、3(3G)、4(4G)、5(5G)、6(6G)、100(未知网络)。 */
   NetType?: string;
   /** 机型 */
   Device?: string;
@@ -1087,7 +1579,7 @@ declare interface DescribeDataPvUrlStatisticsV2Request {
   ExtThird?: string;
   /** 自定义1 */
   ExtFirst?: string;
-  /** 网络类型 */
+  /** 网络类型（1,2,3,4,5,100），1表示WIFI, 2表示2G, 3表示3G, 4表示4G, 5表示5G, 6表示6G, 100表示未知 */
   NetType?: string;
   /** 机型 */
   Device?: string;
@@ -1213,6 +1705,62 @@ declare interface DescribeDataSetUrlStatisticsRequest {
   ExtThird?: string;
   /** 自定义1 */
   ExtFirst?: string;
+  /** 网络类型(tag 值):用于过滤/聚合字段 netType；枚举值：1(WiFi)、2(2G)、3(3G)、4(4G)、5(5G)、6(6G)、100(未知网络)。 */
+  NetType?: string;
+  /** 机型 */
+  Device?: string;
+  /** 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
+  IsAbroad?: string;
+  /** 操作系统 */
+  Os?: string;
+  /** 浏览器 */
+  Browser?: string;
+  /** 耗时/数据量口径："50"/"75"/"90"/"95"/"99"/"99.5" 分别表示 TP50/TP75/TP90/TP95/TP99/TP99.5（percentile2）；"avg" 表示均值（avg）。 */
+  CostType?: string;
+  /** 环境 */
+  Env?: string;
+  /** 小程序包类型（tag 值）：用于过滤字段 type（请求参数名为 PackageType）；取值由上报数据决定，可通过 Type=condition（show tag values）获取可选值集合。 */
+  PackageType?: string;
+}
+
+declare interface DescribeDataSetUrlStatisticsResponse {
+  /** 返回值 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDataSetUrlStatisticsV2Request {
+  /** 开始时间 */
+  StartTime: number;
+  /** allcount：性能视图，data：小程序，component：小程序相关，day：14天数据，nettype：网络/平台视图，performance：页面性能TOP视图，version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：ISP视图/地区视图/浏览器视图等 */
+  Type: string;
+  /** 结束时间 */
+  EndTime: number;
+  /** 项目ID */
+  ID: number;
+  /** 自定义2 */
+  ExtSecond?: string;
+  /** 浏览器引擎 */
+  Engine?: string;
+  /** 运营商 */
+  Isp?: string;
+  /** 来源页面 */
+  From?: string;
+  /** 日志等级 */
+  Level?: string;
+  /** 品牌 */
+  Brand?: string;
+  /** 地区 */
+  Area?: string;
+  /** 版本 */
+  VersionNum?: string;
+  /** 平台 */
+  Platform?: string;
+  /** 自定义3 */
+  ExtThird?: string;
+  /** 自定义1 */
+  ExtFirst?: string;
   /** 网络类型 */
   NetType?: string;
   /** 机型 */
@@ -1229,9 +1777,25 @@ declare interface DescribeDataSetUrlStatisticsRequest {
   Env?: string;
   /** 获取package */
   PackageType?: string;
+  /** 自定义4 */
+  ExtFourth?: string;
+  /** 自定义5 */
+  ExtFifth?: string;
+  /** 自定义6 */
+  ExtSixth?: string;
+  /** 自定义7 */
+  ExtSeventh?: string;
+  /** 自定义8 */
+  ExtEighth?: string;
+  /** 自定义9 */
+  ExtNinth?: string;
+  /** 自定义10 */
+  ExtTenth?: string;
+  /** 时间段 */
+  Granularity?: string;
 }
 
-declare interface DescribeDataSetUrlStatisticsResponse {
+declare interface DescribeDataSetUrlStatisticsV2Response {
   /** 返回值 */
   Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1279,7 +1843,7 @@ declare interface DescribeDataStaticProjectRequest {
   Os?: string;
   /** 浏览器 */
   Browser?: string;
-  /** 耗时计算 */
+  /** 耗时口径："50"/"75"/"90"/"95"/"99"/"99.5" 分别表示 TP50/TP75/TP90/TP95/TP99/TP99.5（percentile2）；"avg" 表示均值（avg）。 */
   CostType?: string;
   /** 来源 */
   Url?: string[];
@@ -1294,7 +1858,135 @@ declare interface DescribeDataStaticProjectResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDataStaticProjectV2Request {
+  /** 开始时间 */
+  StartTime: number;
+  /** allcount：性能视图，day：14天数据，condition：条件列表，area：请求速度分布，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等 */
+  Type: string;
+  /** 结束时间 */
+  EndTime: number;
+  /** 项目ID */
+  ID: number;
+  /** 自定义2 */
+  ExtSecond?: string;
+  /** 浏览器引擎 */
+  Engine?: string;
+  /** 运营商 */
+  Isp?: string;
+  /** 来源页面 */
+  From?: string;
+  /** 日志等级（1表示白名单日志，2表示一般日志，4表示错误日志，8表示Promise 错误，16表示Ajax 请求异常，32表示JS 加载异常，64表示图片加载异常，128表示css 加载异常，256表示console.error，512表示音视频资源异常，1024表示retcode 异常，2048表示aegis report，4096表示PV日志，8192表示自定义事件，16384表示小程序 页面不存在，32768表示websocket错误，65536表示js bridge错误） */
+  Level?: string;
+  /** 品牌 */
+  Brand?: string;
+  /** 地区 */
+  Area?: string;
+  /** 版本 */
+  VersionNum?: string;
+  /** 平台 */
+  Platform?: string;
+  /** 自定义3 */
+  ExtThird?: string;
+  /** 自定义1 */
+  ExtFirst?: string;
+  /** 网络类型（1,2,3,4,5,100），1表示WIFI, 2表示2G, 3表示3G, 4表示4G, 5表示5G, 6表示6G, 100表示未知。 */
+  NetType?: string;
+  /** 机型 */
+  Device?: string;
+  /** 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
+  IsAbroad?: string;
+  /** 操作系统 */
+  Os?: string;
+  /** 浏览器 */
+  Browser?: string;
+  /** 耗时计算 */
+  CostType?: string;
+  /** 来源 */
+  Url?: string[];
+  /** 环境 */
+  Env?: string;
+  /** 自定义4 */
+  ExtFourth?: string;
+  /** 自定义5 */
+  ExtFifth?: string;
+  /** 自定义6 */
+  ExtSixth?: string;
+  /** 自定义7 */
+  ExtSeventh?: string;
+  /** 自定义8 */
+  ExtEighth?: string;
+  /** 自定义9 */
+  ExtNinth?: string;
+  /** 自定义10 */
+  ExtTenth?: string;
+  /** 时间段 */
+  Granularity?: string;
+}
+
+declare interface DescribeDataStaticProjectV2Response {
+  /** 返回值 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDataStaticResourceRequest {
+  /** 开始时间 */
+  StartTime: number;
+  /** top：资源top视图，count40x：40X视图，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图//ext1视图等等 */
+  Type: string;
+  /** 结束时间 */
+  EndTime: number;
+  /** 项目ID */
+  ID: number;
+  /** 自定义2 */
+  ExtSecond?: string;
+  /** 浏览器引擎 */
+  Engine?: string;
+  /** 运营商 */
+  Isp?: string;
+  /** 来源页面 */
+  From?: string;
+  /** 日志等级 */
+  Level?: string;
+  /** 品牌 */
+  Brand?: string;
+  /** 地区 */
+  Area?: string;
+  /** 版本 */
+  VersionNum?: string;
+  /** 平台 */
+  Platform?: string;
+  /** 自定义3 */
+  ExtThird?: string;
+  /** 自定义1 */
+  ExtFirst?: string;
+  /** 网络类型(tag 值):用于过滤/聚合字段 netType；枚举值：1(WiFi)、2(2G)、3(3G)、4(4G)、5(5G)、6(6G)、100(未知网络)。 */
+  NetType?: string;
+  /** 机型 */
+  Device?: string;
+  /** 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
+  IsAbroad?: string;
+  /** 操作系统 */
+  Os?: string;
+  /** 浏览器 */
+  Browser?: string;
+  /** 耗时口径："50"/"75"/"90"/"95"/"99"/"99.5" 分别表示 TP50/TP75/TP90/TP95/TP99/TP99.5（percentile2）；"avg" 表示均值（avg）。 */
+  CostType?: string;
+  /** 来源 */
+  Url?: string;
+  /** 环境 */
+  Env?: string;
+}
+
+declare interface DescribeDataStaticResourceResponse {
+  /** 返回值 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDataStaticResourceV2Request {
   /** 开始时间 */
   StartTime: number;
   /** top：资源top视图，count40x：40X视图，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图//ext1视图等等 */
@@ -1341,9 +2033,25 @@ declare interface DescribeDataStaticResourceRequest {
   Url?: string;
   /** 环境 */
   Env?: string;
+  /** 自定义4 */
+  ExtFourth?: string;
+  /** 自定义5 */
+  ExtFifth?: string;
+  /** 自定义6 */
+  ExtSixth?: string;
+  /** 自定义7 */
+  ExtSeventh?: string;
+  /** 自定义8 */
+  ExtEighth?: string;
+  /** 自定义9 */
+  ExtNinth?: string;
+  /** 自定义10 */
+  ExtTenth?: string;
+  /** 时间段 */
+  Granularity?: string;
 }
 
-declare interface DescribeDataStaticResourceResponse {
+declare interface DescribeDataStaticResourceV2Response {
   /** 返回值 */
   Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1351,6 +2059,62 @@ declare interface DescribeDataStaticResourceResponse {
 }
 
 declare interface DescribeDataStaticUrlRequest {
+  /** 开始时间 */
+  StartTime: number;
+  /** pagepv：性能视图，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图//ext1视图等等 */
+  Type: string;
+  /** 结束时间 */
+  EndTime: number;
+  /** 项目ID */
+  ID: number;
+  /** 自定义2 */
+  ExtSecond?: string;
+  /** 浏览器引擎 */
+  Engine?: string;
+  /** 运营商 */
+  Isp?: string;
+  /** 来源页面 */
+  From?: string;
+  /** 日志等级 */
+  Level?: string;
+  /** 品牌 */
+  Brand?: string;
+  /** 地区 */
+  Area?: string;
+  /** 版本 */
+  VersionNum?: string;
+  /** 平台 */
+  Platform?: string;
+  /** 自定义3 */
+  ExtThird?: string;
+  /** 自定义1 */
+  ExtFirst?: string;
+  /** 网络类型(tag 值):用于过滤/聚合字段 netType；枚举值：1(WiFi)、2(2G)、3(3G)、4(4G)、5(5G)、6(6G)、100(未知网络)。 */
+  NetType?: string;
+  /** 机型 */
+  Device?: string;
+  /** 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
+  IsAbroad?: string;
+  /** 操作系统 */
+  Os?: string;
+  /** 浏览器 */
+  Browser?: string;
+  /** 耗时口径："50"/"75"/"90"/"95"/"99"/"99.5" 分别表示 TP50/TP75/TP90/TP95/TP99/TP99.5（percentile2）；"avg" 表示均值（avg）。 */
+  CostType?: string;
+  /** 来源 */
+  Url?: string;
+  /** 环境 */
+  Env?: string;
+}
+
+declare interface DescribeDataStaticUrlResponse {
+  /** 返回值 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDataStaticUrlV2Request {
   /** 开始时间 */
   StartTime: number;
   /** pagepv：性能视图，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图//ext1视图等等 */
@@ -1397,9 +2161,25 @@ declare interface DescribeDataStaticUrlRequest {
   Url?: string;
   /** 环境 */
   Env?: string;
+  /** 自定义4 */
+  ExtFourth?: string;
+  /** 自定义5 */
+  ExtFifth?: string;
+  /** 自定义6 */
+  ExtSixth?: string;
+  /** 自定义7 */
+  ExtSeventh?: string;
+  /** 自定义8 */
+  ExtEighth?: string;
+  /** 自定义9 */
+  ExtNinth?: string;
+  /** 自定义10 */
+  ExtTenth?: string;
+  /** 时间段 */
+  Granularity?: string;
 }
 
-declare interface DescribeDataStaticUrlResponse {
+declare interface DescribeDataStaticUrlV2Response {
   /** 返回值 */
   Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1407,6 +2187,60 @@ declare interface DescribeDataStaticUrlResponse {
 }
 
 declare interface DescribeDataWebVitalsPageRequest {
+  /** 开始时间 */
+  StartTime: number;
+  /** 结束时间 */
+  EndTime: number;
+  /** 项目ID */
+  ID: number;
+  /** 自定义2 */
+  ExtSecond?: string;
+  /** 浏览器引擎 */
+  Engine?: string;
+  /** 运营商 */
+  Isp?: string;
+  /** 查询维度：from=按页面来源(from)聚合输出；其他值/空值=输出整体汇总。 */
+  From?: string;
+  /** 日志等级 */
+  Level?: string;
+  /** 类型暂无 */
+  Type?: string;
+  /** 品牌 */
+  Brand?: string;
+  /** 地区 */
+  Area?: string;
+  /** 版本 */
+  VersionNum?: string;
+  /** 平台 */
+  Platform?: string;
+  /** 自定义3 */
+  ExtThird?: string;
+  /** 自定义1 */
+  ExtFirst?: string;
+  /** 网络类型(tag 值):用于过滤/聚合字段 netType；枚举值：1(WiFi)、2(2G)、3(3G)、4(4G)、5(5G)、6(6G)、100(未知网络)。 */
+  NetType?: string;
+  /** 机型 */
+  Device?: string;
+  /** 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。 */
+  IsAbroad?: string;
+  /** 操作系统 */
+  Os?: string;
+  /** 浏览器 */
+  Browser?: string;
+  /** Web Vitals 口径："50"/"75"/"90"/"95"/"99"/"99.5" 分别表示 TP50/TP75/TP90/TP95/TP99/TP99.5（percentile2）；"avg" 表示均值（avg）。 */
+  CostType?: string;
+  /** 环境 */
+  Env?: string;
+}
+
+declare interface DescribeDataWebVitalsPageResponse {
+  /** 返回值 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDataWebVitalsPageV2Request {
   /** 开始时间 */
   StartTime: number;
   /** 结束时间 */
@@ -1451,9 +2285,11 @@ declare interface DescribeDataWebVitalsPageRequest {
   CostType?: string;
   /** 环境 */
   Env?: string;
+  /** 时间段 */
+  Granularity?: string;
 }
 
-declare interface DescribeDataWebVitalsPageResponse {
+declare interface DescribeDataWebVitalsPageV2Response {
   /** 返回值 */
   Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1698,6 +2534,26 @@ declare interface DescribeScoresResponse {
   RequestId?: string;
 }
 
+declare interface DescribeScoresV2Request {
+  /** 开始时间 */
+  StartTime: string;
+  /** 结束时间 */
+  EndTime: string;
+  /** 项目 ID 列表 */
+  IDList?: number[];
+  /** 查询粒度，hour 或 day */
+  Type?: string;
+  /** 环境 */
+  Env?: string;
+}
+
+declare interface DescribeScoresV2Response {
+  /** 项目得分数组 */
+  ScoreSet?: ScoreInfoV2[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTawAreasRequest {
   /** 片区Id */
   AreaIds?: number[];
@@ -1937,22 +2793,34 @@ declare interface Rum {
   DescribeAppSingleCaseList(data: DescribeAppSingleCaseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppSingleCaseListResponse>;
   /** 获取QueryData {@link DescribeDataRequest} {@link DescribeDataResponse} */
   DescribeData(data: DescribeDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataResponse>;
+  /** 获取DescribeDataBridgeUrlV2信息 {@link DescribeDataBridgeUrlV2Request} {@link DescribeDataBridgeUrlV2Response} */
+  DescribeDataBridgeUrlV2(data: DescribeDataBridgeUrlV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeDataBridgeUrlV2Response>;
   /** 获取DescribeDataCustomUrl信息 {@link DescribeDataCustomUrlRequest} {@link DescribeDataCustomUrlResponse} */
   DescribeDataCustomUrl(data: DescribeDataCustomUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataCustomUrlResponse>;
+  /** 获取DescribeDataCustomUrlV2信息 {@link DescribeDataCustomUrlV2Request} {@link DescribeDataCustomUrlV2Response} */
+  DescribeDataCustomUrlV2(data: DescribeDataCustomUrlV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeDataCustomUrlV2Response>;
   /** 获取DescribeDataEventUrl信息 {@link DescribeDataEventUrlRequest} {@link DescribeDataEventUrlResponse} */
   DescribeDataEventUrl(data: DescribeDataEventUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataEventUrlResponse>;
+  /** 获取DescribeDataEventUrl信息V2 {@link DescribeDataEventUrlV2Request} {@link DescribeDataEventUrlV2Response} */
+  DescribeDataEventUrlV2(data: DescribeDataEventUrlV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeDataEventUrlV2Response>;
   /** 获取DescribeDataFetchProject信息（已下线，请使用DescribeDataFetchUrl） {@link DescribeDataFetchProjectRequest} {@link DescribeDataFetchProjectResponse} */
   DescribeDataFetchProject(data: DescribeDataFetchProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataFetchProjectResponse>;
   /** 获取DescribeDataFetchUrl信息 {@link DescribeDataFetchUrlRequest} {@link DescribeDataFetchUrlResponse} */
   DescribeDataFetchUrl(data: DescribeDataFetchUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataFetchUrlResponse>;
   /** 获取DescribeDataFetchUrlInfo信息 {@link DescribeDataFetchUrlInfoRequest} {@link DescribeDataFetchUrlInfoResponse} */
   DescribeDataFetchUrlInfo(data: DescribeDataFetchUrlInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataFetchUrlInfoResponse>;
+  /** 获取DescribeDataFetchUrlV2信息 {@link DescribeDataFetchUrlV2Request} {@link DescribeDataFetchUrlV2Response} */
+  DescribeDataFetchUrlV2(data: DescribeDataFetchUrlV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeDataFetchUrlV2Response>;
   /** 获取dataloginfo信息 {@link DescribeDataLogUrlInfoRequest} {@link DescribeDataLogUrlInfoResponse} */
   DescribeDataLogUrlInfo(data: DescribeDataLogUrlInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataLogUrlInfoResponse>;
   /** 获取LogUrlStatistics信息 {@link DescribeDataLogUrlStatisticsRequest} {@link DescribeDataLogUrlStatisticsResponse} */
   DescribeDataLogUrlStatistics(data: DescribeDataLogUrlStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataLogUrlStatisticsResponse>;
+  /** 获取LogUrlStatistics信息V2 {@link DescribeDataLogUrlStatisticsV2Request} {@link DescribeDataLogUrlStatisticsV2Response} */
+  DescribeDataLogUrlStatisticsV2(data: DescribeDataLogUrlStatisticsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeDataLogUrlStatisticsV2Response>;
   /** 获取PerformancePage信息 {@link DescribeDataPerformancePageRequest} {@link DescribeDataPerformancePageResponse} */
   DescribeDataPerformancePage(data: DescribeDataPerformancePageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataPerformancePageResponse>;
+  /** 获取PerformancePage信息V2 {@link DescribeDataPerformancePageV2Request} {@link DescribeDataPerformancePageV2Response} */
+  DescribeDataPerformancePageV2(data: DescribeDataPerformancePageV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeDataPerformancePageV2Response>;
   /** 获取PvUrlInfo信息 {@link DescribeDataPvUrlInfoRequest} {@link DescribeDataPvUrlInfoResponse} */
   DescribeDataPvUrlInfo(data: DescribeDataPvUrlInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataPvUrlInfoResponse>;
   /** 获取DescribeDataPvUrlStatistics信息 {@link DescribeDataPvUrlStatisticsRequest} {@link DescribeDataPvUrlStatisticsResponse} */
@@ -1965,14 +2833,24 @@ declare interface Rum {
   DescribeDataReportCountV2(data: DescribeDataReportCountV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeDataReportCountV2Response>;
   /** 获取DescribeDataSetUrlStatistics信息 {@link DescribeDataSetUrlStatisticsRequest} {@link DescribeDataSetUrlStatisticsResponse} */
   DescribeDataSetUrlStatistics(data: DescribeDataSetUrlStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataSetUrlStatisticsResponse>;
+  /** 获取DescribeDataSetUrlStatisticsV2信息 {@link DescribeDataSetUrlStatisticsV2Request} {@link DescribeDataSetUrlStatisticsV2Response} */
+  DescribeDataSetUrlStatisticsV2(data: DescribeDataSetUrlStatisticsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeDataSetUrlStatisticsV2Response>;
   /** 获取DescribeDataStaticProject信息 {@link DescribeDataStaticProjectRequest} {@link DescribeDataStaticProjectResponse} */
   DescribeDataStaticProject(data: DescribeDataStaticProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataStaticProjectResponse>;
+  /** 获取DescribeDataStaticProjectV2信息 {@link DescribeDataStaticProjectV2Request} {@link DescribeDataStaticProjectV2Response} */
+  DescribeDataStaticProjectV2(data: DescribeDataStaticProjectV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeDataStaticProjectV2Response>;
   /** 获取DescribeDataStaticResource信息 {@link DescribeDataStaticResourceRequest} {@link DescribeDataStaticResourceResponse} */
   DescribeDataStaticResource(data: DescribeDataStaticResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataStaticResourceResponse>;
+  /** 获取DescribeDataStaticResourceV2信息 {@link DescribeDataStaticResourceV2Request} {@link DescribeDataStaticResourceV2Response} */
+  DescribeDataStaticResourceV2(data: DescribeDataStaticResourceV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeDataStaticResourceV2Response>;
   /** 获取DescribeDataStaticUrl信息 {@link DescribeDataStaticUrlRequest} {@link DescribeDataStaticUrlResponse} */
   DescribeDataStaticUrl(data: DescribeDataStaticUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataStaticUrlResponse>;
+  /** 获取DescribeDataStaticUrlV2信息 {@link DescribeDataStaticUrlV2Request} {@link DescribeDataStaticUrlV2Response} */
+  DescribeDataStaticUrlV2(data: DescribeDataStaticUrlV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeDataStaticUrlV2Response>;
   /** 获取DescribeDataWebVitalsPage信息 {@link DescribeDataWebVitalsPageRequest} {@link DescribeDataWebVitalsPageResponse} */
   DescribeDataWebVitalsPage(data: DescribeDataWebVitalsPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataWebVitalsPageResponse>;
+  /** 获取DescribeDataWebVitalsPageV2信息 {@link DescribeDataWebVitalsPageV2Request} {@link DescribeDataWebVitalsPageV2Response} */
+  DescribeDataWebVitalsPageV2(data: DescribeDataWebVitalsPageV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeDataWebVitalsPageV2Response>;
   /** 获取首页错误信息 {@link DescribeErrorRequest} {@link DescribeErrorResponse} */
   DescribeError(data: DescribeErrorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeErrorResponse>;
   /** 获取应用上报抽样信息 {@link DescribeProjectLimitsRequest} {@link DescribeProjectLimitsResponse} */
@@ -1997,6 +2875,8 @@ declare interface Rum {
   DescribeRumStatsLogList(data: DescribeRumStatsLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRumStatsLogListResponse>;
   /** 获取首页分数列表 {@link DescribeScoresRequest} {@link DescribeScoresResponse} */
   DescribeScores(data: DescribeScoresRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScoresResponse>;
+  /** 获取首页分数列表V2 {@link DescribeScoresV2Request} {@link DescribeScoresV2Response} */
+  DescribeScoresV2(data: DescribeScoresV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeScoresV2Response>;
   /** 查询片区信息 {@link DescribeTawAreasRequest} {@link DescribeTawAreasResponse} */
   DescribeTawAreas(data?: DescribeTawAreasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTawAreasResponse>;
   /** 查询 RUM 业务系统信息 {@link DescribeTawInstancesRequest} {@link DescribeTawInstancesResponse} */

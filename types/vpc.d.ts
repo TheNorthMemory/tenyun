@@ -3220,7 +3220,7 @@ declare interface VpnGateway {
   RenewFlag?: string;
   /** 网关付费类型：POSTPAID_BY_HOUR：按量计费，PREPAID：包年包月预付费。 */
   InstanceChargeType?: string;
-  /** 网关出带宽。 */
+  /** 网关出带宽，单位：Mbps。 */
   InternetMaxBandwidthOut?: number;
   /** 创建时间。 */
   CreatedTime?: string;
@@ -3250,7 +3250,7 @@ declare interface VpnGateway {
 
 /** VPN网关配额对象 */
 declare interface VpnGatewayQuota {
-  /** 带宽配额 */
+  /** 带宽配额，单位：Mbps。 */
   Bandwidth?: number;
   /** 配额中文名称 */
   Cname?: string;

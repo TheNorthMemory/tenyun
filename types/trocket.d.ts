@@ -62,14 +62,6 @@ declare interface ConsumerClient {
   ChannelProtocol?: string | null;
 }
 
-/** map结构返回 */
-declare interface CustomMapEntry {
-  /** key */
-  Key?: string | null;
-  /** value */
-  Value?: string | null;
-}
-
 /** Topic&Group维度的权限配置 */
 declare interface DetailedRolePerm {
   /** 权限对应的资源可以是主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031) 或控制台获得。可以是消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031) 或控制台获得。 */
@@ -244,136 +236,6 @@ declare interface IpRule {
   Remark: string;
 }
 
-/** MQTT 订阅关系 */
-declare interface MQTTClientSubscription {
-  /** topic 订阅 */
-  TopicFilter?: string;
-  /** 服务质量等级 */
-  Qos?: number;
-}
-
-/** MQTTEndpoint */
-declare interface MQTTEndpointItem {
-  /** 类型 */
-  Type?: string | null;
-  /** 接入点 */
-  Url?: string | null;
-  /** vpc信息 */
-  VpcId?: string | null;
-  /** 子网信息 */
-  SubnetId?: string | null;
-  /** 主机 */
-  Host?: string | null;
-  /** 端口 */
-  Port?: number | null;
-  /** 接入点ip */
-  Ip?: string | null;
-}
-
-/** MQTT 实例信息 */
-declare interface MQTTInstanceItem {
-  /** 实例ID */
-  InstanceId?: string;
-  /** 实例名称 */
-  InstanceName?: string;
-  /** 实例版本 */
-  Version?: string;
-  /** 实例类型，BASIC，基础版PRO，专业版 */
-  InstanceType?: string;
-  /** 实例状态，RUNNING, 运行中MAINTAINING，维护中ABNORMAL，异常OVERDUE，欠费DESTROYED，已删除CREATING，创建中MODIFYING，变配中CREATE_FAILURE，创建失败MODIFY_FAILURE，变配失败DELETING，删除中 */
-  InstanceStatus?: string;
-  /** 实例主题数上限 */
-  TopicNumLimit?: number;
-  /** 备注信息 */
-  Remark?: string | null;
-  /** 主题数量 */
-  TopicNum?: number;
-  /** 商品规格 */
-  SkuCode?: string;
-  /** 弹性TPS限流值 */
-  TpsLimit?: number | null;
-  /** 创建时间 */
-  CreateTime?: number | null;
-  /** 订阅关系上限 */
-  SubscriptionNumLimit?: number | null;
-  /** 客户端连接数上线 */
-  ClientNumLimit?: number | null;
-}
-
-/** 消息记录 */
-declare interface MQTTMessageItem {
-  /** 消息ID */
-  MsgId?: string | null;
-  /** 消息tag */
-  Tags?: string | null;
-  /** 消息key */
-  Keys?: string | null;
-  /** 客户端地址 */
-  ProducerAddr?: string | null;
-  /** 消息发送时间 */
-  ProduceTime?: string | null;
-  /** 死信重发次数 */
-  DeadLetterResendTimes?: number | null;
-  /** 死信重发成功次数 */
-  DeadLetterResendSuccessTimes?: number | null;
-  /** 子topic */
-  SubTopic?: string | null;
-  /** 消息质量等级 */
-  Qos?: string | null;
-}
-
-/** MQTT ProductSkuItem */
-declare interface MQTTProductSkuItem {
-  /** 类型 */
-  InstanceType?: string | null;
-  /** cide */
-  SkuCode?: string | null;
-  /** sale */
-  OnSale?: boolean | null;
-  /** topic num限制 */
-  TopicNumLimit?: number | null;
-  /** tps */
-  TpsLimit?: number | null;
-  /** 客户端连接数 */
-  ClientNumLimit?: number | null;
-  /** 订阅数限制 */
-  SubscriptionNumLimit?: number | null;
-  /** 代理核 */
-  ProxySpecCore?: number | null;
-  /** 代理内存 */
-  ProxySpecMemory?: number | null;
-  /** 代理总数 */
-  ProxySpecCount?: number | null;
-}
-
-/** MQTT 主题详情 */
-declare interface MQTTTopicItem {
-  /** 实例 ID */
-  InstanceId?: string;
-  /** 主题名称 */
-  Topic?: string;
-  /** 主题描述 */
-  Remark?: string | null;
-}
-
-/** MQTT集群用户信息 */
-declare interface MQTTUserItem {
-  /** 用户名 */
-  Username?: string;
-  /** 密码 */
-  Password?: string;
-  /** 是否开启消费 */
-  PermRead?: boolean;
-  /** 是否开启生产 */
-  PermWrite?: boolean;
-  /** 备注信息 */
-  Remark?: string;
-  /** 创建时间，秒为单位 */
-  CreatedTime?: number;
-  /** 修改时间，秒为单位 */
-  ModifiedTime?: number;
-}
-
 /** 消息记录 */
 declare interface MessageItem {
   /** 消息ID */
@@ -454,16 +316,6 @@ declare interface MigrationTaskItem {
   CreateTime?: number;
 }
 
-/** MQTT客户端监控 */
-declare interface PacketStatistics {
-  /** 类型 */
-  MessageType?: string | null;
-  /** 服务质量 */
-  Qos?: number | null;
-  /** 指标值 */
-  Count?: number | null;
-}
-
 /** 价格标签信息，一个完整的价格标签包含计价类别和计费项标签。 */
 declare interface PriceTag {
   /** 计价名称（枚举值：tps：TPS基础价；stepTps：TPS步长） */
@@ -516,16 +368,6 @@ declare interface ProductSKU {
   PriceTags?: PriceTag[];
   /** 主题数量上限默认最大值 */
   TopicNumUpperLimit?: number;
-}
-
-/** 公网访问安全规则 */
-declare interface PublicAccessRule {
-  /** ip网段信息 */
-  IpRule: string | null;
-  /** 允许或者拒绝 */
-  Allow: boolean | null;
-  /** 备注信息 */
-  Remark?: string | null;
 }
 
 /** 角色信息 */
@@ -616,14 +458,6 @@ declare interface SourceClusterTopicConfig {
   TopicNameV4?: string;
   /** 4.x的完整命名空间，出参使用 */
   FullNamespaceV4?: string;
-}
-
-/** MQTT客户端数据流量统计 */
-declare interface StatisticsReport {
-  /** 字节数 */
-  Bytes?: number | null;
-  /** 监控指标 */
-  Items?: PacketStatistics[] | null;
 }
 
 /** 主题与消费组的订阅关系数据 */
@@ -830,90 +664,6 @@ declare interface CreateInstanceResponse {
   RequestId?: string;
 }
 
-declare interface CreateMQTTInsPublicEndpointRequest {
-  /** 实例ID */
-  InstanceId: string;
-  /** 带宽 */
-  Bandwidth: number;
-  /** 公网访问规则 */
-  Rules?: PublicAccessRule[];
-}
-
-declare interface CreateMQTTInsPublicEndpointResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateMQTTInstanceRequest {
-  /** 实例类型，EXPERIMENT 体验版BASIC 基础版PRO 专业版PLATINUM 铂金版 */
-  InstanceType: string;
-  /** 实例名称 */
-  Name: string;
-  /** 商品规格，可用规格如下：basic_1k, */
-  SkuCode: string;
-  /** 备注信息 */
-  Remark?: string;
-  /** 标签列表 */
-  TagList?: Tag[];
-  /** 实例绑定的VPC信息 */
-  VpcList?: VpcInfo[];
-  /** 是否开启公网 */
-  EnablePublic?: boolean;
-  /** 公网带宽（单位：兆） */
-  Bandwidth?: number;
-  /** 公网访问白名单 */
-  IpRules?: IpRule[];
-  /** 是否自动续费（0: 不自动续费；1: 自动续费） */
-  RenewFlag?: number;
-  /** 购买时长（单位：月） */
-  TimeSpan?: number;
-}
-
-declare interface CreateMQTTInstanceResponse {
-  /** 实例ID */
-  InstanceId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateMQTTTopicRequest {
-  /** 集群ID */
-  InstanceId: string;
-  /** 主题名称 */
-  Topic: string;
-  /** 备注 */
-  Remark?: string;
-}
-
-declare interface CreateMQTTTopicResponse {
-  /** 实例ID */
-  InstanceId?: string;
-  /** 主题 */
-  Topic?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateMQTTUserRequest {
-  /** 集群ID */
-  InstanceId: string;
-  /** 备注 */
-  Remark: string;
-  /** 是否开启生产权限 */
-  PermWrite: boolean;
-  /** 是否开启消费权限 */
-  PermRead: boolean;
-  /** 用户名 */
-  Username: string;
-  /** 密码，该字段为空时候则后端会默认生成 */
-  Password?: string;
-}
-
-declare interface CreateMQTTUserResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateRoleRequest {
   /** 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。 */
   InstanceId: string;
@@ -982,50 +732,6 @@ declare interface DeleteInstanceRequest {
 }
 
 declare interface DeleteInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteMQTTInsPublicEndpointRequest {
-  /** 实例ID */
-  InstanceId: string;
-}
-
-declare interface DeleteMQTTInsPublicEndpointResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteMQTTInstanceRequest {
-  /** 实例ID */
-  InstanceId: string;
-}
-
-declare interface DeleteMQTTInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteMQTTTopicRequest {
-  /** 集群ID */
-  InstanceId: string;
-  /** 主题名称 */
-  Topic: string;
-}
-
-declare interface DeleteMQTTTopicResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteMQTTUserRequest {
-  /** 集群ID */
-  InstanceId: string;
-  /** 用户名 */
-  Username: string;
-}
-
-declare interface DeleteMQTTUserResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1300,270 +1006,6 @@ declare interface DescribeInstanceResponse {
   NodeCount?: number | null;
   /** proxy调度详情 */
   ZoneScheduledList?: ZoneScheduledItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeMQTTClientRequest {
-  /** 实例ID */
-  InstanceId: string;
-  /** 客户端详情 */
-  ClientId: string;
-}
-
-declare interface DescribeMQTTClientResponse {
-  /** 客户端唯一标识 */
-  ClientId?: string;
-  /** 客户端网络地址 */
-  ClientAddress?: string;
-  /** MQTT 协议版本，4 表示 MQTT 3.1.1 */
-  ProtocolVersion?: number;
-  /** 保持连接时间，单位：秒 */
-  Keepalive?: number;
-  /** 连接状态，CONNECTED 已连接，DISCONNECTED 未连接 */
-  ConnectionStatus?: string;
-  /** 客户端创建时间 */
-  CreateTime?: number;
-  /** 上次建立连接时间 */
-  ConnectTime?: number;
-  /** 上次断开连接时间，仅对持久会话（cleanSession=false）并且客户端当前未连接时有意义 */
-  DisconnectTime?: number;
-  /** 客户端的订阅列表 */
-  MQTTClientSubscriptions?: MQTTClientSubscription[];
-  /** 服务端到客户端的流量统计 */
-  Inbound?: StatisticsReport;
-  /** 客户端到服务端的流量统计 */
-  OutBound?: StatisticsReport;
-  /** cleansession标志 */
-  CleanSession?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeMQTTInsPublicEndpointsRequest {
-  /** 集群ID */
-  InstanceId: string;
-}
-
-declare interface DescribeMQTTInsPublicEndpointsResponse {
-  /** 接入点 */
-  Endpoints?: MQTTEndpointItem[];
-  /** 实例id */
-  InstanceId?: string;
-  /** 带宽 */
-  Bandwidth?: number;
-  /** 公网访问规则 */
-  Rules?: PublicAccessRule[];
-  /** 公网状态： NORMAL-正常 CLOSING-关闭中 MODIFYING-修改中 CREATING-开启中 CLOSE-关闭 */
-  Status?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeMQTTInsVPCEndpointsRequest {
-  /** 实例ID */
-  InstanceId: string;
-}
-
-declare interface DescribeMQTTInsVPCEndpointsResponse {
-  /** 接入点 */
-  Endpoints?: MQTTEndpointItem[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeMQTTInstanceCertRequest {
-  /** 集群ID */
-  InstanceId: string;
-}
-
-declare interface DescribeMQTTInstanceCertResponse {
-  /** 集群id */
-  InstanceId?: string | null;
-  /** 服务端证书id */
-  SSLServerCertId?: string | null;
-  /** CA证书id */
-  SSLCaCertId?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeMQTTInstanceListRequest {
-  /** 查询条件列表 */
-  Filters?: Filter[];
-  /** 查询起始位置 */
-  Offset?: number;
-  /** 查询结果限制数量 */
-  Limit?: number;
-  /** 是否包含新控制台集群：默认为包含 */
-  IncludeNew?: boolean;
-}
-
-declare interface DescribeMQTTInstanceListResponse {
-  /** 查询总数 */
-  TotalCount?: number | null;
-  /** 实例列表 */
-  Data?: MQTTInstanceItem[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeMQTTInstanceRequest {
-  /** 集群ID */
-  InstanceId: string;
-}
-
-declare interface DescribeMQTTInstanceResponse {
-  /** 实例类型，EXPERIMENT 体验版BASIC 基础版PRO 专业版PLATINUM 铂金版 */
-  InstanceType?: string;
-  /** 实例ID */
-  InstanceId?: string;
-  /** 实例名称 */
-  InstanceName?: string;
-  /** 主题数量 */
-  TopicNum?: number;
-  /** 实例最大主题数量 */
-  TopicNumLimit?: number;
-  /** TPS限流值 */
-  TpsLimit?: number;
-  /** 创建时间，秒为单位 */
-  CreatedTime?: number;
-  /** 备注信息 */
-  Remark?: string;
-  /** 实例状态 */
-  InstanceStatus?: string;
-  /** 实例规格 */
-  SkuCode?: string;
-  /** 订阅数上限 */
-  SubscriptionNumLimit?: number;
-  /** 客户端数量上限 */
-  ClientNumLimit?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeMQTTMessageListRequest {
-  /** 集群ID */
-  InstanceId: string;
-  /** 主题名称 */
-  Topic: string;
-  /** 开始时间 */
-  StartTime: number;
-  /** 结束时间 */
-  EndTime: number;
-  /** 请求任务id */
-  TaskRequestId: string;
-  /** 查询起始位置 */
-  Offset?: number;
-  /** 查询结果限制数量 */
-  Limit?: number;
-}
-
-declare interface DescribeMQTTMessageListResponse {
-  /** 查询总数 */
-  TotalCount?: number | null;
-  /** 消息记录列表 */
-  Data?: MQTTMessageItem[] | null;
-  /** 请求任务id */
-  TaskRequestId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeMQTTMessageRequest {
-  /** 集群ID */
-  InstanceId: string;
-  /** 主题名称 */
-  Topic: string;
-  /** 消息ID */
-  MsgId: string;
-}
-
-declare interface DescribeMQTTMessageResponse {
-  /** 消息体 */
-  Body?: string;
-  /** 详情参数 */
-  Properties?: CustomMapEntry[];
-  /** 生产时间 */
-  ProduceTime?: string;
-  /** 消息ID */
-  MessageId?: string | null;
-  /** 生产者地址 */
-  ProducerAddr?: string;
-  /** Topic */
-  ShowTopicName?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeMQTTProductSKUListRequest {
-}
-
-declare interface DescribeMQTTProductSKUListResponse {
-  /** 查询总数 */
-  TotalCount?: number | null;
-  /** mqtt商品配置信息 */
-  MQTTProductSkuList?: MQTTProductSkuItem[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeMQTTTopicListRequest {
-  /** 集群ID */
-  InstanceId: string;
-  /** 查询条件列表 */
-  Filters?: Filter[];
-  /** 查询起始位置 */
-  Offset?: number;
-  /** 查询结果限制数量 */
-  Limit?: number;
-}
-
-declare interface DescribeMQTTTopicListResponse {
-  /** 查询总数 */
-  TotalCount?: number | null;
-  /** 主题列表 */
-  Data?: MQTTTopicItem[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeMQTTTopicRequest {
-  /** 集群ID */
-  InstanceId: string;
-  /** 主题名称 */
-  Topic: string;
-}
-
-declare interface DescribeMQTTTopicResponse {
-  /** 实例ID */
-  InstanceId?: string;
-  /** 主题名称 */
-  Topic?: string;
-  /** 备注 */
-  Remark?: string;
-  /** 创建时间，秒为单位 */
-  CreatedTime?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeMQTTUserListRequest {
-  /** 实例ID */
-  InstanceId: string;
-  /** 查询条件列表 */
-  Filters?: Filter[];
-  /** 查询起始位置 */
-  Offset?: number;
-  /** 查询结果限制数量 */
-  Limit?: number;
-}
-
-declare interface DescribeMQTTUserListResponse {
-  /** 查询总数 */
-  TotalCount?: number | null;
-  /** 角色信息列表 */
-  Data?: MQTTUserItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2036,80 +1478,6 @@ declare interface ModifyInstanceResponse {
   RequestId?: string;
 }
 
-declare interface ModifyMQTTInsPublicEndpointRequest {
-  /** 集群ID */
-  InstanceId: string;
-  /** 带宽 */
-  Bandwidth: number;
-  /** 公网访问规则 */
-  Rules: PublicAccessRule[];
-}
-
-declare interface ModifyMQTTInsPublicEndpointResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ModifyMQTTInstanceCertBindingRequest {
-  /** 集群ID */
-  InstanceId: string;
-  /** 服务端证书id */
-  SSLServerCertId: string;
-  /** CA证书id */
-  SSLCaCertId: string;
-}
-
-declare interface ModifyMQTTInstanceCertBindingResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ModifyMQTTInstanceRequest {
-  /** 集群ID */
-  InstanceId: string;
-  /** 实例名称 */
-  Name?: string;
-  /** 备注信息 */
-  Remark?: string;
-}
-
-declare interface ModifyMQTTInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ModifyMQTTTopicRequest {
-  /** 集群ID */
-  InstanceId: string;
-  /** 主题名称 */
-  Topic: string;
-  /** 备注信息 */
-  Remark?: string;
-}
-
-declare interface ModifyMQTTTopicResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ModifyMQTTUserRequest {
-  /** 集群ID */
-  InstanceId: string;
-  /** 用户名 */
-  Username: string;
-  /** 是否开启消费 */
-  PermRead: boolean;
-  /** 是否开启生产 */
-  PermWrite: boolean;
-  /** 备注 */
-  Remark?: string;
-}
-
-declare interface ModifyMQTTUserResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ModifyRoleRequest {
   /** 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。 */
   InstanceId: string;
@@ -2257,14 +1625,6 @@ declare interface Trocket {
   CreateConsumerGroup(data: CreateConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerGroupResponse>;
   /** 创建集群 {@link CreateInstanceRequest} {@link CreateInstanceResponse} */
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
-  /** @deprecated 为MQTT实例创建公网接入点 {@link CreateMQTTInsPublicEndpointRequest} {@link CreateMQTTInsPublicEndpointResponse} */
-  CreateMQTTInsPublicEndpoint(data: CreateMQTTInsPublicEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMQTTInsPublicEndpointResponse>;
-  /** @deprecated 购买MQTT实例 {@link CreateMQTTInstanceRequest} {@link CreateMQTTInstanceResponse} */
-  CreateMQTTInstance(data: CreateMQTTInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMQTTInstanceResponse>;
-  /** @deprecated 创建MQTT主题 {@link CreateMQTTTopicRequest} {@link CreateMQTTTopicResponse} */
-  CreateMQTTTopic(data: CreateMQTTTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMQTTTopicResponse>;
-  /** @deprecated 添加MQTT角色 {@link CreateMQTTUserRequest} {@link CreateMQTTUserResponse} */
-  CreateMQTTUser(data: CreateMQTTUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMQTTUserResponse>;
   /** 创建角色 {@link CreateRoleRequest} {@link CreateRoleResponse} */
   CreateRole(data: CreateRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoleResponse>;
   /** 创建主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
@@ -2273,14 +1633,6 @@ declare interface Trocket {
   DeleteConsumerGroup(data: DeleteConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsumerGroupResponse>;
   /** 删除集群 {@link DeleteInstanceRequest} {@link DeleteInstanceResponse} */
   DeleteInstance(data: DeleteInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceResponse>;
-  /** @deprecated 删除MQTT实例的公网接入点 {@link DeleteMQTTInsPublicEndpointRequest} {@link DeleteMQTTInsPublicEndpointResponse} */
-  DeleteMQTTInsPublicEndpoint(data: DeleteMQTTInsPublicEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMQTTInsPublicEndpointResponse>;
-  /** @deprecated 删除MQTT实例 {@link DeleteMQTTInstanceRequest} {@link DeleteMQTTInstanceResponse} */
-  DeleteMQTTInstance(data: DeleteMQTTInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMQTTInstanceResponse>;
-  /** @deprecated 删除MQTT主题 {@link DeleteMQTTTopicRequest} {@link DeleteMQTTTopicResponse} */
-  DeleteMQTTTopic(data: DeleteMQTTTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMQTTTopicResponse>;
-  /** @deprecated 删除MQTT角色 {@link DeleteMQTTUserRequest} {@link DeleteMQTTUserResponse} */
-  DeleteMQTTUser(data: DeleteMQTTUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMQTTUserResponse>;
   /** 删除角色 {@link DeleteRoleRequest} {@link DeleteRoleResponse} */
   DeleteRole(data: DeleteRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoleResponse>;
   /** 删除平滑迁移任务 {@link DeleteSmoothMigrationTaskRequest} {@link DeleteSmoothMigrationTaskResponse} */
@@ -2303,30 +1655,6 @@ declare interface Trocket {
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
   /** 查询 5.X 集群列表 {@link DescribeInstanceListRequest} {@link DescribeInstanceListResponse} */
   DescribeInstanceList(data?: DescribeInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceListResponse>;
-  /** @deprecated 查询 MQTT 客户端详情 {@link DescribeMQTTClientRequest} {@link DescribeMQTTClientResponse} */
-  DescribeMQTTClient(data: DescribeMQTTClientRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTClientResponse>;
-  /** @deprecated 查询MQTT实例公网接入点 {@link DescribeMQTTInsPublicEndpointsRequest} {@link DescribeMQTTInsPublicEndpointsResponse} */
-  DescribeMQTTInsPublicEndpoints(data: DescribeMQTTInsPublicEndpointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTInsPublicEndpointsResponse>;
-  /** @deprecated 查询MQTT实例VPC接入点 {@link DescribeMQTTInsVPCEndpointsRequest} {@link DescribeMQTTInsVPCEndpointsResponse} */
-  DescribeMQTTInsVPCEndpoints(data: DescribeMQTTInsVPCEndpointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTInsVPCEndpointsResponse>;
-  /** @deprecated 查询MQTT实例详情信息 {@link DescribeMQTTInstanceRequest} {@link DescribeMQTTInstanceResponse} */
-  DescribeMQTTInstance(data: DescribeMQTTInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTInstanceResponse>;
-  /** @deprecated 查询MQTT集群证书列表 {@link DescribeMQTTInstanceCertRequest} {@link DescribeMQTTInstanceCertResponse} */
-  DescribeMQTTInstanceCert(data: DescribeMQTTInstanceCertRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTInstanceCertResponse>;
-  /** @deprecated 获取MQTT实例列表 {@link DescribeMQTTInstanceListRequest} {@link DescribeMQTTInstanceListResponse} */
-  DescribeMQTTInstanceList(data?: DescribeMQTTInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTInstanceListResponse>;
-  /** @deprecated 查询MQTT消息 {@link DescribeMQTTMessageRequest} {@link DescribeMQTTMessageResponse} */
-  DescribeMQTTMessage(data: DescribeMQTTMessageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTMessageResponse>;
-  /** @deprecated 查询MQTT消息列表 {@link DescribeMQTTMessageListRequest} {@link DescribeMQTTMessageListResponse} */
-  DescribeMQTTMessageList(data: DescribeMQTTMessageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTMessageListResponse>;
-  /** @deprecated 获取MQTT产品售卖规格 {@link DescribeMQTTProductSKUListRequest} {@link DescribeMQTTProductSKUListResponse} */
-  DescribeMQTTProductSKUList(data?: DescribeMQTTProductSKUListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTProductSKUListResponse>;
-  /** @deprecated 查询MQTT主题详情 {@link DescribeMQTTTopicRequest} {@link DescribeMQTTTopicResponse} */
-  DescribeMQTTTopic(data: DescribeMQTTTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTTopicResponse>;
-  /** @deprecated 查询MQTT主题列表 {@link DescribeMQTTTopicListRequest} {@link DescribeMQTTTopicListResponse} */
-  DescribeMQTTTopicList(data: DescribeMQTTTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTTopicListResponse>;
-  /** @deprecated 查询MQTT用户列表 {@link DescribeMQTTUserListRequest} {@link DescribeMQTTUserListResponse} */
-  DescribeMQTTUserList(data: DescribeMQTTUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMQTTUserListResponse>;
   /** 查询消息详情 {@link DescribeMessageRequest} {@link DescribeMessageResponse} */
   DescribeMessage(data: DescribeMessageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageResponse>;
   /** 查询消息列表 {@link DescribeMessageListRequest} {@link DescribeMessageListResponse} */
@@ -2369,16 +1697,6 @@ declare interface Trocket {
   ModifyInstance(data: ModifyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceResponse>;
   /** 修改集群接入点 {@link ModifyInstanceEndpointRequest} {@link ModifyInstanceEndpointResponse} */
   ModifyInstanceEndpoint(data: ModifyInstanceEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceEndpointResponse>;
-  /** @deprecated 更新MQTT实例公网接入点 {@link ModifyMQTTInsPublicEndpointRequest} {@link ModifyMQTTInsPublicEndpointResponse} */
-  ModifyMQTTInsPublicEndpoint(data: ModifyMQTTInsPublicEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMQTTInsPublicEndpointResponse>;
-  /** @deprecated 修改MQTT实例属性 {@link ModifyMQTTInstanceRequest} {@link ModifyMQTTInstanceResponse} */
-  ModifyMQTTInstance(data: ModifyMQTTInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMQTTInstanceResponse>;
-  /** @deprecated 更新MQTT集群证书证书 {@link ModifyMQTTInstanceCertBindingRequest} {@link ModifyMQTTInstanceCertBindingResponse} */
-  ModifyMQTTInstanceCertBinding(data: ModifyMQTTInstanceCertBindingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMQTTInstanceCertBindingResponse>;
-  /** @deprecated 修改MQTT主题属性 {@link ModifyMQTTTopicRequest} {@link ModifyMQTTTopicResponse} */
-  ModifyMQTTTopic(data: ModifyMQTTTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMQTTTopicResponse>;
-  /** @deprecated 修改MQTT角色 {@link ModifyMQTTUserRequest} {@link ModifyMQTTUserResponse} */
-  ModifyMQTTUser(data: ModifyMQTTUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMQTTUserResponse>;
   /** 修改角色 {@link ModifyRoleRequest} {@link ModifyRoleResponse} */
   ModifyRole(data: ModifyRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoleResponse>;
   /** 修改主题属性 {@link ModifyTopicRequest} {@link ModifyTopicResponse} */

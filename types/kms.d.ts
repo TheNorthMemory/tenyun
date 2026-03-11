@@ -60,6 +60,12 @@ declare interface DataKeyMetadata {
   SyncEndTime?: number;
   /** 同步的原始集群，如果为空，是公有云公共集群 */
   SourceHsmClusterId?: string;
+  /** 成员账号appId */
+  AccountAppId?: number;
+  /** 成员账号uin */
+  AccountUin?: number;
+  /** 成员账号名称 */
+  AccountName?: string;
 }
 
 /** 同步任务的目标地域列表，包括地域和集群信息。如果集群为空，表示公有云共享集群，如果集群不为空，表示独享集群。 */
@@ -144,6 +150,20 @@ declare interface KeyMetadata {
   SyncEndTime?: number;
   /** 同步的原始集群，如果为空，是公有云公共集群 */
   SourceHsmClusterId?: string;
+  /** 成员账号appId */
+  AccountAppId?: number;
+  /** 成员账号uin */
+  AccountUin?: number;
+  /** 成员账号名称 */
+  AccountName?: string;
+}
+
+/** 共享成员账号信息 */
+declare interface MemberAccount {
+  /** 成员账号appid */
+  MemberAppId?: number;
+  /** 成员账号uin */
+  MemberUin?: number;
 }
 
 /** 标签键和标签值 */
@@ -193,6 +213,8 @@ declare interface WhiteboxKeyInfo {
 declare interface ArchiveKeyRequest {
   /** CMK唯一标识符 */
   KeyId: string;
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface ArchiveKeyResponse {
@@ -251,6 +273,8 @@ declare interface BindCloudResourceResponse {
 declare interface CancelDataKeyDeletionRequest {
   /** 数据密钥的唯一标志符 */
   DataKeyId: string;
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface CancelDataKeyDeletionResponse {
@@ -263,6 +287,8 @@ declare interface CancelDataKeyDeletionResponse {
 declare interface CancelKeyArchiveRequest {
   /** CMK唯一标识符 */
   KeyId: string;
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface CancelKeyArchiveResponse {
@@ -273,6 +299,8 @@ declare interface CancelKeyArchiveResponse {
 declare interface CancelKeyDeletionRequest {
   /** 需要被取消删除的CMK的唯一标志 */
   KeyId: string;
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface CancelKeyDeletionResponse {
@@ -389,6 +417,8 @@ declare interface DeleteWhiteBoxKeyResponse {
 declare interface DescribeDataKeyRequest {
   /** 数据密钥全局唯一标识符 */
   DataKeyId: string;
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface DescribeDataKeyResponse {
@@ -401,6 +431,8 @@ declare interface DescribeDataKeyResponse {
 declare interface DescribeDataKeysRequest {
   /** 查询DataKey的ID列表，批量查询一次最多支持100个DataKeyId */
   DataKeyIds: string[];
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface DescribeDataKeysResponse {
@@ -413,6 +445,8 @@ declare interface DescribeDataKeysResponse {
 declare interface DescribeKeyRequest {
   /** CMK全局唯一标识符 */
   KeyId: string;
+  /** 可信服务成员账号信息 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface DescribeKeyResponse {
@@ -425,6 +459,8 @@ declare interface DescribeKeyResponse {
 declare interface DescribeKeysRequest {
   /** 查询CMK的ID列表，批量查询一次最多支持100个KeyId */
   KeyIds: string[];
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface DescribeKeysResponse {
@@ -503,6 +539,8 @@ declare interface DescribeWhiteBoxServiceStatusResponse {
 declare interface DisableDataKeyRequest {
   /** 数据密钥唯一标识符 */
   DataKeyId: string;
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface DisableDataKeyResponse {
@@ -513,6 +551,8 @@ declare interface DisableDataKeyResponse {
 declare interface DisableDataKeysRequest {
   /** 需要批量禁用的DataKey Id 列表，数据密钥数量最大支持100 */
   DataKeyIds: string[];
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface DisableDataKeysResponse {
@@ -523,6 +563,8 @@ declare interface DisableDataKeysResponse {
 declare interface DisableKeyRequest {
   /** CMK唯一标识符 */
   KeyId: string;
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface DisableKeyResponse {
@@ -533,6 +575,8 @@ declare interface DisableKeyResponse {
 declare interface DisableKeyRotationRequest {
   /** CMK唯一标识符 */
   KeyId: string;
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface DisableKeyRotationResponse {
@@ -543,6 +587,8 @@ declare interface DisableKeyRotationResponse {
 declare interface DisableKeysRequest {
   /** 需要批量禁用的CMK Id 列表，CMK数量最大支持100 */
   KeyIds: string[];
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface DisableKeysResponse {
@@ -573,6 +619,8 @@ declare interface DisableWhiteBoxKeysResponse {
 declare interface EnableDataKeyRequest {
   /** 数据密钥唯一标识符 */
   DataKeyId: string;
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface EnableDataKeyResponse {
@@ -583,6 +631,8 @@ declare interface EnableDataKeyResponse {
 declare interface EnableDataKeysRequest {
   /** 需要批量启用的DataKey Id 列表， 数据密钥数量最大支持100 */
   DataKeyIds: string[];
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface EnableDataKeysResponse {
@@ -593,6 +643,8 @@ declare interface EnableDataKeysResponse {
 declare interface EnableKeyRequest {
   /** CMK唯一标识符 */
   KeyId: string;
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface EnableKeyResponse {
@@ -605,6 +657,8 @@ declare interface EnableKeyRotationRequest {
   KeyId: string;
   /** 密钥轮转周期，单位天，允许范围 7 ~ 365，默认值 365。 */
   RotateDays?: number;
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface EnableKeyRotationResponse {
@@ -615,6 +669,8 @@ declare interface EnableKeyRotationResponse {
 declare interface EnableKeysRequest {
   /** 需要批量启用的CMK Id 列表， CMK数量最大支持100 */
   KeyIds: string[];
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface EnableKeysResponse {
@@ -735,6 +791,8 @@ declare interface GenerateRandomResponse {
 declare interface GetDataKeyCiphertextBlobRequest {
   /** 数据密钥的唯一标志符 */
   DataKeyId: string;
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface GetDataKeyCiphertextBlobResponse {
@@ -763,6 +821,8 @@ declare interface GetDataKeyPlaintextResponse {
 declare interface GetKeyRotationStatusRequest {
   /** CMK唯一标识符 */
   KeyId: string;
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface GetKeyRotationStatusResponse {
@@ -947,6 +1007,8 @@ declare interface ListDataKeyDetailRequest {
   DataKeyLen?: number;
   /** 标签过滤条件 */
   TagFilters?: TagFilter[];
+  /** 成员账号信息数组 */
+  MemberAccounts?: MemberAccount[];
 }
 
 declare interface ListDataKeyDetailResponse {
@@ -999,6 +1061,8 @@ declare interface ListKeyDetailRequest {
   TagFilters?: TagFilter[];
   /** KMS 高级版对应的 HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）。 */
   HsmClusterId?: string;
+  /** 可信服务成员账号信息数组 */
+  MemberAccounts?: MemberAccount[];
 }
 
 declare interface ListKeyDetailResponse {
@@ -1135,6 +1199,8 @@ declare interface ScheduleDataKeyDeletionRequest {
   DataKeyId: string;
   /** 计划删除时间区间[7,30] */
   PendingWindowInDays: number;
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface ScheduleDataKeyDeletionResponse {
@@ -1151,6 +1217,8 @@ declare interface ScheduleKeyDeletionRequest {
   KeyId: string;
   /** 计划删除时间区间[7,30] */
   PendingWindowInDays: number;
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface ScheduleKeyDeletionResponse {
@@ -1199,6 +1267,8 @@ declare interface UpdateAliasRequest {
   Alias: string;
   /** CMK的全局唯一标识符 */
   KeyId: string;
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface UpdateAliasResponse {
@@ -1211,6 +1281,8 @@ declare interface UpdateDataKeyDescriptionRequest {
   DataKeyId: string;
   /** 数据密钥 的描述，最大100字节 */
   Description: string;
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface UpdateDataKeyDescriptionResponse {
@@ -1223,6 +1295,8 @@ declare interface UpdateDataKeyNameRequest {
   DataKeyId: string;
   /** 数据密钥的名称 */
   DataKeyName: string;
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface UpdateDataKeyNameResponse {
@@ -1235,6 +1309,8 @@ declare interface UpdateKeyDescriptionRequest {
   Description: string;
   /** 需要修改描述信息的CMK ID */
   KeyId: string;
+  /** 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。 */
+  MemberAccount?: MemberAccount;
 }
 
 declare interface UpdateKeyDescriptionResponse {

@@ -808,10 +808,20 @@ declare interface DashboardTopicInfo {
 
 /** 数据加工的资源信息 */
 declare interface DataTransformResouceInfo {
-  /** 日志主题ID- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  /** 日志主题ID通过获取日志主题列表获取日志主题Id。 */
   TopicId: string;
   /** 别名限制：不能包含字符 |。 */
   Alias?: string;
+  /** 是否是跨账号主题，false不是跨账号主题，true是跨账号主题默认值：false */
+  IsCrossAccount?: boolean;
+  /** 跨账号场景下，被投递账号给投递账号创建的角色ARN值，在被投递账号的角色里查找 */
+  RoleARN?: string;
+  /** 外部ID值，可以在被投递账号的角色-载体里找到该值 */
+  ExternalId?: string;
+  /** topic名称 */
+  TopicName?: string;
+  /** 日志集的名称 */
+  LogsetName?: string;
 }
 
 /** 外部表SQL信息 */
@@ -1764,7 +1774,7 @@ declare interface MonitorNotice {
 declare interface MonitorNoticeRule {
   /** 腾讯云可观测平台通知模板 ID */
   NoticeId?: string;
-  /** 腾讯云可观测平台内容模板ID，不传默认内容模板 */
+  /** 腾讯云可观测平台内容模板ID，为空时使用默认内容模板 */
   ContentTmplId?: string | null;
   /** 告警级别,0:警告(Warn); 1:提醒(Info); 2:紧急 (Critical) */
   AlarmLevels?: number[];
@@ -2567,7 +2577,7 @@ declare interface CreateAlarmNoticeResponse {
 }
 
 declare interface CreateAlarmRequest {
-  /** 告警策略名称。最大支持255个字节。 不支持 '|'。 */
+  /** 告警策略名称。最大支持255个字节。 不支持 &#39;|&#39;。 */
   Name: string;
   /** 监控对象列表。 */
   AlarmTargets: AlarmTarget[];
@@ -2577,13 +2587,11 @@ declare interface CreateAlarmRequest {
   TriggerCount: number;
   /** 告警重复的周期，单位是分钟。取值范围是0~1440。 */
   AlarmPeriod: number;
-  /** 关联的告警通知渠道组列表。-通过[获取通知渠道组列表](https://cloud.tencent.com/document/product/614/56462)获取关联的告警通知渠道组列表，和MonitorNotice互斥 */
-  AlarmNoticeIds?: string[];
-  /** 告警发送通知的触发条件 注意: - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
+  /** 告警发送通知的触发条件 注意: Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
   Condition?: string;
-  /** 告警级别0:警告(Warn); 1:提醒(Info); 2:紧急 (Critical)。注意: - 不填则默认为0。- Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
+  /** 告警级别0:警告(Warn); 1:提醒(Info); 2:紧急 (Critical)。注意: 不填则默认为0。Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
   AlarmLevel?: number;
-  /** 多触发条件 注意: - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
+  /** 多触发条件 注意: Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
   MultiConditions?: MultiCondition[];
   /** 是否开启告警策略。默认值为true */
   Status?: boolean;
@@ -2601,10 +2609,14 @@ declare interface CreateAlarmRequest {
   GroupTriggerCondition?: string[];
   /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的告警策略。最大支持10个标签键值对，并且不能有重复的键值对。 */
   Tags?: Tag[];
-  /** 监控对象类型。0:执行语句共用监控对象; 1:每个执行语句单独选择监控对象。 不填则默认为0。当值为1时，AlarmTargets元素个数不能超过10个，AlarmTargets中的Number必须是从1开始的连续正整数，不能重复。 */
+  /** 监控对象类型。0:执行语句共用监控对象; 1:每个执行语句单独选择监控对象。不填则默认为0。当值为1时，AlarmTargets元素个数不能超过10个，AlarmTargets中的Number必须是从1开始的连续正整数，不能重复。 */
   MonitorObjectType?: number;
-  /** 告警附加分类信息列表。Classifications元素个数不能超过20个。Classifications元素的Key不能为空，不能重复，长度不能超过50个字符，符合正则 `^[a-z]([a-z0-9_]{0,49})$`。Classifications元素的Value长度不能超过200个字符。 */
+  /** 告警附加分类信息列表。Classifications元素个数不能超过20个。Classifications元素的Key不能为空，不能重复，长度不能超过50个字符，符合正则 ^[a-z]([a-z0-9_]{0,49})$。Classifications元素的Value长度不能超过200个字符。 */
   Classifications?: AlarmClassification[];
+  /** 关联的日志服务告警通知渠道组列表。-通过获取通知渠道组列表获取关联的告警通知渠道组列表，和MonitorNotice互斥 */
+  AlarmNoticeIds?: string[];
+  /** 关联的可观测平台通知模板，与 AlarmNoticeIds 参数互斥，不能同时使用 */
+  MonitorNotice?: MonitorNotice;
 }
 
 declare interface CreateAlarmResponse {
@@ -2875,7 +2887,7 @@ declare interface CreateDataTransformRequest {
   FuncType: number;
   /** 日志主题ID- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   SrcTopicId: string;
-  /** 加工任务名称名称限制- 不能为空字符串- 不能包含字符'|'- 最长 255 个字符 */
+  /** 加工任务名称名称限制- 不能为空字符串- 不能包含字符'|'- 最长128 个字符 */
   Name: string;
   /** 加工语句。 当FuncType为2时，EtlContent必须使用[log_auto_output](https://cloud.tencent.com/document/product/614/70733) 其他参考文档：- [创建加工任务](https://cloud.tencent.com/document/product/614/63940) - [函数总览](https://cloud.tencent.com/document/product/614/70395) */
   EtlContent: string;
@@ -4915,24 +4927,22 @@ declare interface ModifyAlarmNoticeResponse {
 }
 
 declare interface ModifyAlarmRequest {
-  /** 告警策略ID。-通过[获取告警策略列表](https://cloud.tencent.com/document/product/614/56461)获取告警策略ID */
+  /** 告警策略ID。-通过获取告警策略列表获取告警策略ID */
   AlarmId: string;
-  /** 告警策略名称。最大支持255个字节，不支持 '|'。 */
+  /** 告警策略名称。最大支持255个字节，不支持 &#39;|&#39;。 */
   Name?: string;
   /** 监控任务运行时间点。 */
   MonitorTime?: MonitorTime;
-  /** 告警信息发送的触发条件。注意: - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
+  /** 告警信息发送的触发条件。注意: Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
   Condition?: string;
-  /** 告警级别。0:警告(Warn);1:提醒(Info);2:紧急 (Critical)注意: - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
+  /** 告警级别。0:警告(Warn);1:提醒(Info);2:紧急 (Critical)注意: Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
   AlarmLevel?: number;
-  /** 多触发条件。 注意: - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
+  /** 多触发条件。 注意: Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。 */
   MultiConditions?: MultiCondition[];
   /** 持续周期。持续满足触发条件TriggerCount个周期后，再进行告警；最小值为1，最大值为2000。 */
   TriggerCount?: number;
   /** 告警重复的周期。单位是分钟。取值范围是0~1440。 */
   AlarmPeriod?: number;
-  /** 关联的告警通知渠道组列表。-通过[获取通知渠道组列表](https://cloud.tencent.com/document/product/614/56462)获取关联的告警通知渠道组列表，和MonitorNotice互斥 */
-  AlarmNoticeIds?: string[];
   /** 监控对象列表。 */
   AlarmTargets?: AlarmTarget[];
   /** 是否开启告警策略。 */
@@ -4951,10 +4961,14 @@ declare interface ModifyAlarmRequest {
   GroupTriggerCondition?: string[];
   /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的告警策略。最大支持10个标签键值对，并且不能有重复的键值对。 */
   Tags?: Tag[];
-  /** 监控对象类型。0:执行语句共用监控对象; 1:每个执行语句单独选择监控对象。 当值为1时，AlarmTargets元素个数不能超过10个，AlarmTargets中的Number必须是从1开始的连续正整数，不能重复。 */
+  /** 监控对象类型。0:执行语句共用监控对象; 1:每个执行语句单独选择监控对象。当值为1时，AlarmTargets元素个数不能超过10个，AlarmTargets中的Number必须是从1开始的连续正整数，不能重复。 */
   MonitorObjectType?: number;
-  /** 告警附加分类信息列表。Classifications元素个数不能超过20个。Classifications元素的Key不能为空，不能重复，长度不能超过50个字符，符合正则 `^[a-z]([a-z0-9_]{0,49})$`。Classifications元素的Value长度不能超过200个字符。 */
+  /** 告警附加分类信息列表。Classifications元素个数不能超过20个。Classifications元素的Key不能为空，不能重复，长度不能超过50个字符，符合正则 ^[a-z]([a-z0-9_]{0,49})$。Classifications元素的Value长度不能超过200个字符。 */
   Classifications?: AlarmClassification[];
+  /** 关联的日志服务告警通知渠道组列表。-通过获取通知渠道组列表获取关联的告警通知渠道组列表，和MonitorNotice互斥 */
+  AlarmNoticeIds?: string[];
+  /** 关联的可观测平台通知模板，与 AlarmNoticeIds 参数互斥，不能同时使用 */
+  MonitorNotice?: MonitorNotice;
 }
 
 declare interface ModifyAlarmResponse {

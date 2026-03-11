@@ -742,6 +742,14 @@ declare interface ShareUnitMember {
   CreateTime?: string;
 }
 
+/** 共享单元部门 */
+declare interface ShareUnitNode {
+  /** 共享部门ID。 */
+  ShareNodeId?: number;
+  /** 创建时间。 */
+  CreateTime?: string;
+}
+
 /** 共享单元资源 */
 declare interface ShareUnitResource {
   /** 共享资源ID。 */
@@ -1042,6 +1050,18 @@ declare interface AddShareUnitMembersRequest {
 }
 
 declare interface AddShareUnitMembersResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddShareUnitNodeRequest {
+  /** 共享单元ID。 */
+  UnitId: string;
+  /** 共享部门ID。 */
+  NodeId: number;
+}
+
+declare interface AddShareUnitNodeResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1624,6 +1644,18 @@ declare interface DeleteShareUnitMembersResponse {
   RequestId?: string;
 }
 
+declare interface DeleteShareUnitNodeRequest {
+  /** 共享单元ID。 */
+  UnitId: string;
+  /** 部门ID。 */
+  NodeId: number;
+}
+
+declare interface DeleteShareUnitNodeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteShareUnitRequest {
   /** 共享单元ID。 */
   UnitId: string;
@@ -2094,6 +2126,26 @@ declare interface DescribeShareUnitMembersResponse {
   Total?: number;
   /** 共享单元成员列表。 */
   Items?: ShareUnitMember[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeShareUnitNodesRequest {
+  /** 共享单元ID。 */
+  UnitId: string;
+  /** 偏移量。取值是limit的整数倍，默认值 : 0 */
+  Offset: number;
+  /** 限制数目。取值范围：1~50。 */
+  Limit: number;
+  /** 搜索关键字。支持部门ID搜索。 */
+  SearchKey?: string;
+}
+
+declare interface DescribeShareUnitNodesResponse {
+  /** 总数目。 */
+  Total?: number;
+  /** 共享单元部门列表。 */
+  Items?: ShareUnitNode[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3613,6 +3665,8 @@ declare interface Organization {
   AddShareUnit(data: AddShareUnitRequest, config?: AxiosRequestConfig): AxiosPromise<AddShareUnitResponse>;
   /** 添加共享单元成员 {@link AddShareUnitMembersRequest} {@link AddShareUnitMembersResponse} */
   AddShareUnitMembers(data: AddShareUnitMembersRequest, config?: AxiosRequestConfig): AxiosPromise<AddShareUnitMembersResponse>;
+  /** 添加共享单元部门 {@link AddShareUnitNodeRequest} {@link AddShareUnitNodeResponse} */
+  AddShareUnitNode(data: AddShareUnitNodeRequest, config?: AxiosRequestConfig): AxiosPromise<AddShareUnitNodeResponse>;
   /** 添加共享单元资源 {@link AddShareUnitResourcesRequest} {@link AddShareUnitResourcesResponse} */
   AddShareUnitResources(data: AddShareUnitResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<AddShareUnitResourcesResponse>;
   /** 为用户组添加用户 {@link AddUserToGroupRequest} {@link AddUserToGroupResponse} */
@@ -3689,6 +3743,8 @@ declare interface Organization {
   DeleteShareUnit(data: DeleteShareUnitRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShareUnitResponse>;
   /** 删除共享单元成员 {@link DeleteShareUnitMembersRequest} {@link DeleteShareUnitMembersResponse} */
   DeleteShareUnitMembers(data: DeleteShareUnitMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShareUnitMembersResponse>;
+  /** 删除共享单元部门 {@link DeleteShareUnitNodeRequest} {@link DeleteShareUnitNodeResponse} */
+  DeleteShareUnitNode(data: DeleteShareUnitNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShareUnitNodeResponse>;
   /** 删除共享单元资源 {@link DeleteShareUnitResourcesRequest} {@link DeleteShareUnitResourcesResponse} */
   DeleteShareUnitResources(data: DeleteShareUnitResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShareUnitResourcesResponse>;
   /** 删除用户 {@link DeleteUserRequest} {@link DeleteUserResponse} */
@@ -3733,6 +3789,8 @@ declare interface Organization {
   DescribeShareAreas(data?: DescribeShareAreasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShareAreasResponse>;
   /** 获取共享单元成员列表 {@link DescribeShareUnitMembersRequest} {@link DescribeShareUnitMembersResponse} */
   DescribeShareUnitMembers(data: DescribeShareUnitMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShareUnitMembersResponse>;
+  /** 获取共享单元部门列表 {@link DescribeShareUnitNodesRequest} {@link DescribeShareUnitNodesResponse} */
+  DescribeShareUnitNodes(data: DescribeShareUnitNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShareUnitNodesResponse>;
   /** 获取共享单元资源列表 {@link DescribeShareUnitResourcesRequest} {@link DescribeShareUnitResourcesResponse} */
   DescribeShareUnitResources(data: DescribeShareUnitResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShareUnitResourcesResponse>;
   /** 获取共享单元列表 {@link DescribeShareUnitsRequest} {@link DescribeShareUnitsResponse} */

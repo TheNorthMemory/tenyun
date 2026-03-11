@@ -24,12 +24,84 @@ declare interface ApplicationInfo {
   ApplicationSize?: number;
 }
 
+/** cos挂载信息 */
+declare interface COSStorage {
+  /** cos桶uri */
+  URI?: string;
+}
+
+/** 算力详情 */
+declare interface ComputeDetail {
+  /** 算力套餐ID */
+  BundleType?: string;
+  /** 节点数量 */
+  Count?: number;
+  /** 显卡数量 */
+  GPUCount?: string;
+  /** 显存 */
+  GPUMemory?: string;
+  /** 算力 */
+  GPUPerformance?: string;
+  /** CPU核数 */
+  CPU?: string;
+  /** 内存 */
+  Memory?: string;
+}
+
+/** 容器信息 */
+declare interface ContainerInfo {
+  /** 镜像相关信息 */
+  Image?: ImageInfo;
+  /** 服务监听端口 */
+  Port?: string;
+  /** 启动命令 */
+  Scripts?: string[];
+  /** 环境变量列表 */
+  Envs?: EnvParam[];
+  /** 存储挂载配置 */
+  Storages?: StorageInfo[];
+}
+
+/** 服务部署信息 */
+declare interface DeploymentConfig {
+  /** 容器配置 */
+  Container?: ContainerInfo;
+  /** 容器数量 */
+  ContainerCount?: number;
+}
+
+/** 环境变量键值对 */
+declare interface EnvParam {
+  /** 环境变量名 */
+  Name?: string;
+  /** 环境变量值 */
+  Value?: string;
+}
+
 /** 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等- 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。- 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
 declare interface Filter {
   /** 需要过滤的字段。 */
   Name: string;
   /** 字段的过滤值。 */
   Values: string[];
+}
+
+/** HiCache信息 */
+declare interface HiCacheInfo {
+  /** HiCache缓存等级 */
+  HiCacheLevel?: string;
+}
+
+/** 描述了服务的超参数配置 */
+declare interface HyperParam {
+  /** HiCache缓存 */
+  HiCache?: HiCacheInfo;
+}
+
+/** 镜像相关配置 */
+declare interface ImageInfo {
+  /** tcr仓库地址 */
+  ImageRegistryUrl?: string;
 }
 
 /** 实例信息 */
@@ -200,10 +272,42 @@ declare interface SceneInfo {
   SceneName?: string;
 }
 
+/** 服务详情 */
+declare interface ServiceDetail {
+  /** 服务id */
+  ServiceId?: string;
+  /** 服务名称 */
+  ServiceName?: string;
+  /** 服务状态 */
+  ServiceState?: string;
+  /** 运行中的副本数 */
+  RunningReplicas?: number;
+  /** 期望的副本总数 */
+  TotalReplicas?: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 算力套餐详情 */
+  ComputeSet?: ComputeDetail[];
+  /** 模型名称 */
+  ModelName?: string;
+  /** 服务部署信息 */
+  DeploymentConfigs?: DeploymentConfig[];
+  /** 服务超参数配置 */
+  HyperParam?: HyperParam;
+}
+
 /** 推理集群费用数据结构体 */
 declare interface ServicePriceDetail {
   /** 推理集群价格信息 */
   ServicePrice?: ItemPrice;
+}
+
+/** 存储信息 */
+declare interface StorageInfo {
+  /** 挂载路径 */
+  MountPath: string;
+  /** cos挂载信息 */
+  COSStorage?: COSStorage;
 }
 
 /** 描述了操作系统所在块设备即系统盘的信息 */
@@ -360,6 +464,24 @@ declare interface DescribeServiceLoginSettingsRequest {
 declare interface DescribeServiceLoginSettingsResponse {
   /** 服务登录配置详情 */
   LoginSettings?: LoginSetting[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeServicesRequest {
+  /** 服务列表 */
+  ServiceIds?: string[];
+  /** 分页大小 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+}
+
+declare interface DescribeServicesResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 服务列表 */
+  ServiceInfoSet?: ServiceDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -529,6 +651,8 @@ declare interface Hai {
   DescribeScenes(data?: DescribeScenesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScenesResponse>;
   /** 查询服务登录配置 {@link DescribeServiceLoginSettingsRequest} {@link DescribeServiceLoginSettingsResponse} */
   DescribeServiceLoginSettings(data: DescribeServiceLoginSettingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceLoginSettingsResponse>;
+  /** 查询服务 {@link DescribeServicesRequest} {@link DescribeServicesResponse} */
+  DescribeServices(data?: DescribeServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServicesResponse>;
   /** 创建实例询价 {@link InquirePriceRunInstancesRequest} {@link InquirePriceRunInstancesResponse} */
   InquirePriceRunInstances(data: InquirePriceRunInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRunInstancesResponse>;
   /** 更新服务配置询价 {@link InquirePriceUpdateServiceConfigsRequest} {@link InquirePriceUpdateServiceConfigsResponse} */

@@ -224,7 +224,7 @@ declare interface IdDTO {
   ProjectId?: number | null;
   /** 事务id */
   TranId?: string | null;
-  /** 事务状态 */
+  /** 事务状态取值范围：1: 处理中2: 处理成功3: 处理失败 */
   TranStatus?: number | null;
 }
 
@@ -252,7 +252,7 @@ declare interface PageScreenVO {
 declare interface PermissionComponent {
   /** 权限值 */
   ModuleId?: string | null;
-  /** 可见/可用 */
+  /** 可用性。取值范围：- usable：可用- visible：可见- disabled：不可用- hidden：隐藏默认值：disabled示例值：disabled */
   IncludeType?: string | null;
   /** 目标升级版本 */
   UpgradeVersionType?: string | null;
@@ -342,7 +342,7 @@ declare interface ProjectConfigList {
 declare interface ProjectConfigResult {
   /** 配置名称 */
   ModuleId?: string | null;
-  /** 配置方式 */
+  /** 配置方式。取值范围：- usable：可用- visible：可见- disabled：不可用- hidden：隐藏默认值：disabled示例值：disabled */
   IncludeType?: string | null;
   /** 额外参数 */
   Params?: string | null;
@@ -470,7 +470,7 @@ declare interface UserIdAndUserName {
   Email?: string | null;
   /** 最后一次登录时间 */
   LastLogin?: string | null;
-  /** 停启用状态 */
+  /** 用户状态。取值范围：- 1：启用- 0：停用默认值：1示例值：1 */
   Status?: number | null;
   /** 首次登录是否修改密码 */
   FirstModify?: number | null;
@@ -679,7 +679,7 @@ declare interface ClearEmbedTokenResponse {
 declare interface CreateDatasourceCloudRequest {
   /** 后端提供字典：域类型，1、腾讯云，2、本地 */
   ServiceType: string;
-  /** 驱动 */
+  /** 驱动取值范围：MYSQL：MySQL数据库PRESTO：PRESTO数据库POSTGRE：PostgreSQL数据库DLC：DLC数据库MSSQL：微软SQL Server数据库 */
   DbType: string;
   /** 数据库编码 */
   Charset: string;
@@ -743,7 +743,7 @@ declare interface CreateDatasourceRequest {
   DbPort: number;
   /** 后端提供字典：域类型，1、腾讯云，2、本地 */
   ServiceType: string;
-  /** 驱动 */
+  /** 驱动取值范围：MYSQL：MySQL数据库PRESTO：PRESTO数据库POSTGRE：PostgreSQL数据库DLC：DLC数据库MSSQL：微软SQL Server数据库 */
   DbType: string;
   /** 数据库编码 */
   Charset: string;
@@ -845,17 +845,17 @@ declare interface CreateEmbedTokenResponse {
 declare interface CreatePermissionRanksRequest {
   /** 页数 */
   TableId?: number;
-  /** 条数 */
+  /** 模式。取值范围：- ALL：全部- Specify：指定- TAG：标签默认值：ALL示例值：ALL */
   Mode?: string;
-  /** 角色类型 */
+  /** 角色类型。取值范围：- ROLES：按角色- Others：其它默认值：Others示例值：Others */
   RoleType?: string;
   /** 所有页码 */
   RoleId?: number;
   /** 规则信息 */
   RulerInfo?: string;
-  /** 类型 */
+  /** 类型。取值范围：- ROW：行权限- COLUMN：列权限默认值：ROW示例值：ROW */
   Type?: string;
-  /** 状态 */
+  /** 开启状态。取值范围：- Open：开启- Close：关闭默认值：Close示例值：Close */
   OpenStatus?: string;
   /** 项目id */
   ProjectId?: number;
@@ -887,7 +887,7 @@ declare interface CreateProjectRequest {
   Mark?: string;
   /** 是否允许用户申请 */
   IsApply?: boolean;
-  /** 默认看板 */
+  /** 默认看板取值范围：1：项目看板 2：我的看板 */
   DefaultPanelType?: number;
   /** 管理平台 */
   ManagePlatform?: string;
@@ -979,7 +979,7 @@ declare interface DeleteProjectRequest {
   Id: number;
   /** 随机数 */
   Seed?: string;
-  /** 默认看板 */
+  /** 默认看板取值范围：1：项目看板 2：我的看板 */
   DefaultPanelType?: number;
 }
 
@@ -1087,13 +1087,13 @@ declare interface DescribePageWidgetListResponse {
 declare interface DescribePermissionRanksInfoRequest {
   /** 页数 */
   TableId?: number;
-  /** 条数 */
+  /** 模式。取值范围：- ALL：全部- Specify：指定- TAG：标签默认值：ALL示例值：ALL */
   Mode?: string;
-  /** 角色类型 */
+  /** 角色类型。取值范围：- ROLES：按角色- Others：其它默认值：Others示例值：Others */
   RoleType?: string;
   /** 所有页码 */
   RoleId?: number;
-  /** 类型 */
+  /** 类型。取值范围：- ROW：行权限- COLUMN：列权限默认值：ROW示例值：ROW */
   Type?: string;
   /** 项目id */
   ProjectId?: number;
@@ -1139,7 +1139,7 @@ declare interface DescribePermissionRoleInfoResponse {
 declare interface DescribePermissionStatusInfoRequest {
   /** 页数 */
   TableId?: number;
-  /** 类型 */
+  /** 类型。取值范围：- ROW：行权限- COLUMN：列权限默认值：ROW示例值：ROW */
   Type?: string;
   /** 1 */
   ProjectId?: string;
@@ -1161,7 +1161,7 @@ declare interface DescribePermissionStatusInfoResponse {
 declare interface DescribeProjectInfoRequest {
   /** 项目Id */
   Id: number;
-  /** 默认看板 */
+  /** 默认看板取值范围：1：项目看板 2：我的看板 */
   DefaultPanelType?: number;
 }
 
@@ -1331,7 +1331,7 @@ declare interface ExportScreenPageResponse {
 declare interface ModifyDatasourceCloudRequest {
   /** 后端提供字典：域类型，1、腾讯云，2、本地 */
   ServiceType: string;
-  /** 驱动 */
+  /** 驱动取值范围：MYSQL：MySQL数据库PRESTO：PRESTO数据库POSTGRE：PostgreSQL数据库DLC：DLC数据库MSSQL：微软SQL Server数据库 */
   DbType: string;
   /** 数据库编码 */
   Charset: string;
@@ -1397,7 +1397,7 @@ declare interface ModifyDatasourceRequest {
   DbPort: number;
   /** 后端提供字典：域类型，1、腾讯云，2、本地 */
   ServiceType: string;
-  /** 驱动 */
+  /** 驱动取值范围：MYSQL：MySQL数据库PRESTO：PRESTO数据库POSTGRE：PostgreSQL数据库DLC：DLC数据库MSSQL：微软SQL Server数据库 */
   DbType: string;
   /** 数据库编码 */
   Charset: string;
@@ -1469,7 +1469,7 @@ declare interface ModifyProjectRequest {
   IsApply?: boolean;
   /** 种子 */
   Seed?: string;
-  /** 默认看板 */
+  /** 默认看板取值范围：1：项目看板 2：我的看板 */
   DefaultPanelType?: number;
   /** 2 */
   PanelScope?: string;

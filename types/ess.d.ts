@@ -4981,7 +4981,7 @@ declare interface ExportContractReviewResultRequest {
   Operator: UserInfo;
   /** 合同审查任务ID */
   TaskId: string;
-  /** 导出文件类型。1 = 带风险批注文件; 2 = 审查结果＆摘要（.xIsx） */
+  /** 导出文件类型。1 = 带风险批注文件; 2 = 审查结果＆摘要（.xIsx）; 3 = 不带批注文件 */
   FileType: number;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
