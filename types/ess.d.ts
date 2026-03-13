@@ -576,7 +576,7 @@ declare interface ExtendAuthInfo {
 
 /** 印章扩展信息 */
 declare interface ExtendScene {
-  /** 印章来源类型印章来源类型包括下面几种：CREATE-客户上传图片创建GENERATE-系统模版印章生成SIST_SEAL-深圳电子印章 */
+  /** 印章来源类型印章来源类型包括下面几种：CREATE-客户上传图片创建GENERATE-系统模板印章生成SIST_SEAL-深圳电子印章 */
   GenerateType?: string;
   /** 印章来源类型描述 */
   GenerateTypeDesc?: string;
@@ -1024,6 +1024,8 @@ declare interface FlowGroupOptions {
   SelfOrganizationApproverNotifyType?: string;
   /** 发起合同（流程）组他方经办人通知方式签署通知类型，支持以下类型sms : 短信 (默认值)none : 不通知 */
   OtherApproverNotifyType?: string;
+  /** 是否开启发起合同组的发起审批，默认：false(不开启)，开启后，发起合同组会提交电子签内置审批流 */
+  FlowGroupNeedWorkflow?: boolean;
 }
 
 /** 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。 */
@@ -2781,6 +2783,8 @@ declare interface CreateFlowByFilesRequest {
   FlowDisplayType?: number;
   /** 是否开启动态签署合同： **true**：开启动态签署合同，可在发起时可以不传签署人，在签署过程中追加签署人（必须满足：1，发起方企业开启了模块化计费能力；2，发起方企业在企业应用管理中开启了动态签署人2.0能力） 。 **false**：不开启动态签署合同。 */
   OpenDynamicSignFlow?: boolean;
+  /** 是否开启发起合同审批，默认：false（不开启），开启后，发起合同（StartFlow），会提交电子签内置的审批流 */
+  Workflow?: boolean;
 }
 
 declare interface CreateFlowByFilesResponse {
@@ -2790,6 +2794,8 @@ declare interface CreateFlowByFilesResponse {
   PreviewUrl?: string;
   /** 签署方信息，如角色ID、角色名称等 */
   Approvers?: ApproverItem[];
+  /** 发起审批流id，仅在CreateFlowByFiles时指定了WorkFlow=true时返回 */
+  WorkflowInstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2860,6 +2866,8 @@ declare interface CreateFlowGroupByFilesResponse {
   FlowIds?: string[];
   /** 合同组签署方信息。 */
   Approvers?: FlowGroupApprovers[];
+  /** 发起审批流id，仅在发起时指定FlowGroupOptions.FlowGroupNeedWorkflow=true时返回 */
+  WorkflowInstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2886,6 +2894,8 @@ declare interface CreateFlowGroupByTemplatesResponse {
   FlowIds?: string[];
   /** 合同组签署人信息。 */
   Approvers?: FlowGroupApprovers[];
+  /** FlowGroupNeedWorkflow */
+  WorkflowInstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2963,6 +2973,8 @@ declare interface CreateFlowRequest {
   CallbackUrl?: string;
   /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议 3 :文书效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png) */
   FlowDisplayType?: number;
+  /** 是否开启发起合同审批，默认：false（不开启），开启后，发起合同（StartFlow），会提交电子签内置的审批流 */
+  Workflow?: boolean;
 }
 
 declare interface CreateFlowResponse {
@@ -3505,6 +3517,8 @@ declare interface CreatePrepareFlowGroupRequest {
   ResourceType: number;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
+  /** 合同组发起控制参数，当前仅支持FlowGroupNeedWorkflow，表示开启嵌入式合同组发起审批 */
+  FlowGroupOptions?: FlowGroupOptions;
 }
 
 declare interface CreatePrepareFlowGroupResponse {
@@ -3559,6 +3573,8 @@ declare interface CreatePrepareFlowRequest {
   FlowDisplayType?: number;
   /** 此字段已不再使用，请使用 CreateFlowOption 里面的 SignComponentConfig签署控件的配置信息，用在嵌入式发起的页面配置，包括 - 签署控件 是否默认展示日期. */
   SignComponentConfig?: SignComponentConfig;
+  /** 是否开启嵌入式合同发起时，提交发起审批流，默认：false（不开启），开启后，嵌入式合同发起后，会提交电子签内置审批流 */
+  Workflow?: boolean;
 }
 
 declare interface CreatePrepareFlowResponse {
@@ -5236,6 +5252,8 @@ declare interface StartFlowRequest {
 declare interface StartFlowResponse {
   /** 发起成功后返回的状态，根据合同流程的不同，返回不同状态： **START** : 发起成功, 合同进入签署环节 **REVIEW** : 提交审核成功, 合同需要发起审核, 发起方企业通过接口审核通过后合同才进入签署环境 `白名单功能，使用前请联系对接的客户经理沟通。` **EXECUTING** : 已提交发起任务且PDF合同正在合成中, 等PDF合同合成成功后进入签署环节 */
   Status?: string;
+  /** 发起审批流id，仅在CreateFlow时指定了WorkFlow=true时返回 */
+  WorkflowInstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

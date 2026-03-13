@@ -347,15 +347,15 @@ declare interface BriefDomain {
   /** 源站配置详情 */
   Origin?: Origin;
   /** 域名封禁状态normal：正常状态overdue：账号欠费导致域名关闭，充值完成后可自行启动加速服务malicious：域名出现恶意行为，强制关闭加速服务ddos：域名被大规模 DDoS 攻击，关闭加速服务idle：域名超过 90 天内无任何操作、数据产生，判定为不活跃域名自动关闭加速服务，可自行启动加速服务unlicensed：域名未备案/备案注销，自动关闭加速服务，备案完成后可自行启动加速服务capping：触发配置的带宽阈值上限readonly：域名存在特殊配置，被锁定 */
-  Disable: string;
+  Disable?: string;
   /** 加速区域mainland：中国境内加速overseas：中国境外加速global：全球加速 */
-  Area: string;
+  Area?: string;
   /** 域名锁定状态normal：未锁定mainland：中国境内锁定overseas：中国境外锁定global：全球锁定 */
-  Readonly: string;
+  Readonly?: string;
   /** 域名所属产品，cdn/ecdn */
-  Product: string;
+  Product?: string;
   /** 主域名 */
-  ParentHost: string;
+  ParentHost?: string;
 }
 
 /** 节点缓存过期时间配置，分为以下两种：+ 基础版缓存过期规则配置+ 高级版缓存过期规则配置 */

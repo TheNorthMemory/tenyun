@@ -7239,7 +7239,7 @@ declare interface CreateAdaptiveDynamicStreamingTemplateResponse {
 declare interface CreateAigcImageTaskRequest {
   /** 模型名称。当前支持的模型列表：Hunyuan,GEM，Qwen。 */
   ModelName?: string;
-  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。1. GEM， 可选[2.5,3.0]。 */
+  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。GEM， 可选[2.5,3.0]。 */
   ModelVersion?: string;
   /** 生成图片的描述。(注：最大支持1000字符)。当未传入参考图片时，此参数必填。 */
   Prompt?: string;
@@ -7247,10 +7247,12 @@ declare interface CreateAigcImageTaskRequest {
   NegativePrompt?: string;
   /** 默认取值为False，模型会严格地遵循指令。如果需要更精细的prompt获得最佳效果，可将此参数设置为True，将自动优化传入的prompt，以提升生成质量。 */
   EnhancePrompt?: boolean;
-  /** 用于传入参考的资源图片信息，默认支持传入一张图片。支持多图输入的模型：1. GEM，可支持最多3张图片输入作为资源图。注意：1. 推荐图片小于7M，各模型限制不同。2. 图片格式支持：jpeg, png, webp。 */
+  /** 用于传入参考的资源图片信息，默认支持传入一张图片。支持多图输入的模型：GEM，可支持最多3张图片输入作为资源图。注意：推荐图片小于7M，各模型限制不同。图片格式支持：jpeg, png, webp。 */
   ImageInfos?: AigcImageInfo[];
   /** 用于传入模型要求的额外参数。 */
   ExtraParameters?: AigcImageExtraParam;
+  /** 用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。 示例： {"size":"2048x2048"} */
+  AdditionalParameters?: string;
   /** 文件结果指定存储Cos桶信息。 注意：需开通Cos，创建并授权MPS_QcsRole角色。 */
   StoreCosParam?: AigcStoreCosParam;
   /** 接口操作者名称。 */

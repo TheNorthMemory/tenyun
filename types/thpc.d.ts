@@ -807,8 +807,10 @@ declare interface AttachNodesRequest {
   ImageId?: string;
   /** 要新增节点的资源类型。CVM：CVM实例类型资源WORKSPACE：工作空间类型实例资源默认值：CVM。 */
   ResourceType?: string;
-  /** 提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16KB。关于获取此参数的详细介绍，请参阅[Windows](https://cloud.tencent.com/document/product/213/17526)和[Linux](https://cloud.tencent.com/document/product/213/17525)启动时运行命令。 */
+  /** 提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16KB。关于获取此参数的详细介绍，请参阅Windows和Linux启动时运行命令。 */
   UserData?: string;
+  /** 控制实例加入集群是否跳过重装系统默认值：False */
+  SkipResetInstance?: boolean;
 }
 
 declare interface AttachNodesResponse {

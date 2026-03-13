@@ -7685,6 +7685,38 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface CreateAigcAdvancedCustomElementRequest {
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: number;
+    /** 主体名称，不能超过20个字符。 */
+    ElementName?: string;
+    /** 主体描述，不能超过100个字符。 */
+    ElementDescription?: string;
+    /** 主体参考方式。通过视频定制的主体和通过图片定制的主体的可用范围不同。枚举值：video_refer： 视频角色主体，此时将参考element_video_list定义主体外表。image_refer： 多图主体，此时将参考element_image_list定义主体外表。 */
+    ReferenceType?: string;
+    /** 主体音色，可绑定音色库中已有音色。当前参数为空时，当前主体不绑定音色。仅视频定制的主体支持绑定音色。 */
+    ElementVoiceId?: string;
+    /** 主体参考视频，可通过视频设定主体及其细节。可上传有声视频，有声视频包含人声则触发音色定制（定制+入音色库+与主体绑定）参考视频时当前参数必填，参考图片时当前参数无效用key:value承载，如下：{ &quot;refer_videos&quot;:[ { &quot;video_url&quot;:&quot;video_url_1&quot; } ]}● 视频格式仅支持MP4/MOV● 仅支持时长介于3s～8s之间、宽高比例需为16:9或9:16的1080P视频● 至多仅支持上传1段视频，视频大小不超过200MB● video_url参数值不得为空 */
+    ElementVideoList?: string;
+    /** 主体参考图，可通过多张图片设定主体及其细节。包括正面参考图和其他角度或特写参考图，其中：至少包括1张正面参考图，由frontal_image参数定义。需包括1～3张其他参考图，需与正面参考图有差异，由image_url参数定义。用key:value承载，如下：{ &quot;frontal_image&quot;:&quot;image_url_0&quot;, &quot;refer_images&quot;:[ { &quot;image_url&quot;:&quot;image_url_1&quot; }, { &quot;image_url&quot;:&quot;image_url_2&quot; }, { &quot;image_url&quot;:&quot;image_url_3&quot; } ]} */
+    ElementImageList?: string;
+    /** 为主体配置标签，一个主体可以配置多个标签。用key:value承载，其中具体如下：[ { &quot;tag_id&quot;: &quot;o_101&quot; }, { &quot;tag_id&quot;: &quot;o_102&quot; }] */
+    TagList?: string;
+    /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+    /** 来源上下文，用于透传用户请求信息，任务完成回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+    /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
+    TasksPriority?: number;
+  }
+
+  interface CreateAigcAdvancedCustomElementResponse {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface CreateAigcApiTokenRequest {
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId: number;
@@ -7711,6 +7743,30 @@ declare namespace V20180717 {
   interface CreateAigcCustomElementResponse {
     /** 主体ID。需自行记录下返回的主体ID。 */
     ElementId?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface CreateAigcCustomVoiceRequest {
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: number;
+    /** 音色名称，文本内容最大长度 20 个字符 */
+    VoiceName?: string;
+    /** 音色数据文件获取链接，支持 .mp3 / .wav / .mp4 / .mov 格式的音视频文件。音频中人声需干净无杂音，有且只能有一种人声，时长不短于 5 秒且不长于 30 秒。 */
+    VoiceUrl?: string;
+    /** 历史作品 ID，可通过引用历史作品提供音频素材。 */
+    VideoId?: string;
+    /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+    /** 来源上下文，用于透传用户请求信息，任务完成回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+    /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
+    TasksPriority?: number;
+  }
+
+  interface CreateAigcCustomVoiceResponse {
+    /** 任务 ID。 */
+    TaskId?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -12121,10 +12177,14 @@ declare interface Vod {
   CreateAIRecognitionTemplate(data: V20180717.CreateAIRecognitionTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAIRecognitionTemplateResponse>;
   /** 创建转自适应码流模板 {@link V20180717.CreateAdaptiveDynamicStreamingTemplateRequest} {@link V20180717.CreateAdaptiveDynamicStreamingTemplateResponse} */
   CreateAdaptiveDynamicStreamingTemplate(data: V20180717.CreateAdaptiveDynamicStreamingTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAdaptiveDynamicStreamingTemplateResponse>;
+  /** 创建 AIGC 高级自定义主体 {@link V20180717.CreateAigcAdvancedCustomElementRequest} {@link V20180717.CreateAigcAdvancedCustomElementResponse} */
+  CreateAigcAdvancedCustomElement(data: V20180717.CreateAigcAdvancedCustomElementRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcAdvancedCustomElementResponse>;
   /** 创建AIGC API Token {@link V20180717.CreateAigcApiTokenRequest} {@link V20180717.CreateAigcApiTokenResponse} */
   CreateAigcApiToken(data: V20180717.CreateAigcApiTokenRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcApiTokenResponse>;
   /** 创建AIGC自定义主体 {@link V20180717.CreateAigcCustomElementRequest} {@link V20180717.CreateAigcCustomElementResponse} */
   CreateAigcCustomElement(data: V20180717.CreateAigcCustomElementRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcCustomElementResponse>;
+  /** 创建 AIGC 自定义音色 {@link V20180717.CreateAigcCustomVoiceRequest} {@link V20180717.CreateAigcCustomVoiceResponse} */
+  CreateAigcCustomVoice(data: V20180717.CreateAigcCustomVoiceRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcCustomVoiceResponse>;
   /** 创建 AIGC 生图任务 {@link V20180717.CreateAigcImageTaskRequest} {@link V20180717.CreateAigcImageTaskResponse} */
   CreateAigcImageTask(data: V20180717.CreateAigcImageTaskRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcImageTaskResponse>;
   /** 创建 AIGC 生视频任务 {@link V20180717.CreateAigcVideoTaskRequest} {@link V20180717.CreateAigcVideoTaskResponse} */

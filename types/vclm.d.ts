@@ -305,7 +305,7 @@ declare interface DescribeVideoVoiceJobResponse {
 declare interface SubmitAigcVideoJobRequest {
   /** 模型名称。枚举值：● Vidu；● Kling：可灵；● HY：混元；● YT：优图；示例值：Vidu */
   Vendor: string;
-  /** 模型版本。枚举值：● 当Vendor为Vidu时，可选值[q2, q2-pro, q2-turbo]● 当Vendor为Kling时，可选值[v1.6, v2.0, v2.1, v2.5, , v2.6, O1]● 当Vendor为HY时，默认值：[v1.5]● 当Vendor为YT时，默认值：[v2.0] */
+  /** 模型版本。枚举值：● 当Vendor为Vidu时，可选值[q2, q2-pro, q2-turbo, q3-pro, q3-turbo]● 当Vendor为Kling时，可选值[v1.6, v2.0, v2.1, v2.5, v2.6]● 当Vendor为HY时，默认值：[v1.5]● 当Vendor为YT时，默认值：[v2.0] */
   Model: string;
   /** 模型参数Json-Format字符串 模型参数列表 */
   ModelParam?: string;

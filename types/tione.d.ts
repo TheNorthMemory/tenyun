@@ -176,6 +176,8 @@ declare interface DataConfig {
   CBSSource?: CBSConfig | null;
   /** 主机路径信息 */
   HostPathSource?: HostPath;
+  /** 公有云数据源 */
+  PublicDataSource?: PublicDataSourceFS | null;
 }
 
 /** 数据点 */

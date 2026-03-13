@@ -288,34 +288,6 @@ declare interface Whitelist {
   CreateTime?: string;
 }
 
-declare interface CreateProjectRequest {
-  /** 应用名称(不为空且最长为 200) */
-  Name: string;
-  /** 业务系统 ID */
-  InstanceID: string;
-  /** 项目抽样率(大于等于 0) */
-  Rate: string;
-  /** 是否开启聚类 */
-  EnableURLGroup: number;
-  /** 项目类型("web", "mp", "android", "ios", "node", "hippy", "weex", "viola", "rn") */
-  Type: string;
-  /** 项目对应仓库地址(可选，最长为 256) */
-  Repo?: string;
-  /** 项目对应网页地址(可选，最长为 256) */
-  URL?: string;
-  /** 应用描述(可选，最长为 1000) */
-  Desc?: string;
-}
-
-declare interface CreateProjectResponse {
-  /** 项目 id */
-  ID?: number;
-  /** 项目唯一key */
-  Key?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateReleaseFileRequest {
   /** 项目 id */
   ProjectID: number;
@@ -340,46 +312,6 @@ declare interface CreateStarProjectRequest {
 declare interface CreateStarProjectResponse {
   /** 接口返回信息 */
   Msg?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateTawInstanceRequest {
-  /** 片区Id，(至少大于0) */
-  AreaId: number;
-  /** 计费类型, (1=后付费) */
-  ChargeType: number;
-  /** 数据保存时间，(至少大于0) */
-  DataRetentionDays: number;
-  /** 实例名称，(最大长度不超过255字节) */
-  InstanceName: string;
-  /** 标签列表 */
-  Tags?: Tag[];
-  /** 实例描述，(最大长度不超过1024字节) */
-  InstanceDesc?: string;
-  /** 每天数据上报量，（不作量级限制） */
-  CountNum?: string;
-  /** 数据存储时长计费 */
-  PeriodRetain?: string;
-  /** 实例购买渠道("cdn" 等) */
-  BuyingChannel?: string;
-  /** 资源包类型：1=5百万/30天，2=10百万/30天，3=50百万/180天，4=100百万/180天，5=300百万/180天，6=500百万/180天，7=1000百万/180天，8=2500百万/180天，9=10000百万/360天（单位：上报量=百万条，周期=天） */
-  ResourcePackageType?: number;
-  /** 预付费资源包数量(仅预付费需要) */
-  ResourcePackageNum?: number;
-  /** 实例类型 1:原web相关类型 2:app端类型 */
-  InstanceType?: number;
-  /** 自动续费类型：0=不自动续费，1=开启自动续费；开启时需填写 AutoRenewalThreshold（1~50%）；同一实例最多允许存在 1 个自动续费资源包。 */
-  AutoRenewalType?: number;
-  /** 自动续费阈值 */
-  AutoRenewalThreshold?: number;
-}
-
-declare interface CreateTawInstanceResponse {
-  /** 实例Id */
-  InstanceId?: string;
-  /** 预付费订单 ，预付费不为null，后付费为null */
-  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2763,14 +2695,10 @@ declare interface StopProjectResponse {
 /** {@link Rum 前端性能监控} */
 declare interface Rum {
   (): Versions;
-  /** 创建 RUM 应用 {@link CreateProjectRequest} {@link CreateProjectResponse} */
-  CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
   /** 创建发布文件记录 {@link CreateReleaseFileRequest} {@link CreateReleaseFileResponse} */
   CreateReleaseFile(data: CreateReleaseFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReleaseFileResponse>;
   /** 添加星标应用 {@link CreateStarProjectRequest} {@link CreateStarProjectResponse} */
   CreateStarProject(data: CreateStarProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStarProjectResponse>;
-  /** 创建 RUM 业务系统 {@link CreateTawInstanceRequest} {@link CreateTawInstanceResponse} */
-  CreateTawInstance(data: CreateTawInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTawInstanceResponse>;
   /** 创建白名单 {@link CreateWhitelistRequest} {@link CreateWhitelistResponse} */
   CreateWhitelist(data: CreateWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWhitelistResponse>;
   /** 删除 RUM 业务系统 {@link DeleteInstanceRequest} {@link DeleteInstanceResponse} */

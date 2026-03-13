@@ -1185,7 +1185,7 @@ declare interface DescribeHostingDomainTaskRequest {
 
 declare interface DescribeHostingDomainTaskResponse {
   /** todo/doing/done/error */
-  Status: string;
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1667,7 +1667,7 @@ declare interface Tcb {
   CreateMySQL(data: CreateMySQLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMySQLResponse>;
   /** 创建静态托管资源 {@link CreateStaticStoreRequest} {@link CreateStaticStoreResponse} */
   CreateStaticStore(data: CreateStaticStoreRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStaticStoreResponse>;
-  /** 创建表 {@link CreateTableRequest} {@link CreateTableResponse} */
+  /** 创建文档型数据库表 {@link CreateTableRequest} {@link CreateTableResponse} */
   CreateTable(data: CreateTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTableResponse>;
   /** 创建tcb用户 {@link CreateUserRequest} {@link CreateUserResponse} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
@@ -1677,7 +1677,7 @@ declare interface Tcb {
   DeleteCloudBaseGWAPI(data: DeleteCloudBaseGWAPIRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudBaseGWAPIResponse>;
   /** 删除网关域名 {@link DeleteCloudBaseGWDomainRequest} {@link DeleteCloudBaseGWDomainResponse} */
   DeleteCloudBaseGWDomain(data: DeleteCloudBaseGWDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudBaseGWDomainResponse>;
-  /** 删除表 {@link DeleteTableRequest} {@link DeleteTableResponse} */
+  /** 删除文档型数据库表 {@link DeleteTableRequest} {@link DeleteTableResponse} */
   DeleteTable(data: DeleteTableRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTableResponse>;
   /** 删除tcb用户 {@link DeleteUsersRequest} {@link DeleteUsersResponse} */
   DeleteUsers(data: DeleteUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsersResponse>;
@@ -1693,7 +1693,7 @@ declare interface Tcb {
   DescribeCloudBaseGWService(data?: DescribeCloudBaseGWServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseGWServiceResponse>;
   /** 开通 MySql 结果查询 {@link DescribeCreateMySQLResultRequest} {@link DescribeCreateMySQLResultResponse} */
   DescribeCreateMySQLResult(data: DescribeCreateMySQLResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCreateMySQLResultResponse>;
-  /** 获取数据库权限 {@link DescribeDatabaseACLRequest} {@link DescribeDatabaseACLResponse} */
+  /** 获取文档型数据库权限 {@link DescribeDatabaseACLRequest} {@link DescribeDatabaseACLResponse} */
   DescribeDatabaseACL(data: DescribeDatabaseACLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseACLResponse>;
   /** 查询环境当前计费周期 {@link DescribeEnvAccountCircleRequest} {@link DescribeEnvAccountCircleResponse} */
   DescribeEnvAccountCircle(data: DescribeEnvAccountCircleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvAccountCircleResponse>;
@@ -1713,9 +1713,9 @@ declare interface Tcb {
   DescribeSafeRule(data: DescribeSafeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSafeRuleResponse>;
   /** 查看静态托管资源信息 {@link DescribeStaticStoreRequest} {@link DescribeStaticStoreResponse} */
   DescribeStaticStore(data: DescribeStaticStoreRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStaticStoreResponse>;
-  /** 查询表信息 {@link DescribeTableRequest} {@link DescribeTableResponse} */
+  /** 查询文档型数据库表信息 {@link DescribeTableRequest} {@link DescribeTableResponse} */
   DescribeTable(data: DescribeTableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableResponse>;
-  /** 查询所有表信息 {@link DescribeTablesRequest} {@link DescribeTablesResponse} */
+  /** 查询文档型数据库所有表信息 {@link DescribeTablesRequest} {@link DescribeTablesResponse} */
   DescribeTables(data: DescribeTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesResponse>;
   /** 查询tcb用户列表 {@link DescribeUserListRequest} {@link DescribeUserListResponse} */
   DescribeUserList(data: DescribeUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserListResponse>;
@@ -1723,17 +1723,17 @@ declare interface Tcb {
   DestroyEnv(data: DestroyEnvRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyEnvResponse>;
   /** 销毁MySql {@link DestroyMySQLRequest} {@link DestroyMySQLResponse} */
   DestroyMySQL(data: DestroyMySQLRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyMySQLResponse>;
-  /** 销毁静态资源 {@link DestroyStaticStoreRequest} {@link DestroyStaticStoreResponse} */
+  /** 销毁静态托管资源 {@link DestroyStaticStoreRequest} {@link DestroyStaticStoreResponse} */
   DestroyStaticStore(data: DestroyStaticStoreRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyStaticStoreResponse>;
   /** 编辑登录配置 {@link EditAuthConfigRequest} {@link EditAuthConfigResponse} */
   EditAuthConfig(data: EditAuthConfigRequest, config?: AxiosRequestConfig): AxiosPromise<EditAuthConfigResponse>;
-  /** 查询所有表 {@link ListTablesRequest} {@link ListTablesResponse} */
+  /** 查询文档型数据库所有表 {@link ListTablesRequest} {@link ListTablesResponse} */
   ListTables(data: ListTablesRequest, config?: AxiosRequestConfig): AxiosPromise<ListTablesResponse>;
   /** 修改云开发网关API {@link ModifyCloudBaseGWAPIRequest} {@link ModifyCloudBaseGWAPIResponse} */
   ModifyCloudBaseGWAPI(data: ModifyCloudBaseGWAPIRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudBaseGWAPIResponse>;
   /** 修改日志主题 {@link ModifyClsTopicRequest} {@link ModifyClsTopicResponse} */
   ModifyClsTopic(data: ModifyClsTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClsTopicResponse>;
-  /** 修改数据库权限 {@link ModifyDatabaseACLRequest} {@link ModifyDatabaseACLResponse} */
+  /** 修改文档型数据库权限 {@link ModifyDatabaseACLRequest} {@link ModifyDatabaseACLResponse} */
   ModifyDatabaseACL(data: ModifyDatabaseACLRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatabaseACLResponse>;
   /** 更新环境信息 {@link ModifyEnvRequest} {@link ModifyEnvResponse} */
   ModifyEnv(data: ModifyEnvRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvResponse>;
@@ -1747,13 +1747,13 @@ declare interface Tcb {
   ReinstateEnv(data: ReinstateEnvRequest, config?: AxiosRequestConfig): AxiosPromise<ReinstateEnvResponse>;
   /** 续费云开发环境 {@link RenewEnvRequest} {@link RenewEnvResponse} */
   RenewEnv(data: RenewEnvRequest, config?: AxiosRequestConfig): AxiosPromise<RenewEnvResponse>;
-  /** 执行数据库命令 {@link RunCommandsRequest} {@link RunCommandsResponse} */
+  /** 执行文档型数据库命令 {@link RunCommandsRequest} {@link RunCommandsResponse} */
   RunCommands(data: RunCommandsRequest, config?: AxiosRequestConfig): AxiosPromise<RunCommandsResponse>;
-  /** 执行SQL语句 {@link RunSqlRequest} {@link RunSqlResponse} */
+  /** 执行MySQL语句 {@link RunSqlRequest} {@link RunSqlResponse} */
   RunSql(data: RunSqlRequest, config?: AxiosRequestConfig): AxiosPromise<RunSqlResponse>;
   /** 搜索CLS日志 {@link SearchClsLogRequest} {@link SearchClsLogResponse} */
   SearchClsLog(data: SearchClsLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClsLogResponse>;
-  /** 修改表索引信息 {@link UpdateTableRequest} {@link UpdateTableResponse} */
+  /** 修改文档型数据库表索引信息 {@link UpdateTableRequest} {@link UpdateTableResponse} */
   UpdateTable(data: UpdateTableRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTableResponse>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   AddCustomDomain(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;

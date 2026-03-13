@@ -4162,7 +4162,7 @@ declare interface IDCardOCRResponse {
   Authority?: string;
   /** 证件有效期（国徽面） */
   ValidDate?: string;
-  /** 扩展信息，不请求则不返回，具体输入参考示例3和示例4。IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;WarnInfos，告警信息，Code 告警码列表和释义：-9100 身份证有效日期不合法告警，-9101 身份证边框不完整告警，-9102 身份证复印件告警（黑白及彩色复印件）,-9108 身份证复印件告警（仅黑白复印件），-9103 身份证翻拍告警，-9105 身份证框内遮挡告警，-9104 临时身份证告警，-9106 身份证疑似存在PS痕迹告警，-9107 身份证反光告警，-9110 电子身份证告警，-9111 水印告警（仅CardWarnType参数为Advanced时） */
+  /** 扩展信息，不请求则不返回，具体输入参考示例3和示例4。IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;WarnInfos，告警信息，Code 告警码列表和释义：-9109 身份证有效日期不合法告警，-9101 身份证边框不完整告警，-9102 身份证复印件告警（黑白及彩色复印件）,-9108 身份证复印件告警（仅黑白复印件），-9103 身份证翻拍告警，-9105 身份证框内遮挡告警，-9104 临时身份证告警，-9106 身份证疑似存在PS痕迹告警，-9107 身份证反光告警，-9110 电子身份证告警，-9111 水印告警（仅CardWarnType参数为Advanced时） */
   AdvancedInfo?: string;
   /** 反光点覆盖区域详情结果，具体内容请点击左侧链接 */
   ReflectDetailInfos?: ReflectDetailInfo[];
@@ -4901,6 +4901,8 @@ declare interface RecognizeTableAccurateOCRRequest {
   ImageUrl?: string;
   /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF有效，默认值为1。 */
   PdfPageNumber?: number;
+  /** 是否使用新模型枚举值：false： 使用当前默认模型，耗时短且支持坐标返回true： 使用新模型，复杂表格识别效果更好，耗时稍长默认值：false */
+  UseNewModel?: boolean;
 }
 
 declare interface RecognizeTableAccurateOCRResponse {
@@ -5590,6 +5592,38 @@ declare interface VehicleRegCertOCRResponse {
   RequestId?: string;
 }
 
+declare interface VerifyBizLicenseEnterprise4Request {
+  /** 统一社会信用代码 */
+  CreditCode: string;
+  /** 企业名称 */
+  EntName: string;
+  /** 法人代表 */
+  LrName: string;
+  /** 注册登记证件号码 */
+  IdNum: string;
+}
+
+declare interface VerifyBizLicenseEnterprise4Response {
+  /** 请求状态枚举值：0： 成功，计费1： 系统异常，不计费 */
+  StatusCode?: number;
+  /** 验证结果1：四要素完全匹配0：四要素不完全匹配仅StatusCode为0时返回 */
+  VerifyResult?: number;
+  /** 统一社会信用代码是否一致仅StatusCode为0时返回 */
+  IsCreditCodeConsistent?: boolean;
+  /** 企业名称是否一致仅StatusCode为0时返回 */
+  IsEntNameConsistent?: boolean;
+  /** 法人代表是否一致仅StatusCode为0时返回，企业名称与统一社会信用代码均未查得时，固定返回false */
+  IsLrNameConsistent?: boolean;
+  /** 注册登记证件号码是否一致仅StatusCode为0时返回，企业名称与统一社会信用代码均未查得时，固定返回false */
+  IsIdNumConsistent?: boolean;
+  /** 经营状态枚举值：1： 开业（在营）2： 迁出3： 注销4： 吊销5： 撤销6： 停业0： 其他-10002： 企业信息不正确，无法查询 */
+  OperatingStatus?: string;
+  /** 营业期限：一般包括营业开始时间和结束时间参数格式：yyyy-MM-dd/yyyy-MM-dd无固定期限的格式为：yyyy-MM-dd/部分企业历史数据可能为空，将返回：/企业信息不正确，无法查询，将返回：-10002 */
+  OperatingPeriod?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface VerifyOfdVatInvoiceOCRRequest {
   /** OFD文件的 Url 地址。 */
   OfdFileUrl?: string;
@@ -5855,6 +5889,8 @@ declare interface Ocr {
   VehicleLicenseOCR(data?: VehicleLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VehicleLicenseOCRResponse>;
   /** 机动车登记证书识别 {@link VehicleRegCertOCRRequest} {@link VehicleRegCertOCRResponse} */
   VehicleRegCertOCR(data?: VehicleRegCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VehicleRegCertOCRResponse>;
+  /** 营业执照核验（企业四要素） {@link VerifyBizLicenseEnterprise4Request} {@link VerifyBizLicenseEnterprise4Response} */
+  VerifyBizLicenseEnterprise4(data: VerifyBizLicenseEnterprise4Request, config?: AxiosRequestConfig): AxiosPromise<VerifyBizLicenseEnterprise4Response>;
   /** OFD发票识别 {@link VerifyOfdVatInvoiceOCRRequest} {@link VerifyOfdVatInvoiceOCRResponse} */
   VerifyOfdVatInvoiceOCR(data?: VerifyOfdVatInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyOfdVatInvoiceOCRResponse>;
   /** 车辆VIN码识别 {@link VinOCRRequest} {@link VinOCRResponse} */
