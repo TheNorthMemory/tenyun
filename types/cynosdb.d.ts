@@ -238,8 +238,10 @@ declare interface BackupConfigInfo {
   CrossRegionsEnable?: string;
   /** 跨地域备份地域 */
   CrossRegions?: string[] | null;
-  /** 动数据备份触发策略，periodically:自动周期备份,frequent:高频备份 */
+  /** 自动数据备份触发策略，periodically:自动周期备份,frequent:高频备份 */
   BackupTriggerStrategy?: string;
+  /** 备份投递关系 */
+  AutoCopyVaults?: CreateBackupVaultItem[];
 }
 
 /** 备份文件信息 */
@@ -268,6 +270,14 @@ declare interface BackupFileInfo {
   SnapShotType?: string;
   /** 备份文件备注 */
   BackupName?: string;
+  /** 投递状态 */
+  CopyStatus?: string;
+  /** 秘钥id */
+  EncryptKeyId?: string;
+  /** 秘钥地域 */
+  EncryptRegion?: string;
+  /** 保险箱信息 */
+  VaultInfos?: VaultInfo[];
 }
 
 /** 备份下载集群限制参数 */
@@ -338,6 +348,8 @@ declare interface BinlogConfigInfo {
   BinlogCrossRegionsEnable: string;
   /** binlog异地地域 */
   BinlogCrossRegions?: string[] | null;
+  /** 保险箱信息 */
+  AutoCopyVaults?: CreateBackupVaultItem[];
 }
 
 /** Binlog描述 */
@@ -354,6 +366,14 @@ declare interface BinlogItem {
   BinlogId?: number;
   /** binlog所跨地域 */
   CrossRegions?: string[];
+  /** 备份投递状态 */
+  CopyStatus?: string;
+  /** 保险箱信息 */
+  VaultInfos?: VaultInfo[];
+  /** 加密秘钥key */
+  EncryptKeyId?: string;
+  /** 加密秘钥地域 */
+  EncryptRegion?: string;
 }
 
 /** 任务信息 */
@@ -434,6 +454,10 @@ declare interface BizTaskInfo {
   TaskProgressInfo?: TaskProgressInfo;
   /** 全球数据库网络任务 */
   GdnTaskInfo?: GdnTaskInfo;
+  /** 保险箱id */
+  VaultId?: string;
+  /** 保险箱名称 */
+  VaultName?: string;
 }
 
 /** 实例参数修改任务详情 */
@@ -574,6 +598,14 @@ declare interface ClusterTaskId {
   ClusterId?: string;
   /** 任务ID */
   TaskId?: string;
+}
+
+/** 保险箱信息 */
+declare interface CreateBackupVaultItem {
+  /** 保险箱id */
+  VaultId?: string | null;
+  /** 保险箱地域 */
+  VaultRegion?: string | null;
 }
 
 /** 创建集群任务信息 */
@@ -1872,6 +1904,8 @@ declare interface LogicBackupConfigInfo {
   LogicCrossRegionsEnable?: string;
   /** 逻辑备份所跨地域 */
   LogicCrossRegions?: string[] | null;
+  /** 备份投递关系 */
+  AutoCopyVaults?: CreateBackupVaultItem[];
 }
 
 /** 手动备份任务信息 */
@@ -2510,6 +2544,14 @@ declare interface RedoLogItem {
   StartTime?: string;
   /** 完成时间 */
   FinishTime?: string;
+  /** 保险箱信息 */
+  VaultInfos?: VaultInfo[];
+  /** 备份投递状态 */
+  CopyStatus?: string;
+  /** 加密秘钥key */
+  EncryptKeyId?: string;
+  /** 加密秘钥地域 */
+  EncryptRegion?: string;
 }
 
 /** 该地域实例规格信息 */
@@ -2920,6 +2962,8 @@ declare interface SnapshotBackupConfig {
   ReserveDuration?: number;
   /** 自动数据备份触发策略，periodically:自动周期备份,frequent:高频备份 */
   BackupTriggerStrategy?: string;
+  /** 保险箱信息 */
+  AutoCopyVaults?: CreateBackupVaultItem[];
 }
 
 /** 转换集群log bin开关 */
@@ -3056,6 +3100,20 @@ declare interface UserHostPrivilege {
   DbHost: string;
   /** 用户权限 */
   DbPrivilege: string;
+}
+
+/** 保险箱信息 */
+declare interface VaultInfo {
+  /** 保险箱id */
+  VaultId?: string;
+  /** 保险箱name */
+  VaultName?: string;
+  /** 保险箱地域 */
+  VaultRegion?: string;
+  /** 保险箱状态 */
+  VaultStatus?: string;
+  /** 备份保留时间 */
+  BackupSaveSeconds?: number;
 }
 
 /** 可用区库存信息 */
@@ -6571,6 +6629,8 @@ declare interface ModifyServerlessStrategyRequest {
   AutoArchive?: string;
   /** 升级类型。 默认值：upgradeImmediate。 可选值： upgradeImmediate：立即完成修改 upgradeInMaintain：在维护时间窗口内完成修改 */
   UpgradeType?: string;
+  /** 新增的只读实例需要绑定的安全组列表。仅仅针对于在这次调整策略过程中新产生的只读实例绑定安全组，存量的实例不绑定。 */
+  SecurityGroupIdsForNewRo?: string[];
 }
 
 declare interface ModifyServerlessStrategyResponse {

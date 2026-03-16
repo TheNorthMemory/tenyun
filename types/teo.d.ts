@@ -2604,7 +2604,7 @@ declare interface OriginACLEntity {
   OperationMode: string;
 }
 
-/** 七层加速域名/四层代理实例与回源 IP 网段的绑定关系，以及回源 IP 网段详情。 */
+/** 七层加速域名/四层代理实例与回源 IP 网段的绑定关系，同时包含回源 IP 网段详情和选择可切换的回源 IP 网段列表。 */
 declare interface OriginACLInfo {
   /** 启用了特定回源 IP 网段回源的七层加速域名列表。源站防护未开启时为空。 */
   L7Hosts?: string[];
@@ -2616,6 +2616,8 @@ declare interface OriginACLInfo {
   NextOriginACL?: NextOriginACL | null;
   /** 源站防护状态，取值有：online：已生效；offline：已停用；updating: 配置部署中。 */
   Status?: string;
+  /** 源站防护回源ACL控制域。 */
+  OriginACLFamily?: string;
 }
 
 /** 回源鉴权参数。 */
@@ -6831,14 +6833,16 @@ declare interface DownloadL7LogsResponse {
 declare interface EnableOriginACLRequest {
   /** 站点 ID。 */
   ZoneId: string;
-  /** 七层加速域名开启源站防护的模式。all：针对站点下的所有七层加速域名开启。specific：针对站点下指定的七层加速域名开启。当参数为空时，默认为 specific。 */
+  /** 站点首次开启源站防护时，为七层加速域名配置特定回源 IP 网段的模式。all：针对当前站点下的所有七层加速域名开启，当域名数量超过 200 时，请先通过 specific 模式启用 200 个域名，剩余资源通过 ModifyOriginACL 接口启用。specific：针对站点下指定的七层加速域名开启。注意：当参数为空时，默认为 specific。后续新增七层加速域名/四层代理实例均请通过 ModifyOriginACL 接口配置。 */
   L7EnableMode?: string;
   /** 开启源站防护的七层加速域名列表，仅当参数 L7EnableMode 为 specific 时生效。L7EnableMode 为 all 时，请保留此参数为空。单次最大仅支持填写 200 个七层加速域名。 */
   L7Hosts?: string[];
-  /** 四层代理实例开启源站防护的模式。all：针对站点下的所有四层代理实例开启。specific：针对站点下指定的四层代理实例开启。当参数为空时，默认为 specific。 */
+  /** 站点首次开启源站防护时，为四层代理实例配置特定回源 IP 网段的模式。all：针对当前站点下的所有四层代理实例开启，当实例数量超过 100 时，请先通过 specific 模式启用 100 个域名，剩余资源通过 ModifyOriginACL 接口启用。specific：针对站点下指定的四层代理实例开启。注意：当参数为空时，默认为 specific。后续新增七层加速域名/四层代理实例均请通过 ModifyOriginACL 接口配置。 */
   L4EnableMode?: string;
   /** 开启源站防护的四层代理实例列表，仅当参数 L4EnableMode 为 specific 时生效。L4EnableMode 为 all 时，请保留此参数为空。单次最大仅支持填写 100 个四层代理实例。 */
   L4ProxyIds?: string[];
+  /** 源站防护回源ACL控制域，不填则默认用标准全球控制域；可用控制域信息可以通过DescribeAvailableOriginACLFamily接口查询获得。具体取值说明如下：gaz：标准全球可用区控制域；mlc：标准中国大陆可用区控制域；emc：标准全球(不含中国大陆)可用区控制域；plat-gaz：精简全球可用区控制域；plat-mlc：精简中国大陆可用区控制域；plat-emc：精简全球(不含中国大陆)可用区控制域； */
+  OriginACLFamily?: string;
 }
 
 declare interface EnableOriginACLResponse {
@@ -7409,6 +7413,8 @@ declare interface ModifyOriginACLRequest {
   ZoneId: string;
   /** 需要启用/关闭特定回源 IP 网段回源的实例。 */
   OriginACLEntities?: OriginACLEntity[];
+  /** 源站防护回源ACL控制域，不填则默认不变；控制域信息可以通过DescribeAvailableOriginACLFamily接口查询获得。具体取值说明如下：gaz：标准全球可用区控制域；mlc：标准中国大陆可用区控制域；emc：标准全球(不含中国大陆)可用区控制域；plat-gaz：精简全球可用区控制域；plat-mlc：精简中国大陆可用区控制域；plat-emc：精简全球(不含中国大陆)可用区控制域； */
+  OriginACLFamily?: string;
 }
 
 declare interface ModifyOriginACLResponse {

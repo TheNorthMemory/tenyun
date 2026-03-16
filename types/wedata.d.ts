@@ -650,6 +650,12 @@ declare interface CreateTriggerWorkflowResult {
   WorkflowId?: string | null;
 }
 
+/** 工作流调度模式下，工作流触发运行结果 */
+declare interface CreateTriggerWorkflowRunResult {
+  /** 工作流执行id */
+  WorkflowExecutionId?: string | null;
+}
+
 /** 工作流授权结果 */
 declare interface CreateWorkflowPermissionsResult {
   /** 实体授权结果，true/false */
@@ -5142,6 +5148,28 @@ declare interface CreateTriggerWorkflowResponse {
   RequestId?: string;
 }
 
+declare interface CreateTriggerWorkflowRunRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 工作流ID */
+  WorkflowId: string;
+  /** 自定义运行参数，如果为空或者null则使用工作流最新配置 */
+  AdvancedParams?: SchedulingParameter[];
+  /** 本次需要运行指定的任务ID集合，如果为null或为空则运行全部 */
+  TaskIds?: string[];
+  /** 指定的调度资源组id，为空默认原资源组 */
+  SchedulingResourceGroupId?: string;
+  /** 指定的集成资源组id，为空默认原资源组 */
+  IntegrationResourceGroupId?: string;
+}
+
+declare interface CreateTriggerWorkflowRunResponse {
+  /** 操作结果信息 */
+  Data?: CreateTriggerWorkflowRunResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateWorkflowFolderRequest {
   /** 项目ID */
   ProjectId: string;
@@ -8541,6 +8569,16 @@ declare namespace V20210820 {
     ProjectName?: string;
   }
 
+  /** 维度简化对象 */
+  interface AssetDimSimpleVO {
+    /** ID */
+    Id?: number | null;
+    /** 名称 */
+    DimName?: string | null;
+    /** 编码 */
+    DimCode?: string | null;
+  }
+
   /** 资产维度关联数据表字段结构定义 */
   interface AssetDimTableColumn {
     /** 表字段名称 */
@@ -8865,6 +8903,24 @@ declare namespace V20210820 {
     Value?: string | null;
     /** 取值描述 */
     ValueDesc?: string | null;
+  }
+
+  /** 变更日志 */
+  interface ChangeLog {
+    /** 变更类型 */
+    ChangeType?: string | null;
+    /** 修改前的值 */
+    OldValue?: string | null;
+    /** 修改后的值 */
+    NewValue?: string | null;
+    /** 修改人 */
+    ModifiedAccount?: string | null;
+    /** 修改时间 */
+    ModifiedTime?: string | null;
+    /** 修改原因 */
+    ChangeReason?: string | null;
+    /** 修改人名字 */
+    ModifiedAccountName?: string | null;
   }
 
   /** 模版详情 */
@@ -9283,6 +9339,24 @@ declare namespace V20210820 {
     Score: number | null;
   }
 
+  /** 数据资产操作标记 */
+  interface DataAssetOption {
+    /** 是否拥有权限 */
+    HasPermission?: boolean | null;
+    /** 是否已收藏 */
+    HasFavorite?: boolean | null;
+    /** 其他的操作类型:取值：ProjectIdNull -当前表未设置归属项目；NotCluster - 非系统源不支持权限申请；ProjectDisabled - 当前项目已被禁用； */
+    OtherOperate?: string | null;
+    /** 被收藏数 */
+    FavoriteCount?: number | null;
+    /** 是否有修改业务权限 */
+    HasBizPermission?: boolean | null;
+    /** 是否有修改归属项目权限 */
+    HasProjectPermission?: boolean | null;
+    /** 用户无映射账户，请先完成账户映射后再来申请。 */
+    ErrorTips?: string | null;
+  }
+
   /** 数据监测情况结果 */
   interface DataCheckStat {
     /** 表总数 */
@@ -9341,6 +9415,8 @@ declare namespace V20210820 {
     ExampleValue?: string | null;
     /** 参数描述 */
     Description?: string | null;
+    /** 关联标准编码 */
+    StdCode?: string | null;
   }
 
   /** 数据服务入参 */
@@ -9355,6 +9431,144 @@ declare namespace V20210820 {
     ExampleValue: string | null;
     /** 参数描述 */
     Description: string | null;
+  }
+
+  /** 数据资产结构 */
+  interface DataSetRecord {
+    /** 资产 ID */
+    AssetId?: string | null;
+    /** 数据源名称 */
+    DatasourceName?: string | null;
+    /** 数据库名称 */
+    DatabaseName?: string | null;
+    /** 表名称 */
+    TableName?: string | null;
+    /** 数据资产名称展示名称 */
+    TableNameCn?: string | null;
+    /** 数据资产名称展示名称EN */
+    TableNameEn?: string | null;
+    /** 资产描述信息 */
+    Description?: string | null;
+    /** 资产热度 */
+    HeatValue?: number | null;
+    /** 标签列表 */
+    LabelNames?: string[] | null;
+    /** 负责人 */
+    InCharge?: string | null;
+    /** 元数据采集类型：Table View Index */
+    MetaCrawlType?: string | null;
+    /** 数据资产归属的项目ID */
+    ProjectId?: string | null;
+    /** 生命周期 */
+    LifeTime?: number | null;
+    /** 判断是否是分区表1 是 0否 */
+    IsPartitionTable?: number | null;
+    /** 表字段集合 */
+    TableRecordFieldSet?: SearchColumnDocVO[] | null;
+    /** 表属性评分 */
+    TablePropertyScore?: TablePropertyScore | null;
+    /** 数据源类型 */
+    MsType?: string | null;
+    /** 数据存储大小 */
+    StorageSize?: number | null;
+    /** 数据资产等级 */
+    AssetLevel?: number | null;
+    /** 数据资产状态 */
+    AssetStatus?: number | null;
+    /** 数据目录ID */
+    BizCatalogIds?: string[] | null;
+    /** 数据目录名称 */
+    BizCatalogNames?: string[] | null;
+    /** 数据源 ID */
+    DatasourceId?: number | null;
+    /** 数据库 ID */
+    DatabaseId?: string | null;
+    /** 创建时间 */
+    CreateTime?: string | null;
+    /** 表 ID */
+    TableId?: string | null;
+    /** 数据资产操作选项 */
+    OperateOption?: DataAssetOption | null;
+    /** 数据库模式 */
+    Schema?: string | null;
+    /** 环境，取值 prod或者 dev */
+    Environment?: string | null;
+    /** 是否为视图 */
+    IsView?: boolean | null;
+    /** 数据来源技术类型取值： HIVE/MYSQL/HBASE/KAFKA等 */
+    TechnologyType?: string | null;
+    /** 项目名称 */
+    ProjectName?: string | null;
+    /** 项目展示名称 */
+    ProjectDisplayName?: string | null;
+    /** 集群 ID */
+    ClusterId?: string | null;
+    /** 存储大小，已转为如9.31TB: */
+    StorageSizeWithUnit?: string | null;
+    /** 多数据源信息 */
+    CollectDatasourceList?: GovDatasourceInfo[] | null;
+    /** 集群名称 */
+    ClusterName?: string | null;
+    /** 数据源Category: 系统源-CLUSTER, DB-自定义源 */
+    DataSourceCategory?: string | null;
+    /** 采集任务id */
+    CollectId?: number | null;
+    /** 采集唯一性urn */
+    Urn?: string | null;
+    /** 数据资产名称 */
+    AssetName?: string | null;
+    /** 资产运行状态： 任务运行状态 */
+    AssetRunningStatus?: string | null;
+    /** 任务类型 */
+    TaskTypeId?: number | null;
+    /** 资产运行时间， 任务最近执行时间 */
+    ExecuteTime?: string | null;
+    /** 资产日志，任务资产取 自动转交日志 */
+    AssetLog?: string | null;
+    /** 资产类型 */
+    AssetType?: string | null;
+    /** 任务 Job名称 */
+    JobName?: string | null;
+    /** 资产失效时间 */
+    ExpireTime?: string | null;
+    /** 安全等级值范围1-10 */
+    LevelRank?: number | null;
+    /** 安全等级名称 */
+    LevelName?: string | null;
+    /** 资产编码 */
+    AssetCode?: string | null;
+    /** 责任人 ID */
+    OwnerAccount?: number | null;
+    /** 更新时间 */
+    ModifyTime?: string | null;
+    /** 最近访问时间 */
+    LastAccessTime?: string | null;
+    /** 引擎侧创建人 */
+    OwnerByEngine?: string | null;
+    /** 数仓分层 UUID */
+    DataLayerUuid?: string | null;
+    /** 数仓分层名称 */
+    DataLayerName?: string | null;
+    /** 字段数量 */
+    ColumnCount?: number | null;
+    /** 关键字搜索命中的表字段列表 */
+    SearchHitColumns?: SearchColumnDocVO[] | null;
+    /** 标签对象集合 */
+    LabelTagList?: LabelTag[] | null;
+    /** 模型别名 */
+    Aliases?: RegisteredModelAlias[] | null;
+    /** 是否已经部署服务 */
+    IsDeployed?: boolean | null;
+    /** 模型标签 */
+    Tags?: RegisteredModelTag[] | null;
+    /** 模型类型 */
+    ModelType?: string | null;
+    /** 资产全称 */
+    FullName?: string | null;
+    /** Catalog名称 */
+    Namespace?: string | null;
+    /** Catalog来源 */
+    MetaFrom?: string | null;
   }
 
   /** 数据源云梯连接状态 */
@@ -10733,6 +10947,96 @@ declare namespace V20210820 {
     DatasourceEnv?: string | null;
   }
 
+  /** 指标查询出参 */
+  interface IndicatorBaseInfo {
+    /** 名称 */
+    Name?: string | null;
+    /** 指标编码 */
+    IndicatorCode?: string | null;
+    /** 指标类型（1-原子指标 2-衍生指标 3-复合指标） */
+    IndicatorType?: number | null;
+    /** 业务负责人 */
+    BizOwner?: string | null;
+    /** 技术负责人 */
+    TechOwner?: string | null;
+    /** 业务口径 */
+    BizCaliber?: string | null;
+    /** 指标描述 */
+    Description?: string | null;
+    /** 等级：40-L4核心 30-L3重要 20-L2一般 10-L1临时 */
+    Level?: number | null;
+    /** 计算逻辑 */
+    CalLogic?: string | null;
+    /** 计算频次 */
+    CalFreq?: string | null;
+    /** 度量单位 */
+    MeasureUnit?: number | null;
+    /** 精度 */
+    Accuracy?: number | null;
+    /** 关联指标 */
+    SourceIndicatorIds?: IndicatorBaseSimpleInfo[] | null;
+    /** ID */
+    Id?: number | null;
+    /** 维度列表 */
+    DimensionIds?: AssetDimSimpleVO[] | null;
+    /** 文件夹ID */
+    FolderId?: number | null;
+    /** 状态 */
+    Status?: number | null;
+    /** 业务负责人名字 */
+    BizOwnerName?: string | null;
+    /** 技术负责人名字 */
+    TechOwnerName?: string | null;
+    /** 发布时间 */
+    PublishTime?: string | null;
+    /** 发布人 */
+    PublishAccount?: string | null;
+    /** 发布人名字 */
+    PublishAccountName?: string | null;
+    /** 最后修订时间 */
+    LastModifyTime?: string | null;
+    /** 最后修订人ID */
+    LastModifyAccount?: string | null;
+    /** 最后修订人名字 */
+    LastModifyAccountName?: string | null;
+    /** 变更日志 */
+    ChangeLogList?: ChangeLog[] | null;
+    /** 字段列表 */
+    TableColumns?: AssetDimTableColumn[] | null;
+    /** 关联指标(包含多层级关联指标) */
+    AllSourceIndicatorIds?: IndicatorBaseInfo[] | null;
+    /** 资产guid */
+    AssetId?: string | null;
+    /** 类型 */
+    AssetType?: string | null;
+    /** 资产编码 */
+    AssetCode?: string | null;
+    /** 被关联的指标 */
+    RelatedIndicatorIds?: IndicatorBaseInfo[] | null;
+    /** 数据目录ID列表 */
+    BizCatalogIds?: number[] | null;
+    /** 数据目录名称列表 */
+    BizCatalogNames?: string[] | null;
+    /** 资产等级 */
+    AssetLevel?: number | null;
+    /** 资产发布状态 */
+    AssetStatus?: number | null;
+    /** 资产发布时间 */
+    AssetPublishTime?: string | null;
+    /** 资产发布人 */
+    AssetPublishAccount?: string | null;
+    /** 资产发布人名字 */
+    AssetPublishAccountName?: string | null;
+    /** 指标权限 */
+    IndicatorPermission?: PermissionStatus | null;
+    /** 资产权限 */
+    OperateOption?: DataAssetOption | null;
+    /** 项目 ID */
+    ProjectId?: string | null;
+    /** 项目名称 */
+    ProjectName?: string | null;
+  }
+
   /** 指标列表简单结构 */
   interface IndicatorBaseSimpleInfo {
     /** ID */
@@ -11597,6 +11901,14 @@ declare namespace V20210820 {
     TagList?: IntegrationTag[] | null;
     /** 错误信息 */
     ErrorMessage?: string | null;
+    /** 任务子状态 */
+    TaskSubType?: number | null;
+    /** 是否存在SavePoint, 0-存在, 1-不存在, null 为未知 */
+    NotExistsCheckPoint?: number | null;
+    /** savepiontPath */
+    SavePointId?: string | null;
+    /** savepiontId */
+    SavePointPath?: string | null;
   }
 
   /** 调度任务日志错误提示信息 */
@@ -12767,6 +13079,22 @@ declare namespace V20210820 {
     Properties?: ParamInfoDs[];
     /** 描述信息 */
     Description?: string;
+  }
+
+  /** 注册模型别名 */
+  interface RegisteredModelAlias {
+    /** 别名的名称 */
+    Alias?: string;
+    /** 别名指向的模型版本号 */
+    Version?: string;
+  }
+
+  /** 注册模型标签 */
+  interface RegisteredModelTag {
+    /** tag key */
+    Key?: string;
+    /** tag value */
+    Value?: string;
   }
 
   /** 任务直接关联的其他任务 */
@@ -14769,6 +15097,12 @@ declare namespace V20210820 {
     Ext: string | null;
     /** 表物理唯一id */
     TablePhysicalId: string | null;
+    /** Catalog名称 */
+    CatalogName?: string | null;
+    /** 数据源名称 */
+    DatasourceName?: string | null;
+    /** Catalog(如有).数据库(如有).表名名称 */
+    QualifiedName?: string | null;
   }
 
   /** 任务信息 */
@@ -14979,6 +15313,10 @@ declare namespace V20210820 {
     BundleId?: string | null;
     /** bundle信息 */
     BundleInfo?: string | null;
+    /** 是否允许下游依赖 0 不允许 1 允许 */
+    AllowDownstreamDependency?: number | null;
+    /** - 任务依赖运行条件，默认为ALL_SUCCESS，暂时只支持工作流调度项目下配置- ALL_SUCCESS： 全部成功：所有上游依赖任务都达到终态时，进行依赖判断，如果上游全部都成功，则依赖判断成功，否则如果上游有一个跳过运行，则标记为跳过运行，其余情况标记为上游失败- ALL_FAILED：全部失败：所有上游依赖任务都达到终态时，进行依赖判断，如果上游状态都是失败或者上游失败，则依赖判断成功，否则就标记为跳过运行- ALL_DONE：全部完成：所有上游依赖任务都达到终态时，进行依赖判断，直接是依赖判断成功- ALL_DONE_AT_LEAST_ONE_SUCCESS：上游全部完成至少一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个成功，则依赖判断成功，否则就是跳过运行- ALL_SKIPPED：上游全部都跳过: 所有上游依赖任务都达到终态时，进行依赖判断，所有的上游都是跳过状态才算依赖判断成功，否则当前节点就是跳过运行- ONE_FAILED：至少一个失败: 上游只要有一个失败了，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有失败，则跳过运行- ONE_SUCCESS：至少一个成功：上游只要有一个成功，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有成功，则跳过运行- ONE_DONE：至少一个完成：上游只要有一个完成了，就进行依赖判断，且依赖判断成功，否则还是等待上游- NONE_FAILED：上游全部完成，没有失败: 所有上游依赖任务都达到终态时，进行依赖判断，如果上游都是成功或者跳过运行，则依赖判断成功，否则标记为上游失败- ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS：上游全部完成，没有失败，至少有一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，上游没有一个失败且至少有一个成功的情况下，依赖判断成功，否则就是跳过运行- NONE_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行- ALL_DONE_AT_LEAST_ONE_FAILED：上游全部完成至少一个失败: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个失败，则依赖判断成功，否则就是跳过运行 */
+    DependencyTriggerPolicy?: string | null;
   }
 
   /** 属性配置 */
@@ -15053,6 +15391,8 @@ declare namespace V20210820 {
     WorkFlowName?: string | null;
     /** 重名任务处理策略, 0:跳过,不导入; 1: 重命名 */
     TaskNameExistMode?: number | null;
+    /** 工作流所属目录路径 */
+    WorkFlowFolderPath?: string | null;
   }
 
   /** 任务信息 */
@@ -18084,6 +18424,34 @@ declare namespace V20210820 {
     RequestId?: string;
   }
 
+  interface DescribeDataAssetsRequest {
+    /** 请求来源，WEB 前端；CLIENT 客户端 */
+    RequestFromSource?: string;
+    /** 过滤字段名称Name 取值如下 keyword 搜索关键字 bizCatalogIds 表示目录分类取值 DataAssetType 数据资产类型枚举取值：ALL-全部类型、TABLE-数据表 DatasourceType 数据源类型 datasourceIds 数据源ID列表 DatabaseName 数据库名称 InCharge 负责人 ProjectId 项目ID Label 标签 ProjectId 数据资产归属的项目ID AssetLevel 等级 取值：ALL-全部，40-核心，30-重要，20-一般，10-临时 OwnerMe 我负责的 PermissionMe 我有权限的 MyFavorite 我收藏的 */
+    Filters?: Filter[];
+    /** 排序字段列表取值： Name： Table-按表名，LikeCount-按热度 Direction： ASC, DESC */
+    OrderFields?: OrderField[];
+    /** 页码，配合pageSize使用 */
+    PageNumber?: number;
+    /** 每页数目，配合pageNumber使用 */
+    PageSize?: number;
+  }
+
+  interface DescribeDataAssetsResponse {
+    /** 数据资产记录列表 */
+    DataSetRecords?: DataSetRecord[] | null;
+    /** 总数量 */
+    TotalCount?: number | null;
+    /** 页码 */
+    PageNumber?: number | null;
+    /** 每页数目 */
+    PageSize?: number | null;
+    /** 指标列表 */
+    IndicatorRecords?: IndicatorBaseInfo[] | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeDataCheckStatRequest {
     /** 项目id */
     ProjectId: string;
@@ -20313,7 +20681,7 @@ declare namespace V20210820 {
     /** 生命周期信息 */
     LifecycleInfo?: LifecycleInfo | null;
     /** 标签 */
-    TagVoteSumList?: TagVoteSum | null;
+    TagVoteSumList?: TagVoteSum[] | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -23498,6 +23866,8 @@ declare interface Wedata {
   CreateTriggerTask(data: CreateTriggerTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTriggerTaskResponse>;
   /** 创建调度工作流 {@link CreateTriggerWorkflowRequest} {@link CreateTriggerWorkflowResponse} */
   CreateTriggerWorkflow(data: CreateTriggerWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTriggerWorkflowResponse>;
+  /** 运行工作流(工作流调度) {@link CreateTriggerWorkflowRunRequest} {@link CreateTriggerWorkflowRunResponse} */
+  CreateTriggerWorkflowRun(data: CreateTriggerWorkflowRunRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTriggerWorkflowRunResponse>;
   /** 创建工作流 {@link CreateWorkflowRequest} {@link CreateWorkflowResponse} */
   CreateWorkflow(data: CreateWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkflowResponse>;
   /** 创建工作流文件夹 {@link CreateWorkflowFolderRequest} {@link CreateWorkflowFolderResponse} */
@@ -23972,6 +24342,8 @@ declare interface Wedata {
   DescribeColumnLineage(data: V20210820.DescribeColumnLineageRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeColumnLineageResponse>;
   /** 查询表的所有列元数据 {@link V20210820.DescribeColumnsMetaRequest} {@link V20210820.DescribeColumnsMetaResponse} */
   DescribeColumnsMeta(data: V20210820.DescribeColumnsMetaRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeColumnsMetaResponse>;
+  /** 查询数据资产 {@link V20210820.DescribeDataAssetsRequest} {@link V20210820.DescribeDataAssetsResponse} */
+  DescribeDataAssets(data: V20210820.DescribeDataAssetsRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeDataAssetsResponse>;
   /** 数据质量数据监测情况接口 {@link V20210820.DescribeDataCheckStatRequest} {@link V20210820.DescribeDataCheckStatResponse} */
   DescribeDataCheckStat(data: V20210820.DescribeDataCheckStatRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeDataCheckStatResponse>;
   /** 查询数据服务API的发布态信息详情 {@link V20210820.DescribeDataServicePublishedApiDetailRequest} {@link V20210820.DescribeDataServicePublishedApiDetailResponse} */

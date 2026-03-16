@@ -113,7 +113,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 250+ 款产品，13453+ 服务数</summary>
+<details><summary>共计 250+ 款产品，13458+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -231,7 +231,7 @@ fmu | [人脸试妆](https://cloud.tencent.com/document/product/1172) | 2019-12-
 ft | [人像变换](https://cloud.tencent.com/document/product/1202) | 2020-03-04(6) |
 gaap | [全球应用加速](https://cloud.tencent.com/document/product/608) | 2018-05-29(102) |
 gme | [游戏多媒体引擎](https://cloud.tencent.com/document/product/607) | 2018-07-11(38) |
-goosefs | [数据加速器 GooseFS](https://cloud.tencent.com/document/product/1424) | 2022-05-19(31) |
+goosefs | [数据加速器 GooseFS](https://cloud.tencent.com/document/product/1424) | 2022-05-19(36) |
 gs | [云游戏](https://cloud.tencent.com/document/product/1162) | 2019-11-18(83) |
 gwlb | [网关负载均衡](https://cloud.tencent.com/document/product/1782) | 2024-09-06(19) |
 habo |  | 2018-12-03(2) |
@@ -323,7 +323,7 @@ tdai | [腾讯云数据库 AI 服务](https://cloud.tencent.com/document/product
 tdcpg | [TDSQL-C PostgreSQL 版](https://cloud.tencent.com/document/product/1556) | 2021-11-18(25) |
 tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021-05-19(18) |
 tdmq | [消息队列 TDMQ](https://cloud.tencent.com/document/product/1179) | 2020-02-17(150) |
-tdmysql | [TDSQL](https://cloud.tencent.com/document/product/1376) | 2021-11-22(20) |
+tdmysql | [TDSQL](https://cloud.tencent.com/document/product/1376) | 2021-11-22(17) |
 tds | [设备安全](https://cloud.tencent.com/document/product/1628) | 2022-08-01(5) |
 tem | [弹性微服务](https://cloud.tencent.com/document/product/1371) | 2021-07-01(51) | 2020-12-21(17) |
 teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) | 2022-09-01(198) | 2022-01-06(5) |
@@ -353,13 +353,13 @@ vcube | [音视频终端引擎](https://cloud.tencent.com/document/product/1449)
 vdb | [向量数据库](https://cloud.tencent.com/document/product/1709) | 2023-06-16(17) |
 vm | [视频内容安全](https://cloud.tencent.com/document/product/1265) | 2021-09-22(4) | 2020-12-29(4)<br/>2020-07-09(5) |
 vms | [语音消息](https://cloud.tencent.com/document/product/1128) | 2020-09-02(2) |
-vod | [云点播](https://cloud.tencent.com/document/product/266) | 2024-07-18(7) | 2018-07-17(215) |
+vod | [云点播](https://cloud.tencent.com/document/product/266) | 2024-07-18(7) | 2018-07-17(216) |
 vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(443) |
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(8) |
 vtc | [视频转译](https://cloud.tencent.com/document/product/1769) | 2024-02-23(3) |
 waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(200) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
-wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2025-08-06(180) | 2021-08-20(299) |
+wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2025-08-06(181) | 2021-08-20(300) |
 weilingwith | [微瓴同业开放平台](https://cloud.tencent.com/document/product/1693) | 2023-04-27(63) |
 wimgs | [联网图像搜索](https://cloud.tencent.com/document/product/1815) | 2025-11-06(1) |
 wsa | [联网搜索API](https://cloud.tencent.com/document/product/1806) | 2025-05-08(1) |

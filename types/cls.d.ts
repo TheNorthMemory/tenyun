@@ -4241,22 +4241,22 @@ declare interface DescribeHostMetricConfigsResponse {
 }
 
 declare interface DescribeIndexRequest {
-  /** 日志主题Id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  /** 日志主题Id。通过获取日志主题列表获取日志主题Id。 */
   TopicId: string;
 }
 
 declare interface DescribeIndexResponse {
   /** 日志主题Id */
   TopicId?: string;
-  /** 索引状态。true：开启状态，false：关闭状态开启后可对日志进行检索分析，将产生索引流量、索引存储及相应费用。[费用详情](https://cloud.tencent.com/document/product/614/45802) */
+  /** 索引状态。true：开启状态，false：关闭状态开启后可对日志进行检索分析，将产生索引流量、索引存储及相应费用。费用详情 */
   Status?: boolean;
   /** 索引配置信息 */
   Rule?: RuleInfo | null;
-  /** 索引修改时间，初始值为索引创建时间。格式 `YYYY-MM-DD HH:MM:SS` */
+  /** 索引修改时间，初始值为索引创建时间。格式 YYYY-MM-DD HH:MM:SS */
   ModifyTime?: string;
-  /** 内置保留字段（`__FILENAME__`，`__HOSTNAME__`及`__SOURCE__`）是否包含至全文索引* false:不包含* true:包含 */
+  /** 内置保留字段（__FILENAME__，__HOSTNAME__及__SOURCE__）是否包含至全文索引false:不包含true:包含 */
   IncludeInternalFields?: boolean;
-  /** 元数据字段（前缀为`__TAG__`的字段）是否包含至全文索引* 0:仅包含开启键值索引的元数据字段* 1:包含所有元数据字段* 2:不包含任何元数据字段 */
+  /** 元数据字段（前缀为__TAG__的字段）是否包含至全文索引0:仅包含开启键值索引的元数据字段1:包含所有元数据字段2:不包含任何元数据字段 */
   MetadataFlag?: number;
   /** 自定义日志解析异常存储字段。 */
   CoverageField?: string;

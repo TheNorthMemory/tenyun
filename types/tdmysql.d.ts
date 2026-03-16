@@ -172,14 +172,6 @@ declare interface SecurityGroupBound {
   IpProtocol?: string;
 }
 
-/** 数据库列信息 */
-declare interface TableColumn {
-  /** 列名称 */
-  Col: string;
-  /** 列类型 */
-  Type: string;
-}
-
 declare interface CancelIsolateDBInstancesRequest {
   /** 需要隔离的实例ID列表 */
   InstanceIds: string[];
@@ -228,14 +220,6 @@ declare interface DeleteDBSBackupSetsResponse {
   IsSuccess?: boolean;
   /** 需要删除的备份总数 */
   Total?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeBillingEnableRequest {
-}
-
-declare interface DescribeBillingEnableResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -342,28 +326,6 @@ declare interface DescribeDatabaseObjectsResponse {
   RequestId?: string;
 }
 
-declare interface DescribeDatabaseTableRequest {
-  /** 实例 ID，形如：tdsql3-ow7t8lmc。 */
-  InstanceId: string;
-  /** 数据库名称，通过 DescribeDatabases 接口获取。 */
-  DbName: string;
-  /** 表名称，通过 DescribeDatabaseObjects 接口获取。 */
-  Table: string;
-}
-
-declare interface DescribeDatabaseTableResponse {
-  /** 实例名称。 */
-  InstanceId: string;
-  /** 数据库名称。 */
-  DbName: string;
-  /** 表名称。 */
-  Table: string | null;
-  /** 列信息。 */
-  Cols: TableColumn[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeFlowRequest {
 }
 
@@ -408,20 +370,6 @@ declare interface ModifyAutoRenewFlagRequest {
 }
 
 declare interface ModifyAutoRenewFlagResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ModifyBinlogStatusRequest {
-  /** 实例id */
-  InstanceId: string;
-  /** 1打开0关闭 */
-  Status: number;
-}
-
-declare interface ModifyBinlogStatusResponse {
-  /** flow的流程id */
-  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -507,8 +455,6 @@ declare interface Tdmysql {
   CreateDBSBackup(data: CreateDBSBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBSBackupResponse>;
   /** 清理实例备份 {@link DeleteDBSBackupSetsRequest} {@link DeleteDBSBackupSetsResponse} */
   DeleteDBSBackupSets(data: DeleteDBSBackupSetsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDBSBackupSetsResponse>;
-  /** 查询计费是否开启 {@link DescribeBillingEnableRequest} {@link DescribeBillingEnableResponse} */
-  DescribeBillingEnable(data?: DescribeBillingEnableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingEnableResponse>;
   /** 查看实例参数 {@link DescribeDBParametersRequest} {@link DescribeDBParametersResponse} */
   DescribeDBParameters(data: DescribeDBParametersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBParametersResponse>;
   /** 获取可恢复时间 {@link DescribeDBSAvailableRecoveryTimeRequest} {@link DescribeDBSAvailableRecoveryTimeResponse} */
@@ -519,8 +465,6 @@ declare interface Tdmysql {
   DescribeDBSecurityGroups(data: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
   /** 查询数据库对象列表 {@link DescribeDatabaseObjectsRequest} {@link DescribeDatabaseObjectsResponse} */
   DescribeDatabaseObjects(data: DescribeDatabaseObjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseObjectsResponse>;
-  /** 查询数据库表信息 {@link DescribeDatabaseTableRequest} {@link DescribeDatabaseTableResponse} */
-  DescribeDatabaseTable(data: DescribeDatabaseTableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseTableResponse>;
   /** 查询流程状态 {@link DescribeFlowRequest} {@link DescribeFlowResponse} */
   DescribeFlow(data?: DescribeFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowResponse>;
   /** 批量销毁实例 {@link DestroyInstancesRequest} {@link DestroyInstancesResponse} */
@@ -529,8 +473,6 @@ declare interface Tdmysql {
   IsolateDBInstance(data: IsolateDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDBInstanceResponse>;
   /** 修改自动续费标志 {@link ModifyAutoRenewFlagRequest} {@link ModifyAutoRenewFlagResponse} */
   ModifyAutoRenewFlag(data: ModifyAutoRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoRenewFlagResponse>;
-  /** 修改binlog状态 {@link ModifyBinlogStatusRequest} {@link ModifyBinlogStatusResponse} */
-  ModifyBinlogStatus(data: ModifyBinlogStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBinlogStatusResponse>;
   /** 修改云数据库安全组 {@link ModifyDBInstanceSecurityGroupsRequest} {@link ModifyDBInstanceSecurityGroupsResponse} */
   ModifyDBInstanceSecurityGroups(data: ModifyDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSecurityGroupsResponse>;
   /** 修改实例参数 {@link ModifyDBParametersRequest} {@link ModifyDBParametersResponse} */

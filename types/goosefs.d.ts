@@ -56,6 +56,36 @@ declare interface ClientToken {
   Token?: string | null;
 }
 
+/** 客户端集群挂载信息 */
+declare interface ClusterMountAttr {
+  /** 挂载的文件系统Id */
+  StorageFileSystemId?: string;
+  /** 客户端集群挂载点。入参是节点的自定义挂载点，出参是集群的默认挂载点 */
+  MountPoint?: string | null;
+}
+
+/** goosefsx客户端集群信息 */
+declare interface CustomerClusterAttr {
+  /** 集群id */
+  ClusterId?: string;
+  /** vpc网络id */
+  VpcId?: string;
+  /** 子网id */
+  SubnetId?: string;
+  /** 客户端数量 */
+  ClientNum?: number;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 集群类型：0: 默认集群（文件系统创建时构建，不可销毁）；1: 扩展集群（客户端数量为0时可销毁） */
+  ClusterType?: number;
+  /** 管理节点信息 */
+  ManagerNodes?: ClientClusterManagerNodeInfo[];
+  /** 集群状态：0:creating 创建中；1: created 创建完成; 2: deleting 删除中； 3: deleted 删除完成； 4: failed 创建失败 */
+  Status?: number;
+  /** 客户端集群挂载存储集合 */
+  ClusterMountSet?: ClusterMountAttr[];
+}
+
 /** 数据预热任务参数 */
 declare interface DistributedLoadAttrs {
   /** 预热类型，枚举值 LoadByPath｜LoadByList */
@@ -348,6 +378,24 @@ declare interface BuildClientNodeMountCommandResponse {
   RequestId?: string;
 }
 
+declare interface BuildCustomerClusterRequest {
+  /** 文件系统id */
+  FileSystemId?: string;
+  /** vpc网络ID */
+  VpcId?: string;
+  /** 子网id */
+  SubnetId?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+}
+
+declare interface BuildCustomerClusterResponse {
+  /** 客户端集群Id */
+  ClusterId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CancelLoadTaskRequest {
   /** 集群 ID */
   ClusterId: string;
@@ -466,6 +514,18 @@ declare interface DeleteCrossVpcSubnetSupportForClientNodeResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCustomerClusterRequest {
+  /** 文件系统id */
+  FileSystemId?: string;
+  /** 客户端集群ID */
+  ClusterId?: string;
+}
+
+declare interface DeleteCustomerClusterResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteFileSystemRequest {
   /** 文件系统ID */
   FileSystemId: string;
@@ -522,6 +582,18 @@ declare interface DescribeClusterRoleTokenRequest {
 declare interface DescribeClusterRoleTokenResponse {
   /** 角色凭证 */
   RoleTokens?: RoleToken[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCustomerClusterRequest {
+  /** 文件系统id */
+  FileSystemId?: string;
+}
+
+declare interface DescribeCustomerClusterResponse {
+  /** 客户端集群列表 */
+  ClusterSet?: CustomerClusterAttr[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -682,6 +754,36 @@ declare interface ModifyDataRepositoryBandwidthResponse {
   RequestId?: string;
 }
 
+declare interface MountMultipleStorageFileSystemRequest {
+  /** 客户端集群所属的文件系统id */
+  FileSystemId?: string;
+  /** 客户端集群Id */
+  CustomerClusterId?: string;
+  /** 挂载的存储集群的id */
+  StorageFileSystemId?: string;
+}
+
+declare interface MountMultipleStorageFileSystemResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface QueryClientNodeMountCommandRequest {
+  /** 客户端集群ID */
+  ClusterId?: string;
+  /** 集群挂载信息 */
+  ClusterMountInfo?: ClusterMountAttr[];
+  /** 文件系统id */
+  FileSystemId?: string;
+}
+
+declare interface QueryClientNodeMountCommandResponse {
+  /** 挂载命令 */
+  Command?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface QueryCrossVpcSubnetSupportForClientNodeRequest {
   /** 文件系统ID */
   FileSystemId: string;
@@ -767,6 +869,8 @@ declare interface Goosefs {
   BatchDeleteClientNodes(data: BatchDeleteClientNodesRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteClientNodesResponse>;
   /** 生成客户端节点的挂载命令 {@link BuildClientNodeMountCommandRequest} {@link BuildClientNodeMountCommandResponse} */
   BuildClientNodeMountCommand(data: BuildClientNodeMountCommandRequest, config?: AxiosRequestConfig): AxiosPromise<BuildClientNodeMountCommandResponse>;
+  /** 创建客户端集群 {@link BuildCustomerClusterRequest} {@link BuildCustomerClusterResponse} */
+  BuildCustomerCluster(data?: BuildCustomerClusterRequest, config?: AxiosRequestConfig): AxiosPromise<BuildCustomerClusterResponse>;
   /** 取消 GooseFS 预热任务 {@link CancelLoadTaskRequest} {@link CancelLoadTaskResponse} */
   CancelLoadTask(data: CancelLoadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelLoadTaskResponse>;
   /** 创建数据流动任务 {@link CreateDataRepositoryTaskRequest} {@link CreateDataRepositoryTaskResponse} */
@@ -779,6 +883,8 @@ declare interface Goosefs {
   CreateLoadTask(data: CreateLoadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoadTaskResponse>;
   /** 为客户端节点删除跨vpc子网访问能力 {@link DeleteCrossVpcSubnetSupportForClientNodeRequest} {@link DeleteCrossVpcSubnetSupportForClientNodeResponse} */
   DeleteCrossVpcSubnetSupportForClientNode(data: DeleteCrossVpcSubnetSupportForClientNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCrossVpcSubnetSupportForClientNodeResponse>;
+  /** 删除客户端集群 {@link DeleteCustomerClusterRequest} {@link DeleteCustomerClusterResponse} */
+  DeleteCustomerCluster(data?: DeleteCustomerClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomerClusterResponse>;
   /** 删除文件系统 {@link DeleteFileSystemRequest} {@link DeleteFileSystemResponse} */
   DeleteFileSystem(data: DeleteFileSystemRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFileSystemResponse>;
   /** 删除Fileset {@link DeleteFilesetRequest} {@link DeleteFilesetResponse} */
@@ -789,6 +895,8 @@ declare interface Goosefs {
   DescribeClusterClientToken(data: DescribeClusterClientTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterClientTokenResponse>;
   /** 查询GooseFS集群角色凭证 {@link DescribeClusterRoleTokenRequest} {@link DescribeClusterRoleTokenResponse} */
   DescribeClusterRoleToken(data: DescribeClusterRoleTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterRoleTokenResponse>;
+  /** 查询客户端集群 {@link DescribeCustomerClusterRequest} {@link DescribeCustomerClusterResponse} */
+  DescribeCustomerCluster(data?: DescribeCustomerClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomerClusterResponse>;
   /** 获取数据流动任务实时状态 {@link DescribeDataRepositoryTaskStatusRequest} {@link DescribeDataRepositoryTaskStatusResponse} */
   DescribeDataRepositoryTaskStatus(data: DescribeDataRepositoryTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataRepositoryTaskStatusResponse>;
   /** 罗列文件系统关联的Bucket映射 {@link DescribeFileSystemBucketsRequest} {@link DescribeFileSystemBucketsResponse} */
@@ -809,6 +917,10 @@ declare interface Goosefs {
   ListLoadTasks(data: ListLoadTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListLoadTasksResponse>;
   /** 修改数据流动带宽 {@link ModifyDataRepositoryBandwidthRequest} {@link ModifyDataRepositoryBandwidthResponse} */
   ModifyDataRepositoryBandwidth(data: ModifyDataRepositoryBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataRepositoryBandwidthResponse>;
+  /** 挂载多个存储集群 {@link MountMultipleStorageFileSystemRequest} {@link MountMultipleStorageFileSystemResponse} */
+  MountMultipleStorageFileSystem(data?: MountMultipleStorageFileSystemRequest, config?: AxiosRequestConfig): AxiosPromise<MountMultipleStorageFileSystemResponse>;
+  /** 查询生成客户端节点的挂载命令 {@link QueryClientNodeMountCommandRequest} {@link QueryClientNodeMountCommandResponse} */
+  QueryClientNodeMountCommand(data?: QueryClientNodeMountCommandRequest, config?: AxiosRequestConfig): AxiosPromise<QueryClientNodeMountCommandResponse>;
   /** 查询客户端节点跨vpc子网访问能力 {@link QueryCrossVpcSubnetSupportForClientNodeRequest} {@link QueryCrossVpcSubnetSupportForClientNodeResponse} */
   QueryCrossVpcSubnetSupportForClientNode(data: QueryCrossVpcSubnetSupportForClientNodeRequest, config?: AxiosRequestConfig): AxiosPromise<QueryCrossVpcSubnetSupportForClientNodeResponse>;
   /** 查询数据流动带宽 {@link QueryDataRepositoryBandwidthRequest} {@link QueryDataRepositoryBandwidthResponse} */

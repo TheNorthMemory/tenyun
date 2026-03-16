@@ -16,23 +16,23 @@ declare interface AddTemplateStatus {
 
 /** 回执数据统计响应包体 */
 declare interface CallbackStatusStatistics {
-  /** 短信回执量统计。 */
+  /** 短信回执量统计。单位：个 */
   CallbackCount?: number;
-  /** 短信提交成功量统计。 */
+  /** 短信提交成功量统计。单位：个 */
   RequestSuccessCount?: number;
-  /** 短信回执失败量统计。 */
+  /** 短信回执失败量统计。单位：个 */
   CallbackFailCount?: number;
-  /** 短信回执成功量统计。 */
+  /** 短信回执成功量统计。单位：个 */
   CallbackSuccessCount?: number;
-  /** 运营商内部错误统计。 */
+  /** 运营商内部错误统计。单位：个 */
   InternalErrorCount?: number;
-  /** 号码无效或空号统计。 */
+  /** 号码无效或空号统计。单位：个 */
   InvalidNumberCount?: number;
-  /** 停机、关机等错误统计。 */
+  /** 停机、关机等错误统计。单位：个 */
   ShutdownErrorCount?: number;
-  /** 号码拉入黑名单统计。 */
+  /** 号码拉入免打扰名单统计。单位：个 */
   BlackListCount?: number;
-  /** 运营商频率限制统计。 */
+  /** 运营商频率限制统计。单位：个 */
   FrequencyLimitCount?: number;
 }
 
@@ -198,19 +198,19 @@ declare interface SendStatusStatistics {
 
 /** 套餐包信息统计响应包体 */
 declare interface SmsPackagesStatistics {
-  /** 套餐包创建时间，UNIX 时间戳（单位：秒）。 */
+  /** 套餐包创建时间，UNIX 时间戳。单位：秒 */
   PackageCreateTime?: number;
-  /** 套餐包生效时间，UNIX 时间戳（单位：秒）。 */
+  /** 套餐包生效时间，UNIX 时间戳。单位：秒 */
   PackageEffectiveTime?: number;
-  /** 套餐包过期时间，UNIX 时间戳（单位：秒）。 */
+  /** 套餐包过期时间，UNIX 时间戳。单位：秒 */
   PackageExpiredTime?: number;
-  /** 套餐包条数。 */
+  /** 套餐包条数。单位：条 */
   PackageAmount?: number;
-  /** 套餐包类别，0表示赠送套餐包，1表示购买套餐包。 */
+  /** 套餐包类别。枚举值：0： 赠送套餐1： 购买套餐包 */
   PackageType?: number;
   /** 套餐包 ID。 */
   PackageId?: number;
-  /** 当前使用套餐包条数。 */
+  /** 当前使用套餐包条数。单位：条 */
   CurrentUsage?: number;
 }
 
@@ -575,23 +575,23 @@ declare namespace V20190711 {
 
   /** 回执数据统计响应包体 */
   interface CallbackStatusStatistics {
-    /** 短信回执量统计。 */
+    /** 短信回执量统计。单位：个 */
     CallbackCount?: number;
-    /** 短信提交成功量统计。 */
+    /** 短信提交成功量统计。单位：个 */
     RequestSuccessCount?: number;
-    /** 短信回执失败量统计。 */
+    /** 短信回执失败量统计。单位：个 */
     CallbackFailCount?: number;
-    /** 短信回执成功量统计。 */
+    /** 短信回执成功量统计。单位：个 */
     CallbackSuccessCount?: number;
-    /** 运营商内部错误统计。 */
+    /** 运营商内部错误统计。单位：个 */
     InternalErrorCount?: number;
-    /** 号码无效或空号统计。 */
+    /** 号码无效或空号统计。单位：个 */
     InvalidNumberCount?: number;
-    /** 停机、关机等错误统计。 */
+    /** 停机、关机等错误统计。单位：个 */
     ShutdownErrorCount?: number;
-    /** 号码拉入黑名单统计。 */
+    /** 号码拉入黑名单统计。单位：个 */
     BlackListCount?: number;
-    /** 运营商频率限制统计。 */
+    /** 运营商频率限制数单位：个 */
     FrequencyLimitCount?: number;
   }
 
@@ -733,44 +733,44 @@ declare namespace V20190711 {
   interface SmsPackagesStatistics {
     /** 套餐包创建时间，标准时间，例如：2019-10-08 17:18:37。 */
     PackageCreateTime?: string;
-    /** 套餐包创建时间，UNIX 时间戳（单位：秒）。 */
+    /** 套餐包创建时间，UNIX 时间戳。单位：秒 */
     PackageCreateUnixTime?: number;
     /** 套餐包生效时间，标准时间，例如：2019-10-08 17:18:37。 */
     PackageEffectiveTime?: string;
-    /** 套餐包生效时间，UNIX 时间戳（单位：秒）。 */
+    /** 套餐包生效时间，UNIX 时间戳。单位：秒 */
     PackageEffectiveUnixTime?: number;
     /** 套餐包过期时间，标准时间，例如：2019-10-08 17:18:37。 */
     PackageExpiredTime?: string;
-    /** 套餐包过期时间，UNIX 时间戳（单位：秒）。 */
+    /** 套餐包过期时间，UNIX 时间戳。单位：秒 */
     PackageExpiredUnixTime?: number;
-    /** 套餐包条数。 */
+    /** 套餐包条数。单位：条 */
     AmountOfPackage?: number;
-    /** 0表示赠送套餐包，1表示购买套餐包。 */
+    /** 套餐包类别。枚举值：0： 赠送套餐包1： 购买套餐包 */
     TypeOfPackage?: number;
     /** 套餐包 ID。 */
     PackageId?: number;
-    /** 当前使用量。 */
+    /** 当前使用量。单位：条 */
     CurrentUsage?: number;
   }
 
   interface AddSmsSignRequest {
     /** 签名名称。注：不能重复申请已通过或待审核的签名。 */
     SignName: string;
-    /** 签名类型。其中每种类型后面标注了其可选的 DocumentType（证明类型）：0：公司，可选 DocumentType 有（0，1）。1：APP，可选 DocumentType 有（0，1，2，3，4） 。4：商标，可选 DocumentType 有（7）。5：政府/机关事业单位/其他机构，可选 DocumentType 有（2，3）。注1：必须按照对应关系选择证明类型，否则会审核失败。注2：签名类型2（网站）、3（公众号）、6（小程序）已不再支持，具体可参考 [关于腾讯云短信签名申请规则更新的公告](https://cloud.tencent.com/document/product/382/116397)。 */
+    /** 签名类型。其中每种类型后面标注了其可选的 DocumentType（证明类型）：0：公司，可选 DocumentType 有（0，1）。1：APP，可选 DocumentType 有（0，1，2，3，4） 。4：商标，可选 DocumentType 有（7）。5：政府/机关事业单位/其他机构，可选 DocumentType 有（2，3）。注1：必须按照对应关系选择证明类型，否则会审核失败。注2：签名类型2（网站）、3（公众号）、6（小程序）已不再支持，具体可参考 关于腾讯云短信签名申请规则更新的公告。 */
     SignType: number;
-    /** 证明类型：0：三证合一。1：企业营业执照。2：组织机构代码证书。3：社会信用代码证书。4：应用后台管理截图（个人开发APP）。7：商标注册书。注：证明类型5（网站备案后台截图）、6（小程序设置页面截图）、8（公众号设置页面截图）已不再支持，具体可参考 [关于腾讯云短信签名申请规则更新的公告](https://cloud.tencent.com/document/product/382/116397)。 */
+    /** 证明类型：0：三证合一。1：企业营业执照。2：组织机构代码证书。3：社会信用代码证书。4：应用后台管理截图（个人开发APP）。7：商标注册书。注：证明类型5（网站备案后台截图）、6（小程序设置页面截图）、8（公众号设置页面截图）已不再支持，具体可参考 关于腾讯云短信签名申请规则更新的公告。 */
     DocumentType: number;
     /** 是否国际/港澳台短信：0：表示国内短信。1：表示国际/港澳台短信。 */
     International: number;
     /** 签名用途：0：自用。1：他用。 */
     UsedMethod: number;
-    /** 签名对应的资质证明图片需先进行 base64 编码格式转换，将转换后的字符串去掉前缀`data:image/jpeg;base64,`再赋值给该参数。 */
+    /** 签名对应的资质证明图片需先进行 base64 编码格式转换，将转换后的字符串去掉前缀data:image/jpeg;base64,再赋值给该参数。 */
     ProofImage: string;
-    /** 委托授权证明。选择 UsedMethod 为他用之后需要提交委托的授权证明。图片需先进行 base64 编码格式转换，将转换后的字符串去掉前缀`data:image/jpeg;base64,`再赋值给该参数。注：只有 UsedMethod 在选择为 1（他用）时，这个字段才会生效。 */
+    /** 委托授权证明。选择 UsedMethod 为他用之后需要提交委托的授权证明。图片需先进行 base64 编码格式转换，将转换后的字符串去掉前缀data:image/jpeg;base64,再赋值给该参数。注：只有 UsedMethod 在选择为 1（他用）时，这个字段才会生效。 */
     CommissionImage?: string;
     /** 签名的申请备注。 */
     Remark?: string;
-    /** 已审核通过的国内短信的资质 ID。资质 ID 信息可前往国内短信的 [实名资质管理](https://console.cloud.tencent.com/smsv2/enterprise) 页查看。国内短信需填写资质ID，国际短信无需填写。</dx-alert> */
+    /** 已审核通过的国内短信的资质 ID。资质 ID 信息可前往国内短信的 实名资质管理 页查看。 说明 国内短信需填写资质ID，国际短信无需填写。 */
     QualificationId?: number;
   }
 
@@ -878,21 +878,21 @@ declare namespace V20190711 {
     SignId: number;
     /** 签名名称。 */
     SignName: string;
-    /** 签名类型。其中每种类型后面标注了其可选的 DocumentType（证明类型）：0：公司，可选 DocumentType 有（0，1）。1：APP，可选 DocumentType 有（0，1，2，3，4） 。4：商标，可选 DocumentType 有（7）。5：政府/机关事业单位/其他机构，可选 DocumentType 有（2，3）。注1：必须按照对应关系选择证明类型，否则会审核失败。注2：签名类型2（网站）、3（公众号）、6（小程序）已不再支持，具体可参考 [关于腾讯云短信签名申请规则更新的公告](https://cloud.tencent.com/document/product/382/116397)。 */
+    /** 签名类型。其中每种类型后面标注了其可选的 DocumentType（证明类型）：0：公司，可选 DocumentType 有（0，1）。1：APP，可选 DocumentType 有（0，1，2，3，4） 。4：商标，可选 DocumentType 有（7）。5：政府/机关事业单位/其他机构，可选 DocumentType 有（2，3）。注1：必须按照对应关系选择证明类型，否则会审核失败。注2：签名类型2（网站）、3（公众号）、6（小程序）已不再支持，具体可参考 关于腾讯云短信签名申请规则更新的公告。 */
     SignType: number;
-    /** 证明类型：0：三证合一。1：企业营业执照。2：组织机构代码证书。3：社会信用代码证书。4：应用后台管理截图（个人开发APP）。7：商标注册书。注：证明类型5（网站备案后台截图）、6（小程序设置页面截图）、8（公众号设置页面截图）已不再支持，具体可参考 [关于腾讯云短信签名申请规则更新的公告](https://cloud.tencent.com/document/product/382/116397)。 */
+    /** 证明类型：0：三证合一。1：企业营业执照。2：组织机构代码证书。3：社会信用代码证书。4：应用后台管理截图（个人开发APP）。7：商标注册书。注：证明类型5（网站备案后台截图）、6（小程序设置页面截图）、8（公众号设置页面截图）已不再支持，具体可参考 关于腾讯云短信签名申请规则更新的公告。 */
     DocumentType: number;
     /** 是否国际/港澳台短信：0：表示国内短信。1：表示国际/港澳台短信。注：需要和待修改签名International值保持一致，该参数不能直接修改国内签名到国际签名。 */
     International: number;
     /** 签名用途：0：自用。1：他用。 */
     UsedMethod: number;
-    /** 签名对应的资质证明图片需先进行 base64 编码格式转换，将转换后的字符串去掉前缀`data:image/jpeg;base64,`再赋值给该参数。 */
+    /** 签名对应的资质证明图片需先进行 base64 编码格式转换，将转换后的字符串去掉前缀data:image/jpeg;base64,再赋值给该参数。 */
     ProofImage: string;
-    /** 委托授权证明。选择 UsedMethod 为他用之后需要提交委托的授权证明。图片需先进行 base64 编码格式转换，将转换后的字符串去掉前缀`data:image/jpeg;base64,`再赋值给该参数。注：只有 UsedMethod 在选择为 1（他用）时，这个字段才会生效。 */
+    /** 委托授权证明。选择 UsedMethod 为他用之后需要提交委托的授权证明。图片需先进行 base64 编码格式转换，将转换后的字符串去掉前缀data:image/jpeg;base64,再赋值给该参数。注：只有 UsedMethod 在选择为 1（他用）时，这个字段才会生效。 */
     CommissionImage?: string;
     /** 签名的申请备注。 */
     Remark?: string;
-    /** 已审核通过的国内短信的资质 ID。资质 ID 信息可前往国内短信的 [实名资质管理](https://console.cloud.tencent.com/smsv2/enterprise) 页查看。国内短信需填写资质ID，国际短信无需填写。</dx-alert> */
+    /** 已审核通过的国内短信的资质 ID。资质 ID 信息可前往国内短信的 实名资质管理 页查看。 说明 国内短信需填写资质ID，国际短信无需填写。 */
     QualificationId?: number;
   }
 
